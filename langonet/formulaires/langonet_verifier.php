@@ -291,6 +291,7 @@ function formater_resultats($verification, $resultats, $corrections, $langue) {
 		}
 	}
 
+//	$log_texte .= evacue_L($resultats, $ou, $langue);
 	// Generation du fichier de log contenant le texte complet des resultats
 	$ok = creer_log($verification, $resultats, $texte, $log_fichier, $langue);
 	if (!$ok) {
@@ -364,6 +365,106 @@ function afficher_lignes($type, $tableau, $extra=array(), $f_coloriser) {
 	return $liste_lignes;
 }
 
+/**
+ * Cree le fichier de log avec le texte des resultats.
+ * Dans le cas _L cree un shell-script a executer.
+ *
+ * @param string $verification
+ * @param array $resultats
+ * @param string $texte
+ * @param string &$log_fichier (nom du fichier cree retourne par reference)
+ * @param string $langue
+ * @return boolean
+ */
+
+function creer_log($verification, $resultats, $texte, &$log_fichier, $langue) {
+
+	// Fichier de log dans tmp/langonet/
+	$ou_fichier =  $resultats['ou_fichier'];
+	$log_prefixe = ($verification == 'fonction_l') ? str_replace("/", "%", $ou_fichier) : basename($resultats['langue'], '.php') . '_';
+	$log_nom = $log_prefixe . $verification[0] . '_' . date("Ymd_His").'.log';
+	$log_rep = sous_repertoire(_DIR_TMP, "langonet");
+	$log_rep = sous_repertoire($log_rep, "verification");
+	$log_rep = sous_repertoire($log_rep, $verification);
+	$log_fichier = $log_rep . $log_nom;
+
+	// Texte du fichier en UTF-8
+	include_spip('inc/langonet_utils');
+
+	$sep = str_repeat('*', 77);
+
+	// -- En-tete resumant la verification
+	$log_texte = "# $sep\n# LangOnet : " . 
+		entite2utf(_T('langonet:entete_log_date_creation', array('log_date_jour' => affdate(date('Y-m-d H:i:s')), 'log_date_heure' => date('H:i:s')))) .
+		"\n# $sep\n# " .
+		entite2utf(_T('langonet:label_verification')) . " : " .
+		entite2utf(_T('langonet:label_verification_'.$verification)) .
+		"\n";
+
+	if ($verification != 'fonction_l') {
+		$log_texte .= "# " . 
+			entite2utf(_T('langonet:label_module')) . " : " .
+			entite2utf($resultats['module']) . "\n# " .
+			entite2utf(_T('langonet:label_fichier_verifie')) . " : " .
+			entite2utf($resultats['langue']) . "\n";
+	}
+
+	$log_texte .= "# " .
+		entite2utf(_T('langonet:label_arborescence_scannee')) . " : " .
+		entite2utf($ou_fichier) . 
+		"\n# $sep\n# " .
+		entite2utf(_T('langonet:label_erreur')) . " : " .
+		strval(count($resultats['item_non'])+count($resultats['item_non_mais_nok']));
+
+	if ($verification != 'fonction_l') {
+		$log_texte .= "\n# " . entite2utf(_T('langonet:label_avertissement')) . " : " . strval(count($resultats['item_non_mais'])+count($resultats['item_peut_etre']));
+	}
+	$log_texte .= "\n# $sep\n";
+
+	// -- Texte des resultats: erreur (non definis ou non utilises)
+	$log_texte .= "\n# $sep\n# " .
+		entite2utf(_T('langonet:entete_log_erreur_'.$verification)) .
+		"\n# $sep\n" .
+		texte2log($texte['non']);
+
+	// -- Texte des resultats: erreur (non definis mais n'appartenant pas au module en cours de verification)
+	if ($verification == 'definition') {
+		$log_texte .= "\n\n# $sep\n# " . 
+		  entite2utf(_T('langonet:entete_log_erreur_definition_nonmais')) .
+		  "\n# $sep\n" .
+		  texte2log($texte['non_mais_nok']);
+
+	// -- Texte des resultats: avertissement (definis mais dans un autre module)
+		$log_texte .= "\n\n# $sep\n# " . 
+		  entite2utf(_T('langonet:entete_log_avertissement_nonmais')) .
+		  "\n# $sep\n" .
+		  texte2log($texte['non_mais']);
+	}
+
+	// -- Texte des resultats: avertissement (non definis ou non utilises sans certitude)
+	if ($verification != 'fonction_l') {
+		$log_texte .= "\n\n# $sep\n# " . 
+		  entite2utf(_T('langonet:entete_log_avertissement_peutetre_'.$verification)) . 
+		  "\n# $sep\n" .
+		texte2log($texte['peut_etre']);
+	}
+
+	$ok = ecrire_fichier($log_fichier, $log_texte);
+	return $ok;
+}
+
+/**
+ * Cree le fichier de log avec le texte des resultats.
+ * Dans le cas _L cree un shell-script a executer.
+ *
+ * @param string $verification
+ * @param array $resultats
+ * @param string $texte
+ * @param string &$log_fichier (nom du fichier cree retourne par reference)
+ * @param string $langue
+ * @return boolean
+ */
+
 /// Construit un script Shell s'appliquant sur les fichiers contenant _L
 /// et affichant les ajouts au fichier de langue de ce qu'on evacue
 
@@ -417,93 +518,7 @@ function evacue_L($resultats, $ou, $langue)
 		"\n\nif [ \"$*\" != 'mv' ]; then echo \"Si correct, rappeler ce script avec 'mv' comme argument\"; fi";
 }
 
-/**
- * Cree le fichier de log avec le texte des resultats.
- * Dans le cas _L cree un shell-script a executer.
- *
- * @param string $verification
- * @param array $resultats
- * @param string $texte
- * @param string &$log_fichier (nom du fichier cree retourne par reference)
- * @param string $langue
- * @return boolean
- */
-
-function creer_log($verification, $resultats, $texte, &$log_fichier, $langue) {
-	// Fichier de log dans tmp/langonet/
-	$ou =  $resultats['ou_fichier'];
-	$log_prefixe = ($verification == 'fonction_l') ? str_replace("/", "%", $ou) : basename($resultats['langue'], '.php') . '_';
-	$log_nom = $log_prefixe . $verification[0] . '_' . date("Ymd_His").'.log';
-	$log_rep = sous_repertoire(_DIR_TMP, "langonet");
-	$log_rep = sous_repertoire($log_rep, "verification");
-	$log_rep = sous_repertoire($log_rep, $verification);
-	$log_fichier = $log_rep . $log_nom;
-
-	// Texte du fichier en UTF-8
-	include_spip('inc/langonet_utils');
-
-	$sep = str_repeat('*', 77);
-
-	// -- En-tete resumant la verification
-	$log_texte = "# $sep\n# LangOnet : " . 
-	  entite2utf(_T('langonet:entete_log_date_creation', array('log_date_jour' => affdate(date('Y-m-d H:i:s')), 'log_date_heure' => date('H:i:s')))) .
-	  "\n# $sep\n# " .
-	  entite2utf(_T('langonet:label_verification')) . " : " .
-	  entite2utf(_T('langonet:label_verification_'.$verification)) .
-	  "\n";
-
-	if ($verification != 'fonction_l') {
-		$log_texte .= " * " . 
-		  entite2utf(_T('langonet:label_module')) . " : " .
-		  entite2utf($resultats['module']) . "\n# " .
-		  entite2utf(_T('langonet:label_fichier_verifie')) . " : " .
-		  entite2utf($resultats['langue']) . "\n";
-	}
-
-	$log_texte .= "\n# " .
-	  entite2utf(_T('langonet:label_arborescence_scannee')) . " : " .
-	  entite2utf($resultats['ou_fichier']) . 
-	  "\n# $sep\n# " .
-	  entite2utf(_T('langonet:label_erreur')) . " : " .
-	  strval(count($resultats['item_non'])+count($resultats['item_non_mais_nok'])) .
-	  "\n# $sep\n";
-
-	if ($verification != 'fonction_l') {
-		$log_texte .= "\n# " . entite2utf(_T('langonet:label_avertissement')) . " : " . strval(count($resultats['item_non_mais'])+count($resultats['item_peut_etre'])) . "\n";
-
-		// -- Texte des resultats: erreur (non definis ou non utilises)
-		$log_texte .= "\n# $sep\n * " .
-		  entite2utf(_T('langonet:entete_log_erreur_'.$verification)) .
-		  "\n# $sep\n" .
-		  texte2log($texte['non']);
-	}
-
-	if ($verification == 'definition') {
-
-	// -- Texte des resultats: erreur (non definis mais n'appartenant pas au module en cours de verification)
-
-		$log_texte .= "\n\n# $sep\n# " . 
-		  entite2utf(_T('langonet:entete_log_erreur_definition_nonmais')) .
-		  "\n# $sep\n" .
-		  texte2log($texte['non_mais_nok']);
-
-	// -- Texte des resultats: avertissement (definis mais dans un autre module)
-		$log_texte .= "\n\n# $sep\n# " . 
-		  entite2utf(_T('langonet:entete_log_avertissement_nonmais')) .
-		  "\n# $sep\n" .
-		  texte2log($texte['non_mais']);
-	}
-
-	// -- Texte des resultats: avertissement (non definis ou non utilises sans certitude)
-	if ($verification != 'fonction_l') {
-		$log_texte .= "\n\n# $sep\n# " . 
-		  entite2utf(_T('langonet:entete_log_avertissement_peutetre_'.$verification)) . 
-		  "\n# $sep\n" .
-		texte2log($texte['peut_etre']);
-	} else $log_texte .= evacue_L($resultats, $ou, $langue);
-
-	$ok = ecrire_fichier($log_fichier, $log_texte);
-	return $ok;
+function creer_script_l($verification, $resultats, $texte, &$log_fichier, $langue) {
 }
 
 // fonction purement utilitaire
