@@ -1,0 +1,32 @@
+[(#REM) icone=images/tdm.png]
+[(#REM) titre= Table des Mati&egrave;res]
+[(#REM) descriptif= Les param&egrave;tres configurables de la Table des Mati&egrave;res sont les suivants&nbsp;:<ul>
+<li>la <strong>longueur</strong> d&eacute;finit le nombre de caract&egrave;res maximum que consituera chaque ancres,</li>
+<li>le <strong>s&eacute;parateur</strong> d&eacute;finit le caract&egrave;re qui s'intercalera entre chaque mot pour remplacer les espaces,</li>
+<li>et le nombre d'<strong>intertitres minimum</strong> d&eacute;finit le nombre d'intertitres d'un texte &agrave; partir duquel une table des mati&egrave;res sera affich&eacute;e.</li>
+<ul>]#CACHE{0}
+<form method="post">[
+	(#ENV{_cfg_}|form_hidden)
+	]<fieldset>
+		<legend><:tdm:config:>&nbsp;:</legend>
+
+		<p>
+			<label for= "lg"><:tdm:longueur:>&nbsp;: </label>
+			<input type="text" name="lg" size="4" value="#ENV{lg,#EVAL{_LG_ANCRE}}" />
+		</p>
+
+		<p>
+			<label for="sep"><:tdm:separateur:>&nbsp;: </label>
+			<input type="text" name="sep" size="4" value="#ENV{sep,#EVAL{_SEP_ANCRE}}" />
+		</p>
+
+		<p>
+			<label for="min"><:tdm:min_intertitres:>&nbsp;: </label>
+			<input type="text" name="min" size="4" value="#ENV{min,#EVAL{_MIN_ANCRE}}" />
+		</p>
+	</fieldset>
+
+	<div>
+		<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+	</div>
+</form>
