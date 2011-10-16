@@ -12,6 +12,7 @@
 _ Dans l'espace public, vous pouvez ajouter des cartes dans vos squelettes ou dans les textes.
 	</multi>
 	</description>
+	<lien>http://www.spip-contrib.net/Plugin-GMap-geolocalisation-et-cartographie-des-objets</lien>
 	 
 	<install>base/gmap_install.php</install>
 	<prefix>gmap</prefix>
