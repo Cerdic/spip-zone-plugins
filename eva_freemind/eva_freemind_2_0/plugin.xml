@@ -1,12 +1,12 @@
 <plugin>
-	<nom>Int&#233;gration d'activit&#233;s Freemind</nom>
+	<nom>Int&#233;gration d'activit&#233;s Freemind et Freeplane</nom>
 	<icon>img_pack/freemind_icon-24.png</icon>
 	<auteur>[Olivier Gautier->http://www.eva-web.edres74.ac-grenoble.fr], Dominique Lepaisant, Gilles Quiniou</auteur>
 	<licence>GNU/GPL</licence>
 	<version>1.2.0</version>
 	<etat>stable</etat>
     <description>
-Permet d'ins&#233;rer des animations Freemind (format mm) gr&#226;ce &#224; un mod&#232;le.
+Permet d'ins&#233;rer des animations Freemind ou Freeplane (format mm) gr&#226;ce &#224; un mod&#232;le.
 _ Plugin cr&#233;&#233; gr&#226;ce &#224; l'article de [ivandps sur SPIP-Contrib->http://www.spip-contrib.net/Inserer-une-carte-Freemind-dans-un].
 	</description>
 	<lien>http://www.eva-web.edres74.ac-grenoble.fr/spip.php?article73</lien>
