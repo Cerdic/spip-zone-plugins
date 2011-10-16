@@ -9,6 +9,7 @@
 		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action --> ]
 		#ACTION_FORMULAIRE{#ENV{action}}
+		<div><input type="hidden" name="encodage" id="encodage_defaut" value="html" /></div>
 		<ul>
 			<li class="fieldset">
 				<fieldset>
@@ -68,14 +69,14 @@
 //<![CDATA[
 	jQuery(document).ready(function() {
 		[(#ENV{verification, definition}|=={fonction_l}|oui)
-			jQuery("#option_fichier_langue").hide();
+//			jQuery("#option_fichier_langue").hide();
 		]
 		jQuery("input[name='verification']").change(function() {
 			if (jQuery("input[name='verification']:checked").val() == 'fonction_l') {
-				jQuery("#option_fichier_langue").hide();
+//				jQuery("#option_fichier_langue").hide();
 			}
 			else {
-				jQuery("#option_fichier_langue").show();
+//				jQuery("#option_fichier_langue").show();
 			}
 			jQuery(this).blur();
 		});	

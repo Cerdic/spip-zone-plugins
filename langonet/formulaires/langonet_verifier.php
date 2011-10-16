@@ -46,44 +46,41 @@ function formulaires_langonet_verifier_traiter() {
 
 	$verification = _request('verification');
 	$ou_fichier = _request('dossier_scan');
-	if ($verification != 'fonction_l') {
-		$retour_select_langue = explode(':', _request('fichier_langue'));
-		$rep = $retour_select_langue[0];
-		$module = $retour_select_langue[1];
-		$langue = $retour_select_langue[2];
-		$ou_langue = $retour_select_langue[3];
+	$retour_select_langue = explode(':', _request('fichier_langue'));
+	$rep = $retour_select_langue[0];
+	$module = $retour_select_langue[1];
+	$langue = $retour_select_langue[2];
+	$ou_langue = $retour_select_langue[3];
+	$encodage = _request('encodage');
 
-		// Chargement de la fonction de verification
+	// Chargement de la fonction de verification
+	// et verification et formatage des resultats pour affichage
+	$retour = array();
+	if ($verification != 'fonction_l') {
 		$langonet_verifier_items = charger_fonction('langonet_verifier_items','inc');
-	
-		// Verification et formatage des resultats pour affichage
-		$retour = array();
 		$resultats = $langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fichier, $verification);
-		
-		// Creation du fichier de langue corrige avec les items detectes comme non definis ou obsoletes
-		// suivant la verification en cours
-		if (count($resultats['item_non']) > 0) {
-			$langonet_corriger = charger_fonction('langonet_generer_fichier','inc');
-			if ($verification == 'definition') {
-				$oublies = array();
-				foreach ($resultats['item_non'] as $_item)
-					$oublies[$_item] = '';
-				$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode='oublie', $encodage='html', $oublies);
-			}
-			else {
-				$inutiles = $resultats['item_non'];
-				$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode='inutile', $encodage='html', $inutiles);
-			}
-		}
 	}
 	else {
-		// Chargement de la fonction de verification
 		$langonet_verifier_items = charger_fonction('langonet_verifier_l','inc');
-	
-		// Verification et formatage des resultats pour affichage
-		$retour = array();
 		$resultats = $langonet_verifier_items($ou_fichier);
-		$langue = 'fr'; // trouver comment generaliser
+	}
+
+	// Creation du fichier de langue corrige avec les items detectes comme non definis ou obsoletes
+	// suivant la verification en cours
+	if (count($resultats['item_non']) > 0) {
+		$langonet_corriger = charger_fonction('langonet_generer_fichier','inc');
+		if ($verification != 'utilisation') {
+			$oublies = array();
+			foreach ($resultats['item_non'] as $_item)
+				$oublies[$_item] = ($verification == 'definition') ? '' : $resultats['item_md5'][$_item];
+			$mode = ($verification == 'definition') ? 'oublie' : 'fonction_l';
+			$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $oublies);
+		}
+		else {
+			$inutiles = $resultats['item_non'];
+			$mode = 'inutile';
+			$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $inutiles);
+		}
 	}
 
 	// Traitement des resultats

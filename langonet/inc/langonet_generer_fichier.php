@@ -57,7 +57,7 @@ function langonet_generer_couples($module, $var_source, $var_cible, $mode='index
 	$source = $GLOBALS[$var_source] ? $GLOBALS[$var_source] : array();
 	// Si on demande de generer le fichier corrige
 	// alors on fournit la liste des items a ajouter
-	$source = ($mode == 'oublie') ? array_merge($source, $oublis_inutiles) : $source;
+	$source = ($mode == 'oublie' OR $mode == 'fonction_l') ? array_merge($source, $oublis_inutiles) : $source;
 	if ($mode != 'inutile') $oublis_inutiles = array();
 	foreach ($source as $_item => $_valeur) {
 		$texte = $GLOBALS[$var_cible][$_item];
@@ -79,12 +79,14 @@ function langonet_generer_couples($module, $var_source, $var_cible, $mode='index
 					$texte = '';
 				else if ($mode == 'oublie')
 					$texte = '<LANGONET_DEFINITION_MANQUANTE>';
+				else if ($mode == 'fonction_l')
+					$texte = array('<LANGONET_DEFINITION_L>', $_valeur, $mode);
 				else
 					$texte = $_item;
 			}
 		}
 		if ($encodage == 'utf8') $texte = entite2utf($texte);
-		$source[$_item] = $comm ? array("<LANGONET_DEFINITION_OBSOLETE>", $texte) : $texte;
+		$source[$_item] = $comm ? array('<LANGONET_DEFINITION_OBSOLETE>', $texte, $mode) : $texte;
 	}
 	return $source;
 }
@@ -100,10 +102,13 @@ function produire_fichier_langue($langue, $module, $items, $producteur='')
 	foreach($items as $k => $v) {
 		if ($initiale != strtoupper($k[0])) {
 			$initiale = strtoupper($k[0]);
-			$contenu[]= "// $initiale";
+			$contenu[]= "\n// $initiale";
 		}
 		if (!is_string($v))
-			$contenu[]= "/*\t" . $v[0] ."\n\t'" . $k . "' => '" . addslashes($v[1]) ."',*/\n"; 
+			if ($v[2] == 'inutile')
+				$contenu[]= "/*\t" . $v[0] ."\n\t'" . $k . "' => '" . addslashes($v[1]) ."',*/"; 
+			else
+				$contenu[]= "/*\t" . $v[0] ." */\n\t'" . $k . "' => '" . addslashes($v[1]) ."',"; 
 		else {
 			$v = addslashes($v);
 			$v = str_replace('\\\\n', "' . \"\\n\" .'", $v);

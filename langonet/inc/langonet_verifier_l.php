@@ -2,14 +2,12 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-/// @file
 /**
  * Verification de l'utilisation de la fonction _L() dans le code PHP 
  *
  */
-
-/// Les REGEXP de recherche de l'item de langue (voir le fichier regexp.txt)
-/// -- pour les fichiers .php et la detection de _L
+// Les REGEXP de recherche de l'item de langue (voir le fichier regexp.txt)
+// -- pour les fichiers .php et la detection de _L
 define("_LANGONET_FONCTION_L", 
 #       "`_L\([\"'](.+)(?:[,\"']|[\"'][,].*)\)`iUm"); # old
 	'#\b_L *[(] *"([^"]*)"[^)]*#');
@@ -17,26 +15,26 @@ define("_LANGONET_FONCTION_L",
 define("_LANGONET_FONCTION_L2", 
 	"#\b_L *[(] *'([^']*)'[^)]*#");
 
-/// Si une erreur se produit lors du deroulement de la fonction,
-/// le tableau resultat contient le libelle
-/// de l'erreur dans $resultats['erreur'];
-/// sinon, cet index n'existe pas.
+// Si une erreur se produit lors du deroulement de la fonction,
+// le tableau resultat contient le libelle
+// de l'erreur dans $resultats['erreur'];
+// sinon, cet index n'existe pas.
 
-/// $ou_fichier   => racine de l'arborescence a verifier
-/// On n'examine pas les ultimes sous-repertoires charsets/,lang/ , req/ et /.
-/// On n'examine que les fichiers php
-/// (voir le fichier regexp.txt).
+// $ou_fichier   => racine de l'arborescence a verifier
+// On n'examine pas les ultimes sous-repertoires charsets/,lang/ , req/ et /.
+// On n'examine que les fichiers php
+// (voir le fichier regexp.txt).
 
 define('_LANGONET_FILES', '(?<!/charsets|/lang|/req)(/[^/]*\.(php))$');
 
-/// Construit le tableau des occurrences du premier argument de _L.
-/// Ce tableau est indexe par un representant canonique de chaque chaine trouvee
-/// Les valeurs de ce tableau sont des sous-tableaux indexes par le nom du fichier
-/// Chacun a pour valeur un sous-sous-tableau indexe par le numero de ligne,
-/// pointant sur un sous-sous-sous-tableau des appels complets de _L
+// Construit le tableau des occurrences du premier argument de _L.
+// Ce tableau est indexe par un representant canonique de chaque chaine trouvee
+// Les valeurs de ce tableau sont des sous-tableaux indexes par le nom du fichier
+// Chacun a pour valeur un sous-sous-tableau indexe par le numero de ligne,
+// pointant sur un sous-sous-sous-tableau des appels complets de _L
 
-/// @param string $ou_fichier
-/// @return array
+// @param string $ou_fichier
+// @return array
 
 function inc_langonet_verifier_l($ou_fichier) {
 
@@ -61,23 +59,23 @@ function inc_langonet_verifier_l($ou_fichier) {
 	}
 
 	return array('ou_fichier' => $ou_fichier,
-		     'item_non' => array_values($item_md5), // est-ce utile ? 
+		     'item_non' => array_keys($item_md5), // est-ce utile ? 
 		     'fichier_non' => $fichier_non,
 		     'item_md5' => $item_md5);
 }
 
-/// Calcul du representant canonique d'un premier argument de _L.
-/// C'est un transcodage ASCII, reduits aux 32 premiers caracteres,
-/// les caracteres non alphabetiques etant remplaces par un souligne.
-/// On elimine les repetitions de mots pour evacuer le cas frequent truc: @truc@
-/// Si plus que 32 caracteres, on elimine les mots de moins de 3 lettres.
-/// Si toujours trop, on coupe au dernier mot complet avant 32 caracteres.
-/// C'est donc le tableau des chaines de langues manquant;
-/// toutefois, en cas d'homonymie d'index, on prend le md5, qui est illisible.
+// Calcul du representant canonique d'un premier argument de _L.
+// C'est un transcodage ASCII, reduits aux 32 premiers caracteres,
+// les caracteres non alphabetiques etant remplaces par un souligne.
+// On elimine les repetitions de mots pour evacuer le cas frequent truc: @truc@
+// Si plus que 32 caracteres, on elimine les mots de moins de 3 lettres.
+// Si toujours trop, on coupe au dernier mot complet avant 32 caracteres.
+// C'est donc le tableau des chaines de langues manquant;
+// toutefois, en cas d'homonymie d'index, on prend le md5, qui est illisible.
 
-/// @param string $occ
-/// @param array item_md5
-/// @return string
+// @param string $occ
+// @param array item_md5
+// @return string
 
 function langonet_index_l($occ, $item_md5)
 {
