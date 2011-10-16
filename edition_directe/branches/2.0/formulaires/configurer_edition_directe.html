@@ -1,0 +1,53 @@
+<!-- nom=edition_directe -->
+
+[(#SPIP_VERSION|>={3}|?{
+	#SET{objets,#ARRAY{
+		1,rubrique,
+		2,breve,
+		3,site,
+		4,auteur,
+		5,mot,
+			}
+		},
+	#SET{objets,#ARRAY{
+		1,rubrique,
+		2,breve,
+		3,site,
+			}
+		}		
+	})]
+
+<div class="formulaire_spip formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>
+	<p class="reponse_formulaire reponse_formulaire_ok"><a href="[(#URL_ECRIRE{admin_vider})]"><:edir:vider_cache:></a></p>]
+
+	<form action="#ENV{action}" method="post"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="fieldset">
+				<fieldset><legend><:edir:activer_edition_directe:></legend>
+				<ul>
+				#SAISIE{case,
+						article,
+						label=#EVAL{_T('edir:article');},
+						valeur=#ENV{article,on},
+						}
+				<BOUCLE_objets(POUR) {tableau #GET{objets}}>
+					#SAISIE{case,
+						#VALEUR,
+						label=#EVAL{_T('edir:#VALEUR');},
+						}
+				</BOUCLE_objets>	
+				</ul>
+				</fieldset>
+			</li>
+		</ul>
+		
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:cfg:ok:>" />
+		</p>
+		
+	</div></form>
+</div>
