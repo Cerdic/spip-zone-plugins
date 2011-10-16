@@ -1,6 +1,6 @@
 <!-- nom=edition_directe -->
 
-[(#SPIP_VERSION|>={3}|?{
+
 	#SET{objets,#ARRAY{
 		1,rubrique,
 		2,breve,
@@ -9,13 +9,8 @@
 		5,mot,
 			}
 		},
-	#SET{objets,#ARRAY{
-		1,rubrique,
-		2,breve,
-		3,site,
-			}
-		}		
-	})]
+		
+
 
 <div class="formulaire_spip formulaire_#FORM">
 
@@ -46,7 +41,7 @@
 		</ul>
 		
 		<p class="boutons">
-			<input type="submit" name="_cfg_ok" class="submit" value="<:cfg:ok:>" />
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
 		</p>
 		
 	</div></form>
