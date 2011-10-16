@@ -217,7 +217,7 @@ function abonnement_optimiser_base_disparus($flux){
 	
 	// On récupère les contacts_abonnements trop vieux
 	$contacts_abonnements = sql_allfetsel(
-		'id_contacts_abonnements',
+		'id_contacts_abonnement',
 		'spip_contacts_abonnements',
 		'statut_abonnement = '.sql_quote('encours').' and date<'.sql_quote($depuis)
 	);
@@ -227,7 +227,7 @@ function abonnement_optimiser_base_disparus($flux){
 	// S'il y a bien des contacts_abonnements à supprimer
 	if ($contacts_abonnements){
 		// Le in
-		$in = sql_in('id_contacts_abonnements', $contacts_abonnements);
+		$in = sql_in('id_contacts_abonnement', $contacts_abonnements);
 		
 		// Les contacts_abonnements
 		$nombre = intval(sql_delete(
