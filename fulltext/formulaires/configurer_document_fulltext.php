@@ -5,6 +5,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function formulaires_configurer_document_fulltext_charger_dist(){
 	//Recuperation de la configuration
 	$fulltext = @unserialize($GLOBALS['meta']['fulltext']);
+	if(!is_array($fulltext)){
+		$fulltext = array();
+	}
 	//Valeurs prealablement saisie ou par defaut/d'exemple 
 	$valeur = array(
 		'intervalle_cron' =>  $fulltext['intervalle_cron'] ? $fulltext['intervalle_cron'] : 600,
