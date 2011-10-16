@@ -85,29 +85,55 @@ function formulaires_configurer_document_fulltext_verifier_dist(){
 		$erreurs['taille_index'] = _T('fulltext:erreur_taille_index');
 	}
 	//Si on a choisit d'indexer un type de document on doit renseigner le binaire correspondant
-	if(_request('pdf_index') == 'on'){
+	if(_request('pdf_index') == 'on' && !defined('_FULLTEXT_PDF_EXE')){
 		if(!_request('pdf_bin')){
 			$erreurs['pdf_bin'] = _T('fulltext:erreur_pdf_bin');
+		}else{
+			@exec(_request('pdf_bin'),$retour_pdfbin,$retour_pdfbin_int);
+			if($retour_pdfbin_int != 0){
+				$erreurs['pdf_bin'] = _T('fulltext:erreur_binaire_indisponible');
+			}
 		}
 	}
-	if(_request('doc_index') == 'on'){
+	
+	if(_request('doc_index') == 'on' && !defined('_FULLTEXT_DOC_EXE')){
 		if(!_request('doc_bin')){
 			$erreurs['doc_bin'] = _T('fulltext:erreur_doc_bin');
+		}else{
+			@exec(_request('doc_bin'),$retour_doc_bin,$retour_doc_bin_int);
+			if($retour_doc_bin_int != 0){
+				$erreurs['doc_bin'] = _T('fulltext:erreur_binaire_indisponible');
+			}
 		}
 	}
-	if(_request('ppt_index') == 'on'){
+	
+	if(_request('ppt_index') == 'on' && !defined('_FULLTEXT_PPT_EXE')){
 		if(!_request('ppt_bin')){
 			$erreurs['ppt_bin'] = _T('fulltext:erreur_ppt_bin');
+		}else{
+			@exec(_request('ppt_bin'),$retour_ppt_bin,$retour_ppt_bin_int);
+			if($retour_ppt_bin_int != 0){
+				$erreurs['ppt_bin'] = _T('fulltext:erreur_binaire_indisponible');
+			}
 		}
 	}
-	if(_request('xls_index') == 'on'){
+	
+	if(_request('xls_index') == 'on' && !defined('_FULLTEXT_XLS_EXE')){
 		if(!_request('xls_bin')){
 			$erreurs['xls_bin'] = _T('fulltext:erreur_xls_bin');
+		}else{
+			@exec(_request('xls_bin'),$retour_xls_bin,$retour_xls_bin_int);
+			if($retour_xls_bin_int != 0){
+				$erreurs['xls_bin'] = _T('fulltext:erreur_binaire_indisponible');
+			}
 		}
 	}
 	
 	//TODO : verifier si on a bien une version PHP superieur a 5.2 avec option Zip si on indexe les odt,docx,xlsx,pptx
 	
+	if(count($erreurs) > 0){
+		$erreurs['message_erreur'] = _T('fulltext:erreur_verifier_configuration');
+	}
 	return $erreurs;
 }
 

@@ -24,7 +24,7 @@ function extracteur_doc($fichier, &$charset, $bin='', $opt = '') {
 		$exe = $bin ? $bin : _FULLTEXT_DOC_EXE;
 	} else {
 		// TODO : essayer de trouver tout seul l'executable
-		spip_log('Erreur extraction DOC : Il faut sp�cifier _FULLTEXT_DOC_EXE dans mes_options.php ou dans le panneau de configuration');
+		spip_log('Erreur extraction DOC : Il faut specifier _FULLTEXT_DOC_EXE dans mes_options.php ou dans le panneau de configuration');
 		return false;
 	}
 	if ((defined('_FULLTEXT_DOC_CMD_OPTIONS') && '' != _FULLTEXT_DOC_CMD_OPTIONS)||($opt)) {

@@ -9,17 +9,17 @@
 				<ul>
 					<li class="fulltext_intervalle_cron[ (#ENV**{erreurs}|table_valeur{intervalle_cron}|oui)erreur]">
 						<label for="nb_docs"><:fulltext:intervalle_cron:></label>
-						[<span class='erreur'>(#ENV**{erreurs}|table_valeur{intervalle_cron})</span>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{intervalle_cron})</span>
 						]<input type="text" class="text" name="intervalle_cron" id="intervalle_cron" value="[(#ENV{intervalle_cron})]" />
 					</li>
 					<li class="fulltext_nb_docs[ (#ENV**{erreurs}|table_valeur{nb_docs}|oui)erreur]">
 						<label for="nb_docs"><:fulltext:nombre_documents:></label>
-						[<span class='erreur'>(#ENV**{erreurs}|table_valeur{nb_docs})</span>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nb_docs})</span>
 						]<input type="text" class="text" name="nb_docs" id="nb_docs" value="[(#ENV{nb_docs})]" />
 					</li>
 					<li class="fulltext_taille_index[ (#ENV**{erreurs}|table_valeur{taille_index}|oui)erreur]">
 						<label for="taille_index"><:fulltext:nombre_caracteres:></label>
-						[<span class='erreur'>(#ENV**{erreurs}|table_valeur{taille_index})</span>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{taille_index})</span>
 						]<input type="text" class="text" name="taille_index" id="taille_index" value="[(#ENV{taille_index})]" />
 					</li>
 				</ul>
@@ -41,13 +41,13 @@
 					<li class="fulltext_pdf_bin[ (#ENV**{erreurs}|table_valeur{pdf_bin}|oui)erreur]">
 						<label for="pdf_bin"><:fulltext:indiquer_chemin_bin:> .pdf</label>
 						[(#ENV{pdf_bin_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
-						<span class='erreur'>(#ENV**{erreurs}|table_valeur{pdf_bin})</span>
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{pdf_bin})</span>
 						]<input type="text" class="text" name="pdf_bin" id="pdf_bin" value="[(#ENV{pdf_bin})]"[(#ENV{pdf_bin_readonly}|oui) readonly="readonly" disabled="disabled"] />
 					</li>
 					<li class="fulltext_pdf_opt[ (#ENV**{erreurs}|table_valeur{pdf_opt}|oui)erreur]">
 						<label for="pdf_opt"><:fulltext:indiquer_options_bin:> .pdf</label>
 						[(#ENV{pdf_opt_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
-						<span class='erreur'>(#ENV**{erreurs}|table_valeur{pdf_opt})</span>
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{pdf_opt})</span>
 						]<input type="text" class="text" name="pdf_opt" id="pdf_opt" value="[(#ENV{pdf_opt})]"[(#ENV{pdf_opt_readonly}|oui) readonly="readonly" disabled="disabled"] />
 					</li>
 				</ul>
@@ -58,7 +58,7 @@
 					<li class="fulltext_odt[ (#ENV**{erreurs}|table_valeur{odt_index}|oui)erreur]">
 						<label for="odt_index"><:fulltext:activer_indexation{ext=odt}:></label>
 						<p class="explication"><:fulltext:necessite_version_php:></p>
-						[<span class='erreur'>(#ENV**{erreurs}|table_valeur{odt_index})</span>]
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{odt_index})</span>]
 						<div class="choix">
 							<input type="radio" class="radio" name="odt_index" id="odt_index_on" [(#ENV{odt_index}|=={on}|?{'checked="checked"'})] value="on" />
 							<label for="odt_index_on"><:item_oui:></label>
@@ -87,13 +87,13 @@
 					<li class="fulltext_doc_bin[ (#ENV**{erreurs}|table_valeur{doc_bin}|oui)erreur]">
 						<label for="doc_bin"><:fulltext:indiquer_chemin_bin:> .doc</label>
 						[(#ENV{doc_bin_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
-						<span class='erreur'>(#ENV**{erreurs}|table_valeur{doc_bin})</span>
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{doc_bin})</span>
 						]<input type="text" class="text" name="doc_bin" id="doc_bin" value="[(#ENV{doc_bin})]"[(#ENV{doc_bin_readonly}|oui) readonly="readonly" disabled="disabled"] />
 					</li>
 					<li class="fulltext_doc_opt[ (#ENV**{erreurs}|table_valeur{doc_opt}|oui)erreur]">
 						<label for="doc_opt"><:fulltext:indiquer_options_bin:> .doc</label>
 						[(#ENV{doc_opt_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
-						<span class='erreur'>(#ENV**{erreurs}|table_valeur{doc_opt})</span>
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{doc_opt})</span>
 						]<input type="text" class="text" name="doc_opt" id="doc_opt" value="[(#ENV{doc_opt})]"[(#ENV{doc_opt_readonly}|oui) readonly="readonly" disabled="disabled"] />
 					</li>
 				</ul>
@@ -104,7 +104,7 @@
 					<li class="fulltext_docx[ (#ENV**{erreurs}|table_valeur{docx_index}|oui)erreur]">
 						<label><:fulltext:activer_indexation{ext=docx}:></label>
 						<p class="explication"><:fulltext:necessite_version_php:></p>
-						[<span class='erreur'>(#ENV**{erreurs}|table_valeur{docx_index})</span>]
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{docx_index})</span>]
 						<div class="choix">
 							<input type="radio" class="radio" name="docx_index" id="docx_index_on" [(#ENV{docx_index}|=={on}|?{'checked="checked"'})] value="on" />
 							<label for="docx_index_on"><:item_oui:></label>
@@ -133,13 +133,13 @@
 					<li class="fulltext_ppt_bin[ (#ENV**{erreurs}|table_valeur{ppt_bin}|oui)erreur]">
 						<label for="ppt_bin"><:fulltext:indiquer_chemin_bin:> .ppt</label>
 						[(#ENV{ppt_bin_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
-						<span class='erreur'>(#ENV**{erreurs}|table_valeur{ppt_bin})</span>
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ppt_bin})</span>
 						]<input type="text" class="text" name="ppt_bin" id="ppt_bin" value="[(#ENV{ppt_bin})]"[(#ENV{ppt_bin_readonly}|oui) readonly="readonly" disabled="disabled"] />
 					</li>
 					<li class="fulltext_ppt_opt[ (#ENV**{erreurs}|table_valeur{ppt_opt}|oui)erreur]">
 						<label for="ppt_opt"><:fulltext:indiquer_options_bin:> .ppt</label>
 						[(#ENV{ppt_opt_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
-						<span class='erreur'>(#ENV**{erreurs}|table_valeur{ppt_opt})</span>
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ppt_opt})</span>
 						]<input type="text" class="text" name="ppt_opt" id="ppt_opt" value="[(#ENV{ppt_opt})]"[(#ENV{ppt_opt_readonly}|oui) readonly="readonly" disabled="disabled"] />
 					</li>
 				</ul>
@@ -150,7 +150,7 @@
 					<li class="fulltext_pptx[ (#ENV**{erreurs}|table_valeur{pptx_index}|oui)erreur]">
 						<label for="pptx_index"><:fulltext:activer_indexation{ext=pptx}:></label>
 						<p class="explication"><:fulltext:necessite_version_php:></p>
-						[<span class='erreur'>(#ENV**{erreurs}|table_valeur{pptx_index})</span>]
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{pptx_index})</span>]
 						<div class="choix">
 							<input type="radio" class="radio" name="pptx_index" id="pptx_index_on" [(#ENV{pptx_index}|=={on}|?{'checked="checked"'})] value="on" />
 							<label for="pptx_index_on"><:item_oui:></label>
@@ -179,13 +179,13 @@
 					<li class="fulltext_xls_bin[ (#ENV**{erreurs}|table_valeur{xls_bin}|oui)erreur]">
 						<label for="xls_bin"><:fulltext:indiquer_chemin_bin:> .xls</label>
 						[(#ENV{xls_bin_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
-						<span class='erreur'>(#ENV**{erreurs}|table_valeur{xls_bin})</span>
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{xls_bin})</span>
 						]<input type="text" class="text" name="xls_bin" id="xls_bin" value="[(#ENV{xls_bin})]"[(#ENV{xls_bin_readonly}|oui) readonly="readonly" disabled="disabled"] />
 					</li>
 					<li class="fulltext_xls_opt[ (#ENV**{erreurs}|table_valeur{xls_opt}|oui)erreur]">
 						<label for="xls_opt"><:fulltext:indiquer_options_bin:> .xls</label>
 						[(#ENV{xls_opt_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
-						<span class='erreur'>(#ENV**{erreurs}|table_valeur{xls_opt})</span>
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{xls_opt})</span>
 						]<input type="text" class="text" name="xls_opt" id="xls_opt" value="[(#ENV{xls_opt})]"[(#ENV{xls_opt_readonly}|oui) readonly="readonly" disabled="disabled"] />
 					</li>
 				</ul>
@@ -196,7 +196,7 @@
 					<li class="fulltext_xlsx[ (#ENV**{erreurs}|table_valeur{xlsx_index}|oui)erreur]">
 						<label><:fulltext:activer_indexation{ext=xlsx}:></label>
 						<p class="explication"><:fulltext:necessite_version_php:></p>
-						[<span class='erreur'>(#ENV**{erreurs}|table_valeur{xlsx_index})</span>]
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{xlsx_index})</span>]
 						<div class="choix">
 							<input type="radio" class="radio" name="xlsx_index" id="xlsx_index_on" [(#ENV{xlsx_index}|=={on}|?{'checked="checked"'})] value="on" />
 							<label for="xlsx_index_on"><:item_oui:></label>
