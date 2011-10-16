@@ -13,6 +13,7 @@ _ Dans l'espace public, vous pouvez ajouter des cartes dans vos squelettes ou da
 	</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-GMap-geolocalisation-et-cartographie-des-objets</lien>
+	<categorie>divers</categorie>
 	 
 	<install>base/gmap_install.php</install>
 	<prefix>gmap</prefix>
