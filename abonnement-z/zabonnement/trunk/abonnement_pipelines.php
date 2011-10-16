@@ -122,18 +122,29 @@ function abonnement_post_insertion($flux){
 				foreach($commande_abos as $abo){
 					
 					$id_commandes_detail=$abo['id_commandes_detail'];
-					//$id_objet=$abo['id_objet'];
+					$id_objet=$abo['id_objet'];
 					
 					//recupere id_contacts_abonnement si il existe
 					$contact_abo = sql_fetsel('id_contacts_abonnement,statut_abonnement', 'spip_contacts_abonnements', 'id_commandes_detail='.$id_commandes_detail);
 					
 					$id_contacts_abonnement=$contact_abo['id_contacts_abonnement'];
-					if (_DEBUG_ABONNEMENT) spip_log("pour id_contacts_abonnement = $id_contacts_abonnement on fait ".'id_commandes_detail='.$id_commandes_detail,'abonnement');
-
-					
-					//on institue le contacts_abonnement
-					$action = charger_fonction('instituer_contacts_abonnement', 'action');
-					$action($id_contacts_abonnement."-".$statut);
+					if($id_contacts_abonnement){
+						if (_DEBUG_ABONNEMENT) spip_log("pour id_contacts_abonnement = $id_contacts_abonnement on fait ".'id_commandes_detail='.$id_commandes_detail,'abonnement');
+	
+						
+						//on institue le contacts_abonnement
+						$action = charger_fonction('instituer_contacts_abonnement', 'action');
+						$action($id_contacts_abonnement."-".$statut);
+					}
+					else {
+						$champs['id_auteur']=$id_auteur;
+						$champs['statut_abonnement']=$statut;
+						$champs['objet']=$objet;
+						$champs['id_objet']=$id_objet;
+						$champs['id_commandes_detail']=$id_commandes_detail;
+						include_spip('action/editer_contacts_abonnement');
+						$id_contacts_abonnement = insert_contacts_abonnement($champs);
+					}
 				}
 		}
 
@@ -198,12 +209,34 @@ function abonnement_affiche_milieu($flux){
 	return $flux;
 }
 
-include_spip('inc/autoriser');
-
-//affiche liste des abonnements pour s'abonner dans le formulaire d'un auteur
-function abonnement_editer_contenu_objet($flux){
-
+// Supprimer tous les contacts_abonnements en cours et trop vieux
+function abonnement_optimiser_base_disparus($flux){
+	include_spip('inc/config');
+	// On cherche la durée de vie d'un contacts_abonnements encours (par défaut 1h)
+	$depuis = date('Y-m-d H:i:s', time() - 3600);
 	
+	// On récupère les contacts_abonnements trop vieux
+	$contacts_abonnements = sql_allfetsel(
+		'id_contacts_abonnements',
+		'spip_contacts_abonnements',
+		'statut_abonnement = '.sql_quote('encours').' and date<'.sql_quote($depuis)
+	);
+	if (is_array($contacts_abonnements))
+		$contacts_abonnements = array_map('reset', $contacts_abonnements);
+	
+	// S'il y a bien des contacts_abonnements à supprimer
+	if ($contacts_abonnements){
+		// Le in
+		$in = sql_in('id_contacts_abonnements', $contacts_abonnements);
+		
+		// Les contacts_abonnements
+		$nombre = intval(sql_delete(
+			'spip_contacts_abonnements',
+			$in
+		));
+	}
+	
+	$flux['data'] += $nombre;
 	return $flux;
 }
 
@@ -229,7 +262,7 @@ function abonnement_post_edition($flux){
 		if (
 			$flux['args']['table'] == 'spip_commandes'
 		){
-		if (_DEBUG_ABONNEMENT) spip_log("abonnement_post_edition args ".join(",\n", $flux['args'])." data= ".join(",\n", $flux['data']),'commande');
+		if (_DEBUG_ABONNEMENT) spip_log("abonnement_post_edition args ".join(",\n", $flux['args'])." data= ".join(",\n", $flux['data']),'abonnement');
 		$flux = abonnement_post_insertion($flux);
 		}
 

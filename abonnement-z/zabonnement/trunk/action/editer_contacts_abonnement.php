@@ -11,6 +11,7 @@ function action_editer_contacts_abonnement_dist($arg=null) {
 		
 	// si id_contacts_abonnement n'est pas un nombre, c'est une creation
 	if (!$id_contacts_abonnement = intval($arg)) {
+		spip_log("creation d'un contacts_abonnement",'abonnement');
 		$id_contacts_abonnement = insert_contacts_abonnement(array(
 			'id_auteur'=>_request('id_auteur'),
 			'objet'=>_request('objet'),
@@ -249,7 +250,7 @@ function instituer_contacts_abonnement($id_contacts_abonnement, $c){
 		}
 	}
 	
-	if (_DEBUG_ABONNEMENT) spip_log("il y a un flux post_edition sur contacts_abonnement",'contacts_abonnement');
+	if (_DEBUG_ABONNEMENT) spip_log("il y a un flux post_edition sur contacts_abonnement",'abonnement');
 
 	// Pipeline
 	pipeline(
