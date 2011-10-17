@@ -78,7 +78,17 @@ function gis_affiche_milieu($flux){
 				$id_objet = $flux['args']['id_document'];
 				break;
 			default:
-				$objet = $id_objet = '';
+				// Par défaut on regarde si on est sur la page d'un vrai objet SPIP
+				include_spip('base/objets.php');
+				$objets = lister_tables_objets_sql();
+				foreach ($objets as $table=>$infos){
+					// Si cet exec fait partie d'une URL pour voir un objet déclaré
+					if ($exec == $infos['url_voir']){
+						$objet = $infos['type'];
+						$id_objet = $flux['args'][id_table_objet($objet)];
+						break; // On a trouvé on s'arrête
+					}
+				}
 				break;
 		}
 		if ($objet && $id_objet) {
