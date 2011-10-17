@@ -77,7 +77,7 @@ function spipicious_insert_head($flux){
 								url: "$selecteur",
 								data:{
 									id_objet:id_objet,
-									type:type,
+									objet:type,
 									q:extractLast( request.term )
 								},
 								success: function(data) {

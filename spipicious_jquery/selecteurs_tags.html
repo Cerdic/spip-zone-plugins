@@ -13,7 +13,7 @@
 
 [(#SET{id_groupe,#CONFIG{spipicious/groupe_mot,1}})]
 #SET{total,0}
-<BOUCLE_s0(MOTS spipicious){id_auteur=#SESSION{id_auteur}}{id_objet=#ENV{id_objet}}{objet=#ENV{type}}{doublons}> </BOUCLE_s0>
+<BOUCLE_s0(MOTS spipicious){id_auteur=#SESSION{id_auteur}}{id_objet=#ENV{id_objet}}{objet=#ENV{objet}}{doublons}> </BOUCLE_s0>
 <BOUCLE_s(MOTS){titre LIKE (#ENV{q})%}{id_groupe = #GET{id_groupe}}{0,20}{par titre}{doublons}>
 #TITRE[ - (#DESCRIPTIF|textebrut|couper{20})]|[(#TITRE|textebrut)]|#ID_MOT
 </BOUCLE_s>
