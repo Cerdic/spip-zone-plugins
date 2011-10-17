@@ -191,6 +191,7 @@ function tri_protege_champ($t){
  * Interpreter les multi xxx et num xxx utilise comme tri
  * pour la clause order
  * 'multi xxx' devient simplement 'multi' qui est calcule dans le select
+ * 'hasard' est calculé dans le select
  * @param string $t
  * @return string
  */
@@ -223,6 +224,7 @@ function tri_champ_order($t,$table=NULL,$field=NULL){
  * pour la clause select
  * 'multi xxx' devient select "...." as multi
  * les autres cas ne produisent qu'une chaine vide '' en select
+ * 'hasard' devient 'rand() AS hasard' dans le select
  *
  * @param string $t
  * @return string
@@ -233,6 +235,9 @@ function tri_champ_select($t){
 		$t = preg_replace(',\s,','',$t);
 		$t = sql_multi($t,$GLOBALS['spip_lang']);
 		return $t;
+	}
+	if(trim($t)=='hasard'){
+		return 'rand() AS hasard';
 	}
 	return "''";
 }
