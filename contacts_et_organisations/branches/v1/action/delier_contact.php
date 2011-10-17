@@ -31,6 +31,12 @@ function action_delier_contact_post($id_contact, $id_organisation) {
 			"id_contact=" . sql_quote($id_contact),
 			"id_organisation=" . sql_quote($id_organisation),
 		));
+		//compatibilite
+		sql_delete("spip_organisations_liens", array(
+			"objet='contact'",
+			"id_objet=" . sql_quote($id_contact),
+			"id_organisation=" . sql_quote($id_organisation),
+		));
 		
 		include_spip('inc/invalideur');
 		suivre_invalideur("id='id_contact/$id_contact'");
