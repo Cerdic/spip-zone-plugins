@@ -1,6 +1,7 @@
 <plugin>
 	<nom>Rechercher-Remplacer</nom>
 	<slogan>Rechercher des chaines dans la BDD SPIP et eventuellement les remplacer par une autre chaine</slogan>
+	<documentation>www.spip-contrib.net/3941</documentation>
 	<auteur>[Didier, JLuc -> www.ouhpla.net]</auteur>
 	<licence>GNU/GLP</licence>
 	<description>Rechercher les occurences d'un texte et les remplacer par un autre texte, dans les champs de type texte des objets SPIP.
