@@ -72,7 +72,7 @@
 			 pause:		"#CONFIG{sjcycle/pause}",
 			 random:		"#CONFIG{sjcycle/random}",
 			 cleartype: 1
-			 [,(#ENV{opt}|replace{';',','}html_entity_decode)]
+			 [,(#ENV{opt}|replace{';',','}|html_entity_decode)]
 			 });
 	});
 
