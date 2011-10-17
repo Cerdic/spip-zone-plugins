@@ -112,6 +112,21 @@
 				</div>
 			</li>
 		</ul>
+		[(#REM) L'option sousrubrique ne s'applique jamais si plus_recent_branche est actif.]
+		<script type="text/javascript">// <![CDATA[
+			$(document).ready(function(){
+				function maj_editer_sousrubrique() {
+					var plus_recent_branche = $("[name='plus_recent_branche']:checked").val();
+					if (plus_recent_branche == 'oui')
+						$("li.editer_sousrubrique").hide(500);
+					else
+						$("li.editer_sousrubrique").show(500);
+				};
+				maj_editer_sousrubrique();
+				$("[name='plus_recent_branche']").change(function(){maj_editer_sousrubrique();});
+			});
+		//]]></script>
+		
 		
 		<h3 class="titrem"><:courtcircuit:label_liens:></h3>
 		<ul>
