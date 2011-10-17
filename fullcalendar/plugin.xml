@@ -54,7 +54,7 @@
 	</bouton>
 	<categorie>date</categorie>
 	<necessite id="jqueryui" version="[1.6;)" />
-	<necessite id="SPIP" version="[2.0;3.0]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id='cfg' version='[1.0.4;]' />
 	<utilise id="palette" />
 </plugin>
