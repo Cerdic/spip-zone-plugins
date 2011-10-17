@@ -21,7 +21,7 @@
 		<label for="id_selection" id="label_id_selection"><:sitra_select:selection:></label>
 		<select name="id_selection" id="id_selection" class="select">
 			<option[ (#ENV{id_selection}|non)selected="selected"] value="">--</option>
-		<BOUCLE_selections (SITRA_SELECTIONS){fusion id_selection}{par id_selection}>
+		<BOUCLE_selections (SITRA_SELECTIONS){fusion id_selection}{par selection}>
 			[<option[ (#ENV{id_selection}|=={#ID_SELECTION}|oui)selected="selected"] value="#ID_SELECTION">(#SELECTION)</option>]
 		</BOUCLE_selections>
 		</select>
@@ -33,7 +33,7 @@
 		<label for="id_categorie" id="label_id_categorie"><:sitra_select:categorie:></label>
 		<select name="id_categorie" id="id_categorie" class="select">
 		<option[ (#ENV{id_categorie}|non)selected="selected"] value="">--</option>
-		<BOUCLE_categories (SITRA_CATEGORIES){fusion id_categorie}{par id_categorie}>
+		<BOUCLE_categories (SITRA_CATEGORIES){fusion id_categorie}{par categorie}>
 			[<option[ (#ENV{id_categorie}|=={#ID_CATEGORIE}|oui)selected="selected"] value="#ID_CATEGORIE">(#CATEGORIE)</option>]
 		</BOUCLE_categories>
 		</select>
