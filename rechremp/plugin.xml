@@ -1,6 +1,7 @@
 <plugin>
-	<nom>Rechercher-Remplacer textes dans la BDD SPIP</nom>
-	<auteur>Didier, JLuc, www.ouhpla.net</auteur>
+	<nom>Rechercher-Remplacer</nom>
+	<slogan>Rechercher des chaines dans la BDD SPIP et eventuellement les remplacer par une autre chaine</slogan>
+	<auteur>[Didier, JLuc -> www.ouhpla.net]</auteur>
 	<licence>GNU/GLP</licence>
 	<description>Rechercher les occurences d'un texte et les remplacer par un autre texte, dans les champs de type texte des objets SPIP.
 	</description>
@@ -17,7 +18,6 @@
 		<url>rechercher_remplacer</url>
 		<titre>Rechercher remplacer</titre>
 	</bouton>
-
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 </plugin>
