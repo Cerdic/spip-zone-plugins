@@ -267,6 +267,9 @@ foreach($langues as $langue){
 				if (($val['type'] == '09.01.06' and !$val['id_recurrente']) or ($val['type'] == '09.01.13') or ($val['type'] == '09.01.14')) {
 					$objet['date_debut'] = date_norme($val -> Dates -> DetailDates -> DateDebut);
 					$objet['date_fin'] = date_norme($val -> Dates -> DetailDates -> DateFin);
+					// precaution
+					if (!$objet['date_fin'] and $objet['date_debut'])
+						$objet['date_fin'] = $objet['date_debut'];
 					$objet_details['observation_dates'] = $val -> Dates -> DetailDates -> ObservationDates;
 				}
 			}

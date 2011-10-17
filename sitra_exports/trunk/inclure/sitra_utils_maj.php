@@ -57,7 +57,7 @@ function serialize_non_vide($array){
 }
 
 
-// date au format JJ/MM/AAAA [HH:MM]
+// date au format JJ/MM/AAAA [HH:MM] fournie par le xml
 function date_norme($date){
 	if (!$date) {return;}
 	$date = trim($date);
@@ -66,8 +66,11 @@ function date_norme($date){
 	$a = substr($date,6,4);
 	$h = trim(substr($date,11,2));
 	$min = trim(substr($date,14,2));
-	if (!$h){$h = '00';}
-	if (!$min){$min = '00';}
+	if (!$h)
+		$h = '00';
+	if (!$min)
+		$min = '00';
+		
 	return $a.'-'.$m.'-'.$j.' '.$h.':'.$min.':00';
 }
 
