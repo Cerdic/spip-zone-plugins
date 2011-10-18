@@ -32,7 +32,7 @@ _ For DIYers, you can also use this plugin to display your own list of sites and
 	<categorie>navigation</categorie>
 
 	<fonctions>boussole_fonctions.php</fonctions>
-	<install>base/boussole_installer.php</install>
+	<install>boussole_administrations.php</install>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/boussole_declarer.php</inclure>
