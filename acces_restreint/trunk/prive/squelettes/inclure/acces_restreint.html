@@ -22,10 +22,10 @@
 </span>
 <span class='descriptif'>#DESCRIPTIF</span>
 <span class='quoi'>[(#PUBLIQUE|=={oui}|oui)<:accesrestreint:publique:>[, (#PRIVEE|=={oui}|oui)]][ (#PRIVEE|=={oui}|oui)<:accesrestreint:privee:>]</span>
-<p class='actions'>
-	[(#AUTORISER{modifier,zone,#ID_ZONE})	<span class='lien_modifier'>&#91;<a href='[(#URL_ECRIRE{zones_edit,id_zone=#ID_ZONE}|parametre_url{retour,#SELF})]'><:bouton_modifier:></a>&#93;</span>]
-	[(#AUTORISER{supprimer,zone,#ID_ZONE})<span class='lien_supprimer'>&#91;<a href='#URL_ACTION_AUTEUR{supprimer_zone,#ID_ZONE,#SELF}' onclick="return confirm('<:accesrestreint:confirmer_supprimer_zone:>');"><:accesrestreint:icone_supprimer_zone:></a>&#93;</span>]
-</p>
+<div class='actions'>
+	[(#AUTORISER{supprimer,zone,#ID_ZONE})<span class='lien_supprimer'>[(#BOUTON_ACTION{<:accesrestreint:icone_supprimer_zone:>,#URL_ACTION_AUTEUR{supprimer_zone,#ID_ZONE,#SELF},ajax,<:accesrestreint:confirmer_supprimer_zone:>})]</span>]
+	[| (#AUTORISER{modifier,zone,#ID_ZONE})	<span class='lien_modifier'><a href='[(#URL_ECRIRE{zone_edit,id_zone=#ID_ZONE}|parametre_url{retour,#SELF})]'><:bouton_modifier:></a></span>]
+</div>
 </li>
 </BOUCLE_zones>
 </ul>

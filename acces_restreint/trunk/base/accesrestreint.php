@@ -28,7 +28,14 @@ function accesrestreint_declarer_tables_interfaces($interface){
 
 function accesrestreint_declarer_tables_objets_sql($tables){
 	$tables['spip_zones'] = array(
-	
+		'texte_modifier' => 'accesrestreint:modifier_zone',
+		'texte_creer' => 'accesrestreint:creer_zone',
+		'texte_objets' => 'accesrestreint:titre_zones_acces',
+		'texte_objet' => 'accesrestreint:titre_zone_acces',
+		'info_aucun_objet'=> 'accesrestreint:info_aucune_zone',
+		'info_1_objet' => 'accesrestreint:info_1_zone',
+		'info_nb_objets' => 'accesrestreint:info_nb_zones',
+
 		'principale' => "oui",
 			'field'=> array(
 			"id_zone" 	=> "bigint(21) NOT NULL",

@@ -38,6 +38,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_acces' => 'Aucun accès autorisé',
 	'info_aucun_auteur' => 'Aucun auteur dans la zone',
 	'info_aucune_zone' => 'Aucune zone',
+	'info_1_zone' => '1 zone',
+	'info_nb_zones' => '@nb@ zones',
+
 	'info_auteurs_lies_zone' => 'Les auteurs ayant accès à cette zone',
 	'info_lien_action_proteger' => 'Prot&eacute;ger l\'acc&egrave;s &agrave; cette rubrique.',
 	'info_page' => 'Cette page vous permet de gérer les zones d\'accès restreint de votre site',
@@ -77,6 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_config' => 'Configuration des accès',
 	'titre_table' => 'Toutes les zones d\'accès',
 	'titre_zones_acces' => 'Zones d\'accès restreint',
+	'titre_zone_acces' => 'Zone d\'accès restreint',
 	'toutes' => 'Toutes',
 
 	// V
