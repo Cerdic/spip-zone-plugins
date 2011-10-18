@@ -1,7 +1,5 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
 /* prototype de backend */
 class MCacheBackend {
 	function get($key) {}

@@ -1,7 +1,5 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
 # http://xcache.lighttpd.net/wiki/XcacheApi
 @define('_CACHE_NAMESPACE', $_SERVER['HTTP_HOST'].':');
 @define('_LOCK_MAX', 30); # max lock time (seconds)

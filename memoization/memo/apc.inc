@@ -1,7 +1,5 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
 @define('_CACHE_NAMESPACE', $_SERVER['HTTP_HOST'].':');
 
 class MCacheBackend_apc extends MCacheBackend {
