@@ -31,6 +31,7 @@
 	<pipeline nom="page_indisponible" inclure="accesrestreint_pipelines.php" />
 	<pipeline nom="autoriser" inclure="inc/accesrestreint_autoriser.php" />
 	<pipeline nom="objets_extensibles" inclure="accesrestreint_pipelines.php" />
+	<pipeline nom="accesrestreint_liste_zones_autorisees" action="" />
 
 	<menu nom="zones" titre="accesrestreint:icone_menu_config" parent="menu_publication" icone="images/zone-16.png" />
 </paquet>

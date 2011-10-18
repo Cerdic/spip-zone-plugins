@@ -7,8 +7,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// declarer le pipeline pour le core
-$GLOBALS['spip_pipeline']['accesrestreint_liste_zones_autorisees']='';
 
 if (isset($GLOBALS['meta']["accesrestreint_base_version"])){
 	// Si on n'est pas connecte, aucune autorisation n'est disponible

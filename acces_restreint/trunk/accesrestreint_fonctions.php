@@ -27,6 +27,7 @@ function accesrestreint_securise_squelette($letexte){
  * filtre de test pour savoir si l'acces a un article est restreint
  *
  * @param int $id_article
+ * @param int $id_auteur
  * @return bool
  */
 function accesrestreint_article_restreint($id_article, $id_auteur=null){
@@ -44,6 +45,7 @@ function accesrestreint_article_restreint($id_article, $id_auteur=null){
  * filtre de test pour savoir si l'acces a une rubrique est restreinte
  *
  * @param int $id_rubrique
+ * @param int $id_auteur
  * @return bool
  */
 function accesrestreint_rubrique_restreinte($id_rubrique, $id_auteur=null){
@@ -59,6 +61,7 @@ function accesrestreint_rubrique_restreinte($id_rubrique, $id_auteur=null){
  *
  * @param int $id_zone
  * @param int $id_auteur
+ * @return bool
  */
 function accesrestreint_acces_zone($id_zone,$id_auteur=null){
 	static $liste_zones = array();
@@ -99,7 +102,7 @@ function icone_auteur_12($statut){
  *
  * @param int $id_rubrique
  * @return array identifiants des zones
-**/
+ */
 function accesrestreint_zones_rubrique_et_hierarchie($id_rubrique) {
 	static $zones = array();
 	
@@ -133,7 +136,7 @@ function accesrestreint_zones_rubrique_et_hierarchie($id_rubrique) {
  * 
  * @param int $id_rubrique
  * @return array identifiants des zones
-**/
+ */
 function accesrestreint_zones_rubrique($id_rubrique) {
 	// on teste notre rubrique deja
 	$idz = sql_allfetsel('id_zone', 'spip_zones_rubriques', 'id_rubrique='. intval($id_rubrique));
@@ -151,13 +154,14 @@ function accesrestreint_zones_rubrique($id_rubrique) {
  * [(#ID_RUBRIQUE|accesrestreint_rubrique_zone_restreinte{tout}) Rubrique dans une zone ]
  *
  * @param int $id_rubrique : identifiant de la rubrique
- * @param null|bool|'tout'	Sélectionner les rubriques
+ * @param null|bool|string $_publique
+ *   Sélectionner les rubriques
  *   cachées dans le public (true),
  *   le privé (false),
  *   selon le contexte privé ou public (null),
  *   cachées ou non quelque soit le contexte ('tout')
  * @return bool La rubrique est présente dans une zone
-**/
+ */
 function accesrestreint_rubrique_zone_restreinte($id_rubrique, $_publique=null) {
 	return
 		@in_array($id_rubrique,
@@ -168,13 +172,14 @@ function accesrestreint_rubrique_zone_restreinte($id_rubrique, $_publique=null) 
 /**
  * Retourne la liste de toutes les rubriques sélectionnées dans des zones 
  *
-  @param null|bool|'tout'	Sélectionner les rubriques
+ * @param null|bool|string	$_publique
+ *   Sélectionner les rubriques
  *   cachées dans le public (true),
  *   le privé (false),
  *   selon le contexte privé ou public (null),
  *   cachées ou non quelque soit le contexte ('tout')
  * @return Array liste d'identifiants de rubriques
-**/
+ */
 function accesrestreint_liste_rubriques_restreintes($_publique = null) {
 	static $rubs = array();
 
@@ -213,13 +218,14 @@ function accesrestreint_liste_rubriques_restreintes($_publique = null) {
 /**
  * Retourne la liste de toutes les rubriques sélectionnées dans des zones 
  *
- * @param null|bool|'tout'	Sélectionner les rubriques
+ * @param null|bool|string $_publique
+ *   Sélectionner les rubriques
  *   cachées dans le public (true),
  *   le privé (false),
  *   selon le contexte privé ou public (null),
  *   cachées ou non quelque soit le contexte ('tout')
  * @return Array liste d'identifiants de rubriques
-**/
+ */
 function accesrestreint_liste_rubriques_restreintes_et_enfants($_publique = null) {
 	static $rubs = array();
 
@@ -250,7 +256,7 @@ function accesrestreint_liste_rubriques_restreintes_et_enfants($_publique = null
  * @param int $id_auteur	Identifiant de l'auteur
  * @param int $id_rubrique	Identifiant de la rubrique
  * @return bool L'auteur fait partie de la rubrique.
-**/
+ */
 function accesrestreint_auteur_lie_a_rubrique($id_auteur, $id_rubrique) {
 	if (!$id_auteur)   return false;
 	if (!$id_rubrique) return false;
