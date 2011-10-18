@@ -4,30 +4,18 @@ include_spip('inc/meta');
 // Installation et mise à jour
 function contact_upgrade($nom_meta_version_base, $version_cible){
 
-	$version_actuelle = '0.0';
-	if (
-		(!isset($GLOBALS['meta'][$nom_meta_version_base]))
-		|| (($version_actuelle = $GLOBALS['meta'][$nom_meta_version_base]) != $version_cible)
-	){
-		
-		if (version_compare($version_actuelle,'0.0','=')){
-			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
-		}
 	$maj = array();
-	$maj['create'] = array(		
+	$maj['create'] = array(
 		array('maj_tables',array('spip_messages')),
 	);
 
 	include_spip('maj/svn10000'); //pour maj_liens
-	$maj['0.2.0'] = array(	
-		array('maj_liens','auteur','message'),
-		array('sql_drop_table',"spip_auteurs_messages"),
+	$maj['0.2.0'] = array(
+		array('maj_tables',array('spip_messages')),
 	);
 
 	include_spip('base/upgrade');
-	maj_plugin($nom_meta_base_version, $version_cible, $maj);
-	
-	}
+	maj_plugin($nom_meta_version_base, $version_cible, $maj);
 
 }
 

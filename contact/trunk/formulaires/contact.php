@@ -1,7 +1,9 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/config');
 include_spip('configurer/pipelines');
+include_spip('contact_fonctions');
 
 function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 	$valeurs = array();
