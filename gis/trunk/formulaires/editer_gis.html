@@ -1,136 +1,9 @@
 #CACHE{0}
-<div id="map_[(#ENV{objet})]_[(#ENV{id_objet})]" name="formMap" class="formMap" style="width: 100%; height: 350px"></div>
-<script type="text/javascript">
-<!--
-var form_map;
-var annuler_geocoder = 0;
-[(#ENV{recherhce}|!={non}|oui|et{#CONFIG{gis/geocoder}|oui})
-[(#SET{geocoder,oui})]
-var geocoder;]
-
-(function($){
-	
-	var maj_inputs = function(map,data,action) {
-		[(#GET{geocoder}|oui)
-		if (action != 'geocoding') {
-			var f = geocoder.geocode(data);
-		}]
-		var zoom = map.getZoom();
-		$("#champ_zoom").val(zoom);
-		if(action == 'click'){
-			$("#champ_lat").val(data.lat);
-			$("#champ_lon").val(data.lon);
-			annuler_geocoder = 1;
-			form_map.setCenter(data);
-			marker = new mxn.Marker(data);
-		}
-		else if(annuler_geocoder != 1){
-			if(data.point == 'undefined'){
-				$("#champ_lat").val(data.lat);
-				$("#champ_lon").val(data.lon);
-				form_map.setCenter(data);
-				marker = new mxn.Marker(data);
-			}else{
-				$("#champ_lat").val(data.point.lat);
-				$("#champ_lon").val(data.point.lon);
-				form_map.setCenter(data.point);
-				marker = new mxn.Marker(data.point);
-			}
-		}
-		form_map.removeAllMarkers();
-		form_map.addMarker(marker);
-	}
-	
-	[(#GET{geocoder}|oui)
-	function geocode(query) {
-		$('#champ_adresse').val(query.street);
-		$('#champ_code_postal').val(query.postcode);
-		$('#champ_ville').val(query.locality);
-		$('#champ_region').val(query.region);
-		$('#champ_pays').val(query.country);
-		maj_inputs(form_map,query,'geocoding');
-	}]
-	
-	var init_map = function() {
-		// creer la carte
-		var map_container = 'map_[(#ENV{objet})]_[(#ENV{id_objet})]';
-		form_map = new mxn.Mapstraction(map_container,'[(#REM|gis_api_utilisee)]');
-		form_map.setCenterAndZoom(new mxn.LatLonPoint(#ENV{lat,#CONFIG{gis/lat,0}},#ENV{lon,#CONFIG{gis/lon,0}}),#ENV{zoom,#CONFIG{gis/zoom,0}});
-		form_map.addControls({
-			pan: true,
-			zoom: '#CONFIG{gis/control,large}',
-			map_type: true
-		});
-		
-		[(#GET{geocoder}|oui)
-		// geocoder
-		geocoder = new mxn.Geocoder('[(#REM|gis_api_utilisee)]',geocode);]
-		
-		[(#ENV{lat}|oui)
-		var data = {
-			"type": "FeatureCollection",
-			"features": [(#VAL{91}|chr)]
-				{"type": "Feature",
-					"geometry": {"type": "Point", "coordinates": [(#VAL{91}|chr)]#LON, #LAT[(#VAL{93}|chr)]},
-					"id":"#ID_GIS",
-					"title":[(#TITRE|supprimer_numero|json_encode)],
-					"description":[(#DESCRIPTIF|json_encode)][,(#LOGO_GIS|oui)
-					[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{32,32}|image_recadre{32,32}})]
-					#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
-					#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
-					["icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
-					"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)]],
-					"icon_anchor": [(#VAL{91}|chr)][(#GET{icon_w}|div{2})],[(#GET{icon_h})][(#VAL{93}|chr)]
-				}[(#VAL{93}|chr)]
-		}
-		form_map.addJSON(data);]
-		
-		// mettre a jour les coordonnees quand on clique la carte
-		form_map.click.addHandler(function(name, source, args) {
-			annuler_geocoder = 0;
-			var pos = args.location;
-			maj_inputs(form_map,pos,'click');
-		});
-		
-		// mettre à jour le zoom quand on le modifie
-		form_map.changeZoom.addHandler(function(name, source, args) {
-			var zoom = source.getZoom();
-			$("#champ_zoom").val(zoom);
-		});
-		
-		[(#GET{geocoder}|oui)
-		// geocoder si clic...
-		$('a#rechercher').css("cursor","pointer").click(function(){
-			var address = {};
-			address.address = $("#champ_geocoder").attr("value");
-			annuler_geocoder = 0;
-			geocoder.geocode(address);
-		});
-
-		// ne pas soumettre le formulaire si on presse Entree depuis le champ de recherche
-		$('#champ_geocoder').keypress(function(e){
-			if (e.which == 13) {
-				$('a#rechercher').trigger("click");
-				return false;
-			}
-		});]
-		[(#ENV{id_gis}|non|ou{#ENV{id_gis}|=={oui}}|et{#CONFIG{gis/geolocaliser_user_html5}|=={on}}|oui)
-		gis_get_navigator_location(form_map,#ENV{zoom,#CONFIG{gis/zoom,0}});]
-	};
-
-	$(function(){
-		init_map();
-		[(#ENV{ajaxload}|!={non}|oui)onAjaxLoad(init_map);]
-	});
-	
-})(jQuery);
--->
-</script>
 <div class="formulaire_spip formulaire_editer formulaire_editer_gis">
 	<!-- br class='spacer' / -->
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	[(#ENV{editable})
+	<BOUCLE_editable(CONDITION){si #ENV{editable}}>
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data' name='formulaire_editer_gis' id='formulaire_editer_gis'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
@@ -138,12 +11,7 @@ var geocoder;]
 		<ul>
 			[(#SAISIE{hidden,objet})]
 			[(#SAISIE{hidden,id_objet})]
-			[(#GET{geocoder}|oui)
-			<li class="rechercher_adresse">
-				<label for="champ_geocoder"><:gis:label_rechercher_address:></label>
-				<input type="text" class="text" name="champ_geocoder" id="champ_geocoder" value="" />
-				<a id="rechercher"><:info_rechercher:></a>
-			</li>]
+			[(#SAISIE{carte,editer_gis_#ENV{id_gis},env})]
 			[(#SAISIE{input,lat,
 				label=<:gis:lat:>,
 				defaut=#CONFIG{gis/lat,0},
@@ -184,5 +52,5 @@ var geocoder;]
 			<input class='submit link' type='submit' name='supprimer' value='<:lien_supprimer:>' />]
 		</p>
 	</div></form>
-	]
+	</BOUCLE_editable>
 </div>

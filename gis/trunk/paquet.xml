@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="3.0.10"
+	version="3.1.0"
 	schema="2.0.2"
 	etat="dev"
 	compatibilite="[3.0.0-dev;3.0.*["
@@ -14,6 +14,7 @@
 
 	<auteur>b_b</auteur>
 	<auteur>kent1</auteur>
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 	<copyright>2011</copyright>
 	<licence>GPL v3</licence>
 	<credit lien="http://mattrich.deviantart.com/art/Picnic-101256405">Icône de mattrich sous licence CC BY-NC-SA</credit>
@@ -79,6 +80,10 @@
 		nom="formulaire_traiter"
 		inclure="formulaires/configurer_gis.php"
 		action="gis_configurer_gis_post_traitement"
+	/>
+	<pipeline
+		nom="saisies_autonomes"
+		inclure="gis_pipelines.php"
 	/>
 	
 	<menu nom="gis_tous" titre="gis:icone_gis_tous" parent="menu_edition" icone="images/gis-16.png" />

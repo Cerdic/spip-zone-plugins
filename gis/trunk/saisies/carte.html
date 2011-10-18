@@ -1,0 +1,145 @@
+<li class="pleine_largeur editer editer_[(#ENV{nom})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]"[ data-id="(#ENV{id_saisie})"]>
+#ENV*{inserer_debut}
+<div id="map_[(#ENV{nom})]" name="formMap" class="formMap" style="width: 100%; height: 350px"></div>
+<script type="text/javascript">
+<!--
+var form_map;
+var annuler_geocoder = 0;
+[(#ENV{recherche}|!={non}|oui|et{#CONFIG{gis/geocoder}|oui})
+[(#SET{geocoder,oui})]
+var geocoder;]
+
+(function($){
+	var champ_lat = $('#champ_#ENV{champ_lat,lat}');
+	var champ_lon = $('#champ_#ENV{champ_lon,lon}');
+	var champ_zoom = $('#champ_#ENV{champ_zoom,zoom}');
+	var champ_adresse = $('#champ_#ENV{champ_adresse,adresse}');
+	var champ_code_postal = $('##ENV{champ_code_postal,code_postal}');
+	var champ_ville = $('#champ_#ENV{champ_ville,ville}');
+	var champ_region = $('#champ_#ENV{champ_region,region}');
+	var champ_pays = $('#champ_#ENV{champ_pays,pays}');
+	
+	var maj_inputs = function(map,data,action) {
+		[(#GET{geocoder}|oui)
+		if (action != 'geocoding') {
+			var f = geocoder.geocode(data);
+		}]
+		var zoom = map.getZoom();
+		$('#champ_#ENV{champ_zoom,zoom}').val(zoom);
+		if(action == 'click'){
+			$('#champ_#ENV{champ_lat,lat}').val(data.lat);
+			$('#champ_#ENV{champ_lon,lon}').val(data.lon);
+			annuler_geocoder = 1;
+			form_map.setCenter(data);
+			marker = new mxn.Marker(data);
+		}
+		else if(annuler_geocoder != 1){
+			if(data.point == 'undefined'){
+				$('#champ_#ENV{champ_lat,lat}').val(data.lat);
+				$('#champ_#ENV{champ_lon,lon}').val(data.lon);
+				form_map.setCenter(data);
+				marker = new mxn.Marker(data);
+			}else{
+				$('#champ_#ENV{champ_lat,lat}').val(data.point.lat);
+				$('#champ_#ENV{champ_lon,lon}').val(data.point.lon);
+				form_map.setCenter(data.point);
+				marker = new mxn.Marker(data.point);
+			}
+		}
+		form_map.removeAllMarkers();
+		form_map.addMarker(marker);
+	}
+	
+	[(#GET{geocoder}|oui)
+	function geocode(query) {
+		$('#champ_#ENV{champ_adresse,adresse}').val(query.street);
+		$('#champ_#ENV{champ_code_postal,code_postal}').val(query.postcode);
+		$('#champ_#ENV{champ_ville,ville}').val(query.locality);
+		$('#champ_#ENV{champ_region,region}').val(query.region);
+		$('#champ_#ENV{champ_pays,pays}').val(query.country);
+		maj_inputs(form_map,query,'geocoding');
+	}]
+	
+	var init_map = function() {
+		// creer la carte
+		var map_container = 'map_[(#ENV{nom})]';
+		form_map = new mxn.Mapstraction(map_container,'[(#REM|gis_api_utilisee)]');
+		form_map.setCenterAndZoom(new mxn.LatLonPoint(#ENV{lat,#CONFIG{gis/lat,0}},#ENV{lon,#CONFIG{gis/lon,0}}),#ENV{zoom,#CONFIG{gis/zoom,0}});
+		form_map.addControls({
+			pan: true,
+			zoom: '#CONFIG{gis/control,large}',
+			map_type: true
+		});
+		
+		[(#GET{geocoder}|oui)
+		// geocoder
+		geocoder = new mxn.Geocoder('[(#REM|gis_api_utilisee)]',geocode);]
+		
+		[(#ENV{lat}|et{#ENV{lon}}|oui)
+		var data = {
+			"type": "FeatureCollection",
+			"features": [(#VAL{91}|chr)]
+				{"type": "Feature",
+					"geometry": {"type": "Point", "coordinates": [(#VAL{91}|chr)]#ENV{lon}, #ENV{lat}[(#VAL{93}|chr)]},
+					"id":"#ENV{id_gis,oui}",
+					"title":[(#ENV{titre}|supprimer_numero|json_encode)],
+					"description":[(#ENV{descriptif}|json_encode)][,(#LOGO_GIS|oui)
+					[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{32,32}|image_recadre{32,32}})]
+					#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
+					#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
+					["icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
+					"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)],
+					"icon_anchor": [(#VAL{91}|chr)][(#GET{icon_w}|div{2})],[(#GET{icon_h})][(#VAL{93}|chr)]]
+				}[(#VAL{93}|chr)]
+		}
+		form_map.addJSON(data);]
+		
+		// mettre a jour les coordonnees quand on clique la carte
+		form_map.click.addHandler(function(name, source, args) {
+			annuler_geocoder = 0;
+			var pos = args.location;
+			maj_inputs(form_map,pos,'click');
+		});
+		
+		// mettre à jour le zoom quand on le modifie
+		form_map.changeZoom.addHandler(function(name, source, args) {
+			var zoom = source.getZoom();
+			$('#champ_#ENV{champ_zoom,zoom}').val(zoom);
+		});
+		
+		[(#GET{geocoder}|oui)
+		// geocoder si clic...
+		$('a##ENV{nom}_rechercher_geocodage').css("cursor","pointer").click(function(){
+			var address = {};
+			address.address = $("#champ_#ENV{nom}_geocoder").attr("value");
+			annuler_geocoder = 0;
+			geocoder.geocode(address);
+		});
+
+		// ne pas soumettre le formulaire si on presse Entree depuis le champ de recherche
+		$('#champ_#ENV{nom}_geocoder').keypress(function(e){
+			if (e.which == 13) {
+				$('a##ENV{nom}_rechercher_geocodage').trigger("click");
+				return false;
+			}
+		});]
+		[(#ENV{id_gis}|non|ou{#ENV{id_gis}|=={oui}}|et{#CONFIG{gis/geolocaliser_user_html5}|=={on}}|oui)
+		gis_get_navigator_location(form_map,#ENV{zoom,#CONFIG{gis/zoom,0}});]
+	};
+
+	$(function(){
+		init_map();
+		[(#ENV{ajaxload}|!={non}|oui)onAjaxLoad(init_map);]
+	});
+	
+})(jQuery);
+-->
+</script>
+#ENV*{inserer_fin}
+</li>
+[(#GET{geocoder}|oui)
+<li class="rechercher_adresse">
+	<label for="champ_#ENV{nom}_geocoder"><:gis:label_rechercher_address:></label>
+	<input type="text" class="text" name="champ_#ENV{nom}_geocoder" id="champ_#ENV{nom}_geocoder" value="" />
+	<a id="#ENV{nom}_rechercher_geocodage"><:info_rechercher:></a>
+</li>]

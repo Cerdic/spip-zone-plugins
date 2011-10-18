@@ -1,5 +1,10 @@
 <?php
 
+function gis_saisies_autonomes($flux){
+	$flux[] = 'carte';
+	return $flux;
+}
+
 function gis_inserer_javascript($flux){
 	
 	// initialisation des valeurs de config

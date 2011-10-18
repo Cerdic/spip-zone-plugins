@@ -27,7 +27,7 @@
 			$(function(){
 				// resize + recenter de la map si bloc deplie
 				$('#pave_gis_depliable').bind('deplie', function(e){
-					var container = $('#map_[(#ENV{objet})]_[(#ENV{id_objet})]');
+					var container = $('#map_editer_gis_#ENV{id_gis,oui}');
 					form_map.resizeTo(container.width(),container.height());
 					var lat = $("#champ_lat").val();
 					var lon = $("#champ_lon").val();
