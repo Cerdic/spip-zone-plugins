@@ -1,7 +1,7 @@
 <paquet
 	prefix="googleplus1"
 	categorie="communication"
-	version="0.4.0"
+	version="0.4.1"
 	etat="stable"
 	compatibilite="[2.0.10;3.0.*]"
 	documentation="http://www.spip-contrib.net/Google-1"
@@ -9,7 +9,6 @@
 >
 
 	<nom>Google +1</nom>
-	<!-- Gestion des brèves dans SPIP -->
 
 	<auteur>Phil</auteur>
 
