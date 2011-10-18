@@ -40,6 +40,6 @@ Avec ce plugin, plus aucun objet n’est supprim&#233; automatiquement. La poube
 		<url>corbeille</url>
 	</bouton>
 	<pipeline><nom>corbeille_table_infos</nom><action></action></pipeline>
-	<necessite id='SPIP' version='[3.0.0;3.0.*]' />
+	<necessite id='SPIP' version='[3.0.0-beta;3.0.*]' />
 	<categorie>maintenance</categorie>
 </plugin>
