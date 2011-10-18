@@ -7,8 +7,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/acces_restreint_base');
-include_spip('inc/acces_restreint_gestion');
+include_spip('inc/accesrestreint_base');
+include_spip('inc/accesrestreint');
 include_spip('inc/presentation');
 include_spip('inc/config');
 

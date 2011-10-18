@@ -42,7 +42,7 @@ function autoriser_auteur_affecterzones_dist($faire,$quoi,$id,$qui,$opts){
 	# les non admin ne peuvent pas s'administrer eux meme pour eviter les erreurs
 	if ($id == $qui['id_auteur']) return false;
 	# les non admin ne peuvent affecter que les zones dont ils font partie
-	include_spip('inc/acces_restreint');
+	include_spip('inc/accesrestreint');
 	if ($opts['id_zone']
 	  AND !accesrestreint_test_appartenance_zone_auteur($opts['id_zone'], $qui['id_auteur']))
 	  return false;
@@ -51,7 +51,7 @@ function autoriser_auteur_affecterzones_dist($faire,$quoi,$id,$qui,$opts){
 
 if(!function_exists('autoriser_rubrique_voir')) {
 function autoriser_rubrique_voir($faire, $type, $id, $qui, $opt) {
-	include_spip('inc/acces_restreint');
+	include_spip('inc/accesrestreint');
 	static $rub_exclues;
 	$publique = isset($opt['publique'])?$opt['publique']:!test_espace_prive();
 	$id_auteur = isset($qui['id_auteur']) ? $qui['id_auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
@@ -116,7 +116,7 @@ function autoriser_evenement_voir($faire, $type, $id, $qui, $opt) {
 
 if(!function_exists('autoriser_document_voir')) {
 function autoriser_document_voir($faire, $type, $id, $qui, $opt) {
-	include_spip('public/acces_restreint');
+	include_spip('public/accesrestreint');
 	static $documents_statut = array();
 	static $where = array();
 	$publique = isset($opt['publique'])?$opt['publique']:!test_espace_prive();
@@ -128,7 +128,7 @@ function autoriser_document_voir($faire, $type, $id, $qui, $opt) {
 			if (!isset($where[$publique])){
 				$where[$publique] = accesrestreint_documents_accessibles_where('id_document', $publique?"true":"false");
 				// inclure avant le eval, pour que les fonctions soient bien definies
-				include_spip('inc/acces_restreint');
+				include_spip('inc/accesrestreint');
 				$where[$publique] = eval("return ".$where[$publique].";");
 			}
 			$documents_statut[$id_auteur][$publique][$id] = sql_getfetsel('id_document','spip_documents',array('id_document='.intval($id),$where[$publique]));

@@ -6,6 +6,8 @@
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('public/accesrestreint');
+include_spip('inc/accesrestreint');
 
 /**
  * filtre de securisation des squelettes
@@ -29,7 +31,7 @@ function accesrestreint_securise_squelette($letexte){
  */
 function accesrestreint_article_restreint($id_article, $id_auteur=null){
 	include_spip('public/quete');
-	include_spip('inc/acces_restreint');
+	include_spip('inc/accesrestreint');
 	$article = quete_parent_lang('spip_articles',$id_article);
 	return
 		@in_array($article['id_rubrique'],
@@ -45,7 +47,7 @@ function accesrestreint_article_restreint($id_article, $id_auteur=null){
  * @return bool
  */
 function accesrestreint_rubrique_restreinte($id_rubrique, $id_auteur=null){
-	include_spip('inc/acces_restreint');
+	include_spip('inc/accesrestreint');
 	return
 		@in_array($id_rubrique,
 			accesrestreint_liste_rubriques_exclues(!test_espace_prive(), $id_auteur)
@@ -66,7 +68,7 @@ function accesrestreint_acces_zone($id_zone,$id_auteur=null){
 		  AND ($id_auteur==$GLOBALS['visiteur_session']['id_auteur']))
 			$liste_zones[$id_auteur] = explode(',',$GLOBALS['accesrestreint_zones_autorisees']);
 		elseif (!is_null($id_auteur)){
-			include_spip('inc/acces_restreint');
+			include_spip('inc/accesrestreint');
 			$liste_zones[$id_auteur] = explode(',',accesrestreint_liste_zones_autorisees('',$id_auteur));
 		}
 	}
@@ -257,7 +259,7 @@ function accesrestreint_auteur_lie_a_rubrique($id_auteur, $id_rubrique) {
 	if (!isset($auteurs[$id_auteur])) {
 		$auteurs[$id_auteur] = array();
 
-		include_spip('inc/acces_restreint');
+		include_spip('inc/accesrestreint');
 		$auteurs[$id_auteur] = array_flip(accesrestreint_liste_rubriques_exclues(true, $id_auteur, true));
 	}
 	

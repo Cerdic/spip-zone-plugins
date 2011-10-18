@@ -18,7 +18,7 @@ function accesrestreint_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-		include_spip('base/acces_restreint');
+		include_spip('base/accesrestreint');
 		if (version_compare($current_version,'0.0','<=')){
 			include_spip('base/create');
 			include_spip('base/abstract_sql');

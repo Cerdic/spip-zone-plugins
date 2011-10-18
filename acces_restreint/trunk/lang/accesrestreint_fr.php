@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_creer_la_zone' => 'Créer la nouvelle zone',
+	'bouton_configurer_acces' => 'Configuration des acc&#232;s .htaccess',
 
 	// C
 	'colonne_id' => 'Num',
