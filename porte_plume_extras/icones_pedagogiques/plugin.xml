@@ -36,6 +36,6 @@ Un simple clic sur une ic&#244;ne propos&#233;e permet d'ajouter dans le texte d
 		<inclure>iconespedago.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.0.3;2.1.99]" />
+	<necessite id="SPIP" version="[2.0.3;3.0.99]" />
 	<necessite id="porte_plume" version="[1.2.2;]" />
 </plugin>
