@@ -117,23 +117,24 @@ function edition_directe_afficher_contenu_objet($flux){
 
 
 function edition_directe_recuperer_fond($flux){
+
+	//Enlever la prévisualisation des articles
+    if ($flux['args']['fond'] == 'prive/contenu/article' AND objet_edition_directe('article')){
+        $flux['data']['texte'] = '';
+    }
+    
 	//Enlever la prévisualisation des rubriques
     if ($flux['args']['fond'] == 'prive/contenu/rubrique' AND objet_edition_directe('rubrique')){
-
-
         $flux['data']['texte'] = '';
     }
  	
  	//Enlever la prévisualisation des sites
     if ($flux['args']['fond'] == 'prive/contenu/site' AND objet_edition_directe('site')){
-
-
         $flux['data']['texte'] = '';
     } 
     
  	//Enlever la prévisualisation des breves
     if ($flux['args']['fond'] == 'prive/contenu/breve'  AND objet_edition_directe('breve')){
-
         $flux['data']['texte'] = '';
     } 
 
