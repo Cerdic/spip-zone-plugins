@@ -200,7 +200,7 @@ Plusieurs methodes d'insertion :
   		attributes[_(#ENV{id})][_(#GET{objet_val})].name= "[(#GET{javascriptid,mediaplayer})]_[(#GET{objet_spip})][_(#GET{objet_val})]";
 
 	$(document).ready(function() {
-		swfobject.embedSWF("#CHEMIN{lib/mediaplayer/player.swf}", "mediaplayer_container[_(#ENV{id})]_[(#GET{objet_spip})][_(#GET{objet_val})]", "#GET{width}", "#GET{height}", "9.0.0","#CHEMIN{lib/swfobject/expressInstall.swf}", flashvars[_(#ENV{id})][_(#GET{objet_val})], params[_(#ENV{id})][_(#GET{objet_val})], attributes[_(#ENV{id})][_(#GET{objet_val})]);
+		swfobject.embedSWF("#CHEMIN{lib/mediaplayer-5.8/player.swf}", "mediaplayer_container[_(#ENV{id})]_[(#GET{objet_spip})][_(#GET{objet_val})]", "#GET{width}", "#GET{height}", "9.0.0","#CHEMIN{lib/swfobject/expressInstall.swf}", flashvars[_(#ENV{id})][_(#GET{objet_val})], params[_(#ENV{id})][_(#GET{objet_val})], attributes[_(#ENV{id})][_(#GET{objet_val})]);
 	});
 // ]]>
 </script>
