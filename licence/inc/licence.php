@@ -79,6 +79,13 @@ $GLOBALS['licence_licences'] = array (
 				"link"		=> _T('licence:lien_art_libre'),
 				"description" => _T('licence:description_art_libre'),
 				"abbr" 		=> "lal"),
+			"10" 			=> array(
+				"name" 		=> _T('licence:titre_gfdl'),
+				"id"		=> "10",
+				"icon"		=> "gnu-gfdl.png",
+				"link"		=> _T('licence:lien_gfdl'),
+				"description" => _T('licence:description_gfdl'),
+				"abbr" 		=> "gfdl"),
 );
 
 ?>
