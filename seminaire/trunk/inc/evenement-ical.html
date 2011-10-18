@@ -7,10 +7,10 @@ DTEND:(#DATE_FIN|date_ical)],[
 DTSTART;VALUE=DATE:(#DATE_DEBUT|affdate{Ymd})][
 DTEND;VALUE=DATE:(#DATE_FIN|agenda_jourdecal{1,Ymd})]})][
 LOCATION:(#LIEU|PtoBR|textebrut|filtrer_ical)]
-ORGANIZER:<BOUCLE_auteur(AUTEURS){id_article=#ID_ARTICLE}>[(#NOM)-(#BIO)]</BOUCLE_auteur>
-ATTENDEE:[(#NAME)-(#ORIGIN)]
-DESCRIPTION:[(#ABSTRACT|supprimer_tags|textebrut|filtrer_ical|lignes_longues{60})]
-CATEGORIES:<BOUCLE_article(ARTICLES) {id_article=#ID_ARTICLE}>[(#TITRE|textebrut|filtrer_ical)]</BOUCLE_article>
+ORGANIZER:<BOUCLE_auteur(AUTEURS){id_article=#ID_ARTICLE}>[(#NOM|filtrer_ical)][-(#BIO|filtrer_ical)]</BOUCLE_auteur>
+ATTENDEE:[(#NAME|filtrer_ical)][-(#ORIGIN|filtrer_ical)]
+DESCRIPTION:[(#ABSTRACT|supprimer_tags|textebrut|filtrer_ical)]
+CATEGORIES:<BOUCLE_article(ARTICLES){id_article=#ID_ARTICLE}>[(#TITRE|textebrut|filtrer_ical)]</BOUCLE_article>
 URL:[(#URL_ARTICLE|parametre_url{id_evenement,#ID_EVENEMENT}|url_absolue|filtrer_ical)]
 STATUS:CONFIRMED
 END:VEVENT
