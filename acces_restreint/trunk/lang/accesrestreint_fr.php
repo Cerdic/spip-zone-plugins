@@ -25,6 +25,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'descriptif' => 'Descriptif',
 
+	// E
+	'explication_creer_htaccess' => 'Cette option interdit la lecture des documents joints si le texte auquel ils se rattachent n\'est pas publi&eacute',
+
 	// I
 	'icone_menu_config' => 'Accès Restreint',
 	'icone_supprimer_zone' => 'Supprimer cette zone',
@@ -43,6 +46,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_retirer_zones' => 'Enlever de toutes les zones',
 	'info_rubrique_dans_zone' => 'Cette rubrique fait partie de la zone :',
 	'info_rubrique_dans_zones' => 'Cette rubrique fait partie des zones :',
+
+	// L
+	'label_creer_htaccess' => 'Acc&egrave;s aux document joints par leur URL',
+	'label_creer_htaccess_oui' => 'interdire la lecture',
+	'label_creer_htaccess_non' => 'autoriser la lecture',
 
 	// M
 	'modifier_zone' => 'Modifier la zone',

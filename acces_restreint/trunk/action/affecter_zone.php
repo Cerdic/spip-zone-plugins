@@ -4,6 +4,7 @@
  * Licence GPL (c) 2006-2008 Cedric Morin
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 function action_affecter_zone_dist(){

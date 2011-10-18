@@ -4,6 +4,7 @@
  * Licence GPL (c) 2006-2008 Cedric Morin
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * editer une zone (action apres creation/modif de zone)

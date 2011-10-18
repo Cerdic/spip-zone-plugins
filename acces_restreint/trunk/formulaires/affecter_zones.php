@@ -4,6 +4,7 @@
  * Licence GPL (c) 2006-2008 Cedric Morin
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_affecter_zones_charger_dist($id_auteur){
 	$valeurs = array('zone'=>'','id_auteur'=>$id_auteur,'id'=>$id_auteur);
