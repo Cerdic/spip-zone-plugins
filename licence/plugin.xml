@@ -5,12 +5,12 @@
 		[en]License
 		</multi>
 	</nom>
-	<nom>
+	<slogan>
 		<multi>
-		[fr]Une Licence pour mes articles et documents
+		[fr]Une Licence pour articles et documents
 		[en]A license for articles and documents
 		</multi>
-	</nom>
+	</slogan>
 	<icon>img_pack/licence_logo.png</icon>
 	<auteur>[fanouch->lesguppies@free.fr], sur une id&#233;e originale de erational</auteur>
 	<version>0.3.6</version>
