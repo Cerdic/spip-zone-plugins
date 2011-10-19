@@ -2,7 +2,7 @@
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations             *
  *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
+ *  Copyright (c) 2007 Bernard Blazin & Franï¿½ois de Montlivault (V1)       *
  *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -35,13 +35,10 @@ function exec_edit_adherent_args($id_auteur)
 	} else {
 		include_spip('inc/association_coordonnees');
 		$nom_membre = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
-		$statut_interne=$data['statut_interne'];
 		$adresses = association_recuperer_adresses_string(array($id_auteur));
 		$emails = association_recuperer_emails_string(array($id_auteur));
 		$telephones = association_recuperer_telephones_string(array($id_auteur));
-		
-		$validite=$data['validite'];
-		
+
 		$statut = sql_getfetsel('statut', 'spip_auteurs', 'id_auteur='.$id_auteur);
 		switch($statut)	{
 			case "0minirezo":
@@ -52,8 +49,6 @@ function exec_edit_adherent_args($id_auteur)
 				$statut='visiteur'; break;
 		}
 		
-		$adh = generer_url_ecrire('voir_adherent',"id=$id_auteur");
-	
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		include_spip ('inc/navigation');
