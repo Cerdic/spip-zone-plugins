@@ -25,9 +25,9 @@ Paramètres:
 - maxrubs: nb max de pictos de rubriques géoréférencés.
 - maxarts: nb max de pictos d'articles géoréférencés.
 
-][(#SET{id_carte_gis,#ENV{id_carte_gis,1}})]<BOUCLE_centrer_article(GIS){id_rubrique=0}{id_article}{0,1}>[(#ENV{lat}|non)#SET{latitude,#LAT}][(#ENV{lon}|non)#SET{lonxitude,#LONX}][(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]ca</BOUCLE_centrer_article>
-<BOUCLE_centrer_rubrique(GIS){id_rubrique}{id_article=0}{0,1}>[(#ENV{lat}|non)#SET{latitude,#LAT}][(#ENV{lon}|non)#SET{lonxitude,#LONX}][(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]cr</BOUCLE_centrer_rubrique>
-<BOUCLE_centrer_mot(gis_mots){id_mot}{0,1}>[(#ENV{lat}|non)#SET{latitude,#LAT}][(#ENV{lon}|non)#SET{lonxitude,#LONX}][(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]cm</BOUCLE_centrer_mot>
+][(#SET{id_carte_gis,#ENV{id_carte_gis,1}})]<BOUCLE_centrer_article(GIS){id_rubrique=0}{id_article}>[(#ENV{lat}|non)#SET{latitude,#LAT}][(#ENV{lon}|non)#SET{lonxitude,#LONX}][(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]</BOUCLE_centrer_article>
+<BOUCLE_centrer_rubrique(GIS){id_rubrique}{id_article=0}>[(#ENV{lat}|non)#SET{latitude,#LAT}][(#ENV{lon}|non)#SET{lonxitude,#LONX}][(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]</BOUCLE_centrer_rubrique>
+<BOUCLE_centrer_mot(gis_mots){id_mot}>[(#ENV{lat}|non)#SET{latitude,#LAT}][(#ENV{lon}|non)#SET{lonxitude,#LONX}][(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]</BOUCLE_centrer_mot>
 [(#REM)
   
   Sinon centrer sur les coordonnes passees en parametre ou sur celles par defaut
