@@ -25,7 +25,7 @@ $sitra_objets_field = array(
 	'classement_orga' => 'varchar(32) NOT NULL',
 	'classement_code' => 'varchar(32) NOT NULL',
 	'classement' => 'varchar(32) NOT NULL',
-	'reservation_url' => 'text NOT NULL',
+	'reservation_url' => 'text NOT NULL'
 	);
 
 $sitra_objets_key = array(
@@ -65,7 +65,11 @@ $sitra_objets_details_field = array(
 	'presta_services' => 'text NOT NULL',
 	'presta_sitra' => 'text NOT NULL',
 	'langues' => 'text NOT NULL',
-	'capacites' => 'text NOT NULL'
+	'capacites' => 'text NOT NULL',
+	'carte_plan' => 'text NOT NULL',
+	'ouverture_en_clair' => 'text NOT NULL',
+	'bons_plans' => 'text NOT NULL',
+	'accueil' => 'text NOT NULL'
 	);
 
 $sitra_objets_details_key = array(
@@ -233,9 +237,11 @@ function sitra_declarer_tables_interfaces($interface){
 	
 	$interface['table_des_traitements']['DESCRIPTION'][] = 'propre(%s)';
 	$interface['table_des_traitements']['DESCRIPTION_COURTE'][]= 'propre(%s)';
-	$interface['table_des_traitements']['OBSERVATIONS_DATES'][]= 'propre(%s)';
+	$interface['table_des_traitements']['OBSERVATION_DATES'][]= 'propre(%s)';
 	$interface['table_des_traitements']['TARIFS_EN_CLAIR'][]= 'propre(%s)';
 	$interface['table_des_traitements']['TARIFS_COMPLEMENTAIRES'][]= 'propre(%s)';
+	$interface['table_des_traitements']['CARTE_PLAN'][]= 'propre(%s)';
+	$interface['table_des_traitements']['OUVERTURE_EN_CLAIR'][]= 'propre(%s)';
 	
 	// Titre pour url
 	$interface['table_titre']['sitra_objets'] = "titre, '' AS lang";

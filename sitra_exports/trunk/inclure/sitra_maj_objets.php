@@ -82,7 +82,11 @@ foreach($langues as $langue){
 			'presta_services' => '',
 			'presta_sitra' => '',
 			'langues' => '',
-			'capacites' => ''
+			'capacites' => '',
+			'carte_plan' => '',
+			'ouverture_en_clair' => '',
+			'accueil' => '',
+			'bons_plans' => ''
 			);
 		
 		if (SITRA_DEBUG) echo $hr;
@@ -197,11 +201,15 @@ foreach($langues as $langue){
 			foreach ($oi -> DescriptionsComplementaires -> DetailDescriptionComplementaire as $val){
 				$descr = $val -> Description;
 				switch ($descr['type']){
-					case '16.01.05': $objet_details['titre_lang'] = $descr; break;
+					case '16.02.01': $objet_details['accueil'] = $descr; break;
+					case '16.02.02': $objet_details['carte_plan'] = $descr; break;
 					case '16.02.28': $objet_details['description_courte'] = $descr; break;
 					case '16.02.30': $objet_details['description'] = $descr; break;
+					case '16.02.32': $objet_details['bons_plans'] = $descr; break;
 					case '16.02.38': $objet_details['tarifs_complementaires'] = $descr; break;
 					case '16.02.42': $objet_details['lieu'] = $descr; break;
+					case '16.02.48': $objet_details['titre_lang'] = $descr; break;
+					case '16.02.49': $objet_details['ouverture_en_clair'] = $descr; break;
 					case '16.02.67': $objet_details['tarifs_en_clair'] = $descr; break;
 				} // fin switch
 			}
