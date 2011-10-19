@@ -17,7 +17,7 @@
 
 		<BOUCLE_images(documents_liens documents){extension IN png,jpg,gif}{par hasard}{0, 5}{statut=publie}>
             <a href="[(#URL_ARTICLE{#ID_OBJET})]" [title="(#TITRE|attribut_html|couper{80})"] >
-                [(#FICHIER||image_reduire{270,0}|image_recadre{270,210,'center','ffffff'}|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]})]
+                [(#LOGO_DOCUMENT||image_reduire{270,0}|image_recadre{270,210,'center','ffffff'}|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]})]
             </a>
         </BOUCLE_images>
 		
