@@ -3,8 +3,8 @@ Todo
  stockage de toutes les infos dans une base de données au lieu du cookie. ==> pas tout de  suite
  -
  configuration dans l’espace privé des widget à afficher ok
- configuration affichage mots clés : nuages/tagsphère/boucle spip avec accordion
- configuration images: fader ou splickbox
+ configuration affichage mots clés : nuages/tagsphère/boucle spip avec accordion ok
+ configuration images: fader ou splickbox ok
  configuration interactivité (communication avec visiteur) : annonce publique ou brèves 
  widget de configuration avec case à cocher des widget à afficher ou pas ok 
  + stockage cookie
@@ -12,7 +12,7 @@ Todo
  choix de la couleur des boites => voir jquery colorpicker
  + stockage cookie
  
- zone de texte pour le widget aides (dans cfg)
+ zone de texte pour le widget aides (dans cfg) ok
  -
  formulaire ajax pour sélection du lieu de la météo (liste déroulante avec les grandes villes de la région ou formulaire de saisie du code avec lien vers weather.com) avec stockage des infos dans un cookie. 
  
@@ -30,7 +30,7 @@ widget :
  Derniers articles avec toggle sur titre ou infinite scroll ==>pour le squelette
 
 extensions : 
- plugin fader sur brève et images aléatoires 
+ plugin fader sur brève et images aléatoires avec modeles
  squelette iGoogle, avec bandeauslide, menu animé, boite rouge dégradée, 3 colonnes, fader brèves et images, 
  fond du body en dégradé métal ou anthracite, contenu(article, menu rubrique accordion, breve, images, commentaires)
 

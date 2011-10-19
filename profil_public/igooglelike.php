@@ -16,7 +16,8 @@ function igooglelike_jqueryui_forcer($scripts){
 	$scripts[] = "jquery.ui.tabs";
 	$scripts[] = "jquery.effects.core";
 	$scripts[] = "jquery.effects.drop";
-	$scripts[] = "jquery.effects.bounce";
+	$scripts[] = "jquery.effects.explode";
+	$scripts[] = "jquery.effects.bounce";	
     return $scripts;
 }
 ?>

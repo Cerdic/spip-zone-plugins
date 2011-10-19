@@ -4,32 +4,33 @@
 			<div class="logo-profil">[(#LOGO_AUTEUR|image_reduire{0,100})]</div>
 
 			<div class="info-profil">
-				
-				<B_contact>
-				
-				<BOUCLE_contact(CONTACTS){id_auteur=#SESSION{id_auteur}}>
-					
+			
+				<B_contact>				
+					<BOUCLE_contact(CONTACTS){id_auteur=#SESSION{id_auteur}}>						
 					[<p class="#EDIT{nom} nom">(#NOM)</p>]				  
 					[<p class="#EDIT{prenom} prenom">(#PRENOM)</p>]
 					[<p class="#EDIT{fonction} fonction">(#FONCTION)</p>]
 					[<p>(#DATE_NAISSANCE|affdate)</p>]
-				</BOUCLE_contact>
+					</BOUCLE_contact>
 				</B_contact>
-					#NOM
+					[<p class="#EDIT{nom} nom">(#NOM)</p>]
 				<//B_contact>
-				
-				</div>
+							
+			</div>
 				
 			<div class="detail-profil">	
-					<p>
+				<p>
 					<div class="head">D&eacute;tails</div>
 					<div class="content">
-						
-						[<p class="#EDIT{email} email">(#EMAIL)</p>]
-						[<p class="#EDIT{bio} bio">(#BIO)</p>]
-					</p>	
+					
+					[<p class="#EDIT{email} email">(#EMAIL)</p>]
+					[<p class="#EDIT{site} site"><a href="#URL_SITE">(#NOM_SITE)</a></p>]   					
+					[<p class="#EDIT{bio} bio">(#BIO)</p>]
+					
+					
+				</p>	
 					</div>
-				</BOUCLE_profil>
+				
 				
 				<p>
 				<div class="head">R&eacute;glages</div>
@@ -37,7 +38,15 @@
 				
 				
 				<form action="" method="get">
-				<fieldset style="border:none">
+				<fieldset style="border:none; font-size:0.8em">
+				<table>
+				<tr>
+				    <td align="left" colspan="2">
+					couleur des boites
+					</td>
+				</tr>
+				<tr>
+				   <td> 
 					
 					[(#CONFIG{profil_public/articles}|?{' ',''})
 					<p class="formulaire">						
@@ -80,6 +89,9 @@
 						<label for="case-nav" class="left">Navigation</label>
 					</p>
 					]
+					</TD>
+					
+					<TD> 
 					
 					[(#CONFIG{profil_public/annonce}|?{' ',''})
 					<p class="formulaire">
@@ -115,7 +127,14 @@
 						<label for="case-rss" class="left">Flux rss</label>
 					</p>
 					]
-				
+					</TD>
+				</TR>
+				<tr>
+					<TD align="left" colspan="2">
+					<a href="ecrire/?exec=infos_perso&id_auteur=#SESSION{id_auteur}">Modifier mon profil</a>
+					</TD>
+				</tr>
+				</table>				
 					
 				</fieldset>
 				</form>
@@ -125,3 +144,4 @@
 				
 			</div>
 		</div>
+</BOUCLE_profil>

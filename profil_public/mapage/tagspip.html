@@ -1,0 +1,38 @@
+<B_mots>
+		
+		<script>
+	$(function() {
+		$( "#mots_accordion" ).accordion({
+			active: false,
+			icons: { 'header': 'ui-icon-plus', 'headerSelected': 'ui-icon-minus' },
+			collapsible: true
+			});
+	});
+	</script>
+
+
+
+
+
+		<div>
+		
+			<ul id="mots_accordion">
+			<BOUCLE_mots(GROUPES_MOTS){par titre}>
+				<li>
+					<h3><a href="#">[(#TITRE|couper{80})]</a></h3>
+					<div>
+					<B_sous_mots>
+					<ul>
+						<BOUCLE_sous_mots(MOTS) {id_groupe}{par titre}>
+							<li><a href="#URL_MOT ">[(#TITRE|couper{80})]</a></li>
+						</BOUCLE_sous_mots>
+					</ul>
+					</B_sous_mots>
+					</div>
+				</li>
+			</BOUCLE_mots>
+
+			</ul>
+		</div>
+	</B_mots>
+	
