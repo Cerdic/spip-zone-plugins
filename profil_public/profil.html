@@ -99,13 +99,7 @@
 		<div class="portlet" id="box-messages">
 			<div class="portlet-header">Messagerie</div>
 			<div class="portlet-content">
-			[(#ONGLETS_DEBUT{Envoyés})]
-			#FORMULAIRE_MESSAGES_ENVOYES{id_auteur}
-			[(#ONGLETS_TITRE{Reçus})]
-			#FORMULAIRE_MESSAGES_RECUS{id_auteur}
-			[(#ONGLETS_TITRE{Ecrire})]
-			#FORMULAIRE_ECRIRE_MESSAGE{id_auteur}
-			#ONGLETS_FIN
+			<INCLURE{fond=mapage/w-messages}>
 			</div>
 		</div>
 		]

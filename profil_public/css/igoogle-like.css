@@ -8,7 +8,7 @@
 	#conteneur .ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important; height: 100px !important; }
 	#conteneur .ui-sortable-placeholder * { visibility: hidden; }
 	
-	#conteneur .ui-widget-header  {border:none;
+	#conteneur .portlet-header  {border:none;
 	padding-top:5px;
 	padding-right:10px;
 	height:20px;
