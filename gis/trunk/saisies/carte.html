@@ -82,8 +82,8 @@ var geocoder;]
 				{"type": "Feature",
 					"geometry": {"type": "Point", "coordinates": [(#VAL{91}|chr)]#ENV{lon}, #ENV{lat}[(#VAL{93}|chr)]},
 					"id":"#ENV{id_gis,oui}",
-					"title":[(#ENV{titre}|supprimer_numero|json_encode)],
-					"description":[(#ENV{descriptif}|json_encode)][,(#LOGO_GIS|oui)
+					"title":[(#ENV{titre,''}|supprimer_numero|json_encode)],
+					"description":[(#ENV{descriptif,''}|json_encode)][,(#LOGO_GIS|oui)
 					[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{32,32}|image_recadre{32,32}})]
 					#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
 					#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
