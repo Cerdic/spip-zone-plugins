@@ -127,14 +127,15 @@
     function updateTags(){
         var fy;
         var fx;
-        if (curState.mouseOver) {
-            fy = options.speed - forCalcs.speedY * curState.mouseY;
-            fx = forCalcs.speedX * curState.mouseX - options.speed;
-        }
-        else {
-            fy = curState.lastFy * options.slower;
-            fx = curState.lastFx * options.slower;
-        }
+		// Pour inverser le comportement, arret si over, rotation si out ...
+		if (curState.mouseOver) {
+		 fy = curState.lastFy * options.slower;
+		 fx = curState.lastFx * options.slower;
+		}  
+		else {
+		 fy = options.speed - forCalcs.speedY * curState.mouseY;
+		 fx = forCalcs.speedX * curState.mouseX - options.speed;
+		}
         curState.lastFy = fy;
         curState.lastFx = fx;
         if (Math.abs(fy) > 0.01 || Math.abs(fx) > 0.01) {
