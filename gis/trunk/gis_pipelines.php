@@ -103,12 +103,17 @@ function gis_affiche_milieu($flux){
 				include_spip('inc/presentation');
 				$contexte['objet'] = $objet;
 				$contexte['id_objet'] = $id_objet;
-				$flux['data'] .= "<div id='pave_gis'>";
+				$texte = "<div id='pave_gis'>";
 				$bouton = bouton_block_depliable(_T('gis:cfg_titre_gis'), false, "pave_gis_depliable");
-				$flux['data'] .= debut_cadre_enfonce(find_in_path('images/gis-24.png'), true, "", $bouton);
-				$flux['data'] .= recuperer_fond('prive/contenu/gis_objet', $contexte);
-				$flux['data'] .= fin_cadre_enfonce(true);
-				$flux['data'] .= "</div>";
+				$texte .= debut_cadre_enfonce(find_in_path('images/gis-24.png'), true, "", $bouton);
+				$texte .= recuperer_fond('prive/contenu/gis_objet', $contexte);
+				$texte .= fin_cadre_enfonce(true);
+				$texte .= "</div>";
+				
+				if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
+					$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
+				else
+					$flux['data'] .= $texte;
 			}
 		}
 	}

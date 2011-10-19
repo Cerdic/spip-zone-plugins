@@ -2,9 +2,12 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_editer_gis_dist() {
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+function action_editer_gis_dist($arg=null) {
+	if (is_null($arg)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	}
+	
 	// si id_gis n'est pas un nombre, c'est une creation
 	if (!$id_gis = intval($arg)) {
 		if (!$id_gis = insert_gis())
