@@ -1,7 +1,7 @@
 <plugin>
-	<nom>Profil public</nom>
+	<nom>Fader</nom>
 	<slogan>Images au hasard...</slogan>
-	<auteur>cris</auteur>
+	<auteur>christophe vallois</auteur>
 	<version>0.1</version>
 	<etat>stable</etat>
 	
@@ -12,7 +12,7 @@
 	- [(#MODELE{fadbreve})]	qui affiche les breves en fonction d'un mot clef
 	
 	</description>
-	<lien>http://www.spip-contrib.net/Une-image-aleatoire-en-page-d-accueil-ou-ailleurs</lien>
+	<lien>http://www.spip-contrib.net/Plugin-fader</lien>
 	<icon></icon>
 	<prefix>fader</prefix>
 	<pipeline>
