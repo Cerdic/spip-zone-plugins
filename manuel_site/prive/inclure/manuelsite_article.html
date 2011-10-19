@@ -42,7 +42,7 @@
 
 			$( ".contenu-principal" ).find(hi).each(function(index) {
 				// Creer un div apres le h3 et y placer tout ce qui se trouve apres et jusqu'au hi suivant
-				$(this).after("<div></div>").next().append($(this).next().nextUntil(hi));
+				$(this).after("<div class=\"bloc_sous_h\"></div>").next().append($(this).next().nextUntil(hi));
 				// Deplier le contenu du hi
 				$(this).next().hide();
 				$(this).click(function(){

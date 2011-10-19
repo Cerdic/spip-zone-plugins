@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_background_color' => 'Type in the background color of the manual display area',
 	'explication_cacher_public' => 'Hide this article in the public space, even in rss flow',
 	'explication_email' => 'Contact email for editors',
+	'explication_faq' => 'Listed below are the generic blocks used to write your manual (the text is displayed, not formatted, when then mouse is over the code). Just copy / paste the code in the textarea of your article.<br />To hide the question, add <i>|q=no</i>.<br />To add parameters, add <i>|params=p1:v1;p2:v2</i>.',
 	'explication_id_article' => 'Type in the number of the article wich contain the manual',
 	'explication_intro' => 'Introduction text of the manual (will be placed before the introduction of the article)',
 	'explication_largeur' => 'Type in the manual display area width',

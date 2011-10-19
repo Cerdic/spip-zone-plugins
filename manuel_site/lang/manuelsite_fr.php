@@ -7,41 +7,43 @@ $texte = ($idart > 0) ? '<a href="?exec=articles&amp;id_article='.$idart.'" titl
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
-	'cfg_boite_manuelsite' => 'Configuration du plugin Manuel de r&eacute;daction du site.<br /><br />Ce plugin installe une ic&ocirc;ne d\'aide permettant d\'afficher depuis n\'importe quelle page de l\'espace priv&eacute; le manuel de r&eacute;daction du site. Ce manuel est '.$texte.' Il a pour but d\'expliquer aux r&eacute;dacteurs l\'architecture du site, dans quelle rubrique ranger quoi, comment encoder et installer une vidéo... Bref tout ce que vous voulez et qui est sp&eacute;cifique &agrave; votre site.',
-	'cfg_titre_manuelsite' => 'Manuel de r&eacute;daction du site',
+	'cfg_boite_manuelsite' => 'Configuration du plugin Manuel de rédaction du site.<br /><br />Ce plugin installe une icône d\'aide permettant d\'afficher depuis n\'importe quelle page de l\'espace privé le manuel de rédaction du site. Ce manuel est '.$texte.' Il a pour but d\'expliquer aux rédacteurs l\'architecture du site, dans quelle rubrique ranger quoi, comment encoder et installer une vidéo... Bref tout ce que vous voulez et qui est spécifique à votre site.',
+	'cfg_titre_manuelsite' => 'Manuel de rédaction du site',
 
 	// E
-	'erreur_article' => 'L\'article du manuel d&eacute;fini dans la configuration du plugin est introuvable : @idart@',
-	'erreur_pas_darticle' => 'L\'article du manuel n\'est pas d&eacute;fini dans la configuration du plugin',
-	'explication_afficher_bord_gauche' => 'Afficher l\'icone du manuel en haut &agrave; gauche (sinon le manuel sera affich&eacute; en colonne)',
+	'erreur_article' => 'L\'article du manuel défini dans la configuration du plugin est introuvable : @idart@',
+	'erreur_pas_darticle' => 'L\'article du manuel n\'est pas défini dans la configuration du plugin',
+	'explication_afficher_bord_gauche' => 'Afficher l\'icone du manuel en haut à gauche (sinon le manuel sera affiché en colonne)',
 	'explication_background_color' => 'Entrez la couleur de fond de la zone d\'affichage du manuel',
 	'explication_cacher_public' => 'Cacher cet article dans l\'espace public, flux rss compris',
 	'explication_email' => 'Email de contact pour les rédacteurs',
-	'explication_id_article' => 'Entrez le num&eacute;ro de l\'article qui contient le manuel',
-	'explication_intro' => 'Texte d\'introduction au manuel (sera plac&eacute; avant le chapo)',
+	'explication_faq' => 'Vous trouverez ci-dessous les blocs génériques utilisables pour rédiger votre manuel (le texte s\'affiche sans mise en forme au survol du code). Il suffit de copier/coller le code correspondant dans la zone de texte de votre article.<br />Pour ne pas afficher la question, rajouter <i>|q=non</i>.<br />Pour ajouter des paramètres, rajouter <i>|params=p1:v1;p2:v2</i>.',
+	'explication_id_article' => 'Entrez le numéro de l\'article qui contient le manuel',
+	'explication_intro' => 'Texte d\'introduction au manuel (sera placé avant le chapo)',
 	'explication_largeur' => 'Entrez la largeur de la zone d\'affichage du manuel',
 
 	// F
-	'fermer_le_manuel' => 'Cermer le manuel',
+	'fermer_le_manuel' => 'Fermer le manuel',
 	
 	// H
 	'help' => 'Au secours : ' ,
 	
 	// I
-	'intro' => "Ce document a pour but d\'aider les r&eacute;dacteurs &agrave; l\'utilisation du site. Il vient en compl&eacute;ment du document intitul&eacute; « [Cours SPIP 2.0 pour r&eacute;dacteurs->http://www.spip-contrib.net/Mode-d-emploi-SPIP-2-pour] » qui est une aide globale &agrave; l\'utilisation de SPIP. Vous y trouverez une description de l\'architecture du site, de l\'aide technique sur des points particuliers...",
+	'intro' => "Ce document a pour but d\'aider les rédacteurs à l\'utilisation du site. Il vient en complément du document intitulé « [Cours SPIP 2.0 pour rédacteurs->http://www.spip-contrib.net/Mode-d-emploi-SPIP-2-pour] » qui est une aide globale à l\'utilisation de SPIP. Vous y trouverez une description de l\'architecture du site, de l\'aide technique sur des points particuliers...",
 
 	// L
 	'label_afficher_bord_gauche' => 'Affichage',
 	'label_background_color' => 'Couleur de fond',
 	'label_cacher_public' => 'Cacher',
 	'label_email' => 'Email',
-	'label_id_article' => 'N&deg; de l\'article',
+	'label_id_article' => 'N° de l\'article',
 	'label_intro' => 'Introduction',
 	'label_largeur' => 'Largeur',
 	'legende_apparence' => 'Apparence' ,
 	'legende_contenu' => 'Contenu' ,
-
+	
 	// T
-	'titre_manuel' => 'Manuel de r&eacute;daction du site'
+	'titre_faq' => 'FAQ du Manuel de rédaction',
+	'titre_manuel' => 'Manuel de rédaction du site'
 );
 ?>

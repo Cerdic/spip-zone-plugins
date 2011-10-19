@@ -1,15 +1,25 @@
 <plugin>
-	<nom>Manuel de r&#233;daction du site</nom>
-	<slogan>Un manuel sp&#233;cifique &#224; votre site pour vos r&#233;dacteurs</slogan>
+	<nom>
+		<multi>
+		[fr]Manuel de r&#233;daction du site
+		[en]Website Editor Manual
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+		[fr]Un manuel sp&#233;cifique &#224; votre site pour vos r&#233;dacteurs
+		[en]A manual specific to your site for your editors
+		</multi>
+	</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.5.1</version>
+	<version>0.6.0</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<description>
 	<multi>
-		[fr]Ce plugin installe une ic&#244;ne d'aide permettant d'afficher depuis n'importe quelle page de l'espace priv&#233; le manuel de r&#233;daction du site. Ce manuel est un article du site.
-		[en]This plugin installs an help icon making it possible to post since any page of private space the Website Editor Manual. This manual is an article of the website.
+		[fr]Ce plugin installe une ic&#244;ne d'aide permettant d'afficher depuis n'importe quelle page de l'espace priv&#233; le manuel de r&#233;daction du site. Ce manuel est un article du site. Le plugin fournit également un jeu d'item de Foire Aux Questions courants pouvant être insérés facilement dans votre manuel.
+		[en]This plugin installs an help icon making it possible to post since any page of private space the Website Editor Manual. This manual is an article of the website. The plugin also provides a set of Frequently Asked Questions that can be easily inserted in your manual.
 	</multi>
 	</description>
 	<icon>images/manuelsite-32.png</icon>
@@ -30,6 +40,10 @@
 	</pipeline>
 	<pipeline>
 		<nom>affiche_droite</nom>
+		<inclure>manuelsite_prive_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_gauche</nom>
 		<inclure>manuelsite_prive_pipelines.php</inclure>
 	</pipeline>
 	<fonctions>manuelsite_fonctions.php</fonctions>

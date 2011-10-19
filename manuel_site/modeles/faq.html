@@ -1,0 +1,16 @@
+[(#REM)
+ Appel dans un article : <faq|b=le_bloc>
+ Faq d'un plugin : <faq|p=prefixe_plugin|b=le_bloc>
+ Ne pas afficher la question : <faq|b=le_bloc|q=non>
+ Avec des parametres : <faq|b=le_bloc|params=p1:v1;p2:v2>
+]
+#SET{plugin,#ENV{p,manuelsite}}
+#SET{bloc,#ENV{b}}
+[(#ENV{q}|!={non}|oui)
+	#SET{question,#ENV{b}|concat{_q}}
+	<h4 class="faq_question">[(#VAL{faq-#GET{plugin}:#GET{question}}|_T|typo)]</h4>
+]
+
+<div class="faq_reponse">
+[(#VAL{faq-#GET{plugin}:#GET{bloc}}|_T{#ENV{params}|manuelsite_params_to_array}|propre)]
+</div>
