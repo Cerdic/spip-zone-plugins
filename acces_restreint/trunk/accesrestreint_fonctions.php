@@ -139,7 +139,7 @@ function accesrestreint_zones_rubrique_et_hierarchie($id_rubrique) {
  */
 function accesrestreint_zones_rubrique($id_rubrique) {
 	// on teste notre rubrique deja
-	$idz = sql_allfetsel('id_zone', 'spip_zones_rubriques', 'id_rubrique='. intval($id_rubrique));
+	$idz = sql_allfetsel('id_zone', 'spip_zones_liens', "objet='rubrique' AND id_objet=". intval($id_rubrique));
 	if (is_array($idz)) {
 		$idz = array_map('reset', $idz);
 		return $idz;
@@ -195,16 +195,16 @@ function accesrestreint_liste_rubriques_restreintes($_publique = null) {
 		return $rubs[$_publique];
 	}
 
-	$where = array('z.id_zone = zr.id_zone');
+	$where = array("zr.objet='rubrique'");
 	if (!$tout) {
 		if ($_publique) {
-			$where[] = 'publique=' . sql_quote('oui');
+			$where[] = 'z.publique=' . sql_quote('oui');
 		} else {
-			$where[] = 'privee=' . sql_quote('oui');
+			$where[] = 'z.privee=' . sql_quote('oui');
 		}
 	}
 	
-	$idz = sql_allfetsel('DISTINCT(id_rubrique)', array('spip_zones_rubriques AS zr', 'spip_zones AS z'), $where);
+	$idz = sql_allfetsel('DISTINCT(zr.id_objet)', 'spip_zones_liens AS zr JOIN spip_zones AS z ON z.id_zone = zr.id_zone', $where);
 	
 	if (is_array($idz)) {
 		$idz = array_map('reset', $idz);

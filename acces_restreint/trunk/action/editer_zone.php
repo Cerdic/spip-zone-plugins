@@ -65,9 +65,10 @@ function action_zone_set($id_zone){
  * $type est le type de l'objet (rubrique, auteur).
  * $operation = add/set/del pour ajouter, affecter uniquement, ou supprimer les objets listes dans ids.
  *
- * @param int/array $zones
- * @param int/array $ids
+ * @param int|array $zones
+ * @param int|array $ids
  * @param string $type
+ * @param string $operation
  */
 function accesrestreint_revision_zone_objets_lies($zones,$ids,$type,$operation = 'add'){
 	include_spip('inc/autoriser');
@@ -79,7 +80,7 @@ function accesrestreint_revision_zone_objets_lies($zones,$ids,$type,$operation =
 	foreach($liste as $row){
 		if ($operation=='del'){
 			// on supprime les ids listes
-			sql_delete("spip_zones_{$type}s",array("id_zone=".intval($row['id_zone']),sql_in("id_$type",$ids)));			
+			sql_delete("spip_zones_liens",array("id_zone=".intval($row['id_zone']),"objet='$type'",sql_in("id_objet",$ids)));
 		}
 		else {
 			if (!$ids) $ids = array();
@@ -87,12 +88,12 @@ function accesrestreint_revision_zone_objets_lies($zones,$ids,$type,$operation =
 			// si c'est une affectation exhaustive, supprimer les existants qui ne sont pas dans ids
 			// si c'est un ajout, ne rien effacer
 			if ($operation=='set')
-				sql_delete("spip_zones_{$type}s",array("id_zone=".intval($row['id_zone']),sql_in("id_$type",$ids,"NOT")));
-			$deja = array_map('reset',sql_allfetsel("id_$type","spip_zones_{$type}s","id_zone=".intval($row['id_zone'])));
+				sql_delete("spip_zones_liens",array("id_zone=".intval($row['id_zone']),"objet='$type'",sql_in("id_objet",$ids,"NOT")));
+			$deja = array_map('reset',sql_allfetsel("id_objet","spip_zones_liens","objet='$type' AND id_zone=".intval($row['id_zone'])));
 			$add = array_diff($ids,$deja);
 			foreach ($add as $id) {
 				if (autoriser('affecterzones',$type,$id,null,array('id_zone'=>$row['id_zone'])))
-					sql_insertq("spip_zones_{$type}s",array('id_zone'=>$row['id_zone'],"id_$type"=>intval($id)));
+					sql_insertq("spip_zones_liens",array('id_zone'=>$row['id_zone'],"objet"=>$type,"id_objet"=>intval($id)));
 			}
 		}
 	}	
@@ -121,7 +122,7 @@ function accesrestreint_action_insert_zone(){
  * Enregistre la revision d'une zone
  *
  * @param int $id_zone
- * @param array $c
+ * @param array|bool $c
  * @return string
  */
 function accesrestreint_revision_zone($id_zone, $c=false) {
@@ -138,16 +139,14 @@ function accesrestreint_revision_zone($id_zone, $c=false) {
 /**
  * Supprimer une zone
  *
- * @param unknown_type $supp_zone
- * @return unknown
+ * @param int $id_zone
+ * @return int
  */
 function accesrestreint_supprime_zone($id_zone){
 	$supp_zone = sql_getfetsel("id_zone", "spip_zones", "id_zone=" . intval($id_zone));
 	if (intval($id_zone) AND 	intval($id_zone) == intval($supp_zone)){
-		// d'abord les auteurs
-		sql_delete("spip_zones_auteurs", "id_zone=".intval($id_zone));
-		// puis la portee
-		sql_delete("spip_zones_rubriques", "id_zone=".intval($id_zone));
+		// d'abord les auteurs et zones en un coup
+		sql_delete("spip_zones_liens", "id_zone=".intval($id_zone));
 		// puis la zone
 		sql_delete("spip_zones", "id_zone=".intval($id_zone));
 	}

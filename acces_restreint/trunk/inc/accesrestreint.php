@@ -41,7 +41,7 @@ function accesrestreint_liste_zones_autorisees($zones='', $id_auteur=NULL) {
  * pour savoir quelles rubriques on peut decocher
  * si id_zone = '' : toutes les rub en acces restreint
  *
- * @param int/string $id_zone
+ * @param int|string $id_zone
  * @return array
  */
 function accesrestreint_liste_contenu_zone_rub_direct($id_zone){
@@ -52,8 +52,14 @@ function accesrestreint_liste_contenu_zone_rub_direct($id_zone){
 		$where[] = "z.id_zone=".intval($id_zone);
 	elseif ($id_zone)
 		$where = $id_zone;
+
+	if (is_array($where))
+		$where[] = "zr.objet='rubrique'";
+	else
+		$where = "($where) AND zr.objet='rubrique'";
+
 	include_spip('base/abstract_sql');
-	$liste_rubriques = sql_allfetsel('id_rubrique','spip_zones_rubriques AS zr INNER JOIN spip_zones AS z ON zr.id_zone=z.id_zone',$where);
+	$liste_rubriques = sql_allfetsel('id_objet','spip_zones_liens AS zr INNER JOIN spip_zones AS z ON zr.id_zone=z.id_zone',$where);
 	$liste_rubriques = array_map('reset',$liste_rubriques);
 	$liste_rubriques = array_unique($liste_rubriques);
 	return $liste_rubriques;
@@ -112,7 +118,7 @@ function accesrestreint_liste_zones_appartenance_auteur($id_auteur){
 	static $liste_zones = array();
 	if (!isset($liste_zones[$id_auteur])){
 		include_spip('base/abstract_sql');
-		$liste_zones[$id_auteur] = sql_allfetsel("id_zone","spip_zones_auteurs","id_auteur=".intval($id_auteur));
+		$liste_zones[$id_auteur] = sql_allfetsel("id_zone","spip_zones_liens","objet='auteur' AND id_objet=".intval($id_auteur));
 		$liste_zones[$id_auteur] = array_map('reset',$liste_zones[$id_auteur]);
 	}
 	return $liste_zones[$id_auteur];
@@ -140,7 +146,7 @@ function accesrestreint_test_appartenance_zone_auteur($id_zone,$id_auteur){
 function accesrestreint_liste_contenu_zone_auteur($id_zone) {
 	$liste_auteurs=array();
 	include_spip('base/abstract_sql');
-	$liste_auteurs = sql_allfetsel("id_auteur","spip_zones_auteurs","id_zone=".intval($id_zone));
+	$liste_auteurs = sql_allfetsel("id_objet","spip_zones_liens","objet='auteur' AND id_zone=".intval($id_zone));
 	$liste_auteurs = array_map('reset',$liste_auteurs);
 	return $liste_auteurs;
 }

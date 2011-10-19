@@ -9,20 +9,14 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function accesrestreint_declarer_tables_interfaces($interface){
-	$interface['tables_jointures']['spip_auteurs'][] = 'zones_auteurs';
-	$interface['tables_jointures']['spip_zones'][] = 'zones_auteurs';
-	
-	$interface['tables_jointures']['spip_rubriques'][] = 'zones_rubriques';
-	$interface['tables_jointures']['spip_zones'][] = 'zones_rubriques';
-	
+	$interface['tables_jointures']['spip_auteurs'][] = 'zones_liens';
+	$interface['tables_jointures']['spip_zones'][] = 'zones_liens';
+	$interface['tables_jointures']['spip_rubriques'][] = 'zones_liens';
+
 	//-- Table des tables ----------------------------------------------------
 	
 	$interface['table_des_tables']['zones']='zones';
 
-	/*if (version_compare($spip_version_code,'1.9250','<')) {
-		$table_des_tables['zones_rubriques']='zones_rubriques'; 
-		$table_des_tables['zones_auteurs']='zones_auteurs'; 
-	}*/
 	return $interface;
 }
 
@@ -40,7 +34,7 @@ function accesrestreint_declarer_tables_objets_sql($tables){
 		'page' => false,
 
 		'principale' => "oui",
-			'field'=> array(
+		'field'=> array(
 			"id_zone" 	=> "bigint(21) NOT NULL",
 			"titre" 	=> "varchar(255) DEFAULT '' NOT NULL",
 			"descriptif" 	=> "text DEFAULT '' NOT NULL",
@@ -58,29 +52,23 @@ function accesrestreint_declarer_tables_objets_sql($tables){
 }
 
 function accesrestreint_declarer_tables_auxiliaires($tables_auxiliaires){
-	$spip_zones_auteurs = array(
-		"id_zone" 	=> "bigint(21) NOT NULL",
-		"id_auteur" 	=> "bigint(21) NOT NULL");
-	
-	$spip_zones_auteurs_key = array(
-		"PRIMARY KEY" 	=> "id_zone, id_auteur",
-		"KEY id_auteur" => "id_auteur");
-	
-	$tables_auxiliaires['spip_zones_auteurs'] = array(
-		'field' => &$spip_zones_auteurs,
-		'key' => &$spip_zones_auteurs_key);
-	
-	$spip_zones_rubriques = array(
-		"id_zone" 	=> "bigint(21) NOT NULL",
-		"id_rubrique" 	=> "bigint(21) NOT NULL");
-	
-	$spip_zones_rubriques_key = array(
-		"PRIMARY KEY" 	=> "id_zone, id_rubrique",
-		"KEY id_rubrique" => "id_rubrique");
-	
-	$tables_auxiliaires['spip_zones_rubriques'] = array(
-		'field' => &$spip_zones_rubriques,
-		'key' => &$spip_zones_rubriques_key);
+
+	$spip_zones_liens = array(
+			"id_zone"	=> "bigint(21) DEFAULT '0' NOT NULL",
+			"id_objet"	=> "bigint(21) DEFAULT '0' NOT NULL",
+			"objet"	=> "VARCHAR (25) DEFAULT '' NOT NULL"
+	);
+
+	$spip_zones_liens_key = array(
+			"PRIMARY KEY"		=> "id_zone,id_objet,objet",
+			"KEY id_zone"	=> "id_zone"
+	);
+
+	$tables_auxiliaires['spip_zones_liens'] = array(
+		'field' => &$spip_zones_liens,
+		'key' => &$spip_zones_liens_key
+	);
+
 	return $tables_auxiliaires;
 }
 
