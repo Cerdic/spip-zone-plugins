@@ -63,7 +63,7 @@
 	
 	/*style du widget profil */
 	.logo-profil {width:110px; height:120px; float:left;}
-	.info-profil {width: 170px;height:120px; float:right;}
+	.info-profil {width: 160px;height:120px; float:right;}
 	.detail-profil {margin-top:15px; float:left;}
 	
 	 /*style de la barre de navigation du fader */
