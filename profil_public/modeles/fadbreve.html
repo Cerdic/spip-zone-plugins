@@ -1,0 +1,28 @@
+<B_breves>
+<script>
+	$(document).ready(function(){
+	$(".fadbreve").fadeTransition({
+				pauseTime: [(#ENV{pauseTime}|?{#ENV{pauseTime},4000})],
+                transitionTime: [(#ENV{transitionTime}|?{#ENV{transitionTime},2000})],
+				delayStart: [(#ENV{delayStart}|?{#ENV{delayStart},4000})],
+                pauseOnMouseOver: [(#ENV{pauseOnMouseOver}|?{#ENV{pauseOnMouseOver},true})],
+				createNavButtons: [(#ENV{createNavButtons}|?{#ENV{createNavButtons},true})]                
+			});
+	});
+	
+	</script>
+
+          <ul>
+          <div class="fadbreve">
+            <BOUCLE_breves(BREVES) {!par date} {par num titre} {age<0}>
+            <li>
+            [(#LOGO_BREVE{180,220})]
+            [<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+            </li>
+            </BOUCLE_breves>
+            </div>
+            </ul>  
+        </div>
+    </B_breves>
+
+</B_images>
