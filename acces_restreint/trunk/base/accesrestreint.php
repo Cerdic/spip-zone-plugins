@@ -35,6 +35,9 @@ function accesrestreint_declarer_tables_objets_sql($tables){
 		'info_aucun_objet'=> 'accesrestreint:info_aucune_zone',
 		'info_1_objet' => 'accesrestreint:info_1_zone',
 		'info_nb_objets' => 'accesrestreint:info_nb_zones',
+		'url_voir' => 'zone_edit',
+		'url_edit' => 'zone_edit',
+		'page' => false,
 
 		'principale' => "oui",
 			'field'=> array(

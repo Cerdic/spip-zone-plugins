@@ -16,13 +16,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function accesrestreint_affiche_milieu($flux){
 	if ($e = trouver_objet_exec($flux['args']['exec'])
-	  AND $e['type'] == 'rubrique'
+	  AND $e['type'] == 'auteur'
 	  AND $e['edition'] == false) {
 		
 		$id_auteur = $flux['args']['id_auteur'];
 
 		$ins = recuperer_fond('prive/editer/affecter_zones',array('id_auteur'=>$id_auteur));
-		if ($p = strpos($flux['data'],"<!--affiche_milieu-->") !== false)
+		if (($p = strpos($flux['data'],"<!--affiche_milieu-->")) !== false)
 			$flux['data'] = substr_replace($flux['data'],$ins,$p,0);
 		else
 			$flux['data'] .= $ins;
@@ -43,7 +43,7 @@ function accesrestreint_affiche_gauche($flux) {
 	  AND $e['edition'] == false
 	  AND $id_rubrique = $flux['args']['id_rubrique']){
 		if (autoriser('administrer', 'zone', 0)) {
-			$flux['data'] .= recuperer_fond('prive/inclure/acces_rubrique', $_GET);
+			$flux['data'] .= recuperer_fond('prive/inclure/acces_rubrique', array('id_rubrique'=>$id_rubrique));
 		}
 	}
 	return $flux;

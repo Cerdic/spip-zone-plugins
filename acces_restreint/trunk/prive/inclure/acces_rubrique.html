@@ -4,28 +4,29 @@
 	Sur une rubrique non protégée : affiche un bouton pour la protéger.
 
 ]
-<div class="cadre cadre-r cadre_padding">
-	[(#CHEMIN{img_pack/zones-acces-24.png}|image_reduire{24}|inserer_attribut{class,cadre-icone}|inserer_attribut{alt,icone})]
-	<B_restreint>
-		<h2><:accesrestreint:titre_boite_protegee_oui:></h2>
-		[<p>(#GRAND_TOTAL|singulier_ou_pluriel{'accesrestreint:info_rubrique_dans_zone','accesrestreint:info_rubrique_dans_zones'})</p>]
-		<ul>
-	<BOUCLE_restreint(ZONES){id_zone IN (#ENV{id_rubrique}|accesrestreint_zones_rubrique_et_hierarchie)}>
-		<li>
-			<a href="[(#URL_ECRIRE{zones_edit,id_zone=#ID_ZONE}|parametre_url{retour,#SELF})]">
-				n&deg; #ID_ZONE : #TITRE 
-			</a>
-		</li>
-	</BOUCLE_restreint>
+<B_restreint>
+	[(#BOITE_OUVRIR{[<:accesrestreint:titre_boite_protegee_oui:>(#CHEMIN_IMAGE{zone-24.png}|balise_img{'',cadre-icone})],simple})]
+	[<p>(#GRAND_TOTAL|singulier_ou_pluriel{'accesrestreint:info_rubrique_dans_zone','accesrestreint:info_rubrique_dans_zones'})</p>]
+	<ul class="liste-items">
+<BOUCLE_restreint(ZONES){id_zone IN (#ENV{id_rubrique}|accesrestreint_zones_rubrique_et_hierarchie)}>
+	<li class="item">
+		<a href="[(#URL_ECRIRE{zone_edit,id_zone=#ID_ZONE}|parametre_url{redirect,#SELF})]">
+			n&deg; #ID_ZONE : #TITRE
+		</a>
+		[(#BOUTON_ACTION{#CHEMIN_IMAGE{supprimer-12.png}|balise_img{<:accesrestreint:info_retirer_zone:>},[(#URL_ACTION_AUTEUR{retirer_zone,[(#ID_ZONE)-rubrique-#ID_RUBRIQUE],#SELF})],ajax})]
+	</li>
+</BOUCLE_restreint>
 	</ul>
-	</B_restreint>
-		<h2 class='h2'><:accesrestreint:titre_boite_protegee_non:></h2>
+	#BOITE_FERMER
+</B_restreint>
+	[(#BOITE_OUVRIR{[<:accesrestreint:titre_boite_protegee_non:>(#CHEMIN_IMAGE{cadenasouvert-24.png}|balise_img{'',cadre-icone})],simple})]
 		<p>
-			<a href="[(#URL_ECRIRE{zones_edit,new=oui}
+			<a href="[(#URL_ECRIRE{zone_edit,new=oui}
 				|parametre_url{rubriques,#ENV{id_rubrique}}
-				|parametre_url{retour,#SELF})]">
+				|parametre_url{redirect,#SELF})]">
 				<:accesrestreint:info_lien_action_proteger:>
 			</a>
 		</p>
-	<//B_restreint>
-</div>
+	#BOITE_FERMER
+<//B_restreint>
+
