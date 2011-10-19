@@ -12,8 +12,7 @@
 function formulaires_configurer_association_verifier_dist() {
 	$erreurs = array();
 	$erreurs['message_erreur'] = _T('asso:erreur_configurer_association_titre'); /* on insere directement un titre de message d'erreurs, si on n'a que lui a la fin on renvoie un tableau vide */
-
-
+	
 	$dons = _request('dons');
 	$ventes = _request('ventes');
 	$prets = _request('prets');
@@ -27,6 +26,8 @@ function formulaires_configurer_association_verifier_dist() {
 	$pc_prets = _request('pc_prets');
 	$pc_activites = _request('pc_activites');
 
+	$nom = _request('nom'); // nom de l'association ne doit pas etre vide
+	if (!$nom or strlen(trim($nom))==0) { $erreurs['nom'] = _T('asso:erreur_configurer_association_nom_association_vide');}
 
 	// si la gestion comptable est activee, on valide le plan comptable
 	$ref_attribuee = array();

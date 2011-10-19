@@ -10,7 +10,9 @@
 					<fieldset>
 						<h3 class="legend"><:asso:config_info_asso:></h3>
 						<ul>
-							<li>
+							<li class="obligatoire"> <!-- il faut au moins le nom de l'association !!!! -->
+								#SET{erreurs,#ENV**{erreurs}|table_valeur{nom}}
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
 								<label for="nom"><strong><:asso:config_libelle_nom:></strong></label>
 								<input type="text" name="nom" [value="(#ENV{nom})"] id="nom" class='formo'/>
 							</li>

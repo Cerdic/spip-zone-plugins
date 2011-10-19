@@ -547,6 +547,7 @@ Commentaire: @commentaire@
 			'cpte_resultat_recette_evaluee' => 'Recette<br />&eacute;valu&eacute;e',
 			'cpte_resultat_depense_evaluee' => 'D&eacutepense<br />&eacute;valu&eacute;e',
 			'cpte_resultat_mode_exportation' => 'Exporter le Compte de R&eacute;sultat en ',
+			'cpte_resultat_pied_page_export_pdf' => 'Associaspip - Gestion d\'une association sous licence GPL',
 
 		# annexe
 			'annexe_titre_general' => 'Annexe',
@@ -560,6 +561,7 @@ Commentaire: @commentaire@
 			'erreur_configurer_association_reference_multiple' => 'Une m&ecirc;me r&eacute;f&eacute;rence comptable ne doit pas &ecirc;tre utilis&eacute;e pour plusieurs fonctions activ&eacute;es(ventes, dons, prets, activit&eacute;s) ou cotisations',
 			'erreur_configurer_association_classe_identique' => 'Une m&ecirc;me classe ne doit pas &ecirc;tre utilis&eacute;e pour plusieurs fonctions !',
 			'erreur_configurer_association_gestion_comptable_non_activee' => 'Il n\'est pas possible d\'activer un module(gestion des prets, ventes, dons ou activit&eacute;s) si la gestion comptable n\'est pas activ&eacute;e.',
+			'erreur_configurer_association_nom_association_vide' => 'Le nom de l\'association ne doit pas &ecirc;tre vide !',
 			'erreur_id_adherent' => 'Ce num&eacute;ro de membre ne correspond &agrave; aucun membre de l\'association',
 			'erreur_pas_de_classe_financiere' => 'Aucune classe de comptes financiers d&eacute;finie au plan comptable !',
 			'erreur_creer_un_plan_pour_activer_ce_module' => 'Vous devez d&eacute;finir un plan comptable pour pouvoir activer ce module.',
