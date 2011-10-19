@@ -22,6 +22,6 @@ P.S.&#160;2&#160;: {Le pr&#233;sent plugin ne fonctionne pas si le &#171;&#160;C
 	<prefix>retoursimple</prefix>
 	<icon>retoursimple.png</icon>
 	<options>retoursimple.php</options>
-	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.*]" />
 	<categorie>edition</categorie>
 </plugin>
