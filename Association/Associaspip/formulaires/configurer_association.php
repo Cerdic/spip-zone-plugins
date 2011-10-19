@@ -57,7 +57,7 @@ function formulaires_configurer_association_verifier_dist() {
 		$classe_produit = _request('classe_produits');
 		if(array_key_exists($classe_produit, $classe_attribuee)) {
 			$erreurs['classe_produits'] = _T('asso:erreur_configurer_association_classe_identique');
-			$erreurs[$ref_attribuee[$classe_produit]] = _T('asso:erreur_configurer_association_rclasse_identique');
+			$erreurs[$ref_attribuee[$classe_produit]] = _T('asso:erreur_configurer_association_classe_identique');
 		}
 		$classe_attribuee[$classe_produit]='classe_produits';
 
