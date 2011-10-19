@@ -16,6 +16,6 @@
 	<lien>http://www.paris-beyrouth.org/tutoriaux-spip/article/le-plugin-de-cesure-html</lien>
 	<fonctions>pb_cesure_fonctions.php</fonctions>
 	<prefix>pb_cesure</prefix>
-	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
+	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
 	<categorie>edition</categorie>
 </plugin>
