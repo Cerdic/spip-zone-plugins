@@ -82,7 +82,6 @@ function manuelsite_params_to_array($params="") {
 		$params = preg_replace( '/^(.*)$/','"${1}"',$params) ;
 		$params = str_replace(';','","',$params);
 		$params= str_replace(':','"=>"',$params);
-		spip_log("manuelsite_params_to_array $params","params");
 		eval("\$tablo=array($params);");
 	}
 	return $tablo;	
