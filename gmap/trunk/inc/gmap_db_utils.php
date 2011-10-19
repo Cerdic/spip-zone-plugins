@@ -368,7 +368,7 @@ function _gmap_recurs_tree_points(&$points, $objet, $id_objet, $niveau_fils, $ni
 		{
 			$objIds = explode(",", $idListe);
 			foreach ($objIds as $idxId => $idFils)
-				_gmap_recurs_marqueurs($points, $objetFils, $idFils, $niveau_fils-1, $niveau+1);
+				_gmap_recurs_tree_points($points, $objetFils, $idFils, $niveau_fils-1, $niveau+1);
 		}
 	}
 		
