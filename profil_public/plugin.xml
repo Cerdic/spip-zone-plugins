@@ -20,7 +20,7 @@
 	</pipeline>
 	<necessite id="SPIP" version='[2.1;]' />
 	<necessite id="jqueryui" version="[1.8.5;]" />
-	<necessite id="contacts_et_organisations" version="[1.13.1;]" />
+	<utilise id="contacts_et_organisations" version="[1.13;]" />
 	<utilise id="cfg" version="[1.16.0;]" />
 	<utilise id="tagshpere" version="[0.3;]" />
 	<utilise id="splickrbox" version="[0.4.2;]" />
