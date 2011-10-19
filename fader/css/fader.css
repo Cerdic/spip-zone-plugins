@@ -1,0 +1,7 @@
+	 /*style de la barre de navigation du fader */
+	div.fadenav { position: absolute; bottom: 5px; right: 5px; }
+	div.fadenav a { display: block; background: #ccc; width: 12px; height: 12px; margin: 0 0 0 2px; float: left; overflow: hidden; -moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%; border: 1px solid #000; }
+	div.fadenav a:hover { text-decoration: none; }
+	div.fadenav a.current { background: cornflowerblue; }
+	
+	
