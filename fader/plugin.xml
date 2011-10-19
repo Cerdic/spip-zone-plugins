@@ -1,0 +1,24 @@
+<plugin>
+	<nom>Profil public</nom>
+	<slogan>Images au hasard...</slogan>
+	<auteur>cris</auteur>
+	<version>0.1</version>
+	<etat>stable</etat>
+	
+	<description>
+	Offre trois modele pour afficher des objets spip avec un effet de fade:
+	- [(#MODELE{fadaleatoire})]	qui affiche aleatoirement 5 images issues de toutes les images du site
+	- [(#MODELE{fadimage})]	qui affiche les images d'un article
+	- [(#MODELE{fadbreve})]	qui affiche les breves en fonction d'un mot clef
+	
+	</description>
+	<lien>http://www.spip-contrib.net/Une-image-aleatoire-en-page-d-accueil-ou-ailleurs</lien>
+	<icon></icon>
+	<prefix>fader</prefix>
+	<pipeline>
+	<nom>insert_head</nom>
+	<inclure>fader.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version='[2.1;]' />
+	<categorie>multimedia</categorie>
+</plugin>
