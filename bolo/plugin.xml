@@ -1,6 +1,6 @@
 <plugin>
 
-	<version>0.2.1</version>
+	<version>0.2.2</version>
 	
 	<nom>Bolo</nom>
 	
@@ -13,7 +13,7 @@
 	
 	<prefix>bolo</prefix>
 
-	<auteur>[Cyril MARION Ateliers CYM->http://www.cym.fr]</auteur>
+	<auteur>Cyril MARION [Ateliers CYM->http://www.cym.fr]</auteur>
 	
    <licence>&#169; 2010 GNU/GPL</licence>
 
@@ -27,14 +27,14 @@
 		<multi>
 		[fr]Ce plugin permet d'ins&#233;rer tr&#232;s facilement du faux texte dans les articles ou dans les squelettes, en sp&#233;cifiant le nombre de caract&#232;res souhait&#233;s.
 		
-		On l'emploie soit directement dans les squelettes en utilisant le code <code>[(#BOLO|couper{800})]</code>, soit dans les champs #TEXTE des articles gr&acirc;ce au mod&#232;le <code><bolo800></code>.
+		On l'emploie soit directement dans les squelettes en utilisant le code [(#BOLO|couper{800})], soit dans les champs #TEXTE des articles gr&acirc;ce au mod&#232;le &lt;bolo800&gt;.
 		
-		La version actuelle permet seulement d'ins&#233;rer du texte latin; une future version permettra d'ins&#233;rer du texte latin ou fran&ccedil;ais accentu&#233;.
+		La version actuelle permet seulement d'ins&#233;rer du texte latin; une future version pourrait permettre d'ins&#233;rer du texte latin ou fran&ccedil;ais accentu&#233;.
 		[en]This plugin allows to easily insert fake text with an ajustable number of characters, into SPIP articles or into SPIP templates.
 		
-		It can be used directy in templates  via the code <code>[(#BOLO|couper{800})]</code> or in the #TEXT fields of the articles via this code : <code><bolo800></code>.
+		It can be used directy in templates  via the code [(#BOLO|couper{800})], or in the #TEXT fields of the articles via this code : &lt;bolo800&gt;.
 		
-		This version inserts text in latin language only, a future version will offer the choice between latin or French language texts.
+		This version inserts text in latin language only, a future version could offer the choice between latin or French language texts.
 		</multi>
 	</description>
 
@@ -42,6 +42,6 @@
 	
 	<categorie>edition</categorie>
 	
-	<necessite id="SPIP" version='[1.9.0;2.1.99]' />
+	<necessite id="SPIP" version='[1.9.0;3.0.99]' />
 	
 </plugin>
