@@ -41,19 +41,17 @@ function formulaires_editer_zone_verifier_dist($id_zone='new', $retour='', $conf
 }
 
 function formulaires_editer_zone_traiter_dist($id_zone='new', $retour='', $config_fonc='zones_edit_config', $row=array(), $hidden=''){
+	if (_request('publique')!=='oui')
+		set_request('publique','non');
+	if (_request('privee')!=='oui')
+		set_request('privee','non');
 
-	$message = "";
-	$action_editer = charger_fonction("editer_zone",'action');
-	list($id,$err) = $action_editer();
-	if ($err){
-		$message .= $err;
+	$res = formulaires_editer_objet_traiter('zone',$id_zone,0,0,$retour,$config_fonc,$row,$hidden);
+
+	if ($retour AND $res['id_zone']) {
+		$res['redirect'] = parametre_url($retour,'id_zone',$res['id_zone']);
 	}
-	elseif ($retour) {
-		include_spip('inc/headers');
-		$retour = parametre_url($retour,'id_zone',$id);
-		$message .= redirige_formulaire($retour);
-	}
-	return $message;
+	return $res;
 }
 
 ?>

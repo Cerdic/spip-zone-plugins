@@ -16,9 +16,9 @@ function action_retirer_zone_dist(){
 		$id_objet = intval($regs[3]);
 		include_spip('action/editer_zone');
 		if ($id_objet=='-1')
-			accesrestreint_revision_zone_objets_lies($id_zone,array(),$type,'set');
+			zone_lier($id_zone,$type,array(),'set');
 		else
-			accesrestreint_revision_zone_objets_lies($id_zone,$id_objet,$type,'del');
+			zone_lier($id_zone,$type,$id_objet,'del');
 	}
 }
 

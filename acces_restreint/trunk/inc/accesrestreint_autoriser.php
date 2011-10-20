@@ -46,9 +46,9 @@ function autoriser_auteur_affecterzones_dist($faire,$quoi,$id,$qui,$opts){
 	# les non admin ne peuvent affecter que les zones dont ils font partie
 	include_spip('inc/accesrestreint');
 	if ($opts['id_zone']
-	  AND !accesrestreint_test_appartenance_zone_auteur($opts['id_zone'], $qui['id_auteur']))
-	  return false;
- return true;
+	  AND accesrestreint_test_appartenance_zone_auteur($opts['id_zone'], $qui['id_auteur']))
+	  return true;
+ return false;
 }
 
 if(!function_exists('autoriser_rubrique_voir')) {

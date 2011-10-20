@@ -18,6 +18,6 @@ function formulaires_affecter_zones_charger_dist($id_auteur){
 function formulaires_affecter_zones_traiter_dist($id_auteur){
 	/* ajout d'une zone */
 	include_spip('action/editer_zone');
-	accesrestreint_revision_zone_objets_lies(intval(_request('zone')),$id_auteur,'auteur');
+	zone_lier(intval(_request('zone')),'auteur',$id_auteur);
 	return array('editable'=>true,'message'=>'');
 }

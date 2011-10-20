@@ -18,7 +18,7 @@ function action_affecter_zone_dist(){
 		include_spip('action/editer_zone');
 		if ($id_auteur==-1)
 			$id_auteur = array_map('reset',sql_allfetsel('id_auteur','spip_auteurs',"statut!='poub'"));
-		accesrestreint_revision_zone_objets_lies($id_zone=='-1'?'':$id_zone,$id_auteur,'auteur');
+		zone_lier($id_zone=='-1'?'':$id_zone,'auteur',$id_auteur);
 	}
 }
 

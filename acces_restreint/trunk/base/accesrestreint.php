@@ -34,6 +34,7 @@ function accesrestreint_declarer_tables_objets_sql($tables){
 		'page' => false,
 
 		'principale' => "oui",
+		'champs_editables' => array('titre', 'descriptif','publique', 'privee'),
 		'field'=> array(
 			"id_zone" 	=> "bigint(21) NOT NULL",
 			"titre" 	=> "varchar(255) DEFAULT '' NOT NULL",

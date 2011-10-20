@@ -9,51 +9,111 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * editer une zone (action apres creation/modif de zone)
  *
+ * @param int $arg
  * @return array
  */
-function action_editer_zone_dist(){
+function action_editer_zone_dist($arg=null){
 
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
-
-	// si id_article n'est pas un nombre, c'est une creation 
-	// mais on verifie qu'on a toutes les donnees qu'il faut.
-	if (!$id_zone = intval($arg)) {
-		if (!$id_zone = accesrestreint_action_insert_zone())
-			return array(false,_L('echec'));
-		// ajouter les droits a l'admin si demande, lors de la creation
-		if (_request('droits_admin')){
-			accesrestreint_revision_zone_objets_lies($id_zone,$GLOBALS['visiteur_session']['id_auteur'],'auteur');
-		}
+	if (is_null($arg)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
 	}
-	
-	$err = action_zone_set($id_zone);
+
+	// Envoi depuis le formulaire d'edition d'une zone
+	if (!$id_zone = intval($arg)) {
+		$id_zone = zone_inserer();
+	}
+
+	if (!$id_zone)
+		return array(0,''); // erreur
+
+	if (_request('droits_admin')){
+		zone_lier($id_zone,'auteur',$GLOBALS['visiteur_session']['id_auteur']);
+	}
+
+	$err = zone_modifier($id_zone);
+
 	return array($id_zone,$err);
 }
 
+
 /**
- * mettre a jour une zone
+ * Inserer une zone en base
+ *
+ * @return int
+ */
+function zone_inserer() {
+
+	include_spip('inc/autoriser');
+	if (!autoriser('creer','zone'))
+		return false;
+
+	$champs = array(
+		'publique'=>'non',
+		'privee'=>'non',
+	);
+	
+	// Envoyer aux plugins
+	$champs = pipeline('pre_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_zones',
+			),
+			'data' => $champs
+		)
+	);
+	$id_zone = sql_insertq("spip_zones", $champs);
+	pipeline('post_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_zones',
+				'id_objet' => $id_zone
+			),
+			'data' => $champs
+		)
+	);
+	return $id_zone;
+}
+
+
+/**
+ * Modifier une zone en base
+ * $c est un contenu (par defaut on prend le contenu via _request())
  *
  * @param int $id_zone
- * @return string
+ * @param array $set
+ * @return string|bool
  */
-function action_zone_set($id_zone){
-	$err = '';
-
-	$c = array();
-	foreach (array(
-		'titre', 'descriptif',
-	) as $champ)
-		$c[$champ] = _request($champ);
-	foreach (array(
-		'publique', 'privee'
-	) as $champ)
-		$c[$champ] = _request($champ)=='oui'?'oui':'non';
+function zone_modifier ($id_zone, $set=null) {
 
 	include_spip('inc/modifier');
-	accesrestreint_revision_zone($id_zone, $c);
-	accesrestreint_revision_zone_objets_lies($id_zone, _request('rubriques'),'rubrique','set');
+	$c = collecter_requests(
+		// white list
+		array('titre', 'descriptif','publique', 'privee'),
+		// black list
+		array(),
+		// donnees eventuellement fournies
+		$set
+	);
 
+	// Si la zone est publiee, invalider les caches et demander sa reindexation
+	$t = sql_getfetsel("statut", "spip_zones", "id_zone=$id_zone");
+	if ($t == 'publie') {
+		$invalideur = "id='zone/$id_zone'";
+		$indexation = true;
+	}
+
+	if ($err = objet_modifier_champs('zone', $id_zone,
+		array(
+			'nonvide' => array('titre' => _T('info_sans_titre')),
+			'invalideur' => $invalideur,
+			'indexation' => $indexation
+		),
+		$c))
+		return $err;
+
+
+	zone_lier($id_zone, 'rubrique', _request('rubriques'),'set');
 	return $err;
 }
 
@@ -66,75 +126,38 @@ function action_zone_set($id_zone){
  * $operation = add/set/del pour ajouter, affecter uniquement, ou supprimer les objets listes dans ids.
  *
  * @param int|array $zones
- * @param int|array $ids
  * @param string $type
+ * @param int|array $ids
  * @param string $operation
  */
-function accesrestreint_revision_zone_objets_lies($zones,$ids,$type,$operation = 'add'){
+function zone_lier($zones,$type,$ids,$operation = 'add'){
 	include_spip('inc/autoriser');
-	$in = "";
-	if ($zones){
-		$in = sql_in('id_zone',$zones);
+	include_spip('action/editer_liens');
+	if (!$zones)
+		$zones="*";
+	if (!$ids)
+		$ids = array();
+	elseif (!is_array($ids))
+		$ids = array($ids);
+
+	if ($operation=='del'){
+		// on supprime les ids listes
+		objet_dissocier(array('zone'=>$zones),array($type=>$ids));
 	}
-	$liste = sql_allfetsel('id_zone','spip_zones',$in);
-	foreach($liste as $row){
-		if ($operation=='del'){
-			// on supprime les ids listes
-			sql_delete("spip_zones_liens",array("id_zone=".intval($row['id_zone']),"objet='$type'",sql_in("id_objet",$ids)));
+	else {
+		// si c'est une affectation exhaustive, supprimer les existants qui ne sont pas dans ids
+		// si c'est un ajout, ne rien effacer
+		if ($operation=='set'){
+			objet_dissocier(array('zone'=>$zones),array($type=>array("NOT",$ids)));
 		}
-		else {
-			if (!$ids) $ids = array();
-			elseif (!is_array($ids)) $ids = array($ids);
-			// si c'est une affectation exhaustive, supprimer les existants qui ne sont pas dans ids
-			// si c'est un ajout, ne rien effacer
-			if ($operation=='set')
-				sql_delete("spip_zones_liens",array("id_zone=".intval($row['id_zone']),"objet='$type'",sql_in("id_objet",$ids,"NOT")));
-			$deja = array_map('reset',sql_allfetsel("id_objet","spip_zones_liens","objet='$type' AND id_zone=".intval($row['id_zone'])));
-			$add = array_diff($ids,$deja);
-			foreach ($add as $id) {
-				if (autoriser('affecterzones',$type,$id,null,array('id_zone'=>$row['id_zone'])))
-					sql_insertq("spip_zones_liens",array('id_zone'=>$row['id_zone'],"objet"=>$type,"id_objet"=>intval($id)));
-			}
+		foreach ($ids as $id) {
+			if (autoriser('affecterzones',$type,$id,null,array('id_zone'=>$zones)))
+				objet_associer(array('zone'=>$zones),array($type=>$id));
 		}
-	}	
+	}
 }
 
-/**
- * Creer une nouvelle zone
- *
- * @return int
- */
-function accesrestreint_action_insert_zone(){
-	include_spip('inc/autoriser');
-	if (!autoriser('creer','zone'))
-		return false;
-	// nouvel zone
-	$id_zone = sql_insertq("spip_zones", array("maj"=>"NOW()", 'publique'=>'non','privee'=>'non'));
 
-	if (!$id_zone){
-		spip_log("accesrestreint action : impossible d'ajouter un zone");
-		return false;
-	} 
-	return $id_zone;	
-}
-
-/**
- * Enregistre la revision d'une zone
- *
- * @param int $id_zone
- * @param array|bool $c
- * @return string
- */
-function accesrestreint_revision_zone($id_zone, $c=false) {
-
-	modifier_contenu('zone', $id_zone,
-		array(
-			'nonvide' => array('titre' => _T('info_sans_titre')),
-		),
-		$c);
-
-	return ''; // pas d'erreur
-}
 
 /**
  * Supprimer une zone
@@ -142,14 +165,13 @@ function accesrestreint_revision_zone($id_zone, $c=false) {
  * @param int $id_zone
  * @return int
  */
-function accesrestreint_supprime_zone($id_zone){
-	$supp_zone = sql_getfetsel("id_zone", "spip_zones", "id_zone=" . intval($id_zone));
-	if (intval($id_zone) AND 	intval($id_zone) == intval($supp_zone)){
-		// d'abord les auteurs et zones en un coup
-		sql_delete("spip_zones_liens", "id_zone=".intval($id_zone));
-		// puis la zone
-		sql_delete("spip_zones", "id_zone=".intval($id_zone));
-	}
+function zone_supprimer($id_zone){
+	include_spip('action/editer_liens');
+	objet_dissocier(array('zone'=>$id_zone),array('*'=>'*'));
+
+	// puis la zone
+	sql_delete("spip_zones", "id_zone=".intval($id_zone));
+
 	$id_zone = 0;
 	return $id_zone;
 }

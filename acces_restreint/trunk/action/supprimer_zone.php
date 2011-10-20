@@ -13,7 +13,7 @@ function action_supprimer_zone_dist(){
 	if ($id_zone = intval($arg)
 	 AND autoriser('supprimer','zone',$id_zone)) {
 	 	include_spip('action/editer_zone');
-	 	accesrestreint_supprime_zone($id_zone);
+	 	zone_supprimer($id_zone);
 	}
 }
 
