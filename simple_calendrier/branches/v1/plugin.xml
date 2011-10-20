@@ -4,7 +4,7 @@
     </nom>
     <auteur>[Julien Lanfrey->http://www.spip-contrib.net/ju3873]</auteur>
     <licence>GPL &#169; 2010-2011</licence>
-    <version>1.2.1</version>
+    <version>1.2.2</version>
     <version_base>1.4</version_base>
     <etat>stable</etat>
     
@@ -171,11 +171,19 @@ _   (Th&#232;mes pour le mini-calendrier bas&#233;s sur [jquery-ui themeroller->
         <url>evenement_tous&mode=avenir</url>	
     </bouton>
     
-    <!-- Pour l'integration dans plugin 'bando' -->
+    <!-- Pour l'integration dans le plugin 'bando' -->
     <bouton id="bt_simplecal_accueil_bando" parent="bando_edition">
         <icone>img_pack/simplecal-logo-16.png</icone>
         <titre>simplecal:bouton_entree</titre>	
         <url>evenement_tous&mode=avenir</url>	
-    </bouton>	
+    </bouton>
+    
+    <!-- Pour l'integration dans le plugin 'bando' et 'minibando' -->
+    <bouton id='bt_simplecal_creer_bando' parent="outils_rapides">
+		<icone>img_pack/simplecal-logo-new-16.png</icone>
+		<titre>simplecal:raccourcis_ecrire_evenement</titre>
+		<url>evenements_edit</url>
+		<args>new=oui&amp;retour=liste&amp;id_rubrique=@id_rubrique@</args>
+	</bouton>
 
 </plugin>

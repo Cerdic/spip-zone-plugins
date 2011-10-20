@@ -32,6 +32,11 @@ function autoriser_bt_simplecal_accueil_bando($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
+// Raccourcis de creation pour le plugin 'bando' et 'minibando'
+function autoriser_bt_simplecal_creer_bando($faire, $type, $id, $qui, $opt){
+    return autoriser('creer', 'evenement', $id, $qui, $opt);
+}
+
 // Remarque : Cette fonction est aussi appelée au niveau du core (API des listings - cf. inc/afficher_objets.php)
 // Le plugin "Acces restreint 3" la déclare également mais ne l'utilise pas (surement pour le plugin Agenda 2).
 // Ce qui pose problème car basé sur une table evenement différente de celle du plugin "simple-calendrier" !
