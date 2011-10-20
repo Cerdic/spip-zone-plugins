@@ -32,4 +32,25 @@ function pp_chgt_lg_porte_plume_lien_classe_vers_icone($flux) {
 	return array_merge($flux, $icones);
 }
 
+// insert le css pour les styles supplementaires de la BTE dans le <head> du document (#INSERT_HEAD)
+function pp_chgt_lg_insert_head_css($flux) {
+	static $done = false;
+	if (!$done) {
+		$done = true;
+		$flux .= "\n".'<link rel="stylesheet" href="'.find_in_path('css/pp_chgt_lg.css').'" type="text/css" media="all" />';
+	}
+	return $flux;
+}
+
+// insert le css pour les styles supplementaires de la BTE dans le <head> du document (#INSERT_HEAD)
+function pp_chgt_lg_insert_head($flux) {
+	$flux = pp_chgt_lg_insert_head_css($flux);
+	return $flux;
+}
+function pp_chgt_lg_header_prive($texte) {
+	$texte.= '<link rel="stylesheet" type="text/css" href="' . _DIR_PLUGIN_PP_CHGT_LG . 'css/pp_chgt_lg_prive.css" />' . "\n";
+	return $texte;
+}
+
+
 ?>
