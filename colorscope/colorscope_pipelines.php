@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Spipmine pour Spip 2.0
+ * Plugin Colorscope pour SPIP 2.0
  * Licence GPL (c) 2009 - 2011
  * Auteur Cyril MARION - Ateliers CYM
  * Merci a Arno* pour les filtres couleur :-)
@@ -24,7 +24,7 @@ function bloc_colorscope($couleurs) {
 	}
 	// $fond = '#'.couleur_inverser(couleur_extreme($coul));
 
-	$bloc = '<span style="display:inline-block;text-align:center;width:90px;height:20px;background-color:'.format_decimal($coul).';color:'.$fond.'">'.$coul.'</span>';
+	$bloc = '<code style="display:inline-block;text-align:center;width:90px;height:20px; background-color: '.format_decimal($coul).'; color: '.$fond.'">'.$coul.'</code>';
 	return $bloc;
 }
 
