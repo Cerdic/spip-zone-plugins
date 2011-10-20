@@ -11,6 +11,6 @@
 	<prefix>cite</prefix>
 	<fonctions>cite_fonctions.php</fonctions>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 	<utilise id="verifier" version="[0.1.8;]" />
 </plugin>
