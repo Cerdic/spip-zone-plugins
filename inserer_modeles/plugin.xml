@@ -24,7 +24,7 @@
 		<inclure>inserer_modeles_pipelines.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 	<necessite id="spip_bonux" version="[1.8.10;]" />
 	<necessite id="saisies" version="[1.8.4;]" />
 	<necessite id="verifier" version="[0.1.1;]" />
