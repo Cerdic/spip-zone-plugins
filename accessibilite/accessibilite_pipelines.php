@@ -17,7 +17,7 @@ function accessibilite_pre_liens($texte){
 					array('spip_documents AS TT1', 'spip_types_documents AS TT2'), 
 					array('id_document='.$type[2], 'TT1.extension=TT2.extension')
 					);
-				$textelien = ($intitule[0]) ? $intitule[0]:$row['T1'];
+				$textelien = ($intitule[0]) ? $intitule[0]:supprimer_numero(typo($row['T1']));
 				$langue = ($intitule[2]) ? '{'.$intitule[2].'}':'';
 				// Si intitulé du lien, le reprendre,
 				// Sinon, si titre pour le doc, le reprendre,
@@ -33,7 +33,7 @@ function accessibilite_pre_liens($texte){
 					. (($intitule[2]) ? ' ('.traduire_nom_langue($intitule[2]).')':''); // La langue presente dans le lien (malheureusement, info non disponible dans la table spip_documents)
 				
 				// Rebatir le raccourcis typo du lien avec les informations modifiees
-				$lien = '['. supprimer_numero(typo($textelien)) . '|'. $title .$langue .'->'. $reg[4] .']';
+				$lien = '['. $textelien . '|'. $title .$langue .'->'. $reg[4] .']';
 				$texte = str_replace($reg[0], $lien, $texte);
 			}
 		}	
