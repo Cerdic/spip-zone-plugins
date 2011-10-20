@@ -73,6 +73,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'selectionner_une_zone' => 'Sélectionner une zone',
 
 	// T
+	'texte_ajouter_zone' => 'Ajouter une zone',
+	'texte_creer_associer_zone' => 'Créer et associer une zone',
 	'titre' => 'Titre',
 	'titre_ajouter_zone' => 'Rejoindre la zone',
 	'titre_boite_protegee_non' => 'Acc&egrave;s non prot&eacute;g&eacute;',

@@ -26,6 +26,8 @@ function accesrestreint_declarer_tables_objets_sql($tables){
 		'texte_creer' => 'accesrestreint:creer_zone',
 		'texte_objets' => 'accesrestreint:titre_zones_acces',
 		'texte_objet' => 'accesrestreint:titre_zone_acces',
+		'texte_ajouter' => 'accesrestreint:texte_ajouter_zone',
+		'texte_creer_associer' => 'accesrestreint:texte_creer_associer_zone',
 		'info_aucun_objet'=> 'accesrestreint:info_aucune_zone',
 		'info_1_objet' => 'accesrestreint:info_1_zone',
 		'info_nb_objets' => 'accesrestreint:info_nb_zones',

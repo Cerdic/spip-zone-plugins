@@ -21,7 +21,7 @@ function accesrestreint_affiche_milieu($flux){
 		
 		$id_auteur = $flux['args']['id_auteur'];
 
-		$ins = recuperer_fond('prive/editer/affecter_zones',array('id_auteur'=>$id_auteur));
+		$ins = recuperer_fond('prive/squelettes/inclure/acces_auteur',array('id_auteur'=>$id_auteur));
 		if (($p = strpos($flux['data'],"<!--affiche_milieu-->")) !== false)
 			$flux['data'] = substr_replace($flux['data'],$ins,$p,0);
 		else

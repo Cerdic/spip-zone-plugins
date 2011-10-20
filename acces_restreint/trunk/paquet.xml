@@ -2,7 +2,7 @@
 	prefix="accesrestreint"
 	categorie="auteur"
 	version="3.5.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="prive/themes/spip/images/zone-32.png"
 	schema="0.4.1"
