@@ -43,7 +43,7 @@ function accesrestreint_affiche_gauche($flux) {
 	  AND $e['edition'] == false
 	  AND $id_rubrique = $flux['args']['id_rubrique']){
 		if (autoriser('administrer', 'zone', 0)) {
-			$flux['data'] .= recuperer_fond('prive/inclure/acces_rubrique', array('id_rubrique'=>$id_rubrique));
+			$flux['data'] .= recuperer_fond('prive/squelettes/inclure/acces_rubrique', array('id_rubrique'=>$id_rubrique));
 		}
 	}
 	return $flux;

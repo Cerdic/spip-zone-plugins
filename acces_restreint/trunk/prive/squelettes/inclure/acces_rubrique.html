@@ -13,7 +13,7 @@
 		<a href="[(#URL_ECRIRE{zone_edit,id_zone=#ID_ZONE}|parametre_url{redirect,#SELF})]">
 			n&deg; #ID_ZONE : #TITRE
 		</a>
-		[(#BOUTON_ACTION{#CHEMIN_IMAGE{supprimer-12.png}|balise_img{<:accesrestreint:info_retirer_zone:>},[(#URL_ACTION_AUTEUR{retirer_zone,[(#ID_ZONE)-rubrique-#ID_RUBRIQUE],#SELF})],ajax})]
+		[(#BOUTON_ACTION{#CHEMIN_IMAGE{supprimer-12.png}|balise_img{<:accesrestreint:info_retirer_zone:>},[(#URL_ACTION_AUTEUR{retirer_zone,[(#ID_ZONE)-rubrique-#ID_RUBRIQUE],#SELF})],ajax,<:accesrestreint:confirmer_retirer_rubrique_zone:>})]
 	</li>
 </BOUCLE_restreint>
 	</ul>
