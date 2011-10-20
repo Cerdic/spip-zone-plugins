@@ -13,10 +13,10 @@
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-profil-public</lien>
 	<icon>img/icon.png</icon>
-	<prefix>igooglelike</prefix>
+	<prefix>profilpublic</prefix>
 	<pipeline>
 	<nom>insert_head</nom>
-	<inclure>igooglelike.php</inclure>
+	<inclure>profilpublic.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version='[2.1;]' />
 	<necessite id="jqueryui" version="[1.8.5;]" />

@@ -1,5 +1,5 @@
 <?php
-function igooglelike_insert_head($flux)
+function profilpublic_insert_head($flux)
 {
 	$flux .= '<link type="text/css" rel="stylesheet" href="'.url_absolue(find_in_path('css/igoogle-like.css')).'" />
 				<script type="text/javascript" src="'.url_absolue(find_in_path('lib/jquery.cookie.js')).'"></script>
@@ -10,7 +10,7 @@ function igooglelike_insert_head($flux)
 return $flux;
 }
 
-function igooglelike_jqueryui_forcer($scripts){
+function profilpublic_jqueryui_forcer($scripts){
     $scripts[] = "jquery.ui.accordion";
 	$scripts[] = "jquery.ui.sortable";
 	$scripts[] = "jquery.ui.tabs";
