@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="prive/themes/spip/images/zone-32.png"
-	schema="0.4.0"
+	schema="0.4.1"
 	documentation="http://www.spip-contrib.net/Acces-Restreint-3-0"
 >	
 

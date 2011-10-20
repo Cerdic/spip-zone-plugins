@@ -39,8 +39,8 @@ function accesrestreint_declarer_tables_objets_sql($tables){
 			"id_zone" 	=> "bigint(21) NOT NULL",
 			"titre" 	=> "varchar(255) DEFAULT '' NOT NULL",
 			"descriptif" 	=> "text DEFAULT '' NOT NULL",
-			"publique" 	=> "ENUM('non', 'oui') DEFAULT 'oui' NOT NULL",
-			"privee" 	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
+			"publique" 	=> "char(3) DEFAULT 'oui' NOT NULL",
+			"privee" 	=> "char(3) DEFAULT 'non' NOT NULL",
 			"maj" 		=> "TIMESTAMP"
 		),
 		'key' => array(

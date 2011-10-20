@@ -46,6 +46,10 @@ function accesrestreint_upgrade($nom_meta_base_version,$version_cible){
 		array('maj_liens','zone','rubrique'),
 		array('sql_drop_table',"spip_zones_rubriques"),
 	);
+	$maj['0.4.1'] = array(
+		array('sql_alter',"TABLE spip_zone CHANGE publique publique char(3) DEFAULT 'oui' NOT NULL"),
+		array('sql_alter',"TABLE spip_zone CHANGE privee privee char(3) DEFAULT 'oui' NOT NULL"),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
