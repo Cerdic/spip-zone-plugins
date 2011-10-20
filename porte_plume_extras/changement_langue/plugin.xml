@@ -3,7 +3,7 @@
 	<slogan>Extension changement de langue pour Porte-Plume</slogan>
 	<auteur>Joseph</auteur>
 	<licence>GPL v3</licence>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<etat>test</etat>
 	<description>Ajoute un bouton au porte-plume permettant d'indiquer un changement de langue dans le texte.</description>
 	<lien>http://www.spip-contrib.net/?article3705</lien>
