@@ -29,14 +29,8 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 		[<width>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{width})</width>]
 	</image>
 ]
-
-<BOUCLE_recents(ARTICLES) {lang ?}{branche ?}{id_mot ?}{id_auteur ?} {par date}{inverse}{0,#CONFIG{rssconfig/nb_art,10}}{unique}>
-<INCLURE{fond=inclure/rss-item}{id_article}>
-</BOUCLE_recents>
-
-<BOUCLE_tres_recents(ARTICLES){lang ?}{branche ?}{id_mot ?}{id_auteur ?} {par date}{inverse}{age<#CONFIG{rssconfig/age_art,3}}{unique}>
-<INCLURE{fond=inclure/rss-item}{id_article}>
-</BOUCLE_tres_recents>
+#SET{id_rubrique,#ENV{id_rubrique,#CONFIG{rssconfig/rubriques_a_inclure}|explode{','}}}
+<INCLURE{fond=inclure/rss-liste-items}{env}{id_rubrique=#GET{id_rubrique}}>
 
 </channel>
 

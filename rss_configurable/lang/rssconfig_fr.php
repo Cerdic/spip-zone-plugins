@@ -7,7 +7,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'configurer_rssconfig' => 'Configurer le flux RSS',
 	'explication_age_art' => 'Indiquez un nombre de jours. Les articles ayant un âge inférieur à ce critère seront inclus dans le flux. Mettez 0 pour ne pas utiliser ce critère.',
-	'explication_articles_a_inclure' => 'Par défaut, SPIP inclue dans le flux les 10 derniers articles publiés ainsi que les articles publiés il y a moins de trois jours. Vous pouvez modifier ci-dessous ces deux critères.',
+	'explication_articles_a_inclure' => 'Par défaut, SPIP inclut dans le flux les 10 derniers articles publiés ainsi que les articles publiés il y a moins de trois jours. Vous pouvez modifier ci-dessous ces deux critères.',
+	'explication_rubriques' => 'Par défaut, SPIP inclut dans le flux les articles publiés de toutes les rubriques du site. Vous pouvez modifier ci-dessous le choix des rubriques à traiter',
+	'explication_rubriques_a_inclure' => 'Saisir les numéros des rubriques à inclure séparés par une virgule (les sous-rubriques seront automatiquement rajoutées). Ne rien saisir pour que toutes les rubriques soient traitées.',
 	'explication_creator' => 'Auteur(s) de l\'article affichés dans le flux RSS.',
 	'explication_diffuser_documents' => 'Diffuser dans le flux l\'URL des documents joints à l\'articles ?',
 	'explication_diffuser_mots' => 'Diffuser les mots-clés associés à l\'article dans le flux comme tags de l\'article ?',
@@ -25,6 +27,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_diffuser_rubrique' => 'Rubrique',
 	'label_nb_art' => 'Critère de nombre',
 	'label_options_articles' => 'Options des articles',
+	'label_rubriques' => 'Rubriques',
+	'label_rubriques_a_inclure' => 'Rubriques à inclure',
 	'label_syndication_integrale' => 'Syndication intégrale',
 	'rssconfig' => 'Flux RSS',
 
