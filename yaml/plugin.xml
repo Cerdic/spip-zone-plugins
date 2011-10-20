@@ -13,7 +13,7 @@
 	<lien>http://www.spip-contrib.net/Le-plugin-YAML</lien>
 	<icon>yaml.png</icon>
 	<fonctions>yaml_fonctions.php</fonctions>
-	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 	<categorie>outil</categorie>
 	<chemin dir='' />
 </plugin>
