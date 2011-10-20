@@ -26,7 +26,7 @@ function accesrestreint_liste_zones_autorisees($zones='', $id_auteur=NULL) {
 	if (!is_null($id)) {
 		$new = accesrestreint_liste_zones_appartenance_auteur($id);
 		if ($zones AND $new) {
-			$zones = array_unique(array_merge(split(',',$zones),$new));
+			$zones = array_unique(array_merge(explode(',',$zones),$new));
 			sort($zones);
 			$zones = join(',', $zones);
 		} else if ($new) {
