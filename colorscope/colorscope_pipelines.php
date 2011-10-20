@@ -24,7 +24,7 @@ function bloc_colorscope($couleurs) {
 	}
 	// $fond = '#'.couleur_inverser(couleur_extreme($coul));
 
-	$bloc = '<code style="display:inline-block;text-align:center;width:90px;height:20px; background-color: '.format_decimal($coul).'; color: '.$fond.'">'.$coul.'</code>';
+	$bloc = '<code class="spip_color" style="background-color:'.format_decimal($coul).';color:'.$fond.'">'.$coul.'</code>';
 	return $bloc;
 }
 
