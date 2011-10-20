@@ -7,10 +7,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 
 // pour les messages mail
-$objet = 'Import sitra du : '.date('d/m/Y H:i')."\n";
+$objet = 'Import sitra '.$GLOBALS['meta']['nom_site'].' '.date('d/m/Y H:i');
 
 if ($GLOBALS['sitra_config']['erreur'])
-	$objet = $GLOBALS['sitra_config']['mail_objet'];
+	$objet = 'Import sitra '.$GLOBALS['meta']['nom_site'].' '.$GLOBALS['sitra_config']['mail_objet'];
 
 $mail_dest = lire_config('sitra_config/mail_dest');
 
