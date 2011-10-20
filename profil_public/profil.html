@@ -1,5 +1,5 @@
 #CACHE{0}
-<BOUCLE_principale(AUTEURS) {id_auteur=#SESSION{id_auteur}}>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
@@ -26,7 +26,7 @@
 		 	
 	
 	<div id="conteneur">
-    	
+    <BOUCLE_principale(AUTEURS) {id_auteur=#SESSION{id_auteur}}>	
 	<div class="column" id="col1">
 	
 		[(#REM) Infos sur l'auteur ]
@@ -156,7 +156,9 @@
 		
 
 	</div><!-- fin colonne 3 -->
-	
+	</BOUCLE_principale>
+	 #LOGIN_PUBLIC    
+	<//B_principale>
 
 </div><!-- fin conteneur -->  
 	
@@ -166,4 +168,5 @@
 </div><!--#page-->
 </body>
 </html>
-</BOUCLE_principale>
+
+
