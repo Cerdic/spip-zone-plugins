@@ -19,7 +19,8 @@ var cloudmade_key = '#CONFIG{gis/api_key_cloudmade}';]
 		});
 		
 		map_preview.setCenterAndZoom(new mxn.LatLonPoint([(#LAT)],[(#LON)]),[(#ZOOM|sinon{#CONFIG{gis/zoom,0}})]);
-
+		
+		[(#REM) On ajoute les points ou le point unique suivant les params ]
 		<BOUCLE_points(GIS){id_objet}{objet}>
 		var data = {
 			"type": "FeatureCollection",
@@ -63,6 +64,11 @@ var cloudmade_key = '#CONFIG{gis/api_key_cloudmade}';]
 		map_preview.addJSON(data);
 		</BOUCLE_point>
 		<//B_points>
+		
+		[(#REM) On ajoute les KML attachés à l'objet ]
+		<BOUCLE_kml(DOCUMENTS){tous}{objet}{id_objet}{extension=kml}>
+		map_preview.addOverlay('[(#URL_DOCUMENT|url_absolue)]', true);
+		</BOUCLE_kml>
 	}
 
 	$(function(){
