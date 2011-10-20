@@ -191,8 +191,10 @@ function normaliser_auteur_licence($texte, $balise) {
 				$licurl = 'http://opensource.org/licenses/mit-license.php';
 			else if (strtolower($licnom) == 'bsd')
 				$licurl = 'http://www.freebsd.org/copyright/license.html';
+			else if (strtolower($licnom) == 'lgpl')
+				$licurl = 'http://www.gnu.org/licenses/lgpl-3.0.html';
 			else
-				$licurl = ($licnom=='LGPL') ? 'http://www.gnu.org/licenses/lgpl-3.0.html' : 'http://www.gnu.org/licenses/gpl-3.0.html';
+				$licurl = (substr($licnom, -1) =='2') ? 'http://www.gnu.org/licenses/gpl-2.0.html' : 'http://www.gnu.org/licenses/gpl-3.0.html';
 			$res['licence'][] = array('nom' => $licnom, 'url' => $licurl);
 		}
 		
