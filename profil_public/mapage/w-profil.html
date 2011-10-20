@@ -4,18 +4,11 @@
 			<div class="logo-profil">[(#LOGO_AUTEUR|image_reduire{110,100})]</div>
 
 			<div class="info-profil">
+			[(#CONFIG{profil_public/contact} |?{#MODELE{contact},#NOM})
+				
+			]	
+	
 			
-				<B_contact>				
-					<BOUCLE_contact(CONTACTS){id_auteur=#SESSION{id_auteur}}>						
-					[<p class="#EDIT{nom} nom">(#NOM)</p>]				  
-					[<p class="#EDIT{prenom} prenom">(#PRENOM)</p>]
-					[<p class="#EDIT{fonction} fonction">(#FONCTION)</p>]
-					[<p>(#DATE_NAISSANCE|affdate)</p>]
-					</BOUCLE_contact>
-				</B_contact>
-					[<p class="#EDIT{nom} nom">(#NOM)</p>]
-				<//B_contact>
-							
 			</div>
 				
 			<div class="detail-profil">	

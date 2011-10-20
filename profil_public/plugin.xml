@@ -11,7 +11,7 @@
 	l'appel se fait via la page spip.php?page=profil.
 	Vous pouvez choisir les widgets &agrave; afficher avec cfg
 	</description>
-	<lien>http://www.spip-contrib.net/spip.php?article3937</lien>
+	<lien>http://www.spip-contrib.net/Plugin-profil-public</lien>
 	<icon>img/icon.png</icon>
 	<prefix>igooglelike</prefix>
 	<pipeline>
@@ -20,12 +20,12 @@
 	</pipeline>
 	<necessite id="SPIP" version='[2.1;]' />
 	<necessite id="jqueryui" version="[1.8.5;]" />
-	<utilise id="contacts_et_organisations" version="[1.13;]" />
-	<utilise id="cfg" version="[1.16.0;]" />
-	<utilise id="tagshpere" version="[0.3;]" />
-	<utilise id="splickrbox" version="[0.4.2;]" />
-	<utilise id="messagerie_2_0" version="[2.0.1;]" />
-	<utilise id="annonces_publiques" version="[1.3.0;]" />	
-	<utilise id="mesfavoris_2_0" version="[2.1.2;]" />
+	<necessite id="cfg" version="[1.16.0;]" />
+	<utilise id="contacts" version="[1.7.0;]"/>
+	<utilise id="tagsphere" version="[0.3;]" />
+	<utilise id="Splickr" version="[0.4.2;]" />
+	<utilise id="messagerie" version="[2.0.1;]" />
+	<utilise id="AP" version="[1.3.0;]" />	
+	<utilise id="mesfavoris" version="[2.1.2;]" />
 	<categorie>divers</categorie>
 </plugin>
