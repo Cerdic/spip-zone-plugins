@@ -23,6 +23,7 @@ function TypoEnluminee_insert_head($flux) {
 }
 function TypoEnluminee_header_prive($texte) {
 	$texte.= '<link rel="stylesheet" type="text/css" href="' . _DIR_PLUGIN_TYPOENLUMINEE . 'css/enluminurestypo.css" />' . "\n";
+	$texte.= '<link rel="stylesheet" type="text/css" href="' . _DIR_PLUGIN_TYPOENLUMINEE . 'css/enluminurestypo_prive.css" />' . "\n";
 	return $texte;
 }
 
