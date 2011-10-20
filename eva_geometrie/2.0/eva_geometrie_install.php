@@ -12,9 +12,28 @@ function eva_geometrie_install($action){
 	case 'test':
 	if (!$GLOBALS['meta']['eva_geometrie_test']) {return false;}
 	else {
+	//Pour les collègues matheux, on insères ici quelques formats de documents à accepter par SPIP (algobox, XCAS)
+		//On commence par ajouter l'icone pour le format alg = logiciel algobox
+		if (!@opendir(_DIR_IMG."icones")) {mkdir(_DIR_IMG."icones");}
+		if (!@fopen(_DIR_IMG."icones/alg.png", "r")) {copy(_DIR_PLUGIN_EVA_GEOMETRIE.'img_pack/alg.png',_DIR_IMG.'icones/alg.png');}
+		//On poursuit avec l'ajout du format alg dans la base de données
+		$test_alg_req=sql_select('inclus','spip_types_documents',"extension = 'alg'");
+		$test_alg_ta=sql_fetch($test_alg_req);
+		$test_alg=$test_alg_ta['inclus'];
+		if (!$test_alg) {
+			sql_insertq('spip_types_documents',array('extension' => 'alg','mime_type' => 'application/algobox','titre' => 'AlgoBox','inclus' => 'embed','upload' => 'oui'));
+		}
+		//On commence par ajouter l'icone pour le format xws = logiciel Xcas
+		if (!@fopen(_DIR_IMG."icones/xws.png", "r")) {copy(_DIR_PLUGIN_EVA_GEOMETRIE.'img_pack/xws.png',_DIR_IMG.'icones/xws.png');}
+		//On poursuit avec l'ajout du format xws dans la base de données
+		$test_xws_req=sql_select('inclus','spip_types_documents',"extension = 'xws'");
+		$test_xws_ta=sql_fetch($test_xws_req);
+		$test_xws=$test_xws_ta['inclus'];
+		if (!$test_xws) {
+			sql_insertq('spip_types_documents',array('extension' => 'xws','mime_type' => 'application/Xcas','titre' => 'Xcas','inclus' => 'embed','upload' => 'oui'));
+		}
 	//Mise à jour avec le nouveau format zirs pour CarMetal
 		//On commence par ajouter l'icone pour le format zirs = copie de zir
-		if (!@opendir(_DIR_IMG."icones")) {mkdir(_DIR_IMG."icones");}
 		if (!@fopen(_DIR_IMG."icones/zirs.png", "r")) {copy(_DIR_PLUGIN_EVA_GEOMETRIE.'img_pack/zirs.png',_DIR_IMG.'icones/zirs.png');}
 		//On poursuit avec l'ajout du format zirs dans la base de données
 		$test_zirs_req=sql_select('inclus','spip_types_documents',"extension = 'zirs'");
