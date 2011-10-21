@@ -230,6 +230,7 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 		spiplistes_debug_log (_T('pass_erreur').' acces visiteurs non autorises');
 	}
 	
+	
 	return array($formulaire, $GLOBALS['delais'],
 				array(
 					'oubli_pass' => $oubli_pass
@@ -318,7 +319,8 @@ function spiplistes_formulaire_abonnement (
 	{
 		$sql_where = array("id_auteur=$connect_id_auteur");
 	}
-	if($sql_where) {
+	
+	if ($sql_where) {
 		// cherche les coordonnees de l'abonne'
 		$sql_select = 'id_auteur,statut,nom,email,cookie_oubli';
 		$sql_result = sql_select(

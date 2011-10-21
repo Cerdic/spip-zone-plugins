@@ -50,9 +50,11 @@
 		[<!--(#REM) sinon formulaire d'inscription -->]
 		
 		[(#ENV{d}|non|et{#SESSION{id_auteur}|non})
+			[(#ENV{ok}|non)
 			<div class="message-formulaire">
 				<p><:spiplistes:abonnement_explication:></p>
 			</div>
+			]
 			#FORMULAIRE_SPIP_LISTES_INSCRIPTION]
 		
 		</div>
