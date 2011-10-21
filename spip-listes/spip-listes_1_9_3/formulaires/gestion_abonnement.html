@@ -22,7 +22,9 @@ Pour la classe ajax, voir http://www.spip.net/fr_article3753.html
 
 <div class="formulaire_spip formulaire_gestion_abonnement ajax">
 [<!--(#REM)
+
 	Formulaire de desabonnement
+
 -->]
 [(#ENV{d}|oui|et{#ENV{stop}|oui})
 	[(#ENV{message_ok}|non)
@@ -41,7 +43,9 @@ Pour la classe ajax, voir http://www.spip.net/fr_article3753.html
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV{message_ok})</p>]
 ]
 [<!--(#REM)
+
 	Formulaire de gestion d'abonnement
+
 -->]
 [(#ENV{d}|oui|et{#ENV{stop}|non}|et{#ENV{errormsg}|non})
 		<p class='souhait'><:spiplistes:effectuez_modif_validez:></p>
@@ -93,9 +97,11 @@ Pour la classe ajax, voir http://www.spip.net/fr_article3753.html
 
 </B_auteur>
 [<!--(#REM)
+
 	Le squelette a été appelé directement.
 	A voir si message d'erreur ici
 	ou redirection brutale sur 404
 	ou autre...
+
 -->][<p class="errormsg">(#ENV{errormsg})</p>]
 <//B_auteur>

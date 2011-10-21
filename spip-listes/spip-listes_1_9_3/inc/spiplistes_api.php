@@ -1482,12 +1482,22 @@ function spiplistes_format_valide ($format) {
  * soit update cookie du cookie transmis
  * soit update cookie de l'email transmis
  */
-function spiplistes_auteurs_cookie_oubli_updateq ($cookie_oubli, $where, $where_is_cookie = false) {
-	if(is_string($where) && !empty($where)) {
-		$where = (($where_is_cookie) ? "cookie_oubli" : "email")
-			. "=" . sql_quote($where) . " LIMIT 1";
+function spiplistes_auteurs_cookie_oubli_updateq ($cookie_oubli,
+												  $where,
+												  $where_is_cookie = false)
+{
+	$result = FALSE;
+	
+	if(is_string($where) && !empty($where))
+	{
+		$where = (($where_is_cookie) ? 'cookie_oubli' : 'email')
+			. '=' . sql_quote($where) . ' LIMIT 1';
+		
+		$result = sql_update('spip_auteurs',
+							 array('cookie_oubli' => sql_quote($cookie_oubli)),
+							 $where);
 	}
-	return(sql_update('spip_auteurs', array('cookie_oubli' => sql_quote($cookie_oubli)), $where));
+	return ($result);
 }
 
 /**

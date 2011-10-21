@@ -14,7 +14,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 include_spip('inc/spiplistes_api');
 include_spip('inc/spiplistes_api_globales');
 
-function formulaires_gestion_abonnement_charger_dist($id_liste=''){
+function formulaires_gestion_abonnement_charger_dist($id_liste='')
+{
 	//spiplistes_debug_log ('formulaires_gestion_abonnement_charger_dist()');
 	
 	$d = _request('d');
@@ -24,8 +25,10 @@ function formulaires_gestion_abonnement_charger_dist($id_liste=''){
 	$contexte['d'] = $d;
 	$contexte['editable'] = false;
 	
-	if($auteur = spiplistes_auteur_cookie_ou_session($d))
+	if ($auteur = spiplistes_auteur_cookie_ou_session($d))
 	{
+		spiplistes_debug_log('FGA a: '.$auteur);
+	
 		$id_auteur = $auteur['id_auteur'];
 		$contexte['id_auteur'] = intval($id_auteur);
 		$contexte['format'] = spiplistes_format_abo_demande($id_auteur);
@@ -69,6 +72,23 @@ function formulaires_gestion_abonnement_charger_dist($id_liste=''){
 				unset ($contexte['editable']);
 			}
 		}
+		/**
+		 * formulaire appelé directement
+		 * http://<localhost>/?page=abonnement
+		 */
+		else if (!$d)
+		{
+			if (!empty($auteur['email']))
+			{
+				/**
+				 * Le cookie pour le lien direct
+				 */
+				$cookie = creer_uniqid();
+				spiplistes_auteurs_cookie_oubli_updateq ($cookie, $auteur['email'], false);
+				//spiplistes_debug_log ('COOKIE: '.$cookie);
+				$contexte['d'] = $cookie;
+			}
+		}
 	}
 	else
 	{
@@ -104,7 +124,9 @@ function formulaires_gestion_abonnement_traiter_dist($id_liste='') {
 		// la liste des abonnements en cours
 		// pour cet auteur
 		$mes_abos = spiplistes_abonnements_listes_auteur ($id_auteur, FALSE);
-							  
+		
+		
+				  
 		// demander de stopper une inscription ?
 		if ($stop > 0)
 		{
