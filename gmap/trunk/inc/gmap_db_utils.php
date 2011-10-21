@@ -94,9 +94,8 @@ function gmap_get_all_types()
 			"spip_gmap_types.descriptif AS descriptif",
 			"spip_gmap_types.visible AS visible",
 			"spip_gmap_types.priorite AS priorite",
-			"count(spip_gmap_points.id_point) AS nb_points"),
-//		array("spip_gmap_types", "spip_gmap_points"),
-		"spip_gmap_types LEFT JOIN spip_gmap_points ON spip_gmap_types.id_type_point = spip_gmap_points.id_type_point",
+			"count(points.id_point) AS nb_points"),
+		"spip_gmap_types LEFT JOIN spip_gmap_points AS points ON spip_gmap_types.id_type_point = points.id_type_point",
 		"", "spip_gmap_types.id_type_point", "spip_gmap_types.id_type_point");
 	while ($row = sql_fetch($rowset))
 		$types[] = $row;
