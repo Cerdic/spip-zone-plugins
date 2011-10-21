@@ -194,9 +194,18 @@ function exec_spiplistes_liste_gerer () {
 				}
 			}
 			
-			// Modifier l'adresse email de reponse ?
-			if($btn_modifier_replyto && email_valide($email_envoi) && ($email_envoi!=$current_liste['email_envoi'])) {
+			/**
+			 * Modifier l'adresse email de reponse ?
+			 */
+			if (
+			   $btn_modifier_replyto
+			   && (email_valide($email_envoi)
+				   || !($email_envoi = trim($email_envoi))
+				   )
+			   )
+			{
 				$sql_champs['email_envoi'] = $email_envoi;
+				spiplistes_debug_log ('Modification email_envoi: '.$email_envoi);
 			}
 
 			////////////////////////////////////

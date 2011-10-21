@@ -630,7 +630,7 @@ function spiplistes_listes_nb_abonnes_compter ($id_liste = 0, $preciser = false)
 
 /**
  * renvoie email emetteur d'une liste
- * @version CP-20080509
+ * @version CP-20111021
  */
 function spiplistes_listes_email_emetteur ($id_liste = 0) {
 	$id_liste = intval($id_liste);
@@ -644,10 +644,6 @@ function spiplistes_listes_email_emetteur ($id_liste = 0) {
 		if($result === false) {
 			spiplistes_sqlerror_log("listes_email_emetteur");
 		}
-	}
-	// si pas d'adresse moderateur, va chercher adresse par defaut
-	if(!$result || empty($result)) {
-		$result = spiplistes_email_from_default();
 	}
 	return($result);
 }

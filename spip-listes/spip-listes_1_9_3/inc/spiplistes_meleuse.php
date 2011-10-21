@@ -218,9 +218,23 @@ function spiplistes_meleuse ($last_time) {
 				break;
 			}
 			
-			//////////////////////////////
-			// email emetteur
-			$email_envoi = spiplistes_listes_email_emetteur($id_liste);
+			/**
+			 * noter email emetteur de la liste
+			 */
+			$email_envoi = spiplistes_listes_email_emetteur ($id_liste);
+			
+			/**
+			 * si pas d'adresse emetteur, va chercher adresse par defaut
+			 */
+			if (!$email_envoi)
+			{
+				$email_envoi = spiplistes_email_from_default();
+				$email_reply_to = spiplistes_pref_lire_defaut('email_reply_to', $from);
+			}
+			else {
+				$email_reply_to = $email_envoi;
+			}
+			
 			if(!$is_a_test && !($email_envoi)) { 
 				$str_log .= ' [ERROR] ID_LISTE #'.$id_liste.' or from email MISSING'; 
 				spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_COURRIER_STATUT_ERREUR);
@@ -247,7 +261,7 @@ function spiplistes_meleuse ($last_time) {
 				// break; // garder pour incrementer les erreurs des listes
 			}
 			
-			$email_reply_to = spiplistes_pref_lire_defaut('email_reply_to', $from);
+			
 			
 			$return_path = spiplistes_pref_lire_defaut('email_return_path_defaut', $from);
 			
@@ -362,7 +376,10 @@ function spiplistes_meleuse ($last_time) {
 			$email_a_envoyer['html']->AddCustomHeader('Return-Path: '.$return_path); 	
 			$email_a_envoyer['html']->SMTPKeepAlive = true;
 		
-			$str_log .= ' REPLY-TO: '.$email_reply_to.' RETURN-PATH: '.$return_path;
+			$str_log .= ' FROM: ' . $from
+				. ' FROMNAME: ' . $fromname
+				. ' REPLY-TO: ' . $email_reply_to
+				. ' RETURN-PATH: ' . $return_path;
 			
 			if($total_abonnes) {
 		
