@@ -96,12 +96,26 @@ function svp_supprimer_depot($id){
 
 	// On supprime les paquets heberges par le depot
 	sql_delete('spip_paquets','id_depot='.sql_quote($id_depot));
+	
+	// Si on est pas en mode runtime, on utilise surement l'espace public pour afficher les plugins.
+	// Il faut donc verifier que les urls suivent bien la mise à jour
+	// Donc avant de nettoyer la base des plugins du depot ayant disparus on supprime toutes les urls
+	// associees a ce depot : on les recreera apres le nettoyage
+	if (!_SVP_MODE_RUNTIME)
+		svp_actualiser_url_plugins($id_depot);
 
 	// On supprime ensuite :
 	// - les liens des plugins avec le depot (table spip_depots_plugins)
 	// - les plugins dont aucun paquet n'est encore heberge par un depot restant (table spip_plugins)
 	// - et on met a zero la vmax des plugins ayant vu leur paquet vmax supprime
 	svp_nettoyer_apres_suppression($id_depot, $vmax);
+
+	// Si on est pas en mode runtime, on utilise surement l'espace public pour afficher les plugins.
+	// Il faut donc s'assurer que les urls suivent bien la mise à jour
+	// - on supprime toutes les urls plugin
+	// - on les regenere pour la liste des plugins mise a jour
+	if (!_SVP_MODE_RUNTIME)
+		svp_actualiser_url_plugins($id_depot);
 
 	// On supprime le depot lui-meme
 	sql_delete('spip_depots','id_depot='.sql_quote($id_depot));
@@ -419,7 +433,14 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	// On compile maintenant certaines informations des paquets mis a jour dans les plugins
 	// (date de creation, date de modif, version spip...)
 	svp_completer_plugins($id_depot);
-	
+
+	// Si on est pas en mode runtime, on utilise surement l'espace public pour afficher les plugins.
+	// Il faut donc s'assurer que les urls suivent bien la mise à jour
+	// - on supprime toutes les urls plugin
+	// - on les regenere pour la liste des plugins mise a jour
+	if (!_SVP_MODE_RUNTIME)
+		svp_actualiser_url_plugins($id_depot);
+		
 	// Calcul des compteurs de paquets, plugins et contributions
 	$nb_paquets = sql_countsel('spip_paquets', 'id_depot=' . sql_quote($id_depot));
 	$nb_plugins = sql_countsel('spip_depots_plugins', 'id_depot=' . sql_quote($id_depot));
@@ -551,6 +572,25 @@ function svp_completer_plugins($id_depot) {
 	}
 
 	return true;
+}
+
+
+function svp_actualiser_url_plugins () {
+	$nb_plugins = 0;
+
+	// On supprime toutes les urls de plugin
+	sql_delete('spip_urls', array('type=\'plugin\''));
+
+	// On recupere les ids des plugins et on regenere les urls
+	if ($ids_plugin = sql_allfetsel('id_plugin', 'spip_plugins')) {
+		$ids_plugin = array_map('reset', $ids_plugin);
+		$nb_plugins = count($ids_plugins);
+		
+		foreach ($ids_plugin as $_id)
+			generer_url_entite($_id, 'plugin', '', '', true);
+	}
+	
+	return $nb_plugins;
 }
 
 
