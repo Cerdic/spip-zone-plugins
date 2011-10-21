@@ -1,2 +1,4 @@
 /*************** LOCUTIONS ETRANGERES */
-.champ div [lang], .champ span [lang], .markItUpPreview div [lang], .markItUpPreview span [lang] { font-style: italic; }
+.champ span[lang], .markItUpPreview span[lang] { background-color: #eef; }
+.champ div[lang], .markItUpPreview div[lang] { background-color: #eef; }
+.champ div[lang]:after, .champ span[lang]:after, .markItUpPreview div[lang]:after, .markItUpPreview span[lang]:after { content: " [" attr(lang) "] "; color:#009;  font-size: 0.7em; position: relative; top: -0.6em; }
