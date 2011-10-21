@@ -95,8 +95,12 @@ function gmap_get_all_types()
 			"spip_gmap_types.visible AS visible",
 			"spip_gmap_types.priorite AS priorite",
 			"count(points.id_point) AS nb_points"),
-		"spip_gmap_types LEFT JOIN spip_gmap_points AS points ON spip_gmap_types.id_type_point = points.id_type_point",
+		"spip_gmap_types".
+		" LEFT JOIN spip_gmap_points AS points ON spip_gmap_types.id_type_point = points.id_type_point",
 		"", "spip_gmap_types.id_type_point", "spip_gmap_types.id_type_point");
+	// L'alias sur le nom de la table spip_gmap_points est nécessaire pour contourner une faille de 
+	// spip dans la transposition des nom de tables : un nom de table précédent d'une parenthèse
+	// n'est pas transposé (cf. _SQL_PREFIXE_TABLE dans ecrire/req/mysql.php).
 	while ($row = sql_fetch($rowset))
 		$types[] = $row;
 	return $types;

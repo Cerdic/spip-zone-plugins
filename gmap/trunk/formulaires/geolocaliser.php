@@ -385,17 +385,23 @@ function gmap_get_siblings_markers($id, $table, $limit = 6, $bSameParent = false
             ($row = sql_fetch($rowset)))
         {
             // Requête pour récupérer les articles géoréférencés et espacés de moins d'une semaine
-			$where = array("spip_articles.id_article<>" . $id);
+			$where = array("articles.id_article<>" . $id);
 			if ($bSameParent === true)
-				$where[] = "spip_articles.id_rubrique=" . $row['id_rubrique'];
+				$where[] = "articles.id_rubrique=" . $row['id_rubrique'];
 			$rowset = sql_select(
 				array(
-					"spip_articles.id_article AS id", "spip_articles.titre AS titre", "spip_articles.date AS date",
-					"spip_gmap_points.latitude AS coord_lat", "spip_gmap_points.longitude AS coord_long", "spip_gmap_points.zoom AS zoom", "spip_gmap_types.nom AS type",
-					"ABS(DATEDIFF('" . $row['date'] . "', spip_articles.date)) AS distdate"),
-				"spip_articles JOIN spip_gmap_points_liens ON (spip_articles.id_article = spip_gmap_points_liens.id_objet AND spip_gmap_points_liens.objet = 'article') JOIN spip_gmap_points ON spip_gmap_points.id_point = spip_gmap_points_liens.id_point JOIN spip_gmap_types ON spip_gmap_points.id_type_point = spip_gmap_types.id_type_point",
+					"articles.id_article AS id", "articles.titre AS titre", "articles.date AS date",
+					"points.latitude AS coord_lat", "points.longitude AS coord_long", "points.zoom AS zoom", "types.nom AS type",
+					"ABS(DATEDIFF('" . $row['date'] . "', articles.date)) AS distdate"),
+				"spip_articles AS articles".
+				" JOIN spip_gmap_points_liens AS liens ON (articles.id_article = liens.id_objet AND liens.objet = 'article')".
+				" JOIN spip_gmap_points AS points ON points.id_point = liens.id_point".
+				" JOIN spip_gmap_types AS types ON points.id_type_point = types.id_type_point",
 				$where,
 				"", "distdate ASC", $limit);
+			// L'alias sur les noms des tables est nécessaire pour contourner une faille de spip dans la
+			// transposition des nom de tables : un nom de table précédent d'une parenthèse n'est pas
+			// transposé (cf. _SQL_PREFIXE_TABLE dans ecrire/req/mysql.php).
 			while ($row = sql_fetch($rowset))
 			{
 				if ($markers == NULL)
