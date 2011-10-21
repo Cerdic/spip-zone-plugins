@@ -98,8 +98,9 @@ function formulaires_spip_listes_inscription_verifier_dist ($id_liste='')
  * - envoie un mail de confirmation
  * @return array
  */
-function formulaires_spip_listes_inscription_traiter_dist ($id_liste = '') {
-	
+function formulaires_spip_listes_inscription_traiter_dist ($id_liste = '')
+{
+	//spiplistes_debug_log ('formulaires_spip_listes_inscription_traiter_dist: '.$id_liste);
 	/**
 	 * Un abonné doit etre enregistre
 	 * dans spip_auteurs,
@@ -169,6 +170,12 @@ function formulaires_spip_listes_inscription_traiter_dist ($id_liste = '') {
 		/**
 		 * Si le compte n'existe pas, le créer
 		 */
+		$pass = creer_pass_aleatoire(8, $abonne['email']);
+		//$val['zepass'] = $pass;
+		//$val['mdpass'] = md5($pass);
+		$val['pass'] = generer_htpass($pass);
+		$val['login'] = $val['email'];
+				
 		if ($id_auteur = spiplistes_auteurs_auteur_insertq ($val))
 		{
 			spiplistes_format_abo_modifier ($id_auteur, $format);

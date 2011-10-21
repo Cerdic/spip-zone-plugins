@@ -86,6 +86,10 @@
 </p>
 ]
 
+[(#ENV{statut}|=={aconfirmer}|?{' ',''})
+[<p><:spiplistes:definir_votre_pass:>, 
+	<a href="#URL_SITE_SPIP/spip.php?page=spip_pass&p=(#ENV{cookie_oubli})"><:spiplistes:_cliquez_lien_formulaire:></a>.</p>]
+]
 
 [<p>(#ENV*{texte})</p>]
 

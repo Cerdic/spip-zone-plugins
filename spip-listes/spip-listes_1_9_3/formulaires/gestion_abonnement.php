@@ -27,8 +27,6 @@ function formulaires_gestion_abonnement_charger_dist($id_liste='')
 	
 	if ($auteur = spiplistes_auteur_cookie_ou_session($d))
 	{
-		spiplistes_debug_log('FGA a: '.$auteur);
-	
 		$id_auteur = $auteur['id_auteur'];
 		$contexte['id_auteur'] = intval($id_auteur);
 		$contexte['format'] = spiplistes_format_abo_demande($id_auteur);

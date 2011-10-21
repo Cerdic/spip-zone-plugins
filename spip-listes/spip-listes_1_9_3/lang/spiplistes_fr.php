@@ -27,6 +27,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 // action/spiplistes_supprimer_abonne.php
 // balise/formulaire_abonnement.php
 // formulaires/spip_listes_inscriptions.php
+// patrons/messages_abo/standard.html
 , 'email_incorrect' => 'Adresse mail incorrecte.'
 , 'inscription_liste_f' => 'Vous avez choisi de recevoir les courriers adress&#233;s &#224; la liste suivante en format @f@ : '
 , 'inscription_listes_f' => 'Vous avez choisi de recevoir les courriers adress&#233;s aux listes suivantes en format @f@ : '
@@ -36,6 +37,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'liste_dispo_site_' => 'Liste de diffusion disponible sur ce site : '
 , 'listes_dispos_site_' => 'Listes de diffusion disponibles sur ce site : '
 , 'desole_pas_de_liste' => 'D&#233;sol&#233;, il n&#8217;y a pas de liste de diffusion disponible pour le moment.'
+, 'definir_votre_pass' => 'Pour d&#233;finir votre mot de passe, '
 , 'pour_vous_abonner' => 'Pour vous abonner aux listes de diffusion'
 // obsolete
 , 'abonnement_mail_passcookie' => '
