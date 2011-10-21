@@ -277,7 +277,7 @@ function plugin2balise_lien($url, $nom='lien', $sep="\n\t") {
 // --> A voir plus tard
 function plugin2balise_nom($texte) {
 	$t = traiter_multi($texte);
-	$res = ($t['fr']) ? "\n\t<nom>" . $t['fr'] . "</nom>" : '';
+	$res = ($t['fr']) ? "\n\t<nom>" . trim($t['fr']) . "</nom>" : '';
 
 	return $res ? "\n$res" : '';
 }
@@ -325,17 +325,23 @@ function plugin2balise_copy($texte, $balise) {
 		// -- soit sous la forme d'un raccourci SPIP
 		// Dans les deux cas on garde preferentiellement le contenu de l'ancre ou du raccourci
 		// si il existe
+		$href = $mail = '';
 		if (preg_match('@<a[^>]*href=(\W)(.*?)\1[^>]*>(.*?)</a>@', $v, $r)) {
 			$href = " lien=\"" . $r[2] ."\"";
 			$v = str_replace($r[0], $r[3], $v);
-		} elseif (preg_match(_RACCOURCI_LIEN,$v, $r)) {
-			$href = " lien=\"" . $r[4] ."\"";
+		} 
+		elseif (preg_match(_RACCOURCI_LIEN,$v, $r)) {
+			if (preg_match('/([^\w\d._-]*)(([\w\d._-]+)@([\w\d.-]+))/', $r[4], $m))
+				$mail = " mail=\"" . $r[4] ."\"";
+			else
+				$href = " lien=\"" . $r[4] ."\"";
 			$v = ($r[1]) ? $r[1] : str_replace($r[0], '', $v);
-		} else 
+		} 
+		else 
 			$href = '';
 		
 		// On detecte ensuite un mail eventuel
-		if (preg_match('/([^\w\d._-]*)(([\w\d._-]+)@([\w\d.-]+))/', $v, $r)) {
+		if (!$mail AND preg_match('/([^\w\d._-]*)(([\w\d._-]+)@([\w\d.-]+))/', $v, $r)) {
 			$mail = " mail=\"$r[2]\"";
 			$v = str_replace($r[2], '', $v);
 			if (!$v) {
@@ -345,9 +351,8 @@ function plugin2balise_copy($texte, $balise) {
 				else
 					$v = ucfirst($r[3]);
 			}
-		} else 
-			$mail = '';
-		
+		}
+
 		// On detecte aussi si le bloc texte en cours contient une eventuelle licence
 		// -- cela generera une balise licence et non auteur
 		//    cette heuristique n'est pas deterministe car la phrase de licence n'est pas connue
@@ -391,7 +396,7 @@ function plugin2balise_copy($texte, $balise) {
 
 // --------------------- BALISE DE TRADUCTION -----------------------
 //
-// - traduire : déclaratif des modules de langue
+// - traduire : declaratif des modules de langue
 // --> A RAJOUTER EVENTUELLEMENT :  TOUS LES MODULES EXISTANTS + LE MODULE PAQUET
 function plugin2balise_traduire($D) {
 	$res = '';
