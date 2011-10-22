@@ -8,6 +8,8 @@
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
+include_spip('public/spip_bonux_criteres');
+include_spip('public/spip_bonux_balises');
 
 /**
  * une fonction pour generer une balise img a partir d'un nom de fichier
