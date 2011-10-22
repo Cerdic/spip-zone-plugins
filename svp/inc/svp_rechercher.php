@@ -57,6 +57,13 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $versio
 			}
 		}
 	}
+	else {
+		if ($ids_paquets = sql_allfetsel('id_paquet', 'spip_paquets')) {
+			$ids_paquets = array_map('reset', $ids_paquets);
+			foreach ($ids_paquets as $_id)
+				$scores[$_id] = 0;
+		}
+	}
 
 	// Maintenant, on continue la recherche en appliquant, sur la liste des id de paquets,
 	// les filtres complementaires : categorie, etat, exclusions et compatibilite spip
