@@ -7,8 +7,8 @@
 	logo="chess32.png"
 	documentation="http://www.spip-contrib.net/Plugin-Chess"
 >
-	<nom>Chess</nom>
-	<!-- Pour voir des parties d'échecs avec les fichiers pgn -->
+	<nom>Echecs</nom>
+	<!-- Pour afficher des parties d'échecs au format pgn -->
 
 	<auteur>Sébastien Boureux</auteur>
 	<auteur>Jacques Bouthier</auteur>
