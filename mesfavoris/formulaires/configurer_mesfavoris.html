@@ -7,15 +7,13 @@ div.choix img { vertical-align: top; margin: 0 5px 10px; }
 </style>
 
 <div class="formulaire_spip formulaire_cfg formulaire_#FORM">
+	<h3 class="titrem"><:mesfavoris:legend_formulaire_public:></h3>
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	
 <form method="post" action="#ENV{action}">
 <div>
 #ACTION_FORMULAIRE{#ENV{action}}
-<ul>
-<li class="fieldset">
-	<h3 class="legend"><:mesfavoris:legend_formulaire_public:></h3>
 	<ul>
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{espaceprive}}
 		<li class="editer_style_formulaire[ (#GET{erreurs}|oui)erreur]">
@@ -38,12 +36,9 @@ div.choix img { vertical-align: top; margin: 0 5px 10px; }
 			</div>
 		</li>
 	</ul>		
-</li>
-
-</ul>
-<p class="boutons">
-	<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
-</p>
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+	</p>
 </div>
 </form>
 </div>

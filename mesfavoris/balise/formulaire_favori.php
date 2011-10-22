@@ -30,7 +30,7 @@ function balise_FORMULAIRE_FAVORI ($p) {
 	);
 }
 
-function balise_FORMULAIRE_FAVORI_stat($args, $filtres) {
+function balise_FORMULAIRE_FAVORI_stat($args) {
 	// si on force les parametres par #FORMULAIRE_FAVORI{article,12}
 	// on enleve les parametres calcules
 	if (isset($args[3])) {
