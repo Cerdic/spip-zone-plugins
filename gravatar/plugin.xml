@@ -4,6 +4,12 @@
 	<icon>images/gravatar-64.png</icon>
 	<version>1.2.1</version>
 	<etat>stable</etat>
+	<slogan>
+		<multi>
+		[fr]Afficher le Gravatar d'un auteur ou d'un contributeur de forum
+		[en]Display Gravatar for author or forum poster
+		</multi>
+	</slogan>
 	<description>
 		<multi>
 			[fr]Permet d'utiliser un cache pour stocker les gravatars.
