@@ -16,7 +16,7 @@
 **/
 function association_objets_extensibles($objets){
 	return array_merge($objets, array(
-		'membres' => _T('asso:membres'),
+		'spip_asso_membres' => _T('asso:membres'),
 		
 	));
 }
