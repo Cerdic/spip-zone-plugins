@@ -55,6 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'les_paniers' => 'Les paniers de',
 	'liste_amapiens' => 'Liste des amapiens',
 	'liste_amapiens_enregistres'  => 'Liste des amapiens enregistrés',
+	'liste_livraisons' => 'Liste des livraisons',
 	'liste_paniers' => 'Liste des paniers',
 	'liste_paniers_distribuer_le' => 'Liste des paniers à distribuer le',
 	'livraison' => 'Livraison',
