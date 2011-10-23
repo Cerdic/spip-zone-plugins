@@ -8,7 +8,7 @@
 	<input type='hidden' name='id_amap_livraison' value='#ENV{id_amap_livraison}' />
 		<ul>
 			[(#SAISIE{date_distributions, date_livraison, label=<:amap:date_distribution:>, obligatoire=oui})]
-			[(#SAISIE{textarea, contenu_panier, label=<:amap:contenu_panier:>, obligatoire=oui, rows=10, cols=58})]
+			[(#SAISIE{textarea, contenu_panier, label=<:amap:contenu_panier:>, explication=<:amap:contenu_panier_explication:>, obligatoire=oui, rows=10, cols=58})]
 		</ul>
 	<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
