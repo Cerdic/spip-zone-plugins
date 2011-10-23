@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'date_distribution' => 'Date de la distribution',
+	'date_livraison' => 'Date de la livraison',
 	'distribution_paniers' => 'Distribution des paniers du @nb@',
 
 	// E
@@ -48,6 +49,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'impression_explication' => 'Seulement les dates contenant au minimum un panier sont cliquables et ouvrent une nouvelle fenêtre.',
 
 	// L
+	'les_livraisons' => 'Les livraisons',
+	'les_livraisons_effectuees' => 'Les livraisons déjà effectuées',
 	'les_paniers' => 'Les paniers de',
 	'liste_amapiens' => 'Liste des amapiens',
 	'liste_amapiens_enregistres'  => 'Liste des amapiens enregistrés',

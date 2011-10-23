@@ -87,6 +87,8 @@ function amap_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['amap_paniers'] = 'amap_paniers';
 	//-- filtre date
 	$interface['table_date']['amap_paniers'] = 'date_distribution';
+	//-- Savoit traiter "_ " en <br />
+	$interface['table_des_traitements']['CONTENU_PANIER']['amap_livraisons'] = _TRAITEMENT_RACCOURCIS;
 	return $interface;
 }
 
