@@ -1,11 +1,15 @@
 [(#AUTORISER{configurer}|sinon_interdire_acces)]
 <h1 class="grostitre"><:icone_admin_plugin:></h1>
 
-<div class="onglets_simple clearfix">
+
+[(#REM) <!-- Barre d'onglets de premier niveau : on reste dans l'onglet ajouter --> ]
+[(#VAL{plugins}|barre_onglets{charger_plugin})]
+
+[(#REM) <!-- Barre d'onglets de second niveau de ajouter : rechercher / depots --> ]
+<div class="onglets_simple second clearfix">
 	<ul>
-		<li><a[ href="(#URL_ECRIRE{admin_plugin}|parametre_url{voir, tous})"]>Maintenir les plugins du site</a></li>
-		<li><strong><:plugin_titre_automatique_ajouter:></strong></li>
-		<li><a[ href="(#URL_ECRIRE{depots})"]><:svp:onglet_depots:></a></li>
+		<li><strong><:svp:titre_plugins:></strong></li>
+		<li><a[ href="(#URL_ECRIRE{depots})"]><:svp:titre_depots:></a></li>
 	</ul>
 </div>
 
