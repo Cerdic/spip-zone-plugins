@@ -1,0 +1,22 @@
+		<BOUCLE_art(ARTICLES){id_article ?}{id_rubrique ?}{id_secteur ?}{id_mot ?}{id_auteur ?}{recherche ?}{0, #ENV{limit}}{","}><BOUCLE_gis(GIS){id_article}{","}>
+		{"type": "Feature",
+		"geometry": {"type": "Point", "coordinates": [#LON, #LAT]},
+		"properties": {
+			"id":"#ID_GIS",
+			"infoBubble":[(#TITRE|sinon{#_art:TITRE}|supprimer_numero|json_encode)],
+			"description":[(#DESCRIPTIF|sinon{#_art:DESCRIPTIF}|json_encode)][(#SET{logo_doc,''})]
+			[(#LOGO_GIS|oui)
+			[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{32,32}|image_recadre{32,32}})]]
+			[(#LOGO_GIS|non)
+			[(#CHEMIN{images/marker_defaut.png}|oui)
+				[(#SET{logo_doc,#CHEMIN{images/marker_defaut.png}|image_passe_partout{32,32}|image_recadre{32,32}})]
+			]]
+			[(#GET{logo_doc}|oui)
+			#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
+			#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
+			#SET{icon_anchorPoint,''}
+			[,"icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
+			"iconSize": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)],
+			"iconAnchor": [(#VAL{91}|chr)][(#GET{icon_w}|div{2})],[(#GET{icon_h})][(#VAL{93}|chr)]
+		]}
+		}</BOUCLE_gis></BOUCLE_art>

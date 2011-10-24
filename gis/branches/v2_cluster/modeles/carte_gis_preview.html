@@ -1,0 +1,76 @@
+<BOUCLE_gis(GIS){objet ?}{id_objet ?}{id_gis ?}{0,1}>
+<div id="map_preview" class="carte_gis" style="width: 100%; height: 150px;"></div>
+
+<script type="text/javascript">
+<!--
+[(#CONFIG{gis/api}|=={cloudmade}|oui)
+var cloudmade_key = '#CONFIG{gis/api_key_cloudmade}';]
+
+(function($){
+	var init_map_preview = function() {
+		var map_preview;
+		var map_preview_container = 'map_preview';
+		var marker;
+		map_preview = new mxn.Mapstraction(map_preview_container,'[(#REM|gis_api_utilisee)]');
+		
+		map_preview.addControls({
+			pan: true,
+			zoom: '[(#ENV{control,large})]',
+		});
+		
+		map_preview.setCenterAndZoom(new mxn.LatLonPoint([(#LAT)],[(#LON)]),[(#ZOOM|sinon{#CONFIG{gis/zoom,0}})]);
+
+		<BOUCLE_points(GIS){id_objet}{objet}>
+		var data = {
+			"type": "FeatureCollection",
+			"features": [
+				{"type": "Feature",
+					"geometry": {"type": "Point", "coordinates": [#LON, #LAT]},
+					"id":"#ID_GIS",
+					"title":[(#TITRE|supprimer_numero|json_encode)],
+					"description":[(#DESCRIPTIF|json_encode)][,(#LOGO_GIS|oui)
+					[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{28,28}|image_recadre{28,28}|image_recadre{32,32,center}|image_aplatir{jpg,ffffff}})]
+					#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
+					#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
+					["icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
+					"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)]
+					]
+				}]
+		}
+		map_preview.addJSON(data);
+		</BOUCLE_points>
+		[(#TOTAL_BOUCLE|>{1}|oui)
+			map_preview.autoCenterAndZoom();
+		]
+		</B_points>
+		<BOUCLE_point(GIS){id_gis}>
+		var data = {
+			"type": "FeatureCollection",
+			"features": [
+				{"type": "Feature",
+					"geometry": {"type": "Point", "coordinates": [#LON, #LAT]},
+					"id":"#ID_GIS",
+					"title":[(#TITRE|supprimer_numero|json_encode)],
+					"description":[(#DESCRIPTIF|json_encode)][,(#LOGO_GIS|oui)
+					[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{28,28}|image_recadre{28,28}|image_recadre{32,32,center}|image_aplatir{jpg,ffffff}})]
+					#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
+					#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
+					["icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
+					"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)]
+					]
+				}]
+		}
+		map_preview.addJSON(data);
+		</BOUCLE_point>
+		<//B_points>
+	}
+
+	$(function(){
+		init_map_preview();
+		onAjaxLoad(init_map_preview);
+	});
+
+})(jQuery);
+-->
+</script>
+</BOUCLE_gis>

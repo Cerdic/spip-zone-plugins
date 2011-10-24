@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>Cluster - [(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|attribut_html)" />]
+<INCLURE{fond=inc-head}>
+<meta name="robots" content="none" />
+</head>
+
+<body class="page_plan">
+<div id="page">
+
+<h1>Fais péter mémé !</h1>
+
+<p>Ici on utilise le code de http://www.appelsiini.net/2008/11/introduction-to-marker-clustering-with-google-maps pour gérer des clusters côté serveur.</p>
+
+[(#MODELE{carte_gis,objets=articles,limit=50000,cluster=oui})]
+
+<p>La même sans cluster</p>
+
+[(#MODELE{carte_gis,id_map=2,objets=articles,limit=50000})]
+
+</div><!--#page-->
+</body>
+</html>
