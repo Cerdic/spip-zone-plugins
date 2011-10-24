@@ -52,18 +52,20 @@ return $flux;
 /*Modifie l'affichage de la rubrique dans l'espace interne*/
  function trad_rub_afficher_contenu_objet($args){
     if ($args["args"]["type"] == "rubrique") {
+		
+		// faire en sorte que la barre s'affiche en dessous de la prévisualisation
      	$data=$args["data"] ;
      	$args["data"] ='';
-	 $contexte=array(
-		'id_rubrique'=>$args['args']['id_objet'],
-		'voir'=>_request('voir'),
-		'id_trad'=>_request('voir'),			    
-		);	
-	$contenu .= recuperer_fond("prive/editer/barre_traductions_rubrique",
-	$contexte,array('ajax'=>true));
-    	$contenu .= recuperer_fond('prive/contenu/rubrique',$args['args']['contexte']);
-        $args["data"] .= $contenu;
- 	$args["data"] .= $data;       
+		$contexte=array(
+			'id_rubrique'=>$args['args']['id_objet'],
+			'voir'=>_request('voir'),
+			'id_trad'=>_request('voir'),			    
+			);	
+		$contenu .= recuperer_fond("prive/editer/barre_traductions_rubrique",$contexte,array('ajax'=>true));
+		// on affiche la bare
+	    $args["data"] .= $contenu;
+		// puis le reste    
+	 	$args["data"] .= $data;       
     }
     return $args;
 }
