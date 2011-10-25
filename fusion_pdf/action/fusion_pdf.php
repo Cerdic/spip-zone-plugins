@@ -28,7 +28,8 @@ function action_fusion_pdf_dist($arg=null) {
 
 function fusion_pdf_post($id_document_parent, $interval, $prefix,$objet,$id_objet){
 	
-	$titre=sql_getfetsel('titre', 'spip_'.$objet.'s', "id_$objet=".$id_objet);	
+	$titre=sql_getfetsel('titre', 'spip_'.$objet.'s', "id_$objet=".$id_objet);
+	include_spip('inc/fusionpdf_fonctions');	
 	$fichier_propre=titrature($titre,$prefix).'.pdf';
 	$outputpdf=_DIR_IMG.'pdf/'.$fichier_propre;
 	
