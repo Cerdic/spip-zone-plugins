@@ -108,7 +108,7 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 			$id_vignette = sql_insertq('spip_documents',$champsVignette);
 			if($id_vignette) $champs['id_vignette'] = $id_vignette;
 		}
-		else{ spip_log("Echec du lien vers le document $logoDocument, abandon"); return $champs; }
+		else{ spip_log("Echec de l'insertion du logo $logoDocument pour la video $document","Plugin Vidéo(s)"); }
 	}
 	
 	$document = sql_insertq('spip_documents',$champs);
