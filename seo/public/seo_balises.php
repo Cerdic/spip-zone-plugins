@@ -47,17 +47,16 @@ function calculer_balise_SEO_META_TAGS(){
  * Renvoyer la valeur de la meta appelée (sans balise)
  */
 function balise_SEO_META_BRUTE($p){
-	return calculer_balise_META_BRUTE($p);
-}
-function calculer_balise_META_BRUTE($p){	
 	$_nom = str_replace("'","",interprete_argument_balise(1,$p));
-	$retour = generer_meta_brute($_nom);
-
-	$p->code = "'$retour'";	
+    $p->code = "calculer_balise_META_BRUTE($_nom)";
 	$p->interdire_scripts = false;
-	return $p;
+    return $p;
 }
-
+function calculer_balise_META_BRUTE($_nom){	
+	$retour = generer_meta_brute($_nom);
+	$retour = htmlentities($retour);
+	return $retour;
+}
 
 /**
  * #SEO_GWT

@@ -14,7 +14,7 @@
 	<licence>(c) 2009 GPL v2</licence>
 	<etat>test</etat>
 	
-	<version>1.5.0</version>
+	<version>1.5.1</version>
 	<version_base>1.0.1</version_base>
 
 	<install>base/seo_installation.php</install>
