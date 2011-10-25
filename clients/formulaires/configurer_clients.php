@@ -18,6 +18,7 @@ return array(
 			'options' => array(
 				'nom' => 'elm',
 				'label' => _T('clients:label_elm'),
+				'choix' => 'ligne',
 				'defaut' => array('complement', 'pays', 'obli_pays'),
 				'datas' => array(
 							'civilite' => _T('contacts:label_civilite'),
