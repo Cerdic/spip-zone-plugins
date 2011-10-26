@@ -29,7 +29,14 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 		[<width>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{width})</width>]
 	</image>
 ]
-#SET{id_rubrique,#ENV{id_rubrique,#CONFIG{rssconfig/rubriques_a_inclure}|explode{','}}}
+
+[(#REM) Si la saisie des rubriques a ete faites avec le selecteur, on utilise le filtre picker_selected
+			sinon, on explode la chaine saisie ]
+#SET{rubriques_a_inclure,#CONFIG{rssconfig/rubriques_a_inclure}|picker_selected{rubrique}}
+[(#GET{rubriques_a_inclure}|count|=={0}|oui)
+	#SET{rubriques_a_inclure,#CONFIG{rssconfig/rubriques_a_inclure}|explode{','}}]
+
+#SET{id_rubrique,#ENV{id_rubrique,#GET{rubriques_a_inclure}}}
 <INCLURE{fond=inclure/rss-liste-items}{env}{id_rubrique=#GET{id_rubrique}}>
 
 </channel>

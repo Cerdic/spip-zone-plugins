@@ -96,8 +96,14 @@
 				<ul>
 					<li class="editer_rubriques[ (#ENV**{erreurs}|table_valeur{rubriques}|oui)erreur]">
 						<label for='rubriques_a_inclure'><:rssconfig:label_rubriques_a_inclure:></label>
-						<p class="explication"><:rssconfig:explication_rubriques_a_inclure:></p>
-						<input type="text" name="rubriques_a_inclure" class="text" id="rubriques_a_inclure" value="#ENV*{rubriques_a_inclure}" />
+                  [(#REM) Si le selecteur de rubrique est present (dans bonux pour spip2, dans le core pour spip3), on l'utilise) ]
+                  [(#CHEMIN{formulaires/selecteur/rubriques.html}|oui) 
+							<p class="explication"><:rssconfig:explication_rubriques_a_inclure_selecteur:></p>
+							<INCLURE{fond=formulaires/selecteur/rubriques}{selected=#ENV*{rubriques_a_inclure}}{name=rubriques_a_inclure}>
+						][(#CHEMIN{formulaires/selecteur/rubriques.html}|non) 
+							<p class="explication"><:rssconfig:explication_rubriques_a_inclure:></p>
+							<input type="text" name="rubriques_a_inclure" class="text" id="rubriques_a_inclure" value="#ENV*{rubriques_a_inclure}" />
+                  ]
 					</li>
 				</ul>
          </fieldset>

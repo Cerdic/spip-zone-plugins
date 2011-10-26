@@ -4,7 +4,7 @@
 	<auteur>[Joseph->http://www.spip-contrib.net/Joseph]</auteur>
 	<icon>images/rssconfig-128.png</icon>
 	<licence>GNU/GPL</licence>
-	<version>1.1.0</version>
+	<version>1.1.1</version>
 	<etat>test</etat>
 	<description>Ce plugin vous permet de personnaliser le fonctionnement de votre flux RSS &#224; l&#8217;aide d&#8217;un formulaire dans l&#8217;espace priv&#233;.</description>
 	<lien>http://www.spip-contrib.net/?article3793</lien>
