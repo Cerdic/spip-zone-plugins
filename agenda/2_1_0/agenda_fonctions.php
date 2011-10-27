@@ -111,5 +111,22 @@ function balise_NB_INSCRITS_dist($p) {
         return $p;
 }
 
+/**
+ * Raccourcis [->evenement12] et [->evt12]
+ */
+
+function generer_url_evenement($id, $args='', $ancre='') {
+	return array('evenement', $id);
+}
+
+function generer_url_ecrire_evenement($id, $args='', $ancre='', $statut='', $connect='') {
+	$a = "id_evenement=" . intval($id);
+
+	$h = ($connect)
+	? generer_url_entite_absolue($id, 'evenement', $args, $ancre, $connect)
+	: (generer_url_ecrire('agenda_evenements',$a . ($args ? "&$args" : ''))
+		. ($ancre ? "#$ancre" : ''));
+	return $h;
+}
 
 ?>
