@@ -1,47 +1,18 @@
 <plugin>
 	<nom>Publication ouverte</nom>
-	<version>0.5</version>
+	<slogan>Permettre &#224; tout visiteur de publier sans authentification</slogan>
+	<version>1.0.0</version>
 	<etat>stable</etat>
-	<auteur>Polez k&#233;vin
-		- [contact->mailto:edd@no-log.org]
-		- [site->http://www.trevise.org]
-		- &#169; 2009-2010 - Distribu&#233; sous licence GNU/GPL
-	</auteur>
-	<description>
-		{{Plugin Publication Ouverte pour site Spip.}} <br />
-		
-		<p>Le plugin "Publication Ouverte" a pour but de fournir une interface de publication d'article publique et anonyme permettant &#224; n'importe quel visiteur d'un site spip de publier un article sans aucune authentification. Cette m&#233;thode de gestion/cr&#233;ation de contenu est appel&#233; "Publication ouverte" (ou open-publishing en anglais). La publication ouverte est pratiqu&#233; par le r&#233;seau indym&#233;dia, ainsi que de nombreux autres sites d'informations alternatives.</p>
-		
-		
-		{{Principe de fonctionnement}}
-		
-		<p>Le plugin "Publication Ouverte" fournit [un formulaire accessible par les visiteurs d'un site
-		SPIP->../spip.php?page=publication_ouverte], qu'ils soient ou non enregistr&#233; comme auteur. Ce formulaire permet d'&#233;crire un article sans devoir poss&#233;der un compte sur le site en question. Pour cela, tous les articles &#233;crits via ce formulaire serons attribu&#233; &#224; un auteur par d&#233;faut, commun&#233;ment appel&#233; auteur "anonyme". Il est aussi fortement conseill&#233; de d&#233;sactiver le stockage des IP de SPIP.</p>
-		
-		
-		{{Procedure de mise &#224; jour : }}
-		
-		<p>Pour passer de Publication Ouverte 0.4 &#224; Publication
-		Ouverte 0.5, utilisez le lien ["mise &#224; jour"->spip.php?exec=op_base] ci-dessous, et suivez les instructions.</p>
-	
-		{{Documentation compl&#232;te : }}
-		
-		<p>Pour obtenir une documentation compl&#232;te sur le fonctionnement et la configuration de ce plugin, utilisez le lien ["Documentation"->http://www.spip-contrib.net/Plugin-Publication-Ouverte] ci-dessous.</p>
-	
-		{{Interface de configuration : }}
-		
-		<p>Pour configurer le fonctionnement du plugin Publication Ouverte, utilisez le lien ["Configuration"->.?exec=cfg&amp;cfg=op] ci-dessous.</p>
-		
+	<auteur>[Polez K&#233;vin->mailto:edd@no-log.org]</auteur>
+	<licence>&#169; 2009-2010 - GNU/GPL</licence>
+	<description>		
+		Le plugin "Publication Ouverte" a pour but de fournir une interface de publication d'article publique et anonyme permettant &#224; n'importe quel visiteur d'un site spip de publier un article sans aucune authentification. Cette m&#233;thode de gestion/cr&#233;ation de contenu est appel&#233; "Publication ouverte" (ou open-publishing en anglais). La publication ouverte est pratiqu&#233; par le r&#233;seau indym&#233;dia, ainsi que de nombreux autres sites d'informations alternatives.
 	</description>
-	<lien>[Documentation->http://www.spip-contrib.net/Plugin-Publication-Ouverte], [Configuration->.?exec=cfg&amp;cfg=op], [mise &#224; jour->.?exec=op_base]</lien>
+	<lien>http://www.spip-contrib.net/Plugin-Publication-Ouverte</lien>
 	<prefix>op</prefix>
-	<options>
-		op_options.php
-	</options>
-	<fonctions>
-		op_fonctions.php
-	</fonctions>
-	<necessite id="SPIP" version="[2.1;]" />
+	<options>op_options.php</options>
+	<fonctions>op_fonctions.php</fonctions>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id='cfg' version='[1.14.1;]' />
 	<necessite id='cextras' version='[1.0;]' />
 	<categorie>edition</categorie>
