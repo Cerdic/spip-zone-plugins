@@ -8,6 +8,10 @@
 	- lat|latit|latitude = 48.3		latitude du centre de la carte
 	- lon|lonxit|longitude = -4.7	longitude du centre de la carte
 	- zoom = 5						zoom de la carte
+	- sw_lat = lat - 10°			latitude du sud-ouest de la bounding box
+	- sw_lon = lon - 10°			longitude du sud-ouest de la bounding box
+	- ne_lat = lat + 10°			latitude du nord-est de la bounding box
+	- ne_lon = lon + 10°			longitude du nord-est de la bounding box
 	- width|largeur = 100%			largeur de la carte, 100% par defaut
 	- height|hauteur = 400px		hauteur de la carte, 400px par defaut
 	- style = non					ne pas styler la carte
@@ -34,7 +38,16 @@
 [(#REM) -- compat gis v1 -- ]
 [(#SET{lat,#ENV{lat,#ENV{latit,#ENV{latitude,#CONFIG{gis/lat,0}}}}})]
 [(#SET{lon,#ENV{lon,#ENV{lonxit,#ENV{longitude,#CONFIG{gis/lon,0}}}}})]
-
+[(#REM) On utilise la bounding box seulement si le centre n'a pas été donné et si les quatre valeurs de la bounding box sont renseignées
+    les valeurs par defaut sont "centre +/- 10°", ce qui est naze, mais c'est un cas normalement impossible
+]
+[(#ENV{lat}|ou{#ENV{lon}}|non|et{#ENV{sw_lat}}|et{#ENV{sw_lon}}|et{#ENV{ne_lat}}|et{#ENV{ne_lon}})
+	#SET{utiliser_bb, oui}
+	#SET{sw_lat,#ENV{sw_lat,#GET{lat}|moins{10}}}
+	#SET{sw_lon,#ENV{sw_lon,#GET{lon}|moins{10}}}
+	#SET{ne_lat,#ENV{ne_lat,#GET{lat}|plus{10}}}
+	#SET{ne_lon,#ENV{ne_lon,#GET{lon}|plus{10}}}
+]
 [(#REM)  
 	// todo
 	{recursive=#ENV{recursive}}
@@ -73,7 +86,13 @@ var map[(#GET{id})];
 		[(#ENV{zoom_molette,#ENV{zoom_wheel}}|!={non}|oui)
 		map[(#GET{id})].enableScrollWheelZoom();]
 		
-		map[(#GET{id})].setCenterAndZoom(new mxn.LatLonPoint(#GET{lat},#GET{lon}),#ENV{zoom,#CONFIG{gis/zoom,0}});
+		[(#GET{utiliser_bb}|non)
+		map[(#GET{id})].setCenterAndZoom(new mxn.LatLonPoint([(#GET{lat})],[(#GET{lon})]),[(#ENV{zoom,#CONFIG{gis/zoom,0}})]);
+		]
+		
+		[(#GET{utiliser_bb}|oui)
+		map[(#GET{id})].setBounds(new mxn.BoundingBox([(#GET{sw_lat})],[(#GET{sw_lon})],[(#GET{ne_lat})],[(#GET{ne_lon})]));
+		]
 
 		[(#ENV{type}|oui)
 		#SET{type,ROAD}
