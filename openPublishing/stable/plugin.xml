@@ -18,7 +18,7 @@
 		<action>OP_squelette</action>
 		<inclure>op_fonctions.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
 	<necessite id='cfg' version='[1.14.1;]' />
 	<necessite id='extras' version='[1.0;]' />
 	<categorie>edition</categorie>
