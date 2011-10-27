@@ -20,10 +20,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_annuler' => 'Annuler',
 	'bouton_supprimer' => "Supprimer",
-	
+
 	// C
 	'confirm_suppression_inscription' => "Voulez-vous vraiment supprimer cette inscription ?",
 	'creer_evenement' => "Cr&eacute;er un &eacute;v&eacute;nement",
+	'connexion_necessaire_pour_inscription' => "Merci de <a href='#LOGIN_PUBLIC'>vous connecter</a> pour pouvoir vous inscrire &agrave; cet &eacute;v&eacute;nement.",
 
 	// E
 	'erreur_article_manquant' => 'Vous devez indiquer un article',
@@ -55,10 +56,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'fermer' => 'fermer',
-	
+
 	// G
 	'groupes_mots'=>'Groupes de mots-cl&eacute;',
-	
+
 	// I
 	'icone_creer_evenement' => 'Cr&eacute;er un nouvel &eacute;v&eacute;nement',
 	'item_mots_cles_association_evenements' => 'aux &eacute;v&eacute;nements',
@@ -101,7 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rubrique_desactiver_agenda' => 'D&eacute;sactiver le mode agenda pour cette rubrique',
 	'rubrique_sans_gestion_evenement' => 'Le mode agenda n\'est pas activ&eacute; pour cette rubrique',
 	'rubrique_mode_agenda' => 'Le mode agenda est activ&eacute; pour cette rubrique et sa branche',
-	
+
 	// S
 	'sans_titre' => "(sans titre)",
 
@@ -112,7 +113,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_cadre_modifier_evenement' => 'Modifier un &eacute;v&eacute;nement',
 	'titre_sur_l_agenda' => "Sur l'agenda",
 	'toutes_rubriques' => 'Toutes',
-	
+
 	// U
 	'un_mot_clef' => '1&nbsp;mot-cl&eacute;',
 	'une_repetition' => '1&nbsp;r&eacute;p&eacute;tition',

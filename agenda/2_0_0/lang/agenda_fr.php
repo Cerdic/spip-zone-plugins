@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'creer_evenement' => "Cr&eacute;er un &eacute;v&eacute;nement",
 'confirm_suppression_inscription' => "Voulez-vous vraiment supprimer cette inscription ?",
+'connexion_necessaire_pour_inscription' => "Merci de <a href='#LOGIN_PUBLIC'>vous connecter</a> pour pouvoir vous inscrire &agrave; cet &eacute;v&eacute;nement.",
 
 'erreur_article_manquant' => 'Vous devez indiquer un article',
 'erreur_article_interdit' => 'Vous n\'avez pas le droit d\'associer cet &eacute;v&eacute;nement &agrave; cet article',

@@ -5,7 +5,7 @@
 	[C&eacute;dric MORIN->http://www.yterium.net], [b_b->http://www.spip-contrib.net/b_b], [romy.tetue.net->http://romy.tetue.net], [Julien Tessier->http://www.cahri.com]
 	</auteur>
 	<licence>GPL 3 - &#169; 2006-2010</licence>
-	<version>3.1.3</version>
+	<version>3.1.4</version>
 	<version_base>0.24</version_base>
 	<etat>dev</etat>
 	<description>Agenda Ev&#233;nementiel</description>
@@ -93,7 +93,7 @@
 	</bouton>
 	<chemin dir="" />
 	<chemin dir="inclure" />
-	<necessite id="SPIP" version="[3.0.0-dev;]" /> 
+	<necessite id="SPIP" version="[3.0.0-dev;]" />
 
 <!-- si le plugin fulltext est actif, il faut qu'agenda soit pris en compte avant lui pour le pipeline rechercher_liste_des_champs -->
 	<utilise id='Fulltext' version='[0.2;]' />

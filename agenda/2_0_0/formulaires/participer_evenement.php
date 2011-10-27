@@ -15,11 +15,16 @@ function formulaires_participer_evenement_charger_dist($id_evenement){
 	  OR !$row['inscription'])
 		return false;
 
+	// si anonyme, on echoue avec avertissement
+	if (!$GLOBALS['visiteur_session']['id_auteur'])
+		return array(
+			'message_erreur'=>_T('agenda:connexion_necessaire_pour_inscription'),
+			'editable'=>false
+		);
+
 	// valeurs d'initialisation
 	$valeurs['id'] = $id_evenement;
-	if ($GLOBALS['visiteur_session']['id_auteur']){
-		$valeurs['reponse'] = sql_getfetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']));
-	}
+	$valeurs['reponse'] = sql_getfetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']));
 
 	// si les places sont comptees, regarder si il en reste
 	if ($places = $row['places']){
