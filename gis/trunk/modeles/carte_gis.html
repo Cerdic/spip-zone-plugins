@@ -81,6 +81,8 @@ var map[(#GET{id})];
 	
 	var init_map[(#GET{id})] = function() {
 		var map_container = 'map[(#GET{id})]';
+
+		$('#map[(#GET{id})]').empty();
 		map[(#GET{id})] = new mxn.Mapstraction(map_container,'[(#REM|gis_api_utilisee)]');
 		
 		[(#ENV{zoom_molette,#ENV{zoom_wheel}}|!={non}|oui)
