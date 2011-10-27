@@ -348,7 +348,7 @@ function encodage($source,$doc_attente){
 		$texte .= lire_config("spipmotion/vcodec_$extension_attente") ? "vcodec=".lire_config("spipmotion/vcodec_$extension_attente")."\n":'';
 		$vcodec .= lire_config("spipmotion/vcodec_$extension_attente") ? "--vcodec ".lire_config("spipmotion/vcodec_$extension_attente") :'';
 
-		$fps_conf = (intval(lire_config("spipmotion/fps_$extension_attente","30")) > 0) ? lire_config("spipmotion/fps_$extension_attente","30") : 24;
+		$fps_conf = (intval(lire_config("spipmotion/fps_$extension_attente","30")) > 0) ? lire_config("spipmotion/fps_$extension_attente","30") : ((intval($source['framerate']) > 0) ? intval($source['framerate']) : 24);
 		if(intval($source['framerate']) && (intval($source['framerate']) < $fps_conf)){
 			$fps_num = $source['framerate'];
 		}else{
