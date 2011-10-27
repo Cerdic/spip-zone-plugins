@@ -14,7 +14,7 @@ include_spip('inc/editer');
 function formulaires_participer_evenement_charger_dist($id_evenement){
 	$valeurs = array();
 	// si pas d'evenement ou d'inscription, on echoue silencieusement
-	if (!$row = sql_fetsel('inscription,places','spip_evenements','id_evenement='.intval($id_evenement))
+	if (!$row = sql_fetsel('inscription,places','spip_evenements','id_evenement='.intval($id_evenement).' AND date_fin>NOW()')
 	  OR !$row['inscription'])
 		return false;
 
