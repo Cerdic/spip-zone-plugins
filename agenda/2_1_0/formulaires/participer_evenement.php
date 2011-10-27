@@ -2,7 +2,7 @@
 /**
  * Plugin Agenda pour Spip 2.0
  * Licence GPL
- * 
+ *
  *
  */
 
@@ -17,8 +17,13 @@ function formulaires_participer_evenement_charger_dist($id_evenement){
 	if (!$row = sql_fetsel('inscription,places','spip_evenements','id_evenement='.intval($id_evenement))
 	  OR !$row['inscription'])
 		return false;
+
+	// valeurs d'initialisation
 	$valeurs['id'] = $id_evenement;
-	
+	if ($GLOBALS['visiteur_session']['id_auteur']){
+		$valeurs['reponse'] = sql_getfetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']));
+	}
+
 	// si les places sont comptees, regarder si il en reste
 	if ($places = $row['places']){
 		$ok = sql_countsel('spip_evenements_participants','id_evenement='.intval($id_evenement)." AND reponse='oui'");
@@ -27,16 +32,14 @@ function formulaires_participer_evenement_charger_dist($id_evenement){
 		// on multiplie tout par 2 pour eviter les troncatures ($total ne sert de toute facon que dans les tests)
 		$total = 2*$ok+$peutetre;
 		if ($total>=2*$places){
-		  // dans ce cas, le formulaire est editable seulement si l'auteur a deja repondu oui ou peut-etre, et peut changer d'avis ! 
-		  // on recupere la reponse eventuelle de l'utilisateur que si on en a besoin pour le test (petite optim)
-		  $valeurs['reponse'] = sql_getfetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']));
+		  // dans ce cas, le formulaire est editable seulement si l'auteur a deja repondu oui ou peut-etre, et peut changer d'avis !
 		  if (!($valeurs['reponse']=='oui' OR $valeurs['reponse']=='?')){
 				$valeurs['editable'] = false;
 				$valeurs['message_ok'] = _T('agenda:evenement_complet');
 			}
 		}
 	}
-	
+
 	return $valeurs;
 }
 
@@ -72,7 +75,7 @@ function formulaires_participer_evenement_verifier_dist($id_evenement){
 }
 
 function formulaires_participer_evenement_traiter_dist($id_evenement){
-	
+
 	$reponse = _request('reponse');
 	if (sql_fetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']))){
 		sql_updateq('spip_evenements_participants',array('reponse'=>$reponse),'id_evenement='.intval($id_evenement).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']));
