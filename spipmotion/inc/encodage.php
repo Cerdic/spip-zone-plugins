@@ -256,8 +256,16 @@ function encodage($source,$doc_attente){
 		}
 
 		if(intval($audiochannels) >= 1){
-			$texte .= "ac=$audiochannels\n";
-			$audiochannels_ffmpeg = "--ac $audiochannels";
+			/**
+			 * Apparemment le mp3 n'aime pas trop le 5.1 channels des AC3 donc on downgrade en 2 channels en attendant
+			 */
+			if($extension_attente == 'mp3'){
+				$texte .= "ac=2\n";
+				$audiochannels_ffmpeg = "--ac 2";
+			}else{
+				$texte .= "ac=$audiochannels\n";
+				$audiochannels_ffmpeg = "--ac $audiochannels";
+			}
 		}
 	}
 
@@ -340,10 +348,11 @@ function encodage($source,$doc_attente){
 		$texte .= lire_config("spipmotion/vcodec_$extension_attente") ? "vcodec=".lire_config("spipmotion/vcodec_$extension_attente")."\n":'';
 		$vcodec .= lire_config("spipmotion/vcodec_$extension_attente") ? "--vcodec ".lire_config("spipmotion/vcodec_$extension_attente") :'';
 
-		if(intval($source['framerate']) && (intval($source['framerate']) < lire_config("spipmotion/fps_$extension_attente","30"))){
+		$fps_conf = (intval(lire_config("spipmotion/fps_$extension_attente","30")) > 0) ? lire_config("spipmotion/fps_$extension_attente","30") : 24;
+		if(intval($source['framerate']) && (intval($source['framerate']) < $fps_conf)){
 			$fps_num = $source['framerate'];
 		}else{
-			$fps_num = (intval(lire_config("spipmotion/fps_$extension_attente")) > 0) ? lire_config("spipmotion/fps_$extension_attente") : $source['framerate'];
+			$fps_num = (intval($fps_conf) > 0) ? $fps_conf : $source['framerate'];
 		}
 		$fps = "--fps $fps_num";
 
