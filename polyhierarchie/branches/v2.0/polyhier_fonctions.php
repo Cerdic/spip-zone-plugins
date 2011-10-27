@@ -192,7 +192,7 @@ function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
 	$where[] = $c;
 	
 	if ($tous!=='directs'
-	  AND in_array($boucle->type_requete,array('rubriques','articles'))){
+	  AND in_array(table_objet_sql($boucle_parent->type_requete),array_keys(lister_tables_objets_sql()))){
 		$type = objet_type($boucle->type_requete);
 		$primary = $boucle->id_table.".".$boucle->primary;
 		$sous = "sql_get_select('rl.id_objet','spip_rubriques_liens as rl',sql_in('rl.id_parent',\$b" . ($not ? ", 'NOT'" : '') . ").' AND objet=\'$type\'')";
