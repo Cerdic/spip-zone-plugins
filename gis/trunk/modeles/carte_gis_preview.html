@@ -12,7 +12,13 @@ var cloudmade_key = '#CONFIG{gis/api_key_cloudmade}';]
 		var map_preview_container = 'map_preview';
 		var marker;
 		map_preview = new mxn.Mapstraction(map_preview_container,'[(#REM|gis_api_utilisee)]');
-		map_preview.setMapType([mxn.Mapstraction.(#REM|gis_maptype_utilise)]);
+        // Pour l'API Openlayers, la methode n'existe pas
+        try {
+			map_preview.setMapType([mxn.Mapstraction.(#REM|gis_maptype_utilise)]);
+        }
+        catch(err) {
+            ;
+        }
 		
 		map_preview.addControls({
 			pan: true,

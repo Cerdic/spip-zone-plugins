@@ -103,7 +103,13 @@ var map[(#GET{id})];
 		[(#ENV{type}|=={'hybride'}|oui) #SET{maptype,HYBRID} ]
 		[(#ENV{type}|=={'relief'}|oui) #SET{maptype,PHYSICAL} ]
 		]
-		map[(#GET{id})].setMapType([mxn.Mapstraction.(#GET{maptype})]);
+        // Pour l'API Openlayers, la methode n'existe pas
+        try {
+			map[(#GET{id})].setMapType([mxn.Mapstraction.(#GET{maptype})]);
+        }
+        catch(err) {
+			;
+        }
 
 		[(#ENV{no_control,#ENV{aucun_controle}}|!={oui}|oui)
 		map[(#GET{id})].addControls({zoom: '[(#ENV{control_zoom,large})]'});]

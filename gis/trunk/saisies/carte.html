@@ -65,7 +65,13 @@ var geocoder;]
 		var map_container = 'map_[(#ENV{nom})]';
 		form_map = new mxn.Mapstraction(map_container,'[(#REM|gis_api_utilisee)]');
 		form_map.setCenterAndZoom(new mxn.LatLonPoint(#ENV{lat,#CONFIG{gis/lat,0}},#ENV{lon,#CONFIG{gis/lon,0}}),#ENV{zoom,#CONFIG{gis/zoom,0}});
-		form_map.setMapType([mxn.Mapstraction.(#REM|gis_maptype_utilise)]);
+        // Pour l'API Openlayers, la methode n'existe pas
+        try {
+			form_map.setMapType([mxn.Mapstraction.(#REM|gis_maptype_utilise)]);
+        }
+        catch(err) {
+            ;
+        }
 		form_map.addControls({
 			pan: true,
 			zoom: '#CONFIG{gis/control,large}',
