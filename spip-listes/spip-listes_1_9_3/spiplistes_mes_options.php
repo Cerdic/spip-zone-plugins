@@ -276,7 +276,7 @@ if(spiplistes_spip_est_inferieur_193() && !function_exists('autoriser_webmestre'
 }
 
 // autorise les admins et l'utilisateur a modifier son format de reception
-function autoriser_abonne_modifierformat ($faire = '', $type = '', $id_objet = 0, $qui = NULL, $opt = NULL) {
+function autoriser_abonne_modifierformat_dist ($faire = '', $type = '', $id_objet = 0, $qui = NULL, $opt = NULL) {
 	return(
 		$GLOBALS['auteur_session']['id_auteur'] == $id
 		|| $GLOBALS['auteur_session']['statut'] == '0minirezo'
@@ -284,7 +284,7 @@ function autoriser_abonne_modifierformat ($faire = '', $type = '', $id_objet = 0
 }
 
 //CP-20080610 :: autoriser la moderation d'une liste
-function autoriser_liste_moderer ($faire = '', $type = '', $id_objet = 0, $qui = NULL, $opt = NULL) {
+function autoriser_liste_moderer_dist ($faire = '', $type = '', $id_objet = 0, $qui = NULL, $opt = NULL) {
 	global 
 		$connect_statut
 		, $connect_toutes_rubriques
