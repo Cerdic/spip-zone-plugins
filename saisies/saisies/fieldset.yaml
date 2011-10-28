@@ -16,6 +16,13 @@ options:
           label: '<:saisies:option_label_label:>'
           explication: '<:saisies:option_label_explication:>'
           size: 50
+      -
+        saisie: 'input'
+        options:
+          nom: 'explication'
+          label: '<:saisies:option_explication_label:>'
+          explication: '<:saisies:option_explication_explication:>'
+          size: 50
   -
     saisie: 'fieldset'
     options:
