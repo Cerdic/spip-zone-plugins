@@ -39,6 +39,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_api_yandex' => 'Yandex', # NEW
 	'cfg_lbl_geocoder' => 'Geocoder',
 	'cfg_lbl_geolocaliser_user_html5' => 'At the creation step, center the map on the location of the user',
+    'cfg_lbl_maptype' => 'Cartografic background',
+    'cfg_lbl_maptype_carte' => 'Road',
+    'cfg_lbl_maptype_satellite' => 'Satellite',
+    'cfg_lbl_maptype_hybride' => 'Hybrid',
+    'cfg_lbl_maptype_relief' => 'Physical',
 	'cfg_titre_gis' => 'GIS',
 
 	// E
@@ -47,7 +52,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_gis_nouveau' => 'Create a new point',
 	'editer_gis_titre' => 'The geolocated points',
 	'erreur_recherche_pas_resultats' => 'No point corresponds to the searched text.',
-	'explication_api_forcee' => 'L\'API est imposée par un autre plugin ou squelette.', # NEW
+	'explication_api_forcee' => 'This API has been enforced by another plugin or template.',
+	'explication_maptype_force' => 'This cartographic background has been enforced by another plugin or template.',
 
 	// F
 	'formulaire_creer_gis' => 'Create a new geolocated point :',

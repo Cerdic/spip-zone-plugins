@@ -51,6 +51,32 @@
 			defaut=#GET{api_defaut},valeur_forcee=#GET{api_forcee},readonly=#GET{api_readonly},disable=#GET{api_disable},explication=#GET{api_explications},
 			datas=#GET{apis}})]
 
+		[(#SET{maptypes,[(#ARRAY{
+				ROAD,<:gis:cfg_lbl_maptype_carte:>,
+				SATELLITE,<:gis:cfg_lbl_maptype_satellite:>,
+				HYBRID,<:gis:cfg_lbl_maptype_hybride:>,
+				PHYSICAL,<:gis:cfg_lbl_maptype_relief:>})]})]
+
+		[(#VAL{_GIS_MAPTYPES}|defined|oui)
+			[(#EVAL{_GIS_MAPTYPES}|unserialize|is_array|oui)#SET{apis,#EVAL{_GIS_MAPTYPES}|unserialize}]
+		]
+
+		[(#SET{maptype_defaut,carte})]
+		[(#VAL{_GIS_MAPTYPES_DEFAUT}|defined|oui)
+			[(#SET{maptype_defaut,[(#EVAL{_GIS_MAPTYPES_DEFAUT})]})]
+		]
+		[(#VAL{_GIS_MAPTYPES_FORCE}|defined|oui)
+			[(#SET{maptype_readonly,readonly})]
+			[(#SET{maptype_disable,disabled})]
+			[(#SET{maptype_force,[(#EVAL{_GIS_MAPTYPES_FORCE})]})]
+			[(#SET{maptype_explications,<:gis:explication_maptype_force:>})]
+		]
+		[(#SAISIE{selection,maptype,
+			label=<:gis:cfg_lbl_maptype:>,
+			cacher_option_intro=oui,
+			defaut=#GET{maptype_defaut},valeur_forcee=#GET{maptype_force},readonly=#GET{maptype_readonly},disable=#GET{maptype_disable},explication=#GET{maptype_explications},
+			datas=#GET{maptypes}})]
+
 		[(#SAISIE{oui_non,geocoder,
 			defaut='',
 			label=<:gis:cfg_lbl_geocoder:>,
@@ -105,7 +131,8 @@
 		var map_container = 'map_config';
 		map = new mxn.Mapstraction(map_container,'[(#REM|gis_api_utilisee)]');
 		map.setCenterAndZoom(new mxn.LatLonPoint(#ENV{lat,0},#ENV{lon,0}),#ENV{zoom,0});
-		
+        map.setMapType([mxn.Mapstraction.(#REM|gis_maptype_utilise)]);
+
 		map.addControls({
 			pan: true,
 			zoom: '#ENV{control,small}',

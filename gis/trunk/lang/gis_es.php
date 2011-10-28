@@ -39,6 +39,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_api_yandex' => 'Yandex',
 	'cfg_lbl_geocoder' => 'Geocoder',
 	'cfg_lbl_geolocaliser_user_html5' => 'Centrar el mapa sobre la ubicaci&oacute;n del usuario a la creaci&oacute;n',
+	'cfg_lbl_maptype' => 'Fondo cartográfico',
+	'cfg_lbl_maptype_carte' => 'Mapa base',
+	'cfg_lbl_maptype_satellite' => 'Satelital',
+	'cfg_lbl_maptype_hybride' => 'Híbrido',
+	'cfg_lbl_maptype_relief' => 'Relieve',
 	'cfg_titre_gis' => 'GIS',
 
 	// E
@@ -48,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_gis_titre' => 'Los puntos geolocalizados',
 	'erreur_recherche_pas_resultats' => 'Ning&uacute;n punto corresponde a la b&uacute;squeda.',
 	'explication_api_forcee' => 'La API esta impuesta por un otro plugin o esqueleto.',
+	'explication_maptype_force' => 'El fondo cartográfico esta impuesto por un otro plugin o esqueleto.',
 
 	// F
 	'formulaire_creer_gis' => 'Crear un punto geolocalizado:',

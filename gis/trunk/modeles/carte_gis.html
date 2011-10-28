@@ -96,14 +96,14 @@ var map[(#GET{id})];
 		map[(#GET{id})].setBounds(new mxn.BoundingBox([(#GET{sw_lat})],[(#GET{sw_lon})],[(#GET{ne_lat})],[(#GET{ne_lon})]));
 		]
 
+		[(#SET{maptype, #REM|gis_maptype_utilise})]
 		[(#ENV{type}|oui)
-		#SET{type,ROAD}
-		[(#ENV{type}|=={'carte'}|oui) #SET{type,ROAD} ]
-		[(#ENV{type}|=={'satellite'}|oui) #SET{type,SATELLITE} ]
-		[(#ENV{type}|=={'hybride'}|oui) #SET{type,HYBRID} ]
-		[(#ENV{type}|=={'relief'}|oui) #SET{type,PHYSICAL} ]
-		map[(#GET{id})].setMapType([mxn.Mapstraction.(#GET{type})]);
+		[(#ENV{type}|=={'carte'}|oui) #SET{maptype,ROAD} ]
+		[(#ENV{type}|=={'satellite'}|oui) #SET{maptype,SATELLITE} ]
+		[(#ENV{type}|=={'hybride'}|oui) #SET{maptype,HYBRID} ]
+		[(#ENV{type}|=={'relief'}|oui) #SET{maptype,PHYSICAL} ]
 		]
+		map[(#GET{id})].setMapType([mxn.Mapstraction.(#GET{maptype})]);
 
 		[(#ENV{no_control,#ENV{aucun_controle}}|!={oui}|oui)
 		map[(#GET{id})].addControls({zoom: '[(#ENV{control_zoom,large})]'});]

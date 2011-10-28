@@ -39,6 +39,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_api_yandex' => 'Yandex', # NEW
 	'cfg_lbl_geocoder' => 'Geocoder',
 	'cfg_lbl_geolocaliser_user_html5' => 'Pri vytváraní vycentrujte mapu na polohe používateľa',
+    'cfg_lbl_maptype' => 'Fond cartographique', # NEW
+    'cfg_lbl_maptype_carte' => 'Carte', # NEW
+    'cfg_lbl_maptype_satellite' => 'Satellite', # NEW
+    'cfg_lbl_maptype_hybride' => 'Hybride', # NEW
+    'cfg_lbl_maptype_relief' => 'Relief', # NEW
 	'cfg_titre_gis' => 'GIS',
 
 	// E
@@ -48,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_gis_titre' => 'Geolokalizované body',
 	'erreur_recherche_pas_resultats' => 'Vyhľadávaného textu sa netýka žiaden bod.',
 	'explication_api_forcee' => 'L\'API est imposée par un autre plugin ou squelette.', # NEW
+	'explication_maptype_force' => 'Le fond cartographique est imposé par un autre plugin ou squelette.', # NEW
 
 	// F
 	'formulaire_creer_gis' => 'Vytvoriť nový geolokalizovaný bod:',
