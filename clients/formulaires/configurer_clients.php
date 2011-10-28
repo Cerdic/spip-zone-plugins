@@ -39,9 +39,9 @@ return array(
 				'label' => _T('clients:label_elm_civ'),
 				//'defaut' => array('m', 'mme'),
 				'datas' => array(
-							'm' => _T('clients:label_monsieur'),
 							'mme' => _T('clients:label_madame'),
 							'melle' => _T('clients:label_mademoiselle'),
+							'm' => _T('clients:label_monsieur'),
 							'dr' => _T('clients:label_docteur')
 							)
 				)

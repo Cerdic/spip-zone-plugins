@@ -16,10 +16,9 @@ function formulaires_inscription_client_saisies_dist($retour=''){
 		$civ_t=array();
 		foreach($civ as $v){
 			// pas moyen de faire marcher array_merge ici
-				array_push($civ_t, _T($v));
+				array_push($civ_t, "<:clients:$v:>");
 		}
-		$civ_t = array_values($civ_t);
-		$civ_t = array_combine($civ_t, $civ_t);
+		$civ_t = array_combine($civ, $civ_t);
 		$civilite=array(
 			'saisie' => 'radio',
 			'options' => array(
@@ -33,10 +32,9 @@ function formulaires_inscription_client_saisies_dist($retour=''){
 		$civ_t=array();
 		foreach($civ as $v){
 			// pas moyen de faire marcher array_merge ici
-				array_push($civ_t, _T($v));
+				array_push($civ_t, "<:clients:$v:>");
 		}
-		$civ_t = array_values($civ_t);
-		$civ_t = array_combine($civ_t, $civ_t);
+		$civ_t = array_combine($civ, $civ_t);
 		$civilite=array(
 			'saisie' => 'radio',
 			'options' => array(
