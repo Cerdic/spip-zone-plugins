@@ -1,0 +1,19 @@
+<paquet
+	prefix="apropos"
+	categorie="divers"
+	version="0.2.2ß1"
+	etat="test"
+	compatibilite="[2.1.1;3.0.99]"
+	logo="apropos.png"
+	documentation="http://www.spip-contrib.net/A-propos-des-plugins-actifs"
+	demonstration="http://www.jp.guihard.net/spip.php?article92"
+>	
+
+	<nom>&#192; propos des Plugins actifs</nom>
+	<!-- Liste les plugins actifs et affiche une description sommaire -->
+
+	<auteur lien="http://www.jp.guihard.net/">Jean-Philippe Guihard</auteur>
+
+	<pipeline nom="insert_head_css" inclure="apropos_pipeline.php" />
+	<pipeline nom="insert_head" action="insert_head" inclure="apropos_pipeline.php" />
+</paquet>
