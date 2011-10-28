@@ -1,5 +1,7 @@
 <?php
 
+include_spip('inc/config');
+
 /** 
  * Filtre dec_to_dms, http://www.statemaster.com/encyclopedia/Geographic-coordinate-conversion
  * 
@@ -139,8 +141,8 @@ function gis_api_utilisee(){
 		if(defined('_GIS_APIS_DEFAUT')){
 			$defaut = _GIS_APIS_DEFAUT;
 		}
-		$config = @unserialize($GLOBALS['meta']['gis']);
-		return $config['api'] ? $config['api'] : $defaut;
+		$config = lire_config('gis/api');
+		return $config ? $config : $defaut;
 	}
 }
 
@@ -155,8 +157,8 @@ function gis_maptype_utilise(){
 		if(defined('_GIS_MAPTYPES_DEFAUT')){
 			$defaut = _GIS_MAPTYPES_DEFAUT;
 		}
-		$config = @unserialize($GLOBALS['meta']['gis']);
-		return $config['maptype'] ? $config['maptype'] : $defaut;
+		$config = lire_config('gis/maptype');
+		return $config ? $config : $defaut;
 	}
 }
 ?>

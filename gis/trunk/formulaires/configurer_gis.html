@@ -131,7 +131,13 @@
 		var map_container = 'map_config';
 		map = new mxn.Mapstraction(map_container,'[(#REM|gis_api_utilisee)]');
 		map.setCenterAndZoom(new mxn.LatLonPoint(#ENV{lat,0},#ENV{lon,0}),#ENV{zoom,0});
-        map.setMapType([mxn.Mapstraction.(#REM|gis_maptype_utilise)]);
+        // Pour l'API Openlayers, la methode n'existe pas
+        try {
+            map.setMapType([mxn.Mapstraction.(#REM|gis_maptype_utilise)]);  
+        }
+        catch(err) {
+            $(".editer_maptype").hide();
+        }
 
 		map.addControls({
 			pan: true,

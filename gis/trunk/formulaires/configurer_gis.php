@@ -8,7 +8,7 @@
 function formulaires_configurer_gis_verifier_dist(){
 	$erreurs = array();
 	
-	if(in_array(_request('api'), array('cloudmade','google'))){
+	if(in_array(_request('api'), array('cloudmade','google','yandex'))){
 		$obligatoire = "api_key_"._request('api');
 		if(!_request($obligatoire)){
 			$erreurs[$obligatoire] = _T('info_obligatoire');
