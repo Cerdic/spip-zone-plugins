@@ -197,7 +197,7 @@ function apropos_plugin_resumer($info, $dir_plugins, $plug_file, $url_page) {
 		$i = inserer_attribut(image_reduire("$generic", 32),'alt','Icone g&eacute;n&eacute;rique pour le plugin '.$info['nom']);
 		$i = "<div class='apropos-icon'>$i</div>";
 	}
-	$auteur = implode($info['auteur']);
+	$auteur = PtoBR(plugin_propre(implode($info['auteur'])));
 
 	return "<div class='resume'>"
 	. $i
@@ -211,44 +211,5 @@ function apropos_plugin_resumer($info, $dir_plugins, $plug_file, $url_page) {
 	. "<div class='apropos-description'>".$slogan."</div><span class='apropos-auteur'>". _T('public:par_auteur') .$auteur.".</span>"
 	. "</div>";
 
-
-/*	$prefix = $info['prefix'];
-	$dir = "$dir_plugins$plug_file";
-	$slogan = typo(attribut_html($info['slogan'])); //PtoBR(plugin_propre($info['slogan'], "$dir/lang/paquet-$prefix"));
-	$get_desc = charger_fonction('afficher_plugin','plugins');
-	$desc = plugin_propre($info['description']);
-	// une seule ligne dans le slogan : couper si besoin
-	if (($p=strpos($slogan, "<br />"))!==FALSE)
-		$slogan = substr($slogan, 0,$p);
-	// couper par securite
-	$slogan = couper($slogan, 80);
-
-	$url = parametre_url($url_page, "plugin", substr($dir,strlen(_DIR_RACINE)));
-
-	if (isset($info['logo']) and $i = trim($info['logo'])) {
-		include_spip("inc/filtres_images_mini");
-		$i = inserer_attribut(image_reduire("$dir/$i", 32),'alt','Icone du plugin '.$info['nom']);
-		$i = "<div class='apropos-icon'>$i</div>";
-	} else {
-		$generic = _DIR_PLUGIN_APROPOS."img/generique.png"; //mettre une icone generique si pas d'icone de defini
-		include_spip("inc/filtres_images_mini");
-		$i = inserer_attribut(image_reduire("$generic", 32),'alt','Icone g&eacute;n&eacute;rique pour le plugin '.$info['nom']);
-		$i = "<div class='apropos-icon'>$i</div>";
-		//$i = '';
-	}
-
-	return "<div class='apropos-resume'>"
-	. $i
-	. " <span class='apropos-nom'>"
-	. typo(attribut_html($info['nom']))
-	. "</span>"
-	. "<span class='apropos-version'> v ".$info['version']."</span>"
-	. "<span class='apropos-etat'> - "
-	. typo(attribut_html($info['etat']))
-	. "</span>"
-	. "<div class='short'>".$slogan."</div>"
-	. "<div class='short'>".couper($desc,220)."</div>"
-	. "</div>";
-*/
 }
 ?>
