@@ -196,7 +196,7 @@ function apropos_plugin_resumer($info, $dir_plugins, $plug_file, $url_page) {
 	. "<span class='apropos-nom'>"
 	. typo(attribut_html($info['nom']))
 	. "</span>"
-	. " <span class='apropos-version'>v ".$lefichier.$info['version']."</span>"
+	. " <span class='apropos-version'>v ".$info['version']."</span>"
 	. " <span class='apropos-etat'> - "
 	. plugin_etat_en_clair($info['etat'])
 	. "</span>"
