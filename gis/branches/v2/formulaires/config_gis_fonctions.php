@@ -8,11 +8,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Fonction de verification du formulaire de configuration CFG
- * - On vérifie si dans les cas de cloudmade ou de google (v2), une clé a 
- * été fournie
+ * - On vérifie si dans les cas de cloudmade, de google (v2) ou de 
+ *   yandex, une clé a été fournie
  */
 function cfg_config_gis_verifier(&$cfg){
-	if(in_array($cfg->val['api'],array('cloudmade','google'))){
+	if(in_array($cfg->val['api'],array('cloudmade','google','yandex'))){
 		$obligatoire = "api_key_".$cfg->val['api'];
 		if(!$cfg->val[$obligatoire]){
 			$erreur[$obligatoire] = _T('info_obligatoire');
