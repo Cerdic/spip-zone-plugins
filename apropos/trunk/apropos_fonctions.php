@@ -162,8 +162,10 @@ function apropos_plugins_afficher_plugins($url_page, $plug_file, $class_li="item
 // Extrait de Cartouche Resume a modifier pour l'affichage final
 /* Traite les infos a afficher */
 function apropos_plugin_resumer($info, $dir_plugins, $plug_file, $url_page) {
+	//recherche la presence d'un fichier paquet.xml
 	if (is_readable($file = "$dir_plugins$plug_file/" . ($desc = "paquet") . ".xml")) {
 		$lefichier = 'lepaquet';
+		}else{
 		if (is_readable($file = "$dir_plugins$plug_file/" . ($desc = "plugin") . ".xml"))
 		$lefichier = 'le pluginxml';
 	}
@@ -171,11 +173,17 @@ function apropos_plugin_resumer($info, $dir_plugins, $plug_file, $url_page) {
 	$prefix = $info['prefix'];
 	$dir = "$dir_plugins$plug_file";
 	$slogan = PtoBR(plugin_propre($info['slogan'], "$dir/lang/paquet-$prefix"));
-	// une seule ligne dans le slogan : couper si besoin
-	if (($p=strpos($slogan, "<br />"))!==FALSE)
-		$slogan = substr($slogan, 0,$p);
-	// couper par securite
-	$slogan = couper($slogan, 180);
+	// test si slogan vide afin de prendre la description via le fichier plugin.xml le cas echeant
+	if ($slogan!==''){
+		// une seule ligne dans le slogan : couper si besoin
+		if (($p=strpos($slogan, "<br />"))!==FALSE)
+			$slogan = substr($slogan, 0,$p);
+		// couper par securite
+		$slogan = couper($slogan, 180).".";
+	}else{
+	$get_desc = charger_fonction('afficher_plugin','plugins');
+	$slogan = couper(plugin_propre($info['description']), 180);
+	}
 	
 	$url = parametre_url($url_page, "plugin", substr($dir,strlen(_DIR_RACINE)));
 
@@ -194,13 +202,13 @@ function apropos_plugin_resumer($info, $dir_plugins, $plug_file, $url_page) {
 	return "<div class='resume'>"
 	. $i
 	. "<span class='apropos-nom'>"
-	. typo(attribut_html($info['nom']))
+	. PtoBR(plugin_propre($info['nom']))
 	. "</span>"
 	. " <span class='apropos-version'>v ".$info['version']."</span>"
 	. " <span class='apropos-etat'> - "
 	. plugin_etat_en_clair($info['etat'])
 	. "</span>"
-	. "<div class='apropos-description'>".$slogan.".</div><span class='apropos-auteur'>". _T('public:par_auteur') .$auteur.".</span>"
+	. "<div class='apropos-description'>".$slogan."</div><span class='apropos-auteur'>". _T('public:par_auteur') .$auteur.".</span>"
 	. "</div>";
 
 
