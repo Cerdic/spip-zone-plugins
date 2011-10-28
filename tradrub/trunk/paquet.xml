@@ -1,10 +1,10 @@
 <paquet
 	prefix="tradrub"
 	categorie="edition"
-	version="2.0.0"
-	etat="dev"
+	version="3.0.0"
+	etat="test"
 	compatibilite="[3.0.0-alpha2;["
-	logo="images/tradrub-128.png"
+	logo="images/tradrub-32.png"
 	schema="1.0.0"
 	documentation=""
 >	
