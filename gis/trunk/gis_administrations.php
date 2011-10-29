@@ -23,17 +23,17 @@ function gis_upgrade($nom_meta_base_version, $version_cible){
 		// On ajoute la nouvelle table
 		array('maj_tables', array('spip_gis_liens')),
 		// On renomme le champ #LONX en #LON
-		array('sql_alter', array('TABLE spip_gis CHANGE lonx lon float(21) NULL NULL')),
+		array('sql_alter', 'TABLE spip_gis CHANGE lonx lon float(21) NULL NULL'),
 		// On déplace les liaisons articles, rubriques et mots
 		array('gis_upgrade_2_0'),
 		// Virer les champs id_article et id_rubrique
-		array('sql_alter', array('TABLE spip_gis DROP id_article')),
-		array('sql_alter', array('TABLE spip_gis DROP id_rubrique')),
+		array('sql_alter', 'TABLE spip_gis DROP id_article'),
+		array('sql_alter', 'TABLE spip_gis DROP id_rubrique'),
 		// Virer les index id_article et id_rubrique
-		array('sql_alter', array('TABLE spip_gis DROP INDEX id_article')),
-		array('sql_alter', array('TABLE spip_gis DROP INDEX id_rubrique')),
+		array('sql_alter', 'TABLE spip_gis DROP INDEX id_article'),
+		array('sql_alter', 'TABLE spip_gis DROP INDEX id_rubrique'),
 		// Virer la table pour les mots
-		array('sql_drop_table', array('spip_gis_mots')),
+		array('sql_drop_table', 'spip_gis_mots'),
 	);
 	
 	// Des nouveaux champs
@@ -43,8 +43,8 @@ function gis_upgrade($nom_meta_base_version, $version_cible){
 	
 	// Augmenter la précision des champs de coordonnées
 	$maj['2.0.2'] = array(
-		array('sql_alter', array('TABLE spip_gis CHANGE lat lat DOUBLE NULL NULL')),
-		array('sql_alter', array('TABLE spip_gis CHANGE lon lon DOUBLE NULL NULL')),
+		array('sql_alter', 'TABLE spip_gis CHANGE lat lat DOUBLE NULL NULL'),
+		array('sql_alter', 'TABLE spip_gis CHANGE lon lon DOUBLE NULL NULL'),
 	);
 	
 	include_spip('base/upgrade');
