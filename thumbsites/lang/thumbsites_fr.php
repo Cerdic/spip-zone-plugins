@@ -6,6 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_copier_comme_logo' => 'Définir comme logo',
 	'bouton_effacer' => 'Effacer',
 	'bouton_rafraichir' => 'Rafraichir la vignette',
 	'bouton_valider' => 'Valider',

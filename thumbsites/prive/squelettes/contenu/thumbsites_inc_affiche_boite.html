@@ -12,6 +12,7 @@
          <div class="spip_xx-small">[(#VAL{"d-m-Y H:i:s"}|date{#ENV{thumbshot_cache}|filemtime})]</div>
          <div class="actions">
             [(#BOUTON_ACTION{<:thumbsites:bouton_rafraichir:>,[(#URL_ACTION_AUTEUR{thumbsites_rafraichir,#ENV{id_syndic}--#ENV{url}--[(#GET{vignette_cache}|extraire_attribut{src})],#SELF})],ajax})]
+            [(#BOUTON_ACTION{<:thumbsites:bouton_copier_comme_logo:>,[(#URL_ACTION_AUTEUR{thumbsites_copier_comme_logo,#ENV{id_syndic}--#ENV{url}--[(#GET{vignette_cache}|extraire_attribut{src})],#SELF})]})]
          </div>
       </div>
    </div>
