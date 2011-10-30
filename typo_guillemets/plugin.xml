@@ -2,15 +2,13 @@
 	<nom>Corrections guillemets</nom>
 	<slogan>Affiche les guillemets corespondant &#224; la langue d'affichage</slogan>
 	<icon>icon.png</icon>
-	<version>1.3.0</version>
+	<version>1.3.1</version>
 	<prefix>typo_guillemets</prefix>
 	<etat>stable</etat>
 	<auteur>[Vincent Ramos->http://www.spip-contrib.net/auteur7639.html]</auteur>
 	<licence>GNU/GPL</licence>
 	<lien>http://www.spip-contrib.net/article1592.html</lien>
-	<description>Ce plugin remplace automatiquement les guillemets droits (") par les guillemets typographiques (&#171;&#187;&#8220;&#8221;&#8222;) de la langue de composition et guillemette correctement la balise <code><q></code>. Les liens automatiques <code>[->1]</code> vers des articles dont le titre contient des &#171;guillemets fran&#231;ais&#187; passent en guillemets &#8220;de second niveau&#8221;.
-
-Le remplacement, transparent pour l'utilisateur, ne modifie pas le texte mais seulement l'affichage final.
+	<description>Ce plugin remplace automatiquement les guillemets droits (") par les guillemets typographiques (&#171;&#187;&#8220;&#8221;&#8222;) de la langue de composition et guillemette correctement la balise <code><q></code>. Les liens automatiques <code>[->1]</code> vers des articles dont le titre contient des &#171;guillemets fran&#231;ais&#187; passent en guillemets &#8220;de second niveau&#8221;. Le remplacement, transparent pour l'utilisateur, ne modifie pas le texte mais seulement l'affichage final.
 	</description>
 	<pipeline>
 		<nom>post_typo</nom>
