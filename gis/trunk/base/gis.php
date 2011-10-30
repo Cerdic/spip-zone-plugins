@@ -56,7 +56,7 @@ function gis_declarer_tables_objets_sql($tables){
 		/* L'édition, l'affichage et la recherche */
         'page' => 'gis',
         'url_voir' => 'gis',
-        'url_edit' => 'gis_edit',
+        'url_edit' => 'gis_editer',
         'editable' => 'oui',
 		/*'champs_editables' => array(), */
 		'icone_objet' => 'gis',
