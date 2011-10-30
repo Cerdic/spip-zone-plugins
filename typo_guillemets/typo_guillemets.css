@@ -1,0 +1,19 @@
+/* Specifie des paires de guillemets sur plusieurs niveaux pour chaque langue */
+/* Cf.: http://www.yoyodesign.org/doc/w3c/css2/generate.html#quotes-specify */
+q { quotes: '"' '"' "'" "'" }
+:lang(fr) q { quotes: "\00AB\A0" "\A0\00BB" "\201C" "\201D" "\2018" "\2019"; }
+:lang(en) q { quotes: "\201C" "\201D" "\2018" "\2019" }
+:lang(es) q { quotes: "\00AB" "\00BB" "\201C" "\201D"; }
+:lang(it) q { quotes: "\00AB\A0" "\A0\00BB" "\201C" "\201D"; }
+:lang(de) q { quotes: "\00BB" "\00AB" ">" "<" }
+:lang(no) q { quotes: "\00AB\A0" "\A0\00BB" "<" ">" }
+
+/* Insere des guillemets avant et apres le contenu d'un element Q */
+q:before { content: open-quote; } 
+q:after { content: close-quote; }
+
+/* Pour IE, qui n'y comprend rien, on se contente d'italique */
+* html q { font-style: italic; }
+*+html q { font-style: italic; }
+
+/* end */
