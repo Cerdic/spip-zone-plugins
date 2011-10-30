@@ -1,0 +1,11 @@
+<B_liste_sels>
+<li class='editer_liste_sels fieldset'>
+		<fieldset>
+		<legend><:auteur:membre_auteur_sel:></legend>
+		<BOUCLE_liste_sels(SELS)>
+			<input type="checkbox" name="sel_#ID_SEL" id="sel_#ID_SEL" value="oui"[(#ENV{sel_#ID_SEL}|=={oui}|oui)checked="checked"]/>
+			<label for="sel_#ID_SEL">#NOM</label>
+		</BOUCLE_liste_sels>
+		</fieldset>
+</li>
+</B_liste_sels>
