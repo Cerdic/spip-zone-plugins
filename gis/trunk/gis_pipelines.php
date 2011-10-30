@@ -63,7 +63,7 @@ function gis_affiche_milieu($flux){
 		// -> ajouter un element a la array suivante (qqch comme ca - voir les mots):
 		//   'editable'=>autoriser('associergis',$type,$id)?'oui':'non'
         $texte = recuperer_fond(
-                'prive/objets/editer/liens',
+                'prive/contenu/gis_objet',
                 array(
                     'table_source'=>'gis',
                     'objet'=>$type,
