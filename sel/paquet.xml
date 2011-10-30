@@ -1,0 +1,32 @@
+<paquet
+	prefix="sel"
+	categorie="edition"
+	version="0.1"
+	etat="test"
+	compatibilite="[3.0.0-alpha2;]"
+	logo="prive/themes/spip/images/sel-128.png"
+	schema="0.1"
+	documentation="http://www.spip-contrib.net/SEL-systeme-d-echange-local"
+>      
+<nom>SEL (Syst&egrave;me d'&eacute;change local)</nom>
+ <!-- Gestion des chats dans SPIP -->
+<auteur lien="http://valerie.journet.free.fr">[Val&eacute;rie Journet-Texier->http://valerie.journet.free.fr]</auteur>
+<auteur lien="http://perline.org/">[Perline->http://perline.org/]</auteur>
+<licence>GNU/GPL</licence>
+<!--credit lien="http://www.xxx">gggg</credit-->
+<!-- Ces 2 balises n'existent plus dans spip3. On ne les déclare plus mais on les mets à la racine du plugin -->
+<!--fonctions>sel_fonctions.php</fonctions-->
+<!--options>sel_options.php</options-->
+
+<pipeline nom="declarer_tables_interfaces" inclure="base/structure.php" />
+<pipeline nom="declarer_tables_objets_sql" inclure="base/structure.php" />
+<pipeline nom="declarer_tables_auxiliaires" inclure="base/structure.php" />
+<pipeline nom="autoriser" inclure="pipelines/sel_autorisations.php" />
+<pipeline nom="editer_contenu_objet" inclure="pipelines/complement_editer_auteur.php" />
+
+<!-- ERGONOMIE DANS ESPACE PRIVE A REVOIR ET UNIFORMISER AVEC PLUGIN.XML -->
+<menu nom="sels" titre="sel:titre_sel" parent="menu_edition" icone="images/sel-16.png" />
+<menu nom="sel_creer" titre="sel:icone_creer_sel" parent="outils_rapides" icone="images/sel-new-16.png" action="sel_edit" parametres="new=oui" />
+
+</paquet>
+
