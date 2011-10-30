@@ -65,13 +65,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_gis_tous' => 'Points g&eacute;olocalis&eacute;s',
 	'info_id_objet' => 'N&deg;',
 	'info_aucun_gis' => 'Aucun point géolocalisé',
+	'info_aucun_objet_gis' => 'Aucun objet lié à ce point',
 	'info_1_gis' => 'Un point géolocalisé',
+	'info_1_objet_gis' => '1 objet lié à ce point',
 	'info_liste_gis' => 'Points géolocalisés',
-	'info_liste_gis_objet' => 'Points li&eacute;s &agrave; cet objet',
-	'info_liste_objets_gis' => 'Objets li&eacute;s &agrave; ce point',
 	'info_nb_gis' => '@nb@ points géolocalisés',
+	'info_nb_objets_gis' => '@nb@ objets liés à ce point',
 	'info_numero_gis' => 'Point num&eacute;ro',
 	'info_objet' => 'Objet',
+	'info_recherche_gis_zero' => 'Aucun résultat pour « @cherche_gis@ ».',
 	'info_supprimer_lien' => 'D&eacute;tacher',
 	'info_supprimer_liens' => 'D&eacute;tacher tous les points',
 	'info_voir_fiche_objet' => 'Voir la fiche',
@@ -86,6 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_ville' => 'Ville',
 	'lat' => 'Latitude',
 	'libelle_logo_gis' => 'LOGO DU POINT',
+	'lien_ajouter_gis' => 'Ajouter ce point',
 	'lon' => 'Longitude',
 
 	// T
@@ -93,11 +96,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_creer_gis' => 'Créer un point géolocalisé',
 	'texte_creer_associer_gis' => 'Créer et associer un point géolocalisé',
 	'texte_modifier_gis' => 'Modifier le point géolocalisé',
+	'texte_voir_gis' => 'Voir le point géolocalisé',
 	'titre_bloc_creer_point' => 'Lier un nouveau point',
 	'titre_bloc_points_lies' => 'Points liés',
 	'titre_bloc_rechercher_point' => 'Rechercher un point',
 	'titre_nombre_utilisation' => 'Une utilisation',
 	'titre_nombre_utilisations' => '@nb@ utilisations',
+	'titre_nouveau_point' => 'Nouveau point',
+	'titre_objet' => 'Titre',
 
 	// Z
 	'zoom' => 'Zoom'

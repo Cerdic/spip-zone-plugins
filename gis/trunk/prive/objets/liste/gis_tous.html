@@ -2,7 +2,7 @@
 [(#ANCRE_PAGINATION)]
 <div class="menu points">
 <ul class="liste_items">
-	<BOUCLE_gis(GIS){par titre}{pagination 5}>
+	<BOUCLE_gis(GIS){par titre}{pagination #ENV{nb,5}}>
 	<li class="item">
 		<h3 class="titre">
 			<a href="[(#URL_ECRIRE{gis,id_gis=#ID_GIS})]">#TITRE</a>
@@ -18,7 +18,7 @@
 		<p class='actions'>
 			<span class="afficher" id="afficher_[(#ID_GIS)]">&#91;<a href="[(#URL_ECRIRE{gis,id_gis=#ID_GIS})]">Afficher</a>&#93;</span>
 			[(#AUTORISER{modifier,gis,#ID_GIS}|oui)
-			<span class='lien_modifier'>&#91;<a href='[(#URL_ECRIRE{gis_editer,id_gis=#ID_GIS})]'><:gis:editer_gis_editer:></a>&#93;</span>]
+			<span class='lien_modifier'>&#91;<a href='[(#URL_ECRIRE{gis_edit}|parametre_url{id_gis,#ID_GIS}|parametre_url{redirect,#SELF|url_absolue})]'><:gis:editer_gis_editer:></a>&#93;</span>]
 		</p>
 	</li>
 	</BOUCLE_gis>
@@ -37,4 +37,3 @@
 </script>
 </B_gis>
 </div>
-[(#URL_ECRIRE{gis_editer}|parametre_url{nouveau,oui}|icone_verticale{<:gis:editer_gis_nouveau:>,#CHEMIN{images/gis-24.png},new,#LANG_RIGHT})]

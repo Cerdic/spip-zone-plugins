@@ -52,71 +52,29 @@ function gis_inserer_javascript($flux){
 }
 
 function gis_affiche_milieu($flux){
-	if ($exec = $flux['args']['exec']){
-		switch ($exec){
-			case 'article':
-				$objet = 'article';
-				$id_objet = $flux['args']['id_article'];
-				break;
-			case 'auteur':
-				$objet = 'auteur';
-				$id_objet = $flux['args']['id_auteur'];
-				break;
-			case 'breve':
-				$objet = 'breve';
-				$id_objet = $flux['args']['id_breve'];
-				break;
-			case 'rubrique':
-				$objet = 'rubrique';
-				$id_objet = $flux['args']['id_rubrique'];
-				break;
-			case 'mot':
-				$objet = 'mot';
-				$id_objet = $flux['args']['id_mot'];
-				break;
-			case 'site':
-				$objet = 'syndic';
-				$id_objet = $flux['args']['id_syndic'];
-				break;
-			case 'document':
-				$objet = 'document';
-				$id_objet = $flux['args']['id_document'];
-				break;
-			default:
-				// Par défaut on regarde si on est sur la page d'un vrai objet SPIP
-				include_spip('base/objets.php');
-				$objets = lister_tables_objets_sql();
-				foreach ($objets as $table=>$infos){
-					// Si cet exec fait partie d'une URL pour voir un objet déclaré
-					if ($exec == $infos['url_voir']){
-						$objet = $infos['type'];
-						$id_objet = $flux['args'][id_table_objet($objet)];
-						break; // On a trouvé on s'arrête
-					}
-				}
-				break;
-		}
-		if ($objet && $id_objet) {
-			// TODO : seulement si la conf permet de geolocaliser cet objet
-			if (1) {
-				include_spip('inc/layer');
-				include_spip('inc/presentation');
-				$contexte['objet'] = $objet;
-				$contexte['id_objet'] = $id_objet;
-				$texte = "<div id='pave_gis'>";
-				$bouton = bouton_block_depliable(_T('gis:cfg_titre_gis'), false, "pave_gis_depliable");
-				$texte .= debut_cadre_enfonce(find_in_path('images/gis-24.png'), true, "", $bouton);
-				$texte .= recuperer_fond('prive/contenu/gis_objet', $contexte);
-				$texte .= fin_cadre_enfonce(true);
-				$texte .= "</div>";
-				
-				if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
-					$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
-				else
-					$flux['data'] .= $texte;
-			}
-		}
-	}
+
+    if ($en_cours = trouver_objet_exec($flux['args']['exec'])
+        AND $en_cours['edition']!==true // page visu
+        AND $en_cours['type']!=='gis' // on ne va pas associer des points entre eux
+        AND $type = $en_cours['type']
+        AND $id_table_objet = $en_cours['id_table_objet']
+        AND ($id = intval($flux['args'][$id_table_objet]))){
+        // TODO : seulement si la conf permet de geolocaliser cet objet
+		// -> ajouter un element a la array suivante (qqch comme ca - voir les mots):
+		//   'editable'=>autoriser('associergis',$type,$id)?'oui':'non'
+        $texte = recuperer_fond(
+                'prive/objets/editer/liens',
+                array(
+                    'table_source'=>'gis',
+                    'objet'=>$type,
+                    'id_objet'=>$id
+                )
+        );
+        if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
+            $flux['data'] = substr_replace($flux['data'],$texte,$p,0);
+        else
+            $flux['data'] .= $texte;
+    }
 
 	return $flux;
 }

@@ -48,7 +48,7 @@ function gis_declarer_tables_objets_sql($tables){
             "PRIMARY KEY"   => "id_gis",
         ),
         'principale' => 'oui',
-		/*'modeles' => array('carte_gis','carte_gis_preview'),*/
+		'modeles' => array('carte_gis','carte_gis_preview'),
 
 		/* Le titre, la date et la gestion du statut */
         'titre' => "titre, '' AS lang",
