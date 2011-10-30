@@ -58,7 +58,7 @@
     #INCLURE{fond=formulaires/inc-paypal-details,details=#ENV{details}}
 <input type="hidden" name="cmd" value="_cart"> 
 <input type="hidden" name="upload" value="1">
-<input alt="<:paypal:info_bouton_paypal:>" name="submit" src="https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
+<input alt="<:paypal:info_bouton_paypal:>" name="submit" src="[(#ENV{bouton_paypal_acheter}|sinon{https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif})]" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
 ]
 
 [(#REM) Acheter ]
@@ -70,7 +70,7 @@
 	[(#REM) Bouton...]
 	<input name="cmd" type="hidden" value="_xclick" />
 	<input name="bn" type="hidden" value="PP-BuyNow" />
-	<input alt="<:paypal:info_bouton_paypal:>" name="submit" src="https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
+	<input alt="<:paypal:info_bouton_paypal:>" name="submit" src="[(#ENV{bouton_paypal_acheter}|sinon{https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif})]" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
 ]
 
 [(#REM) Ou s'abonner ]
@@ -84,7 +84,7 @@
 	[(#REM) Bouton...]
 	<input name="cmd" type="hidden" value="_xclick-subscriptions" />
 	<input name="bn" type="hidden" value="PP-Subscribe" />
-	<input alt="<:paypal:info_bouton_paypal:>" name="submit" src="https://www.paypal.com/fr_FR/FR/i/btn/btn_subscribe_LG.gif" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
+	<input alt="<:paypal:info_bouton_paypal:>" name="submit" src="[(#ENV{bouton_paypal_souscrire}|sinon{https://www.paypal.com/fr_FR/FR/i/btn/btn_subscribe_LG.gif})]" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
 ]
 
 
