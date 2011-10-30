@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="3.1.5"
+	version="3.1.6"
 	schema="2.0.2"
 	etat="dev"
 	compatibilite="[3.0.0-dev;3.0.*["
@@ -31,7 +31,7 @@
 		inclure="base/gis.php"
 	/>
 	<pipeline
-		nom="declarer_tables_principales"
+		nom="declarer_tables_objets_sql"
 		inclure="base/gis.php"
 	/>
 	<pipeline

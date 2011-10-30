@@ -57,15 +57,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_creer_gis' => 'Cr&eacute;er un point g&eacute;olocalis&eacute; :',
 	'formulaire_modifier_gis' => 'Modifier le point g&eacute;olocalis&eacute; :',
 
+	// G
+	'gis_singulier' => 'Point géolocalisé',
+	'gis_pluriel' => 'Points géolocalisés',
+
 	// I
 	'icone_gis_tous' => 'Points g&eacute;olocalis&eacute;s',
 	'info_id_objet' => 'N&deg;',
+	'info_aucun_gis' => 'Aucun point géolocalisé',
+	'info_1_gis' => 'Un point géolocalisé',
 	'info_liste_gis' => 'Points géolocalisés',
 	'info_liste_gis_objet' => 'Points li&eacute;s &agrave; cet objet',
 	'info_liste_objets_gis' => 'Objets li&eacute;s &agrave; ce point',
+	'info_nb_gis' => '@nb@ points géolocalisés',
 	'info_numero_gis' => 'Point num&eacute;ro',
 	'info_objet' => 'Objet',
 	'info_supprimer_lien' => 'D&eacute;tacher',
+	'info_supprimer_liens' => 'D&eacute;tacher tous les points',
 	'info_voir_fiche_objet' => 'Voir la fiche',
 
 	// L
@@ -81,6 +89,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lon' => 'Longitude',
 
 	// T
+	'texte_ajouter_gis' => 'Ajouter un point géolocalisé',
+	'texte_creer_gis' => 'Créer un point géolocalisé',
+	'texte_creer_associer_gis' => 'Créer et associer un point géolocalisé',
+	'texte_modifier_gis' => 'Modifier le point géolocalisé',
 	'titre_bloc_creer_point' => 'Lier un nouveau point',
 	'titre_bloc_points_lies' => 'Points liés',
 	'titre_bloc_rechercher_point' => 'Rechercher un point',
