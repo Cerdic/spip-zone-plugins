@@ -104,15 +104,16 @@ function produire_fichier_langue($langue, $module, $items, $producteur='')
 			$initiale = strtoupper($k[0]);
 			$contenu[]= "\n// $initiale";
 		}
-		if (!is_string($v))
+		if (!is_string($v)) {
+			$t = str_replace("'", '\\\'', $v[1]);
 			if ($v[2] == 'inutile')
-				$contenu[]= "/*\t" . $v[0] ."\n\t'" . $k . "' => '" . addslashes($v[1]) ."',*/"; 
+				$contenu[]= "/*\t" . $v[0] ."\n\t'$k' => '$t',*/"; 
 			else
-				$contenu[]= "/*\t" . $v[0] ." */\n\t'" . $k . "' => '" . addslashes($v[1]) ."',"; 
-		else {
-			$v = addslashes($v);
-			$v = str_replace('\\\\n', "' . \"\\n\" .'", $v);
-			$contenu[]= "\t'" . $k . "' => '$v',";
+				$contenu[]= "/*\t" . $v[0] ." */\n\t'$k' => '$t',"; 
+		} else {
+			$t = str_replace("'", '\\\'', $v);
+			$t = str_replace('\\\\n', "' . \"\\n\" .'", $t);
+			$contenu[]= "\t'$k' => '$t',";
 		}
 	}
 
