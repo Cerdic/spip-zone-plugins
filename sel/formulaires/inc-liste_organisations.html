@@ -1,0 +1,11 @@
+<B_liste_organisations>
+<li class='editer_liste_sels fieldset'>
+		<fieldset>
+		<legend><:auteur:correspondant_auteur_organisations:></legend>
+		<BOUCLE_liste_organisations(ORGANISATIONS)>
+			<input type="checkbox" name="org_#ID_ORGANISATION" id="org_#ID_ORGANISATION" value="oui"[(#ENV{sel_#ID_ORGANISATION}|=={oui}|oui)checked="checked"]/>
+			<label for="org_#ID_ORGANISATION">#NOM</label>
+		</BOUCLE_liste_organisations>
+		</fieldset>
+</li>
+</B_liste_organisations>
