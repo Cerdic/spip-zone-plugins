@@ -1,9 +1,9 @@
 <paquet
 	prefix="vignettes_oxygen"
 	categorie="multimedia"
-	version="0.1.0"
+	version="1.0.0"
 	etat="stable"
-	compatibilite="[2.0.0;3.0.99]"
+	compatibilite="[3.0.0-alpha2;3.0.99]"
 	logo="images/oxygen.png"
 	documentation="http://www.spip-contrib.net/?article3977"
 >
