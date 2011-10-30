@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function polyhier_affiche_hierarchie($flux){
 	$objet = $flux['args']['objet'];
-	if (in_array($objet,array('article','rubrique'))){
+	if (in_array(table_objet_sql($objet),array_keys(lister_tables_objets_sql()))){
 		$id_objet = $flux['args']['id_objet'];
 		include_spip('inc/polyhier');
 		$parents = polyhier_get_parents($id_objet,$objet,$serveur='');
