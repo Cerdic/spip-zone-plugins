@@ -1,0 +1,62 @@
+
+<li class='editer_localisation fieldset'>
+		<fieldset>
+		<legend><:auteur:info_coordonnees:></legend>
+		<ul>
+			<li class="editer editer_adresse1 obligatoire[ (#ENV**{erreurs}|table_valeur{adresse1_auteur}|oui)erreur]">
+				[<label for="adresse1">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:auteur:entree_adresse1:>,<:auteur:entree_adresse1_2:>})</label>][
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse1_auteur})</span>
+				]<input type='text' class='text' name='adresse1' id='adresse1' value="[(#ENV**{adresse1})]" />
+			</li>
+			<li class="editer editer_adresse2[ (#ENV**{erreurs}|table_valeur{adresse2_auteur}|oui)erreur]">
+				[<label for="adresse2">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:auteur:entree_adresse2:>,<:auteur:entree_adresse2_2:>})</label>][
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse2_auteur})</span>
+				]<input type='text' class='text' name='adresse2' id='adresse2' value="[(#ENV**{adresse2})]" />
+			</li>
+			<li class="editer editer_code_postal obligatoire[ (#ENV**{erreurs}|table_valeur{code_postal_auteur}|oui)erreur]">
+				[<label for="code_postal">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:auteur:entree_code_postal:>,<:auteur:entree_code_postal_2:>})</label>][
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{code_postal_auteur})</span>
+				]<input type='text' class='text' name='code_postal' id='code_postal' maxlength='20' value="[(#ENV**{code_postal})]" />
+			</li>
+			<li class="editer editer_ville obligatoire[ (#ENV**{erreurs}|table_valeur{ville_auteur}|oui)erreur]">
+				[<label for="ville">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:auteur:entree_ville:>,<:auteur:entree_ville_2:>})</label>][
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ville_auteur})</span>
+				]<input type='text' class='text' name='ville' id='ville' maxlength='255' value="[(#ENV**{ville})]" />
+			</li>
+			<li class="editer editer_pays obligatoire[ (#ENV**{erreurs}|table_valeur{pays_auteur}|oui)erreur]">
+				[<label for="pays">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:auteur:entree_pays:>,<:auteur:entree_pays_2:>})</label>][
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{pays_auteur})</span>
+				]<input type='text' class='text' name='pays' id='pays' maxlength='255' value="[(#ENV**{pays})]" />
+			</li>
+			<!-- Préremplir ce champ, faire une proposition en fonction de la valeur de lang. Faire une table des pays ? -->
+			<li class="editer editer_tel1 obligatoire[ (#ENV**{erreurs}|table_valeur{tel1_auteur}|oui)erreur]">
+				[<label for="tel1">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:auteur:entree_tel1:>,<:auteur:entree_tel1_2:>})</label>][
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{tel1_auteur})</span>
+				]<input type='text' class='text' name='tel1' id='tel1' maxlength='50' value="[(#ENV**{tel1})]" />
+			</li>
+			<li class="editer editer_tel2[ (#ENV**{erreurs}|table_valeur{tel2_auteur}|oui)erreur]">
+				[<label for="tel2">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:auteur:entree_tel2:>,<:auteur:entree_tel2_2:>})</label>][
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{tel2_auteur})</span>
+				]<input type='text' class='text' name='tel2' id='tel2' maxlength='50' value="[(#ENV**{tel2})]" />
+			</li>
+			<li class="editer editer_commentaires[ (#ENV**{erreurs}|table_valeur{commentaires_auteur}|oui)erreur]">
+				<label for="commentaires"><:auteur:entree_commentaires:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{commentaires_auteur})</span>
+				]<textarea name='commentaires' id='commentaires' rows='4' cols='40'>[(#ENV**{commentaires})]</textarea>
+			</li>
+			<li>Membre de : (liste JEU / SELs dans spip_sels) - Stocker les appartenances bipartites auteur -> SEL dans spip_correspondances</li>
+			<li>Correspondant de : (liste ateliers, intersel... spip_organisations) au nom de : liste des SELs - Stocker les correspondances tripartites auteur -> SEL/orga dans spip_correspondances</li>
+		</ul>
+		</fieldset>
+</li>
+
+<!--
+A définir dans editer_auteur.php :
+---------------------------------
+erreurs[adresse1_auteur] 
+erreurs[code_postal_auteur]
+erreurs[ville_auteur]
+erreurs[pays]
+erreurs[tel1_auteur]
+erreurs[tel2_auteur]
+-->
