@@ -248,6 +248,10 @@ Merci',
     'news1' => 'Les nouveaut&eacute;s n&deg;1',
     'news_depuis' => 'Les nouveaut&eacute;s depuis le ',
 	'mauvais_affichage' => 'Si vous ne visualisez pas cet email, lisez-le sur le site',
-	'lire_en_ligne' => 'Lire le message sur le site.'
+	'lire_en_ligne' => 'Lire le message sur le site.',
+	
+	// Noisette
+	'nom_formulaire_clevermail' => 'Formulaire d\'abonnement aux listes de diffusion'
+	
 	);
 ?>
