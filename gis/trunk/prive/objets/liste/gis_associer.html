@@ -29,7 +29,7 @@ a mis a jour la valeur avec la page reelle]
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_gis(GIS){!id_gis IN #GET{exclus}}{tout}{where?}{recherche?}{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} gisa}>
+	<BOUCLE_liste_gis(GIS){!id_gis IN #GET{exclus}}{tout}{where?}{recherche?}{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,5} gisa}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='picto'>[(#CHEMIN_IMAGE{gis-16.png}|balise_img)]</td>
 			<td class='titre principale'>[(#LOGO_GIS|image_reduire{20,20})]<a href="[(#ID_GIS|generer_url_entite{gis})]"
