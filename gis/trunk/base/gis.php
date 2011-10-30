@@ -25,9 +25,9 @@ function gis_declarer_tables_objets_sql($tables){
     $tables['spip_gis'] = array(
 		/* Declarations principales */
         'table_objet' => 'gis',
-        'table_objet_surnoms' => array(),
+        'table_objet_surnoms' => array('gis'),
         'type' => 'gis',
-        'type_surnoms' => array('gis'),
+        'type_surnoms' => array('gi'),
 
 		/* La table */
         'field'=> array(
@@ -56,19 +56,17 @@ function gis_declarer_tables_objets_sql($tables){
 		/* L'édition, l'affichage et la recherche */
         'page' => 'gis',
         'url_voir' => 'gis',
-        'url_edit' => 'gis_editer',
+        'url_edit' => 'gis_edit',
         'editable' => 'oui',
 		/*'champs_editables' => array(), */
 		'icone_objet' => 'gis',
         'rechercher_champs' => array(
             'titre' => 8,
-            'descriptif' => 2,
-            'adresse' => 2,
-            'pays' => 2,
-            'code_pays' => 2,
-            'region' => 2,
-            'ville' => 2,
-            'code_postal' => 2,
+            'descriptif' => 5,
+            'pays' => 3,
+            'region' => 3,
+            'ville' => 3,
+            'code_postal' => 3,
         ),
 
         /* Les textes standard */

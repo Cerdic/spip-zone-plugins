@@ -322,29 +322,6 @@ function gis_post_edition($flux){
 	return $flux;
 }
 
-// permettre la recherche dans une boucle gis
-function gis_rechercher_liste_des_champs($tables){
-	$tables['gis'] = array(
-		'titre' => 8,
-		'descriptif' => 5,
-		'pays' => 3,
-		'region' => 3,
-		'ville' => 3,
-		'code_postal' => 3
-	);
-	return $tables;
-}
-
-function gis_declarer_type_surnoms($surnoms){
-	$surnoms['gi'] = 'gis';
-	return $surnoms;
-}
-
-function gis_declarer_tables_objets_surnoms($surnoms){
-	$surnoms['gis'] = 'gis';
-	return $surnoms;
-}
-
 function gis_taches_generales_cron($taches_generales){
 	$taches_generales['gis_nettoyer_base'] = 3600*48;
 	return $taches_generales;
