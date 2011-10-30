@@ -1,0 +1,16 @@
+<paquet
+	prefix="vignettes_oxygen"
+	categorie="multimedia"
+	version="0.1.0"
+	etat="stable"
+	compatibilite="[2.0.0;3.0.99]"
+	logo="images/oxygen.png"
+	documentation="http://www.spip-contrib.net/?article3977"
+>
+	<nom>Vignettes Oxygen</nom>
+	<!-- Collection d'icônes pour les documents -->
+	<auteur lien="http://www.spip-contrib.net/Joseph">Joseph</auteur>
+	<credit lien="http://www.oxygen-icons.org/">Team Oxygen</credit>
+	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL</licence>
+	<utilise nom="medias" />
+</paquet>
