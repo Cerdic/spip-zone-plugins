@@ -45,57 +45,84 @@ function sel_upgrade($nom_meta_base_version, $version_cible){
 			$qqs_sels = 'spip_sels';
 			sql_insertq_multi($qqs_sels, array(
 				array(
-					id_sel => '0',
-					nom => 'JEU',
-					adresse1 => 'le monde !',
-					adresse2 => '',
-					code_postal => '00000',
-					ville => '',
-					pays => '',
-					email => '',
-					nom_unite => ''
+					'id_sel' => '0',
+					'nom' => 'JEU',
+					'num_adhesion' => '',
+					'etat_compte' => '',
+					'etat_compte_depuis' => '0000-00-00 00:00:00',
+					'adresse1' => 'le monde !',
+					'adresse2' => '',
+					'code_postal' => '00000',
+					'ville' => '',
+					'pays' => '',
+					'tel1' => '',
+					'tel2' => '',
+					'email' => '',
+					'nom_unite' => '',
+					'credit_ouverture' => '',
+					'validation_echange' => '',
+					'cotisation_unite' => '',
+					'cotisation_montant_taux' => ''
 				),
 
 				array(
-					id_sel => '1',
-					nom => 'SEL de Paris',
-					adresse1 => '1/3 rue Frédérick Lemaître',
-					adresse2 => 'BP41',
-					code_postal => '75020',
-					ville => 'PARIS',
-					pays => 'France',
-					email => 'contact@seldeparis.org',
-					nom_unite => 'piaf'
+					'id_sel' => '1',
+					'nom' => 'SEL de Paris',
+					'num_adhesion' => '',
+					'etat_compte' => '',
+					'etat_compte_depuis' => '0000-00-00 00:00:00',
+					'adresse1' => '1/3 rue Frédérick Lemaître',
+					'adresse2' => 'BP41',
+					'code_postal' => '75020',
+					'ville' => 'PARIS',
+					'pays' => 'France',
+					'tel1' => '',
+					'tel2' => '',
+					'email' => 'contact@seldeparis.org',
+					'nom_unite' => 'piaf',
+					'credit_ouverture' => '',
+					'validation_echange' => '',
+					'cotisation_unite' => '',
+					'cotisation_montant_taux' => ''
 				),
 				array(
-					id_sel => '2',
-					nom => 'SEL de Loire',
-					adresse1 => '-',
-					adresse2 => '',
-					code_postal => '37000',
-					ville => 'TOURS',
-					pays => 'France',
-					email => 'contact@seldeloire.org',
-					nom_unite => 'unité'
+					'id_sel' => '2',
+					'nom' => 'SEL de Loire',
+					'num_adhesion' => '',
+					'etat_compte' => '',
+					'etat_compte_depuis' => '0000-00-00 00:00:00',
+					'adresse1' => '-',
+					'adresse2' => '',
+					'code_postal' => '37000',
+					'ville' => 'TOURS',
+					'pays' => 'France',
+					'tel1' => '',
+					'tel2' => '',
+					'email' => 'contact@seldeloire.org',
+					'nom_unite' => 'unité',
+					'credit_ouverture' => '',
+					'validation_echange' => '',
+					'cotisation_unite' => '',
+					'cotisation_montant_taux' => ''
 				)
 			));
 			
 			$qqs_orgs = 'spip_organisations';
 			sql_insertq_multi($qqs_orgs, array(
 				array(
-					id_organisations => '1',
-					nom => 'Route des SEL',
-					description => 'La route des SEL'
+					'id_organisation' => '1',
+					'nom' => 'Route des SEL',
+					'description' => 'La route des SEL'
 				),
 				array(
-					id_organisations => '2',
-					nom => 'Selidaire',
-					description => 'Selidaire'
+					'id_organisation' => '2',
+					'nom' => 'Selidaire',
+					'description' => 'Selidaire'
 				),
 				array(
-					id_organisations => '3',
-					nom => 'le MES',
-					description => 'Acteurs de l\'Econimie Sociale et Solidaire'
+					'id_organisation' => '3',
+					'nom' => 'le MES',
+					'description' => 'Acteurs de l\'Econimie Sociale et Solidaire'
 				),
 			));
 		}
@@ -144,59 +171,87 @@ function sel_upgrade($nom_meta_base_version, $version_cible){
 			sql_create_view(spip_valideurs,$vue_valideurs);
 			
 			// Fourniture de quelques SELs pour démarrer (juste pour l'exemple, supprimer ces lignes par la suite)
-			sql_insertq_multi($dpt, array(
+			$qqs_sels = 'spip_sels';
+			sql_insertq_multi($qqs_sels, array(
 				array(
-					id_sel => '0',
-					nom => 'JEU',
-					adresse1 => 'le monde !',
-					adresse2 => '',
-					code_postal => '00000',
-					ville => '',
-					pays => '',
-					email => '',
-					nom_unite => ''
+					'id_sel' => '0',
+					'nom' => 'JEU',
+					'num_adhesion' => '',
+					'etat_compte' => '',
+					'etat_compte_depuis' => '0000-00-00 00:00:00',
+					'adresse1' => 'le monde !',
+					'adresse2' => '',
+					'code_postal' => '00000',
+					'ville' => '',
+					'pays' => '',
+					'tel1' => '',
+					'tel2' => '',
+					'email' => '',
+					'nom_unite' => '',
+					'credit_ouverture' => '',
+					'validation_echange' => '',
+					'cotisation_unite' => '',
+					'cotisation_montant_taux' => ''
 				),
 
 				array(
-					id_sel => '1',
-					nom => 'SEL de Paris',
-					adresse1 => '1/3 rue Frédérick Lemaître',
-					adresse2 => 'BP41',
-					code_postal => '75020',
-					ville => 'PARIS',
-					pays => 'France',
-					email => 'contact@seldeparis.org',
-					nom_unite => 'piaf'
+					'id_sel' => '1',
+					'nom' => 'SEL de Paris',
+					'num_adhesion' => '',
+					'etat_compte' => '',
+					'etat_compte_depuis' => '0000-00-00 00:00:00',
+					'adresse1' => '1/3 rue Frédérick Lemaître',
+					'adresse2' => 'BP41',
+					'code_postal' => '75020',
+					'ville' => 'PARIS',
+					'pays' => 'France',
+					'tel1' => '',
+					'tel2' => '',
+					'email' => 'contact@seldeparis.org',
+					'nom_unite' => 'piaf',
+					'credit_ouverture' => '',
+					'validation_echange' => '',
+					'cotisation_unite' => '',
+					'cotisation_montant_taux' => ''
 				),
 				array(
-					id_sel => '2',
-					nom => 'SEL de Loire',
-					adresse1 => '-',
-					adresse2 => '',
-					code_postal => '37000',
-					ville => 'TOURS',
-					pays => 'France',
-					email => 'contact@seldeloire.org',
-					nom_unite => 'unité'
+					'id_sel' => '2',
+					'nom' => 'SEL de Loire',
+					'num_adhesion' => '',
+					'etat_compte' => '',
+					'etat_compte_depuis' => '0000-00-00 00:00:00',
+					'adresse1' => '-',
+					'adresse2' => '',
+					'code_postal' => '37000',
+					'ville' => 'TOURS',
+					'pays' => 'France',
+					'tel1' => '',
+					'tel2' => '',
+					'email' => 'contact@seldeloire.org',
+					'nom_unite' => 'unité',
+					'credit_ouverture' => '',
+					'validation_echange' => '',
+					'cotisation_unite' => '',
+					'cotisation_montant_taux' => ''
 				)
 			));
 
 			$qqs_orgs = 'spip_organisations';
 			sql_insertq_multi($qqs_orgs, array(
 				array(
-					id_organisations => '1',
-					nom => 'Route des SEL',
-					description => 'La route des SEL'
+					'id_organisation' => '1',
+					'nom' => 'Route des SEL',
+					'description' => 'La route des SEL'
 				),
 				array(
-					id_organisations => '2',
-					nom => 'Selidaire',
-					description => 'Selidaire'
+					'id_organisation' => '2',
+					'nom' => 'Selidaire',
+					'description' => 'Selidaire'
 				),
 				array(
-					id_organisations => '3',
-					nom => 'le MES',
-					description => 'Acteurs de l\'Econimie Sociale et Solidaire'
+					'id_organisation' => '3',
+					'nom' => 'le MES',
+					'description' => 'Acteurs de l\'Econimie Sociale et Solidaire'
 				),
 			));
 			
