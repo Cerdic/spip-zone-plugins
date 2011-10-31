@@ -45,7 +45,7 @@ La liste des traductions disponibles est sur [Spip-Contrib->http://www.spip-cont
 	<lien>http://www.spip-contrib.net/Spip-Bible,1125</lien>
 </plugin>
 <plugin spip='[3.0.0-dev;3.0.99]'>
-	<nom>Spip-Bible 2</nom>
+	<nom>Spip-Bible</nom>
 	<slogan>Pour faire rapidement des citations de la Bible</slogan>
 	<auteur>Ma&#239;eul Rouquette (Auteur originel), Teddy Payet (Auteur associ&#233;), Cerdic (Id&#233;e du presse-papier)</auteur>
 	<licence>GPL3</licence>
