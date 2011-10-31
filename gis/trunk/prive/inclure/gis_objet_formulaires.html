@@ -28,7 +28,7 @@
 </div>
 
 [(#GET{bloc_gis}|=={editer}|oui)
-	#FORMULAIRE_EDITER_GIS{#ENV{id_gis,#GET{gis_defaut}},#ENV{objet},#ENV{id_objet},#SELF,'non'}
+	#FORMULAIRE_EDITER_GIS{#ENV{id_gis,#GET{gis_defaut}},#ENV{objet},#ENV{id_objet},#SELF,'non',#ENV{options_formulaire_editer_gis}}
 ]
 
 [(#GET{bloc_gis}|=={lier}|oui)
