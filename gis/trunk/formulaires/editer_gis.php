@@ -39,7 +39,6 @@ function formulaires_editer_gis_charger_dist($id_gis='new', $objet='', $id_objet
 	    if (is_numeric($options['ne_lon']))
         	$valeurs['ne_lon']=$options['ne_lon'];
 	}
-spip_log($valeurs,'quipus');
 	return $valeurs;
 }
 
