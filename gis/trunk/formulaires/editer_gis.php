@@ -29,7 +29,17 @@ function formulaires_editer_gis_charger_dist($id_gis='new', $objet='', $id_objet
         	$valeurs['lon']=$options['lon'];
     	if (is_numeric($options['zoom']) && intval($options['zoom'])==$options['zoom'])
 	        $valeurs['zoom']=$options['zoom'];
+		/* Bounding Box */
+	    if (is_numeric($options['sw_lat']))
+        	$valeurs['sw_lat']=$options['sw_lat'];
+	    if (is_numeric($options['sw_lon']))
+        	$valeurs['sw_lon']=$options['sw_lon'];
+	    if (is_numeric($options['ne_lat']))
+        	$valeurs['ne_lat']=$options['ne_lat'];
+	    if (is_numeric($options['ne_lon']))
+        	$valeurs['ne_lon']=$options['ne_lon'];
 	}
+spip_log($valeurs,'quipus');
 	return $valeurs;
 }
 

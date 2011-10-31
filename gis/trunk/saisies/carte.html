@@ -1,18 +1,32 @@
 [(#REM)
 
-    Saisie carte
+	Saisie carte
 
-    Parametres optionnels:
+	Parametres optionnels:
 
-    - lat = 48.3                    latitude du centre de la carte
-    - lon = -4.7                    longitude du centre de la carte
-    - zoom = 5                      zoom de la carte
+	- lat = 48.3                    latitude du centre de la carte
+	- lon = -4.7                    longitude du centre de la carte
+	- zoom = 5                      zoom de la carte
+	- sw_lat = lat - 10°            latitude du sud-ouest de la bounding box
+	- sw_lon = lon - 10°            longitude du sud-ouest de la bounding box
+	- ne_lat = lat + 10°            latitude du nord-est de la bounding box
+	- ne_lon = lon + 10°            longitude du nord-est de la bounding box
 
 ]
 
 [(#SET{init_lat,#ENV{lat,#CONFIG{gis/lat,0}}})]
 [(#SET{init_lon,#ENV{lon,#CONFIG{gis/lon,0}}})]
 [(#SET{init_zoom,#ENV{zoom,#CONFIG{gis/zoom,0}}})]
+[(#REM) On utilise la bounding box seulement si le centre n'a pas été donné et si les quatre valeurs de la bounding box sont renseignées
+        Les valeurs par defaut sont "centre +/- 10°", ce qui est naze, mais c'est un cas normalement impossible
+]
+[(#ENV{lat}|ou{#ENV{lon}}|non|et{#ENV{sw_lat}}|et{#ENV{sw_lon}}|et{#ENV{ne_lat}}|et{#ENV{ne_lon}})
+	#SET{utiliser_bb, oui}
+	#SET{init_sw_lat,#ENV{sw_lat,#GET{lat}|moins{10}}}
+	#SET{init_sw_lon,#ENV{sw_lon,#GET{lon}|moins{10}}}
+	#SET{init_ne_lat,#ENV{ne_lat,#GET{lat}|plus{10}}}
+	#SET{init_ne_lon,#ENV{ne_lon,#GET{lon}|plus{10}}}
+]
 
 <li class="pleine_largeur editer editer_[(#ENV{nom})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]"[ data-id="(#ENV{id_saisie})"]>
 #ENV*{inserer_debut}
@@ -80,7 +94,19 @@ var geocoder;]
 		// creer la carte
 		var map_container = 'map_[(#ENV{nom})]';
 		form_map = new mxn.Mapstraction(map_container,'[(#REM|gis_api_utilisee)]');
-		form_map.setCenterAndZoom(new mxn.LatLonPoint(#GET{init_lat},#GET{init_lon}),#GET{init_zoom});
+		[(#GET{utiliser_bb}|non)
+		form_map.setCenterAndZoom(new mxn.LatLonPoint([(#GET{init_lat})],[(#GET{init_lon})]),[(#GET{init_zoom})]);
+		]
+		[(#GET{utiliser_bb}|oui)
+		form_map.setBounds(new mxn.BoundingBox([(#GET{init_sw_lat})],[(#GET{init_sw_lon})],[(#GET{init_ne_lat})],[(#GET{init_ne_lon})]));
+		// mettre à jour les champs de latitude et longitude quand la carte est chargée
+		// a voir si on le fait dans tous les cas, pas seulement pour la boundingbox, comme pour le zoom
+		form_map.load.addHandler(function(name, source, args) {
+			var center = source.getCenter();
+			$('#champ_#ENV{champ_lat,lat}').val(center.lat);
+			$('#champ_#ENV{champ_lon,lon}').val(center.lon);
+		});		
+		]
         // Pour l'API Openlayers, la methode n'existe pas
         try {
 			form_map.setMapType([mxn.Mapstraction.(#REM|gis_maptype_utilise)]);
