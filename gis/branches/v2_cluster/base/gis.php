@@ -40,7 +40,10 @@ function gis_declarer_tables_principales($tables_principales){
 		);
 	
 	$spip_gis_key = array(
-		"PRIMARY KEY" => "id_gis");
+		"PRIMARY KEY" => "id_gis",
+		"KEY lat" => "lat",
+		"KEY lon" => "lon"
+	);
 	
 	$tables_principales['spip_gis'] = array(
 		'field' => &$spip_gis,

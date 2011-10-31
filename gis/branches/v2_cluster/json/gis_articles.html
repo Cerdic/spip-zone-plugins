@@ -1,4 +1,4 @@
-		<BOUCLE_art(ARTICLES){id_article ?}{id_rubrique ?}{id_secteur ?}{id_mot ?}{id_auteur ?}{recherche ?}{0, #ENV{limit}}{","}><BOUCLE_gis(GIS){id_article}{","}>
+		<BOUCLE_art(ARTICLES){id_article ?}{id_rubrique ?}{id_secteur ?}{id_mot ?}{id_auteur ?}{recherche ?}{0, #ENV{limit}}{","}><BOUCLE_gis(GIS){id_article}{lat >= #ENV{minlat,-90}}{lat <= #ENV{maxlat,90}}{lon >= #ENV{minlon,-180}}{lon <= #ENV{maxlon,180}}{","}>
 		{"type": "Feature",
 		"geometry": {"type": "Point", "coordinates": [#LON, #LAT]},
 		"properties": {

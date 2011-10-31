@@ -215,6 +215,8 @@ function filtre_gis_cluster($flux, $distance=40, $zoom=3) {
 			$result[$key]['properties']['title'] = json_encode($nb_markers);
 			// marquer les markers qui sont des clusters, attribut category dans mxn.addJSON()
 			$result[$key]['properties']['category'] = 'cluster';
+			// pas d'infoBubble pour les markers de cluster
+			$result[$key]['properties']['infoBubble'] = '';
 			// récupérer les bounds pour afficher l'enssemble des points du clusters
 			$bounds = array(
 				'sw_lat' => $result[$key]['geometry']['coordinates'][1],

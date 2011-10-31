@@ -78,6 +78,13 @@ function gis_upgrade($nom_meta_base_version,$version_cible){
 			sql_alter("TABLE spip_gis CHANGE lon lon DOUBLE NULL NULL");
 			ecrire_meta($nom_meta_base_version,$current_version="2.0.2",'non');
 		}
+		if (version_compare($current_version, '2.0.3','<')){
+			// ajouter des index sur les coords lat/lon
+			include_spip('base/abstract_sql');
+			sql_alter("TABLE spip_gis ADD INDEX (lat)");
+			sql_alter("TABLE spip_gis ADD INDEX (lon)");
+			ecrire_meta($nom_meta_base_version,$current_version="2.0.3",'non');
+		}
 	}
 }
 

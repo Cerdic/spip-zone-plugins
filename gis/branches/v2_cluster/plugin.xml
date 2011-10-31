@@ -1,8 +1,8 @@
 <plugin>
 	<nom>GIS</nom>
 	<auteur>b_b, kent1</auteur>
-	<version>2.1.0</version>
-	<version_base>2.0.2</version_base>
+	<version>2.1.1</version>
+	<version_base>2.0.3</version_base>
 	<licence>GNU/GPL</licence>
 	<etat>dev</etat>
 	<slogan>G&#233;olocaliser les objets SPIP</slogan>
@@ -85,7 +85,7 @@ _ Icon from [mattrich->http://mattrich.deviantart.com/art/Picnic-101256405] unde
 	<necessite id="saisies" version="[1.7.1;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<necessite id="afficher_objets" version="[1.2.0;]" />
-	<necessite id="lib:mxn-gis-cluster-2.0.9" src="https://github.com/downloads/brunob/mxn/mxn-gis-cluster-2.0.9.zip" />
+	<necessite id="lib:mxn-gis-cluster-2.0.10" src="https://github.com/downloads/brunob/mxn/mxn-gis-cluster-2.0.10.zip" />
 	<categorie>divers</categorie>
 	<traduire gestionnaire="salvatore" module="gis" reference="fr" />
 </plugin>

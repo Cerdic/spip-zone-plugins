@@ -99,27 +99,33 @@ var map[(#GET{id})];
 		
 		[(#ENV{control_pan,#ENV{contole_pan}}|!={non}|oui)
 		map[(#GET{id})].addControls({pan: true});]
-
-		[(#ENV{point}|!={non}|oui)
-		jQuery.getJSON("[(#URL_PAGE{gis_json}|url_absolue)]",
-			{[
-				objets : "(#ENV{objets})",][
-				id_rubrique : (#ENV{id_rubrique}),][
-				id_secteur : (#ENV{id_secteur}),][
-				id_parent : (#ENV{id_parent}),][
-				id_article : (#ENV{id_article}),][
-				id_breve : (#ENV{id_breve}),][
-				id_document : (#ENV{id_document}),][
-				id_mot : (#ENV{id_mot}),][
-				id_groupe : (#ENV{id_groupe}),][
-				id_auteur : (#ENV{id_auteur}),][
-				id_syndic : (#ENV{id_syndic}),][
-				id_forum : (#ENV{id_forum}),][
-				id_gis : (#ENV{id_gis}),][
-				cluster : "(#ENV{cluster})",][
-				recherche : "(#ENV{recherche})",][
-				limit : (#ENV{limit,#ENV{limite,500}})]
-			},
+		
+	[(#ENV{point}|!={non}|oui)
+		map[(#GET{id})].json_url = "[(#URL_PAGE{gis_json}|url_absolue)]";
+		map[(#GET{id})].json_args = {[
+			objets : "(#ENV{objets})",][
+			id_rubrique : (#ENV{id_rubrique}),][
+			id_secteur : (#ENV{id_secteur}),][
+			id_parent : (#ENV{id_parent}),][
+			id_article : (#ENV{id_article}),][
+			id_breve : (#ENV{id_breve}),][
+			id_document : (#ENV{id_document}),][
+			id_mot : (#ENV{id_mot}),][
+			id_groupe : (#ENV{id_groupe}),][
+			id_auteur : (#ENV{id_auteur}),][
+			id_syndic : (#ENV{id_syndic}),][
+			id_forum : (#ENV{id_forum}),][
+			id_gis : (#ENV{id_gis}),][
+			cluster : "(#ENV{cluster})",][
+			recherche : "(#ENV{recherche})",][
+			limit : (#ENV{limit,#ENV{limite,500}})]
+		};
+		
+		[(#ENV{cluster}|non)
+		map[(#GET{id})].load.addHandler(function() { gis_load_json(map[(#GET{id})]); });
+		/*
+		jQuery.getJSON(map[(#GET{id})].json_url,
+			map[(#GET{id})].json_args,
 			function(data) {
 				if (data){
 					map[(#GET{id})].addJSON(data);
@@ -130,12 +136,22 @@ var map[(#GET{id})];
 					} else {
 						map[(#GET{id})].autoCenterAndZoom();
 					}]
-					[(#ENV{cluster}|oui)
-					gis_cluster(map[(#GET{id})],'[(#CHEMIN{images/bg_cluster.png}|url_absolue)]');]
 				}
 			}
-		);]
+		);*/]
 		
+		[(#ENV{cluster}|oui)
+		map[(#GET{id})].cluster = true;[
+		map[(#GET{id})].cluster_icon = '(#CHEMIN{images/bg_cluster.png}|url_absolue)';]
+		]
+		
+		// surveiller le changement de zoom et le déplacement dans la carte
+		map[(#GET{id})].changeZoom.addHandler(function() { gis_load_json(map[(#GET{id})]); });
+		map[(#GET{id})].endPan.addHandler(function() { gis_load_json(map[(#GET{id})]); });
+
+		
+	]
+						
 		[(#ENV{kml}|oui)
 		[(#ENV{kml}|intval|oui)
 		map[(#GET{id})].addOverlay(['(#ENV{kml}|generer_url_entite{document}|url_absolue)']);]
