@@ -38,6 +38,10 @@ function exec_adherents() {
 		$statut_interne = _request('statut_interne');
 		$lettre= _request('lettre');
 
+		/* bloc des raccourcis */
+		$res.=association_icone(_T('asso:gerer_les_groupes'),  generer_url_ecrire("groupes"), 'annonce.gif',  '');
+		echo bloc_des_raccourcis($res);
+
 		echo debut_boite_info(true);
 
 		echo association_icone(_T('asso:menu2_titre_relances_cotisations'),  $url_edit_relances, 'ico_panier.png');
@@ -75,15 +79,18 @@ function exec_adherents() {
 	
 
 		/* on appelle ici la fonction qui calcule le code du formulaire/tableau de membres pour pouvoir recuperer la liste des membres affiches a transmettre a adherents_table pour la generation du pdf */
-		//Filtre ID
+		//Filtre ID et groupe : si le filtre id est actif, on ignore le filtre groupe
 		$id = intval(_request('id'));
 		if (!$id) {
 			$id = _T('asso:adherent_libelle_id_auteur');
+			//Filtre groupe
+			$id_groupe = intval(_request('id_groupe'));
 		} else {
 			$critere = "a.id_auteur=$id";
+			$id_groupe = 0;
 		}
 
-		list($liste_id_auteurs, $code_liste_membres) = adherents_liste(intval(_request('debut')), $lettre, $critere, $statut_interne);
+		list($liste_id_auteurs, $code_liste_membres) = adherents_liste(intval(_request('debut')), $lettre, $critere, $statut_interne, $id_groupe);
 	
 		echo debut_cadre_enfonce('',true),
 		  '<h3 style="text-align:center;">',
@@ -123,6 +130,19 @@ function exec_adherents() {
 		echo "\n<a href='$h'>"._T('asso:adherent_entete_tous').'</a>'; }
 		
 		// FILTRES
+		//Filtre groupes
+		echo '</td><td style="text-align:right;">';
+		echo "\n<form method='post' action='".$url_adherents."'><div>";
+		echo '<select class="fondl" name="id_groupe" onchange="form.submit()">';
+		$qGroupes = sql_select('nom, id_groupe', 'spip_asso_groupes');
+		echo '<option value="">'._T('asso:tous_les_groupes').'</option>';
+		while ($groupe = sql_fetch($qGroupes)) {
+			echo '<option value="'.$groupe['id_groupe'].'"';
+			if ($id_groupe==$groupe['id_groupe']) echo ' selected="selected"';
+			echo '>'.$groupe['nom'].'</option>';
+		}
+		echo '</select>';
+
 		//Filtre ID
 		echo '</td><td style="text-align:right;">';
 		
@@ -156,16 +176,22 @@ function exec_adherents() {
 }
 
 /* adherent liste renvoie un tableau des id des auteurs affiches et le code html */
-function adherents_liste($debut, $lettre, $critere, $statut_interne)
+function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe)
 {
 
 	$max_par_page=30;
 
 	if ($lettre)
 		$critere .= " AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";
+
+	$jointure_groupe = "";
+	if ($id_groupe) {
+		$critere .= " AND c.id_groupe=$id_groupe ";
+		$jointure_groupe = " LEFT JOIN spip_asso_groupes_liaisons c ON b.id_auteur=c.id_auteur ";
+	}
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	include_spip('inc/filtres_images_mini');
-	$query = sql_select('a.id_auteur AS id_auteur, b.email AS email, a.sexe, a.nom_famille, a.prenom, a.id_asso, b.statut AS statut, a.validite, a.statut_interne, a.categorie, b.bio AS bio','spip_asso_membres' .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere, '', "nom_famille ", "$debut,$max_par_page" );
+	$query = sql_select('a.id_auteur AS id_auteur, b.email AS email, a.sexe, a.nom_famille, a.prenom, a.id_asso, b.statut AS statut, a.validite, a.statut_interne, a.categorie, b.bio AS bio','spip_asso_membres' .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur $jointure_groupe", $critere, '', "nom_famille ", "$debut,$max_par_page" );
 	$auteurs = '';
 	$liste_id_auteurs = array();
 	while ($data = sql_fetch($query)) {	
@@ -234,8 +260,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne)
 		. '<td class="'.$class. '">'
 		. association_bouton(_T('asso:adherent_label_voir_membre'), 'voir-12.png', 'voir_adherent','id='.$id_auteur)
 		. "</td>\n"
-		. '<td class="'.$class. '"><input name="desactive[]" type="checkbox" value="'.$id_auteur.'" /></td>'
-		. '<td class="'.$class. '"><input name="delete[]" type="checkbox" value="'.$id_auteur.'" /></td>'
+		. '<td class="'.$class. '"><input name="id_auteurs[]" type="checkbox" value="'.$id_auteur.'" /></td>'
 		. "</tr>\n";
 	}
 	
@@ -250,8 +275,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne)
 	$res .= "<th>"._T('asso:adherent_libelle_categorie')."</th>\n"
 	. "<th>"._T('asso:adherent_libelle_validite')."</th>\n"
 	. '<th colspan="4" style="text-align:center;">'._T('asso:adherent_entete_action')."</th>\n"
-	. "<th>"._T('asso:adherent_entete_desactiver_abrev')."</th>\n"
-	. "<th>"._T('asso:adherent_entete_supprimer_abrev')."</th>\n"
+	. '<th><input title="'._T('asso:selectionner_tout').'" type="checkbox" id="selectionnerTous" onclick="var currentVal = document.getElementById(\'selectionnerTous\').checked; var checkboxList = document.getElementsByName(\'id_auteurs[]\'); for (var i in checkboxList){checkboxList[i].checked=currentVal;}" /></th>'
 	. '</tr>'
 	. $auteurs
 	. '</table>';
@@ -276,7 +300,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne)
 	}
 	
 	$res .= "\n<div style='float:right;'>\n"
-	.  (!$auteurs ? '' : ('<input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" />'))
+	.  (!$auteurs ? '' : ('<select name="action_adherents"><option value="" selected="">'._T('asso:choisir_action').'</option><option value="desactive">'.($statut_interne=='sorti'?_T('asso:reactiver_adherent'):_T('asso:desactiver_adherent')).'</option><option value="delete">'._T('asso:supprimer_adherent').'</option><option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_groupe').'</option></select><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" />'))
 	. '<input type="hidden" name="statut_courant" value="'.$statut_interne.'" />'
 	.  '</div>';
 

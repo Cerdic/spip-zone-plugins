@@ -1,0 +1,30 @@
+<div class="formulaire_spip formulaire_#FORM">
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form name="formulaire_#FORM" method="post" action="#ENV{action}">
+	<div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="editer_date">
+			<label for="nom"><strong><:asso:nom_groupe:></strong></label>
+			<input type="text" name="nom" [value="(#ENV{nom})"] id="nom"  class='formo'/>
+		</li>
+
+		<li class="editer_commentaires">
+			<label for="commentaires"><strong><:asso:commentaires:></strong></label>
+			<input type="text" name="commentaires" [value="(#ENV{commentaires})"] id="commentaires"  class='formo'/>
+		</li>
+
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{affichage}}
+		<li class="editer_affichage">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<label for="affichage"><strong><:asso:ordre_affichage:></strong></label>
+			<input type="text" name="affichage" [value="(#ENV{affichage})"] id="affichage"  class='formo'/>
+		</li>
+	</ul>
+
+<p class="boutons"><input type="submit" value="<:pass_ok:>" class="submit" /></p>
+
+</div>
+</form>
+</div>

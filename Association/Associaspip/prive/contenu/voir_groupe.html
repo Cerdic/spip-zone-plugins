@@ -1,0 +1,16 @@
+<B_groupes>
+<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>
+	<tr style='background-color: #DBE1C5;'>
+		<th><strong><:asso:nom:></strong></th>
+		<th><strong><:asso:commentaires:></strong></th>
+		<th><strong><:asso:ordre_affichage_groupe:></strong></th>
+	</tr>
+<BOUCLE_groupes(ASSO_GROUPES){id_groupe=#ENV{id_groupe}}>
+	<tr>
+		<td>[(#NOM)]</td>
+		<td>[(#COMMENTAIRES)]</td>
+		<td>[(#AFFICHAGE)]</td>
+	</tr>
+</BOUCLE_groupes>
+</table>
+</B_groupes>

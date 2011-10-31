@@ -15,6 +15,16 @@ border1 {border-top: 1px solid #CCCCCC;}
 h1.asso_titre { text-align:center; }
 
 /* Formulaires*/
+.formulaire_ajouter_membres_groupe {margin-top: 2em;}
+.formulaire_ajouter_membres_groupe .pagination {margin: 0px;}
+.formulaire_table_editable input.formo {padding: 2px; width:90%;}
+
+/* liste auteurs 5 par lignes dans un formulaire */
+.formulaire_spip li.liste_auteurs { 	padding: 2px;
+					width:23%;
+					float: left;
+					clear: none;}
+
 .spip_forms form label {
 	float:none;
 }
@@ -305,3 +315,5 @@ span.erreur {
     margin-top: -1px;
     position: absolute;
 }
+
+

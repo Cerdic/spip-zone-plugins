@@ -46,6 +46,13 @@ function formulaires_editer_asso_membres_verifier_dist($id_auteur) {
 }
 
 function formulaires_editer_asso_membres_traiter($id_auteur) {
+	/* traitement des appartenance a un groupe */
+	$action_membre_groupes = charger_fonction('editer_membre_groupes','action');
+	$action_membre_groupes($id_auteur);
+	/* ajout a un groupe */
+	$action_ajouter_groupes = charger_fonction('ajouter_membre_groupes', 'action');
+	$action_ajouter_groupes($id_auteur);
+
 	return formulaires_editer_objet_traiter('asso_membres', $id_auteur, '', '',  generer_url_ecrire('adherents'), '');
 }
 ?>

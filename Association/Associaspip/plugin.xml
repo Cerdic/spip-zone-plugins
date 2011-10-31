@@ -5,14 +5,14 @@
 	Emmanuel Saint-James - Jeannolapin
 	</auteur>
 	<version>2.1.0</version>
-	<version_base>51602</version_base>
+	<version_base>53901</version_base>
 	<meta>association_metas</meta>
 	<etat>dev</etat>
 	<slogan>Gestion d'associations</slogan>
 	<description>Gestion d'associations</description>
 	<prefix>association</prefix>	
 	<install>base/association_gestion.php</install>
-	<lien>http://www.spip-contrib.net/Plugin-Gestion-d-associations</lien>
+	<lien>http://www.spip-contrib.net/Associaspip</lien>
 	<icon>img_pack/annonce.gif</icon>
 
 	<options>association_options.php</options>

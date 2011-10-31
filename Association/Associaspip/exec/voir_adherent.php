@@ -91,10 +91,23 @@ function exec_voir_adherent(){
 		
 		 debut_cadre_relief(  "", false, "", $titre = $nom_membre);
 
-		 echo _T('asso:liens_vers_les_justificatifs'), ' ', voir_adherent_recus($id_auteur), '<br /><br />';
+		// Liste des groupes
+		$query = sql_select('g.id_groupe as id_groupe, g.nom as nom', 'spip_asso_groupes g LEFT JOIN spip_asso_groupes_liaisons l ON g.id_groupe=l.id_groupe', 'l.id_auteur='.$id_auteur, '', 'g.nom');
+		if (sql_count($query)) {
+			echo '<div class="cadre_padding">'._T('asso:groupes_dp');
+			if ($row=sql_fetch($query)) {
+				echo ' <a href="'.generer_url_ecrire('voir_groupe', 'id='.$row['id_groupe']).'">'.$row['nom'].'</a>';
+			}
+			while ($row=sql_fetch($query)) {
+				echo ', <a href="'.generer_url_ecrire('voir_groupe', 'id='.$row['id_groupe']).'">'.$row['nom'].'</a>';
+			}
+			echo '.</div>';
+		}
+
 
 		// FICHE HISTORIQUE COTISATIONS
 		echo '<fieldset><legend>'._T('asso:adherent_titre_historique_cotisations').'</legend>';
+		echo _T('asso:liens_vers_les_justificatifs'), ' ', voir_adherent_recus($id_auteur), '<br /><br />';
 		/* si on a l'autorisation admin, on ajoute un bouton pour ajouter une cotisation */
 		if ($full) {
 			echo '<a href="'.generer_url_ecrire('ajout_cotisation', 'id='.$id_auteur).'">'._T('asso:adherent_label_ajouter_cotisation').'</a>';

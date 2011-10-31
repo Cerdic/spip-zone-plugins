@@ -58,68 +58,15 @@ function exec_association() {
 		}
 		echo fin_cadre_formulaire(true);
 		
-		$coordonnees_actif = test_plugin_actif('COORDONNEES');
-		include_spip('inc/association_coordonnees');
-
-		/* on recupere tout dans un tableau php pour pouvoir extraire le tableau des id_auteur a envoyer en parametre aux fonction de recuperation d'emails et telephone */
-		$all = sql_allfetsel("id_auteur, statut_interne, fonction, nom_famille, prenom, sexe", 'spip_asso_membres', "fonction <> '' AND statut_interne <> 'sorti'", '',  "nom_famille");
-		$tr_class = "pair";
-		$id_auteurs = array();
-		foreach ($all as $data) {
-			$id_auteurs[] = $data['id_auteur'];
+		/* affiche tous les groupes devant l'etre */
+		$queryGroupesAffiches = sql_select('id_groupe, nom', 'spip_asso_groupes', 'affichage>0', '', 'affichage');
+		while ($row = sql_fetch($queryGroupesAffiches)) {
+			echo '<br/><a title="'._T('asso:editer_groupe').'" href="'.generer_url_ecrire('edit_groupe', 'id='.$row['id_groupe']).'">'.gros_titre($row['nom'], '', false).'</a>';
+			echo debut_cadre_relief('', true);
+			echo recuperer_fond('prive/contenu/voir_membres_groupe', array('id_groupe' => $row['id_groupe']));
+			echo fin_cadre_relief(true);
 		}
-
-		$emails = association_recuperer_emails_string($id_auteurs);
-
-		echo '<br />';
-		echo gros_titre(_T('asso:le_bureau'),'',false);		
-		echo '<br />';	
 		
-		echo debut_cadre_relief('', true);
-		
-		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-		echo "<tr style='background-color: #DBE1C5;'>\n";
-		echo '<th>' . _T('asso:nom') . "</th>\n";
-		echo '<th>' . _T('asso:fonction') . "</th>\n";
-		if ($coordonnees_actif) {
-			$telephones = association_recuperer_telephones_string($id_auteurs);
-			echo '<th>' . _T('asso:telephone') . "</th>\n";
-		}
-		echo '<th>' . _T('asso:email') .  "</th>\n";
-
-		echo '</tr>';
-
-		foreach ($all as $data) {
-			$id_auteur=$data['id_auteur'];
-			$nom_affiche = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
-			 
-			$auteur = generer_url_ecrire('auteur_infos',"id_auteur=$id_auteur");
-			$adh = generer_url_ecrire('voir_adherent',"id=$id_auteur");
-			echo "\n<tr class='".$tr_class."'>\n";
-			$tr_class = ($tr_class == "pair")?"impair":"pair";
-
-			echo "<td class='arial11 border1'>",
-				"<a href='$auteur' title=\"",
-				_T('lien_voir_auteur'),
-				'">',
-				htmlspecialchars($nom_affiche),
-				 "</a></td>\n";
-
-			echo "<td class='arial11 border1'>",
-				"<a href='$adh' title=\"",
-				_T('asso:adherent_label_voir_membre'),
-				"\">",
-				htmlspecialchars($data['fonction']),
-				 "</a></td>\n";
-			if ($coordonnees_actif) {
-				echo '<td class="arial1 border1">'.$telephones[$id_auteur].'</td>';
-			}
-			echo '<td class="arial1 border1" style="text-align:center">'.$emails[$id_auteur].'</td>';
-			echo "</tr>\n";
-		}
-		echo '</table>';
-		
-		echo fin_cadre_relief(true);	
 		echo fin_page_association();
 		
 		//Petite routine pour mettre à jour les statuts de cotisation "échu"

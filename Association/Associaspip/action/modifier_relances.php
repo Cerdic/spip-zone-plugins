@@ -24,8 +24,9 @@ function action_modifier_relances() {
 	$statut_tab=(isset($_POST["statut"])) ? $_POST["statut"]:array(); /* contient un tableau id_auteur => statut_interne */
 
 	$adresse=$GLOBALS['association_metas']['email'];
-	$exp=$GLOBALS['association_metas']['nom'].'<'.$adresse.'>'; 
-	$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
+	$exp=$GLOBALS['association_metas']['nom'].'<'.$adresse.'>';
+	include_spip ('inc/envoyer_mail');
+	//$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 	
 	/* on recupere les adresses emails de tous les auteurs selectionnes */
 	include_spip('inc/association_coordonnees');
@@ -47,7 +48,7 @@ function action_modifier_relances() {
 
 		/* envoi des mails */
 		foreach ($emails as $email) {
-			if (!$envoyer_mail($email, $sujet, $message, $exp)) {
+			if (!inc_envoyer_mail_dist($email, $sujet, $message, $exp)) {
 				$emails_envoyes_echec++;
 				spip_log("non envoi du mail a ".$email);
 			} else {

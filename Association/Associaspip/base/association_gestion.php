@@ -36,7 +36,9 @@ $tables_a_supprimer=array(
 		'spip_asso_prets',
 		'spip_asso_ressources',
 		'spip_asso_ventes',
-		'spip_association_metas');
+		'spip_association_metas',
+		'spip_asso_groupes',
+		'spip_asso_groupes_liaisons');
 	
 	foreach($tables_a_supprimer as $table);
 		{
@@ -449,6 +451,37 @@ $GLOBALS['association_maj'][52476] = array(
 	array('sql_update', 'spip_association_metas', array('nom' => "'meta_utilisateur_n_tva'" ), "nom='tva' AND valeur<>''" ),
 	array('sql_delete', 'spip_association_metas', "nom='tva' AND valeur=''" ),
 	);
+
+/* mise a jour introduisant les groupes */
+function association_maj_53901()
+{
+	sql_create('spip_asso_groupes', 
+		$GLOBALS['tables_principales']['spip_asso_groupes']['field'],
+		$GLOBALS['tables_principales']['spip_asso_groupes']['key']);
+	sql_alter("TABLE spip_asso_groupes AUTO_INCREMENT = 100");
+	sql_create('spip_asso_groupes_liaisons', 
+		$GLOBALS['tables_principales']['spip_asso_groupes_liaisons']['field'],
+		$GLOBALS['tables_principales']['spip_asso_groupes_liaisons']['key']);
+
+	/* si on a des membres avec une fonction defini, on recupere tout et on les mets dans un groupe appele bureau */
+	$liste_membres_bureau = sql_select("id_auteur, fonction" ,"spip_asso_membres", "fonction <> ''");
+	if (sql_count($liste_membres_bureau )) {
+		/* on cree un groupe "Bureau" */
+		$id_groupe = sql_insertq("spip_asso_groupes", array('nom' => 'Bureau', 'affichage' => '1'));
+		/* et on y insere tous les membres qui avaient une fonction */
+		while ($membre_bureau = sql_fetch($liste_membres_bureau)) {
+			sql_insertq("spip_asso_groupes_liaisons", array(	'id_groupe' => $id_groupe,
+															'id_auteur' => $membre_bureau['id_auteur'],
+															'fonction'  => $membre_bureau['fonction'],
+													));
+		}
+	}
+
+	/* on supprime le champs fonction de la table spip_asso_membres car il est maintenant gere dans spip_asso_groupes_liaison */
+	sql_alter("TABLE spip_asso_membres DROP fonction");
+}
+
+$GLOBALS['association_maj'][53901] = array(array('association_maj_53901'));
 
 
 ?>

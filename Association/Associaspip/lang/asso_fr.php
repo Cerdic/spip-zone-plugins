@@ -110,6 +110,34 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_pas_de_nom_meta_utilisateur' => 'Le nom d\'un champs ne peut pas &ecirc;tre vide, si vous voulez supprimer un champs, utilisez le bouton supprimer sur la page listant tous les champs utilisateur.',
 	
 		
+	# Groupes
+	'gerer_les_groupes' => 'G&eacute;rer les groupes',
+	'gestion_groupes' => 'Gestion des groupes',
+	'nom_groupe' => 'Nom du groupe',
+	'ordre_affichage' => 'Ordre d\'affichage sur la page d\'accueil',
+	'ajouter_un_groupe' => 'Ajouter un groupe',
+	'tous_les_groupes' => 'Tous les groupes',
+	'aucun_membre_dans_ce_groupe' => 'Aucun membre dans ce groupe',
+	'editer_groupe' => 'Editer le groupe',
+	'supprimer_groupe' => 'Supprimer le groupe',
+	'ajouter_membres_au_groupe' => 'Ajouter ces membres au groupe',
+	'titre_editer_groupe' => 'Editer le groupe',
+	'ajouter' => 'Ajouter',
+	'exclure' => 'Exclure',
+	'supprimer_selectionnes' => 'Exclure les membres selectionn&eacute;s',
+	'ok_edition_groupe' => 'Sauvegarder les modifications du champs Fonction',
+	'ordre_affichage_groupe' => 'Ordre d\'affichage',
+	'aide_groupes' => '<p><strong>Affichage d\'un groupe sur la page d\'accueil</strong></p><p>Pour afficher un groupe sur la page d\'accueil du plugin, par exemple le groupe "Bureau", il suffit de mettre un nombre entier diff&eacute;rent de z&eacute;ro dans le champs "Ordre d\'affichage".</p><p>Les groupes affich&eacute;s le sont par ordre croissant de cet index.</p>',
+	'vous_vous_appretez_a_supprimer_le_groupe' => 'Vous vous appretez &agrave; supprimer le groupe ',
+	'adherent_message_grouper' => '<p>S&eacute;lectionner les groupes que les adh&eacute;rents suivants vont rejoindre.</p>',
+	'adherents_dp' => 'Adh&eacute;rents :',
+	'groupes_dp' => 'Groupes :',
+	'groupe_dp' => 'Groupe :',
+	'rejoindre_un_groupe' => 'Rejoindre un ou plusieurs groupes',
+	'quitter_groupe' => 'Quitter un groupe',
+	'adherent_message_degrouper' => '<p>S&eacute;lectionner les groupes dont les adh&eacute;rents seront exclus.</p>',
+	'titre_voir_groupe' => 'Voir le groupe',
+				
 	# Entetes globales
 	'entete_id' => 'ID',
 	'entete_action' => 'Action',
@@ -151,6 +179,13 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'le_bureau' => 'Bureau de l\'association',
 	
 # Adherents
+ # Actions
+	'selectionner_tout' => 'D&eacute;/S&eacute;lectionner tout',
+	'choisir_action' => 'Pour la s&eacute;lection :',
+	'desactiver_adherent' => 'D&eacute;sactiver',
+	'reactiver_adherent' => 'R&eacute;activer',
+	'supprimer_adherent' => 'Supprimer',
+	'rejoindre_groupe' => 'Rejoindre un groupe',
  # Titres
 	'adherent_titre_action_membres_actifs' => 'Action sur les membres actifs',
 	'adherent_titre_modifier_membre' => 'Modifier un membre actif',

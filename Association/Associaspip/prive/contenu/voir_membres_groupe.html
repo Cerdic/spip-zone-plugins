@@ -1,0 +1,28 @@
+#SET{coordonnees_actif, #VAL{COORDONNEES}|test_plugin_actif}
+#SET{listeIdAuteurs, #ARRAY}
+<BOUCLE_listeID(ASSO_GROUPES_LIAISONS){id_groupe=#ENV{id_groupe}}>#SET{listeIdAuteurs, #GET{listeIdAuteurs}|push{#ID_AUTEUR}}</BOUCLE_listeID>
+#SET{emails,#ARRAY}
+#SET{emails,#GET{listeIdAuteurs}|association_recuperer_emails_string}
+#SET{telephones,#ARRAY}
+#SET{telephones,#GET{listeIdAuteurs}|association_recuperer_telephones_string}
+<B_groupes>
+<p class="pagination">#PAGINATION</p>
+<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>
+	<tr style='background-color: #DBE1C5;'>
+		<th><:asso:nom:></th>
+		<th><:asso:fonction:></th>
+		[(#GET{coordonnees_actif}|oui)<th><:asso:telephone:></th>]
+		<th><:asso:email:></th>
+	</tr>
+<BOUCLE_groupes(ASSO_GROUPES_LIAISONS asso_membres){id_groupe=#ENV{id_groupe}}{par nom_famille}{pagination}>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{'pair','impair'})]">
+		<td><a title="<:asso:adherent_label_voir_membre:>" href="#URL_ECRIRE{voir_adherent, id=#ID_AUTEUR}">[(#SEXE|association_calculer_nom_membre{#PRENOM, #NOM_FAMILLE}) ]</a></td>
+		<td>[(#FONCTION)]</td>
+		[(#GET{coordonnees_actif}|oui)<td>[(#GET{telephones}|table_valeur{#ID_AUTEUR})]</td>]
+		<td>[(#GET{emails}|table_valeur{#ID_AUTEUR})]</td>
+	</tr>
+</BOUCLE_groupes>
+</table>
+</B_groupes>
+<div><:asso:aucun_membre_dans_ce_groupe:></div>
+<//B_groupes>

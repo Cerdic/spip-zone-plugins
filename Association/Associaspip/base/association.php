@@ -221,13 +221,46 @@ $tables_principales['spip_asso_activites'] = array(
 );
 
 
+//-- Table groupes de membres: deux tables: groupe et liaison -----------------
+$spip_asso_groupes= array(
+	"id_groupe"		=> "bigint(20) NOT NULL auto_increment",
+	"nom"			=> "varchar(128) NOT NULL",
+	"commentaires"	=> "text",
+	"affichage"		=> "tinyint NOT NULL default 0",
+	"maj"			=> "timestamp NOT NULL"
+				);
+$spip_asso_groupes_key = array(
+	"PRIMARY KEY" => "id_groupe"
+);
+$tables_principales['spip_asso_groupes'] = array(
+	'field' => &$spip_asso_groupes, 
+	'key' => &$spip_asso_groupes_key
+);
+
+$spip_asso_groupes_liaisons= array(
+	"id_groupe" => "bigint(20) NOT NULL",
+	"id_auteur" => "bigint(20) NOT NULL",
+	"fonction" => "varchar(128) NOT NULL",
+	"date_debut" => "date NOT NULL default '0000-00-00'",
+	"date_fin" => "date NOT NULL default '0000-00-00'",
+	"commentaires"	=> "text",
+	"maj"			=> "timestamp NOT NULL"
+				);
+$spip_asso_groupes_liaisons_key = array(
+	"PRIMARY KEY" => "id_groupe,id_auteur"
+);
+$tables_principales['spip_asso_groupes_liaisons'] = array(
+	'field' => &$spip_asso_groupes_liaisons, 
+	'key' => &$spip_asso_groupes_liaisons_key
+);
+
+
 $spip_asso_membres= array(
   "id_auteur" => "bigint(21) NOT NULL auto_increment",
   "id_asso" => "text NOT NULL",
   "nom_famille" => "text NOT NULL",
   "prenom" => "text NOT NULL",
   "sexe" => "tinytext NOT NULL",
-  "fonction" => "text",
   "categorie" => "text NOT NULL",
   "statut_interne" => "text NOT NULL",
   "commentaire" => "text NOT NULL",
@@ -281,11 +314,15 @@ $tables_interfaces['table_des_tables']['asso_membres'] = 'asso_membres';
 $tables_interfaces['table_des_tables']['association_metas'] = 'association_metas';
 $tables_interfaces['table_des_tables']['asso_destination'] = 'asso_destination';
 $tables_interfaces['table_des_tables']['asso_destination_op'] = 'asso_destination_op';	
+$tables_interfaces['table_des_tables']['asso_groupes'] = 'asso_groupes';	
+$tables_interfaces['table_des_tables']['asso_groupes_liaisons'] = 'asso_groupes_liaisons';	
 
 // Pour que les raccourcis ci-dessous heritent d'une zone de clic pertinente
 //$tables_interfaces['table_titre']['asso_membres']= "nom_famille AS titre, '' AS lang";
 $tables_interfaces['table_titre']['asso_dons']= "CONCAT('don ', id_don) AS titre, '' AS lang";
 
+	/* jointures */
+	$tables_interfaces['tables_jointures']['spip_asso_membres']['id_auteur'] = 'asso_groupes_liaisons';
  return  $tables_interfaces;
 	
 }

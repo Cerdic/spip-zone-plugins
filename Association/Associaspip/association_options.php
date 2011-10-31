@@ -43,9 +43,9 @@ function association_bouton($texte, $image, $script, $args='', $img_attributes='
 	.' /></a>';
 }
 
-function association_retour()
+function association_retour($adresse_retour='')
 {
-	return bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']), "retour-24.png"));
+	return bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  ($adresse_retour=='')?str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']):$adresse_retour, "retour-24.png"));
 }
 
 function request_statut_interne()
@@ -226,4 +226,9 @@ include_spip('balise/meta');
 // charger les metas donnees
 $inc_meta = charger_fonction('meta', 'inc'); // inc_version l'a deja chargee
 $inc_meta('association_metas'); 
+
+// pouvoir utiliser les fonctions de coordonnees comme filtre
+if (test_plugin_actif('COORDONNEES')) {
+	include_spip('inc/association_coordonnees');
+}
 ?>

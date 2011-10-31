@@ -2,7 +2,7 @@
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations             *
  *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & Franï¿½ois de Montlivault (V1)       *
+ *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
  *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -12,11 +12,28 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_supprimer_adherents() {
+function action_editer_asso_groupes() {
 		
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-	$where = sql_in('id_auteur', _request('id_auteurs'));
-	sql_delete('spip_asso_membres', $where);
+	$id_groupe = $securiser_action();
+
+	$nom = _request('nom');
+	$commentaires = _request('commentaires');
+	$affichage = intval(_request('affichage'));
+
+	if ($id_groupe) {/* c'est une modification */
+		sql_updateq('spip_asso_groupes', array(
+			'nom' => $nom,
+			'affichage' => $affichage,
+			'commentaires' => $commentaires),
+		    "id_groupe=$id_groupe");
+	} else { /* c'est un ajout */
+		$id_groupe = sql_insertq('spip_asso_groupes', array(
+			'nom' => $nom,
+			'affichage' => $affichage,
+			'commentaires' => $commentaires));
+	}
+
+	return array($id_groupe, '');
 }
 ?>
