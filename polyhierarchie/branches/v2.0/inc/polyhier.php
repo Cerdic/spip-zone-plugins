@@ -128,7 +128,7 @@ function polyhier_get_parents($id_objet,$objet,$serveur=''){
  * @param int/array $id_parent
  * @param string $objet Un éventuel type d'objet
  * @param string $serveur
- * @return array
+ * @return array Retourne un tableau des enfants triés par objet : array('article' => array(1, 2, 3))
  */
 function polyhier_get_enfants($id_parent, $objet='', $serveur=''){
 
@@ -137,19 +137,23 @@ function polyhier_get_enfants($id_parent, $objet='', $serveur=''){
 	// selectionner l'intersection entre base et tableau
 	$objets = sql_allfetsel("objet, id_objet","spip_rubriques_liens",$where,"","","","",$serveur);
 	
-	// S'il n'y a pas de type on retourne tous les couples
-	if (!$objet){
-		return $objets;
+	if (!$objets or !is_array($objets)){
+		return array();
 	}
-	// S'il y a un type on retoure juste la liste des ID
 	else{
-		$ids = array();
+		$objets_tries = array();
 		foreach ($objets as $couple){
-			if ($couple['objet'] == $objet){
-				$ids[] = $couple['id_objet'];
+			// On ajoute que s'il n'y a pas de filtre, ou bien si le filtre correspond
+			if (!$objet or (is_string($objet) and $couple['objet'] == $objet) or (is_array($objet) and in_array($couple['objet'], $objet))){
+				if (isset($objets_tries[$couple['objet']])){
+					$objets_tries[$couple['objet']][] = $couple['id_objet'];
+				}
+				else{
+					$objets_tries[$couple['objet']] = array($couple['id_objet']);
+				}
 			}
 		}
-		return $ids;
+		return $objets_tries;
 	}
 }
 
