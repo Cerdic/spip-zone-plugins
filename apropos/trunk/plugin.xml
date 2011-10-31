@@ -1,7 +1,7 @@
 <plugin>
     <nom>À propos des Plugins actifs</nom>
     <auteur>[Jean-Philippe Guihard|Se rendre sur le site de Jean-Philippe Guihard->http://www.jp.guihard.net/]</auteur>
-    <version>0.2.2ß1</version>
+    <version>0.3.ß2</version>
     <etat>Test</etat>
 	<slogan>Liste les plugins actifs et affiche une description sommaire</slogan>
     <description>

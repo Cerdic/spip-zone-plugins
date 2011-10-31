@@ -1,19 +1,13 @@
 <?php
 /*
- * Plugin A propos des plugins pour SPIP 2
+ * Plugin A propos des plugins pour SPIP 3
  * Liste les plugins actifs avec affichage icon, nom, version, etat, short description
  * Utilisation intensive des fonctions faisant cela dans le code de SPIP
  * Auteur Jean-Philippe Guihard
- * version 0.2 du 06 janvier 2011, 23h40
+ * version 0.3.0 du 06 novembre 2011, 13h40
  * ajout de la possibilite de n'afficher que le nombre de plugin et extension  
  * code emprunte dans le code source de SPIP
  */
-/* 
-include_spip('inc/texte');
-include_spip('inc/plugin');
-include_spip('exec/admin_plugin');
-include_spip('inc/charsets');
-*/
 
 include_spip('inc/charsets');
 include_spip('inc/texte');
@@ -122,7 +116,7 @@ function apropos_plugins_afficher_list_dist($url_page,$liste_plugins, $liste_plu
 		$liste_plugins[$chemin] = strtoupper(trim(typo(translitteration(unicode2charset(html2unicode($info['nom']))))));
 	}
 	
-	// je trie cette liste par le nm de chacun
+	// je trie cette liste par le nom de chacun
 	asort($liste_plugins);
 	$exposed = urldecode(_request('plugin'));
 
@@ -134,7 +128,7 @@ function apropos_plugins_afficher_list_dist($url_page,$liste_plugins, $liste_plu
 	$block_actif = false;
 	
 	// pour chaque plugin, je vais aller chercher les informations complementaires a afficher
-	// en l'occurrence, nom, version, etat, slogan, description et logo.
+	// en l'occurrence, nom, version, etat, slogan ou description et logo.
 	foreach($liste_plugins as $plug => $nom){
 		$block .= apropos_plugins_afficher_plugins($url_page, $plug, "item", $dir_plugins)."\n";
 	}
@@ -160,49 +154,100 @@ function apropos_plugins_afficher_plugins($url_page, $plug_file, $class_li="item
 }
 
 // Extrait de Cartouche Resume a modifier pour l'affichage final
-/* Traite les infos a afficher */
+// prend en compte si version 2 ou version 3 de Spip
 function apropos_plugin_resumer($info, $dir_plugins, $plug_file, $url_page) {
-	//recherche la presence d'un fichier paquet.xml
-	if (is_readable($file = "$dir_plugins$plug_file/" . ($desc = "paquet") . ".xml")) {
-		$lefichier = 'lepaquet';
+	//recherche la version de Spip
+	$laversion = spip_version();
+	$version_de_spip = $laversion[0];
+	//si version 3 de Spip
+	if ($version_de_spip == '3'){
+		//recherche la presence d'un fichier paquet.xml
+		if (is_readable($file = "$dir_plugins$plug_file/" . ($desc = "paquet") . ".xml")) {
+			$lefichier = 'lepaquet';
+			}else{
+			if (is_readable($file = "$dir_plugins$plug_file/" . ($desc = "plugin") . ".xml"))
+			$lefichier = 'le pluginxml';
+		}
+		
+		$prefix = $info['prefix'];
+		$dir = "$dir_plugins$plug_file";
+		$slogan = PtoBR(plugin_propre($info['slogan'], "$dir/lang/paquet-$prefix"));
+		// test si slogan vide afin de prendre la description via le fichier plugin.xml le cas echeant
+		if ($slogan!==''){
+			// une seule ligne dans le slogan : couper si besoin
+			if (($p=strpos($slogan, "<br />"))!==FALSE)
+				$slogan = substr($slogan, 0,$p);
+			// couper par securite
+			$slogan = couper($slogan, 180).".";
+			}else{
+			$get_desc = charger_fonction('afficher_plugin','plugins');
+			$slogan = couper(plugin_propre($info['description']), 180);
+		}
+		
+		$url = parametre_url($url_page, "plugin", substr($dir,strlen(_DIR_RACINE)));
+	
+		// affiche l'icone du plugin ou une icone générique si absente
+		if (isset($info['logo']) and $i = trim($info['logo'])) {
+			include_spip("inc/filtres_images_mini");
+			$i = inserer_attribut(image_reduire("$dir/$i", 32),'alt','Icone du plugin '.$info['nom']);
+			$i = "<span class='apropos-icon'>".$i."</span>";
+		} else {
+			$generic = _DIR_PLUGIN_APROPOS."img/generique.png"; //mettre une icone generique si pas d'icone de defini
+			include_spip("inc/filtres_images_mini");
+			$i = inserer_attribut(image_reduire("$generic", 32),'alt','Icone g&eacute;n&eacute;rique pour le plugin '.$info['nom']);
+			$i = "<div class='apropos-icon'>$i</div>";
+		}
+		
+		// grosse différence avec Spip 2 qui retournait une liste et non 1 array
+		if (is_array($info['auteur'])) {
+		$auteur = PtoBR(plugin_propre(implode($info['auteur'])));
 		}else{
-		if (is_readable($file = "$dir_plugins$plug_file/" . ($desc = "plugin") . ".xml"))
-		$lefichier = 'le pluginxml';
+		$auteur = plugin_propre($info['auteur']);
+		}
+		$leNom=PtoBR(plugin_propre($info['nom']));
 	}
 	
-	$prefix = $info['prefix'];
-	$dir = "$dir_plugins$plug_file";
-	$slogan = PtoBR(plugin_propre($info['slogan'], "$dir/lang/paquet-$prefix"));
-	// test si slogan vide afin de prendre la description via le fichier plugin.xml le cas echeant
-	if ($slogan!==''){
-		// une seule ligne dans le slogan : couper si besoin
-		if (($p=strpos($slogan, "<br />"))!==FALSE)
-			$slogan = substr($slogan, 0,$p);
-		// couper par securite
-		$slogan = couper($slogan, 180).".";
-	}else{
+	//si version 2 de Spip
+	if ($version_de_spip == '2'){
 	$get_desc = charger_fonction('afficher_plugin','plugins');
-	$slogan = couper(plugin_propre($info['description']), 180);
+	$desc = plugin_propre($info['description']);
+	$dir = $dir_plugins.$plug_file;
+	if (($p=strpos($desc, "<br />"))!==FALSE)
+		$desc = substr($desc, 0,$p);
+		$slogan = couper($desc,180);
+		$url = parametre_url($url_page, "plugin", $dir);
+		$leNom = typo($info['nom']);
+		if (isset($info['icon']) and $i = trim($info['icon'])) {
+			include_spip("inc/filtres_images_mini");
+			$i = inserer_attribut(image_reduire("$dir/$i", 32),'alt','Icone du plugin '.$leNom);
+			$i = "<div class='apropos-icon'>$i</div>";
+		} else {
+			$generic = _DIR_PLUGIN_APROPOS."img/generique.png"; //mettre une icone generique si pas d'icone de defini
+			include_spip("inc/filtres_images_mini");
+			$i = inserer_attribut(image_reduire("$generic", 32),'alt','Icone g&eacute;n&eacute;rique pour le plugin '.$leNom);
+			$i = "<div class='apropos-icon'>$i</div>";
+			//$i = '';
+		}
+		$auteur = plugin_propre($info['auteur']) ;
+		
+			// on recherche la trace d'une arobase pour remplacer par 1 image
+			$lemail = strpos($auteur,'@') ;
+			if ($lemail !== false) {
+				$larobase = "<img src=\""._DIR_PLUGIN_APROPOS."img/arob.png\" alt=\"remplacant\" />";
+				$auteur = preg_replace('/@/', $larobase, $auteur);
+			}
+			// on recherche la trace d'un tag <br /> pour le supprimer
+			$lebr = strpos($auteur,'<br ') ;
+			if ($lebr !== false) {
+				$lepasbr = " ";
+				$auteur = preg_replace('/<br \/>/', $lepasbr, $auteur);
+			}
 	}
 	
-	$url = parametre_url($url_page, "plugin", substr($dir,strlen(_DIR_RACINE)));
-
-	if (isset($info['logo']) and $i = trim($info['logo'])) {
-		include_spip("inc/filtres_images_mini");
-		$i = inserer_attribut(image_reduire("$dir/$i", 32),'alt','Icone du plugin '.$info['nom']);
-		$i = "<span class='apropos-icon'>".$i."</span>";
-	} else {
-		$generic = _DIR_PLUGIN_APROPOS."img/generique.png"; //mettre une icone generique si pas d'icone de defini
-		include_spip("inc/filtres_images_mini");
-		$i = inserer_attribut(image_reduire("$generic", 32),'alt','Icone g&eacute;n&eacute;rique pour le plugin '.$info['nom']);
-		$i = "<div class='apropos-icon'>$i</div>";
-	}
-	$auteur = PtoBR(plugin_propre(implode($info['auteur'])));
-
 	return "<div class='resume'>"
 	. $i
 	. "<span class='apropos-nom'>"
-	. PtoBR(plugin_propre($info['nom']))
+	. $leNom
 	. "</span>"
 	. " <span class='apropos-version'>v ".$info['version']."</span>"
 	. " <span class='apropos-etat'> - "
