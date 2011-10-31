@@ -133,6 +133,10 @@ function polyhier_get_parents($id_objet,$objet,$serveur=''){
 function polyhier_get_enfants($id_parent, $objet='', $serveur=''){
 
 	$where = (is_array($id_parent) ? sql_in('id_parent',$id_parent) : ("id_parent=".intval($id_parent)));
+	if ($objet){
+		$where_objet = is_array($objet) ? sql_in('objet', $objet) : 'objet = '.sql_quote($objet);
+		$where .= ' and '.$where_objet;
+	}
 
 	// selectionner l'intersection entre base et tableau
 	$objets = sql_allfetsel("objet, id_objet","spip_rubriques_liens",$where,"","","","",$serveur);
@@ -143,14 +147,11 @@ function polyhier_get_enfants($id_parent, $objet='', $serveur=''){
 	else{
 		$objets_tries = array();
 		foreach ($objets as $couple){
-			// On ajoute que s'il n'y a pas de filtre, ou bien si le filtre correspond
-			if (!$objet or (is_string($objet) and $couple['objet'] == $objet) or (is_array($objet) and in_array($couple['objet'], $objet))){
-				if (isset($objets_tries[$couple['objet']])){
-					$objets_tries[$couple['objet']][] = $couple['id_objet'];
-				}
-				else{
-					$objets_tries[$couple['objet']] = array($couple['id_objet']);
-				}
+			if (isset($objets_tries[$couple['objet']])){
+				$objets_tries[$couple['objet']][] = $couple['id_objet'];
+			}
+			else{
+				$objets_tries[$couple['objet']] = array($couple['id_objet']);
 			}
 		}
 		return $objets_tries;
