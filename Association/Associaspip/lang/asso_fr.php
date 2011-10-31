@@ -87,6 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_erreur_pas_de_destination_definie' => 'Pas de destination comptable d&eacute;finie',
 	'config_plan_comptable_prerenseigne' => 'Activer l\'aide &agrave; la d&eacute;claration du plan comptable (fran&ccedil;ais uniquement)',
 	'config_libelle_categorie_par_defaut' => 'Cat&eacute;gorie de cotisation des nouveaux membres',
+	'config_libelle_affichage_champs_page_membres' => 'S&eacute;lectionner les champs &agrave; afficher sur la page des membres',
 	'aucune_categorie_par_defaut' => 'Aucune cat&eacute;gorie par d&eacute;faut',
 
 	# Options
@@ -225,6 +226,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_libelle_mobile' => "Mobile",
 	'adherent_libelle_email' => "Mail",
 	'adherent_libelle_adresse' => "Adresse",
+	'adherent_libelle_groupes' => "Groupes",
 
 	'adherent_libelle_statut_ok' => '&Agrave; jour',
 	'adherent_libelle_statut_echu' => '&Eacute;chu',
@@ -580,7 +582,7 @@ Commentaire: @commentaire@
 			'cpte_resultat_perte' => 'Perte',
 			'cpte_resultat_benefice' => 'B&eacute;n&eacute;fice',
 			'cpte_resultat_recette_evaluee' => 'Recette<br />&eacute;valu&eacute;e',
-			'cpte_resultat_depense_evaluee' => 'D&eacutepense<br />&eacute;valu&eacute;e',
+			'cpte_resultat_depense_evaluee' => 'D&eacute;pense<br />&eacute;valu&eacute;e',
 			'cpte_resultat_mode_exportation' => 'Exporter le Compte de R&eacute;sultat en ',
 			'cpte_resultat_pied_page_export_pdf' => 'Associaspip - Gestion d\'une association sous licence GPL',
 

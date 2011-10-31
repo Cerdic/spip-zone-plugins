@@ -229,23 +229,43 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe)
 		}
 		$icone = !$icone ? strlen($statut) :  http_img_pack($icone,'','', _T('asso:adherent_label_modifier_visiteur'));
 
-		$auteurs .= "\n<tr>"
-		. '<td style="text-align:right;" class="'.$class. '">'
-		. $id_auteur
-		. '</td>'
-		. '<td class="'.$class. '">'
-		. $logo
-		. "</td>\n";
-		if ($GLOBALS['association_metas']['civilite']=="on") $auteurs .= '<td class="'.$class. '">'.$data['sexe']."</td>\n";
+		$auteurs .= "\n<tr>";
+		if ($GLOBALS['association_metas']['aff_id_auteur']=="on") {
+			$auteurs .= '<td class="'.$class. '">'
+			. $id_auteur
+			. '</td>';
+		}
+		if ($GLOBALS['association_metas']['aff_photo']=="on") {
+			$auteurs .= '<td class="'.$class. '">'
+			. $logo
+			. "</td>\n";
+		}
+		if ($GLOBALS['association_metas']['aff_civilite']=="on" && $GLOBALS['association_metas']['civilite']=="on") $auteurs .= '<td class="'.$class. '">'.$data['sexe']."</td>\n";
 		$auteurs .= '<td class="'.$class. '">'
 		. $mail . "</td>\n";
-		if ($GLOBALS['association_metas']['prenom']=="on") $auteurs .= '<td class="'.$class. '">'.$data["prenom"]."</td>\n";
-		if ($GLOBALS['association_metas']['id_asso']=="on") $auteurs .= '<td class="'.$class. '">'.$data["id_asso"]."</td>\n";
+		if ($GLOBALS['association_metas']['aff_prenom']=="on" && $GLOBALS['association_metas']['prenom']=="on") $auteurs .= '<td class="'.$class. '">'.$data["prenom"]."</td>\n";
+		if ($GLOBALS['association_metas']['aff_groupes']=="on") {
+			$auteurs .= '<td class="'.$class. '">';
+			$query_groupes = sql_select('g.nom as nom_groupe, g.id_groupe as id_groupe', 'spip_asso_groupes g LEFT JOIN spip_asso_groupes_liaisons l ON g.id_groupe=l.id_groupe', 'l.id_auteur='.$id_auteur);
+			if ($row_groupes = sql_fetch($query_groupes)) {
+				$auteurs .= '<a href="'.generer_url_ecrire('voir_groupe', 'id='.$row_groupes['id_groupe']).'">'.$row_groupes['nom_groupe'].'</a>';
+				while ($row_groupes = sql_fetch($query_groupes)) {
+					$auteurs .= ', <a href="'.generer_url_ecrire('voir_groupe', 'id='.$row_groupes['id_groupe']).'">'.$row_groupes['nom_groupe'].'</a>';
+				}
+			}
+			$auteurs .= '</td>';
+		}
+
+		if ($GLOBALS['association_metas']['aff_id_asso']=="on" && $GLOBALS['association_metas']['id_asso']=="on") $auteurs .= '<td class="'.$class. '">'.$data["id_asso"]."</td>\n";
+		if ($GLOBALS['association_metas']['aff_categorie']=="on") {
+			$auteurs .= '<td class="'.$class. '">'
+			. affiche_categorie($data["categorie"])
+			. "</td>\n";
+		}
+		if ($GLOBALS['association_metas']['aff_validite']=="on") {
+			$auteurs .= '<td class="'.$class. '">' . $valide . "</td>";
+		}
 		$auteurs .= '<td class="'.$class. '">'
-		. affiche_categorie($data["categorie"])
-		. "</td>\n"
-		. '<td class="'.$class. '">' . $valide . "</td>\n"
-		. '<td class="'.$class. '">'
 		. '<a href="'
 		. generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur)
 		.'">'
@@ -265,17 +285,28 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe)
 	}
 	
 	$res = "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
-	. "<tr style='background-color: #DBE1C5;'>\n"
-	. "<td><strong>"._T('asso:adherent_libelle_id_auteur')."</strong></td>\n"
-	. "<th>"._T('asso:adherent_libelle_photo')."</th>\n";
-	if ($GLOBALS['association_metas']['civilite']=="on") $res .= "<th>"._T('asso:adherent_libelle_sexe')."</th>\n";
+	. "<tr style='background-color: #DBE1C5;'>\n";
+	if ($GLOBALS['association_metas']['aff_id_auteur']=="on") {
+		$res .= "<th><strong>"._T('asso:adherent_libelle_id_auteur')."</strong></th>";
+	}
+	if ($GLOBALS['association_metas']['aff_photo']=="on") {
+		$res .= "<th>"._T('asso:adherent_libelle_photo')."</th>";
+	}
+	if ($GLOBALS['association_metas']['aff_civilite']=="on" && $GLOBALS['association_metas']['civilite']=="on") $res .= "<th>"._T('asso:adherent_libelle_sexe')."</th>";
 	$res .= "<th>"._T('asso:adherent_libelle_nom_famille')."</th>\n";
-	if ($GLOBALS['association_metas']['prenom']=="on") $res .= "<th>"._T('asso:adherent_libelle_prenom')."</th>\n";
-	if ($GLOBALS['association_metas']['id_asso']=="on") $res .= "<th>"._T('asso:adherent_libelle_id_asso')."</th>\n";
-	$res .= "<th>"._T('asso:adherent_libelle_categorie')."</th>\n"
-	. "<th>"._T('asso:adherent_libelle_validite')."</th>\n"
-	. '<th colspan="4" style="text-align:center;">'._T('asso:adherent_entete_action')."</th>\n"
-	. '<th><input title="'._T('asso:selectionner_tout').'" type="checkbox" id="selectionnerTous" onclick="var currentVal = document.getElementById(\'selectionnerTous\').checked; var checkboxList = document.getElementsByName(\'id_auteurs[]\'); for (var i in checkboxList){checkboxList[i].checked=currentVal;}" /></th>'
+	if ($GLOBALS['association_metas']['aff_prenom']=="on" && $GLOBALS['association_metas']['prenom']=="on") $res .= "<th>"._T('asso:adherent_libelle_prenom')."</th>";
+	if ($GLOBALS['association_metas']['aff_groupes']=="on") {
+		$res .= "<th>"._T('asso:adherent_libelle_groupes')."</th>";
+	}
+	if ($GLOBALS['association_metas']['aff_id_asso']=="on" && $GLOBALS['association_metas']['id_asso']=="on") $res .= "<th>"._T('asso:adherent_libelle_id_asso')."</th>";
+	if ($GLOBALS['association_metas']['aff_categorie']=="on") {
+		$res .= "<th>"._T('asso:adherent_libelle_categorie')."</th>";
+	}
+	if ($GLOBALS['association_metas']['aff_validite']=="on") {
+		$res .= "<th>"._T('asso:adherent_libelle_validite')."</th>";
+	}
+	$res .= '<th colspan="4" style="text-align:center;">'._T('asso:adherent_entete_action')."</th>\n"
+	. '<th><input title="'._T('asso:selectionner_tout').'" type="checkbox" id="selectionnerTous" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName(\'id_auteurs[]\'); for (var i in checkboxList){checkboxList[i].checked=currentVal;}" /></th>'
 	. '</tr>'
 	. $auteurs
 	. '</table>';
