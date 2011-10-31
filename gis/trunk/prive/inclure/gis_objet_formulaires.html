@@ -1,6 +1,7 @@
 <div class="ajax">
 <BOUCLE_test(GIS){objet}{id_objet}{0,1}> </BOUCLE_test>
 #SET{gis_defaut,nouveau}
+#SET{gis_defaut,glop}
 <//B_test>
 
 #SET{bloc_gis, #ENV{bloc_gis,#GET{gis_defaut}|=={nouveau}|?{editer,lier}}}
