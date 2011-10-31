@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0-alpha2;3.0.99]"
 	logo="images/oxygen.png"
-	documentation="http://www.spip-contrib.net/?article3977"
+	documentation="http://www.spip-contrib.net/?article3970"
 >
 	<nom>Vignettes Oxygen</nom>
 	<!-- Collection d'icônes pour les documents -->
