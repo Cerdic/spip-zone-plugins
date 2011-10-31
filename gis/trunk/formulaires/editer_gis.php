@@ -15,11 +15,21 @@ include_spip('inc/editer');
  * @param string $retour L'url de retour
  * @param string $ajaxload initialiser la carte à chaque onAjaxLoad()
  */
-function formulaires_editer_gis_charger_dist($id_gis='new', $objet='', $id_objet='', $retour='', $ajaxload='oui'){
+function formulaires_editer_gis_charger_dist($id_gis='new', $objet='', $id_objet='', $retour='', $ajaxload='oui', $options=''){
 	$valeurs = formulaires_editer_objet_charger('gis', $id_gis, '', '', $retour, '');
 	$valeurs['objet'] = $objet;
 	$valeurs['id_objet'] = $id_objet;
 	$valeurs['ajaxload'] = $ajaxload;
+    /* Traitement des options */
+	/* peut etre a envoyer dans une fonction generique de verification des options */
+	if (is_array($options)) {
+    	if (is_numeric($options['lat']))
+	        $valeurs['lat']=$options['lat'];
+	    if (is_numeric($options['lon']))
+        	$valeurs['lon']=$options['lon'];
+    	if (is_numeric($options['zoom']) && intval($options['zoom'])==$options['zoom'])
+	        $valeurs['zoom']=$options['zoom'];
+	}
 	return $valeurs;
 }
 
@@ -38,7 +48,7 @@ function formulaires_editer_gis_charger_dist($id_gis='new', $objet='', $id_objet
  * @param string $retour L'url de retour
  * @param string $ajaxload initialiser la carte à chaque onAjaxLoad()
  */
-function formulaires_editer_gis_verifier_dist($id_gis='new', $objet='', $id_objet='', $retour='', $ajaxload='oui'){
+function formulaires_editer_gis_verifier_dist($id_gis='new', $objet='', $id_objet='', $retour='', $ajaxload='oui', $options=''){
 	$erreurs = formulaires_editer_objet_verifier('gis', $id_gis,array('titre','lat','lon','zoom'));
 	return $erreurs;
 }
@@ -52,7 +62,7 @@ function formulaires_editer_gis_verifier_dist($id_gis='new', $objet='', $id_obje
  * @param string $retour L'url de retour
  * @param string $ajaxload initialiser la carte à chaque onAjaxLoad()
  */
-function formulaires_editer_gis_traiter_dist($id_gis='new', $objet='', $id_objet='', $retour='', $ajaxload='oui'){
+function formulaires_editer_gis_traiter_dist($id_gis='new', $objet='', $id_objet='', $retour='', $ajaxload='oui', $options=''){
 	if (_request('supprimer')){
 		include_spip('action/editer_gis');
 		supprimer_gis($id_gis);

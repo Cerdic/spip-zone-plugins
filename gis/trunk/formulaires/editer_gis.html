@@ -14,15 +14,15 @@
 			[(#SAISIE{carte,editer_gis_#ENV{id_gis},env})]
 			[(#SAISIE{input,lat,
 				label=<:gis:lat:>,
-				defaut=#CONFIG{gis/lat,0},
+				defaut=#ENV{lat,#CONFIG{gis/lat,0}},
 				obligatoire=oui})]
 			[(#SAISIE{input,lon,
 				label=<:gis:lon:>,
-				defaut=#CONFIG{gis/lon,0},
+				defaut=#ENV{lon,#CONFIG{gis/lon,0}},
 				obligatoire=oui})]
 			[(#SAISIE{input,zoom,
 				label=<:gis:zoom:>,
-				defaut=#CONFIG{gis/zoom,0},
+				defaut=#ENV{zoom,#CONFIG{gis/zoom,0}},
 				size=2,
 				maxlength=2,
 				obligatoire=oui})]
