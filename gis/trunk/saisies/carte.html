@@ -1,3 +1,19 @@
+[(#REM)
+
+    Saisie carte
+
+    Parametres optionnels:
+
+    - lat = 48.3                    latitude du centre de la carte
+    - lon = -4.7                    longitude du centre de la carte
+    - zoom = 5                      zoom de la carte
+
+]
+
+[(#SET{init_lat,#ENV{lat,#CONFIG{gis/lat,0}}})]
+[(#SET{init_lon,#ENV{lon,#CONFIG{gis/lon,0}}})]
+[(#SET{init_zoom,#ENV{zoom,#CONFIG{gis/zoom,0}}})]
+
 <li class="pleine_largeur editer editer_[(#ENV{nom})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]"[ data-id="(#ENV{id_saisie})"]>
 #ENV*{inserer_debut}
 <div id="map_[(#ENV{nom})]" name="formMap" class="formMap" style="width: 100%; height: 350px"></div>
@@ -64,7 +80,7 @@ var geocoder;]
 		// creer la carte
 		var map_container = 'map_[(#ENV{nom})]';
 		form_map = new mxn.Mapstraction(map_container,'[(#REM|gis_api_utilisee)]');
-		form_map.setCenterAndZoom(new mxn.LatLonPoint(#ENV{lat,#CONFIG{gis/lat,0}},#ENV{lon,#CONFIG{gis/lon,0}}),#ENV{zoom,#CONFIG{gis/zoom,0}});
+		form_map.setCenterAndZoom(new mxn.LatLonPoint(#GET{init_lat},#GET{init_lon}),#GET{init_zoom});
         // Pour l'API Openlayers, la methode n'existe pas
         try {
 			form_map.setMapType([mxn.Mapstraction.(#REM|gis_maptype_utilise)]);
@@ -82,6 +98,8 @@ var geocoder;]
 		// geocoder
 		geocoder = new mxn.Geocoder('[(#REM|gis_api_utilisee)]',geocode);]
 		
+		[(#REM) Ici on utilise #ENV{lat} et #ENV{lon}, et pas les valeurs
+		        d'initialisation #GET{init_lat} et #GET{init_lon} qui sont toujours remplies]
 		[(#ENV{lat}|et{#ENV{lon}}|oui)
 		var data = {
 			"type": "FeatureCollection",
@@ -131,7 +149,7 @@ var geocoder;]
 			}
 		});]
 		[(#ENV{id_gis}|non|ou{#ENV{id_gis}|=={oui}}|et{#CONFIG{gis/geolocaliser_user_html5}|=={on}}|oui)
-		gis_get_navigator_location(form_map,#ENV{zoom,#CONFIG{gis/zoom,0}});]
+		gis_get_navigator_location(form_map,#GET{init_zoom});]
 	};
 
 	$(function(){
