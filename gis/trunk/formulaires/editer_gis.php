@@ -39,7 +39,7 @@ function formulaires_editer_gis_charger_dist($id_gis='new', $objet='', $id_objet
  * @param string $ajaxload initialiser la carte à chaque onAjaxLoad()
  */
 function formulaires_editer_gis_verifier_dist($id_gis='new', $objet='', $id_objet='', $retour='', $ajaxload='oui'){
-	$erreurs = formulaires_editer_objet_verifier('gis', $id_gis,array('titre','lat','lon'));
+	$erreurs = formulaires_editer_objet_verifier('gis', $id_gis,array('titre','lat','lon','zoom'));
 	return $erreurs;
 }
 
