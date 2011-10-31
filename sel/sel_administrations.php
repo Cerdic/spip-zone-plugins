@@ -45,7 +45,7 @@ function sel_upgrade($nom_meta_base_version, $version_cible){
 			$qqs_sels = 'spip_sels';
 			sql_insertq_multi($qqs_sels, array(
 				array(
-					'id_sel' => '0',
+					'id_sel' => '1',
 					'nom' => 'JEU',
 					'num_adhesion' => '',
 					'etat_compte' => '',
@@ -66,7 +66,7 @@ function sel_upgrade($nom_meta_base_version, $version_cible){
 				),
 
 				array(
-					'id_sel' => '1',
+					'id_sel' => '2',
 					'nom' => 'SEL de Paris',
 					'num_adhesion' => '',
 					'etat_compte' => '',
@@ -86,7 +86,7 @@ function sel_upgrade($nom_meta_base_version, $version_cible){
 					'cotisation_montant_taux' => ''
 				),
 				array(
-					'id_sel' => '2',
+					'id_sel' => '3',
 					'nom' => 'SEL de Loire',
 					'num_adhesion' => '',
 					'etat_compte' => '',
@@ -174,7 +174,7 @@ function sel_upgrade($nom_meta_base_version, $version_cible){
 			$qqs_sels = 'spip_sels';
 			sql_insertq_multi($qqs_sels, array(
 				array(
-					'id_sel' => '0',
+					'id_sel' => '1',
 					'nom' => 'JEU',
 					'num_adhesion' => '',
 					'etat_compte' => '',
@@ -195,7 +195,7 @@ function sel_upgrade($nom_meta_base_version, $version_cible){
 				),
 
 				array(
-					'id_sel' => '1',
+					'id_sel' => '2',
 					'nom' => 'SEL de Paris',
 					'num_adhesion' => '',
 					'etat_compte' => '',
@@ -214,8 +214,9 @@ function sel_upgrade($nom_meta_base_version, $version_cible){
 					'cotisation_unite' => '',
 					'cotisation_montant_taux' => ''
 				),
+				
 				array(
-					'id_sel' => '2',
+					'id_sel' => '3',
 					'nom' => 'SEL de Loire',
 					'num_adhesion' => '',
 					'etat_compte' => '',
