@@ -1,6 +1,6 @@
 <?php
 // Ce fichier est charge a chaque hit //
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // Pour forcer les logs du plugin, outil actif ou non :
 #define('_LOG_CS_FORCE', 'oui');
@@ -21,16 +21,6 @@ $GLOBALS['spip_pipeline']['fichier_distant']='';
 if (!isset($GLOBALS['spip_pipeline']['porte_plume_cs_pre_charger']))
 	$GLOBALS['spip_pipeline']['porte_plume_cs_pre_charger']='';
 
-// liste des outils et des variables
-global $metas_vars, $metas_outils;
-if (!isset($GLOBALS['meta']['tweaks_actifs'])) {
-cs_log("  -- lecture metas");
-	include_spip('inc/meta');
-	lire_metas();
-}
-$metas_outils = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
-$metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
-
 // pour les serveurs qui aiment les virgules...
 $GLOBALS['spip_version_code'] = str_replace(',','.',$GLOBALS['spip_version_code']);
 // constantes de compatibilite
@@ -46,6 +36,7 @@ elseif (version_compare($GLOBALS['spip_version_code'],'1.9300','>='))
 elseif (version_compare($GLOBALS['spip_version_code'],'1.9200','>=')) 
 	@define('_SPIP19200', 1);
 else @define('_SPIP19100', 1);
+
 // chemin du fichier de fonctions
 define('_COUT_FONCTIONS_PHP', find_in_path('couteau_suisse_fonctions.php'));
 // globales de controles de passes
@@ -61,6 +52,16 @@ if (in_array('report', $GLOBALS['cs_params']))
 elseif (in_array('reportall', $GLOBALS['cs_params']) && $auteur_session['statut']=='0minirezo')
 	{ define('_CS_REPORTALL', 1); @define('_LOG_CS', 1); error_reporting(E_ALL); }
 
+// liste des outils et des variables
+global $metas_vars, $metas_outils;
+if (!isset($GLOBALS['meta']['tweaks_actifs'])) {
+cs_log("  -- lecture metas");
+	include_spip('inc/meta');
+	lire_metas();
+}
+$metas_outils = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
+$metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
+
 // on active tout de suite les logs, si l'outil est actif.
 if (($metas_outils['cs_comportement']['actif'] && $metas_vars['log_couteau_suisse'])
  || defined('_LOG_CS_FORCE') || in_array('log', $GLOBALS['cs_params']))	@define('_LOG_CS', 1);
@@ -71,6 +72,13 @@ if(defined('_LOG_CS')) {
 
 // on passe son chemin si un reset general est demande
 $zap = _request('cmd')=='resetall';
+
+// cas ou les options seraient appelees en dehors de tmp/charger_plugins_options.php
+if (!defined('_DIR_PLUGIN_COUTEAU_SUISSE')) {
+	spip_log('## ERREUR : constante "_DIR_PLUGIN_COUTEAU_SUISSE" non definie !');
+	spip_log(' URI : '.$_SERVER['REQUEST_URI'].'. POST : '.var_export($POST, true));
+	$zap = true;
+}
 
 // lancer maintenant les options du Couteau Suisse
 if($zap)
@@ -95,7 +103,7 @@ else {
 	if(!$cs_exists) cs_log(" -- '$f_mo' ou '$f_mso' introuvable !");
 
 	// lancer l'initialisation du plugin. on force la compilation si cs=calcul
-	include_spip('cout_lancement');
+	include_once(_DIR_PLUGIN_COUTEAU_SUISSE.'cout_lancement.php');
 	cs_initialisation(!$cs_exists || in_array('calcul', $GLOBALS['cs_params']));
 	if(defined('_LOG_CS')) cs_log("PUIS : couteau_suisse_options, initialisation terminee");
 

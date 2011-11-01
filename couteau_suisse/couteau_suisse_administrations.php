@@ -3,9 +3,8 @@
 if(!defined('_SPIP20100')) {
 	// Versions SPIP anterieures a 2.1
 	function couteau_suisse_install($action){
-//echo "<br>INSTALL : $action";
-	static $ok = 0;
-	if(defined('_LOG_CS')) cs_log("couteau_suisse_install($action)");
+		static $ok = 0;
+		if(defined('_LOG_CS')) cs_log("couteau_suisse_install($action)");
 		include_spip('inc/meta');
 		include_spip('inc/plugin');
 		$t = plugin_get_infos('couteau_suisse');

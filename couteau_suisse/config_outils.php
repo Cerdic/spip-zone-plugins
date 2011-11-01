@@ -818,16 +818,22 @@ add_outil( array(
     'id' => 'citations_bb',
     'auteur'	=> 'Bertrand Marne, Romy T&ecirc;tue',
     'categorie'	=> 'typo-corr',
-	'code:css'	=> '/* fr */
-	q:lang(fr):before { content: "\00AB\A0"; }
-	q:lang(fr):after { content: "\A0\00BB"; }
-	q:lang(fr) q:before { content: "\201C"; }
-	q:lang(fr) q:after { content: "\201D"; }
-	q:lang(fr) q q:before { content: "\2018"; }
-	q:lang(fr) q q:after { content: "\2019"; }
-	/* IE */
-	* html q { font-style: italic; }
-	*+html q { font-style: italic; }', 
+	'code:css'	=> '/* Specifie des paires de guillemets sur plusieurs niveaux pour chaque langue */
+/* Cf.: http://www.yoyodesign.org/doc/w3c/css2/generate.html#quotes-specify */
+q { quotes: \'"\' \'"\' "\'" "\'" }
+/* Guillemets selon la langue du texte */
+:lang(fr) q { quotes: "\00AB\A0" "\A0\00BB" "\201C" "\201D" "\2018" "\2019"; }
+:lang(en) q { quotes: "\201C" "\201D" "\2018" "\2019" }
+:lang(es) q { quotes: "\00AB" "\00BB" "\201C" "\201D"; }
+:lang(it) q { quotes: "\00AB\A0" "\A0\00BB" "\201C" "\201D"; }
+:lang(de) q { quotes: "\00BB" "\00AB" ">" "<" }
+:lang(no) q { quotes: "\00AB\A0" "\A0\00BB" "<" ">" }
+/* Insere des guillemets avant et apres le contenu d\'un element Q */
+q:before { content: open-quote; } 
+q:after { content: close-quote; }
+/* IE */
+* html q { font-style: italic; }
+*+html q { font-style: italic; }', 
     'pipelinecode:pre_propre' => 'if(strpos($flux, "<qu")!==false) $flux=cs_echappe_balises("", "citations_bb_rempl", $flux);',
 	// Remplacer <quote> par <q> quand il n'y a pas de retour a la ligne (3 niveaux, preg sans l'option s) 
     'code:options' => 'function citations_bb_rempl($texte){
