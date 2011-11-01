@@ -7,39 +7,58 @@ function formulaires_editer_client_saisies_dist($id_auteur, $retour=''){
 	$conf=lire_config('clients/elm',array());
 	
 	$civilite=array();
-	if (in_array("civilite", $conf) and !in_array("obli_civilite", $conf)) {
-		$civ=lire_config('clients/elm_civ',array('m', 'mme'));
+	$type_c = lire_config('clients/type_civ','i');
+	
+	if($type_c == 'c'){		
+		$civ=lire_config('clients/elm_civ',array('madame', 'monsieur'));	
 		$civ_t=array();
-		foreach($civ as $v){
-			// pas moyen de faire marcher array_merge ici
-				array_push($civ_t, "<:clients:$v:>");
+		if (in_array("civilite", $conf) and !in_array("obli_civilite", $conf)) {		
+			foreach($civ as $v){
+				array_push($civ_t, "<:clients:label_$v:>");
+			}
+			$civ_t = array_combine($civ, $civ_t);
+			$civilite=array(
+				'saisie' => 'radio',
+				'options' => array(
+					'nom' => 'civilite',
+					'label' => _T('contacts:label_civilite'),
+					'datas' => $civ_t
+				)
+			);
+		}elseif (in_array("civilite", $conf) and in_array("obli_civilite", $conf)) {
+			foreach($civ as $v){
+				array_push($civ_t, "<:clients:label_$v:>");
+			}
+			$civ_t = array_combine($civ, $civ_t);
+			$civilite=array(
+				'saisie' => 'radio',
+				'options' => array(
+					'nom' => 'civilite',
+					'label' => _T('contacts:label_civilite'),
+					'obligatoire' => 'oui',
+					'datas' => $civ_t
+				)
+			);
 		}
-		$civ_t = array_combine($civ, $civ_t);
-		$civilite=array(
-			'saisie' => 'radio',
-			'options' => array(
-				'nom' => 'civilite',
-				'label' => _T('contacts:label_civilite'),
-				'datas' => $civ_t
-			)
-		);
-	}elseif (in_array("civilite", $conf) and in_array("obli_civilite", $conf)) {
-		$civ=lire_config('clients/elm_civ',array('m', 'mme'));
-		$civ_t=array();
-		foreach($civ as $v){
-			// pas moyen de faire marcher array_merge ici
-				array_push($civ_t, "<:clients:$v:>");
+	}else{
+		if (in_array("civilite", $conf) and !in_array("obli_civilite", $conf)) {
+			$civilite=array(
+				'saisie' => 'input',
+				'options' => array(
+					'nom' => 'civilite',
+					'label' => _T('contacts:label_civilite')
+				)
+			);
+		}elseif (in_array("civilite", $conf) and in_array("obli_civilite", $conf)) {
+			$civilite=array(
+				'saisie' => 'input',
+				'options' => array(
+					'nom' => 'civilite',
+					'label' => _T('contacts:label_civilite'),
+					'obligatoire' => 'oui'
+				)
+			);
 		}
-		$civ_t = array_combine($civ, $civ_t);
-		$civilite=array(
-			'saisie' => 'radio',
-			'options' => array(
-				'nom' => 'civilite',
-				'label' => _T('contacts:label_civilite'),
-				'obligatoire' => 'oui',
-				'datas' => $civ_t
-			)
-		);
 	}
 	
 	$complement=array();

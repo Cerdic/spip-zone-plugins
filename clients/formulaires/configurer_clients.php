@@ -32,18 +32,27 @@ return array(
 			)
 		),
 		array(
+			'saisie' => 'radio',
+			'editable' => (in_array('civilite',lire_config('clients/elm',array()))) ? true : false,
+			'options' => array(
+				'nom' => 'type_civ',
+				'label' => _T('clients:label_type_civ'),
+				//'defaut' => array(),
+				'datas' => array(
+							'i' => _T('clients:label_input'),
+							'c' => _T('clients:label_checkbox')
+							)
+				)
+		),
+		array(
 			'saisie' => 'checkbox',
-			'editable' => (!in_array('civilite',lire_config('clients/elm',array()))) ? false : true,
+			'editable' => (lire_config('clients/type_civ')=='c') ? true : false,
 			'options' => array(
 				'nom' => 'elm_civ',
 				'label' => _T('clients:label_elm_civ'),
-				//'defaut' => array('m', 'mme'),
-				'datas' => array(
-							'mme' => _T('clients:label_madame'),
-							'melle' => _T('clients:label_mademoiselle'),
-							'm' => _T('clients:label_monsieur'),
-							'dr' => _T('clients:label_docteur')
-							)
+				'explication' => _T('clients:explication_type_civ'),
+				//'defaut' => array('madame', 'monsieur'),
+				'datas' => $civilite()
 				)
 		)
 	);
