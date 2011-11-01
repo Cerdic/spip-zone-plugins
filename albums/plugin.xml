@@ -3,12 +3,18 @@
 <prefix>album</prefix>
 <icon>icon/album.png</icon>
 
-<description>Afficher un album de documents {{dans}} un article et ailleurs.</description>
+<categorie>multimedia</categorie>
+<slogan>Albums au fil du texte</slogan>
+<description>Afficher une ou plusieurs galeries d’images au fil du texte, dans les articles et ailleurs.</description>
 <auteur>[romy.tetue.net->http://romy.tetue.net]</auteur>
 <licence>GPL 2011</licence>
-<categorie>multimedia</categorie>
 
-<version>0.0.1</version>
+<version>0.0.2</version>
 <etat>dev</etat>
+
 <necessite id='SPIP' version='[2.0.0;]' />
+<pipeline>
+	<nom>insert_head</nom>
+	<inclure>album_pipelines.php</inclure>
+</pipeline>
 </plugin>

@@ -5,11 +5,11 @@
 	<ul>
 		<BOUCLE_album(DOCUMENTS) {id_document IN (#ENV{id}|explode{','})}>[
 		<li><a href="(#URL_DOCUMENT)" type="#MIME_TYPE" onclick="location.href='[(#URL_ARTICLE
-			|parametre_url{id_document,#ID_DOCUMENT}
-			)]';return false;"[ class="(#EXPOSER)"][ title="(#TITRE|attribut_html|couper{80})"]>[(#FICHIER
-			|image_reduire{0,100}
-			|inserer_attribut{class,spip_logos}
-			|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]})]</a></li>
+		|parametre_url{id_document,#ID_DOCUMENT}
+		)]';return false;"[ class="(#EXPOSER)"][ title="(#TITRE|attribut_html|couper{80})"]>[(#FICHIER
+		|image_reduire{0,100}
+		|inserer_attribut{class,spip_logos}
+		|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]})]</a></li>
 		]</BOUCLE_album>
 	</ul>
 </div>
@@ -22,11 +22,11 @@
 	<ul>
 		<BOUCLE_article(DOCUMENTS) {id_article=#ENV{id_article}} {mode=document}{extension IN png,jpg,gif} {par num titre, date}{doublons}{vu=non}>[
 		<li><a href="(#URL_DOCUMENT)" type="#MIME_TYPE" onclick="location.href='[(#URL_ARTICLE
-			|parametre_url{id_document,#ID_DOCUMENT}
-			)]#documents_portfolio';return false;"[ class="(#EXPOSER)"][ title="(#TITRE|attribut_html|couper{80})"]>[(#FICHIER
-			|image_reduire{0,100}
-			|inserer_attribut{class,spip_logos}
-			|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]})]</a></li>
+		|parametre_url{id_document,#ID_DOCUMENT}
+		)]';return false;"[ class="(#EXPOSER)"][ title="(#TITRE|attribut_html|couper{80})"]>[(#FICHIER
+		|image_reduire{0,100}
+		|inserer_attribut{class,spip_logos}
+		|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]})]</a></li>
 		]</BOUCLE_article>
 	</ul>
 </div>
