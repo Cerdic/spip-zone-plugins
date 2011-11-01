@@ -2,14 +2,30 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// Les REGEXP de recherche de l'item de langue (voir le fichier regexp.txt)
-// -- pour les fichiers .html et .php sans detection de _L
-define("_LANGONET_TROUVER_ITEM_HP", ",(?:<:|_[TU]\(['\"])(?:([a-z0-9_]+):)?((?:\\$|[\"\']\s*\.\s*\\$*)?[a-z0-9_]+)((?:{(?:[^\|=>]*=[^\|>]*)})?(?:(?:\|[^>]*)?)(?:['\"]\s*\.\s*[^\s]+)?),iS");
+// Les REGEXP de recherche de l'item de langue 
+// (voir le fichier regexp.txt pour des exemples)
+
+// -- pour les fichiers .html et .php
+// sans detection de _L mais avec variables PHP eventuelles dans l'argument de _T
+define("_LANGONET_TROUVER_ITEM_HP", 
+	"#" .
+	"(?:<:|_[TU]\(['\"])" . // designation (<: pour squelette, T|U pour PHP)
+	"(?:([a-z0-9_]+):)?" .  // nom du module eventuel
+       "(" . "(?:\\$|[\"\']\s*\.\s*\\$*)?" . // delimiteur ' ou " pour T|U
+		"[A-Za-z0-9@_&;,.?!\s-]+" . // item nu, pas forcement normalise
+	       ")" .
+	"(" . "(?:{(?:[^\|=>]*=[^\|>]*)})?" . // argument entre accolades
+		"(?:(?:\|[^>]*)?)" . // filtre
+		"(?:['\"]\s*\.\s*[^\s]+)?" . // delimiteur ' ou " pour T|U
+	")" .
+	"#iS"
+       );
+
 // -- pour les fichiers .xml
 define("_LANGONET_TROUVER_ITEM_X", ",<[a-z0-9_]+>[\n|\t|\s]*([a-z0-9_]+):([a-z0-9_]+)[\n|\t|\s]*</[a-z0-9_]+()>,iS");
 
 /**
- * Vérification de l'utilisation des items de langue
+ * Verification de l'utilisation des items de langue
  *
  * @param string $rep
  * @param string $module
@@ -32,12 +48,13 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 	// Si une erreur se produit lors du deroulement de la fonction, le tableau contient le libelle
 	// de l'erreur dans $resultats['erreur'].
 	// Sinon, cet index n'existe pas
-	$resultats = array();
+	$item_md5 = $fichier_non = $resultats = array();
 
 	// On charge le fichier de langue a verifier
 	// si il existe dans l'arborescence $ou_langue
 	// (evite le mecanisme standard de surcharge SPIP)
 	include_spip('inc/traduire');
+	include_spip('inc/langonet_verifier_l');
 	$var_source = "i18n_".$module."_".$langue;
 	if (empty($GLOBALS[$var_source])) {
 		$GLOBALS['idx_lang'] = $var_source;
@@ -45,50 +62,30 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 	}
 
 	// On cherche l'ensemble des items utilises dans l'arborescence $ou_fichier
-	$utilises_brut = array('items' => array(), 'suffixes' => array(), 'modules' => array());
-	// On ne scanne pas dans les ultimes sous-repertoires charsets/ ,
+	$utilises = array('items' => array(), 'suffixes' => array(), 'modules' => array());
+	// On ignore les ultimes sous-repertoires charsets/ ,
 	// lang/ , req/ . On ne scanne que les fichiers php, html ou xml
 	// (voir le fichier regexp.txt).
-	foreach (preg_files(_DIR_RACINE.$ou_fichier, '(?<!/charsets|/lang|/req)(/[^/]*\.(html|php|xml|yaml))$') as $_fichier) {
+	$files = preg_files(_DIR_RACINE.$ou_fichier, '(?<!/charsets|/lang|/req)(/[^/]*\.(html|php|xml|yaml))$');
+	foreach ($files as $_fichier) {
+		$re = strpos($_fichier, '.xml') ? _LANGONET_TROUVER_ITEM_X : _LANGONET_TROUVER_ITEM_HP;
 		foreach ($contenu = file($_fichier) as $ligne => $texte) {
-			if (strpos($_fichier, '.xml')) {
-				$trouver_item = _LANGONET_TROUVER_ITEM_X;
-			}
-			else {
-				$trouver_item = _LANGONET_TROUVER_ITEM_HP;
-			}
-			if (preg_match_all($trouver_item, $texte, $matches)) {
+			if (preg_match_all($re, $texte,  $m, PREG_SET_ORDER)) {
+				foreach ($m as $occ) {
+					$suffixe = preg_replace(',\s*,', '', $occ[2]);
 				// On traite les cas particuliers ou l'item est entierement une expression ou une variable:
-				// on duplique l'item dans le suffixe ce qui est en fait bien le cas
-				// On sauvegarde le matches[2] pour calculer les lignes concernees pus tard
-				$matches[4] = $matches[2];
-				$suffixe = preg_replace(',\s*,', '', $matches[2][0]);
-				if ((substr($suffixe, 0, 1) == "$") OR (substr($suffixe, 0, 2) == "'.") OR (substr($suffixe, 0, 2) == '".')) {
-					$matches[2][0] = str_replace('$', '\$', $suffixe);
-					$utilises_brut['suffixes'] = array_merge($utilises_brut['suffixes'], $matches[2]);
-				}
-				else {
-					$utilises_brut['suffixes'] = array_merge($utilises_brut['suffixes'], $matches[3]);
-				}
-				$utilises_brut['items'] = array_merge($utilises_brut['items'], $matches[2]);
-				$utilises_brut['modules'] = array_merge($utilises_brut['modules'], $matches[1]);
-				// On collecte pour chaque item trouve les lignes et fichiers dans lesquels il est utilise
-				foreach ($matches[4] as $_cle_val => $_item_val) {
-					preg_match("#.{0,8}" . str_replace('$', '\$', $_item_val) . ".{0,20}#is", $texte, $extrait);
-					$item_tous[$matches[2][$_cle_val]][$_fichier][$ligne][] = trim($extrait[0]);
+					if ((substr($suffixe, 0, 1) == "$") OR (substr($suffixe, 0, 2) == "'.") OR (substr($suffixe, 0, 2) == '".')) {
+						$suffixe = str_replace('$', '\$', $suffixe);
+					} else $suffixe = $occ[3];
+					$index = langonet_index_l($occ[2], $utilises['items']);
+					$utilises['items'][$index] = $occ[2];
+					$utilises['modules'][$index] = $occ[1];
+					$item_tous[$index][$_fichier][$ligne][] = trim($occ[0]);
+					// l'item est-il dynamique, hormis tableau d'arguments ou filtre ?
+					// (si oui c'est sale et on pourra pas faire grand chose)
+					$utilises['suffixes'][$index] = ($suffixe AND (strpos('|{', $suffixe[0] !== false)));
 				}
 			}
-		}
-	}
-
-	// On affine le tableau resultant en supprimant les doublons
-	$utilises = array('items' => array(), 'suffixes' => array(), 'modules' => array());
-	foreach ($utilises_brut['items'] as $_cle => $_valeur) {
-		if (!in_array($_valeur, $utilises['items'])) {
-			$utilises['items'][] = $_valeur;
-			// Attention ne pas oublier d'exclure le |filtre qui n'est pas un suffixe !! 
-			$utilises['suffixes'][] = ((!$utilises_brut['suffixes'][$_cle]) OR (substr($utilises_brut['suffixes'][$_cle], 0, 1) == '|' )) ? false : true;
-			$utilises['modules'][] = $utilises_brut['modules'][$_cle];
 		}
 	}
 
@@ -112,8 +109,8 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 					if ($utilises['modules'][$_cle] == $module) {
 						// L'item est vraiment non defini et c'est une erreur
 						$item_non[] = $_valeur;
-						if (is_array($item_tous[$_valeur])) {
-							$fichier_non[$_valeur] = $item_tous[$_valeur];
+						if (is_array($item_tous[$_cle])) {
+							$fichier_non[$_cle] = $item_tous[$_cle];
 						}
 					}
 					else {
@@ -131,40 +128,44 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 										$definition_ok = true;
 									}
 									else {
-										$definition_ok = ((($module_trouve[1]=='spip') OR ($module_trouve[1]=='ecrire') OR ($module_trouve[1]=='public')) AND ($utilises['modules'][$_cle] == ''));
+										$definition_ok = ((($module_trouve[1]=='spip') OR ($module_trouve[1]=='ecrire') OR ($module_trouve[1]=='public')) AND (!$utilises['modules'][$_cle]));
 									}
 								}
 							}
 						}
 						if ($definition_ok) {
 							$item_non_mais[] = $_valeur;
-							if (is_array($item_tous[$_valeur])) {
-								$fichier_non_mais[$_valeur] = $item_tous[$_valeur];
+							if (is_array($item_tous[$_cle])) {
+								$fichier_non_mais[$_cle] = $item_tous[$_cle];
 							}
 							if ($definitions)
 								$definition_non_mais[$_valeur] = $definitions;
 						}
 						else {
-							$item_non_mais_nok[] = $_valeur;
-							if (is_array($item_tous[$_valeur])) {
-								$fichier_non_mais_nok[$_valeur] = $item_tous[$_valeur];
+							$item_non_mais_nok[] = $_cle;
+							if (is_array($item_tous[$_cle])) {
+								$fichier_non_mais_nok[$_cle] = $item_tous[$_cle];
+						// Si pas normalise, c'est une auto-definition 
+								if (!preg_match(',^\w+$,', $_valeur)) {
+									$item_md5[$_cle] = $_valeur;
+								}
 							}
 							if ($definitions)
-								$definition_non_mais_nok[$_valeur] = $definitions;
+								$definition_non_mais_nok[$_cle] = $definitions;
 						}
 					}
 				}
 				else {
-					// L'item trouve est utilise dans un contexte variable
+					// L'item est defini dynamiquement (i.e. a l'execution)
 					// Il ne peut etre trouve directement dans le fichier de
-					// langue, donc on verifie que des items de ce "type"
+					// langue, donc on verifie que des items ressemblant
 					// existent dans le fichier de langue
 					$item_trouve = false;
 					foreach($GLOBALS[$var_source] as $_item => $_traduction) {
 						if (substr($_item, 0, strlen($_valeur)) == $_valeur) {
 							$item_peut_etre[] = $_valeur;
-							if (is_array($item_tous[$_valeur])) {
-								$fichier_peut_etre[$_item] = $item_tous[$_valeur];
+							if (is_array($item_tous[$_cle])) {
+								$fichier_peut_etre[$_item] = $item_tous[$_cle];
 							}
 							$item_trouve = true;
 						}
@@ -175,8 +176,8 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 					if (!$item_trouve) {
 						$_item = ltrim($_valeur, '\'".\\');
 						$item_peut_etre[] = $_item;
-						if (is_array($item_tous[$_valeur])) {
-							$fichier_peut_etre[$_item] = $item_tous[$_valeur];
+						if (is_array($item_tous[$_cle])) {
+							$fichier_peut_etre[$_item] = $item_tous[$_cle];
 						}
 					}
 				}
@@ -228,6 +229,7 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 	$resultats['definition_non_mais_nok'] = $definition_non_mais_nok;
 	$resultats['item_peut_etre'] = $item_peut_etre;
 	$resultats['fichier_peut_etre'] = $fichier_peut_etre;
+	$resultats['item_md5'] = $item_md5;
 
 	return $resultats;
 }

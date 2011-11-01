@@ -71,8 +71,11 @@ function formulaires_langonet_verifier_traiter() {
 		$langonet_corriger = charger_fonction('langonet_generer_fichier','inc');
 		if ($verification != 'utilisation') {
 			$oublies = array();
-			foreach ($resultats['item_non'] as $_item)
-				$oublies[$_item] = ($verification == 'definition') ? '' : $resultats['item_md5'][$_item];
+			$_l = ($verification=='fonction_l');
+			$all = $resultats[$_l ? "item_non" : 'item_non_mais_nok'];
+			foreach ($all as $_item) {
+				$oublies[$_item] = @$resultats['item_md5'][$_item]; // indefini si dejo normalise
+			}
 			$mode = ($verification == 'definition') ? 'oublie' : 'fonction_l';
 			$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $oublies);
 		}
@@ -305,17 +308,18 @@ function formater_resultats($verification, $resultats, $corrections) {
 		return $retour;
 	}
 
-	if ($verification == 'fonction_l') {
+	if ($verification == 'fonction_l' OR $verification == 'definition' ) {
 		// On cree un fichier de script capable de modifier les fichiers de l'arbo specifiee
-		// en remplacant les _L par des _T. Il porte le meme nom que le log avec l'extension .sh
+		//  Il porte le meme nom que le log avec l'extension .sh
 		$script = substr($log_fichier, 0, strlen($log_fichier)-4) . '.sh';
-		$ok = creer_script_l($resultats, $script);
-		if (!$ok) {
-			$retour['message_erreur'] .= _T('langonet:message_nok_fichier_script');
-			spip_log("echec de creation du fichier $script", "langonet");
-			return $retour;
+		if ($contenu = creer_script($resultats, $verification)) {
+			if (!ecrire_fichier($script, $contenu)) {
+				$retour['message_erreur'] .= _T('langonet:message_nok_fichier_script');
+				spip_log("echec de creation du fichier $script", "langonet");
+				return $retour;
+			}
+			$resume = 'langonet:message_ok_fichier_log_script';
 		}
-		$resume = 'langonet:message_ok_fichier_log_script';
 	}
 
 	// Tout s'est bien passe on renvoie le message ok et les resultats de la verification
@@ -470,60 +474,64 @@ function creer_log($verification, $resultats, $texte, &$log_fichier) {
 }
 
 /**
- * Construit un script Shell s'appliquant sur les fichiers contenant _L
+ * Construit un script Shell 
+ * s'appliquant sur les fichiers contenant les chaines indefinies
  * @param array $resultats
- * @param string $langue
- * @param string $script
+ * @param string $verification 
  * @return boolean
  */
-function creer_script_l($resultats, $script) {
+function creer_script($resultats, $verification) {
 	$ou = $resultats['ou_fichier'];
 	$prefixe = ($resultats['module'] == 'spip' 
 				OR $resultats['module'] == 'ecrire' 
 				OR $resultats['module'] == 'public') ? '' : $resultats['module'] . ':' ;
 
-	$sed = array();
-	foreach ($resultats['fichier_non'] as $index => $val) {
+	$files = $sed = array();
+	$_l = ($verification=='fonction_l');
+	$all = $resultats[$_l ? "fichier_non" : 'fichier_non_mais_nok'];
+	// Pour chaque item on construit le sed
+	// et on collecte au passage les fichiers qui le contiennent
+	foreach ($all as $index => $val) {
+		foreach($val as $f => $l) $files[$f]= str_replace(_DIR_RACINE . $ou, '', $f);
+		$fichier = key($val);
 		$val = array_shift($val);
 		$val = array_shift($val);
 		$val = array_shift($val);
-		// gestion des backslash imparfaite, mais c'est deja ca
-		if (preg_match(_LANGONET_FONCTION_L, $val, $m))
-			$occ = str_replace('\\', '.', $m[1]);
-		elseif (preg_match(_LANGONET_FONCTION_L2, $val, $m))
-			$occ = $m[1];
-		else continue;
+		if ($_l) {
+			// gestion des backslash imparfaite, mais c'est deja ca
+			if (preg_match(_LANGONET_FONCTION_L, $val, $m))
+				$occ = str_replace('\\', '.', $m[1]);
+			elseif (preg_match(_LANGONET_FONCTION_L2, $val, $m))
+				$occ = $m[1];
+			else continue;
+		} else {
+		  // si les item n'ont pas que des lettres, normaliser
+			$re = strpos($fichier, '.xml') ? _LANGONET_TROUVER_ITEM_X : _LANGONET_TROUVER_ITEM_HP;		  
+			if (!preg_match($re, $val, $m)) continue;
+			if ($m[0][0] !== '<') continue;
+			if (preg_match(',^\w+$,', $occ = $m[2])) continue;
+		}
 		// Un item avec $ est intraduisible.
 		if (strpos($occ, '$') !== false)  continue;
 		$occ = str_replace('%', '\\%', $occ);
-		$cite = "s%_L *( *.$occ *.%_T('$prefixe$index'%;";
+		$cite = $_l ? "s%_L *( *.$occ *.%_T('$prefixe$index'%;" : "s%<:$occ%<:$prefixe$index%;";
 		$sed[$cite]=strlen($occ); 
 	}
-
+	if (!$sed) return '';
 	// Trier par ordre decroissant des longueurs des items a remplacer:
 	// "truc_x" doit etre traite avant "truc"
 	arsort($sed);
-
-	// Lister les fichiers concernes
-	$files = array();
-	foreach ($resultats["fichier_non"] as $j) {
-		foreach($j as $f => $l) $files[$f]= str_replace(_DIR_RACINE . $ou, '', $f);
-	}
-
 	// Creer le texte du script
 	$in = _L('executer ce script dans ');
-	$out = _L("Si correct, rappeler ce script avec 'mv' comme argument pour remplacer _L par _T dans les fichiers.");
-	$texte = "echo \"$in $ou\"\n" .
+	$out = _L("Si correct, rappeler ce script avec 'mv' comme argument pour modifier les fichiers.");
+	return "echo \"$in $ou\"\n" .
 		'if [ "$*" == "mv" ]; then comm=mv; else comm=diff; fi' .
 		"\nfor i in " .
 		join(" ", $files) .
 		"\ndo\nr=\$(basename \$i)\nsed \"\n" .
 		join("\n", array_keys($sed)) .
 		"\n\" \$i > /tmp/\$r\n\$comm /tmp/\$r \$i\ndone\n" .
-		"\nif [ \"$*\" != 'mv' ]; then echo \"$out\"; fi";
-
-	$ok = ecrire_fichier($script, $texte);
-	return $ok;
+		"\nif [ \"$*\" != 'mv' ]; then echo; echo \"$out\"; fi";
 }
 
 // fonction purement utilitaire

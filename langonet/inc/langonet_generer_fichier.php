@@ -50,22 +50,22 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 }
 
 function langonet_generer_couples($module, $var_source, $var_cible, $mode='index', $encodage='utf8', $oublis_inutiles=array()) {
-
 	if ($encodage == 'utf8') include_spip('inc/langonet_utils');
 
 	// On recupere les items du fichier de langue si celui ci n'est pas vide
 	$source = $GLOBALS[$var_source] ? $GLOBALS[$var_source] : array();
+
 	// Si on demande de generer le fichier corrige
 	// alors on fournit la liste des items a ajouter
 	$source = ($mode == 'oublie' OR $mode == 'fonction_l') ? array_merge($source, $oublis_inutiles) : $source;
 	if ($mode != 'inutile') $oublis_inutiles = array();
 	foreach ($source as $_item => $_valeur) {
 		$texte = $GLOBALS[$var_cible][$_item];
-		$comm = false;
-		if ($GLOBALS[$var_cible][$_item]) {
+		if ($texte) {
 			$comm = in_array($_item, $oublis_inutiles);
 		}
 		else {
+			$comm = false;
 			if ($mode != 'pas_item') {
 				if ($mode == 'new')
 					$texte = '<NEW>';
@@ -77,10 +77,10 @@ function langonet_generer_couples($module, $var_source, $var_cible, $mode='index
 					$texte = $_valeur;
 				else if ($mode == 'vide')
 					$texte = '';
+				else if (($mode == 'fonction_l') OR (($mode == 'oublie') AND $_valeur))
+					$texte = array('<LANGONET_DEFINITION_L>', $_valeur, $mode);
 				else if ($mode == 'oublie')
 					$texte = '<LANGONET_DEFINITION_MANQUANTE>';
-				else if ($mode == 'fonction_l')
-					$texte = array('<LANGONET_DEFINITION_L>', $_valeur, $mode);
 				else
 					$texte = $_item;
 			}
