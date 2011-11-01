@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Sitra Select</nom>
 	<auteur>[Dominique Wojylac (Sivu Inforoutes de l'Ard&#232;che)->http://www.inforoutes.fr]</auteur>
-	<version>0.6.4</version>
+	<version>0.7.0</version>
 	<etat>test</etat>
 	<icon>images/sitra-64.png</icon>
 	<licence>GPL 3 - &#169; 2011</licence>
@@ -24,7 +24,10 @@
 		<nom>affiche_milieu</nom>
 		<inclure>sitra_select_pipelines.php</inclure>
 	</pipeline>
-
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>genie/sitra_select_nettoyer_base.php</inclure>
+	</pipeline>
 	<categorie>outil</categorie>
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="sitra" version="[0.8.0;]" />
