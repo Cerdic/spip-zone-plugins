@@ -9,7 +9,9 @@
 	documentation="http://www.spip-contrib.net/Polyhierarchie"
 >	
 
-	<nom>PolyHierarchy</nom>
+	<nom>PolyHi&#233;rarchie</nom>
+	<!-- Rattacher un article ou une rubrique à plusieurs rubriques parentes -->
+
 	<auteur lien="http://www.yterium.com">C&#233;dric Morin</auteur>
 	<licence>GPL</licence>
 
