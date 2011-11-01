@@ -158,7 +158,8 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$descrip = isset($outil['description'])?$outil['description']:couteauprive_T($outil['id'].':description');
 	// ajout des variables liees a la barre typo
 	if(defined('_DIR_PLUGIN_PORTE_PLUME') 
-	 && ( isset($outil['pipeline:porte_plume_barre_pre_charger']) || isset($outil['pipeline:porte_plume_cs_pre_charger']))
+	 && ( isset($outil['pipeline:porte_plume_barre_pre_charger']) || isset($outil['pipeline:porte_plume_cs_pre_charger'])
+	 	|| isset($outil['pipelinecode:porte_plume_barre_pre_charger']) || isset($outil['pipelinecode:porte_plume_cs_pre_charger']))
 	 && count($barres = cs_pp_liste_barres())) {
 		$descrip .= "\n\n@puce@ "._T('couteauprive:barres_typo_intro');
 		$i=0;

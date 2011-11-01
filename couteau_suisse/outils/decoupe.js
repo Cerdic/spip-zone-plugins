@@ -57,10 +57,8 @@ function onglets_init() {
 		return false;
 	});
 	// activation d'un onglet grace a l'url
-	if(onglet_get && (this==document)) {
-		sel=jQuery('#onglets_titre_'+onglet_get);
-		sel.click();
-	}
+	if(onglet_get && (this==document))
+		jQuery('#onglets_titre_'+onglet_get).click();
 	// clic vers une note dans un onglet
 	jQuery('.spip_note['+cs_sel_jQuery+'name^=nb], .spip_note['+cs_sel_jQuery+'id^=nb]').each(function(i) {
 		jQuery(this).click(function(e){
