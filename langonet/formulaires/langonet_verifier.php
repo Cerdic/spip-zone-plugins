@@ -67,16 +67,16 @@ function formulaires_langonet_verifier_traiter() {
 
 	// Creation du fichier de langue corrige avec les items detectes comme non definis ou obsoletes
 	// suivant la verification en cours
-	if (count($resultats['item_non']) > 0) {
+	$_l = ($verification=='fonction_l');
+	$all = $resultats[$_l ? "item_non" : 'item_non_mais_nok'];
+	if ($all) {
 		$langonet_corriger = charger_fonction('langonet_generer_fichier','inc');
 		if ($verification != 'utilisation') {
 			$oublies = array();
-			$_l = ($verification=='fonction_l');
-			$all = $resultats[$_l ? "item_non" : 'item_non_mais_nok'];
 			foreach ($all as $_item) {
 				$oublies[$_item] = @$resultats['item_md5'][$_item]; // indefini si dejo normalise
 			}
-			$mode = ($verification == 'definition') ? 'oublie' : 'fonction_l';
+			$mode = $_l ?'fonction_l' :  'oublie';
 			$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $oublies);
 		}
 		else {

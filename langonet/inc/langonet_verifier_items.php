@@ -12,7 +12,7 @@ define("_LANGONET_TROUVER_ITEM_HP",
 	"(?:<:|_[TU]\(['\"])" . // designation (<: pour squelette, T|U pour PHP)
 	"(?:([a-z0-9_]+):)?" .  // nom du module eventuel
        "(" . "(?:\\$|[\"\']\s*\.\s*\\$*)?" . // delimiteur ' ou " pour T|U
-		"[A-Za-z0-9@_&;,.?!\s-]+" . // item nu, pas forcement normalise
+		"[A-Za-z0-9@_&;,.?!\s()-]+" . // item nu, pas forcement normalise
 	       ")" .
 	"(" . "(?:{(?:[^\|=>]*=[^\|>]*)})?" . // argument entre accolades
 		"(?:(?:\|[^>]*)?)" . // filtre
