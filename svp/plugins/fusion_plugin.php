@@ -6,7 +6,6 @@ include_spip('inc/svp_outiller');
 
 // Fusion des informations de chaque balise plugin en considerant la compatibilite SPIP
 function plugins_fusion_plugin($plugins) {
-#var_dump('$plugins', $plugins);
 	$fusion = array();
 	if (!$plugins)
 		return $fusion;
@@ -43,13 +42,11 @@ function plugins_fusion_plugin($plugins) {
 			if (!$fusion['logo'] AND $_plugin['logo']) 
 				$fusion['logo'] = $_plugin['logo'];
 			// compatible
-			$fusion['compatibilite'] = fusionner_intervalles(
-													$fusion['compatibilite'], 
-													$_plugin['compatibilite']);
-			// necessite, utilise
+			$fusion['compatibilite'] = fusionner_intervalles($fusion['compatibilite'], $_plugin['compatibilite']);
+			// necessite, utilise, lib : on indexe chaque liste de dependances par l'intervalle de compatibilite
+			// sans regrouper les doublons pour l'instant
 		}
 	}
-#var_dump('$fusion', $fusion);
 
 	return $fusion;
 }
