@@ -1,0 +1,14 @@
+<plugin>
+<nom>Albums</nom>
+<prefix>album</prefix>
+<icon>icon/album.png</icon>
+
+<description>Afficher un album de documents {{dans}} un article et ailleurs.</description>
+<auteur>[romy.tetue.net->http://romy.tetue.net]</auteur>
+<licence>GPL 2011</licence>
+<categorie>multimedia</categorie>
+
+<version>0.0.1</version>
+<etat>dev</etat>
+<necessite id='SPIP' version='[2.0.0;]' />
+</plugin>
