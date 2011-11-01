@@ -44,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_label_afficher_send' => 'Bouton Envoyer ?',
 	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?',
    'noisette_label_niveau_titre' => 'Choisir le niveau du titre',
+	'noisette_label_show_faces' => 'Afficher les photos de profil sous le bouton ?',
 	'noisette_label_titre_noisette' => 'Titre :',
 	'noisette_label_titre_noisette_perso' => 'Si titre personnalisé :',
 	'noisette_label_width' => 'Largeur',

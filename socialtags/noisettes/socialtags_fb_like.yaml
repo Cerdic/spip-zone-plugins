@@ -18,6 +18,12 @@ parametres:
       label: '<:socialtags:noisette_label_afficher_send:>'
       defaut: ''
   -
+    saisie: 'true_false'
+    options:
+      nom: 'show_faces'
+      label: '<:socialtags:noisette_label_show_faces:>'
+      defaut: 'on'
+  -
     saisie: 'input'
     options:
       nom: 'width'
