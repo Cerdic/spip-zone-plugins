@@ -6,7 +6,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function stocks_declarer_tables_interfaces($interface){
 	// 'spip_' dans l'index de $tables_principales
 	$interface['table_des_tables']['stocks'] = 'stocks';
-	
+    $interface['tables_jointures']['spip_produits'][] = 'stocks';
+
 	return $interface;
 }
 
