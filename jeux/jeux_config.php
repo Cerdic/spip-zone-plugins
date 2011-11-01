@@ -49,6 +49,7 @@ define('_JEUX_AUTEUR', 'auteur');
 define('_JEUX_RECUEIL', 'recueil');
 define('_JEUX_PENDU', 'pendu');
 define('_JEUX_DIAG_ECHECS', 'diag_echecs');
+define('_JEUX_CHESSSTUFF', 'chesstuff');
 define('_JEUX_MULTI_JEUX', 'jeu');
 
 // globale stockant les carateristiques d'un jeu :
@@ -72,6 +73,7 @@ $jeux_caracteristiques = array(
 	'trous' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_TROU, _JEUX_CONFIG, _JEUX_SCORE),
 	'pendu' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_PENDU, _JEUX_CONFIG),
 	'diag_echecs' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_DIAG_ECHECS, _JEUX_CONFIG),
+	'chesstuff' => array(_JEUX_CHESSSTUFF, _JEUX_CONFIG),
   ),
 
 // liste des signatures caracteristiques d'un jeu.
@@ -92,6 +94,7 @@ $jeux_caracteristiques = array(
 	'trous' => array(_JEUX_TROU),
 	'pendu' => array(_JEUX_PENDU),
 	'diag_echecs' => array(_JEUX_DIAG_ECHECS),
+	'chesstuff' => array(_JEUX_CHESSSTUFF),
   ),
 
 // nom court a donner aux jeux
@@ -106,6 +109,7 @@ $jeux_caracteristiques = array(
 	'trous' => _L('Trous'),
 	'pendu' => _T('pendu:titre_court'),
 	'diag_echecs' => _L('Echecs'),
+	'chesstuff' => _L('Echecs'),
   ),
 
 );
