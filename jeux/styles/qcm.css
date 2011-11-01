@@ -6,37 +6,34 @@
  font-size: 90%;
  font-family: arial, helvetica, sans-serif;
  color: #3F5264;
- font-size: 12;
  border: 1px solid #F78C54;
  background-color: #FFEADE;
-/* padding: 3px; 
- width:100%;*/
+ line-height: normal;
 }
 
 .qcm_titre{ 
-/* color: #3F5264; */
 }
 
 .qcm_proposition{ 
  font-size: 90%; 
- font-size: 10;
-/* color: #3F5264;*/
- }
+}
 
-.qcm_reponse{ 
+.qcm_element{
   font-size: 80%;
- font-size: 10;
-/* color: #3F5264;*/
- }
+}
+
+.qcm_reponse{
+  margin-top:
+}
+
+.qcm_correction{
+}
 
 .qcm_precision{
  margin:0.1em auto 0.5em;
  text-align:left;
  font-size: 80%;
  width:90%;
-/* font-family: arial, helvetica, sans-serif;
- color: #3F5264;
- font-size: 12;*/
  border: 1px dotted #3F5264;
  padding: .2em; 
 }
@@ -66,7 +63,7 @@
 
 .qcm_select{ 
  color: #3F5264;
- font-size: 10; 
+ font-size: 10pt; 
  background-color: #F3EEEA;
 }
 

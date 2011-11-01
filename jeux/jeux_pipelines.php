@@ -75,6 +75,7 @@ function jeux_post_propre($texte) {
 // pipeline header_prive
 function jeux_header_prive($flux){
 	include_spip('public/assembler');
+	include_spip('jeux_utils');
 	global $jeux_header_prive, $jeux_javascript_prive;
 	$flux .= _JEUX_HEAD1;
 	$flux .= "<link rel='stylesheet' href='../spip.php?page=jeux.css' type='text/css' media='projection, screen' />";
@@ -85,6 +86,7 @@ function jeux_header_prive($flux){
 
 // pipeline insert_head
 function jeux_insert_head($flux){
+	include_spip('jeux_utils');
 	return $flux . _JEUX_HEAD2;
 }
 

@@ -81,9 +81,9 @@ function qcm_analyse_le_qcm($qcm, $indexQCM, $isQRM) {
   global $qcms;
   $qcms[$indexQCM]['qrm'] = $isQRM;
   $qcms['qrm'] |= $isQRM;
-  $lignes = preg_split("/\r?\n/", $qcm);
+  $lignes = preg_split('/[\r\n]+/', $qcm);
   foreach ($lignes as $ligne) {
-	$li=trim($ligne); 
+	$li = trim($ligne); 
     switch($li[0]){
       case 'Q' : 	  	// On extrait la question
 		$qcms[$indexQCM]['question'] = trim(substr($li, 1));
@@ -241,7 +241,7 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 
 			if($affiche_correction) {
 				// reponse juste ou fausse ?
-				$codeHTML .= '<div class="qcm_reponse"><span class="qcm_correction_'.($bonneReponse?'juste':'faux').'">'
+				$codeHTML .= '<div class="qcm_correction"><span class="qcm_correction_'.($bonneReponse?'juste':'faux').'">'
 					._T('jeux:reponse'.($bonneReponse?'Juste':'Fausse')).'</span></div>';
 				// les precisions eventuelles
 				$prec = $qcms[$indexQCM]['precisions'][$trou?0:$reponse];
