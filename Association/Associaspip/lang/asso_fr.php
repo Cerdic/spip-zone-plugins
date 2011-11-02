@@ -530,7 +530,7 @@ Commentaire: @commentaire@
 			
 		#Votre association
 			'votre_asso' => 'Votre association',
-			'president' => 'President',
+			'president' => 'Pr&eacute;esident',
 			'votre_equipe' => 'Votre &eacute;quipe',
 			'donnees_perso' => 'Donn&eacute;es Personnelles',
 			'donnees_internes' => 'Donn&eacute;es Internes',
@@ -565,12 +565,16 @@ Commentaire: @commentaire@
 			'destination_comptable' => 'Destination comptable',
 		# Bilan
 			'toutes_destination' => 'toutes destinations',
+	'bilan_depenses' => 'D&eacute;penses',
+	'bilan_recettes' => 'Recettes',
+	'bilan_solde' => 'Solde',
 		# Comptes
 			'compte_financier' => 'Compte financier',			
 			'bilan' => 'Bilan',
 			'compte_cree_automatiquement' => 'Compte cr&eacute;&eacute; automatiquement par Associaspip',
 			'virement_interne' => 'Virement interne',
-
+			'bouton_radio_type_operation_titre' => 'Type d\'op&eacute;ration',
+	
 		# Compte de Resultat
 			'cpte_resultat_titre_general' => 'Compte de R&eacute;sultat',
 			'cpte_resultat_bouton_voir' => 'Voir',
@@ -585,6 +589,8 @@ Commentaire: @commentaire@
 			'cpte_resultat_depense_evaluee' => 'D&eacute;pense<br />&eacute;valu&eacute;e',
 			'cpte_resultat_mode_exportation' => 'Exporter le Compte de R&eacute;sultat en ',
 			'cpte_resultat_pied_page_export_pdf' => 'Associaspip - Gestion d\'une association sous licence GPL',
+		'cpte_resultat_total_produits_evalues' => 'Total des Produits &Eacute;valu&eacute;s',
+	'cpte_resultat_total_charges_evaluees' => 'Total des Charges &Eacute;valu&eacute;es',
 
 		# annexe
 			'annexe_titre_general' => 'Annexe',

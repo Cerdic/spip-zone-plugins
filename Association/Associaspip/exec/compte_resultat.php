@@ -51,7 +51,7 @@ function exec_compte_resultat() {
 		echo debut_droite("", true);
 
 		debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES . "finances.jpg", false, "", '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . propre(_T('asso:cpte_resultat_titre_general') . ' - ' . $annee));
-
+		
 		if ($plan) {
 			$join = " RIGHT JOIN spip_asso_plan ON imputation=code";
 			$sel = ", code, intitule, classe";
@@ -62,33 +62,49 @@ function exec_compte_resultat() {
 			$join = $sel = $having = $order = '';
 		}
 
+		$var = @serialize(array($annee, $join, $sel, $having, $order));
+
 		echo "<table border='0' cellpadding='2' cellspacing='6' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>";
 		echo "<tr style='background-color: #DBE1C5;'><td>";
-		$depenses = compte_resultat_charges_produits($annee, $join, $sel, $having, $order, intval($GLOBALS['association_metas']['classe_charges']));
+		$depenses = compte_resultat_charges_produits($var, intval($GLOBALS['association_metas']['classe_charges']));
 		echo "</td></tr>";
 		echo "<tr style='background-color: #DBE1C5;'><td>";
-		$recettes = compte_resultat_charges_produits($annee, $join, $sel, $having, $order, intval($GLOBALS['association_metas']['classe_produits']));
+		$recettes = compte_resultat_charges_produits($var, intval($GLOBALS['association_metas']['classe_produits']));
 		echo "</td></tr>";
 		echo "<tr style='background-color: #DBE1C5;'><td>";
 		compte_resultat_benefice_perte($recettes, $depenses);
 		echo "</td></tr>";
 		echo "<tr style='background-color: #DBE1C5;'><td>";
-		compte_resultat_benevolat($annee, $join, $sel, $having, $order, intval($GLOBALS['association_metas']['classe_contributions_volontaires']));
+		compte_resultat_benevolat($var, intval($GLOBALS['association_metas']['classe_contributions_volontaires']));
 		echo "</td></tr></table>";
+
+		/* si plan on peut exporter en pdf, cs, xml, ..... */
+		if($plan){
+			echo "<br /><table cellpadding='2' cellspacing='6' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>";
+			echo "<tr style='background-color: #DBE1C5;'>";
+			echo "<td style='text-align:right;'>"._T('asso:cpte_resultat_mode_exportation')."</td>";
+			foreach(array('pdf','csv','xml') as $type) { // exports possibles
+				$h = generer_url_ecrire('export_compte_resultat', "type=$type&var=$var");
+				echo "<td style='text-align:center;'><a href='$h'><strong>".ucfirst($type)."</strong></td>";
+			}
+			echo '</tr></table>';
+		}
 
 		fin_cadre_relief();
 		echo fin_page_association();
 	}
 }
 
-function compte_resultat_charges_produits($annee, $join, $sel, $having, $order, $class) {
+function compte_resultat_charges_produits($var, $class) {
 	include_spip('inc/association_plan_comptable');
+	$tableau = @unserialize($var);
+	$annee = $tableau[0];$join = $tableau[1];$sel = $tableau[2];$having = $tableau[3];$order = $tableau[4];
 	echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>";
 	echo "<tr style='background-color: #DBE1C5;'>";
 	echo "<td width='10'><strong>&nbsp;</strong></td>";
 	echo "<td width='30'><strong>&nbsp;</strong></td>";
 	echo "<td><strong>" . (($class == $GLOBALS['association_metas']['classe_charges']) ? _T('asso:cpte_resultat_titre_charges') : _T('asso:cpte_resultat_titre_produits')) . "</strong></td>";
-	echo "<td width='50'><strong>&nbsp;</strong></td>";
+	echo "<td width='80'><strong>&nbsp;</strong></td>";
 	echo "</tr>";
 	$quoi = (($class == $GLOBALS['association_metas']['classe_charges']) ? ("sum(depense) AS valeurs") : ("sum(recette) AS valeurs"));
 	$query = sql_select("imputation, " . $quoi . ", date_format(date, '%Y') AS annee$sel",
@@ -136,18 +152,21 @@ function compte_resultat_benefice_perte($recettes, $depenses) {
 	echo "<td width='30'><strong>&nbsp;</strong></td>";
 	$res = $recettes - $depenses;
 	echo "<td class='arial11 border1' style='text-align:right;color: #9F1C30;'><strong>" . (($res < 0) ? _T('asso:cpte_resultat_perte') : _T('asso:cpte_resultat_benefice')) . "</strong></td>";
-	echo "<td width='50' class='arial11 border1' style='text-align:right;color: #9F1C30;'><strong>" . number_format($res, 2, ',', ' ') . "</strong></td>";
+	echo "<td width='80' class='arial11 border1' style='text-align:right;color: #9F1C30;'><strong>" . number_format($res, 2, ',', ' ') . "</strong></td>";
 
 	echo "</tr></table>";
 }
 
-function compte_resultat_benevolat($annee, $join, $sel, $having, $order, $class) {
+function compte_resultat_benevolat($var, $class) {
+	$tableau = @unserialize($var);
+	$annee = $tableau[0];$join = $tableau[1];$sel = $tableau[2];$having = $tableau[3];$order = $tableau[4];
 	echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>";
 	echo "<tr style='background-color: #DBE1C5;'>";
-	echo "<td><strong>&nbsp;</strong></td>";
+	echo "<td width='10'><strong>&nbsp;</strong></td>";
+	echo "<td width='30'><strong>&nbsp;</strong></td>";
 	echo '<td><strong>' . _T('asso:cpte_resultat_titre_benevolat') . '</strong></td>';
-	echo "<td style='text-align:right;'><strong>"._T('asso:cpte_resultat_recette_evaluee')."</strong></td>";
-	echo "<td style='text-align:right;'><strong>"._T('asso:cpte_resultat_depense_evaluee')."</strong></td>";
+	echo "<td width='80' style='text-align:right;'><strong>"._T('asso:cpte_resultat_recette_evaluee')."</strong></td>";
+	echo "<td width='80' style='text-align:right;'><strong>"._T('asso:cpte_resultat_depense_evaluee')."</strong></td>";
 	$query = sql_select("imputation, sum(recette) AS recettes, sum(depense) AS depenses, date_format(date, '%Y') AS annee$sel",
 			"spip_asso_comptes$join",
 			"",
@@ -155,11 +174,20 @@ function compte_resultat_benevolat($annee, $join, $sel, $having, $order, $class)
 			"code ASC",
 			'',
 			"annee=$annee$having$class");
+	$chapitre = '';
 	$total_recettes = $total_depenses = 0;
 	while ($data = sql_fetch($query)) {
 		$recettes = $data['recettes'];
 		$depenses = $data['depenses'];
 		echo '<tr style="background-color: #EEEEEE;">';
+		$new_chapitre = substr($data['code'], 0, 2);
+		if ($chapitre != $new_chapitre) {
+			echo "<td class='arial11 border1'>" . $new_chapitre . '</td>';
+			echo "<td colspan='4' class='arial11 border1'>" . association_plan_comptable_complet($new_chapitre) . '</td>';
+			$chapitre = $new_chapitre;
+			echo '</tr><tr style="background-color: #EEEEEE;">';
+		}
+		echo "<td>&nbsp;</td>";		
 		echo "<td class='arial11 border1'>" . $data['code'] . '</td>';
 		echo "<td class='arial11 border1'>" . $data['intitule'] . '</td>';
 		echo '<td class="arial11 border1" style="text-align:right;">' . number_format($recettes, 2, ',', ' ') . '</td>';
@@ -173,7 +201,7 @@ function compte_resultat_benevolat($annee, $join, $sel, $having, $order, $class)
 	$total_depenses = number_format($total_depenses, 2, ',', ' ');
 
 	echo '<tr style="background-color: #EEEEEE;">';
-	echo "<td class='arial11 border1' style='text-align:right;color: #9F1C30;' colspan='2'><strong>" . _T('asso:resultat_courant') . '</strong></td>';
+	echo "<td class='arial11 border1' style='text-align:right;color: #9F1C30;' colspan='3'><strong>" . _T('asso:resultat_courant') . '</strong></td>';
 	echo "<td class='arial11 border1' style='text-align:right;color: #9F1C30;'><strong>" . $total_recettes . '</strong></td>';
 	echo "<td class='arial11 border1' style='text-align:right;color: #9F1C30;'><strong>" . $total_depenses . '</strong></td>';
 	echo "</tr>";
