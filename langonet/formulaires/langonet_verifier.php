@@ -350,6 +350,7 @@ function afficher_lignes($type, $tableau, $extra=array(), $f_coloriser) {
 
 	// Detail des fichiers utilisant les items de langue
 	ksort($tableau);
+	$liste_lignes = '';
 	foreach ($tableau as $item => $detail) {
 		$liste_lignes .= bouton_block_depliable($item, false) .
 		                 debut_block_depliable(false) .

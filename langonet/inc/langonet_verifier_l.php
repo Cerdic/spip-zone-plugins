@@ -91,9 +91,10 @@ function langonet_index_l($occ, $item_md5)
 	  // trop long: abandonner les petits mots
 		$index = preg_replace('/\b\w{1,3}\W/', '', $index);
 		if (strlen($index) > 32) {
-			// tant pis mais couper proprement
+			// tant pis mais couper proprement si possible
 			$index = substr($index, 0, 32);
-			$index = substr($index, 0, strrpos($index,' '));
+			if ($n = strrpos($index,' '))
+				$index = substr($index, 0, $n);
 		}
 	}
 	$index = str_replace(' ', '_', trim($index));

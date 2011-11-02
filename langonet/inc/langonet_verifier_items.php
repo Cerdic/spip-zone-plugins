@@ -48,7 +48,7 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 	// Si une erreur se produit lors du deroulement de la fonction, le tableau contient le libelle
 	// de l'erreur dans $resultats['erreur'].
 	// Sinon, cet index n'existe pas
-	$item_md5 = $fichier_non = $resultats = array();
+	$item_non = $definition_non_mais_nok = $item_md5 = $fichier_non = $resultats = array();
 
 	// On charge le fichier de langue a verifier
 	// si il existe dans l'arborescence $ou_langue
@@ -104,7 +104,8 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 		}
 		// On construit la liste des items utilises mais non definis
 		foreach ($utilises['items'] as $_cle => $_valeur) {
-			if (!$GLOBALS[$var_source][$_valeur]) {
+
+			if (!isset($GLOBALS[$var_source][$_valeur])) {
 				if (!$utilises['suffixes'][$_cle]) {
 					if ($utilises['modules'][$_cle] == $module) {
 						// L'item est vraiment non defini et c'est une erreur
