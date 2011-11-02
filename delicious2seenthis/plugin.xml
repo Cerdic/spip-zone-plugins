@@ -1,0 +1,31 @@
+<plugin>
+	<nom>Delicious2SeenThis</nom>
+	<auteur>b_b</auteur>
+	<version>0.0.1</version>
+	<licence>GNU/GPL</licence>
+	<etat>dev</etat>
+	<slogan>Une passerelle delicioous vers SeenThis</slogan>
+	<description>Passer par SPIP pour poster ses bookmarks delicious vers son compte SeenThis.</description>
+	<lien></lien>
+	<prefix>del2seen</prefix>
+	<icon>images/del2seen-32.png</icon>
+	<options>del2seen_options.php</options>
+	<pipeline>
+		<nom>post_syndication</nom>
+		<inclure>del2seen_pipelines.php</inclure>
+	</pipeline>
+	<bouton id='del2seen' parent='configuration'>
+		<icone>images/del2seen-24.png</icone>
+		<titre>del2seen:titre_menu</titre>
+		<url>configurer_del2seen</url>
+	</bouton>
+	<bouton id='del2seen' parent='bando_configuration'>
+		<icone>images/del2seen-16.png</icone>
+		<titre>del2seen:titre_menu</titre>
+		<url>configurer_del2seen</url>
+	</bouton>
+	<necessite id="SPIP" version="[2.1.11;2.1.99]" />
+	<necessite id="Seenthis" version="[0.1;]" />
+	<necessite id="spip_bonux" version="[2.0;]" />
+	<categorie>communication</categorie>
+</plugin>

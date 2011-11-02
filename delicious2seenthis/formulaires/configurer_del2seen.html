@@ -1,0 +1,32 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="editer_login_delicious[ (#ENV**{erreurs}|table_valeur{login_delicious}|oui)erreur]">
+			<label for="id_site_delicious"><:del2seen:label_id_site_delicious:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{id_site_delicious})</span>]
+			<select name="id_site_delicious" class="select" id="id_site_delicious">
+				<option value="">...</option>
+				<BOUCLE_syndics(SITES){syndication=oui}>
+				<option value="#ID_SYNDIC"[(#ENV{id_site_delicious}|=={#ID_SYNDIC}|oui)selected="selected"]>#NOM_SITE</option>
+				</BOUCLE_syndics>
+			</select>
+		</li>
+		<li class="editer_login[ (#ENV**{erreurs}|table_valeur{login}|oui)erreur]">
+			<label for="login"><:del2seen:label_login:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{login})</span>]
+			<input type="text" name="login" class="text" id="login" size="60" value="#ENV*{login}" />
+		</li>
+		<li class="editer_pass[ (#ENV**{erreurs}|table_valeur{pass}|oui)erreur]">
+			<label><:del2seen:label_pass:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{pass})</span>]
+			<input type="text" name="pass" class="text" id="pass" size="60" value="#ENV*{pass}" />
+		</li>
+	</ul>
+	<p class="boutons">
+		<input type="submit" name="enregistrer" class="submit" value="<:bouton_valider:>" />
+	</p>
+</div></form>
+</div>
