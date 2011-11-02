@@ -1,0 +1,15 @@
+<plugin>
+  <nom>Crit&#232;re mots</nom>
+  <slogan>S&#233;lectionner des objets ayant des mots cl&#233;s en communs</slogan>
+  <auteur>Fil, Ma&#252;eul Rouquette, RealET (Formulaires)</auteur>
+  <icon>img_pack/stock_filter-data-by-criteria-24.png</icon>
+  <licence>(c) 2009 GPL</licence>
+  <version>1.2.3</version>
+  <etat>test</etat>
+  <description>Permet d'afficher les &#233;l&#233;ments qui ont plusieurs mots cl&#233;s en communs, via la variable $mots[] pass&#233;e dans l'environnement</description>
+  <lien>http://www.spip-contrib.net/Critere-mots</lien>
+  <fonctions>critere_mots_fonctions.php</fonctions>
+  <prefix>critere_mots</prefix>
+  <necessite id='SPIP' version='[2.0.0;3.0.99]' />
+  <categorie>navigation</categorie>
+</plugin>

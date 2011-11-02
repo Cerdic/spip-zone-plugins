@@ -1,0 +1,3 @@
+[(#REM) SPIP ne fourni pas directement le critere count de MySQL.
+Mais avec une pagination de 1 et GRAND_TOTAL on arrive au même résultat ]
+		<BOUCLE_recherche_par(ARTICLES){mots_selon_id}{pagination 1}>[<option value="(#ENV{id_mot})">[&nbsp;(#ENV{titre})][ ((#GRAND_TOTAL))]</option>]</BOUCLE_recherche_par>
