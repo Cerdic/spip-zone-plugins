@@ -196,7 +196,10 @@ function comptes_while($where, $limit, $id_compte)
 		. '</td>'
 		. ($data['vu'] ?
 			("<td class='$class' colspan='3' style='text-align: center;'><img src=\""._DIR_PLUGIN_ASSOCIATION_ICONES."puce-verte.gif\" $onload_option /></td>\n")
-		   :  ("<td class='$class border1' style='text-align: center;'>" . association_bouton(_T('asso:mettre_a_jour'), 'edit-12.gif', 'edit_compte', 'id='.$id, $onload_option) . "</td>\n"
+			/* si c'est un virement interne : imputation du type 58xx ne pas permettre la modification !!!
+			 * TODO : coder la modification d'un virement interne c'est a dire la modification de 2 operations comptables
+			 */
+		   :  (((substr($data['imputation'],0,1)==$GLOBALS['association_metas']['classe_banques']) ? "<td class='$class border1' style='text-align: center;'>&nbsp;</td>\n" : "<td class='$class border1' style='text-align: center;'>" . association_bouton(_T('asso:mettre_a_jour'), 'edit-12.gif', 'edit_compte', 'id='.$id, $onload_option) . "</td>\n" )
 			. "<td class='$class border1' style='text-align: center;'>" . association_bouton(_T('asso:supprimer'), 'poubelle.gif', 'action_comptes', 'id='.$id) . "</td>\n"
 		       . "<td class='$class border1' style='text-align: center;'><input name='valide[]' type='checkbox' value='".$data['id_compte']. "' /></td>\n"))
 		 . '</tr>';
