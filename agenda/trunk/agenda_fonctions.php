@@ -7,6 +7,7 @@
  */
 
 include_spip('inc/agenda_filtres');
+include_spip('public/agenda');
 
 
 function agenda_mini($i) {

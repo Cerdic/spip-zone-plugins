@@ -1,0 +1,48 @@
+<paquet
+	prefix="agenda"
+	categorie="date"
+	version="3.1.4"
+	etat="dev"
+	compatibilite="[3.0.0-dev;["
+	logo="icon.png"
+	schema="0.24.0"
+	documentation="http://www.spip-contrib.net/article2858"
+>	
+
+	<nom>Agenda</nom>
+	<!-- Agenda Evénementiel -->
+
+	<auteur lien="http://www.yterium.net">C&eacute;dric MORIN</auteur>
+	<auteur lien="http://www.spip-contrib.net/b_b">b_b</auteur>
+	<auteur lien="http://romy.tetue.net">romy.tetue.net</auteur>
+	<auteur lien="http://www.cahri.com">Julien Tessier</auteur>
+
+	<copyright>2006-2010</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="autoriser" inclure="agenda_autoriser.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/agenda_evenements.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/agenda_evenements.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/agenda_evenements.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/agenda_evenements.php" />
+	<pipeline nom="ajouter_onglets" inclure="agenda_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="agenda_pipelines.php" />
+	<pipeline nom="editer_contenu_objet" inclure="agenda_pipelines.php" />
+	<pipeline nom="libelle_association_mots" inclure="agenda_pipelines.php" />
+	<pipeline nom="afficher_nombre_objets_associes_a" inclure="agenda_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="agenda_pipelines.php" />
+	<pipeline nom="declarer_url_objets" inclure="agenda_pipelines.php" />
+	<pipeline nom="rechercher_liste_des_champs" inclure="agenda_pipelines.php" />
+	<pipeline nom="objets_extensibles" inclure="agenda_pipelines.php" />
+
+	<utilise nom="Fulltext" compatibilite="[0.2;[" />
+	<utilise nom="mots" compatibilite="[2.0.0;[" />
+
+	<menu nom="calendrier_agenda" titre="agenda:agenda" parent="naviguer" icone="img_pack/agenda-24.png" />
+	<menu nom="agenda_evenements" titre="agenda:evenements" parent="bando_edition" icone="images/agenda-evenements-16.png" />
+	<menu nom="evenement_creer" titre="agenda:creer_evenement" parent="outils_rapides" icone="images/agenda-evenements-new-16.png" />
+
+	<chemin path="inclure" />
+	<chemin path="" />
+</paquet>

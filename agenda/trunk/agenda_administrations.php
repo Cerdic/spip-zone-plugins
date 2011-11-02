@@ -60,7 +60,7 @@ function agenda_upgrade($nom_meta_base_version,$version_cible){
 		array('sql_alter',"TABLE spip_evenements CHANGE adresse adresse text NOT NULL DEFAULT ''"),
 	);		
 	include_spip('maj/svn10000');
-	$maj['0.24'] = array(	
+	$maj['0.24.0'] = array(
 
 		array('maj_liens','mot','evenement'),
 		array('sql_drop_table',"spip_mots_evenements"),
