@@ -60,7 +60,7 @@ function langonet_generer_couples($module, $var_source, $var_cible, $mode='index
 	$source = ($mode == 'oublie' OR $mode == 'fonction_l') ? array_merge($source, $oublis_inutiles) : $source;
 	if ($mode != 'inutile') $oublis_inutiles = array();
 	foreach ($source as $_item => $_valeur) {
-		$texte = isset($GLOBALS[$var_cible][$_item]);
+		$texte = @$GLOBALS[$var_cible][$_item];
 		if ($texte) {
 			$comm = in_array($_item, $oublis_inutiles);
 		}
