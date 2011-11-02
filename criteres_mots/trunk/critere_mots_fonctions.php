@@ -66,6 +66,11 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
 
 
 	$_table = str_replace('spip_', '', table_objet_sql($table));
+    // Ben. gros Hack on suppose que toutes les tables sont au pluriel : articles / rubriques ...
+    // Donc on enleve le s pour obtenir aticle et pas articles
+    $objet_delatable=substr($_table, 0, (strlen ($_table)) -1 );
+    //
+
 	$_id_table = id_table_objet($table);
 	$where = array();
     
@@ -76,18 +81,18 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
                 $id_mot = $mot;
             else
                 $id_mot = sql_getfetsel('id_mot', 'spip_mots', 'titre='.sql_quote($mot));
-            $where[] = 'id_mot='.sql_quote($id_mot);
+            $where[] = 'id_mot='.sql_quote($id_mot).'and objet='.sql_quote($objet_delatable);
         }
     }
 	elseif($id_ou_titre == 'id'){
 	   foreach($mots as $mot) {
-	       $where[] = 'id_mot='.sql_quote($mot);
+	       $where[] = 'id_mot='.sql_quote($mot).'and objet='.sql_quote($objet_delatable);
 	   }
 	}
 	elseif($id_ou_titre == 'titre'){
 	   foreach($mots as $mot) {
 	        $id_mot = sql_getfetsel('id_mot', 'spip_mots', 'titre='.sql_quote($mot));
-            $where[] = 'id_mot='.sql_quote($id_mot);  
+            $where[] = 'id_mot='.sql_quote($id_mot) .'and objet='.sql_quote($objet_delatable);
 	   }
 	}
 	
@@ -109,9 +114,9 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
 	   }
 	
 	$wh = "$_table.$_id_table IN (
-		SELECT $_id_table FROM spip_mots_$_table WHERE "
+		SELECT id_objet FROM spip_mots_liens WHERE "
 		. join(' OR ', $where)
-		. ' GROUP BY '.$_id_table
+		. ' GROUP BY id_objet,objet '
 		. $having
 		. "\n\t)";
 
