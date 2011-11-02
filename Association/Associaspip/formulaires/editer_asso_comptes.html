@@ -1,65 +1,75 @@
-<div class="formulaire_spip formulaire_demo">
-[<span class='erreur'>(#ENV*{message_erreur})</span>]
-<form method="post" action="#ENV{action}"><div>
-	#ACTION_FORMULAIRE{#ENV{action}}
-	<ul>
-		<h3 class="legend"><:asso:modification_des_comptes:></h3>
-		#SET{erreurs,#ENV**{erreurs}|table_valeur{imputation}}
-		<li class="editer_imputation">
-			[<span class='erreur_message'>(#GET{erreurs})</span>]
-			<label for="imputation"><strong><:asso:imputation:></strong></label>
-			<B_imputation>
-			<select name="imputation" id="imputation" class="formo" > 
-			<BOUCLE_imputation(ASSO_PLAN){par classe}{par code}{classe!=#ENV{classe_banques}}{active=1}>
-			<option value="#CODE" [(#ENV{imputation}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE[(#TYPE_OP|!={multi}|oui)&nbsp;-&nbsp;[(#TYPE_OP|=={credit}|?{<:asso:crediteur:>,<:asso:debiteur:>})]][&nbsp;-&nbsp;(#ENV{classe_banques}|=={#CLASSE}|oui)<:asso:compte_financier:>]</option>
-			</BOUCLE_imputation>
-			</select>
-			</B_imputation>
-			<span class="erreur_message"><:asso:erreur_pas_de_classe_financiere:></span>
-			<//B_imputation>
-		</li>
+<div class="formulaire_spip formulaire_#FORM">
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form name="formulaire_#FORM" method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:asso:modification_des_comptes:></h3>
+						#BOUTON_TYPE_OPERATION
+						<ul>
+							
+							#SET{erreurs,#ENV**{erreurs}|table_valeur{imputation}}
+							<li class="editer_imputation">
+								[<span class='erreur_message'>(#GET{erreurs})</span>]
+								#SELECTEUR_IMPUTATION
+							</li>
+			
+							#SET{erreurs,#ENV**{erreurs}|table_valeur{date}}
+							<li class="editer_date[ (#GET{erreurs}|oui)erreur]">
+								[<span class='erreur_message'>(#GET{erreurs})</span>]
+								<label for="date"><strong><:asso:date_aaaa_mm_jj:></strong></label>
+								<input type="text" name="date" [value="(#ENV{date}|affdate{Y-m-d})"] id="date"  class='formo'/>
+							</li>
 
-		#SET{erreurs,#ENV**{erreurs}|table_valeur{date}}
-		<li class="editer_date">
-			[<span class='erreur_message'>(#GET{erreurs})</span>]
-			<label for="date"><strong><:asso:date_aaaa_mm_jj:></strong></label>
-			<input type="text" name="date" [value="(#ENV{date}|affdate{Y-m-d})"] id="date"  class='formo'/>
-		</li>
+							<div id='saisie_depense' name='saisie_depense' class='[(#ENV{type_operation}|affichage_div{charges-banques-contributions_volontaires})]'>
+								#SET{erreurs,#ENV**{erreurs}|table_valeur{depense}}
+								<li class="editer_depense[ (#GET{erreurs}|oui)erreur]">
+									[<span class='erreur_message'>(#GET{erreurs})</span>]
+									<label for="depense"><strong><:asso:depense:></strong></label>
+									<input type="text" name="depense" value="[(#ENV{depense})]" id="depense"  class='formo'/>
+								</li>
+							</div>
+							
+							<div id='saisie_recette' name='saisie_recette' class='[(#ENV{type_operation}|affichage_div{produits-contributions_volontaires})]'>
+								#SET{erreurs,#ENV**{erreurs}|table_valeur{recette}}
+								<li class="editer_recette[ (#GET{erreurs}|oui)erreur]">
+									[<span class='erreur_message'>(#GET{erreurs})</span>]
+									<label for="recette"><strong><:asso:recette:></strong></label>
+									<input type="text" name="recette" value="[(#ENV{recette})]" id="recette" class='formo' />
+								</li>
+							</div>
 
-		#SET{erreurs,#ENV**{erreurs}|table_valeur{montant}}
-		<li class="editer_recette[ (#GET{erreurs}|oui)erreur]">
-			[<span class='erreur_message'>(#GET{erreurs})</span>]
-			<label for="recette"><strong><:asso:recette:></strong></label>
-			<input type="text" name="recette" value="[(#ENV{recette})]" id="recette"  class='formo'/>
-		
-		</li>
-		<li class="editer_depense[ (#GET{erreurs}|oui)erreur]">
-			<label for="depense"><strong><:asso:depense:></strong></label>
-			<input type="text" name="depense" value="[(#ENV{depense})]" id="depense"  class='formo'/>
-		</li>
+							[(#ENV{classe_banques}|oui) <!-- si il n'a pas de classe banques definie, on ne propose pas de mode de paiement !!!!!!! BIGRE !!!! OUPS !!!!! -->
+							<li class="editer_journal">
+								<INCLURE{fond=inc/mode_de_paiement, journal, classe_banques}>
+							</li>
+							]
 
-		[(#ENV{classe_banques}|oui) <!-- si il n'a pas de classe banques definie, on ne propose pas de mode de paiement -->
-		<li class="editer_journal">
-			<INCLURE{fond=inc/mode_de_paiement, journal, classe_banques}>
-		</li>
-		]
+							<div id='saisie_justification' name='saisie_justification' class='[(#ENV{type_operation}|affichage_div{charges-produits-banques-contributions_volontaires})]'>
+								<li class="editer_justification">
+									<label for="justification"><strong><:asso:justification:></strong></label>
+									<input type="text" name="justification" [value="(#ENV{justification})"] id="justification"  class='formo'/>
+								</li>
+							</div>
+							
+							<div id='saisie_destination' name='saisie_destination' class='[(#ENV{type_operation}|affichage_div{charges-produits-contributions_volontaires})]'>
+								<!-- si la variable destinations est assignee, on insere l'editeur de destinations -->
+								#SET{erreurs,#ENV**{erreurs}|table_valeur{destinations}}
+								[<li [ class="(#GET{erreurs}|oui)erreur"]>
+									[<span class='erreur_message'>(#GET{erreurs})</span>]
+									(#ENV{destinations_on}|oui)#EDITEUR_DESTINATIONS
+								</li>]
+							</div>							
+						</ul>
+						
+						<p class="boutons"><input type="submit" value="<:pass_ok:>" class="submit" /></p>
 
-		<li class="editer_justification">
-			<label for="justification"><strong><:asso:justification:></strong></label>
-			<input type="text" name="justification" [value="(#ENV{justification})"] id="justification"  class='formo'/>
-		</li>
-
-		<!-- si la variable destinations est assignee, on insere l'editeur de destinations -->
-		#SET{erreurs,#ENV**{erreurs}|table_valeur{destinations}}
-		[<li [ class="(#GET{erreurs}|oui)erreur"]>
-			[<span class='erreur_message'>(#GET{erreurs})</span>]
-			(#ENV{destinations_on}|oui)#EDITEUR_DESTINATIONS
-		</li>]
-		
-	</ul>
-
-<p class="boutons"><input type="submit" value="<:pass_ok:>" class="submit" /></p>
-
-</div>
-</form>
+					</fieldset>
+				</li>
+			</ul>
+		</div>
+	</form>
 </div>

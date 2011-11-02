@@ -57,7 +57,7 @@ function association_editeur_destinations($destination, $unique='', $defaut='')
 	$liste_destination = association_toutes_destination_option_list();
 
 	$res = '';
-
+	
 	if ($liste_destination)	{
 		$res = "<script type='text/javascript' src='".find_in_path("javascript/jquery.destinations_form.js")."'></script>";
 		$res .= '<label for="destination"><strong>'
@@ -288,4 +288,47 @@ function association_valider_plan_comptable()
 
 	return true;
 }
+/* retourne un tableau $code => $intitule trie sur $code et de classe $val */
+function association_liste_plan_comptable($val) {
+	$res = array();
+	/* recupere le code et l'intitule de tous les comptes de classe $val */
+	$query = sql_select("code, intitule", "spip_asso_plan", "classe='".$val."'", "", "code");
+	while ($data = sql_fetch($query)) {
+		$code = $data['code'];
+		$intitule = $data['intitule'];
+		$res[$code] = $intitule;
+	}
+	return $res;
+}
+
+/* si il existe un compte 58x on le retourne sinon on cree le compte 581 et on le retourne */
+function association_creer_compte_virement_interne() {
+	/* on recupere tous les comptes de la classe "financier" (classe 5) */
+	$res = association_liste_plan_comptable($GLOBALS['association_metas']['classe_banques']);
+	/* existe-t-il le compte 58x */
+	foreach($res as $code => $libelle) {
+		if (substr($code,0,2)=='58') {
+			/* j'ai trouve un code qui commence par 58 */
+			$trouve = TRUE;
+		}
+	}
+	/* j'ai rien trouve, je cree le compte 581 et je retourne */
+	if(!$trouve) {
+		$code = '581';
+		$id_plan = sql_insertq('spip_asso_plan', array(
+			'code' => $code,
+			'intitule' => _T('asso:virement_interne'),
+			'classe' => '5',
+			'type_op' => 'multi',
+			'solde_anterieur' => '0',
+			'date_anterieure' => date('Y-m-d'),
+			'commentaire' => _T('asso:compte_cree_automatiquement'),
+			'active' => '1',
+			'maj' => date('Y-m-d')
+		));
+	}
+
+	return $code;
+}
+
 ?>

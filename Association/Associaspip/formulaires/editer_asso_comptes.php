@@ -17,13 +17,25 @@ function formulaires_editer_asso_comptes_charger_dist($id_compte='new') {
 	/* cet appel va charger dans $contexte tous les champs de la table spip_asso_compte associes a l'id_compte passe en param */
 	$contexte = formulaires_editer_objet_charger('asso_comptes', $id_compte, '', '',  generer_url_ecrire('comptes'), '');
 
-	/* si c'est une nouvelle operation, on charge la date d'aujourd'hui */
-	if (!$id_compte) $contexte['date'] = date('Y-m-d');
+	/* si c'est une nouvelle operation */
+	if (!$id_compte) {
+	    $contexte['date'] = date('Y-m-d'); # on charge la date d'aujourd'hui
+	    $contexte['type_operation']=$GLOBALS['association_metas']['classe_charges']; # on fixe par defaut une depense
+	}
+	else {
+	    /* le type d'operation est fonction du compte (de l'imputation dans le cas present) : c'est le 1er caractere du code (la classe)
+	     * TODO : dans une version suivante il faut mettre cette information dans le champ "type_op" du type enum dans lequel il faut
+		 * ajouter 'financier' (pour un virement interne) et 'contribution_volontaire' en plus de 'credit', 'debit' et 'multi'
+	     */
+	    $contexte['type_operation']=substr($contexte['imputation'],0,1);
+	}
 
+	include_spip('inc/association_comptabilite');
+	
 	// on ajoute les metas de classe_banques, destinations
 	$contexte['classe_banques'] = $GLOBALS['association_metas']['classe_banques'];
 	if ($GLOBALS['association_metas']['destinations']) {
-		include_spip('inc/association_comptabilite');
+		
 		$contexte['destinations_on'] = true;
 		$dest_id_montant = association_liste_destinations_associees($id_compte);
 		if (is_array($dest_id_montant)) {
@@ -41,7 +53,12 @@ function formulaires_editer_asso_comptes_charger_dist($id_compte='new') {
 	/* meilleure presentation des montants */
 	$contexte['depense'] = association_nbrefr($contexte['depense']);
 	$contexte['recette'] = association_nbrefr($contexte['recette']);
-	
+
+	/* Recuperation du plan comptable sous forme de tableaux javascript correspondants aux classes utilisees.
+	 * Ces tableaux sont ensuite utilises pour initialiser le selecteur d'imputation (javascript)
+	 */
+	include_spip('inc/generer_plan_js');
+
 	return $contexte;
 }
 
@@ -64,7 +81,7 @@ function formulaires_editer_asso_comptes_verifier_dist($id_compte) {
 			$erreurs['imputation'] = _T('asso:erreur_operation_non_permise_sur_ce_compte');
 		}
 	}
-
+	
 	/* verifier si besoin que le montant des destinations correspond bien au montant de l'opération, sauf si on a deja une erreur de montant */
 	if (($GLOBALS['association_metas']['destinations']) && !array_key_exists("montant",$erreurs))
 	{
@@ -82,8 +99,8 @@ function formulaires_editer_asso_comptes_verifier_dist($id_compte) {
 	if (count($erreurs)) {
 	$erreurs['message_erreur'] = _T('asso:erreur_titre');
 	}
-
 	
+
 	return $erreurs;
 }
 
