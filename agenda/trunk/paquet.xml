@@ -39,9 +39,8 @@
 	<utilise nom="Fulltext" compatibilite="[0.2;[" />
 	<utilise nom="mots" compatibilite="[2.0.0;[" />
 
-	<menu nom="calendrier_agenda" titre="agenda:agenda" parent="naviguer" icone="img_pack/agenda-24.png" />
-	<menu nom="agenda_evenements" titre="agenda:evenements" parent="bando_edition" icone="images/agenda-evenements-16.png" />
-	<menu nom="evenement_creer" titre="agenda:creer_evenement" parent="outils_rapides" icone="images/agenda-evenements-new-16.png" />
+	<menu nom="evenements" titre="agenda:evenements" parent="menu_edition" icone="images/evenement-16.png" />
+	<menu nom="evenement_edit" titre="agenda:creer_evenement" parent="outils_rapides" icone="images/evenement-new-16.png" />
 
 	<chemin path="inclure" />
 	<chemin path="" />
