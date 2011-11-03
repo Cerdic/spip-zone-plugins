@@ -3,6 +3,12 @@
 	<auteur>Phil</auteur>
 	<version>0.4.1</version>
 	<etat>stable</etat>
+	<slogan>
+		<multi>
+			[fr]Ajoute un bouton Google +1
+			[en]Add a Google +1 button
+		</multi>
+	</slogan>
 	<description>
 		<multi>
 			[fr]Ajoute un bouton Google +1
@@ -16,6 +22,6 @@
 		<nom>insert_head</nom>
 		<inclure>googleplus1_insert_head.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.10;3.0.0-dev)" />
+	<necessite id="SPIP" version="[2.0.10;3.0.99]" />
 	<categorie>communication</categorie>
 </plugin>
