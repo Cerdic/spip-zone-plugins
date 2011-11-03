@@ -41,6 +41,6 @@ _ To display the number of actives extensions, write <code><apropos|extensions><
 		<action>insert_head</action>
 		<inclure>apropos_pipeline.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.1.1;3.0.99]" />
+	<necessite id="SPIP" version="[2.1.1;2.2.0]" />
 	<categorie>divers</categorie> 
 </plugin>
