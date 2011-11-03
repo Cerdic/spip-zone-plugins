@@ -135,4 +135,26 @@ function agenda_declarer_url_objets($objets){
 	$objets[] = 'evenement';
 	return $objets;
 }
+
+function agenda_quete_calendrier_prive($flux){
+	$quoi = $flux['args']['quoi'];
+	if (!$quoi OR $quoi=='evenements'){
+		$start = sql_quote($flux['args']['start']);
+		$end = sql_quote($flux['args']['end']);
+		$res = sql_select('*','spip_evenements AS E',"((E.date_fin >= $start OR E.date_debut >= $start) AND E.date_debut <= $end)");
+		while ($row = sql_fetch($res)){
+			$flux['data'][] = array(
+				'id' => $row['id_evenement'],
+				'title' => $row['titre'],
+				'allDay' => false,
+				'start' => $row['date_debut'],
+				'end' => $row['date_fin'],
+				'url' => str_replace("&amp;","&",generer_url_entite($row['id_evenement'],'evenement')),
+				'className' => "calendrier-event evenement calendrier-couleur5",
+				'description' => $row['descriptif'],
+			);
+		}
+	}
+	return $flux['data'];
+}
 ?>

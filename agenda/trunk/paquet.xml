@@ -1,7 +1,7 @@
 <paquet
 	prefix="agenda"
 	categorie="date"
-	version="3.1.4"
+	version="3.2.0"
 	etat="dev"
 	compatibilite="[3.0.0-dev;["
 	logo="prive/themes/spip/images/evenement-32.png"
@@ -35,6 +35,7 @@
 	<pipeline nom="declarer_url_objets" inclure="agenda_pipelines.php" />
 	<pipeline nom="rechercher_liste_des_champs" inclure="agenda_pipelines.php" />
 	<pipeline nom="objets_extensibles" inclure="agenda_pipelines.php" />
+	<pipeline nom="quete_calendrier_prive" inclure="agenda_pipelines.php" />
 
 	<utilise nom="Fulltext" compatibilite="[0.2;[" />
 	<utilise nom="mots" compatibilite="[2.0.0;[" />
