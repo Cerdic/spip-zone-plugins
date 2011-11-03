@@ -2,8 +2,7 @@
 
 function agenda_ajouter_onglets($flux) {
 	if($flux['args']=='calendrier' AND !defined('_DIR_PLUGIN_BANDO')){
-		$flux['data']['agenda']= new Bouton(
-														 _DIR_PLUGIN_AGENDA.'/img_pack/agenda-24.png', _T('agenda:agenda'),
+		$flux['data']['agenda']= new Bouton(chemin_image('agenda-24.png'), _T('agenda:agenda'),
 														generer_url_ecrire("calendrier","type=semaine"));
 		$flux['data']['calendrier']= new Bouton(
 													 'cal-rv.png', _T('agenda:activite_editoriale'),
@@ -14,13 +13,13 @@ function agenda_ajouter_onglets($flux) {
 
 function agenda_affiche_milieu($flux) {
 	$exec =  $flux['args']['exec'];
-	
-	if ($exec=='naviguer'
+	$out = "";
+	if ($exec=='rubrique'
 	  AND $id_rubrique = intval($flux['args']['id_rubrique'])){
 		$activer = true;
 		$res = "";
 		$actif = sql_getfetsel('agenda','spip_rubriques','id_rubrique='.intval($id_rubrique));
-		$statut="-48";
+		$statut="-32";
 		$voir = "";
 		if (!sql_countsel('spip_rubriques','agenda=1'))
 			$res .= _T('agenda:aucune_rubrique_mode_agenda').'<br />';
@@ -29,16 +28,16 @@ function agenda_affiche_milieu($flux) {
 			if (sql_countsel('spip_rubriques',sql_in('id_rubrique',calcul_hierarchie_in($id_rubrique))." AND agenda=1 AND id_rubrique<>".intval($id_rubrique))){
 				$res .= _T('agenda:rubrique_dans_une_rubrique_mode_agenda').'<br />';
 				$activer = false;
-				$statut="-ok-48";
+				$statut="-ok-32";
 				$voir = _T('agenda:voir_evenements_rubrique');
 			}
 			elseif(!$actif) {
 				$res .= _T('agenda:rubrique_sans_gestion_evenement').'<br />';
-				$statut="-non-24";
+				$statut="-non-32";
 			}
 			if ($actif){
 				$res .= _T('agenda:rubrique_mode_agenda').'<br />';
-				$statut="-ok-48";
+				$statut="-ok-32";
 				$voir = _T('agenda:voir_evenements_rubrique');
 			}
 		}
@@ -53,7 +52,7 @@ function agenda_affiche_milieu($flux) {
 		if ($voir)
 			$res .= "<p><a href='".generer_url_ecrire('calendrier',"id_rubrique=$id_rubrique")."'>$voir</a></p>";
 		if ($res)
-			$flux['data'] .= "<div class='verdana2'><img src='".find_in_path("img_pack/agenda$statut.png")."' class='agenda-statut' alt='' />$res<div class='nettoyeur'></div></div>";
+			$out .= "<div class='verdana2'><img src='".chemin_image("agenda$statut.png")."' class='agenda-statut' alt='' />$res<div class='nettoyeur'></div></div>";
 	}
 	elseif ($exec=='articles'){
 		$id_article = $flux['args']['id_article'];
@@ -63,7 +62,7 @@ function agenda_affiche_milieu($flux) {
 			foreach($_GET as $key=>$val)
 				$contexte[$key] = $val;
 			 $evenements = recuperer_fond('prive/contenu/evenements_article',$contexte);
-			 $flux['data'] .= $evenements;
+			 $out .= $evenements;
 		}
 	}
 	elseif ($exec=='mots_edit'){
@@ -71,7 +70,13 @@ function agenda_affiche_milieu($flux) {
 		foreach($_GET as $key=>$val)
 			$contexte[$key] = $val;
 	 $evenements = recuperer_fond('prive/contenu/agenda_evenements',$contexte);
-	 $flux['data'] .= $evenements;
+	 $out .= $evenements;
+	}
+	if ($out){
+		if ($p=strpos($flux['data'],'<!--affiche_milieu-->'))
+			$flux['data'] = substr_replace($flux['data'],$out,$p,0);
+		else
+			$flux['data'] .= $out;
 	}
 	return $flux;
 }

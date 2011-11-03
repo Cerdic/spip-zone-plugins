@@ -64,7 +64,7 @@ function evenements_edit($id_evenement, $id_article, $new, $config_fonc, $row)
 		);
 
 	$contexte = array(
-	'icone_retour'=>icone_inline(_T('icone_retour'), $oups, _DIR_PLUGIN_AGENDA."img_pack/agenda-24.png", "rien.gif",$GLOBALS['spip_lang_left']),
+	'icone_retour'=>icone_inline(_T('icone_retour'), $oups, chemin_image("agenda-24.png"), "rien.gif",$GLOBALS['spip_lang_left']),
 	'redirect'=>_request('retour') ? _request('retour') : generer_url_ecrire('articles'),
 	'titre'=>$titre,
 	'new'=>$new?$new:$row['id_evenement'],
