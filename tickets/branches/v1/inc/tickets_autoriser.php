@@ -290,6 +290,11 @@ function autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt){
 		$autorise = in_array($qui['statut'], $liste['statut']);
 	else if ($liste['auteur'])
 		$autorise = in_array($qui['id_auteur'], $liste['auteur']);
+	if(!$autorise){
+		$id_auteur = sql_getfetsel('id_auteur','spip_tickets','id_ticket='.intval($id));
+		if($id_auteur = $qui['id_auteur'])
+			$autorise = true;
+	}
 	return $autorise;
 }
 
