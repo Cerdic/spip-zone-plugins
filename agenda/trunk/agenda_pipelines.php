@@ -66,7 +66,7 @@ function agenda_affiche_milieu($flux) {
 			$contexte = array();
 			foreach($_GET as $key=>$val)
 				$contexte[$key] = $val;
-			 $evenements = recuperer_fond('prive/contenu/evenements_article',$contexte);
+			 $evenements = recuperer_fond('prive/objets/contenu/article-evenements',$contexte);
 			 $out .= $evenements;
 		}
 	}

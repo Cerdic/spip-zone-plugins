@@ -7,7 +7,7 @@
 	#SET{date_debut,#ENV{date}|affdate{Y-m-d}}
 	#SET{date_debut,#ENV{date_debut,#GET{date_debut}}}
 <//B_un>
-[(#INCLURE{fond=prive/contenu/liste-evenements-post}{date_debut=#GET{date_debut}}{env}{ajax})
+[(#INCLURE{fond=prive/objets/liste/evenements-post}{date_debut=#GET{date_debut}}{env}{ajax})
 <script type='text/javascript'>
 function set_vevent(){
 jQuery('ul.evenements li.item')
