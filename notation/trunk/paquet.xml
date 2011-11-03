@@ -1,0 +1,39 @@
+<paquet
+	prefix="notation"
+	categorie="communication"
+	version="2.0.0"
+	etat="stable"
+	compatibilite="[3.0.0-beta;3.0.*]"
+	logo="img_pack/note.gif"
+	schema="0.6.3"
+	documentation="http://www.spip-contrib.net/Notation-d-elements-SPIP"
+>	
+
+	<nom>Notation</nom>
+	<!-- Attribuer une note aux éléments de SPIP -->
+
+	<auteur>JEM</auteur>
+	<auteur>b_b</auteur>
+	<auteur>Matthieu Marcillaud</auteur>
+
+	<copyright>2008-2011</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/notation.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/notation.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/notation.php" />
+	<pipeline nom="affichage_final" action="affichage_final" inclure="notation_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="notation_pipelines.php" />
+	<pipeline nom="header_prive" inclure="notation_pipelines.php" />
+	<pipeline nom="afficher_config_objet" inclure="notation_pipelines.php" />
+	<pipeline nom="pre_insertion" inclure="notation_pipelines.php" />
+	<pipeline nom="configurer_liste_metas" inclure="notation_pipelines.php" />
+
+	<utilise nom="cfg" compatibilite="[1.10.4;[" />
+
+	<menu nom="notation" titre="notation:notation" parent="menu_reactions" icone="images/notation-16.png" />
+
+	<onglet nom="notation" titre="notation:afficher_tables" parent="notation" icone="img_pack/notation.png" />
+	<onglet nom="notation_param" titre="notation:param" parent="notation" icone="img_pack/notation.png" />
+</paquet>

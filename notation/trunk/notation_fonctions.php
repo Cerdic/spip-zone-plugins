@@ -11,6 +11,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/notation_autorisations');
+include_spip('inc/notation_balises');
+
 /** Filtre pour les tableaux :
 * transforme une liste (separee par de ,) en un tableau exploitable avec IN
 */
