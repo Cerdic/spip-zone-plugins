@@ -12,31 +12,33 @@ function agenda_ajouter_onglets($flux) {
 }
 
 function agenda_affiche_milieu($flux) {
-	$exec =  $flux['args']['exec'];
+	$e = trouver_objet_exec($flux['args']['exec']);
 	$out = "";
-	if ($exec=='rubrique'
+	if ($e['type']=='rubrique'
+	  AND $e['edition']==false
 	  AND $id_rubrique = intval($flux['args']['id_rubrique'])){
 		$activer = true;
 		$res = "";
 		$actif = sql_getfetsel('agenda','spip_rubriques','id_rubrique='.intval($id_rubrique));
 		$statut="-32";
+		$alt = "";
 		$voir = "";
 		if (!sql_countsel('spip_rubriques','agenda=1'))
-			$res .= _T('agenda:aucune_rubrique_mode_agenda').'<br />';
+			$res .= "<span class='small'>" . _T('agenda:aucune_rubrique_mode_agenda') . "</span><br />";
 		else {
 			include_spip('inc/agenda_gestion');
 			if (sql_countsel('spip_rubriques',sql_in('id_rubrique',calcul_hierarchie_in($id_rubrique))." AND agenda=1 AND id_rubrique<>".intval($id_rubrique))){
-				$res .= _T('agenda:rubrique_dans_une_rubrique_mode_agenda').'<br />';
+				$alt = _T('agenda:rubrique_dans_une_rubrique_mode_agenda');
 				$activer = false;
 				$statut="-ok-32";
 				$voir = _T('agenda:voir_evenements_rubrique');
 			}
 			elseif(!$actif) {
-				$res .= _T('agenda:rubrique_sans_gestion_evenement').'<br />';
+				$alt = _T('agenda:rubrique_sans_gestion_evenement').'<br />';
 				$statut="-non-32";
 			}
 			if ($actif){
-				$res .= _T('agenda:rubrique_mode_agenda').'<br />';
+				$alt = _T('agenda:rubrique_mode_agenda').'<br />';
 				$statut="-ok-32";
 				$voir = _T('agenda:voir_evenements_rubrique');
 			}
@@ -44,17 +46,20 @@ function agenda_affiche_milieu($flux) {
 
 		if (!$actif){
 			if($activer){
-				$res .= "<a href='".generer_action_auteur('rubrique_activer_agenda',$id_rubrique,self())."'>"._T('agenda:rubrique_activer_agenda').'</a>';
+				$res .= bouton_action(_T('agenda:rubrique_activer_agenda'),generer_action_auteur('rubrique_activer_agenda',$id_rubrique,self()),'ajax');
 			}
 		}
 		else
-			$res .= "<a href='".generer_action_auteur('rubrique_activer_agenda',"-$id_rubrique",self())."'>"._T('agenda:rubrique_desactiver_agenda').'</a>';
+			$res .= bouton_action(_T('agenda:rubrique_desactiver_agenda'),generer_action_auteur('rubrique_activer_agenda',"-$id_rubrique",self()),'ajax');
 		if ($voir)
-			$res .= "<p><a href='".generer_url_ecrire('calendrier',"id_rubrique=$id_rubrique")."'>$voir</a></p>";
+			$res .= " | <a href='".generer_url_ecrire('calendrier',"id_rubrique=$id_rubrique")."'>$voir</a>";
 		if ($res)
-			$out .= "<div class='verdana2'><img src='".chemin_image("agenda$statut.png")."' class='agenda-statut' alt='' />$res<div class='nettoyeur'></div></div>";
+			$out .= boite_ouvrir(_T('agenda:agenda').http_img_pack("agenda$statut.png",$alt,"class='statut'",$alt),'simple agenda-statut')
+			  . $res
+			  . boite_fermer();
 	}
-	elseif ($exec=='articles'){
+	elseif ($e['type']=='article'
+	  AND $e['edition']==false){
 		$id_article = $flux['args']['id_article'];
 		$afficher = autoriser('creerevenementdans','article',$id_article);
 		if ($afficher) {
@@ -65,8 +70,9 @@ function agenda_affiche_milieu($flux) {
 			 $out .= $evenements;
 		}
 	}
-	elseif ($exec=='mots_edit'){
-		$id_mot = $flux['args']['id_mot'];
+	elseif ($e['type']=='mot'
+	  AND $e['edition']==false
+	  AND $id_mot = intval($flux['args']['id_mot'])){
 		foreach($_GET as $key=>$val)
 			$contexte[$key] = $val;
 	 $evenements = recuperer_fond('prive/contenu/agenda_evenements',$contexte);
