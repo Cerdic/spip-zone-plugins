@@ -98,9 +98,10 @@ function langonet_index_l($occ, $item_md5)
 		}
 	}
 	$index = str_replace(' ', '_', trim($index));
-	if (isset($item_md5[$index]) AND $item_md5[$index] !== $occ)
-		$index = md5($occ);
+	if (isset($item_md5[$index]) AND strcasecmp($item_md5[$index], $occ)) {
 
+		$index = md5($occ);
+	}
 	return $index;
 }
 ?>
