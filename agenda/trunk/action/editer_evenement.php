@@ -6,12 +6,15 @@
  *
  */
 
-function action_editer_evenement_dist(){
 
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+function action_editer_evenement_dist($arg=null){
 
-	// si id_article n'est pas un nombre, c'est une creation
+	if (is_null($arg)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	}
+
+	// si id_evenement n'est pas un nombre, c'est une creation
 	// mais on verifie qu'on a toutes les donnees qu'il faut.
 	if (!$id_evenement = intval($arg)) {
 		$id_parent = _request('id_parent');
@@ -23,43 +26,99 @@ function action_editer_evenement_dist(){
 	return array($id_evenement,$err);
 }
 
-function action_evenement_set($id_evenement, $set=null){
-	$err = '';
-
-	if (is_null($set)){
-		$c = array();
-		foreach (array(
-			'titre', 'descriptif', 'lieu', 'id_parent',
-			'inscription','places','adresse',
-		) as $champ)
-			$c[$champ] = _request($champ);
-
-		$c['horaire'] = _request('horaire')=='non'?'non':'oui';
-		include_spip('inc/date_gestion');
-		$date_debut = verifier_corriger_date_saisie('debut',$c['horaire']=='oui',$erreurs);
-		$date_fin = verifier_corriger_date_saisie('fin',$c['horaire']=='oui',$erreurs);
-
-		$c['date_debut'] = date('Y-m-d H:i:s',$date_debut);
-		$c['date_fin'] = date('Y-m-d H:i:s',$date_fin);
+/**
+ * creer un nouvel evenement
+ * @param int $id_article
+ * @param int $id_evenement_source
+ * @return int
+ */
+function evenement_inserer($id_article,$id_evenement_source = 0){
+	include_spip('inc/autoriser');
+	if (!autoriser('creerevenementdans','article',$id_article)){
+		spip_log("agenda action formulaire article : auteur ".$GLOBALS['visiteur_session']['id_auteur']." n'a pas le droit de creer un evenement dans article $id_article",'agenda');
+		return false;
 	}
-	else
-		$c = $set;
+
+	$champs = array(
+		"id_evenement_source"=>intval($id_evenement_source),
+		'id_article'=>intval($id_article),
+		"maj"=>date("Y-m-d H:i:s"),
+		'statut' => 'prepa',
+	);
+
+	// Envoyer aux plugins
+	$champs = pipeline('pre_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_evenements',
+			),
+			'data' => $champs
+		)
+	);
+
+	// nouvel evenement
+	$id_evenement = sql_insertq("spip_evenements", $champs);
+
+	pipeline('post_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_evenements',
+				'id_objet' => $id_evenement
+			),
+			'data' => $champs
+		)
+	);
+
+	if (!$id_evenement){
+		spip_log("agenda action formulaire evenement : impossible d'ajouter un evenement",'agenda');
+		return false;
+	}
+	return $id_evenement;
+}
+
+
+function evenement_modifier($id_evenement, $set=null){
 
 	include_spip('inc/modifier');
-	agenda_action_revision_evenement($id_evenement, $c);
-	agenda_action_revision_evenement_mots($id_evenement, _request('mots',$set));
-	agenda_action_revision_evenement_repetitions($id_evenement,_request('repetitions',$set), _request('mots',$set));
+	include_spip('inc/filtres');
+	$c = collecter_requests(
+		// white list
+		objet_info('evenement','champs_editables'),
+		// black list
+		array('statut','id_article'),
+		// donnees eventuellement fournies
+		$set
+	);
+
+	// Si l'evenement est publie, invalider les caches et demander sa reindexation
+	$t = sql_getfetsel("statut", "spip_evenements", "id_evenement=".intval($id_evenement));
+	$invalideur = $indexation = false;
+	if ($t == 'publie') {
+		$invalideur = "id='evenement/$id_evenement'";
+		$indexation = true;
+	}
+
+	if ($err = objet_modifier_champs('evenement', $id_evenement,
+		array(
+			'nonvide' => array('titre' => _T('info_nouvel_evenement')." "._T('info_numero_abbreviation').$id_evenement),
+			'invalideur' => $invalideur,
+			'indexation' => $indexation,
+		),
+		$c))
+		return $err;
+
+	if (!is_null($mots = _request('mots',$set)))
+		evenement_associer_mots($id_evenement,$mots);
+
+	agenda_action_revision_evenement_repetitions($id_evenement,_request('repetitions',$set));
 
 	// Modification de statut, changement de rubrique ?
-	$c = array();
-	foreach (array(
-		'id_parent'
-	) as $champ)
-		$c[$champ] = _request($champ,$set);
-	$err .= agenda_action_instituer_evenement($id_evenement, $c);
+	$c = collecter_requests(array('statut', 'id_parent'),array(),$set);
+	$err = evenement_instituer($id_evenement, $c);
 
 	return $err;
 }
+
 
 function agenda_action_revision_evenement_repetitions($id_evenement,$repetitions="",$liste_mots=array()){
 	include_spip('inc/filtres');
@@ -76,7 +135,7 @@ function agenda_action_revision_evenement_repetitions($id_evenement,$repetitions
 	agenda_action_update_repetitions($id_evenement, $rep, $liste_mots);
 }
 
-function agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots){
+function agenda_action_update_repetitions($id_evenement,$repetitions){
 	// evenement source
 	if ($row = sql_fetsel("*", "spip_evenements","id_evenement=".intval($id_evenement))){
 		$titre = $row['titre'];
@@ -93,6 +152,12 @@ function agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 		$places = $row['places'];
 		if ($id_evenement_source!=0)
 			return; // pas un evenement source donc rien a faire ici
+
+		include_spip('action/editer_liens');
+		$liens = objet_trouver_liens(array('mot'=>'*'),array('evenement'=>$id_evenement));
+		$mots = array();
+		foreach($liens as $l)
+			$mots[] = $l['mot'];
 
 		$repetitions_updated = array();
 		// mettre a jour toutes les repetitions deja existantes ou les supprimer si plus lieu
@@ -127,14 +192,13 @@ function agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 						"places" => $update_places,
 						"id_article" => $id_article),"id_evenement=".intval($row['id_evenement']));
 
-				agenda_action_revision_evenement_mots($row['id_evenement'], $liste_mots);
+				evenement_associer_mots($row['id_evenement'], $mots);
 			}
 			else {
 				// il est supprime
 				sql_delete("spip_mots_liens","objet='evenement' AND id_objet=".$row['id_evenement']);
 				sql_delete("spip_evenements","id_evenement=".$row['id_evenement']);
 			}
-
 		}
 		// regarder les repetitions a ajouter
 		foreach($repetitions as $date){
@@ -169,77 +233,17 @@ function agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 	}
 }
 
-
-function agenda_action_revision_evenement_mots($id_evenement,$liste_mots){
-	// suppression des mots obsoletes
-	$cond_in  = $cond_not_in = "";
-	if (count($liste_mots)){
-		$cond_not_in = sql_in('id_mot', join(',',$liste_mots), 'NOT');
-		$cond_in = sql_in('id_mot', join(',',$liste_mots));
-	}
-	sql_delete("spip_mots_liens","objet='evenement' AND id_objet=".intval($id_evenement) . ($cond_in?" AND ".$cond_not_in:""));
-
-
-	$liste_deja = array();
-	if ($cond_in)
-		$liste_deja = sql_allfetsel("id_mot", "spip_mots_liens", "objet='evenement' AND id_objet=".intval($id_evenement) . " AND $cond_in");
-	if (count($liste_deja)) {
-		$cond_not_in = sql_in('id_mot', join(',',array_map('reset',$liste_deja)), 'NOT');
-		$liste_mots = sql_allfetsel('id_mot','spip_mots',"$cond_in AND $cond_not_in");
-		$liste_mots = array_map('reset',$liste_mots);
-	}
-	if (count($liste_mots)) {
-		$ins = array();
-		foreach($liste_mots as $k=>$id_mot)
-			$ins[] = array('id_objet'=>$id_evenement,'id_mot'=>$id_mot,'objet'=>'evenement');
-		sql_insertq_multi("spip_mots_liens", $ins);
-	}
-}
-
-// creer un nouvel evenement
-function agenda_action_insert_evenement($id_article,$id_evenement_source = 0){
-	include_spip('inc/autoriser');
-	if (!autoriser('creerevenementdans','article',$id_article)){
-		spip_log("agenda action formulaire article : auteur ".$GLOBALS['visiteur_session']['id_auteur']." n'a pas le droit de creer un evenement dans article $id_article",'agenda');
-		return false;
-	}
-
-	// nouvel evenement
-	$id_evenement = sql_insertq("spip_evenements", array("id_evenement_source"=>intval($id_evenement_source), "maj"=>date("Y-m-d H:i:s"), 'id_article'=>intval($id_article)));
-
-	if (!$id_evenement){
-		spip_log("agenda action formulaire article : impossible d'ajouter un evenement",'agenda');
-		return false;
-	}
-	return $id_evenement;
-}
-
-// Enregistre une revision d'evenement
-function agenda_action_revision_evenement ($id_evenement, $c=false) {
-
-	if ($c['id_parent']) {
-		// Si l'article est publie, invalider les caches et demander sa reindexation
-		$t = sql_getfetsel("statut", "spip_articles", "id_article=".intval($c['id_parent']));
-		if ($t == 'publie') {
-			$invalideur = "id='id_article/$id_article'";
-			$indexation = true;
-		}
-	}
-
-	modifier_contenu('evenement', $id_evenement,
-		array(
-			'nonvide' => array('titre' => _T('info_sans_titre')),
-			'invalideur' => $invalideur,
-			'indexation' => $indexation
-		),
-		$c);
-
-	return ''; // pas d'erreur
+function evenement_associer_mots($id_evenement,$mots){
+	include_spip('action/editer_liens');
+	// associer les mots fournis
+	objet_associer(array('mot'=>$mots),array('evenement'=>$id_evenement));
+	// enlever les autres
+	objet_dissocier(array('mot'=>array('NOT',$mots)),array('evenement'=>$id_evenement));
 }
 
 
 // $c est un array ('statut', 'id_parent' = changement de rubrique)
-function agenda_action_instituer_evenement($id_evenement, $c) {
+function evenement_instituer($id_evenement, $c) {
 
 	include_spip('inc/autoriser');
 	include_spip('inc/modifier');
@@ -267,7 +271,9 @@ function agenda_action_instituer_evenement($id_evenement, $c) {
 		array(
 			'args' => array(
 				'table' => 'spip_evenements',
-				'id_objet' => $id_evenement
+				'action'=>'instituer',
+				'id_objet' => $id_evenement,
+				'id_parent_ancien' => $id_parent,
 			),
 			'data' => $champs
 		)
@@ -290,7 +296,9 @@ function agenda_action_instituer_evenement($id_evenement, $c) {
 		array(
 			'args' => array(
 				'table' => 'spip_evenements',
-				'id_objet' => $id_evenement
+				'action'=>'instituer',
+				'id_objet' => $id_evenement,
+				'id_parent_ancien' => $id_parent,
 			),
 			'data' => $champs
 		)
@@ -331,4 +339,9 @@ function agenda_action_supprime_evenement($id_article,$supp_evenement){
 	return $id_evenement;
 }
 
+
+function agenda_action_insert_evenement($id_article,$id_evenement_source = 0){return evenement_inserer($id_article,$id_evenement_source);}
+function action_evenement_set($id_evenement, $set=null){return evenement_modifier($id_evenement, $set);}
+function agenda_action_instituer_evenement($id_evenement, $c) {return evenement_instituer($id_evenement,$c);}
+function agenda_action_revision_evenement_mots($id_evenement,$liste_mots){return evenement_associer_mots($id_evenement,$liste_mots);}
 ?>

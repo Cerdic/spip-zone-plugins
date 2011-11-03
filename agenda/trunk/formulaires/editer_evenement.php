@@ -96,22 +96,20 @@ function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_art
 }
 
 function formulaires_editer_evenement_traiter_dist($id_evenement='new', $id_article=0, $retour='', $lier_trad = 0, $config_fonc='evenements_edit_config', $row=array(), $hidden=''){
+	set_request('horaire',_request('horaire')=='non'?'non':'oui');
+	include_spip('inc/date_gestion');
+	$erreurs = array();
+	$date_debut = verifier_corriger_date_saisie('debut',_request('horaire')=='oui',$erreurs);
+	$date_fin = verifier_corriger_date_saisie('fin',_request('horaire')=='oui',$erreurs);
+	set_request('date_debut',date('Y-m-d H:i:s',$date_debut));
+	set_request('date_fin',date('Y-m-d H:i:s',$date_fin));
 
-	$res = array();
-	$action_editer = charger_fonction("editer_evenement",'action');
-	list($id,$err) = $action_editer();
-	if ($err){
-		$res['message_erreur'] = $err;
-	}
-	else {
-		$res['message_ok'] = _L('ok');
-		if ($retour) {
-			$retour = parametre_url($retour,'id_evenement',$id);
-			if (strpos($retour,'article')!==FALSE){
-				$id_article = sql_getfetsel('id_article','spip_evenements','id_evenement='.intval($id));
-				$retour = parametre_url($retour,'id_article',$id_article);
-			}
-			$res['redirect'] = $retour;
+	$res = formulaires_editer_objet_traiter('evenement',$id_evenement,$id_article,0,$retour,$config_fonc,$row,$hidden);
+	$id_evenement = $res['id_evenement'];
+	if ($res['redirect']) {
+		if (strpos($res['redirect'],'article')!==false){
+			$id_article = sql_getfetsel('id_article','spip_evenements','id_evenement='.intval($id_evenement));
+			$res['redirect'] = parametre_url($res['redirect'],'id_article',$id_article);
 		}
 	}
 	return $res;
