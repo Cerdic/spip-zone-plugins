@@ -1,0 +1,33 @@
+[(#ID_EVENEMENT|oui)
+	[(#AUTORISER{modifier,evenement,#ID_EVENEMENT}|sinon_interdire_acces)]]
+[(#ID_EVENEMENT|non)
+	[(#AUTORISER{creer,evenement,#ID_EVENEMENT,'','',#ARRAY{id_article,#ENV{id_article}}}|sinon_interdire_acces)]]
+
+#SET{retour,#ENV{redirect}|sinon{#ENV{id_article}|?{#URL_ECRIRE{article,id_article=#ID_ARTICLE},#ID_EVENEMENT|?{#ID_EVENEMENT|generer_url_entite{evenement},#URL_ECRIRE{evenements}}}}}
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_EVENEMENT|oui)
+	[(#GET{retour}|icone_verticale{<:icone_retour:>,evenement,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[[(#ID_EVENEMENT|?{<:agenda:titre_cadre_modifier_evenement:>,<:agenda:titre_cadre_ajouter_evenement:>})]
+	<h1>(#ENV{titre,#INFO_TITRE{evenement,#ID_EVENEMENT}|sinon{<:agenda:info_nouvel_evenement:>}})</h1>]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_EVENEMENT|generer_url_entite{evenement}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+	#FORMULAIRE_EDITER_EVENEMENT{#ENV{id_evenement,oui},#ENV{id_article},#GET{redirect},#ENV{associer_objet}}
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/if (window.jQuery) jQuery('#navigation>div,#extra>div').ajaxReload({args:{exec:'#ENV{exec}'}});/*\]\]>*/</script>
+]
+[(#ENV{id_evenement,''}|intval|oui)
+<div class="ajax">
+	#FORMULAIRE_EDITER_LIENS{mots,evenement,#ENV{id_evenement}}
+</div>
+]
+
+</div>
+

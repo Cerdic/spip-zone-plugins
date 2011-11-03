@@ -75,7 +75,7 @@ function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_art
 	if ($date_debut AND $date_fin AND $date_fin<$date_debut)
 		$erreurs['date_fin'] = _T('agenda:erreur_date_avant_apres');
 
-	include_spip('spip_bonux_fonctions');
+	include_spip('formulaires/selecteur/selecteur_fonctions');
 	if (count($id = picker_selected(_request('parents_id'),'article'))
 	  AND $id = reset($id)
 	  AND $id = sql_getfetsel('id_article','spip_articles','id_article='.intval($id))){

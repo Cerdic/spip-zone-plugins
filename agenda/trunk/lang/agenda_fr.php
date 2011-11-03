@@ -63,10 +63,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'groupes_mots' => 'Groupes de mots-clé',
 // I
 	'icone_creer_evenement' => 'Créer un nouvel événement',
+	'icone_modifier_evenement' => 'Modifier l\'événement',
 	'indiquez_votre_choix' => 'Indiquez votre choix',
 	'info_aucun_evenement' => 'Aucun événement',
+	'info_evenement' => 'Événement',
 	'info_evenements' => 'Événements',
 	'info_nombre_evenements' => '@nb@ événements',
+	'info_nouvel_evenement' => 'Nouvel événement',
 	'info_un_evenement' => '1 événement',
 	'inscrits' => 'Inscriptions',
 	'item_mots_cles_association_evenements' => 'aux événements',
