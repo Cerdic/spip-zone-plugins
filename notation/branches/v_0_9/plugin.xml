@@ -1,0 +1,98 @@
+<plugin>
+	<nom><multi>[fr]Notation[en]Rating</multi></nom>
+	<slogan>
+		<multi>
+			[fr]Attribuer une note aux &#233;l&#233;ments de SPIP
+			[en]Assign a rating to SPIP elements
+		</multi>
+	</slogan>
+	<auteur>JEM, b_b, Matthieu Marcillaud</auteur>
+	<version>0.9.5</version>
+	<version_base>0.6.3</version_base>
+	<etat>stable</etat>
+	<prefix>notation</prefix>
+	<description>
+		<multi>
+[fr]D&#233;finition de la balise <code>#FORMULAIRE_NOTATION</code> permettant la saisie et l'affichage de la note d'un &#233;l&#233;ment de boucle.
+_ D&#233;finition des mod&#232;les <code><autxx|notation|id_article=yy></code> qui donne la note de l'auteur <i>xx</i> pour l'article <i>yy</i>
+et <code><notation|topten></code> qui donne les 10 meilleurs articles.
+[en]Defines the <code>#FORMULAIRE_NOTATION</code> tag which allows the capture and the display of the rating of a loop element.
+_ Defines the models <code><autxx|notation|id_article=yy></code> which gives the author's rating <i>xx</i> for the article <i>yy</i>
+and <code><notation|topten></code> which gives the 10 best articles.
+		</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/Notation-d-elements-SPIP</lien>
+	<licence>GNU/GPL - (c) 2008-2011</licence>
+	<necessite id="spip" version="[2.0.0;2.1.99]" />
+	<utilise id="cfg" version="[1.10.4;]" />
+
+	<icon>img_pack/note.gif</icon>
+
+	<fonctions>notation_fonctions.php</fonctions>
+	<fonctions>inc/notation_autorisations.php</fonctions>
+	<fonctions>inc/notation_balises.php</fonctions>
+
+	<install>base/notation_upgrade.php</install>
+  
+	 <pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/notation.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/notation.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/notation.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>affichage_final</nom>
+		<action>affichage_final</action>
+		<inclure>notation_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>notation_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>notation_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>afficher_config_objet</nom>
+		<inclure>notation_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_insertion</nom>
+		<inclure>notation_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>configurer_liste_metas</nom>
+		<inclure>notation_pipelines.php</inclure>
+	</pipeline>
+	
+	<bouton id='notation' parent='forum'>
+		<icone>img_pack/notation.png</icone>
+		<titre>notation:notation</titre>
+		<url>notation</url>
+	</bouton>
+	<bouton id='notation21' parent='bando_reactions'>
+		<icone>images/notation-16.png</icone>
+		<titre>notation:notation</titre>
+		<url>notation</url>
+	</bouton>
+
+	<onglet id='notation' parent='notation'>
+		<icone>img_pack/notation.png</icone>
+		<titre>notation:afficher_tables</titre>
+		<url>notation</url>
+	</onglet>
+	<onglet id='notation_param' parent='notation'>
+		<icone>img_pack/notation.png</icone>
+		<titre>notation:param</titre>
+		<url>notation_param</url>
+	</onglet>	
+	<categorie>communication</categorie>
+</plugin>

@@ -1,0 +1,106 @@
+<!-- autoriser=configurer -->
+<!-- nom=notation -->
+#CACHE{0}
+	
+<div class="formulaire_spip formulaire_configurer_notation formulaire_configurer_notation_ponderation">
+[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
+[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</div>]
+
+<form method="post" action="#ENV{action}"><div>
+#ACTION_FORMULAIRE{#ENV{action}}
+<ul>
+<li class="fieldset">
+<fieldset>
+	<h3 class="legend"><:notation:ponderation:></h3>
+	<ul>
+		<li class="editer_notation_ponderation">
+			<label for="notation_ponderation"><:notation:valeur_ponderation:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ponderation})</span>]
+			<div class='explication'>
+				<:notation:info_ponderation|propre:>
+				<:notation:exemple{ponderation=#ENV*{ponderation}}|propre:>
+				<table class="spip">
+				<tbody>
+					<tr class="row_odd">
+						<td><:notation:nbvotes:></td><td>1</td><td>10</td><td>25</td><td>50</td><td>100</td><td>150</td><td>200</td>
+					</tr>
+					<tr class="row_even">
+						<td><:notation:note:></td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td>
+					</tr>
+					<tr class="row_odd">
+						<td><:notation:note_pond:></td>
+						<td>[(#VAL{5}|notation_ponderee{1})]</td>
+						<td>[(#VAL{5}|notation_ponderee{10})]</td>
+						<td>[(#VAL{5}|notation_ponderee{25})]</td>
+						<td>[(#VAL{5}|notation_ponderee{50})]</td>
+						<td>[(#VAL{5}|notation_ponderee{100})]</td>
+						<td>[(#VAL{5}|notation_ponderee{150})]</td>
+						<td>[(#VAL{5}|notation_ponderee{200})]</td>
+					</tr>
+				</tbody>
+				</table>
+			</div>
+			<input type="text" name="ponderation" class="text" value="#ENV{ponderation,30}" id="notation_ponderation" size='8' />				
+		</li>
+	</ul>
+</fieldset>
+</li>
+<li class="fieldset">
+	<fieldset>
+	<h3 class="legend"><:notation:acces:></h3>
+	<div class="explication"><:notation:info_ip|propre:></div>
+	<ul>
+		<li class="editer_notation_acces">
+			<label><:notation:info_acces:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{acces})</span>]
+			<div class="choix">
+				<input type="radio" name="acces" class="radio" value="adm"
+					[ (#ENV{acces}|=={adm}|oui)checked="checked"] id="notation_acces_admin" />				
+				<label for="notation_acces_admin"><:notation:item_adm:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="acces" class="radio" value="aut"
+					[ (#ENV{acces}|=={aut}|oui)checked="checked"] id="notation_acces_aut" />				
+				<label for="notation_acces_aut"><:notation:item_aut:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="acces" class="radio" value="ide"
+					[ (#ENV{acces}|=={ide}|oui)checked="checked"] id="notation_acces_ide" />				
+				<label for="notation_acces_ide"><:notation:item_ide:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="acces" class="radio" value="all"
+					[ (#ENV{acces}|=={all}|oui)checked="checked"] id="notation_acces_all" />				
+				<label for="notation_acces_all"><:notation:item_all:></label>
+			</div>
+		</li>
+		
+		<li class="editer_notation_modifier_note">
+			<label for="notation_changer_note"><:notation:info_modifications:></label>
+			<div class="choix">
+			<input type="checkbox" name="change_note" class="checkbox" id="notation_changer_note"[ (#ENV{change_note}|=={oui}|oui)checked="checked"] value="oui" />
+			<label for="notation_changer_note"><:notation:change_note_label:></label>
+			</div>
+		</li>					
+	</ul>
+	</fieldset>
+</li>
+<li class="fieldset">
+<fieldset>
+	<h3 class="legend"><:notation:nb_etoiles:></h3>
+	<ul>
+		<li class="editer_notation_etoile">
+			<label for="notation_etoiles"><:notation:valeur_nb_etoiles:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{acces})</span>]
+			<div class='explication'><:notation:info_etoiles|propre:></div>
+			<input type="text" name="nombre" class="radio" value="#ENV{nombre}" size="8" id="notation_etoiles" />				
+		</li>
+	</ul>
+</fieldset>
+</li>
+</ul>
+<p class="boutons">
+	<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
+</p>
+</div></form>
+</div>
