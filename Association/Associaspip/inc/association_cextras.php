@@ -10,14 +10,13 @@
 \***************************************************************************/
 
 /**
- * Interface avec le plugin "Champs Extras 2" : ajout des objets 
+ * Interface avec le plugin "Champs Extras 2" : ajout des objets
  * membres
- * a la liste des objets pouvant recevoir des champs extras... 
+ * a la liste des objets pouvant recevoir des champs extras...
 **/
 function association_objets_extensibles($objets){
 	return array_merge($objets, array(
-		'spip_asso_membres' => _T('asso:membres'),
-		
+		'asso_membre' => _T('asso:membres'),
 	));
 }
 ?>
