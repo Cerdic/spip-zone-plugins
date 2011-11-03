@@ -138,9 +138,14 @@ function accesrestreint_syndic_articles_accessibles_where($primary, $_publique='
  */
 function accesrestreint_forums_accessibles_where($primary, $_publique=''){
 	# hack : on utilise zzz pour eviter que l'optimiseur ne confonde avec un morceau de la requete principale
-	$where = accesrestreint_rubriques_accessibles_where('zzzf.id_rubrique','NOT',$_publique);
-	$where = "array('OR',$where,".accesrestreint_articles_accessibles_where('zzzf.id_article',$_publique).")";
-	$where = "array('OR',$where,".accesrestreint_breves_accessibles_where('zzzf.id_breve',$_publique).")";
+	$where = "array('AND','zzzf.objet=\'rubrique\'',".accesrestreint_rubriques_accessibles_where('zzzf.id_objet','NOT',$_publique).")";
+	$where = "array('OR',$where,"
+	         ."array('AND','zzzf.objet=\'article\'',".accesrestreint_articles_accessibles_where('zzzf.id_objet',$_publique).")"
+	         .")";
+	$where = "array('OR',$where,"
+	         ."array('AND','zzzf.objet=\'breve\'',".accesrestreint_breves_accessibles_where('zzzf.id_objet',$_publique).")"
+	         .")";
+	$where = "array('OR',$where,sql_in('zzzf.objet',\"'rubrique','article','breve'\",'NOT',\$connect))";
 	return "array('IN','$primary','('.sql_get_select('zzzf.id_forum','spip_forum as zzzf',array($where),'','','','',\$connect).')')";
 }
 
