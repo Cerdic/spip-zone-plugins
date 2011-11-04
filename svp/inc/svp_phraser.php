@@ -127,8 +127,19 @@ function svp_phraser_plugin($dtd, $contenu) {
 			$fusionner = charger_fonction('fusion_' . $dtd, 'plugins');
 			$plugin = $fusionner($plugins);
 		}
-		else
-			$plugin = ($dtd == 'plugin') ? $plugins[0] : $plugins[0][0];
+		else {
+			if ($dtd == 'plugin')
+				$plugin = $plugins[0];
+			else
+				// Avec la DTD paquet, on peut aussi avoir a fusionner les informations de la balise
+				// paquet avec celles d'eventuelles balises spip
+				// La balise paquet est stockee a l'index 0, les balise spip a des index refletant leur
+				// compatibilite spip
+				// Cependant, on doit aussi traiter la balise paquet unique pour deplacer les balises techniques dans
+				// un sous tableau d'index 0 : on appelle donc systematiquement la focntion de fusion
+				$fusionner = charger_fonction('fusion_' . $dtd, 'plugins');
+				$plugin = $fusionner($plugins[0]);
+		}
 
 		// Pour la DTD paquet, les traductions du nom, slogan et description sont compilees dans une balise
 		// du fichier archives.xml. Il faut donc completer les informations precedentes avec cette balise
