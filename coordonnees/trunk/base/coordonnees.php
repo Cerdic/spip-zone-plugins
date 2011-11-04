@@ -44,7 +44,7 @@ function coordonnees_declarer_tables_principales($tables_principales){
 		);
 	$tables_principales['spip_adresses'] =
 		array(
-			'field' => &$adresses, 'key' => &$adresses_key, 'join' => &$adresses_join);
+			'field' => &$adresses, 'key' => &$adresses_key);
 
 	//-- Table numeros ------------------------------------------
 	$numeros = array(
@@ -57,7 +57,7 @@ function coordonnees_declarer_tables_principales($tables_principales){
 		"PRIMARY KEY" => "id_numero"
 		);
 	$tables_principales['spip_numeros'] =
-		array('field' => &$numeros, 'key' => &$numeros_key, 'join' => &$numeros_join);
+		array('field' => &$numeros, 'key' => &$numeros_key);
 
 	//-- Table emails ------------------------------------------
 	$emails = array(
@@ -71,7 +71,7 @@ function coordonnees_declarer_tables_principales($tables_principales){
 		"KEY email"	=> "email" // on ne met pas unique pour le cas ou 2 contacts partagent le meme mail g?n?rique
 		);
 	$tables_principales['spip_emails'] =
-		array('field' => &$emails, 'key' => &$emails_key, 'join' => &$emails_join);
+		array('field' => &$emails, 'key' => &$emails_key);
 
 
 	return $tables_principales;
