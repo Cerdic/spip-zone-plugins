@@ -3,7 +3,8 @@
 
 [(#REM) S'il y a des erreurs pour au moins un des champs internes, on ne plie pas ! ]
 #SET{champs_internes, #ENV{saisies}|saisies_lister_par_nom}
-#SET{erreurs_fieldset, #ENV**{erreurs}|array_intersect_key{#GET{champs_internes}}}
+#SET{erreurs, #ENV**{erreurs}|sinon{#ARRAY}}
+#SET{erreurs_fieldset, #GET{erreurs}|array_intersect_key{#GET{champs_internes}}}
 [(#GET{erreurs_fieldset}|oui)
 	#SET{plie, ''}
 ]
