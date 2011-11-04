@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0-dev;["
 	logo="prive/themes/spip/images/evenement-32.png"
-	schema="0.24.0"
+	schema="0.25.0"
 	documentation="http://www.spip-contrib.net/article2858"
 >	
 
@@ -17,13 +17,12 @@
 	<auteur lien="http://romy.tetue.net">romy.tetue.net</auteur>
 	<auteur lien="http://www.cahri.com">Julien Tessier</auteur>
 
-	<copyright>2006-2010</copyright>
+	<copyright>2006-2011</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<pipeline nom="autoriser" inclure="agenda_autoriser.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/agenda_evenements.php" />
-	<pipeline nom="declarer_tables_principales" inclure="base/agenda_evenements.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/agenda_evenements.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/agenda_evenements.php" />
 	<pipeline nom="ajouter_onglets" inclure="agenda_pipelines.php" />

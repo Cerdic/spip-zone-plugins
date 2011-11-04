@@ -26,7 +26,7 @@ function agenda_upgrade($nom_meta_base_version,$version_cible){
 	$maj['0.12'] = array(
 		array('sql_alter',"TABLE spip_evenements ADD `id_article`  bigint(21) DEFAULT '0' NOT NULL AFTER `id_evenement`"),
 		array('sql_alter',"TABLE spip_evenements ADD ADD INDEX ( `id_article` )"),		
-		array('upgrade_evenements_articles'),
+		array('upgrade_evenements_articles_012'),
 		array('sql_drop_table',"spip_evenements_articles"),
 	);
 	
@@ -61,32 +61,40 @@ function agenda_upgrade($nom_meta_base_version,$version_cible){
 	);		
 	include_spip('maj/svn10000');
 	$maj['0.24.0'] = array(
-
 		array('maj_liens','mot','evenement'),
 		array('sql_drop_table',"spip_mots_evenements"),
 		array('sql_alter',"TABLE spip_evenements ADD statut varchar(10) DEFAULT 0 NOT NULL"),
-		array('sql_update',"spip_evenements", array('statut'=>'publie'), 'id_evenement>0'),
+	);
+	$maj['0.25.0'] = array(
+		array('upgrade_evenements_statut_025'),
 	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
-	function upgrade_evenements_articles(){
-		$res = sql_select("*", "spip_evenements_articles");
-		while ($row = sql_fetch($res)){
-			$id_article = $row['id_article'];
-			$id_evenement = $row['id_evenement'];
-			sql_update("spip_evenements", array('statut'=>"publie"));
-		}
 
+function agenda_vider_tables() {
+	sql_drop_table("spip_evenements");
+	sql_drop_table("spip_mots_evenements");
+	sql_alter("TABLE spip_rubriques DROP COLUMN agenda");
+	effacer_meta('agenda_base_version');
+}
+
+function upgrade_evenements_articles_012(){
+	$res = sql_select("*", "spip_evenements_articles");
+	while ($row = sql_fetch($res)){
+		$id_article = $row['id_article'];
+		$id_evenement = $row['id_evenement'];
+		sql_update("spip_evenements", array('id_article'=>$id_article),'id_evenement='.intval($id_evenement));
 	}
-	
-	function agenda_vider_tables() {
-		sql_drop_table("spip_evenements");
-		sql_drop_table("spip_mots_evenements");
-		sql_alter("TABLE spip_rubriques DROP COLUMN agenda");
-		effacer_meta('agenda_base_version');
+}
+
+function upgrade_evenements_statut_025(){
+	include_spip('action/editer_evenement');
+	$res = sql_select('id_evenement','spip_evenements',"statut='0'");
+	while ($row = sql_fetch($res)){
+		evenement_modifier($row['id_evenement'],array());
 	}
-	
+}
 
 ?>

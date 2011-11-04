@@ -6,7 +6,11 @@
  *
  */
 
-
+/**
+ * Edition d'un evenement
+ * @param string $arg
+ * @return array
+ */
 function action_editer_evenement_dist($arg=null){
 
 	if (is_null($arg)){
@@ -27,7 +31,8 @@ function action_editer_evenement_dist($arg=null){
 }
 
 /**
- * creer un nouvel evenement
+ * Creer un nouvel evenement
+ *
  * @param int $id_article
  * @param int $id_evenement_source
  * @return int
@@ -42,7 +47,6 @@ function evenement_inserer($id_article,$id_evenement_source = 0){
 	$champs = array(
 		"id_evenement_source"=>intval($id_evenement_source),
 		'id_article'=>intval($id_article),
-		"maj"=>date("Y-m-d H:i:s"),
 		'statut' => 'prepa',
 	);
 
@@ -76,7 +80,13 @@ function evenement_inserer($id_article,$id_evenement_source = 0){
 	return $id_evenement;
 }
 
-
+/**
+ * Modifier un evenement existant
+ *
+ * @param int $id_evenement
+ * @param array $set
+ * @return bool|string
+ */
 function evenement_modifier($id_evenement, $set=null){
 
 	include_spip('inc/modifier');
@@ -110,9 +120,10 @@ function evenement_modifier($id_evenement, $set=null){
 	if (!is_null($mots = _request('mots',$set)))
 		evenement_associer_mots($id_evenement,$mots);
 
-	agenda_action_revision_evenement_repetitions($id_evenement,_request('repetitions',$set));
+	if (!is_null($repetitions = _request('repetitions',$set)))
+		agenda_action_revision_evenement_repetitions($id_evenement,$repetitions);
 
-	// Modification de statut, changement de rubrique ?
+	// Modification de statut, changement de parent ?
 	$c = collecter_requests(array('statut', 'id_parent'),array(),$set);
 	$err = evenement_instituer($id_evenement, $c);
 
@@ -233,6 +244,14 @@ function agenda_action_update_repetitions($id_evenement,$repetitions){
 	}
 }
 
+/**
+ * Associer une liste de mots a un evenement
+ * Modifie la liste des mots lies pour qu'elle corresponde exactement a $mots
+ *
+ * @param int $id_evenement
+ * @param array $mots
+ * @return void
+ */
 function evenement_associer_mots($id_evenement,$mots){
 	include_spip('action/editer_liens');
 	// associer les mots fournis
@@ -242,28 +261,75 @@ function evenement_associer_mots($id_evenement,$mots){
 }
 
 
-// $c est un array ('statut', 'id_parent' = changement de rubrique)
+/**
+ * Instituer un evenement
+ *
+ * @param int $id_evenement
+ * @param array $c
+ * @return bool|string
+ */
 function evenement_instituer($id_evenement, $c) {
 
 	include_spip('inc/autoriser');
 	include_spip('inc/modifier');
 
-	$row = sql_fetsel("id_article", "spip_evenements", "id_evenement=".intval($id_evenement));
-	$id_parent = $row['id_article'];
+	$row = sql_fetsel("id_article, statut", "spip_evenements", "id_evenement=".intval($id_evenement));
+	$id_parent  = $id_parent_ancien = $row['id_article'];
+	$statut = $statut_ancien = $row['statut'];
+
 	$champs = array();
 
 	if (!autoriser('modifier', 'article', $id_parent)
-	  OR (!autoriser('modifier', 'article', $c['id_parent']))){
+	  OR (isset($c['id_parent']) AND !autoriser('modifier', 'article', $c['id_parent']))){
 		spip_log("editer_evenement $id_evenement refus " . join(' ', $c));
 		return false;
 	}
 
-	// Verifier que la rubrique demandee existe et est differente
-	// de la rubrique actuelle
+	// Verifier que l'article demande existe et est different
+	// de l'article actuel
 	if ($c['id_parent']
-	AND $c['id_parent'] != $id_parent
-	AND (sql_fetsel('1', "spip_articles", "id_article=".intval($c['id_parent'])))) {
-		$champs['id_article'] = $c['id_parent'];
+	  AND $c['id_parent'] != $id_parent
+	  AND (sql_countsel("spip_articles", "id_article=".intval($c['id_parent'])))) {
+		$id_parent = $champs['id_article'] = $c['id_parent'];
+	}
+
+	$sa = sql_getfetsel('statut','spip_articles','id_article='.intval($id_parent));
+	if ($id_parent
+	  AND (
+			$id_parent!==$id_parent_ancien OR $statut=='0'
+		)){
+		switch($sa){
+			case 'publie':
+				// statut par defaut si besoin
+				if ($statut=='0')
+					$champs['statut'] = $statut = 'publie';
+				break;
+			case 'poubelle':
+				// si article a la poubelle, evenement aussi
+				$champs['statut'] = $statut = 'poubelle';
+				break;
+			default:
+				// pas de publie ni 0 si article pas publie
+				if (in_array($statut,array('publie','0')))
+					$champs['statut'] = $statut = 'prop';
+				break;
+		}
+	}
+
+	// si pas d'article lie, et statut par defaut
+	// on met en propose
+	if ($statut=='0')
+		$champs['statut'] = $statut = 'prop';
+
+	if (isset($c['statut'])
+		AND $s = $c['statut']
+		AND $s != $statut) {
+		// pour instituer un evenement il faut avoir le droit d'instituer l'article associe avec le meme statut
+		if (autoriser('instituer', 'article', $id_parent, null, array('statut'=>$s))
+		  AND ($sa=='publie' OR $s!=='publie'))
+			$champs['statut'] = $statut = $s;
+		else
+			spip_log("editer_evenement $id_evenement refus " . join(' ', $c));
 	}
 
 	// Envoyer aux plugins
@@ -273,7 +339,8 @@ function evenement_instituer($id_evenement, $c) {
 				'table' => 'spip_evenements',
 				'action'=>'instituer',
 				'id_objet' => $id_evenement,
-				'id_parent_ancien' => $id_parent,
+				'id_parent_ancien' => $id_parent_ancien,
+				'statut_ancien' => $statut_ancien,
 			),
 			'data' => $champs
 		)
@@ -288,8 +355,8 @@ function evenement_instituer($id_evenement, $c) {
 
 	// Invalider les caches
 	include_spip('inc/invalideur');
+	suivre_invalideur("id='id_article/$id_parent_ancien'");
 	suivre_invalideur("id='id_article/$id_parent'");
-	suivre_invalideur("id='id_article/".$champs['id_article']."'");
 
 	// Pipeline
 	pipeline('post_edition',
@@ -298,7 +365,8 @@ function evenement_instituer($id_evenement, $c) {
 				'table' => 'spip_evenements',
 				'action'=>'instituer',
 				'id_objet' => $id_evenement,
-				'id_parent_ancien' => $id_parent,
+				'id_parent_ancien' => $id_parent_ancien,
+				'statut_ancien' => $statut_ancien,
 			),
 			'data' => $champs
 		)
@@ -307,7 +375,7 @@ function evenement_instituer($id_evenement, $c) {
 	// Notifications
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications('instituerevenement', $id_evenement,
-			array('id_parent' => $champs['id_article'], 'id_parent_ancien' => $id_parent)
+			array('id_parent' => $id_parent, 'statut' => $statut, 'id_parent_ancien' => $id_parent, 'statut_ancien' => $statut_ancien)
 		);
 	}
 

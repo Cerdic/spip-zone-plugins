@@ -67,6 +67,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'indiquez_votre_choix' => 'Indiquez votre choix',
 	'info_aucun_evenement' => 'Aucun événement',
 	'info_evenement' => 'Événement',
+	'info_evenement_propose' => 'Événement proposé',
+	'info_evenement_publie' => 'Événement publié',
+	'info_evenement_poubelle' => 'Événement supprimé',
 	'info_evenements' => 'Événements',
 	'info_nombre_evenements' => '@nb@ événements',
 	'info_nouvel_evenement' => 'Nouvel événement',
@@ -106,6 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // T
 	'telecharger' => 'Télécharger',
 	'texte_agenda' => 'AGENDA',
+	'texte_evenement_statut' => 'Cet événement est :',
 	'titre_cadre_ajouter_evenement' => 'Ajouter un événement',
 	'titre_cadre_modifier_evenement' => 'Modifier un événement',
 	'titre_sur_l_agenda' => 'Sur l\'agenda',

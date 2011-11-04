@@ -6,38 +6,30 @@
  *
  */
 
+/**
+ * Interfaces du compilateur
+ *
+ * @param array $interface
+ * @return array
+ */
 function agenda_declarer_tables_interfaces($interface){
 	// 'spip_' dans l'index de $tables_principales
 	$interface['table_des_tables']['evenements']='evenements';
 	
-	//-- Jointures ----------------------------------------------------
-
-	$interface['tables_jointures']['spip_articles'][]= 'evenements';
-	$interface['tables_jointures']['spip_evenements'][] = 'articles';
-	$interface['tables_jointures']['spip_evenements'][] = 'evenements_participants';
-	$interface['tables_jointures']['spip_auteurs'][] = 'evenements_participants';
-	$interface['table_des_traitements']['LIEU'][]= 'typo(%s)';
+	$interface['table_des_traitements']['LIEU'][]= _TRAITEMENT_TYPO;
 	
 	// permet d'utiliser les criteres racine, meme_parent, id_parent
 	$interface['exceptions_des_tables']['evenements']['id_parent']='id_evenement_source';
 	$interface['exceptions_des_tables']['evenements']['id_rubrique']=array('spip_articles', 'id_rubrique');
 		
-	$interface['table_date']['evenements'] = 'date_debut';
-
-	// des titres pour certains jeux d'URL (propre, arborescent...)
-	$interface['table_titre']['evenements']  = 'titre, "" AS lang';	
-	
 	return $interface;
 }
 
-function agenda_declarer_tables_principales($tables_principales){
-	
-
-	$tables_principales['spip_rubriques']['field']['agenda'] = 'tinyint(1) DEFAULT 0 NOT NULL';
-
-	return $tables_principales;
-}
-
+/**
+ * Tables auxiliaires de liens
+ * @param array $tables_auxiliaires
+ * @return array
+ */
 function agenda_declarer_tables_auxiliaires($tables_auxiliaires){
 
 	//-- Table des participants ----------------------
@@ -58,6 +50,13 @@ function agenda_declarer_tables_auxiliaires($tables_auxiliaires){
 
 	return $tables_auxiliaires;
 }
+
+/**
+ * Declarer la table objet evenement
+ *
+ * @param array $tables
+ * @return array
+ */
 function agenda_declarer_tables_objets_sql($tables){
 	$tables['spip_evenements'] = array(
 		'page'=>'evenement',
@@ -69,8 +68,8 @@ function agenda_declarer_tables_objets_sql($tables){
 		'info_aucun_objet'=> 'agenda:info_aucun_evenement',
 		'info_1_objet' => 'agenda:info_un_evenement',
 		'info_nb_objets' => 'agenda:info_nombre_evenements',
-		'titre' => 'titre',
-		'date' => 'date_heure',
+		'titre' => 'titre, "" AS lang',
+		'date' => 'date_debut',
 		'principale' => 'oui',
 		'champs_editables' => array('date_debut', 'date_fin', 'titre', 'descriptif','lieu', 'adresse', 'inscription', 'places', 'horaire'),
 		'field'=> array(
@@ -99,6 +98,10 @@ function agenda_declarer_tables_objets_sql($tables){
 			"id_evenement"=>"id_evenement",
 			"id_article"=>"id_article"
 		),
+		'tables_jointures' => array(
+			'articles',
+			'evenements_participants',
+		),
 		'rechercher_champs' => array(
 		  'titre' => 8, 'descriptif' => 5, 'lieu' => 5, 'adresse' => 3
 		),
@@ -113,8 +116,25 @@ function agenda_declarer_tables_objets_sql($tables){
 				'exception' => array('statut','tout')
 			),
 		),
+		'statut_titres' => array(
+			'prop'=>'agenda:info_evenement_propose',
+			'publie'=>'agenda:info_evenement_publie',
+			'poubelle'=>'agenda:info_evenement_supprime'
+		),
+		'statut_textes_instituer' => 	array(
+			'prop' => 'texte_statut_propose_evaluation',
+			'publie' => 'texte_statut_publie',
+			'poubelle' => 'texte_statut_poubelle',
+		),
+		'texte_changer_statut' => 'agenda:texte_evenement_statut',
 		'champs_versionnes' => array('id_article', 'titre', 'descriptif', 'lieu', 'adresse'),
+
 	);
+
+	//-- Jointures ----------------------------------------------------
+	$tables['spip_articles']['tables_jointures'][] = 'evenements';
+	$tables['spip_auteurs']['tables_jointures'][] = 'evenements_participants';
+	$tables['spip_rubriques']['field']['agenda'] = 'tinyint(1) DEFAULT 0 NOT NULL';
 
 	return $tables;
 }
