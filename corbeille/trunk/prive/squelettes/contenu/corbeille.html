@@ -3,7 +3,7 @@
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>
 
-<BOUCLE_corbeilles(POUR){tableau #VAL{prive/listes/}|find_all_in_path{'/corbeille_[^.]*[.]html'}}>
+<BOUCLE_corbeilles(POUR){tableau #VAL{prive/listes/}|find_all_in_path{'/corbeille_[^.]*[.]html$'}}>
 	#SET{table,#VALEUR|basename{.html}|substr{10}}
 	<div id='liste-[(#GET{table})]' class='ajax'>
 		#FORMULAIRE_EDITER_CORBEILLE{#GET{table}}
