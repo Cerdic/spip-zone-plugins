@@ -108,7 +108,8 @@ function svp_phraser_archives($archives) {
 // et phrase la balise <multis> dans le cas d'une DTD paquet qui contient les traductions du 
 // nom, slogan et description 
 function svp_phraser_plugin($dtd, $contenu) {
-	static $balises_multis = array('nom', 'slogan', 'description');
+	global $balises_multis;
+
 	$plugin = array();
 	
 	// On initialise les informations du plugin avec le contenu du plugin.xml ou paquet.xml
@@ -121,25 +122,17 @@ function svp_phraser_plugin($dtd, $contenu) {
 			$informer = charger_fonction('infos_' . $dtd, 'plugins');
 			$plugins[] = $informer($_balise_plugin);
 		}
-		// Si le nombre de balises est superieur a 1, on est forcement en presence d'une DTD plugin
-		// -- On fusionne donc les informations recoltees sinon on renvoie la balise unique
-		if ($nb_balises > 1) {
-			$fusionner = charger_fonction('fusion_' . $dtd, 'plugins');
+
+		// On appelle systematiquement une fonction de mise a jour de la structure de donnees du plugin :
+		// -- Si DTD plugin et que le nombre de balises plugin > 1 ou si DTD paquet avec une presence de balise spip
+		//    alors on fusionne donc les informations recoltees
+		// -- sinon on arrange la structure pour deplacer le contenu des balises dites techniques dans un sous tableau
+		//    d'index 0 par similitude avec la structure fusionnee
+		$fusionner = charger_fonction('fusion_' . $dtd, 'plugins');
+		if ($dtd == 'plugin')
 			$plugin = $fusionner($plugins);
-		}
-		else {
-			if ($dtd == 'plugin')
-				$plugin = $plugins[0];
-			else
-				// Avec la DTD paquet, on peut aussi avoir a fusionner les informations de la balise
-				// paquet avec celles d'eventuelles balises spip
-				// La balise paquet est stockee a l'index 0, les balise spip a des index refletant leur
-				// compatibilite spip
-				// Cependant, on doit aussi traiter la balise paquet unique pour deplacer les balises techniques dans
-				// un sous tableau d'index 0 : on appelle donc systematiquement la focntion de fusion
-				$fusionner = charger_fonction('fusion_' . $dtd, 'plugins');
-				$plugin = $fusionner($plugins[0]);
-		}
+		else
+			$plugin = $fusionner($plugins[0]);
 
 		// Pour la DTD paquet, les traductions du nom, slogan et description sont compilees dans une balise
 		// du fichier archives.xml. Il faut donc completer les informations precedentes avec cette balise
