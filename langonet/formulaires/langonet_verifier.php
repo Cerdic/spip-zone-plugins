@@ -74,7 +74,8 @@ function formulaires_langonet_verifier_traiter() {
 		if ($verification != 'utilisation') {
 			$oublies = array();
 			foreach ($all as $_item) {
-				$oublies[$_item] = @$resultats['item_md5'][$_item]; // indefini si dejo normalise
+				$index = preg_match('/^(.*)[{].*[}]$/', $_item, $m) ? $m[1] : $_item;
+				$oublies[$index] = @$resultats['item_md5'][$_item]; // indefini si dejo normalise
 			}
 			$mode = $_l ?'fonction_l' :  'oublie';
 			$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $oublies);
@@ -532,6 +533,44 @@ function creer_script($resultats, $verification) {
 		join("\n", array_keys($sed)) .
 		"\n\" \$i > /tmp/\$r\n\$comm /tmp/\$r \$i\ndone\n" .
 		"\nif [ \"$*\" != 'mv' ]; then echo; echo \"$out\"; fi";
+}
+
+// Calcul du representant canonique d'un premier argument de _L.
+// C'est un transcodage ASCII, reduits aux 32 premiers caracteres,
+// les caracteres non alphabetiques etant remplaces par un souligne.
+// On elimine les repetitions de mots pour evacuer le cas frequent truc: @truc@
+// Si plus que 32 caracteres, on elimine les mots de moins de 3 lettres.
+// Si toujours trop, on coupe au dernier mot complet avant 32 caracteres.
+// C'est donc le tableau des chaines de langues manquant;
+// toutefois, en cas d'homonymie d'index, on prend le md5, qui est illisible.
+
+// @param string $occ
+// @param array item_md5
+// @return string
+
+function langonet_index($occ, $item_md5)
+{
+	$index = textebrut($occ);
+	$index = preg_replace('/\\\\[nt]/', ' ', $index);
+	$index = strtolower(translitteration($index));
+	$index = trim(preg_replace('/\W+/', ' ', $index));
+	$index = preg_replace('/\b(\w+)\W+\1/', '\1', $index);
+	if (strlen($index) > 32) {
+	  // trop long: abandonner les petits mots
+		$index = preg_replace('/\b\w{1,3}\W/', '', $index);
+		if (strlen($index) > 32) {
+			// tant pis mais couper proprement si possible
+			$index = substr($index, 0, 32);
+			if ($n = strrpos($index,' '))
+				$index = substr($index, 0, $n);
+		}
+	}
+	$index = str_replace(' ', '_', trim($index));
+	if (isset($item_md5[$index]) AND strcasecmp($item_md5[$index], $occ)) {
+
+		$index = md5($occ);
+	}
+	return $index;
 }
 
 // fonction purement utilitaire

@@ -2,7 +2,7 @@
 	<nom>LangOnet</nom>
 	<slogan>V&#233;rifier, g&#233;n&#233;rer, rechercher ou afficher les items de langue</slogan>
 	<auteur>Eric Lupinacci, denisb, esj, kent1</auteur>
-	<version>0.7.0</version>
+	<version>0.7.1</version>
 	<etat>stable</etat>
 	<licence>GPL 3</licence>
 	<icon>prive/themes/spip/images/langonet-64.png</icon>

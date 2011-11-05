@@ -46,13 +46,13 @@ function inc_langonet_verifier_l($module, $ou_fichier) {
 		foreach ($contenu = file($_fichier) as $ligne => $texte) {
 			if (preg_match_all(_LANGONET_FONCTION_L, $texte, $m, PREG_SET_ORDER))
 				foreach ($m as $occ) {
-					$index = langonet_index_l($occ[1], $item_md5);
+					$index = langonet_index($occ[1], $item_md5);
 					$item_md5[$index] = $occ[1];
 					$fichier_non[$index][$_fichier][$ligne][] = trim($occ[0]);
 				}
 			if (preg_match_all(_LANGONET_FONCTION_L2, $texte, $m, PREG_SET_ORDER))
 				foreach ($m as $occ) {
-					$index = langonet_index_l($occ[1], $item_md5);
+					$index = langonet_index($occ[1], $item_md5);
 					$item_md5[$index] = $occ[1];
 					$fichier_non[$index][$_fichier][$ligne][] = trim($occ[0]);
 				}
@@ -65,43 +65,5 @@ function inc_langonet_verifier_l($module, $ou_fichier) {
 	$resultats['fichier_non'] = $fichier_non;
 	$resultats['item_md5'] = $item_md5;
 	return $resultats;
-}
-
-// Calcul du representant canonique d'un premier argument de _L.
-// C'est un transcodage ASCII, reduits aux 32 premiers caracteres,
-// les caracteres non alphabetiques etant remplaces par un souligne.
-// On elimine les repetitions de mots pour evacuer le cas frequent truc: @truc@
-// Si plus que 32 caracteres, on elimine les mots de moins de 3 lettres.
-// Si toujours trop, on coupe au dernier mot complet avant 32 caracteres.
-// C'est donc le tableau des chaines de langues manquant;
-// toutefois, en cas d'homonymie d'index, on prend le md5, qui est illisible.
-
-// @param string $occ
-// @param array item_md5
-// @return string
-
-function langonet_index_l($occ, $item_md5)
-{
-	$index = textebrut($occ);
-	$index = preg_replace('/\\\\[nt]/', ' ', $index);
-	$index = strtolower(translitteration($index));
-	$index = trim(preg_replace('/\W+/', ' ', $index));
-	$index = preg_replace('/\b(\w+)\W+\1/', '\1', $index);
-	if (strlen($index) > 32) {
-	  // trop long: abandonner les petits mots
-		$index = preg_replace('/\b\w{1,3}\W/', '', $index);
-		if (strlen($index) > 32) {
-			// tant pis mais couper proprement si possible
-			$index = substr($index, 0, 32);
-			if ($n = strrpos($index,' '))
-				$index = substr($index, 0, $n);
-		}
-	}
-	$index = str_replace(' ', '_', trim($index));
-	if (isset($item_md5[$index]) AND strcasecmp($item_md5[$index], $occ)) {
-
-		$index = md5($occ);
-	}
-	return $index;
 }
 ?>

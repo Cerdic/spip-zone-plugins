@@ -17,8 +17,6 @@ define("_LANGONET_ITEM_H",
 // pour plugin.xml (obsolete a terme)
 define("_LANGONET_ITEM_X", ",<[a-z0-9_]+>[\n|\t|\s]*([a-z0-9_]+):([a-z0-9_]+)[\n|\t|\s]*</[a-z0-9_]+()>,iS");
 
-include_spip('inc/langonet_verifier_l');
-
 /**
  * Verification de l'utilisation des items de langue
  *
@@ -99,11 +97,33 @@ function langonet_collecter_items($files) {
 
 function langonet_match(&$utilises, $occ, $_fichier, $ligne, $eval=false)
 {
-	$index = langonet_index_l($occ[2], $utilises['items']);
-	$utilises['items'][$index] = $occ[2];
+	list($item, $args) = langonet_argumenter($occ[2]);
+	$index = langonet_index($occ[2], $utilises['items']) . $args;
+	$utilises['items'][$index] = $item;
 	$utilises['modules'][$index] = $occ[1];
 	$utilises['item_tous'][$index][$_fichier][$ligne][] = trim($occ[0]);
 	$utilises['suffixes'][$index] = (($occ[3][0]==='.') OR ($eval AND strpos($occ[2], '$')));
+}
+
+include_spip('public/phraser_html');
+
+///  gerer les args
+/// La RegExp utilisee ci-dessous est defini dans phraser_html ainsi:
+/// define('NOM_DE_BOUCLE', "[0-9]+|[-_][-_.a-zA-Z0-9]*");
+/// define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?(([A-F]*[G-Z_][A-Z_0-9]*)|[A-Z_]+)(\*{0,2})");
+
+function langonet_argumenter($occ)
+{
+	$args = '';
+	if (preg_match_all('/' . NOM_DE_CHAMP . '/S', $occ, $m, PREG_SET_ORDER)) {
+		foreach($m as $match) {
+		  $nom = strtolower($match[4]);
+		  $occ = str_replace($match[0], "@$nom@", $occ);
+		  $args[]= "$nom=" . $match[0];
+		}
+		$args = '{' . join(',',$args) . '}';
+	}
+	return array($occ, $args);
 }
 
 //  Construire la liste des items definis mais apparament pas utilises
