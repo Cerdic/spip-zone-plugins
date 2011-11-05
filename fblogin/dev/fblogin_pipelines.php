@@ -27,7 +27,7 @@ function fblogin_formulaire_charger($flux){
 		$flux['data']['nom_inscription'] = _request('nom_inscription');
 		$flux['data']['mail_inscription'] = _request('mail_inscription');
 		if ($erreur = _request('var_erreur')){
-			$flux['data']['message_erreur'] = _request('var_erreur');
+			$flux['data']['message_erreur'] = $erreur;
 		}
 		else{
 			// Un petit message si pas d'erreur

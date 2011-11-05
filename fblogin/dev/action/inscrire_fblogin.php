@@ -5,9 +5,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // Cette fonction est appelee lors du retour de l'authentification chez Facebook.
 // Elle doit verifier si la connexion est OK, puis chercher l'utilisateur
-// associé dans SPIP (champ fb_uid dans la base), et finalement l'authentifier
-// en creant le bon cookie.
-
 function action_inscrire_fblogin_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
