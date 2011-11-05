@@ -1,0 +1,49 @@
+[(#REM) modèle Fluxslider pour un article : 
+ - Depuis un article : < fluxsliderXX >, alors affiche l'article XX
+ - Selon le modele CROCHET(# MODELE{fluxslider}{id_fluxslider=XX})CROCHET
+]
+
+[(#SET{id_article,[(#ENV{id_fluxslider, #CONFIG{fluxslider/id_defaut, 0} })]} )]
+[(#SET{width,[(#ENV{width, #CONFIG{fluxslider/width, 640} })]} )]
+[(#SET{height,[(#ENV{height, #CONFIG{fluxslider/height, 480} })]} )]
+[(#SET{delay,[(#ENV{delay, #CONFIG{fluxslider/delay, 4000} })]} )]
+[(#SET{autoplay,[(#ENV{autoplay, #CONFIG{fluxslider/autoplay, true} })]} )]
+[(#SET{pagination,[(#ENV{pagination, #CONFIG{fluxslider/pagination, false} })]} )]
+[(#SET{captions,[(#ENV{captions, #CONFIG{fluxslider/captions, false} })]} )]
+[(#SET{controls,[(#ENV{controls, #CONFIG{fluxslider/controls, false} })]} )]
+[(#SET{portfolio,[(#ENV{portfolio, #CONFIG{fluxslider/portfolio, 'non'} })]} )]
+[(#SET{imagealign,[(#ENV{imagealign, #CONFIG{fluxslider/imagealign,'center'} })]} )]
+[(#SET{imagebackcolor,[(#ENV{imagebackcolor, #CONFIG{fluxslider/imagebackcolor,'transparent'} })]} )]
+
+
+
+[(#GET{portfolio}|=={oui}|?{
+	[(#INCLURE{fond=noisettes/fluxslider_article_portfolio,
+			id_article=#GET{id_article},
+			width=#GET{width},
+			height=#GET{height},
+			delay=#GET{delay},
+			autoplay=#GET{autoplay},
+			paginations=#GET{pagination},
+			captions=#GET{captions},
+			controls=#GET{controls},
+			imagealign=#GET{imagealign},
+			imagebackcolor=#GET{imagebackcolor}
+		})]
+})]
+
+[(#GET{portfolio}|=={non}|?{
+		[(#INCLURE{fond=noisettes/fluxslider_article_tous,
+			id_article=#GET{id_article},
+			width=#GET{width},
+			height=#GET{height},
+			delay=#GET{delay},
+			autoplay=#GET{autoplay},
+			paginations=#GET{pagination},
+			captions=#GET{captions},
+			controls=#GET{controls},
+			imagealign=#GET{imagealign},
+			imagebackcolor=#GET{imagebackcolor}
+		})] 
+})]
+

@@ -1,0 +1,38 @@
+<plugin>
+	<nom>Flux Slider</nom>
+	<slogan>
+		<multi>
+		[fr]Slider JQuery Fluxslider dans SPIP!
+		[en]JQuery Fluxslider for SPIP!
+		</multi>
+	</slogan>
+	<auteur>[Gr&#233;gory Pascal->http://www.spip-contrib.net/ngombe]</auteur>
+	<version>0.0.1</version>
+	<licence>GNU/GPL</licence>
+	<etat>test</etat>
+	<description>
+		<multi>
+		[fr] Ajoute les balises {{&lt;fluxsliderXX&gt;}}, {{&lt;fluxslider_doc&gt;}} et {{&lt;fluxslider_rub&gt;}} pour cr&#233;er un diaporama <a href="http://www.joelambert.co.uk/flux/" title="FluxSlider">"Flux Slider" </a> param&#233;trable via <a href="http://www.spip-contrib.net/Config-cfg" title="CFG">CFG</a>.
+		[en] Add {{&lt;fluxsliderXX&gt;}}, {{&lt;fluxslider_doc&gt;}} and {{&lt;fluxslider_rub&gt;}} tags to create a <a href="http://www.joelambert.co.uk/flux/" title="FluxSlider">"Flux Slider" </a> using <a href="http://www.spip-contrib.net/Config-cfg" title="CFG">CFG</a>.
+		</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/Flux-Slider-pour-SPIP</lien>
+	<icon>prive/themes/spip/images/fluxslider-32.png</icon>
+	<prefix>fluxslider</prefix>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>fluxslider_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>fluxslider_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>fluxslider_pipelines.php</inclure>
+	</pipeline>
+	<noisette>modeles/fluxslider.html</noisette>
+	<categorie>multimedia</categorie>
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id='cfg' version='[1.0.4;]' />
+</plugin>

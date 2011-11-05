@@ -1,0 +1,46 @@
+<B_doc>
+<div id="fluxslider">
+	<BOUCLE_doc (DOCUMENTS) {id_article=#ID_ARTICLE} {extension IN png,jpg,gif} {par num titre} {doublons} {vu=non}>
+		[(#DESCRIPTIF|?{'',' '})
+			[(#FICHIER|image_passe_partout{#WIDTH,#HEIGHT}
+					  |image_recadre{#WIDTH,#HEIGHT,#IMAGEALIGN,#IMAGEBACKCOLOR}
+					  |inserer_attribut{title,[(#TITRE|supprimer_numero)]}
+					  |inserer_attribut{rel,#FICHIER|image_reduire{#CONTROLNAVTHUMBSWIDTH,#CONTROLNAVTHUMBSHEIGHT}|extraire_attribut{src}}
+			)]
+		]
+		[(#DESCRIPTIF|?{' ',''})
+			[(#SET{lien,#VAL{'spip.php?'#DESCRIPTIF}|attribut_html|replace{' ',''}})]
+			[(#SET{fancyornot,''})]
+			[(#DESCRIPTIF|match{doc}|=={doc}|?{
+				[(#PLUGIN{FANCYBOX}|oui)
+					[(#SET{fancyornot, [(#CONFIG{fancybox/selecteur_commun,'.fancybox'}|replace{'\.',''})]})]
+				]
+				[(#SET{lien, #URL_DOCUMENT})]
+			})]
+			[(#DESCRIPTIF|match{http}|=={http}|?{
+				[(#SET{lien, [(#DESCRIPTIF|textebrut)]})]
+			})]
+			<a href="#GET{lien}" [class="(#GET{fancyornot})"]>
+			[(#FICHIER|image_passe_partout{#WIDTH,#HEIGHT}
+					  |image_recadre{#WIDTH,#HEIGHT,#IMAGEALIGN,#IMAGEBACKCOLOR}
+					  |inserer_attribut{title,[(#TITRE|supprimer_numero)]}
+					  |inserer_attribut{rel,#FICHIER|image_reduire{#CONTROLNAVTHUMBSWIDTH,#CONTROLNAVTHUMBSHEIGHT}|extraire_attribut{src}}
+			)]
+			</a>
+		]
+	</BOUCLE_doc>
+</div>
+<br style="clear:both"/>
+<script type="text/javascript">
+	$(window).load(function() {
+				window.flxslider = new flux.slider('#fluxslider', {
+					[autoplay: (#AUTOPLAY),]
+					[pagination: (#PAGINATIONS),]
+					[captions: (#CAPTIONS),]
+					[controls: (#CONTROLS),]
+					width: #WIDTH,
+					height: #HEIGHT
+				});
+	});
+</script>
+</B_doc>

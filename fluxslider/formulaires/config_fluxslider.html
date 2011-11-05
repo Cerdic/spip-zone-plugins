@@ -1,0 +1,122 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- depot=metapack -->
+<!-- nom=fluxslider -->
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<div class="formulaire_spip formulaire_configurer formulaire_config_fluxslider">
+
+	<div class="cadre_padding">
+
+		<form name="formulaire_config_fluxslider" method="post"  action="#SELF">
+		<div>
+		#ACTION_FORMULAIRE{#SELF}
+		<fieldset><legend><:fluxslider:general:> &nbsp;</legend>
+		<p>
+		<label for="_ir_width"><:fluxslider:width:> :</label>
+		<input type="text" name="width" class="type_txt" id="_ir_width" size="3"
+			value="#ENV{width,640}" /> px
+		</p>
+		<p>
+		<label for="_ir_height"><:fluxslider:height:> :</label>
+		<input type="text" name="height" class="type_txt" id="_ir_height" size="3"
+			value="#ENV{height,480}" /> px
+		</p>
+		<p>
+		<label for="_ir_delay"><:fluxslider:delay:> :</label>
+		<input type="text" name="delay" class="type_txt" id="_ir_delay" size="3"
+			value="#ENV{delay,4000}" /> ms
+		</p>
+		</fieldset>
+
+		<fieldset><legend><:fluxslider:controls:> &nbsp;</legend>
+		<p>
+			<label for="_ir_autoplay" title="autoplay"><:fluxslider:autoplay:> :</label>
+			<select name="autoplay" id="_ir_autoplay" style="width:70px">
+				<option value="true" [(#CONFIG{fluxslider/autoplay}|=={#VAL{'true'}}|?{selected="selected",''})]><:fluxslider:oui:></option>
+				<option value="false" [(#CONFIG{fluxslider/autoplay}|=={#VAL{'false'}}|?{selected="selected",''})]><:fluxslider:non:></option>
+			</select> 
+		</p>
+		<p id="_ir_pagination_container">
+			<label for="_ir_pagination" title="pagination"><:fluxslider:controlnav:> :</label>
+			<select name="pagination" id="_ir_pagination" style="width:70px">
+				<option value="false" [(#CONFIG{fluxslider/pagination}|=={#VAL{'false'}}|?{selected="selected",''})]><:fluxslider:non:></option>
+				<option value="true" [(#CONFIG{fluxslider/pagination}|=={#VAL{'true'}}|?{selected="selected",''})]><:fluxslider:oui:></option>
+			</select>
+		</p>
+		<p>
+			<label for="_ir_controls" title="controls"><:fluxslider:directionnav:> :</label>
+			<select name="controls" id="_ir_controls" style="width:70px">
+				<option value="false" [(#CONFIG{fluxslider/controls}|=={#VAL{'false'}}|?{selected="selected",''})]><:fluxslider:non:></option>
+				<option value="true" [(#CONFIG{fluxslider/controls}|=={#VAL{'true'}}|?{selected="selected",''})]><:fluxslider:oui:></option>
+			</select>
+		</p>
+		<p>
+			<label for="_ir_captions" title="captions"><:fluxslider:usethumbs:> :</label>
+			<select name="captions" id="_ir_captions" style="width:70px">
+				<option value="false" [(#CONFIG{fluxslider/captions}|=={#VAL{'false'}}|?{selected="selected",''})]><:fluxslider:non:></option>
+				<option value="true" [(#CONFIG{fluxslider/captions}|=={#VAL{'true'}}|?{selected="selected",''})]><:fluxslider:oui:></option>
+			</select>
+		</p>
+		</fieldset>
+
+		<fieldset><legend><:fluxslider:images:> &nbsp;</legend>
+		<p>
+			<label for="_ir_portfolio" title="portfolio"><:fluxslider:portfolio:> :</label>
+			<select name="portfolio" id="_ir_portfolio" style="width:70px">
+				<option value="non" [(#CONFIG{fluxslider/portfolio}|=={#VAL{'non'}}|?{selected="selected",''})]><:fluxslider:non:></option>
+				<option value="oui" [(#CONFIG{fluxslider/portfolio}|=={#VAL{'oui'}}|?{selected="selected",''})]><:fluxslider:oui:></option>
+			</select>
+		</p>
+		<p>
+		<label for="_ir_imagealign" title='imagealign'><:fluxslider:image_align:> :</label>
+		<select name="imagealign" id="_ir_imagealign" style="width:142px">
+			<option value="left top" [(#CONFIG{fluxslider/imagealign}|=={#VAL{'left top'}}|?{selected="selected",''})]>left top</option>
+			<option value="left center" [(#CONFIG{fluxslider/imagealign}|=={#VAL{'left center'}}|?{selected="selected",''})]>left center</option>
+			<option value="left bottom" [(#CONFIG{fluxslider/imagealign}|=={#VAL{'left bottom'}}|?{selected="selected",''})]>left bottom</option>
+			<option value="center top" [(#CONFIG{fluxslider/imagealign}|=={#VAL{'center top'}}|?{selected="selected",''})]>center top</option>
+			<option value="center center" [(#CONFIG{fluxslider/imagealign}|=={#VAL{'center center'}}|?{selected="selected",''})]>center center</option>
+			<option value="center bottom" [(#CONFIG{fluxslider/imagealign}|=={#VAL{'center bottom'}}|?{selected="selected",''})]>center bottom</option>
+			<option value="right top" [(#CONFIG{fluxslider/imagealign}|=={#VAL{'right top'}}|?{selected="selected",''})]>right top</option>
+			<option value="right center" [(#CONFIG{fluxslider/imagealign}|=={#VAL{'right center'}}|?{selected="selected",''})]>right center</option>
+			<option value="right bottom" [(#CONFIG{fluxslider/imagealign}|=={#VAL{'right bottom'}}|?{selected="selected",''})]>right bottom</option>
+		</select>
+		</p>
+		<p>
+			<label for="_ir_imagebackcolor"><:fluxslider:image_backcolor:> :</label>
+			<input type="text" name="imagebackcolor" class="palette" id="_ir_imagebackcolor" size="7" value="#ENV{imagebackcolor,'transparent'}" />
+		</p>
+		</fieldset>
+		#FORMULAIRE_CONFIG_FLUXSLIDER_ARTICLE
+		</div>
+
+	<div class="boutons">
+		<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="fondo" />
+		<input type="submit" name="_cfg_delete" value="<:fluxslider:bouton_effacer:>" class="fondo" />
+	</div>
+
+	</div></form>
+
+</div>
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		var offset = $("#navigation").offset();
+		var topPadding = 0;
+		$(window).scroll(function() {
+			if ($(window).scrollTop() > offset.top) {
+				$("#navigation").stop().animate({
+					marginTop: $(window).scrollTop() - offset.top + topPadding
+				});
+			} else {
+				$("#navigation").stop().animate({
+					marginTop: 0
+				});
+			};
+		});
+	});
+
+</script>

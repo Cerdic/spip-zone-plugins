@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>FluxSlider plugin SPIP</title>
+		<style type="text/css">
+		.caption,th,td {
+			text-align:left;
+			font-weight:normal;
+			vertical-align:middle;
+		}
+		.caption a{
+			color:#fff;
+			text-decoration:none;
+		}
+		.caption a:hover{
+			color:#fafafa;
+			text-decoration:underline;
+		}
+		ul.pagination {
+			-moz-box-sizing:content-box;
+			-webkit-box-sizing:content-box;
+			-ms-box-sizing:content-box;
+			box-sizing:content-box;
+			padding:10px 0 !important;
+			overflow:hidden;
+		}
+		ul.pagination li {
+			text-indent:10000px;
+			height:8px;
+			width:8px;
+			-moz-border-radius:10px;
+			-webkit-border-radius:10px;
+			-o-border-radius:10px;
+			-ms-border-radius:10px;
+			-khtml-border-radius:10px;
+			border-radius:10px;
+			background:rgba(0, 0, 0, 0.6);
+			-webkit-box-shadow:0 1px 0 rgba(255, 255, 255, 0.1);
+		}
+		ul.pagination li.current {
+			background:white;
+		}
+
+		/* Useless CSS */
+
+		HTML {
+			background-color: #959A8F;
+			color: #63665F;
+		}
+
+		H1 {
+			text-align:center;
+			font: bold 35px/30px Helvetica, Arial, Sans-serif;
+			text-align: center;
+			color: #eee;
+			text-shadow: 0px 2px 6px #333;
+		}
+		
+		H2{
+			text-align:center;
+			font: bold 25px/20px Helvetica, Arial, Sans-serif;
+			text-align: center;
+			color: #eee;
+			text-shadow: 0px 2px 6px #333;
+		}
+
+		#slider {
+			margin:0 auto;
+			width:640px;
+			height:420px;
+			background: url(prive/shadow.png) no-repeat center bottom;
+			padding: 17px 0;
+		}
+
+		#controls {
+			margin:0 auto;
+			margin-top:1em;
+			width:600px;
+			height:280px;
+			background: url(prive/shadow.png) no-repeat center bottom;
+			padding: 17px 0;
+		}
+
+		#panel{
+			width:100%;
+			background-color:#f0f0f0;
+			height:280px;
+		}
+
+		#panel_left{
+			float:left;
+			width:48%;
+			padding:4px;
+		}
+
+		#panel_right{
+			float:right;
+			width:48%;
+			padding:4px;
+		}
+
+		#panel ul{ 
+			list-style:none;
+			margin:0 auto;
+			padding:0;
+		}
+
+		#panel ul li {
+			width:120px;
+			margin:1px auto;
+			text-align:center;
+			-moz-border-radius:10px;
+			-webkit-border-radius:10px;
+			-o-border-radius:10px;
+			-ms-border-radius:10px;
+			-khtml-border-radius:10px;
+			border-radius:10px;
+			background:#f0f0f0;
+		}
+
+		#panel ul li:hover{
+			background:rgba(64, 64, 64, 0.3);
+		}
+
+		#panel ul li a{
+			text-decoration:none;
+			color:#444;
+		}
+
+		/* Play Pause stuff */
+
+		.player img{
+			position:absolute;
+			top:50%;
+			left:50%;
+			margin-top:-50px;
+			margin-left:-50px;
+			z-index:1000;
+		}
+		</style>
+		<script src="../../prive/javascript/jquery.js" type="text/javascript"></script>
+		<script src="js/flux.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+
+		<h1><img src="prive/play_pause.png" id="playbutton"> Flux Slider pour SPIP</h1>
+
+		<div id="player" class="player">
+			<img id="play" src="prive/play.png" width="100" height="100" style="display:none;"/>
+			<img id="pause" src="prive/pause.png" width="100" height="100" style="display:none;"/>
+		</div>
+
+		<div id="slider">
+			<img src="prive/1.jpg" title="Demo du plugin Flux Slider pour SPIP" alt="" />
+			<img src="prive/2.jpg" title="Download code from <a href='https://github.com/joelambert/Flux-Slider'>github</a>" alt="" />
+			<img src="prive/3.jpg" title="" alt="" />
+			<img src="prive/4.jpg" title="" alt="" />
+			<img src="prive/5.jpg" title="" alt="" />
+			<img src="prive/6.jpg" title="" alt="" />
+		</div>
+
+		<div id="controls">
+			<div id="panel">
+				<div id="panel_left">
+					<h2>2D</h2>
+					<ul id="trans2D">
+						<li><a href="#bars">Bars</a></li>
+						<li><a href="#zip">Zip</a></li>
+						<li><a href="#blinds">Blinds</a></li>
+						<li><a href="#blocks">Blocks</a></li>
+						<li><a href="#concentric">Concentric</a></li>
+						<li><a href="#warp">Warp</a></li>
+						<li><a href="#slide">Slide</a></li>
+						<li><a href="#swipe" class="new">Swipe</a></li>
+						<li><a href="#dissolve" class="new">Dissolve</a></li>
+						<li><a href="#blocks2" class="new">Blocks2</a></li>
+
+					</ul>
+				</div>
+				<div id="panel_right">
+					<h2>3D</h2>
+					<ul id="trans3d">
+						<li><a href="#bars3d">Bars3D</a></li>
+						<li><a href="#cube">Cube</a></li>
+						<li><a href="#tiles3d">Tiles3D</a></li>
+						<li><a href="#blinds3d">Blinds3D</a></li>
+						<li><a href="#turn">Turn</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" charset="utf-8">
+			$(function(){
+
+				// Flux Slider from https://github.com/joelambert/Flux-Slider
+				window.flxslider = new flux.slider('#slider', {
+					autoplay: false,
+					pagination: true,
+					captions: true,
+					controls: true,
+					width: 640,
+					height: 420
+				});
+
+				// Setup a listener for user requested transitions
+				$('div#panel').bind('click', function(event){
+					event.preventDefault();
+					// If this is a 3D transform and the browser doesn't support 3D then inform the user
+					if($(event.target).closest('ul').is('ul#trans3d') && !flux.browser.supports3d)
+					{
+						alert("La transition '"+event.target.innerHTML+"' fonctionne sur un navigateur supportant le 3D transforms");
+						return;
+					}
+					window.flxslider.next(event.target.href.split('#')[1]);
+				});
+
+				// Play / Pause effect from http://tympanus.net/codrops/2010/01/07/pause-and-play-effect-with-jquery/
+				$('#playbutton').click(function(){
+					if(window.flxslider.isPlaying()){
+						window.flxslider.stop();
+					}else{
+						window.flxslider.start();
+					}
+					togglePlay();
+					return false;
+				});
+
+				function togglePlay(){
+					var $elem = $('#player').children(':first');
+						$elem.stop()
+							 .show()
+							 .animate({
+								'marginTop':'-175px',
+								'marginLeft':'-175px',
+								'width':'350px',
+								'height':'350px',
+								'opacity':'0'},
+								function(){
+									$(this).css({
+										'width':'100px',
+										'height':'100px',
+										'margin-left':'-50px',
+										'margin-top':'-50px',
+										'opacity':'1',
+										'display':'none'
+										});
+								});
+						$elem.parent().append($elem);
+				}
+
+			});
+		</script>
+
+	</body>
+</html>
