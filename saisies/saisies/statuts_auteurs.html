@@ -8,6 +8,7 @@
     (seulement si non multiple)
   - cacher_option_intro : pas de premier option vide  (defaut:"")
   - afficher_tous : permet d'afficher une option de valeur "tous" correspondant à tous les utilisateurs
+  - poubelle : permet d'afficher le statut poubelle
   - defaut : valeur par defaut si pas présente dans l'environnement
   - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
   - size : dans le cas d'un select multiple, limite le nombre de lignes au chiffre passé
@@ -25,13 +26,16 @@
 		<option value="0minirezo"[(#VAL{0minirezo}|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]><:info_administrateurs:></option>
 		<option value="1comite"[(#VAL{1comite}|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]><:info_redacteurs:></option>
 		<option value="6forum"[(#VAL{6forum}|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]><:info_visiteurs:></option>
+		[(#ENV{poubelle}|oui)
+		<option value="5poubelle"[(#VAL{5poubelle}|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]><:texte_statut_poubelle:></option>]
 		[(#ENV{afficher_tous}|oui)
-		<option value="tous"[(#VAL{tous}|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]><:saisies:tous_visiteurs:></option>]
-	]
+		<option value="tous"[(#VAL{tous}|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]><:saisies:tous_visiteurs:></option>]	]
 	[(#ENV{multiple}|non)
 		<option value="0minirezo"[(#VAL{0minirezo}|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]><:info_administrateurs:></option>
 		<option value="1comite"[(#VAL{1comite}|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]><:info_redacteurs:></option>
 		<option value="6forum"[(#VAL{6forum}|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]><:info_visiteurs:></option>
+		[(#ENV{poubelle}|oui)
+			<option value="5poubelle"[(#VAL{5poubelle}|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]><:texte_statut_poubelle:></option>]
 		[(#ENV{afficher_tous}|oui)
 		<option value="tous"[(#VAL{tous}|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]><:saisies:tous_visiteurs:></option>]
 	]
