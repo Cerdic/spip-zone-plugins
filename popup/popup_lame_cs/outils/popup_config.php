@@ -24,11 +24,11 @@ function outils_popup_config_dist() {
 	// Ajout de l'outil 'popup'
 	add_outil(array(
 		'id' => 'popup',
-        'nom' => _T('popup:nom'),
+        'nom' => _T('spipopup:nom'),
         'contrib' => 3573,
         'auteur' => 'Piero Wbmstr',
         'categorie' => 'spip',
-		'description' => _T('popup:description'),
+		'description' => _T('spipopup:description'),
 		'code:options' => "%%popup_skel%% define('POPUP_TITRE', %%popup_titre%%);\n define('POPUP_WIDTH', %%popup_width%%);\n define('POPUP_HEIGHT', %%popup_height%%);\n",
 		'code:js' => "var popup_settings={default_popup_name:'%%popup_titre%%',default_popup_width:'%%popup_width%%',default_popup_height:'%%popup_height%%'};",
 	));
@@ -40,25 +40,25 @@ function outils_popup_config_dist() {
 			'format' => _format_CHAINE,
 			'defaut' => '"'.POPUP_SKEL_DEFAUT.'"',
 			'code' => "define('POPUP_SKEL', str_replace('.html', '', %s));\n",
-			'label' => _T('popup:skel_label'),
+			'label' => _T('spipopup:skel_label'),
 		),
 		array(
 			'nom' => 'popup_titre',
 			'format' => _format_CHAINE,
 			'defaut' => '"'.POPUP_TITRE_DEFAUT.'"',
-			'label' => _T('popup:titre_label'),
+			'label' => _T('spipopup:titre_label'),
 		),
 		array(
 			'nom' => 'popup_width',
 			'format' => _format_NOMBRE,
-			'defaut' => '"'.POPUP_WIDTH_DEFAUT.'"',
-			'label' => _T('popup:width_label'),
+			'defaut' => POPUP_WIDTH_DEFAUT,
+			'label' => _T('spipopup:width_label'),
 		),
 		array(
 			'nom' => 'popup_height',
 			'format' => _format_NOMBRE,
-			'defaut' => '"'.POPUP_HEIGHT_DEFAUT.'"',
-			'label' => _T('popup:height_label'),
+			'defaut' => POPUP_HEIGHT_DEFAUT,
+			'label' => _T('spipopup:height_label'),
 		)
 	);
 

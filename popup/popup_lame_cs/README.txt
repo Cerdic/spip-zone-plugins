@@ -4,17 +4,15 @@ Lame pour le plugin Couteau Suisse
 
 INSTALLATION
 
-Pour installer la lame, copiez les répertoires de l'archive "popup_lame_cs" dans votre répertoire de squelettes ou copiez leur contenu s'ils existent déjà.
+Pour installer la lame, copiez tous les fichiers contenus dans le dossier o˘ se trouve ce README.txt dans votre dossier de squelettes.
+(En gros, ne crÈez pas de dossier "popup_lame_cs" supplÈmentaire)
 
-Alternativement, vous pouvez copier les fichiers directement dans le répertoire du plugin Couteau Suisse (attention si vous faites des mises à jour automatiques : les fichiers seront peut-être écrasés).
-
-NOTE :
-les deux fichiers de squelettes suivants doivent être placés directement dans votre répertoire de squelettes :
-- popup_defaut.html
-- popup_spip_styles.html
+La lame "Balise #POPUP" sera alors automatiquement dÈtectÈe par le Couteau Suisse dans la rubrique "Balises, filtres, critËres".
+A vous ensuite de la configurer et de l'utiliser !
+ 
 
 ------------------------------------------
 
-Plugin Popup : http://www.spip-contrib.net/?article3573
-
 Plugin Couteau Suisse : http://www.spip-contrib.net/Le-Couteau-Suisse
+
+Plugin Popup : http://www.spip-contrib.net/?article3573

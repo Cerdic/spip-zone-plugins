@@ -6,7 +6,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function balise_POPUP_dist($p) {
-	return calculer_balise_dynamique($p, POPUP, array());
+	return calculer_balise_dynamique($p, 'POPUP', array());
 }
 
 function balise_POPUP_dyn($param='', $page=false, $width=false, $height=false, $title='') {

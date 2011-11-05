@@ -5,27 +5,46 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function balise_POPUP($p) {
+function balise_POPUP_dist($p) {
 	// Les arguments
 	$p->code = "popup_balise(".popup_arguments_balise($p).')';
 	$p->interdire_scripts = false;
 	return $p;
 }
 
+
 function popup_balise($param='', $page=false, $width=false, $height=false, $title='') {
-	if(!$page) $page = POPUP_SKEL;
-	$page = str_replace('.html','',$page);
+//	spipopup_config();
 	if(!$width) $width = POPUP_WIDTH;
 	if(!$height) $height = POPUP_HEIGHT;
+	// Cas des objets SPIP
 	if (preg_match(_RACCOURCI_URL, $param, $match)) {
-		if(in_array($match[1], array('art', 'article', 'breve', 'auteur', 'syndic', 'mot'))){
-			$type = ($match[1] == 'art') ? 'article' : $match[1];
+		if(in_array($match[1], array(
+			'art', 'article', 'breve', 'auteur', 'syndic', 'mot', 'document', 'doc', 'site'
+		))){
+			$type = ($match[1] == 'art') ? 'article' : (
+				($match[1] == 'site') ? 'syndic' : (
+					($match[1] == 'doc') ? 'document' : $match[1]
+				)
+			);
 			$param = "id_$type=".$match[2];
 		}
+		if(!$page) $page = POPUP_SKEL;
+//		$page = str_replace('.html','',$page);
+		$url = generer_url_public($page, $param);
+		$url_nopopup = generer_url_public($type,$param);
+	// Cas d'une URL complete
+	} elseif(
+		substr($param, 0, strlen('http://'))=='http://' ||
+		substr($param, 0, strlen('https://'))=='https://'
+	) {
+		$url = $url_nopopup = $param;
+	// Sinon, on considere que c'est une erreur, on renvoie le param sans traitement
+	} else {
+		$url = generer_url_public($page, $param);
+		$url_nopopup = generer_url_public($type,$param);
 	}
-	$url = generer_url_public($page, $param);
-	$url_nopopup = generer_url_public($type,$param);
-	$_title = (strlen($title) ? $title." " : '')._T('popup:nouvelle_fenetre');
+	$_title = (strlen($title) ? $title." " : '')._T('spipopup:nouvelle_fenetre');
 	return "$url_nopopup\" onclick=\"_popup_set('$url',$width,$height);return false;\" title=\"".$_title;
 }
 
@@ -35,7 +54,9 @@ function popup_arguments_balise(&$p) {
 	return join(",", $args);
 }
 
-// Foncion pour transformer les liens dans la popup pour qu'ils renvoient vers l'opener et ferment la fenetre
+/**
+ * Fonction pour transformer les liens dans la popup pour qu'ils renvoient vers l'opener et ferment la fenetre
+ */
 function popup_liens_retour($texte,$_popup='oui'){
 	$popup = ($_popup=='non') ? false : true;
 	if(!$popup) return $texte;
