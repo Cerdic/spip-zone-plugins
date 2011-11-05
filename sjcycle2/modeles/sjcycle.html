@@ -90,7 +90,19 @@
          rajout dans la doc de l'incompatibilite entre infobulles et ces effets. Du coup la bordure autour de l'image
          ne se met pas en place non plus ]
          #SET{fermer_a,non}
+         
+         [(#REM) Doit-on afficher les infobulles ET y a t'il quelque chose a afficher ?]
+         #SET{afficher_infobulle,non}
          [(#CONFIG{sjcycle/tooltip}|=={on}|oui)
+         	[(#SET{texte_infobulle,[<h4>(#TITRE|supprimer_numero)</h4>][(#DESCRIPTIF)<br />]})]
+            [(#CONFIG{sjcycle/tooltip_carac}|=={on}|oui)
+               [(#SET{texte_infobulle,[(#GET{texte_infobulle}|concat{<strong>Original :</strong> l. #LARGEUR x L. #HAUTEUR pixels, [(#TAILLE|taille_en_octets)]})]})]
+            ]
+            [(#SET{texte_infobulle,[(#GET{texte_infobulle}|trim)]})]
+            [(#GET{texte_infobulle}|strlen|!={0}|oui) #SET{afficher_infobulle,oui}]
+         ]
+
+         [(#GET{afficher_infobulle}|=={oui}|oui)
         		<div class="infobulle" style="width:#GET{img_width}px;
       										[(#GET{img_height}|>{0}|oui)height:#GET{img_height}px;]
                                     padding:0px;
@@ -140,14 +152,8 @@
          [(#GET{fermer_a}|=={oui}|oui)
          	</a>
          ]
-         [(#CONFIG{sjcycle/tooltip}|=={on}|oui)
-            <div class="textinfobulle" style="display:none;text-align:left;">
-               [<h4>(#TITRE|supprimer_numero)</h4>]
-               [(#DESCRIPTIF)<br />]
-               [(#CONFIG{sjcycle/tooltip_carac}|=={on}|oui)
-               	<strong>Original :</strong> l. #LARGEUR x L. #HAUTEUR pixels, [(#TAILLE|taille_en_octets)]
-               ]
-            </div>
+         [(#GET{afficher_infobulle}|=={oui}|oui)
+            <div class="textinfobulle" style="display:none;text-align:left;">#GET{texte_infobulle}</div>
          </div> <!-- .infobulle -->
          ]
          [(#GET{legende}|oui|et{#GET{legende}|=={1}|oui})
