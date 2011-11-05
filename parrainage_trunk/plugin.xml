@@ -1,0 +1,62 @@
+<plugin>
+	<nom>Parrainage</nom>
+	<auteur>Les Développements Durables (http://www.ldd.fr)</auteur>
+	<licence>GPL v3</licence>
+	<version>0.2.1</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<slogan>Proposer aux utilisateurs un outil de parrainage.</slogan>
+	<description>Permet d'importer des contacts puis d'envoyer en masse des invitations à rejoindre le site. Si des personnes s'inscrivent, alors un lien est conservé entre eux et celui qui les a invité (le parrain).</description>
+	<icon>images/parrainage-48.png</icon>
+	
+	<prefix>parrainage</prefix>
+	
+	<install>base/parrainage_installation.php</install>
+	<options>parrainage_options.php</options>
+	
+	<bouton id="configurer_parrainage" parent="bando_configuration">
+		<titre>parrainage:plugin_nom</titre>
+		<icone>images/parrainage-16.png</icone>
+		<url>configurer_parrainage</url>
+	</bouton>
+	
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/parrainage_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/parrainage_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/parrainage_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>rechercher_liste_des_champs</nom>
+		<inclure>base/parrainage_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>parrainage_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>parrainage_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>parrainage_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>recuperer_fond</nom>
+		<inclure>parrainage_pipelines.php</inclure>
+	</pipeline>
+	
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="spip_bonux" version="[2.2.10;]" />
+	<necessite id="facteur" version="[1.6.1;]" />
+	<necessite id="queue" version="[0.6.2;]" />
+	<necessite id="saisies" version="[1.8.5;]" />
+	<necessite id="cvtm" version="[0.1.2;]" />
+</plugin>
