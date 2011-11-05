@@ -506,10 +506,9 @@ function creer_script($resultats, $verification) {
 				$occ = $m[1];
 			else continue;
 		} else {
-		  // si les item n'ont pas que des lettres, normaliser
-			$re = strpos($fichier, '.xml') ? _LANGONET_TROUVER_ITEM_X : _LANGONET_TROUVER_ITEM_HP;		  
-			if (!preg_match($re, $val, $m)) continue;
-			if ($m[0][0] !== '<') continue;
+			// si c'est un <: ... :> normaliser au besoin
+			if ($val[0]!=='<') continue;
+			if (!preg_match(_LANGONET_ITEM_H, $val, $m)) continue;
 			if (preg_match(',^\w+$,', $occ = $m[2])) continue;
 		}
 		// Un item avec $ est intraduisible.
