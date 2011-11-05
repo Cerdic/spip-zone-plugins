@@ -5,6 +5,7 @@
 	<version>0.2.1</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
+	<slogan>Proposer aux utilisateurs un outil de parrainage.</slogan>
 	<description>Permet d'importer des contacts puis d'envoyer en masse des invitations à rejoindre le site. Si des personnes s'inscrivent, alors un lien est conservé entre eux et celui qui les a invité (le parrain).</description>
 	<icon>images/parrainage-48.png</icon>
 	
@@ -52,6 +53,7 @@
 		<inclure>parrainage_pipelines.php</inclure>
 	</pipeline>
 	
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="spip_bonux" version="[2.2.10;]" />
 	<necessite id="facteur" version="[1.6.1;]" />
 	<necessite id="queue" version="[0.6.2;]" />
