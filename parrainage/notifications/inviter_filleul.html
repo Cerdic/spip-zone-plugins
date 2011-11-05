@@ -1,0 +1,18 @@
+#CACHE{0}
+
+<p><:form_forum_bonjour{nom=#ENV{nom_filleul}}:></p>
+
+<p><:parrainage:invitation_message{nom_parrain=#ENV{nom_parrain},site=#NOM_SITE_SPIP}:></p>
+
+[(#REM) S'il y a un message perso ]
+[<strong><:message:> :</strong>(#ENV{message}|propre)]
+
+<p>
+	<:parrainage:invitation_url:> <br />
+	<a href="#ENV{url_invitation}">#ENV{url_invitation}</a>
+</p>
+
+<p>
+	--- <br />
+	<:envoi_via_le_site:> <a href="#URL_SITE_SPIP">#NOM_SITE_SPIP</a>
+</p>
