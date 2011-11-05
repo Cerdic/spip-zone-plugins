@@ -31,6 +31,12 @@
 	a { color: #e86519; text-decoration: none; }
 -->
 </style>
+[(#REM) Balise permettant aux plugins d'inserer des appels javascript ou css ;
+        C'est ici que SPIP va inserer l'appel de la librairie jQuery
+        Et appeler a la fin compacte_head pour agreger et compacter tout le head dans des fichiers statiques
+        si l'option est cochee dans Configuration
+]
+#INSERT_HEAD
 </head>
 <body onLoad="javascript:if(document.getElementById('le_formulaire')) if(document.getElementById('le_formulaire').textContent=='') document.getElementById('se_deconnecter').style.display='block';">
 [(#REM)
