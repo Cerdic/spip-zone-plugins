@@ -24,7 +24,7 @@ function configuration_faire_markers_behavior_dist()
 	$apiConfigKey = 'gmap_'.$api.'_interface';
 	
 	// Charger ce qui est spécifique à l'implémentation
-	$faire_markers_behavior = charger_fonction("faire_markers_behavior", "mapimpl/".$api."/prive");
+	$faire_markers_behavior = charger_fonction("faire_markers_behavior", "mapimpl/".$api."/prive", true);
 	if ($faire_markers_behavior)
 		$msg = $faire_markers_behavior();
 	

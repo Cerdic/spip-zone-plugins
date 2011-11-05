@@ -226,21 +226,30 @@ function gmap_addKMLMarker(map, item)
 			}
 			else if (name == "gmm:iconShort")
 			{
-				iconCurrent = icon;
 				if (attrs['state'] == "selected")
 					iconCurrent = iconSel;
+				else
+					iconCurrent = icon;
 				if (attrs['type'] == "shadow")
 				{
-					icon['urlShadowFile'] = attrs['url'];
-					icon['widthShadow'] = parseInt(attrs['cxSize']);
-					icon['heightShadow'] = parseInt(attrs['cySize']);
-					iconSel['urlShadowFile'] = attrs['url'];
-					iconSel['widthShadow'] = parseInt(attrs['cxSize']);
-					iconSel['heightShadow'] = parseInt(attrs['cySize']);
+					iconCurrent['urlShadowFile'] = attrs['url'];
+					iconCurrent['widthShadow'] = parseInt(attrs['cxSize']);
+					iconCurrent['heightShadow'] = parseInt(attrs['cySize']);
+					iconCurrent['urlShadowFile'] = attrs['url'];
+					iconCurrent['widthShadow'] = parseInt(attrs['cxSize']);
+					iconCurrent['heightShadow'] = parseInt(attrs['cySize']);
 					iconCurrent['anchorShadowX'] = parseInt(attrs['xAnchor']);
 					iconCurrent['anchorShadowY'] = parseInt(attrs['yAnchor']);
 				}
-				else if (attrs['type'] != "complete")
+				else if (attrs['type'] == "complete")
+				{
+					iconCurrent['urlCompleteFile'] = attrs['url'];
+					iconCurrent['widthComplete'] = parseInt(attrs['cxSize']);
+					iconCurrent['heightComplete'] = parseInt(attrs['cySize']);
+					iconCurrent['anchorCompleteX'] = parseInt(attrs['xAnchor']);
+					iconCurrent['anchorCompleteY'] = parseInt(attrs['yAnchor']);
+				}
+				else
 				{
 					iconCurrent['urlIconFile'] = attrs['url'];
 					iconCurrent['widthIcon'] = parseInt(attrs['cxSize']);
@@ -248,9 +257,12 @@ function gmap_addKMLMarker(map, item)
 					iconCurrent['anchorX'] = parseInt(attrs['xAnchor']);
 					iconCurrent['anchorY'] = parseInt(attrs['yAnchor']);
 				}
-				iconCurrent['popupOffsetX'] = parseInt(attrs['xOffset']);
-				iconCurrent['popupOffsetY'] = parseInt(attrs['yOffset']);
-				iconCurrent = null;
+				if (attrs['xOffset'] && attrs['yOffset'])
+				{
+					iconCurrent['popupOffsetX'] = parseInt(attrs['xOffset']);
+					iconCurrent['popupOffsetY'] = parseInt(attrs['yOffset']);
+				}
+				iconCurrent = null; // C'est le pointeur, on a rempli icon ou iconSel
 			}
 			else if (name == "gmm:image")
 			{

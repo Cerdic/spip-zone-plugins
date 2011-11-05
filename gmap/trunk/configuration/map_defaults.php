@@ -17,6 +17,29 @@ include_spip('inc/gmap_presentation');
 include_spip('inc/gmap_config_utils');
 include_spip('inc/gmap_saisie_utils');
 
+function generic_show_map_defaults(&$uiElements, &$getParams)
+{
+	$uiElements = '';
+	$getParams = '
+// Lire les paramètres de la carte dans les éléments de formulaire
+function getParams(bIncludeViewport)
+{
+	var params = new Object();
+	
+	// Position par défaut
+	if (bIncludeViewport)
+	{
+		params["viewLatitude"] = parseFloat(jQuery("#map_center_latitude").val());
+		params["viewLongitude"] = parseFloat(jQuery("#map_center_longitude").val());
+		params["viewZoom"] = parseFloat(jQuery("#map_zoom").val());
+	}
+	
+	return params;
+}
+';
+	return true;
+}
+
 function configuration_map_defaults_dist()
 {
 	$corps = "";
@@ -29,11 +52,11 @@ function configuration_map_defaults_dist()
 	$apiConfigKey = 'gmap_'.$api.'_interface';
 	
 	// Charger ce qui est spécifique à l'implémentation
-	$show_map_defaults = charger_fonction("show_map_defaults", "mapimpl/".$api."/prive");
+	$show_map_defaults = charger_fonction("show_map_defaults", "mapimpl/".$api."/prive", true);
 	$uiElements = '';
 	$getParams = '';
-	if (!$show_map_defaults($uiElements, $getParams))
-		return '';
+	if (!$show_map_defaults || !$show_map_defaults($uiElements, $getParams))
+		generic_show_map_defaults($uiElements, $getParams);
 
 	// Récupération des infos sur le centre
 	$isMarker = gmap_config_existe($apiConfigKey, 'default_latitude') && gmap_config_existe($apiConfigKey, 'default_longitude') && gmap_config_existe($apiConfigKey, 'default_zoom');
@@ -108,12 +131,15 @@ function setAddress(mapId, latitude, longitude, zoom)
 		</table>
 		<p id="marker-warning"></p>
 		<br class="nettoyeur" />
-	</div>
-	<div class="sub-fieldset">
-		<p class="label">'._T('gmap:geocoder_label').'</p>' . "\n";
-	$corps .= gmap_sous_bloc_geocoder("CarteConfig", "setAddress", false);
-	$corps .= '	</div>
-</div></div>
+	</div>' . "\n";
+	if (gmap_capability('GeoCoder'))
+	{
+		$corps .= '	<div class="sub-fieldset">
+			<p class="label">'._T('gmap:geocoder_label').'</p>' . "\n";
+		$corps .= gmap_sous_bloc_geocoder("CarteConfig", "setAddress", false);
+		$corps .= '	</div>' . "\n";
+	}
+	$corps .= '</div></div>
 </fieldset>' . "\n";
 
 	// Script de gestion de la mise à jour manuelle du marqueur
@@ -154,10 +180,6 @@ jQuery(document).ready(function() {
 	$corps .= '<script type="text/javascript">'."\n".'//<![CDATA['."\n";
 	$corps .= $getParams;
 	$corps .= '
-// Il y a une erreur "undefined" sous IE8, le hack ci-dssous semble règler
-// le problème...
-var IE8NamespaceHack = document.namespaces;
-
 // Chargement de la carte et mise en place des gestionnaire d\'évènement
 function loadCarteConfig(mapId, divId)
 {
@@ -186,7 +208,9 @@ function loadCarteConfig(mapId, divId)
 	{
 		$corps .= '
 	// Création du marqueur
-	updateMarker(mapId, '.$latitude.', '.$longitude.');
+	updateMarker(mapId, '.$latitude.', '.$longitude.');';
+	if (gmap_capability('dragmarkers'))
+	$corps .= '
 	
 	// Mise en place sur le listener de drop du marqueur
 	map.addListener("drop-marker", function(event, id, latitude, longitude)
@@ -244,7 +268,5 @@ jQuery(document).unload(function()
 		find_in_path('images/logo-config-map_defaults.png'),
 		_T('gmap:configuration_defaults'));
 }
-
-
 
 ?>

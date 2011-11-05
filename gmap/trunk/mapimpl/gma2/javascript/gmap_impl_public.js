@@ -598,7 +598,7 @@ MapWrapper.prototype =
 	},
 
 	// Fonctions de conversion entre lat/lng et pixel
-	fromLatLngToPixel: function(latlng)
+	_fromLatLngToPixel: function(latlng)
 	{
 		var mapType = isObject(this.map) ? this.map.getCurrentMapType() : null;
 		var proj = isObject(mapType) ? mapType.getProjection() : null;
@@ -607,7 +607,7 @@ MapWrapper.prototype =
 		else
 			return new GPoint(0, 0);
 	},
-	fromPixelToLatLng: function(point)
+	_fromPixelToLatLng: function(point)
 	{
 		var mapType = isObject(this.map) ? this.map.getCurrentMapType() : null;
 		var proj = isObject(mapType) ? mapType.getProjection() : null;
@@ -966,15 +966,15 @@ MapWrapper.prototype =
 	_getMarkerAttraction: function(marker)
 	{
 		var mapPosition = marker.getLatLng();
-		var pixPosition = this.fromLatLngToPixel(mapPosition);
+		var pixPosition = this._fromLatLngToPixel(mapPosition);
 		var pixUpLeft = new GPoint(
 			pixPosition.x - marker.extraData.infoWindowAttractionSize.width,
 			pixPosition.y - marker.extraData.infoWindowAttractionSize.height);
-		var mapUpLeft = this.fromPixelToLatLng(pixUpLeft);
+		var mapUpLeft = this._fromPixelToLatLng(pixUpLeft);
 		var pixBottomRight = new GPoint(
 			pixPosition.x + marker.extraData.infoWindowAttractionSize.width,
 			pixPosition.y + marker.extraData.infoWindowAttractionSize.height);
-		var mapBottomRight = this.fromPixelToLatLng(pixBottomRight);
+		var mapBottomRight = this._fromPixelToLatLng(pixBottomRight);
 		return new GLatLngBounds(
 			new GLatLng(mapBottomRight.lat(), mapUpLeft.lng()),
 			new GLatLng(mapUpLeft.lat(), mapBottomRight.lng()));
@@ -1255,8 +1255,8 @@ MapWrapper.prototype =
 		// Le supprimer
 		this.map.removeOverlay(layer);
 		this.layers[id] = null;
-		delete marker;
-		delete this.markers[id];
+		delete layer;
+		delete this.layers[id];
 		
 		return true;
 	},

@@ -106,7 +106,7 @@ function exec_configurer_gmap_ui_dist($class = null)
 		echo $map_defaults();
 	
 	// Paramétrage du comportement des marqueurs : info-bulles, regroupements...
-	$markers_behavior = charger_fonction('markers_behavior', 'configuration');
+	$markers_behavior = charger_fonction('markers_behavior', 'configuration', true);
 	if ($markers_behavior)
 		echo $markers_behavior();
 	

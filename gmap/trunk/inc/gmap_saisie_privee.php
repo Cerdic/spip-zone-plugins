@@ -30,7 +30,7 @@ function gmap_saisie_privee($id, $table, $exec, $deplie = 0)
 		return $flux;
 	
 	// Modification de la géolocalisation
-	$formulaire = charger_fonction('geolocaliser', 'formulaires');
+	$formulaire = charger_fonction('geolocaliser', 'formulaires', true);
 	if ($formulaire)
 		$flux .= $formulaire($id, $table, $exec, $deplie);
 	

@@ -24,8 +24,9 @@ function configuration_faire_map_defaults_dist()
 	$apiConfigKey = 'gmap_'.$api.'_interface';
 	
 	// Charger ce qui est spécifique à l'implémentation
-	$faire_map_defaults = charger_fonction("faire_map_defaults", "mapimpl/".$api."/prive");
-	$msg = $faire_map_defaults();
+	$faire_map_defaults = charger_fonction("faire_map_defaults", "mapimpl/".$api."/prive", true);
+	if ($faire_map_defaults)
+		$msg = $faire_map_defaults();
 	
 	// Position par défaut
 	gmap_ecrire_config($apiConfigKey, 'default_latitude', _request('map_center_latitude'));

@@ -497,8 +497,8 @@ MapWrapper.prototype =
 	
 	// Ajout des listeners
 	// click-on-map = clic souris sur la carte -> function(event, latlng)
-	// clic-on-point = clic sur un marqueur
-	// drag-point = déplacement d'un marqueur -> function(event, zoom)
+	// clic-on-marker = clic sur un marqueur
+	// drag-marker = déplacement d'un marqueur -> function(event, zoom)
 	addListener: function(event, listener)
 	{
 		if (!isObject(this.map))
@@ -715,7 +715,7 @@ MapWrapper.prototype =
 	},
 	
 	// Fonctions de conversion entre lat/lng et pixel
-	fromLatLngToPixel: function(latlng)
+	_fromLatLngToPixel: function(latlng)
 	{
 		var proj = isObject(this.fakeOverlay) ? this.fakeOverlay.getProjection() : null;
 		if (isObject(proj))
@@ -739,7 +739,7 @@ MapWrapper.prototype =
 				return new google.maps.Point(0,0);
 		}
 	},
-	fromPixelToLatLng: function(point)
+	_fromPixelToLatLng: function(point)
 	{
 		var proj = isObject(this.fakeOverlay) ? this.fakeOverlay.getProjection() : null;
 		if (isObject(proj))
@@ -963,7 +963,7 @@ MapWrapper.prototype =
 		return markerOptions;
 	},
 	
-	// Mise à jour des handlers d'évèements
+	// Mise à jour des handlers d'évènements
 	_updateEventHandlers: function(marker, params)
 	{
 		var objThis = this;
@@ -1139,15 +1139,15 @@ MapWrapper.prototype =
 	_getMarkerAttraction: function(marker)
 	{
 		var mapPosition = marker.getPosition();
-		var pixPosition = this.fromLatLngToPixel(mapPosition);
+		var pixPosition = this._fromLatLngToPixel(mapPosition);
 		var pixUpLeft = new google.maps.Point(
 			pixPosition.x - marker.extraData.infoWindowAttractionSize.width,
 			pixPosition.y - marker.extraData.infoWindowAttractionSize.height);
-		var mapUpLeft = this.fromPixelToLatLng(pixUpLeft);
+		var mapUpLeft = this._fromPixelToLatLng(pixUpLeft);
 		var pixBottomRight = new google.maps.Point(
 			pixPosition.x + marker.extraData.infoWindowAttractionSize.width,
 			pixPosition.y + marker.extraData.infoWindowAttractionSize.height);
-		var mapBottomRight = this.fromPixelToLatLng(pixBottomRight);
+		var mapBottomRight = this._fromPixelToLatLng(pixBottomRight);
 		return new google.maps.LatLngBounds(
 			new google.maps.LatLng(mapBottomRight.lat(), mapUpLeft.lng()),
 			new google.maps.LatLng(mapUpLeft.lat(), mapBottomRight.lng()));
@@ -1392,8 +1392,8 @@ MapWrapper.prototype =
 		// Le supprimer
 		layer.setMap(null);
 		this.layers[id] = null;
-		delete marker;
-		delete this.markers[id];
+		delete layer;
+		delete this.layers[id];
 		
 		return true;
 	},

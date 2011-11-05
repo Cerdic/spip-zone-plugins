@@ -139,49 +139,92 @@ function gmap_definir_parametre_carte($objet, $id_objet, $varName = NULL, $param
 }
 
 // Définition des paramètres d'une icone
-function gmap_definir_parametre_icon($iconFile, $shadowFile = NULL,
-				$xAnchor = NULL, $yAnchor = NULL, $xShadowAnchor = NULL, $yShadowAnchor = NULL,
-				$xOffset = NULL, $yOffset = NULL,
-				$varName = NULL)
+// Usage :
+// gmap_definir_parametre_icon(array('file'=>, 'width'=>, 'height'=>, 'xAnchor'=>, 'yAnchor'=>, 'shadowFile'=>, 'widthShadow'=>, 'heightShadow'=>, 'xShadowAnchor'=>, 'yShadowAnchor'=>, 'xOffset'=>, 'yOffset'=>),
+//	array('file'=>, 'width'=>, 'height'=>, 'xAnchor'=>, 'yAnchor'=>), $varName = null)
+function gmap_definir_parametre_icon($icon, $complete = null, $varName = null)
 {
-	if ($shadowFile == NULL)
-		$shadowFile = _DIR_PLUGIN_GMAP . 'images/shadow.png';
-		
-	$imageInfo = @getimagesize($iconFile);
-	$iconWidth = $imageInfo[0] ? $imageInfo[0] : 32;
-	$iconHeight = $imageInfo[1] ? $imageInfo[1] : 32;
-	$imageInfo = @getimagesize($shadowFile);
-	$shadowWidth = $imageInfo[0] ? $imageInfo[0] : 32;
-	$shadowHeight = $imageInfo[1] ? $imageInfo[1] : 32;
+	// Récupérer la taille de l'image
+	if ((!isset($icon['width']) || ($icon['width'] <= 0)) ||
+		(!isset($icon['height']) || ($icon['height'] <= 0)))
+	{
+		$imageInfo = @getimagesize($icon['file']);
+		$icon['width'] = $imageInfo[0] ? $imageInfo[0] : 32;
+		$icon['height'] = $imageInfo[1] ? $imageInfo[1] : 32;
+	}
+	
+	// Si l'ombre n'est pas précisée, on suppose que c'est l'image par défaut
+	if (!$icon['shadowFile'])
+		$icon['shadowFile'] = _DIR_PLUGIN_GMAP . 'images/shadow.png';
+	// Récupérer la taille de l'ombre
+	if ((!isset($icon['widthShadow']) || ($icon['widthShadow'] <= 0)) ||
+		(!isset($icon['heightShadow']) || ($icon['heightShadow'] <= 0)))
+	{
+		$imageInfo = @getimagesize($icon['shadowFile']);
+		$icon['widthShadow'] = $imageInfo[0] ? $imageInfo[0] : 32;
+		$icon['heightShadow'] = $imageInfo[1] ? $imageInfo[1] : 32;
+	}
 
+	// Sortie
 	$out = "";
 	if ($varName)
 		$out .= 'var '.$varName.' = ';	
-	$out .= '{
-		urlIconFile: "'.$iconFile.'",
-		urlShadowFile: "'.$shadowFile.'",
-		widthIcon: '.$iconWidth.',
-		heightIcon: '.$iconHeight.',
-		widthShadow: '.$shadowWidth.',
-		heightShadow: '.$shadowHeight.',';
-	if ($xAnchor != NULL)
+	$out .= '{';
+	
+	// Icone normale
+	$out .= '
+		urlIconFile: "'.$icon['file'].'",
+		widthIcon: '.$icon['width'].',
+		heightIcon: '.$icon['height'].',';
+	if ($icon['xAnchor'] != null)
 		$out .= '
-		anchorX: '.$xAnchor.',';
-	if ($yAnchor != NULL)
+		anchorX: '.$icon['xAnchor'].',';
+	if ($icon['yAnchor'] != null)
 		$out .= '
-		anchorY: '.$yAnchor.',';
-	if ($xShadowAnchor != NULL)
+		anchorY: '.$icon['yAnchor'].',';
+
+	// Ombre
+	$out .= '
+		urlShadowFile: "'.$icon['shadowFile'].'",
+		widthShadow: '.$icon['widthShadow'].',
+		heightShadow: '.$icon['heightShadow'].',';
+	if ($icon['xShadowAnchor'] != null)
 		$out .= '
-		anchorShadowX: '.$xShadowAnchor.',';
-	if ($yShadowAnchor != NULL)
+		anchorShadowX: '.$icon['xShadowAnchor'].',';
+	if ($icon['yShadowAnchor'] != null)
 		$out .= '
-		anchorShadowY: '.$yShadowAnchor.',';
-	if ($xOffset != NULL)
+		anchorShadowY: '.$icon['yShadowAnchor'].',';
+		
+	// Image complete, avec l'ombre	
+	if ($complete != null)
+	{
+		if ((!isset($complete['width']) || ($complete['width'] <= 0)) ||
+			(!isset($complete['height']) || ($complete['height'] <= 0)))
+		{
+			$imageInfo = @getimagesize($complete['file']);
+			$complete['width'] = $imageInfo[0] ? $imageInfo[0] : 32;
+			$complete['height'] = $imageInfo[1] ? $imageInfo[1] : 32;
+		}
 		$out .= '
-		popupOffsetX: '.$xOffset.',';
-	if ($yOffset != NULL)
+		urlCompleteFile: "'.$complete['file'].'",
+		widthComplete: '.$complete['width'].',
+		heightComplete: '.$complete['height'].',';
+		if ($complete['xAnchor'] != null)
+			$out .= '
+		anchorCompleteX: '.$complete['xAnchor'].',';
+		if ($complete['yAnchor'] != null)
+			$out .= '
+		anchorCompleteY: '.$complete['yAnchor'].',';
+	}
+	
+	// Offset pour l'info bulle (un seul, sur l'icone normale)
+	if ($icon['xOffset'] != null)
 		$out .= '
-		popupOffsetY: '.$yOffset.',';
+		popupOffsetX: '.$icon['xOffset'].',';
+	if ($icon['yOffset'] != null)
+		$out .= '
+		popupOffsetY: '.$icon['yOffset'].',';
+		
 	$out .= '
 	}';
 	if ($varName)
@@ -498,25 +541,7 @@ function gmap_parse_icone_def_file($file)
 }
 
 // Fonctions permettant de récupérer l'info d'une liste d'icones
-function gmap_get_icon($icons, $bSelected)
-{
-	$iconExact = null;
-	$iconComplete = null;
-	foreach ($icons as $icon)
-	{
-		if (isset($icon['state']) && ((($icon['state'] === "selected") ? TRUE : FALSE) !== $bSelected))
-			continue;
-		if (!isset($icon['type']) || ($icon['type'] === "simple"))
-			$iconExact = $icon;
-		else if (isset($icon['type']) && ($icon['type'] === "complete"))
-			$iconComplete = $icon;
-	}
-	if ($iconExact)
-		return $iconExact;
-	else
-		return $iconComplete;
-}
-function gmap_get_icon_full($icons, $bSelected)
+function gmap_get_icon($icons, $bSelected = FALSE, $bComplete = FALSE)
 {
 	if (!$icons)
 		return null;
@@ -538,16 +563,34 @@ function gmap_get_icon_full($icons, $bSelected)
 				$iconComplete = $icon;
 		}
 	}
-	if ($iconSimple)
-		return array(find_in_path($iconSimple['image']), $iconShadow ? find_in_path($iconShadow['image']) : "",
-						$iconSimple['xAnchor'], $iconSimple['yAnchor'], $iconSimple['xShadowAnchor'], $iconSimple['yShadowAnchor'],
-						$iconSimple['xOffset'], $iconSimple['yOffset']);
-	else if ($iconComplete)
-		return array(find_in_path($iconComplete['image']), "",
-						$iconComplete['xAnchor'], $iconComplete['yAnchor'], $iconComplete['xShadowAnchor'], $iconComplete['yShadowAnchor'],
-						$iconComplete['xOffset'], $iconComplete['yOffset']);
+	if ($bComplete === TRUE)
+	{
+		if ($iconComplete)
+			return array('file'=>find_in_path($iconComplete['image']),
+							'width'=>$iconComplete['cxSize'], 'height'=>$iconComplete['cySize'],
+							'xAnchor'=>$iconComplete['xAnchor'], 'yAnchor'=>$iconComplete['yAnchor']);
+		else if ($iconSimple)
+			return array('file'=>find_in_path($iconSimple['image']),
+							'width'=>$iconSimple['cxSize'], 'height'=>$iconSimple['cySize'],
+							'xAnchor'=>$iconSimple['xAnchor'], 'yAnchor'=>$iconSimple['yAnchor']);
+		else
+			return null;
+	}
 	else
-		return null;
+	{
+		if ($iconSimple && $iconShadow)
+			return array('file'=>find_in_path($iconSimple['image']), 'width'=>$iconSimple['cxSize'], 'height'=>$iconSimple['cySize'], 'xAnchor'=>$iconSimple['xAnchor'], 'yAnchor'=>$iconSimple['yAnchor'],
+						'shadowFile'=>($iconShadow ? find_in_path($iconShadow['image']) : ""), 'widthShadow'=>$iconShadow['cxSize'], 'heightShadow'=>$iconShadow['cySize'], 'xShadowAnchor'=>$iconShadow['xAnchor'], 'yShadowAnchor'=>$iconShadow['yAnchor'],
+						'xOffset'=>$iconSimple['xOffset'], 'yOffset'=>$iconSimple['yOffset']);
+		else if ($iconComplete)
+			return array('file'=>find_in_path($iconComplete['image']), 'xAnchor'=>$iconComplete['xAnchor'], 'yAnchor'=>$iconComplete['yAnchor'],
+						'xOffset'=>$iconComplete['xOffset'], 'yOffset'=>$iconComplete['yOffset']);
+		else if ($iconSimple)
+			return array('file'=>find_in_path($iconSimple['image']), 'width'=>$iconSimple['cxSize'], 'height'=>$iconSimple['cySize'], 'xAnchor'=>$iconSimple['xAnchor'], 'yAnchor'=>$iconSimple['yAnchor'],
+						'xOffset'=>$iconSimple['xOffset'], 'yOffset'=>$iconSimple['yOffset']);
+		else
+			return null;
+	}
 }
 
 // Récupérer tous les paramètres d'une icone et la créer
@@ -555,18 +598,26 @@ function gmap_ajoute_icone($name, $defFile, $map)
 {
 	// Récupérer la définition de l'icone
 	$icons = gmap_parse_icone_def_file($defFile);
-	$icon = gmap_get_icon_full($icons, FALSE);
-	$selected = gmap_get_icon_full($icons, TRUE);
+	$icon = gmap_get_icon($icons, FALSE, FALSE);
+	$selected = gmap_get_icon($icons, TRUE, FALSE);
 	if (!$icon)
 		return "";
-	
+
+	// Ajout des icones complètes
+	$complete = gmap_get_icon($icons, FALSE, TRUE);
+	$completeSelected = gmap_get_icon($icons, TRUE, TRUE);
+	if (!$complete)
+		$complete = array(0=>NULL, NULL, NULL);
+	if (!$completeSelected)
+		$completeSelected = $complete;
+		
 	// Créer les icones
 	$cmd = "";
-	$cmd .= '	'.$map.'.setIcon("'.$name.'", '.gmap_definir_parametre_icon($icon[0], $icon[1], $icon[2], $icon[3], $icon[4], $icon[5], $icon[6], $icon[7]).');' . "\n";
+	$cmd .= '	'.$map.'.setIcon("'.$name.'", '.gmap_definir_parametre_icon($icon, $complete).');' . "\n";
 	if ($selected)
-		$cmd .= '	'.$map.'.setIcon("'.$name.'_sel", '.gmap_definir_parametre_icon($selected[0], $selected[1], $selected[2], $selected[3], $selected[4], $selected[5], $selected[6], $selected[7]).');' . "\n";
+		$cmd .= '	'.$map.'.setIcon("'.$name.'_sel", '.gmap_definir_parametre_icon($selected, $completeSelected).');' . "\n";
 	else
-		$cmd .= '	'.$map.'.setIcon("'.$name.'_sel", '.gmap_definir_parametre_icon($icon[0], $icon[1], $icon[2], $icon[3], $icon[4], $icon[5], $icon[6], $icon[7]).');' . "\n";
+		$cmd .= '	'.$map.'.setIcon("'.$name.'_sel", '.gmap_definir_parametre_icon($icon, $completeSelected).');' . "\n";
 	
 	return $cmd;
 }
@@ -736,8 +787,8 @@ function loadCartePublic'.$mapId.'()
 	var waitBlock = \'<div id="gmap_attente'.$mapId.'" class="map_wait_mask" style="width: 100%; height: \'+height+\'px;"><span class="map_wait_logo" style="width: 100%; height: 100%;"></span></div>\';
 	jQuery("#gmap_cont'.$mapId.'").after(waitBlock); 
 	var bWaitToBeDeleted = true;
-
-	// Récupérer de la carte
+	
+	// Récupérer la carte
 	var map = MapWrapper.getMap("gmap_map'.$mapId.'", true);
 	if (!isObject(map))
 		return false;
@@ -753,7 +804,11 @@ function loadCartePublic'.$mapId.'()
 	$map .= '
 	mapParams'.$mapId.'.handleResize = true;
 	if (!map.load("gmap_cont'.$mapId.'", mapParams'.$mapId.'))
+	{
+		if (bWaitToBeDeleted)
+			jQuery("#gmap_attente'.$mapId.'").remove();
 		return false;
+	}
 ';
 
 	// Ajout du chargement des marqueurs
@@ -952,12 +1007,7 @@ jQuery(document).ready(function()
 // Test des capacités d'une implémentation de carte
 function gmap_teste_capability($capability)
 {
-	// Spécificités de l'API
-	$api = gmap_lire_config('gmap_api', 'api', 'gma3');
-	$capabilities = charger_fonction("capabilities", "mapimpl/".$api."/public");
-	
-	// Renvoyer le test
-	return $capabilities($capability);
+	return gmap_capability($capability);
 }
 
 ?>

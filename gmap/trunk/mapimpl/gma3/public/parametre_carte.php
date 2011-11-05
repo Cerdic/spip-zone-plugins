@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/gmap_config_utils');
 
-// Enregistrement des paramètres passés dans la requête
+// Paramétrage de la carte selon ce qui est défini dans la partie privée
 function mapimpl_gma3_public_parametre_carte_dist($viewport, $params)
 {
 	// Construction d'un tableau des vues autorisées

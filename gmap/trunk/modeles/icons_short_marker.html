@@ -6,10 +6,9 @@
 	
 ]<B_icons>
 <[(#ENV{prefix}):]markers[ id="(#ENV{name})"]>
-<BOUCLE_icons(POUR){tableau #ENV{icons}}>[
-(#VALEUR|table_valeur{type}|!={complete}|?{" ",""})
+<BOUCLE_icons(POUR){tableau #ENV{icons}}>
 	<[(#ENV{prefix}):]iconShort[ type="(#VALEUR|table_valeur{type})"][ state="(#VALEUR|table_valeur{state})"][ url="(#URL_FICHIER{#VALEUR|table_valeur{image}}|url_absolue)"][ cxSize="(#VALEUR|table_valeur{cxSize})"][ cySize="(#VALEUR|table_valeur{cySize})"][ xAnchor="(#VALEUR|table_valeur{xAnchor})"][ yAnchor="(#VALEUR|table_valeur{yAnchor})"][ xOffset="(#VALEUR|table_valeur{xOffset})"][ yOffset="(#VALEUR|table_valeur{yOffset})"] />
-]</BOUCLE_icons>
+</BOUCLE_icons>
 </[(#ENV{prefix}):]markers>
 </B_icons>
 <[(#ENV{prefix}):]markers[ ref="(#ENV{name})"] />

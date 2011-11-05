@@ -26,8 +26,9 @@ function configuration_init_map_defaults_dist()
 		$apiConfigKey = 'gmap_'.$api.'_interface';
 		
 		// Charger ce qui est spécifique à l'implémentation
-		$init_map_defaults = charger_fonction("init_map_defaults", "mapimpl/".$api."/prive");
-		$init_map_defaults();
+		$init_map_defaults = charger_fonction("init_map_defaults", "mapimpl/".$api."/prive", true);
+		if ($init_map_defaults)
+			$init_map_defaults();
 		
 		// Position par défaut
 		gmap_init_config($apiConfigKey, 'default_latitude', "0.0");

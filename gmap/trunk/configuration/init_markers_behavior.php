@@ -26,7 +26,7 @@ function configuration_init_markers_behavior_dist()
 		$apiConfigKey = 'gmap_'.$api.'_interface';
 		
 		// Charger ce qui est spécifique à l'implémentation
-		$init_markers_behavior = charger_fonction("init_markers_behavior", "mapimpl/".$api."/prive");
+		$init_markers_behavior = charger_fonction("init_markers_behavior", "mapimpl/".$api."/prive", true);
 		if ($init_markers_behavior)
 			$init_markers_behavior();
 	}

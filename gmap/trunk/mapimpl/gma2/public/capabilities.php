@@ -15,14 +15,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS['gma2_capabilities'] = array(
 		"markers",
-		"LayerKML",
-		"LayerAuto",
+		"infowindows",
+		"layerkml",
+		"layerauto",
+		"layeractions",
+		"geocoder",
+		"dragmarkers",
+		"dblclick",
 	);
 
 // Enregistrement des paramètres passés dans la requête
 function mapimpl_gma2_public_capabilities_dist($capability)
 {
-	return in_array($capability, $GLOBALS['gma2_capabilities']);
+	return in_array(strtolower($capability), $GLOBALS['gma2_capabilities']);
 }
 
 ?>

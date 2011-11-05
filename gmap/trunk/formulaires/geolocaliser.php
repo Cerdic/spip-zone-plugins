@@ -33,15 +33,19 @@ function gmap_ajoute_carte_edit($parts, $table, $id, $mapId, $divId)
 // Créer les icones pour la partie privée
 '.$mapId.'.createIcons = function(map)
 {
-	map.setIcon("editMarker", '.gmap_definir_parametre_icon(_DIR_PLUGIN_GMAP . 'images/priveEdit.png', NULL, 11, 32, NULL, NULL, 11, 10).');
-	map.setIcon("activeMarker", '.gmap_definir_parametre_icon(_DIR_PLUGIN_GMAP . 'images/priveActive.png', NULL, 11, 32, NULL, NULL, 11, 10).');
-	map.setIcon("siblingMarker", '.gmap_definir_parametre_icon(_DIR_PLUGIN_GMAP . 'images/priveSibling.png', NULL, 11, 32, NULL, NULL, 11, 10).');
-	map.setIcon("activeSiblingMarker", '.gmap_definir_parametre_icon(_DIR_PLUGIN_GMAP . 'images/priveSiblingActive.png', NULL, 11, 32, NULL, NULL, 11, 10).');
+	map.setIcon("editMarker", '.
+		gmap_definir_parametre_icon(array('file'=>_DIR_PLUGIN_GMAP . 'images/priveEdit.png', 'xAnchor'=>11, 'yAnchor'=>32, 'xOffset'=>11, 'yOffset'=>10),
+									array('file'=>_DIR_PLUGIN_GMAP . 'images/priveEdit-full.png', 'xAnchor'=>11, 'yAnchor'=>32)).');
+	map.setIcon("activeMarker", '.
+		gmap_definir_parametre_icon(array('file'=>_DIR_PLUGIN_GMAP . 'images/priveActive.png', 'xAnchor'=>11, 'yAnchor'=>32, 'xOffset'=>11, 'yOffset'=>10),
+									array('file'=>_DIR_PLUGIN_GMAP . 'images/priveActive-full.png', 'xAnchor'=>11, 'yAnchor'=>32)).');
+	map.setIcon("siblingMarker", '.
+		gmap_definir_parametre_icon(array('file'=>_DIR_PLUGIN_GMAP . 'images/priveSibling.png', 'xAnchor'=>11, 'yAnchor'=>32, 'xOffset'=>11, 'yOffset'=>10),
+									array('file'=>_DIR_PLUGIN_GMAP . 'images/priveSibling-full.png', 'xAnchor'=>11, 'yAnchor'=>32)).');
+	map.setIcon("activeSiblingMarker", '.
+		gmap_definir_parametre_icon(array('file'=>_DIR_PLUGIN_GMAP . 'images/priveSiblingActive.png', 'xAnchor'=>11, 'yAnchor'=>32, 'xOffset'=>11, 'yOffset'=>10),
+									array('file'=>_DIR_PLUGIN_GMAP . 'images/priveSiblingActive-full.png', 'xAnchor'=>11, 'yAnchor'=>32)).');
 };
-
-// Il y a une erreur "undefined" sous IE8, le hack ci-dssous semble règler
-// le problème...
-'.$mapId.'.IE8NamespaceHack = document.namespaces;
 
 // Chargement de la carte et mise en place des gestionnaire d\'évènement
 '.$mapId.'.load = function(mapId, divId, mapParams)
@@ -355,7 +359,9 @@ function gmap_ajoute_liste_marqueurs_edit($parts, $table, $id, $mapId, $divId)
 				if (isObject(row))
 					row.setMarkerZoom(zoom);
 			}
-		});
+		});';
+	if (gmap_capability('dragmarkers'))
+		$parts['script'] .= '
 		map.addListener("drop-marker", function(event, id, latitude, longitude)
 		{
 			var row = bloc.getMarkerRow(id);
@@ -364,7 +370,8 @@ function gmap_ajoute_liste_marqueurs_edit($parts, $table, $id, $mapId, $divId)
 				row.setMarkerPosition(latitude, longitude);
 				'.$mapId.'.updateMarker(row, map, true);
 			}
-		});
+		});';
+	$parts['script'] .= '
 	});
 };';
 	
@@ -711,7 +718,8 @@ function formulaires_geolocaliser_dist($id = NULL, $table = NULL, $exec = NULL, 
 		$parts = gmap_ajoute_siblings_copy($parts, $table, $id, $mapId, $divId);
 	
 	// Recherche par géocoder
-	$parts = gmap_ajoute_geocoder($parts, $mapId);
+	if (gmap_capability('geocoder'))
+		$parts = gmap_ajoute_geocoder($parts, $mapId);
 	
 	// Liste des marqueurs de l'objet
 	$parts = gmap_ajoute_liste_marqueurs_edit($parts, $table, $id, $mapId, $divId);

@@ -29,7 +29,7 @@ function configuration_markers_behavior_dist()
 	$apiConfigKey = 'gmap_'.$api.'_interface';
 	
 	// Charger ce qui est spécifique à l'implémentation
-	$show_markers_behavior = charger_fonction("show_markers_behavior", "mapimpl/".$api."/prive");
+	$show_markers_behavior = charger_fonction("show_markers_behavior", "mapimpl/".$api."/prive", true);
 	$code = "";
 	if ($show_markers_behavior)
 		$code .= $show_markers_behavior();

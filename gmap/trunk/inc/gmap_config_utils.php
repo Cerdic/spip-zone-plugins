@@ -22,7 +22,20 @@ function gmap_apis_connues()
 		'gma3' => array( 'name' => _T('gmap:gis_api_google_maps_3'), 'explic' => _T('gmap:gis_api_google_maps_3_desc')) );
 	return pipeline('gmap_implementations', $apis);
 }
- 
+
+// Test des capacités d'une implémentation de carte
+function gmap_capability($capability)
+{
+	// Spécificités de l'API
+	$api = gmap_lire_config('gmap_api', 'api', 'gma3');
+	$capabilities = charger_fonction("capabilities", "mapimpl/".$api."/public", true);
+	if (!$capabilities)
+		return false;
+	
+	// Renvoyer le test
+	return $capabilities($capability);
+}
+
 // Vérifier qu'une valeur est définie
 function gmap_config_existe($bloc, $nom)
 {

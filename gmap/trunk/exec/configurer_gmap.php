@@ -204,22 +204,22 @@ function exec_configurer_gmap_dist($class = null)
 	
 	// Selon l'API, autre paramétrages
 	// Cette partie n'est pas en ajax, parce que les autres paramètres en dépendent
-	$api_conf = charger_fonction('api', 'configuration');
+	$api_conf = charger_fonction('api', 'configuration', true);
 	if ($api_conf)
 		echo $api_conf();
 
 	// Configuration des rubriques géolocalisables
-	$rubgeo = charger_fonction('rubgeo', 'configuration');
+	$rubgeo = charger_fonction('rubgeo', 'configuration', true);
 	if ($rubgeo)
 		echo $rubgeo();
 
 	// configuration des types de marqueurs et de leurs icônes
-	$markers = charger_fonction('markers', 'configuration');
+	$markers = charger_fonction('markers', 'configuration', true);
 	if ($markers)
 		echo $markers();
 	
 	// Configuration des rubriques géolocalisables
-	$eparams = charger_fonction('editparams', 'configuration');
+	$eparams = charger_fonction('editparams', 'configuration', true);
 	if ($eparams)
 		echo $eparams();
 

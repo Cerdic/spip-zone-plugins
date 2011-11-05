@@ -60,8 +60,19 @@ function inc_gmap_script_init_dist()
 	$out .= '
 	SiteInfo.defaultShadow = "' . $imageFile . '";
 	SiteInfo.defaultShadowWidth = '.$imageWidth.';
-	SiteInfo.defaultShadowHeight = '.$imageHeight.';'."\n";
-	$out .= '//]]>'."\n".'</script>'."\n";
+	SiteInfo.defaultShadowHeight = '.$imageHeight.';';
+	$imageFile = _DIR_PLUGIN_GMAP . "images/marker-full.png";
+	$imageInfo = @getimagesize($imageFile);
+	$imageWidth = $imageInfo[0] ? $imageInfo[0] : 32;
+	$imageHeight = $imageInfo[1] ? $imageInfo[1] : 32;
+	$out .= '
+	SiteInfo.defaultCompleteIcon = "' . $imageFile . '";
+	SiteInfo.defaultCompleteWidth = '.$imageWidth.';
+	SiteInfo.defaultCompleteHeight = '.$imageHeight.';';
+	$out .= '
+// Il y a une erreur "undefined" sous IE, pour GoogleMaps et Yahoo, faire un appel précoce à document.namespaces semble règler le problème...
+var IE8NamespaceHack = document.namespaces;';
+	$out .= "\n".'//]]>'."\n".'</script>'."\n";
 
 	return $out;
 }

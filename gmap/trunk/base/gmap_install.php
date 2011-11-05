@@ -25,20 +25,20 @@ function gmap_initialize_configuration()
 	gmap_init_config('gmap_api', 'api', 'gma3');
 		
 	// Initialiser le paramétrage par défaut de l'API
-	$iniAPI = charger_fonction('init_api', 'configuration');
+	$iniAPI = charger_fonction('init_api', 'configuration', true);
 	if ($iniAPI)
 		$iniAPI();
 	
 	// Initialiser les zones autorisées
-	$iniRUB = charger_fonction('init_rubgeo', 'configuration');
+	$iniRUB = charger_fonction('init_rubgeo', 'configuration', true);
 	if ($iniRUB)
 		$iniRUB();
 		
 	// Initialiser l'interface dans toutes les APIs
-	$iniUI = charger_fonction('init_map_defaults', 'configuration');
+	$iniUI = charger_fonction('init_map_defaults', 'configuration', true);
 	if ($iniUI)
 		$iniUI();
-	$iniMarkersUI = charger_fonction('init_markers_behavior', 'configuration');
+	$iniMarkersUI = charger_fonction('init_markers_behavior', 'configuration', true);
 	if ($iniMarkersUI)
 		$iniMarkersUI();
 }

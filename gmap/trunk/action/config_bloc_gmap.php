@@ -21,7 +21,7 @@ function action_config_bloc_gmap_dist()
 	$arg = $securiser_action();
 	$page = rawurldecode(_request('redirect'));
 	$page = parametre_url($page, 'configuration', $arg,"&");
-	$action = charger_fonction('faire_'.$arg, 'configuration');
+	$action = charger_fonction('faire_'.$arg, 'configuration', true);
 	if ($action)
 	{
 		if ($result = $action())

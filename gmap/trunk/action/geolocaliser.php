@@ -31,7 +31,7 @@ function action_geolocaliser_dist()
 	$page = parametre_url($page, 'ui_state', _request('ui_state'), "&");
 	
 	// Effectuer l'action
-	$action = charger_fonction('faire_geolocaliser', 'formulaires');
+	$action = charger_fonction('faire_geolocaliser', 'formulaires', true);
 	if ($action)
 	{
 		if ($result = $action())
