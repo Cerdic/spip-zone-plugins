@@ -6,7 +6,7 @@
 	</div>
 
 	[(#REM) faudra mettre {si #ID_AUTEUR} sur la 3.0 ]
-	<BOUCLE_auteur_lie(AUTEURS){tout}{id_organisation}>
+	<BOUCLE_auteur_lie(AUTEURS){tout}{id_organisation}{statut==.*}>
 	<div class="numero">
 		<div class='num'>
 		<:contacts:organisation_associe_a_auteur_numero:>
