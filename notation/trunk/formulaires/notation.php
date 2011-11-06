@@ -132,6 +132,7 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 		$where
 	);
 
+	include_spip('action/editer_notation');
 	// Premier vote
 	if (!$row){  // Remplir la table de notation
 		if ($note!=='-1') // annulation d'un vote -> ne pas creer un id !

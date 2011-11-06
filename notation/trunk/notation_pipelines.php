@@ -2,16 +2,25 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function notation_header_prive($flux){
-	$flux = notation_insert_head_css($flux);
-	return $flux;
-}
-
+/**
+ * Inserer les css de notation
+ * @param string $flux
+ * @return string
+ */
 function notation_insert_head_css($flux){
 	$flux .= '<link rel="stylesheet" href="'.find_in_path('css/notation.v2.css').'" type="text/css" media="all" />';
 	return $flux;
 }
 
+/**
+ * insertion des js de notation :
+ * uniquement si on trouve un formulaire de notation dans la page
+ * pour eviter de declencher et charger sur toutes les pages
+ * Et on l'ajoute en fin de page pour la perf
+ *
+ * @param string $flux
+ * @return string mixed
+ */
 function notation_affichage_final($flux){
 	if (strpos($flux, "'notation_note notation_note_on_load'") === false)
 		return $flux;
@@ -23,7 +32,10 @@ function notation_affichage_final($flux){
 	if(function_exists('compacte_head')){
 		$incHead = compacte_head($incHead);
 	}
-	return substr_replace($flux, $incHead, strpos($flux, '</body>'), 0);
+	if ($p = stripos($flux, '</body>'))
+		return substr_replace($flux, $incHead, $p, 0);
+	else
+		return $flux.$incHead;
 }
 
 /**
