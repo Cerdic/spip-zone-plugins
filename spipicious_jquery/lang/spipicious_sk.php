@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'by' => 'Autor',
 
 	// C
-	'cfg_description' => 'Tento zásuvný modul umožňuje návštevníkom jednoducho pridávať k článkom štítky.', # MODIF
+	'cfg_description' => 'Tento zásuvný modul vám umožňuje jednoducho pridávať štítky k objektom.',
 
 	// E
 	'explication_ajout_tag' => 'Ak chcete pridať niekoľko štítkov naraz, použite oddeľovač: "@separateur@".',
@@ -46,12 +46,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tag_deja_present' => 'Tento štítok ste už niekedy pridali.',
 	'tag_supprime' => 'Odstránili ste štítok:<br />@name@',
 	'tags' => 'Štítky:',
-	'tags_ajoutes' => 'Pridali ste niekoľko štítkov:<br />@name@', # MODIF
-	'tags_supprimes' => 'Odstránili ste niekoľko štítkov:<br />@name@', # MODIF
+	'tags_ajoutes' => 'Pridali ste @nb@ štítkov:<br>@name@',
+	'tags_supprimes' => 'Odstránili ste @nb@ štítkov:<br>@name@',
 	'title_tag_utilise_nb' => 'Tento štítok priradili @nb@ ľudia.',
 	'title_tag_utilise_un' => 'Tento štítok priradil jeden človek.',
 	'to' => 's',
-	'types_utilisateurs' => 'Kto má prístup k formuláru?', # MODIF
+	'types_utilisateurs' => 'Kto má prístup k formuláru a môže pridávať štítky?',
 
 	// V
 	'vos_tags' => 'Vaše štítky (zmena)',
