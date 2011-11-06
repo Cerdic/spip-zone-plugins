@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Parrainage</nom>
-	<auteur>Les Développements Durables (http://www.ldd.fr)</auteur>
+	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
 	<version>0.5.0</version>
 	<version_base>0.1</version_base>
@@ -8,6 +8,7 @@
 	<slogan>Proposer aux utilisateurs un outil de parrainage.</slogan>
 	<description>Permet d'importer des contacts puis d'envoyer en masse des invitations à rejoindre le site. Si des personnes s'inscrivent, alors un lien est conservé avec celui qui les a invité (le parrain).</description>
 	<icon>images/parrainage-48.png</icon>
+	<categorie>communication</categorie>
 	
 	<prefix>parrainage</prefix>
 	
