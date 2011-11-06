@@ -9,6 +9,7 @@
 	<description>Permet d'importer des contacts puis d'envoyer en masse des invitations à rejoindre le site. Si des personnes s'inscrivent, alors un lien est conservé avec celui qui les a invité (le parrain).</description>
 	<icon>images/parrainage-48.png</icon>
 	<categorie>communication</categorie>
+	<traduire gestionnaire="salvatore" module="parrainage" reference="fr" />
 	
 	<prefix>parrainage</prefix>
 	
@@ -60,4 +61,5 @@
 	<necessite id="queue" version="[0.6.2;]" />
 	<necessite id="saisies" version="[1.8.5;]" />
 	<necessite id="cvtm" version="[0.1.2;]" />
+	<utilise id="importateur_contacts" />
 </plugin>
