@@ -39,9 +39,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_geolocaliser_user_html5' => 'Centrer la carte sur l\'emplacement de l\'utilisateur &agrave; la cr&eacute;ation',
 	'cfg_lbl_maptype' => 'Fond cartographique',
 	'cfg_lbl_maptype_carte' => 'Carte',
-	'cfg_lbl_maptype_satellite' => 'Satellite',
 	'cfg_lbl_maptype_hybride' => 'Hybride',
 	'cfg_lbl_maptype_relief' => 'Relief',
+	'cfg_lbl_maptype_satellite' => 'Satellite',
 	'cfg_titre_gis' => 'GIS',
 
 	// E
@@ -58,16 +58,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_modifier_gis' => 'Modifier le point g&eacute;olocalis&eacute; :',
 
 	// G
-	'gis_singulier' => 'Point géolocalisé',
 	'gis_pluriel' => 'Points géolocalisés',
+	'gis_singulier' => 'Point géolocalisé',
 
 	// I
 	'icone_gis_tous' => 'Points g&eacute;olocalis&eacute;s',
-	'info_id_objet' => 'N&deg;',
-	'info_aucun_gis' => 'Aucun point géolocalisé',
-	'info_aucun_objet_gis' => 'Aucun objet lié à ce point',
 	'info_1_gis' => 'Un point géolocalisé',
 	'info_1_objet_gis' => '1 objet lié à ce point',
+	'info_aucun_gis' => 'Aucun point géolocalisé',
+	'info_aucun_objet_gis' => 'Aucun objet lié à ce point',
+	'info_id_objet' => 'N&deg;',
 	'info_liste_gis' => 'Points géolocalisés',
 	'info_nb_gis' => '@nb@ points géolocalisés',
 	'info_nb_objets_gis' => '@nb@ objets liés à ce point',
@@ -93,8 +93,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_ajouter_gis' => 'Ajouter un point géolocalisé',
-	'texte_creer_gis' => 'Créer un point géolocalisé',
 	'texte_creer_associer_gis' => 'Créer et associer un point géolocalisé',
+	'texte_creer_gis' => 'Créer un point géolocalisé',
 	'texte_modifier_gis' => 'Modifier le point géolocalisé',
 	'texte_voir_gis' => 'Voir le point géolocalisé',
 	'titre_bloc_creer_point' => 'Lier un nouveau point',

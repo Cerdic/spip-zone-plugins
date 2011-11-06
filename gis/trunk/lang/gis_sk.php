@@ -39,11 +39,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_api_yandex' => 'Yandex', # NEW
 	'cfg_lbl_geocoder' => 'Geocoder',
 	'cfg_lbl_geolocaliser_user_html5' => 'Pri vytváraní vycentrujte mapu na polohe používateľa',
-    'cfg_lbl_maptype' => 'Fond cartographique', # NEW
-    'cfg_lbl_maptype_carte' => 'Carte', # NEW
-    'cfg_lbl_maptype_satellite' => 'Satellite', # NEW
-    'cfg_lbl_maptype_hybride' => 'Hybride', # NEW
-    'cfg_lbl_maptype_relief' => 'Relief', # NEW
+	'cfg_lbl_maptype' => 'Fond cartographique', # NEW
+	'cfg_lbl_maptype_carte' => 'Carte', # NEW
+	'cfg_lbl_maptype_hybride' => 'Hybride', # NEW
+	'cfg_lbl_maptype_relief' => 'Relief', # NEW
+	'cfg_lbl_maptype_satellite' => 'Satellite', # NEW
 	'cfg_titre_gis' => 'GIS',
 
 	// E
@@ -59,15 +59,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_creer_gis' => 'Vytvoriť nový geolokalizovaný bod:',
 	'formulaire_modifier_gis' => 'Upraviť geolokalizované body:',
 
+	// G
+	'gis_pluriel' => 'Points géolocalisés', # NEW
+	'gis_singulier' => 'Point géolocalisé', # NEW
+
 	// I
 	'icone_gis_tous' => 'Geolokalizované body',
+	'info_1_gis' => 'Un point géolocalisé', # NEW
+	'info_1_objet_gis' => '1 objet lié à ce point', # NEW
+	'info_aucun_gis' => 'Aucun point géolocalisé', # NEW
+	'info_aucun_objet_gis' => 'Aucun objet lié à ce point', # NEW
 	'info_id_objet' => 'Č.',
 	'info_liste_gis' => 'Geolokalizované body',
-	'info_liste_gis_objet' => 'Body prepojené s týmto bodom',
-	'info_liste_objets_gis' => 'Objekty pripojené k tomuto bodu',
+	'info_nb_gis' => '@nb@ points géolocalisés', # NEW
+	'info_nb_objets_gis' => '@nb@ objets liés à ce point', # NEW
 	'info_numero_gis' => 'Bod číslo',
 	'info_objet' => 'Objekt',
+	'info_recherche_gis_zero' => 'Aucun résultat pour « @cherche_gis@ ».', # NEW
 	'info_supprimer_lien' => 'Odpojiť',
+	'info_supprimer_liens' => 'D&eacute;tacher tous les points', # NEW
 	'info_voir_fiche_objet' => 'Prejsť na stránku',
 
 	// L
@@ -80,14 +90,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_ville' => 'Mesto',
 	'lat' => 'Zemepisná šírka',
 	'libelle_logo_gis' => 'LOGO BODU',
+	'lien_ajouter_gis' => 'Ajouter ce point', # NEW
 	'lon' => 'Zemepisná dĺžka',
 
 	// T
+	'texte_ajouter_gis' => 'Ajouter un point géolocalisé', # NEW
+	'texte_creer_associer_gis' => 'Créer et associer un point géolocalisé', # NEW
+	'texte_creer_gis' => 'Créer un point géolocalisé', # NEW
+	'texte_modifier_gis' => 'Modifier le point géolocalisé', # NEW
+	'texte_voir_gis' => 'Voir le point géolocalisé', # NEW
 	'titre_bloc_creer_point' => 'Prepojiť nový bod',
 	'titre_bloc_points_lies' => 'Prepojené body',
 	'titre_bloc_rechercher_point' => 'Vyhľadať bod',
 	'titre_nombre_utilisation' => 'Jedno použitie',
 	'titre_nombre_utilisations' => '@nb@ použití',
+	'titre_nouveau_point' => 'Nouveau point', # NEW
+	'titre_objet' => 'Titre', # NEW
 
 	// Z
 	'zoom' => 'Lupa'

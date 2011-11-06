@@ -39,11 +39,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_api_yandex' => 'Yandex', # NEW
 	'cfg_lbl_geocoder' => 'Geocoder',
 	'cfg_lbl_geolocaliser_user_html5' => 'At the creation step, center the map on the location of the user',
-    'cfg_lbl_maptype' => 'Cartografic background',
-    'cfg_lbl_maptype_carte' => 'Road',
-    'cfg_lbl_maptype_satellite' => 'Satellite',
-    'cfg_lbl_maptype_hybride' => 'Hybrid',
-    'cfg_lbl_maptype_relief' => 'Physical',
+	'cfg_lbl_maptype' => 'Fond cartographique', # NEW
+	'cfg_lbl_maptype_carte' => 'Carte', # NEW
+	'cfg_lbl_maptype_hybride' => 'Hybride', # NEW
+	'cfg_lbl_maptype_relief' => 'Relief', # NEW
+	'cfg_lbl_maptype_satellite' => 'Satellite', # NEW
 	'cfg_titre_gis' => 'GIS',
 
 	// E
@@ -52,22 +52,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_gis_nouveau' => 'Create a new point',
 	'editer_gis_titre' => 'The geolocated points',
 	'erreur_recherche_pas_resultats' => 'No point corresponds to the searched text.',
-	'explication_api_forcee' => 'This API has been enforced by another plugin or template.',
-	'explication_maptype_force' => 'This cartographic background has been enforced by another plugin or template.',
+	'explication_api_forcee' => 'L\'API est imposée par un autre plugin ou squelette.', # NEW
+	'explication_maptype_force' => 'Le fond cartographique est imposé par un autre plugin ou squelette.', # NEW
 
 	// F
 	'formulaire_creer_gis' => 'Create a new geolocated point :',
 	'formulaire_modifier_gis' => 'Modify the geolocated point :',
 
+	// G
+	'gis_pluriel' => 'Points géolocalisés', # NEW
+	'gis_singulier' => 'Point géolocalisé', # NEW
+
 	// I
 	'icone_gis_tous' => 'Geolocated points',
+	'info_1_gis' => 'Un point géolocalisé', # NEW
+	'info_1_objet_gis' => '1 objet lié à ce point', # NEW
+	'info_aucun_gis' => 'Aucun point géolocalisé', # NEW
+	'info_aucun_objet_gis' => 'Aucun objet lié à ce point', # NEW
 	'info_id_objet' => 'N&deg;',
 	'info_liste_gis' => 'Points géolocalisés', # NEW
-	'info_liste_gis_objet' => 'Linked points to this object',
-	'info_liste_objets_gis' => 'Objects attached to this point',
+	'info_nb_gis' => '@nb@ points géolocalisés', # NEW
+	'info_nb_objets_gis' => '@nb@ objets liés à ce point', # NEW
 	'info_numero_gis' => 'Point number',
 	'info_objet' => 'Object',
+	'info_recherche_gis_zero' => 'Aucun résultat pour « @cherche_gis@ ».', # NEW
 	'info_supprimer_lien' => 'Detach',
+	'info_supprimer_liens' => 'D&eacute;tacher tous les points', # NEW
 	'info_voir_fiche_objet' => 'Go to page',
 
 	// L
@@ -80,14 +90,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_ville' => 'Town',
 	'lat' => 'Latitude',
 	'libelle_logo_gis' => 'POINT\\\'S LOGO',
+	'lien_ajouter_gis' => 'Ajouter ce point', # NEW
 	'lon' => 'Longitude',
 
 	// T
+	'texte_ajouter_gis' => 'Ajouter un point géolocalisé', # NEW
+	'texte_creer_associer_gis' => 'Créer et associer un point géolocalisé', # NEW
+	'texte_creer_gis' => 'Créer un point géolocalisé', # NEW
+	'texte_modifier_gis' => 'Modifier le point géolocalisé', # NEW
+	'texte_voir_gis' => 'Voir le point géolocalisé', # NEW
 	'titre_bloc_creer_point' => 'Link a new point',
 	'titre_bloc_points_lies' => 'Linked points',
 	'titre_bloc_rechercher_point' => 'Search for a point',
 	'titre_nombre_utilisation' => 'One use',
 	'titre_nombre_utilisations' => '@nb@ uses',
+	'titre_nouveau_point' => 'Nouveau point', # NEW
+	'titre_objet' => 'Titre', # NEW
 
 	// Z
 	'zoom' => 'Zoom'
