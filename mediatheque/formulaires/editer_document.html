@@ -10,7 +10,7 @@
 		[(#REM) un bouton submit pour enregistrer qui sera declenche par le return
 		il ne doit pas etre hidden pour marcher dans safari
 		]
-	  <div style="position:absolute;left:-10000px;"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></div>
+	  <div style="position:absolute;#LANG_LEFT:-10000px;"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></div>
 	  <ul>
 	    <li class="editer_titre[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 		    <label for="titre">[(#ENV{mode}|=={document}|?{<:entree_titre_document:>,<:entree_titre_image:>})]</label>[
