@@ -11,7 +11,7 @@
 		- colorscheme : couleur generale du bouton (light/dark - defaut 'light')
 
 ]
-#SET{href,#ENV{href,#SELF|url_absolue}}
+#SET{href,#ENV{href,#FBMOD{url_page,#SELF|url_absolue}}}
 #SET{width,#ENV{width,490}}
 #SET{height,#ENV{height,450}}
 #SET{num_posts,#ENV{num_posts,2}}

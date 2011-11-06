@@ -12,7 +12,7 @@
 		- ref (todo)
 
 ]
-#SET{href,#ENV{href,#SELF|url_absolue}}
+#SET{href,#ENV{href,#FBMOD{url_page,#SELF|url_absolue}}}
 #SET{width,#ENV{width,80}}
 #SET{height,#ENV{height,20}}
 #SET{font,#ENV{font,#FBMOD{font_def}}}

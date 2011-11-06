@@ -16,7 +16,7 @@
 		- ref (todo)
 
 ]
-#SET{href,#ENV{href,#SELF|url_absolue}}
+#SET{href,#ENV{href,#FBMOD{url_page,#SELF|url_absolue}}}
 #SET{send,#ENV{send,oui}}
 #SET{layout,#ENV{layout,standard}}
 #SET{layout_stds,#ARRAY{0,standard,1,button_count,2,box_count}}
