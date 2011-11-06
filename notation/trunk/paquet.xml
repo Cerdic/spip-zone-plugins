@@ -32,8 +32,8 @@
 
 	<utilise nom="cfg" compatibilite="[1.10.4;[" />
 
-	<menu nom="notation" titre="notation:notation" parent="menu_reactions" icone="images/notation-16.png" />
+	<menu nom="notation" titre="notation:notation" parent="menu_activite" icone="images/notation-16.png" />
 
-	<onglet nom="notation" titre="notation:afficher_tables" parent="notation" icone="img_pack/notation.png" />
-	<onglet nom="notation_param" titre="notation:param" parent="notation" icone="img_pack/notation.png" />
+	<onglet nom="notation" titre="notation:afficher_tables" parent="notation" icone="images/notation-24.png" />
+	<onglet nom="configurer_notation" titre="notation:param" parent="notation" icone="images/notation-24.png" />
 </paquet>

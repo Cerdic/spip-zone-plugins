@@ -101,7 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'note_9' => 'Note : 9',
 	'note_10' => 'Note : 10',
 	'notes' => 'Notes',
-	'notesp' => 'Notes ponder&eacute;es',
+	'note_pond' => 'Notes ponder&eacute;es',
 
 	// O
 	'objets' => 'Objets',
