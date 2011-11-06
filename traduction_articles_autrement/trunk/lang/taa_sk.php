@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'affichage_liste_compacte_desactive' => 'Désactivet l\'affichage compacte des liste des articles', # NEW
+	'affichage_liste_compacte_desactive' => 'Deaktivovať zobrazenie kompaktného zoznamu článkov',
 
 	// C
 	'changer_langue' => 'Zmeniť jazyk článku',
@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_plugin' => 'Iný preklad článku',
-	'traductions' => 'Preklady', # MODIF
+	'traductions' => 'Prekl',
 
 	// V
 	'voir_traductions' => 'Zobraziť podrobnosti o prekladoch'
