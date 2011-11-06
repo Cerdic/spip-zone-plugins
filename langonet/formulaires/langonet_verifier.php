@@ -353,7 +353,8 @@ function afficher_lignes($type, $tableau, $extra=array(), $f_coloriser) {
 	ksort($tableau);
 	$liste_lignes = '';
 	foreach ($tableau as $item => $detail) {
-		$liste_lignes .= bouton_block_depliable($item, false) .
+		$brut = preg_match('/^(.*)[{].*[}]$/', $item, $m) ? $m[1]:$item;
+		$liste_lignes .= bouton_block_depliable($brut, false) .
 		                 debut_block_depliable(false) .
 		                 "<p style=\"padding-left:2em;\">\n  ".
 		                 _T('langonet:texte_item_utilise_ou')."\n<br />";	
