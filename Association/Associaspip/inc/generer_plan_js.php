@@ -19,7 +19,9 @@ foreach ($GLOBALS['association_metas'] as $key => $val) {
 		echo "classe" . $val . " = new Array();\n";
 		$tableau = association_liste_plan_comptable($val);
 		foreach ($tableau as $k => $v) {
-			echo "classe" . $val . "[" . $k . "]='" . $v . "';\n";
+			if($k!=581) { // code virement interne !!!!
+				echo "classe" . $val . "[" . $k . "]='" . $v . "';\n";
+			}
 		}
 	}
 }
