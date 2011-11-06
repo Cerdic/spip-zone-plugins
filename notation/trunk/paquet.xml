@@ -2,7 +2,7 @@
 	prefix="notation"
 	categorie="communication"
 	version="2.0.0"
-	etat="stable"
+	etat="dev"
 	compatibilite="[3.0.0-beta;3.0.*]"
 	logo="prive/themes/spip/images/notation-32.png"
 	schema="0.6.3"
