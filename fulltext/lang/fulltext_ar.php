@@ -35,16 +35,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'enfanter' => 'ولدت',
 	'enfantillage' => 'ولدن',
 	'enfants' => 'ولد',
+	'erreur_binaire_indisponible' => 'Ce logiciel n\'est pas disponible sur le serveur.', # NEW
 	'erreur_doc_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات doc.',
 	'erreur_intervalle_cron' => 'يجب تحديد مدة تفوق الثانية',
 	'erreur_nb_docs' => 'يجب تحديد عدد مستندات للمعالجة يفوق المستند الواحد.',
 	'erreur_pdf_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات pdf.',
 	'erreur_ppt_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات ppt.',
 	'erreur_taille_index' => 'يجب فهرسة حرف واحد على الأقل.',
+	'erreur_verifier_configuration' => 'Il y a des erreurs de configuration.', # NEW
 	'erreur_xls_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات xls.',
 	'et' => '<strong>و</strong>',
 	'etranger' => 'غريب',
 	'exemples' => 'أمثلة على الاستخدام',
+	'explication_option_readonly' => 'Cette option est forcée sur ce site et n\'est donc pas configurable.', # NEW
 
 	// F
 	'fant' => 'لدي',

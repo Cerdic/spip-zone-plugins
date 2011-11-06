@@ -35,16 +35,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'enfanter' => 'problém',
 	'enfantillage' => 'problémovost',
 	'enfants' => 'problémy',
+	'erreur_binaire_indisponible' => 'Ce logiciel n\'est pas disponible sur le serveur.', # NEW
 	'erreur_doc_bin' => 'Vous devez renseigner le binaire &agrave; utiliser pour extraire les .doc', # NEW
 	'erreur_intervalle_cron' => 'Vous devez indiquer un intervalle sup&eacute;rieur &agrave; une seconde.', # NEW
 	'erreur_nb_docs' => 'Vous devez indiquer un nombre de documents &agrave; traiter par it&eacute;ration sup&eacute;rieur &agrave; un.', # NEW
 	'erreur_pdf_bin' => 'Vous devez renseigner le binaire &agrave; utiliser pour extraire les .pdf', # NEW
 	'erreur_ppt_bin' => 'Vous devez renseigner le binaire &agrave; utiliser pour extraire les .ppt', # NEW
 	'erreur_taille_index' => 'Il faut au moins indexer un caract&egrave;re.', # NEW
+	'erreur_verifier_configuration' => 'Il y a des erreurs de configuration.', # NEW
 	'erreur_xls_bin' => 'Vous devez renseigner le binaire &agrave; utiliser pour extraire les .xls', # NEW
 	'et' => 'A',
 	'etranger' => 'cizinec',
 	'exemples' => 'Použití příkladů',
+	'explication_option_readonly' => 'Cette option est forcée sur ce site et n\'est donc pas configurable.', # NEW
 
 	// F
 	'fant' => 'blém',
