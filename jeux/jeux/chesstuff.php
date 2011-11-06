@@ -12,7 +12,7 @@
 
 Insere des parties d'echecs dans vos articles !
 -----------------------------------------------
-http://chesstuff.blogspot.com/
+	http://chesstuff.blogspot.com/
 
 Attention : utilisation d'une librairie externe : 
 -------------------------------------------------
@@ -48,8 +48,8 @@ Exemple de syntaxe dans l'article :
 
 Trois solutions pour afficher une partie d'echecs :
 - code inline du jeu dans un article
-- modele <chesstuffXXX> (fichier PGN joint a l'article. XXX est l'identifiant du fichier joint)
-- modele <jeuXXX> (jeu cree grace a l'interface du plugin)
+- modele <chesstuffXXX> : fichier PGN joint a l'article. XXX est l'identifiant du fichier joint
+- modele <jeuXXX> : jeu cree grace a l'interface du plugin
 
 */
 
