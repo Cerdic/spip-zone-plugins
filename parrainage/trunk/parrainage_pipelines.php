@@ -3,6 +3,11 @@
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+function parrainage_taches_generales_cron($taches){
+	$taches['parrainage_contacts'] = 24 * 3600;
+	return $taches;
+}
+
 function parrainage_formulaire_charger($flux){
 	if ($flux['args']['form'] == 'inscription'){
 		if ($code_invitation = _request('invitation'))
