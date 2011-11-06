@@ -11,34 +11,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
- * Fonction pour commencer l'affichage de la page dans exec/
- * a virer en passant la conf depuis l'onglet CFG ?
- */
-function notation_commencer_page(){
-
-	$commencer_page = charger_fonction("commencer_page","inc");
-	echo $commencer_page(_T('notation:notation'), "naviguer", "notation");
-
-	include_spip('inc/autoriser');
-	if (!autoriser('configurer')){
-		// Pas d'acces
-		echo debut_gauche("",true);
-		echo debut_droite("",true);
-		echo gros_titre("Plugin "._T('notation:notation'), "", false);
-		return true;
-	}
-
-	// Informations
-	echo debut_gauche("",true);	
-	echo debut_droite("",true);
-
-	// Afficher les onglets
-	echo gros_titre("Plugin "._T('notation:notation'), "", false);
-
-	return true;
-}
-
-/**
  * Retourne la configuration de la ponderation (defaut : 30)
  * @return int : valeur de ponderation
  */
