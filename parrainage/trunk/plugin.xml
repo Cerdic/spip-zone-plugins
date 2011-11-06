@@ -6,7 +6,7 @@
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<slogan>Proposer aux utilisateurs un outil de parrainage.</slogan>
-	<description>Permet d'importer des contacts puis d'envoyer en masse des invitations à rejoindre le site. Si des personnes s'inscrivent, alors un lien est conservé entre eux et celui qui les a invité (le parrain).</description>
+	<description>Permet d'importer des contacts puis d'envoyer en masse des invitations à rejoindre le site. Si des personnes s'inscrivent, alors un lien est conservé avec celui qui les a invité (le parrain).</description>
 	<icon>images/parrainage-48.png</icon>
 	
 	<prefix>parrainage</prefix>
