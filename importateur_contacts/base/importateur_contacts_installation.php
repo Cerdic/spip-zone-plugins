@@ -14,9 +14,7 @@ function importateur_contacts_upgrade($nom_meta_version_base, $version_cible){
 		|| (($version_actuelle = $GLOBALS['meta'][$nom_meta_version_base]) != $version_cible)
 	){
 		
-		if (version_compare($version_actuelle,'0.0','=')){
-			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
-		}
+		ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		
 		/*if (version_compare($version_actuelle,'0.5','<')){
 			include_spip('base/create');
