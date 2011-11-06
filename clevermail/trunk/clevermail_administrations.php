@@ -48,7 +48,9 @@ function clevermail_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_insertq',array('spip_cm_settings',  array('set_name' => 'CM_MAIL_SUBJECT', 'set_value' => _T('clevermail:confirmation_votre_inscription_multiple')))),
 		array('sql_insertq',array('spip_cm_settings',  array('set_name' => 'CM_MAIL_TEXT', 'set_value' => _T('clevermail:confirmation_votre_inscription_text_multiple')))),
      	);
-
+	$maj['0.9.0'] = array(
+		array('sql_alter',"TABLE spip_cm_lists DROP lst_subject")
+    	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
  }
