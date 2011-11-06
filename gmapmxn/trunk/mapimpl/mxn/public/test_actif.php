@@ -14,12 +14,19 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/gmap_config_utils');
+include_spip('inc/provider_caps');
 
 // Enregistrement des paramètres passés dans la requête
 function mapimpl_mxn_public_test_actif_dist()
 {
-	// TODO : tester si l'implémentation nécessite une clef et vérifier qu'elle est là
-	return true;
+	if (gmapmxn_hasCapability('key'))
+	{
+		$provider = gmap_lire_config('gmap_api_mxn', 'provider', "openlayers");
+		$key = gmap_lire_config('gmap_api_mxn', 'provider_key_'.$provider, "");
+		return (strlen($key) > 0) ? true : false;
+	}
+	else
+		return true;
 }
 
 ?>
