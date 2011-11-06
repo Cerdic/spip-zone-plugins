@@ -38,6 +38,11 @@
 			<input type="text" name="popup_titre" id="popup_titre" value="#ENV{popup_titre,#EVAL{POPUP_TITRE_DEFAUT}}" size="50" />
 			<br /><span style="font-size:.8em"><:spipopup:titre_popup_comment:></span>
 		</p>
+		<p class="forml" style="width:98%">
+			<label for="popup_options"><strong><:spipopup:options_popup:></strong></label>
+			<input type="text" name="popup_options" id="popup_options" value="#ENV{popup_options,#EVAL{POPUP_OPTIONS_DEFAUT}}" size="50" />
+			<br /><span style="font-size:.8em"><:spipopup:options_popup_comment:></span>
+		</p>
 	</fieldset>
 
 	<p class="boutons">

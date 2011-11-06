@@ -16,7 +16,8 @@ function spipopup_insert_head($flux){
 		."' type='text/javascript'></script>"
 		."\n<script type='text/javascript'>var popup_settings={default_popup_name:'"
 		.POPUP_TITRE."',default_popup_width:'".POPUP_WIDTH."',default_popup_height:'"
-		.POPUP_HEIGHT."'};</script>";
+		.POPUP_HEIGHT."',default_popup_options:'".POPUP_OPTIONS_DEFAUT."'};</script>"
+		."\n";
 	return $flux;
 }
 

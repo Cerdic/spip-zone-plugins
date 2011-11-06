@@ -126,6 +126,7 @@ function _popup_set(url, w, h, focus, options, name) {
 	var width = (!w || w=='') ? popup_settings.default_popup_width : w;
 	var height = (!h || h=='') ? popup_settings.default_popup_height : h;
 	var name_f = (!name) ? popup_settings.default_popup_name : name;
+	if (!options) options = popup_settings.default_popup_options;
 
 	// options
 	var opt_set = {
@@ -141,7 +142,6 @@ function _popup_set(url, w, h, focus, options, name) {
 		'left': (screen.width - width)/2,
 		'top': (screen.height - height)/2
 	};
-	var opt_f = _join(explode_options(options), '', ',');
 
 	// function to analyze options to pass
 	function explode_options(options) {
@@ -155,8 +155,29 @@ function _popup_set(url, w, h, focus, options, name) {
 			opt_send[opt_tag[0]] = opt_tag[1];
 		}
 		return opt_send;
-	}
+	};
+
+	// analyze options to pass (!)
+	var opt_f = _join(explode_options(options), '', ',');
+
 	// create the new window
 	var new_f = window.open(url, name_f, opt_f);
 	if(!focus || focus !== false) new_f.focus();
+	_dbg(url+', '+name_f+', '+opt_f, 'POPUP');
 }
+
+
+/**
+ * DEBUGGER - Write 'str' in console (FireBug for example) if present, or alert(str)
+ * @param string str The text you want to be displayed
+ * @param string title The title of your text | optional
+ */
+function _dbg(str, title){
+	if(!title) title = '';
+	else title = title+" : ";
+	if(window.console && window.console.log) window.console.log(title + str);
+	else {
+		if(settings.debugg == true) alert(title + str);
+	}
+}
+

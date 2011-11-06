@@ -9,8 +9,9 @@
 		|width=XX (option)
 		|height=XX (option)
 		|titre=mon titre (option)
+		|options=liste d'options (option - type 'variable=valeur,...')
 	>
 	
 ][(#ENV{lien}|=={''}|?{'',' '})[(#ENV{texte}|=={''}|?{'',' '})
-	<a href="#POPUP{#ENV{lien},#ENV{skel,''},#ENV{width,''},#ENV{height,''},#ENV{titre,''}}">#ENV{texte}</a>
+	<a href="#POPUP{#ENV{lien},#ENV{skel,''},#ENV{width,''},#ENV{height,''},#ENV{titre,''},#ENV{options,''}}">#ENV{texte}</a>
 ]]
