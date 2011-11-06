@@ -28,10 +28,10 @@ function glossaire_groupes() {
 if(!defined('_SPIP19300'))
 	@define('_GLOSSAIRE_QUERY', 'SELECT id_mot, titre, texte, descriptif FROM spip_mots WHERE type=' . glossaire_groupes() . ' ORDER BY id_mot ASC');
 		
-// surcharge possible de cette fonction glossaire_generer_url_dist par : glossaire_generer_url($id_mot, $titre) 
+// surcharge possible de cette fonction glossaire_generer_url_dist par : glossaire_generer_url($id_mot, $titre_mot) 
 // si elle existe, elle sera utilisee pour generer l'url cliquable des mots trouves
-//   exemple pour annuler le clic : function glossaire_generer_url($id_mot, $titre) { return 'javascript:;'; }
-function glossaire_generer_url_dist($id_mot, $titre) {
+//   exemple pour annuler le clic : function glossaire_generer_url($id_mot, $titre_mot) { return 'javascript:;'; }
+function glossaire_generer_url_dist($id_mot, $titre_mot) {
 	if(defined('_SPIP19300')) 
 		return generer_url_entite($id_mot, 'mot'); // depuis SPIP 2.0
 		else { charger_generer_url(); return generer_url_mot($id_mot); } // avant SPIP 2.0

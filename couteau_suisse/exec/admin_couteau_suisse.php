@@ -48,7 +48,8 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	global $outils, $afficher_outil, $metas_vars, $metas_outils;
 
 	// cette valeur par defaut n'est pas definie sous SPIP 1.92
-	@define('_ID_WEBMESTRES', 1);
+	// constante abandonnee sous SPIP 3.0
+	if(!defined('_SPIP30000')) @define('_ID_WEBMESTRES', 1);
 	cs_minipres();
 	$cmd = _request('cmd');
 	$exec = _request('exec');
