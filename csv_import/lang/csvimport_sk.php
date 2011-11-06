@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'caracteres_separation' => 'Znak oddeľovača',
 	'champs_csv' => 'Polia v súbore CSV',
 	'champs_table' => 'Polia v tabuľke',
-	'confirmation_ajout_base' => 'Le CSV a été correctement ajouté à la base !', # NEW
+	'confirmation_ajout_base' => 'CSV bolo úspešne pridané do databázy!',
 	'correspondance_incomplete' => 'Súvzťažnosti v tabuľkách CSV sú neúplné.',
 	'correspondance_indefinie' => 'Súvzťažnosti v tabuľkách CSV nie sú definované.',
 	'csvimport' => 'Nahrávanie CSV',
@@ -31,15 +31,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreurs_ajout_base' => 'Pri vkladaní do databázy vzniklo @nb@ chýb.',
-	'etape' => '(&Eacute;tape @step@ sur 3)', # NEW
+	'etape' => '(@step@. krok z 3)',
 	'export_classique' => 'štadardný CSV (,)',
 	'export_excel' => 'CSV Excelu (;)',
 	'export_format' => 'Formát súboru:',
 	'export_table' => 'Export tabuľky: @table@',
 	'export_tabulation' => 'CSV oddelený tabulátorom',
 	'exporter' => 'Exportovať',
-	'extrait_CSV_importe' => 'Extrait du fichier CSV importé : ', # NEW
-	'extrait_table' => 'Extrait de la table "@nom_table@" : ', # NEW
+	'extrait_CSV_importe' => 'Extrahovať z nahratého súboru CSV:',
+	'extrait_table' => 'Vypísať z tabuľky "@nom_table@":',
 
 	// F
 	'fichier_absent' => 'Súbor chýba',
@@ -58,12 +58,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nb_enregistrements' => '@nb@ uložených záznamov',
-	'noms_colonnes_CSV' => 'Noms des colonnes (attendus) du fichier CSV à importer : ', # NEW
+	'noms_colonnes_CSV' => '(Očakávané) názvy stĺpcov v súbore CSV, ktorý sa má nahrať:',
 
 	// P
 	'pas_importer' => 'Nenahrávať',
 	'premieres_lignes' => '@nb@ prvých riadkov v súbore.',
-	'previsualisation_CSV_integre' => 'Prévisualisation des @nb@ premières lignes du fichier CSV intégrées à la table : ', # NEW
+	'previsualisation_CSV_integre' => 'Ukážka prvých @nb@ riadkov zo súboru CSV začleneného do tabuľky:',
 	'probleme_chargement_fichier' => 'Problém pri spúšťaní súboru',
 	'probleme_chargement_fichier_erreur' => 'Problém pri spúšťaní súboru (chyba @erreur@).',
 	'probleme_inextricable' => 'Nerozoznaná chyba.',
