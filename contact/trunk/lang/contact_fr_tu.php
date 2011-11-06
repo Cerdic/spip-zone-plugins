@@ -101,6 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'monsieur' => 'Monsieur',
 	'msg_accueil' => 'Tu trouveras ici les messages de contact que tu as reçu.',
 	'msg_contact' => 'Message de contact',
+	'msg_contacts' => 'Messages de contact', # NEW
 	'msg_expediteur' => 'Expéditeur : ',
 	'msg_lus' => 'Messages déjà lus',
 	'msg_messagerie' => 'Messagerie de contact',

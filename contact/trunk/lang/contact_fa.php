@@ -101,6 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'monsieur' => 'آقا',
 	'msg_accueil' => 'پيام‌هاي دريافت شده از تماس.',
 	'msg_contact' => 'پيام تماس',
+	'msg_contacts' => 'Messages de contact', # NEW
 	'msg_expediteur' => 'فرستنده:‌',
 	'msg_lus' => 'پيام خوانده شده',
 	'msg_messagerie' => 'پيك تماس',

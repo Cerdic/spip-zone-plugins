@@ -101,6 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'monsieur' => 'Senyor',
 	'msg_accueil' => 'Trobareu aquí els missatges de contacte que heu rebut.',
 	'msg_contact' => 'Missatge de contacte',
+	'msg_contacts' => 'Messages de contact', # NEW
 	'msg_expediteur' => 'Remitent: ',
 	'msg_lus' => 'Missatges llegits',
 	'msg_messagerie' => 'Correu electrònic de contacte',

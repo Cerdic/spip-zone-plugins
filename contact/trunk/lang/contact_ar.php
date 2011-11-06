@@ -102,6 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'monsieur' => 'السيد',
 	'msg_accueil' => 'ستجد هنا رسائل الاتصال المتلقاة.',
 	'msg_contact' => 'رسالة الاتصال',
+	'msg_contacts' => 'Messages de contact', # NEW
 	'msg_expediteur' => 'مرسل : ',
 	'msg_lus' => 'رسائل مقروءة',
 	'msg_messagerie' => 'بريد الاتصال',

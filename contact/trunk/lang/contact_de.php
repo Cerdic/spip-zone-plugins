@@ -101,6 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'monsieur' => 'Herr',
 	'msg_accueil' => 'Hier finden Sie die Kontaktdaten Nachrichten, die Sie erhalten haben.',
 	'msg_contact' => 'Kontakt Botschaft',
+	'msg_contacts' => 'Messages de contact', # NEW
 	'msg_expediteur' => 'Absender:',
 	'msg_lus' => 'Nachrichten bereits gelesen',
 	'msg_messagerie' => 'Mail-Kontakt',
