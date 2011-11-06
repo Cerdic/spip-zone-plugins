@@ -64,27 +64,23 @@ function formulaires_langonet_verifier_traiter() {
 		$langonet_verifier_items = charger_fonction('langonet_verifier_l','inc');
 		$resultats = $langonet_verifier_items($module, $ou_fichier);
 	}
-
-	// Creation du fichier de langue corrige avec les items detectes comme non definis ou obsoletes
-	// suivant la verification en cours
+	// Creation du fichier de langue corrige avec les items detectes comme 
+	// non definis ou obsoletes suivant la verification en cours
 	$_l = ($verification=='fonction_l');
 	$all = $resultats[$_l ? "item_non" : 'item_non_mais_nok'];
 	if ($all) {
-		$langonet_corriger = charger_fonction('langonet_generer_fichier','inc');
 		if ($verification != 'utilisation') {
-			$oublies = array();
-			foreach ($all as $_item) {
-				$index = preg_match('/^(.*)[{].*[}]$/', $_item, $m) ? $m[1] : $_item;
-				$oublies[$index] = @$resultats['item_md5'][$_item]; // indefini si dejo normalise
-			}
+			$extra = array();
+			foreach ($all as $item) {
+				// indefini si dejo normalise
+				$extra[$item] = @$resultats['item_md5'][$item]; 			}
 			$mode = $_l ?'fonction_l' :  'oublie';
-			$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $oublies);
-		}
-		else {
-			$inutiles = $resultats['item_non'];
+		} else {
+			$extra = $resultats['item_non'];
 			$mode = 'inutile';
-			$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $inutiles);
 		}
+		$langonet_corriger = charger_fonction('langonet_generer_fichier','inc');
+		$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $extra);
 	}
 
 	// Traitement des resultats
@@ -494,7 +490,7 @@ function creer_script($resultats, $verification) {
 	$all = $resultats[$_l ? "fichier_non" : 'fichier_non_mais_nok'];
 	// Pour chaque item on construit le sed
 	// et on collecte au passage les fichiers qui le contiennent
-	foreach ($all as $index => $val) {
+	if (is_array($all)) foreach ($all as $index => $val) {
 		foreach($val as $f => $l) $files[$f]= str_replace(_DIR_RACINE . $ou, '', $f);
 		$fichier = key($val);
 		$val = array_shift($val);
@@ -536,7 +532,7 @@ function creer_script($resultats, $verification) {
 		"\nif [ \"$*\" != 'mv' ]; then echo; echo \"$out\"; fi";
 }
 
-// Calcul du representant canonique d'un premier argument de _L.
+// Calcul du representant canonique d'une chmine de langue (_L ou <: :>)
 // C'est un transcodage ASCII, reduits aux 32 premiers caracteres,
 // les caracteres non alphabetiques etant remplaces par un souligne.
 // On elimine les repetitions de mots pour evacuer le cas frequent truc: @truc@

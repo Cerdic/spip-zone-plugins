@@ -102,7 +102,7 @@ function langonet_match(&$utilises, $occ, $_fichier, $ligne, $eval=false)
 	$utilises['items'][$index] = $item;
 	$utilises['modules'][$index] = $occ[1];
 	$utilises['item_tous'][$index][$_fichier][$ligne][] = trim($occ[0]);
-	$utilises['suffixes'][$index] = (($occ[3][0]==='.') OR ($eval AND strpos($occ[2], '$')));
+	$utilises['suffixes'][$index] = (($occ[3] AND ($occ[3][0]==='.')) OR ($eval AND strpos($occ[2], '$')));
 }
 
 include_spip('public/phraser_html');

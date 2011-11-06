@@ -2,6 +2,8 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+define('_LANGONET_SIGNATURE', "// Ceci est un fichier langue de SPIP -- This is a SPIP language file");
+
 /**
  * Ecriture des fichiers de langue
  * 
@@ -16,12 +18,26 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $langue_cible='en', $mode='index', $encodage='utf8', $oublis_inutiles=array()) {
 	include_spip('inc/traduire');
+	$bandeau = '';
 	$var_source = "i18n_".$module."_".$langue_source;
+	$source = _DIR_RACINE.$ou_langue.$module.'_'.$langue_source.'.php';
+	// Trouver dans quel cas ce fichier n'a pas deja ete inclus a ce stade
 	if (empty($GLOBALS[$var_source])) {
 		if (!file_exists($source = _DIR_RACINE.$ou_langue.$module.'_'.$langue_source.'.php'))
 			return array('message_erreur' =>  _T('langonet:message_nok_fichier_langue',  array('langue' => $langue_source, 'module' => $module, 'dossier' => $ou_langue)));
+
 		$GLOBALS['idx_lang'] = $var_source;	
 		include($source);
+	}
+	// Recuperer le bandeau d'origine si present.
+	if ($file = file($source)) {
+		array_shift($file); // saute < ? php
+		foreach($file as $line) {
+			$bandeau .= $line;
+			if (strpos($line, _LANGONET_SIGNATURE) !== false)
+			  {$file = ''; break;}
+		}
+		if ($file) $bandeau = '';
 	}
 
 	$var_cible = "i18n_".$module."_".$langue_cible;
@@ -36,8 +52,8 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 
 	$dir = sous_repertoire(_DIR_TMP,"langonet");
 	$dir = sous_repertoire($dir,"generation");
-	$producteur = "Produit automatiquement par le plugin LangOnet a partir de la langue source $langue_source";
-	$ok = ecrire_fichier_langue_php($dir, $langue_cible, $module, $source, $producteur);
+	$bandeau .= "// Produit automatiquement par le plugin LangOnet a partir de la langue source $langue_source";
+	$ok = ecrire_fichier_langue_php($dir, $langue_cible, $module, $source, $bandeau);
 
 	if (!$ok) {
 		$resultats['message_erreur'] = _T('langonet:message_nok_ecriture_fichier', array('langue' => $langue_cible, 'module' => $module));
@@ -116,10 +132,10 @@ function produire_fichier_langue($langue, $module, $items, $producteur='')
 			$contenu[]= "\t'$k' => '$t',";
 		}
 	}
+	if (!strpos($producteur, _LANGONET_SIGNATURE)) 
+		$producteur = _LANGONET_SIGNATURE . "\n" . preg_replace(",\\n[/#]*,", "\n/// ", $producteur);
 
-	return '<'.'?php' . "\n" . '
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file' . '
-// ' . preg_replace(",\\n[/#]*,", "\n/// ", $producteur) . '
+	return '<'.'?php' . "\n\n" . $producteur . '
 // Module: ' . $module . '
 // Langue: ' . $langue . '
 // Date: ' . date('d-m-Y H:i:s') . '
@@ -133,6 +149,7 @@ $GLOBALS[$GLOBALS[\'idx_lang\']] = array(
 	  "\n);\n?".'>';
 }
 
+// Fonction aussi pour Plugonet
 function ecrire_fichier_langue_php($dir, $langue, $module, $items, $producteur='')
 {
 	$nom = $dir . $module . "_" . $langue   . '.php';
