@@ -10,6 +10,7 @@
 	<icon>images/parrainage-48.png</icon>
 	<categorie>communication</categorie>
 	<traduire gestionnaire="salvatore" module="parrainage" reference="fr" />
+	<lien>http://www.spip-contrib.net/Plugin-Parrainage</lien>
 	
 	<prefix>parrainage</prefix>
 	
