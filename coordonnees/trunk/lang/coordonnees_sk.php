@@ -13,12 +13,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adresses' => 'Adresy',
 	'ajouter_adresse' => 'Pridať adresu',
 	'ajouter_email' => 'Pridať e-mail',
-	'ajouter_telephone' => 'Pridať telefónne číslo', # MODIF
-	'articles' => 'Articles', # NEW
-	'auteurs' => 'Auteurs', # NEW
+	'ajouter_telephone' => 'Pridať číslo',
+	'articles' => 'Články',
+	'auteurs' => 'Autori',
 
 	// C
-	'configuration_coordonnees' => 'Configuration des coordonnées', # NEW
+	'configuration_coordonnees' => 'Nastavenie podrobností',
 	'confirmer_suppression_adresse' => 'Určite chcete odstrániť túto adresu?',
 	'confirmer_suppression_email' => 'Určite chcete odstrániť tento e-mail?',
 	'confirmer_suppression_numero' => 'Určite chcete odstrániť toto telefónne číslo?',
@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_email' => 'Upraviť e-mail',
 	'editer_numero' => 'Upraviť telefónne číslo',
 	'emails' => 'E-maily',
-	'explication_objets_actifs' => 'Sur quels objets éditoriaux proposer les coordonnées ?', # NEW
+	'explication_objets_actifs' => 'Ktoré redakčné objekty ponúkajú podrobnosti?',
 	'explication_type_adresse' => 'Typ môže byť súkromný alebo do práce',
 	'explication_type_email' => 'Typ môže byť súkromný alebo do práce',
 	'explication_type_numero' => 'Typ môže byť súkromný, do práce, alebo fax',
@@ -53,9 +53,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_complement' => 'Doplňujúce informácie',
 	'label_email' => 'E-mail',
 	'label_numero' => 'Telefónne číslo',
-	'label_objets_actifs' => 'Objets', # NEW
+	'label_objets_actifs' => 'Objekty',
 	'label_pays' => 'Krajina',
-	'label_titre' => 'Titre', # NEW
+	'label_titre' => 'Nadpis',
 	'label_type_adresse' => 'Typ adresy',
 	'label_type_email' => 'Typ e-mailu',
 	'label_type_numero' => 'Typ telefónneho čísla',
@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'numeros' => 'Telefónne čísla',
 
 	// R
-	'rubriques' => 'Rubriques', # NEW
+	'rubriques' => 'Rubriky',
 
 	// S
 	'supprimer_adresse' => 'Odstrániť túto adresu',
