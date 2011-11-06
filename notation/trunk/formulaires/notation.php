@@ -10,7 +10,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/notation');
-include_spip('inc/notation_autorisations');
 include_spip('base/abstract_sql');
 include_spip('inc/session');
 
@@ -108,10 +107,6 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 
 	session_set('a_vote', true);
 
-	// invalider les caches
-	include_spip('inc/invalideur');
-	suivre_invalideur("id='id_notation/$type/$id_objet'");
-
 	if ($GLOBALS["auteur_session"]) {
 		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 	} else {
@@ -140,40 +135,26 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 	// Premier vote
 	if (!$row){  // Remplir la table de notation
 		if ($note!=='-1') // annulation d'un vote -> ne pas creer un id !
-			$id_notation = insert_notation();
+			$id_notation = notation_inserer($type,$id_objet);
 	} else {
 		$id_notation = $row['id_notation'];
 	}
 
 	if ($id_notation){
 		if ($note=='-1'){ // annulation d'un vote
-			supprimer_notation($id_notation);
+			notation_supprimer($id_notation);
 			$id_notation = 0;
 		}
 		else {
 			// Modifier la note
 			$c = array(
-				"objet" => $type,
-				"id_objet" => $id_objet,
 				"note" => $note,
 				"id_auteur" => $id_auteur,
 				"ip" => $ip
 			);
-			modifier_notation($id_notation,$c);
+			notation_modifier($id_notation,$c);
 		}
 
-		// mettre a jour les stats
-		//
-		// cette action est presque devenue inutile
-		// comme la table spip_notations_objets
-		// (qui devrait s'appeler spip_notations_stats plutot !)
-		// car le critere {notation} permet d'obtenir ces resultats
-		// totalements a jour...
-		// Cependant, quelques cas tres particuliers de statistiques
-		// font que je le laisse encore, comme calculer l'objet le mieux note :
-		// 	<BOUCLE_notes_pond(NOTATIONS_OBJETS){0,10}{!par note_ponderee}>
-		// qu'il n'est pas possible de traduire dans une boucle NOTATION facilement.
-		notation_recalculer_total($type,$id_objet);
 	}
 
 	$res = array("editable"=>true,"message_ok"=>_T("notation:jainote"),'id_notation'=>$id_notation);

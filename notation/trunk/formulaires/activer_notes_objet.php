@@ -54,7 +54,7 @@ function formulaires_activer_notes_objet_traiter_dist($id_objet, $objet='article
 		sql_updateq("spip_articles", array("accepter_note" => $statut), "id_article=". intval($id_objet));
 		
 		include_spip('inc/invalideur');
-		suivre_invalideur("id='$objet/$id_objet'");
+		suivre_invalideur("$objet/$id_objet");
 	}
 		
 	return array('message_ok'=>_T('config_info_enregistree'),'editable'=>true);
