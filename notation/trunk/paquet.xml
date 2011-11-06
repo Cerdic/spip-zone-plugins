@@ -4,7 +4,7 @@
 	version="2.0.0"
 	etat="stable"
 	compatibilite="[3.0.0-beta;3.0.*]"
-	logo="img_pack/note.gif"
+	logo="prive/themes/spip/images/notation-32.png"
 	schema="0.6.3"
 	documentation="http://www.spip-contrib.net/Notation-d-elements-SPIP"
 >	
