@@ -1,5 +1,8 @@
 <?php
 	$GLOBALS[$GLOBALS['idx_lang']] = array(
+
+		'clevermail' => 'CleverMail',
+	
 	  // Formulaires
 	  'ce_champ_est_obligatoire' => 'Ce champ est obligatoire.',
 	  'cette_adresse_email_n_est_pas_valide' => 'Cette adresse e-mail n\'est pas valide.',
@@ -15,10 +18,13 @@
 	  'inscription_deja_abonne_meme_mode' => 'Vous &eacute;tiez d&eacute;j&agrave; inscrit &agrave; la lettre « @lst_name@ » dans ce m&ecirc;me mode.',
 	  'inscription_deja_abonne_autre_mode' => 'Vous &eacute;tiez d&eacute;j&agrave; inscrit &agrave; la lettre « @lst_name@ » dans un autre mode, changement op&eacute;r&eacute;.',
 	  'bouton_inscription' => 'S\'inscrire',
+	  'label_contenu_html'=>'Contenu HTML',
+	  'label_contenu_text'=>'Contenu texte',
 
 		// Front
 		'label_inscription_email' => 'Votre adresse e-mail :',
 		'label_inscription_version' => 'Type de message :',
+  	'choix_toutes_les_listes' => 'Toutes les listes',
   	'choix_version_html' => 'HTML',
   	'choix_version_texte' => 'texte brut',
 		'label_inscription_lettres' => 'Choisissez parmi ces lettres d\'information :',
@@ -178,6 +184,7 @@ Merci',
     'auto_subscribers_explication' => 'Les adresses contenus dans ce fichier distant seront automatiquement abonn&eacute;es une fois par jour &agrave; cette lettre.',
 	  'auto_subscribers_url' => 'URL du fichier d\'adresses',
 	  'auto_subscribers_mode' => 'Mode d\'abonnement',
+	  'email_return_path' => 'E-mail des retours d\'erreurs (return-path)',
 	  'email_moderateur' => 'E-mail du mod&eacute;rateur',
 	  'prefixer_messages' => 'Pr&eacute;fixe',
 		'prefixer_messages_explication' => 'Pr&eacute;fixer les sujets des messages avec le nom de la lettre d\'information',
@@ -240,6 +247,8 @@ Merci',
 		'desabonner_abonnes' => 'D&eacute;sabonner les abonn&eacute;s selectionn&eacute;s',
 		'confirme_suppression_multiple_base' => 'Vous &ecirc;tes sur le point de supprimer des abonn&eacute;s de la base. &Eacute;tes vous sur ?',
 		'confirme_desabonnement_multiple_lettre' => 'Vous &ecirc;tes sur le point de d&eacute;sabonner plusieurs abonn&eacute;s de cette lettre. &Eacute;tes vous sur ?',
+		'source_des_abonnes'=>'Lister les abonnées',
+		'selection_des_listes'=>'S&eacute;lection des listes',
 
 	  // Mails
 	  'mail_info_inscription_sujet' => 'Inscription de @sub_email@',

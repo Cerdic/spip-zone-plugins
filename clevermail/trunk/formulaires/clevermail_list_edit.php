@@ -12,7 +12,6 @@ function formulaires_clevermail_list_edit_charger_dist($lst_id = -1) {
 			'lst_moderator_email' => $cm_mail_admin,
 			'lst_subscribe_subject' => _T('clevermail:confirmation_votre_inscription'),
 			'lst_subscribe_text' => _T('clevermail:confirmation_votre_inscription_text'),
-			'lst_subject' => '',
 			'lst_unsubscribe_subject' => _T('clevermail:confirmation_votre_desinscription'),
 			'lst_unsubscribe_text' => _T('clevermail:confirmation_votre_desinscription_text'),
 			'lst_subject_tag' => 1,
@@ -20,7 +19,7 @@ function formulaires_clevermail_list_edit_charger_dist($lst_id = -1) {
 			'lst_url_text' => 'clevermail_nouveautes_text',
 		  'lst_auto_mode' => 'none',
 		  'lst_auto_hour' => 8,
-      'lst_auto_week_days' => array(1),
+			'lst_auto_week_days' => array(1),
 		  'lst_auto_month_day' => 1,
 		  'lst_auto_subscribers' => '',
 		  'lst_auto_subscribers_mode' => 0
@@ -89,6 +88,8 @@ function formulaires_clevermail_list_edit_verifier_dist($lst_id = -1) {
 }
 
 function formulaires_clevermail_list_edit_traiter_dist($lst_id = -1) {
+
+	
   $champs = array(
     'lst_name' => _request('lst_name'),
     'lst_comment' => _request('lst_comment'),
@@ -96,7 +97,6 @@ function formulaires_clevermail_list_edit_traiter_dist($lst_id = -1) {
     'lst_moderator_email' => _request('lst_moderator_email'),
     'lst_subscribe_subject' => _request('lst_subscribe_subject'),
     'lst_subscribe_text' => _request('lst_subscribe_text'),
-    'lst_subject' => _request('lst_subject'),
     'lst_unsubscribe_subject' => _request('lst_unsubscribe_subject'),
     'lst_unsubscribe_text' => _request('lst_unsubscribe_text'),
     'lst_subject_tag' => _request('lst_subject_tag'),
