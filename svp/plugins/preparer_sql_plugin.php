@@ -39,8 +39,8 @@ function plugins_preparer_sql_plugin($plugin)
 	//    contient toujours qu'un seul index
 	$balise_auteur = entite2charset($plugin['auteur'][0]);
 	$auteurs = normaliser_auteur_licence($balise_auteur, 'auteur');
-	$plugin['licence'] = entite2charset($plugin['licence']);
-	$licences = normaliser_auteur_licence($plugin['licence'], 'licence');
+	$balise_licence = entite2charset($plugin['licence'][0]);
+	$licences = normaliser_auteur_licence($balise_licence, 'licence');
 	// -- on merge les tableaux recuperes dans auteur et licence
 	$champs['auteur'] = $champs['licence'] = $champs['copyright'] = '';
 	if ($t = array_merge($auteurs['auteur'], $licences['auteur']))
