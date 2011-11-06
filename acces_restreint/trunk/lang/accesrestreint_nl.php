@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteurs' => 'auteurs',
 
 	// B
+	'bouton_configurer_acces' => 'Configuration des acc&#232;s .htaccess', # NEW
 	'bouton_creer_la_zone' => 'De nieuwe zone creëren',
 
 	// C
@@ -20,15 +21,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_ajouter_auteurs' => 'Êtes vous sûr de vouloir ajouter cet auteur à la zone ?', # NEW
 	'confirmer_retirer_auteur_zone' => 'Bent u te willen zeker deze auteur van de zone terugtrekken?',
 	'confirmer_retirer_auteurs' => 'Bent u te willen zeker alle auteurs van deze zone terugtrekken ?',
+	'confirmer_retirer_rubrique_zone' => 'Êtes vous sûr de vouloir retirer cette rubrique de cette zone ?', # NEW
 	'confirmer_supprimer_zone' => 'Bent u te willen zeker deze zone afschaffen?',
 	'creer_zone' => 'Een nieuwe zone creëren',
 
 	// D
 	'descriptif' => 'Werktekening',
 
+	// E
+	'explication_creer_htaccess' => 'Cette option interdit la lecture des documents joints si le texte auquel ils se rattachent n\'est pas publi&eacute', # NEW
+
 	// I
 	'icone_menu_config' => 'Beperkte toegang',
 	'icone_supprimer_zone' => 'Deze zone afschaffen',
+	'info_1_zone' => '1 zone', # NEW
 	'info_acces_restreint' => 'L\'accès à cette page est restreint. Identifiez vous pour y accéder', # NEW
 	'info_ajouter_auteur' => 'Deze auteur toevoegen',
 	'info_ajouter_auteurs' => 'Alle auteurs toevoegen',
@@ -38,12 +44,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucune_zone' => 'Geen enkele zone',
 	'info_auteurs_lies_zone' => 'De auteurs die toegang tot deze zone hebben',
 	'info_lien_action_proteger' => 'Prot&eacute;ger l\'acc&egrave;s &agrave; cette rubrique.', # NEW
+	'info_nb_zones' => '@nb@ zones', # NEW
 	'info_page' => 'Deze bladzijde laat u toe om de zones van beperkte toegang van uwsite te beheren',
 	'info_retirer_auteurs' => 'Alle auteurs terugtrekken',
 	'info_retirer_zone' => 'De zone wegnemen',
 	'info_retirer_zones' => 'Alle zones wegnemen',
 	'info_rubrique_dans_zone' => 'Cette rubrique fait partie de la zone :', # NEW
 	'info_rubrique_dans_zones' => 'Cette rubrique fait partie des zones :', # NEW
+
+	// L
+	'label_creer_htaccess' => 'Acc&egrave;s aux document joints par leur URL', # NEW
+	'label_creer_htaccess_non' => 'autoriser la lecture', # NEW
+	'label_creer_htaccess_oui' => 'interdire la lecture', # NEW
 
 	// M
 	'modifier_zone' => 'De zone wijzigen',
@@ -62,6 +74,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'selectionner_une_zone' => 'Een zone selecteren',
 
 	// T
+	'texte_ajouter_zone' => 'Ajouter une zone', # NEW
+	'texte_creer_associer_zone' => 'Créer et associer une zone', # NEW
 	'titre' => 'Titel',
 	'titre_ajouter_zone' => 'Met de zone overeenkomen',
 	'titre_boite_protegee_non' => 'Acc&egrave;s non prot&eacute;g&eacute;', # NEW
@@ -69,6 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_cadre_modifier_zone' => 'Een zone wijzigen',
 	'titre_page_config' => 'Configuration des accès', # NEW
 	'titre_table' => 'Alle zones van toegang',
+	'titre_zone_acces' => 'Zone d\'accès restreint', # NEW
 	'titre_zones_acces' => 'Zones van beperkte toegang',
 	'toutes' => 'Iedereen',
 

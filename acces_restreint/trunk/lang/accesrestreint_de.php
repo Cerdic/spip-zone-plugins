@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteurs' => 'Autoren',
 
 	// B
+	'bouton_configurer_acces' => 'Configuration des acc&#232;s .htaccess', # NEW
 	'bouton_creer_la_zone' => 'Neuen Bereich erstellen',
 
 	// C
@@ -20,15 +21,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_ajouter_auteurs' => 'wollen sie diesen Autor wirklich dieser Zone zuordnen?',
 	'confirmer_retirer_auteur_zone' => 'Möchten Sie diesen Autor wirklich aus dem Bereich entfernen?',
 	'confirmer_retirer_auteurs' => 'Möchten wirklich alle Autoren aus dem Bereich entfernen?',
+	'confirmer_retirer_rubrique_zone' => 'Êtes vous sûr de vouloir retirer cette rubrique de cette zone ?', # NEW
 	'confirmer_supprimer_zone' => 'Wollen Sie diesen Bereich wirklich löschen?',
 	'creer_zone' => 'Neuen Bereich anlegen',
 
 	// D
 	'descriptif' => 'Beschreibung',
 
+	// E
+	'explication_creer_htaccess' => 'Cette option interdit la lecture des documents joints si le texte auquel ils se rattachent n\'est pas publi&eacute', # NEW
+
 	// I
 	'icone_menu_config' => 'Zugangskontrolle',
 	'icone_supprimer_zone' => 'Bereich löschen',
+	'info_1_zone' => '1 zone', # NEW
 	'info_acces_restreint' => 'Diese Seite ist geschützt. Bitte melden sie sich an, um auf sie zuzugreifen.',
 	'info_ajouter_auteur' => 'Autor hinzufügen',
 	'info_ajouter_auteurs' => 'Alle Autoren hinzufügen',
@@ -38,12 +44,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucune_zone' => 'Kein Bereich',
 	'info_auteurs_lies_zone' => 'Autoren mit Zugang zu diesem Bereich',
 	'info_lien_action_proteger' => 'Prot&eacute;ger l\'acc&egrave;s &agrave; cette rubrique.', # NEW
+	'info_nb_zones' => '@nb@ zones', # NEW
 	'info_page' => 'Hier können Sie die Bereiche mit Zugangskontrolle verwalten.',
 	'info_retirer_auteurs' => 'ALle Autoren entfernen',
 	'info_retirer_zone' => 'Bereich löschen',
 	'info_retirer_zones' => 'Alle Bereiche löschen',
 	'info_rubrique_dans_zone' => 'Cette rubrique fait partie de la zone :', # NEW
 	'info_rubrique_dans_zones' => 'Cette rubrique fait partie des zones :', # NEW
+
+	// L
+	'label_creer_htaccess' => 'Acc&egrave;s aux document joints par leur URL', # NEW
+	'label_creer_htaccess_non' => 'autoriser la lecture', # NEW
+	'label_creer_htaccess_oui' => 'interdire la lecture', # NEW
 
 	// M
 	'modifier_zone' => 'Bereich ändern',
@@ -62,6 +74,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'selectionner_une_zone' => 'Bereich auswählen',
 
 	// T
+	'texte_ajouter_zone' => 'Ajouter une zone', # NEW
+	'texte_creer_associer_zone' => 'Créer et associer une zone', # NEW
 	'titre' => 'Titel',
 	'titre_ajouter_zone' => 'zum Bereich zufügen',
 	'titre_boite_protegee_non' => 'Acc&egrave;s non prot&eacute;g&eacute;', # NEW
@@ -69,6 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_cadre_modifier_zone' => 'Bereich ändern',
 	'titre_page_config' => 'Zugangskonfiguration',
 	'titre_table' => 'Alle Bereiche mit Zugangskontrolle ',
+	'titre_zone_acces' => 'Zone d\'accès restreint', # NEW
 	'titre_zones_acces' => 'Bereiche mit Zugangskontrolle ',
 	'toutes' => 'Alle',
 

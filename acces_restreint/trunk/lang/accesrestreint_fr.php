@@ -11,15 +11,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteurs' => 'auteurs',
 
 	// B
-	'bouton_creer_la_zone' => 'Créer la nouvelle zone',
 	'bouton_configurer_acces' => 'Configuration des acc&#232;s .htaccess',
+	'bouton_creer_la_zone' => 'Créer la nouvelle zone',
 
 	// C
 	'colonne_id' => 'Num',
 	'confirmer_ajouter_auteurs' => 'Êtes vous sûr de vouloir ajouter cet auteur à la zone ?',
 	'confirmer_retirer_auteur_zone' => 'Êtes vous sûr de vouloir retirer cet auteur de la zone ?',
-	'confirmer_retirer_rubrique_zone' => 'Êtes vous sûr de vouloir retirer cette rubrique de cette zone ?',
 	'confirmer_retirer_auteurs' => 'Êtes vous sûr de vouloir retirer tous les auteurs de cette zone ?',
+	'confirmer_retirer_rubrique_zone' => 'Êtes vous sûr de vouloir retirer cette rubrique de cette zone ?',
 	'confirmer_supprimer_zone' => 'Êtes vous sûr de vouloir supprimer cette zone ?',
 	'creer_zone' => 'Créer une nouvelle zone',
 
@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_menu_config' => 'Accès Restreint',
 	'icone_supprimer_zone' => 'Supprimer cette zone',
+	'info_1_zone' => '1 zone',
 	'info_acces_restreint' => 'L\'accès à cette page est restreint. Identifiez vous pour y accéder',
 	'info_ajouter_auteur' => 'Ajouter cet auteur',
 	'info_ajouter_auteurs' => 'Ajouter tous les auteurs',
@@ -39,11 +40,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_acces' => 'Aucun accès autorisé',
 	'info_aucun_auteur' => 'Aucun auteur dans la zone',
 	'info_aucune_zone' => 'Aucune zone',
-	'info_1_zone' => '1 zone',
-	'info_nb_zones' => '@nb@ zones',
-
 	'info_auteurs_lies_zone' => 'Les auteurs ayant accès à cette zone',
 	'info_lien_action_proteger' => 'Prot&eacute;ger l\'acc&egrave;s &agrave; cette rubrique.',
+	'info_nb_zones' => '@nb@ zones',
 	'info_page' => 'Cette page vous permet de gérer les zones d\'accès restreint de votre site',
 	'info_retirer_auteurs' => 'Retirer tous les auteurs',
 	'info_retirer_zone' => 'Enlever de la zone',
@@ -53,8 +52,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_creer_htaccess' => 'Acc&egrave;s aux document joints par leur URL',
-	'label_creer_htaccess_oui' => 'interdire la lecture',
 	'label_creer_htaccess_non' => 'autoriser la lecture',
+	'label_creer_htaccess_oui' => 'interdire la lecture',
 
 	// M
 	'modifier_zone' => 'Modifier la zone',
@@ -82,8 +81,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_cadre_modifier_zone' => 'Modifier une zone',
 	'titre_page_config' => 'Configuration des accès',
 	'titre_table' => 'Toutes les zones d\'accès',
-	'titre_zones_acces' => 'Zones d\'accès restreint',
 	'titre_zone_acces' => 'Zone d\'accès restreint',
+	'titre_zones_acces' => 'Zones d\'accès restreint',
 	'toutes' => 'Toutes',
 
 	// V

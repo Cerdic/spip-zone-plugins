@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteurs' => 'autores',
 
 	// B
+	'bouton_configurer_acces' => 'Configuration des acc&#232;s .htaccess', # NEW
 	'bouton_creer_la_zone' => 'Crear la estaya nueva',
 
 	// C
@@ -20,15 +21,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_ajouter_auteurs' => '¿Tas seguru de que quies amestar esti autor a la zona?',
 	'confirmer_retirer_auteur_zone' => '¿Tas seguru de que quiés retirar esti autor de la zona?',
 	'confirmer_retirer_auteurs' => '¿Tas seguru de que quiés retirar toos los autores d\'esta zona?',
+	'confirmer_retirer_rubrique_zone' => 'Êtes vous sûr de vouloir retirer cette rubrique de cette zone ?', # NEW
 	'confirmer_supprimer_zone' => '¿Tas seguru que quies desaniciar esta zona?',
 	'creer_zone' => 'Crear una estaya nueva',
 
 	// D
 	'descriptif' => 'Descrición',
 
+	// E
+	'explication_creer_htaccess' => 'Cette option interdit la lecture des documents joints si le texte auquel ils se rattachent n\'est pas publi&eacute', # NEW
+
 	// I
 	'icone_menu_config' => 'Accesu Torgáo',
 	'icone_supprimer_zone' => 'Desaniciar esta estaya',
+	'info_1_zone' => '1 zone', # NEW
 	'info_acces_restreint' => 'L\'accesu a esta páxina ta llendáu. Identificate pa poder entrar',
 	'info_ajouter_auteur' => 'Amestar esti autor',
 	'info_ajouter_auteurs' => 'Amestar toos los autores',
@@ -38,12 +44,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucune_zone' => 'Denguna zona',
 	'info_auteurs_lies_zone' => 'Los autores con accesu a esta estaya',
 	'info_lien_action_proteger' => 'Prot&eacute;ger l\'acc&egrave;s &agrave; cette rubrique.', # NEW
+	'info_nb_zones' => '@nb@ zones', # NEW
 	'info_page' => 'Estae páxina te permite xestionar les estayes con accesu torgáu nel to sitiu',
 	'info_retirer_auteurs' => 'Retirar toos los autores',
 	'info_retirer_zone' => 'Quitar de la estaya',
 	'info_retirer_zones' => 'Quitar de toes les estayes',
 	'info_rubrique_dans_zone' => 'Cette rubrique fait partie de la zone :', # NEW
 	'info_rubrique_dans_zones' => 'Cette rubrique fait partie des zones :', # NEW
+
+	// L
+	'label_creer_htaccess' => 'Acc&egrave;s aux document joints par leur URL', # NEW
+	'label_creer_htaccess_non' => 'autoriser la lecture', # NEW
+	'label_creer_htaccess_oui' => 'interdire la lecture', # NEW
 
 	// M
 	'modifier_zone' => 'Iguar la zona',
@@ -62,6 +74,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'selectionner_une_zone' => 'Seleicionar una estaya',
 
 	// T
+	'texte_ajouter_zone' => 'Ajouter une zone', # NEW
+	'texte_creer_associer_zone' => 'Créer et associer une zone', # NEW
 	'titre' => 'Títulu',
 	'titre_ajouter_zone' => 'Amestar la estaya',
 	'titre_boite_protegee_non' => 'Acc&egrave;s non prot&eacute;g&eacute;', # NEW
@@ -69,6 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_cadre_modifier_zone' => 'Iguar una zona',
 	'titre_page_config' => 'Configuración de los accesos',
 	'titre_table' => 'Toes les estayes d\'accesu',
+	'titre_zone_acces' => 'Zone d\'accès restreint', # NEW
 	'titre_zones_acces' => 'Estayes d\'accesu torgáo',
 	'toutes' => 'Toes',
 
