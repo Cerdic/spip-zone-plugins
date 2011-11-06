@@ -92,7 +92,8 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	$nb_var = intval($outil['nb_variables']);
 
 	// cette valeur par defaut n'est pas definie sous SPIP 1.92
-	@define('_ID_WEBMESTRES', 1);
+	// constante abandonnee sous SPIP 3.0
+	if(!defined('_SPIP30000')) @define('_ID_WEBMESTRES', 1);
 	if(!strlen($outil['id']) || !autoriser('configurer', 'outil', 0, NULL, $outil))
 		return $s . _T('info_acces_interdit') . '</div>';
 
