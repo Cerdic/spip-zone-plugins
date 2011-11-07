@@ -22,8 +22,8 @@
 	<pipeline nom="affiche_milieu" inclure="boussole_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="genie/boussole_taches_generales_cron.php" />
 
-	<menu nom="boussole" titre="boussole:bouton_boussole" parent="configuration" icone="prive/themes/spip/images/boussole_icone-24.png" />
-	<menu nom="boussole_21" titre="boussole:bouton_boussole" parent="bando_squelette" icone="images/boussole_icone-16.png" />
+	<menu nom="boussole" titre="boussole:bouton_boussole" parent="configuration" icone="prive/themes/spip/images/boussole_icone-24.png" action="boussoles_gerer" />
+	<menu nom="boussole_21" titre="boussole:bouton_boussole" parent="bando_squelette" icone="images/boussole_icone-16.png" action="boussoles_gerer" />
 
-	<onglet nom="gerer" titre="boussole:onglet_boussoles" parent="boussoles" icone="prive/themes/spip/images/boussole_icone-24.png" />
+	<onglet nom="gerer" titre="boussole:onglet_boussoles" parent="boussoles" icone="prive/themes/spip/images/boussole_icone-24.png" action="boussoles_gerer" />
 </paquet>
