@@ -2,5 +2,59 @@
 <div class='infos'>
 <div class='numero'><:commandes:commande_numero:><p>#ID_COMMANDE</p></div>
 <div class='reference numero'><:commandes:commande_reference_numero:><p>#REFERENCE</p></div>
+<ul class="instituer instituer_commande">
+		<li><:commandes:modifier_commande_statut:>
+			<ul>
+				<li class="prepa[ (#STATUT|=={encours}|oui)selected]">
+					[(#STATUT|=={encours}|non)<a onclick="javascript:return confirm(confirm_changer_statut);" href="#URL_ACTION_AUTEUR{instituer_commande, #ID_COMMANDE-encours, #SELF}">]
+						<img width="9" height="9" alt="" src="#CHEMIN{images/puce-blanche.gif}">
+						<:commandes:statut_encours:>
+					[(#STATUT|=={encours}|non)</a>]
+				</li>
+				<li class="prop[ (#STATUT|=={attente}|oui)selected]">
+					[(#STATUT|=={attente}|non)<a onclick="javascript:return confirm(confirm_changer_statut);" href="#URL_ACTION_AUTEUR{instituer_commande, #ID_COMMANDE-attente, #SELF}">]
+						<img width="9" height="9" alt="" src="#CHEMIN{images/puce-orange.gif}">
+						<:commandes:statut_attente:>
+					[(#STATUT|=={attente}|non)</a>]
+				</li>
+				<li class="publie[ (#STATUT|=={paye}|oui)selected]">
+					[(#STATUT|=={paye}|non)<a onclick="javascript:return confirm(confirm_changer_statut);" href="#URL_ACTION_AUTEUR{instituer_commande, #ID_COMMANDE-paye, #SELF}">]
+						<img width="9" height="9" alt="" src="#CHEMIN{images/puce-verte.gif}">
+						<:commandes:statut_paye:>
+					[(#STATUT|=={paye}|non)</a>]
+				</li>
+				<li class="publie[ (#STATUT|=={partiel}|oui)selected]">
+					[(#STATUT|=={partiel}|non)<a onclick="javascript:return confirm(confirm_changer_statut);" href="#URL_ACTION_AUTEUR{instituer_commande, #ID_COMMANDE-partiel, #SELF}">]
+						<img width="9" height="9" alt="" src="#CHEMIN{images/puce-verte.gif}">
+						<:commandes:statut_partiel:>
+					[(#STATUT|=={partiel}|non)</a>]
+				</li>
+				<li class="publie[ (#STATUT|=={envoye}|oui)selected]">
+					[(#STATUT|=={envoye}|non)<a onclick="javascript:return confirm(confirm_changer_statut);" href="#URL_ACTION_AUTEUR{instituer_commande, #ID_COMMANDE-envoye, #SELF}">]
+						<img width="9" height="9" alt="" src="#CHEMIN{images/puce-verte.gif}">
+						<:commandes:statut_envoye:>
+					[(#STATUT|=={envoye}|non)</a>]
+				</li>
+				<li class="refuse[ (#STATUT|=={retour}|oui)selected]">
+					[(#STATUT|=={retour}|non)<a onclick="javascript:return confirm(confirm_changer_statut);" href="#URL_ACTION_AUTEUR{instituer_commande, #ID_COMMANDE-retour, #SELF}">]
+						<img width="9" height="9" alt="" src="#CHEMIN{images/puce-rouge.gif}">
+						<:commandes:statut_retour:>
+					[(#STATUT|=={retour}|non)</a>]
+				</li>
+				<li class="refuse[ (#STATUT|=={retour_partiel}|oui)selected]">
+					[(#STATUT|=={retour_partiel}|non)<a onclick="javascript:return confirm(confirm_changer_statut);" href="#URL_ACTION_AUTEUR{instituer_commande, #ID_COMMANDE-retour_partiel, #SELF}">]
+						<img width="9" height="9" alt="" src="#CHEMIN{images/puce-rouge.gif}">
+						<:commandes:statut_retour_partiel:>
+					[(#STATUT|=={retour_partiel}|non)</a>]
+				</li>				
+				<li class="poubelle[ (#STATUT|=={poubelle}|oui)selected]">
+					[(#STATUT|=={poubelle}|non)<a onclick="javascript:return confirm(confirm_changer_statut);" href="#URL_ACTION_AUTEUR{instituer_commande, #ID_COMMANDE-poubelle, #SELF}">]
+						<img width="9" height="9" alt="" src="#CHEMIN{images/puce-poubelle.gif}">
+						<:texte_statut_poubelle:>
+					[(#STATUT|=={poubelle}|non)</a>]
+				</li>
+			</ul>
+		</li>
+	</ul>
 </div>
 </BOUCLE_commande>
