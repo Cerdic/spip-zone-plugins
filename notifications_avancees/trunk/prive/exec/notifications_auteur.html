@@ -1,0 +1,21 @@
+[(#AUTORISER{configurer_notifications, auteur, #ENV{id_auteur}}|oui)
+<!--#hierarchie-->
+<ul id="chemin">
+	<li>
+		<a href="#URL_ECRIRE{auteurs}"><:icone_auteurs:></a>
+	</li>
+	<li>
+		<em> > </em>
+		<a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur, #ENV{id_auteur}})]">#INFO_TITRE{auteur,#ENV{id_auteur}}</a>
+	</li>
+	<li>
+		<em> > </em>
+		[<span class="on">(#SESSION{id_auteur}|=={#ENV{id_auteur}}|?{<:notifavancees:infos_mes_notifications:>,<:notifavancees:infos_notifications:>})</span>]
+	</li>
+</ul>
+<!--/#hierarchie-->
+
+<h1>[(#SESSION{id_auteur}|=={#ENV{id_auteur}}|?{<:notifavancees:infos_mes_notifications:>,<:notifavancees:infos_notifications:>})]</h1>
+
+#FORMULAIRE_NOTIFICATIONS_AUTEUR{#ENV{id_auteur}}
+]

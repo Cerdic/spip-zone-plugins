@@ -1,0 +1,72 @@
+<div class="formulaire_spip formulaire_editer formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id,nouveau})]">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<table>
+			<thead>
+				<tr>
+					<th class="selection"></th>
+					<th class="type">Type</th>
+					<th class="objet">Objet</th>
+					<th class="modes">Modes d'envoi</th>
+					<th class="statut">Statut</th>
+					<th class="actions">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<BOUCLE_notifications(NOTIFICATIONS_ABONNEMENTS){id_auteur=#ENV{_id_auteur}}>
+				[(#SET{objet,[(#QUOI|explode{_}|table_valeur{0})]})]
+				<tr>
+					<td class="selection">
+						<input type="checkbox" name="notifications[]" value="#ID_NOTIFICATIONS_ABONNEMENT" />
+					</td>
+					<td class="type">
+						[(#ENV{_notifications_disponibles}|table_valeur{#QUOI}|table_valeur{titre}|sinon{#QUOI})]
+					</td>
+					<td class="objet">#INFO_TITRE{#GET{objet}, #ID}</td>
+					<td class="modes">
+						<BOUCLE_modes(POUR){tableau	#MODES}{", "}>
+						[(#ENV{_modes_disponibles}|table_valeur{#VALEUR}|table_valeur{titre}|sinon{#VALEUR})]
+						</BOUCLE_modes>
+						<em><:notifavancees:modes_refus:></em>
+						<//B_modes>
+					</td>
+					<td class="statut">[(#ACTIF|?{Activé, Désactivé})]</td>
+					<td class="actions">
+					[(#REM) Pour l'instant on édite rien
+					[(#AUTORISER{modifier,notifications_abonnement,#ID_NOTIFICATIONS_ABONNEMENT}|oui)
+						<:notifavancees:abonnement_action_editer:>
+					]
+					]
+					[(#AUTORISER{toggle,notifications_abonnement,#ID_NOTIFICATIONS_ABONNEMENT}|oui)
+						<a href="#URL_ACTION_AUTEUR{toggle_notifications_abonnement,#ID_NOTIFICATIONS_ABONNEMENT,#SELF}">
+							[(#ACTIF|?{<:notifavancees:abonnement_action_desactiver:>,<:notifavancees:abonnement_action_activer:>})]
+						</a>
+					]
+					[(#AUTORISER{supprimer,notifications_abonnement,#ID_NOTIFICATIONS_ABONNEMENT}|oui)
+						<a href="#URL_ACTION_AUTEUR{supprimer_notifications_abonnement,#ID_NOTIFICATIONS_ABONNEMENT,#SELF}"
+							onclick="return confirm('<:notifavancees:confirmer_supprimer:>')"
+						>
+							<:notifavancees:abonnement_action_supprimer:>
+						</a>
+					]
+					</td>
+				</tr>
+				</BOUCLE_notifications>
+			</tbody>
+		</table>
+		
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		
+		<p class="boutons">
+			<span class="image_loading"></span>
+			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	</div></form>
+</div>

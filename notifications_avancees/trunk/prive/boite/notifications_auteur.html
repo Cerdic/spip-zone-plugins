@@ -1,0 +1,28 @@
+#SET{abonnements,0}
+#SET{refus,0}
+<BOUCLE_notifications(NOTIFICATIONS_ABONNEMENTS){id_auteur}>
+[(#MODES|oui)
+	[(#SET{abonnements,[(#GET{abonnements}|plus{1})]})]
+]
+[(#MODES|non)
+	[(#SET{refus,[(#GET{refus}|plus{1})]})]
+]
+</BOUCLE_notifications>
+<div style="" class="cadre cadre-r">
+	[<img width="24" height="24" class="cadre-icone" alt="" src="(#CHEMIN{images/notifications-24.png})">]
+	<h3 class="titrem">[(#SESSION{id_auteur}|=={#ENV{id_auteur}}|?{<:notifavancees:infos_mes_notifications:>,<:notifavancees:infos_notifications:>})]</h3>
+	<div class="cadre_padding">
+		[(#GET{abonnements}|oui)
+			<p><:notifavancees:infos_nb_abonnements{nb=#GET{abonnements}}:></p>
+		]
+		[(#GET{refus}|oui)
+			<p><:notifavancees:infos_nb_refus{nb=#GET{refus}}:></p>
+		]
+		[(#AUTORISER{configurer_notifications, auteur, #ENV{id_auteur}}|oui)
+			<p class="boutons">
+				<a href="[(#URL_ECRIRE{notifications_auteur}|parametre_url{id_auteur,#ENV{id_auteur}})]"><:notifavancees:config_modifier_notifications_auteur:></a>
+			</p>
+		]
+	</div>
+</div>
+</B_notifications>

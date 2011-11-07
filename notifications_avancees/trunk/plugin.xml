@@ -1,0 +1,42 @@
+<plugin>
+	<nom>Notifications avancées</nom>
+	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
+	<licence>GPL v3</licence>
+	<version>0.2.0</version>
+	<version_base>0.1.0</version_base>
+	<etat>test</etat>
+	<description>Permet une gestion fine des notifications à envoyer avec possibilité de s'inscrire/se désinscrire et de choisir les modes d'envois.</description>
+	<icon>images/notifications-128.png</icon>
+	<categorie>outil</categorie>
+	
+	<prefix>notifavancees</prefix>
+	
+	<install>base/notifavancees_installation.php</install>
+	
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/notifavancees_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/notifavancees_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>notifications</nom>
+		<inclure>notifavancees_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>notifavancees_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/notifications_autoriser.php</inclure>
+	</pipeline>
+	
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="spip_bonux" version="[2.2.10;]" />
+	<necessite id="queue" version="[0.6.2;]" />
+	<necessite id="saisies" version="[1.8.5;]" />
+	<necessite id="yaml" version="[1.4.1;]" />
+</plugin>
