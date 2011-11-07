@@ -17,4 +17,12 @@ function autoriser_commander_dist($faire, $quoi, $id, $qui, $options){
 		return false;
 }
 
+// on ne laisse pas les redacteurs voir les commandes
+// ni voir les commandes dans la recherche spip
+function autoriser_commande_dist($faire, $quoi, $id, $qui, $options) {
+	return
+		$qui['statut'] == '0minirezo'
+		AND !$qui['restreint'];
+}
+
 ?>

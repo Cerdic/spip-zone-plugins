@@ -86,4 +86,16 @@ function commandes_rechercher_liste_des_jointures($tables){
 	return $tables;
 }
 
+// definir la jointur commande_auteur qui n'est pas sur spip_commandes_auteurs
+// cf. inc/rechercher.php
+function inc_rechercher_joints_commande_auteur_dist($table, $table_liee, $ids, $serveur) {
+	if (!autoriser('voir', 'commande')) {
+		return array("id_commande", "id_auteur", array());
+	}
+	$s = sql_select("id_commande, id_auteur", "spip_commandes", sql_in("id_auteur", $ids), '','','','',$serveur);
+	return array("id_commande", "id_auteur", $s);
+}
+
+
+
 ?>
