@@ -1,16 +1,17 @@
 <plugin>
 <nom>Albums</nom>
-<prefix>album</prefix>
+<prefix>albums</prefix>
 <icon>icon/album.png</icon>
 
 <categorie>multimedia</categorie>
 <slogan>Albums au fil du texte</slogan>
 <description>Afficher une ou plusieurs galeries d’images au fil du texte, dans les articles et ailleurs.</description>
+<lien>http://www.spip-contrib.net/?article3971</lien>
 <auteur>[romy.tetue.net->http://romy.tetue.net]</auteur>
 <licence>GPL 2011</licence>
 
-<version>0.0.3</version>
-<etat>dev</etat>
+<version>1.0.0</version>
+<etat>stable</etat>
 
 <necessite id='SPIP' version='[2.0.0;]' />
 <pipeline>
