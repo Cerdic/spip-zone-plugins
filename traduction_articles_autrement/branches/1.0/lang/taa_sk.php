@@ -7,6 +7,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
+	'affichage_liste_compacte_desactive' => 'Deaktivovať zobrazenie kompaktného zoznamu článkov',
+
 	// C
 	'changer_langue' => 'Zmeniť jazyk článku',
 
