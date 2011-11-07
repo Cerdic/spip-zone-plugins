@@ -76,14 +76,20 @@ var map[(#GET{id})];
 		
 		map[(#GET{id})].setCenterAndZoom(new mxn.LatLonPoint(#GET{lat},#GET{lon}),#ENV{zoom,#CONFIG{gis/zoom,0}});
 
+		[(#SET{maptype, #REM|gis_maptype_utilise})]
 		[(#ENV{type}|oui)
-		#SET{type,ROAD}
-		[(#ENV{type}|=={'carte'}|oui) #SET{type,ROAD} ]
-		[(#ENV{type}|=={'satellite'}|oui) #SET{type,SATELLITE} ]
-		[(#ENV{type}|=={'hybride'}|oui) #SET{type,HYBRID} ]
-		[(#ENV{type}|=={'relief'}|oui) #SET{type,PHYSICAL} ]
-		map[(#GET{id})].setMapType([mxn.Mapstraction.(#GET{type})]);
+		[(#ENV{type}|=={'carte'}|oui) #SET{maptype,ROAD} ]
+		[(#ENV{type}|=={'satellite'}|oui) #SET{maptype,SATELLITE} ]
+		[(#ENV{type}|=={'hybride'}|oui) #SET{maptype,HYBRID} ]
+		[(#ENV{type}|=={'relief'}|oui) #SET{maptype,PHYSICAL} ]
 		]
+		// Pour l'API Openlayers, la methode n'existe pas
+		try {
+			map[(#GET{id})].setMapType([mxn.Mapstraction.(#GET{maptype})]);
+		}
+		catch(err) {
+			;
+		}
 
 		[(#ENV{no_control,#ENV{aucun_controle}}|!={oui}|oui)
 		map[(#GET{id})].addControls({zoom: '[(#ENV{control_zoom,large})]'});]
