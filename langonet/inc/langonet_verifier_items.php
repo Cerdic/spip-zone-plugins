@@ -54,7 +54,7 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 		include(_DIR_RACINE.$fichier_langue);
 	}
 	if ($verification == 'definition') {
-		// Les chaines definies sont dans les fichiers definies par la RegExp ci-dessous
+		// Les chaines definies sont dans les fichiers definis par la RegExp ci-dessous
 		// Autrement dit les fichiers francais du repertoire lang/ sont la reference
 		$files = preg_files(_DIR_RACINE, '/lang/[^/]+_fr\.php$');
 		$resultats = langonet_classer_items($module, $resultats, $GLOBALS[$var_source], $files);
@@ -167,11 +167,16 @@ function langonet_reperer_items($utilises, $init)
 
 function langonet_classer_items($module, $utilises, $init=array(), $files=array()) {
 
+	$tous_lang = array();
 	foreach ($files as $_fichier) {
+		$module_def = preg_match(',/lang/([^/]+)_fr\.php$,i', $_fichier, $m) ? $m[1] : '';
 		foreach ($contenu = file($_fichier) as $ligne => $texte) {
-			if (preg_match_all("#^[\s\t]*['\"]([a-z0-9_]+)['\"][\s\t]*=>#i", $texte, $matches)) {
-				foreach ($matches[1] as $cet_item) {
-					$tous_lang[$cet_item][] = $_fichier;
+			if (preg_match_all("#^[\s\t]*['\"]([a-z0-9_]+)['\"][\s\t]*=>(.*)$#i", $texte, $matches, PREG_SET_ORDER)) {
+				foreach ($matches as $m) {
+					$index = $m[1];
+					$m[0] = $_fichier;
+					$m[1] = $module_def;
+					$tous_lang[$index][] = $m;
 				}
 			}
 		}
@@ -179,55 +184,46 @@ function langonet_classer_items($module, $utilises, $init=array(), $files=array(
 
 	$item_non = $definition_non_mais_nok = $item_md5 = $fichier_non = array();
 	foreach ($utilises['items'] as $_cle => $_valeur) {
-
 		if (!isset($init[$_valeur])) {
 			if (!$utilises['suffixes'][$_cle]) {
-				if ($utilises['modules'][$_cle] == $module) {
+				$mod = $utilises['modules'][$_cle];
+				if ($mod == $module) {
 					// Item indefini alors que le module est explicite, c'est une erreur
 					$item_non[] = $_valeur;
 					if (is_array($utilises['item_tous'][$_cle])) {
 						$fichier_non[$_cle] = $utilises['item_tous'][$_cle];
 					}
-				}
-				else {
-					// L'item est a priori defini dans un autre module. Le fait qu'il ne soit pas
+				} else {
+					// L'item peut etre defini dans un autre module. Le fait qu'il ne soit pas
 					// defini dans le fichier en cours de verification n'est pas forcement une erreur.
 					// On l'identifie donc a part
-					$definition_ok = false;
-					$definitions = array();
+					$ok = false;
 					if (array_key_exists($_valeur, $tous_lang)) {
-						$definitions = $tous_lang[$_valeur];
-						while ((list($_index, $_fichier) = each($definitions)) AND !$definition_ok)  {
-							preg_match(',/lang/([^/]+)_fr\.php$,i', $_fichier, $module_trouve);
-							if ($module_trouve[1]) {
-								if ($module_trouve[1] == $utilises['modules'][$_cle]) {
-									$definition_ok = true;
-								}
-								else {
-									$definition_ok = ((($module_trouve[1]=='spip') OR ($module_trouve[1]=='ecrire') OR ($module_trouve[1]=='public')) AND (!$utilises['modules'][$_cle]));
-								}
+						foreach ($tous_lang[$_valeur] as $m) {
+						  if (!$m[1]) continue;
+						  if ($ok = ($mod ? ($m[1] == $mod) : (($m[1]=='spip') OR ($m[1]=='ecrire') OR ($m[1]=='public')))) {
+									break;
 							}
 						}
 					}
-					if ($definition_ok) {
+					if ($ok) {
+						$definition_non_mais[$_valeur] = array_map('array_shift', $tous_lang[$_valeur]);
 						$item_non_mais[] = $_valeur;
 						if (is_array($utilises['item_tous'][$_cle])) {
 							$fichier_non_mais[$_cle] = $utilises['item_tous'][$_cle];
 						}
-						if ($definitions)
-							$definition_non_mais[$_valeur] = $definitions;
-					}
-					else {
+					} else {
 						$item_non_mais_nok[] = $_cle;
 						if (is_array($utilises['item_tous'][$_cle])) {
 							$fichier_non_mais_nok[$_cle] = $utilises['item_tous'][$_cle];
-					// Si pas normalise, c'est une auto-definition 
+							// Si pas normalise, c'est une auto-definition
+							// Il faudrait gerer l'homonymie, pas seulement la signaler
 							if (!preg_match(',^\w+$,', $_valeur)) {
-								$item_md5[$_cle] = $_valeur;
+								  if (!isset($tous_lang[$_cle]) OR preg_match("%^\s*'$_valeur',?\s*$%", $tous_lang[$_cle][0][2]))
+									$item_md5[$_cle] = $_valeur;
+								  else spip_log("homonymie de cle pour '$_valeur' et " . $tous_lang[$_cle][0][2]);
 							}
 						}
-						if ($definitions)
-							$definition_non_mais_nok[$_cle] = $definitions;
 					}
 				}
 			}
