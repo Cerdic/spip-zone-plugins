@@ -97,6 +97,7 @@ function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_art
 
 function formulaires_editer_evenement_traiter_dist($id_evenement='new', $id_article=0, $retour='', $lier_trad = 0, $config_fonc='evenements_edit_config', $row=array(), $hidden=''){
 	set_request('horaire',_request('horaire')=='non'?'non':'oui');
+	set_request('inscription',_request('inscription')?1:0);
 	include_spip('inc/date_gestion');
 	$erreurs = array();
 	$date_debut = verifier_corriger_date_saisie('debut',_request('horaire')=='oui',$erreurs);

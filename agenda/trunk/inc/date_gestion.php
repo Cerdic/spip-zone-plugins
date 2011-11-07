@@ -23,16 +23,16 @@ function verifier_corriger_date_saisie($suffixe,$horaire,&$erreurs){
 		return '';
 	$ret = null;
 	if (!$ret=mktime(0,0,0,$date[1],$date[2],$date[0]))
-		$erreurs["date_$suffixe"] = _T('spip_bonux:erreur_date');
+		$erreurs["date_$suffixe"] = _T('agenda:erreur_date');
 	elseif (!$ret=mktime($date[3],$date[4],$date[5],$date[1],$date[2],$date[0]))
-		$erreurs["date_$suffixe"] = _T('spip_bonux:erreur_heure');
+		$erreurs["date_$suffixe"] = _T('agenda:erreur_heure');
 	if ($ret){
 		if (trim(_request("date_$suffixe")!==($d=date('d/m/Y',$ret)))){
-			$erreurs["date_$suffixe"] = _T('spip_bonux:erreur_date_corrigee');
+			$erreurs["date_$suffixe"] = _T('agenda:erreur_date_corrigee');
 			set_request("date_$suffixe",$d);
 		}
 		if ($horaire AND trim(_request("heure_$suffixe")!==($h=date('H:i',$ret)))){
-			$erreurs["heure_$suffixe"] = _T('spip_bonux:erreur_heure_corrigee');
+			$erreurs["heure_$suffixe"] = _T('agenda:erreur_heure_corrigee');
 			set_request("heure_$suffixe",$h);
 		}
 	}
