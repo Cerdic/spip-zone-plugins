@@ -16,7 +16,8 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 		$self = str_replace('&', '&amp;', nettoyer_uri());//self();//$GLOBALS['REQUEST_URI'];
 	if($page===false) return;
 	// trouver quel <hx> est utilise
-	$root = $niveau = $match = preg_match(',<h(\d),',$GLOBALS['debut_intertitre'],$regs)?$regs[1]:'3';
+	include_spip('outils/sommaire');
+	$root = $niveau = $match = sommaire_niveau_intertitres();
 	@define('_sommaire_NB_CARACTERES', 30);
 	@define('_sommaire_PROFONDEUR', 1);
 	if(_sommaire_PROFONDEUR>1)

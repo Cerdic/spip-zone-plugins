@@ -28,10 +28,20 @@ function sommaire_nettoyer_raccourcis($texte) {
 	return str_replace(array(_sommaire_SANS_FOND, _CS_SANS_SOMMAIRE, _CS_AVEC_SOMMAIRE), '', $texte);
 }
 
+// renvoie le niveau d'intertitre en cours
+function sommaire_niveau_intertitres() {
+	// SPIP 3.0 remplace les intertitres avec TextWheels
+	// TODO : recuperer la valeur utilisee par TW au lieu de '3'
+	return (isset($GLOBALS['debut_intertitre']) && preg_match(',<h(\d),', $GLOBALS['debut_intertitre'], $r))
+		?$r[1]:'3';
+}
+
 // informer dans la description de l'outil de la balise utilisee par SPIP
 function sommaire_description_outil($flux) {
-	if($flux['outil']=='sommaire' && preg_match(',<h(\d),', $GLOBALS['debut_intertitre'], $r))
-		$flux['texte'] = str_replace(array('@h3@','@h4@'), array('h'.$r[1],'h'.($r[1]+1)), $flux['texte']);
+	if($flux['outil']=='sommaire') {
+		$h = sommaire_niveau_intertitres();
+		$flux['texte'] = str_replace(array('@h3@','@h4@'), array('h'.$h,'h'.($h+1)), $flux['texte']);
+	}
 	return $flux;
 }
 
@@ -40,6 +50,9 @@ function sommaire_intertitres_callback($matches) {
 	static $racc = array();
 	$niv = strlen($matches[1])-1;
 	if(!isset($racc[$niv])) {
+		// SPIP 3.0 : plus de globale ! TODO : recuperer la valeur utilisee par TW au lieu de 'h3'
+		if(!isset($GLOBALS['debut_intertitre'])) $GLOBALS['debut_intertitre'] = '<h3 class="spip">';
+		if(!isset($GLOBALS['fin_intertitre'])) $GLOBALS['fin_intertitre'] = '</h3>';
 		$cfg = $niv+1;
 		// compatibilite avec les Enluminures Typo v3 et initialisation des variables
 		if(function_exists('typoenluminee_pre_propre')) typoenluminee_pre_propre('');
