@@ -14,6 +14,7 @@
 
 [(#REM) Frais d'envoi ? ]
 <input name="shipping" type="hidden" value="#ENV{shipping,0.00}" />
+[<input name="handling_cart" type="hidden" value="(#ENV{handling_cart})" />]
 
 [(#REM) Informations de facturaction ]
 [<input type="hidden" name="email" value="(#ENV{email})" />]
