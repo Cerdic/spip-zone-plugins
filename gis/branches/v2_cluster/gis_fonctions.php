@@ -146,6 +146,22 @@ function gis_api_utilisee(){
 	}
 }
 
+/**
+ * Définition du fond cartographique à utiliser en prenant compte les defines
+ */
+function gis_maptype_utilise(){
+	$defaut = 'ROAD';
+	if(defined('_GIS_MAPTYPES_FORCE')){
+		return _GIS_MAPTYPES_FORCE;
+	}else{
+		if(defined('_GIS_MAPTYPES_DEFAUT')){
+			$defaut = _GIS_MAPTYPES_DEFAUT;
+		}
+		$config = @unserialize($GLOBALS['meta']['gis']);
+		return $config['maptype'] ? $config['maptype'] : $defaut;
+	}
+}
+
 // Cluster côté serveur
 // http://www.appelsiini.net/2008/11/introduction-to-marker-clustering-with-google-maps
 
