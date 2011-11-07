@@ -103,6 +103,7 @@ function plugin2paquet($plugins) {
 	if (count($plugins) == 1 ) {
 		$cle_min_min = $cle_min_max = 0;
 		$plugins[$cle_min_min]['auteur'] = $plugins[$cle_min_min]['auteur'][0];
+		$plugins[$cle_min_min]['licence'] = $plugins[$cle_min_min]['licence'][0];
 		if ($plugins[$cle_min_min]['compatibilite'])
 			$plugins[$cle_min_min]['compatibilite_paquet'] = $plugins[$cle_min_min]['compatibilite'];
 	}
@@ -145,7 +146,7 @@ function plugin2paquet($plugins) {
 		$plugins[$cle_min_min]['documentation'] = $plugins[$cle_min_max]['documentation'];
 		$plugins[$cle_min_min]['nom'] = $plugins[$cle_min_max]['nom'];
 		$plugins[$cle_min_min]['auteur'] = $plugins[$cle_min_max]['auteur'][0];
-		$plugins[$cle_min_min]['licence'] = $plugins[$cle_min_max]['licence'];
+		$plugins[$cle_min_min]['licence'] = $plugins[$cle_min_max]['licence'][0];
 		$plugins[$cle_min_min]['slogan'] = $plugins[$cle_min_max]['slogan'];
 		$plugins[$cle_min_min]['description'] = $plugins[$cle_min_max]['description'];
 		// On initialise la compatibilite avec la fusion des intervalles de compatibilite SPIP
@@ -492,7 +493,7 @@ function plugin2balise_exec($D, $balise) {
 			plugin2attribut('parent', @$i['parent']) .
 			plugin2attribut('position', @$i['position']) .
 			plugin2attribut('icone', @$i['icone']) .
-			plugin2attribut('action', @$i['url']) .
+			plugin2attribut('action', @$i['action']) .
 			plugin2attribut('parametres', str_replace('&', '&amp;', str_replace('&amp;', '&', @$i['args']))) .
 			' />';
 	}
