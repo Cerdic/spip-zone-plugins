@@ -1,6 +1,10 @@
 <!-- autoriser=webmestre -->
 <!-- refus=<:cfg:refus_configuration_webmestre:> -->
 <!-- nom=jquerysuperfish -->
+#SET{lien_test_hori,#URL_PAGE{demo/jquerysuperfish}|parametre_url{classe_menu,#CONFIG{jquerysuperfish/classe_hori}}}
+#SET{lien_test_vert,#URL_PAGE{demo/jquerysuperfish}|parametre_url{classe_menu,#CONFIG{jquerysuperfish/classe_vert}}}
+#SET{lien_test_navbar,#URL_PAGE{demo/jquerysuperfish}|parametre_url{classe_menu,#CONFIG{jquerysuperfish/classe_navbar}}}
+
 [(#SET{saisies,
    #ARRAY{
       0, #ARRAY{
@@ -48,6 +52,14 @@
                   label, <:jquerysuperfish:label_delai:>,
                   explication, <:jquerysuperfish:explication_delai:>,
                   defaut, 200,
+                  afficher_si, '@menu_hori@ == "on"' 
+               }
+            },
+            4, #ARRAY{
+               saisie, explication,
+               options, #ARRAY{
+                  nom, tester_hori,
+                  texte, #VAL{<:jquerysuperfish:texte_tester:>}|_T{#ARRAY{lien,#GET{lien_test_hori}}},
                   afficher_si, '@menu_hori@ == "on"' 
                }
             }
@@ -99,6 +111,72 @@
                   explication, <:jquerysuperfish:explication_delai:>,
                   defaut, 200,
                   afficher_si, '@menu_vert@ == "on"' 
+               }
+            },
+            4, #ARRAY{
+               saisie, explication,
+               options, #ARRAY{
+                  nom, tester_vert,
+                  texte, #VAL{<:jquerysuperfish:texte_tester:>}|_T{#ARRAY{lien,#GET{lien_test_vert}}},
+                  afficher_si, '@menu_vert@ == "on"' 
+               }
+            }
+         }
+      },
+      2, #ARRAY{
+         saisie, fieldset,
+         options, #ARRAY{
+            nom, fmenu_nav_bar,
+            label, <:jquerysuperfish:legend_menu{type=navbar}:>
+         },
+         saisies, #ARRAY{
+           	0, #ARRAY{
+               saisie, oui_non,
+               options, #ARRAY{
+                  nom, menu_navbar,
+                  label, <:jquerysuperfish:label_menu{type=navbar}:>,
+                  explication, <:jquerysuperfish:explication_menu{type=navbar}:>,
+                  obligatoire, oui,
+                  defaut, 
+               }
+            },
+            1, #ARRAY{
+               saisie, input,
+               options, #ARRAY{
+                  nom, classe_navbar,
+                  label, <:jquerysuperfish:label_classe:>,
+                  obligatoire, oui,
+                  explication, <:jquerysuperfish:explication_classe:>,
+                  defaut, sf_navbar,
+                  afficher_si, '@menu_navbar@ == "on"' 
+               }
+            },
+            2, #ARRAY{
+               saisie, input,
+               options, #ARRAY{
+                  nom, animation_navbar,
+                  label, <:jquerysuperfish:label_animation:>,
+                  explication, <:jquerysuperfish:explication_animation:>,
+                  defaut, "height:'show'",
+                  afficher_si, '@menu_navbar@ == "on"' 
+               }
+            },
+            3, #ARRAY{
+               saisie, input,
+               options, #ARRAY{
+                  nom, delai_navbar,
+                  label, <:jquerysuperfish:label_delai:>,
+                  explication, <:jquerysuperfish:explication_delai:>,
+                  defaut, 200,
+                  afficher_si, '@menu_navbar@ == "on"' 
+               }
+            },
+            4, #ARRAY{
+               saisie, explication,
+               options, #ARRAY{
+                  nom, tester_navbar,
+                  texte, #VAL{<:jquerysuperfish:texte_tester:>}|_T{#ARRAY{lien,#GET{lien_test_navbar}}},
+                  afficher_si, '@menu_navbar@ == "on"' 
                }
             }
          }

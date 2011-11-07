@@ -20,5 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_menu' => 'Gérer un menu @type@',
 	'legend_menu' => 'Menu @type@' ,
 
+	// T
+	'texte_tester' => 'Si la configuration est enregistrée, vous pouvez <a href="@lien@">tester ce type de menu</a>' ,
 );
 ?>

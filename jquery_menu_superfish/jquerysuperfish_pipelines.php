@@ -10,6 +10,9 @@ function jquerysuperfish_insert_head_css($flux){
 		if($conf_jquerysuperfish["menu_vert"]) {
 			$flux .="\n".'<link rel="stylesheet" href="'.url_absolue(find_in_path('css/superfish-vertical.css')).'" type="text/css" media="all" />';
 		}
+		if($conf_jquerysuperfish["menu_navbar"]) {
+			$flux .="\n".'<link rel="stylesheet" href="'.url_absolue(find_in_path('css/superfish-navbar.css')).'" type="text/css" media="all" />';
+		}
 	}
 
 	return $flux;
@@ -32,6 +35,14 @@ function jquerysuperfish_insert_head($flux){
 		$(".'.$conf_jquerysuperfish["classe_vert"].'").addClass("sf-menu sf-vertical sf-shadow").superfish({ 
 					animation: {'.$conf_jquerysuperfish["animation_vert"].'},
 					delay:'.$conf_jquerysuperfish["delai_vert"].'
+			  });';
+	}
+	if($conf_jquerysuperfish["menu_navbar"]) {
+		$flux .= "\n".'
+		$(".'.$conf_jquerysuperfish["classe_navbar"].'").addClass("sf-menu sf-navbar sf-shadow").superfish({ 
+					animation: {'.$conf_jquerysuperfish["animation_navbar"].'},
+					pathClass:"on",
+					delay:'.$conf_jquerysuperfish["delai_navbar"].'
 			  });';
 	}
 	$flux .= "});\n/* ]]> */</script>";
