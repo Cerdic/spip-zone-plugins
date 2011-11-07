@@ -1,13 +1,17 @@
+<h1 class="grostitre"><:agenda:agenda:></h1>
 [(#REM) Se placer au debut du mois en cours par defaut]
-#SET{date_debut,#VAL{Y-m-}|date|concat{01}}
-<BOUCLE_un(EVENEMENTS){id_evenement}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>
+#SET{date_debut,#VAL{Y-m-d H:i:s}|date{#ENV{date_debut,#ENV{date}}|affdate{Y-m-d 00:00:00}|strtotime|moins{1}}}
+<BOUCLE_un(EVENEMENTS){statut==.*}{id_evenement}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>
 [(#REM) Si un evenement passe, on commence par le jour de cet evenement]
-#SET{date_debut,#DATE_DEBUT|affdate{Y-m-d}}
+	#SET{id_evenement,#ID_EVENEMENT}
 </BOUCLE_un>
-	#SET{date_debut,#ENV{date}|affdate{Y-m-d}}
-	#SET{date_debut,#ENV{date_debut,#GET{date_debut}}}
+	<BOUCLE_debut(EVENEMENTS){evenement_a_venir #GET{date_debut}}{statut==.*}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{par date_debut}{0,1}>
+		#SET{id_evenement,#ID_EVENEMENT}
+	</BOUCLE_debut>
 <//B_un>
-[(#INCLURE{fond=prive/objets/liste/evenements-post}{date_debut=#GET{date_debut}}{env}{ajax})
+<div id="liste_des_evenements">
+	[(#INCLURE{fond=prive/objets/liste/evenements-post}{debut_agenda=#ENV{debut_agenda,@#GET{id_evenement}}}{env}{ajax})
+</div>
 <script type='text/javascript'>
 function set_vevent(){
 jQuery('ul.evenements li.item')

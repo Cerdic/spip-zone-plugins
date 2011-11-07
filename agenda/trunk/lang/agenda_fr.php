@@ -56,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_titre' => 'Titre',
 	'evenements' => 'Événements',
 	'evenements_a_venir' => 'À venir',
-	'evenements_depuis_debut' => 'Tous',
+	'evenements_depuis_debut' => 'Depuis le début',
 // F
 	'fermer' => 'fermer',
 // G
