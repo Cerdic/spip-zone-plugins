@@ -238,7 +238,7 @@ MapWrapper.prototype =
 		this.map = new mxn.Mapstraction(this.div.attr('id'), this.curParams['provider']);
 		if (this._hasCap('maptypes'))
 			this.setMapType(this.curParams['map_type']);
-		
+			
 		// Centre de la carte
 		if (this._isDivOK())
 		{

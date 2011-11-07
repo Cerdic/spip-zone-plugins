@@ -1,8 +1,8 @@
 <plugin>
 	<nom>G&#233;olocalisation et cartographie avec Mapstraction</nom>
 	<icon>images/logo-gmapmxn-64.png</icon>
-	<version>0.0.1</version>
-	<etat>dev</etat>
+	<version>0.1.0</version>
+	<etat>test</etat>
 	<auteur>F. ALBERT</auteur>
 	<slogan>Cartes de diff&#233;rents fournisseurs gr&#226;ce &#224; la librairie Mapstraction</slogan>
 	<description>
@@ -11,7 +11,7 @@
 _ Il permet donc d&apos;utiliser des cartes de diff&#233;rents fournisseurs (notamment OpenLayers).
 	</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-GMap-geolocalisation-et-cartographie-des-objets</lien>
+	<lien>http://www.loceanique.org/spip/rubrique87.html</lien>
 	<categorie>divers</categorie>
 	 
 	<prefix>gmapmxn</prefix>
