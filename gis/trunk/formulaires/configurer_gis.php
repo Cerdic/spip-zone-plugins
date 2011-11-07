@@ -2,7 +2,7 @@
 
 /**
  * Fonction de verification du formulaire de configuration
- * - On vérifie si dans les cas de cloudmade ou de google (v2), une clé a 
+ * - On vérifie si dans les cas de cloudmade, de google (v2) ou de yandex, une clé a 
  * été fournie
  */
 function formulaires_configurer_gis_verifier_dist(){
