@@ -1,9 +1,10 @@
 <?php
 /**
- * Plugin Agenda pour Spip 2.0
- * Licence GPL
- * 
+ * Plugin Agenda 4 pour Spip 3.0
+ * Licence GPL 3
  *
+ * 2006-2011
+ * Auteurs : cf paquet.xml
  */
 
 /* pour que le pipeline ne rale pas ! */
@@ -37,7 +38,7 @@ function autoriser_article_creerevenementdans_dist($faire,$quoi,$id,$qui,$option
 			if (sql_countsel('spip_rubriques','agenda=1')){
 				// alors il faut le flag agenda dans cette branche !
 				$afficher = false;
-				include_spip('inc/agenda_gestion');
+				include_spip('inc/rubriques');
 				$in = calcul_hierarchie_in(sql_getfetsel('id_rubrique','spip_articles','id_article='.intval($id)));
 				$afficher = sql_countsel('spip_rubriques',sql_in('id_rubrique',$in)." AND agenda=1");
 			}

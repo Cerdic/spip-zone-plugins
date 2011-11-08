@@ -1,4 +1,11 @@
 <?php
+/**
+ * Plugin Agenda 4 pour Spip 3.0
+ * Licence GPL 3
+ *
+ * 2006-2011
+ * Auteurs : cf paquet.xml
+ */
 
 /**
  * Inserer les infos d'agenda sur les articles et rubriques
@@ -21,7 +28,7 @@ function agenda_affiche_milieu($flux) {
 		if (!sql_countsel('spip_rubriques','agenda=1'))
 			$res .= "<span class='small'>" . _T('agenda:aucune_rubrique_mode_agenda') . "</span><br />";
 		else {
-			include_spip('inc/agenda_gestion');
+			include_spip('inc/rubriques');
 			if (sql_countsel('spip_rubriques',sql_in('id_rubrique',calcul_hierarchie_in($id_rubrique))." AND agenda=1 AND id_rubrique<>".intval($id_rubrique))){
 				$alt = _T('agenda:rubrique_dans_une_rubrique_mode_agenda');
 				$activer = false;

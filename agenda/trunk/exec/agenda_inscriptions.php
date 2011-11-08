@@ -1,14 +1,12 @@
 <?php
-
 /**
- * Plugin Agenda pour Spip 2.0
- * Liste des inscriptions
+ * Plugin Agenda 4 pour Spip 3.0
+ * Licence GPL 3
  *
- * Pour le moment, seul les administrateurs ont accès à cette page.
- *
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- * @author Julien Tessier <julien@cahri.com>
+ * 2006-2011
+ * Auteurs : cf paquet.xml
  */
+
  
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

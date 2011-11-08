@@ -1,10 +1,12 @@
 <?php
 /**
- * Plugin Spip-Bonux
- * Le plugin qui lave plus SPIP que SPIP
- * (c) 2008 Mathieu Marcillaud, Cedric Morin, Romy Tetue
- * Licence GPL
+ * Plugin Agenda 4 pour Spip 3.0
+ * Licence GPL 3
+ *
+ * 2006-2011
+ * Auteurs : cf paquet.xml
  */
+
 
 
 /**

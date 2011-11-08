@@ -1,10 +1,12 @@
 <?php
 /**
- * Plugin Agenda pour Spip 3.0
- * Licence GPL
- * 
+ * Plugin Agenda 4 pour Spip 3.0
+ * Licence GPL 3
  *
+ * 2006-2011
+ * Auteurs : cf paquet.xml
  */
+
 
 /**
  * Interfaces du compilateur
