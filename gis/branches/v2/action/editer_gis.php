@@ -57,6 +57,7 @@ function insert_gis() {
  * @param array $c : un array des valeurs à mettre en base (par défaut false, on récupère les valeurs passées en dans le POST)
  */
 function revisions_gis($id_gis, $c=false) {
+	$err = '';
 	// recuperer les champs dans POST s'ils ne sont pas transmis
 	if ($c === false) {
 		$c = array();
@@ -70,14 +71,16 @@ function revisions_gis($id_gis, $c=false) {
 	}
 	
 	include_spip('inc/modifier');
-	modifier_contenu('gis', $id_gis, array(
+	$err .= modifier_contenu('gis', $id_gis, array(
 			//'nonvide' => array('nom' => _T('info_sans_titre')),
 			'invalideur' => "id='id_gis/$id_gis'"
 		),
 		$c);
 	
-	if(intval(_request('id_objet')) && _request('objet'))
-		lier_gis($id_gis, _request('objet'), _request('id_objet'));
+	if((intval(_request('id_objet')) && _request('objet')) OR (intval($set['id_objet']) && $set['objet']))
+		$err .= lier_gis($id_gis, _request('objet',$c['objet']), _request('id_objet',$c['id_objet']));
+	
+	return $err;
 }
 
 /**
