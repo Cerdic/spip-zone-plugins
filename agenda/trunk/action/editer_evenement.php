@@ -382,7 +382,7 @@ function evenement_instituer($id_evenement, $c) {
 	return ''; // pas d'erreur
 }
 
-
+/*
 function agenda_action_supprime_repetitions($supp_evenement){
 	$res = sql_select("id_evenement", "spip_evenements", "id_evenement_source=".intval($supp_evenement));
 	while ($row = sql_fetch($res)){
@@ -391,7 +391,8 @@ function agenda_action_supprime_repetitions($supp_evenement){
 		sql_delete("spip_evenements", "id_evenement=".intval($id_evenement));
 	}
 }
-
+*/
+/*
 function agenda_action_supprime_evenement($id_article,$supp_evenement){
 	$id_evenement = sql_getfetsel("id_evenement", "spip_evenements", array(
 		"id_article=" . intval($id_article),
@@ -405,7 +406,7 @@ function agenda_action_supprime_evenement($id_article,$supp_evenement){
 	suivre_invalideur("article/$id_article");
 	$id_evenement = 0;
 	return $id_evenement;
-}
+}*/
 
 
 function agenda_action_insert_evenement($id_article,$id_evenement_source = 0){return evenement_inserer($id_article,$id_evenement_source);}
