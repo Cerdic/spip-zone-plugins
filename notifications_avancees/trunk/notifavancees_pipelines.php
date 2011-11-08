@@ -330,7 +330,7 @@ function notifications_envoyer($destinataire, $mode, $quoi, $id=0, $options=arra
 		$contenu = array();
 		// Si la notification a une fonction dédiée au contenu, c'est ça qu'on prend
 		if ($notification_contenu = charger_fonction('contenu', "notifications/$quoi/", true)){
-			$contenu_tmp = $notification_contenu($id, $options, $destinataire);
+			$contenu_tmp = $notification_contenu($id, $options, $destinataire, $mode);
 			if (is_array($contenu_tmp))
 				$contenu = $contenu_tmp;
 			elseif (is_string($contenu_tmp))
