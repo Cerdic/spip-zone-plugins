@@ -3,8 +3,8 @@
 <h2 class='titre'>[(#GRAND_TOTAL|singulier_ou_pluriel{agenda:info_un_evenement,agenda:info_nombre_evenements})]</h2>
 <div class='pagination'>
 <div class='plier_deplier'><a href='#' onclick='jQuery("li.item.court").removeClass("court");return false;' class='noajax'><:lien_tout_deplier:></a> | <a href='#' onclick='set_vevent();return false;' class='noajax'><:lien_tout_replier:></a></div>
-[(#GET{self}|parametre_url{date_debut,1900-01-01}|lien_ou_expose{<:agenda:evenements_depuis_debut:>,#ENV{date_debut}|=={1900-01-01},noajax}) |]
-[(#GET{self}|lien_ou_expose{<:agenda:evenements_a_venir:>,#ENV{date_debut}|=={#ENV{date}|affdate{Y-m-d}},noajax}) ]
+[(#GET{self}|parametre_url{date_debut,1900-01-01}|lien_ou_expose{<:agenda:evenements_depuis_debut:>,#ENV{date_debut}|=={1900-01-01},ajax}) |]
+[(#GET{self}|parametre_url{date_debut,#ENV{date}|affdate{Y-m-d}}lien_ou_expose{<:agenda:evenements_a_venir:>,#ENV{date_debut}|=={#ENV{date}|affdate{Y-m-d}},ajax}) ]
 </div>
 <ul class='liste_items liste-items evenements'>
 	<BOUCLE_agenda(EVENEMENTS){par date_debut}{pagination #ENV{pagine,20}}{id_evenement?}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{statut?}>

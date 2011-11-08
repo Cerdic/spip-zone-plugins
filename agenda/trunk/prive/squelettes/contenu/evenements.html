@@ -10,7 +10,7 @@
 	</BOUCLE_debut>
 <//B_un>
 <div id="liste_des_evenements">
-	[(#INCLURE{fond=prive/objets/liste/evenements-post}{debut_agenda=#ENV{debut_agenda,@#GET{id_evenement}}}{env}{ajax})
+	[(#INCLURE{fond=prive/objets/liste/evenements-post}{debut_agenda=#ENV{debut_agenda,@#GET{id_evenement}}}{env})
 </div>
 <script type='text/javascript'>
 function set_vevent(){
