@@ -105,7 +105,10 @@ function formulaires_configurer_document_fulltext_verifier_dist(){
 		}else{
 			@exec(_request('doc_bin'),$retour_doc_bin,$retour_doc_bin_int);
 			if($retour_doc_bin_int != 0){
-				$erreurs['doc_bin'] = _T('fulltext:erreur_binaire_indisponible');
+				@exec(_request('doc_bin').' -V',$retour_doc_bin,$retour_doc_bin_int);
+				if($retour_doc_bin_int != 0){
+					$erreurs['doc_bin'] = _T('fulltext:erreur_binaire_indisponible');
+				}
 			}
 		}
 	}
@@ -116,7 +119,10 @@ function formulaires_configurer_document_fulltext_verifier_dist(){
 		}else{
 			@exec(_request('ppt_bin'),$retour_ppt_bin,$retour_ppt_bin_int);
 			if($retour_ppt_bin_int != 0){
-				$erreurs['ppt_bin'] = _T('fulltext:erreur_binaire_indisponible');
+				@exec(_request('ppt_bin').' -V',$retour_ppt_bin,$retour_ppt_bin_int);
+				if($retour_ppt_bin_int != 0){
+					$erreurs['ppt_bin'] = _T('fulltext:erreur_binaire_indisponible');
+				}
 			}
 		}
 	}
