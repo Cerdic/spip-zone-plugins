@@ -1,5 +1,5 @@
 [(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{calendrier-24.png}|balise_img{'',cadre-icone})],'simple'})]
-#SET{self,#SELF|parametre_url{id_evenement|date_debut|debut_agenda,''}|parametre_url{debut_mois,#EVAL{_request('debut_mois')}}}
+#SET{self,#SELF|parametre_url{id_evenement|date_debut|debut_liste_evt,''}|parametre_url{debut_mois,#EVAL{_request('debut_mois')}}}
 <ul class='liste-items agenda-nav'>
 <BOUCLE_debut(EVENEMENTS){par date_debut}{0,1}{id_article?}{id_rubrique?}{id_evenement_source?}{statut==.*}>
 <li class="item[(#ENV{date_debut,''}|=={#DATE_DEBUT|affdate{Y-01-01}}|oui)on]"><a
@@ -16,7 +16,7 @@
 <script type="text/javascript">
 function update_agenda(link){
 	var date_debut = parametre_url(jQuery(link).attr('href'),'date_debut');
-	$("#liste_des_evenements").ajaxReload({args:{date_debut:date_debut,debut_agenda:""},history:true});
+	$("#liste_des_evenements").ajaxReload({args:{date_debut:date_debut,debut_liste_evt:""},history:true});
 	jQuery(link).closest('.box').find('li.on').removeClass('on');
 	jQuery(link).closest('li').addClass('on');
 	return false;

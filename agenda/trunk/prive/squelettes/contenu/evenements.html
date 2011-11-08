@@ -1,31 +1,14 @@
 <h1 class="grostitre"><:agenda:agenda:></h1>
-[(#REM) Se placer au debut du mois en cours par defaut]
-#SET{date_debut,#VAL{Y-m-d H:i:s}|date{#ENV{date_debut,#ENV{date}}|affdate{Y-m-d 00:00:00}|strtotime|moins{1}}}
-<BOUCLE_un(EVENEMENTS){statut==.*}{id_evenement}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>
-[(#REM) Si un evenement passe, on commence par le jour de cet evenement]
-	#SET{id_evenement,#ID_EVENEMENT}
-</BOUCLE_un>
-	<BOUCLE_debut(EVENEMENTS){evenement_a_venir #GET{date_debut}}{statut==.*}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{par date_debut}{0,1}>
-		#SET{id_evenement,#ID_EVENEMENT}
-	</BOUCLE_debut>
-<//B_un>
+<BOUCLE_expose(RUBRIQUES){id_rubrique}{statut==.*}>
+#BOITE_OUVRIR{'','note'}
+	<a class='annule_filtre' href="[(#SELF|parametre_url{id_rubrique,''})]" title="<:info_tout_afficher|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:info_tout_afficher:>})]</a>
+	<:agenda:rubrique_liste_evenements_de:>
+	<h2 class='objet_titre'><a href='[(#ID_RUBRIQUE|generer_url_entite{rubrique})]'>#TITRE</a></h2>
+#BOITE_FERMER
+</BOUCLE_expose>
+
 <div id="liste_des_evenements">
-	[(#INCLURE{fond=prive/objets/liste/evenements-post}{debut_agenda=#ENV{debut_agenda,@#GET{id_evenement}}}{env})
+	[(#INCLURE{fond=prive/objets/liste/evenements-post}{env})]
 </div>
-<script type='text/javascript'>
-function set_vevent(){
-jQuery('ul.evenements li.item')
-.find('h3.summary')
-.parents('li.item').not('.on')
-.addClass('court')
-.end()
-.find('h3.summary').not('.clicable')
-.click(function(){
-var p=jQuery(this).parent().parent();
-p.toggleClass('court');
-})
-.addClass('clicable')
-;}
-jQuery('document').ready(function(){set_vevent();onAjaxLoad(set_vevent);});
-</script>
-]
+
+[(#URL_ECRIRE{evenement_edit,id_evenement=new}|parametre_url{id_article,#ID_ARTICLE}|icone_verticale{<:agenda:creer_evenement:>,evenement-24.png,new,right})]

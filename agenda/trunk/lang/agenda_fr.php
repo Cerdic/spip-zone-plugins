@@ -109,6 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rubrique_activer_agenda' => 'Activer le mode agenda',
 	'rubrique_dans_une_rubrique_mode_agenda' => 'Cette rubrique permet d\'utiliser les événements car elle est dans une rubrique dont le mode agenda a été activé',
 	'rubrique_desactiver_agenda' => 'Désactiver le mode agenda',
+	'rubrique_liste_evenements_de' => 'Événements de la rubrique',
 	'rubrique_mode_agenda' => 'Le mode agenda est activé pour cette rubrique et sa branche',
 	'rubrique_sans_gestion_evenement' => 'Le mode agenda n\'est pas activé pour cette rubrique',
 	'rubriques' => 'Rubriques Agenda',
