@@ -223,7 +223,7 @@ function formulaires_editer_client_charger_dist($id_auteur, $retour=''){
 			array(
 				'objet = '.sql_quote('auteur'),
 				'id_objet = '.intval($id_auteur),
-				'type = '.sql_quote('principale')
+				'type = '.sql_quote('principal')
 			)
 		))
 			$contexte = array_merge($contexte, $numero);
@@ -292,7 +292,7 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 		array(
 			'objet = '.sql_quote('auteur'),
 			'id_objet = '.$id_auteur,
-			'type = '.sql_quote('principale')
+			'type = '.sql_quote('principal')
 		)
 	);
 	
@@ -301,7 +301,7 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 		$id_numero = 'oui';
 		set_request('objet', 'auteur');
 		set_request('id_objet', $id_auteur);
-		set_request('type', 'principale');
+		set_request('type', 'principal');
 	}
 	
 	$editer_numero = charger_fonction('editer_numero', 'action/');

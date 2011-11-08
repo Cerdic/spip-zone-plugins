@@ -240,6 +240,7 @@ function formulaires_inscription_client_traiter_dist($retour=''){
 		$editer_adresse('oui');
 		
 		// On crée le numero de tel
+		set_request('type', 'principal');
 		$editer_numero = charger_fonction('editer_numero', 'action/');
 		$editer_numero('oui');
 	}
