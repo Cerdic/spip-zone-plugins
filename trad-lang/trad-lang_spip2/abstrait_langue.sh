@@ -12,6 +12,12 @@
 # 1. il ne doit y avoir qu'un seul _L par ligne
 # 2. l'argument de _L ne doit pas contenir les signes ) et |
 
+echo "Ce script Shell est un prototype d'un service fourni par Langonet v 0.7:"
+echo "http://www.spip-contrib.net/LangOnet-Presentation-generale"
+echo "Utiliser plutot Langonet, qui traite beaucoup plus de cas"
+echo "et produit des items plus intuitifs et ergonomiques."
+echo
+
 if [ $# -lt 2 ]
 then echo usage: $0 nom file1 file2 ... fileN
 exit 1
