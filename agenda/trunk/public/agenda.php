@@ -1,106 +1,11 @@
 <?php
 /**
- * Plugin Agenda pour Spip 2.0
- * Licence GPL
+ * Plugin Agenda 4 pour Spip 3.0
+ * Licence GPL 3
  *
+ * 2006-2011
+ * Auteurs : cf paquet.xml
  */
-
-
-/**
- * {agendafull ..} variante etendue du crietre agenda du core
- * qui accepte une date de debut et une date de fin
- *
- * {agendafull date_debut, date_fin, jour, #ENV{annee}, #ENV{mois}, #ENV{jour}}
- * {agendafull date_debut, date_fin, semaine, #ENV{annee}, #ENV{mois}, #ENV{jour}}
- * {agendafull date_debut, date_fin, mois, #ENV{annee}, #ENV{mois}}
- * {agendafull date_debut, date_fin, periode, #ENV{annee}, #ENV{mois}, #ENV{jour},
- *                                            #ENV{annee_fin}, #ENV{mois_fin}, #ENV{jour_fin}}
- *
- * @param <type> $idb
- * @param <type> $boucles
- * @param <type> $crit
- */
-function critere_agendafull_dist($idb, &$boucles, $crit)
-{
-	$params = $crit->param;
-
-	if (count($params) < 1)
-	      erreur_squelette(_T('zbug_info_erreur_squelette'),
-			       "{agenda ?} BOUCLE$idb");
-
-	$parent = $boucles[$idb]->id_parent;
-
-	// les valeurs $date et $type doivent etre connus a la compilation
-	// autrement dit ne pas etre des champs
-
-	$date_deb = array_shift($params);
-	$date_deb = $date_deb[0]->texte;
-
-	$date_fin = array_shift($params);
-	$date_fin = $date_fin[0]->texte;
-
-	$type = array_shift($params);
-	$type = $type[0]->texte;
-
-	$annee = $params ? array_shift($params) : "";
-	$annee = "\n" . 'sprintf("%04d", ($x = ' .
-		calculer_liste($annee, array(), $boucles, $parent) .
-		') ? $x : date("Y"))';
-
-	$mois =  $params ? array_shift($params) : "";
-	$mois = "\n" . 'sprintf("%02d", ($x = ' .
-		calculer_liste($mois, array(), $boucles, $parent) .
-		') ? $x : date("m"))';
-
-	$jour =  $params ? array_shift($params) : "";
-	$jour = "\n" . 'sprintf("%02d", ($x = ' .
-		calculer_liste($jour, array(), $boucles, $parent) .
-		') ? $x : date("d"))';
-
-	$annee2 = $params ? array_shift($params) : "";
-	$annee2 = "\n" . 'sprintf("%04d", ($x = ' .
-		calculer_liste($annee2, array(), $boucles, $parent) .
-		') ? $x : date("Y"))';
-
-	$mois2 =  $params ? array_shift($params) : "";
-	$mois2 = "\n" . 'sprintf("%02d", ($x = ' .
-		calculer_liste($mois2, array(), $boucles, $parent) .
-		') ? $x : date("m"))';
-
-	$jour2 =  $params ? array_shift($params) : "";
-	$jour2 = "\n" .  'sprintf("%02d", ($x = ' .
-		calculer_liste($jour2, array(), $boucles, $parent) .
-		') ? $x : date("d"))';
-	
-	$boucle = &$boucles[$idb];
-	$date = $boucle->id_table . ".$date";
-
-	if ($type == 'jour')
-		$boucle->where[]= array("'AND'", 
-					array("'<='", "'DATE_FORMAT($date_deb, \'%Y%m%d\')'",("$annee . $mois . $jour")),
-					array("'>='", "'DATE_FORMAT($date_fin, \'%Y%m%d\')'",("$annee . $mois . $jour")));
-	elseif ($type == 'mois')
-		$boucle->where[]= array("'AND'", 
-					array("'<='", "'DATE_FORMAT($date_deb, \'%Y%m\')'",("$annee . $mois")),
-					array("'>='", "'DATE_FORMAT($date_fin, \'%Y%m\')'",("$annee . $mois")));
-	elseif ($type == 'semaine')
-		$boucle->where[]= array("'AND'", 
-					array("'>='",
-					     "'DATE_FORMAT($date_fin, \'%Y%m%d\')'", 
-					      ("date_debut_semaine($annee, $mois, $jour)")),
-					array("'<='",
-					      "'DATE_FORMAT($date_deb, \'%Y%m%d\')'",
-					      ("date_fin_semaine($annee, $mois, $jour)")));
-	elseif (count($crit->param) > 3)
-		$boucle->where[]= array("'AND'",
-					array("'>='",
-					      "'DATE_FORMAT($date_fin, \'%Y%m%d\')'",
-					      ("$annee . $mois . $jour")),
-					array("'<='", "'DATE_FORMAT($date_deb, \'%Y%m%d\')'", ("$annee2 . $mois2 . $jour2")));
-	// sinon on prend tout
-}
-
-
 
 /**
  * fonction sous jacente pour les 3 criteres
@@ -108,9 +13,9 @@ function critere_agendafull_dist($idb, &$boucles, $crit)
  * 
  * @param string $format
  * @param strinf $as
- * @param <type> $idb
- * @param <type> $boucles
- * @param <type> $crit
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
  */
 function agenda_critere_fusion_par_xx($format, $as, $idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
@@ -132,9 +37,9 @@ function agenda_critere_fusion_par_xx($format, $as, $idb, &$boucles, $crit){
  * {fusion_par_jour date_debut}
  * {fusion_par_jour date_fin}
  * 
- * @param <type> $idb
- * @param <type> $boucles
- * @param <type> $crit
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
  */
 function critere_fusion_par_jour_dist($idb, &$boucles, $crit) {
 	agenda_critere_fusion_par_xx('%Y-%m-%d','jour',$idb, $boucles, $crit);
@@ -144,9 +49,9 @@ function critere_fusion_par_jour_dist($idb, &$boucles, $crit) {
  * {fusion_par_mois date_debut}
  * {fusion_par_mois date_fin}
  *
- * @param <type> $idb
- * @param <type> $boucles
- * @param <type> $crit
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
  */
 function critere_fusion_par_mois_dist($idb, &$boucles, $crit) {
 	agenda_critere_fusion_par_xx('%Y-%m','mois',$idb, $boucles, $crit);
@@ -156,9 +61,9 @@ function critere_fusion_par_mois_dist($idb, &$boucles, $crit) {
  * {fusion_par_annee date_debut}
  * {fusion_par_annee date_fin}
  *
- * @param <type> $idb
- * @param <type> $boucles
- * @param <type> $crit
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
  */
 function critere_fusion_par_annee_dist($idb, &$boucles, $crit) {
 	agenda_critere_fusion_par_xx('%Y','annee',$idb, $boucles, $crit);
@@ -168,9 +73,9 @@ function critere_fusion_par_annee_dist($idb, &$boucles, $crit) {
  * {evenement_a_venir}
  * {evenement_a_venir #ENV{date}}
  * 
- * @param <type> $idb
- * @param <type> $boucles
- * @param <type> $crit
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
  */
 function critere_evenement_a_venir_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
@@ -210,9 +115,9 @@ function critere_evenement_a_venir_dist($idb, &$boucles, $crit) {
  * {evenement_passe}
  * {evenement_passe #ENV{date}}
  *
- * @param <type> $idb
- * @param <type> $boucles
- * @param <type> $crit
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
  */
 function critere_evenement_passe_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
@@ -252,9 +157,9 @@ function critere_evenement_passe_dist($idb, &$boucles, $crit) {
  * {evenement_en_cours}
  * {evenement_en_cours #ENV{date}}
  *
- * @param <type> $idb
- * @param <type> $boucles
- * @param <type> $crit
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
  */
 function critere_evenement_en_cours_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
@@ -302,9 +207,9 @@ function critere_evenement_en_cours_dist($idb, &$boucles, $crit) {
  * {evenementrelatif #ENV{choix}, #ENV{date}}
  * #ENV{choix} peut prendre 6 valeurs : tout, a_venir, en_cours, passe, en_cours_a_venir ou passe_en_cours
  * 
- * @param <type> $idb
- * @param <type> $boucles
- * @param <type> $crit
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
  */
 function critere_evenementrelatif_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
@@ -320,6 +225,15 @@ function critere_evenementrelatif_dist($idb, &$boucles, $crit) {
 	$boucle->where[] = "agenda_calculer_critere_evenementrelatif('$id_table',$_dateref,'$not',$choix,'$horaire')";
 }
 
+/**
+ * Fonction interne utilisee par le critere {evenementrelatif}
+ * @param string $id_table
+ * @param string $_dateref
+ * @param string $not
+ * @param string $choix
+ * @param string $horaire
+ * @return array
+ */
 function agenda_calculer_critere_evenementrelatif($id_table,$_dateref,$not,$choix,$horaire){
 	$_date_debut = "$id_table.date_debut";
 	$_date_fin = "$id_table.date_fin";
@@ -415,9 +329,9 @@ function agenda_calculer_critere_evenementrelatif($id_table,$_dateref,$not,$choi
  * Retourne le code php pour obtenir la date de reference de comparaison
  * des evenements a trouver 
  *
- * @param <type> $idb
- * @param <type> $boucles
- * @param <type> $crit
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
  * 
  * @return string code PHP concernant la date.
 **/
@@ -429,23 +343,17 @@ function agenda_calculer_date_reference($idb, &$boucles, $crit) {
 }
 
 
-function agenda_date_a_venir($date_test,$date_ref=null){
-	if (is_null($date_ref))
-		$date_ref = $_SERVER['REQUEST_TIME'];
-	else
-		$date_ref = strtotime($date_ref);
-
-	return (strtotime($date_test)>$date_ref)?' ':'';
-}
-
-
-function agenda_date_passee($date_test,$date_ref=null){
-	if (is_null($date_ref))
-		$date_ref = $_SERVER['REQUEST_TIME'];
-	else
-		$date_ref = strtotime($date_ref);
-
-	return (strtotime($date_test)<$date_ref)?' ':'';
+/**
+ * Balise #NB_INSCRITS
+ * pour afficher le nombre d'inscrits (qui ont repondu oui) a un evenement
+ *
+ * @param Object $p
+ * @return object
+ */
+function balise_NB_INSCRITS_dist($p) {
+        $id_evenement = champ_sql('id_evenement', $p);
+        $p->code = "sql_countsel('spip_evenements_participants','id_evenement='.intval($id_evenement).' AND reponse=\'oui\'')";
+        return $p;
 }
 
 ?>
