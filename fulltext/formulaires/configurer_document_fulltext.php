@@ -120,7 +120,9 @@ function formulaires_configurer_document_fulltext_verifier_dist(){
 						 * Cela nécessite un chemin complet du binaire
 						 */
 						@exec('test -x '._request($binaire),$retour_bin,$retour_bin_int);
-						$erreurs[$binaire] = _T('fulltext:erreur_binaire_indisponible');
+						if($retour_bin_int != 0){
+							$erreurs[$binaire] = _T('fulltext:erreur_binaire_indisponible');
+						}
 					}
 				}
 			}
