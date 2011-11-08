@@ -45,11 +45,11 @@
 	    </fieldset></li>
 			<li class="editer_repetitions[ (#ENV**{erreurs}|table_valeur{repetitions}|oui)erreur]">
 				<label for="repetitions"><:agenda:evenement_repetitions:></label>[
-				(#ENV{repetitions}|non)<a href='#' onclick="$(this).next().removeClass('cachee');return false;"><:agenda:ajouter_repetition:></a>
-				<div class='ajouter_repetitions'>][
+				(#ENV{repetitions}|non)<a href='#' onclick="$(this).hide().next().show('fast');return false;"><:agenda:ajouter_repetition:></a>
+				<div class='ajouter_repetitions none'>][
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{repetitions})</span>
 				]<div id='repetitions_picker'></div>
-				<textarea name='repetitions' id='repetitions'>#ENV{repetitions}</textarea>[
+				<textarea name='repetitions' id='repetitions' readonly="readonly">#ENV{repetitions}</textarea>[
 				(#ENV{repetitions}|non)</div>]
 			</li>
 	    <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
@@ -87,3 +87,24 @@
 	#INCLURE{fond=formulaires/dateur/inc-dateur}
 	]
 </div>
+<script type="text/javascript">
+	var repetitions_done = false;
+	jQuery(document).bind('datePickerLoaded',function(){
+		if (!repetitions_done){
+			repetitions_done = true;
+			jQuery.getScript('#CHEMIN{javascript/jquery-ui.multidatespicker.js}',function(){
+				var repetitions = jQuery('#repetitions').html();
+				repetitions = repetitions.split(',');
+				jQuery('#repetitions_picker')
+					.multiDatesPicker(jQuery.extend(
+								date_picker_options(),
+								{
+									altField: '#repetitions',
+									addDates: repetitions
+								}
+					))
+					.addClass('.pickable'); // une seule fois;
+			});
+		}
+	});
+</script>

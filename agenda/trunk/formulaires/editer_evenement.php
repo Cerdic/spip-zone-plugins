@@ -38,12 +38,13 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_arti
 		$valeurs['mots'] = sql_allfetsel('id_mot','spip_mots_liens','objet="evenement" AND id_objet='.intval($id_evenement));
 
 	// les repetitions
-	$valeurs['repetitions'] = '';
+	$valeurs['repetitions'] = array();
 	if (intval($id_evenement)){
 		$repetitons = sql_allfetsel("date_debut","spip_evenements","id_evenement_source=".intval($id_evenement),'','date_debut');
 		foreach($repetitons as $d)
-			$valeurs['repetitions'] .= date('d/m/Y',strtotime($d['date_debut'])).' ';
+			$valeurs['repetitions'][] = date('d/m/Y',strtotime($d['date_debut']));
 	}
+	$valeurs['repetitions'] = implode(',',$valeurs['repetitions']);
 
 	// dispatcher date et heure
 	list($valeurs["date_debut"],$valeurs["heure_debut"]) = explode(' ',date('d/m/Y H:i',strtotime($valeurs["date_debut"])));
