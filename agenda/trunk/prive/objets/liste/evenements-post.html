@@ -1,5 +1,5 @@
 [(#REM) Se placer au debut du mois en cours par defaut]
-#SET{date_debut,#VAL{Y-m-d H:i:s}|date{#ENV{date_debut,#ENV{date}}|affdate{Y-m-d 00:00:00}|strtotime|moins{1}}}
+#SET{date_debut,#ENV{date_debut,#ENV{date}}|affdate{Y-m-d 00:00:00}|agenda_dateplus{-1}}
 <BOUCLE_un(EVENEMENTS){statut==.*}{id_evenement}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>
 [(#REM) Si un evenement passe, on commence par le jour de cet evenement]
 	#SET{id_evenement,#ID_EVENEMENT}
