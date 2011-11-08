@@ -10,7 +10,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-function action_rubrique_activer_agenda_dist()
+function action_activer_agenda_rubrique_dist()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
