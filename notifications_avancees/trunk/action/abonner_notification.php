@@ -47,8 +47,8 @@ function action_abonner_notification_dist($arg=null, $modes=array(), $preference
 				'contact' => $contact,
 				'quoi' => $quoi,
 				'id' => $id,
-				'modes' => $modes,
-				'preferences' => $preferences
+				'modes' => serialize($modes),
+				'preferences' => serialize($preferences)
 			)
 		);
 	}
