@@ -35,6 +35,6 @@
 	<menu nom="evenements" titre="agenda:evenements" parent="menu_edition" icone="images/evenement-16.png" />
 	<menu nom="evenement_edit" titre="agenda:creer_evenement" parent="outils_rapides" icone="images/evenement-new-16.png" />
 
-	<chemin path="inclure" />
-	<chemin path="" />
+	<chemin path="./" />
+	<chemin path="squelettes" type='public'/>
 </paquet>
