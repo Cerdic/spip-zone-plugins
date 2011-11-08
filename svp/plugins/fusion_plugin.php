@@ -83,7 +83,7 @@ function plugins_fusion_plugin($plugins) {
 				foreach ($fusion[$_btech] as $_cle0 => $_balise0) {
 					$balise_commune = false;
 					foreach ($plugins[$cle_min_min][$_btech] as $_cle1 => $_balise1) {
-						if (balise_compare_egalite($_balise0, $_balise1)) {
+						if (balise_identique($_balise0, $_balise1)) {
 							// On classe cette balise dans le bloc commun (index 0) et on la supprime dans les
 							// 2 tableaux en cours de comparaison
 							unset($fusion[$_btech][$_cle0]);
@@ -112,20 +112,6 @@ function plugins_fusion_plugin($plugins) {
 	}
 	
 	return $fusion;
-}
-
-
-function balise_compare_egalite($balise1, $balise2) {
-
-	foreach ($balise1 as $_attribut1 => $_valeur1){
-		if (!array_key_exists($_attribut1, $balise2))
-			return false;
-		else
-			if ($_valeur1 != $balise2[$_attribut1])
-				return false;
-	}
-
-	return true;
 }
 
 ?>

@@ -148,4 +148,17 @@ function entite2charset($texte) {
 	return unicode2charset(html_entity_decode(preg_replace('/&([lg]t;)/S', '&amp;\1', $texte), ENT_NOQUOTES, $GLOBALS['meta']['charset']));
 }
 
+
+function balise_identique($balise1, $balise2) {
+	foreach ($balise1 as $_attribut1 => $_valeur1){
+		if (!array_key_exists($_attribut1, $balise2))
+			return false;
+		else
+			if ($_valeur1 != $balise2[$_attribut1])
+				return false;
+	}
+
+	return true;
+}
+
 ?>
