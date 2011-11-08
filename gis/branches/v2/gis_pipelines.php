@@ -330,4 +330,27 @@ function gis_taches_generales_cron($taches_generales){
 	return $taches_generales;
 }
 
+/**
+ * Insertion dans le pipeline xmlrpc_methodes (xmlrpc)
+ * Ajout de méthodes xml-rpc spécifiques à GIS
+ * 
+ * @param array $flux : un array des methodes déjà présentes, fonctionnant sous la forme :
+ * -* clé = nom de la méthode;
+ * -* valeur = le nom de la fonction à appeler;
+ * @return array $flux : l'array complété avec nos nouvelles méthodes 
+ */
+function gis_xmlrpc_methodes($flux){
+	$flux['spip.liste_gis'] = 'spip_liste_gis';
+	$flux['spip.lire_gis'] = 'spip_lire_gis';
+	return $flux;
+}
+
+/**
+ * Insertion dans le pipeline xmlrpc_server_class (xmlrpc)
+ * Ajout de fonctions spécifiques utilisés par le serveur xml-rpc 
+ */
+function gis_xmlrpc_server_class($flux){
+	include_spip('inc/gis_xmlrpc');
+	return $flux;
+}
 ?>
