@@ -7,6 +7,12 @@
 <div class='label'><:agenda:info_dates:></div>
 <div dir='#LANG_DIR' class='dates'>[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#HORAIRE})]</div>
 </div>
+<B_repetitions>
+<div class="champ contenu_repetitions">
+	<div class='label'>[(#GRAND_TOTAL|singulier_ou_pluriel{agenda:une_repetition,agenda:nb_repetitions})]</div>
+	<div dir='#LANG_DIR' class='repetitions'>(<BOUCLE_repetitions(EVENEMENTS){par date_debut}{id_evenement_source=#ID_EVENEMENT}{', '}{statut==.*}>[(#DATE_DEBUT|affdate_court)]</BOUCLE_repetitions>)</div>
+</div>
+</B_repetitions>
 <div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
 <div class='label'><:info_descriptif:></div>
 <div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>[(#DESCRIPTIF|image_reduire{500,0})]</div>
