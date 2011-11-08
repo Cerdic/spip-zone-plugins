@@ -87,53 +87,42 @@ function formulaires_configurer_document_fulltext_verifier_dist(){
 	if((!_request('taille_index'))||(_request('taille_index') < 1)){
 		$erreurs['taille_index'] = _T('fulltext:erreur_taille_index');
 	}
-	//Si on a choisit d'indexer un type de document on doit renseigner le binaire correspondant
-	if(_request('pdf_index') == 'on' && !defined('_FULLTEXT_PDF_EXE')){
-		if(!_request('pdf_bin')){
-			$erreurs['pdf_bin'] = _T('fulltext:erreur_pdf_bin');
-		}else{
-			@exec(_request('pdf_bin'),$retour_pdfbin,$retour_pdfbin_int);
-			if($retour_pdfbin_int != 0){
-				$erreurs['pdf_bin'] = _T('fulltext:erreur_binaire_indisponible');
-			}
-		}
-	}
-	
-	if(_request('doc_index') == 'on' && !defined('_FULLTEXT_DOC_EXE')){
-		if(!_request('doc_bin')){
-			$erreurs['doc_bin'] = _T('fulltext:erreur_doc_bin');
-		}else{
-			@exec(_request('doc_bin'),$retour_doc_bin,$retour_doc_bin_int);
-			if($retour_doc_bin_int != 0){
-				@exec(_request('doc_bin').' -V',$retour_doc_bin,$retour_doc_bin_int);
-				if($retour_doc_bin_int != 0){
-					$erreurs['doc_bin'] = _T('fulltext:erreur_binaire_indisponible');
+
+	/**
+	 * On teste les binaires
+	 */
+	$binaires = array('pdf_bin' => array('pdf_index','_FULLTEXT_PDF_EXE'),'doc_bin' => array('doc_index','_FULLTEXT_DOC_EXE'),'ppt_bin' => array('ppt_index','_FULLTEXT_PPT_EXE'),'xls_bin' => array('xls_index','_FULLTEXT_XLS_EXE'));
+	foreach($binaires as $binaire => $index){
+		/**
+		 * On ne teste l'exécutable que si on index sinon ça ne sert à rien
+		 */
+		if(_request($index[0]) == 'on' && !defined($index[1])){
+			/**
+			 * Pas de binaire => on doit en avoir un pour récupérer le contenu
+			 */
+			if(!_request($binaire)){
+				$erreurs[$binaire] = _T('fulltext:erreur_pdf_bin');
+			}else{
+				/**
+				 * On teste avec la commande de base ...
+				 * Le code de retour normal doit être 0
+				 */
+				@exec(_request($binaire),$retour_bin,$retour_bin_int);
+				if($retour_bin_int != 0){
+					/**
+					 * Si cela retourne un mauvais code d'erreur
+					 * on teste avec l'option -V (catdoc et catppt)
+					 */
+					@exec(_request($binaire).' -V',$retour_bin,$retour_bin_int);
+					if($retour_bin_int != 0){
+						/**
+						 * Sinon on fait un test que le binaire est executable 
+						 * Cela nécessite un chemin complet du binaire
+						 */
+						@exec('test -x '._request($binaire),$retour_bin,$retour_bin_int);
+						$erreurs[$binaire] = _T('fulltext:erreur_binaire_indisponible');
+					}
 				}
-			}
-		}
-	}
-	
-	if(_request('ppt_index') == 'on' && !defined('_FULLTEXT_PPT_EXE')){
-		if(!_request('ppt_bin')){
-			$erreurs['ppt_bin'] = _T('fulltext:erreur_ppt_bin');
-		}else{
-			@exec(_request('ppt_bin'),$retour_ppt_bin,$retour_ppt_bin_int);
-			if($retour_ppt_bin_int != 0){
-				@exec(_request('ppt_bin').' -V',$retour_ppt_bin,$retour_ppt_bin_int);
-				if($retour_ppt_bin_int != 0){
-					$erreurs['ppt_bin'] = _T('fulltext:erreur_binaire_indisponible');
-				}
-			}
-		}
-	}
-	
-	if(_request('xls_index') == 'on' && !defined('_FULLTEXT_XLS_EXE')){
-		if(!_request('xls_bin')){
-			$erreurs['xls_bin'] = _T('fulltext:erreur_xls_bin');
-		}else{
-			@exec(_request('xls_bin'),$retour_xls_bin,$retour_xls_bin_int);
-			if($retour_xls_bin_int != 0 && $retour_xls_bin_int != 139){
-				$erreurs['xls_bin'] = _T('fulltext:erreur_binaire_indisponible');
 			}
 		}
 	}
