@@ -1,6 +1,11 @@
 <?php
 
-
+/**
+ * Inserer les infos d'agenda sur les articles et rubriques
+ *
+ * @param array $flux
+ * @return array
+ */
 function agenda_affiche_milieu($flux) {
 	$e = trouver_objet_exec($flux['args']['exec']);
 	$out = "";
@@ -51,23 +56,11 @@ function agenda_affiche_milieu($flux) {
 	elseif ($e['type']=='article'
 	  AND $e['edition']==false){
 		$id_article = $flux['args']['id_article'];
-		$afficher = autoriser('creerevenementdans','article',$id_article);
-		if ($afficher) {
-			$contexte = array();
-			foreach($_GET as $key=>$val)
-				$contexte[$key] = $val;
-			 $evenements = recuperer_fond('prive/objets/contenu/article-evenements',$contexte);
-			 $out .= $evenements;
+		if (autoriser('creerevenementdans','article',$id_article)) {
+			$out .= recuperer_fond('prive/objets/contenu/article-evenements',$flux['args']);
 		}
 	}
-	elseif ($e['type']=='mot'
-	  AND $e['edition']==false
-	  AND $id_mot = intval($flux['args']['id_mot'])){
-		foreach($_GET as $key=>$val)
-			$contexte[$key] = $val;
-	 $evenements = recuperer_fond('prive/contenu/agenda_evenements',$contexte);
-	 $out .= $evenements;
-	}
+
 	if ($out){
 		if ($p=strpos($flux['data'],'<!--affiche_milieu-->'))
 			$flux['data'] = substr_replace($flux['data'],$out,$p,0);
@@ -105,50 +98,12 @@ function agenda_optimiser_base_disparus($flux){
 }
 
 
-function agenda_editer_contenu_objet($flux){
-	if ($flux['args']['type']=='groupe_mot'){
-		// ajouter l'input sur les evenements
-		$checked = in_array('evenements',$flux['args']['contexte']['tables_liees']);
-		$checked = $checked?" checked='checked'":'';
-		$input = "<div class='choix'><input type='checkbox' class='checkbox' name='tables_liees&#91;&#93;' value='evenements'$checked id='evenements' /><label for='evenements'>"._T('agenda:item_mots_cles_association_evenements')."</label></div>";
-		$flux['data'] = str_replace('<!--choix_tables-->',"$input\n<!--choix_tables-->",$flux['data']);
-	}
-	return $flux;
-}
-
-function agenda_libelle_association_mots($libelles){
-	$libelles['evenements'] = 'agenda:info_evenements';
-	return $libelles;
-}
-
-
-function agenda_objets_extensibles($objets){
-		return array_merge($objets, array('evenement' => _T('agenda:evenements')));
-}
-
-function agenda_afficher_nombre_objets_associes_a($flux){
-	if ($flux['args']['objet']=='mot'
-	  AND $id_mot=$flux['args']['id_objet']){
-		$aff_articles = sql_in('A.statut',  ($GLOBALS['connect_statut'] =="0minirezo")  ? array('prepa','prop','publie') : array('prop','publie'));
-		$nb = sql_countsel("spip_mots_liens AS L LEFT JOIN spip_evenements AS E ON E.id_evenement=L.id_objet AND L.objet='evenement' LEFT JOIN spip_articles AS A ON E.id_article=A.id_article", "L.id_mot=".intval($id_mot)." AND $aff_articles");
-		if ($nb)
-			$flux['data'][] = singulier_ou_pluriel($nb, "agenda:info_un_evenement", "agenda:info_nombre_evenements");
-	}
-	return $flux;
-}
-
 /**
- * Declarer evenement comme un objet interpretable dans les url
- * ?evenement12
- * 
- * @param array $objets
+ * Lister les evenements dans le calendrier de l'espace prive (extension organiseur)
+ *
+ * @param array $flux
  * @return array
  */
-function agenda_declarer_url_objets($objets){
-	$objets[] = 'evenement';
-	return $objets;
-}
-
 function agenda_quete_calendrier_prive($flux){
 	$quoi = $flux['args']['quoi'];
 	if (!$quoi OR $quoi=='evenements'){
