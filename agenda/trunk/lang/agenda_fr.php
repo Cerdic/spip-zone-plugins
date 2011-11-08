@@ -106,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'probleme_technique' => 'Un problème technique est survenu. Reessayez plus tard.',
 // R
 	'repetition_de' => 'Répétition de',
+	'repetition' => 'Répétition',
 	'rubrique_activer_agenda' => 'Activer le mode agenda',
 	'rubrique_dans_une_rubrique_mode_agenda' => 'Cette rubrique permet d\'utiliser les événements car elle est dans une rubrique dont le mode agenda a été activé',
 	'rubrique_desactiver_agenda' => 'Désactiver le mode agenda',
