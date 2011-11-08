@@ -45,6 +45,15 @@ function crud_gis_update_dist($id,$set=null){
 	}
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
+
+/**
+ * Delete :
+ * Supprime un point géolocalisé
+ * 
+ * @param $dummy
+ * @param int $id : L'identifiant numérique du point à supprimer
+ * @return array : un array avec (bool) success, (string) message et (array) result indiquant l'id supprimé 
+ */
 function crud_gis_delete_dist($id){
 	if(autoriser('supprimer','gis',$id)){
 		list($e,$ok) = supprimer_gis($id);
