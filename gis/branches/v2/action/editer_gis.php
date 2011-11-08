@@ -77,7 +77,7 @@ function revisions_gis($id_gis, $c=false) {
 		),
 		$c);
 	
-	if((intval(_request('id_objet')) && _request('objet')) OR (intval($set['id_objet']) && $set['objet']))
+	if((intval(_request('id_objet')) && _request('objet')) OR (intval($c['id_objet']) && $c['objet']))
 		$err .= lier_gis($id_gis, _request('objet',$c['objet']), _request('id_objet',$c['id_objet']));
 	
 	return $err;
