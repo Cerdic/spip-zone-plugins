@@ -32,7 +32,7 @@ function autoriser_gis_iconifier_dist($faire,$quoi){
  * @return boolean true/false
  */
 function autoriser_gis_modifier_dist($faire,$quoi,$id,$qui,$opts){
-	return (in_array($qui['statut'],arary('0minirezo','1comite','6forum')));
+	return (in_array($qui['statut'],array('0minirezo','1comite','6forum')));
 }
 
 /**
@@ -48,7 +48,7 @@ function autoriser_gis_modifier_dist($faire,$quoi,$id,$qui,$opts){
  * @return boolean true/false
  */
 function autoriser_gis_creer_dist($faire,$quoi,$id,$qui,$opts){
-	return (in_array($qui['statut'],arary('0minirezo','1comite','6forum')));
+	return (in_array($qui['statut'],array('0minirezo','1comite','6forum')));
 }
 
 /**
