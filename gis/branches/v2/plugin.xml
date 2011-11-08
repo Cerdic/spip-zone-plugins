@@ -1,7 +1,7 @@
 <plugin>
 	<nom>GIS</nom>
 	<auteur>b_b, kent1</auteur>
-	<version>2.0.9</version>
+	<version>2.1.0</version>
 	<version_base>2.0.2</version_base>
 	<licence>GNU/GPL</licence>
 	<etat>test</etat>
@@ -77,6 +77,14 @@ _ Icon from [mattrich->http://mattrich.deviantart.com/art/Picnic-101256405] unde
 	</pipeline>
 	<pipeline>
 		<nom>declarer_type_surnoms</nom>
+		<inclure>gis_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>xmlrpc_methodes</nom>
+		<inclure>gis_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>xmlrpc_server_class</nom>
 		<inclure>gis_pipelines.php</inclure>
 	</pipeline>
 	<utilise id="cfg" version="[1.12;]" />
