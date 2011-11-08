@@ -1,15 +1,5 @@
 <?php
 
-function agenda_ajouter_onglets($flux) {
-	if($flux['args']=='calendrier' AND !defined('_DIR_PLUGIN_BANDO')){
-		$flux['data']['agenda']= new Bouton(chemin_image('agenda-24.png'), _T('agenda:agenda'),
-														generer_url_ecrire("calendrier","type=semaine"));
-		$flux['data']['calendrier']= new Bouton(
-													 'cal-rv.png', _T('agenda:activite_editoriale'),
-													 generer_url_ecrire("calendrier","mode=editorial&type=semaine"));
-	}
-	return $flux;
-}
 
 function agenda_affiche_milieu($flux) {
 	$e = trouver_objet_exec($flux['args']['exec']);
@@ -87,10 +77,33 @@ function agenda_affiche_milieu($flux) {
 	return $flux;
 }
 
-function agenda_taches_generales_cron($taches_generales){
-	$taches_generales['agenda_nettoyer_base'] = 3600*48;
-	return $taches_generales;
+/**
+ * Optimiser la base (evenements a la poubelle, lies a des articles disparus, ou liens mots sur evenements disparus)
+ *
+ * @param array $flux
+ * @return array
+ */
+function agenda_optimiser_base_disparus($flux){
+
+	# passer a la poubelle
+	# les evenements lies a un article inexistant
+	$res = sql_select("DISTINCT evenements.id_article","spip_evenements AS evenements
+			LEFT JOIN spip_articles AS articles
+			ON evenements.id_article=articles.id_article","articles.id_article IS NULL");
+	while ($row = sql_fetch($res))
+		sql_updateq("spip_evenements",array('statut'=>'poubelle'),"id_article=".$row['id_article']);
+
+	// Evenements a la pouvelle
+	sql_delete("spip_evenements", "statut='poubelle' AND maj < ".$flux['args']['date']);
+
+	include_spip('action/editer_liens');
+	// optimiser les liens de tous les mots vers des objets effaces
+	// et depuis des mots effaces
+	$flux['data'] += objet_optimiser_liens(array('mot'=>'*'),array('evenement'=>'*'));
+
+	return $flux;
 }
+
 
 function agenda_editer_contenu_objet($flux){
 	if ($flux['args']['type']=='groupe_mot'){

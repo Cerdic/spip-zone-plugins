@@ -25,12 +25,11 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/agenda_evenements.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/agenda_evenements.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/agenda_evenements.php" />
-	<pipeline nom="ajouter_onglets" inclure="agenda_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="agenda_pipelines.php" />
 	<pipeline nom="editer_contenu_objet" inclure="agenda_pipelines.php" />
 	<pipeline nom="libelle_association_mots" inclure="agenda_pipelines.php" />
 	<pipeline nom="afficher_nombre_objets_associes_a" inclure="agenda_pipelines.php" />
-	<pipeline nom="taches_generales_cron" inclure="agenda_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="agenda_pipelines.php" />
 	<pipeline nom="declarer_url_objets" inclure="agenda_pipelines.php" />
 	<pipeline nom="rechercher_liste_des_champs" inclure="agenda_pipelines.php" />
 	<pipeline nom="objets_extensibles" inclure="agenda_pipelines.php" />
