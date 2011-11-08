@@ -1,9 +1,10 @@
 <?php
 /**
- * Plugin Agenda pour Spip 2.0
- * Licence GPL
- * 
- * Fichier de filtres communs au plugin agenda et PIM_agenda
+ * Plugin Agenda 4 pour Spip 3.0
+ * Licence GPL 3
+ *
+ * 2006-2011
+ * Auteurs : cf paquet.xml
  */
 
 /**
@@ -91,11 +92,6 @@ function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $for
 		$s .= $dtabbr;
 	}
 	return unicode2charset(charset2unicode(strtr($s,$trans_tbl),''));	
-}
-
-function agenda_dateplus($date,$secondes,$format){
-	$date = strtotime($date)+eval("return $secondes;"); // permet de passer une expression
-	return date($format,$date);
 }
 
 /**
@@ -248,11 +244,32 @@ function agenda_affiche_full($i)
 	return agenda_periode($type, $nb, $evt_avec, $evt_sans);
 }
 
+/**
+ * Ajout d'un offset a une date
+ *
+ * @param string $date
+ * @param int $secondes
+ *   peut etre une expression math : 24*60*60
+ * @param string $format
+ *   format de sortie de la date
+ * @return string
+ */
+function agenda_dateplus($date,$secondes,$format="Y-m-d H:i:s"){
+	$date = strtotime($date)+eval("return $secondes;"); // permet de passer une expression
+	return date($format,$date);
+}
 
-// decale les mois de la date.
-// cette fonction peut raboter le jour si le nouveau mois ne les contient pas
-// exemple 31/01/2007 + 1 mois => 28/02/2007
-function agenda_moisdecal($date,$decalage,$format){
+/**
+ * decale les mois de la date.
+ * cette fonction peut raboter le jour si le nouveau mois ne les contient pas
+ * exemple 31/01/2007 + 1 mois => 28/02/2007
+ *
+ * @param string $date
+ * @param int $decalage
+ * @param string $format
+ * @return string
+ */
+function agenda_moisdecal($date,$decalage,$format="Y-m-d H:i:s"){
 	include_spip('inc/filtres');
 	$date_array = recup_date($date);
 	if ($date_array) list($annee, $mois, $jour) = $date_array;
@@ -269,8 +286,15 @@ function agenda_moisdecal($date,$decalage,$format){
 }
 
 
-// decale les jours de la date.
-function agenda_jourdecal($date,$decalage,$format){
+/**
+ * decale les jours de la date.
+ *
+ * @param string $date
+ * @param int $decalage
+ * @param string $format
+ * @return string
+ */
+function agenda_jourdecal($date,$decalage,$format="Y-m-d H:i:s"){
 	include_spip('inc/filtres');
 	$date_array = recup_date($date);
 	if ($date_array) list($annee, $mois, $jour) = $date_array;
