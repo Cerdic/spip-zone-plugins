@@ -1,0 +1,21 @@
+
+[indentation]
+indent_width=4
+indent_type=1
+indent_hard_tab_width=8
+detect_indent=false
+indent_mode=2
+
+[project]
+name=plugin_edition_directe
+base_path=/home/abelass/www/spip3/plugins/edition_directe
+
+[long line marker]
+long_line_behaviour=1
+long_line_column=72
+
+[files]
+current_page=2
+FILE_NAME_0=0;PHP;0;16;1;1;1;/home/abelass/www/spip3/plugins/edition_directe/branches/2.0/edition_directe_pipelines.php;0;4
+FILE_NAME_1=0;HTML;0;16;1;1;1;/home/abelass/www/spip3/plugins/edition_directe/branches/2.0/prive/editer/colonne_documents_aed.html;0;4
+FILE_NAME_2=523;XML;0;16;1;1;1;/home/abelass/www/spip3/plugins/edition_directe/branches/2.0/plugin.xml;0;4

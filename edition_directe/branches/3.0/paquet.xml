@@ -1,7 +1,7 @@
 <paquet
 	   prefix="edition_directe"
 	   categorie="edition"
-	   version="3.0.0"
+	   version="3.0.1"
 	   etat="test"
 	   compatibilite="[3.0.0-alpha2;3.0.*]"
 	   logo="img/logo_aed_edit_128.png"
@@ -23,5 +23,5 @@
 	<utilise nom="sites" compatibilite="[1.4.1;[" />
 	<utilise nom="mots" compatibilite="[2.1.4;[" />
 	<necessite nom="saisies" compatibilite="[1.14.0;[" />	
-	<menu nom="configurer_edition_directe" titre="edir:titre_plugin" parent="menu_configuration" icone="img/logo_aed_edit_16.png"/>	
+	<menu nom="configurer_edition_directe" titre="edir:titre_plugin" parent="menu_configuration" icone="images/edir-16.png"/>	
 </paquet>
