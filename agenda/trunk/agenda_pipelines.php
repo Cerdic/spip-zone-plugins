@@ -48,11 +48,11 @@ function agenda_affiche_milieu($flux) {
 
 		if (!$actif){
 			if($activer){
-				$res .= bouton_action(_T('agenda:rubrique_activer_agenda'),generer_action_auteur('rubrique_activer_agenda',$id_rubrique,self()),'ajax');
+				$res .= bouton_action(_T('agenda:rubrique_activer_agenda'),generer_action_auteur('activer_agenda_rubrique',$id_rubrique,self()),'ajax');
 			}
 		}
 		else
-			$res .= bouton_action(_T('agenda:rubrique_desactiver_agenda'),generer_action_auteur('rubrique_activer_agenda',"-$id_rubrique",self()),'ajax');
+			$res .= bouton_action(_T('agenda:rubrique_desactiver_agenda'),generer_action_auteur('activer_agenda_rubrique',"-$id_rubrique",self()),'ajax');
 		if ($voir)
 			$res .= " | <a href='".generer_url_ecrire('evenements',"id_rubrique=$id_rubrique")."'>$voir</a>";
 		if ($res)
