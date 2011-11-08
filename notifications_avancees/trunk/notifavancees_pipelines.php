@@ -344,6 +344,7 @@ function notifications_envoyer($destinataire, $mode, $quoi, $id=0, $options=arra
 			'options' => $options,
 			'destinataire' => $destinataire,
 			'contact' => $contact
+			'mode' => $mode
 		);
 		
 		// Pour ajouter des informations utiles, on utilise le même principe que les modèles : le premier mot est le type
