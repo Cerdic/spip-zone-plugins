@@ -1,0 +1,31 @@
+[ (#REM) Feuille de style de la version texte
+	Nous utilisons un squelette afin de traiter l'orientation du texte
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+/* boutonstexte.css */
+.boutonstexte {
+	display:none;
+}
+
+div.onlytext {
+	width:auto!important;
+}
+
+div.onlytext a:link, div.onlytext a:visited {
+  color: #009;
+  background: transparent;
+  font-weight: bold;
+  text-decoration: underline;
+  }
+
+div.onlytext a:link:after, 
+div.onlytext a:visited:after {
+  content: " (" attr(href) ") ";
+  font-size: 90%;
+  }
+div.onlytext a[href^="/"]:after {
+  content: " ([(#URL_SITE_SPIP)]" attr(href) ") ";
+  }
