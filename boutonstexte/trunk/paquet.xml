@@ -1,0 +1,18 @@
+<paquet
+	prefix="boutonstexte"
+	categorie="edition"
+	version="2.0.0"
+	etat="test"
+	compatibilite="[3.0.0-dev;3.0.*]"
+	logo="images/fontsizeup.png"
+	documentation="http://www.spip-contrib.net/?article1474"
+>	
+
+	<nom>Boutons dans le Texte</nom>
+	<!-- Des boutons pour gérer la taille des caractères -->
+
+	<auteur lien="http://toggg.com/">Bertrand Gugger</auteur>
+
+	<pipeline nom="insert_head_css" inclure="boutonstexte_pipelines.php" />
+	<pipeline nom="insert_head" inclure="boutonstexte_pipelines.php" />
+</paquet>

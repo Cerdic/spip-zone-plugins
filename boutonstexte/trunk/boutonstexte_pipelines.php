@@ -1,25 +1,37 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // insert le css et le js externes pour boutonstexte dans le <head> du document (#INSERT_HEAD)
 function boutonstexte_insert_head_css($flux) 
 {
-	static $done = false;
-	if (!$done) {
-		$metacfg = array(
-			'cssFile' => 'boutonstexte',
-		);
-		meta_boutonstexte($metacfg);
-		$cssFile = $metacfg['cssFile'];
-		$done = true;
-		$flux .= '<link rel="stylesheet" href="spip.php?page='.$cssFile.'.css" type="text/css" media="all" /><link rel="stylesheet" href="spip.php?page='.$cssFile.'-print.css" type="text/css" media="print" />';
-	}
+	$metacfg = array(
+		'cssFile' => 'boutonstexte',
+	);
+	meta_boutonstexte($metacfg);
+	$cssFile = find_in_path($metacfg['cssFile'].".css");
+
+	$dir = $GLOBALS['lang_dir']=="ltr"?"left":"right";
+	$imgto = find_in_path("images/textonly.png");
+	$imgtsd = find_in_path("images/fontsizedown.png");
+	$imgtsu = find_in_path("images/fontsizeup.png");
+	$flux .=
+		'<link rel="stylesheet" href="'.$cssFile.'" type="text/css" media="all" />'
+	  . "<style type='text/css'>
+.boutonstexte button.textonly {background-image:url($imgto);}
+.boutonstexte button.textsizedown {background-image:url($imgtsd);}
+.boutonstexte button.textsizeup {background-image:url($imgtsu);}
+div.onlytext {text-align:$dir;}
+</style>"
+		;
+
+
 	return $flux;
 }
 
 function boutonstexte_insert_head($flux)
 {
 	$metacfg = array(
-		'selector' => '#contenu .texte',
+		'selector' => '#content .texte',
 		'jsFile' => 'boutonstexte.js',
 		'imgPath' => 'images/fontsizeup.png',
 		'txtOnly' => 'boutonstexte:texte_seulement',
@@ -38,7 +50,6 @@ function boutonstexte_insert_head($flux)
 	$txtSizeUp = txt_boutonstexte($metacfg['txtSizeUp']);
 	$txtSizeDown = txt_boutonstexte($metacfg['txtSizeDown']);
 
-	$flux = boutonstexte_insert_head_css($flux);
 	$flux .= <<<EOH
 <script src="{$jsFile}" type="text/javascript"></script>
 <script type="text/javascript"><!--
