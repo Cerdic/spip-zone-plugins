@@ -168,9 +168,4 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	return $facteur->Send();
 }
 
-// Juste pour déclarer le pipeline
-function facteur_facteur_pre_envoi($facteur){
-	return $facteur;
-}
-
 ?>

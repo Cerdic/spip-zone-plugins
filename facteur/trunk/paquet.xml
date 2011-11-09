@@ -2,7 +2,7 @@
 	prefix="facteur"
 	categorie="communication"
 	version="2.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="prive/themes/spip/images/facteur-48.png"
 	schema="1.1"
@@ -14,7 +14,7 @@
 
 	<auteur>Collectif SPIP</auteur>
 
-	<pipeline nom="facteur_pre_envoi" inclure="inc/envoyer_mail.php" />
+	<pipeline nom="facteur_pre_envoi" action="" />
 	<pipeline nom="ieconfig_metas" inclure="facteur_ieconfig_metas.php" />
 
 	<menu nom="configurer_facteur" titre="facteur:configuration_facteur" parent="menu_configuration" icone="images/facteur-16.png" />
