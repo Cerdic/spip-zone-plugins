@@ -2,7 +2,7 @@
 	<nom>CVT-multi-etapes</nom>
 	<slogan>Des formulaires CVT multi-&#233;tapes en 2 clics (ou 3)</slogan>
 	<auteur>[Cedric->yterium.net]</auteur>
-	<version>0.2.3</version>
+	<version>0.2.4</version>
 	<etat>stable</etat>
 	<description>Permet de faire facilement des CVT &#224; plusieurs &#233;tapes. Voir le formulaires/d&#233;mo dans le plugin pour plus de d&#233;tails</description>
 	<prefix>cvtm</prefix>
