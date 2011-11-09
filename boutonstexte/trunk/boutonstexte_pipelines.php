@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function boutonstexte_insert_head_css($flux) 
 {
 	$metacfg = array(
-		'cssFile' => 'boutonstexte',
+		'cssFile' => 'css/boutonstexte',
 	);
 	meta_boutonstexte($metacfg);
 	$cssFile = find_in_path($metacfg['cssFile'].".css");
@@ -16,12 +16,7 @@ function boutonstexte_insert_head_css($flux)
 	$imgtsu = find_in_path("images/fontsizeup.png");
 	$flux .=
 		'<link rel="stylesheet" href="'.$cssFile.'" type="text/css" media="all" />'
-	  . "<style type='text/css'>
-.boutonstexte button.textonly {background-image:url($imgto);}
-.boutonstexte button.textsizedown {background-image:url($imgtsd);}
-.boutonstexte button.textsizeup {background-image:url($imgtsu);}
-div.onlytext {text-align:$dir;}
-</style>"
+	  . "<style type='text/css'>div.onlytext {text-align:$dir;}</style>"
 		;
 
 
@@ -32,8 +27,8 @@ function boutonstexte_insert_head($flux)
 {
 	$metacfg = array(
 		'selector' => '#content .texte',
-		'jsFile' => 'boutonstexte.js',
-		'imgPath' => 'images/fontsizeup.png',
+		'jsFile' => 'javascript/boutonstexte.js',
+		'imgPath' => 'boutonstexte/themes/zoom/fontsizeup.png',
 		'txtOnly' => 'boutonstexte:texte_seulement',
 		'txtBackSpip' => 'boutonstexte:retour_a_spip',
 		'txtSizeUp' => 'boutonstexte:augmenter_police',
@@ -43,7 +38,7 @@ function boutonstexte_insert_head($flux)
 	
 	$selector = $metacfg['selector'];
 	$jsFile = find_in_path($metacfg['jsFile']);
-	$imgPath = dirname(find_in_path($metacfg['imgPath']));
+	$imgPath = dirname(find_in_path($metacfg['imgPath']))."/";
 
 	$txtOnly = txt_boutonstexte($metacfg['txtOnly']);
 	$txtBackSpip = txt_boutonstexte($metacfg['txtBackSpip']);

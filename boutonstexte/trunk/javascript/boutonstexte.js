@@ -10,15 +10,15 @@ if (typeof jQuery == 'function')
 		var boutons = $('<span class="boutonstexte"></span>');
 
 		if (!$("img.textsizeup").length && boutonstexte.txtSizeUp) {
-			$('<button class="textsizeup"><img src="rien.gif" alt="' + boutonstexte.txtSizeUp +'" /></button>')
+			$('<a href="#" class="textsizeup"><img src="'+boutonstexte.imgPath+'fontsizeup.png" alt="' + boutonstexte.txtSizeUp +'" /></a>')
 			.appendTo(boutons);
 		}
 		if (!$("img.textsizedown").length && boutonstexte.txtSizeDown) {
-			$('<button class="textsizedown"><img src="rien.gif" alt="' + boutonstexte.txtSizeDown +'" /></button>')
+			$('<a href="#" class="textsizedown"><img src="'+boutonstexte.imgPath+'fontsizedown.png" alt="' + boutonstexte.txtSizeDown +'" /></a>')
 			.appendTo(boutons);
 		}
 		if (!$("img.textonly").length && boutonstexte.txtOnly) {
-			$('<button class="textonly"><img src="rien.gif" alt="' + boutonstexte.txtOnly +'" /></button>')
+			$('<a href="#" class="textonly"><img src="'+boutonstexte.imgPath+'textonly.png" alt="' + boutonstexte.txtOnly +'" /></a>')
 			.appendTo(boutons);
 		}
 
@@ -26,24 +26,27 @@ if (typeof jQuery == 'function')
 			$(boutonstexte.selector).before(boutons);
 		}
 
-		$("img.textsizeup,button.textsizeup")
+		$("img.textsizeup,a.textsizeup")
 		.click(function(e) {
 			boutonstexte.fontBigger($(this).is('button') ? this : null);
 			e.stopPropagation();
+			return false;
 		})
 		.attr({'alt':boutonstexte.txtSizeUp, 'title':boutonstexte.txtSizeUp});
 
-		$("img.textsizedown,button.textsizedown")
+		$("img.textsizedown,a.textsizedown")
 		.click(function(e) {
 			boutonstexte.fontSmaller($(this).is('button') ? this : null);
 			e.stopPropagation();
+			return false;
 		})
 		.attr({'alt':boutonstexte.txtSizeDown, 'title':boutonstexte.txtSizeDown});
 
-		$("img.textonly,button.textonly")
+		$("img.textonly,a.textonly")
 		.click(function(e) {
 			boutonstexte.texteOnly($(this).is('button') ? this : null);
 			e.stopPropagation();
+			return false;
 		})
 		.attr({'alt':boutonstexte.txtOnly, 'title':boutonstexte.txtOnly});
 

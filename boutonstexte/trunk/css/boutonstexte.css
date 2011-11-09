@@ -2,33 +2,13 @@
 .boutonstexte {
 	float: right;
 }
-.boutonstexte button {
+.boutonstexte a {
+    display: inline-block;
 	position:relative;
 	top: -10px;
-	padding: 0;
-	border: 1px transparent solid;
-	background-color: transparent;
-}
-.textsizeup, .textsizedown, .textonly {
-	cursor: pointer;
-}
-.boutonstexte button:hover {
-	border: 1px red solid;
-}
-.boutonstexte button.textonly {
-	background-repeat: no-repeat;
-	height: 17px;
-	width: 17px;
-}
-.boutonstexte button.textsizedown {
-    background-repeat: no-repeat;
-	height: 17px;
-	width: 17px;
-}
-.boutonstexte button.textsizeup {
-    background-repeat: no-repeat;
-	height: 17px;
-	width: 17px;
+	padding: 2px;
+    height: 16px;
+    width:16px;
 }
 
 
