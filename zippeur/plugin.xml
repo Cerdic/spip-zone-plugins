@@ -21,7 +21,7 @@
 	<licence>GPL</licence>
 	<lien>http://www.spip-contrib.net/Zippeur</lien>
 </plugin>
-<plugin spip='[3.0.0;3.0.99]'>
+<plugin spip='[3.0.0-dev;3.0.99]'>
 	<nom>Zippeur</nom>
 	<slogan>Zippez facilement vos documents joints</slogan>
 	<auteur>Maïeul Rouquette, Julien Coste-Louret</auteur>
