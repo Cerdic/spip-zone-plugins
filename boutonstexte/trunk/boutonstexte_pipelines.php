@@ -28,7 +28,7 @@ function boutonstexte_insert_head($flux)
 	$metacfg = array(
 		'selector' => '#content .texte',
 		'jsFile' => 'javascript/boutonstexte.js',
-		'imgPath' => 'boutonstexte/themes/zoom/fontsizeup.png',
+		'skin' => 'zoom',
 		'txtOnly' => 'boutonstexte:texte_seulement',
 		'txtBackSpip' => 'boutonstexte:retour_a_spip',
 		'txtSizeUp' => 'boutonstexte:augmenter_police',
@@ -38,7 +38,7 @@ function boutonstexte_insert_head($flux)
 	
 	$selector = $metacfg['selector'];
 	$jsFile = find_in_path($metacfg['jsFile']);
-	$imgPath = dirname(find_in_path($metacfg['imgPath']))."/";
+	$imgPath = dirname(find_in_path('boutonstexte/themes/'.$metacfg['skin'].'/fontsizeup.png'))."/";
 
 	$txtOnly = txt_boutonstexte($metacfg['txtOnly']);
 	$txtBackSpip = txt_boutonstexte($metacfg['txtBackSpip']);

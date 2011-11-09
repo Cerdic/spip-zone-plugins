@@ -17,6 +17,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_txtSizeUp' => 'Texte augmenter *',
 'label_txtSizeDown' => 'Texte diminuer *',
 'label_selector' => 'Expression CSS ou etendue jQuery',
+'label_skin' => 'Apparence des boutons',
+'legend_apparence' => 'Habillage',
 
 
 'donnees_techniques' => 'Donn&eacute;es techniques &agrave; ne pas changer'
