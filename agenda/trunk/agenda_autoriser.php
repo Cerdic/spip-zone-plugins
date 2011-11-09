@@ -65,6 +65,29 @@ function autoriser_evenement_modifier_dist($faire,$quoi,$id,$qui,$options){
 }
 
 /**
+ * Autorisation d'instituer un evenement : voir si l'article est publie ou non
+ * @param string $faire
+ * @param string $quoi
+ * @param int $id
+ * @param int $qui
+ * @param array $options
+ * @return bool
+ */
+function autoriser_evenement_instituer_dist($faire,$quoi,$id,$qui,$options){
+	if (!isset($options['id_article']) OR !$id_article=$options['id_article'])
+		$id_article = sql_getfetsel('id_article','spip_evenements','id_evenement='.intval($id));
+	if (!$id_article) return false;
+	$statut = sql_getfetsel('statut','spip_articles','id_article='.intval($id_article));
+	// interdit de publier un evenement sur un article non publie
+	if ($statut!=='publie'
+	  AND isset($options['statut'])
+		AND $options['statut']=='publie')
+		return false;
+	$options['id_article']=$id_article;
+	return autoriser('modifier','evenement',$id,$qui,$options);
+}
+
+/**
  * Autorisation de voir un evenement : autorisations de l'article parent
  *
  * @param string $faire

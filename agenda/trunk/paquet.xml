@@ -1,8 +1,8 @@
 <paquet
 	prefix="agenda"
 	categorie="date"
-	version="3.2.0"
-	etat="dev"
+	version="3.5.0"
+	etat="test"
 	compatibilite="[3.0.0-dev;["
 	logo="prive/themes/spip/images/evenement-32.png"
 	schema="0.25.0"
