@@ -132,4 +132,51 @@ function agenda_quete_calendrier_prive($flux){
 	}
 	return $flux['data'];
 }
+
+/**
+ * Synchroniser le statut des evenements lorsqu'on publie/depublie un article
+ * @param array $flux
+ * @return array
+ */
+function agenda_post_edition($flux){
+	if ($flux['args']['table']=='spip_articles'
+	  AND $flux['args']['action'] = 'instituer'
+	  AND $id_article = $flux['args']['id_objet']
+	  AND isset($flux['data']['statut'])
+	  AND $statut = $flux['data']['statut']
+	  AND $statut_ancien = $flux['args']['statut_ancien']
+	  AND $statut!=$statut_ancien){
+
+		$set = array();
+		// les evenements principaux, associes a cet article
+		$where = array('id_article='.intval($id_article),'id_evenement_source=0');
+		switch($statut){
+			case 'poubelle':
+				// on passe aussi tous les evenements associes a la poubelle, sans distinction
+				$set['statut'] = 'poubelle';
+				break;
+			case 'publie':
+				// on passe aussi tous les evenements prop en publie
+				$set['statut'] = 'publie';
+				$where[] = "statut='prop'";
+				break;
+			default:
+				if ($statut_ancien=='publie'){
+					// on depublie aussi tous les evenements publie
+					$set['statut'] = 'prop';
+					$where[] = "statut='publie'";
+				}
+				break;
+		}
+		if (count($set)){
+			include_spip('action/editer_evenement');
+			$res = sql_select('id_evenement','spip_evenements',$where);
+			// et on applique a tous les evenements lies a l'article
+			while ($row = sql_fetch($res)){
+				evenement_modifier($row['id_evenement'],$set);
+			}
+		}
+	}
+	return $flux;
+}
 ?>

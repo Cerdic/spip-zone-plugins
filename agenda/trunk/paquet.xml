@@ -28,6 +28,7 @@
 	<pipeline nom="affiche_milieu" inclure="agenda_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="agenda_pipelines.php" />
 	<pipeline nom="quete_calendrier_prive" inclure="agenda_pipelines.php" />
+	<pipeline nom="post_edition" inclure="agenda_pipelines.php" />
 
 	<utilise nom="Fulltext" compatibilite="[0.2;[" />
 	<utilise nom="mots" compatibilite="[2.0.0;[" />
