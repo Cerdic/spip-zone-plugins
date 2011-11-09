@@ -218,8 +218,12 @@ function cvtm_styliser($flux){
 	  AND isset($flux['args']['contexte']['_etape'])
 	  AND ($e=$flux['args']['contexte']['_etape'])>1
 		AND $ext = $flux['args']['ext']
-		AND $f = chemin($flux['args']['fond']."_".$e.".".$ext))
-		$flux['data'] = substr($f,0,strlen($f)-5);
+		AND $f=$flux['data']
+    ){
+        preg_match("#formulaires\/.*#",$f,$matches);
+        $f = chemin($matches[0]."_".$e.".".$ext);
+        $flux['data'] = substr($f,0,strlen($f)-strlen($ext)-1);
+    }
 
 	return $flux;
 }
