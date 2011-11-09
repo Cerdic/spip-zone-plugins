@@ -72,13 +72,13 @@ boutonsTexte.prototype.texteOnly = function(elt)
 		jQuery(elt).attr({ 'title': that.txtOnly, 'alt': that.txtOnly }).
 			parent().insertBefore(jQuery("#marktextonly")).after(texte);
 		jQuery("#marktextonly").remove();
-		jQuery('body').children().show();
+		jQuery('body').children().removeClass('onlytext_hide');
 		this.backTextOnly = false;
 		return;
 	}
 	texte.addClass("onlytext");
 	jQuery(texte[texte.length-1]).after('<div id="marktextonly">marktextonly</div>');
-	$('body>*').hide();
+	$('body>*').addClass('onlytext_hide');
 	jQuery(elt).attr({ 'title': that.txtBackSpip, 'alt': that.txtBackSpip }).
 		parent().prependTo("body").after(texte);
 	this.backTextOnly = true;
