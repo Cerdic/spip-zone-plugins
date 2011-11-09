@@ -3,6 +3,7 @@
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+include_spip('inc/config');
 include_spip('inc/filtres');
 
 function formulaires_inscription_client_saisies_dist($retour=''){

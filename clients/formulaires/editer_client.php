@@ -3,6 +3,8 @@
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+include_spip('inc/config');
+
 function formulaires_editer_client_saisies_dist($id_auteur, $retour=''){
 	$conf=lire_config('clients/elm',array());
 	
