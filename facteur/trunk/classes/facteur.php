@@ -12,14 +12,10 @@ include_spip('inc/charsets');
 include_spip('inc/filtres');
 
 if (!class_exists('PHPMailer')) {
-if (intval(phpversion()) == 5) {
 	include_spip('phpmailer-php5/class.phpmailer');
 	include_spip('phpmailer-php5/class.smtp');
-} else {
-	include_spip('phpmailer-php4/class.phpmailer');
-	include_spip('phpmailer-php4/class.smtp');
 }
-}
+
 include_spip('facteur_fonctions');
 
 class Facteur extends PHPMailer {
