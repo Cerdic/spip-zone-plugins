@@ -15,5 +15,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // F
 	'facteur_description' => 'Postman delivers emails in HTML, text or mixed format; via SMTP or not',
 	'facteur_nom' => 'Postman',
+	'facteur_slogan' => 'He delivers emails',
 );
 ?>
