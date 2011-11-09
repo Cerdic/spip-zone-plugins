@@ -2,9 +2,12 @@
                                
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
+include_spip('inc/config');
 
 
 function formulaires_configurer_clients_saisies_dist($retour=''){
+$civilite = charger_fonction('civilite','inc');
+
 return array(
 		array(
 			'saisie' => 'explication',
