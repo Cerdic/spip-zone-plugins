@@ -57,7 +57,7 @@ function boutonstexte_insert_head($flux)
 		'txtSizeDown':'{$txtSizeDown}'
 	});
 //-->
-</script >
+</script>
 EOH;
 	return $flux;
 }
@@ -67,7 +67,9 @@ function txt_boutonstexte($txt)
 	if (!$txt || $txt == '_') {
 		return '';
 	}
-	return addslashes(unicode_to_javascript(html2unicode(_T($txt))));
+	$t = texte_script(unicode_to_javascript(html2unicode(_T($txt))));
+	$t = str_replace("\\\\","\\",$t);
+	return $t;
 }
 	
 function meta_boutonstexte(&$metacfg)

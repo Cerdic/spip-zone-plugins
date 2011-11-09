@@ -28,7 +28,7 @@ if (typeof jQuery == 'function')
 
 		$("img.textsizeup,a.textsizeup")
 		.click(function(e) {
-			boutonstexte.fontBigger($(this).is('button') ? this : null);
+			boutonstexte.fontBigger($(this).is('a') ? this : null);
 			e.stopPropagation();
 			return false;
 		})
@@ -36,7 +36,7 @@ if (typeof jQuery == 'function')
 
 		$("img.textsizedown,a.textsizedown")
 		.click(function(e) {
-			boutonstexte.fontSmaller($(this).is('button') ? this : null);
+			boutonstexte.fontSmaller($(this).is('a') ? this : null);
 			e.stopPropagation();
 			return false;
 		})
@@ -44,7 +44,7 @@ if (typeof jQuery == 'function')
 
 		$("img.textonly,a.textonly")
 		.click(function(e) {
-			boutonstexte.texteOnly($(this).is('button') ? this : null);
+			boutonstexte.texteOnly($(this).is('a') ? this : null);
 			e.stopPropagation();
 			return false;
 		})
