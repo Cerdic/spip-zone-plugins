@@ -1,0 +1,46 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Notes de frais et dons pour SPIP 2.1+
+	</nom>
+	<icon>img_pack/fraisdon-24.png</icon>
+	<auteur>	<!-- Auteur du plugin -->
+	Bruno DARCET
+_ &copy; 2011 - Licence GPL
+	</auteur>
+	<version>
+	1.00
+	</version>
+	<etat>stable</etat>
+	<description>
+	Notes de frais et dons aux associations !
+	</description>
+	<lien>http://www.spip-contrib.net/spip.php?article3974</lien> <!-- URI de documentation -->
+	<options> <!-- fichier charge a chaque hit -->
+	fraisdon_mes_options.php
+	</options>
+	<fonctions> <!-- fichier charge a chaque recalcul -->
+	fraisdon_mes_fonctions.php
+	</fonctions>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix>
+	fraisdon
+	</prefix>
+	<install>base/fraisdon_upgrade.php</install>
+	<pipeline>
+		<!-- activer INSERT_HEAD avec le couteau suisse -->
+		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>fraisdon_pipelines.php</inclure>
+	</pipeline>
+
+	<chemin dir='' />
+ 	<necessite id="CFG" version="[1.0;]" />
+ 	<necessite id="spip_bonux" version="[1.8;]" />
+	<necessite id="SPIP" version="[2.0;]" />
+	<categorie>divers</categorie>
+	<utilise Z />
+</plugin>

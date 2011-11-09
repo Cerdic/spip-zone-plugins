@@ -1,0 +1,10 @@
+<form action='#ENV{action}' name='etatfraisdon' method='post' onSubmit='return verifSaisie()'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<select id="etat" name="etat" onChange="submit()">
+		<option value="1saisie" [(#ENV{etat}|=={1saisie}|?{'selected',''})]><:fraisdon:1saisie:></option>
+		<option value="2valide" [(#ENV{etat}|=={2valide}|?{'selected',''})]><:fraisdon:2valide:></option>
+		<option value="3compta" [(#ENV{etat}|=={3compta}|?{'selected',''})]><:fraisdon:3compta:></option>
+		<option value="4paye" [(#ENV{etat}|=={4paye}|?{'selected',''})]><:fraisdon:4paye:></option>
+	</select>
+</form>
+

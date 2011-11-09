@@ -1,0 +1,20 @@
+#CACHE{0}
+[(#REM) titre=Plugin Frais/Dons]
+[(#REM) icone=img_pack/fraisdon-24.png]
+<!-- descriptif=
+<p>
+</p>
+-->
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+	<p></p>
+	<fieldset>
+		<br />
+		<label for="coefkm_fraisdon"><:fraisdon:coefkm:> : </label>
+		<input type="text" name="coefkm_fraisdon" id="coefkm_fraisdon" value="[(#CONFIG{spip_fraisdon/coefkm_fraisdon}|sinon{1})]" />
+	</fieldset>
+	<div>
+		<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
+		<input type="reset" value="<:reset:>" class="fondo" />
+		<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+	</div>
+</form>

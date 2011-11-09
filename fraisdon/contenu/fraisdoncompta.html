@@ -1,0 +1,5 @@
+<BOUCLE_test(CONDITION){ si #ENV{id_auteur,0}|=={0}|oui}>
+<INCLURE{fond=inc/fraisdoncompta_global}{env} />
+</BOUCLE_test>
+<INCLURE{fond=inc/fraisdoncompta_detail}{env} />
+<//B_test>

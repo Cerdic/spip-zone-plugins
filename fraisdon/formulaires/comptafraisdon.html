@@ -1,0 +1,75 @@
+
+<h2><:fraisdon:compta_notes:></h2>
+[<h2 class='formulaire_ok'>(#ENV*{message_ok})</h2>]
+[<h2 class='formulaire_erreur'>(#ENV*{message_erreur})</h2>]
+
+<form action='#ENV{action}' name='comptafraisdon' method='post' onSubmit='return verifSaisie()'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<fieldset>
+
+	<label for="anneecomptable"><:fraisdon:anneecomptable:> : </label>
+	<input type='text' id='anneecomptable' name='anneecomptable' size='4' value='#GET{anneecomptable}' />
+	<br />
+
+	<label for="regroupement"><:fraisdon:regroupement:> : </label>
+	<input type='text' id='regroupement' name='regroupement' value='' />
+	<br />
+
+	<label for="etat"><:fraisdon:etat:> : </label>
+	<select id="etat" name="etat">
+		<option value="3compta" selected><:fraisdon:3compta:></option>
+		<option value="4payee" ><:fraisdon:4payee:></option>
+	</select>
+	<br />
+
+	<input type='hidden' id='ids' name='ids' value='' />
+	<input type='submit' name='ok' value='OK' />
+	</fieldset>
+</form>
+
+<script lang="javascript">
+
+	/*
+	 * vérifier la saisie
+	 */
+	function verifSaisie() {
+		var val;
+		var i, variable, variables;
+
+		variables= new Array('anneecomptable', 'regroupement');
+		i= 0;
+		while (i < variables.length) {
+			variable= variables[i];
+			val= jQuery('#' + variable).val();
+			if (val.length==0) {
+				alert('Saisie incomplète !');
+				jQuery('#' + variable).focus();
+				return false;
+			}
+			i++;
+		}
+
+		str= "";
+		sep= "";
+		$.each ( $("#checkboxes input:checkbox:checked"),
+			function () {
+				str+= sep + $(this).val();
+				sep= ",";
+			}
+		); 
+		if (str.length==0) {
+			alert('Cocher au moins une ligne !');
+			return false;
+		}
+		str= "(" + str + ")";
+
+		jQuery('#ids').val(str);
+
+		return true;
+	}
+
+	jQuery(document).ready(function() {
+		
+	});
+
+</script>

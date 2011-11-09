@@ -1,0 +1,69 @@
+[(#CACHE{0})]
+<p><:fraisdon:aide_global:> :
+<ul>
+<li><img border=0 src="#CHEMIN{img/ajouter.png}" alt="Ajouter"/> : <:fraisdon:aide_ajout:>.</li>
+<li><img border=0 src="#CHEMIN{img/modifier-16.png}" alt="Modifier"/> : <:fraisdon:aide_modif:>.</li>
+<li><:fraisdon:docjustif:> : <:fraisdon:aide_justif:>.</li>
+<li><img border=0 src="#CHEMIN{img/annuler-16.png}" alt="Supprimer"/> : <:fraisdon:aide_suppr:>.</li>
+<li><img border=0 src="#CHEMIN{img/valider-16.png}" alt="Valider"/> : <:fraisdon:aide_valid:>.</li>
+</p>
+<hr/>
+<BOUCLE_auteur(AUTEURS){id_auteur=#SESSION{id_auteur}|vide|?{0,#SESSION{id_auteur}}}>
+	<B_fraisdon>
+		<table class="spip">
+			<thead>
+			<tr class="row_first">
+				<th><:fraisdon:date:></th>
+				<th><:fraisdon:type:></th>
+				<th><:fraisdon:montant:></th>
+				<th><:fraisdon:titre:></th>
+				<th><:fraisdon:choix:></th>
+				<th><:fraisdon:etat:></th>
+				<th><:fraisdon:justificatif:></th>
+				<th><:fraisdon:regroupement:></th>
+				<th><:fraisdon:actions:></th>
+			</tr>
+			</thead>
+	<BOUCLE_fraisdon(FRAISDONS){id_auteur} {par datefrais}{inverse}>
+		<tr>
+			<td>[(#DATEFRAIS|affdate{'d-m-y'})]</td>
+			<td>[(#VAL{fraisdon:#TYPEFRAIS}|_T)]</td>
+			<td>[(#TYPEFRAIS|substr{0,1}|=={2}|oui)#KM km x #COEF = ]#MONTANT</td>
+			<td>#TITRE</td>
+			<td>[(#VAL{fraisdon:#CHOIXREMB}|_T)]</td>
+			<td>[(#VAL{fraisdon:#ETAT}|_T)]</td>
+			<td>
+				<BOUCLE_justif(documents_liens documents){objet='fraisdon'}{id_objet=#ID_FRAISDON}>
+					<a href="#URL_SITE_SPIP[/IMG/(#FICHIER)]" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a>
+				</BOUCLE_justif>
+			</td>
+			<td>#REGROUPEMENT</td>
+			<td>[(#ETAT|substr{0,1}|=={1}|oui)
+				<a href="[(#SELF|parametre_url{'id_fraisdon_modif',#ID_FRAISDON})]" title="Modifier"><img border=0 src="#CHEMIN{img/modifier-16.png}" alt="Modifier"/></a>
+				#FORMULAIRE_VALIDFRAISDON{#ID_FRAISDON}
+				#FORMULAIRE_SUPPRFRAISDON{#ID_FRAISDON}
+			]</td>
+		</tr>
+	</BOUCLE_fraisdon>
+		</table>
+	</B_fraisdon>
+		<p><:fraisdon:pas_de_frais:> - #NOM</p>
+	<//B_fraisdon>
+
+	[(#REM) Saisir une note de frais]
+	<hr/>
+	<br/>
+	[(#ENV{id_fraisdon_modif,0}|=={0}|non)
+	<a href="[(#SELF|parametre_url{'id_fraisdon_modif',0})]"><img border=0 src="#CHEMIN{img/ajouter.png}"/> <:fraisdon:nouvelle_note:></a>
+	]
+	<br/>
+	#FORMULAIRE_AJOUTFRAISDON{#ENV{id_fraisdon_modif,0}}
+
+	[(#ENV{id_fraisdon_modif,0}|=={0}|non)
+	<br/>
+	#FORMULAIRE_AJOUTJUSTIF{#ENV{id_fraisdon_modif,0}}
+	]
+
+</BOUCLE_auteur>
+</B_auteur>
+<//B_auteur>

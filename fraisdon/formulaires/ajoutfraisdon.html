@@ -1,0 +1,178 @@
+<h2>[(#ENV{id_fraisdon_modif,0}|=={0}|?{<:fraisdon:nouvelle_note:>, <:fraisdon:modif_note:>})]</h2>
+[<h2 class='formulaire_ok'>(#ENV*{message_ok})</h2>]
+[<h2 class='formulaire_erreur'>(#ENV*{message_erreur})</h2>]
+
+<form action='#ENV{action}' name='ajoutfraisdon' method='post' onSubmit='return verifSaisie()'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<fieldset>
+
+	<label for="anneecomptable"><:fraisdon:anneecomptable:> : </label>
+	<input type='text' id='anneecomptable' name='anneecomptable' size='20' value='#ENV{anneecomptable}' />
+	<br />
+
+	<label for="datefrais"><:fraisdon:date:> (jj-mm-aaaa) : </label>
+	<input type='text' id='datefrais' name='datefrais' value='#ENV{datefrais}' />
+	<br />
+
+	<label for="typefrais"><:fraisdon:type:> : </label>
+	<select id="typefrais" name="typefrais">
+		<option value="1frais" [(#ENV{typefrais}|=={1frais}|?{'selected',''})]><:fraisdon:1frais:></option>
+		<option value="2km" [(#ENV{typefrais}|=={2km}|?{'selected',''})]><:fraisdon:2km:></option>
+	</select>
+	<br />
+
+	<div id="fraiskm">
+	<label for="km"><:fraisdon:km:> : </label>
+	<input type='text' id='km' name='km' value='#ENV{km}' />
+
+	<label for="coef"><:fraisdon:coef:> : </label>
+	<input type='text' id='coef' name='coef' value='#ENV{coef}' />
+	<br />
+	</div>
+
+	<label for="montant"><:fraisdon:montant:> : </label>
+	<input type='text' id='montant' name='montant' value='#ENV{montant}' />
+	<br />
+
+	<label for="titre"><:fraisdon:titre:> : </label>
+	<input type='text' id='titre' name='titre' size='50' value='#ENV{titre}' />
+	<br />
+
+	<label for="choixremb"><:fraisdon:choixremb:> : </label>
+	<select id="choixremb" name="choixremb">
+		<option value="1remboursement" [(#ENV{choixremb}|=={1remboursement}|?{'selected',''})]><:fraisdon:1remboursement:></option>
+		<option value="2don" [(#ENV{choixremb}|=={2don}|?{'selected',''})]><:fraisdon:2don:></option>
+	</select>
+	<br />
+
+	<input type='hidden' id='id_auteur' name='id_auteur' value='#ENV{id_auteur}' />
+	<input type='hidden' id='etat' name='etat' value='#ENV{etat}' />
+	<input type='submit' name='ok' value='OK' />
+	</fieldset>
+</form>
+
+<script lang="javascript">
+
+   function CheckDate(d) {
+      // Cette fonction vérifie le format JJ/MM/AAAA saisi et la validité de la date.
+      // Le séparateur est défini dans la variable separateur
+      var amin=1999; // année mini
+      var amax=2999; // année maxi
+      var separateur="/-."; // separateur entre jour/mois/annee
+      var j=(d.substring(0,2));
+      var m=(d.substring(3,5));
+      var a=(d.substring(6));
+      var ok=1;
+      if ( ((isNaN(j))||(j<1)||(j>31)) && (ok==1) ) {
+         alert("Le jour n'est pas correct."); ok=0;
+      }
+      if ( ((isNaN(m))||(m<1)||(m>12)) && (ok==1) ) {
+         alert("Le mois n'est pas correct."); ok=0;
+      }
+      if ( ((isNaN(a))||(a<amin)||(a>amax)) && (ok==1) ) {
+         alert("L'année n'est pas correcte."); ok=0;
+      }
+      if ( ((separateur.indexOf(d.substring(2,3)) < 0)||(separateur.indexOf(d.substring(5,6)) < 0)) && (ok==1) ) {
+         alert("Les séparateurs doivent être des "+separateur); ok=0;
+      }
+      if (ok==1) {
+         var d2=new Date(a,m-1,j);
+         j2=d2.getDate();
+         m2=d2.getMonth()+1;
+         a2=d2.getFullYear();
+         if (a2<=100) {a2=1900+a2}
+         if ( (j!=j2)||(m!=m2)||(a!=a2) ) {
+            alert("La date "+d+" n'existe pas !");
+            ok=0;
+         }
+      }
+      return ok;
+   }
+
+
+	/*
+	 * définir la saisie selon le type choisi
+	 */
+	function setType() {
+		var typefrais;
+
+		typefrais= jQuery('#typefrais').val();
+		switch(typefrais.substr(0,1)) {
+			case '2':
+				jQuery('#fraiskm').show();
+				// jQuery('#km').attr('disabled', false);
+				// jQuery('#coef').attr('disabled', false);
+				jQuery('#montant').attr('readonly', true);
+				jQuery('#km').focus();
+				break;
+
+			case '1':
+			default:
+				jQuery('#fraiskm').hide();
+				jQuery('#km').val(0);
+				// jQuery('#km').attr('disabled', true);
+				// jQuery('#coef').attr('disabled', true);
+				jQuery('#montant').attr('readonly', false);
+				break;
+
+		}
+	}
+
+	/*
+	 * calculer le montant de remboursement selon les KM
+	 */
+	function calculerKM() {
+		var km, coef, montant;
+
+		km= jQuery('#km').val();
+		coef= jQuery('#coef').val();
+		montant= Math.round((km * coef)*100)/100;
+		jQuery('#montant').val(montant);
+	}
+
+	/*
+	 * vérifier la saisie
+	 */
+	function verifSaisie() {
+		var val;
+		var i, variable, variables;
+
+		variables= new Array('datefrais', 'montant', 'titre');
+		i= 0;
+		while (i < variables.length) {
+			variable= variables[i];
+			val= jQuery('#' + variable).val();
+			if (val.length==0) {
+				alert('Saisie incomplète !');
+				jQuery('#' + variable).focus();
+				return false;
+			}
+			i++;
+		}
+
+		if (!CheckDate(jQuery('#datefrais').val())) {
+			return false;
+		}
+
+		return true;
+	}
+
+	jQuery(document).ready(function() {
+		
+		jQuery('#typefrais').change(function() {
+			setType();
+		});
+		
+		jQuery('#km').change(function() {
+			calculerKM();
+		});
+		
+		jQuery('#coef').change(function() {
+			calculerKM();
+		});
+
+		setType();
+		
+	});
+
+</script>

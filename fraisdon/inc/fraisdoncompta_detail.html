@@ -1,0 +1,100 @@
+[(#CACHE{0})]
+#SET{anneedefaut,(#DATE|affdate{Y})}
+#SET{anneecomptable,#ENV{anneecomptable,#GET{anneedefaut}}}
+<BOUCLE_auteur(AUTEURS){id_auteur}>
+<h2><:fraisdon:notesfrais:> - #NOM - [(#VAL{fraisdon:#ENV{etatfrais,'%'}}|_T)]</h2>
+<p><a href="[(#SELF|parametre_url{'id_auteur',0}|parametre_url{'etatfrais',''})]"><:fraisdon:retour_listeglobale:></a></p>
+	#SET{totalfrais,0}
+	#SET{choix,1remboursement}
+	#SET{totalregr,0}
+	#SET{refregr,1remboursement-}
+	#SET{regr,''}
+	<B_fraisdon>
+	<form id="checkboxes" name="checkboxes">
+		<table class="spip">
+			<thead>
+			<tr class="row_first">
+			<th><:fraisdon:date:></th>
+			<th><:fraisdon:type:></th>
+			<th><:fraisdon:montant:></th>
+			<th><:fraisdon:titre:></th>
+			<th><:fraisdon:regroupement:></th>
+			<th><:fraisdon:choix:></th>
+			<th><:fraisdon:choix:></th>
+			</tr>
+			</thead>
+	<BOUCLE_fraisdon(FRAISDONS){id_auteur} {anneecomptable=#GET{anneecomptable}}{etat LIKE #ENV{etatfrais,'%'}}{par choixremb}{par regroupement}{par datefrais}{inverse}>
+
+	[(#GET{refregr}|=={#CHOIXREMB-#REGROUPEMENT}|non)
+		[(#GET{regr}|=={''}|non)
+		<tr>
+			<td></td>
+			<td></td>
+			<td>#GET{totalregr}</td>
+			<td><hr></td>
+			<td><:fraisdon:total:> #GET{regr}</td>
+			<td></td>
+			<td></td>
+		</tr>
+		]
+		#SET{totalregr,0}
+		#SET{regr,#REGROUPEMENT}
+		#SET{refregr,#CHOIXREMB-#REGROUPEMENT}
+	]
+	[(#GET{choix}|=={#CHOIXREMB}|non)
+		<tr>
+			<td></td>
+			<td></td>
+			<td><strong>#GET{totalfrais}</strong></td>
+			<td><hr></td>
+			<td><hr></td>
+			<td><strong><:fraisdon:total:> [(#VAL{fraisdon:#GET{choix}}|_T)]</strong></td>
+			<td></td>
+		</tr>
+		#SET{totalfrais,0}
+		#SET{totalregr,0}
+		#SET{choix,#CHOIXREMB}
+	]
+	
+		<tr>
+			<td>[(#DATEFRAIS|affdate{'d-m-y'})]</td>
+			<td>[(#TYPEFRAIS|substr{1})]</td>
+			<td>[(#TYPEFRAIS|substr{0,1}|=={2}|?{' ',''})#KM km x #COEF = ]#MONTANT</td>
+			<td>#TITRE</td>
+			<td>#REGROUPEMENT</td>
+			<td>[(#VAL{fraisdon:#CHOIXREMB}|_T)]</td>
+			<td><input name="id_#ID_FRAISDON" type="checkbox" value="#ID_FRAISDON"/></td>
+			#SET{totalfrais,#GET{totalfrais}|plus{#MONTANT}}
+			#SET{totalregr,#GET{totalregr}|plus{#MONTANT}}
+		</tr>
+	</BOUCLE_fraisdon>
+		[(#GET{regr}|=={''}|non)
+		<tr>
+			<td></td>
+			<td></td>
+			<td>#GET{totalregr}</td>
+			<td><hr></td>
+			<td><:fraisdon:total:> #GET{regr}</td>
+			<td></td>
+			<td></td>
+		</tr>
+		]
+		<tr>
+			<td></td>
+			<td></td>
+			<td><strong>#GET{totalfrais}</strong></td>
+			<td><hr></td>
+			<td><hr></td>
+			<td><strong><:fraisdon:total:> [(#VAL{fraisdon:#GET{choix}}|_T)]</strong></td>
+			<td></td>
+		</tr>
+		</table>
+		</form>
+		#FORMULAIRE_COMPTAFRAISDON
+	</B_fraisdon>
+		<p><:fraisdon:pas_de_frais:> - #NOM</p>
+	<//B_fraisdon>
+
+</BOUCLE_auteur>
+</B_auteur>
+<//B_auteur>

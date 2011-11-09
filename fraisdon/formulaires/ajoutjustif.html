@@ -1,0 +1,17 @@
+
+<h3><:fraisdon:docjustif:></h3>
+[<h2 class='formulaire_ok'>(#ENV*{message_ok})</h2>]
+[<h2 class='formulaire_erreur'>(#ENV*{message_erreur})</h2>]
+
+<form action='#ENV{action}' name='ajoutjustif' method='post' enctype="multipart/form-data">
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<fieldset>
+	<label for="justificatif"><:fraisdon:choix_fic_telecharger:> : </label>
+	<input type='file' id='justificatif' name='justificatif' />
+	<br />
+
+	<input type="hidden" name="MAX_FILE_SIZE" value="2097152">    
+	<input type='submit' name='ok' value='OK' />
+	</fieldset>
+</form>
+

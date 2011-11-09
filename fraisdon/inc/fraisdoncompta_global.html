@@ -1,0 +1,50 @@
+[(#CACHE{0})]
+#SET{anneedefaut,(#DATE|affdate{Y})}
+#SET{anneecomptable,#ENV{anneecomptable,#GET{anneedefaut}}}
+<form action="#SELF" methode="GET">
+<h2><:fraisdon:anneecomptable:><input type="text" id="anneecomptable" name="anneecomptable" value="#GET{anneecomptable}" size="4" onChange="submit()"/></h2>
+<input type="hidden" name="page" value="fraisdoncompta"/>
+</FORM>
+<B_auteurs>
+<table class="spip">
+	<thead>
+	<tr class="row_first">
+	<th><:fraisdon:nom:></th>
+	<th><:fraisdon:1saisie:></th>
+	<th><:fraisdon:2valide:></th>
+	<th><:fraisdon:3compta:></th>
+	<th><:fraisdon:4paye:></th>
+	<th><:fraisdon:total:></th>
+	</tr>
+	</thead>
+<BOUCLE_auteurs(AUTEURS)>
+	#SET{total,0}
+	#SET{montant_1saisie,0}
+	#SET{montant_2valide,0}
+	#SET{montant_3compta,0}
+	#SET{montant_4paye,0}
+	<BOUCLE_fraisdons(FRAISDONS){id_auteur} {anneecomptable=#GET{anneecomptable}}>
+	[(#ETAT|=={1saisie}|oui) #SET{montant_1saisie,#GET{montant_1saisie}|plus{#MONTANT}}]
+	[(#ETAT|=={2valide}|oui) #SET{montant_2valide,#GET{montant_2valide}|plus{#MONTANT}}]
+	[(#ETAT|=={3compta}|oui) #SET{montant_3compta,#GET{montant_3compta}|plus{#MONTANT}}]
+	[(#ETAT|=={4paye}|oui) #SET{montant_4paye,#GET{montant_4paye}|plus{#MONTANT}}]
+	</BOUCLE_fraisdons>
+	#SET{total,(#GET{montant_1saisie}|plus{#GET{total}})}
+	#SET{total,(#GET{montant_2valide}|plus{#GET{total}})}
+	#SET{total,(#GET{montant_3compta}|plus{#GET{total}})}
+	#SET{total,(#GET{montant_4paye}|plus{#GET{total}})}
+	<BOUCLE_test(CONDITION){si #GET{total}|>{0}}>
+	<tr>
+		<td>#NOM</td>
+		<td>[(#GET{montant_1saisie}|>{0}|oui)#GET{montant_1saisie}]</td>
+		<td>[(#GET{montant_2valide}|>{0}|oui)<a href="[(#SELF|parametre_url{'id_auteur',#ID_AUTEUR}|parametre_url{'etatfrais',2valide})]">#GET{montant_2valide}</a>]</td>
+		<td>[(#GET{montant_3compta}|>{0}|oui)<a href="[(#SELF|parametre_url{'id_auteur',#ID_AUTEUR}|parametre_url{'etatfrais',3compta})]">#GET{montant_3compta}</a>]</td>
+		<td>[(#GET{montant_4paye}|>{0}|oui)#GET{montant_4paye}]</td>
+		<td>#GET{total}</td>
+	</tr>
+	</BOUCLE_test>
+	<//B_test>
+</BOUCLE_auteurs>
+</table>
+</B_auteurs>
+<//B_auteurs>
