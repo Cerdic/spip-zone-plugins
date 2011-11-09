@@ -199,12 +199,12 @@ function clevermail_upgrade($nom_meta_base_version, $version_cible) {
       include_spip('base/abstract_sql');
       include_spip('base/create');
       creer_base();
-      // pas besoin d'insert si pas de mail webmaster défini
-      if ($GLOBALS['meta']['email_webmaster']){
-	      sql_insertq('spip_cm_settings',  array('set_name' => 'CM_MAIL_FROM', 'set_value' => $GLOBALS['meta']['email_webmaster']));
-	      sql_insertq('spip_cm_settings',  array('set_name' => 'CM_MAIL_ADMIN', 'set_value' => $GLOBALS['meta']['email_webmaster']));
-	      sql_insertq('spip_cm_settings',  array('set_name' => 'CM_MAIL_RETURN', 'set_value' => $GLOBALS['meta']['email_webmaster']));
-	  }
+      // creer les trois enregistrements et les affecter par defaut a email_webmaster
+      // creation obligatoire sinon bug du formulaire de parametrage de l'expéditeur...
+		sql_insertq('spip_cm_settings',  array('set_name' => 'CM_MAIL_FROM', 'set_value' => $GLOBALS['meta']['email_webmaster']));
+	    sql_insertq('spip_cm_settings',  array('set_name' => 'CM_MAIL_ADMIN', 'set_value' => $GLOBALS['meta']['email_webmaster']));
+	    sql_insertq('spip_cm_settings',  array('set_name' => 'CM_MAIL_RETURN', 'set_value' => $GLOBALS['meta']['email_webmaster']));
+	  
       sql_insertq('spip_cm_settings',  array('set_name' => 'CM_SEND_NUMBER', 'set_value' => 50));
       ecrire_meta($nom_meta_base_version,$current_version="0.1",'non');
       spip_log('Installation des tables du plugin CleverMail en version 0.1', 'clevermail');
