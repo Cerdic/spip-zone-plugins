@@ -14,7 +14,6 @@
 
 	<auteur>Collectif SPIP</auteur>
 
-	<pipeline nom="autoriser" inclure="inc/facteur_autorisations.php" />
 	<pipeline nom="facteur_pre_envoi" inclure="inc/envoyer_mail.php" />
 	<pipeline nom="ieconfig_metas" inclure="facteur_ieconfig_metas.php" />
 
