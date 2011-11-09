@@ -1,7 +1,7 @@
 <?php
 /*
- * Plugin Facteur
- * (c) 2009-2010 Collectif SPIP
+ * Plugin Facteur 2
+ * (c) 2009-2011 Collectif SPIP
  * Distribue sous licence GPL
  *
  */

@@ -1,7 +1,7 @@
 <?php
 /*
- * Plugin Facteur
- * (c) 2009-2010 Collectif SPIP
+ * Plugin Facteur 2
+ * (c) 2009-2011 Collectif SPIP
  * Distribue sous licence GPL
  *
  */
@@ -9,6 +9,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/charsets');
+include_spip('inc/texte');
 include_spip('inc/filtres');
 
 if (!class_exists('PHPMailer')) {

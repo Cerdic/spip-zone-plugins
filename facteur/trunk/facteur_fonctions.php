@@ -1,22 +1,20 @@
 <?php
 /*
- * Plugin Facteur
- * (c) 2009-2010 Collectif SPIP
+ * Plugin Facteur 2
+ * (c) 2009-2011 Collectif SPIP
  * Distribue sous licence GPL
  *
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/texte');
-include_spip('classes/facteur');
-
-
 /**
  * facteur_addstyle
- *
  * @author Eric Dols
- **/
+ *
+ * @param $matches
+ * @return string
+ */
 function facteur_addstyle($matches) {
 
 	// $matches[1]=tag, $matches[2]=tag attributes (if any), $matches[3]=xhtml closing (if any)

@@ -1,4 +1,10 @@
 <?php
+/*
+ * Plugin Facteur 2
+ * (c) 2009-2011 Collectif SPIP
+ * Distribue sous licence GPL
+ *
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
