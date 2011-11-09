@@ -149,9 +149,7 @@ function langonet_reperer_items($utilises, $init)
 			} else {
 				// L'item est utilise dans un contexte variable
 				$item_peut_etre[] = $_item;
-				if (is_array($utilises['item_tous'][$_item])) {
-					$fichier_peut_etre[$_item] = $utilises['item_tous'][$_item];
-				}
+				$fichier_peut_etre[$_item] = $utilises['item_tous'][$_item];
 			}
 		}
 	}
@@ -182,7 +180,7 @@ function langonet_classer_items($module, $utilises, $init=array(), $files=array(
 		}
 	}
 
-	$item_non = $definition_non_mais_nok = $item_md5 = $fichier_non = array();
+	$item_non_mais = $item_non_mais_nok = $item_non = $definition_non_mais_nok = $item_md5 = $fichier_non = array();
 	foreach ($utilises['items'] as $_cle => $_valeur) {
 		if (!isset($init[$_valeur])) {
 			if (!$utilises['suffixes'][$_cle]) {
@@ -190,9 +188,7 @@ function langonet_classer_items($module, $utilises, $init=array(), $files=array(
 				if ($mod == $module) {
 					// Item indefini alors que le module est explicite, c'est une erreur
 					$item_non[] = $_valeur;
-					if (is_array($utilises['item_tous'][$_cle])) {
 						$fichier_non[$_cle] = $utilises['item_tous'][$_cle];
-					}
 				} else {
 					// L'item peut etre defini dans un autre module. Le fait qu'il ne soit pas
 					// defini dans le fichier en cours de verification n'est pas forcement une erreur.
@@ -209,21 +205,22 @@ function langonet_classer_items($module, $utilises, $init=array(), $files=array(
 					if ($ok) {
 						$definition_non_mais[$_valeur] = array_map('array_shift', $tous_lang[$_valeur]);
 						$item_non_mais[] = $_valeur;
-						if (is_array($utilises['item_tous'][$_cle])) {
-							$fichier_non_mais[$_cle] = $utilises['item_tous'][$_cle];
-						}
+						$fichier_non_mais[$_cle] = $utilises['item_tous'][$_cle];
 					} else {
-						$item_non_mais_nok[] = $_cle;
-						if (is_array($utilises['item_tous'][$_cle])) {
-							$fichier_non_mais_nok[$_cle] = $utilises['item_tous'][$_cle];
-							// Si pas normalise, c'est une auto-definition
-							// Il faudrait gerer l'homonymie, pas seulement la signaler
-							if (!preg_match(',^\w+$,', $_valeur)) {
-								  if (!isset($tous_lang[$_cle]) OR preg_match("%^\s*'$_valeur',?\s*$%", $tous_lang[$_cle][0][2]))
-									$item_md5[$_cle] = $_valeur;
-								  else spip_log("homonymie de cle pour '$_valeur' et " . $tous_lang[$_cle][0][2]);
+						$tous = $utilises['item_tous'][$_cle];
+						// Si pas normalise, c'est une auto-definition
+						// Si l'index est deja pris pour un autre texte
+						// (32 caracteres initiaux communs)
+						// forcer un suffixe md5
+						if (!preg_match(',^\w+$,', $_valeur)) {
+							if (isset($tous_lang[$_cle]) 
+							AND !preg_match("%^\s*'$_valeur',?\s*$%", $tous_lang[$_cle][0][2])) {
+								$_cle .= '_' . md5($_valeur);
 							}
+							$item_md5[$_cle] = $_valeur;
 						}
+						$fichier_non_mais_nok[$_cle] = $tous;
+						$item_non_mais_nok[] = $_cle;
 					}
 				}
 			}
