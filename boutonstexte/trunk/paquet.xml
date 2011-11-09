@@ -4,7 +4,7 @@
 	version="2.0.0"
 	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*]"
-	logo="images/fontsizeup.png"
+	logo="boutonstexte-32.png"
 	documentation="http://www.spip-contrib.net/?article1474"
 >	
 

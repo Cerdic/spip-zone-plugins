@@ -75,19 +75,18 @@ function txt_boutonstexte($txt)
 function meta_boutonstexte(&$metacfg)
 {
 	include_spip('inc/meta');
-	lire_metas();
-    global $meta;
-    if (empty($meta['boutonstexte'])) {
-    	return 0;
-    }
-   	$return = 0;
-    $metabtxt = unserialize($meta['boutonstexte']);
-    foreach ($metabtxt as $o=>$v) {
-    	if (isset($metacfg[$o])) {
-    		$metacfg[$o] = $v;
-		   	++$return;
-    	}
-    }
-    return $return;
+	global $meta;
+	if (empty($meta['boutonstexte'])) {
+		return 0;
+	}
+	$return = 0;
+	$metabtxt = unserialize($meta['boutonstexte']);
+	foreach ($metabtxt as $o=>$v) {
+		if (isset($metacfg[$o])) {
+			$metacfg[$o] = $v;
+			++$return;
+		}
+	}
+	return $return;
 }
 ?>
