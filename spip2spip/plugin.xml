@@ -24,7 +24,7 @@ et si vous utilisez agenda, <code>http://www.domaine.tld/spip.php?page=backend-s
 		<icone>img_pack/icon_spip2spip.png</icone>
 		<url>spip2spip</url>
 	</bouton>
-	<bouton id='spip2spip2' parent='bando_activite'>
+	<bouton id='spip2spip2' parent='bando_edition'>
 		<titre>spiptospip:titre</titre>
 		<icone>img_pack/icon_spip2spip.png</icone>
 		<url>spip2spip</url>
