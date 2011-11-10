@@ -1,5 +1,12 @@
 #CACHE{0}
-<label for="journal"><strong><:asso:prets_libelle_mode_paiement:></strong></label>
+<label for="journal">
+	<div id="saisie_label_journal_depense" name="saisie_label_journal_depense" class="[(#ENV{type_operation}|affichage_div{charges-banques})]">
+		<strong><:asso:compte_debite:></strong>
+	</div>
+	<div id="saisie_label_journal_recette" name="saisie_label_journal_recette" class="[(#ENV{type_operation}|affichage_div{produits})]">
+		<strong><:asso:compte_credite:></strong>
+	</div>
+</label>
 <B_mode_paiement>
 	<select name="journal" id="journal" class="formo" > 
 <BOUCLE_mode_paiement(ASSO_PLAN){par code}{active=1}{classe=#ENV{classe_banques}}{code!=581}>

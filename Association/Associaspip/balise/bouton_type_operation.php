@@ -37,20 +37,44 @@ function balise_BOUTON_TYPE_OPERATION_dyn($id_compte, $type_operation) {
 	$res .= "\n<div class='choix'>";
 
 	$num_classe = $GLOBALS['association_metas']['classe_charges'];
-	$res .= "\n<input type='radio'" . (($id_compte && ($type_operation !== $num_classe)) ? " disabled='disabled' " : " ") . "class='radio' name='type_operation' value='" . $num_classe . "' id='type_operation_depense'" . (($type_operation == $num_classe) ? " checked='checked'" : "") . " onclick=\"remplirSelectImputation(" . $num_classe . "); afficheDiv('depense'); afficheDiv('destination'); afficheDiv('justification'); cacheDiv('recette');\" />";
+	$res .= "\n<input type='radio'";
+	$res .= (($id_compte && ($type_operation !== $num_classe)) ? " disabled='disabled' " : " ");
+	$res .= "class='radio' name='type_operation' value='" . $num_classe . "' id='type_operation_depense'";
+	$res .= (($type_operation == $num_classe) ? " checked='checked'" : "");
+	$res .= " onclick=\"remplirSelectImputation(" . $num_classe . ");
+		afficheDiv('label_imputation','label_depense','depense','label_journal_depense','mode_paiement','justification','destination');
+		cacheDiv('label_destination','label_depense_evaluee','label_journal_recette','recette'); \" />";
 	$res .= "\n<label for='type_operation_depense'>D&eacute;pense</label>";
 
 	$num_classe = $GLOBALS['association_metas']['classe_produits'];
-	$res .= "\n<input type='radio'" . (($id_compte && ($type_operation !== $num_classe)) ? " disabled='disabled' " : " ") . " class='radio' name='type_operation' value='" . $num_classe . "' id='type_operation_recette'" . (($type_operation == $num_classe) ? " checked='checked'" : "") . " onclick=\"remplirSelectImputation(" . $num_classe . "); afficheDiv('recette'); afficheDiv('destination'); afficheDiv('justification'); cacheDiv('depense');\" />";
+	$res .= "\n<input type='radio'";
+	$res .= (($id_compte && ($type_operation !== $num_classe)) ? " disabled='disabled' " : " ");
+	$res .= "class='radio' name='type_operation' value='" . $num_classe . "' id='type_operation_recette'";
+	$res .= (($type_operation == $num_classe) ? " checked='checked'" : "");
+	$res .= " onclick=\"remplirSelectImputation(" . $num_classe . ");
+		afficheDiv('label_imputation','label_recette','recette','label_journal_recette','mode_paiement','justification','destination');
+		cacheDiv('label_destination','label_recette_evaluee','label_journal_depense','depense'); \" />";
 	$res .= "\n<label for='type_operation_recette'>Recette</label>";
 
 	$num_classe = $GLOBALS['association_metas']['classe_banques'];
-	$res .= "\n<input type='radio'" . (($id_compte && ($type_operation !== $num_classe)) ? " disabled='disabled' " : " ") . " class='radio' name='type_operation' value='" . $num_classe . "' id='type_operation_virement'" . (($type_operation == $num_classe) ? " checked='checked'" : "") . " onclick=\"remplirSelectImputation(" . $num_classe . "); afficheDiv('depense'); cacheDiv('recette') ; afficheDiv('justification'); cacheDiv('destination');\" />";
+	$res .= "\n<input type='radio'";
+	$res .= (($id_compte && ($type_operation !== $num_classe)) ? " disabled='disabled' " : " ");
+	$res .= "class='radio' name='type_operation' value='" . $num_classe . "' id='type_operation_virement'";
+	$res .= (($type_operation == $num_classe) ? " checked='checked'" : "");
+	$res .= " onclick=\"remplirSelectImputation(" . $num_classe . ");
+		afficheDiv('label_destination','label_depense','depense','label_journal_depense','mode_paiement','justification');
+		cacheDiv('label_imputation','label_depense_evaluee','label_journal_recette','recette','destination'); \" />";
 	$res .= "\n<label for='type_operation_virement'>Virement</label>";
 
 	$num_classe = $GLOBALS['association_metas']['classe_contributions_volontaires'];
 	if(sql_countsel('spip_asso_plan', "classe='$num_classe'")) {
-		$res .= "\n<input type='radio'" . (($id_compte && ($type_operation !== $num_classe)) ? " disabled='disabled' " : " ") . " class='radio' name='type_operation' value='" . $num_classe . "' id='type_operation_contribution_volontaire'" . (($type_operation == $num_classe) ? " checked='checked'" : "") . " onclick=\"remplirSelectImputation(" . $num_classe . "); afficheDiv('destination'); afficheDiv('depense'); afficheDiv('recette'); afficheDiv('justification');\" />";
+		$res .= "\n<input type='radio'";
+		$res .= (($id_compte && ($type_operation !== $num_classe)) ? " disabled='disabled' " : " ");
+		$res .= "class='radio' name='type_operation' value='" . $num_classe . "' id='type_operation_contribution_volontaire'";
+		$res .= (($type_operation == $num_classe) ? " checked='checked'" : "");
+		$res .= " onclick=\"remplirSelectImputation(" . $num_classe . ");
+			afficheDiv('label_imputation','label_depense_evaluee','label_recette_evaluee','depense','recette','justification','destination');
+			cacheDiv('label_destination','label_depense','label_recette','mode_paiement'); \" />";
 		$res .= "\n<label for='type_operation_contribution_volontaire'>Contrib. volontaire</label>";
 	}
 	$res .= "\n</div>";

@@ -20,16 +20,12 @@ function balise_SELECTEUR_IMPUTATION_dist($p) {
 	return calculer_balise_dynamique($p, 'SELECTEUR_IMPUTATION', array('id_compte', 'type_operation', 'imputation'));
 }
 
-function balise_SELECTEUR_IMPUTATION_dyn($id_compte, $type_operation, $imputation) {
-	$res = '<label for="imputation"><strong>' . _T('asso:imputation') . '</strong></label>';
-	$res .= '<select name="imputation" id="imputation" class="formo" >';
-	$res .= '<option value="0" selected="selected">-- choisissez un code</option>';
-	$res .= '</select>';
+function balise_SELECTEUR_IMPUTATION_dyn($id_compte, $type_operation, $imputation) {	
 	if (!$id_compte) {
-		$res .= "<script> remplirSelectImputation(" . $type_operation . ");</script>";
+		$res = "<script> remplirSelectImputation(" . $type_operation . ");</script>";
 	}
 	else {
-		$res .= "<script> remplirSelectImputation(" . $type_operation . "," . $imputation . ");</script>";
+		$res = "<script> remplirSelectImputation(" . $type_operation . "," . $imputation . ");</script>";
 	}
 	return $res;
 }

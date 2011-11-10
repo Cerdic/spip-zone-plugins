@@ -1,21 +1,30 @@
-function afficheDiv(nomDiv){
-	_modifie_div(nomDiv,'')
+function afficheDiv(){
+	nb = arguments.length;
+	for (var i = 0; i < nb; i++) {
+		_modifie_div(arguments[i],'');
+	}
 }
-
-function cacheDiv(nomDiv){
-	_modifie_div(nomDiv,'cachediv');
+	
+function cacheDiv(){
+	nb = arguments.length;
+	for (var i = 0; i < nb; i++) {
+		_modifie_div(arguments[i],'cachediv');
+	}
 }
 
 function _modifie_div(nomDiv,val) {
 	var nomDiv = 'saisie_' + nomDiv;
 	if(document.getElementById && document.getElementById(nomDiv)) { // Pour les navigateurs récents
-		ptrDiv = document.getElementById(nomDiv); modif = true;
+		ptrDiv = document.getElementById(nomDiv);
+		modif = true;
 	}
 	else if(document.all && document.all[nomDiv]) { // Pour les veilles versions
-		ptrDiv = document.all[nomDiv]; modif = true;
+		ptrDiv = document.all[nomDiv];
+		modif = true;
 	}
 	else if(document.layers && document.layers[nomDiv]) { // Pour les très veilles versions
-		ptrDiv = document.layers[nomDiv]; modif = true;
+		ptrDiv = document.layers[nomDiv];
+		modif = true;
 	}
 	else {
 		modif = false;
@@ -31,7 +40,9 @@ function remplirSelectImputation(numClasse, numImputation) {
 	var myselect = document.getElementById("imputation");
 	for (var code in eval('classe'+numClasse)) {
 		leCode = code;
-		if (leCode == numImputation) {numSelect = i;}
+		if (leCode == numImputation) {
+			numSelect = i;
+		}
 		laValeur = code + ' - ' + eval('classe'+numClasse)[code];
 		lOption = new Option(laValeur, leCode, [], []);
 		myselect.options[i] = lOption;
@@ -64,12 +75,16 @@ function isCheckMailOk(e) {
 	if(e==null || e.length==0) return false;
 	ok = "1234567890qwertyuiopasdfghjklzxcvbnm.@-_QWERTYUIOPASDFGHJKLZXCVBNM";
 	for(i=0; i < e.length ;i++)	{
-		if(ok.indexOf(e.charAt(i))<0) {return false;}
+		if(ok.indexOf(e.charAt(i))<0) {
+			return false;
+		}
 	}
 	if(document.images) {
 		re = "/(@.*@)|(\.\.)|(^\.)|(^@)|(@$)|(\.$)|(@\.)/";
 		re_two = "/^.+\@(\[?)[a-zA-Z0-9\-\.]+\.([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/";
-		if(!e.match(re) && e.match(re_two)) {return true;}
+		if(!e.match(re) && e.match(re_two)) {
+			return true;
+		}
 		return false
 	}
 	return true;
