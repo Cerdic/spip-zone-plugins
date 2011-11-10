@@ -1,0 +1,15 @@
+<paquet
+	prefix="recommander"
+	categorie="communication"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[2.0.12;3.0.*]"
+	logo="images/recommander_logo.png"
+	documentation="http://www.spip-contrib.net/Recommander"
+>	
+
+	<nom>Recommander &#224; un ami</nom>
+	<!-- Fonction recommander un article à un ami -->
+
+	<auteur mail="mailto:fil@rezo.net">fil@rezo.net</auteur>
+</paquet>
