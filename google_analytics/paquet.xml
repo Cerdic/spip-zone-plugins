@@ -1,0 +1,18 @@
+<paquet
+	prefix="googleanalytics"
+	categorie="statistique"
+	version="0.4.1"
+	etat="stable"
+	compatibilite="[1.9.2;3.0.*]"
+	logo="images/ga-32.png"
+	documentation="http://www.spip-contrib.net/?article2495"
+>	
+
+	<nom>Google Analytics</nom>
+	<!-- Utiliser le service Google Analytics -->
+
+	<auteur>Phil</auteur>
+
+	<pipeline nom="insert_head_css" inclure="googleanalytics_insert_head.php" />
+
+</paquet>

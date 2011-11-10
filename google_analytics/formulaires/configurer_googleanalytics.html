@@ -4,8 +4,8 @@
 
 <div class="formulaire_spip formulaire_cfg formulaire_#FORM">
 	
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
 		
 	<form method="post" action="#ENV{action}">
 		<div>
@@ -14,7 +14,7 @@
 			<li class="editer_idGoogle">
 				<label for="idgoogle"><:googleanalytics:label_id_google:></label>
 				<p class="explication"><:googleanalytics:explication_id_google:></p>
-				<input type="text" name="idGoogle" class="text" id="idgoogle" size="60" value="#ENV{idGoogle,UA-xxxxxx}" />
+				<input type="text" name="idGoogle" class="text" id="idgoogle" size="60" value="#ENV{idGoogle}" placeholder="UA-xxxxxxx-x" />
 			</li>
 		</ul>
 		<p class="boutons">

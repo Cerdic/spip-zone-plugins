@@ -12,6 +12,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_id_google' => 'Si "_" ou vide, supprime la fonctionnalit&eacute; (vide reviendra au d&eacute;faut).',
 
 	// L
-	'label_id_google' => 'Votre identifiant Google Analytics du type "UA-12345"',
+	'label_id_google' => 'Votre identifiant Google Analytics du type "UA-1234567-1"',
 );
 ?>
