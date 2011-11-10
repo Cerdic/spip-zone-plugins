@@ -1,0 +1,20 @@
+<paquet
+	prefix="feedburner"
+	categorie="communication"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[2.0.0;3.0.*]"
+	logo="feedburner-64.png"
+	documentation="http://www.spip-contrib.net/feedburner"
+>	
+
+	<nom>FeedBurner</nom>
+	<!-- Utilisez [FeedBurner->http -->
+
+	<auteur lien="http://romy.tetue.net">romy.tetue.net</auteur>
+	
+	<copyright>2009-2011</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+
+</paquet>

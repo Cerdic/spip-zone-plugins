@@ -11,7 +11,7 @@
 	<lien>http://www.spip-contrib.net/feedburner</lien>
 	<prefix>feedburner</prefix>
 	<options>feedburner_options.php</options>
-	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
+	<necessite id='SPIP' version='[2.0.0;3.0.99]' />
 	<necessite id='cfg' version='[1.0.5;]' />
 	<categorie>communication</categorie>
 </plugin>

@@ -9,27 +9,6 @@
 [(#REM) titre=FeedBurner]
 [(#REM) icone=feedburner-20.png]
 
-#CACHE{0}
-
-<div class="formulaire_spip">
-<form method="post">[(#ENV{_cfg_}|form_hidden)]
-	<fieldset>
-		<legend>Param&egrave;tres de votre flux FeedBurner (<i>Feed Details</i>)</legend>
-		<ul>
-			<li class="feedburner_feedId obligatoire">
-				<label for="feedId">Identifiant du flux</label>
-				<input type="text" name="feedId" value="#ENV{feedId}" id="feedId" style="width: 8em;" />
-			</li>
-			<li class="feedburner_url">
-				<label for="url">URL de redirection du flux RSS</label>
-				<input type="text" name="url" value="#ENV{url}" id="url" style="width: 24em;" />
-				<p class="explication">L'adresse de votre flux feedburner est de la forme <tt>http://feeds2.feedburner.com/[(#ENV{feedId}|sinon{...})]</tt>. Indiquez-la ici si vous souhaitez que les visiteurs de votre RSS soient redirig&#233;s vers le flux feedburner.</p>
-			</li>
-		</ul>
-	</fieldset>
-	<div class="boutons">
-		<input type="submit" name="_cfg_ok" value="<:OK:>" />
-		<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
-	</div>
-</form>
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_FEEDBURNER
 </div>
