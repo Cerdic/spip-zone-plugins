@@ -18,11 +18,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_docteur' => 'Docteur',
 	'label_elm' => 'Éléments optionnels',
 	'label_elm_civ' => 'Liste des civilités',
+	'label_fax' => 'Fax',
 	'label_input' => 'Utiliser un champ input',
 	'label_madame' => 'Madame',	
 	'label_mademoiselle' => 'Mademoiselle',
 	'label_monsieur' => 'Monsieur',
 	'label_obligatoire' => 'Obligatoire ?',
+	'label_portable' => 'Portable',
 	'label_tel' => 'Téléphone',
 	'label_type_civ' => 'Type de civilité',	
 

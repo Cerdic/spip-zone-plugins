@@ -4,7 +4,6 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/config');
 
-
 function formulaires_configurer_clients_saisies_dist($retour=''){
 $civilite = charger_fonction('civilite','inc');
 
@@ -28,6 +27,10 @@ return array(
 							'obli_civilite' => _T('clients:label_obligatoire'),
 							'numero' => _T('clients:label_tel'),
 							'obli_numero' => _T('clients:label_obligatoire'),
+							'portable' => _T('clients:label_portable'),
+							'obli_portable' => _T('clients:label_obligatoire'),
+							'fax' => _T('clients:label_fax'),
+							'obli_fax' => _T('clients:label_obligatoire'),
 							'complement' => _T('coordonnees:label_complement'),
 							'pays' => _T('coordonnees:label_pays'),
 							'obli_pays' => _T('clients:label_obligatoire')

@@ -66,26 +66,6 @@ function formulaires_inscription_client_saisies_dist($retour=''){
 		}
 	}
 	
-	$complement=array();
-	if (in_array("complement", $conf) and !in_array("obli_complement", $conf)) {
-		$complement=array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'complement',
-				'label' => _T('coordonnees:label_complement'),
-			)
-		);
-	}elseif (in_array("complement", $conf) and in_array("obli_complement", $conf)) {
-		$complement=array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'complement',
-				'label' => _T('coordonnees:label_complement'),
-				'obligatoire' => 'oui'
-			)
-		);
-	}
-	
 	$numero=array();
 	if (in_array("numero", $conf) and !in_array("obli_numero", $conf)) {
 		$numero=array(
@@ -101,6 +81,66 @@ function formulaires_inscription_client_saisies_dist($retour=''){
 			'options' => array(
 				'nom' => 'numero',
 				'label' => _T('coordonnees:label_numero'),
+				'obligatoire' => 'oui'
+			)
+		);
+	}
+	
+	$portable=array();
+	if (in_array("portable", $conf) and !in_array("obli_portable", $conf)) {
+		$portable=array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'portable',
+				'label' => _T('clients:label_portable')
+			)
+		);
+	}elseif (in_array("portable", $conf) and in_array("obli_portable", $conf)) {
+		$portable=array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'portable',
+				'label' => _T('clients:label_portable'),
+				'obligatoire' => 'oui'
+			)
+		);
+	}
+
+	$fax=array();
+	if (in_array("fax", $conf) and !in_array("obli_fax", $conf)) {
+		$fax=array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'fax',
+				'label' => _T('clients:label_fax')
+			)
+		);
+	}elseif (in_array("fax", $conf) and in_array("obli_fax", $conf)) {
+		$fax=array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'fax',
+				'label' => _T('clients:label_fax'),
+				'obligatoire' => 'oui'
+			)
+		);
+	}
+
+	$complement=array();
+	if (in_array("complement", $conf) and !in_array("obli_complement", $conf)) {
+		$complement=array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'complement',
+				'label' => _T('coordonnees:label_complement'),
+			)
+		);
+	}elseif (in_array("complement", $conf) and in_array("obli_complement", $conf)) {
+		$complement=array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'complement',
+				'label' => _T('coordonnees:label_complement'),
 				'obligatoire' => 'oui'
 			)
 		);
@@ -158,6 +198,8 @@ function formulaires_inscription_client_saisies_dist($retour=''){
 			)
 		),
 		$numero,
+		$portable,
+		$fax,
 		array(
 			'saisie' => 'input',
 			'options' => array(
@@ -244,7 +286,34 @@ function formulaires_inscription_client_traiter_dist($retour=''){
 		set_request('type', 'principal');
 		$editer_numero = charger_fonction('editer_numero', 'action/');
 		$editer_numero('oui');
+		
+		// On crée le portable
+		if(_request('portable')){
+			// on stocke cette donnee
+			$numero = _request('numero');
+			set_request('numero', _request('portable'));					
+			set_request('type', 'portable');			
+			set_request('titre', 'Portable');
+			
+			$editer_portable = charger_fonction('editer_numero', 'action/');
+			$editer_portable('oui');		
+		}
+	
+		// On crée le fax
+		if(_request('fax')){
+			// on stocke cette donnee si elle ne l'est pas deja
+			$numero ? '' : $numero = _request('numero');
+			set_request('numero', _request('fax'));
+			set_request('type', 'fax');			
+			set_request('titre', 'Fax');
+								
+			$editer_fax = charger_fonction('editer_numero', 'action/');
+			$editer_fax('oui');		
+		}		
 	}
+	
+	// si necessaire on replace la bonne donnee dans l'environnement
+	$numero ? set_request('numero', $numero) : '';
 	
 	if ($retour) $retours['redirect'] = $retour;
 	
