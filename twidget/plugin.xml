@@ -11,9 +11,10 @@ _ <code>#INCLURE{fond=inclure/twidget_profile,user=GusLeLapin}</code>
  ou <code>#INCLURE{fond=inclure/twidget_search,search=#SPIP,title='Suivez twitter',subject='SPIP'}</code>
 
  Le plugin fait office de proxy afin qu'aucune requ&ecirc;te ne soit faite par vos visiteurs vers twitter
- et &eacute;viter tout tra&ccedil;age possible de leur activit&eacute;
+ et &eacute;viter tout tra&ccedil;age possible de leur activit&eacute; (pr&eacute;servation de leur vie personnelle).
 	</description>
 	<prefix>twidget</prefix>
 	<lien></lien>
 	<categorie>communication</categorie>
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 </plugin>
