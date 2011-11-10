@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Feedburner
- * Licence GPL 2010-2011
+ * Licence GPL 2009-2011
  *
  */
 
