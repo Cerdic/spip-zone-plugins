@@ -57,16 +57,30 @@ function image_echiquier() {
 	$bordure = intval(jeux_config('bordure'));
 	$board_size = intval(jeux_config('board_size'));
 
-  $board = imagecreate($board_size,$board_size);
-  $light_color = imagecolorallocate($board,$light[0],$light[1],$light[2]);
-  imagefill($board,0,0,$light_color);
-  $square = imagecreate($taille,$taille);
-  $dark_color = imagecolorallocate($square,$dark[0],$dark[1],$dark[2]);
-  imagefill($square,0,0,$dark_color);
-  for ($i=0 ; $i<8 ; $i++) 
-    for ($j=0 ; $j<8 ; $j++) 
-      if (($i+$j) & 1) imagecopy($board,$square,$i*$taille,$j*$taille,0,0,$taille,$taille);
-  $chessboard = imagecreate($board_size+2*$bordure,$board_size+2*$bordure);
+	
+	// ***************** Ouvre une image pour l'échiquier *******************
+	if (strlen(jeux_config('plateau'))>1 )	{
+	// si une image d'échiqier est utilisé
+	//$url = jeux_config('base_url').jeux_config('plateau');
+	$url = _DIR_PLUGIN_JEUX.'img/echiquiers/'.jeux_config('plateau');
+	if (file_exists($url)) {
+		$board=imagecreatefrompng($url);
+		if(!$board) { die("Erreur lors de l'ouverture du fichier : ".jeux_config('plateau')); }
+	}
+
+  }
+	else {
+	  $board = imagecreatetruecolor($board_size,$board_size);
+	  $light_color = imagecolorallocate($board,$light[0],$light[1],$light[2]);
+	  imagefill($board,0,0,$light_color);
+	  $square = imagecreatetruecolor($taille,$taille);
+	  $dark_color = imagecolorallocate($square,$dark[0],$dark[1],$dark[2]);
+	  imagefill($square,0,0,$dark_color);
+	  for ($i=0 ; $i<8 ; $i++) 
+		for ($j=0 ; $j<8 ; $j++) 
+		  if (($i+$j) & 1) imagecopy($board,$square,$i*$taille,$j*$taille,0,0,$taille,$taille);
+	}
+  $chessboard = imagecreatetruecolor($board_size+2*$bordure,$board_size+2*$bordure);
   $black_color = imagecolorallocate($chessboard,0,0,0);
   imagefill($chessboard,0,0,$black_color);
   imagecopy($chessboard,$board,$bordure,$bordure,0,0,$board_size,$board_size);
@@ -112,8 +126,8 @@ function diag_echecs_hilite_square($chessboard,$square,$hilite,$flip) {
 	die("Erreur dans la syntaxe (diag_echecs_hilite_square)!");
 
 	$color = $diag_echecs_globales[$hilite];
-	$square = imagecreate($taille,$taille);
-	$hilite_color = imagecolorallocate($square,$color[0],$color[1],$color[2]);
+	$square = imagecreatetruecolor($taille,$taille);
+	$hilite_color = imagecolorallocatealpha($square,$color[0],$color[1],$color[2],50);
 	imagefill($square,0,0,$hilite_color);
   if (!$flip) {
 	imagecopy($chessboard,$square,($diag_echecs_globales['letter2number'][$letter]-1)*$taille+$bordure,(8-$number)*$taille+$bordure,0,0,$taille,$taille);

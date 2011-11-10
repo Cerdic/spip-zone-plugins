@@ -78,6 +78,12 @@ function calcul_diagramme_echecs($position, $indexJeux) {
 	global $diag_echecs_globales, $jeux_couleurs;
 	$flip = jeux_config('flip');
 	$taille = intval(jeux_config('taille'));
+	// ************* case en surbrillance *************
+	$caserouge = jeux_config('rouge');
+	$casebleu = jeux_config('bleu');
+	$casevert = jeux_config('vert');
+	$casejaune = jeux_config('jaune');
+	
 	$bordure = intval(jeux_config('bordure'));
 	$board_size = intval(jeux_config('board_size'));
 	$font = intval(jeux_config('police'));
@@ -117,6 +123,40 @@ function calcul_diagramme_echecs($position, $indexJeux) {
 	//for ($i=0 ; $i<count($table) ; $i++)  if ( $table[$i] == "r" ) $flip = true;
 	if (in_array('r', $table)) $flip = true;
 	
+
+	// *************** CASE A COLORIER *************************
+	if (strlen($casebleu)>0 )	{
+		$lescases=explode(",",$casebleu);
+			for ($j=0 ; $j<count($lescases) ; $j++) {
+				$square=$lescases[$j];
+				$hilite = "hbleu";
+				diag_echecs_hilite_square($chessboard,$square,$hilite,$flip);
+			}
+		}
+	if (strlen($caserouge)>0 )	{
+		$lescases=explode(",",$caserouge);
+			for ($j=0 ; $j<count($lescases) ; $j++) {
+				$square=$lescases[$j];
+				$hilite = "hrouge";
+				diag_echecs_hilite_square($chessboard,$square,$hilite,$flip);
+			}
+		}
+	if (strlen($casevert)>0 )	{
+		$lescases=explode(",",$casevert);
+			for ($j=0 ; $j<count($lescases) ; $j++) {
+				$square=$lescases[$j];
+				$hilite = "hvert";
+				diag_echecs_hilite_square($chessboard,$square,$hilite,$flip);
+			}
+		}
+	if (strlen($casejaune)>0 )	{
+		$lescases=explode(",",$casejaune);
+			for ($j=0 ; $j<count($lescases) ; $j++) {
+				$square=$lescases[$j];
+				$hilite = "hjaune";
+				diag_echecs_hilite_square($chessboard,$square,$hilite,$flip);
+			}
+		}
 	for ($i=0 ; $i<count($table) ; $i++) {
 	  $sub_table = preg_split("/[:,]/",$table[$i]);
 	  switch($sub_table[0]) {
@@ -167,17 +207,19 @@ second */
 	
 	if (jeux_config('coords')) {
 	  $fond = $jeux_couleurs[jeux_config('fond')];
-	  $big_chessboard = imagecreate($board_size+2*$bordure+$taille,$board_size+2*$bordure+$taille);
+	  $big_chessboard = imagecreatetruecolor($board_size+2*$bordure+$taille,$board_size+2*$bordure+$taille);
 	  $bg_color = imagecolorallocate($big_chessboard,$fond[0],$fond[1],$fond[2]);
-	  imagecolortransparent($big_chessboard,$bg_color);
+	  //imagecolortransparent($big_chessboard,$bg_color);
+	  imagefill($big_chessboard,0,0,$bg_color);			
 	  imagecopy($big_chessboard,$chessboard,$taille,0,0,0,$board_size+2*$bordure,$board_size+2*$bordure);
 	  $width = imagefontwidth($font);
 	  $height = imagefontheight($font);
 	  $center = intval($taille/2);
 	  for ($i=1 ; $i<=8 ; $i++) {
-		$empty_coord = imagecreate($taille,$taille);
+		$empty_coord = imagecreatetruecolor($taille,$taille);
 		$bg_color = imagecolorallocate($empty_coord,$fond[0],$fond[1],$fond[2]);
-		imagecolortransparent($empty_coord,$bg_color);
+		//imagecolortransparent($empty_coord,$bg_color);
+		imagefill($empty_coord,0,0,$bg_color);				
 		$font_color = imagecolorallocate($empty_coord,0,0,0);
 		if (!$flip) {
 		  imagechar($empty_coord,$font,($taille-$width)/2,($taille-$height)/2+$bordure,9-$i,$font_color);
@@ -187,9 +229,10 @@ second */
 		imagecopy($big_chessboard,$empty_coord,0,($i-1)*$taille,0,0,$taille,$taille);
 	  }
 	  for ($i=1 ; $i<=8 ; $i++) {
-		$empty_coord = imagecreate($taille,$taille);
+		$empty_coord = imagecreatetruecolor($taille,$taille);
 		$bg_color = imagecolorallocate($empty_coord,$fond[0],$fond[1],$fond[2]);
-		imagecolortransparent($empty_coord,$bg_color);
+		//imagecolortransparent($empty_coord,$bg_color);
+		imagefill($empty_coord,0,0,$bg_color);
 		$font_color = imagecolorallocate($empty_coord,0,0,0);
 		if (!$flip) {
 		  imagechar($empty_coord,$font,($taille-$width)/2+$bordure,($taille-$height)/2,$diag_echecs_globales['number2letter'][$i],$font_color);
@@ -201,7 +244,19 @@ second */
 	 $chessboard = $big_chessboard;
 	} // if (jeux_config('coords'))
 	
-	$img($chessboard, $fichier_dest);
+	// ************* redimensionement final *************
+	if (strlen(jeux_config('redim'))>0) {
+		if (jeux_config('coords')) { $nbcases=9; } else	{ $nbcases=8; }
+		$newsize = intval(jeux_config('redim'))*$nbcases+2*$bordure;
+		if ($newsize>639) {$newsize=640;}; // taille maximale pour éviter les confusion taille de case et taille de l'image
+		$img_finale = imagecreatetruecolor($newsize,$newsize);
+		imagecopyresampled($img_finale,$chessboard,0,0,0,0,$newsize,$newsize,$taille*$nbcases+2*$bordure,$taille*$nbcases+2*$bordure);
+		$img($img_finale, $fichier_dest);
+	}
+	else {
+		$img($chessboard, $fichier_dest);
+	}
+	
 	return $image;
 }
 

@@ -145,8 +145,8 @@ $jeux_couleurs = array(
 	'lightbrown' => array(255,243,217),
 	// fr
 	'blanc' => array(255,255,255),
-	'noir' => array(0,0,0), 
-	'gris' => array(211,209,209), 
+	'noir' => array(170,170,170), 
+	'gris' => array(209,209,209), 
 	'vert' => array(191,220,192), 
 	'bleu' => array(152,192,218), 
 	'brun' => array(224,183,153), 

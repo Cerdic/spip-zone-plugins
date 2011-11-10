@@ -14,10 +14,10 @@
 global $diag_echecs_globales;
 $diag_echecs_globales = Array(
   // Codes RGB des couleurs predefinies
-	'hrouge' => array(255,170,170), 
-	'hbleu' => array(101,128,230), 
-	'hvert' => array(51,153,102), 
-	'hjaune' => array(255,255,102), 
+	'hrouge' => array(255,64,64), 
+	'hbleu' => array(96,96,255), 
+	'hvert' => array(96,255,96), 
+	'hjaune' => array(255,255,32), 
 	// diverses initialisations
 	'colonnes' => "abcdefgh",
 	'english' => array("r"=>"k", "d"=>"q", "t"=>"r", "f"=>"b", "c"=>"n", "p"=>"p"),
