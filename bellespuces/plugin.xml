@@ -22,5 +22,5 @@
 	</pipeline>
 	
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
 </plugin>
