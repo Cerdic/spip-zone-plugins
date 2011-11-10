@@ -17,6 +17,7 @@
 			[en]Postman delivers emails in HTML, text or mixed format; via SMTP or not
 		</multi>
 	</description>
+	<categorie>communication</categorie>
 	<lien>http://www.spip-contrib.net/Facteur</lien>
 	<install>base/facteur.php</install>
 	<icon>prive/images/facteur-48.png</icon>
@@ -42,7 +43,6 @@
 		<titre>facteur:configuration_facteur</titre>		
 		<url>facteur</url>
 	</bouton>
-	<categorie>communication</categorie>
  	<necessite id="SPIP" version="[2.0.3;2.1.99]" />
 	<utilise id="bando" version="[;]" />
 </plugin>

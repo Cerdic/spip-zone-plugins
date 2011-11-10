@@ -8,15 +8,14 @@
 	schema="1.1"
 	documentation="http://www.spip-contrib.net/Facteur"
 >	
-
+	
 	<nom>Facteur</nom>
 	<!-- Il distribue votre courrier -->
-
+	
 	<auteur>Collectif SPIP</auteur>
-
+	
 	<pipeline nom="facteur_pre_envoi" action="" />
 	<pipeline nom="ieconfig_metas" inclure="facteur_ieconfig_metas.php" />
-
+	
 	<menu nom="configurer_facteur" titre="facteur:configuration_facteur" parent="menu_configuration" icone="images/facteur-16.png" />
-
 </paquet>
