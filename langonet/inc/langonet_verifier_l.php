@@ -10,10 +10,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // -- pour les fichiers .php et la detection de _L
 define("_LANGONET_FONCTION_L", 
 #       "`_L\([\"'](.+)(?:[,\"']|[\"'][,].*)\)`iUm"); # old
-	'#\b_L *[(] *"([^"]*)"[^)]*#');
+	'#\b_L *[(] *"([^"]+)"[^)]*#');
 
 define("_LANGONET_FONCTION_L2", 
-	"#\b_L *[(] *'([^']*)'[^)]*#");
+	"#\b_L *[(] *'([^']+)'[^)]*#");
 
 // Si une erreur se produit lors du deroulement de la fonction,
 // le tableau resultat contient le libelle

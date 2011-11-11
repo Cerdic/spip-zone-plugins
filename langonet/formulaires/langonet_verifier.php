@@ -516,6 +516,7 @@ function creer_script($resultats, $verification) {
 		$sed[$cite]=strlen($occ); 
 	}
 	if (!$sed) return '';
+
 	// Trier par ordre decroissant des longueurs des items a remplacer:
 	// "truc_x" doit etre traite avant "truc"
 	arsort($sed);
@@ -526,7 +527,7 @@ function creer_script($resultats, $verification) {
 		'if [ "$*" == "mv" ]; then comm=mv; else comm=diff; fi' .
 		"\nfor i in " .
 		join(" ", $files) .
-		"\ndo\nr=\$(basename \$i)\nsed \"\n" .
+		"\ndo\necho \$i\nr=\$(basename \$i)\nsed \"\n" .
 		join("\n", array_keys($sed)) .
 		"\n\" \$i > /tmp/\$r\n\$comm /tmp/\$r \$i\ndone\n" .
 		"\nif [ \"$*\" != 'mv' ]; then echo; echo \"$out\"; fi";

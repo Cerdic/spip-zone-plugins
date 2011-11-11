@@ -95,10 +95,11 @@ function langonet_generer_couples($module, $var_source, $var_cible, $mode='index
 					$texte = '';
 				else if (($mode == 'fonction_l') OR (($mode == 'oublie') AND $_valeur))
 					$texte = array('<LANGONET_DEFINITION_L>', $_valeur, $mode);
-				else if ($mode == 'oublie')
-					$texte = '<LANGONET_DEFINITION_MANQUANTE>';
-				else
+				else if ($mode !== 'oublie')
 					$texte = $_item;
+				else if (preg_match('/^[a-z]+$/i', $_item))
+					$texte = $_item;
+				else $texte = '<LANGONET_DEFINITION_MANQUANTE>';
 			}
 		}
 		if ($encodage == 'utf8') $texte = entite2utf($texte);
