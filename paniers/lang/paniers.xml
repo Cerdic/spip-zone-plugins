@@ -1,4 +1,7 @@
 <traduction module="paniers" gestionnaire="salvatore" reference="fr">
+	<langue code="de">
+		<traducteur nom="klaus++" />
+	</langue>
 	<langue code="en">
 		<traducteur nom="RastaPopoulos" />
 	</langue>
