@@ -4,7 +4,7 @@
 	<licence>GPL</licence>
 	<categorie>navigation</categorie>
 	<auteur>Ma&#239;eul Rouquette d'apr&#232;s b_b</auteur>
-	<version>2.1.0</version>
+	<version>2.1.1</version>
 	<lien>http://www.spip-contrib.net/?article3763</lien>
 	<etat>test</etat>
 	<icon>images/accordeon-32.png</icon>
@@ -20,5 +20,5 @@
 	</pipeline>
 	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 	<necessite id="jqueryui" />
-	<necessite id="menus" version="[0.8.10;]" />
+	<utilise id="menus" version="[0.8.10;]" />
 </plugin>
