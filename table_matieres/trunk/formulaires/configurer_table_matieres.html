@@ -1,0 +1,41 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=table_matieres -->
+
+<div class="formulaire_spip formulaire_config">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+				<li class="editer_auto">
+					<label><:tdm:automatique:>&nbsp;:</label>
+					<p class='explications'>(<:tdm:automatique_desription:>)</p>
+					<div class="choix">
+						<label for="auto_oui"><:tdm:automatique_oui:></label>
+						<input type="radio" name="auto" id="auto_oui" size="4" [checked="(#ENV{auto,#EVAL{_AUTO_ANCRE}}|=={oui}|?{checked})"] value='oui' />
+						<label for="auto_non"><:tdm:automatique_non:></label>
+						<input type="radio" name="auto" id="auto_non" size="4" [checked="(#ENV{auto,#EVAL{_AUTO_ANCRE}}|!={oui}|?{checked})"] value='non' />
+					</div>
+				</li>		
+				<li class="editer_longueur">
+					<label for= "lg"><:tdm:longueur:>&nbsp;: </label>
+					<input type="text" name="lg" class="texte" size="4" value="#ENV{lg,#EVAL{_LG_ANCRE}}" />
+				</li>
+				<li class="editer_separateur">
+					<label for="sep"><:tdm:separateur:>&nbsp;: </label>
+					<input type="text" name="sep" class="texte" size="4" value="#ENV{sep,#EVAL{_SEP_ANCRE}}" />
+				</li>
+				<li class="editer_min">
+					<label for="min"><:tdm:min_intertitres:>&nbsp;: </label>
+					<input type="text" name="min" class="texte" size="4" value="#ENV{min,#EVAL{_MIN_ANCRE}}" />
+				</li>
+			</ul>
+			<p class="boutons">
+				<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
+			</p>
+		</div>
+	</form>
+</div>
