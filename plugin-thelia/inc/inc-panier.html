@@ -71,18 +71,26 @@
 			</div>
 
 			<br class="nettoyeur" />
+				
+			<form class="formulaire_spip formulaire_panier">	
+				<input type="hidden" name="page" value="adresse" />
+				<p class="boutons">
 				[(#SESSION{id_auteur}|oui)
 				<THELIA SI NON CONNECTE>
-				      <a href="#URL_LOGOUT{#URL_PAGE{adresse}}" class="lien-thelia lien-thelia-suite"><:spipthelia:valider_panier:></a>
+				     <input type="hidden" name="action" value="logout" />
+					 <input class="submit lien-thelia lien-thelia-suite" type="submit" value="<:spipthelia:valider_panier:>" />
 				</THELIA SI NON CONNECTE>
 				<THELIA SI CONNECTE>
-				      <a href="#URL_PAGE{adresse}" class="lien-thelia lien-thelia-suite"><:spipthelia:valider_panier:></a>
+				      <input class="submit lien-thelia lien-thelia-suite" type="submit" value="<:spipthelia:valider_panier:>" />
 				</THELIA SI CONNECTE>
 				]
 				[(#SESSION{id_auteur}|non)
-				    <a href="[(#URL_PAGE{adresse}|parametre_url{commande,1})]" class="lien-thelia lien-thelia-suite"><:spipthelia:valider_panier:></a>
+				     <input type="hidden" name="commande" value="1" />
+					 <input class="submit lien-thelia lien-thelia-suite" type="submit" value="<:spipthelia:valider_panier:>" />
 				]
+				</p>
 				
+			</form>
 			</T_CONTENU_PANIER>
 				<p><:spipthelia:panier_vide:></p>
 			<//T_CONTENU_PANIER>

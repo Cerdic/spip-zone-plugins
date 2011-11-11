@@ -15,11 +15,7 @@
 
 a.lien-retour-thelia { color: #666; text-decoration: underline; font-size: .9em; }
 
-.lien-thelia { display: block; color: #2666C3; text-decoration: underline; background: none; padding: .5em 0; margin: .5em 0; }
-.lien-thelia:hover { background: none; }
 .lien-thelia-precedent { float: left; clear: left; }
-.lien-thelia-suite { float: right; clear: right; background-color: #8EB50C; border: 1px solid #8EB50C; color: white; padding: .5em .5em; text-decoration: none; font-weight: bold; }
-.lien-thelia-suite:hover { background-color: #8EB50C; color: white; text-decoration: none; }
 
 .obligatoire { color: #FF0000; }
 
