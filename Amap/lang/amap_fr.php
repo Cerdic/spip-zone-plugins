@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_modifier' => 'Modifier',
 	'action_supprimer' => 'Supprimer',
 	'adherent' => 'Adhérent', 
-	'adherent_sans_type_panier' => 'Vos adhérents n\'ont pas encore de type de panier affecté.', 
+	'adherent_sans_type_panier_sans_type_adherent' => 'Vos adhérents n\'ont pas encore de type de panier affecté ou de type d\'adhérent.', 
 	'adhesion' => 'Adhésion (ex:2008)',
 	'adhesion_auteur' => 'Adhésion :',
 	'administrateur' => 'Administrateur',
@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									2. Cette opération devra être effectuée avant chaque début de nouvelles saisons.<br />
 									3. À la fin de chaque saison, vous prendrez soin de mettre à jour la liste des amapiens, ainsi que l\'archivage dans la rubrique appropriée, des dates de la saison passée, ceci pour le bon fonctionnement de ce plugin.<br />
 									4. Mettre à jour les <b>type d\'adhérent</b>, <b>adhésion</b> et <b>type de panier</b> sur la page de chaque auteur sinon aucun panier ne pourra lui être attribué.<br />
-									<p><strong>LE NON RESPECT DE CES QUELQUES PRINCIPES ENTRAINERA UN DYSFONCTIONNEMENT DU PLUGIN AMAP</strong></p>', 
+									<p><strong>LE NON RESPECT DE CES QUELQUES PRINCIPES ENTRAINERA UN DYSFONCTIONNEMENT DU PLUGIN AMAP</strong></p>',
 	'aucun_panier_pour_nom' => 'Nous n\'avons aucun panier pour @nom@.',
 	'avant_le' => 'avant le',
 
@@ -27,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmation_envoi' => 'Votre mise a disposition du panier du @date_distribution@ est confimer, nous vous remercions.',
 	'contenu_panier' => 'Contenu du panier',
 	'contenu_panier_explication' => 'Vous pouvez rédiger votre contenu de la même façon que dans SPIP.',
+	'creer_paniers_pour_nom' => 'Créer des paniers pour @nom@.',
 
 	// D
 	'date_distribution' => 'Date de la distribution',

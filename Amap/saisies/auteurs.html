@@ -17,7 +17,7 @@
 <select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="10"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
 		<option value="">[(#ENV{option_intro})]</option>]
-	<BOUCLE_auteurs(AUTEURS){par num nom, nom}{statut ?}{statut != 5poubelle}{type_panier IN petit,grand}>
+	<BOUCLE_auteurs(AUTEURS){par num nom, nom}{statut ?}{statut != 5poubelle}{type_panier IN petit,grand}{type_adherent IN adherent,producteur}>
 		#SET{image_statut, #GET{bonhomme_statut}|table_valeur{#STATUT}}
 		[(#ENV{multiple}|oui)
 		<option value="#ID_AUTEUR"[(#ID_AUTEUR|in_array{#ENV{valeur,#ENV{defaut,#ARRAY}}}|oui) selected="selected"][(#GET{image_statut}|oui)[style="background:url((#CHEMIN{prive/images/#GET{image_statut}})) no-repeat left; padding-left: 20px;"]]>#NOM</option>]
@@ -26,5 +26,5 @@
 	</BOUCLE_auteurs>
 </select>
 </B_auteurs>
-<:amap:adherent_sans_type_panier:>
+<:amap:adherent_sans_type_panier_sans_type_adherent:>
 <//B_auteurs>
