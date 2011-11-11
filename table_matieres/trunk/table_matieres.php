@@ -10,7 +10,7 @@ define('_AUTO_ANCRE', isset($tm['auto']) ? $tm['auto'] : 'oui');
 define('_LG_ANCRE', isset($tm['lg']) ? $tm['lg'] : 35);
 define('_SEP_ANCRE', isset($tm['sep']) ? $tm['sep'] : '-');
 define('_MIN_ANCRE', isset($tm['min']) ? $tm['min'] : 3);
-define('_RETOUR_TDM', '<a href="#tdm" class="tdm"><img src="' .
+define('_RETOUR_TDM', '<a href="'.ancre_url($GLOBALS['REQUEST_URI'],'tdm').'" class="tdm"><img src="' .
 	find_in_path('images/tdm.png') . 
 	'" /></a>');
 
@@ -274,8 +274,9 @@ function tdm_generer_table_des_matieres($intertitres) {
 	// generer un code HTML 
 	$code = "";
 	foreach ($intertitres as $url=>$titre) {
-		$code .= "<li><a href='#$url'>$titre</a></li>\n";
+		$code .= "<li><a href='".ancre_url($GLOBALS['REQUEST_URI'],$url)."'>$titre</a></li>\n";
 	}
+
 	// code HTML de la table des matieres
 	$_table = recuperer_fond('modeles/table_matieres', array(
 		'code' => $code,
