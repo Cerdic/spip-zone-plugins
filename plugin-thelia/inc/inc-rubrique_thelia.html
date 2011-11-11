@@ -87,18 +87,18 @@
 					</THELIA_PAGEPREC>
 					
 					<THELIA_CPAGE type="PAGE" rubrique="#ENV{id_rubrique_thelia}"  num="5" max="10" typeaff="1">
-					|
+					<span class="sep separateur">|</span>
                 			<THELIA_PAGECONT_PASCOUR type="PAGE" rubrique="#ENV{id_rubrique_thelia}"  num="5" courante="0" pagecourante="THELIA-PAGE_NUM" max="10" typeaff="1"> 
 					 <a href="#URL_PAGE{rubrique_thelia,page_thelia=THELIA-PAGE_NUM}&amp;id_rubrique_thelia=#ENV{id_rubrique_thelia}" class="LIEN_pages">THELIA-PAGE_NUM</a>
 					</THELIA_PAGECONT_PASCOUR> 
 				    	<THELIA_PAGECONT_COUR type="PAGE" rubrique="#ENV{id_rubrique_thelia}" num="5" courante="1" pagecourante="THELIA-PAGE_NUM" max="10" typeaff="1"> 
-					THELIA-PAGE_NUM
+					<strong class="on">THELIA-PAGE_NUM</strong>
 					</THELIA_PAGECONT_COUR>  
 					</THELIA_CPAGE>	
 					
 					 
 					<THELIA_PAGE_SUIVANTE type="PAGE" rubrique="#ENV{id_rubrique_thelia}" num="5" max="10" typeaff="0" avance="suivante"> 
-					| <a href="#URL_PAGE{rubrique_thelia,page_thelia=THELIA-PAGE_SUIV&amp;id_rubrique_thelia=#ENV{id_rubrique_thelia}}" class="LIEN_pages"><:spipthelia:page_suivante:></a>
+					<span class="sep separateur">|</span> <a href="#URL_PAGE{rubrique_thelia,page_thelia=THELIA-PAGE_SUIV&amp;id_rubrique_thelia=#ENV{id_rubrique_thelia}}" class="LIEN_pages"><:spipthelia:page_suivante:></a>
 					</THELIA_PAGE_SUIVANTE>
 				</div>	
 			
