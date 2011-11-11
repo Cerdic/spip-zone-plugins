@@ -15,7 +15,6 @@
 
 a.lien-retour-thelia { color: #666; text-decoration: underline; font-size: .9em; }
 
-.lien-thelia-precedent { float: left; clear: left; }
 
 .obligatoire { color: #FF0000; }
 
@@ -25,6 +24,10 @@ a.lien-retour-thelia { color: #666; text-decoration: underline; font-size: .9em;
 .formulaire-produit .declinaisonProduit select { width: auto; display: inline; padding-right:1em; }
 .formulaire-produit .prixProduit small { display: block; } 
 /* style propre aux modeles <produit>*/
+
+.produits .hentry { padding: 0; margin: 0; margin-right: 5px; margin-top: 10px; width: 174px; }
+.produits .hentry .formulaire_spip .boutons { float: left; }
+.produits .hentry .formulaire_spip .boutons input.submit { margin-left: 0; }
 
 .produits_thelia { float: left; clear: left; margin-right: 1em; }
 .thelia_promo {	font-size: 1.1em; color: #F60; font-weight: bold; }
