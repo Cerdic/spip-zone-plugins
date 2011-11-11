@@ -11,25 +11,25 @@
 			#ACTION_FORMULAIRE{#ENV{action}}
 			<ul>
 				<li class="editer_auto">
-					<label><:tdm:automatique:>&nbsp;:</label>
+					<label><:tdm:automatique:></label>
 					<p class='explications'>(<:tdm:automatique_desription:>)</p>
 					<div class="choix">
-						<label for="auto_oui"><:tdm:automatique_oui:></label>
+						<label for="auto_oui"><:item_oui:></label>
 						<input type="radio" name="auto" id="auto_oui" size="4" [checked="(#ENV{auto,#EVAL{_AUTO_ANCRE}}|=={oui}|?{checked})"] value='oui' />
-						<label for="auto_non"><:tdm:automatique_non:></label>
+						<label for="auto_non"><:item_non:></label>
 						<input type="radio" name="auto" id="auto_non" size="4" [checked="(#ENV{auto,#EVAL{_AUTO_ANCRE}}|!={oui}|?{checked})"] value='non' />
 					</div>
 				</li>		
 				<li class="editer_longueur">
-					<label for= "lg"><:tdm:longueur:>&nbsp;: </label>
+					<label for= "lg"><:tdm:longueur:></label>
 					<input type="text" name="lg" class="texte" size="4" value="#ENV{lg,#EVAL{_LG_ANCRE}}" />
 				</li>
 				<li class="editer_separateur">
-					<label for="sep"><:tdm:separateur:>&nbsp;: </label>
+					<label for="sep"><:tdm:separateur:></label>
 					<input type="text" name="sep" class="texte" size="4" value="#ENV{sep,#EVAL{_SEP_ANCRE}}" />
 				</li>
 				<li class="editer_min">
-					<label for="min"><:tdm:min_intertitres:>&nbsp;: </label>
+					<label for="min"><:tdm:min_intertitres:></label>
 					<input type="text" name="min" class="texte" size="4" value="#ENV{min,#EVAL{_MIN_ANCRE}}" />
 				</li>
 			</ul>
