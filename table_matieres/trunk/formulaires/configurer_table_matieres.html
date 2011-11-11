@@ -10,9 +10,10 @@
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
 			<ul>
-				<li class="editer_auto">
+				<li class="editer_auto[ (#ENV**{erreurs}|table_valeur{auto}|oui)erreur]">
 					<label><:tdm:automatique:></label>
-					<p class='explications'>(<:tdm:automatique_desription:>)</p>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{auto})</span>]
+					<p class='explications'><:tdm:automatique_desription:></p>
 					<div class="choix">
 						<label for="auto_oui"><:item_oui:></label>
 						<input type="radio" name="auto" id="auto_oui" size="4" [checked="(#ENV{auto,#EVAL{_AUTO_ANCRE}}|=={oui}|?{checked})"] value='oui' />
@@ -20,17 +21,23 @@
 						<input type="radio" name="auto" id="auto_non" size="4" [checked="(#ENV{auto,#EVAL{_AUTO_ANCRE}}|!={oui}|?{checked})"] value='non' />
 					</div>
 				</li>		
-				<li class="editer_longueur">
+				<li class="editer_longueur[ (#ENV**{erreurs}|table_valeur{lg}|oui)erreur]">
 					<label for= "lg"><:tdm:longueur:></label>
-					<input type="text" name="lg" class="texte" size="4" value="#ENV{lg,#EVAL{_LG_ANCRE}}" />
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{lg})</span>]
+					<p class='explications'><:tdm:explication_longueur:></p>
+					<input type="text" name="lg" class="text" size="4" value="#ENV{lg,#EVAL{_LG_ANCRE}}" />
 				</li>
-				<li class="editer_separateur">
+				<li class="editer_separateur[ (#ENV**{erreurs}|table_valeur{sep}|oui)erreur]">
 					<label for="sep"><:tdm:separateur:></label>
-					<input type="text" name="sep" class="texte" size="4" value="#ENV{sep,#EVAL{_SEP_ANCRE}}" />
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{sep})</span>]
+					<p class='explications'><:tdm:explication_separateur:></p>
+					<input type="text" name="sep" class="text" size="4" value="#ENV{sep,#EVAL{_SEP_ANCRE}}" />
 				</li>
-				<li class="editer_min">
+				<li class="editer_min[ (#ENV**{erreurs}|table_valeur{min}|oui)erreur]">
 					<label for="min"><:tdm:min_intertitres:></label>
-					<input type="text" name="min" class="texte" size="4" value="#ENV{min,#EVAL{_MIN_ANCRE}}" />
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{min})</span>]
+					<p class='explications'><:tdm:explication_min:></p>
+					<input type="text" name="min" class="text" size="4" value="#ENV{min,#EVAL{_MIN_ANCRE}}" />
 				</li>
 			</ul>
 			<p class="boutons">

@@ -7,10 +7,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Déclarer le traitement spécifique des textes d'articles
  * pour ajouter automatiquement la table des matières. 
  *
- * @param 
- * @return 
-**/
-function TableMatieres_declarer_tables_interfaces($interface){
+ * @param array $interface : le tableau des interfaces
+ * @return array $interface : le tableau avec les champs modifiés 
+ */
+function tablematieres_declarer_tables_interfaces($interface){
 	include_spip('table_matieres');
 
 	// ne retourner que la table des matieres du texte fourni (champ texte)

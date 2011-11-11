@@ -11,8 +11,8 @@
 			[en]Create the summary of an article
 		</multi>
 	</slogan>
-	<version>2.0.1</version>
-	<prefix>TableMatieres</prefix>
+	<version>2.0.2</version>
+	<prefix>tablematieres</prefix>
 	<fonctions>table_matieres.php</fonctions>
 	<auteur>marcimat, Fil, James</auteur>
 	<licence>GNU/GPL</licence>

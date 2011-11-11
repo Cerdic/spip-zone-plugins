@@ -30,7 +30,7 @@ define('_RETOUR_TDM', '<a href="'.ancre_url($GLOBALS['REQUEST_URI'],'tdm').'" cl
  * @param string $texte	Texte en entrée
  * @param string $retourner Retourner quoi ? (tout, tdm, texte)
  * @return string	Texte avec une table des matières
-**/
+ */
 function table_matieres($texte, $retourner = 'tout') {
 	static $table_matieres = false;
 
@@ -54,7 +54,7 @@ function table_matieres($texte, $retourner = 'tout') {
  * 		- 'tdm' : la table des matieres
  * 		- 'texte' : le texte (et les ancres)
  * @return string	Texte avec une table des matières
-**/
+ */
 function inc_table_matieres_dist($texte, $retourner = 'tout') {
 
 	// sauvegarde pour ne pas calculer 2 fois les mêmes choses
@@ -137,7 +137,7 @@ function inc_table_matieres_dist($texte, $retourner = 'tout') {
  * par un pipeline ou une globale 
  *
  * @return arrray  expression régulière / fonction de remplacement
-**/
+ */
 function tdm_remplacements_intertitres() {
 	return array(
 		"/{{{(.*)}}}/UmsS" => 'tdm_remplacement_raccourcis_standard_callback'
@@ -151,7 +151,7 @@ function tdm_remplacements_intertitres() {
  *
  * @param string $matches	Captures de l'expression régulière
  * @return l'intertitre complété du code de lien de retour.
-**/
+ */
 function tdm_remplacement_raccourcis_standard_callback($matches) {
 	list($titre, $url) = tdm_calculer_titre( $matches[1] ); // intertitre dans /1
 	$url = tdm_stocker_intertitre($url, $titre);
@@ -164,7 +164,7 @@ function tdm_remplacement_raccourcis_standard_callback($matches) {
  *
  * @param string $intertitre
  * @return array titre/url
-**/
+ */
 function tdm_calculer_titre($intertitre) {
 	$titre = supprimer_tags(typo($intertitre));
 	$titre = preg_replace(",\n[_\s]*,", " ", $titre);
@@ -194,14 +194,14 @@ function tdm_calculer_titre($intertitre) {
 }
 
 
-/*
+/**
  * Remet à zéro la liste des intertitres trouvés
  */
 function tdm_vider_intertitres() {
 	tdm_stocker_intertitre('', '', true);
 }
 
-/*
+/**
  * Retourne la liste des intertitres trouvés
  * @return array	Liste des intertitres (url/titre)
  */
@@ -220,7 +220,7 @@ function tdm_get_intertitres() {
  * @param string $titre	titre de l'ancre
  * @param bool $vider	effacer les sauvegarde ?
  * @return 
-**/
+ */
 function tdm_stocker_intertitre($url='', $titre='', $vider = false) {
 	static $table = array();
 	static $cpt = 0;
@@ -240,8 +240,7 @@ function tdm_stocker_intertitre($url='', $titre='', $vider = false) {
  *
  * @param string $texte	Texte d'entrée
  * @return string Texte avec retours remplacés
- * 
-**/
+ */
 function tdm_ajouter_liens_retour_table_matieres($texte) {
 	
 	// prendre en compte la langue en cours
@@ -269,7 +268,7 @@ function tdm_ajouter_liens_retour_table_matieres($texte) {
  *
  * @param array couples liens/intertitres
  * @return string	Code HTML de la table des matieres
-**/
+ */
 function tdm_generer_table_des_matieres($intertitres) {
 	// generer un code HTML 
 	$code = "";
@@ -301,7 +300,7 @@ function tdm_generer_table_des_matieres($intertitres) {
  * Balise #TABLE_MATIERES
  * Affiche la table des matieres à l'endroit indique
  * A utiliser dans une boucle Articles
-**/
+ */
 function balise_TABLE_MATIERES_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	if ($b === '') {
