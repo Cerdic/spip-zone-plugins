@@ -1,6 +1,10 @@
+<THELIA_cmd type="COMMANDE" ref="#ENV{commande}" client="THELIA-CLIENT_ID">
+
 [(#REM) Fil d'Ariane ]
 <p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{moncompte}"><:spipthelia:mon_compte:></a> &gt; <a href="#URL_PAGE{commande_visualiser}"><:spipthelia:visualiser_commandes:></a> &gt; <:spipthelia:detail_commande:> N&deg;#ENV{commande}</p>
 	
 <div class="contenu-principal">
 	<INCLURE{fond=inc/inc-commande_detail}>
 </div>
+
+</THELIA_cmd>

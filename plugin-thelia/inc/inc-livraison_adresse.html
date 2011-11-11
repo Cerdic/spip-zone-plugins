@@ -2,8 +2,8 @@
 							
 				[(#REM) Titre de la rubrique ]
 
-				<div class="titrePage">
-				<h1><:spipthelia:mes_adresses_livraison:></h1>
+				<div class="cartouche">
+				<h1 class="h1"><:spipthelia:mes_adresses_livraison:></h1>
 				</div>
 
 				[(#REM) Contenu de la page ]
@@ -23,9 +23,7 @@
 				<div class="separation">
 				</div>
 
-				<div class="sousTitrePage">
-				<h3><:spipthelia:ajouter_adresse_livraison:></h3>
-				</div>
+				<h2 class="h2"><:spipthelia:ajouter_adresse_livraison:></h1>
 				
 			<form action="#URL_PAGE{adresse,lang=#LANG}" method="post" id="nouveau" class="formulaire_spip">
           		<fieldset>
@@ -92,10 +90,11 @@
 			  	</li>
 
 			 
-			 	<li class="boutonMonCompteContenu">
-               <input type="submit" class="submit" value="<:spipthelia:valider:>" />
-				</li>
+			 	
          </ul>
+         	<p class="boutons">
+               		<input type="submit" class="submit" value="<:spipthelia:valider:>" />
+			</p>
 			</fieldset>
 			</form>
 
