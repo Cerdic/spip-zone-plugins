@@ -1,13 +1,29 @@
 <plugin>
-	<nom>Table des Mati&#232;res</nom>
-	<slogan>Cr&#233;er le sommaire d'un article</slogan>
+	<nom>
+		<multi>
+			[fr]Table des Mati&#232;res
+			[en]Table of contents
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+			[fr]Cr&#233;er le sommaire d'un article
+			[en]Create the summary of an article
+		</multi>
+	</slogan>
 	<version>2.0.0</version>
 	<prefix>TableMatieres</prefix>
 	<fonctions>table_matieres.php</fonctions>
 	<auteur>marcimat, Fil  et James</auteur>
 	<licence>GNU/GPL</licence>
-	<description>Introduit une ancre translitter&#233;e pour chaque intertitre du champ #TEXTE des ARTICLES,
-	ainsi qu'une balise #TABLE_MATIERES (facultative) associ&#233;e &#224; placer, bien s&#251;r, dans une boucle ARTICLES.</description>
+	<description>
+		<multi>
+			[fr]Introduit une ancre translitter&#233;e pour chaque intertitre du champ #TEXTE des ARTICLES,
+	ainsi qu'une balise #TABLE_MATIERES (facultative) associ&#233;e &#224; placer, bien s&#251;r, dans une boucle ARTICLES.
+			[en]Introduce an anchor for each heading of a #TEXTE field of the articles, and an 
+	associated optional tag #TABLE_MATIERES to put in the ARTICLES loops.
+		</multi>
+	</description>
 	<etat>stable</etat>
 	<lien>http://www.spip-contrib.net/Table-des-Matieres</lien>
 	<categorie>edition</categorie>
