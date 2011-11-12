@@ -103,8 +103,8 @@ function iextras_upgrade_to_saisies() {
 	$nsaisie = array(
 		'bloc'       => 'textarea',
 		'ligne'      => 'input',
-		'auteur'     => 'auteurs', // !
-		'auteurs'    => 'auteurs',
+		'auteur'     => 'auteurs', // ! multiple=''
+		'auteurs'    => 'auteurs', // ! multiple='on'
 		'oui-non'    => 'oui_non',
 		'menu-radio' => 'radio',
 		'menu-enum'  => 'selection',
@@ -158,6 +158,11 @@ function iextras_upgrade_to_saisies() {
 			$nouveau['saisie'] = $nsaisie[$extra['type']];
 			$nouveau['options'] = array('nom' => $champ);
 
+			// cas particulier des auteurs
+			if ($extra['type'] == 'auteurs') {
+				$nouveau['options']['multiple'] = 'on';
+			}
+			
 			foreach (array(
 				'champ'       => 'nom',
 				'label'       => 'label',
@@ -230,6 +235,7 @@ function iextras_upgrade_to_saisies() {
 					unset($nouveau['options']['class']);
 				}
 			}
+			
 
 			// s'il en reste, c'est que y a des choses dont on ne sait pas
 			// quoi en faire...
