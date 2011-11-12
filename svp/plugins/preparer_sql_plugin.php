@@ -232,7 +232,7 @@ function formater_licence($prefixe, $nom, $suffixe, $version) {
 		}
 		else {
 			// Si la version est pas bonne on prend la plus recente
-			if (!$version OR !in_array($version, $licences_plugin[$nom]['versions']))
+			if (!$version OR !in_array($version, $licences_plugin[$nom]['versions'], true))
 				$version = $licences_plugin[$nom]['versions'][0];
 			if (is_array($licences_plugin[$nom]['nom']))
 				$licence['nom'] = $licences_plugin[$nom]['nom'][$version];
@@ -243,7 +243,7 @@ function formater_licence($prefixe, $nom, $suffixe, $version) {
 			if ($nom == 'ccby') {
 				if ($suffixe == '-sharealike')
 					$suffixe = '-sa';
-				if (!$suffixe OR !in_array($suffixe, $licences_plugin[$nom]['suffixes']))
+				if (!$suffixe OR !in_array($suffixe, $licences_plugin[$nom]['suffixes'], true))
 					$suffixe = '';
 				$licence['nom'] = str_replace('@suffixe@', strtoupper($suffixe), $licence['nom']);
 				$licence['url'] = str_replace('@suffixe@', strtoupper($suffixe), $licence['url']);
