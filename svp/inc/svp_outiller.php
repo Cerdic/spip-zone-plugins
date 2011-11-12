@@ -161,4 +161,48 @@ function balise_identique($balise1, $balise2) {
 	return true;
 }
 
+
+// Determiner la licence exacte avec un nom et un lien de doc standardise
+function definir_licence($prefixe, $nom, $suffixe, $version) {
+	global $licences_plugin;
+	$licence = array();
+
+	$prefixe = strtolower($prefixe);
+	$nom = strtolower($nom);
+	$suffixe = strtolower($suffixe);
+
+	if (((trim($prefixe) == 'creative common') AND ($nom == 'attribution'))
+	OR (($prefixe == 'cc') AND ($nom == 'by')))
+		$nom = 'ccby';
+
+	if (array_key_exists($nom, $licences_plugin)) {
+		if (!$licences_plugin[$nom]['versions']) {
+			// La licence n'est pas versionnee : on affecte donc directement le nom et l'url
+			$licence['nom'] = $licences_plugin[$nom]['nom'];
+			$licence['url'] = $licences_plugin[$nom]['url'];
+		}
+		else {
+			// Si la version est pas bonne on prend la plus recente
+			if (!$version OR !in_array($version, $licences_plugin[$nom]['versions'], true))
+				$version = $licences_plugin[$nom]['versions'][0];
+			if (is_array($licences_plugin[$nom]['nom']))
+				$licence['nom'] = $licences_plugin[$nom]['nom'][$version];
+			else
+				$licence['nom'] = str_replace('@version@', $version, $licences_plugin[$nom]['nom']);
+			$licence['url'] = str_replace('@version@', $version, $licences_plugin[$nom]['url']);
+
+			if ($nom == 'ccby') {
+				if ($suffixe == '-sharealike')
+					$suffixe = '-sa';
+				if (!$suffixe OR !in_array($suffixe, $licences_plugin[$nom]['suffixes'], true))
+					$suffixe = '';
+				$licence['nom'] = str_replace('@suffixe@', strtoupper($suffixe), $licence['nom']);
+				$licence['url'] = str_replace('@suffixe@', $suffixe, $licence['url']);
+			}
+		}
+	}
+
+	return $licence;
+}
+
 ?>
