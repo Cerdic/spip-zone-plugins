@@ -1,5 +1,9 @@
 [(#REM)
 
+	Todo:
+			Faire fonctionner les images de statut avec SPIP 3...
+			Elles sont dans [(#CHEMIN_IMAGE{auteur-1comite-16.png})]
+	
   Parametres :
   - class : classe(s) css ajoutes au select
   - multiple : si quelquechose est passe, le select est multiple, sinon, c'est un select simple
@@ -21,13 +25,16 @@
 [(#ENV{option_statut}|oui)
 	#SET{bonhomme_statut, #ARRAY{0minirezo, admin-12.gif, 1comite, redac-12.gif, 6forum, visit-12.gif}}
 ]
+[(#ENV{multiple}|oui)
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+]
 <select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
 		<option value="">[(#ENV{option_intro})]</option>]
 	<BOUCLE_auteurs(AUTEURS){par num nom, nom}{statut ?}{statut != 5poubelle}{tout}>
 		#SET{image_statut, #GET{bonhomme_statut}|table_valeur{#STATUT}}
 		[(#ENV{multiple}|oui)
-		<option value="#ID_AUTEUR"[(#ID_AUTEUR|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"][(#GET{image_statut}|oui)[style="background:url((#CHEMIN{prive/images/#GET{image_statut}})) no-repeat left; padding-left: 20px;"]]>#NOM</option>]
+		<option value="#ID_AUTEUR"[(#ID_AUTEUR|in_array{#ENV{valeur_forcee,#GET{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"][(#GET{image_statut}|oui)[style="background:url((#CHEMIN{prive/images/#GET{image_statut}})) no-repeat left; padding-left: 20px;"]]>#NOM</option>]
 		[(#ENV{multiple}|non)
 		<option value="#ID_AUTEUR"[(#ID_AUTEUR|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"][(#GET{image_statut}|oui)[style="background:url((#CHEMIN{prive/images/#GET{image_statut}})) no-repeat left; padding-left: 20px;"]]>#NOM</option>]
 	</BOUCLE_auteurs>
