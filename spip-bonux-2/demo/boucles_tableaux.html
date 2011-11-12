@@ -1,37 +1,39 @@
 [(#REM) Attention #ENV est un tableau serialize, et echappe, donc inutilisable
 Preferer #ENV* ]
+<B_test10>
+#TOTAL_BOUCLE items dans l'env<br />
 <BOUCLE_test10(POUR){tableau #ENV*}>
-#CLE=>#VALEUR<br />
+#COMPTEUR_BOUCLE) #CLE=>#VALEUR<br />
 </BOUCLE_test10>
 <hr />
 
 <BOUCLE_test101(POUR){tableau #ENV*}>
-#CLE=>#VALEUR<br />
+#COMPTEUR_BOUCLE) #CLE=>#VALEUR<br />
 </BOUCLE_test101>
 <hr />
 
 <BOUCLE_test11(POUR){tableau #EVAL{$GLOBALS['_ENV']}}>
-#CLE=>#VALEUR<br />
+#COMPTEUR_BOUCLE) #CLE=>#VALEUR<br />
 </BOUCLE_test11>
 <hr />
 
 <BOUCLE_test12(POUR){tableau #ENV*}{par cle}>
-#CLE=>#VALEUR<br />
+#COMPTEUR_BOUCLE) #CLE=>#VALEUR<br />
 </BOUCLE_test12>
 <hr />
 
 <BOUCLE_test13(POUR){tableau #ENV*}{!par cle}>
-#CLE=>#VALEUR<br />
+#COMPTEUR_BOUCLE) #CLE=>#VALEUR<br />
 </BOUCLE_test13>
 <hr />
 
 <BOUCLE_test14(POUR){tableau #ENV*}{par valeur}>
-#CLE=>#VALEUR<br />
+#COMPTEUR_BOUCLE) #CLE=>#VALEUR<br />
 </BOUCLE_test14>
 <hr />
 
 <BOUCLE_test15(POUR){tableau #ENV*}{!par valeur}>
-#CLE=>#VALEUR<br />
+#COMPTEUR_BOUCLE) #CLE=>#VALEUR<br />
 </BOUCLE_test15>
 <hr />
 
@@ -81,27 +83,27 @@ Preferer #ENV* ]
 <h2>Tableau GET</h2>
 #SET{test,#ARRAY{1,2,5,6,3,4}}
 <BOUCLE_test30(POUR){tableau #GET{test}}>
-#CLE=>#VALEUR<br />
+#COMPTEUR_BOUCLE) #CLE=>#VALEUR<br />
 </BOUCLE_test30>
 <hr />
 <h3>Par cle</h3>
 <BOUCLE_test31(POUR){tableau #GET{test}}{par cle}>
-#CLE=>#VALEUR<br />
+#COMPTEUR_BOUCLE) #CLE=>#VALEUR<br />
 </BOUCLE_test31>
 <hr />
 <h3>!Par cle</h3>
 <BOUCLE_test32(POUR){tableau #GET{test}}{!par cle}>
-#CLE=>#VALEUR<br />
+#COMPTEUR_BOUCLE) #CLE=>#VALEUR<br />
 </BOUCLE_test32>
 <hr />
 <h3>Par valeur</h3>
 <BOUCLE_test33(POUR){tableau #GET{test}}{par valeur}>
-#CLE=>#VALEUR<br />
+#COMPTEUR_BOUCLE) #CLE=>#VALEUR<br />
 </BOUCLE_test33>
 <hr />
 <h3>!Par valeur</h3>
 <BOUCLE_test34(POUR){tableau #GET{test}}{!par valeur}>
-#CLE=>#VALEUR<br />
+#COMPTEUR_BOUCLE) #CLE=>#VALEUR<br />
 </BOUCLE_test34>
 
 
@@ -111,7 +113,7 @@ Pagination
 <B_test40>
 	<p class="pagination">#PAGINATION</p>
 <BOUCLE_test40(POUR){tableau #GET{test}}{pagination 5}>
-#CLE=>#VALEUR<br />
+#COMPTEUR_BOUCLE) #CLE=>#VALEUR<br />
 </BOUCLE_test40>
 [#TOTAL_BOUCLE/#GRAND_TOTAL]
 </B_test40>
