@@ -172,6 +172,7 @@ function normaliser_auteur_licence($texte, $balise) {
 		// On detecte aussi si le bloc texte en cours contient une eventuelle licence
 		// -- cela generera une balise licence et non auteur
 		//    cette heuristique n'est pas deterministe car la phrase de licence n'est pas connue
+		$licence = array();
 		if (preg_match('/\b((gnu|free|creative\s+common|cc)*[\/|\s|-]*(apache|lgpl|agpl|gpl|fdl|mit|bsd|art|attribution|by)(\s+licence|\-sharealike|-nc-nd|-nc-sa|-sa|-nc|-nd)*\s*v*(\d*[\.\d+]*))\b/i', $v, $r)) {
 			if ($licence = formater_licence($r[2], $r[3], $r[4], $r[5])) {
 				$res['licence'][] = $licence;
@@ -182,7 +183,7 @@ function normaliser_auteur_licence($texte, $balise) {
 		if ($href)
 			$href = !preg_match(',https?://,', $href, $matches) ? "http://" . $href : $href;
 		$v = trim(textebrut($v));
-		if ((strlen($v) > 2) AND !$licnom)
+		if ((strlen($v) > 2) AND !$licence)
 			if ($balise == 'auteur')
 				$res['auteur'][] = array('nom' => $v, 'url' => $href, 'mail' => $mail);
 			else
