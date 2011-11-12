@@ -108,7 +108,7 @@ function langonet_generer_couples($module, $var_source, $var_cible, $mode='index
 	return $source;
 }
 
-// Produit un fichier de langues a partir d'un tableau (index => trad)
+// Produit un fichier de langue a partir d'un tableau (index => trad)
 // Si trad n'est pas une chaine mais un tableau, on le met en commentaire
 
 function produire_fichier_langue($langue, $module, $items, $producteur='')
@@ -134,9 +134,9 @@ function produire_fichier_langue($langue, $module, $items, $producteur='')
 		}
 	}
 	if (!strpos($producteur, _LANGONET_SIGNATURE)) 
-		$producteur = _LANGONET_SIGNATURE . "\n" . preg_replace(",\\n[/#]*,", "\n/// ", $producteur);
+		$producteur = "\n" . _LANGONET_SIGNATURE . "\n" . preg_replace(",\\n[/#]*,", "\n/// ", $producteur);
 
-	return '<'.'?php' . "\n\n" . $producteur . '
+	return '<'. "?php\n" . $producteur . '
 // Module: ' . $module . '
 // Langue: ' . $langue . '
 // Date: ' . date('d-m-Y H:i:s') . '
