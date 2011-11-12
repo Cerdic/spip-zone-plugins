@@ -246,7 +246,7 @@ function formater_licence($prefixe, $nom, $suffixe, $version) {
 				if (!$suffixe OR !in_array($suffixe, $licences_plugin[$nom]['suffixes'], true))
 					$suffixe = '';
 				$licence['nom'] = str_replace('@suffixe@', strtoupper($suffixe), $licence['nom']);
-				$licence['url'] = str_replace('@suffixe@', strtoupper($suffixe), $licence['url']);
+				$licence['url'] = str_replace('@suffixe@', $suffixe, $licence['url']);
 			}
 		}
 	}

@@ -90,7 +90,7 @@ $GLOBALS['licences_plugin'] = array(
 		'versions' => array('2.0', '2.5', '3.0'),
 		'suffixes' => array('-sa', '-nc', '-nd', '-nc-nd', '-nc-sa'),
 		'nom' => 'CC BY@suffixe@ @version@',
-		'url' => 'http://http://creativecommons.org/licenses/by@suffixe@/@version@/')
+		'url' => 'http://creativecommons.org/licenses/by@suffixe@/@version@/')
 );
 
 // Version SPIP minimale quand un plugin ne le precise pas
