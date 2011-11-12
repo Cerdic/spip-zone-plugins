@@ -119,7 +119,7 @@ function plugin2paquet($plugins) {
 		foreach ($plugins as $_cle => $_plugin) {
 			if (!$_plugin['compatibilite'])
 				$borne_min = _PLUGONET_VERSION_SPIP_MIN;
-			$bornes_spip = extraire_bornes($_plugin['compatibilite']);
+			$bornes_spip = intervalle2bornes($_plugin['compatibilite']);
 			$borne_min = ($bornes_spip['min']['valeur']) ? $bornes_spip['min']['valeur'] : _PLUGONET_VERSION_SPIP_MIN;
 			if (spip_version_compare($borne_min_max, $borne_min, '<=')) {
 				$cle_min_max = $_cle;
@@ -194,7 +194,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 		$prefix = $D['prefix'];
 		$version = $D['version'];
 		$version_base = $D['schema'];
-		$compatible =  plugin2intervalle(extraire_bornes($D['compatibilite_paquet']));
+		$compatible =  bornes2intervalle(intervalle2bornes($D['compatibilite_paquet']));
 
 		$attributs =
 			($prefix ? "\n\tprefix=\"$prefix\"" : '') .
@@ -217,7 +217,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 	}
 	else {
 		// Balise spip
-		$compatible =  plugin2intervalle(extraire_bornes($D['compatibilite']));
+		$compatible =  bornes2intervalle(intervalle2bornes($D['compatibilite']));
 		$attributs =
 			($compatible ? " compatibilite=\"$compatible\"" : '');
 		// raz des balises non utilisees
@@ -349,32 +349,15 @@ function plugin2balise_copy($texte, $balise) {
 		// -- cela generera une balise licence et non auteur
 		//    cette heuristique n'est pas deterministe car la phrase de licence n'est pas connue
 		$licnom = $licurl ='';
-		if (preg_match('/\b(apache|mit|bsd|lgpl|gnu\/gpl|gpl\s*v*\d*|cc-by-nc-sa|Creative\s*Commons\s*Attribution\s*2\.5)\b/i', $v, $r)) {
-			$licnom = strtoupper(trim($r[1]));
-			if (strtolower($licnom) == 'apache') {
-				$licnom = 'Apache Licence, Version 2.0';
-				$licurl = 'http://www.apache.org/licenses/LICENSE-2.0';
+		if (preg_match('/\b((gnu|free|creative\s+common|cc)*[\/|\s|-]*(apache|lgpl|agpl|gpl|fdl|mit|bsd|art|attribution|by)(\s+licence|\-sharealike|-nc-nd|-nc-sa|-sa|-nc|-nd)*\s*v*(\d*[\.\d+]*))\b/i', $v, $r)) {
+			if ($licence = balise2licence($r[2], $r[3], $r[4], $r[5])) {
+				$licnom = $licence['nom'];
+				$licurl = $licence['url'];
+				$licurl = " lien=\"$licurl\"";
+				$resl .= "\n\t<licence$licurl>$licnom</licence>";
 			}
-			else if (strtolower($licnom) == 'creative commons attribution 2.5') {
-				$licnom = 'Creative Commons Attribution 2.5';
-				$licurl = 'http://creativecommons.org/licenses/by/2.5';
-			}
-			else if (strtolower($licnom) == 'cc-by-nc-sa') {
-				$licnom = 'CC-BY-NC-SA 2.0';
-				$licurl = 'http://creativecommons.org/licenses/by-nc-sa/2.0';
-			}
-			else if (strtolower($licnom) == 'mit')
-				$licurl = 'http://opensource.org/licenses/mit-license.php';
-			else if (strtolower($licnom) == 'bsd')
-				$licurl = 'http://www.freebsd.org/copyright/license.html';
-			else if (strtolower($licnom) == 'lgpl')
-				$licurl = 'http://www.gnu.org/licenses/lgpl-3.0.html';
-			else
-				$licurl = (substr($licnom, -1) =='2') ? 'http://www.gnu.org/licenses/gpl-2.0.html' : 'http://www.gnu.org/licenses/gpl-3.0.html';
-			$licurl = " lien=\"$licurl\"";
-			$resl .= "\n\t<licence$licurl>$licnom</licence>";
 		}
-		
+
 		// On finalise la balise auteur ou licence si on a pas trouve de licence prioritaire
 		$v = trim(textebrut($v));
 		if ((strlen($v) > 2) AND !$licnom)
@@ -449,7 +432,7 @@ function plugin2balise_necessite($D) {
 		foreach($D['necessite'] as $i) {
 			$nom = isset($i['id']) ? $i['id'] : $i['nom'];
 			$src = plugin2balise_lien($i['src'], 'lien', ' ');
-			$version = empty($i['version']) ? '' : (" compatibilite=\"" . plugin2intervalle(extraire_bornes($i['version'])) . "\"");
+			$version = empty($i['version']) ? '' : (" compatibilite=\"" . bornes2intervalle(intervalle2bornes($i['version'])) . "\"");
 			if (preg_match('/^lib:(.*)$/', $nom, $r))
 				$lib .= "\n\t<lib nom=\"" . $r[1] . "\"$src />";
 			else 
@@ -475,7 +458,7 @@ function plugin2balise_utilise($D) {
 	foreach($D as $i) {
 		$nom = isset($i['id']) ? $i['id'] : $i['nom'];
 		$att = " nom=\"$nom\"" .
-				(!empty($i['version']) ? (" compatibilite=\"" . plugin2intervalle(extraire_bornes($i['version'])) . "\"") : '') .
+				(!empty($i['version']) ? (" compatibilite=\"" . bornes2intervalle(intervalle2bornes($i['version'])) . "\"") : '') .
 				plugin2balise_lien($i['src']);
 		$res .="\n\t<utilise$att />";
 	}
@@ -675,7 +658,7 @@ function extraire_descriptions($nom, $description, $slogan, $prefixe) {
 	return $langs;
 }
 
-function extraire_bornes($intervalle) {
+function intervalle2bornes($intervalle) {
 	include_spip('inc/plugin');
 
 	static $borne_vide = array('valeur' => '', 'incluse' => false);
@@ -697,7 +680,7 @@ function extraire_bornes($intervalle) {
 }
 
 
-function plugin2intervalle($bornes, $dtd='paquet') {
+function bornes2intervalle($bornes, $dtd='paquet') {
 	return ($bornes['min']['incluse'] ? '[' : ($dtd=='paquet' ? ']' : '('))
 			. $bornes['min']['valeur'] . ';' . $bornes['max']['valeur']
 			. ($bornes['max']['incluse'] ? ']' : ($dtd=='paquet' ? '[' : ')'));
@@ -707,8 +690,8 @@ function plugin2intervalle($bornes, $dtd='paquet') {
 function fusionner_intervalles($intervalle_a, $intervalle_b) {
 
 	// On recupere les bornes de chaque intervalle
-	$borne_a = extraire_bornes($intervalle_a);
-	$borne_b = extraire_bornes($intervalle_b);
+	$borne_a = intervalle2bornes($intervalle_a);
+	$borne_b = intervalle2bornes($intervalle_b);
 
 	// On initialise la borne min de chaque intervalle a 1.9.0 si vide
 	if (!$borne_a['min']['valeur'])
@@ -729,7 +712,7 @@ function fusionner_intervalles($intervalle_a, $intervalle_b) {
 		$bornes_fusionnees['max'] = $borne_a['max'];
 	}
 
-	return plugin2intervalle($bornes_fusionnees, 'plugin');
+	return bornes2intervalle($bornes_fusionnees, 'plugin');
 }
 
 
@@ -737,4 +720,47 @@ function plugin2attribut($nom, $val) {
 	return empty($val) ? '' : (" $nom=\"" . str_replace("'","&#039;",$val) . "\"");
 }
 
+
+// Determiner la licence exacte avec un nom et un lien de doc standardise
+function balise2licence($prefixe, $nom, $suffixe, $version) {
+	global $licences_plugin;
+	$licence = array();
+
+	$prefixe = strtolower($prefixe);
+	$nom = strtolower($nom);
+	$suffixe = strtolower($suffixe);
+
+	if (((trim($prefixe) == 'creative common') AND ($nom == 'attribution'))
+	OR (($prefixe == 'cc') AND ($nom == 'by')))
+		$nom = 'ccby';
+
+	if (array_key_exists($nom, $licences_plugin)) {
+		if (!$licences_plugin[$nom]['versions']) {
+			// La licence n'est pas versionnee : on affecte donc directement le nom et l'url
+			$licence['nom'] = $licences_plugin[$nom]['nom'];
+			$licence['url'] = $licences_plugin[$nom]['url'];
+		}
+		else {
+			// Si la version est pas bonne on prend la plus recente
+			if (!$version OR !in_array($version, $licences_plugin[$nom]['versions'], true))
+				$version = $licences_plugin[$nom]['versions'][0];
+			if (is_array($licences_plugin[$nom]['nom']))
+				$licence['nom'] = $licences_plugin[$nom]['nom'][$version];
+			else
+				$licence['nom'] = str_replace('@version@', $version, $licences_plugin[$nom]['nom']);
+			$licence['url'] = str_replace('@version@', $version, $licences_plugin[$nom]['url']);
+
+			if ($nom == 'ccby') {
+				if ($suffixe == '-sharealike')
+					$suffixe = '-sa';
+				if (!$suffixe OR !in_array($suffixe, $licences_plugin[$nom]['suffixes'], true))
+					$suffixe = '';
+				$licence['nom'] = str_replace('@suffixe@', strtoupper($suffixe), $licence['nom']);
+				$licence['url'] = str_replace('@suffixe@', $suffixe, $licence['url']);
+			}
+		}
+	}
+
+	return $licence;
+}
 ?>
