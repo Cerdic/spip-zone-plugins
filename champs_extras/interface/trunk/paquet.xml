@@ -6,6 +6,7 @@
 	compatibilite="[3.0.0-dev;3.1.0["
 	logo="images/iextras-64.png"
 	documentation="http://www.spip-contrib.net/Champs-Extras-2"
+	schema="1.0.0"
 >
 
 	<nom>Champs Extras (Interface)</nom>
