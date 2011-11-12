@@ -343,7 +343,7 @@ function notifications_envoyer($destinataire, $mode, $quoi, $id=0, $options=arra
 			'id' => $id,
 			'options' => $options,
 			'destinataire' => $destinataire,
-			'contact' => $contact
+			'contact' => $contact,
 			'mode' => $mode
 		);
 		
