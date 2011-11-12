@@ -17,17 +17,24 @@
 		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata.gif}">
 		<:amap:panier_liste:>
 	</div>
+	
+	<B_rub>
 	<div class="cadre_padding">
-	    <p style="text-align: justify;">
+		<p style="text-align: justify;">
+		#SET{total,0}
 		<BOUCLE_totalpanier(AMAP_PANIERS){age<0} />
-			[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:reste_panier_distribuer, amap:reste_paniers_distribuer, nb})]
+				[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:reste_panier_distribuer, amap:reste_paniers_distribuer, nb})]
+			#SET{total,#TOTAL_BOUCLE}
 		<//B_totalpanier>
+
 		<:amap:avant_le:>
-		<BOUCLE_rub(RUBRIQUES){titre = '001. Distribution'}>
+		<BOUCLE_rub(RUBRIQUES){titre = '001. Distribution'}{si #GET{total}}>
 			<BOUCLE_evenementfin(EVENEMENTS){id_rubrique}{!par date_debut}{age<0}{0,1}>[(#DATE_DEBUT|affdate{'d/m/Y'}).]</BOUCLE_evenementfin>
 		</BOUCLE_rub>
-	    </p>
+		</p>
 	</div>
+	</B_rub>
+
 	<div class="cadre_padding">
 		<INCLURE{fond=prive/inclure/liste_paniers,env,ajax}>
 	</div>
