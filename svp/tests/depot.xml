@@ -113,6 +113,53 @@ D&eacute;p&ocirc;t de tests
 	<version_base>0.4</version_base>
 	<etat>stable</etat>
 	<icon>images/a2a-64.png</icon>
+	<licence>
+Creative common attribution 2
+Apache2
+Apache v2
+GPL 4
+LGPL 2
+AGPL 2
+Art libre 2
+FDLv1
+GPL v1
+GPLv2
+GPL 3
+GNU/GPL
+GNU/GPL3
+GNU/GPLv3
+GNU/GPL v2
+LGPL
+LGPL3
+LGPLv3
+LGPL v2.1
+GNU/LGPLv3
+AGPLv3
+AGPL
+GNU/AGPL 3
+FDL
+GNU/FDL
+FDLv1.1
+FDL v1.2
+FDL1.3
+Apache 2.0
+Apache  licence v2.0
+MIT licence
+MIT
+Free Art
+Free art licence
+Free art 1.3
+Art libre
+bsd
+Creative common attribution 2.0
+Creative common attribution-sharealike 2.0
+CC by
+cc by-sa
+cc by-nd
+cc by-nc
+cc by-nc-nd 3.0
+cc by-nc-sa 2.5
+	</licence>
 	<description>
 		<multi>
 		[fr]Ce plugin permet de lier des articles de fa&#231;on ponctuelle sans avoir à utiliser les mots-cl&#233;s de SPIP. Il peut &#234;tre utilis&#233; pour mettre en place des liens de type « Lire aussi ».

@@ -172,30 +172,10 @@ function normaliser_auteur_licence($texte, $balise) {
 		// On detecte aussi si le bloc texte en cours contient une eventuelle licence
 		// -- cela generera une balise licence et non auteur
 		//    cette heuristique n'est pas deterministe car la phrase de licence n'est pas connue
-		$licnom = $licurl ='';
-		if (preg_match('/\b(apache|mit|bsd|lgpl|gnu\/gpl|gpl\s*v*\d*|cc-by-nc-sa|Creative\s*Commons\s*Attribution\s*2\.5)\b/i', $v, $r)) {
-			$licnom = strtoupper(trim($r[1]));
-			if (strtolower($licnom) == 'apache') {
-				$licnom = 'Apache Licence, Version 2.0';
-				$licurl = 'http://www.apache.org/licenses/LICENSE-2.0';
+		if (preg_match('/\b((gnu|free|creative\s+common|cc)*[\/|\s|-]*(apache|lgpl|agpl|gpl|fdl|mit|bsd|art|attribution|by)(\s+licence|\-sharealike|-nc-nd|-nc-sa|-sa|-nc|-nd)*\s*v*(\d*[\.\d+]*))\b/i', $v, $r)) {
+			if ($licence = formater_licence($r[2], $r[3], $r[4], $r[5])) {
+				$res['licence'][] = $licence;
 			}
-			else if (strtolower($licnom) == 'creative commons attribution 2.5') {
-				$licnom = 'Creative Commons Attribution 2.5';
-				$licurl = 'http://creativecommons.org/licenses/by/2.5';
-			}
-			else if (strtolower($licnom) == 'cc-by-nc-sa') {
-				$licnom = 'CC-BY-NC-SA 2.0';
-				$licurl = 'http://creativecommons.org/licenses/by-nc-sa/2.0';
-			}
-			else if (strtolower($licnom) == 'mit')
-				$licurl = 'http://opensource.org/licenses/mit-license.php';
-			else if (strtolower($licnom) == 'bsd')
-				$licurl = 'http://www.freebsd.org/copyright/license.html';
-			else if (strtolower($licnom) == 'lgpl')
-				$licurl = 'http://www.gnu.org/licenses/lgpl-3.0.html';
-			else
-				$licurl = (substr($licnom, -1) =='2') ? 'http://www.gnu.org/licenses/gpl-2.0.html' : 'http://www.gnu.org/licenses/gpl-3.0.html';
-			$res['licence'][] = array('nom' => $licnom, 'url' => $licurl);
 		}
 		
 		// On finalise la balise auteur ou licence si on a pas trouve de licence prioritaire
@@ -228,6 +208,50 @@ function normaliser_multi($texte) {
 		}
 	}
 	return $trads;
+}
+
+
+// Expanse les multi en un tableau de textes complets, un par langue
+function formater_licence($prefixe, $nom, $suffixe, $version) {
+	global $licences_plugin;
+	$licence = array();
+
+	$prefixe = strtolower($prefixe);
+	$nom = strtolower($nom);
+	$suffixe = strtolower($suffixe);
+
+	if (((trim($prefixe) == 'creative common') AND ($nom == 'attribution'))
+	OR (($prefixe == 'cc') AND ($nom == 'by')))
+		$nom = 'ccby';
+
+	if (array_key_exists($nom, $licences_plugin)) {
+		if (!$licences_plugin[$nom]['versions']) {
+			// La licence n'est pas versionnee : on affecte donc directement le nom et l'url
+			$licence['nom'] = $licences_plugin[$nom]['nom'];
+			$licence['url'] = $licences_plugin[$nom]['url'];
+		}
+		else {
+			// Si la version est pas bonne on prend la plus recente
+			if (!$version OR !in_array($version, $licences_plugin[$nom]['versions']))
+				$version = $licences_plugin[$nom]['versions'][0];
+			if (is_array($licences_plugin[$nom]['nom']))
+				$licence['nom'] = $licences_plugin[$nom]['nom'][$version];
+			else
+				$licence['nom'] = str_replace('@version@', $version, $licences_plugin[$nom]['nom']);
+			$licence['url'] = str_replace('@version@', $version, $licences_plugin[$nom]['url']);
+
+			if ($nom == 'ccby') {
+				if ($suffixe == '-sharealike')
+					$suffixe = '-sa';
+				if (!$suffixe OR !in_array($suffixe, $licences_plugin[$nom]['suffixes']))
+					$suffixe = '';
+				$licence['nom'] = str_replace('@suffixe@', strtoupper($suffixe), $licence['nom']);
+				$licence['url'] = str_replace('@suffixe@', strtoupper($suffixe), $licence['url']);
+			}
+		}
+	}
+
+	return $licence;
 }
 
 ?>
