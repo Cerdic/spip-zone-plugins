@@ -5,7 +5,7 @@
 	<licence>GPL 3</licence>
 	<version>0.1.0</version>
 	<description>
-	Permet à l'administrateur de remplacer en série des mots-clef par d'autres, pour diminuer le nombre de mots-clef utilisés et éviter les redondances.
+	Permet &agrave; l'administrateur de remplacer en série des mots-clef par d'autres, pour diminuer le nombre de mots-clef utilis&eactute;s et &eactute;viter les redondances.
 	</description>
 	<etat>dev</etat>
 	<necessite id="SPIP" version="[2.1;2.1.99]" />
