@@ -24,6 +24,9 @@ function plugins_fusion_plugin($plugins) {
 				unset($fusion[$_btech]);
 				$fusion[$_btech][0] = $balise;
 			}
+			else {
+				$fusion[$_btech] = array();
+			}
 		}
 	}
 	else {
@@ -46,7 +49,7 @@ function plugins_fusion_plugin($plugins) {
 		// On relit les autres blocs que celui venant d'etre selectionne et on fusionne les informations necessaires
 		// les traitements effectues sont les suivants :
 		// -- nom, prefix, documentation, version, etat, version_base, description : *rien*, on conserve ces informations en l'etat
-		// -- options, fonctions, install, path, pipeline, bouton, onglet : *rien*, meme si certaines pourraient etre fusionnees ces infos ne sont pas stockees
+		// -- options, fonctions, install : *rien*, meme si certaines pourraient etre fusionnees ces infos ne sont pas stockees
 		// -- auteur, licence : *rien*, l'heuristique pour fusionner ces infos est trop compliquee aujourdhui car c'est du texte libre
 		// -- categorie, logo : si la valeur du bloc selectionne est vide on essaye d'en trouver une non vide dans les autres blocs
 		// -- compatible : on constuit l'intervalle global de compatibilite SPIP
@@ -58,10 +61,14 @@ function plugins_fusion_plugin($plugins) {
 			$fusion['logo'] = $plugins[$cle_min_min]['logo'];
 		$fusion['compatibilite'] = fusionner_intervalles($fusion['compatibilite'], $plugins[$cle_min_min]['compatibilite']);
 
-		// necessite, utilise, lib : on indexe chaque liste de dependances par l'intervalle de compatibilite
-		// sans regrouper les doublons pour l'instant
+		// necessite, utilise, lib, chemin, pipeline, bouton, onglet : on indexe chaque liste de dependances
+		// par l'intervalle de compatibilite sans regrouper les doublons pour l'instant
 		foreach ($balises_techniques as $_btech) {
-			if (!isset($fusion[$_btech]) OR !$fusion[$_btech]) {
+			if (!isset($fusion[$_btech]) AND !isset($plugins[$cle_min_min][$_btech])) {
+				// Aucun des tableaux ne contient cette balise technique : on la positionne a un array vide
+				$fusion[$_btech] = array();
+			}
+			else if (!isset($fusion[$_btech]) OR !$fusion[$_btech]) {
 				if ($plugins[$cle_min_min][$_btech]) {
 					// La balise technique est vide dans le tableau de fusion mais non vide dans la deuxieme balise plugin
 					// On range cette balise dans le tableau fusion de sa compatibilite et on cree la cle commune vide
@@ -102,10 +109,11 @@ function plugins_fusion_plugin($plugins) {
 				}
 
 				// On traite maintenant les balises restantes du deuxieme tableau
-				if ($plugins[$cle_min_min][$_btech])
+				if ($plugins[$cle_min_min][$_btech]) {
 					foreach ($plugins[$cle_min_min][$_btech] as $_balise2) {
 						$fusion[$_btech][$plugins[$cle_min_min]['compatibilite']][] = $_balise2;
 					}
+				}
 			}
 		}
 

@@ -30,7 +30,8 @@ define('_SVP_REGEXP_BALISE_MULTIS', '#<multis[^>]*>(.*)</multis>#Uims');
 
 // Liste des balises techniques autorisees dans la balise <spip> et des balises autorisant une traduction
 $GLOBALS['balises_techniques'] = array(
-	'menu', 'chemin', 'lib',	'necessite', 'onglet', 'procure', 'pipeline', 'utilise');
+	'menu', 'chemin', 'lib', 'necessite', 'onglet', 'procure', 'pipeline', 'utilise',
+	'options', 'fonctions', 'install');
 $GLOBALS['balises_multis'] = array(
 	'nom', 'slogan', 'description');
 

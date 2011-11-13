@@ -205,6 +205,8 @@ cc by-nc-sa 2.5
 	<slogan>Fen&#234;tre de dialogue ou de galerie photo</slogan>
 	<description>Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code></description>
 
+	<fonctions>fancybox_fonctions.php</fonctions>
+
 	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
 	<utilise id="cfg" version="[1.12;]" />
 
@@ -236,6 +238,8 @@ cc by-nc-sa 2.5
 
 	<licence>GPL - (c) 2001-2010</licence>
 
+	<fonctions>fancybox_fonctions.php</fonctions>
+	<fonctions>toto/fancybox_fonctions_1.php</fonctions>
 	<options>fancybox_options.php</options>
 
 	<necessite id="saisies" version="[1.7.1;]" />

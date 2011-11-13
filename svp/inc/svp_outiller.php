@@ -150,15 +150,18 @@ function entite2charset($texte) {
 
 
 function balise_identique($balise1, $balise2) {
-	foreach ($balise1 as $_attribut1 => $_valeur1){
-		if (!array_key_exists($_attribut1, $balise2))
-			return false;
-		else
-			if ($_valeur1 != $balise2[$_attribut1])
+	if (is_array($balise1)) {
+		foreach ($balise1 as $_attribut1 => $_valeur1){
+			if (!array_key_exists($_attribut1, $balise2))
 				return false;
+			else
+				if ($_valeur1 != $balise2[$_attribut1])
+					return false;
+		}
+		return true;
 	}
-
-	return true;
+	else
+		return ($balise1 == $balise2);
 }
 
 
