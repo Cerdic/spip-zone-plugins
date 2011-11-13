@@ -1,6 +1,9 @@
 <div class='formulaire_spip formulaire_fusionmots'>
     <form action="#ENV{action}" method="post">
+     #ACTION_FORMULAIRE{#ENV{action}}
         <B_mots>
+        [<div class='reponse_formulaire_erreur'>(#ENV{erreurs}|table_valeur{remplacer})</div>]
+        [<div class='reponse_formulaire_erreur'>(#ENV{erreurs}|table_valeur{par})</div>]
         <table class='cadre-liste' style='width:100%'>
         <tr class='row_first'>
             <th><:fusionmots:remplacer:></th>
