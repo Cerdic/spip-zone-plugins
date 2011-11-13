@@ -6,14 +6,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Verification de l'utilisation de la fonction _L() dans le code PHP 
  *
  */
-// Les REGEXP de recherche de l'item de langue (voir le fichier regexp.txt)
-// -- pour les fichiers .php et la detection de _L
+// Ces 2 REGEXP de recherche de _L
+// doivent fournir les memes tableaux que les RegExp de recherche de <:... :>
 define("_LANGONET_FONCTION_L", 
 #       "`_L\([\"'](.+)(?:[,\"']|[\"'][,].*)\)`iUm"); # old
-	'#\b_L *[(] *"([^"]+)"[^)]*#');
+	'#\b_L *[(] *(")([^"]+)"[^)]*#');
 
 define("_LANGONET_FONCTION_L2", 
-	"#\b_L *[(] *'([^']+)'[^)]*#");
+	"#\b_L *[(] *(')([^']+)'[^)]*#");
 
 // Si une erreur se produit lors du deroulement de la fonction,
 // le tableau resultat contient le libelle
@@ -31,7 +31,8 @@ define('_LANGONET_FILES', '(?<!/charsets|/lang|/req)(/[^/]*\.(php))$');
 // Ce tableau est indexe par un representant canonique de chaque chaine trouvee
 // Les valeurs de ce tableau sont des sous-tableaux indexes par le nom du fichier
 // Chacun a pour valeur un sous-sous-tableau indexe par le numero de ligne,
-// pointant sur un sous-sous-sous-tableau des appels complets de _L
+// pointant sur un sous-sous-sous-tableau des resultats des preg_match
+// (donc encore des tableaux, indexe numeriquement)
 
 // @param string $module
 // @param string $ou_fichier
@@ -46,15 +47,15 @@ function inc_langonet_verifier_l($module, $ou_fichier) {
 		foreach ($contenu = file($_fichier) as $ligne => $texte) {
 			if (preg_match_all(_LANGONET_FONCTION_L, $texte, $m, PREG_SET_ORDER))
 				foreach ($m as $occ) {
-					$index = langonet_index($occ[1], $item_md5);
-					$item_md5[$index] = $occ[1];
-					$fichier_non[$index][$_fichier][$ligne][] = trim($occ[0]);
+					$index = langonet_index($occ[2], $item_md5);
+					$item_md5[$index] = $occ[2];
+					$fichier_non[$index][$_fichier][$ligne][] = $occ;
 				}
 			if (preg_match_all(_LANGONET_FONCTION_L2, $texte, $m, PREG_SET_ORDER))
 				foreach ($m as $occ) {
-					$index = langonet_index($occ[1], $item_md5);
-					$item_md5[$index] = $occ[1];
-					$fichier_non[$index][$_fichier][$ligne][] = trim($occ[0]);
+					$index = langonet_index($occ[2], $item_md5);
+					$item_md5[$index] = $occ[2];
+					$fichier_non[$index][$_fichier][$ligne][] = $occ;
 				}
 		}
 	}

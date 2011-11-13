@@ -5,6 +5,9 @@
  *
  */
 
+// Il est anormal que cette variable puisse etre indefinie
+if (!isset($GLOBALS['spip_display'])) $GLOBALS['spip_display'] = 'large';
+
 function formulaires_langonet_verifier_charger() {
 	return array('verification' => _request('verification'),
 				'fichier_langue' => _request('fichier_langue'),
@@ -84,7 +87,7 @@ function formulaires_langonet_verifier_traiter() {
 	}
 
 	// Traitement des resultats
-	if ($resultats['erreur']) {
+	if (isset($resultats['erreur'])) {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
 	else {
@@ -336,54 +339,84 @@ function formater_resultats($verification, $resultats, $corrections) {
  * @return string
  */
 
-/// $type	  	=> le type de resultats (non, non_mais, non_mais_nok, peut_etre)
-/// $tableau   	=> [item][fichier utilisant][num ligne][] => extrait ligne
-/// $extra	  	=> [item][] => fichier de langue ou item est defini
-///			  	ou [codage(item)] => item, ou l'item est l'argument de _L()
-/// $f_coloriser	=> la fonction de colorisation ou NULL si le plugin coloration_code n'est pas actif  
+/// $type	=> le type de resultats (non, non_mais, non_mais_nok, peut_etre)
+/// $tableau   	=> [item][fichier utilisant][num ligne][] => resultats des preg_match
+/// $extra	=> [item][] => fichier de langue ou item est defini
+///		ou [codage(item)] => item, ou l'item est l'argument de _L()
+/// $f_coloriser=> la fonction de colorisation ou NULL si le plugin coloration_code n'est pas actif  
+
 function afficher_lignes($type, $tableau, $extra=array(), $f_coloriser) {
 
 	include_spip('inc/layer');
 
-	// Detail des fichiers utilisant les items de langue
 	ksort($tableau);
-	$liste_lignes = '';
-	foreach ($tableau as $item => $detail) {
-		$brut = preg_match('/^(.*)[{].*[}]$/', $item, $m) ? $m[1]:$item;
-		$liste_lignes .= bouton_block_depliable($brut, false) .
-		                 debut_block_depliable(false) .
-		                 "<p style=\"padding-left:2em;\">\n  ".
-		                 _T('langonet:texte_item_utilise_ou')."\n<br />";	
-		foreach ($detail as $fichier => $lignes) {
-			$liste_lignes .= "\t<span style=\"font-weight:bold;padding-left:2em;\">" .$fichier. "</span><br />\n";
-			foreach ($lignes as $ligne_n => $ligne_t) {
-				$L = sprintf("%04s", intval($ligne_n+1));
-				$T = '... '.$ligne_t[0].' ...';
-				if ($f_coloriser) {
-					// Traitement de la coloration de l'extrait. C'est la fonction de coloration qui s'occupe des
-					// entites html
-					$infos = pathinfo($fichier);
-					$extension = ($infos['extension'] == 'html') ? 'html4strict' : $infos['extension'];
-					$T = $f_coloriser($T,  $extension, 'code', 'span');
-				} else $T = htmlspecialchars($T);
-
-				$liste_lignes .= "\t\t<code style='padding-left:4em;text-indent: -5em;'>L$L : $T</code><br />\n";
-			}
-		}
-		$liste_lignes .= "</p>";
-
-		if ($type != 'non' AND is_array($extra[$item])) {
-			$liste_lignes .= "<p style=\"padding-left:2em;\">  " . (($type=='non_mais_nok') ? _T('langonet:texte_item_mal_defini') : _T('langonet:texte_item_defini_ou')) . "\n<br />";
-			foreach ($extra[$item] as $fichier_def) {
-				$liste_lignes .= "\t<span style=\"font-weight:bold;padding-left:2em;\">" .$fichier_def. "</span><br />\n";
-			}
-			$liste_lignes .= "</p>\n";
-		} elseif ($type == 'non_mais_nok') {
-				$liste_lignes .= "<p style=\"padding-left:2em;\">  " . _T('langonet:texte_item_non_defini') . "</p>\n<br />\n";
-		}
-		$liste_lignes .= fin_block();
+	foreach ($tableau as $k => $v) {
+		$occ = langonet_lister_occ($type, $k, $v, $extra, $f_coloriser);
+		$brut = preg_match('/^(.*)[{].*[}]$/', $k, $m) ? $m[1]:$k;
+		$tableau[$k] = bouton_block_depliable($brut, false) .
+			debut_block_depliable(false) . 
+			$occ .
+			fin_block();
 	}
+	return join('', $tableau);
+}
 
+/**
+ * Formate les occurrences d'un item dans les fichiers
+ *
+ * @param string $type
+ * @param string $item
+ * @param array $detail
+ * @param array $extra
+ * @param string $f_coloriser
+ * @return string
+ */
+
+function langonet_lister_occ($type, $item, $detail, $extra, $f_coloriser)
+{
+	$liste_lignes = '';
+
+	foreach ($detail as $fichier => $lignes) {
+		$liste_lignes .= "\t<span style=\"font-weight:bold;padding-left:2em;\">" .$fichier. "</span><br />\n";
+		foreach ($lignes as $ligne_n => $ligne_t) {
+			$L = sprintf("%04s", intval($ligne_n+1));
+			// Il peut y en avoir plusieurs sur une meme ligne,
+			// on n'affiche que le premier
+			$match = $ligne_t[0];
+			$T = '... '.trim($match[0]).' ...';
+			if ($f_coloriser) {
+				// Traitement de la coloration de l'extrait.
+				// C'est la fonction de coloration qui s'occupe des entites html
+				$infos = pathinfo($fichier);
+				$extension = ($infos['extension'] == 'html') ? 'html4strict' : $infos['extension'];
+				$T = $f_coloriser($T,  $extension, 'code', 'span');
+			} else $T = htmlspecialchars($T);
+
+			$liste_lignes .= "\t\t<code style='padding-left:4em;text-indent: -5em;'>L$L : $T</code><br />\n";
+		}
+	}
+	// Qaund l'index ne correspond pas aux occurrences (on prend la derniere)
+	// typiquement quand c'est un md5, donner l'index prevu pour aider a trouver l'homonyme
+	// (mais ce serait encore mieux que Langonet le donne)
+	if ($item !==  $match[2]) {
+	  $index = langonet_index_brut($match[2]);
+	  $v = ("(<b>" . $index . "</b>)<br />");
+	} else $v = '';
+
+	$liste_lignes = "<p style=\"padding-left:2em;\">\n  ".
+	$v .
+	_T('langonet:texte_item_utilise_ou')."\n<br />" .
+	$liste_lignes ."</p>";
+
+	if ($type != 'non' AND isset($extra[$item])) {
+		$liste_lignes .= "<p style=\"padding-left:2em;\">  " . (($type=='non_mais_nok') ? _T('langonet:texte_item_mal_defini') : _T('langonet:texte_item_defini_ou')) . "\n<br />";
+		foreach ($extra[$item] as $fichier_def) {
+			$liste_lignes .= "\t<span style=\"font-weight:bold;padding-left:2em;\">" .$fichier_def. "</span><br />\n";
+		}
+		$liste_lignes .= "</p>\n";
+	} elseif ($type == 'non_mais_nok') {
+			$liste_lignes .= "<p style=\"padding-left:2em;\">  " . _T('langonet:texte_item_non_defini') . "</p>\n<br />\n";
+	}
 	return $liste_lignes;
 }
 
@@ -492,16 +525,17 @@ function creer_script($resultats, $verification) {
 	// et on collecte au passage les fichiers qui le contiennent
 	if (is_array($all)) foreach ($all as $index => $val) {
 		foreach($val as $f => $l) $files[$f]= str_replace(_DIR_RACINE . $ou, '', $f);
-		$fichier = key($val);
-		$val = array_shift($val);
-		$val = array_shift($val);
-		$val = array_shift($val);
+		$fichier = key($val);	
+		$val = array_shift($val); // premier fichier
+		$val = array_shift($val); // premiere ligne du dit
+		$val = array_shift($val); // premier match dans la dite
+		$val = array_shift($val); // index 0 du dit
 		if ($_l) {
 			// gestion des backslash imparfaite, mais c'est deja ca
 			if (preg_match(_LANGONET_FONCTION_L, $val, $m))
-				$occ = str_replace('\\', '.', $m[1]);
+				$occ = str_replace('\\', '.', $m[2]);
 			elseif (preg_match(_LANGONET_FONCTION_L2, $val, $m))
-				$occ = $m[1];
+				$occ = $m[2];
 			else continue;
 		} else {
 			// si c'est un <: ... :> normaliser au besoin
@@ -539,14 +573,12 @@ function creer_script($resultats, $verification) {
 // On elimine les repetitions de mots pour evacuer le cas frequent truc: @truc@
 // Si plus que 32 caracteres, on elimine les mots de moins de 3 lettres.
 // Si toujours trop, on coupe au dernier mot complet avant 32 caracteres.
-// C'est donc le tableau des chaines de langues manquant;
-// toutefois, en cas d'homonymie d'index, on prend le md5, qui est illisible.
+// C'est donc le tableau des chaines de langues manquant.
 
 // @param string $occ
-// @param array item_md5
 // @return string
 
-function langonet_index($occ, $item_md5)
+function langonet_index_brut($occ)
 {
 	$index = textebrut($occ);
 	$index = preg_replace('/\\\\[nt]/', ' ', $index);
@@ -559,16 +591,25 @@ function langonet_index($occ, $item_md5)
 		if (strlen($index) > 32) {
 			// tant pis mais couper proprement si possible
 			$index = substr($index, 0, 32);
-			if ($n = strrpos($index,' '))
+			if ($n = strrpos($index,' ') OR ($n = strrpos($index,'_')))
 				$index = substr($index, 0, $n);
 		}
 	}
 	$index = str_replace(' ', '_', trim($index));
-	if (isset($item_md5[$index]) AND strcasecmp($item_md5[$index], $occ)) {
-
-		$index = md5($occ);
-	}
 	return $index;
+}
+
+// comme la precedente, mais en cas d'homonymie,
+// on prend le md5, qui est illisible.
+
+// @param string $occ
+// @param array item_md5
+// @return string
+
+function langonet_index($occ, $item_md5)
+{
+	$index = langonet_index_brut($occ);
+	return (isset($item_md5[$index]) AND strcasecmp($item_md5[$index], $occ)) ? md5($occ) :	$index;
 }
 
 // fonction purement utilitaire

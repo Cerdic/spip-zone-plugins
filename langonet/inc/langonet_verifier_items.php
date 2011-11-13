@@ -101,7 +101,7 @@ function langonet_match(&$utilises, $occ, $_fichier, $ligne, $eval=false)
 	$index = langonet_index($occ[2], $utilises['items']) . $args;
 	$utilises['items'][$index] = $item;
 	$utilises['modules'][$index] = $occ[1];
-	$utilises['item_tous'][$index][$_fichier][$ligne][] = trim($occ[0]);
+	$utilises['item_tous'][$index][$_fichier][$ligne][] = $occ;
 	$utilises['suffixes'][$index] = (($occ[3] AND ($occ[3][0]==='.')) OR ($eval AND strpos($occ[2], '$')));
 }
 
@@ -188,7 +188,7 @@ function langonet_classer_items($module, $utilises, $init=array(), $files=array(
 				if ($mod == $module) {
 					// Item indefini alors que le module est explicite, c'est une erreur
 					$item_non[] = $_valeur;
-						$fichier_non[$_cle] = $utilises['item_tous'][$_cle];
+					$fichier_non[$_cle] = $utilises['item_tous'][$_cle];
 				} else {
 					// L'item peut etre defini dans un autre module. Le fait qu'il ne soit pas
 					// defini dans le fichier en cours de verification n'est pas forcement une erreur.
@@ -225,10 +225,9 @@ function langonet_classer_items($module, $utilises, $init=array(), $files=array(
 				}
 			}
 			else {
-				// L'item est defini dynamiquement (i.e. a l'execution)
-				// Il ne peut etre trouve directement dans le fichier de
-				// langue, donc on verifie que des items ressemblant
-				// existent dans le fichier de langue
+				// L'item est defini dynamiquement (i.e. a l'execution),
+				// il ne peut etre trouve dans un fichier de langue.
+				// On regarde s'il existe des items ressemblants.
 				$item_trouve = false;
 				foreach($init as $_item => $_traduction) {
 					if (substr($_item, 0, strlen($_valeur)) == $_valeur) {
