@@ -7,7 +7,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function inc_palette_header_dist($type='') {
 	$js = generer_url_public('palette.js');
-	$css = _DIR_LIB_PALETTE.'farbtastic.css';
+	$css = find_in_path(_DIR_LIB_PALETTE.'farbtastic.css');
 
 	$ret =  '<link rel="stylesheet" href="'.$css.'" type="text/css" media="all" />'."\n";
 	$ret .= '<script type="text/javascript" src="'.$js.'"></script>'."\n";
