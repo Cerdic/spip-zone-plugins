@@ -1,9 +1,21 @@
-[(#AUTORISER{fusionner,mots}|oui)<!--#navigation-->
+#CACHE{0}
+[(#AUTORISER{fusionner,mots}|oui)
+<!--#navigation-->
 <div class='cadre-info'>
-<:fusionmots:explication:>
+[(#ENV{id_groupe}|?{<:fusionmots:explication:>,Vous pourrez fusionner plusieurs mots et faire converger leurs utilisations})]
 </div>
-<!--/#navigation-->
-<h1><:fusionmots:fusionmots:></h1>
+[(#ENV{id_groupe}|oui)#INCLURE{fond=inc/choix_groupe,id_groupe}]
 
-<div class='ajax'>#FORMULAIRE_FUSIONMOTS</div>
-]
+<!--/#navigation-->
+
+<h1><:fusionmots:fusionmots:></h1>
+	[(#ENV{id_groupe}|oui)
+		<div class='ajax'>
+			[(#ENV{id_groupe}|=={tous}|oui)#FORMULAIRE_FUSIONMOTS{0}]
+			[(#ENV{id_groupe}|=={tous}|non)#FORMULAIRE_FUSIONMOTS{#ENV{id_groupe}}]
+		</div>]
+	[(#ENV{id_groupe}|non)
+		<h3>Choisissez le groupe de mot sur lequel faire les fusions</h3>
+		#INCLURE{fond=inc/choix_groupe}
+	]
+][(#AUTORISER{fusionner,mots}|non)Achtung forbiden !]
