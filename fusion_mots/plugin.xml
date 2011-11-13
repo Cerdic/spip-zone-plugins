@@ -10,4 +10,12 @@
 	<etat>dev</etat>
 	<necessite id="SPIP" version="[2.1;2.1.99]" />
 	<prefix>fusionmots</prefix>
+	<bouton id="fusionmots" parent="bando_edition">
+	   <titre>fusionmots:fusionmots</titre>
+	</bouton>
+	<pipeline>
+        <nom>autoriser</nom>
+        <inclure>fusionmots_pipeline.php</inclure>
+    </pipeline>
+
 </plugin>
