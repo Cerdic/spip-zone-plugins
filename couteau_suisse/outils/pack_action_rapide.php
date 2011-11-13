@@ -5,7 +5,7 @@
 
 include_spip('inc/actions');
 
-// Compatibilite SPIP < 2.0
+// Compatibilite avec SPIP 1.92
 if(!defined('_SPIP19300')) {
 	function redirige_action_post($action, $arg, $ret, $gra, $corps, $att='') {
 		$r = _DIR_RESTREINT_ABS . generer_url_ecrire($ret, $gra, true, true);

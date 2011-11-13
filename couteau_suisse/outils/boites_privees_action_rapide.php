@@ -24,7 +24,7 @@ cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour()
 function action_rapide_tri_auteurs($id_article=0) {
 spip_log("action_rapide_tri_auteurs : $id_article, $id_auteur, $monter");
 	$id = $id_article?$id_article:_request('id_article');
-	include_spip('public/assembler'); // pour recuperer_fond(), SPIP < 2.0
+	include_spip('public/assembler'); // pour recuperer_fond(), SPIP 1.92
 	$texte = trim(recuperer_fond('fonds/tri_auteurs', array('id_article'=>$id)));
 	// syntaxe : ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
 	if(strlen($texte))
@@ -35,7 +35,7 @@ spip_log("action_rapide_tri_auteurs : $id_article, $id_auteur, $monter");
 	if(!$id_article) return $texte;
 	// ici, 1er affichage !
 	if(!strlen($texte)) return '';
-	// SPIP < 2.0
+	// SPIP 1.92
 	if(!defined('_SPIP19300')) return debut_cadre_relief(find_in_path('img/couteau-24.gif'), true)
 		. cs_div_configuration()
 		. "<div class='verdana1' style='text-align: left;'>"
@@ -57,8 +57,10 @@ function boites_privees_tri_auteurs_action() {
 	$id_auteur = abs(_request('bp_auteur'));
 	$monter = _request('bp_auteur')>0;
 
-	if(!defined('_SPIP19300')) include_spip('outils/boites_privees'); // pour les fonctions sql
-	$s = sql_select('id_auteur', 'spip_auteurs_articles', "id_article=$id_article");
+	if(!defined('_SPIP19300')) include_spip('outils/boites_privees'); // pour les fonctions SQL
+	$s = defined('_SPIP30000')
+		?sql_select('id_auteur', 'spip_auteurs_liens', "objet='article' AND id_objet=$id_article")
+		:sql_select('id_auteur', 'spip_auteurs_articles', "id_article=$id_article");
 	$i=0; $j=0;
 	while ($a = sql_fetch($s)) {
 		if($a['id_auteur']==$id_auteur) { $i = $a['id_auteur']; break; }
@@ -67,9 +69,16 @@ function boites_privees_tri_auteurs_action() {
 	if(!$monter && $i && ($a = sql_fetch($s))) $j = $a['id_auteur'];
 	spip_log("action_rapide_tri_auteurs, article $id_article : echange entre l'auteur $i et l'auteur $j");
 	if($i && $j) {
-		sql_update("spip_auteurs_articles", array('id_auteur'=>-99), "id_article=$id_article AND id_auteur=$i");
-		sql_update("spip_auteurs_articles", array('id_auteur'=>$i), "id_article=$id_article AND id_auteur=$j");
-		sql_update("spip_auteurs_articles", array('id_auteur'=>$j), "id_article=$id_article AND id_auteur=-99");
+		if(defined('_SPIP30000')) {
+			// SPIP >= 3.0
+			sql_update('spip_auteurs_liens', array('id_auteur'=>-99), "objet='article' AND id_objet=$id_article AND id_auteur=$i");
+			sql_update('spip_auteurs_liens', array('id_auteur'=>$i), "objet='article' AND id_objet=$id_article AND id_auteur=$j");
+			sql_update('spip_auteurs_liens', array('id_auteur'=>$j), "objet='article' AND id_objet=$id_article AND id_auteur=-99");
+		} else {
+			sql_update('spip_auteurs_articles', array('id_auteur'=>-99), "id_article=$id_article AND id_auteur=$i");
+			sql_update('spip_auteurs_articles', array('id_auteur'=>$i), "id_article=$id_article AND id_auteur=$j");
+			sql_update('spip_auteurs_articles', array('id_auteur'=>$j), "id_article=$id_article AND id_auteur=-99");
+		}
 	}
 	// action terminee, pret pour la redirection exec !
 	return;
