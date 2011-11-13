@@ -1,0 +1,23 @@
+<div class='formulaire_spip formulaire_fusionmots'>
+    <form action="#ENV{action}" method="post">
+        <B_mots>
+        <table class='cadre-liste' style='width:100%'>
+        <tr class='row_first'>
+            <th><:fusionmots:remplacer:></th>
+            <th><:fusionmots:par:></th>
+        </tr>
+        <BOUCLE_mots(MOTS){tout}{par titre}>
+            <tr class='tr_liste'>
+                <td>
+                    <input class='checkbox' type='checkbox' name='remplacer[]' id='remplacer_#ID_MOT' value='#ID_MOT' /><label for='remplacer_#ID_MOT'>#TITRE</label>
+                </td>
+                <td>
+                    <input class='radio' type='radio' name='par' id='par_#ID_MOT' value='#ID_MOT' /><label for='par_#ID_MOT'>#TITRE</label>
+                </td>
+            </tr>
+        </BOUCLE_mots>
+        </table>
+        </B_mots>
+        <p class="boutons"><input type="submit" class="submit" value="<:pass_ok:>" /></p>
+    </form>
+</div>
