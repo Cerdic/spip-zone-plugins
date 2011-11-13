@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_DIR_LIB_GIS',_DIR_RACINE.'lib/mxn-gis-2.0.9/');
+define('_DIR_LIB_GIS','lib/mxn-gis-2.0.9/');
 
 $table_des_traitements['VILLE'][]= 'typo(extraire_multi(%s))';
 $table_des_traitements['PAYS'][]= 'typo(extraire_multi(%s))';
