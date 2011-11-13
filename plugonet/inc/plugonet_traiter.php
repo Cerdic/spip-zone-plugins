@@ -169,12 +169,14 @@ function plugin2paquet($plugins) {
 		// -- generer les balises spip qui ne contiennnent que les balises techniques d'un inetrvalle de compatibilite spip donne
 		// -- completer la balise paquet avec les balises techniques communes
 		foreach ($fusion as $_cle => $_fusion) {
-			if ($_cle == 0) {
+			if ($_cle === 0) {
 				// C'est la partie commune qui doit etre incluse dans la balise paquet
-				$paquet = array_merge($paquet, $_fusion[$_cle]);
+				$paquet = array_merge($paquet, $_fusion);
 			}
 			else {
 				// Generation des balises spip
+				// Il faut au prealable inclure l'intervalle de compatibilite spip
+				$_fusion['compatibilite'] = $_cle;
 				list($spip, $commandes_spip,) = plugin2balise($_fusion, 'spip');
 				$balises_spip .= "\n\n$spip";
 				$commandes['balise_spip'][$_plugin['compatibilite']] = $commandes_spip;
@@ -183,10 +185,7 @@ function plugin2paquet($plugins) {
 	}
 	
 	// -- On conclut avec la balise paquet
-	list($paquet_xml, $commandes_paquet, $descriptions) = plugin2balise(
-											$paquet,
-											'paquet', 
-											$balises_spip);
+	list($paquet_xml, $commandes_paquet, $descriptions) = plugin2balise($paquet, 'paquet', $balises_spip);
 	$commandes['balise_paquet'] = $commandes_paquet;
 
 	return array(
@@ -781,6 +780,7 @@ function balise2licence($prefixe, $nom, $suffixe, $version) {
 	return $licence;
 }
 
+
 function fusionner_balises_techniques($plugins, $cle_min_min, $cle_min_max) {
 	global $balises_techniques_plugin;
 
@@ -791,57 +791,57 @@ function fusionner_balises_techniques($plugins, $cle_min_min, $cle_min_max) {
 	foreach ($balises_techniques_plugin as $_btech) {
 		// On initialise le tableau de sortie avec la balise la plus recente dans cette boucle uniquement.
 		// De cette façon, le tableau ne contiendra que des balises techniques
+		// On range cette balise arbitrairement dans le bloc des balises communes
 		if (isset($plugins[$cle_min_max][$_btech]))
-			$fusion[$_btech] = $plugins[$cle_min_max][$_btech];
+			$fusion[0][$_btech] = $plugins[$cle_min_max][$_btech];
 
-		if (!isset($fusion[$_btech]) AND !isset($plugins[$cle_min_min][$_btech])) {
-			// Aucun des tableaux ne contient cette balise technique : on la positionne a un array vide
-			$fusion[$_btech] = array();
+		if (!isset($fusion[0][$_btech]) AND !isset($plugins[$cle_min_min][$_btech])) {
+			// Aucun des tableaux ne contient cette balise technique : on la positionne dans les balises
+			// communes comme un array vide
+			$fusion[0][$_btech] = array();
 		}
-		else if (!isset($fusion[$_btech]) OR !$fusion[$_btech]) {
+		else if (!isset($fusion[0][$_btech]) OR !$fusion[0][$_btech]) {
 			if ($plugins[$cle_min_min][$_btech]) {
 				// La balise technique est vide dans le tableau de fusion mais non vide dans la deuxieme balise plugin
 				// On range cette balise dans le tableau fusion de sa compatibilite et on cree la cle commune vide
-				$fusion[$_btech][$plugins[$cle_min_min]['compatibilite']] = $plugins[$cle_min_min][$_btech];
-				$fusion[$_btech][0] = array();
+				$fusion[$plugins[$cle_min_min]['compatibilite']][$_btech] = $plugins[$cle_min_min][$_btech];
+				$fusion[0][$_btech] = array();
 			}
 		}
 		else if (!isset($plugins[$cle_min_min][$_btech]) OR !$plugins[$cle_min_min][$_btech]) {
 			// La balise technique est non vide dans le tableau de fusion mais vide dans la deuxieme balise plugin
 			// On deplace cette balise dans le tableau fusion de sa compatibilite et on cree la cle commune vide
-			$balise = $fusion[$_btech];
-			unset($fusion[$_btech]);
-			$fusion[$_btech][$plugins[$cle_min_max]['compatibilite']] = $balise;
-			$fusion[$_btech][0] = array();
+			$balise = $fusion[0][$_btech];
+			unset($fusion[0][$_btech]);
+			$fusion[$plugins[$cle_min_max]['compatibilite']][$_btech] = $balise;
+			$fusion[0][$_btech] = array();
 		}
 		else {
 			// Les deux tableaux contiennent une balise technique non vide : il faut fusionner cette balise technique !
 			// On parcourt le premier tableau (fusion) en verifiant une egalite avec le deuxieme tableau
-			foreach ($fusion[$_btech] as $_cle0 => $_balise0) {
+			foreach ($fusion[0][$_btech] as $_cle0 => $_balise0) {
 				$balise_commune = false;
 				foreach ($plugins[$cle_min_min][$_btech] as $_cle1 => $_balise1) {
 					if (balise_identique($_balise0, $_balise1)) {
-						// On classe cette balise dans le bloc commun (index 0) et on la supprime dans les
-						// 2 tableaux en cours de comparaison
-						unset($fusion[$_btech][$_cle0]);
-						$fusion[$_btech][0][] = $_balise1;
+						// On laisse cette balise dans le bloc commun (index 0) et on la supprime dans l'autre
+						// tableau en cours de comparaison
 						unset($plugins[$cle_min_min][$_btech][$_cle1]);
 						$balise_commune = true;
 						break;
 					}
 				}
 				if (!$balise_commune) {
-					$fusion[$_btech][$plugins[$cle_min_max]['compatibilite']][] = $_balise0;
-					unset($fusion[$_btech][$_cle0]);
+					$fusion[$plugins[$cle_min_max]['compatibilite']][$_btech][] = $_balise0;
+					unset($fusion[0][$_btech][$_cle0]);
 				}
-				if (!isset($fusion[$_btech][0]))
-					$fusion[$_btech][0] = array();
+				if (!isset($fusion[0][$_btech]))
+					$fusion[0][$_btech] = array();
 			}
 
 			// On traite maintenant les balises restantes du deuxieme tableau
 			if ($plugins[$cle_min_min][$_btech]) {
 				foreach ($plugins[$cle_min_min][$_btech] as $_balise2) {
-					$fusion[$_btech][$plugins[$cle_min_min]['compatibilite']][] = $_balise2;
+					$fusion[$plugins[$cle_min_min]['compatibilite']][$_btech][] = $_balise2;
 				}
 			}
 		}
