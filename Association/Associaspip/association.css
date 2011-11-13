@@ -8,7 +8,10 @@ tr.pair { background:#DCF3F4; }
 tr.impair { background:#F0DCF4; }
 td.valide { background:#A0FFA0; }
 td.sortie { background:#E6EAC9; }
-td.prospect { background:#FFF8DC; } 
+td.prospect { background:#FFF8DC; }
+
+td.vi { background:#b4ffb4; } /* virement interne */
+td.cv { background:#ffbc61; } /* contribution volontaire */
 
 border1 {border-top: 1px solid #CCCCCC;}
 

@@ -166,7 +166,9 @@ function comptes_while($where, $limit, $id_compte)
 
 	while ($data = sql_fetch($query)) {
 		if ($data['depense'] >0) { $class= "impair";}
-		else { $class="pair";}	   
+		else { $class="pair";}
+		if (substr($data['imputation'],0,2)=='58') { $class="vi";} // virement interne
+		if (substr($data['imputation'],0,2)=='86') { $class="cv";} // contribution volontaire
 		$id = $data['id_compte'];
 		
 		/* pour voir au chargement l'id_compte recherche */

@@ -715,7 +715,7 @@ Commentaire: @commentaire@
 'duree_en_mois' => 'Dur&eacute;e (en mois)',
 'duree_mois' => 'Dur&eacute;e (mois)',
 'email' => 'Email',
-'en_bleu_recettes_en_rose_depenses' => 'En bleu : Recettes<br />En rose : D&eacute;penses',
+'en_bleu_recettes_en_rose_depenses' => 'En bleu : Recettes<br />En rose : D&eacute;penses<br />En vert : Virements internes<br />En orange : Contributions volontaires',
 'en_rose_vente_enregistree_en_bleu_vente_expediee' => 'En rose : Vente enregistr&eacute;e<br />En bleu : Vente exp&eacute;di&eacute;e',
 'encaisse' => 'Encaisse',
 'entrees' => 'Entr&eacute;es',
