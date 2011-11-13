@@ -31,4 +31,9 @@ define('_PLUGONET_VERSION_SPIP_MIN', '1.9.0');
 // -- Pour l'instant on ne connait pas la borne sup exacte
 define('_PLUGONET_VERSION_SPIP_MAX', '3.0.99');
 
+// Balises dites techniques contenues dans le fichier plugin.xml
+$GLOBALS['balises_techniques_plugin'] = array(
+	'menu', 'chemin', 'lib', 'necessite', 'onglet', 'procure', 'pipeline', 'utilise',
+	'options', 'fonctions', 'install');
+
 ?>

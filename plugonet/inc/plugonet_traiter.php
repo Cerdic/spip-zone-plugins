@@ -49,7 +49,7 @@ function inc_plugonet_traiter($traitement, $files, $forcer_paquetxml=false, $sim
 	
 				if (($traitement == 'generation_paquetxml') 
 				AND !$erreurs[$nom]['information_pluginxml']) {
-					// Puisqu'on sait extraire les infos du plugin.xml, .on construit le contenu 
+					// Puisqu'on sait extraire les infos du plugin.xml, on construit le contenu
 					// du fichier paquet.xml a partir de ces infos
 					list($paquet_xml, $commandes[$nom], $prefixe, $descriptions) = plugin2paquet($plugins);
 					// On valide le contenu obtenu avec la nouvelle DTD paquet
@@ -97,15 +97,12 @@ function inc_plugonet_traiter($traitement, $files, $forcer_paquetxml=false, $sim
 // Boucle sur chaque contenu des balises plugin et creation du contenu de paquet.xml
 function plugin2paquet($plugins) {
 
-	// Pour accelerer on simplifie le cas majaritaire ou le tableau ne contient qu'un seul element
+	// Pour accelerer on simplifie le cas majoritaire ou le tableau ne contient qu'un seul element
 	$balises_spip = '';
-	$commandes = array();
+	$paquet = $commandes = array();
 	if (count($plugins) == 1 ) {
-		$cle_min_min = $cle_min_max = 0;
-		$plugins[$cle_min_min]['auteur'] = $plugins[$cle_min_min]['auteur'][0];
-		$plugins[$cle_min_min]['licence'] = $plugins[$cle_min_min]['licence'][0];
-		if ($plugins[$cle_min_min]['compatibilite'])
-			$plugins[$cle_min_min]['compatibilite_paquet'] = $plugins[$cle_min_min]['compatibilite'];
+		$paquet = $plugins[0];
+		$paquet['compatibilite_paquet'] = ($paquet['compatibilite']) ? $paquet['compatibilite'] : '';
 	}
 	else {
 		// Cas de plusieurs balises plugin (limite a 2)
@@ -136,38 +133,58 @@ function plugin2paquet($plugins) {
 
 		// On initialise les informations non techniques du bloc de compatibilite la moins elevee avec celles
 		// du bloc dont la borne min de compatibilite SPIP est la plus elevee.
-		$plugins[$cle_min_min]['prefix'] = $plugins[$cle_min_max]['prefix'];
-		$plugins[$cle_min_min]['categorie'] = $plugins[$cle_min_max]['categorie'];
-		$plugins[$cle_min_min]['logo'] = $plugins[$cle_min_max]['logo'];
-		$plugins[$cle_min_min]['version'] = $plugins[$cle_min_max]['version'];
-		$plugins[$cle_min_min]['etat'] = $plugins[$cle_min_max]['etat'];
-		$plugins[$cle_min_min]['schema'] = $plugins[$cle_min_max]['schema'];
-		$plugins[$cle_min_min]['meta'] = $plugins[$cle_min_max]['meta'];
-		$plugins[$cle_min_min]['documentation'] = $plugins[$cle_min_max]['documentation'];
-		$plugins[$cle_min_min]['nom'] = $plugins[$cle_min_max]['nom'];
-		$plugins[$cle_min_min]['auteur'] = $plugins[$cle_min_max]['auteur'][0];
-		$plugins[$cle_min_min]['licence'] = $plugins[$cle_min_max]['licence'][0];
-		$plugins[$cle_min_min]['slogan'] = $plugins[$cle_min_max]['slogan'];
-		$plugins[$cle_min_min]['description'] = $plugins[$cle_min_max]['description'];
-		// On initialise la compatibilite avec la fusion des intervalles de compatibilite SPIP
-		$plugins[$cle_min_min]['compatibilite_paquet'] = $compatibilite_paquet;
+		$paquet['prefix'] = $plugins[$cle_min_max]['prefix'];
+		$paquet['categorie'] = $plugins[$cle_min_max]['categorie'];
+		$paquet['logo'] = $plugins[$cle_min_max]['logo'];
+		$paquet['version'] = $plugins[$cle_min_max]['version'];
+		$paquet['etat'] = $plugins[$cle_min_max]['etat'];
+		$paquet['schema'] = $plugins[$cle_min_max]['schema'];
+		$paquet['meta'] = $plugins[$cle_min_max]['meta'];
+		$paquet['documentation'] = $plugins[$cle_min_max]['documentation'];
+		$paquet['nom'] = $plugins[$cle_min_max]['nom'];
+		$paquet['auteur'] = $plugins[$cle_min_max]['auteur'];
+		$paquet['licence'] = $plugins[$cle_min_max]['licence'];
+		$paquet['slogan'] = $plugins[$cle_min_max]['slogan'];
+		$paquet['description'] = $plugins[$cle_min_max]['description'];
 
-		// Le bloc de compatibilite la moins elevee correspond aux attributs et sous-balises primaires
-		// de la balise paquet. Les autres blocs generent les balises spip contenant uniquement les 
-		// donnees dits techniques
-		// -- On commence avec les balises spip
-		foreach ($plugins as $_cle => $_plugin) {
-			if ($_cle <> $cle_min_min) {
-				list($spip, $commandes_spip,) = plugin2balise($_plugin, 'spip');
+		// On fusionne les informations necessaires
+		// les traitements effectues sont les suivants :
+		// -- nom, prefix, documentation, version, etat, version_base, description : *rien*, on conserve ces informations en l'etat
+		// -- options, fonctions, install, path, pipeline, bouton, onglet : *rien*, meme si certaines pourraient etre fusionnees ces infos ne sont pas stockees
+		// -- auteur, licence : *rien*, l'heuristique pour fusionner ces infos est trop compliquee aujourdhui car c'est du texte libre
+		// -- categorie, logo : si la valeur du bloc selectionne est vide on essaye d'en trouver une non vide dans les autres blocs
+		// -- compatible : on constuit l'intervalle global de compatibilite SPIP
+		if (!$paquet['categorie'] AND $plugins[$cle_min_min]['categorie'])
+			$paquet['categorie'] = $plugins[$cle_min_min]['categorie'];
+		if (!$paquet['logo'] AND $plugins[$cle_min_min]['logo'])
+			$paquet['logo'] = $plugins[$cle_min_min]['logo'];
+		// On initialise la compatibilite avec la fusion des intervalles de compatibilite SPIP
+		$paquet['compatibilite_paquet'] = $compatibilite_paquet;
+
+		// -- necessite, utilise, lib, chemin, pipeline, bouton, onglet : on indexe chaque liste de dependances
+		//    par l'intervalle de compatibilite sans regrouper les doublons pour l'instant
+		$fusion = fusionner_balises_techniques($plugins, $cle_min_min, $cle_min_max);
+
+		// Maintenant que les balises techniques sont fusionnees, il faut :
+		// -- generer les balises spip qui ne contiennnent que les balises techniques d'un inetrvalle de compatibilite spip donne
+		// -- completer la balise paquet avec les balises techniques communes
+		foreach ($fusion as $_cle => $_fusion) {
+			if ($_cle == 0) {
+				// C'est la partie commune qui doit etre incluse dans la balise paquet
+				$paquet = array_merge($paquet, $_fusion[$_cle]);
+			}
+			else {
+				// Generation des balises spip
+				list($spip, $commandes_spip,) = plugin2balise($_fusion, 'spip');
 				$balises_spip .= "\n\n$spip";
 				$commandes['balise_spip'][$_plugin['compatibilite']] = $commandes_spip;
 			}
 		}
 	}
 	
-	// -- On continue avec la balise paquet
+	// -- On conclut avec la balise paquet
 	list($paquet_xml, $commandes_paquet, $descriptions) = plugin2balise(
-											$plugins[$cle_min_min], 
+											$paquet,
 											'paquet', 
 											$balises_spip);
 	$commandes['balise_paquet'] = $commandes_paquet;
@@ -175,7 +192,7 @@ function plugin2paquet($plugins) {
 	return array(
 			$paquet_xml, 
 			$commandes, 
-			$plugins[$cle_min_min]['prefix'], 
+			$paquet['prefix'],
 			$descriptions);
 }
 
@@ -211,8 +228,8 @@ function plugin2balise($D, $balise, $balises_spip='') {
 		$nom = plugin2balise_nom($D['nom']);
 		list($commentaire, $descriptions) = plugin2balise_commentaire($D['nom'], $D['description'], $D['slogan'], $D['prefix']);
 	
-		$auteur = plugin2balise_copy($D['auteur'], 'auteur');
-		$licence = plugin2balise_copy($D['licence'], 'licence');
+		$auteur = plugin2balise_copy($D['auteur'][0], 'auteur');
+		$licence = plugin2balise_copy($D['licence'][0], 'licence');
 		$traduire = is_array($D['traduire']) ? plugin2balise_traduire($D) :'';
 	}
 	else {
@@ -658,7 +675,7 @@ function extraire_descriptions($nom, $description, $slogan, $prefixe) {
 	return $langs;
 }
 
-function intervalle2bornes($intervalle) {
+function intervalle2bornes($intervalle='') {
 	include_spip('inc/plugin');
 
 	static $borne_vide = array('valeur' => '', 'incluse' => false);
@@ -763,4 +780,90 @@ function balise2licence($prefixe, $nom, $suffixe, $version) {
 
 	return $licence;
 }
+
+function fusionner_balises_techniques($plugins, $cle_min_min, $cle_min_max) {
+	global $balises_techniques_plugin;
+
+	$fusion = array();
+	if (!$plugins)
+		return $fusion;
+
+	foreach ($balises_techniques_plugin as $_btech) {
+		// On initialise le tableau de sortie avec la balise la plus recente dans cette boucle uniquement.
+		// De cette façon, le tableau ne contiendra que des balises techniques
+		if (isset($plugins[$cle_min_max][$_btech]))
+			$fusion[$_btech] = $plugins[$cle_min_max][$_btech];
+
+		if (!isset($fusion[$_btech]) AND !isset($plugins[$cle_min_min][$_btech])) {
+			// Aucun des tableaux ne contient cette balise technique : on la positionne a un array vide
+			$fusion[$_btech] = array();
+		}
+		else if (!isset($fusion[$_btech]) OR !$fusion[$_btech]) {
+			if ($plugins[$cle_min_min][$_btech]) {
+				// La balise technique est vide dans le tableau de fusion mais non vide dans la deuxieme balise plugin
+				// On range cette balise dans le tableau fusion de sa compatibilite et on cree la cle commune vide
+				$fusion[$_btech][$plugins[$cle_min_min]['compatibilite']] = $plugins[$cle_min_min][$_btech];
+				$fusion[$_btech][0] = array();
+			}
+		}
+		else if (!isset($plugins[$cle_min_min][$_btech]) OR !$plugins[$cle_min_min][$_btech]) {
+			// La balise technique est non vide dans le tableau de fusion mais vide dans la deuxieme balise plugin
+			// On deplace cette balise dans le tableau fusion de sa compatibilite et on cree la cle commune vide
+			$balise = $fusion[$_btech];
+			unset($fusion[$_btech]);
+			$fusion[$_btech][$plugins[$cle_min_max]['compatibilite']] = $balise;
+			$fusion[$_btech][0] = array();
+		}
+		else {
+			// Les deux tableaux contiennent une balise technique non vide : il faut fusionner cette balise technique !
+			// On parcourt le premier tableau (fusion) en verifiant une egalite avec le deuxieme tableau
+			foreach ($fusion[$_btech] as $_cle0 => $_balise0) {
+				$balise_commune = false;
+				foreach ($plugins[$cle_min_min][$_btech] as $_cle1 => $_balise1) {
+					if (balise_identique($_balise0, $_balise1)) {
+						// On classe cette balise dans le bloc commun (index 0) et on la supprime dans les
+						// 2 tableaux en cours de comparaison
+						unset($fusion[$_btech][$_cle0]);
+						$fusion[$_btech][0][] = $_balise1;
+						unset($plugins[$cle_min_min][$_btech][$_cle1]);
+						$balise_commune = true;
+						break;
+					}
+				}
+				if (!$balise_commune) {
+					$fusion[$_btech][$plugins[$cle_min_max]['compatibilite']][] = $_balise0;
+					unset($fusion[$_btech][$_cle0]);
+				}
+				if (!isset($fusion[$_btech][0]))
+					$fusion[$_btech][0] = array();
+			}
+
+			// On traite maintenant les balises restantes du deuxieme tableau
+			if ($plugins[$cle_min_min][$_btech]) {
+				foreach ($plugins[$cle_min_min][$_btech] as $_balise2) {
+					$fusion[$_btech][$plugins[$cle_min_min]['compatibilite']][] = $_balise2;
+				}
+			}
+		}
+	}
+
+	return $fusion;
+}
+
+
+function balise_identique($balise1, $balise2) {
+	if (is_array($balise1)) {
+		foreach ($balise1 as $_attribut1 => $_valeur1){
+			if (!array_key_exists($_attribut1, $balise2))
+				return false;
+			else
+				if ($_valeur1 != $balise2[$_attribut1])
+					return false;
+		}
+		return true;
+	}
+	else
+		return ($balise1 == $balise2);
+}
+
 ?>
