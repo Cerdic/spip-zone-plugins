@@ -2,7 +2,7 @@
 		{"type": "Feature",
 		"geometry": {"type": "Point", "coordinates": [#LON, #LAT]},
 		"id":"#ID_GIS",
-		"title":[(#ID_SYNDIC|generer_url_entite{site}|aoustrong{[(#TITRE|sinon{#_sit:NOM_SITE}|supprimer_numero)]}|json_encode)],
+		"title":[(#TITRE|sinon{#_sit:NOM_SITE}|supprimer_numero|json_encode)],
 		"description":[(#DESCRIPTIF|sinon{#_sit:DESCRIPTIF}|json_encode)][(#SET{logo_doc,''})]
 		[(#LOGO_GIS|oui)
 		[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{32,32}|image_recadre{32,32}})]]
