@@ -1,0 +1,13 @@
+<plugin>
+	<nom>Fusion de mots-clef</nom>
+	<auteur>Maïeul Rouquette</auteur>
+	<slogan>Vous avez trop de mots ? Fusionnez les !</slogan>
+	<licence>GPL 3</licence>
+	<version>0.1.0</version>
+	<description>
+	Permet à l'administrateur de remplacer en série des mots-clef par d'autres, pour diminuer le nombre de mots-clef utilisés et éviter les redondances.
+	</description>
+	<etat>dev</etat>
+	<necessite id="SPIP" version="[2.1;2.1.99]" />
+	<prefix>fusionmots</prefix>
+</plugin>
