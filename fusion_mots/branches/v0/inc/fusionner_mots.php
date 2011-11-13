@@ -23,20 +23,21 @@ function fusionner_mots($source,$cible){
 		
 		
 		foreach ($source as $id_mot){
-			// On met à jour, sauf quand le liens est déjà existant
-			$where = 'id_mot='.intval($id_mot);
-			if ($liens_existants_formates != ''){
-				$where.=  ' and '. sql_in('id_'.$objet,$liens_existants_formates,'NOT')	;	
+			if ($id_mot !=$cible){
+				// On met à jour, sauf quand le liens est déjà existant
+				$where = 'id_mot='.intval($id_mot);
+				if ($liens_existants_formates != ''){
+					$where.=  ' and '. sql_in('id_'.$objet,$liens_existants_formates,'NOT')	;	
+					
+				}
+				sql_update($table, array("id_mot"=>sql_quote($cible)),$where);	
+				// on supprime les anciens liens qui existent encore, ceux qu'on n'a pas modifié pour cause de duplicata
+				sql_delete($table,'id_mot='.$id_mot);
 				
+				// On supprime le mot
+				sql_delete ('spip_mots','id_mot='.$id_mot);
 			}
-			sql_update($table, array("id_mot"=>sql_quote($cible)),$where);	
-			// on supprime les anciens liens qui existent encore, ceux qu'on n'a pas modifié pour cause de duplicata
-			sql_delete($table,'id_mot='.$id_mot);
-			
-			// On supprime le mot
-			sql_delete ('spip_mots','id_mot='.$id_mot);
 		}
-		
 	}
 	
 
