@@ -7,7 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  */
 // Ces 2 REGEXP de recherche de _L
-// doivent fournir les memes tableaux que les RegExp de recherche de <:... :>
+// doivent fournir les memes tableaux que les RegExp de recherche de <: :>
 define("_LANGONET_FONCTION_L", 
 #       "`_L\([\"'](.+)(?:[,\"']|[\"'][,].*)\)`iUm"); # old
 	'#\b_L *[(] *(")([^"]+)"[^)]*#');
@@ -51,7 +51,7 @@ function inc_langonet_verifier_l($module, $ou_fichier) {
 					$item_md5[$index] = $occ[2];
 					$fichier_non[$index][$_fichier][$ligne][] = $occ;
 				}
-			if (preg_match_all(_LANGONET_FONCTION_L2, $texte, $m, PREG_SET_ORDER))
+			elseif (preg_match_all(_LANGONET_FONCTION_L2, $texte, $m, PREG_SET_ORDER))
 				foreach ($m as $occ) {
 					$index = langonet_index($occ[2], $item_md5);
 					$item_md5[$index] = $occ[2];

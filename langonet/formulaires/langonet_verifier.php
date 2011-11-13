@@ -353,7 +353,10 @@ function afficher_lignes($type, $tableau, $extra=array(), $f_coloriser) {
 	foreach ($tableau as $k => $v) {
 		$occ = langonet_lister_occ($type, $k, $v, $extra, $f_coloriser);
 		$brut = preg_match('/^(.*)[{].*[}]$/', $k, $m) ? $m[1]:$k;
-		$tableau[$k] = bouton_block_depliable($brut, false) .
+		if (!$occ)
+		  $tableau[$k] = "<p style='font-weight:bold;padding-left:2em;'>$brut</p>";
+		else
+		  $tableau[$k] = bouton_block_depliable($brut, false) .
 			debut_block_depliable(false) . 
 			$occ .
 			fin_block();
@@ -374,10 +377,10 @@ function afficher_lignes($type, $tableau, $extra=array(), $f_coloriser) {
 
 function langonet_lister_occ($type, $item, $detail, $extra, $f_coloriser)
 {
-	$liste_lignes = '';
+	$occ = '';
 
 	foreach ($detail as $fichier => $lignes) {
-		$liste_lignes .= "\t<span style=\"font-weight:bold;padding-left:2em;\">" .$fichier. "</span><br />\n";
+		$occ .= "\t<span style=\"font-weight:bold;padding-left:2em;\">" .$fichier. "</span><br />\n";
 		foreach ($lignes as $ligne_n => $ligne_t) {
 			$L = sprintf("%04s", intval($ligne_n+1));
 			// Il peut y en avoir plusieurs sur une meme ligne,
@@ -392,32 +395,32 @@ function langonet_lister_occ($type, $item, $detail, $extra, $f_coloriser)
 				$T = $f_coloriser($T,  $extension, 'code', 'span');
 			} else $T = htmlspecialchars($T);
 
-			$liste_lignes .= "\t\t<code style='padding-left:4em;text-indent: -5em;'>L$L : $T</code><br />\n";
+			$occ .= "\t\t<code style='padding-left:4em;text-indent: -5em;'>L$L : $T</code><br />\n";
 		}
 	}
-	// Qaund l'index ne correspond pas aux occurrences (on prend la derniere)
+
+	if ($occ) $occ = _T('langonet:texte_item_utilise_ou')."\n<br />" . $occ;
+
+	// Quand l'index ne correspond pas aux occurrences (on prend la derniere)
 	// typiquement quand c'est un md5, donner l'index prevu pour aider a trouver l'homonyme
 	// (mais ce serait encore mieux que Langonet le donne)
-	if ($item !==  $match[2]) {
-	  $index = langonet_index_brut($match[2]);
-	  $v = ("(<b>" . $index . "</b>)<br />");
-	} else $v = '';
+	if ($match[2] AND ($item !==  $match[2])) {
+		$index = langonet_index_brut($match[2]);
+		$occ = "(<b>" . $index . "</b>)<br />" . $occ;
+	}
 
-	$liste_lignes = "<p style=\"padding-left:2em;\">\n  ".
-	$v .
-	_T('langonet:texte_item_utilise_ou')."\n<br />" .
-	$liste_lignes ."</p>";
+	if ($occ) $occ = "<p style=\"padding-left:2em;\">\n$occ</p>";
 
 	if ($type != 'non' AND isset($extra[$item])) {
-		$liste_lignes .= "<p style=\"padding-left:2em;\">  " . (($type=='non_mais_nok') ? _T('langonet:texte_item_mal_defini') : _T('langonet:texte_item_defini_ou')) . "\n<br />";
+		$occ .= "<p style=\"padding-left:2em;\">  " . (($type=='non_mais_nok') ? _T('langonet:texte_item_mal_defini') : _T('langonet:texte_item_defini_ou')) . "\n<br />";
 		foreach ($extra[$item] as $fichier_def) {
-			$liste_lignes .= "\t<span style=\"font-weight:bold;padding-left:2em;\">" .$fichier_def. "</span><br />\n";
+			$occ .= "\t<span style=\"font-weight:bold;padding-left:2em;\">" .$fichier_def. "</span><br />\n";
 		}
-		$liste_lignes .= "</p>\n";
+		$occ .= "</p>\n";
 	} elseif ($type == 'non_mais_nok') {
-			$liste_lignes .= "<p style=\"padding-left:2em;\">  " . _T('langonet:texte_item_non_defini') . "</p>\n<br />\n";
+		$occ .= "<p style=\"padding-left:2em;\">  " . _T('langonet:texte_item_non_defini') . "</p>\n<br />\n";
 	}
-	return $liste_lignes;
+	return $occ;
 }
 
 /**
@@ -538,7 +541,7 @@ function creer_script($resultats, $verification) {
 				$occ = $m[2];
 			else continue;
 		} else {
-			// si c'est un <: ... :> normaliser au besoin
+			// si c'est un <: :> normaliser au besoin
 			if ($val[0]!=='<') continue;
 			if (!preg_match(_LANGONET_ITEM_H, $val, $m)) continue;
 			if (preg_match(',^\w+$,', $occ = $m[2])) continue;

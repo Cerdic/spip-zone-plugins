@@ -11,7 +11,7 @@ define("_LANGONET_ITEM_A",
 // Fontions PHP _T ou _U avec guillemet
 define("_LANGONET_ITEM_G", 
        '%_[TU]\s*[(]\s*"(?:([a-z0-9_]+):)?([^"]*)"\s*([^.,)]*[^)]*)%S');
-// squelette avec <: ... :>
+// squelette avec <:  :>
 define("_LANGONET_ITEM_H", 
        "%<:(?:([a-z0-9_]+):)?([^:|{}>]+)([^>]*)%S");
 // pour plugin.xml (obsolete a terme)
@@ -97,6 +97,7 @@ function langonet_collecter_items($files) {
 
 function langonet_match(&$utilises, $occ, $_fichier, $ligne, $eval=false)
 {
+	if (!trim($occ[2])) return;
 	list($item, $args) = langonet_argumenter($occ[2]);
 	$index = langonet_index($occ[2], $utilises['items']) . $args;
 	$utilises['items'][$index] = $item;
@@ -149,7 +150,7 @@ function langonet_reperer_items($utilises, $init)
 			} else {
 				// L'item est utilise dans un contexte variable
 				$item_peut_etre[] = $_item;
-				$fichier_peut_etre[$_item] = $utilises['item_tous'][$_item];
+				$fichier_peut_etre[$_item] = array();
 			}
 		}
 	}
@@ -231,11 +232,9 @@ function langonet_classer_items($module, $utilises, $init=array(), $files=array(
 				$item_trouve = false;
 				foreach($init as $_item => $_traduction) {
 					if (substr($_item, 0, strlen($_valeur)) == $_valeur) {
-						$item_peut_etre[] = $_valeur;
-						if (is_array($utilises['item_tous'][$_cle])) {
-							$fichier_peut_etre[$_item] = $utilises['item_tous'][$_cle];
-						}
 						$item_trouve = true;
+						$item_peut_etre[] = $_valeur;
+						$fichier_peut_etre[$_item] = is_array($utilises['item_tous'][$_cle]) ? $utilises['item_tous'][$_cle] : array();
 					}
 				}
 				// Si on a pas trouve d'item pouvant correspondre c'est peut-etre que
@@ -244,9 +243,7 @@ function langonet_classer_items($module, $utilises, $init=array(), $files=array(
 				if (!$item_trouve) {
 					$_item = ltrim($_valeur, '\'".\\');
 					$item_peut_etre[] = $_item;
-					if (is_array($utilises['item_tous'][$_cle])) {
-						$fichier_peut_etre[$_item] = $utilises['item_tous'][$_cle];
-					}
+					$fichier_peut_etre[$_item] = is_array($utilises['item_tous'][$_cle]) ? $utilises['item_tous'][$_cle] : array();
 				}
 			}
 		}
