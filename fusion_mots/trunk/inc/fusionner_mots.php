@@ -12,18 +12,20 @@ function fusionner_mots($source,$cible){
 		if ($objet == 'forum') {// une petite exception
 			$table = 'spip_mots_forum';
 		}	
-		// pour éviter les entrées double, vérifier les liens déjà existant
-		$liens_existants 	= sql_allfetsel('id_'.$objet,$table,'id_mot='.intval($cible));
-		
-		$liens_existants_formates = array();
-		foreach ($liens_existants as $lien){
-			$liens_existants_formates[] = $lien['id_'.$objet];
-		}
-		$liens_existants_formates = implode($liens_existants_formates,',');
 		
 		
 		foreach ($source as $id_mot){
 			if ($id_mot !=$cible){
+				
+				// pour éviter les entrées double, vérifier les liens déjà existant
+				$liens_existants 	= sql_allfetsel('id_'.$objet,$table,'id_mot='.intval($cible));
+		
+				$liens_existants_formates = array();
+				foreach ($liens_existants as $lien){
+					$liens_existants_formates[] = $lien['id_'.$objet];
+				}
+				$liens_existants_formates = implode($liens_existants_formates,',');
+				
 				// On met à jour, sauf quand le liens est déjà existant
 				$where = 'id_mot='.intval($id_mot);
 				if ($liens_existants_formates != ''){
