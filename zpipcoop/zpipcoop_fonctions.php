@@ -68,5 +68,4 @@ function tickets_liste_severite($id_ticket = null){
 	return $severites;
 }
 
-
 ?>

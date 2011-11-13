@@ -58,7 +58,7 @@ ul#feed li small {font-size:.82em;}
 .message-formulaire {background: #fff;margin-top: 15px;padding: 5px 15px 15px 15px;}
 
 /* Instituer article */
-ul.instituer_article {list-style-type: none; padding: 0px; }
+ul.instituer {list-style-type: none; padding: 0px; }
 ul.instituer ul {padding: 0px; }
 ul.instituer li {list-style: none outside none; padding: 0px; }
 ul.instituer li ul li img {border: 1px solid #F8F7F3; margin: 1px 5px -1px 1px; visibility: hidden; }

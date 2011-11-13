@@ -1,9 +1,8 @@
-<BOUCLE_breve_principal(BREVES) {id_breve}>
-[(#REM) Lords du passage en plugins passer au format de date du cs afin d'éviter l'année 1970
-(cf:http://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau_suisse/cout_options.php)]
-
 [(#LOGO_SITE_SPIP||image_reduire{226,226})]
 [(#LOGO_RUBRIQUE||image_reduire{226,226})]
+<BOUCLE_extra_breve(BREVES){id_breve}>
+[(#AUTORISER{instituer,breve,#ID_BREVE}|oui)[(#ID_BREVE|instituer_breve{#ID_RUBRIQUE,#STATUT})]]
+</BOUCLE_extra_breve>
 
 <INCLURE{fond=inclure/redaction,env}>
 
@@ -12,4 +11,3 @@
 <INCLURE{fond=inclure/categories,env}>
 
 <INCLURE{fond=inclure/connexions,env}>
-</BOUCLE_breve_principal>

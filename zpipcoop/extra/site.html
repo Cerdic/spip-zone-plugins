@@ -1,8 +1,10 @@
-[(#REM) Lords du passage en plugins passer au format de date du cs afin d'éviter l'année 1970
-(cf:http://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau_suisse/cout_options.php)]
-
 [(#LOGO_SITE_SPIP||image_reduire{226,226})]
 [(#LOGO_RUBRIQUE||image_reduire{226,226})]
+
+<BOUCLE_extra_site(SITES){id_syndic}>
+[(#AUTORISER{instituer,syndic,#ID_SYNDIC}|oui)[(#ID_SYNDIC|instituer_site{#ID_RUBRIQUE,#STATUT})]]
+</BOUCLE_extra_site>
+
 
 <INCLURE{fond=inclure/redaction,env}>
 

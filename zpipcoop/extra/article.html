@@ -1,9 +1,9 @@
-<BOUCLE_extra_article(ARTICLES){id_article}>
 [(#LOGO_SITE_SPIP||image_reduire{226,226})]
 [(#LOGO_RUBRIQUE||image_reduire{226,226})]
 
-[(#AUTORISER{instituer,article,#ID_ARTICLE}|oui)
-	[(#ID_ARTICLE|instituer_article{#ID_RUBRIQUE,#STATUT})]]
+<BOUCLE_extra_article(ARTICLES){id_article}>
+[(#AUTORISER{instituer,article,#ID_ARTICLE}|oui)[(#ID_ARTICLE|instituer_article{#ID_RUBRIQUE,#STATUT})]]
+</BOUCLE_extra_article>
 
 <INCLURE{fond=inclure/redaction,env}>
 
@@ -12,4 +12,3 @@
 <INCLURE{fond=inclure/categories,env}>
 
 <INCLURE{fond=inclure/connexions,env}>
-</BOUCLE_extra_article>
