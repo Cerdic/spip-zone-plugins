@@ -30,7 +30,7 @@ function fusionner_mots($source,$cible){
 				
 			}
 			sql_update($table, array("id_mot"=>sql_quote($cible)),$where);	
-			// on supprime les anciens liens qui existent encore, ceux qu'on n'a pas modifié pour cuase de duplicata
+			// on supprime les anciens liens qui existent encore, ceux qu'on n'a pas modifié pour cause de duplicata
 			sql_delete($table,'id_mot='.$id_mot);
 			
 			// On supprime le mot
