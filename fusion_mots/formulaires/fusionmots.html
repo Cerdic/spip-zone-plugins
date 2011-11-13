@@ -12,10 +12,16 @@
         <BOUCLE_mots(MOTS){tout}{par titre}>
             <tr class='tr_liste'>
                 <td>
-                    <input class='checkbox' type='checkbox' name='remplacer[]' id='remplacer_#ID_MOT' value='#ID_MOT'[(#ID_MOT|in_array{#ENV{remplacer}}|oui) checked='checked'] /><label for='remplacer_#ID_MOT'>#TITRE</label>
+                    <input class='checkbox' type='checkbox' name='remplacer[]' id='remplacer_#ID_MOT' value='#ID_MOT'[(#ID_MOT|in_array{#ENV{remplacer}}|oui) checked='checked'] />
+                    <label for='remplacer_#ID_MOT'>
+                    	<a href="[(#VAL{mots_edit}|generer_url_ecrire{id_mot=#ID_MOT})]">#TITRE</a>
+                    </label>
                 </td>
                 <td>
-                    <input class='radio' type='radio' name='par' id='par_#ID_MOT' value='#ID_MOT'[(#ID_MOT|=={#ENV{par}}|oui) checked='checked'] /><label for='par_#ID_MOT'>#TITRE</label>
+                    <input class='radio' type='radio' name='par' id='par_#ID_MOT' value='#ID_MOT'[(#ID_MOT|=={#ENV{par}}|oui) checked='checked'] />
+                    <label for='par_#ID_MOT'>
+                    	<a href="[(#VAL{mots_edit}|generer_url_ecrire{id_mot=#ID_MOT})]">#TITRE</a>
+                    </label>
                 </td>
             </tr>
         </BOUCLE_mots>
