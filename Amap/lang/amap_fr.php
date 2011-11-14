@@ -76,7 +76,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		<br />@nom@',
 	'panier_dispo_auteur_mail' => 'Bonjour,
 Je mets à disposition le panier du @date_distribution@, pour le récupérer suiver le lien suivant @lien@
+@panier_dispo_plus@
 @nom@',
+	'panier_dispo_plus' => 'Des infos à donner en plus (elle seront rajouter dans le mail envoyer avant votre nom)',
 	'panier_distribuer' => 'panier à distribuer',
 	'paniers_distribuer' => 'paniers à distribuer',
 	'panier_liste' => 'Liste des paniers',
@@ -99,7 +101,7 @@ Je mets à disposition le panier du @date_distribution@, pour le récupérer sui
 
 	// T
 	'table_vide_aucun_enregistrement' => 'Cette table est actuellement vide :
-					<br />Elle ne contient aucun enregistrement.',
+										<br />Elle ne contient aucun enregistrement.',
 	'type_panier' => 'Type de panier',
 	'type_panier_auteur' => 'Type de panier :',
 	'type_adherent' => 'Type d\'adhérent',

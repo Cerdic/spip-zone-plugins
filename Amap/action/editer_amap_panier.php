@@ -12,10 +12,10 @@ function action_editer_amap_panier_dist() {
 			include_spip('inc/headers');
 			redirige_url_ecrire();
 		}
-		$id_amap_panier = insert_amap_panier();
+	$id_amap_panier = insert_amap_panier();
 	}
 
-	if ($id_amap_panier) $err = revisions_amap_paniers($id_amap_panier);
+	if ($id_amap_panier) $err = revision_amap_panier($id_amap_panier);
 	return array($id_amap_panier,$err);
 }
 
@@ -48,23 +48,16 @@ function insert_amap_panier() {
 
 
 // Enregistrer certaines modifications d'un amap_panier
-function revisions_amap_paniers($id_amap_panier, $c=false) {
-
-	spip_log("Le panier $id_amap_panier n'a pas été modifier, $id_auteur pour $id_auteur", "amap_instalation");
-	// recuperer les champs dans POST s'ils ne sont pas transmis
-	if ($c === false) {
-		$c = array();
-		foreach (array('id_auteur', 'date_distribution') as $champ) {
-			if (($a = _request($champ)) !== null) {
-				$c[$champ] = $a;
-			}
-		}
-	}
-
+function revision_amap_panier($id_amap_panier, $c=false) {
+	
 	include_spip('inc/modifier');
-	modifier_contenu('amap_panier', $id_amap_panier, array(
-			'invalideur' => "id='id_amap_panier/$id_amap_panier'"
-		),
-		$c);
+	$err = '';
+
+	// l'auteur
+	$id_auteur = _request('id_auteur');
+	sql_updateq("spip_amap_paniers", array("id_auteur" => $id_auteur), "id_amap_panier=$id_amap_panier") ;
+	spip_log("Le panier $id_amap_panier à l'auteur $id_auteur", "amap_installation");
+
+	return $err;
 }
 ?>

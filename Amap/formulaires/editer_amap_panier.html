@@ -32,7 +32,6 @@
 										value="[(#VALEUR|table_valeur{date_debut})]"
 										[(#ENV{date_distribution}|non) checked="checked"]
 										[(#ENV{date_distribution}|=={#VALEUR|table_valeur{date_debut}}|oui) checked="checked"]
-										[(#ENV{date_distribution}|oui) disabled="disabled"]
 									/>
 									<label for="champ_date_distribution_#COMPTEUR_BOUCLE">[(#VALEUR|table_valeur{date_debut}|affdate{'d/m/Y'})]</label>
 								</div>

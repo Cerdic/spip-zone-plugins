@@ -15,7 +15,7 @@ function action_editer_amap_livraison_dist() {
 		$id_amap_livraison = insert_amap_livraison();
 	}
 
-	if ($id_amap_livraison) $err = revisions_amap_livraisons($id_amap_livraison);
+	if ($id_amap_livraison) $err = revision_amap_livraison($id_amap_livraison);
 	return array($id_amap_livraison,$err);
 }
 
@@ -37,7 +37,7 @@ function insert_amap_livraison() {
 
 
 // Enregistrer certaines modifications d'un amap_livraison
-function revisions_amap_livraisons($id_amap_livraison, $c=false) {
+function revision_amap_livraison($id_amap_livraison, $c=false) {
 
 	// recuperer les champs dans POST s'ils ne sont pas transmis
 	if ($c === false) {

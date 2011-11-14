@@ -5,6 +5,7 @@
 
 	<form method='post' action='#ENV{action}'><div>
 	[(#ACTION_FORMULAIRE{#ENV{action}})]
+	[(#SAISIE{textarea, panier_dispo_plus, label=<:amap:panier_dispo_plus:>, rows=10, cols=58})]
 	<p class="boutons"><input type='submit' class='submit' value='<:amap:envoyer:>' /></p>
 	</div></form>
 </div>
