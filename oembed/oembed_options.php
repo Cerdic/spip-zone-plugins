@@ -1,4 +1,11 @@
 <?php
+/**
+ * Plugin oEmbed
+ * Licence GPL3
+ *
+ */
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 define('_DEFINIR_CONTEXTE_TYPE',true);
 

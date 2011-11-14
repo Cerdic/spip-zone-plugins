@@ -1,4 +1,11 @@
 <?php
+/**
+ * Plugin oEmbed
+ * Licence GPL3
+ *
+ */
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // renvoyer un mim_type text/oembed pour les videos oembed
 function mime_type_oembed($id_document) {

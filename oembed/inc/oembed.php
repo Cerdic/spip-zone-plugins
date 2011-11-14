@@ -1,4 +1,11 @@
 <?php
+/**
+ * Plugin oEmbed
+ * Licence GPL3
+ *
+ */
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // Merci WordPress :)
 // http://core.trac.wordpress.org/browser/trunk/wp-includes/class-oembed.php
@@ -22,8 +29,16 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 	$provider = false;
 	
 	$provider = oembed_verifier_provider($url);
-	$data_url = parametre_url($provider,'url',$url,'&');
 
+	if ((!$provider)
+	  AND (($detecter_lien != 'non') OR lire_config('oembed/detecter_lien','non')=='oui')) {
+		$provider = oembed_detecter_lien($url);
+	}
+
+	if (!$provider)
+		return false;
+	
+	$data_url = parametre_url($provider['endpoint'],'url',$url,'&');
 	include_spip('inc/config');
 	if (is_null($maxwidth)){
 		$maxwidth = lire_config('oembed/maxwidth','600');
@@ -32,11 +47,6 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 		$maxheight = lire_config('oembed/maxheight','400');
 	}
 
-	if ((!$provider) AND (($detecter_lien != 'non') OR lire_config('oembed/detecter_lien','non')=='oui')) {
-		$provider = oembed_detecter_lien($url);
-		$data_url = $provider;
-	}
-	
 	$data_url = parametre_url($data_url,'maxwidth',$maxwidth,'&');
 	$data_url = parametre_url($data_url,'maxheight',$maxheight,'&');
 	$data_url = parametre_url($data_url,'format',$format,'&');
@@ -44,31 +54,41 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 	if (isset($cache[$data_url]))
 		return $cache[$data_url];
 	
+	$cache[$data_url] = false;
 	// on recupere le contenu de la page
 	include_spip('inc/distant');
 	if ($data = recuperer_page($data_url)) {
 		if ($format == 'json')
-			return $cache[$data_url] = json_decode($data,true);
+			$cache[$data_url] = json_decode($data,true);
 		// TODO : format xml
-		if ($format == 'xml')
-			return $cache[$data_url] = false;
+		//if ($format == 'xml')
+		//	$cache[$data_url] = false;
 	}
 
-	return $cache[$data_url] = false;
+	// si une fonction de post-traitement est fourni pour ce provider+type, l'utiliser
+	if ($cache[$data_url]){
+		$provider_name= strtolower($cache[$data_url]['provider_name']);
+		$type = strtolower($cache[$data_url]['type']);
+		if ($oembed_provider_posttraite = charger_fonction("posttraite_{$provider_name}_$type",'oembed',true))
+			$cache[$data_url] = $oembed_provider_posttraite($cache[$data_url]);
+	}
+
+	return $cache[$data_url];
 }
 
 /**
  * Vérfier qu'une url est dans la liste des providers autorisés
  *
  * @param string $url l'url à tester
- * @return bool|string false si non ; endpoint du provider si oui
+ * @return bool|array
+ *   false si non ; details du provider dans un tabeau associatif si oui
  */
 function oembed_verifier_provider($url) {
 	$providers = sql_allfetsel('*', 'spip_oembed_providers');
 	foreach ($providers as $p) {
 		$regex = '/' . str_replace('\*', '(.+)', preg_quote($p['scheme'], '/')) . '/';
 		if (preg_match($regex, $url)) {
-			return $p['endpoint'];
+			return $p;
 		}
 	}
 	return false;
@@ -122,9 +142,9 @@ function oembed_detecter_lien($url) {
 
 	// on préfère le json au xml
 	if (!empty($providers['json']))
-		return $providers['json'];
+		return array('endpoint'=>$providers['json']);
 	elseif (!empty($providers['xml']))
-		return $providers['xml'];
+		return array('endpoint'=>$providers['xml']);
 	else
 		return false;
 }

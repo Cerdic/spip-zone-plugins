@@ -1,4 +1,11 @@
 <?php
+/**
+ * Plugin oEmbed
+ * Licence GPL3
+ *
+ */
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function formulaires_configurer_providers_charger_dist(){
 	$valeurs = array(

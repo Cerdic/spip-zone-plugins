@@ -1,7 +1,11 @@
 <?php
+/**
+ * Plugin oEmbed
+ * Licence GPL3
+ *
+ */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
-
 
 function action_supprimer_provider_dist(){
 	

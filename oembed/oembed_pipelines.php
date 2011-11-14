@@ -1,4 +1,11 @@
 <?php
+/**
+ * Plugin oEmbed
+ * Licence GPL3
+ *
+ */
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // ajouter le lien oembed dans le head des pages publiques
 function oembed_affichage_final($page) {
@@ -18,7 +25,8 @@ function oembed_renseigner_document_distant($flux) {
 	include_spip('inc/oembed');
 	// on tente de récupérer les données oembed
 	if ($data = oembed_recuperer_data($flux['source'])){
-		if ($data['type']=='photo') {
+		// si on a recupere une URL c'est direct un doc distant
+		if (isset($data['url'])) {
 			// on recupere les infos du document distant
 			if ($doc = recuperer_infos_distantes($data['url'])) {
 				unset($doc['body']);
@@ -32,7 +40,7 @@ function oembed_renseigner_document_distant($flux) {
 				return $doc;
 			}
 		}
-		if (($data['type']=='video') OR ($data['type']=='rich') OR ($data['type']=='link')) {
+		elseif(isset($data['html']) OR $data['type']=='link'){
 			if ($data['type']=='link')
 				$data['html'] = '<a href="' . $flux['source'] . '">' . sinon($data['title'],$flux['source']) . '</a>';
 			// créer une copie locale du contenu html
