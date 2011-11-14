@@ -18,6 +18,10 @@ function oembed_upgrade($nom_meta_base_version,$version_cible){
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			creer_base();
+			// voir
+			// http://oembed.com/
+			// http://code.google.com/p/oohembed/source/browse/app/provider/endpoints.json
+			// https://github.com/starfishmod/jquery-oembed-all/blob/master/jquery.oembed.js
 			$providers = array(
 				'http://*.youtube.com/watch*'    =>   'http://www.youtube.com/oembed',
 				'http://youtu.be/*'              =>   'http://www.youtube.com/oembed',
@@ -31,8 +35,13 @@ function oembed_upgrade($nom_meta_base_version,$version_cible){
 			  'http://*.soundcloud.com/*'      =>   'http://soundcloud.com/oembed',
 			  'http://slideshare.net/*/*'      =>   'http://www.slideshare.net/api/oembed/2',
 				'http://www.slideshare.net/*/*'  =>   'http://www.slideshare.net/api/oembed/2',
-				'http://www.yfrog.com/*'         =>   'http://yfrog.com/api/oembed',
-			  'http://yfrog.com/*'             =>   'http://yfrog.com/api/oembed',
+				'http://yfrog.com/*'         =>   'http://yfrog.com/api/oembed',
+				'http://yfrog.*/*'         =>   'http://yfrog.com/api/oembed',
+				'http://instagr.am/*'            =>   'http://api.instagram.com/oembed',
+				'http://instagram.com/*'         =>   'http://api.instagram.com/oembed',
+
+				#'http://yfrog.ru|com.tr|it|fr|co.il|co.uk|com.pl|pl|eu|us)/*'         =>   'http://yfrog.com/api/oembed',
+				#'https://gist.github.com/*' => 'http://github.com/api/oembed?format=json'
 			);
 			foreach ($providers as $scheme => $endpoint) {
 				sql_insertq('spip_oembed_providers',array('scheme'=>$scheme,'endpoint'=>$endpoint));
