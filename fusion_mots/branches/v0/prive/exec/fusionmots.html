@@ -1,19 +1,20 @@
 [(#AUTORISER{fusionner,mots}|oui)
 <!--#navigation-->
+#SET{id_groupe,#ENV{id_groupe,#CONFIG{groupemot_actif}}}
 <div class='cadre-info'>
-[(#ENV{id_groupe}|?{<:fusionmots:explication:>,<:fusionmots:explication_intro:>})]
+[(#GET{id_groupe}|?{<:fusionmots:explication:>,<:fusionmots:explication_intro:>})]
 </div>
-[(#ENV{id_groupe}|oui)#INCLURE{fond=inc/choix_groupe,id_groupe}]
+[(#GET{id_groupe}|oui)#INCLURE{fond=inc/choix_groupe,id_groupe=#GET{id_groupe}}]
 
 <!--/#navigation-->
 
 <h1><:fusionmots:fusionmots:></h1>
-	[(#ENV{id_groupe}|oui)
+	[(#GET{id_groupe}|oui)
 		<div class='ajax'>
-			[(#ENV{id_groupe}|=={tous}|oui)#FORMULAIRE_FUSIONMOTS{0}]
-			[(#ENV{id_groupe}|=={tous}|non)#FORMULAIRE_FUSIONMOTS{#ENV{id_groupe}}]
+			[(#GET{id_groupe}|=={tous}|oui)#FORMULAIRE_FUSIONMOTS{0}]
+			[(#GET{id_groupe}|=={tous}|non)#FORMULAIRE_FUSIONMOTS{#GET{id_groupe}}]
 		</div>]
-	[(#ENV{id_groupe}|non)
+	[(#GET{id_groupe}|non)
 		<h3><:fusionmots:choisir_groupe:></h3>
 		#INCLURE{fond=inc/choix_groupe}
 	]
