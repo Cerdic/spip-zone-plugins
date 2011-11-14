@@ -31,6 +31,8 @@ function oembed_upgrade($nom_meta_base_version,$version_cible){
 			  'http://*.soundcloud.com/*'      =>   'http://soundcloud.com/oembed',
 			  'http://slideshare.net/*/*'      =>   'http://www.slideshare.net/api/oembed/2',
 				'http://www.slideshare.net/*/*'  =>   'http://www.slideshare.net/api/oembed/2',
+				'http://www.yfrog.com/*'         =>   'http://yfrog.com/api/oembed',
+			  'http://yfrog.com/*'             =>   'http://yfrog.com/api/oembed',
 			);
 			foreach ($providers as $scheme => $endpoint) {
 				sql_insertq('spip_oembed_providers',array('scheme'=>$scheme,'endpoint'=>$endpoint));
