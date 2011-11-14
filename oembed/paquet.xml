@@ -1,7 +1,7 @@
 <paquet
 	prefix="oembed"
 	categorie="multimedia"
-	version="0.3.0"
+	version="0.3.1"
 	etat="dev"
 	compatibilite="[3.0.0-dev;["
 	logo="prive/themes/spip/images/oembed-32.png"
@@ -23,4 +23,5 @@
 	<pipeline nom="affichage_final" inclure="oembed_pipelines.php" />
 
 	<menu nom="configurer_oembed" titre="oembed:titre_oembed" parent="bando_configuration" icone="images/oembed-16.png" />
+	<necessite nom="medias" compatibilite="[2.7.1;]" />
 </paquet>

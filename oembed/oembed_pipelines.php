@@ -74,6 +74,7 @@ function oembed_post_edition($flux) {
 		if ($data = oembed_recuperer_data($flux['data']['oembed'])){
 			// vignette disponible ? la recupérer et l'associer au document
 			if ($data['thumbnail_url']) {
+				spip_log('ajout de la vignette'.$data['thumbnail_url'].' pour '.$flux['data']['oembed'],'oembed.'._LOG_DEBUG);
 				// cf formulaires_illustrer_document_traiter_dist()
 				$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 				include_spip('inc/joindre_document');
@@ -89,6 +90,8 @@ function oembed_post_edition($flux) {
 					set_request('url','');
 				}
 			}
+			else
+				spip_log('pas de vignette pour '.$flux['data']['oembed'],'oembed.'._LOG_DEBUG);
 		}
 	}
 	return $flux;

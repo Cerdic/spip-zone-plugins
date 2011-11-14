@@ -57,7 +57,9 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 	$cache[$data_url] = false;
 	// on recupere le contenu de la page
 	include_spip('inc/distant');
+	spip_log('Requete oembed pour '.$url.' : '.$data_url,'oembed.'._LOG_DEBUG);
 	if ($data = recuperer_page($data_url)) {
+		spip_log('infos oembed brutes pour '.$url.' : '.$data,'oembed.'._LOG_DEBUG);
 		if ($format == 'json')
 			$cache[$data_url] = json_decode($data,true);
 		// TODO : format xml
@@ -72,6 +74,7 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 		if ($oembed_provider_posttraite = charger_fonction("posttraite_{$provider_name}_$type",'oembed',true))
 			$cache[$data_url] = $oembed_provider_posttraite($cache[$data_url]);
 	}
+	spip_log('infos oembed pour '.$url.' : '.var_export($cache[$data_url],true),'oembed.'._LOG_DEBUG);
 
 	return $cache[$data_url];
 }
