@@ -11,9 +11,9 @@ $GLOBALS['formulaires_no_spam'][] = 'editer_ticket';
 /**
  * Enregistre une revision de ticket
  *
+ * @param int $id_ticket : l'identifiant numérique du ticket
+ * @param array $c[optional] : un array des champs à modifier en base
  * @return
- * @param int $id_ticket
- * @param array $c[optional]
  */
 function revision_ticket($id_ticket, $c=false) {
 
