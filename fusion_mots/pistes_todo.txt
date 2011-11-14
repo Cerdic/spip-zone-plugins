@@ -1,0 +1,5 @@
+Pistes pour l'avenir de ce plugin :
+
+- proposer le selecteur generique dés lors qu'il y a plus d'une centaine de motclés dans le groupe
+
+- permettre de trier par ancienneté de création l'affichage des mots dans la colonne de gauche. Ce serait particulièrement utile, puisque notamment avec les plugins spipicious ou etiquette, on voudra prioritairement s'occuper des motclés récemment créés pour éviter les doublons.
