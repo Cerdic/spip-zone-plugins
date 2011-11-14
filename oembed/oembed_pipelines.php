@@ -19,6 +19,15 @@ function oembed_affichage_final($page) {
 	return $page;
 }
 
+function oembed_formulaire_charger($flux){
+	if ($flux['args']['form']=='editer_document'){
+		if ($flux['data']['oembed']
+		  AND !isset($flux['data']['apercu']))
+			$flux['data']['_inclus'] = 'embed';
+	}
+	return $flux;
+}
+
 // insertion des traitements oembed dans l'ajout des documents distants
 function oembed_renseigner_document_distant($flux) {
 	$medias = array('photo' => 'image','video' => 'video', 'sound' => 'audio');
