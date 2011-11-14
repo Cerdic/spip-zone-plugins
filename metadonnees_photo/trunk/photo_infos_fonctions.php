@@ -2,6 +2,19 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Afficher les infos exif dans les differents endroits de l'interface
+ * @param string $flux
+ * @return string
+ */
+function photo_infos_afficher_metas_document($flux){
+	if ($id_document = $flux['args']['id_document']){
+		$flux["data"] .= recuperer_fond("prive/squelettes/inclure/image_pave_exif",array('id_document' => $id_document));
+	}
+	return $flux;
+}
+
+
 // Lire aux:Lens, qui n'est pas du Exif standard
 function lire_aux_lens ($filename) {
 

@@ -15,7 +15,7 @@
 
 	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL 3</licence>
 
-	<pipeline nom="afficher_metas_document" inclure="photo_infos.php" />
+	<pipeline nom="afficher_metas_document" inclure="photo_infos_fonctions.php" />
 
 	<necessite nom="medias" compatibilite="[2.6.0;]" />
 
