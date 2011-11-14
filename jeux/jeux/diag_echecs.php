@@ -78,6 +78,7 @@ function calcul_diagramme_echecs($position, $indexJeux) {
 	global $diag_echecs_globales, $jeux_couleurs;
 	$flip = jeux_config('flip');
 	$taille = intval(jeux_config('taille'));
+	$nbjour = intval(jeux_config('cache')); //nombre de jour avant recalcul
 	// ************* case en surbrillance *************
 	$caserouge = jeux_config('rouge');
 	$casebleu = jeux_config('bleu');
@@ -112,9 +113,12 @@ function calcul_diagramme_echecs($position, $indexJeux) {
 	list(,,,$size) = @getimagesize($fichier_dest);
 	$image = "<img class=\"no_image_filtrer \" src=\"$fichier_dest\" alt=\"$position\" title=\"$position\" border=\"0\" $size/><br>\n";
 	// pas de recalcul de l'image pendant 12 heures si le fichier existe deja
-	if (file_exists($fichier_dest) 
+	/*if (file_exists($fichier_dest) 
 			AND ($GLOBALS['var_mode'] != 'recalcul') AND ($GLOBALS['var_mode'] != 'calcul') 
 			AND (time()-@filemtime($fichier_dest) < 12*3600))
+		 return $image;*/
+	if (file_exists($fichier_dest) 
+			AND (time()-@filemtime($fichier_dest) < 24*3600*$nbjour))
 		 return $image;
 
 	$chessboard = image_echiquier();

@@ -59,6 +59,7 @@ function jeux_diag_echecs_init() {
 		flip=non		// Faut-il retourner l'echiquier ?
 		coords=oui		// Afficher les coordonnees ?
 		truecolor=non	// enregistrement en 24bit
+		cache=30		// nombre de jour avant recalcul de l'image
 	";
 }
 
