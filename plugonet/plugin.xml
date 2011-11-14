@@ -1,10 +1,10 @@
 <plugin>
 	<nom>PlugOnet</nom>
 	<auteur>Eric Lupinacci, Emmanuel Saint-James</auteur>
-	<version>0.5.5</version>
+	<version>0.5.6</version>
 	<etat>stable</etat>
 	<licence>GNU/GPL v3</licence>
-	<icon>prive/themes/spip/images/plugonet-32.png</icon>
+	<icon>prive/themes/spip/images/plugonet-64.png</icon>
 	<slogan>Migrer de la DTD plugin &#224; celle de paquet</slogan>
 	<description>
 Ce plugin permet de produire le nouveau fichier paquet.xml &#224; partir du fichier
