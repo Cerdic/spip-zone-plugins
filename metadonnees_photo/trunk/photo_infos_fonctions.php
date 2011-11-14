@@ -36,142 +36,149 @@ function lire_aux_lens ($filename) {
     }
 }
 
+/**
+ * Lire toutes les exifs d'une image
+ * et les memoriser en static pour optimisation
+ *
+ * @param string $fichier
+ * @return array
+ */
 function extraire_exif($fichier) {
-	global $pb_exif;
+	static $mem_exif;
 	
-	if ($pb_exif["$fichier"]) return $pb_exif["$fichier"];
+	if (isset($mem_exif[$fichier]) AND $mem_exif[$fichier]) return $mem_exif[$fichier];
 
-	if (!file_exists($fichier)) return;
+	if (!file_exists($fichier))
+		return array();
 
-		$time = filemtime($fichier);
+	$time = filemtime($fichier);
 
-		$fichier_exif = sous_repertoire(_DIR_VAR, 'cache-exif') . md5($fichier.$time).".php";
+	$fichier_exif = sous_repertoire(_DIR_VAR, 'cache-exif') . md5($fichier.$time).".php";
+
+	// Systeme de cache pour les variables exif
+	if (file_exists($fichier_exif)) {
+		lire_fichier($fichier_exif, $cache);
+		if ($mem_exif[$fichier] = unserialize($cache))
+			return $mem_exif[$fichier];
+	}
 
 
-		// Systeme de cache pour les variables exif								
-		if (file_exists($fichier_exif)) {
-			lire_fichier($fichier_exif, $pb_ecrire);
-			$pb_exif["$fichier"] = unserialize($pb_ecrire);
+	include_spip("inc/exifReader");
 
-			return $pb_exif["$fichier"];
+	$er = new phpExifReader($fichier);
+	$er->processFile();
+	$mem_exif[$fichier] = $er->getImageInfo();
+
+	// Essayer de trouver aux:Lens
+	$mem_exif[$fichier]["auxLens"] = str_replace(" mm", "&nbsp;", lire_aux_lens($fichier));
+
+
+
+	// Completer GPS
+	if (function_exists('exif_read_data')) {
+		$exif_direc = @exif_read_data($fichier);
+
+		// Si Latitude deja fixee, la traiter
+		// Si la ref n'est ni N ni S, c'est une erreur (j'en trouve sur Flickr)
+		if (!($exif_direc["GPSLatitudeRef"] == "N" || $exif_direc["GPSLatitudeRef"] == "S")) {
+			unset($mem_exif[$fichier]["GPSLatitude"]);
 		}
-		
-	
-		include_spip("inc/exifReader");
-	
-	 	$er = new phpExifReader($fichier);
-		$er->processFile();
-		$pb_exif["$fichier"] = $er->getImageInfo();	
+		if ($mem_exif[$fichier]["GPSLatitude"]) {
+			$exif_direc["GPSLatitude"][0] = $mem_exif[$fichier]["GPSLatitude"]["Degrees"];
+			$exif_direc["GPSLatitude"][1] = ($mem_exif[$fichier]["GPSLatitude"]["Minutes"] * 100 + round($mem_exif[$fichier]["GPSLatitude"]["Seconds"] / 60 * 100)) . "/100";
 
-		// Essayer de trouver aux:Lens
-		$pb_exif["$fichier"]["auxLens"] = str_replace(" mm", "&nbsp;", lire_aux_lens($fichier));
-
-
-
-		// Completer GPS
-		if (function_exists('exif_read_data')) {
-			$exif_direc = @exif_read_data($fichier);
-			
-			// Si Latitude deja fixee, la traiter
-			// Si la ref n'est ni N ni S, c'est une erreur (j'en trouve sur Flickr)
-			if (!($exif_direc["GPSLatitudeRef"] == "N" || $exif_direc["GPSLatitudeRef"] == "S")) {
-				unset($pb_exif["$fichier"]["GPSLatitude"]);
-			}
-			if ($pb_exif["$fichier"]["GPSLatitude"]) {
-				$exif_direc["GPSLatitude"][0] = $pb_exif["$fichier"]["GPSLatitude"]["Degrees"];
-				$exif_direc["GPSLatitude"][1] = ($pb_exif["$fichier"]["GPSLatitude"]["Minutes"] * 100 + round($pb_exif["$fichier"]["GPSLatitude"]["Seconds"] / 60 * 100)) . "/100";
-				
-				$exif_direc["GPSLatitudeRef"] = $pb_exif["$fichier"]["GPSLatitudeRef"];
-			}
-			// Traiter la Latitude
-			// Retourne GPSLatitude en degres, minutes, secondes
-			// Retour GPSLatitudeInt en valeur entiere pour Google
-			if (isset($exif_direc["GPSLatitude"])) {
-			
-				$deg = $exif_direc["GPSLatitude"][0];
-				if ( strpos($deg, "/") > 0) {
-					$deg = substr($deg, 0, strpos($deg, "/"));
-				}
-				
-				$min = $exif_direc["GPSLatitude"][1];
-				if ( strpos($min, "/") > 0) {
-					$minutes = substr($min, 0, strpos($min, "/"));
-					$rap = substr($min, strpos($min, "/")+1, 12);
-					
-					$minutes = $minutes / $rap;
-					
-					$secondes = ($minutes - floor($minutes)) * 60 ;
-					$minutes = floor($minutes);
-				}
-				
-				$N_S = $exif_direc["GPSLatitudeRef"];
-				$pb_exif["$fichier"]["GPSLatitude"] = $deg."°&nbsp;$minutes"."’"."&nbsp;$secondes"."”&nbsp;$N_S";
-
-				// Retourne aussi une valeur entiere pour Google Maps				
-				$GPSLatitudeInt = $deg + ($min / 6000) ;
-				if ($N_S == "S") $GPSLatitudeInt = -1 * $GPSLatitudeInt;
-				$pb_exif["$fichier"]["GPSLatitudeInt"] = $GPSLatitudeInt ;
-			}
-
-			// Verifier que la precedente ref est E/W, sinon ne pas traiter
-			if (!($exif_direc["GPSLongitudeRef"] == "E" || $exif_direc["GPSLongitudeRef"] == "W")) {
-				unset($pb_exif["$fichier"]["GPSLongitude"]);
-			}
-			if ($pb_exif["$fichier"]["GPSLongitude"]) {
-				$exif_direc["GPSLongitude"][0] = $pb_exif["$fichier"]["GPSLongitude"]["Degrees"];
-				$exif_direc["GPSLongitude"][1] = ($pb_exif["$fichier"]["GPSLongitude"]["Minutes"] * 100 + round($pb_exif["$fichier"]["GPSLongitude"]["Seconds"] / 60 * 100)) . "/100";
-				
-				$exif_direc["GPSLongitudeRef"] = $pb_exif["$fichier"]["GPSLongitudeRef"];
-			}
-			// Traiter longitude
-			if (isset($exif_direc["GPSLongitude"])) {
-				$deg = $exif_direc["GPSLongitude"][0];
-				if ( strpos($deg, "/") > 0) {
-					$deg = substr($deg, 0, strpos($deg, "/"));
-				}
-				
-				$min = $exif_direc["GPSLongitude"][1];
-				if ( strpos($min, "/") > 0) {
-					$minutes = substr($min, 0, strpos($min, "/"));
-					$rap = substr($min, strpos($min, "/")+1, 12);
-					
-					$minutes = $minutes / $rap;
-					
-					$secondes = ($minutes - floor($minutes)) * 60 ;
-					$minutes = floor($minutes);
-				}
-				
-				$W_E = $exif_direc["GPSLongitudeRef"];
-				$pb_exif["$fichier"]["GPSLongitude"] =  $deg."°&nbsp;$minutes"."’"."&nbsp;$secondes"."”&nbsp;$W_E";
-
-				// Retourne aussi une valeur entiere pour Google Maps				
-				$GPSLongitudeInt = $deg + ($min / 6000) ;
-				if ($W_E == "W") $GPSLongitudeInt = -1 * $GPSLongitudeInt;
-				$pb_exif["$fichier"]["GPSLongitudeInt"] = $GPSLongitudeInt ;
-			}
-			
-			
+			$exif_direc["GPSLatitudeRef"] = $mem_exif[$fichier]["GPSLatitudeRef"];
 		}
+		// Traiter la Latitude
+		// Retourne GPSLatitude en degres, minutes, secondes
+		// Retour GPSLatitudeInt en valeur entiere pour Google
+		if (isset($exif_direc["GPSLatitude"])) {
+
+			$deg = $exif_direc["GPSLatitude"][0];
+			if ( strpos($deg, "/") > 0) {
+				$deg = substr($deg, 0, strpos($deg, "/"));
+			}
+
+			$min = $exif_direc["GPSLatitude"][1];
+			if ( strpos($min, "/") > 0) {
+				$minutes = substr($min, 0, strpos($min, "/"));
+				$rap = substr($min, strpos($min, "/")+1, 12);
+
+				$minutes = $minutes / $rap;
+
+				$secondes = ($minutes - floor($minutes)) * 60 ;
+				$minutes = floor($minutes);
+			}
+
+			$N_S = $exif_direc["GPSLatitudeRef"];
+			$mem_exif[$fichier]["GPSLatitude"] = $deg."°&nbsp;$minutes"."’"."&nbsp;$secondes"."”&nbsp;$N_S";
+
+			// Retourne aussi une valeur entiere pour Google Maps
+			$GPSLatitudeInt = $deg + ($min / 6000) ;
+			if ($N_S == "S") $GPSLatitudeInt = -1 * $GPSLatitudeInt;
+			$mem_exif[$fichier]["GPSLatitudeInt"] = $GPSLatitudeInt ;
+		}
+
+		// Verifier que la precedente ref est E/W, sinon ne pas traiter
+		if (!($exif_direc["GPSLongitudeRef"] == "E" || $exif_direc["GPSLongitudeRef"] == "W")) {
+			unset($mem_exif[$fichier]["GPSLongitude"]);
+		}
+		if ($mem_exif[$fichier]["GPSLongitude"]) {
+			$exif_direc["GPSLongitude"][0] = $mem_exif[$fichier]["GPSLongitude"]["Degrees"];
+			$exif_direc["GPSLongitude"][1] = ($mem_exif[$fichier]["GPSLongitude"]["Minutes"] * 100 + round($mem_exif[$fichier]["GPSLongitude"]["Seconds"] / 60 * 100)) . "/100";
+
+			$exif_direc["GPSLongitudeRef"] = $mem_exif[$fichier]["GPSLongitudeRef"];
+		}
+		// Traiter longitude
+		if (isset($exif_direc["GPSLongitude"])) {
+			$deg = $exif_direc["GPSLongitude"][0];
+			if ( strpos($deg, "/") > 0) {
+				$deg = substr($deg, 0, strpos($deg, "/"));
+			}
+
+			$min = $exif_direc["GPSLongitude"][1];
+			if ( strpos($min, "/") > 0) {
+				$minutes = substr($min, 0, strpos($min, "/"));
+				$rap = substr($min, strpos($min, "/")+1, 12);
+
+				$minutes = $minutes / $rap;
+
+				$secondes = ($minutes - floor($minutes)) * 60 ;
+				$minutes = floor($minutes);
+			}
+
+			$W_E = $exif_direc["GPSLongitudeRef"];
+			$mem_exif[$fichier]["GPSLongitude"] =  $deg."°&nbsp;$minutes"."’"."&nbsp;$secondes"."”&nbsp;$W_E";
+
+			// Retourne aussi une valeur entiere pour Google Maps
+			$GPSLongitudeInt = $deg + ($min / 6000) ;
+			if ($W_E == "W") $GPSLongitudeInt = -1 * $GPSLongitudeInt;
+			$mem_exif[$fichier]["GPSLongitudeInt"] = $GPSLongitudeInt ;
+		}
+
+
+	}
 	
-		$pb_ecrire = serialize($pb_exif["$fichier"]);
-		ecrire_fichier($fichier_exif, $pb_ecrire);
-	
-	
-		return $pb_exif["$fichier"];
+	ecrire_fichier($fichier_exif, serialize($mem_exif[$fichier]));
+	return $mem_exif[$fichier];
 }
 
-function lire_exif($fichier, $type=false) {
+/**
+ * Lire une valeur exif d'une umage
+ * @param string $fichier
+ * @param string $type
+ * @return array
+ */
+function lire_exif($fichier, $type=null) {
 	
 	$exif = extraire_exif($fichier);
-	
-//	print_r($exif);	
-	
-	if (!$type) return $exif;
-	else return $exif["$type"];
-	
-	
-	
+
+	if (!$type)
+		return $exif;
+	else
+		return $exif["$type"];
 }
+
 
 function extraire_iptc($fichier) {
 	global $pb_iptc;
