@@ -58,6 +58,7 @@ function jeux_diag_echecs_init() {
 		police=5		// Code de la police utilisee pour les coordonnees (1 a 5)
 		flip=non		// Faut-il retourner l'echiquier ?
 		coords=oui		// Afficher les coordonnees ?
+		truecolor=non	// enregistrement en 24bit
 	";
 }
 

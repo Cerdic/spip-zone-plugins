@@ -251,9 +251,13 @@ second */
 		if ($newsize>639) {$newsize=640;}; // taille maximale pour éviter les confusion taille de case et taille de l'image
 		$img_finale = imagecreatetruecolor($newsize,$newsize);
 		imagecopyresampled($img_finale,$chessboard,0,0,0,0,$newsize,$newsize,$taille*$nbcases+2*$bordure,$taille*$nbcases+2*$bordure);
+		// converti l'image en 256 couleurs si truecolor=non
+		if (!jeux_config('truecolor')) { imagetruecolortopalette($img_finale,false,256); };	
 		$img($img_finale, $fichier_dest);
 	}
 	else {
+		// converti l'image en 256 couleurs si truecolor=non
+		if (!jeux_config('truecolor')) { imagetruecolortopalette($chessboard,false,256); };	
 		$img($chessboard, $fichier_dest);
 	}
 	
