@@ -225,15 +225,17 @@ function lire_iptc ($fichier, $type=false) {
 
 /**
  * Tester si on peut traiter l'image compte tenu de la limite de memoire de GD2
- * @param object $im
+ * @param string $fichier
  * @param int $largeur
  * @param int $hauteur
  * @return string
  */
-function test_traiter_image($im, $largeur, $hauteur) {
+function test_traiter_image($fichier, $largeur, $hauteur) {
 	$surface = $largeur * $hauteur;
 
 	if ($surface > $GLOBALS["meta"]["max_taille_vignettes"])
+		return '';
+	if (!file_exists($fichier))
 		return '';
 
 	return ' ';
@@ -257,7 +259,7 @@ function image_histogramme($im) {
 	$y_i = $image["hauteur"];
 	$surface = $x_i * $y_i;
 
-	if (!test_traiter_image($im, $x_i, $y_i) ) return;
+	if (!test_traiter_image($image["fichier"], $x_i, $y_i) ) return;
 	
 	
 	$im = $image["fichier"];
