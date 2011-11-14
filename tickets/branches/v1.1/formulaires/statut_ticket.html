@@ -17,6 +17,7 @@
 					<option value="ouvert"[(#ENV{statut}|=={ouvert}|?{" selected='selected'",""})]>[(#VAL{ouvert}|tickets_texte_statut)]</option>
 					<option value="resolu"[(#ENV{statut}|=={resolu}|?{" selected='selected'",""})]>[(#VAL{resolu}|tickets_texte_statut)]</option>
 					<option value="ferme"[(#ENV{statut}|=={ferme}|?{" selected='selected'",""})]>[(#VAL{ferme}|tickets_texte_statut)]</option>
+					<option value="poubelle"[(#ENV{statut}|=={poubelle}|?{" selected='selected'",""})]>[(#VAL{poubelle}|tickets_texte_statut)]</option>
 				</select>
 			</li>
 		</ul>

@@ -3,6 +3,23 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
+ * <BOUCLE(TICKETS)>
+ */
+function boucle_TICKETS_dist($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+	$mstatut = $id_table .'.statut';
+
+	// Restreindre aux elements considérés comme publiés soit pas en :
+	// -* poubelle (poubelle)
+	// -* en cours de rédac (redac)
+	if (!isset($boucle->modificateur['criteres']['statut']) OR !isset($boucle->modificateur['criteres']['tout'])) {
+		array_unshift($boucle->where,array("'IN'", "'$mstatut'", "'(\\'ouvert\\',\\'resolu\\',\\'ferme\\',\\'redac\\')'"));
+	}
+
+	return calculer_boucle($id_boucle, $boucles);
+}
+/**
  * Crée la liste des options du select des champs :
  * -* jalon
  * -* version
@@ -117,7 +134,8 @@ function tickets_icone_statut ($niveau,$full=false) {
 		"redac" => "puce-blanche.gif",
 		"ouvert" => "puce-orange.gif",
 		"resolu" => "puce-verte.gif",
-		"ferme" => "puce-poubelle.gif"
+		"ferme" => "puce-poubelle.gif",
+		"poubelle" => "puce-poubelle.gif"
 		);
 	if($full)
 		return '<img src="'.find_in_path('prive/images/'.$img[$niveau]).'" alt="'.tickets_texte_statut($niveau).'" />';
@@ -144,6 +162,7 @@ function tickets_liste_statut($connecte = true){
 		"ouvert" => _T("tickets:statut_ouvert"),
 		"resolu" => _T("tickets:statut_resolu"),
 		"ferme" => _T("tickets:statut_ferme"),
+		"poubelle" => _T("tickets:statut_poubelle")
 	);
 	if (!$connecte) {
 		unset($statuts['redac']);

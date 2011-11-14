@@ -166,6 +166,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_ferme_long' => 'All the closed bug reports',
 	'statut_inchange' => 'The status has been modified.',
 	'statut_ouvert' => 'Opened and discussed',
+	'statut_poubelle' => 'In the dustbin',
 	'statut_redac' => 'Editing in progress',
 	'statut_resolu' => 'Resolved',
 	'statut_resolu_long' => 'All the resolved bug reports',
