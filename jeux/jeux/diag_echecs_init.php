@@ -54,12 +54,12 @@ function jeux_diag_echecs_init() {
 		blancs=blanc	// Couleur des cases 'blanches'
 		noirs=brun		// Couleur des cases 'noires'
 		fond=blanc		// Couleur de fond de la page web
-		bordure=2		// Epaisseur de la bordure de l'echiquier, en pixels
+		bordure=2		// Epaisseur de la bordure de l'echiquier (pixels)
 		police=5		// Code de la police utilisee pour les coordonnees (1 a 5)
 		flip=non		// Faut-il retourner l'echiquier ?
 		coords=oui		// Afficher les coordonnees ?
-		truecolor=non	// enregistrement en 24bit
-		cache=30		// nombre de jour avant recalcul de l'image
+		truecolor=non	// Image finale en 24bit ?
+		cache=30		// Nombre de jour avant recalcul de l'image
 	";
 }
 

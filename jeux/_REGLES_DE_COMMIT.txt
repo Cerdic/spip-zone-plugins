@@ -57,10 +57,10 @@ C.  Modification du code
   
 D. Clarté du code.
 
-	Il n'y a actuellement pas de règles précises d'écriture correct du
+	Il n'y a actuellement pas de règles précises d'écriture correcte du
 	code. Il faut juste garder du code indenté (i.e. indenter chaque
 	fermeture sur une nouvelle ligne pour les gros blocs), en général,
-	suivre la façon dont c'est fait dans les fichiers de bases.
+	suivre la façon dont c'est fait dans les fichiers de base.
 
 	Il faut toujours mettre une chaîne de documentation quand c'est
 	possible et quand on le peut documenter le processus/l'algorithme que
