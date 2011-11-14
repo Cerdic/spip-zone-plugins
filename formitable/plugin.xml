@@ -1,9 +1,9 @@
 <plugin>
 	<nom>Formitable</nom>
-	<slogan>Nouveau traitement pour formidable</slogan>
-	<auteur>JLuc</auteur>
+	<slogan>Enregistrement dans les tables de l'utilisateur, pour formidable</slogan>
+	<auteur>[JLuc->http://ouhpla.net]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.2.0</version>
+	<version>0.2.1</version>
 	<version_base>0.2</version_base>
 	<etat>test</etat>
 	<description>Enregistrement des donn&#233;es d'un formulaire formidable dans une table utilisateur, avec correspondance de chaque champ du formulaire vers un champ de la table utilisateur, et traitement optionnel des données.</description>
@@ -12,4 +12,5 @@
 	<necessite id="spip" version="[2.0.0;2.1.99]"/>
 	<necessite id="formidable" />
 	<categorie>communication</categorie>
+	<icon>images/formitable-48.png</icon>
 </plugin>
