@@ -54,38 +54,66 @@ function formulaires_editer_ticket_verifier($id_ticket='new', $retour='', $confi
 
 	$erreurs = formulaires_editer_objet_verifier('ticket',$id_ticket,array('titre','texte'));
 	
-	$doc = &$_FILES['ajouter_document'];
-	spip_log($doc,'test');
-	spip_log($_FILES,'test');
-	if (isset($_FILES['ajouter_document'])
-	AND $_FILES['ajouter_document']['tmp_name']) {
-		include_spip('inc/ajouter_documents');
-		list($extension,$doc['name']) = fixer_extension_document($doc);
-		$acceptes = ticket_documents_acceptes();
-
-		if (!in_array($extension, $acceptes)) {
-			# normalement on n'arrive pas ici : pas d'upload si aucun format
-			if (!$formats = join(', ',$acceptes))
-				$formats = '-'; //_L('aucun');
-			$erreurs['ajouter_document'] = _T('public:formats_acceptes', array('formats' => $formats));
-		}
-		else {
-			include_spip('inc/getdocument');
-			if (!deplacer_fichier_upload($doc['tmp_name'], $tmp.'.bin'))
-				$erreurs['ajouter_document'] = _T('copie_document_impossible');
-
-#		else if (...)
-#		verifier le type_document autorise
-#		retailler eventuellement les photos
+	/**
+	 * Utilisation des fonctions de nospam pour filtrer un peu
+	 */
+	if (include_spip('inc/nospam')) {
+		include_spip('inc/texte');
+		$texte = _request('texte');
+        $caracteres = compter_caracteres_utiles($texte);
+        // moins de 10 caracteres sans les liens = spam !
+        if ($caracteres < 10){
+                $erreurs['texte'] = _T('forum_attention_dix_caracteres');
+        }
+        // on analyse le titre
+        $infos_titre = analyser_spams(_request('titre'));
+        // si un lien dans le titre = spam !
+        if ($infos_titre['nombre_liens'] > 0)
+                $erreurs['titre'] = _T('nospam:erreur_spam');
+        // on analyse le texte
+        $infos_texte = analyser_spams($texte);
+        if ($infos_texte['nombre_liens'] > 0) {
+                // si un lien a un titre de moins de 3 caracteres = spam !
+                if ($infos_texte['caracteres_texte_lien_min'] < 3) {
+                        $erreurs['texte'] = _T('nospam:erreur_spam');
+                }
+                // si le texte contient plus de trois lien = spam !
+                if ($infos_texte['nombre_liens'] >= 3)
+                        $erreurs['texte'] = _T('nospam:erreur_spam');
+        }
+	}
+	if(count($erreurs) == 0){
+		$doc = &$_FILES['ajouter_document'];
+		if (isset($_FILES['ajouter_document'])
+		AND $_FILES['ajouter_document']['tmp_name']) {
+			include_spip('inc/ajouter_documents');
+			list($extension,$doc['name']) = fixer_extension_document($doc);
+			$acceptes = ticket_documents_acceptes();
+	
+			if (!in_array($extension, $acceptes)) {
+				# normalement on n'arrive pas ici : pas d'upload si aucun format
+				if (!$formats = join(', ',$acceptes))
+					$formats = '-'; //_L('aucun');
+				$erreurs['ajouter_document'] = _T('public:formats_acceptes', array('formats' => $formats));
 			}
-
-		// si ok on stocke les meta donnees, sinon on efface
-		if (isset($erreurs['ajouter_document'])) {
-			spip_unlink($tmp.'.bin');
-			unset ($_FILES['ajouter_document']);
-		} else {
-			$doc['tmp_name'] = $tmp.'.bin';
-			ecrire_fichier($tmp.'.txt', serialize($doc));
+			else {
+				include_spip('inc/getdocument');
+				if (!deplacer_fichier_upload($doc['tmp_name'], $tmp.'.bin'))
+					$erreurs['ajouter_document'] = _T('copie_document_impossible');
+	
+				#		else if (...)
+				#		verifier le type_document autorise
+				#		retailler eventuellement les photos
+				}
+	
+			// si ok on stocke les meta donnees, sinon on efface
+			if (isset($erreurs['ajouter_document'])) {
+				spip_unlink($tmp.'.bin');
+				unset ($_FILES['ajouter_document']);
+			} else {
+				$doc['tmp_name'] = $tmp.'.bin';
+				ecrire_fichier($tmp.'.txt', serialize($doc));
+			}
 		}
 	}
 	return $erreurs;
