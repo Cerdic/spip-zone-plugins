@@ -68,7 +68,7 @@ function add_outil($tableau) {
 // ajoute une variable a $cs_variables et fabrique une liste des chaines et des nombres
 function add_variable($tableau) {
 	global $cs_variables;
-	$nom = $tableau['nom'];
+	if(isset($tableau['nom'])) $nom = $tableau['nom']; else return;
 	if(isset($cs_variables[$nom])) {
 		cs_log("Variable $nom dupliquee ??");
 		return;
@@ -323,6 +323,18 @@ function cs_sauve_configuration() {
 	if(_request('cmd')=='pack' || (_request('cmd')=='descrip' && _request('outil')=='pack')) $GLOBALS['cs_pack_actuel'] = $temp;
 }
 
+function cs_autorisation_alias(&$tab, $autoriser) {
+	static $ok = array();
+	if(isset($ok[$autoriser])) return;
+	if(function_exists($f='autoriser_'.$autoriser.'_configurer') || function_exists($f.='_dist')) {
+		$g = str_replace('_','',objet_type($autoriser));
+		if($g != $autoriser) {
+			$tab[] = "function autoriser_{$g}_configurer(\$faire, \$type, \$id=0, \$qui=NULL, \$opt=NULL) {\n\treturn function_exists('$f')\n\t?$f(\$faire, \$type, \$id, \$qui, \$opt):true; \n}";
+			$ok[$autoriser] = 1;
+		}
+	}
+}
+
 // cree les tableaux $infos_pipelines et $infos_fichiers, puis initialise $cs_metas_pipelines
 function cs_initialise_includes($count_metas_outils) {
 	global $outils, $cs_metas_pipelines;
@@ -338,6 +350,20 @@ function cs_initialise_includes($count_metas_outils) {
 		$infos_fichiers['code_fonctions'][] = $temp;
 	// variable de verification
 	$infos_fichiers['code_options'][] = "\$GLOBALS['cs_verif']=$count_metas_outils;";
+	// horrible hack sur les autorisations SPIP 3.0 (en attendant la correction !!)
+	if(defined('_SPIP30000')) {
+		cs_autorisation_alias($infos_fichiers['code_spip_options'], 'plugins');
+		cs_autorisation_alias($infos_fichiers['code_spip_options'], 'cs');
+		global $cs_variables;
+		for($i=2; $i<count($tmp=array_keys($cs_variables)); $i++)
+			cs_autorisation_alias($infos_fichiers['code_spip_options'], 'variable_'.$tmp[$i]);
+		foreach ($outils as $i=>$outil) {
+			cs_autorisation_alias($infos_fichiers['code_spip_options'], 'outil_'.$outil['id']);
+			if(isset($outil['categorie']))
+				cs_autorisation_alias($infos_fichiers['code_spip_options'], 'categorie_'.$outil['categorie']);
+		}
+		cs_autorisation_alias($infos_fichiers['code_spip_options'], 'categorie_divers');
+	}
 	// parcours de tous les outils
 	foreach ($outils as $i=>$outil) {
 		$inc = $outil['id'];

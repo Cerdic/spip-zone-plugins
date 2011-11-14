@@ -963,7 +963,6 @@ add_variables( array(
 	'format' => _format_NOMBRE,
 	'defaut' => 35,
 	'code:%s' => "define('_MAX_COUPE_URL', %s);",
-), array(
 ));
 // attention : liens_orphelins doit etre place avant mailcrypt ou liens_en_clair
 add_outil( array(
