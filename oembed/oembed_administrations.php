@@ -19,16 +19,18 @@ function oembed_upgrade($nom_meta_base_version,$version_cible){
 			include_spip('base/abstract_sql');
 			creer_base();
 			$providers = array(
-				'http://*.youtube.com/watch*'        			=> 'http://www.youtube.com/oembed',
-				'http://youtu.be/*'								=> 'http://www.youtube.com/oembed',
-				'http://blip.tv/file/*'							=> 'http://blip.tv/oembed/',
-				'http://*.vimeo.com/*'							=> 'http://www.vimeo.com/api/oembed.json',
-				'http://vimeo.com/*'							=> 'http://www.vimeo.com/api/oembed.json',
-				'http://*.dailymotion.com/*'					=> 'http://www.dailymotion.com/api/oembed',
-				'http://*.flickr.com/*'							=> 'http://www.flickr.com/services/oembed/',
-				'http://flickr.com/*'							=> 'http://www.flickr.com/services/oembed/',
-				'http://soundcloud.com/*'      =>   'http://soundcloud.com/oembed',
+				'http://*.youtube.com/watch*'    =>   'http://www.youtube.com/oembed',
+				'http://youtu.be/*'              =>   'http://www.youtube.com/oembed',
+				'http://blip.tv/file/*'          =>   'http://blip.tv/oembed/',
+				'http://*.vimeo.com/*'           =>   'http://www.vimeo.com/api/oembed.json',
+				'http://vimeo.com/*'             =>   'http://www.vimeo.com/api/oembed.json',
+				'http://*.dailymotion.com/*'     =>   'http://www.dailymotion.com/api/oembed',
+				'http://*.flickr.com/*'          =>   'http://www.flickr.com/services/oembed/',
+				'http://flickr.com/*'            =>   'http://www.flickr.com/services/oembed/',
+				'http://soundcloud.com/*'        =>   'http://soundcloud.com/oembed',
 			  'http://*.soundcloud.com/*'      =>   'http://soundcloud.com/oembed',
+			  'http://slideshare.net/*/*'      =>   'http://www.slideshare.net/api/oembed/2',
+				'http://www.slideshare.net/*/*'  =>   'http://www.slideshare.net/api/oembed/2',
 			);
 			foreach ($providers as $scheme => $endpoint) {
 				sql_insertq('spip_oembed_providers',array('scheme'=>$scheme,'endpoint'=>$endpoint));
