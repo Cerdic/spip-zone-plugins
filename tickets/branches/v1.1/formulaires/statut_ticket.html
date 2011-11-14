@@ -1,0 +1,27 @@
+<div class="formulaire_spip formulaire_editer formulaire_editer_statut_ticket ajax">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="editer_statut">
+				[(#ENV{statut}|=={redac}|oui)
+				<div class="explication">
+					<:tickets:explication_redaction:>
+				</div>]
+				<label for="statut"><:tickets:champ_statut:></label>
+				<select name="statut" id="statut" class="text" onchange="jQuery('#validation_bouton_statut').slideDown();">
+					<option value="redac"[(#ENV{statut}|=={redac}|?{" selected='selected'",""})]>[(#VAL{redac}|tickets_texte_statut)]</option>
+					<option value="ouvert"[(#ENV{statut}|=={ouvert}|?{" selected='selected'",""})]>[(#VAL{ouvert}|tickets_texte_statut)]</option>
+					<option value="resolu"[(#ENV{statut}|=={resolu}|?{" selected='selected'",""})]>[(#VAL{resolu}|tickets_texte_statut)]</option>
+					<option value="ferme"[(#ENV{statut}|=={ferme}|?{" selected='selected'",""})]>[(#VAL{ferme}|tickets_texte_statut)]</option>
+				</select>
+			</li>
+		</ul>
+		<p class='boutons' id="validation_bouton_statut" style="display:none;">
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	</div></form>
+</div>

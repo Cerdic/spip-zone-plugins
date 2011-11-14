@@ -1,0 +1,58 @@
+[(#REM) Squelette du contenu de la page (exec=ticket_afficher)
+	- servant a l'affichage du ticket
+	- permettant l'acces a son edition
+	- donnant acces a la modification du statut et de l'assignation
+	- permettant la depose de messages
+]
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+<BOUCLE_afficher_contenu(TICKETS){id_ticket=#ENV{id_ticket}}{statut?}>
+<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+<div class='label'><:info_titre:></div>
+<div dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</div>
+</div>
+<div>
+		<div style="float: #LANG_RIGHT; padding-#LANG_RIGHT: 20px;">
+			[<div class="champ">
+				<:tickets:champ_statut:> <strong>(#STATUT|tickets_texte_statut)</strong>
+			</div>]
+			<BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}{tous}>
+				<div style="color: red;"><:tickets:assigne_a:> <strong>#NOM</strong></div>
+			</BOUCLE_assigne>
+		</div>
+		<div>
+			[<div class="champ">
+				<:tickets:champ_severite:> <strong>(#SEVERITE|tickets_texte_severite)</strong>
+			</div>]
+			[<:tickets:champ_type:> <strong>(#TRACKER|tickets_texte_tracker)</strong>]
+		</div>
+
+		[(#REM) - Date de creation et auteur du ticket]
+		<div class="champ">
+			<BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}>
+			[(#SET{date,[(#_afficher_contenu:DATE|affdate_court)]})]
+			<:tickets:date_creation_auteur{date=#GET{date},nom=#NOM}:>
+			</BOUCLE_auteur>
+		</div>
+		<br />		
+		[(#REM) - Champs optionnels]		
+		[(#PROJET|ou{#COMPOSANT}|ou{#VERSION}|ou{#JALON}|oui)
+		<div>
+			[<div><:tickets:champ_projet:> <strong>(#PROJET)</strong></div>]
+			[<div><:tickets:champ_composant:> <strong>(#COMPOSANT)</strong></div>]
+			[<div><:tickets:champ_version:> <strong>(#VERSION)</strong></div>]
+			[<div><:tickets:champ_jalon:> <strong>(#JALON)</strong></div>]
+		</div>]
+		[<div class="champ">
+			<:tickets:champ_navigateur:> (#NAVIGATEUR|tickets_texte_navigateur)
+		</div>]
+</div>
+<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+<div class='label'><:info_texte:></div>
+<div dir='#LANG_DIR' class='#EDIT{texte} texte'>[(#TEXTE|image_reduire{500,0})]</div>
+</div>
+[<div class="champ contenu_notes">
+<div class='label'><:info_notes:></div>
+<div dir='#LANG_DIR' class='#EDIT{notes} notes'>(#NOTES)</div>
+</div>]
+[<div><:tickets:champ_exemple:> : <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
+</BOUCLE_afficher_contenu>

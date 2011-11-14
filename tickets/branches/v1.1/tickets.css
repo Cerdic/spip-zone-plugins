@@ -1,0 +1,43 @@
+/* Pages publiques des tickets */
+.ticket .cartouche {background:#999; padding:3px 1em;
+	border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px;}
+.ticket .cartouche a {float:right; color:white; margin-top:3px;}
+#contenu .ticket .cartouche h1 {font-size:140%; color:#fff; margin:0; clear: none;}
+#contenu .ticket h2.titre {font-size:120%; clear: none;}
+#contenu .ticket h3 {margin:2em 0 .3em;}
+
+.ticket .infos {float:right; max-width:200px; margin:2em 0 1em 1em; padding: 0.5em;  background:#fafafa; border:1px solid #eee;
+	border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px;}
+.ticket .infos .formulaire_spip {margin:0; padding:0;}
+.ticket table { margin:0 0 .5em 0;} 
+.ticket dl { margin:0 0 .5em 0;} 
+.ticket dt {float: left; clear: left; width: 60px; text-align: right;} 
+.ticket dd {margin: 0 0 0 70px; padding: 0 .2em .2em 0;}
+
+.ticket_commentaires {clear:both; background:#ccc; padding:.5em; margin-top:2em;
+	border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px;}
+
+.ticket_commentaires ul.forum {margin:0; padding: 0; list-style: none;
+	border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px;}
+.ticket_commentaires ul.forum li {margin: 0; padding: 10px; list-style: none; border-bottom: 1px solid #F0F0F0; background:#fafafa;}
+.ticket_commentaires .forum-chapo {	background:#fff; padding:3px .5em; margin-top:.5em; border:1px solid #ccc;
+	border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px;}
+.ticket_commentaires .formulaire_forum,
+.ticket_commentaires .formulaire_commenter_ticket {margin:2em;}
+.ticket_commentaires .formulaire_forum legend { background: transparent; }
+.formulaire_editer_ticket input.text {width:98%;}
+.formulaire_editer_statut_ticket li.editer_statut .explication {color:#D06C07;}
+li.editer_forum_ticket .explication {display:none;}
+
+/* start - table */
+.ticket table,
+.ticket table.spip {margin: 15px 0px; width:100%; text-align:left; border:1px solid #ccc; border-spacing:2px; border-collapse:separate !important;}
+.ticket table th,
+.ticket table.spip th{background: white; color: #666; padding:3px; text-align: left; border:none;}
+.ticket table tr,
+.ticket table.spip tr{color: #5b5b5b; background:#f3f3f3;}
+.ticket table td,
+.ticket table.spip td {padding:3px; border:none;}
+.ticket table tr.even,
+.ticket table.spip tr.row_even {background:#eee;}
+.ticket table tr:hover {background:#EAF1F5;}

@@ -1,0 +1,33 @@
+<BOUCLE_principale_ticket(TICKETS){id_ticket}>
+[(#PLUGIN{Z}|oui)
+	<INCLURE{fond=structure,type=ticket,composition,env} />
+][(#PLUGIN{Z}|non)
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<INCLURE{fond=inc-head}>
+<INCLURE{fond=head/ticket,env}>
+</head>
+<body class="page_ticket">
+<div id="page">
+	<INCLURE{fond=inc-entete}>
+	<div id="conteneur">
+		<div id="contenu">
+			<INCLURE{fond=contenu/ticket,env}>
+		</div>
+
+		<div id="navigation">
+
+        [(#REM) Menu de navigation par rubriques ]
+        <INCLURE{fond=inc-rubriques}{id_rubrique}>
+
+		#FORMULAIRE_RECHERCHE
+		</div>
+	</div>
+
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+</div>
+#SPIP_CRON
+</body>
+</html>
+]</BOUCLE_principale_ticket>

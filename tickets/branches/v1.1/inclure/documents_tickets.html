@@ -1,0 +1,42 @@
+[(#REM) Portfolio : album d'images ]
+<B_documents_portfolio>
+<div class="documents documents_portfolio">
+	<h2 class="h2"><:info_portfolio:></h2>
+	<B_documents_portfolio>
+	<ul class="liste-items">
+	<BOUCLE_documents_portfolio(DOCUMENTS) {id_ticket} {mode=document}{extension IN png,jpg,gif} {par num titre, date}{vu=non}{tout}>[
+	<li class="item">
+	<a href="(#URL_DOCUMENT)" type="#MIME_TYPE"[ title="(#TITRE|attribut_html|couper{80})"]>[(#FICHIER
+		|image_reduire{0,100}
+		|inserer_attribut{class,spip_logos}
+		|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]})]</a>
+	<strong class="#EDIT{titre}"><a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a></strong>
+	<span class="small">(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</span>
+	[<div class="#EDIT{descriptif}">(#DESCRIPTIF|sinon{...})</div>]
+	[(#AUTORISER{modifier,ticket,#ID_TICKET}|oui)
+			<div class="actions">[(#BOUTON_ACTION{<:icone_supprimer_image:>,[(#URL_ACTION_AUTEUR{documenter,#ID_TICKET/ticket/#ID_DOCUMENT,#SELF})]})]</div>]
+	</li>]</BOUCLE_documents_portfolio>
+	</ul>
+</div>
+</B_documents_portfolio>
+
+
+[(#REM)
+	Liste des autres documents joints
+]
+<B_documents_joints>
+	<div class="liste documents documents_joints">
+	<h2 class="h2"><:titre_documents_joints:></h2>
+	<ul class="liste-items">
+		<BOUCLE_documents_joints(DOCUMENTS) {id_ticket} {extension !IN gif,jpg,png} {vu=non}{par num titre, date}{tout}>[
+		<li class="item">
+			<strong class="#EDIT{titre}"><a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a></strong>
+			<span class="small">(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</span>
+			[<div class="date"><:tickets:info_document_ajoute:> <abbr title="[(#DATE|date_iso)]">(#DATE|affdate)</abbr></div>]
+			[<div class="#EDIT{descriptif}">(#DESCRIPTIF|sinon{...})</div>]
+			[(#AUTORISER{modifier,ticket,#ID_TICKET}|oui)
+			<div class="actions">[(#BOUTON_ACTION{<:icone_supprimer_document:>,[(#URL_ACTION_AUTEUR{documenter,#ID_TICKET/ticket/#ID_DOCUMENT,#SELF})]})]</div>]
+		</li>]</BOUCLE_documents_joints>
+	</ul>
+	</div>
+</B_documents_joints>
