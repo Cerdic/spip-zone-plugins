@@ -21,7 +21,7 @@ function oembed_affichage_final($page) {
 
 // insertion des traitements oembed dans l'ajout des documents distants
 function oembed_renseigner_document_distant($flux) {
-	$medias = array('photo' => 'image','video' => 'video');
+	$medias = array('photo' => 'image','video' => 'video', 'sound' => 'audio');
 	include_spip('inc/config');
 	include_spip('inc/oembed');
 	// on tente de récupérer les données oembed

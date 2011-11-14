@@ -26,7 +26,9 @@ function oembed_upgrade($nom_meta_base_version,$version_cible){
 				'http://vimeo.com/*'							=> 'http://www.vimeo.com/api/oembed.json',
 				'http://*.dailymotion.com/*'					=> 'http://www.dailymotion.com/api/oembed',
 				'http://*.flickr.com/*'							=> 'http://www.flickr.com/services/oembed/',
-				'http://flickr.com/*'							=> 'http://www.flickr.com/services/oembed/'
+				'http://flickr.com/*'							=> 'http://www.flickr.com/services/oembed/',
+				'http://soundcloud.com/*'      =>   'http://soundcloud.com/oembed',
+			  'http://*.soundcloud.com/*'      =>   'http://soundcloud.com/oembed',
 			);
 			foreach ($providers as $scheme => $endpoint) {
 				sql_insertq('spip_oembed_providers',array('scheme'=>$scheme,'endpoint'=>$endpoint));
@@ -40,6 +42,7 @@ function oembed_upgrade($nom_meta_base_version,$version_cible){
 		}
 	}
 }
+
 
 function oembed_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_oembed_providers");
