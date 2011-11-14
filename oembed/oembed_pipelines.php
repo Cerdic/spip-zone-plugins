@@ -86,10 +86,18 @@ function oembed_post_edition($flux) {
 				spip_log('ajout de la vignette'.$data['thumbnail_url'].' pour '.$flux['data']['oembed'],'oembed.'._LOG_DEBUG);
 				// cf formulaires_illustrer_document_traiter_dist()
 				$ajouter_documents = charger_fonction('ajouter_documents', 'action');
-				include_spip('inc/joindre_document');
-				set_request('url',$data['thumbnail_url']);
-				set_request('joindre_distant','oui');
-				$files = joindre_trouver_fichier_envoye();
+				if (preg_match(",^\w+://,",$data['thumbnail_url'])){
+					include_spip('inc/joindre_document');
+					set_request('url',$data['thumbnail_url']);
+					set_request('joindre_distant','oui');
+					$files = joindre_trouver_fichier_envoye();
+				}
+				elseif (file_exists($data['thumbnail_url'])) {
+					$files = array(array(
+						'name' => basename($data['thumbnail_url']),
+						'tmp_name' => $data['thumbnail_url']
+					));
+				}
 				$ajoute = action_ajouter_documents_dist('new',$files,'',0,'vignette');
 				if (is_int(reset($ajoute))){
 					$id_vignette = reset($ajoute);
