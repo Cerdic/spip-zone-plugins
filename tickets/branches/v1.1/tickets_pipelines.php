@@ -266,13 +266,42 @@ function tickets_formulaire_traiter($flux){
 				revision_ticket($id_ticket, array('id_assigne'=>$new_assigne));
 			}
 		}
-		if ($notifications = charger_fonction('notifications', 'inc')) {
-			$notifications('commenterticket', $flux['args']['args'][6],
-			array(
-					'id_auteur' => id_assigne,
-					'texte' => texte
-			)
-			);
+	}
+	return $flux;
+}
+
+/**
+ * Insertion dans le pipeline notifications_destinataires (Forum)
+ * Ajoute des destinataires dans les notifications
+ * 
+ * @param array $flux : le contexte du pipeline
+ * @return array $flux : le contexte modifié
+ */
+function tickets_notifications_destinataires($flux){
+	/**
+	 * Notification des auteurs de tickets et des assignés et des autres forumeurs lorsque le post est validé
+	 */
+	if(($flux['args']['quoi'] == 'forumvalide')){
+		if(($flux['args']['options']['forum']['objet'] == 'ticket') && ($id_ticket = intval($flux['args']['options']['forum']['id_objet']))){
+			/**
+			 * On notifie l'id_auteur et l'id_assigné du ticket s'ils ne sont pas l'auteur du post en question
+			 */
+			$auteurs = sql_fetsel('id_auteur,id_assigne','spip_tickets','id_ticket='.intval($id_ticket).' AND id_auteur !='.intval($flux['args']['options']['forum']['id_auteur']));
+			if(is_array($auteurs)){
+				foreach($auteurs as $auteur){
+					$email = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($auteur));
+					$flux['data'][] = $email;
+				}
+			}
+			/**
+			 * On notifie les autres forumeurs du ticket
+			 * GROUP BY id_auteur
+			 */
+			$id_forums = sql_select('*','spip_forum','objet='.sql_quote('ticket').' AND id_objet='.intval($id_ticket).' AND id_forum != '.intval($flux['args']['options']['forum']['id_forum']),array('id_auteur'));
+			while($forum = sql_fetch($id_forums)){
+				$email = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($forum['id_auteur']));
+				$flux['data'][] = $email;
+			}
 		}
 	}
 	return $flux;

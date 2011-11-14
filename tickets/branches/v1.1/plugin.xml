@@ -24,7 +24,7 @@
 	</description>
 	<icon>imgs/logo-bugs.png</icon>
 
-	<version>1.9.0</version>
+	<version>1.9.1</version>
 	<version_base>1.4</version_base>
 	<etat>stable</etat>
 
@@ -99,6 +99,10 @@
 	</pipeline>
 	<pipeline>
 		<nom>formulaire_traiter</nom>
+		<inclure>tickets_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>notifications_destinataires</nom>
 		<inclure>tickets_pipelines.php</inclure>
 	</pipeline>
 

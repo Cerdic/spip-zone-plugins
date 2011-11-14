@@ -7,16 +7,13 @@ function tickets_notifications() {}
 
 /**
  * 
- * Fonction appelée lors du changement de statut d'un ticket
+ * Fonction de nortification appelée lors du changement de statut d'un ticket
  * 
  * @return 
  * @param object $quoi
  * @param object $id_article
  * @param object $options
  */
- 
-
-
 function notifications_instituerticket_dist($quoi, $id_ticket, $options) {
 	
 	// ne devrait jamais se produire
@@ -32,12 +29,6 @@ function notifications_assignerticket_dist($quoi, $id_ticket, $options) {
 	
 	$notifier_assignation_ticket = charger_fonction('notifier_assignation_ticket','inc');
 	$notifier_assignation_ticket($id_ticket,$options);
-}
-
-function notifications_commenterticket_dist($quoi, $id_ticket, $options) {
-	
-	$notifier_commentaire_ticket = charger_fonction('notifier_commentaire_ticket','inc');
-	$notifier_commentaire_ticket($id_ticket,$options);
 }
 
 ?>
