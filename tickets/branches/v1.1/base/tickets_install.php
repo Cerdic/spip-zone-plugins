@@ -40,29 +40,6 @@ function tickets_declarer_tables_principales($tables_principales){
 		'field' => &$spip_tickets,
 		'key' => &$spip_tickets_key);
 
-	/**
-	 * En dessous de SPIP 2.1 on garde la table spip_tickets_forum
-	 */
-	if(version_compare($GLOBALS['spip_version_branche'],'2.1','<')){
-		$spip_tickets_forum = array(
-				"id_ticket_forum"	=> "bigint(21) NOT NULL",
-				"id_ticket"	=> "bigint(21) NOT NULL",
-				"texte"	=> "longtext DEFAULT '' NOT NULL",
-				"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-				"id_auteur"	=> "bigint(21) NOT NULL",
-				"ip"	=> "varchar(16) DEFAULT '' NOT NULL",
-				"maj"	=> "TIMESTAMP"
-		);
-		$spip_tickets_forum_key = array(
-				"PRIMARY KEY"	=> "id_ticket_forum",
-				"KEY id_ticket"	=> "id_ticket"
-				);
-
-		$tables_principales['spip_tickets_forum'] = array(
-			'field' => &$spip_tickets_forum,
-			'key' => &$spip_tickets_forum_key);
-	}
-
 	return $tables_principales;
 }
 
@@ -72,12 +49,7 @@ function tickets_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['tickets']='tickets';
 	$interfaces['tables_jointures']['spip_tickets'][]= 'documents_liens';
 	
-	if(version_compare($GLOBALS['spip_version_branche'],'2.1','<')){
-		$interface['table_des_tables']['tickets_forum']='tickets_forum';
-		$interface['tables_jointures']['spip_tickets_forum'][] = 'tickets';
-	}else{
-		$interface['tables_jointures']['spip_tickets'][] = 'forums';
-	}
+	$interface['tables_jointures']['spip_tickets'][] = 'forums';
 
 	return $interface;
 
