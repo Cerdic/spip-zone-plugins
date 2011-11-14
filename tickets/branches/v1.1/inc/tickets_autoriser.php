@@ -59,12 +59,12 @@ function definir_autorisations_tickets($action,$utiliser_defaut=true){
  * Autorisation d'écrire des tickets
  * (défini qui peut créer un ticket)
  * 
- * @param object $faire
- * @param object $type
- * @param object $id
- * @param object $qui
- * @param object $opt
- * @return 
+ * @param string $faire : l'action à faire
+ * @param string $type : le type d'objet sur lequel porte l'action
+ * @param int $id : l'identifiant numérique de l'objet
+ * @param array $qui : les éléments de session de l'utilisateur en cours
+ * @param array $opt : les options
+ * @return boolean true/false : true si autorisé, false sinon
  */
 function autoriser_ticket_ecrire_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
@@ -79,7 +79,7 @@ function autoriser_ticket_ecrire_dist($faire, $type, $id, $qui, $opt){
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
-				$autorise = tickets_verifier_webmestre($qui);
+				$autorise = ($qui['webmestre'] == 'oui');
 				break;
 			case 'par_statut':
 				// Traitement spécifique pour la valeur 'tous'
@@ -117,12 +117,12 @@ function autoriser_ticket_ecrire_dist($faire, $type, $id, $qui, $opt){
  * Autorisation d'assignation des tickets
  * (défini qui peu assigner les tickets)
  * 
- * @param object $faire
- * @param object $type
- * @param object $id
- * @param object $qui
- * @param object $opt
- * @return 
+ * @param string $faire : l'action à faire
+ * @param string $type : le type d'objet sur lequel porte l'action
+ * @param int $id : l'identifiant numérique de l'objet
+ * @param array $qui : les éléments de session de l'utilisateur en cours
+ * @param array $opt : les options
+ * @return boolean true/false : true si autorisé, false sinon
  */
 function autoriser_ticket_assigner_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
@@ -137,7 +137,7 @@ function autoriser_ticket_assigner_dist($faire, $type, $id, $qui, $opt){
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
-				$autorise = tickets_verifier_webmestre($qui);
+				$autorise = ($qui['webmestre'] == 'oui');
 				break;
 			case 'par_statut':
 				// Traitement spécifique pour la valeur 'tous'
@@ -174,12 +174,12 @@ function autoriser_ticket_assigner_dist($faire, $type, $id, $qui, $opt){
  * Autorisation de notification des tickets
  * (défini qui doit être notifié)
  * 
- * @param object $faire
- * @param object $type
- * @param object $id
- * @param object $qui
- * @param object $opt
- * @return 
+ * @param string $faire : l'action à faire
+ * @param string $type : le type d'objet sur lequel porte l'action
+ * @param int $id : l'identifiant numérique de l'objet
+ * @param array $qui : les éléments de session de l'utilisateur en cours
+ * @param array $opt : les options
+ * @return boolean true/false : true si autorisé, false sinon
  */
 function autoriser_ticket_commenter_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
@@ -194,7 +194,7 @@ function autoriser_ticket_commenter_dist($faire, $type, $id, $qui, $opt){
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
-				$autorise = tickets_verifier_webmestre($qui);
+				$autorise = ($qui['webmestre'] == 'oui');
 				break;
 			case 'par_statut':
 				// Traitement spécifique pour la valeur 'tous'
@@ -233,12 +233,12 @@ function autoriser_ticket_commenter_dist($faire, $type, $id, $qui, $opt){
  * - Les personnes assignées
  * - Les personnes correspondant à la configuration
  * 
- * @param object $faire
- * @param object $type
- * @param object $id
- * @param object $qui
- * @param object $opt
- * @return 
+ * @param string $faire : l'action à faire
+ * @param string $type : le type d'objet sur lequel porte l'action
+ * @param int $id : l'identifiant numérique de l'objet
+ * @param array $qui : les éléments de session de l'utilisateur en cours
+ * @param array $opt : les options
+ * @return boolean true/false : true si autorisé, false sinon
  */ 
 function autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
@@ -258,7 +258,7 @@ function autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt){
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
-				$autorise = tickets_verifier_webmestre($qui);
+				$autorise = ($qui['webmestre'] == 'oui');
 				break;
 			case 'par_statut':
 				// Traitement spécifique pour la valeur 'tous'
@@ -296,14 +296,5 @@ function autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt){
 			$autorise = true;
 	}
 	return $autorise;
-}
-
-function tickets_verifier_webmestre($qui){
-	$webmestre =  false;
-	$webmestre = in_array($qui['id_auteur'],explode(':', _ID_WEBMESTRES));
-	if(!$webmestre && ($qui['webmestre']=='oui')){
-		$webmestre =  true;
-	}
-	return $webmestre;
 }
 ?>

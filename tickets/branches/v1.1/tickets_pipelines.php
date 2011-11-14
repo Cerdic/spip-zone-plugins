@@ -262,6 +262,7 @@ function tickets_formulaire_traiter($flux){
 				instituer_ticket($id_ticket,array('statut'=>$new_statut));
 			}
 			if(($new_assigne=_request('id_assigne')) && ($new_assigne != $infos_ticket['id_assigne'])){
+				include_spip('action/editer_ticket');
 				revision_ticket($id_ticket, array('id_assigne'=>$new_assigne));
 			}
 		}

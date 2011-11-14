@@ -206,4 +206,30 @@ function instituer_ticket($id_ticket, $c) {
 
 	return ''; // pas d'erreur
 }
+
+/**
+ * Enregistre une revision de ticket
+ *
+ * @param int $id_ticket : l'identifiant numérique du ticket
+ * @param array $c[optional] : un array des champs à modifier en base
+ * @return
+ */
+function revision_ticket($id_ticket, $c=false) {
+
+	// invalider le cache quelque soit la circonstance.
+	// une modification de base = effacer les caches.
+	$invalideur = "id='id_ticket/$id_ticket'";
+	$indexation = true;
+
+	modifier_contenu('ticket', $id_ticket,
+		array(
+			'nonvide' => array('titre' => _T('info_sans_titre')),
+			'invalideur' => $invalideur,
+			'indexation' => $indexation,
+			'date_modif' => 'date_modif' // champ a mettre a date('Y-m-d H:i:s') s'il y a modif
+		),
+		$c);
+
+	return ''; // pas d'erreur
+}
 ?>
