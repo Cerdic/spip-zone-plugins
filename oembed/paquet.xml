@@ -1,12 +1,12 @@
 <paquet
 	prefix="oembed"
 	categorie="multimedia"
-	version="0.1"
+	version="0.2.0"
 	etat="dev"
 	compatibilite="[3.0.0-dev;["
 	logo="prive/themes/spip/images/oembed-32.png"
 	schema="0.2"
->	
+>
 
 	<nom>oEmbed</nom>
 	<!-- oEmbed client/provider pour SPIP -->

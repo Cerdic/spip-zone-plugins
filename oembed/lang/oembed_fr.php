@@ -19,6 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_embed_auto'=>'Transformer automatiquement les URLs insérées dans le texte ?',
 'label_endpoint'=>'Endpoint',
 'label_scheme'=>'Scheme',
+'label_maxwidth' => 'Largeur maxi. par défaut (px)',
+'label_maxheight' => 'Hauteur maxi. par défaut (px)',
 
 'supprimer_provider'=>'Supprimer',
 

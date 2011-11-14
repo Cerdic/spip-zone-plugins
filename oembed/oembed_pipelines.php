@@ -17,7 +17,7 @@ function oembed_renseigner_document_distant($flux) {
 	include_spip('inc/config');
 	include_spip('inc/oembed');
 	// on tente de récupérer les données oembed
-	if ($data = oembed_recuperer_data($flux['source'],lire_config('oembed/maxwidth','480'),lire_config('oembed/maxheight','295'))){
+	if ($data = oembed_recuperer_data($flux['source'])){
 		if ($data['type']=='photo') {
 			// on recupere les infos du document distant
 			if ($doc = recuperer_infos_distantes($data['url'])) {
@@ -58,7 +58,7 @@ function oembed_renseigner_document_distant($flux) {
 function oembed_post_edition($flux) {
 	if($flux['args']['action']=='ajouter_document' AND $flux['data']['oembed']){
 		$id_document = $flux['args']['id_objet'];
-		if ($data = oembed_recuperer_data($flux['data']['oembed'],lire_config('oembed/maxwidth'),lire_config('oembed/maxheight'))){
+		if ($data = oembed_recuperer_data($flux['data']['oembed'])){
 			// vignette disponible ? la recupérer et l'associer au document
 			if ($data['thumbnail_url']) {
 				// cf formulaires_illustrer_document_traiter_dist()

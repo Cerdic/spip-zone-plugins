@@ -8,17 +8,30 @@
  *
  * @param string $url url de la page qui contient le document à récupérer avec oembed
  * @param int $maxwidth largeur max du document
+ *   null : la valeur configuree par defaut ou pour le provider est utilisee
+ *   '' : pas de valeur max
  * @param int $maxheight hauteur max du document
+ *   null : la valeur configuree par defaut ou pour le provider est utilisee
+ *   '' : pas de valeur max
  * @param string $format format à utiliser pour la requete oembed (json ou xml)
  * @param string $detecter_lien tenter la détection automatique de lien oembed dans la page indiquée
  * @return bool|array false si aucun retour ou erreur ; tableau des éléménents de la réponse oembed
  */
-function oembed_recuperer_data($url, $maxwidth = '', $maxheight = '', $format = 'json', $detecter_lien = 'non') {
+function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $format = 'json', $detecter_lien = 'non') {
+	static $cache = array();
 	$provider = false;
 	
 	$provider = oembed_verifier_provider($url);
 	$data_url = parametre_url($provider,'url',$url,'&');
-	
+
+	include_spip('inc/config');
+	if (is_null($maxwidth)){
+		$maxwidth = lire_config('oembed/maxwidth','600');
+	}
+	if (is_null($maxheight)){
+		$maxheight = lire_config('oembed/maxheight','400');
+	}
+
 	if ((!$provider) AND (($detecter_lien != 'non') OR lire_config('oembed/detecter_lien','non')=='oui')) {
 		$provider = oembed_detecter_lien($url);
 		$data_url = $provider;
@@ -27,17 +40,21 @@ function oembed_recuperer_data($url, $maxwidth = '', $maxheight = '', $format = 
 	$data_url = parametre_url($data_url,'maxwidth',$maxwidth,'&');
 	$data_url = parametre_url($data_url,'maxheight',$maxheight,'&');
 	$data_url = parametre_url($data_url,'format',$format,'&');
+
+	if (isset($cache[$data_url]))
+		return $cache[$data_url];
 	
 	// on recupere le contenu de la page
 	include_spip('inc/distant');
 	if ($data = recuperer_page($data_url)) {
 		if ($format == 'json')
-			return json_decode($data,true);
+			return $cache[$data_url] = json_decode($data,true);
+		// TODO : format xml
 		if ($format == 'xml')
-			return false;
+			return $cache[$data_url] = false;
 	}
 
-	return false;
+	return $cache[$data_url] = false;
 }
 
 /**
