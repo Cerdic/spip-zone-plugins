@@ -13,6 +13,10 @@
 	<bouton id="fusionmots" parent="bando_edition">
 	   <titre>fusionmots:fusionmots</titre>
 	</bouton>
+	<bouton id="fusionmots2" parent="naviguer">
+	   	<titre>fusionmots:fusionmots</titre>
+	   	<exec>fusionmots</exec>
+	</bouton>
 	<pipeline>
         <nom>autoriser</nom>
         <inclure>fusionmots_pipeline.php</inclure>
