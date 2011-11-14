@@ -1,0 +1,26 @@
+<paquet
+	prefix="oembed"
+	categorie="multimedia"
+	version="0.1"
+	etat="dev"
+	compatibilite="[3.0.0-dev;["
+	logo="prive/themes/spip/images/oembed-32.png"
+	schema="0.2"
+>	
+
+	<nom>oEmbed</nom>
+	<!-- oEmbed client/provider pour SPIP -->
+
+	<auteur>b_b</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/oembed.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/oembed.php" />
+	<pipeline nom="renseigner_document_distant" inclure="oembed_pipelines.php" />
+	<pipeline nom="post_edition" inclure="oembed_pipelines.php" />
+	<pipeline nom="pre_propre" inclure="oembed_pipelines.php" />
+	<pipeline nom="affichage_final" inclure="oembed_pipelines.php" />
+
+	<menu nom="configurer_oembed" titre="oembed:titre_oembed" parent="bando_configuration" icone="images/oembed-16.png" />
+</paquet>
