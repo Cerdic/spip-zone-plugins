@@ -149,10 +149,8 @@ function contacts_affiche_gauche($flux){
 				}
 	
 				// fil d'ariane de l'organisation
-				$organisation = sql_fetsel('nom, id_parent', 'spip_organisations', 'id_organisation='.$id_organisation);
 				$flux['data'] .= recuperer_fond('prive/boite/ariane_organisation', array(
-						'nom'				=> $organisation['nom'],
-						'id_parent'			=> $organisation['id_parent']
+						'id_organisation' => $id_organisation
 					));
 			}// fin 'si organisation'
 		} else {
