@@ -19,11 +19,37 @@ function oembed_affichage_final($page) {
 	return $page;
 }
 
+/**
+ * Generer un apercu pour les oembed sur le formulaire d'edition document
+ * @param $flux
+ * @return
+ */
 function oembed_formulaire_charger($flux){
 	if ($flux['args']['form']=='editer_document'){
 		if ($flux['data']['oembed']
 		  AND !isset($flux['data']['apercu']))
 			$flux['data']['_inclus'] = 'embed';
+	}
+	return $flux;
+}
+
+/**
+ * Inserer une explication dans le form d'upload
+ * @param $flux
+ * @return array
+ */
+function oembed_recuperer_fond($flux){
+	if ($flux['args']['fond']=='formulaires/inc-upload_document'){
+		$rows = sql_allfetsel('scheme','spip_oembed_providers');
+		$hosts = array();
+		foreach($rows as $row){
+			$h = parse_url($row['scheme'],PHP_URL_HOST);
+			$hosts[trim(preg_replace(",^(\*|www)\.,i","",$h))]=true;
+		}
+		$hosts = implode(', ',array_keys($hosts));
+		$i = _T('oembed:explication_upload_url',array('hosts'=>$hosts));
+		$i = "<p class='explication small'>$i</p>";
+		$flux['data'] = str_replace($t="<!--editer_url-->",$t.$i,$flux['data']);
 	}
 	return $flux;
 }

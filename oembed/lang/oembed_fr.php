@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_ajout_provider'=>'Erreur lors de l\'ajout du provider.',
 'erreur_scheme_doublon'=>'Ce scheme est déjà présent dans la liste.',
 'explication_scheme'=>'utilisez * comme wildcard',
+'explication_upload_url' => 'Indiquez simplement l\'URL de la page qui contient le document pour les sites @hosts@',
 
 'info_1_provider'=>'1 provider',
 'info_nb_providers'=>'@nb@ providers',
