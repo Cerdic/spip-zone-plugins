@@ -26,7 +26,7 @@ function seminaire_declarer_champs_extras($champs = array()){
 		'type' => 'bloc', // type de saisie
 		'sql' => "text NOT NULL DEFAULT ''", // declaration sql
 		'saisie_parametres' => array(
-			'class' => 'inserer_barre_edition'
+		'class' => 'inserer_barre_edition'
 		)
 	));	
 	$champs[] = new ChampExtra(array(
@@ -37,7 +37,7 @@ function seminaire_declarer_champs_extras($champs = array()){
 		'type' => 'bloc', // type de saisie
 		'sql' => "text NOT NULL DEFAULT ''", // declaration sql
 		'saisie_parametres' => array(
-			'class' => 'inserer_barre_edition'
+		'class' => 'inserer_barre_edition'
 		),
 	));
 	return $champs;
