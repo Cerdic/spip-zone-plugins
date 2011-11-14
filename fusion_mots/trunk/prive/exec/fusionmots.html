@@ -1,8 +1,8 @@
-#CACHE{0}
+
 [(#AUTORISER{fusionner,mots}|oui)
 <!--#navigation-->
 <div class='cadre-info'>
-[(#ENV{id_groupe}|?{<:fusionmots:explication:>,Vous pourrez fusionner plusieurs mots et faire converger leurs utilisations})]
+[(#ENV{id_groupe}|?{<:fusionmots:explication:>,<:fusionmots:explication_intro:>})]
 </div>
 [(#ENV{id_groupe}|oui)#INCLURE{fond=inc/choix_groupe,id_groupe}]
 
@@ -15,7 +15,8 @@
 			[(#ENV{id_groupe}|=={tous}|non)#FORMULAIRE_FUSIONMOTS{#ENV{id_groupe}}]
 		</div>]
 	[(#ENV{id_groupe}|non)
-		<h3>Choisissez le groupe de mot sur lequel faire les fusions</h3>
+		<h3><:fusionmots:choisir_groupe:></h3>
+
 		#INCLURE{fond=inc/choix_groupe}
 	]
 ][(#AUTORISER{fusionner,mots}|non)Achtung forbiden !]
