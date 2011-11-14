@@ -10,12 +10,16 @@
 	<etat>test</etat>
 	<necessite id="SPIP" version="[2.1;2.1.99]" />
 	<prefix>fusionmots</prefix>
+	<icon>images/fusion_mots_64.png</icon>
+
 	<bouton id="fusionmots" parent="bando_edition">
-	   <titre>fusionmots:fusionmots</titre>
+		<titre>fusionmots:fusionmots</titre>
+		<icone>images/fusion_mots_24.png</icone>
 	</bouton>
 	<bouton id="fusionmots2" parent="naviguer">
 	   	<titre>fusionmots:fusionmots</titre>
 	   	<exec>fusionmots</exec>
+		<icone>images/fusion_mots_24.png</icone>
 	</bouton>
 	<pipeline>
         <nom>autoriser</nom>
