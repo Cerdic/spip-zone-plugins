@@ -210,27 +210,40 @@ function lire_iptc ($fichier, $type=false) {
 	
 }
 
+/**
+ * Tester si on peut traiter l'image compte tenu de la limite de memoire de GD2
+ * @param object $im
+ * @param int $largeur
+ * @param int $hauteur
+ * @return string
+ */
 function test_traiter_image($im, $largeur, $hauteur) {
 	$surface = $largeur * $hauteur;
 
-	if ($surface > $GLOBALS["meta"]["max_taille_vignettes_echec"]) return false;
-	else return true;
-	
-	
+	if ($surface > $GLOBALS["meta"]["max_taille_vignettes"])
+		return '';
+
+	return ' ';
 }
 
+/**
+ * Generer un histrogramme des couleurs RVB de l'image
+ * 
+ * @param object $im
+ * @return string
+ */
 function image_histogramme($im) {
 	include_spip("inc/filtres_images");
 	
 	$fonction = array('image_histo', func_get_args());
 	$image = image_valeurs_trans($im, "histo","png",$fonction);
-	
+
 	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
 	$surface = $x_i * $y_i;
-	
+
 	if (!test_traiter_image($im, $x_i, $y_i) ) return;
 	
 	
@@ -249,6 +262,7 @@ function image_histogramme($im) {
 		$col_poly = imagecolorallocate($im_,60,60,60);
 		imagepolygon($im_, array ( 0, 0, 257, 0, 257, 129, 0,129 ), 4, $col_poly);
 
+		$val_gris = $val_r = $val_g = $val_b = array();
 		for ($x = 0; $x < $x_i; $x++) {
 			for ($y=0; $y < $y_i; $y++) {
 
@@ -314,7 +328,7 @@ function image_histogramme($im) {
 		imagedestroy($im);
 	}
 
-	return "<img src='$dest' style='width: 258px; height: 130px;'  />";
+	return _image_ecrire_tag($image,array('src'=>$dest,'width'=>258,'height'=>130));
 }
 
 function position_carte ($latitude, $longitude, $taille) {

@@ -109,7 +109,7 @@
 
 		</div>
 		</div>
-		[(#GET{fichier}|test_traiter_image{[(#GET{fichier}|largeur)], [(#GET{fichier}|hauteur)]}|>{0}|?{" ",""})
+		[(#GET{fichier}|test_traiter_image{[(#GET{fichier}|largeur)],[(#GET{fichier}|hauteur)]}|oui)
 			<div id="histogramme#GET{compteur}" style="text-align: center; padding-top: 5px;"><img src="#CHEMIN{images/loader.gif}" alt="Loading..." /></div>
 		]
 
