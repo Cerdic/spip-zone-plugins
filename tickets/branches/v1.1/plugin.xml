@@ -65,15 +65,6 @@
 		<nom>objets_extensibles</nom>
 		<inclure>tickets_pipelines.php</inclure>
 	</pipeline>
-	<!-- avec plugin revisions (2.1) -->
-	<pipeline>
-		<nom>gouverneur_infos_tables</nom>
-		<inclure>tickets_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>revisions_liste_objets</nom>
-		<inclure>tickets_pipelines.php</inclure>
-	</pipeline>
 	<pipeline>
 		<nom>accueil_gadgets</nom>
 		<inclure>tickets_pipelines.php</inclure>

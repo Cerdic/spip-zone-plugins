@@ -78,41 +78,6 @@ function tickets_objets_extensibles($objets){
 }
 
 /**
- * Insertion dans le pipeline gouverneur_infos_tables_versions
- * (utile pour le plugin revisions en 2.1)
- * Permet de gérer les révisions sur les tickets
- *
- * @param object $array
- * @return
- */
-function tickets_gouverneur_infos_tables($array){
-	$array['spip_tickets'] = array(
-		'table_objet' => 'tickets',
-		'type' => 'ticket',
-		'url_voir' => 'ticket_afficher',
-		'texte_retour' => 'tickets:icone_retour_ticket',
-		'url_edit' => 'ticket_editer',
-		'texte_modifier' => 'tickets:icone_modifier_ticket',
-		'icone_objet' => 'ticket',
-		'texte_unique' => 'tickets:ticket',
-		'texte_multiple' => 'tickets:tickets',
-		'champs_versionnes' => array('titre','exemple', 'texte')
-	);
-	return $array;
-}
-
-/**
- * Insertion dans le pipeline revisions_liste_objets du plugin revisions (2.1)
- * Definir la liste des tables possibles
- * @param object $array
- * @return
- */
-function tickets_revisions_liste_objets($array){
-	$array['tickets'] = 'tickets:tickets';
-	return $array;
-}
-
-/**
  * Insertion dans le pipeline accueil informations de l'etat des tickets
  * @param string $flux
  * @return string $flux
