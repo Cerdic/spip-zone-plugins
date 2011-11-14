@@ -9,7 +9,8 @@
             <th><:fusionmots:remplacer:></th>
             <th><:fusionmots:par:></th>
         </tr>
-        <BOUCLE_mots(MOTS){tout}{par titre}>
+
+        <BOUCLE_mots(MOTS){tout}{par titre}{id_groupe?}>
             <tr class='tr_liste'>
                 <td>
                     <input class='checkbox' type='checkbox' name='remplacer[]' id='remplacer_#ID_MOT' value='#ID_MOT'[(#ID_MOT|in_array{#ENV{remplacer}}|oui) checked='checked'] />

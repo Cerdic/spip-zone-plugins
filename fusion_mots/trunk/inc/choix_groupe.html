@@ -1,0 +1,14 @@
+<B_choix_groupe>
+<ul>
+	<li>[(#ENV{id_groupe}|=={tous}|?{<b>Tous les groupes</b>,<a href="[(#SELF|parametre_url{id_groupe,tous})]">Tous les groupes</a>})]</li>
+</ul>
+#PAGINATION
+<ul>
+<BOUCLE_choix_groupe(GROUPES_MOTS){pagination 20}>
+	<li>[(#EXPOSE{
+			<b>#TITRE</b>,
+			<a href="[(#SELF|parametre_url{id_groupe,#ID_GROUPE})]">#TITRE</a>})]
+	</li>
+</BOUCLE_choix_groupe>
+</ul>
+</B_choix_groupe>
