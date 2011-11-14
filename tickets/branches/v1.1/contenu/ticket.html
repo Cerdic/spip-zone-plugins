@@ -1,6 +1,7 @@
 <BOUCLE_ticket_contenu(TICKETS){id_ticket}>
 <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><a href="#URL_PAGE{tickets}"><:tickets:tickets:></a>[<span class="sep"> &gt; </span><strong class="on">(#TITRE|couper{80})</strong>]</div>
-
+[(#AUTORISER{commenter, ticket, #ID_TICKET}|oui)
+[(#SET{autoriser_commenter,oui})]]
 <div class="ticket contenu-principal">
 
 	<div class="cartouche">
@@ -74,20 +75,22 @@
 		<li class="comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
 			[(#MODELE{comment}{id_forum}{compteur=#COMPTEUR_BOUCLE}{thread=oui})]
 			[(#BOUTONS_ADMIN_FORUM)]
+			[(#GET{autoriser_commenter}|=={oui}|oui)
 			[<p class="repondre"><a
 				href="(#PARAMETRES_FORUM|url_reponse_forum)"
 				onclick="jQuery(this).add_reply_to([(#ID_FORUM)]);return false;"
-				rel="noindex nofollow"><:repondre_message:></a></p>]
+				rel="noindex nofollow"><:repondre_message:></a></p>]]
 			<B_comments-fils>
 			<ul class="comments-ul comments-fils">
 				<BOUCLE_comments-fils(FORUMS){id_parent}{par date}>
 				<li class="comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
 					[(#MODELE{comment}{id_forum}{thread=oui})]
 					[(#BOUTONS_ADMIN_FORUM)]
+					[(#GET{autoriser_commenter}|=={oui}|oui)
 					[<p class="repondre"><a
 						href="(#PARAMETRES_FORUM|url_reponse_forum)"
 						onclick="jQuery(this).add_reply_to([(#ID_FORUM)]);return false;"
-						rel="noindex nofollow"><:repondre_message:></a></p>]
+						rel="noindex nofollow"><:repondre_message:></a></p>]]
 					<BOUCLE_comments-fils-etc(boucle_comments-fils)></BOUCLE_comments-fils-etc>
 				</li>
 				</BOUCLE_comments-fils>
@@ -111,18 +114,20 @@
 				<li class="comment-li[ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)last]">
 					<INCLURE{fond=modeles/comment}{id_forum}{thread=oui}>
 					[(#BOUTONS_ADMIN_FORUM)]
+					[(#GET{autoriser_commenter}|=={oui}|oui)
 					[<p class="repondre"><a
 						href="(#PARAMETRES_FORUM|url_reponse_forum)"
 						onclick="jQuery(this).add_reply_to([(#ID_THREAD)]);return false;"
-						rel="noindex nofollow"><:repondre_message:></a></p>]
+						rel="noindex nofollow"><:repondre_message:></a></p>]]
 				</li>
 				</BOUCLE_comments-fils-1>
 			</ul>
 			</B_comments-fils-1>
+			[(#GET{autoriser_commenter}|=={oui}|oui)
 			[<p class="repondre"><a
 					href="(#PARAMETRES_FORUM|url_reponse_forum)"
 					onclick="jQuery(this).add_reply_to([(#ID_THREAD)]);return false;"
-					rel="noindex nofollow"><:repondre_message:></a></p>]
+					rel="noindex nofollow"><:repondre_message:></a></p>]]
 		</li>
 		</BOUCLE_comments-list-1>
 		[<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
@@ -153,16 +158,26 @@
 	</ul>
 	</B_messages>
 	[(#REM) Bloc 3: formulaire d'ajout d'un commentaire sur le ticket]
-	[(#AUTORISER{commenter, ticket, #ID_TICKET}|oui)
+	[(#GET{autoriser_commenter}|=={oui}|oui)
 		#FORMULAIRE_FORUM{#SELF}
 	]
-	[(#AUTORISER{commenter, ticket, #ID_TICKET}|non)
-		<p><:tickets:tickets_sur_inscription:>
-			[(#CONFIG{accepter_inscriptions}|=={oui}|oui) <a href="#URL_PAGE{inscription}"><:tickets:sinscrire:></a> ]
-		</p>
-
-		<h2 class='titre'><:tickets:titre_identification:></h2>
-		[(#FORMULAIRE_LOGIN{#SELF})]
+	[(#GET{autoriser_commenter}|=={oui}|non)
+		[(#SESSION{id_auteur}|non)
+			<p><:tickets:tickets_sur_inscription:>
+				[(#CONFIG{accepter_inscriptions}|=={oui}|oui) <a href="#URL_PAGE{inscription}"><:tickets:sinscrire:></a> ]
+			</p>
+	
+			<h2 class='titre'><:tickets:titre_identification:></h2>
+			[(#FORMULAIRE_LOGIN{#SELF})]
+		]
+		[(#SESSION{id_auteur}|oui)
+			<p>
+				<:tickets:tickets_sur_inscription:>
+			</p>
+			<p>
+				<:tickets:tickets_sur_inscription_droits:>
+			</p>
+		]
 	]
 </div>
 </BOUCLE_ticket_contenu>

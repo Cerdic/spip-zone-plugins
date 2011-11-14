@@ -11,11 +11,21 @@
 		#FORMULAIRE_EDITER_TICKET{#ENV{id_ticket,oui},#URL_PAGE{ticket}}
 	]
 	[(#AUTORISER{ecrire,ticket,#ENV{id_ticket,oui}}|non)
-		<p><:tickets:tickets_sur_inscription:>
-			[(#CONFIG{accepter_inscriptions}|=={oui}|oui) <a href="#URL_PAGE{inscription}"><:tickets:sinscrire:></a> ]
-		</p>
-
-		<h2 class='titre'><:tickets:titre_identification:></h2>
-		[(#FORMULAIRE_LOGIN{#SELF})]
+		[(#SESSION{id_auteur}|non)
+			<p><:tickets:tickets_sur_inscription:>
+				[(#CONFIG{accepter_inscriptions}|=={oui}|oui) <a href="#URL_PAGE{inscription}"><:tickets:sinscrire:></a> ]
+			</p>
+	
+			<h2 class='titre'><:tickets:titre_identification:></h2>
+			[(#FORMULAIRE_LOGIN{#SELF})]
+		]
+		[(#SESSION{id_auteur}|oui)
+			<p>
+				<:tickets:tickets_sur_inscription:>
+			</p>
+			<p>
+				<:tickets:tickets_sur_inscription_droits:>
+			</p>
+		]
 	]
 </div>
