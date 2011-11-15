@@ -1,0 +1,18 @@
+<paquet
+	prefix="cite"
+	categorie="edition"
+	version="0.4.0"
+	etat="stable"
+	compatibilite="[2.1.0;3.0.99]"
+	logo="prive/themes/spip/images/cite-32.png"
+	documentation="http://www.spip-contrib.net/spip.php?article3698"
+>
+
+	<nom>Cite</nom>
+	<!-- Insérer des références bibliographiques -->
+
+	<auteur lien="http://www.spip-contrib.net/Joseph">Joseph</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+	
+	<utilise nom="verifier" compatibilite="[0.1.8;[" />
+</paquet>
