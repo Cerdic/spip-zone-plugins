@@ -116,21 +116,21 @@ parametres:
         saisie: 'input'
         options:
           nom: 'url_refbase'
-          label: '<:refbase:cfg_url_refbase:>'
+          label: '<:refbase:label_url_refbase:>'
       -
         saisie: 'selection'
         options:
           nom: 'vue'
-          label: '<:refbase:cfg_vue:>'
+          label: '<:refbase:label_vue:>'
           datas:
-            citations: '<:refbase:cfg_vue_citations:>'
-            liste: '<:refbase:cfg_vue_liste:>'
-            details: '<:refbase:cfg_vue_details:>'
+            citations: '<:refbase:label_vue_citations:>'
+            liste: '<:refbase:label_vue_liste:>'
+            details: '<:refbase:label_vue_details:>'
       -
         saisie: 'input'
         options:
           nom: 'max'
-          label: '<:refbase:cfg_max:>'
+          label: '<:refbase:label_max:>'
         verifier:
           type: 'entier'
           options:
@@ -139,7 +139,7 @@ parametres:
         saisie: 'selection'
         options:
           nom: 'doublons'
-          label: '<:refbase:cfg_doublons:>'
+          label: '<:refbase:label_doublons:>'
           datas:
             oui: '<:refbase:oui:>'
             non: '<:refbase:non:>'
@@ -147,18 +147,18 @@ parametres:
         saisie: 'selection'
         options:
           nom: 'tri'
-          label: '<:refbase:cfg_tri:>
+          label: '<:refbase:label_tri:>
           datas:
-            annee: '<:refbase:cfg_tri_annee:>'
-            auteur: '<:refbase:cfg_tri_auteur:>'
-            type: '<:refbase:cfg_tri_type:>'
-            type-annee: '<:refbase:cfg_tri_typeannee:>'
-            date-creation: '<:refbase:cfg_datecreation:>'
+            annee: '<:refbase:label_tri_annee:>'
+            auteur: '<:refbase:label_tri_auteur:>'
+            type: '<:refbase:label_tri_type:>'
+            type-annee: '<:refbase:label_tri_typeannee:>'
+            date-creation: '<:refbase:label_datecreation:>'
       -
         saisie: 'selection'
         options:
           nom: 'style'
-          label: '<:refbase:cfg_style:>
+          label: '<:refbase:label_style:>
           datas:
             APA: 'APA'
             AMA: 'AMA'
@@ -174,7 +174,7 @@ parametres:
         saisie: 'selection'
         options:
           nom: 'liens_exports'
-          label: '<:refbase:cfg_liens_exports:>'
+          label: '<:refbase:label_liens_exports:>'
           datas:
             oui: '<:refbase:oui:>'
             non: '<:refbase:non:>'
@@ -183,3 +183,4 @@ parametres:
         options:
           nom: 'css'
           label: '<:refbase:label_css:>'
+          explication: '<:refbase:explication_css:>'

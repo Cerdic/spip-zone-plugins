@@ -1,0 +1,14 @@
+#SET{plugin,refbase}
+#BOITE_OUVRIR{'',info}
+<div class="infos">
+	[<p>(#CHEMIN{#PLUGIN{#GET{plugin}, logo}}|image_reduire{48})</p>]
+	[<p><strong>(#PLUGIN{#GET{plugin}, nom})</strong>
+		[<br /><em>(#VAL{paquet-}|concat{#GET{plugin},':',#PLUGIN{#GET{plugin},slogan}}|_T|typo)</em>]
+		[(#VAL{paquet-}|concat{#GET{plugin},':',#PLUGIN{#GET{plugin},description}}|_T|propre)]
+	</p>]
+	<ul class="liste-items">
+		[<li><:version:>&nbsp;(#PLUGIN{#GET{plugin}, version})[&nbsp;-&nbsp;(#PLUGIN{#GET{plugin}, etat})]</li>]
+		[<li><a href="(#PLUGIN{#GET{plugin}, documentation})"><:en_savoir_plus:> <img src="#CHEMIN_IMAGE{aide-12.png}" alt="<:en_savoir_plus:>" /></a></li>]
+	</ul>
+</div>
+#BOITE_FERMER

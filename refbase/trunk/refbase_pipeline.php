@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function refbase_insert_head($flux){
 	$flux .= "<script type='text/javascript' src='spip.php?page=refbase_js'></script>\n";
 	$flux .= '<link rel="stylesheet" href="'.find_in_path('refbase.css').'" type="text/css" />';
