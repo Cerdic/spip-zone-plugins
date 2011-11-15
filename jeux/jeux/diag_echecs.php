@@ -129,12 +129,28 @@ function calcul_diagramme_echecs($position, $indexJeux) {
 	
 
 	// *************** CASE A COLORIER *************************
+	// *************** LIGNE A TRACER  *************************
+	// l'ordre des couleurs peut poser des problèmes dans les superpositions
+	// pour une gestion plus fine il faudrait gérer l'odre avec un paramètre du genre
+	// encouleur=R,a1,a2,c2-c8,B,e4-e5,g8
+	// qui permetrais de choisir l'ordre de création
+	
+	if (strlen($casejaune)>0 )	{
+		$lescases=explode(",",$casejaune);
+			for ($j=0 ; $j<count($lescases) ; $j++) {
+				$square=$lescases[$j];
+				$hilite = "hjaune";
+				if (strlen($square)==2) { diag_echecs_hilite_square($chessboard,$square,$hilite,$flip); };	//case de couleur
+				if (strlen($square)==5) { diag_echecs_hilite_line($chessboard, $square, $hilite,$flip); };	// ligne de couleur
+			}
+		}
 	if (strlen($casebleu)>0 )	{
 		$lescases=explode(",",$casebleu);
 			for ($j=0 ; $j<count($lescases) ; $j++) {
 				$square=$lescases[$j];
 				$hilite = "hbleu";
-				diag_echecs_hilite_square($chessboard,$square,$hilite,$flip);
+				if (strlen($square)==2) { diag_echecs_hilite_square($chessboard,$square,$hilite,$flip); }; 			
+				if (strlen($square)==5) { diag_echecs_hilite_line($chessboard, $square, $hilite,$flip); }; 			
 			}
 		}
 	if (strlen($caserouge)>0 )	{
@@ -142,7 +158,8 @@ function calcul_diagramme_echecs($position, $indexJeux) {
 			for ($j=0 ; $j<count($lescases) ; $j++) {
 				$square=$lescases[$j];
 				$hilite = "hrouge";
-				diag_echecs_hilite_square($chessboard,$square,$hilite,$flip);
+				if (strlen($square)==2) { diag_echecs_hilite_square($chessboard,$square,$hilite,$flip); };
+				if (strlen($square)==5) { diag_echecs_hilite_line($chessboard, $square, $hilite,$flip); };
 			}
 		}
 	if (strlen($casevert)>0 )	{
@@ -150,17 +167,11 @@ function calcul_diagramme_echecs($position, $indexJeux) {
 			for ($j=0 ; $j<count($lescases) ; $j++) {
 				$square=$lescases[$j];
 				$hilite = "hvert";
-				diag_echecs_hilite_square($chessboard,$square,$hilite,$flip);
+				if (strlen($square)==2) { diag_echecs_hilite_square($chessboard,$square,$hilite,$flip); };
+				if (strlen($square)==5) { diag_echecs_hilite_line($chessboard, $square, $hilite,$flip); };
 			}
 		}
-	if (strlen($casejaune)>0 )	{
-		$lescases=explode(",",$casejaune);
-			for ($j=0 ; $j<count($lescases) ; $j++) {
-				$square=$lescases[$j];
-				$hilite = "hjaune";
-				diag_echecs_hilite_square($chessboard,$square,$hilite,$flip);
-			}
-		}
+	
 	for ($i=0 ; $i<count($table) ; $i++) {
 	  $sub_table = preg_split("/[:,]/",$table[$i]);
 	  switch($sub_table[0]) {

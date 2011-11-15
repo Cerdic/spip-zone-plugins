@@ -136,5 +136,60 @@ function diag_echecs_hilite_square($chessboard,$square,$hilite,$flip) {
   }
 
 }
-
+// trace une ligne colorée sur l'échiquier
+function diag_echecs_hilite_line($image, $squares, $hilite ,$flip)
+{    
+	global $diag_echecs_globales;
+	$taille = intval(jeux_config('taille'));
+	$bordure = intval(jeux_config('bordure'));
+	
+	//épaisseur de la ligne
+	$thick=round($taille/7);
+	if ($taille==35) {$thick= 5;};
+	if ($taille==55) {$thick= 7;};	 
+	
+	//$squares est de la forme a1-g8
+	$xfrom = substr($squares,0,1);
+	$yfrom = substr($squares,1,1);	
+	$xto = substr($squares,3,1);
+	$yto = substr($squares,4,1);
+	
+	$color = $diag_echecs_globales[$hilite];
+	$hilite_color = imagecolorallocatealpha($image,$color[0],$color[1],$color[2],50);
+	
+	if (!$flip) {
+		$x1=round(($diag_echecs_globales['letter2number'][$xfrom]-1)*$taille+$bordure+$taille/2)-1;
+		$y1=round((8-$yfrom)*$taille+$bordure+$taille/2)-1;
+		$x2=round(($diag_echecs_globales['letter2number'][$xto]-1)*$taille+$bordure+$taille/2)-1;
+		$y2=round((8-$yto)*$taille+$bordure+$taille/2)-1;
+  } else {
+		$x1=round((8-$diag_echecs_globales['letter2number'][$xfrom])*$taille+$bordure+$taille/2)-1;
+		$y1=round(($yfrom-1)*$taille+$bordure+$taille/2)-1;
+		$x2=round((8-$diag_echecs_globales['letter2number'][$xto])*$taille+$bordure+$taille/2)-1;
+		$y2=round(($yto-1)*$taille+$bordure+$taille/2)-1;		
+  }
+  
+	// cercle aux extrémités en attendant une vraie flèche
+	imagefilledellipse($image, $x1,$y1,$thick*2,$thick*2,$hilite_color); 	
+	imagefilledellipse($image, $x2,$y2,$thick*2,$thick*2,$hilite_color); 	
+  
+    if ($thick == 1) {
+        return imageline($image, $x1, $y1, $x2, $y2, $hilite_color);
+    }
+    $t = round($thick / 2)-1 ;
+    if ($x1 == $x2 || $y1 == $y2) {
+        return imagefilledrectangle($image, round(min($x1, $x2) - $t), round(min($y1, $y2) - $t), round(max($x1, $x2) + $t), round(max($y1, $y2) + $t), $hilite_color);
+    }
+	// alors là, bonjour les équations de droites !
+	$k = ($y2 - $y1) / ($x2 - $x1); //y = kx + q
+    $a = $t / sqrt(1 + pow($k, 2));
+	// dès que je comprends j'ajoute 3 points pour faire une flèche ;-)
+    $points = array(
+        round($x1 - (1+$k)*$a), round($y1 + (1-$k)*$a),
+        round($x1 - (1-$k)*$a), round($y1 - (1+$k)*$a),
+        round($x2 + (1+$k)*$a), round($y2 - (1-$k)*$a),		
+        round($x2 + (1-$k)*$a), round($y2 + (1+$k)*$a)    		
+    );	
+    return imagefilledpolygon($image, $points, 4, $hilite_color);   
+}
 ?>
