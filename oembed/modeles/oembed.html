@@ -1,3 +1,4 @@
+#CACHE{7*24*3600}
 [(#SET{data,#ENV**{url}|oembed_recuperer_data})
 ][(#GET{data}|oui)
 	[(#INCLURE{fond=modeles/oembed_[(#GET{data}|table_valeur{type})],data=#GET{data},url})]

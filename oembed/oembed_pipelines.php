@@ -56,9 +56,16 @@ function oembed_recuperer_fond($flux){
 	return $flux;
 }
 
-// insertion des traitements oembed dans l'ajout des documents distants
+/**
+ * insertion des traitements oembed dans l'ajout des documents distants
+ * reconnaitre une URL oembed (car provider declare ou decouverte automatique active)
+ * et la pre-traiter pour recuperer le vrai document a partir de l'url concernee
+ *
+ * @param array $flux
+ * @return array
+ */
 function oembed_renseigner_document_distant($flux) {
-	$medias = array('photo' => 'image','video' => 'video', 'sound' => 'audio');
+	$medias = array('photo' => 'image','video' => 'video');
 	include_spip('inc/config');
 	include_spip('inc/oembed');
 	// on tente de récupérer les données oembed
@@ -75,7 +82,9 @@ function oembed_renseigner_document_distant($flux) {
 				$doc['oembed'] = $flux['source'];
 				$doc['titre'] = $data['title'];
 				$doc['credits'] = $data['author_name'];
-				if (isset($medias[$data['type']]))
+				if (isset($data['media']))
+					$doc['media'] = $data['media'];
+				elseif (isset($medias[$data['type']]))
 					$doc['media'] = $medias[$data['type']];
 				return $doc;
 			}
@@ -96,7 +105,9 @@ function oembed_renseigner_document_distant($flux) {
 			$doc['oembed'] = $flux['source'];
 			$doc['titre'] = $data['title'];
 			$doc['credits'] = $data['author_name'];
-			if (isset($medias[$data['type']]))
+			if (isset($data['media']))
+				$doc['media'] = $data['media'];
+			elseif (isset($medias[$data['type']]))
 				$doc['media'] = $medias[$data['type']];
 			return $doc;
 		}
@@ -104,7 +115,14 @@ function oembed_renseigner_document_distant($flux) {
 	return $flux;
 }
 
-// attacher la vignette si disponible pour les documents oembed
+/**
+ * attacher la vignette si disponible pour les documents oembed
+ * on les reconnait via la presence d'un oembed non vide
+ * on relance un appel a oembed_recuperer_data qui a garde la requete precendente en cache
+ *
+ * @param array $flux
+ * @return array
+ */
 function oembed_post_edition($flux) {
 	if($flux['args']['action']=='ajouter_document' AND $flux['data']['oembed']){
 		$id_document = $flux['args']['id_objet'];
@@ -114,11 +132,15 @@ function oembed_post_edition($flux) {
 				spip_log('ajout de la vignette'.$data['thumbnail_url'].' pour '.$flux['data']['oembed'],'oembed.'._LOG_DEBUG);
 				// cf formulaires_illustrer_document_traiter_dist()
 				$ajouter_documents = charger_fonction('ajouter_documents', 'action');
+				$files = false;
 				if (preg_match(",^\w+://,",$data['thumbnail_url'])){
-					include_spip('inc/joindre_document');
-					set_request('url',$data['thumbnail_url']);
-					set_request('joindre_distant','oui');
-					$files = joindre_trouver_fichier_envoye();
+					$files = array(
+						array(
+							'name' => basename($data['thumbnail_url']),
+							'tmp_name' => $data['thumbnail_url'],
+							'distant' => true,
+						)
+					);
 				}
 				elseif (file_exists($data['thumbnail_url'])) {
 					$files = array(array(
@@ -126,13 +148,12 @@ function oembed_post_edition($flux) {
 						'tmp_name' => $data['thumbnail_url']
 					));
 				}
-				$ajoute = action_ajouter_documents_dist('new',$files,'',0,'vignette');
-				if (is_int(reset($ajoute))){
+				if ($files
+					AND $ajoute = action_ajouter_documents_dist('new',$files,'',0,'vignette')
+				  AND is_int(reset($ajoute))){
 					$id_vignette = reset($ajoute);
 					include_spip('action/editer_document');
-					document_set($id_document,array("id_vignette" => $id_vignette,'mode'=>'document'));
-					// pour ne pas se retrouver avec l'url de la vignette dans l'input du formulaire au retour
-					set_request('url','');
+					document_modifier($id_document,array("id_vignette" => $id_vignette,'mode'=>'document'));
 				}
 			}
 			else
@@ -142,6 +163,12 @@ function oembed_post_edition($flux) {
 	return $flux;
 }
 
+/**
+ * Transformation auto des liens vers contenu oembed correspondant : trop la classe
+ *
+ * @param string $texte
+ * @return mixed
+ */
 function oembed_pre_propre($texte) {
 	include_spip('inc/config');
 	if (lire_config('oembed/embed_auto','oui')!='non') {
