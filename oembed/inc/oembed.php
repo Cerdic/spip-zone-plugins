@@ -53,7 +53,15 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 
 	if (isset($cache[$data_url]))
 		return $cache[$data_url];
-	
+
+	$oembed_cache = sous_repertoire(_DIR_CACHE,'oembed').md5($data_url).".".$format;
+	// si cache oembed dispo et pas de recalcul demande, l'utiliser (perf issue)
+	if (file_exists($oembed_cache) AND _VAR_MODE!=='recalcul'){
+		lire_fichier($oembed_cache,$cache[$data_url]);
+		$cache[$data_url]=unserialize($cache[$data_url]);
+		return $cache[$data_url];
+	}
+
 	$cache[$data_url] = false;
 	// on recupere le contenu de la page
 	include_spip('inc/distant');
@@ -73,6 +81,8 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 		$type = strtolower($cache[$data_url]['type']);
 		if ($oembed_provider_posttraite = charger_fonction("posttraite_{$provider_name}_$type",'oembed',true))
 			$cache[$data_url] = $oembed_provider_posttraite($cache[$data_url]);
+
+		ecrire_fichier($oembed_cache,serialize($cache[$data_url]));
 	}
 	spip_log('infos oembed pour '.$url.' : '.var_export($cache[$data_url],true),'oembed.'._LOG_DEBUG);
 
