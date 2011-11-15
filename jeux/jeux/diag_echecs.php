@@ -67,29 +67,37 @@ Parametres [config] definis par defaut :
 	police=5		// Code de la police utilisee pour les coordonnees (1 a 5)
 	flip=non		// Faut-il retourner l'echiquier ?
 	coords=oui		// Afficher les coordonnees ?
-
+	truecolor=non	// Image finale en 24bit ?
+	cache=30		// Nombre de jour avant le recalcul de l'image (0 : pas de cache)
 */
 require("diag_echecs_init.php");
 require("diag_echecs_inc.php");
 
 // creation du diagramme d'echecs
-function calcul_diagramme_echecs($position, $indexJeux) {
+function calcul_diagramme_echecs($position, $coloration, $indexJeux) {
 	// qq initialisations
 	global $diag_echecs_globales, $jeux_couleurs;
 	$flip = jeux_config('flip');
 	$taille = intval(jeux_config('taille'));
-	$nbjour = intval(jeux_config('cache')); //nombre de jour avant recalcul
-	// ************* case en surbrillance *************
+	$nbjour = intval(jeux_config('cache')); // nombre de jour avant recalcul
+	$bordure = intval(jeux_config('bordure'));
+	$board_size = intval(jeux_config('board_size'));
+	$font = intval(jeux_config('police'));
+	$img = jeux_config('img_img');
+
+	// ************* cases en surbrillance ************* (obsolète ??)
 	$caserouge = jeux_config('rouge');
 	$casebleu = jeux_config('bleu');
 	$casevert = jeux_config('vert');
 	$casejaune = jeux_config('jaune');
 	
-	$bordure = intval(jeux_config('bordure'));
-	$board_size = intval(jeux_config('board_size'));
-	$font = intval(jeux_config('police'));
-	$img = jeux_config('img_img');
-	
+	// dechiffre la surbrillance eventuelle des cases
+	 $surbrillance = array();
+	 $coloration = preg_split("/[\r\n]+/", $coloration);
+	 foreach ($coloration as $ligne)
+		if ($regs = jeux_parse_ligne_config($ligne))
+			$surbrillance[] = array($regs[1], $regs[2]); // (couleur, valeur)
+
 	// dechiffre le code source du diagramme place dans $position
 	$position = preg_replace("/\s*[\r\n]+\s*/", '/', trim($position));
 	$position = preg_replace(",\/+,", '/', trim($position));
@@ -130,17 +138,17 @@ function calcul_diagramme_echecs($position, $indexJeux) {
 
 	// *************** CASE A COLORIER *************************
 	// *************** LIGNE A TRACER  *************************
-	// l'ordre des couleurs peut poser des problèmes dans les superpositions
-	// pour une gestion plus fine il faudrait gérer l'odre avec un paramètre du genre
+	// l'ordre des couleurs peut poser des problemes dans les superpositions
+	// pour une gestion plus fine il faudrait gerer l'odre avec un parametre du genre
 	// encouleur=R,a1,a2,c2-c8,B,e4-e5,g8
-	// qui permetrais de choisir l'ordre de création
+	// qui permetrais de choisir l'ordre de creation
 	
 	if (strlen($casejaune)>0 )	{
 		$lescases=explode(",",$casejaune);
 			for ($j=0 ; $j<count($lescases) ; $j++) {
 				$square=$lescases[$j];
 				$hilite = "hjaune";
-				if (strlen($square)==2) { diag_echecs_hilite_square($chessboard,$square,$hilite,$flip); };	//case de couleur
+				if (strlen($square)==2) { diag_echecs_hilite_square($chessboard,$square,$hilite,$flip); };	// case de couleur
 				if (strlen($square)==5) { diag_echecs_hilite_line($chessboard, $square, $hilite,$flip); };	// ligne de couleur
 			}
 		}
@@ -283,15 +291,37 @@ second */
 function jeux_diag_echecs($texte, $indexJeux, $form=true) { 
 	// qq initialisations
 	$html = false;
+	$coloration = $diagramme = '';
 	
 	// decodage du texte
 	$tableau = jeux_split_texte('diag_echecs', $texte);
 	diag_echecs_config_supplementaire();
 	foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $html .= "<div class=\"jeux_titre diag_echecs_titre\">{$tableau[$i+1]}</div>";
-	  elseif ($valeur==_JEUX_DIAG_ECHECS) $html .= calcul_diagramme_echecs($tableau[$i+1], $indexJeux);
-	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
+	  elseif ($valeur==_JEUX_DIAG_ECHECS) {
+		  if($diagramme) {
+			  $html .= calcul_diagramme_echecs($diagramme, $coloration, $indexJeux);
+			  $coloration = $diagramme = '';
+		  }
+		  $diagramme = $tableau[$i+1];
+		  if($coloration) {
+			  $html .= calcul_diagramme_echecs($diagramme, $coloration, $indexJeux);
+			  $coloration = $diagramme = '';
+		  }
+	  } elseif ($valeur==_JEUX_COLORATION) {
+		  if($coloration && $diagramme) {
+			  $html .= calcul_diagramme_echecs($diagramme, $coloration, $indexJeux);
+			  $coloration = $diagramme = '';
+		  }
+		  $coloration .= "\n".$tableau[$i+1];
+		  if($diagramme) {
+			  $html .= calcul_diagramme_echecs($diagramme, $coloration, $indexJeux);
+			  $coloration = $diagramme = '';
+		  }
+	  } elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
 	}
+    if($diagramme)
+	  $html .= calcul_diagramme_echecs($diagramme, $coloration, $indexJeux);
 	
 	return $html;
 }

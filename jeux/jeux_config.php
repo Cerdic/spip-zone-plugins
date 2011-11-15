@@ -49,6 +49,7 @@ define('_JEUX_AUTEUR', 'auteur');
 define('_JEUX_RECUEIL', 'recueil');
 define('_JEUX_PENDU', 'pendu');
 define('_JEUX_DIAG_ECHECS', 'diag_echecs');
+define('_JEUX_COLORATION', 'coloration');
 define('_JEUX_CHESSSTUFF', 'chesstuff');
 define('_JEUX_MULTI_JEUX', 'jeu');
 
@@ -72,7 +73,7 @@ $jeux_caracteristiques = array(
 	'devinettes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_DEVINETTE, _JEUX_CHARADE, _JEUX_REPONSE, _JEUX_CONFIG),
 	'trous' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_TROU, _JEUX_CONFIG, _JEUX_SCORE),
 	'pendu' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_PENDU, _JEUX_CONFIG),
-	'diag_echecs' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_DIAG_ECHECS, _JEUX_CONFIG),
+	'diag_echecs' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_DIAG_ECHECS, _JEUX_COLORATION, _JEUX_CONFIG),
 	'chesstuff' => array(_JEUX_CHESSSTUFF, _JEUX_CONFIG),
   ),
 
