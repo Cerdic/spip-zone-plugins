@@ -7,32 +7,51 @@ Stocker les traductions eventuelles de l'article en cours
 	#SET_MERGE{ListeTraductions,#GET{ListeTraductions},#ARRAY{#LANG,#URL_ARTICLE}}
 </BOUCLE_TraductionArticleCourant>
 </BOUCLE_article>
+
 [(#REM) 
-Y-a-t'il plusieurs langues reellement utilisees dans le site ?
+Stocker les traductions eventuelles de la rubrique en cours
+]
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+#SET{ListeTraductions, #ARRAY{}}
+<BOUCLE_TraductionRubriqueCourante(RUBRIQUES){traduction}{lang !IN #CONFIG{menu_lang_liens/langues_invisibles,#ARRAY}}>
+	#SET_MERGE{ListeTraductions,#GET{ListeTraductions},#ARRAY{#LANG,#URL_RUBRIQUE}}
+</BOUCLE_TraductionRubriqueCourante>
+</BOUCLE_rubrique>
+
+[(#REM) 
+Y-a-t'il plus d'une langue reellement utilisee dans le site (- les langues invisibles) ?
 Si oui, on affiche le menu de langue
 Si non, rien
+
+Note : 'explode' est une fonction PHP : http://php.net/manual/fr/function.explode.php, utilisée ici pour renvoyer un tableau contenant 
+les langues utilisées, à partir de la variable meta 'langues_utilisees'. Ce tableau est comparé avec le tableau des langues invisibles
+avec la fonction PHP 'array_diff' http://www.php.net/manual/fr/function.array-diff.php qui renvoie elle-meme un tableau. 
+
+Un formulaire CFG permet de définir la liste des langues invisibles (qui ne doivent pas apparaitre dans le menu de langue).
 ]
-<BOUCLE_PlusieursLanguesUtilisees(ARTICLES){par lang}{fusion lang}{lang !IN #CONFIG{menu_lang_liens/langues_invisibles,#ARRAY}}{1,1}>
+
+[(#SET{langues_a_afficher,[(#CONFIG{langues_utilisees}|explode{","}|array_diff{#CONFIG{menu_lang_liens/langues_invisibles}})]})]
+
+<BOUCLE_PlusieursLanguesUtilisees(POUR){tableau #GET{langues_a_afficher}}{1,1}>
 <div id="menu_lang">
 [(#REM)
 On liste les langues utilisees dans le site
 ]
-
-	<BOUCLE_ListeLangues(ARTICLES){par lang}{fusion lang}{lang!=}{lang !IN #CONFIG{menu_lang_liens/langues_invisibles,#ARRAY}}>
+	<BOUCLE_ListeLangues(POUR){tableau #GET{langues_a_afficher}}>
 		[(#REM)
 		Si la langue n'est pas celle en cours, on fait un lien qui fait 2 actions :
 		- fixer le cookie de langue sur la langue demandee
 		- rediriger sur l'article dans la langue demandee si opportun
 		  sinon, revenir sur la page en cours
 		]
-		[(#LANG|=={#ENV{lang}}|non)
-			[<a href="[(#URL_ACTION_AUTEUR{'converser', '', #GET{ListeTraductions}|table_valeur{#LANG}|sinon{#SELF}}|parametre_url{var_lang,#LANG})]" rel="alternate" lang="#LANG" title="[(#LANG|traduire_nom_langue|ucfirst|attribut_html)]" class="langue_#LANG">(#LANG{langues}|ucfirst)</a>]
+		[(#VALEUR|=={#ENV{lang}}|non)
+			[<a href="[(#URL_ACTION_AUTEUR{'converser', '', #GET{ListeTraductions}|table_valeur{#VALEUR}|sinon{#SELF}}|parametre_url{var_lang,#VALEUR})]" rel="alternate" lang="#VALEUR" title="[(#VALEUR|traduire_nom_langue|ucfirst|attribut_html)]" class="langue_#VALEUR">(#VALEUR|ucfirst)</a>]
 		]
 		[(#REM)
 		Si la langue est celle en cours, afficher celle-ci en gras, sans lien
 		]
-		[(#LANG|=={#ENV{lang}}|oui)
-			[<strong class="langue_#LANG" lang="#LANG" title="[(#LANG|traduire_nom_langue|ucfirst|attribut_html)]">(#LANG|ucfirst)</strong>]
+		[(#VALEUR|=={#ENV{lang}}|oui)
+			[<strong class="langue_#VALEUR" lang="#VALEUR" title="[(#VALEUR|traduire_nom_langue|ucfirst|attribut_html)]">(#VALEUR|ucfirst)</strong>]
 		]
 	</BOUCLE_ListeLangues>
 </div>
