@@ -92,7 +92,7 @@ function glossaire_echappe_mot_callback($matches) {
 
 function glossaire_safe($texte) {
 	// on retire les notes avant propre()
-	return safehtml(propre(preg_replace(', *\[\[(.*?)\]\],msS', '', nl2br(trim($texte)))));
+	return safehtml(cs_propre(preg_replace(', *\[\[(.*?)\]\],msS', '', nl2br(trim($texte)))));
 }
 
 // renvoie le tableau des mots du glossaire
@@ -175,8 +175,6 @@ function cs_rempl_glossaire($texte, $liste=false) {
 		$glossaire_generer_mot = '"<a $table1[\\2]_".$GLOBALS["gl_i"]++."\' class=\'cs_glossaire\'><span class=\'gl_mot\'>".'.$glossaire_generer_mot.'."</span>$table2[\\2]</a>"';
 	}
 	$unicode = false;
-	$mem = $GLOBALS['toujours_paragrapher'];
-	$GLOBALS['toujours_paragrapher'] = false;
 	// initialisation des globales d'echappement
 	$gloss_ech = $gloss_mots = array();
 	$gloss_ech_id = $gloss_mots_id = 0;
@@ -222,7 +220,6 @@ function cs_rempl_glossaire($texte, $liste=false) {
 			}
 		}
 	}
-	$GLOBALS['toujours_paragrapher'] = $mem;
 	$GLOBALS['gl_i'] = 0;
 	if($liste) $texte = (preg_match_all(',@@M(\d+)#(\d+)@@,', $texte, $reg, PREG_SET_ORDER) 
 			&& array_walk($reg,

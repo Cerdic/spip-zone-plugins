@@ -29,11 +29,7 @@ function cs_introduire($texte) {
 // Fonction propre() sans paragraphage
 function cs_propre($texte) {
 	include_spip('inc/texte');
-	$mem = $GLOBALS['toujours_paragrapher'];
-	$GLOBALS['toujours_paragrapher'] = false;
-	$texte = propre($texte);
-	$GLOBALS['toujours_paragrapher'] = $mem;
-	return $texte;
+	return trim(PtoBR(propre($texte)));
 }
 
 // Filtre creant un lien <a> sur un texte
