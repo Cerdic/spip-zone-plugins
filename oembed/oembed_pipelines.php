@@ -7,16 +7,18 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// ajouter le lien oembed dans le head des pages publiques
-function oembed_affichage_final($page) {
-	if (!$GLOBALS['html']) return $page;
-	if ($url_oembed = url_absolue(parametre_url($GLOBALS['meta']['adresse_site'] . '/services/oembed/','url',url_absolue(self())))) {
-		$page = preg_replace(',</head>,i',
-			"\n".'<link rel="alternate" type="application/json+oembed" href="'.$url_oembed.'&amp;format=json" />'.
-			"\n".'<link rel="alternate" type="text/xml+oembed" href="'.$url_oembed.'&amp;format=xml" />'."\n".'\0',
-			$page, 1);
-	}
-	return $page;
+//
+/**
+ * annoncer le service oembed dans le head des pages publiques
+ *
+ * @param string $head
+ * @return string
+ */
+function oembed_insert_head($head) {
+	$service = "services/oembed/";
+	$head .= '<link rel="alternate" type="application/json+oembed" href="<?php echo parametre_url(url_absolue("'.parametre_url($service,'format','json').'"),"url",url_absolue(self()));?>" />'."\n";
+	$head .= '<link rel="alternate" type="text/xml+oembed" href="<?php echo parametre_url(url_absolue("'.parametre_url($service,'format','xml').'"),"url",url_absolue(self()));?>" />'."\n";
+	return $head;
 }
 
 /**
