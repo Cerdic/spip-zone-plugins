@@ -23,11 +23,11 @@ Y-a-t'il plus d'une langue reellement utilisee dans le site (- les langues invis
 Si oui, on affiche le menu de langue
 Si non, rien
 
-Note : 'explode' est une fonction PHP : http://php.net/manual/fr/function.explode.php, utilisée ici pour renvoyer un tableau contenant 
-les langues utilisées, à partir de la variable meta 'langues_utilisees'. Ce tableau est comparé avec le tableau des langues invisibles
+Note : 'explode' est une fonction PHP : http://php.net/manual/fr/function.explode.php, utilisee ici pour renvoyer un tableau contenant 
+les langues utilisees, a partir de la variable meta 'langues_utilisees'. Ce tableau est compare avec le tableau des langues invisibles
 avec la fonction PHP 'array_diff' http://www.php.net/manual/fr/function.array-diff.php qui renvoie elle-meme un tableau. 
 
-Un formulaire CFG permet de définir la liste des langues invisibles (qui ne doivent pas apparaitre dans le menu de langue).
+Un formulaire CFG permet de definir la liste des langues invisibles (qui ne doivent pas apparaitre dans le menu de langue).
 ]
 
 [(#SET{langues_a_afficher,[(#CONFIG{langues_utilisees}|explode{","}|array_diff{#CONFIG{menu_lang_liens/langues_invisibles}})]})]
