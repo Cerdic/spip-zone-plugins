@@ -16,6 +16,12 @@ function boucle_TICKETS_dist($id_boucle, &$boucles) {
 	if (!isset($boucle->modificateur['criteres']['statut']) OR !isset($boucle->modificateur['criteres']['tout'])) {
 		array_unshift($boucle->where,array("'IN'", "'$mstatut'", "'(\\'ouvert\\',\\'resolu\\',\\'ferme\\',\\'redac\\')'"));
 	}
+	if(function_exists('lire_config')){
+		$desactiver_public = lire_config('tickets/general/desactiver_public','off');
+		if(($desactiver_public == 'on') && !test_espace_prive()){
+			array_unshift($boucle->where,array("'='", "'$mstatut'", "'(\\'none\\')'"));
+		}
+	}
 
 	return calculer_boucle($id_boucle, $boucles);
 }

@@ -62,11 +62,12 @@
 			<li class="fieldset">
 				<h3 class="legend"><:tickets:cfg_lgd_champs_options_autres:></h3>
 				<ul>
+				[(#SAISIE{oui_non, desactiver_public,
+					label=<:tickets:cfg_lbl_desactiver_public:>,
+					defaut=''})]
 				[(#SAISIE{oui_non, cacher_moteurs,
 					label=<:tickets:cfg_lbl_cacher_moteurs:>,
-					defaut=on,
-					label_case=<:tickets:cfg_lbl_cacher_moteurs:>})]
-				
+					defaut=on})]
 				[(#SAISIE{case, notification_publique,
 					label=<:tickets:cfg_lbl_notification_publique:>,
 					label_case=<:tickets:cfg_lbl_case_notification_publique:>})]

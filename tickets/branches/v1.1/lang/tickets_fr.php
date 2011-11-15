@@ -35,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_case_notification_publique' => 'Être notifié dans l\'espace public plut&ocirc;t que dans l\'espace privé (Nécessite Zpip)',
 	'cfg_lbl_case_selecteur_navigateur' => 'Disposer d\'un sélecteur de navigateur dans le formulaire d\'édition de ticket',
 	'cfg_lbl_composants' => 'Composants',
+	'cfg_lbl_desactiver_public' => 'Désactiver l\'accès public',
 	'cfg_lbl_forums_publics' => 'Commentaires sur les tickets',
 	'cfg_lbl_jalons' => 'Jalons',
 	'cfg_lbl_joindre_fichiers' => 'Joindre un ou des fichiers',

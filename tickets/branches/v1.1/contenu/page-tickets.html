@@ -1,3 +1,4 @@
+<BOUCLE_si_afficher_public(CONDITION){si #CONFIG{tickets/general/desactiver_public,off}|!={on}|oui}>
 <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><:tickets:tickets:></div>
 
 <div class="ticket contenu-principal">
@@ -101,3 +102,5 @@
 		</div>]
 	]
 </div>
+</BOUCLE_si_afficher_public>
+#FILTRE{trim}

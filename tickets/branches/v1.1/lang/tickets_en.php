@@ -35,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_case_notification_publique' => 'Be notified in public rather than private space (Requires Zpip)',
 	'cfg_lbl_case_selecteur_navigateur' => 'Having a browser selector in the bug report form',
 	'cfg_lbl_composants' => 'Components',
+	'cfg_lbl_desactiver_public' => 'Disable public access',
 	'cfg_lbl_forums_publics' => 'Comments on bug reports',
 	'cfg_lbl_jalons' => 'Milestones',
 	'cfg_lbl_joindre_fichiers' => 'Add one or several files',
