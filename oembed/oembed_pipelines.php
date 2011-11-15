@@ -180,7 +180,7 @@ function oembed_pre_propre($texte) {
 			AND (oembed_verifier_provider($url) OR (lire_config('oembed/detecter_lien','non')=='oui'))) {
 				$fond = recuperer_fond('modeles/oembed',array('url'=>$url));
 				if ($fond = trim($fond))
-					$texte = str_replace($lien, $fond, $texte);
+					$texte = str_replace($lien, echappe_html("<html>$fond</html>"), $texte);
 			}
 		}
 	}

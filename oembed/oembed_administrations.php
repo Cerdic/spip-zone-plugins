@@ -40,6 +40,11 @@ function oembed_upgrade($nom_meta_base_version,$version_cible){
 				'http://instagr.am/*'            =>   'http://api.instagram.com/oembed',
 				'http://instagram.com/*'         =>   'http://api.instagram.com/oembed',
 
+				'https://twitter.com/*/status/*' =>   '?action=oeproxy_twitter',
+				'http://twitter.com/*/status/*' =>   '?action=oeproxy_twitter',
+				'https://twitter.com/*/statuses/*' =>   '?action=oeproxy_twitter',
+				'http://twitter.com/*/statuses/*' =>   '?action=oeproxy_twitter',
+
 				#'http://yfrog.ru|com.tr|it|fr|co.il|co.uk|com.pl|pl|eu|us)/*'         =>   'http://yfrog.com/api/oembed',
 				#'https://gist.github.com/*' => 'http://github.com/api/oembed?format=json'
 			);

@@ -38,7 +38,7 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 	if (!$provider)
 		return false;
 	
-	$data_url = parametre_url($provider['endpoint'],'url',$url,'&');
+	$data_url = parametre_url(url_absolue($provider['endpoint'],url_de_base()),'url',$url,'&');
 	include_spip('inc/config');
 	if (is_null($maxwidth)){
 		$maxwidth = lire_config('oembed/maxwidth','600');

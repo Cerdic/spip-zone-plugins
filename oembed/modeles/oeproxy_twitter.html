@@ -1,0 +1,17 @@
+<style>
+.tweet-block {background: #fff;padding: 10px;border: 1px solid #eee;margin: 1em 0;}
+.tweet-user-screen_name,.tweet-user-name {display: block;}
+.tweet-user-block img {float:left;margin-right: 10px;margin-bottom:10px;}
+.tweet-text {clear:left; font-size: 1.3em;margin: 10px 0;}
+</style>
+<div class="tweet-block">
+	<div class="tweet-user-block">
+		<a href="http://twitter.com/#ENV*{screen_name}"><img src="#ENV*{profile_image}">
+			<span class="tweet-user-screen_name">@#ENV*{screen_name}</span></a>
+			<span class="tweet-user-name">#ENV*{name}</span>
+	</div>
+	<div class="tweet-text">#ENV*{text}</div>
+	<div class="tweet-meta">[<a href='#URL'>(#ENV*{created_at}|affdate_heure)</a>][
+		via (#ENV*{source})][
+		in reply to <a href='http://twitter.com/#ENV*{in_reply_to_screen_name}/status/#ENV*{in_reply_to_status_id}'>@(#ENV*{in_reply_to_screen_name})</a>]</div>
+</div>
