@@ -116,7 +116,7 @@ function calcul_diagramme_echecs($position, $coloration, $indexJeux) {
 	
 	// image en cache
 	global $jeux_config;
-	$md5 = md5($position.serialize($jeux_config));
+	$md5 = md5($position.$coloration.serialize($jeux_config));
 	$fichier_dest = sous_repertoire(_DIR_VAR, "cache-jeux") . 'echiq_'.$md5 . jeux_config('img_suffix');
 	list(,,,$size) = @getimagesize($fichier_dest);
 	$image = "<img class=\"no_image_filtrer \" src=\"$fichier_dest\" alt=\"$position\" title=\"$position\" border=\"0\" $size/><br>\n";
