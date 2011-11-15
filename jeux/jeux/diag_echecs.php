@@ -85,7 +85,7 @@ function calcul_diagramme_echecs($position, $coloration, $indexJeux) {
 	$font = intval(jeux_config('police'));
 	$img = jeux_config('img_img');
 
-	// ************* cases en surbrillance ************* (obsolète ??)
+	// ************* cases en surbrillance ************* (obsolete ??)
 	$caserouge = jeux_config('rouge');
 	$casebleu = jeux_config('bleu');
 	$casevert = jeux_config('vert');
@@ -96,7 +96,7 @@ function calcul_diagramme_echecs($position, $coloration, $indexJeux) {
 	 $coloration = preg_split("/[\r\n]+/", $coloration);
 	 foreach ($coloration as $ligne)
 		if ($regs = jeux_parse_ligne_config($ligne))
-			$surbrillance[] = array($regs[1], $regs[2]); // (couleur, valeur)
+			$surbrillance[] = array($regs[1], explode(',',$regs[2])); // (couleur, valeur)
 
 	// dechiffre le code source du diagramme place dans $position
 	$position = preg_replace("/\s*[\r\n]+\s*/", '/', trim($position));
@@ -136,13 +136,20 @@ function calcul_diagramme_echecs($position, $coloration, $indexJeux) {
 	if (in_array('r', $table)) $flip = true;
 	
 
-	// *************** CASE A COLORIER *************************
-	// *************** LIGNE A TRACER  *************************
+	// *************** CASE A COLORIER & LIGNE A TRACER *************************
+	foreach($surbrillance as $surb) 
+		if(in_array($surb[0], array('jaune', 'bleu', 'rouge', 'vert')))
+			foreach($surb[1] as $square)
+				switch(strlen($square)) {
+					case 2: diag_echecs_hilite_square($chessboard, $square, 'h'.$surb[0], $flip); break; // case de couleur
+					case 5: diag_echecs_hilite_line($chessboard, $square, 'h'.$surb[0], $flip); break; // ligne de couleur
+				}
+
+	// code obsolete ici ??
 	// l'ordre des couleurs peut poser des problemes dans les superpositions
-	// pour une gestion plus fine il faudrait gerer l'odre avec un parametre du genre
+	// pour une gestion plus fine il faudrait gerer l'ordre avec un parametre du genre
 	// encouleur=R,a1,a2,c2-c8,B,e4-e5,g8
-	// qui permetrais de choisir l'ordre de creation
-	
+	// qui permetrait de choisir l'ordre de creation
 	if (strlen($casejaune)>0 )	{
 		$lescases=explode(",",$casejaune);
 			for ($j=0 ; $j<count($lescases) ; $j++) {
