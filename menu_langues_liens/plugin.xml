@@ -14,7 +14,7 @@
 	<auteur>[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_]</auteur>
 	<licence>&#169; 2009 GNU/GPL</licence>
 	<lien>http://www.spip-contrib.net/Menu-de-langues-sous-forme-de-liens</lien>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<etat>test</etat>
 	<description>
 		<multi>
@@ -26,5 +26,7 @@
 	<icon>img_pack/menu_langues_liens.png</icon>
 	<options>mll_options.php</options>
 	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
+	<necessite id='spip_bonux' version='[1.9.1;]' />
+	<necessite id='tradrub' version='[2.1.1;]' />			
 	<categorie>navigation</categorie>
 </plugin>
