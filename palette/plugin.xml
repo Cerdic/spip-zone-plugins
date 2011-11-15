@@ -8,7 +8,7 @@
 	</slogan>
 	<auteur>Daniel FAIVRE (&#224; partir de travaux de Marcimat)</auteur>
 	<licence>&#169; 2008 GNU/LGPL</licence>
-   <version>1.3.3</version>
+   <version>1.3.4</version>
 	<version_base>0.1</version_base>
    <etat>stable</etat>
    <install>palette_install.php</install>
