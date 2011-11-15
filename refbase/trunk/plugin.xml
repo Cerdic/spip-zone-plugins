@@ -4,8 +4,8 @@
 	<icon>img_pack/refbase-48.png</icon>
 	<auteur>Joseph</auteur>
 	<licence>GPL</licence>
-	<version>1.1.0</version>
-	<etat>stable</etat>
+	<version>2.0.0</version>
+	<etat>dev</etat>
 	<description>
 	<multi>
 	[fr]Ce plugin permet d'importer des r&eacute;f&eacute;rences bibliographiques contenues dans une ou plusieurs bases de donn&eacute;es [refbase->http://www.refbase.net] et des les afficher simplement dans SPIP &agrave; l'aide du mod&egrave;le <code>refbase</code>.
@@ -29,6 +29,6 @@ in SPIP with a model called <code>refbase</code>.
 		<inclure>refbase_ieconfig_metas.php</inclure>
 	</pipeline>
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version='[2.1.2;2.1.99]' />
+	<necessite id="SPIP" version='[3.0.0-dev;3.0.99]' />
 	<utilise id="cfg" />
 </plugin>
