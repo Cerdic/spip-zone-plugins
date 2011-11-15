@@ -35,8 +35,8 @@
 		[<div class='bandeau'>(#VALEUR|table_valeur{bandeau}|?{<:zengarden:bandeau_personalisable:>})</div>]
 		</div>
 		<p class='actions'>
-		[<a target='_blank' href='[(#URL_ACTION_AUTEUR{zengarden_activer_theme,apercu:#CLE,[(#EVAL{_DIR_RACINE}|sinon{#ENV{redirect}})]})]'><:zengarden:apercevoir_ce_theme:></a>]
-		[<a href='#URL_ACTION_AUTEUR{zengarden_activer_theme,activation:#CLE,#SELF|parametre_url{debut_themes,''}}'><:zengarden:choisir_ce_theme:></a>]
+		<a target='_blank' href='[(#URL_ACTION_AUTEUR{zengarden_activer_theme,apercu:#CLE,[(#EVAL{_DIR_RACINE}|sinon{#ENV{redirect}})]})]'><:zengarden:apercevoir_ce_theme:></a><span class="sep"> | </span>[
+		<a href='(#URL_ACTION_AUTEUR{zengarden_activer_theme,activation:#CLE,#SELF|parametre_url{debut_themes,''}})'><:zengarden:choisir_ce_theme:></a>]
 		</p>
 	</li>
 </BOUCLE_themes>
