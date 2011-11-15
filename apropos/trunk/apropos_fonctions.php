@@ -4,11 +4,15 @@
  * Liste les plugins actifs avec affichage icon, nom, version, etat, short description
  * Utilisation intensive des fonctions faisant cela dans le code de SPIP
  * Auteur Jean-Philippe Guihard
- * version 0.3.0 du 06 novembre 2011, 13h40
+ * version 0.3.0 du 15 novembre 2011, 13h40
  * ajout de la possibilite de n'afficher que le nombre de plugin et extension  
  * code emprunte dans le code source de SPIP
  */
 
+/*
+to do
+vérifier les parties à traduire
+*/
 include_spip('inc/charsets');
 include_spip('inc/texte');
 include_spip('inc/plugin'); // pour plugin_est_installe
@@ -23,90 +27,88 @@ function balise_APROPOS_dist($p) {
 	$p->code = 'calcul_info_apropos(' . $premier . ')';
 	}else{
 	//si pas d\'argument, on affiche la liste des plugins
-	$p->code = 'calcul_info_apropos("liste")';
+	$p->code = 'calcul_info_apropos("listes")';
 	}
 	$p->interdire_scripts = false;
 	return $p;
 }
 
-// fait l tri dans l'argument passé avec la balise : apropos|liste, apropos|nombre, apropos|plugins, apropos|extensions
+// fait l tri dans l'argument passé avec la balise : apropos|liste, apropos|nombre, apropos|plugins, apropos|extensions, apropos|default
 // liste pour afficher la totale, 
 // nombre pour afficher le nombre total plugin et extensions
 // plugins pour afficher le nombre de plugins
 // extensions pour afficher le nombre d'extensions
+// default pour afficher une description complète du plugin
 
 function calcul_info_apropos($params){
-// si parametre liste, alors tout afficher
-if ($params == "liste"){
-$affiche = charger_fonction('admin_plugin','exec');
-$lcpa = liste_chemin_plugin_actifs();
-$lpf = liste_plugin_files();
+//liste_prefix_plugin_actifs est la liste des prefixes des plugins actifs 
+$liste_prefix_plugin_actifs = liste_chemin_plugin_actifs();
+// $liste_prefix_extensions_actives est la liste des prefixes des extensions actives
+$liste_prefix_extensions_actives = liste_plugin_files(_DIR_EXTENSIONS);
 
-/* on s'occupe de la liste des extensions */
-$liste_extensions_actives = apropos_affiche_les_extension(_DIR_EXTENSIONS);
-// liste les plugins
-$liste_des_pgI_actifs = apropos_affiche_les_PiG($lcpa,$lpf);
-return $liste_des_pgI_actifs.$liste_extensions_actives;
-}
-
-// si parametre nombre, alors afficher que le nombre de plugins et extensions
-if ($params == "nombre"){
-$pig = liste_chemin_plugin_actifs();
-$ext = liste_plugin_files(_DIR_EXTENSIONS);
-$nbre_pig = count($pig);
-$nbre_ext = count($ext);
-return $nbre_ext+$nbre_pig;
-}
-if ($params == "plugins"){
-$pig = liste_chemin_plugin_actifs();
-$nbre_pig = count($pig);
-return $nbre_pig;
-}if ($params == "extensions"){
-$ext = liste_plugin_files(_DIR_EXTENSIONS);
-$nbre_ext = count($ext);
-return $nbre_ext;
-}}
-
-function apropos_affiche_les_extension($liste_extensions_actives){
-	$rese = "";
-	if ($liste_extensions = liste_plugin_files(_DIR_EXTENSIONS)) {
-		$rese .= "<div class='apropos-liste'>";
-		$rese .= "<h3>".count($liste_extensions)." extensions activées automatiquement.</h3>";
-		$format = 'liste'; 
-		$rese .= apropos_plugins_afficher_list_dist(self(), $liste_extensions,$liste_extensions, _DIR_EXTENSIONS);// surcharge de fonction
-		$rese .= "</div>\n";
+switch ($params) { 
+	// si parametre liste, alors afficher la liste de tout ce qui est actif avec un résumé pour chaque
+	case "liste": 
+	/* on s'occupe de la liste les plugins */
+	$liste_plugins_actifs = apropos_affiche_les_pluginsActifs($liste_prefix_plugin_actifs,$afficheQuoi="resume");
+	//$liste_plugins_actifs = apropos_affiche_la_partie_generale($liste_prefix_plugin_actifs,$afficheQuoi="resume");
+	/* on s'occupe de la liste des extensions */
+	$liste_extensions_actives = apropos_affiche_les_extension(_DIR_EXTENSIONS,$afficheQuoi="resume");
+	//$liste_extensions_actives = apropos_affiche_la_partie_generale($quoiAfficher="extensions",$afficheQuoi="resume");
+	return $liste_plugins_actifs.$liste_extensions_actives;
+	break;
+	
+	// si parametre nombre, alors afficher le nombre de plugins et extensions actifs
+	case "nombre":
+	$nbre_pluginsActifs = count($liste_prefix_plugin_actifs);
+	$nbre_ext = count($liste_prefix_extensions_actives);
+	return $nbre_ext+$nbre_pluginsActifs;
+	break;
+	/* si parametre plugins, afficher le nombre de plugin actifs */
+	case "plugins":
+	$nbre_pluginsActifs = count($liste_prefix_plugin_actifs);
+	return $nbre_pluginsActifs;
+	break;
+	/* si parametre extensions, afficher le nombre d'extensions actives */
+	case "extensions":
+	$nbre_ext = count($liste_prefix_extensions_actives);
+	return $nbre_ext;
+	break;
+	/* si parametre defaut, on récupère le prefixe du plugin pour afficher la description complète de celui-ci */
+	default:
+	$leResume = apropos_afficher_info_du_plugins($url_page, $params, $class_li="item",$dir_plugins=_DIR_PLUGINS,$afficheQuoi="latotale",$params);
+	return "<br />".$leResume."<br />";
+	break;
 	}
-	return $rese;
 }
-/* Fin liste les extensions */
 
+function apropos_affiche_les_extension($liste_extensions_actives,$afficheQuoi){
+	$lesExtensions = "";
+	if ($liste_extensions = liste_plugin_files(_DIR_EXTENSIONS)) {
+		$format = 'liste'; 
+		$lesExtensions .= "<div class='apropos-liste'>";
+		$lesExtensions .= "<h3>".count($liste_extensions)." extensions activées automatiquement.</h3>";
+		$lesExtensions .= apropos_afficher_list(self(), $liste_extensions,$liste_extensions, _DIR_EXTENSIONS,$afficheQuoi);// surcharge de fonction
+		$lesExtensions .= "</div>\n";
+	}
+	return $lesExtensions;
+}
 
 /* les fonctions utilisees pour les plugins */
 // entete liste des plugins pour affichage du nombre du plugin actives
-function apropos_affiche_les_PiG($lcpa,$lpf){
-		$h3 = "<div class='apropos-liste'><h3>".sinon(
-						singulier_ou_pluriel(count($lcpa), 'plugins_actif_un', 'plugins_actifs', 'count'),
+function apropos_affiche_les_pluginsActifs($liste_prefix_plugin_actifs, $afficheQuoi){
+		$lesPlugins .= "<div class='apropos-liste'><h3>".sinon(
+						singulier_ou_pluriel(count($liste_prefix_plugin_actifs), 'plugins_actif_un', 'plugins_actifs', 'count'),
 						_T('plugins_actif_aucun')
 						)."</h3>";
-		$corps = apropos_affiche_les_plugin($lcpa, $lcpa, $format);
-return $h3.$corps."</div>\n";
+		$lesPlugins .= apropos_afficher_list(self(), $liste_prefix_plugin_actifs,$liste_plugins_actifs, _DIR_PLUGINS, $format='liste',$afficheQuoi,$params);
+	return $lesPlugins."</div>\n";
 }
 
-// Extrait de http://doc.spip.org/@affiche_les_plugins
-function apropos_affiche_les_plugin($liste_plugins, $liste_plugins_actifs, $format='liste'){
-	if (!$format)
-		$format = 'liste';
-	if (!in_array($format,array('liste','repertoires')))
-		$format = 'repertoires';
-	$res = apropos_plugins_afficher_list_dist(self(), $liste_plugins,$liste_plugins_actifs);
-
-	if (!$res) return "";
-	return	$res;
-}
 
 // Extrait de  http://doc.spip.org/@affiche_liste_plugins
 /* Creation de la liste des plugins actifs, trie de la liste par ordre alphabetique*/
-function apropos_plugins_afficher_list_dist($url_page,$liste_plugins, $liste_plugins_actifs, $dir_plugins=_DIR_PLUGINS,$afficher_un = 'afficher_plugin'){
+function apropos_afficher_list($url_page,$liste_plugins, $liste_plugins_actifs, $dir_plugins,$afficheQuoi){
 	$get_infos = charger_fonction('get_infos','plugins');
 	
 	// je recupere la liste des plugin par leur nom
@@ -114,48 +116,31 @@ function apropos_plugins_afficher_list_dist($url_page,$liste_plugins, $liste_plu
 	foreach(array_keys($liste_plugins) as $chemin) {
 		$info = $get_infos($chemin, false, $dir_plugins);
 		$liste_plugins[$chemin] = strtoupper(trim(typo(translitteration(unicode2charset(html2unicode($info['nom']))))));
-	}
-	
-	// je trie cette liste par le nom de chacun
-	asort($liste_plugins);
-	$exposed = urldecode(_request('plugin'));
-
-	$block_par_lettre = false;//count($liste_plugins)>10;
-	$fast_liste_plugins_actifs = array_flip($liste_plugins_actifs);
-	$res = '';
-	$block = '';
-	$initiale = '';
-	$block_actif = false;
-	
+	}	
+	$block_UL = '';
 	// pour chaque plugin, je vais aller chercher les informations complementaires a afficher
 	// en l'occurrence, nom, version, etat, slogan ou description et logo.
+	// je construis une liste classique avec des UL et des LI
 	foreach($liste_plugins as $plug => $nom){
-		$block .= apropos_plugins_afficher_plugins($url_page, $plug, "item", $dir_plugins)."\n";
+		$block_UL .= apropos_afficher_info_du_plugins($url_page, $plug, "item", $dir_plugins,$afficheQuoi,$params)."\n";
 	}
 
-	return "<ul>".$block."</ul>";
+	return "<ul>".$block_UL."</ul>";
 }
 
 // Extrait de  http://doc.spip.org/@ligne_plug
 /* Extrait les infos de chaque plugin */
-function apropos_plugins_afficher_plugins($url_page, $plug_file, $class_li="item", $dir_plugins=_DIR_PLUGINS) {
+function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item", $dir_plugins=_DIR_PLUGINS,$afficheQuoi,$params) {
 
 	$force_reload = (_request('var_mode')=='recalcul');
 	$get_infos = charger_fonction('get_infos','plugins');
 	$info = $get_infos($plug_file, $force_reload, $dir_plugins);
 	$leBloc = charger_fonction('afficher_plugin', 'plugins');
 	
-
-	$leResume = apropos_plugin_resumer($info, $dir_plugins, $plug_file, $url_page);
-	return "<li>"
-	. $leResume
-	. $erreur
-	."</li>";
-}
-
-// Extrait de Cartouche Resume a modifier pour l'affichage final
-// prend en compte si version 2 ou version 3 de Spip
-function apropos_plugin_resumer($info, $dir_plugins, $plug_file, $url_page) {
+// Affichage des différentes informations à récupérer
+// suivants que nous voulions un liste totale des plugins
+// ou juste le description complete d'un seul plugin
+// je cherche la version de Spip car différence entre Spip 2 et Spip 3
 	//recherche la version de Spip
 	$laversion = spip_version();
 	$version_de_spip = $laversion[0];
@@ -171,19 +156,43 @@ function apropos_plugin_resumer($info, $dir_plugins, $plug_file, $url_page) {
 		
 		$prefix = $info['prefix'];
 		$dir = "$dir_plugins$plug_file";
-		$slogan = PtoBR(plugin_propre($info['slogan'], "$dir/lang/paquet-$prefix"));
-		// test si slogan vide afin de prendre la description via le fichier plugin.xml le cas echeant
-		if ($slogan!==''){
-			// une seule ligne dans le slogan : couper si besoin
-			if (($p=strpos($slogan, "<br />"))!==FALSE)
-				$slogan = substr($slogan, 0,$p);
-			// couper par securite
-			$slogan = couper($slogan, 180).".";
+		// si afficheQuoi = latotale, je vais afficher toutes les infos du plugin, 
+		// y comprit une description complète et non uniquement un résumé.
+		// Autrement, affiche le résumé
+		// fonction demandée pour pouvoir afficher une page par plugin, page qui affiche
+		// la description complète de ce plugin.
+		//nom
+		if ($afficheQuoi == "latotale"){
+		//je teste pour vérifier que $prefix n'est pas vide. Si vide, c'est que le préfixe entré est invalide
+		if ($prefix ==''){
+			return "<span class='apropos-erreur'>"
+			. "Erreur dans la saisie du préfixe du plugin.</span><br /> Vous avez entré <b>".$params."</b> comme préfixe. Vérifiez ce dernier qui se trouve dans le fichier paquet.xml ou plugin.xml du plugin.";
 			}else{
 			$get_desc = charger_fonction('afficher_plugin','plugins');
-			$slogan = couper(plugin_propre($info['description']), 180);
+			$slogan = PtoBR(plugin_propre($info['description'], "$dir/lang/paquet-$prefix"));
+			$documentation = $info['documentation'];
+			if ($documentation != ''){
+			$documentation = "<div class='apropos-description'>La documentation du plugin : <a href=\"".$info['documentation']."\">".$info['documentation']."</a></div>";
+			}
+			$demonstration = $info['demonstration'];
+			if ($demonstration != ''){
+			$demonstration = "<div class='apropos-description'>Le plugin en action : <a href=\"".$info['demonstration']."\">".$info['demonstration']."</a></div>";
+			}
+			}
+		}else{
+			$slogan = PtoBR(plugin_propre($info['slogan'], "$dir/lang/paquet-$prefix"));
+			// test si slogan vide afin de prendre la description via le fichier plugin.xml le cas echeant
+			if ($slogan!==''){
+				// une seule ligne dans le slogan : couper si besoin
+				if (($p=strpos($slogan, "<br />"))!==FALSE)
+					$slogan = substr($slogan, 0,$p);
+				// couper par securite
+				$slogan = couper($slogan, 180).".";
+				}else{
+				$get_desc = charger_fonction('afficher_plugin','plugins');
+				$slogan = couper(plugin_propre($info['description']), 180);
+			}
 		}
-		
 		$url = parametre_url($url_page, "plugin", substr($dir,strlen(_DIR_RACINE)));
 	
 		// affiche l'icone du plugin ou une icone générique si absente
@@ -204,6 +213,7 @@ function apropos_plugin_resumer($info, $dir_plugins, $plug_file, $url_page) {
 		}else{
 		$auteur = plugin_propre($info['auteur']);
 		}
+		
 		$leNom=PtoBR(plugin_propre($info['nom']));
 	}
 	
@@ -228,8 +238,7 @@ function apropos_plugin_resumer($info, $dir_plugins, $plug_file, $url_page) {
 			$i = "<div class='apropos-icon'>$i</div>";
 			//$i = '';
 		}
-		$auteur = plugin_propre($info['auteur']) ;
-		
+		$auteur = plugin_propre($info['auteur']) ;		
 			// on recherche la trace d'une arobase pour remplacer par 1 image
 			$lemail = strpos($auteur,'@') ;
 			if ($lemail !== false) {
@@ -244,17 +253,23 @@ function apropos_plugin_resumer($info, $dir_plugins, $plug_file, $url_page) {
 			}
 	}
 	
-	return "<div class='resume'>"
+	// on construit l'affichage des informations
+	$leResume = "<div class='apropos-resume'>"
 	. $i
-	. "<span class='apropos-nom'>"
-	. $leNom
-	. "</span>"
-	. " <span class='apropos-version'>v ".$info['version']."</span>"
-	. " <span class='apropos-etat'> - "
-	. plugin_etat_en_clair($info['etat'])
-	. "</span>"
-	. "<div class='apropos-description'>".$slogan."</div><span class='apropos-auteur'>". _T('public:par_auteur') .$auteur.".</span>"
+	. "<span class='apropos-nom'>".$leNom."</span>"
+	. "<span class='apropos-version'>v ".$info['version']."</span>"
+	. "<span class='apropos-etat'> - ".plugin_etat_en_clair($info['etat'])."</span>"
+	. "<div class='apropos-description'>".$slogan."</div>"
+	. "<span class='apropos-auteur'>". _T('public:par_auteur') .$auteur.".</span>"
+	. $documentation
+	. $demonstration
 	. "</div>";
 
+
+	return "<li>"
+	. $leResume
+	. $erreur
+	."</li>";
 }
+
 ?>

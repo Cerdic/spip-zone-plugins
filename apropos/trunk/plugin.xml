@@ -1,7 +1,7 @@
 <plugin>
     <nom>À propos des Plugins actifs</nom>
     <auteur>[Jean-Philippe Guihard|Se rendre sur le site de Jean-Philippe Guihard->http://www.jp.guihard.net/]</auteur>
-    <version>0.3.ß2</version>
+    <version>0.3.0</version>
     <etat>Test</etat>
 	<slogan>Liste les plugins actifs et affiche une description sommaire</slogan>
     <description>
@@ -23,7 +23,10 @@
 	Pour afficher la liste dans un article, il faut écrire dans l'article <code><apropos|liste></code>.<br />
 	Pour n'afficher que le nombre de plugins ET d'extensions actifs, utilisez <code><apropos|nombre></code>.<br />
 	Pour n'afficher que le nombre de plugins actifs, utilisez <code><apropos|plugins></code>.<br />
-	Pour n'afficher que le nombre d'extensions actives, utilisez <code><apropos|extensions></code>.
+	Pour n'afficher que le nombre d'extensions actives, utilisez <code><apropos|extensions></code>.<br />
+	
+	Si vous voulez afficher la description complète d'un plugin dans un article, utilisez <code><apropos|prefixe=le préfixe du plugin></code>. Ainsi, par exemple, si vous mettez <code><apropos|prefixe=apropos></code>, vous afficherez la description complète de ce plugin.
+
 	[en]Lists the active plugins and displays a brief description of them.
 	It is used to display a page of type "about the site" with a summary of actives plugins, including the icon of these.
 	<br />
