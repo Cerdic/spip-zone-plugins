@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_configurer_oembed'=>'Configurer oEmbed',
 'titre_configurer_providers'=>'Providers oEmbed',
 'titre_ajouter_provider'=>'Ajouter un provider',
+'titre_configuration_avancee_providers' => 'Accéder à la configuration avancée des fournisseurs oEmbed',
 
 );
 
