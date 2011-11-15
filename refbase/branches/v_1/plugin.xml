@@ -28,7 +28,7 @@ in SPIP with a model called <code>refbase</code>.
 		<nom>ieconfig_metas</nom>
 		<inclure>refbase_ieconfig_metas.php</inclure>
 	</pipeline>
-	<categorie>divers</categorie>
+	<categorie>edition</categorie>
 	<necessite id="SPIP" version='[2.1.2;2.1.99]' />
 	<utilise id="cfg" />
 </plugin>

@@ -93,23 +93,8 @@
 	font-size: 0.8em;
 }
 
-.refbasecss a:link {
-	color: #0033CC;
-	text-decoration: none;
-}
-
-.refbasecss a:visited {
-	color: #666666;
-	text-decoration: none;
-}
-
-.refbasecss a:active {
-	color: #990000;
-	text-decoration: none;
-}
-
-.refbasecss a:hover {
-	color: #3366FF;
+.refbasecss .showhide > a, .refbasecss .showhide > a:hover, .refbasecss .showhide > a:focus, .refbasecss .showhide > a:active {
+	background: none; 
 	text-decoration: none;
 }
 

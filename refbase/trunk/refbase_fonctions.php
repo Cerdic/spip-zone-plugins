@@ -11,6 +11,7 @@ function balise_REFBASE_dist($p) {
 }
 
 function calculer_balise_REFBASE($env, $option=''){
+	include_spip('inc/config');
 	// On determine l url a utiliser
 	$url_refbase = $env['url_refbase'] ? trim($env['url_refbase']) : trim(lire_config('refbase/url_refbase'));
 	// on ajoute le / final au besoin
