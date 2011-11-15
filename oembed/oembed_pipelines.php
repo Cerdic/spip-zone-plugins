@@ -16,7 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function oembed_insert_head($head) {
 	$service = "services/oembed/";
-	$head .= '<link rel="alternate" type="application/json+oembed" href="<?php echo parametre_url(url_absolue("'.parametre_url($service,'format','json').'"),"url",url_absolue(self()));?>" />'."\n";
+	$head .= '<link rel="alternate" type="application/json+oembed" href="<?php include_spip(\'inc/filtres_mini\');echo parametre_url(url_absolue("'.parametre_url($service,'format','json').'"),"url",url_absolue(self()));?>" />'."\n";
 	$head .= '<link rel="alternate" type="text/xml+oembed" href="<?php echo parametre_url(url_absolue("'.parametre_url($service,'format','xml').'"),"url",url_absolue(self()));?>" />'."\n";
 	return $head;
 }
