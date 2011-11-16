@@ -1,6 +1,8 @@
 <BOUCLE_ext(DOCUMENTS types_documents) {id_document} {tout}>
-[(#MEDIA**|in_any{#ARRAY{0,'audio',1,'video',2,'image'}}|?{
+[(#CHEMIN{modeles/emb_[(#EXTENSION)].html}|?{[(#INCLURE
+{fond=modeles/emb_[(#EXTENSION)]}{id=#ID_DOCUMENT}{env}{emb=' '}
+)],[(#MEDIA**|in_any{#ARRAY{0,'audio',1,'video',2,'image'}}|?{
 	[(#INCLURE{fond=modeles/#MEDIA}{id=#ID_DOCUMENT}{env}{emb=' '})],
 	[(#INCLURE{fond=modeles/[(#MIME_TYPE|substr{0,[(#MIME_TYPE|strpos{/})]})]}{id=#ID_DOCUMENT}{env}{emb=' '})]
-})]
+})]})]
 </BOUCLE_ext>
