@@ -3,7 +3,7 @@
 	<auteur>Severo</auteur>
 	<licence>GNU/GPL</licence>
 	<version>0.1.0</version>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<prefix>redirhttps</prefix>
  	<categorie>performance</categorie>
 	<slogan>S&#233;curiser l'acc&#232;s &#224; certaines pages du site</slogan>
@@ -18,5 +18,5 @@
 
 	<options>redirhttps_options.php</options>
 
-	<necessite id="SPIP" version="[2.1.10;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.11;3.0.0]" />
 </plugin>
