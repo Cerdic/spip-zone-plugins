@@ -27,7 +27,7 @@ function balise_APROPOS_dist($p) {
 	$p->code = 'calcul_info_apropos(' . $premier . ')';
 	}else{
 	//si pas d\'argument, on affiche la liste des plugins
-	$p->code = 'calcul_info_apropos("listes")';
+	$p->code = 'calcul_info_apropos("liste")';
 	}
 	$p->interdire_scripts = false;
 	return $p;
@@ -254,9 +254,9 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 	}
 	
 	// on construit l'affichage des informations
-	$leResume = "<div class='apropos-resume'>"
+	$leResume = "<div class='resume'>"
 	. $i
-	. "<span class='apropos-nom'>".$leNom."</span>"
+	. "<span class='apropos-nom'>".$params.$leNom."</span>"
 	. "<span class='apropos-version'>v ".$info['version']."</span>"
 	. "<span class='apropos-etat'> - ".plugin_etat_en_clair($info['etat'])."</span>"
 	. "<div class='apropos-description'>".$slogan."</div>"
