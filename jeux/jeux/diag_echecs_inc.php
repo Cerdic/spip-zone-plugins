@@ -61,12 +61,26 @@ function image_echiquier() {
 	// ***************** Ouvre une image pour l'échiquier *******************
 	if (strlen(jeux_config('plateau'))>1 )	{
 	// si une image d'échiqier est utilisé
-	//$url = jeux_config('base_url').jeux_config('plateau');
-	$url = _DIR_PLUGIN_JEUX.'img/echiquiers/'.jeux_config('plateau');
+	$nomfichier=jeux_config('plateau');
+	$url = _DIR_PLUGIN_JEUX.'img/echiquiers/'.$nomfichier;
 	if (file_exists($url)) {
 		$board=imagecreatefrompng($url);
 		if(!$board) { die("Erreur lors de l'ouverture du fichier : ".jeux_config('plateau')); }
+		list($width, $height) = getimagesize($url); //récupère la largeur on suppose l'image carrée
+		$board_size = $width;
+		jeux_config_set('board_size', $width);			
+		if(strpos($nomfichier,'(')<>0) { //si le nom du fichier contient les coordonnées de l'origine
+			$xori=substr($nomfichier,strpos($nomfichier,'(')+1,strpos($nomfichier,'-')-strpos($nomfichier,'(')-1);
+			$yori=substr($nomfichier,strpos($nomfichier,'-')+1,strpos($nomfichier,')')-strpos($nomfichier,'-')-1);
+			jeux_config_set('xori', $xori);
+			jeux_config_set('yori', $yori);		
+		} else {
+			jeux_config_set('xori', '0');
+			jeux_config_set('yori', '0');		
+		}		
 	}
+	
+	
 
   }
 	else {
@@ -80,11 +94,16 @@ function image_echiquier() {
 		for ($j=0 ; $j<8 ; $j++) 
 		  if (($i+$j) & 1) imagecopy($board,$square,$i*$taille,$j*$taille,0,0,$taille,$taille);
 	}
-  $chessboard = imagecreatetruecolor($board_size+2*$bordure,$board_size+2*$bordure);
-  $black_color = imagecolorallocate($chessboard,0,0,0);
-  imagefill($chessboard,0,0,$black_color);
-  imagecopy($chessboard,$board,$bordure,$bordure,0,0,$board_size,$board_size);
-  return $chessboard;
+	if ($bordure<>0)	{ //inutile autrement
+		$chessboard = imagecreatetruecolor($board_size+2*$bordure,$board_size+2*$bordure);
+		$black_color = imagecolorallocate($chessboard,0,0,0);
+		imagefill($chessboard,0,0,$black_color);
+		imagecopy($chessboard,$board,$bordure,$bordure,0,0,$board_size,$board_size);
+		return $chessboard;
+	}
+	else return $board;
+	
+  
 }
 
 // mets une piece sur l'echiquier
@@ -99,14 +118,17 @@ function diag_echecs_put_piece($chessboard,$side,$name,$square,$flip) {
 	
   if ((!(ereg("[a-h]",$letter,$match1))) or (!(ereg("[1-8]",$number,$match2))))
 	die("Erreur dans la syntaxe (diag_echecs_put_piece)!");
+	
+	$xori=intval(jeux_config('xori'));
+	$yori=intval(jeux_config('yori'));
 
   $url = jeux_config('base_url').$side.$diag_echecs_globales['english'][$name].jeux_config('img_suffix');
   $img_create = jeux_config('img_create');
   $file = $img_create($url);
   if (!$flip) {
-    imagecopy($chessboard,$file,($diag_echecs_globales['letter2number'][$letter]-1)*$taille+$bordure,(8-$number)*$taille+$bordure,0,0,$taille,$taille);
+    imagecopy($chessboard,$file,($diag_echecs_globales['letter2number'][$letter]-1)*$taille+$bordure+$xori,(8-$number)*$taille+$bordure+$yori,0,0,$taille,$taille);
   } else {
-    imagecopy($chessboard,$file,(8-$diag_echecs_globales['letter2number'][$letter])*$taille+$bordure,($number-1)*$taille+$bordure,0,0,$taille,$taille);
+    imagecopy($chessboard,$file,(8-$diag_echecs_globales['letter2number'][$letter])*$taille+$bordure+$xori,($number-1)*$taille+$bordure+$yori,0,0,$taille,$taille);
   }
 }
 
@@ -121,6 +143,9 @@ function diag_echecs_hilite_square($chessboard,$square,$hilite,$flip) {
 	$board_size = intval(jeux_config('board_size'));
 	$letter = substr($square,0,1);
 	$number = substr($square,1,1);
+	
+	$xori=intval(jeux_config('xori'));
+	$yori=intval(jeux_config('yori'));
 
   if ((!(ereg("[a-h]",$letter,$match1))) or (!(ereg("[1-8]",$number,$match2))))
 	die("Erreur dans la syntaxe (diag_echecs_hilite_square)!");
@@ -130,9 +155,9 @@ function diag_echecs_hilite_square($chessboard,$square,$hilite,$flip) {
 	$hilite_color = imagecolorallocatealpha($square,$color[0],$color[1],$color[2],50);
 	imagefill($square,0,0,$hilite_color);
   if (!$flip) {
-	imagecopy($chessboard,$square,($diag_echecs_globales['letter2number'][$letter]-1)*$taille+$bordure,(8-$number)*$taille+$bordure,0,0,$taille,$taille);
+	imagecopy($chessboard,$square,($diag_echecs_globales['letter2number'][$letter]-1)*$taille+$bordure+$xori,(8-$number)*$taille+$bordure+$yori,0,0,$taille,$taille);
   } else {
-	imagecopy($chessboard,$square,(8-$diag_echecs_globales['letter2number'][$letter])*$taille+$bordure,($number-1)*$taille+$bordure,0,0,$taille,$taille);
+	imagecopy($chessboard,$square,(8-$diag_echecs_globales['letter2number'][$letter])*$taille+$bordure+$xori,($number-1)*$taille+$bordure+$yori,0,0,$taille,$taille);
   }
 
 }
@@ -154,19 +179,22 @@ function diag_echecs_hilite_line($image, $squares, $hilite ,$flip)
 	$xto = substr($squares,3,1);
 	$yto = substr($squares,4,1);
 	
+	$xori=intval(jeux_config('xori'));
+	$yori=intval(jeux_config('yori'));
+	
 	$color = $diag_echecs_globales[$hilite];
 	$hilite_color = imagecolorallocatealpha($image,$color[0],$color[1],$color[2],50);
 	
 	if (!$flip) {
-		$x1=round(($diag_echecs_globales['letter2number'][$xfrom]-1)*$taille+$bordure+$taille/2)-1;
-		$y1=round((8-$yfrom)*$taille+$bordure+$taille/2)-1;
-		$x2=round(($diag_echecs_globales['letter2number'][$xto]-1)*$taille+$bordure+$taille/2)-1;
-		$y2=round((8-$yto)*$taille+$bordure+$taille/2)-1;
+		$x1=round(($diag_echecs_globales['letter2number'][$xfrom]-1)*$taille+$bordure+$taille/2)-1+$xori;
+		$y1=round((8-$yfrom)*$taille+$bordure+$taille/2)-1+$yori;
+		$x2=round(($diag_echecs_globales['letter2number'][$xto]-1)*$taille+$bordure+$taille/2)-1+$xori;
+		$y2=round((8-$yto)*$taille+$bordure+$taille/2)-1+$yori;
   } else {
-		$x1=round((8-$diag_echecs_globales['letter2number'][$xfrom])*$taille+$bordure+$taille/2)-1;
-		$y1=round(($yfrom-1)*$taille+$bordure+$taille/2)-1;
-		$x2=round((8-$diag_echecs_globales['letter2number'][$xto])*$taille+$bordure+$taille/2)-1;
-		$y2=round(($yto-1)*$taille+$bordure+$taille/2)-1;		
+		$x1=round((8-$diag_echecs_globales['letter2number'][$xfrom])*$taille+$bordure+$taille/2)-1+$xori;
+		$y1=round(($yfrom-1)*$taille+$bordure+$taille/2)-1+$yori;
+		$x2=round((8-$diag_echecs_globales['letter2number'][$xto])*$taille+$bordure+$taille/2)-1+$xori;
+		$y2=round(($yto-1)*$taille+$bordure+$taille/2)-1+$yori;		
   }
   
 	// cercle aux extrémités en attendant une vraie flèche

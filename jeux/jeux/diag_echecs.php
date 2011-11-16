@@ -84,7 +84,7 @@ function calcul_diagramme_echecs($position, $coloration, $indexJeux) {
 	$board_size = intval(jeux_config('board_size'));
 	$font = intval(jeux_config('police'));
 	$img = jeux_config('img_img');
-	
+
 	// dechiffre la surbrillance eventuelle des cases
 	 $surbrillance = array();
 	 $coloration = preg_split("/[\r\n]+/", $coloration);
@@ -139,6 +139,7 @@ function calcul_diagramme_echecs($position, $coloration, $indexJeux) {
 					case 5: diag_echecs_hilite_line($chessboard, $square, 'h'.$surb[0], $flip); break; // ligne de couleur
 				}
 
+	
 	for ($i=0 ; $i<count($table) ; $i++) {
 	  $sub_table = preg_split("/[:,]/",$table[$i]);
 	  switch($sub_table[0]) {
@@ -229,10 +230,10 @@ second */
 	// ************* redimensionement final *************
 	if (strlen(jeux_config('redim'))>0) {
 		if (jeux_config('coords')) { $nbcases=9; } else	{ $nbcases=8; }
-		$newsize = intval(jeux_config('redim'))*$nbcases+2*$bordure;
-		if ($newsize>639) {$newsize=640;}; // taille maximale pour éviter les confusion taille de case et taille de l'image
-		$img_finale = imagecreatetruecolor($newsize,$newsize);
-		imagecopyresampled($img_finale,$chessboard,0,0,0,0,$newsize,$newsize,$taille*$nbcases+2*$bordure,$taille*$nbcases+2*$bordure);
+		$newsize = intval(jeux_config('redim')) / intval(jeux_config('taille'));
+		if ($newsize>3) {$newsize=3;}; // taille maximale pour éviter les erreurs
+		$img_finale = imagecreatetruecolor(round($newsize*imagesx($chessboard)),round($newsize*imagesy($chessboard)));
+		imagecopyresampled($img_finale,$chessboard,0,0,0,0,round($newsize*imagesx($chessboard)),round($newsize*imagesy($chessboard)),imagesx($chessboard),imagesy($chessboard));
 		// converti l'image en 256 couleurs si truecolor=non
 		if (!jeux_config('truecolor')) { imagetruecolortopalette($img_finale,false,256); };	
 		$img($img_finale, $fichier_dest);
