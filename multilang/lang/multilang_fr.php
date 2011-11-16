@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'lien_desactiver' => 'Tout',
 	'lien_multi_title' => 'Éditer les champs multilingues en «@lang@»',
+	'lien_multi_title_sans' => 'La version «@lang@» est incomplète. Cliquez pour l\'éditer.',
 
 	// M
 	'message_champs_readonly' => 'Les champs multilingues sont en lecture seule, choisissez une langue pour les modifier'

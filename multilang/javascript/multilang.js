@@ -475,9 +475,14 @@ function multilang_mark_empty_langs(container,target) {
 
 	// On indique dans le menu de langue, celles qui ont au moins un champ non renseigne
 	if(container!='') {
-		container.find('a').removeClass('empty');
-		$.each(langs_empty,function(i,name){
-			container.find('a[class~='+name+']').addClass('empty');
+		$.each(multilang_avail_langs,function(i,name){
+			if((jQuery.inArray(name, langs_empty) == -1)){
+				var title = 'multilang_lang.title_lien_multi_'+name;
+				container.find('a[class~='+name+']').removeClass('empty').attr('title',eval(title));
+			}else{
+				var title = 'multilang_lang.title_lien_multi_sans_'+name;
+				container.find('a[class~='+name+']').addClass('empty').attr('title',eval(title));
+			}
 		});
 	}
 }
