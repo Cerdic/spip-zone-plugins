@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // R
-	'refbase_description' => 'Ce plugin permet d\'importer des références bibliographiques contenues dans une ou plusieurs bases de données [RefBase->http://www.refbase.net] et de les afficher simplement dans SPIP à l\'aide du modèle <code><refbase></code>.',
-	'refbase_slogan' => 'Importer des références bibliographiques RefBase',
+	'refbase_description' => 'Ce plugin permet d\'importer des références bibliographiques contenues dans une ou plusieurs bases de données [refbase->http://www.refbase.net] et de les afficher simplement dans SPIP à l\'aide du modèle <code><refbase></code>.',
+	'refbase_slogan' => 'Importer des références bibliographiques refbase',
 );
 ?>

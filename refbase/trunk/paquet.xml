@@ -1,15 +1,16 @@
 <paquet
 	prefix="refbase"
 	categorie="edition"
-	version="2.0.0"
+	version="2.1.0"
 	etat="stable"
 	compatibilite="[3.0.0-dev;3.0.99]"
 	logo="prive/themes/spip/images/refbase-48.png"
 	documentation="http://www.spip-contrib.net/spip.php?article3036"
+	schema="0.1.0"
 >
 
-	<nom>Refbase</nom>
-	<!-- Importer des références bibliographiques Refbase -->
+	<nom>refbase</nom>
+	<!-- Importer des références bibliographiques refbase -->
 
 	<auteur lien="http://www.spip-contrib.net/Joseph">Joseph</auteur>
 
@@ -18,6 +19,7 @@
 	<pipeline nom="insert_head" inclure="refbase_pipeline.php" />
 	<pipeline nom="header_prive" inclure="refbase_pipeline.php" />
 	<pipeline nom="ieconfig_metas" inclure="refbase_ieconfig_metas.php" />
+	<pipeline nom="compagnon_messages" inclure="refbase_compagnon_messages.php" />
 	
 	<menu nom="configurer_refbase" titre="refbase:config_refbase" parent="menu_squelette" icone="images/refbase-16.png" />
 </paquet>
