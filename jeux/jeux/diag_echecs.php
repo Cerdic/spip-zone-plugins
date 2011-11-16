@@ -84,12 +84,6 @@ function calcul_diagramme_echecs($position, $coloration, $indexJeux) {
 	$board_size = intval(jeux_config('board_size'));
 	$font = intval(jeux_config('police'));
 	$img = jeux_config('img_img');
-
-	// ************* cases en surbrillance ************* (obsolete ??)
-	$caserouge = jeux_config('rouge');
-	$casebleu = jeux_config('bleu');
-	$casevert = jeux_config('vert');
-	$casejaune = jeux_config('jaune');
 	
 	// dechiffre la surbrillance eventuelle des cases
 	 $surbrillance = array();
@@ -145,48 +139,6 @@ function calcul_diagramme_echecs($position, $coloration, $indexJeux) {
 					case 5: diag_echecs_hilite_line($chessboard, $square, 'h'.$surb[0], $flip); break; // ligne de couleur
 				}
 
-	// code obsolete ici ??
-	// l'ordre des couleurs peut poser des problemes dans les superpositions
-	// pour une gestion plus fine il faudrait gerer l'ordre avec un parametre du genre
-	// encouleur=R,a1,a2,c2-c8,B,e4-e5,g8
-	// qui permetrait de choisir l'ordre de creation
-	if (strlen($casejaune)>0 )	{
-		$lescases=explode(",",$casejaune);
-			for ($j=0 ; $j<count($lescases) ; $j++) {
-				$square=$lescases[$j];
-				$hilite = "hjaune";
-				if (strlen($square)==2) { diag_echecs_hilite_square($chessboard,$square,$hilite,$flip); };	// case de couleur
-				if (strlen($square)==5) { diag_echecs_hilite_line($chessboard, $square, $hilite,$flip); };	// ligne de couleur
-			}
-		}
-	if (strlen($casebleu)>0 )	{
-		$lescases=explode(",",$casebleu);
-			for ($j=0 ; $j<count($lescases) ; $j++) {
-				$square=$lescases[$j];
-				$hilite = "hbleu";
-				if (strlen($square)==2) { diag_echecs_hilite_square($chessboard,$square,$hilite,$flip); }; 			
-				if (strlen($square)==5) { diag_echecs_hilite_line($chessboard, $square, $hilite,$flip); }; 			
-			}
-		}
-	if (strlen($caserouge)>0 )	{
-		$lescases=explode(",",$caserouge);
-			for ($j=0 ; $j<count($lescases) ; $j++) {
-				$square=$lescases[$j];
-				$hilite = "hrouge";
-				if (strlen($square)==2) { diag_echecs_hilite_square($chessboard,$square,$hilite,$flip); };
-				if (strlen($square)==5) { diag_echecs_hilite_line($chessboard, $square, $hilite,$flip); };
-			}
-		}
-	if (strlen($casevert)>0 )	{
-		$lescases=explode(",",$casevert);
-			for ($j=0 ; $j<count($lescases) ; $j++) {
-				$square=$lescases[$j];
-				$hilite = "hvert";
-				if (strlen($square)==2) { diag_echecs_hilite_square($chessboard,$square,$hilite,$flip); };
-				if (strlen($square)==5) { diag_echecs_hilite_line($chessboard, $square, $hilite,$flip); };
-			}
-		}
-	
 	for ($i=0 ; $i<count($table) ; $i++) {
 	  $sub_table = preg_split("/[:,]/",$table[$i]);
 	  switch($sub_table[0]) {
