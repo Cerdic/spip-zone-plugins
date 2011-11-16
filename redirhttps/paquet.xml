@@ -1,0 +1,19 @@
+<paquet
+	prefix="redirhttps"
+	categorie="performance"
+	version="0.1.0"
+	etat="test"
+	compatibilite="[2.1.11;3.0.0]"
+	logo="images/redirhttps-128.png"
+	documentation="http://www.spip-contrib.net/Rediriger-en-HTTPS-quand-l-utilisateur-est-connecte"
+>	
+
+	<nom>Redirections HTTPS</nom>
+	<!-- Sécuriser l'accès à certaines pages du site -->
+
+	<auteur>Severo</auteur>
+	<credit lien="http://www.iconfinder.com/icondetails/25388/128/high_security_thick_icon">Oliver Scholtz</credit>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<traduire gestionnaire="salvatore" module="redirhttps" reference="fr" />
+</paquet>
