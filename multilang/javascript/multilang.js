@@ -146,7 +146,7 @@ function multilang_init_multi(options) {
 			//return false;
 		//});
 		this.isfull = false;
-		this.form_lang = multilang_lang_courante;
+		this.form_lang = multilang_def_lang;
 		var container = multilang_menu_selector ? $(multilang_menu_selector,this) : $(this);
 		// Pas de rajout s'il y en deja un
 		if(!container.find('.menu_lang').size())
@@ -341,7 +341,7 @@ function multilang_init_field(el,lang,force) {
 				} else {
 					value = langs[2];
 				}
-				el.field_lang[langs[1]||multilang_lang_courante] = value;
+				el.field_lang[langs[1]||multilang_def_lang] = value;
 			}
 		}
 	} else {
@@ -353,9 +353,9 @@ function multilang_init_field(el,lang,force) {
 			var n = el.value.match(/(\d+\.\s+)?(.*)/);
 			el.field_pre_lang = n[1] || "";
 			el.field_pre_lang = el.field_pre_lang.replace(/\.|\s+/,'') ;
-			el.field_lang[multilang_lang_courante] = n[2];
+			el.field_lang[multilang_def_lang] = n[2];
 		} else {
-			el.field_lang[multilang_lang_courante] = el.value;
+			el.field_lang[multilang_def_lang] = el.value;
 		}
 	}
 
@@ -432,6 +432,7 @@ function multilang_change_lang(el,container,target) {
 	multilang_forms_fields[target_id].each(function(){
 		multilang_set_lang(this,lang);
 	});
+	
 	multilang_mark_empty_langs(container,target);
 }
 
@@ -447,20 +448,27 @@ function multilang_mark_empty_langs(container,target) {
 	var target_id = multilang_init_target_id(target);
 
 	multilang_forms_fields[target_id].each(function(){
-		
+		var field_langs = [];
+		// Mise sous forme de tableau
+		$.each(this.field_lang,function(name,value){
+			if(value){
+				field_langs.push(name);
+			}
+		});
 		// Trouver les elements non communs entre le tableau des langues availables et pour chaque champ,
 		// celui des langues renseignees, si ce champ est multi
+		// Si la langue d'origine n'est pas remplie (champ texte par exemple, on ne considère donc pas empty)
 		if(this.multi) {
-			var field_langs = [];
-			// Mise sous forme de tableau
-			$.each(this.field_lang,function(name,value){
-				field_langs.push(name);
-			});
 			// Comparaison des tableaux
 			$.each(multilang_avail_langs,function(i,name){
-				if (jQuery.inArray(name, field_langs) == -1)
-					if(jQuery.inArray(name, langs_empty) == -1)
-						langs_empty.push(name);
+				if ((jQuery.inArray(name, field_langs) == -1) && (jQuery.inArray(name, langs_empty) == -1) && (jQuery.inArray(multilang_def_lang, field_langs) != -1))
+					langs_empty.push(name);
+			});
+		}else{
+			// Comparaison des tableaux
+			$.each(multilang_avail_langs,function(i,name){
+				if ((jQuery.inArray(name, field_langs) == -1) && (jQuery.inArray(name, langs_empty) == -1) && (jQuery.inArray(multilang_def_lang, field_langs) != -1))
+					langs_empty.push(name);
 			});
 		}
 	});
@@ -489,7 +497,7 @@ function multilang_set_lang(el,lang) {
 
 	//if current lang is not setted use default lang value
 	if(el.field_lang[lang]==undefined) {
-		el.field_lang[lang] = el.field_lang[multilang_lang_courante];
+		el.field_lang[lang] = el.field_lang[multilang_def_lang];
 	}
 
 	el.value = (el.field_lang[lang] == undefined ? "" : el.field_lang[lang]);
@@ -511,7 +519,7 @@ function multilang_set_lang(el,lang) {
 function multilang_field_set_background(el,lang) {
 	if(lang != 'full'){
 		if(el.totreat){
-			$(el).removeAttr('readonly');
+			$(el).removeAttr('readonly').removeClass('multilang_readonly');
 			if(typeof($(el).attr('class')) != 'undefined'){
 				$($(el).attr('class').split(' ')).each(function(){
 					var m = this.match(/^multi_lang_*/);
@@ -532,7 +540,7 @@ function multilang_field_set_background(el,lang) {
 			$(el).css({"background":"url("+multilang_dir_plugin+"/images/multi_forbidden.png) no-repeat right top"});
 		}
 	}else{
-		$(el).attr('readonly','readonly');
+		$(el).attr('readonly','readonly').addClass('multilang_readonly');
 		if(typeof($(el).attr('class')) != 'undefined'){
 			$($(el).attr('class').split(' ')).each(function(){
 				var m = this.match(/^multi_lang_*/);
@@ -577,7 +585,7 @@ function multilang_save_lang(el,lang) {
 	}else{
 		el.field_lang[lang] = el.field_lang[multilang_def_lang];
 		$.each(el.field_lang,function(index, value){
-			if((index != multilang_lang_courante) && (value == el.field_lang[multilang_lang_courante])){
+			if((index != multilang_def_lang) && (value == el.field_lang[multilang_def_lang])){
 				delete el.field_lang[index];
 			}
 		});

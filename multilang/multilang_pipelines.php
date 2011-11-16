@@ -103,7 +103,6 @@ function multilang_inserer_head($config=array()){
 		if($config['document']){
 			$root .= ',div#liste_documents,div.formulaire_editer_document' ; // avec ou sans Mediatheque
 		}
-
 		// Appel de multilang_init_lang si
 		// - document.ready
 		// - onAjaxLoad (cas des docs et de la configuration du site)
@@ -124,8 +123,8 @@ function multilang_inserer_head($config=array()){
 		return (value != multilang_def_lang && value != multilang_lang_courante);
 	});
 	multilang_avail_langs.sort();
-	if(multilang_lang_courante!=multilang_def_lang) multilang_avail_langs.unshift(multilang_def_lang);
 	multilang_avail_langs.unshift(multilang_lang_courante);
+	if(multilang_lang_courante!=multilang_def_lang) multilang_avail_langs.unshift(multilang_def_lang);
 
 	jQuery(document).ready(function(){
 		function multilang_init(){
@@ -138,8 +137,8 @@ function multilang_inserer_head($config=array()){
 			var root_opt = "form:has(.multilang)";
 			var fields_selector_opt = ".multilang";
 			multilang_init_lang({fields:fields_selector,fields_opt:fields_selector_opt,root:root,root_opt:root_opt,forms:forms_selector});
+			
 			var limite_multilang = $(".menu_lang").offset().top ;
-	
 			$(window).scroll(function() {
 				if($(this).scrollTop() > limite_multilang)
 					var menu_lang_width = $(".menu_lang").width();
