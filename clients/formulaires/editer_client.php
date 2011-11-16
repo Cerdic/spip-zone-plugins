@@ -340,9 +340,19 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 		'spip_contacts_liens',
 		'objet = '.sql_quote('auteur').' and id_objet = '.$id_auteur
 	);
-	$editer_contact = charger_fonction('editer_contact', 'action/');
-	$editer_contact($id_contact);
-	
+
+    //Si le contact n'existe pas encore, on doit le créer (cas d'un auteur prexistant à son statut de client)
+    if (is_null($id_contact)) {
+        $inscrire_client = charger_fonction('traiter','formulaires/inscription_client');
+        $inscrire_client();
+
+	    $id_contact = sql_getfetsel(
+		    'id_contact',
+		    'spip_contacts_liens',
+		    'objet = '.sql_quote('auteur').' and id_objet = '.$id_auteur
+	    );
+    }
+
 	// Le pseudo SPIP est construit 
 	set_request('nom', trim(_request('prenom').' '._request('nom'))); 
 	

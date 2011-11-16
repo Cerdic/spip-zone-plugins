@@ -258,12 +258,16 @@ function formulaires_inscription_client_traiter_dist($retour=''){
 	set_request('nom_inscription', trim(_request('prenom').' '._request('nom')));
 	
 	// On active le traitement du formulaire d'inscription classique, donc on crée un nouvel utilisateur
-	$mode = tester_config(0);
-	$inscription_dist = charger_fonction('traiter', 'formulaires/inscription');
-	$retours = $inscription_dist($mode,'');
-	
+    if (!($id_auteur = verifier_session())) {
+	    $mode = tester_config(0);
+	    $inscription_dist = charger_fonction('traiter', 'formulaires/inscription');
+	    $retours = $inscription_dist($mode,'');
+    
+        $id_auteur = sql_getfetsel('id_auteur', 'spip_auteurs', 'email = '.sql_quote(_request('mail_inscription')));
+    }	
+
 	// On récupère l'auteur qu'on vient de créer avec l'email du form
-	if ($id_auteur = sql_getfetsel('id_auteur', 'spip_auteurs', 'email = '.sql_quote(_request('mail_inscription')))){
+	if ($id_auteur){
 		// On ajoute des infos au contexte
 		set_request('objet', 'auteur');
 		set_request('id_objet', $id_auteur);
