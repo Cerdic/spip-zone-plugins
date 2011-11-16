@@ -1,0 +1,68 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]Galleria plugin pour SPIP (1.9.2+)
+			[en]Galleria plugin for SPIP (1.9.2+)
+		</multi>
+	</nom>
+	<auteur>LUU-THO Th&#224;nh
+_ [emthanh@free.fr->mailto:emthanh@free.fr]	
+	</auteur>
+	<slogan>
+		<multi>
+			[fr]galerie d'image avec Galleria
+			[en]image gallery with Galleria
+		</multi>
+	</slogan>
+	<version>1.0.0</version>
+	<icon>galleria.png</icon>
+	<etat>stable</etat>
+	<description>
+		<multi>
+			[fr]Il n&#233;cessite le plugin {{jQuery}} pour les versions de SPIP &lt; 1.9.2
+_ 
+_ Vous pouvez cr&#233;er des galerie d'images qui utilisent la librairie javascript Galleria.
+_ Pour cr&#233;er une galerie d'image ajoutez une balise &lt;galleria##> dans un article ,ou ## est l'ID de l'article.
+_ 
+_ Les options du mod&#232;le sont :
+- width
+- height
+- lightbox :[true|false]
+- transition :[fade|flash|pulse|slide|fadeslide|doorslide]
+- theme : le nom d'un theme Galleria
+- pagesize : le nombre d'image par page
+_ 
+_ ex : &lt;galleria22> une galerie dans l'article 22 ; &lt;galleria22|lightbox=true> activation de l'effet lightbox
+_ 
+_ Galleria , librairie javascript :[->http://galleria.aino.se/]
+			[en]spip need the plugin {{jQuery}} for the SPIP version  &lt; 1.9.2
+_ 
+_ You can create image gallery that use the javascript librairy Galleria.
+_ To create an image gallery add this tag &lt;galleria##> in an article where ## is the ID of the article.
+_ 
+_ The options of the modele are :
+- width
+- height
+- lightbox :[true|false]
+- transition :[fade|flash|pulse|slide|fadeslide|doorslide]
+- theme : the name of the Galleria theme
+- pagesize : the number of image per page
+_ 
+_ ex : &lt;galleria22> a gallery in the article 22 ; &lt;galleria22|lightbox=true> activate the lightbox effect.
+_ 
+_ Galleria , javascript library :[->http://galleria.aino.se/]
+		</multi>
+	</description>
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
+	<categorie>multimedia</categorie>
+	<lien>http://www.spip-contrib.net/Galleria</lien>
+	<prefix>Galleria</prefix>
+	<pipeline>
+	 <nom>insert_head</nom>
+	 <inclure>head.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+</plugin>

@@ -1,0 +1,20 @@
+
+<B_galleria>
+#ANCRE_PAGINATION
+[<p class="pagination">(#PAGINATION)</p>]
+<div id="galleria#ENV{id}">
+<BOUCLE_galleria (DOCUMENTS){id_article=#ENV{id}}{extension==jpg|gif|png} {pagination #ENV{pagesize,30}}>
+	<img src="#FICHIER" [title="(#TITRE)" ][alt="(#DESCRIPTIF|textebrut)" ]/>
+</BOUCLE_galleria>
+</div>
+[<p class="pagination">(#PAGINATION)</p>]
+<script>
+	Galleria.loadTheme('[(#CHEMIN{galleria/themes/[(#ENV{theme, "classic"})]/galleria.[(#ENV{theme, "classic"})].min.js})]');
+	$("#galleria[(#ENV{id})]").galleria({[
+		lightbox: (#ENV{lightbox}),][
+		transition: '(#ENV{transition})',]
+		width: [(#ENV{width, "750"})],
+		height: [(#ENV{height, "500"})]
+	});
+</script>
+</B_galleria>
