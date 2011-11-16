@@ -43,4 +43,22 @@ function mailcrypt($texte) {
 	return echappe_retour($texte, 'MAILCRYPT');
 }
 
+function maildecrypt($texte) {
+	if (strpos($texte, 'spancrypt')===false AND strpos($texte, 'mc_lancerlien')===false) return $texte;
+	
+	// Traiter les <span class="spancrypt">chez</span>
+	$texte = preg_replace(',<span class=\'spancrypt\'>(.*)</span>,U','@',$texte);
+	
+	// Traiter les liens
+	$texte = preg_replace(
+		',href="#" title="(.+)'._MAILCRYPT_AROBASE_JSQ.'(.+)" onclick="location.href=' . _MAILCRYPT_FONCTION_JS_LANCER_LIEN. '(.+)",U',
+		'href="mailto:$1@$2"',
+		$texte
+	);
+	
+	return $texte;
+}
+
+
+
 ?>
