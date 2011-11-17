@@ -450,11 +450,13 @@ function multilang_mark_empty_langs(container,target) {
 	multilang_forms_fields[target_id].each(function(){
 		var field_langs = [];
 		// Mise sous forme de tableau
-		$.each(this.field_lang,function(name,value){
-			if(value){
-				field_langs.push(name);
-			}
-		});
+		if(typeof(this.field_lang) != 'undefined'){
+			$.each(this.field_lang,function(name,value){
+				if(value){
+					field_langs.push(name);
+				}
+			});
+		}
 		// Trouver les elements non communs entre le tableau des langues availables et pour chaque champ,
 		// celui des langues renseignees, si ce champ est multi
 		// Si la langue d'origine n'est pas remplie (champ texte par exemple, on ne considère donc pas empty)
