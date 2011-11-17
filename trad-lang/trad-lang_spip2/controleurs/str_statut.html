@@ -22,10 +22,10 @@
 	<label><:tradlang:label_version_originale{lang=#LANG}:></label>
 	<textarea readonly="readonly" class="crayon-active readonly" style="width:#ENV{largeur}px;">[(#STR**|entites_html)]</textarea>
 	</div>
-	#SET{url_google_translate,https://ajax.googleapis.com/ajax/services/language/translate?v=1.0}
+	#SET{url_google_translate,http://ajax.googleapis.com/ajax/services/language/translate?v=1.0}
 	[(#SET{url_google_translate,[(#GET{url_google_translate}|parametre_url{q,[(#STR**|entites_html)],&}|parametre_url{langpair,[(#LANG)]|[(#_a:LANG)],&})]})]
 	<BOUCLE_google_translate(DATA){source json,#GET{url_google_translate}}>
-	[(#CLE|=={responseData}|oui)
+	[(#VALEUR|table_valeur{translatedText}|oui)
 	<div>
 	<label><:tradlang:label_proposition_google_translate:></label>
 	<textarea readonly="readonly" id="google_translate" class="crayon-active" style="width:#ENV{largeur}px;">[(#VALEUR|table_valeur{translatedText})]</textarea>
