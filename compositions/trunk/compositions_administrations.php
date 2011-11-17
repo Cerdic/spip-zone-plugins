@@ -37,6 +37,25 @@ function compositions_upgrade($nom_meta_base_version,$version_cible){
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
+/**
+ * Une fonction pour verifier que les champs sont bien sur tous les objets,
+ * appelee lors de la configuration
+ * (cas d'un nouvel objet ajoute apres l'install du plugin)
+ * 
+ * @return void
+ */
+function compositions_check_upgrade(){
+	include_spip('base/objets');
+	$tables_objets = array_keys(lister_tables_objets_sql());
+	$trouver_table = charger_fonction('trouver_table','base');
+	foreach($tables_objets as $table){
+		$desc = $trouver_table($table);
+		if (!isset($desc['field']['composition']))
+			sql_alter("TABLE $table ADD composition varchar(255) DEFAULT '' NOT NULL");
+		if (!isset($desc['field']['composition_lock']))
+			sql_alter("TABLE $table ADD composition_lock tinyint(1) DEFAULT 0 NOT NULL");
+	}
+}
 
 /**
  * Desinstallation
