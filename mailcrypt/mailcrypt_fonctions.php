@@ -52,13 +52,13 @@ function maildecrypt($texte) {
 	
 	// Traiter les liens HTML
 	$texte = preg_replace(
-		',href="#(.+)#mc#(.+)#" title="(.+)'._MAILCRYPT_AROBASE_JSQ.'(.+)" onclick="location.href=' . _MAILCRYPT_FONCTION_JS_LANCER_LIEN. '(.+)",U',
+		',href="#(\S+)#mc#(\S+)#" title="(\S+)'._MAILCRYPT_AROBASE_JSQ.'(\S+)" onclick="location.href=' . _MAILCRYPT_FONCTION_JS_LANCER_LIEN. '(.+)",U',
 		'href="mailto:$3@$4"',
 		$texte
 	);
 	
 	// Traiter les liens texte
-	$texte = preg_replace(',#(.+)#mc#(.+)#,U' , 'mailto:$1@$2' , $texte);
+	$texte = preg_replace(',#(\S+)#mc#(\S+)#,U' , 'mailto:$1@$2' , $texte);
 	$texte = preg_replace(',(\S+) '._T('mailcrypt:chez').' (\S+),U' , '$1@$2' , $texte);
 	
 	// Supprimer l'appel du javascript
