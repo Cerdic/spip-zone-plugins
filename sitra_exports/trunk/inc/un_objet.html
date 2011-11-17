@@ -3,8 +3,8 @@
 <BOUCLE_objet (SITRA_OBJETS){id_sitra}>
 [<dt><strong id="o-#ID_SITRA">(#TITRE)</strong>[ - <em>(#ID_SITRA)</em>][ - <strong>Id (#ID_SITRA_OBJET)</strong>]</dt>]
 <dd class="o-#ID_SITRA">
-<ul>
 	<strong><:sitra:renseignements:></strong>
+<ul>
 	<li><:sitra:obj_adresse:> : [(#ADRESSE|sitra_expand_liste)]</li>
 	<li><:sitra:obj_commune:> : #COMMUNE</li>
 	<li><:sitra:obj_code_postal:> : #CODE_POSTAL</li>
@@ -25,13 +25,20 @@
 	<li><:sitra:obj_reservation_url:> : [(#RESERVATION_URL|sitra_expand_liste)]</li>
 </ul>
 </dd>
-<B_b><dd style="overflow: hidden">
-<BOUCLE_b (SITRA_DOCS){id_sitra}{par type_doc}>
+<B_b><dd style="overflow: hidden"><strong><:sitra:images_principales_ou_secondaires:></strong><br />
+<BOUCLE_b (SITRA_DOCS){id_sitra}{type_doc IN principale,secondaire,logo}>
 	[<dl class="spip_documents spip_documents_left" style="float: left; width: 120px;">
 	<dt>(#URL_DOC|url_doc_sitra{#LIEN,'../'}|image_reduire{120,120}|sinon{#URL_DOC - #LIEN})</dt>
 	[<dt>(#TYPE_DOC)</dt>]
 	</dl>]
 </BOUCLE_b>
 </dd></B_b>
+<B_c><dd style="overflow: hidden"><strong><:sitra:autres_documents:></strong><br />
+	<BOUCLE_c (SITRA_DOCS){id_sitra}{type_doc !IN principale,secondaire,logo}>
+		[(#MODELE{doc_sitra, align=left, id_sitra, num_doc,lang})]
+	</BOUCLE_c>
+</dd></B_c>
+
+
 </BOUCLE_objet>
 </dl></B_objet>

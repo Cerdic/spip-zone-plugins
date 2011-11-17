@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'administration_sitra' => 'Administration Sitra',
 'afficher_masquer' => 'Afficher / Masquer tout',
+'autres_documents' => 'Autres documents',
 'aucun_resultat' => 'Aucun résultat !',
 
 // C
@@ -51,6 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // I
 'identifiant_site' => 'Identifiant Sitra du site',
 'identifiant_sitra' => 'Identifiant SITRA',
+'images_principales_ou_secondaires' => 'Images principales, secondaires ou logo',
 
 // L
 'langues' => 'Langues',
