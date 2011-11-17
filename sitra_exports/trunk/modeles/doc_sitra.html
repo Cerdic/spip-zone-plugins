@@ -1,0 +1,12 @@
+[<!-- (#REM) Conforme au modele dl/ dt de spip 
+	modele pour afficher les documents multimedia non image -->]
+<BOUCLE_doc(SITRA_DOCS types_documents){id_sitra}{num_doc}>
+	<BOUCLE_details (SITRA_DOCS_DETAILS){id_sitra}{num_doc}{lang}>
+	[<dl class="spip_documents[ spip_documents_(#ENV{align})]"[ style="float:(#ENV{align}|match{left|right});width:120px;"]>
+		<dt><a href="(#URL_DOC|url_doc_sitra{#LIEN}|url_absolue)" title="#EXTENSION"[ type="(#MIME_TYPE)"]>[<img src="(#CHEMIN{vignettes/#EXTENSION.png})" alt="[(#EXTENSION)]" />]</a></dt>[
+		<dt class="spip_doc_titre"><strong>(#TITRE)</strong></dt>][
+		<dd class="spip_doc_descriptif">(#DESCRIPTIF|PtoBR)</dd>][
+		<dd class="spip_doc_descriptif">(#COPYRIGHT|PtoBR)</dd>]
+	</dl>]
+	</BOUCLE_details>
+</BOUCLE_doc>

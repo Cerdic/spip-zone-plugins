@@ -148,7 +148,8 @@ $sitra_docs_key = array(
 
 $sitra_docs_join = array(
 	'id_sitra' => 'id_sitra',
-	'num_doc' => 'num_doc'
+	'num_doc' => 'num_doc',
+	'extension' => 'extension'
 	);
 
 $tables_principales['spip_sitra_docs'] = array(

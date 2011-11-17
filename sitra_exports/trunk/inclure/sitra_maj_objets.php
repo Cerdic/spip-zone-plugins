@@ -99,7 +99,15 @@ foreach($langues as $langue){
 				if ($val -> DetailPrestation) {
 					foreach($val -> DetailPrestation as $val2) {
 						$val3 = $val2 -> Prestation;
-						if ($val3['utilise'] == 'O') ajoute_si_present($prestations,$val3);
+						if ($val3['utilise'] == 'O'){
+							$details = '';
+							foreach($val2 -> children() as $prest){
+								if ($prest > 0)
+									$details .= $prest.' '.strtolower(substr($prest['libelle'],0,1)).'. ';
+							}
+							$val3 = $val3.' '.$details;
+							ajoute_si_present($prestations,$val3);
+						}
 					}
 					$les_prestations = serialize_non_vide($prestations);
 					switch ($val['type']) {
@@ -164,7 +172,8 @@ foreach($langues as $langue){
 		$types_docs = array(
 			'i_03.01.05' => 'principale',
 			'i_03.01.01' => 'secondaire',
-			'i_03.01.08' => 'logo'
+			'i_03.01.08' => 'logo',
+			'i_03.01.07' => 'plan'
 		);
 		
 		if($oi -> Multimedia -> DetailMultimedia){
