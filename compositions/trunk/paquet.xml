@@ -1,0 +1,30 @@
+<paquet
+	prefix="compositions"
+	categorie="outil"
+	version="3.0.0"
+	etat="dev"
+	compatibilite="[3.0.0-dev;3.0.*]"
+	logo="images/compositions-64.png"
+	schema="0.4.0"
+	documentation="http://www.spip-contrib.net/?article3777"
+>	
+
+	<nom>Compositions</nom>
+	<!-- Varier les mises en page selon les rubriques, les articles... -->
+
+	<auteur lien="http://www.yterium.com">Cedric Morin</auteur>
+
+	<copyright>2007-2009</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_principales" inclure="base/compositions.php" />
+	<pipeline nom="affiche_milieu" inclure="compositions_pipeline.php" />
+	<pipeline nom="autoriser" inclure="compositions_pipeline.php" />
+	<pipeline nom="styliser" inclure="compositions_pipeline.php" />
+	<pipeline nom="compositions_lister_disponibles" inclure="compositions_pipeline.php" />
+
+	<utilise nom="Z" compatibilite="[1.7.10;[" />
+	<utilise nom="Zcore" compatibilite="[2.0.0-dev;[" />
+	<utilise nom="Zpip" compatibilite="[2.0.0-dev;[" />
+</paquet>
