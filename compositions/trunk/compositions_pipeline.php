@@ -8,14 +8,23 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// lister les exec ou apparait l'interface de composition et le type correspondant
-// peut etre etendu par des plugins
-$GLOBALS['compositions_exec']['naviguer'] = 'rubrique';
-$GLOBALS['compositions_exec']['articles'] = 'article';
-$GLOBALS['compositions_exec']['mots_edit'] = 'mot';
-$GLOBALS['compositions_exec']['sites'] = 'site';
-$GLOBALS['compositions_exec']['breves_voir'] = 'breve';
-$GLOBALS['compositions_exec']['auteur_infos'] = 'auteur';
+/**
+ * Declaration des champs sur les objets
+ *
+ * @param array $tables
+ * @return array
+ */
+function compositions_declarer_tables_objets_sql($tables){
+
+	// champs composition et composition_lock sur tous les objets
+	// c'est easy
+	$tables[]['field']['composition'] = "varchar(255) DEFAULT '' NOT NULL";
+	$tables[]['field']['composition_lock'] = "tinyint(1) DEFAULT 0 NOT NULL";
+	$tables['spip_rubriques']['field']['composition_branche_lock'] = "tinyint(1) DEFAULT 0 NOT NULL";
+
+	return $tables;
+}
+
 
 /**
  * Fonction vide pour le pipeline homonyme
@@ -25,12 +34,12 @@ function compositions_autoriser(){}
 /**
  * Autorisation de modifier la composition
  *
- * @param <type> $faire
- * @param <type> $type
- * @param <type> $id
- * @param <type> $qui
- * @param <type> $opt
- * @return <type>
+ * @param string $faire
+ * @param string $type
+ * @param int $id
+ * @param array $qui
+ * @param array $opt
+ * @return bool
  */
 function autoriser_styliser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
 	include_spip('compositions_fonctions');
@@ -90,6 +99,15 @@ function compositions_styliser($flux){
 	return $flux;
 }
 
+// lister les exec ou apparait l'interface de composition et le type correspondant
+// peut etre etendu par des plugins
+$GLOBALS['compositions_exec']['naviguer'] = 'rubrique';
+$GLOBALS['compositions_exec']['articles'] = 'article';
+$GLOBALS['compositions_exec']['mots_edit'] = 'mot';
+$GLOBALS['compositions_exec']['sites'] = 'site';
+$GLOBALS['compositions_exec']['breves_voir'] = 'breve';
+$GLOBALS['compositions_exec']['auteur_infos'] = 'auteur';
+
 /**
  * Affichage du formulaire de selection de la composition
  *
@@ -121,6 +139,5 @@ function compositions_affiche_milieu($flux){
 	return $flux;
 }
 
-function compositions_compositions_lister_disponibles($flux){return $flux;}
 
 ?>
