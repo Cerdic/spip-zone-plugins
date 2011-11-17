@@ -4,6 +4,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function notifications_mes_fichiers_sauver_dist($quoi, $id, $options){
 	$cfg = lire_config('mes_fichiers');
 	if (($cfg['notif_active'] == 'oui') && !$options['err']) {
+
+		// pour typo()
+		include_spip('inc/texte');
+		
 		$tous = explode(',',$cfg['notif_mail']);
 		$tous[] = $GLOBALS['meta']['email_webmaster'];
 		$destinataires = pipeline('notifications_destinataires',

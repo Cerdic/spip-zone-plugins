@@ -8,6 +8,10 @@ function notifications_mes_fichiers_cleaner_dist($quoi, $id, $options){
 		 * On vérifie que l'on a bien supprimé au moins un fichier
 		 */
 		if(is_array($options['liste'] && !empty($options['liste']))){
+
+			// pour typo()
+			include_spip('inc/texte');
+		
 			$tous = explode(',',$cfg['notif_mail']);
 			$tous[] = $GLOBALS['meta']['email_webmaster'];
 			$destinataires = pipeline('notifications_destinataires',
