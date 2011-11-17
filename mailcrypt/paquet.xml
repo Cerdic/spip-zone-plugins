@@ -1,7 +1,7 @@
 <paquet
 	prefix="mailcrypt"
 	categorie="edition"
-	version="2.1.0"
+	version="2.1.1"
 	etat="stable"
 	compatibilite="[2.1.0;3.0.99]"
 	logo="images/mailcrypt-256.png"
@@ -18,4 +18,5 @@
 
 	<pipeline nom="insert_head" inclure="mailcrypt_pipelines.php" />
 	<pipeline nom="post_propre" inclure="mailcrypt_pipelines.php" />
+	<pipeline nom="facteur_pre_envoi" inclure="mailcrypt_pipelines.php" />
 </paquet>

@@ -33,7 +33,7 @@ function mailcrypt($texte) {
 
 	// protection des liens HTML
 	$texte = preg_replace(",[\"\']mailto:([^@\"']+)@([^\"']+)[\"\'],", 
-		'"#" title="$1' . _MAILCRYPT_AROBASE_JS . '$2" onclick="location.href=' . _MAILCRYPT_FONCTION_JS_LANCER_LIEN . '(\'$1\',\'$2\'); return false;"', $texte);
+		'"#$1#mc#$2#" title="$1' . _MAILCRYPT_AROBASE_JS . '$2" onclick="location.href=' . _MAILCRYPT_FONCTION_JS_LANCER_LIEN . '(\'$1\',\'$2\'); return false;"', $texte);
 	// retrait des titles en doublon... un peu sale, mais en attendant mieux ?
 	$texte = preg_replace(',title="[^"]+'._MAILCRYPT_AROBASE_JSQ.'[^"]+"([^>]+title=[\"\']),', '$1', $texte);
 
@@ -44,17 +44,25 @@ function mailcrypt($texte) {
 }
 
 function maildecrypt($texte) {
-	if (strpos($texte, 'spancrypt')===false AND strpos($texte, 'mc_lancerlien')===false) return $texte;
+	if (strpos($texte, 'spancrypt')===false AND strpos($texte, 'mc_lancerlien')===false AND strpos($texte, '#mc')===false) return $texte;
 	
 	// Traiter les <span class="spancrypt">chez</span>
 	$texte = preg_replace(',<span class=\'spancrypt\'>(.*)</span>,U','@',$texte);
+	$texte = preg_replace(',<span class="spancrypt">(.*)</span>,U','@',$texte);
 	
-	// Traiter les liens
+	// Traiter les liens HTML
 	$texte = preg_replace(
-		',href="#" title="(.+)'._MAILCRYPT_AROBASE_JSQ.'(.+)" onclick="location.href=' . _MAILCRYPT_FONCTION_JS_LANCER_LIEN. '(.+)",U',
-		'href="mailto:$1@$2"',
+		',href="#(.+)#mc#(.+)#" title="(.+)'._MAILCRYPT_AROBASE_JSQ.'(.+)" onclick="location.href=' . _MAILCRYPT_FONCTION_JS_LANCER_LIEN. '(.+)",U',
+		'href="mailto:$3@$4"',
 		$texte
 	);
+	
+	// Traiter les liens texte
+	$texte = preg_replace(',#(.+)#mc#(.+)#,U' , 'mailto:$1@$2' , $texte);
+	$texte = preg_replace(',(\S+) '._T('mailcrypt:chez').' (\S+),U' , '$1@$2' , $texte);
+	
+	// Supprimer l'appel du javascript
+	$texte = preg_replace(',<script type=\'text/javascript\'(.*)mailcrypt.js(.*)</script>,U','',$texte);
 	
 	return $texte;
 }
