@@ -138,14 +138,16 @@ function multilang_inserer_head($config=array()){
 			var fields_selector_opt = ".multilang";
 			multilang_init_lang({fields:fields_selector,fields_opt:fields_selector_opt,root:root,root_opt:root_opt,forms:forms_selector});
 			
-			var limite_multilang = $(".menu_lang").offset().top ;
-			$(window).scroll(function() {
-				if($(this).scrollTop() > limite_multilang)
-					var menu_lang_width = $(".menu_lang").width();
-					$(".menu_lang").addClass("menu_lang_flottant").css({"border-bottom":"3px solid black", "position": "fixed", "top": 0, "width": menu_lang_width+"px","z-index":"999"});
-				if($(this).scrollTop() < limite_multilang)
-					$(".menu_lang").removeClass("menu_lang_flottant").css({"border-bottom": "0" , "position": "static", "width": "auto"});	
-			});
+			if($(".menu_lang").length > 0){ 
+				var limite_multilang = $(".menu_lang").offset().top ;
+				$(window).scroll(function() {
+					if($(this).scrollTop() > limite_multilang)
+						var menu_lang_width = $(".menu_lang").width();
+						$(".menu_lang").addClass("menu_lang_flottant").css({"border-bottom":"3px solid black", "position": "fixed", "top": 0, "width": menu_lang_width+"px","z-index":"999"});
+					if($(this).scrollTop() < limite_multilang)
+						$(".menu_lang").removeClass("menu_lang_flottant").css({"border-bottom": "0" , "position": "static", "width": "auto"});	
+				});
+			}
 		}
 		multilang_init();
 		if(typeof onAjaxLoad == "function") onAjaxLoad(multilang_init);
