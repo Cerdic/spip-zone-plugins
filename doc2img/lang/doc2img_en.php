@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_desc_page' => 'This document is composed by one unique sheet.',
 	'info_desc_pages' => 'This document is composed by @nb@ sheets.',
-	'info_nb_pages' => 'Pages number:',
+	'info_nb_pages' => 'Number of pages:'
 );
 
 ?>
