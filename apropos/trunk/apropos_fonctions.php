@@ -4,7 +4,7 @@
  * Liste les plugins actifs avec affichage icon, nom, version, etat, short description
  * Utilisation intensive des fonctions faisant cela dans le code de SPIP
  * Auteur Jean-Philippe Guihard
- * version 0.3.0 du 15 novembre 2011, 13h40
+ * version 0.3.1 du 17 novembre 2011, 13h40
  * ajout de la possibilite de n'afficher que le nombre de plugin et extension  
  * code emprunte dans le code source de SPIP
  */
@@ -27,7 +27,7 @@ function balise_APROPOS_dist($p) {
 	$p->code = 'calcul_info_apropos(' . $premier . ')';
 	}else{
 	//si pas d\'argument, on affiche la liste des plugins
-	$p->code = 'calcul_info_apropos("liste")';
+	$p->code = 'calcul_info_apropos("listes")';
 	}
 	$p->interdire_scripts = false;
 	return $p;
@@ -87,7 +87,7 @@ function apropos_affiche_les_extension($liste_extensions_actives,$afficheQuoi){
 	if ($liste_extensions = liste_plugin_files(_DIR_EXTENSIONS)) {
 		$format = 'liste'; 
 		$lesExtensions .= "<div class='apropos-liste'>";
-		$lesExtensions .= "<h3>".count($liste_extensions)." extensions activées automatiquement.</h3>";
+		$lesExtensions .= "<h3>".count($liste_extensions)." "._T('apropos:extensions_automatiquement').".</h3>";
 		$lesExtensions .= apropos_afficher_list(self(), $liste_extensions,$liste_extensions, _DIR_EXTENSIONS,$afficheQuoi);// surcharge de fonction
 		$lesExtensions .= "</div>\n";
 	}
@@ -166,17 +166,17 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 		//je teste pour vérifier que $prefix n'est pas vide. Si vide, c'est que le préfixe entré est invalide
 		if ($prefix ==''){
 			return "<span class='apropos-erreur'>"
-			. "Erreur dans la saisie du préfixe du plugin.</span><br /> Vous avez entré <b>".$params."</b> comme préfixe. Vérifiez ce dernier qui se trouve dans le fichier paquet.xml ou plugin.xml du plugin.";
+			."Erreur dans la saisie du préfixe du plugin.</span><br />Vous avez entré <b>".$params."</b> comme préfixe. Vérifiez ce dernier qui se trouve dans le fichier paquet.xml ou plugin.xml du plugin.";
 			}else{
 			$get_desc = charger_fonction('afficher_plugin','plugins');
 			$slogan = PtoBR(plugin_propre($info['description'], "$dir/lang/paquet-$prefix"));
 			$documentation = $info['documentation'];
 			if ($documentation != ''){
-			$documentation = "<div class='apropos-description'>La documentation du plugin : <a href=\"".$info['documentation']."\">".$info['documentation']."</a></div>";
+			$documentation = "<div class='apropos-description'>"._T('apropos:la_documentation')." <a href=\"".$info['documentation']."\">".$info['documentation']."</a></div>";
 			}
 			$demonstration = $info['demonstration'];
 			if ($demonstration != ''){
-			$demonstration = "<div class='apropos-description'>Le plugin en action : <a href=\"".$info['demonstration']."\">".$info['demonstration']."</a></div>";
+			$demonstration = "<div class='apropos-description'>"._T('apropos:la_demonstration')." <a href=\"".$info['demonstration']."\">".$info['demonstration']."</a></div>";
 			}
 			}
 		}else{
@@ -193,17 +193,18 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 				$slogan = couper(plugin_propre($info['description']), 180);
 			}
 		}
+		$leNom = PtoBR(plugin_propre($info['nom']));
 		$url = parametre_url($url_page, "plugin", substr($dir,strlen(_DIR_RACINE)));
 	
 		// affiche l'icone du plugin ou une icone générique si absente
 		if (isset($info['logo']) and $i = trim($info['logo'])) {
 			include_spip("inc/filtres_images_mini");
-			$i = inserer_attribut(image_reduire("$dir/$i", 32),'alt','Icone du plugin '.$info['nom']);
+			$i = inserer_attribut(image_reduire("$dir/$i", 32),'alt','Icone du plugin '.$leNom);
 			$i = "<span class='apropos-icon'>".$i."</span>";
 		} else {
 			$generic = _DIR_PLUGIN_APROPOS."img/generique.png"; //mettre une icone generique si pas d'icone de defini
 			include_spip("inc/filtres_images_mini");
-			$i = inserer_attribut(image_reduire("$generic", 32),'alt','Icone g&eacute;n&eacute;rique pour le plugin '.$info['nom']);
+			$i = inserer_attribut(image_reduire("$generic", 32),'alt','Icone g&eacute;n&eacute;rique pour le plugin '.$leNom);
 			$i = "<div class='apropos-icon'>$i</div>";
 		}
 		
@@ -214,7 +215,6 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 		$auteur = plugin_propre($info['auteur']);
 		}
 		
-		$leNom=PtoBR(plugin_propre($info['nom']));
 	}
 	
 	//si version 2 de Spip
@@ -256,7 +256,7 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 	// on construit l'affichage des informations
 	$leResume = "<div class='resume'>"
 	. $i
-	. "<span class='apropos-nom'>".$params.$leNom."</span>"
+	. "<span class='apropos-nom'>".$leNom."</span>"
 	. "<span class='apropos-version'>v ".$info['version']."</span>"
 	. "<span class='apropos-etat'> - ".plugin_etat_en_clair($info['etat'])."</span>"
 	. "<div class='apropos-description'>".$slogan."</div>"

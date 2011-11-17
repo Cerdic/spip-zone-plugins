@@ -39,8 +39,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     To display the number of actives plugins, write <code><apropos|plugins></code>.
 
-    To display the number of actives extensions, write <code><apropos|extensions></code>.
-    
+    To display the number of actives extensions, write <code><apropos|extensions></code>.<br />
+	
 	If you want to display the full description of a specific plugin, use this: <code><apropos|prefixe=the prefixe of the plugin></code>. For example, to display the description of this plugin, write: <code><apropos|prefixe=apropos></code>.
 
 ',

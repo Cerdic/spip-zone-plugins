@@ -4,8 +4,14 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	// D
+	'la_documentation' => 'La documentation du plugin :',
+	'la_demonstration' => 'Le plugin en action :',
 	
-
+	// E
+	'extensions_automatiquement' => 'extensions activ&eacute;es automatiquement',
+	'erreur_prefixe' => 'Vous avez entr&eacute; <b> @params@ </b>',
+	
 	// P
 	'les_plugins' => 'Il utilise les plugins suivants :',
 
@@ -16,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// T
 	
-	'titre'			=> 'À propos'
+	'titre'			=> '&Agrave; propos'
 
 );
 
