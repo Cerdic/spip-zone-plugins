@@ -1,0 +1,8 @@
+<B_pour>
+<BOUCLE_pour(POUR){tableau #ENV{_compositions}}{par nom}>
+<div class='choix'>[(#VALEUR|table_valeur{icon}|sinon{#CHEMIN{images/objet-liste-contenus.png}}|image_reduire{24,24}|inserer_attribut{class,logo})]
+<input type='radio' class='radio' name='#ENV{name}' id='[(#ENV{name})]-#CLE' value='#CLE'[(#CLE|=={#ENV{selected}}|oui)checked='checked'] /><label for='[(#ENV{name})]-#CLE'>[(#VALEUR|table_valeur{nom}|supprimer_numero)][(#ENV{composition_heritee}|et{#CLE|=={''}}|oui)(<:compositions:composition_heritee:>)]</label>
+[<p class='descriptif'>(#VALEUR|table_valeur{description})</p>]
+</div>
+</BOUCLE_pour>
+</B_pour>
