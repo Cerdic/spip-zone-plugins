@@ -60,7 +60,7 @@ function autoriser_styliser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NU
 function compositions_styliser($flux){
 	include_spip('compositions_fonctions');
 	if (compositions_styliser_auto()){
-		if (!defined('_DIR_PLUGIN_Z')){
+		if (!defined('_DIR_PLUGIN_Z') AND !defined('_DIR_PLUGIN_ZCORE')){
 			$type = $flux['args']['fond']; // on fait l'approximation fond=type
 			// si le type n'est pas l'objet d'une composition, ne rien faire
 			if (in_array($type,compositions_types())){
@@ -79,9 +79,10 @@ function compositions_styliser($flux){
 		}
 		else {
 			$contexte = isset($flux['args']['contexte'])?$flux['args']['contexte']:$GLOBALS['contexte'];
+			$z_contenu = (isset($GLOBALS['z_blocs'])?reset($GLOBALS['z_blocs']):'contenu');
 			if (!test_espace_prive()
-			  AND preg_match(',(^|/)contenu/([^/]*)$,i',$flux['args']['fond'],$regs)
-			  AND $type = $regs[2]
+			  AND strncmp($flux['args']['fond'], "$z_contenu/", strlen($z_contenu)+1)==0
+			  AND $type = substr($flux['args']['fond'],strlen($z_contenu)+1)
 			  AND in_array($type,compositions_types())){
 				$serveur = $flux['args']['connect'];
 
@@ -99,15 +100,6 @@ function compositions_styliser($flux){
 	return $flux;
 }
 
-// lister les exec ou apparait l'interface de composition et le type correspondant
-// peut etre etendu par des plugins
-$GLOBALS['compositions_exec']['naviguer'] = 'rubrique';
-$GLOBALS['compositions_exec']['articles'] = 'article';
-$GLOBALS['compositions_exec']['mots_edit'] = 'mot';
-$GLOBALS['compositions_exec']['sites'] = 'site';
-$GLOBALS['compositions_exec']['breves_voir'] = 'breve';
-$GLOBALS['compositions_exec']['auteur_infos'] = 'auteur';
-
 /**
  * Affichage du formulaire de selection de la composition
  *
@@ -115,23 +107,30 @@ $GLOBALS['compositions_exec']['auteur_infos'] = 'auteur';
  * @return array
  */
 function compositions_affiche_milieu($flux){
-	$exec = $flux['args']['exec'];
-	if (isset($GLOBALS['compositions_exec'][$exec])){
-		$type = $GLOBALS['compositions_exec'][$exec];
-		$_id = id_table_objet($type);
-		if ($id = $flux['args'][$_id]) {
+	$e = trouver_objet_exec($flux['args']['exec']);
+	$objets = compositions_objets_actives();
+	if (in_array($e['type'],$objets)
+	  AND $e['edition']===false){
+		$type = $e['type'];
+		if ($id = $flux['args'][$e['id_table_objet']]) {
 			$config = unserialize($GLOBALS['meta']['compositions']);
 			$aut = autoriser('styliser',$type,$id);
-			include_spip('compositions_fonctions');
-			if (($config['masquer_formulaire'] != 'oui' OR $aut) 
+			if (($config['masquer_formulaire'] != 'oui' OR $aut)
 				AND (is_array(reset(compositions_lister_disponibles($type))) OR ($type == 'rubrique' AND $config['tout_verrouiller'] != 'oui'))
 				) {
 				$deplie = $aut ? false : -1;
 				$ids = 'formulaire_editer_composition_objet-' . "$type-$id";
 				$bouton = bouton_block_depliable(strtoupper(_T('compositions:composition')), $deplie, $ids);
-				$flux['data'] .= debut_cadre('e', chemin('compositions-24.png','images/'),'',$bouton, '', '', true);
-				$flux['data'] .= recuperer_fond('prive/editer/compositions', array_merge($_GET, array('type'=>$type,'id'=>$id)));
-				$flux['data'] .= fin_cadre();
+
+				$out = '';
+				$out .= debut_cadre('e', find_in_path('compositions-24.png','images/'),'',$bouton, '', '', true);
+				$out .= recuperer_fond('prive/editer/compositions', array_merge($flux['args'], array('type'=>$type,'id'=>$id)));
+				$out .= fin_cadre();
+
+				if (($p = strpos($flux['data'],'<!--affiche_milieu-->'))!==false)
+					$flux['data'] = substr_replace($flux['data'],$out,$p,0);
+				else
+					$flux['data'] .= $out;
 			}
 		}
 	}

@@ -80,11 +80,15 @@ function compositions_charger_infos($nom,$info=""){
  * @param array $liste
  */
 function compositions_cacher($liste=null){
+	// lister les compositions vraiment utilisees
 	if (!is_array($liste)){
 		include_spip('compositions_fonctions');
 		$liste = compositions_lister_disponibles('',false);
 	}
-	include_spip('inc/meta');
+	// lister les objets dont on a active la composition dans la configuration
+	$config = compositions_objets_actives();
+
+	$liste = array_intersect($config,array_keys($liste));
 	ecrire_meta('compositions_types',implode(',',array_keys($liste)));
 	spip_log('compositions: maj des compositions_types ['.$GLOBALS['meta']['compositions_types'].']');
 }

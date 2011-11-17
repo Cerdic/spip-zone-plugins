@@ -2,7 +2,7 @@
 	prefix="compositions"
 	categorie="outil"
 	version="3.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="images/compositions-64.png"
 	schema="0.5.0"

@@ -11,6 +11,22 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define('_COMPOSITIONS_MATCH','-([^0-9][^.]*)');
 
 /**
+ * Lister les objets actives par configuration
+ *
+ * @return array
+ */
+function compositions_objets_actives(){
+	static $config=null;
+	if (is_null($config)){
+		// lister les objets dont on a active la composition dans la configuration
+		$config = unserialize($GLOBALS['meta']['compositions']);
+		$config = (isset($config['objets'])?$config['objets']:array('spip_articles','spip_rubriques'));
+		$config = array_map('objet_type',$config);
+	}
+	return $config;
+}
+
+/**
  * Retrouver le nom du dossier ou sont stockees les compositions
  * reglage par defaut, ou valeur personalisee via cfg
  * 
@@ -19,7 +35,7 @@ define('_COMPOSITIONS_MATCH','-([^0-9][^.]*)');
 function compositions_chemin(){
 	$config_chemin = 'compositions/';
 	if (defined('_DIR_PLUGIN_Z') OR defined('_DIR_PLUGIN_ZCORE'))
-		$config_chemin = (isset($GLOBALS['z_blocs'])?reset($GLOBALS['z_blocs']):'contenu/');
+		$config_chemin = (isset($GLOBALS['z_blocs'])?reset($GLOBALS['z_blocs']):'contenu').'/';
 
 	if (isset($GLOBALS['meta']['compositions'])){
 		$config = unserialize($GLOBALS['meta']['compositions']);
@@ -57,14 +73,18 @@ function compositions_styliser_auto(){
  */
 function compositions_lister_disponibles($type, $informer=true){
 	include_spip('inc/compositions');
-	$type = preg_replace(',\W,','',$type);
-	if ($type=='syndic') $type='site'; //grml
-	if (!strlen($type)) $type="[a-z0-9]+";
-
+	$type_match = "";
+	if (strlen($type)){
+		$type = objet_type($type); // securite
+		$type_match = $type;
+	}
+	else {
+		$type_match = "[a-z0-9]+";
+	}
 
 	// rechercher les skel du type article-truc.html
 	// truc ne doit pas commencer par un chiffre pour eviter de confondre avec article-12.html
-	$match = "/($type)("._COMPOSITIONS_MATCH.")?[.]html$";
+	$match = "/($type_match)("._COMPOSITIONS_MATCH.")?[.]html$";
 
 	// lister les compositions disponibles
 	$liste = find_all_in_path(compositions_chemin(),$match);
@@ -80,8 +100,6 @@ function compositions_lister_disponibles($type, $informer=true){
 		}
 	}
 	// Pipeline compositions_lister_disponibles
-	if ($type=="[a-z0-9]+")
-		$type = '';
 	$res = pipeline('compositions_lister_disponibles',array(
 		'args'=>array('type' => $type,'informer' => $informer), 
 		'data'=> $res
@@ -184,7 +202,7 @@ function composition_class($composition,$type){
 }
 
 /**
- * Liste les types d'objets qui ont une composition
+ * Liste les types d'objets qui ont une composition ET sont autorises par la configuration
  * utilise la valeur en cache meta sauf si demande de recalcul
  * ou pas encore definie
  *
@@ -194,7 +212,7 @@ function composition_class($composition,$type){
 function compositions_types(){
 	static $liste = null;
 	if (is_null($liste)) {
-		if ($GLOBALS['var_mode'] OR !isset($GLOBALS['meta']['compositions_types'])){
+		if (_VAR_MODE OR !isset($GLOBALS['meta']['compositions_types'])){
 			include_spip('inc/compositions');
 			compositions_cacher();
 		}
@@ -204,8 +222,8 @@ function compositions_types(){
 }
 
 /**
- * Renvoie la composition qui s'applique � un objet
- * en tenant compte, le cas �ch�ant, de la composition h�rit�e
+ * Renvoie la composition qui s'applique a un objet
+ * en tenant compte, le cas echeant, de la composition heritee
  * si etoile=true on renvoi dire le champ sql
  *
  * @param string $type
@@ -245,7 +263,7 @@ function compositions_determiner($type, $id, $serveur='', $etoile = false){
 }
 
 /**
- * Renvoie la composition h�rit�e par un objet selon sa rubrique
+ * Renvoie la composition heritee par un objet selon sa rubrique
  *
  * @param string $type
  * @param integer $id_rubrique
@@ -280,18 +298,18 @@ function compositions_heriter($type, $id_rubrique, $serveur=''){
 
 /**
  * #COMPOSITION
- * Renvoie la composition s'appliquant � un objet
- * en tenant compte, le cas �ch�ant, de l'h�ritage.
+ * Renvoie la composition s'appliquant a un objet
+ * en tenant compte, le cas echeant, de l'heritage.
  *
  * Sans precision, l'objet et son identifiant sont pris
- * dans la boucle en cours, mais l'on peut sp�cifier notre recherche
+ * dans la boucle en cours, mais l'on peut specifier notre recherche
  * en passant objet et id_objet en argument de la balise :
  * #COMPOSITION{article, 8}
  *
  * #COMPOSITION* renvoie toujours le champs brut, sans tenir compte de l'heritage
  *
  * @param array $p 	AST au niveau de la balise
- * @return array	AST->code modifi� pour calculer le nom de la composition
+ * @return array	AST->code modifie pour calculer le nom de la composition
  */
 function balise_COMPOSITION_dist($p) {
 	$_composition = "";
@@ -316,7 +334,7 @@ function balise_COMPOSITION_dist($p) {
 }
 
 /**
- * Indique si la composition d'un objet est verrouill�e ou non,
+ * Indique si la composition d'un objet est verrouillee ou non,
  * auquel cas, seul le webmaster peut la modifier
  *
  * @param string $type
@@ -351,7 +369,7 @@ function compositions_verrouiller($type, $id, $serveur=''){
 }
 
 /**
- * Indique si les objets d'une branche sont verrouill�s
+ * Indique si les objets d'une branche sont verrouilles
  * @param integer $id_rubrique
  * @param string $serveur
  * @return string
