@@ -63,7 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_voir_fiche_objet' => 'Go to page',
 
 	// L
-	'label_adress' => 'Addresse',
+	'label_adress' => 'Address',
 	'label_code_postal' => 'Postal code',
 	'label_pays' => 'Country',
 	'label_rechercher_address' => 'Search for an address',
