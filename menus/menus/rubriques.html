@@ -1,4 +1,8 @@
-[(#SET{id_rubrique, #ENV{id_rubrique}|intval})]
+[(#REM) 	Rubrique de départ :
+			Si l'id_rubrique saisi vaut "courante" on va chercher l'id de la rubrique courante => env{env{id_rubrique}}
+			sinon, on utilise l'id saisi ]
+[(#SET{id_rubrique, #ENV{id_rubrique}|=={courante}|?{#ENV**|unserialize|table_valeur{env}|table_valeur{id_rubrique},#ENV{id_rubrique}|intval}})]
+
 [(#SET{id_secteur_exclus, #ENV{id_secteur_exclus}|?{#ENV{id_secteur_exclus}|explode{','},#ARRAY}})]
 [(#SET{niveau_max_txt, #ENV{niveau}|intval|?{#ENV{niveau},infini}})]
 [(#SET{niveau_max, #ENV{niveau}|intval|?{#ENV{niveau},1000}})]
@@ -26,7 +30,7 @@
 [(#SET{tri_alpha_articles_inverse, #ENV{tri_alpha_articles_inverse}|=={oui}|?{'1','0'}})]
 
 [(#ENV{appel_formulaire}|oui)
-	[(#SET{titre, #GET{id_rubrique}|?{#INFO_TITRE{rubrique, #GET{id_rubrique}}, <:info_racine_site:>}})]
+	[(#SET{titre, #ENV{id_rubrique}|?{#ENV{id_rubrique}|=={courante}|?{<:menus:info_rubrique_courante:>,#INFO_TITRE{rubrique, #GET{id_rubrique}}}, <:info_racine_site:>}})]
 	[(#ENV{secteurlangue}non)<div class="titre">#GET{titre}</div>]
 	[(#ENV{secteurlangue}oui)<div class="titre"><:menus:nom_menu_secteurlangue:></div>]
 	<div class="infos">
