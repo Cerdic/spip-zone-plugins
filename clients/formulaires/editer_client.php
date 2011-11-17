@@ -353,6 +353,9 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 	    );
     }
 
+    $editer_contact = charger_fonction('editer_contact', 'action/'); 
+    $editer_contact($id_contact);
+
 	// Le pseudo SPIP est construit 
 	set_request('nom', trim(_request('prenom').' '._request('nom'))); 
 	
