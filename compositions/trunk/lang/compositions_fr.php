@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_composition_branche_lock' => 'Verrouiller la composition de tous les objets de la branche',
 	'label_composition_explication' => 'Vous &ecirc;tes Webmestre, vous pouvez',
 	'label_composition_lock' => 'Verrouiller la composition',
+	'label_activer_composition_objets' => 'Utiliser les compositions sur les objets',
 	'label_composition_rubrique' => 'Composition des rubriques',
 	'label_information' => 'Information',
 	'label_masquer_formulaire' => 'Masquer le formulaire',

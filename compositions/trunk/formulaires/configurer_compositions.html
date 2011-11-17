@@ -7,6 +7,14 @@
 	<form method="post" action="#SELF"><div>
 		#ACTION_FORMULAIRE
 		<ul>
+			#SET{name,objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:compositions:label_activer_composition_objets:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name},#LISTE{spip_articles,spip_rubriques}}}
+			</li>
+
 			<li class='configurer_chemin_compositions'>
 				<label for="chemin_compositions"><:compositions:label_chemin_compositions:></label>
 				<div class='explication'><:compositions:label_chemin_compositions_details:></div>
