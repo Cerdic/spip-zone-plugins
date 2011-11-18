@@ -60,6 +60,8 @@ function gmap_saisie_geo_info($flux)
 	// Si la carte n'est pas complètement fonctionelle, inutile de faire quoi que ce soit : il faut d'abord paramétrer
 	if (!gmap_est_actif())
 		return $flux;
+		
+	$bHackModalBox = false;
 	
 	// Edition d'une rubrique
 	if ($flux['args']['exec'] === 'naviguer')
@@ -69,6 +71,7 @@ function gmap_saisie_geo_info($flux)
 		{
 			include_spip('inc/gmap_saisie_privee');
 			$flux['data'] .= gmap_saisie_privee($id_rubrique, 'rubrique', $flux['args']['exec']);
+			$bHackModalBox = true;
 		}
 	}
 	
@@ -80,23 +83,7 @@ function gmap_saisie_geo_info($flux)
 		{
 			include_spip('inc/gmap_saisie_privee');
 			$flux['data'] .= gmap_saisie_privee($id_article, 'article', $flux['args']['exec']);
-			if (gmap_lire_config('gmap_edit_params', 'hack_modalbox', 'oui') === "oui")
-				$flux['data'] .= '
-<script type="text/javascript">
-//<![CDATA[
-// CONTOURNEMENT : je n\'arrive pas à faire fonctionner le formulaire en ajax 
-// dans modalbox qui est utilisé par le plugin médiathèque ! L\'évènement 
-// document.ready est envoyé avant que la div ne soit ajoutée au document.
-// Et même en contournant ça avec un ajaxComplete, la soumission du formulaire
-// en ajax ne marche pas non plus (je n\'ai pas eu le courage de chercher
-// pourquoi.
-// ==> Solution de base, je désactive ModalBox sur les liens "modifier"...
-jQuery(document).ready(function()
-{
-	jQuery("#portfolios").find("a.editbox").removeClass("editbox").removeAttr("target");
-});
-//]]>
-</script>'."\n";
+			$bHackModalBox = true;
 		}
 	}
 
@@ -159,6 +146,25 @@ jQuery(document).ready(function()
 		}
 	}
 
+	// Désactivation du modal-box
+	if ($bHackModalBox && (gmap_lire_config('gmap_edit_params', 'hack_modalbox', 'oui') === "oui"))
+		$flux['data'] .= '
+<script type="text/javascript">
+//<![CDATA[
+// CONTOURNEMENT : je n\'arrive pas à faire fonctionner le formulaire en ajax 
+// dans modalbox qui est utilisé par le plugin médiathèque ! L\'évènement 
+// document.ready est envoyé avant que la div ne soit ajoutée au document.
+// Et même en contournant ça avec un ajaxComplete, la soumission du formulaire
+// en ajax ne marche pas non plus (je n\'ai pas eu le courage de chercher
+// pourquoi.
+// ==> Solution de base, je désactive ModalBox sur les liens "modifier"...
+jQuery(document).ready(function()
+{
+	jQuery("#portfolios").find("a.editbox").removeClass("editbox").removeAttr("target");
+});
+//]]>
+</script>'."\n";
+	
 	return $flux;
 }
 

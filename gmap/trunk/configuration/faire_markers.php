@@ -7,7 +7,7 @@
  * Fabrice ALBERT
  * (c) 2009 - licence GNU/GPL
  *
- * Import des données gis / geomap
+ * Édition des types de marqueurs
  *
  */
 

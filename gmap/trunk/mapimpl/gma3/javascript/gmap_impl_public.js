@@ -134,35 +134,42 @@ MapWrapper.defaultParams = {
 // Définition des paramètre d'une icone
 MapWrapper.IconDef = function(params)
 {
-	if (!isObject(params))
+	if (isObject(params) && isObject(params.urlIconFile))
 	{
-		this.urlIconFile = SiteInfo.defaultIcon;
-		this.urlShadowFile = SiteInfo.defaultShadow;
-		this.widthIcon = SiteInfo.defaultIconWidth;
-		this.heightIcon = SiteInfo.defaultIconHeight;
-		this.widthShadow = SiteInfo.defaultShadowWidth;
-		this.heightShadow = SiteInfo.defaultShadowHeight;
-		this.anchorX = this.widthIcon / 2;
-		this.anchorY = this.heightIcon;
-		this.anchorShadowX = this.anchorX;
-		this.anchorShadowY = this.anchorY;
-		this.popupOffsetX = 0; // position calculée à partir de top/center
-		this.popupOffsetY = this.heightIcon / 4;
+		this.urlIconFile = params.urlIconFile;
+		this.widthIcon = isObject(params.widthIcon) ? params.widthIcon : SiteInfo.iconDef.widthIcon;
+		this.heightIcon = isObject(params.heightIcon) ? params.heightIcon : SiteInfo.iconDef.heightIcon;
+		this.anchorX = isObject(params.anchorX) ? params.anchorX : this.widthIcon / 2;
+		this.anchorY = isObject(params.anchorY) ? params.anchorY : this.heightIcon;
+		this.popupOffsetX = isObject(params.popupOffsetX) ? params.popupOffsetX -(this.widthIcon / 2) : 0; // position calculée à partir de top/center
+		this.popupOffsetY = isObject(params.popupOffsetY) ? params.popupOffsetY : this.heightIcon / 4;
 	}
 	else
 	{
-		this.urlIconFile = isObject(params.urlIconFile) ? params.urlIconFile : SiteInfo.defaultIcon;
-		this.urlShadowFile = isObject(params.urlShadowFile) ? params.urlShadowFile : SiteInfo.defaultShadow;
-		this.widthIcon = isObject(params.widthIcon) ? params.widthIcon : SiteInfo.defaultIconWidth;
-		this.heightIcon = isObject(params.heightIcon) ? params.heightIcon : SiteInfo.defaultIconHeight;
-		this.widthShadow = isObject(params.widthShadow) ? params.widthShadow : SiteInfo.defaultShadowWidth;
-		this.heightShadow = isObject(params.heightShadow) ? params.heightShadow : SiteInfo.defaultShadowHeight;
-		this.anchorX = isObject(params.anchorX) ? params.anchorX : this.widthIcon / 2;
-		this.anchorY = isObject(params.anchorY) ? params.anchorY : this.heightIcon;
+		this.urlIconFile = SiteInfo.iconDef.urlIconFile;
+		this.widthIcon = SiteInfo.iconDef.widthIcon;
+		this.heightIcon = SiteInfo.iconDef.heightIcon;
+		this.anchorX = SiteInfo.iconDef.anchorX;
+		this.anchorY = SiteInfo.iconDef.anchorY;
+		this.popupOffsetX = SiteInfo.iconDef.popupOffsetX;
+		this.popupOffsetY = SiteInfo.iconDef.popupOffsetY;
+	}
+	
+	if (isObject(params) && isObject(params.urlShadowFile))
+	{
+		this.urlShadowFile = params.urlShadowFile;
+		this.widthShadow = isObject(params.widthShadow) ? params.widthShadow : SiteInfo.iconDef.widthShadow;
+		this.heightShadow = isObject(params.heightShadow) ? params.heightShadow : SiteInfo.iconDef.heightShadow;
 		this.anchorShadowX = isObject(params.anchorShadowX) ? params.anchorShadowX : this.anchorX;
 		this.anchorShadowY = isObject(params.anchorShadowY) ? params.anchorShadowY : this.anchorY;
-		this.popupOffsetX = isObject(params.popupOffsetX) ? params.popupOffsetX -(this.widthIcon / 2) : 0; // position calculée à partir de top/center
-		this.popupOffsetY = isObject(params.popupOffsetY) ? params.popupOffsetY : this.heightIcon / 4;
+	}
+	else
+	{
+		this.urlShadowFile = SiteInfo.iconDef.urlShadowFile;
+		this.widthShadow = SiteInfo.iconDef.widthShadow;
+		this.heightShadow = SiteInfo.iconDef.heightShadow;
+		this.anchorShadowX = SiteInfo.iconDef.anchorShadowX;
+		this.anchorShadowY = SiteInfo.iconDef.anchorShadowY;
 	}
 };
 MapWrapper.IconDef.prototype =
@@ -685,7 +692,8 @@ MapWrapper.prototype =
 	{
 		if (!isObject(this.map))
 			return false;
-		this.map.panToBounds(new google.maps.LatLngBounds(new google.maps.LatLng(minLatitude, minLongitude), new google.maps.LatLng(maxLatitude, maxLongitude)));
+		this.map.fitBounds(new google.maps.LatLngBounds(new google.maps.LatLng(minLatitude, minLongitude), new google.maps.LatLng(maxLatitude, maxLongitude)));
+		this.panTo((minLatitude + maxLatitude) / 2, (minLongitude + maxLongitude) / 2); // je n'ai pas confiance...
 		this._updateCurViewport();
 		return true;
 	},
@@ -1120,8 +1128,9 @@ MapWrapper.prototype =
 	// Afficher la fenêtre sur un marqueur
 	_getInfoWindowMaxWidth: function()
 	{
-		var maxPercent = jQuery(this.map.getDiv()).width() * this.curParams.infoWidthPercent / 100;
-		var maxWidth = 0;
+		var mapWidth = jQuery(this.map.getDiv()).width();
+		var maxPercent = mapWidth * this.curParams.infoWidthPercent / 100;
+		var maxWidth = mapWidth;
 		if (this.curParams.infoWidthAbsolute > 0)
 		{
 			maxWidth = this.curParams.infoWidthAbsolute;

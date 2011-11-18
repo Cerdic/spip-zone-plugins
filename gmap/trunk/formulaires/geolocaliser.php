@@ -17,6 +17,7 @@ include_spip('inc/gmap_presentation');
 include_spip('inc/gmap_db_utils');
 include_spip('inc/gmap_saisie_utils');
 include_spip('inc/gmap_geoloc');
+include_spip('gmap_filtres');
 
 // Ajout de la carte clicable
 function gmap_ajoute_carte_edit($parts, $table, $id, $mapId, $divId)
@@ -33,18 +34,10 @@ function gmap_ajoute_carte_edit($parts, $table, $id, $mapId, $divId)
 // Créer les icones pour la partie privée
 '.$mapId.'.createIcons = function(map)
 {
-	map.setIcon("editMarker", '.
-		gmap_definir_parametre_icon(array('file'=>_DIR_PLUGIN_GMAP . 'images/priveEdit.png', 'xAnchor'=>11, 'yAnchor'=>32, 'xOffset'=>11, 'yOffset'=>10),
-									array('file'=>_DIR_PLUGIN_GMAP . 'images/priveEdit-full.png', 'xAnchor'=>11, 'yAnchor'=>32)).');
-	map.setIcon("activeMarker", '.
-		gmap_definir_parametre_icon(array('file'=>_DIR_PLUGIN_GMAP . 'images/priveActive.png', 'xAnchor'=>11, 'yAnchor'=>32, 'xOffset'=>11, 'yOffset'=>10),
-									array('file'=>_DIR_PLUGIN_GMAP . 'images/priveActive-full.png', 'xAnchor'=>11, 'yAnchor'=>32)).');
-	map.setIcon("siblingMarker", '.
-		gmap_definir_parametre_icon(array('file'=>_DIR_PLUGIN_GMAP . 'images/priveSibling.png', 'xAnchor'=>11, 'yAnchor'=>32, 'xOffset'=>11, 'yOffset'=>10),
-									array('file'=>_DIR_PLUGIN_GMAP . 'images/priveSibling-full.png', 'xAnchor'=>11, 'yAnchor'=>32)).');
-	map.setIcon("activeSiblingMarker", '.
-		gmap_definir_parametre_icon(array('file'=>_DIR_PLUGIN_GMAP . 'images/priveSiblingActive.png', 'xAnchor'=>11, 'yAnchor'=>32, 'xOffset'=>11, 'yOffset'=>10),
-									array('file'=>_DIR_PLUGIN_GMAP . 'images/priveSiblingActive-full.png', 'xAnchor'=>11, 'yAnchor'=>32)).');
+	map.setIcon("editMarker", '.gmap_definition_icone('priveEdit').');
+	map.setIcon("activeMarker", '.gmap_definition_icone('priveActive').');
+	map.setIcon("siblingMarker", '.gmap_definition_icone('priveSibling').');
+	map.setIcon("activeSiblingMarker", '.gmap_definition_icone('priveSiblingActive').');
 };
 
 // Chargement de la carte et mise en place des gestionnaire d\'évènement
@@ -232,14 +225,14 @@ function gmap_ajoute_liste_marqueurs_edit($parts, $table, $id, $mapId, $divId)
 		};
 		if (isActive)
 		{
-			params["title"] = "'.addslashes(_T('gmap:titre_marqueur_actif')).'";
+			params["title"] = "'.protege_titre(_T('gmap:titre_marqueur_actif')).'";
 			params["icon"] = "activeMarker";
 			params["zorder"] = 20;
 			params["draggable"] = true;
 		}
 		else
 		{
-			params["title"] = "'.addslashes(_T('gmap:titre_marqueur_edit')).'";
+			params["title"] = "'.protege_titre(_T('gmap:titre_marqueur_edit')).'";
 			params["icon"] = "editMarker";
 			params["zorder"] = 10;
 			params["draggable"] = false;
@@ -398,7 +391,8 @@ function gmap_get_siblings_markers($id, $table, $limit = 6, $bSameParent = false
 			$rowset = sql_select(
 				array(
 					"articles.id_article AS id", "articles.titre AS titre", "articles.date AS date",
-					"points.latitude AS coord_lat", "points.longitude AS coord_long", "points.zoom AS zoom", "types.nom AS type",
+					"points.latitude AS coord_lat", "points.longitude AS coord_long", "points.zoom AS zoom", "points.id_point AS id_point",
+					"types.nom AS type",
 					"ABS(DATEDIFF('" . $row['date'] . "', articles.date)) AS distdate"),
 				"spip_articles AS articles".
 				" JOIN spip_gmap_points_liens AS liens ON (articles.id_article = liens.id_objet AND liens.objet = 'article')".
@@ -425,7 +419,11 @@ function gmap_get_siblings_markers($id, $table, $limit = 6, $bSameParent = false
 					'long'=>$row['coord_long'],
 					'zoom'=>$row['zoom'],
 					'type'=>$row['type'],
-					'html'=>gmap_get_object_info_contents('article', $row['id'], $row['type'])
+					'html'=>gmap_get_object_info_contents(array(
+								'objet'=>'article',
+								'id_objet'=>$row['id'],
+								'type_point'=>$row['type'],
+								'id_point'=>$row['id_point']))
 					);
 			}
 			if ($keys && $markers)
@@ -447,7 +445,8 @@ function gmap_get_siblings_markers($id, $table, $limit = 6, $bSameParent = false
 			$rowset = sql_select(
 				array(
 					"spip_documents_liens.id_document AS id", "spip_documents.titre AS titre", "spip_documents.fichier AS fichier", "spip_documents.date AS date",
-					"spip_gmap_points.latitude AS coord_lat", "spip_gmap_points.longitude AS coord_long", "spip_gmap_points.zoom AS zoom", "spip_gmap_types.nom AS type",
+					"spip_gmap_points.latitude AS coord_lat", "spip_gmap_points.longitude AS coord_long", "spip_gmap_points.zoom AS zoom", "spip_gmap_points.id_point AS id_point",
+					"spip_gmap_types.nom AS type",
 					"ABS(TIMEDIFF('" . $row['date'] . "', spip_documents.date)) AS distdate"),
 				"spip_documents_liens JOIN spip_documents ON spip_documents_liens.id_document = spip_documents.id_document JOIN spip_gmap_points_liens ON (spip_documents_liens.id_document = spip_gmap_points_liens.id_objet AND spip_gmap_points_liens.objet = 'document') JOIN spip_gmap_points ON spip_gmap_points.id_point = spip_gmap_points_liens.id_point JOIN spip_gmap_types ON spip_gmap_points.id_type_point = spip_gmap_types.id_type_point",
 				$where,
@@ -468,7 +467,11 @@ function gmap_get_siblings_markers($id, $table, $limit = 6, $bSameParent = false
 					'long'=>$row['coord_long'],
 					'zoom'=>$row['zoom'],
 					'type'=>$row['type'],
-					'html'=>gmap_get_object_info_contents('document', $row['id'], $row['type'])
+					'html'=>gmap_get_object_info_contents(array(
+								'objet'=>'document',
+								'id_objet'=>$row['id'],
+								'type_point'=>$row['type'],
+								'id_point'=>$row['id_point']))
 				   );
             }
 			if ($keys && $markers)
@@ -512,10 +515,10 @@ function gmap_ajoute_siblings_copy($parts, $table, $id, $mapId, $divId)
 				icon: "siblingMarker",
 				zorder: 0,
 				click: "custom",
-				title: "'.addslashes(_T('gmap:titre_marqueur_voisin').$marker['desc']).'",
+				title: "'.protege_titre(_T('gmap:titre_marqueur_voisin').$marker['desc']).'",
 				latitude: '.$marker['lat'].',
 				longitude: '.$marker['long'].',
-				html: "'.$marker['html'].'"
+				html: "'.protege_html_body($marker['html']).'"
 			});' . "\n";
 			
 		}
@@ -525,7 +528,7 @@ function gmap_ajoute_siblings_copy($parts, $table, $id, $mapId, $divId)
 </div>'."\n";
 
 	// Mécanisme du bouton dépliable sur la partie HTML
-	$parts['html'] .= gmap_sous_bloc_depliable("siblings_".$mapId, _T('gmap:formulaire_voisins'), $html);
+	$parts['html'] .= gmap_sous_bloc_depliable("siblings_".$mapId, _T('gmap:formulaire_voisins'), $html, $mapId);
 	
 	// Scripts
 	$parts['script'] .= '
@@ -565,14 +568,7 @@ function gmap_ajoute_siblings_copy($parts, $table, $id, $mapId, $divId)
 			map.addListener("click-on-marker", function(event, markerId)
 			{
 				// Déplier le bloc s\'il était plié
-				jQuery("#siblings_'.$mapId.'").each(function()
-				{
-					if (jQuery(this).hasClass("sbd_replie"))
-					{
-						jQuery(this).removeClass("sbd_replie");
-						jQuery(this).addClass("sbd_deplie");
-					}
-				});
+				sbd_opensiblings_'.$mapId.'();
 				
 				// Rendre la ligne active
 				'.$mapId.'.setActiveSiblingID(markerId);

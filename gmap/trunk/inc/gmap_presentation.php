@@ -15,7 +15,7 @@ include_spip('inc/presentation');
 
 // Définition d'un sous-bloc dépliable
 // Sous-bloc d'un formulaire, inséré avec un fieldset...
-function gmap_sous_bloc_depliable($nom, $titre, $contenu)
+function gmap_sous_bloc_depliable($nom, $titre, $contenu, $mapId)
 {
 	$out = '';
 	
@@ -44,23 +44,37 @@ function gmap_sous_bloc_depliable($nom, $titre, $contenu)
 	$out .= '<script type="text/javascript">'."\n".'//<![CDATA['."\n";
 	$out .= '
 // Activation des listeners
+function sbd_close'.$nom.'()
+{
+	jQuery("#'.$nom.'").each(function(){
+		jQuery(this).removeClass("sbd_deplie");
+		jQuery(this).addClass("sbd_replie");
+		setUIState("ui_state_'.$mapId.'", "sb_'.$nom.'", 0);
+	});
+}
+function sbd_open'.$nom.'()
+{
+	jQuery("#'.$nom.'").each(function(){
+		jQuery(this).removeClass("sbd_replie");
+		jQuery(this).addClass("sbd_deplie");
+		setUIState("ui_state_'.$mapId.'", "sb_'.$nom.'", 1);
+	});
+}
 jQuery(document).ready(function()
 {
+	if (open = getUIState("ui_state_'.$mapId.'", "sb_'.$nom.'", 0))
+		sbd_open'.$nom.'();
+	else
+		sbd_close'.$nom.'();
 	jQuery("#sbd_btn_'.$nom.'_open").click(function(event)
 	{
-		jQuery(this).parents("#'.$nom.'").each(function(){
-			jQuery(this).removeClass("sbd_replie");
-			jQuery(this).addClass("sbd_deplie");
-		});
+		sbd_open'.$nom.'();
 		event.preventDefault();
 		return false;
 	});
 	jQuery("#sbd_btn_'.$nom.'_close").click(function(event)
 	{
-		jQuery(this).parents("#'.$nom.'").each(function(){
-			jQuery(this).removeClass("sbd_deplie");
-			jQuery(this).addClass("sbd_replie");
-		});
+		sbd_close'.$nom.'();
 		event.preventDefault();
 		return false;
 	});

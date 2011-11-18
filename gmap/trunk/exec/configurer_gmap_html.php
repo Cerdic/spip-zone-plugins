@@ -138,11 +138,11 @@ function exec_configurer_gmap_html_dist($class = null)
 		$title = $matches[1];
 	else
 		$title = _T('gmap:html_titre_defaut');
-	if (preg_match_all('/<link (.*)href="([[:alnum:]-_]*).css"(.*)\/>/U', $contents, $matches, PREG_PATTERN_ORDER) !== FALSE)
+	if (preg_match_all('/<link (.*)href="([^\.]+).css"(.*)\/>/U', $contents, $matches, PREG_PATTERN_ORDER) !== FALSE)
 	{
 		foreach ($matches[2] as $cssFile)
 		{
-			echo "<style>\n<!--\n";
+			echo "<style>\n<!-- styles ".$cssFile.".css \n";
 			readfile($root.$folder.'/'.$cssFile.'.css');
 			echo "-->\n</style>\n";
 		}

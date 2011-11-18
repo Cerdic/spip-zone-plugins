@@ -26,14 +26,15 @@
 		<li>Param&eacute;trer un type de repr&eacute;sentation (par exemple pour l'impl&eacute;mentation Google Maps V2, donner une clef d'enregistrement Google), cf. <a href="parametrage.html">param&eacute;trage du plugin</a>.</li>
 		<li>Int&eacute;grer une balise <a href="balise-GEOMAP.html">#GEOMAP</a> dans un squelette, ou un mod&egrave;le <a href="modele-map.html">&lt;map&gt;</a> dans un texte.</li>
 	</ol>
-	<p>Mais le plus int&eacute;ressant sera tout de m&ecirc;me de g&eacute;olocaliser les objets SPIP de votre site.</p>
+	<p>Apr&egrave;s il ne reste plus qu'&agrave; g&eacute;olocaliser les objets de votre site, ou de fournir &agrave; la carte un point ext&eacute;rieur.</p>
 	<p>&nbsp;</p>
-	<p>Par exemple, le code suivant permet d'afficher une carte sur les objets g&eacute;olicalis&eacute;s&nbsp;:</p>
-	<pre class="code"><span class="spip-boucle">&lt;B_geo&gt;</span>
-<span class="spip-boucle">&lt;BOUCLE_geo(GEOTEST){id_article}&gt;</span><span class="spip-syntax">[
+	<p>Par exemple, le code suivant permet d'afficher une carte repr&eacute;sentant les documents g&eacute;olocalis&eacute;s d'un article&nbsp;:</p>
+	<pre class="code"><span class="spip-syntax">[(</span><span class="spip-balise">#GEOMAP</span><span class="spip-syntax">{</span>id_article,markers=query<span class="spip-syntax">})]</span></pre>
+	<p>&nbsp;</p>
+	<p>En ajoutant une boucle GEOTEST autour de la balise #GEOMAP, on restreint l'affichage de la carte aux articles eux-m&ecirc;mes g&eacute;olocalis&eacute;s&nbsp;:</p>
+	<pre class="code"><span class="spip-boucle">&lt;BOUCLE_geo(GEOTEST){id_article}&gt;</span><span class="spip-syntax">[
 	(</span><span class="spip-balise">#GEOMAP</span><span class="spip-syntax">{</span>id_article,markers=query<span class="spip-syntax">})
-]</span><span class="spip-boucle">&lt;/BOUCLE_geo&gt;</span>
-<span class="spip-boucle">&lt;/B_geo&gt;</span></pre>
+]</span><span class="spip-boucle">&lt;/BOUCLE_geo&gt;</span></pre>
 
 	<h2>Informations d&eacute;taill&eacute;es</h2>
 

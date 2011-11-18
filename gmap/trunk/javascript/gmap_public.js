@@ -146,6 +146,8 @@ function _gmap_getHtmlContents(contents)
 {
 	if (typeof(contents) != "string")
 		return contents;
+	// Inutile : juste pour tester et avoir exactement le même contenu qu'en JSON
+	// contents = contents.replace(/[\n\r\t]/g, "");
 	var matches = contents.match(/<body([^>]*)>([\s\S]*)<\/body>/mi);
 	if (!matches)
 		return contents;
@@ -199,7 +201,12 @@ function gmap_addKMLMarker(map, item)
 			else if (name == "gmm:markerParams")
 			{
 				for (name in attrs)
-					markerParams[name] = attrs[name]
+				{
+					if ((name == 'objectId') || (name == 'zoom') || (name == 'priority'))
+						markerParams[name] = parseInt(attrs[name]);
+					else
+						markerParams[name] = attrs[name]
+				}
 			}
 			else if (name == "gmm:markers")
 			{
@@ -232,9 +239,6 @@ function gmap_addKMLMarker(map, item)
 					iconCurrent = icon;
 				if (attrs['type'] == "shadow")
 				{
-					iconCurrent['urlShadowFile'] = attrs['url'];
-					iconCurrent['widthShadow'] = parseInt(attrs['cxSize']);
-					iconCurrent['heightShadow'] = parseInt(attrs['cySize']);
 					iconCurrent['urlShadowFile'] = attrs['url'];
 					iconCurrent['widthShadow'] = parseInt(attrs['cxSize']);
 					iconCurrent['heightShadow'] = parseInt(attrs['cySize']);
@@ -322,7 +326,6 @@ function gmap_addKMLMarker(map, item)
 	parser.parse(item);
 
 	// Ajout du marqueur
-	var id = map.getNewMarkerID();
 	if (!map.existIcon(iconName))
 		map.setIcon(iconName, icon);
 	markerParams['icon'] = iconName;
@@ -350,7 +353,132 @@ function gmap_handleXMLMarkers(map, xmlDoc)
 	jQuery("kml", xmlDoc).each(function(kmlIndex, kmlElement) {
 		gmap_addKMLMarkers(map, kmlElement);
 	});
-	// On pourrait ajouter d'autres formats : GeoRSS...
+	// On pourrait ajouter d'autres formats XML : GeoRSS...
+}
+
+
+
+/***
+ * Gestion des fichier GeoJSON pour transmettre les données
+ */
+
+// Ajout d'une Feature
+function gmap_handleJSONMarker(map, feature)
+{
+	if (!feature || (feature.type != 'Feature'))
+		return false;
+	var geometry = feature.geometry;
+	if (!geometry || (geometry.type != 'Point'))
+		return false;
+	var markerParams = {
+			longitude: geometry.coordinates[0],
+			latitude: geometry.coordinates[1]
+		};
+	var params = feature['properties'];
+	if (params['name'])
+		markerParams.title = params['name'];
+	if (params['html'])
+	{
+		markerParams.click = "showInfoWindow";
+		markerParams['html'] = params['html'];
+	}
+	if (params['type'])
+		markerParams.type = params['type'];
+	if (params['zoom'])
+		markerParams.zoom = params['zoom'];
+	if (params['objet'])
+		markerParams.objectName = params['objet'];
+	if (params['id_objet'])
+		markerParams.objectId = params['id_objet'];
+	if (params['visible'])
+		markerParams.visible = params['visible'];
+	if (params['priorite'])
+		markerParams.priority = params['priorite'];
+	if (params['icon'])
+	{
+		var icon = params['icon'];
+		var images = icon.images;
+		if (images)
+		{
+			var iconDef = new Array;
+			var iconSelDef = new Array;
+			for (var indImage = 0; indImage < images.length; indImage++)
+			{
+				var image = images[indImage];
+				if (image.state === "selected")
+					iconCurrent = iconSelDef;
+				else
+					iconCurrent = iconDef;
+				if (image.type == "shadow")
+				{
+					iconCurrent['urlShadowFile'] = image['url'];
+					iconCurrent['widthShadow'] = image['cxSize'];
+					iconCurrent['heightShadow'] = image['cySize'];
+					iconCurrent['anchorShadowX'] = image['xAnchor'];
+					iconCurrent['anchorShadowY'] = image['yAnchor'];
+				}
+				else if (image.type == "complete")
+				{
+					iconCurrent['urlCompleteFile'] = image['url'];
+					iconCurrent['widthComplete'] = image['cxSize'];
+					iconCurrent['heightComplete'] = image['cySize'];
+					iconCurrent['anchorCompleteX'] = image['xAnchor'];
+					iconCurrent['anchorCompleteY'] = image['yAnchor'];
+				}
+				else
+				{
+					iconCurrent['urlIconFile'] = image['url'];
+					iconCurrent['widthIcon'] = image['cxSize'];
+					iconCurrent['heightIcon'] = image['cySize'];
+					iconCurrent['anchorX'] = image['xAnchor'];
+					iconCurrent['anchorY'] = image['yAnchor'];
+				}
+				if (image['xOffset'] && image['yOffset'])
+				{
+					iconCurrent['popupOffsetX'] = image['xOffset'];
+					iconCurrent['popupOffsetY'] = image['yOffset'];
+				}
+			}
+			if (arrayCount(iconDef))
+			{
+				if (!map.existIcon(icon.name))
+					map.setIcon(icon.name, iconDef);
+				if (arrayCount(iconSelDef) && !map.existIcon(icon.name+"_sel"))
+					map.setIcon(icon.name+"_sel", iconSelDef);
+			}
+		}
+		if (icon.name && map.existIcon(icon.name))
+			markerParams.icon = icon.name;
+		if (icon.name && map.existIcon(icon.name+"_sel"))
+			markerParams.icon_sel = icon.name+"_sel";
+	}
+	var id = map.getNewMarkerID();
+	map.setMarker(id, markerParams);
+	return true;
+}
+
+// Décodage d'un contenu JSON obtenu par Ajax
+function gmap_handleJSONMarkers(map, content)
+{
+	var features;
+	if (typeof(content) == "string")
+		features = eval('(' + content + ')');
+	else
+		features = content;
+	switch (features.type)
+	{
+	case 'FeatureCollection':
+		{
+			features = features.features;
+			for (var index = 0; index < features.length; index++)
+				gmap_handleJSONMarker(map, features[index])
+		}
+		break;
+	case 'Feature':
+		gmap_handleJSONMarker(map, features);
+		break;
+	}
+	return true;
 }
 
 
@@ -409,7 +537,12 @@ function gmap_setViewportOnMarkers(mapId)
 	
 	// Centrer la carte
 	if (countMarkers == 1)
+	{
 		map.panTo(minLatitude, minLongitude);
+		var vp = map.getViewport();
+		if (vp['zoom'] < 4)
+			map.setZoom(4);
+	}
 	else
 		map.panToBounds(minLatitude, minLongitude, maxLatitude, maxLongitude);
 }

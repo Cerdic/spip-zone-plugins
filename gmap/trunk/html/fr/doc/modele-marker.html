@@ -21,22 +21,52 @@
 			<td>absent, donc la derni&egrave;re carte ajout&eacute;e est utilis&eacute;e</td>
 		</tr>
 		<tr>
-			<td>id_rubrique, id_article, id_breve, id_document, id_auteur, id_mot ou objet+id_objet</td>
-			<td>Objet dont la localisation est utilis&eacute;e</td>
-			<td><span class="code">id_article=39</span> ou <span class="code">objet=article, id_objet=39</span></td>
+			<td>id_secteur, id_rubrique, id_parent, id_article, id_document, id_breve, id_auteur, id_mot, id_groupe, id_forum, id_syndic</td>
+			<td>La premi&egrave;re occurence d'un identifiant est utilis&eacute;e comme objet de r&eacute;f&eacute;rence pour la recherche des points. Les suivantes peuvent &ecirc;tre transmises au fichier de requ&ecirc;te.</td>
+			<td>|id_article ou |id_article=39 ou encore |objet=article|id_objet=39</td>
+			<td>absent, aucun objet n'est fourni aux &eacute;ventuelles requ&ecirc;tes</td>
+		</tr>
+		<tr>
+			<td>markers</td>
+			<td>D&eacute;finition des marqueurs</td>
+			<td>
+				<ul>
+					<li><b>local</b>&nbsp;: seul(s) le(s) marqueur(s) de l'objet sont affich&eacute;s</li>
+					<li><b>childs</b>&nbsp;: les marqueurs de l'objet et de ses descendants de niveau 1 sont affich&eacute;s</li>
+					<li><b>recursive</b>&nbsp;: les marqueurs de l'objet et de tous ses descendants sont affich&eacute;s</li>
+					<li><b>query</b>&nbsp;: la liste des marqueurs provient d'une requ&ecirc;te ajax</li>
+					<li>Autre valeur&nbsp;: nom d'une requ&ecirc;te sp&eacute;ciale, &eacute;quivalent &agrave; markers=query, query=xxx</li>
+				</ul>
+			</td>
 			<td>absent</td>
 		</tr>
 		<tr>
-			<td>id_article/id_rubrique...</td>
-			<td>Objet &agrave; partir duquel est affich&eacute;e la carte. S'il n'est pas g&eacute;olocalis&eacute;, la carte n'est pas affich&eacute;e, s'il l'est, la carte est centr&eacute;e dessus, et il sert de base &agrave; la recherche des marqueurs</td>
-			<td>{id_article} ou {id_article=39}, {id_rubrique}, {id_document}, {id_breve}, {id_mot}, {id_auteur}</td>
+			<td>query</td>
+			<td>Nom du fichier de requ&ecirc;te (si <i>markers=query</i>). GMap contient des requ&ecirc;tes pr&eacute;d&eacute;finies pour les objets qu'il traite (rubrique, article, document, br&egrave;ve, auteur et mot-clef) et pour les formulaires de recherche. Quand ce param&egrave;tre est absent, GMap utilise une requ&ecirc;te sur les enfants de l'objet de r&eacute;f&eacute;rence.</td>
+			<td>Chemin relatif du fichier par rapport au path de SPIP (par exemple dossier des squelettes, racine des plugins), sans l'extension .html.</td>
 			<td>absent</td>
+		</tr>
+		<tr>
+			<td>format</td>
+			<td>Format du fichier de requ&ecirc;te&nbsp;:
+				<ul>
+					<li><b>kml</b> (par d&eacute;faut)&nbsp;: fichiers kml (OGC). Ces fichiers sont explicites et tr&egrave;s standardis&eacute;s. Ils peuvent &ecirc;tre t&eacute;l&eacute;charg&eacute;s et ouverts dans la plupart des outils de cartographie.</li>
+					<li>json&nbsp;: fichiers l&eacute;g&egrave;rement plus l&eacute;gers et plus rapide &agrave; d&eacute;coder, mais moins standards.</li>
+				</ul></td>
+			<td>kml | json</td>
+			<td>kml</td>
+		</tr>
+		<tr>
+			<td>focus</td>
+			<td>Quand ce param&egrave;tre est pr&eacute;sent (la valeur n'est pas utilis&eacute;e), il indique que la carte doit s'autocentrer apr&egrave;s avoir ajouter les points.</td>
+			<td>n.a.</td>
+			<td>non</td>
 		</tr>
 		<tr>
 			<td>type</td>
 			<td>Type du marqueur recherch&eacute; sur un &eacute;l&eacute;ment.</td>
 			<td>Parmi les types d&eacute;finis dans le param&eacute;trage du plugin.</td>
-			<td>Défaut</td>
+			<td>defaut</td>
 		</tr>
 		<tr>
 			<td>latitude</td>

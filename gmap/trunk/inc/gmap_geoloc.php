@@ -15,15 +15,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/gmap_config_utils');
 include_spip('inc/gmap_db_utils');
+include_spip('gmap_filtres');
 
 // Rechercher en base comment doit être affichée la carte d'une base
 function gmap_get_object_viewport($objet, $id_objet)
 {
-	// Initialisation
+	// Initialisation sur le défaut du site
 	$vp = array();
-	$vp['latitude'] = 0.0;
-	$vp['longitude'] = 0.0;
-	$vp['zoom'] = 3;
+	$api = gmap_lire_config('gmap_api', 'api', 'gma3');
+	$interface = 'gmap_'.$api.'_interface';
+	$vp['latitude'] = gmap_lire_config($interface, 'default_latitude', "0.0");
+	$vp['longitude'] = gmap_lire_config($interface, 'default_longitude', "0.0");
+	$vp['zoom'] = gmap_lire_config($interface, 'default_zoom', "1");
 	
 	// Rechercher les marqueurs de l'objet
 	$points = gmap_get_points($objet, $id_objet);
@@ -103,30 +106,51 @@ function gmap_get_object_viewport($objet, $id_objet)
 	if (count($parents) == 1)
 		return gmap_get_object_viewport($parents[0]['objet'], $parents[0]['id_objet']);
 	
-	// Sinon prendre le défaut du site
-	$api = gmap_lire_config('gmap_api', 'api', 'gma3');
-	$interface = 'gmap_'.$api.'_interface';
-	$vp['latitude'] = gmap_lire_config($interface, 'default_latitude', "0.0");
-	$vp['longitude'] = gmap_lire_config($interface, 'default_longitude', "0.0");
-	$vp['zoom'] = gmap_lire_config($interface, 'default_zoom', "1");
+	// Sinon renvoyer le défaut du site
 	return $vp;
 }
 
 // Définition des paramètres de la carte au format défini dans gmap_<impl>_public.js
-function gmap_definir_parametre_carte($objet, $id_objet, $varName = NULL, $params = NULL)
+function gmap_definir_parametre_carte($objet, $id_objet, $varName = null, $params = null)
 {
-	// Récupérer le centre
-	$viewport = gmap_get_object_viewport($objet, $id_objet);
-	
-	// Spécificités de l'API
+	// Fonction spécifique à l'API
 	$api = gmap_lire_config('gmap_api', 'api', 'gma3');
 	$parametre_carte = charger_fonction("parametre_carte", "mapimpl/".$api."/public");
+	if (!$parametre_carte)
+		return '';
 
+	// Récupérer le centre
+	if ($params && isset($params['viewport']))
+	{
+		if ($params['viewport'] === 'site')
+		{
+			$api = gmap_lire_config('gmap_api', 'api', 'gma3');
+			$interface = 'gmap_'.$api.'_interface';
+			$viewport = array(
+				'latitude' => gmap_lire_config($interface, 'default_latitude', "0.0"),
+				'longitude' => gmap_lire_config($interface, 'default_longitude', "0.0"),
+				'zoom' => gmap_lire_config($interface, 'default_zoom', "1"));
+		}
+		else if (preg_match("/^([\w]+)([0-9]+)$/i", $params['viewport'], $matches) == 1)
+			$viewport = gmap_get_object_viewport($matches[1], intval($matches[2]));
+	}
+	else if ($objet && strlen($objet) && $id_objet)
+		$viewport = gmap_get_object_viewport($objet, $id_objet);
+	else
+	{
+		$api = gmap_lire_config('gmap_api', 'api', 'gma3');
+		$interface = 'gmap_'.$api.'_interface';
+		$viewport = array(
+			'latitude' => gmap_lire_config($interface, 'default_latitude', "0.0"),
+			'longitude' => gmap_lire_config($interface, 'default_longitude', "0.0"),
+			'zoom' => gmap_lire_config($interface, 'default_zoom', "1"));
+	}
+	
 	// Retour
 	$out = "";
 	if ($varName)
 	{
-		if (strstr($varName, '.') !== FALSE)
+		if (strstr($varName, '.') !== false)
 			$out .= $varName.' = ';	
 		else
 			$out .= 'var '.$varName.' = ';	
@@ -232,108 +256,201 @@ function gmap_definir_parametre_icon($icon, $complete = null, $varName = null)
 	return $out;
 }
 
-// Récupérer un fichier de définition pour un triplet (objet, id_objet, type_point)
-function _gmap_find_file($prefix, &$name, $ext, &$filename, $ids_rubrique = NULL)
+// Calculer le path du thème utilisé
+function gmap_theme_folder()
 {
-	$file = FALSE;
-	if (is_array($ids_rubrique) && count($ids_rubrique))
-	{
-		$rubs = count($ids_rubrique);
-		$base = $name;
-		$name = $base.'='.$ids_rubrique[0];
-		if ($file = _gmap_find_file($prefix, $name, $ext, &$filename))
-			return $file;
-		for ($index = 0; $index < $rubs; $index++)
-		{
-			$name = $base.'-'.$ids_rubrique[$index];
-			if ($file = _gmap_find_file($prefix, $name, $ext, &$filename))
-				return $file;
-		}
-		$name = $base;
-	}
-	$filename = $prefix.$name;
-	if ($file = find_in_path('modeles/'.$filename.'.'.$ext))
-		return $file;
-	if ($file = find_in_path($filename.'.'.$ext))
-		return $file;
-	return FALSE;
+	$api = gmap_lire_config('gmap_api', 'api', "gma3");
+	$trouve_theme = charger_fonction("trouve_theme", "mapimpl/".$api."/public", true);
+	if ($trouve_theme)
+		$folder = $trouve_theme();
+	return 'themes/'.($folder ? $folder : 'gmap');
 }
-function gmap_trouve_def_file($objet, $id_objet, $type_point, $prefix, $ext, $buffer = null)
+
+// Récupérer un fichier de définition selon un prefix, un nom et un contexte
+function _gmap_find_in_path($squelette, $folder)
+{
+	if ($file = find_in_path($squelette))
+		return $file;
+	else if ($folder && strlen($folder) && ($file = find_in_path($folder.'/'.$squelette)))
+		return $file;
+	return false;
+}
+function _gmap_find_file($prefix, &$name, $ext, &$fond, $folder, $args = null)
+{
+	// J'ai bien essayé de limiter les recherches par find_in_path, mais ça ne
+	// marche pas : comme on fait déjà varier les noms de fichiers avec le type
+	// d'objet et le type de point, si on fait, comme spip, d'abord une recherche
+	// sur un fichier générique avant de faire varier les rubriques, ça force
+	// à créer dans le dossier squelettes des fichiers qui n'existent pas dans
+	// le plugin (par exemple gmap-json-article.html). À l'inverse, si on recherche
+	// d'abord le fichier le plus simple (gmap-json-default), il faudra forcément tout 
+	// redéfinir...
+	
+	// D'abord chercher un fichier sans le suffixe de zone
+	$fileBase = false;
+	$fond = $prefix;
+	if (strlen($name))
+		$fond .= '-'.$name;
+	if ($file = _gmap_find_in_path($fond.'.'.$ext, $folder))
+		$fileBase = $file;
+		
+	// Si on n'a pas d'indication de rubriques, s'arrêter là aussi (en succès)
+	if (!$args || !$args['ids_rubrique'])
+		return $fileBase;
+
+	// Rechercher en faisant varier la rubrique
+	// On n'utilise pas le pipeline styliser pour deux raisons :
+	// - Il y a plusieurs appels successifs donc le buffer des ids des parents
+	// est utile.
+	// - Il faudrait utiliser _gmap_find_in_path au lieu d'un file_exists
+	$base = $name;
+	$name = $base.'='.$args['ids_rubrique'][0];
+	$fond = $prefix.'-'.$name;
+	if ($file = _gmap_find_in_path($fond.'.'.$ext, $folder))
+		return $file;
+	$rubs = count($args['ids_rubrique']);
+	for ($index = 0; $index < $rubs; $index++)
+	{
+		$name = $base.'-'.$args['ids_rubrique'][$index];
+		$fond = $prefix.'-'.$name;
+		if ($file = _gmap_find_in_path($fond.'.'.$ext, $folder))
+			return $file;
+	}
+	
+	// Pas trouvé, revenir à la version de base...
+	$name = $base;
+	$fond = $prefix.(strlen($name)?'-':'').$name;
+	return $fileBase;
+	// Tout de même, si un jour on ne passe pas de cache...
+	//{
+	//	$squelette = substr($fileBase, 0, - strlen('.'.$ext));
+	//	$fond = pipeline('styliser', array(
+	//		'args' => array(
+	//			'id_rubrique' => $args['id_rubrique'],
+	//			'ext' => $ext,
+	//			'fond' => $fond,
+	//			'lang' => $GLOBALS['spip_lang'],
+	//			'contexte' => $args['contexte']
+	//		),
+	//		'data' => $squelette,
+	//	));
+	//	$name = filename($fond);
+	//	$file = $fond.'.'.$ext;
+	//	return $file;
+	//}
+}
+function gmap_trouve_def_file($contexte, $prefix, $ext, $folder = null, $buffer = null, $default = 'default')
 {
 	$result = NULL;
 	$file = FALSE;
-	$fileSpip = NULL;
-
-	// Rechercher d'abord s'il y a un fichier spécifique
-	$name = 'spe-'.$objet.'-'.$id_objet;
-	$file = _gmap_find_file($prefix, $name, $ext, $fileSpip);
-	if ($file !== FALSE)
-	{
-		// Ne pas ajouter dans le buffer : ça n'a pas de sens pour une icone spécifique
-		$result = array(
-			'name'=>'spe-'.$objet.'-'.$id_objet,
-			'spip-path'=>$fileSpip,
-			'file'=>$file
-		);
-		return $result;
-	}
-
-	// On a aussi besoin de la rubrique
-	if ($objet === "rubrique")
-		$id_rubrique = $id_objet;
-	else
-		$id_rubrique = gmap_get_rubrique($objet, $id_objet);
+	$fond = NULL;
 	
-	// Rechercher dans le buffer
-	if (($file === FALSE) && ($buffer != NULL) &&
-		($resultInBuffer = $buffer[$objet.'-'.$type_point.'-'.$id_rubrique]))
+	// Arguments pour _gmap_find_file
+	$args = array('contexte' => $contexte);
+	$id_rubrique = 0;
+	
+	// Si on cherche un fichier lié à un objet
+	if ($contexte['objet'] &&  $contexte['id_objet'])
 	{
-		// On renvoie seulement le nom trouvé, l'icone est déjà créée
-		$result = array('name'=>$resultInBuffer);
-		return $result;
-	}
-
-	// Récupérer les rubriques situées au dessus
-	$ids_rubrique = NULL;
-	if ($id_rubrique)
-	{
-		$ids_rubrique = array();
-		$ids_rubrique[] = $id_rubrique;
-		$rub = $id_rubrique;
-		while ($rub = gmap_get_rubrique('rubrique', $rub))
-			$ids_rubrique[] = $rub;
-	}
-
-	// Recherche le marqueur selon le type
-	$name = $objet.'-'.$type_point;
-	if (!$type_point || (strlen($type_point) == 0) ||
-		($file = _gmap_find_file($prefix, $name, $ext, $fileSpip, $ids_rubrique)) === FALSE)
-	{
-		// sinon, rechercher seulement avec l'objet
-		$name = $objet;
-		if (($file = _gmap_find_file($prefix, $name, $ext, $fileSpip, $ids_rubrique)) === FALSE)
+		// Rechercher d'abord s'il y a un fichier spécifique
+		$name = '='.$contexte['objet'].$contexte['id_objet'];
+		if ($file = _gmap_find_file($prefix, $name, $ext, $fond, $folder, $args))
 		{
-			// et avec le type
-			$name = $type_point;
-			if (!$type_point || (strlen($type_point) == 0) ||
-				(($file = _gmap_find_file($prefix, $name, $ext, $fileSpip, $ids_rubrique)) === FALSE))
-			{
-				// fichier par defaut de la partie publique
-				$name = 'default';
-				$file = _gmap_find_file($prefix, $name, $ext, $fileSpip, $ids_rubrique);
-			}
+			// Ne pas ajouter dans le buffer : ça n'a pas de sens pour une icone spécifique
+			$result = array(
+				'name'=>$name,
+				'spip-path'=>$fond,
+				'file'=>$file
+			);
+			return $result;
+		}
+
+		// On a aussi besoin de la rubrique
+		if ($contexte['objet'] === "rubrique")
+			$id_rubrique = $contexte['id_objet'];
+		else
+			$id_rubrique = gmap_get_rubrique($contexte['objet'], $contexte['id_objet']);
+	}
+	// Sinon, on peut chercher un fichier lié à un point
+	if ($contexte['id_point'])
+	{
+		$name = '=point'.$contexte['id_point'];
+		if ($file = _gmap_find_file($prefix, $name, $ext, $fond, $folder, $args))
+		{
+			$result = array(
+				'name'=>$name,
+				'spip-path'=>$fond,
+				'file'=>$file
+			);
+			return $result;
 		}
 	}
 	
-	// Ajouter l'icone dans le buffer pour éviter de la chercher à nouveau
-	if ($buffer)
-		$buffer[$objet.'-'.$type_point.'-'.$id_rubrique] = $name;
-	
+	// Si on n'a pas d'objet, passer directement au défaut
+	$bufferEntry = false;
+	if (!$contexte['objet'] || !$contexte['id_objet'])
+	{
+		$fond = $prefix;
+		if ($default && strlen($default))
+			$fond = $prefix.'-'.$default;
+		if (!($file = find_in_path($folder.'/'.$fond.'.'.$ext)))
+			$file = find_in_path($fond.'.'.$ext);
+	}
+	else
+	{
+		// Rechercher dans le buffer (seulement pour les icones)
+		if (is_array($buffer) && $contexte['type_point'] && $id_rubrique)
+		{
+			$bufferEntry = $contexte['objet'].'-'.$contexte['type_point'].'-'.$id_rubrique;
+			if ($resultInBuffer = $buffer[$bufferEntry])
+			{
+				$result = array('name'=>$resultInBuffer); // On renvoie seulement le nom trouvé, ça indique que l'icone est déjà créée
+				return $result;
+			}
+		}
+		
+		// Ajouter la rubrique dans le contexte pour faire tourner la recherche par rubrique
+		if ($id_rubrique)
+		{
+			$args['id_rubrique'] = $id_rubrique;
+			$args['ids_rubrique'] = array($id_rubrique);
+			while ($id_rubrique = gmap_get_rubrique('rubrique', $id_rubrique))
+				$args['ids_rubrique'][] = $id_rubrique;
+			// Ca fait beaucoup de requêtes, on pourrait optimiser en cachant cette
+			// liste : sur un même carte on va passer ici pour la requête, les définitions
+			// de marqueurs et les images des marqueurs...
+		}
+		
+		// Recherche le marqueur selon le type
+		$name = $contexte['objet'].'-'.$contexte['type_point'];
+		if (!$type_point || (strlen($type_point) == 0) ||
+			!($file = _gmap_find_file($prefix, $name, $ext, $fond, $folder, $args)))
+		{
+			// sinon, rechercher seulement avec l'objet
+			$name = $contexte['objet'];
+			if (!($file = _gmap_find_file($prefix, $name, $ext, $fond, $folder, $args)))
+			{
+				// et avec le type
+				$name = $type_point;
+				if (!$type_point || (strlen($type_point) == 0) ||
+					(!($file = _gmap_find_file($prefix, $name, $ext, $fond, $folder, $args))))
+				{
+					// fichier par defaut de la partie publique
+					$name = $default;
+					$file = _gmap_find_file($prefix, $name, $ext, $fond, $folder, $args);
+				}
+			}
+		}
+	}
+
+	if (!$file)
+		return null;
 	$result = array();
 	$result['name'] = $name;
-	$result['spip-path'] = $fileSpip;
+	$result['spip-path'] = $fond;
 	if ($file && (strlen($file) > 0))
 		$result['file'] = $file;
+	$result['buffer'] = $bufferEntry;
 	return $result;
 }
 
@@ -541,7 +658,7 @@ function gmap_parse_icone_def_file($file)
 }
 
 // Fonctions permettant de récupérer l'info d'une liste d'icones
-function gmap_get_icon($icons, $bSelected = FALSE, $bComplete = FALSE)
+function gmap_get_icon($icons, $bSelected = FALSE, $bComplete = FALSE, $folder = '')
 {
 	if (!$icons)
 		return null;
@@ -566,11 +683,11 @@ function gmap_get_icon($icons, $bSelected = FALSE, $bComplete = FALSE)
 	if ($bComplete === TRUE)
 	{
 		if ($iconComplete)
-			return array('file'=>find_in_path($iconComplete['image']),
+			return array('file'=>_gmap_find_in_path($iconComplete['image'], $folder),
 							'width'=>$iconComplete['cxSize'], 'height'=>$iconComplete['cySize'],
 							'xAnchor'=>$iconComplete['xAnchor'], 'yAnchor'=>$iconComplete['yAnchor']);
 		else if ($iconSimple)
-			return array('file'=>find_in_path($iconSimple['image']),
+			return array('file'=>_gmap_find_in_path($iconSimple['image'], $folder),
 							'width'=>$iconSimple['cxSize'], 'height'=>$iconSimple['cySize'],
 							'xAnchor'=>$iconSimple['xAnchor'], 'yAnchor'=>$iconSimple['yAnchor']);
 		else
@@ -579,14 +696,14 @@ function gmap_get_icon($icons, $bSelected = FALSE, $bComplete = FALSE)
 	else
 	{
 		if ($iconSimple && $iconShadow)
-			return array('file'=>find_in_path($iconSimple['image']), 'width'=>$iconSimple['cxSize'], 'height'=>$iconSimple['cySize'], 'xAnchor'=>$iconSimple['xAnchor'], 'yAnchor'=>$iconSimple['yAnchor'],
-						'shadowFile'=>($iconShadow ? find_in_path($iconShadow['image']) : ""), 'widthShadow'=>$iconShadow['cxSize'], 'heightShadow'=>$iconShadow['cySize'], 'xShadowAnchor'=>$iconShadow['xAnchor'], 'yShadowAnchor'=>$iconShadow['yAnchor'],
+			return array('file'=>_gmap_find_in_path($iconSimple['image'], $folder), 'width'=>$iconSimple['cxSize'], 'height'=>$iconSimple['cySize'], 'xAnchor'=>$iconSimple['xAnchor'], 'yAnchor'=>$iconSimple['yAnchor'],
+						'shadowFile'=>($iconShadow ? _gmap_find_in_path($iconShadow['image'], $folder) : ""), 'widthShadow'=>$iconShadow['cxSize'], 'heightShadow'=>$iconShadow['cySize'], 'xShadowAnchor'=>$iconShadow['xAnchor'], 'yShadowAnchor'=>$iconShadow['yAnchor'],
 						'xOffset'=>$iconSimple['xOffset'], 'yOffset'=>$iconSimple['yOffset']);
 		else if ($iconComplete)
-			return array('file'=>find_in_path($iconComplete['image']), 'xAnchor'=>$iconComplete['xAnchor'], 'yAnchor'=>$iconComplete['yAnchor'],
+			return array('file'=>_gmap_find_in_path($iconComplete['image'], $folder), 'xAnchor'=>$iconComplete['xAnchor'], 'yAnchor'=>$iconComplete['yAnchor'],
 						'xOffset'=>$iconComplete['xOffset'], 'yOffset'=>$iconComplete['yOffset']);
 		else if ($iconSimple)
-			return array('file'=>find_in_path($iconSimple['image']), 'width'=>$iconSimple['cxSize'], 'height'=>$iconSimple['cySize'], 'xAnchor'=>$iconSimple['xAnchor'], 'yAnchor'=>$iconSimple['yAnchor'],
+			return array('file'=>_gmap_find_in_path($iconSimple['image'], $folder), 'width'=>$iconSimple['cxSize'], 'height'=>$iconSimple['cySize'], 'xAnchor'=>$iconSimple['xAnchor'], 'yAnchor'=>$iconSimple['yAnchor'],
 						'xOffset'=>$iconSimple['xOffset'], 'yOffset'=>$iconSimple['yOffset']);
 		else
 			return null;
@@ -594,18 +711,39 @@ function gmap_get_icon($icons, $bSelected = FALSE, $bComplete = FALSE)
 }
 
 // Récupérer tous les paramètres d'une icone et la créer
-function gmap_ajoute_icone($name, $defFile, $map)
+function gmap_definition_icone($name, $bSelected = FALSE)
 {
+	$folder = gmap_theme_folder();
+	if (!($icon = gmap_trouve_def_file(null, $name, 'gmd', $folder, null, '')) || !isset($icon['file']))
+		return 'null';
+	
 	// Récupérer la définition de l'icone
-	$icons = gmap_parse_icone_def_file($defFile);
-	$icon = gmap_get_icon($icons, FALSE, FALSE);
-	$selected = gmap_get_icon($icons, TRUE, FALSE);
+	$icons = gmap_parse_icone_def_file($icon['file']);
+	$icon = gmap_get_icon($icons, $bSelected, false, $folder);
 	if (!$icon)
 		return "";
 
 	// Ajout des icones complètes
-	$complete = gmap_get_icon($icons, FALSE, TRUE);
-	$completeSelected = gmap_get_icon($icons, TRUE, TRUE);
+	$complete = gmap_get_icon($icons, $bSelected, true, $folder);
+	if (!$complete)
+		$complete = array(0=>null, null, null);
+		
+	// Créer les icones
+	return gmap_definir_parametre_icon($icon, $complete);
+}
+function gmap_ajoute_icone($name, $defFile, $map)
+{
+	// Récupérer la définition de l'icone
+	$icons = gmap_parse_icone_def_file($defFile);
+	$folder = gmap_theme_folder();
+	$icon = gmap_get_icon($icons, FALSE, FALSE, $folder);
+	$selected = gmap_get_icon($icons, TRUE, FALSE, $folder);
+	if (!$icon)
+		return "";
+
+	// Ajout des icones complètes
+	$complete = gmap_get_icon($icons, FALSE, TRUE, $folder);
+	$completeSelected = gmap_get_icon($icons, TRUE, TRUE, $folder);
 	if (!$complete)
 		$complete = array(0=>NULL, NULL, NULL);
 	if (!$completeSelected)
@@ -622,27 +760,13 @@ function gmap_ajoute_icone($name, $defFile, $map)
 	return $cmd;
 }
 
-// Protéger le texte de la bulle pour pouvoir le mettre dans un script 
-function _gmap_protege_html($html)
-{
-	$html = str_replace(array("\r\n", "\r", "\n"), array("", "", ""), $html);
-	return addslashes($html);
-}
-
 // Récupération de l'intérieur d'un bulle
-function gmap_get_object_info_contents($objet, $id_objet, $marker_type)
+function gmap_get_object_info_contents($contexte)
 {
-	$fond = gmap_trouve_def_file($objet, $id_objet, $marker_type, 'gmap-info-', 'html');
+	$fond = gmap_trouve_def_file($contexte, 'gmap-info', 'html', 'modeles');
 	if (!$fond)
 		return "";
-	$fullhtml = recuperer_fond($fond['spip-path'], array('objet'=>$objet, 'id_objet'=>$id_objet, 'type_point'=>$marker_type, 'id_'.$objet=>$id_objet));
-	if (!$fullhtml || !strlen($fullhtml))
-		return "";
-	$fullhtml = str_replace(array("\r\n", "\r", "\n"), array("", "", ""), $fullhtml);
-	if (preg_match('/<body(.*)>(.*)<\/body>/Ui', $fullhtml, $matches) === 1)
-		return addslashes($matches[2]);
-	else
-		return addslashes($fullhtml);
+	return recuperer_fond($fond['spip-path'], $contexte);
 }
 
 // Utilitaire pour ajouter un marqueur
@@ -652,24 +776,41 @@ function gmap_ajoute_marqueur($marker, &$iconsBuffer, $map)
 	
 	// Paramètres standards du marqueur (position et meta-info)
 	$markerParams = '';
-	$markerParams .= '			latitude: '.$marker['latitude'];
+	$markerParams .= 			'			latitude: '.$marker['latitude'];
 	$markerParams .= ','."\n" . '			longitude: '.$marker['longitude'];
-	$markerParams .= ','."\n" . '			owner_objet: "'.$marker['objet'].'"';
-	$markerParams .= ','."\n" . '			owner_id_objet: '.$marker['id_objet'];
-	$markerParams .= ','."\n" . '			marker_zoom: '.$marker['zoom'];
-	$markerParams .= ','."\n" . '			marker_type: "'.$marker['type'].'"';
+	$markerParams .= ','."\n" . '			objectName: "'.$marker['objet'].'"';
+	$markerParams .= ','."\n" . '			objectId: '.$marker['id_objet'];
+	$markerParams .= ','."\n" . '			visible: "'.$marker['visible'].'"';
+	$markerParams .= ','."\n" . '			priority: '.$marker['priorite'];
+	$markerParams .= ','."\n" . '			zoom: '.$marker['zoom'];
+	$markerParams .= ','."\n" . '			type: "'.$marker['type'].'"';
 	
 	// Déterminer le titre
 	$titre = gmap_marqueur_titre($marker['objet'], $marker['id_objet']);
 	if (strlen($titre))
-		$markerParams .= ','."\n" . '			title: "'.$titre.'"';
+		$markerParams .= ','."\n" . '			title: "'.protege_titre($titre).'"';
+
+	// Contexte de la recherche des fichiers
+	$contexte = array();
+	if ($marker['objet'] && strlen($marker['objet']) && $marker['id_objet'])
+	{
+		$contexte['objet'] = $marker['objet'];
+		$contexte['id_objet'] = $marker['id_objet'];
+		$contexte['id_'.$marker['objet']] = $marker['id_objet'];
+	}
+	if ($marker['type'] && strlen($marker['type']))
+		$contexte['type_point'] = $marker['type'];
+	if ($marker['id'])
+		$contexte['id_point'] = $marker['id'];
 	
 	// Déterminer l'icone
-	if ($icon = gmap_trouve_def_file($marker['objet'], $marker['id_objet'], $marker['type'], 'gmap-marker-', 'gmd', $iconsBuffer))
+	if ($icon = gmap_trouve_def_file($contexte, 'gmap-marker', 'gmd', gmap_theme_folder(), $iconsBuffer))
 	{
 		if (isset($icon['name']))
 		{
-			if (isset($icon['file']) && ($icon['name'] != "default"))
+			if ($icon['file'] && $icon['buffer'])
+				$GLOBALS['iconsAliases'][$icon['buffer']] = $icon['name'];
+			if ($icon['file'] && ($icon['name'] != "default"))
 				$precmd .= gmap_ajoute_icone($icon['name'], $icon['file'], $map);
 			$markerParams .= ','."\n" . '			icon: "'.$icon['name'].'"';
 			$markerParams .= ','."\n" . '			icon_sel: "'.$icon['name'].'_sel"';
@@ -677,10 +818,10 @@ function gmap_ajoute_marqueur($marker, &$iconsBuffer, $map)
 	}
 
 	// Ajouter l'info-bulle
-	if (($bulle = gmap_get_object_info_contents($marker['objet'], $marker['id_objet'], $marker['type'])) && strlen($bulle))
+	if (($bulle = gmap_get_object_info_contents($contexte)) && strlen($bulle))
 	{
 		$markerParams .= ','."\n" . '			click: "showInfoWindow"';
-		$markerParams .= ','."\n" . '			html: "'.$bulle.'"';
+		$markerParams .= ','."\n" . '			html: "'.protege_html_body($bulle).'"';
 	}
 	
 	$cmd = '	'.$map.'.setMarker('.$marker['id'].', {'."\n".$markerParams."\n".'		});' . "\n";
@@ -688,80 +829,184 @@ function gmap_ajoute_marqueur($marker, &$iconsBuffer, $map)
 }
 
 // Ajout des marqueurs sur la carte
-function gmap_ajoute_markers($table, $id, $mapId, $params)
+//$GLOBALS['raccourcis_markers'] = array(
+//	'rubriques', 'articles', 'documents', 'breves', 'auteurs', 'mots',
+//	'recherche', 'racine'); // inutilisé, gardé au cas ou...
+function _gmap_ajoute_markers_kml($queryUrl, $table, $id, $mapId, $params, $mapInit)
+{
+		
+	$map = '';
+	$map .= '
+	// Chargement des marqueurs par requête ajax/xml';
+	if ($mapInit)
+		$map .= '
+	bCompleted = false;';
+	$map .= '
+	jQuery.ajax({
+		url: "'.$queryUrl.'",
+		type: "GET",
+		dataType: "xml",
+		data: {';
+	foreach ($params as $key => $value)
+		$map .= '
+			'.$key.': "'.$value.'",';
+	if ($table && $id)
+		$map .= '
+			id_'.$table.': '.$id.',';
+	$map .= '
+			prefix: "gmm"
+		},
+		success: function(xmlDoc, status, request) {
+			if (xmlDoc)
+				gmap_handleXMLMarkers(map, xmlDoc);
+		},
+		complete: function() {';
+	if ($mapInit)
+		$map .= '
+			jQuery("#gmap_attente'.$mapId.'").remove();';
+	if ($params['focus'])
+		$map .= '
+			gmap_setViewportOnMarkers("'.$mapId.'");';
+	$map .= '
+		}
+	});
+';
+	return $map;
+}
+function _gmap_ajoute_markers_json($queryUrl, $table, $id, $mapId, $params, $mapInit)
+{
+	$map = '';
+	$map .= '
+	// Chargement des marqueurs par requête ajax/json';
+	if ($mapInit)
+		$map .= '
+	bCompleted = false;';
+	$map .= '
+	jQuery.ajax({
+		url: "'.$queryUrl.'",
+		type: "GET",
+		dataType: "json",
+		data: {';
+	foreach ($params as $key => $value)
+		$map .= '
+			'.$key.': "'.$value.'",';
+	if ($table && $id)
+		$map .= '
+			id_'.$table.': '.$id;
+	$map .= '
+		},
+		success: function(content, status, request) {
+			if (content)
+				gmap_handleJSONMarkers(map, content);
+		},
+		complete: function() {';
+	if ($mapInit)
+		$map .= '
+			jQuery("#gmap_attente'.$mapId.'").remove();';
+	if ($params['focus'])
+		$map .= '
+			gmap_setViewportOnMarkers("'.$mapId.'");';
+	$map .= '
+		}
+	});
+';
+	return $map;
+}
+function gmap_ajoute_markers($table, $id, $mapId, $params, $mapInit)
 {
 	$map = "";
 
 	// Initialisation du tableau des icones déjà créées
 	$iconsBuffer = array();
+	$bFocusOnExit = $params['focus'] ? true : false;
 	
 	// Marqueurs locaux, sur l'objet
 	if ($params['markers'] === "local")
 	{
-		$map .= '
-	// Chargement du/des marqueur(s) de l\'objet
-';
-		$markers = gmap_get_tree_points($table, $id);
-		foreach ($markers as $idxMarker => $marker)
-			$map .= gmap_ajoute_marqueur($marker, $iconsBuffer, "map");
+		if ($table && $id)
+		{
+			$markers = gmap_get_tree_points($table, $id);
+			foreach ($markers as $idxMarker => $marker)
+				$map .= gmap_ajoute_marqueur($marker, $iconsBuffer, "map");
+		}
 	}
 	
 	// Marqueurs sur l'objet et ses descendants immédiats
 	else if ($params['markers'] === "childs")
 	{
-		$map .= '
-	// Chargement des marqueurs des descendants
-';
-		$markers = gmap_get_tree_points($table, $id, 1);
-		foreach ($markers as $idxMarker => $marker)
-			$map .= gmap_ajoute_marqueur($marker, $iconsBuffer, "map");
+		if ($table && $id)
+		{
+			$markers = gmap_get_tree_points($table, $id, 1);
+			foreach ($markers as $idxMarker => $marker)
+				$map .= gmap_ajoute_marqueur($marker, $iconsBuffer, "map");
+		}
 	}
 	
 	// Marqueurs sur l'objet et ses descendants
 	else if ($params['markers'] === "recursive")
 	{
-		$map .= '
-	// Chargement des marqueurs des descendants
-';
-		$markers = gmap_get_tree_points($table, $id, 99);
-		foreach ($markers as $idxMarker => $marker)
-			$map .= gmap_ajoute_marqueur($marker, $iconsBuffer, "map");
+		if ($table && $id)
+		{
+			$markers = gmap_get_tree_points($table, $id, 99);
+			foreach ($markers as $idxMarker => $marker)
+				$map .= gmap_ajoute_marqueur($marker, $iconsBuffer, "map");
+		}
 	}
 	
-	// Requête ajax
-	else if ($params['markers'] === "query")
+	// Sinon requête ajax
+	else
 	{
-		if (isset($params['query']))
-			$queryFile = $params['query'];
-		else
+		$format = isset($params['format']) ? $params['format'] : 'kml';
+		$bFocusOnExit = false; // au retour de la requête ajax
+		
+		// Raccourcis
+		if ($params['markers'] !== 'query')
 		{
-			$queryDefault = gmap_trouve_def_file($table, $id, '', 'gmap-query-', 'html');
-			if (!$queryDefault)
-				$queryFile = "gmap-query-default";
+			$params['query'] = $params['markers'];
+			$params['markers'] = 'query';
+		}
+		
+		// Créer un contexte de recherche de fichier
+		$contexte = array();
+		if ($table && strlen($table) && $id)
+		{
+			$contexte['objet'] = $table;
+			$contexte['id_objet'] = $id;
+			$contexte['id_'.$table] = $id;
+		}
+		
+		// Il y a une requête ajax, directe ou par raccourci
+		if ($params['markers'] === 'query')
+		{
+			if (isset($params['query']))
+			{
+				if ($queryMatch = gmap_trouve_def_file($contexte, 'gmap-'.$format.'-'.$params['query'], 'html', 'modeles', null, ''))
+					$queryFile = $queryMatch['spip-path'];
+				else if ($queryMatch = gmap_trouve_def_file($contexte, $params['query'], 'html', 'modeles', null, ''))
+					$queryFile = $queryMatch['spip-path'];
+				else
+					spip_log("Requete ".$params['query']." introuvable", "gmap");
+			}
+			else if ($queryMatch = gmap_trouve_def_file($contexte, 'gmap-'.$format, 'html', 'modeles'))
+				$queryFile = $queryMatch['spip-path'];
 			else
-				$queryFile = $queryDefault['spip-path'];
+				$queryFile = find_in_path('gmap-'.$format.'-default');
+				
+			if ($queryUrl = generer_url_public($queryFile, "", true, false))
+			{
+				if ($format == 'json')
+					$map .= _gmap_ajoute_markers_json($queryUrl, $table, $id, $mapId, $params, $mapInit);
+				else if ($format == 'kml')
+					$map .= _gmap_ajoute_markers_kml($queryUrl, $table, $id, $mapId, $params, $mapInit);
+			}
 		}
-		$queryParams = "id_".$table."=".$id."&prefix=gmm"; // gmm est nécessaire pour le script qui décode les icones...
-		if ($queryUrl = generer_url_public($queryFile, $queryParams, true))
-			$map .= '
-	// Chargement des marqueurs par requête ajax
-	bWaitToBeDeleted = false;
-	jQuery.ajax({
-		url: "'.$queryUrl.'",
-		type: "GET",
-		dataType: "xml",
-		success: function(xmlDoc, status, request) {
-			gmap_handleXMLMarkers(map, xmlDoc);
-		},
-		error: function() {
-			//alert("Query failed");
-		},
-		complete: function() {
-			jQuery("#gmap_attente'.$mapId.'").remove();
-		}
-	});
-';
 	}
+	
+	// Afficher tous les marqueurs
+	if ($bFocusOnExit)
+		$map .= '
+	gmap_setViewportOnMarkers("'.$mapId.'");';
+		
 	
 	return $map;
 }
@@ -769,6 +1014,14 @@ function gmap_ajoute_markers($table, $id, $mapId, $params)
 // Ajout de la carte clicable
 function gmap_ajoute_carte_public($table, $id, $mapId, $params)
 {
+	// Mécanisme anti-récursion : si on affiche une carte sur laquelle on affiche un 
+	// marqueur dont la bulle d'information contient une carte, on entre dans une
+	// boucle infinie.
+	// Donc on bloque.
+	if ($GLOBALS["in_geomap"])
+		return "";
+	$GLOBALS["in_geomap"] = true;
+	
 	$map = "";
 
 	// Ajouter un DIV qui va recevoir la carte
@@ -783,10 +1036,10 @@ function loadCartePublic'.$mapId.'()
 	// D\'abord afficher le masque d\'attente
 	var parent = jQuery("#gmap_cont'.$mapId.'").parent();
 	parent.addClass("carte_gmap_container");
-	var height = parent.innerHeight();
+	var height = parent.height();
 	var waitBlock = \'<div id="gmap_attente'.$mapId.'" class="map_wait_mask" style="width: 100%; height: \'+height+\'px;"><span class="map_wait_logo" style="width: 100%; height: 100%;"></span></div>\';
 	jQuery("#gmap_cont'.$mapId.'").after(waitBlock); 
-	var bWaitToBeDeleted = true;
+	var bCompleted = true;
 	
 	// Récupérer la carte
 	var map = MapWrapper.getMap("gmap_map'.$mapId.'", true);
@@ -805,7 +1058,7 @@ function loadCartePublic'.$mapId.'()
 	mapParams'.$mapId.'.handleResize = true;
 	if (!map.load("gmap_cont'.$mapId.'", mapParams'.$mapId.'))
 	{
-		if (bWaitToBeDeleted)
+		if (bCompleted)
 			jQuery("#gmap_attente'.$mapId.'").remove();
 		return false;
 	}
@@ -813,10 +1066,10 @@ function loadCartePublic'.$mapId.'()
 
 	// Ajout du chargement des marqueurs
 	if (isset($params['markers']))
-		$map .= gmap_ajoute_markers($table, $id, $mapId, $params);
-	
+		$map .= gmap_ajoute_markers($table, $id, $mapId, $params, true);
+
 	$map .= '
-	if (bWaitToBeDeleted)
+	if (bCompleted)
 		jQuery("#gmap_attente'.$mapId.'").remove();
 
 	return true;
@@ -839,6 +1092,7 @@ jQuery(document).unload(function()
 ';
 	$map .= '//]]>'."\n".'</script>'."\n";
 
+	$GLOBALS["in_geomap"] = false;
 	return $map;
 }
 
@@ -933,6 +1187,39 @@ jQuery(document).ready(function()
 	return $code;
 }
 
+// Ajout manuel des maruqeurs d'une requête, selon les même arguments que GEOMAP
+function gmap_ajoute_marqueur_query($objet, $id_objet, $mapId, $params)
+{
+	// Tests de validité
+	if (!$mapId)
+		return "";
+	
+	// Construire le code du marqueur
+	$buffer = array();
+	$codeMarker = gmap_ajoute_markers($params['objet'], intval($params['id_objet']), $mapId, $params, false);
+	if (!strlen($codeMarker))
+		return "";
+	
+	// Construction du code
+	$code = '
+<script type="text/javascript">
+//<![CDATA[
+jQuery(document).ready(function()
+{
+	jQuery("#gmap_cont'.$mapId.'").gmapReady(function()
+	{
+		var map = gMap("gmap_map'.$mapId.'");
+		if (isObject(map))
+		{
+	'.$codeMarker.'
+		}
+	});
+});
+//]]>
+</script>';
+	return $code;
+}
+
 // Ajout d'un marqueur special, c'est-à-dire qui ne provient pas d'un objet SPIP géolocalisé
 // (on passe donc en paramètre toutes les informations nécessaires)
 function gmap_ajoute_marqueur_special($id, $latitude, $longitude, $mapId, $titre = null, $texte = null, $iconFile = null)
@@ -978,7 +1265,7 @@ function gmap_ajoute_marqueur_special($id, $latitude, $longitude, $mapId, $titre
 			$html .= '</div>' . "\n";
 		}
 		$markerParams .= ','."\n" . '			click: "showInfoWindow"';
-		$markerParams .= ','."\n" . '			html: "'._gmap_protege_html($html).'"';
+		$markerParams .= ','."\n" . '			html: "'.protege_html($html).'"';
 	}
 	
 	// Construction du code

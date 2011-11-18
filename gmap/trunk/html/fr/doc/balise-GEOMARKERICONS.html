@@ -23,38 +23,38 @@
  <b>xmlns:<span class="spip-balise">#GET</span><span class="spip-syntax">{prefix}</span>="<span class="spip-balise">#URL_SITE_SPIP</span>/schemas/GeoMarkers/1.0"<span class="spip-syntax">[</span>
  xsi:SchemaLocation="<span class="spip-balise">#URL_SITE_SPIP</span>/schemas/GeoMarkers/1.0 <span class="spip-syntax">(</span><span class="spip-balise">#URL_FICHIER</span><span class="spip-syntax">{schemas/GeoMarkers/1.0/geomarkers.xsd}|url_absolue)</span>"<span class="spip-syntax">]</span></b>&gt;</pre>
 	 <p>&nbsp;</p>
-	 <p>Le schéma est inclu dans le plugin, dans le fichier <span class="code">schemas/GeoMarkers/1.0/geomarkers.xsd</span>.</p>
+	 <p>Le sch&eacute;ma est inclu dans le plugin, dans le fichier <span class="code">schemas/GeoMarkers/1.0/geomarkers.xsd</span>.</p>
 	
 	<h2>Mod&egrave;les</h2>
-	<p>Après avoir recherché les icones qui correspondent à l'objet passé en paramètre, la balise utilise les modèles <span class="code">icons_marker.html</span> ou <span class="code">icons_short_marker.html</span> pour générer le code XML.</p>
+	<p>Apr&egrave;s avoir recherch&eacute; les icones qui correspondent &agrave; l'objet pass&eacute; en param&egrave;tre, la balise utilise les mod&egrave;les <span class="code">icons_marker.html</span> ou <span class="code">icons_short_marker.html</span> pour g&eacute;n&eacute;rer le code XML.</p>
 	
 	<h2>Param&egrave;tres</h2>
 	<table>
 		<tr><th>Nom</th><th>Description</th><th>Valeur</th></tr>
 		<tr>
 			<td>id_article/id_rubrique...</td>
-			<td>Objet &agrave; partir duquel les points sont compt&eacute;s. Ce param&egrave;tre est habituellement pris de l'environnement de la balise (la boucle englobante).</td>
+			<td>Objet de r&eacute;f&eacute;rence pour le choix de l'icone.</td>
 			<td>{id_article} ou {id_article=39}, {id_rubrique}, {id_document}, {id_breve}, {id_mot}, {id_auteur}</td>
 		</tr>
 		<tr>
 			<td>type_point</td>
-			<td>Type du marqueur recherch&eacute; sur un &eacute;l&eacute;ment.</td>
+			<td>Type de r&eacute;f&eacute;rence pour le choix de l'icone.</td>
 			<td>Parmi les types d&eacute;finis dans le param&eacute;trage du plugin.</td>
 		</tr>
 		<tr>
 			<td>format</td>
-			<td>Param&egrave;tre actuellement non utilis&eacute;, peut-&ecirc;tre omis. La valeur par d&eacute;faut est &quot;kml&quot;.</td>
-			<td>kml</td>
+			<td>Format des donn&eacute;es g&eacute;n&eacute;r&eacute;es. La valeur par d&eacute;faut est &quot;kml&quot;.</td>
+			<td><b>kml</b> | json</td>
 		</tr>
 		<tr>
 			<td>prefix</td>
-			<td>Pr&eacute;fixe du sch&eacute;ma XML qui d&eacute;crit les icones. Il doit correspondre &agrave; ce qui est indiqu&eacute; dans l'attribut xmlns de la balise racine du fichier XML cible.</td>
+			<td>Pr&eacute;fixe du sch&eacute;ma XML qui d&eacute;crit les icones, uniquement quand le format est <span class="code">kml</span>. Il doit correspondre &agrave; ce qui est indiqu&eacute; dans l'attribut xmlns de la balise racine du fichier XML cible.</td>
 			<td>Cha&icirc;ne de caract&egrave;re, &quot;gmn&quot; par d&eacute;faut.</td>
 		</tr>
 		<tr>
 			<td>tag</td>
-			<td>Indique si les icones doivent être ajoutées selon un format court ou long.</td>
-			<td><b>short</b> / long</td>
+			<td>Indique si les icones doivent &ecirc;tre ajout&eacute;es selon un format court ou long. Ce param&egrave;tre n'est plus utilis&eacute;, le format court est toujours pr&eacute;f&eacute;rable.</td>
+			<td><b>short</b> | long</td>
 		</tr>
 	</table>
 	

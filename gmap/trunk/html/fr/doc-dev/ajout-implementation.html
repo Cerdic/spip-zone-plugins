@@ -25,21 +25,21 @@
 	<p>Les impl&eacute;mentations sont regroup&eacute;es dans le dossier <span class="code">mapimpl/</span> situ&eacute; &agrave; la racine du plugin.</p>
 	<p>De nouvelles impl&eacute;mentations peuvent &ecirc;tre ajout&eacute;es soit dans ce dossier, soit dans un dossier <span class="code">squelettes/mapimpl/</span>, soit encore dans le dossier <span class="code">mapimpl/</span> d'un plugin.</p>
 	<p>Les impl&eacute;mentations sont identifi&eacute;es par un code qui sert de nom de dossier pour les fichiers. GMap inclut une impl&eacute;mentation Google Maps V2 identifi&eacute;e par <i>gma2</i> et une impl&eacute;mentation Google Maps V3 identifi&eacute;e par <i>gma3</i>. On trouve donc des dossiers <span class="code">mapimpl/gma2</span> et <span class="code">mapimpl/gma3</span>.</p>
-	<p>Sous ces dossiers, les fichiers sont encore regroupés selon leur fonction&nbsp;:</p>
+	<p>Sous ces dossiers, les fichiers sont encore regroup&eacute;s selon leur fonction&nbsp;:</p>
 	<ul>
 		<li><b>javascript</b>&nbsp;: le fichier principal de l'impl&eacute;mentation, en javascript.</li>
 		<li><b>prive</b>&nbsp;: les fichiers PHP utilis&eacute;s dans la partie priv&eacute;e.</li>
 		<li><b>public</b>&nbsp;: les fichiers PHP utilis&eacute;s dans la partie publique.</li>
-		<li><b>style</b>&nbsp;: les feuilles de styles spécifiques.</li>
+		<li><b>style</b>&nbsp;: les feuilles de styles sp&eacute;cifiques.</li>
 	</ul>
 	
 	<h3>D'autres impl&eacute;mentations&nbsp;?</h3>
 	<p>Le plus urgent est certainement de d&eacute;velopper une impl&eacute;mentation OpenLayers.</p>
 	<p>Ajouter une impl&eacute;mentation Mapstraction pourrait ouvrir les possibilit&eacute;s sur Yahoo et Bing &agrave; moindres frais.</p>
 	
-	<h2>Détails de l'ajout d'une implémentation</h2>
+	<h2>D&eacute;tails de l'ajout d'une impl&eacute;mentation</h2>
 	
-	<h3>Déclaration de l'implémentation</h3>
+	<h3>D&eacute;claration de l'impl&eacute;mentation</h3>
 	<p>Le plugin utilise un <i>pipeline</i> nomm&eacute; <b>gmap_implementations</b> pour r&eacute;cup&eacute;rer la liste des impl&eacute;mentations.</p>
 	<p>Le pipeline re&ccedil;oit en param&egrave;tre un tableau index&eacute; dont la clef est le code de l'impl&eacute;mentation.</p>
 	<p>La fonction qui traite le pipeline devrait faire &ecirc;tre de la forme suivante&nbsp;:</p>
@@ -51,7 +51,7 @@
 	<p>&nbsp;</p>
 	<p>Gr&acirc;ce &agrave; cette d&eacute;claration, GMap sait qu'une impl&eacute;mentation &quot;code&quot; existe, il va donc la proposer dans les pages de param&eacute;trage et utiliser les fichier du dossier <span class="code">mapimpl/<em>code</em>/</span>.</p>
 	
-	<h3>Le script d'implémentation</h3>
+	<h3>Le script d'impl&eacute;mentation</h3>
 	<p>Le script principal de l'impl&eacute;mentation est une classe <b>MapWrapper</b> (autant que javascript permet de faire des &quot;classes&quot;) qui impl&eacute;mente les m&eacute;thodes utilis&eacute;es par GMap.</p>
 	<p>Il y a certainement des progr&egrave;s &agrave; faire pour faciliter l'impl&eacute;mentation des fonctions. Actuellement, le plus simple est de partir d'un fichier existant et de recoder toutes les fonctions qui ne sont pas pr&eacute;fix&eacute;es par un &quot;_&quot;.</p>
 	
@@ -64,7 +64,7 @@
 		<li>Une fonction <span class="code">mapimpl_<em>code</em>_public_parametre_carte_dist</span> dans un fichier <span class="code">parametre_carte.php</span>&nbsp;: qui renvoie un bout de code javascript utilis&eacute; pour param&eacute;trer la carte (selon les param&eacute;trages par d&eacute;faut ou les param&egrave;tres de la balise #GEOMAP).</li>
 	</ul>
 	
-	<h3>Les pages de paramétrage (partie privée)</h3>
+	<h3>Les pages de param&eacute;trage (partie priv&eacute;e)</h3>
 	<p>Le dossier <span class="code">prive/</span> contient les fonctions PHP utilis&eacute;es pour initialiser, afficher et trait&eacute; les param&egrave;tres sp&eacute;cifiques &agrave; l'impl&eacute;mentation.</p>
 	<p>Actuellement, les param&egrave;tres sont regroup&eacute;s en trois blocs&nbsp;:</p>
 	<ul>
@@ -73,11 +73,11 @@
 		<li><b>markers_behavior</b>&nbsp;: comportement des marqueurs, par exemple la taille des info-bulles, et la fonction de regroupement des info-bulles.</li>
 	</ul>
 	<p>&nbsp;</p>
-	<p>Pour chaque bloc de paramètres, il faut trois fonctions&nbsp;:</p>
+	<p>Pour chaque bloc de param&egrave;tres, il faut trois fonctions&nbsp;:</p>
 	<ul>
 		<li>Une fonction <span class="code">mapimpl_<em>code</em>_prive_init_<em>nom-du-bloc</em>_dist</span> dans un fichier <span class="code">init_<em>nom-du-bloc</em>.php</span>, charg&eacute;e d'initialiser les param&egrave;tres &agrave; l'installation du plugin.</li>
 		<li>Une fonction <span class="code">mapimpl_<em>code</em>_prive_show_<em>nom-du-bloc</em>_dist</span> dans un fichier <span class="code">show_<em>nom-du-bloc</em>.php</span>, charg&eacute;e d'afficher l'interface de modification des param&egrave;tres qui sera affich&eacute;e depuis les pages de param&eacute;trage de GMap.</li>
-		<li>Une fonction <span class="code">mapimpl_<em>code</em>_prive_faire_<em>nom-du-bloc</em>_dist</span> dans un fichier <span class="code">faire_<em>nom-du-bloc</em>.php</span>, charg&eacute;e de récupérer les données de formulaire et de sauvegarder le paramétrage.</li>
+		<li>Une fonction <span class="code">mapimpl_<em>code</em>_prive_faire_<em>nom-du-bloc</em>_dist</span> dans un fichier <span class="code">faire_<em>nom-du-bloc</em>.php</span>, charg&eacute;e de r&eacute;cup&eacute;rer les donn&eacute;es de formulaire et de sauvegarder le param&eacute;trage.</li>
 	</ul>
 	
 </body>

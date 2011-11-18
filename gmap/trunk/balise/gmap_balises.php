@@ -36,6 +36,7 @@ $GLOBALS['context_query'] = array(
 	'id_article',
 	'id_breve',
 	'id_rubrique',
+	'id_secteur',
 	'id_mot',
 	'id_auteur',
 	'type_point'
@@ -93,6 +94,12 @@ function _gmap_calculer_balise_params($args, $bStrictParams = false)
 		$params[$key] = $value;
 	}
 	
+	// Si une requête est précisée, désactiver la recherche d'un point de 
+	// référence à tout prix : la personne qui a donné la requête doit 
+	// savoir quels paramètres il faut passer
+	if (isset($params['query']))
+		$bStrictParams = true;
+	
 	// Inialiser les paramètres implicites
 	$objet = null;
 	$id_objet = null;
@@ -102,26 +109,31 @@ function _gmap_calculer_balise_params($args, $bStrictParams = false)
 	if (isset($params["type_point"]))
 	{
 		if ($params["type_point"] === true)
-			$type_point = $args[array_search($params["type_point"], $GLOBALS['context_query'], true)];
+			$type_point = $args[array_search("type_point", $GLOBALS['context_query'], true)];
 		else
 			$type_point = $params["type_point"];
 		unset($params["type_point"]);
 	}
 	
 	// Traiter le cas de "objet" dont peut dépendre le type d'objet choisit
-	if (isset($params["objet"]) && is_string($params["objet"]))
+	if (isset($params["objet"]))
 	{
-		$objet = $params["objet"];
+		if (is_string($params["objet"]))
+			$objet = $params["objet"];
 		unset($params["objet"]);
 	}
 	
 	// Finalement, traiter le cas de id_objet qui est prioritaire, mais
 	// seulement si $objet est déjà défini
-	if ($objet && isset($params["id_objet"]) && is_string($params["id_objet"]))
+	if (isset($params["id_objet"]))
 	{
-		$id_objet = $params["id_objet"];
+		if ($objet && is_string($params["id_objet"]))
+			$id_objet = $params["id_objet"];
 		unset($params["id_objet"]);
 	}
+	
+	// Là, on a nettoyé les paramètres passés manuellement ($params) de "objet", "id_objet" et
+	// "type_point", si on n'a trouvé aucun objet, on va essayer d'en trouvé un dans la pile
 	
 	// Si on n'a pas de id_objet, mais un objet désigné, le chercher
 	if (!$id_objet && is_string($objet))
@@ -129,12 +141,13 @@ function _gmap_calculer_balise_params($args, $bStrictParams = false)
 		$idName = 'id_'.$objet;
 		if (isset($params[$idName]) && is_string($params[$idName]))
 			$id_objet = $params[$idName];
-		else
-			$id_objet = $args[array_search($params[$idName], $GLOBALS['context_query'], true)];
+		else if ($index = array_search($idName, $GLOBALS['context_query'], true))
+			$id_objet = $args[$index];
 	}
 	
 	// Si on n'a pas de id_objet, parcourir les paramètres explicites pour voir si
-	// quelque chose est désigné
+	// un type d'objet est désigné (c'est le cas le plus courant : on a mis dans les
+	// paramètre {id_rubrique} ou {id_rubrique=XX})
 	if (!$id_objet)
 	{
 		// Rechercher le premier paramètre qui correspond à un des paramètres implicites
@@ -147,10 +160,10 @@ function _gmap_calculer_balise_params($args, $bStrictParams = false)
 				if (preg_match("/^id_([a-z]*)$/i", $key, $matches))
 				{
 					$objet = $matches[1];
-					if ($params[$key] === true)
+					if ($value === true)
 						$id_objet = $args[array_search($key, $GLOBALS['context_query'], true)];
 					else
-						$id_objet = $params[$key];
+						$id_objet = $value;
 					break;
 				}
 			}
@@ -159,6 +172,9 @@ function _gmap_calculer_balise_params($args, $bStrictParams = false)
 	
 	// Si on n'a toujours rien, parcourir les paramètres implicites dans l'ordre
 	// de préférence
+	// Ici, il serait mieux de prendre la boucle la plus proche, mais je ne sais pas
+	// faire ça dans une balise dynamique : il faudrait décoder les codes PHP renvoyés
+	// pour les valeurs afin de voir lequel a l'indice le plus proche
 	if (!$id_objet && ($bStrictParams !== true))
 	{
 		foreach ($GLOBALS['context_query'] as $index => $name)
@@ -178,10 +194,23 @@ function _gmap_calculer_balise_params($args, $bStrictParams = false)
 		}
 	}
 	
-	// Supprimer les associations excédentaires pour nettoyer le tableau
-	foreach ($GLOBALS['context_query'] as $name)
-		if (isset($params[$name]))
+	// Nettoyer de l'objet trouvé, puis rechercher dans la pile les autres
+	foreach ($params as $name => $value)
+	{
+		// Supprimer si c'est l'objet qu'on a trouvé
+		if ($name === 'id_'.$objet)
 			unset($params[$name]);
+			
+		// Si aucune valeur explicite n'est donnée, tenter de reprendre dans la
+		// pile
+		else if (!is_string($value))
+		{
+			if ($index = array_search($name, $GLOBALS['context_query'], true))
+				$params[$name] = $args[$index];
+			if (!$params[$name] || !strlen($params[$name]))
+				unset($params[$name]);
+		}
+	}
 		
 	// Remettre l'objet et le type de point
 	if (isset($objet) && isset($id_objet) && is_string($objet) && strlen($objet))
@@ -200,7 +229,7 @@ function _gmap_calculer_balise_params($args, $bStrictParams = false)
  * Balises statiques
  */
 
-// Balise URL_FICHIER : recherche d'une image avec find_in_path.
+// Balise URL_FICHIER : recherche d'un fichier par find_in_path.
 function balise_URL_FICHIER($p)
 {
 	// Récupérer l'argument
@@ -211,6 +240,22 @@ function balise_URL_FICHIER($p)
 		$p->code = "";
 	else
 		$p->code = "find_in_path(".$filePath.")";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+// Balise URL_FICHIER_DEF : recherche par find_in_path avec un dossier alternatif
+function balise_URL_FICHIER_DEF($p)
+{
+	// Récupérer l'argument
+	$filePath = interprete_argument_balise(1, $p);
+	$folder = interprete_argument_balise(2, $p);
+	
+	// Retour
+	if (!$filePath)
+		$p->code = "";
+	else
+		$p->code = "_gmap_find_in_path(".$filePath.", ".$folder.")";
 	$p->interdire_scripts = false;
 	return $p;
 }

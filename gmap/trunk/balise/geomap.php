@@ -15,6 +15,7 @@
  *	id_article/id_rubrique...	: objet à partir duquel est affichée la carte. S'il n'est pas géolocalisé, la carte n'est pas affichée, s'il l'est, la carte est centrée dessus, et il sert de base à la recherche des marqueurs
  *	markers		: définition des marqueurs (local : seul(s) le(s) marqueur(s) de l'objet sont affichés; childs : les marqueurs de l'objet et de ses descendants de niveau 1 sont affichés; recursive : les marqueurs de l'objet et de tous ses descendants sont affichés; query : la liste des marqueurs provient d'une requête ajax)
  *	query		: nom du fichier ajax de requête (si markers=query)
+ *  viewport	: objet qui sert de référence pour le positionnement et le zoom initial de la carte
  *	latitude	: latitude du centre de la carte
  *	longitude	: longitude du centre de la carte
  *	zoom		: zoom initial de la carte

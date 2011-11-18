@@ -53,9 +53,13 @@ function balise_GEOMARKER_dyn($params)
 	$mapId = $GLOBALS['currentMapID'];
 	if ($params['map'])
 		$mapId = $params['map'];
+		
+	// S'il y a un paramètre markers : même procédure que pour une carte
+	if ($params['markers'])
+		$code = gmap_ajoute_marqueur_query($params['objet'], intval($params['id_objet']), $mapId, $params);
 	
 	// S'il y a un objet, procédure d'ajout classique
-	if ($params['objet'] && $params['id_objet'])
+	else if ($params['objet'] && $params['id_objet'])
 	{
 		$type = "";
 		if ($params['type'])

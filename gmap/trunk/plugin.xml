@@ -1,15 +1,15 @@
 <plugin>
 	<nom>G&#233;olocalisation et cartographie</nom>
 	<icon>images/logo-gmap.png</icon>
-	<version>0.1.3</version>
+	<version>0.2.0</version>
 	<version_base>1.0.0</version_base>
 	<etat>test</etat>
 	<auteur>F. ALBERT</auteur>
-	<slogan>G&#233;olocalisation dans l'espace priv&#233; et int&#233;gration de cartes dans l'espace public de votre site</slogan>
+	<slogan>G&#233;olocalisation des objets et rendu cartographique param&#233;trable.</slogan>
 	<description>
 	<multi>
-[fr]Dans l'espace priv&#233;, vous pouvez ajouter plusieurs points sur les rubriques, les articles, les documents (avec le plugin M&#233;diath&egrave;que), les auteurs, les br&egrave;ves et les mots-clefs.
-_ Dans l'espace public, vous pouvez ajouter des cartes dans vos squelettes ou dans les textes.
+[fr]Dans l&apos;espace priv&#233;, GMap permet d&apos;associer une &#224; plusieurs coordonn&#233;es aux objets &#233;ditoriaux et de param&#233;trer le rendu des cartes.
+_ Dans l&apos;espace public, vous pouvez ins&#233;rer des cartes dans les squelettes ou dans les textes en ma&#238;trisant finement la repr&#233;sentation des points et les informations qui leur sont associ&#233;es.
 	</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-GMap-geolocalisation-et-cartographie-des-objets</lien>
@@ -18,6 +18,8 @@ _ Dans l'espace public, vous pouvez ajouter des cartes dans vos squelettes ou da
 	<install>base/gmap_install.php</install>
 	<prefix>gmap</prefix>
 	<chemin dir='' />
+	<chemin dir='exemples/' />
+	<chemin dir='requetes/' />
 	
 	<bouton id="configurer_gmap" parent="configuration">
 		<icone>images/logo-config-title.gif</icone>
@@ -65,8 +67,7 @@ _ Dans l'espace public, vous pouvez ajouter des cartes dans vos squelettes ou da
 	</pipeline>
 	
 	<!-- Affichage dans la zone publique -->
-	<fonctions>boucle/gmap_boucles.php</fonctions>
-	<fonctions>balise/gmap_balises.php</fonctions>
+	<fonctions>gmap_fonctions.php</fonctions>
 	<pipeline>
 		<nom>affichage_final</nom>
 		<action>affichage_final</action>

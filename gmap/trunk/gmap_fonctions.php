@@ -9,8 +9,11 @@
  *
  */
 
-// Pour SPIP 3.0.* : les balises <fonctions> du plugin.xml n'existent plus dans paquet.XML
+// Inclure les fichiers des balises et des boucles communes (les balise dynamiques n'ont pas besoin d'être chargées)
 include_spip('boucle/gmap_boucles');
 include_spip('balise/gmap_balises');
+
+// Inclure les filtres
+include_spip('gmap_filtres');
 
 ?>

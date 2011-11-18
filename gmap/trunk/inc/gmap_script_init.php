@@ -12,6 +12,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/gmap_config_utils');
+include_spip('inc/gmap_geoloc');
 
 // Inclusion des entêtes nécessaires à la fois dans l'espace privé et l'espace public
 function inc_gmap_script_init_dist()
@@ -43,37 +44,19 @@ function inc_gmap_script_init_dist()
 	// scripts est activé, le .js concaténé est inclu tout au début...
 	$out .= '<script type="text/javascript">'."\n".'//<![CDATA[';
 	$out .= '
-	SiteInfo.pluginRoot = "' . _DIR_PLUGIN_GMAP . '";
-	SiteInfo.pluginGmapImages = SiteInfo.pluginRoot + "images/";';
-	$imageFile = _DIR_PLUGIN_GMAP . "images/marker.png";
-	$imageInfo = @getimagesize($imageFile);
-	$imageWidth = $imageInfo[0] ? $imageInfo[0] : 32;
-	$imageHeight = $imageInfo[1] ? $imageInfo[1] : 32;
+	SiteInfo.pluginRoot = "' . _DIR_PLUGIN_GMAP . '";';
+	
+	// Icone par défaut
 	$out .= '
-	SiteInfo.defaultIcon = "' . $imageFile . '";
-	SiteInfo.defaultIconWidth = '.$imageWidth.';
-	SiteInfo.defaultIconHeight = '.$imageHeight.';';
-	$imageFile = _DIR_PLUGIN_GMAP . "images/shadow.png";
-	$imageInfo = @getimagesize($imageFile);
-	$imageWidth = $imageInfo[0] ? $imageInfo[0] : 32;
-	$imageHeight = $imageInfo[1] ? $imageInfo[1] : 32;
-	$out .= '
-	SiteInfo.defaultShadow = "' . $imageFile . '";
-	SiteInfo.defaultShadowWidth = '.$imageWidth.';
-	SiteInfo.defaultShadowHeight = '.$imageHeight.';';
-	$imageFile = _DIR_PLUGIN_GMAP . "images/marker-full.png";
-	$imageInfo = @getimagesize($imageFile);
-	$imageWidth = $imageInfo[0] ? $imageInfo[0] : 32;
-	$imageHeight = $imageInfo[1] ? $imageInfo[1] : 32;
-	$out .= '
-	SiteInfo.defaultCompleteIcon = "' . $imageFile . '";
-	SiteInfo.defaultCompleteWidth = '.$imageWidth.';
-	SiteInfo.defaultCompleteHeight = '.$imageHeight.';';
+	SiteInfo.iconDef = '.gmap_definition_icone('system').';';
+	
+	// Patch d'un bug IE dont la source est inconnue...
+	// (Lors du premier accès à document.namespaces, ça plante, sauf s'il a été utilisé auparavant...)
 	$out .= '
 // Il y a une erreur "undefined" sous IE, pour GoogleMaps et Yahoo, faire un appel précoce à document.namespaces semble règler le problème...
 var IE8NamespaceHack = document.namespaces;';
-	$out .= "\n".'//]]>'."\n".'</script>'."\n";
 
+	$out .= "\n".'//]]>'."\n".'</script>'."\n";
 	return $out;
 }
 

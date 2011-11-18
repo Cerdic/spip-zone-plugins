@@ -7,7 +7,9 @@
  * Fabrice ALBERT
  * (c) 2009 - licence GNU/GPL
  *
- * Import des données gis / geomap
+ * Édition des paramètres de la géolocalisation :
+ * - désactiver ModalBox sur les liens 'modifier' des documents,
+ * - paramètres des "voisins".
  *
  */
 

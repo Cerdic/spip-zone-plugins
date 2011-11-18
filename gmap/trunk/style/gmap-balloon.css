@@ -69,9 +69,7 @@
 /* Fond du navigateur */ 
 table#miw-navigator {
 	margin: 0; padding: 0;
-    background-repeat: repeat-x;
-    background-position: bottom left;
-	background-image: url('../images/miw-bkgnd');
+	background: url('../images/miw-bkgnd.png') repeat-x bottom left;
 	border: none;
 	color: rgb(255,255,255);
 	font-size: 10px;

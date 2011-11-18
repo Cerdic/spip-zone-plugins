@@ -121,7 +121,7 @@ jQuery(document).ready(function()
 </script>'."\n";
 	
 	if ($bSousBloc === true)
-		return gmap_sous_bloc_depliable("geocoder", _T('gmap:formulaire_geocoder'), $out);
+		return gmap_sous_bloc_depliable("geocoder".$mapId, _T('gmap:formulaire_geocoder'), $out, $mapId);
 	else
 		return $out;
 }
