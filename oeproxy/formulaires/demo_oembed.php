@@ -12,7 +12,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_demo_oembed_charger_dist(){
 	return array(
-		'url'=>''
+		'url'=>_request('url'),
 	);
 }
 
