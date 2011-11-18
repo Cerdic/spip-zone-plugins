@@ -1,4 +1,5 @@
 <?php
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function themes_interface_privee_header_prive($flux) {
 	global $visiteur_session, $REQUEST_URI;
