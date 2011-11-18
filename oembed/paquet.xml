@@ -1,7 +1,7 @@
 <paquet
 	prefix="oembed"
 	categorie="multimedia"
-	version="0.5.2"
+	version="0.5.3"
 	etat="test"
 	compatibilite="[3.0.0-beta;["
 	logo="prive/themes/spip/images/oembed-32.png"
@@ -21,6 +21,8 @@
 	<pipeline nom="post_edition" inclure="oembed_pipelines.php" />
 	<pipeline nom="pre_propre" inclure="oembed_pipelines.php" />
 	<pipeline nom="insert_head" inclure="oembed_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="oembed_pipelines.php" />
+	<pipeline nom="header_prive_css" action="insert_head_css" inclure="oembed_pipelines.php" />
 	<pipeline nom="formulaire_charger" inclure="oembed_pipelines.php" />
 	<pipeline nom="recuperer_fond" inclure="oembed_pipelines.php" />
 

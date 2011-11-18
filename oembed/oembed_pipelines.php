@@ -7,7 +7,16 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-//
+/**
+ * Inserer une CSS pour le contenu embed
+ * @param $head
+ * @return string
+ */
+function oembed_insert_head_css($head){
+	$head .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('css/oembed.css').'" />'."\n";
+	return $head;
+}
+
 /**
  * annoncer le service oembed dans le head des pages publiques
  *

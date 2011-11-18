@@ -1,0 +1,9 @@
+/* Oembed twitter */
+.oe-tweet-block {background: #fff;padding: 10px;border: 1px solid #eee;margin: 1em 0;}
+.oe-tweet-user-screen_name,.oe-tweet-user-name {display: block;}
+.oe-tweet-user-block img {float:left;margin-right: 10px;margin-bottom:10px;}
+.oe-tweet-text {clear:left; font-size: 1.3em;margin: 10px 0;}
+
+/* Oembed generique */
+.oe-reference {}
+.oe-cite {}
