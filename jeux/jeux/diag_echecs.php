@@ -69,6 +69,7 @@ Parametres [config] definis par defaut :
 	coords=oui		// Afficher les coordonnees ?
 	truecolor=non	// Image finale en 24bit ?
 	cache=30		// Nombre de jour avant le recalcul de l'image (0 : pas de cache)
+	plateau=non		// Fichier image de l'echiquier
 */
 require("diag_echecs_init.php");
 require("diag_echecs_inc.php");
@@ -283,7 +284,7 @@ function jeux_diag_echecs($texte, $indexJeux, $form=true) {
 	}
     if($diagramme)
 	  $html .= calcul_diagramme_echecs($diagramme, $coloration, $indexJeux);
-	
+
 	return $html;
 }
 ?>

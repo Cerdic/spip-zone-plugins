@@ -60,6 +60,7 @@ function jeux_diag_echecs_init() {
 		coords=oui		// Afficher les coordonnees ?
 		truecolor=non	// Image finale en 24bit ?
 		cache=30		// Nombre de jour avant recalcul de l'image
+		plateau=non		// Fichier image de l'echiquier
 	";
 }
 
