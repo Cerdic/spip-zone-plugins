@@ -52,10 +52,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'warning_google' => "nop", // code, do not translate
 	'warning_googlev3' => "nop", // code, do not translate
 	'warning_mapquest' => "nop", // code, do not translate
-	'warning_microsoft' => "L'impl&eacute;mentation pour ce fournisseur pose un probl&egrave;me majeur&nbsp;: le point d'ancrage des marqueurs n'est pas pris en compte, ce qui produit des d&eacute;calages non seulement avec les autres fournisseurs mais aussi lors des zooms. Il est d&eacute;conseill&eacute; de l'utiliser en production.",
+	'warning_microsoft' => "L'API Virtual Earth impose de centrer l'ancrage des marqueurs sur l'image.",
 	'warning_openlayers' => "nop", // code, do not translate
 	'warning_ovi' => "nop", // code, do not translate
-	'warning_yahoo' => "L'impl&eacute;mentation pour ce fournisseur pose un probl&egrave;me majeur&nbsp;: le point d'ancrage des marqueurs n'est pas pris en compte, ce qui produit des d&eacute;calages non seulement avec les autres fournisseurs mais aussi lors des zooms. Il est d&eacute;conseill&eacute; de l'utiliser en production. Par ailleurs, l'interface de g&eacute;olocalisation souffre d'un probl&egrave;me de dimensionnement.",
+	'warning_yahoo' => "L'API Yahoo ne fournit impose que l'ancrage des marqueurs soit en bas &agrave; gauche de l'image. Par ailleurs, l'interface de g&eacute;olocalisation souffre d'un probl&egrave;me de dimensionnement.",
 	'warning_yandex' => "Ce fournisseur n'a pas &eacute;t&eacute; test&eacute; &agrave; cause de la &quot;barri&egrave;re de la langue&quot;... SVP, signalez les erreurs.",
 
 );

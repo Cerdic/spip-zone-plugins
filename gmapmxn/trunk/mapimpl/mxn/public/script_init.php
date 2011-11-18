@@ -11,6 +11,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/gmap_config_utils');
 include_spip('inc/provider_caps');
+include_spip('gmapmxn_filtres');
 
 // Enregistrement des paramètres passés dans la requête
 function mapimpl_mxn_public_script_init_dist()
@@ -34,7 +35,7 @@ function mapimpl_mxn_public_script_init_dist()
 	if ($provider == 'googlev3')
 		$out .= '<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;language='.$GLOBALS['spip_lang'].'"></script>'."\n";
 	if ($provider == 'microsoft')
-		$out .= '<script type="text/javascript" src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6"></script>'."\n";
+		$out .= '<script type="text/javascript" src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.3&mkt='.lang2culture($GLOBALS['spip_lang']).'"></script>'."\n";
 	if ($provider == 'openlayers')
 		$out .= '<script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>'."\n";
 	if ($provider == 'ovi')

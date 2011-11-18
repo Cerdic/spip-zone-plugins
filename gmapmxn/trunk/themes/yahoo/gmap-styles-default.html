@@ -1,0 +1,59 @@
+[(#CACHE{3600*24*365})][(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+	<Schema name="GMAPExtension" id="GMAPExtensionId">
+		<SimpleField type="string" name="BalloonContents">
+			<displayName><![CDATA[Contents of the ballon info]]></displayName>
+		</SimpleField>
+	</Schema>
+	<Style id="GMapDefault">
+		<IconStyle>
+			[<Icon>
+				<href>(#URL_FICHIER{themes/yahoo/images/gmap-marker-full.png}|url_absolue)</href>
+			</Icon>]
+		</IconStyle>
+	</Style>
+	<Style id="GMapRubrique">
+		<IconStyle>
+			[<Icon>
+				<href>(#URL_FICHIER{themes/yahoo/images/gmap-marker-rubrique-full.png}|url_absolue)</href>
+			</Icon>]
+		</IconStyle>
+	</Style>
+	<Style id="GMapArticle">
+		<IconStyle>
+			[<Icon>
+				<href>(#URL_FICHIER{themes/yahoo/images/gmap-marker-article-full.png}|url_absolue)</href>
+			</Icon>]
+		</IconStyle>
+	</Style>
+	<Style id="GMapDocument">
+		<IconStyle>
+			[<Icon>
+				<href>(#URL_FICHIER{themes/yahoo/images/gmap-marker-photo-full.png}|url_absolue)</href>
+			</Icon>]
+		</IconStyle>
+	</Style>
+	<Style id="GMapAuteur">
+		<IconStyle>
+			[<Icon>
+				<href>(#URL_FICHIER{themes/yahoo/images/gmap-marker-auteur-full.png}|url_absolue)</href>
+			</Icon>]
+		</IconStyle>
+	</Style>
+	<Style id="GMapBreve">
+		<IconStyle>
+			[<Icon>
+				<href>(#URL_FICHIER{themes/yahoo/images/gmap-marker-breve-full.png}|url_absolue)</href>
+			</Icon>]
+		</IconStyle>
+	</Style>
+	<Style id="GMapMot">
+		<IconStyle>
+			[<Icon>
+				<href>(#URL_FICHIER{themes/yahoo/images/gmap-marker-mot-full.png}|url_absolue)</href>
+			</Icon>]
+		</IconStyle>
+	</Style>
+</Document>
+</kml>

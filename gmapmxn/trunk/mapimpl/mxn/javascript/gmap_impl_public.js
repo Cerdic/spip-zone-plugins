@@ -116,45 +116,59 @@ MapWrapper.defaultParams = {
 // Définition des paramètre d'une icone
 MapWrapper.IconDef = function(params)
 {
-	if (!isObject(params))
+	if (isObject(params) && isObject(params.urlIconFile))
 	{
-		this.urlIconFile = SiteInfo.defaultIcon;
-		this.urlShadowFile = SiteInfo.defaultShadow;
-		this.widthIcon = SiteInfo.defaultIconWidth;
-		this.heightIcon = SiteInfo.defaultIconHeight;
-		this.widthShadow = SiteInfo.defaultShadowWidth;
-		this.heightShadow = SiteInfo.defaultShadowHeight;
-		this.anchorX = this.widthIcon / 2;
-		this.anchorY = this.heightIcon;
-		this.anchorShadowX = this.anchorX;
-		this.anchorShadowY = this.anchorY;
-		this.urlCompleteFile = SiteInfo.defaultCompleteIcon;
-		this.widthComplete = SiteInfo.defaultCompleteWidth;
-		this.heightComplete = SiteInfo.defaultCompleteHeight;
-		this.anchorCompleteX = this.widthIcon / 2;
-		this.anchorCompleteY = this.heightIcon;
-		this.popupOffsetX = 0; // position calculée à partir de top/center
-		this.popupOffsetY = this.heightIcon / 4;
+		this.urlIconFile = params.urlIconFile;
+		this.widthIcon = isObject(params.widthIcon) ? params.widthIcon : SiteInfo.iconDef.widthIcon;
+		this.heightIcon = isObject(params.heightIcon) ? params.heightIcon : SiteInfo.iconDef.heightIcon;
+		this.anchorX = isObject(params.anchorX) ? params.anchorX : this.widthIcon / 2;
+		this.anchorY = isObject(params.anchorY) ? params.anchorY : this.heightIcon;
+		this.popupOffsetX = isObject(params.popupOffsetX) ? params.popupOffsetX -(this.widthIcon / 2) : 0; // position calculée à partir de top/center
+		this.popupOffsetY = isObject(params.popupOffsetY) ? params.popupOffsetY : this.heightIcon / 4;
 	}
 	else
 	{
-		this.urlIconFile = isObject(params.urlIconFile) ? params.urlIconFile : SiteInfo.defaultIcon;
-		this.urlShadowFile = isObject(params.urlShadowFile) ? params.urlShadowFile : SiteInfo.defaultShadow;
-		this.widthIcon = isObject(params.widthIcon) ? params.widthIcon : SiteInfo.defaultIconWidth;
-		this.heightIcon = isObject(params.heightIcon) ? params.heightIcon : SiteInfo.defaultIconHeight;
-		this.widthShadow = isObject(params.widthShadow) ? params.widthShadow : SiteInfo.defaultShadowWidth;
-		this.heightShadow = isObject(params.heightShadow) ? params.heightShadow : SiteInfo.defaultShadowHeight;
-		this.anchorX = isObject(params.anchorX) ? params.anchorX : this.widthIcon / 2;
-		this.anchorY = isObject(params.anchorY) ? params.anchorY : this.heightIcon;
+		this.urlIconFile = SiteInfo.iconDef.urlIconFile;
+		this.widthIcon = SiteInfo.iconDef.widthIcon;
+		this.heightIcon = SiteInfo.iconDef.heightIcon;
+		this.anchorX = SiteInfo.iconDef.anchorX;
+		this.anchorY = SiteInfo.iconDef.anchorY;
+		this.popupOffsetX = SiteInfo.iconDef.popupOffsetX;
+		this.popupOffsetY = SiteInfo.iconDef.popupOffsetY;
+	}
+	
+	if (isObject(params) && isObject(params.urlShadowFile))
+	{
+		this.urlShadowFile = params.urlShadowFile;
+		this.widthShadow = isObject(params.widthShadow) ? params.widthShadow : SiteInfo.iconDef.widthShadow;
+		this.heightShadow = isObject(params.heightShadow) ? params.heightShadow : SiteInfo.iconDef.heightShadow;
 		this.anchorShadowX = isObject(params.anchorShadowX) ? params.anchorShadowX : this.anchorX;
 		this.anchorShadowY = isObject(params.anchorShadowY) ? params.anchorShadowY : this.anchorY;
-		this.urlCompleteFile = isObject(params.urlCompleteFile) ? params.urlCompleteFile : null;
-		this.widthComplete = isObject(params.widthComplete) ? params.widthComplete : SiteInfo.defaultCompleteWidth;
-		this.heightComplete = isObject(params.heightComplete) ? params.heightComplete : SiteInfo.defaultCompleteHeight;
-		this.anchorCompleteX = isObject(params.anchorCompleteX) ? params.anchorCompleteX : this.widthIcon / 2;
-		this.anchorCompleteY = isObject(params.anchorCompleteY) ? params.anchorCompleteY : this.heightIcon;
-		this.popupOffsetX = isObject(params.popupOffsetX) ? params.popupOffsetX -(this.widthIcon / 2) : 0; // position calculée à partir de top/center
-		this.popupOffsetY = isObject(params.popupOffsetY) ? params.popupOffsetY : this.heightIcon / 4;
+	}
+	else
+	{
+		this.urlShadowFile = SiteInfo.iconDef.urlShadowFile;
+		this.widthShadow = SiteInfo.iconDef.widthShadow;
+		this.heightShadow = SiteInfo.iconDef.heightShadow;
+		this.anchorShadowX = SiteInfo.iconDef.anchorShadowX;
+		this.anchorShadowY = SiteInfo.iconDef.anchorShadowY;
+	}
+
+	if (isObject(params) && isObject(params.urlCompleteFile))
+	{
+		this.urlCompleteFile = params.urlCompleteFile;
+		this.widthComplete = isObject(params.widthComplete) ? params.widthComplete : SiteInfo.iconDef.widthComplete;
+		this.heightComplete = isObject(params.heightComplete) ? params.heightComplete : SiteInfo.iconDef.heightComplete;
+		this.anchorCompleteX = isObject(params.anchorCompleteX) ? params.anchorCompleteX : this.anchorX;
+		this.anchorCompleteY = isObject(params.anchorCompleteY) ? params.anchorCompleteY : this.anchorY;
+	}
+	else
+	{
+		this.urlCompleteFile = SiteInfo.iconDef.urlCompleteFile;
+		this.widthComplete = SiteInfo.iconDef.widthComplete;
+		this.heightComplete = SiteInfo.iconDef.heightComplete;
+		this.anchorCompleteX = SiteInfo.iconDef.anchorCompleteX;
+		this.anchorCompleteY = SiteInfo.iconDef.anchorCompleteY;
 	}
 };
 
@@ -757,11 +771,28 @@ MapWrapper.prototype =
 		// Mise à jour des données (sauf la position qui a déjà été donnée)
 		if (isObject(params.draggable) && this._hasCap('draggable'))
 			marker.setDraggable(params.draggable);
-		if (isObject(params.html) && !this._hasCap('marker_click_handler')) // sinon on affiche l'info-bulle par showInfoWindow
-			marker.setInfoBubble(params.html);
-		if (isObject(params.title))
-			marker.setLabel(params.title);
-		marker.setHover(false); // pas d'ouverture de la bulle en survol...
+		if (this.curParams.provider == 'microsoft')
+		{
+			if (isObject(params.html))
+				marker.setLabel(params.html);
+			else if (isObject(params.title))
+				marker.setLabel(params.title);
+		}
+		else if (this.curParams.provider == 'yahoo')
+		{
+			// pour Yahoo les titres sont beaucoup trop longs pour mettre
+			// un label (il est représenté en permanence sur la carte)...
+			// et on n'a pas besoin de mettre le contenu de l'info-bulle, elle
+			// sera calculée dans showInfoWindow
+		}
+		else
+		{
+			if (isObject(params.html) && !this._hasCap('marker_click_handler')) // sinon on affiche l'info-bulle par showInfoWindow
+				marker.setInfoBubble(params.html);
+			if (isObject(params.title))
+				marker.setLabel(params.title);
+		}
+		marker.setHover(false); // pas d'ouverture de la bulle en survol... => évoluer en paramétrage de la carte
 			
 		// Mise à jour des icones
 		if (isObject(params.icon))

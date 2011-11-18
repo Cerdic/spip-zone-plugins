@@ -26,7 +26,7 @@ function mapimpl_mxn_public_parametre_carte_dist($viewport, $params)
 		caps: {';
 	foreach ($caps as $name => $value)
 	$code .= '
-			"'.$name.'": '.(($value === 'oui') ? 'true' : 'false').',';
+			'.$name.': '.(($value === 'oui') ? 'true' : 'false').',';
 	$code .= '
 			},';
 	$code .= '	
