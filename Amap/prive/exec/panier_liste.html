@@ -23,12 +23,12 @@
 		<p style="text-align: justify;">
 		#SET{total,0}
 		<BOUCLE_totalpanier(AMAP_PANIERS){age<0} />
-				[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:reste_panier_distribuer, amap:reste_paniers_distribuer, nb})]
+			[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:reste_panier_distribuer, amap:reste_paniers_distribuer, nb})]
 			#SET{total,#TOTAL_BOUCLE}
 		<//B_totalpanier>
 
 		<:amap:avant_le:>
-		<BOUCLE_rub(RUBRIQUES){titre = '001. Distribution'}{si #GET{total}}>
+		<BOUCLE_rub(RUBRIQUES){titre = '001. Distribution'}{si #GET{total}!=0}>
 			<BOUCLE_evenementfin(EVENEMENTS){id_rubrique}{!par date_debut}{age<0}{0,1}>[(#DATE_DEBUT|affdate{'d/m/Y'}).]</BOUCLE_evenementfin>
 		</BOUCLE_rub>
 		</p>
