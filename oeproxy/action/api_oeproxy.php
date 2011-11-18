@@ -36,6 +36,12 @@ function action_api_oeproxy_dist($args = null){
 	if (!strlen($url) OR !preg_match(",^\w+://,",$url))
 		oeproxy_echec(404);
 
+	// si l'url demandee a deja un endpoint connu, rediriger
+	// ca ne sert a rien de refaire le travail
+	if ($redirect = oeproxy_verifier_provider($url,$args)){
+		include_spip('inc/headers');
+		redirige_par_entete($redirect,'',301);
+	}
 
 	$format = (isset($args['format'])?$args['format']:'xml');
 	if (!in_array($format,$support_formats))
@@ -95,6 +101,33 @@ function action_api_oeproxy_dist($args = null){
 	exit;
 }
 
+/**
+ * Verifier si l'url demandee ne peut pas etre servie par un provider connu
+ * et dans ce cas on redirige simplement en 301
+ * @param string $url
+ * @param array $args
+ * @return string
+ */
+function oeproxy_verifier_provider($url,$args){
+	$redirect = '';
+	if(include_spip('inc/oembed')
+		AND function_exists('oembed_verifier_provider')
+		AND $provider = oembed_verifier_provider($url)){
+
+		// ne rediriger que si le provider est bien un service externe
+		if (preg_match(",^\w+://,",$provider['endpoint'])){
+			$redirect = $provider['endpoint'];
+			$redirect = parametre_url($redirect,'url',$url);
+			if (isset($args['maxheight']))
+				$redirect = parametre_url($redirect,'maxheight',$args['maxheight']);
+			if (isset($args['maxwidth']))
+				$redirect = parametre_url($redirect,'maxwidth',$args['maxwidth']);
+			if (isset($args['format']))
+				$redirect = parametre_url($redirect,'format',$args['format']);
+		}
+	}
+	return $redirect;
+}
 
 /**
  * Generer une sortie en cas d'echec
