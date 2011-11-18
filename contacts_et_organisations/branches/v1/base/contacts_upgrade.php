@@ -261,9 +261,9 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 	}
 
 
-	if (version_compare($current_version,"1.7.0","<")) {
+	if (version_compare($current_version,"1.7.1","<")) {
 		contacts_migrer_liens_auteurs();
-		ecrire_meta($nom_meta_base_version, $current_version="1.7.0");
+		ecrire_meta($nom_meta_base_version, $current_version="1.7.1");
 	}
 }
 
