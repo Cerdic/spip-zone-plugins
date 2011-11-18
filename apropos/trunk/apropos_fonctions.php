@@ -165,20 +165,32 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 		if ($afficheQuoi == "latotale"){
 		//je teste pour vérifier que $prefix n'est pas vide. Si vide, c'est que le préfixe entré est invalide
 		if ($prefix ==''){
-			return "<span class='apropos-erreur'>"
-			."Erreur dans la saisie du préfixe du plugin.</span><br />Vous avez entré <b>".$params."</b> comme préfixe. Vérifiez ce dernier qui se trouve dans le fichier paquet.xml ou plugin.xml du plugin.";
-			}else{
-			$get_desc = charger_fonction('afficher_plugin','plugins');
-			$slogan = PtoBR(plugin_propre($info['description'], "$dir/lang/paquet-$prefix"));
-			$documentation = $info['documentation'];
-			if ($documentation != ''){
-			$documentation = "<div class='apropos-description'>"._T('apropos:la_documentation')." <a href=\"".$info['documentation']."\">".$info['documentation']."</a></div>";
+				return "<span class='apropos-erreur'>"
+				."Erreur dans la saisie du préfixe du plugin.</span><br />Vous avez entré <b>".$params."</b> comme préfixe. Vérifiez ce dernier qui se trouve dans le fichier paquet.xml ou plugin.xml du plugin.";
+				}else{
+				//je récupère la description complète, la version avec svn, le crédit et la licence
+				$get_desc = charger_fonction('afficher_plugin','plugins');
+				$slogan = PtoBR(plugin_propre($info['description'], "$dir/lang/paquet-$prefix"));
+				$documentation = $info['documentation'];
+				if ($documentation != ''){
+					$documentation = "<div class='apropos-description'>"._T('apropos:la_documentation')." <a href=\"".$info['documentation']."\">".$info['documentation']."</a></div>";
+				}
+				$demonstration = $info['demonstration'];
+				if ($demonstration != ''){
+					$demonstration = "<div class='apropos-description'>"._T('apropos:la_demonstration')." <a href=\"".$info['demonstration']."\">".$info['demonstration']."</a></div>";
+				}
+				$credit = $info['credit'];
+				if ($credit != ''){
+					$credit = "<div class='apropos-auteur'>"._T('plugin_info_credit')." : ".formater_credits($info['credit'], ', ')."</div>";
+				}
+
+				// Version SVn et répertoire du plugin
+				$svn_revision = version_svn_courante($dir_plugins.$plug_file);
+				$leSVN = ($svn_revision<0 ? ' SVN':'').' ['.abs($svn_revision).']'; // version_svn_courante($dir_plugins.$plug_file);	  
+				$infoSVN = "<div class='apropos-svn'>".$leSVN." "._T('repertoire_plugins')." ".$dir."</div>"; 
 			}
-			$demonstration = $info['demonstration'];
-			if ($demonstration != ''){
-			$demonstration = "<div class='apropos-description'>"._T('apropos:la_demonstration')." <a href=\"".$info['demonstration']."\">".$info['demonstration']."</a></div>";
-			}
-			}
+			
+			// si pas la totale des infos, le minimum pour l'affichage en liste
 		}else{
 			$slogan = PtoBR(plugin_propre($info['slogan'], "$dir/lang/paquet-$prefix"));
 			// test si slogan vide afin de prendre la description via le fichier plugin.xml le cas echeant
@@ -210,11 +222,11 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 		
 		// grosse différence avec Spip 2 qui retournait une liste et non 1 array
 		if (is_array($info['auteur'])) {
-		$auteur = PtoBR(plugin_propre(implode($info['auteur'])));
+		$auteur =   _T('public:par_auteur') .formater_credits($info['auteur'], ', ').".\n";
 		}else{
-		$auteur = plugin_propre($info['auteur']);
+		$auteur =  _T('public:par_auteur') .PtoBR(propre($info['auteur'])).".";
 		}
-		
+		$auteur = $auteur;
 	}
 	
 	//si version 2 de Spip
@@ -259,8 +271,9 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 	. "<span class='apropos-nom'>".$leNom."</span>"
 	. "<span class='apropos-version'>v ".$info['version']."</span>"
 	. "<span class='apropos-etat'> - ".plugin_etat_en_clair($info['etat'])."</span>"
+	. $infoSVN
 	. "<div class='apropos-description'>".$slogan."</div>"
-	. "<span class='apropos-auteur'>". _T('public:par_auteur') .$auteur.".</span>"
+	. "<span class='apropos-auteur'>".$auteur.$credit."</span>"
 	. $documentation
 	. $demonstration
 	. "</div>";
