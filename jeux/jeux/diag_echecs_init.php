@@ -65,16 +65,15 @@ function jeux_diag_echecs_init() {
 
 
 function diag_echecs_config_supplementaire() {
-	jeux_config_set('base_url', _DIR_PLUGIN_JEUX.'img/diag_echecs'.jeux_config('taille').'/');
-//	jeux_config_set('base_url', './img/diag_echecs'.jeux_config('taille').'/');
+	jeux_config_set('base_url', find_in_path('img/diag_echecs'.jeux_config('taille').'/'));
 	jeux_config_set('board_size', intval(jeux_config('taille'))*8);
-	if (function_exists("imagepng")) $type = 'png';
-	elseif (function_exists("imagegif")) $type = 'gif';
-	else { jeux_config_set('fonction_gd_absentes'); return; }
-   jeux_config_set('img_suffix', '.'.$type);
-   jeux_config_set('img_create', 'imagecreatefrom'.$type);
-   jeux_config_set('img_header', 'Content-type: image/'.$type);
-   jeux_config_set('img_img', 'image'.$type);
+	if (function_exists('imagepng')) $type = 'png';
+	elseif (function_exists('imagegif')) $type = 'gif';
+	else { jeux_config_set('erreur', 'fonctions GD absentes !'); return; }
+	jeux_config_set('img_suffix', '.'.$type);
+	jeux_config_set('img_create', 'imagecreatefrom'.$type);
+	jeux_config_set('img_header', 'Content-type: image/'.$type);
+	jeux_config_set('img_img', 'image'.$type);
 }
 
 /*

@@ -79,9 +79,10 @@ function calcul_diagramme_echecs($position, $coloration, $indexJeux) {
 	global $diag_echecs_globales, $jeux_couleurs;
 	$flip = jeux_config('flip');
 	$taille = intval(jeux_config('taille'));
+	$redim = intval(jeux_config('redim'));
 	$nbjour = intval(jeux_config('cache')); // nombre de jour avant recalcul
 	$bordure = intval(jeux_config('bordure'));
-	$board_size = intval(jeux_config('board_size'));
+	$board_size = jeux_config('board_size');
 	$font = intval(jeux_config('police'));
 	$img = jeux_config('img_img');
 
@@ -114,12 +115,10 @@ function calcul_diagramme_echecs($position, $coloration, $indexJeux) {
 	$fichier_dest = sous_repertoire(_DIR_VAR, "cache-jeux") . 'echiq_'.$md5 . jeux_config('img_suffix');
 	list(,,,$size) = @getimagesize($fichier_dest);
 	$image = "<img class=\"no_image_filtrer \" src=\"$fichier_dest\" alt=\"$position\" title=\"$position\" border=\"0\" $size/><br>\n";
-	// pas de recalcul de l'image pendant 12 heures si le fichier existe deja
-	/*if (file_exists($fichier_dest) 
-			AND ($GLOBALS['var_mode'] != 'recalcul') AND ($GLOBALS['var_mode'] != 'calcul') 
-			AND (time()-@filemtime($fichier_dest) < 12*3600))
-		 return $image;*/
+
+	// pas de recalcul de l'image pendant 30 jours si le fichier existe deja
 	if (file_exists($fichier_dest) 
+			AND (_request('var_mode') != 'recalcul') AND (_request('var_mode') != 'calcul') 
 			AND (time()-@filemtime($fichier_dest) < 24*3600*$nbjour))
 		 return $image;
 
@@ -135,8 +134,10 @@ function calcul_diagramme_echecs($position, $coloration, $indexJeux) {
 		if(in_array($surb[0], array('jaune', 'bleu', 'rouge', 'vert')))
 			foreach($surb[1] as $square)
 				switch(strlen($square)) {
-					case 2: diag_echecs_hilite_square($chessboard, $square, 'h'.$surb[0], $flip); break; // case de couleur
-					case 5: diag_echecs_hilite_line($chessboard, $square, 'h'.$surb[0], $flip); break; // ligne de couleur
+					// case de couleur : forme a1
+					case 2: diag_echecs_hilite_square($chessboard, $square, 'h'.$surb[0], $flip); break;
+					// ligne de couleur : forme a1-g8
+					case 5: diag_echecs_hilite_line($chessboard, $square, 'h'.$surb[0], $flip); break;
 				}
 
 	
@@ -228,19 +229,19 @@ second */
 	} // if (jeux_config('coords'))
 	
 	// ************* redimensionement final *************
-	if (strlen(jeux_config('redim'))>0) {
+	if ($redim) {
 		if (jeux_config('coords')) { $nbcases=9; } else	{ $nbcases=8; }
-		$newsize = intval(jeux_config('redim')) / intval(jeux_config('taille'));
-		if ($newsize>3) {$newsize=3;}; // taille maximale pour éviter les erreurs
+		$newsize = $redim / $taille;
+		if ($newsize>3) $newsize=3; // taille maximale pour eviter les erreurs
 		$img_finale = imagecreatetruecolor(round($newsize*imagesx($chessboard)),round($newsize*imagesy($chessboard)));
 		imagecopyresampled($img_finale,$chessboard,0,0,0,0,round($newsize*imagesx($chessboard)),round($newsize*imagesy($chessboard)),imagesx($chessboard),imagesy($chessboard));
-		// converti l'image en 256 couleurs si truecolor=non
-		if (!jeux_config('truecolor')) { imagetruecolortopalette($img_finale,false,256); };	
+		// convertir l'image en 256 couleurs si truecolor=non
+		if (!jeux_config('truecolor')) imagetruecolortopalette($img_finale,false,256);	
 		$img($img_finale, $fichier_dest);
 	}
 	else {
-		// converti l'image en 256 couleurs si truecolor=non
-		if (!jeux_config('truecolor')) { imagetruecolortopalette($chessboard,false,256); };	
+		// convertir l'image en 256 couleurs si truecolor=non
+		if (!jeux_config('truecolor')) imagetruecolortopalette($chessboard,false,256);	
 		$img($chessboard, $fichier_dest);
 	}
 	
