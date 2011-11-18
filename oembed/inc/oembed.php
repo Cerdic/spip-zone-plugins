@@ -80,7 +80,7 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 		$provider_name= strtolower($cache[$data_url]['provider_name']);
 		$type = strtolower($cache[$data_url]['type']);
 		if ($oembed_provider_posttraite = charger_fonction("posttraite_{$provider_name}_$type",'oembed',true))
-			$cache[$data_url] = $oembed_provider_posttraite($cache[$data_url]);
+			$cache[$data_url] = $oembed_provider_posttraite($cache[$data_url],$url);
 
 		ecrire_fichier($oembed_cache,serialize($cache[$data_url]));
 	}
