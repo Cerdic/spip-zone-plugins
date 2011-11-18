@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'api_result_json' => 'JSON Result',
 
 'liste_urls_exemples' => 'Try one of these',
-'label_url'=>'Entry your URL',
+'label_url'=>'Enter your URL',
 'bouton_tester'=>'oEmbed!',
 
 );
