@@ -22,6 +22,7 @@ function action_api_oeproxy_dist($args = null){
 		'xml',
 		'json',
 	);
+	$force_reload=false;
 
 	if (is_null($args)){
 		$args = array(
@@ -53,6 +54,7 @@ function action_api_oeproxy_dist($args = null){
 	$options = array(
 		'maxwidth' => (isset($args['maxwidth'])?intval($args['maxwidth']):null),
 		'maxheight' => (isset($args['maxheight'])?intval($args['maxheight']):null),
+		'force_reload' => $force_reload,
 	);
 
 
