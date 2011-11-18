@@ -1,0 +1,45 @@
+<div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#SET{fl,oeproxy}
+		<ul>
+			#SET{name,url}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+			</li>
+		</ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:oeproxy:bouton_tester:>' /></p>
+
+		[(#ENV{url}|oui)
+		<div class="oe-demo">
+			[URL oEmbed&nbsp;: (#EVAL{chr(91)}|concat{'->',[(#ENV{url}|demo_link)],#EVAL{chr(93)}}|propre|liens_ouvrants)]
+
+			[<h3>Contenu HTML</h3>
+			<div class="oe-demo-html">
+				(#ENV**{url}|propre|image_reduire{400})
+			</div>]
+
+			[<h3>Réponse XML</h3>
+			<div class="oe-demo-xml">
+(#VAL{"<cadre class='spip xml'>"}|concat{#ENV**{url}|demo_oembed{xml},"</cadre>"}|propre)
+			</div>]
+			[<h3>Réponse JSON</h3>
+			<div class="oe-demo-json">
+(#VAL{"<cadre class='spip json'>"}|concat{#ENV**{url}|demo_oembed{json},"</cadre>"}|propre)
+			</div>]
+		</div>
+		]
+
+	</div></form>
+	]
+</div>
