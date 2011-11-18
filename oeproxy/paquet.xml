@@ -1,0 +1,15 @@
+<paquet
+	prefix="oeproxy"
+	categorie="outil"
+	version="0.1.0"
+	etat="experimental"
+	compatibilite="[3.0.0-beta;["
+	logo="oeproxy-32.png"
+>
+
+	<nom>oEmbed the Web</nom>
+	<auteur lien="http://www.yterium.com">C&#233;dric Morin</auteur>
+	<licence>GPL</licence>
+
+	<necessite nom="Readability" compatibilite="[0.1.1;[" />
+</paquet>
