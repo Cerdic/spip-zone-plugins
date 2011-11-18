@@ -1,7 +1,7 @@
 <div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
-	[(#ENV{editable})
+
 	<form method='post' action='#ENV{action}'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
@@ -22,24 +22,30 @@
 
 		[(#ENV{url}|oui)
 		<div class="oe-demo">
-			[URL oEmbed&nbsp;: (#EVAL{chr(91)}|concat{'->',[(#ENV{url}|demo_link)],#EVAL{chr(93)}}|propre|liens_ouvrants)]
+			[<h3><:oeproxy:api_call_title:></h3>
+			<div class="oe-demo-block oe-demo-api-call">
+			<pre><a href="[(#ENV{url}|demo_link)]" target="_blank">(#ENV{url}|demo_link)</a></pre>
+			</div>
+			]
 
-			[<h3>Contenu HTML</h3>
-			<div class="oe-demo-html">
+			[<h3><:oeproxy:api_result_html:></h3>
+			<div class="oe-demo-block oe-demo-html">
+				<table><tbody><tr><td>
 				(#ENV**{url}|propre|image_reduire{400,0})
+				</td></tr></tbody></table>
 			</div>]
 
-			[<h3>Réponse XML</h3>
-			<div class="oe-demo-xml">
+			[<h3><:oeproxy:api_result_xml:></h3>
+			<div class="oe-demo-block oe-demo-xml">
 (#VAL{"<cadre class='spip xml'>"}|concat{#ENV**{url}|demo_oembed{xml},"</cadre>"}|propre)
 			</div>]
-			[<h3>Réponse JSON</h3>
-			<div class="oe-demo-json">
+			[<h3><:oeproxy:api_result_json:></h3>
+			<div class="oe-demo-block oe-demo-json">
 (#VAL{"<cadre class='spip json'>"}|concat{#ENV**{url}|demo_oembed{json},"</cadre>"}|propre)
 			</div>]
 		</div>
 		]
 
 	</div></form>
-	]
+
 </div>
