@@ -10,8 +10,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+define('_provider_name_prefixe','oeproxy_');
+
 function action_api_oeproxy_dist($args = null){
 	static $methodes = array(
+		',^https?://(www.)?twitpic.com/[^/]+,i' => 'twitpic',
 
 	);
 	static $support_formats = array(
@@ -69,7 +72,7 @@ function action_api_oeproxy_dist($args = null){
 	// provider_name (optional)
 	// The name of the resource provider.
 	if (!isset($res['provider_name']))
-		$res['provider_name'] = 'oeproxy_'.$methode;
+		$res['provider_name'] = _provider_name_prefixe.$methode;
 
 	// provider_url (optional)
 	// The url of the resource provider.

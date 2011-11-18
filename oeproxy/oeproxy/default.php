@@ -16,9 +16,11 @@ function oeproxy_default_dist($url,$options){
 	include_spip('inc/distant');
 	$html = recuperer_page($url);
 
+	if (!$html)
+		return 404;
+
 	include_spip('inc/readability');
 	$res = readability_html($html,'array');
-
 
 	$result = array(
 		// type (required)
@@ -39,11 +41,11 @@ function oeproxy_default_dist($url,$options){
 
 		// width (required)
     // The width in pixels required to display the HTML.
-		'width' => ($options['width']?$options['width']:'300').'px',
+		'width' => ($options['width']?$options['width']:'300'),
 
 		// height (required)
     // The height in pixels required to display the HTML.
-		'height' => ($options['height']?$options['height']:'100').'px',
+		'height' => ($options['height']?$options['height']:'100'),
 
 		// author_name (optional)
     // The name of the author/owner of the resource.
@@ -70,6 +72,7 @@ function oeproxy_default_dist($url,$options){
     // The height of the optional thumbnail. If this paramater is present, thumbnail_url and thumbnail_width must also be present.
 		// NIY
 		// 'thumbnail_height' => '',
+
 	);
 
 	return $result;
