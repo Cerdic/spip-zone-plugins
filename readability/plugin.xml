@@ -3,7 +3,7 @@
 	<slogan>Extraire le contenu pertinent d'une page Web</slogan>
 	<auteur>Arc90, Keyvan Minoukadeh, Fil</auteur>
 	<licence>Apache License Version 2.0</licence>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<etat>test</etat>
 	<lien>http://www.spip-contrib.net/3758</lien>
 	<description>
@@ -14,7 +14,7 @@ Ce script a depuis &#233;t&#233; port&#233; par ses auteurs sous forme de servic
 	<prefix>Readability</prefix>
 	<icon>readability.png</icon><!-- by Lothar Grimme http://www.iconfinder.com/icondetails/56/128/eye_wear_glasses_read_view_icon -->
 	<fonctions>inc/readability.php</fonctions>
-	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 	<categorie>outil</categorie>
 	<chemin dir='' />
 </plugin>

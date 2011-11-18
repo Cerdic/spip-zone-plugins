@@ -19,7 +19,7 @@ function readability($url) {
 //      <h1> le titre
 //      <div.readability> le contenu
 //
-function readability_html($html) {
+function readability_html($html, $format='string') {
 	require_once find_in_path('lib/readability/Readability.php');
 
 
@@ -59,7 +59,14 @@ function readability_html($html) {
 			$content = $tidy->value;
 		}
 
-		return (strlen($title) ? "<h1>$title</h1>\n\n" : '')
-			. $content;
+		if ($format=='array'){
+			return array(
+				'title' => $title,
+				'content' => $content,
+			);
+		}
+		else
+			return (strlen($title) ? "<h1>$title</h1>\n\n" : '')
+				. $content;
 	}
 }
