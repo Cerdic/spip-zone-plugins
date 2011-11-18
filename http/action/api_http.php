@@ -18,6 +18,7 @@ function action_api_http_dist(){
 	}
 	else{
 		list($format, $collection, $ressource) = explode('/', $arg);
+		define('_SET_HTML_BASE', true);
 		
 		// Si le format n'a pas le bon format ou que le fichier avec l'implémentation n'existe pas, on arrête
 		if (!preg_match('/^[\w]+$/', $format)){
@@ -35,11 +36,17 @@ function action_api_http_dist(){
 		
 		// On cherche ce qu'on est en train de demander avec cette URL
 		// S'il n'y a pas de collection c'est l'index
-		if (!$collection) $fonction = 'index';
+		if (!$collection){
+			$fonction = 'index';
+		}
 		// Sinon s'il n'y a que la collection sans la ressource
-		elseif (!$ressource) $fonction = 'collection';
+		elseif (!$ressource){
+			$fonction = 'collection';
+		}
 		// Sinon c'est une ressource
-		else $fonction = 'ressource';
+		else{
+			$fonction = 'ressource';
+		}
 
 		// Le GET peut se faire sur : la racine du serveur, une collection, une ressource
 		if ($methode == 'GET'
