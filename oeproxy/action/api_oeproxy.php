@@ -15,6 +15,7 @@ define('_provider_name_prefixe','oeproxy_');
 function action_api_oeproxy_dist($args = null){
 	static $methodes = array(
 		',^https?://(www.)?twitpic.com/[^/]+,i' => 'twitpic',
+		',https?://twitter.com/(?:#!/)?([^/#]+)/status(?:es)?/(\d+),i' => 'twitter',
 
 	);
 	static $support_formats = array(
@@ -59,7 +60,7 @@ function action_api_oeproxy_dist($args = null){
 	// recherche et lancement de la methode oEmbed appropriee
 	$methode = 'default';
 	foreach($methodes as $pattern => $action){
-		if (preg_match($pattern,$args['url']))
+		if (preg_match($pattern,$url))
 			$methode = $action;
 	}
 
@@ -138,7 +139,7 @@ function oeproxy_echec($status=404){
 
 	switch ($status){
 		case 501:
-			http_status('501');
+			header("Status: 501 Not Implemented");
 			echo "501 Not Implemented";
 			break;
 
