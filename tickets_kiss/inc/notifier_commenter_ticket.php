@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function inc_notifier_commenter_ticket($id_ticket,$options){
 
 		$id_ticket_forum = $options['id_ticket_forum'];

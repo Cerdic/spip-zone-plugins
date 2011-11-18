@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 // Traitement de la page d'affichage et de modification d'un ticket
 function exec_ticket_afficher () {
 	global $connect_id_auteur;

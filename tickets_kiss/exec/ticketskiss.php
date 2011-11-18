@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 // Traitement de la page recapitulative des ticketskiss
 function exec_ticketskiss () {
 

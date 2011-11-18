@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 // Creation de la liste des options du select des champ jalon, version, projet ou composant
 function ticketskiss_select_champ_optionnel($champ='', $en_cours){
 	$options = NULL;

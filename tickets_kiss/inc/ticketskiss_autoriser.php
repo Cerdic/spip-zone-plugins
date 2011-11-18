@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 // Renvoie la liste des auteurs ou des statuts autorises pour une action donnee
 function definir_autorisations_ticketskiss($action){
 	$aut = NULL;

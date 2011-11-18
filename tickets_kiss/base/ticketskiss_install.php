@@ -1,6 +1,6 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function ticketskiss_declarer_tables_principales($tables_principales){	
 

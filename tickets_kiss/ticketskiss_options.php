@@ -7,6 +7,9 @@
  * @param int $id_ticket
  * @param array $c[optional]
  */
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function revision_ticket($id_ticket, $c=false) {
 
 	// invalider le cache quelque soit la circonstance.

@@ -1,7 +1,7 @@
 <?php
 // Traitement de la page d'edition d'un ticket
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/presentation');
 
