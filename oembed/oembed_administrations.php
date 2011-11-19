@@ -59,6 +59,9 @@ function oembed_update_new_providers(){
 		'http://meetup.com/*'            =>   'http://api.meetup.com/oembed',
 		'http://meetup.ps/*'             =>   'http://api.meetup.com/oembed',
 		'http://*.wordpress.com/*'       =>   'http://public-api.wordpress.com/oembed/1.0/',
+		'http://*.blogs.cnn.com/*'         =>   'http://public-api.wordpress.com/oembed/1.0/',
+		'http://techcrunch.com/*'        =>   'http://public-api.wordpress.com/oembed/1.0/',
+		'http://wp.me/*'                 =>   'http://public-api.wordpress.com/oembed/1.0/',
 		'http://my.opera.com/*'           => 'http://my.opera.com/service/oembed',
 
 
