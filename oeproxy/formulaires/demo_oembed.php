@@ -17,6 +17,7 @@ function formulaires_demo_oembed_charger_dist(){
 }
 
 function demo_link($url){
+	$url = parametre_url($url,'dummy','','&'); // inverser le travail de entites_html
 	if (!$url) return "";
 	return url_absolue(parametre_url("oeproxy.api/",'url',$url));
 }
