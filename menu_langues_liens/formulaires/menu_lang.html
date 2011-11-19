@@ -9,50 +9,59 @@ Stocker les traductions eventuelles de l'article en cours
 </BOUCLE_article>
 
 [(#REM) 
-Stocker les traductions eventuelles de la rubrique en cours
+Stocker les traductions eventuelles de la rubrique en cours si le plugin Tradrub est installe (permet l'utilisation du
+critere traduction sur les rubriques)
 ]
-<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
-#SET{ListeTraductions, #ARRAY{}}
-<BOUCLE_TraductionRubriqueCourante(RUBRIQUES){traduction}{lang !IN #CONFIG{menu_lang_liens/langues_invisibles,#ARRAY}}>
-	#SET_MERGE{ListeTraductions,#GET{ListeTraductions},#ARRAY{#LANG,#URL_RUBRIQUE}}
-</BOUCLE_TraductionRubriqueCourante>
-</BOUCLE_rubrique>
+<BOUCLE_tradrub(CONDITION){si #PLUGIN{tradrub}}>
+    <BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+        #SET{ListeTraductions, #ARRAY{}}
+        <BOUCLE_TraductionRubriqueCourante(RUBRIQUES){traduction}{lang !IN #CONFIG{menu_lang_liens/langues_invisibles,#ARRAY}}>
+            #SET_MERGE{ListeTraductions,#GET{ListeTraductions},#ARRAY{#LANG,#URL_RUBRIQUE}}
+        </BOUCLE_TraductionRubriqueCourante>
+    </BOUCLE_rubrique>
+</BOUCLE_tradrub>
 
 [(#REM) 
-Y-a-t'il plus d'une langue reellement utilisee dans le site (- les langues invisibles) ?
+Y-a-t'il plus d'une langue reellement utilisee dans le site (moins les langues "invisibles") ?
 Si oui, on affiche le menu de langue
 Si non, rien
+
+Les langues "invisibles" sont les langues que le webmestre peut choisir de ne pas afficher dans le menu, 
+a partir du formulaire de configuration du plugin.
 
 Note : 'explode' est une fonction PHP : http://php.net/manual/fr/function.explode.php, utilisee ici pour renvoyer un tableau contenant 
 les langues utilisees, a partir de la variable meta 'langues_utilisees'. Ce tableau est compare avec le tableau des langues invisibles
 avec la fonction PHP 'array_diff' http://www.php.net/manual/fr/function.array-diff.php qui renvoie elle-meme un tableau. 
 
-Un formulaire CFG permet de definir la liste des langues invisibles (qui ne doivent pas apparaitre dans le menu de langue).
 ]
 
-[(#SET{langues_a_afficher,[(#CONFIG{langues_utilisees}|explode{","}|array_diff{#CONFIG{menu_lang_liens/langues_invisibles}})]})]
+[(#SET{langues_a_afficher,[(#CONFIG{langues_utilisees}|explode{","}|array_diff{#CONFIG{menu_lang_liens/langues_invisibles, #ARRAY}})]})]
 
 <BOUCLE_PlusieursLanguesUtilisees(POUR){tableau #GET{langues_a_afficher}}{1,1}>
-<div id="menu_lang">
+<ul id="menu_lang">
 [(#REM)
 On liste les langues utilisees dans le site
 ]
 	<BOUCLE_ListeLangues(POUR){tableau #GET{langues_a_afficher}}>
+    	<li [(#COMPTEUR_BOUCLE|=={1}|oui)class="first"] [(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)class="last"]>
 		[(#REM)
 		Si la langue n'est pas celle en cours, on fait un lien qui fait 2 actions :
 		- fixer le cookie de langue sur la langue demandee
 		- rediriger sur l'article dans la langue demandee si opportun
 		  sinon, revenir sur la page en cours
 		]
+        [(#CONFIG{menu_lang_liens/format,complet}|=={'complet'}|oui)[(#SET{nom_langue,[(#VALEUR|traduire_nom_langue)]})]]   
+        [(#CONFIG{menu_lang_liens/format,complet}|=={'abrege'}|oui)[(#SET{nom_langue,[(#VALEUR)]})]]
 		[(#VALEUR|=={#ENV{lang}}|non)
-			[<a href="[(#URL_ACTION_AUTEUR{'converser', '', #GET{ListeTraductions}|table_valeur{#VALEUR}|sinon{#SELF}}|parametre_url{var_lang,#VALEUR})]" rel="alternate" lang="#VALEUR" title="[(#VALEUR|traduire_nom_langue|ucfirst|attribut_html)]" class="langue_#VALEUR">(#VALEUR|ucfirst)</a>]
+			[<a href="[(#URL_ACTION_AUTEUR{'converser', '', #GET{ListeTraductions}|table_valeur{#VALEUR}|sinon{#SELF}}|parametre_url{var_lang,#VALEUR})]" rel="alternate" lang="#VALEUR" title="[(#VALEUR|traduire_nom_langue|ucfirst|attribut_html)]" class="langue_#VALEUR">(#GET{nom_langue}|ucfirst)</a>]
 		]
 		[(#REM)
 		Si la langue est celle en cours, afficher celle-ci en gras, sans lien
 		]
 		[(#VALEUR|=={#ENV{lang}}|oui)
-			[<strong class="langue_#VALEUR" lang="#VALEUR" title="[(#VALEUR|traduire_nom_langue|ucfirst|attribut_html)]">(#VALEUR|ucfirst)</strong>]
+			[<span class="langue_#VALEUR" lang="#VALEUR" title="[(#VALEUR|traduire_nom_langue|ucfirst|attribut_html)]">(#GET{nom_langue}|ucfirst)</span>]
 		]
+        </li>
 	</BOUCLE_ListeLangues>
-</div>
+</ul>
 </BOUCLE_PlusieursLanguesUtilisees>
