@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'liste_urls_exemples' => 'Quelques exemples',
 'label_url'=>'URL de la page',
 'bouton_tester'=>'oEmbed!',
+'titre_lien_vers_cette_page' => 'Lien vers cette page !',
 
 );
 
