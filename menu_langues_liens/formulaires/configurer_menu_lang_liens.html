@@ -8,7 +8,7 @@
 <form method="post" action="#ENV{action}"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
-		<li class="editer_mll_langues_supprimer[ (#ENV**{erreurs}|table_valeur{licence_defaut}|oui)erreur]">
+		<li class="editer_mll_langues_invisibles[ (#ENV**{erreurs}|table_valeur{licence_defaut}|oui)erreur]">
 			<label for="langues_invisibles"><:mll:label_langues_invisibles:></label>
 			<p class="explication"><:mll:explication_langues_invisibles:></p>
 			<select name="langues_invisibles[]" id="langues_invisibles" multiple="oui">
@@ -16,6 +16,19 @@
 				<option value="#VALEUR"[(#VALEUR|in_array{#ENV{langues_invisibles,#ARRAY}}|oui)selected="selected"]>[(#VALEUR|traduire_nom_langue)]</option>
 				</BOUCLE_langues>
 			</select>
+		</li>
+	</ul>
+	<ul>
+		<li class="editer_mll_langues_supprimer[ (#ENV**{erreurs}|table_valeur{licence_defaut}|oui)erreur]">
+			<label for="format"><:mll:label_format:></label>
+            <div class="choix">
+			<input type="radio" name="format" id="complet" value="complet" [(#ENV{format,complet}|=={'complet'}|?{' ',''})checked]/> 
+            <label for="complet"><:mll:label_format_complet:></label>
+           	</div>            
+            <div class="choix">
+			<input type="radio" name="format" id="abrege" value="abrege" [(#ENV{format,complet}|=={'abrege'}|?{' ',''})checked]/> 
+            <label for="abrege"><:mll:label_format_abrege:></label>
+           	</div>
 		</li>
 	</ul>
 	<p class="boutons">
