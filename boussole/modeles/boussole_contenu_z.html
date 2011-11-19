@@ -32,7 +32,11 @@
 <div class="contenu-principal">
 [(#ENV{cartouche_boussole, non}|=={oui}|oui)
 	<div class="cartouche">
-		[(#CHEMIN{prive/themes/spip/images/boussole[-(#ENV{boussole})].png}|image_reduire{#ENV{taille_logo, 64}}|inserer_attribut{class,spip_logos}|inserer_attribut{alt,logo #ENV{boussole}})]
+		[(#CHEMIN{prive/themes/spip/images/boussole[-(#ENV{boussole})].png}
+			|image_reduire{#ENV{taille_logo, 64}}
+			|image_recadre{#ENV{taille_logo, 64},#ENV{taille_logo, 64},center,transparent}
+			|inserer_attribut{class,spip_logos}
+			|inserer_attribut{alt,logo #ENV{boussole}})]
 		[<h1 class="h1">(#ENV{boussole}|boussole_traduire{nom_boussole})</h1>]
 		[<p class="info-publi">
 			(#ENV{boussole}|boussole_traduire{slogan_boussole})

@@ -39,7 +39,7 @@
 	<BOUCLE_site(BOUSSOLES){aka_boussole}{aka_groupe}{affiche=oui}{par rang_site}>
 		[(#SET{bulle, [(#AKA_BOUSSOLE|boussole_traduire{#ENV{type_bulle}, #AKA_SITE}|couper{100})]})]
 		[<li[ class="(#ENV{li_class})"]>
-			<a href="#URL_SITE"[ title="(#GET{bulle})"]>
+			<a rel="external" href="#URL_SITE"[ title="(#GET{bulle})"]>
 				(#AKA_BOUSSOLE|boussole_traduire{nom_site, #AKA_SITE})
 			</a>
 		</li>]
