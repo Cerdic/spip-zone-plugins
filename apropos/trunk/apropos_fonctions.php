@@ -181,7 +181,7 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 				}
 				$credit = $info['credit'];
 				if ($credit != ''){
-					$credit = "<div class='apropos-auteur'>"._T('plugin_info_credit')." : ".formater_credits($info['credit'], ', ')."</div>";
+					$credit = "<div class='apropos-auteur'>"._T('plugin_info_credit')." : ".implode($info['credit'])."</div>";
 				}
 
 				// Version SVn et répertoire du plugin
@@ -222,7 +222,8 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 		
 		// grosse différence avec Spip 2 qui retournait une liste et non 1 array
 		if (is_array($info['auteur'])) {
-		$auteur =   _T('public:par_auteur') .formater_credits($info['auteur'], ', ').".\n";
+		$auteur =   _T('public:par_auteur') .implode($info['auteur']).".\n";
+		$auteur = PtoBR(propre($auteur));
 		}else{
 		$auteur =  _T('public:par_auteur') .PtoBR(propre($info['auteur'])).".";
 		}
