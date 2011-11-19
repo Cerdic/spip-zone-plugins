@@ -1,8 +1,8 @@
 <plugin>
-	<nom>Switcher</nom>
+	<nom>Th&#232;mes Switcher</nom>
 	<slogan>Switcheur de th&#232;mes</slogan>
 	<auteur>	<!-- Auteur du plugin -->
-	StephK, adaptation  pour les th&egrave;mes du plugin switcher de Philippe Drouot et de Fil - Distribu&#233; sous licence GNU/GPL
+	StephK, adaptation  pour les th&#232;mes du plugin switcher de Philippe Drouot / Fil - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
 	0.1.0
