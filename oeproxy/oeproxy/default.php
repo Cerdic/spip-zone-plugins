@@ -11,10 +11,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-function oeproxy_default_dist($url,$options){
+function oeproxy_default_dist($url,$options,$html=null){
 
-	include_spip('inc/distant');
-	$html = recuperer_page($url);
+	if (is_null($html)){
+		include_spip('inc/distant');
+		$html = recuperer_page($url);
+	}
 
 	if (!$html)
 		return 404;

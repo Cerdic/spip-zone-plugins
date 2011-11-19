@@ -12,6 +12,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_provider_name_prefixe','oeproxy_');
 
+/**
+ * Proxy oEmbed
+ *  - redirige vers un endpoint oEmbed existant si connu
+ *  - detecte une annonce du service oEmbed sur l'url de la page et redirige
+ *  - utilise une methode interne basee sur une API du site, si existante
+ *  - utiliser Readability en dernier ressort
+ *
+ * @param null|array $args
+ * @return void
+ */
 function action_api_oeproxy_dist($args = null){
 	static $methodes = array(
 		',^https?://(www.)?twitpic.com/[^/]+,i' => 'twitpic',
@@ -38,6 +48,11 @@ function action_api_oeproxy_dist($args = null){
 	if (!strlen($url) OR !preg_match(",^\w+://,",$url))
 		oeproxy_echec(404);
 
+	// verifier que le format est licite
+	$format = (isset($args['format'])?$args['format']:'xml');
+	if (!in_array($format,$support_formats))
+		oeproxy_echec(501);
+
 	// si l'url demandee a deja un endpoint connu, rediriger
 	// ca ne sert a rien de refaire le travail
 	if ($redirect = oeproxy_verifier_provider($url,$args)){
@@ -45,31 +60,37 @@ function action_api_oeproxy_dist($args = null){
 		redirige_par_entete($redirect,'',301);
 	}
 
-	$format = (isset($args['format'])?$args['format']:'xml');
-	if (!in_array($format,$support_formats))
-		oeproxy_echec(501);
-	unset($args['format']);
-
-	// les deux seules options acceptees (les autres sont ignorees, d'ou qu'elles viennent)
-	$options = array(
-		'maxwidth' => (isset($args['maxwidth'])?intval($args['maxwidth']):null),
-		'maxheight' => (isset($args['maxheight'])?intval($args['maxheight']):null),
-		'force_reload' => $force_reload,
-	);
-
-
-
-	// recherche et lancement de la methode oEmbed appropriee
+	// recherche si methode oEmbed dediee
 	$methode = 'default';
 	foreach($methodes as $pattern => $action){
 		if (preg_match($pattern,$url))
 			$methode = $action;
 	}
 
+	$html = null;
+	// si pas de methode dediee, rechercher une annonce de oEmbed dans la page
+	if ($methode=='default'){
+		// decouverte du service annonce dans la page
+		include_spip('inc/distant');
+		$html = recuperer_page($url);
+		if ($redirect = oeproxy_verifier_annonce($url, $args, $html)){
+			include_spip('inc/headers');
+			redirige_par_entete($redirect,'',301);
+		}
+	}
+
+	// les deux seules options acceptees (les autres sont ignorees, d'ou qu'elles viennent)
+	// + une option interne
+	$options = array(
+		'maxwidth' => (isset($args['maxwidth'])?intval($args['maxwidth']):null),
+		'maxheight' => (isset($args['maxheight'])?intval($args['maxheight']):null),
+		'force_reload' => $force_reload,
+	);
+
 	// appeler la methode proxy qui fait le job
 	// et retourne le resultat sous forme de tableau
 	$oeproxy = charger_fonction($methode,'oeproxy');
-	$res = $oeproxy($url,$args);
+	$res = $oeproxy($url,$options,$html);
 
 
 	// si la methode renvoie un entier
@@ -120,17 +141,84 @@ function oeproxy_verifier_provider($url,$args){
 		// ne rediriger que si le provider est bien un service externe
 		if (preg_match(",^\w+://,",$provider['endpoint'])){
 			$redirect = $provider['endpoint'];
-			$redirect = parametre_url($redirect,'url',$url);
+			$redirect = parametre_url($redirect,'url',$url,'&');
 			if (isset($args['maxheight']))
-				$redirect = parametre_url($redirect,'maxheight',$args['maxheight']);
+				$redirect = parametre_url($redirect,'maxheight',$args['maxheight'],'&');
 			if (isset($args['maxwidth']))
-				$redirect = parametre_url($redirect,'maxwidth',$args['maxwidth']);
+				$redirect = parametre_url($redirect,'maxwidth',$args['maxwidth'],'&');
 			if (isset($args['format']))
-				$redirect = parametre_url($redirect,'format',$args['format']);
+				$redirect = parametre_url($redirect,'format',$args['format'],'&');
 		}
 	}
 	return $redirect;
 }
+
+
+/**
+ * Détecter les liens oembed dans le head d'une page web
+ *
+ * @param string $url
+ * @param array $args
+ * @param string $html
+ * @return string
+ */
+function oeproxy_verifier_annonce($url, $args, $html=null) {
+	$redirect = "";
+
+	if (is_null($html)){
+		// on recupere le contenu de la page
+		include_spip('inc/distant');
+		$html = recuperer_page($url);
+	}
+
+	if ($html) {
+		$providers = array();
+		// types de liens oembed à détecter
+		$linktypes = array(
+			'application/json+oembed' => 'json',
+			'text/xml+oembed' => 'xml',
+			'application/xml+oembed' => 'xml', // uniquement pour Vimeo
+		);
+
+		// on ne garde que le head de la page
+		$head = substr($html,0,stripos($html,'</head>'));
+
+		if (stripos($head,"+oembed")!==false // optimisation : eviter preg_match si rien qui ressemble
+			AND preg_match_all('/<link([^<>]+)>/i', $head, $links)) {
+			include_spip('inc/filtres');
+			foreach ($links[0] as $link) {
+				if (stripos($link,"+oembed")!==false){
+					$type = extraire_attribut($link,'type');
+					$href = extraire_attribut($link,'href');
+					if (!empty($type)
+					  AND isset($linktypes[$type])
+					  AND !empty($href)) {
+						$providers[$linktypes[$type]] = $href;
+						if (!isset($args['format'])
+						  OR $linktypes[$type]==$args['format'])
+							break;
+					}
+				}
+			}
+		}
+
+		if (count($providers)){
+			if (!isset($args['format']))
+				$redirect = reset($providers);
+			elseif (isset($providers[$args['format']]))
+				$redirect = $providers[$args['format']];
+			if ($redirect){
+				if (isset($args['maxheight']))
+					$redirect = parametre_url($redirect,'maxheight',$args['maxheight'],'&');
+				if (isset($args['maxwidth']))
+					$redirect = parametre_url($redirect,'maxwidth',$args['maxwidth'],'&');
+			}
+		}
+	}
+
+	return $redirect;
+}
+
 
 /**
  * Generer une sortie en cas d'echec

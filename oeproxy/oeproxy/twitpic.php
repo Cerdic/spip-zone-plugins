@@ -10,16 +10,31 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/distant');
 include_spip('inc/filtres');
-function oeproxy_twitpic_dist($url,$options){
+include_spip('inc/distant');
+
+/**
+ * Proxy twitpic :
+ * utilise l'api twitpic pour les metadonnees
+ * parse l'url pour la photo principale (un peu crappy mais pas trouve mieux)
+ *
+ * @param string $url
+ * @param array $options
+ * @param string $html
+ * @return array|int
+ */
+function oeproxy_twitpic_dist($url,$options,$html=null){
 
 	$id = end(explode('/',$url));
 	$url_show = "http://api.twitpic.com/2/media/show.json?id=".$id;
 
+	// recuperer la page qui servira pour trouver le media et son titre
+	if (is_null($html)){
+		$html = recuperer_page($url);
+	}
 
-	$show = recuperer_page($url_show);
-	if (!$show
+	if (!$html
+		OR !$show = recuperer_page($url_show)
 	  OR !$show = json_decode($show,true))
 		return 404;
 
@@ -30,8 +45,7 @@ function oeproxy_twitpic_dist($url,$options){
 	$width = $show['width'];
 	$height = $show['height'];
 
-	// recuperer la page pour trouver le media et son titre
-	$html = recuperer_page($url);
+	// recuperer le media et son titre dans la page
 	$img = extraire_balises($html,"img");
 	foreach($img as $i){
 		if (extraire_attribut($i,'id')=='photo-display'){

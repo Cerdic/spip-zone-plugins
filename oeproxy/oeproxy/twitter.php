@@ -18,9 +18,10 @@ include_spip('inc/distant');
  *
  * @param string $url
  * @param array $options
- * @return int|array
+ * @param string $html
+ * @return array|int
  */
-function oeproxy_twitter_dist($url,$options){
+function oeproxy_twitter_dist($url,$options,$html=null){
 
 	if(!$url
 	  OR !preg_match( ',https?://twitter.com/(?:#!/)?([^/#]+)/status(?:es)?/(\d+),i', $url, $matches )){
