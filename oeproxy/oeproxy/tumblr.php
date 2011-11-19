@@ -43,10 +43,11 @@ function oeproxy_tumblr_dist($url,$options,$html=null){
 
 	$xml = simplexml_load_string($string);
 	$post = $xml->posts->post;
-
+#var_dump($post);
 	$childs = array();
 	foreach($post->children() as $name=>$value)
-		$childs[$name]=(string)$value;
+		if (!isset($childs[$name]))
+			$childs[$name]=(string)$value;
 
 	/*
 	 * http://www.tumblr.com/docs/fr/api
@@ -119,7 +120,7 @@ function oeproxy_tumblr_dist($url,$options,$html=null){
 		case "photo":
 			$title = $childs['photo-caption'];
 			$html = $childs['photo-url'];
-			$html = "<h3>$title</h3><div>$html</div>";
+			$html = "<h3>$title</h3><div><img src='$html' /></div>";
 			break;
 		case "video":
 			$title = $childs['video-caption'];
