@@ -51,6 +51,7 @@ function oembed_upgrade($nom_meta_base_version,$version_cible){
 				'http://smugmug.com/*/*'         =>   'http://api.smugmug.com/services/oembed/',
 				'http://meetup.com/*'            =>   'http://api.meetup.com/oembed',
 				'http://meetup.ps/*'             =>   'http://api.meetup.com/oembed',
+				'http://*.wordpress.com/*'       =>   'http://public-api.wordpress.com/oembed/1.0/'
 
 
 				#'https://twitter.com/*/status/*' =>   '?action=oeproxy_twitter',

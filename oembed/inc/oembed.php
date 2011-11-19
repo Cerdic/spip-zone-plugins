@@ -75,11 +75,14 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 		//	$cache[$data_url] = false;
 	}
 
+
 	// si une fonction de post-traitement est fourni pour ce provider+type, l'utiliser
 	if ($cache[$data_url]){
 		$provider_name= strtolower($cache[$data_url]['provider_name']);
 		$type = strtolower($cache[$data_url]['type']);
-		if ($oembed_provider_posttraite = charger_fonction("posttraite_{$provider_name}_$type",'oembed/input',true))
+		// securisons le nom de la fonction (provider peut contenir n'importe quoi)
+		$f = preg_replace(",\W,","","posttraite_{$provider_name}_$type");
+		if ($oembed_provider_posttraite = charger_fonction($f,'oembed/input',true))
 			$cache[$data_url] = $oembed_provider_posttraite($cache[$data_url],$url);
 
 		ecrire_fichier($oembed_cache,serialize($cache[$data_url]));
