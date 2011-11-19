@@ -26,6 +26,7 @@ function action_api_oeproxy_dist($args = null){
 	static $methodes = array(
 		',^https?://(www.)?twitpic.com/[^/]+,i' => 'twitpic',
 		',https?://twitter.com/(?:#!/)?([^/#]+)/status(?:es)?/(\d+),i' => 'twitter',
+		',\w+://([\w]+).tumblr.com/post/([^/]+).*,i' => 'tumblr',
 
 	);
 	static $support_formats = array(
