@@ -1,11 +1,11 @@
 <paquet
 	prefix="oembed"
 	categorie="multimedia"
-	version="0.6.3"
+	version="0.6.4"
 	etat="test"
 	compatibilite="[3.0.0-beta;["
 	logo="prive/themes/spip/images/oembed-32.png"
-	schema="0.2"
+	schema="0.3.0"
 >
 
 	<nom>oEmbed</nom>
