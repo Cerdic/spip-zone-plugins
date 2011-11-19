@@ -1,22 +1,24 @@
 <paquet
 	prefix="pays"
 	categorie="divers"
-	version="1.1.0"
+	version="2.0.0"
 	etat="stable"
-	compatibilite="[3.0.0-alpha2;["
+	compatibilite="[3.0.0-alpha2;3.0.*]"
 	logo="img/pays_32x32.png"
 	schema="1.2.1"
 	documentation="http://www.spip-contrib.net/Liste-des-pays-avec-codes-ISO-3166-1"
 >	
 	<nom>Pays ISO 3166-1</nom>
+	<!-- Liste officielle des pays -->
+
 	<auteur>Collectif SPIP</auteur>
-	
-	<auteur lien="http://www.cym.fr">Cyril MARION, Ateliers CYM</auteur>
-	<licence>GNU/GPL</licence>
+	<auteur lien="http://www.cym.fr">Cyril MARION</auteur>
+	<auteur lien="http://www.cym.fr">Ateliers CYM</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 	
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/pays.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/pays.php" />
 
-	<utilise nom='saisies' compatibilite='[1.0;' /> 
-
+	<utilise nom='saisies' compatibilite='[1.0;[' /> 
 </paquet>
