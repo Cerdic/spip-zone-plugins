@@ -9,7 +9,7 @@
 	Permet aux administrateurs de remplacer en s&#233;rie des mots-clef par d'autres, pour diminuer le nombre de mots-clef et &#233;viter les redondances.
 	</description>
 	<etat>test</etat>
-	<necessite id="SPIP" version="[2.1;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<prefix>fusionmots</prefix>
 	<icon>images/fusion_mots_64.png</icon>
 
@@ -19,7 +19,7 @@
 	</bouton>
 	<bouton id="fusionmots2" parent="naviguer">
 	   	<titre>fusionmots:fusionmots</titre>
-	   	<exec>fusionmots</exec>
+	   	<url>fusionmots</url>
 		<icone>images/fusion_mots_24.png</icone>
 	</bouton>
 	<pipeline>
@@ -27,5 +27,4 @@
         <inclure>fusionmots_pipeline.php</inclure>
     </pipeline>
     <lien>http://www.spip-contrib.net/Fusion-de-mots-clef</lien>
-
 </plugin>
