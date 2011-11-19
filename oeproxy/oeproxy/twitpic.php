@@ -30,11 +30,11 @@ function oeproxy_twitpic_dist($url,$options,$html=null){
 
 	// recuperer la page qui servira pour trouver le media et son titre
 	if (is_null($html)){
-		$html = recuperer_page($url);
+		$html = recuperer_page_cache($url);
 	}
 
 	if (!$html
-		OR !$show = recuperer_page($url_show)
+		OR !$show = recuperer_page_cache($url_show)
 	  OR !$show = json_decode($show,true))
 		return 404;
 

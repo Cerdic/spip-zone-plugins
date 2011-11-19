@@ -72,7 +72,7 @@ function action_api_oeproxy_dist($args = null){
 	if ($methode=='default'){
 		// decouverte du service annonce dans la page
 		include_spip('inc/distant');
-		$html = recuperer_page($url);
+		$html = recuperer_page_cache($url);
 		if ($redirect = oeproxy_verifier_annonce($url, $args, $html)){
 			include_spip('inc/headers');
 			redirige_par_entete($redirect,'',301);
@@ -168,7 +168,7 @@ function oeproxy_verifier_annonce($url, $args, $html=null) {
 	if (is_null($html)){
 		// on recupere le contenu de la page
 		include_spip('inc/distant');
-		$html = recuperer_page($url);
+		$html = recuperer_page_cache($url);
 	}
 
 	if ($html) {
@@ -248,4 +248,35 @@ function oeproxy_echec($status=404){
 	flush();
 	ob_flush();
 	exit;
+}
+
+
+if (!defined('_DUREE_CACHE_HTML_PAGE'))
+	define('_DUREE_CACHE_HTML_PAGE',3600);
+/**
+ * Recuperer une URL distante avec un cache file d'une 1H
+ * et utilisation du not-modified-since au dela
+ *
+ * @param $url
+ * @return bool|int|string
+ */
+function recuperer_page_cache($url){
+	static $now = null;
+	if (!$now) $now = time();
+
+	$cache = md5($url);
+	$dir = sous_repertoire(_DIR_CACHE,substr($cache,0,1));
+	$cache = $dir."htmlcache-$cache.html";
+
+	$date = 0;
+	if (!file_exists($cache)
+	  OR !$date=filemtime($cache)
+	  OR $date<$now-_DUREE_CACHE_HTML_PAGE){
+
+		include_spip('inc/distant');
+		copie_locale($url,'modif',$cache);
+	}
+
+	lire_fichier($cache,$html);
+	return $html;
 }

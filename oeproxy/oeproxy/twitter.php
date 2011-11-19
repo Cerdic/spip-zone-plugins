@@ -38,7 +38,7 @@ function oeproxy_twitter_dist($url,$options,$html=null){
 	// and let oEmbed handle the response.
 	// fetch http://api.twitter.com/1/statuses/show/$tweet.json
 	$apiurl = 'http://api.twitter.com/1/statuses/show/'.$tweetid.'.json';
-	if (!$result = recuperer_page($apiurl)){
+	if (!$result = recuperer_page_cache($apiurl)){
 		spip_log("could not fetch $apiurl",'oep_twitter');
 		return 404;
 	}

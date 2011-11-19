@@ -14,8 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function oeproxy_default_dist($url,$options,$html=null){
 
 	if (is_null($html)){
-		include_spip('inc/distant');
-		$html = recuperer_page($url);
+		$html = recuperer_page_cache($url);
 	}
 
 	if (!$html)
