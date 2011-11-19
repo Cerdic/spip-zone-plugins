@@ -117,7 +117,7 @@ function action_api_oeproxy_dist($args = null){
 		$res['cache_age'] = 7*24*3600;
 
 
-	$output = charger_fonction($format,'oeoutput');
+	$output = charger_fonction($format,'oembed/output');
 	$output($res);
 
 	flush();
