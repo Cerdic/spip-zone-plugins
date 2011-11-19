@@ -27,4 +27,33 @@ function balise_MIME_TYPE_dist($p) {
     return $p;
 }
 
+function oembed_output($args){
+	if (!is_array($args))
+		$args = unserialize($args);
+
+	if (!$args
+	  OR !isset($args['url'])
+	  OR !$url = $args['url'])
+		return "";
+
+	include_spip('inc/url');
+	define('_DEFINIR_CONTEXTE_TYPE_PAGE',true);
+	list($fond,$contexte,$url_redirect) = urls_decoder_url($url,'',$args);
+	if (!isset($contexte['type-page'])
+	  OR !$type=$contexte['type-page'])
+		return "";
+
+	$res = "";
+	// chercher le modele json si il existe
+	if (trouver_fond($f="oembed/output/modeles/$type.json")){
+		$res = trime(recuperer_fond($f,$contexte));
+		if (isset($args['format']) AND $args['format']=='xml'){
+			$res = json_decode($res,true);
+			$output = charger_fonction("xml","oembed/output");
+			$res = $output($res, false);
+		}
+	}
+
+	return $res;
+}
 ?>

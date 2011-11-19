@@ -1,0 +1,22 @@
+<?php
+/**
+ * Plugin oEmbed
+ * Licence GPL3
+ *
+ */
+
+/**
+ * Generer une sortie json a partit d'un tableau associatif
+ * @param array $res
+ * @param bool $output
+ * @return void|string
+ */
+function oembed_output_json_dist($res, $output=true){
+
+	$out = json_encode($res);
+	if (!$output)
+		return $out;
+
+	header("Content-type: application/json; charset=utf-8");
+	echo $out;
+}
