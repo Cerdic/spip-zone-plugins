@@ -269,12 +269,13 @@ function recuperer_page_cache($url){
 	$cache = $dir."htmlcache-$cache.html";
 
 	$date = 0;
-	if (!file_exists($cache)
+	if (_VAR_MODE
+		OR !file_exists($cache)
 	  OR !$date=filemtime($cache)
 	  OR $date<$now-_DUREE_CACHE_HTML_PAGE){
 
 		include_spip('inc/distant');
-		copie_locale($url,'modif',$cache);
+		copie_locale($url,_VAR_MODE?'force':'modif',$cache);
 	}
 
 	lire_fichier($cache,$html);
