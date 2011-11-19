@@ -46,7 +46,7 @@ function oembed_output($args){
 	$res = "";
 	// chercher le modele json si il existe
 	if (trouver_fond($f="oembed/output/modeles/$type.json")){
-		$res = trime(recuperer_fond($f,$contexte));
+		$res = trim(recuperer_fond($f,$contexte));
 		if (isset($args['format']) AND $args['format']=='xml'){
 			$res = json_decode($res,true);
 			$output = charger_fonction("xml","oembed/output");
