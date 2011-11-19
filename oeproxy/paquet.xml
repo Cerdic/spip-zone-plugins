@@ -11,6 +11,6 @@
 	<auteur lien="http://www.yterium.com">C&#233;dric Morin</auteur>
 	<licence>GPL</licence>
 
-	<necessite nom="Readability" compatibilite="[0.1.1;[" />
+	<necessite nom="Readability" compatibilite="[0.2.0;[" />
 	<necessite nom="oembed" compatibilite="[0.6.0;[" />
 </paquet>
