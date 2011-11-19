@@ -1,5 +1,5 @@
 <?php
-function switcher_affichage_final($texte){
+function tswitcher_affichage_final($texte){
 
 	global 	$html;
 	global $squelettes_alternatifs;

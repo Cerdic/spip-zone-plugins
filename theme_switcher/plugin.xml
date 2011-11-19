@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Theme Switcher
-	</nom>
+	<nom>Switcher</nom>
+	<slogan>Switcheur de th&#232;mes</slogan>
 	<auteur>	<!-- Auteur du plugin -->
-	StephK adaptation  pour les th&egrave;mes du plugin switcher de Philippe Drouot et de Fil - Distribu&#233; sous licence GNU/GPL
+	StephK, adaptation  pour les th&egrave;mes du plugin switcher de Philippe Drouot et de Fil - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
-	0.1
+	0.1.0
 	</version>
 	<etat>
 	test
@@ -15,12 +13,12 @@
 	<description>
 	<multi>
 	[fr]
-	Ajoute une liste d&#233;roulante permettant de basculer entre les th&egrave;mes du r&#233;pertoire themes.
+	Ajoute une liste d&#233;roulante permettant de basculer entre les th&#232;mes du r&#233;pertoire themes.
 	</multi>
 	</description>
 	<lien>[->http://www.spip-contrib.net/Switcher-de-themes-pour-l-espace]</lien> <!-- URI de documentation -->
 	<prefix> 
-	switcher
+	tswitcher
 	</prefix>	
 	<options>
 	switcher.php
@@ -34,6 +32,6 @@
 		<nom>insert_head</nom>
 		<inclure>head.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[2.0.10;2.0.99]" />
 	<categorie>maintenance</categorie>
 </plugin>

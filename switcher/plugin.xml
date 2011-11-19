@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
 	<nom>Switcher</nom>
-	<slogan>Switcher de squelettes</slogan>
+	<slogan>Switcheur de squelettes</slogan>
 	<auteur>Philippe Drouot, adaptation en plugin de la contrib switcher de Fil</auteur>
-	<licence>&#169; 2006 - GNU/GPL</licence>
+	<licence>&#169; 2006, GNU/GPL</licence>
 	<version>0.1.0</version>
 	<etat>test</etat>
 	<description>
