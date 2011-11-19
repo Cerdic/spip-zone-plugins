@@ -1,0 +1,29 @@
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#menu_lang {
+    list-style: none outside none;    
+}
+
+#menu_lang li {
+    float: left;
+}
+
+#menu_lang li a, #menu_lang li span {
+    border-left: 1px solid #000;
+    padding: 0 5px 0 5px;
+    font-size: 11px;
+}
+
+#menu_lang li.first a, #menu_lang li.first span {
+    border: none;
+}
+
+#menu_lang li.last a, #menu_lang li.last span {
+    padding-right: 0;
+}
+
+#menu_lang li a:hover {
+    text-decoration: underline;
+}
