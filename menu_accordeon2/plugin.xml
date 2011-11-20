@@ -1,9 +1,9 @@
 <plugin>
-	<nom>Menu accord&#233;on 2</nom>
+	<nom>Menu accord&#233;on</nom>
 	<slogan>Animer le menu de SPIP avec un effet d'ouverture de tiroir</slogan>
 	<licence>GPL</licence>
 	<categorie>navigation</categorie>
-	<auteur>Ma&#239;eul Rouquette d'apr&#232;s b_b</auteur>
+	<auteur>[Ma&#239;eul Rouquette->http://www.maieul.net] d'apr&#232;s b_b</auteur>
 	<version>2.1.1</version>
 	<lien>http://www.spip-contrib.net/?article3763</lien>
 	<etat>test</etat>
