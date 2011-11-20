@@ -28,6 +28,7 @@ function action_api_oeproxy_dist($args = null){
 		',https?://twitter.com/(?:#!/)?([^/#]+)/status(?:es)?/(\d+),i' => 'twitter',
 		',\w+://([\w]+).tumblr.com/post/([^/]+).*,i' => 'tumblr',
 		',\w+://([\w]+).wikipedia.org/wiki/([^/]+).*,i' => 'wikipedia',
+		',^https?://.*facebook.com/(people/[^/]+/(\d+).*|([^/]+$)),i' => 'facebook',
 
 	);
 	static $support_formats = array(
