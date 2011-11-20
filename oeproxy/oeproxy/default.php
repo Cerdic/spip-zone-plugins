@@ -23,6 +23,7 @@ function oeproxy_default_dist($url,$options,$html=null){
 	include_spip('inc/readability');
 	$res = readability_html($html,'array');
 	// passer les liens en absolu !
+	include_spip('inc/filtres_mini');
 	$res = liens_absolus($res,$url);
 
 	$result = array(
