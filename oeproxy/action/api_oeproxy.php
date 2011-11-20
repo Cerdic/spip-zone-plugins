@@ -29,6 +29,7 @@ function action_api_oeproxy_dist($args = null){
 		',\w+://([\w]+).tumblr.com/post/([^/]+).*,i' => 'tumblr',
 		',\w+://([\w]+).wikipedia.org/wiki/([^/]+).*,i' => 'wikipedia',
 		',^https?://.*facebook.com/(people/[^/]+/(\d+).*|([^/]+$)),i' => 'facebook',
+		',^http://(?:www.)?imdb.com/title/([^/]+),i' => 'imdb'
 
 	);
 	static $support_formats = array(
