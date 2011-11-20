@@ -4,7 +4,7 @@
     <slogan>Cr&#233;er une rubrique &#224; l'inscription d'un admin</slogan>
 
     <!-- Auteur du plugin -->
-    <auteur>Ma&#239;eul Rouquette sur une id&#233;e de Jean-No&#235;l Moreau</auteur>
+    <auteur>[Ma&#239;eul Rouquette->http://www.maieul.net] sur une id&#233;e de Jean-No&#235;l Moreau</auteur>
     <version>0.6.0</version>
     <version_base>0.3</version_base>
   
@@ -40,5 +40,6 @@
 
 	<install>base/rubrique_a_linscription.php</install>
   	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+  	<lien>http://www.spip-contrib.net/Rubrique-a-l-inscription</lien>
 	<categorie>auteur</categorie>
 </plugin>
