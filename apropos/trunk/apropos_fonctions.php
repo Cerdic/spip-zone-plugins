@@ -171,6 +171,9 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 				//je récupère la description complète, la version avec svn, le crédit et la licence
 				$get_desc = charger_fonction('afficher_plugin','plugins');
 				$slogan = PtoBR(plugin_propre($info['description'], "$dir/lang/paquet-$prefix"));
+				if ($slogan!==''){
+					$slogan = PtoBR(plugin_propre($info['slogan'], "$dir/lang/paquet-$prefix"));
+				}
 				$documentation = $info['documentation'];
 				if ($documentation != ''){
 					$documentation = "<div class='apropos-description'>"._T('apropos:la_documentation')." <a href=\"".$info['documentation']."\">".$info['documentation']."</a></div>";
