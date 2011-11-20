@@ -29,6 +29,11 @@ function oembed_upgrade($nom_meta_base_version,$version_cible){
 }
 
 function oembed_update_new_providers(){
+
+	// voir
+	// http://oembed.com/
+	// http://code.google.com/p/oohembed/source/browse/app/provider/endpoints.json
+	// https://github.com/starfishmod/jquery-oembed-all/blob/master/jquery.oembed.js
 	$providers = array(
 		'http://*.youtube.com/watch*'    =>   'http://www.youtube.com/oembed',
 		'http://youtu.be/*'              =>   'http://www.youtube.com/oembed',
