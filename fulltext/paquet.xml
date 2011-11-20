@@ -1,0 +1,32 @@
+<paquet
+	prefix="fulltext"
+	categorie="navigation"
+	version="0.6.6"
+	etat="dev"
+	compatibilite="[2.0.0;3.0.99]"
+	logo="fulltext.png"
+	schema="0.2"
+	documentation="http://www.spip-contrib.net/Fulltext"
+>	
+
+	<nom>Fulltext</nom>
+	<!-- Indexation FULLTEXT pour accélérer les recherches -->
+
+	<auteur>Fil</auteur>
+	<auteur>Gael Chareyre</auteur>
+
+	<copyright>2009-2011</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<traduire module="fulltext" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="declarer_tables_principales" inclure="base/fulltext.php" />
+	<pipeline nom="autoriser" inclure="fulltext_autoriser.php" />
+	<pipeline nom="taches_generales_cron" inclure="fulltext_pipelines.php" />
+
+	<menu nom="fulltext" titre="Fulltext - Index" parent="bando_configuration" icone="images/fulltext-22.png" />
+	<menu nom="fulltext_document" titre="Fulltext - Documents" parent="bando_configuration" icone="images/fulltext-22.png" />
+
+	<onglet nom="fulltext" titre="Fulltext" parent="configuration" icone="fulltext-22.png" />
+</paquet>
