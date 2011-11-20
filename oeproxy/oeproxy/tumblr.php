@@ -100,42 +100,42 @@ function oeproxy_tumblr_dist($url,$options,$html=null){
 		case "regular":
 			$title = $childs['regular-title'];
 			$html = $childs['regular-body'];
-			$html = ($title?"<h3>$title</h3>":"")."<div>$html</div>";
+			$html = oeproxy_cite($url,$title,$html);
 			break;
 		case "link":
 			$title = '<a href="'.$childs['link-url'].'">'.$childs['link-text'].'</a>';
 			$html = $childs['link-description'];
-			$html = ($title?"<h3>$title</h3>":"")."<div>$html</div>";
+			$html = oeproxy_cite($url,$title,$html);
 			break;
 		case "quote":
 			$title = $childs['quote-source'];
 			$html = $childs['quote-text'];
-			$html = ($title?"<h3>$title</h3>":"")."<div>$html</div>";
+			$html = oeproxy_cite($url,$title,$html);
 			break;
 		case "conversation":
 			$title = $childs['conversation-title'];
 			$html = $childs['conversation-text'];
-			$html = ($title?"<h3>$title</h3>":"")."<div>$html</div>";
+			$html = oeproxy_cite($url,$title,$html);
 			break;
 		case "photo":
 			$title = $childs['photo-caption'];
 			$html = $childs['photo-url'];
-			$html = ($title?"<h3>$title</h3>":"")."<div><img src='$html' /></div>";
+			$html = "<div><a href='$url'><img src='$html' alt='".attribut_html($title)."'/></a></div>";
 			break;
 		case "video":
 			$title = $childs['video-caption'];
 			$html = $childs['video-player'];
-			$html = ($title?"<h3>$title</h3>":"")."<div>$html</div>";
+			$html = oeproxy_cite($url,$title,$html);
 			break;
 		case "audio":
 			$title = $childs['audio-caption'];
 			$html = $childs['audio-player'];
-			$html = ($title?"<h3>$title</h3>":"")."<div>$html</div>";
+			$html = oeproxy_cite($url,$title,$html);
 			break;
 		case "answer":
 			$title = $childs['question'];
 			$html = $childs['answer'];
-			$html = ($title?"<h3>$title</h3>":"")."<div>$html</div>";
+			$html = oeproxy_cite($url,$title,$html);
 			break;
 	}
 

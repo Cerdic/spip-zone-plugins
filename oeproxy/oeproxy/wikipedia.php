@@ -42,7 +42,6 @@ function oeproxy_wikipedia_dist($url,$options,$html=null){
 	$html = (string)$xml->parse->text;
 	$html = liens_absolus($html,$url);
 
-
 	$result = array(
 		// type (required)
     // The resource type. Valid values, along with value-specific parameters, are described below.
@@ -58,7 +57,7 @@ function oeproxy_wikipedia_dist($url,$options,$html=null){
 
 		// html (required)
     // The HTML required to display the resource. The HTML should have no padding or margins. Consumers may wish to load the HTML in an off-domain iframe to avoid XSS vulnerabilities. The markup should be valid XHTML 1.0 Basic.
-		'html' => $html,
+		'html' => oeproxy_cite($url,$title,$html),
 
 		// width (required)
     // The width in pixels required to display the HTML.

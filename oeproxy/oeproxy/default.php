@@ -23,6 +23,8 @@ function oeproxy_default_dist($url,$options,$html=null){
 	include_spip('inc/readability');
 	$res = readability_html($html,'array');
 
+
+
 	$result = array(
 		// type (required)
     // The resource type. Valid values, along with value-specific parameters, are described below.
@@ -38,7 +40,7 @@ function oeproxy_default_dist($url,$options,$html=null){
 
 		// html (required)
     // The HTML required to display the resource. The HTML should have no padding or margins. Consumers may wish to load the HTML in an off-domain iframe to avoid XSS vulnerabilities. The markup should be valid XHTML 1.0 Basic.
-		'html' => $res['content'],
+		'html' => oeproxy_cite($url,$res['title'],$res['content']),
 
 		// width (required)
     // The width in pixels required to display the HTML.

@@ -155,6 +155,11 @@ function oeproxy_verifier_provider($url,$args){
 	return $redirect;
 }
 
+function oeproxy_cite($url,$title,$html){
+	$html = "<h4 class='title'><a href='$url'>".($title?$title:$url)."</a></h4>"
+	        . "<blockquote class='spip' cite='$url'>$html</blockquote>";
+	return $html;
+}
 
 /**
  * Détecter les liens oembed dans le head d'une page web
