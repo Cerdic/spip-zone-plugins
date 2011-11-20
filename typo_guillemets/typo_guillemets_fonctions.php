@@ -1,4 +1,12 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function typo_guillemets_insert_head_css($flux) {
+	$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('css/typo_guillemets.css').'" media="all" />'."\n";
+	return $flux;
+}
+
 /*
 Fichier de formatage typographique des guillemets, par Vincent Ramos
 <spip_dev AD kailaasa PVNCTVM net>, sous licence GNU/GPL.
@@ -18,8 +26,6 @@ aucune information n'a ete trouvee. Par defaut, les guillements sont alors
 de la forme &ldquo;mot&rdquo;, sauf si la barre d'insertion de SPIP proposait
 deja une autre forme.
 */
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
 function typo_guillemets_remplacements($texte) {
 
 	// si le texte ne contient pas de guill droit

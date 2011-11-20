@@ -3,7 +3,7 @@
 	<prefix>typo_guillemets</prefix>
 	<icon>icon.png</icon>
 	
-	<version>1.4.0</version>
+	<version>1.5.0</version>
 	<etat>stable</etat>
 	<categorie>edition</categorie>
 	
@@ -12,7 +12,9 @@
 	<lien>http://www.spip-contrib.net/article1592.html</lien>
 	<auteur>[Vincent Ramos->http://www.spip-contrib.net/auteur7639.html]</auteur>
 	<licence>GNU/GPL</licence>
-	
+
+	<fonctions>typo_guillemets_fonctions.php</fonctions>
+	<options>typo_guillemets_options.php</options>
 	<pipeline>
 		<nom>post_typo</nom>
 		<action>remplacements</action>
@@ -20,8 +22,8 @@
 	</pipeline>
 	<pipeline>
 		<nom>insert_head_css</nom>
-		<inclure>typo_guillemets_pipelines.php</inclure>
+		<inclure>typo_guillemets_fonctions.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
 </plugin>
