@@ -169,9 +169,11 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 				."Erreur dans la saisie du préfixe du plugin.</span><br />Vous avez entré <b>".$params."</b> comme préfixe. Vérifiez ce dernier qui se trouve dans le fichier paquet.xml ou plugin.xml du plugin.";
 				}else{
 				//je récupère la description complète, la version avec svn, le crédit et la licence
-				$get_desc = charger_fonction('afficher_plugin','plugins');
+				//$get_desc = charger_fonction('afficher_plugin','plugins');
 				$slogan = PtoBR(plugin_propre($info['description'], "$dir/lang/paquet-$prefix"));
-				if ($slogan!==''){
+
+				// prise en compte des plugin sans tag description (ex crayons dans sa version
+				if ((strpos($slogan, "_description")) !==FALSE) { // $dir."/lang/paquet-".$prefix.":".$prefix."_description"){ //$dir."/lang/paquet-".$prefix.":".$prefix."_description"){
 					$slogan = PtoBR(plugin_propre($info['slogan'], "$dir/lang/paquet-$prefix"));
 				}
 				$documentation = $info['documentation'];
