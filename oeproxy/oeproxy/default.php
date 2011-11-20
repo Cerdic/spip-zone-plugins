@@ -22,8 +22,8 @@ function oeproxy_default_dist($url,$options,$html=null){
 
 	include_spip('inc/readability');
 	$res = readability_html($html,'array');
-
-
+	// passer les liens en absolu !
+	$res = liens_absolus($res,$url);
 
 	$result = array(
 		// type (required)
