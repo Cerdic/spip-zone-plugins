@@ -47,6 +47,7 @@ function oembed_output($args){
 	// chercher le modele json si il existe
 	if (trouver_fond($f="oembed/output/modeles/$type.json")){
 		$res = trim(recuperer_fond($f,$contexte));
+
 		if (isset($args['format']) AND $args['format']=='xml'){
 			$res = json_decode($res,true);
 			$output = charger_fonction("xml","oembed/output");
@@ -55,5 +56,13 @@ function oembed_output($args){
 	}
 
 	return $res;
+}
+/**
+ * un filtre pour json_encode avec les bonnes options, pour l'export json des modeles
+ * @param $texte
+ * @return string
+ */
+function json_encode_html($texte){
+	return json_encode($texte,JSON_HEX_TAG);
 }
 ?>
