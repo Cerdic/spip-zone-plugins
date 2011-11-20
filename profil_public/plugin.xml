@@ -4,9 +4,8 @@
 	<auteur>cris</auteur>
 	<version>0.1</version>
 	<etat>test</etat>
-	
 	<description>
-	le plugin  permet de cr&#233;er une page perso pour les auteurs enregistr&#233;s, 
+	Le plugin  permet de cr&#233;er une page perso pour les auteurs enregistr&#233;s, 
 	rassemblant divers widgets d&#233;placables, r&#233;ductibles et refermables &agrave; l'envie
 	l'appel se fait via la page spip.php?page=profil.
 	Vous pouvez choisir les widgets &agrave; afficher avec cfg
@@ -15,10 +14,10 @@
 	<icon>img/icon.png</icon>
 	<prefix>profilpublic</prefix>
 	<pipeline>
-	<nom>insert_head</nom>
-	<inclure>profilpublic.php</inclure>
+		<nom>insert_head</nom>
+		<inclure>profilpublic.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version='[2.1;]' />
+	<necessite id="SPIP" version='[2.1.0;2.1.99]' />
 	<necessite id="jqueryui" version="[1.8.5;]" />
 	<necessite id="cfg" version="[1.16.0;]" />
 	<utilise id="contacts" version="[1.7.0;]"/>
