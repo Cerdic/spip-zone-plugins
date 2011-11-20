@@ -5,6 +5,7 @@
 .oe-tweet-text {clear:left; font-size: 1.3em;margin: 10px 0;}
 
 .oe-fb-user-block img {float:left;margin-right: 10px;margin-bottom:10px;}
+.oe-imdb-title img {float:left;margin-right: 10px;margin-bottom:10px;}
 
 /* Oembed generique */
 .oembed.oe-rich {display: block;background: #fff;padding: 10px;border: 1px solid #eee;margin: 1em 0;}
