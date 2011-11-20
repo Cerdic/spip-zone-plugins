@@ -8,8 +8,8 @@
 	<lien>http://www.spip-contrib.net/?article3762</lien>
 	<etat>dev</etat>
 	<icon>img/annuaire.jpg</icon>
-	<prefix>annuaire</prefix>
-	<fonctions>annuaire_fonctions.php</fonctions>
+	<prefix>zannuaire</prefix>
+	<fonctions>zannuaire_fonctions.php</fonctions>
 
 	<bouton id='annuaire' parent='configuration'>
 	<icone>img/annuaire.jpg</icone>
