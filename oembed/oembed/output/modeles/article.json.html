@@ -8,5 +8,6 @@
 	"width":[(#ENV{maxwidth,#CONFIG{oembed/maxwidth,480}}|json_encode)],
 	"height":[(#ENV{maxheight,#CONFIG{oembed/maxheight,295}}|json_encode)],
 	"url":[(#URL_ARTICLE|url_absolue|json_encode)],
-	"html":[(#INTRODUCTION|json_encode)]
+	[(#SET{html,[<h4 class='title'><a href="#URL_ARTICLE">(#TITRE)</a></h4><blockquote class="spip">#INTRODUCTION</blockquote>]})
+	]"html":[(#GET{html}|json_encode)]
 }</BOUCLE_art>
