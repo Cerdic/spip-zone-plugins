@@ -40,7 +40,7 @@ function FEN2classic($fen) {
 }
 
 // cree un echiquier vierge
-function image_echiquier() {
+function image_echiquier($flip) {
 	// qq initialisations 
 	global $jeux_couleurs;
 	$light = $jeux_couleurs[jeux_config('blancs')];
@@ -52,7 +52,13 @@ function image_echiquier() {
 	
 	if ($nomfichier && ($url = find_in_path('img/echiquiers/' . $nomfichier))){
 		// ici une image d'echiquier est demandee
-		$board = imagecreatefrompng($url);
+		if (!$flip) {
+			$board = imagecreatefrompng($url);
+		}
+		else {			
+			$url=str_replace('.png','2.png',$url);
+			$board = imagecreatefrompng($url);
+		}
 		if(!$board)
 			die("Erreur lors de la creation de l'image : img/echiquiers/$nomfichier");
 		// recupere la largeur (on suppose l'image carree)
@@ -64,6 +70,7 @@ function image_echiquier() {
 		if(preg_match(',\((\d+)\-(\d+)\),', $nomfichier, $regs)) {
 			jeux_config_set('xori', $regs[1]);
 			jeux_config_set('yori', $regs[2]);		
+			jeux_config_set('coords', 'non');	//évite a l'utilisateur de la faire	(plante si à oui)
 		} else {
 			jeux_config_set('xori', 0);
 			jeux_config_set('yori', 0);		
@@ -80,15 +87,16 @@ function image_echiquier() {
 		for ($j=0 ; $j<8 ; $j++) 
 		  if (($i+$j) & 1) imagecopy($board,$square,$i*$taille,$j*$taille,0,0,$taille,$taille);
 	}
-	if ($bordure)	{ 
+	// if ($bordure)	{ 
 		// inutile autrement
+		//permet de transformer l'image en truecolor si le plateau est en 256
 		$chessboard = imagecreatetruecolor($board_size+2*$bordure,$board_size+2*$bordure);
 		$black_color = imagecolorallocate($chessboard,0,0,0);
 		imagefill($chessboard,0,0,$black_color);
 		imagecopy($chessboard,$board,$bordure,$bordure,0,0,$board_size,$board_size);
 		return $chessboard;
-	}
-	return $board;
+	//}
+	//return $board;
 }
 
 // mets une piece sur l'echiquier

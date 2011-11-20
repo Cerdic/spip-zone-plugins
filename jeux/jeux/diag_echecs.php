@@ -123,11 +123,13 @@ function calcul_diagramme_echecs($position, $coloration, $indexJeux) {
 			AND (time()-@filemtime($fichier_dest) < 24*3600*$nbjour))
 		 return $image;
 
-	$chessboard = image_echiquier();
+	
 
 // *********************	
 	//for ($i=0 ; $i<count($table) ; $i++)  if ( $table[$i] == "r" ) $flip = true;
 	if (in_array('r', $table)) $flip = true;
+	
+	$chessboard = image_echiquier($flip);
 	
 
 	// *************** CASE A COLORIER & LIGNE A TRACER *************************
