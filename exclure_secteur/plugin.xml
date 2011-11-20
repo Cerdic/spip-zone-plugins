@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Exclure secteur</nom>
 	<slogan>Exclure automatiquement des boucles certains secteurs</slogan>
-	<auteur>Ma&#239;eul Rouquette</auteur>
+	<auteur>[Ma&#239;eul Rouquette->http://www.maieul.net]</auteur>
 	<licence>GPL3</licence>
 	<icon>exclure_secteur.jpg</icon>
 	<version>1.2.0</version>
