@@ -22,9 +22,10 @@ function oeproxy_default_dist($url,$options,$html=null){
 
 	include_spip('inc/readability');
 	$res = readability_html($html,'array');
+
 	// passer les liens en absolu !
 	include_spip('inc/filtres_mini');
-	$res = liens_absolus($res,$url);
+	$res['content'] = liens_absolus($res['content'],$url);
 
 	$result = array(
 		// type (required)
