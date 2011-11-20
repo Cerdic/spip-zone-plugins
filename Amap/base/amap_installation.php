@@ -48,6 +48,11 @@ function amap_upgrade($nom_meta_version_base, $version_cible){
 			spip_log("Creation du champ type_adherent V0.9", "amap_installation");
 			ecrire_meta($nom_meta_version_base, $current_version=$version_cible, 'non');
 			}
+		if (version_compare($current_version,'1.0','<')) {
+			maj_tables("spip_amap_paniers");
+			spip_log("Maj de la table amap_paniers V1.0", "amap_installation");
+			ecrire_meta($nom_meta_version_base, $current_version=$version_cible, 'non');
+			}
 		}
 }
 function amap_vider_tables($nom_meta_version_base){

@@ -9,8 +9,8 @@
 	</description>
 
 	<auteur>St&#233;phane Moulinet, E-cosystems, [Pierre KUHN->http://www.pierre-kuhn.org] </auteur>
-	<version>2.1.5</version>
-	<version_base>0.9</version_base>
+	<version>2.1.6</version>
+	<version_base>1.0</version_base>
 
 	<licence>GNU/GPL - (c) 2010 - 2011</licence>
 	<etat>dev</etat>

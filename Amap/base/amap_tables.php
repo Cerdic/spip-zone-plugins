@@ -112,6 +112,7 @@ function amap_declarer_tables_principales($tables_principales){
 	$spip_amap_paniers = array(
 		'id_amap_panier'  => 'bigint NOT NULL AUTO_INCREMENT',
 		'id_auteur'  => 'bigint NOT NULL',
+		'id_producteur'  => 'bigint NOT NULL',
 		'date_distribution'  => 'datetime DEFAULT "0000-00-00 00:00:00" NOT NULL',
 		);
 	$spip_amap_paniers_key = array(

@@ -25,6 +25,8 @@ function insert_amap_panier() {
 	$les_dates = _request('date_distribution');
 	// l'auteur
 	$id_auteur_adherent = _request('id_auteur');
+	// le producteur
+	$id_auteur_producteur = _request('id_producteur');
 	// pour chaque date, remplir un tableau de données correspondant à un amap_panier et l'enregistrer
 	$id_amap_panier = 0;
 	$i = 0;
@@ -32,6 +34,7 @@ function insert_amap_panier() {
 	foreach ($les_dates as $date_distrib) {
 		$data_insert = array();
 		$data_insert['id_auteur'] = (int)$id_auteur_adherent;
+		$data_insert['id_producteur'] = (int)$id_auteur_producteur;
 		$data_insert['date_distribution'] = (string)$date_distrib;
 		$data[] = $data_insert;
 
@@ -52,11 +55,12 @@ function revision_amap_panier($id_amap_panier, $c=false) {
 	
 	include_spip('inc/modifier');
 	$err = '';
-
 	// l'auteur
 	$id_auteur = _request('id_auteur');
-	sql_updateq("spip_amap_paniers", array("id_auteur" => $id_auteur), "id_amap_panier=$id_amap_panier") ;
-	spip_log("Le panier $id_amap_panier à l'auteur $id_auteur", "amap_installation");
+	// le producteur
+	$id_producteur = _request('id_producteur');
+	sql_updateq("spip_amap_paniers", array("id_auteur" => $id_auteur, "id_producteur" => $id_producteur), "id_amap_panier=$id_amap_panier") ;
+	spip_log("Le panier $id_amap_panier à l'auteur $id_producteur", "amap_installation");
 
 	return $err;
 }

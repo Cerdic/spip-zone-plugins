@@ -11,7 +11,7 @@ function formulaires_editer_amap_panier_charger_dist($id_amap_panier='new', $ret
 }
 
 function formulaires_editer_amap_panier_verifier_dist($id_amap_panier='new', $retour=''){
-	$erreurs = formulaires_editer_objet_verifier('amap_panier', $id_amap_panier, array('id_auteur', 'date_distribution'));
+	$erreurs = formulaires_editer_objet_verifier('amap_panier', $id_amap_panier, array('id_auteur', 'id_producteur', 'date_distribution'));
 	return $erreurs;
 }
 

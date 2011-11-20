@@ -86,8 +86,10 @@ Je mets à disposition le panier du @date_distribution@, pour le récupérer sui
 	'pas_connecte_ou_reconnu' => 'Vous n\'êtes pas connecté ou on ne vous a pas reconnu.',
 	'pas_date_distributions' => 'Pas de date de distribution renseigné.',
 	'pas_paniers' => 'Vous ne disposez d\'aucun panier durant cette saison, en effet aucun contrat vous concernant n\'est actuellement en cours',
+	'pas_producteur_amap' => 'Vous n\'avez pas de producteur dans votre amap.',
 	'petit' => 'Petit',
 	'producteur' => 'Producteur',
+	'producteurs' => 'Producteurs',
 
 	// R
 	'reste_panier_distribuer' => 'Il nous reste encore 1 panier à distribuer',
