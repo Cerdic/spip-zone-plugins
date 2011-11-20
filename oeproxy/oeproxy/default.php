@@ -20,6 +20,16 @@ function oeproxy_default_dist($url,$options,$html=null){
 	if (!$html)
 		return 404;
 
+	// verifier si charset indique dans le <head>
+	$charset = "";
+	$p = stripos($html,'</head>');
+	if (preg_match('/Content-Type([^;]+)(?:;\s*charset=([\w\d-]*))?/ims', substr($html,0,$p), $match)){
+		// <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		$charset = strtolower($match[2]);
+		include_spip('inc/charsets');
+		$html = importer_charset($html, $charset);
+	}
+
 	include_spip('inc/readability');
 	$res = readability_html($html,'array');
 
