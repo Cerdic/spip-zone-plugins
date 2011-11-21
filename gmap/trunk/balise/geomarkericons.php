@@ -25,7 +25,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/gmap_geoloc');
 
 // Globales
-$GLOBALS['iconsAliases'] = array();
+$GLOBALS['iconsAliases'] = array(); // ici, on peut avoir un seul buffer : il est valable sur une requête unique, donc pour une seule carte
 $GLOBALS['iconsDefs'] = array();
 
 // Balise GEOMARKERICONS : renvoie les informations sur le marqueur associé à un point sur un objet
@@ -88,19 +88,30 @@ function  balise_GEOMARKERICONS_stat($args, $filtres)
 	if ($id_point)
 		$contexte['id_point'] = $id_point;
 	$icon = gmap_trouve_def_file($contexte, 'gmap-marker', 'gmd', gmap_theme_folder(), $GLOBALS['iconsAliases']);
+	
+	// Gérer le buffer
+	if ($icon['file'] && $icon['buffer'])
+		$GLOBALS['iconsAliases'][$icon['buffer']] = $icon['name'];
+		
+	// Éviter de mettre plusieurs fois la même icone dans le fichier
+	// Le buffer des icones ne suffit pas puisqu'il est index sur un nom complet :
+	// dans le cas des rubriques, on les créé toujours !
+	if ($GLOBALS['iconsDefs'][$icon['name']]) // Déjà défini dans cette session
+		unset($icon['file']);
+	else
+		$GLOBALS['iconsDefs'][$icon['name']] = true;
+		
+	// Parser le fichier des icones
 	if (isset($icon['file']))
 	{
 		$icons = gmap_parse_icone_def_file($icon['file']);
 		$folder = gmap_theme_folder();
-		if ($icon['file'] && $icon['buffer'])
-			$GLOBALS['iconsAliases'][$icon['buffer']] = $icon['name'];
-	
-		// Post-traitement des icones
+			
+		// Pour alléger les modèles, supprimer ce qui n'est pas demandé
 		if (!$incComplete || !$incNormal || !$incShadow || !$incSelected)
 		{
 			foreach ($icons as $index => $iconDef)
 			{
-				// Pour alléger les modèles, supprimer ce qui n'est pas demandé
 				if ((!$incComplete && ($iconDef['type'] === 'complete')) ||
 					(!$incNormal && (!isset($iconDef['type']) || ($iconDef['type'] === 'simple'))) ||
 					(!$incShadow && ($iconDef['type'] === 'shadow')) ||

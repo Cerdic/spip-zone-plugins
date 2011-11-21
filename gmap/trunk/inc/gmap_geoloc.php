@@ -199,25 +199,25 @@ function gmap_definir_parametre_icon($icon, $complete = null, $varName = null)
 	$out .= '
 		urlIconFile: "'.$icon['file'].'",
 		widthIcon: '.$icon['width'].',
-		heightIcon: '.$icon['height'].',';
+		heightIcon: '.$icon['height'];
 	if ($icon['xAnchor'] != null)
-		$out .= '
-		anchorX: '.$icon['xAnchor'].',';
+		$out .= ',
+		anchorX: '.$icon['xAnchor'];
 	if ($icon['yAnchor'] != null)
-		$out .= '
-		anchorY: '.$icon['yAnchor'].',';
+		$out .= ',
+		anchorY: '.$icon['yAnchor'];
 
 	// Ombre
-	$out .= '
+	$out .= ',
 		urlShadowFile: "'.$icon['shadowFile'].'",
 		widthShadow: '.$icon['widthShadow'].',
-		heightShadow: '.$icon['heightShadow'].',';
+		heightShadow: '.$icon['heightShadow'];
 	if ($icon['xShadowAnchor'] != null)
-		$out .= '
-		anchorShadowX: '.$icon['xShadowAnchor'].',';
+		$out .= ',
+		anchorShadowX: '.$icon['xShadowAnchor'];
 	if ($icon['yShadowAnchor'] != null)
-		$out .= '
-		anchorShadowY: '.$icon['yShadowAnchor'].',';
+		$out .= ',
+		anchorShadowY: '.$icon['yShadowAnchor'];
 		
 	// Image complete, avec l'ombre	
 	if ($complete != null)
@@ -229,25 +229,25 @@ function gmap_definir_parametre_icon($icon, $complete = null, $varName = null)
 			$complete['width'] = $imageInfo[0] ? $imageInfo[0] : 32;
 			$complete['height'] = $imageInfo[1] ? $imageInfo[1] : 32;
 		}
-		$out .= '
+		$out .= ',
 		urlCompleteFile: "'.$complete['file'].'",
 		widthComplete: '.$complete['width'].',
-		heightComplete: '.$complete['height'].',';
+		heightComplete: '.$complete['height'];
 		if ($complete['xAnchor'] != null)
-			$out .= '
-		anchorCompleteX: '.$complete['xAnchor'].',';
+			$out .= ',
+		anchorCompleteX: '.$complete['xAnchor'];
 		if ($complete['yAnchor'] != null)
-			$out .= '
-		anchorCompleteY: '.$complete['yAnchor'].',';
+			$out .= ',
+		anchorCompleteY: '.$complete['yAnchor'];
 	}
 	
 	// Offset pour l'info bulle (un seul, sur l'icone normale)
 	if ($icon['xOffset'] != null)
-		$out .= '
-		popupOffsetX: '.$icon['xOffset'].',';
+		$out .= ',
+		popupOffsetX: '.$icon['xOffset'];
 	if ($icon['yOffset'] != null)
-		$out .= '
-		popupOffsetY: '.$icon['yOffset'].',';
+		$out .= ',
+		popupOffsetY: '.$icon['yOffset'];
 		
 	$out .= '
 	}';
@@ -770,7 +770,7 @@ function gmap_get_object_info_contents($contexte)
 }
 
 // Utilitaire pour ajouter un marqueur
-function gmap_ajoute_marqueur($marker, &$iconsBuffer, $map)
+function gmap_ajoute_marqueur($marker, $map, $mapId)
 {
 	$precmd = '';
 	
@@ -804,17 +804,30 @@ function gmap_ajoute_marqueur($marker, &$iconsBuffer, $map)
 		$contexte['id_point'] = $marker['id'];
 	
 	// Déterminer l'icone
-	if ($icon = gmap_trouve_def_file($contexte, 'gmap-marker', 'gmd', gmap_theme_folder(), $iconsBuffer))
+	if (!$GLOBALS['iconsAliases'.$mapId])
+		$GLOBALS['iconsAliases'.$mapId] = array();
+	if (!$GLOBALS['iconsDefs'.$mapId])
+		$GLOBALS['iconsDefs'.$mapId] = array();
+	if (($icon = gmap_trouve_def_file($contexte, 'gmap-marker', 'gmd', gmap_theme_folder(), $GLOBALS['iconsAliases'.$mapId])) &&
+		isset($icon['name']))
 	{
-		if (isset($icon['name']))
-		{
-			if ($icon['file'] && $icon['buffer'])
-				$GLOBALS['iconsAliases'][$icon['buffer']] = $icon['name'];
-			if ($icon['file'] && ($icon['name'] != "default"))
-				$precmd .= gmap_ajoute_icone($icon['name'], $icon['file'], $map);
-			$markerParams .= ','."\n" . '			icon: "'.$icon['name'].'"';
-			$markerParams .= ','."\n" . '			icon_sel: "'.$icon['name'].'_sel"';
-		}
+		// Gérer le buffer
+		if ($icon['file'] && $icon['buffer'])
+			$GLOBALS['iconsAliases'.$mapId][$icon['buffer']] = $icon['name'];
+			
+		// Éviter de mettre plusieurs fois la même icone dans le fichier
+		// Le buffer des icones ne suffit pas puisqu'il est index sur un nom complet :
+		// dans le cas des rubriques, on les créé toujours !
+		if ($GLOBALS['iconsDefs'.$mapId][$icon['name']]) // Déjà défini dans cette session
+			unset($icon['file']);
+		else
+			$GLOBALS['iconsDefs'.$mapId][$icon['name']] = true;
+	
+		// Ajouter le code pour créer l'icone et l'ajouter à la définition du marqueur
+		if ($icon['file'] && ($icon['name'] != "default"))
+			$precmd .= gmap_ajoute_icone($icon['name'], $icon['file'], $map);
+		$markerParams .= ','."\n" . '			icon: "'.$icon['name'].'"';
+		$markerParams .= ','."\n" . '			icon_sel: "'.$icon['name'].'_sel"';
 	}
 
 	// Ajouter l'info-bulle
@@ -916,8 +929,6 @@ function gmap_ajoute_markers($table, $id, $mapId, $params, $mapInit)
 {
 	$map = "";
 
-	// Initialisation du tableau des icones déjà créées
-	$iconsBuffer = array();
 	$bFocusOnExit = $params['focus'] ? true : false;
 	
 	// Marqueurs locaux, sur l'objet
@@ -927,7 +938,7 @@ function gmap_ajoute_markers($table, $id, $mapId, $params, $mapInit)
 		{
 			$markers = gmap_get_tree_points($table, $id);
 			foreach ($markers as $idxMarker => $marker)
-				$map .= gmap_ajoute_marqueur($marker, $iconsBuffer, "map");
+				$map .= gmap_ajoute_marqueur($marker, "map", $mapId);
 		}
 	}
 	
@@ -938,7 +949,7 @@ function gmap_ajoute_markers($table, $id, $mapId, $params, $mapInit)
 		{
 			$markers = gmap_get_tree_points($table, $id, 1);
 			foreach ($markers as $idxMarker => $marker)
-				$map .= gmap_ajoute_marqueur($marker, $iconsBuffer, "map");
+				$map .= gmap_ajoute_marqueur($marker, "map", $mapId);
 		}
 	}
 	
@@ -949,7 +960,7 @@ function gmap_ajoute_markers($table, $id, $mapId, $params, $mapInit)
 		{
 			$markers = gmap_get_tree_points($table, $id, 99);
 			foreach ($markers as $idxMarker => $marker)
-				$map .= gmap_ajoute_marqueur($marker, $iconsBuffer, "map");
+				$map .= gmap_ajoute_marqueur($marker, "map", $mapId);
 		}
 	}
 	
@@ -1162,8 +1173,7 @@ function gmap_ajoute_marqueur_site($objet, $id_objet, $mapId, $type)
 	// Construire le code du marqueur
 	$point['objet'] = $objet;
 	$point['id_objet'] = $id_objet;
-	$buffer = array();
-	$codeMarker = gmap_ajoute_marqueur($point, $buffer, "map");
+	$codeMarker = gmap_ajoute_marqueur($point, "map", $mapId);
 	if (!strlen($codeMarker))
 		return "";
 	

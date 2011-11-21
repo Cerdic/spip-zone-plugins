@@ -3,7 +3,7 @@
 	Fichier KML par défaut pour les requêtes de marqueurs.
 	ATTENTION : fichier conservé pour compatibilité avec la version 0.1.3, utilisez maintenant gmap-kml-default.html.
 	
-][(#CACHE{3600*24})][(#HTTP_HEADER{Content-type: #ENV{mime,text/xml}[; charset=(#CHARSET)]})][(#SET{prefix, #ENV{prefix,gmm}})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+][(#CACHE{86400})][(#HTTP_HEADER{Content-type: #ENV{mime,text/xml}[; charset=(#CHARSET)]})][(#SET{prefix, #ENV{prefix,gmm}})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom"
 	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	 xmlns:#GET{prefix}="#URL_SITE_SPIP/schemas/GeoMarkers/1.0"[
