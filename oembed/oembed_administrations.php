@@ -34,6 +34,7 @@ function oembed_update_new_providers(){
 	// http://oembed.com/
 	// http://code.google.com/p/oohembed/source/browse/app/provider/endpoints.json
 	// https://github.com/starfishmod/jquery-oembed-all/blob/master/jquery.oembed.js
+	// voir aussi http://embed.ly/providers qui donne les scheme mais pas les endpoint
 	$providers = array(
 		'http://*.youtube.com/watch*'    =>   'http://www.youtube.com/oembed',
 		'http://youtu.be/*'              =>   'http://www.youtube.com/oembed',
@@ -68,6 +69,8 @@ function oembed_update_new_providers(){
 		'http://techcrunch.com/*'        =>   'http://public-api.wordpress.com/oembed/1.0/',
 		'http://wp.me/*'                 =>   'http://public-api.wordpress.com/oembed/1.0/',
 		'http://my.opera.com/*'           => 'http://my.opera.com/service/oembed',
+		'http://*.viddler.com/*'         =>   'http://lab.viddler.com/services/oembed/',
+		'http://www.collegehumor.com/video/*'=>'http://www.collegehumor.com/oembed.json',
 
 
 		#'https://twitter.com/*/status/*' =>   '?action=oeproxy_twitter',
