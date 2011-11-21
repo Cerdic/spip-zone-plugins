@@ -1,0 +1,25 @@
+<paquet
+	prefix="nuage"
+	categorie="navigation"
+	version="3.2.1"
+	etat="stable"
+	compatibilite="[2.0.0;3.0.99]"
+	logo="images/nuage-64.png"
+	documentation="http://www.spip-contrib.net/Nuage-de-mots-cles"
+>	
+
+	<nom>Nuage</nom>
+	<!-- Afficher les mots-clés en faisant varier la taille de la police -->
+
+	<auteur>Booz</auteur>
+	<auteur>Fil</auteur>
+	<auteur>James</auteur>
+	<auteur>Stéphane</auteur>
+	<auteur>Camille Lafitte</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="insert_head_css" inclure="nuage_fonctions.php" />
+
+	<necessite nom="spip_bonux" compatibilite="[3.0.0-dev;[" />
+</paquet>
