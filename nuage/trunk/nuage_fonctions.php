@@ -175,7 +175,7 @@ function nuage_tri_hasard($a,$b){
 function nuage_affiche($nuage,$max_mots = -1){
 	if (!is_array($nuage)) $nuage = unserialize($nuage);
 	if (!is_array($nuage)) return "";
-	$out .= "";
+	$out = "";
 	foreach($nuage as $cle=>$vals){
 		$a = "<a rel='tag' href='".$vals['url']."' class='nuage".$vals['class'].($vals['expose']?' on':'')."'>";
 		$a = $a . $cle . "</a>";
@@ -213,7 +213,8 @@ function nuage_extrait($nuage,$nombre){
 function nuage_insert_head_css($flux) {
 	$css = "<link rel='stylesheet' href='".find_in_path("css/nuage.css")."' type='text/css' />\n";
 	static $done = false;
-	if (!$done) {
+	if (intval($GLOBALS['spip_version_branche'])>2
+		OR !$done) {
 		$done = true;
 		$flux .= "\n".$css;
 	}
@@ -221,7 +222,9 @@ function nuage_insert_head_css($flux) {
 }
 
 function nuage_insert_head($flux){
-	$flux = nuage_insert_head_css($flux); // au cas ou il n'est pas implemente
+	// au cas ou il n'est pas implemente, mais plus necessaire en spip>=3
+	if (intval($GLOBALS['spip_version_branche'])<3)
+		$flux = nuage_insert_head_css($flux);
 	return $flux;
 }
 ?>
