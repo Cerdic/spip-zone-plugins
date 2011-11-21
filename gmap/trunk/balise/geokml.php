@@ -36,17 +36,14 @@ function balise_GEOKML($p)
 function balise_GEOKML_stat($args, $filtres)
 {
 	$params = _gmap_calculer_balise_params($args);
+	if (!isset($params['map']))
+		$params['map'] = $GLOBALS['currentMapID'];
 	return array($params);
 }
 function balise_GEOKML_dyn($params)
 {
-	// Init retour
 	$code = "";
-		
-	// Décodage des paramètres
-	$mapId = $GLOBALS['currentMapID'];
-	if ($params['map'])
-		$mapId = $params['map'];
+	$mapId = $params['map'];
 	$show = (($params['show'] === "non") || ($params['show'] === "false") || ($params['show'] === "faux")) ? false : true;
 		
 	// Si un objet de type document est spécifié

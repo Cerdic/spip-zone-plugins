@@ -775,8 +775,6 @@ function gmap_showWikipediaLayer(show, mapId)
 		gmap_showWikipediaLayer.layer = new Array();
 	
     // Récupérer la carte
-	if (!mapId)
-		mapId = 1;
 	var map = gmap_getMap(mapId);
 	if (!isObject(map))
 	    return;

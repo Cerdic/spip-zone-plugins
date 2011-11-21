@@ -41,18 +41,17 @@ function balise_GEOMAP($p)
 function balise_GEOMAP_stat($args, $filtres)
 {
 	$params = _gmap_calculer_balise_params($args);
+	if (isset($params['map']))
+		$mapId = $params['map'];
+	else
+		$mapId = $GLOBALS['nextMapID']++;
+	$params['map'] = $GLOBALS['currentMapID'] = $mapId;
 	return array($params);
 }
 function balise_GEOMAP_dyn($params)
 {
-	// Init retour
 	$code = "";
-
-	// Décodage des paramètres
-	$mapId = $GLOBALS['nextMapID']++;
-	$GLOBALS['currentMapID'] = $mapId;
-	if ($params['map'])
-		$mapId = $params['map'];
+	$mapId = $params['map'];
 
 	// Ajout d'une div si nécessaire
 	$bCreateDiv = (isset($params['creatediv']) && $params['creatediv']) ? true : false;

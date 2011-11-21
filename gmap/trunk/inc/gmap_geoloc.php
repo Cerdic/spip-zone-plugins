@@ -1301,6 +1301,79 @@ jQuery(document).ready(function()
 	return $code;
 }
 
+// Ajout d'un maruquer à partir d'une adresse
+function gmap_ajoute_marqueur_adresse($id, $adresse, $mapId, $titre = null, $texte = null, $iconFile = null)
+{
+	// Tests de validité
+	if (!$id || !$adresse || !$mapId)
+		return "";
+		
+	// Gérer des id chaine ou numérique
+	$iconId = 'icon_'.$id;
+	if (is_string($id))
+		$id = '"'.$id.'"';
+	
+	// Paramètres standards du marqueur (position et meta-info)
+	$markerParams = '';
+	
+	// Ajouter le titre
+	if (strlen($titre))
+		$markerParams .= ','."\n" . '			title: "'.$titre.'"';
+	
+	// Déterminer l'icone
+	$precmd = '';
+	if ($iconFile)
+	{
+		$file = find_in_path($iconFile.'.gmd');
+		$precmd .= gmap_ajoute_icone($iconId, $file, "map");
+		$markerParams .= ','."\n" . '			icon: "'.$iconId.'"';
+	}
+
+	// Ajouter l'info-bulle
+	if (strlen($titre) || strlen($texte))
+	{
+		$html = '<div class="gmap-balloon">' . "\n";
+		if (strlen($titre))
+			$html .= '	<h1>'.$titre.'</h1>' . "\n";
+		if (strlen($texte))
+		{
+			$html .= '	<div class="contents">' . "\n";
+			$html .= '		<div class="texte"><p>'.$texte.'</p></div>' . "\n";
+			$html .= '	</div>' . "\n";
+			$html .= '</div>' . "\n";
+		}
+		$markerParams .= ','."\n" . '			click: "showInfoWindow"';
+		$markerParams .= ','."\n" . '			html: "'.protege_html($html).'"';
+	}
+	
+	// Construction du code
+	$code = '
+<script type="text/javascript">
+//<![CDATA[
+jQuery(document).ready(function()
+{
+	jQuery("#gmap_cont'.$mapId.'").gmapReady(function()
+	{
+		var map = gMap("gmap_map'.$mapId.'");
+		if (isObject(map))
+		{
+			map.searchGeocoder("'.$adresse.'", function(latitude, longitude)
+			{
+		'.$precmd.'
+				map.setMarker('.$id.', {
+					latitude: latitude,
+					longitude: longitude
+		'.$markerParams.'
+				});
+			});
+		}
+	});
+});
+//]]>
+</script>';
+	return $code;
+}
+
 // Test des capacités d'une implémentation de carte
 function gmap_teste_capability($capability)
 {

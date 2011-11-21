@@ -42,17 +42,14 @@ function balise_GEOMARKER($p)
 function balise_GEOMARKER_stat($args, $filtres)
 {
 	$params = _gmap_calculer_balise_params($args, true);
+	if (!isset($params['map']))
+		$params['map'] = $GLOBALS['currentMapID'];
 	return array($params);
 }
 function balise_GEOMARKER_dyn($params)
 {
-	// Init retour
 	$code = "";
-		
-	// Décodage des paramètres
-	$mapId = $GLOBALS['currentMapID'];
-	if ($params['map'])
-		$mapId = $params['map'];
+	$mapId = $params['map'];
 		
 	// S'il y a un paramètre markers : même procédure que pour une carte
 	if ($params['markers'])
@@ -77,6 +74,17 @@ function balise_GEOMARKER_dyn($params)
 		else
 			$markerId = "marker_".$latitude."_".$longitude;
 		$code = gmap_ajoute_marqueur_special($markerId, $latitude, $longitude, $mapId, $params['titre'], $params['texte'], $params['icon']);
+	}
+	
+	// Sinon encore, ajouter un marqueur par adresse
+	else if ($params['adresse'])
+	{
+		$addr = $params['adresse'];
+		if ($params['id'])
+			$markerId = $params['id'];
+		else
+			$markerId = "marker_".bin2hex(mhash(MHASH_MD5, $addr));
+		$code = gmap_ajoute_marqueur_adresse($markerId, $addr, $mapId, $params['titre'], $params['texte'], $params['icon']);
 	}
 	
 	return $code;
