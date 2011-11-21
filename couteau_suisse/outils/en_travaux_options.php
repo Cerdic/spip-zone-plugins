@@ -43,6 +43,7 @@ if (!$tr_acces) {
 	@define('_en_travaux_MESSAGE', $tr_message);
 	if($tr_prive) {
 		// les actions ne fonctionnent pas ici
+		if(defined('_SPIP19300')) spip_initialisation_suite();
 		action_cs_travaux(true);
 		exit;
 	}
