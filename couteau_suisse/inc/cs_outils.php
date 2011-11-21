@@ -250,23 +250,27 @@ function cs_action_rapide($outil_id, $actif=true) {
 function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 	if(!isset($outil['fichiers_distants'])) return '';
 	$lib = sous_repertoire(_DIR_PLUGIN_COUTEAU_SUISSE, 'lib');
+	$actif = $outil['actif'];
 	$a = array();
 	foreach($outil['fichiers_distants'] as $i) {
 		$erreur = false;
 		$res_pipe = '';
 		$dir = sous_repertoire($lib, $outil['id']);
+		// retrait des arguments
 		preg_match('/[^?]*/', basename($outil[$i]), $reg); 
 		$f = 'distant_' . $reg[0];
-		$file = pipeline('fichier_distant', array('outil'=>$outil['id'], 'fichier_local'=>$dir.$f));
+		// 1er appel : envoi du nom du fichier
+		$file = pipeline('fichier_distant', array('outil'=>$outil['id'], 'actif'=>$actif, 'fichier_local'=>$dir.$f));
 		$file = $file['fichier_local'];
 		$f = basename($file);
 		$size = ($forcer || @(!file_exists($file)) ? 0 : filesize($file));
 		if($size) $statut = _T('couteauprive:distant_present', array('date'=>cs_date_long(date('Y-m-d H:i:s', filemtime($file)))));
-		elseif($outil['actif'] || $forcer) {
+		elseif($actif || $forcer) {
 			include_spip('inc/distant');
 			if($distant = recuperer_page($outil[$i])) {
+				// 2e appel : envoi du texte
 				$distant = pipeline('fichier_distant', array('outil'=>$outil['id'], 'fichier_local'=>$file, 
-						'fichier_distant'=>$outil[$i], 'message'=>'', 'texte'=>$distant, 'actif'=>$outil['actif']));
+						'fichier_distant'=>$outil[$i], 'message'=>'', 'texte'=>$distant, 'actif'=>$actif));
 				$file = $distant['fichier_local'];
 				$message = $distant['message'] . "\n_ " . _T('couteauprive:copie_vers', array('dir'=>dirname($distant['fichier_local']).'/'));
 				$distant = $distant['texte'];
@@ -284,7 +288,7 @@ function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 	}
 	if($tester) return $a;
 	$a = '<ul style="margin:0.6em 0 0.6em 4em;"><li>' . join("</li><li style='margin-top:0.4em;'>", $a) . '</li></ul>';
-	$b = ($outil['actif'] || !$erreur)?'rss_actualiser':($erreur?'distant_charger':false);
+	$b = ($actif || !$erreur)?'rss_actualiser':($erreur?'distant_charger':false);
 	$b = $b?"\n<p class='cs_sobre'><input class='cs_sobre' type='submit' value=\" ["
 			. attribut_html(_T('couteauprive:'.$b)).']" /></p>':'';
 	return ajax_action_auteur('action_rapide', 'fichiers_distants', 'admin_couteau_suisse', "arg=$outil[id]|fichiers_distants&cmd=descrip#cs_action_rapide",

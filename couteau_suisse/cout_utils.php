@@ -411,8 +411,8 @@ function cs_initialise_includes($count_metas_outils) {
 					if($temp=cs_lire_fichier_php("lib/$inc/distant_{$f}_$outil[distant_$f].php")) 
 						$infos_fichiers['code_'.$f][] = $temp;
 */			}
-		} else foreach(array('pre_description_outil') as $p) {
-			// outil inactif
+		} else foreach(array('pre_description_outil', 'fichier_distant') as $p) {
+			// exceptions pour les outils inactifs
 			if(isset($outil[$t='pipelinecode:'.$p])) 	
 				$infos_pipelines[$p]['inline'][] = cs_optimise_if(cs_parse_code_js($outil[$t]));
 			if(isset($outil[$t='pipeline:'.$p])) {
