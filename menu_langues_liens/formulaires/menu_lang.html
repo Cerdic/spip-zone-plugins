@@ -50,8 +50,8 @@ On liste les langues utilisees dans le site
 		- rediriger sur l'article dans la langue demandee si opportun
 		  sinon, revenir sur la page en cours
 		]
-        [(#CONFIG{menu_lang_liens/format,complet}|=={'complet'}|oui)[(#SET{nom_langue,[(#VALEUR|traduire_nom_langue)]})]]   
-        [(#CONFIG{menu_lang_liens/format,complet}|=={'abrege'}|oui)[(#SET{nom_langue,[(#VALEUR)]})]]
+        [(#CONFIG{menu_lang_liens/format,abrege}|=={'complet'}|oui)[(#SET{nom_langue,[(#VALEUR|traduire_nom_langue)]})]]   
+        [(#CONFIG{menu_lang_liens/format,abrege}|=={'abrege'}|oui)[(#SET{nom_langue,[(#VALEUR)]})]]
 		[(#VALEUR|=={#ENV{lang}}|non)
 			[<a href="[(#URL_ACTION_AUTEUR{'converser', '', #GET{ListeTraductions}|table_valeur{#VALEUR}|sinon{#SELF}}|parametre_url{var_lang,#VALEUR})]" rel="alternate" lang="#VALEUR" title="[(#VALEUR|traduire_nom_langue|ucfirst|attribut_html)]" class="langue_#VALEUR">(#GET{nom_langue}|ucfirst)</a>]
 		]
