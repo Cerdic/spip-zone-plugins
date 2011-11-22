@@ -1,14 +1,12 @@
-<?php 
-
-	// base/player_install.php
-
-	// $LastChangedRevision$
-	// $LastChangedBy$
-	// $LastChangedDate$
-
-// CP-20080321
+<?php
+/**
+ * Plugin Lecteur (mp3)
+ * Licence GPL
+ * 2007-2011
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
 
 /**
  * Upgrade des tables

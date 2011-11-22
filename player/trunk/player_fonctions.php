@@ -1,24 +1,28 @@
 <?php
+/**
+ * Plugin Lecteur (mp3)
+ * Licence GPL
+ * 2007-2011
+ */
 
-	// player_fonctions.php
-
-	// $LastChangedRevision: 35894 $
-	// $LastChangedBy$
-	// $LastChangedDate$
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function player_call_js() {
+/**
+ * Code JS a inserer dans la page pour faire fonctionner le player
+ * @param $player
+ * @return string
+ */
+function player_call_js($player) {
 	$flux = "\n"
 		. "<!-- Player JS -->\n"
 		. '<script type="text/javascript" src="'.find_in_path('soundmanager/soundmanager2.js').'"></script>'
 		. '<script type="text/javascript"><!--' . "\n"
-		// . 'var musicplayerurl="'.find_in_path('flash/eraplayer_playlist.swf').'";'."\n"
-		. 'var musicplayerurl="' . find_in_path('flash/' . $player_ . '.swf') . '";'."\n"
+		. 'var musicplayerurl="' . find_in_path('flash/' . $player . '.swf') . '";'."\n"
 		. "var key_espace_stop = true;\n"
 		. 'var image_play="'.find_in_path('images/playl.gif').'";'."\n"
 		. 'var image_pause="'.find_in_path('images/pausel.gif').'";'."\n"
 		. 'soundManager.url = "'.find_in_path('soundmanager/soundmanager2.swf').'";'."\n"
-  		. 'soundManager.nullURL = "'.find_in_path('soundmanager/null.mp3').'";'."\n"
+  	. 'soundManager.nullURL = "'.find_in_path('soundmanager/null.mp3').'";'."\n"
 		. 'var videoNullUrl = "null.flv";'."\n"
 		. 'var DIR_PLUGIN_PLAYER = "' . _DIR_PLUGIN_PLAYER . '";'
 		. "//--></script>\n"
@@ -28,48 +32,64 @@ function player_call_js() {
 	return $flux;
 }
 
+/**
+ * Code CSS a inserer dans la page pour habiller le player
+ * @return string
+ */
 function player_call_css() {
 	$flux = "\n".'<link rel="stylesheet" href="'.direction_css(find_in_path('player.css')).'" type="text/css" media="all" />';
 	return $flux;
 }
 
-function player_head(){
-	
-	$player_ = ($p = $GLOBALS['meta']['player']) ? $p : _PLAYER_MP3_LECTEUR_DEFAULT;
-	
-	$flux =	Player_call_js();
-	$flux .= Player_call_css();
-
-	return $flux;
-}
-
+/**
+ * inserer systematiquement le CSS dans la page
+ * @param string $flux
+ * @return string
+ */
 function player_insert_head_css($flux){
-	static $done = false;
-	if (!$done) {
-		$done = true;
-		if (!defined('_PLAYER_AFFICHAGE_FINAL') OR !_PLAYER_AFFICHAGE_FINAL)
-		{
-			$flux .= Player_call_css();
-		}
-	}
+	if (test_espace_prive()
+		OR (!defined('_PLAYER_AFFICHAGE_FINAL') OR !_PLAYER_AFFICHAGE_FINAL))
+		$flux .= player_call_css();
+
 	return $flux;
 }
 
+/**
+ * Inserer systematiquement le JS dans la page
+ * @param string $flux
+ * @return string
+ */
 function player_insert_head($flux){
-	if (!defined('_PLAYER_AFFICHAGE_FINAL') OR !_PLAYER_AFFICHAGE_FINAL)
-	{
-		$flux = Player_insert_head_css($flux);
-		$flux .= Player_call_js();
+	if (test_espace_prive()
+		OR (!defined('_PLAYER_AFFICHAGE_FINAL') OR !_PLAYER_AFFICHAGE_FINAL)){
+		$player = unserialize($GLOBALS['meta']['player']);
+		$player = isset($player['player_mp3'])?$player['player_mp3']:'eraplayer';
+		$flux .= player_call_js($player);
 	}
 	return $flux;
 }
 
+
+/**
+ * Inserer JS+CSS dans la page si elle contient un player
+ * (a la demande)
+ * @param string $flux
+ * @return string
+ */
 function player_affichage_final($flux){
 	if (defined('_PLAYER_AFFICHAGE_FINAL') AND _PLAYER_AFFICHAGE_FINAL){
 		// inserer le head seulement si presente d'un rel='enclosure'
-		if ((strpos($flux,'rel="enclosure"')!==FALSE)
-		  OR (strpos($flux,'playliste_video')!==FALSE)){
-			$flux = str_replace('</head>', Player_head().'</head>', $flux);
+		if ((strpos($flux,'rel="enclosure"')!==FALSE)){
+			$player = unserialize($GLOBALS['meta']['player']);
+			$player = isset($player['player_mp3'])?$player['player_mp3']:'eraplayer';
+			$ins = player_call_css();
+			$ins .= player_call_js($player);
+
+			$p = stripos($flux,"</head>");
+			if ($p)
+				$flux = substr_replace($flux,$ins,$p,0);
+			else
+				$flux .= player_head();
 		}
 	}
 	return $flux;
@@ -81,8 +101,10 @@ function player_affichage_final($flux){
  * ajout d'un rel="enclosure" sur les liens mp3 absolus
  * appele en pipeline apres propre pour traiter les [mon son->http://monsite/mon_son.mp3]
  * peut etre appele dans un squelette apres |liens_absolus
+ *
+ * @param $texte
+ * @return mixed
  */
- 
 function player_post_propre($texte) {
 
 	$reg_formats="mp3";
@@ -95,6 +117,11 @@ function player_post_propre($texte) {
 	return $texte;
 }
 
+/**
+ * Un filtre pour afficher de joli titre a partir du nom du fichier
+ * @param $titre
+ * @return mixed|string
+ */
 function joli_titre($titre){
 	$titre=basename($titre);
 	$titre=preg_replace('/.mp3/','',$titre);
@@ -104,109 +131,3 @@ function joli_titre($titre){
 
 	return $titre ;
 }
-
-
-// CP 20080321
-// balise a' placer dans le modele
-// donne la ligne FlashVars
-function balise_PLAYER_FLV_FLASHVVARS ($p) {
-	
-	static $player_flv_flashvars = null;
-
-	$id_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
-	
-	// #PLAYER_FLV_FLASHVVARS hors boucle ? ne rien faire !
-	if (!$type = $p->boucles[$id_boucle]->type_requete) {
-		$p->code = "''";
-	}
-	else {
-		// sinon, renvoyer les Flashvars sur une seule ligne
-
-		if(!$player_flv_flashvars) {
-		
-			$player_flv_lecteurs = unserialize(_PLAYER_FLV_LECTEURS);
-	
-			$player_config = unserialize($GLOBALS['meta'][_PLAYER_META_PREFERENCES]);
-			
-			include_spip('inc/player_flv_config');
-			// la grosse table commune a tous les profils
-			$player_flv_config = player_flv_config();
-	
-			$result = array();
-			$player_key = $player_config['player_key'];
-			
-			// n'envoyer que ce qui est necessaire au profil configure en admin
-			// mini demande beaucoup moins de variables que multi
-			foreach($player_flv_config as $key => $value) {
-				if(
-					in_array($player_key, explode(' ', $value['class']))
-					&& !empty($player_config['player_video_prefs'][$key])
-				) {
-					$result[] = $key."=".$player_config['player_video_prefs'][$key];
-				}
-			}
-			$player_flv_flashvars = implode('&amp;', $result);
-		}
-		
-		$p->code = "'$player_flv_flashvars'";
-	}
-	$p->interdire_scripts = false;
-	return($p);
-}
-
-
-// CP 20080321
-// balise a' placer dans le modele
-// donne le nom du fichier player flv demande a' la config
-function balise_PLAYER_FLV_PLAYER ($p) {
-
-	$id_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
-	
-	// #PLAYER_FLV_PLAYER hors boucle ? ne rien faire !
-	if (!$type = $p->boucles[$id_boucle]->type_requete) {
-		$p->code = "''";
-	} else {
-	// sinon, renvoyer le nom du swf
-
-		$player_config = unserialize($GLOBALS['meta'][_PLAYER_META_PREFERENCES]);
-		$result = $player_config['player_video'];
-		if(!$result){
-			$result = 'player_flv_maxi.swf'; 
-		}
-		$p->code = "'$result'";
-	}
-	$p->interdire_scripts = false;
-	return($p);
-}
-
-function balise_PLAYER_VIDEOS_DIR ($p) {
-
-	$p->code = "'/videos/'";
-	$p->interdire_scripts = false;
-
-	return($p);
-	
-}
-
-function player_meta_prefs_item ($ii) {
-	
-	static $prefs;
-	
-	if($prefs == null)
-	{
-		lire_metas();
-		$prefs = unserialize($GLOBALS['meta'][_PLAYER_META_PREFERENCES]);
-		$prefs = $prefs['player_video_prefs'];
-	}
-	return($ii && isset($prefs[$ii]) ? $prefs[$ii] : null);
-}
-
-function balise_PLAYER_META_GET ($p) {
-
-	if($key = trim(interprete_argument_balise(1, $p))) {
-		$p->code = "player_meta_prefs_item($key)";
-	}
-		
-	return($p);
-}
-

@@ -17,12 +17,12 @@
 	<auteur>erational</auteur>
 	<auteur>CP.</auteur>
 
-	<pipeline nom="post_propre" inclure="player_fonctions.php" />
-	<pipeline nom="header_prive" inclure="inc/player_pipeline_header_prive.php" />
+	<pipeline nom="post_propre" />
 	<pipeline nom="insert_head_css" />
 	<pipeline nom="insert_head" />
+	<pipeline nom="header_prive_css" action="insert_head_css"/>
+	<pipeline nom="header_prive" action="insert_head"/>
 	<pipeline nom="affichage_final" inclure="player_fonctions.php" />
-	<pipeline nom="affiche_milieu" inclure="inc/player_pipeline_affiche_milieu.php" />
 
 	<menu nom="configurer_player" titre="player:player_nom" parent="menu_configuration" icone="images/player-16.png" />
 </paquet>
