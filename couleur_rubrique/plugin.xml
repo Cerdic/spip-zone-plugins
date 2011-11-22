@@ -28,7 +28,7 @@
 		<action>gauche</action>
 		<inclure>pb_couleur_rubrique.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="lib:farbtastic_1_3" src="http://files.spip.org/spip-zone/farbtastic_1_3.zip" />
 	<categorie>maintenance</categorie>
 </plugin>
