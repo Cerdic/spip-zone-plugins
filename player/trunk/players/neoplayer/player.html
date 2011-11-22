@@ -1,0 +1,9 @@
+<BOUCLE_doc (DOCUMENTS) {id_document}{tout}>
+<dd class='spip_doc_descriptif player #ENV{player}'[ style='width:(#ENV{my_width})px;']>
+<object class='audioplayer#ID_DOCUMENT' type="application/x-shockwave-flash" data="#CHEMIN{players/neoplayer/player.swf}" height="[(#ENV{height,20})]" width="[(#GET{my_width})]">
+<param name="wmode" value="transparent" />
+<param name="movie" value="#CHEMIN{players/neoplayer/player.swf}" />
+<param name="FlashVars" value="mp3=#URL_DOCUMENT&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;loadingcolor=ffff00&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;showinfo=0&amp;width=[(#GET{my_width})]&amp;height=20[&amp;autoplay=(#ENV{autostart,0})]" />
+[<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
+</object></dd>
+</BOUCLE_doc>
