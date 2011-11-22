@@ -28,7 +28,7 @@ jQuery(document).ready(function(){
 		player_stop();
 		jQuery("#playliste_video").show();
 		var id_start = $("a[title='video']").eq(0).attr("rel");
-		jQuery("#media").load("./?page=embed_video&id_document=" + id_start);
+		jQuery("#media").load("[(#URL_PAGE{player-embed_video,id_document=})]"+id_start);
 	});
 	
 	jQuery("#affiche_podcast a").click(function(e){
@@ -71,7 +71,7 @@ jQuery(document).ready(function(){
 			jQuery(this).click(
 				 function(e){
 					e.preventDefault();
-					jQuery("#media").load("./?page=embed_video&id_document=" + this.rel);
+					jQuery("#media").load("[(#URL_PAGE{player-embed_video,id_document=})]" + this.rel);
 					// jQuery("#now_playing").html(jQuery(this).html());
 				 }
 			);

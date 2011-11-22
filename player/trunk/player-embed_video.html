@@ -26,7 +26,7 @@ $("div.flash").hover(function(){
 
 <div id="video">
 <div style="margin:10px 0px;text-align:right;" class="flash">
-<a id="large" href="spip.php?page=embed_video&id_document=#ID_DOCUMENT&largeur=425&hauteur=355&height=500&width=600" class="thickbox">+ large</a>
+<a id="large" href="[(#URL_PAGE{player-embed_video,id_document=#ID_DOCUMENT}|parametre_url{largeur,425}|parametre_url{hauteur,355}|parametre_url{height,500}|parametre_url{width,600})]" class="thickbox">+ large</a>
 </div>
 [(#MODELE{emb}{id_document}{largeur=#ENV{largeur,255}}{hauteur=#ENV{hauteur,213}}{autostart=true})]
 </div>
