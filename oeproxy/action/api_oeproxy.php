@@ -130,6 +130,19 @@ function action_api_oeproxy_dist($args = null){
 }
 
 /**
+ * Se declarer soi meme comme provider universel
+ * @param array $providers
+ * @return array
+ */
+function oeproxy_oembed_lister_providers($providers){
+
+	$providers['http://*'] = 'oeproxy.api';
+	$providers['https://*'] = 'oeproxy.api';
+
+	return $providers;
+}
+
+/**
  * Verifier si l'url demandee ne peut pas etre servie par un provider connu
  * et dans ce cas on redirige simplement en 301
  * @param string $url

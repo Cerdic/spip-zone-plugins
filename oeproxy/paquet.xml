@@ -1,7 +1,7 @@
 <paquet
 	prefix="oeproxy"
 	categorie="outil"
-	version="0.5.4"
+	version="0.6.0"
 	etat="experimental"
 	compatibilite="[3.0.0-beta;["
 	logo="oeproxy-32.png"
@@ -11,6 +11,7 @@
 	<auteur lien="http://www.yterium.com">C&#233;dric Morin</auteur>
 	<licence>GPL</licence>
 
+	<pipeline nom='oembed_lister_providers' inclure='action/api_oeproxy.php' />
 	<necessite nom="Readability" compatibilite="[0.2.0;[" />
-	<necessite nom="oembed" compatibilite="[0.6.0;[" />
+	<necessite nom="oembed" compatibilite="[0.8.0;[" />
 </paquet>
