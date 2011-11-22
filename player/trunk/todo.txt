@@ -1,0 +1,14 @@
+TO DO
+
+
+- Faire le menage en mettant les fichiers .swf de la racine dans un /rep
+- Finaliser le systeme de skin ; actuellement on a :
+
+#MODELE{playliste} -> skin par defaut
+
+<INCLURE{fond=skins/blogo/blogoplayer}> -> skin blogoplayer
+
+- ajouter la fonction pause
+
+- nettoyer le code pour avoir notamment un player_enclosure.js propre et des css propres et faciles a customiser ...
+	
