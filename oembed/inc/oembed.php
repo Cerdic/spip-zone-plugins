@@ -7,6 +7,80 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Lister les providers connus
+ * @return array
+ */
+function oembed_lister_providers(){
+
+	// liste des providers par defaut
+
+	// voir
+	// http://oembed.com/
+	// http://code.google.com/p/oohembed/source/browse/app/provider/endpoints.json
+	// https://github.com/starfishmod/jquery-oembed-all/blob/master/jquery.oembed.js
+	// voir aussi http://embed.ly/providers qui donne les scheme mais pas les endpoint
+	$providers = array(
+		'http://*.youtube.com/watch*'    =>   'http://www.youtube.com/oembed',
+		'http://youtu.be/*'              =>   'http://www.youtube.com/oembed',
+		'http://blip.tv/file/*'          =>   'http://blip.tv/oembed/',
+		'http://*.vimeo.com/*'           =>   'http://www.vimeo.com/api/oembed.json',
+		'http://vimeo.com/*'             =>   'http://www.vimeo.com/api/oembed.json',
+		'http://*.dailymotion.com/*'     =>   'http://www.dailymotion.com/api/oembed',
+		'http://*.flickr.com/*'          =>   'http://www.flickr.com/services/oembed/',
+		'http://flickr.com/*'            =>   'http://www.flickr.com/services/oembed/',
+		'http://soundcloud.com/*'        =>   'http://soundcloud.com/oembed',
+		'http://*.soundcloud.com/*'      =>   'http://soundcloud.com/oembed',
+		'http://slideshare.net/*/*'      =>   'http://www.slideshare.net/api/oembed/2',
+		'http://www.slideshare.net/*/*'  =>   'http://www.slideshare.net/api/oembed/2',
+		'http://yfrog.com/*'         =>   'http://yfrog.com/api/oembed',
+		'http://yfrog.*/*'         =>   'http://yfrog.com/api/oembed',
+		'http://instagr.am/*'            =>   'http://api.instagram.com/oembed',
+		'http://instagram.com/*'         =>   'http://api.instagram.com/oembed',
+		'http://rd.io/*'                 =>   'http://www.rdio.com/api/oembed/',
+		'http://rdio.com/*'              =>   'http://www.rdio.com/api/oembed/',
+		'http://huffduffer.com/*/*'      =>   'http://huffduffer.com/oembed',
+		'http://nfb.ca/film/*'           =>   'http://www.nfb.ca/remote/services/oembed/',
+		'http://dotsub.com/view/*'       =>   'http://dotsub.com/services/oembed',
+		'http://clikthrough.com/theater/video/*'=>'http://clikthrough.com/services/oembed',
+		'http://kinomap.com/*'           =>   'http://www.kinomap.com/oembed',
+		'http://photobucket.com/albums/*'=>   'http://photobucket.com/oembed/',
+		'http://photobucket.com/groups/*'=>   'http://photobucket.com/oembed/',
+		'http://smugmug.com/*/*'         =>   'http://api.smugmug.com/services/oembed/',
+		'http://meetup.com/*'            =>   'http://api.meetup.com/oembed',
+		'http://meetup.ps/*'             =>   'http://api.meetup.com/oembed',
+		'http://*.wordpress.com/*'       =>   'http://public-api.wordpress.com/oembed/1.0/',
+		'http://*.blogs.cnn.com/*'         =>   'http://public-api.wordpress.com/oembed/1.0/',
+		'http://techcrunch.com/*'        =>   'http://public-api.wordpress.com/oembed/1.0/',
+		'http://wp.me/*'                 =>   'http://public-api.wordpress.com/oembed/1.0/',
+		'http://my.opera.com/*'           => 'http://my.opera.com/service/oembed',
+		'http://*.viddler.com/*'         =>   'http://lab.viddler.com/services/oembed/',
+		'http://www.collegehumor.com/video/*'=>'http://www.collegehumor.com/oembed.json',
+
+
+		#'https://twitter.com/*/status/*' =>   '?action=oeproxy_twitter',
+		#'http://twitter.com/*/status/*' =>   '?action=oeproxy_twitter',
+		#'https://twitter.com/*/statuses/*' =>   '?action=oeproxy_twitter',
+		#'http://twitter.com/*/statuses/*' =>   '?action=oeproxy_twitter',
+
+		#'http://yfrog.ru|com.tr|it|fr|co.il|co.uk|com.pl|pl|eu|us)/*'         =>   'http://yfrog.com/api/oembed',
+		#'https://gist.github.com/*' => 'http://github.com/api/oembed?format=json'
+	);
+
+	// pipeline pour permettre aux plugins d'ajouter/supprimer/modifier des providers
+	$providers = pipeline('oembed_lister_providers',$providers);
+
+	// merger avec la globale pour perso mes_options dans un site
+	// pour supprimer un scheme il suffit de le renseigner avec un endpoint vide
+	if (isset($GLOBALS['oembed_providers'])){
+		$providers = array_merge($providers, $GLOBALS['oembed_providers']);
+		// retirer les providers avec un endpoint vide
+		$providers = array_filter($providers);
+	}
+
+	return $providers;
+}
+
 // Merci WordPress :)
 // http://core.trac.wordpress.org/browser/trunk/wp-includes/class-oembed.php
 
@@ -100,11 +174,11 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
  *   false si non ; details du provider dans un tabeau associatif si oui
  */
 function oembed_verifier_provider($url) {
-	$providers = sql_allfetsel('*', 'spip_oembed_providers');
-	foreach ($providers as $p) {
-		$regex = '/' . str_replace('\*', '(.+)', preg_quote($p['scheme'], '/')) . '/';
+	$providers = oembed_lister_providers();
+	foreach ($providers as $scheme=>$endpoint) {
+		$regex = '/' . str_replace('\*', '(.+)', preg_quote($scheme, '/')) . '/';
 		if (preg_match($regex, $url)) {
-			return $p;
+			return array('endpoint' => $endpoint);
 		}
 	}
 	return false;

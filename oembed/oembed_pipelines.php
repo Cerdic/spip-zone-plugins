@@ -51,10 +51,11 @@ function oembed_formulaire_charger($flux){
  */
 function oembed_recuperer_fond($flux){
 	if ($flux['args']['fond']=='formulaires/inc-upload_document'){
-		$rows = sql_allfetsel('scheme','spip_oembed_providers');
+		include_spip('inc/oembed');
+		$providers = oembed_lister_providers();
 		$hosts = array();
-		foreach($rows as $row){
-			$h = parse_url($row['scheme'],PHP_URL_HOST);
+		foreach($providers as $scheme=>$endpoint){
+			$h = parse_url($scheme,PHP_URL_HOST);
 			$hosts[trim(preg_replace(",^(\*|www)\.,i","",$h))]=true;
 		}
 		$hosts = implode(', ',array_keys($hosts));
