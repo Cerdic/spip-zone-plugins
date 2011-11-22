@@ -1,6 +1,6 @@
 <BOUCLE_doc (DOCUMENTS) {id_document}{tout}>
-<dd class='spip_doc_descriptif player #ENV{player}'[ style='width:(#ENV{my_width})px;']>
-<object type="application/x-shockwave-flash" data="#CHEMIN{players/dewplayer/player.swf}" height="[(#ENV{height,20})]" width="[(#GET{my_width})]">
+<dd class='spip_doc_descriptif player #ENV{player}'[ style='width:(#ENV{my_width})px;height:[(#ENV{height,20})]px;']>
+<object type="application/x-shockwave-flash" data="#CHEMIN{players/dewplayer/player.swf}" height="[(#ENV{height,20})]" width="[(#ENV{my_width})]">
 <param name="wmode" value="transparent" />
 <param name="movie" value='#CHEMIN{players/dewplayer/player.swf}' />
 <param name="FlashVars" value="son=[(#URL_DOCUMENT|url_absolue)]" />

@@ -4,20 +4,19 @@
 	Pour voir les options de configuration : http://www.1pixelout.net/code/audio-player-wordpress-plugin/
 
 -->]
-<dd class='spip_doc_descriptif player #ENV{player}'[ style='width:(#ENV{my_width})px;']>
-<object class='audioplayer#ID_DOCUMENT' type='application/x-shockwave-flash' data='#CHEMIN{flash/pixplayer.swf}' height='[(#ENV{height,24})]' width='[(#GET{my_width})]'>
-<param name="wmode" value="transparent" />
-<param name='movie' value='#CHEMIN{flash/pixplayer.swf}' />
-<param name='FlashVars' value='playerID=#ID_DOCUMENT&amp;bg=0x[(#ENV{bg,f8f8f8})]&amp;leftbg=0x[(#ENV{leftbg,eeeeee})]&amp;lefticon=0x[(#ENV{lefticon,666666})]&amp;rightbg=0x[(#ENV{rightbg,cccccc})]&amp;rightbghover=0x[(#ENV{rightbghover,999999})]&amp;righticon=0x[(#ENV{righticon,666666})]&amp;righticonhover=0x[(#ENV{righticonhover,FFFFFF})]&amp;text=0x[(#ENV{text,666666})]&amp;slider=0x[(#ENV{slider,666666})]&amp;track=0x[(#ENV{track,FFFFFF})]&amp;border=0x[(#ENV{border,666666})]&amp;loader=0x[(#ENV{loader,9FFFB8})]&amp;soundFile=#URL_DOCUMENT' />
-<param name='quality' value='high' />
-<param name='menu' value='false' />
-<param name='bgcolor' value='[(#ENV{bgcolor,#FFFFFF})]' />
-[<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
-</object>
+<dd class='spip_doc_descriptif player #ENV{player}'[ style='width:(#ENV{my_width})px;height:24px']>
+<p id="audioplayer_#ID_DOCUMENT[_(#ID_DOCUMENT|pixplayer_id)]">[<span><a href='(#URL_DOCUMENT)' rel='enclosure' title='[(#TITRE|attribut_html)]'>#URL_DOCUMENT</a></span>]</p>
 <script type="text/javascript">
-	if(typeof(ap_instances) == "undefined"){
-		ap_instances = [];
-		jQuery.getScript("[(#CHEMIN{javascript/audio-player.js})]");
+	if(typeof(AudioPlayer) == "undefined"){
+		AudioPlayer = function(){};
+		jQuery.getScript("[(#CHEMIN{players/pixplayer/audio-player.js})]",function(){
+			AudioPlayer.setup("[(#CHEMIN{players/pixplayer/player.swf})]", {width: #ENV{my_width}});
+			jQuery(function(){
+				jQuery('dd.pixplayer>p').each(function(){
+					AudioPlayer.embed($(this).attr('id'), {soundFile: $('a',this).attr('href'),titles: $('a',this).attr('title')});
+				});
+			});
+		});
 	}
 </script></dd>
 </BOUCLE_doc>

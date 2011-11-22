@@ -15,19 +15,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function player_call_js($player) {
 	$flux = "\n"
 		. "<!-- Player JS -->\n"
-		. '<script type="text/javascript" src="'.find_in_path('soundmanager/soundmanager2.js').'"></script>'
+		. '<script type="text/javascript" src="'.find_in_path('javascript/soundmanager/soundmanager2.js').'"></script>'
 		. '<script type="text/javascript"><!--' . "\n"
-		. 'var musicplayerurl="' . find_in_path('flash/' . $player . '.swf') . '";'."\n"
+		. 'var musicplayerurl="' . find_in_path('players/' . $player . '/player.swf') . '";'."\n"
 		. "var key_espace_stop = true;\n"
 		. 'var image_play="'.find_in_path('images/playl.gif').'";'."\n"
 		. 'var image_pause="'.find_in_path('images/pausel.gif').'";'."\n"
-		. 'soundManager.url = "'.find_in_path('soundmanager/soundmanager2.swf').'";'."\n"
-  	. 'soundManager.nullURL = "'.find_in_path('soundmanager/null.mp3').'";'."\n"
-		. 'var videoNullUrl = "null.flv";'."\n"
+		. 'soundManager.url = "'.find_in_path('javascript/soundmanager/soundmanager2.swf').'";'."\n"
+  	. 'soundManager.nullURL = "'.find_in_path('javascript/soundmanager/null.mp3').'";'."\n"
 		. 'var DIR_PLUGIN_PLAYER = "' . _DIR_PLUGIN_PLAYER . '";'
 		. "//--></script>\n"
-		. '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'javascript/jscroller.js"></script>'."\n"
-		. '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'player_enclosure.js"></script>'."\n"
+		. '<script type="text/javascript" src="'.find_in_path('javascript/jscroller.js').'"></script>'."\n"
+		. '<script type="text/javascript" src="'.find_in_path('javascript/player_enclosure.js').'"></script>'."\n"
 		;
 	return $flux;
 }
