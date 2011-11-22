@@ -52,18 +52,6 @@ ul.playliste li{
 	background:#e6e6e6;
 }
 
-span.play_{
-	/*background:#E6ECFF;*/
-	cursor:pointer;
-    vertical-align: middle;
-}
-
-span.play_on{
-	/*background:#FF0000;*/
-	cursor:pointer;
-    vertical-align: middle;
-}
-
 #scrollbar{
 	clear:both;
 	height:5px;
@@ -112,6 +100,7 @@ div#now_playing{
 	height: 13px;
 	overflow: hidden;
 	border: 1px solid #cccccc;
+    line-height: 1;
 }
 
 #scroller {

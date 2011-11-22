@@ -19,6 +19,8 @@ isPlaying = false ;
      
 soundManager.consoleOnly = true;
 soundManager.debugMode = false;
+soundManager.url = player_data.soundManager_url;
+soundManager.nullURL = player_data.soundManager_nullURL;
 
 var seljQ = '@';
 if (jQuery.fn.jquery>="1.3.0")
@@ -50,7 +52,7 @@ function lecteur_multimedia_init(){
 	             function(e){
 	                 e.preventDefault();
 	                 player_play(i);
-	                 jQuery("#bouton_play").attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/pause.png');		
+	                 jQuery("#bouton_play").attr('src',player_data.dir + 'skins/blogo/pause.png');		
 	              }
 	         );
 		         
@@ -60,14 +62,14 @@ function lecteur_multimedia_init(){
 			jQuery(this).parent().click(
 				function(e){
 					player_play(i);
-					jQuery("#bouton_play").attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/pause.png');
+					jQuery("#bouton_play").attr('src',player_data.dir + 'skins/blogo/pause.png');
 				}
 			);
 			
 			// ajouter un bouton "play" devant les liens hors player - 
 			//a passer en .ajoute_musicplayer()	
 			//jQuery(this).before('<span class="play_">play</span>&nbsp;');
-			jQuery(this).before('<span class="play_"><img src="' + image_play + '"/></span>&nbsp;');
+			jQuery(this).before('<span class="play_"><img src="' + player_data.image_play + '"/></span>&nbsp;');
 		}
 	);
 	
@@ -109,7 +111,7 @@ function lecteur_multimedia_init(){
 						player_stop();
 					}else{
 						player_play(i) ;
-						jQuery(this).html("<img src='" + image_pause + "'/>").addClass("play_on");	
+						jQuery(this).html("<img src='" + player_data.image_pause + "'/>").addClass("play_on");
 						// i c pas forcemment bon si t'as un player avant le lien cf plus bas
 					}  						
 				},function(e){
@@ -123,14 +125,14 @@ function lecteur_multimedia_init(){
 	jQuery('#bouton_play').click(function(e){
 	    //console.log(isPlaying);
 		if(!isPlaying){
-			jQuery(this).attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/pause.png');	    	   
+			jQuery(this).attr('src',player_data.dir + 'skins/blogo/pause.png');	    	   
 			if(live_track =='stop') {
 				player_play(0) ;
 			}else{
 				player_togglePause();
 			}	
 		}else{	
-			jQuery(this).attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/play.png');		
+			jQuery(this).attr('src',player_data.dir + 'skins/blogo/play.png');		
 			player_togglePause();
 		}
 	});
@@ -155,7 +157,7 @@ function lecteur_multimedia_init(){
 	});
 	
 	// si option choisie, presser la barre espace arrete le lecteur
-	if (key_espace_stop) {
+	if (player_data.key_espace_stop) {
 		jQuery(document).keypress(function(e)
 		{
 			key = (e.charCode) ? e.charCode : e.keyCode;
@@ -180,13 +182,13 @@ function lecteur_multimedia_init(){
 
 function player_play(i){
 	player_stop();
-	jQuery("#bouton_play").attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/pause.png');
+	jQuery("#bouton_play").attr('src',player_data.dir + 'skins/blogo/pause.png');
 
 	track_index = i ;
 	live_track = i ;
 
 	//jQuery("span.play_:eq("+i+")").html("stop").addClass("play_on");		
-	jQuery("span.play_:eq("+i+")").html("<img src='" + image_pause + "'/>").addClass("play_on");	
+	jQuery("span.play_:eq("+i+")").html("<img src='" + player_data.image_pause + "'/>").addClass("play_on");
 	// i c pas forcemment bon si t'as un player avant le lien, il faut retrancher le nb d'item de la playlist du lecteur 
 	// (ne pas mettre enclosure aux deux ?)	
 	// limiter une playliste a son parent plutot qu'a la page ?
@@ -258,11 +260,11 @@ function player_play(i){
 		
 		jQuery("#musicplayer").html('<object '+
 			'type="application/x-shockwave-flash" '+
-			'data="'+musicplayerurl+'" '+
+			'data="'+player_data.player_url+'" '+
 			'width="1" height="1" align="middle">'+
 			'<param name="FlashVars" value="song_url='+playlist+'" />'+
 			'<param name="wmode" value="transparent" />'+
-			'<param name="movie" value="'+musicplayerurl+'" />'+
+			'<param name="movie" value="'+player_data.player_url+'" />'+
 			'</object>');
 		// Fin modification
 	}
@@ -320,7 +322,7 @@ function player_stop(){
 	isPlaying = false ;
 
 	//jQuery("span.play_on").html('play');
-	jQuery("span.play_on").html('<img src="' + image_play + '"/>');
+	jQuery("span.play_on").html('<img src="' + player_data.image_play + '"/>');
 	jQuery("span.play_on").removeClass("play_on");
 	live_track = 'stop' ;
 	
@@ -366,7 +368,7 @@ function player_togglePause(){
 }
 
 function reset_boutons(){
-	jQuery("#bouton_play").attr('src',DIR_PLUGIN_PLAYER + 'skins/blogo/play.png');
+	jQuery("#bouton_play").attr('src',player_data.dir + 'skins/blogo/play.png');
 	jQuery(".position").html("0'00''");
 	jQuery("#position,#loading").width(0);
 }
@@ -391,49 +393,6 @@ Array.prototype.contains = function (ele) {
 };
 
 
-// lecteur video
-// doc : http://flv-player.net/players/js/documentation/
-
-function video_play(i){
-	track_index = i ;
-	live_video = i ;
-	if (!videoPause) {
-		video_stop();
-	 	getFlashObject().SetVariable("method:setUrl", flvArray[i]);
- 	}
-	getFlashObject().SetVariable("method:play", "");
-	videoPause = false ; 
-	jQuery(".playliste li:eq("+i+")").addClass("play_on");
-}
-
-function video_pause(){
-	if(videoPause){ videoPause = false } else { videoPause = true }
-	getFlashObject().SetVariable("method:pause", "");
-}
-
-function video_next(){	
-	track_index++;
-	video_play(track_index);	
-}
-	
-function video_prev(){	
-	track_index--;	
-	video_play(track_index);
-}
-	
-function video_stop(){	
-	jQuery(".playliste li.play_on").removeClass("play_on");
-	getFlashObject().SetVariable("method:stop", "");
-	getFlashObject().SetVariable("method:setUrl", videoNullUrl);          
-	getFlashObject().SetVariable("method:play", "");
-	getFlashObject().SetVariable("method:stop", "");
-	getFlashObject().SetVariable("method:setPosition", 0);
-}
-
-function video_setVolume(){
-	var volume = document.getElementById("inputVolume").value;
-	getFlashObject().SetVariable("method:setVolume", volume);
-}
    
 function lecteur_debug(){
 	var content = jQuery("#debug").html() ; 	

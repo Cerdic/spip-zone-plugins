@@ -12,33 +12,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param $player
  * @return string
  */
-function player_call_js($player) {
+function player_call_js() {
 	$flux = "\n"
-		. "<!-- Player JS -->\n"
 		. '<script type="text/javascript" src="'.find_in_path('javascript/soundmanager/soundmanager2.js').'"></script>'
-		. '<script type="text/javascript"><!--' . "\n"
-		. 'var musicplayerurl="' . find_in_path('players/' . $player . '/player.swf') . '";'."\n"
-		. "var key_espace_stop = true;\n"
-		. 'var image_play="'.find_in_path('players/controls/play-16.png').'";'."\n"
-		. 'var image_pause="'.find_in_path('players/controls/pause-16.png').'";'."\n"
-		. 'soundManager.url = "'.find_in_path('javascript/soundmanager/soundmanager2.swf').'";'."\n"
-  	. 'soundManager.nullURL = "'.find_in_path('javascript/soundmanager/null.mp3').'";'."\n"
-		. 'var DIR_PLUGIN_PLAYER = "' . _DIR_PLUGIN_PLAYER . '";'
-		. "//--></script>\n"
-		. '<script type="text/javascript" src="'.find_in_path('javascript/jscroller.js').'"></script>'."\n"
 		. '<script type="text/javascript" src="'.find_in_path('javascript/player_enclosure.js').'"></script>'."\n"
 		;
 	return $flux;
 }
 
-/**
- * Code CSS a inserer dans la page pour habiller le player
- * @return string
- */
-function player_call_css() {
-	$flux = "\n".'<link rel="stylesheet" href="'.direction_css(find_in_path('player.css')).'" type="text/css" media="all" />';
-	return $flux;
-}
 
 /**
  * inserer systematiquement le CSS dans la page
@@ -46,9 +27,23 @@ function player_call_css() {
  * @return string
  */
 function player_insert_head_css($flux){
-	if (test_espace_prive()
-		OR (!defined('_PLAYER_AFFICHAGE_FINAL') OR !_PLAYER_AFFICHAGE_FINAL))
-		$flux .= player_call_css();
+	$flux =
+		'<script type="text/javascript">/*<![CDATA[*/' . "\n"
+		. 'player_data={'
+		// sert uniquement en fallback player sur les enclosure, si flash<8
+	  . 'player_url:"' . find_in_path('players/eraplayer/player.swf') . '",'
+	  . 'key_espace_stop:true,'
+	  . 'image_play:"'.find_in_path('players/controls/play-16.png').'",'
+		. 'image_pause:"'.find_in_path('players/controls/pause-16.png').'",'
+		. 'soundManager_url:"'.find_in_path('javascript/soundmanager/soundmanager2.swf').'",'
+		. 'soundManager_nullURL:"'.find_in_path('javascript/soundmanager/null.mp3').'",'
+		. 'dir:"' . _DIR_PLUGIN_PLAYER . '"'
+	  . '};'
+		. "/*]]>*/</script>\n"
+		. $flux;
+
+	lire_fichier(direction_css(find_in_path('css/player.css')),$css);
+	$flux .= "\n".'<style type="text/css">'.$css.'</style>';
 
 	return $flux;
 }
@@ -60,10 +55,8 @@ function player_insert_head_css($flux){
  */
 function player_insert_head($flux){
 	if (test_espace_prive()
-		OR (!defined('_PLAYER_AFFICHAGE_FINAL') OR !_PLAYER_AFFICHAGE_FINAL)){
-		$player = unserialize($GLOBALS['meta']['player']);
-		$player = isset($player['player_mp3'])?$player['player_mp3']:'eraplayer';
-		$flux .= player_call_js($player);
+		OR (defined('_PLAYER_AFFICHAGE_FINAL') AND _PLAYER_AFFICHAGE_FINAL)){
+		$flux .= player_call_js();
 	}
 	return $flux;
 }
@@ -76,21 +69,17 @@ function player_insert_head($flux){
  * @return string
  */
 function player_affichage_final($flux){
-	if (defined('_PLAYER_AFFICHAGE_FINAL') AND _PLAYER_AFFICHAGE_FINAL){
+	if (!defined('_PLAYER_AFFICHAGE_FINAL') OR !_PLAYER_AFFICHAGE_FINAL){
 		// inserer le head seulement si presente d'un rel='enclosure'
 		// il faut etre pas trop stricte car on peut avoir rel='nofollow encolsure' etc...
 		if ((strpos($flux,'enclosure')!==false)){
 			// on pourrait affiner la detection avec un preg ?
-			$player = unserialize($GLOBALS['meta']['player']);
-			$player = isset($player['player_mp3'])?$player['player_mp3']:'eraplayer';
-			$ins = player_call_css();
-			$ins .= player_call_js($player);
-
-			$p = stripos($flux,"</head>");
+			$ins = player_call_js();
+			$p = stripos($flux,"</body>");
 			if ($p)
 				$flux = substr_replace($flux,$ins,$p,0);
 			else
-				$flux .= player_head();
+				$flux .= $ins;
 		}
 	}
 	return $flux;
@@ -133,7 +122,7 @@ function player_enclose_link($regs){
  * @param $titre
  * @return mixed|string
  */
-function joli_titre($titre){
+function player_joli_titre($titre){
 	$titre=basename($titre);
 	$titre=preg_replace('/.mp3/','',$titre);
 	$titre=preg_replace('/^ /','',$titre);

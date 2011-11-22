@@ -28,7 +28,7 @@
    	[(#GET{url_tracks}|oui) [(#SET{url_tracks,#GET{url_tracks}|concat{'|'}})] ]
       [(#SET{url_tracks,#GET{url_tracks}|concat{#URL_DOCUMENT}})]
    	[(#GET{titre_tracks}|oui) [(#SET{titre_tracks,#GET{titre_tracks}|concat{'|'}})] ]
-      [(#SET{titre_tracks,[(#GET{titre_tracks}|concat{[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]})]})]
+      [(#SET{titre_tracks,[(#GET{titre_tracks}|concat{[(#TITRE|sinon{[(#FICHIER|player_joli_titre|couper{30})]})]})]})]
    </BOUCLE_documents>
 
    <BOUCLE_logo_art(ARTICLES){id_article ?}{0,1}>
