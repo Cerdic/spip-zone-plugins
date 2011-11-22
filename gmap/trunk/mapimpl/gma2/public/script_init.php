@@ -29,7 +29,7 @@ function mapimpl_gma2_public_script_init_dist()
 	$out .= '<script type="text/javascript" src="'.$google.'"></script>'."\n";
 	
 	// Ajouter le markermanager (copie en local)
-	$manager = find_in_path('mapimpl/gma2/javascript/markermanager.js');
+	$manager = "http://gmaps-utility-library-dev.googlecode.com/svn/tags/markermanager/1.1/src/markermanager.js";
 	$out .= '<script type="text/javascript" src="'.$manager.'"></script>'."\n";
 	
 	// Ajouter les scripts spécifiques

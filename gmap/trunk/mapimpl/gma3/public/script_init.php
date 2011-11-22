@@ -41,7 +41,11 @@ function mapimpl_gma3_public_script_init_dist()
 		$out .= 'google.load("earth", "1");'."\n";
 		$out .= '//]]>'."\n".'</script>'."\n";
 	
-		// Plugin google earth (http://google-maps-utility-library-v3.googlecode.com/svn/trunk/googleearth/)
+		// Plugin google earth
+		// Avec bonne volonté, je voudrais bien utiliser directement le js des librairies, mais il 
+		// y a un bug (connu) sur les marqueurs customisés, donc ça ne marche pas, alors je
+		// le corrige et garde une version locale...
+//		$earth = "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/googleearth/src/googleearth-compiled.js";
 		$earth = find_in_path('mapimpl/gma3/javascript/googleearth.js');
 		$out .= '<script type="text/javascript" src="'.$earth.'"></script>'."\n";
 	}

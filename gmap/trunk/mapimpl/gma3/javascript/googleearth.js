@@ -1,20 +1,983 @@
-(function(){var j=window,k=document,l=Math;function n(a,b){return a.width=b}function o(a,b){return a.position=b}function p(a,b){return a.height=b}function q(a,b){return a.zIndex=b}var r="appendChild",s="createElement",t="getCoordinates",u="getView",w="pushLatLngAlt",x="setTimeout",y="style",z="addListener",A="getFeatures",B="InfoWindow",C="maps",D="getPosition",E="setStyleSelector",F="earth",H="prototype",I="setGeometry",J="substring",K="parentNode",L="event";
-function M(a){if(!google||!google[F])throw"google.earth not loaded";if(!google[F].isSupported())throw"Google Earth API is not supported on this system";if(!google[F].isInstalled())throw"Google Earth API is not installed on this system";this.l="http://maps.google.com/mapfiles/kml/paddle/red-circle.png";this.b=a;this.k=a.getDiv();this.d=!1;this.f="Earth";this.i=[];this.e={};this.j=null;this.g=0;aa(this);ba(this)}j.GoogleEarth=M;M.MAP_TYPE_ID="GoogleEarthAPI";M[H].o=function(){return this.a};
-M[H].getInstance=M[H].o;
-function aa(a){var b=a.b,c={tileSize:new google[C].Size(256,256),maxZoom:19,name:a.f,alt:a.f,getTile:function(a,b,c){return c[s]("DIV")}};b.mapTypes.set("GoogleEarthAPI",c);b.setOptions({mapTypeControlOptions:{mapTypeIds:[google[C].MapTypeId.ROADMAP,google[C].MapTypeId.SATELLITE,"GoogleEarthAPI"]}});google[C][L][z](b,"maptypeid_changed",function(){if(a.b.getMapTypeId()=="GoogleEarthAPI"){var b;a:{b=RegExp("title=['\"]?"+a.f+"[\"']?");for(var c=a.c[K].childNodes,e=0,g;g=c[e];e++)if(b.test(g.innerHTML)){b=g;
-break a}b=void 0}c=b;e=c[y].zIndex;g=a.c[K].childNodes;for(var h=0,i;i=g[h];h++)i.__gme_ozi=i[y].zIndex,q(i[y],-1);c.__gme_ozi=e;q(a.c[y],q(c[y],0));c=a.h=k[s]("IFRAME");c.src="javascript:false;";c.scrolling="no";c.frameBorder="0";e=c[y];q(e,-1E5);n(e,p(e,"100%"));o(e,"absolute");e.left=e.top=0;b[r](c);a.c[y].display="";a.d=!0;a.a?N(a):ca(a)}else da(a)})}
-function N(a){a.e={};O(a,!0);for(var b=a.a[A]();b.getFirstChild();)b.removeChild(b.getFirstChild());a.g++;for(var b=0,c;c=a.i[b];b++)google[C][L].removeListener(c);b={};c=P;for(var d=0,f;f=c[d];d++)b[f]=Q(a,f);for(c=0;d=b.Marker[c];c++)ea(a,d);for(c=0;d=b.Polygon[c];c++){var e=a,g=d,d=e.a;f=S(e,g);var h=d.createPolygon("");f[I](h);e=T(e,g);f[E](e);e=d.createLinearRing("");h.setOuterBoundary(e);for(var h=e[t](),g=g.getPath().getArray(),e=0,i=void 0;i=g[e];e++)h[w](i.lat(),i.lng(),0);d[A]()[r](f)}for(c=
-0;d=b.Polyline[c];c++){h=a;g=d;d=h.a;f=S(h,g);e=d.createLineString("");e.setTessellate(!0);f[I](e);h=T(h,g);f[E](h);h=e[t]();g=g.getPath().getArray();e=0;for(i=void 0;i=g[e];e++)h[w](i.lat(),i.lng(),0);d[A]()[r](f)}for(c=0;d=b.Rectangle[c];c++){var g=a,m=d,d=g.a,h=m.getBounds();f=h.getNorthEast();h=h.getSouthWest();e=S(g,m);e[I](d.createPolygon(""));i=d.createLinearRing("");g=T(g,m);e[E](g);g=i[t]();g[w](f.lat(),f.lng(),0);g[w](f.lat(),h.lng(),0);g[w](h.lat(),h.lng(),0);g[w](h.lat(),f.lng(),0);g[w](f.lat(),
-f.lng(),0);e.getGeometry().setOuterBoundary(i);e.setName("placemark");d[A]()[r](e)}for(c=0;d=b.Circle[c];c++){i=a;m=d;d=i.a;f=m.getCenter();g=m.getRadius();h=S(i,m);h[I](d.createPolygon(""));e=d.createLinearRing("");i=T(i,m);h[E](i);for(i=0;i<25;i++){var R=f,v=g,m=14.4*i;v/=6378137;m*=l.PI/180;var G=R.lat()*(l.PI/180),R=R.lng()*(l.PI/180),X=l.cos(v),v=l.sin(v),Y=l.sin(G),G=l.cos(G),Z=X*Y+v*G*l.cos(m),m=new google[C].LatLng(l.asin(Z)/(l.PI/180),(R+l.atan2(v*G*l.sin(m),X-Y*Z))/(l.PI/180));e[t]()[w](m.lat(),
-m.lng(),0)}h.getGeometry().setOuterBoundary(e);h.setName("placemark");d[A]()[r](h)}for(c=0;d=b.KmlLayer[c];c++)fa(a,d.getUrl());for(c=0;d=b.GroundOverlay[c];c++)g=d.getBounds(),f=g.getNorthEast(),g=g.getSouthWest(),h=a.a,e=h.createGroundOverlay(""),e.setLatLonBox(h.createLatLonBox("")),e.getLatLonBox().setBox(f.lat(),g.lat(),f.lng(),g.lng(),0),e.setIcon(h.createIcon("")),e.getIcon().setHref(d.getUrl()),h[A]()[r](e)}
-function O(a,b){var c=a.b.getCenter(),d=a.a.createLookAt("");d.setRange(l.pow(2,27-a.b.getZoom()));d.setLatitude(c.lat());d.setLongitude(c.lng());d.setHeading(0);d.setAltitude(0);var f=a.a;b?(f.getOptions().setFlyToSpeed(5),f[u]().setAbstractView(d),d.setTilt(15),f.getOptions().setFlyToSpeed(0.75),j[x](function(){f[u]().setAbstractView(d)},200),j[x](function(){f.getOptions().setFlyToSpeed(1)},250)):f[u]().setAbstractView(d)}
-function U(a,b){a[0]=="#"&&(a=a[J](1,9));typeof b=="undefined"?b="FF":(b=parseInt(parseFloat(b)*255,10).toString(16),b.length==1&&(b="0"+b));return[b,a[J](4,6),a[J](2,4),a[J](0,2)].join("")}function S(a,b){var c=a.g+"GEV3_"+b.__gme_id;a.e[c]=b;return a.a.createPlacemark(c)}function fa(a,b){var c=a.a;google[F].fetchKml(c,b,function(a){a?c[A]()[r](a):j[x](function(){alert("Bad or null KML.")},0)})}
-function ea(a,b){if(b[D]()){var c=a.a,d=S(a,b);b.getTitle()&&d.setName(b.getTitle());var f=c.createIcon("");b.getIcon()?f.setHref(b.getIcon()):f.setHref(a.l);var e=c.createStyle("");e.getIconStyle().setIcon(f);d[E](e);f=c.createPoint("");f.setLatitude(b[D]().lat());f.setLongitude(b[D]().lng());d[I](f);c[A]()[r](d);a.i.push(google[C][L][z](b,"position_changed",function(){var c=a.g+"GEV3_"+b.__gme_id,d=a.e[c],c=a.a.getElementById(c).getGeometry(),d=d[D]();c.setLatitude(d.lat());c.setLongitude(d.lng())}))}}
-function T(a,b){var c=a.a.createStyle(""),d=c.getPolyStyle(),f=c.getLineStyle();f.setWidth(V(b,"strokeWeight",3));var e=V(b,"strokeOpacity",1),g=V(b,"fillOpacity",0.3),h=V(b,"strokeColor","#000000"),i=V(b,"fillColor","#000000");f.getColor().set(U(h,e));d.getColor().set(U(i,g));return c}function V(a,b,c){a=a.get(b);return typeof a=="undefined"?c:a}
-function ca(a){google[F].createInstance(a.m,function(b){a.a=b;ga(a);N(a)},function(b){ha(a);a.b.setMapTypeId(google[C].MapTypeId.ROADMAP);throw"Google Earth API failed to initialize: "+b;})}
-function ga(a){var b=a.a;b.getWindow().setVisibility(!0);var c=b.getNavigationControl();c.setVisibility(b.VISIBILITY_AUTO);c=c.getScreenXY();c.setYUnits(b.UNITS_INSET_PIXELS);c.setXUnits(b.UNITS_PIXELS);c=b.getLayerRoot();c.enableLayerById(b.LAYER_BORDERS,!0);c.enableLayerById(b.LAYER_ROADS,!0);google[C][L][z](a.b,"GEInfoWindowOpened",function(b){if(a.d){var c=a.a.createHtmlStringBalloon("");c.setFeature(a.j);c.setContentString(b.getContent());a.a.setBalloon(c)}});google[F].addEventListener(b.getGlobe(),
-"click",function(b){var c=b.getTarget(),e=a.e[c.getId()];if(e){b.preventDefault();for(var b=Q(a,"InfoWindow"),g=0,h;h=b[g];g++)h.close();a.j=c;google[C][L].trigger(e,"click")}})}function ia(a){var b=a.a[u]().copyAsLookAt(a.a.ALTITUDE_RELATIVE_TO_GROUND),c=b.getRange(),c=l.round(27-l.log(c)/l.log(2));!a.b.getZoom()==c?a.b.setZoom(c-1):a.b.setZoom(c);a.b.panTo(new google[C].LatLng(b.getLatitude(),b.getLongitude()))}function da(a){a.d&&(ia(a),j[x](function(){O(a)},50),j[x](function(){ha(a)},2200))}
-function ha(a){for(var b=a.c[K].childNodes,c=0,d;d=b[c];c++)q(d[y],d.__gme_ozi);a.h[K].removeChild(a.h);a.h=null;a.c[y].display="none";a.d=!1}
-function ba(a){var b=a.k,c=a.c=k[s]("DIV");o(c[y],"absolute");n(c[y],0);p(c[y],0);c.index=0;c[y].display="none";var d=a.n=k[s]("DIV");n(d[y],b.clientWidth+"px");p(d[y],b.clientHeight+"px");o(d[y],"absolute");c[r](d);b=a.m=k[s]("DIV");o(b[y],"absolute");n(b[y],"100%");p(b[y],"100%");d[r](b);a.b.controls[google[C].ControlPosition.TOP_LEFT].push(c);google[C][L][z](a.b,"resize",function(){var b=a.n[y],c=a.k;n(b,c.clientWidth+"px");p(b,c.clientHeight+"px")})}
-function Q(a,b){var c=[],d=W[b],f;for(f in d)if(d.hasOwnProperty(f)){var e=d[f];e.get("map")==a.b&&c.push(e)}return c}var W={};function ja(){var a=$,b=google[C][a][H];b.__gme_setMapOriginal=b.setMap;W[a]={};google[C][a][H].setMap=function(b){if(b){if(!this.__gme_id)this.__gme_id=ka++,W[a][this.__gme_id]=this}else delete W[a][this.__gme_id],this.__gme_id=void 0;this.__gme_setMapOriginal(b)}}
-for(var P="Marker,Polyline,Polygon,Rectangle,Circle,KmlLayer,GroundOverlay,InfoWindow".split(","),ka=0,la=P,ma=0,$;$=la[ma];ma++)if(ja(),$=="InfoWindow")google[C][B][H].p=google[C][B][H].open,W.InfoWindow={},google[C][B][H].open=function(a,b){if(a){if(!this.__gme_id)this.__gme_id=ka++,W[B][this.__gme_id]=this}else delete W[B][this.__gme_id],this.__gme_id=void 0;google[C][L].trigger(a,"GEInfoWindowOpened",this);this.p(a,b)};})();
+// Copyright 2011 Google Inc. All Rights Reserved.
+
+/**
+ * @fileoverview Earth API library for Maps v3.
+ * usage:  var ge = new GoogleEarth(map);.
+ * @author jlivni@google.com (Josh Livni).
+ */
+
+/**
+ * @constructor
+ * @param {google.maps.Map} map the Map associated with this Earth instance.
+ */
+function GoogleEarth(map) {
+  if (!google || !google.earth) {
+    throw 'google.earth not loaded';
+  }
+
+  if (!google.earth.isSupported()) {
+    throw 'Google Earth API is not supported on this system';
+  }
+
+  if (!google.earth.isInstalled()) {
+    throw 'Google Earth API is not installed on this system';
+  }
+
+  /**
+   * @const
+   * @private
+   * @type {string} */
+  this.RED_ICON_ = 'http://maps.google.com/mapfiles/kml/paddle/red-circle.png';
+
+  /**
+   * @private
+   * @type {google.maps.Map} */
+  this.map_ = map;
+
+  /**
+   * @private
+   * @type {Node} */
+  this.mapDiv_ = map.getDiv();
+
+  /**
+   * @private
+   * @type {boolean} */
+  this.earthVisible_ = false;
+
+  /**
+   * @private
+   * @type {string} */
+  this.earthTitle_ = 'Earth';
+
+  /**
+   * @private
+   * @type {Object} */
+  this.moveEvents_ = [];
+
+  /**
+   * @private
+   * @type {Object} */
+  this.overlays_ = {};
+
+  /**
+   * @private
+   * @type {?Object} */
+  this.lastClickedPlacemark_ = null;
+
+  /**
+   * Keep track of each time the 3D view is reloaded/refreshed
+   * @private
+   * @type {number} */
+  this.displayCounter_ = 0;
+
+  this.addEarthMapType_();
+  this.addEarthControl_();
+}
+window['GoogleEarth'] = GoogleEarth;
+
+/**
+ * @const
+ * @type {string} */
+GoogleEarth.MAP_TYPE_ID = 'GoogleEarthAPI';
+GoogleEarth['MAP_TYPE_ID'] = GoogleEarth.MAP_TYPE_ID;
+
+/**
+ * @const
+ * @private
+ * @type {string}
+ */
+GoogleEarth.INFO_WINDOW_OPENED_EVENT_ = 'GEInfoWindowOpened';
+
+/**
+ * @const
+ * @private
+ * @type {number}
+ */
+GoogleEarth.MAX_EARTH_ZOOM_ = 27;
+
+/**
+ * @return {?google.earth.GEPlugin} The Earth API Instance.
+ */
+GoogleEarth.prototype.getInstance = function() {
+  return this.instance_;
+};
+GoogleEarth.prototype['getInstance'] = GoogleEarth.prototype.getInstance;
+
+/**
+ * @private
+ */
+GoogleEarth.prototype.addEarthMapType_ = function() {
+  var map = this.map_;
+
+  var earthMapType = /** @type {google.maps.MapType} */({
+    tileSize: new google.maps.Size(256, 256),
+    maxZoom: 19,
+    name: this.earthTitle_,
+    // The alt helps the findMapTypeControlDiv work.
+    alt: this.earthTitle_,
+    getTile:
+      /**
+       * @param {google.maps.Point} tileCoord the tile coordinate.
+       * @param {number} zoom the zoom level.
+       * @param {Node} ownerDocument n/a.
+       * @return {Node} the overlay.
+       */
+      function(tileCoord, zoom, ownerDocument) {
+        var div = ownerDocument.createElement('DIV');
+        return div;
+      }
+  });
+
+  map.mapTypes.set(GoogleEarth.MAP_TYPE_ID, earthMapType);
+
+  var options = /** @type {google.maps.MapTypeControlOptions} */({
+    mapTypeControlOptions: {
+      mapTypeIds: [google.maps.MapTypeId.ROADMAP,
+                   google.maps.MapTypeId.SATELLITE,
+                   GoogleEarth.MAP_TYPE_ID]
+    }
+  });
+
+  map.setOptions(options);
+
+  var that = this;
+  google.maps.event.addListener(map, 'maptypeid_changed', function() {
+    that.mapTypeChanged_();
+  });
+};
+
+/**
+ * @private
+ */
+GoogleEarth.prototype.mapTypeChanged_ = function() {
+  if (this.map_.getMapTypeId() == GoogleEarth.MAP_TYPE_ID) {
+    this.showEarth_();
+  } else {
+    this.switchToMapView_();
+  }
+};
+
+/**
+ * @private
+ */
+GoogleEarth.prototype.showEarth_ = function() {
+  var mapTypeControlDiv = this.findMapTypeControlDiv_();
+  this.setZIndexes_(mapTypeControlDiv);
+  this.addShim_(mapTypeControlDiv);
+
+  this.controlDiv_.style.display = '';
+
+  this.earthVisible_ = true;
+  if (!this.instance_) {
+    this.initializeEarth_();
+    return;
+  }
+  this.refresh_();
+};
+
+/**
+ * @private
+ */
+GoogleEarth.prototype.refresh_ = function() {
+  this.overlays_ = {};
+  this.flyToMapView_(true);
+  this.clearPlacemarks_();
+  this.displayCounter_++;
+  this.clearMoveEvents_();
+  this.addMapOverlays_();
+};
+
+/**
+ * Clear all marker position_changed events
+ * @private
+ */
+GoogleEarth.prototype.clearMoveEvents_ = function() {
+  for (var i = 0, evnt; evnt = this.moveEvents_[i]; i++) {
+    google.maps.event.removeListener(evnt);
+  }
+};
+
+/**
+ * Clear all features on this instance.
+ * @private
+ */
+GoogleEarth.prototype.clearPlacemarks_ = function() {
+  var features = this.instance_.getFeatures();
+  while (features.getFirstChild()) {
+    features.removeChild(features.getFirstChild());
+  }
+};
+
+/**
+ * Fly to the current map zoom, add slight tilt.
+ * @private
+ * @param {boolean} tilt whether to teleport and tilt, or just flyto.
+ */
+GoogleEarth.prototype.flyToMapView_ = function(tilt) {
+  var center = this.map_.getCenter();
+  var lookAt = this.instance_.createLookAt('');
+  var range = Math.pow(2, GoogleEarth.MAX_EARTH_ZOOM_ - this.map_.getZoom());
+  lookAt.setRange(range);
+  lookAt.setLatitude(center.lat());
+  lookAt.setLongitude(center.lng());
+  lookAt.setHeading(0);
+  lookAt.setAltitude(0);
+  var ge = this.instance_;
+  if (tilt) {
+    // Teleport to the pre-tilt view immediately.
+    ge.getOptions().setFlyToSpeed(5);
+    ge.getView().setAbstractView(lookAt);
+    lookAt.setTilt(15);
+    // Fly to the tilt at regular speed in 200ms
+    ge.getOptions().setFlyToSpeed(0.75);
+    window.setTimeout(function() {
+      ge.getView().setAbstractView(lookAt);
+    }, 200);
+    // Set the flyto speed back to default after the animation starts.
+    window.setTimeout(function() {
+      ge.getOptions().setFlyToSpeed(1);
+    }, 250);
+  } else {
+    // Fly to the approximate map view at regular speed.
+    ge.getView().setAbstractView(lookAt);
+  }
+};
+
+/**
+ *  @param {string|*} hex color value in rgb.
+ *  @param {string|*=} opacity -- in percentage.
+ *  @return {string} abgr KML style color.
+ *  @private
+ */
+GoogleEarth.getKMLColor_ = function(hex, opacity) {
+  if (hex[0] == '#') {
+    hex = hex.substring(1, 9);
+  }
+  if (typeof opacity == 'undefined') {
+    opacity = 'FF';
+  } else {
+    opacity = parseInt(parseFloat(opacity) * 255, 10).toString(16);
+    if (opacity.length == 1) {
+      opacity = '0' + opacity;
+    }
+  }
+  var R = hex.substring(0, 2);
+  var G = hex.substring(2, 4);
+  var B = hex.substring(4, 6);
+  var abgr = [opacity, B, G, R].join('');
+  return abgr;
+};
+
+
+/**
+ * @param {google.maps.MVCObject} overlay the map overlay.
+ * @return {String} ID for the Placemark.
+ * @private
+ */
+GoogleEarth.prototype.generatePlacemarkId_ = function(overlay) {
+  var placemarkId = this.displayCounter_ + 'GEV3_' + overlay['__gme_id'];
+  return placemarkId;
+};
+
+/**
+ * @param {google.maps.MVCObject} overlay the map overlay.
+ * @return {google.earth.KmlPlacemark} placemark the placemark.
+ * @private
+ */
+GoogleEarth.prototype.createPlacemark_ = function(overlay) {
+  var placemarkId = this.generatePlacemarkId_(overlay);
+  this.overlays_[placemarkId] = overlay;
+  return this.instance_.createPlacemark(placemarkId);
+};
+
+/**
+ * @param {google.maps.Rectangle} rectangle the rectangle overlay.
+ * @private
+ */
+GoogleEarth.prototype.createRectangle_ = function(rectangle) {
+  var ge = this.instance_;
+  var bounds = rectangle.getBounds();
+  var ne = bounds.getNorthEast();
+  var sw = bounds.getSouthWest();
+
+  var placemark = this.createPlacemark_(rectangle);
+
+  placemark.setGeometry(ge.createPolygon(''));
+  var ring = ge.createLinearRing('');
+
+  //set the style
+  var style = this.createStyle_(rectangle);
+  placemark.setStyleSelector(style);
+
+  //create the rectangle
+  var coords = ring.getCoordinates();
+  coords.pushLatLngAlt(ne.lat(), ne.lng(), 0);
+  coords.pushLatLngAlt(ne.lat(), sw.lng(), 0);
+  coords.pushLatLngAlt(sw.lat(), sw.lng(), 0);
+  coords.pushLatLngAlt(sw.lat(), ne.lng(), 0);
+  coords.pushLatLngAlt(ne.lat(), ne.lng(), 0);
+
+  placemark.getGeometry().setOuterBoundary(ring);
+  placemark.setName('placemark');
+  ge.getFeatures().appendChild(placemark);
+};
+
+/**
+ * @param {google.maps.GroundOverlay} groundOverlay the GroundOverlay.
+ * @private
+ */
+GoogleEarth.prototype.addGroundOverlay_ = function(groundOverlay) {
+  var bounds = groundOverlay.getBounds();
+  var ne = bounds.getNorthEast();
+  var sw = bounds.getSouthWest();
+
+  var ge = this.instance_;
+  var overlay = ge.createGroundOverlay('');
+
+  overlay.setLatLonBox(ge.createLatLonBox(''));
+  var latLonBox = overlay.getLatLonBox();
+  latLonBox.setBox(ne.lat(), sw.lat(), ne.lng(), sw.lng(), 0);
+
+  overlay.setIcon(ge.createIcon(''));
+  overlay.getIcon().setHref(groundOverlay.getUrl());
+
+  ge.getFeatures().appendChild(overlay);
+};
+
+/**
+ * @param {string} url for kml.
+ * @private
+ */
+GoogleEarth.prototype.addKML_ = function(url) {
+  var ge = this.instance_;
+  google.earth.fetchKml(ge, url, function(kml) {
+    if (!kml) {
+      // wrap alerts in API callbacks and event handlers
+      // in a window.setTimeout to prevent deadlock in some browsers
+      window.setTimeout(function() {
+        alert('Bad or null KML.');
+      }, 0);
+      return;
+    }
+    ge.getFeatures().appendChild(kml);
+ });
+};
+
+/**
+ * @param {String} placemarkId the id of the placemark.
+ * @private
+ */
+GoogleEarth.prototype.updatePlacemark_ = function(placemarkId) {
+  //TODO(jlivni) generalize to work with more than just Markers/Points
+  var marker = this.overlays_[placemarkId];
+  var placemark = this.instance_.getElementById(placemarkId);
+  var geom = placemark.getGeometry();
+  var position = marker.getPosition();
+  geom.setLatitude(position.lat());
+  geom.setLongitude(position.lng());
+};
+
+/**
+ * @param {google.maps.Marker} marker The map marker.
+ * @private
+ */
+GoogleEarth.prototype.createPoint_ = function(marker) {
+  if (!marker.getPosition()) {
+    return;
+  }
+  var ge = this.instance_;
+  var placemark = this.createPlacemark_(marker);
+  if (marker.getTitle()) {
+    placemark.setName(marker.getTitle());
+  }
+
+  // Create style map for placemark
+  var icon = ge.createIcon('');
+  if (marker.getIcon()) {
+    //TODO(jlivni) fix for if it's a markerImage
+	// FAB >>> fix it !
+    //icon.setHref(marker.getIcon());
+	var url = marker.getIcon();
+	if (url instanceof google.maps.MarkerImage)
+		url = url.url;
+    icon.setHref(url);
+	// <<< FAB
+  } else {
+    icon.setHref(this.RED_ICON_);
+  }
+
+  var style = ge.createStyle('');
+  style.getIconStyle().setIcon(icon);
+  placemark.setStyleSelector(style);
+
+  // Create point
+  var point = ge.createPoint('');
+  point.setLatitude(marker.getPosition().lat());
+  point.setLongitude(marker.getPosition().lng());
+  placemark.setGeometry(point);
+
+  ge.getFeatures().appendChild(placemark);
+
+  //add listener for marker move on Map
+  var that = this;
+  var moveEvent = google.maps.event.addListener(marker,
+    'position_changed',
+    function() {
+      var placemarkId = that.generatePlacemarkId_(marker);
+      that.updatePlacemark_(placemarkId);
+    });
+  this.moveEvents_.push(moveEvent);
+};
+
+/**
+ * @param {google.maps.Polygon} polygon the polygon overlay.
+ * @private
+ */
+GoogleEarth.prototype.createPolygon_ = function(polygon) {
+  var ge = this.instance_;
+  var placemark = this.createPlacemark_(polygon);
+
+  // Create polygon
+  var poly = ge.createPolygon('');
+  placemark.setGeometry(poly);
+
+  //set the style
+  var style = this.createStyle_(polygon);
+  placemark.setStyleSelector(style);
+
+
+  //assume single linearRing
+  var outer = ge.createLinearRing('');
+  poly.setOuterBoundary(outer);
+  var coords = outer.getCoordinates();
+  var path = polygon.getPath().getArray();
+
+  //TODO(jlivni) use getPaths and multiple rings
+  for (var i = 0, latLng; latLng = path[i]; i++) {
+    coords.pushLatLngAlt(latLng.lat(), latLng.lng(), 0);
+  }
+
+  ge.getFeatures().appendChild(placemark);
+};
+
+/**
+ * Computes the LatLng produced by starting from a given LatLng and heading a
+ * given distance.
+ * @see http://williams.best.vwh.net/avform.htm#LL
+ * @param {google.maps.LatLng} from The LatLng from which to start.
+ * @param {number} distance The distance to travel.
+ * @param {number} heading The heading in degrees clockwise from north.
+ * @return {google.maps.LatLng} The result.
+ * @private
+ */
+GoogleEarth.computeOffset_ = function(from, distance, heading) {
+  var radius = 6378137;
+  distance /= radius;
+  heading = heading * (Math.PI / 180); //convert to radians
+  var fromLat = from.lat() * (Math.PI / 180);
+  var fromLng = from.lng() * (Math.PI / 180);
+  var cosDistance = Math.cos(distance);
+  var sinDistance = Math.sin(distance);
+  var sinFromLat = Math.sin(fromLat);
+  var cosFromLat = Math.cos(fromLat);
+  var sinLat = cosDistance * sinFromLat +
+      sinDistance * cosFromLat * Math.cos(heading);
+  var dLng = Math.atan2(
+      sinDistance * cosFromLat * Math.sin(heading),
+      cosDistance - sinFromLat * sinLat);
+  return new google.maps.LatLng((Math.asin(sinLat) / (Math.PI / 180)),
+                                (fromLng + dLng) / (Math.PI / 180));
+};
+
+/**
+ * @param {google.maps.Circle} circle The circle overlay.
+ * @private
+ */
+GoogleEarth.prototype.createCircle_ = function(circle) {
+  var ge = this.instance_;
+  var center = circle.getCenter();
+  var radius = circle.getRadius();
+  var placemark = this.createPlacemark_(circle);
+  placemark.setGeometry(ge.createPolygon(''));
+  var ring = ge.createLinearRing('');
+
+  //set the style
+  var style = this.createStyle_(circle);
+  placemark.setStyleSelector(style);
+
+  //create a circle
+  var vertices = 25;
+  for (var i = 0; i < vertices; i++) {
+    var heading = 360 / vertices * i;
+    var offset = GoogleEarth.computeOffset_(center, radius, heading);
+    ring.getCoordinates().pushLatLngAlt(offset.lat(), offset.lng(), 0);
+  }
+  placemark.getGeometry().setOuterBoundary(ring);
+  placemark.setName('placemark');
+  ge.getFeatures().appendChild(placemark);
+};
+
+/**
+ * @param {google.maps.Polyline} polyline The map polyline overlay.
+ * @private
+ */
+GoogleEarth.prototype.createPolyline_ = function(polyline) {
+  var ge = this.instance_;
+  var placemark = this.createPlacemark_(polyline);
+
+  // Create linestring
+  var lineString = ge.createLineString('');
+  lineString.setTessellate(true);
+  placemark.setGeometry(lineString);
+
+  //set the style
+  var style = this.createStyle_(polyline);
+  placemark.setStyleSelector(style);
+
+  var coords = lineString.getCoordinates();
+  var path = polyline.getPath().getArray();
+  //TODO(jlivni) use getPaths for case of multiple rings
+  for (var i = 0, latLng; latLng = path[i]; i++) {
+    coords.pushLatLngAlt(latLng.lat(), latLng.lng(), 0);
+  }
+
+  ge.getFeatures().appendChild(placemark);
+};
+
+/**
+ * @param {google.maps.MVCObject} overlay the map overlay.
+ * @return {google.earth.KmlStyle} the style.
+ * @private
+ */
+GoogleEarth.prototype.createStyle_ = function(overlay) {
+  var style = this.instance_.createStyle('');
+  var polyStyle = style.getPolyStyle();
+  var lineStyle = style.getLineStyle();
+
+  lineStyle.setWidth(this.getMVCVal_(overlay, 'strokeWeight', 3));
+
+  var strokeOpacity = this.getMVCVal_(overlay, 'strokeOpacity', 1);
+  var fillOpacity = this.getMVCVal_(overlay, 'fillOpacity', 0.3);
+  var strokeColor = this.getMVCVal_(overlay, 'strokeColor', '#000000');
+  var fillColor = this.getMVCVal_(overlay, 'fillColor', '#000000');
+
+  lineStyle.getColor().set(GoogleEarth.getKMLColor_(strokeColor,
+                                                   strokeOpacity));
+  polyStyle.getColor().set(GoogleEarth.getKMLColor_(fillColor, fillOpacity));
+
+  return style;
+};
+
+/**
+ * Gets the property value from an mvc object.
+ * @param {google.maps.MVCObject} mvcObject The object.
+ * @param {string} property The property.
+ * @param {string|number} def The default.
+ * @return {string|number} The property, or default if property undefined.
+ * @private
+ */
+GoogleEarth.prototype.getMVCVal_ = function(mvcObject, property, def) {
+  var val = mvcObject.get(property);
+  if (typeof val == 'undefined') {
+    return def;
+  } else {
+    return /** @type {string|number} */(val);
+  }
+};
+
+/**
+ * Add  map overlays to Earth.
+ * @private
+ */
+GoogleEarth.prototype.addMapOverlays_ = function() {
+  var overlays = this.getOverlays_();
+  for (var i = 0, marker; marker = overlays['Marker'][i]; i++) {
+    this.createPoint_(marker);
+  }
+  for (var i = 0, polygon; polygon = overlays['Polygon'][i]; i++) {
+    this.createPolygon_(polygon);
+  }
+  for (var i = 0, polyline; polyline = overlays['Polyline'][i]; i++) {
+    this.createPolyline_(polyline);
+  }
+  for (var i = 0, rectangle; rectangle = overlays['Rectangle'][i]; i++) {
+    this.createRectangle_(rectangle);
+  }
+  for (var i = 0, circle; circle = overlays['Circle'][i]; i++) {
+    this.createCircle_(circle);
+  }
+  for (var i = 0, kml; kml = overlays['KmlLayer'][i]; i++) {
+    this.addKML_(kml.getUrl());
+  }
+  for (var i = 0, overlay; overlay = overlays['GroundOverlay'][i]; i++) {
+    this.addGroundOverlay_(overlay);
+  }
+};
+
+/**
+ * @private
+ */
+GoogleEarth.prototype.initializeEarth_ = function() {
+  var that = this;
+  google.earth.createInstance(this.earthDiv_, function(instance) {
+    that.instance_ = /** @type {google.earth.GEPlugin} */(instance);
+    that.addEarthEvents_();
+    that.refresh_();
+  }, function(e) {
+    that.hideEarth_();
+    //TODO(jlivni) record previous maptype
+    that.map_.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+    throw 'Google Earth API failed to initialize: ' + e;
+  });
+};
+
+/**
+ * @private
+ */
+GoogleEarth.prototype.addEarthEvents_ = function() {
+  var ge = this.instance_;
+  ge.getWindow().setVisibility(true);
+
+  // add a navigation control
+  var navControl = ge.getNavigationControl();
+  navControl.setVisibility(ge.VISIBILITY_AUTO);
+
+  var screen = navControl.getScreenXY();
+  screen.setYUnits(ge.UNITS_INSET_PIXELS);
+  screen.setXUnits(ge.UNITS_PIXELS);
+
+  // add some layers
+  var layerRoot = ge.getLayerRoot();
+  layerRoot.enableLayerById(ge.LAYER_BORDERS, true);
+  layerRoot.enableLayerById(ge.LAYER_ROADS, true);
+
+  var that = this;
+  google.maps.event.addListener(this.map_,
+                                GoogleEarth.INFO_WINDOW_OPENED_EVENT_,
+                                function(infowindow) {
+    //If Earth is open, create balloon
+    if (!that.earthVisible_) {
+      return;
+    }
+    var balloon = that.instance_.createHtmlStringBalloon('');
+    //TODO assuming anchor == marker == lastclicked
+    var placemark = that.lastClickedPlacemark_;
+    balloon.setFeature(placemark);
+    balloon.setContentString(infowindow.getContent());
+    that.instance_.setBalloon(balloon);
+  });
+
+   // On click of a placemark we want to trigger the map click event.
+  google.earth.addEventListener(ge.getGlobe(), 'click', function(event) {
+    var target = event.getTarget();
+    var overlay = that.overlays_[target.getId()];
+    if (overlay) {
+      event.preventDefault();
+      // Close any currently opened map info windows.
+      var infoWindows = that.getOverlaysForType_('InfoWindow');
+      for (var i = 0, infoWindow; infoWindow = infoWindows[i]; i++) {
+        infoWindow.close();
+      }
+      that.lastClickedPlacemark_ = target;
+      google.maps.event.trigger(overlay, 'click');
+    }
+  });
+
+};
+
+/**
+ * Set the Map view to match Earth.
+ * @private
+ */
+GoogleEarth.prototype.matchMapToEarth_ = function() {
+  var lookAt = this.instance_.getView().copyAsLookAt(
+      this.instance_.ALTITUDE_RELATIVE_TO_GROUND);
+  var range = lookAt.getRange();
+  var zoom = Math.round(
+      GoogleEarth.MAX_EARTH_ZOOM_ - (Math.log(range) / Math.log(2)));
+  if (!this.map_.getZoom() == zoom) {
+    this.map_.setZoom(zoom - 1);
+  } else {
+    this.map_.setZoom(zoom);
+  }
+  var center = new google.maps.LatLng(lookAt.getLatitude(),
+                                      lookAt.getLongitude());
+  this.map_.panTo(center);
+};
+
+/**
+ * Animate from Earth to Maps view.
+ * @private
+ */
+GoogleEarth.prototype.switchToMapView_ = function() {
+  if (!this.earthVisible_) {
+    return;
+  }
+
+  // First, set map to match current earth view.
+  this.matchMapToEarth_();
+
+  // Now fly Earth to match the map view.
+  var that = this;
+
+  window.setTimeout(function() {
+    // Sometimes it takes a few ms before the map zoom is ready.
+    that.flyToMapView_();
+  }, 50);
+
+  window.setTimeout(function() {
+    // And switch back to maps once we've flown.
+    that.hideEarth_();
+  }, 2200);
+};
+
+/**
+ * Hide the Earth div.
+ * @private
+ */
+GoogleEarth.prototype.hideEarth_ = function() {
+  this.unsetZIndexes_();
+  this.removeShim_();
+
+  this.controlDiv_.style.display = 'none';
+  this.earthVisible_ = false;
+};
+
+/**
+ * Sets the z-index of all controls except for the map type control so that
+ * they appear behind Earth.
+ * @param {Node} mapTypeControlDiv the control div.
+ * @private
+ */
+GoogleEarth.prototype.setZIndexes_ = function(mapTypeControlDiv) {
+  var oldIndex = mapTypeControlDiv.style.zIndex;
+  var siblings = this.controlDiv_.parentNode.childNodes;
+  for (var i = 0, sibling; sibling = siblings[i]; i++) {
+    sibling['__gme_ozi'] = sibling.style.zIndex;
+    // Sets the zIndex of all controls to be behind Earth.
+    sibling.style.zIndex = -1;
+  }
+
+  mapTypeControlDiv['__gme_ozi'] = oldIndex;
+  this.controlDiv_.style.zIndex = mapTypeControlDiv.style.zIndex = 0;
+};
+
+/**
+ * @private
+ */
+GoogleEarth.prototype.unsetZIndexes_ = function() {
+  var siblings = this.controlDiv_.parentNode.childNodes;
+  for (var i = 0, sibling; sibling = siblings[i]; i++) {
+    // Set the old zIndex back
+    sibling.style.zIndex = sibling['__gme_ozi'];
+  }
+};
+
+/**
+ * @param {Node} mapTypeControlDiv the control div.
+ * @private
+ */
+GoogleEarth.prototype.addShim_ = function(mapTypeControlDiv) {
+  var iframeShim = this.iframeShim_ = document.createElement('IFRAME');
+  iframeShim.src = 'javascript:false;';
+  iframeShim.scrolling = 'no';
+  iframeShim.frameBorder = '0';
+
+  var style = iframeShim.style;
+  style.zIndex = -100000;
+  style.width = style.height = '100%';
+  style.position = 'absolute';
+  style.left = style.top = 0;
+
+  // Appends the iframe to the map type control's DIV so that its width and
+  // height will be 100% and if the control changes from a bar to a drop down,
+  // it flows nicely.
+  mapTypeControlDiv.appendChild(iframeShim);
+};
+
+/**
+ * Remove the shim containing the earth div.
+ * @private
+ */
+GoogleEarth.prototype.removeShim_ = function() {
+  this.iframeShim_.parentNode.removeChild(this.iframeShim_);
+  this.iframeShim_ = null;
+};
+
+/**
+ * @private
+ * @return {Node} the map type control div.
+ */
+GoogleEarth.prototype.findMapTypeControlDiv_ = function() {
+  var title = 'title=[\'\"]?' + this.earthTitle_ + '[\"\']?';
+  var regex = new RegExp(title);
+  var siblings = this.controlDiv_.parentNode.childNodes;
+  for (var i = 0, sibling; sibling = siblings[i]; i++) {
+    if (regex.test(sibling.innerHTML)) {
+      return sibling;
+    }
+  }
+};
+
+/**
+ * @private
+ */
+GoogleEarth.prototype.addEarthControl_ = function() {
+  var mapDiv = this.mapDiv_;
+
+  var control = this.controlDiv_ = document.createElement('DIV');
+  control.style.position = 'absolute';
+  control.style.width = 0;
+  control.style.height = 0;
+  control.index = 0;
+  control.style.display = 'none';
+
+  var inner = this.innerDiv_ = document.createElement('DIV');
+  inner.style.width = mapDiv.clientWidth + 'px';
+  inner.style.height = mapDiv.clientHeight + 'px';
+  inner.style.position = 'absolute';
+
+  control.appendChild(inner);
+
+  var earthDiv = this.earthDiv_ = document.createElement('DIV');
+  earthDiv.style.position = 'absolute';
+  earthDiv.style.width = '100%';
+  earthDiv.style.height = '100%';
+
+  inner.appendChild(earthDiv);
+
+  this.map_.controls[google.maps.ControlPosition.TOP_LEFT].push(control);
+
+  var that = this;
+
+  google.maps.event.addListener(this.map_, 'resize', function() {
+    that.resizeEarth_();
+  });
+};
+
+/**
+ * @private
+ */
+GoogleEarth.prototype.resizeEarth_ = function() {
+  var innerStyle = this.innerDiv_.style;
+  var mapDiv = this.mapDiv_;
+  innerStyle.width = mapDiv.clientWidth + 'px';
+  innerStyle.height = mapDiv.clientHeight + 'px';
+};
+
+/**
+ * @param {string} type type of overlay (Polygon, etc).
+ * @return {Array.<Object>} list of overlays of given type currently on map.
+ * @private
+ */
+GoogleEarth.prototype.getOverlaysForType_ = function(type) {
+  var tmp = [];
+  var overlays = GoogleEarth.overlays_[type];
+  for (var i in overlays) {
+    if (overlays.hasOwnProperty(i)) {
+      var overlay = overlays[i];
+      if (overlay.get('map') == this.map_) {
+        tmp.push(overlay);
+      }
+    }
+  }
+  return tmp;
+};
+
+/**
+ * @return {Object} dictionary of lists for all map overlays.
+ * @private
+ */
+GoogleEarth.prototype.getOverlays_ = function() {
+  var overlays = {};
+  var overlayClasses = GoogleEarth.OVERLAY_CLASSES;
+
+  for (var i = 0, overlayClass; overlayClass = overlayClasses[i]; i++) {
+    overlays[overlayClass] = this.getOverlaysForType_(overlayClass);
+  }
+  return overlays;
+};
+
+/**
+ * @private
+ */
+GoogleEarth.overlays_ = {};
+
+/**
+ * override the open property for infowindow
+ * @private
+ */
+GoogleEarth.modifyOpen_ = function() {
+  google.maps.InfoWindow.prototype.openOriginal_ =
+      google.maps.InfoWindow.prototype['open'];
+
+  GoogleEarth.overlays_['InfoWindow'] = {};
+  google.maps.InfoWindow.prototype['open'] = function(map, anchor) {
+    if (map) {
+      if (!this['__gme_id']) {
+        this['__gme_id'] = GoogleEarth.counter_++;
+        GoogleEarth.overlays_['InfoWindow'][this['__gme_id']] = this;
+      }
+    } else {
+      delete GoogleEarth.overlays_['InfoWindow'][this['__gme_id']];
+      this['__gme_id'] = undefined;
+    }
+    google.maps.event.trigger(map, GoogleEarth.INFO_WINDOW_OPENED_EVENT_, this);
+    this.openOriginal_(map, anchor);
+  };
+};
+
+/**
+ * @param {string} overlayClass overlay type, such as Marker, Polygon, etc.
+ * @private
+ */
+GoogleEarth.modifySetMap_ = function(overlayClass) {
+  var proto = google.maps[overlayClass].prototype;
+  proto['__gme_setMapOriginal'] = proto.setMap;
+
+  GoogleEarth.overlays_[overlayClass] = {};
+  google.maps[overlayClass].prototype['setMap'] = function(map) {
+    if (map) {
+      if (!this['__gme_id']) {
+        this['__gme_id'] = GoogleEarth.counter_++;
+        GoogleEarth.overlays_[overlayClass][this['__gme_id']] = this;
+      }
+    } else {
+      delete GoogleEarth.overlays_[overlayClass][this['__gme_id']];
+      this['__gme_id'] = undefined;
+    }
+
+    this['__gme_setMapOriginal'](map);
+  };
+};
+
+/**
+ * @const
+ * @type {Array.<string>}
+ */
+GoogleEarth.OVERLAY_CLASSES = ['Marker', 'Polyline', 'Polygon', 'Rectangle',
+    'Circle', 'KmlLayer', 'GroundOverlay', 'InfoWindow'];
+
+/**
+ * Keep track of total number of placemarks added.
+ * @type {number}
+ * @private
+ */
+GoogleEarth.counter_ = 0;
+
+/**
+ * Wrapper to call appropriate prototype override methods for all overlays
+ * @private
+ */
+GoogleEarth.trackOverlays_ = function() {
+  var overlayClasses = GoogleEarth.OVERLAY_CLASSES;
+
+  for (var i = 0, overlayClass; overlayClass = overlayClasses[i]; i++) {
+    GoogleEarth.modifySetMap_(overlayClass);
+    if (overlayClass == 'InfoWindow') {
+      GoogleEarth.modifyOpen_();
+    }
+  }
+};
+
+GoogleEarth.trackOverlays_();

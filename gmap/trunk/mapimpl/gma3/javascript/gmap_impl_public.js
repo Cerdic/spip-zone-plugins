@@ -1221,7 +1221,8 @@ MapWrapper.prototype =
 		var htmlContents = marker.extraData.params.html;
 		var markers = null;
 		var bounds = null;
-		if (this.curParams.mergeInfoWindows === true)
+		if ((this.curParams.mergeInfoWindows === true) &&
+			(this.map.getMapTypeId() != GoogleEarth.MAP_TYPE_ID))
 		{
 			bounds = this._getMarkerAttraction(marker);
 			markers = this.getMarkersInSquare(bounds);
