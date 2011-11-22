@@ -43,7 +43,7 @@ _ {Attention, la taille max d’un fichier est de '.$max_filesize.', soit enviro
 'thumbsites' => 'Cliquer sur « Référencer un site » dans la rubrique {{@rubrique@}}. Renseigner l’url du site, et valider, le système va essayer de récupérer le titre, la description et une vignette du site en ligne.  Corriger le titre et la description si nécessaire. Si la vignette n’est pas générée automatiquement, faire une capture écran et l’insérer comme logo du site en 120x90 pixels.',
 
 'trier_q' => 'Comment gérer l’ordre d’affichage des articles / rubriques / documents ?',
-'trier' => 'Les numéros devant les titres permettent de gérer leur ordre d’affichage. La syntaxe est un nombre suivi d’un point et d’un espace',
+'trier' => 'Les numéros devant les titres des articles / rubriques / documents, permettent de gérer leur ordre d’affichage. La syntaxe est un nombre suivi d’un point et d’un espace',
 
 'video_320x240_q' => 'Comment ajouter une vidéo à un article ?',
 'video_320x240' => 'Préparer votre vidéo au format flv (streaming flash) en 320x240 pixels avec un bitrate (taux de compression) de 400kbps et un son en mono/64kbps. Pour convertir un fichier vidéo, vous pouvez utiliser le logiciel avidemux (Mac, Windows, Linux) téléchargeable par ici [->http://www.avidemux.org/]. 
