@@ -107,7 +107,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=switch&outil='.$outil_id).'" title="'._T("couteauprive:outil_{$act}activer_le").'">'._T("couteauprive:outil_{$act}activer")."</a></div>";
 	if(strlen($temp = cs_action_fichiers_distants($outil) . cs_action_rapide($outil_id, $actif))) 
 		$s .= "<div class='cs_action_rapide' id='cs_action_rapide'>$temp</div>";
-	$s .= propre($descrip);
+	$s .= cs_nettoie(propre($descrip));
 	$serial = serialize(array_keys($outil));
 	$p = '';
 	if($b=cs_balises_traitees($outil_id, '*, #'))

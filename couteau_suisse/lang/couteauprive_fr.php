@@ -303,8 +303,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 - Version du fichier local : ',
 	'ecran_securite:nom' => 'Ecran de sécurité',
 	'effaces' => 'Effacés',
-	'en_travaux:description' => 'Pendant une phase de maintenance, permet d\'afficher un message personalisable sur tout le site public, éventuellement la partie privée.
-[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1">%avertir_travaux%</admin_travaux>]][[%prive_travaux%]]',
+	'en_travaux:description' => 'Pendant une phase de maintenance, permet d\'afficher un message personnalisable sur tout le site public, éventuellement la partie privée.',
 	'en_travaux:nom' => 'Site en travaux',
 	'erreur:bt' => '<span style="color:red;">Attention :</span> la barre typographique (version @version@) semble ancienne.<br />Le Couteau Suisse est compatible avec une version supérieure ou égale à @mini@.',
 	'erreur:description' => 'id manquant dans la définition de l\'outil !',

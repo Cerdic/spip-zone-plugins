@@ -487,6 +487,7 @@ add_outil( array(
 	'pipeline:affichage_final' => 'en_travaux_affichage_final',
 	'pipelinecode:pre_description_outil' => 'if($id=="en_travaux") $texte=str_replace(array("@_CS_TRAVAUX_TITRE@","@_CS_NOM_SITE@"),
 	array("["._T("info_travaux_titre")."]","[".$GLOBALS["meta"]["nom_site"]."]"),$texte);',
+	'description' => '<:en_travaux::>[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1/2/3">%avertir_travaux%</admin_travaux>]][[%prive_travaux%]]',
 ));
 
 add_variables( array(

@@ -90,7 +90,7 @@ function description_outil_une_variable($index, &$outil, &$variable, &$label, &$
 	if(!$actif)
 		return $label.'<html>'.(strlen($valeur)?nl2br(echapper_tags($valeur)):'&nbsp;'._T('couteauprive:variable_vide')).'</html>';
 	$len = $nombre?6:0;
-	$width = $len?'':'style="width:100%;" ';
+	$width = $len?'':'style="width:98.8%;" ';
 	$lignes = !isset($cs_variable['lignes']) || $nombre?0:strval($cs_variable['lignes']);
 	return $label .
 		( $lignes < 2
@@ -136,7 +136,7 @@ function description_outil_label_callback($matches) {
 }
 
 function cs_input_variable_callback($matches) {
-	$a = " valeur_{$matches[1]}_";
+	$a = ' valeur_'.$matches[1].'_';
 	$tmp = str_replace('/',$a, $matches[3]);
 	return "<div class='groupe_{$matches[1]} $a$tmp'>";
 }

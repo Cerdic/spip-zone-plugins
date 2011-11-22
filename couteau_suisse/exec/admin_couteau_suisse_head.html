@@ -1,22 +1,24 @@
 <style type='text/css'>
 
-[(#EVAL{defined('_SPIP19300')}|non)
+[(#VAL{_SPIP19300}|defined|non)
 	div.cadre-info a { background:none; padding:0; border:0; }
 	div.cadre-info { margin-bottom:1em; }
 	div.cadre-padding form{ padding:0; margin:0; }
 	div.cadre-padding .titrem { background-color:#EEEEEE; color:#000000; }
 ]
 div.cadre_padding form { padding:0; margin:0; }
-[(#EVAL{defined('_SPIP20100')}|oui)
+[(#VAL{_SPIP20100}|defined|oui)
 	#contenu .cadre_padding .titrem { background-color:#EEEEEE !important; color:#000000 !important; padding:2px !important; }
 	#contenu .cadre_padding { padding:6px !important; }
 ]
-[(#EVAL{defined('_SPIP30000')}|oui)
+[(#VAL{_SPIP30000}|defined|oui)
 	#SET{claire,##ENV{couleur_claire,edf3fe}}
 	#SET{foncee,##ENV{couleur_foncee,3874b0}}
 	div.cs_outils fieldset, div.cs_intros_inner { border:2px solid #GET{claire}; background:#fcfcfc;}
 	div.cs_infos fieldset { border: 1px threedface groove; padding: 0.3em; }
 	table.spip td,table.spip th,th,td,caption { padding: 0.20em 0.40em; }
+	div.cs_aide p { margin: 1em 0; }
+	div.cs_boite_rss ul { font-size: 95%; }
 ]
 
 
@@ -125,6 +127,12 @@ div.cs_intros_inner {
 .cs_droite {
 	text-align:right;
 }
+
+/* rss */
+.cs_boite_rss li { padding-top:0.5em; }
+.cs_boite_rss ul { list-style-type:none; padding:0; margin:0; }
+.cs_boite_rss p.rss-small { font-size: 85%; border-top:solid gray thin; margin: 1em 0; }
+
 /* classes de description */
 .q1 { margin:0 2em; }
 .q2 { margin-left:2em; }
@@ -271,9 +279,10 @@ if(window.jQuery) jQuery(function(){
 	input_init.apply(document);
 
 	// verifier la version du CS
-	jQuery('span.cs_version').load('[(#URL_ECRIRE{cs_version}|parametre_url{version,#ENV*{cs_version},&}|parametre_url{force,#ENV*{force},&})]');
-	// afficher la boite rss, si elle existe
-	jQuery('div.cs_boite_rss').load('[(#URL_ECRIRE{cs_boite_rss}|parametre_url{force,#ENV*{force},&})]');
+	jQuery('span.cs_version').load('[(#URL_ECRIRE{cs_version}|parametre_url{version,#ENV*{cs_version},&}|parametre_url{force,#ENV*{force},&})]',
+		// afficher la boite rss, si elle existe
+		jQuery('div.cs_boite_rss').load('[(#URL_ECRIRE{cs_boite_rss}|parametre_url{force,#ENV*{force},&})]')
+	);
 
 });
 

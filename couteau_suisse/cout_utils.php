@@ -329,7 +329,7 @@ function cs_autorisation_alias(&$tab, $autoriser) {
 	if(function_exists($f='autoriser_'.$autoriser.'_configurer') || function_exists($f.='_dist')) {
 		$g = str_replace('_','',objet_type($autoriser));
 		if($g != $autoriser) {
-			$tab[] = "function autoriser_{$g}_configurer(\$faire, \$type, \$id=0, \$qui=NULL, \$opt=NULL) {\n\treturn function_exists('$f')\n\t?$f(\$faire, \$type, \$id, \$qui, \$opt):true; \n}";
+			$tab[] = "function autoriser_{$g}_configurer(\$faire,\$type,\$id,\$qui,\$opt) {\n\treturn function_exists('$f')\n\t?$f(\$faire, \$type, \$id, \$qui, \$opt):true; }";
 			$ok[$autoriser] = 1;
 		}
 	}
