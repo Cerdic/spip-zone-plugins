@@ -203,6 +203,12 @@ function couteau_suisse_porte_plume_cs_pre_charger($flux){
 	return eval_metas_pipelines($flux, 'porte_plume_cs_pre_charger');
 }
 
+
+// compatibilite avec le plugin Facteur
+function couteau_suisse_facteur_pre_envoi($flux){
+	return eval_metas_pipelines($flux, 'facteur_pre_envoi');
+}
+
 // pipeline maison : pre-affichage de la description d'un outil
 // flux['outil'] est l'id de l'outil, $flux['actif'] est l'etat de l'outil, flux['texte'] est le texte de description
 function couteau_suisse_pre_description_outil($flux) {

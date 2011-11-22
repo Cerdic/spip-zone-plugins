@@ -1078,7 +1078,11 @@ add_outil( array(
 	});",
 	'code:css' => 'span.spancrypt {background:transparent url(' . url_absolue(find_in_path('img/mailcrypt/leure.gif'))
 		. ') no-repeat scroll 0.1em center; padding-left:12px; text-decoration:none;}',
-	'traitement:EMAIL' => 'mailcrypt',
+	'traitement:EMAIL' => 'mailcrypt_email_dist',
+	// compatibilite avec le plugin facteur
+ 	'pipelinecode:facteur_pre_envoi'   => 'include_spip("public/parametrer"); // charger mes_fonctions
+$flux->Body = maildecrypt($flux->Body);
+$flux->AltBody = maildecrypt($flux->AltBody);',
 )); 
 
 
