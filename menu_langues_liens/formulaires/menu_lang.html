@@ -38,12 +38,12 @@ avec la fonction PHP 'array_diff' http://www.php.net/manual/fr/function.array-di
 [(#SET{langues_a_afficher,[(#CONFIG{langues_utilisees}|explode{","}|array_diff{#CONFIG{menu_lang_liens/langues_invisibles, #ARRAY}})]})]
 
 <BOUCLE_PlusieursLanguesUtilisees(POUR){tableau #GET{langues_a_afficher}}{1,1}>
-<ul id="menu_lang">
+<[(#CONFIG{menu_lang_liens/formatliste,bloc}|=={'bloc'}|?{div,ul})] id="menu_lang">
 [(#REM)
 On liste les langues utilisees dans le site
 ]
 	<BOUCLE_ListeLangues(POUR){tableau #GET{langues_a_afficher}}>
-    	<li [(#COMPTEUR_BOUCLE|=={1}|oui)class="first"] [(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)class="last"]>
+    	[(#CONFIG{menu_lang_liens/formatliste,bloc}|=={'liste'}|oui)<li [(#COMPTEUR_BOUCLE|=={1}|oui)class="first"] [(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)class="last"]>]
 		[(#REM)
 		Si la langue n'est pas celle en cours, on fait un lien qui fait 2 actions :
 		- fixer le cookie de langue sur la langue demandee
@@ -61,7 +61,7 @@ On liste les langues utilisees dans le site
 		[(#VALEUR|=={#ENV{lang}}|oui)
 			[<strong class="langue_#VALEUR" lang="#VALEUR" title="[(#VALEUR|traduire_nom_langue|ucfirst|attribut_html)]">(#GET{nom_langue}|ucfirst)</strong>]
 		]
-        </li>
+        [(#CONFIG{menu_lang_liens/formatliste,bloc}|=={'liste'}|oui)</li>]
 	</BOUCLE_ListeLangues>
-</ul>
+</[(#CONFIG{menu_lang_liens/formatliste,bloc}|=={'bloc'}|?{div,ul})]>
 </BOUCLE_PlusieursLanguesUtilisees>
