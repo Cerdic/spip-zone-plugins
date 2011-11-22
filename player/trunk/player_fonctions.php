@@ -7,12 +7,7 @@
 	// $LastChangedDate$
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-if (!defined('_DIR_PLUGIN_PLAYER')){ // defini automatiquement par SPIP 1.9.2
-	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-	define('_DIR_PLUGIN_PLAYER',(_DIR_PLUGINS.end($p)."/"));
-}
-
-function Player_call_js() {
+function player_call_js() {
 	$flux = "\n"
 		. "<!-- Player JS -->\n"
 		. '<script type="text/javascript" src="'.find_in_path('soundmanager/soundmanager2.js').'"></script>'
@@ -33,12 +28,12 @@ function Player_call_js() {
 	return $flux;
 }
 
-function Player_call_css() {
+function player_call_css() {
 	$flux = "\n".'<link rel="stylesheet" href="'.direction_css(find_in_path('player.css')).'" type="text/css" media="all" />';
 	return $flux;
 }
 
-function Player_head(){
+function player_head(){
 	
 	$player_ = ($p = $GLOBALS['meta']['player']) ? $p : _PLAYER_MP3_LECTEUR_DEFAULT;
 	
@@ -48,7 +43,7 @@ function Player_head(){
 	return $flux;
 }
 
-function Player_insert_head_css($flux){
+function player_insert_head_css($flux){
 	static $done = false;
 	if (!$done) {
 		$done = true;
@@ -60,7 +55,7 @@ function Player_insert_head_css($flux){
 	return $flux;
 }
 
-function Player_insert_head($flux){
+function player_insert_head($flux){
 	if (!defined('_PLAYER_AFFICHAGE_FINAL') OR !_PLAYER_AFFICHAGE_FINAL)
 	{
 		$flux = Player_insert_head_css($flux);
@@ -69,7 +64,7 @@ function Player_insert_head($flux){
 	return $flux;
 }
 
-function Player_affichage_final($flux){
+function player_affichage_final($flux){
 	if (defined('_PLAYER_AFFICHAGE_FINAL') AND _PLAYER_AFFICHAGE_FINAL){
 		// inserer le head seulement si presente d'un rel='enclosure'
 		if ((strpos($flux,'rel="enclosure"')!==FALSE)
@@ -88,7 +83,7 @@ function Player_affichage_final($flux){
  * peut etre appele dans un squelette apres |liens_absolus
  */
  
-function Player_post_propre($texte) {
+function player_post_propre($texte) {
 
 	$reg_formats="mp3";
 

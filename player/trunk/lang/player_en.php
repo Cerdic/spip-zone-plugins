@@ -9,7 +9,7 @@
 	// might be perfectible. Thanks in advance for future enhencments. (Etienne "Loiseau2nuit" Brackers)
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-$GLOBALS['i18n_'._PLAYER_PREFIX.'_en'] = array(
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
   'player_nom' => "Multimedia Player"
 , 'configuration_player' => "Configure Multimedia Player"
