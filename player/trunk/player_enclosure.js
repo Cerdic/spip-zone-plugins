@@ -36,10 +36,10 @@ function lecteur_multimedia_init(){
 	flvArray = new Array();
 	flvTitles = new Array();
 	
-	var aff= jQuery("a["+seljQ+"rel='enclosure']["+seljQ+"href$=mp3]").size();
+	var aff= jQuery("a["+seljQ+"rel*='enclosure']["+seljQ+"href$=mp3]").size();
 
 	// lister les mp3 de la page 
-	jQuery("a["+seljQ+"rel='enclosure']["+seljQ+"href$=mp3]").each(
+	jQuery("a["+seljQ+"rel*='enclosure']["+seljQ+"href$=mp3]").each(
 		function(i) {	 
 			// we store mp3 links in an array
 			mp3Array.push(this.href);

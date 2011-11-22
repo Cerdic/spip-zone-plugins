@@ -79,7 +79,9 @@ function player_insert_head($flux){
 function player_affichage_final($flux){
 	if (defined('_PLAYER_AFFICHAGE_FINAL') AND _PLAYER_AFFICHAGE_FINAL){
 		// inserer le head seulement si presente d'un rel='enclosure'
-		if ((strpos($flux,'rel="enclosure"')!==FALSE)){
+		// il faut etre pas trop stricte car on peut avoir rel='nofollow encolsure' etc...
+		if ((strpos($flux,'enclosure')!==false)){
+			// on pourrait affiner la detection avec un preg ?
 			$player = unserialize($GLOBALS['meta']['player']);
 			$player = isset($player['player_mp3'])?$player['player_mp3']:'eraplayer';
 			$ins = player_call_css();
@@ -108,13 +110,23 @@ function player_affichage_final($flux){
 function player_post_propre($texte) {
 
 	$reg_formats="mp3";
+	// plus vite
+	if (stripos($texte,".$reg_formats")!==false
+	  AND stripos($texte,"<a")!==false){
+		$texte = preg_replace_callback(
+			",<a(\s[^>]*href=['\"]?(http://[a-zA-Z0-9\s()\/\:\._%\?+'=~-]*\.($reg_formats))['\"]?[^>]*)>,Uims",
+			'player_enclose_link',
+			$texte
+			);
+	}
 
-	$texte = preg_replace(
-		",<a(\s[^>]*href=['\"]?(http:\/\/[a-zA-Z0-9\s()\/\:\._%\?+'=~-]*\.($reg_formats))['\"]?[^>]*)>(.*)</a>,Uims",
-		'<a$1 rel="enclosure">$4</a>', 
-		$texte);
-	
 	return $texte;
+}
+
+function player_enclose_link($regs){
+	$rel = extraire_attribut($regs[0],'rel');
+	$rel = ($rel?"$rel ":"")."enclosure";
+	return inserer_attribut($regs[0],'rel',$rel);
 }
 
 /**
