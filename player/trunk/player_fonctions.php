@@ -19,8 +19,8 @@ function player_call_js($player) {
 		. '<script type="text/javascript"><!--' . "\n"
 		. 'var musicplayerurl="' . find_in_path('players/' . $player . '/player.swf') . '";'."\n"
 		. "var key_espace_stop = true;\n"
-		. 'var image_play="'.find_in_path('images/playl.gif').'";'."\n"
-		. 'var image_pause="'.find_in_path('images/pausel.gif').'";'."\n"
+		. 'var image_play="'.find_in_path('players/controls/play-16.png').'";'."\n"
+		. 'var image_pause="'.find_in_path('players/controls/pause-16.png').'";'."\n"
 		. 'soundManager.url = "'.find_in_path('javascript/soundmanager/soundmanager2.swf').'";'."\n"
   	. 'soundManager.nullURL = "'.find_in_path('javascript/soundmanager/null.mp3').'";'."\n"
 		. 'var DIR_PLUGIN_PLAYER = "' . _DIR_PLUGIN_PLAYER . '";'

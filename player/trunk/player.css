@@ -55,11 +55,13 @@ ul.playliste li{
 span.play_{
 	/*background:#E6ECFF;*/
 	cursor:pointer;
+    vertical-align: middle;
 }
 
 span.play_on{
 	/*background:#FF0000;*/
 	cursor:pointer;
+    vertical-align: middle;
 }
 
 #scrollbar{
@@ -131,26 +133,4 @@ div#now_playing{
 
 #scroller_container {
 	overflow: auto;
-}
-
-/* ==================== Player video ==================== */
-#player {
-	background-color: #e9f6ff;
-	color: #000;
-	height: 20px;
-	width: 200px;
-	border: solid 1px #ccc;
-}
-#player .button {
-	width: 20px;
-	height: 20px;
-	background-repeat: no-repeat;
-	background-position: 2px 2px;
-	float: left;
-}
-#player .button a {
-	display: block;
-	height: 20px;
-	text-indent: -100em;
-	overflow: hidden;
 }

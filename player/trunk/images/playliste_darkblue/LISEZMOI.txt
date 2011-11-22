@@ -1,5 +1,0 @@
-CP-20090901
-
-Icones pour playliste.html
-
-Pour activer ces icones, recopier les fichiers *.jpg dans le repertoire images/ de vos squelettes/
