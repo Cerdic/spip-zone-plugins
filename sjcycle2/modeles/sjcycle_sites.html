@@ -5,8 +5,7 @@
 [(#SET{hauteur,[(#ENV{hauteur,0})]})]
 [(#SET{afficher_nom_site,#ENV{afficher_nom_site}})]
 
-<script type="text/javascript">
-<!-- http://malsup.com/jquery/cycle/
+<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 jQuery(document).ready(function() {
 	$('#sjcycle_sites').cycle({ 
 		fx:'#GET{fx}',
@@ -15,8 +14,7 @@ jQuery(document).ready(function() {
 		pause:1
 	});
 });
--->
-</script>
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
 
 <B_sites>
    <div id="sjcycle_sites">
