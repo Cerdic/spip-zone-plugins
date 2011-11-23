@@ -17,7 +17,7 @@ function formulaires_inscription_client_saisies_dist($retour=''){
 	if($type_c == 'c'){
 		$civ=lire_config('clients/elm_civ',array('madame', 'monsieur'));
 		$civ_t=array();
-		if (in_array("civilite", $conf) and !in_array("obli_civilite", $conf)) {		
+		if (in_array("civilite", $conf)) {		
 			foreach($civ as $v){
 				array_push($civ_t, "<:clients:label_$v:>");
 			}
@@ -27,143 +27,81 @@ function formulaires_inscription_client_saisies_dist($retour=''){
 				'options' => array(
 					'nom' => 'civilite',
 					'label' => _T('contacts:label_civilite'),
-					'datas' => $civ_t
-				)
-			);
-		}elseif (in_array("civilite", $conf) and in_array("obli_civilite", $conf)) {
-			foreach($civ as $v){
-				array_push($civ_t, "<:clients:label_$v:>");
-			}
-			$civ_t = array_combine($civ, $civ_t);
-			$civilite=array(
-				'saisie' => 'radio',
-				'options' => array(
-					'nom' => 'civilite',
-					'label' => _T('contacts:label_civilite'),
-					'obligatoire' => 'oui',
+					'obligatoire' => in_array("obli_civilite", $conf) ? 'oui' : '',
 					'datas' => $civ_t
 				)
 			);
 		}
 	}else{
-		if (in_array("civilite", $conf) and !in_array("obli_civilite", $conf)) {
-			$civilite=array(
-				'saisie' => 'input',
-				'options' => array(
-					'nom' => 'civilite',
-					'label' => _T('contacts:label_civilite')
-				)
-			);
-		}elseif (in_array("civilite", $conf) and in_array("obli_civilite", $conf)) {
+		if (in_array("civilite", $conf)) {
 			$civilite=array(
 				'saisie' => 'input',
 				'options' => array(
 					'nom' => 'civilite',
 					'label' => _T('contacts:label_civilite'),
-					'obligatoire' => 'oui'
+					'obligatoire' => in_array("obli_civilite", $conf) ? 'oui' : '',
 				)
 			);
 		}
 	}
 	
 	$numero=array();
-	if (in_array("numero", $conf) and !in_array("obli_numero", $conf)) {
+	if (in_array("numero", $conf)) {
 		$numero=array(
 			'saisie' => 'input',
 			'options' => array(
 				'nom' => 'numero',
 				'label' => _T('coordonnees:label_numero'),
-			)
-		);
-	}elseif (in_array("numero", $conf) and in_array("obli_numero", $conf)) {
-		$numero=array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'numero',
-				'label' => _T('coordonnees:label_numero'),
-				'obligatoire' => 'oui'
+				'obligatoire' => in_array("obli_numero", $conf) ? 'oui' : '',
 			)
 		);
 	}
 	
 	$portable=array();
-	if (in_array("portable", $conf) and !in_array("obli_portable", $conf)) {
-		$portable=array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'portable',
-				'label' => _T('clients:label_portable')
-			)
-		);
-	}elseif (in_array("portable", $conf) and in_array("obli_portable", $conf)) {
+	if (in_array("portable", $conf)) {
 		$portable=array(
 			'saisie' => 'input',
 			'options' => array(
 				'nom' => 'portable',
 				'label' => _T('clients:label_portable'),
-				'obligatoire' => 'oui'
+				'obligatoire' => in_array("obli_portable", $conf) ? 'oui' : '',
 			)
 		);
 	}
 
 	$fax=array();
-	if (in_array("fax", $conf) and !in_array("obli_fax", $conf)) {
-		$fax=array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'fax',
-				'label' => _T('clients:label_fax')
-			)
-		);
-	}elseif (in_array("fax", $conf) and in_array("obli_fax", $conf)) {
+	if (in_array("fax", $conf)) {
 		$fax=array(
 			'saisie' => 'input',
 			'options' => array(
 				'nom' => 'fax',
 				'label' => _T('clients:label_fax'),
-				'obligatoire' => 'oui'
+				'obligatoire' => in_array("obli_fax", $conf) ? 'oui' : '',
 			)
 		);
 	}
 
 	$complement=array();
-	if (in_array("complement", $conf) and !in_array("obli_complement", $conf)) {
+	if (in_array("complement", $conf)) {
 		$complement=array(
 			'saisie' => 'input',
 			'options' => array(
 				'nom' => 'complement',
 				'label' => _T('coordonnees:label_complement'),
-			)
-		);
-	}elseif (in_array("complement", $conf) and in_array("obli_complement", $conf)) {
-		$complement=array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'complement',
-				'label' => _T('coordonnees:label_complement'),
-				'obligatoire' => 'oui'
+				'obligatoire' => in_array("obli_complement", $conf) ? 'oui' : '',
 			)
 		);
 	}
 	
 	$pays=array();
-	if (in_array("pays", $conf) and !in_array("obli_pays", $conf)) {
+	if (in_array("pays", $conf)) {
 		$pays=array(
 			'saisie' => 'pays',
 			'options' => array(
 				'nom' => 'pays',				
 				'code_pays' => 'oui',
 				'label' => _T('coordonnees:label_pays'),
-			)
-		);
-	}elseif (in_array("pays", $conf) and in_array("obli_pays", $conf)) {
-		$pays=array(
-			'saisie' => 'pays',
-			'options' => array(
-				'nom' => 'pays',				
-				'code_pays' => 'oui',
-				'label' => _T('coordonnees:label_pays'),
-				'obligatoire' => 'oui'
+				'obligatoire' => in_array("obli_pays", $conf) ? 'oui' : '',
 			)
 		);
 	}
