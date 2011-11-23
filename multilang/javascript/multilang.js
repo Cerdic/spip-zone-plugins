@@ -191,13 +191,13 @@ function multilang_make_menu_lang(container,target) {
 	$(multilang_menu_lang).clone().find("a").click(function() {
 		if($(this).is('.change_lang') && !$(this).is('.on')){
 			$(this).parents('form > .menu_multilang').find('a.on').removeClass('on');
-			$(this).parents('form > .menu_multilang').find('.message').detach();
+			$(this).parents('form > .menu_multilang').find('.multilang_message').detach();
 			$(this).parents('form').find('li.editer_titre_numero,div.editer_titre_numero').show();
 			$(this).addClass('on');
 			multilang_change_lang(this,container,target);
 		}else if(!$(this).is('.on') && $(this).is('.recover_lang')){
 			$(this).parents('form > .menu_multilang').find('a.on').removeClass('on');
-			$(this).parents('form > .menu_multilang').append('<div class="message"><p>'+multilang_lang.champs_readonly+'<\/p><\/div>');
+			$(this).parents('form > .menu_multilang').append('<div class="multilang_message"><p>'+multilang_lang.champs_readonly+'<\/p><\/div>');
 			$(this).parents('form').find('li.editer_titre_numero,div.editer_titre_numero').hide();
 			$(this).addClass('on');
 			multilang_multi_recover(this,container,target,'submit');
