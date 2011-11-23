@@ -17,14 +17,25 @@ include_spip('action/editer_article');
  * Interface C(r)UD
  */
 function crud_articles_create_dist($dummy,$set=null){
-	if ($id = insert_article($set['id_rubrique']))
+	$id_rubrique = sql_getfetsel('id_rubrique','spip_rubriques','id_rubrique='.intval($set['id_rubrique']));
+	if (($id_rubrique > 0) && autoriser('creerarticledans','rubrique',$set['id_rubrique'],$GLOBALS['visiteur_session']) && ($id = insert_article($set['id_rubrique'])))
 		list($e,$ok) = articles_set($id,$set);
-	else
+	else if(!$id_rubrique){
+		$e = _T('crud:erreur_rubrique_inconnue',array('id'=>$set['id_rubrique']));
+	}else{
 		$e = _L('create error');
+	}
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_articles_update_dist($id,$set=null){
-	list($e,$ok) = articles_set($id,$set);
+	$id_article = sql_getfetsel('id_article','spip_articles','id_article='.intval($id));
+	if(!$id_article){
+		$e = _T('crud:erreur_article_inconnue',array('id'=>$id));
+	}else if(autoriser('modifier','article',$id)){
+		list($e,$ok) = articles_set($id,$set);
+	}else{
+		$e = _L('update error');
+	}
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_articles_delete_dist($id){
