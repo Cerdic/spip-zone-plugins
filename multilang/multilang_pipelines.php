@@ -141,11 +141,13 @@ function multilang_inserer_head($config=array()){
 			if($(".menu_multilang").length > 0){ 
 				var limite_multilang = $(".menu_multilang").offset().top ;
 				$(window).scroll(function() {
-					if($(this).scrollTop() > limite_multilang)
+					if(parseFloat($(this).scrollTop()) > parseFloat(limite_multilang)){
 						var menu_lang_width = $(".menu_multilang").width();
-						$(".menu_multilang").addClass("menu_lang_flottant").css({"border-bottom":"3px solid black", "position": "fixed", "top": 0, "width": menu_lang_width+"px","z-index":"999"});
-					if($(this).scrollTop() < limite_multilang)
-						$(".menu_multilang").removeClass("menu_multilang_flottant").css({"border-bottom": "0" , "position": "static", "width": "auto"});	
+						$(".menu_multilang").addClass("menu_lang_flottant").css({"position": "fixed", "top": 0, "width": menu_lang_width+"px","z-index":"999"});
+					}
+					else if(parseFloat($(this).scrollTop()) <= parseFloat(limite_multilang)){
+						$(".menu_multilang").removeClass("menu_lang_flottant").css({"position": "static", "width": "auto"});
+					}	
 				});
 			}
 		}

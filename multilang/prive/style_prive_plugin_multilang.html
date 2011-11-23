@@ -38,6 +38,12 @@
 	clear:both;
 }
 
+.menu_lang_flottant{
+	border-bottom:3px solid #GET{foncee};
+	background-color:[#(#GET{claire}|couleur_eclaircir)];
+	opacity:.8;
+}
+
 #SET{langues,#EVAL{$GLOBALS["meta"]["langues_multilingue"]}}
 <BOUCLE_langues(POUR){tableau #GET{langues}|explode{','}}>
 .multi_lang_#VALEUR {
