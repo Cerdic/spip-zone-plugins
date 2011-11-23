@@ -257,6 +257,9 @@ function formulaires_inscription_client_traiter_dist($retour=''){
 	// si necessaire on replace la bonne donnee dans l'environnement
 	$numero ? set_request('numero', $numero) : '';
 	
+    // Comme conseillé dans la documentation on informe de l'id auteur inscrit
+    $retours['id_auteur'] = $id_auteur;
+
 	if ($retour) $retours['redirect'] = $retour;
 	
 	return $retours;
