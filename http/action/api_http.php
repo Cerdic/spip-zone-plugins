@@ -52,7 +52,16 @@ function action_api_http_dist(){
 		if ($methode == 'GET'
 			and $fonction = charger_fonction("get_$fonction", "http/$format/", true) // rest_atom_get_index()
 		){
-			$fonction($collection, $ressource);
+			// On teste l'autorisation sinon 401
+			if (
+				autoriser("get_$fonction", $collection, $ressource) // autoriser_patates_get_collection_dist()
+			){
+				$fonction($collection, $ressource);
+			}
+			else{
+				header('Status: 401 Unauthorized');
+				exit;
+			}
 		}
 		// Si la fonction n'existe pas ça n'existe pas
 		else{
