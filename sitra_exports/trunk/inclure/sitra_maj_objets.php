@@ -170,8 +170,10 @@ foreach($langues as $langue){
 		
 		// tjs le problème des clés qui doivent être des alphanum
 		$types_docs = array(
-			'i_03.01.05' => 'principale',
 			'i_03.01.01' => 'secondaire',
+			'i_03.01.02' => 'texte',
+			'i_03.01.03' => 'son',
+			'i_03.01.05' => 'principale',
 			'i_03.01.08' => 'logo',
 			'i_03.01.07' => 'plan'
 		);
