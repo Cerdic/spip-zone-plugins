@@ -149,8 +149,8 @@ function multilang_init_multi(options) {
 		this.form_lang = multilang_def_lang;
 		var container = multilang_menu_selector ? $(multilang_menu_selector,this) : $(this);
 		// Pas de rajout s'il y en deja un
-		if(!container.find('.menu_lang').size())
-			container.prepend("<div class='menu_lang'></div>");
+		if(!container.find('.menu_multilang').size())
+			container.prepend("<div class='menu_multilang'></div>");
 	});
 
 	/**
@@ -170,7 +170,7 @@ function multilang_init_multi(options) {
 		}
 	});
 	//create menu for each form. The menu is just before the form
-	$("div.menu_lang",init_forms).empty().each(function() {
+	$("div.menu_multilang",init_forms).empty().each(function() {
 		//store all form containers to allow menu lang update on each container
 		//when it is triggered by global menu
 		multilang_containers.add(this);
@@ -190,21 +190,21 @@ function multilang_make_menu_lang(container,target) {
 	target = target || multilang_forms;
 	$(multilang_menu_lang).clone().find("a").click(function() {
 		if($(this).is('.change_lang') && !$(this).is('.on')){
-			$(this).parents('form > .menu_lang').find('a.on').removeClass('on');
-			$(this).parents('form > .menu_lang').find('.message').detach();
+			$(this).parents('form > .menu_multilang').find('a.on').removeClass('on');
+			$(this).parents('form > .menu_multilang').find('.message').detach();
 			$(this).parents('form').find('li.editer_titre_numero,div.editer_titre_numero').show();
 			$(this).addClass('on');
 			multilang_change_lang(this,container,target);
 		}else if(!$(this).is('.on') && $(this).is('.recover_lang')){
-			$(this).parents('form > .menu_lang').find('a.on').removeClass('on');
-			$(this).parents('form > .menu_lang').append('<div class="message"><p>'+multilang_lang.champs_readonly+'<\/p><\/div>');
+			$(this).parents('form > .menu_multilang').find('a.on').removeClass('on');
+			$(this).parents('form > .menu_multilang').append('<div class="message"><p>'+multilang_lang.champs_readonly+'<\/p><\/div>');
 			$(this).parents('form').find('li.editer_titre_numero,div.editer_titre_numero').hide();
 			$(this).addClass('on');
 			multilang_multi_recover(this,container,target,'submit');
 		}
 		return false;
 	}).end().appendTo(container);
-	$(target).find('.menu_lang .langues a').eq(0).addClass('on');
+	$(target).find('.menu_multilang .langues a').eq(0).addClass('on');
 
 	var target_id = multilang_init_target_id(target);
 	multilang_forms_fields[target_id].each(function(){
@@ -606,7 +606,7 @@ function multilang_multi_submit(params) {
 	//remove the current form from the list of forms
 	multilang_forms.not(this);
 	//remove the current menu lang container from the list
-	multilang_containers.not("div.menu_lang",$(this));
+	multilang_containers.not("div.menu_multilang",$(this));
 	//build the input values
 	multilang_multi_recover('','',form,'submit');
 	//save back the params
