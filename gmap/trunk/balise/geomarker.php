@@ -61,7 +61,7 @@ function balise_GEOMARKER_dyn($params)
 		$type = "";
 		if ($params['type'])
 			$type = $params['type'];
-		$code = gmap_ajoute_marqueur_site($params['objet'], intval($params['id_objet']), $mapId, $type);
+		$code = gmap_ajoute_marqueur_site($params['objet'], intval($params['id_objet']), $mapId, $type, $params);
 	}
 	
 	// Sinon ajouter un marqueur manuel
@@ -73,7 +73,7 @@ function balise_GEOMARKER_dyn($params)
 			$markerId = $params['id'];
 		else
 			$markerId = "marker_".$latitude."_".$longitude;
-		$code = gmap_ajoute_marqueur_special($markerId, $latitude, $longitude, $mapId, $params['titre'], $params['texte'], $params['icon']);
+		$code = gmap_ajoute_marqueur_special($markerId, $latitude, $longitude, $mapId, $params);
 	}
 	
 	// Sinon encore, ajouter un marqueur par adresse
@@ -84,7 +84,7 @@ function balise_GEOMARKER_dyn($params)
 			$markerId = $params['id'];
 		else
 			$markerId = "marker_".bin2hex(mhash(MHASH_MD5, $addr));
-		$code = gmap_ajoute_marqueur_adresse($markerId, $addr, $mapId, $params['titre'], $params['texte'], $params['icon']);
+		$code = gmap_ajoute_marqueur_adresse($markerId, $addr, $mapId, $params);
 	}
 	
 	return $code;

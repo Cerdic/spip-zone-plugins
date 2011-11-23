@@ -1159,7 +1159,7 @@ function gmap_ajoute_kml($id_document, $mapId, $show = true)
 // Ajout manuel d'un marqueur provenant d'un objet SPIP géolocalisé
 // Cette fonction est faite pour être appelée depuis la balise GEOMARKER pour ajouter un
 // marqueur qui n'est pas normalement renvoyé par la balise GEOMAP.
-function gmap_ajoute_marqueur_site($objet, $id_objet, $mapId, $type)
+function gmap_ajoute_marqueur_site($objet, $id_objet, $mapId, $type, $params)
 {
 	// Tests de validité
 	if (!$mapId)
@@ -1188,7 +1188,11 @@ jQuery(document).ready(function()
 		var map = gMap("gmap_map'.$mapId.'");
 		if (isObject(map))
 		{
-	'.$codeMarker.'
+	'.$codeMarker;
+	if ($params && $params['focus'])
+		$code .= '
+			gmap_setViewportOnMarkers("'.$mapId.'");';
+	$code .= '
 		}
 	});
 });
@@ -1232,7 +1236,7 @@ jQuery(document).ready(function()
 
 // Ajout d'un marqueur special, c'est-à-dire qui ne provient pas d'un objet SPIP géolocalisé
 // (on passe donc en paramètre toutes les informations nécessaires)
-function gmap_ajoute_marqueur_special($id, $latitude, $longitude, $mapId, $titre = null, $texte = null, $iconFile = null)
+function gmap_ajoute_marqueur_special($id, $latitude, $longitude, $mapId, $params = null)
 {
 	// Tests de validité
 	if (!$id || !$latitude || !$longitude || !$mapId)
@@ -1249,31 +1253,31 @@ function gmap_ajoute_marqueur_special($id, $latitude, $longitude, $mapId, $titre
 	$markerParams .= ','."\n" . '			longitude: '.$longitude;
 	
 	// Ajouter le titre
-	if (strlen($titre))
-		$markerParams .= ','."\n" . '			title: "'.$titre.'"';
+	if ($params && strlen($params['titre']))
+		$markerParams .= ','."\n" . '			title: "'.$params['titre'].'"';
 	
 	// Déterminer l'icone
 	$precmd = '';
-	if ($iconFile)
+	if ($params && $params['icon'])
 	{
-		$file = find_in_path($iconFile.'.gmd');
+		$file = find_in_path($params['icon'].'.gmd');
 		$precmd .= gmap_ajoute_icone($iconId, $file, "map");
 		$markerParams .= ','."\n" . '			icon: "'.$iconId.'"';
 	}
 
 	// Ajouter l'info-bulle
-	if (strlen($titre) || strlen($texte))
+	if ($params && (strlen($params['titre']) || strlen($params['texte'])))
 	{
 		$html = '<div class="gmap-balloon">' . "\n";
-		if (strlen($titre))
-			$html .= '	<h1>'.$titre.'</h1>' . "\n";
-		if (strlen($texte))
+		if (strlen($params['titre']))
+			$html .= '	<h1>'.$params['titre'].'</h1>' . "\n";
+		if (strlen($params['texte']))
 		{
 			$html .= '	<div class="contents">' . "\n";
-			$html .= '		<div class="texte"><p>'.$texte.'</p></div>' . "\n";
+			$html .= '		<div class="texte"><p>'.$params['texte'].'</p></div>' . "\n";
 			$html .= '	</div>' . "\n";
-			$html .= '</div>' . "\n";
 		}
+		$html .= '</div>' . "\n";
 		$markerParams .= ','."\n" . '			click: "showInfoWindow"';
 		$markerParams .= ','."\n" . '			html: "'.protege_html($html).'"';
 	}
@@ -1292,7 +1296,11 @@ jQuery(document).ready(function()
 	'.$precmd.'
 			map.setMarker('.$id.', {
 	'.$markerParams.'
-			});
+			});';
+	if ($params && $params['focus'])
+		$code .= '
+			gmap_setViewportOnMarkers("'.$mapId.'");';
+	$code .= '
 		}
 	});
 });
@@ -1302,8 +1310,9 @@ jQuery(document).ready(function()
 }
 
 // Ajout d'un maruquer à partir d'une adresse
-function gmap_ajoute_marqueur_adresse($id, $adresse, $mapId, $titre = null, $texte = null, $iconFile = null)
+function gmap_ajoute_marqueur_adresse($id, $adresse, $mapId, $params = null)
 {
+spip_log("Dans gmap_ajoute_marqueur_adresse, params=".print_r($params, true), "fabdbg");
 	// Tests de validité
 	if (!$id || !$adresse || !$mapId)
 		return "";
@@ -1317,31 +1326,31 @@ function gmap_ajoute_marqueur_adresse($id, $adresse, $mapId, $titre = null, $tex
 	$markerParams = '';
 	
 	// Ajouter le titre
-	if (strlen($titre))
-		$markerParams .= ','."\n" . '			title: "'.$titre.'"';
+	if ($params && strlen($params['titre']))
+		$markerParams .= ','."\n" . '			title: "'.$params['titre'].'"';
 	
 	// Déterminer l'icone
 	$precmd = '';
-	if ($iconFile)
+	if ($params && $params['icon'])
 	{
-		$file = find_in_path($iconFile.'.gmd');
+		$file = find_in_path($params['icon'].'.gmd');
 		$precmd .= gmap_ajoute_icone($iconId, $file, "map");
 		$markerParams .= ','."\n" . '			icon: "'.$iconId.'"';
 	}
 
 	// Ajouter l'info-bulle
-	if (strlen($titre) || strlen($texte))
+	if ($params && (strlen($params['titre']) || strlen($params['texte'])))
 	{
 		$html = '<div class="gmap-balloon">' . "\n";
-		if (strlen($titre))
-			$html .= '	<h1>'.$titre.'</h1>' . "\n";
-		if (strlen($texte))
+		if (strlen($params['titre']))
+			$html .= '	<h1>'.$params['titre'].'</h1>' . "\n";
+		if (strlen($params['texte']))
 		{
 			$html .= '	<div class="contents">' . "\n";
-			$html .= '		<div class="texte"><p>'.$texte.'</p></div>' . "\n";
+			$html .= '		<div class="texte"><p>'.$params['texte'].'</p></div>' . "\n";
 			$html .= '	</div>' . "\n";
-			$html .= '</div>' . "\n";
 		}
+		$html .= '</div>' . "\n";
 		$markerParams .= ','."\n" . '			click: "showInfoWindow"';
 		$markerParams .= ','."\n" . '			html: "'.protege_html($html).'"';
 	}
@@ -1359,12 +1368,18 @@ jQuery(document).ready(function()
 		{
 			map.searchGeocoder("'.$adresse.'", function(latitude, longitude)
 			{
-		'.$precmd.'
-				map.setMarker('.$id.', {
-					latitude: latitude,
-					longitude: longitude
-		'.$markerParams.'
-				});
+				if (latitude && longitude)
+				{
+			'.$precmd.'
+					map.setMarker('.$id.', {
+						latitude: latitude,
+						longitude: longitude'.$markerParams.'
+					});';
+	if ($params['focus'])
+		$code .= '
+					gmap_setViewportOnMarkers("'.$mapId.'");';
+	$code .= '
+				}
 			});
 		}
 	});
