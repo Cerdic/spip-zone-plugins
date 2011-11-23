@@ -1,7 +1,7 @@
 <plugin>
   <nom>Crit&#232;re mots</nom>
   <slogan>S&#233;lectionner des objets ayant des mots cl&#233;s en communs</slogan>
-  <auteur>Fil, Ma&#252;eul Rouquette, RealET (Formulaires)</auteur>
+  <auteur>Fil, [Ma&#239;eul Rouquette->http://www.maieul.net], RealET (Formulaires)</auteur>
   <icon>img_pack/stock_filter-data-by-criteria-24.png</icon>
   <licence>(c) 2009 GPL</licence>
   <version>1.2.3</version>
