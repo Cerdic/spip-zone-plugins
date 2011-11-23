@@ -43,15 +43,15 @@ function action_crud_dist($action=null,$table=null,$id=null,$args = array()){
 	}
 
 	if (!in_array($action,array('create','update','delete', 'read')))
-		$res = array('message'=>_L("CRUD action $action erronee"));
+		$res = array('message'=>_T('crud:erreur_action_erronee',array('action'=>$action)));
 
 	elseif (!preg_match(',^\w+$,',$table))
-		$res = array('message'=>_L("CRUD table $table erronee"));
+		$res = array('message'=>_T('crud:erreur_table_erronee',array('table'=>$table)));
 
 	elseif(!include_spip("crud/$table")
 		// tolerer un appel avec type plutot que table
 		AND (!$table = table_objet($table) OR !include_spip("crud/$table")))
-		$res = array('message'=>_L("CRUD table $table inconnue"));
+		$res = array('message'=>_T('crud:erreur_table_inconnue',array('table'=>$table)));
 
 	elseif ($f=charger_fonction("{$table}_{$action}","crud",true))
 		$res = $f($id,$args);
@@ -59,7 +59,7 @@ function action_crud_dist($action=null,$table=null,$id=null,$args = array()){
 		$res = $f($table,$id,$args);
 
 	else
-		$res = array('message'=>_L("CRUD action $action inconnue pour table $table"));
+		$res = array('message'=>_T('crud:erreur_action_inconnue_table',array('action'=>$action,'table'=>$table)));
 
 	// interpretons un peu le retour pour le mettre en forme :
 	if (!$res['success'])
@@ -101,7 +101,7 @@ function action_crud_dist($action=null,$table=null,$id=null,$args = array()){
  */
 function crud_read_dist($table,$id,$args=array()) {
 	if (!preg_match(',^\w+$,',$table))
-		return array('message'=>_L("CRUD table $table erronee"));
+		return array('message'=>_T('crud:erreur_table_erronee',array('table'=>$table)));
 
 	$type = objet_type($table);
 	$table_sql = table_objet_sql($type);
