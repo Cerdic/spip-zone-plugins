@@ -37,24 +37,24 @@ function action_api_http_dist(){
 		// On cherche ce qu'on est en train de demander avec cette URL
 		// S'il n'y a pas de collection c'est l'index
 		if (!$collection){
-			$fonction = 'index';
+			$type = 'index';
 		}
 		// Sinon s'il n'y a que la collection sans la ressource
 		elseif (!$ressource){
-			$fonction = 'collection';
+			$type = 'collection';
 		}
 		// Sinon c'est une ressource
 		else{
-			$fonction = 'ressource';
+			$type = 'ressource';
 		}
 
 		// Le GET peut se faire sur : la racine du serveur, une collection, une ressource
 		if ($methode == 'GET'
-			and $fonction = charger_fonction("get_$fonction", "http/$format/", true) // rest_atom_get_index()
+			and $fonction = charger_fonction("get_$type", "http/$format/", true) // rest_atom_get_index()
 		){
 			// On teste l'autorisation sinon 401
 			if (
-				autoriser("get_$fonction", $collection, $ressource) // autoriser_patates_get_collection_dist()
+				autoriser("get_$type", $collection, $ressource) // autoriser_patates_get_collection_dist()
 			){
 				$fonction($collection, $ressource);
 			}
