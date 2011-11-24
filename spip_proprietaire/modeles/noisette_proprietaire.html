@@ -1,16 +1,19 @@
 [(#SET{proprietaire,#CONFIG{spip_proprietaire}})]
 <div>
-	<span style='font-weight: bold;'>
+	<b class="vcard">
 	[(#ENV{logo}|=={oui}|oui)[(#LOGO_SITE_SPIP||image_reduire{200,100})]]
-	[<p><strong>(#GET*{proprietaire}|table_valeur{proprietaire_nom}|typo)</strong></p>]
-	<a href='#URL_SITE_SPIP'>#URL_SITE_SPIP</a>[(#ENV*{separator})]
-	[<:spipproprio:coordonnees_tel:>&nbsp;(#GET*{proprietaire}|table_valeur{proprietaire_adresse_telephone}|spip_proprio_formater_telephone)[(#ENV*{separator})]]
-	[<:spipproprio:coordonnees_fax:>&nbsp;(#GET*{proprietaire}|table_valeur{proprietaire_adresse_telecopie})[(#ENV*{separator})]]
-	[<a href='mailto:[(#GET*{proprietaire}|table_valeur{proprietaire_mail})]' title="<:spipproprio:coordonnees_mailto_ttl:>" class='spip_mail'>(#GET*{proprietaire}|table_valeur{proprietaire_mail})</a>[(#ENV*{separator})]]
-	[(#GET*{proprietaire}|table_valeur{proprietaire_adresse_rue})[(#ENV*{separator})]]
-	[(#GET*{proprietaire}|table_valeur{proprietaire_adresse_code_postal}) ][(#GET*{proprietaire}|table_valeur{proprietaire_adresse_ville})[(#ENV*{separator})]]
-	[(#GET*{proprietaire}|table_valeur{proprietaire_adresse_pays})[(#ENV*{separator})]]
+	[<p><strong class="fn org">(#GET*{proprietaire}|table_valeur{proprietaire_nom}|typo)</strong></p>]
+	<a href='#URL_SITE_SPIP' class="url">#URL_SITE_SPIP</a>[(#ENV*{separator})]
+	[<span class="tel"><abbr class="type" title="voice"><:spipproprio:coordonnees_tel:></abbr>&nbsp;<span class="value">(#GET*{proprietaire}|table_valeur{proprietaire_adresse_telephone}|spip_proprio_formater_telephone)</span>[(#ENV*{separator})]</span>]
+	[<span class="tel"><abbr class="type" title="fax"><:spipproprio:coordonnees_fax:></abbr>&nbsp;<span class="value">(#GET*{proprietaire}|table_valeur{proprietaire_adresse_telecopie})</span>[(#ENV*{separator})]</span>]
+	[<a href='mailto:[(#GET*{proprietaire}|table_valeur{proprietaire_mail})]' title="<:spipproprio:coordonnees_mailto_ttl:>" class="spip_mail email">(#GET*{proprietaire}|table_valeur{proprietaire_mail})</a>[(#ENV*{separator})]]
+	<span class="adr">
+	[<span class="street-address">(#GET*{proprietaire}|table_valeur{proprietaire_adresse_rue})</span>[(#ENV*{separator})]]
+	[<span class="postal-code">(#GET*{proprietaire}|table_valeur{proprietaire_adresse_code_postal})</span>]
+	[<span class="locality">(#GET*{proprietaire}|table_valeur{proprietaire_adresse_ville})</span>[(#ENV*{separator})]]
+	[<span class="country-name">(#GET*{proprietaire}|table_valeur{proprietaire_adresse_pays})</span>[(#ENV*{separator})]]
 	</span>
+	</b>
 	<br /><i>
 	[[(#GET*{proprietaire}|table_valeur{proprietaire_nom}|typo), ](#GET*{proprietaire}|table_valeur{proprietaire_libelle}|typo)[(#ENV*{separator})]]
 [(#GET*{proprietaire}|table_valeur{proprietaire_legal_forme}|typo)
@@ -30,8 +33,8 @@
 		][
 		(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_siret}|=={''}|oui)
 			[<:spipproprio:siren:> (#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_siren}|typo)]
-		][<br /><:spipproprio:numero_maj:> <:spipproprio:tva_intracommunautaire:> 
-			(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_tvaintra}|typo)[ 
+		][<br /><:spipproprio:numero_maj:> <:spipproprio:tva_intracommunautaire:>
+			(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_tvaintra}|typo)[
 				(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_siren}|typo)
 			]
 		]
@@ -39,4 +42,3 @@
 ]
 	</i>
 </div>
-
