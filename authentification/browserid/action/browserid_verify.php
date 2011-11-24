@@ -16,7 +16,7 @@ function action_browserid_verify() {
 	if ($assertion = _request('assertion')
 	AND $audience = _request('audience')
 	) {
-
+		include_spip('inc/filtres_mini');
 		$server = url_absolue('/');
 		if ($server !== "$audience/") {
 			$a['status'] = 'failure';
@@ -51,6 +51,7 @@ function action_browserid_verify() {
 					if ($auteur) {
 						include_spip('inc/auth');
 						auth_loger($auteur);
+						include_spip('inc/texte');
 						$a['session_nom'] = typo($auteur['nom']);
 						$a['session_statut'] = $auteur['statut'];
 						$a['autoriser_ecrire'] = autoriser('ecrire');

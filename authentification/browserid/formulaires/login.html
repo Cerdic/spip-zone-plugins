@@ -13,12 +13,12 @@
 ]
 
 function browserid_login() {
-	$("#browserid_login")
-	.html("connexion BrowserID en cours…");
 	navigator.id.getVerifiedEmail(browserid_verify_server);
 }
 function browserid_start() {
-	$.getScript('?page=browserid.js', browserid_login);
+	$("#browserid_login")
+	.html("connexion BrowserID en cours…");
+	$.getScript('?page=browserid.js&v=3', browserid_login);
 }
 </script>
 <div id="browserid_login">
