@@ -17,7 +17,7 @@ function browserid_verify_client(assertion) {
     $.post("https://browserid.org/verify",
       {
       assertion: assertion,
-      audience: window.location.origin
+      audience: window.location.href.replace(/(\/\/.*?)\/.*/, '$1')
       }, browserid_welcome
     );
   }
@@ -33,7 +33,7 @@ function browserid_verify_server(assertion) {
     $.post("?action=browserid_verify",
       {
       assertion: assertion,
-      audience: window.location.origin
+      audience: window.location.href.replace(/(\/\/.*?)\/.*/, '$1')
       }, browserid_welcome
     );
   }
