@@ -6,6 +6,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'docgen'=>'Documentation générale',
 'docwiki'=>'Carnet d\'idées',
+'aff_tout:nom'=>'Affiche tout',
+'aff_tout:description'=>'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
+
+Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.',
+'label:tout_rub'=>'Afficher en public tous les objets suivants :',
 
 	// 2
 	'2pts_non' => ' : non',

@@ -765,6 +765,27 @@ add_outil( array(
 	'code:css' => defined('_SPIP19300')?'[[%enveloppe_mails%]]':NULL,
 ));
 
+add_variables( array(
+	'nom' => 'tout_rub',
+	'check' => 'icone_rubriques',
+	'defaut' => 0,
+), array(
+	'nom' => 'tout_aut',
+	'check' => 'icone_auteurs',
+	'defaut' => 0,
+));
+add_outil( array(
+	'id' => 'aff_tout',
+	'categorie' => 'public',
+	'auteur' => 'b_b',
+	'description' => '<:aff_tout::>[[%tout_rub%]][[->%tout_aut%]]',
+	'pipelinecode:pre_boucle' =>
+'if(%%tout_rub%%) {if($flux->type_requete == \'rubriques\' && !isset($flux->modificateur[\'criteres\'][\'statut\']))
+	$flux->modificateur[\'criteres\'][\'statut\'] = true;}
+if(%%tout_aut%%) {if($flux->type_requete == \'auteurs\' && !isset($flux->modificateur[\'criteres\'][\'statut\']))
+	$flux->modificateur[\'criteres\'][\'statut\'] = true;}',
+));
+
 //-----------------------------------------------------------------------------//
 //                               NOISETTES                                     //
 //-----------------------------------------------------------------------------//
