@@ -20,7 +20,7 @@
 
 	Une fois rempli, le formulaire teste si les valeurs sont coh&#233;rentes (pas plus de votants que d'inscrits par exemple !). Puis il calcule la r&#233;partition de si&#232;ges.
 	</description>
-	<icone>
+	<icone>scrutin.png</icone>
 	<prefix>scrut_prop</prefix>
 	<pipeline>
 	   <nom>insert_head</nom>
