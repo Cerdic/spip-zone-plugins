@@ -1,0 +1,39 @@
+<INCLURE{fond=entete}{type_page=agenda}{lang}>
+[(#REM) A décommenter quand l'agenda marchera
+[(#ENV{type, mois}|agenda_connu)<INCLURE {fond=noisettes/agenda_#ENV{type,semaine}}{type} {delais=900}{annee}{mois}{jour}{echelle}{partie_cal}{theme}>]
+
+<div id="navigation-seminaire"><!-- mettre ce div dans le div suivant -->
+<INCLURE{fond=agenda/navigation/agenda_evenements}{env}>
+</div>
+]
+<div id="seminaire"> [(#REM) afficher les evenements de cet article]
+<INCLURE{fond=agenda/contenu/agenda_evenements_doubleliste}{env}{self}>
+</div>
+
+
+test sur les mots types
+
+<BOUCLE_mot_evenements(MOTS){type=Type}>
+#TITRE
+</BOUCLE_mot_evenements>
+
+test sur le groupe catégorie
+
+<BOUCLE_mot_articles(MOTS){type=Catégorie}>
+#TITRE
+</BOUCLE_mot_articles>
+
+test sur la modèle
+<BOUCLE_agenda_evenement(EVENEMENTS){par date_debut}{age_relatif_debut<=0}{id_evenement?}{id_article}{id_rubrique?}{titre_mot=#_mot_evenements:TITRE}{id_evenement_source?}{pagination}>
+
+				<ul class='liste_items evenements'>
+					<li class='item[ (#EXPOSE)][ (#ID_EVENEMENT_SOURCE|oui)repetition]'>
+						[(#MODELE{seminaire_acm}|trim|sinon{'?'})]
+<INCLURE{fond=formulaires/participation_evenement}>
+						<p class='actions'>
+							<span class='lien_article'>[<a href='[(#URL_ARTICLE)]'>Article</a>]</span>
+						</p>
+					</li>
+				</ul>
+			</BOUCLE_agenda_evenement>
+<INCLURE{fond=pied}{lang}>

@@ -1,0 +1,44 @@
+#SET{self,#SELF|parametre_url{date_debut|id_evenement|debut_agenda,''}}#SET{yena,''}
+<h2><:agenda:agenda:></h2>
+<B_mot_evenements>
+<div class='pagination'>
+<div class='plier_deplier'><a href='#' onclick='jQuery("li.item.court").removeClass("court");return false;' class='noajax'><:seminaire:lien_tout_deplier:></a> | <a href='#' onclick='set_vevent();return false;' class='noajax'><:seminaire:lien_tout_replier:></a></div>
+[(#GET{self}|parametre_url{date_debut,1900-01-01}|aoustrong{<:seminaire:evenements_depuis_debut:>,#ENV{date_debut}|=={1900-01-01},noajax}) |]
+[(#GET{self}|aoustrong{<:agenda:evenements_a_venir:>,#ENV{date_debut}|=={#ENV{date}|affdate{Y-m-d}},noajax}) ]
+</div>
+
+
+<BOUCLE_mot_evenements(MOTS){type=Type}>
+<h3 class="agenda">[(#DESCRIPTIF|attribut_html)]</h3>
+	<BOUCLE_mot_articles(MOTS){type=Catégorie}>
+		<BOUCLE_article_evenement(ARTICLES){titre_mot=#TITRE}{par num titre}{inverse}>
+			<B_agenda_evenement>
+			<ul>
+			<li><h4>[(#_mot_articles:TITRE|unique)]</h4></li>
+			<BOUCLE_agenda_evenement(EVENEMENTS){par date_debut}{age_relatif_debut<=0}{id_evenement?}{id_article}{id_rubrique?}{titre_mot=#_mot_evenements:TITRE}{id_evenement_source?}{pagination}>
+
+				<ul class='liste_items evenements'>
+					<li class='item[ (#EXPOSE)][ (#ID_EVENEMENT_SOURCE|oui)repetition]'>
+						[(#MODELE{seminaire_acm}|trim|sinon{'?'})]
+<INCLURE{fond=formulaires/participation_evenement}>
+						<p class='actions'>
+							<span class='lien_article'>[<a href='[(#URL_ARTICLE)]'>Article</a>]</span>
+						</p>
+					</li>
+				</ul>
+			</BOUCLE_agenda_evenement>
+			</ul>
+			#PAGINATION
+			</B_agenda_evenement>
+		</BOUCLE_article_evenement>
+	</BOUCLE_mot_articles>
+</BOUCLE_mot_evenements>
+
+
+	<!-- On n'affiche le formulaire d'édition des événements que si la personne connectée est autorisée à modifier l'événement (edit, on verra les autorisations plus tard)(pas nécessaire ici)-->
+
+<div class='espace'></div>
+<span class="bouton">
+<a href="#URL_ECRIRE{evenements_edit,new=oui&id_article=#ID_ARTICLE}" class='noajax creer'><:seminaire:creer_evenement:></a>
+</span>
+<div class='espace'></div>
