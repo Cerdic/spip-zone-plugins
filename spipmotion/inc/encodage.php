@@ -382,7 +382,6 @@ function encodage($source,$doc_attente){
 		 * Paramètres supplémentaires pour encoder en h264
 		 */
 		if($vcodec == '--vcodec libx264'){
-			console.log($spipmotion_compiler,'test');
 			$preset_quality = lire_config("spipmotion/vpreset_$extension_attente",'slow');
 			if(in_array('--enable-pthreads',@unserialize($spipmotion_compiler['configuration']))){
 				$infos_sup_normal .= "-threads 0";
