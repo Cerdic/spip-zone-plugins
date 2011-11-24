@@ -1,8 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8">
-<markers xmlns="http://www.loceanique.org/schemas/geomarkers/1.0"
-	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	 xsi:SchemaLocation="http://www/loceanique.org/schemas/GeoMarkers/1.0 http://www/loceanique.org/schemas/GeoMarkers/1.0/geomarkers.xsd"
-	 id="gmap-marker-article">
+<markers id="gmap-marker-article">
 
 <icon type="shadow">
 	<image>images/gmap-shadow.png</image>
