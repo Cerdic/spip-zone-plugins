@@ -100,7 +100,7 @@ function sqlfield_auteurs_objet($id_objet, $type_objet, $alias, $serveur) {
 		$t = sql_allfetsel('*','spip_auteurs_liens', "objet=$type_objet", '','','','',$serveur);
 		// hack qui conserve l'ordre de la table malgre les cles primaires
 		$r = array(); foreach($t as $e) if($e['id_objet'] == $id_objet) $r[] = $e["id_auteur"];
-		$r[$i] = 'FIELD('.$alias.'.id_auteur,'.join($r, ',').')'; 
+		$r[$i] = count($r)?'FIELD('.$alias.'.id_auteur,'.join($r, ',').')':''; 
 	}
 	return $r[$i];
 }
