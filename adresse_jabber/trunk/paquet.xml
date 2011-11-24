@@ -1,10 +1,16 @@
-<plugin>
+<paquet
+	prefix="jabberid"
+	categorie="auteur"
+	version="2.0.0"
+	etat="test"
+	compatibilite="[3.0.0-dev;["
+	logo="img/chat.png"
+	schema="0.1.0"
+	documentation="http://www.spip-contrib.net/Adresse-Jabber"
+>
 	<nom>Adresse Jabber (JID)</nom>
 	<auteur>[davux->http://da.weeno.net/]</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.1.0</version>
-	<version_base>0.1</version_base>
-	<icon>img/chat.png</icon>
 	<slogan>
 Une adresse Jabber pour les auteurs
 	</slogan>
@@ -20,15 +26,6 @@ site francophone [JabberFR->http://jabberfr.org/].
 Ce plugin fournit un champ supplémentaire dans le formulaire d'édition des informations d'un auteur. La
 balise correspondante est <code>#JID</code> (appellation standard de l'identifiant Jabber).
 	</description>
-	<etat>test</etat>
-	<prefix>jabberid</prefix>
-	<lien>http://www.spip-contrib.net/Adresse-Jabber</lien>
-	<necessite id="SPIP" version="[3.0.0-dev;[" />
-	<necessite id="cextras" version="[2.0.0-dev;[" />
-	<install>base/jabberid_install.php</install>
-	<pipeline>
-		<nom>declarer_champs_extras</nom>
-		<inclure>base/jabberid.php</inclure>
-	</pipeline>
-	<categorie>auteur</categorie>
-</plugin>
+	<necessite nom="cextras" version="[2.0.0-dev;[" />
+	<pipeline nom="declarer_champs_extras" inclure="base/jabberid.php" />
+</paquet>
