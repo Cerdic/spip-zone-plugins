@@ -80,7 +80,7 @@ function encodage($source,$doc_attente){
 	if($GLOBALS['meta']['spipmotion_casse'] == 'oui')
 		return;
 
-	$spimotion_compiler = @unserialize($GLOBALS['spipmotion_metas']['spipmotion_compiler']);
+	$spipmotion_compiler = @unserialize($GLOBALS['spipmotion_metas']['spipmotion_compiler']);
 	$ffmpeg_version = $spipmotion_compiler['ffmpeg_version'] ? $spipmotion_compiler['ffmpeg_version'] : '0.7';
 	$rep_dest = sous_repertoire(_DIR_VAR, 'cache-spipmotion');
 
@@ -382,6 +382,7 @@ function encodage($source,$doc_attente){
 		 * Paramètres supplémentaires pour encoder en h264
 		 */
 		if($vcodec == '--vcodec libx264'){
+			console.log($spipmotion_compiler,'test');
 			$preset_quality = lire_config("spipmotion/vpreset_$extension_attente",'slow');
 			if(in_array('--enable-pthreads',@unserialize($spipmotion_compiler['configuration']))){
 				$infos_sup_normal .= "-threads 0";
