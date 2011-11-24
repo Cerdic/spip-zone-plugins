@@ -42,8 +42,6 @@ function action_browserid_verify() {
 				AND $a['audience']."/" == $server
 				) {
 					include_spip('inc/session');
-					session_set('session_email', $a['email']);
-					session_set('email_confirme', $a['email']);
 
 					// on verifie si l'auteur existe deja en base, si oui on le loge
 					include_spip('base/abstract_sql');
@@ -64,6 +62,10 @@ function action_browserid_verify() {
 						#$a['message'] = 'Welcome '.$a['session_nom'];
 
 					}
+
+					session_set('session_email', $a['email']);
+					session_set('email_confirme', $a['email']);
+
 				} else {
 					$a['status'] = 'failure';
 				}

@@ -12,16 +12,23 @@
 	[(#AUTORISER{ecrire}|?{document.location = url;})]
 ]
 
+function browserid_message(m) {
+	$("#browserid_login .message")
+	.html(m);
+}
+
 function browserid_login() {
 	navigator.id.getVerifiedEmail(browserid_verify_server);
+	browserid_message("Veuillez autoriser les popups");
 }
+
 function browserid_start() {
-	$("#browserid_login")
-	.html("connexion BrowserID en cours…");
-	$.getScript('?page=browserid.js&v=3', browserid_login);
+	browserid_message("connexion BrowserID en cours…");
+	$.getScript('?page=browserid.js&v=8', browserid_login);
 }
 </script>
 <div id="browserid_login">
 <button onclick="browserid_start();">[<img src="(#CHEMIN{images/sign_in_red.png})" />]</button>
+<div class="message"></div>
 </div>
 

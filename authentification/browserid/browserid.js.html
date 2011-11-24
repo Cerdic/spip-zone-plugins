@@ -44,19 +44,25 @@ function browserid_verify_server(assertion) {
  * Fonction appelee quand on a reussi a se connecter
  */
 function browserid_welcome(e) {
-  console.log(e);
+  // console.log(e);
   if (e.status == "okay") {
+    if (url) {
+      if (e.autoriser_ecrire) {
+        window.location = url;
+      } else {
+        e.message = "Vous êtes identifié comme " + e.email + " mais cet email n'a pas d'accès à l'espace privé du site.";
+      }
+    }
     if (e.message) {
-      alert(e.message);
+      browserid_message(e.message);
     }
     if (e.action) {
       eval(e.action);
     }
-    if (url) {
-      window.location = url;
-    }
   } else {
-    alert('something was wrong: '+(e.reason || ""));
+    browserid_message('something was wrong: '+(e.reason || ""));
   }
 }
- 
+
+/* definir a minima une fonction d'alerte */
+if (!browserid_message) browserid_message = alert;
