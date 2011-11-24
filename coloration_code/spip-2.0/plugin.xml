@@ -65,7 +65,7 @@ _ <code>#TEXTE**|coloration_code_color{spip,code}</code>: colora #TEXTE con le r
 	  </multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Coloration-Code,2938</lien>
-   <fonctions>coloration_code.php</fonctions>
+   <fonctions>coloration_code_fonctions.php</fonctions>
 	<prefix>coloration_code</prefix>
 	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<categorie>edition</categorie>
