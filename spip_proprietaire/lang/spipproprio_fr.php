@@ -309,7 +309,8 @@ Nous vous conseillons &eacute;galement de jeter un oeil au squelette [mentions l
 	'utiliser_ce_plugin' => 'Utiliser ce plugin ...',
 
 	// V
-	'ville_label' => 'Ville'
+	'ville_label' => 'Ville',
+	'valider_pour_forcer' => '(vous pouvez cependant forcer une valeur vide en indiquant un underscore seul : "_")',
 );
 
 ?>

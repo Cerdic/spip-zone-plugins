@@ -7,16 +7,17 @@
 setTimeout(function(){
 if (window.jQuery){
 jQuery(document).ready(function(){
-[(#ENV**{idem}|=={non}|non)
-	if (jQuery('.[(#ENV**{who})]').is(':visible')) {
-		jQuery('.[(#ENV**{who})]').slideUp('fast');
-		jQuery('.[(#ENV**{who})]').hide();
+	var idemselect = $('select#idem option:selected').val();
+	if (idemselect=='non') {
+		if (jQuery('.[(#ENV**{who})]').is(':hidden')) {
+			jQuery('.[(#ENV**{who})]').show().slideDown('fast');
+		}
+	} else {
+		if (jQuery('.[(#ENV**{who})]').is(':visible')) {
+			jQuery('.[(#ENV**{who})]').slideUp('fast');
+			jQuery('.[(#ENV**{who})]').hide();
+		}
 	}
-][(#ENV**{idem}|=={non}|oui)
-	if (jQuery('.[(#ENV**{who})]').is(':hidden')) {
-		jQuery('.[(#ENV**{who})]').show().slideDown('fast');
-	}
-]
 });
 }
 },10);

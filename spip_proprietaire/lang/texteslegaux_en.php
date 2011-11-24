@@ -19,20 +19,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 - {{[webmaster card->@webmaster@]}}', # MODIF
 	'conditions_utilisation_abus' => '{{{Abuse}}}
 
-Pursuant to [French law n° 2004-575 of 21 june 2004 on confidence in the digital economy|See the text (legifrance.gouv.fr) [fr]->http://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000801164], to report a content issue or if you are a victim of fraudulent use of the site {{[@nom_site@->@url_site@]}}, please contact the administrator site by e-mail: [@proprietaire_mail_administratif@->mailto:@proprietaire_mail_administratif@].
+Pursuant to [French law n° 2004-575 of 21 June 2004 on confidence in the digital economy|See the text (legifrance.gouv.fr) [fr]->http://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000801164], to report a content issue or if you are a victim of fraudulent use of the site {{[@nom_site@->@url_site@]}}, please contact the administrator site by e-mail: [@proprietaire_mail_administratif@->mailto:@proprietaire_mail_administratif@].
 ', # MODIF
 	'conditions_utilisation_cookies' => '{{{Cookies}}}
 
-Some personal information and some witnesses markers may be recorded by {{[@nom_site@->@url_site@]}} on the personal computer of the user without his permission ({"cookies" or "Java applets"}). Unless explicitly stated otherwise &#091;*&#093;, these technical procedures are not essential for the proper functioning of {{[@nom_site@->@url_site@]}} and their use can of course be disabled in the browser used by the Internet user without its navigation may be affected. {{None of this information is retained by the site after disconnecting from the Internet.}}
+Some personal information and some witness markers may be recorded by {{[@nom_site@->@url_site@]}} on the personal computer of the user without his permission ({"cookies" or "Java applets"}). Unless explicitly stated otherwise &#091;*&#093;, these technical procedures are not essential for the proper functioning of {{[@nom_site@->@url_site@]}} and their use can of course be disabled in the browser used by the Internet user without its navigation being affected. {{None of this information is retained by the site after disconnecting from the Internet.}}
  
-<small>&#091;*&#093; It is worth to precise here that access to different private areas of the site may require acceptance by the user of the deposit of a cookie on his personal computer to a security issue.</small>
+<small>&#091;*&#093; It is worth mentioning that access to different private areas of the site may require acceptance by the user of the deposit of a cookie on his personal computer for security purposes.</small>
 ', # MODIF
 	'conditions_utilisation_infos_personnelles' => '{{{Collection and processing of personal data}}}
 
 {{Any information collected by {{[@nom_site@->@url_site@]}} are never disclosed to third parties.}}
-<br />Except in special cases, this information comes from voluntary registration of an email provided by the user, allowing him to receive a brochure or newsletter, to request its inclusion in the editorial board of the site or to inquire about a point whatever.
+<br />Except in special cases, this information comes from voluntary registration of an email provided by the user, allowing him to receive a brochure or newsletter, to request its inclusion in the editorial board of the site or to inquire about a point.
 
-Pursuant to [French law n° 78-17 of 6 january 1978 relating to data, files and freedoms|See the text (legifrance.gouv.fr) [fr]->http://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000886460], {{the user has a right to access, correct or delete personal information stored on the {{[@nom_site@->@url_site@]}}, exercisable at any time with the administrator of {{[@nom_site@->@url_site@]}}.}} For such requests, please send a letter to @proprietaire_forme@ @proprietaire_nom@ or contact email address: [@proprietaire_mail_administratif@->mailto:@proprietaire_mail_administratif@].
+Pursuant to [French law n° 78-17 of 6 January 1978 relating to data, files and freedoms|See the text (legifrance.gouv.fr) [fr]->http://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000886460], {{the user has a right to access, correct or delete personal information stored on the {{[@nom_site@->@url_site@]}}, exercisable at any time with the administrator of {{[@nom_site@->@url_site@]}}.}} For such requests, please send a letter to @proprietaire_forme@ @proprietaire_nom@ or contact email address: [@proprietaire_mail_administratif@->mailto:@proprietaire_mail_administratif@].
 @cnil_texte@
 ', # MODIF
 	'conditions_utilisation_intro' => '{{{De facto acceptance}}}
