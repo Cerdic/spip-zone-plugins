@@ -114,9 +114,11 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 	}
 
 	if ($cadre == 'cadre') {
+	  $spip_cadre = ' spip_cadre';
 	  $geshi->set_header_type(GESHI_HEADER_DIV);
 	  $geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
 	} else {
+	  $spip_cadre = '';
 	  $geshi->set_header_type(GESHI_HEADER_NONE);
 	  $geshi->enable_line_numbers(GESHI_NO_LINE_NUMBERS);
 	}
@@ -124,7 +126,7 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 	//
 	// And echo the result!
 	//
-	$rempl = $stylecss . '<' . $englobant . ' class="coloration_code"><' . $englobant . ' class="spip_'.$language.' '.$cadre.'">'.$geshi->parse_code().'</' . $englobant . '>';
+	$rempl = $stylecss . '<' . $englobant . ' class="coloration_code"><' . $englobant . ' class="spip_'.$language.' '.$cadre.$spip_cadre.'">'.$geshi->parse_code().'</' . $englobant . '>';
 
 	if ($telecharge) {
 		$rempl .= "<div class='" . $cadre . "_download'
