@@ -1,0 +1,22 @@
+<plugin>
+	<nom>BrowserID</nom>
+	<auteur>Fil</auteur>
+	<version>0.1</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Authentification des visiteurs via BrowserID
+	</description>
+	<prefix>
+	browserid
+	</prefix>
+	<icon>images/browserid.png</icon>
+	<!-- https://www.browserid.org/i/icon.png -->
+
+	<categorie>auteur</categorie>
+	<!--
+		<lien>http://www.spip-contrib.net/</lien>
+	-->
+	<chemin dir='' />
+</plugin>

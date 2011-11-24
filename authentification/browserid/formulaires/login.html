@@ -1,0 +1,27 @@
+[(#REM)
+/*
+ *  Plugin BrowserID pour SPIP
+ *
+ *  (c) Fil 2011 - Licence GNU/GPL
+ *
+ */
+
+]<script type="text/javascript">
+[
+	var url = (#ENV{url}|sinon{#EVAL{_DIR_RESTREINT_ABS}}|_q);
+	[(#AUTORISER{ecrire}|?{document.location = url;})]
+]
+
+function browserid_login() {
+	$("#browserid_login")
+	.html("connexion BrowserID en cours…");
+	navigator.id.getVerifiedEmail(browserid_verify_server);
+}
+function browserid_start() {
+	$.getScript('?page=browserid.js', browserid_login);
+}
+</script>
+<div id="browserid_login">
+<button onclick="browserid_start();">[<img src="(#CHEMIN{images/sign_in_red.png})" />]</button>
+</div>
+
