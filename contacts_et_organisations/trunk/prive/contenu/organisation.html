@@ -1,0 +1,26 @@
+<BOUCLE_organisation(ORGANISATIONS){id_organisation?}{id_auteur?}>
+[<div class="champ contenu_nom[ (#NOM*|strlen|?{'',vide})]">
+	<label><:contacts:label_nom:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{nom} nom'>(#NOM)</span>
+</div>]
+[<div class="champ contenu_statut_juridique[ (#STATUT_JURIDIQUE*|strlen|?{'',vide})]">
+	<label><:contacts:label_statut_juridique:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{statut_juridique} statut_juridique'>(#STATUT_JURIDIQUE)</span>
+</div>]
+[<div class="champ contenu_siret[ (#IDENTIFICATION*|strlen|?{'',vide})]">
+	<label><:contacts:label_identification:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{identification} identification'>(#IDENTIFICATION)</span>
+</div>]
+[<div class="champ contenu_siret[ (#ACTIVITE*|strlen|?{'',vide})]">
+	<label><:contacts:label_activite:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{activite} activite'>(#ACTIVITE)</span>
+</div>]
+[<div class="champ contenu_date_creation[ (#DATE_CREATION*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:contacts:label_date_creation:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{date_creation} date_creation'>(#DATE_CREATION|=={0000-00-00 00:00:00}|?{'',[(#DATE_CREATION|affdate)]})</span>
+</div>]
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:contacts:label_descriptif:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF|affdate)</span>
+</div>]
+</BOUCLE_organisation>

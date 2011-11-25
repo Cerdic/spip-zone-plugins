@@ -1,0 +1,58 @@
+[(#REM)
+	Page de test du plugin C&O
+	Test de la table des organisations; liaison avec contacts;
+]
+
+
+<B_o>
+#PAGINATION
+
+<table class="spip" summary="<:contacts:liste_organisations:>" width="100%">
+	<thead>
+	<tr>
+		<th>Nom</th>
+		<th>Activité</th>
+		<th>Descriptif</th>
+	</tr>
+	</thead>
+	<tbody>
+<BOUCLE_o(ORGANISATIONS){par nom}{pagination}>
+	<tr[ class="(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})"]>
+		<td>#NOM</td>
+		<td>#ACTIVITE</td>
+		<td>#DESCRIPTIF</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<B_c>
+			<table summary="Contacts de #NOM" class="spip" width="100%">
+				<tr>
+					<th>Auteur</th>
+					<th>Nom</th>
+					<th>Prénom</th>
+					[(#PLUGIN{concurrences}|oui)
+					<th colspan="2">Revue</th>
+					<th colspan="2">Bulletin</th>
+					]
+				</tr>
+				<BOUCLE_c(CONTACTS){id_organisation}>
+				<tr[ class="(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})"]>
+					<td>#ID_AUTEUR</td>
+					<td>#NOM</td>
+					<td>#PRENOM</td>
+					[(#PLUGIN{concurrences}|oui)
+					<INCLURE{fond=test/col_revue}{id_auteur=#ID_AUTEUR}/>
+					<INCLURE{fond=test/col_bulletin}{id_auteur=#ID_AUTEUR}/>
+					]
+				</tr>
+				</BOUCLE_c>
+			</table>
+			</B_c>
+		</td>
+	</tr>
+</BOUCLE_o>
+	</tbody>
+</table>
+
+#PAGINATION
+</B_o>
