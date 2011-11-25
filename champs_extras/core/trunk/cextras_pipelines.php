@@ -56,7 +56,7 @@ function champs_extras_autorisation($faire, $quoi='', $saisies=array(), $args=ar
 /**
  * Ajoute pour chaque saisie de type SQL un drapeau (input hidden)
  * permettant de retrouver les saisies editées.
- * Particulièrement utile pour les checkbox qui peuvent ne renvoient
+ * Particulièrement utile pour les checkbox qui ne renvoient
  * rien si on les décoche.
  *
  * @param Array $saisies liste de saisies

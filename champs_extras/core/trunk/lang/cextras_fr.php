@@ -11,5 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type' => '@type@',
 #	'type_input'=>'Afficher une saisie input de type texte',
 #	'type_textarea'=>'Afficher une saisie textarea',
+
+	'zbug_balise_argument_non_texte' => 'L\'argument @nb@ dans la balise @balise@ doit &ecirc;tre de type texte',
 );
 ?>

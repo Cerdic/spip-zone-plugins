@@ -36,68 +36,7 @@ function iextras_champs_extras_definis($table='') {
 }
 
 
-function iextras_get_extras(){
-	static $extras = null;
-	if ($extras === null) {
-		$extras = @unserialize($GLOBALS['meta']['iextras']);
-		if (!is_array($extras)) $extras = array();
-	}
-	return $extras;
-}
 
-
-/* retourne l'extra ayant l'id demande */
-function iextra_get_extra($extra_id){
-		$extras = iextras_get_extras();
-		foreach($extras as $extra) {
-			if ($extra->get_id() == $extra_id) {
-				return $extra;
-			}
-		}
-		return false;
-}
-
-function iextras_set_extras($extras){
-	ecrire_meta('iextras',serialize($extras));
-	return $extras;
-}
-
-// tableau des extras, mais classes par table SQL
-// et sous forme de tableau PHP pour pouvoir boucler dessus.
-function iextras_get_extras_par_table($appliquer_typo = false){
-	$extras = iextras_get_extras();
-	if ($appliquer_typo) {
-		$extras = _extras_typo($extras);
-	}
-	$tables = array();
-	foreach($extras as $e) {
-		if (!isset($tables[$e->table])) {
-			$tables[$e->table] = array();
-		}
-		$tables[$e->table][] = $e->toArray();
-	}
-
-	return $tables;
-}
-
-// tableau des extras, tries par table SQL
-function iextras_get_extras_tries_par_table(){
-	$extras = iextras_get_extras();
-	$tables = $extras_tries = array();
-	foreach($extras as $e) {
-		if (!isset($tables[$e->table])) {
-			$tables[$e->table] = array();
-		}
-		$tables[$e->table][] = $e;
-	}
-	sort($tables);
-	foreach ($tables as $table) {
-		foreach ($table as $extra) {
-			$extras_tries[] = $extra;
-		}
-	}
-	return $extras_tries;
-}
 
 /**
  * Compter les saisies extras d'une table
@@ -234,6 +173,13 @@ function iextras_formulaire_verifier($flux) {
 		$saisies_sql = saisies_lister_disponibles_sql();
 
 		if (isset($saisies_sql[$type_saisie])) {
+
+			// liste 'type_de_saisie' => 'Titre de la saisie'
+			$liste_saisies = array();
+			foreach ($saisies_sql as $s=>$d) {
+				$liste_saisies[$s] = $d['titre'];
+			}
+			
 			$sql = $saisies_sql[$type_saisie]['defaut']['options']['sql'];
 			$flux['data'][$nom] = saisies_inserer($flux['data'][$nom], array(
 
@@ -274,6 +220,17 @@ function iextras_formulaire_verifier($flux) {
 								'_TRAITEMENT_TYPO' => _T('iextras:radio_traitements_typo'),
 								'_TRAITEMENT_RACCOURCIS' => _T('iextras:radio_traitements_raccourcis'),
 							)
+						)
+					),
+					array(
+						'saisie' => 'selection',
+						'options' => array(
+							'nom' => "saisie_modifiee_${name}[options][nouveau_type_saisie]",
+							'label' => _T('iextras:label_saisie'),
+							'explication' => _T('iextras:precisions_pour_nouvelle_saisie'),
+							'attention' => _T('iextras:precisions_pour_nouvelle_saisie_attention'),
+							'defaut' => $type_saisie,
+							'datas' => $liste_saisies
 						)
 					),
 				)));

@@ -7,6 +7,7 @@
  *
  * <BOUCLE_x(TABLE)>
  *  - #CHAMP_EXTRA{nom_du_champ}
+ *  - #CHAMP_EXTRA{nom_du_champ,label}
  * </BOUCLE_x>
  * 
  * @return ChampExtra
@@ -17,31 +18,38 @@ function balise_CHAMP_EXTRA_dist($p) {
 	$objet = $p->boucles[$id_boucle]->id_table;
 	
 	// recuperer les parametres : colonne sql (champ)
-	$colonne = interprete_argument_balise(1, $p);
+	if (!$colonne = interprete_argument_balise(1, $p)) {
+		$msg = array('zbug_balise_sans_argument',	array('balise' => ' CHAMP_EXTRA'));
+		erreur_squelette($msg, $p);
+	}
+		
 	$demande = sinon(interprete_argument_balise(2, $p), "''");
 	$p->code = "calculer_balise_CHAMP_EXTRA('$objet', $colonne, $demande)";
 	return $p;
 }
 
-// retourne un champ extra donne (sa classe) ou une propriete ou methode demandee
+// retourne un champ extra donne (le tableau de description des options de saisies)
+// ou un des attributs de ce tableau
 function calculer_balise_CHAMP_EXTRA($objet, $colonne, $demande='') {
 	// recuperer la liste des champs extras existants
 	include_spip('cextras_pipelines');
-	if (!$c = cextras_get_extra(table_objet_sql($objet), $colonne)) {
+	if (!$saisies = champs_extras_objet( $table = table_objet_sql($objet) )) {
 		return '';
 	}
+	
+	include_spip('inc/saisies');
+	if (!$saisie = saisies_chercher($saisies, $colonne)) {
+		return '';
+	}
+
 	if (!$demande) {
-		return $c; // retourner ChampExtra (attention, c'est un objet !)
+		return $saisie['options']; // retourne la description de la saisie...
 	}
-	if (property_exists($c, $demande)) {
-		return $c->$demande;
+
+	if (array_key_exists($demande, $saisie['options'])) {
+		return $saisie['options'][$demande];
 	}
-	if (method_exists($c, $demande)) {
-		return $c->$demande();
-	}
-	if (property_exists($c, 'saisie_parametres') and isset($c->saisie_parametres[$demande])) {
-		return $c->saisie_parametres[$demande];
-	}
+
 	return '';
 }
 
@@ -58,10 +66,25 @@ function calculer_balise_CHAMP_EXTRA($objet, $colonne, $demande='') {
 function balise_LISTER_CHOIX_dist($p) {
 	// prendre nom de la cle primaire de l'objet pour calculer sa valeur
 	$id_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
+
+	// s'il n'y a pas de nom de boucle, on ne peut pas fonctionner
+	if (!isset($p->boucles[$id_boucle])) {
+		$msg = array('zbug_champ_hors_boucle', array('champ' => ' LISTER_CHOIX'));
+		erreur_squelette($msg, $p);
+		$p->code = "''";
+		return $p;
+	}
+	
 	$objet = $p->boucles[$id_boucle]->id_table;
 	
 	// recuperer les parametres : colonne sql (champ)
-	$colonne = interprete_argument_balise(1, $p);
+	if (!$colonne = interprete_argument_balise(1, $p)) {
+		$msg = array('zbug_balise_sans_argument',	array('balise' => ' LISTER_CHOIX'));
+		erreur_squelette($msg, $p);
+		$p->code = "''";
+		return $p;
+	}
+	
 	$separateur = interprete_argument_balise(2, $p);
 	if (!$separateur) $separateur = "', '";
 
@@ -71,7 +94,7 @@ function balise_LISTER_CHOIX_dist($p) {
 	// retourne un array si #LISTER_CHOIX**
 	// sinon fabrique une chaine avec le separateur designe.
 	if ($p->etoile != "**") {
-		$p->code = "join($separateur, " . $p->code . ")";
+		$p->code = "(is_array(\$a = $p->code) ? join($separateur, \$a) : " . $p->code . ")";
 	}
 	
 	return $p;
@@ -79,18 +102,10 @@ function balise_LISTER_CHOIX_dist($p) {
 
 
 function calculer_balise_LISTER_CHOIX($objet, $colonne) {
-	if ($c = calculer_balise_CHAMP_EXTRA($objet, $colonne)) {
-		// saisie externe (SAISIES)
-		if (isset($c->saisie_parametres['datas']) and $c->saisie_parametres['datas']) {
-			return $c->saisie_parametres['datas'];
-		}
-		// saisie de ce plugin
-		if ($c->enum) {
-			$enum = cextras_enum_array($c->enum);
-			if (!is_array($enum)) {
-				$enum = array();
-			}
-			return $enum;
+	if ($options = calculer_balise_CHAMP_EXTRA($objet, $colonne)) {
+		if (isset($options['datas']) and $options['datas']) {
+			include_spip('inc/saisies');
+			return saisies_chaine2tableau($options['datas']);
 		}
 	}
 	return '';
@@ -119,18 +134,41 @@ function calculer_balise_LISTER_CHOIX($objet, $colonne) {
 function balise_LISTER_VALEURS_dist($p) {
 	// prendre nom de la cle primaire de l'objet pour calculer sa valeur
 	$id_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
+
+	// s'il n'y a pas de nom de boucle, on ne peut pas fonctionner
+	if (!isset($p->boucles[$id_boucle])) {
+		$msg = array('zbug_champ_hors_boucle', array('champ' => ' LISTER_VALEURS'));
+		erreur_squelette($msg, $p);
+		$p->code = "''";
+		return $p;
+	}
+	
 	$objet = $p->boucles[$id_boucle]->id_table;
 	$_id_objet = $p->boucles[$id_boucle]->primary;
 	$id_objet = champ_sql($_id_objet, $p);
 
-	// recuperer les parametres : colonne sql (champ) et separateur
-	$colonne = interprete_argument_balise(1, $p);
+	// recuperer les parametres : colonne sql (champ)
+	if (!$colonne = interprete_argument_balise(1, $p)) {
+		$msg = array('zbug_balise_sans_argument',	array('balise' => ' LISTER_VALEURS'));
+		erreur_squelette($msg, $p);
+		$p->code = "''";
+		return $p;
+	}
+	
 	$separateur = interprete_argument_balise(2, $p);
 	if (!$separateur) $separateur = "', '";
 	
 	// demander la colonne dans la requete SQL
-	// $colonne doit etre un texte 'nom'
+	// $colonne doit etre un texte 'nom_du_champ'
+	if ($p->param[0][1][0]->type != 'texte') {
+		$msg = array('cextras:zbug_balise_argument_non_texte', array('nb'=>1, 'balise' => ' LISTER_VALEURS'));
+		erreur_squelette($msg, $p);
+		$p->code = "''";
+		return $p;
+	}
+	
 	$texte_colonne = $p->param[0][1][0]->texte;
+	
 	$valeur = champ_sql($texte_colonne, $p);
 	
 	// generer le code d'execution
@@ -139,7 +177,7 @@ function balise_LISTER_VALEURS_dist($p) {
 	// retourne un array si #LISTER_VALEURS**
 	// sinon fabrique une chaine avec le separateur designe.
 	if ($p->etoile != "**") {
-		$p->code = "join($separateur, " . $p->code . ")";
+		$p->code = "(is_array(\$a = $p->code) ? join($separateur, \$a) : " . $p->code . ")";
 	}
 	
 	return $p;
@@ -162,9 +200,7 @@ function calculer_balise_LISTER_VALEURS($objet, $_id_objet, $colonne, $id_objet,
 	if (!$choix) return $cles;
 
 	// correspondances...
-	foreach($choix as $cle=>$valeur) {
-		if (in_array($cle, $cles)) $vals[$cle] = $valeur;
-	}
+	$vals = array_intersect_key($choix, array_flip($cles));
 
 	// et voici les valeurs !
 	return $vals ? $vals : $cles;

@@ -88,6 +88,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		Peut &ecirc;tre une cha&icirc;ne de langue &laquo;plugin:chaine&raquo;.',
 	'precisions_pour_rechercher' => 'Inclure ce champ dans le moteur de recherche ?',
 	'precisions_pour_saisie' => 'Afficher une saisie de type :',
+	'precisions_pour_nouvelle_saisie' => 'Permet de changer le type de saisie utilisée pour ce champ',
+	'precisions_pour_nouvelle_saisie_attention' => 'Attention cependant, un changement de type de saisie perd les options de configuration de la saisie actuelle qui ne sont pas communes avec la nouvelle saisie sélectionnée !',
 	'precisions_pour_traitements' => 'Appliquer automatiquement un traitement
 		pour la balise #NOM_DU_CHAMP r&eacute;sultante :',
 	'precisions_pour_restrictions_secteurs' => 'Identifiants de secteurs à restreindre (séparateur «:»)',
@@ -106,6 +108,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisies_champs_extras' => 'De &laquo;Champs Extras&raquo;',
 	'saisies_saisies' => 'De «Saisies&raquo;',
 	'supprimer_reelement' => 'Supprimer ce champ ?',
+	
 	//T
 	'titre_page_iextras' => 'Champs Extras',
 	'titre_iextras' => 'Champs Extras',

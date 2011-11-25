@@ -3,14 +3,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
- * Log une information si l'on est en mode debug
- * ( define('EXTRAS_DEBUG',true); )
- * Ou si le second parametre est true.
+ * Log une information 
+ * Info importante si le second parametre est true.
  */
 function extras_log($contenu, $important=false) {
-	if ($important
-	OR (defined('EXTRAS_DEBUG') and EXTRAS_DEBUG)) {
-		spip_log($contenu,'extras');
+	if ($important) {
+		spip_log($contenu, 'extras.'. _LOG_INFO);
+	} else {
+		spip_log($contenu, 'extras.'. _LOG_INFO_IMPORTANTE);
 	}
 }
 
@@ -54,26 +54,6 @@ function cextras_types_formulaires(){
 	}
 
 	return $types;
-}
-
-
-/**
- * Installe des champs extras et
- * gere en meme temps la mise a jour de la meta
- * du plugin concernant la base de donnee
- */
-function installer_champs_extras($champs, $nom_meta_base_version, $version_cible, $creer_meta=true) {
-	$current_version = 0.0;
-	$ok = true;
-	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
-	|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-		// cas d'une installation
-		$ok = creer_champs_extras($champs);
-		if ($ok and $creer_meta) {
-			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
-		}
-	}
-	return $ok;
 }
 
 
@@ -185,96 +165,6 @@ function champs_extras_modifier($table, $saisies_nouvelles, $saisies_anciennes) 
 		}
 	}
 	return $ok;
-}
-
-
-/**
- * /!\ À supprimer (API EXTRAS2)
- * Cree en base les champs extras demandes
- * 
- * @param $champs : objet ChampExtra ou tableau d'objets ChampExtra
- */
-function creer_champs_extras($champs) {
-	if (!$champs) {
-		return;
-	}
-	
-	if (!is_array($champs)) 
-		$champs = array($champs);
-				
-	// on recupere juste les differentes tables a mettre a jour
-	$tables_modifiees = array();
-	foreach ($champs as $c){ 
-		if ($table = $c->table) {
-			$tables_modifiees[$table] = $table;
-		} else {
-			// ici on est bien ennuye, vu qu'on ne pourra pas creer ce champ.
-			extras_log("Aucune table trouvee pour le champs extras ; il ne pourra etre cree :", true);
-			extras_log($c, true);
-		}
-	}	
-
-	if (!$tables_modifiees) {
-		return false;
-	}
-	
-	$tables = lister_tables_objets_sql();
-	$tables = array_intersect_key($tables, $tables_modifiees);
-	foreach ($champs as $c) {
-		if (!isset($tables[$c->table]['field'][$c->champ])) {
-			$tables[$c->table]['field'][$c->champ] = $c->sql;
-		}
-	};
-	
-
-	// executer la mise a jour
-	include_spip('base/create');
-	foreach ($tables as $table => $desc) {
-		creer_ou_upgrader_table($table, $desc, true, true);
-	}
-
-	// pour chaque champ a creer, on verifie qu'il existe bien maintenant !
-	$trouver_table = charger_fonction('trouver_table','base');
-	$trouver_table(''); // recreer la description des tables.
-	$retour = true;
-	foreach ($champs as $c){
-		if ($objet = table_objet($c->table)) {
-			$desc = $trouver_table($objet);
-			if (!isset($desc['field'][$c->champ])) {
-				extras_log("Le champ extra '" . $c->champ . "' sur $objet n'a pas ete cree :(", true);
-				$retour = false;
-			}
-		} else {
-			$retour = false;
-		}
-	}
-	return $retour;
-}
-
-/**
- * Desinstaller des champs extras
- * et gerer la suppression de la meta du plugin concernant 
- * la base de donnee
- */
-function desinstaller_champs_extras($champs, $nom_meta_base_version) {
-	vider_champs_extras($champs);
-	effacer_meta($nom_meta_base_version);	
-}
-
-/**
- * Supprime les champs extras 
- * @param $champs : objet ChampExtra ou tableau d'objets ChampExtra
- */
-function vider_champs_extras($champs) {
-	if (!is_array($champs)) 
-		$champs = array($champs);
-		
-	// on efface chaque champ trouve
-	foreach ($champs as $c){ 
-		if ($table = $c->table and $c->champ and $c->sql) {
-			sql_alter("TABLE $table DROP $c->champ");
-		}
-	}	
 }
 
 
