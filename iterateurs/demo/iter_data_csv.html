@@ -2,11 +2,13 @@
 
 <h2>Manipulation de CSV</h2>
 
+#SET{source,#CHEMIN{demo/iter_adresses.csv}}
+
 <B_csv>
 <table border="1">
 
 <thead><tr>
-<BOUCLE_cles(DATA){source csv, #CHEMIN{demo/iter_adresses.csv}}
+<BOUCLE_cles(DATA){source csv, #GET{source}}
 {cle=0}>
 <BOUCLE_c(DATA){source table, (#VALEUR|array_keys)}{2/2}>
 	<th><a href="[(#SELF|parametre_url{tri,#VALEUR})]"
@@ -15,7 +17,7 @@
 </BOUCLE_cles>
 </tr></thead>
 
-<BOUCLE_csv(DATA){source csv, #CHEMIN{demo/iter_adresses.csv}}
+<BOUCLE_csv(DATA){source csv, #GET{source}}
 {!par #ENV{tri,pseudo}}{'<br />'}
 {cle>0}
 >
