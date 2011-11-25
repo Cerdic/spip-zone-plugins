@@ -41,7 +41,7 @@ function contacts_afficher_contenu_objet($flux)
 		{
 			$infos = '';
 			$bouton_edit = '';
-			$self = generer_url_ecrire('auteur_infos', 'id_auteur='.$id);
+			$self = self();
 
 			if ($id_contact)
 			{
@@ -112,7 +112,7 @@ function contacts_boite_infos($flux){
 **/
 function contacts_affiche_gauche($flux){
 
-	if ($flux['args']['exec'] == 'auteur_infos'){
+	if ($flux['args']['exec'] == 'auteur'){
 
 		$id = $flux["args"]["id_auteur"];
 		$id_contact = sql_getfetsel('id_contact', 'spip_contacts', 'id_auteur=' . intval($id));
@@ -179,7 +179,7 @@ function contacts_affiche_gauche($flux){
  * des informations relatives aux organisations
  */
 function contacts_affiche_milieu($flux){
-	if ($flux['args']['exec'] == 'auteur_infos')
+	if ($flux['args']['exec'] == 'auteur')
 	{
 		$id = $flux["args"]["id_auteur"];
 		$id_contact = sql_getfetsel('id_contact', 'spip_contacts', 'id_auteur=' . intval($id));
@@ -225,16 +225,11 @@ function contacts_affiche_milieu($flux){
 
 			}
 
-			// portfolio documents
-			$porfolio_documents = recuperer_fond('prive/contenu/portfolio_document', 
-							array(),
-							array('ajax'		=> true));
-							
-			$flux['data'] = $ajout . $flux['data'] . $porfolio_documents  ;		
+			$flux['data'] = $ajout . $flux['data'];		
 		}// fin page contact ou organisation
 	} 
 		
-	if ($flux['args']['exec'] == 'naviguer' && $flux['args']['id_rubrique'])
+	if ($flux['args']['exec'] == 'rubriques' && $flux['args']['id_rubrique'])
 	{
 		$flux['data'] .= recuperer_fond('prive/liste/organisations_liees_rubrique', array(
 			'id_rubrique' => $flux['args']['id_rubrique'],

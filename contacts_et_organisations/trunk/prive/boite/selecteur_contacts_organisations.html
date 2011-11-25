@@ -1,7 +1,7 @@
 [(#VAL{inc/presentation}|include_spip|oui)]
 [(#SET{identifiant,[(#VAL{contacts_#ENV{id_auteur}})]})]
 [(#SET{plie,0})]
-[(#CHEMIN{images/contacts-24.png}|debut_cadre_relief{#EVAL{true},'',[(#VAL{<:contacts:infos_contacts_ou_organisations:>}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})],0})]
+#BOITE_OUVRIR{#CHEMIN_IMAGE{contacts-24.png}|balise_img{'',cadre-icone}|concat{#VAL{contacts:infos_contacts_ou_organisations}|_T},'simple','titrem'}
 #SET{rien,0}#SET{contact,0}
 <BOUCLE_est_un_contact(CONTACTS){id_auteur}>
 		#SET{id_contact,#ID_CONTACT}
@@ -26,7 +26,6 @@
 		#SET{rien,1}
 	<//B_est_une_organisation>
 <//B_est_un_contact>
-[(#GET{plie}|debut_block_depliable{#GET{identifiant}})]
 
 [(#AUTORISER{modifier,auteur,#ENV{id_auteur}})
 	[(#GET{rien}|oui)
@@ -71,5 +70,4 @@
 		]
 	]
 ]
-[(#GET{plie}|fin_block)]
-[(#EVAL{true}|fin_cadre_relief)]
+#BOITE_FERMER
