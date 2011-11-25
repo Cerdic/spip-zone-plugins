@@ -19,7 +19,8 @@ _ [emthanh@free.fr->emthanh@free.fr]
 	<etat>stable</etat>
 	<description>
 		<multi>
-			[fr]Il n&#233;cessite le plugin {{jQuery}} pour les versions de SPIP &lt; 1.9.2
+			[fr]Une galerie d’image qui utilise la librairie javascript Galleria.Le plugin propose un modèle SPIP galleria.
+			SPIP n&#233;cessite le plugin {{jQuery}} pour les versions de SPIP &lt; 1.9.2
  
 Vous pouvez cr&#233;er des galerie d'images qui utilisent la librairie javascript Galleria.
 _ Pour cr&#233;er une galerie d'image ajoutez une balise &lt;galleria##> dans un article ,ou ## est l'ID de l'article.
@@ -33,9 +34,11 @@ Les options du mod&#232;le sont :
 -* pagesize : le nombre d'image par page
  
 ex : <code><galleria22></code> une galerie dans l'article 22 ; <code><galleria22|lightbox=true></code> activation de l'effet lightbox.
- 
+[emthanh@free.fr->mailto:emthanh@free.fr] 
+[Le site du plugin->http://www.spip-contrib.net/Galleria]
 [Galleria, librairie javascript->http://galleria.aino.se/]
-[en]spip need the plugin {{jQuery}} for the SPIP version  &lt; 1.9.2
+[en]An image gallery that use the javascript library Galleria.The plugin implement a SPIP modele galleria.
+spip need the plugin {{jQuery}} for the SPIP version  &lt; 1.9.2
  
 You can create image gallery that use the javascript librairy Galleria.
 _ To create an image gallery add this tag &lt;galleria##> in an article where ## is the ID of the article.
@@ -49,7 +52,8 @@ The options of the modele are :
 -* pagesize : the number of image per page
  
 ex : <code><galleria22></code> a gallery in the article 22 ; <code><galleria22|lightbox=true></code> activate the lightbox effect.
- 
+[emthanh@free.fr->mailto:emthanh@free.fr] 
+[the plugin's website->http://www.spip-contrib.net/Galleria]
 [Galleria, javascript library->http://galleria.aino.se/]
 		</multi>
 	</description>
