@@ -178,7 +178,14 @@ function saisies_modifier($saisies, $id_ou_nom_ou_chemin, $modifs){
 	$modifs['saisie'] = $parent[$position]['saisie'];
 	if (!isset($modifs['options']['nom'])) $modifs['options']['nom'] = $parent[$position]['options']['nom'];
 	if (is_array($parent[$position]['saisies'])) $modifs['saisies'] = $parent[$position]['saisies'];
-	
+
+	// Si une option 'nouveau_type_saisie' est donnee, c'est que l'on souhaite
+	// peut être changer le type de saisie !
+	if (isset($modifs['options']['nouveau_type_saisie']) and $type = $modifs['options']['nouveau_type_saisie']) {
+		$modifs['saisie'] = $type;
+		unset($modifs['options']['nouveau_type_saisie']);
+	}
+			
 	// On remplace tout
 	$parent[$position] = $modifs;
 	

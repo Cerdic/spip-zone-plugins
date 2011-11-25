@@ -303,6 +303,7 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 		}
 		else
 			unset($saisie_modifiee['verifier']);
+	
 		
 		// On récupère les options postées en enlevant les chaines vides
 		$saisie_modifiee['options'] = array_filter($saisie_modifiee['options'], 'saisie_option_contenu_vide');

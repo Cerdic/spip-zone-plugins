@@ -31,11 +31,11 @@
 			<//B_contenu>
 			
 			<B_saisies_disponibles>
-			<li class="editer haut saisies_disponibles">
+			<li class="editer haut saisies_disponibles" id="attrapable">
 				<label><:saisies:construire_ajouter_champ:></label>
 				<BOUCLE_saisies_disponibles(POUR){tableau #ENV{_saisies_disponibles}}>
 				<button type="submit" name="ajouter_saisie" value="#CLE" class="submit ajouter_saisie"[ title="(#VALEUR|table_valeur{description})"] [style="background-image:url((#VALEUR|table_valeur{icone}|sinon{#CHEMIN{images/formulaire-saisie-defaut.png}}))"]>
-					[(#VALEUR|table_valeur{titre})]
+					<span>[(#VALEUR|table_valeur{titre})]</span>
 				</button>
 				</BOUCLE_saisies_disponibles>
 			</li>
@@ -49,11 +49,6 @@
 		<span class='image_loading'></span>
 	</div></form>
 
-	[(#ENV{erreurs}|non)
-		[(#CHEMIN{javascript/ui/jquery.ui.sortable.js}|oui)
-			[(#SET{sortable,1})]
-		]
-	]
 	<script type="text/javascript">
 		$(function(){
 			$('.formulaire_construire_formulaire li.configurable')
@@ -108,6 +103,12 @@
 						.removeClass('plie')
 						.find('> fieldset > ul').show();
 				});
+				
+			[(#ENV{erreurs}|non)
+				[(#CHEMIN{javascript/ui/jquery.ui.sortable.js}|oui)
+					[(#SET{sortable,1})]
+				]
+			]
 			[(#ENV{erreurs}|non|et{#GET{sortable}})
 				$.getScript("#CHEMIN{javascript/ui/jquery.ui.core.js}", function(){
 				$.getScript("#CHEMIN{javascript/ui/jquery.ui.widget.js}", function(){
@@ -152,6 +153,24 @@
 					}
 				});});});});
 			]
+			[(#ENV{erreurs}|non)
+				[(#CHEMIN{javascript/ui/jquery.ui.draggable.js}|oui)
+					[(#SET{draggable,1})]
+				]
+			]
+			[(#ENV{erreurs}|non|et{#GET{draggable}})
+				$.getScript("#CHEMIN{javascript/ui/jquery.ui.core.js}", function(){
+				$.getScript("#CHEMIN{javascript/ui/jquery.ui.widget.js}", function(){
+				$.getScript("#CHEMIN{javascript/ui/jquery.ui.mouse.js}", function(){
+				$.getScript("#CHEMIN{javascript/ui/jquery.ui.draggable.js}", function(){
+					if ($.fn.draggable) {
+						$( "#attrapable" ).draggable({
+							connectToSortable: "#deplacable, #deplacable ul",
+							helper: "clone"
+						});
+					}
+				});});});});
+			]			
 		});
 		
 		function formulaire_configurer_onglets(){

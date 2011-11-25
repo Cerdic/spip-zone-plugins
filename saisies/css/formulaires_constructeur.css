@@ -69,7 +69,7 @@
 .formulaire_construire_formulaire .formulaire_configurer{
 	border-top:3px dashed #999;
 	margin: 1em -8px 0 -138px;
-    padding: 0.5em;
+    padding: 1em .5em .5em .5em;
     background:white;
 }
 .formulaire_construire_formulaire .fieldset > .formulaire_configurer{
@@ -97,19 +97,21 @@
 	-webkit-border-radius:0 0 5px 5px;
 }
 */
+.formulaire_construire_formulaire .formulaire_configurer .formulaire_configurer-onglets {
+	overflow:auto;
+}
 .formulaire_construire_formulaire .formulaire_configurer .formulaire_configurer-onglets li{
 	float:left;
 	width:auto;
 	clear:none;
-	margin-bottom:-1px;
 	padding:0;
-	/*background:#eee;*/
-	border:0;
-	border-bottom:1px solid #ddd;
-	border-right:1px solid #999;
-	border-radius:0;
-	-moz-border-radius:0;
-	-webkit-border-radius:0;
+	background:#eee;
+	border:1px solid #ddd;
+	margin-right:1px;
+	-moz-border-radius:5px 5px 0 0;
+	-webkit-border-radius:5px 5px 0 0;
+	-o-border-radius:5px 5px 0 0;
+	border-radius:5px 5px 0 0;
 }
 .formulaire_construire_formulaire .formulaire_configurer .formulaire_configurer-onglets li.actif{
 	background:white;
@@ -120,9 +122,11 @@
 }
 .formulaire_construire_formulaire .formulaire_configurer .formulaire_configurer-onglets li a{
 	display:block;
-	padding:1em;
+	padding:.5em;
 }
 .formulaire_construire_formulaire .formulaire_configurer .boutons { margin-bottom: -20px; }
+
+.formulaire_configurer-contenus > .fieldset > fieldset:first-child {border-top:0;}
 
 .formulaire_construire_formulaire li.editer,
 .formulaire_construire_formulaire li.explication,

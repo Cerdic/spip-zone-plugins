@@ -1,5 +1,4 @@
 [(#REM) datas peut être une chaine qu'on sait décomposer ]
-#SET{datas, #ENV{datas}}
-#SET{datas, #GET{datas}|is_string|?{(#GET{datas}|saisies_chaine2tableau), #GET{datas}}}
+#SET{datas, #ENV{datas}|saisies_chaine2tableau}
 
-[<p>(#GET{datas}|table_valeur{#ENV{valeur}}|sinon{#ENV{sans_reponse}})</p>]
+[<p>(#GET{datas}|table_valeur{#ENV{valeur}}|sinon{#ENV*{sans_reponse}})</p>]

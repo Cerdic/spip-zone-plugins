@@ -284,6 +284,48 @@ function saisies_tableau2chaine($tableau){
 	}
 }
 
+
+
+
+/**
+ * Passe une valeur en tableau d'élements si ce n'en est pas une
+ *
+ * entrée :
+ * cle|valeur
+ * cle|valeur
+ *
+ * Sinon :
+ * valeur,valeur
+ *
+ * @param mixed $valeur
+ * @return array Tableau de valeurs
+**/
+function saisies_valeur2tableau($valeur, $sinon_separateur="") {
+	if (is_array($valeur)) {
+		return $valeur;
+	}
+	
+	if (!strlen($valeur)) {
+		return array();
+	}
+	
+	$t = saisies_chaine2tableau($valeur);
+	if (count($t) > 1) {
+		return $t;
+	}
+
+	// qu'une seule valeur, c'est qu'elle a peut etre un separateur a virgule
+	// et a donc une cle est 0 dans ce cas la d'ailleurs
+	if (isset($t[0])) {
+		$t = saisies_chaine2tableau($t[0], ',');
+	}
+	
+	return $t;
+}
+
+
+
+
 /*
  * Génère une page d'aide listant toutes les saisies et leurs options
  */
