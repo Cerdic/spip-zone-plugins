@@ -19,22 +19,7 @@ function spip_liste_gis($args) {
 	if(!$spip_xmlrpc_serveur)
 		return false;
 	
-	$access = $spip_xmlrpc_serveur->verifier_access();
-	if(!$access)
-		return $spip_xmlrpc_serveur->error;
-	
-	$args = array_map('trim',$args);
-	$username  = $args['login'];
-	$password   = $args['pass'];
-	
-	if(!is_array($GLOBALS['visiteur_session']) && isset($username) && isset($password)){
-		$args_aut = array($username,$password);
-		$auth = $spip_xmlrpc_serveur->auth($args_aut);
-		if(!$auth)
-			return $spip_xmlrpc_serveur->error;
-	}
-	
-	$limite = intval($args['limite']) ? $args['limite'] : '';
+	$limite = $args['limite'] ? $args['limite'] : '20';
 	
 	$where = '';
 	$order = array();
@@ -48,14 +33,14 @@ function spip_liste_gis($args) {
 
 	$points_struct = array();
 
-	if($points = sql_select('gis.*','spip_gis as gis LEFT JOIN spip_gis_liens as lien ON gis.id_gis=lien.id_gis',$where,array('gis.id_gis'),$order,$limite)){
+	if($points = sql_select('gis.id_gis','spip_gis as gis LEFT JOIN spip_gis_liens as lien ON gis.id_gis=lien.id_gis',$where,array('gis.id_gis'),$order,$limite)){
 		while($point = sql_fetch($points)){
 			$struct=array();
-			$struct = $point;
-			$logo = quete_logo('id_gis','on', $point['id_gis'], '', false);
-			if(is_array($logo))
-				$struct['logo'] = url_absolue($logo[0]);
-			$struct = array_map('texte_backend',$struct);
+			$args['id_gis'] = $point['id_gis'];
+			/**
+			 * On utilise la fonction geodiv_lire_media pour éviter de dupliquer trop de code
+			 */
+			$struct = spip_lire_gis($args);
 			$points_struct[] = $struct;
 		}
 	}
@@ -76,24 +61,9 @@ function spip_lire_gis($args){
 	if(!$spip_xmlrpc_serveur)
 		return false;
 	
-	$access = $spip_xmlrpc_serveur->verifier_access();
-	if(!$access)
-		return $spip_xmlrpc_serveur->error;
-	
-	$args = array_map('trim',$args);
 	if(!intval($args['id_gis']) > 0){
 		$erreur = _T('xmlrpc:erreur_identifiant',array('objet'=>'gis'));
 		return new IXR_Error(-32601, attribut_html($erreur));
-	}
-	
-	$username  = $args['login'];
-	$password   = $args['pass'];
-	
-	if(!is_array($GLOBALS['visiteur_session']) && isset($username) && isset($password)){
-		$args_aut = array($username,$password);
-		$auth = $spip_xmlrpc_serveur->auth($args_aut);
-		if(!$auth)
-			return $spip_xmlrpc_serveur->error;
 	}
 	
 	$args_gis = array('objet'=>'gis','id_objet'=>$args['id_gis']);
