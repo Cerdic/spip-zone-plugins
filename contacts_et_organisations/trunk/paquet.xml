@@ -1,0 +1,50 @@
+<paquet
+	prefix="contacts"
+	categorie="auteur"
+	version="2.0.0"
+	etat="test"
+	compatibilite="[3.0.*;3.0.*]"
+	logo="images/contacts-128.png"
+	schema="1.7.1"
+	documentation="http://www.spip-contrib.net/Plugin-Contacts-Organisations"
+>	
+
+	<nom>Contacts &#38; Organisations</nom>
+	<!-- Ajouter un gestionnaire de contacts à SPIP -->
+
+	<auteur>Cyril MARION</auteur>
+	<auteur lien="http://www.cym.fr">Ateliers CYM</auteur>
+	<auteur>Matthieu Marcillaud</auteur>
+	<auteur lien="http://magraine.net">Ma Graine</auteur>
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+
+	<traduire module="contacts" reference="fr" gestionnaire="salvatore" />
+	<traduire module="paquet-contacts" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="declarer_tables_principales" inclure="base/contacts.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/contacts.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/contacts.php" />
+	<pipeline nom="header_prive" inclure="contacts_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="contacts_pipelines.php" />
+	<pipeline nom="insert_head" action="insert_head" inclure="contacts_pipelines.php" />
+	<pipeline nom="afficher_contenu_objet" inclure="contacts_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="contacts_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="contacts_pipelines.php" />
+	<pipeline nom="autoriser" inclure="contacts_autorisations.php" />
+	<pipeline nom="rechercher_liste_des_champs" inclure="contacts_pipelines.php" />
+	<pipeline nom="declarer_url_objets" inclure="contacts_pipelines.php" />
+	<pipeline nom="objets_extensibles" inclure="contacts_pipelines.php" />
+
+	<necessite nom="saisies" compatibilite="[1.15.3;[" />
+	<necessite nom="spip_bonux" compatibilite="[3.0.0-dev;[" />
+	<necessite nom="medias" compatibilite="[1.6;[" />
+
+	<utilise nom="coordonnees" compatibilite="[1.2.0;[" />
+	<utilise nom="crayons" compatibilite="[1.10.0;[" />
+
+	<menu nom="contacts_organisations" titre="contacts:bouton_contacts_organisations" parent="menu_edition" icone="images/contacts-16.png" action="repertoire" />
+
+	<onglet nom="repertoire" titre="contacts:bouton_repertoire" parent="contacts" icone="images/contacts-24.png" />
+	<onglet nom="organisations" titre="contacts:bouton_organisations" parent="contacts" icone="images/co_organisation-24.png" />
+	<onglet nom="contacts" titre="contacts:bouton_contacts" parent="contacts" icone="images/co_contact-24.png" />
+</paquet>
