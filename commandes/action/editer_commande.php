@@ -161,8 +161,7 @@ function instituer_commande($id_commande, $c, $calcul_details=true){
 			$champs['date'] = $date = $d;
 		}
 	}
-	
-	
+
 
 	$champs['id_auteur'] = $id_auteur;
 
@@ -170,6 +169,11 @@ function instituer_commande($id_commande, $c, $calcul_details=true){
 	// Si le statut est "paye" alors on ajoute la date de paiement
 	if ($s == 'paye'){
 		$champs['date_paiement'] = date('Y-m-d H:i:s');
+	}
+	
+	// Si le statut est "envoye" alors on ajoute la date de paiement
+	if ($s == 'envoye'){
+		$champs['date_envoi'] = date('Y-m-d H:i:s');
 	}
 	
 	// Envoyer aux plugins
