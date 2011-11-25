@@ -145,7 +145,7 @@ function contacts_affiche_gauche($flux){
 					$texte = _T('contacts:contact_creer');
 					$lien = generer_url_ecrire('contact_edit', 'new=oui&id_organisation='.$id_organisation.'&redirect='.$self);
 					$fond = find_in_path('images/co_contact-24.png');				
-					$flux['data'] .= icone($texte, $lien, $fond, '', 'right') ;
+					$flux['data'] .= icone_inline($texte, $lien, $fond, '', 'right') ;
 				}
 	
 				// fil d'ariane de l'organisation
