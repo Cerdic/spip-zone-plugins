@@ -1,7 +1,7 @@
 <tr class="tr_liste">
 	<td class="arial11">
 		[(#ENV{alias}|boussole_traduire{nom_boussole})]
-		[<span style="float: #LANG_RIGHT; margin-top: -2px; margin-bottom: -2px;">(#CHEMIN{prive/themes/spip/images/boussole[-(#ENV{alias})].png}|image_reduire{16}|inserer_attribut{alt,logo #ENV{alias}})</span>]
+		[<span style="float: #LANG_RIGHT; margin-top: -2px; margin-bottom: -2px;">(#CHEMIN{prive/themes/spip/images/boussole[-(#ENV{alias})].png}|image_reduire{16}|inserer_attribut{alt,[(#ENV{alias}|boussole_traduire{nom_boussole}|couper{60}|attribut_html)]})</span>]
 	</td>
 	<td class="arial11">&nbsp;</td>
 	<td class="arial11">[(#ENV{version})]</td>

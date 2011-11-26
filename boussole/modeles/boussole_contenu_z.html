@@ -36,7 +36,7 @@
 			|image_reduire{#ENV{taille_logo, 64}}
 			|image_recadre{#ENV{taille_logo, 64},#ENV{taille_logo, 64},center,transparent}
 			|inserer_attribut{class,spip_logos}
-			|inserer_attribut{alt,logo #ENV{boussole}})]
+			|inserer_attribut{alt,[(#ENV{boussole}|boussole_traduire{nom_boussole}|couper{60}|attribut_html)]})]
 		[<h1 class="h1">(#ENV{boussole}|boussole_traduire{nom_boussole})</h1>]
 		[<p class="info-publi">
 			(#ENV{boussole}|boussole_traduire{slogan_boussole})
@@ -54,7 +54,7 @@
 		[(#SET{bulle, [(#AKA_BOUSSOLE|boussole_traduire{#ENV{type_bulle}, #AKA_SITE}|couper{100})]})]
 		[<p[ class="(#ENV{p_class})"]>
 			<strong>
-				<a class="spip_out" rel="external" href="#URL_SITE"[ title="(#GET{bulle})"]>
+				<a class="spip_out" rel="external" href="#URL_SITE"[ title="(#GET{bulle}|couper{80}|attribut_html)"]>
 					(#AKA_BOUSSOLE|boussole_traduire{nom_site, #AKA_SITE})
 				</a>
 			</strong>

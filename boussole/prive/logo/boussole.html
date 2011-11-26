@@ -8,7 +8,7 @@
 			[(#SET{logo, [(#CHEMIN{[prive/themes/spip/images/boussole-(#ENV{alias}).png]})]})]
 			[<div>
 				<a [ href="(#GET{logo})"]>
-					(#GET{logo}|image_reduire{256}|inserer_attribut{class,miniature_logo}|inserer_attribut{alt,logo #ENV{alias}})
+					(#GET{logo}|image_reduire{256}|inserer_attribut{class,miniature_logo}|inserer_attribut{alt,[(#ENV{alias}|boussole_traduire{nom_boussole}|couper{60}|attribut_html)]})
 				</a>
 			</div>]
 			<div>
