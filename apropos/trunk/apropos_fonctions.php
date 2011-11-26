@@ -161,21 +161,30 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 		// Autrement, affiche le résumé
 		// fonction demandée pour pouvoir afficher une page par plugin, page qui affiche
 		// la description complète de ce plugin.
-		//nom
+		// nom
 		if ($afficheQuoi == "latotale"){
-		//je teste pour vérifier que $prefix n'est pas vide. Si vide, c'est que le préfixe entré est invalide
-		if ($prefix ==''){
+			//je teste pour vérifier que $prefix n'est pas vide. Si vide, c'est que le préfixe entré est invalide ou que le plugin est dans le dossier extension
+			// de toute façon, a revoir car pas gégène
+			if ($prefix ==''){
+				// je check si par hasard ce ne serait pas un plugin place dans le dossier extension
+				$info = $get_infos($plug_file, $force_reload, _DIR_EXTENSIONS);
+				$dir = _DIR_EXTENSIONS.$plug_file;
+				$prefix = $info['prefix'];
+				if ($prefix !=''){
+				$cestQuoi = "une_extension";
+				}else{
 				return "<span class='apropos-erreur'>"
 				."Erreur dans la saisie du préfixe du plugin.</span><br />Vous avez entré <b>".$params."</b> comme préfixe. Vérifiez ce dernier qui se trouve dans le fichier paquet.xml ou plugin.xml du plugin.";
-				}else{
+			}}
+
 				//je récupère la description complète, la version avec svn, le crédit et la licence
-				//$get_desc = charger_fonction('afficher_plugin','plugins');
 				$slogan = PtoBR(plugin_propre($info['description'], "$dir/lang/paquet-$prefix"));
 
-				// prise en compte des plugin sans tag description (ex crayons dans sa version
+				// prise en compte des plugin sans tag description par ex crayons dans sa version 1.13.0
 				if ((strpos($slogan, "_description")) !==FALSE) { // $dir."/lang/paquet-".$prefix.":".$prefix."_description"){ //$dir."/lang/paquet-".$prefix.":".$prefix."_description"){
 					$slogan = PtoBR(plugin_propre($info['slogan'], "$dir/lang/paquet-$prefix"));
 				}
+				//$slogan .= "<br />".$description;
 				$documentation = $info['documentation'];
 				if ($documentation != ''){
 					$documentation = "<div class='apropos-description'>"._T('apropos:la_documentation')." <a href=\"".$info['documentation']."\">".$info['documentation']."</a></div>";
@@ -193,8 +202,7 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 				$svn_revision = version_svn_courante($dir_plugins.$plug_file);
 				$leSVN = ($svn_revision<0 ? ' SVN':'').' ['.abs($svn_revision).']'; // version_svn_courante($dir_plugins.$plug_file);	  
 				$infoSVN = "<div class='apropos-svn'>".$leSVN." "._T('repertoire_plugins')." ".$dir."</div>"; 
-			}
-			
+
 			// si pas la totale des infos, le minimum pour l'affichage en liste
 		}else{
 			$slogan = PtoBR(plugin_propre($info['slogan'], "$dir/lang/paquet-$prefix"));
