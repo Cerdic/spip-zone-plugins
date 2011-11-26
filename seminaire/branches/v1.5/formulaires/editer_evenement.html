@@ -54,6 +54,15 @@
 	    </li>
 	    </ul>
 	    </fieldset></li>
+	    <li class="editer_repetitions[ (#ENV**{erreurs}|table_valeur{repetitions}|oui)erreur]">
+			<label for="repetitions"><:agenda:evenement_repetitions:></label>[
+			(#ENV{repetitions}|non)<a href='#' onclick="$(this).next().removeClass('cachee');return false;"><:agenda:ajouter_repetition:></a>
+			<div class='ajouter_repetitions'>][
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{repetitions})</span>
+			]<div id='repetitions_picker'></div>
+			<textarea name='repetitions' id='repetitions'>#ENV{repetitions}</textarea>[
+			(#ENV{repetitions}|non)</div>]
+	    </li>
 	    <li class="editer_lieu[ (#ENV**{erreurs}|table_valeur{lieu}|oui)erreur]">
 			<label for="lieu"><:agenda:evenement_lieu:></label>
 			<em class="attention"><:seminaire:exemple:></em>
