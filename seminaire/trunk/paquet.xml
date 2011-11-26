@@ -1,0 +1,20 @@
+<paquet
+	prefix="seminaire"
+	categorie="date"
+	version="2.0.0-dev"
+	etat="dev"
+	compatibilite="[3.0.0-dev;3.0.*]"
+	logo="images/logo_seminaire.png"
+	documentation="http://www.spip-contrib.net/Seminaire-LATP"
+>
+
+	<nom>Séminaire LATP</nom>
+
+	<auteur>Amaury ADON</auteur>
+	<licence>GNU/GPL</licence>
+	
+	<necessite nom="agenda" compatibilite="[3.2.0;]" />
+	<necessite nom="cextras" compatibilite="[2.0.0-dev;]" />
+
+	<utilise nom="kitcnrs" compatibilite="[4.0.10;]" />
+</paquet>
