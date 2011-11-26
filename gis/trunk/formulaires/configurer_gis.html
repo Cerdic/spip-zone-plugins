@@ -104,6 +104,12 @@
 			label=<:gis:cfg_lbl_api_key_yandex:>,
 			explication=<:gis:cfg_inf_yandex{url=http://api.yandex.ru/maps/}:>,
 			size=40})]
+		#SET{name,gis_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<label><:gis:cfg_lbl_activer_objets:></label>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name}},exclus=spip_gis}
+		</li>
 	</ul>
 
 

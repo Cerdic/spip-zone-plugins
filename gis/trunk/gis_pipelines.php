@@ -52,30 +52,32 @@ function gis_inserer_javascript($flux){
 }
 
 function gis_affiche_milieu($flux){
-
-    if ($en_cours = trouver_objet_exec($flux['args']['exec'])
-        AND $en_cours['edition']!==true // page visu
-        AND $en_cours['type']!=='gis' // on ne va pas associer des points entre eux
-        AND $type = $en_cours['type']
-        AND $id_table_objet = $en_cours['id_table_objet']
-        AND ($id = intval($flux['args'][$id_table_objet]))){
-        // TODO : seulement si la conf permet de geolocaliser cet objet
+	if ($en_cours = trouver_objet_exec($flux['args']['exec'])
+		and $en_cours['edition']!==true // page visu
+		and $type = $en_cours['type']
+		and include_spip('inc/config')
+		and in_array(table_objet_sql($type), lire_config('gis/gis_objets', array()))
+		and $id_table_objet = $en_cours['id_table_objet']
+		and ($id = intval($flux['args'][$id_table_objet]))
+		
+	){
+		// TODO : seulement si la conf permet de geolocaliser cet objet
 		// -> ajouter un element a la array suivante (qqch comme ca - voir les mots):
 		//   'editable'=>autoriser('associergis',$type,$id)?'oui':'non'
-        $texte = recuperer_fond(
-                'prive/contenu/gis_objet',
-                array(
-                    'table_source'=>'gis',
-                    'objet'=>$type,
-                    'id_objet'=>$id
-                )
-        );
-        if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
-            $flux['data'] = substr_replace($flux['data'],$texte,$p,0);
-        else
-            $flux['data'] .= $texte;
-    }
-
+		$texte = recuperer_fond(
+			'prive/contenu/gis_objet',
+			array(
+				'table_source'=>'gis',
+				'objet'=>$type,
+				'id_objet'=>$id
+			)
+		);
+		if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
+			$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
+		else
+			$flux['data'] .= $texte;
+	}
+	
 	return $flux;
 }
 

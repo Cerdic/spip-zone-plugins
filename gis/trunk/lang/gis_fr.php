@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_inf_geolocaliser_user_html5' => 'Si le navigateur de l\'utilisateur le permet, son emplacement g&eacute;ographique approximatif est r&eacute;cup&eacute;r&eacute; pour donner la position par d&eacute;faut lors de la cr&eacute;ation d\'un point.',
 	'cfg_inf_google' => 'Cette API n&eacute;cessite une cl&eacute; &agrave; cr&eacute;er sur <a href=\'@url@\'>le site de GoogleMaps</a>.',
 	'cfg_inf_yandex' => 'Cette API n&eacute;cessite une cl&eacute; &agrave; cr&eacute;er sur <a href=\'@url@\'>le site de Yandex</a>.',
+	'cfg_lbl_activer_objets' => 'Activer la géolocalisation sur les contenus :',
 	'cfg_lbl_adresse' => 'Afficher les champs d\'adresse',
 	'cfg_lbl_api' => 'API de cartographie',
 	'cfg_lbl_api_cloudmade' => 'CloudMade',
