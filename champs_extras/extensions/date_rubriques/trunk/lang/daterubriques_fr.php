@@ -39,3 +39,4 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//V
 	'valeur_incorrecte'=>'Ce n\'est pas vraiment un numéro!',
 );
+?>
