@@ -1,17 +1,4 @@
-[(#REM)
-	
-	Une capture d'ecran d'un site pris au hasard dans l'Herbier
-	Cf.: www.spip-herbier.net/2
-	
-]<BOUCLE_herbier(SYNDIC_ARTICLES) {id_syndic=#CONFIG{id_syndic_herbier}} {par hasard} {0,1}>
-[<div class="p" id="herbier">
-	<h2><a href="http://www.spip-herbier.net/"><:herbier:herbier:></a></h2>
-	<a href="#URL_ARTICLE"[ title="(#TITRE|attribut_html)[ - (#DATE_REDAC|sinon{#DATE}|annee)]"]>(#DESCRIPTIF
-		|extraire_balise{img}
-		|image_reduire{195,*}
-		|image_recadre{195,146,left top,transparent}
-		|inserer_attribut{alt,[(#TITRE|attribut_html)][ - (#DATE_REDAC|sinon{#DATE}|annee)]}
-		|inserer_attribut{'align','center'}
-	)</a>
-</div>]
-</BOUCLE_herbier>
+[(#REM) 
+	Ne pas utiliser cette noisette maintenue pour
+	Retro-compatibilite avec la version precedente
+]<INCLURE{fond=inclure/herbier}>

@@ -8,7 +8,7 @@
 <categorie>divers</categorie>
 
 <slogan>Capture d'&#233;cran d'un site pris au hasard dans l'Herbier</slogan>
-<description>Affichez sur votre site une capture d'ecran d'un site pris au hasard dans l'Herbier&nbsp;! Ce plugin ajoute &#224; l'installation la syndication automatique &#224; l'Herbier.</description>
+<description>Affichez sur votre site une capture d'ecran d'un site pris au hasard dans l'Herbier&nbsp;! Il suffit d'installer ce plugin pour syndiquer automatiquement l'Herbier. Ajoutez ensuite <code><INCLURE{fond=inclure/herbier}></code> dans vos squelettes.</description>
 <lien>http://www.spip-herbier.net</lien>
 <auteur>James et Romy</auteur>
 <licence>GPL</licence>
