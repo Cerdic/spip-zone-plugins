@@ -19,7 +19,7 @@ _ [emthanh@free.fr->emthanh@free.fr]
 	<etat>stable</etat>
 	<description>
 		<multi>
-			[fr]Une galerie d’image qui utilise la librairie javascript Galleria.Le plugin propose un modèle SPIP galleria.
+			[fr]Une galerie d&acute;image qui utilise la librairie javascript Galleria.Le plugin propose un mod&#232;le SPIP galleria.
 			SPIP n&#233;cessite le plugin {{jQuery}} pour les versions de SPIP &lt; 1.9.2
  
 Vous pouvez cr&#233;er des galerie d'images qui utilisent la librairie javascript Galleria.
