@@ -1,22 +1,26 @@
 <plugin>
-	<nom>Herbier</nom>
-	<prefix>herbier</prefix>
-	<version>1.0.0</version>
-	<auteur>Collectif Spip</auteur>
-	<etat>stable</etat>
-	<slogan>Capture d'&#233;cran d'un site pris au hasard dans l'herbier</slogan>
-	<description>
-Ce plugin fournit une noisette permettant d'afficher une capture d'ecran d'un site pris au hasard dans l'herbier. Pour cela il ajoute &#224; l'installation la syndication automatique &#224; l'herbier.
-	</description>
-	<install>herbier_install.php</install>
-	<pipeline>
-		<nom>insert_head</nom> 
-		<inclure>herbier_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>boussole</nom> 
-		<inclure>herbier_pipelines.php</inclure>
-	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
-	<categorie>divers</categorie>
+<nom>Herbier</nom>
+<prefix>herbier</prefix>
+<icon>icon/herbier.png</icon>
+
+<version>1.5.0</version>
+<etat>stable</etat>
+<categorie>divers</categorie>
+
+<slogan>Capture d'&#233;cran d'un site pris au hasard dans l'Herbier</slogan>
+<description>Affichez sur votre site une capture d'ecran d'un site pris au hasard dans l'Herbier&nbsp;! Ce plugin ajoute &#224; l'installation la syndication automatique &#224; l'Herbier.</description>
+<lien>http://www.spip-herbier.net</lien>
+<auteur>James et Romy</auteur>
+<licence>GPL</licence>
+
+<install>herbier_install.php</install>
+<pipeline>
+	<nom>insert_head</nom> 
+	<inclure>herbier_pipelines.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>boussole</nom> 
+	<inclure>herbier_pipelines.php</inclure>
+</pipeline>
+<necessite id="SPIP" version="[1.9.2;2.1.99]" />
 </plugin>
