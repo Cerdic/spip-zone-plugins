@@ -33,7 +33,7 @@ function exec_edit_pret(){
 			$date_retour=$data['date_retour'];
 			$date_sortie=$data['date_sortie'];
 			$action = 'modifier';
-			$texte = _T('asso:bouton_modifie');
+			$texte = _T('asso:bouton_modifier');
 		} else {
 			$action = 'ajouter';
 			$id_ressource= $id_pret;

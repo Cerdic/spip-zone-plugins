@@ -141,7 +141,7 @@ function association_recuperer_emails_string($id_auteurs)
 		if (count($emails)) {
 			foreach ($emails as $email) {
 				$emails_strings[$id_auteur] .= "<a href='mailto:$email' title='"
-					. _L('Ecrire &agrave;') . ' ' . $email . "'>"
+					. _T('asso:ecrire_a') . ' ' . $email . "'>"
 				 	. $email
 		 			. '</a><br/>';
 			}

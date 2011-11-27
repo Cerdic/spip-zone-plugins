@@ -4,12 +4,12 @@
 <form action="#" method="POST">
 <input name="id_evenement" type="hidden" value="[(#ENV{id_evenement})]" />
 	<div class='spip_form_champs'>
-		<span class='spip_form_label'><label for="nom"><:asso:adherent_libelle_nom:> :</label>[<span class="spip_form_erreur">(#ENV{erreur_nom})</span>]</span>
+		<span class='spip_form_label'><label for="nom"><:asso:adherent_libelle_nom_famille:> :</label>[<span class="spip_form_erreur">(#ENV{erreur_nom})</span>]</span>
 		<input name="nom" type="text" class="choix" size="40" value="[(#ENV{nom})]" /> 
 	</div>
 	<div class='spip_form_champs'>
 		<span class='spip_form_label'>
-			<label for="id_adherent"><:asso:adherent_libelle_adherent:> :</label>
+			<label for="id_adherent"><:asso:adherent_libelle_id_auteur:> :</label>
 		</span>
 		<input name="id_adherent" type="text" class="choix" size="40" value="[(#ENV{id_adherent})]"  /> 
 	</div>

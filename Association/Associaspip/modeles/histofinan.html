@@ -56,7 +56,7 @@ maj:2011-10-03; version:0.4.1; licence:GPL; copyleft:gilcot; -->]
 [(#META{/association/activites}|=={on}|et{#GET{droit_acces}|=={oui }}|oui)
 	[(#AUTORISER{associer_adherents,asso_comptes,#ID_COMPTE}|oui)
 	[(#BOUTON_ACTION{
-		<:asso:activite_titre_ajouter_inscription:>,
+		<:asso:activite_titre_ajouter_inscriptions:>,
 		[(#URL_ECRIRE{ajout_participation}
 			|parametre_url{id,#ENV{id}}
 			|parametre_url{retour,[(#ENV{retour,#SELF})]}

@@ -23,7 +23,7 @@ function exec_association() {
 		echo minipres();
 	} else {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:association')) ;
+		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		
 		association_onglets();
 		

@@ -61,10 +61,10 @@ function exec_edit_relances(){
 
 		$res = '<fieldset>'
 			. '<legend>Message de relance</legend>'
-			. '<label for="sujet"><strong>'._T('asso:Sujet')
+			. '<label for="sujet"><strong>'._T('asso:sujet')
 			. " :</strong></label>\n"
 			. '<input name="sujet" type="text" value="'.stripslashes(_T('asso:titre_relance')).'" id="sujet" class="formo" />'
-			. '<label for="message"><strong>'._T('asso:Message')
+			. '<label for="message"><strong>'._T('asso:message')
 			. " :</strong></label>\n"
 			. '<textarea name="message" rows="15" id="message" class="formo">'.stripslashes(_T('asso:message_relance'))."</textarea>\n"
 			. '</fieldset>'

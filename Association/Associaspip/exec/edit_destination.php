@@ -29,7 +29,7 @@ function exec_edit_destination(){
 		$id_destination= intval(_request('id'));
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:edition_destination')) ;		
+		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;		
 		association_onglets();
 		echo debut_gauche("",true);
 		echo debut_boite_info(true);

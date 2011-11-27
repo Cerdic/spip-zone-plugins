@@ -151,7 +151,7 @@ function exec_comptes_args($annee, $vu, $imputation, $debut, $max_par_page, $id_
 		. '</tr>'
 		. $table
 		. "</table>\n"
-		. "<table width='100%'><tr>\n<td>" . $nav . '</td><td style="text-align:right;"><input type="submit" value="' . _L('Valider') . '" class="fondo" /></td></tr></table>';
+		. "<table width='100%'><tr>\n<td>" . $nav . '</td><td style="text-align:right;"><input type="submit" value="' . _T('asso:valider') . '" class="fondo" /></td></tr></table>';
 	
 		echo generer_form_ecrire('action_comptes', $table);
 	}
@@ -219,7 +219,7 @@ function comptes_totaux($where, $imputation, $annee)
 	return '<table width="100%">' . 
 	 '<tr>' . 
 	 '<td colspan="2"><strong>' . 
-	  _L('Totaux ') . ($imputation=='%' ? '' : $imputation) . 
+	  _T('asso:totaux') . ($imputation=='%' ? '' : $imputation) . 
 	 ' ' . $annee . 
 	 ' :</strong></td>' . 
 	 '</tr>' . 

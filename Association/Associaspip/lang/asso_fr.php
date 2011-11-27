@@ -109,6 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_nom_meta_utilisateur_incorrect' => 'Le nom d\'un champs est limit&eacute; aux caract&egrave;res alphanum&eacute;riques: A-Z a-z 0-9 et espaces, pas de caract&egrave;res accentu&eacute;s ni ponctuation.',
 	'erreur_nom_meta_utilisateur_trop_long' => 'Le nom d\'un champs est limit&eacute; &agrave; 237 caract&egrave;res',
 	'erreur_pas_de_nom_meta_utilisateur' => 'Le nom d\'un champs ne peut pas &ecirc;tre vide, si vous voulez supprimer un champs, utilisez le bouton supprimer sur la page listant tous les champs utilisateur.',
+	'erreur_meta_utilisateur_deja_definie' => 'Ce champs utilisateur est d&eacute;j&agrave; d&eacute;fini.',
 	
 		
 	# Groupes
@@ -117,14 +118,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_groupe' => 'Nom du groupe',
 	'ordre_affichage' => 'Ordre d\'affichage sur la page d\'accueil',
 	'ajouter_un_groupe' => 'Ajouter un groupe',
+	'suppression_de_groupe' => 'Suppression d\'un groupe',
 	'tous_les_groupes' => 'Tous les groupes',
 	'aucun_membre_dans_ce_groupe' => 'Aucun membre dans ce groupe',
 	'editer_groupe' => 'Editer le groupe',
+	'voir_groupe' => 'Voir le groupe',
 	'supprimer_groupe' => 'Supprimer le groupe',
 	'ajouter_membres_au_groupe' => 'Ajouter ces membres au groupe',
 	'titre_editer_groupe' => 'Editer le groupe',
 	'ajouter' => 'Ajouter',
 	'exclure' => 'Exclure',
+	'exclure_du_groupe' => 'Exclure du groupe',
 	'supprimer_selectionnes' => 'Exclure les membres selectionn&eacute;s',
 	'ok_edition_groupe' => 'Sauvegarder les modifications du champs Fonction',
 	'ordre_affichage_groupe' => 'Ordre d\'affichage',
@@ -135,7 +139,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'groupes_dp' => 'Groupes :',
 	'groupe_dp' => 'Groupe :',
 	'rejoindre_un_groupe' => 'Rejoindre un ou plusieurs groupes',
-	'quitter_groupe' => 'Quitter un groupe',
+	'quitter_un_groupe' => 'Quitter un groupe',
 	'adherent_message_degrouper' => '<p>S&eacute;lectionner les groupes dont les adh&eacute;rents seront exclus.</p>',
 	'titre_voir_groupe' => 'Voir le groupe',
 				
@@ -146,7 +150,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	# Boutons globaux
 	'bouton_retour' => 'Retour',
 	'bouton_confirmer' => 'Confirmer',
-	'bouton_modifie' => 'Modifier',
+	'bouton_modifier' => 'Modifier',
 	'bouton_ajoute' => 'Ajouter',
 	'bouton_envoyer' => 'Envoyer',
 	'bouton_soumettre' => 'Soumettre',
@@ -162,6 +166,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'gestion_de_lassoc' => 'Gestion de l\'association',
 	'ID' => 'ID',
 	'info_doc' => '<p>Ce plugin vous permet de g&eacute;rer une petite association en ligne.</p> <p>Vous pouvez ainsi  visualiser, ajouter et modifier des membres actifs, lancer des mails de masse pour les relances de cotisations, g&eacute;rer des dons, des ventes associatives, des inscriptions aux activit&eacute;s, des pr&ecirc;ts de mat&eacute;riels et autres ressources, et tenir un livre de comptes.</p>',
+	'message' => 'Message',
+	'sujet' => 'Sujet',
 	'message_relance' => '
 Bonjour,
 		
@@ -342,6 +348,8 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'echec' => '&eacute;chec',
 	'echecs' => '&eacute;checs',
 	'aucune_adresse_trouvee_pour_les_membres' => 'Aucune adresse trouv&eacute;e pour les membres : ',
+	'ecrire_a' => '&Eacute;crire &agrave;',
+	'a' => '&agrave',
 
 	# cotisation
 	'gestion_cotisations_limitee' => 'La gestion comptable &eacute;tant desactiv&eacute;e, seule la date de validit&eacute; est prise en charge par la gestion des cotisations.',
@@ -456,6 +464,7 @@ Commentaire: @commentaire@
 		'vente_entete_date_envoi' => 'Date d\'envoi',
 			
 		'dons_titre_mise_a_jour' => 'Mise &agrave; jour des dons',
+		'adherent_bouton_maj_vente' => 'Editer la vente',
 
 # RESSOURCES
 		
@@ -584,6 +593,15 @@ Commentaire: @commentaire@
 	'recette_evaluee' => 'Recette &eacute;valu&eacute;e',
 	'compte_debite' => 'Compte d&eacute;bit&eacute;',
 	'compte_credite' => 'Compte cr&eacute;dit&eacute;',
+			'aucun' => 'aucun',
+			'tous' => 'tous',
+			'aucun_achat_pour_l_instant' => 'Aucun achat pour l\'instant',
+			'aucun_don_pour_l_instant' => 'Aucun achat don l\'instant',
+			'aucun_pret_payant_pour_l_instant' => 'Aucun pr&ecirc;t payant pour l\'instant',
+			'aucune_activite_payante_pour_l_instant' => 'Aucun activit&eacute; payante pour l\'instant',
+			'aucune_cotisation_pour_l_instant' => 'Aucune cotisation pour l\'instant',
+			'totaux' => 'Totaux',
+
 		# Compte de Resultat
 			'cpte_resultat_titre_general' => 'Compte de R&eacute;sultat',
 			'cpte_resultat_bouton_voir' => 'Voir',
@@ -663,19 +681,21 @@ Commentaire: @commentaire@
 			'eti_marge_droite_etiquette' => 'Marge droite &eacute;tiquette',
 			'eti_espace_etiquettesl' => 'Espace entre &eacute;tiquettes largeur',
 			'eti_espace_etiquettesh' => 'Espace entre &eacute;tiquettes hauteur',
+			'etiquette_aucun_choix' => 'Aucun statut interne s&eacute;lectionn&eacute;',
+			'info_doc_etiquette'=>'Cette page permet le param&eacute;trage du g&eacute;n&eacute;rateur d\'&eacute;tiquettes, il permet ainsi de renseigner le g&eacute;n&eacute;rateur sur le format du papier sur lequel seront imprim&eacute;es les &eacute;tiquettes, la taille des &eacute;tiquettes ...',
+			'disposition_des_etiquettes' => 'Espace entre &eacute;tiquettes hauteur',
+			'contenu_des_etiquettes' => 'Contenu des &eacute;tiquettes',
+			'parametrage_des_etiquettes' => 'Param&eacute;trage des &eacute;tiquettes',
+			'enregistrer' => 'Enregistrer',
+			'imprimer' => 'Imprimer',
+			'info_etiquette'=>'Imprimer les &eacute;tiquettes de vos cartes de membres, de vos courriers papiers...',
+			'etiquettes'=>'&Eacute;tiquettes',
+			'titre_page_config_etiquette'=>'Param&eacute;trage des &eacute;tiquettes',
+			'membre_sans_email'=>'Uniquement les menbres sans email',
+			'format_des_pages' => 'Format des pages',
+			'marges_des_etiquettes' => 'Marge des &eacute;tiquettes',
 
-
-'info_doc_etiquette'=>'Cette page permet le param&eacute;trage du g&eacute;n&eacute;rateur d\'&eacute;tiquettes, il permet ainsi de renseigner le g&eacute;n&eacute;rateur sur le format du papier sur lequel seront imprim&eacute;es les &eacute;tiquettes, la taille des &eacute;tiquettes ...',
-'disposition_des_etiquettes' => 'Espace entre &eacute;tiquettes hauteur',
-'contenu_des_etiquettes' => 'Contenu des &eacute;tiquettes',
-'parametrage_des_etiquettes' => 'Param&eacute;trage des &eacute;tiquettes',
-'enregistrer' => 'Enregistrer',
-'imprimer' => 'Imprimer',
-'info_etiquette'=>'Imprimer les &eacute;tiquettes de vos cartes de membres, de vos courriers papiers...',
-'etiquettes'=>'&Eacute;tiquettes',
-'titre_page_config_etiquette'=>'Param&eacute;trage des &eacute;tiquettes',
-'membre_sans_email'=>'Uniquement les menbres sans email',
-
+	
 			// chaines collectee automatiquement
 
 'a_developper' => 'A d&eacute;velopper',
@@ -709,6 +729,7 @@ Commentaire: @commentaire@
 'destination' => "Destinations",
 'date_aaaa_mm_jj' => 'Date (AAAA-MM-JJ)',
 'date_report_aaaa_mm_jj' => 'Date report (AAAA-MM-JJ)',
+'date_du_paiement_aaaa_mm_jj' => 'Date du paiement (AAAA-MM-JJ)',
 'date' => 'Date',
 'don' => 'Don',
 'don_financier_en_e__' => 'Don financier (en &euro;)',
@@ -778,6 +799,8 @@ Commentaire: @commentaire@
 'relance' => 'relance',
 'relances' => 'relances',
 'ventes' => 'ventes',
+'vente' => 'vente',
+'valider' => 'Valider',
 
 'action_sur_les_ventes_associatives' => 'Action sur les ventes associatives',
 'ajout_de_cotisation' => 'Ajout de cotisation',

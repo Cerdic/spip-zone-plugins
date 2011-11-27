@@ -23,7 +23,7 @@ include_spip('inc/autoriser');
 function inc_instituer_statut_interne_dist($statut) {
 
 	$hstatut = htmlentities($statut);
-	$tab_statut=array(''=>_T('tous'));
+	$tab_statut=array(''=>_T('asso:tous'));
 	$tab_statut=array_merge($tab_statut,$GLOBALS['association_liste_des_statuts']);
 	foreach ($tab_statut as $var) {
 		$nom = htmlentities($var);

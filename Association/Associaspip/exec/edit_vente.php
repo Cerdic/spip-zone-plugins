@@ -33,7 +33,7 @@ function exec_edit_vente() {
 		
 		echo debut_boite_info(true);
 		if ($id_vente) {
-			echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:vente_libelle_numero').'<br />';
+			echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:vente_entete_id').'<br />';
 			echo '<span class="spip_xx-large">';
 			echo $id_vente;
 			echo '</span></div><br />';

@@ -50,7 +50,7 @@ function exec_ventes(){
 			$imputation = $data['imputation'];
 			echo "\n<table width='100%'>";
 			echo '<tr>';
-			echo '<td colspan="2"><strong>' . _L('Totaux '.$imputation.' '.$annee).' :</strong></td>';
+			echo '<td colspan="2"><strong>' . _T('asso:totaux').' '.$annee.' :</strong></td>';
 			echo '</tr>';
 			echo '<tr>';
 			echo '<td><strong style="color: #9F1C30;">' .  _T('asso:solde') . '</strong></td>';

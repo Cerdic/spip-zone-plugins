@@ -28,7 +28,7 @@ function exec_adherents() {
 		
 		//debut_page(_T('asso:titre_gestion_pour_association'), "", "");
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:association')) ;
+		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets(_T('asso:titre_onglet_membres'));
 		
 		echo debut_gauche("",true);
@@ -331,7 +331,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe)
 	}
 	
 	$res .= "\n<div style='float:right;'>\n"
-	.  (!$auteurs ? '' : ('<select name="action_adherents"><option value="" selected="">'._T('asso:choisir_action').'</option><option value="desactive">'.($statut_interne=='sorti'?_T('asso:reactiver_adherent'):_T('asso:desactiver_adherent')).'</option><option value="delete">'._T('asso:supprimer_adherent').'</option><option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_groupe').'</option></select><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" />'))
+	.  (!$auteurs ? '' : ('<select name="action_adherents"><option value="" selected="">'._T('asso:choisir_action').'</option><option value="desactive">'.($statut_interne=='sorti'?_T('asso:reactiver_adherent'):_T('asso:desactiver_adherent')).'</option><option value="delete">'._T('asso:supprimer_adherent').'</option><option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_un_groupe').'</option></select><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" />'))
 	. '<input type="hidden" name="statut_courant" value="'.$statut_interne.'" />'
 	.  '</div>';
 
