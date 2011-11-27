@@ -339,7 +339,12 @@ function association_maj_48001()
 				$liens = array('objet' => 'auteur'); 
 				$telephone = array('titre' => 'telephone');
 				$mobile = array('titre' => 'mobile');
-				$invalideur = array('invalideur' => 0);
+
+				$spip_table_numero = table_objet_sql('numero');
+				$id_table_numero = id_table_objet('numero');
+
+				$spip_table_adresse = table_objet_sql('adresse');
+				$id_table_adresse = id_table_objet('adresse');
 
 				/* On recupere les coordonnees utiles */
 				$coordonnees_membres = sql_select('id_auteur, adresse AS voie, code_postal, ville, telephone, mobile', 'spip_asso_membres', "adresse <> '' OR mobile <> '' OR code_postal <> '' OR ville <> '' OR telephone <> ''");
@@ -350,8 +355,7 @@ function association_maj_48001()
 					/* si on a un numero de telephone */
 					if ($telephone['numero'] = $data['telephone']) {
 						if ($id_numero =  insert_numero($liens)) {
-							$invalideur['invalideur'] = "id='id_numero/$id_numero'";
-							modifier_contenu('numero', $id_numero, $invalideur, $telephone);
+							sql_updateq($spip_table_numero, $telephone, "$id_table_numero=$id_numero");
 						}
 					}
 					unset($data['telephone']); 
@@ -359,8 +363,7 @@ function association_maj_48001()
 					/* si on a un numero de mobile */
 					if ($mobile['numero'] = $data['mobile']) {
 						if ($id_numero = insert_numero($liens)) {
-							$invalideur['invalideur'] = "id='id_numero/$id_numero'";
-							modifier_contenu('numero', $id_numero, $invalideur, $mobile);
+							sql_updateq($spip_table_numero, $mobile, "$id_table_numero=$id_numero");
 						}
 					}
 					unset($data['mobile']); 
@@ -368,8 +371,7 @@ function association_maj_48001()
 					/* si on a une adresse, meme partielle */
 					if ($data['voie'] OR $data['code_postal'] OR $data['ville']) {
 						if ($id_adresse = insert_adresse($liens)) {
-							$invalideur['invalideur'] = "id='id_adresse/$id_adresse'";
-							modifier_contenu('adresse', $id_adresse, $invalideur, $data);
+							sql_updateq($spip_table_adresse, $data, "$id_table_adresse=$id_adresse");
 						}
 					}
 				}
