@@ -5,8 +5,8 @@ include_spip('inc/meta');
 
 function herbier_install($action) {
 
-	$url = 'http://www.spip-herbier.net/spip.php?page=backend';
-	#$url = 'http://www.spip-herbier.net/rss';
+	$url = 'http://herbier.spip.net/spip.php?page=backend';
+	#$url = 'http://herbier.spip.net/rss';
 	$id = isset($GLOBALS['meta']['id_syndic_herbier']) ? intval($GLOBALS['meta']['id_syndic_herbier']) : false;
 
 	switch ($action) {
