@@ -8,3 +8,4 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_1'=>"Nom du type 1",
 	'type_2'=>"Nom du type 2"
 );
+?>
