@@ -1,7 +1,7 @@
 <plugin>
 	<nom>BrowserID</nom>
 	<auteur>Fil</auteur>
-	<version>0.1</version>
+	<version>0.2</version>
 	<etat>
 	dev
 	</etat>
@@ -15,8 +15,6 @@
 	<!-- https://www.browserid.org/i/icon.png -->
 
 	<categorie>auteur</categorie>
-	<!--
-		<lien>http://www.spip-contrib.net/</lien>
-	-->
+	<lien>http://www.spip-contrib.net/4005</lien>
 	<chemin dir='' />
 </plugin>

@@ -32,3 +32,14 @@ function browserid_start() {
 <div class="message"></div>
 </div>
 
+[(#REM)
+	le formulaire de login normal continue de fonctionner ;
+	on pourrait le desactiver avec une config
+]
+<div id="browserid_traditionnel">
+<INCLURE{fond=prive/formulaires/login,env} />
+</div>
+<script type="text/javascript">
+$("#browserid_traditionnel").hide();
+</script>
+<button onclick='$("#browserid_traditionnel").show();'>login traditionnel</button>
