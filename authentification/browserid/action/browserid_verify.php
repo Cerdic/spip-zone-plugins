@@ -9,6 +9,17 @@
 
 define('_BROWSERID_VERIFY', "https://browserid.org/verify");
 
+
+function browserid_auth_loger($auteur, &$a) {
+	include_spip('inc/auth');
+	include_spip('inc/texte');
+	auth_loger($auteur);
+	$a['session_nom'] = typo($auteur['nom']);
+	$a['session_statut'] = $auteur['statut'];
+	$a['autoriser_ecrire'] = autoriser('ecrire');
+
+}
+
 function action_browserid_verify() {
 
 	$a = array();
@@ -46,13 +57,9 @@ function action_browserid_verify() {
 					// on verifie si l'auteur existe deja en base, si oui on le loge
 					include_spip('base/abstract_sql');
 					$auteur = sql_fetsel('*', 'spip_auteurs', 'email='.sql_quote($a['email']));
+
 					if ($auteur) {
-						include_spip('inc/auth');
-						auth_loger($auteur);
-						include_spip('inc/texte');
-						$a['session_nom'] = typo($auteur['nom']);
-						$a['session_statut'] = $auteur['statut'];
-						$a['autoriser_ecrire'] = autoriser('ecrire');
+						browserid_auth_loger($auteur, $a);
 
 						# envoyer une action javascript
 #						if ($auteur['statut'] == '0minirezo') {
@@ -61,6 +68,27 @@ function action_browserid_verify() {
 						# ou envoyer un message
 						#$a['message'] = 'Welcome '.$a['session_nom'];
 
+					}
+
+					else
+					/* OPTION : creer un compte pour l'auteur */
+					{
+						$statut_inscription = null;
+						if ($GLOBALS['meta']["accepter_inscriptions"] == 'oui')
+							$statut_inscription = '1comite';
+						else if ($GLOBALS['meta']["forums_publics"] == 'abo')
+							$statut_inscription = '6forum';
+
+						if ($statut_inscription) {
+							sql_insertq('spip_auteurs', array(
+								'email' => $a['email'],
+								'statut' => $statut_inscription,
+								'nom' => preg_replace('/@.*/', '', $a['email']),
+								'login' => md5($a['email']), # unicite a la rache.
+							));
+							$auteur = sql_fetsel('*', 'spip_auteurs', 'email='.sql_quote($a['email']));
+							browserid_auth_loger($auteur, $a);
+						}
 					}
 
 					session_set('session_email', $a['email']);
@@ -72,7 +100,7 @@ function action_browserid_verify() {
 			}
 			else {
 				$a['status'] = 'failure';
-				$a['reason'] = "could not connect to the verification server";
+				$a['reason'] = "could not connect to the verification server; please retry";
 			}
 		}
 	} else {
