@@ -37,7 +37,7 @@ function action_lier_contact_auteur_post($id_contact, $id_auteur) {
 				'objet' => 'auteur',
 				'id_objet' => $id_auteur
 			);
-			sql_updateq("spip_contacts_liens", $champs);
+			sql_insertq("spip_contacts_liens", $champs);
 					
 		include_spip('inc/invalideur');
 		suivre_invalideur("id='id_contact/$id_contact'");
