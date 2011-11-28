@@ -320,6 +320,19 @@ add_outil( array(
 	'pipelinecode:pre_description_outil' => 'if($id=="auteur_forum") $texte=str_replace(array("@_CS_FORUM_NOM@","@_CS_FORUM_EMAIL@"),
 	array(preg_replace(\',:$,\',"",_T("'.$cs_temp.'forum_votre_nom")),preg_replace(\',:$,\',"",_T("'.$cs_temp.'forum_votre_email"))),$texte);',
 ));
+/* Astuce de b_b en php (a tester !)
+	'pipeline:formulaire_verifier' => 'nom_obligatoire',
+function nom_obligatoire($flux){
+	$form = $flux['args']['form'];
+	if ($form=='forum'){
+		if (!sinon($GLOBALS['visiteur_session']['nom'],$GLOBALS['visiteur_session']['session_nom'])){
+			$flux['data']['message_erreur'] .= _T('nom_obligatoire');
+			$flux['data']['session_nom'] = _T('nom_obligatoire');
+			unset($flux['data']['previsu']);
+		}
+	}
+	return $flux;
+}*/
 
 // ici on a besoin de trois boutons radio : _T('couteauprive:par_defaut'), _T('couteauprive:sf_amont') et _T('couteauprive:sf_tous')
 add_variable( array(
@@ -478,6 +491,12 @@ add_variables( array(
 	'radio' => array(1 => 'couteauprive:travaux_titre', 0 => 'couteauprive:travaux_nom_site'),
 	'defaut' => 1,
 	'code:%s' => "define('_en_travaux_TITRE', %s);",
+), array(
+	'nom' => 'cache_travaux',
+	'format' => _format_NOMBRE,
+	'check' => 'couteauprive:travaux_nocache',
+	'defaut' => 1,
+	'code:%s' => "define('_NO_CACHE',1);", // SPIP >=2.0
 ));
 add_outil( array(
 	'id' => 'en_travaux',
@@ -487,7 +506,7 @@ add_outil( array(
 	'pipeline:affichage_final' => 'en_travaux_affichage_final',
 	'pipelinecode:pre_description_outil' => 'if($id=="en_travaux") $texte=str_replace(array("@_CS_TRAVAUX_TITRE@","@_CS_NOM_SITE@"),
 	array("["._T("info_travaux_titre")."]","[".$GLOBALS["meta"]["nom_site"]."]"),$texte);',
-	'description' => '<:en_travaux::>[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1/2/3">%avertir_travaux%</admin_travaux>]][[%prive_travaux%]]',
+	'description' => '<:en_travaux::>[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1/2/3">%avertir_travaux%</admin_travaux>]][[->%cache_travaux%]][[%prive_travaux%]]',
 ));
 
 add_variables( array(

@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.',
 'label:tout_rub'=>'Afficher en public tous les objets suivants :',
-
+'travaux_nocache'=>'Désactiver également le cache de SPIP',
 	// 2
 	'2pts_non' => ' : non',
 	'2pts_oui' => ' : oui',
