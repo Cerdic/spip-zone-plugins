@@ -194,8 +194,15 @@ function email_notification_forum ($t, $email) {
 		// detecter les url des liens du forum
 		// pour la moderation (permet de reperer les SPAMS avec des liens caches)
 		$links = array();
-		foreach ($t as $champ)
-			$links = $links + extraire_balises($champ,'a');
+		foreach ($t as $champ){
+			if (strpos($champ,"[")!==false){
+				if (!function_exists('propre'))
+					include_spip('inc/texte');
+				$champ = propre($champ,'');
+			}
+			if (strpos($champ,"<")!==false)
+				$links = $links + extraire_balises($champ,'a');
+		}
 		$links = extraire_attribut($links,'href');
 		$links = implode("\n",$links);
 		$t['liens'] = $links;
