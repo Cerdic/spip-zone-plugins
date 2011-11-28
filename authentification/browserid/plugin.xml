@@ -11,7 +11,7 @@
 	<prefix>
 	browserid
 	</prefix>
-	<icon>images/browserid.png</icon>
+	<icon>browserid-32.png</icon>
 	<!-- https://www.browserid.org/i/icon.png -->
 
 	<categorie>auteur</categorie>
