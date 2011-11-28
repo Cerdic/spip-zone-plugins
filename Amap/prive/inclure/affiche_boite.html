@@ -3,8 +3,8 @@
 	<img class="cadre-icone" width="24" height="24" alt="" src="#CHEMIN{prive/themes/spip/images/amapconfig-24.gif}">
 	<div class="titrem"><:amap:information_amap:></div>
 	<div class="cadre_padding">
-		<BOUCLE_panier(AMAP_PANIERS){id_auteur}{age<0}{0,1}>
-			<BOUCLE_aut(AUTEURS){id_auteur}><a href="[(#URL_ECRIRE{panier_adherent}|parametre_url{id_auteur,#ID_AUTEUR})]"><:amap:les_paniers:> #NOM</a>
+		<BOUCLE_panier(AMAP_PANIERS){id_auteur}{tous}{age<0}{0,1}>
+			<BOUCLE_aut(AUTEURS){id_auteur}{tous}><a href="[(#URL_ECRIRE{panier_adherent}|parametre_url{id_auteur,#ID_AUTEUR})]"><:amap:les_paniers:> #NOM</a>
 				(<BOUCLE_totalpanier(AMAP_PANIERS){id_auteur}{age<0} />#TOTAL_BOUCLE<//B_totalpanier>)
 			</BOUCLE_aut>
 		</BOUCLE_panier>
