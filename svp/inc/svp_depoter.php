@@ -192,17 +192,23 @@ function svp_actualiser_depot($id){
 		if (!$infos)
 			return false;
 	
-		// On actualise les paquets dans spip_paquets uniquement car le depot n'est
-		// mis a jour que par le formulaire d'edition d'un depot.
+		// On actualise les paquets dans spip_paquets en premier lieu.
 		// Lors de la mise a jour des paquets, les plugins aussi sont actualises
 		$ok = svp_actualiser_paquets($depot['id_depot'], $infos['paquets'],
 									$nb_paquets, $nb_plugins, $nb_autres);
 		if ($ok) {
-			// On met à jour le nombre de paquets et de plugins du depot ainsi que le nouveau sha1
+			// On met à jour :
+			// -- les infos ne pouvant pas etre editees par le formulaire d'edition d'un depot et extraites du xml
+			// -- le nombre de paquets et de plugins du depot ainsi que le nouveau sha1
 			// ce qui aura pour effet d'actualiser la date de mise a jour
-			sql_updateq('spip_depots', 
-						array('nbr_paquets'=> $nb_paquets, 'nbr_plugins'=> $nb_plugins, 'nbr_autres'=> $nb_autres, 'sha_paquets'=> $sha),
-						'id_depot=' . sql_quote($depot['id_depot']));
+			$champs = array('url_serveur' => $infos['depot']['url_serveur'],
+							'url_brouteur' => $infos['depot']['url_brouteur'],
+							'url_archives' => $infos['depot']['url_archives'],
+							'nbr_paquets'=> $nb_paquets,
+							'nbr_plugins'=> $nb_plugins,
+							'nbr_autres'=> $nb_autres,
+							'sha_paquets'=> $sha);
+			sql_updateq('spip_depots', $champs, 'id_depot=' . sql_quote($depot['id_depot']));
 		}
 	}
 	
