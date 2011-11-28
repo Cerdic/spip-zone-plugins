@@ -20,11 +20,15 @@ _ - compatible fonctions sql portables MySQL, PostGreSQL, SQLite
 	</multi>
 	</description>
 	<prefix>tabledata</prefix>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
-    <pipeline>
-        <nom>ajouter_boutons</nom>
-        <action>ajouterBoutons</action>
-        <inclure>tabledata_pipelines.php</inclure>
-    </pipeline>
+	<bouton id='tabledata' parent='naviguer'>
+		<titre>tabledata:tabledata</titre>
+		<icone>img_pack/tabledata.gif</icone>
+		<url>tabledata</url>
+	</bouton>
+	<bouton id='tabledata21' parent='bando_administration'>
+		<titre>tabledata:tabledata</titre>
+		<icone>img_pack/tabledata.gif</icone>
+		<url>tabledata</url>
+	</bouton>
     <necessite id="SPIP" version='[2.0.0;]' />
 </plugin>
