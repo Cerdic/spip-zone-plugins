@@ -7,10 +7,10 @@
 <etat>stable</etat>
 <categorie>divers</categorie>
 
-<slogan>Capture d'&#233;cran d'un site pris au hasard dans l'Herbier</slogan>
-<description>Affichez sur votre site une capture d'ecran d'un site pris au hasard dans l'Herbier&nbsp;! Il suffit d'installer ce plugin pour syndiquer automatiquement l'Herbier. Ajoutez ensuite <code><INCLURE{fond=inclure/herbier}></code> dans vos squelettes.</description>
-<lien>http://herbier.spip.net</lien>
-<auteur>James et Romy</auteur>
+<slogan>Affichez l'Herbier sur votre site&nbsp;!</slogan>
+<description>Affichez sur votre site une capture d'ecran d'un site pris au hasard dans l'Herbier&nbsp;! Il suffit d'installer ce plugin pour syndiquer automatiquement [l'Herbier de SPIP->http://herbier.spip.net] et ses sites remarquables. Ajoutez ensuite <code><INCLURE{fond=inclure/herbier}></code> dans vos squelettes.</description>
+<lien>http://herbier.spip.net/2</lien>
+<auteur>James et Romy, pour [l'Herbier de SPIP->http://herbier.spip.net]</auteur>
 <licence>GPL</licence>
 
 <install>herbier_install.php</install>
