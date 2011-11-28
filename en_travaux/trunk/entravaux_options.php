@@ -57,22 +57,33 @@ if (is_entravaux()){
 				define('_NO_CACHE',1);
 		}
 	}
+	// si espace prive : die avec page travaux
+	// sauf si pas loge => redirection
 	else {
 		if (!in_array(_request('action'),array('logout'))
 		){
 			if (!autoriser('travaux')){
 				spip_initialisation_suite();
-				$travaux = recuperer_fond("inclure/entravaux",array());
-				// fallback : le fond renvoie parfois du vide ...
-				if (!strlen($travaux)){
-					@define('_SPIP_SCRIPT','spip.php');
-					echo "Acces interdit (en travaux) <a href='"
-					.generer_url_action('logout',"logout=public",false,true)
-					."'>Deconnexion</a>";
+				// si on est loge : die() avec travaux
+				if ($GLOBALS['visiteur_session']['id_auteur']){
+					$travaux = recuperer_fond("inclure/entravaux",array());
+					// fallback : le fond renvoie parfois du vide ...
+					if (!strlen($travaux)){
+						@define('_SPIP_SCRIPT','spip.php');
+						echo "Acces interdit (en travaux) <a href='"
+						.generer_url_action('logout',"logout=public",false,true)
+						."'>Deconnexion</a>";
+					}
+					else
+						echo $travaux;
+					die();
 				}
-				else
-					echo $travaux;
-				die();
+				// sinon retour sur login_sos
+				else {
+					$redirect = parametre_url(generer_url_public('login_sos'),'url',self(),'&');
+					include_spip('inc/headers');
+					redirige_par_entete($redirect);
+				}
 			}
 		}
 	}
