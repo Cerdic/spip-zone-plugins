@@ -155,7 +155,7 @@ function diag_echecs_hilite_square($chessboard,$square,$hilite,$flip) {
 			($number-1)*$taille+$bordure+$yori,0,0,$taille,$taille);
 }
 
-// trace une ligne coloree sur l'echiquier
+// trace une flèche colorée sur l'echiquier
 function diag_echecs_hilite_line($image, $squares, $hilite ,$flip) {
 	global $diag_echecs_globales;
 	$taille = intval(jeux_config('taille'));
@@ -163,7 +163,7 @@ function diag_echecs_hilite_line($image, $squares, $hilite ,$flip) {
 	$xori = intval(jeux_config('xori'));
 	$yori = intval(jeux_config('yori'));
 	
-	// epaisseur de la ligne
+	// epaisseur de la flèche
 	switch($taille) {
 		case 35 : $thick = 5; break;
 		case 55 : $thick = 7; break;
@@ -177,38 +177,101 @@ function diag_echecs_hilite_line($image, $squares, $hilite ,$flip) {
 	$hilite_color = imagecolorallocatealpha($image,$color[0],$color[1],$color[2],50);
 	
 	if (!$flip) {
-		$x1 = round(($diag_echecs_globales['letter2number'][$xfrom]-1)*$taille+$bordure+$taille/2)-1+$xori;
-		$y1 = round((8-$yfrom)*$taille+$bordure+$taille/2)-1+$yori;
-		$x2 = round(($diag_echecs_globales['letter2number'][$xto]-1)*$taille+$bordure+$taille/2)-1+$xori;
-		$y2 = round((8-$yto)*$taille+$bordure+$taille/2)-1+$yori;
+		$x1 = (($diag_echecs_globales['letter2number'][$xfrom]-1)*$taille+$bordure+$taille/2)-1+$xori;
+		$y1 = ((8-$yfrom)*$taille+$bordure+$taille/2)-1+$yori;
+		$x2 = (($diag_echecs_globales['letter2number'][$xto]-1)*$taille+$bordure+$taille/2)-1+$xori;
+		$y2 = ((8-$yto)*$taille+$bordure+$taille/2)-1+$yori;
 	} else {
-		$x1 = round((8-$diag_echecs_globales['letter2number'][$xfrom])*$taille+$bordure+$taille/2)-1+$xori;
-		$y1 = round(($yfrom-1)*$taille+$bordure+$taille/2)-1+$yori;
-		$x2 = round((8-$diag_echecs_globales['letter2number'][$xto])*$taille+$bordure+$taille/2)-1+$xori;
-		$y2 = round(($yto-1)*$taille+$bordure+$taille/2)-1+$yori;		
+		$x1 = ((8-$diag_echecs_globales['letter2number'][$xfrom])*$taille+$bordure+$taille/2)-1+$xori;
+		$y1 = (($yfrom-1)*$taille+$bordure+$taille/2)-1+$yori;
+		$x2 = ((8-$diag_echecs_globales['letter2number'][$xto])*$taille+$bordure+$taille/2)-1+$xori;
+		$y2 = (($yto-1)*$taille+$bordure+$taille/2)-1+$yori;		
 	}
   
-	// cercle aux extremites en attendant une vraie fleche
+	// cercle au début
 	imagefilledellipse($image, $x1,$y1,$thick*2,$thick*2,$hilite_color); 	
-	imagefilledellipse($image, $x2,$y2,$thick*2,$thick*2,$hilite_color); 	
-  
-    if ($thick == 1)
+
+	if ($thick == 1)
         return imageline($image, $x1, $y1, $x2, $y2, $hilite_color);
 
-    $t = round($thick / 2)-1 ;
-    if ($x1 == $x2 || $y1 == $y2)
-        return imagefilledrectangle($image, round(min($x1, $x2) - $t), round(min($y1, $y2) - $t), round(max($x1, $x2) + $t), round(max($y1, $y2) + $t), $hilite_color);
-
-	// alors la, bonjour les equations de droites !
-	$k = ($y2 - $y1) / ($x2 - $x1); //y = kx + q
-    $a = $t / sqrt(1 + pow($k, 2));
-	// des que je comprends j'ajoute 3 points pour faire une fleche ;-)
-    $points = array(
-        round($x1 - (1+$k)*$a), round($y1 + (1-$k)*$a),
-        round($x1 - (1-$k)*$a), round($y1 - (1+$k)*$a),
-        round($x2 + (1+$k)*$a), round($y2 - (1-$k)*$a),		
-        round($x2 + (1-$k)*$a), round($y2 + (1+$k)*$a)    		
-    );	
-    return imagefilledpolygon($image, $points, 4, $hilite_color);   
+	$ep=round(2.5*$thick/2); //épaisseur totale de la pointe
+	$lg=round(5*$thick/2);  //longeur de la pointe
+    $t=round($thick / 2)-1;	 //demi épaisseur de la flèche
+	
+    if ($y1 == $y2) {// flèches horizontales
+		if ($x1 < $x2) {//vers la droite
+			$points = array(
+				round($x1),round($y1+$t),
+				round($x2-$lg),round($y2+$t),
+				round($x2-$lg),round($y2+$ep),
+				round($x2),round($y2),
+				round($x2-$lg),round($y2-$ep),
+				round($x2-$lg),round($y2-$t),	
+				round($x1),round($y1-$t)
+			);			
+			return imagefilledpolygon($image, $points, 7, $hilite_color);   
+		} else {//vers la gauche
+			$points = array(
+				round($x1),round($y1+$t),
+				round($x2+$lg),round($y2+$t),
+				round($x2+$lg),round($y2+$ep),
+				round($x2),round($y2),
+				round($x2+$lg),round($y2-$ep),
+				round($x2+$lg),round($y2-$t),	
+				round($x1),round($y1-$t)
+			);			
+			return imagefilledpolygon($image, $points, 7, $hilite_color);   	
+		}
+	}
+	
+	if ($x1 == $x2) {// flèches verticales
+		if ($y1 < $y2) {//vers le bas
+			$points = array(
+				round($x1-$t),round($y1),
+				round($x2-$t),round($y2-$lg),
+				round($x2-$ep),round($y2-$lg),
+				round($x2),round($y2),
+				round($x2+$ep),round($y2-$lg),
+				round($x2+$t),round($y2-$lg),
+				round($x1+$t),round($y1)
+			);			
+			return imagefilledpolygon($image, $points, 7, $hilite_color);   
+		} else {//vers le haut
+			$points = array(
+				round($x1-$t),round($y1),
+				round($x2-$t),round($y2+$lg),
+				round($x2-$ep),round($y2+$lg),
+				round($x2),round($y2),
+				round($x2+$ep),round($y2+$lg),
+				round($x2+$t),round($y2+$lg),
+				round($x1+$t),round($y1)
+			);			
+			return imagefilledpolygon($image, $points, 7, $hilite_color);   
+		}
+	}
+	//autres flèches
+	// utilisation des coordonnées polaires
+	$pi=pi();
+	$teta=atan(($y2-$y1)/($x2-$x1));
+	// (x3,y3) est le point intermédiare pour contruire la pointe
+	if ($x2>$x1) {
+		$x3=$x2+$lg*cos($teta+$pi);
+		$y3=$y2+$lg*sin($teta+$pi);
+	} else {
+		$x3=$x2-$lg*cos($teta+$pi);
+		$y3=$y2-$lg*sin($teta+$pi);
+	}
+	
+	$points = array(
+		round($x1+$t*cos($teta+$pi/2)),round($y1+$t*sin($teta+$pi/2)),
+		round($x3+$t*cos($teta+$pi/2)),round($y3+$t*sin($teta+$pi/2)),
+		round($x3+$ep*cos($teta+$pi/2)),round($y3+$ep*sin($teta+$pi/2)),
+		round($x2),round($y2),
+		round($x3+$ep*cos($teta-$pi/2)),round($y3+$ep*sin($teta-$pi/2)),
+		round($x3+$t*cos($teta-$pi/2)),round($y3+$t*sin($teta-$pi/2)),
+		round($x1+$t*cos($teta-$pi/2)),round($y1+$t*sin($teta-$pi/2))
+	);				
+	return imagefilledpolygon($image, $points, 7, $hilite_color);   
+	
 }
 ?>
