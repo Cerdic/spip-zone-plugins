@@ -8,6 +8,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'msg_erreur_installation' => 'Erreur à l\'installation du champ extra rubrique préférée',
 
+	// N
+	'noisette_titre' => 'Liste des articles de l\'auteur qui a choisi cette rubrique comme rubrique préférée',
+
 	// T
 	'titre' => 'Rubrique préférée ',
 

@@ -1,0 +1,4 @@
+<BOUCLE_auteurs(AUTEURS){rubrique_preferee=rubrique|#ENV{id_rubrique}}>
+	[(#PLUGIN{aveline}|oui)
+		#INCLURE{fond=noisettes/auteur-articles,env,id_auteur=#ID_AUTEUR}]
+</BOUCLE_auteurs>

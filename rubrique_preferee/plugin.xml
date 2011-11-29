@@ -18,5 +18,6 @@
 	<necessite id="saisies" version="[1.1;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<necessite id="cextras" version="[0.7;]" />
+	<utilise id="aveline" version="[1.7.0;]" />
 	<categorie>navigation</categorie>
 </plugin>
