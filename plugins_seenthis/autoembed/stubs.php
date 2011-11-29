@@ -1156,13 +1156,16 @@ $AutoEmbed_stubs = array(
   array(
     'title' => 'Ted.com',
     'website' => 'http://www.ted.com',
-    'url-match' => 'http://(?:www\.)?ted\.com/(index.php/)?talks/[a-z0-9\-_]*.html',
-    'fetch-match' => 'hs:"talks\/dynamic\/([a-z0-9-_]*)-high\.flv',
+    'url-match' => 'http://(?:www\.)?ted\.com/(index.php/)?talks.*/[a-z0-9\-_]*.html',
+    'fetch-match' => 'download\.ted\.com/talks/([a-z0-9\-_]+)\_([0-9][0-9][0-9][0-9][a-z]?).mp4',
     'embed-src' => 'http://video.ted.com/assets/player/swf/EmbedPlayer.swf',
     'embed-width' => '446',
     'embed-height' => '326',
-    'flashvars' => 'vu=http://video.ted.com/talks/dynamic/$2-medium.flv&su=http://images.ted.com/images/ted/tedindex/embed-posters/$2.embed_thumbnail.jpg&vw=432&vh=240',
+    'flashvars' => 'vu=http://video.ted.com/talk/stream/$3/Blank/$2_$3-320k.mp4&su=http://images.ted.com/images/ted/tedindex/embed-posters/$2.embed_thumbnail.jpg&vw=432&vh=240',
   ),
+  
+  
+  
   array(
     'title' => 'The Onion',
     'website' => 'http://www.theonion.com',
@@ -1504,7 +1507,7 @@ $AutoEmbed_stubs = array(
  array(
     'title' => 'Arte Video',
     'website' => 'http://videos.arte.tv',
-    'url-match' => '(http://videos\.arte\.tv/fr/videos/(.*\-([0-9]+))\.html)',
+    'url-match' => '(http://videos\.arte\.tv/fr/videos/(.*\_\-([0-9]+))\.html)',
     'embed-width' => '450',
     'embed-height' => '303',
     'embed-src' => 'http://videos.arte.tv/videoplayer.swf?mode=prod&lang=fr&configFileUrl=http%3A//videos%2Earte%2Etv/cae/static/flash/player/config%2Exml&localizedPathUrl=http%3A//videos%2Earte%2Etv/cae/static/flash/player/&videoId=$4&autoPlay=true&admin=false&videorefFileUrl=http%3A//videos%2Earte%2Etv/fr/do%5Fdelegate/videos/$3%2Cview%2CasPlayerXml%2Exml&embed=true&autoPlay=false',
@@ -1526,6 +1529,14 @@ array(
     'embed-width' => '300',
     'embed-height' => '410',
     'iframe-player' => 'http://bandcamp.com/EmbeddedPlayer/v=2/album=$2/size=grande3/bgcol=FFFFFF/linkcol=4285BB/transparent=true/',
+  ),
+array(
+    'title' => 'Arte radio',
+    'website' => 'www.arteradio.com',
+    'url-match' => 'http://(.*\.)?arteradio\.com/son.html\?([0-9]+)',
+    'embed-width' => '182',
+    'embed-height' => '247',
+    'embed-src' => 'http://download.arteradio.com/flash/arteradiov4player.swf?mediaId=$3&v=102',
   ),
 
 array(
