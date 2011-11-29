@@ -1,4 +1,12 @@
-[(#REM) Bloc d'information sur la page ]
+[(#REM) <!-- Bloc d'information sur la page --> ]
 #BOITE_OUVRIR{'', info}
 	<p><:svp:info_boite_depot_gerer:></p>
+    <div class="bouton">
+        [(#BOUTON_ACTION{
+            <:svp:bouton_actualiser_tout:>,
+                #URL_ACTION_AUTEUR{actualiser_depot, tout, #SELF},
+                '',
+                '',
+                <:svp:bulle_actualiser_tout_depot:>})]
+    </div>
 #BOITE_FERMER

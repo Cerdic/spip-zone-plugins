@@ -10,10 +10,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 	'bouton_actualiser' => 'Actualiser',
+	'bouton_actualiser_tout' => 'Actualiser les dépôts',
 	'bouton_installer' => 'Installer',
 	'bouton_modifier_depot' => 'Modifier le dépôt',
 	'bouton_supprimer' => 'Supprimer',
 	'bulle_actualiser_depot' => 'Actualiser les paquets du dépôt',
+	'bulle_actualiser_tout_depot' => 'Actualiser les paquets de tous les dépôts',
 	'bulle_afficher_xml_plugin' => 'Contenu du fichier XML du plugin',
 	'bulle_ajouter_spipzone' => 'Ajouter le dépôt SPIP-Zone',
 	'bulle_aller_depot' => 'Se rendre sur la page de ce dépôt',

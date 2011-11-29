@@ -20,6 +20,7 @@ function svp_declarer_tables_objets_sql($tables) {
 			"url_serveur"	=> "varchar(255) DEFAULT '' NOT NULL", // url du serveur svn ou git
 			"url_brouteur"	=> "varchar(255) DEFAULT '' NOT NULL", // url de l'interface de gestion du repository (trac, redmine...)
 			"url_archives"	=> "varchar(255) DEFAULT '' NOT NULL", // url de base des zips
+			"url_commits"	=> "varchar(255) DEFAULT '' NOT NULL", // url du flux rss des commits du serveur svn ou git
 			"xml_paquets"	=> "varchar(255) DEFAULT '' NOT NULL", // chemin complet du fichier xml du depot
 			"sha_paquets"	=> "varchar(40) DEFAULT '' NOT NULL",
 			"nbr_paquets" 	=> "integer DEFAULT 0 NOT NULL",

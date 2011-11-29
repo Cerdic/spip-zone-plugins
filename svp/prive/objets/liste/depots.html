@@ -15,6 +15,7 @@
 [(#SET{defaut_tri, #ARRAY{
 	titre, 1,
 	nbr_paquets, -1,
+    nbr_plugins, -1,
 	maj, -1,
 	id_depot, 1}})]
 
@@ -27,7 +28,8 @@
 			<tr class="first_row">
 				<th class="titre principale">[(#TRI{titre, <:info_titre:>, ajax})]</th>
 				[(#ENV{affichage}|=={complet}|oui)
-				<th class="nombre">[(#TRI{nbr_paquets, <:svp:titre_paquets:>, ajax})]</th>
+                <th class="nombre">[(#TRI{nbr_paquets, <:svp:titre_paquets:>, ajax})]</th>
+                <th class="nombre">[(#TRI{nbr_plugins, <:svp:titre_plugins:>, ajax})]</th>
 				<th class="date secondaire">[(#TRI{maj, <:svp:label_actualise_le:>, ajax})]</th>]
 				<th class="id">[(#TRI{id_depot, <:info_numero_abbreviation:>, ajax})]</th>
 				[(#ENV{affichage}|=={complet}|oui)
@@ -45,11 +47,11 @@
 					</a>
 				</td>
 				[(#ENV{affichage}|=={complet}|oui)
-				<td class="nombre">[(#NBR_PAQUETS)]</td>
+                <td class="nombre">[(#NBR_PAQUETS)]</td>
+                <td class="nombre">[(#NBR_PLUGINS)]</td>
 				<td class="date secondaire">[(#MAJ|affdate{d-m H:i})]</td>]
 				<td class="id">[(#ID_DEPOT)]</td>
 				[(#ENV{affichage}|=={complet}|oui)
-				<td class="bouton">[(#BOUTON_ACTION{<:svp:bouton_actualiser:>, #URL_ACTION_AUTEUR{actualiser_depot,#ID_DEPOT, #SELF}, '', '', <:svp:bulle_actualiser_depot:>})]</td>
 				<td class="bouton">[(#BOUTON_ACTION{<:svp:bouton_supprimer:>, #URL_ACTION_AUTEUR{supprimer_depot,#ID_DEPOT, #SELF}, '', '', <:svp:bulle_supprimer_depot:>})]</td>]
 			</tr>
 </BOUCLE_liste_depots>
