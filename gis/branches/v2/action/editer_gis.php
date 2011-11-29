@@ -71,14 +71,14 @@ function revisions_gis($id_gis, $c=false) {
 	}
 	
 	include_spip('inc/modifier');
-	$err .= modifier_contenu('gis', $id_gis, array(
+	modifier_contenu('gis', $id_gis, array(
 			//'nonvide' => array('nom' => _T('info_sans_titre')),
 			'invalideur' => "id='id_gis/$id_gis'"
 		),
 		$c);
 	
 	if((intval(_request('id_objet')) && _request('objet')) OR (intval($c['id_objet']) && $c['objet']))
-		$err .= lier_gis($id_gis, _request('objet',$c['objet']), _request('id_objet',$c['id_objet']));
+		lier_gis($id_gis, _request('objet',$c['objet']), _request('id_objet',$c['id_objet']));
 	
 	return $err;
 }
