@@ -5,56 +5,55 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
-	'animspeed' => 'Vitesse de l\'animation',
 	// B
-	'bottommargin' => 'Marge sous le slider',
 	'bouton_effacer' => 'Effacer',
 	// C
-	'caption_backcolor' => 'Couleur du fond',
-	'caption_frontcolor' => 'Couleur du texte',
-	'caption_opacity' => 'Transparence',
 	'controls' => 'Contrôles',
-	'controlnav' => 'Afficher les puces',
-	'cfg_title_nivoslider' => 'Nivo Slider',
-	'cfg_boite_nivoslider' => 'Configuration du plugin Nivo Slider.<br /><br />[Documentation->http://www.spip-contrib.net/Nivo-Slider-pour-SPIP]',
+	'cfg_title_nivoslider' => 'Configuration du carrousel NivoSlider',
 	// D
 	'default' => 'Diaporama par défaut',
-	'default_info' => 'Article utilisé comme réservoir d\'images lors de l\'inclusion du modèle [(#MODELE{nivoslider})] sans paramètre <i>id_article</i> à partir d\'un squelette :',
-	'directionnav' => 'Activer les flèches de navigation',
-	'directionnavhide' => 'Cacher les fl&egrave;ches (afficher au survol)',
 	// E
-	'effect' => 'Effet de transition',
 	// F
 	// G
 	'general' => 'Apparence générale',
 	// H
-	'height' => 'Hauteur',
-	// I 
-	'image_align' => 'Recadrer',
-	'image_backcolor' => 'Couleur de fond',
+	// I
 	// J
 	// K
-	'keyboardnav' => 'Utiliser les fl&eacute;ches droite &amp; gauche du clavier',
 	// L
+	'label_animSpeed' => 'Vitesse de l\'animation',
+	'label_height' => 'Hauteur (px)',
+	'label_width' => 'Largeur (px)',
+	'label_effect' => 'Effet de transition',
+	'label_slices' => 'Nombre de tranches',
+	'label_pauseTime' => 'Pause entre les images',
+	'label_imageAlign' => 'Recadrer',
+	'label_imageBackcolor' => 'Couleur de fond',
+	'label_false' => 'non',
+	'label_true' => 'oui',
+	'label_directionNav' => 'Activer les flèches de navigation',
+	'label_directionNavHide' => 'Cacher les fl&egrave;ches (afficher au survol)',
+	'label_keyboardNav' => 'Utiliser les fl&eacute;ches droite &amp; gauche du clavier',
+	'label_pauseOnHover' => 'Pause au survol',
+	'label_controlNavThumbs' => 'Activer les miniatures',
+	'label_controlNav' => 'Afficher les puces',
+	'label_bottomMargin' => 'Marge sous le slider (px)',
+	'label_captionBackcolor' => 'Couleur du fond',
+	'label_captionFrontcolor' => 'Couleur du texte',
+	'label_captionOpacity' => 'Transparence',
+	'label_id_defaut' => 'Article utilisé comme réservoir d\'images lors de l\'inclusion du modèle [(#MODELE{nivoslider})] sans paramètre <i>id_article</i> à partir d\'un squelette :',
 	'legend' => 'Légendes',
 	// M
 	// N
-	'non' => 'non',
 	// O
-	'oui' => 'oui',
 	// P
-	'pausetime' => 'Pause entre les images',
-	'pauseonhover' => 'Pause au survol',
 	// Q
 	// R
 	// S
-	'slices' => 'Nombre de tranches',
 	// T
 	// U
-	'usethumbs' => 'Activer les miniatures',
 	// V
 	// W
-	'width' => 'Largeur',
 	// X
 	// Y
 	// Z

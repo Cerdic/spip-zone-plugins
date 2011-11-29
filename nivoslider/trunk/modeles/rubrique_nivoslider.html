@@ -1,7 +1,9 @@
-[(#REM) modèle Nivoslider de documents : 
- - Depuis un article : < nivoslider_doc|id=.,.,.. >
- - Selon le modele CROCHET(# MODELE{nivoslider_doc}{id=.,.,..})CROCHET
+[(#REM) modèle Nivoslider pour une rubrique : 
+ - Depuis un article : < nivoslider_rubXX >, alors affiche les docs de la rubrique XX
+ - Selon le modele CROCHET(# MODELE{nivoslider_rub}{id_nivoslider_rub=XX})CROCHET
 ]
+
+[(#SET{id_rubrique,[(#ENV{id_nivoslider_rub, #CONFIG{nivoslider/id_defaut, 0} })]} )]
 
 [(#SET{width,[(#ENV{width, #CONFIG{nivoslider/width, 500} })]} )]
 [(#SET{height,[(#ENV{height, #CONFIG{nivoslider/height, 240} })]} )]
@@ -15,7 +17,7 @@
 [(#SET{keyboardNav,[(#ENV{keyboardNav, #CONFIG{nivoslider/keyboardNav,false} })]} )]
 [(#SET{pauseOnHover,[(#ENV{pauseOnHover, #CONFIG{nivoslider/pauseOnHover,true} })]} )]
 [(#SET{captionOpacity,[(#ENV{captionOpacity, #CONFIG{nivoslider/captionOpacity,0.8} })]} )]
-[(#SET{imageAlign,[(#ENV{imageAlign, #CONFIG{nivoslider/imageAlign,'center center'} })]} )]
+[(#SET{imageAlign,[(#ENV{imageAlign, #CONFIG{nivoslider/imageAlign,'center'} })]} )]
 [(#SET{imageBackcolor,[(#ENV{imageBackcolor, #CONFIG{nivoslider/imageBackcolor,'transparent'} })]} )]
 [(#SET{controlNavThumbs,[(#ENV{controlNavThumbs, #CONFIG{nivoslider/controlNavThumbs,false} })]} )]
 [(#SET{controlNavThumbsWidth,[(#ENV{controlNavThumbsWidth, #CONFIG{nivoslider/controlNavThumbsWidth,50} })]} )]
@@ -24,9 +26,9 @@
 [(#SET{id_rand,	#VAL{1}|rand{1000}})]
 
 <B_doc>
-<div id='slider'style="[width:(#GET{width})px;][height:(#GET{height})px]">
+<div id='slider' style="[width:(#GET{width})px;][height:(#GET{height})px]">
 	<div id="slider_#GET{id_rand}" class="nivoSlider">
-	<BOUCLE_doc(DOCUMENTS){extension IN png,jpg,gif}{id_document==^((#ENV{id}|replace{',',|}|sinon{.*}))$}{par num titre, date}{doublons}>
+	<BOUCLE_doc(DOCUMENTS){mode=document}{id_rubrique=#GET{id_rubrique}}{extension IN png,jpg,gif}{par num titre}>
 		[(#DESCRIPTIF|?{'',' '})
 			[(#FICHIER|image_passe_partout{#GET{width},#GET{height}}|image_recadre{#GET{width},#GET{height},#GET{imageAlign},#GET{imageBackcolor}}|inserer_attribut{title,[(#TITRE|supprimer_numero)]}|inserer_attribut{rel,#FICHIER|image_reduire{#GET{controlNavThumbsWidth},#GET{controlNavThumbsHeight}}|extraire_attribut{src}})]
 		]
@@ -50,8 +52,8 @@
 	</div>
 </div>
 <br style="clear:both"/>
-	<script type="text/javascript">/*<![CDATA[*/
-		jQuery(function() {
+<script type="text/javascript">/*<![CDATA[*/
+	jQuery(function() {
 		$('#slider_#GET{id_rand}').nivoSlider({
 			[effect:'(#GET{effect})',]
 			[slices:(#GET{slices}),]
