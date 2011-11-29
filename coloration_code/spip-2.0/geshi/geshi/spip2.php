@@ -229,7 +229,7 @@ $language_data = array (
 
 		// critere de boucle ou de filtre
 		40 => array(
-			GESHI_SEARCH => '(\{(\s*(?:([^{}]+)|(?R))*)\s*\})',
+			GESHI_SEARCH => '(\{(\s*(?:([^{}]+)|(?R))*)\s*\}?)',
 			GESHI_REPLACE => '\\1',
 			GESHI_MODIFIERS => 'i',
 			GESHI_BEFORE => '',
