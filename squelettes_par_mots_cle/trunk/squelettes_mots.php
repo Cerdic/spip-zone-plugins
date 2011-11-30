@@ -18,13 +18,13 @@
 
 
 //TODO: essayer de se passer de cette insertion unilaterale de css ...
-function SquelettesMots_header_prive($texte) {
+function squelettesmots_header_prive($texte) {
   $texte.= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_SQUELETTESMOTS.'chercher_squelettes_mots.css" />' . "\n";
   return $texte;
 }
 
 // Selection du squelette par mot cle
-function SquelettesMots_styliser($flux) {
+function squelettesmots_styliser($flux) {
 	// quand le selecteur doit il s'activer ?
 	// pas de fond=rep/nom (inclusions)
 	if ($fond = $flux['args']['fond']
