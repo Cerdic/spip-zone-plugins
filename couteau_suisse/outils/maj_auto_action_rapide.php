@@ -133,12 +133,13 @@ function maj_auto_action_rapide() {
 		${$actif?'html_actifs':($extension?'html_extensions':'html_inactifs')}[] = "|$bouton|$nom|$rev|";
 	}
 	
+	$sep = " class='cs_hidden'> (...)</span>}}|<|<|\n";
 	$html1 = "\n<div $style id='maj_auto_div'>$html1<fieldset><legend $style>"
 		. _T('couteau:maj_liste').'</legend>'
 		. propre(
-			(count($html_actifs)? "\n|{{" . _T('couteau:plug_actifs') . "}}|<|<|\n" . join("\n",$html_actifs) . "\n" : '')
-			. (count($html_extensions)? "\n|{{" . _T('plugins_liste_extensions') . "}}|<|<|\n" . join("\n",$html_extensions) . "\n" : '')
-			. (count($html_inactifs)? "\n|{{" . _T('couteau:plug_inactifs') . "}}|<|<|\n" . join("\n",$html_inactifs) . "\n" : '')
+			(count($html_actifs)? "\n|{{" . _T('couteau:plug_actifs') . "<span id='maj_1'" . $sep . join("\n",$html_actifs) . "\n" : '')
+			. (count($html_extensions)? "\n|{{" . _T('plugins_liste_extensions') . "<span id='maj_2'". $sep . join("\n",$html_extensions) . "\n" : '')
+			. (count($html_inactifs)? "\n|{{" . _T('couteau:plug_inactifs') . "<span id='maj_3'". $sep . join("\n",$html_inactifs) . "\n" : '')
 		  )
 		. "<div style='text-align: right;'><input class='fondo' type='submit' value=\""
 		. attribut_html(_T('couteau:maj_maj'))
@@ -152,12 +153,31 @@ jQuery(document).ready(function() {
 		jQuery('#maj_auto_div :submit').parent().remove();
 		jQuery('#maj_auto_div :radio').attr('disabled','disabled');
 	}
-	if(!jQuery('#maj_auto_div :radio:checked').length)
+	if(!jQuery('#maj_auto_div :radio:checked').length && jQuery('#maj_auto_div :radio').length)
 		jQuery('#maj_auto_div :radio:first')[0].checked = true;
 	re.click(function() {
 		cs_href_click(jQuery('#maj_auto')[0], true);
 		return false;
 	});
+	jQuery('#maj_auto_div thead').click( function() {
+		jQuery(this).next().toggleClass('cs_hidden');
+		span = jQuery('span', this);
+		cs_EcrireCookie(span[0].id, '+'+span[0].className, dixans);
+		span.toggleClass('cs_hidden');
+		// annulation du clic
+		return false;
+	}).each(maj_lire_cookie);
+
+function maj_lire_cookie(i,e){
+	jQuery(this).attr('style', 'cursor:pointer;')
+	var span = jQuery('span', this);
+	var c = cs_LireCookie(span[0].id);
+	if(c!==null && c.match('cs_hidden')) {
+		jQuery(this).next().addClass('cs_hidden');
+		span.removeClass('cs_hidden');
+	}
+}
+
 });");
 	$html2 = "\n<div class='cs_sobre'><input class='cs_sobre' type='submit' value=\"["
 		. attribut_html(_T('couteau:maj_actu'))	. ']" /></div>';
