@@ -37,6 +37,7 @@ function svp_ajouter_depot($url, &$erreur='') {
 					'url_serveur' => $infos['depot']['url_serveur'],
 					'url_brouteur' => $infos['depot']['url_brouteur'],
 					'url_archives' => $infos['depot']['url_archives'],
+					'url_commits' => $infos['depot']['url_commits'],
 					'xml_paquets'=> $url,
 					'sha_paquets'=> sha1_file($fichier_xml),
 					'nbr_paquets' => 0,
@@ -204,6 +205,7 @@ function svp_actualiser_depot($id){
 			$champs = array('url_serveur' => $infos['depot']['url_serveur'],
 							'url_brouteur' => $infos['depot']['url_brouteur'],
 							'url_archives' => $infos['depot']['url_archives'],
+							'url_commits' => $infos['depot']['url_commits'],
 							'nbr_paquets'=> $nb_paquets,
 							'nbr_plugins'=> $nb_plugins,
 							'nbr_autres'=> $nb_autres,
@@ -248,7 +250,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 		return false;
 		
 	// On initialise l'url de base des logos du depot et son type afin de calculer l'url complete de chaque logo
-	$select = array('url_brouteur', 'url_archives', 'type');
+	$select = array('url_archives', 'type');
 	$depot = sql_fetsel($select, 'spip_depots', 'id_depot=' . sql_quote($id_depot));
 	
 	// Initialisation du tableau des id de paquets crees ou mis a jour pour le depot concerne
