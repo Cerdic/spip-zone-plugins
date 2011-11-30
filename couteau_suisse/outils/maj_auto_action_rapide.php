@@ -268,6 +268,7 @@ function version_svn_courante2($dir) {
 		} else $b = basename($dir);
 	} else $b = '';
 	// version 1.7 de Subversion
+	if(!class_exists('PDO')) return false;
 	try {
 		$db = new PDO('sqlite:' . $dir2);
 	//	foreach ($db->query('SELECT * FROM SQLite_master WHERE type=\'table\';') as $row) print_r($row);
