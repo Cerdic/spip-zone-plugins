@@ -17,12 +17,6 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-//TODO: essayer de se passer de cette insertion unilaterale de css ...
-function squelettesmots_header_prive($texte) {
-  $texte.= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_SQUELETTESMOTS.'chercher_squelettes_mots.css" />' . "\n";
-  return $texte;
-}
-
 // Selection du squelette par mot cle
 function squelettesmots_styliser($flux) {
 	// quand le selecteur doit il s'activer ?

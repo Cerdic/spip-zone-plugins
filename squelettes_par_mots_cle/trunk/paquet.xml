@@ -2,9 +2,9 @@
 	prefix="squelettesmots"
 	categorie="outil"
 	version="3.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0-dev;3.0.99]"
-	logo="spip_death.png"
+	logo="squelettesmots-32.png"
 	documentation="http://www.spip-contrib.net/SPMC-Squelette-par-mot-cle-V2-0"
 >	
 
@@ -14,8 +14,7 @@
 	<auteur>Pierre Andrews (Mortimer)</auteur>
 	<credit>d'après un code proposé par Déesse A.</credit>
 
-	<pipeline nom="header_prive" inclure="squelettesmots.php" />
 	<pipeline nom="styliser" inclure="squelettesmots.php" />
 
-	<onglet nom="config_chercher_squelettes_mots" titre="squelettesmots:titre_onglet" parent="configuration" icone="spip_death.png" />
+	<menu nom="configurer_squelettesmots" titre="squelettesmots:titre_onglet" parent="menu_squelette" icone="squelettesmots-16.png" />
 </paquet>
