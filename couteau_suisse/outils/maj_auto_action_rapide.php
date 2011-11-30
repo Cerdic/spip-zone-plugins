@@ -292,14 +292,12 @@ function version_svn_courante2($dir) {
 	try {
 		$db = new PDO('sqlite:' . $dir2);
 	//	foreach ($db->query('SELECT * FROM SQLite_master WHERE type=\'table\';') as $row) print_r($row);
-		foreach ($db->query('SELECT root FROM REPOSITORY;') as $row) {
-			$url = $row[0];	break;
-		}
-		foreach ($db->query("SELECT repos_path FROM NODES WHERE local_relpath='$b';") as $row) {
-			$url .= '/' . $row[0]; break;
-		}
-		foreach ($db->query("SELECT MAX(changed_revision) FROM NODES WHERE local_relpath LIKE '$b%';") as $row) {
-			return array($row[0], $url);
+		if($res = $db->query('SELECT root FROM REPOSITORY;')) {
+			foreach($res as $row) { $url = $row[0]; break; }
+			if($res = $db->query("SELECT repos_path FROM NODES WHERE local_relpath='$b';"))
+				foreach($res as $row) { $url .= '/' . $row[0]; break; }
+			if($res = $db->query("SELECT MAX(changed_revision) FROM NODES WHERE local_relpath LIKE '$b%';"))
+				foreach ($res as $row) return array($row[0], $url);
 		}
 	} catch(PDOException $e) {
 		return false;
