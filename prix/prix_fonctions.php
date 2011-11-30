@@ -51,20 +51,24 @@ function balise_PRIX_dist($p) {
  */
 function prix_formater($prix){
 
-    // Pouvoir débrayer la devise de référence
-    if (! defined('PRIX_DEVISE')) {
-        define('PRIX_DEVISE','fr_FR.utf8');
-    }
-
-    setlocale(LC_MONETARY, PRIX_DEVISE); 
-
-    $prix = money_format('%i', $prix); 
-
-    // Afficher la devise € si celle ci n'est pas remontée par la fonction money
-    if (strlen(money_format('%#1.0n', 0)) < 2)
-        $prix .= '&nbsp;&euro;'; 
-
-    return $prix;
+	// Pouvoir débrayer la devise de référence
+	if (! defined('PRIX_DEVISE')) {
+	  define('PRIX_DEVISE','fr_FR.utf8');
+	}
+	
+	setlocale(LC_MONETARY, PRIX_DEVISE); 
+	
+	if(function_exists(money_format)) {
+		$prix = money_format('%i', $prix); 
+		// Afficher la devise € si celle ci n'est pas remontée par la fonction money
+		if (strlen(money_format('%#1.0n', 0)) < 2)
+		  $prix .= '&nbsp;&euro;'; 
+	} else {
+		 $prix .= '&nbsp;&euro;'; 
+	}
+	
+	
+	return $prix;
 }
 
 ?>

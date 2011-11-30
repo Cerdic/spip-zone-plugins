@@ -2,7 +2,7 @@
 	<nom>API Prix</nom>
 	<auteur>[Les D&#233;veloppements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.1.3</version>
+	<version>0.1.4</version>
 	<etat>dev</etat>
 	<slogan>API pour connaitre le prix d'un objet.</slogan>
 	<description>Interface de programmation pour connaitre le prix d'un objet SPIP. Ce plugin est un outil pour d&#233;veloppeur.</description>
