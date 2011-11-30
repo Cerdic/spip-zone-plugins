@@ -199,7 +199,7 @@ function plugin_get_infos_maj($p, $timeout=false, $DIR_PLUGINS=_DIR_PLUGINS) {
 		$get_infos = charger_fonction('get_infos','plugins');
 		$infos = $get_infos($p, false, $DIR_PLUGINS);
 	} else $infos = plugin_get_infos($p);
-	// fichier svn.revision
+	// fichier svn.revision fourni par SPIP
 	$ok = lire_fichier($svn_rev = $DIR_PLUGINS.$p.'/svn.revision', $svn);
 	$lastmodified = @file_exists($svn_rev)?@filemtime($svn_rev):0;
 	if($ok && preg_match(',<origine>(.+)</origine>,', $svn, $regs)) {
@@ -209,15 +209,18 @@ function plugin_get_infos_maj($p, $timeout=false, $DIR_PLUGINS=_DIR_PLUGINS) {
 	} else $url_origine = '';
 	$infos['commit'] = ($ok && preg_match(',<commit>(.+)</commit>,', $svn, $regs))?$regs[1]:'';
 	$rev_local = (strlen($svn) && preg_match(',<revision>(.+)</revision>,', $svn, $regs))
-		?intval($regs[1]):version_svn_courante($DIR_PLUGINS.$p);
-	if($infos['svn'] = $rev_local<0) { 
-		// fichier SVN
-		if (lire_fichier($DIR_PLUGINS.$p.'/.svn/entries', $svn) 
-				&& preg_match(',(?:'.preg_quote(_MAJ_SVN_TRAC).'|'.preg_quote(_MAJ_SVN_DEBUT).')[^\n\r]+,ms', $svn, $regs)) {
-			$url_origine = str_replace(array(_MAJ_SVN_TRAC,_MAJ_SVN_DEBUT), _MAJ_LOG_DEBUT, $regs[0]);
-			// prise en compte du recent demenagement de la Zone...
-			$url_origine = preg_replace(',/_plugins_/_(?:stable|dev|test)_/,','/_plugins_/', $url_origine);
-		}
+		?intval($regs[1]):version_svn_courante2($DIR_PLUGINS.$p);
+	if($infos['svn'] = is_array($rev_local) || $rev_local<0) { 
+		// systeme SVN en place
+		if (is_array($rev_local)) // version SVN >= 1.7 ?
+			list($rev_local, $url_origine) = $rev_local;	
+		// version SVN anterieure
+		elseif (lire_fichier($DIR_PLUGINS.$p.'/.svn/entries', $svn) 
+				&& preg_match(',(?:'.preg_quote(_MAJ_SVN_TRAC).'|'.preg_quote(_MAJ_SVN_DEBUT).')[^\n\r]+,ms', $svn, $regs))
+			$url_origine = $regs[0];
+		$url_origine = str_replace(array(_MAJ_SVN_TRAC,_MAJ_SVN_DEBUT), _MAJ_LOG_DEBUT, $url_origine);
+		// prise en compte du recent demenagement de la Zone...
+		$url_origine = preg_replace(',/_plugins_/_(?:stable|dev|test)_/,','/_plugins_/', $url_origine);
 		//$infos['zip_trac'] = 'SVN';
 	}
 	$infos['url_origine'] = strlen($url_origine)?$url_origine._MAJ_LOG_FIN:'';
@@ -249,6 +252,38 @@ function maj_auto_maj_auto_forcer_action() {
 	// forcer la lecture des revisions distantes de plugins
 	ecrire_meta('tweaks_maj_auto', serialize(array()));
 	ecrire_metas();
+}
+
+function version_svn_courante2($dir) {
+	// recherche de la base de donnee
+	if(!$db = @file_exists($dir2 = realpath($dir . '/.svn/wc.db'))) {
+		// version <1.7 de Subversion (reconnue par SPIP)
+		if(@file_exists($dir.'/.svn/entries')) return version_svn_courante($dir);
+		// trunk et extensions
+		$db = @file_exists($dir2 = realpath($dir . '/../.svn/wc.db'));
+		if(!$db) {
+			// branches
+			$db = @file_exists($dir2 = realpath($dir . '/../../.svn/wc.db'));
+			if($db) $b = basename(dirname($dir)).'/'.basename($dir);
+		} else $b = basename($dir);
+	} else $b = '';
+	// version 1.7 de Subversion
+	try {
+		$db = new PDO('sqlite:' . $dir2);
+	//	foreach ($db->query('SELECT * FROM SQLite_master WHERE type=\'table\';') as $row) print_r($row);
+		foreach ($db->query('SELECT root FROM REPOSITORY;') as $row) {
+			$url = $row[0];	break;
+		}
+		foreach ($db->query("SELECT repos_path FROM NODES WHERE local_relpath='$b';") as $row) {
+			$url .= '/' . $row[0]; break;
+		}
+		foreach ($db->query("SELECT MAX(changed_revision) FROM NODES WHERE local_relpath LIKE '$b%';") as $row) {
+			return array($row[0], $url);
+		}
+	} catch(PDOException $e) {
+		return false;
+	}
+	return false;
 }
 
 ?>
