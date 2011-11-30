@@ -42,19 +42,17 @@ function spipicious_upgrade($nom_meta_base_version,$version_cible){
 			}
 			$config_spipicious = array('people' => array('0minirezo'),'groupe_mot' => $id_groupe);
 			ecrire_meta('spipicious',serialize($config_spipicious),'oui');
-			echo _T('spipicious:message_installation_activation');
+			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 		}
 		if(version_compare($current_version,'0.2','<')){
 			sql_alter("TABLE `spip_spipicious` ADD PRIMARY KEY (`id_mot`) ");
 			sql_alter("TABLE `spip_spipicious` ADD KEY (`id_auteur`) ");
 			sql_alter("TABLE `spip_spipicious` ADD maj timestamp AFTER position ");
-			echo _T('spipicious:message_upgrade_database',array('version'=>0.2));
 			ecrire_meta($nom_meta_base_version,$current_version=0.2,'non');
 		}
 		if(version_compare($current_version,'0.3','<')){
 			sql_alter("TABLE `spip_spipicious` ADD id_rubrique bigint(21) NOT NULL AFTER`id_article` ");
 			sql_alter("TABLE `spip_spipicious` ADD id_document bigint(21) NOT NULL AFTER`id_rubrique` ");
-			echo _T('spipicious:message_upgrade_database',array('version'=>0.3));
 			ecrire_meta($nom_meta_base_version,$current_version=0.3,'non');
 		}
 		if(version_compare($current_version,'0.4','<')){
@@ -70,13 +68,11 @@ function spipicious_upgrade($nom_meta_base_version,$version_cible){
 				creer_base();
 				echo "Creation de la table spip_mots_documents<br/>";
 			}
-			echo _T('spipicious:message_upgrade_database',array('version'=>0.4));
 			ecrire_meta($nom_meta_base_version,$current_version=0.4,'non');
 		}
 		if(version_compare($current_version,'0.5','<')){
 			sql_alter("TABLE `spip_spipicious` ADD id_syndic bigint(21) NOT NULL AFTER`id_document` ");
 			sql_alter("TABLE `spip_spipicious` ADD id_evenement bigint(21) NOT NULL AFTER`id_syndic` ");
-			echo _T('spipicious:message_upgrade_database',array('version'=>0.5));
 			ecrire_meta($nom_meta_base_version,$current_version=0.5,'non');
 		}
 		if(version_compare($current_version,'0.6','<')){
@@ -90,7 +86,6 @@ function spipicious_upgrade($nom_meta_base_version,$version_cible){
 			sql_alter("TABLE `spip_spipicious` DROP COLUMN `id_rubrique`");
 			sql_alter("TABLE `spip_spipicious` DROP COLUMN `id_syndic`");
 			sql_alter("TABLE `spip_spipicious` DROP COLUMN `id_evenement`");
-			echo _T('spipicious:message_upgrade_database',array('version'=>0.6));
 			ecrire_meta($nom_meta_base_version,$current_version=0.6,'non');
 		}
 		if(version_compare($current_version,'0.6.1','<')){
