@@ -4,7 +4,7 @@
 	version="3.0.0"
 	etat="test"
 	compatibilite="[3.0.0-dev;3.0.99]"
-	logo="squelettesmots-32.png"
+	logo="prive/themes/spip/images/squelettesmots-32.png"
 	documentation="http://www.spip-contrib.net/SPMC-Squelette-par-mot-cle-V2-0"
 >	
 
@@ -16,5 +16,5 @@
 
 	<pipeline nom="styliser" inclure="squelettesmots.php" />
 
-	<menu nom="configurer_squelettesmots" titre="squelettesmots:titre_onglet" parent="menu_squelette" icone="squelettesmots-16.png" />
+	<menu nom="configurer_squelettesmots" titre="squelettesmots:titre_onglet" parent="menu_squelette" icone="images/squelettesmots-16.png" />
 </paquet>

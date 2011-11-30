@@ -21,8 +21,9 @@
 function squelettesmots_styliser($flux) {
 	// quand le selecteur doit il s'activer ?
 	// pas de fond=rep/nom (inclusions)
-	if ($fond = $flux['args']['fond']
-	and false === strpos($fond, '/')) {
+	if (!test_espace_prive()
+		AND $fond = $flux['args']['fond']
+	  AND strpos($fond, '/')===false) {
 		// on cherche si le squelette a deja trouve un fond particulier specifique
 		// c'est a dire different de $fond.html.
 		// Si c'est le cas, on ne cherche pas de squelette specifique par mot.
