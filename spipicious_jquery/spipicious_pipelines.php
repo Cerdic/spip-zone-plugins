@@ -93,6 +93,7 @@ function spipicious_insert_head($flux){
 							return false;
 						},
 						delay: 200,
+						html: true,
 						select: function( event, ui ) {
 							var terms = split_multiple( this.value );
 							// remove the current input
