@@ -47,7 +47,7 @@ function SelecteurGenerique_inserer_auteur() {
 					});
 				},
 				delay: 300,
-				html:true,
+				html: true,
 				select: function( event, ui ) {
 					if (ui.item.result > 0) {
 						me.attr('name', 'old_value')
@@ -133,6 +133,7 @@ function SelecteurGenerique_inserer_mot() {
 							}
 						});
 					},
+					html: true,
 					select:function( event, ui ) {
 						if (ui.item.result > 0) {
 							$(inp)
@@ -196,6 +197,7 @@ function SelecteurGenerique_inserer_rubrique() {
 						});
 					},
 					delay: 300,
+					html: true,
 					select:function( event, ui ) {
 						if (ui.item.result > 0) {
 							jQuery(inp)
