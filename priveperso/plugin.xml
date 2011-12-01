@@ -3,8 +3,8 @@
 	<slogan>A chaque rubrique son style</slogan>
 	<auteur>S&#233;bastien Zamith</auteur>
 	<icon>images/priveperso-24.png</icon>
-	<version>0.5.0</version>
-	<version_base>0.3</version_base>
+	<version>0.6.0</version>
+	<version_base>0.4</version_base>
 	<licence>GNU/GPL</licence>
 	<etat>stable</etat>
 	<description>

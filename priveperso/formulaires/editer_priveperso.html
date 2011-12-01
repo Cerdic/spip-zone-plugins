@@ -131,10 +131,20 @@
 
 [
 <fieldset><legend><h3><:priveperso:personnaliser_texte:></h3> </legend></fieldset>
+<:priveperso:info_multilangue:>
+
 
 [
 <fieldset><legend><h4><:priveperso:info_contenu_articles:></h4></legend>
-
+   <label><:texte_date_publication_article:></label>
+	<input type="text" class="text" name="texte_date_publication_article" value="#ENV{texte_date_publication_article}" size="40" />
+   <br>
+	<label><:texte_date_creation_article:></label>
+	<input type="text" class="text" name="texte_date_creation_article" value="#ENV{texte_date_creation_article}" size="40" />
+   <br>
+   [<label><:texte_date_publication_anterieure:></label>
+	<input type="text" class="text" name="texte_date_publication_anterieure" value="#ENV{texte_date_publication_anterieure}" size="40" />
+	<br>(#ENV{articles_redac}|=={oui}|oui)]
 	<label><:icone_modifier_article:></label>
 	<input type="text" class="text" name="icone_modifier_article" value="#ENV{icone_modifier_article}" size="40" />
    <br>
@@ -147,9 +157,6 @@
 	<label><:info_nouvel_article:></label>
    <input type="text" class="text" name="info_nouvel_article" value="#ENV{info_nouvel_article}" size="40" />
    <br>
-   [<label><:texte_date_publication_anterieure:></label>
-	<input type="text" class="text" name="texte_date_publication_anterieure" value="#ENV{texte_date_publication_anterieure}" size="40" />
-	<br>(#ENV{articles_redac}|=={oui}|oui)]
    [<label><:texte_sur_titre:></label>
 	<input type="text" class="text" name="texte_sur_titre" value="#ENV{texte_sur_titre}" size="40" />
    <br>(#ENV{articles_surtitre}|=={oui}|oui)]

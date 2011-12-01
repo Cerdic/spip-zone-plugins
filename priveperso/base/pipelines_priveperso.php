@@ -42,7 +42,10 @@ function priveperso_init_tables_principales($tables_principales){
 					"entree_texte_breve" => "TEXT DEFAULT '' NOT NULL",
 					"entree_liens_sites_breves" => "TEXT DEFAULT '' NOT NULL",
 					"info_titre_url_breves" => "TEXT DEFAULT '' NOT NULL",
-					"info_url_breves" => "TEXT DEFAULT '' NOT NULL"
+					"info_url_breves" => "TEXT DEFAULT '' NOT NULL",
+					// Dates
+					"texte_date_publication_article" => "TEXT DEFAULT '' NOT NULL",
+					"texte_date_creation_article" => "TEXT DEFAULT '' NOT NULL"
 	
         );
 
@@ -71,6 +74,7 @@ function priveperso_init_tables_principales($tables_principales){
 					"activer_perso" => "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'",
 					"autoriser_sous_rubriques" => "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'",
 					"articles_mots" => "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'"
+		
 					
         );
 

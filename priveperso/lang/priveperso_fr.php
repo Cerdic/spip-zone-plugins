@@ -31,8 +31,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_contenu_articles' => 'Contenu des articles',
 	'info_contenu_rubriques' => 'Contenu des rubriques',
 	'info_contenu_breves' => 'Contenu des br&egrave;ves',
+	'info_dates' => 'Texte de pr&eacute;sentation des dates',
 	'info_modifier_priveperso' => 'Personnaliser une rubrique',
 	'info_modif_priveperso' => 'Modification de la personnalisation de la rubrique @rubrique@ :',
+	'info_multilangue' => 'Vous pouvez utiliser les balises &lt;multi&gt;&lt;/multi&gt; pour personnaliser les texte des champs de saisie dans plusieurs langues.<br>
+	 Par exemple: &lt;multi&gt;[fr]mon titre[it]mi titulo[en]my title&lt;/multi&gt;.',
 	'info_nouveau_priveperso' => 'Nouvelle personnalisation de rubrique',
 	'info_description_priveperso' => "Cette page permet de personnaliser l'espace priv&eacute; par rubriques. Une fois votre personnalisation de rubrique cr&eacute;&eacute;e, elle apparaitra ici. Voua avez alors la possibilit&eacute; de la modifier, la supprimer ou juste la d&eacute;sactiver temporairement.",
 	'info_description_priveperso_creer' => "Vous pouvez choisir le type d'objets &agrave; afficher, utiliser ou non les articles, les sous-rubriques, les br&egrave;ves, la syndication de site, rubrique par rubrique. Il est aussi possible de modifier les champs de saisie pour les articles, les rubriques et les br&egrave;ves.",		
