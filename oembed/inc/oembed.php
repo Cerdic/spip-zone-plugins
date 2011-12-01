@@ -135,7 +135,7 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 		$cache[$data_url]=unserialize($cache[$data_url]);
 		return $cache[$data_url];
 	}
-
+	var_dump($url);
 	$cache[$data_url] = false;
 	// on recupere le contenu de la page
 	include_spip('inc/distant');
@@ -174,6 +174,8 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
  *   false si non ; details du provider dans un tabeau associatif si oui
  */
 function oembed_verifier_provider($url) {
+	if (strncmp($url,$GLOBALS['meta']['adresse_site'],strlen($GLOBALS['meta']['adresse_site']))==0)
+		return false;
 	$providers = oembed_lister_providers();
 	foreach ($providers as $scheme=>$endpoint) {
 		$regex = '/' . str_replace('\*', '(.+)', preg_quote($scheme, '/')) . '/';
