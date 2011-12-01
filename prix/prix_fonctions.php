@@ -59,6 +59,7 @@ function prix_formater($prix){
 	setlocale(LC_MONETARY, PRIX_DEVISE); 
 	
 	if(function_exists(money_format)) {
+		$prix = floatval($prix);
 		$prix = money_format('%i', $prix); 
 		// Afficher la devise € si celle ci n'est pas remontée par la fonction money
 		if (strlen(money_format('%#1.0n', 0)) < 2)
