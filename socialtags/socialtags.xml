@@ -151,6 +151,12 @@
 </item>
 
 <item>
+<title>Google +1</title>
+<author>googleplus</author>
+<link>https://plusone.google.com/_/+1/confirm?url=%u&amp</link>
+</item>
+
+<item>
 <title>Google bookmarks</title>
 <author>google</author>
 <link>http://www.google.com/bookmarks/mark?op=edit&amp;bkmk=%u&amp;title=%t</link>
