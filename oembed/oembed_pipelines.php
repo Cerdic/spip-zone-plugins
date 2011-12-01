@@ -24,7 +24,7 @@ function oembed_insert_head_css($head){
  * @return string
  */
 function oembed_insert_head($head) {
-	$service = "services/oembed/";
+	$service = "oembed.api/";
 	$head .= '<link rel="alternate" type="application/json+oembed" href="<?php include_spip(\'inc/filtres_mini\');echo parametre_url(url_absolue("'.parametre_url($service,'format','json').'"),"url",url_absolue(self()));?>" />'."\n";
 	$head .= '<link rel="alternate" type="text/xml+oembed" href="<?php echo parametre_url(url_absolue("'.parametre_url($service,'format','xml').'"),"url",url_absolue(self()));?>" />'."\n";
 	return $head;

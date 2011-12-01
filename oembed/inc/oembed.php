@@ -135,7 +135,7 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 		$cache[$data_url]=unserialize($cache[$data_url]);
 		return $cache[$data_url];
 	}
-	var_dump($url);
+
 	$cache[$data_url] = false;
 	// on recupere le contenu de la page
 	include_spip('inc/distant');
