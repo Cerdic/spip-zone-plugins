@@ -54,7 +54,6 @@ function balise_SEO_META_BRUTE($p){
 }
 function calculer_balise_META_BRUTE($_nom){	
 	$retour = generer_meta_brute($_nom);
-	$retour = htmlentities($retour);
 	return $retour;
 }
 
