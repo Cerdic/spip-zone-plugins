@@ -25,7 +25,7 @@ include_spip('inc/crayons-json');
 if (!function_exists('autoriser_meta_modifier_dist')) {
 	function autoriser_meta_modifier_dist($faire, $type, $id, $qui, $opt) {
 		if (in_array("$id", array(
-			'nom_site', 'descriptif_site', 'email_webmaster'
+			'nom_site', 'slogan_site', 'descriptif_site', 'email_webmaster'
 		)))
 			return autoriser('configurer', null, null, $qui);
 		else

@@ -187,9 +187,9 @@ function balise_EDIT($p) {
 	$label = interprete_argument_balise(1,$p);
 
 	// Verification si l'on est dans le cas d'une meta
-	// #EDIT{meta-descriptif_site} #EDIT{nom_site} et #EDIT{email_webmaster}
+	// #EDIT{meta-descriptif_site} #EDIT{slogan_site} #EDIT{nom_site} et #EDIT{email_webmaster}
 	if(preg_match('/meta-(.*)\'/',$label,$meta)){
-		if(in_array($meta[1],array('descriptif_site','nom_site','email_webmaster'))){
+		if(in_array($meta[1],array('descriptif_site','slogan_site','nom_site','email_webmaster'))){
 			$type = 'meta';
 			$label= 'valeur';
 			$primary = $meta[1];
