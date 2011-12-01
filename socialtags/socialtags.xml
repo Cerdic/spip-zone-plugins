@@ -312,6 +312,12 @@
 <description>Digg-like, fr en-us etc...</description>
 </item>
 
+<item>
+<title>Imprimer la page</title>
+<author>printer</author>
+<link>javascript:window.print()</link>
+</item>
+
 <!-- R -->
 <item>
 <title>Reddit</title>
