@@ -1,0 +1,12 @@
+[(#ENV{titre}|oui)
+	#SET{titre, #ENV*{titre}|typo}
+]
+
+[(#ENV{appel_formulaire}|oui)
+	<div class="titre">#GET{titre}</div>
+	<div class="infos"><:menus:info_page_speciale{page=#ENV{nom}}:></div>
+]
+[(#ENV{appel_menu}|oui)
+	<li class="menu-entree item[ (#ENV{css})][(#ENV{env}|table_valeur{type}|=={page}|et{#ENV{env}|table_valeur{composition}|=={#ENV{nom}}}) on]">
+		<a href="#URL_PAGE{#ENV{nom}, #ENV{parametres}}" title="[(#GET{titre}|attribut_html)]">#GET{titre}</a>
+]

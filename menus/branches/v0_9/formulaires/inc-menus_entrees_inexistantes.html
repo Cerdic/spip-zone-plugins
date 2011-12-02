@@ -1,0 +1,11 @@
+[(#SET{titre, <:menus:formulaire_supprimer_entree:>})]
+[(#ENV{titre}|oui)
+	#SET{titre, #ENV*{titre}|typo}
+]
+
+[(#ENV{appel_formulaire}|oui)
+	<div class="erreur_message">
+	<div class="titre">#GET{titre}</div>
+	<div class="infos"><:menus:erreur_type_menu_inexistant:></div>
+	</div>
+]
