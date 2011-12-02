@@ -27,19 +27,22 @@ function openid_editer_contenu_objet($flux){
  * @param array $flux
  */
 function openid_formulaire_charger($flux){
-	if ($flux['args']['form']=='editer_auteur'){
-		$flux['data']['openid'] = ''; // un champ de saisie openid !
-		if ($id_auteur = intval($flux['data']['id_auteur']))
-			$flux['data']['openid'] = sql_getfetsel('openid','spip_auteurs','id_auteur='.intval($id_auteur));
-	}
-	if ($flux['args']['form']=='inscription'){
-		$flux['data']['_forcer_request'] = true; // forcer la prise en compte du post
-		$flux['data']['url_openid'] = ''; // un champ de saisie openid !
-		$flux['data']['openid'] = ''; // une url openid a se passer en hidden
-		if ($erreur = _request('var_erreur'))
-			$flux['data']['message_erreur'] = _request('var_erreur');
-		elseif(_request('openid') AND (!_request('nom_inscription') OR !_request('mail_inscription')))
-			$flux['data']['message_erreur'] = _T('openid:erreur_openid_info_manquantes');
+	// si le charger a renvoye false ou une chaine, ne rien faire
+	if (is_array($flux['data'])){
+		if ($flux['args']['form']=='editer_auteur'){
+			$flux['data']['openid'] = ''; // un champ de saisie openid !
+			if ($id_auteur = intval($flux['data']['id_auteur']))
+				$flux['data']['openid'] = sql_getfetsel('openid','spip_auteurs','id_auteur='.intval($id_auteur));
+		}
+		if ($flux['args']['form']=='inscription'){
+			$flux['data']['_forcer_request'] = true; // forcer la prise en compte du post
+			$flux['data']['url_openid'] = ''; // un champ de saisie openid !
+			$flux['data']['openid'] = ''; // une url openid a se passer en hidden
+			if ($erreur = _request('var_erreur'))
+				$flux['data']['message_erreur'] = _request('var_erreur');
+			elseif(_request('openid') AND (!_request('nom_inscription') OR !_request('mail_inscription')))
+				$flux['data']['message_erreur'] = _T('openid:erreur_openid_info_manquantes');
+		}
 	}
 	return $flux;
 }
