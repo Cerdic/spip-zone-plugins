@@ -3,7 +3,7 @@
     categorie="date"
     version="2.0.0"
     etat="dev"
-    compatibilite="[3.0.0-dev;3.0.*]"
+    compatibilite="[3.0.0-dev;["
     logo="prive/themes/spip/images/evenement-32.png"
     schema="1.2.0"
     documentation="http://www.spip-contrib.net/Simple-Calendrier-v1"
@@ -36,8 +36,9 @@
     
     <!-- Listing des nombres d'objet par mot clef (exec/mot_tous -> inc/grouper_mots) -->
     <pipeline nom="afficher_nombre_objets_associes_a" inclure="simplecal_pipelines.php" />
-    <pipeline nom="accueil_encours" inclure="simplecal_pipelines.php" />
-    <pipeline nom="accueil_informations" inclure="simplecal_pipelines.php" />
+    
+    <pipeline nom="accueil_encours" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
+    <pipeline nom="accueil_informations" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
     <pipeline nom="compter_contributions_auteur" inclure="simplecal_pipelines.php" />
     
     <!-- prise en compte du squelette evenement.html pour les urls de type spip.php?evenement123 -->
@@ -52,8 +53,6 @@
     <pipeline nom="pre_boucle" inclure="public/simplecal_boucles.php" />
     
     
-    <menu nom="simplecal:evenements" titre="simplecal:icone_evenements" parent="menu_edition" icone="images/evenement-24.png" action="evenements" parametres="mode=avenir" />
-	<menu nom="simplecal:evenement_creer" titre="simplecal:icone_nouvel_evenement" parent="outils_rapides" icone="images/evenement-new-16.png" action="evenement_edit" parametres="new=oui" />
-
-
-</paquet> 
+    <menu nom="evenements" titre="simplecal:icone_evenements" parent="menu_edition" icone="images/evenement-24.png" action="evenements" parametres="mode=avenir" />
+	<menu nom="evenement_creer" titre="simplecal:icone_nouvel_evenement" parent="outils_rapides" icone="images/evenement-new-16.png" action="evenement_edit" parametres="new=oui" />
+</paquet>

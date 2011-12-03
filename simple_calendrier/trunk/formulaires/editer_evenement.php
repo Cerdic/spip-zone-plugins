@@ -19,6 +19,9 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_rubr
     $valeurs["date_debut"] = date_sql2affichage($valeurs["date_debut"]);
     $valeurs["date_fin"] = date_sql2affichage($valeurs["date_fin"]);
     
+    // champ ref = assemblage du champ type et id_objet
+    $valeurs["ref"] = $valeurs["type"].$valeurs["id_objet"];    
+    
     return $valeurs;
 }
 
@@ -77,7 +80,28 @@ function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_rub
                 }
             }
         }
-    }    
+    }
+    
+    $config = $config_fonc($row);
+    if ($config['simplecal_refobj'] == 'oui'){
+        // Ref saisie correctement ?
+        $ref = trim(_request('ref'));
+        if ($ref){
+            if (!simplecal_is_ref_ok($ref)){
+                $erreurs['ref'] = _T('simplecal:validation_refobj_format');
+            }
+            else {
+                // L'objet en question existe t-il ?
+                $tab = simplecal_get_tuple_from_ref($ref);
+                $type = $tab['type'];
+                $id_objet = $tab['id_objet'];
+                $existe = sql_fetsel("id_$type" ,"spip_".$type."s", "id_$type=".$id_objet);
+                if (!$existe){
+                    $erreurs['ref'] = _T('simplecal:validation_type_nexiste_pas', array('type'=>$type, 'id_objet'=>$id_objet));
+                } 
+            }
+        }
+    }
     
 	return $erreurs;
 }
@@ -87,6 +111,30 @@ function formulaires_editer_evenement_traiter_dist($id_evenement='new', $id_rubr
     // On remet les dates au format SQL ('14/08/2011' => '14/08/2011 00:00:00')
     set_request("date_debut", date_saisie2sql(_request("date_debut")));
     set_request("date_fin", date_saisie2sql(_request("date_fin")));
+    
+    
+    // On reconstitue les champs 'type' et 'id_objet' à partir du champ 'ref'
+    $config = $config_fonc($row);
+    if ($config['simplecal_refobj'] == 'oui'){
+        $ref = trim(_request('ref'));
+        if ($ref){
+            
+            $tab = simplecal_get_tuple_from_ref($ref);
+            //die("yeah ! ".$tab['type'].$tab['id_objet']);
+            set_request("type", $tab['type']);
+            set_request("id_objet", $tab['id_objet']);
+        } else {
+            set_request("type", "");
+            set_request("id_objet", 0);
+        }
+    } else {
+        // Option desactivé => on ne fait rien !
+        // => Option desactivable sans risque de perdre les infos enregistrées lorsqu'elle était active.
+    }
+    
+    
+    
+    
     
     return formulaires_editer_objet_traiter('evenement',$id_evenement,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
 }

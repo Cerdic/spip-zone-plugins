@@ -160,11 +160,17 @@ function simplecal_affiche_gauche($flux) {
     }
     
     // On se trouve sur un article
-    if ($exec == 'articles') {
+    if ($exec == 'article') {
         if ($GLOBALS['meta']['simplecal_refobj'] == 'oui'){
             $id_article = intval($flux['args']['id_article']);
-            $bloc = simplecal_get_portlet_ajout('article', $id_article);
-            $flux['data'] .= $bloc;
+            $contexte = array(
+                'type' => 'article',
+                'id_objet'=>$id_article
+            );
+            $portlet = recuperer_fond('prive/squelettes/inclure/portlet_article', $contexte);
+            
+            //$bloc = simplecal_get_portlet_ajout('article', $id_article);
+            $flux['data'] .= $portlet;
         }
     }
     
