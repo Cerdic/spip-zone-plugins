@@ -58,9 +58,12 @@ function abomailman_mail($nom, $email, $to_email,$liste_email, $sujet="", $body=
 		$to_email = $liste_email;
 	$envoyer_mail = charger_fonction('envoyer_mail','inc/');
 	if($envoyer_mail($to_email, $sujet, $body, $email, $headers))
-		return true;
+		$retour=true;
 	else
-		return false;
+		$retour=false;
+
+	spip_log("abomailman_mail nom $nom, email $email, to_email $to_email, liste_email $liste_email, sujet $sujet, body $body, html $html, headers $headers, retour envoyer_mail : $retour","abomailmans");
+	return $retour ;
 }
 
 
