@@ -163,9 +163,14 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	$head = $facteur->CreateHeader();
 
 	// Et c'est parti on envoie enfin
-	spip_log("mail via facteur\n$head"."Destinataire: \n$destinataire\n",'mail');
-	spip_log("mail\n$head"."Destinataire: \n$destinataire\n",'facteur');
-	return $facteur->Send();
+	spip_log("mail via facteur\n$head"."Destinataire:".print_r($destinataire,true),'mail');
+	spip_log("mail\n$head"."Destinataire:".print_r($destinataire,true),'facteur');
+	$retour = $facteur->Send();
+	
+	if (!$retour)
+		spip_log("Erreur Envoi mail via Facteur : ".print_r($facteur->ErrorInfo,true),'facteur');
+
+	return $retour ;
 }
 
 ?>
