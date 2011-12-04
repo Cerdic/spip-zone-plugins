@@ -1,6 +1,6 @@
 <?php
 
-include_spip("inc/charsets") ;
+include_spip("inc/charsets");
 function spip_thelia_supprimer_balises_thelia($texte) {
 	//suppression des boucles th�lia
 	$texte = str_replace("THELIA_", "DUMMY_", $texte);
@@ -62,6 +62,8 @@ function spip_thelia_insert_head($flux) {
 
 function spip_thelia_appeler_moteur_thelia($texte) {
 	
+	include_spip("inc/utils");
+	
 	//si pas de boucle ou de balise th�lia dans la page on sort	
 	if ((strpos($texte, "THELIA-") === FALSE) && (strpos($texte, "<THELIA") == FALSE))
 		return $texte;
@@ -92,6 +94,7 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 		case 'nouveau' : $securise=1; break;
 		case 'regret' : $pageret=1; break;	
 		case 'virement' : $securise=1; $pageret=1; $reset=1; break;
+		case 'formulerr' : set_request('errform','1'); break;
 	}
 
 	global $page, $res, $id_rubrique;
@@ -209,6 +212,7 @@ function remplacement_sortie_thelia($in_thelia) {
 	$in_thelia = str_replace("produit.php?action", "produit.php?thelia_action", $in_thelia);
 	$in_thelia = str_replace("regret.php?action", "regret.php?thelia_action", $in_thelia);
 	$in_thelia = str_replace("virement.php?action", "virement.php?thelia_action", $in_thelia);
+	$in_thelia = str_replace("?fond=", "?page=", $in_thelia);
 
 	return $in_thelia;
 }
