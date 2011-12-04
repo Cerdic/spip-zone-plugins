@@ -3,7 +3,7 @@
 <prefix>herbier</prefix>
 <icon>icon/herbier.png</icon>
 
-<version>1.6.0</version>
+<version>1.6.1</version>
 <etat>stable</etat>
 <categorie>divers</categorie>
 
@@ -15,7 +15,7 @@
 
 <install>herbier_install.php</install>
 <pipeline>
-	<nom>insert_head</nom> 
+	<nom>insert_head_css</nom> 
 	<inclure>herbier_pipelines.php</inclure>
 </pipeline>
 <pipeline>
