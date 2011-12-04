@@ -7,9 +7,9 @@
 -------------------------------------------------------------- */
 
 #herbier { width: 205px; text-align: center; }
+#herbier img { display: block; margin: 0; padding: 5px; background-image: url(img/bg/stripe.png); }
 
 /* Style precedent :
-
 #herbier {
 	width: 185px;
 	background: #333;
