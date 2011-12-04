@@ -23,19 +23,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	Vous pouvez utiliser la nouvelle balise #APROPOS dans vos squelettes. Cette balise a 4 param&egrave;tres : <br />
 
-	
-
 	- soit vous &eacute;crivez :  <code>#APROPOS{liste}</code> pour retourner la liste des plugins, <br />
 
-	
-
 	- soit vous &eacute;crivez :  <code>#APROPOS{nombre}</code> pour n\'afficher que le nombre de plugins ET d\'extensions actifs.<br />
-
-	
 
 	- soit vous &eacute;crivez :  <code>#APROPOS{plugins}</code> pour n\'afficher que le nombre de plugins actifs.<br />
 
 	- soit vous &eacute;crivez :  <code>#APROPOS{extensions}</code> pour n\'afficher que le nombre d\'extensions actives.<br />
+
+	- soit vous écrivez :  <code>#APROPOS{adisposition}</code> pour afficher le nombre de plugins dans le dossier plugins.<br />
+
+	- soit vous écrivez :  <code>#APROPOS{disponible}</code> pour afficher le nombre total d\'extensions et de plugins de votre configuration.<br />
 
 	Pour personnaliser ce qui est affich&eacute; avant et apr&egrave;s la liste des plugins actifs, modifiez le fichier modeles/apropos_liste.html que vous aurez pr&eacute;alablement copi&eacute; dans le dossier squelettes/modeles.
 
@@ -49,6 +47,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	Pour n\'afficher que le nombre d\'extensions actives, utilisez <code><apropos|extensions></code><br />
 	
+	Pour n\'afficher que le nombre de plugins dans le dossier plugins, utilisez <code><apropos|adisposition></code>.
+	Pour n\'afficher que le nombre total d\'extensions et de plugins de votre configuration, utilisez <code><apropos|disponible></code>.
+
 	Si vous souhaitez afficher la description compl&egrave;te d\'un plugin sp&eacute;cifique, &eacute;crivez <code><apropos|prefixe=le prefixe du plugin></code>. Ainsi, par exemple, pour afficher dans un article la description compl&egrave;te de ce plugin, utilisez <code><apropos|prefixe=apropos></code>.',
 	'apropos_slogan' => 'Liste les plugins actifs et affiche une description sommaire de ceux-ci',
 );

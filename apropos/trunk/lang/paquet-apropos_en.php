@@ -29,6 +29,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	- if you wrote: <code>#APROPOS{extensions}</code>, you get the number of the actives extensions.
 
+	- if you wrote: <code>#APROPOS{adisposition}</code>, you get the number of plugins in the folder plugins.
+
+	- if you wrote: <code>#APROPOS{disponible}</code>, you get the total number of extensions and plugins of your configuration.
+
 	
 
 	To personalize the informations which are displayed before and after the list, modify the file modeles/apropos_liste.html after copying it into your folder squelettes/modeles. 
@@ -41,6 +45,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     To display the number of actives extensions, write <code><apropos|extensions></code>.<br />
 	
+	To display the number of plugins in the folder plugins, write <code><apropos|adisposition></code>.
+
+	To display the total number of extensions and plugins of your configuration, write <code><apropos|disponible></code>.
+
 	If you want to display the full description of a specific plugin, use this: <code><apropos|prefixe=the prefixe of the plugin></code>. For example, to display the description of this plugin, write: <code><apropos|prefixe=apropos></code>.
 
 ',
