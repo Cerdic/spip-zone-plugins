@@ -4,7 +4,7 @@
  * Liste les plugins actifs avec affichage icon, nom, version, etat, short description
  * Utilisation intensive des fonctions faisant cela dans le code de SPIP
  * Auteur Jean-Philippe Guihard
- * version 0.3.1 du 17 novembre 2011, 13h40
+ * version 0.3.4 du 04 décembre 2011, 13h40
  * ajout de la possibilite de n'afficher que le nombre de plugin et extension  
  * code emprunte dans le code source de SPIP
  */
@@ -45,16 +45,19 @@ function calcul_info_apropos($params){
 $liste_prefix_plugin_actifs = liste_chemin_plugin_actifs();
 // $liste_prefix_extensions_actives est la liste des prefixes des extensions actives
 $liste_prefix_extensions_actives = liste_plugin_files(_DIR_EXTENSIONS);
+// liste la totalité des plugins di dosier plugin
+$liste_tous_les_plugins = liste_plugin_files(_ROOT_PLUGINS);
+//return "<b>".$params."</b>";
 
 switch ($params) { 
 	// si parametre liste, alors afficher la liste de tout ce qui est actif avec un résumé pour chaque
 	case "liste": 
 	/* on s'occupe de la liste les plugins */
 	$liste_plugins_actifs = apropos_affiche_les_pluginsActifs($liste_prefix_plugin_actifs,$afficheQuoi="resume");
-	//$liste_plugins_actifs = apropos_affiche_la_partie_generale($liste_prefix_plugin_actifs,$afficheQuoi="resume");
+
 	/* on s'occupe de la liste des extensions */
 	$liste_extensions_actives = apropos_affiche_les_extension(_DIR_EXTENSIONS,$afficheQuoi="resume");
-	//$liste_extensions_actives = apropos_affiche_la_partie_generale($quoiAfficher="extensions",$afficheQuoi="resume");
+
 	return $liste_plugins_actifs.$liste_extensions_actives;
 	break;
 	
@@ -69,16 +72,29 @@ switch ($params) {
 	$nbre_pluginsActifs = count($liste_prefix_plugin_actifs);
 	return $nbre_pluginsActifs;
 	break;
-	/* si parametre extensions, afficher le nombre d'extensions actives */
+	/* si paramètre extensions, afficher le nombre d'extensions actives */
 	case "extensions":
 	$nbre_ext = count($liste_prefix_extensions_actives);
 	return $nbre_ext;
 	break;
-	/* si parametre defaut, on récupère le prefixe du plugin pour afficher la description complète de celui-ci */
+	/* si paramètre adisposition, afficher le nombre de plugins du dossier plugins */
+	case "adisposition":
+	$nbre_tous = count($liste_tous_les_plugins);
+	return $nbre_tous;
+	break;
+	/* additionne tout ce qui est disponible e, plugins et extensions */ 
+	case "disponible":
+	$nbre_ext = count($liste_prefix_extensions_actives);
+	$nbre_tous = count($liste_tous_les_plugins);
+	return $nbre_tous+$nbre_ext;
+	//return
+	break;
+	/* si paramètre defaut, on récupère le prefixe du plugin pour afficher la description complète de celui-ci */
 	default:
+	//$leResume = count($liste_tous_les_plugins);
 	$leResume = apropos_afficher_info_du_plugins($url_page, $params, $class_li="item",$dir_plugins=_DIR_PLUGINS,$afficheQuoi="latotale",$params);
 	return "<br />".$leResume."<br />";
-	break;
+	break; 
 	}
 }
 
@@ -136,7 +152,7 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 	$get_infos = charger_fonction('get_infos','plugins');
 	$info = $get_infos($plug_file, $force_reload, $dir_plugins);
 	$leBloc = charger_fonction('afficher_plugin', 'plugins');
-	
+
 // Affichage des différentes informations à récupérer
 // suivants que nous voulions un liste totale des plugins
 // ou juste le description complete d'un seul plugin
@@ -161,7 +177,7 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 		// Autrement, affiche le résumé
 		// fonction demandée pour pouvoir afficher une page par plugin, page qui affiche
 		// la description complète de ce plugin.
-		// nom
+
 		if ($afficheQuoi == "latotale"){
 			//je teste pour vérifier que $prefix n'est pas vide. Si vide, c'est que le préfixe entré est invalide ou que le plugin est dans le dossier extension
 			// de toute façon, a revoir car pas gégène
@@ -171,7 +187,7 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 				$dir = _DIR_EXTENSIONS.$plug_file;
 				$prefix = $info['prefix'];
 				if ($prefix !=''){
-				$cestQuoi = "une_extension";
+				//return "<span class='apropos-erreur'>Le paramètre entré n'est pas valide. Consultez la documentation du plugin.</span>";
 				}else{
 				return "<span class='apropos-erreur'>"
 				."Erreur dans la saisie du préfixe du plugin.</span><br />Vous avez entré <b>".$params."</b> comme préfixe. Vérifiez ce dernier qui se trouve dans le fichier paquet.xml ou plugin.xml du plugin.";
