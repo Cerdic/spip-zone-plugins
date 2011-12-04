@@ -1,0 +1,11 @@
+<BOUCLE_tradlang(TRADLANG){id_tradlang}>
+<div class="contenu-principal">
+<INCLURE{fond=inclure/tradlang_entete,env}>
+[(#AUTORISER{voir,tradlang}|oui)
+	<INCLURE{fond=noisettes/vues/tradlang-traduction_chaine,env,ajax}>
+]
+[(#AUTORISER{voir,tradlang}|non)
+	#LOGIN_PUBLIC
+]
+</div>
+</BOUCLE_tradlang>

@@ -1,0 +1,47 @@
+<div class="contenu-principal">
+<div class="tradlang_explications">
+	[(#SESSION{statut}|non)
+		<p><:tradlang:texte_inscription_ou_login:></p>
+	]
+	[(#SESSION{statut}|oui)
+		[(#AUTORISER{modifier,tradlang}|non)
+			<p><:tradlang:texte_pas_autoriser_traduire:></p>
+			<p><:tradlang:texte_contacter_admin:></p>
+		]
+	]
+	<p><:tradlang:texte_selectionner:></p>
+	<ul>
+		<li>
+			<:tradlang:texte_module:>
+		</li>
+		<li>
+			<:tradlang:texte_langue_origine:>
+		</li>
+		<li>
+			<:tradlang:texte_langue_cible:>
+		</li>
+	</ul>
+	<p>
+		<:tradlang:texte_explication_langue_cible:>
+	</p>
+</div>
+<B_versions>
+<BOUCLE_versions(VERSIONS){objet=tradlang}{id_auteur>0}>
+<div>
+	<h3><:tradlang:titre_revisions_sommaire:></h3>
+	<B_versions_auteur>
+	<BOUCLE_versions_auteur(VERSIONS){objet=tradlang}{id_auteur=#SESSION{id_auteur}}{0,1}>
+	<div class="onglets_simple clearfix">
+		<ul>
+			<li>[(#SELF|parametre_url{id_auteur,''}|parametre_url{debut_liste_rev,''}|lien_ou_expose{<:revisions:voir_toutes_les_revisions:>,[(#ID_AUTEUR|non)],ajax})]</li>
+			<li>[(#SELF|parametre_url{id_auteur,#SESSION{id_auteur}}|parametre_url{debut_liste_rev,''}|lien_ou_expose{<:revisions:voir_mes_revisions:>,[(#ID_AUTEUR|=={#SESSION{id_auteur}}|oui)],ajax})]</li>
+		</ul>
+	</div>
+	</BOUCLE_versions_auteur>
+	</B_versions_auteur>
+	#SET{url_modif,#URL_PAGE{traduction}|parametre_url{etape,revision}}
+	<INCLURE{fond=prive/objets/liste/versions,objet=tradlang,url_modif=#GET{url_modif},env,ajax,sinon=<:revisions:info_aucune_revision:>} />
+</div>
+</BOUCLE_versions>
+</B_versions>
+</div>
