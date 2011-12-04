@@ -1,5 +1,3 @@
-#entete_tradlang{overflow:auto;}
-
 #entete_tradlang .formulaire_spip{float:left;clear:none;}
 
 #entete_tradlang .entete_recherche{float:right;}
@@ -19,13 +17,14 @@
 #bilan_traduction{
 	width:100%;
 	overflow:auto;
+	font-size:.9em;
 }
 .page_traduction table.spip{
 	width:100%;
 }
 
 table.liste_traductions{
-	font-size:.8em;
+	font-size:.9em;
 	margin:10px 0 15px;
 	width:100%;
 }

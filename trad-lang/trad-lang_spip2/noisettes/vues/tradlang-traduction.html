@@ -1,7 +1,6 @@
-<BOUCLE_module(TRADLANG_MODULES){module}>
-[(#ENV{lang_cible}|et{#ENV{module}}|oui)
+<BOUCLE_module(TRADLANG_MODULES){id_tradlang_module ?}{module ?}>
+[(#ENV{lang_cible}|et{#ENV{module,#ENV{id_tradlang_module}}}|oui)
 	[(#SET{lang_orig,[(#ENV{lang_orig,#LANG_MERE})]})]
-	<div id="hierarchie"><a href="#URL_PAGE{traduction}"><:tradlang:lien_accueil_interface:></a></div>
 	<div class="cartouche">
 		[(#SET{lang_orig_long,[(#GET{lang_orig}|traduire_nom_langue)]})]
 		#SET{lang_cible_long,#ENV{lang_cible}|traduire_nom_langue}
@@ -10,16 +9,14 @@
 	
 	<INCLURE{fond=noisettes/listes/tradlang_liste_tous,lang_orig=#GET{lang_orig},env,self=#SELF,ajax}>
 ]
-[(#ENV{lang_cible}|et{#ENV{module}}|non)
-	<div id="hierarchie"><a href="#URL_PAGE{traduction}"><:tradlang:lien_accueil_interface:></a></div>
-	[(#ENV{module}|non)
+[(#ENV{lang_cible}|et{#ENV{module,#ENV{id_tradlang_module}}}|non)
+	[(#ENV{module}|ou{#ENV{id_tradlang_module}}|non)
 	<p class="erreur_message"><:tradlang:erreur_choisir_module:></p>]
 	[(#ENV{lang_cible}|non)
 	<p class="erreur_message"><:tradlang:erreur_choisir_lang_cible:></p>]
 ]
 </BOUCLE_module>
-[(#ENV{lang_cible}|et{#ENV{module}}|non)
-	<div id="hierarchie"><a href="#URL_PAGE{traduction}"><:tradlang:lien_accueil_interface:></a></div>
+[(#ENV{lang_cible}|et{#ENV{module,#ENV{id_tradlang_module}}}|non)
 	[(#ENV{module}|non)
 	<p class="erreur_message"><:tradlang:erreur_choisir_module:></p>]
 	[(#ENV{lang_cible}|non)

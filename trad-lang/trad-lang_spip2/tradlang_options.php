@@ -2,6 +2,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+$GLOBALS['url_arbo_parents']['tradlang'] = array('id_tradlang_module','tradlang_module');
+
 /**
  * Fonction de revision d'une chaine de langue
  * Utile particulièrement pour les crayons

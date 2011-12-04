@@ -35,10 +35,10 @@
 			[(#TOTAL_BOUCLE|=={#GET{full}}|oui)#SET{class,traduit_full}]
 			[(#TOTAL_BOUCLE|=={#GET{full}}|non)
 			[(#TOTAL_BOUCLE|>={#GET{full}|div{100}|mult{60}}|oui)#SET{class,traduit}]]
-			[(#_langue_module:CLE|!={#GET{langue_mere}}|oui)<td class="#GET{class}"><a href="[(#URL_PAGE{traduction}|parametre_url{etape,traduction}|parametre_url{module,#MODULE}|parametre_url{lang_cible,#CLE})]">#TOTAL_BOUCLE</a></td>]
+			[(#_langue_module:CLE|!={#GET{langue_mere}}|oui)<td class="#GET{class}"><a href="[(#URL_TRADLANG_MODULE{#ID_TRADLANG_MODULE}|parametre_url{lang_cible,#CLE})]">#TOTAL_BOUCLE</a></td>]
 			[(#_langue_module:CLE|=={#GET{langue_mere}}|oui)<td class="[(#GET{class})] lang_mere">#TOTAL_BOUCLE</td>]
 			</B_compte_tradlang>
-			<td class="non_traduit"><a href="[(#URL_PAGE{traduction}|parametre_url{etape,traduction}|parametre_url{module,#MODULE}|parametre_url{lang_cible,#CLE})]"> - </a></td>
+			<td class="non_traduit"><a href="[(#URL_TRADLANG_MODULE{#ID_TRADLANG_MODULE}|parametre_url{lang_cible,#CLE})]"> - </a></td>
 			<//B_compte_tradlang>
 		</BOUCLE_langue_module>
 	</tr>
@@ -61,7 +61,7 @@ $('table.bilan tr').each(function() {
 		$('td',this).each(function(i){
 			$(this).find('a').click(function(){
 				if (confirm('<:tradlang:message_confirm_redirection:> : '+modules[i]+' ['+lang+']')) {
-					var url = '[(#URL_PAGE{traduction}|parametre_url{etape,traduction})]&module=' +modules[i] +'&lang_cible=' +lang;
+					var url = '[(#URL_PAGE{tradlang_module})]&module=' +modules[i] +'&lang_cible=' +lang;
 					if (window.parent)
 						window.parent.location = url;
 					else

@@ -203,8 +203,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_revisions_sommaire' => 'Recent changes',
 	'titre_tradlang' => 'Trad-lang',
 	'titre_tradlang_chaines' => 'Trad-lang language string',
-	'titre_tradlang_modules' => 'Trad-lang language modules
-',
+	'titre_tradlang_module' => 'Trad-lang language modules',
 	'titre_traduction' => 'Translations',
 	'titre_traduction_chaine_de_vers' => 'Translation of the string "@chaine@" of the module "@module@" from <abbr title="@lang_orig_long@">@lang_orig@</abbr> to <abbr title="@lang_cible_long@">@lang_cible@</abbr>',
 	'titre_traduction_de' => 'Translation of',

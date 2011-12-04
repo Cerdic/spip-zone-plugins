@@ -8,10 +8,6 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 	 */
 	$langue_mere = sql_getfetsel('lang_mere','spip_tradlang_modules','module='.sql_quote($module));
 	
-	if(sql_count($trad_langue_mere) != sql_count($trad_langue_cible)){
-		spip_log("compte de locutions different entre $langue_mere et $langue");
-	}
-	
 	/**
 	 * On teste et on ajoute ce qu'il y a en trop
 	 */
@@ -25,19 +21,24 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 		$trad_langue_cible_id[] = $row_langue_cible['id']; 
 	}
 	
+	if(sql_count($trad_langue_mere) == sql_count($trad_langue_cible)){
+		spip_log("compte de locutions égal entre $langue_mere et $langue");
+		return array('0','0');
+	}
+	
 	/**
 	 * $diff1 est l'ensemble des chaines manquantes dans la langue fille
+	 * et donc à insérer
 	 */
 	$diff1 = array_diff($trad_langue_mere_id, $trad_langue_cible_id);
 	$diff1_array = sql_allfetsel('*','spip_tradlang','module='.sql_quote($module).' AND lang='.sql_quote($langue_mere).' AND '.sql_in('id',$diff1));
-	
 	$inserees = 0;
 	
 	/**
 	 * $diff2 est l'ensemble des chaines en trop dans la langue fille
+	 * et donc à supprimer
 	 */
 	$diff2 = array_diff($trad_langue_cible_id,$trad_langue_mere_id);
-	
 	$supprimees = 0;
 	
 	if((count($diff1)>0) OR (count($diff2)>0)){
@@ -66,5 +67,6 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 		}
 		spip_log("$supprimees suppressions");		
 	}
+	return array($inserees,$supprimees);
 }
 ?>

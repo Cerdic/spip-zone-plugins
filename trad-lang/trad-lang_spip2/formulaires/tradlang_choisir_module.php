@@ -1,6 +1,8 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('base/abstract_sql');
+
 function formulaires_tradlang_choisir_module_charger($module="",$lang_orig="",$lang_cible="",$lang_crea=""){
 	$module_defaut = sql_getfetsel('module','spip_tradlang_modules','','','','0,1');
 	$module = _request('module') ? _request('module') : $module;
@@ -8,9 +10,12 @@ function formulaires_tradlang_choisir_module_charger($module="",$lang_orig="",$l
 	 * Si aucun module dans la base
 	 */
 	if(!$module_defaut){
-		$valeurs['message_erreur'] = _T('tradlang:erreur_aucun_module');
-		$valeurs['editable'] = false;
-		return $valeurs;
+		if(autoriser('configurer','tradlang')){
+			$valeurs['message_erreur'] = _T('tradlang:erreur_aucun_module');
+			$valeurs['editable'] = false;
+			return $valeurs;
+		}
+		return false;
 	}
 	
 	if(!$module OR !sql_getfetsel('id_tradlang_module','spip_tradlang_modules','module='.sql_quote($module))){
@@ -31,19 +36,23 @@ function formulaires_tradlang_choisir_module_charger($module="",$lang_orig="",$l
 		include_spip('inc/lang_liste');
 		$langues_possibles = $GLOBALS['codes_langues'];
 		
+		ksort($langues_possibles);
 		$langues_modules = sql_select('DISTINCT lang','spip_tradlang','module='.sql_quote($module));
 		while($langue = sql_fetch($langues_modules)){
 			$langues_presentes[$langue['lang']] = traduire_nom_langue($langue['lang']);
 		}
-		if(is_array($langues_presentes))
+		if(is_array($langues_presentes)){
+			ksort($langues_presentes);
 			$langues_possibles = array_diff($langues_possibles,$langues_presentes);
+		}
+		
+		ksort($langues_possibles);
 		
 		$config = @unserialize($GLOBALS['meta']['tradlang']);
 		if (is_array($config) && is_array($config['langues_autorisees'])){
 			foreach($config['langues_autorisees'] as $key=>$val){
 				$langues_conf[$val] = traduire_nom_langue($val);
 			}
-			spip_log($langues_conf);
 			$langues_possibles = array_intersect_key($langues_possibles,$langues_conf);	
 		}
 			
@@ -82,8 +91,10 @@ function formulaires_tradlang_choisir_module_traiter($module="",$lang_orig="",$l
 			$ajouter_code_langue($infos_module,$lang_crea);
 			$lang_cible = $lang_crea;
 			$res['message_ok'] = _T('tradlang:message_passage_trad_creation_lang',array('lang'=>$lang_crea));
+		}else{
+			$infos_module = sql_fetsel('id_tradlang_module','spip_tradlang_modules','module='.sql_quote($module));
 		}
-		$res['redirect'] = parametre_url(parametre_url(parametre_url(parametre_url(generer_url_public("traduction","etape=traduction"),"module",$module),"lang_orig",$lang_orig),"lang_cible",$lang_cible),'lang_crea',$lang_crea);
+		$res['redirect'] = parametre_url(parametre_url(parametre_url(generer_url_entite($infos_module['id_tradlang_module'],'tradlang_module'),"lang_orig",$lang_orig),"lang_cible",$lang_cible),'lang_crea',$lang_crea);;
 	}else{
 		$res['editable'] = true;
 	}

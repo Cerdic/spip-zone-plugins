@@ -18,13 +18,15 @@ function tradlang_declarer_tables_interfaces($interface){
 function tradlang_declarer_tables_objets_sql($tables){
 	$tables['spip_tradlang_modules'] = array(
 		'texte_retour' => 'icone_retour',
+		'texte_objet' => 'tradlang:titre_tradlang_module',
 		'texte_objets' => 'tradlang:titre_tradlang_modules',
 		'texte_modifier' => 'tradlang:icone_modifier_tradlang_module',
 		'icone_objet' => 'spip_lang-24',
+		'texte_logo_objet' => 'tradlang:titre_logo_tradlang_module',
 		'info_aucun_objet'=> 'tradlang:info_aucun_tradlang_module',
 		'info_1_objet' => 'tradlang:info_1_tradlang_module',
 		'info_nb_objets' => 'tradlang:info_nb_tradlang_module',
-		'titre' => "nom_mod AS titre, lang_mere AS lang",
+		'titre' => "nom_mod AS titre, '' AS lang",
 		'principale' => 'oui',
 		'field'=> array(
 			"id_tradlang_module" => "bigint(21) NOT NULL AUTO_INCREMENT",
@@ -54,6 +56,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 	);
 
 	$tables['spip_tradlang'] = array(
+		'page'=>'tradlang',
 		'texte_retour' => 'icone_retour',
 		'texte_objets' => 'tradlang:titre_tradlang_chaines',
 		'texte_modifier' => 'tradlang:icone_modifier_tradlang',
@@ -61,6 +64,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 		'info_aucun_objet'=> 'tradlang:info_aucun_tradlang',
 		'info_1_objet' => 'tradlang:info_1_tradlang',
 		'info_nb_objets' => 'tradlang:info_nb_tradlang',
+		//'titre' => "CONCAT(module,' : ',id,' ','[',lang,']') AS titre",
 		'date' => 'date_modif',
 		'principale' => 'oui',
 		'field'=> array(
