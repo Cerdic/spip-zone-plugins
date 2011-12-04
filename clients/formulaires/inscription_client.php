@@ -168,11 +168,16 @@ function formulaires_inscription_client_saisies_dist($retour=''){
 }
 
 function formulaires_inscription_client_charger_dist($retour=''){
+	$erreurs = array();
 	// On récupère le formulaire classique d'inscription
 	$mode = tester_config(0);
 	$inscription_dist = charger_fonction('charger', 'formulaires/inscription');
 	$contexte = $inscription_dist($mode,'');
-	
+
+	if(isset($contexte['editable']) && $contexte['editable']!=true){
+		$contexte['message_erreur'] = _T('rien_a_faire_ici');
+	}
+
 	return $contexte;
 }
 
@@ -257,8 +262,8 @@ function formulaires_inscription_client_traiter_dist($retour=''){
 	// si necessaire on replace la bonne donnee dans l'environnement
 	$numero ? set_request('numero', $numero) : '';
 	
-    // Comme conseillé dans la documentation on informe de l'id auteur inscrit
-    $retours['id_auteur'] = $id_auteur;
+   // Comme conseillé dans la documentation on informe de l'id auteur inscrit
+   $retours['id_auteur'] = $id_auteur;
 
 	if ($retour) $retours['redirect'] = $retour;
 	
