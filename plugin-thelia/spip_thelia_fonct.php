@@ -67,12 +67,13 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 		return $texte;
 	
 	//convertion utf-8 vers ISO des variables $_REQUEST
-	$sauvegarde_request = array();
-	foreach ($_REQUEST as $clef => $valeur) {
+	if(lire_config("spip_thelia/encodage_spip_thelia_post", "non") == "oui") {
+		$sauvegarde_request = array();
+		foreach ($_REQUEST as $clef => $valeur) {
                 $sauvegarde_request[$clef] = $valeur;
-		$_REQUEST[$clef]=unicode2charset(charset2unicode($valeur, 'utf-8'),'iso-8859-1');
-            }
-
+				$_REQUEST[$clef]=unicode2charset(charset2unicode($valeur, 'utf-8'),'iso-8859-1');
+         }
+	}
 	//parsonnalisation des variables th�lia
 	switch($_REQUEST['page']){
 		case 'merci' : $securise=0; $pageret=0; $reset=1; break;
@@ -177,9 +178,11 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 	$_SESSION['navig']->lang = $sav_session_navig_lang;
 	
 	//restauration des variables $_REQUEST en utf-8 pour SPIP
-	foreach ($sauvegarde_request as $clef => $valeur) {
+	if(lire_config("spip_thelia/encodage_spip_thelia_post", "non") == "oui") {
+		foreach ($sauvegarde_request as $clef => $valeur) {
                 $_REQUEST[$clef]=$valeur;
         }
+    }
 	
 	return ($texte);	
 }
