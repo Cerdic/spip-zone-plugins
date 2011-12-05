@@ -1,4 +1,5 @@
 <div class="contenu-principal">
+<INCLURE{fond=inclure/tradlang_entete,env}>
 <div class="tradlang_explications">
 	[(#SESSION{statut}|non)
 		<p><:tradlang:texte_inscription_ou_login:></p>
@@ -26,7 +27,7 @@
 	</p>
 </div>
 <B_versions>
-<BOUCLE_versions(VERSIONS){objet=tradlang}{id_auteur>0}>
+<BOUCLE_versions(VERSIONS){objet=tradlang}{id_auteur>0}{0,1}>
 <div>
 	<h3><:tradlang:titre_revisions_sommaire:></h3>
 	<B_versions_auteur>

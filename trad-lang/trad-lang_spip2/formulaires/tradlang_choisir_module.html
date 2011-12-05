@@ -8,17 +8,17 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-		    <li class='choisir_module obligatoire[ (#ENV**{erreurs}|table_valeur{module}|oui)erreur]'>
+		    <li class='editer choisir_module obligatoire[ (#ENV**{erreurs}|table_valeur{module}|oui)erreur]'>
 				<label for='module'><:tradlang:texte_module_traduire:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{module})</span>
 				]<INCLURE{fond=noisettes/formulaires/tradlang_selecteur_module}{env}>
 		    </li>
-		    <li class='choisir_lang_orig[ (#ENV**{erreurs}|table_valeur{lang_orig}|oui)erreur]'>
+		    <li class='editer choisir_lang_orig[ (#ENV**{erreurs}|table_valeur{lang_orig}|oui)erreur]'>
 				<label for='lang_orig'><:tradlang:item_langue_origine:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lang_orig})</span>
 				]<INCLURE{fond=noisettes/formulaires/tradlang_selecteur_langue_module_dispo}{env}{lang_select=#ENV{lang_orig}}{name=lang_orig}>
 		    </li>
-		    <li class='choisir_lang_cible[ (#ENV**{erreurs}|table_valeur{lang_cible}|oui)erreur]'>
+		    <li class='editer choisir_lang_cible[ (#ENV**{erreurs}|table_valeur{lang_cible}|oui)erreur]'>
 				<label for='lang_cible'><:tradlang:item_langue_cible:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lang_cible})</span>
 				]<INCLURE{fond=noisettes/formulaires/tradlang_selecteur_langue_module_dispo}{env}{lang_select=#ENV{lang_cible}}{lang_exclue=#ENV{lang_mere}}{name=lang_cible}>
@@ -33,7 +33,7 @@
 </div>
 <script type='text/javascript'>
 	jQuery(document).ready(function(){
-		jQuery('.formulaire_choisir_module select#module').change(function(){
+		jQuery('.formulaire_choisir_module select#id_tradlang_module').change(function(){
 			jQuery(this).parents('form').submit();		
 		});
 	});
