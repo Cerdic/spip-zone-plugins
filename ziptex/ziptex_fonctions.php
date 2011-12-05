@@ -43,7 +43,6 @@ function ziptex_creer_tex($squel,$nom,$options=array()){
 }
 
 function ziptex_copier_tex($orig,$dest){
-	var_dump($orig);
 	copy(find_in_path($orig),_DIR_ZIPTEX.'/'.$dest);
 }
 ?>
