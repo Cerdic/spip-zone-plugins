@@ -1,0 +1,16 @@
+<plugin>
+	<nom>ZipTeX</nom>
+	<auteur>Maïeul Rouquette</auteur>
+	<version>0.1.0</version>
+	<etat>dev</etat>
+	<categorie>divers</categorie>
+	<prefix>ziptex</prefix>
+	<licence>GPL</licence>
+	<necessite id="zippeur" version="[1.4.0;)"/>
+	<description>
+		Il s'agit d'une API permettant de regrouper en ZIP le résultat d'une série de squelettes visant à produire à des fichiers .tex
+	</description>
+	<fonctions>ziptex_fonctions.php</fonctions>
+	<options>ziptex_options.php</options>
+	<necessite id="Z" />
+</plugin>
