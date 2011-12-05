@@ -25,6 +25,7 @@
 	</pipeline>
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="cfg" version="[1.10;]" />
+	<necessite id="spip_bonux" version="[1.8;]" /> <!-- Pour Saisies -->
 	<necessite id="saisies" version="[1.1;]" />
 	<necessite id="YAML" version="[1.5;]" />
 	<categorie>navigation</categorie>
