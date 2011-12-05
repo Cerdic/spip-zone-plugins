@@ -24,6 +24,8 @@ global $spip_lang_left,$spip_lang_right;
 if (window.jQuery) jQuery(document).ready(function(){
 	jQuery("$q").hide()
 	.after("$r");
+	// SPIP 3 ou bando ?
+	jQuery('#bando_navigation .largeur').prepend(jQuery("$r").css({'margin':'8px', 'float':'left'}));
 });
 //--></script>
 JAVASCRIPT;
