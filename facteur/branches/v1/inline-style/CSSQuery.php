@@ -944,6 +944,10 @@ class CSSQuery
  */
 CSSQuery::$filters = new RecursiveArrayIterator(array(
     //CSS3 selectors
+    'before'        => create_function('DOMNode $e',     'return false;'),
+                                                                        
+    'after'        => create_function('DOMNode $e',     'return false;'),
+                                                                        
     'first-child'        => create_function('DOMNode $e,$i,$m,$a,CSSQuery $c',     'return !$e->isSameNode($e->ownerDocument->documentElement) && 
                                                                         $c->xpath->query("../*[position()=1]", $e)->item(0)->isSameNode($e);'),
                                                                         
