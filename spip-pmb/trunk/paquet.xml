@@ -3,9 +3,10 @@
 	categorie="divers"
 	version="1.99"
 	etat="dev"
-	compatibilite="[3.0.0-dev;3.0.*]"
+	compatibilite="[3.0.0-beta;3.0.*]"
 	logo="img_pack/logo-spip-pmb.png"
 	documentation="http://www.spip-contrib.net/Portail-Web-pour-PMB"
+	schema="1.0.0"
 >	
 
 	<nom>Portail Web pour PMB</nom>
@@ -17,6 +18,8 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
+	<pipeline nom="declarer_tables_principales" inclure="base/pmb.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/pmb.php" />
 
 	<utilise nom="Z" compatibilite="[1.2.0;[" />
 </paquet>
