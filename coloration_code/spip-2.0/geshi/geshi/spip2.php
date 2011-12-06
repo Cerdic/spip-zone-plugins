@@ -138,7 +138,7 @@ $language_data = array (
 		2 => array(
 			GESHI_SEARCH => REG_BALISE,
 			GESHI_REPLACE => '\\2',
-			GESHI_MODIFIERS => 'i',
+			GESHI_MODIFIERS => '',
 			GESHI_BEFORE => '\\1',
 			GESHI_AFTER => '\\3'
 			),
@@ -147,7 +147,7 @@ $language_data = array (
 		10 => array(
 			GESHI_SEARCH => REG_BOUCLE,
 			GESHI_REPLACE => '\\3',
-			GESHI_MODIFIERS => 'i',
+			GESHI_MODIFIERS => '',
 			GESHI_BEFORE => '\\1',
 			GESHI_AFTER => '\\4\\5'
 			),		
@@ -155,7 +155,7 @@ $language_data = array (
 		11 => array(
 			GESHI_SEARCH => REG_BOUCLE,
 			GESHI_REPLACE => '\\1',
-			GESHI_MODIFIERS => 'i',
+			GESHI_MODIFIERS => '',
 			GESHI_BEFORE => '',
 			GESHI_AFTER => '\\3\\4\\5'
 			),	
@@ -163,7 +163,7 @@ $language_data = array (
 		12 => array(
 			GESHI_SEARCH => REG_BOUCLE,
 			GESHI_REPLACE => '\\4',
-			GESHI_MODIFIERS => 'i',
+			GESHI_MODIFIERS => '',
 			GESHI_BEFORE => '\\1\\3',
 			GESHI_AFTER => '\\5'
 			),
@@ -171,7 +171,7 @@ $language_data = array (
 		13 => array(
 			GESHI_SEARCH => REG_BOUCLE,
 			GESHI_REPLACE => '\\5',
-			GESHI_MODIFIERS => 'i',
+			GESHI_MODIFIERS => '',
 			GESHI_BEFORE => '\\1\\3\\4',
 			GESHI_AFTER => ''
 			),
@@ -181,7 +181,7 @@ $language_data = array (
 		20 => array(
 			GESHI_SEARCH => REG_INCLURE,
 			GESHI_REPLACE => '\\3',
-			GESHI_MODIFIERS => 'i',
+			GESHI_MODIFIERS => '',
 			GESHI_BEFORE => '\\1',
 			GESHI_AFTER => '\\4\\5'
 			),			
@@ -189,7 +189,7 @@ $language_data = array (
 		21 => array(
 			GESHI_SEARCH => REG_INCLURE,
 			GESHI_REPLACE => '\\1',
-			GESHI_MODIFIERS => 'i',
+			GESHI_MODIFIERS => '',
 			GESHI_BEFORE => '',
 			GESHI_AFTER => '\\3\\4\\5'
 			),
@@ -197,7 +197,7 @@ $language_data = array (
 		22 => array(
 			GESHI_SEARCH => REG_INCLURE,
 			GESHI_REPLACE => '\\4',
-			GESHI_MODIFIERS => 'i',
+			GESHI_MODIFIERS => '',
 			GESHI_BEFORE => '\\1\\3',
 			GESHI_AFTER => '\\5'
 			),
@@ -205,7 +205,7 @@ $language_data = array (
 		23 => array(
 			GESHI_SEARCH => REG_INCLURE,
 			GESHI_REPLACE => '\\5',
-			GESHI_MODIFIERS => 'i',
+			GESHI_MODIFIERS => '',
 			GESHI_BEFORE => '\\1\\3\\4',
 			GESHI_AFTER => ''
 			),
@@ -214,7 +214,7 @@ $language_data = array (
 		30 => array(
 			GESHI_SEARCH => '(&lt;:(.*):&gt;)',
 			GESHI_REPLACE => '\\1',
-			GESHI_MODIFIERS => 'i',
+			GESHI_MODIFIERS => '',
 			GESHI_BEFORE => '',
 			GESHI_AFTER => ''
 			),	
@@ -231,7 +231,7 @@ $language_data = array (
 		40 => array(
 			GESHI_SEARCH => '(\{(\s*(?:([^{}]+)|(?R))*)\s*\}?)',
 			GESHI_REPLACE => '\\1',
-			GESHI_MODIFIERS => 'i',
+			GESHI_MODIFIERS => '',
 			GESHI_BEFORE => '',
 			GESHI_AFTER => ''
 			),
