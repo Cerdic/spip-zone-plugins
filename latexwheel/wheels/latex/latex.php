@@ -72,6 +72,8 @@ function supprimer_verb($code){
 	preg_match_all('#verb¡(.*)\¡#',$texte,$array,PREG_SET_ORDER);
 	foreach ($array as $i){
 		$texte = str_replace("\\".$i[0],$i[1],$texte);	
+		$texte = str_replace("\begin{english}","",$texte);
+		$texte = str_replace("\end{english}","",$texte);
 	}
 
 	return $texte;
