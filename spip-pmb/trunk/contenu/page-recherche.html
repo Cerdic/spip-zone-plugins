@@ -9,9 +9,9 @@
 
 
 
-		<INCLURE{fond=inc/inc-recherche-avancee}{recherche}{env}>
+		<INCLURE{fond=inclure/inc-recherche-avancee}{recherche}{env}>
 		[(#ENV{look_SITE}|=={1}|?{' ',''})
-			<INCLURE{fond=inc/inc-recherche-site}{recherche}{env}>
+			<INCLURE{fond=inclure/inc-recherche-site}{recherche}{env}>
 		]
 		[(#ENV{look_PMB}|=={1}|?{' ',''})
 			<div id="ajax-recherche-catalogue" class="ajax-content"><img src="#CHEMIN{img/ajaxLoader.gif}" class="ajax-loader" alt="<:pmb:chargement:>" width="43" height="43" /></div>
