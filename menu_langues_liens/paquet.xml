@@ -1,0 +1,25 @@
+<paquet
+	prefix="mll"
+	categorie="navigation"
+	version="1.1.0"
+	etat="test"
+	compatibilite="[2.0.10;3.0.*]"
+	logo="img_pack/menu_langues_liens.png"
+	documentation="http://www.spip-contrib.net/Menu-de-langues-sous-forme-de-liens"
+>	
+
+	<nom>Menu de langues avec liens</nom>
+	<!-- Afficher les langues sous forme de liens cliquables -->
+
+	<auteur lien="http://www.spip-contrib.net/_Jacques-PYRAT_">Jacques</auteur>
+	<auteur>Jean-Baptiste Pressac</auteur>
+	<auteur>kent1</auteur>
+
+	<copyright>2009</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="insert_head_css" inclure="mll_pipelines.php" />
+
+	<utilise nom="tradrub" compatibilite="[2.1.1;[" />
+</paquet>
