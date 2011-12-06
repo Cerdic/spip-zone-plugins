@@ -14,7 +14,34 @@ include_spip('inc/session');
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 	  
-	  error_reporting(E_ALL);
+
+/**
+ * Informer du droit de modifier ou non son login
+ * @param string $serveur
+ * @return bool
+ *	 toujours true pour un auteur cree dans SPIP
+ */
+function auth_pmb_autoriser_modifier_login($serveur=''){
+	if (strlen($serveur))
+		return false; // les fonctions d'ecriture sur base distante sont encore incompletes
+	return true;
+}
+
+
+/**
+ * Informer du droit de modifier ou non le pass
+ * @param string $serveur
+ * @return bool
+ *	toujours true pour un auteur cree dans SPIP
+ */
+function auth_pmb_autoriser_modifier_pass($serveur=''){
+	if (strlen($serveur))
+		return false; // les fonctions d'ecriture sur base distante sont encore incompletes
+	return true;
+}
+
+
+
 // Authentifie via PMB et retourne la ligne SQL decrivant l'utilisateur si ok
 
 // http://doc.spip.org/@inc_auth_ldap_dist
@@ -22,7 +49,7 @@ function auth_pmb_dist ($login, $pass, $md5pass="", $md5next="") {
 
 	spip_log("pmb $login " . ($pass ? "mdp fourni" : "mdp absent"). ($md5pass ? "md5mdp fourni" : "md5mdp absent"));
 	//connexion webservices pmb
-	include_spip('pmb_mes_fonctions');
+	include_spip('pmb_fonctions');
 	pmb_ws_charger_client($ws, '');
 	
 	// Securite 
