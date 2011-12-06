@@ -27,7 +27,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 $rpc_client = NULL;
-
+include_spip('inc/config');
 
 function pmb_section_extraire($id_section, $url_base='') {
 	$tableau_sections = Array();
@@ -60,6 +60,7 @@ function pmb_section_extraire($id_section, $url_base='') {
 	} 
 	return $tableau_sections;
 }
+
 function pmb_location_extraire($id_location, $url_base='') {
 	$tableau_locationsections = Array();
 	pmb_ws_charger_client($ws, $url_base);
