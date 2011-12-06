@@ -9,6 +9,11 @@ $poids_max_image = (_IMG_MAX_SIZE == "0") ? $max_filesize : round(_IMG_MAX_SIZE/
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+'forum_q' => 'Comment gérer les forums ?',
+'forum' => 'Les forums sont activés par défaut sur vos articles @complement@ ; ils sont désactivables au cas par cas... Les visiteurs peuvent donc réagir à vos articles... Vous serez prévenu par mail à chaque fois qu’un message est posté sur un de vos articles. Petit revers de médaille : les spams qui ne sont pas toujours évident à repérer et que vous devrez parfois gérer manuellement. Pour traiter un message de forum (le supprimer s’il ne vous plait pas ou le signaler comme spam si s’en est un) :
+-* Dans le site public, sur la page de l’article, si vous êtes identifiés, il y a 2 boutons "Supprimer ce Message" ou "SPAM"
+-* Dans l’espace privé, via le menu Activité / Suivre les Forums',
+
 'img_q' => 'Quelle taille doit faire ma photo ?',
 'img' => 'Il n’y a pas de « bonne » taille pour afficher une image dans un article. En tout cas, inutile d’envoyer une image de 3000 pixels de large, aucun écran ne pourra l’afficher dans son intégralité ! Sauf si le document est destiné à l’impression.
 -* Si l’image doit être intégrée au texte d’un article, tout dépend de son contenu : si c’est un portrait, une hauteur de 200px devrait suffire sinon gare aux rides ; si c’est un beau paysage, on peut aller jusqu’à {{@largeur_max@}} pixels max de large.
