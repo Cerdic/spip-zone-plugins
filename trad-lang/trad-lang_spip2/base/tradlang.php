@@ -11,7 +11,6 @@ function tradlang_declarer_tables_interfaces($interface){
 	
 	$interface['table_des_tables']['tradlang'] = 'tradlang';
 	$interface['table_des_tables']['tradlang_modules'] = 'tradlang_modules';
-	$interface['table_titre']['tradlang'] = "CONCAT(module,' : ',id,' ','[',lang,']') AS titre";
 	return $interface;
 }
 
@@ -64,19 +63,19 @@ function tradlang_declarer_tables_objets_sql($tables){
 		'info_aucun_objet'=> 'tradlang:info_aucun_tradlang',
 		'info_1_objet' => 'tradlang:info_1_tradlang',
 		'info_nb_objets' => 'tradlang:info_nb_tradlang',
-		//'titre' => "CONCAT(module,' : ',id,' ','[',lang,']') AS titre",
 		'date' => 'date_modif',
 		'principale' => 'oui',
 		'field'=> array(
 			"id_tradlang" => "bigint(21) NOT NULL AUTO_INCREMENT",
 			"id_tradlang_module" => "bigint(21) NOT NULL DEFAULT '0'",
+			"titre"	=> "text DEFAULT '' NOT NULL",
 			"id" => "varchar(128) NOT NULL default ''",
 			"module" => "varchar(32) NOT NULL default 0",
 			"lang" => "varchar(16) NOT NULL default ''",
 			"str" => "text NOT NULL", 
 			"comm" => "text NOT NULL",
 			"ts" => "timestamp(14) NOT NULL",
-			"statut" => "varchar(16) NOT NULL default 'OK'",
+			"statut" => "varchar(16) NOT NULL default 'NEW'",
 			"traducteur" => "varchar(32) default NULL",
 			"md5" => "varchar(32) default NULL",
 			"orig" => "tinyint(4) NOT NULL default '0'",
