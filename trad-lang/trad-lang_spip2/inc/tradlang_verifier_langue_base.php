@@ -33,14 +33,16 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 	$diff1 = array_diff($trad_langue_mere_id, $trad_langue_cible_id);
 	$diff1_array = sql_allfetsel('*','spip_tradlang','module='.sql_quote($module).' AND lang='.sql_quote($langue_mere).' AND '.sql_in('id',$diff1));
 	$inserees = 0;
-	
+	spip_log('à insérer');
+	spip_log($diff1_array);
 	/**
 	 * $diff2 est l'ensemble des chaines en trop dans la langue fille
 	 * et donc à supprimer
 	 */
 	$diff2 = array_diff($trad_langue_cible_id,$trad_langue_mere_id);
 	$supprimees = 0;
-	
+	spip_log('à supprimer');
+	spip_log($diff2);
 	if((count($diff1)>0) OR (count($diff2)>0)){
 		include_spip('action/editer_tradlang');
 		
@@ -52,8 +54,7 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 			unset($array['id_tradlang']);
 			
 			$id_tradlang = sql_insertq('spip_tradlang');
-			tradlang_set($id_tradlang,$array);
-			instituer_tradlang($id_tradlang, $array);
+			sql_updateq('spip_tradlang',$array,'id_tradlang='.intval($id_tradlang));
 			$inserees++;
 		}
 		spip_log("$inserees insertions");
@@ -62,7 +63,7 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 			$array['id'] = $module.'_'.$id;
 			$array['module'] = 'attic';
 			$id_tradlang = sql_getfetsel('id_tradlang','spip_tradlang','id='.sql_quote($id)." AND module=".sql_quote($module)." AND lang=".sql_quote($langue));
-			tradlang_set($id_tradlang,$array);
+			sql_updateq('spip_tradlang',$array,'id_tradlang='.intval($id_tradlang));
 			$supprimees++;
 		}
 		spip_log("$supprimees suppressions");		
