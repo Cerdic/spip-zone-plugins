@@ -175,7 +175,7 @@ function formulaires_inscription_client_charger_dist($retour=''){
 	$contexte = $inscription_dist($mode,'');
 
 	if(isset($contexte['editable']) && $contexte['editable']!=true){
-		$contexte['message_erreur'] = _T('rien_a_faire_ici');
+		$contexte['message_erreur'] = _T('clients:erreur_inscription_visiteur');
 	}
 
 	return $contexte;

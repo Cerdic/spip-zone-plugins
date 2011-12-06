@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_titre' => 'Choisir les éléments constituant un client',
 
 	//E	
-	'erreur_inscription_visiteur' => 'Erreur de configuration : inscription des visiteurs non autorisée',
+	'erreur_inscription_visiteur' => 'Erreur de configuration Spip : inscription des visiteurs non autorisée',
 	'explication_type_civ' => 'Pour en profiter au mieux, il faut surcharger le fichier <code>contacts_et_organisations/prive/contenu/contact.html</code> en dupliquant ce fichier dans <code>squelette/prive/contenu</code> et en remplaçant <code>(#CIVILITE)&lt;/span&gt;</code> par <code>(#VAL{clients:label_}|concat{#CIVILITE}|_T)&lt;/span&gt;</code>.<br />Pour modifier la liste suivante, il suffit de surchager le fichier <code>clients/inc/civilite.php</code> par <code>squelette/inc/civilite.php</code> en nommant la fonction <code>inc_civilite</code>.',
 	
 	// L
