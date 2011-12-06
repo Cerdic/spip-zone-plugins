@@ -4,7 +4,7 @@
 	version="1.99.2"
 	etat="dev"
 	compatibilite="[3.0.0-beta;3.0.*]"
-	logo="img_pack/logo-spip-pmb.png"
+	logo="img/logo-spip-pmb.png"
 	documentation="http://www.spip-contrib.net/Portail-Web-pour-PMB"
 	schema="1.0.0"
 >	
