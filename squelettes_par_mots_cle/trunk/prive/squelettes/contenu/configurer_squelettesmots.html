@@ -1,0 +1,9 @@
+<h1 class="grostitre"><:squelettesmots:titre_onglet:></h1>
+[(#AUTORISER{webmestre}|non)
+	<:squelettesmots:refus_1:>
+]
+[(#AUTORISER{webmestre}|oui)
+	<div class="ajax">
+		#FORMULAIRE_CONFIGURER_SQUELETTESMOTS
+	</div>
+]

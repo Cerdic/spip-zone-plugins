@@ -1,7 +1,7 @@
 <paquet
 	prefix="squelettesmots"
 	categorie="outil"
-	version="3.0.0"
+	version="3.1.0"
 	etat="test"
 	compatibilite="[3.0.0-dev;3.0.99]"
 	logo="prive/themes/spip/images/squelettesmots-32.png"
@@ -12,6 +12,7 @@
 	<!-- Permet de choisir le squelette en fonction d'un mot clef -->
 
 	<auteur>Pierre Andrews (Mortimer)</auteur>
+	<auteur>Florent Cavard</auteur>
 	<credit>d'après un code proposé par Déesse A.</credit>
 
 	<pipeline nom="styliser" inclure="squelettesmots.php" />

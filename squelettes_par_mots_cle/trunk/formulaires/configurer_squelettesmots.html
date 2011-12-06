@@ -1,0 +1,105 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	<h3 class="titrem"><:squelettesmots:titre_page:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<form method="get" action="#ENV{action}">
+	#ACTION_FORMULAIRE{#ENV{action}}	
+
+	#SET{regle,0}
+	<BOUCLE_parcours_config(POUR){tableau #ENV*{_fonds}}>
+		#SET{fonds,#CLE}
+		#SET{id_groupe,#VALEUR{0}}
+		#SET{table,#VALEUR{1}}
+		<fieldset class="nouvelle regle" >
+			#SET{nb,#COMPTEUR_BOUCLE}
+		 	<legend><:squelettesmots:reglei{id=#GET{nb}}:></legend>
+			<ul>
+				<li class="editer editer_fonds editer_fonds_#COMPTEUR_BOUCLE">
+					<label for="fonds_#COMPTEUR_BOUCLE" class="fond"><:squelettesmots:fond:></label>
+					<input type="text" id="fonds_#COMPTEUR_BOUCLE" name="fonds[#COMPTEUR_BOUCLE]" class="forml" value="#GET{fonds}"/>
+					<span class="choix">
+						<input type="checkbox"  class="actif" name="actif[#COMPTEUR_BOUCLE]" id="actif_#COMPTEUR_BOUCLE" checked="true" />
+						<label for="actif_#COMPTEUR_BOUCLE" class="type"><:squelettesmots:label_regle_active:></label>
+					</span>
+				</li>
+				<li class="editer editer_id_groupe">
+					<label for="id_groupe_#COMPTEUR_BOUCLE" class="id_groupe"><:squelettesmots:groupe:></label>
+					<select name="tid_groupe[#COMPTEUR_BOUCLE]" class="id_groupe forml" id="id_groupe_#COMPTEUR_BOUCLE">
+					<BOUCLE_liste_groupes(GROUPES_MOTS) >
+						<option value="#ID_GROUPE" [(#ID_GROUPE|=={#GET{id_groupe}}|oui) selected="selected"]>#TITRE</option>
+					</BOUCLE_liste_groupes>
+					</select>
+				</li>
+				<li class="editer editer_type">
+					<label for="type_#COMPTEUR_BOUCLE" class="type"><:squelettesmots:type:></label>
+					<select name="type[#COMPTEUR_BOUCLE]" class="type forml" id="type_#COMPTEUR_BOUCLE">
+					<BOUCLE_liste_id_table(POUR){tableau #ENV*{_tableau_type}}>
+						#SET{val,#VALEUR|objet_info{table_objet}}
+						<option value="#GET{val}" [(#GET{val}|=={#GET{table}}|oui) selected="selected"]>[(#VALEUR|objet_info{texte_objets}|_T)]</option>
+					</BOUCLE_liste_id_table>
+					</select>
+				</li>
+			</ul>
+			[(#GET{fonds}|trouver_fond|non)
+			<div class="notice">
+				[(#SET{affiche,[<em>(#GET{fonds}).html</em>]})]
+				<:squelettesmots:avertissement{squelette=#GET{affiche}}:>
+			</div>
+			]
+			#SET{ma_regex, ["\'.\s]}
+			<B_cherche_squelette>
+			<div class="squelettes">
+				<strong>[(#TOTAL_BOUCLE|singulier_ou_pluriel{squelettesmots:une_possibilite,squelettesmots:nb_possibilites})]</strong>
+				<BOUCLE_cherche_squelette(MOTS) {id_groupe=#GET{id_groupe}}{', '}>
+					[(#SET{un_mot,[(#TITRE|translitteration|replace{#GET{ma_regex}, _, Uims}).html]})]
+					[(#SET{un_squelette, [(#GET{fonds})-][(#GET{un_mot})]})]
+					[<a href="(#CHEMIN{#GET{un_squelette}})">#GET{un_squelette}</a>][
+					(#CHEMIN{#GET{un_squelette}}|non) <i>#GET{un_squelette}</i>]</BOUCLE_cherche_squelette>
+			</div>
+			</B_cherche_squelette>
+
+		</fieldset>
+	</BOUCLE_parcours_config>
+	
+	<fieldset class="nouvelle regle" >
+		<legend><:squelettesmots:nouvelle_regle:></legend>
+		<ul>
+			<li class="editer editer_fonds editer_fonds_0">
+				<label for="fonds" class="fond"><:squelettesmots:fond:></label>
+				<input type="text" id="fonds" name="fonds[0]" class="forml" value="article"/>
+				<span class="choix">
+					<input type="checkbox"  class="actif" name="actif[0]" id="actif" checked="true" />
+					<label for="actif" class="type"><:squelettesmots:label_regle_active:></label>
+				</span>
+			</li>
+			<li class="editer editer_id_groupe">
+				<label for="id_groupe" class="id_groupe"><:squelettesmots:groupe:></label>
+				<select name="tid_groupe[0]" class="id_groupe forml" id="id_groupe">
+					<option value=""></option>
+				<BOUCLE_liste_groupes_new(GROUPES_MOTS) >
+					<option value="#ID_GROUPE">#TITRE</option>
+				</BOUCLE_liste_groupes_new>
+				</select>
+			</li>
+			<li class="editer editer_type">
+				<label for="type" class="type"><:squelettesmots:type:></label>
+				<select name="type[0]" class="type forml" id="type">
+				<BOUCLE_liste_id_table_new(POUR){tableau #ENV*{_tableau_type}}>
+					#SET{val,#VALEUR|objet_info{table_objet}}
+					<option value="#GET{val}">[(#VALEUR|objet_info{texte_objets}|_T)]</option>
+				</BOUCLE_liste_id_table_new>
+				</select>
+			</li>
+		</ul>
+	</fieldset>
+	
+	<p class='boutons'><span class='image_loading'>&nbsp;</span>
+	<input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>	
+	</div>
+	</form>
+</div>
+<style>
+.formulaire_#FORM	.editer_id_groupe {padding-top: 0;}
+.formulaire_#FORM	.editer_type {padding-top: 0;}
+</style>
