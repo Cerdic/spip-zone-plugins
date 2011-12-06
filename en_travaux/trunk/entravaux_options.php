@@ -60,7 +60,9 @@ if (is_entravaux()){
 	// si espace prive : die avec page travaux
 	// sauf si pas loge => redirection
 	else {
-		if (!in_array(_request('action'),array('logout'))
+		if (
+		  !in_array(_request('action'),array('logout'))
+		  AND !in_array(_request('exec'),array('install'))
 		){
 			if (!autoriser('travaux')){
 				spip_initialisation_suite();
