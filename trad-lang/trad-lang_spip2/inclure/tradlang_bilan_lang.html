@@ -1,0 +1,56 @@
+<p><a href="[(#SELF|parametre_url{lang_modules,''})]"><:tradlang:lien_trier_langue_non:></a></p>
+
+<table class="bilan spip liste">
+	<thead>
+		<tr class="row_first">
+			<th><:tradlang:th_module:></th>
+			<th class="lang">
+				<:tradlang:th_langue_mere:>
+			</th>
+			<th class="total_items">
+				<:tradlang:th_total_items_module:>
+			</th>
+			<th class="items_traduits">
+				<:tradlang:th_items_traduits:>
+			</th>
+			<th class="items_modifs">
+				<:tradlang:th_items_modifs:>
+			</th>
+			<th class="items_new">
+				<:tradlang:th_items_new:>
+			</th>
+		</tr>
+	</thead>
+	<B_modules_lang>
+	<tbody>
+	<BOUCLE_modules_lang(TRADLANG_MODULES){par module,nom_mod,id_tradlang_module}>
+	<tr class="module #NOM_MOD[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+		<td><a href="[(#SELF|parametre_url{id_tradlang_module,#ID_TRADLANG_MODULE}|parametre_url{langue_modules,''})]">[(#NOM_MOD)]</a></td>
+		<BOUCLE_compte_langue_mere(TRADLANG){module}{lang=#LANG_MERE}> </BOUCLE_compte_langue_mere>
+		<td><abbr title="[(#LANGUE_MERE|traduire_nom_langue)]">#LANG_MERE</abbr></td>
+		<td>#GRAND_TOTAL</td>
+		</B_compte_langue_mere>
+		<td>-</td>
+		<//B_compte_langue_mere>
+		<BOUCLE_ok_langue(TRADLANG){module}{lang=#ENV{lang_modules}}{statut=OK}> </BOUCLE_ok_langue>
+		<td>#GRAND_TOTAL</td>
+		</B_ok_langue>
+		<td>-</td>
+		<//B_ok_langue>
+		<BOUCLE_modif_langue(TRADLANG){module}{lang=#ENV{lang_modules}}{statut=MODIF}> </BOUCLE_modif_langue>
+		<td>#GRAND_TOTAL</td>
+		</B_modif_langue>
+		<td>-</td>
+		<//B_modif_langue>
+		<BOUCLE_new_langue(TRADLANG){module}{lang=#ENV{lang_modules}}{statut=NEW}> </BOUCLE_new_langue>
+		<td>#GRAND_TOTAL</td>
+		</B_new_langue>
+		<td>-</td>
+		<//B_new_langue>
+	</tr>
+	</BOUCLE_modules_lang>
+	</tbody>
+	</B_modules_lang>
+</table>
+</B_langues_totales>
+<//B_langues_totales>
