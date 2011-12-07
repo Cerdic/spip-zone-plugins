@@ -58,7 +58,7 @@ function exec_acces_restreint_config(){
 
 	pipeline('exec_init',array('args'=>array('exec'=>'acces_restreint_config'),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('titre_page_config'), "configuration", "configuration");
+	echo $commencer_page(_T('accesrestreint:titre_page_config'), "configuration", "configuration");
 
 	echo gros_titre(_T('titre_config_fonctions'),'',false);
 
