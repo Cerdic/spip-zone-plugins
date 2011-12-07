@@ -1,9 +1,9 @@
 <paquet
 	prefix="iextras"
 	categorie="outil"
-	version="2.0.0-dev"
-	etat="dev"
-	compatibilite="[3.0.0-dev;3.1.0["
+	version="2.0.0"
+	etat="test"
+	compatibilite="[3.0.0-beta;3.1.0["
 	logo="images/iextras-64.png"
 	documentation="http://www.spip-contrib.net/Champs-Extras-2"
 	schema="1.0.0"
