@@ -14,7 +14,7 @@ Sont d&#233;j&#224; propos&#233;s :
 
 	</description>
 	<lien>http://www.spip-contrib.net/Activite-editoriale</lien>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<icon>activite_editoriale.png</icon>
 	<prefix>activite_editoriale</prefix>
 	<install>base/activite_editoriale_install.php</install>
@@ -57,7 +57,7 @@ Sont d&#233;j&#224; propos&#233;s :
 -* un tableau de bord pr&#233;sentant les m&#234;mes informations
 	</description>
 	<lien>http://www.spip-contrib.net/Activite-editoriale</lien>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<bouton id='activite_editoriale' parent='bando_publication'>
 		<titre>activite_editoriale:activite_editoriale</titre>
 		<icone>images/16.png</icone>
