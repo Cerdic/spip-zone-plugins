@@ -145,7 +145,7 @@ Raadpleegt [documentatie over Spip-Contrib-> http://www.spip-contrib.net/SpipBB-
 	'choix_rubrique_selection' => 'Een sector selecteren die de basis van uw forums zal zijn. Het binnenste, elke sous-rubrique zullen een groep forums zijn, elk gepubliceerd artikel zal een forum openen.',
 	'choix_squelettes' => 'U kunt anderen ervan kiezen, maar de bestanden die groupeforum.html en filforum.html vervangen moeten bestaan !',
 	'citer' => 'Citeren',
-	'cocher' => 'cocher', # NEW
+	'cocher' => 'kiezen',
 	'col_avatar' => 'Tegenslag',
 	'col_date_crea' => 'Datum inschrijving',
 	'col_marquer' => 'Markeren',
@@ -228,7 +228,7 @@ Raadpleegt [documentatie over Spip-Contrib-> http://www.spip-contrib.net/SpipBB-
 	'forum_ouvrir' => 'Dit forum openen',
 	'forums_categories' => 'Diversen',
 	'forums_spipbb' => 'SpipBB Forums',
-	'forums_titre' => 'Mijn eerste gecreëerd forum',
+	'forums_titre' => 'Mijn geschapen eerste forum',
 	'fromphpbb_erreur_db_phpbb_config' => 'Onmogelijk om de configuratie in de basis phpBB te lezen',
 	'fromphpbb_migre_categories' => 'Import van de categorieën',
 	'fromphpbb_migre_categories_dans_rub_dpt' => 'Vestiging van de forums in de rubriek :',
@@ -331,7 +331,7 @@ _ Wordt een aankondiging in hoofd van forum over alle bladzijdes geplaatst.',
  -* Wanneer een forum onderwerp is gesloten, enig kunnen moderatoren er antwoorden toevoegen.',
 	'mot_groupe_moderation' => 'Goupe van woord dat voor de matiging wordt gebruikt, van SpipBB',
 	'mot_postit' => 'Postit
-_ Wordt een postit onder de aankondigingen, voor de gewone berichten geplaatst. Het komt slechts één keer in de lijst voor.',
+_ Een positie bevindt zich onder de mededelingen voor de gewone berichten. Het lijkt slechts een keer in de lijst.',
 
 	// N
 	'no_message' => 'Geen onderwerp of bericht komt overeen met je zoekopdracht',

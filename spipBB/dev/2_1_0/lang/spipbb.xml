@@ -16,13 +16,18 @@
 		<traducteur nom="davood" />
 	</langue>
 	<langue code="es" />
+	<langue code="fa">
+		<traducteur nom="davood" />
+	</langue>
 	<langue code="fr_tu">
 		<traducteur nom="beatnick" />
 	</langue>
 	<langue code="gl" />
 	<langue code="it_fem" />
 	<langue code="km" />
-	<langue code="nl" />
+	<langue code="nl">
+		<traducteur nom="michelpossoz" />
+	</langue>
 	<langue code="oc_lnc" />
 	<langue code="oc_ni" />
 	<langue code="pt" />
