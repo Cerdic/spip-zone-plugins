@@ -97,6 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_nom_label' => 'Feldname',
 	'option_obligatoire_label' => 'Pflichtfeld',
 	'option_option_intro_label' => 'Bezeichnung der ersten leeren Auswahl',
+	'option_option_statut_label' => 'Afficher les statuts', # NEW
 	'option_pliable_label' => 'Klappbar',
 	'option_pliable_label_case' => 'Die Feldgruppe kann zugeklappt werden',
 	'option_plie_label' => 'Bereits zugeklappt',
@@ -118,6 +119,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_text' => 'Normal',
 
 	// S
+	'saisie_auteurs_explication' => 'Permet de sélectionner un ou plusieurs auteurs', # NEW
+	'saisie_auteurs_titre' => 'Auteurs', # NEW
 	'saisie_case_explication' => 'Ermöglicht Dinge zu aktivieren und deaktivieren',
 	'saisie_case_titre' => 'Nur eine Option',
 	'saisie_checkbox_explication' => 'Erlaubt mehrer Optionen auszuwählen',

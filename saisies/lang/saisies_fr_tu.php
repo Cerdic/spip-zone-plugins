@@ -97,6 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_nom_label' => 'Nom du champ',
 	'option_obligatoire_label' => 'Champ obligatoire',
 	'option_option_intro_label' => 'Label du premier choix vide',
+	'option_option_statut_label' => 'Afficher les statuts', # NEW
 	'option_pliable_label' => 'Pliable',
 	'option_pliable_label_case' => 'Le groupe de champs pourra être replié.',
 	'option_plie_label' => 'Déjà plié',
@@ -118,6 +119,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_text' => 'Normal',
 
 	// S
+	'saisie_auteurs_explication' => 'Permet de sélectionner un ou plusieurs auteurs', # NEW
+	'saisie_auteurs_titre' => 'Auteurs', # NEW
 	'saisie_case_explication' => 'Permet d\'activer ou de désactiver quelque chose.',
 	'saisie_case_titre' => 'Case unique',
 	'saisie_checkbox_explication' => 'Permet de choisir plusieurs options avec des cases.',

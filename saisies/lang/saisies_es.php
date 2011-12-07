@@ -97,6 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_nom_label' => 'Nombre del campo',
 	'option_obligatoire_label' => 'Campo obligatorio',
 	'option_option_intro_label' => 'Label de la primera opción vacía',
+	'option_option_statut_label' => 'Afficher les statuts', # NEW
 	'option_pliable_label' => 'Desplegable',
 	'option_pliable_label_case' => 'El grupo de campos se podrá contraer y desplegar.',
 	'option_plie_label' => 'Ya está contraido',
@@ -118,6 +119,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_text' => 'Normal',
 
 	// S
+	'saisie_auteurs_explication' => 'Permet de sélectionner un ou plusieurs auteurs', # NEW
+	'saisie_auteurs_titre' => 'Auteurs', # NEW
 	'saisie_case_explication' => 'Permite activar o deactivar algo.',
 	'saisie_case_titre' => 'Checkbox único',
 	'saisie_checkbox_explication' => 'Permite elegir varias opciones con checkboxes',

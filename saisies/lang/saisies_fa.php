@@ -97,6 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_nom_label' => 'اسم ميدان',
 	'option_obligatoire_label' => 'ميدان الزامي',
 	'option_option_intro_label' => 'برچسب نخستين گزينه‌ي خالي ',
+	'option_option_statut_label' => 'Afficher les statuts', # NEW
 	'option_pliable_label' => 'گسترشي ',
 	'option_pliable_label_case' => 'گروه‌ ميدان‌هاي چين خور.',
 	'option_plie_label' => 'چين خورده',
@@ -118,6 +119,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_text' => 'عادي',
 
 	// S
+	'saisie_auteurs_explication' => 'Permet de sélectionner un ou plusieurs auteurs', # NEW
+	'saisie_auteurs_titre' => 'Auteurs', # NEW
 	'saisie_case_explication' => 'فعال يا غيرفعال‌سازي يك گزينه‌ي مشخص.',
 	'saisie_case_titre' => 'تك چك‌ باكش',
 	'saisie_checkbox_explication' => 'اجازه‌ي گزينش چك‌ باكس چندگزينه‌اي.',

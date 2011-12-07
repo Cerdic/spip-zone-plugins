@@ -97,6 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_nom_label' => 'Field name',
 	'option_obligatoire_label' => 'Required field',
 	'option_option_intro_label' => 'Label for the first empty choice',
+	'option_option_statut_label' => 'Afficher les statuts', # NEW
 	'option_pliable_label' => 'Expandable',
 	'option_pliable_label_case' => 'The group of fields can be expanded or shrunk.',
 	'option_plie_label' => 'Already shrunk',
@@ -118,6 +119,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_text' => 'Normal',
 
 	// S
+	'saisie_auteurs_explication' => 'Permet de sélectionner un ou plusieurs auteurs', # NEW
+	'saisie_auteurs_titre' => 'Auteurs', # NEW
 	'saisie_case_explication' => 'Used to activate or deactivate a particular option.',
 	'saisie_case_titre' => 'Single check box',
 	'saisie_checkbox_explication' => 'Used to select several options using check boxes.',

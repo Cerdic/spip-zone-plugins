@@ -97,6 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_nom_label' => 'Názov poľa',
 	'option_obligatoire_label' => 'Povinné pole',
 	'option_option_intro_label' => 'Označenie prvého prázdneho výberu',
+	'option_option_statut_label' => 'Afficher les statuts', # NEW
 	'option_pliable_label' => 'Roztiahnuteľné',
 	'option_pliable_label_case' => 'Skupina polí sa dá roztiahnuť alebo stiahnuť.',
 	'option_plie_label' => 'Už stiahnutá',
@@ -118,6 +119,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_text' => 'Normálny',
 
 	// S
+	'saisie_auteurs_explication' => 'Permet de sélectionner un ou plusieurs auteurs', # NEW
+	'saisie_auteurs_titre' => 'Auteurs', # NEW
 	'saisie_case_explication' => 'Používa sa na aktivovanie alebo deaktivovanie konkrétnej možnosti.',
 	'saisie_case_titre' => 'Jedno zaškrtávacie políčko',
 	'saisie_checkbox_explication' => 'Používa sa na výber niekoľkých možností pomocou zaškrtávacích políčok.',

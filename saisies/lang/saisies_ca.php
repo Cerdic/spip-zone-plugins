@@ -97,6 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_nom_label' => 'Nom del camp',
 	'option_obligatoire_label' => 'Camp obligatori',
 	'option_option_intro_label' => 'Etiqueta de la primera elecció buida',
+	'option_option_statut_label' => 'Afficher les statuts', # NEW
 	'option_pliable_label' => 'Plegable',
 	'option_pliable_label_case' => 'El grup de camps es podrà replegar.',
 	'option_plie_label' => 'Ja plegat',
@@ -118,6 +119,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_text' => 'Normal',
 
 	// S
+	'saisie_auteurs_explication' => 'Permet de sélectionner un ou plusieurs auteurs', # NEW
+	'saisie_auteurs_titre' => 'Auteurs', # NEW
 	'saisie_case_explication' => 'Permet activar o desactivar alguna cosa.',
 	'saisie_case_titre' => 'Casella única',
 	'saisie_checkbox_explication' => 'Permet escollir diverses opcions amb caselles.',
