@@ -113,7 +113,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 			'str' => 8,
 			'comm' => 4
 		),
-		'champs_versionnes' => array('str','comm', 'statut')
+		'champs_versionnes' => array('str','comm','traducteur','statut')
 	);
 	return $tables;
 }

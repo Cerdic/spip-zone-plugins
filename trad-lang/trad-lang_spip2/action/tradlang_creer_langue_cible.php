@@ -31,10 +31,8 @@ function action_tradlang_creer_langue_cible_dist(){
 			$ajouter_code_langue($infos_module,$lang_crea);
 		}
 		/**
-		 * Invalidation du cache
+		 * Le cache est invalidé dans $ajouter_code_langue
 		 */
-		include_spip('inc/invalideur');
-		suivre_invalideur("id='id_tradlang/$id_tradlang'");	
 	}else{
 		spip_log("action_tradlang_creer_langue_cible : Module $module_nom inexistant","tradlang");
 	}

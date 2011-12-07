@@ -8,9 +8,11 @@ function inc_tradlang_ajouter_code_langue($module,$lang){
 	 */
 	$chaines_mere = sql_select('*','spip_tradlang',"module=".sql_quote($module['module'])." AND lang=".sql_quote($module['lang_mere']));
 	while($chaine = sql_fetch($chaines_mere)){
+		$titre = $chaine['id'].' : '.$chaine['module'].' - '.$lang;
 		$res = sql_insertq('spip_tradlang',array(
 				'id' => $chaine['id'],
 				'id_tradlang_module' => $chaine['id_tradlang_module'],
+				'titre' => $titre,
 				'module' => $module["module"],
 				'str' => $chaine['str'],
 				'lang' => $lang,
