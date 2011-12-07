@@ -40,24 +40,26 @@ function zless_select_css($css_file){
  * @return string
  */
 function find_less_or_css_in_path($less_file, $css_file){
-	if ($l = find_in_path($less_file)){
-		// ok il y a un less,
-		// voyons si il y a aussi un css
-		if ($c = find_in_path($css_file)){
-			// on a un less et un css en concurence
-			// prioriser en fonction de leur position dans le path
-			$path = creer_chemin();
-			foreach($path as $dir) {
-				// css prioritaire
-				if ($c == $dir . $css_file) return $c;
-				if ($l == $dir . $less_file) return $l;
-			}
-			spip_log('Resolution chemin less/css impossible',_LOG_ERREUR);
-			die('paf ?');
-		}
-		else
+	$l = find_in_path($less_file);
+	$c = $f = trouver_fond($css_file);
+	if (!$c)
+		$c = find_in_path($css_file);
+
+	if (!$l)
+		return ($f?produire_fond_statique($css_file,array('format'=>'css')):$c);
+	elseif(!$c)
+		return $l;
+
+	// on a un less et un css en concurence
+	// prioriser en fonction de leur position dans le path
+	$path = creer_chemin();
+	foreach($path as $dir) {
+		// css prioritaire
+		if (strncmp($c,$dir . $css_file,strlen($dir . $css_file))==0)
+			return ($f?produire_fond_statique($css_file,array('format'=>'css')):$c);;
+		if ($l == $dir . $less_file)
 			return $l;
 	}
-	else
-		return find_in_path($css_file);
+	spip_log('Resolution chemin less/css impossible',_LOG_ERREUR);
+	die('paf ?');
 }
