@@ -1,6 +1,13 @@
-<div>
-	<h3><:tradlang:titre_bilan:></h3>
+<div class="contenu-principal">
+	<INCLURE{fond=inclure/tradlang_entete,env}>
+	<h1><:tradlang:titre_bilan:></h1>
 	<div id="bilan_traduction">
-	<INCLURE{fond=inclure/tradlang_bilan,lang}>
+	[(#ENV{id_tradlang_module}|oui)
+		<INCLURE{fond=inclure/tradlang_bilan_module,lang}>
+	][(#ENV{lang_modules}|oui)
+		<INCLURE{fond=inclure/tradlang_bilan_lang,lang_modules}>
+	]
+	[(#ENV{lang_modules}|ou{#ENV{id_tradlang_module}}|non)
+	<INCLURE{fond=inclure/tradlang_bilan,lang}>]
 	</div>
 </div>
