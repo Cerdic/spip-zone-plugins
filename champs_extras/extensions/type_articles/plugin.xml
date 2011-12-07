@@ -20,6 +20,6 @@
 
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="cextras" version="[0.7;]" />
-	
+	<utilise id="aveline" version="[1.7.0;]" />
 	<categorie>outil</categorie>
 </plugin>
