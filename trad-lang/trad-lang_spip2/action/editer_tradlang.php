@@ -25,21 +25,33 @@ function tradlang_set($id_tradlang,$set=null){
 	$err = '';
 	
 	include_spip('inc/modifier');
+	include_spip('inc/filtres');
+	
 	$c = collecter_requests(
 		// white list
-		array(
-			'str', 'comm'
-		),
+		objet_info('tradlang','champs_editables'),
 		// black list
-		array('statut'),
+		array(),
 		// donnees eventuellement fournies
 		$set
 	);
 	
-	revision_tradlang($id_tradlang, $c);
+	$invalideur = "id='id_tradlang/$id_tradlang'";
+	
+	if ($err = objet_modifier_champs('tradlang', $id_tradlang,
+		array(
+			'nonvide' => array(),
+			'invalideur' => $invalideur,
+			'indexation' => true,
+			'date_modif' => 'ts' // champ a mettre a date('Y-m-d H:i:s') s'il y a modif
+		),
+		$c)){
+		spip_log($err);
+		return $err;
+	}
 
-	$c = collecter_requests(array('statut'),array(),$set);
-	$err .= instituer_tradlang($id_tradlang, $c);
+	//$c = collecter_requests(array('statut'),array(),$set);
+	//$err .= instituer_tradlang($id_tradlang, $c);
 
 	return $err;
 }

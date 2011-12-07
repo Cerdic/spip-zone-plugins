@@ -64,6 +64,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 		'info_1_objet' => 'tradlang:info_1_tradlang',
 		'info_nb_objets' => 'tradlang:info_nb_tradlang',
 		'date' => 'date_modif',
+		'champs_editables' => 'str,comm,traducteur,statut',
 		'principale' => 'oui',
 		'field'=> array(
 			"id_tradlang" => "bigint(21) NOT NULL AUTO_INCREMENT",
@@ -72,6 +73,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 			"id" => "varchar(128) NOT NULL default ''",
 			"module" => "varchar(32) NOT NULL default 0",
 			"lang" => "varchar(16) NOT NULL default ''",
+			"langue_choisie"	=> "VARCHAR(3) DEFAULT 'non'",
 			"str" => "text NOT NULL", 
 			"comm" => "text NOT NULL",
 			"ts" => "timestamp(14) NOT NULL",
