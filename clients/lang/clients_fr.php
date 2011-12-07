@@ -7,7 +7,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'clients_titre' => 'Clients',
-	'configurer_titre' => 'Choisir les éléments constituant un client',
+	'configurer_titre' => 'Configuration du plugin Clients',
+	'configurer_titre_elements' => 'Choisir les éléments constituant une fiche client',
 
 	//E	
 	'erreur_inscription_visiteur' => 'Erreur de configuration Spip : inscription des visiteurs non autorisée',
