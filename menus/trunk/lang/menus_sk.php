@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_rubriques' => 'Displays a list of sections and, if desired, the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
 	'description_menu_rubriques_articles' => 'Zobrazí zoznam rubrík, v ktorom môžu byť podrubriky a články včlenené do rôznych úrovní. Podľa predvolených nastavení sa zobrazia všetky rubriky počnúc koreňovým adresárom stránky a budú zotriedené podľa názvu (najprv čísla, potom písmená). Články v danej rubrike budú vždy uvedené po jej podrubrikách.',
 	'description_menu_secteurlangue' => 'This entry can be used by sites which have one language per sector. It displays a menu which lists the sections of the sector corresponding to the language of the page, and if desired the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
-	'description_menu_texte_libre' => 'Jednoducho text, ktorý chcete',
+	'description_menu_texte_libre' => 'Jednoducho text, ktorý chcete', # MODIF
 
 	// E
 	'editer_menus_editer' => 'Upraviť toto menu',
@@ -49,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_mot' => 'Číslo kľúčového slova',
 	'entree_id_objet' => 'Číslo',
 	'entree_id_rubrique' => 'Číslo nadradenej rubriky',
+	'entree_id_rubrique_ou_courante' => 'Numéro de la rubrique parente ou "courante" si la rubrique parente est la rubrique courante du contexte', # NEW
 	'entree_id_rubriques_exclues' => 'Numéros des rubriques à exclure, séparés par des virgules', # NEW
 	'entree_id_secteur_exclus' => 'Numéros des secteurs à exclure, séparés par des virgules', # NEW
 	'entree_infini' => 'Do nekonečna',
@@ -129,6 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_numero_menu' => 'MENU ČÍSLO:',
 	'info_page_speciale' => 'Odkaz na stránku "@page@"',
 	'info_page_speciale_zajax' => 'Modalbox pre stránku "@page@" bloku "@bloc@" ',
+	'info_rubrique_courante' => 'Rubrique courante', # NEW
 	'info_rubriques_exclues' => ' / sauf rubrique(s) @id_rubriques@', # NEW
 	'info_rubriques_max_affichees' => 'Affichage limit&eacute; &agrave; @max@ rubriques', # NEW
 	'info_secteur_exclus' => ' / sauf secteur(s) @id_secteur@', # NEW

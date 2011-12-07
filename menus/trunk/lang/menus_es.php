@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_rubriques' => 'Muestra una lista de secciones y, si se quiere, las sub-secciones en varios niveles. De manera predeterminada, muestra todas las entradas de la raíz, ordenados por título (en orden alfabético y numérico).',
 	'description_menu_rubriques_articles' => 'Muestra una lista de secciones y, si se quiere, subsecciones y artículos en varios niveles. De manera predeterminada, muestra todas las secciones de la raíz, ordenados por título (en orden alfabético y numérico). Los artículos se colocan automáticamente después de las secciones.',
 	'description_menu_secteurlangue' => 'Esta entrada es específica de los sitios que utilizan un sector para cada idioma. Se muestra automáticamente un menú con las secciones de la zona correspondiente al idioma de la página y, si se quiere, las sub-secciones en varios niveles. De manera predeterminada, muestra todas las secciones de la raíz, ordenados por título (en orden alfabético y numérico).',
-	'description_menu_texte_libre' => 'Sólo el texto que desea',
+	'description_menu_texte_libre' => 'Sólo el texto que desea', # MODIF
 
 	// E
 	'editer_menus_editer' => 'Modificar el menú',
@@ -49,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_mot' => 'Número de palabra clave',
 	'entree_id_objet' => 'Número',
 	'entree_id_rubrique' => 'Número de la sección padre',
+	'entree_id_rubrique_ou_courante' => 'Numéro de la rubrique parente ou "courante" si la rubrique parente est la rubrique courante du contexte', # NEW
 	'entree_id_rubriques_exclues' => 'Números de secciones a excluir, separadas por coma',
 	'entree_id_secteur_exclus' => 'Números de sectores a excluir, separados por coma',
 	'entree_infini' => 'Al infinito',
@@ -129,6 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_numero_menu' => 'MENU NÚMERO :',
 	'info_page_speciale' => 'Link a la página « @page@ »',
 	'info_page_speciale_zajax' => 'Modalbox al bloque « @bloc@ » de la página « @page@ » ',
+	'info_rubrique_courante' => 'Rubrique courante', # NEW
 	'info_rubriques_exclues' => ' / salvo la(s) sección(es) @id_rubriques@',
 	'info_rubriques_max_affichees' => 'Limitado a @max@ secciones',
 	'info_secteur_exclus' => ' / salvo el/los sector(es) @id_secteur@',

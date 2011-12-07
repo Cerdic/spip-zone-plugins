@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_rubriques' => 'Displays a list of sections and, if desired, the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
 	'description_menu_rubriques_articles' => 'Display a list of sections, optionally including sub-sections and articles nested to several levels. By default, all sections will be displayed starting from the site root and sorted by title (numerically then alphabetically).Articles in a given section will always be listed after any sub-sections.',
 	'description_menu_secteurlangue' => 'This entry can be used by sites which have one language per sector. It displays a menu which lists the sections of the sector corresponding to the language of the page, and if desired the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
-	'description_menu_texte_libre' => 'Just the text that you would like',
+	'description_menu_texte_libre' => 'Just the text that you would like', # MODIF
 
 	// E
 	'editer_menus_editer' => 'Edit this menu',
@@ -49,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_mot' => 'Number of the keyword',
 	'entree_id_objet' => 'Number',
 	'entree_id_rubrique' => 'Number of the parent section',
+	'entree_id_rubrique_ou_courante' => 'Numéro de la rubrique parente ou "courante" si la rubrique parente est la rubrique courante du contexte', # NEW
 	'entree_id_rubriques_exclues' => 'Numéros des rubriques à exclure, séparés par des virgules', # NEW
 	'entree_id_secteur_exclus' => 'Numéros des secteurs à exclure, séparés par des virgules', # NEW
 	'entree_infini' => 'To infinity',
@@ -129,6 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_numero_menu' => 'MENU NUMBER:',
 	'info_page_speciale' => 'Link to the page « @page@ »',
 	'info_page_speciale_zajax' => 'Modalbox for the "@page@" page for the "@bloc@" block',
+	'info_rubrique_courante' => 'Rubrique courante', # NEW
 	'info_rubriques_exclues' => ' / sauf rubrique(s) @id_rubriques@', # NEW
 	'info_rubriques_max_affichees' => 'Affichage limit&eacute; &agrave; @max@ rubriques', # NEW
 	'info_secteur_exclus' => ' / sauf secteur(s) @id_secteur@', # NEW
