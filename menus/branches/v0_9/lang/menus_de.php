@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_rubriques' => 'Zeigt eine Liste der Rubriken und, wen gew&uuml;nscht, der Unterrubriken &uuml;ber mehreer Niveaus an. In der Grundeinstelung werden alle Rubriken ab der obersten Ebene nach Titel (numerisch und anschließend alphanumerisch) sortiert angezeigt.',
 	'description_menu_rubriques_articles' => 'Zeigt einen Liste der Rubriken und auf Wunsch der Unterrubriken und Artikel als Hierarchie an. In der Grundeinstellung werden alle Rubriken von der obersten Ebene an dargestellt. Sie werden nach Titeln (zuerst numerisch und dann alphabetisch) sortiert. Artikel werden immer hinter den Rubriken angezeigt.',
 	'description_menu_secteurlangue' => 'Dieser Eintrag bezieht sich aud die Sites, welche pro Sprache ein Hauptrubrik verwenden. Er zeigt ein Men&uuml; mit allen Rubriken des Sektors, die mit der Sprache &uuml;bereinstimmen, wenn erfordelich auf &uuml;ber mehrere Niveaus. In der Grundeinstelung werden alle Rubriken ab der obersten Ebene nach Titel (numerisch und anschließend alphanumerisch) sortiert angezeigt.',
-	'description_menu_texte_libre' => 'Freitext',
+	'description_menu_texte_libre' => 'Freitext', # MODIF
 
 	// E
 	'editer_menus_editer' => 'Menü bearbeiten',
@@ -49,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_mot' => 'Nummer des Schlagworts',
 	'entree_id_objet' => 'Nummer',
 	'entree_id_rubrique' => 'Nummer der übergeordeneten Rubrik',
+	'entree_id_rubrique_ou_courante' => 'Numéro de la rubrique parente ou "courante" si la rubrique parente est la rubrique courante du contexte', # NEW
 	'entree_id_rubriques_exclues' => 'Nummern der auszuschließenden Rubriken, getrennt durch Semikolons.',
 	'entree_id_secteur_exclus' => 'Nummern der auszuschließenden Sektoren, getrennt mit Kommata',
 	'entree_infini' => 'Unendlich',
@@ -129,6 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_numero_menu' => 'MENÜ NUMMER:',
 	'info_page_speciale' => 'Link zu Seite « @page@ »',
 	'info_page_speciale_zajax' => 'Modale Box der Seite « @page@ » für den Block « @bloc@ »',
+	'info_rubrique_courante' => 'Rubrique courante', # NEW
 	'info_rubriques_exclues' => ' / außer Rubrik(en) @id_rubriques@',
 	'info_rubriques_max_affichees' => 'Auf @max@ Rubriken begrenzen',
 	'info_secteur_exclus' => ' / außer Sektor(en) @id_secteur@',

@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_rubriques' => 'Mostra una lista di rubriche e, se si vuole, le sotto rubriche su più livelli. Normalmente, mostra tutte le rubriche dalla radice, ordinate per titolo (numericamente e poi alfabeticamente).',
 	'description_menu_rubriques_articles' => 'Affiche une liste de rubriques et, si on veut, les sous-rubriques et les articles sur plusieurs niveaux. Par défaut, affiche toutes les rubriques depuis la racine, triées par titre (numériquement puis alphabétiquement). Les articles sont placés systématiquement après les rubriques.', # NEW
 	'description_menu_secteurlangue' => 'Questa voce è specifica per i siti che utilizzano un settore per lingua. Mostra automaticamente un menù che elenca le rubriche del settore corrispondente alla lingua della pagina e, se si vuole, le sotto rubriche su più livelli. Normalmente, mostra tutte le rubriche dalla radice, ordinate per titolo (numericamente e poi alfabeticamente).',
-	'description_menu_texte_libre' => 'Simplement le texte que vous souhaitez', # NEW
+	'description_menu_texte_libre' => 'Simplement le texte que vous souhaitez, ou un code de langue SPIP (<:...:>)', # NEW
 
 	// E
 	'editer_menus_editer' => 'Modifica questo menù',
@@ -49,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_mot' => 'Numero della parola chiave',
 	'entree_id_objet' => 'Numero',
 	'entree_id_rubrique' => 'Numero della rubrica padre',
+	'entree_id_rubrique_ou_courante' => 'Numéro de la rubrique parente ou "courante" si la rubrique parente est la rubrique courante du contexte', # NEW
 	'entree_id_rubriques_exclues' => 'Numéros des rubriques à exclure, séparés par des virgules', # NEW
 	'entree_id_secteur_exclus' => 'Numéros des secteurs à exclure, séparés par des virgules', # NEW
 	'entree_infini' => 'All\'infinito',
@@ -129,6 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_numero_menu' => 'MENU NUMERO:',
 	'info_page_speciale' => 'Link verso la pagina "@page@"',
 	'info_page_speciale_zajax' => 'Modalbox de la page « @page@ » pour le bloc « @bloc@ &#187', # NEW
+	'info_rubrique_courante' => 'Rubrique courante', # NEW
 	'info_rubriques_exclues' => ' / sauf rubrique(s) @id_rubriques@', # NEW
 	'info_rubriques_max_affichees' => 'Affichage limit&eacute; &agrave; @max@ rubriques', # NEW
 	'info_secteur_exclus' => ' / sauf secteur(s) @id_secteur@', # NEW
