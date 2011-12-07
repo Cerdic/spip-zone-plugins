@@ -485,5 +485,11 @@ function association_maj_53901()
 
 $GLOBALS['association_maj'][53901] = array(array('association_maj_53901'));
 
+/* Creation de la table 'exercices' permettant de gerer la comptabilite en exercice comptable */
+/* sur une annee civile, une annee'scolaire' ou sur des periodes donnees */
+$GLOBALS['association_maj'][55177] = array(array('sql_create','spip_asso_exercices',
+	$GLOBALS['tables_principales']['spip_asso_exercices']['field'],
+	$GLOBALS['tables_principales']['spip_asso_exercices']['key'])
+);
 
 ?>

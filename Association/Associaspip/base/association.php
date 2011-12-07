@@ -2,7 +2,7 @@
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations             *
  *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
+ *  Copyright (c) 2007 Bernard Blazin & Franï¿½ois de Montlivault (V1)       *
  *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -273,6 +273,22 @@ $tables_principales['spip_asso_membres'] = array(
 	'field' => &$spip_asso_membres, 
 	'key' => &$spip_asso_membres_key);
 
+//-- Tables EXERCICES ----------------------------------------
+$spip_asso_exercices = array(
+	"id_exercice" => "int(11) NOT NULL auto_increment",
+	"intitule" => "text NOT NULL",
+	"commentaire" => "text NOT NULL",
+	"debut" => "date NOT NULL default '0000-00-00'",
+	"fin" => "date NOT NULL default '0000-00-00'"
+);
+$spip_asso_exercices_key = array(
+	"PRIMARY KEY" => "id_exercice"
+);
+$tables_principales['spip_asso_exercices'] = array(
+	'field' => &$spip_asso_exercices,
+	'key' => &$spip_asso_exercices_key
+);
+
 	return $tables_principales;
 	
 }
@@ -315,7 +331,8 @@ $tables_interfaces['table_des_tables']['association_metas'] = 'association_metas
 $tables_interfaces['table_des_tables']['asso_destination'] = 'asso_destination';
 $tables_interfaces['table_des_tables']['asso_destination_op'] = 'asso_destination_op';	
 $tables_interfaces['table_des_tables']['asso_groupes'] = 'asso_groupes';	
-$tables_interfaces['table_des_tables']['asso_groupes_liaisons'] = 'asso_groupes_liaisons';	
+$tables_interfaces['table_des_tables']['asso_groupes_liaisons'] = 'asso_groupes_liaisons';
+$tables_interfaces['table_des_tables']['asso_exercices'] = 'asso_exercices';
 
 // Pour que les raccourcis ci-dessous heritent d'une zone de clic pertinente
 //$tables_interfaces['table_titre']['asso_membres']= "nom_famille AS titre, '' AS lang";
