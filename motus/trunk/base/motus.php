@@ -2,23 +2,21 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function motus_declarer_champs_extras($champs = array()){
-	
-	$champs[] = new ChampExtra(array(
-		'table' => 'groupes_mot', 
-		'champ' => 'rubriques_on', 
-		'label' => 'motus:rubriques_on', 
-		'type' => 'selecteur_rubrique', // necissite bonux et saisies
-		'sql' => "varchar(255) NOT NULL DEFAULT ''", 
-
-		// experimental
-		'saisie_externe' => true, // saisies
-		'saisie_parametres' => array(
-			'explication' => 'motus:explication_rubriques_on', 
+	$champs['spip_groupes_mots']['rubriques_on'] = array(
+		'saisie' => 'selecteur', // Type du champs (voir plugin Saisies)
+		'options' => array(
+			'nom' => 'rubriques_on', 
+			'label' => _T('motus:rubriques_on'), 
+			'explication' => _T('motus:explication_rubriques_on'),
+			'sql' => "varchar(255) NOT NULL DEFAULT ''",
+			'defaut' => '',// Valeur par défaut
+			'whitelist' => array('rubriques'),
 			'multiple' => 'oui',
-		),
-	));
-	
-		
-	return $champs;
+			'restriction'=>array(	'voir' 		=> array('auteur'=>''),//Tout le monde peut voir
+									'modifier'	=> array('auteur'=>'0minirezo'))),//Seul les admins peuvent modifier
+        'verifier' => array());
+
+	return $champs;	
 }
+
 ?>
