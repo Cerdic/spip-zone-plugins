@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'champ_adresse' => 'Address', # MODIF
 	'champ_civi_explication' => 'Réglages avancées du champ civilité', # NEW
-	'champ_civi_mademoiselle_ok' => 'Proposer un choix « Mademoiselle » dans le champ civilit&eacute;', # NEW
+	'champ_civi_mademoiselle_ok' => 'V poli oslovenie ponúkať možnosť "slečna"', # NEW
 	'champ_civilite' => 'Civility',
 	'champ_code_postal' => 'Zip Code', # MODIF
 	'champ_etat' => 'State',
@@ -101,7 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'monsieur' => 'Mister', # MODIF
 	'msg_accueil' => 'Here are messages from contacts you have received.',
 	'msg_contact' => 'Message from contact', # MODIF
-	'msg_contacts' => 'Messages de contact', # NEW
+	'msg_contacts' => 'Správy od kontaktu',
 	'msg_expediteur' => 'Sender: ',
 	'msg_lus' => 'Messages already read',
 	'msg_messagerie' => 'Contact messaging', # MODIF
