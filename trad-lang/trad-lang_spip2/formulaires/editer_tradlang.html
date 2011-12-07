@@ -36,7 +36,7 @@
 			<li class='editer_str obligatoire[(#ENV{erreurs}|table_valeur{str}|oui)erreur]'>
 				<label for='str'><:tradlang:label_tradlang_str:></label>[
 				<span class="erreur_message">(#ENV{erreurs}|table_valeur{str})</span>]
-				<textarea class="texte" name="str" id="str">[(#ENV*{str}|entites_html)]</textarea>
+				<textarea class="texte" name="str" id="str">[(#ENV**{str})]</textarea>
 			</li>
 			<li class='readonly'>
 				[(#ENV{lang_orig}|=={#ENV{lang_mere}}|oui)<label><:tradlang:label_version_originale_comm{lang=#ENV{lang_orig}}:></label>]
