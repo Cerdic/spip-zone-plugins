@@ -15,8 +15,7 @@
 		<div class="qTipContent">
 		<div class='descriptif'>[(#VALEUR{description}|propre)]</div>
 		<div class='auteur'>[(#VAL{info_les_auteurs_1}|_T{#ARRAY{les_auteurs,#VALEUR{auteur}|implode{', '}|propre|PtoBR}})]</div>
-		<div class='licence'>[<:intitule_licence:> (#VALEUR{licence}|propre|PtoBR)]</div>
-
+		<div class='licence'>[<:intitule_licence:> (#VALEUR{licence}|implode{','}|propre|PtoBR)]</div>
 		<B_squelettes>
 			<div class='squelette'>
 				<:zengarden:intitule_compatiblite_squelette:>
