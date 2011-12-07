@@ -14,9 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attente_confirmation' => 'In wachten van bevestiging',
 
 	// B
-	'base_donnees' => 'Base de données', # NEW
-	'bloc_deplier' => 'Déplier', # NEW
-	'bloc_replier' => 'Replier', # NEW
+	'base_donnees' => 'Gegevensbestand',
+	'bloc_deplier' => 'Ontvouwen',
+	'bloc_replier' => 'Opvouwen',
 
 	// C
 	'colorer_fond' => 'De bodem kleuren',
@@ -33,23 +33,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explique_spam' => 'Opgelet: u hebt bakens, verboden karakters of woorden gebruikt. <br /><br /> Terug komen !',
 
 	// L
-	'lancer_test' => 'Lancer le test !', # NEW
+	'lancer_test' => 'Start de test !',
 	'lutte_spam' => 'Bestrijding van SPAM',
 
 	// M
-	'maj_actu' => 'De actualisering forceren', # MODIF
+	'maj_actu' => 'Force een refresh op afstand',
 	'maj_liste' => 'Lijst van ontdekte plugins :',
 	'maj_maj' => 'Geselecteerde plugin bijwerken',
 	'maj_ok' => 'Dit [plugin->@zip@] lijkt [aan dag->@url@].',
 	'maj_rev' => 'Rev. @revision@',
 	'maj_rev_ko' => '[Verwijderde revisie->@url@] kon niet gevonden worden.',
 	'maj_rev_ok' => 'De revisie [@revisie@->@url@] is [beschikbaar->@zip@].',
-	'maj_spip' => 'Après avoir mis à jour tous vos plugins avec précaution, il est vivement conseillé de mettre à jour SPIP lui-même en cliquant sur le lien ci-dessus et en suivant les instructions proposées.', # NEW
+	'maj_spip' => 'Nadat u uw plugins goed updaten, is het sterk aanbevolen om zichzelf updaten SPIP door te klikken op de link hierboven en volgenen instructies.',
 	'maj_svn' => 'Dit plugin SVN lijkt [aan dag->@url@].',
 	'maj_verif' => 'Controleert van te voren het archief dat u past :',
 	'maj_verif2' => 'Opgelet: na op de knoop geklikt te hebben hierboven, controleert goed dat het gedownloade archief met plugin overeenstemt die hij u nodig is bij te werken.',
-	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu être identifié.', # NEW
-	'msg_publies' => 'Uniquement les messages publiés', # NEW
+	'maj_zip_ko' => 'Het remote .zip kan worden geïdentificeerd.',
+	'msg_publies' => 'Alleen berichten gepubliceerd',
 
 	// N
 	'nom_email_forum' => 'Bedankt om uw naam of uw e-mail te specificeren !',
@@ -91,26 +91,26 @@ Ontdekt in dit plugin uw lievelingswerktuigen: {Typografische Inzenders}, {typog
 Aarzelt niet om de gepubliceerde artikelen van documentatie van plugin over te raadplegen : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Verenigbaarheid: SPIP 1.92x en v2.0.x', # MODIF
-	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques', # NEW
-	'pp_blocs_bloc' => 'Insérer un bloc replié', # NEW
-	'pp_blocs_visible' => 'Insérer un bloc déplié', # NEW
-	'pp_chatons_inserer' => 'Insérer le chaton « @chaton@ »', # NEW
-	'pp_chatons_inserer_drop' => 'Insérer un chaton dans votre texte', # NEW
-	'pp_couleur_fond' => 'Fond @couleur@', # NEW
-	'pp_couleur_icone_fond' => 'F', # NEW
-	'pp_couleur_icone_texte' => 'T', # NEW
-	'pp_couleur_texte' => 'Texte @couleur@', # NEW
-	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
-	'pp_decoration_inserer' => 'Décoration « @balise@.@racc@ »', # NEW
-	'pp_decoration_inserer_drop' => 'Appliquer au texte une « décoration » personnalisée', # NEW
-	'pp_decoupe_onglets' => 'Insérer un système d\'onglet', # NEW
-	'pp_decoupe_separateur' => 'Insérer un séparateur de page ou d\'onglet', # NEW
-	'pp_filets_inserer' => 'Insérer un filet de style « @filet@ »', # NEW
-	'pp_filets_inserer_drop' => 'Insérer un filet de séparation', # NEW
-	'pp_smileys_inserer' => 'Insérer une frimousse @smiley@', # NEW
-	'pp_un_titre' => 'Un titre', # NEW
-	'pp_votre_texte' => 'Placez votre texte ici', # NEW
-	'pp_votre_titre' => 'Titre @nb@', # NEW
+	'pp_autobr' => 'Plaats een blok waar de regeleinden zijn automatische',
+	'pp_blocs_bloc' => 'Plaats gevouwen een blok',
+	'pp_blocs_visible' => 'Plaats een blok ontvouwd',
+	'pp_chatons_inserer' => 'Plaats de kitten « @chaton@ »',
+	'pp_chatons_inserer_drop' => 'Plaats een kitten in de tekst',
+	'pp_couleur_fond' => 'Achtergrond @couleur@',
+	'pp_couleur_icone_fond' => 'A',
+	'pp_couleur_icone_texte' => 'T',
+	'pp_couleur_texte' => 'Tekst @couleur@',
+	'pp_couteau_suisse_drop' => 'Gebruik een instrument van de Zwitserse zakmes',
+	'pp_decoration_inserer' => 'Decoratie « @balise@.@racc@ »',
+	'pp_decoration_inserer_drop' => 'Toegepast op de tekst individueel « ingericht »',
+	'pp_decoupe_onglets' => 'Plaats een tab',
+	'pp_decoupe_separateur' => 'Plaats een scheidingsteken pagina of tab',
+	'pp_filets_inserer' => 'Plaats een vleugje stijl « @filet@ »',
+	'pp_filets_inserer_drop' => 'Plaats een netto-scheiding',
+	'pp_smileys_inserer' => 'Plaats gezicht @smiley@',
+	'pp_un_titre' => 'Een titel',
+	'pp_votre_texte' => 'Plaats uw tekst hier',
+	'pp_votre_titre' => 'Titel @nb@',
 
 	// S
 	'smileys_dispos' => 'Beschikbare smylies :',
@@ -121,8 +121,8 @@ Verenigbaarheid: SPIP 1.92x en v2.0.x', # MODIF
 	'stats_date' => '@jour@/@mois@/@annee@ om @h@h@m@',
 
 	// T
-	'test_base' => 'Test de la base de données', # NEW
-	'test_manuel' => 'Test manuel', # NEW
+	'test_base' => 'Testen van de databank',
+	'test_manuel' => 'Handmatige test',
 	'texte_formatspip' => 'ORIGINELE TEKST AAN HET SPIP FORMAAT',
 	'textes_formatspip' => 'ORIGINELE TEKSTEN AAN HET SPIP FORMAAT',
 	'titre' => 'Het Zwitserland Mes',
@@ -131,7 +131,7 @@ Verenigbaarheid: SPIP 1.92x en v2.0.x', # MODIF
 	'tri_monter' => 'Deze auteur stijgen',
 
 	// U
-	'url_verrouillee' => 'URL verrouillée', # NEW
+	'url_verrouillee' => 'URL geblokkeerd',
 	'urls_propres_erreur' => 'Dit formaat neemt geen rekening van URL eigen hieronder op een lijst gezet.',
 	'urls_propres_format' => 'Het huidige formaat van URLs is: {{« @format@ »}}. [<span>[Configuratie->@url@]</span>]',
 	'urls_propres_lien' => 'Openbare toegang link',
