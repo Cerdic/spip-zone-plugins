@@ -41,29 +41,57 @@ function auth_pmb_autoriser_modifier_pass($serveur=''){
 }
 
 
+function auth_pmb_retrouver_login($login, $serveur='') {
+	if (!strlen($login)) return null; // pas la peine de requeter
+
+	// si l'auteur existe dans SPIP en tant que source PMB, c'est qu'il s'est deja authentifié une fois au moins
+	// donc qu'il existe !
+	if (sql_getfetsel('id_auteur', 'spip_auteurs', array(
+		'login='.sql_quote($login),
+		'source='.sql_quote('pmb'),
+		'statut<>'. sql_quote('5poubelle')))) {
+			return $login;
+	}
+
+
+	// PMB n'a pas de moyen de savoir si un auteur existe ou non.
+	// on peut juste savoir si le login+pass est valide ou non.
+	// or là, on n'a pas encore le pass.
+		// connexion webservices pmb
+		#include_spip('pmb_fonctions');
+		#pmb_ws_charger_client($ws, '');
+
+	// ici, c'est un login PMB "peut être"...
+	// on demande à SPIP d'autoriser les connexions avec un mot de passe non
+	// crypte lorsqu'on ne connait pas le login dans spip_auteurs
+	define ('_AUTORISER_AUTH_FAIBLE', true);
+	
+
+}
 
 // Authentifie via PMB et retourne la ligne SQL decrivant l'utilisateur si ok
 
 // http://doc.spip.org/@inc_auth_ldap_dist
-function auth_pmb_dist ($login, $pass, $md5pass="", $md5next="") {
+function auth_pmb_dist ($login, $pass, $serveur='') {
 
-	spip_log("pmb $login " . ($pass ? "mdp fourni" : "mdp absent"). ($md5pass ? "md5mdp fourni" : "md5mdp absent"));
+	# spip_log("pmb $login " . ($pass ? "mdp fourni" : "mdp absent"));
+
+	// le password arrive en sha256(pass+alea) lorsque c'est un auteur SPIP
+	// mais en clair si c'est un auteur hors SPIP	
+
+	// Securite 
+	if (!$login || !$pass) return array();
+
+
 	//connexion webservices pmb
 	include_spip('pmb_fonctions');
 	pmb_ws_charger_client($ws, '');
+
 	
-	// Securite 
-	if (!$login || (!$pass && !$md5pass)) return array();
-
-		     
-	 if (!$md5pass AND $pass) {
-		$md5pass = md5($pass);
-	} 
-
 	// Utilisateur connu ?
 	try {
 	      //$session_id = $ws->pmbesOPACEmpr_login($login,$pass);
-	      $session_id = $ws->pmbesOPACEmpr_login_md5($login,$md5pass);
+	      $session_id = $ws->pmbesOPACEmpr_login_md5($login, md5($pass));
 	      if ($session_id) {
 		      // importer les infos depuis pmb, 
 		      // avec le statut par defaut a l'install
@@ -75,8 +103,8 @@ function auth_pmb_dist ($login, $pass, $md5pass="", $md5next="") {
 		      
 		      // Si l'utilisateur figure deja dans la base, y recuperer les infos
 		      if ($result = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND source='pmb'")) {
-			  //mette à jour les infos pmb de l'auteur
-			  $m = sql_updateq('spip_auteurs_pmb', array(
+			      //mette à jour les infos pmb de l'auteur
+			      $m = sql_updateq('spip_auteurs_pmb', array(
 				      'pmb_session' => $session_id,
 				      'pmb_firstname' => importer_charset($resultpmb->personal_information->firstname, 'utf-8'),
 				      'pmb_lastname' => importer_charset($resultpmb->personal_information->lastname, 'utf-8'),
@@ -134,7 +162,7 @@ function auth_pmb_dist ($login, $pass, $md5pass="", $md5next="") {
 				      'pmb_adhesion_date' => importer_charset($resultpmb->adhesion_date, 'utf-8'),
 				      'pmb_expiration_date' => importer_charset($resultpmb->expiration_date, 'utf-8')));
 		      spip_log("Creation de l'auteur '$nom' dans spip_auteurs_pmb id->".$m);
-		     spip_log("test6");
+
 		       if ($n)	return sql_fetsel("*", "spip_auteurs", "id_auteur=$n");
 
 

@@ -769,7 +769,7 @@ function pmb_ws_charger_client(&$ws, $url_base) {
 		$ws = $rpc_client;
 	try {
 		$rpc_type = lire_config("spip_pmb/rpc_type","soap");
-		if($rpc_type == "soap") {
+		if ($rpc_type == "soap") {
 			ini_set("soap.wsdl_cache_enabled", "0");
 			$ws = new SoapClient(lire_config("spip_pmb/wsdl", "http://tence.bibli.fr/pmbws/PMBWsSOAP_1?wsdl"), array("features" => SOAP_SINGLE_ELEMENT_ARRAYS, 'encoding' => 'iso8859-1'));
 		}
