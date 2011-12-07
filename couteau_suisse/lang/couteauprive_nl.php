@@ -37,6 +37,10 @@ De waarde van 1~000~000 pixels lijkt juist voor een configuratie met weinig gehe
 	'action_rapide' => 'Snelle actie, alleen als u weet wat u doet !',
 	'action_rapide_non' => 'Vlugge actie, ter beschikking eens dat het instrument is geactiveerd',
 	'admins_seuls' => 'Alleen beheerders',
+	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
+
+Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.', # NEW
+	'aff_tout:nom' => 'Affiche tout', # NEW
 	'attente' => 'Wachten...',
 	'auteur_forum:description' => 'Zet alle auteurs van openbare berichten ertoe aan om een naam of mailaddress te melden (van minstens een letter!) teneinde de volkomen anonieme bijdragen te vermijden. Dit werktuig bestaat uit een javascript verificatie op het bezoekercomputer.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
 {Let op : de derde keuze maakt de twee eerste ongedaan. Het is belangrijk te controleren of de formuliers van je skeletons  compatibel zijn met dit werktuig.}', # MODIF
@@ -51,11 +55,11 @@ De waarde van 1~000~000 pixels lijkt juist voor een configuratie met weinig gehe
 @puce@ Welke statuten van auteurs kunnen op deze bladzijde op een lijst gezet worden ?
 [[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]', # MODIF
 	'auteurs:nom' => 'Bladzijde van de auteurs',
-	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML <br />.[[%alinea%]][[->%alinea2%]]', # NEW
-	'autobr:nom' => 'Retours de ligne automatiques', # NEW
-	'autobr_non' => 'À l\'intérieur des balises &lt;alinea>&lt;/alinea>', # NEW
-	'autobr_oui' => 'Articles et messages publics (balises @BALISES@)', # NEW
-	'autobr_racc' => 'Retours de ligne : <b><alinea></alinea></b>', # NEW
+	'autobr:description' => 'Toegepast op bepaalde content SPIP filter {|post_autobr} vervangt alle nieuwe regels met een enkele HTML lijn te breken <br />.[[%alinea%]][[->%alinea2%]]',
+	'autobr:nom' => 'Automatische regeleinden',
+	'autobr_non' => 'Binnen labels &lt;alinea>&lt;/alinea>',
+	'autobr_oui' => 'Artikelen en openbare berichten (labels @BALISES@)',
+	'autobr_racc' => 'Terug van de line : <b><alinea></alinea></b>',
 
 	// B
 	'balise_set:description' => 'Afin d\'alléger les écritures du type <code>#SET{x,#GET{x}|un_filtre}</code>, cet outil vous offre le raccourci suivant : <code>#SET_UN_FILTRE{x}</code>. Le filtre appliqué à une variable passe donc dans le nom de la balise.
@@ -163,10 +167,10 @@ Opgelet: door deze tweede parameter te wijzigen, verliest u dan de standaardstij
 	'code_js' => 'Javascript',
 	'code_options' => 'Opties',
 	'code_spip_options' => 'Opties SPIP',
-	'compacte_css' => 'Compacter les CSS', # NEW
-	'compacte_js' => 'Compacter le Javacript', # NEW
-	'compacte_prive' => 'Ne rien compacter en partie privée', # NEW
-	'compacte_tout' => 'Ne rien compacter du tout (rend caduques les options précédentes)', # NEW
+	'compacte_css' => 'Compact CSS',
+	'compacte_js' => 'Javacript compact',
+	'compacte_prive' => 'Niet compact gedeeltelijk prive',
+	'compacte_tout' => 'Niet comprimeren op alle (annuleert de vorige opties)',
 	'contrib' => 'Meer info : @url@',
 	'copie_vers' => 'Copie vers : @dir@', # NEW
 	'corbeille:description' => '<MODIF>SPIP verwijdert automatisch de objecten mis au rebuts na 24 uren, en dit meestal rond 4u \'s morgens, dit dankzij «CRON» (een periodieke en/of een automatische lancering van het voorgeprogrammeerde proces). Hier kunt u het proces verhinderen zodanig dat u beter vat hebt op het beheer van prullenmand.[[%arret_optimisation%]]',
@@ -264,13 +268,15 @@ Cet outil peut être couplé avec « [.->sommaire] ».', # MODIF
 	'distant_echoue' => 'De fout op de verwijderde lading, dit werktuig dreigt om niet te werken !',
 	'distant_inactif' => 'Onvindbaar bestand (inactief werktuig).',
 	'distant_present' => 'Aanwezig bestand in boekhandel sinds @date@.',
+	'docgen' => 'Documentation générale', # NEW
+	'docwiki' => 'Carnet d\'idées', # NEW
 	'dossier_squelettes:description' => 'Wijzigt het dossier van het gebruikte skelet. Bijvoorbeeld: skeletten/mijnskelet. U kunt verschillende dossiers inschrijven door ze te scheiden door beide punten <html> « : »</html>. Door leegte te laten het hokje dat (of door "dist" te typen) volgt, is het originele skelet dat "dist" door SPIP wordt geleverd, dat zal gebruikt worden. [[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'Dossier van het skelet',
 
 	// E
 	'ecran_activer' => 'Activer l\'écran de sécurité', # NEW
 	'ecran_conflit' => 'Attention : le fichier statique «@file@» peut entrer en conflit. Choisissez votre méthode de protection !', # NEW
-	'ecran_conflit2' => 'Note : un fichier statique «@file@» a été détecté et activé. Le Couteau Suisse ne pourra le mettre à jour ou le configurer.', # NEW
+	'ecran_conflit2' => 'Note : un fichier statique «@file@» a été détecté et activé. Le Couteau Suisse ne pourra le mettre à jour ou le configurer.', # MODIF
 	'ecran_ko' => 'Ecran inactif !', # NEW
 	'ecran_maj_ko' => 'La version {{@n@}} de l\'écran de sécurité est disponible. Veuillez actualiser le fichier distant de cet outil.', # NEW
 	'ecran_maj_ko2' => 'La version @n@ de l\'écran de sécurité est disponible. Vous pouvez actualiser le fichier distant de l\'outil « [.->ecran_securite] ».', # NEW
@@ -480,6 +486,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:terminaison_urls_page' => '<MODIF>De uitgang van URls (ex : .html) :',
 	'label:titre_travaux' => 'Titel van het bericht :',
 	'label:titres_etendus' => 'Activer l\'utilisation étendue des balises #TITRE_XXX :', # NEW
+	'label:tout_rub' => 'Afficher en public tous les objets suivants :', # NEW
 	'label:url_arbo_minuscules' => 'Het breken van de titels in URLs behouden :',
 	'label:url_arbo_sep_id' => 'Het scheidingskarakter \'titel-idem\' in geval van doublon: <br/>(niet gebruiken \'/\')', # MODIF
 	'label:url_glossaire_externe2' => 'Band naar het externe glossarium :',
@@ -546,7 +553,7 @@ Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère
 	'outil_desactiver' => 'Buiten dienst zetten.',
 	'outil_desactiver_le' => 'het werktuig buiten dienst zetten.',
 	'outil_inactif' => 'Inactief werktuig',
-	'outil_intro' => 'Deze bladzijde zet de functies van plugin op een lijst die uw ter beschikking worden gesteld.<br /><br />Door op de naam van de werktuigen te klikken hieronder, selecteert u degenen waarvan zult kunnen verwisselen u de stand met behulp van de centrale knoop: de geactiveerde werktuigen désactivés en <i>vice versa</i>. Aan elke klik, blijkt de beschrijving onder de lijsten. De categorieën zijn opvouwbaar en de werktuigen kunnen verborgen worden. Het dubbele-Voor een eerste gebruik, wordt hij aanbevolen om de werktuigen één voor één te activeren, ingeval zeker de onverenigbaarheden met uw skelet, SPIP of anderen plugins zouden blijkenklik maakt het mogelijk om een werktuig snel te verwisselen.<br /><br />.<br /><br />Nota : de eenvoudige lading van deze bladzijde compileert het geheel van de werktuigen van het Zwitserland Mes opnieuw.',
+	'outil_intro' => 'Deze bladzijde zet de functies van plugin op een lijst die uw ter beschikking worden gesteld.<br /><br />Door op de naam van de werktuigen te klikken hieronder, selecteert u degenen waarvan zult kunnen verwisselen u de stand met behulp van de centrale knoop: de geactiveerde werktuigen désactivés en <i>vice versa</i>. Aan elke klik, blijkt de beschrijving onder de lijsten. De categorieën zijn opvouwbaar en de werktuigen kunnen verborgen worden. Het dubbele-Voor een eerste gebruik, wordt hij aanbevolen om de werktuigen één voor één te activeren, ingeval zeker de onverenigbaarheden met uw skelet, SPIP of anderen plugins zouden blijkenklik maakt het mogelijk om een werktuig snel te verwisselen.<br /><br />.<br /><br />Nota : de eenvoudige lading van deze bladzijde compileert het geheel van de werktuigen van het Zwitserland Mes opnieuw.', # MODIF
 	'outil_intro_old' => 'Deze interface is oud.<br /><br />Als u problemen in het gebruik van <a href=\' ./? exec=admin_couteau_suisse\'> nieuwe interface ondervindt</a>, aarzelt niet aandeel ervan doen over het forum van <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
 	'outil_nb' => '@pipe@ : @nb@ werktuig', # MODIF
 	'outil_nbs' => '@pipe@ : @nb@ werktuigen', # MODIF
@@ -575,7 +582,7 @@ Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère
 
 Deze PHP code kan plaats in het bestand /config/mes_options.php nemen en zal een band van réinitialisatie op deze bladzijde van het pakijs {Pakijs Huidige} toevoegen. Natuurlijk is het u mogelijk om zijn naam hieronder te veranderen.
 
-Als u plugin réinitialiserd door op een pakijs te klikken, reconfiguratie van het Zwitserland mes  automatisch in functie van het pakijs voor bepaald parameters.',
+Als u plugin réinitialiserd door op een pakijs te klikken, reconfiguratie van het Zwitserland mes  automatisch in functie van het pakijs voor bepaald parameters.', # MODIF
 	'pack_du' => '• van het pakijs @pack@',
 	'pack_installe' => 'Het invoeren van een configuratie pakijs',
 	'pack_installer' => 'Êtes-vous sûr de vouloir réinitialiser le Couteau Suisse et installer le pack « @pack@ » ?', # NEW
@@ -721,9 +728,10 @@ La fonction SPIP utilisée en PHP est <code>_T(\'chaine\')</code> sans argument,
  N\'oubliez donc pas de vérifier que la clef <code>\'chaine\'</code> est bien définie dans les fichiers de langues.', # MODIF
 	'toutmulti:nom' => 'Meertalige blokken',
 	'travaux_masquer_avert' => 'Masquer le cadre indiquant sur le site public qu\'une maintenance est en cours', # NEW
+	'travaux_nocache' => 'Désactiver également le cache de SPIP', # NEW
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Deze site zal zeer binnenkort hersteld worden.
-_ Bedankt voor uw begrip.',
+_ Bedankt voor uw begrip.', # MODIF
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
 	'tri_articles:description' => '<MODIF>En naviguant sur le site en partie privée ([->./?exec=auteurs]), choisissez ici le tri à utiliser pour afficher vos articles à l\'intérieur de vos rubriques.
 

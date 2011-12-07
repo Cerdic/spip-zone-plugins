@@ -4,14 +4,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-'docgen'=>'Documentation générale',
-'docwiki'=>'Carnet d\'idées',
-'aff_tout:nom'=>'Affiche tout',
-'aff_tout:description'=>'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
 
-Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.',
-'label:tout_rub'=>'Afficher en public tous les objets suivants :',
-'travaux_nocache'=>'Désactiver également le cache de SPIP',
 	// 2
 	'2pts_non' => ' : non',
 	'2pts_oui' => ' : oui',
@@ -46,6 +39,10 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'action_rapide' => 'Action rapide, uniquement si vous savez ce que vous faites !',
 	'action_rapide_non' => 'Action rapide, disponible une fois cet outil activé :',
 	'admins_seuls' => 'Les administrateurs seulement',
+	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
+
+Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.',
+	'aff_tout:nom' => 'Affiche tout',
 	'attente' => 'Attente...',
 	'auteur_forum:description' => 'Incite tous les auteurs de messages publics à fournir (d\'au moins d\'une lettre !) un nom et/ou un courriel afin d\'éviter les contributions totalement anonymes. Notez que cet outil procède à une vérification JavaScript sur le poste du visiteur.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
 {Attention : Choisir la troisième option annule les 2 premières. Il est important de vérifier que les formulaires de votre squelette sont bien compatibles avec cet outil.}',
@@ -284,6 +281,8 @@ Cet outil peut être couplé avec « [.->sommaire] ».',
 	'distant_echoue' => 'Erreur sur le chargement distant, cet outil risque de ne pas fonctionner !',
 	'distant_inactif' => 'Fichier introuvable (outil inactif).',
 	'distant_present' => 'Fichier présent en librairie depuis le @date@.',
+	'docgen' => 'Documentation générale',
+	'docwiki' => 'Carnet d\'idées',
 	'dossier_squelettes:description' => 'Modifie le dossier du squelette utilisé. Par exemple : &quot;squelettes/monsquelette&quot;. Vous pouvez inscrire plusieurs dossiers en les séparant par les deux points <html>« : »</html>. En laissant vide la case qui suit (ou en tapant &quot;dist&quot;), c\'est le squelette original &quot;dist&quot; fourni par SPIP qui sera utilisé.[[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'Dossier du squelette',
 
@@ -510,6 +509,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:terminaison_urls_page' => 'Terminaison des URLs (ex : « .html ») :',
 	'label:titre_travaux' => 'Titre du message :',
 	'label:titres_etendus' => 'Activer l\'utilisation étendue des balises #TITRE_XXX :',
+	'label:tout_rub' => 'Afficher en public tous les objets suivants :',
 	'label:url_arbo_minuscules' => 'Conserver la casse des titres dans les URLs :',
 	'label:url_arbo_sep_id' => 'Caractère de séparation \'titre-id\' en cas de doublon :<br />(ne pas utiliser \'/\')',
 	'label:url_glossaire_externe2' => 'Lien vers le glossaire externe :',
@@ -771,6 +771,7 @@ La fonction SPIP utilisée en PHP est <code>_T(\'chaine\')</code> sans argument,
  N\'oubliez donc pas de vérifier que la clef <code>\'chaine\'</code> est bien définie dans les fichiers de langues.',
 	'toutmulti:nom' => 'Blocs multilingues',
 	'travaux_masquer_avert' => 'Masquer le cadre indiquant sur le site public qu\'une maintenance est en cours',
+	'travaux_nocache' => 'Désactiver également le cache de SPIP',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Ce site sera rétabli très prochainement.
 _ Merci de votre compréhension.',

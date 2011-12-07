@@ -41,6 +41,10 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'action_rapide' => 'Acción rápida, unicamente se sabe do que fai!',
 	'action_rapide_non' => 'Acción rápida, dispoñible tras a activación desta utilidade :',
 	'admins_seuls' => 'Só para administradores/as',
+	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
+
+Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.', # NEW
+	'aff_tout:nom' => 'Affiche tout', # NEW
 	'attente' => 'En espera...',
 	'auteur_forum:description' => 'Invite a todos os autores de mensaxes públicas a fornecer (cando menos cunha letra!) un nome e/ou un correo co fin de evitar as colaboracións totalmente anónimas. Esta utilidade procede a facer unha verificación JavaScript sobre a caixa de correo do visitante.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
 {Atención : Escoller a terceira opción anula as dúas primeiras. Cómpre verificar que os formularios do seu esqueleto sexan compatibles con esta ferramenta.}', # MODIF
@@ -269,13 +273,15 @@ _ Esta utilidade pode ser emparellada con « [.->sommaire] ».', # MODIF
 	'distant_echoue' => 'Erreur sur le chargement distant, cet outil risque de ne pas fonctionner !', # NEW
 	'distant_inactif' => 'Fichier introuvable (outil inactif).', # NEW
 	'distant_present' => 'Fichier présent en librairie depuis le @date@.', # NEW
+	'docgen' => 'Documentation générale', # NEW
+	'docwiki' => 'Carnet d\'idées', # NEW
 	'dossier_squelettes:description' => 'Modifica o cartafol do esqueleto usado. Por exemplo : "squelettes/monsquelette". Pode rexistrar varios cartafoles separándoos polos dous puntos <html>« : »</html>. Deixando baleira caixa seguinte (ou escribindo "dist"), vai ser o esqueleto orixinal "dist" fornecido por SPIP o que será usado.[[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'Cartafol do esqueleto',
 
 	// E
 	'ecran_activer' => 'Activer l\'écran de sécurité', # NEW
 	'ecran_conflit' => 'Attention : le fichier statique «@file@» peut entrer en conflit. Choisissez votre méthode de protection !', # NEW
-	'ecran_conflit2' => 'Note : un fichier statique «@file@» a été détecté et activé. Le Couteau Suisse ne pourra le mettre à jour ou le configurer.', # NEW
+	'ecran_conflit2' => 'Note : un fichier statique «@file@» a été détecté et activé. Le Couteau Suisse ne pourra peut-être pas le mettre à jour ou le configurer.', # NEW
 	'ecran_ko' => 'Ecran inactif !', # NEW
 	'ecran_maj_ko' => 'La version {{@n@}} de l\'écran de sécurité est disponible. Veuillez actualiser le fichier distant de cet outil.', # NEW
 	'ecran_maj_ko2' => 'La version @n@ de l\'écran de sécurité est disponible. Vous pouvez actualiser le fichier distant de l\'outil « [.->ecran_securite] ».', # NEW
@@ -494,6 +500,7 @@ Atención, esta ferramenta, precisa para funcionar do módulo {jQuery} : {Round 
 	'label:terminaison_urls_page' => 'Terminación dos URL (ex : « .html ») :',
 	'label:titre_travaux' => 'Título da mensaxe :',
 	'label:titres_etendus' => 'Activr a utilización estendida das balizas #TITRE_XXX :',
+	'label:tout_rub' => 'Afficher en public tous les objets suivants :', # NEW
 	'label:url_arbo_minuscules' => 'Conservar a altura tipográfica dos títulos nos URL :',
 	'label:url_arbo_sep_id' => 'Carácter de separación \'titulo-id\' para o caso de repetición (doublon) :<br/>(non empregue \'/\')', # MODIF
 	'label:url_glossaire_externe2' => 'Ligazón sobre o glosario externo :',
@@ -740,6 +747,7 @@ A función SPIP usada en PHP é : <code>_T(\'chaine\')</code>. sen argumento, e 
 Non esqueza verificar que a clave <code>\'cadea\'</code> está ben definida nos ficheiros de lingua.', # MODIF
 	'toutmulti:nom' => 'Bloques multilingües',
 	'travaux_masquer_avert' => 'Ocultar o cadro que indica no web público que unha operación de mantemento está en curso',
+	'travaux_nocache' => 'Désactiver également le cache de SPIP', # NEW
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Este web será restablecido axiña.
 _ Grazas pola súa comprensión.',

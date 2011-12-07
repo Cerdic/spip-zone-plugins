@@ -41,6 +41,10 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'action_rapide' => 'Acción rápida, ¡sólo si sabes lo que haces!',
 	'action_rapide_non' => 'Acción rápida, disponible una vez activada esta herramienta:',
 	'admins_seuls' => 'Los administradores solamente',
+	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
+
+Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.', # NEW
+	'aff_tout:nom' => 'Affiche tout', # NEW
 	'attente' => 'Espera...',
 	'auteur_forum:description' => 'Pide a todos los autores de mensajes públicos que rellenen (¡al menos con una letra!) el campo «@_CS_FORUM_NOM@» para evitar las contribuciones completamente anónimas.', # MODIF
 	'auteur_forum:nom' => 'Sin foros anónimos',
@@ -262,13 +266,15 @@ Esta herramienta puede acoplarse con « [.->sommaire] ».', # MODIF
 	'distant_echoue' => 'Erreur sur le chargement distant, cet outil risque de ne pas fonctionner !', # NEW
 	'distant_inactif' => 'Fichier introuvable (outil inactif).', # NEW
 	'distant_present' => 'Fichier présent en librairie depuis le @date@.', # NEW
+	'docgen' => 'Documentation générale', # NEW
+	'docwiki' => 'Carnet d\'idées', # NEW
 	'dossier_squelettes:description' => 'Modifica la carpeta de esqueleto utilizada. Por ejemplo: "esqueletos/miesqueleto". Puedes registrar varias carpetas separándolas con dos puntos <html>« : »</html>. Si se deja vacío el siguiente cuadro (o escribiendo "dist"), se usará el esqueleto original "dist" proporcionado por SPIP.[[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'Carpeta del esqueleto',
 
 	// E
 	'ecran_activer' => 'Activer l\'écran de sécurité', # NEW
 	'ecran_conflit' => 'Attention : le fichier statique «@file@» peut entrer en conflit. Choisissez votre méthode de protection !', # NEW
-	'ecran_conflit2' => 'Note : un fichier statique «@file@» a été détecté et activé. Le Couteau Suisse ne pourra le mettre à jour ou le configurer.', # NEW
+	'ecran_conflit2' => 'Note : un fichier statique «@file@» a été détecté et activé. Le Couteau Suisse ne pourra peut-être pas le mettre à jour ou le configurer.', # NEW
 	'ecran_ko' => 'Ecran inactif !', # NEW
 	'ecran_maj_ko' => 'La version {{@n@}} de l\'écran de sécurité est disponible. Veuillez actualiser le fichier distant de cet outil.', # NEW
 	'ecran_maj_ko2' => 'La version @n@ de l\'écran de sécurité est disponible. Vous pouvez actualiser le fichier distant de l\'outil « [.->ecran_securite] ».', # NEW
@@ -490,6 +496,7 @@ Atención, esta herramienta necesita el plugin {jQuery} : {Round Corners} para f
 	'label:terminaison_urls_page' => 'Terminación de las URLs (ej.: «.html»):',
 	'label:titre_travaux' => 'Título del mensaje:',
 	'label:titres_etendus' => 'Activar el uso extendido de las balizas #TITRE_XXX:',
+	'label:tout_rub' => 'Afficher en public tous les objets suivants :', # NEW
 	'label:url_arbo_minuscules' => 'Conservar los espacios de los títulos en las URLs:',
 	'label:url_arbo_sep_id' => 'Carácter de separación \'titre-id\' en caso de duplicidad:<br/>(no utilizar \'/\')', # MODIF
 	'label:url_glossaire_externe2' => 'Enlace al glosario externo:',
@@ -734,6 +741,7 @@ La función de SPIP utilizada en PHP es  <code>_T(\'cadena\')</code> sin argumen
 No te olvides de verificar que la clave <code>\'cadena\'</code> esté bien definida en los ficheros de idiomas. ', # MODIF
 	'toutmulti:nom' => 'Bloques multilingües',
 	'travaux_masquer_avert' => 'Masquer le cadre indiquant sur le site public qu\'une maintenance est en cours', # NEW
+	'travaux_nocache' => 'Désactiver également le cache de SPIP', # NEW
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Este sitio se reactivará en breve.
 _ Gracias por la comprensión.',

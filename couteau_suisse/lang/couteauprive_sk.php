@@ -40,6 +40,10 @@ Hodnota 1~000~000 pixelov sa zdá byť rozumná na nastavenie, ak máte málo do
 	'action_rapide' => 'Rýchla akcia, iba ak viete, čo robíte!',
 	'action_rapide_non' => 'Rapid action, available when this tool is activated:',
 	'admins_seuls' => 'Len administrátori',
+	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
+
+Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.', # NEW
+	'aff_tout:nom' => 'Affiche tout', # NEW
 	'attente' => 'Čaká sa...',
 	'auteur_forum:description' => 'Požiadajte všetkých autorov verejných stráv, aby vyplnili (aspoň jedným písmenom!) meno a/alebo email, aby sa predišlo úplne anonymným správam. Majte na pamäti, že tento nástroj vykonáva overenie cez Javascript v prehliadači používateľa. [[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
 {Upozornenie: Tretia možnosť ruší ostatné. Je dôležité overiť si, že formuláre vašej šablóny sú kompatibilné s týmto nástrojom.}',
@@ -266,13 +270,15 @@ This tool may be combined with "[.->sommaire]".', # MODIF
 	'distant_echoue' => 'Chyba pri nahrávaní, tento nástroj možno nefunguje!',
 	'distant_inactif' => 'Súbor sa nenašiel (nástroj neaktívny).',
 	'distant_present' => 'Súbor existuje v knižnici od @date@.',
+	'docgen' => 'Documentation générale', # NEW
+	'docwiki' => 'Carnet d\'idées', # NEW
 	'dossier_squelettes:description' => 'Changes which template directory to use. For example: "squelettes/mytemplate". You can register several directories by separating them with a colon <html>":"</html>. If you leave the following box empty (or type "dist" in it), then the default "dist" template, supplied with SPIP, will be used.[[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'Priečinok šablón',
 
 	// E
 	'ecran_activer' => 'Povoliť bezpečnostnú obrazovku',
 	'ecran_conflit' => 'Varovanie: súbor "@file@" spôsobuje konflikt a mal by byť odstránený!',
-	'ecran_conflit2' => 'Poznámka: statický súbor s názvom "@file@" sa našiel a bol aktivovaný. Modul Vreckový nožík ho nevedel aktualizovať ani nastaviť.',
+	'ecran_conflit2' => 'Poznámka: statický súbor s názvom "@file@" sa našiel a bol aktivovaný. Modul Vreckový nožík ho nevedel aktualizovať ani nastaviť.', # MODIF
 	'ecran_ko' => 'Neaktívna obrazovka!',
 	'ecran_maj_ko' => 'K dispozícii je verzia {{@n@}} bezpečnostnej obrazovky. Prosím, aktualizujte vzdialený súbor tejto utility.',
 	'ecran_maj_ko2' => 'K dispozícii je verzia @n@ bezpečnostnej obrazovky. Môžete aktualizovať vzdialený súbor " [.->ecran_securite] ".',
@@ -492,6 +498,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:terminaison_urls_page' => 'URL endings (e.g.: .html):',
 	'label:titre_travaux' => 'Názov príspevku:',
 	'label:titres_etendus' => 'Activate the extended use of the tags #TITRE_XXX:',
+	'label:tout_rub' => 'Afficher en public tous les objets suivants :', # NEW
 	'label:url_arbo_minuscules' => 'Nechať veľkosť písma podľa názvu vo www adrese:',
 	'label:url_arbo_sep_id' => 'Oddeľovač \'title-id\', ktorý sa použije v prípade duplicity:<br/>(nepoužívajte /)',
 	'label:url_glossaire_externe2' => 'Odkaz na externý slovník:',
@@ -745,6 +752,7 @@ The SPIP function used is: <code>_T(\'a_text\')</code> (with no parmameters), an
 Do not forget to check that the variable used <code>\'a_text\'</code> is defined in the language files.', # MODIF
 	'toutmulti:nom' => 'Viacjazyčné bloky',
 	'travaux_masquer_avert' => 'Schovať rám, ktorý uvádza na verejnej stránke, že sa vykonáva údržba',
+	'travaux_nocache' => 'Désactiver également le cache de SPIP', # NEW
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'This site will be back online soon.
 _ Thank you for your understanding.',

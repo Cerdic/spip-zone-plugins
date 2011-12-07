@@ -14,7 +14,9 @@
 		<traducteur nom="beatnick" />
 	</langue>
 	<langue code="gl" />
-	<langue code="nl" />
+	<langue code="nl">
+		<traducteur nom="michelpossoz" />
+	</langue>
 	<langue code="sk">
 		<traducteur nom="jaro" />
 	</langue>

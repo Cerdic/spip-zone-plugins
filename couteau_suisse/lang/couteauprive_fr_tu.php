@@ -41,6 +41,10 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'action_rapide' => 'Action rapide, uniquement si tu sais ce que tu fais !',
 	'action_rapide_non' => 'Action rapide, disponible une fois cet outil activé :',
 	'admins_seuls' => 'Les administrateurs seulement',
+	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
+
+Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.', # NEW
+	'aff_tout:nom' => 'Affiche tout', # NEW
 	'attente' => 'Attente...',
 	'auteur_forum:description' => 'Incite tous les auteurs de messages publics à fournir (d\'au moins d\'une lettre !) un nom et/ou un courriel afin d\'éviter les contributions totalement anonymes. Note que cet outil procède à une vérification JavaScript sur le poste du visiteur.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
 {Attention : Choisir la troisième option annule les 2 premières. Il est important de vérifier que les formulaires de ton squelette sont bien compatibles avec cet outil.}',
@@ -279,13 +283,15 @@ Cet outil peut être couplé avec « [.->sommaire] ».',
 	'distant_echoue' => 'Erreur sur le chargement distant, cet outil risque de ne pas fonctionner !',
 	'distant_inactif' => 'Fichier introuvable (outil inactif).',
 	'distant_present' => 'Fichier présent en librairie depuis le @date@.',
+	'docgen' => 'Documentation générale', # NEW
+	'docwiki' => 'Carnet d\'idées', # NEW
 	'dossier_squelettes:description' => 'Modifie le dossier du squelette utilisé. Par exemple : "squelettes/monsquelette". Tu peux inscrire plusieurs dossiers en les séparant par les deux points <html>« : »</html>. En laissant vide la case qui suit (ou en tapant "dist"), c\'est le squelette original "dist" fourni par SPIP qui sera utilisé.[[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'Dossier du squelette',
 
 	// E
 	'ecran_activer' => 'Activer l\'écran de sécurité',
 	'ecran_conflit' => 'Attention : le fichier statique «@file@» peut entrer en conflit. Choisis ta méthode de protection !',
-	'ecran_conflit2' => 'Note : un fichier statique «@file@» a été détecté et activé. Le Couteau Suisse ne pourra le mettre à jour ou le configurer.',
+	'ecran_conflit2' => 'Note : un fichier statique «@file@» a été détecté et activé. Le Couteau Suisse ne pourra le mettre à jour ou le configurer.', # MODIF
 	'ecran_ko' => 'Ecran inactif !',
 	'ecran_maj_ko' => 'La version {{@n@}} de l\'écran de sécurité est disponible. Actualise le fichier distant de cet outil.',
 	'ecran_maj_ko2' => 'La version @n@ de l\'écran de sécurité est disponible. Tu peux actualiser le fichier distant de l\'outil « [.->ecran_securite] ».',
@@ -304,7 +310,7 @@ En cas de mise à jour officielle, actualise le fichier distant associé (clique
 	'ecran_securite:nom' => 'Ecran de sécurité',
 	'effaces' => 'Effacés',
 	'en_travaux:description' => 'Pendant une phase de maintenance, permet d\'afficher un message personalisable sur tout le site public, éventuellement la partie privée.
-[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1">%avertir_travaux%</admin_travaux>]][[%prive_travaux%]]',
+[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1">%avertir_travaux%</admin_travaux>]][[%prive_travaux%]]', # MODIF
 	'en_travaux:nom' => 'Site en travaux',
 	'erreur:bt' => '<span style="color:red;">Attention :</span> la barre typographique (version @version@) semble ancienne.<br />Le Couteau Suisse est compatible avec une version supérieure ou égale à @mini@.',
 	'erreur:description' => 'id manquant dans la définition de l\'outil !',
@@ -506,6 +512,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:terminaison_urls_page' => 'Terminaison des URLs (ex : « .html ») :',
 	'label:titre_travaux' => 'Titre du message :',
 	'label:titres_etendus' => 'Activer l\'utilisation étendue des balises #TITRE_XXX :',
+	'label:tout_rub' => 'Afficher en public tous les objets suivants :', # NEW
 	'label:url_arbo_minuscules' => 'Conserver la casse des titres dans les URLs :',
 	'label:url_arbo_sep_id' => 'Caractère de séparation \'titre-id\' en cas de doublon :<br />(ne pas utiliser \'/\')',
 	'label:url_glossaire_externe2' => 'Lien vers le glossaire externe :',
@@ -767,6 +774,7 @@ La fonction SPIP utilisée en PHP est <code>_T(\'chaine\')</code> sans argument,
  N\'oublie donc pas de vérifier que la clef <code>\'chaine\'</code> est bien définie dans les fichiers de langues.',
 	'toutmulti:nom' => 'Blocs multilingues',
 	'travaux_masquer_avert' => 'Masquer le cadre indiquant sur le site public qu\'une maintenance est en cours',
+	'travaux_nocache' => 'Désactiver également le cache de SPIP', # NEW
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Ce site sera rétabli très prochainement.
 _ Merci de ta compréhension.',

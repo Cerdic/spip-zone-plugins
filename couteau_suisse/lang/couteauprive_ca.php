@@ -41,6 +41,10 @@ El valor de 1~000~000 píxels sembla correcte per una configuració amb poca mem
 	'action_rapide' => 'Acció ràpida, només si sabeu què us feu! ',
 	'action_rapide_non' => 'Acció ràpida, disponible un cop aquesta eina siga activada :',
 	'admins_seuls' => 'Només els administradors',
+	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
+
+Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.', # NEW
+	'aff_tout:nom' => 'Affiche tout', # NEW
 	'attente' => 'Espera...',
 	'auteur_forum:description' => 'Incita a tots els autors de missatges públics a omplir (amb una lletra com a mínim!) un nom i/o un correu electrònic per tal d\'evitar les contribucions totalment anònimes. Fixeu-vos que aquesta eina fa una verificació del JavaScript al lloc del visitant.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
 {Alerta: Escollir la tercera opció anul·la les 2 primeres. És important verificar que els formularis del vostre esquelet són compatibles completament amb aquesta eina.}',
@@ -279,13 +283,15 @@ Aquesta eina es pot acompanyar amb « [.->sommaire] ».',
 	'distant_echoue' => 'Error en la càrrega distant, aquesta eina té el risc de no funcionar!',
 	'distant_inactif' => 'Fitxer introbable )eina inactiva).',
 	'distant_present' => 'Fitxer present a la llibreria a partir del @date@.',
+	'docgen' => 'Documentation générale', # NEW
+	'docwiki' => 'Carnet d\'idées', # NEW
 	'dossier_squelettes:description' => 'Modifica la carpeta de l\'esquelet utilitzat. Per exemple: "esquelets/elmeuesquelet". Podeu inscriure diverses carpetes separant-les pels dos punts <html>« : »</html>. Deixar buida la caixa que segueix (o teclejant "dist"), és l\'esquelet original "dist" subministrat per SPIP el que es farà servir.[[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'Carpeta de l\'esquelet',
 
 	// E
 	'ecran_activer' => 'Activar la pantalla de seguretat',
 	'ecran_conflit' => 'Atenció: el fitxer «@file@» entra en conflicte i s\'ha de suprimir!',
-	'ecran_conflit2' => 'Nota: s\'ha detectat i activat un fitxer estàtic «@file@». El Ganivet Suís no podrà ni actualitzar-lo ni configurar-lo.',
+	'ecran_conflit2' => 'Nota: s\'ha detectat i activat un fitxer estàtic «@file@». El Ganivet Suís no podrà ni actualitzar-lo ni configurar-lo.', # MODIF
 	'ecran_ko' => 'Pantalla inactiva!',
 	'ecran_maj_ko' => 'Hi ha disponible la versió {{@n@}} de la pantalla de seguretat. Actualitzeu el fitxer distant d\'aquesta eina.',
 	'ecran_maj_ko2' => 'La versió @n@ de la pantalla de seguretat està disponible. Podeu actualitzar el fitxer distant de l\'eina « [.->ecran_securite] ».',
@@ -305,7 +311,7 @@ En cas d\'actualització oficial, actualitzeu el fitxer distant associat (clique
 	'effaces' => 'Esborrats',
 	'en_travaux:description' => 'Durant un període de manteniment, permet mostrar un missatge personalitzat a tot el lloc públic, eventualment la part privada.
 
-[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1">%avertir_travaux%</admin_travaux>]][[%prive_travaux%]]',
+[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1">%avertir_travaux%</admin_travaux>]][[%prive_travaux%]]', # MODIF
 	'en_travaux:nom' => 'Lloc en manteniment',
 	'erreur:bt' => '<span style="color:red;">Atenció:</span> la barra tipogràfica (versió @version@) sembla antiga.<br />El Ganivet Suís és compatible amb una versió igual o superior a @mini@.',
 	'erreur:description' => 'id absent en la definició de l\'eina!',
@@ -510,6 +516,7 @@ Atenció, aquesta eina necessita per funcionar el plugin {jQuery}: {Round Corner
 	'label:terminaison_urls_page' => 'Terminacions dels URls (ex : « .html ») :',
 	'label:titre_travaux' => 'Títol del missatge:',
 	'label:titres_etendus' => 'Activar la utilització àmplia d\'etiquetes #TITRE_XXX :',
+	'label:tout_rub' => 'Afficher en public tous les objets suivants :', # NEW
 	'label:url_arbo_minuscules' => 'Conservar els tipus dels títols en els URLs:',
 	'label:url_arbo_sep_id' => 'Caràcter de separació \'titre-id\' en cas de doublon:<br />(no utilitzar \'/\')',
 	'label:url_glossaire_externe2' => 'Enllaç al glossari extern:',
@@ -773,6 +780,7 @@ La funció SPIP utilitzada en PHP és <code>_T(\'chaine\')</code> sense argument
 Per tant, no oblideu verificar que la clau  <code>\'chaine\'</code> està ben definida en els fitxers de llengües. ',
 	'toutmulti:nom' => 'Blocs multilingües',
 	'travaux_masquer_avert' => 'Amagar el requadre indicant al lloc públic que s\'està fent un manteniment.',
+	'travaux_nocache' => 'Désactiver également le cache de SPIP', # NEW
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Aquest lloc es restablirà ben aviat.
 _ Gràcies per la vostra comprensió.',

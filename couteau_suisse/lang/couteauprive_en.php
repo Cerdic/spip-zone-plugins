@@ -46,6 +46,10 @@ The value of 1,000,000 pixels appears to be reasonable for a configuration with 
 	'action_rapide' => 'Rapid action, only if you know what you are doing!',
 	'action_rapide_non' => 'Rapid action, available when this tool is activated:',
 	'admins_seuls' => 'Only administrators',
+	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
+
+Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.', # NEW
+	'aff_tout:nom' => 'Affiche tout', # NEW
 	'attente' => 'Waiting...',
 	'auteur_forum:description' => 'Request all authors of public messages to fill in (with at least one letter!) a name and/or email in order to avoid completely anonymous messages. Note that the tool performs a JavaScript validation with the user\'s browser.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
 {Caution: The third option cancels the 2 others. It is important to verify that the forms in your SPIP templates are compatible with this tool.}',
@@ -337,13 +341,15 @@ This tool may be combined with "[.->sommaire]".', # MODIF
 	'distant_echoue' => 'An error occurred with the remote file download - this tool may not work properly!',
 	'distant_inactif' => 'Can not find the remote file (tool is inactive).',
 	'distant_present' => 'The file exists in the library since @date@.',
+	'docgen' => 'Documentation générale', # NEW
+	'docwiki' => 'Carnet d\'idées', # NEW
 	'dossier_squelettes:description' => 'Changes which template directory to use. For example: "squelettes/mytemplate". You can register several directories by separating them with a colon <html>":"</html>. If you leave the following box empty (or type "dist" in it), then the default "dist" template, supplied with SPIP, will be used.[[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'Template directory',
 
 	// E
 	'ecran_activer' => 'Enable the security screen',
 	'ecran_conflit' => 'Warning: the "@file@" file is causing a conflict and should be deleted!', # MODIF
-	'ecran_conflit2' => 'Note: a static file named "@file@" has been detected and activated. The Swiss Knife could not update it or configure it.',
+	'ecran_conflit2' => 'Note: a static file named "@file@" has been detected and activated. The Swiss Knife could not update it or configure it.', # MODIF
 	'ecran_ko' => 'Inactive screen!',
 	'ecran_maj_ko' => 'Version {{@n@}} of the security screen is available. Please update the remote file for this utility.',
 	'ecran_maj_ko2' => 'Version @n@ of the safetu screen is available. You can update the remote file " [.->ecran_securite] ".',
@@ -604,6 +610,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:terminaison_urls_page' => 'URL endings (e.g.: .html):',
 	'label:titre_travaux' => 'Message title:',
 	'label:titres_etendus' => 'Activate the extended use of the tags #TITRE_XXX:',
+	'label:tout_rub' => 'Afficher en public tous les objets suivants :', # NEW
 	'label:url_arbo_minuscules' => 'Preserve the case of titles in URLs:',
 	'label:url_arbo_sep_id' => 'Separation character for \'title-id\', used in the event of homonyms:<br />(do not use \'/\')',
 	'label:url_glossaire_externe2' => 'Link to external glossary:',
@@ -958,6 +965,7 @@ The SPIP PHP function used is: <code>_T(\'a_text\')</code> (with no parameters),
 Do not forget to check that the variable used <code>\'a_text\'</code> is defined in the language files.', # MODIF
 	'toutmulti:nom' => 'Multilingual blocks',
 	'travaux_masquer_avert' => 'Hide the frame indicating on the public site that maintenance is currently being carried out',
+	'travaux_nocache' => 'Désactiver également le cache de SPIP', # NEW
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'This site will be back online soon.
 

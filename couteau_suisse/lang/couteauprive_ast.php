@@ -41,6 +41,10 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'action_rapide' => 'Aición rápida, ¡únicamente si sabes lo que tas faciendo!',
 	'action_rapide_non' => 'Aición rápida, disponible de magar que actives esta ferramienta:',
 	'admins_seuls' => 'Namái los alministradores',
+	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
+
+Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.', # NEW
+	'aff_tout:nom' => 'Affiche tout', # NEW
 	'attente' => 'N\'espera...',
 	'auteur_forum:description' => 'Encamienta a tolos autores de mensaxes públicos escribir (¡polo menos una lletra!) nel campu «@_CS_FORUM_NOM@» col fin d\'evitar los mensaxes totalmente anónimos.', # MODIF
 	'auteur_forum:nom' => 'Ensin foros anónimos',
@@ -266,13 +270,15 @@ Esta ferramienta puede acoplase con «[.->sommaire]».', # MODIF
 	'distant_echoue' => 'Erreur sur le chargement distant, cet outil risque de ne pas fonctionner !', # NEW
 	'distant_inactif' => 'Fichier introuvable (outil inactif).', # NEW
 	'distant_present' => 'Fichier présent en librairie depuis le @date@.', # NEW
+	'docgen' => 'Documentation générale', # NEW
+	'docwiki' => 'Carnet d\'idées', # NEW
 	'dossier_squelettes:description' => 'Modifica la carpeta de cadarma utilizada. Por exemplu: "squelettes/miocadarma". Pues escribir dellos direutorios separtaos por dos puntos <html>« : »</html>. Si dexes vacíu el cuadru siguiente (o escribiendo "dist"), sedrá la cadarma orixinal "dist" que ufre SPIP la que se use.[[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'Direutoriu de la cadarma',
 
 	// E
 	'ecran_activer' => 'Activer l\'écran de sécurité', # NEW
 	'ecran_conflit' => 'Attention : le fichier statique «@file@» peut entrer en conflit. Choisissez votre méthode de protection !', # NEW
-	'ecran_conflit2' => 'Note : un fichier statique «@file@» a été détecté et activé. Le Couteau Suisse ne pourra le mettre à jour ou le configurer.', # NEW
+	'ecran_conflit2' => 'Note : un fichier statique «@file@» a été détecté et activé. Le Couteau Suisse ne pourra peut-être pas le mettre à jour ou le configurer.', # NEW
 	'ecran_ko' => 'Ecran inactif !', # NEW
 	'ecran_maj_ko' => 'La version {{@n@}} de l\'écran de sécurité est disponible. Veuillez actualiser le fichier distant de cet outil.', # NEW
 	'ecran_maj_ko2' => 'La version @n@ de l\'écran de sécurité est disponible. Vous pouvez actualiser le fichier distant de l\'outil « [.->ecran_securite] ».', # NEW
@@ -492,6 +498,7 @@ Atención, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Round Co
 	'label:terminaison_urls_page' => 'Terminación de les URLs (p.ex.: «.html»):',
 	'label:titre_travaux' => 'Títulu del mensaxe:',
 	'label:titres_etendus' => 'Activar l\'usu estendíu de les balices #TITRE_XXX:',
+	'label:tout_rub' => 'Afficher en public tous les objets suivants :', # NEW
 	'label:url_arbo_minuscules' => 'Conservar les mayúscules de los títulos nes URLs:',
 	'label:url_arbo_sep_id' => 'Carauter de separación \'titre-id\' en casu de duplicaos :<br/>(nun uses \'/\')', # MODIF
 	'label:url_glossaire_externe2' => 'Enllaz al glosariu esternu:',
@@ -739,6 +746,7 @@ La función SPIP usada en PHP ye <code>_T(\'cadena\')</code> ensin argumentu, y 
  Nun t\'escaezas de verificar que la clave <code>\'cadena\'</code> tea bien definida nos archivos de les llingües.', # MODIF
 	'toutmulti:nom' => 'Bloques multillingües',
 	'travaux_masquer_avert' => 'Masquer le cadre indiquant sur le site public qu\'une maintenance est en cours', # NEW
+	'travaux_nocache' => 'Désactiver également le cache de SPIP', # NEW
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Esti sitiu volverá a tar en llinia pronto.
 _ Agradecémoste la comprensión.',

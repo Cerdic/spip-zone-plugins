@@ -41,6 +41,10 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'action_rapide' => 'Hızlı işlem, sadece ne yaptığınızdan eminseniz !',
 	'action_rapide_non' => 'Hızlı işlem, bu alet etkinleştirildikten sonra :',
 	'admins_seuls' => 'Sadece yöneticiler',
+	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
+
+Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.', # NEW
+	'aff_tout:nom' => 'Affiche tout', # NEW
 	'attente' => 'Beklemede...',
 	'auteur_forum:description' => 'En azından bir mektup yazmış olan kamusal ileti yazarlarını, tüm katılımların isimsiz olmaması için «@_CS_FORUM_NOM@» alanını doldurmaya teşvik eder.', # MODIF
 	'auteur_forum:nom' => 'Anonim (isimsiz) forum yok',
@@ -247,13 +251,15 @@ _ Bu gereç {makaleleriniz için bir özet} ile birlikte kullanılabilir.', # MO
 	'distant_echoue' => 'Erreur sur le chargement distant, cet outil risque de ne pas fonctionner !', # NEW
 	'distant_inactif' => 'Fichier introuvable (outil inactif).', # NEW
 	'distant_present' => 'Fichier présent en librairie depuis le @date@.', # NEW
+	'docgen' => 'Documentation générale', # NEW
+	'docwiki' => 'Carnet d\'idées', # NEW
 	'dossier_squelettes:description' => 'Kullanılan iskelet dizinini değiştirir. Örneğin : "squelettes/iskeletim". Dizinleri iki nokta ile ayırarak bir çok dizin belirtebilirsiniz  <html>« : »</html>. İzleyen kutuyu boş bırakarak (veya "dist" yazarak) SPIP tarafından sunulan orijinal "dist" iskeletini kullanabilirsiniz. [[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'İskelet dosyası',
 
 	// E
 	'ecran_activer' => 'Activer l\'écran de sécurité', # NEW
 	'ecran_conflit' => 'Attention : le fichier statique «@file@» peut entrer en conflit. Choisissez votre méthode de protection !', # NEW
-	'ecran_conflit2' => 'Note : un fichier statique «@file@» a été détecté et activé. Le Couteau Suisse ne pourra le mettre à jour ou le configurer.', # NEW
+	'ecran_conflit2' => 'Note : un fichier statique «@file@» a été détecté et activé. Le Couteau Suisse ne pourra peut-être pas le mettre à jour ou le configurer.', # NEW
 	'ecran_ko' => 'Ecran inactif !', # NEW
 	'ecran_maj_ko' => 'La version {{@n@}} de l\'écran de sécurité est disponible. Veuillez actualiser le fichier distant de cet outil.', # NEW
 	'ecran_maj_ko2' => 'La version @n@ de l\'écran de sécurité est disponible. Vous pouvez actualiser le fichier distant de l\'outil « [.->ecran_securite] ».', # NEW
@@ -467,6 +473,7 @@ Dikkat, bu gereç çalışmak için {Round Corners} {jQuery} eklentisine gereksi
 	'label:terminaison_urls_page' => 'URL soyadları (ör : « .html ») :',
 	'label:titre_travaux' => 'Mesajın başlığı :',
 	'label:titres_etendus' => '#TITRE_XXX komutlarının geniş kullanımını etkinleştir  :',
+	'label:tout_rub' => 'Afficher en public tous les objets suivants :', # NEW
 	'label:url_arbo_minuscules' => 'URL\'lerde küçük büyük harfleri koru :',
 	'label:url_arbo_sep_id' => 'Tekrarlama durumunda kullanılacak ayraç \'titre-id\' :<br/>(\'/\' kullanmayın)', # MODIF
 	'label:url_glossaire_externe2' => 'Dış sözlüğe bağ :',
@@ -706,6 +713,7 @@ Bu gereç argüman da kabûl eder. Örneğin <code><:chaine{arg1=bir metin, arg2
 <code>\'zincir\'</code> anahtarının dil dosyalarında düzgün biçimde tanımlandığından emin olun. [Bu konuyla ilgili şu adresteki ->http://www.spip.net/fr_article2128.html] SPIP belgelerine göz atınız.', # MODIF
 	'toutmulti:nom' => 'Çok dilli bloklar',
 	'travaux_masquer_avert' => 'Masquer le cadre indiquant sur le site public qu\'une maintenance est en cours', # NEW
+	'travaux_nocache' => 'Désactiver également le cache de SPIP', # NEW
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Bu site çok yakında tekrar yayına başlayacak.
 _ Anlayışınız için teşekkürler.',
