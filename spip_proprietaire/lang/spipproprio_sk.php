@@ -311,6 +311,7 @@ Tiež vám odporúčame, aby ste sa pozreli na  [informácie právneho charakter
 	'utiliser_ce_plugin' => 'Použitie tohto zásuvného modulu',
 
 	// V
+	'valider_pour_forcer' => '(vous pouvez cependant forcer une valeur vide en indiquant un underscore seul : "_")', # NEW
 	'ville_label' => 'Mesto'
 );
 

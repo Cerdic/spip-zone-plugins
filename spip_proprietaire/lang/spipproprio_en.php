@@ -311,6 +311,7 @@ We also recommend you take a look at the skeleton [legals->@mentions_legales@].'
 	'utiliser_ce_plugin' => 'Usage of this plugin ...',
 
 	// V
+	'valider_pour_forcer' => '(vous pouvez cependant forcer une valeur vide en indiquant un underscore seul : "_")', # NEW
 	'ville_label' => 'City'
 );
 
