@@ -30,7 +30,9 @@
 	<langue code="it_fem" />
 	<langue code="km" />
 	<langue code="lb" />
-	<langue code="nl" />
+	<langue code="nl">
+		<traducteur nom="michelpossoz" />
+	</langue>
 	<langue code="oc_lnc" />
 	<langue code="ro" />
 	<langue code="sk">
