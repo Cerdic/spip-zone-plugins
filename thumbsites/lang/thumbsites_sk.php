@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_copier_comme_logo' => 'Définir comme logo', # NEW
+	'bouton_copier_comme_logo' => 'Nastaviť ako logo',
 	'bouton_effacer' => 'Odstrániť',
 	'bouton_rafraichir' => 'Obnoviť miniatúru',
 	'bouton_valider' => 'Potvrdiť',
