@@ -1,5 +1,7 @@
 <traduction module="gis" gestionnaire="salvatore" reference="fr">
-	<langue code="en" />
+	<langue code="en">
+		<traducteur nom="kent1" />
+	</langue>
 	<langue code="es" />
 	<langue code="sk">
 		<traducteur nom="jaro" />

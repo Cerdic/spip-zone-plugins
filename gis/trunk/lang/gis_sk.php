@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_inf_geolocaliser_user_html5' => 'Ak to povoľuje prehliadač používateľa, na určenie predvolenej polohy pri vytváraní nového bodu sa zistí približná geografická poloha používateľa.',
 	'cfg_inf_google' => 'Táto API potrebuje kľúč, ktorý si môžete vytvoriť na <a href=\'@url@\'>stránke GoogleMaps.</a>',
 	'cfg_inf_yandex' => 'Cette API n&eacute;cessite une cl&eacute; &agrave; cr&eacute;er sur <a href=\'@url@\'>le site de Yandex</a>.', # NEW
+	'cfg_lbl_activer_objets' => 'Activer la géolocalisation sur les contenus :', # NEW
 	'cfg_lbl_adresse' => 'Zobraziť polia adresy',
 	'cfg_lbl_api' => 'Geolokačná API',
 	'cfg_lbl_api_cloudmade' => 'CloudMade',
