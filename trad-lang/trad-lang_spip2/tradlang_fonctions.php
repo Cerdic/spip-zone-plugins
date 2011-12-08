@@ -123,4 +123,20 @@ function langues_sort($array){
 	}
 	return false;
 }
+
+/**
+ * <BOUCLE(TRADLANG_MODULES)>
+ * On enlève les modules attic*
+ */
+function boucle_TRADLANG_MODULES_dist($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+
+	// Par defaut, selectionner uniquement les modules qui ne sont pas attic*
+	if (!isset($boucle->modificateur['tout'])) {
+		array_unshift($boucle->where,array("'NOT LIKE'", "'$id_table." ."module'", "'\"attic%\"'"));
+	}
+
+	return calculer_boucle($id_boucle, $boucles);
+}
 ?>
