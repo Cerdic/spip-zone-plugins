@@ -13,9 +13,6 @@ function titrecourt_declarer_champs_extras($champs = array()){
 									'modifier'	=> array('auteur'=>'webmestre'))),//Seul les webmestre peuvent modifier
         'verifier' => array());
 
-	
-	return $champs;
-	
-		
+	return $champs;	
 }
 ?>

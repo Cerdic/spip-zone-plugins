@@ -7,20 +7,15 @@ include_spip('base/titrecourt');
 function titrecourt_upgrade($nom_meta_base_version,$version_cible){
 
 	$maj = array();
-	
-	$table_champs = titrecourt_declarer_champs_extras();
-	foreach($table_champs as $table=>$champs)
-		$maj['create'][]=array('champs_extras_creer',$table, $champs);
-	
+	cextras_api_upgrade(titrecourt_declarer_champs_extras(), $maj['create']);	
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 	
 }
 
 function titrecourt_vider_tables($nom_meta_base_version) {
-	$table_champs = titrecourt_declarer_champs_extras();
-	foreach($table_champs as $table=>$champs)
-		champs_extras_supprimer($table, $champs);
+	cextras_api_vider_tables(titrecourt_declarer_champs_extras());
 	effacer_meta($nom_meta_base_version);
 }
 ?>
