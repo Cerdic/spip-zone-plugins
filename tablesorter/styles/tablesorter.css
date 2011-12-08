@@ -1,6 +1,8 @@
 /* tables */
 table.tablesorter {}
 
+
+/**
 table.tablesorter td,
 table.tablesorter th {
 	vertical-align: middle !important;
@@ -9,6 +11,7 @@ table.tablesorter th {
 table.tablesorter th {
 	text-align:center;
 }
+*/
 
 td.modele {
 	font-weight: bold;
