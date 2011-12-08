@@ -200,7 +200,9 @@ function cextras_api_upgrade($declaration_champs_extras, &$maj_item) {
 
 /**
  * Supprime les champs extras declarés
- *
+ * Exemple d'usage :
+ * cextras_api_vider_tables(motus_declarer_champs_extras());
+ * 
  * @param array $declaration_champs_extras
  * 		Liste de champs extras à désinstaller, c'est à dire la liste de saisies
  * 		présentes dans le pipeline declarer_champs_extras() du plugin qui demande la désinstallation
@@ -208,7 +210,7 @@ function cextras_api_upgrade($declaration_champs_extras, &$maj_item) {
  * @return bool
  * 		Les actions ont été faites.
 **/
-function cextras_api_vider_table($declaration_champs_extras) {
+function cextras_api_vider_tables($declaration_champs_extras) {
 	if (!is_array($declaration_champs_extras)) {
 		return false;
 	}	
