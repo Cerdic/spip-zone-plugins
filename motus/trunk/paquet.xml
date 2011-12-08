@@ -19,6 +19,6 @@
 	<pipeline nom="autoriser" inclure="motus_autorisations.php" />
 	<pipeline nom="declarer_champs_extras" inclure="base/motus.php" />
 
-	<necessite nom="cextras" compatibilite="[2.0.0-dev;[" />
+	<necessite nom="cextras" compatibilite="[2.1.0;[" />
 	<necessite nom="saisies" compatibilite="[1.18.0;[" />
 </paquet>
