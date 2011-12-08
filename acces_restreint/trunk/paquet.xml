@@ -30,7 +30,6 @@
 	<pipeline nom="affiche_gauche" inclure="accesrestreint_pipelines.php" />
 	<pipeline nom="page_indisponible" inclure="accesrestreint_pipelines.php" />
 	<pipeline nom="autoriser" inclure="inc/accesrestreint_autoriser.php" />
-	<pipeline nom="objets_extensibles" inclure="accesrestreint_pipelines.php" />
 
 	<menu nom="zones" titre="accesrestreint:icone_menu_config" parent="menu_publication" icone="images/zone-16.png" />
 </paquet>
