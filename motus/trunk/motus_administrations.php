@@ -13,7 +13,7 @@ function motus_upgrade($nom_meta_base_version,$version_cible){
 }
 
 function motus_vider_tables($nom_meta_base_version) {
-	cextras_api_vider_table(motus_declarer_champs_extras());
+	cextras_api_vider_tables(motus_declarer_champs_extras());
 	effacer_meta($nom_meta_base_version);
 }
 
