@@ -1,7 +1,9 @@
 <div class="contenu-principal">
 <INCLURE{fond=inclure/tradlang_entete,env}>
-[<div class="ajax tradlang_choisir_module">
-	(#FORMULAIRE_TRADLANG_CHOISIR_MODULE{#ENV{id_tradlang_module},#ENV{lang_orig},#ENV{lang_cible},#ENV{lang_crea}})
+[<div class="tradlang_choisir_module">
+	<div class="ajax">
+		(#FORMULAIRE_TRADLANG_CHOISIR_MODULE{#ENV{id_tradlang_module},#ENV{lang_orig},#ENV{lang_cible},#ENV{lang_crea}})
+	</div>
 </div>]
 
 <BOUCLE_si_autorise(CONDITION){si #AUTORISER{voir,tradlang}|oui}>
