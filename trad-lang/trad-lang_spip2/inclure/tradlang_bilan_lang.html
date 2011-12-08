@@ -2,7 +2,7 @@
 
 <p><a href="[(#SELF|parametre_url{langue_modules,''})]"><:tradlang:lien_trier_langue_non:></a></p>
 
-<table class="bilan spip liste">
+<table class="bilan spip liste tablesorter">
 	<thead>
 		<tr class="row_first">
 			<th><:tradlang:th_module:></th>
@@ -64,6 +64,7 @@
 			#SET{percent_ok,#GET{total_ok}|div{#GET{total_mere}}|mult{100}|floor}
 			#SET{percent_modif,#GET{total_modif}|div{#GET{total_mere}}|mult{100}|floor}
 			#SET{percent_new,#VAL{100}|moins{#GET{percent_ok}}|moins{#GET{percent_modif}}}
+			<span class="valeur_traduit">#GET{percent_ok}%</span>
 			<div class="graph" title="<:tradlang:info_module_traduit_pc{pc=#GET{percent_ok}}:>">
 				<div class="ok"[ style="width: (#GET{percent_ok})px"]> </div>
 				<div class="modif" style="left: #GET{percent_ok}px; width: #GET{percent_modif}px"></div>

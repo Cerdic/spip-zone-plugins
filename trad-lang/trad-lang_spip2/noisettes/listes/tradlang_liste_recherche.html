@@ -11,14 +11,14 @@
 #ANCRE_PAGINATION
 <h2 class="h2"><:tradlang:titre_recherche_tradlang:> (#GRAND_TOTAL)</h2>
 #SET{total,#GRAND_TOTAL}
-<table class="spip liste_traductions">
+<table class="spip liste_traductions tablesorter">
 	<thead>
 		<tr class="row_first">
 			<th>
-				[(#TRI{id,<:tradlang:codelangue:>,ajax})]
+				<:tradlang:codelangue:>
 			</th>
 			<th>
-				[(#TRI{module,<:tradlang:th_module:>,ajax})]
+				<:tradlang:th_module:>
 			</th>
 			<th>
 				<:tradlang:th_langue_origine:>
@@ -27,10 +27,10 @@
 				<:tradlang:th_traduction:>
 			</th>
 			<th width="50px">
-				[(#TRI{lang,<:tradlang:th_langue:>,ajax})]
+				<:tradlang:th_langue:>
 			</th>
 			<th width="50px">
-				[(#TRI{statut,<:tradlang:th_status:>,ajax})]
+				<:tradlang:th_status:>
 			</th>
 			<th width="50px">&nbsp;</th>
 		</tr>
