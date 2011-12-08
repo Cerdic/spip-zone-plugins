@@ -21,6 +21,9 @@
 			<th class="items_new">
 				<:tradlang:th_items_new:>
 			</th>
+			<th class="avancement">
+				<:tradlang:th_avancement:>
+			</th>
 		</tr>
 	</thead>
 	<B_modules_lang>
@@ -30,25 +33,43 @@
 		<td><a href="[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#ENV{langue_modules}}|parametre_url{langue_modules,''})]">[(#NOM_MOD)]</a></td>
 		<BOUCLE_compte_langue_mere(TRADLANG){module}{lang=#LANG_MERE}> </BOUCLE_compte_langue_mere>
 		<td><abbr title="[(#LANG_MERE|traduire_nom_langue)]">#LANG_MERE</abbr></td>
+		#SET{total_mere,#GRAND_TOTAL}
 		<td>#GRAND_TOTAL</td>
 		</B_compte_langue_mere>
-		<td>-</td>
+		#SET{total_mere,0}
+		<td>0</td>
 		<//B_compte_langue_mere>
 		<BOUCLE_ok_langue(TRADLANG){module}{lang=#ENV{langue_modules}}{statut=OK}> </BOUCLE_ok_langue>
+		#SET{total_ok,#GRAND_TOTAL}
 		<td>#GRAND_TOTAL</td>
 		</B_ok_langue>
-		<td>-</td>
+		#SET{total_ok,0}
+		<td>0</td>
 		<//B_ok_langue>
 		<BOUCLE_modif_langue(TRADLANG){module}{lang=#ENV{langue_modules}}{statut=MODIF}> </BOUCLE_modif_langue>
+		#SET{total_modif,#GRAND_TOTAL}
 		<td>#GRAND_TOTAL</td>
 		</B_modif_langue>
-		<td>-</td>
+		#SET{total_modif,0}
+		<td>0</td>
 		<//B_modif_langue>
 		<BOUCLE_new_langue(TRADLANG){module}{lang=#ENV{langue_modules}}{statut=NEW}> </BOUCLE_new_langue>
+		#SET{total_new,#GRAND_TOTAL}
 		<td>#GRAND_TOTAL</td>
 		</B_new_langue>
-		<td>-</td>
+		#SET{total_new,0}
+		<td>0</td>
 		<//B_new_langue>
+		<td>
+			#SET{percent_ok,#GET{total_ok}|div{#GET{total_mere}}|mult{100}|floor}
+			#SET{percent_modif,#GET{total_modif}|div{#GET{total_mere}}|mult{100}|floor}
+			#SET{percent_new,#VAL{100}|moins{#GET{percent_ok}}|moins{#GET{percent_modif}}}
+			<div class="graph" title="<:tradlang:info_module_traduit_pc{pc=#GET{percent_ok}}:>">
+				<div class="ok"[ style="width: (#GET{percent_ok})px"]> </div>
+				<div class="modif" style="left: #GET{percent_ok}px; width: #GET{percent_modif}px"></div>
+				<div class="new" style="left: [(#GET{percent_ok}|plus{#GET{percent_modif}})]px; width: #GET{percent_new}px">
+			</div>
+		</td>
 	</tr>
 	</BOUCLE_modules_lang>
 	</tbody>

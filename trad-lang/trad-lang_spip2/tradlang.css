@@ -39,3 +39,38 @@ table.liste_traductions tr.statut_modif td.statut,.traducteur #navigation ul.inf
 }
 
 .liste-objets .caption{background-repeat:no-repeat;height:24px;display:block;padding-left: 30px;}
+
+div.graph {
+    border: 0 none;
+    height: 14px;
+    position: relative;
+    width: 100px;
+}
+
+div.graph[dir="ltr"] div.translated {
+    left: 0;
+}
+
+.graph div.ok {
+    background: url("images/green-bar.png") repeat-x scroll 0 0 transparent;
+    color: black;
+    height: 100%;
+    position: absolute;
+    top: 2px;
+}
+
+.graph div.modif {
+    background: url("images/purple-bar.png") repeat-x scroll 0 0 transparent;
+    color: black;
+    height: 100%;
+    position: absolute;
+    top: 2px;
+}
+
+.graph div.new {
+    background: url("images/red-bar.png") repeat-x scroll 0 0 transparent;
+    color: black;
+    height: 100%;
+    position: absolute;
+    top: 2px;
+}

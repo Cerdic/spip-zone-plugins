@@ -135,6 +135,7 @@ function boucle_TRADLANG_MODULES_dist($id_boucle, &$boucles) {
 	// Par defaut, selectionner uniquement les modules qui ne sont pas attic*
 	if (!isset($boucle->modificateur['tout'])) {
 		array_unshift($boucle->where,array("'NOT LIKE'", "'$id_table." ."module'", "'\"attic%\"'"));
+		array_unshift($boucle->where,array("'NOT LIKE'", "'$id_table." ."module'", "'\"contrib\"'"));
 	}
 
 	return calculer_boucle($id_boucle, $boucles);
