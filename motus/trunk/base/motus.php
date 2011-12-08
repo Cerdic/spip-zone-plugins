@@ -12,6 +12,7 @@ function motus_declarer_champs_extras($champs = array()){
 			'defaut' => '',// Valeur par défaut
 			'whitelist' => array('rubriques'),
 			'multiple' => 'oui',
+		),
         'verifier' => array());
 
 	return $champs;	
