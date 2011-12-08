@@ -114,6 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_telecharger' => '[Télécharger]',
 	'lien_traduction_module' => 'Module ',
 	'lien_traduction_vers' => ' vers ',
+	'lien_trier_langue_non' => 'Afficher le bilan global.',
 	'lien_utiliser_google_translate' => 'Utiliser cette version',
 	'lien_voir_toute_chaines_module' => 'Voir toutes les chaines du module.',
 
@@ -203,6 +204,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'th_total_items_module' => 'Nombre total d\'items',
 	'th_traduction' => 'Traduction',
 	'titre_bilan' => 'Bilan des traductions',
+	'titre_bilan_langue' => 'Bilan des traductions de la langue "@lang@"',
+	'titre_bilan_module' => 'Bilan des traductions du module "@module@"',
 	'titre_commentaires_chaines' => 'Commentaires au sujet de cette chaine',
 	'titre_logo_tradlang_module' => 'Logo du module',
 	'titre_modifications_chaines' => 'Les dernières modifications de cette chaine',

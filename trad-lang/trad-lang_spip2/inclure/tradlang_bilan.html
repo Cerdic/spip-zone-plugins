@@ -14,7 +14,7 @@
 			<th></th>
 			<BOUCLE_langues_totales(POUR){tableau #GET{langues}}>
 			<th class="lang #CLE" title="[(#CLE|traduire_nom_langue)]">
-				<abbr title="[(#CLE|traduire_nom_langue)]"><a href="[(#SELF|parametre_url{langue_modules,#CLE})]">[(#CLE)]</a></abbr>
+				<abbr title="[(#CLE|traduire_nom_langue)]"><a href="[(#SELF|parametre_url{id_tradlang_module,''}|parametre_url{langue_modules,#CLE})]">[(#CLE)]</a></abbr>
 			</th>
 			</BOUCLE_langues_totales>
 		</tr>
@@ -57,15 +57,11 @@ $('table.bilan th').each(function(i){
 $('table.bilan tr').each(function() {
 	var lang = $('td',this).parent('tr').attr('title');
 	if (lang && (lang = lang.replace(/:.*/,'')) && lang != 'fr'){
-		console.log(lang);
 		$('td',this).each(function(i){
 			$(this).find('a').click(function(){
-				if (confirm('<:tradlang:message_confirm_redirection:> : '+modules[i]+' ['+lang+']')) {
-					var url = '[(#URL_PAGE{tradlang_module})]&module=' +modules[i] +'&lang_cible=' +lang;
-					if (window.parent)
-						window.parent.location = url;
-					else
-						window.location = url;
+				var module = modules[i];
+				if (confirm('<:tradlang:message_confirm_redirection:> : '+lang+' ['+module+']')) {
+					return true;
 				}else{
 					return false;
 				}

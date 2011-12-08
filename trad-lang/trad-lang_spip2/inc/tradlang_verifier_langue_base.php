@@ -3,6 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function inc_tradlang_verifier_langue_base_dist($module,$langue){
+	
 	/**
 	 * Quelle est la langue mère
 	 */
@@ -11,21 +12,17 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 	/**
 	 * On teste et on ajoute ce qu'il y a en trop
 	 */
+	$trad_langue_mere_id = array();
 	$trad_langue_mere = sql_select('*','spip_tradlang','module='.sql_quote($module).' AND lang='.sql_quote($langue_mere));
 	while($row_langue_mere = sql_fetch($trad_langue_mere)){
 		$trad_langue_mere_id[] = $row_langue_mere['id']; 
 	}
-	
+	$trad_langue_cible_id = array();
 	$trad_langue_cible  = sql_select('*','spip_tradlang','module='.sql_quote($module).' AND lang='.sql_quote($langue));
 	while($row_langue_cible = sql_fetch($trad_langue_cible)){
 		$trad_langue_cible_id[] = $row_langue_cible['id']; 
 	}
-	
-	if(sql_count($trad_langue_mere) == sql_count($trad_langue_cible)){
-		spip_log("compte de locutions égal entre $langue_mere et $langue");
-		return array('0','0');
-	}
-	
+
 	/**
 	 * $diff1 est l'ensemble des chaines manquantes dans la langue fille
 	 * et donc à insérer
@@ -40,18 +37,20 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 	$diff2 = array_diff($trad_langue_cible_id,$trad_langue_mere_id);
 	$supprimees = 0;
 	if((count($diff1)>0) OR (count($diff2)>0)){
-		include_spip('action/editer_tradlang');
-		
-		foreach($diff1_array as $key => $array){
-			$array['orig'] = 0;
-			$array['lang'] = $langue;
-			$array['statut'] = 'NEW';
-			unset($array['ts']);
-			unset($array['id_tradlang']);
-			
-			$id_tradlang = sql_insertq('spip_tradlang');
-			sql_updateq('spip_tradlang',$array,'id_tradlang='.intval($id_tradlang));
-			$inserees++;
+		spip_log(count($diff1));
+		spip_log(count($diff2));
+		spip_log($diff1_array);
+		if(is_array($diff1_array)){
+			foreach($diff1_array as $key => $array){
+				$array['orig'] = 0;
+				$array['lang'] = $langue;
+				$array['statut'] = 'NEW';
+				unset($array['ts']);
+				unset($array['id_tradlang']);
+				$id_tradlang = sql_insertq('spip_tradlang',$array);
+				spip_log($array['id_tradlang']);
+				$inserees++;
+			}
 		}
 
 		foreach($diff2 as $key => $id){
@@ -61,6 +60,9 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 			sql_updateq('spip_tradlang',$array,'id_tradlang='.intval($id_tradlang));
 			$supprimees++;
 		}
+	}else{
+		//spip_log("compte de locutions égal entre $langue_mere et $langue");
+		return array('0','0');
 	}
 	return array($inserees,$supprimees);
 }
