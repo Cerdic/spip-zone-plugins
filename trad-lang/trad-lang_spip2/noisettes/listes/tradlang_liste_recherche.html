@@ -1,11 +1,13 @@
 #SET{str_cible,#ARRAY}
 #SET{lang,#ENV{lang_string,.*}}
+
 [(#SET{defaut_tri,#ARRAY{
 	statut,#ENV{statut_sens,1},
 	id,1,
 	str,1,
 	lang,inverse
 }})]
+[(#SET{par,[(#ENV{par,[(#ENV{recherche}|?{points,lang})]})]})]
 <B_recherche_tradlang>
 <div class="liste resultats tradlang">
 #ANCRE_PAGINATION
@@ -36,7 +38,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_recherche_tradlang(TRADLANG){recherche?}{module?}{statut?}{lang==#GET{lang}}{module != attic}{tri #ENV{par,points},#GET{defaut_tri}}{pagination 20}>
+	<BOUCLE_recherche_tradlang(TRADLANG){recherche?}{id_tradlang_module?}{module?}{statut?}{lang==#GET{lang}}{tri #GET{par},#GET{defaut_tri}}{pagination 20}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})] statut_[(#STATUT|strtolower)]">
 		<td>#ID</td>
 		<BOUCLE_module(TRADLANG_MODULES){module=#MODULE}>
@@ -52,7 +54,7 @@
 			[(#GET{id_lang_mere}|=={#ID_TRADLANG}|non)[(#STR**|entites_html)]]
 			[(#GET{id_lang_mere}|=={#ID_TRADLANG}|oui)<em><:tradlang:info_chaine_originale:></em>]
 		</td>
-		<td class="lang" width="50px"><abbr title="[(#LANG|traduire_nom_langue)]">#LANG</abbr></td>
+		<td class="lang" width="50px"><abbr title="[(#LANG|traduire_nom_langue)]"><a href="[(#URL_PAGE{tradlang_bilan}|parametre_url{langue_modules,#LANG})]">#LANG</a></abbr></td>
 		<td class="status" width="50px">[(#STATUT)]</td>
 		<td class="modifier" width="50px">
 			[(#GET{id_lang_mere}|=={#ID_TRADLANG}|non)
