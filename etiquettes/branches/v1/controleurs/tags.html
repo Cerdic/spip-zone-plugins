@@ -1,0 +1,20 @@
+[(#REM)
+
+	Controleur pour modifier/ajouter des mots-clés juste avec un champs texte.
+	Ca modifie les mots du groupe "tags".
+	Le contrôleur marche pour n'importe quel type d'objet
+
+]
+#CACHE{0}
+
+<fieldset[ style="(#ENV{style})"]>
+	<legend><:etiquettes:modifier_etiquettes:></legend>
+	
+	<input type="hidden" disabled="disabled" name="#ENV{name_tags}" />
+	#SET{objet,#ARRAY}
+	#SET{objet,#GET{objet}|push{#ENV{crayon_type}}}
+	#SET{objet,#GET{objet}|push{#ENV{id_#ENV{crayon_type}}}}
+	#SET{separateur,'-'}
+	#SET{objet,#GET{separateur}|join{#GET{objet}}}
+	#FORMULAIRE_ETIQUETTES{uniquement_champ=true, groupe=tags, name=#ENV{name_tags}, objet=#GET{objet}}
+</fieldset>

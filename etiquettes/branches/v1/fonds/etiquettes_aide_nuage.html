@@ -1,0 +1,85 @@
+
+#SET{frequences,#ARRAY}
+#SET{max_frequence,0}
+
+[(#REM)
+	On calcule la vraie fréquence des mots en additionant
+	sur les différentes tables
+	Si vous avez modifié SPIP pour pouvoir mettre des mots sur une
+	nouvelle table, il faut rajouter une boucle ici
+]
+
+<BOUCLE_frequence_articles(MOTS){compteur articles}{type ?}>
+#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#COMPTEUR{articles}}}}}
+[(#COMPTEUR{articles}|>{#GET{max_la}}|oui)#SET{max_la,#COMPTEUR{articles}}]
+</BOUCLE_frequence_articles>
+#SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
+</B_frequence_articles>
+
+<BOUCLE_frequence_forum(MOTS){compteur forum}{type ?}>
+#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#COMPTEUR{forum}}}}}
+[(#COMPTEUR{forum}|>{#GET{max_la}}|oui)#SET{max_la,#COMPTEUR{forum}}]
+</BOUCLE_frequence_forum>
+#SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
+</B_frequence_forum>
+
+<BOUCLE_frequence_documents(MOTS){compteur documents}{type ?}>
+#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#COMPTEUR{documents}}}}}
+[(#COMPTEUR{documents}|>{#GET{max_la}}|oui)#SET{max_la,#COMPTEUR{documents}}]
+</BOUCLE_frequence_documents>
+#SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
+</B_frequence_documents>
+
+<BOUCLE_frequence_syndic(MOTS){compteur syndic}{type ?}>
+#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#COMPTEUR{syndic}}}}}
+[(#COMPTEUR{articles}|>{#GET{max_la}}|oui)#SET{max_la,#COMPTEUR{syndic}}]
+</BOUCLE_frequence_syndic>
+#SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
+</B_frequence_syndic>
+
+<BOUCLE_frequence_breves(MOTS){compteur breves}{type ?}>
+#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#COMPTEUR{breves}}}}}
+[(#COMPTEUR{breves}|>{#GET{max_la}}|oui)#SET{max_la,#COMPTEUR{breves}}]
+</BOUCLE_frequence_breves>
+#SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
+</B_frequence_breves>
+
+<BOUCLE_frequence_rubriques(MOTS){compteur rubriques} {type ?}>
+#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#COMPTEUR{rubriques}}}}}
+[(#COMPTEUR{rubriques}|>{#GET{max_la}}|oui)#SET{max_la,#COMPTEUR{rubriques}}]
+</BOUCLE_frequence_rubriques>
+#SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
+</B_frequence_rubriques>
+
+[(#REM) Et maintenant qu'on a enregistré les fréquences, on affiche le nuage ]
+<B_mots>
+<ul id="popular_tags_#ENV{identifiant}" class="popular_tags nuage">
+	<BOUCLE_mots(MOTS){tous}{type ?}{par #ENV{tri,titre}}{0,30}>
+	[(#SET{score,[(#GET{frequences}|table_valeur{#TITRE*,0}|div{#GET{max_frequence}})]})]
+	[(#GET{score}|>={0}|?{' '})
+		[(#SET{score,[(#GET{score}|plus{0.900001})]})]
+		[(#SET{unite,[(#GET{score}|floor)]})]
+		[(#SET{decimale,[(#GET{score}|moins{#GET{unite}}|mult{10}|floor)]})]
+		<li><span style="font-size: #GET{unite}[.(#GET{decimale})]em;">[(#TITRE*|extraire_multi)]</span></li>
+	]</BOUCLE_mots>
+</ul>
+</B_mots>
+
+[(#REM) On utilise le javascript pour ce nuage précis ]
+<script  type="text/javascript">
+<!--
+var appliquer_etiquettes_aide_nuage_#ENV{identifiant} = function(){
+	appliquer_etiquettes_aide_nuage(
+		'##ENV{name}',
+		'#popular_tags_#ENV{identifiant}'
+	);
+}
+// on applique avec un timeout pour laisser la page s'afficher
+$(function(){
+	setTimeout(appliquer_etiquettes_aide_nuage_#ENV{identifiant}, 200);
+});
+onAjaxLoad(function(){
+	setTimeout(appliquer_etiquettes_aide_nuage_#ENV{identifiant}, 200);
+});
+// -->
+</script>
