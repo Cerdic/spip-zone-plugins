@@ -168,6 +168,56 @@ function champs_extras_modifier($table, $saisies_nouvelles, $saisies_anciennes) 
 }
 
 
+/**
+ * Crée un tableau de mise à jour pour installer les champs extras.
+ * Exemple d'usage :
+ * cextras_api_upgrade(motus_declarer_champs_extras(), $maj['create']);
+ *
+ * @param array $declaration_champs_extras
+ * 		Liste de champs extras à installer, c'est à dire la liste de saisies
+ * 		présentes dans le pipeline declarer_champs_extras() du plugin qui demande l'installation
+ * @param array &$maj_item
+ * 		Un des éléments du tableau d'upgrade $maj,
+ * 		il sera complété des actions d'installation des champs extras demandés
+ * 
+ * @return bool
+ * 		Les actions ont été faites.
+**/
+function cextras_api_upgrade($declaration_champs_extras, &$maj_item) {
+	if (!is_array($declaration_champs_extras)) {
+		return false;
+	}
+	if (!is_array($maj_item)) {
+		$maj_item = array();
+	}
+	foreach($declaration_champs_extras as $table=>$champs) {
+		$maj_item[] = array('champs_extras_creer',$table, $champs);
+	}
+
+	return true;
+}
+
+
+/**
+ * Supprime les champs extras declarés
+ *
+ * @param array $declaration_champs_extras
+ * 		Liste de champs extras à désinstaller, c'est à dire la liste de saisies
+ * 		présentes dans le pipeline declarer_champs_extras() du plugin qui demande la désinstallation
+ * 
+ * @return bool
+ * 		Les actions ont été faites.
+**/
+function cextras_api_vider_table($declaration_champs_extras) {
+	if (!is_array($declaration_champs_extras)) {
+		return false;
+	}	
+	foreach($declaration_champs_extras as $table=>$champs) {
+		champs_extras_supprimer($table, $champs);
+	}
+	return true;
+}
+
 
 /**
  * 
