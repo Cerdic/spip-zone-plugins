@@ -8,7 +8,7 @@
 function mots_techniques_pre_boucle($boucle){
 	// MOTS
 	if ($boucle->type_requete == 'mots') {
-		$id_table = $boucle->id_table;
+/*		$id_table = $boucle->id_table;
 		// Restreindre aux mots cles non techniques
 		// les modificateurs ne se creent que sur les champs de la table principale
 		// pas sur une jointure, il faut donc analyser les criteres passes pour
@@ -26,7 +26,8 @@ function mots_techniques_pre_boucle($boucle){
 				$boucle->from["groupes"] =  "spip_groupes_mots";
 				$boucle->where[]= array("'='", "'groupes.id_groupe'", "'$id_table.id_groupe'");
 				$boucle->where[]= array("'='", "'groupes.technique'", "'\"\"'");	
-		} 
+		}
+*/
 	// GROUPES_MOTS		
 	} 
 	/* elseif ($boucle->type_requete == 'groupes_mots') {
