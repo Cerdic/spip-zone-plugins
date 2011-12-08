@@ -12,8 +12,6 @@ function motus_declarer_champs_extras($champs = array()){
 			'defaut' => '',// Valeur par défaut
 			'whitelist' => array('rubriques'),
 			'multiple' => 'oui',
-			'restriction'=>array(	'voir' 		=> array('auteur'=>''),//Tout le monde peut voir
-									'modifier'	=> array('auteur'=>'0minirezo'))),//Seul les admins peuvent modifier
         'verifier' => array());
 
 	return $champs;	
