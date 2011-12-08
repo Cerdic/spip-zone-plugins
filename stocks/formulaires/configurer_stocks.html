@@ -1,0 +1,17 @@
+<!-- nom=stocks -->
+
+<div class="formulaire_spip formulaire_editer formulaire_cfg">
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	<p class="explication"><:stocks:stocks:></p>
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+        [(#SAISIE{input, quantite_defaut, defaut=#ENV{quantite_defaut}, label=<:stocks:cfg_quantite_defaut:>})]
+
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
+		</p>
+	</div></form>
+
+</div>
