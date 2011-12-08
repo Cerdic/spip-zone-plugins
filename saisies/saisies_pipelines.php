@@ -38,6 +38,9 @@ function saisies_formulaire_saisies($flux) { return $flux; }
 
 // Déclarer automatiquement les champs d'un CVT si on les trouve dans un tableau de saisies et s'ils ne sont pas déjà déclarés
 function saisies_formulaire_charger($flux){
+    // Si le flux data est inexistant, on quitte : Le CVT d'origine a décidé de ne pas continuer
+    if (!is_array($flux['data']))
+        return $flux;
 	// Il faut que la fonction existe et qu'elle retourne bien un tableau
 	if (include_spip('inc/saisies')
 		and $saisies = saisies_chercher_formulaire($flux['args']['form'], $flux['args']['args'])
