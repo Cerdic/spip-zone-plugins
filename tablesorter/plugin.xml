@@ -3,7 +3,7 @@
 	<nom>Tablesorter</nom>
 	<slogan>Avec tableSorter, le tri sera top !</slogan>
 	<auteur>[Chistian Bach->http://lovepeacenukes.com/], portage sous SPIP par cym, b_b, Eric Lupinacci et BoOz</auteur>
-	<version>1.2.0</version>
+	<version>1.2.1</version>
 	<etat>stable</etat>
 	<icon>images/tablesorter-32.png</icon>
 	<description>
@@ -23,6 +23,6 @@
 		<nom>header_prive</nom>
 		<inclure>tablesorter_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
 	<categorie>navigation</categorie>
 </plugin>
