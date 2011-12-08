@@ -61,9 +61,6 @@
 			<th class="cible">
 				<:tradlang:traduction{lang=#ENV{lang_cible}}:>
 			</th>
-			<th class="comm">
-				<:tradlang:th_comm:>
-			</th>
 			<th class="statut" width="50px">
 				[(#TRI{statut,<:tradlang:th_status:>,ajax})]
 			</th>
@@ -83,7 +80,6 @@
 		<td class="origine"><:tradlang:str_existe_plus:></td>
 		<//B_revise_orig>
 		<td class="cible #EDIT{str_statut}">[(#STR**|entites_html)]</td>
-		<td class="comm">#COMM</td>
 		<td class="statut" width="50px">[(#STATUT|sinon{<:tradlang:info_status_ok:>})]</td>
 		<td class="modifier" width="50px"><a href="[(#URL_TRADLANG|parametre_url{lang_orig,#ENV{lang_orig}}|parametre_url{retour,#SELF})]"><:tradlang:lien_editer_chaine:></a></td>
 	</tr>
