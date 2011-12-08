@@ -15,8 +15,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return string
  */
 // http://doc.spip.org/@puce_statut_mot_dist
-function puce_statut_mot_dist($id, $statut, $id_groupe, $type, $ajax='') {
+function puce_statut_mot_dist($id, $statut, $id_groupe, $type, $ajax='', $menu_rapide=_ACTIVER_PUCE_RAPIDE) {
 	static $icones = array();
+	
 	if (!isset($icones[$id_groupe])) {
 		$technique = sql_getfetsel('technique', 'spip_groupes_mots', 'id_groupe='.intval($id_groupe));
 		if ($technique == 'oui') {
@@ -25,7 +26,6 @@ function puce_statut_mot_dist($id, $statut, $id_groupe, $type, $ajax='') {
 			$icones[$id_groupe] = chemin_image("mot-16.png");
 		}
 	}
-	var_dump($icones);
 	return "<img src='" . $icones[$id_groupe] . "' width='16' height='16' alt=''  />";
 }
 

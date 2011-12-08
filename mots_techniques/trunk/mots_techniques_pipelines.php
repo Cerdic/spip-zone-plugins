@@ -7,6 +7,15 @@
  */
 function mots_techniques_pre_boucle($boucle){
 	// MOTS
+	
+	// le marqueur_skel (du fichier d'options de ce plugin)
+	// force un cache different du squelette compilé pour
+	// l'espace public ou l'espace prive.
+	// on ne touche pas aux boucles du prive !
+	if (test_espace_prive()) {
+		return $boucle;
+	}
+	
 	if ($boucle->type_requete == 'mots') {
 		$id_table = $boucle->id_table;
 		// Restreindre aux mots cles non techniques
@@ -24,15 +33,9 @@ function mots_techniques_pre_boucle($boucle){
 		if (!$technique && 
 			!isset($boucle->modificateur['tout'])) {
 				// Restreindre aux mots cles non techniques
-				// seulement dans l'espace public !
 				$boucle->from["groupes"] =  "spip_groupes_mots";
-				$boucle->where[] = array("'OR'",
-					array("'='", "(test_espace_prive()?'1':'0')", "'1'"),
-					array("'AND'",
-						array("'='", "'groupes.id_groupe'", "'$id_table.id_groupe'"),
-						array("'='", "'groupes.technique'", "'\"\"'")
-					)
-				);
+				$boucle->where[] = array("'='", "'groupes.id_groupe'", "'$id_table.id_groupe'");
+				$boucle->where[] = array("'='", "'groupes.technique'", "'\"\"'");
 		}
 
 	// GROUPES_MOTS		
@@ -41,13 +44,9 @@ function mots_techniques_pre_boucle($boucle){
 		$id_table = $boucle->id_table;
 		$mtechnique = $id_table .'.technique';
 		// Restreindre aux mots cles non techniques
-		// seulement dans l'espace public !
 		if (!isset($boucle->modificateur['criteres']['technique']) && 
 			!isset($boucle->modificateur['tout'])) {
-				$boucle->where[] = array("'OR'",
-					array("'='", "(test_espace_prive()?'1':'0')", "'1'"),
-					array("'='", "'$mtechnique'", "'\"\"'")
-				);				
+				$boucle->where[] = array("'='", "'$mtechnique'", "'\"\"'");				
 		}		
 	}
 	return $boucle;
