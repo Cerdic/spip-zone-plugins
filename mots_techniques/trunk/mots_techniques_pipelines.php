@@ -28,7 +28,8 @@ function mots_techniques_pre_boucle($boucle){
 				$boucle->where[]= array("'='", "'groupes.technique'", "'\"\"'");	
 		} 
 	// GROUPES_MOTS		
-	} elseif ($boucle->type_requete == 'groupes_mots') {
+	} 
+	/* elseif ($boucle->type_requete == 'groupes_mots') {
 		$id_table = $boucle->id_table;
 		$mtechnique = $id_table .'.technique';
 		// Restreindre aux mots cles non techniques
@@ -36,7 +37,7 @@ function mots_techniques_pre_boucle($boucle){
 			!isset($boucle->modificateur['tout'])) {
 				$boucle->where[]= array("'='", "'$mtechnique'", "'\"\"'");
 		}		
-	}
+	}*/
 	return $boucle;
 }
 
