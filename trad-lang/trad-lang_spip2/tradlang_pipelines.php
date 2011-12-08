@@ -1,9 +1,9 @@
 <?php
 /**
  * 
- * Trad-lang v1
+ * Trad-lang v2
  * Plugin SPIP de traduction de fichiers de langue
- * © Florent Jugla, Fil
+ * © Florent Jugla, Fil, kent1
  * 
  */
 

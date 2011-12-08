@@ -8,7 +8,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Fonction pour le pipeline, n'a rien a effectuer
+ * Fonction pour le pipeline,n'a rien a effectuer
  *
  * @return
  */

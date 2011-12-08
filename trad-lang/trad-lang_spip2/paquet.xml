@@ -5,15 +5,13 @@
 	etat="dev"
 	compatibilite="[3.0.0-dev;["
 	logo="images/spip_lang.png"
-	schema="0.3.4"
->	
+	schema="0.3.6"
+>
 
 	<nom>Trad-Lang</nom>
-	<!-- Un plugin pour gérer directement les fichiers langues depuis l'interface privée -->
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/tradlang.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/tradlang.php" />
-	<pipeline nom="declarer_tables_objets_surnoms" inclure="tradlang_pipelines.php" />
 	<pipeline nom="declarer_tables_objets_surnoms" inclure="tradlang_pipelines.php" />
 	<pipeline nom="revisions_liste_objets" inclure="tradlang_pipelines.php" />
 	<pipeline nom="post_edition" inclure="tradlang_pipelines.php" />
@@ -26,5 +24,6 @@
 	<necessite nom="Zpip" compatibilite="[2.0.3;[" />
 	<necessite nom="Zcore" compatibilite="[2.0.0-dev;[" />
 	
-	<menu nom="configurer_tradlang" titre="tradlang:titre_tradlang" parent="bando_configuration" icone="images/spip_lang-16.png" />
+	<menu nom="configurer_tradlang" titre="tradlang:titre_tradlang" parent="menu_configuration" icone="images/spip_lang-16.png" />
+	<menu nom="tradlang_module_tous" titre="tradlang:titre_tradlang" parent="menu_squelette" icone="images/spip_lang-16.png" />
 </paquet>
