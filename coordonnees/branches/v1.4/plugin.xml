@@ -15,7 +15,7 @@
 	<lien>http://www.spip-contrib.net/Plugin-Coordonnees</lien>
 	<icon>images/addressbook-128.png</icon>
 	
-	<version>1.4.7</version>
+	<version>1.4.8</version>
 	<version_base>1.5</version_base>
 	<etat>test</etat>
 	
@@ -60,7 +60,13 @@
 		<nom>objets_extensibles</nom>
 		<inclure>coordonnees_pipelines.php</inclure>
 	</pipeline>
-		
+
+	<bouton id='configurer_coordonnees' parent="bando_configuration">
+		<titre>coordonnees:titre_coordonnees</titre>
+		<icone>images/addressbook-16.png</icone>
+		<url>configurer_coordonnees</url>
+	</bouton>
+	
 	<necessite id="SPIP" version="[2.1.0;3.0.0-dev)" />
 	<necessite id="saisies" version="[1.5.0;]" />
 
