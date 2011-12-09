@@ -48,7 +48,7 @@ function formulaires_editer_client_saisies_dist($id_auteur, $retour=''){
 			'saisie' => 'input',
 			'options' => array(
 				'nom' => 'numero',
-				'label' => _T('coordonnees:label_numero'),
+				'label' => _T('clients:label_tel'),
                 'obligatoire' => in_array("obli_numero", $conf) ? 'oui' : '',
 			)
 		);
