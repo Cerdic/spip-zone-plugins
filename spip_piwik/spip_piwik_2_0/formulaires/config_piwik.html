@@ -31,8 +31,7 @@
 				size=50
 			})]
 			[(#CONFIG{piwik/token}|et{#CONFIG{piwik/user}}|oui)
-				
-				[(#SET{defaut,[(#URL_SITE_SPIP|replace{'http://',''})]})]
+				[(#SET{defaut,[(#URL_SITE_SPIP)]})]
 				[(#SAISIE{sites_piwik,idpiwik,
 					label=<:piwik:label_identifiant_site:>,
 					explication=<:piwik:explication_identifiant_site:>,

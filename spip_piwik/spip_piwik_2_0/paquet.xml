@@ -13,7 +13,7 @@
 	<!-- Interfacer Spip et Piwik -->
 
 	<auteur>jsb</auteur>
-	<auteur>kent1</auteur>
+	<auteur>[kent1->http://www.kent1.info]</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
@@ -24,5 +24,4 @@
 
 	<necessite nom="cfg" compatibilite="[1.13.0;[" />
 	<necessite nom="saisies" compatibilite="[1.1;[" />
-	<necessite nom="spip_bonux" compatibilite="[1.8;[" />
 </paquet>
