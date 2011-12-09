@@ -2,7 +2,7 @@
 		prefix="mots_techniques"
 		categorie="outil"
 		version="1.0.0-dev"
-		etat="dev"
+		etat="test"
 		compatibilite="[3.0.0-beta;3.0.*]"
 		logo="prive/themes/spip/images/mots-techniques-48.png"
 		schema="0.3"
