@@ -40,13 +40,13 @@
 	#SET{total,#TOTAL_BOUCLE}</B_total_item>
 	<BOUCLE_total_item_ok(TRADLANG){module}{statut=OK}{lang=#LANG}> </BOUCLE_total_item_ok>
 	#SET{total_ok,#GRAND_TOTAL}
-	</B_total_item_ok>
+	</B_total_item_ok>#SET{total_ok,0}<//B_total_item_ok>
 	<BOUCLE_total_item_new(TRADLANG){module}{statut=NEW}{lang=#LANG}> </BOUCLE_total_item_new>
 	#SET{total_new,#GRAND_TOTAL}
-	</B_total_item_new>
+	</B_total_item_new>#SET{total_new,0}<//B_total_item_new>
 	<BOUCLE_total_item_modif(TRADLANG){module}{statut=MODIF}{lang=#LANG}> </BOUCLE_total_item_modif>
 	#SET{total_modif,#GRAND_TOTAL}
-	</B_total_item_modif>
+	</B_total_item_modif>#SET{total_modif,0}<//B_total_item_modif>
 	#SET{percent_ok,#GET{total_ok}|div{#GET{total_mere}}|mult{100}|floor}
 	#SET{percent_modif,#GET{total_modif}|div{#GET{total_mere}}|mult{100}|floor}
 	#SET{percent_new,#VAL{100}|moins{#GET{percent_ok}}|moins{#GET{percent_modif}}}
