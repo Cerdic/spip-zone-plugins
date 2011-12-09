@@ -1,0 +1,77 @@
+
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=tweetnspip -->
+
+<div class="formulaire_spip formulaire_configurer formulaire_configurer_tweetnspip">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+	<ul>
+		<li class="editer_tweetnspip_username[ (#ENV**{erreurs}|table_valeur{username}|oui)erreur]">
+			<label for="tweetnspip_username"><:tweetnspip:cfg_lbl_username:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{username})</span>]
+			<p class="explication"><:tweetnspip:cfg_inf_username:></p>
+			<input type="text" name="username" class="text" id="tweetnspip_username" size="60"
+				value="#ENV{username, MrWaz}" />
+		</li>
+    
+    <li class="editer_tweetnspip_numtweets[ (#ENV**{erreurs}|table_valeur{numtweets}|oui)erreur]">
+			<label for="tweetnspip_numtweets"><:tweetnspip:cfg_lbl_numtweets:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{numtweets})</span>]
+			<p class="explication"><:tweetnspip:cfg_inf_numtweets:></p>
+			<input type="text" name="numtweets" class="text" id="tweetnspip_numtweets" size="60"
+				value="#ENV{numtweets, 5}" />
+		</li>
+		
+		<li class="editer_tweetnspip_loadertext[ (#ENV**{erreurs}|table_valeur{loadertext}|oui)erreur]">
+			<label for="tweetnspip_loadertext"><:tweetnspip:cfg_lbl_loadertext:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{loadertext})</span>]
+			<p class="explication"><:tweetnspip:cfg_inf_loadertext:></p>
+			<input type="text" name="loadertext" class="text" id="tweetnspip_loadertext" size="60"
+				value="[(#ENV{loadertext}|sinon{<:tweetnspip:cfg_def_loadertext:>})]" />
+		</li>
+		
+		<li class="editer_tweetnspip_slidein[ (#ENV**{erreurs}|table_valeur{slidein}|oui)erreur]">
+			<label for="tweetnspip_slidein"><:tweetnspip:cfg_lbl_slidein:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{slidein})</span>]
+			<p class="explication"><:tweetnspip:cfg_inf_slidein:></p>
+			<input type="text" name="slidein" class="text" id="tweetnspip_slidein" size="60"
+				value="#ENV{slidein, true}" />
+		</li>
+		
+		<li class="editer_tweetnspip_showheading[ (#ENV**{erreurs}|table_valeur{showheading}|oui)erreur]">
+			<label for="tweetnspip_showheading"><:tweetnspip:cfg_lbl_showheading:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{showheading})</span>]
+			<p class="explication"><:tweetnspip:cfg_inf_showheading:></p>
+			<input type="text" name="showheading" class="text" id="tweetnspip_showheading" size="60"
+				value="#ENV{showheading, true}" />
+		</li>
+		
+		<li class="editer_tweetnspip_headingtext[ (#ENV**{erreurs}|table_valeur{headingtext}|oui)erreur]">
+			<label for="tweetnspip_headingtext"><:tweetnspip:cfg_lbl_headingtext:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{headingtext})</span>]
+			<p class="explication"><:tweetnspip:cfg_inf_headingtext:></p>
+			<input type="text" name="headingtext" class="text" id="tweetnspip_headingtext" size="60"
+				value="[(#ENV{headingtext}|sinon{<:tweetnspip:cfg_def_headingtext:>})]" />
+		</li>
+		
+		<li class="editer_tweetnspip_showprofilelink[ (#ENV**{erreurs}|table_valeur{showprofilelink}|oui)erreur]">
+			<label for="tweetnspip_showprofilelink"><:tweetnspip:cfg_lbl_showprofilelink:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{showprofilelink})</span>]
+			<p class="explication"><:tweetnspip:cfg_inf_showprofilelink:></p>
+			<input type="text" name="showprofilelink" class="text" id="tweetnspip_showprofilelink" size="60"
+				value="#ENV{showprofilelink, true}" />
+		</li>
+	</ul>
+
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
+		<input type="submit" name="_cfg_delete" class="submit" value="<:effacer:>" />
+	</p>
+</div></form>
+</div>
