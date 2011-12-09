@@ -72,7 +72,7 @@ function jeux_qcm_init() {
 		max_radios=5 // nombre maximal de boutons radios affiches avant le choix d'une liste deroulante
 		colonnes=1 // nombre de boutons par ligne
 		bouton_corriger=corriger // fond utilise pour le bouton 'Corriger'
-		bouton_refaire=reinitialiser // fond utilise pour le bouton 'Reset'
+		bouton_refaire=recommencer // fond utilise pour le bouton 'Reset'
 	";
 }
 
