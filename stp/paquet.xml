@@ -3,9 +3,9 @@
 	categorie="maintenance"
 	version="0.1.0"
 	etat="dev"
-	compatibilite="[3.0.0-dev;["
+	compatibilite="[3.0.0-beta;["
 	logo="images/step-128.png"
-	schema="0.1"
+	schema="0.2"
 >	
 
 	<nom>STP</nom>
@@ -19,7 +19,7 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-	<pipeline nom="declarer_tables_principales" inclure="base/stp_declarer.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/stp_declarer.php" />
 
 	<necessite nom="svp" compatibilite="[0.6.0;[" />
 </paquet>

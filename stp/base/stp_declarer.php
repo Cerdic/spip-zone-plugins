@@ -1,7 +1,7 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function stp_declarer_tables_principales($tables_principales){
+function stp_declarer_tables_objets_sql($tables){
 
 	// Ajout des champs necessaires a STP dans la table paquets
 	$fields = array(
@@ -17,9 +17,8 @@ function stp_declarer_tables_principales($tables_principales){
 			"constante"		=> "VARCHAR(30) DEFAULT '' NOT NULL", // nom de la constante _DIR_(PLUGINS|EXTENSIONS|PLUGINS_SUPP)
 			"dossier"		=> "VARCHAR(255) DEFAULT '' NOT NULL", // chemin du dossier depuis la constante
 	);
-	$tables_principales['stp_paquets']['field'] = array_merge($tables_principales['stp_paquets']['field'], $fields);
-
-	return $tables_principales;
+	$tables['spip_paquets']['field'] = array_merge($tables['spip_paquets']['field'], $fields);
+	return $tables;
 }
 
 ?>
