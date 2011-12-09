@@ -4,8 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function stp_declarer_tables_principales($tables_principales){
 
 	// Ajout des champs necessaires a STP dans la table paquets
-	$GLOBALS['stp_paquets'] = array('field' => array(), 'key' => array(), 'join' => array());
-	$GLOBALS['stp_paquets']['field'] = array(
+	$fields = array(
 			"present"		=> "varchar(3) DEFAULT 'non' NOT NULL", // est present ? oui / non (duplique l'info id_zone un peu)
 			"actif"			=> "varchar(3) DEFAULT 'non' NOT NULL", // est actif ? oui / non
 			"installe"		=> "varchar(3) DEFAULT 'non' NOT NULL", // est desinstallable ? oui / non
@@ -18,8 +17,7 @@ function stp_declarer_tables_principales($tables_principales){
 			"constante"		=> "VARCHAR(30) DEFAULT '' NOT NULL", // nom de la constante _DIR_(PLUGINS|EXTENSIONS|PLUGINS_SUPP)
 			"dossier"		=> "VARCHAR(255) DEFAULT '' NOT NULL", // chemin du dossier depuis la constante
 	);
-
-	$tables_principales['spip_paquets']['field'] = $GLOBALS['stp_paquets']['field'];
+	$tables_principales['stp_paquets']['field'] = array_merge($tables_principales['stp_paquets']['field'], $fields);
 
 	return $tables_principales;
 }
