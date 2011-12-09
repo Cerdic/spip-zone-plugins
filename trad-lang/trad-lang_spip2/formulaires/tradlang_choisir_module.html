@@ -16,7 +16,7 @@
 		    <li class='editer choisir_lang_orig[ (#ENV**{erreurs}|table_valeur{lang_orig}|oui)erreur]'>
 				<label for='lang_orig'><:tradlang:item_langue_origine:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lang_orig})</span>
-				]<INCLURE{fond=formulaires/tradlang_selecteur_langue_module_dispo}{env}{lang_select=#ENV{lang_orig}}{name=lang_orig}>
+				]<INCLURE{fond=formulaires/tradlang_selecteur_langue_module_dispo_complete}{env}{lang_select=#ENV{lang_orig}}{name=lang_orig}>
 		    </li>
 		    <li class='editer choisir_lang_cible[ (#ENV**{erreurs}|table_valeur{lang_cible}|oui)erreur]'>
 				<label for='lang_cible'><:tradlang:item_langue_cible:></label>[

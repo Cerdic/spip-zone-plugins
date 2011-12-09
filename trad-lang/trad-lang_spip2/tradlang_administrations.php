@@ -43,6 +43,12 @@ function tradlang_upgrade($nom_meta_base_version,$version_cible){
 	$maj['0.3.6'] = array(
 		array('maj_tables',array('spip_tradlang'))
 	);
+	$maj['0.3.7'] = array(
+		array('tradlang_maj_traducteurs','true')
+	);
+	$maj['0.3.8'] = array(
+		array('maj_tables',array('spip_tradlang_modules'))
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -62,7 +68,7 @@ function tradlang_import_ancien_tradlang($affiche=false){
 	/**
 	 * On insére les anciens tradlang
 	 */
-	$strings = sql_allfetsel('id,module,lang,str,comm,status,ts,md5,orig,date_modif','trad_lang',"orig!='2'",'','',"0,100");
+	$strings = sql_allfetsel('id,module,lang,str,comm,status,traducteur,ts,md5,orig,date_modif','trad_lang',"orig!='2'",'','',"0,100");
 	while (count($strings)){
 		foreach($strings as $id => $string){
 			$string['titre'] = $string['id'].' : '.$string['module'].' - '.$string['lang'];
@@ -118,6 +124,21 @@ function tradlang_maj_modules($affiche=false){
 		while($lang = sql_fetch($langues)){
 			$modifs = $tradlang_verifier_langue_base($module['module'],$lang['lang']);
 		}
+	}
+}
+
+/**
+ * On remet les traducteurs des locutions 
+ */
+function tradlang_maj_traducteurs($affiche=false){
+	$chaines_traducteurs = sql_select('*','trad_lang','status = "" AND traducteur != ""');
+	while($traduction = sql_fetch($chaines_traducteurs)){
+		sql_updateq('spip_tradlang',array('traducteur'=>$traduction['traducteur']),'module = '.sql_quote($traduction['module']).' AND id='.sql_quote($traduction['id']).' AND lang='.sql_quote($traduction['lang']));
+	}
+	
+	$chaines_traducteurs_modif = sql_select('*','trad_lang','status = "MODIF" AND traducteur != ""');
+	while($traduction = sql_fetch($chaines_traducteurs_modif)){
+		sql_updateq('spip_tradlang',array('traducteur'=>$traduction['traducteur']),'module = '.sql_quote($traduction['module']).' AND id='.sql_quote($traduction['id']).' AND lang='.sql_quote($traduction['lang']));
 	}
 }
 /**

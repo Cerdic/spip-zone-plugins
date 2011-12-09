@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('base/abstract_sql');
 
 function formulaires_tradlang_choisir_module_charger($id_tradlang_module="",$lang_orig="",$lang_cible="",$lang_crea=""){
-	$module_defaut = sql_getfetsel('id_tradlang_module','spip_tradlang_modules','','','','0,1');
+	$module_defaut = sql_getfetsel('id_tradlang_module','spip_tradlang_modules','',array('priorite','nom_mod'),'','0,1');
 	$id_tradlang_module = _request('id_tradlang_module') ? _request('id_tradlang_module') : $id_tradlang_module;
 	/**
 	 * Si aucun module dans la base

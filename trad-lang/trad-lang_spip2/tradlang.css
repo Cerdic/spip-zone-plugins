@@ -77,3 +77,7 @@ div.graph[dir="ltr"] div.translated {
     position: absolute;
     top: 2px;
 }
+
+.none, .js .none-js, .no-js .none-nojs {
+    display: none;
+}

@@ -1,7 +1,9 @@
 <BOUCLE_tradlang(TRADLANG){id_tradlang}>
-	<div id="hierarchie"><a href="#URL_PAGE{traduction}"><:tradlang:lien_accueil_interface:></a></div>
+	<BOUCLE_module(TRADLANG_MODULES){module}>
+	#SET{lang_mere,#LANG_MERE}
+	<div id="hierarchie"><a href="[(#URL_TRADLANG_MODULE{#ID_TRADLANG_MODULE}|parametre_url{lang_cible,#_tradlang:LANG}|parametre_url{lang_orig,#ENV{lang_orig}})]"><:tradlang:lien_retour_module{module=#NOM_MOD}:></a></div>
+	</BOUCLE_module>
 	<div class="cartouche">
-		<BOUCLE_module(TRADLANG_MODULES){module}>#SET{lang_mere,#LANG_MERE}</BOUCLE_module>
 		[(#ENV{lang_orig}|non)
 		#SET{lang_orig_long,#GET{lang_mere}|traduire_nom_langue}]
 		[(#ENV{lang_orig}|oui)

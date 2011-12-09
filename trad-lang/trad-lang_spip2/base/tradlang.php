@@ -35,6 +35,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 			"type_export" => "varchar(16) NOT NULL default 'spip'",
 			"dir_lang" => "varchar(255) NOT NULL",
 			"texte" => "longtext DEFAULT '' NOT NULL",
+			"priorite" => "varchar(128) NOT NULL",
 			"lang_prefix" => "varchar(32) NOT NULL"
 		),
 		'key' => array(
@@ -49,7 +50,8 @@ function tradlang_declarer_tables_objets_sql($tables){
 		'rechercher_champs' => array(
 			'module' => 8,
 			'nom_mod' => 8,
-			'texte' => 8
+			'texte' => 8,
+			'priorite' => 3
 		),
 		'champs_versionnes' => array('module','nom_mod','texte','lang_mere')
 	);

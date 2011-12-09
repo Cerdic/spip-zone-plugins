@@ -70,7 +70,8 @@ function formulaires_editer_tradlang_module_traiter($id_tradlang_module,$retour=
 		$datas = array(
 			'nom_mod' => _request('nom_mod') ? _request('nom_mod') : $module,
 			'lang_mere' => _request('lang_mere'),
-			'texte' => _request('texte')
+			'texte' => _request('texte'),
+			'priorite' => _request('priorite')
 		);
 		
 		sql_updateq('spip_tradlang_modules',$datas,'id_tradlang_module='.intval($id_tradlang_module));

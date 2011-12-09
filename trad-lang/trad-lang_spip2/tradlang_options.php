@@ -12,6 +12,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS['url_arbo_parents']['tradlang'] = array('id_tradlang_module','tradlang_module');
 
+if(!defined('_TRAD_PRIORITES'))
+	define(_TRAD_PRIORITES,'10. core;20. extensions;30. contribs');
+if(!defined('_TRAD_PRIORITE_DEFAUT'))
+	define(_TRAD_PRIORITE_DEFAUT,'30. contribs');
+
 /**
  * Fonction de revision d'une chaine de langue
  * Utile particulièrement pour les crayons

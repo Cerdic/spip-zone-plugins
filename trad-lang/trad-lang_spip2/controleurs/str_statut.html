@@ -8,6 +8,11 @@
 <fieldset style="#ENV{style}">
 <ul>
 <BOUCLE_a(TRADLANG tradlang_modules){id_tradlang}>
+[(#SET{str,[(#STR**|entites_html)]})]
+<script type="text/javascript">
+	var statut_old = '#STATUT';
+	var str_old = '#GET{str}';
+</script>
 <li class="editer_statut">
 	<label><:tradlang:label_tradlang_status:></label>
 	<select class="text crayon_active" name="#ENV{name_statut}" id="statut">
@@ -20,7 +25,7 @@
 <li class="original">
 	<div>
 	<label><:tradlang:label_version_originale{lang=#LANG}:></label>
-	<textarea readonly="readonly" class="crayon-active readonly" style="width:#ENV{largeur}px;">[(#STR**|entites_html)]</textarea>
+	<textarea readonly="readonly" class="crayon-active readonly" style="width:#ENV{largeur}px;">#GET{str}</textarea>
 	</div>
 </li>
 </BOUCLE_orig>

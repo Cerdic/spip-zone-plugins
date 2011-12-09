@@ -138,6 +138,32 @@ function boucle_TRADLANG_MODULES_dist($id_boucle, &$boucles) {
 		array_unshift($boucle->where,array("'NOT LIKE'", "'$id_table." ."module'", "'\"contrib\"'"));
 	}
 
+	if (!isset($boucle->modificateur['par']) 
+		&& !isset($boucle->modificateur['tri'])) {
+			$boucle->order[] = "'$id_table." ."priorite'";
+			$boucle->order[] = "'$id_table." ."nom_mod'";
+			//array_unshift();
+			//array_unshift($boucle->order,"'$id_table." ."nom_mod'");
+	}
+	return calculer_boucle($id_boucle, $boucles);
+}
+
+/**
+ * <BOUCLE(TRADLANG)>
+ * On enlève les modules attic*
+ */
+function boucle_TRADLANG_dist($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+
+	// Par defaut, selectionner uniquement les modules qui ne sont pas attic*
+	if (!isset($boucle->modificateur['tout'])) {
+		array_unshift($boucle->where,array("'NOT LIKE'", "'$id_table." ."module'", "'\"attic%\"'"));
+		array_unshift($boucle->where,array("'NOT LIKE'", "'$id_table." ."module'", "'\"%attic\"'"));
+		array_unshift($boucle->where,array("'NOT LIKE'", "'$id_table." ."module'", "'\"contrib\"'"));
+		array_unshift($boucle->where,array("'!='", "'$id_table." ."id'", "'\"zz_timestamp_nepastraduire\"'"));
+	}
+	
 	return calculer_boucle($id_boucle, $boucles);
 }
 ?>

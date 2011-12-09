@@ -67,4 +67,15 @@ function tradlang_post_edition($flux){
 	}
 	return $flux;
 }
+
+function tradlang_insert_head_css($flux){
+	static $done = false;
+	if (!$done) {
+		$done = true;
+		$flux .= '<link rel="stylesheet" href="'.find_in_path('tradlang.css').'" type="text/css" />';
+		$flux .= '<link rel="stylesheet" href="'.generer_url_public('tradlang.css').'" type="text/css" />';
+	}
+
+	return $flux;
+}
 ?>

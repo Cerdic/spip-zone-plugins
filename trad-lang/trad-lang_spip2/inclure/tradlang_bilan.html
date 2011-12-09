@@ -8,7 +8,7 @@
 </BOUCLE_langues_sort>
 #SET{langues,#GET{langues}|langues_sort}
 <B_langues_totales>
-<table class="bilan spip liste">
+<table class="bilan spip liste ss_tablesort">
 	<thead>
 		<tr class="row_first">
 			<th></th>
@@ -21,7 +21,7 @@
 	</thead>
 	<B_modules_lang>
 	<tbody>
-	<BOUCLE_modules_lang(TRADLANG_MODULES){par module,nom_mod,id_tradlang_module}>
+	<BOUCLE_modules_lang(TRADLANG_MODULES)>
 	<tr class="module #NOM_MOD[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]" title="[(#NOM_MOD|attribut_html)]">
 		<td><a href="[(#SELF|parametre_url{id_tradlang_module,#ID_TRADLANG_MODULE})]">[(#NOM_MOD)]</a></td>
 		#SET{full,''}

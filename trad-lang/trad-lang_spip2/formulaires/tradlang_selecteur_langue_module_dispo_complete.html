@@ -1,0 +1,17 @@
+<BOUCLE_module(TRADLANG_MODULES){id_tradlang_module}>
+<BOUCLE_nb_langue_complete(TRADLANG){id_tradlang_module}{lang = #LANG_MERE}{statut IN 'OK'}> </BOUCLE_nb_langue_complete>
+#SET{langue_mere_nb,#TOTAL_BOUCLE}
+</B_nb_langue_complete>
+<B_module_langue_dispo>
+	<select name="#ENV{name,langues}" id="#ENV{name,langues}">
+		[(#ENV{option_vide}|oui)
+			<option value="">--</option>]
+		<BOUCLE_module_langue_dispo(TRADLANG){id_tradlang_module?}{lang != #ENV{lang_exclue}}{fusion lang}{par lang}>
+			<BOUCLE_nb_tradlangs(TRADLANG){id_tradlang_module}{lang=#LANG}{statut='OK'}> </BOUCLE_nb_tradlangs>
+			[(#TOTAL_BOUCLE|=={#GET{langue_mere_nb}}|oui)
+			<option value="#LANG"[(#LANG|=={#ENV{#ENV{name,langues}}}|oui)selected="selected"]>[(#LANG|traduire_nom_langue)][(#LANG|=={#LANG_MERE}|oui)<:tradlang:info_langue_mere:>]</option>]
+			</B_nb_tradlangs>
+		</BOUCLE_module_langue_dispo>
+	</select>
+</B_module_langue_dispo>
+</BOUCLE_module>

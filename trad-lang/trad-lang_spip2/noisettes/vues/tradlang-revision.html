@@ -2,9 +2,11 @@
 #SET{id_version,#ENV{id_version,#GET{lastversion}}}
 #SET{id_diff,#ENV{id_diff,#GET{lastversion}}|min{#GET{id_version}|moins{1}}}
 #SET{textes,#ID_OBJET|revision_comparee{#OBJET,#GET{id_version},complet,#GET{id_diff}}}
-
-
 [(#AUTORISER{modifier,#OBJET,#ID_OBJET})
+	<h1><:revisions:info_historique:> &laquo;&nbsp;<a
+					href="[(#ID_OBJET|generer_url_entite{#OBJET})]"
+					title="[(#OBJET|objet_info{texte_objet}|_T) ]#ID_OBJET"
+					>#INFO_TITRE{#OBJET,#ID_OBJET}</a>&nbsp;&raquo;</h1>
 	[(#GET{id_version}|=={#GET{lastversion}}|oui)
 		[(#URL_PAGE{traduction,etape=traduction_chaine}|parametre_url{id_tradlang,#ID_OBJET}|icone_verticale{[(#OBJET|objet_info{texte_modifier}|_T)],#OBJET|objet_info{icone_objet},edit,right})]
 	]
@@ -14,10 +16,6 @@
 				|icone_verticale{[(#VAL{revisions:icone_restaurer_version}|_T{#ARRAY{version,#GET{id_version}}})],revision-24.png,'edit',right})]
 		]
 	]
-	<h1>[(#CHEMIN_IMAGE{diff-24.png}|balise_img{'',cadre-icone})]<:revisions:info_historique:> &laquo;&nbsp;<a
-					href="[(#ID_OBJET|generer_url_entite{#OBJET})]"
-					title="[(#OBJET|objet_info{texte_objet}|_T) ]#ID_OBJET"
-					>#INFO_TITRE{#OBJET,#ID_OBJET}</a>&nbsp;&raquo;</h1>
 	<div class="historique_revisions">
 		<div class="ajax">
 			#FORMULAIRE_REVISER{#OBJET,#ID_OBJET,#GET{id_version},#GET{id_diff}}
@@ -27,15 +25,12 @@
 
 	[(#AUTORISER{modifier,#OBJET,#ID_OBJET})
 		[(#AUTORISER{modifier,#OBJET,#ID_OBJET}|oui)
-			[(#URL_PAGE{traduction,etape=traduction_chaine}|parametre_url{id_tradlang,#ID_OBJET}
-				|parametre_url{id_version,#GET{id_diff}}
+			[(#URL_TRADLANG{#ID_OBJET}|parametre_url{id_version,#GET{id_diff}}
 				|icone_verticale{[(#VAL{revisions:icone_restaurer_version}|_T{#ARRAY{version,#GET{id_diff}}})],revision-24.png,'edit',right})]
 		]
 	]
 	[<div class='id_rubrique'>(#GET{textes}|table_valeur{id_rubrique})</div>]
-	[<h4 class='surtitre'>(#GET{textes}|table_valeur{surtitre})</h4>]
-	<h1>[(#INFO_STATUT{#OBJET,#ID_OBJET}|puce_statut{#OBJET}) ][(#GET{textes}|table_valeur{titre}|sinon{#INFO_TITRE{#OBJET,#ID_OBJET}})]</h1>
-	[<h2 class='soustitre'>(#GET{textes}|table_valeur{soustitre})</h2>]
+	<h3>[(#INFO_STATUT{#OBJET,#ID_OBJET}|puce_statut{#OBJET}) ][(#GET{textes}|table_valeur{titre}|sinon{#INFO_TITRE{#OBJET,#ID_OBJET}})]</h1>
 
 	<div class="nettoyeur"></div>
 	<div id="wysiwyg" class="revision">

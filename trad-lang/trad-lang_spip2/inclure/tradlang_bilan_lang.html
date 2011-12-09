@@ -28,7 +28,7 @@
 	</thead>
 	<B_modules_lang>
 	<tbody>
-	<BOUCLE_modules_lang(TRADLANG_MODULES){par module,nom_mod,id_tradlang_module}>
+	<BOUCLE_modules_lang(TRADLANG_MODULES)>
 	<tr class="module #NOM_MOD[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 		<td><a href="[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#ENV{langue_modules}}|parametre_url{langue_modules,''})]">[(#NOM_MOD)]</a></td>
 		<BOUCLE_compte_langue_mere(TRADLANG){module}{lang=#LANG_MERE}> </BOUCLE_compte_langue_mere>
@@ -68,7 +68,7 @@
 			<div class="graph" title="<:tradlang:info_module_traduit_pc{pc=#GET{percent_ok}}:>">
 				<div class="ok"[ style="width: (#GET{percent_ok})px"]> </div>
 				<div class="modif" style="left: #GET{percent_ok}px; width: #GET{percent_modif}px"></div>
-				<div class="new" style="left: [(#GET{percent_ok}|plus{#GET{percent_modif}})]px; width: #GET{percent_new}px">
+				<div class="new" style="left: [(#GET{percent_ok}|plus{#GET{percent_modif}})]px; width: #GET{percent_new}px"> </div>
 			</div>
 		</td>
 	</tr>
