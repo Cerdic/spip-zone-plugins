@@ -46,7 +46,6 @@ function tradlang_set($id_tradlang,$set=null){
 			'date_modif' => 'ts' // champ a mettre a date('Y-m-d H:i:s') s'il y a modif
 		),
 		$c)){
-		spip_log($err);
 		return $err;
 	}
 

@@ -16,7 +16,6 @@ function action_tradlang_synchro_base_fichier_dist(){
 	}
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-	spip_log($arg,'test');
 	if (!preg_match(",^(\w+)$,", $arg, $r)) {
 		spip_log("action_tradlang_synchro_base_fichier $arg pas compris");
 	}
