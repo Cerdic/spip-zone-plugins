@@ -27,7 +27,7 @@ function teleporter_http_dist($methode,$source,$dest,$options=array()){
 		return $res;
 
 	list($fichier,$extension) = $res;
-	if (!$deballe = charger_fonction("http_deballe_$extension","teleporter",true))
+	if (!$deballe = charger_fonction("http_deballe_".preg_replace(",\W,","_",$extension),"teleporter",true))
 		return _T('svp:erreur_teleporter_format_archive_non_supporte',array('extension' => $extension));
 
 	$old = "";
@@ -72,18 +72,27 @@ function teleporter_http_recuperer_source($source,$dest_tmp){
 	include_spip('inc/distant');
 	$head = recuperer_page($source, false, true, 0);
 
-	if (preg_match(",^Content-Type:\s*application/zip$,Uims",$head))
-		$extension = "zip";
-	elseif (preg_match(",^Content-Disposition:\s*attachment;\s*filename=(.*)$,Uims",$head,$m)){
-		$f = $m[1];
-		if (pathinfo($f, PATHINFO_EXTENSION)=="zip"){
-			$extension = "zip";
+	if (preg_match(",^Content-Type:\s*?(.*)$,Uims",$head,$m)
+		AND include_spip('base/typedoc')){
+		$mime = $m[1];
+		// passer du mime a l'extension !
+		if ($e = array_search($mime,$GLOBALS['tables_mime']))
+			$extension = $e;
+	}
+
+	if (!$extension
+	  // cas des extensions incertaines car mime-type ambigu
+	  OR in_array($extension,array('bin','gz'))){
+		if (preg_match(",^Content-Disposition:\s*attachment;\s*filename=(.*)['\"]?$,Uims",$head,$m)
+		  AND $e=teleporter_http_extension($m[1])){
+			$extension = $e;
+		}
+		// au cas ou, si le content-type n'est pas la
+		// mais que l'extension est explicite
+		else{
+			$extension = teleporter_http_extension($source);
 		}
 	}
-	// au cas ou, si le content-type n'est pas la
-	// mais que l'extension est explicite
-	elseif(pathinfo($source, PATHINFO_EXTENSION)=="zip")
-		$extension = "zip";
 
 	# format de fichier inconnu
 	if (!$extension) {
@@ -102,4 +111,46 @@ function teleporter_http_recuperer_source($source,$dest_tmp){
 	}
 
 	return array($dest_tmp,$extension);
+}
+
+function teleporter_http_extension($file){
+	$e = pathinfo($file, PATHINFO_EXTENSION);
+
+	// cas particuliers : redresser .tar.gz
+	if ($e=='gz'
+		AND preg_match(',tar\.gz,i',$file))
+		$e = 'tgz';
+
+	return $e;
+}
+
+function http_deballe_recherche_racine($list){
+	// on cherche la plus longue racine commune a tous les fichiers
+	// pour l'enlever au deballage
+	$max_n = 999999;
+	$paths = array();
+	foreach($list as $n) {
+		$p = array();
+		foreach(explode('/', $n['filename']) as $n => $x) {
+			if ($n>$max_n)
+				continue;
+			$sofar = join('/',$p);
+			$paths[$n][$sofar]++;
+			$p[] = $x;
+		}
+		$max_n = min($n,$max_n);
+	}
+
+	$total = $paths[0][''];
+	$i = 0;
+	while (isset($paths[$i])
+	AND count($paths[$i]) <= 1
+	AND array_values($paths[$i]) == array($total))
+		$i++;
+
+	$racine = $i
+		? array_pop(array_keys($paths[$i-1])).'/'
+		: '';
+
+	return $racine;
 }

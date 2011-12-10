@@ -7,7 +7,7 @@
 
 
 /**
- * Deballer le fichier au format zip dans le repertoire $dest
+ * Deballer le fichier au format tgz dans le repertoire $dest
  * en utilisant le dossier temporaire $tmp si besoin
  *
  * @param string $archive
@@ -15,8 +15,9 @@
  * @param string $tmp
  * @return bool|string
  */
-function teleporter_http_deballe_zip_dist($archive, $dest, $tmp){
-	$status = teleporter_http_charger_zip(
+function teleporter_http_deballe_tgz_dist($archive, $dest, $tmp){
+
+	$status = teleporter_http_charger_tgz(
 		array(
 			'archive' => $archive, // normalement l'url source mais on l'a pas ici
 			'fichier' => $archive,
@@ -44,6 +45,7 @@ function teleporter_http_deballe_zip_dist($archive, $dest, $tmp){
 }
 
 
+
 /**
  * Charger un zip a partir d'un tableau d'options descriptives
  * http://doc.spip.org/@chargeur_charger_zip
@@ -51,11 +53,11 @@ function teleporter_http_deballe_zip_dist($archive, $dest, $tmp){
  * @param array $quoi
  * @return array|bool|int|string
  */
-function teleporter_http_charger_zip($quoi = array()){
+function teleporter_http_charger_tgz($quoi = array()){
 	if (!$quoi)
 		return false;
 
-	foreach (array(	'remove' => 'spip',
+	foreach (array(	'remove' => '',
 					'rename' => array(),
 					'edit' => array(),
 					'root_extract' => false, # extraire a la racine de dest ?
@@ -68,12 +70,17 @@ function teleporter_http_charger_zip($quoi = array()){
 	if (!@file_exists($fichier = $quoi['fichier']))
 		return 0;
 
-	include_spip('inc/pclzip');
-	$zip = new PclZip($fichier);
-	$list = $zip->listContent();
+	include_spip('inc/pcltar');
 
-	$racine = http_deballe_recherche_racine($list);
-	$quoi['remove'] = $racine;
+	$racine = '';
+	if ($list = PclTarList($fichier)){
+		$racine = http_deballe_recherche_racine($list);
+		$quoi['remove'] = $racine;
+	}
+	else {
+		spip_log('charger_decompresser erreur lecture liste tar ' . PclErrorString() .' pour paquet: ' . $quoi['archive'],"teleport"._LOG_ERREUR);
+		return PclErrorString();
+	}
 
 	// si pas de racine commune, reprendre le nom du fichier zip
 	// en lui enlevant la racine h+md5 qui le prefixe eventuellement
@@ -95,19 +102,10 @@ function teleporter_http_charger_zip($quoi = array()){
 	if (is_dir($target))
 		supprimer_repertoire($target);
 
-	// et enfin on extrait
-	$ok = $zip->extract(
-		PCLZIP_OPT_PATH,
-			$target
-		,
-		PCLZIP_OPT_SET_CHMOD, _SPIP_CHMOD,
-		PCLZIP_OPT_REPLACE_NEWER,
-		PCLZIP_OPT_REMOVE_PATH, $quoi['remove']
-	);
-	if ($zip->error_code < 0) {
-		spip_log('charger_decompresser erreur zip ' . $zip->error_code .' pour paquet: ' . $quoi['archive'],"teleport"._LOG_ERREUR);
-		return //$zip->error_code
-			$zip->errorName(true);
+	$ok = PclTarExtract($fichier,$target,$quoi['remove']);
+	if ($ok == 0) {
+		spip_log('charger_decompresser erreur tar ' . PclErrorString() .' pour paquet: ' . $quoi['archive'],"teleport"._LOG_ERREUR);
+		return PclErrorString();
 	}
 
 	spip_log('charger_decompresser OK pour paquet: ' . $quoi['archive'],"teleport");
