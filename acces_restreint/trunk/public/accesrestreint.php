@@ -25,27 +25,12 @@ function accesrestreint_pre_boucle(&$boucle){
 		$securise = false;
 		switch ($boucle->type_requete){
 			case 'hierarchie':
-			case 'rubriques':
 			case 'articles':
 			case 'breves':
 			case 'syndication':
 				$t = $boucle->id_table . '.id_rubrique';
 				$boucle->select = array_merge($boucle->select, array($t)); // pour postgres
 				$boucle->where[] = accesrestreint_rubriques_accessibles_where($t);
-				$securise = true;
-				break;
-			case 'forums':
-				$t = $boucle->id_table . '.id_rubrique';
-				$boucle->select = array_merge($boucle->select, array($t)); // pour postgres
-				$where = accesrestreint_rubriques_accessibles_where($t);
-		
-				$t = $boucle->id_table . '.id_article';
-				$boucle->select = array_merge($boucle->select, array($t)); // pour postgres
-				$where = "array('OR',$where,".accesrestreint_articles_accessibles_where($t).")";
-		
-				$t = $boucle->id_table . '.id_breve';
-				$boucle->select = array_merge($boucle->select, array($t)); // pour postgres
-				$boucle->where[] = "array('OR',$where,".accesrestreint_breves_accessibles_where($t).")";
 				$securise = true;
 				break;
 			case 'evenements':
@@ -55,17 +40,13 @@ function accesrestreint_pre_boucle(&$boucle){
 				$boucle->where[] = accesrestreint_articles_accessibles_where($t);
 				$securise = true;
 				break;
-			case 'syndic_articles':
-				$t = $boucle->id_table . '.' . $boucle->primary;
-				$boucle->select = array_merge($boucle->select, array($t));
-				$boucle->where[] = accesrestreint_syndic_articles_accessibles_where($t);
-				$securise = true;
-				break;
-			case 'documents':
-				$t = $boucle->id_table . '.' . $boucle->primary;
-				$boucle->select = array_merge($boucle->select, array($t));
-				$boucle->where[] = accesrestreint_documents_accessibles_where($t);
-				$securise = true;
+			default :
+				if (function_exists($accessible_where = "accesrestreint_".$boucle->type_requete."_accessibles_where")){
+					$t = $boucle->id_table . '.' . $boucle->primary;
+					$boucle->select = array_merge($boucle->select, array($t));
+					$boucle->where[] = $accessible_where($t);
+					$securise = true;
+				}
 				break;
 		}
 		if ($securise){
