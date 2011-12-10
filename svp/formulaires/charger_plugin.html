@@ -63,6 +63,13 @@
 				<p class="boutons" style="display:none"><input type="submit" name="installer" class="submit" value="<:svp:bouton_installer:>" /></p>
 			</div>]
 		</form>
+		<script type="text/javascript">
+		jQuery(function(){
+				jQuery('.plugins li.item input.checkbox').change(function(){
+					jQuery(this).parents('form').eq(0).find('.boutons').slideDown();
+				});
+		});
+		</script>
 </BOUCLE_depot_existe>
 	#BOITE_OUVRIR{'','notice'}
 		<p><:svp:message_nok_aucun_depot_disponible:></p>

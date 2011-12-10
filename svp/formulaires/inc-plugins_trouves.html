@@ -3,13 +3,10 @@
 	<ul class="liste-items">
 <BOUCLE_plugins_trouves(DATA) {source table, #ENV{plugins}}>
 		<li class="item"[ id="(#VALEUR{prefixe}|strtolower)-#COMPTEUR_BOUCLE-#VALEUR{score}"]>
-			[(#REM) <!-- Icone de l'action de telechargement -->]
-			<div class="download">
-				<a[ href="(#URL_ACTION_AUTEUR{charger_plugin, charger_zip,./}|parametre_url{url_zip_plugin, #VALEUR{url_archive}})"] title="<:plugin_charger:>">
-					[(#CHEMIN_IMAGE{telecharger-16.png}|balise_img{<:plugin_charger:>})]
-				</a>
-			</div>		
-
+		[(#REM) <!-- Checkbox action multiple -->]
+			<div class="check">
+				<input type="checkbox" class="checkbox" name="id_paquets[]" value="#ID_PAQUET" />
+			</div>	
 			[(#REM) <!-- Resume du plugin -->]
 			<div class="resume">
 				<h3 class="nom"><a[ href="(#VALEUR{version})"] rel="info">[(#VALEUR{nom})]</a></h3>
@@ -19,7 +16,10 @@
 				<div class="short">[(#VALEUR{slogan})]</div>
 				<div class="icon">[(#VALEUR{logo}|image_reduire{32})]</div>
 			</div>
-
+			[(#REM) <!-- Icone de l'action de telechargement -->]
+			<div class="actions">
+				<input type="submit" name="installer_paquet[#ID_PAQUET]" class="submit" value="<:svp:bouton_installer:>" />
+			</div>
 			[(#REM) <!-- Details du plugin -->]
 			<div class="details" style="display:none">
 				<dl>
@@ -39,7 +39,7 @@
 </BOUCLE_plugins_trouves>
 	</ul>
 </div>
-<B_plugins_trouves>
+</B_plugins_trouves>
 
 <script type="text/javascript">
 //<![CDATA[
