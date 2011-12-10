@@ -37,9 +37,6 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 	$diff2 = array_diff($trad_langue_cible_id,$trad_langue_mere_id);
 	$supprimees = 0;
 	if((count($diff1)>0) OR (count($diff2)>0)){
-		spip_log(count($diff1));
-		spip_log(count($diff2));
-		spip_log($diff1_array);
 		if(is_array($diff1_array)){
 			foreach($diff1_array as $key => $array){
 				$array['orig'] = 0;
@@ -48,7 +45,6 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 				unset($array['ts']);
 				unset($array['id_tradlang']);
 				$id_tradlang = sql_insertq('spip_tradlang',$array);
-				spip_log($array['id_tradlang']);
 				$inserees++;
 			}
 		}
@@ -61,7 +57,6 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 			$supprimees++;
 		}
 	}else{
-		//spip_log("compte de locutions égal entre $langue_mere et $langue");
 		return array('0','0');
 	}
 	return array($inserees,$supprimees);

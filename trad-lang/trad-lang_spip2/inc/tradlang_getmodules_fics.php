@@ -26,7 +26,6 @@ function inc_tradlang_getmodules_fics($rep,$nom_mod){
 				$ret[$nom_mod]['langue_'.$lang] = basename($fichier);
 			}
 		}
-		spip_log($ret,'tradlang');
 		return $ret;
 	}
 	else{

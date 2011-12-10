@@ -34,7 +34,6 @@ function inc_tradlang_ajouter_code_langue($module,$lang){
 	if (!is_array($config))
 		return;
 	if(($config['sauvegarde_locale'] == 'on') && ($config['sauvegarde_post_edition'] == 'on')){
-		spip_log('sauvegarde du fichier','test');
 		include_spip('tradlang_fonctions');
 		if($dir_lang = tradlang_dir_lang()){
 			$sauvegarder_module = charger_fonction('tradlang_sauvegarde_module','inc');
