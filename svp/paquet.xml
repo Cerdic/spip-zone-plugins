@@ -22,4 +22,12 @@
 	<pipeline nom="taches_generales_cron" inclure="genie/svp_taches_generales_cron.php" />
 	<pipeline nom="autoriser" inclure="inc/svp_autoriser.php" />
 	<pipeline nom="header_prive_css" inclure="svp_pipelines.php" />
+	<onglet 
+		nom="charger_plugin"
+		titre="plugin_titre_automatique_ajouter"
+		parent="plugins"
+		icone="images/plugin-add-24.png"
+		action="charger_plugin"
+	/>
+	
 </paquet>
