@@ -1,25 +1,39 @@
 <?php
 
+
 function stp_actualiser_paquets_locaux() {
 
-		$paquets = stp_descriptions_paquets_locaux();
-	$y = time();
+	spip_timer('paquets_locaux');
+	$paquets = stp_descriptions_paquets_locaux();
+	$hash = md5(serialize($paquets));
+	include_spip('inc/config');
+	if (lire_config('stp/hash_local') != $hash) {
 		stp_base_supprimer_paquets_locaux();
 		stp_base_inserer_paquets_locaux($paquets);
-	$z = time();
+		ecrire_config('stp/hash_local', $hash);
+	}
+	$temps = spip_timer('paquets_locaux');
 
-	print_r(($z - $y) . " s<br />");
+	return "Éxécuté en : " . $temps . "<br />";
 	
 }
 
+
+
 function stp_descriptions_paquets_locaux() {
+	include_spip('inc/plugin');
+	liste_plugin_files(_DIR_PLUGINS);
+	liste_plugin_files(_DIR_EXTENSIONS);
 	$get_infos = charger_fonction('get_infos', 'plugins');
-	$plugs = $get_infos(array(), false, _DIR_PLUGINS);
-	$exts  = $get_infos(array(), false, _DIR_EXTENSIONS);
-	return array(
-		'_DIR_PLUGINS' => $plugs,
-		'_DIR_EXTENSIONS' => $exts
+	$res = array(
+		'_DIR_PLUGINS'    => $get_infos(array(), false, _DIR_PLUGINS),
+		'_DIR_EXTENSIONS' => $get_infos(array(), false, _DIR_EXTENSIONS),
 	);
+	if (defined('_DIR_PLUGINS_SUPP') and _DIR_PLUGINS_SUPP) {
+		liste_plugin_files(_DIR_PLUGINS_SUPP);
+		$res['_DIR_PLUGINS_SUPP'] = $get_infos(array(), false, _DIR_PLUGINS_SUPP);
+	}
+	return $res;
 }
 
 

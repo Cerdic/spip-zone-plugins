@@ -5,7 +5,7 @@ function formulaires_tester_stp_charger_dist() {
 	$val = array();
 
 	include_spip('inc/stp_depot_local');
-	stp_actualiser_paquets_locaux();
+	$val['message_ok'] = stp_actualiser_paquets_locaux();
 	
 	return $val;
 }
