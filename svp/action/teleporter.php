@@ -20,6 +20,10 @@
  */
 function action_teleporter_composant_dist($methode,$source,$dest,$options=array()){
 
+	# Si definie a '', le chargeur est interdit ; mais on n'aurait de toutes
+	# facons jamais pu venir ici avec toutes les securisations faites :^)
+	if (!_DIR_PLUGINS_AUTO) die('jamais');
+
 	// verifier que la methode est connue
 	if (!$teleporter =  charger_fonction($methode,"teleporter",true)){
 		spip_log("Methode $methode inconnue pour teleporter $source vers $dest","teleport"._LOG_ERREUR);
@@ -29,7 +33,12 @@ function action_teleporter_composant_dist($methode,$source,$dest,$options=array(
 	if (!$dest = teleporter_verifier_destination($dest)){
 		spip_log("Rerpertoire $dest non accessible pour teleporter $source vers $dest","teleport"._LOG_ERREUR);
 		return _T('svp:erreur_teleporter_destination_erreur',array('dir' => $dest));
+		#$texte = "<p>"._T('plugin_erreur_droit1',array('dest'=>$dest))."</p>"
+		#  . "<p>"._T('plugin_erreur_droit2').aide('install0')."</p>";
 	}
+
+	# destination temporaire des fichiers si besoin
+	$options['dir_tmp'] = sous_repertoire(_DIR_CACHE, 'chargeur');
 
 	return $teleporter($methode,$source,$dest,$options);
 }
