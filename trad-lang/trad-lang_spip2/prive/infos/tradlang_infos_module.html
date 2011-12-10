@@ -10,8 +10,8 @@
 	<p><:tradlang:items_new:> : #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_new>
 	<BOUCLE_total_item_langue_mere_modif(TRADLANG){module}{statut=MODIF}{lang=#LANG}> </BOUCLE_total_item_langue_mere_modif>
 	<p><:tradlang:items_modif:> : #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_modif>
-	[(#IDMODULE|tradlang_testesynchro{#LANG_MERE}|oui)<p><img src="#CHEMIN{img_pack/vert.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_ok:></p>]
-	[(#IDMODULE|tradlang_testesynchro{#LANG_MERE}|non)<p><img src="#CHEMIN{img_pack/rouge.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_pas_ok:></p>]
+	[(#IDMODULE|tradlang_testesynchro{#LANG_MERE}|oui)<p><img src="#CHEMIN{images/vert.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_ok:></p>]
+	[(#IDMODULE|tradlang_testesynchro{#LANG_MERE}|non)<p><img src="#CHEMIN{images/rouge.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_pas_ok:></p>]
 </div>
 <BOUCLE_langues(TRADLANG){module}{fusion lang}{lang !IN #LANG_MERE}>
 #SET{str_cible,#ARRAY}
@@ -40,8 +40,8 @@
 			<p><:tradlang:message_demande_update_langues_cible_mere:></p>
 		]
 	]
-	[(#_module:IDMODULE|tradlang_testesynchro{#LANG}|oui)<p><img src="#CHEMIN{img_pack/vert.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_ok:></p>]
-	[(#_module:IDMODULE|tradlang_testesynchro{#LANG}|non)<p><img src="#CHEMIN{img_pack/rouge.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_pas_ok:></p>]
+	[(#_module:IDMODULE|tradlang_testesynchro{#LANG}|oui)<p><img src="#CHEMIN{images/vert.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_ok:></p>]
+	[(#_module:IDMODULE|tradlang_testesynchro{#LANG}|non)<p><img src="#CHEMIN{images/rouge.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_pas_ok:></p>]
 </div>
 </BOUCLE_langues>
 </BOUCLE_module>
