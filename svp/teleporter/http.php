@@ -30,15 +30,7 @@ function teleporter_http_dist($methode,$source,$dest,$options=array()){
 	if (!$deballe = charger_fonction("http_deballe_".preg_replace(",\W,","_",$extension),"teleporter",true))
 		return _T('svp:erreur_teleporter_format_archive_non_supporte',array('extension' => $extension));
 
-	$old = "";
-	if (is_dir($dest)){
-		$dir = dirname($dest);
-		$base = basename($dest);
-		$old="$dir/.$base.bck";
-		if (is_dir($old))
-			supprimer_repertoire($old);
-		rename($dest,$old);
-	}
+	$old = teleporter_nettoyer_vieille_version($dest);
 
 	if (!$target = $deballe($fichier, $dest, $tmp)){
 		// retablir l'ancien sinon

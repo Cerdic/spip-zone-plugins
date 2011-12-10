@@ -73,3 +73,16 @@ function teleporter_verifier_destination($dest){
 
 	return $base."/$final";
 }
+
+function teleporter_nettoyer_vieille_version($dest){
+	$old = "";
+	if (is_dir($dest)){
+		$dir = dirname($dest);
+		$base = basename($dest);
+		$old="$dir/.$base.bck";
+		if (is_dir($old))
+			supprimer_repertoire($old);
+		rename($dest,$old);
+	}
+	return $old;
+}
