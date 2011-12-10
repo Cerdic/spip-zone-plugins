@@ -15,7 +15,9 @@ function inc_tradlang_ajouter_code_langue($module,$lang){
 		$chaine['traducteur'] = '';
 		$chaine['md5'] = md5($chaine['str']);
 		$chaine['date_modif'] = date('Y-m-d H:i:s');
-		$chaine['lang_choisie'] = 'oui';
+		$chaine['langue_choisie'] = 'oui';
+		unset($chaine['ts']);
+		unset($chaine['id_tradlang']);
 		$res = sql_insertq('spip_tradlang',$chaine);
 	}
 	
