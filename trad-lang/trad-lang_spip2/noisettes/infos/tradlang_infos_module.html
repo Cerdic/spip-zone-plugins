@@ -41,7 +41,7 @@
 <li class="[(#COMPTEUR_BOUCLE|alterner{even,odd})]">
 	#SET{update,non}
 	#SET{str_cible,#ARRAY}
-	<strong>[(#LANG|traduire_nom_langue)][ ((#LANG))]</strong>
+	<strong>[[(#LANG)]][ (#LANG|traduire_nom_langue)]</strong>
 	<BOUCLE_total_item(TRADLANG){module}{lang=#LANG}>[(#SET{str_cible,#GET{str_cible}|push{#ID}})] </BOUCLE_total_item>
 	#SET{total,#TOTAL_BOUCLE}</B_total_item>
 	<BOUCLE_total_item_ok(TRADLANG){module}{statut=OK}{lang=#LANG}> </BOUCLE_total_item_ok>
