@@ -162,12 +162,13 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 	$version_de_spip = $laversion[0];
 	//si version 3 de Spip
 	if ($version_de_spip == '3'){
+		$lefichier = '';
 		//recherche la presence d'un fichier paquet.xml
 		if (is_readable($file = "$dir_plugins$plug_file/" . ($desc = "paquet") . ".xml")) {
-			$lefichier = 'lepaquet';
+			$lefichier = 'paquet';
 			}else{
 			if (is_readable($file = "$dir_plugins$plug_file/" . ($desc = "plugin") . ".xml"))
-			$lefichier = 'le pluginxml';
+			$lefichier = 'plugin';
 		}
 		
 		$prefix = $info['prefix'];
@@ -219,8 +220,9 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 				$leSVN = ($svn_revision<0 ? ' SVN':'').' ['.abs($svn_revision).']'; // version_svn_courante($dir_plugins.$plug_file);	  
 				$infoSVN = "<div class='apropos-svn'>".$leSVN." "._T('repertoire_plugins')." ".$dir."</div>"; 
 
-			// si pas la totale des infos, le minimum pour l'affichage en liste
 		}else{
+
+		// si pas la totale des infos, le minimum pour l'affichage en liste
 			$slogan = PtoBR(plugin_propre($info['slogan'], "$dir/lang/paquet-$prefix"));
 			// test si slogan vide afin de prendre la description via le fichier plugin.xml le cas echeant
 			if ($slogan!==''){
@@ -250,13 +252,14 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 		}
 		
 		// grosse différence avec Spip 2 qui retournait une liste et non 1 array
-		if (is_array($info['auteur'])) {
-		$auteur =   _T('public:par_auteur') .implode($info['auteur']).".\n";
-		$auteur = PtoBR(propre($auteur));
-		}else{
-		$auteur =  _T('public:par_auteur') .PtoBR(propre($info['auteur'])).".";
+
+	if (isset($info['auteur']))
+	{
+		if (is_array($info['auteur'])){
+			$a = formater_credits($info['auteur'], ', ');
+			$auteur =  _T('public:par_auteur') .PtoBR(propre($a, $dir));
 		}
-		$auteur = $auteur;
+		}
 	}
 	
 	//si version 2 de Spip
