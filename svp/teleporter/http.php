@@ -27,10 +27,23 @@ function teleporter_http_dist($methode,$source,$dest,$options=array()){
 		return $res;
 
 	list($fichier,$extension) = $res;
-	if (!$deballe = charger_fonction("http_deballe_zip","teleporter",true))
+	if (!$deballe = charger_fonction("http_deballe_$extension","teleporter",true))
 		return _T('svp:erreur_teleporter_format_archive_non_supporte',array('extension' => $extension));
 
+	$old = "";
+	if (is_dir($dest)){
+		$dir = dirname($dest);
+		$base = basename($dest);
+		$old="$dir/.$base.bck";
+		if (is_dir($old))
+			supprimer_repertoire($old);
+		rename($dest,$old);
+	}
+
 	if (!$target = $deballe($fichier, $dest, $tmp)){
+		// retablir l'ancien sinon
+		if ($old)
+			rename($old,$dest);
 		return _T('svp:erreur_teleporter_echec_deballage_archive',array('fichier' => $fichier));
 	}
 
@@ -75,11 +88,11 @@ function teleporter_http_recuperer_source($source,$dest_tmp){
 
 	include_spip('inc/distant');
 	$dest_tmp = copie_locale($source,'force',$dest_tmp);
-	if (!$dest_tmp) {
+	if (!$dest_tmp
+	  OR !file_exists($dest_tmp = _DIR_RACINE . $dest_tmp)) {
 		spip_log("Chargement impossible de la source $source","teleport"._LOG_ERREUR);
 		return _T('svp:erreur_teleporter_chargement_source_impossible',array('source' => $source));
 	}
-	$dest_tmp = _DIR_RACINE . $dest_tmp;
 
 	return array($dest_tmp,$extension);
 }
