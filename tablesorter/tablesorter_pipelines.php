@@ -19,7 +19,9 @@ function tablesorter_insert_head($flux){
 	<script type="text/javascript">/* <![CDATA[ */
 	(function($){
 		$(function(){
-			$("table.spip").tablesorter();
+			var tablesorter_init = function(){$("table.spip").not(".ss_tablesort").tablesorter();}
+			tablesorter_init();
+			onAjaxLoad(tablesorter_init);
 		});
 	})(jQuery);
 	/* ]]> */</script>';

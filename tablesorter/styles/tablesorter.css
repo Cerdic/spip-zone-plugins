@@ -26,6 +26,7 @@ table.tablesorter thead tr .header {
 	background-repeat: no-repeat;
 	background-position: center right;
 	cursor: pointer;
+	padding-right: 18px;
 }
 
 /* annulation du survol et fleche enlevee pour les zones non cliquables */
