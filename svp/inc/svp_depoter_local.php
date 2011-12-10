@@ -70,7 +70,6 @@ function stp_base_inserer_paquets_locaux($paquets_locaux) {
 	$recents = lire_config('plugins_interessants');
 	$installes  = lire_config('plugin_installes');
 	$actifs  = lire_config('plugin');
-	var_dump($installes);
 	
 	foreach($paquets_locaux as $const_dir => $paquets) {
 		foreach ($paquets as $chemin => $paquet) {
@@ -113,6 +112,7 @@ function stp_base_inserer_paquets_locaux($paquets_locaux) {
 				$le_paquet['src_archive'] = $chemin;
 				$le_paquet['recent']      = isset($recents[$chemin]) ? $recents[$chemin] : 0;
 				$le_paquet['installe']    =  in_array($chemin, $installes) ? 'oui': 'non'; // est desinstallable ?
+				$le_paquet['obsolete']    =  'non'; 
 				$actif = "non";
 				if (isset($actifs[$prefixe])
 					and ($actifs[$prefixe]['dir_type'] == $const_dir)
@@ -120,11 +120,26 @@ function stp_base_inserer_paquets_locaux($paquets_locaux) {
 					$actif = "oui";
 				}
 				$le_paquet['actif'] = $actif;
-				/*
-     		"maj_version"	=> "VARCHAR(255) DEFAULT '' NOT NULL", // version superieure existante (mise a jour possible)
-     		"superieur"		=> "varchar(3) DEFAULT 'non' NOT NULL", // superieur : version plus recente disponible (distant) d'un plugin (actif?) existant
-     		"obsolete"		=> "varchar(3) DEFAULT 'non' NOT NULL", // obsolete : version plus ancienne (locale) disponible d'un plugin local existant
-			*/
+				// on recherche d'eventuelle mises a jour existantes
+				if ($res = sql_allfetsel(array('id_plugin','version'),array('spip_plugins AS pl', 'spip_paquets AS pa'), array(
+					'pl.id_plugin = pa.id_paquet',
+					'pa.id_depot>' . sql_quote(0),
+					'pl.prefixe=' . sql_quote($prefixe),
+					'pa.etatnum>=' . sql_quote($le_paquet['etatnum'])))) {
+					foreach ($res as $paquet_distant) {
+						// si version superieure et etat identique ou meilleur,
+						// c'est que c'est une mise a jour possible !
+						if (spip_version_compare($paquet_distant['version'],$le_paquet['version'],'>')) {
+							if (!$le_paquet['maj_version'] or spip_version_compare($paquet_distant['version'], $le_paquet['maj_version'],'>')) {
+								$le_paquet['maj_version'] = $paquet_distant['version'];
+							}
+							# a voir si on utilisera...
+							# "superieur"		=> "varchar(3) DEFAULT 'non' NOT NULL",
+							# // superieur : version plus recente disponible (distant) d'un plugin (actif?) existant
+						}
+					}
+				}
+
 				$insert_paquets[] = $le_paquet;
 			}
 		}
@@ -139,10 +154,37 @@ function stp_base_inserer_paquets_locaux($paquets_locaux) {
 	}
 	
 	if ($insert_paquets) {
+			/*
+     		"obsolete"		=> "varchar(3) DEFAULT 'non' NOT NULL", 
+			*/
+		$obsoletes = array();
 		foreach ($insert_paquets as $c => $p) {
 			$insert_paquets[$c]['id_plugin'] = $cle_plugins[$p['prefixe']];
 			unset($insert_paquets[$c]['prefixe']);
+			$obsoletes[$p['prefixe']][] = $c;
+			// si 2 paquet locaux ont le meme prefixe, mais pas la meme version,
+			// l'un est obsolete : la version la plus ancienne
+			if (count($obsoletes[$p['prefixe']]) > 1) {
+				foreach ($obsoletes[$p['prefixe']] as $cle) {
+					if ($cle == $c) continue;
+					
+					// je suis plus petit qu'un autre
+					if (spip_version_compare($insert_paquets[$c]['version'], $insert_paquets[$cle]['version'], '<')) {
+						if ($insert_paquets[$c]['etatnum'] <= $insert_paquets[$cle]['etatnum']) {
+							$insert_paquets[$c]['obsolete'] = 'oui';
+						}
+					}
+					
+					// je suis plus grand qu'un autre...
+					// si mon etat est meilleur, rendre obsolete les autres
+					elseif ($insert_paquets[$c]['etatnum'] > $insert_paquets[$cle]['etatnum']) {
+						$insert_paquets[$cle]['obsolete'] = 'oui';
+					}
+					
+				}
+			}
 		}
+
 		sql_insertq_multi('spip_paquets', $insert_paquets);
 	}
 }
