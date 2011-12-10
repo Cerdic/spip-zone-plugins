@@ -1,0 +1,23 @@
+<div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM">
+	<h3 class="titrem">[(#CHEMIN_IMAGE{step-paquet-24.png}|balise_img{icone,cadre-icone})] Test de STP</h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	<!-- <br class='bugajaxie' /> -->
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}">
+		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action --> ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div>
+
+			[(#SAISIE{checkbox,do,label=Choisir,datas=#ARRAY{
+				actualiser_locaux,Actualiser les dépots locaux}})]
+				
+			<p class="boutons">
+				<input type="submit" class="submit" value="Lancer" />
+			</p>
+		</div>
+	</form>
+	]
+</div>
