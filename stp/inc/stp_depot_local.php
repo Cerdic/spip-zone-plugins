@@ -39,7 +39,7 @@ function stp_descriptions_paquets_locaux() {
 
 // supprime les paquets et plugins locaux.
 function stp_base_supprimer_paquets_locaux() {
-	sql_delete('spip_paquets', 'local=' . sql_quote('oui'));
+	sql_delete('spip_paquets', 'id_depot = ' . 0); //_paquets locaux en 0
 	sql_delete('spip_plugins', sql_in('id_plugin', sql_get_select('DISTINCT(id_plugin)', 'spip_paquets'), 'NOT'));
 }
 
