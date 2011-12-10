@@ -121,7 +121,7 @@ function stp_base_inserer_paquets_locaux($paquets_locaux) {
 				}
 				$le_paquet['actif'] = $actif;
 				// on recherche d'eventuelle mises a jour existantes
-				if ($res = sql_allfetsel(array('id_plugin','version'),array('spip_plugins AS pl', 'spip_paquets AS pa'), array(
+				if ($res = sql_allfetsel(array('pl.id_plugin','version'),array('spip_plugins AS pl', 'spip_paquets AS pa'), array(
 					'pl.id_plugin = pa.id_paquet',
 					'pa.id_depot>' . sql_quote(0),
 					'pl.prefixe=' . sql_quote($prefixe),
@@ -154,9 +154,7 @@ function stp_base_inserer_paquets_locaux($paquets_locaux) {
 	}
 	
 	if ($insert_paquets) {
-			/*
-     		"obsolete"		=> "varchar(3) DEFAULT 'non' NOT NULL", 
-			*/
+
 		$obsoletes = array();
 		foreach ($insert_paquets as $c => $p) {
 			$insert_paquets[$c]['id_plugin'] = $cle_plugins[$p['prefixe']];
