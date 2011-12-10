@@ -65,9 +65,15 @@ function stp_base_inserer_paquets_locaux($paquets_locaux) {
 	$cle_plugins    = array(); // prefixe => id
 	$insert_plugins = array(); // insertion prefixe...
 	$insert_paquets = array(); // insertion de paquet...
+
+	include_spip('inc/config');
+	$recents = lire_config('plugins_interessants');
+	$installes  = lire_config('plugin_installes');
+	$actifs  = lire_config('plugin');
+	var_dump($installes);
 	
 	foreach($paquets_locaux as $const_dir => $paquets) {
-		foreach ($paquets as $paquet) {
+		foreach ($paquets as $chemin => $paquet) {
 			$le_paquet = $paquet_base;
 
 			#$le_paquet['traductions'] = serialize($paquet['traductions']);
@@ -102,7 +108,23 @@ function stp_base_inserer_paquets_locaux($paquets_locaux) {
 				}
 
 				// ajout du prefixe dans le paquet, supprime avant insertion...
-				$le_paquet['prefixe'] = $prefixe;				
+				$le_paquet['prefixe']     = $prefixe;
+				$le_paquet['constante']   = $const_dir;
+				$le_paquet['src_archive'] = $chemin;
+				$le_paquet['recent']      = isset($recents[$chemin]) ? $recents[$chemin] : 0;
+				$le_paquet['installe']    =  in_array($chemin, $installes) ? 'oui': 'non'; // est desinstallable ?
+				$actif = "non";
+				if (isset($actifs[$prefixe])
+					and ($actifs[$prefixe]['dir_type'] == $const_dir)
+					and ($actifs[$prefixe]['dir'] == $chemin)) {
+					$actif = "oui";
+				}
+				$le_paquet['actif'] = $actif;
+				/*
+     		"maj_version"	=> "VARCHAR(255) DEFAULT '' NOT NULL", // version superieure existante (mise a jour possible)
+     		"superieur"		=> "varchar(3) DEFAULT 'non' NOT NULL", // superieur : version plus recente disponible (distant) d'un plugin (actif?) existant
+     		"obsolete"		=> "varchar(3) DEFAULT 'non' NOT NULL", // obsolete : version plus ancienne (locale) disponible d'un plugin local existant
+			*/
 				$insert_paquets[] = $le_paquet;
 			}
 		}
@@ -117,7 +139,6 @@ function stp_base_inserer_paquets_locaux($paquets_locaux) {
 	}
 	
 	if ($insert_paquets) {
-
 		foreach ($insert_paquets as $c => $p) {
 			$insert_paquets[$c]['id_plugin'] = $cle_plugins[$p['prefixe']];
 			unset($insert_paquets[$c]['prefixe']);
