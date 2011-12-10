@@ -25,13 +25,8 @@ function stp_descriptions_paquets_locaux() {
 
 // supprime les paquets et plugins locaux.
 function stp_base_supprimer_paquets_locaux() {
-
-	$id_plugins = sql_allfetsel('DISTINCT(id_plugin)', 'spip_paquets', 'local=' . sql_quote('oui'));
-	$id_plugins = array_map('array_shift', $id_plugins);
 	sql_delete('spip_paquets', 'local=' . sql_quote('oui'));
-	$id_plugins_corrects = sql_allfetsel('DISTINCT(id_plugin)', 'spip_paquets', sql_in('id_plugin', $id_plugins));
-	sql_delete('spip_plugins', sql_in('id_plugin', array_diff($id_plugins, $id_plugins_corrects)));
-	
+	sql_delete('spip_plugins', sql_in('id_plugin', sql_get_select('DISTINCT(id_plugin)', 'spip_paquets'), 'NOT'));
 }
 
 
@@ -53,6 +48,11 @@ function stp_base_inserer_paquets_locaux($paquets_locaux) {
 	$preparer_sql_paquet = charger_fonction('preparer_sql_paquet', 'plugins');
 
 	// pour chaque decouverte, on insere les paquets en base.
+	// on evite des requetes individuelles, tres couteuses en sqlite...
+	$cle_plugins    = array(); // prefixe => id
+	$insert_plugins = array(); // insertion prefixe...
+	$insert_paquets = array(); // insertion de paquet...
+	
 	foreach($paquets_locaux as $const_dir => $paquets) {
 		foreach ($paquets as $paquet) {
 			$le_paquet = $paquet_base;
@@ -79,14 +79,37 @@ function stp_base_inserer_paquets_locaux($paquets_locaux) {
 				}
 
 				// creation du plugin...
-				if (!$id_plugin = sql_getfetsel('id_plugin', 'spip_plugins', 'prefixe = '.sql_quote($le_paquet['prefixe']))) {
-					$id_plugin = sql_insertq('spip_plugins', $le_plugin);
+				$prefixe = $le_plugin['prefixe'];
+				if (!isset($cle_plugins[$prefixe])) {
+					if (!$id_plugin = sql_getfetsel('id_plugin', 'spip_plugins', 'prefixe = '.sql_quote($prefixe))) {
+						$insert_plugins[$prefixe] = $le_plugin;
+					} else {
+						$cle_plugins[$prefixe] = $id_plugin;
+					}
 				}
-				
-				$le_paquet['id_plugin'] = $id_plugin;
-				$id_plugin = sql_insertq('spip_paquets', $le_paquet);
+
+				// ajout du prefixe dans le paquet, supprime avant insertion...
+				$le_paquet['prefixe'] = $prefixe;				
+				$insert_paquets[] = $le_paquet;
 			}
 		}
+	}
+
+	if ($insert_plugins) {
+		sql_insertq_multi('spip_plugins', $insert_plugins);
+		$pls = sql_allfetsel(array('id_plugin', 'prefixe'), 'spip_plugins', sql_in('prefixe', array_keys($insert_plugins)));
+		foreach ($pls as $p) {
+			$cle_plugins[$p['prefixe']] = $p['id_plugin'];
+		}
+	}
+	
+	if ($insert_paquets) {
+
+		foreach ($insert_paquets as $c => $p) {
+			$insert_paquets[$c]['id_plugin'] = $cle_plugins[$p['prefixe']];
+			unset($insert_paquets[$c]['prefixe']);
+		}
+		sql_insertq_multi('spip_paquets', $insert_paquets);
 	}
 }
 
