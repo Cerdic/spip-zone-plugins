@@ -289,7 +289,7 @@ function version_svn_courante2($dir) {
 	} else $b = '';
 	// version 1.7 de Subversion
 	if(!class_exists('PDO')) return false;
-	try {
+/*	try { */
 		$db = new PDO('sqlite:' . $dir2);
 	//	foreach ($db->query('SELECT * FROM SQLite_master WHERE type=\'table\';') as $row) print_r($row);
 		if($res = $db->query('SELECT root FROM REPOSITORY;')) {
@@ -299,9 +299,9 @@ function version_svn_courante2($dir) {
 			if($res = $db->query("SELECT MAX(changed_revision) FROM NODES WHERE local_relpath LIKE '$b%';"))
 				foreach ($res as $row) return array($row[0], $url);
 		}
-	} catch(PDOException $e) {
+/*	} catch(PDOException $e) {
 		return false;
-	}
+	} */
 	return false;
 }
 
