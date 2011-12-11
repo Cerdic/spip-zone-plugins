@@ -190,7 +190,7 @@ function svp_actualiser_depot($id){
 		return false;
 	}
 	
-	$fichier_xml = _DIR_RACINE . copie_locale($depot['xml_paquets'], 'force');
+	$fichier_xml = _DIR_RACINE . copie_locale($depot['xml_paquets'], 'modif');
 
 	$sha = sha1_file($fichier_xml);
 
@@ -283,12 +283,12 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	// tous les plugins encore lies a des depots...
 	// la vmax est a retablir...
 	if ($anciens_plugins) {
-		$p = sql_allfetsel('p.id_plugin', array('spip_plugins AS p', 'spip_depots_plugins AS dp'), array(sql_in('p.id_plugin', $anciens_plugins), 'p.id_plugin=dp.id_plugin', 'dp.id_depot > ' . intval(0)));
+		$p = sql_allfetsel('DISTINCT(p.id_plugin)', array('spip_plugins AS p', 'spip_paquets AS pa'), array(sql_in('p.id_plugin', $anciens_plugins), 'p.id_plugin=pa.id_plugin'));
 		$p = array_map('array_shift', $p);
 		$diff = array_diff($anciens_plugins, $p);
 		// pour chaque plugin non encore utilise, on les vire !
 		sql_delete('spip_plugins', sql_in('id_plugin', $diff));
-		
+	
 		// pour les autres, on la fixe correctement
 		$vmax = 0;
 		
