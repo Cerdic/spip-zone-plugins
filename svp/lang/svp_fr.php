@@ -128,6 +128,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resume_table_paquets' => 'Liste des paquets',
 	'resume_table_plugins' => 'Liste des plugins @categorie@',
 
+// P
+	'plugins_inactifs_liste' => 'Inactifs',
+	'plugins_verouilles_liste' => 'Vérouillés',
+	'plugins_non_verouilles_liste' => 'Non vérouillés',
+	
 // T
 	'titre_depot' => 'Dépôt',
 	'titre_depots' => 'Dépôts',

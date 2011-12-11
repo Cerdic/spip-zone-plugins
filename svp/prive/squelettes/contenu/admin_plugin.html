@@ -1,0 +1,22 @@
+[(#AUTORISER{configurer,plugins}|sinon_interdire_acces)]
+<h1 class="grostitre"><:icone_admin_plugin:></h1>
+
+
+[(#REM) <!-- Barre d'onglets de premier niveau : on reste dans l'onglet ajouter --> ]
+[(#VAL{plugins}|barre_onglets{plugins_actifs})]
+
+<div class="ajax">
+	<div class="onglets_simple second clearfix">
+		<ul>
+			<li>[(#SELF|parametre_url{voir,tous_etat}|lien_ou_expose{<:plugins_tous_liste:>,[(#ENV{voir,actif}|=={tous_etat}|oui)],ajax})]</li>
+			<li>[(#SELF|parametre_url{voir,actif}|lien_ou_expose{<:plugins_actifs_liste:>,[(#ENV{voir,actif}|=={actif}|oui)],ajax})]</li>
+			<li>[(#SELF|parametre_url{voir,inactif}|lien_ou_expose{<:svp:plugins_inactifs_liste:>,[(#ENV{voir,actif}|=={inactif}|oui)],ajax})]</li>
+		</ul>
+		<ul>
+			<li>[(#SELF|parametre_url{voir,tous_type}|lien_ou_expose{<:plugins_tous_liste:>,[(#ENV{voir,actif}|=={tous_type}|oui)],ajax})]</li>
+			<li>[(#SELF|parametre_url{voir,verouille}|lien_ou_expose{<:svp:plugins_verouilles_liste:>,[(#ENV{voir,actif}|=={verouille}|oui)],ajax})]</li>
+			<li>[(#SELF|parametre_url{voir,non_verouille}|lien_ou_expose{<:svp:plugins_non_verouilles_liste:>,[(#ENV{voir,actif}|=={non_verouille}|oui)],ajax})]</li>
+		</ul>
+	</div>
+	#FORMULAIRE_ADMIN_PLUGIN{#ENV{voir}}
+</div>
