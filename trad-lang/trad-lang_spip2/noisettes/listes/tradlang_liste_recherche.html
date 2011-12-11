@@ -1,19 +1,34 @@
-#SET{str_cible,#ARRAY}
-#SET{lang,#ENV{lang_string,.*}}
-
+[(#REM)
+	
+	Plugin Tradlang
+	Plugin SPIP de traduction de fichiers de langue
+	© Florent Jugla, Fil, kent1
+	
+	Résultats de la recherche avancée...
+	Utilisé sur la page "spip.php?page=traduction_recherche"
+	Retourne un tableau des items de langue correspondant à une recherche
+	
+	Paramètres possibles :
+	-* recherche string : une chaine de recherche dans les items
+	-* lang_string string : la langue (lang) des items recherchés
+	-* statut string : le statut des items recherchés
+	-* id_tradlang_module int : le module dans lequel on recherche
+	-* par string : l'ordre du tri
+	-* pagination int : le nombre de résultats affichés par page
+]
+[(#SET{lang_recherche,#ENV{lang_string,.*}})]
 [(#SET{defaut_tri,#ARRAY{
 	statut,#ENV{statut_sens,1},
 	id,1,
 	str,1,
 	lang,inverse
-}})]
-[(#SET{par,[(#ENV{par,[(#ENV{recherche}|?{points,lang})]})]})]
+}})][(#SET{par,[(#ENV{par,[(#ENV{recherche}|?{points,lang})]})]})]
 <B_recherche_tradlang>
 <div class="liste resultats tradlang">
 #ANCRE_PAGINATION
 <h2 class="h2"><:tradlang:titre_recherche_tradlang:> (#GRAND_TOTAL)</h2>
-#SET{total,#GRAND_TOTAL}
-<table class="spip liste_traductions tablesorter">
+[<p class="pagination">(#PAGINATION)</p>]
+<table class="spip liste_traductions ss_tablesort">
 	<thead>
 		<tr class="row_first">
 			<th>
@@ -38,18 +53,16 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_recherche_tradlang(TRADLANG){recherche?}{id_tradlang_module?}{module?}{statut?}{lang=#GET{lang}}{tri #GET{par},#GET{defaut_tri}}{pagination 20}>
+	<BOUCLE_recherche_tradlang(TRADLANG tradlang_modules){recherche?}{id_tradlang_module?}{module?}{statut?}{lang=#GET{lang_recherche}}{tri #GET{par},#GET{defaut_tri}}{pagination #ENV{pagination,20}}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})] statut_[(#STATUT|strtolower)]">
 		<td>#ID</td>
-		<BOUCLE_module(TRADLANG_MODULES){module=#MODULE}>
-		<td>#MODULE</td>
+		<td>#NOM_MOD</td>
 		<BOUCLE_revise_orig(TRADLANG){lang=#LANG_MERE}{id=#ID}{0,1}>
 		#SET{id_lang_mere,#ID_TRADLANG}
 		<td class="status[_(#STATUT|strtolower)]">[(#STR**|entites_html)]</td>
 		</BOUCLE_revise_orig>
 		<td><:tradlang:str_existe_plus:></td>
 		<//B_revise_orig>
-		</BOUCLE_module>
 		<td class="#EDIT{str_statut}">
 			[(#GET{id_lang_mere}|=={#ID_TRADLANG}|non)[(#STR**|entites_html)]]
 			[(#GET{id_lang_mere}|=={#ID_TRADLANG}|oui)<em><:tradlang:info_chaine_originale:></em>]
