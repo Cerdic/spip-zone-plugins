@@ -2,13 +2,13 @@
 function csv2spip_analyse($contenu)
 {
 	$Tchamps = $err = array();
-	$Tref_champs = array('nom' => 'login',
+	$Tref_champs = array('nom' => 'nom',
 			     'prenom' => 'prenom', 
 			     'pass' => 'pass', 
 			     'bio' => 'bio', 
 			     'groupe' => 'groupe',
 			     'ss_groupe' => 'ss_groupe',
-			     'pseudo_spip' => 	'pseudo_spip',
+			     'login' => 	'login',
 			     'email' => 'email');
         list($head, $csv) = $contenu;
 	// traiter la premiere ligne pour avoir les noms des champs
@@ -21,6 +21,8 @@ function csv2spip_analyse($contenu)
 		    $err[]= _L("Champ inconnu @champ@", 
 			       array('champ' => $champ_ec));
 	}
+	if (count(array_intersect($Tchamps, array('login', 'nom'))) < 1)
+		return _L("Il faut obligatoirement une colonne login ou nom");
 	$n = count($Tchamps);
 	$l = 1;
 
@@ -33,12 +35,31 @@ function csv2spip_analyse($contenu)
 		$i = 0;
 		$insert = array();
 		foreach($Tchamps as $v) 
-		  $insert[$v] = trim(str_replace('"', '', $cols[$i++]));
-		if (isset($insert['pass']) AND !$insert['pass'])
-		  $insert['pass'] = $insert['nom'];
+			$insert[$v] = trim(str_replace('"', '', $cols[$i++]));
+
+		if ((!isset($insert['nom']) OR !$insert['nom'])
+			 AND (!isset($insert['login']) OR !$insert['login'])
+			 AND (!isset($insert['email']) OR !$insert['email'])) {
+			$err[] =  _L("ligne @ligne@: il faut qu'au moins un des champs nom, email ou login soit rempli",
+						array('ligne' => $k));
+			continue;
+		}
+		if ((!isset($insert['nom']) OR !$insert['nom'])
+			 AND (!isset($insert['login']) OR !$insert['login'])) {
+			if (isset($insert['nom']))
+				$insert['nom'] = str_replace('.', ' ', substr($insert['email'], 0, strpos($insert['email'], '@')));
+		}
+		if (isset($insert['pass']) AND !$insert['pass']) {
+			if (isset($insert['nom']) AND $insert['nom'] != '')
+				$insert['pass'] = $insert['nom'];
+			elseif (isset($insert['login']) AND $insert['login'] != '')
+				$insert['pass'] = $insert['login'];
+		}				
+
 		$csv[$k] = $insert;
 		$l++;
 	}
+
 	return $err ? join("<br />", $err) : $csv;
 }
 
