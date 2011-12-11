@@ -23,7 +23,7 @@ function metas_upgrade($nom_meta_base_version, $version_cible)
 
     $maj = array();
     $maj['create'] = array(
-        array('maj_tables', array('spip_metas')),
+        array('maj_tables', array('spip_metas','spip_metas_liens')),
     );
 
     // comme c'est un ajout de colonne, pas besoin d'utiliser un sqal_alter
