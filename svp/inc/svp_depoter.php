@@ -194,7 +194,7 @@ function svp_actualiser_depot($id){
 
 	$sha = sha1_file($fichier_xml);
 
-	if ($depot['sha_paquets'] == $sha) {
+	if (false AND $depot['sha_paquets'] == $sha) {
 		// Le fichier n'a pas change (meme sha1) alors on ne fait qu'actualiser la date 
 		// de mise a jour du depot en mettant a jour *inutilement* le sha1
 		spip_log('Aucune modification du fichier XML, actualisation non declenchee - id_depot = ' . $depot['id_depot'], 'svp_actions.' . _LOG_INFO);

@@ -38,14 +38,22 @@ function svp_phraser_depot($fichier_xml) {
 		}
 	}
 
-
 	// Extraction et phrasage du bloc des archives si il existe
 	// -- Le bloc <archives> peut etre une chaine de grande taille et provoquer une erreur 
 	// sur une recherche de regexp. On ne teste donc pas l'existence de cette balise
 	// -- Si aucun bloc <archive> c'est aussi une erreur
 	if (!preg_match_all(_SVP_REGEXP_BALISE_ARCHIVE, $xml, $matches))
 		return false;
-	$infos['paquets'] = svp_phraser_archives($matches[0]);
+
+	// lire le cache des md5 pour ne parser que ce qui a change
+	$fichier_xml_md5 = $fichier_xml . ".md5.txt";
+	lire_fichier($fichier_xml_md5,$cache_md5);
+	if (!$cache_md5
+	  OR !$cache_md5 = unserialize($cache_md5))
+		$cache_md5 = array();
+
+	$infos['paquets'] = svp_phraser_archives($matches[0], $cache_md5);
+	ecrire_fichier($fichier_xml_md5,serialize($cache_md5));
 
 	// -- Si aucun paquet extrait c'est aussi une erreur
 	if (!$infos['paquets'])
@@ -60,8 +68,9 @@ function svp_phraser_depot($fichier_xml) {
 	// - <zip> : contient les balises d'information sur le zip (obligatoire)
 	// - <traductions> : contient la compilation des informations de traduction (facultatif)
 	// - <plugin> ou <paquet> suivant la DTD : le contenu du fichier plugin.xml ou paquet.xml (facultatif)
-function svp_phraser_archives($archives) {
+function svp_phraser_archives($archives,&$md5_cache=array()) {
 	include_spip('inc/plugin');
+	$seen = array();
 
 	$paquets = array();
 	$version_spip = $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'];
@@ -73,7 +82,15 @@ function svp_phraser_archives($archives) {
 	// On phrase chacune des archives
 	// Seul le bloc <zip> est obligatoire
 	foreach ($archives as $_cle => $_archive){
-		if (preg_match(_SVP_REGEXP_BALISE_ZIP, $_archive, $matches)) {
+		// quand version spip ou mode runtime changent,
+		// il faut mettre le xml a jour pour voir les plugins compatibles ou non
+		$md5 = md5($_archive.":$version_spip:"._SVP_MODE_RUNTIME);
+		if (isset($md5_cache[$md5])){
+			if (is_array($p=$md5_cache[$md5]))
+				$paquets[$p['file']] = $p; // ce paquet est connu
+			$seen[] = $md5;
+		}
+		elseif (preg_match(_SVP_REGEXP_BALISE_ZIP, $_archive, $matches)) {
 
 			// Extraction de la balise <zip>
 			$zip = svp_phraser_zip($matches[1]);
@@ -105,9 +122,22 @@ function svp_phraser_archives($archives) {
 					$paquets[$zip['file']]['traductions'] = $traductions;
 					$paquets[$zip['file']]['dtd'] = $dtd;
 					$paquets[$zip['file']]['plugin'] = $xml;
+					$paquets[$zip['file']]['md5'] = $md5;
+					$md5_cache[$md5] = $paquets[$zip['file']];
+					$seen[] = $md5;
+				}
+				else{
+					$md5_cache[$md5] = $zip['file'];
+					$seen[] = $md5;
 				}
 			}
 		}
+	}
+
+	// supprimer du cache les zip qui ne sont pas dans le nouveau $archives
+	$oldies = array_diff(array_keys($md5_cache),$seen);
+	foreach ($oldies as $old_md5){
+		unset($md5_cache[$old_md5]);
 	}
 
 	return $paquets;
