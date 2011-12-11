@@ -68,7 +68,6 @@ function contruire_intervalle($bornes, $dtd='paquet') {
 
 
 function compiler_branches_spip($intervalle) {
-#spip_timer("compiler_branches_spip");
 	include_spip('plugins/installer');
 
 	global $infos_branches_spip;
@@ -138,8 +137,6 @@ function compiler_branches_spip($intervalle) {
 	for ($i = $index_inf; $i <= $index_sup; $i++) {
 		$liste[] = $liste_branches_spip[$i];
 	}
-#$a = spip_timer("compiler_branches_spip");
-#spip_log("svp_completer_plugins : " . $a , 'SVP.' . _LOG_ERREUR);
 
 	return implode(',', $liste);
 }
