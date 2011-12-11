@@ -2,7 +2,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/plugin'); // pour spip_version_compare(), plugin_version_compatible()
+include_spip('plugins/installer'); // pour spip_version_compare()
+include_spip('inc/plugin'); // plugin_version_compatible()
 
 class Decideur {
 
@@ -264,8 +265,8 @@ class Decideur {
 	function est_presente_lib($lib) {
 		static $libs = false;
 		if ($libs === false) {
-			include_spip('inc/step');
-			$libs = step_lister_librairies();
+			include_spip('inc/svp_outiller');
+			$libs = svp_lister_librairies();
 		}
 		return isset($libs[$lib]) ? $libs[$lib] : false;
 	}
@@ -424,7 +425,7 @@ class Decideur {
 				if (strtoupper($p) == 'SPIP') {
 					if (!step_verifier_plugin_compatible_version_spip($v)) {
 						$this->invalider($info);
-						$this->erreur($id, _T('step:message_incompatibilite_spip',array('plugin'=>$info[p])));
+						$this->erreur($id, _T('svp:message_incompatibilite_spip',array('plugin'=>$info[p])));
 						// est-ce qu'on quitte tout de suite, ou teste-t-on tout ?
 						// pour l'instant, essayons de tout tester quand meme
 						// nous verrons par la suite si c'est judicieux ou pas
@@ -437,7 +438,7 @@ class Decideur {
 						// peut on ecrire ?
 						if (!is_writable(_DIR_LIB)) {
 							$this->invalider($info);
-							$this->erreur($id, _T('step:message_erreur_ecriture_lib',array('plugin'=>$info[p],'lib_url'=>$n[src],'lib'=>$lib)));
+							$this->erreur($id, _T('svp:message_erreur_ecriture_lib',array('plugin'=>$info[p],'lib_url'=>$n[src],'lib'=>$lib)));
 						}
 					}
 
@@ -489,7 +490,7 @@ class Decideur {
 									$this->log("-- !erreur : $p");
 									// on ne trouve pas la dependance !
 									$this->invalider($info);
-									$this->erreur($id, $v ? _T('step:message_dependance_plugin_version',array('plugin'=>$info['p'],'dependance'=>$p,'version'=>$v)) : _T('step:message_dependance_plugin',array('plugin'=>$info['p'],'dependance'=>$p)));
+									$this->erreur($id, $v ? _T('svp:message_dependance_plugin_version',array('plugin'=>$info['p'],'dependance'=>$p,'version'=>$v)) : _T('svp:message_dependance_plugin',array('plugin'=>$info['p'],'dependance'=>$p)));
 								}
 								unset($new, $vieux);
 								break;
@@ -516,7 +517,7 @@ class Decideur {
 									$this->log("-- !erreur : $p");
 									// on ne trouve pas la dependance !
 									$this->invalider($info);
-									$this->erreur($id, $v ? _T('step:message_dependance_plugin_version',array('plugin'=>$info['p'],'dependance'=>$p,'version'=>$v)) : _T('step:message_dependance_plugin',array('plugin'=>$info['p'],'dependance'=>$p)));
+									$this->erreur($id, $v ? _T('svp:message_dependance_plugin_version',array('plugin'=>$info['p'],'dependance'=>$p,'version'=>$v)) : _T('svp:message_dependance_plugin',array('plugin'=>$info['p'],'dependance'=>$p)));
 								}
 								break;
 						}
@@ -549,7 +550,7 @@ class Decideur {
 		$res = array();
 		foreach ($this->$quoi as $id=>$info) {
 			$supp = ($info['todo'] == 'up' or $info['todo'] == 'upon') ? 'en version ' . $info['maj'] : '';
-			$res[] = _T('step:message_action'.$info['todo'],array('plugin'=>$info[p],'version'=>$info[v],'supp'=>$supp));
+			$res[] = _T('svp:message_action'.$info['todo'],array('plugin'=>$info[p],'version'=>$info[v],'supp'=>$supp));
 		}
 		return $res;
 	}
