@@ -84,21 +84,21 @@ class Decideur {
 			'p'=>array()
 		);
 
-        $from = array('spip_paquets AS t1', 'spip_plugins AS t2');
-		$orderby = $multiple ? 'etatnum DESC' : '';
-        $where[] = 't1.id_plugin = t2.id_plugin';
+        $from = array('spip_paquets AS pa', 'spip_plugins AS pl');
+		$orderby = $multiple ? 'pa.etatnum DESC' : '';
+        $where[] = 'pa.id_plugin = pl.id_plugin';
         if ($condition)
             $where[] = $condition;
 
 		$res = sql_select(array(
-			't1.id_paquet AS i',
-			't2.nom AS n',
-			't2.prefixe AS p',
-			't1.version AS v',
-			't1.etatnum AS e',
-			't1.dependances',
-			't1.maj_version AS maj',
-			't1.actif AS a'), $from, $where, '', $orderby);
+			'pa.id_paquet AS i',
+			'pl.nom AS n',
+			'pl.prefixe AS p',
+			'pa.version AS v',
+			'pa.etatnum AS e',
+			'pa.dependances',
+			'pa.maj_version AS maj',
+			'pa.actif AS a'), $from, $where, '', $orderby);
 		while ($r = sql_fetch($res)) {
 			$d = unserialize($r['dependances']);
 			// voir pour enregistrer en bdd simplement 'n' et 'u' (pas la peine d'encombrer)...
@@ -139,7 +139,7 @@ class Decideur {
 
 	/* verifier qu'on plugin plus recent existe pour un prefixe et une version donnee */
 	function chercher_plugin_recent($prefixe, $version) {
-		$news = $this->infos_courtes(array('prefixe=' . sql_quote($prefixe), 'obsolete=' . sql_quote('non'), 'id_zone>'.sql_quote(0)), true);
+		$news = $this->infos_courtes(array('pl.prefixe=' . sql_quote($prefixe), 'pa.obsolete=' . sql_quote('non'), 'pa.id_depot > '.sql_quote(0)), true);
 		$res = false;
 		if ($news and count($news['p'][$prefixe]) > 0) {
 			foreach ($news['p'][$prefixe] as $new) {
@@ -155,7 +155,7 @@ class Decideur {
 
 	/* verifier qu'un plugin exsite avec prefixe (cfg) pour une version [1.0;] donnee */
 	function chercher_plugin_compatible($prefixe, $version) {
-		$news = $this->infos_courtes(array('prefixe=' . sql_quote($prefixe), 'obsolete=' . sql_quote('non')), true);
+		$news = $this->infos_courtes(array('pl.prefixe=' . sql_quote($prefixe), 'pa.obsolete=' . sql_quote('non')), true);
 		if ($news and count($news['p'][$prefixe]) > 0) {
 			foreach ($news['p'][$prefixe] as $new) {
 				if (plugin_version_compatible($version, $new['v'])) {
