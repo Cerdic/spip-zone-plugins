@@ -5,9 +5,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function formulaires_admin_plugin_charger_dist($voir='actif'){
 	$valeurs = array();
 	
+	include_spip('inc/svp_depoter_local');
+	$val['message_ok'] = stp_actualiser_paquets_locaux();
+	
 	$valeurs['constante'] = array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL');
 	$valeurs['actif'] = 'oui';
-	
+		
 	if ($voir == 'actif')
 		$valeurs['actif'] = 'oui';
 		
