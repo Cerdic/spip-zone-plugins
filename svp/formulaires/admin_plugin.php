@@ -67,6 +67,28 @@ function formulaires_admin_plugin_traiter_dist(){
 					spip_log("Changement des plugins actifs par l'auteur " . $GLOBALS['visiteur_session']['id_auteur'] . ": " . join(',', $paquets));
 					ecrire_plugin_actifs($paquets, false, $action);
 					break;
+
+
+				case 'desinstaller':
+					$del_paquets = sql_allfetsel(
+						array('pl.prefixe', 'pa.constante', 'pa.src_archive'),
+						array('spip_paquets AS pa', 'spip_plugins AS pl'),
+						array('pl.id_plugin=pa.id_plugin', sql_in('id_paquet', $ids_paquets)));
+
+					$installer_plugins = charger_fonction('installer', 'plugins');
+					
+					$dels = array();
+					foreach ($del_paquets as $del) {
+						$infos = $installer_plugins($del['src_archive'], 'uninstall');
+						if ($infos AND !$infos['install_test'][0]) {
+							$dels[] = $del['src_archive'];
+						}
+					}
+					if ($dels) {
+						include_spip('inc/plugin');
+						ecrire_plugin_actifs($dels, false, 'enleve');
+					}
+					break;
 			}
 		}
 		$retour['redirect'] = generer_url_ecrire('admin_plugin');
