@@ -13,7 +13,7 @@ define("_LANGONET_ITEM_G",
        '%_[TU]\s*[(]\s*"(?:([a-z0-9_]+):)?([^"]*)"\s*([^.,)]*[^)]*)%S');
 // squelette avec <:  :>
 define("_LANGONET_ITEM_H", 
-       "%<:(?:([a-z0-9_]+):)?([^:|{}>]+)([^>]*)%S");
+       "%<[:](?:([a-z0-9_]+):)?([^:|{}>]+)([^>]*)%S");
 // pour plugin.xml (obsolete a terme)
 define("_LANGONET_ITEM_X", ",<[a-z0-9_]+>[\n|\t|\s]*([a-z0-9_]+):([a-z0-9_]+)[\n|\t|\s]*</[a-z0-9_]+()>,iS");
 

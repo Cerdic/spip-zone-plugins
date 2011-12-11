@@ -5,10 +5,9 @@
 	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok}|table_valeur{resume})</p>]
 	<!-- <br class='bugajaxie' /> -->
 	[(#ENV{editable})
-	<form method='post' action='#ENV{action}'><div>
+	<form action='#ENV{action}'><div>#ACTION_FORMULAIRE
 		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action --> ]
-		#ACTION_FORMULAIRE{#ENV{action}}
 		<div><input type="hidden" name="encodage" id="encodage_defaut" value="html" /></div>
 		<ul>
 			<li class="fieldset">
