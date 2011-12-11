@@ -414,10 +414,22 @@ class Decideur {
 
 		$cache = array(); // cache des actions realisees dans ce tour
 
-		if (is_array($info['dn']) and $info['dn'] and $info['dn'][0]) {
+		if (is_array($info['dn']) and $info['dn']) {
 
-			// [todo] : gerer les dependences autres que dans 0 (communs ou local) !!!!
-
+			// gerer les dependences autres que dans 0 (communs ou local) !!!!
+			// il peut exister des cles info[dn]["[version_spip_min;version_spip_max]"] de dependences
+			if (!isset($info['dn'][0]) OR count($info['dn']) > 1) {
+				$dep = array();
+				$dep[0] = isset($info['dn'][0]) ? $info['dn'][0] : array();
+				unset($info['dn'][0]);
+				foreach ($info['dn'] as $version => $deps) {
+					if (plugin_version_compatible($version, $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'])) {
+						$dep = array_merge($dep[0], $deps);
+					}
+				}
+				$info['dn'] = $dep;
+			}
+			
 			foreach ($info['dn'][0] as $n) {
 				// de deux choses l'une...
 				// soit la dependance est a SPIP, soit a un plugin, soit a une librairie...
