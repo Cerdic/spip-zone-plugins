@@ -24,6 +24,7 @@ function svp_phraser_depot($url) {
 							'type' => 'manuel'),
 				'paquets' => array());
 
+
 	// Extraction et phrasage du bloc depot si il existe
 	// -- Si le bloc <depot> n'est pas renseigne on ne considere pas cela comme une erreur
 	$balises_depot = array('titre', 'descriptif', 'type', 'url_serveur', 'url_brouteur', 'url_archives', 'url_commits');
@@ -33,6 +34,7 @@ function svp_phraser_depot($url) {
 		}
 	}
 
+
 	// Extraction et phrasage du bloc des archives si il existe
 	// -- Le bloc <archives> peut etre une chaine de grande taille et provoquer une erreur 
 	// sur une recherche de regexp. On ne teste donc pas l'existence de cette balise
@@ -40,6 +42,7 @@ function svp_phraser_depot($url) {
 	if (!preg_match_all(_SVP_REGEXP_BALISE_ARCHIVE, $xml, $matches))
 		return false;
 	$infos['paquets'] = svp_phraser_archives($matches[0]);
+
 	// -- Si aucun paquet extrait c'est aussi une erreur
 	if (!$infos['paquets'])
 		return false;
@@ -67,13 +70,17 @@ function svp_phraser_archives($archives) {
 	// Seul le bloc <zip> est obligatoire
 	foreach ($archives as $_cle => $_archive){
 		if (preg_match(_SVP_REGEXP_BALISE_ZIP, $_archive, $matches)) {
+
 			// Extraction de la balise <zip>
 			$zip = svp_phraser_zip($matches[1]);
+
 			if ($zip) {
+				
 				// Extraction de la balise traductions
 				$traductions = array();
 				if (preg_match(_SVP_REGEXP_BALISE_TRADUCTIONS, $_archive, $matches))
 					$traductions = svp_phraser_traductions($matches[1]);
+
 				
 				// La balise <archive> peut posseder un attribut qui precise la DTD utilisee pour les plugins (plugin ou paquet)
 				// Sinon, c'est la DTD plugin qui est utilisee
@@ -84,7 +91,7 @@ function svp_phraser_archives($archives) {
 				// Extraction *des balises* plugin ou *de la balise* paquet suivant la DTD et la version SPIP
 				// -- DTD : si on utilise plugin.xml on extrait la balise <plugin> sinon la balise <paquet>
 				$xml = svp_phraser_plugin($dtd, $_archive);
-				
+			
 				// Si on est en mode runtime, on est seulement interesse par les plugins compatibles avec
 				// la version courant de SPIP. On ne stocke donc pas les autres plugins.
 				// Si on est pas en mode runtime on prend tout !
@@ -109,7 +116,8 @@ function svp_phraser_archives($archives) {
 // nom, slogan et description 
 function svp_phraser_plugin($dtd, $contenu) {
 	global $balises_multis;
-
+	static $informer = array();
+	
 	$plugin = array();
 	
 	// On initialise les informations du plugin avec le contenu du plugin.xml ou paquet.xml
@@ -119,8 +127,10 @@ function svp_phraser_plugin($dtd, $contenu) {
 		// Pour chacune des occurences de la balise on extrait les infos
 		foreach ($matches[0] as $_balise_plugin) {
 			// Extraction des informations du plugin suivant le standard SPIP
-			$informer = charger_fonction('infos_' . $dtd, 'plugins');
-			$plugins[] = $informer($_balise_plugin);
+			if (!isset($informer[$dtd])) {
+				$informer[$dtd] = charger_fonction('infos_' . $dtd, 'plugins');
+			}
+			$plugins[] = $informer[$dtd]($_balise_plugin);
 		}
 
 		// On appelle systematiquement une fonction de mise a jour de la structure de donnees du plugin :

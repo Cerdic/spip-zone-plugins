@@ -171,21 +171,17 @@ function svp_nettoyer_apres_suppression($id_depot, $vmax) {
 // $id	=> id_depot de l'objet depot dans la table spip_depots
 function svp_actualiser_depot($id){
 	include_spip('inc/distant');
-spip_timer("svp_actualiser_depot");
+
 	$id = intval($id);
 	
 	// pas de depot a cet id ?
 	if (!$depot = sql_fetsel('*', 'spip_depots', 'id_depot='. sql_quote($id)) ){
 		return false;
 	}
-spip_timer("svp_recup");
+	
 	$fichier_xml = _DIR_RACINE . copie_locale($depot['xml_paquets'], 'force');
-$a = spip_timer("svp_recup");
-spip_log( "svp_recup ($id) : " . $a , 'SVP.' . _LOG_ERREUR);
-spip_timer("svn_sha");
+
 	$sha = sha1_file($fichier_xml);
-$a = spip_timer("svn_sha");
-spip_log( "svn_sha ($id) : " . $a , 'SVP.' . _LOG_ERREUR);
 
 	if ($depot['sha_paquets'] == $sha) {
 		// Le fichier n'a pas change (meme sha1) alors on ne fait qu'actualiser la date 
@@ -194,20 +190,18 @@ spip_log( "svn_sha ($id) : " . $a , 'SVP.' . _LOG_ERREUR);
 		sql_replace('spip_depots', array_diff_key($depot, array('maj' => '')));
 	}
 	else {
-spip_timer("svp_phraser_depot");
+
 		// Le fichier a bien change il faut actualiser tout le depot
 		$infos = svp_phraser_depot($depot['xml_paquets']);
-$a = spip_timer("svp_phraser_depot");
-spip_log( "svp_phraser_depot ($id) : " . $a , 'SVP.' . _LOG_ERREUR);
+
 		if (!$infos)
 			return false;
-spip_timer("svp_actualiser_paquets");
+
 		// On actualise les paquets dans spip_paquets en premier lieu.
 		// Lors de la mise a jour des paquets, les plugins aussi sont actualises
 		$ok = svp_actualiser_paquets($depot['id_depot'], $infos['paquets'],
 									$nb_paquets, $nb_plugins, $nb_autres);
-$tp = spip_timer("svp_actualiser_paquets");
-spip_log( "svp_actualiser_paquets ($id) : " . $tp , 'SVP.' . _LOG_ERREUR);	
+
 		if ($ok) {
 			// On met à jour :
 			// -- les infos ne pouvant pas etre editees par le formulaire d'edition d'un depot et extraites du xml
@@ -224,9 +218,7 @@ spip_log( "svp_actualiser_paquets ($id) : " . $tp , 'SVP.' . _LOG_ERREUR);
 			sql_updateq('spip_depots', $champs, 'id_depot=' . sql_quote($depot['id_depot']));
 		}
 	}
-	
-$temps = spip_timer("svp_actualiser_depot");
-spip_log( "svp_actualiser_depot ($id) : " . $temps , 'SVP.' . _LOG_ERREUR);
+
 	return true;
 }
 
@@ -288,6 +280,12 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 		
 		// pour les autres, on la fixe correctement
 		$vmax = 0;
+		
+		// On insere, en encapsulant pour sqlite...
+		if (sql_preferer_transaction()) {
+			sql_demarrer_transaction();
+		}
+				
 		foreach ($p as $id_plugin) {
 			if ($pa = sql_allfetsel('version', 'spip_paquets', 'id_plugin='.$id_plugin)) {
 				foreach ($pa as $v) {
@@ -297,6 +295,10 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 				}
 			}
 			sql_updateq('spip_plugins', array('vmax'=>$vmax), 'id_plugin=' . intval($id_plugin));
+		}
+		
+		if (sql_preferer_transaction()) {
+			sql_terminer_transaction();
 		}
 	}
 	
@@ -399,9 +401,6 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 					if (!$plugin = sql_fetsel('id_plugin, vmax', 'spip_plugins',
 						array('prefixe=' . sql_quote($insert_plugin['prefixe'])))) {
 						$insert_plugins[ $insert_plugin['prefixe'] ] = array_merge($insert_plugin, array('vmax' => $insert_paquet['version']));
-#						if (!$id_plugin = sql_insertq('spip_plugins', 
-#											array_merge($insert_plugin, array('vmax' => $insert_paquet['version']))))
-#							spip_log("insertion dans la base du plugin de prefixe " . $insert_plugin['prefixe'] . " archive (". $insert_paquet['nom_archive'] . ") a echoue\n", 'svp_paquets.' . _LOG_ERREUR);
 					}
 					else {
 						$id_plugin = $plugin['id_plugin'];
@@ -493,11 +492,6 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	}
 	sql_insertq_multi('spip_depots_plugins', $insert_dp);
 	
-/*					
-	// Il faut maintenant nettoyer la liste des paquets et plugins qui ont disparus du depot
-	if (count($ids_a_supprimer) > 0)
-		svp_nettoyer_apres_actualisation($id_depot, $ids_a_supprimer, $versions_a_supprimer);
-*/
 
 	// On compile maintenant certaines informations des paquets mis a jour dans les plugins
 	// (date de creation, date de modif, version spip...)
@@ -523,7 +517,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 // les paquets peuvent de pas avoir d'info "prefixe" (a transformer en id_plugin)
 // lorsqu'ils ne proviennent pas de plugin (squelettes...)
 function svp_inserer_multi(&$insert_plugins, &$insert_paquets, &$prefixes) {
-spip_timer("svp_inserer_multi");
+
 	if (count($insert_plugins)) {
 		sql_insertq_multi('spip_plugins', $insert_plugins);
 		$insert_plugins = array();
@@ -556,134 +550,70 @@ spip_timer("svp_inserer_multi");
 		sql_insertq_multi('spip_paquets', $insert_paquets);
 		$insert_paquets = array();
 	}
-$a = spip_timer("svp_inserer_multi");
-spip_log("svp_inserer_multi ($id_depot) : " . $a , 'SVP.' . _LOG_ERREUR);
+
 }
 
-/*
-function svp_nettoyer_apres_actualisation($id_depot) {
-
-	// Si on rentre dans cette fonction c'est que le tableau des paquets a supprimer est non vide
-	// On prepare : 
-	// - la liste des paquets a supprimer
-	// - la liste des plugins a verifier
-	// - la liste des versions max pour les plugins a verifier
-	$paquets_a_supprimer = array();
-	$ids_plugin = array();
-	$vmax = array();
-	foreach ($ids_a_supprimer as $_id_paquet => $_id_plugin) {
-		$paquets_a_supprimer[] = $_id_paquet;
-		if (!in_array($_id_plugin, $ids_plugin) AND ($_id_plugin != 0)) {
-			$ids_plugin[] = $_id_plugin;
-			if (!isset($vmax[$id_plugin])
-			OR (spip_version_compare($vmax[$id_plugin], $versions_a_supprimer[$_id_paquet], '<'))) 
-				$vmax[$_id_plugin] = $versions_a_supprimer[$_id_paquet];
-		}
-	}
-
-	// On supprime les paquets inutiles
-	sql_delete('spip_paquets', sql_in('id_paquet', $paquets_a_supprimer));
-
-	// On verifie pour chaque plugin concerne par la disparition de paquets si c'est la version
-	// la plus elevee qui a ete supprimee.
-	// Si oui, on positionne le vmax a 0, ce qui permettra de remettre a jour le plugin systematiquement
-	// a la prochaine actualisation. 
-	// Cette operation est necessaire car on n'impose pas que les informations du plugin soient identiques
-	// pour chaque paquet !!!
-	if ($resultats = sql_select('id_plugin, vmax', 'spip_plugins', sql_in('id_plugin', $ids_plugin))) {
-		while ($plugin = sql_fetch($resultats)) {
-			if (spip_version_compare($plugin['vmax'], $vmax[$plugin['id_plugin']], '='))
-				sql_updateq('spip_plugins',	array('vmax' => '0.0'),	'id_plugin=' . sql_quote($plugin['id_plugin']));
-		}
-	}
-
-	if ($ids_plugin) {
-		// On cherche pour chaque plugin de la liste si un paquet existe encore dans le meme depot
-		// Si aucun autre paquet n'existe on peut supprimer le plugin de la table spip_depots_plugins
-		if ($resultats = sql_select('id_plugin', 'spip_paquets', 
-									array('id_depot=' . sql_quote($id_depot), sql_in('id_plugin', $ids_plugin)))) {
-			while ($paquet = sql_fetch($resultats)) {
-				$cle = array_search($paquet['id_plugin'], $ids_plugin);
-				if ($cle !== false)
-					unset($ids_plugin[$cle]);
-			}
-		}
-		if (count($ids_plugin) > 0) {
-			// On supprime les liens des plugins n'etant plus heberges par le depot
-			sql_delete('spip_depots_plugins', array('id_depot=' . sql_quote($id_depot), sql_in('id_plugin', $ids_plugin)));
-				
-			// Maintenant on verifie si les plugins supprimes sont encore heberges par d'autre depot 
-			// Si non, on peut supprimer le plugin lui-meme de la table spip_plugins
-			$plugins_a_supprimer = $ids_plugin;
-			if ($liens = sql_allfetsel('id_plugin', 'spip_depots_plugins', sql_in('id_plugin', $ids_plugin))) {
-				$plugins_a_conserver = array_map('reset', $liens);
-				// L'intersection des deux tableaux renvoie les plugins a supprimer	
-				$plugins_a_supprimer = array_diff($ids_plugin, $plugins_a_conserver);
-			}
-			
-			// On supprime les plugins identifies
-			if ($plugins_a_supprimer)
-				sql_delete('spip_plugins', sql_in('id_plugin', $plugins_a_supprimer));
-		}
-	}
-	
-	return true;
-}
-*/
 
 function svp_completer_plugins($id_depot) {
-spip_timer("svp_completer_plugins");
+
 	include_spip('inc/svp_outiller');
 
 	// On limite la revue des paquets a ceux des plugins heberges par le depot en cours d'actualisation
-	if ($ids_plugin = sql_allfetsel('id_plugin', 'spip_depots_plugins', array('id_depot=' . sql_quote($id_depot)))) {
-		// -- on commence donc par recuperer les id des plugins du depot
-		$ids_plugin = array_map('reset', $ids_plugin);
+	$select_plugin = sql_get_select('id_plugin', 'spip_depots_plugins', array('id_depot=' . sql_quote($id_depot)));
 	
-		// -- on recupere tous les paquets associes aux plugins du depot et on compile les infos
+	// -- on recupere tous les paquets associes aux plugins du depot et on compile les infos	
+	if ($resultats = sql_allfetsel('id_plugin, compatibilite_spip, date_crea, date_modif', 'spip_paquets', 
+				sql_in('id_plugin', $select_plugin), '', 'id_plugin')) {
+
 		$plugin_en_cours = 0;
-		if ($resultats = sql_select('id_plugin, compatibilite_spip, date_crea, date_modif', 
-									'spip_paquets', 
-									array(sql_in('id_plugin', $ids_plugin)), array(), 
-									array('id_plugin'))) {
-			while ($paquet = sql_fetch($resultats)) {
-				// On finalise le plugin en cours et on passe au suivant 
-				if ($plugin_en_cours != $paquet['id_plugin']) {
-					// On met a jour le plugin en cours
-					if ($plugin_en_cours != 0) {
-						// On deduit maintenant les branches de la compatibilite globale
-						$complements['branches_spip'] = compiler_branches_spip($complements['compatibilite_spip']);
-						sql_updateq('spip_plugins',
-									$complements,
-									'id_plugin=' . sql_quote($plugin_en_cours));
-					}
-					// On passe au plugin suivant
-					$plugin_en_cours = $paquet['id_plugin'];
-					$complements = array('compatibilite_spip' => '', 'branches_spip' => '', 'date_crea' => 0, 'date_modif' => 0);
+		$inserts = array();
+		
+		foreach($resultats as $paquet) {
+			// On finalise le plugin en cours et on passe au suivant 
+			if ($plugin_en_cours != $paquet['id_plugin']) {
+				// On met a jour le plugin en cours
+				if ($plugin_en_cours) {
+					// On deduit maintenant les branches de la compatibilite globale
+					$complements['branches_spip'] = compiler_branches_spip($complements['compatibilite_spip']);
+					$inserts[$plugin_en_cours] = $complements;
 				}
-				
-				// On compile les compléments du plugin avec le paquet courant sauf les branches
-				// qui sont deduites en fin de compilation de la compatibilite
-				if ($paquet['date_modif'] > $complements['date_modif'])
-					$complements['date_modif'] = $paquet['date_modif'];
-				if (($complements['date_crea'] === 0)
-				OR ($paquet['date_crea'] < $complements['date_crea']))
-					$complements['date_crea'] = $paquet['date_crea'];
-				if ($paquet['compatibilite_spip'])
-					if (!$complements['compatibilite_spip'])
-						$complements['compatibilite_spip'] = $paquet['compatibilite_spip'];
-					else
-						$complements['compatibilite_spip'] = fusionner_intervalles($paquet['compatibilite_spip'], $complements['compatibilite_spip']);
+				// On passe au plugin suivant
+				$plugin_en_cours = $paquet['id_plugin'];
+				$complements = array('compatibilite_spip' => '', 'branches_spip' => '', 'date_crea' => 0, 'date_modif' => 0);
 			}
-			// On finalise le dernier plugin en cours
-			$complements['branches_spip'] = compiler_branches_spip($complements['compatibilite_spip']);
-			sql_updateq('spip_plugins',
-						$complements,
-						'id_plugin=' . sql_quote($plugin_en_cours));
+			
+			// On compile les compléments du plugin avec le paquet courant sauf les branches
+			// qui sont deduites en fin de compilation de la compatibilite
+			if ($paquet['date_modif'] > $complements['date_modif'])
+				$complements['date_modif'] = $paquet['date_modif'];
+			if (($complements['date_crea'] === 0)
+			OR ($paquet['date_crea'] < $complements['date_crea']))
+				$complements['date_crea'] = $paquet['date_crea'];
+			if ($paquet['compatibilite_spip'])
+				if (!$complements['compatibilite_spip'])
+					$complements['compatibilite_spip'] = $paquet['compatibilite_spip'];
+				else
+					$complements['compatibilite_spip'] = fusionner_intervalles($paquet['compatibilite_spip'], $complements['compatibilite_spip']);
 		}
+		// On finalise le dernier plugin en cours
+		$complements['branches_spip'] = compiler_branches_spip($complements['compatibilite_spip']);
+		$inserts[$plugin_en_cours] = $complements;
+
+		// On insere, en encapsulant pour sqlite...
+		if (sql_preferer_transaction()) {
+			sql_demarrer_transaction();
+		}
+		
+		foreach ($inserts as $id_plugin => $complements) {
+			sql_updateq('spip_plugins', $complements, 'id_plugin=' . intval($id_plugin));
+		}
+		
+		if (sql_preferer_transaction()) {
+			sql_terminer_transaction();
+		}
+
 	}
-$a = spip_timer("svp_completer_plugins");
-spip_log("svp_completer_plugins ($id_depot) : " . $a , 'SVP.' . _LOG_ERREUR);
+
 	return true;
 }
 
