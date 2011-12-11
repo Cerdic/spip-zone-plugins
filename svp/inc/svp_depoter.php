@@ -20,18 +20,18 @@ function svp_ajouter_depot($url, &$erreur='') {
 
 	// On considere que l'url a deja ete validee (correcte et nouveau depot)
 	$url = trim($url);
+	// Ajout du depot dans la table spip_depots. Les compteurs de paquets et de plugins
+	// sont mis a jour apres le traitement des paquets
+	$fichier_xml = _DIR_RACINE . copie_locale($url, 'modif');
 
 	// Lire les donnees d'un depot de paquets
-	$infos = svp_phraser_depot($url);
+	$infos = svp_phraser_depot($fichier_xml);
 	if (!$infos) {
 		$erreur = _T('svp:message_nok_xml_non_conforme', array('fichier' => $url));
 		return false;
 	}
 	
-	// Ajout du depot dans la table spip_depots. Les compteurs de paquets et de plugins
-	// sont mis a jour apres le traitement des paquets
-	$fichier_xml = _DIR_RACINE . copie_locale($url, 'force');
-	$champs = array('titre' => filtrer_entites($infos['depot']['titre']), 
+	$champs = array('titre' => filtrer_entites($infos['depot']['titre']),
 					'descriptif' => filtrer_entites($infos['depot']['descriptif']),
 					'type' => $infos['depot']['type'],
 					'url_serveur' => $infos['depot']['url_serveur'],
@@ -198,12 +198,12 @@ function svp_actualiser_depot($id){
 		// Le fichier n'a pas change (meme sha1) alors on ne fait qu'actualiser la date 
 		// de mise a jour du depot en mettant a jour *inutilement* le sha1
 		spip_log('Aucune modification du fichier XML, actualisation non declenchee - id_depot = ' . $depot['id_depot'], 'svp_actions.' . _LOG_INFO);
-		sql_replace('spip_depots', array_diff_key($depot, array('maj' => '')));
+		sql_updateq('spip_depots', array('maj' => date('Y-m-d H:i:s')));
 	}
 	else {
 
 		// Le fichier a bien change il faut actualiser tout le depot
-		$infos = svp_phraser_depot($depot['xml_paquets']);
+		$infos = svp_phraser_depot($fichier_xml);
 
 		if (!$infos)
 			return false;
@@ -225,7 +225,9 @@ function svp_actualiser_depot($id){
 							'nbr_paquets'=> $nb_paquets,
 							'nbr_plugins'=> $nb_plugins,
 							'nbr_autres'=> $nb_autres,
-							'sha_paquets'=> $sha);
+							'sha_paquets'=> $sha,
+							'maj' => date('Y-m-d H:i:s'),
+			);
 			sql_updateq('spip_depots', $champs, 'id_depot=' . sql_quote($depot['id_depot']));
 		}
 	}

@@ -5,16 +5,20 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/xml');
 
 
-// Phraser un fichier de source dont l'url est donnee
-// Le fichier est un fichier XML contenant deux balises principales :
-// - <depot>...</depot> : informations de description du depot (facultatif)
-// - <archives>...</archives> : liste des informations sur chaque archive (obligatoire)
-function svp_phraser_depot($url) {
+/**
+ * Phraser un fichier de source dont l'url est donnee
+ * Le fichier est un fichier XML contenant deux balises principales :
+ * - <depot>...</depot> : informations de description du depot (facultatif)
+ * - <archives>...</archives> : liste des informations sur chaque archive (obligatoire)
+ *
+ * @param string $fichier_xml
+ *   nom du fichier XML de description du depot
+ * @return array|bool
+ */
+function svp_phraser_depot($fichier_xml) {
 
-	// On lit le fichier xml. A priori il ne peut y avoir d'erreur, l'url a ete verifiee par l'appelant...
-	include_spip('inc/distant');
-	if (!$xml = recuperer_page($url))
-		return false;
+	// le fichier xml fournit sous forme de fichier
+	lire_fichier($fichier_xml,$xml);
 
 	// Initialisation du tableau des informations
 	// -- Si aucun bloc depot n'est trouve le titre et le type prennent une valeur par defaut
