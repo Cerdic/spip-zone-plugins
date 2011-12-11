@@ -7,4 +7,6 @@
 
 #FORMULAIRE_TRADLANG_RECHERCHE_AVANCEE{#URL_PAGE{traduction_recherche}}
 
-<INCLURE{fond=noisettes/listes/tradlang_liste_recherche,env}>
+[(#ENV{recherche}|ou{#ENV{statut}}|ou{#ENV{lang_string}}|ou{#ENV{id_tradlang_module}}|oui)
+	<INCLURE{fond=noisettes/listes/tradlang_liste_recherche,env}>
+]

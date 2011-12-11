@@ -38,7 +38,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_recherche_tradlang(TRADLANG){recherche?}{id_tradlang_module?}{module?}{statut?}{lang==#GET{lang}}{tri #GET{par},#GET{defaut_tri}}{pagination 20}>
+	<BOUCLE_recherche_tradlang(TRADLANG){recherche?}{id_tradlang_module?}{module?}{statut?}{lang=#GET{lang}}{tri #GET{par},#GET{defaut_tri}}{pagination 20}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})] statut_[(#STATUT|strtolower)]">
 		<td>#ID</td>
 		<BOUCLE_module(TRADLANG_MODULES){module=#MODULE}>
