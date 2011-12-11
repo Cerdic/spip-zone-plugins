@@ -46,7 +46,6 @@ function formulaires_charger_plugin_verifier_dist(){
             $decideur->verifier_dependances($a_installer);
 
             if (!$decideur->ok) {
-                $erreurs['message_erreur'] = "c'est pas ok !";
                 $erreurs['decideur_erreurs'] = array();
                 foreach ($decideur->err as $id=>$errs) {
                     foreach($errs as $err) {
