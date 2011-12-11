@@ -404,6 +404,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 						't1.version=' . sql_quote($insert_paquet['version']),
 						't1.version_base=' . sql_quote($insert_paquet['version_base']),
 						't1.etatnum=' . sql_quote($insert_paquet['etatnum']),
+						't1.depot>' . intval(0),
 						't2.prefixe=' . sql_quote($insert_plugin['prefixe']));
 				if (!$id_paquet = sql_getfetsel('t1.id_paquet', 'spip_paquets AS t1, spip_plugins AS t2', $where)) {
 					// On traite d'abord le plugin du paquet pour recuperer l'id_plugin
