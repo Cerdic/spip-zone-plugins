@@ -86,15 +86,16 @@ function svp_supprimer_depot($id){
 
 	// on calcule les versions max des plugins heberges par le depot
 	$vmax =array();
-	if ($resultats = sql_select('id_plugin, version', 'spip_paquets', 'id_depot='. sql_quote($id))) {
-		while ($paquet = sql_fetch($resultats)) {
+			
+	if ($resultats = sql_allfetsel('id_plugin, version', 'spip_paquets', 'id_depot='. sql_quote($id))) {
+		foreach ($resultats as $paquet) {
 			$id_plugin = $paquet['id_plugin'];
 			if (!isset($vmax[$id_plugin])
 			OR (spip_version_compare($vmax[$id_plugin], $paquet['version'], '<'))) 
 				$vmax[$id_plugin] = $paquet['version'];
 		}
 	}
-
+	
 	// On supprime les paquets heberges par le depot
 	sql_delete('spip_paquets','id_depot='.sql_quote($id_depot));
 	
@@ -140,13 +141,23 @@ function svp_nettoyer_apres_suppression($id_depot, $vmax) {
 	// a la prochaine actualisation. 
 	// Cette operation est necessaire car on n'impose pas que les informations du plugin soient identiques
 	// pour chaque paquet !!!
-	if ($resultats = sql_select('id_plugin, vmax', 'spip_plugins', sql_in('id_plugin', $plugins_depot))) {
-		while ($plugin = sql_fetch($resultats)) {
+	
+	// On insere, en encapsulant pour sqlite...
+	if (sql_preferer_transaction()) {
+		sql_demarrer_transaction();
+	}
+	
+	if ($resultats = sql_allfetsel('id_plugin, vmax', 'spip_plugins', sql_in('id_plugin', $plugins_depot))) {
+		foreach ($resultats as $plugin) {
 			if (spip_version_compare($plugin['vmax'], $vmax[$plugin['id_plugin']], '='))
 				sql_updateq('spip_plugins',	array('vmax' => '0.0'),	'id_plugin=' . sql_quote($plugin['id_plugin']));
 		}
 	}
 
+	if (sql_preferer_transaction()) {
+		sql_terminer_transaction();
+	}
+	
 	// Maintenant on calcule la liste des plugins du depot qui ne sont pas heberges 
 	// par un autre depot => donc a supprimer
 	// - Liste de tous les plugins encore lies a un autre depot
