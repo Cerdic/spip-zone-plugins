@@ -87,8 +87,10 @@ class Decideur {
 
         $from = array('spip_paquets AS pa', 'spip_plugins AS pl');
 		$orderby = $multiple ? 'pa.etatnum DESC' : '';
-        $where[] = 'pa.id_plugin = pl.id_plugin';
-        if ($condition)
+        $where = array('pa.id_plugin = pl.id_plugin');
+        if (is_array($condition))
+            $where = array_merge($where, $condition);
+        else
             $where[] = $condition;
 
 		$res = sql_select(array(
@@ -550,7 +552,7 @@ class Decideur {
 		$res = array();
 		foreach ($this->$quoi as $id=>$info) {
 			$supp = ($info['todo'] == 'up' or $info['todo'] == 'upon') ? 'en version ' . $info['maj'] : '';
-			$res[] = _T('svp:message_action'.$info['todo'],array('plugin'=>$info[p],'version'=>$info[v],'supp'=>$supp));
+			$res[] = _T('svp:message_action_'.$info['todo'],array('plugin'=>$info[p],'version'=>$info[v],'supp'=>$supp));
 		}
 		return $res;
 	}

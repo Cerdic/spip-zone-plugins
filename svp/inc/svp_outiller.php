@@ -211,11 +211,9 @@ function definir_licence($prefixe, $nom, $suffixe, $version) {
 function svp_lister_librairies() {
 	$libs = array();
 	foreach (array_reverse(creer_chemin()) as $d) {
-		if (is_dir($dir = $d.'lib/')
-		AND $t = @opendir($dir)) {
+		if (is_dir($dir = $d.'lib/') AND $t = @opendir($dir)) {
 			while (($f = readdir($t)) !== false) {
-				if ($f[0] != '.'
-				AND is_dir("$dir/$f"))
+				if ($f[0] != '.' AND is_dir("$dir/$f"))
 					$libs[$f] = $dir;
 			}
 		}

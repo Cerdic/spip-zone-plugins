@@ -106,6 +106,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende_rechercher_plugins' => 'Rechercher des plugins',
 
 // M
+    'message_action_on' => 'Activer le plugin &laquo;@plugin@&raquo; (version : @version@)',
+    'message_dependance_plugin' => 'Le plugin @plugin@ d&eacute;pend de @dependance@.',
+    'message_dependance_plugin_version' => 'Le plugin @plugin@ d&eacute;pend de @dependance@ @version@',
+    'message_erreur_ecriture_lib' => '@plugin@ a besoin de la librairie <a href="@lib_url@">@lib@</a>
+   								placée dans le répertoire <var>lib/</var> à la racine de votre site.
+   								Cependant, ce répertoire n\'est pas accessible en écriture.
+   								Vous devez l\'installer manuellement ou donner des permissions d\'écriture
+   								à ce répertoire.',
+    'message_incompatibilite_spip' => '@plugin@  n\'est pas compatible avec la version de SPIP que vous utilisez.',
 	'message_nok_aucun_depot_disponible' => 'Aucun plugin n\'est disponible ! Veuillez vous rendre dans la page de gestion des dépôts pour ajouter des listes de plugins installables.',
 	'message_nok_aucun_paquet_ajoute' => 'Le dépôt « @url@ » ne fournit aucun nouveau paquet par rapport à la base déjà enregistrée. Il n\'a donc pas ét&eacute ajouté',
 	'message_nok_aucun_plugin_selectionne' => 'Aucun plugin à installer. Veuillez sélectionner les plugins à installer',
@@ -135,7 +144,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plugins_inactifs_liste' => 'Inactifs',
 	'plugins_verouilles_liste' => 'Vérouillés',
 	'plugins_non_verouilles_liste' => 'Non vérouillés',
-	
+
 // T
 	'titre_depot' => 'Dépôt',
 	'titre_depots' => 'Dépôts',
