@@ -92,8 +92,7 @@ class Decideur {
             $where = array_merge($where, $condition);
         else
             $where[] = $condition;
-
-		$res = sql_select(array(
+		$res = sql_allfetsel(array(
 			'pa.id_paquet AS i',
 			'pl.nom AS n',
 			'pl.prefixe AS p',
@@ -102,8 +101,9 @@ class Decideur {
 			'pa.dependances',
 			'pa.maj_version AS maj',
 			'pa.actif AS a'), $from, $where, '', $orderby);
-		while ($r = sql_fetch($res)) {
+		foreach ($res as $r) {
 			$d = unserialize($r['dependances']);
+
 			// voir pour enregistrer en bdd simplement 'n' et 'u' (pas la peine d'encombrer)...
 			if (!$d) $d = array('necessite'=>array(), 'utilise'=>array());
 			unset($r['dependances']);
@@ -414,24 +414,33 @@ class Decideur {
 
 		$cache = array(); // cache des actions realisees dans ce tour
 
-		if (is_array($info['dn']) and $info['dn']) {
-			foreach ($info['dn'] as $n) {
+		if (is_array($info['dn']) and $info['dn'] and $info['dn'][0]) {
+
+			// [todo] : gerer les dependences autres que dans 0 (communs ou local) !!!!
+
+			foreach ($info['dn'][0] as $n) {
 				// de deux choses l'une...
 				// soit la dependance est a SPIP, soit a un plugin, soit a une librairie...
 
-				$p = strtoupper($n['id']);
-				$v = $n['version'];
+				$p = strtoupper($n['nom']);
+				$v = $n['compatibilite'];
 
 				// si c'est a SPIP et qu'on ne valide pas, on retourne une erreur !
 				// normalement, on ne devrait pas trop pouvoir tomber sur ce cas
 				if (strtoupper($p) == 'SPIP') {
+					// c'est pas la que ça se fait !
+				}
+					/*
 					if (!step_verifier_plugin_compatible_version_spip($v)) {
 						$this->invalider($info);
 						$this->erreur($id, _T('svp:message_incompatibilite_spip',array('plugin'=>$info[p])));
 						// est-ce qu'on quitte tout de suite, ou teste-t-on tout ?
 						// pour l'instant, essayons de tout tester quand meme
 						// nous verrons par la suite si c'est judicieux ou pas
-					}
+					}*/
+
+				// les libs non plus ici ... todo...
+				/*
 				} elseif (strpos($p,'lib:')===0) {
 					$lib = substr($p, 4);
 					// l'identifiant commence par "lib:", c'est une librairie dont il s'agit.
@@ -444,12 +453,16 @@ class Decideur {
 						}
 					}
 
-                } elseif ((array_key_exists(strtoupper($p), $this->procure))
+                }*/
+
+                // le core procure le paquet que l'on demande !
+                elseif ((array_key_exists(strtoupper($p), $this->procure))
                   and (plugin_version_compatible($v, $this->procure[strtoupper($p)]))) {
                     // rien a faire...
+                    $this->log("-- est procure par le core ($p)");
 
 				} else {
-					$this->log("-- verifier $p");
+					$this->log("-- verifier : $p");
 					// nous sommes face a une dependance de plugin
 					// on regarde s'il est present et a la bonne version
 					// sinon on le cherche et on l'ajoute
@@ -459,7 +472,7 @@ class Decideur {
 
 						// absent ou erreur ou pas compatible
 						$etat = $err ? 'erreur' : ($ninfo ? 'conflit' : 'absent');
-						$this->log("Dedendance " . $p . " &agrave; resoudre ! ($etat)");
+						$this->log("Dedendance " . $p . " a resoudre ! ($etat)");
 
 						switch ($etat) {
 							// commencons par le plus simple :

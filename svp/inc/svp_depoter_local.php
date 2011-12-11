@@ -5,13 +5,14 @@ function stp_actualiser_paquets_locaux() {
 
 	spip_timer('paquets_locaux');
 	$paquets = stp_descriptions_paquets_locaux();
-	$hash = md5(serialize($paquets) . $GLOBALS['meta']['plugin']);
-	include_spip('inc/config');
-	if (lire_config('stp/hash_local') != $hash) {
+
+#	$hash = md5(serialize($paquets) . $GLOBALS['meta']['plugin']);
+#	include_spip('inc/config');
+#	if (lire_config('stp/hash_local') != $hash) {
 		stp_base_supprimer_paquets_locaux();
 		stp_base_inserer_paquets_locaux($paquets);
-		ecrire_config('stp/hash_local', $hash);
-	}
+#		ecrire_config('stp/hash_local', $hash);
+#	}
 	$temps = spip_timer('paquets_locaux');
 
 	return "Éxécuté en : " . $temps;
@@ -181,6 +182,23 @@ function stp_base_inserer_paquets_locaux($paquets_locaux) {
 					
 				}
 			}
+
+			// remettre les necessite, utilise, librairie dans la cle 0
+			// comme SVP
+			if ($dep = unserialize($insert_paquets[$c]['dependances']) and is_array($dep)) {
+				foreach ($dep as $d => $contenu) {
+					if ($contenu) {
+						$new = array();
+						foreach($contenu as $n) {
+							unset($n['id']);
+							$new[ strtolower($n['nom']) ] = $n;
+						}
+						$dep[$d] = array($new);
+					}
+				}
+				$insert_paquets[$c]['dependances'] = serialize($dep);
+			}
+
 		}
 
 		sql_insertq_multi('spip_paquets', $insert_paquets);
