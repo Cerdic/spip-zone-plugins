@@ -2,29 +2,36 @@
     <h3 class="titrem">[(#CHEMIN_IMAGE{ajouter_plugin-24.gif}|balise_img{icone ajouter_plugin-24,cadre-icone})]<:plugin_titre_automatique_ajouter:></h3>
 
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-    [<div class="reponse_formulaire reponse_formulaire_erreur">
-        <strong>Erreurs :</strong>
-        <ul>(#ENV**{erreurs}|table_valeur{decideur_erreurs}|foreach)</ul>
-    </div>]
-    [<div class="reponse_formulaire reponse_formulaire_ok">
-        <strong>Demande :</strong>
-        <ul>(#ENV**{erreurs}|table_valeur{decideur_demandes}|foreach)</ul>
-    </div>]
-
-    [<div class="reponse_formulaire reponse_formulaire_ok">
-        <strong>Propositions :</strong>
-        <ul>(#ENV**{erreurs}|table_valeur{decideur_propositions}|foreach)</ul>
-    </div>]
-
-    [<div class="reponse_formulaire reponse_formulaire_ok">
-        <strong>Actions :</strong>
-        <ul>(#ENV**{erreurs}|table_valeur{decideur_actions}|foreach)</ul>
-    </div>]
 <BOUCLE_depot_existe(DEPOTS) {0,1}>
     <form method="post" action="#ENV{action}">
+        [<div class="reponse_formulaire reponse_formulaire_erreur">
+            <strong>Erreurs :</strong>
+            <ul>(#ENV**{erreurs}|table_valeur{decideur_erreurs}|foreach)</ul>
+        </div>]
+        [<div class="reponse_formulaire reponse_formulaire_ok">
+            <strong>Demande :</strong>
+            <ul>(#ENV**{erreurs}|table_valeur{decideur_demandes}|foreach)</ul>
+        </div>]
+
+        [<div class="reponse_formulaire reponse_formulaire_ok">
+            <strong>Propositions :</strong>
+            <ul>(#ENV**{erreurs}|table_valeur{decideur_propositions}|foreach)</ul>
+        </div>]
+
+        [<div class="reponse_formulaire reponse_formulaire_ok">
+            <strong>Actions :</strong>
+            <ul>(#ENV**{erreurs}|table_valeur{decideur_actions}|foreach)</ul>
+        </div>
+        <p class="boutons">
+            <input type="submit" name="annuler_actions" class="submit" value="<:bouton_annuler:>" />
+            <input type="submit" name="valider_actions" class="submit" value="<:bouton_valider:>" />
+        </p>]
+
         [(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
         parametre : url d'action --> ]
         #ACTION_FORMULAIRE{#ENV{action}}
+        <input type="hidden" name="_todo" class='hidden' value="[(#ENV{_todo})]" />
+
         <div>
             <fieldset>
                 <legend><:svp:legende_rechercher_plugins:></legend>

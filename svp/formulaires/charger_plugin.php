@@ -7,7 +7,9 @@ function formulaires_charger_plugin_charger_dist(){
 				'categorie' => _request('categorie'),
 				'etat' => _request('etat'),
 				'depot' => _request('depot'),
-				'doublon' => _request('doublon'));
+                'doublon' => _request('doublon'),
+                'ids_paquet' => _request('ids_paquet'),
+                '_todo' => _request('_todo'));
 }
 
 function formulaires_charger_plugin_verifier_dist(){
@@ -15,56 +17,60 @@ function formulaires_charger_plugin_verifier_dist(){
     $erreurs = array();
     $a_installer = array();
 
-    if (!_request('rechercher')
-    and (!_request('valider_actions'))
-    and (!_request('annuler_actions'))) {
+    if (_request('annuler_actions')) {
+        // On vide la todo
+        set_request('_todo', '');
+    }
+    else {
+        if (!_request('rechercher')
+        and (!_request('valider_actions'))) {
         // On construit le tableau des ids de paquets conformement a l'interface du decideur
-        if (_request('installer')) {
-            // L'utilisateur a demander une installation multiple de paquets
-            // -- on verifie la liste des id_paquets uniquement
-            if ($id_paquets = _request('id_paquets')) {
-                foreach ($id_paquets as $_id_paquet)
-                    $a_installer[$_id_paquet] = 'on';
+            if (_request('installer')) {
+                // L'utilisateur a demander une installation multiple de paquets
+                // -- on verifie la liste des id_paquets uniquement
+                if ($id_paquets = _request('ids_paquet')) {
+                    foreach ($id_paquets as $_id_paquet)
+                        $a_installer[$_id_paquet] = 'on';
+                }
             }
-        }
-        else {
-            // L'utilisateur a demander l'installation d'un paquet en cliquant sur le bouton en regard
-            // du resume du plugin -> installer_paquet
-            if ($install = _request('installer_paquet'))
-                if ($id_paquet = key($install))
-                    $a_installer[$id_paquet] = 'on';
-        }
+            else {
+                // L'utilisateur a demander l'installation d'un paquet en cliquant sur le bouton en regard
+                // du resume du plugin -> installer_paquet
+                if ($install = _request('installer_paquet'))
+                    if ($id_paquet = key($install))
+                        $a_installer[$id_paquet] = 'on';
+            }
 
-        if (!$a_installer)
-            $erreurs = _T('svp:message_nok_aucun_plugin_selectionne');
-        else {
-            // On fait appel au decideur pour determiner la liste exacte des commandes apres
-            // verification des dependances
-            include_spip('inc/svp_decider');
-            $decideur = new Decideur;
-            $decideur->log = true;
-            $decideur->verifier_dependances($a_installer);
+            if (!$a_installer)
+                $erreurs = _T('svp:message_nok_aucun_plugin_selectionne');
+            else {
+                // On fait appel au decideur pour determiner la liste exacte des commandes apres
+                // verification des dependances
+                include_spip('inc/svp_decider');
+                $decideur = new Decideur;
+                $decideur->log = true;
+                $decideur->verifier_dependances($a_installer);
 
-            if (!$decideur->ok) {
-                $erreurs['decideur_erreurs'] = array();
-                foreach ($decideur->err as $id=>$errs) {
-                    foreach($errs as $err) {
-                        $erreurs['decideur_erreurs'][] = $err;
+                if (!$decideur->ok) {
+                    $erreurs['decideur_erreurs'] = array();
+                    foreach ($decideur->err as $id=>$errs) {
+                        foreach($errs as $err) {
+                            $erreurs['decideur_erreurs'][] = $err;
+                        }
                     }
                 }
-          	}
-            else {
-                $erreurs['decideur_propositions'] 	= $decideur->presenter_actions('changes');
-                $erreurs['decideur_demandes'] 		= $decideur->presenter_actions('ask');
-                $erreurs['decideur_actions'] 		= $decideur->presenter_actions('todo');
+                else {
+                    $erreurs['decideur_propositions'] 	= $decideur->presenter_actions('changes');
+                    $erreurs['decideur_demandes'] 		= $decideur->presenter_actions('ask');
+                    $erreurs['decideur_actions'] 		= $decideur->presenter_actions('todo');
 
-                // c'est pas vraiment des erreurs... a suivre...
-                $todo = array();
-                foreach ($decideur->todo as $_todo) {
-                    $todo[$_todo['i']] = $_todo['todo'];
+                    // c'est pas vraiment des erreurs... a suivre...
+                    $todo = array();
+                    foreach ($decideur->todo as $_todo) {
+                        $todo[$_todo['i']] = $_todo['todo'];
+                    }
+                    set_request('_todo', serialize($todo));
                 }
-
-                set_request('_todo', serialize($todo));
             }
         }
     }
@@ -75,7 +81,7 @@ function formulaires_charger_plugin_traiter_dist(){
 
 	$retour = array();
 	
-	if (_request('rechercher')) {
+	if (_request('rechercher') OR _request('annuler_actions')) {
 		include_spip('inc/svp_rechercher');
 
 		// On a demande une recherche (bouton rechercher)
@@ -108,9 +114,6 @@ function formulaires_charger_plugin_traiter_dist(){
 		}
 	}
     elseif (_request('valider_actions')) {
-
-    }
-    elseif (_request('annuler_actions')) {
 
     }
 	else {
