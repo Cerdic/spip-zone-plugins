@@ -5,7 +5,7 @@ function stp_actualiser_paquets_locaux() {
 
 	spip_timer('paquets_locaux');
 	$paquets = stp_descriptions_paquets_locaux();
-	$hash = md5(serialize($paquets));
+	$hash = md5(serialize($paquets) . $GLOBALS['meta']['plugin']);
 	include_spip('inc/config');
 	if (lire_config('stp/hash_local') != $hash) {
 		stp_base_supprimer_paquets_locaux();
@@ -14,7 +14,7 @@ function stp_actualiser_paquets_locaux() {
 	}
 	$temps = spip_timer('paquets_locaux');
 
-	return "Éxécuté en : " . $temps . "<br />";
+	return "Éxécuté en : " . $temps;
 	
 }
 

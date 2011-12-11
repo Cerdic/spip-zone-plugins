@@ -9,9 +9,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
+	'bouton_activer' => 'Activer',
 	'bouton_actualiser' => 'Actualiser',
 	'bouton_actualiser_tout' => 'Actualiser les dépôts',
 	'bouton_installer' => 'Installer',
+	'bouton_desactiver' => 'Désactiver',
+	'bouton_desinstaller' => 'Désinstaller',
 	'bouton_modifier_depot' => 'Modifier le dépôt',
 	'bouton_supprimer' => 'Supprimer',
 	'bulle_actualiser_depot' => 'Actualiser les paquets du dépôt',

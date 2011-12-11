@@ -16,7 +16,15 @@
 				<div class="icon">[(#LOGO|oui)[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/#LOGO}|image_reduire{32})]]</div>
 			</div>
 			<div class="actions">
-				<input type="submit" name="installer_paquet[#ID_PAQUET]" class="submit" value="<:svp:bouton_installer:>" />
+				[(#ACTIF|=={oui}|oui)
+					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{desactiver})]" class="submit" value="<:svp:bouton_desactiver:>" />
+					[(#INSTALLE|=={oui}|oui)
+						<input type="submit" name="[(#ID_PAQUET|svp_nom_action{desinstaller})]" class="submit" value="<:svp:bouton_desinstaller:>" />
+					]
+				]
+				[(#ACTIF|=={oui}|non)
+					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{activer})]" class="submit" value="<:svp:bouton_activer:>" />
+				]
 			</div>
 			[(#ACTIF|=={oui}|oui) #SET{prefixe,#PREFIXE|strtolower}
 				[(#INCLURE{fond=prive/squelettes/inclure/cfg,script=configurer_#GET{prefixe},nom=#NOM})]
