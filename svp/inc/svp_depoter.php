@@ -53,7 +53,7 @@ function svp_ajouter_depot($url, &$erreur='') {
 	if (!$ok OR ($nb_paquets == 0)) {
 		// Si une erreur s'est produite, on supprime le depot deja insere
 		sql_delete('spip_depots','id_depot='.sql_quote($id_depot));
-		if (!ok)
+		if (!$ok)
 			$erreur = _T('svp:message_nok_xml_non_conforme', array('fichier' => $url));
 		else
 			$erreur = _T('svp:message_nok_aucun_paquet_ajoute', array('url' => $url));
