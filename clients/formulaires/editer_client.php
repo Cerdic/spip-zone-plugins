@@ -294,7 +294,8 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
     $editer_contact = charger_fonction('editer_contact', 'action/'); 
     $editer_contact($id_contact);
 
-	// Le pseudo SPIP est construit 
+	// Le pseudo SPIP est construit
+	$nom_save = _request('nom') ;
 	set_request('nom', trim(_request('prenom').' '._request('nom'))); 
 	
 	// On modifie l'auteur
@@ -407,7 +408,9 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 	
 	// Si on demande une redirection
 	if ($retour) $retours['redirect'] = $retour;
-	
+
+	set_request('nom', $nom_save); 
+
 	return $retours;
 }
 
