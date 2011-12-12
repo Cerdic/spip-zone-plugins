@@ -17,6 +17,9 @@ function formulaires_admin_plugin_charger_dist($voir='actif'){
 	if ($voir == 'inactif')
 		$valeurs['actif'] = 'non';
 	
+	if ($voir == 'tous_etat')
+		$valeurs['actif'] = '';
+	
 	if ($voir == 'verouille') {
 		$valeurs['constante'] = array('_DIR_EXTENSIONS');
 	}

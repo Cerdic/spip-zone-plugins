@@ -2,11 +2,11 @@
 <div class="liste plugins">
 	<ul class="liste-items">
 <BOUCLE_plugins(PAQUETS plugins){par prefixe}{id_depot=0}{actif ?}{constante ?IN #ENV{constante}}>
-		<li class="item"[ id="(#PREFIXE|strtolower)-#COMPTEUR_BOUCLE-#SCORE"]>
-		[(#REM) <!-- Checkbox action multiple -->]
+		<li class="item[ (#ACTIF|=={oui}|?{actif,inactif})][(#OBSOLETE|=={oui}|oui) disabled]"[ id="(#PREFIXE|strtolower)-#COMPTEUR_BOUCLE"]>
+			[(#OBSOLETE|=={oui}|non)
 			<div class="check">
-				<input type="checkbox" class="checkbox" name="id_paquets[]" value="#ID_PAQUET" />
-			</div>	
+				<input type="checkbox" class="checkbox" name="id_paquets[(#VAL{91}|chr)][(#VAL{93}|chr)]" value="#ID_PAQUET" />
+			</div>]
 			[(#REM) <!-- Resume du plugin -->]
 			<div class="resume">
 				<h3 class="nom"><a[ href="(#VERSION)"] rel="info">[(#NOM)]</a></h3>
@@ -15,6 +15,7 @@
 				<div class="short">[(#SLOGAN|_T|typo)]</div>
 				<div class="icon">[(#LOGO|oui)[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/#LOGO}|image_reduire{32})]]</div>
 			</div>
+			[(#OBSOLETE|=={oui}|non)
 			<div class="actions">
 				[(#ACTIF|=={oui}|oui)
 					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{desactiver})]" class="submit" value="<:svp:bouton_desactiver:>" />
@@ -25,9 +26,12 @@
 				[(#ACTIF|=={oui}|non)
 					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{activer})]" class="submit" value="<:svp:bouton_activer:>" />
 				]
-			</div>
+			</div>]
 			[(#ACTIF|=={oui}|oui) #SET{prefixe,#PREFIXE|strtolower}
 				[(#INCLURE{fond=prive/squelettes/inclure/cfg,script=configurer_#GET{prefixe},nom=#NOM})]
+			]
+			[(#OBSOLETE|=={oui}|oui)
+			[(#CHEMIN_IMAGE{plugin-dis-32.png}|balise_img{<:plugin_info_non_compatible_spip:>,picto_err}|inserer_attribut{title,<:plugin_info_non_compatible_spip:>})]
 			]
 			<div class="details" style="display:none">
 				<dl>
