@@ -168,8 +168,8 @@ function jeux_commentaire_score($categ, $score, $total) {
 }
 
 // fonction qui retourne un bouton, faisant appel au fond fonds/bouton_{$item}.html
-function jeux_bouton($item, $id_jeu = 0) {
-	return recuperer_fond('fonds/bouton_'.$item, array('id_jeu' => $id_jeu));
+function jeux_bouton($item, $id_jeu = 0, $indexJeux = 0) {
+	return recuperer_fond('fonds/bouton_'.$item, array('id_jeu' => $id_jeu, 'indexJeux' => $indexJeux));
 }
 // fonctions obsoletes
 function jeux_bouton_reinitialiser() { return jeux_bouton('reinitialiser'); }

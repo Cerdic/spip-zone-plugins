@@ -374,7 +374,7 @@ function jeux_qcm($texte, $indexJeux, $form=true) {
 	}
   } else {
 	$pied = jeux_afficher_score($qcm_score, $qcms['totalscore'], $id_jeu, join(', ', $qcm_score_detaille), $categ_score);
-	if($form) $pied .= jeux_bouton(jeux_config('bouton_refaire'), $id_jeu);
+	if($form) $pied .= jeux_bouton(jeux_config('bouton_refaire'), $id_jeu, $indexJeux);
   }
   // ajout du javascript si on doit afficher une par une
   if (jeux_config('une_par_une'))
