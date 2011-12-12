@@ -7,7 +7,7 @@
     <slogan>G&#233;re les retours Paypal</slogan>
 	<description>Ce plugin permet de g&#233;rer les retours d'un payement Paypal pour savoir quel commande a &#233;t&#233; pay&#233;e, et donc changer son statut.</description>
 	<categorie>divers</categorie>
-	<icon></icon>
+	<icon>images/commandes_paypal-32.png</icon>
 	
 	<prefix>commandes_paypal</prefix>
 	
