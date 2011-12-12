@@ -8,7 +8,7 @@
     <slogan>Remplir une commande</slogan>
 	<description>Permet de remplir une commande avec le contenu d'un panier.</description>
 	<categorie>divers</categorie>
-	<icon></icon>
+	<icon>images/panier2commande-32.png</icon>
 	
 	<prefix>panier2commande</prefix>
 	
