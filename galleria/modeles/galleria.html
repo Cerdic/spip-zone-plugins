@@ -4,7 +4,7 @@
 [<p class="pagination">(#PAGINATION)</p>]
 <div id="galleria#ENV{id}">
 <BOUCLE_galleria (DOCUMENTS){id_article=#ENV{id}}{extension==jpg|gif|png} {pagination #ENV{pagesize,30}}>
-	<img src="#FICHIER" [title="(#TITRE)" ][alt="(#DESCRIPTIF|textebrut)" ]/>
+	<img src="#FICHIER" [title="(#TITRE)" ][alt="(#DESCRIPTIF|textebrut)" ]class="no_image_filtrer" />
 </BOUCLE_galleria>
 </div>
 [<p class="pagination">(#PAGINATION)</p>]
