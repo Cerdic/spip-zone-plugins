@@ -1,14 +1,15 @@
 <plugin>
 	<nom>TweetNSpip</nom>
 	<slogan>Int&#233;gration d'un fil twitter</slogan>
-	<auteur>
-	[jQuery plugin for Twitter par Damien du Toit->http://coda.co.za/blog/2008/10/26/jquery-plugin-for-twitter]
-_ Mis en plugin SPIP par Dr Abdou et Mr Waz
-	</auteur>
+	<auteur>Dr Abdou, Mr Waz</auteur>
+	<licence>&#169; 2009 LGPL</licence>
 	<version>1.0.0</version>
 	<icon></icon>
 	<etat>stable</etat>
 	<description>
+[jQuery plugin for Twitter par Damien du Toit->http://coda.co.za/blog/2008/10/26/jquery-plugin-for-twitter] 
+_ mis en plugin SPIP par Dr Abdou et Mr Waz.
+
 Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
 	</description>
 	<lien>http://www.wakzine.com</lien>
