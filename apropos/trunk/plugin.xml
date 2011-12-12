@@ -12,19 +12,28 @@
     <br />
 	Vous pouvez utiliser la nouvelle balise #APROPOS dans vos squelettes. Cette balise a 4 paramètres : <br />
 	
-	- soit vous écrivez :  <code>#APROPOS{liste}</code> pour retourner la liste des plugins, <br />
+	<code>#APROPOS{liste}</code> pour retourner la liste des plugins, <br />
 	
-	- soit vous écrivez :  <code>#APROPOS{nombre}</code> pour n'afficher que le nombre de plugins ET d'extensions actifs.<br />
+	<code>#APROPOS{nombre}</code> pour n'afficher que le nombre de plugins ET d'extensions actifs.<br />
 	
-	- soit vous écrivez :  <code>#APROPOS{plugins}</code> pour n'afficher que le nombre de plugins actifs.<br />
-	- soit vous écrivez :  <code>#APROPOS{extensions}</code> pour n'afficher que le nombre d'extensions actives.<br />
+	<code>#APROPOS{plugins}</code> pour n'afficher que le nombre de plugins actifs.<br />
+	
+	<code>#APROPOS{extensions}</code> pour n'afficher que le nombre d'extensions actives.<br />
+	
 	Si vous voulez afficher la description complète d'un plugin dans un article, utilisez <code><apropos|prefixe=le préfixe du plugin></code>. Ainsi, par exemple, si vous mettez <code><apropos|prefixe=apropos></code>, vous afficherez la description complète de ce plugin.<br />
 	Pour personnaliser ce qui est affiché avant et après la liste des plugins actifs, modifiez le fichier modeles/apropos_liste.html que vous aurez préalablement copié dans le dossier squelettes/modeles.
 	<br />
-	Pour afficher la liste dans un article, il faut écrire dans l'article <code><apropos|liste></code>.<br />
-	Pour n'afficher que le nombre de plugins ET d'extensions actifs, utilisez <code><apropos|nombre></code>.<br />
-	Pour n'afficher que le nombre de plugins actifs, utilisez <code><apropos|plugins></code>.<br />
-	Pour n'afficher que le nombre d'extensions actives, utilisez <code><apropos|extensions></code>.
+	
+	Dans vos articles, entrez les codes suivants :<br />
+	
+	<code><apropos|liste></code> pour afficher la liste des plugins et extensions actifs.<br />
+	
+	<code><apropos|nombre></code> pour n'afficher que le nombre de plugins ET d'extensions actifs.<br />
+	
+	<code><apropos|plugins></code> pour n'afficher que le nombre de plugins actifs.<br />
+	
+	<code><apropos|extensions></code> pour n'afficher que le nombre d'extensions actives.
+	
 	[en]Lists the active plugins and displays a brief description of them.
 	It is used to display a page of type "about the site" with a summary of actives plugins, including the icon of these.
 	<br />
