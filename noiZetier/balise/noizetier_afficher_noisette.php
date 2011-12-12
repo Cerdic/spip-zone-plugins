@@ -15,22 +15,24 @@ function balise_NOIZETIER_AFFICHER_NOISETTE_dist($p) {
 	$_ajax = 'true';
 	if (($v = interprete_argument_balise(1,$p))!==NULL)
 		$_ajax = 'false';
+		
 
 	// si pas de contexte attribuer, on passe tout le contexte que l'on recoit
 	// sinon, on regarde si 'aucun' ou 'env' est indique :
 	// si 'aucun' => aucun contexte
 	// si 'env' => tout le contexte recu.
-	$environnement = '$Pile[0]';
+	// $id_noisette est toujours transmis dans l'environnement
+	$environnement = "array_merge(\$Pile[0],array('id_noisette' => $id_noisette))";
 	
 	$inclusion_dynamique = "\"<?php echo recuperer_fond(
 		'noisettes/\".$noisette.\"',
-		\".var_export(array_merge(unserialize($parametres), noizetier_choisir_contexte($noisette, $environnement)),true).\",
+		\".var_export(array_merge(unserialize($parametres), noizetier_choisir_contexte($noisette, $environnement, $id_noisette)),true).\",
 		\".var_export(array('ajax'=>($_ajax && noizetier_ajaxifier_noisette($noisette))),true).\"
 	);?>\"";
 
 	$inclusion_statique =  "recuperer_fond(
 		'noisettes/'.$noisette,
-		array_merge(unserialize($parametres), noizetier_choisir_contexte($noisette, $environnement)),
+		array_merge(unserialize($parametres), noizetier_choisir_contexte($noisette, $environnement, $id_noisette)),
 		array('ajax'=>($_ajax && noizetier_ajaxifier_noisette($noisette)))
 	)";
 	

@@ -525,18 +525,26 @@ function noizetier_lister_icones(){
  * @param 
  * @return 
 **/
-function noizetier_choisir_contexte($noisette, $contexte_entrant) {
-	if (!$contexte_entrant) $contexte_entrant = array();
+function noizetier_choisir_contexte($noisette, $contexte_entrant, $id_noisette) {
 	$contexte_noisette = array_flip(noizetier_obtenir_contexte($noisette));
 
-	if (isset($contexte_noisette['aucun'])) {
-		return array();
-	}
+	// On transmet toujours l'id_noisette et les variables se terminant par _$id_noisette (utilisées par exemple par Aveline pour la pagination)
+	$contexte_min = array('id_noisette' => $id_noisette);
+	
 	if (isset($contexte_noisette['env'])) {
-		return $contexte_entrant;
+		return array_merge($contexte_entrant,$contexte_min);
+	}
+	
+	$l = -1 * (strlen($id_noisette)+1);
+	foreach ($contexte_entrant as $variable => $valeur)
+		if (substr($variable,$l)=='_'.$id_noisette)
+			$contexte_min[$variable] = $valeur;
+	
+	if (isset($contexte_noisette['aucun'])) {
+		return $contexte_min;
 	}
 	if ($contexte_noisette) {
-		return array_intersect_key($contexte_entrant, $contexte_noisette);
+		return array_merge(array_intersect_key($contexte_entrant, $contexte_noisette),$contexte_min);
 	}
 	
 	return $contexte_entrant;
