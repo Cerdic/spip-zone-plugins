@@ -1,0 +1,54 @@
+[(#REM) 
+  Saisie pour les paramètres de modèle personnalisable pouvant être de la forme |param (auquel cas param=param) ou |param=valeur personnalisée
+  On crée alors un select et un input, gérant les différents cas par javascript
+  Parametres supplementaire :
+  - defaut : valeur par defaut du parametre
+  - type : type de l'input (defaut: text)
+  - class : classe(s) css ajoutes a l'input
+  - size : taille du champ
+  - maxlength : nombre de caracteres maximum
+  - disable : champ insaisissable ? 'oui' (defaut : '')
+  - option_vide : chaine de langue pour le cas où on ne rebvoie rien
+  - option_identique : chaine de langue pour le cas où param=param
+  - option_personnalise : chaîne de lanque pour le cas où on saisie une valeur personnalisée
+  - explication_personnalise : explication pour le champs personnalise
+]
+#SET{type,#ENV{type,text}}
+[(#REM) Ajout d'un marqueur unique au cas où le formulaire serait présent deux fois dans la page ]
+[(#SET{id_unique,#EVAL{'rand();'}})]
+[(#SET{valeur,#ENV{valeur,#ENV{defaut}}})]
+<select name="select_#ENV{nom}" id="select_#ENV{nom}" style="display:none;" class="select_#ENV{nom}_#GET{id_unique}[ (#ENV{class})]"[ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
+	<option value="" [(#GET{valeur}|non) selected="selected"]>#ENV{option_vide}</option>
+	<option value="identique" [(#GET{valeur}|=={#ENV{nom}}|oui) selected="selected"]>#ENV{option_identique}</option>
+	<option value="personnalise" [(#GET{valeur}|!={#ENV{nom}}|et{#GET{valeur}|oui}) selected="selected"]>#ENV{option_personnalise}</option>
+</select>
+
+[<p class="explication explication_#ENV{nom}_#GET{id_unique}">(#ENV{explication_personnalise})</p>]
+<input type="#GET{type}" name="#ENV{nom}" class="[(#GET{type})] champ_#ENV{nom}_#GET{id_unique}[ (#ENV{class})]" id="champ_#ENV{nom}"[ value="(#GET{valeur})"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#HTML5}|oui) required="required"] />
+
+<script type="text/javascript">// <![CDATA[
+	$(document).ready(function(){
+		$(".select_#ENV{nom}_#GET{id_unique}").show(400);
+		verifier_#ENV{nom}_#GET{id_unique} = function(){
+			if($(".select_#ENV{nom}_#GET{id_unique}").val() == ''){
+				$(".champ_#ENV{nom}_#GET{id_unique}").val('');
+				$(".champ_#ENV{nom}_#GET{id_unique}").hide(400);
+				$(".explication_#ENV{nom}_#GET{id_unique}").hide(400);
+			}
+			if($(".select_#ENV{nom}_#GET{id_unique}").val() == 'identique'){
+				$(".champ_#ENV{nom}_#GET{id_unique}").val('#ENV{nom}');
+				$(".champ_#ENV{nom}_#GET{id_unique}").hide(400);
+				$(".explication_#ENV{nom}_#GET{id_unique}").hide(400);
+			}
+			if($(".select_#ENV{nom}_#GET{id_unique}").val() == 'personnalise'){
+				$(".champ_#ENV{nom}_#GET{id_unique}").show(400);
+				$(".explication_#ENV{nom}_#GET{id_unique}").show(400);
+			}
+		};
+		verifier_#ENV{nom}_#GET{id_unique}();
+		$(".select_#ENV{nom}_#GET{id_unique}").change(function(){
+			$(".champ_#ENV{nom}_#GET{id_unique}").val('');
+			verifier_#ENV{nom}_#GET{id_unique}();
+		});
+	});
+ //]]></script>
