@@ -82,17 +82,7 @@ function formulaires_charger_plugin_traiter_dist(){
 	$retour = array();
 	
 	if (_request('rechercher') OR _request('annuler_actions')) {
-		/*
-		// Determination des messages de retour
-		if (!$plugins)
-			$retour['message_erreur'] = _T('svp:message_ok_aucun_plugin_trouve');
-		else {
-			$retour['message_ok']['resume'] = _T('svp:message_ok_plugins_trouves', 
-												array('nb_plugins' => count($plugins),
-													'tri' => _T('svp:info_tri_' . $tri)));
-			$retour['message_ok']['plugins'] = $plugins;
-		}
-		*/
+
 	}
     elseif (_request('valider_actions')) {
 
