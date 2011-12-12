@@ -22,7 +22,9 @@
 [(#REM) datas peut être une chaine qu'on sait décomposer ]
 #SET{datas, #ENV*{datas}}
 #SET{datas, #GET{datas}|is_string|?{(#GET{datas}|saisies_chaine2tableau), #GET{datas}}}
-#SET{valeur,#ENV{valeur_forcee,#ENV{valeur}}|?{#ENV{valeur_forcee,#ENV{valeur}},#ENV{defaut}}}
+[(#REM) Attention, la valeur ou la valeur forcée peut être une chaine vide. On doit donc tester avec is_null. ]
+#SET{valeur,#ENV{valeur_forcee}|is_null|?{#ENV{valeur}|is_null|?{#ENV{defaut},#ENV{valeur}},#ENV{valeur_forcee}}}
+
 <select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ size="(#ENV{size})"]>
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 <BOUCLE_selection(POUR){tableau #GET{datas}}>
