@@ -1,7 +1,16 @@
+[(#SET{plugins,#ARRAY})]
+[(#ENV{phrase}|ou{#ENV{depot}}|ou{#ENV{categorie}}|ou{#ENV{etat}|ou{#ENV{doublon}}}|oui)
+	[(#SET{plugins,[(#ENV{phrase}|construire_recherche_plugins{#ENV{categorie}, #ENV{etat}, #ENV{depot}, #ENV{doublon}})]})]
+	[(#SET{nb,[(#GET{plugins}|count)]})]
+	[(#SET{tri,[(#GET{phrase}|?{score,nom})]})]
+	[(#GET{nb}|oui)<p class="explication"><:svp:message_ok_plugins_trouves{nb_plugins=#GET{nb},tri=#GET{tri}}:></p>]
+	[(#GET{nb}|non)<p class="explication"><:svp:message_ok_aucun_plugin_trouve:></p>]
+]
+
 <B_plugins_trouves>
 <div class="liste plugins distants">
 	<ul class="liste-items">
-<BOUCLE_plugins_trouves(DATA) {source table, #ENV{plugins}}>
+<BOUCLE_plugins_trouves(DATA) {source table, #GET{plugins}}>
 		<li class="item"[ id="(#VALEUR{prefixe}|strtolower)-#COMPTEUR_BOUCLE-#VALEUR{score}"]>
 		[(#REM) <!-- Checkbox action multiple -->]
 			<div class="check">
