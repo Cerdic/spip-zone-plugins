@@ -14,7 +14,7 @@ function action_editer_tradlang_dist($arg=null) {
 	if (!$id_tradlang = intval($arg)) {
 		return false;
 	}
-
+	spip_log("edition du tradlang $id_tradlang");
 	// Enregistre l'envoi dans la BD
 	$err = tradlang_set($id_tradlang);
  
@@ -35,7 +35,8 @@ function tradlang_set($id_tradlang,$set=null){
 		// donnees eventuellement fournies
 		$set
 	);
-	
+	spip_log(objet_info('tradlang','champs_editables'));
+	spip_log($c);
 	$invalideur = "id='id_tradlang/$id_tradlang'";
 	
 	if ($err = objet_modifier_champs('tradlang', $id_tradlang,
@@ -47,6 +48,10 @@ function tradlang_set($id_tradlang,$set=null){
 		),
 		$c)){
 		return $err;
+	}
+
+	if($statut = _request('statut')){
+		sql_updateq('spip_tradlang',array('statut' => $statut),'id_tradlang='.intval($id_tradlang));
 	}
 
 	//$c = collecter_requests(array('statut'),array(),$set);

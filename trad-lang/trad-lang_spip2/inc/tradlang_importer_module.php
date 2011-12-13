@@ -55,10 +55,8 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 	foreach($langues_module as $langue){
 		$chs = null;
 		$fichier = $module_choisi[$langue]['fichier'];
-		spip_log($fichier,'tradlang');
 		$orig = 0;
 		if ($langue == $module['lang_mere']){
-			spip_log('insertion de la langue mère','tradlang');
 			$orig = 1;
 		}
 			
@@ -68,7 +66,6 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 		include($nom_fichier);
 		$chs = $GLOBALS[$GLOBALS['idx_lang']];
 		if (is_null($chs)) {
-			spip_log("Erreur, fichier $module mal forme\n","tradlang");
 			return false;
 		}
 		
@@ -102,7 +99,6 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 					array_merge(array_keys($existant), array_keys($chs))
 				) as $id) {
 			if (isset($chs[$id]) AND !isset($existant[$id])){
-				spip_log('cas 1','tradlang');
 				unset($md5);
 				if ($orig) {
 					$md5 = md5($chs[$id]);

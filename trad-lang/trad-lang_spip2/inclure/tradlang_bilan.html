@@ -7,8 +7,11 @@
 <//B_strings_ok>
 </BOUCLE_langues_sort>
 #SET{langues,#GET{langues}|langues_sort}
+<BOUCLE_priorites(TRADLANG_MODULES){fusion priorite}>
+<h3>#PRIORITE</h3>
 <B_langues_totales>
-<table class="bilan spip liste ss_tablesort">
+<div class="bilan">
+<table class="spip liste ss_tablesort">
 	<thead>
 		<tr class="row_first">
 			<th></th>
@@ -21,7 +24,7 @@
 	</thead>
 	<B_modules_lang>
 	<tbody>
-	<BOUCLE_modules_lang(TRADLANG_MODULES)>
+	<BOUCLE_modules_lang(TRADLANG_MODULES){priorite}>
 	<tr class="module #NOM_MOD[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]" title="[(#NOM_MOD|attribut_html)]">
 		<td><a href="[(#SELF|parametre_url{id_tradlang_module,#ID_TRADLANG_MODULE})]">[(#NOM_MOD)]</a></td>
 		#SET{full,''}
@@ -47,8 +50,9 @@
 	</B_modules_lang>
 </table>
 </B_langues_totales>
-bof
 <//B_langues_totales>
+</div>
+</BOUCLE_priorites>
 <script type='text/javascript'><!--
 var modules = [];
 $('table.bilan th').each(function(i){

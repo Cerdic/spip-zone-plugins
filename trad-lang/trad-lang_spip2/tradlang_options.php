@@ -17,25 +17,6 @@ if(!defined('_TRAD_PRIORITES'))
 if(!defined('_TRAD_PRIORITE_DEFAUT'))
 	define(_TRAD_PRIORITE_DEFAUT,'30. contribs');
 
-/**
- * Fonction de revision d'une chaine de langue
- * Utile particulièrement pour les crayons
- * 
- * @param int $id_tradlang
- * @param array $c [optional]
- * @return 
- */
-function revision_tradlang($id_tradlang,$c=false){
-	$invalideur = "id='id_tradlang/$id_tradlang'";
-
-	return modifier_contenu('tradlang', $id_tradlang,
-		array(
-			'invalideur' => $invalideur,
-			'date_modif' => 'ts'
-		),
-		$c);
-}
-
 function str_statut_revision($id_tradlang,$c=false){
 	if(isset($c['statut'])){
 		include_spip('action/editer_tradlang');

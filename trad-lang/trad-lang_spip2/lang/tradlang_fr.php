@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_activer_lang' => 'Activer la langue "@lang@" pour ce module',
 	'bouton_supprimer_module' => 'Supprimer ce module',
-	'bouton_traduire' => 'Traduire >>',
+	'bouton_traduire' => 'Traduire',
 
 	// C
 	'cfg_form_tradlang_autorisations' => 'Les autorisations',
@@ -42,6 +42,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_module_inconnu' => 'Ce module n\'est pas disponible',
 	'erreur_pas_langue_cible' => 'Sélectionnez une langue cible',
 	'erreur_repertoire_local_inexistant' => 'Attention : le répertoire pour la sauvegarde locale "squelettes/lang" est inexistant',
+	'explication_langue_cible' => 'La langue vers laquelle vous traduisez.',
+	'explication_langue_origine' => 'La langue depuis laquelle vous traduisez (Seules les langues 100% complêtes sont sidponibles).',
 	'explication_langues_autorisees' => 'Les utilisateurs ne pourront créer de nouvelles traductions que dans les langues sélectionnées.',
 	'explication_sauvegarde_locale' => 'Sauvegardera les fichiers dans le dossier squelette du site',
 	'explication_sauvegarde_post_edition' => 'Sauvegardera les fichiers temporaires à chaque modification de chaine de langue',
@@ -58,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_chaine_originale' => 'Cette chaîne est la chaine originale',
 	'info_filtrer_status' => 'Filtrer par statut :',
 	'info_langue_mere' => '(langue mère)',
+	'info_module_traduction' => '@total@ @statut@ (@percent@%)',
 	'info_module_traduit_pc' => 'Module traduit à @pc@%', 
 	'info_nb_tradlang' => '@nb@ chaînes de langue',
 	'info_nb_tradlang_module' => '@nb@ modules de langue',
@@ -226,12 +229,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_traduction_chaine_de_vers' => 'Traduction de la chaine «@chaine@» du module «@module@» de <abbr title="@lang_orig_long@">@lang_orig@</abbr> vers <abbr title="@lang_cible_long@">@lang_cible@</abbr>',
 	'titre_traduction_de' => 'Traduction de ',
 	'titre_traduction_module_de_vers' => 'Traduction du module "@module@" de <abbr title="@lang_orig_long@">@lang_orig@</abbr> vers <abbr title="@lang_cible_long@">@lang_cible@</abbr>',
+	'titre_traduire' => 'Traduire',
 	'tradlang' => 'Trad-Lang',
 	'traduction' => 'Traduction @lang@',
-	'traductions' => 'Traductions',
-
-	// V
-	'visumodule' => 'Résumé du module'
+	'traductions' => 'Traductions'
 );
 
 ?>

@@ -16,7 +16,7 @@
 	-* par string : l'ordre du tri
 	-* pagination int : le nombre de résultats affichés par page
 ]
-[(#SET{lang_recherche,#ENV{lang_string,.*}})]
+#SET{lang,#ENV{lang_string,.*}}
 [(#SET{defaut_tri,#ARRAY{
 	statut,#ENV{statut_sens,1},
 	id,1,
@@ -53,7 +53,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_recherche_tradlang(TRADLANG tradlang_modules){recherche?}{id_tradlang_module?}{module?}{statut?}{lang=#GET{lang_recherche}}{tri #GET{par},#GET{defaut_tri}}{pagination #ENV{pagination,20}}>
+	<BOUCLE_recherche_tradlang(TRADLANG tradlang_modules){recherche?}{id_tradlang_module?}{module?}{statut?}{lang==^#ENV{lang_string,.*}$}{tri #GET{par},#GET{defaut_tri}}{pagination #ENV{pagination,20}}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})] statut_[(#STATUT|strtolower)]">
 		<td>#ID</td>
 		<td>#NOM_MOD</td>

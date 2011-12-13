@@ -23,7 +23,10 @@ table.liste_traductions td.statut{
 	vertical-align:middle;
 }
 
-
+.bilan{
+	width:100%;
+	overflow:auto;
+}
 table.liste_traductions tr.statut_new td.statut,.traducteur #navigation ul.infos p.items_new{
 	background-image:url(images/back_new.png);
 	background-repeat:no-repeat;

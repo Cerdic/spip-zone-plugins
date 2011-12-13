@@ -59,8 +59,7 @@ function tradlang_testesynchro($idmodule, $langue){
 	$getmodules_fics = charger_fonction('tradlang_getmodules_fics','inc');
 	$modules2 = $getmodules_fics($dir_lang,$module);
 	$modok2 = $modules2[$module];
-	
-	spip_log($modok2,'tradlang');
+
 	// union entre modok et modok2
 	if(is_array($modok2)){
 		foreach($modok2 as $cle=>$item){
@@ -165,5 +164,38 @@ function boucle_TRADLANG_dist($id_boucle, &$boucles) {
 	}
 	
 	return calculer_boucle($id_boucle, $boucles);
+}
+
+/**
+ * Critère permettant de sélection les langues complêtement traduites d'un module 
+ * soit dans l'environnement soit passé en paramètre
+ * {langue_complete} ou {langue_complete #ID_TRADLANG_MODULE}
+ */
+function critere_langue_complete_dist($id_boucle, &$boucles, $crit){
+	$boucle = &$boucles[$id_boucle];
+    $id_table = $boucle->id_table;
+	if(isset($crit->param[0][0]))
+		$id_module = calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucles[$id_boucle]->id_parent);
+	else
+		$id_module = calculer_argument_precedent($id_boucle, 'id_tradlang_module', $boucles);
+
+	$boucle->hash .= '
+		$prepare_module = charger_fonction(\'prepare_module\', \'inc\');
+		$module_having = $prepare_module('.$id_module.', "' . $boucle->sql_serveur . '");
+	';
+
+    if($id_table == 'tradlang'){
+        array_unshift($boucle->where,array("'='", "'$id_table." ."statut'", "'\"OK\"'"));
+        $boucles[$id_boucle]->group[] = "$id_table.lang";
+        $boucles[$id_boucle]->having[] = "\n\t\t".'$module_having';
+    }else
+		return (array('zbug_critere_inconnu', array('table' => $crit->op.' ?')));
+} 
+
+function inc_prepare_module_dist($id_module,  $serveur='') {
+	$lang_mere = sql_getfetsel('lang_mere','spip_tradlang_modules','id_tradlang_module='.intval($id_module));
+	$count = sql_countsel('spip_tradlang','id_tradlang_module='.$id_module.' AND statut="OK" AND lang='.sql_quote($lang_mere));
+	$having = "COUNT(*)=$count";
+	return $having;
 }
 ?>

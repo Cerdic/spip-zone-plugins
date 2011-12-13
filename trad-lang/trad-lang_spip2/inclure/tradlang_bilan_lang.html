@@ -1,8 +1,11 @@
-<h3><:tradlang:titre_bilan_langue{lang=#ENV{langue_modules}}:></h3>
+<h2><:tradlang:titre_bilan_langue{lang=#ENV{langue_modules}}:></h2>
 
 <p><a href="[(#SELF|parametre_url{langue_modules,''})]"><:tradlang:lien_trier_langue_non:></a></p>
 
-<table class="bilan spip liste tablesorter">
+<BOUCLE_priorites(TRADLANG_MODULES){fusion priorite}>
+<h3>#PRIORITE</h3>
+<div class="bilan">
+<table class="spip liste tablesorter">
 	<thead>
 		<tr class="row_first">
 			<th><:tradlang:th_module:></th>
@@ -28,7 +31,7 @@
 	</thead>
 	<B_modules_lang>
 	<tbody>
-	<BOUCLE_modules_lang(TRADLANG_MODULES)>
+	<BOUCLE_modules_lang(TRADLANG_MODULES){priorite}>
 	<tr class="module #NOM_MOD[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 		<td><a href="[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#ENV{langue_modules}}|parametre_url{langue_modules,''})]">[(#NOM_MOD)]</a></td>
 		<BOUCLE_compte_langue_mere(TRADLANG){module}{lang=#LANG_MERE}> </BOUCLE_compte_langue_mere>
@@ -78,3 +81,5 @@
 </table>
 </B_langues_totales>
 <//B_langues_totales>
+</div>
+</BOUCLE_priorites>

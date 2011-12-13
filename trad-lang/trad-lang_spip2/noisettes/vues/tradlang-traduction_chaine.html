@@ -1,4 +1,7 @@
 <BOUCLE_tradlang(TRADLANG){id_tradlang}>
+	[(#AUTORISER{modifier,tradlang,#ID_TRADLANG}|oui)
+	#SET{auth_modifier,oui}
+	]
 	<BOUCLE_module(TRADLANG_MODULES){module}>
 	#SET{lang_mere,#LANG_MERE}
 	<div id="hierarchie"><a href="[(#URL_TRADLANG_MODULE{#ID_TRADLANG_MODULE}|parametre_url{lang_cible,#_tradlang:LANG}|parametre_url{lang_orig,#ENV{lang_orig}})]"><:tradlang:lien_retour_module{module=#NOM_MOD}:></a></div>
@@ -12,13 +15,13 @@
 		#SET{lang_cible_long,#LANG|traduire_nom_langue}
 		<h1><:tradlang:titre_traduction_chaine_de_vers{module=#MODULE,chaine=#ID,lang_orig=#GET{lang_orig},lang_orig_long=#GET{lang_orig_long},lang_cible=#LANG,lang_cible_long=#GET{lang_cible_long}}:></h1>
 	</div>
-	[(#AUTORISER{modifier,tradlang,#ID_TRADLANG}|oui)
+	[(#GET{auth_modifier}|=={oui}|oui)
 	<div class="ajax">
 	#FORMULAIRE_EDITER_TRADLANG{#ENV{id_tradlang},#ENV{retour},#GET{lang_orig}}
 	</div>]
 	
-	[(#AUTORISER{modifier,tradlang,#ENV{id_tradlang}}|non)
-	Les infos du truc pour pouvoir le commenter 
+	[(#GET{auth_modifier}|=={oui}|non)
+	Vous ne pouvez modifier cet item de langue
 	]
 	<div>
 		<h3>
