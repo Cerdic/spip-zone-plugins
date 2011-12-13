@@ -82,7 +82,7 @@ function yaml_decode_file($fichier){
 
 /*
  * Charge les inclusions de YAML dans un tableau
- * Les inclusions sont indiqu�es dans le tableau via la valeur 'inclure:rep/fichier.yaml' o� rep indique le chemin relatif.
+ * Les inclusions sont indiquees dans le tableau via la valeur 'inclure:rep/fichier.yaml' ou rep indique le chemin relatif.
  * On passe donc par find_in_path() pour trouver le fichier
  * @param array $tableau
  */
