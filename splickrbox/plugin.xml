@@ -2,7 +2,7 @@
 	<nom>Splickrbox</nom>
 	<slogan>Afficher des photos &#224; la Flickr</slogan>
 	<auteur>[BoOz->booz@rezo.net], Pierre Andrews (mortimer)</auteur>
-	<version>0.4.2</version>
+	<version>0.4.3</version>
 	<etat>stable</etat>
 	<icon>images/splickrbox-64.png</icon>
 	<description>

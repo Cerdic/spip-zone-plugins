@@ -94,7 +94,11 @@ jQuery.SplickerBox.prototype = {
 				if(typeof imageArray != 'undefined' && href.match(/\.(jpeg|jpg|png|gif)$/i)){
 					TB_show('',href,'image');
 				}else{
-					window.document.location = href ;
+					if ($.modalbox && href.match(/\.(jpeg|jpg|png|gif)$/i)) {
+						$.modalbox(href);
+					} else {
+						window.document.location = href ;
+					}
 				}
 			});
 
