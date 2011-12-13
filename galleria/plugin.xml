@@ -14,7 +14,7 @@ _ [emthanh@free.fr->emthanh@free.fr]
 			[en]Image gallery with Galleria
 		</multi>
 	</slogan>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<icon>galleria.png</icon>
 	<etat>stable</etat>
 	<description>
@@ -37,6 +37,8 @@ ex : <code><galleria22></code> une galerie dans l'article 22 ; <code><galleria22
 [emthanh@free.fr->mailto:emthanh@free.fr] 
 [Le site du plugin->http://www.spip-contrib.net/Galleria]
 [Galleria, librairie javascript->http://galleria.aino.se/]
+| version 1.1.0 | 90% des options de galleria |
+| version 1.0.0 | support des options essentielles |
 [en]An image gallery that use the javascript library Galleria.The plugin implement a SPIP modele galleria.
 spip need the plugin {{jQuery}} for the SPIP version  &lt; 1.9.2
  
@@ -55,6 +57,8 @@ ex : <code><galleria22></code> a gallery in the article 22 ; <code><galleria22|l
 [emthanh@free.fr->mailto:emthanh@free.fr] 
 [the plugin's website->http://www.spip-contrib.net/Galleria]
 [Galleria, javascript library->http://galleria.aino.se/]
+| version 1.1.0 | 90% of the Galleria's options |
+| version 1.0.0 | support of the critical options |
 		</multi>
 	</description>
 	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
