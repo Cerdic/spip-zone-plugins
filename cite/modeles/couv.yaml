@@ -1,5 +1,5 @@
 nom: '<:cite:couverture:>'
-logo: 'images/couv-24.png'
+logo: 'prive/themes/spip/images/couv-24.png'
 icone_barre: 'couv.png'
 traiter: 'cite_inserer_modeles_traiter'
 parametres:

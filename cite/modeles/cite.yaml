@@ -1,5 +1,5 @@
 nom: '<:cite:reference_bibliographie:>'
-logo: 'images/cite-24.png'
+logo: 'prive/themes/spip/images/cite-24.png'
 icone_barre: 'cite.png'
 traiter: 'cite_inserer_modeles_traiter'
 parametres:
