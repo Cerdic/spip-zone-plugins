@@ -1,5 +1,5 @@
 nom: '<:refbase:biblio_refbase:>'
-logo: 'img_pack/refbase-24.png'
+logo: 'prive/themes/spip/images/refbase-24.png'
 icone_barre: 'refbase.png'
 parametres:
   -
