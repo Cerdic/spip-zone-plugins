@@ -21,19 +21,22 @@ function configuration_init_map_defaults_dist()
 	$apis = gmap_apis_connues();
 	
 	// Les parcourir
+	$profiles = array('interface', 'prive');
 	foreach ($apis as $api => $infos)
 	{
-		$apiConfigKey = 'gmap_'.$api.'_interface';
-		
-		// Charger ce qui est spécifique à l'implémentation
 		$init_map_defaults = charger_fonction("init_map_defaults", "mapimpl/".$api."/prive", true);
-		if ($init_map_defaults)
-			$init_map_defaults();
-		
-		// Position par défaut
-		gmap_init_config($apiConfigKey, 'default_latitude', "0.0");
-		gmap_init_config($apiConfigKey, 'default_longitude', "0.0");
-		gmap_init_config($apiConfigKey, 'default_zoom', "1");
+		foreach ($profiles as $profile)
+		{
+			// Charger ce qui est spécifique à l'implémentation
+			if ($init_map_defaults)
+				$init_map_defaults($profile);
+			
+			// Position par défaut
+			$apiConfigKey = 'gmap_'.$api.'_'.$profile;
+			gmap_init_config($apiConfigKey, 'default_latitude', "0.0");
+			gmap_init_config($apiConfigKey, 'default_longitude', "0.0");
+			gmap_init_config($apiConfigKey, 'default_zoom', "1");
+		}
 	}
 }
 

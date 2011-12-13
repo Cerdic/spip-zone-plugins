@@ -46,9 +46,12 @@ function balise_GEOMAP_stat($args, $filtres)
 	else
 		$mapId = $GLOBALS['nextMapID']++;
 	$params['map'] = $GLOBALS['currentMapID'] = $mapId;
-	return array($params);
+	return gmap_geomap($params);
 }
-function balise_GEOMAP_dyn($params)
+// Pas de partie dynamique : on calcule tout avant le cache
+
+// Ajout de la carte
+function gmap_geomap($params)
 {
 	$code = "";
 	$mapId = $params['map'];

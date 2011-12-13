@@ -27,7 +27,7 @@ function gmap_ajoute_carte_edit($parts, $table, $id, $mapId, $divId)
 <div id="'.$divId.'" class="carte_editer_gmap"></div>';
 	
 	// Lecture des paramètres de la carte
-	$parts['script'] .= gmap_definir_parametre_carte($table, $id, $mapId.'.mapParams', null);
+	$parts['script'] .= gmap_definir_parametre_carte($table, $id, $mapId.'.mapParams', null, 'prive');
 	
 	// Partie de script sans code PHP
 	$parts['script'] .= '
@@ -52,8 +52,9 @@ function gmap_ajoute_carte_edit($parts, $table, $id, $mapId, $divId)
 	this.createIcons(map);
 		
 	// Chargement de la carte
-	this.mapParams.handleResize = true;
-	if (!map.load(divId, this.mapParams))
+	mapParams.handleResize = true;
+	mapParams.mergeInfoWindows = false;
+	if (!map.load(divId, mapParams))
 		return false;
 
 	return true;
@@ -68,7 +69,7 @@ function gmap_ajoute_carte_edit($parts, $table, $id, $mapId, $divId)
 	{
 		// Charger la carte
 		if (!isObject(gMap("'.$mapId.'")) || !gMap("'.$mapId.'").isLoaded())
-			'.$mapId.'.load("'.$mapId.'", "'.$divId.'", "'.$mapId.'.mapParams");
+			'.$mapId.'.load("'.$mapId.'", "'.$divId.'", '.$mapId.'.mapParams);
 	}
 };
 
@@ -79,6 +80,13 @@ function gmap_ajoute_carte_edit($parts, $table, $id, $mapId, $divId)
 		MapWrapper.freeMap("'.$mapId.'");
 };
 ';
+
+	$parts['script_ready'] .= '
+	if (typeof('.$mapId.'.onCarteDocumentReady) === "function")
+		'.$mapId.'.onCarteDocumentReady();';
+	$parts['script_unload'] .= '
+	if (typeof('.$mapId.'.onCarteUnload) === "function")
+		'.$mapId.'.onCarteUnload();';
 
 	return $parts;
 }
@@ -113,7 +121,7 @@ function gmap_ajoute_liste_marqueurs_edit($parts, $table, $id, $mapId, $divId)
 
 	// Code HTML des marqueurs
 	$parts['html'] .= '
-	<div style="clear:both;">
+	<div class="geoloc-sous-bloc">
 		<fieldset>
 			<legend>Nouvelles coordonn&eacute;es</legend>
 			<input type="hidden" name="markers_count" id="markers_count_'.$mapId.'" value="'.$markers_count.'" />
@@ -155,7 +163,7 @@ function gmap_ajoute_liste_marqueurs_edit($parts, $table, $id, $mapId, $divId)
 					</tbody>
 				</table>
 			</td></tr>
-			<tr><td class="markers_set_cmds"><a class="btn_marker_add" href="#">'._T('gmap:add_marker').'</a></td></tr>
+			<tr><td id="markers_set_cmds_'.$mapId.'" class="markers_set_cmds"><a class="btn_marker_add" href="#">'._T('gmap:add_marker').'</a></td></tr>
 			</table>
 		</fieldset>
 	</div>';
@@ -163,478 +171,76 @@ function gmap_ajoute_liste_marqueurs_edit($parts, $table, $id, $mapId, $divId)
 	// Méthodes pratiques pour ajouter et mettre à jour les marqueurs sur la carte
 	// Elles pourraient dans une certaine mesure être factorisée dans un fichier .js
 	// indépendant, je n'en ai pas pris la peine...)
-	$parts['script'] .= '
-
-// ID du marker actif
-'.$mapId.'.getActiveMarkerID = function()
-{
-	var edit = jQuery("#active_marker_'.$mapId.'");
-	if (!isObject(edit))
-		return 0;
-	return parseInt(edit.val());
-};
-'.$mapId.'.setActiveMarkerID = function(id)
-{
-	var edit = jQuery("#active_marker_'.$mapId.'");
-	if (isObject(edit))
-		edit.val(id);
-};
-
-// Nombre de marqueurs
-'.$mapId.'.getMarkersCount = function()
-{
-	var edit = jQuery("#markers_count_'.$mapId.'");
-	if (!isObject(edit))
-		return -1;
-	return parseInt(edit.val());
-};
-'.$mapId.'.setMarkersCount = function(count)
-{
-	var edit = jQuery("#markers_count_'.$mapId.'");
-	if (isObject(edit))
-		edit.val(count);
-};
-
-// Information sur le marqueur actif
-'.$mapId.'.getActiveMarkerInfo = function()
-{
-	var id = this.getActiveMarkerID();
-	var bloc = jQuery("#markers_set_'.$mapId.'");
-	var row = bloc.getMarkerRow(id);
-	if (isObject(row))
-		return row.getMarkerRowInfo();
-	else
-		return null;
-};
-
-// Mise à jour d\'un marqueur
-'.$mapId.'.updateMarker = function(row, map, bDoNotUpdatePosition)
-{
-	var isActive = (row.hasClass("active")) ? true : false;
-	var isDeleted = (row.hasClass("deleted")) ? true : false;
-	var info = row.getMarkerRowInfo();
-	if (isDeleted)
-	{
-		map.removeMarker(info["id"]);
-	}
-	else
-	{
-		var params = {
-			latitude: info["latitude"],
-			longitude: info["longitude"],
-		};
-		if (isActive)
-		{
-			params["title"] = "'.protege_titre(_T('gmap:titre_marqueur_actif')).'";
-			params["icon"] = "activeMarker";
-			params["zorder"] = 20;
-			params["draggable"] = true;
-		}
-		else
-		{
-			params["title"] = "'.protege_titre(_T('gmap:titre_marqueur_edit')).'";
-			params["icon"] = "editMarker";
-			params["zorder"] = 10;
-			params["draggable"] = false;
-		}
-		if (bDoNotUpdatePosition !== true)
-			map.setMarker(info["id"], params);
-		if (isActive)
-		{
-			map.panTo(info["latitude"], info["longitude"]);
-			map.setZoom(info["zoom"]);
-		}
-	}
-};
-
-// Ajout de tous les marqueurs définis
-'.$mapId.'.updateMarkers = function(bloc, map)
-{
-	// Mise à jour des marqueurs
-	var activeRowID = 0;
-	var count = 0;
-	jQuery("tr.marker", bloc).each(function()
-	{
-		var row = jQuery(this);
-		if (row.hasClass("active"))
-			activeRowID = row.getMarkerRowID();
-		count++;
-		'.$mapId.'.updateMarker(row, map);
-	});
-	
-	// Mise  jour de l\'information globale
-	this.setActiveMarkerID(activeRowID);
-	this.setMarkersCount(count);
-};
-
-// Modification de la position du marqueur actif
-'.$mapId.'.setActiveMarkerPosition = function(bloc, map, latitude, longitude)
-{
-	var markerID = this.getActiveMarkerID();
-	if (markerID != 0)
-	{
-		var row = bloc.getMarkerRow(markerID);
-		if (isObject(row))
-		{
-			row.setMarkerPosition(latitude, longitude);
-			this.updateMarker(row, map);
-		}
-	}
-};
-
-// Modification du zoom du marqueur actif
-'.$mapId.'.setActiveMarkerZoom = function(bloc, map, zoom)
-{
-	var markerID = this.getActiveMarkerID();
-	if (markerID != 0)
-	{
-		var row = bloc.getMarkerRow(markerID);
-		if (isObject(row))
-		{
-			row.setMarkerZoom(zoom);
-			this.updateMarker(row, map);
-		}
-	}
-};
-';
+	$parts['script'] .= '';
 	
 	// Mise en place des listeners sur la carte et les marqueurs
-	$parts['script'] .= '
-// Activation des listeners
-// Sur gmapReady, mais à positionné seulement quand le document est prêt
-// sinon le div n\'existe pas encore en retour de Ajax.
-'.$mapId.'.onMarkersDocumentReady = function()
-{
-	jQuery("#'.$divId.'").gmapReady(function()
-	{
-		var bloc = jQuery("#markers_set_'.$mapId.'");
-		var map = gMap("'.$mapId.'");
-		if (!isObject(bloc) || !isObject(map))
-			return;
-		
-		// Fonctionnement de la liste de marqueurs
-		bloc.setMarkerTriggers(null, bloc);
-		bloc.checkForActiveRow(bloc);
-		jQuery(\'.btn_marker_add\').setAddMarkerAction(bloc, function()
-		{
-			return map.getViewport();
-		}, "markers_template_'.$mapId.'", bloc);
-
-		// Créer les marqueurs
-		'.$mapId.'.updateMarkers(bloc, map);
-		
-		// Évènements de la liste des marqueurs vers la carte
-		bloc.bind(\'marker_created\', function(event, markerID)
-		{
-			'.$mapId.'.updateMarkers(bloc, map);
-		});
-		bloc.bind(\'marker_deleted\', function(event, markerID)
-		{
-			'.$mapId.'.updateMarkers(bloc, map);
-		});
-		bloc.bind(\'active_marker_changed\', function(event, ids)
-		{
-			'.$mapId.'.setActiveMarkerID(ids.active);
-			'.$mapId.'.updateMarkers(bloc, map);
-		});
-		
-		// Évènements de la carte vers la liste de marqueurs
-		map.addListener("click-on-map", function(event, latitude, longitude)
-		{
-			'.$mapId.'.setActiveMarkerPosition(bloc, map, latitude, longitude);
-		});
-		map.addListener("zoom", function(event, zoom)
-		{
-			var markerID = '.$mapId.'.getActiveMarkerID();
-			if (markerID != 0)
-			{
-				var row = bloc.getMarkerRow(markerID);
-				if (isObject(row))
-					row.setMarkerZoom(zoom);
-			}
-		});';
-	if (gmap_capability('dragmarkers'))
-		$parts['script'] .= '
-		map.addListener("drop-marker", function(event, id, latitude, longitude)
-		{
-			var row = bloc.getMarkerRow(id);
-			if (isObject(row))
-			{
-				row.setMarkerPosition(latitude, longitude);
-				'.$mapId.'.updateMarker(row, map, true);
-			}
-		});';
-	$parts['script'] .= '
-	});
-};';
+	$parts['script'] .= '';
 	
+	$parts['script_ready'] .= '
+	EditMarkers.obj("'.$mapId.'").initialize("'.$divId.'", '.(gmap_capability('dragmarkers') ? 'true' : 'false').', {
+			titre_marqueur_actif: "'.protege_titre(_T('gmap:titre_marqueur_actif')).'",
+			titre_marqueur_edit: "'.protege_titre(_T('gmap:titre_marqueur_edit')).'"
+		});';
+		
 	return $parts;
 }
 
-// Recherche des marqueurs des objets voisins
-function gmap_get_siblings_markers($id, $table, $limit = 6, $bSameParent = false)
+// Ajout des outils de copie
+function gmap_ajoute_copy_tools($parts, $table, $id, $mapId, $divId)
 {
-    // Initialisation du retour
-    $markers = NULL;
-    
-    // Pour les articles, sélectionner les articles de la même rubrique et espacés de moins d'une semaine
-    if ($table == 'article')
-    {
-        // Récupérer les infos sur l'article
-	    if (($rowset = sql_select("id_rubrique, date", "spip_articles", "id_article = $id")) &&
-            ($row = sql_fetch($rowset)))
-        {
-            // Requête pour récupérer les articles géoréférencés et espacés de moins d'une semaine
-			$where = array("articles.id_article<>" . $id);
-			if ($bSameParent === true)
-				$where[] = "articles.id_rubrique=" . $row['id_rubrique'];
-			$rowset = sql_select(
-				array(
-					"articles.id_article AS id", "articles.titre AS titre", "articles.date AS date",
-					"points.latitude AS coord_lat", "points.longitude AS coord_long", "points.zoom AS zoom", "points.id_point AS id_point",
-					"types.nom AS type",
-					"ABS(DATEDIFF('" . $row['date'] . "', articles.date)) AS distdate"),
-				"spip_articles AS articles".
-				" JOIN spip_gmap_points_liens AS liens ON (articles.id_article = liens.id_objet AND liens.objet = 'article')".
-				" JOIN spip_gmap_points AS points ON points.id_point = liens.id_point".
-				" JOIN spip_gmap_types AS types ON points.id_type_point = types.id_type_point",
-				$where,
-				"", "distdate ASC", $limit);
-			// L'alias sur les noms des tables est nécessaire pour contourner une faille de spip dans la
-			// transposition des nom de tables : un nom de table précédent d'une parenthèse n'est pas
-			// transposé (cf. _SQL_PREFIXE_TABLE dans ecrire/req/mysql.php).
-			while ($row = sql_fetch($rowset))
-			{
-				if ($markers == NULL)
-				{
-					$markers = array();
-					$keys = array();
-				}
-				$keys[] = $row['date'];
-				$markers[] = array(
-					'objet'=>'article',
-					'id'=>$row['id'],
-					'desc'=>$row['titre'],
-					'lat'=>$row['coord_lat'],
-					'long'=>$row['coord_long'],
-					'zoom'=>$row['zoom'],
-					'type'=>$row['type'],
-					'html'=>gmap_get_object_info_contents(array(
-								'objet'=>'article',
-								'id_objet'=>$row['id'],
-								'type_point'=>$row['type'],
-								'id_point'=>$row['id_point']))
-					);
-			}
-			if ($keys && $markers)
-				array_multisort($keys, SORT_ASC, $markers);
-        }
-    }
-    
-    // Pour les documents, sélectionner les document du même article et espacés de moins d'une heure
-    else if ($table == 'document')
-    {
-        // Récupérer les infos du documents
-	    if (($rowset = sql_select("spip_documents_liens.id_objet AS id_article, spip_documents.date AS date", "spip_documents_liens JOIN spip_documents ON spip_documents_liens.id_document = spip_documents.id_document", "spip_documents_liens.id_document=$id AND spip_documents_liens.objet='article'")) &&
-            ($row = sql_fetch($rowset)))
-        {
-            // Requête pour récupérer les documents géoréférencés et espacés de moins de deux heures
-			$where = array("spip_documents_liens.id_document<>" . $id);
-			if ($bSameParent === true)
-				$where[] = "spip_documents_liens.objet='article' AND spip_documents_liens.id_objet=" . $row['id_article'];
-			$rowset = sql_select(
-				array(
-					"spip_documents_liens.id_document AS id", "spip_documents.titre AS titre", "spip_documents.fichier AS fichier", "spip_documents.date AS date",
-					"spip_gmap_points.latitude AS coord_lat", "spip_gmap_points.longitude AS coord_long", "spip_gmap_points.zoom AS zoom", "spip_gmap_points.id_point AS id_point",
-					"spip_gmap_types.nom AS type",
-					"ABS(TIMEDIFF('" . $row['date'] . "', spip_documents.date)) AS distdate"),
-				"spip_documents_liens JOIN spip_documents ON spip_documents_liens.id_document = spip_documents.id_document JOIN spip_gmap_points_liens ON (spip_documents_liens.id_document = spip_gmap_points_liens.id_objet AND spip_gmap_points_liens.objet = 'document') JOIN spip_gmap_points ON spip_gmap_points.id_point = spip_gmap_points_liens.id_point JOIN spip_gmap_types ON spip_gmap_points.id_type_point = spip_gmap_types.id_type_point",
-				$where,
-				"",	"distdate ASC", $limit);
-			while ($row = sql_fetch($rowset))
-    	    {
-				if ($markers == NULL)
-				{
-					$markers = array();
-					$keys = array();
-				}
-				$keys[] = $row['date'];
-				$markers[] = array(
-					'objet'=>'document',
-					'id'=>$row['id'],
-					'desc'=>$row['titre'] ? $row['titre']." (".$row['fichier'].")" : $row['fichier'],
-					'lat'=>$row['coord_lat'],
-					'long'=>$row['coord_long'],
-					'zoom'=>$row['zoom'],
-					'type'=>$row['type'],
-					'html'=>gmap_get_object_info_contents(array(
-								'objet'=>'document',
-								'id_objet'=>$row['id'],
-								'type_point'=>$row['type'],
-								'id_point'=>$row['id_point']))
-				   );
-            }
-			if ($keys && $markers)
-				array_multisort($keys, SORT_ASC, $markers);
-        }
-    }
-    
-    return $markers;
-}
-
-// Ajout du formulaire de choix des voisins
-function gmap_ajoute_siblings_copy($parts, $table, $id, $mapId, $divId)
-{
-	// Récupérer les voisins
-	$sibling_same_parent = (gmap_lire_config('gmap_edit_params', 'sibling_same_parent', "oui") === "oui") ? true : false;
-	$siblings_limit = intval(gmap_lire_config('gmap_edit_params', 'siblings_limit', "5"));
-	$markers = gmap_get_siblings_markers($id, $table, $siblings_limit, $sibling_same_parent);
-	if (!$markers || (count($markers) == 0))
+	// Récupérer les outils disponibles
+	$tools = pipeline('gmap_outils_geoloc', array(
+			'args'=>array('objet'=>$table, 'id_objet'=>$id, 'mapId'=>$mapId, 'divId'=>$divId),
+			'data'=>array()));
+	if (!$tools || !is_array($tools))
 		return $parts;
-
-	// Ajout du formulaire
-	$markers_script = '';
-	$html = '
-<div class="geoedit_subform">
-	<table id="siblings_set_'.$mapId.'" class="edit_markers edit_siblings" cellspacing="0" cellpadding="0" align="right">
-		<tbody>
-			<tr class="header"><th>&nbsp;</th><th>'._T('gmap:titre').'</th><th>'._T('gmap:latitude').'</th><th>'._T('gmap:longitude').'</th><th>'._T('gmap:zoom').'</th><th>&nbsp;</th></tr>';
-		foreach ($markers as $index => $marker)
-		{
-			$html .= '
-			<tr class="marker sibling">
-				<td nowrap><input name="sibling_id[]" class="marker_id" type="hidden" value="'.$marker['id'].'"/><span class="btn_activate"></span></td>
-				<td class="sibling_desc">'.htmlentities($marker['desc']).'</td>
-				<td class="marker_lat" nowrap>'.$marker['lat'].'</td>
-				<td class="marker_long" nowrap>'.$marker['long'].'</td>
-				<td class="marker_zoom" nowrap>'.$marker['zoom'].'</td>
-				<td nowrap><span class="'.$mapId.'_sibling_copy btn_marker_copy" nowrap></span></td>
-			</tr>';
-			$markers_script .= '
-			map.setMarker("sibling_'.$marker['id'].'", {
-				icon: "siblingMarker",
-				zorder: 0,
-				click: "custom",
-				title: "'.protege_titre(_T('gmap:titre_marqueur_voisin').$marker['desc']).'",
-				latitude: '.$marker['lat'].',
-				longitude: '.$marker['long'].',
-				html: "'.protege_html_body($marker['html']).'"
-			});' . "\n";
-			
-		}
-	$html .= '
-		</tbody>
-	</table>
-</div>'."\n";
-
-	// Mécanisme du bouton dépliable sur la partie HTML
-	$parts['html'] .= gmap_sous_bloc_depliable("siblings_".$mapId, _T('gmap:formulaire_voisins'), $html, $mapId);
-	
-	// Scripts
-	$parts['script'] .= '
-// ID du voisin actif
-'.$mapId.'.getActiveSiblingID = function()
-{
-	var bloc = jQuery("#siblings_set_'.$mapId.'");
-	return "sibling_"+bloc.getActiveRowID();
-};
-'.$mapId.'.setActiveSiblingID = function(id)
-{
-	var bloc = jQuery("#siblings_set_'.$mapId.'");
-	if (typeof(id) === "string")
+	$options = '';
+	$html = '';
+	$script = '';
+	$script_ready = '';
+	foreach ($tools as $tool=>$params)
 	{
-		var pos = id.search(/[0-9]/);
-		if (pos < 0)
-			return false;
-		id = parseInt(id.substring(pos));
+		if (!strlen($params['name']) || !strlen($params['html']))
+			continue;
+		$options .= '
+		<option value="'.$tool.'">'.$params['name'].'</option>';
+		$html .= '
+	<div id="tool_'.$tool.'_content_'.$mapId.'" class="tool-content tool-'.$tool.'" style="display: none;">'.$params['html'].'
+	</div>';
+		$script .= $params['script'];
+		$script_ready .= $params['script_ready'];
 	}
-	bloc.setActiveRow(id, bloc);
-};
+	if (!strlen($options) || !strlen($html))
+		return $parts;
+		
+	// Script simple
+	$parts['script'] .= $script;
 
-// Initialisation
-'.$mapId.'.onSiblingsDocumentReady = function()
-{
-	// Carte prête : ajouter les handlers d\'évènement sur les marqueurs
-	jQuery("#'.$divId.'").gmapReady(function()
-	{
-		var map = gMap("'.$mapId.'");
-		if (isObject(map))
-		{
-			var id = 0;';
-	$parts['script'] .= $markers_script;
-	$parts['script'] .= '
-
-			// Évènements de la carte vers la liste de marqueurs
-			map.addListener("click-on-marker", function(event, markerId)
-			{
-				// Déplier le bloc s\'il était plié
-				sbd_opensiblings_'.$mapId.'();
-				
-				// Rendre la ligne active
-				'.$mapId.'.setActiveSiblingID(markerId);
-			});
-		}
-	});
+	// Script dans le document.ready
+	$parts['script_ready'] .= '
+	GeolocTools.obj("'.$mapId.'").initialize({
+		tool_no_results: "'._T('gmap:geocoder_no_results').'",
+		copier_point: "'._T('gmap:copier_point').'",
+		lier_point: "'._T('gmap:lier_point').'"});'.$script_ready;
 	
-	// Changement de marqueur actif
-	jQuery("#siblings_set_'.$mapId.'").bind("active_marker_changed", function(event, ids)
-	{
-		var map = gMap("'.$mapId.'");
-		if (isObject(map))
-		{
-			// Changer l\'icone du marqueur actif
-			if (isObject(ids.previous))
-				map.setMarker("sibling_"+ids.previous, { icon: "siblingMarker", zorder: 0 });
-			var markerID = "sibling_"+ids.active;
-			map.setMarker(markerID, { icon: "activeSiblingMarker", zorder: 1 });
-			
-			// Afficher la bulle
-			var params = map.getMarkerDefinition(markerID);
-			map.showInfoWindow(markerID);
-		}
-	});
+	// Code HTML
+	$choix = '<select id="toolId'.$mapId.'" name="toolId'.$mapId.'" class="toolsId" size="1">';
+	$choix .= '
+		<option value="none" selected="selected"></option>';
+	$choix .= $options;
+	$choix .= '</select>';
+	$html = '
+	<div id="tools_list_'.$mapId.'" class="tool-container">'.$html.'
+	</div>
+	<div id="tool_result_'.$mapId.'" class="tool-results"></div>';
 	
-	// Action sur la sélection d\'une ligne active
-	jQuery("#siblings_set_'.$mapId.' .btn_activate").click(function()
-	{
-		var row = jQuery(this).parents("tr.sibling");
-		var id = row.getMarkerRowID();
-		var bloc = jQuery("#siblings_set_'.$mapId.'");
-		bloc.setActiveRow(id, bloc);
-	});
-	
-	// Action sur le bouton copier sur les coordonnées
-	jQuery(".'.$mapId.'_sibling_copy").click(function()
-	{
-		var map = gMap("'.$mapId.'");
-		if (isObject(map))
-			map.closeInfoWindow();
-		var row = jQuery(this).parents("tr.sibling");
-		var latitude = jQuery("td.marker_lat", row).text();
-		var longitude =	jQuery("td.marker_long", row).text();
-		var zoom =	jQuery("td.marker_zoom", row).text();
-		if ((isObject(latitude) && (latitude != "")) && (isObject(longitude) && (longitude != "")))
-		{
-			'.$mapId.'.setActiveMarkerPosition(jQuery("#markers_set_'.$mapId.'"), gMap("'.$mapId.'"), Number(latitude), Number(longitude));
-			'.$mapId.'.setActiveMarkerZoom(jQuery("#markers_set_'.$mapId.'"), gMap("'.$mapId.'"), Number(zoom));
-		}
-	});
-};' . "\n";
+	// Mécanisme du bouton dépliable sur la partie HTML
+	$parts['html'] .= gmap_sous_bloc_depliable("tools_".$mapId, _T('gmap:formulaire_outils')." ".$choix, $html, $mapId, "geoloc-sous-bloc");
 	
 	return $parts;
 }
 
-// Ajout du formulaire de choix par recherche sur le geocoder
-function gmap_ajoute_geocoder($parts, $mapId)
-{
-	$parts['script'] .= '
-'.$mapId.'.setMarkerPosition = function(mapId, latitude, longitude)
-{
-	this.setActiveMarkerPosition(jQuery("#markers_set_'.$mapId.'"), gMap(mapId), latitude, longitude);
-};';
-	$parts['html'] .= gmap_sous_bloc_geocoder($mapId, $mapId.".setMarkerPosition");
-	return $parts;
-}
+
 
 // Affichage du formulaire de géolocalisation d'un objet SPIP
 function formulaires_geolocaliser_dist($id = NULL, $table = NULL, $exec = NULL, $deplie = 0)
@@ -709,13 +315,8 @@ function formulaires_geolocaliser_dist($id = NULL, $table = NULL, $exec = NULL, 
 	// Carte
 	$parts = gmap_ajoute_carte_edit($parts, $table, $id, $mapId, $divId);
 	
-	// Clic sur les voisins
-	if (($table == 'article') || ($table == 'document'))
-		$parts = gmap_ajoute_siblings_copy($parts, $table, $id, $mapId, $divId);
-	
-	// Recherche par géocoder
-	if (gmap_capability('geocoder'))
-		$parts = gmap_ajoute_geocoder($parts, $mapId);
+	// Ajout des outils génériques 
+	$parts = gmap_ajoute_copy_tools($parts, $table, $id, $mapId, $divId);
 	
 	// Liste des marqueurs de l'objet
 	$parts = gmap_ajoute_liste_marqueurs_edit($parts, $table, $id, $mapId, $divId);
@@ -726,24 +327,24 @@ function formulaires_geolocaliser_dist($id = NULL, $table = NULL, $exec = NULL, 
 	// Ajouter à la fin du script la partie sur document.ready
 	$parts['script'] .= '
 '.$mapId.'.onGeolocShow = function()
-{
-	// Enregistrement des évènements carte pour les marqueurs et les voisins (avant la création de la carte)
-	if (typeof('.$mapId.'.onMarkersDocumentReady) === "function")
-		'.$mapId.'.onMarkersDocumentReady();
-	if (typeof('.$mapId.'.onSiblingsDocumentReady) === "function")
-		'.$mapId.'.onSiblingsDocumentReady();
-
-	// Chargement de la carte
-	if (typeof('.$mapId.'.onCarteDocumentReady) === "function")
-		'.$mapId.'.onCarteDocumentReady();
+{';
+	if ($parts['script_ready'] && strlen($parts['script_ready']))
+		$parts['script'] .= $parts['script_ready'];
+	$parts['script'] .= '
 	
 	// Quand la demande jQuery part, il faut détruire la carte pour qu\'elle soit
 	// correctement recréée sur le document.ready qui interviendra à sa complétion
 	jQuery("#'.$ajaxDivId.'").ajaxSend(function(evt, request, settings)
 	{
-		if (jQuery(this).isAjaxTarget(settings) && (typeof('.$mapId.'.onCarteUnload) === "function"))
-			'.$mapId.'.onCarteUnload();
+		if (jQuery(this).isAjaxTarget(settings))
+			'.$mapId.'.onGeolocUnload();
 	});
+};
+'.$mapId.'.onGeolocUnload = function()
+{';
+	if ($parts['script_unload'] && strlen($parts['script_unload']))
+		$parts['script'] .= $parts['script_unload'];
+	$parts['script'] .= '
 };
 jQuery(document).ready(function()
 {
@@ -760,7 +361,7 @@ jQuery(document).ready(function()
 		if (isObject(gMap("'.$mapId.'")))
 		{
 			gMap("'.$mapId.'").onResize();
-			var info = '.$mapId.'.getActiveMarkerInfo();
+			var info = EditMarkers.obj("'.$mapId.'").getActiveMarkerInfo();
 			if (isObject(info))
 				gMap("'.$mapId.'").setCenter(info["latitude"], info["longitude"]);
 		}
@@ -769,9 +370,7 @@ jQuery(document).ready(function()
 });
 jQuery(document).unload(function()
 {
-	// Nettoyer proprement la carte
-	if (typeof('.$mapId.'.onCarteUnload) === "function")
-		'.$mapId.'.onCarteUnload();
+	'.$mapId.'.onGeolocUnload();
 });';
 
 	// Finaliser la partie script

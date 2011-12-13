@@ -75,6 +75,7 @@ function exec_configurer_gmap_import_dist($class = null)
 	// Ça marche comme ça mais ce n'est pas très ouvert : on va trouver tous
 	// les fichiers php qui contiennent outil_ puis on va restreindre à ceux
 	// qui sont dans gmap. Serait peut-être mieux d'utiliser un pipeline...
+	$corps = '';
 	$outils = find_all_in_path('configuration/','outil_\w+\.php$');
 	foreach ($outils as $outil)
 	{
@@ -89,10 +90,15 @@ function exec_configurer_gmap_import_dist($class = null)
 			{
 				$outil_cmd = charger_fonction($outil, 'configuration');
 				if (is_callable($outil_cmd))
-					echo $outil_cmd();
+					$corps .= $outil_cmd();
 			}
 		}
 	}
+	
+	if (strlen($corps) == 0)
+		echo '<p>'._T('gmap:aucun_outil').'</p>' . "\n";
+	else
+		echo $corps;
 	
 	// pied de page SPIP
 	echo fin_gauche() . fin_page();

@@ -110,32 +110,6 @@ function boite_info_important()
 		$api_desc = $apis[$api]['name'];
 		$flux .= propre(_T('gmap:info_configuration_gmap_api').'<br />'.$api_desc);
 		
-		// Zones du site
-		$bIsObject =
-			(gmap_lire_config('gmap_objets_geo', 'type_rubriques', "oui") === 'oui') ||
-			(gmap_lire_config('gmap_objets_geo', 'type_articles', "oui") === 'oui') ||
-			(gmap_lire_config('gmap_objets_geo', 'type_documents', "oui") === 'oui') ||
-			(gmap_lire_config('gmap_objets_geo', 'type_breves', "oui") === 'oui') ||
-			(gmap_lire_config('gmap_objets_geo', 'type_mots', "oui") === 'oui') ||
-			(gmap_lire_config('gmap_objets_geo', 'type_auteurs', "oui") === 'oui');
-		if (!$bIsObject)
-			$flux .= propre(_T('gmap:info_configuration_gmap_no_object'));
-		$tout_le_site = (gmap_lire_config('gmap_objets_geo', 'tout_le_site', "oui") === 'oui') ? true : false;
-		if ($tout_le_site)
-			$flux .= propre(_T('gmap:info_configuration_gmap_site'));
-		else
-		{
-			$simple_rubs = gmap_lire_config('gmap_objets_geo', 'liste', "");
-			$flux .= propre(_T('gmap:info_configuration_gmap_rubriques'));
-			$flux .= '<ul>'."\n";
-			foreach ($simple_rubs as $rub)
-			{
-				$nom = sql_getfetsel('titre', 'spip_rubriques', 'id_rubrique=' . intval($rub));
-				$flux .= '<li>'.$nom.'</li>'."\n";
-			}
-			$flux .= '</ul>'."\n";
-		}
-		
 		// Fin de la boîte
 		$flux .= fin_boite_info(true);
 	}
@@ -207,21 +181,11 @@ function exec_configurer_gmap_dist($class = null)
 	$api_conf = charger_fonction('api', 'configuration', true);
 	if ($api_conf)
 		echo $api_conf();
-
-	// Configuration des rubriques géolocalisables
-	$rubgeo = charger_fonction('rubgeo', 'configuration', true);
-	if ($rubgeo)
-		echo $rubgeo();
-
-	// configuration des types de marqueurs et de leurs icônes
-	$markers = charger_fonction('markers', 'configuration', true);
-	if ($markers)
-		echo $markers();
-	
-	// Configuration des rubriques géolocalisables
-	$eparams = charger_fonction('editparams', 'configuration', true);
-	if ($eparams)
-		echo $eparams();
+		
+	// Optimisations
+	$optim = charger_fonction('optimisations', 'configuration', true);
+	if ($optim)
+		echo $optim();
 
 	// pied de page SPIP
 	echo fin_gauche() . fin_page();

@@ -8,7 +8,7 @@
 <body class="help-page">
 	
 	<h2>Acc&egrave;s &agrave; la g&eacute;olocalisation</h2>
-	<p>Le plugin ins&egrave;re dans les pages d&rsquo;&eacute;dition des objets SPIP (rubrique, article, document, br&egrave;ve, mot-clef et auteur) une interface qui permet de g&eacute;olocaliser l&rsquo;objet. Pour les documents, il faut avoir install&eacute; le plugin M&eacute;diath&egrave;que pour avoir acc&egrave;s &agrave; la page de modification d&rsquo;un document.</p>
+	<p>Le plugin ins&egrave;re dans les pages d&rsquo;&eacute;dition des objets &eacute;ditoriaux de SPIP (rubrique, article, document, br&egrave;ve, mot-clef et auteur) une interface qui permet de g&eacute;olocaliser l&rsquo;objet. Pour les documents, il faut avoir install&eacute; le plugin M&eacute;diath&egrave;que pour avoir acc&egrave;s &agrave; la page de modification d&rsquo;un document.</p>
 	<p>&nbsp;</p>
 	<p>L&rsquo;interface comporte principalement une carte, une zone d&rsquo;&eacute;dition des marqueurs et un bouton &quot;Enregistrer&quot; qui permet d&rsquo;enregistrer les modifications en base de donn&eacute;es.</p>
  	<p class="illustration"><img src="images/geolocalisation-1.jpg" alt="Interface de g&eacute;olocalisation" /></p>
@@ -24,23 +24,19 @@
 	<p>&nbsp;</p>
 	<p>Les types de marqueurs peuvent &ecirc;tre &eacute;dit&eacute;s depuis l&rsquo;interface de param&eacute;trage du plugin.</p> 
 
-	<h2>R&eacute;cup&eacute;ration des coordonn&eacute;es des voisins</h2>
-	<p>Pour les articles et les documents, il m&rsquo;a sembl&eacute; int&eacute;ressant de pouvoir r&eacute;cup&eacute;rer les coordonn&eacute;es des articles ou documents proches dans le temps pour copier leur position.</p>
-	<p>&nbsp;</p>
-	<p>Cette fonctionnalit&eacute; est accessible en d&eacute;ployant le groupe &quot;Copie des coordonn&eacute;es des voisins&quot; de l&rsquo;interface. Cela ouvre une petite section dans laquelle apparaissent les articles et/ou documents les plus proches dans le temps&nbsp;:</p>
- 	<p class="illustration"><img src="images/geolocalisation-2.jpg" alt="R&eacute;cup&eacute;ration des coordonn&eacute;es des voisins" /></p>
-	<p>En cliquant sur la coche verte &agrave; droite de chaque ligne on copie les coordonn&eacute;es sur le marqueur actif (il faut qu&rsquo;il y en ait un&hellip;).</p>
- 
-	<h2>Recherche par adresse</h2>
-	<p>Le groupe &quot;Recherche par adresse&quot; permet de rechercher une position selon son adresse (avec le GeoCoder de Google Maps)&nbsp;:</p>
+	<h2>Recherches</h2>
+	<p>Pour faciliter la géolocalisation, l'interface propose des outils de recherche qui dépendent de l'implémentation choisie et du type d'objet géolocalisé.</p>
+	<p>Ces outils sont accessibles en sélectionnant leur nom dans la liste déroulante "Recherche".</p>
+	
+	<h3>G&eacute;olocalisation d'une adresse</h3>
+	<p>Cette fonction n'est disponible que si l'impl&eacute;mentation de carte offre la fonctionnalit&eacute; de <i>geocoding</i>.</p>
  	<p class="illustration"><img src="images/geolocalisation-3.jpg" alt="Recherche par adresse" /></p>
-	<p>Apr&egrave;s avoir cliqu&eacute; sur le bouton &quot;Rechercher&quot;, une liste des r&eacute;sultats possibles est affich&eacute;e et il n&rsquo;y a plus qu&rsquo;&agrave; cliquer sur la coche verte de la ligne qui semble la plus pertinente.</p>
+	<p>Apr&egrave;s avoir cliqu&eacute; sur le bouton &quot;Rechercher&quot;, une liste des r&eacute;sultats possibles est affich&eacute;e, chaque point est &eacute;galement repr&eacute;sent&eacute; sur la carte. On peut copier les coordonn&eacute;es sur le point en cours d'&eacute;dition en cliquant sur le petit signe plus &agrave; droite du tableau.</p>
  
-	<h2>Cas des documents</h2>
-	<p>Par d&eacute;faut, seule la page de modification accessible par la m&eacute;diath&egrave;que permet de g&eacute;olocaliser le document, la popup qui s&rsquo;ouvre depuis l&rsquo;&eacute;dition d&rsquo;un article n&rsquo;y donne pas acc&egrave;s (c&rsquo;est un bug que je n&rsquo;ai pas pu corriger : l&rsquo;appel &agrave; l&rsquo;interface se faisant en ajax, je n&rsquo;arrive pas &agrave; initialiser les cartes correctement&hellip; Si quelqu&rsquo;un a une id&eacute;e&hellip;).</p>
-	<p>Pour palier ce petit d&eacute;sagr&eacute;ment, j&rsquo;ai ajout&eacute; un param&eacute;trage dans le plugin pour d&eacute;sactiver automatiquement l&rsquo;ouverture du popup : le bouton &quot;modifier&quot; renvoie alors sur la page d&rsquo;&eacute;dition d&rsquo;un document.</p>
-	<p>Pour activer ce comportement, il faut cocher la case &quot;D&eacute;sactiver l&rsquo;&eacute;dition des documents par bo&icirc;te modale depuis un article&quot; dans la partie &quot;Param&eacute;trage de la saisie dans l&rsquo;espace priv&eacute;&quot; de l&rsquo;onglet &quot;Syst&egrave;me&quot; du param&eacute;trage du plugin.</p>
- 	<p class="illustration"><img src="images/geolocalisation-5.jpg" alt="Cas des documents" /></p>
+	<h3>Coordonn&eacute;es des voisins</h3>
+	<p>Pour les articles et les documents seulement (car ils sont dat&eacute;s), GMap permet de rechercher les cooordonn&eacute;es des points associ&eacute;s &agrave; des objets de m&ecirc;me type proches dans le temps et l'espace.</p>
+ 	<p class="illustration"><img src="images/geolocalisation-2.jpg" alt="R&eacute;cup&eacute;ration des coordonn&eacute;es des voisins" /></p>
+	<p>L'interface permet de d&eacute;finir les contraintes de la recherche (temps, position, arborescence) et le nombre de points affich&eacute;s. Apr&egrave;s la recherche, les meilleurs points sont affich&eacute;s dans le tableau et sur la carte. On peut copier les coordonn&eacute;es sur le point en cours d'&eacute;dition en cliquant sur le petit signe plus &agrave; droite du tableau.</p>
 	
 </body>
 </html>

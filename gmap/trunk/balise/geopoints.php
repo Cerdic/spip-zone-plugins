@@ -33,22 +33,8 @@ function balise_GEOPOINTS($p)
 function balise_GEOPOINTS_stat($args, $filtres)
 {
 	$params = _gmap_calculer_balise_params($args);
-	return array($params);
+	return gmap_compteur($params['objet'], $params['id_objet'], $params['visible'] ? true : false, $params['recursif'] ? true : false, $params['type'] ? $params['type'] : "");
 }
-function balise_GEOPOINTS_dyn($params)
-{
-	// Init retour
-	$code = "";
-
-	// Paramètres
-	$recursive = $params['recursif'] ? true : false;
-	$filtre = $params['type'] ? $params['type'] : "";
-	
-	// Générer le résultat
-	if ($params["objet"] && $params["id_objet"])
-		$code = gmap_compteur($params['objet'], $params['id_objet'], $recursive, $filtre);
-	
-	return $code;
-}
+// Pas de partie dynamique : on calcule tout avant le cache
 
 ?>

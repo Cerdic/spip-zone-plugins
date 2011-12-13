@@ -20,7 +20,9 @@ function action_config_bloc_gmap_dist()
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	$page = rawurldecode(_request('redirect'));
-	$page = parametre_url($page, 'configuration', $arg,"&");
+	$page = parametre_url($page, 'configuration', $arg, "&");
+	if ($arg == 'map_defaults') // pas beau... mais je suis un peu fatigué
+		$page = parametre_url($page, 'map_defaults_profile', _request('map_defaults_profile'), "&");
 	$action = charger_fonction('faire_'.$arg, 'configuration', true);
 	if ($action)
 	{

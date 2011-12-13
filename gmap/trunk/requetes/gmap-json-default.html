@@ -32,7 +32,7 @@
 		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
 		"properties": {[
 			"name": (#TITRE|textebrut|texte_json),][
-			"html": (#GEOPOPUP{objet_parent=#_rubriques:OBJET,id_objet_parent=#_rubriques:ID_OBJET,contenu_seul=oui,json=oui}),][
+			"html": (#GEOPOPUP{objet_parent=rubrique,id_objet_parent=#_rubriques:ID_RUBRIQUE,contenu_seul=oui,json=oui}),][
 			"icon": {(#GEOMARKERICONS{format=json})},][
 			"objet": "(#OBJET)",][
 			"id_objet": (#ID_OBJET),][
@@ -49,7 +49,7 @@
 		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
 		"properties": {[
 			"name": (#TITRE|textebrut|texte_json),][
-			"html": (#GEOPOPUP{objet_parent=#_rubriques:OBJET,id_objet_parent=#_rubriques:ID_OBJET,contenu_seul=oui,json=oui}),][
+			"html": (#GEOPOPUP{objet_parent=rubrique,id_objet_parent=#_rubriques:ID_RUBRIQUE,contenu_seul=oui,json=oui}),][
 			"icon": {(#GEOMARKERICONS{format=json})},][
 			"objet": "(#OBJET)",][
 			"id_objet": (#ID_OBJET),][
@@ -66,7 +66,7 @@
 		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
 		"properties": {[
 			"name": (#TITRE|sinon{doc#ID_DOCUMENT}|textebrut|texte_json),][
-			"html": (#GEOPOPUP{objet_parent=#_rubriques:OBJET,id_objet_parent=#_rubriques:ID_OBJET,contenu_seul=oui,json=oui}),][
+			"html": (#GEOPOPUP{objet_parent=rubrique,id_objet_parent=#_rubriques:ID_RUBRIQUE,contenu_seul=oui,json=oui}),][
 			"icon": {(#GEOMARKERICONS{format=json})},][
 			"objet": "(#OBJET)",][
 			"id_objet": (#ID_OBJET),][
@@ -83,7 +83,7 @@
 		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
 		"properties": {[
 			"name": (#TITRE|textebrut|texte_json),][
-			"html": (#GEOPOPUP{contenu_seul=oui,json=oui}),][
+			"html": (#GEOPOPUP{objet_parent=rubrique,id_objet_parent=#_rubriques:ID_RUBRIQUE,contenu_seul=oui,json=oui}),][
 			"icon": {(#GEOMARKERICONS{format=json})},][
 			"objet": "(#OBJET)",][
 			"id_objet": (#ID_OBJET),][
@@ -100,7 +100,7 @@
 		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
 		"properties": {[
 			"name": (#TITRE|textebrut|texte_json),][
-			"html": (#GEOPOPUP{contenu_seul=oui,json=oui}),][
+			"html": (#GEOPOPUP{objet_parent=rubrique,id_objet_parent=#_rubriques:ID_RUBRIQUE, contenu_seul=oui,json=oui}),][
 			"icon": {(#GEOMARKERICONS{format=json})},][
 			"objet": "(#OBJET)",][
 			"id_objet": (#ID_OBJET),][
@@ -123,7 +123,7 @@
 		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
 		"properties": {[
 			"name": (#TITRE|sinon{doc#ID_DOCUMENT}|textebrut|texte_json),][
-			"html": (#GEOPOPUP{objet_parent=#_articles:OBJET,id_objet_parent=#_articles:ID_OBJET,contenu_seul=oui,json=oui}),][
+			"html": (#GEOPOPUP{objet_parent=article,id_objet_parent=#_articles:ID_ARTICLE,contenu_seul=oui,json=oui}),][
 			"icon": {(#GEOMARKERICONS{format=json})},][
 			"objet": "(#OBJET)",][
 			"id_objet": (#ID_OBJET),][
@@ -140,7 +140,7 @@
 		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
 		"properties": {[
 			"name": (#TITRE|textebrut|texte_json),][
-			"html": (#GEOPOPUP{contenu_seul=oui,json=oui}),][
+			"html": (#GEOPOPUP{objet_parent=article,id_objet_parent=#_articles:ID_ARTICLE,contenu_seul=oui,json=oui}),][
 			"icon": {(#GEOMARKERICONS{format=json})},][
 			"objet": "(#OBJET)",][
 			"id_objet": (#ID_OBJET),][
@@ -163,7 +163,7 @@
 		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
 		"properties": {[
 			"name": (#TITRE|textebrut|texte_json),][
-			"html": (#GEOPOPUP{objet_parent=#_rubriques:OBJET,id_objet_parent=#_rubriques:ID_OBJET,contenu_seul=oui,json=oui}),][
+			"html": (#GEOPOPUP{objet_parent=mot,id_objet_parent=#_mots:ID_MOT,contenu_seul=oui,json=oui}),][
 			"icon": {(#GEOMARKERICONS{format=json})},][
 			"objet": "(#OBJET)",][
 			"id_objet": (#ID_OBJET),][
@@ -180,7 +180,7 @@
 		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
 		"properties": {[
 			"name": (#TITRE|textebrut|texte_json),][
-			"html": (#GEOPOPUP{objet_parent=#_rubriques:OBJET,id_objet_parent=#_rubriques:ID_OBJET,contenu_seul=oui,json=oui}),][
+			"html": (#GEOPOPUP{objet_parent=mot,id_objet_parent=#_mots:ID_MOT,contenu_seul=oui,json=oui}),][
 			"icon": {(#GEOMARKERICONS{format=json})},][
 			"objet": "(#OBJET)",][
 			"id_objet": (#ID_OBJET),][
@@ -197,7 +197,7 @@
 		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
 		"properties": {[
 			"name": (#TITRE|sinon{doc#ID_DOCUMENT}|textebrut|texte_json),][
-			"html": (#GEOPOPUP{objet_parent=#_rubriques:OBJET,id_objet_parent=#_rubriques:ID_OBJET,contenu_seul=oui,json=oui}),][
+			"html": (#GEOPOPUP{objet_parent=mot,id_objet_parent=#_mots:ID_MOT,contenu_seul=oui,json=oui}),][
 			"icon": {(#GEOMARKERICONS{format=json})},][
 			"objet": "(#OBJET)",][
 			"id_objet": (#ID_OBJET),][
@@ -214,7 +214,7 @@
 		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
 		"properties": {[
 			"name": (#TITRE|textebrut|texte_json),][
-			"html": (#GEOPOPUP{contenu_seul=oui,json=oui}),][
+			"html": (#GEOPOPUP{objet_parent=mot,id_objet_parent=#_mots:ID_MOT,contenu_seul=oui,json=oui}),][
 			"icon": {(#GEOMARKERICONS{format=json})},][
 			"objet": "(#OBJET)",][
 			"id_objet": (#ID_OBJET),][

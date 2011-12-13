@@ -1,0 +1,31 @@
+[(#REM)
+
+	Fichier GeoJSON pour récupérer directement des points.
+	
+	La requête utilise tous les critères passés dans les paramètres parmi :
+	- aucun paramètres : tous les points (ça peut faire beaucoup)
+	- id_document : un document particulier
+	- id_article : les documents liés à un article
+	- id_rubrique : les documents liés à une rubrique
+
+][(#CACHE{86400})][(#HTTP_HEADER{Content-type: text/plain; charset=utf-8})][(#SET{features, 0})]{	"type": "FeatureCollection",
+	"features": #EVAL{'chr(91)'}[
+
+(#REM) Boucle sur les points ]
+<BOUCLE_points(GEOPOINTS){id_rubrique ?}{id_article ?}{id_document ?}{id_breve ?}{id_auteur ?}{id_mot ?}{visible}{","}>
+	{	"type": "Feature",
+		"geometry": {"type": "Point", "coordinates": [#LONGITUDE,#LATITUDE]},
+		"properties": {
+			"name": "Point#ID_POINT",[
+			"html": (#GEOPOPUP{contenu_seul=oui,json=oui}),][
+			"icon": {(#GEOMARKERICONS{format=json})},][
+			"objet": "(#OBJET)",][
+			"id_objet": (#ID_OBJET),][
+			"visible": "(#VISIBLE)",][
+			"priorite": (#PRIORITE),]
+			"type": "#TYPE_POINT",
+			"zoom": #ZOOM
+			}
+	}</BOUCLE_points>
+	#EVAL{'chr(93)'}
+}

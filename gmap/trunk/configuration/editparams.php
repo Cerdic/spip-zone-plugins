@@ -28,26 +28,15 @@ function configuration_editparams_dist()
 	$corps .= gmap_decode_result("msg_result");
 
 	// Récupérer les paramètres
-	$hack_modalbox = gmap_lire_config('gmap_edit_params', 'hack_modalbox', "oui");
-	$sibling_same_parent = gmap_lire_config('gmap_edit_params', 'sibling_same_parent', "oui");
+	$sibling_same_parent = gmap_lire_config('gmap_edit_params', 'siblings_same_parent', "oui");
 	$siblings_limit = gmap_lire_config('gmap_edit_params', 'siblings_limit', "5");
 		
-	// Paramétrage de l'accès
-	$corps .= '
-<fieldset class="config_group">
-	<legend>'._T('gmap:configuration_edit_params_access').'</legend>
-	<div class="padding"><div class="interior">
-		<input type="checkbox" name="hack_modalbox" id="hack_modalbox" value="oui"'.(($hack_modalbox==="oui")?'checked="checked"':'').' />&nbsp;<label for="hack_modalbox">'._T('gmap:choix_hack_modalbox').'</label>
-		<p class="explications">'._T('gmap:explication_hack_modalbox').'</p>
-	</div></div>
-</fieldset>';
-
 	// Voisins
 	$corps .= '
 <fieldset class="config_group">
-	<legend>'._T('gmap:configuration_edit_params_siblings').'</legend>
+	<legend>'._T('gmap:outil_siblings_nom').'</legend>
 	<div class="padding"><div class="interior">
-		<p><input type="checkbox" name="sibling_same_parent" id="sibling_same_parent" value="oui"'.(($sibling_same_parent==="oui")?'checked="checked"':'').' />&nbsp;<label for="sibling_same_parent">'._T('gmap:choix_sibling_same_parent').'</label></p>
+		<p><input type="checkbox" name="sibling_same_parent" id="sibling_same_parent" value="oui"'.(($sibling_same_parent==="oui")?'checked="checked"':'').' />&nbsp;<label for="sibling_same_parent">'._T('gmap:choix_siblings_same_parent').'</label></p>
 		<p><label for="siblings_limit">'._T('gmap:choix_siblings_limit').'</label>&nbsp;<input type="text" name="siblings_limit" id="siblings_limit" value="'.$siblings_limit.'" /></p>
 	</div></div>
 </fieldset>';

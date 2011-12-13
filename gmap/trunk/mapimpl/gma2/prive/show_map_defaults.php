@@ -20,17 +20,23 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/gmap_config_utils');
 
 // Éléments de l'interface
-function _gmap_get_gma2_ui_elements()
+function _gmap_get_gma2_ui_elements($profile = 'interface')
 {
 	$corps = "";
 	
+	// Clefs d'accès aux valeurs enregistrées
+	if (!isset($profile))
+		$profile = 'interface';
+	$apiConfigKey = 'gmap_gma2_'.$profile;
+
 	// Fonds de cartes
-	$allow_type_plan = gmap_lire_config('gmap_gma2_interface', 'type_carte_plan', "oui");
-	$allow_type_satellite = gmap_lire_config('gmap_gma2_interface', 'type_carte_satellite', "oui");
-	$allow_type_mixte = gmap_lire_config('gmap_gma2_interface', 'type_carte_mixte', "oui");
-	$allow_type_physic = gmap_lire_config('gmap_gma2_interface', 'type_carte_physic', "oui");
-	$allow_type_earth = gmap_lire_config('gmap_gma2_interface', 'type_carte_earth', "oui");
-	$default_type = gmap_lire_config('gmap_gma2_interface', 'type_defaut', "mixte");
+	$allow_type_plan = gmap_lire_config($apiConfigKey, 'type_carte_plan', "oui");
+	$allow_type_satellite = gmap_lire_config($apiConfigKey, 'type_carte_satellite', "oui");
+	$allow_type_mixte = gmap_lire_config($apiConfigKey, 'type_carte_mixte', "oui");
+	$allow_type_physic = gmap_lire_config($apiConfigKey, 'type_carte_physic', "oui");
+	$allow_type_earth = gmap_lire_config($apiConfigKey, 'type_carte_earth', "oui");
+	$default_type = gmap_lire_config($apiConfigKey, 'type_defaut', "mixte");
+	$types_control_style = gmap_lire_config($apiConfigKey, 'types_control_style', "menu");
 	$corps .= '
 <fieldset id="config_carte_fonds" class="config_group">
 	<legend>'._T('gmap:configuration_defaults_types').'</legend>
@@ -53,6 +59,12 @@ function _gmap_get_gma2_ui_elements()
 			<input type="checkbox" name="type_carte_earth" id="type_carte_earth" class="tracked" value="oui"'.(($allow_type_earth==="oui")?'checked="checked"':'').' /><label for="type_carte_earth">'._T('gmap:choix_type_carte_earth').'</label>
 			<input type="hidden" name="none" id="current_type" value="oui" />
 		</div>
+		<p><label for="types_control_style">'._T('gmap:choix_style_control_types').'</label>
+		<select name="types_control_style" id="types_control_style" class="tracked">
+			<option value="none"'.(($types_control_style === "none")?' selected="selected"':'').'>'._T('gmap:style_types_control_none').'</option>
+			<option value="button"'.(($types_control_style === "button")?' selected="selected"':'').'>'._T('gmap:style_types_control_button').'</option>
+			<option value="menu"'.(($types_control_style === "menu")?' selected="selected"':'').'>'._T('gmap:style_types_control_menu').'</option>
+		</select></p>
 	</div></div>
 </fieldset>' . "\n";
 	
@@ -89,21 +101,14 @@ jQuery(document).ready(function() { updateDefaultMapType(); });
 	$corps .= '	//]]>'."\n".'</script>'."\n";
 	
 	// Choix du type de contrôles
-	$types_control_style = gmap_lire_config('gmap_gma2_interface', 'types_control_style', "menu");
-	$nav_control_style = gmap_lire_config('gmap_gma2_interface', 'nav_control_style', "3D");
-	$allow_dblclk_zoom = gmap_lire_config('gmap_gma2_interface', 'allow_dblclk_zoom', "non");
-	$allow_continuous_zoom = gmap_lire_config('gmap_gma2_interface', 'allow_continuous_zoom', "non");
-	$allow_wheel_zoom = gmap_lire_config('gmap_gma2_interface', 'allow_wheel_zoom', "non");
+	$nav_control_style = gmap_lire_config($apiConfigKey, 'nav_control_style', "3D");
+	$allow_dblclk_zoom = gmap_lire_config($apiConfigKey, 'allow_dblclk_zoom', "non");
+	$allow_continuous_zoom = gmap_lire_config($apiConfigKey, 'allow_continuous_zoom', "non");
+	$allow_wheel_zoom = gmap_lire_config($apiConfigKey, 'allow_wheel_zoom', "non");
 	$corps .= '
 <fieldset id="config_carte_params" class="config_group">
 	<legend>'._T('gmap:configuration_defaults_controls').'</legend>
 	<div class="padding"><div class="interior">
-		<p><label for="nav_control_style">'._T('gmap:choix_style_control_types').'</label>
-		<select name="types_control_style" id="types_control_style" class="tracked">
-			<option value="none"'.(($types_control_style === "none")?' selected="selected"':'').'>'._T('gmap:style_types_control_none').'</option>
-			<option value="button"'.(($types_control_style === "button")?' selected="selected"':'').'>'._T('gmap:style_types_control_button').'</option>
-			<option value="menu"'.(($types_control_style === "menu")?' selected="selected"':'').'>'._T('gmap:style_types_control_menu').'</option>
-		</select></p>
 		<p><label for="nav_control_style">'._T('gmap:choix_style_control_nav').'</label>
 		<select name="nav_control_style" id="nav_control_style" class="tracked">
 			<option value="none"'.(($nav_control_style === "none")?' selected="selected"':'').'>'._T('gmap:style_nav_control_none').'</option>
@@ -162,9 +167,9 @@ function getParams(bIncludeViewport)
 }
 
 // Enregistrement des paramètres passés dans la requête
-function mapimpl_gma2_prive_show_map_defaults_dist(&$uiElements, &$getParams)
+function mapimpl_gma2_prive_show_map_defaults_dist(&$uiElements, &$getParams, $profile = 'interface')
 {
-	$uiElements = _gmap_get_gma2_ui_elements();
+	$uiElements = _gmap_get_gma2_ui_elements($profile);
 	$getParams = _gmap_get_gma2_get_params();
 	return true;
 }

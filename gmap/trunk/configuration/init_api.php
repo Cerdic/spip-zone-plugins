@@ -23,16 +23,10 @@ function configuration_init_api_dist()
 	// Les parcourir
 	foreach ($apis as $api => $infos)
 	{
-		$apiConfigKey = 'gmap_'.$api.'_interface';
-		
 		// Charger ce qui est spécifique à l'implémentation
 		$init_api = charger_fonction("init_api", "mapimpl/".$api."/prive");
-		$init_api();
-		
-		// Position par défaut
-		gmap_init_config($apiConfigKey, 'default_latitude', "0.0");
-		gmap_init_config($apiConfigKey, 'default_longitude', "0.0");
-		gmap_init_config($apiConfigKey, 'default_zoom', "1");
+		if ($init_api)
+			$init_api();
 	}
 }
 

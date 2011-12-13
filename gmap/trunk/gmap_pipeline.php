@@ -147,7 +147,7 @@ function gmap_saisie_geo_info($flux)
 	}
 
 	// Désactivation du modal-box
-	if ($bHackModalBox && (gmap_lire_config('gmap_edit_params', 'hack_modalbox', 'oui') === "oui"))
+	if ($bHackModalBox && (gmap_lire_config('gmap_objets_geo', 'hack_modalbox', 'oui') === "oui"))
 		$flux['data'] .= '
 <script type="text/javascript">
 //<![CDATA[

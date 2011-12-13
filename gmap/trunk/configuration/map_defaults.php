@@ -17,7 +17,7 @@ include_spip('inc/gmap_presentation');
 include_spip('inc/gmap_config_utils');
 include_spip('inc/gmap_saisie_utils');
 
-function generic_show_map_defaults(&$uiElements, &$getParams)
+function generic_show_map_defaults(&$uiElements, &$getParams, $profile = 'interface')
 {
 	$uiElements = '';
 	$getParams = '
@@ -40,35 +40,72 @@ function getParams(bIncludeViewport)
 	return true;
 }
 
-function configuration_map_defaults_dist()
+function configuration_map_defaults_dist($exec = 'configurer_gmap_ui', $profile = 'interface')
 {
 	$corps = "";
 	
+	// Quand le bloc est appelé en ajax, il ne reçoit pas les paramètres, puisque
+	if (_AJAX)
+	{
+		$exec = _request('script');
+		$profile = _request('map_defaults_profile');
+	}
+
 	// Si on a le résultat d'un traitement, l'afficher ici
 	$corps .= gmap_decode_result("msg_result");
 
-	// Lire l'API utilisée
+	// La clef à laquelle se trouvent les configurations dépend du profile et de l'api
+	if (!isset($profile))
+		$profile = 'interface';
 	$api = gmap_lire_config('gmap_api', 'api', 'gma3');
-	$apiConfigKey = 'gmap_'.$api.'_interface';
+	$apiConfigKey = 'gmap_'.$api.'_'.$profile;
 	
 	// Charger ce qui est spécifique à l'implémentation
 	$show_map_defaults = charger_fonction("show_map_defaults", "mapimpl/".$api."/prive", true);
 	$uiElements = '';
 	$getParams = '';
-	if (!$show_map_defaults || !$show_map_defaults($uiElements, $getParams))
-		generic_show_map_defaults($uiElements, $getParams);
+	if (!$show_map_defaults || !$show_map_defaults($uiElements, $getParams, $profile))
+		generic_show_map_defaults($uiElements, $getParams, $profile);
+		
+	// Si le profile n'est pas 'interface', les autres (donc le privé) peuvent si
+	// référer. Donc il y a une case à cocher pour faire afficher le reste.
+	if ($profile != 'interface')
+	{
+		$toInterface = gmap_lire_config($apiConfigKey, 'redirect_to_interface', "oui");
+		$corps .= '
+		<div class="padding"><div class="interior">
+			<input type="hidden" name="map_defaults_profile" value="'.$profile.'" />
+			<input type="checkbox" name="map_defaults_auto" id="map_defaults_auto" value="oui"'.(($toInterface==="oui")?'checked="checked"':'').' />&nbsp;<label for="map_defaults_auto">'._T('gmap:utilise_param_interface').'</label>
+		</div></div>';
+		$corps .= '
+<script type="text/javascript">'."\n".'//<![CDATA[
+	jQuery(document).ready(function() {
+		jQuery("#map_defaults_auto").change(function() {
+			if (jQuery(this).attr("checked"))
+				jQuery("#profile_content").hide();
+			else
+			{
+				jQuery("#profile_content").show();
+				jQuery("#carte_config").trigger("resize");
+			}
+		});
+	});
+//]]>'."\n".'</script>';
+		$corps .= '
+		<div class="profile_content" id="profile_content"'.(($toInterface==="oui")?' style="display: none;"':'').'>';
+	}
 
-	// Récupération des infos sur le centre
-	$isMarker = gmap_config_existe($apiConfigKey, 'default_latitude') && gmap_config_existe($apiConfigKey, 'default_longitude') && gmap_config_existe($apiConfigKey, 'default_zoom');
-	$latitude = gmap_lire_config($apiConfigKey, 'default_latitude', "0.0");
-	$longitude = gmap_lire_config($apiConfigKey, 'default_longitude', "0.0");
-	$zoom = gmap_lire_config($apiConfigKey, 'default_zoom', "1");
-	
 	// Éléments d'interface spécifiques
 	$corps .= $uiElements;
 		
 	// Élément DOM qui reçoit la carte
 	$corps .= '<div id="carte_config" class="carte_configurer_gmap"></div>'."\n";
+	
+	// Récupération des infos sur le marqueur de centre enregistré
+	$isMarker = gmap_config_existe($apiConfigKey, 'default_latitude') && gmap_config_existe($apiConfigKey, 'default_longitude') && gmap_config_existe($apiConfigKey, 'default_zoom');
+	$latitude = gmap_lire_config($apiConfigKey, 'default_latitude', "0.0");
+	$longitude = gmap_lire_config($apiConfigKey, 'default_longitude', "0.0");
+	$zoom = gmap_lire_config($apiConfigKey, 'default_zoom', "1");
 	
 	// Script de mise à jour des marqueurs
 	$corps .= '<script type="text/javascript">'."\n".'//<![CDATA[
@@ -262,9 +299,15 @@ jQuery(document).unload(function()
 ';
 
 	$corps .= '//]]>'."\n".'</script>'."\n";
-	
+
+	// Fermer la div supplémentaire si on n'est pas en profil 'interface'
+	if ($profile != 'interface')
+	{
+		$corps .= '
+		</div>';
+	}
 	// Renvoyer le formulaire
-	return gmap_formulaire_ajax('config_bloc_gmap', 'map_defaults', 'configurer_gmap_ui', $corps,
+	return gmap_formulaire_ajax('config_bloc_gmap', 'map_defaults', $exec, $corps,
 		find_in_path('images/logo-config-map_defaults.png'),
 		_T('gmap:configuration_defaults'));
 }

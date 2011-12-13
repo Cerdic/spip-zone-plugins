@@ -14,6 +14,8 @@
 include_spip('inc/gmap_presentation');
 
 // Ajout du formulaire de choix par recherche sur le geocoder
+// Depuis la refonte des outils de rechercher, cette fonction n'est plus utilisée que
+// dans la configuration.
 function gmap_sous_bloc_geocoder($mapId, $cbSetMarkerPosition, $bSousBloc = true, $bSimpleSearch = false)
 {
 	$out = "";
@@ -104,7 +106,7 @@ jQuery(document).ready(function()
 		{
 			bEraseOnFocusIn = true;
 			jQuery(this).addClass("empty-edit");
-			jQuery(this).val("'._T('gmap:address_explic').'");
+			jQuery(this).val("'.html_entity_decode(_T('gmap:address_explic'), ENT_COMPAT, $GLOBALS['meta']['charset']).'");
 			jQuery("#'.$mapId.'_geocode").attr("disabled", "disabled");
 		}
 		else
@@ -126,5 +128,4 @@ jQuery(document).ready(function()
 		return $out;
 }
 
-	
 ?>

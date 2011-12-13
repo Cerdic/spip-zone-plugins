@@ -547,6 +547,20 @@ MapWrapper.prototype =
 		}
 		return vp;
 	},
+	getViewportBounds: function()
+	{
+		if (!isObject(this.map))
+			return false;
+		var mapBounds = this.map.getBounds();
+		var mapTopRight = mapBounds.getNorthEast();
+		var mapBottomLeft = mapBounds.getSouthWest();
+		var bounds = new Object();
+		bounds.max_lat = mapTopRight.lat();
+		bounds.max_lng = mapTopRight.lng();
+		bounds.min_lat = mapBottomLeft.lat();
+		bounds.min_lng = mapBottomLeft.lng();
+		return bounds;
+	},
 	setCenter: function(latitude, longitude)
 	{
 		if (!isObject(this.map))
@@ -818,7 +832,7 @@ MapWrapper.prototype =
 			marker.extraData = {
 				id: id,
 				infoWindowAnchor: gpar.icon.infoWindowAnchor,
-				infoWindowAttractionSize: new GSize(gpar.icon.iconSize.width*0.60, gpar.icon.iconSize.height*0.60),
+				infoWindowAttractionSize: new GSize(gpar.icon.iconSize.width*0.75, gpar.icon.iconSize.height*0.75),
 				params: clone(params)
 			};
 			
@@ -928,15 +942,20 @@ MapWrapper.prototype =
 	},
 	
 	// Rechercher les marqueurs qui se trouvent entre deux coordonnées
-	getMarkersInSquare: function(bounds)
+	getMarkersInSquare: function(bounds, fnValidate)
 	{
 		var arResult = new Array();
 		var sw = bounds.getSouthWest();
 		var ne = bounds.getNorthEast();
 		var latTop = ne.lat();
 		var latBottom = sw.lat();
-		var lngLeft = (sw.lng() > ne.lng()) ? ne.lng() : sw.lng();
-		var lngRight = (sw.lng() > ne.lng()) ? sw.lng() : ne.lng();
+		var lngLeft = sw.lng();
+		var lngRight = ne.lng();
+		var fnCompareLng = null;
+		if (lngRight < lngLeft)
+			fnCompareLng = function(pt) { return ((pt.lng() > lngLeft) || (pt.lng() < lngRight)); };
+		else
+			fnCompareLng = function(pt) { return ((pt.lng() > lngLeft) && (pt.lng() < lngRight)); };
 		var mapMarkerPos;
 		for (var id in this.markers)
 		{
@@ -944,9 +963,12 @@ MapWrapper.prototype =
 			if (!(marker instanceof GMarker))
 				continue;
 			mapMarkerPos = marker.getLatLng();
-			if ((mapMarkerPos.lng() >= lngLeft) && (mapMarkerPos.lng() <= lngRight) &&
+			if (fnCompareLng(mapMarkerPos) &&
 				(mapMarkerPos.lat() >= latBottom) && (mapMarkerPos.lat() <= latTop))
-				arResult.push(marker);
+			{
+				if (!fnValidate || fnValidate(marker))
+					arResult.push(marker);
+			}
 		}
 		return (arResult.length > 0) ? arResult : null;
 	},
@@ -1025,26 +1047,31 @@ MapWrapper.prototype =
 	},
 	showInfoWindow: function(id)
 	{
+		if (!isObject(this.map))
+			return false;
 		var marker = this.getMarkerObject(id);
 		if (marker == null)
 			return false;
 		var htmlContents = marker.extraData.params.html;
 		var markers = null;
 		var bounds = null;
+		var current = -1;
 		if (this.curParams.mergeInfoWindows === true)
 		{
 			bounds = this._getMarkerAttraction(marker);
-			markers = this.getMarkersInSquare(bounds);
+			markers = this.getMarkersInSquare(bounds, function(marker) { return (marker.extraData.params.html && marker.extraData.params.html.length) ? true : false; });
 			if (markers && (typeof(markers) === "object") && (markers.length > 1))
 			{
 				var html = ''
 				var navigator = '';
 				for (var index = 0; index < markers.length; index++)
 				{
-					html += miw_formatContentPart(index+1, markers[index].extraData.params.html);
+					if (markers[index].extraData.id == marker.extraData.id)
+						current = index;
+					html += miw_formatContentPart(index+1, markers[index].extraData.params.html, (current == index) ? true : false);
 					navigator += miw_formatNavigatorPart(index+1, markers[index].getTitle());
 				}
-				htmlContents = miw_formatHtml(markers.length, 1, navigator, html);
+				htmlContents = miw_formatHtml(markers.length, current+1, navigator, html);
 			}
 			else
 				markers = null;
@@ -1054,7 +1081,7 @@ MapWrapper.prototype =
 			if (!markers)
 				this._createSimpleInfoWindow(htmlContents, marker);
 			else
-				this._createMergedInfoWindow(htmlContents, markers, 1, bounds);
+				this._createMergedInfoWindow(htmlContents, markers, current+1, bounds);
 		}
 		return true;
 	},

@@ -490,6 +490,8 @@ function gmap_handleJSONMarkers(map, content)
 // Récupérer l'objet carte à parti de son id (optionnel, 1 par défaut)
 function gmap_getMap(mapId)
 {
+	if (mapId instanceof MapWrapper)
+		return mapId;
 	if (!mapId)
 		mapId = 1;
 	return gMap("gmap_map"+mapId);
@@ -801,9 +803,9 @@ function miw_formatNavigatorPart(index, name)
 {
 	return '<option id="miw'+index+'-link" value="'+index+'">'+name+'</option>';
 }
-function miw_formatContentPart(index, html)
+function miw_formatContentPart(index, html, bSelect)
 {
-	return '<div id="miw'+index+'-content"'+((index == 1) ? ' style="display:block;"' : ' style="display:none;"')+'>' + html + '</div>';
+	return '<div id="miw'+index+'-content"'+(bSelect ? ' style="display:block;"' : ' style="display:none;"')+'>' + html + '</div>';
 }
 function miw_wrapHtml(count, current, content)
 {
@@ -841,17 +843,18 @@ jQuery.fn.updateMergedInfoWindows = function(onChangeHandler, bFireChange, onZoo
 	var root = this;
 		
 	// Mettre à jour le contenu
-	for (var index = 0; index <= count; index++)
+	for (var index = 1; index <= count; index++)
 	{
+		var part = jQuery('#miw'+index+'-content', this);
 		if (index == current)
-			jQuery('#miw'+index+'-content', this).show();
+			part.show();
 		else
-			jQuery('#miw'+index+'-content', this).hide();
+			part.hide();
 	}
 	
 	// Mettre à jour les accès directs
 	var select = jQuery('#miw-navigator-choice', this);
-	for (var index = 0; index <= count; index++)
+	for (var index = 1; index <= count; index++)
 	{
 		if (index == current)
 			jQuery('#miw'+index+'-link', select).attr('selected', 'selected');
@@ -880,18 +883,22 @@ jQuery.fn.updateMergedInfoWindows = function(onChangeHandler, bFireChange, onZoo
 	{
 		first.addClass('miw-navigator-first').click(function(event) {
 			root.updateMergedInfoWindows(onChangeHandler, true, onZoomHandler, 1, count);
+			return false;
 		});
 		prev.addClass('miw-navigator-prev').click(function(event) {
 			root.updateMergedInfoWindows(onChangeHandler, true, onZoomHandler, current-1, count);
+			return false;
 		});
 	}
 	if (current < count)
 	{
 		last.addClass('miw-navigator-last').click(function(event) {
 			root.updateMergedInfoWindows(onChangeHandler, true, onZoomHandler, count, count);
+			return false;
 		});
 		next.addClass('miw-navigator-next').click(function(event) {
 			root.updateMergedInfoWindows(onChangeHandler, true, onZoomHandler, current+1, count);
+			return false;
 		});
 	}
 	

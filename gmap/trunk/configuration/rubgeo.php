@@ -42,6 +42,7 @@ function configuration_rubgeo_dist()
 		foreach ($simple_rubs as $rub)
 			$rubgeo[] = 'rubrique|'.$rub;
 	}
+	$hack_modalbox = gmap_lire_config('gmap_edit_params', 'hack_modalbox', "oui");
 		
 	// Type d'objet géolocalisable
 	$corps .= '
@@ -106,6 +107,16 @@ jQuery(document).ready(function()
 	</div></div>
 </fieldset>';
 	
+	// Paramétrage de l'accès
+	$corps .= '
+<fieldset class="config_group">
+	<legend>'._T('gmap:geolocalisation_documents').'</legend>
+	<div class="padding"><div class="interior">
+		<input type="checkbox" name="hack_modalbox" id="hack_modalbox" value="oui"'.(($hack_modalbox==="oui")?'checked="checked"':'').' />&nbsp;<label for="hack_modalbox">'._T('gmap:choix_hack_modalbox').'</label>
+		<p class="explications">'._T('gmap:explication_hack_modalbox').'</p>
+	</div></div>
+</fieldset>';
+
 	return gmap_formulaire_submit('configuration_rubgeo', $corps,
 		find_in_path('images/logo-config-rubgeo.png'),
 		_T('gmap:configuration_rubriques'));

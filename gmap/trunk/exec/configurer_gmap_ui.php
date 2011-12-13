@@ -101,9 +101,9 @@ function exec_configurer_gmap_ui_dist($class = null)
 	echo debut_droite("", true);
 	
 	// Configuration des valeurs par défaut de l'interface (position par défaut, types de cartes, contrôles...)
-	$map_defaults = charger_fonction('map_defaults', 'configuration');
+	$map_defaults = charger_fonction('map_defaults', 'configuration', true);
 	if ($map_defaults)
-		echo $map_defaults();
+		echo $map_defaults('configurer_gmap_ui', 'interface');
 	
 	// Paramétrage du comportement des marqueurs : info-bulles, regroupements...
 	$markers_behavior = charger_fonction('markers_behavior', 'configuration', true);

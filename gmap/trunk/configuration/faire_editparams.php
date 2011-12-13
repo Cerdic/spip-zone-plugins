@@ -25,11 +25,8 @@ function configuration_faire_editparams_dist()
 {
 	$result = "";
 	
-	// Contournement ModalBox.
-	gmap_ecrire_config('gmap_edit_params', 'hack_modalbox', ((_request('hack_modalbox') === "oui") ? "oui" : "non"));
-	
 	// Voisins
-	gmap_ecrire_config('gmap_edit_params', 'sibling_same_parent', ((_request('sibling_same_parent') === "oui") ? "oui" : "non"));
+	gmap_ecrire_config('gmap_edit_params', 'siblings_same_parent', ((_request('sibling_same_parent') === "oui") ? "oui" : "non"));
 	gmap_ecrire_config('gmap_edit_params', 'siblings_limit', _request('siblings_limit'));
 	
 	// Message de retour

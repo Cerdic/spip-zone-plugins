@@ -98,9 +98,9 @@ function gmap_get_all_types()
 		"spip_gmap_types".
 		" LEFT JOIN spip_gmap_points AS points ON spip_gmap_types.id_type_point = points.id_type_point",
 		"", "spip_gmap_types.id_type_point", "spip_gmap_types.id_type_point");
-	// L'alias sur le nom de la table spip_gmap_points est nécessaire pour contourner une faille de 
-	// spip dans la transposition des nom de tables : un nom de table précédent d'une parenthèse
-	// n'est pas transposé (cf. _SQL_PREFIXE_TABLE dans ecrire/req/mysql.php).
+	// L'alias sur les noms des tables est nécessaire parce que spip ne peut pas prendre en 
+	// charge tous les cas dans la transposition des nom de tables : un nom de table précédé
+	// d'une parenthèse n'est pas transposé (cf. _SQL_PREFIXE_TABLE dans ecrire/req/mysql.php).
 	while ($row = sql_fetch($rowset))
 		$types[] = $row;
 	return $types;
@@ -447,39 +447,54 @@ function _gmap_recurse_fils($objet, $id_objet, &$IDs, $recursive = TRUE)
 
 // Compte le nombre de points géographiques définis sous un objet SPIP
 // $objet, $id_objet : identification de l'objet
+// $visible : filtre sur le fait que le type soit marqué visible
 // $recursive : cherche aussi sous les fils
 // $filtre : fltre sur le type de points : une chaine ou un tableau de chaines
 // Retour : un entier qui indique le nombre de points trouvés
-function gmap_compteur($objet, $id_objet, $recursive = FALSE, $filtre = NULL)
+function gmap_compteur($objet = '', $id_objet = 0, $visible = false, $recursive = false, $filtre = null)
 {
-	// Vérifications
-	if (!strlen($objet) || !$id_objet)
-		return 0;
-	
 	// Calculer la clause WHERE sur les objets
-	$idWhere = "";
-	if ($recursive)
+	$clauseWhere = "";
+	$joinLiens = "";
+	if (strlen($objet) && $id_objet)
 	{
-		// Construire un tableau contenant tous les IDs
-		$IDs = array();
-		$IDs[$objet] = "".$id_objet;
-		_gmap_recurse_fils($objet, $id_objet, &$IDs, TRUE);
-		
-		// Reconstruire la requête
-		foreach ($IDs as $idObj => $idListe)
+		$idWhere = '';
+		if ($recursive)
 		{
-			if (strlen($idWhere) > 0)
-				$idWhere .= " OR ";
-			$idWhere .= "(liens.objet='".$idObj."' AND liens.id_objet IN (".$idListe."))";
+			// Construire un tableau contenant tous les IDs
+			$IDs = array();
+			$IDs[$objet] = "".$id_objet;
+			_gmap_recurse_fils($objet, $id_objet, &$IDs, TRUE);
+			
+			// Reconstruire la requête
+			foreach ($IDs as $idObj => $idListe)
+			{
+				if (strlen($idWhere) > 0)
+					$idWhere .= " OR ";
+				$idWhere .= "(liens.objet='".$idObj."' AND liens.id_objet IN (".$idListe."))";
+			}
 		}
+		else
+			$idWhere = "liens.objet='".$objet."' AND liens.id_objet=".$id_objet;
+		if (!strlen($joinLiens))
+			$joinLiens = " JOIN spip_gmap_points_liens AS liens ON liens.id_point = points.id_point";
+		$clauseWhere .= $idWhere;
 	}
-	else
-		$idWhere = "liens.objet='".$objet."' AND liens.id_objet=".$id_objet;
 	
 	// Construction des filtres sur le type de point
-	$filtreWhere = "";
+	$joinType = "";
+	if ($visible)
+	{
+		if (!strlen($joinType))
+			$joinType = " JOIN spip_gmap_types AS types ON types.id_type_point = points.id_type_point";
+		if (strlen($clauseWhere))
+			$clauseWhere .= " AND ";
+		$clauseWhere .= "types.visible='oui'";
+	}
 	if ($filtre)
 	{
+		$filtreWhere = "";
+		
 		// Si c'est une chaîne la transformer en tableau
 		if (strlen($filtre) > 0)
 			$filtre = explode(",; ", $filtre);
@@ -501,13 +516,16 @@ function gmap_compteur($objet, $id_objet, $recursive = FALSE, $filtre = NULL)
 					}
 				}
 				if (strlen($filtreWhere) > 0)
-					$filtreWhere = " AND spip_gmap_types.nom IN (".$filtreWhere.")";
+					$filtreWhere = " AND types.nom IN (".$filtreWhere.")";
 			}
 		}
+			
+		if (!strlen($joinType))
+			$joinType = " JOIN spip_gmap_types AS types ON types.id_type_point = points.id_type_point";
+		if (strlen($clauseWhere))
+			$clauseWhere .= " AND ";
+		$clauseWhere .= $filtreWhere;
 	}
-	$filtreJoin = "";
-	if (strlen($filtreWhere))
-		$filtreJoin = " JOIN spip_gmap_types AS types";
 
 	// Initialisation du retour
 	$count = 0;
@@ -515,8 +533,8 @@ function gmap_compteur($objet, $id_objet, $recursive = FALSE, $filtre = NULL)
 	// Requête sur l'objet
 	$rowset = sql_select(
 				"count(*) as count",
-				"spip_gmap_points_liens AS liens".$filtreJoin,
-				$idWhere.$filtreWhere);
+				"spip_gmap_points AS points".$joinLiens.$joinType,
+				$clauseWhere);
 	if ($row = sql_fetch($rowset))
 		$count += $row['count'];
 	sql_free($rowset);
@@ -528,13 +546,13 @@ function gmap_compteur($objet, $id_objet, $recursive = FALSE, $filtre = NULL)
 // $objet, $id_objet : identification de l'objet
 // $recursive : cherche aussi sous les fils
 // Retour : TRUE ou FALSE
-function gmap_est_objet_geo($objet, $id_objet, $recursive = FALSE)
+function gmap_est_objet_geo($objet, $id_objet, $visible=false, $recursive = false)
 {
 	// On ne teste pas ici si l'objet est géolocalisable : même s'il a été géolocalisé par le passé, et ne l'est plus,
 	// on considère que les positions saisies peuvent être affichées sur une carte. En fait, ce sont aux
 	// squelettes de déterminer si une carte doit être affichée sur un objet ou non, pas au paramétrage
 	// global.
-	return (gmap_compteur($objet, $id_objet, $recursive) > 0) ? TRUE : FALSE;
+	return (gmap_compteur($objet, $id_objet, $visible, $recursive) > 0) ? true : false;
 }
 
 // Trouver le titre d'un objet (pour afficher dans la bulle ou en survol)

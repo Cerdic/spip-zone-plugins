@@ -20,26 +20,29 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/gmap_config_utils');
 
 // Enregistrement des paramètres passés dans la requête
-function mapimpl_gma2_prive_faire_map_defaults_dist()
+function mapimpl_gma2_prive_faire_map_defaults_dist($profile = 'interface')
 {
+	// Clefs d'accès aux valeurs enregistrées
+	if (!isset($profile))
+		$profile = 'interface';
+	$apiConfigKey = 'gmap_gma2_'.$profile;
+	
 	// Fonds de carte
-	gmap_ecrire_config('gmap_gma2_interface', 'type_carte_plan', ((_request('type_carte_plan') === "oui") ? "oui" : "non"));
-	gmap_ecrire_config('gmap_gma2_interface', 'type_carte_satellite', ((_request('type_carte_satellite') === "oui") ? "oui" : "non"));
-	gmap_ecrire_config('gmap_gma2_interface', 'type_carte_mixte', ((_request('type_carte_mixte') === "oui") ? "oui" : "non"));
-	gmap_ecrire_config('gmap_gma2_interface', 'type_carte_physic', ((_request('type_carte_physic') === "oui") ? "oui" : "non"));
-	gmap_ecrire_config('gmap_gma2_interface', 'type_carte_earth', ((_request('type_carte_earth') === "oui") ? "oui" : "non"));
-	gmap_ecrire_config('gmap_gma2_interface', 'type_defaut', _request('type_carte_defaut'));
+	gmap_ecrire_config($apiConfigKey, 'type_carte_plan', ((_request('type_carte_plan') === "oui") ? "oui" : "non"));
+	gmap_ecrire_config($apiConfigKey, 'type_carte_satellite', ((_request('type_carte_satellite') === "oui") ? "oui" : "non"));
+	gmap_ecrire_config($apiConfigKey, 'type_carte_mixte', ((_request('type_carte_mixte') === "oui") ? "oui" : "non"));
+	gmap_ecrire_config($apiConfigKey, 'type_carte_physic', ((_request('type_carte_physic') === "oui") ? "oui" : "non"));
+	gmap_ecrire_config($apiConfigKey, 'type_carte_earth', ((_request('type_carte_earth') === "oui") ? "oui" : "non"));
+	gmap_ecrire_config($apiConfigKey, 'type_defaut', _request('type_carte_defaut'));
 
 	// Choix du type de contrôles
-	gmap_ecrire_config('gmap_gma2_interface', 'types_control_style', _request('types_control_style'));
-	gmap_ecrire_config('gmap_gma2_interface', 'nav_control_style', _request('nav_control_style'));
+	gmap_ecrire_config($apiConfigKey, 'types_control_style', _request('types_control_style'));
+	gmap_ecrire_config($apiConfigKey, 'nav_control_style', _request('nav_control_style'));
 	
 	// Paramètres
-	gmap_ecrire_config('gmap_gma2_interface', 'allow_dblclk_zoom', ((_request('allow_dblclk_zoom') === "oui") ? "oui" : "non"));
-	gmap_ecrire_config('gmap_gma2_interface', 'allow_continuous_zoom', ((_request('allow_continuous_zoom') === "oui") ? "oui" : "non"));
-	gmap_ecrire_config('gmap_gma2_interface', 'allow_wheel_zoom', ((_request('allow_wheel_zoom') === "oui") ? "oui" : "non"));
-	
-	return "";
+	gmap_ecrire_config($apiConfigKey, 'allow_dblclk_zoom', ((_request('allow_dblclk_zoom') === "oui") ? "oui" : "non"));
+	gmap_ecrire_config($apiConfigKey, 'allow_continuous_zoom', ((_request('allow_continuous_zoom') === "oui") ? "oui" : "non"));
+	gmap_ecrire_config($apiConfigKey, 'allow_wheel_zoom', ((_request('allow_wheel_zoom') === "oui") ? "oui" : "non"));
 }
 
 ?>

@@ -21,6 +21,9 @@ function barre_onglets_configurer_gmap()
 	$onglets['cg_main']=
 		  new Bouton(find_in_path('images/logo-config-gmap-main.png'), 'gmap:onglet_config_principale',
 			generer_url_ecrire("configurer_gmap"));
+	$onglets['cg_prive']=
+		  new Bouton(find_in_path('images/logo-config-gmap-prive.png'), 'gmap:onglet_config_prive',
+			generer_url_ecrire("configurer_gmap_prive"));
 	$onglets['cg_ui']=
 		  new Bouton(find_in_path('images/logo-config-gmap-ui.png'), 'gmap:onglet_config_interface',
 			generer_url_ecrire("configurer_gmap_ui"));

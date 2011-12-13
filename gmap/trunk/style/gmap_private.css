@@ -33,7 +33,6 @@
 {
 	margin: 0px;
 	display: block;
-	float: left;
 }
 .sbd-btn
 {
@@ -58,6 +57,11 @@
 	float: left;
 	width: 12px;
 	height: 12px;
+}
+.sbd-titre {
+}
+.sbd-titre select {
+	font-size: 11px; /* pour reprendre le style de .cadre */
 }
 
 
@@ -150,6 +154,7 @@ table.edit_markers tr.deleted .btn_marker_delete {
 .btn_marker_add {
 	display: inline;
     height: 10px;
+	width: 0px;
 	padding-left: 15px;
     background-repeat: no-repeat;
     background-position: left center;
@@ -157,12 +162,21 @@ table.edit_markers tr.deleted .btn_marker_delete {
 	cursor: pointer;
 }
 .btn_marker_copy {
-	display: inline;
+	display: block;
     height: 10px;
-	padding-left: 15px;
+	width: 10px;
     background-repeat: no-repeat;
     background-position: left center;
     background-image: url('../images/item-copy.png');
+	cursor: pointer;
+}
+.btn_marker_link {
+	display: block;
+    height: 10px;
+	width: 10px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-image: url('../images/item-link.png');
 	cursor: pointer;
 }
 table.edit_markers .btn_marker_validate {
@@ -213,27 +227,63 @@ table.edit_siblings tr.active .btn_activate {
 
 
 
+/*
+ * Geolocalisation
+ */
+
+.geoloc-sous-bloc {
+	clear: both;
+	margin: 5px 0;
+}
+
+table.geoloc-tool-results {
+	margin: 5px auto;
+}
+
+table.geoloc-tool-results .btn_activate {
+	display: block;
+    width: 12px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url('../images/btn-sibling.png');
+	cursor: pointer;
+}
+table.geoloc-tool-results tr.active .btn_activate {
+	display: block;
+    width: 12px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url('../images/btn-sibling-active.png');
+	cursor: pointer;
+}
+
+
 
 /*
  * Geocoder
  */
 
 /* Saisie de l'adresse */ 
-.geoedit_subform input {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 0.95em;
-}
 .geoedit_subform input.empty-edit {
 	color: rgb(164,164,164);
 	font-style: italic;
 }
 
-/* Résultats */
-.geoedit_subform .geocoder-results {
-	margin: 5px 0 0 0;
+
+/*
+ * Outils génériques
+ */
+
+.tool-container {
+	padding: 10px 5px 5px 5px;
 }
 
-
+.tool-container input, .tool-container select {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 0.9em;
+}
 
 /*
  * Page de paramétrage du plugin

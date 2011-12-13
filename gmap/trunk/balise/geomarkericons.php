@@ -23,6 +23,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/gmap_geoloc');
+include_spip('inc/gmap_config_utils');
 
 // Globales
 $GLOBALS['iconsAliases'] = array(); // ici, on peut avoir un seul buffer : il est valable sur une requête unique, donc pour une seule carte
@@ -50,7 +51,7 @@ function  balise_GEOMARKERICONS_stat($args, $filtres)
 	$incComplete = true;
 	$incNormal = true;
 	$incShadow = true;
-	$incSelected = true;
+	$incSelected = (gmap_lire_config('gmap_optimisations', 'gerer_selection', 'oui') === 'oui') ? true : false;
 	for ($index = 4; $index < count($args); $index++)
 	{
 		// Décodage des arguments
@@ -87,7 +88,8 @@ function  balise_GEOMARKERICONS_stat($args, $filtres)
 		$contexte['type_point'] = $type;
 	if ($id_point)
 		$contexte['id_point'] = $id_point;
-	$icon = gmap_trouve_def_file($contexte, 'gmap-marker', 'gmd', gmap_theme_folder(), $GLOBALS['iconsAliases']);
+	$branches = (gmap_lire_config('gmap_optimisations', 'gerer_branches', 'oui') === 'oui') ? true : false;
+	$icon = gmap_trouve_def_file($contexte, 'gmap-marker', 'gmd', $branches, gmap_theme_folder(), $GLOBALS['iconsAliases']);
 	
 	// Gérer le buffer
 	if ($icon['file'] && $icon['buffer'])
@@ -127,20 +129,28 @@ function  balise_GEOMARKERICONS_stat($args, $filtres)
 	}
 	
 	// Renvoyer les paramètres de la partie dynamique
-	return array($icons, $icon['name'], $objet, $id_objet, $type, $format, $prefix, $tag, $folder);
+	return gmap_geomarkericons($icons, $icon['name'], $objet, $id_objet, $type, $format, $prefix, $tag, $folder);
 }
-function balise_GEOMARKERICONS_dyn($icons, $name, $objet, $id_objet, $type, $format, $prefix, $tag, $folder)
+// Pas de partie dynamique : on calcule tout avant le cache
+
+function gmap_geomarkericons($icons, $name, $objet, $id_objet, $type, $format, $prefix, $tag, $folder)
 {
-	$env = array('icons'=>$icons, 'name'=>$name, 'prefix'=>$prefix, 'folder'=>$folder);
+	// Quel fond ?
+	$fond = null;
 	if ($format === "kml")
 	{
 		if ($tag === "long")
-			return array('modeles/icons_marker', 0, $env);
+			$fond = 'modeles/icons_marker';
 		else
-			return array('modeles/icons_short_marker', 0, $env);
+			$fond = 'modeles/icons_short_marker';
 	}
 	else if ($format === "json")
-		return array('modeles/icons_json_marker', 0, $env);
+		$fond = 'modeles/icons_json_marker';
+	if (!$fond)
+		return '';
+		
+	$env = array('icons'=>$icons, 'name'=>$name, 'prefix'=>$prefix, 'folder'=>$folder);
+	return recuperer_fond($fond, $env);
 }
 
 ?>

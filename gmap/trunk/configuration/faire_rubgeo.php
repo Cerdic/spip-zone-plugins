@@ -48,6 +48,9 @@ function configuration_faire_rubgeo_dist()
 	}
 	gmap_ecrire_config('gmap_objets_geo', 'liste', $simple_rubs);
 	
+	// Contournement ModalBox.
+	gmap_ecrire_config('gmap_objets_geo', 'hack_modalbox', ((_request('hack_modalbox') === "oui") ? "oui" : "non"));
+	
 	// Message de retour
 	$msg = "";
 	if ($msg != "")

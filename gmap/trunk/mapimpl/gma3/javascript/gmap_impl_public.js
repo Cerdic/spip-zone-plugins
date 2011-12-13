@@ -324,27 +324,6 @@ MapWrapper.prototype =
 		else
 			mapOptions.mapTypeControl = false;
 		
-		// Commandes de navigation (deprecated)
-		/*if (!isObject(params.styleNavigationCommand) || (params.styleNavigationCommand != 'none'))
-		{
-			mapOptions.navigationControl = true;
-			if (!isObject(mapOptions.navigationControlOptions))
-				mapOptions.navigationControlOptions = new Array();
-			mapOptions.navigationControlOptions.style = google.maps.ZoomControlStyle.DEFAULT;
-			if (isObject(params.styleNavigationCommand))
-			{
-				switch (params.styleNavigationCommand)
-				{
-					case 'auto' : mapOptions.navigationControlOptions.style = google.maps.NavigationControlStyle.DEFAULT; break;
-					case 'small' : mapOptions.navigationControlOptions.style = google.maps.NavigationControlStyle.SMALL; break;
-					case 'android' : mapOptions.navigationControlOptions.style = google.maps.NavigationControlStyle.ANDROID; break;
-					case 'large' : mapOptions.navigationControlOptions.style = google.maps.NavigationControlStyle.ZOOM_PAN; break;
-				}
-			}
-			mapOptions.navigationControlOptions.position = this._translateControlPosition("LT");
-			if (isObject(params.positionNavigationCommand))
-				mapOptions.navigationControlOptions.position = this._translateControlPosition(params.positionNavigationCommand);
-		}*/
 		// Commande de zoom
 		if (isObject(params.styleZoomCommand))
 		{
@@ -672,6 +651,20 @@ MapWrapper.prototype =
 		}
 		return vp;
 	},
+	getViewportBounds: function()
+	{
+		if (!isObject(this.map))
+			return false;
+		var mapBounds = this.map.getBounds();
+		var mapTopRight = mapBounds.getNorthEast();
+		var mapBottomLeft = mapBounds.getSouthWest();
+		var bounds = new Object();
+		bounds.max_lat = mapTopRight.lat();
+		bounds.max_lng = mapTopRight.lng();
+		bounds.min_lat = mapBottomLeft.lat();
+		bounds.min_lng = mapBottomLeft.lng();
+		return bounds;
+	},
 	setCenter: function(latitude, longitude)
 	{
 		if (!isObject(this.map))
@@ -949,7 +942,7 @@ MapWrapper.prototype =
 			if (!markerOptions.flat)
 				markerOptions.shadow = icon.shadow;
 			markerOptions.infoWindowAnchor = icon.infoWindowAnchor;
-			markerOptions.infoWindowAttractionSize = new google.maps.Size(icon.image.size.width*0.60, icon.image.size.height*0.60);
+			markerOptions.infoWindowAttractionSize = new google.maps.Size(icon.image.size.width*0.75, icon.image.size.height*0.75);
 		}
 		
 		// Titre	
@@ -967,6 +960,8 @@ MapWrapper.prototype =
 		// Z-order
 		if (isObject(params.zorder))
 			markerOptions.zIndex = Number(params.zorder);
+		else
+			markerOptions.zIndex = 0; // il faut l'initialiser, sinon ça marche mal
 
 		return markerOptions;
 	},
@@ -1102,15 +1097,20 @@ MapWrapper.prototype =
 	},
 	
 	// Rechercher les marqueurs qui se trouvent entre deux coordonnées
-	getMarkersInSquare: function(bounds)
+	getMarkersInSquare: function(bounds, fnValidate)
 	{
 		var arResult = new Array();
 		var sw = bounds.getSouthWest();
 		var ne = bounds.getNorthEast();
 		var latTop = ne.lat();
 		var latBottom = sw.lat();
-		var lngLeft = (sw.lng() > ne.lng()) ? ne.lng() : sw.lng();
-		var lngRight = (sw.lng() > ne.lng()) ? sw.lng() : ne.lng();
+		var lngLeft = sw.lng();
+		var lngRight = ne.lng();
+		var fnCompareLng = null;
+		if (lngRight < lngLeft)
+			fnCompareLng = function(pt) { return ((pt.lng() > lngLeft) || (pt.lng() < lngRight)); };
+		else
+			fnCompareLng = function(pt) { return ((pt.lng() > lngLeft) && (pt.lng() < lngRight)); };
 		var mapMarkerPos;
 		for (var id in this.markers)
 		{
@@ -1118,9 +1118,12 @@ MapWrapper.prototype =
 			if (!(marker instanceof google.maps.Marker))
 				continue;
 			mapMarkerPos = marker.getPosition();
-			if ((mapMarkerPos.lng() >= lngLeft) && (mapMarkerPos.lng() <= lngRight) &&
+			if (fnCompareLng(mapMarkerPos) &&
 				(mapMarkerPos.lat() >= latBottom) && (mapMarkerPos.lat() <= latTop))
-				arResult.push(marker);
+			{
+				if (!fnValidate || fnValidate(marker))
+					arResult.push(marker);
+			}
 		}
 		return (arResult.length > 0) ? arResult : null;
 	},
@@ -1221,21 +1224,24 @@ MapWrapper.prototype =
 		var htmlContents = marker.extraData.params.html;
 		var markers = null;
 		var bounds = null;
+		var current = -1;
 		if ((this.curParams.mergeInfoWindows === true) && 
 			!(MapWrapper._isEarth() && (this.map.getMapTypeId() == GoogleEarth.MAP_TYPE_ID)))
 		{
 			bounds = this._getMarkerAttraction(marker);
-			markers = this.getMarkersInSquare(bounds);
+			markers = this.getMarkersInSquare(bounds, function(marker) { return (marker.extraData.params.html && marker.extraData.params.html.length) ? true : false; });
 			if (markers && (typeof(markers) === "object") && (markers.length > 1))
 			{
 				var html = ''
 				var navigator = '';
 				for (var index = 0; index < markers.length; index++)
 				{
-					html += miw_formatContentPart(index+1, markers[index].extraData.params.html);
+					if (markers[index].extraData.id == marker.extraData.id)
+						current = index;
+					html += miw_formatContentPart(index+1, markers[index].extraData.params.html, (current == index) ? true : false);
 					navigator += miw_formatNavigatorPart(index+1, markers[index].getTitle());
 				}
-				htmlContents = miw_formatHtml(markers.length, 1, navigator, html);
+				htmlContents = miw_formatHtml(markers.length, current+1, navigator, html);
 			}
 			else
 				markers = null;
@@ -1245,7 +1251,7 @@ MapWrapper.prototype =
 			if (!markers)
 				this._createSimpleInfoWindow(htmlContents, marker);
 			else
-				this._createMergedInfoWindow(htmlContents, markers, 1, bounds);
+				this._createMergedInfoWindow(htmlContents, markers, current+1, bounds);
 		}
 		return true;
 	},

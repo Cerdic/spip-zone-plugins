@@ -38,9 +38,12 @@ function balise_GEOKML_stat($args, $filtres)
 	$params = _gmap_calculer_balise_params($args);
 	if (!isset($params['map']))
 		$params['map'] = $GLOBALS['currentMapID'];
-	return array($params);
+	return gmap_geokml($params);
 }
-function balise_GEOKML_dyn($params)
+// Pas de partie dynamique : on calcule tout avant le cache
+
+// Ajout du code qui ajoute un fichier KML sur la carte
+function gmap_geokml($params)
 {
 	$code = "";
 	$mapId = $params['map'];

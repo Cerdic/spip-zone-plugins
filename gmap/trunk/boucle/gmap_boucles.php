@@ -403,13 +403,14 @@ function boucle_GEOTEST_dist($id_boucle, &$boucles)
 		$objetDef = _gmap_find_boucle_param_objet($params, $id_boucle, &$boucles); // id_article, id_rubrique...
 		
 		// Récupérer les autres paramètres
-		$recursive = ($params['recursif'] ? TRUE : FALSE);
+		$recursive = ($params['recursif'] ? true : false);
+		$visible = ($params['visible'] ? true : false);
 	
 		// Si une carte peut-être affichée, ajouter le contenu de la boucle
 		if ($objetDef)
 		{
 			$corps .= '
-	if (gmap_est_objet_geo("'.$objetDef['objet'].'", '.$objetDef['id_objet'].', '.($recursive?'TRUE':'FALSE').'))
+	if (gmap_est_objet_geo("'.$objetDef['objet'].'", '.$objetDef['id_objet'].', '.($visible?'true':'false').', '.($recursive?'true':'false').'))
 	{
 		$boucle->numrows = TRUE;
 		$Numrows["'.$id_boucle.'"]["compteur_boucle"]++;
@@ -425,6 +426,9 @@ function boucle_GEOTEST_dist($id_boucle, &$boucles)
 		. "\n	return \$t0;";
 }
 function critere_GMAP_POINTS_LIENS_recursif_dist($idb, &$boucles, $crit)
+{
+}
+function critere_GMAP_POINTS_LIENS_visible_dist($idb, &$boucles, $crit)
 {
 }
 

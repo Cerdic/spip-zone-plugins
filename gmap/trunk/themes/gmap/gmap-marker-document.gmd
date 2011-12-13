@@ -9,7 +9,7 @@
 
 <icon state="normal" type="simple">
 	<image>images/gmap-marker-photo.png</image>
-	<size x="32" y="32" />
+	<size x="24" y="32" />
 	<anchor x="11" y="31" />
 	<offset x="12" y="15" />
 </icon>
@@ -23,7 +23,7 @@
 
 <icon state="selected" type="simple">
 	<image>images/gmap-marker-photo-high.png</image>
-	<size x="32" y="32" />
+	<size x="24" y="32" />
 	<anchor x="11" y="31" />
 	<offset x="12" y="15" />
 </icon>

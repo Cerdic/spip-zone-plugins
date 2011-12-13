@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'api_sub_version_gma2' => "Version secondaire (2.xxx)&nbsp;:",
 	'api_sub_version_gma3' => "Version secondaire (3.x)&nbsp;:",
 	'api_version' => "Version de l'API Google Maps&nbsp;:",
+	'aucun_outil' => "Aucun outil n'est disponible sur les donn&eacute;es trouv&eacute;es.",
 	
 	// B
 	'bouton_geolocaliser' => "Enregistrer",
@@ -22,14 +23,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'clef' => "Clef d'activation Google Maps&nbsp;:",
 	'clef_V3' => "Clef Google API&nbsp;:",
 	'clic_map' => "Cliquer sur la carte pour changer les coordonn&eacute;es",
-	'choix_hack_modalbox' => "D&eacute;sactiver l'&eacute;dition des documents par bo&icirc;te modale depuis un article",
+	'choix_hack_modalbox' => "D&eacute;sactiver l'&eacute;dition des documents par bo&icirc;te modale depuis un article ou une rubrique",
 	'choix_info_merge' => "Activer le regroupement des bulles d'informations",
 	'choix_keyboard' => "Commande de la carte par le clavier",
 	'choix_map_dragging' => "D&eacute;placement de la carte par glisser d&eacute;placer",
 	'choix_restrictions' => "R&egrave;gle de restriction&nbsp;:",
 	'choix_restriction_rubriques' => "Restriction &agrave; une liste de rubriques&nbsp;: seuls les objets descendants sont g&eacute;olocalisables",
-	'choix_sibling_same_parent' => "N'afficher que les objets voisins du m&ecirc;me parent",
-	'choix_siblings_limit' => "Nombre de voisins affich&eacute;s",
+	'choix_siblings_interval_temps' => "Restreindre la recherche &agrave; un interval de ",
+	'choix_siblings_limit' => "Nombre maxmimum de voisins affich&eacute;s&nbsp;:",
+	'choix_siblings_limite_vue' => "Restreindre la recherche &agrave; la zone g&eacute;ographique",
+	'choix_siblings_same_parent' => "Restreindre la recherche aux objets du m&ecirc;me parent",
 	'choix_style_control_nav' => "Commandes de navigation&nbsp;:",
 	'choix_style_control_overview' => "Panneau de situation&nbsp;:",
 	'choix_style_control_pan' => "Commande de d&eacute;filement&nbsp;:",
@@ -59,22 +62,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_import' => "Import des donn&eacute;es gis-escoitar/geomap et gis2",
 	'configuration_api' => "Param&egrave;tres sp&eacute;cifiques de l'API",
 	'configuration_api_explic' => "Ces param&egrave;tres permettent de faire fonctionner l'API, ils sont n&eacute;cessaires.",
-	'configuration_defaults' => "Apparence par d&eacute;faut des cartes",
-	'configuration_defaults_types' => "Fonds des cartes&nbsp;:",
-	'configuration_defaults_controls' => "Commandes disponibles sur les cartes&nbsp;:",
+	'configuration_defaults' => "Apparence des cartes",
+	'configuration_defaults_types' => "Fonds de carte&nbsp;:",
+	'configuration_defaults_controls' => "Contr&ocirc;le de la zone visualis&eacute;e&nbsp;:",
 	'configuration_defaults_center' => "Positionnement par d&eacute;faut&nbsp;:",
-	'configuration_edit_params' => "Param&eacute;trage de la saisie dans l'espace priv&eacute;",
-	'configuration_edit_params_access' => "Acc&egrave;s &agrave; la g&eacute;olocalisation",
-	'configuration_edit_params_siblings' => "Affichage des objets voisins lors de la saisie",
+	'configuration_edit_params' => "Param&eacute;trage des outils",
 	'configuration_gis' => "Choix de l'API cartographique",
 	'configuration_gis_explic' => "Le plugin peut se baser sur plusieurs API cartographiques, veuillez en choisir une.",
-	'configuration_info_bulle' => "Apparence des bulles d'information",
-	'configuration_rubriques' => "Objets g&eacute;olocalisables",
+	'configuration_optimisations' => "Optimisations & performances",
+	'configuration_optimisations_explic' => "Si le site contient plus d'un millier de points, le calcul des requ&ecirc;tes sur les points peut &ecirc;tre assez long. Si vous rencontrez des probl&egrave;mes de performances sur le serveur et que vous n'utilisez pas toutes les possibilit&eacute;s de GMap, vous pouvez activer ou d&eacute;sactiver ici certaines fonctionnalit&eacute;s de GMap.",
+	'configuration_rubriques' => "Acc&egrave;s &agrave; l'interface de g&eacute;olocalisation",
 	'configuration_rubriques_liste' => "Restriction &agrave; une zone du site",
 	'configuration_rubriques_types' => "Objets g&eacute;olocalisables",
 	'configuration_titre' => "Configuration du plugin GMap",
 	'configuration_markers' => "Types de marqueurs",
-	'configuration_markers_behavior' => "Comportement des marqueurs",
+	'configuration_markers_behavior' => "Bulles d'information",
 	'control_position_topleft' => "En haut &agrave; gauche",
 	'control_position_topcenter' => "En haut au centre",
 	'control_position_topright' => "En haut &agrave; droite",
@@ -88,6 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'control_position_leftcenter' => "&Agrave; gauche au centre",
 	'control_position_lefttop' => "&Agrave; gauche en haut",
 	'coord' => "Coordonn&eacute;es",
+	'copier_point' => "Copier le point",
 	'current_version_gma2' => "Version courante, r&eacute;cente mais assez stable (v=2, recommand&eacute;e)",
 	'current_version_gma3' => "Version trunk, r&eacute;guli&egrave;ment mise &agrave; jour (v=3, recommand&eacute;e)",
 	
@@ -95,6 +98,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'default_geoloc' => "Position par d&eacute;faut des cartes&nbsp;:",
 	'delete_markers' => "Supprimer tout",
 	'deplier' => "d&eacute;plier",
+	'distance_temporelle' => "&Eacute;cart",
 	
 	// E
 	'edit_types_add_type' => "Ajouter un nouveau type de marqueur",
@@ -119,7 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_clef' => "Cette clef est n&eacute;cessaire pour activer la carte (<a href=\"http://www.google.com/apis/maps/signup.html\" class=\"spip_out\">page d'enregistrement Google</a>)",
 	'explication_clef_V3' => "Cette clef n'est n&eacute;cessaire qui si vous voulez utiliser le mode de visualisation Google Earth. C'est la clef \"Google API\" qui est utilis&eacute;e pour charger des scripts avec google.load. Si vous ne la renseignez pas, la fonctionnalit&eacute; \"Google Earth\" sera seulement d&eacute;sactiv&eacute;e",
 	'explication_defaults_center' => "Cliquez sur la carte ci-dessous, ou d&eacute;placez le marqueur pour d&eacute;finir la position du centre de la carte, vous pouvez &eacute;galement agir sur le zoom.",
-	'explication_hack_modalbox' => "Cette fonction utilise ModalBox qui ne g&egrave;re pas correctement les &eacute;v&egrave;nement et ne permet pas d'initialiser la carte et les autres scripts proprement.",
+	'explication_hack_modalbox' => "Cette fonction utilise ModalBox qui ne permet pas d'initialiser la carte et les autres scripts correctement.",
 	'explication_info_merge_more' => "Quand cette option est s&eacute;lectionn&eacute;e, le contenu des bulles d'information est fusionn&eacute; si plusieurs marqueurs se chevauchent.",
 	'explication_info_width' => "Largeur max des bulles...",
 	'explication_info_width_more' => "La largeur des bulles sera calcul&eacute;e comme le minimum de la valeur max donn&eacute;e en pourcentage de la largeur de la carte et celle donn&eacute;e en pixels.",
@@ -128,13 +132,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_info_width_zero' => " (0 pour pas de limite)",
 	'explication_liste_rubriques' => "Choisissez les rubriques dans lesquelles le plugin sera disponible.<br />Tous les &eacute;l&eacute;ments SPIP situ&eacute;s sous ces rubriques (sous-rubriques, articles) seront g&eacute;olocalisables",
 	'explication_restriction' => "Pour les rubriques, les br&egrave;ves, les articles et les documents, vous pouvez limiter l'utilisation des cartes &agrave; certaines zones du site. Aucune restriction n'est applicable pour les auteurs et les mots-clefs.",
-	'explication_types_cartes_visibles' => "Choix des types de carte disponibles sur les cartes&nbsp;:",
+	'explication_types_cartes_visibles' => "Fonds utilisables&nbsp;:",
 	'explication_type_carte_defaut' => "Fond de carte par d&eacute;faut&nbsp;:",
 	
 	// F
-	'formulaire_geocoder' => "Recherche par adresse",
+	'format_distdate_dh' => "%day%j %hour%h",
+	'format_distdate_hm' => "%hour%h %minute%m",
+	'format_distdate_ms' => "%minute%m %second%s",
+	'format_distdate_s' => "%second%s",
 	'formulaire_geolocaliser' => "G&eacute;olocalisation",
-	'formulaire_voisins' => "Copie des coordonn&eacute;es des voisins",
+	'formulaire_outils' => "Recherche&nbsp;:",
 	
 	// G
 	'geocoder_bouton' => "Rechercher",
@@ -143,7 +150,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'geocoder_hint_explic' => "Tapez ici un nom de lieu (ville, pays, lieu-dit)",
 	'geocoder_label' => "Rechercher par lieu&nbsp;:",
 	'geocoder_name' => "Lieu",
-	'geocoder_no_results' => "Aucun r&eacute;sultats",
+	'geocoder_no_results' => "Aucun r&eacute;sultat",
+	'geolocalisation_documents' => "G&eacute;olocalisation des documents",
+	'gerer_branches' => "Sp&eacute;cialiser les icones et le contenu des info-bulles selon une branche",
+	'gerer_branches_explic' => "GMap cherche les fichiers de d&eacute;finition des icones ou de contenu des info-bulles en testant la pr&eacute;sence de suffixes &rsquo;=id_rubrique&rsquo; ou &rsquo;-id_rubrique&rsquo; (comme SPIP le fait pour les squelettes). Pour une requ&ecirc;te contenant de nombreux points, ce m&eacute;canisme alourdit le calcul du fichier. Si vous ne comptez pas utiliser des icones ou des contenus diff&eacute;rents selon les rubriques, il est inutile de l&rsquo;activer. Pour un grand nombre de points, la d&eacute;sactivation de cette fonctionalit&eacute; peut am&eacute;liorer le temps de calcul sur le serveur.",
+	'gerer_selection' => "G&eacute;rer l&rsquo;&eacute;tat s&eacute;lectionn&eacute; sur les marqueurs",
+	'gerer_selection_explic' => "GMap s&eacute;lectionne un marqueur quand on appelle la fonction <em>gmap_bounceMarker</em>. Si vous n&rsquo;appelez pas cette fonction les icones de l&rsquo;&eacute;tat s&eacute;lectionn&eacute; sont inutiles. En d&eacute;sactivant cette fonctionnalit&eacute;, vous r&eacute;duirez l&eacute;g&egrave;rement la quantit&eacute; d'informations transmises sur le r&eacute;seau, il n'y a pas d'influence notable sur le travail du serveur.",
 	'gis_api_google_maps_2' => "Google Maps API version 2",
 	'gis_api_google_maps_2_desc' => "L'API Google Maps API version 2 est maintenant abandonn&eacute;e au profit de la version 3.",
 	'gis_api_google_maps_3' => "Google Maps API version 3",
@@ -151,6 +163,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'gis_api_none_desc' => "Veuillez s&eacute;lectionner une API...",
 	
 	// H
+	'heure' => "Heure",
 	'html_titre_defaut' => "Informations&nbsp;:",
 	
 	// I
@@ -175,25 +188,31 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_configuration_gmap_rubriques' => "Seuls les &eacute;l&eacute;ments descendants des rubriques suivantes sont g&eacute;olocalisables&nbsp;:",
 	'info_configuration_gmap_site' => "Tout le site est g&eacute;olocalisable",
 	'info_configuration_gmap_ui' => "Cette page regroupe les param&egrave;tres relatifs &agrave; l'interface utilisateur de la partie publique. Le contenu peut diff&eacute;rer selon l'API cartographique choisie.",
+	'info_configuration_gmap_prive' => "Le param&eacute;trage de la partie priv&eacute;e permet de d&eacute;finir l'apparence de l'interface de g&eacute;olocalisation.",
 	'info_configuration_help' => ">&nbsp;Aide sur le param&eacute;trage",
 	'info_configuration_html_plan' => "Plan de l'aide",
 	'invalid_form_data' => "Donn&eacute;es de formulaire incoh&eacute;rentes",
 	
+	// J
+	'jour' => "Jour",
+	
 	// L
 	'latitude' => "Latitude",
 	'latest_version_gma2' => "Toute derni&egrave;re version (v=2.x, peut &ecirc;tre instable)",
+	'lier_point' => "Relier &agrave; ce point",
 	'longitude' => "Longitude",
 	'local_version_gma2' => "Version locale (version courante au 25/10/2008 : 2.176)",
 	
 	// M
-	'marker_type' => "Type",
-	'miseajour' => "Mise &agrave; jour",
 	'marker_def_centre' => "centre de la carte",
 	'marker_def_defaut' => "position de l'objet",
 	'marker_def_document_prise' => "lieu de la prise de vue",
 	'marker_def_document_visee' => "lieu vis&eacute;",
 	'marker_def_article_etape' => "point d'&eacute;tape",
+	'marker_type' => "Type",
 	'marqueur_modifie_manuellement' => "La position a chang&eacute;, vous devez valider pour mettre &agrave; jour la carte",
+	'miseajour' => "Mise &agrave; jour",
+	'mois' => "Mois",
 	
 	// N
 	'non' => 'non',
@@ -201,12 +220,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'onglet_config_credits' => "&nbsp;Cr&eacute;dits",
 	'onglet_config_help' => "&nbsp;Aide",
-	'onglet_config_interface' => "&nbsp;Interface utilisateur",
-	'onglet_config_imports' => "&nbsp;Imports/exports",
+	'onglet_config_interface' => "&nbsp;Cartographie",
+	'onglet_config_imports' => "&nbsp;Outils",
 	'onglet_config_principale' => "&nbsp;Syst&egrave;me",
+	'onglet_config_prive' => "&nbsp;G&eacute;olocalisation",
 	'other_version_gma2' => "Version sp&eacute;cifique",
 	'other_version_gma3' => "Version sp&eacute;cifique",
 	'oui' => 'oui',
+	'outil_geocoder_nom' => "G&eacute;olocalisation d'une adresse",
+	'outil_siblings_nom' => "Coordonn&eacute;es des voisins",
 	
 	// P
 	'pages_prive' => "Partie priv&eacute;e",
@@ -216,6 +238,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'sbd_btn_close' => "Ferme",
 	'sbd_btn_open' => "Ouvrir",
+	'semaine' => "Semaine",
 	'stable_version_gma2' => "Derni&egrave;re version r&eacute;put&eacute;e stable (v=2.s)",
 	'style_control_none' => "non",
 	'style_control_default' => "oui",
@@ -256,6 +279,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// U
 	'update_markers' => "Mettre &agrave; jour",
+	'utilise_param_interface' => "M&ecirc;me param&eacute;trage que la partie publique",
 	
 	// Z
 	'zoom' => 'Zoom'

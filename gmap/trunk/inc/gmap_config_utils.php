@@ -17,9 +17,6 @@ include_spip('inc/gmap_db_utils');
 // Obtenir la liste des APIs
 function gmap_apis_connues()
 {
-	$apis = array(
-		'gma2' => array( 'name' => _T('gmap:gis_api_google_maps_2'), 'explic' => _T('gmap:gis_api_google_maps_2_desc')),
-		'gma3' => array( 'name' => _T('gmap:gis_api_google_maps_3'), 'explic' => _T('gmap:gis_api_google_maps_3_desc')) );
 	return pipeline('gmap_implementations', $apis);
 }
 

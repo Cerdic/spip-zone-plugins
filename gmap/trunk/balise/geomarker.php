@@ -44,9 +44,12 @@ function balise_GEOMARKER_stat($args, $filtres)
 	$params = _gmap_calculer_balise_params($args, true);
 	if (!isset($params['map']))
 		$params['map'] = $GLOBALS['currentMapID'];
-	return array($params);
+	return gmap_geomarker($params);
 }
-function balise_GEOMARKER_dyn($params)
+// Pas de partie dynamique : on calcule tout avant le cache
+
+// Ajout du code qui créé un marqueur sur une carte
+function gmap_geomarker($params)
 {
 	$code = "";
 	$mapId = $params['map'];

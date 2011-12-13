@@ -1,7 +1,7 @@
 <plugin>
 	<nom>G&#233;olocalisation et cartographie</nom>
 	<icon>images/logo-gmap.png</icon>
-	<version>0.2.0</version>
+	<version>0.2.1</version>
 	<version_base>1.0.0</version_base>
 	<etat>test</etat>
 	<auteur>F. ALBERT</auteur>
@@ -72,6 +72,18 @@ _ Dans l&apos;espace public, vous pouvez ins&#233;rer des cartes dans les squele
 		<nom>affichage_final</nom>
 		<action>affichage_final</action>
 		<inclure>gmap_pipeline.php</inclure>
+	</pipeline>
+	
+	<!-- Pipelines internes GMap -->
+	<pipeline>
+		<nom>gmap_implementations</nom>
+		<action>declare_implementation</action>
+		<inclure>gmap_pipeline_local.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>gmap_outils_geoloc</nom>
+		<action>declare_outil_geoloc</action>
+		<inclure>gmap_pipeline_local.php</inclure>
 	</pipeline>
 		
 	<necessite id="SPIP" version="[2.0.9;2.1.99]" />

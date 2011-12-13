@@ -15,23 +15,23 @@ include_spip('inc/presentation');
 
 // Définition d'un sous-bloc dépliable
 // Sous-bloc d'un formulaire, inséré avec un fieldset...
-function gmap_sous_bloc_depliable($nom, $titre, $contenu, $mapId)
+function gmap_sous_bloc_depliable($nom, $titre, $contenu, $mapId, $extraClass = '')
 {
 	$out = '';
 	
 	// Début du wrapper global, qui prend l'état
-	$out .= '<div id="'.$nom.'" class="sbd_main sbd_replie">' . "\n";
+	$out .= '<div id="'.$nom.'" class="sbd_main sbd_replie'.(($extraClass && strlen($extraClass)) ? ' '.$extraClass : '' ).'">' . "\n";
 	
 	// Titre et bouton dépliant
 	$out .= '<div class="sbd_closed">' . "\n";
-	$out .= '	<div class="sbd-btn-bloc"><a id="sbd_btn_'.$nom.'_open" class="sbd-btn sbd-btn-down" title="'._T('gmap:sbd_btn_open').'" href="#"></a>'.$titre.'</div>' . "\n";
+	$out .= '	<div class="sbd-btn-bloc sbd-titre"><a id="sbd_btn_'.$nom.'_open" class="sbd-btn sbd-btn-down" title="'._T('gmap:sbd_btn_open').'" href="#"></a><span class="titre-sous-bloc">'.$titre.'</span></div>' . "\n";
 	$out .= '</div>' . "\n";
 	
 	// Contenu
 	$out .= '<div class="sbd_opened">' . "\n";
 	$out .= '	<div id="formulaire_'.$nom.'" method="post" action="#">'."\n";
 	$out .= '		<fieldset>' . "\n";
-	$out .= '			<legend><a id="sbd_btn_'.$nom.'_close" class="sbd-btn sbd-btn-up" title="'._T('gmap:sbd_btn_close').'" href="#"></a>'.$titre.'</legend>' . "\n";
+	$out .= '			<legend class="sbd-titre"><a id="sbd_btn_'.$nom.'_close" class="sbd-btn sbd-btn-up" title="'._T('gmap:sbd_btn_close').'" href="#"></a></legend>' . "\n";
 	$out .= $contenu;
 	$out .= '		</fieldset>' . "\n";
 	$out .= '	</div>'."\n";
@@ -43,41 +43,8 @@ function gmap_sous_bloc_depliable($nom, $titre, $contenu, $mapId)
 	// Scripts pour l'ouverture/fermeture
 	$out .= '<script type="text/javascript">'."\n".'//<![CDATA['."\n";
 	$out .= '
-// Activation des listeners
-function sbd_close'.$nom.'()
-{
-	jQuery("#'.$nom.'").each(function(){
-		jQuery(this).removeClass("sbd_deplie");
-		jQuery(this).addClass("sbd_replie");
-		setUIState("ui_state_'.$mapId.'", "sb_'.$nom.'", 0);
-	});
-}
-function sbd_open'.$nom.'()
-{
-	jQuery("#'.$nom.'").each(function(){
-		jQuery(this).removeClass("sbd_replie");
-		jQuery(this).addClass("sbd_deplie");
-		setUIState("ui_state_'.$mapId.'", "sb_'.$nom.'", 1);
-	});
-}
-jQuery(document).ready(function()
-{
-	if (open = getUIState("ui_state_'.$mapId.'", "sb_'.$nom.'", 0))
-		sbd_open'.$nom.'();
-	else
-		sbd_close'.$nom.'();
-	jQuery("#sbd_btn_'.$nom.'_open").click(function(event)
-	{
-		sbd_open'.$nom.'();
-		event.preventDefault();
-		return false;
-	});
-	jQuery("#sbd_btn_'.$nom.'_close").click(function(event)
-	{
-		sbd_close'.$nom.'();
-		event.preventDefault();
-		return false;
-	});
+jQuery(document).ready(function() {
+	SousBlocDepliant.bloc("'.$mapId.'", "'.$nom.'").initialize();
 });
 ' . "\n";
 	$out .= '//]]>'."\n".'</script>'."\n";
@@ -172,7 +139,7 @@ function gmap_formulaire_submit($action, $corps, $logo, $titre, $clic='', $atts_
 
 	// Ajouter le bouton
 	if (!$atts_i) 
-		$atts_i = ' class="fondo" style="float: '.$spip_lang_right.'"';
+		$atts_i = ' style="float: '.$spip_lang_right.'"';
 	if (!$clic)  $clic =  _T('bouton_valider');
 		$submit = '<input type="submit" value="'.$clic.'" '.$atts_i.' />';
 	$wrapper .= "<div><span" . $atts_span . ">" . $submit . "</span></div>";

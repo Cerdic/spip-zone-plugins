@@ -19,14 +19,21 @@ function configuration_faire_map_defaults_dist()
 {
 	$result = "";
 
-	// Lire l'API utilisée
+	// Calcul de la clef de la configuration
 	$api = gmap_lire_config('gmap_api', 'api', 'gma3');
-	$apiConfigKey = 'gmap_'.$api.'_interface';
+	$profile = _request('map_defaults_profile');
+	if (!isset($profile) || ($toInterface === 'oui'))
+		$profile = 'interface';
+	$apiConfigKey = 'gmap_'.$api.'_'.$profile;
+	
+	// Sélection du profil
+	$toInterface = (_request('map_defaults_auto') === 'oui') ? 'oui' : 'non';
+	gmap_ecrire_config($apiConfigKey, 'redirect_to_interface', $toInterface);
 	
 	// Charger ce qui est spécifique à l'implémentation
 	$faire_map_defaults = charger_fonction("faire_map_defaults", "mapimpl/".$api."/prive", true);
 	if ($faire_map_defaults)
-		$msg = $faire_map_defaults();
+		$msg = $faire_map_defaults($profile);
 	
 	// Position par défaut
 	gmap_ecrire_config($apiConfigKey, 'default_latitude', _request('map_center_latitude'));

@@ -74,27 +74,30 @@ function  balise_GEOPOPUP_stat($args, $filtres)
 		$contexte['type_point'] = $type;
 	if ($id_point)
 		$contexte['id_point'] = $id_point;
-	$fond = gmap_trouve_def_file($contexte, 'gmap-info', 'html', 'modeles');
+	$branches = (gmap_lire_config('gmap_optimisations', 'gerer_branches', 'oui') === 'oui') ? true : false;
+	$fond = gmap_trouve_def_file($contexte, 'gmap-info', 'html', $branches, 'modeles');
 	
 	// Renvoyer vers la partie dynamique
-	return array($fond['spip-path'], $objet, $id_objet, $type, $objet_parent, $id_objet_parent, $contenu_seul, $json);
+	//return array($fond['spip-path'], $objet, $id_objet, $type, $objet_parent, $id_objet_parent, $contenu_seul, $json);
+	return gmap_geopopup($fond['spip-path'], $objet, $id_objet, $type, $objet_parent, $id_objet_parent, $contenu_seul, $json);
 }
-function balise_GEOPOPUP_dyn($fond, $objet, $id_objet, $type, $objet_parent, $id_objet_parent, $contenu_seul, $json)
+// Pas de partie dynamique : on calcule tout avant le cache
+
+// Récupération du contenu de la bulle
+function gmap_geopopup($fond, $objet, $id_objet, $type, $objet_parent, $id_objet_parent, $contenu_seul, $json)
 {
 	$env = array('objet'=>$objet, 'id_objet'=>$id_objet, 'type_point'=>$type, 'id_'.$objet=>$id_objet, 'objet_parent'=>$objet_parent, 'id_objet_parent'=>$id_objet_parent);
+	$return = recuperer_fond($fond, $env);
 	if ($contenu_seul || $json)
 	{
-		$return = recuperer_fond($fond, $env);
 		if ($contenu_seul)
 			$return = html_body($return);
 		if ($json)
 			$return = texte_json($return);
 		else
 			$return = protege_html($return);
-		return $return;
 	}
-	else
-		return array($fond, 0, $env);
+	return $return;
 }
 
 ?>

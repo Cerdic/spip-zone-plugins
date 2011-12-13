@@ -9,15 +9,20 @@
  *
  */
 
-// Il est nécessaire d'interdire le compactage des JavaScripts dans la partie privée
-// parce que l'API Google n'est pas compactée alors que d'autres fichiers le sont et 
-// se retrouvent donc avant elle dans le fichier final !
-// À vérifier car le plugin a évolué de telle sorte que toutes les opérations ont
-// été déportées dans des jQuery(document).ready(), le fait que l'API Google arrive après
-// ne pose peut-être plus de problème.
-define('_INTERDIRE_COMPACTE_HEAD_ECRIRE',true);
-
-// Ajouter un pipeline pour récupérer l'info exif/iptc
+// Pipeline gmap_implementations :
+// Lister les implémentations disponibles
+// Data = array(
+// 	'<code-de-l-implementation>' => array(
+//		'name'=> texte, nom de l'implémentation, affiché dans la liste de choix de l'implémentation,
+//		'explic'=> texte, ligne de description affichée dans la page de configuration))
 $GLOBALS['spip_pipeline']['gmap_implementations'] .= '';
+
+// Pipeline gmap_implementations :
+// Lister et récupérer le contenu des outils disponibles pour la géolocalisation
+// Data = array(
+// 	'<code-de-l-outil>' => array(
+//		'name'=> texte, nom de l'outil, affiché dans la liste de choix de l'outil,
+//		'content'=> html, contenu de la div qui fait l'interface utilisateur (sans le tableau de résultats)))
+$GLOBALS['spip_pipeline']['gmap_outils_geoloc'] .= '';
 
 ?>
