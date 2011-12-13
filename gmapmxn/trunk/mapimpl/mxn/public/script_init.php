@@ -53,16 +53,21 @@ function mapimpl_mxn_public_script_init_dist()
 		$out .= '<script id="mxn_script" type="text/javascript" src="'.$lib_mxn.'?('.$provider.$modules.')"></script>'."\n";
 		
 	// Patch locaux : !!!! VÉRIFIER AVEC LES NOUVELLES VERSIONS DE MAPSTRACTION !!!!
+	$patch = false;
 	if ($provider == 'openlayers')
 	{
 		$patch = _DIR_PLUGIN_GMAPMXN.'mapimpl/mxn/javascript/patch.mxn.openlayers.core.js';
-		$out .= '<script type="text/javascript" src="'.$patch.'"></script>'."\n";
+		$out .= '<script type="text/javascript" id="patch_mxn_ol" src="'.$patch.'"></script>'."\n"; // un id pour éviter le compactage
+		$patch = true;
 	}
 	if ($provider == 'ovi')
 	{
 		$patch = _DIR_PLUGIN_GMAPMXN.'mapimpl/mxn/javascript/patch.mxn.ovi.core.js';
-		$out .= '<script type="text/javascript" src="'.$patch.'"></script>'."\n";
+		$out .= '<script type="text/javascript" id="patch_mxn_ovi" src="'.$patch.'"></script>'."\n"; // un id pour éviter le compactage
+		$patch = true;
 	}
+	if ($patch && ($GLOBALS['meta']['version_installee'] < 18566))
+		define('_INTERDIRE_COMPACTE_HEAD', true); // parce que le fait qu'un id bloque le compactage n'est codé qu'en 2.1.11
 		
 	// Ajouter les scripts spécifiques
 	$local_script = find_in_path('mapimpl/mxn/javascript/gmap_impl_public.js');

@@ -481,6 +481,20 @@ MapWrapper.prototype =
 		}
 		return vp;
 	},
+	getViewportBounds: function()
+	{
+		if (!isObject(this.map))
+			return false;
+		var mapBounds = this.map.getBounds();
+		var mapTopRight = mapBounds.getNorthEast();
+		var mapBottomLeft = mapBounds.getSouthWest();
+		var bounds = new Object();
+		bounds.max_lat = mapTopRight.lat;
+		bounds.max_lng = mapTopRight.lon;
+		bounds.min_lat = mapBottomLeft.lat;
+		bounds.min_lng = mapBottomLeft.lon;
+		return bounds;
+	},
 	setCenter: function(latitude, longitude)
 	{
 		if (!isObject(this.map) || !this._isDivOK())
