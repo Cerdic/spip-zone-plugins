@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteurs' => 'autores',
 
 	// B
-	'bouton_configurer_acces' => 'Configuration des acc&#232;s .htaccess', # NEW
+	'bouton_configurer_acces' => 'Configuration des accès .htaccess', # NEW
 	'bouton_creer_la_zone' => 'Crear a nova zona',
 
 	// C
@@ -43,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_auteur' => 'Non hai ningún autor na zona',
 	'info_aucune_zone' => 'Ningunha zona',
 	'info_auteurs_lies_zone' => 'Os autores que teñen acceso a esta zona',
-	'info_lien_action_proteger' => 'Prot&eacute;ger l\'acc&egrave;s &agrave; cette rubrique.', # NEW
+	'info_lien_action_proteger' => 'Protéger l\'accès à cette rubrique.', # NEW
 	'info_nb_zones' => '@nb@ zones', # NEW
 	'info_page' => 'Esta páxina permite xestionar as zonas de acceso restrinxido do seu web',
 	'info_retirer_auteurs' => 'Retirar a todos os autores',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_rubrique_dans_zones' => 'Cette rubrique fait partie des zones :', # NEW
 
 	// L
-	'label_creer_htaccess' => 'Acc&egrave;s aux document joints par leur URL', # NEW
+	'label_creer_htaccess' => 'Accès aux document joints par leur URL', # NEW
 	'label_creer_htaccess_non' => 'autoriser la lecture', # NEW
 	'label_creer_htaccess_oui' => 'interdire la lecture', # NEW
 
@@ -78,8 +78,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_creer_associer_zone' => 'Créer et associer une zone', # NEW
 	'titre' => 'Título',
 	'titre_ajouter_zone' => 'Reconectar a zona',
-	'titre_boite_protegee_non' => 'Acc&egrave;s non prot&eacute;g&eacute;', # NEW
-	'titre_boite_protegee_oui' => 'Acc&egrave;s prot&eacute;g&eacute;', # NEW
+	'titre_boite_protegee_non' => 'Accès non protégé', # NEW
+	'titre_boite_protegee_oui' => 'Accès protégé', # NEW
 	'titre_cadre_modifier_zone' => 'Modificar unha zona',
 	'titre_page_config' => 'Configuration des accès', # NEW
 	'titre_table' => 'Todas as zonas de acceso',

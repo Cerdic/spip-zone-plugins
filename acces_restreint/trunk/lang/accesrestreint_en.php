@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteurs' => 'authors',
 
 	// B
-	'bouton_configurer_acces' => 'Configuration des acc&#232;s .htaccess', # NEW
+	'bouton_configurer_acces' => 'Configuration des accès .htaccess', # NEW
 	'bouton_creer_la_zone' => 'Create new area',
 
 	// C
@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_menu_config' => 'Restricted access',
 	'icone_supprimer_zone' => 'Delete this area',
-	'info_1_zone' => '1 zone', # NEW
+	'info_1_zone' => '1 zone',
 	'info_acces_restreint' => 'Access to this page is restricted. Please log in to continue',
 	'info_ajouter_auteur' => 'Add this author',
 	'info_ajouter_auteurs' => 'Add all authors',
@@ -53,9 +53,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_rubrique_dans_zones' => 'This section is in areas:',
 
 	// L
-	'label_creer_htaccess' => 'Acc&egrave;s aux document joints par leur URL', # NEW
-	'label_creer_htaccess_non' => 'autoriser la lecture', # NEW
-	'label_creer_htaccess_oui' => 'interdire la lecture', # NEW
+	'label_creer_htaccess' => 'Accès aux document joints par leur URL', # NEW
+	'label_creer_htaccess_non' => 'allow read',
+	'label_creer_htaccess_oui' => 'forbid the reading',
 
 	// M
 	'modifier_zone' => 'Edit the area',
@@ -74,7 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'selectionner_une_zone' => 'Select a restricted area',
 
 	// T
-	'texte_ajouter_zone' => 'Ajouter une zone', # NEW
+	'texte_ajouter_zone' => 'Add a zone',
 	'texte_creer_associer_zone' => 'Créer et associer une zone', # NEW
 	'titre' => 'Title',
 	'titre_ajouter_zone' => 'Add to a restricted area',
@@ -83,7 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_cadre_modifier_zone' => 'Edit an area',
 	'titre_page_config' => 'Configure access rights',
 	'titre_table' => 'All restricted areas',
-	'titre_zone_acces' => 'Zone d\'accès restreint', # NEW
+	'titre_zone_acces' => 'Restricted access zone',
 	'titre_zones_acces' => 'Restricted areas',
 	'toutes' => 'All',
 

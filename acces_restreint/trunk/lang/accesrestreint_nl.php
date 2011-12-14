@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_droits_auteur' => 'Me de rechten van toegang tot deze zone toevoegen',
-	'aucune_zone' => 'Geen enkel gebied',
+	'aucune_zone' => 'Aucune zone', # NEW
 	'auteurs' => 'auteurs',
 
 	// B
