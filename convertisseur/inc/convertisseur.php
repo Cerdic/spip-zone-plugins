@@ -52,7 +52,7 @@ function nettoyer_format($t) {
   $conv_functions_pre['MediaWiki_SPIP'] = array("convertisseur_add_ln","mediawiki_doQuotes");
   $conv_formats['MediaWiki_SPIP'] = array(
       "pattern" => array( 
-        'model'  => "{{([^}}]*)}}",   // FIXME si template ds template       
+        'model'  => "\{\{([^\}\}]*)\}\}",   // FIXME si template ds template       
          // applies anywhere        
         'ib' => "<i><b>([^<]*)</b></i>",            
         'b' => "<b>([^<]*)</b>",  
@@ -91,7 +91,7 @@ function nettoyer_format($t) {
         // TODO: Table (http://www.mediawiki.org/wiki/Help:Tables)
         ),
       "replacement" => array(
-        'model'  => "",
+        'model'  => "<MODELE_WIKI:\\1>",
         'ib' => "<ib>\\1</ib>", 
         'b' => "{{\\1}}",   
         'i' => "{\\1}", 
