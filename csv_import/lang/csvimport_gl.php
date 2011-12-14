@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreurs_ajout_base' => 'Houbo @nb@ erros logo de engadilos na base.',
-	'etape' => '(&Eacute;tape @step@ sur 3)', # NEW
+	'etape' => '(Étape @step@ sur 3)', # NEW
 	'export_classique' => 'CSV clásico (,)',
 	'export_excel' => 'CSV para Excel (;)',
 	'export_format' => 'Formato do ficheiro:',
