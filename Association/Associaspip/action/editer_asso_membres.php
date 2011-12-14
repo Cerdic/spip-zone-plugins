@@ -18,6 +18,7 @@ function action_editer_asso_membres() {
 	$id_auteur = $securiser_action();
 
 	include_spip('base/association');
+	include_spip('inc/modifier');
 
 	$categorie = _request('categorie');
 	$validite = _request('validite');
@@ -40,8 +41,9 @@ function action_editer_asso_membres() {
 	if ($GLOBALS['association_metas']['civilite']=="on") $modifs["sexe"] = $sexe;
 	if ($GLOBALS['association_metas']['prenom']=="on") $modifs["prenom"] = $prenom;
 	if ($GLOBALS['association_metas']['id_asso']=="on") $modifs["id_asso"] = $id_asso;
-	
-	sql_updateq('spip_asso_membres', $modifs, "id_auteur=$id_auteur");
+
+	/* on passe par modifier_contenu pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere */
+	modifier_contenu('asso_membre', $id_auteur, '', $modifs);
 
 	return (array($id_auteur,''));
 }
