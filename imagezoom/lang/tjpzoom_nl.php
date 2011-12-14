@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => 'Deze bladzijde maakt het mogelijk om de stijl van het vergrootglas te configureren. Een verpersoonlijkte stijl kan verklaard worden; <a href= " http://plugins.spip.net/?page=article&amp;id_article=48 ">  zien de on-line documentatie</a>. Webmestres SPIP', # MODIF
+	'descriptif' => 'Deze bladzijde maakt het mogelijk om de stijl van het vergrootglas te configureren. Een verpersoonlijkte stijl kan verklaard worden; <a href= " http://plugins.spip.net/?page=article&id_article=48 ">  zien de on-line documentatie</a>. Webmestres SPIP', # MODIF
 
 	// E
 	'example' => 'Grafisch resultaat',

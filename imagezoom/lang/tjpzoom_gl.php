@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => 'Esta páxina permite configurar o estilo da lupa. Pódese indicar un estilo personalizado; vexa <a href="http://plugins.spip.net/?page=article&amp;id_article=48">a documentación en liña</a>.', # MODIF
+	'descriptif' => 'Esta páxina permite configurar o estilo da lupa. Pódese indicar un estilo personalizado; vexa <a href="http://plugins.spip.net/?page=article&id_article=48">a documentación en liña</a>.', # MODIF
 
 	// E
 	'example' => 'Resultado gráfico',
