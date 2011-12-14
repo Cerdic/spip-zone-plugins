@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -22,9 +22,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_modifier' => 'Modifier la commande :', # NEW
 	'commande_montant' => 'Amount',
 	'commande_nouvelle' => 'Nouvelle commande', # NEW
-	'commande_numero' => 'Commande n&deg;&nbsp;', # NEW
+	'commande_numero' => 'Commande n° ', # NEW
 	'commande_reference' => 'Reference',
-	'commande_reference_numero' => 'Référence n&deg;&nbsp;', # NEW
+	'commande_reference_numero' => 'Référence n° ', # NEW
 	'commande_statut' => 'Status',
 	'confirmer_supprimer_commande' => 'Can you confirm the deletion of this order?',
 	'contact_label' => 'Contact :', # NEW
