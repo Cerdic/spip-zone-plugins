@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_option_thread_un' => 'Enfilade de commentaires (en thread) à un niveau', # NEW
 	'cfg_permalien_label' => 'Apparence du lien permanent vers le commentaire', # NEW
 	'cfg_permalien_legende' => 'Permalien', # NEW
-	'cfg_type_label' => 'Présentation du&nbsp;fil de discussion', # NEW
+	'cfg_type_label' => 'Présentation du fil de discussion', # NEW
 	'cfg_type_legende' => 'Liste ou thread ?', # NEW
 	'comment' => 'comentario',
 	'comments' => 'comentarios',
