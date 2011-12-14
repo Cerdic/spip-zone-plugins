@@ -31,8 +31,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte_et_icones_page' => 'Affichage dans la page',
 
 	// T
-	'texte_redirection_adresses_secondaires' => 'Les Alias sont des URL alternatives qui permettent aussi d\'acc&egrave;der à votre site.
-		Ces adresses seront redirig&eacute;es automatiquement vers l\'adresse principale. Indiquez une adresse par ligne',
+	'texte_redirection_adresses_secondaires' => 'Les Alias sont des URL alternatives qui permettent aussi d\'accèder à votre site.
+		Ces adresses seront redirigées automatiquement vers l\'adresse principale. Indiquez une adresse par ligne',
 	'titre_config_langage' => 'Configurer la langue',
 	'titre_configurer_preferences' => 'Configurer vos préférences',
 	'titre_identite_site' => 'Identité du site',

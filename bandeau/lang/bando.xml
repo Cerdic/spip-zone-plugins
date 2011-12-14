@@ -1,4 +1,4 @@
-<traduction module="bando" gestionnaire="salvatore" reference="fr">
+<traduction module="bando" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/bandeau/lang/" reference="fr">
 	<langue code="ast">
 		<traducteur nom="xuacu" />
 	</langue>
