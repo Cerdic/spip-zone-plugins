@@ -6,6 +6,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 include_spip('inc/actions');
 include_spip('inc/distant');
 include_spip('inc/presentation');
+if(version_compare(PHP_VERSION, '5.0.0', '>='))	
+	include_spip('outils/maj_auto_php5'); else { function cs_svn17($dir) { return false; } }
 
 define('_MAJ_SVN_FILE', 'file:///home/svn/repository/spip-zone/');
 define('_MAJ_SVN_DEBUT', 'svn://zone.spip.org/spip-zone/');
@@ -288,21 +290,7 @@ function version_svn_courante2($dir) {
 		} else $b = basename($dir);
 	} else $b = '';
 	// version 1.7 de Subversion
-	if(!class_exists('PDO')) return false;
-/*	try { 
-		$db = new PDO('sqlite:' . $dir2);
-	//	foreach ($db->query('SELECT * FROM SQLite_master WHERE type=\'table\';') as $row) print_r($row);
-		if($res = $db->query('SELECT root FROM REPOSITORY;')) {
-			foreach($res as $row) { $url = $row[0]; break; }
-			if($res = $db->query("SELECT repos_path FROM NODES WHERE local_relpath='$b';"))
-				foreach($res as $row) { $url .= '/' . $row[0]; break; }
-			if($res = $db->query("SELECT MAX(changed_revision) FROM NODES WHERE local_relpath LIKE '$b%';"))
-				foreach ($res as $row) return array($row[0], $url);
-		}
-	} catch(PDOException $e) {
-		return false;
-	} */
-	return false;
+	return cs_svn17($dir2);
 }
 
 ?>
