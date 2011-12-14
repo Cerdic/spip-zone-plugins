@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -149,7 +149,7 @@ _ {{1.}} &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; :[[%style_p%]] komutları
 _ {{2.}} &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt;, &lt;blockquote&gt; et les listes (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[%style_h%]] komutları
  
 Önemli : 2. stili değiştirirseniz SPIP\'in bu komutlara bağlı stillerini kaybedersiniz.</q1>', # MODIF
-	'class_spip:nom' => 'SPIP ve k&#305;sayollar&#305;…',
+	'class_spip:nom' => 'SPIP ve kısayolları…',
 	'code_css' => 'CSS',
 	'code_fonctions' => 'İşlevler',
 	'code_jq' => 'jQuery',
@@ -321,11 +321,11 @@ Dikkat : forumlarda, dilekçelerde, paylaşılan akılarda ve benzerlerinde java
 
 	// G
 	'glossaire:aide' => 'Özetsiz metin : <b>@_CS_SANS_GLOSSAIRE@</b>',
-	'glossaire:description' => '@puce@ Gestion d’un glossaire interne li&eacute; &agrave; un ou plusieurs groupes de mots-cl&eacute;s. Inscrivez ici le nom des groupes en  les s&eacute;parant par les deux points &laquo;&nbsp;:&nbsp;&raquo;. En laissant vide la case qui  suit (ou en tapant "Glossaire"), c’est le groupe "Glossaire" qui sera utilis&eacute;.[[%glossaire_groupes%]]
+	'glossaire:description' => '@puce@ Gestion d’un glossaire interne lié à un ou plusieurs groupes de mots-clés. Inscrivez ici le nom des groupes en  les séparant par les deux points « : ». En laissant vide la case qui  suit (ou en tapant "Glossaire"), c’est le groupe "Glossaire" qui sera utilisé.[[%glossaire_groupes%]]
 
-@puce@ Pour chaque mot, vous avez la possibilit&eacute; de choisir le nombre maximal de liens cr&eacute;&eacute;s dans vos textes. Toute valeur nulle ou n&eacute;gative implique que tous les mots reconnus seront trait&eacute;s. [[%glossaire_limite% par mot-cl&eacute;]]
+@puce@ Pour chaque mot, vous avez la possibilité de choisir le nombre maximal de liens créés dans vos textes. Toute valeur nulle ou négative implique que tous les mots reconnus seront traités. [[%glossaire_limite% par mot-clé]]
 
-@puce@ Deux solutions vous sont offertes pour g&eacute;n&eacute;rer la petite fen&ecirc;tre automatique qui appara&icirc;t lors du survol de la souris. [[%glossaire_js%]]', # MODIF
+@puce@ Deux solutions vous sont offertes pour générer la petite fenêtre automatique qui apparaît lors du survol de la souris. [[%glossaire_js%]]', # MODIF
 	'glossaire:nom' => 'İç endeks',
 	'glossaire_css' => 'CSS çözümü',
 	'glossaire_erreur' => 'Le mot «@mot1@» rend indétectable le mot «@mot2@»', # NEW
@@ -338,9 +338,9 @@ Dikkat : forumlarda, dilekçelerde, paylaşılan akılarda ve benzerlerinde java
 	// H
 	'help' => '{{Bu sayfa yalnız site sorumlularının erişimine açıktır.}} «{{İsviçre Çakısı}}» eklentisinin getirdiği farklı bir çok ek işlevin düzenlenmesine izin verir .',
 	'help2' => 'Yerel sürüm : @version@',
-	'help3' => 'Belgelendirme ba&#287;lant&#305;lar&#305; :<br/>• [&#304;svi&ccedil;re&nbsp;&Ccedil;ak&#305;s&#305;->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Yeniden ba&#351;lat&#305;lmas&#305; :
-_ • [Gizli gere&ccedil;lerin|Bu sayfan&#305;n ilk g&ouml;r&uuml;n&uuml;m&uuml;ne d&ouml;n&uuml;lmesi->@hide@]
-_ • [T&uuml;m eklentinin|Eklentini ilk durumuna d&ouml;n&uuml;lmesi->@reset@]@install@
+	'help3' => 'Belgelendirme bağlantıları :<br/>• [İsviçre Çakısı->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Yeniden başlatılması :
+_ • [Gizli gereçlerin|Bu sayfanın ilk görünümüne dönülmesi->@hide@]
+_ • [Tüm eklentinin|Eklentini ilk durumuna dönülmesi->@reset@]@install@
 </p>', # MODIF
 	'horloge:description' => 'Geliştirilmekte olan gereç. Size JavaScript bir saat sunuyor. Komut: <code>#HORLOGE{format,utc,id}</code>. Model : <code><horloge></code>', # MODIF
 	'horloge:nom' => 'Saat',
@@ -354,13 +354,13 @@ Bu logoyu tanımlamak için « Konfigürasyon » düğmesine tıklayarak « S
 	'insert_head:nom' => '#INSERT_HEAD komutu',
 	'insertions:description' => 'DiKKAT : geliştirilmekte olan gereç !! [[%insertions%]]',
 	'insertions:nom' => 'Otomatik düzeltmeler',
-	'introduction:description' => '&amp;#304;skeletlere yerle&amp;#351;tirilecek bu komut genelde ana sayfaya veya ba&amp;#351;l&amp;#305;klarda makalelerin veya k&amp;#305;sa haberlerin bir &amp;ouml;zetini olu&amp;#351;turmaya yarar.</p>
-<p>{{Dikkat}} : Bu i&amp;#351;levi aktive etmeden &amp;ouml;nce iskeletinizde veya eklentilerinizde hi&amp;ccedil;bir {balise_INTRODUCTION()} fonksiyonunun  olmad&amp;#305;&amp;#287;&amp;#305;ndan emin olun, aksi halde derleme hatas&amp;#305; olu&amp;#351;acakt&amp;#305;r.</p>
-@puce@ #INTRODUCTION komutu taraf&amp;#305;ndan g&amp;ouml;nderilen metnin uzunlu&amp;#287;unu (varsay&amp;#305;lan de&amp;#287;ere g&amp;ouml;re y&amp;uuml;zde olarak) belirtebilirsiniz. Bo&amp;#351; bir de&amp;#287;er veya 100 de&amp;#287;eri metni de&amp;#287;i&amp;#351;tirmeyecektir ve &amp;#351;u varsay&amp;#305;lan de&amp;#287;erleri kullanacakt&amp;#305;r : makaleler i&amp;ccedil;in 500 karakter, k&amp;#305;sa haberler i&amp;ccedil;in 300karakter, forumlar veya ba&amp;#351;l&amp;#305;klar i&amp;ccedil;in 600 karakter.
-[[%lgr_introduction%&amp;nbsp;%]]
-@puce@ E&amp;#287;er metin &amp;ccedil;ok uzunsa, #INTRODUCTION komutuna eklenen varsay&amp;#305;lan &amp;uuml;&amp;ccedil; nokta &amp;#351;&amp;ouml;yledir : <html>&amp;laquo;&amp;amp;nbsp;(…)&amp;raquo;</html>. Burada, metnin kesildi&amp;#287;ini ve devam&amp;#305; oldu&amp;#287;unu siz kendi &amp;ouml;zel karakter zincirinizi kullanarak okuyucular&amp;#305;n&amp;#305;za belirtebilirsiniz.
+	'introduction:description' => 'İskeletlere yerleştirilecek bu komut genelde ana sayfaya veya başlıklarda makalelerin veya kısa haberlerin bir &ouml;zetini oluşturmaya yarar.</p>
+<p>{{Dikkat}} : Bu işlevi aktive etmeden &ouml;nce iskeletinizde veya eklentilerinizde hi&ccedil;bir {balise_INTRODUCTION()} fonksiyonunun  olmadığından emin olun, aksi halde derleme hatası oluşacaktır.</p>
+@puce@ #INTRODUCTION komutu tarafından g&ouml;nderilen metnin uzunluğunu (varsayılan değere g&ouml;re y&uuml;zde olarak) belirtebilirsiniz. Boş bir değer veya 100 değeri metni değiştirmeyecektir ve şu varsayılan değerleri kullanacaktır : makaleler i&ccedil;in 500 karakter, kısa haberler i&ccedil;in 300karakter, forumlar veya başlıklar i&ccedil;in 600 karakter.
+[[%lgr_introduction%&nbsp;%]]
+@puce@ Eğer metin &ccedil;ok uzunsa, #INTRODUCTION komutuna eklenen varsayılan &uuml;&ccedil; nokta ş&ouml;yledir : <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Burada, metnin kesildiğini ve devamı olduğunu siz kendi &ouml;zel karakter zincirinizi kullanarak okuyucularınıza belirtebilirsiniz.
 [[%suite_introduction%]]
-@puce@ #INTRODUCTION komutu bir makaleyi &amp;ouml;zetlemek i&amp;ccedil;in kulan&amp;#305;lm&amp;#305;&amp;#351;sa &amp;#304;svi&amp;ccedil;re &amp;Ccedil;ak&amp;#305;s&amp;#305; &amp;uuml;&amp;ccedil; noktalar&amp;#305;n &amp;uuml;zerine bir hipermetin olu&amp;#351;turarak okuru orijinal metne y&amp;ouml;nlendirir. &amp;Ouml;rne&amp;#287;in : &amp;laquo;Makalenin devam&amp;#305; i&amp;ccedil;in…&amp;raquo;
+@puce@ #INTRODUCTION komutu bir makaleyi &ouml;zetlemek i&ccedil;in kulanılmışsa İsvi&ccedil;re &Ccedil;akısı &uuml;&ccedil; noktaların &uuml;zerine bir hipermetin oluşturarak okuru orijinal metne y&ouml;nlendirir. &Ouml;rneğin : &laquo;Makalenin devamı i&ccedil;in…&raquo;
 [[%lien_introduction%]]
 ', # MODIF
 	'introduction:nom' => '#INTRODUCTION komutu',
@@ -483,19 +483,19 @@ Dikkat, bu gereç çalışmak için {Round Corners} {jQuery} eklentisine gereksi
 	'label:webmestres' => 'Site yöneticilerinin listesi :',
 	'liens_en_clair:description' => 'Met à votre disposition le filtre : \'liens_en_clair\'. Votre texte contient probablement des liens hypertexte qui ne sont pas visibles lors d\'une impression. Ce filtre ajoute entre crochets la destination de chaque lien cliquable (liens externes ou mails). Attention : en mode impression (parametre \'cs=print\' ou \'page=print\' dans l\'url de la page), cette fonctionnalité est appliquée automatiquement.', # NEW
 	'liens_en_clair:nom' => 'Açıkta bırakılmış bağlar',
-	'liens_orphelins:description' => 'Bu gerecin 2 i&#351;levi vard&#305;r:
+	'liens_orphelins:description' => 'Bu gerecin 2 işlevi vardır:
 
-@puce@ {{Do&#287;ru ba&#287;lar}}.
+@puce@ {{Doğru bağlar}}.
 
-SPIP, frans&#305;z gramerine ba&#287;l&#305; olarak soru ve &uuml;nlem i&#351;aretlerinden &ouml;nce bir bo&#351;luk b&#305;rak&#305;r. &#304;&#351;te size metinlerinizde bulunan URL\'lerdeki soru i&#351;aretlerini koruyan bir gere&ccedil;.[[%liens_interrogation%]]
+SPIP, fransız gramerine bağlı olarak soru ve ünlem işaretlerinden önce bir boşluk bırakır. İşte size metinlerinizde bulunan URL\'lerdeki soru işaretlerini koruyan bir gereç.[[%liens_interrogation%]]
 
-@puce@ {{Yetim ba&#287;lar}}.
+@puce@ {{Yetim bağlar}}.
 
-Kullan&#305;c&#305;lar taraf&#305;ndan metin olarak b&#305;rak&#305;lm&#305;&#351; \'t&#305;klanamayan\' t&uuml;m URL\'leri sistemli bi&ccedil;imde SPIP format&#305;nda hipermetin ba&#287;lar&#305;yla de&#287;i&#351;tirir (&ouml;zellikle forumlarda). &Ouml;rne&#287;in : {<html>www.spip.net</html>} [->www.spip.net] ile de&#287;i&#351;tirilir.
+Kullanıcılar tarafından metin olarak bırakılmış \'tıklanamayan\' tüm URL\'leri sistemli biçimde SPIP formatında hipermetin bağlarıyla değiştirir (özellikle forumlarda). Örneğin : {<html>www.spip.net</html>} [->www.spip.net] ile değiştirilir.
 
-De&#287;i&#351;tirme tipini siz se&ccedil;ebilirsiniz :
-_ • {Temel} : {<html>http://spip.net</html>} (t&uuml;m  protokoller) veya  {<html>www.spip.net</html>} de&#287;i&#351;tirilir.
-_ • {Yayg&#305;n} : &#351;u tipteki ba&#287;lar da de&#287;i&#351;tirilir {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} veya {<html>news:mesnews</html>}.
+Değiştirme tipini siz seçebilirsiniz :
+_ • {Temel} : {<html>http://spip.net</html>} (tüm  protokoller) veya  {<html>www.spip.net</html>} değiştirilir.
+_ • {Yaygın} : şu tipteki bağlar da değiştirilir {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} veya {<html>news:mesnews</html>}.
 [[%liens_orphelins%]]', # MODIF
 	'liens_orphelins:description1' => '[[Si l\'URL rencontrée dépasse les %long_url% caractères, alors SPIP la réduit à %coupe_url% caractères]].', # NEW
 	'liens_orphelins:nom' => 'Güzel URL\'ler',
@@ -667,13 +667,13 @@ Burada yasaklanacak serileri @_CS_ASTER@ aralarında bir boşluk bırakarak list
 
 @puce@ Si vous avez plusieurs sites en mutualisation, vous pouvez spécifier ici la valeur par défaut prise en compte par tous les sites locaux (SPIP 2.0 mini).[[%duree_cache_mutu% heures]]', # MODIF
 	'spip_cache:description1' => '@puce@ SPIP, varsayılan durumda incelemeyi hızlandırmak için tüm kamusal sayfaları ve önbellekteki yerlerini tekrar hesaplar. Önbelleği geçici olarak kapatmak sitenin gelişimine yardımcı olabilir. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]', # MODIF
-	'spip_cache:description2' => '@puce@ SPIP &ouml;nbelle&#287;inin i&#351;leyi&#351;ini y&ouml;nlendirmek i&ccedil;in 4 se&ccedil;enek vard&#305;r : <q1>
-_ • {Normal kullan&#305;m} : SPIP, varsay&#305;lan durumda incelemeyi h&#305;zland&#305;rmak i&ccedil;in t&uuml;m kamusal sayfalar&#305; ve &ouml;nbellekteki yerlerini tekrar hesaplar. Belirli bir s&uuml;re ge&ccedil;ti&#287;inde &ouml;nbellek yeniden saklan&#305;r ve kaydedidlir..
-_ • {Kal&#305;c&#305; &ouml;nbellek} : &ouml;nbelle&#287;i ge&ccedil;ersiz k&#305;lan s&uuml;re iptal edilir..
-_ • {&Ouml;nbellek yok} : &Ouml;nbelle&#287;i ge&ccedil;ici olarak kapatmak sitenin geli&#351;imine yard&#305;mc&#305; olabilir. Diske hi&ccedil;bir &#351;ey kaydedilmez.
-_ • {&Ouml;nbelle&#287;in kontrol&uuml;} : bu se&ccedil;enek bir &ouml;ncekiyle ayn&#305;d&#305;r ama t&uuml;m sonu&ccedil;lar ileride kontrol edilebilmeleri i&ccedil;in diske yaz&#305;l&#305;r. </q1>[[%radio_desactive_cache4%]]', # MODIF
+	'spip_cache:description2' => '@puce@ SPIP önbelleğinin işleyişini yönlendirmek için 4 seçenek vardır : <q1>
+_ • {Normal kullanım} : SPIP, varsayılan durumda incelemeyi hızlandırmak için tüm kamusal sayfaları ve önbellekteki yerlerini tekrar hesaplar. Belirli bir süre geçtiğinde önbellek yeniden saklanır ve kaydedidlir..
+_ • {Kalıcı önbellek} : önbelleği geçersiz kılan süre iptal edilir..
+_ • {Önbellek yok} : Önbelleği geçici olarak kapatmak sitenin gelişimine yardımcı olabilir. Diske hiçbir şey kaydedilmez.
+_ • {Önbelleğin kontrolü} : bu seçenek bir öncekiyle aynıdır ama tüm sonuçlar ileride kontrol edilebilmeleri için diske yazılır. </q1>[[%radio_desactive_cache4%]]', # MODIF
 	'spip_cache:description3' => '@puce@ L\'extension « Compresseur » présente dans SPIP permet de compacter les différents éléments CSS et Javascript de vos pages et de les placer dans un cache statique. Cela accélère l\'affichage du site, et limite le nombre d\'appels sur le serveur et la taille des fichiers à obtenir.', # NEW
-	'spip_cache:nom' => 'SPIP ve &ouml;nbellek…',
+	'spip_cache:nom' => 'SPIP ve önbellek…',
 	'spip_ecran:description' => 'Détermine la largeur d\'écran imposée à tous en partie privée. Un écran étroit présentera deux colonnes et un écran large en présentera trois. Le réglage par défaut laisse l\'utilisateur choisir, son choix étant stocké dans un cookie.[[%spip_ecran%]]', # NEW
 	'spip_ecran:nom' => 'Largeur d\'écran', # NEW
 	'stat_auteurs' => 'Stat durumundaki yazarlar',
@@ -780,10 +780,10 @@ _ Örnek : <code>article.php3?id_article=123</code>
 
 @puce@ Eğer yukarıda {page} formatını kullanıyorsanız veya istenen nesne tanınmıyorsa o zaman {{çağrı skripti}}ni seçmeniz mümkündür. Varsayılan değer olarak SPIP {spip.php}\'yi seçer ama {index.php}  (format örneği : <code>/index.php?article123</code>) veya boş bir değer de (format : <code>/?article123</code>) iş görür. Diğer dğerler için SPIP\'in kök dizininde karşı düşen dosyayı oluşturmanız gerekir : {index.php}.
 [[%spip_script%]]', # MODIF
-	'type_urls:description1' => '@puce@ URL tabanl&#305; bir format kullan&#305;yorsan&#305;z &laquo;propres&raquo;  ({propres}, {propres2}, {libres}, {arborescentes} veya {propres_qs}) &#304;svi&ccedil;re &Ccedil;ak&#305;s&#305; &#351;unu yapabilir :
-<q1>• URL\'nin tamamen {{k&uuml;&ccedil;&uuml;k harf olmas&#305;}}.</q1>[[%urls_minuscules%]]
-<q1>• Sistematik olarak {{nesne id\'sinin}} URL\'ye eklenmesi (&ouml;n ek, son ek vb.).
-_ (&ouml;rnekler : <code>/Mon-titre-d-article,457</code> veya <code>/457-Mon-titre-d-article</code>)</q1>', # MODIF
+	'type_urls:description1' => '@puce@ URL tabanlı bir format kullanıyorsanız «propres»  ({propres}, {propres2}, {libres}, {arborescentes} veya {propres_qs}) İsviçre Çakısı şunu yapabilir :
+<q1>• URL\'nin tamamen {{küçük harf olması}}.</q1>[[%urls_minuscules%]]
+<q1>• Sistematik olarak {{nesne id\'sinin}} URL\'ye eklenmesi (ön ek, son ek vb.).
+_ (örnekler : <code>/Mon-titre-d-article,457</code> veya <code>/457-Mon-titre-d-article</code>)</q1>', # MODIF
 	'type_urls:nom' => 'URL\'lerin formatları',
 	'typo_exposants:description' => '{{Fransızca metinler}} : güncel kısaltmaların tipografik görünümünü gerekli elemanları üs\'e koyarak  (böylece, {<acronym>Mme</acronym>} şu hale gelir {M<sup>me</sup>}) ve sıkça yapılan hataları düzelterek ({<acronym>2ème</acronym>} veya {<acronym>2me</acronym>} şu hale gelir {2<sup>e</sup>}) geliştirir,.
 _ Burada elde edilen kısaltmalar 2002 yılında yayınlanan Paris Ulusal Basımevi 2002 standartlarına uygundur. 

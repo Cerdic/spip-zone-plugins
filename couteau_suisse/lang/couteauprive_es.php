@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -179,15 +179,15 @@ Nota: al modificar este segundo estilo, también pierdes los estilos estándar d
 	'corbeille_objets_vider' => 'Suprimir los objetos seleccionados',
 	'corbeille_vider' => 'Vaciar la papelera:',
 	'couleurs:aide' => 'Asignar colores: <b>[coul]texto[/coul]</b>@fond@ en <b>color</b>= @liste@',
-	'couleurs:description' => 'Permite aplicar facilmente des colores a todos los textos del sitio (art&iacute;culos, breves, t&iacute;tulos, foro, …) utilizando balizas de atajo.
+	'couleurs:description' => 'Permite aplicar facilmente des colores a todos los textos del sitio (artículos, breves, títulos, foro, …) utilizando balizas de atajo.
 
-Dos ejemplos id&eacute;nticos para cambiar el color del texto:@_CS_EXEMPLE_COULEURS2@
+Dos ejemplos idénticos para cambiar el color del texto:@_CS_EXEMPLE_COULEURS2@
 
-Lo mismo para cambiar el fondo, si la opci&oacute;n de abajo lo permite:@_CS_EXEMPLE_COULEURS3@
+Lo mismo para cambiar el fondo, si la opción de abajo lo permite:@_CS_EXEMPLE_COULEURS3@
 
 [[%couleurs_fonds%]]
 [[%set_couleurs%]][[->%couleurs_perso%]]
-@_CS_ASTER@El formato de estas balizas personalizadas debe listar colores existentes o definir parejas &laquo;baliza=color&raquo;, todo ello separado por comas. Ejemplos: &laquo;gris, rouge&raquo;, &laquo;suave=jaune, fuerte=rouge&raquo;, &laquo;bajo=#99CC11, alto=brown&raquo; o incluso &laquo;gris=#DDDDCC, rouge=#EE3300&raquo;. Para el primer y el &uacute;ltimo ejemplo, las balizas autorizadas son: <code>[gris]</code> y <code>[rouge]</code> (<code>[fond gris]</code> y <code>[fond rouge]</code> si se permiten los fondos).', # MODIF
+@_CS_ASTER@El formato de estas balizas personalizadas debe listar colores existentes o definir parejas «baliza=color», todo ello separado por comas. Ejemplos: «gris, rouge», «suave=jaune, fuerte=rouge», «bajo=#99CC11, alto=brown» o incluso «gris=#DDDDCC, rouge=#EE3300». Para el primer y el último ejemplo, las balizas autorizadas son: <code>[gris]</code> y <code>[rouge]</code> (<code>[fond gris]</code> y <code>[fond rouge]</code> si se permiten los fondos).', # MODIF
 	'couleurs:nom' => 'Todo en colores',
 	'couleurs_fonds' => ', <b>[fond coul]texto[/coul]</b>, <b>[bg coul]texto[/coul]</b>',
 	'cs_comportement:description' => '@puce@ {{Logs.}} Obtener abundante información sobre el funcionamiento de la Navaja Suiza en los archivos {spip.log} que se pueden encontrar en el directorio: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
@@ -359,8 +359,8 @@ Los bloques multi se muestran siempre en el idioma solicitado por el visitante.'
 	// H
 	'help' => '{{Esta página sólo es accesible para los responsables del sitio.}} Permite la configuración de las diversas funciones suplementarias aportadas por el plugin «{{La Navaja Suiza}}».',
 	'help2' => 'Version local: @version@',
-	'help3' => '<p>Enlaces a documentaci&oacute;n:<br/>• [La&nbsp;Navaja&nbsp;Suisza->http://www.spip-contrib.net/La-navaja-suiza]@contribs@</p><p>Reinicializaciones:
-_ • [De las herramientas ocultas|Volver al aspecto inicial de esta p&aacute;gina->@hide@]
+	'help3' => '<p>Enlaces a documentación:<br/>• [La Navaja Suisza->http://www.spip-contrib.net/La-navaja-suiza]@contribs@</p><p>Reinicializaciones:
+_ • [De las herramientas ocultas|Volver al aspecto inicial de esta página->@hide@]
 _ • [De todo el plugin|Volver al estado inicial del plugin->@reset@]@install@
 </p>', # MODIF
 	'horloge:description' => 'Outil en cours de développement. Vous offre une horloge JavaScript . Balise : <code>#HORLOGE</code>. Modèle : <code><horloge></code>
@@ -377,13 +377,13 @@ Para definir el logo, entra en la página de «Configuración de sitio» pulsand
 	'insert_head:nom' => 'Baliza #INSERT_HEAD',
 	'insertions:description' => 'ATENCIÓN : ¡¡herramienta en fase de desarrollo!! [[%insertions%]]',
 	'insertions:nom' => 'Correcciones automáticas',
-	'introduction:description' => 'Esta baliza situada en los esqueletos se usa, en general, en portada o en las secciones para producir un resumen de los art&amp;iacute;culos, las breves, etc.</p>
-<p>{{Atenci&amp;oacute;n}} : Antes de activar esta funci&amp;oacute;n, comprueba bien que no exista ninguna otra funci&amp;oacute;n {balise_INTRODUCTION()} en tu esqueleto o en tus plugins, porque entonces la sobrecarga producir&amp;aacute; un error de compilaci&amp;oacute;n.</p>
-@puce@ Puedes precisar (en porcentaje respecto al valor utilizado por omisi&amp;oacute;n) la longitud del texto devuelto por la baliza #INTRODUCTION. Un valor nulo o igual a 100 no modifica el aspecto de la introducci&amp;oacute;n utilizando en este caso los siguientes valores por omisi&amp;oacute;n: 500 caracteres para los art&amp;iacute;culos, 300 para las breves y 600 para los foros o las secciones.
-[[%lgr_introduction%&amp;nbsp;%]]
-@puce@ Por omisi&amp;oacute;n, los puntos de seguir a&amp;ntilde;adidos al resultado de la baliza #INTRODUCTION si el texto es m&amp;aacute;s largo son: <html>&amp;laquo;&amp;amp;nbsp;(…)&amp;raquo;</html>. Puedes precisar aqu&amp;iacute; tu propia cadena de caracteres para indicar al lector que el texto truncado contin&amp;uacute;a.
+	'introduction:description' => 'Esta baliza situada en los esqueletos se usa, en general, en portada o en las secciones para producir un resumen de los art&iacute;culos, las breves, etc.</p>
+<p>{{Atenci&oacute;n}} : Antes de activar esta funci&oacute;n, comprueba bien que no exista ninguna otra funci&oacute;n {balise_INTRODUCTION()} en tu esqueleto o en tus plugins, porque entonces la sobrecarga producir&aacute; un error de compilaci&oacute;n.</p>
+@puce@ Puedes precisar (en porcentaje respecto al valor utilizado por omisi&oacute;n) la longitud del texto devuelto por la baliza #INTRODUCTION. Un valor nulo o igual a 100 no modifica el aspecto de la introducci&oacute;n utilizando en este caso los siguientes valores por omisi&oacute;n: 500 caracteres para los art&iacute;culos, 300 para las breves y 600 para los foros o las secciones.
+[[%lgr_introduction%&nbsp;%]]
+@puce@ Por omisi&oacute;n, los puntos de seguir a&ntilde;adidos al resultado de la baliza #INTRODUCTION si el texto es m&aacute;s largo son: <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Puedes precisar aqu&iacute; tu propia cadena de caracteres para indicar al lector que el texto truncado contin&uacute;a.
 [[%suite_introduction%]]
-@puce@ Si se usa la baliza #INTRODUCTION para resumir un art&amp;iacute;culo, la Navaja Suiza puede fabricar un enlace de hipertexto en los puntos de seguir definidos anteriormente para dirigir al lector hacia el texto original. Por ejemplo: &amp;laquo;Leer el resto del art&amp;iacute;culo…&amp;raquo;
+@puce@ Si se usa la baliza #INTRODUCTION para resumir un art&iacute;culo, la Navaja Suiza puede fabricar un enlace de hipertexto en los puntos de seguir definidos anteriormente para dirigir al lector hacia el texto original. Por ejemplo: &laquo;Leer el resto del art&iacute;culo…&raquo;
 [[%lien_introduction%]]
 ', # MODIF
 	'introduction:nom' => 'Baliza #INTRODUCTION',
@@ -510,15 +510,15 @@ Atención, esta herramienta necesita el plugin {jQuery} : {Round Corners} para f
 
 @puce@ {{Enlaces correctos}}.
 
-SPIP habitualmente inserta un espacio antes de los signos de interrogaci&oacute;n o de exclamaci&oacute;n, seg&uacute;n la ortograf&iacute;a francesa. Esta herramienta protege el signo de interrogaci&oacute;n en las URLs de tus textos.[[%liens_interrogation%]]
+SPIP habitualmente inserta un espacio antes de los signos de interrogación o de exclamación, según la ortografía francesa. Esta herramienta protege el signo de interrogación en las URLs de tus textos.[[%liens_interrogation%]]
 
-@puce@ {{Enlaces hu&eacute;rfanos}}.
+@puce@ {{Enlaces huérfanos}}.
 
-Reemplaza autom&aacute;ticamente todas las URLs escritas como texto por los usuarios (sobre todo en los foros) y que, por lo tanto, no son pulsables, por enlaces de hipertexto en formato SPIP. Por ejemplo: {<html>www.spip.net</html>} se reemplaza por [->www.spip.net].
+Reemplaza automáticamente todas las URLs escritas como texto por los usuarios (sobre todo en los foros) y que, por lo tanto, no son pulsables, por enlaces de hipertexto en formato SPIP. Por ejemplo: {<html>www.spip.net</html>} se reemplaza por [->www.spip.net].
 
 Puedes elegir el tipo de reemplazo:
-_ • {B&aacute;sico}: se reemplazan los enlaces del tipo {<html>http://spip.net</html>} (todos los protocolos) o {<html>www.spip.net</html>}.
-_ • {Extendido}: se reemplazan adem&aacute;s los enlaces del tipo {<html>yo@spip.net</html>}, {<html>mailto:micorreo</html>} o {<html>news:misnews</html>}.
+_ • {Básico}: se reemplazan los enlaces del tipo {<html>http://spip.net</html>} (todos los protocolos) o {<html>www.spip.net</html>}.
+_ • {Extendido}: se reemplazan además los enlaces del tipo {<html>yo@spip.net</html>}, {<html>mailto:micorreo</html>} o {<html>news:misnews</html>}.
 [[%liens_orphelins%]]', # MODIF
 	'liens_orphelins:description1' => '[[Si l\'URL rencontrée dépasse les %long_url% caractères, alors SPIP la réduit à %coupe_url% caractères]].', # NEW
 	'liens_orphelins:nom' => 'Buenas URLs',
@@ -690,13 +690,13 @@ Lista aquí las secuencias prohibidas@_CS_ASTER@ separándolas por espacios. [[%
 
 @puce@ Si tienes varios sitios mutualizados, puedes especificar aquí el valor por omisión que se toma para todos los sitios locales (SPIP 2.0 mini).[[%duree_cache_mutu% horas]]', # MODIF
 	'spip_cache:description1' => '@puce@ Por omisión, SPIP calcula todas las páginas públicas y las sitúa en la caché para acelerar la consulta. Desactivar temporalmente la caché puede ayudar durante el desarrollo del sitio. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]', # MODIF
-	'spip_cache:description2' => '@puce@ Cuatro opciones para orientar el funcionamiento de la cach&eacute; de SPIP: <q1>
-_ • {Uso normal}: SPIP calcula todas las p&aacute;ginas p&uacute;blicas y las pone en la cach&eacute; para acelerar la consulta. Tras un cierto intervalo, la cach&eacute; se recalcula y se guarda.
-_ • {Cach&eacute; permanente}: los intervalos de invalidaci&oacute;n de la cach&eacute; se ignoran.
-_ • {Sin cach&eacute;}: desactivar temporalmente la cach&eacute; puede ayudar mientras se desarrolla el sitio. Aqu&iacute;, no se guarda nada en el disco.
-_ • {Control de la cach&eacute;}: opci&oacute;n id&eacute;ntica a la anterior, con escritura en el disco de todos los resultados para poder controlarlos si hace falta.</q1>[[%radio_desactive_cache4%]]', # MODIF
+	'spip_cache:description2' => '@puce@ Cuatro opciones para orientar el funcionamiento de la caché de SPIP: <q1>
+_ • {Uso normal}: SPIP calcula todas las páginas públicas y las pone en la caché para acelerar la consulta. Tras un cierto intervalo, la caché se recalcula y se guarda.
+_ • {Caché permanente}: los intervalos de invalidación de la caché se ignoran.
+_ • {Sin caché}: desactivar temporalmente la caché puede ayudar mientras se desarrolla el sitio. Aquí, no se guarda nada en el disco.
+_ • {Control de la caché}: opción idéntica a la anterior, con escritura en el disco de todos los resultados para poder controlarlos si hace falta.</q1>[[%radio_desactive_cache4%]]', # MODIF
 	'spip_cache:description3' => '@puce@ L\'extension « Compresseur » présente dans SPIP permet de compacter les différents éléments CSS et Javascript de vos pages et de les placer dans un cache statique. Cela accélère l\'affichage du site, et limite le nombre d\'appels sur le serveur et la taille des fichiers à obtenir.', # NEW
-	'spip_cache:nom' => 'SPIP y la cach&eacute;…',
+	'spip_cache:nom' => 'SPIP y la caché…',
 	'spip_ecran:description' => 'Détermine la largeur d\'écran imposée à tous en partie privée. Un écran étroit présentera deux colonnes et un écran large en présentera trois. Le réglage par défaut laisse l\'utilisateur choisir, son choix étant stocké dans un cookie.[[%spip_ecran%]]', # NEW
 	'spip_ecran:nom' => 'Largeur d\'écran', # NEW
 	'stat_auteurs' => 'Estado de los autores',
@@ -720,7 +720,7 @@ Por ejemplo, en un bucle sobre (ARTICLES), #TITRE_SECTEUR devolverá el título 
 
 Igualmente está soportada la sintaxis <html>#TITRE_XXX{yy}</html>. Ejemplo: <html>#TITRE_ARTICLE{10}</html> devolverá el título del artículo #10.[[%titres_etendus%]]', # MODIF
 	'titre_parent:nom' => 'Balizas #TITRE_PARENT/OBJET',
-	'titre_tests' => 'La Navaja Suiza - P&aacute;gina de pruebas…',
+	'titre_tests' => 'La Navaja Suiza - Página de pruebas…',
 	'titres_typo:description' => 'Transforme tous les intertitres <html>« {{{Mon intertitre}}} »</html> en image typographique paramétrable.[[%i_taille% pt]][[%i_couleur%]][[%i_police%
 
 Polices disponibles : @_CS_FONTS@]][[%i_largeur% px]][[%i_hauteur% pt]][[%i_padding% px]][[%i_align%]]
@@ -808,9 +808,9 @@ _ Ejemplo: <code>article.php3?id_article=123</code>
 
 @puce@ Si utilizas el formato {page} de más arriba o si no se reconoce el objeto solicitado, te será posible elegir {{el script de llamada}} a SPIP. Por omisión, SPIP usa {spip.php}; pero {index.php} (ejemplo de formato: <code>/index.php?article123</code>) o un valor nulo (formato: <code>/?article123</code>) también funcionan. Para cualquier otro valor, te será absolutamente necesario crear el fichero correspondiente en la raíz de SPIP, a imagen del que ya existe: {index.php}.
 [[%spip_script%]]', # MODIF
-	'type_urls:description1' => '@puce@ Si utilizas un formato basado en URLs &laquo;propias&raquo; ({propres}, {propres2}, {libres}, {arborescentes} o {propres_qs}), la Navaja Suiza puede:
-<q1>• Asegurar que la URL producida est&eacute; totalmente {{en min&uacute;sculas}}.
-_ • Hacer que se a&ntilde;ada sistem&aacute;ticamente {{la id del objeto}} a su URL (como sufijo o prefijo).
+	'type_urls:description1' => '@puce@ Si utilizas un formato basado en URLs «propias» ({propres}, {propres2}, {libres}, {arborescentes} o {propres_qs}), la Navaja Suiza puede:
+<q1>• Asegurar que la URL producida esté totalmente {{en minúsculas}}.
+_ • Hacer que se añada sistemáticamente {{la id del objeto}} a su URL (como sufijo o prefijo).
 _ (ejemplos: <code>/Mi-titulo-de-articulo,457</code> o <code>/457-Mi-titulo-de-articulo</code>)</q1>[[%urls_minuscules%]][[->%urls_avec_id%]][[->%urls_avec_id2%]]', # MODIF
 	'type_urls:nom' => 'Formato de las URLs',
 	'typo_exposants:description' => '{{Textos en francés}}: mejora la presentación tipográfica de las abreviaturas corrientes, poniendo como superíndices los elementos necesarios (así, {<acronym>Mme</acronym>} se transforma en {M<sup>me</sup>}) y corrigiendo los errores comunes ({<acronym>2ème</acronym>} o  {<acronym>2me</acronym>}, por ejemplo, se transforman en {2<sup>e</sup>}, única abreviatura correcta).

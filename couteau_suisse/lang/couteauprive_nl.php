@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -105,8 +105,8 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 - {{De revisies van het Zwitserse Mes}} : een kader op deze bladzijde van configuratie, laatste wijzigingen aangebracht aan de code van plugin  ([Source->@_CS_RSS_SOURCE@]).
 - {{De artikelen aan het SPIP formaat}} : een aanvullend opvouwbaar kader voor uw artikelen ten einde de code bron te kennen die door hun auteurs wordt gebruikt.
 - {{De auteurs in stat}} : een kader aanvullend op [de bladzijde van de auteurs->./?exec=auteurs] wijst op de  10 laatst aangeslotenen en de niet bevestigde inschrijvingen. Enkel de beheerders zien deze informatie.
-- {{De SPIP webmasters}} : een opvouwbare kader op het [auteur\'s pagina->./?exec=auteurs] duit de beheerders aan die ook SPIP webmasters zijn. Allen door beheerders zichtbaar. Was u zelfs webmaster, zie ook het werktuig  &laquo;&nbsp;[.->webmestres]&nbsp;&raquo;.
-- {{"Proper" URLs }}: een opvouwbare kader voor elk onderwerp van inhoud (artikel, rubriek, auteur,…) aangevend URL eigen verenigd alsmede van hen alias eventueel. Het werktuig &#132;&nbsp; [. - >type_urls] &nbsp;&#147; laat u een fijne configuratie van URLs van uw plaats toe.- {{Sorteren van auteurs}} : een opvouwbare kader voor de artikels met meer dan een auteur en die eenvoudig de mogelijkheid geeft ze van verschillende maniers te sorteren.', # MODIF
+- {{De SPIP webmasters}} : een opvouwbare kader op het [auteur\'s pagina->./?exec=auteurs] duit de beheerders aan die ook SPIP webmasters zijn. Allen door beheerders zichtbaar. Was u zelfs webmaster, zie ook het werktuig  « [.->webmestres] ».
+- {{"Proper" URLs }}: een opvouwbare kader voor elk onderwerp van inhoud (artikel, rubriek, auteur,…) aangevend URL eigen verenigd alsmede van hen alias eventueel. Het werktuig   [. - >type_urls]   laat u een fijne configuratie van URLs van uw plaats toe.- {{Sorteren van auteurs}} : een opvouwbare kader voor de artikels met meer dan een auteur en die eenvoudig de mogelijkheid geeft ze van verschillende maniers te sorteren.', # MODIF
 	'boites_privees:nom' => 'Particuliere dozen',
 	'bp_tri_auteurs' => 'Sorteren van auteurs',
 	'bp_urls_propres' => 'Eigen URLs ',
@@ -189,7 +189,7 @@ Idem om de bodem te veranderen, als de keuze hieronder het toelaat:@_CS_EXEMPLE_
 
 [[%couleurs_fonds%]]
 [[%set_couleurs%]][[-><set_couleurs valeur="1">%couleurs_perso%</set_couleurs>]]
-@_CS_ASTER@Het formaat van deze verpersoonlijkte bakens moet bestaande kleuren op een lijst zetten of paren &laquo;balise=couleur&raquo;, bepalen, alles die door komma\'s wordt gescheiden. Voorbeelden. Exemples : &laquo;grijs, rood&raquo;, &laquo;zwak=geel, sterk=rood&raquo;, &laquo;beneden=#99CC11, boven=brown&raquo; of nog &laquo;grijs=#DDDDCC, rood=#EE3300&raquo;. Voor de eerste en het laatste voorbeeld, zijn de toegelaten bakens : <code>[grijs]</code> en <code>[rood]</code> (<code>[fond grijs]</code> en <code>[fond rood]</code> als de middelen toegestaan zijn).', # MODIF
+@_CS_ASTER@Het formaat van deze verpersoonlijkte bakens moet bestaande kleuren op een lijst zetten of paren «balise=couleur», bepalen, alles die door komma\'s wordt gescheiden. Voorbeelden. Exemples : «grijs, rood», «zwak=geel, sterk=rood», «beneden=#99CC11, boven=brown» of nog «grijs=#DDDDCC, rood=#EE3300». Voor de eerste en het laatste voorbeeld, zijn de toegelaten bakens : <code>[grijs]</code> en <code>[rood]</code> (<code>[fond grijs]</code> en <code>[fond rood]</code> als de middelen toegestaan zijn).', # MODIF
 	'couleurs:nom' => 'Erg in kleuren',
 	'couleurs_fonds' => ', <b>[fond coul]text[/coul]</b>, <b>[bg coul]text[/coul]</b>',
 	'cs_comportement:description' => '<MODIF>@puce@ {{Logs.}}Vele inlichtingen zijn te verkrijgen over de plugin \'Couteau Suisse (Zwitsers mesje)\' in de folders {spip.log} deze kunt U vinden in het repertoire: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
@@ -351,7 +351,7 @@ Opgelet: in de forums, petities, georganiseerde stromen, enz., het beleid van ja
 	// H
 	'help' => '<MODIF>{{Deze bladzijde is alleen toegankelijk voor de site verantwoordelijken.}} Zij geeft toegang tot de verschillende aanvullende functies die door plugin worden gebracht«{{Le Couteau Suisse}}».',
 	'help2' => 'Plaatselijke versie : @version@',
-	'help3' => '<p>Band van documentatie :<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisatie :
+	'help3' => '<p>Band van documentatie :<br/>• [Le Couteau Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Réinitialisatie :
 _ • [Verborgen werktuigen|Aan de eerste schijn van deze bladzijde terugkomen->@hide@]
 _ • [Van hele plugin|Aan de eerste stand van plugin terugkomen->@reset@]@install@
 </p>', # MODIF
@@ -370,10 +370,10 @@ Pour définir ce logo, rendez-vous sur la page « Configuration du site » en 
 	'introduction:description' => 'Dit baken dat in de skeletten moet geplaatst worden, dient in het algemeen tot een of in de rubrieken teneinde een samenvatting van de artikelen, van kort te produceren, enz..</p>
 <p>{{Opgelet}} : Alvorens deze functionaliteit te activeren, controleert goed dat geen enkele functie {balise_INTRODUCTION ()} bestaat niet reeds in uw plugins skelet , overbelasting zouden dan een fout van compilatie produceren.</p>
 @puce@ U kunt (in percent ten opzichte van de waarde die per gebrek wordt gebruikt) de lengte van de tekst aangeven die per baken #INTRODUCTION wordt teruggestuurd. Een nul of gelijke waarde aan 100 wijzigt het aspect van de inleiding niet en gebruikt dus de waarden per gebrek volgend: 500 karakters voor de artikelen, 300 voor kort en 600 voor de forums of de rubrieken.
-[[%lgr_introduction%&amp;nbsp;%]]
-@puce@ Per gebrek, zijn de punten van vervolg die aan het resultaat van het baken #INTRODUCTION worden toegevoegd, als de tekst te lang is : <html>&amp;laquo;&amp;amp;nbsp;(…)&amp;raquo;</html>. U kunt hier uw eigen keten van carat&amp;egrave;re aangeven die de lezer mededeelt, dat de verminkte tekst goed een vervolg heeft.
+[[%lgr_introduction%&nbsp;%]]
+@puce@ Per gebrek, zijn de punten van vervolg die aan het resultaat van het baken #INTRODUCTION worden toegevoegd, als de tekst te lang is : <html>&laquo;&amp;nbsp;(…)&raquo;</html>. U kunt hier uw eigen keten van carat&egrave;re aangeven die de lezer mededeelt, dat de verminkte tekst goed een vervolg heeft.
 [[%suite_introduction%]]
-@puce@ Als het baken #INTRODUCTION wordt gebruikt om een artikel kort samen te vatten, dan kan het Mes Zwitserland een band hypertexte op de hierboven bepaalde punten van vervolg vervaardigen teneinde de lezer naar de originele tekst te leiden. Bijvoorbeeld: &amp;laquo;Het vervolg van het artikel lezen…&amp;raquo;
+@puce@ Als het baken #INTRODUCTION wordt gebruikt om een artikel kort samen te vatten, dan kan het Mes Zwitserland een band hypertexte op de hierboven bepaalde punten van vervolg vervaardigen teneinde de lezer naar de originele tekst te leiden. Bijvoorbeeld: &laquo;Het vervolg van het artikel lezen…&raquo;
 [[%lien_introduction%]]
 ', # MODIF
 	'introduction:nom' => 'Baken #INTRODUCTION',
