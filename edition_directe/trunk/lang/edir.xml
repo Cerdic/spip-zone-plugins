@@ -1,4 +1,4 @@
-<traduction module="edir" gestionnaire="salvatore" reference="fr">
+<traduction module="edir" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/edition_directe/trunk/lang/" reference="fr">
 	<langue code="de">
 		<traducteur nom="abelass1" />
 	</langue>
