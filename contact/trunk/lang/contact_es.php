@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'champ_adresse' => 'Dirección',
 	'champ_civi_explication' => 'Réglages avancées du champ civilité', # NEW
-	'champ_civi_mademoiselle_ok' => 'Proposer un choix « Mademoiselle » dans le champ civilit&eacute;', # NEW
+	'champ_civi_mademoiselle_ok' => 'Proposer un choix « Mademoiselle » dans le champ civilité', # NEW
 	'champ_civilite' => 'Civilidad',
 	'champ_code_postal' => 'Código Postal',
 	'champ_etat' => 'Estado',

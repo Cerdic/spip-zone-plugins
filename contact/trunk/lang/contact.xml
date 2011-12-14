@@ -1,4 +1,4 @@
-<traduction module="contact" gestionnaire="salvatore" reference="fr">
+<traduction module="contact" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/contact/trunk/lang/" reference="fr">
 	<langue code="ar">
 		<traducteur nom="kandalaft" />
 	</langue>
@@ -10,9 +10,8 @@
 	<langue code="en">
 		<traducteur nom="paolo2" />
 		<traducteur nom="mark_baber" />
-		<traducteur nom="kandalaft" />
 		<traducteur nom="kent1" />
-		<traducteur nom="davood" />
+		<traducteur nom="kandalaft" />
 	</langue>
 	<langue code="es" />
 	<langue code="fa">
