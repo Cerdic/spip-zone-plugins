@@ -1,7 +1,6 @@
-<traduction module="paypal" gestionnaire="salvatore" reference="fr">
+<traduction module="paypal" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/paypal/lang/" reference="fr">
 	<langue code="en">
 		<traducteur nom="RastaPopoulos" />
-		<traducteur nom="davood" />
 	</langue>
 	<langue code="fa">
 		<traducteur nom="davood" />

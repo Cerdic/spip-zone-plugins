@@ -16,23 +16,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_paypal' => 'Configurer le systeme de paiement en ligne Paypal',
 
 	// E
-	'explication_account' => 'Correspond &agrave; l\'adresse email du compte du vendeur',
-	'explication_environnement' => 'Vous pouvez indiquer dans ce formulaire des donn&eacute;es
-		qui concernent le site de test de Paypal (Sandbox, pour le d&eacute;veloppement)
+	'explication_account' => 'Correspond à l\'adresse email du compte du vendeur',
+	'explication_environnement' => 'Vous pouvez indiquer dans ce formulaire des données
+		qui concernent le site de test de Paypal (Sandbox, pour le développement)
 		ainsi que celles valables uniquement pour de vraies transactions.
 		Quel environnement souhaitez-vous utiliser ?',
-	'explication_identifiant_vendeur' => 'Correspond &agrave; l\'adresse email du compte du vendeur',
+	'explication_identifiant_vendeur' => 'Correspond à l\'adresse email du compte du vendeur',
 	'explication_soumission' => 'Sur quelle page de paypal est soumis le formulaire ?',
-	'explication_tax' => '&Eacute;ventuellement la valeur de la taxe qui doit s\'appliquer (exemple pour TVA : 19.60)',
+	'explication_tax' => 'Éventuellement la valeur de la taxe qui doit s\'appliquer (exemple pour TVA : 19.60)',
 
 	// I
 	'info_bouton_paypal' => 'Effectuez vos paiements via PayPal :
-		une solution rapide, gratuite et s&eacute;curis&eacute;e',
+		une solution rapide, gratuite et sécurisée',
 
 	// L
 	'label_account' => 'Account (email)',
 	'label_currency_code' => 'Devise',
-	'label_currency_code_eur' => 'Euro (&euro;)',
+	'label_currency_code_eur' => 'Euro (€)',
 	'label_currency_code_usd' => 'Dollar ($)',
 	'label_environnement' => 'Environnement',
 	'label_environnement_prod' => 'Environnement de production',

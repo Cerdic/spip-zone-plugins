@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -19,8 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_account' => 'Corresponds to email the seller\'s account',
-	'explication_environnement' => 'Vous pouvez indiquer dans ce formulaire des donn&eacute;es
-		qui concernent le site de test de Paypal (Sandbox, pour le d&eacute;veloppement)
+	'explication_environnement' => 'Vous pouvez indiquer dans ce formulaire des données
+		qui concernent le site de test de Paypal (Sandbox, pour le développement)
 		ainsi que celles valables uniquement pour de vraies transactions.
 		Quel environnement souhaitez-vous utiliser ?', # NEW
 	'explication_identifiant_vendeur' => 'Corresponds to email the seller\'s account',

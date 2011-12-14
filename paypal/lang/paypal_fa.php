@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_password' => 'اي.پي.آي گذر واژه (گذرواژه)',
 	'label_signature' => 'امضاء  ',
 	'label_soumission' => 'فرم ارايه',
-	'label_tax' => 'ماليات‌ها',
+	'label_tax' => 'Taxes', # NEW
 	'label_username' => 'اي.پي.آي يوزرنيم (شناسه)'
 );
 
