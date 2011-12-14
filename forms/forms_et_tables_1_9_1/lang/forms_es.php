@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -111,7 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'format_liste' => 'lista desplegable',
 	'format_liste_ou_radio' => 'Formato de la lista',
 	'format_radio' => 'botones tipo radio',
-	'forms_obligatoires' => 'Formularios obligatorios para la introducción de &eacute;ste :',
+	'forms_obligatoires' => 'Formularios obligatorios para la introducción de éste :',
 	'formulaire' => 'Formulario',
 	'formulaire_aller' => 'Ir al formulario ',
 	'formulaires_copie' => 'Copia de @nom@',
