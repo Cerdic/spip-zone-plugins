@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -18,9 +18,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_cc_by' => 'Creative Commons - Attribution',
 	'description_cc_by_nc' => 'Creative Commons - Attribution Non-Commercial',
 	'description_cc_by_nc_nd' => 'Creative Commons - Attribution Non-Commercial No Derivatives',
-	'description_cc_by_nc_sa' => 'Creative Commons - Attribution Non-Commercial Share Alike',
+	'description_cc_by_nc_sa' => 'Creative Commons - Attribution Non-Commercial Share Alike', # MODIF
 	'description_cc_by_nd' => 'Creative Commons - Attribution No Derivatives',
-	'description_cc_by_sa' => 'Creative Commons - Attribution Share Alike',
+	'description_cc_by_sa' => 'Creative Commons - Attribution Share Alike', # MODIF
 	'description_copyright' => '© copyright autor článku',
 	'description_gpl' => 'Licencia GPL', # MODIF
 
