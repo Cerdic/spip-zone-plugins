@@ -1,4 +1,4 @@
-<traduction module="tra" gestionnaire="salvatore" reference="fr">
+<traduction module="tra" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/traduction_rubriques_autrement/trunk/lang/" reference="fr">
 	<langue code="ast">
 		<traducteur nom="xuacu" />
 	</langue>
