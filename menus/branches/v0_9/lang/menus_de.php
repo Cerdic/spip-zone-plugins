@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -17,14 +17,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_espace_prive' => 'Link zum Login und zum Redaktionssystem',
 	'description_menu_groupes_mots' => 'Zeige automatisch ein Menü aus Schlagworten und zugehörigen Artikeln. In der Grundeinstellung werden die Schlagwortgruppen mit ihren Schlagworten angezeigt. Wenn ein Skelett mit der Bezeichnung groupes_mots.html existiert, wird der Link zur Schlagwortguppe verwendet.',
 	'description_menu_lien' => 'Fügt eine beliebigen Link hinzu, der entweder intern (rekative URL)oder extern (http://...) sein kann.',
-	'description_menu_mapage' => 'Wenn der Besucher angemeldet ist, füge einen Link zu seiner pers&ouml;nlichen Seite hinzu.',
+	'description_menu_mapage' => 'Wenn der Besucher angemeldet ist, füge einen Link zu seiner persönlichen Seite hinzu.',
 	'description_menu_mots' => 'Zeigt automatisch ein Menü, das die Artikel zum Schlagwort anzeigt.',
 	'description_menu_objet' => 'Link zu einem SPIP-Objekt anlegen: Artikel, Rubrik, usw. In der Grundeinstellung trägt der Eintrag den Namen des Objekts.',
 	'description_menu_page_speciale' => 'Fügt einen URL zu einer Skelettseite im Format  <code>spip.php?page=nom&param1=xx&param2=yyy...</code> hinzu. Diese Skelette werden von Plugins bereitgestellt',
 	'description_menu_page_speciale_zajax' => 'Fügt einen Link zu einem Block auf einer Seite hinzu, die über einen URL mit der Syntax <code>spip.php?page=nom¶m1=xx¶m2=yyy...</code> erreichbar ist. Dazu sind ein Skelett des Typs Z und das Plugin <a href="http://www.spip-contrib.net/MediaBox">médiabox</a> Voraussetzung.',
-	'description_menu_rubriques' => 'Zeigt eine Liste der Rubriken und, wen gew&uuml;nscht, der Unterrubriken &uuml;ber mehreer Niveaus an. In der Grundeinstelung werden alle Rubriken ab der obersten Ebene nach Titel (numerisch und anschließend alphanumerisch) sortiert angezeigt.',
+	'description_menu_rubriques' => 'Zeigt eine Liste der Rubriken und, wen gewünscht, der Unterrubriken über mehreer Niveaus an. In der Grundeinstelung werden alle Rubriken ab der obersten Ebene nach Titel (numerisch und anschließend alphanumerisch) sortiert angezeigt.',
 	'description_menu_rubriques_articles' => 'Zeigt einen Liste der Rubriken und auf Wunsch der Unterrubriken und Artikel als Hierarchie an. In der Grundeinstellung werden alle Rubriken von der obersten Ebene an dargestellt. Sie werden nach Titeln (zuerst numerisch und dann alphabetisch) sortiert. Artikel werden immer hinter den Rubriken angezeigt.',
-	'description_menu_secteurlangue' => 'Dieser Eintrag bezieht sich aud die Sites, welche pro Sprache ein Hauptrubrik verwenden. Er zeigt ein Men&uuml; mit allen Rubriken des Sektors, die mit der Sprache &uuml;bereinstimmen, wenn erfordelich auf &uuml;ber mehrere Niveaus. In der Grundeinstelung werden alle Rubriken ab der obersten Ebene nach Titel (numerisch und anschließend alphanumerisch) sortiert angezeigt.',
+	'description_menu_secteurlangue' => 'Dieser Eintrag bezieht sich aud die Sites, welche pro Sprache ein Hauptrubrik verwenden. Er zeigt ein Menü mit allen Rubriken des Sektors, die mit der Sprache übereinstimmen, wenn erfordelich auf über mehrere Niveaus. In der Grundeinstelung werden alle Rubriken ab der obersten Ebene nach Titel (numerisch und anschließend alphanumerisch) sortiert angezeigt.',
 	'description_menu_texte_libre' => 'Freitext', # MODIF
 
 	// E
@@ -108,7 +108,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_ieconfig_remplacer' => 'Aktuelles Menü durch das zu importierende ersetzen',
 	'formulaire_ieconfig_renommer' => 'Menü vor Import umbenennen',
 	'formulaire_importer' => 'Menü importieren',
-	'formulaire_importer_explication' => 'Wenn sie ein Men&uuml; in eine Datei exportiert haben, können sie es jetzt importieren.',
+	'formulaire_importer_explication' => 'Wenn sie ein Menü in eine Datei exportiert haben, können sie es jetzt importieren.',
 	'formulaire_modifier_entree' => 'Eintrag bearbeiten',
 	'formulaire_modifier_menu' => 'Menü bearbeiten:',
 	'formulaire_nouveau' => 'Neues Menü',

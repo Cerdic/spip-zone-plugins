@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -20,8 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_mapage' => 'Ak sa návštevníci prihlásia, pridať odkaz na ich autorskú stránku.',
 	'description_menu_mots' => 'Automaticky zobrazí menu so zoznamom článkov prepojených s kľúčovým slovom.',
 	'description_menu_objet' => 'Vytvorí odkaz na objekt SPIPu: článok, rubriku alebo iný. Podľa predvolených nastavení bude niesť názov objektu.',
-	'description_menu_page_speciale' => 'Pridá odkaz na stránku šablóny pomocou adresy formulára <code>spip.php?page=name&amp;param1=xx&amp;param2=yyy...</code> Takéto stránky často využívajú zásuvné moduly.',
-	'description_menu_page_speciale_zajax' => 'Pridať odkaz do bolu na stránke, na ktorú sa dá dostať progredníctvom adresy typu <code>spip.php?page=name&amp;param1=xx&amp;param2=yyy...</code> Na to treba šablónu typu Z a zásuvný modul <a href="http://www.spip-contrib.net/MediaBox">médiabox.</a>',
+	'description_menu_page_speciale' => 'Pridá odkaz na stránku šablóny pomocou adresy formulára <code>spip.php?page=name&param1=xx&param2=yyy...</code> Takéto stránky často využívajú zásuvné moduly.',
+	'description_menu_page_speciale_zajax' => 'Pridať odkaz do bolu na stránke, na ktorú sa dá dostať progredníctvom adresy typu <code>spip.php?page=name&param1=xx&param2=yyy...</code> Na to treba šablónu typu Z a zásuvný modul <a href="http://www.spip-contrib.net/MediaBox">médiabox.</a>',
 	'description_menu_rubriques' => 'Displays a list of sections and, if desired, the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
 	'description_menu_rubriques_articles' => 'Zobrazí zoznam rubrík, v ktorom môžu byť podrubriky a články včlenené do rôznych úrovní. Podľa predvolených nastavení sa zobrazia všetky rubriky počnúc koreňovým adresárom stránky a budú zotriedené podľa názvu (najprv čísla, potom písmená). Články v danej rubrike budú vždy uvedené po jej podrubrikách.',
 	'description_menu_secteurlangue' => 'This entry can be used by sites which have one language per sector. It displays a menu which lists the sections of the sector corresponding to the language of the page, and if desired the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_afficher_articles' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)', # NEW
 	'entree_afficher_item_suite' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)', # NEW
 	'entree_articles_max' => 'Si oui, afficher les articles seulement si la rubrique contient au maximum xx articles ? (mettre le nombre maximum d\'articles, laissez vide pour afficher tous les articles)', # NEW
-	'entree_articles_max_affiches' => 'Si oui, limiter le nombre d\'articles list&eacute;s &agrave; xx maximum (suivis d\'un item "... Tous les articles" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum d\'articles, laissez vide pour afficher tous les articles)', # NEW
+	'entree_articles_max_affiches' => 'Si oui, limiter le nombre d\'articles listés à xx maximum (suivis d\'un item "... Tous les articles" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum d\'articles, laissez vide pour afficher tous les articles)', # NEW
 	'entree_aucun' => 'Žiadny',
 	'entree_bloc' => 'Blok Zpipu',
 	'entree_choisir' => 'Vyberte typ položky, ktorú chcete pridať:',
@@ -59,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_nombre_articles' => 'Maximálny počet článkov (predvolené 0)',
 	'entree_page' => 'Názov stránky',
 	'entree_parametres' => 'Zoznam parametrov',
-	'entree_rubriques_max_affichees' => 'Si oui, limiter le nombre de rubriques list&eacute;s &agrave; xx maximum (suivis d\'un item "... Toutes les rubriques" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum de rubriques, laissez vide pour afficher toutes les rubriques)', # NEW
+	'entree_rubriques_max_affichees' => 'Si oui, limiter le nombre de rubriques listés à xx maximum (suivis d\'un item "... Toutes les rubriques" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum de rubriques, laissez vide pour afficher toutes les rubriques)', # NEW
 	'entree_sousrub_cond' => 'Zobrazovať len podrubriky aktuálnej rubriky (zadajte "oui" (áno), v opačnom prípade nevypĺňajte)',
 	'entree_sur_n_articles' => '@n@ zobrazených článkov',
 	'entree_sur_n_mots' => '@n@ zobrazených kľúčových slov',
@@ -122,17 +122,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_afficher_articles' => 'Les articles seront inclus dans le menu.', # NEW
 	'info_articles_max' => 'Seulement si la rubrique contient au plus @max@ articles', # NEW
-	'info_articles_max_affiches' => 'Affichage limit&eacute; &agrave; @max@ articles', # NEW
+	'info_articles_max_affiches' => 'Affichage limité à @max@ articles', # NEW
 	'info_classe_parent' => 'Classe des éléments parents : ', # NEW
 	'info_connexion_obligatoire' => 'Vyžaduje sa prihlásenie',
 	'info_deconnexion_obligatoire' => 'Iba keď ste odhlásený',
-	'info_masquer_articles_uniques' => 'Articles uniques masqu&eacute;s', # NEW
+	'info_masquer_articles_uniques' => 'Articles uniques masqués', # NEW
 	'info_numero_menu' => 'MENU ČÍSLO:',
 	'info_page_speciale' => 'Odkaz na stránku "@page@"',
 	'info_page_speciale_zajax' => 'Modalbox pre stránku "@page@" bloku "@bloc@" ',
 	'info_rubrique_courante' => 'Rubrique courante', # NEW
 	'info_rubriques_exclues' => ' / sauf rubrique(s) @id_rubriques@', # NEW
-	'info_rubriques_max_affichees' => 'Affichage limit&eacute; &agrave; @max@ rubriques', # NEW
+	'info_rubriques_max_affichees' => 'Affichage limité à @max@ rubriques', # NEW
 	'info_secteur_exclus' => ' / sauf secteur(s) @id_secteur@', # NEW
 	'info_sousrub_cond' => 'Sú zobrazené iba podrubriky aktuálnej rubriky.',
 	'info_tous_groupes_mots' => 'Všetky skupiny kľúčových slov',

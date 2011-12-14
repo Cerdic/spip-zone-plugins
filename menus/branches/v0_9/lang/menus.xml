@@ -1,4 +1,4 @@
-<traduction module="menus" gestionnaire="salvatore" reference="fr">
+<traduction module="menus" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/menus/branches/v0_9/lang/" reference="fr">
 	<langue code="ca" />
 	<langue code="de">
 		<traducteur nom="klaus" />
@@ -11,7 +11,6 @@
 		<traducteur nom="tin" />
 	</langue>
 	<langue code="it" />
-	<langue code="ru" />
 	<langue code="sk">
 		<traducteur nom="jaro" />
 	</langue>
