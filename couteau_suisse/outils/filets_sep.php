@@ -23,13 +23,14 @@ function filets_sep_installe_dist() {
 //cs_log('filets_sep_installe_dist()');
 	include_spip('inc/texte');
 	// Tester si on echappe en span ou en div
-	$mode = preg_match(',<('._BALISES_BLOCS.'|p)(\W|$),iS', _FILETS_SEP_BALISE_DEBUT)?'div':'span';
+	$mode = ($bmode=preg_match(',<('._BALISES_BLOCS.'|p)(\W|$),iS', _FILETS_SEP_BALISE_DEBUT))?'div':'span';
 	$bt = defined('_DIR_PLUGIN_PORTE_PLUME');
 	$filets = array();
 	// filets numeriques
 	for($i=0; $i<=_FILETS_SEP_MAX_CSS; $i++) {
 		$filets[6][] = $i;
-		$filets[1]["$i"] = cs_code_echappement(_FILETS_SEP_BALISE_DEBUT." class='filet_sep filet_sep_$i'"._FILETS_SEP_BALISE_FIN, '', $mode);
+		$f = cs_code_echappement(_FILETS_SEP_BALISE_DEBUT." class='filet_sep filet_sep_$i'"._FILETS_SEP_BALISE_FIN, '', $mode);
+		$filets[1]["$i"] = $bmode?"\n\n".$f."\n\n":$f;
 	}
 	// filets image	
 	$path = find_in_path('img/filets');
@@ -42,7 +43,8 @@ function filets_sep_installe_dist() {
 			list(,$haut) = @getimagesize($path.'/'.$reg[1]);
 			if ($haut) $haut="height:{$haut}px;";
 			$f = url_absolue($path).'/'.$reg[1];
-			$filets[1][$reg[1]] = cs_code_echappement(_FILETS_SEP_BALISE_DEBUT." class=\"filet_sep filet_sep_image\" style=\"$haut background-image: url($f);\""._FILETS_SEP_BALISE_FIN, '', $mode);
+			$f = cs_code_echappement(_FILETS_SEP_BALISE_DEBUT." class=\"filet_sep filet_sep_image\" style=\"$haut background-image: url($f);\""._FILETS_SEP_BALISE_FIN, '', $mode);
+			$filets[1][$reg[1]] = $bmode?"\n\n".$f."\n\n":$f;
 			if($bt)
 				$filets[4]['filet_'.str_replace('.','_',$reg[1])] = $reg[1];
 		}
