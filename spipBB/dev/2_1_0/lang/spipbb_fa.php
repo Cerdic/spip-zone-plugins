@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -331,7 +331,7 @@ _ يك اطلاعيه بالاي سخنگاه در تمام صفحه‌ها‌ي
 -* وقتي يك موضوع سخنگاه بسته باشد فقط هماهنگ كننده مي‌تواند يك پيام پست كند.',
 	'mot_groupe_moderation' => 'گروه كليدواژه‌هاي مورد استفاده براي هماهنگ‌سازي اسپيپ بي‌بي',
 	'mot_postit' => 'Postit
-_ Un postit est situé en dessous des annonces, avant les messages ordinaires. Il n\'appara&icirc;t qu\'une seule fois dans la liste.', # NEW
+_ Un postit est situé en dessous des annonces, avant les messages ordinaires. Il n\'apparaît qu\'une seule fois dans la liste.', # NEW
 
 	// N
 	'no_message' => 'Aucun sujet ou message ne correspond à vos critères de recherche', # NEW

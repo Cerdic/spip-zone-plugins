@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -429,7 +429,7 @@ nbr_post@ message(s). Deleted along with it!\\n', # NEW
 	'secteur_forum' => 'ឫស',
 	'selection_efface' => 'បានលុបចេញ ជំរើស... ',
 	'selection_tri_dpt' => 'ជ្រើសរើស វិធីរៀបលំដាប់៖',
-	'sign_admin' => '{{This page can only be seen by the site owner.}}<p>It provides access to the plugin configuration of &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; as well as to the forum management of your site.</p><p>Version : @version@ @distant@</p><p>See&nbsp;:
+	'sign_admin' => '{{This page can only be seen by the site owner.}}<p>It provides access to the plugin configuration of «{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}» as well as to the forum management of your site.</p><p>Version : @version@ @distant@</p><p>See :
 _ • [The documentation of Spip-Contrib->http://www.spip-contrib.net/?article2460]
 _ • [Help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@', # NEW
 	'sign_maj' => '<br />ការបន្ទាន់សម័យ មានស្រាប់៖ @version@',

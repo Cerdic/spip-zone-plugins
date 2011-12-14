@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -347,7 +347,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pagine_sujet_s' => 'assuntos',
 	'par_' => 'por',
 	'plugin_auteur' => 'O SpipBB Equipa: [ ver a lista dos contribuintes sobre Spip-contrib - http://www.spip-contrib.net/Plugin-SpipBB#contributeurs',
-	'plugin_description' => 'O plugin SpipBB permite :- * De gerir de maneira centralizada os f&oacute;runs de SPIP (convers&atilde;o privada),- * De utilizar um sector como base de um grupo de f&oacute;runs como os &laquo;Bulletin Board&raquo; como phpBB. neste sector, os subt&iacute;tulos s&atilde;o grupos de f&oacute;runs, os artigos dos f&oacute;runs, cada mensagem no f&oacute;rum h&aacute; do thread.{{Consulte :}}-* •[ a ajuda e apoio sobre spipbb.spip-zone.info - http://spipbb.spip-zone.info/spip.php?article11,-* •[ A documenta&ccedil;&atilde;o sobre Spip-contrib - http://www.spip-contrib.net/SpipBB-le-forum._ {{Plugin spipbb em fase de desenvolvimento. Utilize-o a vossos riscos e perigos}}_ [ Acessos ao painel de administra&ccedil;&atilde;o ->.?exec=spipbb_configuration',
+	'plugin_description' => 'O plugin SpipBB permite :- * De gerir de maneira centralizada os fóruns de SPIP (conversão privada),- * De utilizar um sector como base de um grupo de fóruns como os «Bulletin Board» como phpBB. neste sector, os subtítulos são grupos de fóruns, os artigos dos fóruns, cada mensagem no fórum há do thread.{{Consulte :}}-* •[ a ajuda e apoio sobre spipbb.spip-zone.info - http://spipbb.spip-zone.info/spip.php?article11,-* •[ A documentação sobre Spip-contrib - http://www.spip-contrib.net/SpipBB-le-forum._ {{Plugin spipbb em fase de desenvolvimento. Utilize-o a vossos riscos e perigos}}_ [ Acessos ao painel de administração ->.?exec=spipbb_configuration',
 	'plugin_licence' => 'Distribuído sob licença GPL',
 	'plugin_lien' => '[ Consultar a documentação do plugin sobre Spip-contrib - http://www.spip-contrib.net/SpipBB-le-forum',
 	'plugin_mauvaise_version' => 'Esta versão do plugin não é compatível com a sua versão de SPIP !',
@@ -387,7 +387,7 @@ nbr_post@ mensagem (s). Apagados com ele !\\n',
 	'secteur_forum' => 'Raiz',
 	'selection_efface' => 'Apagar a selecção ..',
 	'selection_tri_dpt' => 'Seleccionar o método de triagem :',
-	'sign_admin' => '{{Esta p&aacute;gina &eacute; unicamente acess&iacute;vel aos respons&aacute;veis do s&iacute;tio.}}<p>D&aacute; acessos &agrave; configura&ccedil;&atilde;o do plugin&laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo;assim como &agrave; gest&atilde;o dos f&oacute;runs do s&iacute;tio.</p><p>Version : @version@ @distant@</p><p>Consulte&nbsp;:_ • [ A documenta&ccedil;&atilde;o sobre Spip-Contrib->http://www.spip-contrib.net/?article2460]_ • [ A ajuda e apoio sobre spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
+	'sign_admin' => '{{Esta página é unicamente acessível aos responsáveis do sítio.}}<p>Dá acessos à configuração do plugin«{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}»assim como à gestão dos fóruns do sítio.</p><p>Version : @version@ @distant@</p><p>Consulte :_ • [ A documentação sobre Spip-Contrib->http://www.spip-contrib.net/?article2460]_ • [ A ajuda e apoio sobre spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Versão mais recente disponível : @version@',
 	'sign_ok' => 'a dia.',
 	'sign_reinit' => '<p>Re-iniciação :_ • [de todo o plugin->@plugin@]</p>',

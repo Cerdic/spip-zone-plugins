@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -353,16 +353,16 @@ _ Un post-it està situat a sota dels anuncis, abans dels missatges ordinaris. A
 	'par_' => 'per ',
 	'plugin_auteur' => 'La SpipBB Team: [veure la llista de col·laboradors a Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
 	'plugin_description' => 'El plugin SpipBB permet:
--* Gestionar de manera centralitzada els f&ograve;rums d\'SPIP (interf&iacute;cie privada),
--* Utilitzar un sector com a base d\'un grup de f&ograve;rums com els &laquo;Bulletin Board&raquo; tals com phpBB. En aquest sector, les subseccions s&oacute;n grups de f&ograve;rums, els articles f&ograve;rums, cada missatge al f&ograve;rum d\'un article hi inicia un fil.
+-* Gestionar de manera centralitzada els fòrums d\'SPIP (interfície privada),
+-* Utilitzar un sector com a base d\'un grup de fòrums com els «Bulletin Board» tals com phpBB. En aquest sector, les subseccions són grups de fòrums, els articles fòrums, cada missatge al fòrum d\'un article hi inicia un fil.
 
 {{Consulteu:}}
 -* •[l\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
--* •[La documentaci&oacute; a Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+-* •[La documentació a Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
 _ {{Plugin spipbb en curs de desenvolupament. Utilitzeu-lo assumint-ne els riscs i els perills}}
 
-_ [Acc&eacute;s al panell d\'administraci&oacute;-> .?exec=spipbb_configuration]',
+_ [Accés al panell d\'administració-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribuït sota llicència GPL',
 	'plugin_lien' => '[Consultar la documentació del plugin a Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => 'Aquesta versió del plugin no és compatible amb la vostra versió d\'SPIP!',
@@ -405,8 +405,8 @@ _ [Acc&eacute;s al panell d\'administraci&oacute;-> .?exec=spipbb_configuration]
 	'secteur_forum' => 'ARREL',
 	'selection_efface' => 'Esborrar la selecció...',
 	'selection_tri_dpt' => 'Seleccionar el mètode d\'ordenació:',
-	'sign_admin' => '{{Aquesta p&agrave;gina nom&eacute;s est&agrave; disponible pels responsables del lloc.}}<p>D&oacute;na acc&eacute;s a la configuraci&oacute; del plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; i tamb&eacute; a la gesti&oacute; dels f&ograve;rums del lloc Web.</p><p>Versi&oacute;: @version@ @distant@</p><p>Consulteu:
-_ • [La documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/?article2460]
+	'sign_admin' => '{{Aquesta pàgina només està disponible pels responsables del lloc.}}<p>Dóna accés a la configuració del plugin «{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}» i també a la gestió dels fòrums del lloc Web.</p><p>Versió: @version@ @distant@</p><p>Consulteu:
+_ • [La documentació a Spip-Contrib->http://www.spip-contrib.net/?article2460]
 _ • [L\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />La versió més recent disponible: @version@',
 	'sign_ok' => 'actualitzat.',

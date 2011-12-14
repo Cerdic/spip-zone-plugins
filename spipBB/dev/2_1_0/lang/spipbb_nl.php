@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -135,12 +135,12 @@ Raadpleegt [documentatie over Spip-Contrib-> http://www.spip-contrib.net/SpipBB-
 	'champs_obligatoires' => 'De duidelijke velden van een * zijn verplicht.',
 	'chercher' => 'Zoeken',
 	'choix_mots_annonce' => 'Een aankondiging doen',
-	'choix_mots_creation' => 'Als u <strong>automatisch</strong> wilt cre&euml;ren het woord gewijd aan SpipBB, steunt op deze knoop. Dit woord kunnen gewijzigd of later afgeschaft worden…',
+	'choix_mots_creation' => 'Als u <strong>automatisch</strong> wilt creëren het woord gewijd aan SpipBB, steunt op deze knoop. Dit woord kunnen gewijzigd of later afgeschaft worden…',
 	'choix_mots_creation_submit' => 'Zelf configuratie van de sleutelwoorden',
 	'choix_mots_ferme' => 'Om een draad te sluiten',
 	'choix_mots_postit' => 'In postit zetten',
 	'choix_mots_selection' => 'De woordgroep moet drie bevatten woord. Normaal heeft plugin ze op het moment van zijn installatie gecreëerd. SpipBB gebruikt in het algemeen de woorden {stevige}, {kondigen} aan en {postit}, maar u kunt anderen ervan kiezen.',
-	'choix_rubrique_creation' => 'Als u <strong>automatisch</strong> wilt cre&euml;ren de sector met de forums SpipBB en een eerste leeg forum, steunt op deze knoop. Dit gecre&euml;erde forum en hi&euml;rarchie kunnen gewijzigd of later afgeschaft worden…',
+	'choix_rubrique_creation' => 'Als u <strong>automatisch</strong> wilt creëren de sector met de forums SpipBB en een eerste leeg forum, steunt op deze knoop. Dit gecreëerde forum en hiërarchie kunnen gewijzigd of later afgeschaft worden…',
 	'choix_rubrique_creation_submit' => 'Zelf configuratie van de sector',
 	'choix_rubrique_selection' => 'Een sector selecteren die de basis van uw forums zal zijn. Het binnenste, elke sous-rubrique zullen een groep forums zijn, elk gepubliceerd artikel zal een forum openen.',
 	'choix_squelettes' => 'U kunt anderen ervan kiezen, maar de bestanden die groupeforum.html en filforum.html vervangen moeten bestaan !',
@@ -354,7 +354,7 @@ _ Een positie bevindt zich onder de mededelingen voor de gewone berichten. Het l
 	'plugin_auteur' => 'SpipBB Team: [zie de lijst van contributoren op Spip-contrib-> http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
 	'plugin_description' => 'Plugin SpipBB laat toe:
 -* Om op gecentraliseerde wijze de forums van SPIP (particuliere interface),
- te beheren-* Om een sector als basis van een groep forums zoals &#132;het Bulletin Board&#147; zoals phpBB te gebruiken. In deze sector, zijn sous-rubriques groepen forums, de artikelen van de forums, elk bericht in het forum van een artikel start er een thread. 
+ te beheren-* Om een sector als basis van een groep forums zoals het Bulletin Board zoals phpBB te gebruiken. In deze sector, zijn sous-rubriques groepen forums, de artikelen van de forums, elk bericht in het forum van een artikel start er een thread. 
 
 {{Raadplegen:}} 
 -* •[de hulp en steun op spipbb.spip-zone.info - > http://spipbb.free.fr/spip.php?article11], 
@@ -431,12 +431,12 @@ nbr_post@ bericht(en). Uitgewist met hem !n',
 	'secteur_forum' => 'HOOFD SECTORE',
 	'selection_efface' => 'De selectie uitwissen ...',
 	'selection_tri_dpt' => 'Sorteren methode selecteren :',
-	'sign_admin' => '{{Deze bladzijde is alleen toegankelijk voor de verantwoordelijken voor de site.}}<p>Zij geeft toegang tot de plugin configuratie &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; alsmede aan het beleid van de site forums.</p><p>Version : @version@ @distant@</p><p>Raadpleegt&nbsp;:
+	'sign_admin' => '{{Deze bladzijde is alleen toegankelijk voor de verantwoordelijken voor de site.}}<p>Zij geeft toegang tot de plugin configuratie «{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}» alsmede aan het beleid van de site forums.</p><p>Version : @version@ @distant@</p><p>Raadpleegt :
 _ • [De documentatie om Spip-Contrib->http://www.spip-contrib.net/?article2460]
 _ • [De hulp en zurige steun spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Beschikbare recentere versie : @version@',
 	'sign_ok' => 'aan dag.',
-	'sign_reinit' => '<p>Weder-inwijding&nbsp;:
+	'sign_reinit' => '<p>Weder-inwijding :
 _ • [van hele plugin->@plugin@]</p>',
 	'sign_tempo' => 'Verwezenlijkt met <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'signature' => 'Handtekening',

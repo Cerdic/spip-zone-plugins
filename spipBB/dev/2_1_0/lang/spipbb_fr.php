@@ -329,7 +329,7 @@ _ Une annonce est située en tête de forum sur toutes les pages.',
 -* Lorsqu\'un sujet de forum est ferm&ecute;, seuls les modérateurs peuvent y ajouter des réponses.',
 	'mot_groupe_moderation' => 'Goupe de mot-clefs utilisé pour la modération de SpipBB',
 	'mot_postit' => 'Postit
-_ Un postit est situé en dessous des annonces, avant les messages ordinaires. Il n\'appara&icirc;t qu\'une seule fois dans la liste.',
+_ Un postit est situé en dessous des annonces, avant les messages ordinaires. Il n\'apparaît qu\'une seule fois dans la liste.',
 
 	// N
 	'no_message' => 'Aucun sujet ou message ne correspond à vos critères de recherche',

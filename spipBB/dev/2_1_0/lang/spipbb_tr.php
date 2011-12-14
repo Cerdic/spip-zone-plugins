@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -328,7 +328,7 @@ Bkz [Spip-Contrib ile ilgili belgeler->http://www.spip-contrib.net/SpipBB-le-for
 _ Duyuru, tüm sayfalarda forumun en başında yer alır.',
 	'mot_ferme' => 'Kapalı
 -* Bir makale/forum bu anahtar sözcüğü içeririyorsa sadece moderatörler mesaj ekleyebilir.
--* Lorsqu\'un sujet de forum est ferm&amp;ecute;, seuls les modérateurs peuvent y ajouter des réponses.',
+-* Lorsqu\'un sujet de forum est ferm&ecute;, seuls les modérateurs peuvent y ajouter des réponses.',
 	'mot_groupe_moderation' => 'SpipBB\'nin idaresi için kullanılan anahtar sözcük grubu',
 	'mot_postit' => 'Postit
 _ Duyuruların altında, basit mesajlardan önce bir postit vardır. Listede yalnız bir kere görülür.',
@@ -352,17 +352,17 @@ _ Duyuruların altında, basit mesajlardan önce bir postit vardır. Listede yal
 	'pagine_sujet_s' => ' konu',
 	'par_' => '--> ',
 	'plugin_auteur' => 'SpipBB Takımı : [katılımcıların listesini görmek için Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
-	'plugin_description' => 'SpipBB eklentisi &#351;unlar&#305; sa&#287;lar :
--* SPIP forumlar&#305;n&#305; tek merkezden y&ouml;netmek (&ouml;zel aray&uuml;z),
--* Bir sekt&ouml;r&uuml; forumlar grubu veritaban&#305; olarak phpBB benzeri &laquo;Bulletin Board&raquo; gibi kullanmak. Bu sekt&ouml;rde; alt ba&#351;l&#305;klar forum gruplar&#305; ve forum makaleleridir. Bir makalenin forumuna yaz&#305;lan her yeni mesaj orada bir "thread" ba&#351;lat&#305;r.
+	'plugin_description' => 'SpipBB eklentisi şunları sağlar :
+-* SPIP forumlarını tek merkezden yönetmek (özel arayüz),
+-* Bir sektörü forumlar grubu veritabanı olarak phpBB benzeri «Bulletin Board» gibi kullanmak. Bu sektörde; alt başlıklar forum grupları ve forum makaleleridir. Bir makalenin forumuna yazılan her yeni mesaj orada bir "thread" başlatır.
 
-{{&#304;nceleyiniz :}}
--* •[spipbb\'de yard&#305;m ve destek.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
+{{İnceleyiniz :}}
+-* •[spipbb\'de yardım ve destek.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
 -* •[Belgeler Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
-_ {{spipbb eklentisi geli&#351;tirilme a&#351;amas&#305;ndad&#305;r. Kullan&#305;m esnas&#305;nda olu&#351;abilecek sorunlar tamamen size aittir.}}
+_ {{spipbb eklentisi geliştirilme aşamasındadır. Kullanım esnasında oluşabilecek sorunlar tamamen size aittir.}}
 
-_ [Y&ouml;netim panosuna eri&#351;im-> .?exec=spipbb_configuration]',
+_ [Yönetim panosuna erişim-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'GPL lisansı ile dağıtılan',
 	'plugin_lien' => 'Spip-contrib\'de eklenti hakkındaki belgelere bkz->http://www.spip-contrib.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => 'Eklentinin bu sürümü sizin SPIP sürümünüzle uyumlu değil !',
@@ -402,12 +402,12 @@ nbr_post@ mesaj içerir. Bu mesajlar da konuyla birlikte silinecektir !n',
 	'secteur_forum' => 'KÖK DİZİN',
 	'selection_efface' => 'Seçimi sil ...',
 	'selection_tri_dpt' => 'Sıralama yöntemini seç :',
-	'sign_admin' => '{{Bu sayfa sadece site sorumlular&#305;n&#305;n eri&#351;imine a&ccedil;&#305;kt&#305;r.}}<p>Eklentinin konfig&uuml;rasyonuna eri&#351;im hakk&#305; verir &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; ayr&#305;ca sitenin forumlar&#305;n&#305;n y&ouml;netimine olanak tan&#305;r. </p><p>S&uuml;r&uuml;m : @version@ @distant@</p><p>Bkz&nbsp;:
+	'sign_admin' => '{{Bu sayfa sadece site sorumlularının erişimine açıktır.}}<p>Eklentinin konfigürasyonuna erişim hakkı verir «{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}» ayrıca sitenin forumlarının yönetimine olanak tanır. </p><p>Sürüm : @version@ @distant@</p><p>Bkz :
 _ • [Spip-Contrib\'deki belgeler->http://www.spip-contrib.net/?article2460]
-_ • [spipbb.spip-zone.info yard&#305;m dosyalar&#305;->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
+_ • [spipbb.spip-zone.info yardım dosyaları->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Daha yeni bir sürüm mevcut : @version@',
 	'sign_ok' => 'güncel.',
-	'sign_reinit' => '<p>Yeniden ba&#351;lat&#305;lmas&#305;&nbsp;:
+	'sign_reinit' => '<p>Yeniden başlatılması :
 _ • [eklenti->@plugin@]</p>',
 	'sign_tempo' => '<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a> ile gerçekleştirilmiştir',
 	'signature' => 'İmza',

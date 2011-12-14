@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -328,7 +328,7 @@ Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 _ Une annonce est située en tête de forum sur toutes les pages.',
 	'mot_ferme' => 'Fermé
 -* Lorsqu\'un article-forum a ce mot-clef, seul les modérateurs peuvent y ajouter des messages.
--* Lorsqu\'un sujet de forum est ferm&amp;ecute;, seuls les modérateurs peuvent y ajouter des réponses.',
+-* Lorsqu\'un sujet de forum est ferm&ecute;, seuls les modérateurs peuvent y ajouter des réponses.',
 	'mot_groupe_moderation' => 'Goupe de mot-clefs utilisé pour la modération de SpipBB',
 	'mot_postit' => 'Postit
  _ Un postit est situé en dessous des annonces, avant les messages ordinaires. Il n\'apparaît qu\'une seule fois dans la liste.',
@@ -353,16 +353,16 @@ _ Une annonce est située en tête de forum sur toutes les pages.',
 	'par_' => 'par ',
 	'plugin_auteur' => 'La SpipBB Team : [voir la liste des contributeurs sur Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
 	'plugin_description' => 'Le plugin SpipBB permet :
--* De g&eacute;rer de fa&ccedil;on centralis&eacute;e les forums de SPIP (interface priv&eacute;e),
--* D\'utiliser un secteur comme base d\'un groupe de forums comme les &laquo;Bulletin Board&raquo; tels que phpBB. Dans ce secteur, les sous-rubriques sont des groupes de forums, les articles des forums, chaque message dans le forum d\'un article y d&eacute;marre un thread.
+-* De gérer de façon centralisée les forums de SPIP (interface privée),
+-* D\'utiliser un secteur comme base d\'un groupe de forums comme les «Bulletin Board» tels que phpBB. Dans ce secteur, les sous-rubriques sont des groupes de forums, les articles des forums, chaque message dans le forum d\'un article y démarre un thread.
 
 {{Consulte :}}
 -* •[l\'aide et support sur spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
 -* •[La documentation sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
-_ {{Plugin spipbb en cours de d&eacute;veloppement. Tu l\'utilises &agrave; tes risques et p&eacute;rils}}
+_ {{Plugin spipbb en cours de développement. Tu l\'utilises à tes risques et périls}}
 
-_ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]',
+_ [Accès au panneau d\'administration-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribué sous licence GPL',
 	'plugin_lien' => '[Consulter la documentation du plugin sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => 'Cette version du plugin n\'est pas compatible avec ta version de SPIP !',
@@ -428,12 +428,12 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]',
 	'secteur_forum' => 'RACINE',
 	'selection_efface' => 'Effacer la sélection ..',
 	'selection_tri_dpt' => 'Sélectionner la méthode de tri :',
-	'sign_admin' => '{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s &agrave; la configuration du plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; ainsi qu\'&agrave; la gestion des forums du site.</p><p>Version : @version@ @distant@</p><p>Consulte&nbsp;:
+	'sign_admin' => '{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne accès à la configuration du plugin «{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}» ainsi qu\'à la gestion des forums du site.</p><p>Version : @version@ @distant@</p><p>Consulte :
 _ • [La documentation sur Spip-Contrib->http://www.spip-contrib.net/?article2460]
 _ • [L\'aide et support sur spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Version plus récente disponible : @version@',
 	'sign_ok' => 'à jour.',
-	'sign_reinit' => '<p>R&eacute;-initialisation&nbsp;:
+	'sign_reinit' => '<p>Ré-initialisation :
 _ • [de tout le plugin->@plugin@]</p>',
 	'sign_tempo' => 'Réalisé avec <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'signature' => 'Signature',

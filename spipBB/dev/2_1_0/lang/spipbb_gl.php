@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -352,17 +352,17 @@ _ Un destacado sitúase por baixo dos anuncios, antes das mensaxes ordinarias. A
 	'pagine_sujet_s' => ' asuntos',
 	'par_' => 'por',
 	'plugin_auteur' => 'O equipo SpipBB : [ver a lista de contribuidores en Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
-	'plugin_description' => 'O m&oacute;dulo de SpipBB permite :
+	'plugin_description' => 'O módulo de SpipBB permite :
 -* Xestionar de forma centralizada os foros d SPIP (interface privada),
--* Usar un sector como base dun grupo de de foros de tipo &laquo;Bulletin Board&raquo; como phpBB. Neste sector, as subsecci&oacute;ns son grupos de foros, os artigos son os foros, cada mensaxe dentro do foro dun artigo comeza un f&iacute;o.
+-* Usar un sector como base dun grupo de de foros de tipo «Bulletin Board» como phpBB. Neste sector, as subseccións son grupos de foros, os artigos son os foros, cada mensaxe dentro do foro dun artigo comeza un fío.
 
 {{Consulte :}}
 -* •[a axuda en spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
--* •[a documentaci&oacute;n en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+-* •[a documentación en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
-_ {{M&oacute;dulo spipbb en curso de desenvolvemento. &Uacute;seo a seu risco e ventura}}
+_ {{Módulo spipbb en curso de desenvolvemento. Úseo a seu risco e ventura}}
 
-_ [Acceso ao panel de administraci&oacute;n-> .?exec=spipbb_configuration]',
+_ [Acceso ao panel de administración-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribuído baixo licenza GPL',
 	'plugin_lien' => '[Consulte a documentación do módulo en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => 'Esta versión do módulo non é compatible coa súa versión de SPIP !',
@@ -425,13 +425,13 @@ _ [Acceso ao panel de administraci&oacute;n-> .?exec=spipbb_configuration]',
 	'secteur_forum' => 'RAÍZ',
 	'selection_efface' => 'Borrar a selección ...',
 	'selection_tri_dpt' => 'Seleccionar o método de saída :',
-	'sign_admin' => '{{Esta p&aacute;xina &eacute; unicamente accesible para os responsables do web.}}<p>Proporciona acceso &aacute; configuraci&oacute;n do m&oacute;dulo &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; as&iacute; como &aacute; xesti&oacute;n dos foros do web.</p><p>Versi&oacute;n : @version@ @distant@</p><p>Consulte&nbsp;:
-_ • [A documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/?article2460]
+	'sign_admin' => '{{Esta páxina é unicamente accesible para os responsables do web.}}<p>Proporciona acceso á configuración do módulo «{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}» así como á xestión dos foros do web.</p><p>Versión : @version@ @distant@</p><p>Consulte :
+_ • [A documentación en Spip-Contrib->http://www.spip-contrib.net/?article2460]
 _ • [A axuda en spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Versión máis recente dispoñíbel : @version@',
 	'sign_ok' => 'actualizar.',
-	'sign_reinit' => '<p>Re-inicializaci&oacute;n&nbsp;:
-_ • [de todo o m&oacute;dulo->@plugin@]</p>',
+	'sign_reinit' => '<p>Re-inicialización :
+_ • [de todo o módulo->@plugin@]</p>',
 	'sign_tempo' => 'Realizado con <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'signature' => 'Sinatura',
 	'sinscrire' => 'Rexistrarse',

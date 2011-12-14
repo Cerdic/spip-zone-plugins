@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -383,7 +383,7 @@ nbr_post@ príspevkov. Budú vymazané spolu s ňou!\\n',
 	'posts_effaces' => 'Témy odstránené!',
 	'posts_refuses' => 'Zamietnuté témy na vymazanie!',
 	'previsualisation' => 'Ukážka',
-	'profil' => 'Vizitka &ndash;  ',
+	'profil' => 'Vizitka –  ',
 
 	// R
 	'raison_clic' => 'Kliknite sem',
@@ -416,7 +416,7 @@ _ • [pomocníka a podporu na spipbb.spip-zone.info.->http://spipbb.spip-zone.
 	'sign_tempo' => 'Vytvorené pomocou <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'signature' => 'Podpis',
 	'sinscrire' => 'Zaregistrovať sa',
-	'site_propose' => 'Navrhovaná internetová stránka &ndash; @auteur_post@',
+	'site_propose' => 'Navrhovaná internetová stránka – @auteur_post@',
 	'site_web' => 'Webová stránka',
 	'squelette_filforum' => 'Základná šablóna diskusných príspevkov:',
 	'squelette_groupeforum' => 'Základná šablóna skupín diskusného fóra:',

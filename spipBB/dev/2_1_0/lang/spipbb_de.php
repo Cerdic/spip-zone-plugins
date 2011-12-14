@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -354,7 +354,7 @@ _ Ein Post-It erscheint unter den Ankündigungen und vor den Posts. Es erscheint
 	'plugin_auteur' => 'Das SpipBB Team : [siehe Liste der Unterstützer auf Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
 	'plugin_description' => 'Mit SpipBB kann man:
 -* SPIP-Foren zentral verwalten (im Redaktionssystem),
--* Eine Rubrik (Top Level / Sektor) als Container f&uuml;r eine Gruppe Foren wie in &laquo;bulletin boards&raquo; &agrave; la phpBB nutzen. In diesem Sektor sind Unterrubriken Forengruppen und Artikel Foren. Jeder Eintrag im Forum eines Artikels startet einen Diskussionsstrang (thread).
+-* Eine Rubrik (Top Level / Sektor) als Container für eine Gruppe Foren wie in «bulletin boards» à la phpBB nutzen. In diesem Sektor sind Unterrubriken Forengruppen und Artikel Foren. Jeder Eintrag im Forum eines Artikels startet einen Diskussionsstrang (thread).
 
 {{Siehe auch:}}
 -* •[Hilfe ud Support auf spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
@@ -409,7 +409,7 @@ nbr_post@ Post(s). Sie werden mit ihm gelöscht!n',
 	'secteur_forum' => 'HAUPTRUBRIK DER FOREN',
 	'selection_efface' => 'Auswahl löschen ...',
 	'selection_tri_dpt' => 'Sortierung wählen:',
-	'sign_admin' => '{{Diese Seite ist nur f&uuml;r den/Webmaster zug&auml;nglich.}}<p>Sie erm&ouml;glicht die Steuerung des Plugins &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; und die Verwaltung der SPIP-Foren.</p><p>Version : @version@ @distant@</p><p>Consultez&nbsp;:
+	'sign_admin' => '{{Diese Seite ist nur für den/Webmaster zugänglich.}}<p>Sie ermöglicht die Steuerung des Plugins «{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}» und die Verwaltung der SPIP-Foren.</p><p>Version : @version@ @distant@</p><p>Consultez :
 _ • [Dokumentation auf Spip-Contrib->http://www.spip-contrib.net/?article2460]
 _ • [Hilfe und Support auf spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Neuests verfügbare Version: @version@',

@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -168,7 +168,7 @@ Consulta la [documentación en Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 
 	// D
 	'dans_forum' => 'en el foro',
-	'deconnexion_' => 'Desconecci&amp;oacute;n',
+	'deconnexion_' => 'Desconecci&oacute;n',
 	'deplacer' => 'Desplazar',
 	'deplacer_confirmer' => 'Confirmar el desplazamiento',
 	'deplacer_dans_dpt' => 'A desplazar en el foro:',
@@ -222,8 +222,8 @@ Consulta la [documentación en Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'forum_annonce_annonce' => 'Poner la marca de anuncio',
 	'forum_annonce_desannonce' => 'Quitar la marca de anuncio',
 	'forum_dpt' => 'Foro: ',
-	'forum_ferme' => 'Este foro est&amp;aacute; desactivado',
-	'forum_ferme_texte' => 'Este foro est&amp;aacute; desactivado. Ya no puedes contribuir.',
+	'forum_ferme' => 'Este foro est&aacute; desactivado',
+	'forum_ferme_texte' => 'Este foro est&aacute; desactivado. Ya no puedes contribuir.',
 	'forum_maintenance' => 'Este foro está cerrado por mantenimiento',
 	'forum_ouvrir' => 'Abrir este Foro',
 	'forums_categories' => 'Varios',
@@ -318,7 +318,7 @@ Consulta la [documentación en Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'messages_supprimer_titre_dpt' => 'Para los mensajes:',
 	'messages_supprimer_tous' => 'suprimirlos',
 	'messages_voir_dernier' => 'Ver el último mensaje',
-	'messages_voir_dernier_s' => 'Ver el &amp;uacute;ltimo mensaje',
+	'messages_voir_dernier_s' => 'Ver el &uacute;ltimo mensaje',
 	'moderateur' => 'Moderador(es)/a(s)',
 	'moderateur_dpt' => 'Moderador: ',
 	'moderateurs' => 'Moderador(es)',
@@ -354,15 +354,15 @@ _ Un postit está situado bajo los anuncios, antes de los mensajes ordinarios. S
 	'plugin_auteur' => 'El Equipo SpipBB: [ver la lista de colaboradores en Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
 	'plugin_description' => 'El plugin SpipBB permite:
 -* Gestionar de modo centralizado los foros de SPIP (interfaz privada),
--* Utilizar un sector como base de un grupo de foros como los &laquo;Bulletin Board&raquo; parecidos a phpBB. En ese sector, las subsecciones son grupos de foros; los art&iacute;culos son foros, y cada mensaje del foro de un art&iacute;culo inicia un hilo de discusi&oacute;n.
+-* Utilizar un sector como base de un grupo de foros como los «Bulletin Board» parecidos a phpBB. En ese sector, las subsecciones son grupos de foros; los artículos son foros, y cada mensaje del foro de un artículo inicia un hilo de discusión.
 
 {{Consulta:}}
 -* •[la ayuda y soporte en spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
--* •[La documentaci&oacute;n en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+-* •[La documentación en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
-_ {{Plugin spipbb en fase de desarrollo. T&uacute; asumes el riesgo si lo utilizas}}
+_ {{Plugin spipbb en fase de desarrollo. Tú asumes el riesgo si lo utilizas}}
 
-_ [Acceso al panel de administraci&oacute;n-> .?exec=spipbb_configuration]',
+_ [Acceso al panel de administración-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribuido bajo licencia GPL',
 	'plugin_lien' => '[Consultar la documentación del plugin en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => '¡Esta versión del plugin no es compatible con la versión instalada de SPIP!',
@@ -387,7 +387,7 @@ _ [Acceso al panel de administraci&oacute;n-> .?exec=spipbb_configuration]',
 	// R
 	'raison_clic' => 'pulsa aquí',
 	'raison_texte' => 'Para conocer el motivo',
-	'recherche' => 'B&amp;uacute;squeda',
+	'recherche' => 'B&uacute;squeda',
 	'recherche_elargie' => 'Búsqueda extendida',
 	'redige_post' => 'Escribir mensaje',
 	'reglement' => '<p>Los administradores y moderadores de este foro se esforzarán en suprimir o editar todos los mensajes de carácter reprensible tan rápidamente como sea posible. De cualquier modo, les resulta imposible revisar todos los mensajes. Por tanto, admites que todos los mensajes publicados en esto foros expresan el punto de vista y la opinión de sus autores respectivos, y no la de los administradores, moderadores, o webmasters (excepto los mensajes publicados por ellos mismos) y, por consiguiente, no pueden ser considerados responsables de ellos.</p>
@@ -407,12 +407,12 @@ _ [Acceso al panel de administraci&oacute;n-> .?exec=spipbb_configuration]',
 	'secteur_forum' => 'RAÍZ',
 	'selection_efface' => 'Borrar la selección ...',
 	'selection_tri_dpt' => 'Seleccionar el método de ordenación:',
-	'sign_admin' => '{{Esta p&aacute;gina es accesible &uacute;nicamente para los responsables del sitio.}}<p>Da acceso a la configuraci&oacute;n del plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; igual que a la gesti&oacute;n de los foros del sitio.</p><p>Versi&oacute;n: @version@ @distant@</p><p>Consulta:
-_ • [La documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/?article2460]
+	'sign_admin' => '{{Esta página es accesible únicamente para los responsables del sitio.}}<p>Da acceso a la configuración del plugin «{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}» igual que a la gestión de los foros del sitio.</p><p>Versión: @version@ @distant@</p><p>Consulta:
+_ • [La documentación en Spip-Contrib->http://www.spip-contrib.net/?article2460]
 _ • [La ayuda y soporte en spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Hay disponible una versión más reciente: @version@',
 	'sign_ok' => 'al día.',
-	'sign_reinit' => '<p>Reinicializaci&oacute;n:
+	'sign_reinit' => '<p>Reinicialización:
 _ • [de todo el plugin->@plugin@]</p>',
 	'sign_tempo' => 'Realizado con <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'signature' => 'Firma',
