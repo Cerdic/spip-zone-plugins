@@ -1,4 +1,4 @@
-<traduction module="noie" gestionnaire="salvatore" reference="fr">
+<traduction module="noie" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/noie/lang/" reference="fr">
 	<langue code="ar" />
 	<langue code="ast">
 		<traducteur nom="xuacu" />
