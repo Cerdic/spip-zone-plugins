@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_boite_postale' => 'Poštová schránka',
 	'label_code_postal' => 'PSČ',
-	'label_complement' => 'Doplňujúce informácie',
+	'label_complement' => 'Doplňujúce informácie', # MODIF
 	'label_email' => 'E-mail',
 	'label_numero' => 'Telefónne číslo',
 	'label_objets_actifs' => 'Objekty',
