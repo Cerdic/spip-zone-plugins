@@ -82,7 +82,10 @@ function exec_voir_adherent(){
 			echo '<p style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.$id_asso."</p>";
 		}
 
-		echo '<br /><div style="text-align:center;">'.association_date_du_jour().'</div>';	
+		// Afficher les champs extras
+		echo '<div style="text-align: center" class="verdana1 spip_xx-small">'.pipeline('afficher_contenu_objet', array ('args'=>array('type'=>'asso_membre', 'id_objet'=>$id_auteur, 'contexte'=>array()), 'data'=>'')).'</div>';
+
+		echo '<br/><div style="text-align:center;">'.association_date_du_jour().'</div>';	
 		 echo fin_boite_info(true);
 		
 		 echo association_retour();
