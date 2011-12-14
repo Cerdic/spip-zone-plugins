@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -93,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meteo_9' => 'mrholenie',
 	'meteo_conditions' => 'súčasné poveternostné podmienky',
 	'meteo_consultation' => 'Počasie pre @ville@ ',
-	'meteo_de' => 'Počasie &ndash; @ville@ ',
+	'meteo_de' => 'Počasie – @ville@ ',
 	'meteo_na' => 'neznáme',
 	'meteo_previsions' => 'predpovedané poveternostné podmienky',
 	'meteo_previsions_aujourdhui' => 'predpoveď na dnes',
