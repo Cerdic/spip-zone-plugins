@@ -32,7 +32,7 @@
 <div class="contenu-principal">
 [(#ENV{cartouche_boussole, non}|=={oui}|oui)
 	<div class="cartouche">
-		[(#CHEMIN{prive/themes/spip/images/boussole[-(#ENV{boussole})].png}
+		[(#CHEMIN{images/boussole/boussole[-(#ENV{boussole})].png}
 			|image_reduire{#ENV{taille_logo, 64}}
 			|image_recadre{#ENV{taille_logo, 64},#ENV{taille_logo, 64},center,transparent}
 			|inserer_attribut{class,spip_logos}

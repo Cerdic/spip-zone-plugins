@@ -1,6 +1,6 @@
 nom: '<:boussole:nom_noisette_boussole:>'
 description: '<:boussole:description_noisette_boussole:>'
-icon: 'prive/themes/spip/images/boussole_icone-24.png'
+icon: 'boussole_icone-24.png'
 contexte: 'aucun'
 parametres:
   -

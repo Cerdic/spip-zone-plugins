@@ -9,7 +9,7 @@
 	<licence>GPL</licence>
 	<version>0.6.4</version>
 	<version_base>0.1</version_base>
-	<icon>prive/themes/spip/images/boussole_icone-64.png</icon>
+	<icon>boussole_icone-64.png</icon>
 	<etat>dev</etat>
     <slogan>
     	<multi>
@@ -55,7 +55,7 @@ _ For DIYers, you can also use this plugin to display your own list of sites and
 	</pipeline>
 
 	<bouton id="boussole" parent="configuration">
-		<icone>prive/themes/spip/images/boussole_icone-24.png</icone>
+		<icone>boussole_icone-24.png</icone>
 		<titre>boussole:bouton_boussole</titre>
 		<url>boussoles_gerer</url>
 	</bouton>
@@ -66,7 +66,7 @@ _ For DIYers, you can also use this plugin to display your own list of sites and
 	</bouton>
 
 	<onglet id='gerer' parent='boussoles'>
-		<icone>prive/themes/spip/images/boussole_icone-24.png</icone>
+		<icone>boussole_icone-24.png</icone>
 		<titre>boussole:onglet_boussoles</titre>
 		<url>boussoles_gerer</url>
 	</onglet>

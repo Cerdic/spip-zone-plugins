@@ -24,7 +24,7 @@
 		[(#REM) <!-- Insertion des sites du groupe -->]
 		<ul[ id="groupe-(#AKA_GROUPE)"] class="groupe_entrees">
 	<BOUCLE_site(BOUSSOLES){aka_boussole}{aka_groupe}{par rang_site}>
-			[(#SET{logo, [(#CHEMIN{prive/themes/spip/images/site[-(#AKA_BOUSSOLE)][-(#AKA_SITE)].png})]})]
+			[(#SET{logo, [(#CHEMIN{images/boussole/site[-(#AKA_BOUSSOLE)][-(#AKA_SITE)].png})]})]
 			<li class="entree"[ style="background-repeat:no-repeat;background-position:5px 10px;background-image:url((#GET{logo}|image_reduire{24}|extraire_attribut{src}))"]>
 				<div class="ligne #AFFICHE">
 					<div class="description arial2">
