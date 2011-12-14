@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_debug' => 'Debug',
-	'titre_outils_rapides' => 'Cr&eacute;ation'
+	'titre_outils_rapides' => 'Création'
 );
 
 ?>
