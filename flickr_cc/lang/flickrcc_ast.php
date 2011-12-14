@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -18,14 +18,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'fermer' => 'Zarrar',
-	'flickr_cc_explication' => '<p>Restola imaxes de Creative Commons en Flickr enxertando enriba los t&eacute;rminos a guetar. Precisa, si ye\'l casu, los tipos de llicencia embaxo los que tan les im&aacute;xenes.</p>
-<p>Calca na (o nes) imaxe(s) escoy&iacute;a(es) ente los resultaos de la gueta: la imaxe am&eacute;stase de secute col to art&iacute;culu. Calca enriba\'l nome de l\'autor pa dir a la p&aacute;xina en Flickr d\'esa imaxen.</p>
-<p>Estes imaxes &uacute;frense polos sos respeutivos autores: col env&iacute;s de respetar los sos derechos y el so trabayu,</p>
-<ul><li>nun desanicies la menci&oacute;n de l\'autor y l\'enllace a la so p&aacute;xina en Flickr&nbsp;;</li>
+	'flickr_cc_explication' => '<p>Restola imaxes de Creative Commons en Flickr enxertando enriba los términos a guetar. Precisa, si ye\'l casu, los tipos de llicencia embaxo los que tan les imáxenes.</p>
+<p>Calca na (o nes) imaxe(s) escoyía(es) ente los resultaos de la gueta: la imaxe améstase de secute col to artículu. Calca enriba\'l nome de l\'autor pa dir a la páxina en Flickr d\'esa imaxen.</p>
+<p>Estes imaxes úfrense polos sos respeutivos autores: col envís de respetar los sos derechos y el so trabayu,</p>
+<ul><li>nun desanicies la mención de l\'autor y l\'enllace a la so páxina en Flickr ;</li>
 <li>respeta rigurosamente la llicencia Creative Commons asociada con cada imaxe (en particular, nun utilizar una imaxe nun proyeutu comercial si la llicencia nun lo permite;</li>
 <li>si l\'autor de la imaxe te lo pidiere, debes desaniciar la imaxe del to sitiu nun plazu de 24 hores.</li>
 </ul>
-<p>Esti productu utiliza l’API Flickr pero nun ta nin sofit&aacute;u, nin certific&aacute;u por Flickr.</p>',
+<p>Esti productu utiliza l’API Flickr pero nun ta nin sofitáu, nin certificáu por Flickr.</p>',
 
 	// R
 	'rechercher_flickr' => 'Restolar en Flickr',
