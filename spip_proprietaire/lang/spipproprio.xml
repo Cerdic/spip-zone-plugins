@@ -1,10 +1,8 @@
-<traduction module="spipproprio" gestionnaire="salvatore" reference="fr">
+<traduction module="spipproprio" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/spip_proprietaire/lang/" reference="fr">
 	<langue code="en">
 		<traducteur nom="merce" />
-		<traducteur nom="davood" />
 	</langue>
 	<langue code="sk">
 		<traducteur nom="jaro" />
-		<traducteur nom="merce" />
 	</langue>
 </traduction>
