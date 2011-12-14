@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'configurer_taxe_defaut_label' => 'Taxe par d&eacute;faut',
+	'configurer_taxe_defaut_label' => 'Taxe par défaut',
 	'configurer_titre' => 'Configuration des produits',
 
 	// I
@@ -18,17 +18,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'produit_bouton_ajouter' => 'Ajouter un produit',
 	'produit_champ_descriptif_label' => 'Court descriptif',
 	'produit_champ_prix_ht_label' => 'Prix HT',
-	'produit_champ_reference_label' => 'R&eacute;f&eacute;rence',
+	'produit_champ_reference_label' => 'Référence',
 	'produit_champ_rubrique_label' => 'Rubrique',
 	'produit_champ_taxe_explication' => 'Valeur par défaut sur le site : @taxe@. Ce champ peut être laissé vide.',
 	'produit_champ_taxe_label' => 'Taxe',
 	'produit_champ_texte_label' => 'Texte',
 	'produit_champ_titre_label' => 'Titre',
-	'produit_editer' => '&Eacute;diter le produit',
+	'produit_editer' => 'Éditer le produit',
 	'produit_modifier' => 'Modifier le produit :',
 	'produit_nouveau' => 'Nouveau produit',
 	'produit_numero' => 'Produit n°',
-	'produit_reference' => 'R&eacute;f&eacute;rence "@reference@"',
+	'produit_reference' => 'Référence "@reference@"',
 	'produit_statut' => 'Modifier le statut :',
 	'produits_titre' => 'Produits'
 );
