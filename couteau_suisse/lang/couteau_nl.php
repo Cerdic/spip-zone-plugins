@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -80,13 +80,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_suivante' => 'Volgende bladzijde',
 	'plug_actifs' => 'Plugins actief',
 	'plug_inactifs' => 'Plugins inactief',
-	'plugin_xml' => 'In slechts &eacute;&eacute;n plugin verenigt een lijst van kleine nieuwe en nuttige functies die het beleid van uw SPIP site verbeteren.
+	'plugin_xml' => 'In slechts één plugin verenigt een lijst van kleine nieuwe en nuttige functies die het beleid van uw SPIP site verbeteren.
 
 Elk van deze werktuigen kan of niet door de gebruiker op geactiveerd worden [de bladzijde van bestuur van plugin->./?exec=admin_couteau_suisse] en een aantal variabele beheren: op {{Configuratie}} klikken, vervolgens de tab kiezen {{Le Couteau Suisse}}.
 
-De beschikbare categorie&euml;n zijn: Bestuur, typografische Verbeteringen, typografische Kortere wegen, openbare Display, Bakens, filters, criteria.
+De beschikbare categorieën zijn: Bestuur, typografische Verbeteringen, typografische Kortere wegen, openbare Display, Bakens, filters, criteria.
 
-Ontdekt in dit plugin uw lievelingswerktuigen: {Typografische Inzenders}, {typografische Aanhalingstekens}, {Mooi chips}, {schaft een overzicht voor uw artikelen}, {Smileys}, {het nummer}, {Mooi URLs}, {SPIP en de band af… externe}, {Niet van onbekende forums}, {D&eacute;coupe in bladzijdes en tabben}, enz., enz.
+Ontdekt in dit plugin uw lievelingswerktuigen: {Typografische Inzenders}, {typografische Aanhalingstekens}, {Mooi chips}, {schaft een overzicht voor uw artikelen}, {Smileys}, {het nummer}, {Mooi URLs}, {SPIP en de band af… externe}, {Niet van onbekende forums}, {Découpe in bladzijdes en tabben}, enz., enz.
 
 Aarzelt niet om de gepubliceerde artikelen van documentatie van plugin over te raadplegen : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 

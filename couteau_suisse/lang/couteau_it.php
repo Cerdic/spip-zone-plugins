@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -78,7 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Pagina @page@ : @title@',
 	'page_precedente' => 'Pagina precedente',
 	'page_suivante' => 'Pagina successiva',
-	'plug_actifs' => 'Plugins attivi',
+	'plug_actifs' => 'Plugins actifs', # NEW
 	'plug_inactifs' => 'Plugins non attivi',
 	'plugin_xml' => 'Raccoglie in un solo plugin una serie di piccole funzioni nuove ed utili a migliorare la gestione del tuo sito SPIP.
 
