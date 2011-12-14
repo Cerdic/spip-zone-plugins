@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -22,19 +22,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_action_supprimer' => 'Supprimer', # NEW
 	'construire_ajouter_champ' => 'Ajouter un champ', # NEW
 	'construire_attention_enregistrer' => 'N\'oubliez pas d\'enregistrer vos modifications !', # NEW
-	'construire_attention_modifie' => 'Le formulaire ci-dessous est diff&eacute;rent du formulaire initial. Vous avez la possibilit&eacute; de le r&eacute;initialiser &agrave; son &eacute;tat avant vos modifications.', # NEW
+	'construire_attention_modifie' => 'Le formulaire ci-dessous est différent du formulaire initial. Vous avez la possibilité de le réinitialiser à son état avant vos modifications.', # NEW
 	'construire_attention_supprime' => 'Vos modifications comportent des suppressions de champs. Veuillez confirmer l\'enregistrement de cette nouvelle version du formulaire.', # NEW
 	'construire_aucun_champs' => 'Il n\'y a pour l\'instant aucun champ dans ce formulaire.', # NEW
 	'construire_confirmer_supprimer_champ' => 'Voulez-vous vraiment supprimer ce champ ?', # NEW
 	'construire_info_nb_champs_masques' => '@nb@ champ(s) masqué(s) le temps de configurer le groupe.', # NEW
-	'construire_position_explication' => 'Indiquez devant quel autre champ sera plac&eacute; celui-ci.', # NEW
-	'construire_position_fin_formulaire' => '&Agrave; la fin du formulaire', # NEW
-	'construire_position_fin_groupe' => '&Agrave; la fin du groupe @groupe@', # NEW
+	'construire_position_explication' => 'Indiquez devant quel autre champ sera placé celui-ci.', # NEW
+	'construire_position_fin_formulaire' => 'À la fin du formulaire', # NEW
+	'construire_position_fin_groupe' => 'À la fin du groupe @groupe@', # NEW
 	'construire_position_label' => 'Position du champ', # NEW
-	'construire_reinitialiser' => 'R&eacute;initialiser le formulaire', # NEW
-	'construire_reinitialiser_confirmer' => 'Vous allez perdre toutes vos modifications. &Ecirc;tes-vous s&ucirc;r de vouloir revenir au formulaire initial ?', # NEW
+	'construire_reinitialiser' => 'Réinitialiser le formulaire', # NEW
+	'construire_reinitialiser_confirmer' => 'Vous allez perdre toutes vos modifications. Êtes-vous sûr de vouloir revenir au formulaire initial ?', # NEW
 	'construire_verifications_aucune' => 'Aucune', # NEW
-	'construire_verifications_label' => 'Type de v&eacute;rification &agrave; effectuer', # NEW
+	'construire_verifications_label' => 'Type de vérification à effectuer', # NEW
 
 	// E
 	'erreur_option_nom_unique' => 'Ce nom est déjà utilisé par un autre champ et il doit être unique dans ce formulaire.', # NEW
