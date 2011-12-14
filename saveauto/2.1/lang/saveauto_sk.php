@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'envoi_mail' => 'Zálohy odoslané',
-	'erreur_config_inadaptee_mail' => 'Nesprávne nastavenia &ndash; váš server neponúka funkciu odosielania e-mailov!',
+	'erreur_config_inadaptee_mail' => 'Nesprávne nastavenia – váš server neponúka funkciu odosielania e-mailov!',
 	'erreur_impossible_creer_verifier' => 'Nedá sa vytvoriť súbor @fichier@: skontrolujte právo zapisovať v priečinku @rep_bases@.',
 	'erreur_impossible_liste_tables' => 'Tabuľky z databázy sa nedajú vypísať.',
 	'erreur_mail_fichier_lourd' => 'Záložný súbor je priveľký na to, aby bol odoslaný e-mailom. Jeho kópiu môžte získať pomocou administračného rozhrania stránky alebo prostredníctvom FTP v umiestnení: @fichier@',
