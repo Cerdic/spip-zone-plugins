@@ -1,5 +1,5 @@
 <plugin>
-	<nom>G&#233;olocalisation et cartographie avec Mapstraction</nom>
+	<nom>Impl&#233;mentation Mapstraction pour GMap</nom>
 	<icon>images/logo-gmapmxn-64.png</icon>
 	<version>0.1.2</version>
 	<etat>test</etat>
