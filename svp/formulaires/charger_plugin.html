@@ -25,22 +25,39 @@
                 <input type="submit" name="valider_actions" class="submit valider_actions" value="<:bouton_valider:>" />
             </p>
             <script type="text/javascript">
+				[(#REM)
+					Fonctionnement du JS.
+						- overlayClose // pas de click en dehors des éléments prévus
+						
+						- onComplete   // le chargement et fait : si l'on clique les boutons du formulaire
+									   // mis dans la modale, on leur ajoute une classe 'fire'
+									   // et on lance la fermeture de la boite
+
+						- onCleanup    // avant la fermeture... on verifie que 'fire' est bien là
+									   // sinon c'est qu'on a appuyé ESC ou cliqué X
+									   // dans ce cas on met 'fire' sur annuler
+
+						- onClose	   // apres la fermeture, on clique le bouton ayant 'fire'
+								
+				]
                 <!--
                 (function($){
                     $(function(){
 						if ($.modalbox !== 'undefined') {
 							
 							$.modalboxload('#charger_plugin_confirm', {
-								overlayClose: false,
+								overlayClose: false, // pas de click en dehors
 								onComplete: function() {
 									$('#cboxLoadedContent .boutons .submit').click(function(){
-										$(this).addClass('fire');
-										$.mediaboxClose();
+										$(this).addClass('fire'); $.mediaboxClose();
 									});
 								},
-								onClose: function() {
-									$('#charger_plugin_confirm .submit.fire').click();
-								}
+								onCleanup: function() {
+									if (!$('#charger_plugin_confirm .boutons .submit.fire').length) {
+										$('#charger_plugin_confirm .boutons .submit.annuler_actions').addClass('fire');
+									}
+								},
+								onClose: function() { $('#charger_plugin_confirm .submit.fire').click(); }
 							});
 						}
                     });
