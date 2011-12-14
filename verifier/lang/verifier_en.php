@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_regex' => 'Regular expression',
 	'type_regex_description' => 'Check that the value matches the defined expression. For more information on using regular expressions, please refer to <a href="http://fr2.php.net/manual/en/reference.pcre.pattern.syntax.php">the online PHP help</a>.', # MODIF
 	'type_siren_siret' => 'SIREN or SIRET',
-	'type_siren_siret_description' => 'Check that the value is a valid number from the French <a href="http://fr.wikipedia.org/wiki/SIREN">Syst&egrave;me d’Identification du R&eacute;pertoire des ENtreprises</a> (Company Registry ID System).',
+	'type_siren_siret_description' => 'Check that the value is a valid number from the French <a href="http://fr.wikipedia.org/wiki/SIREN">Système d’Identification du Répertoire des ENtreprises</a> (Company Registry ID System).',
 	'type_taille' => 'Size',
 	'type_taille_description' => 'Check that the size of the value corresponds to the minimum and/or maximum specified.',
 	'type_telephone' => 'Telephone number',

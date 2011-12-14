@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -59,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_mode_complet' => 'Vérification complète de l\'url', # NEW
 	'option_url_mode_label' => 'Mode de vérification des urls', # NEW
 	'option_url_mode_php_filter' => 'Vérification complète de l\'url via le filtre FILTER_VALIDATE_URL de php', # NEW
-	'option_url_mode_protocole_seul' => 'V&eacute;rification uniquement de la présence d\'un protocole', # NEW
+	'option_url_mode_protocole_seul' => 'Vérification uniquement de la présence d\'un protocole', # NEW
 	'option_url_protocole_label' => 'Nom du protocole à vérifier', # NEW
 	'option_url_type_protocole_exact' => 'Saisir un protocole ci-dessous :', # NEW
 	'option_url_type_protocole_ftp' => 'Protocoles ftp : ftp ou sftp', # NEW
@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_regex' => 'Expressió regular ',
 	'type_regex_description' => 'Verifica que el valor correspon a la màscara demanada. Per l\'ús de màscares, aneu a <a href="http://fr2.php.net/manual/fr/reference.pcre.pattern.syntax.php">l\'ajuda en línia de PHP</a>.',
 	'type_siren_siret' => 'SIREN o SIRET',
-	'type_siren_siret_description' => 'Verifica queel valor &eacute;s un n&uacute;mero v&agrave;lid del <a href="http://fr.wikipedia.org/wiki/SIREN">Syst&egrave;me d’Identification du R&eacute;pertoire des ENtreprises</a> franc&egrave;s.',
+	'type_siren_siret_description' => 'Verifica queel valor és un número vàlid del <a href="http://fr.wikipedia.org/wiki/SIREN">Système d’Identification du Répertoire des ENtreprises</a> francès.',
 	'type_taille' => 'Mida',
 	'type_taille_description' => 'Verifica que la mida del valor correspon al mínim i/o al màxim demanat.',
 	'type_telephone' => 'Número de telèfon',

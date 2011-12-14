@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -59,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_mode_complet' => 'Vérification complète de l\'url', # NEW
 	'option_url_mode_label' => 'Mode de vérification des urls', # NEW
 	'option_url_mode_php_filter' => 'Vérification complète de l\'url via le filtre FILTER_VALIDATE_URL de php', # NEW
-	'option_url_mode_protocole_seul' => 'V&eacute;rification uniquement de la présence d\'un protocole', # NEW
+	'option_url_mode_protocole_seul' => 'Vérification uniquement de la présence d\'un protocole', # NEW
 	'option_url_protocole_label' => 'Nom du protocole à vérifier', # NEW
 	'option_url_type_protocole_exact' => 'Saisir un protocole ci-dessous :', # NEW
 	'option_url_type_protocole_ftp' => 'Protocoles ftp : ftp ou sftp', # NEW

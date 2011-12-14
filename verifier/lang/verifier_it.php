@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_regex' => 'Espressione regolare',
 	'type_regex_description' => 'Verifica che il valore corrisponda alla maschera richiesta. Per l\'utilizzo delle maschere, riferisciti all\'<a href="http://it.php.net/manual/en/reference.pcre.pattern.syntax.php">aiuto in linea di PHP</a>.',
 	'type_siren_siret' => 'SIREN o SIRET',
-	'type_siren_siret_description' => 'Verifica che il valore sia un numero valido di <a href="http://fr.wikipedia.org/wiki/SIREN">Syst&egrave;me d&rsquo;Identification du R&eacute;pertoire des ENtreprises</a> francese.',
+	'type_siren_siret_description' => 'Verifica che il valore sia un numero valido di <a href="http://fr.wikipedia.org/wiki/SIREN">Système d’Identification du Répertoire des ENtreprises</a> francese.',
 	'type_taille' => 'Dimensione',
 	'type_taille_description' => 'Verifica che la dimensione del valore corrisponda ad un minimo e/o ad un massimo richiesto.',
 	'type_telephone' => 'Numero telefonico',
