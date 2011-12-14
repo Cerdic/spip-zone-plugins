@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -8,8 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'a_confirmer' => 'Zu best&amp;auml;tigen',
-	'accesrestreint' => 'Eingeschr&amp;auml;nkter Zugang',
+	'a_confirmer' => 'Zu best&auml;tigen',
+	'accesrestreint' => 'Eingeschr&auml;nkter Zugang',
 	'aconfirmer' => 'Zu bestätigen',
 	'action_adherent' => 'Aktionen',
 	'activation_compte' => 'Aktivieren Sie Ihr Konto',
