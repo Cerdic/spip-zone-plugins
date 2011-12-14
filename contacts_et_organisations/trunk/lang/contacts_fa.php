@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -57,9 +57,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_statut_juridique' => 'سازمان، انجمن، شركت . . . ',
 	'explication_supprimer_contact' => 'حذف اين تماس تمام اطلاعات اضافي را كه در صفحه‌ي نويسنده پر شده حذف مي‌كند. ',
 	'explication_supprimer_organisation' => 'حذف اين سازمان تمام اطلاعات اضافي را كه در صفحه‌ي نويسنده پر شده حذف خواهد كرد. ',
-	'explications_page_contacts' => 'Page en cours de d&eacute;veloppement. <br /><br />Actions envisag&eacute;es :<ul>
+	'explications_page_contacts' => 'Page en cours de développement. <br /><br />Actions envisagées :<ul>
 	<li>voir tous les contacts</li><li>transformer les auteurs en contacts</li><li>importer des contacts</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)', # NEW
-	'explications_page_organisations' => 'Page en cours de d&eacute;veloppement. <br /><br />Actions envisag&eacute;es :<ul>
+	'explications_page_organisations' => 'Page en cours de développement. <br /><br />Actions envisagées :<ul>
 	<li>voir toutes les organisations</li><li>transformer des auteurs en organisations</li><li>importer des organsations</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)', # NEW
 
 	// I

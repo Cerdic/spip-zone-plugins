@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chercher_statut' => 'Status',
 	'confirmer_delier_contact' => 'Are you sure you want to unlink this organisation from this contact?',
 	'confirmer_delier_organisation' => 'Are you sure you want to unlink this contact from this organisation?',
-	'confirmer_delier_organisation_rubrique' => '&Ecirc;tes-vous s&ucirc;r de vouloir d&eacute;lier cette organisation de cette rubrique ?', # NEW
+	'confirmer_delier_organisation_rubrique' => 'Êtes-vous sûr de vouloir délier cette organisation de cette rubrique ?', # NEW
 	'confirmer_supprimer_contact' => 'Ares you sure you want to delete all information about this contact?',
 	'confirmer_supprimer_organisation' => 'Are you sure you want to delete all the information about this organisation?',
 	'contact' => 'One contact',
