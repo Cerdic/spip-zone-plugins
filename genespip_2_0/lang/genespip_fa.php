@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creation_annulee' => 'ايجاد منتفي شد',
 	'creation_fiche' => 'ايجاد پرونده',
 	'creer' => 'ايجاد',
-	'creer_document' => '››&nbsp;&#1575;&#1610;&#1580;&#1575;&#1583; &#1610;&#1603; &#1587;&#1606;&#1583;&nbsp;››',
+	'creer_document' => '›› ايجاد يك سند ››',
 
 	// D
 	'date' => 'تاريخ',
@@ -96,7 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'indication_format_photo' => '<br />بيشترين اندازه. 100 ك.ب',
 	'individu' => 'فرد',
-	'info_centans' => '<p>&#1606;&#1605;&#1575;&#1610;&#1588; &#1578;&#1575;&#1585;&#1610;&#1582;&#8204;&#1607;&#1575;&#1610; &#1603;&#1605;&#8204;&#1578;&#1585; &#1575;&#1586; 100 &#1587;&#1575;&#1604; &#1576;&#1607; &#1591;&#1608;&#1585; &#1582;&#1608;&#1583;&#1603;&#1575;&#1585; &#1605;&#1605;&#1606;&#1608;&#1593; &#1575;&#1587;&#1578;. <br /> &#1575;&#1610;&#1606; &#1711;&#1586;&#1610;&#1606;&#1607; &#1601;&#1602;&#1591; &#1583;&#1585; &#1605;&#1608;&#1585;&#1583; &#1576;&#1575;&#1586;&#1583;&#1610;&#1583;&#1603;&#1606;&#1606;&#1583;&#1711;&#1575;&#1606; &#1587;&#1575;&#1610;&#1578; &#1603;&#1575;&#1585;&#1576;&#1585;&#1583; &#1583;&#1575;&#1585;&#1583;<br /> &#1575;&#1711;&#1585; &#1575;&#1610;&#1606; &#1711;&#1586;&#1610;&#1606;&#1607; &#1594;&#1610;&#1585;&#1601;&#1593;&#1575;&#1604; &#1588;&#1583;&#1607; &#1576;&#1575;&#1588;&#1583;&#1548; &#1607;&#1606;&#1608;&#1586; &#1605;&#1605;&#1603;&#1606; &#1575;&#1587;&#1578; &#1606;&#1605;&#1575;&#1610;&#1588; &#1662;&#1585;&#1608;&#1606;&#1583;&#1607; &#1576;&#1607; &#1662;&#1585;&#1608;&#1606;&#1583;&#1607; &#1585;&#1575; &#1605;&#1581;&#1583;&#1608;&#1583; &#1603;&#1585;&#1583;.</p></p><NEW><p>Interdire syst&eacute;matiquement l‘affichage des dates ayant moins de 100 ans.<br />Cette option ne s‘applique que pour les visiteurs<br />Si cette option est d&eacute;sactiv&eacute;e, il est possible de limiter l‘affichage fiche par fiche.</p>',
+	'info_centans' => '<p>نمايش تاريخ‌هاي كم‌تر از 100 سال به طور خودكار ممنوع است. <br /> اين گزينه فقط در مورد بازديدكنندگان سايت كاربرد دارد<br /> اگر اين گزينه غيرفعال شده باشد، هنوز ممكن است نمايش پرونده به پرونده را محدود كرد.</p></p><NEW><p>Interdire systématiquement l‘affichage des dates ayant moins de 100 ans.<br />Cette option ne s‘applique que pour les visiteurs<br />Si cette option est désactivée, il est possible de limiter l‘affichage fiche par fiche.</p>',
 	'info_deces' => 'اطلاعات مرگ',
 	'info_doc' => '<p>پلاگين شجرنامه.</p> <p> شجره‌نامه خود را با اسپيپ در اينترنت منتشر كنيد.</p>',
 	'info_gedcom_etape1' => 'شجره‌ي شما خالي است - يك پرونده‌ي جدكام (GedCom)وارد كنيد (يك م.ب حداكثر) يا يك پرونده‌ي نو بسازيد.<br />',

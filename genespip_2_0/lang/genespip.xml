@@ -1,4 +1,4 @@
-<traduction module="genespip" gestionnaire="salvatore" reference="fr">
+<traduction module="genespip" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/genespip_2_0/lang/" reference="fr">
 	<langue code="ca">
 		<traducteur nom="merce" />
 	</langue>
@@ -8,7 +8,6 @@
 	<langue code="fa">
 		<traducteur nom="davood" />
 	</langue>
-	<langue code="pt" />
 	<langue code="sk">
 		<traducteur nom="jaro" />
 	</langue>

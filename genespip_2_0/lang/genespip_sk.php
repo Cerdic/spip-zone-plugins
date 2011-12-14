@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -99,13 +99,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_centans' => '<p>Natrvalo zakáže zobrazovanie dátumov spred 100 rokov.<br />Táto možnosť sa použije iba pri návštevníkoch stránky.<br />Ak bola deaktivovaná, zobrazenie sa stále dá obmedziť samostatne pri každom súbore.</p>',
 	'info_deces' => 'Údaje o smrti',
 	'info_doc' => '<p>Genealogický zásuvný modul.</p> <p>Publikujte svoj rodokmeň na internete pomocou stránky v SPIPe.</p>',
-	'info_gedcom_etape1' => 'Váš rodostrom je prázdny &ndash; nahrajte súbor GedCom (max. 1 MB) alebo vytvorte nový súbor.<br />',
+	'info_gedcom_etape1' => 'Váš rodostrom je prázdny – nahrajte súbor GedCom (max. 1 MB) alebo vytvorte nový súbor.<br />',
 	'info_gedcom_etape2' => 'Na nahratie súboru GedCom GeneSPIP potrebuje vedieť, ako chcete spracúvať vstup"PLAC"<br />GeneSPIP vybral prvých 5 vstupov "PLAC", vyberte jeden z nich, ktorý bude pre ostatné slúžiť ako referenčný bod',
 	'info_gedcom_etape3' => 'Počnúc prvým vstupom vyberte, ako má GeneSPIP každý údaj preložiť',
 	'info_mariage' => 'Údaje o manželstve',
 	'info_multilingue' => '<p>Na stránke zobraziť viacjazyčnú hlavičku.<br />Na deaktivovanie všetkých nepoužívaných jazykov použite viacjazyčné menu SPIPu</p>',
 	'info_naissance' => 'Údaj o narodení',
-	'info_pub' => '<p>Príjmy z reklamy sú určené pre autora GeneSPIPu a vy môžete vložiť svoju vlastnú hlavičku s reklamou tak, že upravíte obsah súboru: pub/200x200genespip.html &ndash; prihláste sa na odber reklamy to google adsense, ak si chcete vytvoriť vlastnú hlavičku</p>',
+	'info_pub' => '<p>Príjmy z reklamy sú určené pre autora GeneSPIPu a vy môžete vložiť svoju vlastnú hlavičku s reklamou tak, že upravíte obsah súboru: pub/200x200genespip.html – prihláste sa na odber reklamy to google adsense, ak si chcete vytvoriť vlastnú hlavičku</p>',
 	'info_restriction_acces' => '<p>Obmedziť prístup k údajom na liste na verejne prístupnej stránke</p>',
 	'info_restriction_acces0' => '<b>0:</b> Vyhradené pre administrátorov',
 	'info_restriction_acces1' => '<b>1:</b> Vyhradené pre administrátorov a redaktorov',
