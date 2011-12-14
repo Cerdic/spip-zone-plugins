@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'casse_indifferente' => 'لا يتأثر المحرك بحالة الأحرف ان كانت كبيرة او صغيرة.',
 	'configuration_indexation_document' => 'إعداد فهرسة المستندات',
-	'configurer_egalement_doc' => 'يمكن أيضاً إعداد فهرسة المستندات:',
+	'configurer_egalement_doc' => 'يمكن أيضاً إعداد فهرسة المستندات:', # MODIF
 	'convertir_myisam' => 'تحويل الى MyISAM',
 	'convertir_toutes' => 'تحويل كل الجداول الى  MyISAM',
 	'convertir_utf8' => 'تحويل الى UTF-8 لاسترجاع الاتساق',
@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'des_utilisations' => '@nb@ استخدام',
 	'descriptif' => 'الوصف',
-	'documents_proteges' => 'مستندات محمية',
+	'documents_proteges' => 'مستندات محمية', # MODIF
 
 	// E
 	'enfan' => 'ولد',
@@ -36,14 +36,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'enfantillage' => 'ولدن',
 	'enfants' => 'ولد',
 	'erreur_binaire_indisponible' => 'Ce logiciel n\'est pas disponible sur le serveur.', # NEW
-	'erreur_doc_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات doc.',
-	'erreur_intervalle_cron' => 'يجب تحديد مدة تفوق الثانية',
-	'erreur_nb_docs' => 'يجب تحديد عدد مستندات للمعالجة يفوق المستند الواحد.',
-	'erreur_pdf_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات pdf.',
-	'erreur_ppt_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات ppt.',
-	'erreur_taille_index' => 'يجب فهرسة حرف واحد على الأقل.',
+	'erreur_doc_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات doc.', # MODIF
+	'erreur_intervalle_cron' => 'يجب تحديد مدة تفوق الثانية', # MODIF
+	'erreur_nb_docs' => 'يجب تحديد عدد مستندات للمعالجة يفوق المستند الواحد.', # MODIF
+	'erreur_pdf_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات pdf.', # MODIF
+	'erreur_ppt_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات ppt.', # MODIF
+	'erreur_taille_index' => 'يجب فهرسة حرف واحد على الأقل.', # MODIF
 	'erreur_verifier_configuration' => 'Il y a des erreurs de configuration.', # NEW
-	'erreur_xls_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات xls.',
+	'erreur_xls_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات xls.', # MODIF
 	'et' => '<strong>و</strong>',
 	'etranger' => 'غريب',
 	'exemples' => 'أمثلة على الاستخدام',
@@ -81,17 +81,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'mais_pas' => 'ولكن <strong>ليس</strong>',
-	'message_ok_configuration' => 'تم تسجيل تفضيلاتك',
-	'message_ok_update_configuration' => 'تم تحديث تفضيلاتك',
+	'message_ok_configuration' => 'تم تسجيل تفضيلاتك', # MODIF
+	'message_ok_update_configuration' => 'تم تحديث تفضيلاتك', # MODIF
 
 	// N
 	'nb_err' => 'En erreur d\'indexation', # NEW
-	'nb_index' => 'Index&eacute;s', # NEW
-	'nb_non_index' => 'Non-index&eacute;s', # NEW
-	'nb_ptg' => 'Prot&eacute;g&eacute;s (non-index&eacute;s)', # NEW
+	'nb_index' => 'Indexés', # MODIF
+	'nb_non_index' => 'Non-indexés', # MODIF
+	'nb_ptg' => 'Protégés (non-indexés)', # MODIF
 	'necessite_version_php' => '(يتطلب PHP 5.2 الأقل وخيار -enable-zip)', # MODIF
-	'nombre_caracteres' => 'عدد الحروف المفهرسة (من بداية المستند).',
-	'nombre_documents' => 'Nombre de documents &agrave; traiter par it&eacute;ration du CRON', # NEW
+	'nombre_caracteres' => 'عدد الحروف المفهرسة (من بداية المستند).', # MODIF
+	'nombre_documents' => 'Nombre de documents à traiter par itération du CRON', # MODIF
 
 	// O
 	'ou_bien' => 'أو',
@@ -102,7 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'premier_soit' => '<strong>إما</strong>',
 
 	// Q
-	'que_des_exemples' => 'ملاحظة: عناوين التطبيقات المقترحة هنا هي أمثلة.',
+	'que_des_exemples' => 'ملاحظة: عناوين التطبيقات المقترحة هنا هي أمثلة.', # MODIF
 
 	// R
 	'regenerer_tous' => 'إعادة إنتاج كل فهارس FULLTEXT',
@@ -110,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reinitialise_index_ptg' => 'Réinitialiser l\'indexation des documents protégés', # NEW
 	'reinitialise_totalement_doc' => 'إعادة تأصيل فهرسة كل المستندات',
 	'reserve_webmestres' => 'صفحة محصورة بمسؤول الموقع',
-	'retour_configuration_fulltext' => 'العودة الى إعداد الملحق',
+	'retour_configuration_fulltext' => 'العودة الى إعداد الملحق', # MODIF
 	'retourne' => 'يسترجع النصوص التي تحتوي ',
 
 	// S

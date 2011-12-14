@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'casse_indifferente' => 'وضعيت حروف (كوچك/بزرگ) در كلمه تأثيري ندارد.',
 	'configuration_indexation_document' => 'Configuration de l\'indexation des documents', # NEW
-	'configurer_egalement_doc' => 'Vous pouvez &eacute;galement configurer l\'indexation des documents :', # NEW
+	'configurer_egalement_doc' => 'Vous pouvez également configurer l\'indexation des documents :', # MODIF
 	'convertir_myisam' => 'تبديل به ماي‌‌ايسام (MyISAM)',
 	'convertir_toutes' => 'تبديل تمام جدول‌ها به ماي‌ايسام',
 	'convertir_utf8' => 'تبديل به يو.تي.اف-8 (UTF-8) براي بهبود هماهنگي ',
@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'des_utilisations' => '@nb@ utilisations', # NEW
 	'descriptif' => 'Descriptif', # NEW
-	'documents_proteges' => 'Documents prot&eacute;g&eacute;s', # NEW
+	'documents_proteges' => 'Documents protégés', # MODIF
 
 	// E
 	'enfan' => 'بچه',
@@ -36,14 +36,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'enfantillage' => 'بچگي ',
 	'enfants' => 'بچه‌ها',
 	'erreur_binaire_indisponible' => 'Ce logiciel n\'est pas disponible sur le serveur.', # NEW
-	'erreur_doc_bin' => 'Vous devez renseigner le binaire &agrave; utiliser pour extraire les .doc', # NEW
-	'erreur_intervalle_cron' => 'Vous devez indiquer un intervalle sup&eacute;rieur &agrave; une seconde.', # NEW
-	'erreur_nb_docs' => 'Vous devez indiquer un nombre de documents &agrave; traiter par it&eacute;ration sup&eacute;rieur &agrave; un.', # NEW
-	'erreur_pdf_bin' => 'Vous devez renseigner le binaire &agrave; utiliser pour extraire les .pdf', # NEW
-	'erreur_ppt_bin' => 'Vous devez renseigner le binaire &agrave; utiliser pour extraire les .ppt', # NEW
-	'erreur_taille_index' => 'Il faut au moins indexer un caract&egrave;re.', # NEW
+	'erreur_doc_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .doc', # MODIF
+	'erreur_intervalle_cron' => 'Vous devez indiquer un intervalle supérieur à une seconde.', # MODIF
+	'erreur_nb_docs' => 'Vous devez indiquer un nombre de documents à traiter par itération supérieur à un.', # MODIF
+	'erreur_pdf_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .pdf', # MODIF
+	'erreur_ppt_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .ppt', # MODIF
+	'erreur_taille_index' => 'Il faut au moins indexer un caractère.', # MODIF
 	'erreur_verifier_configuration' => 'Il y a des erreurs de configuration.', # NEW
-	'erreur_xls_bin' => 'Vous devez renseigner le binaire &agrave; utiliser pour extraire les .xls', # NEW
+	'erreur_xls_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .xls', # MODIF
 	'et' => 'و ',
 	'etranger' => 'بيگانه',
 	'exemples' => 'نمونه‌هايي از موارد استفاده',
@@ -81,17 +81,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'mais_pas' => 'اما نه',
-	'message_ok_configuration' => 'Enregistrement de vos pr&eacute;f&eacute;rences termin&eacute;e', # NEW
-	'message_ok_update_configuration' => 'Mise &agrave; jour de vos pr&eacute;f&eacute;rences termin&eacute;e', # NEW
+	'message_ok_configuration' => 'Enregistrement de vos préférences terminée', # MODIF
+	'message_ok_update_configuration' => 'Mise à jour de vos préférences terminée', # MODIF
 
 	// N
 	'nb_err' => 'En erreur d\'indexation', # NEW
-	'nb_index' => 'Index&eacute;s', # NEW
-	'nb_non_index' => 'Non-index&eacute;s', # NEW
-	'nb_ptg' => 'Prot&eacute;g&eacute;s (non-index&eacute;s)', # NEW
-	'necessite_version_php' => 'N&eacute;cessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip.', # NEW
-	'nombre_caracteres' => 'Nombre de caract&egrave;res index&eacute;s (depuis le debut du document).', # NEW
-	'nombre_documents' => 'Nombre de documents &agrave; traiter par it&eacute;ration du CRON', # NEW
+	'nb_index' => 'Indexés', # MODIF
+	'nb_non_index' => 'Non-indexés', # MODIF
+	'nb_ptg' => 'Protégés (non-indexés)', # MODIF
+	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip.', # MODIF
+	'nombre_caracteres' => 'Nombre de caractères indexés (depuis le debut du document).', # MODIF
+	'nombre_documents' => 'Nombre de documents à traiter par itération du CRON', # MODIF
 
 	// O
 	'ou_bien' => 'يا ديگر',
@@ -102,7 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'premier_soit' => 'هم',
 
 	// Q
-	'que_des_exemples' => 'NB : les adresses de binaires et options propos&eacute;es ici ab initio ne sont que des exemples.', # NEW
+	'que_des_exemples' => 'NB : les adresses de binaires et options proposées ici ab initio ne sont que des exemples.', # MODIF
 
 	// R
 	'regenerer_tous' => 'بازسازي تمام ايندكس فول‌تكست ',
@@ -110,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reinitialise_index_ptg' => 'Réinitialiser l\'indexation des documents protégés', # NEW
 	'reinitialise_totalement_doc' => 'Réinitialiser l\'indexation de tous les documents', # NEW
 	'reserve_webmestres' => 'فقط وب مستر مي‌تواند از اين صفحه استفاده كند',
-	'retour_configuration_fulltext' => 'Retour &agrave; la configuration de Fulltext', # NEW
+	'retour_configuration_fulltext' => 'Retour à la configuration de Fulltext', # MODIF
 	'retourne' => 'بازگشت محتواي تكست',
 
 	// S
