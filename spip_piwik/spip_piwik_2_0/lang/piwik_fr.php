@@ -20,9 +20,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_creer_site' => 'Le lien ci-dessous vous permet de créer un site sur le serveur Piwik qui sera disponible ensuite dans la liste. Vérifiez que vous avez bien configuré l\'adresse et le nom de votre site SPIP avant de cliquer, ce sont ces informations qui seront utilisées.',
 	'explication_exclure_ips' => 'Pour exclure plusieurs adresses, séparez les par des points virgules',
 	'explication_identifiant_site' => 'La liste des sites disponibles sur le serveur Piwik a été récupérée automatiquement gràce aux informations soumises. Sélectionnez dans la liste ci-dessous celui qui vous convient',
-	'explication_mode_insertion' => 'Il existe deux modes d\'insertion dans les pages du code n&eacute;cessaire au bon fonctionnement du plugin. Par le pipeline "insert_head" (m&eacute;thode automatique mais peu configurable), ou par l\'insertion d\'une balise (m&eacute;thode manuelle en insérant dans le pied de vos pages la balise #PIWIK) qui, quant &agrave; elle est pleinement configurable.',
+	'explication_mode_insertion' => 'Il existe deux modes d\'insertion dans les pages du code nécessaire au bon fonctionnement du plugin. Par le pipeline "insert_head" (méthode automatique mais peu configurable), ou par l\'insertion d\'une balise (méthode manuelle en insérant dans le pied de vos pages la balise #PIWIK) qui, quant à elle est pleinement configurable.',
 	'explication_recuperer_liste' => 'Le lien ci-dessous vous permet de récupérer la liste des sites que votre compte peut administrer sur le serveur Piwik.',
-	'explication_restreindre_statut_prive' => 'Choisissez ici les statuts d\'utilisateurs qui ne seront pas comptabilisés dans les statistiques dans l\'espace priv&eacute;',
+	'explication_restreindre_statut_prive' => 'Choisissez ici les statuts d\'utilisateurs qui ne seront pas comptabilisés dans les statistiques dans l\'espace privé',
 	'explication_restreindre_statut_public' => 'Choisissez ici les statuts d\'utilisateurs qui ne seront pas comptabilisés dans les statistiques dans la partie publique',
 	'explication_token' => 'Le token d\'identification est disponible dans vos préférences personnelles ou dans la partie API de votre serveur Piwik',
 

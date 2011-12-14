@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_description_piwik' => 'Tu môžete uviesť svoj identifikátor pre piwik, ako aj adresu svojho štatistického servera.',
-	'cfg_erreur_recuperation_data' => 'Pri komunikácii so serverom sa vyskytol problém &ndash; prosím, skontrolujte adresu a token',
+	'cfg_erreur_recuperation_data' => 'Pri komunikácii so serverom sa vyskytol problém – prosím, skontrolujte adresu a token',
 	'cfg_erreur_token' => 'Your identification token is invalid', # NEW
 	'cfg_erreur_user_token' => 'The username and token do not match each other.', # NEW
 
