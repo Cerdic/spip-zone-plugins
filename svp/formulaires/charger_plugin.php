@@ -22,61 +22,62 @@ function formulaires_charger_plugin_verifier_dist(){
 		// Requete : Annulation des actions d'installation en cours
 		// -- On vide la liste d'actions en cours
 		set_request('_todo', '');
-	}
-	else {
-		if (!_request('rechercher')
-		and (!_request('valider_actions'))) {
-			// Requete : Installation d'un ou de plusieurs plugins
-			// -- On construit le tableau des ids de paquets conformement a l'interface du decideur
-			if (_request('installer')) {
-				// L'utilisateur a demander une installation multiple de paquets
-				// -- on verifie la liste des id_paquets uniquement
-				if ($id_paquets = _request('ids_paquet')) {
-					foreach ($id_paquets as $_id_paquet)
-						$a_installer[$_id_paquet] = 'on';
+	} elseif (_request('valider_actions')) {
+		// ...
+	} elseif (_request('rechercher')) {
+		// ...
+	} else {
+		// Requete : Installation d'un ou de plusieurs plugins
+		// -- On construit le tableau des ids de paquets conformement a l'interface du decideur
+		if (_request('installer')) {
+			// L'utilisateur a demander une installation multiple de paquets
+			// -- on verifie la liste des id_paquets uniquement
+			if ($id_paquets = _request('ids_paquet')) {
+				foreach ($id_paquets as $_id_paquet)
+					$a_installer[$_id_paquet] = 'on';
+			}
+		}
+		else {
+			// L'utilisateur a demande l'installation d'un paquet en cliquant sur le bouton en regard
+			// du resume du plugin -> installer_paquet
+			if ($install = _request('installer_paquet'))
+				if ($id_paquet = key($install))
+					$a_installer[$id_paquet] = 'on';
+		}
+
+		if (!$a_installer)
+			$erreurs = _T('svp:message_nok_aucun_plugin_selectionne');
+		else {
+			// On fait appel au decideur pour determiner la liste exacte des commandes apres
+			// verification des dependances
+			include_spip('inc/svp_decider');
+			$decideur = new Decideur;
+			$decideur->log = true;
+			$decideur->verifier_dependances($a_installer);
+
+			if (!$decideur->ok) {
+				$erreurs['decideur_erreurs'] = array();
+				foreach ($decideur->err as $id=>$errs) {
+					foreach($errs as $err) {
+						$erreurs['decideur_erreurs'][] = $err;
+					}
 				}
 			}
 			else {
-				// L'utilisateur a demande l'installation d'un paquet en cliquant sur le bouton en regard
-				// du resume du plugin -> installer_paquet
-				if ($install = _request('installer_paquet'))
-					if ($id_paquet = key($install))
-						$a_installer[$id_paquet] = 'on';
-			}
+				$erreurs['decideur_propositions'] 	= $decideur->presenter_actions('changes');
+				$erreurs['decideur_demandes'] 		= $decideur->presenter_actions('ask');
+				$erreurs['decideur_actions'] 		= $decideur->presenter_actions('todo');
 
-			if (!$a_installer)
-				$erreurs = _T('svp:message_nok_aucun_plugin_selectionne');
-			else {
-				// On fait appel au decideur pour determiner la liste exacte des commandes apres
-				// verification des dependances
-				include_spip('inc/svp_decider');
-				$decideur = new Decideur;
-				$decideur->log = true;
-				$decideur->verifier_dependances($a_installer);
-
-				if (!$decideur->ok) {
-					$erreurs['decideur_erreurs'] = array();
-					foreach ($decideur->err as $id=>$errs) {
-						foreach($errs as $err) {
-							$erreurs['decideur_erreurs'][] = $err;
-						}
-					}
+				// On construit la liste des actions pour la passer au formulaire en hidden
+				$todo = array();
+				foreach ($decideur->todo as $_todo) {
+					$todo[$_todo['i']] = $_todo['todo'];
 				}
-				else {
-					$erreurs['decideur_propositions'] 	= $decideur->presenter_actions('changes');
-					$erreurs['decideur_demandes'] 		= $decideur->presenter_actions('ask');
-					$erreurs['decideur_actions'] 		= $decideur->presenter_actions('todo');
-
-					// On construit la liste des actions pour la passer au formulaire en hidden
-					$todo = array();
-					foreach ($decideur->todo as $_todo) {
-						$todo[$_todo['i']] = $_todo['todo'];
-					}
-					set_request('_todo', serialize($todo));
-				}
+				set_request('_todo', serialize($todo));
 			}
 		}
 	}
+	
 	return $erreurs;
 }
 
@@ -88,7 +89,8 @@ function formulaires_charger_plugin_traiter_dist(){
 
 	}
 	elseif (_request('valider_actions')) {
-
+		set_request('_todo', '');
+		$retour['message_ok'] = "Les actions ont bien étés validées... Reste plus qu'à les coder :)";
 	}
 	else {
 		// On a demande une installation, "installer" ou "installer_paquet" la fonction verifier a appele

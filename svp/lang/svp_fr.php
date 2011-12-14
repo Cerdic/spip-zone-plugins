@@ -107,6 +107,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // M
     'message_action_on' => 'Activer le plugin &laquo;@plugin@&raquo; (version : @version@)',
+	'message_action_up' => 'Mise &agrave; jour du plugin &laquo;@plugin@&raquo; (version : @version@)',
+	'message_action_upon' => 'Mise &agrave; jour et activation du plugin &laquo;@plugin@&raquo; (version : @version@)',
+
     'message_dependance_plugin' => 'Le plugin @plugin@ d&eacute;pend de @dependance@.',
     'message_dependance_plugin_version' => 'Le plugin @plugin@ d&eacute;pend de @dependance@ @version@',
     'message_erreur_ecriture_lib' => '@plugin@ a besoin de la librairie <a href="@lib_url@">@lib@</a>
