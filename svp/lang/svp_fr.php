@@ -108,6 +108,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // M
     'message_action_get' => 'Télécharger le plugin &laquo;@plugin@&raquo; (version : @version@)',
     'message_action_geton' => 'Télécharger et activer le plugin &laquo;@plugin@&raquo; (version : @version@)',
+	'message_action_getlib' => 'Télécharger la librairie &laquo;@plugin@&raquo; (depuis : <a href="@version" class="spip_out">@version@</a>)',
     'message_action_on' => 'Activer le plugin &laquo;@plugin@&raquo; (version : @version@)',
 	'message_action_up' => 'Mise &agrave; jour du plugin &laquo;@plugin@&raquo; (version : @version@)',
 	'message_action_upon' => 'Mise &agrave; jour et activation du plugin &laquo;@plugin@&raquo; (version : @version@)',

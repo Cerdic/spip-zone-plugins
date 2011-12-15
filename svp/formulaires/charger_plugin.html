@@ -7,7 +7,12 @@
 	<form method="post" action="#ENV{action}">
 
 
+		[<div class="reponse_formulaire reponse_formulaire_erreur">
+			(#ENV**{erreurs}|table_valeur{decideur_erreurs}|foreach)
+		</div>]
+
         [<div id="charger_plugin_confirm">
+			
             [<div class="reponse_formulaire reponse_formulaire_ok">
                 <strong>Demande :</strong>
                 <ul>(#ENV**{erreurs}|table_valeur{decideur_demandes}|foreach)</ul>

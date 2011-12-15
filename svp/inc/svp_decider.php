@@ -343,6 +343,8 @@ class Decideur {
 				$this->log("-- todo: $id/$t");
 
 				switch ($t) {
+					case 'getlib':
+						break;
 					case 'on':
 					case 'geton':
 						// ajouter ce plugin dans la liste
@@ -474,7 +476,8 @@ class Decideur {
 
 		$cache = array(); // cache des actions realisees dans ce tour
 
-		// 1 TODO : tester la version de SPIP de notre paquet
+		// 1
+		// tester la version de SPIP de notre paquet
 		// si on ne valide pas, on retourne une erreur !
 		// mais normalement, on ne devrait vraiment pas pouvoir tomber sur ce cas
 		if (!svp_verifier_compatibilite_spip($info['compatibilite_spip'])) {
@@ -483,24 +486,42 @@ class Decideur {
 			return false;
 		}
 					
-		// 2 TODO : ajouter les librairies necessaires a notre paquet
+		// 2
+		// ajouter les librairies necessaires a notre paquet
 		if (is_array($info['dl']) and count($info['dl'][0])) {
+			$err = false;
 			foreach ($info['dl'][0] as $l) {
-				$this->log("## Necessite la librairie : ");
-				$this->log($l);
-				/*
+				// $l = array('nom' => 'x', 'lien' => 'url')
+				$lib = $l['nom'];
+				$this->log("## Necessite la librairie : " . $lib );
+
 				// on verifie sa presence OU le fait qu'on pourra la telecharger
 				if ($lib and !$this->est_presente_lib($lib)) {
 					// peut on ecrire ?
 					if (!is_writable(_DIR_LIB)) {
 						$this->invalider($info);
-						$this->erreur($id, _T('svp:message_erreur_ecriture_lib',array('plugin'=>$info[p],'lib_url'=>$n[src],'lib'=>$lib)));
+						$this->erreur($id, _T('svp:message_erreur_ecriture_lib', array('plugin'=>$info['p'], 'lib_url'=>$l['lien'], 'lib'=>$lib)));
+						$err = true;
 					}
-				}*/
+					// ajout, pour info
+					// de la librairie dans la todo list
+					else {
+						$this->todo(array(
+							'i' => md5(serialize($l)),
+							'p' => $lib,
+							'v' => $l['lien'],
+						), 'getlib');
+					}
+					
+				}
+			}
+			if ($err) {
+				return false;
 			}
 		}
 
-		// 3 Trouver les dependences aux necessites
+		// 3
+		// Trouver les dependences aux necessites
 		// et les activer au besoin
 		if (is_array($info['dn']) and count($info['dn'][0])) {
 			foreach ($info['dn'][0] as $n) {

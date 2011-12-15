@@ -1,5 +1,12 @@
 <?php
 
+// definir le chemin des librairies
+// que l'on installe
+if (!defined('_DIR_LIB')) {
+	define('_DIR_LIB', _DIR_RACINE . 'lib/');
+}
+
+
 // Mode d'utilisation de SVP runtime ou pas :
 // - En mode runtime (true), on ne charge que les plugins compatibles avec la version courante
 // - En mode non runtime (false) on charge tous les plugins : cas du site Plugins SPIP
