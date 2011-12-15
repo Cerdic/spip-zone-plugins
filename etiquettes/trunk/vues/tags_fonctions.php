@@ -20,7 +20,7 @@ function etiquettes_vue_tags($rien, $type_objet, $id_objet){
 		array('mots' => 'spip_mots', 'liaison' => 'spip_mots_liens'),
 		array(
 			//array('=', 'mots.type', _q('tags')),
-			array('=', 'liaison.objet', _q(obje_type($type_objet))),
+			array('=', 'liaison.objet', sql_quote(objet_type($type_objet))),
 			array('=', 'liaison.id_objet', $id_objet),
 			array('=', 'mots.id_mot', 'liaison.id_mot')
 		),
