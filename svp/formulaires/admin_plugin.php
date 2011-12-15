@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formulaires_admin_plugin_charger_dist($voir='actif'){
+function formulaires_admin_plugin_charger_dist($voir='actif', $verrouille='non'){
 	$valeurs = array();
 	
 	include_spip('inc/svp_depoter_local');
@@ -10,26 +10,25 @@ function formulaires_admin_plugin_charger_dist($voir='actif'){
 	
 	$valeurs['constante'] = array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL');
 	$valeurs['actif'] = 'oui';
-		
-	if ($voir == 'actif')
-		$valeurs['actif'] = 'oui';
-		
+	
 	if ($voir == 'inactif')
 		$valeurs['actif'] = 'non';
 	
-	if ($voir == 'tous_etat')
+	if ($voir == 'tous')
 		$valeurs['actif'] = '';
 	
-	if ($voir == 'verouille') {
+	if ($verrouille == 'oui')
 		$valeurs['constante'] = array('_DIR_EXTENSIONS');
-	}
-
+	
+	if ($verrouille == 'tous')
+		$valeurs['constante'] = '';
+	
 	$valeurs['actions'] = array();
 	
 	return $valeurs;
 }
 
-function formulaires_admin_plugin_verifier_dist(){
+function formulaires_admin_plugin_verifier_dist($voir='actif', $verrouille='non'){
 	$actions = _request('actions');
 
 	$erreurs = array();
@@ -37,7 +36,7 @@ function formulaires_admin_plugin_verifier_dist(){
 	return $erreurs;
 }
 
-function formulaires_admin_plugin_traiter_dist(){
+function formulaires_admin_plugin_traiter_dist($voir='actif', $verrouille='non'){
 	
 	$retour = array();
 	

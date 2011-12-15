@@ -153,8 +153,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // P
 	'plugins_inactifs_liste' => 'Inactifs',
-	'plugins_verouilles_liste' => 'Verrouillés',
-	'plugins_non_verouilles_liste' => 'Non verrouillés',
+	'plugins_verrouilles_liste' => 'Verrouillés',
+	'plugins_non_verrouilles_liste' => 'Non verrouillés',
 
 // T
 	'titre_depot' => 'Dépôt',
