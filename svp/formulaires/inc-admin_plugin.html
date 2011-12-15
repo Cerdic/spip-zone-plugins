@@ -34,7 +34,7 @@
 			[(#CHEMIN_IMAGE{plugin-dis-32.png}|balise_img{<:plugin_info_non_compatible_spip:>,picto_err}|inserer_attribut{title,<:plugin_info_non_compatible_spip:>})]
 			]
 			<div class="details" style="display:none">
-				<dl>
+				<dl class="description">
 					<dd class="desc">
 						[(#DESCRIPTION*|svp_T{#PREFIXE}|propre)]
 						[<em class="site">
@@ -45,6 +45,12 @@
 					<dd class="auteurs">(#AUTEUR*|svp_afficher_credits)</dd>]
 					[<dt class="licence"><:intitule_licence:></dt>
 					<dd class="licence">(#LICENCE|svp_afficher_credits{','})</dd>]
+				</dl>
+				<dl class="tech">
+					<dt><:version:></dt>
+					<dd>#VERSION[ SVN [(#VAL{91}|chr)](#CONSTANTE|constant|concat{#SRC_ARCHIVE/}|version_svn_courante|abs|sinon{''})[(#VAL{93}|chr)]]</dd>
+					<dt><:repertoire_plugins:></dt>
+					<dd>[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/}|joli_repertoire)]</dd>
 				</dl>
 			</div>
 		</li>
