@@ -1,16 +1,15 @@
 <?php
-#---------------------------------------------------#
-#  Plugin  : Étiquettes                             #
-#  Auteur  : RastaPopoulos                          #
-#  Licence : GPL                                    #
-#------------------------------------------------------------------------------------------------------#
-#  Documentation : http://www.spip-contrib.net/Plugin-Etiquettes                                       #
-#                                                                                                      #
-#  Définition de la balise #FORMULAIRE_ETIQUETTES                                                      #
-#------------------------------------------------------------------------------------------------------#
+/**
+ * Plugin  : Étiquettes
+ * Auteur  : RastaPopoulos
+ * Licence : GPL
+ *
+ * Documentation : http://www.spip-contrib.net/Plugin-Etiquettes
+ *
+ */
 
-// Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
 
 function formulaires_etiquettes_charger_dist($groupe, $id_groupe, $name, $aide_nuage, $aide_autocompletion, $aide_liste, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login, $uniquement_champ, $explication, $squelette_nuage,$label){
 	

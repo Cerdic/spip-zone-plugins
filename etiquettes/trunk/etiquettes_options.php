@@ -1,11 +1,14 @@
 <?php
-#---------------------------------------------------#
-#  Plugin  : Étiquettes                             #
-#  Auteur  : RastaPopoulos                          #
-#  Licence : GPL                                    #
-#--------------------------------------------------------------- -#
-#  Documentation : http://www.spip-contrib.net/Plugin-Etiquettes  #
-#-----------------------------------------------------------------#
+/**
+ * Plugin  : Étiquettes
+ * Auteur  : RastaPopoulos
+ * Licence : GPL
+ *
+ * Documentation : http://www.spip-contrib.net/Plugin-Etiquettes
+ *
+ */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function etiquettes_produire_id($groupe, $type_objet='', $id_objet=''){
 
@@ -60,15 +63,11 @@ function tags_revision($id_objet, $colonnes, $type_objet){
 	if (!isset($colonnes['tags'])) return false;
 	
 	// On va chercher la bonne table et clé
-	include_spip('base/connect_sql');
-	$type_objet = strtolower($type_objet);
-	$type_objet = preg_replace(',^spip_|s$,', '', $type_objet);
-	$type_objet = table_objet($type_objet);
-	$cle_objet = id_table_objet($type_objet);
-	
+	include_spip('base/objets');
+
 	// On met à jour les tags
 	include_spip('inc/tag-machine');
-	ajouter_mots($colonnes['tags'], $id_objet, 'tags', $type_objet, $cle_objet, true);
+	ajouter_mots($colonnes['tags'], $id_objet, 'tags', table_objet($type_objet), id_table_objet($type_objet), true);
 	return true;
 
 }

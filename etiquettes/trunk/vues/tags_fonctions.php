@@ -1,4 +1,14 @@
 <?php
+/**
+ * Plugin  : Étiquettes
+ * Auteur  : RastaPopoulos
+ * Licence : GPL
+ *
+ * Documentation : http://www.spip-contrib.net/Plugin-Etiquettes
+ *
+ */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function etiquettes_vue_tags($rien, $type_objet, $id_objet){
 

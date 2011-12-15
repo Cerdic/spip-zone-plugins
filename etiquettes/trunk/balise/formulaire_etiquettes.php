@@ -1,15 +1,13 @@
 <?php
-#---------------------------------------------------#
-#  Plugin  : Étiquettes                             #
-#  Auteur  : RastaPopoulos                          #
-#  Licence : GPL                                    #
-#------------------------------------------------------------------------------------------------------#
-#  Documentation : http://www.spip-contrib.net/Plugin-Etiquettes                                       #
-#                                                                                                      #
-#  Définition de la balise #FORMULAIRE_ETIQUETTES                                                      #
-#------------------------------------------------------------------------------------------------------#
+/**
+ * Plugin  : Étiquettes
+ * Auteur  : RastaPopoulos
+ * Licence : GPL
+ *
+ * Documentation : http://www.spip-contrib.net/Plugin-Etiquettes
+ *
+ */
 
-// Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function balise_FORMULAIRE_ETIQUETTES($p) {

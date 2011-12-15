@@ -1,4 +1,14 @@
 <?php
+/**
+ * Plugin  : Étiquettes
+ * Auteur  : RastaPopoulos
+ * Licence : GPL
+ *
+ * Documentation : http://www.spip-contrib.net/Plugin-Etiquettes
+ *
+ */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //	  inc_tag-machine.php
 //
@@ -22,8 +32,6 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-if (!defined("_ECRIRE_INC_VERSION")) exit;
-
 function entableau($tag) {
 	return array('groupe' => $tag->type, 'tag' => $tag->titre);
 }
@@ -38,8 +46,8 @@ function entableau($tag) {
 	$tags: tableau de tag ('groupe' => groupe, 'tag' => tag)
 	$id: id de l'objet sur lequel ajouter les mots clefs
 	[$groupe_defaut]: groupe par défaut pour les mots qui n'ont pas de groupe dans la chaîne
-	[$nom_objet]: type d'objet sur lequel ajouter les mots clefs (une table: spip_mots_$nom_objet doit exister)
-	[$id_objet]: colonne de la table de cet objet qui contient les ids
+	[$table_objet]: type d'objet sur lequel ajouter les mots clefs (une table: spip_mots_$table_objet doit exister)
+	[$id_table_objet]: colonne de la table de cet objet qui contient les ids
 	
 	Retourne:
 	rien
@@ -47,20 +55,20 @@ function entableau($tag) {
 function ajouter_liste_mots($tags,
 							$id,
 							$groupe_defaut='',
-							$nom_objet='documents',
-							$id_objet='id_document',
+							$table_objet='documents',
+							$id_table_objet='id_document',
 							$clear = false) {
 	$tags = new ListeTags($tags,$groupe_defaut);
-	$tags->ajouter($id, $nom_objet, $id_objet,$clear);
+	$tags->ajouter($id, $table_objet, $id_table_objet,$clear);
 }
 function ajouter_mots($liste_tags,
 					  $id,
 					  $groupe_defaut='',
-					  $nom_objet='documents',
-					  $id_objet='id_document',
+					  $table_objet='documents',
+					  $id_table_objet='id_document',
 					  $clear = false) {
 	$tags = new ListeTags($liste_tags,$groupe_defaut);
-	$tags->ajouter($id, $nom_objet, $id_objet,$clear);
+	$tags->ajouter($id, $table_objet, $id_table_objet,$clear);
 }
 
 
@@ -71,8 +79,8 @@ function ajouter_mots($liste_tags,
 	$tags: tableau de tag ('groupe' => groupe, 'tag' => tag)
 	$id: id de l'objet sur lequel supprimer les mots clefs
 	[groupe_defaut]: groupe par défaut pour les mots qui n'ont pas de groupe dans la chaîne
-	[$nom_objet]: type d'objet sur lequel supprimer les mots clefs (une table: spip_mots_$nom_objet doit exister)
-	[$id_objet]: colonne de la table de cet objet qui contient les ids
+	[$table_objet]: type d'objet sur lequel supprimer les mots clefs (une table: spip_mots_$table_objet doit exister)
+	[$id_table_objet]: colonne de la table de cet objet qui contient les ids
 	
 	Retourne:
 	rien
@@ -80,18 +88,18 @@ function ajouter_mots($liste_tags,
 function retirer_liste_mots($tags,
 							$id,
 							$groupe_defaut='',
-							$nom_objet='documents',
-							$id_objet='id_document') {
+							$table_objet='documents',
+							$id_table_objet='id_document') {
 	$tags = new ListeTags($tags,$groupe_defaut);
-	$tags->retirer($id, $nom_objet, $id_objet);
+	$tags->retirer($id, $table_objet, $id_table_objet);
 }
 function retirer_mots($liste_tags,
 					  $id,
 					  $groupe_defaut='',
-					  $nom_objet='documents',
-					  $id_objet='id_document') {
+					  $table_objet='documents',
+					  $id_table_objet='id_document') {
 	$tags = new ListeTags($liste_tags,$groupe_defaut);
-	$tags->retirer($id, $nom_objet, $id_objet);
+	$tags->retirer($id, $table_objet, $id_table_objet);
 }
 
 
@@ -203,10 +211,11 @@ class Tag {
 	// Vérifie si on peut bien ajouter un mot de ce groupe
 	// Crée le groupe du mot s'il n'existe pas
 	// Retourne l'id_groupe si c'est ok, false sinon
-	function verifier($nom_objet) { // private
+	function verifier($table_objet) { // private
 	
 		include_spip('base/abstract_sql');
-		
+		$type = objet_type($table_objet);
+
 		list($id_groupe,$unseul,$titre) = $this->verifier_groupe();
 		
 		if($id_groupe > 0) {
@@ -218,16 +227,18 @@ class Tag {
 					'count(id_mot) as tot', 
 					array(
 						'spip_mots as mots',
-						"spip_mots_$nom_objet as objets"
+						"spip_mots_liens as liens"
 					), 
 					array(
-						"mots.id_groupe = $id_groupe",
-						"mots.id_mot = objets.id_mot"
+						"mots.id_groupe = ".intval($id_groupe),
+						"mots.id_mot = liens.id_mot",
+						"liens.objet = ".sql_quote($type)
 					),
 					'mots.id_groupe'
 				);
 				// mot déjà utilisé, on arrête
-				if($numrow = sql_fetch($celcount) && $numrow['tot'] > 0)
+				if($numrow = sql_fetch($celcount)
+					AND $numrow['tot'] > 0)
 					return false;
 				if ($celcount) sql_free($celcount);
 			}
@@ -238,16 +249,15 @@ class Tag {
 			spip_log("création du groupe ".$this->type);
 			
 			// on rajoute une option pour le type d'objet dans spip_groupes_mots
-			if(!lire_meta("tag-machine:colonne_.$nom_objet")) {
-				sql_alter("TABLE spip_groupes_mots ADD $nom_objet CHAR( 3 ) NOT NULL DEFAULT 'non';");
-				ecrire_meta("tag-machine:colonne_.$nom_objet",1);
+			if(!lire_meta("tag-machine:colonne_.$table_objet")) {
+				ecrire_meta("tag-machine:colonne_.$table_objet",1);
 			}
 			
 			$id_groupe = sql_insertq(
 				"spip_groupes_mots",
 				array(
 					'titre' => $this->type,
-					$nom_objet => 'oui',
+					'tables_liees' => $table_objet,
 					'minirezo' => 'oui'
 				)
 			);
@@ -263,11 +273,11 @@ class Tag {
 	
 	// Teste si le mot existe sinon crée le mot
 	// Renvoie l'id_mot
-	function creer($nom_objet) { // private
+	function creer($table_objet) { // private
 		
 		include_spip ('base/abstract_sql');
 		
-		if(!$this->id_mot && ($this->id_groupe = $this->verifier($nom_objet)) > 0) {
+		if(!$this->id_mot && ($this->id_groupe = $this->verifier($table_objet)) > 0) {
 			
 			$where = array(array('=', 'titre', _q($this->titre)));
 			
@@ -301,51 +311,31 @@ class Tag {
 	
 	// Ajoute le mot à un objet quelconque
 	// Sauf s'il est déjà associé
-	function ajouter($id, $nom_objet, $id_objet) { // public
+	function ajouter($id, $table_objet, $id_table_objet) { // public
 		
 		include_spip ('base/abstract_sql');
-		
+		$type = objet_type($table_objet);
+
 		if($id) {
 			// on vérifie que le mot est bien créé
 			if(!$this->id_mot) {
-				$this->creer($nom_objet);
+				$this->creer($table_objet);
 			}
-			
-			$where = array(
-				array('=', 'id_mot', $this->id_mot),
-				array('=', $id_objet, $id)
-			);
-			
-			$result = sql_select('id_mot', "spip_mots_$nom_objet", $where);
-			
-			// on crée une liaison seulement si c'est pas déjà le cas
-			if (sql_count($result) == 0) {
-				sql_insertq(
-					"spip_mots_$nom_objet",
-					array(
-						'id_mot' => $this->id_mot,
-						$id_objet => $id
-					)
-				);
-			}
-			if ($result) sql_free($result);	 
+
+			include_spip('action/edtier_liens');
+			if (!count(objet_trouver_liens(array('mot'=>$this->id_mot),array($type=>$id))))
+				objet_associer(array('mot'=>$this->id_mot),array($type=>$id));
 		}
 		else spip_log("id_objet non défini");
 		
 	}
 	
 	// Retire le mot d'un objet quelconque
-	function retirer($id, $nom_objet, $id_objet) { // public
+	function retirer($id, $table_objet, $id_table_objet) { // public
 		
-		include_spip ('base/abstract_sql');
-		
-		if ($this->id_mot){
-			sql_delete(
-				"spip_mots_$nom_objet",
-				"id_mot = ".intval($this->id_mot)." and ".$id_objet." = ".intval($id)
-			);
-		}
-		
+		$type = objet_type($table_objet);
+		include_spip('action/edtier_liens');
+		objet_dissocier(array('mot'=>$this->id_mot),array($type=>$id));
 	}
 	
 }
@@ -358,7 +348,7 @@ class ListeTags {
 	var $tags = array(); // private, la liste des mots
 	var $groupe_defaut; // le groupe par défaut si les mots n'ont pas la forme groupe:titre
 	var $id_groupe;
-	var $id_objet; // clé primaire de l'objet auquel on veut lier la liste
+	var $id_table_objet; // clé primaire de l'objet auquel on veut lier la liste
 	
 	// Constructeur
 	function ListeTags($liste_tags,	$groupe_defaut='', $id_groupe='') { // public
@@ -426,7 +416,7 @@ class ListeTags {
 	
 	
 	// Ajouter tous les mots de la liste à un objet quelconque, et supprimer les anciens si ya l'option clear
-	function ajouter($id, $nom_objet='documents', $id_objet='id_document', $clear=false) { // public
+	function ajouter($id, $table_objet='documents', $id_table_objet='id_document', $clear=false) { // public
 		
 		include_spip ('base/abstract_sql');
 		
@@ -434,30 +424,24 @@ class ListeTags {
 			
 			// si il y a l'option clear, on efface les anciennes liaisons avant
 			if ($clear) {
-				$result = sql_select(
+				$mots_a_effacer = sql_allfetsel(
 					'id_mot',
 					'spip_mots as mots',
 					"mots.type = "._q($this->groupe_defaut)." OR mots.id_groupe = "._q($this->id_groupe)
 				);
-				
-				$mots_a_effacer = array('0');
-				
-				while ($row = sql_fetch($result)) {
-					$mots_a_effacer[] = $row['id_mot']; 
-				}
-				if ($result) sql_free($result);
-				
-				spip_log("Enleve les mots: (".join(',',$mots_a_effacer).") à (".$id_objet.", ".intval($id).")");
-				sql_delete(
-					"spip_mots_$nom_objet",
-					$id_objet." = ".intval($id)." and id_mot in (".join(',', $mots_a_effacer).")"
-				);
+
+				$mots_a_effacer = array_map('reset',$mots_a_effacer);
+
+				spip_log("Enleve les mots: (".join(',',$mots_a_effacer).") à (".$id_table_objet.", ".intval($id).")");
+				include_spip('action/edtier_liens');
+				objet_dissocier(array('mot'=>$mots_a_effacer),array($table_objet=>$id));
+
 			}
 			
 			// ensuite on ajoute chaque mot
 			foreach($this->tags as $mot) {
 				if (trim($mot->titre) != "")
-				$mot->ajouter($id,$nom_objet,$id_objet);
+				$mot->ajouter($id,$table_objet,$id_table_objet);
 			}
 			
 		}
@@ -465,13 +449,13 @@ class ListeTags {
 	}
 	
 	// Retirer les mots de la liste d'un objet quelconque
-	function retirer($id, $nom_objet='documents', $id_objet='id_document') {
+	function retirer($id, $table_objet='documents', $id_table_objet='id_document') {
 		
 		include_spip ('base/abstract_sql');
 		
 		if($id) {
 			foreach($this->tags as $mot) {
-				$mot->retirer($id,$nom_objet,$id_objet);
+				$mot->retirer($id,$table_objet,$id_table_objet);
 			}
 		}
 		
