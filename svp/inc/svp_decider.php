@@ -99,13 +99,20 @@ class Decideur {
 			'pa.version AS v',
 			'pa.etatnum AS e',
 			'pa.dependances',
+			'pa.id_depot',
 			'pa.maj_version AS maj',
 			'pa.actif AS a'), $from, $where, '', $orderby);
 		foreach ($res as $r) {
+			
+			// savoir si un paquet est en local ou non...
+			$r['local'] = ($r['id_depot']) == 0 ? true : false;
+			unset($r['id_depot']);
+			
 			$d = unserialize($r['dependances']);
-
 			// voir pour enregistrer en bdd simplement 'n' et 'u' (pas la peine d'encombrer)...
-			if (!$d) $d = array('necessite'=>array(), 'utilise'=>array());
+			$deps = array('necessite'=>array(array()), 'utilise'=>array(array()), 'librairie'=>array(array()));
+			if (!$d) $d = $deps;
+			
 			unset($r['dependances']);
 
 			/*
@@ -114,14 +121,43 @@ class Decideur {
 			$r['n'] = extraire_multi($r['n']);
 
 			$plugs['i'][$r['i']] = $r;
+
+			
+			// pour chaque type de dependences... (necessite, utilise, librairie)
+			// on cree un tableau unique [$dependence][0] = array()
+			// au lieu de plusieurs tableaux par version de spip
+			// en ne mettant dans 0 que ce qui concerne notre spip local
+			foreach($deps as $cle => $defaut) {
+				if (!isset($d[$cle])) {
+					$d[$cle] = $defaut;
+				}
+				
+				// gerer les dependences autres que dans 0 (communs ou local) !!!!
+				// il peut exister des cles info[dn]["[version_spip_min;version_spip_max]"] de dependences
+				if (!isset($d[$cle][0]) OR count($d[$cle]) > 1) {
+					$dep = array();
+					$dep[0] = isset($d[$cle][0]) ? $d[$cle][0] : array();
+					unset($d[$cle][0]);
+					foreach ($d[$cle] as $version => $dependences) {
+						if (plugin_version_compatible($version, $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'])) {
+							$dep = array_merge($dep[0], $dependences);
+						}
+					}
+					$d[$cle] = $dep;
+				}
+			}
+			
 			$plugs['i'][$r['i']]['dn'] = $d['necessite'];
 			$plugs['i'][$r['i']]['du'] = $d['utilise'];
+			$plugs['i'][$r['i']]['dl'] = $d['librairie'];
+
 
 			if ($multiple) {
 				$plugs['p'][$r['p']][] = &$plugs['i'][$r['i']]; // alias
 			} else {
 				$plugs['p'][$r['p']] = &$plugs['i'][$r['i']]; // alias
 			}
+			
 		}
 		return $plugs;
 	}
@@ -285,16 +321,17 @@ class Decideur {
 
 				switch ($t) {
 					case 'on':
+					case 'geton':
 						// ajouter ce plugin dans la liste
 						if (!$this->sera_actif_id($id)) {
 							$i = $this->infos_courtes_id($id);
 							if ($i['i'][$id]) {
 								$this->add($i['i'][$id]);
-								$this->ask($i['i'][$id], 'on');
+								$this->ask($i['i'][$id], $i['local'] ? 'on' : 'geton' );
 							} else {
 								// la c'est vraiment pas normal... Erreur plugin inexistant...
 								// concurrence entre administrateurs ?
-								$this->erreur($id, _T('step:message_plugin_inexistant',array('plugin'=>$id)));
+								$this->erreur($id, _T('step:message_plugin_inexistant',array('plugin' => $id)));
 							}
 						}
 						break;
@@ -414,61 +451,52 @@ class Decideur {
 
 		$cache = array(); // cache des actions realisees dans ce tour
 
-		if (is_array($info['dn']) and $info['dn']) {
-
-			// gerer les dependences autres que dans 0 (communs ou local) !!!!
-			// il peut exister des cles info[dn]["[version_spip_min;version_spip_max]"] de dependences
-			if (!isset($info['dn'][0]) OR count($info['dn']) > 1) {
-				$dep = array();
-				$dep[0] = isset($info['dn'][0]) ? $info['dn'][0] : array();
-				unset($info['dn'][0]);
-				foreach ($info['dn'] as $version => $deps) {
-					if (plugin_version_compatible($version, $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'])) {
-						$dep = array_merge($dep[0], $deps);
+		// 1 TODO : tester la version de SPIP de notre paquet
+		// si on ne valide pas, on retourne une erreur !
+		// mais normalement, on ne devrait pas trop pouvoir tomber sur ce cas
+			/*
+			if (!step_verifier_plugin_compatible_version_spip($v)) {
+				$this->invalider($info);
+				$this->erreur($id, _T('svp:message_incompatibilite_spip',array('plugin'=>$info[p])));
+				// est-ce qu'on quitte tout de suite, ou teste-t-on tout ?
+				// pour l'instant, essayons de tout tester quand meme
+				// nous verrons par la suite si c'est judicieux ou pas
+			}*/
+					
+		// 2 TODO : ajouter les librairies necessaires a notre paquet
+		if (is_array($info['dl']) and count($info['dl'][0])) {
+			foreach ($info['dl'][0] as $l) {
+				$this->log("## Necessite la librairie : ");
+				$this->log($l);
+				/*
+				// on verifie sa presence OU le fait qu'on pourra la telecharger
+				if ($lib and !$this->est_presente_lib($lib)) {
+					// peut on ecrire ?
+					if (!is_writable(_DIR_LIB)) {
+						$this->invalider($info);
+						$this->erreur($id, _T('svp:message_erreur_ecriture_lib',array('plugin'=>$info[p],'lib_url'=>$n[src],'lib'=>$lib)));
 					}
-				}
-				$info['dn'] = $dep;
+				}*/
 			}
-			
+		}
+
+		// 3 Trouver les dependences aux necessites
+		// et les activer au besoin
+		if (is_array($info['dn']) and count($info['dn'][0])) {
 			foreach ($info['dn'][0] as $n) {
-				// de deux choses l'une...
+				// de trois choses l'une...
 				// soit la dependance est a SPIP, soit a un plugin, soit a une librairie...
 
 				$p = strtoupper($n['nom']);
 				$v = $n['compatibilite'];
 
-				// si c'est a SPIP et qu'on ne valide pas, on retourne une erreur !
-				// normalement, on ne devrait pas trop pouvoir tomber sur ce cas
-				if (strtoupper($p) == 'SPIP') {
+				if ($p == 'SPIP') {
 					// c'est pas la que ça se fait !
+					// ca ne devrait plus apparaitre comme dependence a un plugin.
 				}
-					/*
-					if (!step_verifier_plugin_compatible_version_spip($v)) {
-						$this->invalider($info);
-						$this->erreur($id, _T('svp:message_incompatibilite_spip',array('plugin'=>$info[p])));
-						// est-ce qu'on quitte tout de suite, ou teste-t-on tout ?
-						// pour l'instant, essayons de tout tester quand meme
-						// nous verrons par la suite si c'est judicieux ou pas
-					}*/
-
-				// les libs non plus ici ... todo...
-				/*
-				} elseif (strpos($p,'lib:')===0) {
-					$lib = substr($p, 4);
-					// l'identifiant commence par "lib:", c'est une librairie dont il s'agit.
-					// on verifie sa presence OU le fait qu'on pourra la telecharger
-					if ($lib and !$this->est_presente_lib($lib)) {
-						// peut on ecrire ?
-						if (!is_writable(_DIR_LIB)) {
-							$this->invalider($info);
-							$this->erreur($id, _T('svp:message_erreur_ecriture_lib',array('plugin'=>$info[p],'lib_url'=>$n[src],'lib'=>$lib)));
-						}
-					}
-
-                }*/
 
                 // le core procure le paquet que l'on demande !
-                elseif ((array_key_exists(strtoupper($p), $this->procure))
+                elseif ((array_key_exists($p, $this->procure))
                   and (plugin_version_compatible($v, $this->procure[strtoupper($p)]))) {
                     // rien a faire...
                     $this->log("-- est procure par le core ($p)");

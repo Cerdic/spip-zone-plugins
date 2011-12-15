@@ -34,7 +34,7 @@ function formulaires_charger_plugin_verifier_dist(){
 			// -- on verifie la liste des id_paquets uniquement
 			if ($id_paquets = _request('ids_paquet')) {
 				foreach ($id_paquets as $_id_paquet)
-					$a_installer[$_id_paquet] = 'on';
+					$a_installer[$_id_paquet] = 'geton';
 			}
 		}
 		else {
@@ -42,7 +42,7 @@ function formulaires_charger_plugin_verifier_dist(){
 			// du resume du plugin -> installer_paquet
 			if ($install = _request('installer_paquet'))
 				if ($id_paquet = key($install))
-					$a_installer[$id_paquet] = 'on';
+					$a_installer[$id_paquet] = 'geton';
 		}
 
 		if (!$a_installer)
