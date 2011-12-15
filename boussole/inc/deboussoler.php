@@ -22,7 +22,7 @@ function boussole_ajouter($url) {
 	
 	// On recupere les infos du fichier xml de description de la balise
 	$infos = boussole_parser_xml($url);
-	if (!infos OR !$infos['boussole']['alias']){
+	if (!$infos OR !$infos['boussole']['alias']){
 		$message = _T('boussole:message_nok_xml_invalide', array('fichier' => $url));
 		return array(false, $message);
 	}
