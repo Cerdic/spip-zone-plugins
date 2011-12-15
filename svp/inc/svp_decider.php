@@ -506,7 +506,7 @@ class Decideur {
 					// ajout, pour info
 					// de la librairie dans la todo list
 					else {
-						$this->todo(array(
+						$this->change(array(
 							'i' => md5(serialize($l)),
 							'p' => $lib,
 							'v' => $l['lien'],
