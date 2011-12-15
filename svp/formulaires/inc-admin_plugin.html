@@ -1,11 +1,13 @@
 <B_plugins>
 <div class="liste plugins">
 	<ul class="liste-items">
-<BOUCLE_plugins(PAQUETS plugins){par prefixe}{id_depot=0}{actif ?}{constante ?IN #ENV{constante}}>
+<BOUCLE_plugins(PAQUETS plugins){!par constante}{par prefixe}{id_depot=0}{actif ?}{constante ?IN #ENV{constante}}>
 		<li class="item[ (#ACTIF|=={oui}|?{actif,inactif})][(#OBSOLETE|=={oui}|oui) disabled]"[ id="(#PREFIXE|strtolower)-#COMPTEUR_BOUCLE"]>
 			[(#OBSOLETE|=={oui}|non)
 			<div class="check">
-				<input type="checkbox" class="checkbox" name="id_paquets[(#VAL{91}|chr)][(#VAL{93}|chr)]" value="#ID_PAQUET" />
+				[(#CONSTANTE|=={_DIR_EXTENSIONS}|non)
+					<input type="checkbox" class="checkbox" name="id_paquets[(#VAL{91}|chr)][(#VAL{93}|chr)]" value="#ID_PAQUET" />
+				]
 			</div>]
 			[(#REM) <!-- Resume du plugin -->]
 			<div class="resume">
@@ -17,14 +19,21 @@
 			</div>
 			[(#OBSOLETE|=={oui}|non)
 			<div class="actions">
-				[(#ACTIF|=={oui}|oui)
-					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{desactiver})]" class="submit" value="<:svp:bouton_desactiver:>" />
-					[(#INSTALLE|=={oui}|oui)
-						<input type="submit" name="[(#ID_PAQUET|svp_nom_action{desinstaller})]" class="submit" value="<:svp:bouton_desinstaller:>" />
+				[(#CONSTANTE|=={_DIR_EXTENSIONS}|non)
+					[(#ACTIF|=={oui}|oui)
+						<input type="submit" name="[(#ID_PAQUET|svp_nom_action{desactiver})]" class="submit" value="<:svp:bouton_desactiver:>" />
+						[(#INSTALLE|=={oui}|oui)
+							<input type="submit" name="[(#ID_PAQUET|svp_nom_action{desinstaller})]" class="submit" value="<:svp:bouton_desinstaller:>" />
+						]
+					]
+					[(#ACTIF|=={oui}|non)
+						<input type="submit" name="[(#ID_PAQUET|svp_nom_action{activer})]" class="submit" value="<:svp:bouton_activer:>" />
 					]
 				]
-				[(#ACTIF|=={oui}|non)
-					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{activer})]" class="submit" value="<:svp:bouton_activer:>" />
+				[(#CONSTANTE|=={_DIR_EXTENSIONS}|oui)
+					<span class="details">
+					<:svp:info_verrouille:>
+					</span>
 				]
 			</div>]
 			[(#ACTIF|=={oui}|oui) #SET{prefixe,#PREFIXE|strtolower}

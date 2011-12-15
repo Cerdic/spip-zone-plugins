@@ -75,6 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_type_depot_git' => 'Dépôt géré sous GIT',
 	'info_type_depot_manuel' => 'Dépôt géré manuellement',
 	'info_type_depot_svn' => 'Dépôt géré sous SVN',
+	'info_verrouille' => 'Il ne vous est pas possible de désactiver ni de désinstaller ce plugin.',
 
 // L
 	'label_1_autre_contribution' => 'autre contribution',
