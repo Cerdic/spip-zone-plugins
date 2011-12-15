@@ -327,6 +327,8 @@ function nettoyer_format($t) {
   $conv_formats['Word'] = 'doc'; // function extract/
   $conv_formats['RTF'] = 'rtf'; // function extract/
   $conv_formats['PDF'] = 'pdf'; // function extract/
+  $conv_formats['html_SPIP'] = 'html'; // function HTML2SPIP
+  
 
 	// FIN INITIALISATION
 
@@ -360,6 +362,24 @@ function conversion_format($conv_in, $format) {
 			$conv_out = eregi_replace($pattern, $replacement, $conv_out);
 		}
 	}
+	
+	// fonction HTML2SPIP - http://ftp.espci.fr/pub/html2spip/
+	else if ($format=="html_SPIP") { 	  
+            if (file_exists(find_in_path('lib/html2spip-0.6/misc_tools.php'))) {                  
+                require_once(find_in_path('lib/html2spip-0.6/misc_tools.php'));
+                require_once(find_in_path('lib/html2spip-0.6/HTMLEngine.class'));
+                require_once(find_in_path('lib/html2spip-0.6/HTML2SPIPEngine.class'));
+                //define('_HTML2SPIP_PRESERVE_DISTANT',false);
+                $parser = new HTML2SPIPEngine('', _DIR_IMG);    // Quels sont les bons parametres ?
+                $parser->loggingEnable();
+                $output = $parser->translate($conv_out);
+                $conv_out = $output['default']; 
+            } else {
+                  $log = "<span style='color:red'>"
+        					._T("convertisseur:erreur_html2SPIP")
+        					." $cv</span>";
+            }          
+  }
 
 	// c'est un nom de fonction : 'quark' par exemple
 	else {

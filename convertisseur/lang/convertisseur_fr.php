@@ -23,10 +23,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'Word' => 'Word vers texte', 
 'RTF' => 'RTF vers texte', 
 'PDF' => 'PDF vers texte', 
+'html_SPIP' => 'HTML vers SPIP', 
 
 // les erreurs
 'unknown_format' => 'Erreur: format inconnu',
-'erreur_extracteur' => 'Erreur : l\'extracteur n\'a pas fonctionn&eacute;'
+'erreur_extracteur' => 'Erreur : l\'extracteur n\'a pas fonctionn&eacute;' ,
+'erreur_html2SPIP' => 'Erreur: pour utiliser cette fonction vous devez installer la librarie <a href="http://ftp.espci.fr/pub/html2spip/html2spip-0.6.zip">HTML2SPIP</a> dans le r&eacute;pertoire ./lib/'
 );
 
 ?>
