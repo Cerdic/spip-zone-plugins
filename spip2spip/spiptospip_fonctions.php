@@ -288,6 +288,7 @@ function analyser_backend_spip2spip($rss){
 			foreach ($echappe_cdata as $n => $e)
 				$data[$var] = str_replace("@@@SPIP_CDATA$n@@@",$e, $data[$var]);
       if (!defined("_SPIP2SPIP_IMPORT_HTML")) $data[$var] = trim(textebrut($data[$var]));  // protection import HTML 
+                                        else  $data[$var] = preg_replace('@<script[^>]*?>.*?</script>@si', '',  $data[$var]); // pas de protection, on supprime qd mm les balises script ...                                      
 			$data[$var] = str_replace("@@@MULTI@@@", "<multi>", $data[$var]);
 	    $data[$var] = str_replace("@@@MULTJ@@@", "</multi>", $data[$var]);
       $data[$var] = str_replace("@@@LIEN_INV@@@", "<-", $data[$var]);	
