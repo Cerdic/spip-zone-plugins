@@ -194,14 +194,33 @@ class Decideur {
 
 	/* verifier qu'un plugin exsite avec prefixe (cfg) pour une version [1.0;] donnee */
 	function chercher_plugin_compatible($prefixe, $version) {
-		$news = $this->infos_courtes(array('pl.prefixe=' . sql_quote($prefixe), 'pa.obsolete=' . sql_quote('non')), true);
-		if ($news and count($news['p'][$prefixe]) > 0) {
-			foreach ($news['p'][$prefixe] as $new) {
+		
+		// on choisit en priorite dans les paquets locaux !
+		$locaux = $this->infos_courtes(array(
+			'pl.prefixe=' . sql_quote($prefixe),
+			'pa.obsolete=' . sql_quote('non'),
+			'id_depot='.sql_quote(0)), true);
+		if ($locaux and count($locaux['p'][$prefixe]) > 0) {
+			foreach ($locaux['p'][$prefixe] as $new) {
 				if (plugin_version_compatible($version, $new['v'])) {
 					return $new;
 				}
 			}
 		}
+		
+		// sinon dans les paquets distants
+		$distants = $this->infos_courtes(array(
+			'pl.prefixe=' . sql_quote($prefixe),
+			'pa.obsolete=' . sql_quote('non'),
+			'id_depot>'.sql_quote(0)), true);
+		if ($distants and count($distants['p'][$prefixe]) > 0) {
+			foreach ($distants['p'][$prefixe] as $new) {
+				if (plugin_version_compatible($version, $new['v'])) {
+					return $new;
+				}
+			}
+		}
+		
 		return false;
 	}
 
@@ -484,8 +503,6 @@ class Decideur {
 		// et les activer au besoin
 		if (is_array($info['dn']) and count($info['dn'][0])) {
 			foreach ($info['dn'][0] as $n) {
-				// de trois choses l'une...
-				// soit la dependance est a SPIP, soit a un plugin, soit a une librairie...
 
 				$p = strtoupper($n['nom']);
 				$v = $n['compatibilite'];
@@ -501,17 +518,26 @@ class Decideur {
                     // rien a faire...
                     $this->log("-- est procure par le core ($p)");
 
-				} else {
+				}
+
+				// pas d'autre alternative qu'un vrai paquet a activer
+				else {
 					$this->log("-- verifier : $p");
 					// nous sommes face a une dependance de plugin
 					// on regarde s'il est present et a la bonne version
 					// sinon on le cherche et on l'ajoute
-					if (!($ninfo = $this->sera_actif($p)
+					if ($ninfo = $this->sera_actif($p)
 					and !$err = $this->en_erreur($ninfo['i'])
-					and plugin_version_compatible($v, $ninfo['v']))) {
-
+					and plugin_version_compatible($v, $ninfo['v'])) {
+						// il est deja actif ou a activer, et tout est ok
+						$this->log('-- dep OK pour '.$info['p'].' : '.$p);
+					}
+					// il faut le trouver et demander a l'activer
+					else {
+					
 						// absent ou erreur ou pas compatible
 						$etat = $err ? 'erreur' : ($ninfo ? 'conflit' : 'absent');
+						// conflit signifie qu'il existe le prefixe actif, mais pas a la version demandee
 						$this->log("Dedendance " . $p . " a resoudre ! ($etat)");
 
 						switch ($etat) {
@@ -523,8 +549,8 @@ class Decideur {
 								if (!$this->sera_off($p)
 								and $new = $this->chercher_plugin_compatible($p, $v)
 								and $this->verifier_dependances_plugin($new, ++$prof)) {
-									// si le plugin existe localement, c'est que
-									// c'est une mise a jour + activation a faire
+									// si le plugin existe localement et possede maj_version,
+									// c'est que c'est une mise a jour + activation a faire
 									$cache[] = $new;
 									$i = $this->infos_courtes(array(
 											'prefixe=' . sql_quote($new['p']),
@@ -537,7 +563,7 @@ class Decideur {
 										$this->log("-- update+active : $p");
 									} else {
 										// tout nouveau tout beau
-										$this->change($new, 'on');
+										$this->change($new, $new['local'] ? 'on' : 'geton');
 										$this->log("-- nouveau : $p");
 									}
 									$this->add($new);
@@ -577,9 +603,7 @@ class Decideur {
 								break;
 						}
 
-					} else {
-						$this->log('-- dep OK pour '.$info['p'].' : '.$p);
-					}
+					} 
 				}
 
 				if ($this->sera_invalide($info['p'])) {
