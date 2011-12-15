@@ -16,9 +16,9 @@ function stocks_upgrade($nom_meta_version_base, $version_cible){
 	if (isset($GLOBALS['meta'][$nom_meta_base_version]))
 		$version_actuelle = $GLOBALS['meta'][$nom_meta_base_version];
 	
-	if (version_compare($version_actuelle,'0.0.1','<')) {
+	if (version_compare($version_actuelle,'0.1.1','<')) {
 		creer_base();
-		ecrire_meta($nom_meta_version_base, $version_actuelle="0.0.1");
+		ecrire_meta($nom_meta_version_base, $version_actuelle="0.1.1");
 	}
 
 }
