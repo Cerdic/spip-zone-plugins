@@ -354,7 +354,7 @@ class Decideur {
 							} else {
 								// la c'est vraiment pas normal... Erreur plugin inexistant...
 								// concurrence entre administrateurs ?
-								$this->erreur($id, _T('step:message_plugin_inexistant',array('plugin' => $id)));
+								$this->erreur($id, _T('svp:message_nok_plugin_inexistant',array('plugin' => $id)));
 							}
 						}
 						break;
@@ -477,7 +477,7 @@ class Decideur {
 		// 1 TODO : tester la version de SPIP de notre paquet
 		// si on ne valide pas, on retourne une erreur !
 		// mais normalement, on ne devrait vraiment pas pouvoir tomber sur ce cas
-		if (!step_verifier_plugin_compatible_version_spip($info['compatibilite_spip'])) {
+		if (!svp_verifier_compatibilite_spip($info['compatibilite_spip'])) {
 			$this->invalider($info);
 			$this->erreur($id, _T('svp:message_incompatibilite_spip',array('plugin'=>$info[p])));
 			return false;
