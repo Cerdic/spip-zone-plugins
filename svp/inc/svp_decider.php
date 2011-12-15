@@ -375,12 +375,12 @@ class Decideur {
 								$this->ask($i, $t);
 							} else {
 								// on n'a pas trouve la nouveaute !!!
-								$this->erreur($id, _T('step:message_maj_introuvable',array('plugin' => $i[p],'id'=>$id)));
+								$this->erreur($id, _T('svp:message_nok_maj_introuvable',array('plugin' => $i[p],'id'=>$id)));
 							}
 						} else {
 							// mauvais identifiant ?
 							// on n'a pas trouve le plugin !!!
-							$this->erreur($id, _T('step:message_erreur_maj_inconnu',array('id'=>$id)));
+							$this->erreur($id, _T('svp:message_erreur_maj_inconnu',array('id'=>$id)));
 						}
 						break;
 					case 'off':
@@ -402,7 +402,7 @@ class Decideur {
 						} else {
 							// pas normal... plugin deja inactif...
 							// concurrence entre administrateurs ?
-							$this->erreur($id, _T('step:message_erreur_plugin_non_actif'));
+							$this->erreur($id, _T('svp:message_erreur_plugin_non_actif'));
 						}
 						break;
 					case 'null':
@@ -412,7 +412,7 @@ class Decideur {
 							$this->ask($info['i'][$id], $t);
 						} else {
 							// pas normal... plugin inconnu... concurrence entre administrateurs ?
-							$this->erreur($id, _T('step:message_erreur_plugin_introuvable',array('plugin'=>$id,'action'=>$t)));
+							$this->erreur($id, _T('svp:message_erreur_plugin_introuvable',array('plugin'=>$id,'action'=>$t)));
 						}
 						break;
 				}

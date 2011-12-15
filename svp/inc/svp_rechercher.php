@@ -174,7 +174,7 @@ function svp_lister_plugins_installes(){
  *
  * @return boolean
  */
-function svp_verifier_compatibilite_spip($intervalle, $version_spip) {
+function svp_verifier_compatibilite_spip($intervalle, $version_spip = '') {
 	if (!$version_spip)
 		$version_spip = $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'];
 	return plugin_version_compatible($intervalle, $version_spip);
