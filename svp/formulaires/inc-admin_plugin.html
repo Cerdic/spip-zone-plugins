@@ -12,7 +12,7 @@
 				<h3 class="nom"><a[ href="(#VERSION)"] rel="info">[(#NOM)]</a></h3>
 				<span class="version">[(#VERSION)]</span>
 				<span class="etat">[ - (#ETAT)]</span>
-				<div class="short">[(#SLOGAN|_T|typo)]</div>
+				<div class="short">[(#SLOGAN|svp_T{#PREFIXE}|typo)]</div>
 				<div class="icon">[(#LOGO|oui)[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/#LOGO}|image_reduire{32})]]</div>
 			</div>
 			[(#OBSOLETE|=={oui}|non)
@@ -36,7 +36,7 @@
 			<div class="details" style="display:none">
 				<dl>
 					<dd class="desc">
-						[(#DESCRIPTION|propre)]
+						[(#DESCRIPTION*|svp_T{#PREFIXE}|propre)]
 						[<em class="site">
 							<a href="(#LIEN_DOC)" class="spip_out" title="<:svp:bulle_aller_documentation:>"><:en_savoir_plus:></a>
 						</em>]
