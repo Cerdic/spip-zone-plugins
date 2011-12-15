@@ -22,7 +22,7 @@ function autoriser_ajouteretiquettes_dist($faire, $type, $id, $qui, $opt) {
 
 // Teste si on peut remplacer la liste des mots liés à l'objet par une autre liste de mots
 function autoriser_remplaceretiquettes_dist($faire, $type, $id_groupe, $qui, $opt) {
-	return autoriser('modifier', $type, $id, $qui, $opt);
+	return autoriser('modifier', $type, $id_groupe, $qui, $opt);
 }
 
 ?>
