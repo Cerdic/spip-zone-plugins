@@ -91,5 +91,12 @@ function formulaires_editer_id3_traiter($id){
 			supprimer_fichier($file);
 		}
 	}
+	if(_request('redirect')){
+		$redirect = parametre_url(urldecode(_request('redirect')),
+			'id_document', $id, '&');
+			
+		include_spip('inc/headers');
+		redirige_par_entete($redirect);
+	}
 	return array('message_ok'=>_T('getid3:message_fichier_maj'),'editable'=>true);
 }

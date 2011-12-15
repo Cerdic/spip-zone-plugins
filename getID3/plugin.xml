@@ -6,11 +6,11 @@
 			[en]Read and write audio tags
 		</multi>
 	</slogan>
-	<auteur>[BoOz->booz@rezo.net], [kent1->kent1@arscenic.info]
+	<auteur>[BoOz->booz@rezo.net], [kent1->http://www.kent1.info]
 	</auteur>
 	<icon>images/id3v2.png</icon>
 	<licence>(c) 2008-2011 GPL</licence>
-	<version>0.5.0</version>
+	<version>0.5.1</version>
 	<version_base>0.3.1</version_base>
 	<etat>test</etat>
 	<description>

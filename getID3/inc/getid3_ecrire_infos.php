@@ -83,7 +83,7 @@ function inc_getid3_ecrire_infos($id_document,$infos=array(),$images=null,$forma
 		 */
 		if(is_array($images)){
 			foreach ($images as $image){
-				if(!is_array($image)){
+				if(!is_array($image) && strlen($image) > 0){
 					$image_finale['chemin'] = $image;
 					$image_finale['picturetypeid'] = '3';
 					$image_finale['description'] = 'Front Cover';
@@ -91,20 +91,22 @@ function inc_getid3_ecrire_infos($id_document,$infos=array(),$images=null,$forma
 					$image_finale['mime'] = image_type_to_mime_type($image_infos[2]);
 					$image = $image_finale;
 				}
-				if($formats[0] != 'metaflac'){
-					$TagData['attached_picture'][] = array(
-						'data' => file_get_contents($image['chemin']),
-						'picturetypeid' => $image['picturetypeid'],
-						'description' => $image['description'],
-						'mime' => $image['mime']
-					);
-				}else{
-					$TagData['attached_picture'][] = array(
-						'file' => $image['chemin'],
-						'picturetypeid' => $image['picturetypeid'],
-						'description' => $image['description'],
-						'mime' => $image['mime']
-					);
+				if(is_array($image)){
+					if($formats[0] != 'metaflac'){
+						$TagData['attached_picture'][] = array(
+							'data' => file_get_contents($image['chemin']),
+							'picturetypeid' => $image['picturetypeid'],
+							'description' => $image['description'],
+							'mime' => $image['mime']
+						);
+					}else{
+						$TagData['attached_picture'][] = array(
+							'file' => $image['chemin'],
+							'picturetypeid' => $image['picturetypeid'],
+							'description' => $image['description'],
+							'mime' => $image['mime']
+						);
+					}
 				}
 			}
 		}
