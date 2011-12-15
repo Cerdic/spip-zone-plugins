@@ -322,7 +322,7 @@ class Tag {
 				$this->creer($table_objet);
 			}
 
-			include_spip('action/edtier_liens');
+			include_spip('action/editer_liens');
 			if (!count(objet_trouver_liens(array('mot'=>$this->id_mot),array($type=>$id))))
 				objet_associer(array('mot'=>$this->id_mot),array($type=>$id));
 		}
@@ -334,7 +334,7 @@ class Tag {
 	function retirer($id, $table_objet, $id_table_objet) { // public
 		
 		$type = objet_type($table_objet);
-		include_spip('action/edtier_liens');
+		include_spip('action/editer_liens');
 		objet_dissocier(array('mot'=>$this->id_mot),array($type=>$id));
 	}
 	
@@ -433,7 +433,7 @@ class ListeTags {
 				$mots_a_effacer = array_map('reset',$mots_a_effacer);
 
 				spip_log("Enleve les mots: (".join(',',$mots_a_effacer).") à (".$id_table_objet.", ".intval($id).")");
-				include_spip('action/edtier_liens');
+				include_spip('action/editer_liens');
 				objet_dissocier(array('mot'=>$mots_a_effacer),array($table_objet=>$id));
 
 			}

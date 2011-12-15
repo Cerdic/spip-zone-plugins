@@ -47,19 +47,14 @@ function formulaires_etiquettes_charger_dist($groupe, $id_groupe, $name, $aide_n
 		// Mais si on modifie, le champ est rempli avec les tags liés à l'objet
 		if ($remplacer and $type_objet and $id_objet){
 
-			$reponse = sql_select(
-				'mots.titre',
-				array('mots' => 'spip_mots', 'liaison' => 'spip_mots_' . preg_replace('/^spip_/i', '', table_objet_sql($type_objet))),
-				array(
-					array('=', 'mots.type', sql_quote($groupe)),
-					array('=', 'liaison.' . $cle_objet, $id_objet),
-					array('=', 'mots.id_mot', 'liaison.id_mot')
-				),
-				"",
-				"mots.titre"
-			);
-			while ($mot = sql_fetch($reponse)){
+			include_spip('action/editer_liens');
+			$liens = objet_trouver_liens(array('mot'=>'*'),array(objet_type($type_objet)=>$id_objet));
+			$mots = array();
+			foreach ($liens as $l)
+				$mots[] = $l['id_mot'];
 
+			$mots = sql_allfetsel('titre','spip_mots',sql_in('id_mot',$mots));
+			foreach ($mots as $mot){
 				// S'il y a des espaces ou virgules on entoure de guillemets
 				if (strcspn($mot['titre'], ' ,"')!=strlen($mot['titre']))
 					$etiquettes .= ' "' . entites_html($mot['titre']) . '"';
