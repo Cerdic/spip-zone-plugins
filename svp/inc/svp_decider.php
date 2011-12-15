@@ -3,7 +3,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('plugins/installer'); // pour spip_version_compare()
-include_spip('inc/plugin'); // plugin_version_compatible()
+include_spip('inc/svp_rechercher'); // svp_verifier_compatibilite_spip()
+# include_spip('inc/plugin'); // plugin_version_compatible() [inclu dans svp_rechercher]
 
 class Decideur {
 
@@ -98,6 +99,7 @@ class Decideur {
 			'pl.prefixe AS p',
 			'pa.version AS v',
 			'pa.etatnum AS e',
+			'pa.compatibilite_spip',
 			'pa.dependances',
 			'pa.id_depot',
 			'pa.maj_version AS maj',
@@ -139,7 +141,7 @@ class Decideur {
 					$dep[0] = isset($d[$cle][0]) ? $d[$cle][0] : array();
 					unset($d[$cle][0]);
 					foreach ($d[$cle] as $version => $dependences) {
-						if (plugin_version_compatible($version, $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'])) {
+						if (svp_verifier_compatibilite_spip($version)) {
 							$dep = array_merge($dep[0], $dependences);
 						}
 					}
@@ -202,7 +204,8 @@ class Decideur {
 			'id_depot='.sql_quote(0)), true);
 		if ($locaux and count($locaux['p'][$prefixe]) > 0) {
 			foreach ($locaux['p'][$prefixe] as $new) {
-				if (plugin_version_compatible($version, $new['v'])) {
+				if (plugin_version_compatible($version, $new['v'])
+				and svp_verifier_compatibilite_spip($new['compatibilite_spip']) ){
 					return $new;
 				}
 			}
@@ -215,7 +218,8 @@ class Decideur {
 			'id_depot>'.sql_quote(0)), true);
 		if ($distants and count($distants['p'][$prefixe]) > 0) {
 			foreach ($distants['p'][$prefixe] as $new) {
-				if (plugin_version_compatible($version, $new['v'])) {
+				if (plugin_version_compatible($version, $new['v'])
+				and svp_verifier_compatibilite_spip($new['compatibilite_spip']) ){
 					return $new;
 				}
 			}
@@ -472,15 +476,12 @@ class Decideur {
 
 		// 1 TODO : tester la version de SPIP de notre paquet
 		// si on ne valide pas, on retourne une erreur !
-		// mais normalement, on ne devrait pas trop pouvoir tomber sur ce cas
-			/*
-			if (!step_verifier_plugin_compatible_version_spip($v)) {
-				$this->invalider($info);
-				$this->erreur($id, _T('svp:message_incompatibilite_spip',array('plugin'=>$info[p])));
-				// est-ce qu'on quitte tout de suite, ou teste-t-on tout ?
-				// pour l'instant, essayons de tout tester quand meme
-				// nous verrons par la suite si c'est judicieux ou pas
-			}*/
+		// mais normalement, on ne devrait vraiment pas pouvoir tomber sur ce cas
+		if (!step_verifier_plugin_compatible_version_spip($info['compatibilite_spip'])) {
+			$this->invalider($info);
+			$this->erreur($id, _T('svp:message_incompatibilite_spip',array('plugin'=>$info[p])));
+			return false;
+		}
 					
 		// 2 TODO : ajouter les librairies necessaires a notre paquet
 		if (is_array($info['dl']) and count($info['dl'][0])) {
