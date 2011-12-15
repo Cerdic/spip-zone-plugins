@@ -6,7 +6,7 @@ function formulaires_admin_plugin_charger_dist($voir='actif', $verrouille='non')
 	$valeurs = array();
 	
 	include_spip('inc/svp_depoter_local');
-	stp_actualiser_paquets_locaux();
+	svp_actualiser_paquets_locaux();
 	
 	$valeurs['constante'] = array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL');
 	$valeurs['actif'] = 'oui';

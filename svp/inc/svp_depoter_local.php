@@ -1,16 +1,16 @@
 <?php
 
 
-function stp_actualiser_paquets_locaux() {
+function svp_actualiser_paquets_locaux() {
 
 	spip_timer('paquets_locaux');
-	$paquets = stp_descriptions_paquets_locaux();
+	$paquets = svp_descriptions_paquets_locaux();
 
 #	$hash = md5(serialize($paquets) . $GLOBALS['meta']['plugin']);
 #	include_spip('inc/config');
 #	if (lire_config('stp/hash_local') != $hash) {
-		stp_base_supprimer_paquets_locaux();
-		stp_base_inserer_paquets_locaux($paquets);
+		svp_base_supprimer_paquets_locaux();
+		svp_base_inserer_paquets_locaux($paquets);
 #		ecrire_config('stp/hash_local', $hash);
 #	}
 	$temps = spip_timer('paquets_locaux');
@@ -21,7 +21,7 @@ function stp_actualiser_paquets_locaux() {
 
 
 
-function stp_descriptions_paquets_locaux() {
+function svp_descriptions_paquets_locaux() {
 	include_spip('inc/plugin');
 	liste_plugin_files(_DIR_PLUGINS);
 	liste_plugin_files(_DIR_EXTENSIONS);
@@ -39,13 +39,13 @@ function stp_descriptions_paquets_locaux() {
 
 
 // supprime les paquets et plugins locaux.
-function stp_base_supprimer_paquets_locaux() {
+function svp_base_supprimer_paquets_locaux() {
 	sql_delete('spip_paquets', 'id_depot = ' . 0); //_paquets locaux en 0
 	sql_delete('spip_plugins', sql_in('id_plugin', sql_get_select('DISTINCT(id_plugin)', 'spip_paquets'), 'NOT'));
 }
 
 
-function stp_base_inserer_paquets_locaux($paquets_locaux) {
+function svp_base_inserer_paquets_locaux($paquets_locaux) {
 	include_spip('inc/svp_depoter');
 	
 	// On initialise les informations specifiques au paquet :
