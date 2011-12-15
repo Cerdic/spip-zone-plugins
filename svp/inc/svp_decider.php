@@ -545,7 +545,7 @@ class Decideur {
 							// en cas d'absence, on cherche ou est ce plugin !
 							case 'absent':
 								// on choisit par defaut le meilleur etat de plugin.
-								// (attention: la on ne regarde pas si c'est local ou distant... a corriger ?)
+								// de preference dans les plugins locaux, sinon en distant.
 								if (!$this->sera_off($p)
 								and $new = $this->chercher_plugin_compatible($p, $v)
 								and $this->verifier_dependances_plugin($new, ++$prof)) {
