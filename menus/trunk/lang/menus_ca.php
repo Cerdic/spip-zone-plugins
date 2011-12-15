@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_mapage' => 'Si el visitant està connectat, afegeix un enllaç cap a la pàgina de l\'autor.',
 	'description_menu_mots' => 'Mostra automàticament un menú que llista els articles lligats a la paraula clau.',
 	'description_menu_objet' => 'Crea un enllaç cap a un objecte d\'SPIP: article, secció o un altre. Per defecte, l\'entrada tindrà el títol de l\'objecte.',
-	'description_menu_page_speciale' => 'Afegeix un enllaç cap a un esquelet accessible per un URL del tipus <code>spip.php?page=nom&amp;param1=xx&amp;param2=yyy...</code> Aquestes pàgines sovint són subministrades per connectors.',
+	'description_menu_page_speciale' => 'Afegeix un enllaç cap a un esquelet accessible per un URL del tipus <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Aquestes pàgines sovint són subministrades per connectors.',
 	'description_menu_page_speciale_zajax' => 'Ajoute un lien vers un bloc d\'une page accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ceci nécéssite une squelette de type Z et le plugin <a href="http://www.spip-contrib.net/MediaBox">médiabox</a>.', # NEW
 	'description_menu_rubriques' => 'Mostra una llista de seccions i, si es vol, les subseccions a diferents nivells. Per defecte, mostra totes les seccions des de l\'arrel, ordenats per títol (numèricament i després afabèticament).',
 	'description_menu_rubriques_articles' => 'Affiche une liste de rubriques et, si on veut, les sous-rubriques et les articles sur plusieurs niveaux. Par défaut, affiche toutes les rubriques depuis la racine, triées par titre (numériquement puis alphabétiquement). Les articles sont placés systématiquement après les rubriques.', # NEW
@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_afficher_articles' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)', # NEW
 	'entree_afficher_item_suite' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)', # NEW
 	'entree_articles_max' => 'Si oui, afficher les articles seulement si la rubrique contient au maximum xx articles ? (mettre le nombre maximum d\'articles, laissez vide pour afficher tous les articles)', # NEW
-	'entree_articles_max_affiches' => 'Si oui, limiter le nombre d\'articles list&eacute;s &agrave; xx maximum (suivis d\'un item "... Tous les articles" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum d\'articles, laissez vide pour afficher tous les articles)', # NEW
+	'entree_articles_max_affiches' => 'Si oui, limiter le nombre d\'articles listés à xx maximum (suivis d\'un item "... Tous les articles" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum d\'articles, laissez vide pour afficher tous les articles)', # NEW
 	'entree_aucun' => 'Cap',
 	'entree_bloc' => 'Bloc Zpip', # NEW
 	'entree_choisir' => 'Escolliu el tipus d\'entrada que voleu afegir:',
@@ -59,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_nombre_articles' => 'Número d\'articles com a màxim (0 per defecte)',
 	'entree_page' => 'Nom de la pàgina',
 	'entree_parametres' => 'Llista dels paràmetres',
-	'entree_rubriques_max_affichees' => 'Si oui, limiter le nombre de rubriques list&eacute;s &agrave; xx maximum (suivis d\'un item "... Toutes les rubriques" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum de rubriques, laissez vide pour afficher toutes les rubriques)', # NEW
+	'entree_rubriques_max_affichees' => 'Si oui, limiter le nombre de rubriques listés à xx maximum (suivis d\'un item "... Toutes les rubriques" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum de rubriques, laissez vide pour afficher toutes les rubriques)', # NEW
 	'entree_sousrub_cond' => 'N\'afficher que les sous-rubriques de la rubrique en cours (mettre "oui", sinon laisser vide)', # NEW
 	'entree_sur_n_articles' => '@n@ articles mostrat(s)',
 	'entree_sur_n_mots' => '@n@ paraules mostrada(es)',
@@ -122,17 +122,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_afficher_articles' => 'Les articles seront inclus dans le menu.', # NEW
 	'info_articles_max' => 'Seulement si la rubrique contient au plus @max@ articles', # NEW
-	'info_articles_max_affiches' => 'Affichage limit&eacute; &agrave; @max@ articles', # NEW
+	'info_articles_max_affiches' => 'Affichage limité à @max@ articles', # NEW
 	'info_classe_parent' => 'Classe des éléments parents : ', # NEW
 	'info_connexion_obligatoire' => 'Connexion obligatoire', # NEW
 	'info_deconnexion_obligatoire' => 'Uniquement déconnecté', # NEW
-	'info_masquer_articles_uniques' => 'Articles uniques masqu&eacute;s', # NEW
+	'info_masquer_articles_uniques' => 'Articles uniques masqués', # NEW
 	'info_numero_menu' => 'MENÚ NÚMERO:',
 	'info_page_speciale' => 'Enllaç cap a la pàgina «@page@»',
 	'info_page_speciale_zajax' => 'Modalbox de la page « @page@ » pour le bloc « @bloc@ &#187', # NEW
 	'info_rubrique_courante' => 'Rubrique courante', # NEW
 	'info_rubriques_exclues' => ' / sauf rubrique(s) @id_rubriques@', # NEW
-	'info_rubriques_max_affichees' => 'Affichage limit&eacute; &agrave; @max@ rubriques', # NEW
+	'info_rubriques_max_affichees' => 'Affichage limité à @max@ rubriques', # NEW
 	'info_secteur_exclus' => ' / sauf secteur(s) @id_secteur@', # NEW
 	'info_sousrub_cond' => 'Seules les sous-rubriques de la rubriques en cours sont affichées.', # NEW
 	'info_tous_groupes_mots' => 'Tots els grups de paraules',
