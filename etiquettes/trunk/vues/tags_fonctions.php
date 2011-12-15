@@ -14,18 +14,14 @@ function etiquettes_vue_tags($rien, $type_objet, $id_objet){
 
 	include_spip('base/abstract_sql');
 	include_spip('base/connect_sql');
-	
-	$type_objet = preg_replace(',^spip_|s$,', '', $type_objet);
-	$type_objet = table_objet_sql($type_objet);
-	$type_objet = preg_replace(',^spip_,', '', $type_objet);
-	$cle_objet = id_table_objet($type_objet);
-	
+
 	$reponse = sql_select(
 		'mots.id_mot, mots.titre',
-		array('mots' => 'spip_mots', 'liaison' => 'spip_mots_'.$type_objet),
+		array('mots' => 'spip_mots', 'liaison' => 'spip_mots_liens'),
 		array(
 			//array('=', 'mots.type', _q('tags')),
-			array('=', 'liaison.'.$cle_objet, $id_objet),
+			array('=', 'liaison.objet', _q(obje_type($type_objet))),
+			array('=', 'liaison.id_objet', $id_objet),
 			array('=', 'mots.id_mot', 'liaison.id_mot')
 		),
 		"",

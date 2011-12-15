@@ -41,10 +41,8 @@ function etiquettes_produire_id($groupe, $type_objet='', $id_objet=''){
 
 function valeur_champ_tags($table, $id, $champ) {
 	
-	include_spip('base/connect_sql');
-	$table_sql = table_objet_sql($table);
-	$table_sql = preg_replace(',^spip_,', '', $table_sql);
-	$r = spip_query('SELECT ALL titre FROM spip_mots AS m RIGHT JOIN spip_mots_'.$table_sql.' AS j ON m.id_mot=j.id_mot WHERE j.id_'.$table.'='.$id);
+	include_spip('base/objets');
+	$r = spip_query('SELECT ALL titre FROM spip_mots AS m RIGHT JOIN spip_mots_liens AS j ON m.id_mot=j.id_mot WHERE j.objet='.sql_quote(objet_type($table)).' AND j.id_objet='.intval($id));
 	$liste = array();
 	while($a = spip_fetch_array($r)){
 		array_push($liste,$a['titre']);
