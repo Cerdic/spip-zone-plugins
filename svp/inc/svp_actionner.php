@@ -355,7 +355,7 @@ class Actionneur {
 		// a activer uniquement
 		// il faudra prendre en compte les autres _DIR_xx
 		if (in_array($i['constante'], array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL'))) {
-			$dossier = rtrim($i['dossier'],'/');
+			$dossier = rtrim($i['src_archive'], '/');
 			$this->activer_plugin_dossier($dossier, $i, $i['constante']);
 			return true;
 		}
@@ -575,6 +575,7 @@ class Actionneur {
 		if (@is_readable(_CACHE_PIPELINES))   {include_once(_CACHE_PIPELINES);}
 
 		$dossier = ($constante == '_DIR_PLUGINS')? $dossier : '../'.constant($constante).$dossier;
+		include_spip('inc/plugin');
 		ecrire_plugin_actifs(array($dossier), false, 'ajoute');
 		$installe = $i['version_base'] ? 'oui' : 'non';
 		if ($installe == 'oui') {
@@ -606,26 +607,33 @@ class Actionneur {
 		if (!is_array($plugins_interessants)) {
 			$plugins_interessants = array();
 		}
+		
 		$dossiers = array();
+		$dossiers_old = array();
 		foreach($plugins_interessants as $p => $score) {
 			if (--$score > 0) {
 				$plugins_interessants[$p] = $score;
 				$dossiers[$p.'/'] = true;
 			} else {
 				unset($plugins_interessants[$p]);
-				// ATTENTION, il faudra prendre en compte les _DIR_xx
-				sql_updateq('spip_plugins',array('recent'=>0),'dossier='.sql_quote($p));
+				$dossiers_old[$p.'/'] = true;
 			}
 		}
 
-		$plugs = sql_select('dossier','spip_plugins','actif='.sql_quote('oui'));
-
-		while ($plug = sql_fetch($plugs)) {
-			$dossiers[$plug['dossier']] = true;
-			$plugins_interessants[ rtrim($plug['dossier'],'/') ] = 30; // score initial
+		// enlever les anciens
+		if ($dossiers_old) {
+			// ATTENTION, il faudra prendre en compte les _DIR_xx
+			sql_updateq('spip_paquets', array('recent'=>0), sql_in('src_archive', array_keys($dossiers_old)));
 		}
 
-		$plugs = sql_updateq('spip_plugins', array('recent'=>1), sql_in('dossier', array_keys($dossiers)));
+		$plugs = sql_allfetsel('src_archive','spip_paquets', 'actif='.sql_quote('oui'));
+		$plugs = array_map('array_shift', $plugs);
+		foreach ($plugs as $dossier) {
+			$dossiers[$dossier] = true;
+			$plugins_interessants[ rtrim($dossier, '/') ] = 30; // score initial
+		}
+
+		$plugs = sql_updateq('spip_paquets', array('recent'=>1), sql_in('src_archive', array_keys($dossiers)));
 		ecrire_meta('plugins_interessants', serialize($plugins_interessants));
 	}
 
@@ -643,12 +651,12 @@ class Actionneur {
 
 	function installe_plugin($info){
 		$plugin_get_infos = charger_fonction('get_infos', 'plugins');
-		if($info['constante'] == '_DIR_PLUGINS_SUPPL')
+		if ($info['constante'] == '_DIR_PLUGINS_SUPPL')
 			$constante = _DIR_RACINE.constant($info['constante']);
 		else
 			$constante = constant($info['constante']);
 		
-		$infos = $plugin_get_infos($info['dossier'],false,$constante);
+		$infos = $plugin_get_infos($info['dossier'], false, $constante);
 		if (isset($infos['install'])) {
 			ob_start();
 			include_spip('inc/step');
