@@ -122,7 +122,7 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 				}
 				$le_paquet['actif'] = $actif;
 				// on recherche d'eventuelle mises a jour existantes
-				if ($res = sql_allfetsel(array('pl.id_plugin','version'),array('spip_plugins AS pl', 'spip_paquets AS pa'), array(
+				if ($res = sql_allfetsel(array('pl.id_plugin','pa.version'),array('spip_plugins AS pl', 'spip_paquets AS pa'), array(
 					'pl.id_plugin = pa.id_paquet',
 					'pa.id_depot>' . sql_quote(0),
 					'pl.prefixe=' . sql_quote($prefixe),
