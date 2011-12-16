@@ -22,8 +22,21 @@ function formulaires_charger_plugin_verifier_dist(){
 		// Requete : Annulation des actions d'installation en cours
 		// -- On vide la liste d'actions en cours
 		set_request('_todo', '');
+	
 	} elseif (_request('valider_actions')) {
-		// ...
+		
+		// Ajout de la todo list à l'actionneur
+		// c'est lui qui va effectuer rellement les actions.
+		// mais quand ? !
+		$actions = unserialize(_request('_todo'));
+		include_spip('inc/svp_actionner');
+		$actionneur = new Actionneur();
+		$actionneur->log = true;
+		$actionneur->ajouter_actions($actions);
+		$actionneur->sauver_actions();
+		set_request('gogogo', 1);   // indiquer que le formulaire travaille...
+
+		
 	} elseif (_request('rechercher')) {
 		// annuler les selections si nouvelle recherche
 		set_request('ids_paquet', array());
