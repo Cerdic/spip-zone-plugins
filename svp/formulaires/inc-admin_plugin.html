@@ -1,7 +1,7 @@
 <B_plugins>
 <div class="liste plugins">
 	<ul class="liste-items">
-<BOUCLE_plugins(PAQUETS plugins){!par constante}{par prefixe}{id_depot=0}{actif ?}{constante ?IN #ENV{constante}}>
+<BOUCLE_plugins(PAQUETS plugins){!par constante, actif}{par prefixe}{id_depot=0}{actif ?}{constante ?IN #ENV{constante}}>
 		<li class="item[ (#ACTIF|=={oui}|?{actif,inactif})][(#OBSOLETE|=={oui}|oui) disabled][(#CONSTANTE|=={_DIR_EXTENSIONS}|oui) verrou]"[ id="(#PREFIXE|strtolower)-#COMPTEUR_BOUCLE"]>
 			[(#OBSOLETE|=={oui}|non)
 			<div class="check">
@@ -15,10 +15,16 @@
 				<span class="version">[(#VERSION)]</span>
 				<span class="etat">[ - (#ETAT)]</span>
 				<div class="short">[(#SLOGAN|svp_T{#PREFIXE}|typo)]</div>
-				<div class="icon">[(#LOGO|oui)[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/#LOGO}|image_reduire{32})]]</div>
+				[(#LOGO|oui)<div class="icon">
+					[(#ACTIF|=={oui}|?{
+						#CONSTANTE|constant|concat{#SRC_ARCHIVE/#LOGO}|image_reduire{32}
+						,
+						#CONSTANTE|constant|concat{#SRC_ARCHIVE/#LOGO}|image_reduire{32}|image_sepia{#dddddd}
+					})]
+				</div>]
 			</div>
-			[(#OBSOLETE|=={oui}|non)
-			<div class="actions">
+			
+			<div class="actions">[(#OBSOLETE|=={oui}|non)
 				[(#CONSTANTE|=={_DIR_EXTENSIONS}|non)
 					[(#ACTIF|=={oui}|oui)
 						<input type="submit" name="[(#ID_PAQUET|svp_nom_action{desactiver})]" class="submit" value="<:svp:bouton_desactiver:>" />
@@ -35,7 +41,7 @@
 					<:svp:info_verrouille:>
 					</span>
 				]
-			</div>]
+			]</div>
 			[(#ACTIF|=={oui}|oui) #SET{prefixe,#PREFIXE|strtolower}
 				[(#INCLURE{fond=prive/squelettes/inclure/cfg,script=configurer_#GET{prefixe},nom=#NOM})]
 			]
