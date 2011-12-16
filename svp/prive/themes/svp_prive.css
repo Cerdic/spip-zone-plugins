@@ -8,8 +8,8 @@
 }
 /* **************** LISTE EXTENSIONS          ***************** */
 .verrou {
-	background:url('../themes/spip/images/fond-installe.gif') repeat fixed 0 0 #EEEEEE !important;
+	background:url('../themes/spip/images/fond-verrou.png') repeat fixed 0 0 #FDFDFD !important;
 }
 .verrou:hover {
-	background:url('../themes/spip/images/fond-installe.gif') repeat fixed 0 0 #E8E8E8 !important;
+	background-color:#F0F0F0 !important;
 }
