@@ -268,17 +268,29 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	// On initialise l'url de base des logos du depot et son type afin de calculer l'url complete de chaque logo
 	$select = array('url_archives', 'type');
 	$depot = sql_fetsel($select, 'spip_depots', 'id_depot=' . sql_quote($id_depot));
-	
-	// Initialisation du tableau des id de paquets crees ou mis a jour pour le depot concerne
-	$ids_a_supprimer = array();
-	$versions_a_supprimer = array();
+
 
 	// On supprime tous les paquets du depot
+	// qui ont etes evacues, c'est a dire ceux dont les signatures
+	// ne correspondent pas aux nouveaux...
 	// et on retablit les vmax des plugins restants...
-	$anciens_plugins = sql_allfetsel('p.id_plugin', array('spip_plugins AS p', 'spip_depots_plugins AS dp'), array('p.id_plugin=dp.id_plugin', 'dp.id_depot = ' . intval($id_depot)));
+	$signatures = array();
+	foreach ($paquets as $p) {
+		$signatures[] = $p['md5'];
+	}
+
+	// tous les paquets du depot qui ne font pas parti des signatures
+	$anciens_paquets = sql_allfetsel('id_paquet', 'spip_paquets', array('id_depot=' . sql_quote($id_depot), sql_in('signature', $signatures, 'NOT')));
+	$anciens_paquets = array_map('array_shift', $anciens_paquets);
+
+	// tous les plugins correspondants aux anciens paquets
+	$anciens_plugins = sql_allfetsel('p.id_plugin',	array('spip_plugins AS p', 'spip_paquets AS pa'), array('p.id_plugin=pa.id_plugin', sql_in('pa.id_paquet', $anciens_paquets)));
 	$anciens_plugins = array_map('array_shift', $anciens_plugins);
-	sql_delete('spip_paquets', array('id_depot='. sql_quote($id_depot)));
-	sql_delete('spip_depots_plugins', array('id_depot='. sql_quote($id_depot)));
+
+	// suppression des anciens paquets
+	sql_delete('spip_paquets', sql_in('id_paquet', $anciens_paquets));
+	// suppressions des liaisons depots / anciens plugins
+	sql_delete('spip_depots_plugins', array('id_depot='. sql_quote($id_depot), sql_in('id_plugin', $anciens_plugins)));
 
 	// tous les plugins encore lies a des depots...
 	// la vmax est a retablir...
@@ -313,8 +325,16 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 		}
 	}
 	
-	
-	
+
+	// on ne garde que les paquets qui ne sont pas presents dans la base
+	$signatures = sql_allfetsel('signature', 'spip_paquets', 'id_depot='.sql_quote($id_depot));
+	$signatures = array_map('array_shift', $signatures);
+	foreach ($paquets as $cle=>$infos) {
+		if (in_array($infos['md5'], $signatures)) {
+			unset($paquets[$cle]);
+		}
+	}
+
 	// tableaux d'actions
 	$insert_paquets = array();
 	$insert_plugins = array();
@@ -324,6 +344,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	// On ne fait pas cas de la compatibilite avec la version de SPIP installee
 	// car l'operation doit permettre de collecter tous les paquets
 	foreach ($paquets as $_archive => $_infos) {
+
 		$insert_paquet = array();
 		// On initialise les informations specifiques au paquet :
 		// l'id du depot et les infos de l'archive
@@ -335,6 +356,8 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 		$insert_paquet['date_modif'] = $_infos['last_commit'];
 		// On serialise le tableau des traductions par module
 		$insert_paquet['traductions'] = serialize($_infos['traductions']);
+		// On ajoute la signature
+		$insert_paquet['signature'] = $_infos['md5'];
 
 		// On verifie si le paquet est celui d'un plugin ou pas
 		// -- Les traitements du XML dependent de la DTD utilisee
