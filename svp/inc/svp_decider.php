@@ -377,7 +377,7 @@ class Decideur {
 								$this->ask($i, $t);
 							} else {
 								// on n'a pas trouve la nouveaute !!!
-								$this->erreur($id, _T('svp:message_nok_maj_introuvable',array('plugin' => $i[p],'id'=>$id)));
+								$this->erreur($id, _T('svp:message_nok_maj_introuvable',array('plugin' => $i['n'],'id'=>$id)));
 							}
 						} else {
 							// mauvais identifiant ?
@@ -482,7 +482,7 @@ class Decideur {
 		// mais normalement, on ne devrait vraiment pas pouvoir tomber sur ce cas
 		if (!svp_verifier_compatibilite_spip($info['compatibilite_spip'])) {
 			$this->invalider($info);
-			$this->erreur($id, _T('svp:message_incompatibilite_spip',array('plugin'=>$info[p])));
+			$this->erreur($id, _T('svp:message_incompatibilite_spip',array('plugin'=>$info['n'])));
 			return false;
 		}
 					
@@ -500,7 +500,7 @@ class Decideur {
 					// peut on ecrire ?
 					if (!is_writable(_DIR_LIB)) {
 						$this->invalider($info);
-						$this->erreur($id, _T('svp:message_erreur_ecriture_lib', array('plugin'=>$info['p'], 'lib_url'=>$l['lien'], 'lib'=>$lib)));
+						$this->erreur($id, _T('svp:message_erreur_ecriture_lib', array('plugin'=>$info['n'], 'lib_url'=>$l['lien'], 'lib'=>$lib)));
 						$err = true;
 					}
 					// ajout, pour info
@@ -594,7 +594,7 @@ class Decideur {
 									$this->log("-- !erreur : $p");
 									// on ne trouve pas la dependance !
 									$this->invalider($info);
-									$this->erreur($id, $v ? _T('svp:message_dependance_plugin_version',array('plugin'=>$info['p'],'dependance'=>$p,'version'=>$v)) : _T('svp:message_dependance_plugin',array('plugin'=>$info['p'],'dependance'=>$p)));
+									$this->erreur($id, $v ? _T('svp:message_dependance_plugin_version',array('plugin'=>$info['n'],'dependance'=>$p,'version'=>$v)) : _T('svp:message_dependance_plugin',array('plugin'=>$info['n'],'dependance'=>$p)));
 								}
 								unset($new, $vieux);
 								break;
@@ -621,7 +621,7 @@ class Decideur {
 									$this->log("-- !erreur : $p");
 									// on ne trouve pas la dependance !
 									$this->invalider($info);
-									$this->erreur($id, $v ? _T('svp:message_dependance_plugin_version',array('plugin'=>$info['p'],'dependance'=>$p,'version'=>$v)) : _T('svp:message_dependance_plugin',array('plugin'=>$info['p'],'dependance'=>$p)));
+									$this->erreur($id, $v ? _T('svp:message_dependance_plugin_version',array('plugin'=>$info['n'],'dependance'=>$p,'version'=>$v)) : _T('svp:message_dependance_plugin',array('plugin'=>$info['n'],'dependance'=>$p)));
 								}
 								break;
 						}
