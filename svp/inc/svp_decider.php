@@ -509,6 +509,7 @@ class Decideur {
 						$this->change(array(
 							'i' => md5(serialize($l)),
 							'p' => $lib,
+							'n' => $lib,
 							'v' => $l['lien'],
 						), 'getlib');
 					}
@@ -650,7 +651,7 @@ class Decideur {
 	function presenter_actions($quoi) {
 		$res = array();
 		foreach ($this->$quoi as $id=>$info) {
-			$res[] = _T('svp:message_action_'.$info['todo'],array('plugin'=>$info['p'],'version'=>$info['v']));
+			$res[] = _T('svp:message_action_'.$info['todo'], array('plugin'=>$info['n'],'version'=>$info['v']));
 		}
 		return $res;
 	}

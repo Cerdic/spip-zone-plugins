@@ -107,12 +107,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende_rechercher_plugins' => 'Rechercher des plugins',
 
 // M
-    'message_action_get' => 'Télécharger le plugin &laquo;@plugin@&raquo; (version : @version@)',
-    'message_action_geton' => 'Télécharger et activer le plugin &laquo;@plugin@&raquo; (version : @version@)',
-	'message_action_getlib' => 'Télécharger la librairie &laquo;@plugin@&raquo; (depuis : <a href="@version@" class="spip_out">@version@</a>)',
-    'message_action_on' => 'Activer le plugin &laquo;@plugin@&raquo; (version : @version@)',
-	'message_action_up' => 'Mise &agrave; jour du plugin &laquo;@plugin@&raquo; (version : @version@)',
-	'message_action_upon' => 'Mise &agrave; jour et activation du plugin &laquo;@plugin@&raquo; (version : @version@)',
+    'message_action_get' => 'Télécharger le plugin « @plugin@ » (version : @version@)',
+    'message_action_geton' => 'Télécharger et activer le plugin « @plugin@ » (version : @version@)',
+	'message_action_getlib' => 'Télécharger la librairie « <a href="@version@" class="spip_out">@plugin@</a> »',
+    'message_action_on' => 'Activer le plugin « @plugin@ » (version : @version@)',
+	'message_action_up' => 'Mise &agrave; jour du plugin « @plugin@ » (version : @version@)',
+	'message_action_upon' => 'Mise &agrave; jour et activation du plugin « @plugin@ » (version : @version@)',
 
     'message_dependance_plugin' => 'Le plugin @plugin@ d&eacute;pend de @dependance@.',
     'message_dependance_plugin_version' => 'Le plugin @plugin@ d&eacute;pend de @dependance@ @version@',
