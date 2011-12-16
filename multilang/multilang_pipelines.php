@@ -9,7 +9,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param $flux
  */
 function multilang_insert_head_css($flux){
-
+	include_spip('inc/config');
 	$config = lire_config('multilang',array());
 	if($config['multilang_public'] == 'on'){
 
