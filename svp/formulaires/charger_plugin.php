@@ -25,7 +25,8 @@ function formulaires_charger_plugin_verifier_dist(){
 	} elseif (_request('valider_actions')) {
 		// ...
 	} elseif (_request('rechercher')) {
-		// ...
+		// annuler les selections si nouvelle recherche
+		set_request('ids_paquet', array());
 	} else {
 		// Requete : Installation d'un ou de plusieurs plugins
 		// -- On construit le tableau des ids de paquets conformement a l'interface du decideur

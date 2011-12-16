@@ -75,7 +75,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="hidden" name="_todo" class='hidden' value="[(#ENV{_todo})]" />
 
-		<div>
+		<div class="liste-recherche">
 			<fieldset>
 				<legend><:svp:legende_rechercher_plugins:></legend>
 				<p class="explication"><:svp:info_charger_plugin{version=#SPIP_VERSION}:></p>
@@ -118,7 +118,7 @@
 				</ul>
 			</fieldset>
 
-		<p class="boutons"><input type="submit" name="rechercher" class="submit" value="<:info_rechercher:>" /></p>
+		<p class="boutons recherche"><input type="submit" name="rechercher" class="submit" value="<:info_rechercher:>" /></p>
 		</div>
 
 		[(#ENV{phrase}|ou{#ENV{depot}}|ou{#ENV{categorie}}|ou{#ENV{etat}|ou{#ENV{doublon}}}|oui)
@@ -127,7 +127,7 @@
 				<legend><:svp:legende_installer_plugins:></legend>
 				<INCLURE{fond=formulaires/inc-plugins_trouves, plugins=#ENV*{message_ok}|table_valeur{plugins}, env} />
 			</fieldset>
-			<p class="boutons" style="display:none"><input type="submit" name="installer" class="submit" value="<:svp:bouton_installer:>" /></p>
+			<p class="boutons actions"[(#ENV{ids_paquet}|non) style="display:none"]><input type="submit" name="installer" class="submit" value="<:svp:bouton_installer:>" /></p>
 		</div>]
 	</form>
 </BOUCLE_depot_existe>

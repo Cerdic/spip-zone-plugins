@@ -25,10 +25,7 @@
 				<div class="short">[(#VALEUR{slogan})]</div>
 				<div class="icon">[(#VALEUR{logo}|image_reduire{32})]</div>
 			</div>
-			[(#REM) <!-- Icone de l'action de telechargement -->]
-			<div class="actions">
-				<input type="submit" name="installer_paquet[#ID_PAQUET]" class="submit" value="<:svp:bouton_installer:>" />
-			</div>
+
 			[(#REM) <!-- Details du plugin -->]
 			<div class="details" style="display:none">
 				<dl>
@@ -61,8 +58,17 @@
 				li.removeClass('on');
 			return false;
 		});
+		[(#REM) Déplier le bouton 'installer' et mettre le submit en premier dans le form
+			pour que l'appuie de la touche entree valide.
+			Le supprimer si l'on change un critere de recherche. ]
 		jQuery('.plugins li.item input.checkbox').change(function(){
-			jQuery(this).parents('form').eq(0).find('.boutons').slideDown();
+			$form = jQuery(this).parents('form').eq(0);
+			if (!$form.find('> input.submit').length) {
+				$form.find('.boutons.actions').slideDown().find('input.submit').clone().prependTo($form);
+				$form.find('.liste-recherche').change(function(){
+					jQuery(this).parents('form').eq(0).find('> input.submit').remove();
+				});
+			}
 		}); 
 	});
 //]]>
