@@ -143,7 +143,8 @@ function svp_declarer_tables_objets_sql($tables) {
      		"maj_version"	=> "VARCHAR(255) DEFAULT '' NOT NULL", // version superieure existante (mise a jour possible)
      		"superieur"		=> "varchar(3) DEFAULT 'non' NOT NULL", // superieur : version plus recente disponible (distant) d'un plugin (actif?) existant
      		"obsolete"		=> "varchar(3) DEFAULT 'non' NOT NULL", // obsolete : version plus ancienne (locale) disponible d'un plugin local existant
-     		"constante"		=> "VARCHAR(30) DEFAULT '' NOT NULL"), // nom de la constante _DIR_(PLUGINS|EXTENSIONS|PLUGINS_SUPP)
+     		"constante"		=> "VARCHAR(30) DEFAULT '' NOT NULL", // nom de la constante _DIR_(PLUGINS|EXTENSIONS|PLUGINS_SUPP)
+     		"signature"		=> "VARCHAR(32) DEFAULT '' NOT NULL"), // hash MD5 d'un paquet
 		'key'					=> array(
 			"PRIMARY KEY"	=> "id_paquet",
 			"KEY id_plugin"	=> "id_plugin"),
