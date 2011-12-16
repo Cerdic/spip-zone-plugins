@@ -126,7 +126,7 @@ class Decideur {
 
 			
 			// pour chaque type de dependences... (necessite, utilise, librairie)
-			// on cree un tableau unique [$dependence][0] = array()
+			// on cree un tableau unique [$dependence] = array()
 			// au lieu de plusieurs tableaux par version de spip
 			// en ne mettant dans 0 que ce qui concerne notre spip local
 			foreach($deps as $cle => $defaut) {
@@ -149,9 +149,9 @@ class Decideur {
 				}
 			}
 			
-			$plugs['i'][$r['i']]['dn'] = $d['necessite'];
-			$plugs['i'][$r['i']]['du'] = $d['utilise'];
-			$plugs['i'][$r['i']]['dl'] = $d['librairie'];
+			$plugs['i'][$r['i']]['dn'] = $d['necessite'][0];
+			$plugs['i'][$r['i']]['du'] = $d['utilise'][0];
+			$plugs['i'][$r['i']]['dl'] = $d['librairie'][0];
 
 
 			if ($multiple) {
@@ -488,9 +488,9 @@ class Decideur {
 					
 		// 2
 		// ajouter les librairies necessaires a notre paquet
-		if (is_array($info['dl']) and count($info['dl'][0])) {
+		if (is_array($info['dl']) and count($info['dl'])) {
 			$err = false;
-			foreach ($info['dl'][0] as $l) {
+			foreach ($info['dl'] as $l) {
 				// $l = array('nom' => 'x', 'lien' => 'url')
 				$lib = $l['nom'];
 				$this->log("## Necessite la librairie : " . $lib );
@@ -524,8 +524,8 @@ class Decideur {
 		// 3
 		// Trouver les dependences aux necessites
 		// et les activer au besoin
-		if (is_array($info['dn']) and count($info['dn'][0])) {
-			foreach ($info['dn'][0] as $n) {
+		if (is_array($info['dn']) and count($info['dn'])) {
+			foreach ($info['dn'] as $n) {
 
 				$p = strtoupper($n['nom']);
 				$v = $n['compatibilite'];

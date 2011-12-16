@@ -65,8 +65,8 @@ class Actionneur {
 	function add_lib($nom, $source) {
 		if (!$this->decideur->est_presente_lib($nom)) {
 			if (is_writable(_DIR_LIB)) {
-				$this->middle['lib'][$nom] = array(
-					'todo'=>'lib',
+				$this->middle['getlib'][$nom] = array(
+					'todo'=>'getlib',
 					'n'=>$nom,
 					'p'=>$nom,
 					'v'=>$source,
@@ -105,6 +105,9 @@ class Actionneur {
 			$i = $i['i'][$id];
 			switch ($action) {
 				case 'getlib':
+					// le plugin en ayant besoin le fera
+					// comme un grand...
+					break;
 				case 'geton':
 				case 'on':
 					$this->on($i, $action);
@@ -154,18 +157,16 @@ class Actionneur {
 		$in = $out = $deps = $deps_all = array();
 		// raz des cles pour avoir les memes que $out (utile reellement ?)
 		$this->middle['on'] = array_values($this->middle['on']);
-		// ajout des dependance et des librairies si besion
+		// ajout des dependance
 		foreach ($info['dn'] as $dep) {
-			if ($dep['id'] != 'SPIP') {
-				if (strpos($dep['id'],'lib:')===0) {
-					if ($lib = substr($dep['id'], 4)) {
-						// il faudrait gerer un retour d'erreur eventuel !
-						$this->add_lib($lib, $dep['src']);
-					}
-				} else {
-					$in[]  = $dep['id'];
-				}
-			}
+			$in[]  = $dep['id'];
+		}
+		// ajout des librairies
+		foreach ($info['dl'] as $lib) {
+			
+			// il faudrait gerer un retour d'erreur eventuel !
+			$this->add_lib($lib['nom'], $lib['lien']);
+			
 		}
 
 		// on recupere : tous les prefix de plugin a activer (out)
