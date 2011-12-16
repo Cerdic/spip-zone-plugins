@@ -3,6 +3,13 @@
 .liste-items .item span.installe { color: red; }
 
 .liste-objets.depots .caption {
-    background-image: url("../prive/themes/spip/images/depot-24.png");
+    background-image: url("../themes/spip/images/depot-24.png");
     padding-left: 30px;
+}
+/* **************** LISTE EXTENSIONS          ***************** */
+.verrou {
+	background:url('../themes/spip/images/fond-installe.gif') repeat fixed 0 0 #EEEEEE !important;
+}
+.verrou:hover {
+	background:url('../themes/spip/images/fond-installe.gif') repeat fixed 0 0 #E8E8E8 !important;
 }

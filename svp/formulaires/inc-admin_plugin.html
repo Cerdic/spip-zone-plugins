@@ -2,7 +2,7 @@
 <div class="liste plugins">
 	<ul class="liste-items">
 <BOUCLE_plugins(PAQUETS plugins){!par constante}{par prefixe}{id_depot=0}{actif ?}{constante ?IN #ENV{constante}}>
-		<li class="item[ (#ACTIF|=={oui}|?{actif,inactif})][(#OBSOLETE|=={oui}|oui) disabled]"[ id="(#PREFIXE|strtolower)-#COMPTEUR_BOUCLE"]>
+		<li class="item[ (#ACTIF|=={oui}|?{actif,inactif})][(#OBSOLETE|=={oui}|oui) disabled][(#CONSTANTE|=={_DIR_EXTENSIONS}|oui) verrou]"[ id="(#PREFIXE|strtolower)-#COMPTEUR_BOUCLE"]>
 			[(#OBSOLETE|=={oui}|non)
 			<div class="check">
 				[(#CONSTANTE|=={_DIR_EXTENSIONS}|non)
