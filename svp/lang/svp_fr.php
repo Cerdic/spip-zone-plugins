@@ -7,7 +7,10 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
+// A
+	'actions_demandees' => 'Actions demandées :',
+	'actions_necessaires' => 'Les actions nécessaires suivantes seront effectuées :',
+	
 // B
 	'bouton_activer' => 'Activer',
 	'bouton_actualiser' => 'Actualiser',

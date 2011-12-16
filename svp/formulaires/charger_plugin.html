@@ -12,18 +12,14 @@
 
         [<div id="charger_plugin_confirm">
 			
-            [<div class="reponse_formulaire reponse_formulaire_ok">
-                <strong>Demande :</strong>
+            <div class="reponse_formulaire reponse_formulaire_ok">
+                <strong><:svp:actions_demandees:></strong>
                 <ul>(#ENV**{erreurs}|table_valeur{decideur_demandes}|foreach{svp_presenter_actions})</ul>
-            </div>]
+            </div>
             [<div class="reponse_formulaire reponse_formulaire_ok">
-                <strong>Propositions :</strong>
+                <strong><:svp:actions_necessaires:></strong>
                 <ul>(#ENV**{erreurs}|table_valeur{decideur_propositions}|foreach{svp_presenter_actions})</ul>
             </div>]
-            <div class="reponse_formulaire reponse_formulaire_ok">
-                <strong>Actions :</strong>
-                <ul>(#ENV**{erreurs}|table_valeur{decideur_actions}|foreach{svp_presenter_actions})</ul>
-            </div>
             <p class="boutons">
                 <input type="submit" name="annuler_actions" class="submit annuler_actions" value="<:bouton_annuler:>" />
                 <input type="submit" name="valider_actions" class="submit valider_actions" value="<:bouton_valider:>" />
