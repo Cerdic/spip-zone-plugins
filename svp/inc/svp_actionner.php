@@ -163,10 +163,8 @@ class Actionneur {
 		}
 		// ajout des librairies
 		foreach ($info['dl'] as $lib) {
-			
 			// il faudrait gerer un retour d'erreur eventuel !
 			$this->add_lib($lib['nom'], $lib['lien']);
-			
 		}
 
 		// on recupere : tous les prefix de plugin a activer (out)
@@ -177,12 +175,8 @@ class Actionneur {
 		foreach ($this->middle['on'] as $inf) {
 			$out[] = $inf['p'];
 			foreach ($inf['dn'] as $dep) {
-				if ($dep['id'] != 'SPIP') {
-					if (strpos($dep['id'],'lib:')!==0) {
-						$deps[$inf['p']][] = $dep['id'];
-						$deps_all[] = $dep['id'];
-					}
-				}
+				$deps[$inf['p']][] = $dep['id'];
+				$deps_all[] = $dep['id'];
 			}
 		}
 
@@ -251,12 +245,12 @@ class Actionneur {
 		$in = $out = array();
 		// raz des cles pour avoir les memes que $out (utile reellement ?)
 		$this->middle['off'] = array_values($this->middle['off']);
-		foreach ($info['dn'] as $dep) 			{
-			if (($dep['id'] != 'SPIP') and (strpos($dep['id'],'lib:')!==0)) {
-				$in[]  = $dep['id'];
-			}
+		foreach ($info['dn'] as $dep) {
+			$in[]  = $dep['id'];
 		}
-		foreach ($this->middle['off'] as $inf) 	{$out[] = $inf['p'];}
+		foreach ($this->middle['off'] as $inf) 	{
+			$out[] = $inf['p'];
+		}
 
 		if (!$in) {
 			// pas de dependance, on le met en dernier !
