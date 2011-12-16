@@ -9,9 +9,6 @@
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 [(#CONFIG{spipmotion_casse}|=={oui}|oui)
 	#SET{erreur_chemin,true}
-	<p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:erreur_chemin_ffmpeg:></p>
-	<p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:erreur_binaire:></p>
-	[(#BOUTON_ACTION{<:spipmotion:label_verifier_logiciels:>,#URL_ACTION_AUTEUR{spipmotion_verifier_binaires,1,#SELF}})]
 ]
 
 <BOUCLE_script_perms(CONDITION){si #CONFIG{spipmotion_spipmotionsh_casse}|!={oui}|oui}>
@@ -111,7 +108,7 @@
 				<h3 class="legend"><:spipmotion:profils_encodage_son:></h3>
 				<div class="spipmotion_formats">
 					<ul>
-						<BOUCLE_profils_son_top(POUR){tableau #CONFIG{spipmotion/fichiers_audios_sortie}}>
+						<BOUCLE_profils_son_top(POUR){tableau #CONFIG{spipmotion/fichiers_audios_sortie,#ARRAY}}>
 						<li><a href="#spipmotion_#VALEUR">#VALEUR</a></li>
 						</BOUCLE_profils_son_top>
 					</ul>
@@ -130,7 +127,7 @@
 				<h3 class="legend"><:spipmotion:profils_encodage_video:></h3>
 				<div class="spipmotion_formats">
 					<ul>
-						<BOUCLE_profils_video_top(POUR){tableau #CONFIG{spipmotion/fichiers_videos_sortie}}>
+						<BOUCLE_profils_video_top(POUR){tableau #CONFIG{spipmotion/fichiers_videos_sortie,#ARRAY}}>
 						<li><a href="#spipmotion_#VALEUR">#VALEUR</a></li>
 						</BOUCLE_profils_video_top>
 					</ul>
@@ -166,7 +163,9 @@ $(function() {
 });
 // --></script>
 </BOUCLE_script_perms>
-<p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:erreur_verifier_droits:></p>
+<p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:erreur_chemin_ffmpeg:></p>
+<p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:erreur_binaire:></p>
+	<p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:erreur_verifier_droits:></p>
 [(#BOUTON_ACTION{<:spipmotion:label_verifier_logiciels:>,#URL_ACTION_AUTEUR{spipmotion_verifier_binaires,1,#SELF}})]
 <//B_script_perms>
 </div>

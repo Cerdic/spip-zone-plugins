@@ -11,15 +11,15 @@
 			44100,44100 Hz,
 			48000,48000 Hz
 		}})]
-
+	
 	#SET{acodecs_existants,#EVAL{$GLOBALS['spipmotion_metas']['spipmotion_codecs_audio_encode']}}
-
+	#SET{acodecs_possibles,#ARRAY}
 	<BOUCLE_ogg(CONDITION){si #ENV{valeur}|in_array{#ARRAY|push{ogg}|push{oga}}|oui}>
-		#SET{acodecs_possibles,#ARRAY|push{libvorbis}}
+		#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libvorbis}}
 		#SET{vorbis,oui}
 	</BOUCLE_ogg>
 
-	#SET{acodecs,#GET{acodecs_possibles,#ARRAY}|array_intersect{#GET{acodecs_existants,#ARRAY}|unserialize}}
+	#SET{acodecs,#GET{acodecs_possibles}|array_intersect{#GET{acodecs_existants,#ARRAY|serialize}|unserialize}}
 	#SET{acodec_defaut,#GET{acodec}|table_valeur{0}}
 	[(#GET{acodecs}|count|>{0}|oui)
 		[(#SAISIE{selection_valeur,acodec_#ENV{valeur},

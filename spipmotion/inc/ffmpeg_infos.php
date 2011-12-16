@@ -20,7 +20,7 @@ function inc_ffmpeg_infos_dist($forcer=false){
  * Récupération des informations sur les codecs disponibles
  */
 function ffmpeg_recuperer_infos_codecs($forcer){
-
+	
 	if($forcer){
 		if(!is_dir(_DIR_CACHE.'spipmotion')){
 			sous_repertoire(_DIR_CACHE,'spipmotion');
@@ -28,10 +28,6 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 		$chemin = lire_config('spipmotion/chemin','ffmpeg');
 		$chemin_fichier = _DIR_CACHE.'spipmotion/ffmpeg_codecs';
 		$chemin_out = _DIR_CACHE.'spipmotion/out';
-
-		if(!$chemin){
-			return false;
-		}
 		
 		/**
 		 * On recharge les logiciels
@@ -47,7 +43,7 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 		 * On crée un fichier contenant l'ensemble de la conf de ffmpeg
 		 */
 		supprimer_fichier($chemin_fichier);
-
+		
 		spimotion_write($chemin_fichier,"==VERSION==\n");
 		exec($spipmotion_sh.' --info "-version" --log '.$chemin_fichier,$retour,$bool);
 		spimotion_write($chemin_fichier,"\n==FORMATS==\n");
@@ -63,7 +59,7 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 		spimotion_write($chemin_fichier,"\n==PROTOCOLS==\n");
 		exec($spipmotion_sh.' --info "-protocols" --log '.$chemin_fichier,$retour,$bool);
 		spimotion_write($chemin_fichier,"\n==FIN==");
-
+		
 		if (lire_fichier($chemin_fichier, $contenu)){
 			$data = array();
 			$look_ups = array(
