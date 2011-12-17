@@ -9,6 +9,18 @@
 <ul>
 <BOUCLE_a(TRADLANG tradlang_modules){id_tradlang}>
 <li class="editer_statut">
+	<script type='text/javascript'>
+	var statut_orig = '#STATUT';
+	var contenu_orig = '[(#STR**|entites_html)]';
+	var me = cQuery(".tradlang-str_statut-#ID_TRADLANG");
+	var id = me.crayon().find('form');
+	cQuery(id).submit(function(){
+		var newstatut = $(this).find('#statut').val();
+		var new_contenu = $(this).find('#str').val();
+		if((new_contenu != contenu_orig) && (newstatut != 'OK'))
+			alert('<:tradlang:crayon_changer_statut|filtrer_entites|texte_script:>');
+	});
+	</script>
 	<label><:tradlang:label_tradlang_status:></label>
 	<select class="text crayon_active" name="#ENV{name_statut}" id="statut">
 		<option value="OK"[(#STATUT|=={OK}|oui)selected="selected"]><:tradlang:str_status_traduit:></option>

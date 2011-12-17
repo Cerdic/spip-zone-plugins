@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_legende_autorisation_modifier' => 'Modifier les traductions',
 	'cfg_legende_autorisation_voir' => 'Voir l\'interface de traduction',
 	'codelangue' => 'Code de langue',
+	'crayon_changer_statut' => 'Attention! Vous avez modifié le contenu de la chaîne sans en modifier le statut.',
 
 	// E
 	'entrerlangue' => 'Ajouter un code langue',
