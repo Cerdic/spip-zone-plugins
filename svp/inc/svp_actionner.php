@@ -346,7 +346,7 @@ class Actionneur {
 
 	// attraper et activer un plugin
 	function do_geton($info) {
-		if ($dirs = $this->get_paquet_id($info)) {
+		if ($dirs = $this->get_paquet_id($info['i'])) {
 			$this->activer_plugin_dossier($dirs['dossier'], $i);
 			return true;
 		}
@@ -530,7 +530,7 @@ class Actionneur {
 
 		$i = sql_fetsel('*', 'spip_paquets', 'id_paquet=' . sql_quote($info['i']));
 	
-		if ($dirs = $this->get_paquet_id($info)) {
+		if ($dirs = $this->get_paquet_id($info['i'])) {
 			$this->ajouter_plugin_interessants_meta($dirs['dossier']);
 			return true;
 		}
