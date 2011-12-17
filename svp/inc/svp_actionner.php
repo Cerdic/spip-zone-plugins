@@ -317,8 +317,6 @@ class Actionneur {
 			$oks = true;
 			$done .= "<ul>";
 			foreach ($this->done as $i) {
-				$this->log('done:');
-				$this->log($i);
 				$ok = ($i['done'] ? true : false);
 				$oks = &$ok;
 				$ok_texte = $ok ? 'ok' : 'fail';
@@ -407,8 +405,8 @@ class Actionneur {
 		if (!$this->tester_repertoire_plugins_auto()) {
 			return false;
 		}
-		
-		if ($dirs = $this->get_paquet_id($info['i'])) {
+		$i = sql_fetsel('*','spip_paquets','id_paquet='.sql_quote($info['i']));
+		if ($dirs = $this->get_paquet_id($i)) {
 			$this->activer_plugin_dossier($dirs['dossier'], $i);
 			return true;
 		}
@@ -420,7 +418,7 @@ class Actionneur {
 	// activer un plugin
 	// soit il est la... soit il est a telecharger...
 	function do_on($info) {
-		$i = sql_fetsel('*','spip_paquet','id_paquet='.sql_quote($info['i']));
+		$i = sql_fetsel('*','spip_paquets','id_paquet='.sql_quote($info['i']));
 		if ($i['id_zone'] > 0) {
 			return $this->do_geton($info);
 		}
@@ -636,10 +634,11 @@ class Actionneur {
 			// installer le plugin au prochain tour
 			$new_action = array_merge($this->work, array(
 				'todo'=>'install',
-				'dossier'=>rtrim($i['dossier'],'/'),
+				'dossier'=>rtrim($dossier,'/'),
 				'constante'=>$i['constante']
 			));
 			array_unshift($this->end, $new_action);
+			$this->log("Demande d'installation de $dossier");
 			#$this->installer_plugin($dossier);
 		}
 
@@ -702,17 +701,33 @@ class Actionneur {
 
 
 	function installer_plugin($info){
-		
-		include_spip('inc/plugin');
-		ob_start();
-		// ceci teste l'install de TOUS les plugins
-		// et serait a optimiser pour n'installer QUE ce plugin
-		// en utilisant $installer_plugins() par exemple directement
-		plugin_installes_meta();
-		$messages = ob_get_contents();
-		ob_end_clean();
-		return $messages;
+		// il faut info['dossier'] et info['constante'] pour installer
+		if ($plug = $info['dossier']) {
+			$installer_plugins = charger_fonction('installer', 'plugins');
+			$infos = $installer_plugins($plug, 'install', $info['constante']);
+			if ($infos) {
+				// en absence d'erreur, on met a jour la liste des plugins installes...
+				if (!is_array($infos) OR $infos['install_test'][0]) {
+					$meta_plug_installes = @unserialize($GLOBALS['meta']['plugin_installes']);
+					if (!$meta_plug_installes) {
+						$meta_plug_installes=array();
+					}
+					$meta_plug_installes[] = $plug;
+					ecrire_meta('plugin_installes',serialize($meta_plug_installes),'non');
+				}
+				if (is_array($infos)){
+					list($ok, $trace) = $infos['install_test'];
+					if ($ok) {
+						return true;
+					}
+					$this->err(_T('svp:message_action_finale_install_fail',
+						array('plugin' => $info['n'], 'version'=>$info['v'])) . "<br />" . $trace);
+				}
+			}
+		}
+		return false;
 	}
+	
 
 
 	// telecharge un paquet

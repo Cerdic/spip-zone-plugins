@@ -129,8 +129,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'message_action_geton' => 'Télécharger et activer le plugin « @plugin@ » (version : @version@)',
 	'message_action_getlib' => 'Télécharger la librairie « <a href="@version@" class="spip_out">@plugin@</a> »',
     'message_action_on' => 'Activer le plugin « @plugin@ » (version : @version@)',
-	'message_action_up' => 'Mise &agrave; jour du plugin « @plugin@ » (version : @version@)',
-	'message_action_upon' => 'Mise &agrave; jour et activation du plugin « @plugin@ » (version : @version@)',
+	'message_action_up' => 'Mise à jour du plugin « @plugin@ » (version : @version@)',
+	'message_action_upon' => 'Mise à jour et activation du plugin « @plugin@ » (version : @version@)',
+	'message_action_install' => 'Le plugin « @plugin@ » (version : @version@) va être installé',
+	'message_action_kill' => 'Suppression des fichiers du plugin « @plugin@ » (version : @version@)',
+	'message_action_off' => 'Désinstaller le plugin « @plugin@ » (version : @version@)',
+	'message_action_stop' => 'Désinstaller le plugin « @plugin@ » (version : @version@)',
+
+
 
 	'message_action_finale_get_fail' => 'Le plugin « @plugin@ » (version : @version@) n\'a pu être correctement récupéré',
 	'message_action_finale_get_ok' => 'Le plugin « @plugin@ » (version : @version@) a été correctement récupéré',
