@@ -275,6 +275,7 @@ class Actionneur {
 	}
 
 
+
 	function presenter_actions() {
 		$affiche = "";
 		if ($this->end or $this->done) {
@@ -283,10 +284,10 @@ class Actionneur {
 				if(is_string($i['done'])){
 					$ajouts_message = "<br />".$i['done'];
 				}
-				$affiche .= "\t<li>"._T('step:message_action_finale_'.$i['todo'].'_'.($i['done']?'ok':'fail'),array('plugin'=>$i[n],'version'=>$i[v])).$ajouts_message."</li>\n";
+				$affiche .= "\t<li>"._T('svp:message_action_finale_'.$i['todo'].'_'.($i['done']?'ok':'fail'),array('plugin'=>$i['n'],'version'=>$i['v'])).$ajouts_message."</li>\n";
 			}
 			foreach ($this->end as $i) {
-				$affiche .= "\t<li>"._T('step:message_action_'.$i['todo'],array('plugin'=>$i[n],'version'=>$i[v]))."</li>\n";
+				$affiche .= "\t<li>"._T('svp:message_action_'.$i['todo'],array('plugin'=>$i['n'],'version'=>$i['v']))."</li>\n";
 			}
 			$affiche .= "</ul>\n";
 		}
@@ -702,55 +703,6 @@ class Actionneur {
 		}
 		return false;
 	}
-
-
-
-
-	function remove_older_files($dir, $files = array()) {
-		static $ok = false;
-		if ($ok === false) {
-			$ok = array();
-			foreach ($files as $f) {
-				$ok[$f['filename']] = true;
-			}
-		}
-
-		if (!file_exists($dir)) return true;
-		if (!is_dir($dir) || is_link($dir)) {
-			if (!isset($ok[$dir])) {
-				$this->log('- supp :' . $dir);
-				unlink($dir);
-			}
-			return true;
-		}
-
-		$dir = rtrim($dir, '/');
-		foreach (scandir($dir) as $item) {
-			if ($item == '.' || $item == '..') continue;
-			$this->remove_older_files($dir . "/" . $item);
-		}
-
-		return true;
-	}
-
-}
-
-// scandir pour php4
-// http://fr2.php.net/manual/fr/function.scandir.php#73062
-if (!function_exists('scandir')) {
-function scandir($dir, $listDirectories=false, $skipDots=true) {
-    $dirArray = array();
-    if ($handle = opendir($dir)) {
-        while (false !== ($file = readdir($handle))) {
-            if (($file != "." && $file != "..") || $skipDots == true) {
-                if($listDirectories == false) { if(is_dir($file)) { continue; } }
-                array_push($dirArray,basename($file));
-            }
-        }
-        closedir($handle);
-    }
-    return $dirArray;
-}
 }
 
 ?>

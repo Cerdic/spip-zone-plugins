@@ -117,6 +117,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_action_up' => 'Mise &agrave; jour du plugin « @plugin@ » (version : @version@)',
 	'message_action_upon' => 'Mise &agrave; jour et activation du plugin « @plugin@ » (version : @version@)',
 
+	'message_action_finale_get_fail' => 'Le plugin « @plugin@ » (version : @version@) n\'a pu être correctement récupéré',
+	'message_action_finale_get_ok' => 'Le plugin « @plugin@ » (version : @version@) a été correctement récupéré',
+	'message_action_finale_install_fail' => 'L\'installation du plugin « @plugin@ » (version : @version@) a échoué',
+	'message_action_finale_install_ok' => 'L\'installation du plugin « @plugin@ » (version : @version@) s\'est correctement déroulée',
+	'message_action_finale_kill_fail' => 'Les fichiers du plugin « @plugin@ » (version : @version@) n\'ont pu être correctement effacés',
+	'message_action_finale_kill_ok' => 'Les fichiers du plugin « @plugin@ » (version : @version@) ont été correctement effacés',
+	'message_action_finale_off_fail' => 'La désactivation du plugin « @plugin@ » (version : @version@) ne s\'est pas correctement déroulée',
+	'message_action_finale_off_ok' => 'La désactivation du plugin « @plugin@ » (version : @version@) s\'est correctement déroulée',
+	'message_action_finale_on_fail' => 'L\'activation du plugin « @plugin@ » (version : @version@) ne s\'est pas correctement déroulée',
+	'message_action_finale_on_ok' => 'L\'activation du plugin « @plugin@ » (version : @version@) s\'est correctement déroulée',
+	'message_action_finale_stop_fail' => 'La d&eacute;sinstallation du plugin « @plugin@ » (version : @version@) ne s\'est pas correctement déroulée',
+	'message_action_finale_stop_ok' => 'La d&eacute;sinstallation du plugin « @plugin@ » (version : @version@) s\'est correctement déroulée',
+	'message_action_finale_up_fail' => 'La mise à jour du plugin « @plugin@ » (version : @version@) ne s\'est pas correctement déroulée',
+	'message_action_finale_up_ok' => 'La mise à jour du plugin « @plugin@ » (version : @version@) s\'est correctement déroulée',
+	'message_action_finale_getlib_fail' => 'L\'installation de la librairie « @plugin@ » a échoué',
+	'message_action_finale_getlib_ok' => 'La librairie « @plugin@ » a été installée',
+
     'message_dependance_plugin' => 'Le plugin @plugin@ d&eacute;pend de @dependance@.',
     'message_dependance_plugin_version' => 'Le plugin @plugin@ d&eacute;pend de @dependance@ @version@',
     'message_erreur_ecriture_lib' => '@plugin@ a besoin de la librairie <a href="@lib_url@">@lib@</a>
