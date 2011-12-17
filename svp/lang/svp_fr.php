@@ -48,6 +48,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'categorie_statistique' => 'Référencement, statistiques',
 	'categorie_theme' => 'Thème',
 
+// E
+	'erreur_teleporter_chargement_source_impossible' => 'Chargement impossible de la source @source@',
+	'erreur_teleporter_destination_erreur' => 'Rerpertoire @dir@ non accessible pour teleporter',
+	'erreur_teleporter_echec_deballage_archive' => 'Impossible de déballer @fichier@',
+	'erreur_teleporter_format_archive_non_supporte' => 'Le format @extension@ n\'est pas supporté par le téléporteur',
+	'erreur_teleporter_methode_inconue' => 'Methode @methode@ inconnue pour teleporter',
+	'erreur_teleporter_type_fichier_inconnu' => 'Type de fichier inconnu pour la source @source@',
+	
 // I
 	'info_1_depot' => '1 dépôt',
 	'info_1_paquet' => '1 paquet',
