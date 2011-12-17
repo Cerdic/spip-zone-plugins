@@ -11,14 +11,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'actions_a_faire' => 'Actions à traiter',
 	'actions_demandees' => 'Actions demandées :',
 	'actions_en_erreur' => 'Erreurs survenues',
-	'actions_necessaires' => 'Les actions nécessaires suivantes seront effectuées :',
+	'actions_necessaires' => 'Les actions supplémentaires suivantes seront effectuées :',
 	'actions_realises' => 'Actions réalisées',
 	
 // B
 	'bouton_activer' => 'Activer',
 	'bouton_actualiser' => 'Actualiser',
 	'bouton_actualiser_tout' => 'Actualiser les dépôts',
-	'bouton_installer' => 'Installer',
+	'bouton_installer' => 'Télécharger et activer',
 	'bouton_desactiver' => 'Désactiver',
 	'bouton_desinstaller' => 'Désinstaller',
 	'bouton_modifier_depot' => 'Modifier le dépôt',
