@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_paypal_ipn_dist() {
 	
-	spip_log("Entrer action_paypal_ipn_dist arg : "._request('arg'),'paypal');
+	spip_log("Entrer action_paypal_ipn_dist",'paypal');
 
 	#spip_log($_POST,'paypal');
 
@@ -32,18 +32,12 @@ function action_paypal_ipn_dist() {
 		$retour == "VERIFIED"
 		and $datas['receiver_email'] == $conf['api'][$envr]['account']
 	) {
-		// On recupere les arguments
-		list($id_auteur, $invoice, $id_panier) = preg_split('/\W/', _request('arg'));
-
-		spip_log('Retour de Paypal vérifié (id_auteur $id_auteur, invoice $invoice, id_panier$id_panier), on peut passer aux traitements','paypal');
+		spip_log('Retour de Paypal vérifié, on peut passer aux traitements','paypal');
 
 		// c'est tout bon, on envoie ca au pipeline pour traitements
 		pipeline('traitement_paypal', array(
 			'args'=>array(
 				'paypal' => $datas,
-				'id_auteur' => $id_auteur,
-				'invoice' => $invoice,
-				'id_panier' => $id_panier,
 				'test' => (($envr == 'test') or ($datas['test_ipn'] == 1)),
 			),
 			'data'=>'')
