@@ -21,7 +21,8 @@ function action_actionner_dist() {
 		include_spip('inc/minipres');
 		$url = generer_action_auteur('actionner', '',  _request('redirect'));
 		$pres = $actionneur->presenter_actions();
-		echo minipres( _T('svp:installation_en_cours'), $pres . '<br /><br /><br />' . $url);
+		$btn = "<a href='$url'>[ Action Suivante ]</a>";
+		echo minipres( _T('svp:installation_en_cours'), $pres . '<br /><br />' . $btn);
 		die();
 		#redirige_par_entete(str_replace('&amp;','&', $url));
 	}

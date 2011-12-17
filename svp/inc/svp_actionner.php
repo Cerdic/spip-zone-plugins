@@ -668,9 +668,6 @@ class Actionneur {
 				// on recupere la mise a jour...
 				include_spip('action/teleporter');
 				$teleporter_composant = charger_fonction('teleporter_composant', 'action');
-$this->log($teleporter_composant);
-$this->log($zip);
-$this->log( _DIR_PLUGINS_AUTO . $dest);
 				$ok = $teleporter_composant('http', $zip, _DIR_PLUGINS_AUTO . $dest);
 				if ($ok === true) {
 					return array(
