@@ -88,7 +88,7 @@ class Actionneur {
 	function add_lib($nom, $source) {
 		if (!$this->decideur->est_presente_lib($nom)) {
 			if (is_writable(_DIR_LIB)) {
-				$this->middle['getlib'][$nom] = array(
+				$this->middle['lib'][$nom] = array(
 					'todo'=>'getlib',
 					'n'=>$nom,
 					'p'=>$nom,
