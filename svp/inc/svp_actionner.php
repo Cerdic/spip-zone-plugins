@@ -335,6 +335,7 @@ class Actionneur {
 		if ($do = $this->work) {
 			$todo = 'do_' . $do['todo'];
 			lire_metas(); // avoir les metas a jour
+			$this->log("Faire $todo avec $do[n]");
 			$do['done'] = $this->$todo($do);
 			$this->done[] = $do;
 			$this->work = array();
@@ -389,26 +390,27 @@ class Actionneur {
 			'prefixe='.sql_quote($info['p']),
 			'version='.sql_quote($info['maj']),
 			'superieur='.sql_quote('oui')))) {
-				if ($dirs = $this->get_paquet_id($maj)) {
-					// Si le plugin a jour n'est pas dans le meme dossier que l'ancien...
-					// il faut :
-					// - activer le plugin sur son nouvel emplacement (uniquement si l'ancien est actif)...
-					// - supprimer l'ancien (si faisable)
-					if (($dirs['src_archive'] . '/') != $i['src_archive']) {
-						if ($i['actif'] == 'oui') {
-							$this->activer_plugin_dossier($dirs['dossier'], $maj);
-						}
-
-						if (substr($i['dossier'], 0, 5) == 'auto/') {
-							if (supprimer_repertoire($dirs['dir'])) {
-								sql_delete('spip_paquets', 'id_paquet=' . sql_quote($info['i']));
-							}
-						}
+				
+			if ($dirs = $this->get_paquet_id($maj)) {
+				// Si le plugin a jour n'est pas dans le meme dossier que l'ancien...
+				// il faut :
+				// - activer le plugin sur son nouvel emplacement (uniquement si l'ancien est actif)...
+				// - supprimer l'ancien (si faisable)
+				if (($dirs['src_archive'] . '/') != $i['src_archive']) {
+					if ($i['actif'] == 'oui') {
+						$this->activer_plugin_dossier($dirs['dossier'], $maj);
 					}
 
-					$this->ajouter_plugin_interessants_meta($dirs['dossier']);
-					return $dirs;
+					if (substr($i['dossier'], 0, 5) == 'auto/') {
+						if (supprimer_repertoire($dirs['dir'])) {
+							sql_delete('spip_paquets', 'id_paquet=' . sql_quote($info['i']));
+						}
+					}
 				}
+
+				$this->ajouter_plugin_interessants_meta($dirs['dossier']);
+				return $dirs;
+			}
 		}
 		return false;
 	}
@@ -453,7 +455,7 @@ class Actionneur {
 			$dossier = rtrim($i['dossier'],'/');
 			$constante = $i['constante'];
 
-			$constante = $this->donner_chemin_constante_plugins( $i['constante'] );
+			# $constante = $this->donner_chemin_constante_plugins( $i['constante'] );
 				
 			$installer_plugins = charger_fonction('installer', 'plugins');
 			$infos = $installer_plugins($del['src_archive'], 'uninstall');
@@ -493,56 +495,42 @@ class Actionneur {
 	
 	// installer une librairie
 	function do_getlib($info) {
-		if (!defined('_DIR_LIB') or !_DIR_LIB or !is_writable(_DIR_LIB)) {
-			$this->log("Pas de _DIR_LIB defini !");
+		if (!defined('_DIR_LIB') or !_DIR_LIB) {
+			$this->log("/!\ Pas de _DIR_LIB defini !");
+			return false;
+		}
+		if (!is_writable(_DIR_LIB)) {
+			$this->log("/!\ Ne peut pas écrire dans _DIR_LIB !");
 			return false;
 		}
 
-		# TODO
-		$this->log("TODO [ do_getlib() ] Récupérer la lib : " );
-		$this->log($info);
-		if ($action_todo_est_ok) {
+		$this->log("Recuperer la librairie : " . $info['n'] );
+
+		// on recupere la mise a jour...
+		$teleporter_composant = charger_fonction('teleporter_composant', 'action');
+		$ok = $teleporter_composant('http', $i['v'], _DIR_LIB . $info['n']);
+		if ($ok === true) {
 			return true;
 		}
-
+		
+		$this->log("Téléporteur en erreur : " . $ok);
 		return false;
 	}
 
 
 	// telecharger un plugin
 	function do_get($info) {
-		if (!defined('_DIR_PLUGINS_AUTO') or !_DIR_PLUGINS_AUTO or !is_writable(_DIR_PLUGINS_AUTO)) {
-			$this->log("Pas de _DIR_PLUGINS_AUTO defini !");
+		if (!$this->tester_repertoire_plugins_auto()) {
 			return false;
 		}
 
-		# TODO
-		$this->log("TODO [ do_get() ] Récupérer le paquet : " );
-		$this->log($info);
-		if ($action_todo_est_ok) {
+		$i = sql_fetsel('*', 'spip_paquets', 'id_paquet=' . sql_quote($info['i']));
+	
+		if ($dirs = $this->get_paquet_id($info)) {
+			$this->ajouter_plugin_interessants_meta($dirs['dossier']);
 			return true;
 		}
-/*		
-		$i = sql_fetsel('*','spip_plugins','id_plugin='.sql_quote($info['i']));
-		if ($i['paquet']) {
-			if ($adresse = sql_getfetsel('adresse','spip_zones_plugins','id_zone='.sql_quote($i['id_zone']))) {
-				$adresse = dirname($adresse);
-				$zip = $adresse . '/' . $i['paquet'];
-				if ($files = $this->get_zip($zip, _DIR_PLUGINS_AUTO)) {
-					$dest = $files[0]['stored_filename'];
-					// rendre obsolete ce paquet distant
-					// (ca le fera tout seul au moment d'actualiser les paquets locaux)
-					// trouver le nouveau paquet et le mettre dans les interessants...
-					$dest = 'auto/' . rtrim($dest, '/');
-					$this->ajouter_plugin_interessants_meta($dest);
-					
-					// c'est la ou _DIR_PLUGINS_AUTO
-					// ne sert pas a grand chose... a ameliorer
-					return true;
-				}
-			}
-		}
-*/
+
 		return false;
 	}
 
