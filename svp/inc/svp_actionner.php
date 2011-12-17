@@ -337,7 +337,6 @@ class Actionneur {
 
 	// attraper et activer un plugin
 	function do_geton($info) {
-		## TODO !!!!
 		if ($dirs = $this->get_paquet_id($i)) {
 			$this->activer_plugin_dossier($dirs['dossier'], $i);
 			return true;
@@ -393,7 +392,7 @@ class Actionneur {
 						}
 
 						if (substr($i['dossier'],0,5) == 'auto/') {
-							if ($this->deleteDirectory($dirs['dir'])) {
+							if (supprimer_repertoire($dirs['dir'])) {
 								sql_delete('spip_plugins', 'id_plugin=' . sql_quote($info['i']));
 							}
 						}
@@ -484,7 +483,7 @@ class Actionneur {
 		if (in_array($i['constante'],array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL'))
 		and substr($i['dossier'],0,5) == 'auto/') {
 			$dir = constant($i['constante']) . $i['dossier'];
-			if ($this->deleteDirectory($dir)) {
+			if (supprimer_repertoire($dir)) {
 				sql_delete('spip_plugins', 'id_plugin=' . sql_quote($info['i']));
 				return true;
 			}
@@ -505,15 +504,10 @@ class Actionneur {
 			return false;
 		}
 
-		$zip = $info['s'];
-		if ($files = $this->get_zip($zip, _DIR_LIB)) {
-			$dest = $files[0]['stored_filename'];
-			$dest = rtrim($dest, '/');
-			$dir = _DIR_LIB . $dest;
-
-			$this->log("Suppression des anciens fichiers de $dir");
-			$this->remove_older_files($dir, $files);
-
+		# TODO
+		$this->log("TODO [ do_getlib() ] Récupérer la lib : " );
+		$this->log($info);
+		if ($action_todo_est_ok) {
 			return true;
 		}
 
@@ -528,6 +522,13 @@ class Actionneur {
 			return false;
 		}
 
+		# TODO
+		$this->log("TODO [ do_get() ] Récupérer le paquet : " );
+		$this->log($info);
+		if ($action_todo_est_ok) {
+			return true;
+		}
+/*		
 		$i = sql_fetsel('*','spip_plugins','id_plugin='.sql_quote($info['i']));
 		if ($i['paquet']) {
 			if ($adresse = sql_getfetsel('adresse','spip_zones_plugins','id_zone='.sql_quote($i['id_zone']))) {
@@ -547,7 +548,7 @@ class Actionneur {
 				}
 			}
 		}
-
+*/
 		return false;
 	}
 
@@ -556,7 +557,7 @@ class Actionneur {
 	// lancer l'installation d'un plugin
 	function do_install($info) {
 		include_spip('inc/plugin');
-		$message_install = $this->installe_plugin($info);
+		$message_install = $this->installer_plugin($info);
 		return $message_install;
 	}
 
@@ -588,7 +589,7 @@ class Actionneur {
 				'constante'=>$i['constante']
 			));
 			array_unshift($this->end, $new_action);
-			#$this->installe_plugin($dossier);
+			#$this->installer_plugin($dossier);
 		}
 
 		$this->ajouter_plugin_interessants_meta($dossier);
@@ -649,48 +650,25 @@ class Actionneur {
 	}
 
 
-	function installe_plugin($info){
+	function installer_plugin($info){
 		$plugin_get_infos = charger_fonction('get_infos', 'plugins');
-		if ($info['constante'] == '_DIR_PLUGINS_SUPPL')
-			$constante = _DIR_RACINE.constant($info['constante']);
-		else
-			$constante = constant($info['constante']);
 		
-		$infos = $plugin_get_infos($info['dossier'], false, $constante);
-		if (isset($infos['install'])) {
-			ob_start();
-			include_spip('inc/step');
-			$dossier = ($info['constante'] == '_DIR_PLUGINS')? $info['dossier'] : '../'.constant($info['constante']).$info['dossier'];
-			if (installe_un_plugin($dossier, $infos)) {
-				$meta_plug_installes = @unserialize($GLOBALS['meta']['plugin_installes']);
-				if (!$meta_plug_installes) $meta_plug_installes=array();
-				$meta_plug_installes[] = $dossier;
-				ecrire_meta('plugin_installes',serialize($meta_plug_installes), 'non');
-				//$messages = preg_replace('/<div.*(install-plugins).*<\/div>/','',ob_get_contents());
-				ob_end_clean();
-				return true;
-			}
-			ob_end_clean();
+		// il parait que les suppl, c'est par rapport a la racine...
+		if ($info['constante'] == '_DIR_PLUGINS_SUPPL') {
+			$constante = _DIR_RACINE.constant($info['constante']);
+		} else {
+			$constante = constant($info['constante']);
 		}
-		return false;
-	}
 
-
-
-	// serait mieux dans inc/flock...
-	// necessite PHP 5
-	// vient de http://www.php.net/manual/en/function.rmdir.php#92050
-	function deleteDirectory($dir) {
-		if (!file_exists($dir)) return true;
-		if (!is_dir($dir) || is_link($dir)) return unlink($dir);
-		foreach (scandir($dir) as $item) {
-			if ($item == '.' || $item == '..') continue;
-			if (!$this->deleteDirectory($dir . "/" . $item)) {
-				chmod($dir . "/" . $item, 0777);
-				if (!$this->deleteDirectory($dir . "/" . $item)) return false;
-			};
-		}
-		return rmdir($dir);
+		include_spip('inc/plugin');
+		ob_start();
+		// ceci teste l'install de TOUS les plugins
+		// et serait a optimiser pour n'installer QUE ce plugin
+		// en utilisant $installer_plugins() par exemple directement
+		plugin_installes_meta();
+		$messages = ob_get_contents();
+		ob_end_clean();
+		return $messages;
 	}
 
 
@@ -699,92 +677,33 @@ class Actionneur {
 	function get_paquet_id($id_or_row) {
 		// on peut passer direct le row sql...
 		if (!is_array($id_or_row)) {
-			$i = sql_fetsel('*','spip_plugins','id_plugin='.sql_quote($id_or_row));
+			$i = sql_fetsel('*','spip_paquets','id_paquet='.sql_quote($id_or_row));
 		} else {
 			$i = $id_or_row;
 		}
 		unset($id_or_row);
 
-		if ($i['paquet']) {
-			if ($adresse = sql_getfetsel('adresse','spip_zones_plugins','id_zone='.sql_quote($i['id_zone']))) {
-				$adresse = dirname($adresse);
-				$zip = $adresse . '/' . $i['paquet'];
+		if ($i['nom_archive'] and $i['id_depot']) {
+			$this->log("Recuperer l'archive : " . $i['nom_archive'] );
+			if ($adresse = sql_getfetsel('url_archives', 'spip_depots', 'id_depot='.sql_quote($i['id_depot']))) {
+				$zip = $adresse . '/' . $i['nom_archive'];
+				$dest = substr($i['nom_archive'], 0, -4); // enlever .zip ...
 				// on recupere la mise a jour...
-				if ($files = $this->get_zip($zip, _DIR_PLUGINS_AUTO)) {
-					$dest = $files[0]['stored_filename'];
-					$dest = 'auto/' . rtrim($dest, '/');
-					$dir = _DIR_PLUGINS . $dest;
-
-					// la c'est ennuyant : il faut supprimer les vieux fichiers...
-					$this->log("Suppression des anciens fichiers de $dir");
-					$this->remove_older_files($dir, $files);
-
+				$teleporter_composant = charger_fonction('teleporter_composant', 'action');
+				$ok = $teleporter_composant('http', $zip, _DIR_PLUGINS_AUTO . $dest);
+				if ($ok === true) {
 					return array(
-						'dir'=>$dir,
-						'dossier'=>$dest,
+						'dir'=> _DIR_PLUGINS_AUTO . $dest,
+						'dossier' => 'auto/' . $dest, // c'est depuis _DIR_PLUGINS ... pas bien en dur...
 					);
 				}
+				$this->log("Téléporteur en erreur : " . $ok);	
 			}
 		}
 		return false;
 	}
 
 
-	function get_zip($zip, $dir_dest) {
-
-		# si premiere lecture, destination temporaire des fichiers
-		$tmp = sous_repertoire(_DIR_CACHE, 'chargeur');
-
-		# $extract = sous_repertoire($tmp, 'extract');
-		$extract = $dir_dest;
-
-		$fichier = $tmp . basename($zip);
-		include_spip('inc/distant');
-		$contenu = recuperer_page($zip, $fichier, false, _COPIE_LOCALE_MAX_SIZE);
-		if (!$contenu) {
-			$this->log('Impossible de charger : '. $zip);
-			return false;
-		}
-
-		include_spip('inc/pclzip');
-		$uzip = new PclZip($fichier);
-
-		// On extrait, mais dans tmp/
-		$ok = $uzip->extract(
-			PCLZIP_OPT_PATH,
-			$extract,
-			PCLZIP_OPT_SET_CHMOD,
-			_SPIP_CHMOD,
-			PCLZIP_OPT_REPLACE_NEWER
-		);
-
-		if ($uzip->error_code < 0) {
-			$this->log('Impossible de decompresser : '. $zip);
-			$this->log('> erreur '. $uzip->error_code .' : ' . $uzip->errorName(true));
-			return false;
-		}
-
-		# spip_log($ok, 'ok');
-		# spip_log($uzip->listContent(), 'ok');
-		// ok contient toute la liste des fichiers installes :)
-		// ainsi que leur localisation et quelques infos.
-		// [0] est le nom du premier repertoire
-		/*
-			  0 =>
-			  array (
-				'filename' => '../plugins/auto/aa/',
-				'stored_filename' => 'aa/',
-				'size' => 0,
-				'compressed_size' => 0,
-				'mtime' => 1262386900,
-				'comment' => '',
-				'folder' => true,
-				'index' => 0,
-				'status' => 'ok',
-			  ),
-		*/
-		return $ok;
-	}
 
 
 	function remove_older_files($dir, $files = array()) {

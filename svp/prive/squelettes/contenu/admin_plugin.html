@@ -1,6 +1,8 @@
 [(#AUTORISER{configurer,plugins}|sinon_interdire_acces)]
 <h1 class="grostitre"><:icone_admin_plugin:></h1>
 
+[(#VAL{inc/plugin}|include_spip|oui)]
+[(#REM|plugin_installes_meta)]
 
 [(#REM) <!-- Barre d'onglets de premier niveau : on reste dans l'onglet ajouter --> ]
 [(#VAL{plugins}|barre_onglets{plugins_actifs})]
