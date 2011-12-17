@@ -44,7 +44,6 @@
                 (function($){
                     $(function(){
 						if ($.modalbox !== 'undefined') {
-							
 							$.modalboxload('#charger_plugin_confirm', {
 								overlayClose: false, // pas de click en dehors
 								onComplete: function() {
@@ -56,6 +55,7 @@
 									if (!$('#charger_plugin_confirm .boutons .submit.fire').length) {
 										$('#charger_plugin_confirm .boutons .submit.annuler_actions').addClass('fire');
 									}
+									$('#charger_plugin_confirm').hide();
 								},
 								onClose: function() { $('#charger_plugin_confirm .submit.fire').click(); }
 							});

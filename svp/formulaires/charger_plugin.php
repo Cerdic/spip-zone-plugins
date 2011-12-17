@@ -103,6 +103,8 @@ function formulaires_charger_plugin_traiter_dist(){
 
 	}
 	elseif (_request('valider_actions')) {
+		#refuser_traiter_formulaire_ajax();
+		$retour['redirect'] = generer_url_action('stp_action', 'redirect='. generer_url_ecrire('admin_plugin'));
 		set_request('_todo', '');
 		$retour['message_ok'] = "Les actions ont bien étés validées... Reste plus qu'à les coder :)";
 	}

@@ -93,6 +93,8 @@ class Decideur {
             $where = array_merge($where, $condition);
         else
             $where[] = $condition;
+
+        include_spip('inc/filtres'); // extraire_multi()
 		$res = sql_allfetsel(array(
 			'pa.id_paquet AS i',
 			'pl.nom AS n',

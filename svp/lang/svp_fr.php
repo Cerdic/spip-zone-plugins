@@ -80,6 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_type_depot_svn' => 'Dépôt géré sous SVN',
 	'info_verrouille' => 'Il ne vous est pas possible de désactiver ni de désinstaller ce plugin.',
 
+	'installation_en_cours' => 'Les actions demandées sont en cours de traitement',
 // L
 	'label_1_autre_contribution' => 'autre contribution',
 	'label_actualise_le' => 'Actualisé le',
@@ -119,6 +120,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'message_action_finale_get_fail' => 'Le plugin « @plugin@ » (version : @version@) n\'a pu être correctement récupéré',
 	'message_action_finale_get_ok' => 'Le plugin « @plugin@ » (version : @version@) a été correctement récupéré',
+	'message_action_finale_geton_fail' => 'Le téléchargement ou l\'activation du plugin « @plugin@ » (version : @version@) ne s\'est pas correctement déroulée',
+	'message_action_finale_geton_ok' => 'Le téléchargement et l\'activation du plugin « @plugin@ » (version : @version@) s\'est correctement déroulée',
 	'message_action_finale_install_fail' => 'L\'installation du plugin « @plugin@ » (version : @version@) a échoué',
 	'message_action_finale_install_ok' => 'L\'installation du plugin « @plugin@ » (version : @version@) s\'est correctement déroulée',
 	'message_action_finale_kill_fail' => 'Les fichiers du plugin « @plugin@ » (version : @version@) n\'ont pu être correctement effacés',

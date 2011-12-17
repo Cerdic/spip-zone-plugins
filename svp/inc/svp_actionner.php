@@ -346,10 +346,13 @@ class Actionneur {
 
 	// attraper et activer un plugin
 	function do_geton($info) {
-		if ($dirs = $this->get_paquet_id($i)) {
+		if ($dirs = $this->get_paquet_id($info)) {
 			$this->activer_plugin_dossier($dirs['dossier'], $i);
 			return true;
 		}
+		
+		$this->log("GetOn : Erreur de chargement du paquet " .$info['n']);
+		return false;
 	}
 
 	// activer un plugin
@@ -507,6 +510,7 @@ class Actionneur {
 		$this->log("Recuperer la librairie : " . $info['n'] );
 
 		// on recupere la mise a jour...
+		include_spip('action/teleporter');
 		$teleporter_composant = charger_fonction('teleporter_composant', 'action');
 		$ok = $teleporter_composant('http', $i['v'], _DIR_LIB . $info['n']);
 		if ($ok === true) {
@@ -662,6 +666,7 @@ class Actionneur {
 				$zip = $adresse . '/' . $i['nom_archive'];
 				$dest = substr($i['nom_archive'], 0, -4); // enlever .zip ...
 				// on recupere la mise a jour...
+				include_spip('action/teleporter');
 				$teleporter_composant = charger_fonction('teleporter_composant', 'action');
 				$ok = $teleporter_composant('http', $zip, _DIR_PLUGINS_AUTO . $dest);
 				if ($ok === true) {
