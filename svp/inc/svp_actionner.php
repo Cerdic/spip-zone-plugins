@@ -302,21 +302,19 @@ class Actionneur {
 	function presenter_actions() {
 		$affiche = "";
 
+		include_spip('inc/filtres_boites');
+		
 		if (count($this->err)) {
-			$affiche .= "<div class='erreurs groupe'>";
-			$affiche .= "<h3 class='h3 spip'>" . _T('svp:actions_en_erreur') . " </h3>\n";
-			$affiche .= "<ul>\n";
+			$erreurs = "<ul>";
 			foreach ($this->err as $i) {
-				$affiche .= "\t<li class='erreur'>" . $i . "</li>\n";
+				$erreurs .= "\t<li class='erreur'>" . $i . "</li>\n";
 			}
-			$affiche .= "</ul>"; 
-			$affiche .= "</div>"; 
+			$erreurs .= "</ul>"; 
+			$affiche .= boite_ouvrir(_T('svp:actions_en_erreur'), 'error') . $erreurs . boite_fermer();
 		}
 
 		if (count($this->done)) {
-			$affiche .= "<div class='realisees groupe'>";
-			$affiche .= "<h3 class='h3 spip'>" . _T('svp:actions_realises') . " </h3>\n";
-			$affiche .= "<ul>";
+			$done .= "<ul>";
 			foreach ($this->done as $i) {
 				$ok = (is_string($i['done']) ? true : false);
 				$ok_texte = $ok ? 'ok' : 'fail';
@@ -325,21 +323,19 @@ class Actionneur {
 				if ($ok) {
 					$texte .= " <span class='$ok_texte'>$i[done]</span>";
 				}
-				$affiche .= "\t<li class='$ok_texte'>$texte</li>\n";
+				$done .= "\t<li class='$ok_texte'>$texte</li>\n";
 			}
-			$affiche .= "</ul>";
-			$affiche .= "</div>"; 
+			$done .= "</ul>";
+			$affiche .= boite_ouvrir(_T('svp:actions_realises'), 'notice') . $done . boite_fermer();
 		}
 
 		if (count($this->end)) {
-			$affiche .= "<div class='a_faire groupe'>";
-			$affiche .= "<h3 class='h3 spip'>" . _T('svp:actions_a_faire') . " </h3>\n";
-			$affiche .= "<ul>";
+			$todo .= "<ul>";
 			foreach ($this->end as $i) {
-				$affiche .= "\t<li>"._T('svp:message_action_'.$i['todo'],array('plugin'=>$i['n'],'version'=>$i['v']))."</li>\n";
+				$todo .= "\t<li>"._T('svp:message_action_'.$i['todo'],array('plugin'=>$i['n'],'version'=>$i['v']))."</li>\n";
 			}
-			$affiche .= "</ul>\n";
-			$affiche .= "</div>"; 
+			$todo .= "</ul>\n";
+			$affiche .= boite_ouvrir(_T('svp:actions_a_faire'), 'notice') . $todo . boite_fermer();
 		}
 
 		if ($affiche) {

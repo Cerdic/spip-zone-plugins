@@ -25,10 +25,7 @@ function action_actionner_dist() {
 		$styles = "
 <style type='text/css'>
 /* Execution des actions en minipres() */
-#minipres #actionner .groupe {margin:.5em .5em 1.5em; border:1px solid #ccc; border-radius:3px; padding:1em;}
-#minipres #actionner .erreurs {background-color:#ffeeee;}
 #minipres #actionner .fail {color:#c30000;}
-#minipres #actionner h3 {margin:0;}
 #minipres #actionner ul {margin-left: 0.5em;}
 #minipres #actionner li {list-style-type:square; margin-left: 0.5em;}
 </style>
