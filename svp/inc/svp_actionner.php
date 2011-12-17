@@ -399,7 +399,7 @@ class Actionneur {
 							$this->activer_plugin_dossier($dirs['dossier'], $maj);
 						}
 
-						if (substr($i['dossier'],0,5) == 'auto/') {
+						if (substr($i['dossier'], 0, 5) == 'auto/') {
 							if (supprimer_repertoire($dirs['dir'])) {
 								sql_delete('spip_paquets', 'id_paquet=' . sql_quote($info['i']));
 							}
@@ -446,35 +446,25 @@ class Actionneur {
 
 	// desinstaller un plugin
 	function do_stop($info) {
-		$i = sql_fetsel('*','spip_plugins','id_plugin='.sql_quote($info['i']));
+		$i = sql_fetsel('*','spip_paquets','id_paquet=' . sql_quote($info['i']));
 		// il faudra prendre en compte les autres _DIR_xx
-		if (in_array($i['constante'],array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL'))) {
+		if (in_array($i['constante'], array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL'))) {
 			include_spip('inc/plugin');
-			include_spip('inc/step');
 			$dossier = rtrim($i['dossier'],'/');
 			$constante = $i['constante'];
-			$plugin_get_infos = charger_fonction('get_infos', 'plugins');
-			if($i['constante'] == '_DIR_PLUGINS_SUPPL')
-				$constante = _DIR_RACINE.constant($i['constante']);
-			else 
-				$constante = constant($i['constante']);
-			$infos = $plugin_get_infos($dossier,false,$constante);
 
-			if (isset($infos['install'])){
+			$constante = $this->donner_chemin_constante_plugins( $i['constante'] );
 				
-				// desinstaller
-				$dossier = ($i['constante'] == '_DIR_PLUGINS')? $dossier : '../'.constant($i['constante']).$dossier;
-				$etat = desinstalle_un_plugin($dossier, $infos);
-
-				// desactiver si il a bien ete desinstalle
-				if (!$etat) {
-					ecrire_plugin_actifs(array($dossier), false, 'enleve');
-					sql_updateq('spip_plugins', array('actif'=>'non', 'installe'=>'non'), 'id_plugin='.sql_quote($info['i']));
-					return true;
-				}
-				// echec de la desinstallation
+			$installer_plugins = charger_fonction('installer', 'plugins');
+			$infos = $installer_plugins($del['src_archive'], 'uninstall');
+			if ($infos AND !$infos['install_test'][0]) {
+				include_spip('inc/plugin');
+				ecrire_plugin_actifs(array($del['src_archive']), false, 'enleve');
+				sql_updateq('spip_paquets', array('actif'=>'non', 'installe'=>'non'), 'id_paquet='.sql_quote($info['i']));
+			} else {
+				// echec
+				$this->log("Échec de la désinstallation de " . $del['src_archive']);
 			}
-			// pas de desinstallation possible !
 		}
 		$this->actualiser_plugin_interessants();
 		return false;
@@ -486,13 +476,13 @@ class Actionneur {
 		// on reverifie que c'est bien un plugin auto !
 		// il faudrait aussi faire tres attention sur un site mutualise
 		// cette option est encore plus delicate que les autres...
-		$i = sql_fetsel('*','spip_plugins','id_plugin='.sql_quote($info['i']));
+		$i = sql_fetsel('*','spip_paquets','id_paquet='.sql_quote($info['i']));
 
-		if (in_array($i['constante'],array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL'))
-		and substr($i['dossier'],0,5) == 'auto/') {
+		if (in_array($i['constante'], array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL'))
+		and substr($i['dossier'], 0, 5) == 'auto/') {
 			$dir = constant($i['constante']) . $i['dossier'];
 			if (supprimer_repertoire($dir)) {
-				sql_delete('spip_plugins', 'id_plugin=' . sql_quote($info['i']));
+				sql_delete('spip_paquets', 'id_paquet=' . sql_quote($info['i']));
 				return true;
 			}
 		}
@@ -500,10 +490,6 @@ class Actionneur {
 		return false;
 	}
 
-
-	function do_lib($info) {
-		return $this->do_getlib($info);
-	}
 	
 	// installer une librairie
 	function do_getlib($info) {
@@ -564,7 +550,6 @@ class Actionneur {
 
 	// lancer l'installation d'un plugin
 	function do_install($info) {
-		include_spip('inc/plugin');
 		$message_install = $this->installer_plugin($info);
 		return $message_install;
 	}
@@ -659,15 +644,7 @@ class Actionneur {
 
 
 	function installer_plugin($info){
-		$plugin_get_infos = charger_fonction('get_infos', 'plugins');
 		
-		// il parait que les suppl, c'est par rapport a la racine...
-		if ($info['constante'] == '_DIR_PLUGINS_SUPPL') {
-			$constante = _DIR_RACINE.constant($info['constante']);
-		} else {
-			$constante = constant($info['constante']);
-		}
-
 		include_spip('inc/plugin');
 		ob_start();
 		// ceci teste l'install de TOUS les plugins
@@ -728,6 +705,19 @@ class Actionneur {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * Retourne le chemin relatif d'un repertoire plugins
+	 * depuis _DIR_PLUGINS
+	 * 
+	 * Étrange chose que ce _DIR_PLUGINS_SUPPL...
+	**/
+	function donner_chemin_constante_plugins($constante) {
+		if ($i['constante'] == '_DIR_PLUGINS_SUPPL') {
+			return _DIR_RACINE . constant($constante);
+		}
+		return constant($constante);
 	}
 }
 
