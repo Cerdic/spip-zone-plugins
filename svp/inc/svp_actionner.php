@@ -314,7 +314,11 @@ class Actionneur {
 	}
 
 
+	/**
+	 * Effectue une des actions qui reste a faire.  
+	**/
 	function one_action() {
+		// s'il reste des actions, on en prend une, et on la fait.
 		if (count($this->end)) {
 			$action = $this->work = array_shift($this->end);
 			$this->sauver_actions();
@@ -324,6 +328,9 @@ class Actionneur {
 		return false;
 	}
 
+	/**
+	 * Effectue l'action en attente.  
+	**/
 	function do_action() {
 		if ($do = $this->work) {
 			$todo = 'do_' . $do['todo'];
@@ -370,15 +377,15 @@ class Actionneur {
 		// ecriture du nouveau
 		// suppression de l'ancien (si dans auto, et pas au meme endroit)
 		// OU suppression des anciens fichiers
-		if (!defined('_DIR_PLUGINS_AUTO') or !_DIR_PLUGINS_AUTO or !is_writable(_DIR_PLUGINS_AUTO)) {
-			$this->log("Pas de _DIR_PLUGINS_AUTO defini !");
+		if (!$this->tester_repertoire_plugins_auto()) {
 			return false;
 		}
 
-		$i = sql_fetsel('*','spip_plugins','id_plugin='.sql_quote($info['i']));
+		$i = sql_fetsel('*','spip_paquets','id_paquet='.sql_quote($info['i']));
 
 		// on cherche la mise a jour...
-		if ($maj = sql_fetsel('*','spip_plugins',array(
+		// c'est a dire le paquet source que l'on met a jour.
+		if ($maj = sql_fetsel('*','spip_paquets',array(
 			'prefixe='.sql_quote($info['p']),
 			'version='.sql_quote($info['maj']),
 			'superieur='.sql_quote('oui')))) {
@@ -387,14 +394,14 @@ class Actionneur {
 					// il faut :
 					// - activer le plugin sur son nouvel emplacement (uniquement si l'ancien est actif)...
 					// - supprimer l'ancien (si faisable)
-					if (($dirs['dossier'] . '/') != $i['dossier']) {
+					if (($dirs['src_archive'] . '/') != $i['src_archive']) {
 						if ($i['actif'] == 'oui') {
 							$this->activer_plugin_dossier($dirs['dossier'], $maj);
 						}
 
 						if (substr($i['dossier'],0,5) == 'auto/') {
 							if (supprimer_repertoire($dirs['dir'])) {
-								sql_delete('spip_plugins', 'id_plugin=' . sql_quote($info['i']));
+								sql_delete('spip_paquets', 'id_paquet=' . sql_quote($info['i']));
 							}
 						}
 					}
@@ -409,7 +416,7 @@ class Actionneur {
 
 	// mettre a jour et activer un plugin
 	function do_upon($info) {
-		$i = sql_fetsel('*','spip_plugins','id_plugin='.sql_quote($info['i']));
+		$i = sql_fetsel('*', 'spip_paquets', 'id_paquet='.sql_quote($info['i']));
 		if ($dirs = $this->do_up($info)) {
 			$this->activer_plugin_dossier($dirs['dossier'], $i, $i['constante']);
 			return true;
@@ -420,13 +427,13 @@ class Actionneur {
 
 	// desactiver un plugin
 	function do_off($info) {
-		$i = sql_fetsel('*','spip_plugins','id_plugin='.sql_quote($info['i']));
+		$i = sql_fetsel('*','spip_paquets','id_paquet='.sql_quote($info['i']));
 		// il faudra prendre en compte les autres _DIR_xx
-		if (in_array($i['constante'],array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL'))) {
+		if (in_array($i['constante'], array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL'))) {
 			include_spip('inc/plugin');
-			$dossier = ($i['constante'] == '_DIR_PLUGINS')? $i['dossier'] : '../'.constant($i['constante']).$i['dossier'];
+			$dossier = ($i['constante'] == '_DIR_PLUGINS') ? $i['dossier'] : '../' . constant($i['constante']) . $i['dossier'];
 			ecrire_plugin_actifs(array(rtrim($dossier,'/')), false, 'enleve');
-			sql_updateq('spip_plugins', array('actif'=>'non', 'installe'=>'non'), 'id_plugin='.sql_quote($info['i']));
+			sql_updateq('spip_paquets', array('actif'=>'non', 'installe'=>'non'), 'id_paquet='.sql_quote($info['i']));
 			$this->actualiser_plugin_interessants();
 			// ce retour est un rien faux...
 			// il faudrait que la fonction ecrire_plugin_actifs()
@@ -702,6 +709,25 @@ class Actionneur {
 			}
 		}
 		return false;
+	}
+
+
+	/**
+	 * Teste que le répertoire plugins auto existe et
+	 * que l'on peut ecrire dedans !
+	 *
+	 * @return bool : C'est ok, ou pas
+	**/
+	function tester_repertoire_plugins_auto() {
+		if (!defined('_DIR_PLUGINS_AUTO') or !_DIR_PLUGINS_AUTO) {
+			$this->log("/!\ Pas de _DIR_PLUGINS_AUTO defini !");
+			return false;
+		}
+		if (!is_writable(_DIR_PLUGINS_AUTO)) {
+			$this->log("/!\ Ne peut pas écrire dans _DIR_PLUGINS_AUTO !");
+			return false;
+		}
+		return true;
 	}
 }
 
