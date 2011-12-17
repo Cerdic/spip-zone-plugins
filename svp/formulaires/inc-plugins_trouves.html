@@ -64,7 +64,7 @@
 		jQuery('.plugins li.item input.checkbox').change(function(){
 			$form = jQuery(this).parents('form').eq(0);
 			if (!$form.find('> input.submit').length) {
-				$form.find('.boutons.actions').slideDown().find('input.submit').clone().prependTo($form);
+				$form.find('.boutons.actions').slideDown().find('input.submit').clone().addClass('invisible').prependTo($form);
 				$form.find('.liste-recherche').change(function(){
 					jQuery(this).parents('form').eq(0).find('> input.submit').remove();
 				});
