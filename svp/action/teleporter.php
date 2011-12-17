@@ -30,9 +30,9 @@ function action_teleporter_composant_dist($methode,$source,$dest,$options=array(
 		return _T('svp:erreur_teleporter_methode_inconue',array('methode' => $methode));
 	}
 
-	if (!$dest = teleporter_verifier_destination($dest)){
-		spip_log("Rerpertoire $dest non accessible pour teleporter $source vers $dest","teleport"._LOG_ERREUR);
-		return _T('svp:erreur_teleporter_destination_erreur',array('dir' => $dest));
+	if (!$dest = teleporter_verifier_destination($d = $dest)){
+		spip_log("Rerpertoire $d non accessible pour teleporter $source vers $d","teleport"._LOG_ERREUR);
+		return _T('svp:erreur_teleporter_destination_erreur',array('dir' => $d));
 		#$texte = "<p>"._T('plugin_erreur_droit1',array('dest'=>$dest))."</p>"
 		#  . "<p>"._T('plugin_erreur_droit2').aide('install0')."</p>";
 	}

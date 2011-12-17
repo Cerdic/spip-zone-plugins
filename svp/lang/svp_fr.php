@@ -8,8 +8,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
+	'actions_a_faire' => 'Actions à traiter',
 	'actions_demandees' => 'Actions demandées :',
+	'actions_en_erreur' => 'Erreurs survenues',
 	'actions_necessaires' => 'Les actions nécessaires suivantes seront effectuées :',
+	'actions_realises' => 'Actions réalisées',
 	
 // B
 	'bouton_activer' => 'Activer',
@@ -50,12 +53,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 	'erreur_teleporter_chargement_source_impossible' => 'Chargement impossible de la source @source@',
-	'erreur_teleporter_destination_erreur' => 'Rerpertoire @dir@ non accessible pour teleporter',
+	'erreur_teleporter_destination_erreur' => 'Répertoire @dir@ non accessible pour téléporter',
 	'erreur_teleporter_echec_deballage_archive' => 'Impossible de déballer @fichier@',
 	'erreur_teleporter_format_archive_non_supporte' => 'Le format @extension@ n\'est pas supporté par le téléporteur',
 	'erreur_teleporter_methode_inconue' => 'Methode @methode@ inconnue pour teleporter',
 	'erreur_teleporter_type_fichier_inconnu' => 'Type de fichier inconnu pour la source @source@',
-	
+	'erreur_dir_dib_ecriture' => 'Le répertoire de librairies @dir@ n\'est pas accessible en écriture. Impossible de charger une librairie dedans !',
+	'erreur_dir_dib_indefini' => 'Le répertoire _DIR_LIB n\'est pas défini. Impossible de charger une librairie dedans !',
+	'erreur_dir_plugins_auto_ecriture' => 'Le répertoire de paquets @dir@ n\'est pas accessible en écriture. Impossible de charger un paquet dedans !',
+	'erreur_dir_plugins_auto_indefini' => 'Le répertoire _DIR_PLUGIN_AUTO n\'est pas défini. Impossible de charger un paquet dedans !',
 // I
 	'info_1_depot' => '1 dépôt',
 	'info_1_paquet' => '1 paquet',

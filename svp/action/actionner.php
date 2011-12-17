@@ -22,7 +22,18 @@ function action_actionner_dist() {
 		$url = generer_action_auteur('actionner', '',  _request('redirect'));
 		$pres = $actionneur->presenter_actions();
 		$btn = "<a href='$url'>[ Action Suivante ]</a>";
-		echo minipres( _T('svp:installation_en_cours'), $pres . '<br /><br />' . $btn);
+		$styles = "
+<style type='text/css'>
+/* Execution des actions en minipres() */
+#minipres #actionner .groupe {margin:.5em .5em 1.5em; border:1px solid #ccc; border-radius:3px; padding:1em;}
+#minipres #actionner .erreurs {background-color:#ffeeee;}
+#minipres #actionner .fail {color:#c30000;}
+#minipres #actionner h3 {margin:0;}
+#minipres #actionner ul {margin-left: 0.5em;}
+#minipres #actionner li {list-style-type:square; margin-left: 0.5em;}
+</style>
+";
+		echo minipres( _T('svp:installation_en_cours'), $pres . '<br /><br />' . $btn . $styles);
 		die();
 		#redirige_par_entete(str_replace('&amp;','&', $url));
 	}

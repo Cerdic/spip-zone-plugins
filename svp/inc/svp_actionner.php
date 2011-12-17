@@ -28,6 +28,10 @@ class Actionneur {
 	var $done = array(); // faites
 	var $work = array(); // en cours
 
+	// listing des erreurs rencontrées
+	var $err = array();
+	
+
 	function Actionneur(){
 		include_spip('inc/svp_decider');
 		$this->decideur = new Decideur();
@@ -35,9 +39,28 @@ class Actionneur {
 	}
 
 
+	/**
+	 * Ajoute un log
+	 * lorsqu'on a activé les logs sur notre objet
+	 * $actionneur->log = true;
+	 *
+	 * @param string $quoi : le texte du log
+	**/
 	function log($quoi) {
 		if ($this->log) {
 			spip_log($quoi,'actionneur');
+		}
+	}
+
+	/**
+	 * Ajoute une erreur
+	 * a la liste des erreurs presentees au moment de traiter les actions.
+	 *
+	 * @param string $erreur : le texte de l'erreur
+	**/
+	function err($erreur) {
+		if ($erreur) {
+			$this->err[] = $erreur;
 		}
 	}
 
@@ -278,19 +301,52 @@ class Actionneur {
 
 	function presenter_actions() {
 		$affiche = "";
-		if ($this->end or $this->done) {
+
+		if (count($this->err)) {
+			$affiche .= "<div class='erreurs groupe'>";
+			$affiche .= "<h3 class='h3 spip'>" . _T('svp:actions_en_erreur') . " </h3>\n";
+			$affiche .= "<ul>\n";
+			foreach ($this->err as $i) {
+				$affiche .= "\t<li class='erreur'>" . $i . "</li>\n";
+			}
+			$affiche .= "</ul>"; 
+			$affiche .= "</div>"; 
+		}
+
+		if (count($this->done)) {
+			$affiche .= "<div class='realisees groupe'>";
+			$affiche .= "<h3 class='h3 spip'>" . _T('svp:actions_realises') . " </h3>\n";
 			$affiche .= "<ul>";
 			foreach ($this->done as $i) {
-				if(is_string($i['done'])){
-					$ajouts_message = "<br />".$i['done'];
+				$ok = (is_string($i['done']) ? true : false);
+				$ok_texte = $ok ? 'ok' : 'fail';
+				$cle_t = 'svp:message_action_finale_' . $i['todo'] . '_' . $ok_texte;
+				$texte = _T($cle_t, array('plugin' => $i['n'], 'version' => $i['v']));
+				if ($ok) {
+					$texte .= " <span class='$ok_texte'>$i[done]</span>";
 				}
-				$affiche .= "\t<li>"._T('svp:message_action_finale_'.$i['todo'].'_'.($i['done']?'ok':'fail'),array('plugin'=>$i['n'],'version'=>$i['v'])).$ajouts_message."</li>\n";
+				$affiche .= "\t<li class='$ok_texte'>$texte</li>\n";
 			}
+			$affiche .= "</ul>";
+			$affiche .= "</div>"; 
+		}
+
+		if (count($this->end)) {
+			$affiche .= "<div class='a_faire groupe'>";
+			$affiche .= "<h3 class='h3 spip'>" . _T('svp:actions_a_faire') . " </h3>\n";
+			$affiche .= "<ul>";
 			foreach ($this->end as $i) {
 				$affiche .= "\t<li>"._T('svp:message_action_'.$i['todo'],array('plugin'=>$i['n'],'version'=>$i['v']))."</li>\n";
 			}
 			$affiche .= "</ul>\n";
+			$affiche .= "</div>"; 
 		}
+
+		if ($affiche) {
+			include_spip('inc/filtres');
+			$affiche = wrap($affiche, "<div id='actionner'>");
+		}
+		
 		return $affiche;
 	}
 
@@ -300,6 +356,7 @@ class Actionneur {
 			'todo' => $this->end,
 			'done' => $this->done,
 			'work' => $this->work,
+			'err' => $this->err,
 		));
 		ecrire_fichier(_DIR_TMP . 'stp_actions.txt', $contenu);
 	}
@@ -311,6 +368,7 @@ class Actionneur {
 		$this->end  = $infos['todo'];
 		$this->work = $infos['work'];
 		$this->done = $infos['done'];
+		$this->err  = $infos['err'];
 	}
 
 
@@ -346,6 +404,10 @@ class Actionneur {
 
 	// attraper et activer un plugin
 	function do_geton($info) {
+		if (!$this->tester_repertoire_plugins_auto()) {
+			return false;
+		}
+		
 		if ($dirs = $this->get_paquet_id($info['i'])) {
 			$this->activer_plugin_dossier($dirs['dossier'], $i);
 			return true;
@@ -499,10 +561,12 @@ class Actionneur {
 	// installer une librairie
 	function do_getlib($info) {
 		if (!defined('_DIR_LIB') or !_DIR_LIB) {
+			$this->err(_T('svp:erreur_dir_dib_indefini'));
 			$this->log("/!\ Pas de _DIR_LIB defini !");
 			return false;
 		}
 		if (!is_writable(_DIR_LIB)) {
+			$this->err(_T('svp:erreur_dir_dib_ecriture', array('dir' => _DIR_LIB )));
 			$this->log("/!\ Ne peut pas écrire dans _DIR_LIB !");
 			return false;
 		}
@@ -517,6 +581,7 @@ class Actionneur {
 			return true;
 		}
 		
+		$this->err($ok);
 		$this->log("Téléporteur en erreur : " . $ok);
 		return false;
 	}
@@ -675,6 +740,7 @@ class Actionneur {
 						'dossier' => 'auto/' . $dest, // c'est depuis _DIR_PLUGINS ... pas bien en dur...
 					);
 				}
+				$this->err($ok);
 				$this->log("Téléporteur en erreur : " . $ok);	
 			}
 		}
@@ -690,10 +756,12 @@ class Actionneur {
 	**/
 	function tester_repertoire_plugins_auto() {
 		if (!defined('_DIR_PLUGINS_AUTO') or !_DIR_PLUGINS_AUTO) {
+			$this->err(_T('svp:erreur_dir_plugins_auto_indefini'));
 			$this->log("/!\ Pas de _DIR_PLUGINS_AUTO defini !");
 			return false;
 		}
 		if (!is_writable(_DIR_PLUGINS_AUTO)) {
+			$this->err(_T('svp:erreur_dir_plugins_auto_ecriture', array('dir'=>_DIR_PLUGINS_AUTO)));
 			$this->log("/!\ Ne peut pas écrire dans _DIR_PLUGINS_AUTO !");
 			return false;
 		}
