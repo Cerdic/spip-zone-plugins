@@ -14,6 +14,7 @@
 		[(#SET{lang_orig_long,[(#GET{lang_orig}|traduire_nom_langue)]})]
 		#SET{lang_cible_long,#ENV{lang_cible}|traduire_nom_langue}
 		<h1><:tradlang:titre_page_tradlang_module{id=#ID_TRADLANG_MODULE,module=#NOM_MOD}:></h1>
+		#FORMULAIRE_FAVORI
 	</div>
 	
 	<h3><:tradlang:titre_traduction_module_de_vers{module=#NOM_MOD,lang_orig=#GET{lang_orig},lang_orig_long=#GET{lang_orig_long},lang_cible=#ENV{lang_cible},lang_cible_long=#GET{lang_cible_long}}:></h3>

@@ -152,6 +152,7 @@ function boucle_TRADLANG_MODULES_dist($id_boucle, &$boucles) {
  * On enlève les modules attic*
  */
 function boucle_TRADLANG_dist($id_boucle, &$boucles) {
+	spip_log($boucle->nom,'tradlang');
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 
@@ -162,7 +163,9 @@ function boucle_TRADLANG_dist($id_boucle, &$boucles) {
 		array_unshift($boucle->where,array("'NOT LIKE'", "'$id_table." ."module'", "'\"contrib\"'"));
 		array_unshift($boucle->where,array("'!='", "'$id_table." ."id'", "'\"zz_timestamp_nepastraduire\"'"));
 	}
-	
+	if(($boucle->nom == 'calculer_langues_utilisees') && $boucle->id_boucle == 'tradlang'){
+		array_unshift($boucle->where,array("'='", "'$id_table." ."id_tradlang'", "'0'"));
+	}
 	return calculer_boucle($id_boucle, $boucles);
 }
 

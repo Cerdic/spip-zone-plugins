@@ -12,11 +12,10 @@
 		[<div class="#EDIT{bio} texte bio">(#BIO)</div>]
 		[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="url spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 	</div>[(#REM) / vcard]
-
 	<INCLURE{fond=liste/articles-auteur,id_auteur,env,ajax} />
-
+	[(#SET{titre,[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{<:mesfavoris:mes_favoris:>,<:mesfavoris:ses_favoris:>})]})]
+	<INCLURE{fond=inclure/mesfavoris,id_auteur=#ID_AUTEUR,titre=#GET{titre},ajax}>
 </div>
-
 [<div class="notes"><hr />(#NOTES)</div>]
 
 #FORMULAIRE_ECRIRE_AUTEUR

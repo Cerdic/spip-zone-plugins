@@ -1,9 +1,14 @@
 #SET{langues,#ARRAY}
+#SET{langues_vides,#ARRAY}
 <BOUCLE_langues_sort(TRADLANG){fusion lang}>
-<BOUCLE_strings_ok(TRADLANG){lang=#LANG}{statut = 'OK'}> </BOUCLE_strings_ok>
-#SET{langues,#GET{langues}|array_merge{#ARRAY{#LANG,#COMPTEUR_BOUCLE}}}
+<BOUCLE_strings_ok(TRADLANG){lang=#LANG}{statut=OK}> </BOUCLE_strings_ok>
+[(#TOTAL_BOUCLE|>{2}|oui)
+#SET{langues,#GET{langues}|array_merge{#ARRAY{#LANG,#TOTAL_BOUCLE}}}]
+[(#TOTAL_BOUCLE|>{2}|non)
+#SET{langues_vides,#GET{langues_vides}|push{#LANG}}
+]
 </B_strings_ok>
-#SET{langues,#GET{langues}|array_merge{#ARRAY{#LANG,#COMPTEUR_BOUCLE}}}
+#SET{langues_vides,#GET{langues_vides}|push{#LANG}}
 <//B_strings_ok>
 </BOUCLE_langues_sort>
 #SET{langues,#GET{langues}|langues_sort}
@@ -37,7 +42,7 @@
 			#SET{class,'non_traduit'}
 			[(#TOTAL_BOUCLE|=={#GET{full}}|oui)#SET{class,traduit_full}]
 			[(#TOTAL_BOUCLE|=={#GET{full}}|non)
-			[(#TOTAL_BOUCLE|>={#GET{full}|div{100}|mult{60}}|oui)#SET{class,traduit}]]
+			[(#TOTAL_BOUCLE|>={#GET{full}|div{100}|mult{50}}|oui)#SET{class,traduit}]]
 			[(#_langue_module:CLE|!={#GET{langue_mere}}|oui)<td class="#GET{class}"><a href="[(#URL_TRADLANG_MODULE{#ID_TRADLANG_MODULE}|parametre_url{lang_cible,#CLE})]">#TOTAL_BOUCLE</a></td>]
 			[(#_langue_module:CLE|=={#GET{langue_mere}}|oui)<td class="[(#GET{class})] lang_mere">#TOTAL_BOUCLE</td>]
 			</B_compte_tradlang>

@@ -7,7 +7,6 @@
  * © Florent Jugla, Fil, kent1
  * 
  */
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS['url_arbo_parents']['tradlang'] = array('id_tradlang_module','tradlang_module');

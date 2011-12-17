@@ -78,4 +78,16 @@ function tradlang_insert_head_css($flux){
 
 	return $flux;
 }
+
+/**
+ * Insertion dans le pipeline pre_boucle
+ * Si on est dans la fonction calculer_langues_utilisees, on ne renvoit pas les langues des tradlang
+ * pour éviter de bloquer ces langues dans la configuration du multilinguisme
+ */
+function tradlang_pre_boucle($boucle){
+	if(($boucle->nom == 'calculer_langues_utilisees') && $boucle->id_boucle == 'tradlang'){
+		array_unshift($boucle->where,array("'='", "'$id_table." ."id_tradlang'", "'0'"));
+	}
+	return $boucle;
+}
 ?>
