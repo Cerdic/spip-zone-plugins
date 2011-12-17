@@ -12,15 +12,10 @@
  * 
 **/
 function svp_T($texte, $prefixe) {
-
-	// deja, si la demande existe, on la retourne.
-	if ($retour = _T($texte, array(), array('force'=>false))) {
-		return $retour;
-	}
-
+	
 	// si elle existe dans le fichier de paquet
 	$paquet = 'paquet-' . strtolower($prefixe) . ':';
-	if ($retour = _T($paquet . $texte, array(), array('force'=>false))) {
+	if ($retour = _T($paquet . strtolower($texte), array(), array('force'=>false))) {
 		return $retour;
 	}
 
@@ -115,7 +110,7 @@ function svp_afficher_credits($balise_serialisee, $sep=', ') {
 			// Si le credit en cour n'est pas un array c'est donc un copyright
 			$texte .= 
 				(!is_array($_credit)) 
-				? $_credit 
+				? propre($_credit) // propre pour les [lien->url] des auteurs de plugin.xml ... 
 				: ($_credit['url'] ? '<a href="' . $_credit['url'] . '">' : '') . 
 				  $_credit['nom'] .
 				  ($_credit['url'] ? '</a>' : '');
