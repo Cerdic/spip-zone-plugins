@@ -4,6 +4,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 define('_LANGONET_SIGNATURE', "// Ceci est un fichier langue de SPIP -- This is a SPIP language file");
 
+define('_LANGONET_DEFINITION_L', '<LANGONET_DEFINITION_L>');
+define('_LANGONET_DEFINITION_MANQUANTE', '<LANGONET_DEFINITION_MANQUANTE>');
+define('_LANGONET_DEFINITION_OBSOLETE', '<LANGONET_DEFINITION_OBSOLETE>');
+
 /**
  * Ecriture des fichiers de langue
  * 
@@ -94,16 +98,16 @@ function langonet_generer_couples($module, $var_source, $var_cible, $mode='index
 				else if ($mode == 'vide')
 					$texte = '';
 				else if (($mode == 'fonction_l') OR (($mode == 'oublie') AND $_valeur))
-					$texte = array('<LANGONET_DEFINITION_L>', $_valeur, $mode);
+					$texte = array(_LANGONET_DEFINITION_L, $_valeur, $mode);
 				else if ($mode !== 'oublie')
 					$texte = $_item;
 				else if (preg_match('/^[a-z]+$/i', $_item))
 					$texte = $_item;
-				else $texte = '<LANGONET_DEFINITION_MANQUANTE>';
+				else $texte = _LANGONET_DEFINITION_MANQUANTE;
 			}
 		}
 		if ($encodage == 'utf8') $texte = entite2utf($texte);
-		$source[$_item] = $comm ? array('<LANGONET_DEFINITION_OBSOLETE>', $texte, $mode) : $texte;
+		$source[$_item] = $comm ? array(_LANGONET_DEFINITION_OBSOLETE, $texte, $mode) : $texte;
 	}
 	return $source;
 }
@@ -125,8 +129,10 @@ function produire_fichier_langue($langue, $module, $items, $producteur='')
 			$t = str_replace("'", '\\\'', $v[1]);
 			if ($v[2] == 'inutile')
 				$contenu[]= "/*\t" . $v[0] ."\n\t'$k' => '$t',*/"; 
-			else
-				$contenu[]= "/*\t" . $v[0] ." */\n\t'$k' => '$t',"; 
+			else {
+				$com = !$v[0] ? '' : ("/*\t". $v[0] ." */\n");
+				$contenu[]= "$com\t'$k' => '$t',"; 
+			}
 		} else {
 			$t = str_replace("'", '\\\'', $v);
 			$t = str_replace('\\\\n', "' . \"\\n\" .'", $t);
