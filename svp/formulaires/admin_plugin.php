@@ -4,10 +4,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_admin_plugin_charger_dist($voir='actif', $verrouille='non'){
 	$valeurs = array();
-	
+
+	// actualiser la liste des paquets locaux systematiquement
 	include_spip('inc/svp_depoter_local');
 	svp_actualiser_paquets_locaux();
-	
+		
 	$valeurs['constante'] = array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL');
 	$valeurs['actif'] = 'oui';
 	

@@ -6,6 +6,11 @@ if (!defined('_DIR_LIB')) {
 	define('_DIR_LIB', _DIR_RACINE . 'lib/');
 }
 
+// passer ou pas en mode debug
+if (!defined('_SVP_DEBUG')) {
+	define('_SVP_DEBUG', false);
+}
+
 
 // Mode d'utilisation de SVP runtime ou pas :
 // - En mode runtime (true), on ne charge que les plugins compatibles avec la version courante

@@ -35,7 +35,7 @@ class Actionneur {
 	function Actionneur(){
 		include_spip('inc/svp_decider');
 		$this->decideur = new Decideur();
-		$this->decideur->start();
+		#$this->decideur->start();
 	}
 
 
@@ -299,7 +299,7 @@ class Actionneur {
 
 
 
-	function presenter_actions() {
+	function presenter_actions($fin = false) {
 		$affiche = "";
 
 		include_spip('inc/filtres_boites');
@@ -337,7 +337,8 @@ class Actionneur {
 				$todo .= "\t<li>"._T('svp:message_action_'.$i['todo'],array('plugin'=>$i['n'],'version'=>$i['v']))."</li>\n";
 			}
 			$todo .= "</ul>\n";
-			$affiche .= boite_ouvrir(_T('svp:actions_a_faire'), 'notice') . $todo . boite_fermer();
+			$titre = ($fin ? _T('svp:actions_non_traitees') : _T('svp:actions_a_faire'));
+			$affiche .= boite_ouvrir($titre, 'notice') . $todo . boite_fermer();
 		}
 
 		if ($affiche) {
@@ -369,6 +370,15 @@ class Actionneur {
 		$this->err  = $infos['err'];
 	}
 
+	function nettoyer_actions() {
+		$contenu = serialize(array(
+			'todo' => array(),
+			'done' => array(),
+			'work' => array(),
+			'err' => array(),
+		));
+		ecrire_fichier(_DIR_TMP . 'stp_actions.txt', $contenu);
+	}
 
 	/**
 	 * Effectue une des actions qui reste a faire.  

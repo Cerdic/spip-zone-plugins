@@ -30,3 +30,7 @@
 	margin:.5em .5em .5em 0;
 }
 
+/* Presentation des actions effectuees */
+#actionner .fail {color:#c30000;}
+#actionner ul {margin-left: 0.5em;}
+#actionner li {list-style-type:square; margin-left: 0.5em;}

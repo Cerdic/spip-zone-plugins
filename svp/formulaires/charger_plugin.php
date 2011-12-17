@@ -25,18 +25,7 @@ function formulaires_charger_plugin_verifier_dist(){
 	
 	} elseif (_request('valider_actions')) {
 		
-		// Ajout de la todo list à l'actionneur
-		// c'est lui qui va effectuer rellement les actions.
-		// mais quand ? !
-		$actions = unserialize(_request('_todo'));
-		include_spip('inc/svp_actionner');
-		$actionneur = new Actionneur();
-		$actionneur->log = true;
-		$actionneur->ajouter_actions($actions);
-		$actionneur->sauver_actions();
-		set_request('gogogo', 1);   // indiquer que le formulaire travaille...
-
-		
+	
 	} elseif (_request('rechercher')) {
 		// annuler les selections si nouvelle recherche
 		set_request('ids_paquet', array());
@@ -104,9 +93,19 @@ function formulaires_charger_plugin_traiter_dist(){
 	}
 	elseif (_request('valider_actions')) {
 		#refuser_traiter_formulaire_ajax();
+		// Ajout de la todo list à l'actionneur
+		// c'est lui qui va effectuer rellement les actions
+		// lors de l'appel de action/actionner 
+		$actions = unserialize(_request('_todo'));
+		include_spip('inc/svp_actionner');
+		$actionneur = new Actionneur();
+		$actionneur->log = true;
+		$actionneur->ajouter_actions($actions);
+		$actionneur->sauver_actions();
+
 		$retour['redirect'] = generer_url_action('actionner', 'redirect='. generer_url_ecrire('admin_plugin'));
 		set_request('_todo', '');
-		$retour['message_ok'] = _L("Les actions à faire ont été enregistrées... Vous allez être redirigés !");
+		$retour['message_ok'] = _T("svp:action_patienter");
 	}
 	else {
 		// On a demande une installation, "installer" ou "installer_paquet" la fonction verifier a appele
