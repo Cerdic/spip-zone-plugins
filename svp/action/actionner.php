@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_stp_action_dist() {
+function action_actionner_dist() {
 	
 	// droits
 	include_spip('inc/autoriser');
@@ -19,7 +19,7 @@ function action_stp_action_dist() {
 	$actionneur->get_actions();
 	if ($actionneur->one_action()) {
 		include_spip('inc/minipres');
-		$url = generer_action_auteur('stp_action', '',  _request('redirect'));
+		$url = generer_action_auteur('actionner', '',  _request('redirect'));
 		$pres = $actionneur->presenter_actions();
 		echo minipres( _T('svp:installation_en_cours'), $pres . '<br /><br /><br />' . $url);
 		die();
