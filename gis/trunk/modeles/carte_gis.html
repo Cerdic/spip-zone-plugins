@@ -159,12 +159,19 @@ var map[(#GET{id})];
 			}
 		);]
 		
-		[(#ENV{kml}|oui)
-		[(#ENV{kml}|intval|oui)
-		map[(#GET{id})].addOverlay(['(#ENV{kml}|generer_url_entite{document}|url_absolue)']);]
-		[(#ENV{kml}|intval|non)
-		map[(#GET{id})].addOverlay(['(#ENV{kml})']);]
-		]
+		<BOUCLE_test_kml(CONDITION){si (#ENV{kml}|oui)}>
+			#SET{kml, #ENV{kml}}
+			[(#GET{kml}|is_array|non) #SET{kml, #ARRAY{0,#GET{kml}}} ]
+			
+			<BOUCLE_kml(POUR){tableau #GET{kml}}>
+				[(#VALEUR|intval|oui)
+					map[(#GET{id})].addOverlay(['(#VALEUR|generer_url_entite{document}|url_absolue)']);
+				]
+				[(#VALEUR|intval|non)
+					map[(#GET{id})].addOverlay(['(#VALEUR)']);
+				]
+			</BOUCLE_kml>
+		</BOUCLE_test_kml>
 		
 		[(#ENV{localize_visitor,#ENV{localiser_visiteur}}|oui)
 		gis_get_navigator_location(map[(#GET{id})],#ENV{zoom,#CONFIG{gis/zoom,0}});]
