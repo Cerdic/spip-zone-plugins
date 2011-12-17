@@ -106,7 +106,7 @@ function formulaires_charger_plugin_traiter_dist(){
 		#refuser_traiter_formulaire_ajax();
 		$retour['redirect'] = generer_url_action('actionner', 'redirect='. generer_url_ecrire('admin_plugin'));
 		set_request('_todo', '');
-		$retour['message_ok'] = "Les actions ont bien étés validées... Reste plus qu'à les coder :)";
+		$retour['message_ok'] = _L("Les actions à faire ont été enregistrées... Vous allez être redirigés !");
 	}
 	else {
 		// On a demande une installation, "installer" ou "installer_paquet" la fonction verifier a appele

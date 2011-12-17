@@ -314,19 +314,23 @@ class Actionneur {
 		}
 
 		if (count($this->done)) {
+			$oks = true;
 			$done .= "<ul>";
 			foreach ($this->done as $i) {
-				$ok = (is_string($i['done']) ? true : false);
+				$this->log('done:');
+				$this->log($i);
+				$ok = ($i['done'] ? true : false);
+				$oks = &$ok;
 				$ok_texte = $ok ? 'ok' : 'fail';
 				$cle_t = 'svp:message_action_finale_' . $i['todo'] . '_' . $ok_texte;
 				$texte = _T($cle_t, array('plugin' => $i['n'], 'version' => $i['v']));
-				if ($ok) {
+				if (is_string($i['done'])) {
 					$texte .= " <span class='$ok_texte'>$i[done]</span>";
 				}
 				$done .= "\t<li class='$ok_texte'>$texte</li>\n";
 			}
 			$done .= "</ul>";
-			$affiche .= boite_ouvrir(_T('svp:actions_realises'), 'notice') . $done . boite_fermer();
+			$affiche .= boite_ouvrir(_T('svp:actions_realises'), ($oks ? 'success' : 'notice')) . $done . boite_fermer();
 		}
 
 		if (count($this->end)) {
@@ -611,7 +615,8 @@ class Actionneur {
 	// adresse du dossier, et row SQL du plugin en question
 	function activer_plugin_dossier($dossier, $i, $constante='_DIR_PLUGINS') {
 		include_spip('inc/plugin');
-
+		$this->log("Demande d'activation de : " . $dossier);
+		
 		//il faut absolument que tous les fichiers de cache
 		// soient inclus avant modification, sinon un appel ulterieur risquerait
 		// de charger des fichiers deja charges par un autre !
@@ -729,7 +734,7 @@ class Actionneur {
 				// on recupere la mise a jour...
 				include_spip('action/teleporter');
 				$teleporter_composant = charger_fonction('teleporter_composant', 'action');
-				$ok = $teleporter_composant('http', $zip, _DIR_PLUGINS_AUTO . $dest);
+				$ok = $teleporter_composant('http', $zip, _DIR_PLUGINS_AUTO . $dest);				
 				if ($ok === true) {
 					return array(
 						'dir'=> _DIR_PLUGINS_AUTO . $dest,
@@ -738,6 +743,8 @@ class Actionneur {
 				}
 				$this->err($ok);
 				$this->log("Téléporteur en erreur : " . $ok);	
+			} else {
+				$this->log("Aucune adresse pour le dépot " . $i['id_depot'] );
 			}
 		}
 		return false;
