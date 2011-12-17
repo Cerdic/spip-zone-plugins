@@ -72,7 +72,7 @@
         <nom>editer_contenu_formulaire_cfg</nom>
         <inclure>cfg_pipeline.php</inclure>
     </pipeline>
-	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<categorie>outil</categorie>
 	<traduire gestionnaire="salvatore" module="cfg" reference="fr" />
 </plugin>
