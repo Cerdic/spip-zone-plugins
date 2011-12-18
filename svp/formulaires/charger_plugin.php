@@ -102,6 +102,7 @@ function formulaires_charger_plugin_traiter_dist(){
 		$actionneur = new Actionneur();
 		$actionneur->log = true;
 		$actionneur->ajouter_actions($actions);
+		$actionneur->verrouiller();
 		$actionneur->sauver_actions();
 
 		$retour['redirect'] = generer_url_action('actionner', 'redirect='. generer_url_ecrire('admin_plugin'));
