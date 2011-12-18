@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_desinstaller' => 'Désinstaller',
 	'bouton_modifier_depot' => 'Modifier le dépôt',
 	'bouton_supprimer' => 'Supprimer',
+	'bouton_up' => 'Mettre à jour',
 	'bulle_actualiser_depot' => 'Actualiser les paquets du dépôt',
 	'bulle_actualiser_tout_depot' => 'Actualiser les paquets de tous les dépôts',
 	'bulle_afficher_xml_plugin' => 'Contenu du fichier XML du plugin',
@@ -207,6 +208,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // P
 	'plugins_inactifs_liste' => 'Inactifs',
+	'plugin_info_up' => 'Une mise à jour du plugin est disponible',
 	'plugins_verrouilles_liste' => 'Verrouillés',
 	'plugins_non_verrouilles_liste' => 'Non verrouillés',
 
