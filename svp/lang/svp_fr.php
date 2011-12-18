@@ -54,6 +54,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'categorie_theme' => 'Thème',
 
 // E
+	'erreur_actions_non_traitees' => 'Certaines actions n\'ont pas étés réalisées.
+			Cela peut provenir d\'une erreur lors des actions à réaliser, ou d\'un affichage de cette page
+			alors que des actions sont encore en cours. Les actions avaient été lancées par @auteur@ le @date@.',
+	
 	'erreur_teleporter_chargement_source_impossible' => 'Chargement impossible de la source @source@',
 	'erreur_teleporter_destination_erreur' => 'Répertoire @dir@ non accessible pour téléporter',
 	'erreur_teleporter_echec_deballage_archive' => 'Impossible de déballer @fichier@',
@@ -126,6 +130,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende_installer_plugins' => 'Installer des plugins',
 	'legende_rechercher_plugins' => 'Rechercher des plugins',
 
+// N
+	'nettoyer_actions' => 'Nettoyer ces actions ! Cela effacera la liste des actions qui restent à traiter.',
+	
 // M
     'message_action_get' => 'Télécharger le plugin « @plugin@ » (version : @version@)',
     'message_action_geton' => 'Télécharger et activer le plugin « @plugin@ » (version : @version@)',

@@ -31,6 +31,10 @@ class Actionneur {
 	// listing des erreurs rencontrées
 	var $err = array();
 	
+	// Verrou.
+	// Le verrou est posé au moment de passer à l'action.
+	var $lock = array('id_auteur'=>0, 'time'=>'');
+	
 
 	function Actionneur(){
 		include_spip('inc/svp_decider');
@@ -338,6 +342,26 @@ class Actionneur {
 			}
 			$todo .= "</ul>\n";
 			$titre = ($fin ? _T('svp:actions_non_traitees') : _T('svp:actions_a_faire'));
+
+			// s'il reste des actions à faire alors que c'est la fin qui est affichée,
+			// on met un lien pour vider. C'est un cas anormal qui peut surgir :
+			// - en cas d'erreur sur une des actions bloquant l'espace privé
+			// - en cas d'appel d'admin_plugins concurrent par le même admin ou 2 admins...
+			if ($fin) {
+				include_spip('inc/filtres');
+				if ($this->lock['time']) {
+					$time = $this->lock['time'];
+				} else {
+					$time = time();
+				}
+				$date = date('Y-m-d H:i:s', $time);
+				$todo .= "<br />\n";
+				$todo .= "<p class='error'>" . _T('svp:erreur_actions_non_traitees', array(
+					'auteur' => sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . sql_quote($this->lock['id_auteur'])),
+					'date' => affdate_heure($date)
+				)) . "</p>\n";
+				$todo .= "<a href='" . parametre_url(self(), 'nettoyer_actions', '1'). "'>" . _T('svp:nettoyer_actions') . "</a>\n";
+			}
 			$affiche .= boite_ouvrir($titre, 'notice') . $todo . boite_fermer();
 		}
 
@@ -350,12 +374,37 @@ class Actionneur {
 	}
 
 
+	function est_verrouille($id_auteur = '') {
+		if ($id_auteur == '') {
+			return ($this->lock['id_auteur'] ? true : false);
+		}
+		return ($this->lock['id_auteur'] == $id_auteur);
+	}
+
+	
+	function verrouiller() {
+		$this->lock = array(
+			'id_auteur' => $GLOBALS['visiteur_session']['id_auteur'],
+			'time' => time(),
+		);
+	}
+
+
+	function deverrouiller() {
+		$this->lock = array(
+			'id_auteur' => 0,
+			'time' => '',
+		);
+	}
+
+
 	function sauver_actions() {
 		$contenu = serialize(array(
 			'todo' => $this->end,
 			'done' => $this->done,
 			'work' => $this->work,
-			'err' => $this->err,
+			'err'  => $this->err,
+			'lock' => $this->lock,
 		));
 		ecrire_fichier(_DIR_TMP . 'stp_actions.txt', $contenu);
 	}
@@ -368,16 +417,16 @@ class Actionneur {
 		$this->work = $infos['work'];
 		$this->done = $infos['done'];
 		$this->err  = $infos['err'];
+		$this->lock = $infos['lock'];
 	}
 
 	function nettoyer_actions() {
-		$contenu = serialize(array(
-			'todo' => array(),
-			'done' => array(),
-			'work' => array(),
-			'err' => array(),
-		));
-		ecrire_fichier(_DIR_TMP . 'stp_actions.txt', $contenu);
+		$this->todo = array();
+		$this->done = array();
+		$this->work = array();
+		$this->err  = array();
+		$this->deverrouiller();
+		$this->sauver_actions();
 	}
 
 	/**
@@ -386,10 +435,22 @@ class Actionneur {
 	function one_action() {
 		// s'il reste des actions, on en prend une, et on la fait.
 		if (count($this->end)) {
+			if (!$this->est_verrouille()) {
+				$this->verrouiller();
+			} elseif (!$this->est_verrouille($GLOBALS['visiteur_session']['id_auteur'])) {
+				// si ce n'est pas verrouille par l'auteur en cours...
+				// ce n'est pas normal, donc on quitte sans rien faire.
+				return false;
+			}
 			$action = $this->work = array_shift($this->end);
 			$this->sauver_actions();
 			$this->do_action();
 			return $action;
+		} else {
+			if ($this->est_verrouille()) {
+				$this->deverrouiller();
+				$this->sauver_actions();
+			}
 		}
 		return false;
 	}
