@@ -20,7 +20,7 @@ function tags_autoadd(node,e){
 			if(tag.length){
 				var li = jQuery('<li class="tag">'+tag+'</li>');
 				li.append(jQuery('<input type="hidden" name="tags[]" />').attr('value',tag));
-				if (ul.is('.supprimable')) li.append(tags_remove_img);
+				if (ul.is('.supprimable')) li.append(tags_remove_img.clone());
 				ul.append(li);
 				if (ul.is('.empty'))
 				 	ul.removeClass('empty').find('.notag').remove();

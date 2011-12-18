@@ -3,7 +3,7 @@
 <li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur][(#ENV{supprimable}|oui)supprimable][(#ENV{ajoutable}|oui)ajoutable]">
 	#SET{value,#ENV*{#GET{name}}}
 	<B_mots>
-	<ul class="tags[(#ENV{autosumbit,' '}|oui)autosubmit][(#ENV{supprimable}|oui)supprimable]"><BOUCLE_mots(MOTS){type=#ENV{type_mot}}{id_objet}{objet}{par titre}><li
+	<ul class="tags[(#ENV{autosubmit,''}|oui)autosubmit][(#ENV{supprimable}|oui)supprimable]"><BOUCLE_mots(MOTS){type=#ENV{type_mot}}{id_objet}{objet}{par titre}><li
 			class="tag"><a href="#URL_MOT">#TITRE</a><input 	#SET{value,#GET{value}|array_diff{#LISTE{#TITRE}}}
 			type="hidden" name="tags[]" value="[(#TITRE|entites_html)]" />[<img (#ENV{supprimable}|oui)
 	    src="#CHEMIN_IMAGE{supprimer-12.png}" width="12" height="12"
@@ -12,7 +12,7 @@
 		  onclick="tags_remove_tag(this);"
 		  />]</li></BOUCLE_mots></ul>
 	</B_mots>
-	<ul class="tags empty[(#ENV{autosumbit,' '}|oui)autosubmit][(#ENV{supprimable}|oui)supprimable]"><li class="notag">[(#GET{fl}|concat{':tag_aucun'}|_T)]</li></ul>
+	<ul class="tags empty[(#ENV{autosubmit,''}|oui)autosubmit][(#ENV{supprimable}|oui)supprimable]"><li class="notag">[(#GET{fl}|concat{':tag_aucun'}|_T)]</li></ul>
 	<//B_mots>[(#ENV{ajoutable}|oui)
 	<label for="#GET{name}-#ENV{objet}-#ENV{id_objet}" class="invisible">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 	<span class='erreur_message'>(#GET{erreurs})</span>

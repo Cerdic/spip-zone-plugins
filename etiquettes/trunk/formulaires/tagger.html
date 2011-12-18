@@ -6,7 +6,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 	]
 		<ul>
-			#INCLURE{fond=formulaires/inc-saisie-tags,objet=#ENV{_objet},id_objet=#ENV{_id_objet},type_mot=#ENV{_type_mot},supprimable=#ENV{_supprimable},ajoutable=#ENV{_ajoutable},env}
+			#INCLURE{fond=formulaires/inc-saisie-tags,objet=#ENV{_objet},id_objet=#ENV{_id_objet},type_mot=#ENV{_type_mot},supprimable=#ENV{_supprimable},ajoutable=#ENV{_ajoutable},autosubmit=' ',env}
 		</ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
