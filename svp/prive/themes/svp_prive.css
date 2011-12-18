@@ -1,5 +1,5 @@
 /* **************** FORMULAIRE AJOUTER PLUGIN ***************** */
-.liste-items .item.installe{ color: #999; background: url('../prive/themes/spip/images/fond-installe.gif') repeat; }
+.liste-items .item.installe{ color: #999; background: url('../themes/spip/images/fond-installe.png') repeat fixed 0 0 !important; }
 .liste-items .item span.installe { color: red; }
 
 .liste-objets.depots .caption {
@@ -7,12 +7,8 @@
     padding-left: 30px;
 }
 /* **************** LISTE EXTENSIONS          ***************** */
-.verrou {
-	background:url('../themes/spip/images/fond-verrou.png') repeat fixed 0 0 #FDFDFD !important;
-}
-.verrou:hover {
-	background-color:#F0F0F0 !important;
-}
+.verrou { background:url('../themes/spip/images/fond-verrou.png') repeat fixed 0 0 #FDFDFD !important;}
+.verrou:hover {	background-color:#F0F0F0 !important; }
 
 /* Validation des actions par popin */
 #colorbox #charger_plugin_confirm {font-size:110%;}

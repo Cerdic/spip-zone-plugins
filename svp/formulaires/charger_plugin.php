@@ -125,7 +125,7 @@ function filtre_construire_recherche_plugins($phrase='', $categorie='', $etat=''
 
 	$tri = ($phrase) ? 'score' : 'nom';
 	$version_spip = $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'];
-	$afficher_exclusions = false;
+	$afficher_exclusions = true;
 
 	// On recupere la liste des paquets:
 	// - sans doublons, ie on ne garde que la version la plus recente
