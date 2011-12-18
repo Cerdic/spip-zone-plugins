@@ -4,7 +4,7 @@
 	<auteur>[Ma&#239;eul Rouquette->http://www.maieul.net]</auteur>
 	<licence>GPL3</licence>
 	<icon>exclure_secteur.jpg</icon>
-	<version>1.2.0</version>
+	<version>2.0.0</version>
 	<etat>stable</etat>
 	<lien>http://www.spip-contrib.net/Plugin-Exclure-secteur</lien>
    <description>
@@ -28,8 +28,7 @@ On peut aussi configurer pour que que si l'id principal du nom de boucle est pas
 	</pipeline>
 
 	<fonctions>exclure_sect_fonctions.php</fonctions>
-	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
-	<necessite id='CFG' />
+	<necessite id="SPIP" version="[3.0.0-beta;3.0.99]" />
 	<categorie>outil</categorie>
 
 </plugin>
