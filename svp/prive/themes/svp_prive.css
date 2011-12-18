@@ -10,6 +10,8 @@
 .verrou { background:url('../themes/spip/images/fond-verrou.png') repeat fixed 0 0 #FDFDFD !important;}
 .verrou:hover {	background-color:#F0F0F0 !important; }
 
+.disabled { background:url('../themes/spip/images/fond-obsolete.png') repeat fixed 0 0 #FDFDFD !important;}
+
 /* Validation des actions par popin */
 #colorbox #charger_plugin_confirm {font-size:110%;}
 #colorbox #charger_plugin_confirm .reponse_formulaire {margin-bottom:1em; line-height: 1.4em;}
