@@ -1,6 +1,6 @@
 [(#SET{plugins,#ARRAY})]
-[(#ENV{phrase}|ou{#ENV{depot}}|ou{#ENV{categorie}}|ou{#ENV{etat}|ou{#ENV{doublon}}}|oui)
-	[(#SET{plugins,[(#ENV{phrase}|construire_recherche_plugins{#ENV{categorie}, #ENV{etat}, #ENV{depot}, #ENV{doublon}})]})]
+[(#ENV{phrase}|ou{#ENV{depot}}|ou{#ENV{categorie}}|ou{#ENV{etat}}|ou{#ENV{exclusion}}|ou{#ENV{doublon}}|oui)
+	[(#SET{plugins,[(#ENV{phrase}|construire_recherche_plugins{#ENV{categorie}, #ENV{etat}, #ENV{depot}, #ENV{exclusion}, #ENV{doublon}})]})]
 	[(#SET{nb,[(#GET{plugins}|count)]})]
 	[(#SET{tri,[(#GET{phrase}|?{score,nom})]})]
 	[(#GET{nb}|oui)<p class="explication"><:svp:message_ok_plugins_trouves{nb_plugins=#GET{nb},tri=#GET{tri}}:></p>]

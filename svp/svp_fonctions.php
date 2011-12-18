@@ -386,4 +386,28 @@ function critere_compatible_spip_dist($idb, &$boucles, $crit) {
 	$boucle->where[] = '$where';
 }
 
+
+function filtre_construire_recherche_plugins($phrase='', $categorie='', $etat='', $depot='', $afficher_exclusions=true, $afficher_doublons=false) {
+
+	// On a demande une recherche (bouton rechercher)
+	$afficher_doublons = ($afficher_doublons == 'oui') ? true : false;
+
+	$tri = ($phrase) ? 'score' : 'nom';
+	$version_spip = $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'];
+
+	// On recupere la liste des paquets:
+	// - sans doublons, ie on ne garde que la version la plus recente
+	// - correspondant a ces criteres
+	// - compatible avec la version SPIP installee sur le site
+	// - et n'etant pas deja installes (ces paquets peuvent toutefois etre affiches)
+	// tries par nom ou score
+	include_spip('inc/svp_rechercher');
+	$plugins = svp_rechercher_plugins_spip(
+		$phrase, $categorie, $etat, $depot, $version_spip,
+		svp_lister_plugins_installes(), $afficher_exclusions, $afficher_doublons, $tri);
+
+	return $plugins;
+
+}
+
 ?>

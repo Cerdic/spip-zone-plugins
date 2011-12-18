@@ -93,7 +93,7 @@ function formulaires_charger_plugin_traiter_dist(){
 	}
 	elseif (_request('valider_actions')) {
 		#refuser_traiter_formulaire_ajax();
-		// Ajout de la todo list à l'actionneur
+		// Ajout de la liste des actions à l'actionneur
 		// c'est lui qui va effectuer rellement les actions
 		// lors de l'appel de action/actionner 
 		$actions = unserialize(_request('_todo'));
@@ -118,27 +118,4 @@ function formulaires_charger_plugin_traiter_dist(){
 }
 
 
-function filtre_construire_recherche_plugins($phrase='', $categorie='', $etat='', $depot='', $doublon = false) {
-
-	// On a demande une recherche (bouton rechercher)
-	$doublon = ($doublon == 'oui') ? true : false;
-
-	$tri = ($phrase) ? 'score' : 'nom';
-	$version_spip = $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'];
-	$afficher_exclusions = true;
-
-	// On recupere la liste des paquets:
-	// - sans doublons, ie on ne garde que la version la plus recente
-	// - correspondant a ces criteres
-	// - compatible avec la version SPIP installee sur le site
-	// - et n'etant pas deja installes (ces paquets peuvent toutefois etre affiches)
-	// tries par nom ou score
-	include_spip('inc/svp_rechercher');
-	$plugins = svp_rechercher_plugins_spip(
-		$phrase, $categorie, $etat, $depot, $version_spip,
-		svp_lister_plugins_installes(), $afficher_exclusions, $doublon, $tri);
-
-	return $plugins;
-	
-}
 ?>
