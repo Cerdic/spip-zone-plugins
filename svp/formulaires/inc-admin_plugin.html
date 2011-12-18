@@ -1,52 +1,50 @@
+#SET{vspip, #EVAL{$GLOBALS['spip_version_branche']}}
 <B_plugins>
 <div class="liste plugins">
 	<ul class="liste-items">
 <BOUCLE_plugins(PAQUETS plugins){par multi nom, prefixe}{!par constante, actif}{id_depot=0}{actif ?}{constante ?IN #ENV{constante}}>
-		<li class="item[ (#ACTIF|=={oui}|?{actif,inactif})][(#OBSOLETE|=={oui}|oui) disabled][(#CONSTANTE|=={_DIR_EXTENSIONS}|oui) verrou][(#MAJ_VERSION|oui) up]"[ id="(#PREFIXE|strtolower)-#COMPTEUR_BOUCLE"]>
-			[(#OBSOLETE|=={oui}|non)
+		#SET{incompatible, #COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|non}
+		<li class="item[ (#ACTIF|=={oui}|?{actif,inactif})][(#OBSOLETE|=={oui}|ou{#GET{incompatible}}|oui) disabled][(#CONSTANTE|=={_DIR_EXTENSIONS}|oui) verrou][(#MAJ_VERSION|oui) up]"[ id="(#PREFIXE|strtolower)-#COMPTEUR_BOUCLE"]>
+			[(#OBSOLETE|=={non}|et{#CONSTANTE|!={_DIR_EXTENSIONS}}|et{#GET{incompatible}|non}|oui)
 			<div class="check">
-				[(#CONSTANTE|=={_DIR_EXTENSIONS}|non)
-					<input type="checkbox" class="checkbox select_plugin" name="id_paquets[(#VAL{91}|chr)][(#VAL{93}|chr)]" value="#ID_PAQUET" />
-				]
+				<input type="checkbox" class="checkbox select_plugin" name="id_paquets[(#VAL{91}|chr)][(#VAL{93}|chr)]" value="#ID_PAQUET" />
 			</div>]
 			[(#REM) <!-- Resume du plugin -->]
 			<div class="resume">
 				<h3 class="nom"><a[ href="(#VERSION)"] rel="info">[(#NOM)]</a></h3>
 				<span class="version">[(#VERSION)]</span>
 				<span class="etat">[ - (#ETAT)]</span>
-				[<span class="disabled"> - (#OBSOLETE|=={oui}|oui)<:svp:info_plugin_obsolete:></span>]
+				[<span class="information"> - (#OBSOLETE|=={oui}|oui)<:svp:info_plugin_obsolete:></span>]
+				[<span class="information"> - (#GET{incompatible}|oui)<:svp:info_plugin_incompatible:></span>]
 				<div class="short">[(#SLOGAN|svp_T{#PREFIXE}|typo)]</div>
 				[(#LOGO|oui)<div class="icon">
 					[(#ACTIF|=={oui}|?{
-						#CONSTANTE|constant|concat{#SRC_ARCHIVE/#LOGO}|image_reduire{32}
-						,
+						#CONSTANTE|constant|concat{#SRC_ARCHIVE/#LOGO}|image_reduire{32},
 						#CONSTANTE|constant|concat{#SRC_ARCHIVE/#LOGO}|image_reduire{32}|image_sepia{#dddddd}
 					})]
 				</div>]
 			</div>
 			
-			<div class="actions">[(#OBSOLETE|=={oui}|non)
-				[(#CONSTANTE|=={_DIR_EXTENSIONS}|non)
-					[(#ACTIF|=={oui}|oui)
-						<input type="submit" name="[(#ID_PAQUET|svp_nom_action{desactiver})]" class="submit" value="<:svp:bouton_desactiver:>" />
-						[(#INSTALLE|=={oui}|et{#AUTORISER{webmestre}}|oui)
-							<input type="submit" name="[(#ID_PAQUET|svp_nom_action{desinstaller})]" class="submit" value="<:svp:bouton_desinstaller:>" />
-						]
-					]
-					[(#ACTIF|=={oui}|non)
-						<input type="submit" name="[(#ID_PAQUET|svp_nom_action{activer})]" class="submit" value="<:svp:bouton_activer:>" />
-						<input type="submit" name="[(#ID_PAQUET|svp_nom_action{supprimer})]" class="submit" value="<:svp:bouton_supprimer:>" />
-					]
-					[(#MAJ_VERSION|oui)
-						<input type="submit" name="[(#ID_PAQUET|svp_nom_action{up})]" class="submit" value="<:svp:bouton_up:>" />
+			<div class="actions">
+			[(#OBSOLETE|=={non}|et{#CONSTANTE|!={_DIR_EXTENSIONS}}|et{#GET{incompatible}|non}|oui)
+				[(#ACTIF|=={oui}|oui)
+					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{desactiver})]" class="submit" value="<:svp:bouton_desactiver:>" />
+					[(#INSTALLE|=={oui}|et{#AUTORISER{webmestre}}|oui)
+						<input type="submit" name="[(#ID_PAQUET|svp_nom_action{desinstaller})]" class="submit" value="<:svp:bouton_desinstaller:>" />
 					]
 				]
-				[(#CONSTANTE|=={_DIR_EXTENSIONS}|oui)
-					<span class="details">
-					<:svp:info_verrouille:>
-					</span>
+				[(#ACTIF|=={oui}|non)
+					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{activer})]" class="submit" value="<:svp:bouton_activer:>" />
+					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{supprimer})]" class="submit" value="<:svp:bouton_supprimer:>" />
 				]
-			]</div>
+				[(#MAJ_VERSION|oui)
+					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{up})]" class="submit" value="<:svp:bouton_up:>" />
+				]
+			]
+			[(#CONSTANTE|=={_DIR_EXTENSIONS}|oui)
+				<span class="information"><:svp:info_verrouille:></span>
+			]
+			</div>
 			[(#ACTIF|=={oui}|oui) #SET{prefixe,#PREFIXE|strtolower}
 				[(#INCLURE{fond=prive/squelettes/inclure/cfg,script=configurer_#GET{prefixe},nom=#NOM})]
 			]
