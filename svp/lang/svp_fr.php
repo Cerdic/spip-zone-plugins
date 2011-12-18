@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
-	'action_patienter' => 'Les actions sont en cours de traitement. Patientez...',
+	'action_patienter' => 'Les actions sont en cours de traitement. Veuillez patienter...',
 	'actions_a_faire' => 'Actions à traiter',
 	'actions_demandees' => 'Actions demandées :',
 	'actions_en_erreur' => 'Erreurs survenues',
@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_supprimer_depot' => 'Supprimer le dépôt et ses paquets',
 	'bulle_telecharger_archive' => 'Télécharger l\'archive',
 	'bulle_telecharger_fichier_depot' => 'Télécharger le fichier XML du dépôt',
-	'bulle_telecharger_librairie' => 'Télécharger la librairie',
+	'bulle_telecharger_librairie' => 'Télécharger la bibliothèque',
 
 // C
 	'categorie_aucune' => 'Sans catégorie',
@@ -56,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'categorie_theme' => 'Thème',
 
 // E
-	'erreur_actions_non_traitees' => 'Certaines actions n\'ont pas étés réalisées.
+	'erreur_actions_non_traitees' => 'Certaines actions n\'ont pas été réalisées.
 			Cela peut provenir d\'une erreur lors des actions à réaliser, ou d\'un affichage de cette page
 			alors que des actions sont encore en cours. Les actions avaient été lancées par @auteur@ le @date@.',
 	
@@ -64,10 +64,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_teleporter_destination_erreur' => 'Répertoire @dir@ non accessible pour téléporter',
 	'erreur_teleporter_echec_deballage_archive' => 'Impossible de déballer @fichier@',
 	'erreur_teleporter_format_archive_non_supporte' => 'Le format @extension@ n\'est pas supporté par le téléporteur',
-	'erreur_teleporter_methode_inconue' => 'Methode @methode@ inconnue pour teleporter',
+	'erreur_teleporter_methode_inconue' => 'Methode @methode@ inconnue pour téléporter',
 	'erreur_teleporter_type_fichier_inconnu' => 'Type de fichier inconnu pour la source @source@',
-	'erreur_dir_dib_ecriture' => 'Le répertoire de librairies @dir@ n\'est pas accessible en écriture. Impossible de charger une librairie dedans !',
-	'erreur_dir_dib_indefini' => 'Le répertoire _DIR_LIB n\'est pas défini. Impossible de charger une librairie dedans !',
+	'erreur_dir_dib_ecriture' => 'Le répertoire des bibliothèques @dir@ n\'est pas accessible en écriture. Impossible de charger une bibliothèque dedans !',
+	'erreur_dir_dib_indefini' => 'Le répertoire _DIR_LIB n\'est pas défini. Impossible de charger une bibliothèque dedans !',
 	'erreur_dir_plugins_auto_ecriture' => 'Le répertoire de paquets @dir@ n\'est pas accessible en écriture. Impossible de charger un paquet dedans !',
 	'erreur_dir_plugins_auto_indefini' => 'Le répertoire _DIR_PLUGIN_AUTO n\'est pas défini. Impossible de charger un paquet dedans !',
 // I
@@ -114,7 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_critere_categorie' => 'Catégories',
 	'label_critere_depot' => 'Dépôts',
 	'label_critere_doublon' => 'Compatibilité',
-	'label_critere_etat' => 'Etats',
+	'label_critere_etat' => 'États',
 	'label_critere_phrase' => 'Rechercher dans les plugins',
 	'label_modifie_le' => 'Modifié le',
 	'label_n_autres_contributions' => 'autres contributions',
@@ -140,7 +140,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // M
     'message_action_get' => 'Télécharger le plugin « @plugin@ » (version : @version@)',
     'message_action_geton' => 'Télécharger et activer le plugin « @plugin@ » (version : @version@)',
-	'message_action_getlib' => 'Télécharger la librairie « <a href="@version@" class="spip_out">@plugin@</a> »',
+	'message_action_getlib' => 'Télécharger la bibliothèque « <a href="@version@" class="spip_out">@plugin@</a> »',
     'message_action_on' => 'Activer le plugin « @plugin@ » (version : @version@)',
 	'message_action_up' => 'Mise à jour du plugin « @plugin@ » (version : @version@)',
 	'message_action_upon' => 'Mise à jour et activation du plugin « @plugin@ » (version : @version@)',
@@ -153,8 +153,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'message_action_finale_get_fail' => 'Le plugin « @plugin@ » (version : @version@) n\'a pu être correctement récupéré',
 	'message_action_finale_get_ok' => 'Le plugin « @plugin@ » (version : @version@) a été correctement récupéré',
-	'message_action_finale_geton_fail' => 'Le téléchargement ou l\'activation du plugin « @plugin@ » (version : @version@) ne s\'est pas correctement déroulée',
-	'message_action_finale_geton_ok' => 'Le téléchargement et l\'activation du plugin « @plugin@ » (version : @version@) s\'est correctement déroulée',
+	'message_action_finale_geton_fail' => 'Le téléchargement ou l\'activation du plugin « @plugin@ » (version : @version@) ne se sont pas correctement déroulés',
+	'message_action_finale_geton_ok' => 'Le téléchargement et l\'activation du plugin « @plugin@ » (version : @version@) se sont correctement déroulés',
 	'message_action_finale_install_fail' => 'L\'installation du plugin « @plugin@ » (version : @version@) a échoué',
 	'message_action_finale_install_ok' => 'L\'installation du plugin « @plugin@ » (version : @version@) s\'est correctement déroulée',
 	'message_action_finale_kill_fail' => 'Les fichiers du plugin « @plugin@ » (version : @version@) n\'ont pu être correctement effacés',
@@ -163,31 +163,31 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_action_finale_off_ok' => 'La désactivation du plugin « @plugin@ » (version : @version@) s\'est correctement déroulée',
 	'message_action_finale_on_fail' => 'L\'activation du plugin « @plugin@ » (version : @version@) ne s\'est pas correctement déroulée',
 	'message_action_finale_on_ok' => 'L\'activation du plugin « @plugin@ » (version : @version@) s\'est correctement déroulée',
-	'message_action_finale_stop_fail' => 'La d&eacute;sinstallation du plugin « @plugin@ » (version : @version@) ne s\'est pas correctement déroulée',
-	'message_action_finale_stop_ok' => 'La d&eacute;sinstallation du plugin « @plugin@ » (version : @version@) s\'est correctement déroulée',
+	'message_action_finale_stop_fail' => 'La désinstallation du plugin « @plugin@ » (version : @version@) ne s\'est pas correctement déroulée',
+	'message_action_finale_stop_ok' => 'La désinstallation du plugin « @plugin@ » (version : @version@) s\'est correctement déroulée',
 	'message_action_finale_up_fail' => 'La mise à jour du plugin « @plugin@ » (version : @version@) ne s\'est pas correctement déroulée',
 	'message_action_finale_up_ok' => 'La mise à jour du plugin « @plugin@ » (version : @version@) s\'est correctement déroulée',
-	'message_action_finale_getlib_fail' => 'L\'installation de la librairie « @plugin@ » a échoué',
-	'message_action_finale_getlib_ok' => 'La librairie « @plugin@ » a été installée',
+	'message_action_finale_getlib_fail' => 'L\'installation de la bibliothèque « @plugin@ » a échoué',
+	'message_action_finale_getlib_ok' => 'La bibliothèque « @plugin@ » a été installée',
 
-    'message_dependance_plugin' => 'Le plugin @plugin@ d&eacute;pend de @dependance@.',
-    'message_dependance_plugin_version' => 'Le plugin @plugin@ d&eacute;pend de @dependance@ @version@',
-    'message_erreur_ecriture_lib' => '@plugin@ a besoin de la librairie <a href="@lib_url@">@lib@</a>
+    'message_dependance_plugin' => 'Le plugin @plugin@ dépend de @dependance@.',
+    'message_dependance_plugin_version' => 'Le plugin @plugin@ dépend de @dependance@ @version@',
+    'message_erreur_ecriture_lib' => '@plugin@ a besoin de la bibliothèque <a href="@lib_url@">@lib@</a>
    								placée dans le répertoire <var>lib/</var> à la racine de votre site.
    								Cependant, ce répertoire n\'est pas accessible en écriture.
    								Vous devez l\'installer manuellement ou donner des permissions d\'écriture
    								à ce répertoire.',
-   	'message_erreur_maj_inconnu' => 'Mise &agrave; jour impossible d\'un plugin inconnu (@id@).',
+   	'message_erreur_maj_inconnu' => 'Mise à jour impossible d\'un plugin inconnu (@id@).',
 	'message_erreur_plugin_introuvable' => 'Il est impossible de trouver le plugin @plugin@ pour @action@.',
-	'message_erreur_plugin_non_actif' => 'Il est impossible de d&eacute;sactiver un plugin non actif.',
+	'message_erreur_plugin_non_actif' => 'Il est impossible de désactiver un plugin non actif.',
     'message_incompatibilite_spip' => '@plugin@  n\'est pas compatible avec la version de SPIP que vous utilisez.',
 	'message_nok_aucun_depot_disponible' => 'Aucun plugin n\'est disponible ! Veuillez vous rendre dans la page de gestion des dépôts pour ajouter des listes de plugins installables.',
-	'message_nok_aucun_paquet_ajoute' => 'Le dépôt « @url@ » ne fournit aucun nouveau paquet par rapport à la base déjà enregistrée. Il n\'a donc pas ét&eacute ajouté',
+	'message_nok_aucun_paquet_ajoute' => 'Le dépôt « @url@ » ne fournit aucun nouveau paquet par rapport à la base déjà enregistrée. Il n\'a donc pas été ajouté',
 	'message_nok_aucun_plugin_selectionne' => 'Aucun plugin à installer. Veuillez sélectionner les plugins à installer',
 	'message_nok_champ_obligatoire' => 'Ce champ est obligatoire',
 	'message_nok_depot_deja_ajoute' => 'L\'adresse « @url@ » correspond à un dépôt déjà ajouté',
-	'message_nok_maj_introuvable' => 'Mise &agrave; jour du plugin @plugin@ introuvable (@id@).',
-	'message_nok_plugin_inexistant' => 'Le plugin demand&eacute; est inexistant (@plugin@).',
+	'message_nok_maj_introuvable' => 'Mise à jour du plugin @plugin@ introuvable (@id@).',
+	'message_nok_plugin_inexistant' => 'Le plugin demandé est inexistant (@plugin@).',
 	'message_nok_sql_insert_depot' => 'Erreur SQL lors de l\'ajout du dépôt @objet@',
 	'message_nok_url_depot_incorrecte' => 'L\'adresse « @url@ » est incorrecte',
 	'message_nok_xml_non_conforme' => 'Le fichier XML « @fichier@ » de description du dépôt n\'est pas conforme',
@@ -218,7 +218,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_depot' => 'Dépôt',
 	'titre_depots' => 'Dépôts',
 	'titre_form_ajouter_depot' => 'Ajouter un dépôt',
-	'titre_liste_autres_contributions' => 'Squelettes, librairies, jeux d\'icônes...',
+	'titre_liste_autres_contributions' => 'Squelettes, bibliothèques, jeux d\'icônes...',
 	'titre_liste_autres_depots' => 'Autres dépôts',
 	'titre_liste_depots' => 'Liste des dépôts disponibles',
 	'titre_liste_paquets_plugin' => 'Liste des paquets du plugin',
