@@ -107,7 +107,7 @@ function formulaires_etiquettes_traiter_dist($groupe, $id_groupe, $name, $aide_n
 			$etiquettes,
 			$id_objet,
 			$groupe,
-			preg_replace('/^spip_/i', '', table_objet_sql($type_objet)),
+			table_objet($type_objet),
 			$cle_objet,
 			$remplacer
 		);
