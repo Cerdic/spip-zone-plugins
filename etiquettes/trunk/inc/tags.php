@@ -101,11 +101,15 @@ function tags_tagger($objet,$id_objet,$tags,$type_mot='tags',$ajouter=true,$supp
 	foreach ($liens as $lien)
 		$deja[]=$lien['id_mot'];
 
+	$invalider = false;
 	// si on peut ajouter, ajouter les ids manquants
 	// facile
 	if ($ajouter){
 		$adds = array_diff($ids,$deja);
-		objet_associer(array('mot'=>$adds),array($objet=>$id_objet));
+		if (count($adds)){
+			$invalider = true;
+			objet_associer(array('mot'=>$adds),array($objet=>$id_objet));
+		}
 	}
 
 	// si on peut supprimer, il faut filtrer les mots deja la
@@ -115,7 +119,15 @@ function tags_tagger($objet,$id_objet,$tags,$type_mot='tags',$ajouter=true,$supp
 		$deja = array_map('reset',$deja);
 		// et maintenant on peut supprimer ceux qui sont en trop
 		$remove = array_diff($deja,$ids);
-		objet_dissocier(array('mot'=>$remove),array($objet=>$id_objet));
+		if (count($remove)){
+			$invalider = true;
+			objet_dissocier(array('mot'=>$remove),array($objet=>$id_objet));
+		}
+	}
+
+	if ($invalider){
+		include_spip('inc/invalideur');
+		suivre_invalideur("id=$objet/$id_objet");
 	}
 
 	// et on rechecke les tags reels
