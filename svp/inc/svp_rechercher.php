@@ -69,7 +69,7 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $versio
 	// les filtres complementaires : categorie, etat, exclusions et compatibilite spip
 	// si on a bien trouve des resultats precedemment ou si aucune phrase n'a ete saisie
 	// -- Preparation de la requete
-	if (!$phrase OR $resultats['plugin']) {
+	if ($ids_paquets) {
 		$from = array('spip_plugins AS t1', 'spip_paquets AS t2', 'spip_depots AS t3');
 		$select = array('t1.nom AS nom', 't1.slogan AS slogan', 't1.prefixe AS prefixe', 't1.id_plugin AS id_plugin', 
 						't2.id_paquet AS id_paquet', 't2.description AS description', 't2.compatibilite_spip AS compatibilite_spip',
