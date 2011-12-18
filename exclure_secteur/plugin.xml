@@ -28,7 +28,7 @@ On peut aussi configurer pour que que si l'id principal du nom de boucle est pas
 	</pipeline>
 
 	<fonctions>exclure_sect_fonctions.php</fonctions>
-	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id='CFG' />
 	<categorie>outil</categorie>
 
