@@ -293,7 +293,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	sql_delete('spip_depots_plugins', array('id_depot='. sql_quote($id_depot), sql_in('id_plugin', $anciens_plugins)));
 
 	// corriger les vmax des plugins (et supprimer les plugins orphelins)
-	include_spip('inc/depoter_local');
+	include_spip('inc/svp_depoter_local');
 	svp_corriger_vmax_plugins($anciens_plugins);
 	
 	// on ne garde que les paquets qui ne sont pas presents dans la base
