@@ -75,6 +75,8 @@ function geoportail_install($action){
 			// Par defaut, on travaille sur les auteurs et les articles
 			ecrire_meta('geoportail_geoarticle',1);
 			ecrire_meta('geoportail_geoauteur',1);
+ 			ecrire_metas();
+			
 			break;
 
 		// Supprimer la base
