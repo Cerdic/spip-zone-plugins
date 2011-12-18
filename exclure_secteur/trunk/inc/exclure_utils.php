@@ -1,4 +1,5 @@
 <?php
+include_spip('inc/config');
 if (!function_exists('critere_tout_voir_dist')){
         function critere_tout_voir_dist($idb, &$boucles, $crit) {   
             $boucle = &$boucles[$idb];
