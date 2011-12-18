@@ -206,6 +206,8 @@ function svp_compter($entite, $id_depot=0, $categorie='', $compatible_spip=''){
 	$where = array();
 	if ($id_depot)
 		$where[] = "t1.id_depot=" . sql_quote($id_depot);
+	else
+		$where[] = "t1.id_depot>0";
 
 	if ($entite == 'plugin') {
 		$from = 'spip_plugins AS t2, spip_depots_plugins AS t1';
