@@ -1,9 +1,9 @@
 <div class="formulaire_spip">
-<!-- titre=Exclure Secteur -->
+<input type="hidden" name="_meta_titre"value="Exclure Secteur" />
 
 
-			<form action="#SELF" method="post">
-[<div>(#ENV{_cfg_}|form_hidden)</div>]
+			<form action="#ENV{action}" method="post">
+#ACTION_FORMULAIRE{#ENV{action}}
     <fieldset>
 	<ul>
 	<legend id="explication">Choisissez les secteurs &agrave; exclure</legend>
