@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_activer' => 'Activer',
 	'bouton_actualiser' => 'Actualiser',
 	'bouton_actualiser_tout' => 'Actualiser les dépôts',
+	'bouton_appliquer' => 'Appliquer',
 	'bouton_installer' => 'Télécharger et activer',
 	'bouton_desactiver' => 'Désactiver',
 	'bouton_desinstaller' => 'Désinstaller',
@@ -99,8 +100,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_type_depot_manuel' => 'Dépôt géré manuellement',
 	'info_type_depot_svn' => 'Dépôt géré sous SVN',
 	'info_verrouille' => 'Il ne vous est pas possible de désactiver ni de désinstaller ce plugin.',
-
 	'installation_en_cours' => 'Les actions demandées sont en cours de traitement',
+
 // L
 	'label_1_autre_contribution' => 'autre contribution',
 	'label_actualise_le' => 'Actualisé le',
