@@ -69,9 +69,8 @@ function exclure_sect_choisir($crit,$type){
     else {
         $cfg = sql_quote('z');
     }
-    
-   
-    return '('.$cfg.')';
+
+    return $cfg;
 
 }
 ?>

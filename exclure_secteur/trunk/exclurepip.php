@@ -12,16 +12,15 @@ function exclure_sect_pre_boucle(&$boucle){
     if ($type == 'articles' or $type == 'rubriques' or $type == 'syndic'){
     
         $crit = $boucle->criteres;
-        $exclut = exclure_sect_choisir($crit,$type);       
-        $boucle->where[] = array("'NOT'",array("'IN'", "'$type.id_secteur'",sql_quote($exclut)));    
-         
+        $exclut = exclure_sect_choisir($crit,$type);    
+        $boucle->where[] = "sql_in(id_secteur,$exclut,'NOT')";    
     }
     
     if ($type == 'breves'){
     
         $crit = $boucle->criteres;
         $exclut = exclure_sect_choisir($crit,$type);       
-        $boucle->where[] = array("'NOT'",array("'IN'", "'$type.id_rubrique'",sql_quote($exclut)));    
+        $boucle->where[] = "sql_in(id_rubrique,$exclut,'NOT')";       
          
     }
     
