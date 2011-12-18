@@ -18,7 +18,7 @@ function action_supprimer_depot_dist(){
 
 	// Suppression du depot et de ses plugins
 	if ($id_depot = intval($arg)) {
-		include_spip('inc/svp_depoter');
+		include_spip('inc/svp_depoter_distant');
 		svp_supprimer_depot($id_depot);
 		spip_log("ACTION SUPPRIMER DEPOT (manuel) : id_depot = ". $id_depot, 'svp_actions.' . _LOG_INFO);
 	}

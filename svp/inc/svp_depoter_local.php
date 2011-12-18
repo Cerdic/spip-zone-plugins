@@ -51,7 +51,7 @@ function svp_base_supprimer_paquets_locaux() {
  * @param array $plugins liste d'identifiant de plugins
 **/
 function svp_base_modifier_paquets_locaux($paquets_locaux) {
-	include_spip('inc/svp_depoter');
+	include_spip('inc/svp_depoter_distant');
 
 	// On ne va modifier QUE les paquets locaux qui ont change
 	// Et cela en comparant les md5 des informations fouries.
@@ -150,7 +150,7 @@ function svp_corriger_vmax_plugins($plugins) {
 
 
 function svp_base_inserer_paquets_locaux($paquets_locaux) {
-	include_spip('inc/svp_depoter');
+	include_spip('inc/svp_depoter_distant');
 	
 	// On initialise les informations specifiques au paquet :
 	// l'id du depot et les infos de l'archive

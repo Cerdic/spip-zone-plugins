@@ -29,7 +29,7 @@ function formulaires_ajouter_depot_verifier_dist(){
 }
 
 function formulaires_ajouter_depot_traiter_dist(){
-	include_spip('inc/svp_depoter');
+	include_spip('inc/svp_depoter_distant');
 
 	$retour = array();
 	$xml = _request('xml_paquets');

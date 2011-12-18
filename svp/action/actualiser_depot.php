@@ -20,7 +20,7 @@ function action_actualiser_depot_dist(){
 	// Le depot lui-meme n'est mis a jour que partiellement via le fichier XML une fois que
 	// la premiere insertion a ete effectuee. En effet, seules les infos non editables dans le prive
 	// peuvent etre actualisees lors de cette action
-	include_spip('inc/svp_depoter');
+	include_spip('inc/svp_depoter_distant');
 	if ($arg === 'tout') {
 		if ($ids_depots = sql_allfetsel('id_depot', 'spip_depots')) {
 			$ids_depots = array_map('reset', $ids_depots);

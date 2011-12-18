@@ -3,7 +3,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function genie_svp_actualiser_depots_dist ($last) {
 
-	include_spip('inc/svp_depoter');
+	include_spip('inc/svp_depoter_distant');
 
 	// On recupere en base de donnees tous les depots a mettre a jour
 	if ($resultats = sql_select('id_depot', 'spip_depots')) {
