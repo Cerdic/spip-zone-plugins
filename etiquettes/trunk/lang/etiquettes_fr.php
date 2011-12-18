@@ -19,6 +19,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'se_deconnecter' => 'Vous pouvez vous d&eacute;connecter en cliquant ici.',
 
+'tag_aucun' => 'Aucun tag',
+'label_tags' => 'Ajouter un tag',
+'tag_placeholder' => 'Ajouter un tag',
+'tag_ajoutes' => 'Les tags ont été ajoutés',
+
 'zbug_et_parametre_manquant' => ' et vous n\'avez pas sp&eacute;cifi&eacute; d\'objet &agrave; lier en param&egrave;tre.<br/>=&gt; Lisez la doc !', 
 'zbug_objet_existe_pas' => 'L\'objet (@type@, @id@), sp&eacute;cifi&eacute; pour la balise @champ@, n\'existe pas.',
 'zbug_objet_mal_forme' => 'L\'objet (@objet@), sp&eacute;cifi&eacute; pour la balise @champ@, est mal form&eacute;.<br/>=&gt; Lisez la doc !',
