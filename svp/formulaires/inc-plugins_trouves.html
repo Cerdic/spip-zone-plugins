@@ -13,11 +13,12 @@
 <BOUCLE_plugins_trouves(DATA) {source table, #GET{plugins}}>
 		<li class="item[(#VALEUR{installe}|oui) installe]"[ id="(#VALEUR{prefixe}|strtolower)-#COMPTEUR_BOUCLE-#VALEUR{score}"]>
 		[(#REM) <!-- Checkbox action multiple -->]
+		[(#VALEUR{installe}|non)
 			<div class="check">
-				<input type="checkbox" class="checkbox" name="ids_paquet[]" value="#ID_PAQUET"
-					[(#ID_PAQUET|in_any{#ENV{ids_paquet}}) checked="checked"]
-					[(#VALEUR{installe}|oui) disabled="disabled"] />
+				<input type="checkbox" class="checkbox" name="ids_paquet[(#VAL{91}|chr)][(#VAL{93}|chr)]" value="#ID_PAQUET"
+					[(#ID_PAQUET|in_any{#ENV{ids_paquet}}) checked="checked"] />
 			</div>
+		]
 			[(#REM) <!-- Resume du plugin -->]
 			<div class="resume">
 				<h3 class="nom"><a[ href="(#VALEUR{version})"] rel="info">[(#VALEUR{nom})]</a></h3>
