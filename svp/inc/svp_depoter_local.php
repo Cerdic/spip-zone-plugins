@@ -6,15 +6,13 @@ function svp_actualiser_paquets_locaux() {
 	spip_timer('paquets_locaux');
 	$paquets = svp_descriptions_paquets_locaux();
 
-#	$hash = md5(serialize($paquets) . $GLOBALS['meta']['plugin']);
-#	include_spip('inc/config');
-#	if (lire_config('stp/hash_local') != $hash) {
-		svp_base_supprimer_paquets_locaux();
-		svp_base_inserer_paquets_locaux($paquets);
-#		ecrire_config('stp/hash_local', $hash);
-#	}
-	$temps = spip_timer('paquets_locaux');
+#	svp_base_supprimer_paquets_locaux();
+#	svp_base_inserer_paquets_locaux($paquets);
+	svp_base_modifier_paquets_locaux($paquets);
 
+	$temps = spip_timer('paquets_locaux');
+#spip_log('svp_actualiser_paquets_locaux', 'SVP');
+#spip_log($temps, 'SVP');
 	return "Éxécuté en : " . $temps;
 	
 }
@@ -45,6 +43,112 @@ function svp_base_supprimer_paquets_locaux() {
 }
 
 
+/**
+ * Actualise les informations en base
+ * sur les paquets locaux
+ * en ne modifiant que ce qui a changé.
+ *
+ * @param array $plugins liste d'identifiant de plugins
+**/
+function svp_base_modifier_paquets_locaux($paquets_locaux) {
+	include_spip('inc/svp_depoter');
+
+	// On ne va modifier QUE les paquets locaux qui ont change
+	// Et cela en comparant les md5 des informations fouries.
+	$signatures = array();
+
+	// creer la liste des signatures
+	foreach($paquets_locaux as $const_dir => $paquets) {
+		foreach ($paquets as $chemin => $paquet) {
+			$md5 = md5($const_dir . $chemin . serialize($paquet));
+			$signatures[$md5] = array(
+				'constante' => $const_dir,
+				'chemin'    => $chemin,
+				'paquet'    => $paquet,
+			);
+		}
+	}
+
+	// tous les paquets du depot qui ne font pas parti des signatures
+	$anciens_paquets = sql_allfetsel('id_paquet', 'spip_paquets', array('id_depot=' . sql_quote(0), sql_in('signature', array_keys($signatures), 'NOT')));
+	$anciens_paquets = array_map('array_shift', $anciens_paquets);
+
+	// tous les plugins correspondants aux anciens paquets
+	$anciens_plugins = sql_allfetsel('p.id_plugin',	array('spip_plugins AS p', 'spip_paquets AS pa'), array('p.id_plugin=pa.id_plugin', sql_in('pa.id_paquet', $anciens_paquets)));
+	$anciens_plugins = array_map('array_shift', $anciens_plugins);
+
+	// suppression des anciens paquets
+	sql_delete('spip_paquets', sql_in('id_paquet', $anciens_paquets));
+	
+	// corriger les vmax (et supprimer les plugins orphelins)
+	svp_corriger_vmax_plugins($anciens_plugins);
+
+	// on ne garde que les paquets qui ne sont pas presents dans la base
+	$signatures_base = sql_allfetsel('signature', 'spip_paquets', 'id_depot='.sql_quote(0));
+	$signatures_base = array_map('array_shift', $signatures_base);
+	$signatures = array_diff_key($signatures, array_flip($signatures_base));
+
+	// on recree la liste des paquets locaux a inserer
+	$paquets_locaux = array();
+	foreach ($signatures as $s => $infos) {
+		if (!isset($paquets_locaux[$infos['constante']])) {
+			$paquets_locaux[$infos['constante']] = array();
+		}
+		$infos['paquet']['signature'] = $s;
+		$paquets_locaux[$infos['constante']][$infos['chemin']] = $infos['paquet'];
+	}
+
+	svp_base_inserer_paquets_locaux($paquets_locaux);
+}
+
+
+/**
+ * Détermine la version max
+ * de chaque plugin, c'est a dire
+ * la version maxi d'un des paquets qui lui est lié.
+ *
+ * Supprime les plugins devenus orphelins dans cette liste.
+ *
+ * @param array $plugins liste d'identifiant de plugins
+**/
+function svp_corriger_vmax_plugins($plugins) {
+	// tous les plugins encore lies a des depots...
+	// la vmax est a retablir...
+	if ($plugins) {
+		$p = sql_allfetsel('DISTINCT(p.id_plugin)', array('spip_plugins AS p', 'spip_paquets AS pa'), array(sql_in('p.id_plugin', $plugins), 'p.id_plugin=pa.id_plugin'));
+		$p = array_map('array_shift', $p);
+		$diff = array_diff($plugins, $p);
+		// pour chaque plugin non encore utilise, on les vire !
+		sql_delete('spip_plugins', sql_in('id_plugin', $diff));
+	
+		// pour les autres, on la fixe correctement
+		$vmax = 0;
+		
+		// On insere, en encapsulant pour sqlite...
+		if (sql_preferer_transaction()) {
+			sql_demarrer_transaction();
+		}
+				
+		foreach ($p as $id_plugin) {
+			if ($pa = sql_allfetsel('version', 'spip_paquets', 'id_plugin='.$id_plugin)) {
+				foreach ($pa as $v) {
+					if (spip_version_compare($v['version'], $vmax, '>')) {
+						$vmax = $v['version'];
+					}
+				}
+			}
+			sql_updateq('spip_plugins', array('vmax'=>$vmax), 'id_plugin=' . intval($id_plugin));
+		}
+		
+		if (sql_preferer_transaction()) {
+			sql_terminer_transaction();
+		}
+	}
+}
+
+
+
+
 function svp_base_inserer_paquets_locaux($paquets_locaux) {
 	include_spip('inc/svp_depoter');
 	
@@ -57,6 +161,8 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 		'maj_archive' => '',
 		'src_archive' => '',
 		'date_modif' => '',
+		'maj_version' => '',
+		'signature' => '',
 	);
 
 	$preparer_sql_paquet = charger_fonction('preparer_sql_paquet', 'plugins');
@@ -114,7 +220,7 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 				$le_paquet['recent']      = isset($recents[$chemin]) ? $recents[$chemin] : 0;
 				$le_paquet['installe']    =  in_array($chemin, $installes) ? 'oui': 'non'; // est desinstallable ?
 				$le_paquet['obsolete']    =  'non';
-				$le_paquet['maj_version'] = '';
+				$le_paquet['signature']    =  $paquet['signature'];
 				
 				$actif = "non";
 				if (isset($actifs[$prefixe])
@@ -204,6 +310,10 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 		}
 
 		sql_insertq_multi('spip_paquets', $insert_paquets);
+	}
+
+	if (count($cle_plugins)) {
+		svp_corriger_vmax_plugins(array_values($cle_plugins));
 	}
 }
 
