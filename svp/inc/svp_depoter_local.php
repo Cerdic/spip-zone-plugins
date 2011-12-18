@@ -9,6 +9,7 @@ function svp_actualiser_paquets_locaux() {
 #	svp_base_supprimer_paquets_locaux();
 #	svp_base_inserer_paquets_locaux($paquets);
 	svp_base_modifier_paquets_locaux($paquets);
+	svp_base_actualiser_paquets_actifs();
 
 	$temps = spip_timer('paquets_locaux');
 #spip_log('svp_actualiser_paquets_locaux', 'SVP');
@@ -16,7 +17,6 @@ function svp_actualiser_paquets_locaux() {
 	return "Éxécuté en : " . $temps;
 	
 }
-
 
 
 function svp_descriptions_paquets_locaux() {
@@ -315,6 +315,60 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 	if (count($cle_plugins)) {
 		svp_corriger_vmax_plugins(array_values($cle_plugins));
 	}
+}
+
+
+/**
+ * Fait correspondre l'état des métas des plugins actifs & installés
+ * avec ceux en base de données dans spip_paquets pour le dépot local 
+**/
+function svp_base_actualiser_paquets_actifs() {
+	$installes  = lire_config('plugin_installes');
+	$actifs  = lire_config('plugin');
+	$locaux = sql_allfetsel(
+		array('pa.id_paquet', 'pl.prefixe', 'pa.actif', 'pa.installe', 'pa.constante', 'pa.src_archive'),
+		array('spip_paquets AS pa', 'spip_plugins AS pl'),
+		array('pa.id_plugin=pl.id_plugin', 'id_depot='.sql_quote(0)));
+	$changements = array();
+	
+	foreach ($locaux as $l) {
+		$copie = $l;
+		// actif ?
+		if (isset($actifs[$l['prefixe']])
+			and ($actifs[$l['prefixe']]['dir_type'] == $l['constante'])
+			and ($actifs[$l['prefixe']]['dir'] == $l['src_archive'])) {
+			$copie['actif'] = "oui";
+		} else {
+			$copie['actif'] = "non";
+		}
+			
+		// installe ?
+		if (in_array($l['src_archive'], $installes)) {
+			$copie['installe'] = "oui";
+		} else {
+			$copie['installe'] = "non";
+		}
+
+		if ($copie != $l) {
+			$changements[ $l['id_paquet'] ] = array( 'actif'=> $copie['actif'], 'installe'=>$copie['installe'] );
+		}
+	}
+
+	if (count($changements)) {
+		// On insere, en encapsulant pour sqlite...
+		if (sql_preferer_transaction()) {
+			sql_demarrer_transaction();
+		}
+				
+		foreach ($changements as $id_paquet => $data) {
+			sql_updateq('spip_paquets', $data, 'id_paquet=' . intval($id_paquet));
+		}
+		
+		if (sql_preferer_transaction()) {
+			sql_terminer_transaction();
+		}
+	}
+
 }
 
 ?>

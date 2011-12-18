@@ -51,6 +51,7 @@ function formulaires_admin_plugin_traiter_dist($voir='actif', $verrouille='non')
 			switch ($a) {
 				case 'activer':
 					$action = 'ajoute';
+				
 				case 'desactiver':
 					if (!$action) {
 						$action = 'enleve';
@@ -90,6 +91,16 @@ function formulaires_admin_plugin_traiter_dist($voir='actif', $verrouille='non')
 					if ($dels) {
 						include_spip('inc/plugin');
 						ecrire_plugin_actifs($dels, false, 'enleve');
+					}
+					break;
+					
+				case 'supprimer':
+					$del = sql_fetsel(
+						array('constante', 'src_archive'), 'spip_paquets',
+						sql_in('id_paquet', $ids_paquets));
+					if ($del) {
+						$dir = constant($del['constante']) . $del['src_archive'];
+						supprimer_repertoire($dir);
 					}
 					break;
 			}
