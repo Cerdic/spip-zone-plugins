@@ -1,7 +1,7 @@
 <B_plugins>
 <div class="liste plugins">
 	<ul class="liste-items">
-<BOUCLE_plugins(PAQUETS plugins){!par constante, actif}{par prefixe}{id_depot=0}{actif ?}{constante ?IN #ENV{constante}}>
+<BOUCLE_plugins(PAQUETS plugins){par multi nom, prefixe}{!par constante, actif}{id_depot=0}{actif ?}{constante ?IN #ENV{constante}}>
 		<li class="item[ (#ACTIF|=={oui}|?{actif,inactif})][(#OBSOLETE|=={oui}|oui) disabled][(#CONSTANTE|=={_DIR_EXTENSIONS}|oui) verrou][(#MAJ_VERSION|oui) up]"[ id="(#PREFIXE|strtolower)-#COMPTEUR_BOUCLE"]>
 			[(#OBSOLETE|=={oui}|non)
 			<div class="check">
