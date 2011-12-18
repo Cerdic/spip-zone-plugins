@@ -9,6 +9,7 @@ function formulaires_charger_plugin_charger_dist(){
 		'etat' => _request('etat'),
 		'depot' => _request('depot'),
 		'doublon' => _request('doublon'),
+		'exclusion' => _request('exclusion'),
 		'ids_paquet' => _request('ids_paquet'),
 		'_todo' => _request('_todo'));
 }

@@ -389,7 +389,8 @@ function critere_compatible_spip_dist($idb, &$boucles, $crit) {
 
 function filtre_construire_recherche_plugins($phrase='', $categorie='', $etat='', $depot='', $afficher_exclusions=true, $afficher_doublons=false) {
 
-	// On a demande une recherche (bouton rechercher)
+	// On traite les paramètres d'affichage
+	$afficher_exclusions = ($afficher_exclusions == 'oui') ? true : false;
 	$afficher_doublons = ($afficher_doublons == 'oui') ? true : false;
 
 	$tri = ($phrase) ? 'score' : 'nom';
