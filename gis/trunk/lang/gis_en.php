@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_lier' => 'Link this point',
-	'bouton_supprimer_gis' => 'Delete this point permanently', # MODIF
+	'bouton_supprimer_gis' => 'Delete this point permanently',
 	'bouton_supprimer_lien' => 'Remove this link',
 
 	// C
