@@ -241,12 +241,13 @@ class Decideur {
 		$this->log('- stopper ' . $info['p']);
 		$this->remove($info);
 		$this->off[$info['p']] = $info;
+
 		// si recursif, on stoppe aussi les plugins dependants
 		if ($recur) {
 			foreach ($this->end['i'] as $id => $plug) {
 				if (is_array($plug['dn']) and $plug['dn']) {
 					foreach ($plug['dn'] as $n) {
-						if ($info['p'] == $n['id']) {
+						if ($info['p'] == strtoupper($n['nom'])) {
 							$this->change($plug, 'off');
 							$this->off($plug, true);
 							$this->mefiance = true;
