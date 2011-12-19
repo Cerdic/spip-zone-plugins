@@ -6,7 +6,7 @@
 		[erational->http://www.erational.org], [le module de choix de couleur par Steven Wittens->http://acko.net/dev/farbtastic]
 	</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.5.0</version>
+	<version>0.5.1</version>
 	<etat>experimental</etat>
 	<description>Permet de modifier les couleurs de l'habillage par d&#233;faut (squelette dist) du site SPIP via une interface graphique sans avoir &#224; &#233;diter le code</description>
 	<prefix>coloriagedist</prefix>
