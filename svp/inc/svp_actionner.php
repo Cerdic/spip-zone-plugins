@@ -518,13 +518,17 @@ class Actionneur {
 		}
 
 		$i = sql_fetsel('*','spip_paquets','id_paquet='.sql_quote($info['i']));
-
+$this->log($info);
+$this->log($i);
 		// on cherche la mise a jour...
 		// c'est a dire le paquet source que l'on met a jour.
-		if ($maj = sql_fetsel('*','spip_paquets',array(
-			'prefixe='.sql_quote($info['p']),
-			'version='.sql_quote($info['maj']),
-			'superieur='.sql_quote('oui')))) {
+		if ($maj = sql_fetsel('pa.*',
+			array('spip_paquets AS pa', 'spip_plugins AS pl'),
+			array(
+			'pl.prefixe='.sql_quote($info['p']),
+			'pa.version='.sql_quote($info['maj']),
+			'pa.id_depot>'.sql_quote(0)),
+			'', 'pa.etatnum DESC', '0,1')) {
 				
 			if ($dirs = $this->get_paquet_id($maj)) {
 				// Si le plugin a jour n'est pas dans le meme dossier que l'ancien...
