@@ -46,7 +46,7 @@ function formulaires_admin_plugin_verifier_dist($voir='actif', $verrouille='non'
 		$a_actionner = array();
 		
 		// actions globales...
-		if ($action_globale = _request('appliquer')) {
+		if ($action_globale = _request('action_globale') AND _request('appliquer')) {
 			$ids_paquet = _request('ids_paquet');
 			foreach ($ids_paquet as $i) {
 				$a_actionner[$i] = $action_globale;

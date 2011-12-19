@@ -12,7 +12,32 @@
 				<p class="explication"><:texte_presente_plugin:></p>
 				<INCLURE{fond=formulaires/inc-admin_plugin,env} />
 			</fieldset>
-			<p class="boutons" style="display:none"><input type="submit" name="appliquer" class="submit" value="<:svp:bouton_appliquer:>" /></p>
+		</div>
+		<div class="actions_multiples">
+			<fieldset class="boutons">
+				<p class="cocher"><a href="#" id="select_tous"><:svp:tout_cocher:></a> | <a href="#" id="select_aucun"><:svp:tout_decocher:></a></p>
+				<select class="action" name="action_globale">
+					<option value="on"><:svp:bouton_activer:></option>
+					<option value="off"><:svp:bouton_desactiver:></option>
+					<option value="up"><:svp:bouton_up:></option>
+					<option value="stop"><:svp:bouton_desinstaller:></option>
+				</select>
+				<input type="submit" class="submit" name="appliquer" value="<:svp:bouton_appliquer:>" />
+			</fieldset>
+			<script type="text/javascript">
+			//<![CDATA[
+				jQuery(function(){
+					jQuery("#select_tous").click(function(){
+						jQuery("input.select_plugin").attr("checked",true);
+						return false;
+					});
+					jQuery("#select_aucun").click(function(){
+						jQuery("input.select_plugin").attr("checked",false);
+						return false;
+					});
+				});
+			//]]>
+			</script>
 		</div>
 	</form>
 </div>

@@ -7,7 +7,7 @@
 		<li class="item[ (#ACTIF|=={oui}|?{actif,inactif})][(#OBSOLETE|=={oui}|ou{#GET{incompatible}}|oui) disabled][(#CONSTANTE|=={_DIR_EXTENSIONS}|oui) verrou][(#MAJ_VERSION|oui) up]"[ id="(#PREFIXE|strtolower)-#COMPTEUR_BOUCLE"]>
 			[(#OBSOLETE|=={non}|et{#CONSTANTE|!={_DIR_EXTENSIONS}}|et{#GET{incompatible}|non}|oui)
 			<div class="check">
-				<input type="checkbox" class="checkbox select_plugin" name="id_paquets[(#VAL{91}|chr)][(#VAL{93}|chr)]" value="#ID_PAQUET" />
+				<input type="checkbox" class="checkbox select_plugin" name="ids_paquet[(#VAL{91}|chr)][(#VAL{93}|chr)]" value="#ID_PAQUET" />
 			</div>]
 			[(#REM) <!-- Resume du plugin -->]
 			<div class="resume">

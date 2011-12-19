@@ -230,6 +230,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_paquets' => 'Paquets',
 	'titre_plugin' => 'Plugin',
 	'titre_plugins' => 'Plugins',
+	'tout_cocher' => 'Tout cocher',
+	'tout_decocher' => 'Tout décocher',
 );
 
 ?>
