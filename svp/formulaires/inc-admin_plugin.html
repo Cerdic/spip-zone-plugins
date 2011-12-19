@@ -51,8 +51,10 @@
 			[(#MAJ_VERSION|oui)
 			[(#CHEMIN_IMAGE{update-16.png}|balise_img{<:svp:plugin_info_up:>,picto_up}|inserer_attribut{title,<:svp:plugin_info_up{version=#MAJ_VERSION}:>})]
 			]
-			[(#OBSOLETE|=={oui}|oui)
-			[(#CHEMIN_IMAGE{plugin-dis-16.png}|balise_img{<:plugin_info_non_compatible_spip:>,picto_err}|inserer_attribut{title,<:plugin_info_non_compatible_spip:>})]
+			[(#OBSOLETE|=={oui}|ou{#GET{incompatible}}|oui)
+				[(#OBSOLETE|=={oui}|oui) [(#SET{err, <:svp:info_plugin_obsolete:>})]]
+				[(#GET{incompatible}|oui) [(#SET{err, <:svp:info_plugin_incompatible:>})]]
+				[(#CHEMIN_IMAGE{plugin-dis-16.png}|balise_img{#GET{err}, picto_err}|inserer_attribut{title, #GET{err}})]
 			]
 			<div class="details" style="display:none">
 				<dl class="description">
