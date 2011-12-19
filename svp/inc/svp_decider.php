@@ -150,7 +150,10 @@ class Decideur {
 					$d[$cle] = $dep;
 				}
 			}
-			
+			// passer les prefixes en majuscule
+			foreach($d['necessite'][0] as $i=>$n) {
+				$d['necessite'][0][$i]['nom'] = strtoupper($n['nom']);
+			}
 			$plugs['i'][$r['i']]['dn'] = $d['necessite'][0];
 			$plugs['i'][$r['i']]['du'] = $d['utilise'][0];
 			$plugs['i'][$r['i']]['dl'] = $d['librairie'][0];
@@ -247,7 +250,7 @@ class Decideur {
 			foreach ($this->end['i'] as $id => $plug) {
 				if (is_array($plug['dn']) and $plug['dn']) {
 					foreach ($plug['dn'] as $n) {
-						if ($info['p'] == strtoupper($n['nom'])) {
+						if ($info['p'] == $n['nom']) {
 							$this->change($plug, 'off');
 							$this->off($plug, true);
 							$this->mefiance = true;
@@ -530,7 +533,7 @@ class Decideur {
 		if (is_array($info['dn']) and count($info['dn'])) {
 			foreach ($info['dn'] as $n) {
 
-				$p = strtoupper($n['nom']);
+				$p = $n['nom'];
 				$v = $n['compatibilite'];
 
 				if ($p == 'SPIP') {
@@ -540,7 +543,7 @@ class Decideur {
 
                 // le core procure le paquet que l'on demande !
                 elseif ((array_key_exists($p, $this->procure))
-                  and (plugin_version_compatible($v, $this->procure[strtoupper($p)]))) {
+                  and (plugin_version_compatible($v, $this->procure[$p]))) {
                     // rien a faire...
                     $this->log("-- est procure par le core ($p)");
 
