@@ -8,7 +8,7 @@ if (!defined('_DIR_LIB')) {
 
 // passer ou pas en mode debug
 if (!defined('_SVP_DEBUG')) {
-	define('_SVP_DEBUG', false);
+	define('_SVP_DEBUG', true);
 }
 
 

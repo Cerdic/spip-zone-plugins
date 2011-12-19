@@ -326,7 +326,7 @@ class Actionneur {
 				$oks = &$ok;
 				$ok_texte = $ok ? 'ok' : 'fail';
 				$cle_t = 'svp:message_action_finale_' . $i['todo'] . '_' . $ok_texte;
-				$texte = _T($cle_t, array('plugin' => $i['n'], 'version' => $i['v']));
+				$texte = _T($cle_t, array('plugin' => $i['n'], 'version' => $i['v'], 'version_maj'=>$i['maj']));
 				if (is_string($i['done'])) {
 					$texte .= " <span class='$ok_texte'>$i[done]</span>";
 				}
@@ -339,7 +339,7 @@ class Actionneur {
 		if (count($this->end)) {
 			$todo .= "<ul>";
 			foreach ($this->end as $i) {
-				$todo .= "\t<li>"._T('svp:message_action_'.$i['todo'],array('plugin'=>$i['n'],'version'=>$i['v']))."</li>\n";
+				$todo .= "\t<li>"._T('svp:message_action_'.$i['todo'],array('plugin'=>$i['n'],'version'=>$i['v'], 'version_maj'=>$i['maj']))."</li>\n";
 			}
 			$todo .= "</ul>\n";
 			$titre = ($fin ? _T('svp:actions_non_traitees') : _T('svp:actions_a_faire'));
@@ -518,8 +518,7 @@ class Actionneur {
 		}
 
 		$i = sql_fetsel('*','spip_paquets','id_paquet='.sql_quote($info['i']));
-$this->log($info);
-$this->log($i);
+
 		// on cherche la mise a jour...
 		// c'est a dire le paquet source que l'on met a jour.
 		if ($maj = sql_fetsel('pa.*',
