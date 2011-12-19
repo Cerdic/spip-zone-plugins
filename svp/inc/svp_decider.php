@@ -354,7 +354,7 @@ class Decideur {
 							$i = $this->infos_courtes_id($id);
 							if ($i['i'][$id]) {
 								$this->add($i['i'][$id]);
-								$this->ask($i['i'][$id], $i['local'] ? 'on' : 'geton' );
+								$this->ask($i['i'][$id], $i['i'][$id]['local'] ? 'on' : 'geton' );
 							} else {
 								// la c'est vraiment pas normal... Erreur plugin inexistant...
 								// concurrence entre administrateurs ?

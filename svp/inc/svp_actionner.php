@@ -597,6 +597,7 @@ class Actionneur {
 				include_spip('inc/plugin');
 				ecrire_plugin_actifs(array($dossier), false, 'enleve');
 				sql_updateq('spip_paquets', array('actif'=>'non', 'installe'=>'non'), 'id_paquet='.sql_quote($info['i']));
+				return true;
 			} else {
 				// echec
 				$this->log("Échec de la désinstallation de " . $i['src_archive']);
