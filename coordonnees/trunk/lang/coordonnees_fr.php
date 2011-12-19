@@ -48,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_boite_postale' => 'Boîte Postale',
 	'label_code_postal' => 'Code Postal',
-	'label_complement' => 'Complément', # MODIF
+	'label_complement' => 'Complément',
 	'label_email' => 'Courriel',
 	'label_numero' => 'Numéro',
 	'label_objets_actifs' => 'Objets',
