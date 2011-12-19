@@ -146,7 +146,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_action_upon' => 'Mise à jour et activation du plugin « @plugin@ » (version : @version@)',
 	'message_action_install' => 'Le plugin « @plugin@ » (version : @version@) va être installé',
 	'message_action_kill' => 'Suppression des fichiers du plugin « @plugin@ » (version : @version@)',
-	'message_action_off' => 'Désinstaller le plugin « @plugin@ » (version : @version@)',
+	'message_action_off' => 'Désactiver le plugin « @plugin@ » (version : @version@)',
 	'message_action_stop' => 'Désinstaller le plugin « @plugin@ » (version : @version@)',
 
 
