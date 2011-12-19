@@ -210,7 +210,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // P
 	'plugins_inactifs_liste' => 'Inactifs',
-	'plugin_info_up' => 'Une mise à jour du plugin est disponible',
+	'plugin_info_up' => 'Une mise à jour du plugin est disponible (version @version@)',
 	'plugins_verrouilles_liste' => 'Verrouillés',
 	'plugins_non_verrouilles_liste' => 'Non verrouillés',
 
