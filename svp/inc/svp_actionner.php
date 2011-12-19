@@ -567,7 +567,7 @@ class Actionneur {
 		// il faudra prendre en compte les autres _DIR_xx
 		if (in_array($i['constante'], array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL'))) {
 			include_spip('inc/plugin');
-			$dossier = ($i['constante'] == '_DIR_PLUGINS') ? $i['dossier'] : '../' . constant($i['constante']) . $i['dossier'];
+			$dossier = ($i['constante'] == '_DIR_PLUGINS') ? $i['src_archive'] : '../' . constant($i['constante']) . $i['src_archive'];
 			ecrire_plugin_actifs(array(rtrim($dossier,'/')), false, 'enleve');
 			sql_updateq('spip_paquets', array('actif'=>'non', 'installe'=>'non'), 'id_paquet='.sql_quote($info['i']));
 			$this->actualiser_plugin_interessants();
@@ -586,20 +586,20 @@ class Actionneur {
 		// il faudra prendre en compte les autres _DIR_xx
 		if (in_array($i['constante'], array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL'))) {
 			include_spip('inc/plugin');
-			$dossier = rtrim($i['dossier'],'/');
+			$dossier = rtrim($i['src_archive'],'/');
 			$constante = $i['constante'];
 
 			# $constante = $this->donner_chemin_constante_plugins( $i['constante'] );
 				
 			$installer_plugins = charger_fonction('installer', 'plugins');
-			$infos = $installer_plugins($del['src_archive'], 'uninstall');
+			$infos = $installer_plugins($dossier, 'uninstall');
 			if ($infos AND !$infos['install_test'][0]) {
 				include_spip('inc/plugin');
-				ecrire_plugin_actifs(array($del['src_archive']), false, 'enleve');
+				ecrire_plugin_actifs(array($dossier), false, 'enleve');
 				sql_updateq('spip_paquets', array('actif'=>'non', 'installe'=>'non'), 'id_paquet='.sql_quote($info['i']));
 			} else {
 				// echec
-				$this->log("Échec de la désinstallation de " . $del['src_archive']);
+				$this->log("Échec de la désinstallation de " . $i['src_archive']);
 			}
 		}
 		$this->actualiser_plugin_interessants();
@@ -615,8 +615,8 @@ class Actionneur {
 		$i = sql_fetsel('*','spip_paquets','id_paquet='.sql_quote($info['i']));
 
 		if (in_array($i['constante'], array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL'))
-		and substr($i['dossier'], 0, 5) == 'auto/') {
-			$dir = constant($i['constante']) . $i['dossier'];
+		and substr($i['src_archive'], 0, 5) == 'auto/') {
+			$dir = constant($i['constante']) . $i['src_archive'];
 			if (supprimer_repertoire($dir)) {
 				sql_delete('spip_paquets', 'id_paquet=' . sql_quote($info['i']));
 				return true;
