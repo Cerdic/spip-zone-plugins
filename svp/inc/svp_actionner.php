@@ -186,7 +186,7 @@ class Actionneur {
 		$this->middle['on'] = array_values($this->middle['on']);
 		// ajout des dependance
 		foreach ($info['dn'] as $dep) {
-			$in[]  = $dep['id'];
+			$in[]  = strtoupper($dep['nom']);
 		}
 		// ajout des librairies
 		foreach ($info['dl'] as $lib) {
@@ -202,10 +202,11 @@ class Actionneur {
 		foreach ($this->middle['on'] as $inf) {
 			$out[] = $inf['p'];
 			foreach ($inf['dn'] as $dep) {
-				$deps[$inf['p']][] = $dep['id'];
-				$deps_all[] = $dep['id'];
+				$deps[$inf['p']][] = strtoupper($dep['nom']);
+				$deps_all[] = strtoupper($dep['nom']);
 			}
 		}
+
 
 		if (!$in) {
 
@@ -273,7 +274,7 @@ class Actionneur {
 		// raz des cles pour avoir les memes que $out (utile reellement ?)
 		$this->middle['off'] = array_values($this->middle['off']);
 		foreach ($info['dn'] as $dep) {
-			$in[]  = $dep['id'];
+			$in[]  = strtoupper($dep['nom']);
 		}
 		foreach ($this->middle['off'] as $inf) 	{
 			$out[] = $inf['p'];
