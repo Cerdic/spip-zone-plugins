@@ -107,6 +107,7 @@ class Decideur {
 			'pa.maj_version AS maj',
 			'pa.actif AS a'), $from, $where, '', $orderby);
 		foreach ($res as $r) {
+			$r['p'] = strtoupper( $r['p'] ); // on s'assure du prefixe en majuscule.
 			
 			// savoir si un paquet est en local ou non...
 			$r['local'] = ($r['id_depot']) == 0 ? true : false;

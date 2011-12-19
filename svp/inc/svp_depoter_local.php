@@ -204,7 +204,7 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 				}
 
 				// creation du plugin...
-				$prefixe = $le_plugin['prefixe'];
+				$prefixe = strtoupper( $le_plugin['prefixe'] );
 				if (!isset($cle_plugins[$prefixe])) {
 					if (!$id_plugin = sql_getfetsel('id_plugin', 'spip_plugins', 'prefixe = '.sql_quote($prefixe))) {
 						$insert_plugins[$prefixe] = $le_plugin;
