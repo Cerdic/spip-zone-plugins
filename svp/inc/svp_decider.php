@@ -40,7 +40,7 @@ class Decideur {
 
 	/* Liste des plugins deja actifs */
 	function liste_plugins_actifs() {
-		return $this->infos_courtes('actif='.sql_quote('oui'));
+		return $this->infos_courtes('pa.actif='.sql_quote('oui'));
 	}
 
     /* Liste des plugins procure par SPIP */
@@ -67,7 +67,7 @@ class Decideur {
 		// on cache ceux la
 		static $plug = array();
 		if (!isset($plug[$id])) {
-			$plug[$id] = $this->infos_courtes('id_paquet=' . sql_quote($id));
+			$plug[$id] = $this->infos_courtes('pa.id_paquet=' . sql_quote($id));
 		}
 		return $plug[$id];
 	}
@@ -206,7 +206,7 @@ class Decideur {
 		$locaux = $this->infos_courtes(array(
 			'pl.prefixe=' . sql_quote($prefixe),
 			'pa.obsolete=' . sql_quote('non'),
-			'id_depot='.sql_quote(0)), true);
+			'pa.id_depot='.sql_quote(0)), true);
 		if ($locaux and count($locaux['p'][$prefixe]) > 0) {
 			foreach ($locaux['p'][$prefixe] as $new) {
 				if (plugin_version_compatible($version, $new['v'])
@@ -220,7 +220,7 @@ class Decideur {
 		$distants = $this->infos_courtes(array(
 			'pl.prefixe=' . sql_quote($prefixe),
 			'pa.obsolete=' . sql_quote('non'),
-			'id_depot>'.sql_quote(0)), true);
+			'pa.id_depot>'.sql_quote(0)), true);
 		if ($distants and count($distants['p'][$prefixe]) > 0) {
 			foreach ($distants['p'][$prefixe] as $new) {
 				if (plugin_version_compatible($version, $new['v'])
@@ -582,8 +582,8 @@ class Decideur {
 									// c'est que c'est une mise a jour + activation a faire
 									$cache[] = $new;
 									$i = $this->infos_courtes(array(
-											'prefixe=' . sql_quote($new['p']),
-											'maj_version=' . sql_quote($new['v'])
+											'pl.prefixe=' . sql_quote($new['p']),
+											'pa.maj_version=' . sql_quote($new['v'])
 										), true);
 									if (isset($i['p'][$new['p']]) and count($i['p'][$new['p']])) {
 										// c'est une mise a jour

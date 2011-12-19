@@ -325,18 +325,20 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 function svp_base_actualiser_paquets_actifs() {
 	$installes  = lire_config('plugin_installes');
 	$actifs  = lire_config('plugin');
+
 	$locaux = sql_allfetsel(
 		array('pa.id_paquet', 'pl.prefixe', 'pa.actif', 'pa.installe', 'pa.constante', 'pa.src_archive'),
 		array('spip_paquets AS pa', 'spip_plugins AS pl'),
 		array('pa.id_plugin=pl.id_plugin', 'id_depot='.sql_quote(0)));
 	$changements = array();
-	
+
 	foreach ($locaux as $l) {
 		$copie = $l;
+		$prefixe = strtoupper($l['prefixe']);
 		// actif ?
-		if (isset($actifs[$l['prefixe']])
-			and ($actifs[$l['prefixe']]['dir_type'] == $l['constante'])
-			and ($actifs[$l['prefixe']]['dir'] == $l['src_archive'])) {
+		if (isset($actifs[$prefixe])
+			and ($actifs[$prefixe]['dir_type'] == $l['constante'])
+			and ($actifs[$prefixe]['dir'] == $l['src_archive'])) {
 			$copie['actif'] = "oui";
 		} else {
 			$copie['actif'] = "non";
