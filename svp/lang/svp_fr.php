@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_plugin' => 'aucun plugin',
 	'info_boite_charger_plugin' => '<strong>Cette page est uniquement accessible aux webmestres du site.</strong><p>Elle vous permet de rechercher des plugins mis à disposition par les dépôts enregistrés dans votre configuration et de les installer physiquement sur votre serveur</p>',
 	'info_boite_depot_gerer' => '<strong>Cette page est uniquement accessible aux webmestres du site.</strong><p>Elle permet l\'ajout et l\'actualisation des dépôts de plugins.</p>',
-	'info_charger_plugin' => 'Effectuez une recherche multi-critères sur les plugins de la galaxie SPIP (catégorie, état, nom, auteur...). La recherche n\'inclut que les plugins compatibles avec la version SPIP installée et exclut les plugins déjà actifs sur le site.',
+	'info_charger_plugin' => 'Pour ajouter un ou plusieurs plugins, effectuez préalablement une recherche multi-critères sur les plugins de la galaxie SPIP. La recherche n\'inclut que les plugins compatibles avec la version SPIP installée et signale les plugins déjà actifs sur le site.',
 	'info_compatibilite_dependance' => 'Pour @compatibilite@ :',
 	'info_contributions_hebergees' => '@total_autres@ autre(s) contribution(s) hébergée(s)',
 	'info_critere_phrase' => 'Saisissez les mots-clés à chercher dans le préfixe, le nom, le slogan, la description et les auteurs des plugins',
@@ -209,6 +209,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resume_table_plugins' => 'Liste des plugins @categorie@',
 
 // P
+	'placeholder_phrase' => 'préfixe, nom, slogan, description ou auteur',
 	'plugins_inactifs_liste' => 'Inactifs',
 	'plugin_info_up' => 'Une mise à jour du plugin est disponible (version @version@)',
 	'plugins_verrouilles_liste' => 'Verrouillés',

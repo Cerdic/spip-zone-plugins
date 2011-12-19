@@ -22,7 +22,7 @@
 						<label for="phrase"><:svp:label_critere_phrase:></label>
 						<p class="explication"><:svp:info_critere_phrase:></p>
 						[<span class="erreur_message">(#ENV{erreurs}|table_valeur{phrase})</span>]
-						<input type="text" name="phrase" id="phrase" value="#ENV{phrase}" class="text" />
+						<input type="text" name="phrase" id="phrase" value="#ENV{phrase}" class="text" placeholder="<:svp:placeholder_phrase:>" />
 					</li>
 					<li class="editer_categorie obligatoire[(#ENV{erreurs}|table_valeur{categorie}|oui) erreur]">
 						<label for="categorie"><:svp:label_critere_categorie:></label>
