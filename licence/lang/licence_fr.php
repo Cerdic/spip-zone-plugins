@@ -16,9 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_cc_by' => 'Creative Commons - Paternité',
 	'description_cc_by_nc' => 'Creative Commons - Paternité Pas d\'Utilisation Commerciale',
 	'description_cc_by_nc_nd' => 'Creative Commons - Paternité Pas d\'Utilisation Commerciale Pas de Modification',
-	'description_cc_by_nc_sa' => 'Creative Commons - Paternité Pas d\'Utilisation Commerciale Partage des Conditions Initiales à l\'Identique', # MODIF
+	'description_cc_by_nc_sa' => 'Creative Commons - Paternité Pas d\'Utilisation Commerciale Partage des Conditions Initiales à l\'Identique',
 	'description_cc_by_nd' => 'Creative Commons - Paternité pas de modification',
-	'description_cc_by_sa' => 'Creative Commons - Paternité Partage des Conditions Initiales à l\'Identique', # MODIF
+	'description_cc_by_sa' => 'Creative Commons - Paternité Partage des Conditions Initiales à l\'Identique',
 	'description_copyright' => '© copyright auteur de l\'article',
 	'description_gpl' => 'licence GNU/GPL',
 

@@ -20,9 +20,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_cc_by_nc_nd' => 'Creative Commons - Attribution Non-Commercial No Derivatives',
 	'description_cc_by_nc_sa' => 'Creative Commons - Attribution Non-Commercial Share Alike', # MODIF
 	'description_cc_by_nd' => 'Creative Commons - Attribution No Derivatives', # MODIF
-	'description_cc_by_sa' => 'Creative Commons - Attribution Share Alike', # MODIF
+	'description_cc_by_sa' => 'Creative Commons - Attribution Share Alike',
 	'description_copyright' => '© copyright the article\'s author',
-	'description_gpl' => 'GPL License', # MODIF
+	'description_gpl' => 'GNU/GPL License',
 
 	// L
 	'label_select_licence' => 'Choose a license',
@@ -57,7 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_cc_by_sa' => 'CC by-sa',
 	'titre_copyright' => 'Copyright',
 	'titre_gfdl' => 'GNU FDL', # NEW
-	'titre_gpl' => 'Gnu GPL' # MODIF
+	'titre_gpl' => 'GNU GPL'
 );
 
 ?>
