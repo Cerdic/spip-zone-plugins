@@ -871,4 +871,24 @@ class Actionneur {
 	}
 }
 
+
+/**
+ * Fonction pour aider le traitement des actions
+ * dans un formulaire CVT 
+ *
+ * @param array $actions la liste des actions a faire (id_paquet => action)
+ * @param array $retour le tableau de retour du CVT dans la partie traiter
+ * @return bool Action ok.
+**/
+function svp_actionner_traiter_actions_demandees($actions, &$retour) {
+		$actionneur = new Actionneur();
+		$actionneur->log = true;
+		$actionneur->ajouter_actions($actions);
+		$actionneur->verrouiller();
+		$actionneur->sauver_actions();
+
+		$retour['redirect'] = generer_url_action('actionner', 'redirect='. generer_url_ecrire('admin_plugin'));
+		set_request('_todo', '');
+		$retour['message_ok'] = _T("svp:action_patienter");
+}
 ?>

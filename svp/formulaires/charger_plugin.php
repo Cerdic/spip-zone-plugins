@@ -34,7 +34,7 @@ function formulaires_charger_plugin_verifier_dist(){
 		// Requete : Installation d'un ou de plusieurs plugins
 		// -- On construit le tableau des ids de paquets conformement a l'interface du decideur
 		if (_request('installer')) {
-			// L'utilisateur a demander une installation multiple de paquets
+			// L'utilisateur a demande une installation multiple de paquets
 			// -- on verifie la liste des id_paquets uniquement
 			if ($id_paquets = _request('ids_paquet')) {
 				foreach ($id_paquets as $_id_paquet)
@@ -52,33 +52,11 @@ function formulaires_charger_plugin_verifier_dist(){
 		if (!$a_installer)
 			$erreurs = _T('svp:message_nok_aucun_plugin_selectionne');
 		else {
+			
 			// On fait appel au decideur pour determiner la liste exacte des commandes apres
 			// verification des dependances
 			include_spip('inc/svp_decider');
-			$decideur = new Decideur;
-			$decideur->log = true;
-			$decideur->verifier_dependances($a_installer);
-
-			if (!$decideur->ok) {
-				$erreurs['decideur_erreurs'] = array();
-				foreach ($decideur->err as $id=>$errs) {
-					foreach($errs as $err) {
-						$erreurs['decideur_erreurs'][] = $err;
-					}
-				}
-			}
-			else {
-				$erreurs['decideur_propositions'] 	= $decideur->presenter_actions('changes');
-				$erreurs['decideur_demandes'] 		= $decideur->presenter_actions('ask');
-				$erreurs['decideur_actions'] 		= $decideur->presenter_actions('todo');
-
-				// On construit la liste des actions pour la passer au formulaire en hidden
-				$todo = array();
-				foreach ($decideur->todo as $_todo) {
-					$todo[$_todo['i']] = $_todo['todo'];
-				}
-				set_request('_todo', serialize($todo));
-			}
+			svp_decider_verifier_actions_demandees($a_installer, $erreurs);
 		}
 	}
 	
@@ -99,21 +77,9 @@ function formulaires_charger_plugin_traiter_dist(){
 		// lors de l'appel de action/actionner 
 		$actions = unserialize(_request('_todo'));
 		include_spip('inc/svp_actionner');
-		$actionneur = new Actionneur();
-		$actionneur->log = true;
-		$actionneur->ajouter_actions($actions);
-		$actionneur->verrouiller();
-		$actionneur->sauver_actions();
+		svp_actionner_traiter_actions_demandees($actions, $retour);
+	}
 
-		$retour['redirect'] = generer_url_action('actionner', 'redirect='. generer_url_ecrire('admin_plugin'));
-		set_request('_todo', '');
-		$retour['message_ok'] = _T("svp:action_patienter");
-	}
-	else {
-		// On a demande une installation, "installer" ou "installer_paquet" la fonction verifier a appele
-		// le decideur afin de definir la liste des commandes a actionner en fonction des dependances
-		set_request('traitement_fait',1);
-	}
 	$retour['editable'] = true;
 
 	return $retour;

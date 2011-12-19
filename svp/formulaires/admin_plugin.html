@@ -2,6 +2,9 @@
 	<h3 class="titrem">[(#CHEMIN_IMAGE{plugin-24.gif}|balise_img{icone plugin-24,cadre-icone})]<:plugins_liste:></h3>
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<form method="post" action="#ENV{action}">
+
+		<INCLURE{fond=formulaires/inc-svp_confirmer_actions, env} />
+		
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<div class="liste-plugins">
 			<fieldset>

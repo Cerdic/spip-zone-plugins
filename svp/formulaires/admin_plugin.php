@@ -26,6 +26,9 @@ function formulaires_admin_plugin_charger_dist($voir='actif', $verrouille='non')
 	
 	$valeurs['actions'] = array();
 	
+	$valeurs['ids_paquet'] = _request('ids_paquet');
+	$valeurs['_todo'] = _request('_todo');
+			
 	return $valeurs;
 }
 
