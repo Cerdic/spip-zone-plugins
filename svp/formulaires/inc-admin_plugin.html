@@ -28,14 +28,14 @@
 			<div class="actions">
 			[(#OBSOLETE|=={non}|et{#CONSTANTE|!={_DIR_EXTENSIONS}}|et{#GET{incompatible}|non}|oui)
 				[(#ACTIF|=={oui}|oui)
-					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{desactiver})]" class="submit" value="<:svp:bouton_desactiver:>" />
+					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{off})]" class="submit" value="<:svp:bouton_desactiver:>" />
 					[(#INSTALLE|=={oui}|et{#AUTORISER{webmestre}}|oui)
-						<input type="submit" name="[(#ID_PAQUET|svp_nom_action{desinstaller})]" class="submit" value="<:svp:bouton_desinstaller:>" />
+						<input type="submit" name="[(#ID_PAQUET|svp_nom_action{stop})]" class="submit" value="<:svp:bouton_desinstaller:>" />
 					]
 				]
 				[(#ACTIF|=={oui}|non)
-					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{activer})]" class="submit" value="<:svp:bouton_activer:>" />
-					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{supprimer})]" class="submit" value="<:svp:bouton_supprimer:>" />
+					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{on})]" class="submit" value="<:svp:bouton_activer:>" />
+					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{kill})]" class="submit" value="<:svp:bouton_supprimer:>" />
 				]
 				[(#MAJ_VERSION|oui)
 					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{up})]" class="submit" value="<:svp:bouton_up:>" />

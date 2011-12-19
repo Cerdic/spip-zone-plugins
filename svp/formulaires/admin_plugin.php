@@ -33,84 +33,63 @@ function formulaires_admin_plugin_charger_dist($voir='actif', $verrouille='non')
 }
 
 function formulaires_admin_plugin_verifier_dist($voir='actif', $verrouille='non'){
-	$actions = _request('actions');
 
 	$erreurs = array();
 
+	if (_request('annuler_actions')) {
+		// Requete : Annulation des actions d'installation en cours
+		// -- On vide la liste d'actions en cours
+		set_request('_todo', '');
+	} elseif (_request('valider_actions')) {
+		// ...
+	} else {
+		$a_actionner = array();
+		
+		// actions globales...
+		if ($action_globale = _request('appliquer')) {
+			$ids_paquet = _request('ids_paquet');
+			foreach ($ids_paquet as $i) {
+				$a_actionner[$i] = $action_globale;
+			}
+		// action unitaire
+		} else {
+			$actions = _request('actions');
+			// $actions[type][id] = Texte
+			// -> $a_actionner[id] = type
+			foreach ($actions as $action => $p) {
+				foreach ($p as $i => $null) {
+					$a_actionner[$i] = $action;
+				}
+			}			
+		}
+		// lancer les verifications
+		if (!$a_actionner)
+			$erreurs = _T('svp:message_nok_aucun_plugin_selectionne');
+		else {
+			
+			// On fait appel au decideur pour determiner la liste exacte des commandes apres
+			// verification des dependances
+			include_spip('inc/svp_decider');
+			svp_decider_verifier_actions_demandees($a_actionner, $erreurs);
+		}
+	}
+	
 	return $erreurs;
 }
 
 function formulaires_admin_plugin_traiter_dist($voir='actif', $verrouille='non'){
 	
 	$retour = array();
-	
-	$actions = _request('actions');
-	if ($actions) {
-		
-#		refuser_traiter_formulaire_ajax();
-		foreach ($actions as $a=>$ids_paquets) {
-			$ids_paquets = array_keys($ids_paquets);
-			$action = '';
-			switch ($a) {
-				case 'activer':
-					$action = 'ajoute';
-				
-				case 'desactiver':
-					if (!$action) {
-						$action = 'enleve';
-					}
-					// forcer la maj des meta pour les cas de modif de numero de version base via phpmyadmin
-					lire_metas();
-					include_spip('inc/plugin');
-					$paquets = array();
-					$new_paquets = sql_allfetsel(
-						array('pl.prefixe', 'pa.constante', 'pa.src_archive'),
-						array('spip_paquets AS pa', 'spip_plugins AS pl'),
-						array('pl.id_plugin=pa.id_plugin', sql_in('id_paquet', $ids_paquets)));
-					
-					foreach($new_paquets as $c=>$p) {
-						$paquets[ $p['prefixe'] ] = /*constant($p['constante']) . */ $p['src_archive'];
-					}
-					spip_log("Changement des plugins actifs par l'auteur " . $GLOBALS['visiteur_session']['id_auteur'] . ": " . join(',', $paquets));
-					ecrire_plugin_actifs($paquets, false, $action);
-					break;
 
-
-				case 'desinstaller':
-					$del_paquets = sql_allfetsel(
-						array('pl.prefixe', 'pa.constante', 'pa.src_archive'),
-						array('spip_paquets AS pa', 'spip_plugins AS pl'),
-						array('pl.id_plugin=pa.id_plugin', sql_in('id_paquet', $ids_paquets)));
-
-					$installer_plugins = charger_fonction('installer', 'plugins');
-					
-					$dels = array();
-					foreach ($del_paquets as $del) {
-						$infos = $installer_plugins($del['src_archive'], 'uninstall');
-						if ($infos AND !$infos['install_test'][0]) {
-							$dels[] = $del['src_archive'];
-						}
-					}
-					if ($dels) {
-						include_spip('inc/plugin');
-						ecrire_plugin_actifs($dels, false, 'enleve');
-					}
-					break;
-					
-				case 'supprimer':
-					$del = sql_fetsel(
-						array('constante', 'src_archive'), 'spip_paquets',
-						sql_in('id_paquet', $ids_paquets));
-					if ($del) {
-						$dir = constant($del['constante']) . $del['src_archive'];
-						supprimer_repertoire($dir);
-					}
-					break;
-			}
-		}
-		$retour['redirect'] = generer_url_ecrire('admin_plugin');
+	if (_request('valider_actions')) {
+		#refuser_traiter_formulaire_ajax();
+		// Ajout de la liste des actions à l'actionneur
+		// c'est lui qui va effectuer rellement les actions
+		// lors de l'appel de action/actionner 
+		$actions = unserialize(_request('_todo'));
+		include_spip('inc/svp_actionner');
+		svp_actionner_traiter_actions_demandees($actions, $retour);
 	}
-
 		
 	$retour['editable'] = true;
 
