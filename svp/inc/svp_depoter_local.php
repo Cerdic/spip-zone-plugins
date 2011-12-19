@@ -6,9 +6,13 @@ function svp_actualiser_paquets_locaux() {
 	spip_timer('paquets_locaux');
 	$paquets = svp_descriptions_paquets_locaux();
 
-#	svp_base_supprimer_paquets_locaux();
-#	svp_base_inserer_paquets_locaux($paquets);
-	svp_base_modifier_paquets_locaux($paquets);
+	// un mode pour tout recalculer sans désinstaller le plugin... !
+	if (_request('var_mode') == 'vider_paquets_locaux') { 
+		svp_base_supprimer_paquets_locaux();
+		svp_base_inserer_paquets_locaux($paquets);
+	} else {
+		svp_base_modifier_paquets_locaux($paquets);
+	}
 	svp_base_actualiser_paquets_actifs();
 
 	$temps = spip_timer('paquets_locaux');
@@ -24,15 +28,23 @@ function svp_descriptions_paquets_locaux() {
 	liste_plugin_files(_DIR_PLUGINS);
 	liste_plugin_files(_DIR_EXTENSIONS);
 	$get_infos = charger_fonction('get_infos', 'plugins');
-	$res = array(
+	$paquets_locaux = array(
 		'_DIR_PLUGINS'    => $get_infos(array(), false, _DIR_PLUGINS),
 		'_DIR_EXTENSIONS' => $get_infos(array(), false, _DIR_EXTENSIONS),
 	);
 	if (defined('_DIR_PLUGINS_SUPP') and _DIR_PLUGINS_SUPP) {
 		liste_plugin_files(_DIR_PLUGINS_SUPP);
-		$res['_DIR_PLUGINS_SUPP'] = $get_infos(array(), false, _DIR_PLUGINS_SUPP);
+		$paquets_locaux['_DIR_PLUGINS_SUPP'] = $get_infos(array(), false, _DIR_PLUGINS_SUPP);
 	}
-	return $res;
+	
+	// creer la liste des signatures
+	foreach($paquets_locaux as $const_dir => $paquets) {
+		foreach ($paquets as $chemin => $paquet) {
+			$paquets_locaux[$const_dir][$chemin]['signature'] = md5($const_dir . $chemin . serialize($paquet));
+		}
+	}
+	
+	return $paquets_locaux;
 }
 
 
@@ -57,11 +69,10 @@ function svp_base_modifier_paquets_locaux($paquets_locaux) {
 	// Et cela en comparant les md5 des informations fouries.
 	$signatures = array();
 
-	// creer la liste des signatures
+	// recuperer toutes les signatures 
 	foreach($paquets_locaux as $const_dir => $paquets) {
 		foreach ($paquets as $chemin => $paquet) {
-			$md5 = md5($const_dir . $chemin . serialize($paquet));
-			$signatures[$md5] = array(
+			$signatures[$paquet['signature']] = array(
 				'constante' => $const_dir,
 				'chemin'    => $chemin,
 				'paquet'    => $paquet,
@@ -94,7 +105,6 @@ function svp_base_modifier_paquets_locaux($paquets_locaux) {
 		if (!isset($paquets_locaux[$infos['constante']])) {
 			$paquets_locaux[$infos['constante']] = array();
 		}
-		$infos['paquet']['signature'] = $s;
 		$paquets_locaux[$infos['constante']][$infos['chemin']] = $infos['paquet'];
 	}
 
@@ -177,7 +187,7 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 	$recents = lire_config('plugins_interessants');
 	$installes  = lire_config('plugin_installes');
 	$actifs  = lire_config('plugin');
-	
+
 	foreach($paquets_locaux as $const_dir => $paquets) {
 		foreach ($paquets as $chemin => $paquet) {
 			$le_paquet = $paquet_base;
@@ -230,16 +240,21 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 				}
 				$le_paquet['actif'] = $actif;
 				// on recherche d'eventuelle mises a jour existantes
-				if ($res = sql_allfetsel(array('pl.id_plugin','pa.version'),array('spip_plugins AS pl', 'spip_paquets AS pa'), array(
-					'pl.id_plugin = pa.id_paquet',
-					'pa.id_depot>' . sql_quote(0),
-					'pl.prefixe=' . sql_quote($prefixe),
-					'pa.etatnum>=' . sql_quote($le_paquet['etatnum'])))) {
+				if ($res = sql_allfetsel(
+					array('pl.id_plugin', 'pa.version'),
+					array('spip_plugins AS pl', 'spip_paquets AS pa'),
+					array(
+						'pl.id_plugin = pa.id_plugin',
+						'pa.id_depot>' . sql_quote(0),
+						'pl.prefixe=' . sql_quote($prefixe),
+						'pa.etatnum>=' . sql_quote($le_paquet['etatnum']))))
+					{
+
 					foreach ($res as $paquet_distant) {
 						// si version superieure et etat identique ou meilleur,
 						// c'est que c'est une mise a jour possible !
 						if (spip_version_compare($paquet_distant['version'],$le_paquet['version'],'>')) {
-							if (!$le_paquet['maj_version'] or spip_version_compare($paquet_distant['version'], $le_paquet['maj_version'],'>')) {
+							if (!strlen($le_paquet['maj_version']) or spip_version_compare($paquet_distant['version'], $le_paquet['maj_version'], '>')) {
 								$le_paquet['maj_version'] = $paquet_distant['version'];
 							}
 							# a voir si on utilisera...
@@ -248,7 +263,6 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 						}
 					}
 				}
-
 				$insert_paquets[] = $le_paquet;
 			}
 		}
