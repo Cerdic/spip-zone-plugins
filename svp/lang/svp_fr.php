@@ -172,6 +172,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     'message_dependance_plugin' => 'Le plugin @plugin@ dépend de @dependance@.',
     'message_dependance_plugin_version' => 'Le plugin @plugin@ dépend de @dependance@ @version@',
+    'message_erreur_aucun_plugin_selectionne' => 'Aucun plugin sélectionné.',
     'message_erreur_ecriture_lib' => '@plugin@ a besoin de la bibliothèque <a href="@lib_url@">@lib@</a>
    								placée dans le répertoire <var>lib/</var> à la racine de votre site.
    								Cependant, ce répertoire n\'est pas accessible en écriture.

@@ -48,8 +48,12 @@ function formulaires_admin_plugin_verifier_dist($voir='actif', $verrouille='non'
 		// actions globales...
 		if ($action_globale = _request('action_globale') AND _request('appliquer')) {
 			$ids_paquet = _request('ids_paquet');
-			foreach ($ids_paquet as $i) {
-				$a_actionner[$i] = $action_globale;
+			if (!is_array($ids_paquet)) {
+				$erreurs['message_erreur'] = _T('svp:message_erreur_aucun_plugin_selectionne');
+			} else {
+				foreach ($ids_paquet as $i) {
+					$a_actionner[$i] = $action_globale;
+				}
 			}
 		// action unitaire
 		} else {
@@ -64,7 +68,7 @@ function formulaires_admin_plugin_verifier_dist($voir='actif', $verrouille='non'
 		}
 		// lancer les verifications
 		if (!$a_actionner)
-			$erreurs = _T('svp:message_nok_aucun_plugin_selectionne');
+			$erreurs['message_erreur'] = _T('svp:message_erreur_aucun_plugin_selectionne');
 		else {
 			
 			// On fait appel au decideur pour determiner la liste exacte des commandes apres
