@@ -29,7 +29,7 @@
 		<url>mini_doc</url>
 	</bouton>
 	<bouton id="amap_bandeau" parent="bando_configuration">
-		<icone>images/amapconfig-16.gif</icone>
+		<icone>prive/themes/spip/images/amapconfig-16.gif</icone>
 		<titre>amap:gestion_amap</titre>
 		<url>mini_doc</url>
 	</bouton>
@@ -60,6 +60,7 @@
 	<necessite id="agenda" version="[2.2.1;]" />
 	<necessite id="cextras" version="[1.9;]" />
 	<necessite id="facteur" version="[1.6.2;]" />
+	<necessite id="fpdf" version="[0.0.1;]" />
 	<necessite id="Iterateurs" version="[0.4.0;]" />
 	<necessite id="saisies" version="[1.7.7;]" />
 	<necessite id="spip_bonux" version="[2.2.21;]" />

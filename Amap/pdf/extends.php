@@ -4,13 +4,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 define('FPDF_FONTPATH','font/');
-include_spip('pdf/pdf_table');
+include_spip('pdf_table');
 include_spip('inc/charsets');
 
 class PDF extends PDF_Table {
 
 
-var $ajoute;
+var $ajoute_titre;
+var $titre;
 
 	function PDF($orientation='L',$unite='mm',$format='A4',$ajoute_titre=true){
 		$this->ajoute_titre=$ajoute_titre;
@@ -21,12 +22,12 @@ var $ajoute;
 		//Titre
 		if($this->ajoute_titre)
 		{
-		$this->SetFont('Arial','',10);
-		$this->Cell(0,6,_T('amap:liste_paniers'),0,1,'L');
-		$this->SetFont('Arial','B',14);
-		$this->Cell(0,6,unicode2charset(html2unicode($this->titre)),0,1,'C');
-		$this->Ln(10);
-		//Imprime l'en-tête du tableau si nécessaire
+			$this->SetFont('Arial','',10);
+			$this->Cell(0,6,_T('amap:liste_paniers'),0,1,'L');
+			$this->SetFont('Arial','B',14);
+			$this->Cell(0,6,unicode2charset(html2unicode($this->titre)),0,1,'C');
+			$this->Ln(10);
+		//Imprime l'en-tï¿½te du tableau si nï¿½cessaire
 		}
 		parent::Header();
 	}
@@ -42,7 +43,7 @@ var $ajoute;
 	/* le parametre data doit donc etre un tableau de la forme: valeur_champ_jointure => array(champs1=>valeur, champs2=>valeur, ..)  afin d'inserer */
 	/* dans le resultat de la requete les champs champs1 et champ2 en jointure = sur le champs fourni dans l'autre parametre */
 	function Query_extended($res, $prop=array(), $data, $champ_jointure) {
-		//Traite les propriétés
+		//Traite les proprietes
 		if(!isset($prop['width']))
 			$prop['width']=0;
 		if($prop['width']==0)
@@ -63,7 +64,7 @@ var $ajoute;
 		$this->RowColors=array($prop['color1'],$prop['color2']);
 		//Calcule les largeurs des colonnes
 		$this->CalcWidths($prop['width'],$prop['align']);
-		//Imprime l'en-tête
+		//Imprime l'en-tï¿½te
 		$this->TableHeader();
 		//Imprime les lignes
 		$this->SetFont('Arial','',8);
@@ -106,7 +107,7 @@ var $ajoute;
 		foreach($this->aCols as $col) {
 			$this->SetX($x);			
 			$this->MultiCell($col['w'],5*$max_nb_lignes/$nb_lignes[$col['f']],utf8_decode($data[$col['f']]),1,$col['a'],$fill);
-			$this->SetY($this->GetY()-5*$max_nb_lignes); 
+			$this->SetY($this->GetY()-5*$max_nb_lignes);
 			$x += $col['w'];
 			
 
