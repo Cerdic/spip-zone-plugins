@@ -4,7 +4,7 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	<form method="post" action="#ENV{action}">
 
-		<INCLURE{fond=formulaires/inc-svp_confirmer_actions, env} />
+		<INCLURE{fond=formulaires/inc-confirmer_actions, env} />
 		
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<div class="liste-plugins">
