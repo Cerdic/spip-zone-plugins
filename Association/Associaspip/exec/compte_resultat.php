@@ -28,8 +28,11 @@ function exec_compte_resultat() {
 	else {
 		$plan = sql_countsel('spip_asso_plan');
 
-		if (!($annee = _request('annee'))) {
-			$annee = date('Y');
+		$exercice= intval(_request('exercice'));
+		if(!$exercice){
+			/* on recupere l'id_exercice dont la date "fin" est "la plus grande" */
+			$exercice = sql_getfetsel("id_exercice","spip_asso_exercices","","","fin DESC");
+			if(!$exercice) $exercice=0;
 		}
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -42,27 +45,28 @@ function exec_compte_resultat() {
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
 
-		$url_bilan = generer_url_ecrire('bilan', "annee=$annee");
-		$url_annexe = generer_url_ecrire('annexe', "annee=$annee");
-		$res = association_icone(_T('asso:bilan') . " $annee", $url_bilan, 'finances.jpg')
-			. association_icone(_T('asso:annexe_titre_general') . " $annee", $url_annexe, 'finances.jpg');
+		$url_bilan = generer_url_ecrire('bilan', "exercice=$exercice");
+		$url_annexe = generer_url_ecrire('annexe', "exercice=$exercice");
+		$res = association_icone(_T('asso:bilan'), $url_bilan, 'finances.jpg')
+			. association_icone(_T('asso:annexe_titre_general'), $url_annexe, 'finances.jpg');
 		echo bloc_des_raccourcis($res);
 
 		echo debut_droite("", true);
 
-		debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES . "finances.jpg", false, "", '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . propre(_T('asso:cpte_resultat_titre_general') . ' - ' . $annee));
+		debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES . "finances.jpg", false, "", '&nbsp;'.propre( _T('asso:cpte_resultat_titre_general').' : '.exercice_intitule($exercice)));
 		
 		if ($plan) {
 			$join = " RIGHT JOIN spip_asso_plan ON imputation=code";
 			$sel = ", code, intitule, classe";
-			$having = " AND classe = ";
-			$order = "code,";
+			$where = " date >= \"".exercice_date_debut($exercice)."\" AND date <= \"".exercice_date_fin($exercice)."\"";
+			$having = "classe = ";
+			$order = "code";
 		}
 		else {
-			$join = $sel = $having = $order = '';
+			$join = $sel = $where = $having = $order = '';
 		}
 
-		$var = @serialize(array($annee, $join, $sel, $having, $order));
+		$var = @serialize(array($exercice, $join, $sel, $where, $having, $order));
 
 		echo "<table border='0' cellpadding='2' cellspacing='6' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>";
 		echo "<tr style='background-color: #DBE1C5;'><td>";
@@ -98,7 +102,7 @@ function exec_compte_resultat() {
 function compte_resultat_charges_produits($var, $class) {
 	include_spip('inc/association_plan_comptable');
 	$tableau = @unserialize($var);
-	$annee = $tableau[0];$join = $tableau[1];$sel = $tableau[2];$having = $tableau[3];$order = $tableau[4];
+	$exercice = $tableau[0];$join = $tableau[1];$sel = $tableau[2];$where=$tableau[3];$having = $tableau[4];$order = $tableau[5];
 	echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>";
 	echo "<tr style='background-color: #DBE1C5;'>";
 	echo "<td width='10'><strong>&nbsp;</strong></td>";
@@ -107,13 +111,14 @@ function compte_resultat_charges_produits($var, $class) {
 	echo "<td width='80'><strong>&nbsp;</strong></td>";
 	echo "</tr>";
 	$quoi = (($class == $GLOBALS['association_metas']['classe_charges']) ? ("sum(depense) AS valeurs") : ("sum(recette) AS valeurs"));
-	$query = sql_select("imputation, " . $quoi . ", date_format(date, '%Y') AS annee$sel",
-			"spip_asso_comptes$join",
-			"",
-			$order . "annee",
+	$query = sql_select(
+		"imputation, " . $quoi . ", date_format(date, '%Y') AS annee".$sel,
+		"spip_asso_comptes".$join,
+			$where,
+			$order,
 			"code ASC",
-			'',
-			"annee=$annee$having$class");
+			"",
+			$having.$class);
 
 	$total = 0;
 	$chapitre = '';
@@ -159,7 +164,7 @@ function compte_resultat_benefice_perte($recettes, $depenses) {
 
 function compte_resultat_benevolat($var, $class) {
 	$tableau = @unserialize($var);
-	$annee = $tableau[0];$join = $tableau[1];$sel = $tableau[2];$having = $tableau[3];$order = $tableau[4];
+	$exercice = $tableau[0];$join = $tableau[1];$sel = $tableau[2];$where=$tableau[3];$having = $tableau[4];$order = $tableau[5];
 	echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>";
 	echo "<tr style='background-color: #DBE1C5;'>";
 	echo "<td width='10'><strong>&nbsp;</strong></td>";
@@ -167,13 +172,14 @@ function compte_resultat_benevolat($var, $class) {
 	echo '<td><strong>' . _T('asso:cpte_resultat_titre_benevolat') . '</strong></td>';
 	echo "<td width='80' style='text-align:right;'><strong>"._T('asso:cpte_resultat_recette_evaluee')."</strong></td>";
 	echo "<td width='80' style='text-align:right;'><strong>"._T('asso:cpte_resultat_depense_evaluee')."</strong></td>";
-	$query = sql_select("imputation, sum(recette) AS recettes, sum(depense) AS depenses, date_format(date, '%Y') AS annee$sel",
-			"spip_asso_comptes$join",
-			"",
-			$order . "annee",
-			"code ASC",
-			'',
-			"annee=$annee$having$class");
+	$query = sql_select(
+		"imputation, sum(recette) AS recettes, sum(depense) AS depenses, date_format(date, '%Y') AS annee".$sel,
+		"spip_asso_comptes".$join,
+		$where,
+		$order,
+		"code ASC",
+		"",
+		$having.$class);
 	$chapitre = '';
 	$total_recettes = $total_depenses = 0;
 	while ($data = sql_fetch($query)) {

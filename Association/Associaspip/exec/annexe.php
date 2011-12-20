@@ -29,8 +29,11 @@ function exec_annexe(){
 	else {
 		$plan = sql_countsel('spip_asso_plan');
 
-		if (!($annee = _request('annee')))		{
-			$annee = date('Y');		
+		$exercice= intval(_request('exercice'));
+		if(!$exercice){
+			/* on recupere l'id_exercice dont la date "fin" est "la plus grande" */
+			$exercice = sql_getfetsel("id_exercice","spip_asso_exercices","","","fin DESC");
+			if(!$exercice) $exercice=0;
 		}
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -44,16 +47,16 @@ function exec_annexe(){
 
 		echo fin_boite_info(true);
 
-		$url_compte_resultat = generer_url_ecrire('compte_resultat', "annee=$annee");
-		$url_bilan = generer_url_ecrire('bilan', "annee=$annee");
-		$res = association_icone(_T('asso:cpte_resultat_titre_general') . " $annee",  $url_compte_resultat, 'finances.jpg')
-		. association_icone(_T('asso:bilan') . " $annee",  $url_bilan, 'finances.jpg');
+		$url_compte_resultat = generer_url_ecrire('compte_resultat', "exercice=$exercice");
+		$url_bilan = generer_url_ecrire('bilan', "exercice=$exercice");
+		$res = association_icone(_T('asso:cpte_resultat_titre_general'),  $url_compte_resultat, 'finances.jpg')
+		. association_icone(_T('asso:bilan'),  $url_bilan, 'finances.jpg');
 		
 		echo bloc_des_raccourcis($res);
 
 		echo debut_droite("",true);
 		
-		debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES."finances.jpg", false, "", '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' .propre( _T('asso:annexe_titre_general'). ' - ' . $annee));
+		debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES."finances.jpg", false, "", '&nbsp;' .propre( _T('asso:annexe_titre_general').' : '.exercice_intitule($exercice)));
 		
 		echo _T('asso:non_implemente');
 

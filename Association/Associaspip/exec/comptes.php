@@ -20,9 +20,16 @@ function exec_comptes() {
 	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
-	} else {
-		$annee= intval(_request('annee'));
-		if(empty($annee)){$annee = date('Y');}
+	}
+	else {
+		$exercice= intval(_request('exercice'));
+		if(!$exercice){
+			/* on recupere l'id_exercice dont la date "fin" est "la plus grande" !!!!
+			 * Il faut bien trouver un critere .... */
+			$exercice = sql_getfetsel("id_exercice","spip_asso_exercices","","","fin DESC");
+			if(!$exercice) $exercice=0;
+		}
+		
 		$vu = _request('vu');
 		if (!is_numeric($vu)) $vu = '';
 
@@ -32,31 +39,18 @@ function exec_comptes() {
 		if (!$max) $max = 30;
 		$id_compte = _request('id_compte', $_GET);
 		$id_compte = $id_compte ? intval($id_compte):'';
-		exec_comptes_args($annee, $vu, $imputation, _request('debut'), $max, $id_compte);
+		exec_comptes_args($exercice, $vu, $imputation, _request('debut'), $max, $id_compte);
 	}
 }
 
-function exec_comptes_args($annee, $vu, $imputation, $debut, $max_par_page, $id_compte) 
+function exec_comptes_args($exercice, $vu, $imputation, $debut, $max_par_page, $id_compte)
 {
-	/* si on a id_compte a afficher, recuperer son annee pour afficher celle la et reinitialiser les autres parametres */
-	if ($id_compte) {
-		$annee_id_compte = sql_getfetsel("date_format( date, '%Y' )", 'spip_asso_comptes', "id_compte=$id_compte");
-		if ($annee_id_compte) {
-			$annee = $annee_id_compte;
-			/* on reinitialise les autres parametres */
-			$imputation = '%';
-			$vu = '';
-		} else { /* on n'a pas trouve l'id_compte */
-			$id_compte = '';
-		}
-	}
-	$where = "imputation like " . sql_quote($imputation)
-	  . (!is_numeric($vu) ? '' : (" AND vu=$vu"));
 
-	$sel = comptes_select_annee($where, $annee,'imputation='.$imputation . "&vu=$vu");
-	$where .= " AND date_format( date, '%Y' ) = $annee";
+	$where = "imputation like " . sql_quote($imputation);
+	$where .= (!is_numeric($vu) ? '' : (" AND vu=$vu"));
+	$where .= " AND date>='".exercice_date_debut($exercice)."' AND date<='".exercice_date_fin($exercice)."'";
 
-	$totaux = comptes_totaux($where, $imputation, $annee);
+	$totaux = comptes_totaux($where, $imputation);
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
@@ -65,16 +59,17 @@ function exec_comptes_args($annee, $vu, $imputation, $debut, $max_par_page, $id_
 	echo debut_gauche("",true);
 	echo debut_boite_info(true);
 	echo association_date_du_jour();	
-	echo '<p>', _T('asso:en_bleu_recettes_en_rose_depenses'), '</p>'; 
+	echo '<p>'. _T('asso:en_bleu_recettes_en_rose_depenses'). '</p>';
 	echo $totaux;
 	echo fin_boite_info(true);	
 	
-	$url_bilan = generer_url_ecrire('bilan', "annee=$annee");
-	$url_compte_resultat = generer_url_ecrire('compte_resultat', "annee=$annee");
-	$url_annexe = generer_url_ecrire('annexe', "annee=$annee"); 
-	$res = association_icone(_T('asso:cpte_resultat_titre_general') . " $annee",  $url_compte_resultat, 'finances.jpg')
-	. association_icone(_T('asso:bilan') . " $annee",  $url_bilan, 'finances.jpg')
-	. association_icone(_T('asso:annexe_titre_general') . " $annee",  $url_annexe, 'finances.jpg')
+	$url_bilan = generer_url_ecrire('bilan', "exercice=$exercice");
+	$url_compte_resultat = generer_url_ecrire('compte_resultat', "exercice=$exercice");
+	$url_annexe = generer_url_ecrire('annexe', "exercice=$exercice");
+	$res = '<br /><strong>Exercice : '.exercice_intitule($exercice).'</strong><br />'
+	. association_icone(_T('asso:cpte_resultat_titre_general'),  $url_compte_resultat, 'finances.jpg')
+	. association_icone(_T('asso:bilan'),  $url_bilan, 'finances.jpg')
+	. association_icone(_T('asso:annexe_titre_general'),  $url_annexe, 'finances.jpg')
 	. association_icone(_T('asso:ajouter_une_operation'),  generer_url_ecrire('edit_compte'), 'ajout_don.png');
 
 	echo bloc_des_raccourcis($res);
@@ -84,12 +79,22 @@ function exec_comptes_args($annee, $vu, $imputation, $debut, $max_par_page, $id_
 	debut_cadre_relief(  "", false, "",  _T('asso:informations_comptables'));
 	
 	echo "\n<table width='100%'>";
-	echo '<tr><td>', $sel,'</td>';
-	
-	echo '<td style="text-align:right;">';
-	echo '<form method="post" action="';
-	echo generer_url_ecrire('comptes');
-	echo '"><div>';
+	echo '<tr><td>';
+	echo '<form method="post" action="'.generer_url_ecrire('comptes',"imputation=$imputation").'"><div>';
+	echo '<select name ="exercice" class="fondl" onchange="form.submit()">';
+	echo '<option value="0" ';
+	if (!$exercice) { echo ' selected="selected"'; }
+	echo '>Choix Exercice ?</option>';
+	$sql = sql_select('id_exercice, intitule', 'spip_asso_exercices','', "intitule DESC");
+	while ($val = sql_fetch($sql)) {
+		echo '<option value="'.$val['id_exercice'].'" ';
+		if ($exercice==$val['id_exercice']) { echo ' selected="selected"'; }
+		echo '>'.$val['intitule'].'</option>';
+	}
+	echo '</select></div></form></td>';
+
+	echo '<td>';
+	echo '<form method="post" action="'.generer_url_ecrire('comptes', "exercice=$exercice").'"><div>';
 	echo '<select name ="imputation" class="fondl" onchange="form.submit()">';
 	echo '<option value="%" ';
 	if ($imputation=="%") { echo ' selected="selected"'; }
@@ -129,7 +134,7 @@ function exec_comptes_args($annee, $vu, $imputation, $debut, $max_par_page, $id_
 
 		$nombre_selection=sql_countsel('spip_asso_comptes', $where);
 		$pages=intval($nombre_selection/$max_par_page) + 1;
-		$args = 'annee='.$annee.'&imputation='.$imputation. (is_numeric($vu) ? "&vu=$vu" : ''); 
+		$args = 'exercice='.$exercice.'&imputation='.$imputation. (is_numeric($vu) ? "&vu=$vu" : '');
 		$nav = '';
 		if ($pages != 1) for ($i=0;$i<$pages;$i++) { 
 			$position= $i * $max_par_page;
@@ -209,9 +214,19 @@ function comptes_while($where, $limit, $id_compte)
 	return $auteurs;
 }
 
-function comptes_totaux($where, $imputation, $annee)
+function comptes_totaux($where, $imputation)
 {
-	$data = sql_fetsel("sum(recette) AS somme_recettes, sum(depense) AS somme_depenses", 'spip_asso_comptes', $where);
+	$clas_banque=$GLOBALS['association_metas']['classe_banques'];
+	$clas_contrib_volontaire=$GLOBALS['association_metas']['classe_contributions_volontaires']; // une contribution benevole ne doit pas etre comptabilisee en charge/produit
+	$where .= " AND classe <> " . sql_quote($clas_banque). " AND classe <> " .sql_quote($clas_contrib_volontaire);
+	$join = " RIGHT JOIN spip_asso_plan ON imputation=code";
+	$sel = ", code, classe";
+
+	$data = sql_fetsel(
+		"sum(recette) AS somme_recettes, sum(depense) AS somme_depenses$sel",
+		"spip_asso_comptes$join",
+		"$where");
+
 	$somme_recettes = $data['somme_recettes'];
 	$somme_depenses = $data['somme_depenses'];
 	$solde= $somme_recettes - $somme_depenses;
@@ -219,8 +234,7 @@ function comptes_totaux($where, $imputation, $annee)
 	return '<table width="100%">' . 
 	 '<tr>' . 
 	 '<td colspan="2"><strong>' . 
-	  _T('asso:totaux') . ($imputation=='%' ? '' : $imputation) . 
-	 ' ' . $annee . 
+	  _T('asso:totaux') . ($imputation=='%' ? '' : ' '.$imputation) .
 	 ' :</strong></td>' . 
 	 '</tr>' . 
 	 '<tr>' . 
@@ -238,16 +252,4 @@ function comptes_totaux($where, $imputation, $annee)
 	 '</table>';
 }
 
-function comptes_select_annee($where, $annee, $args)
-{
-	$tous = sql_allfetsel("date_format( date, '%Y' )  AS annee", "spip_asso_comptes", $where, "annee", "annee");
-		
-	foreach ($tous as $k => $data) {
-		$an = $data['annee'];
-		if ($an==$annee)	
-		  $tous[$k] = ' <strong>'.$an.' </strong>';
-		else $tous[$k] = '<a href="'. generer_url_ecrire('comptes','annee='.$an.'&'. $args).'">'.$an.'</a>';
-	}
-	return join("\n", $tous);
-}
 ?>
