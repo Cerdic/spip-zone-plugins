@@ -101,6 +101,21 @@ function association_mode_de_paiement($journal, $label)
 	      : "<select name='journal' id='journal' class='formo'>$sel</select>\n");
 }
 
+# ensemble de fonctions pour recuperer les donnees de l'exercice en cours
+// TODO ---> POO !!!
+function exercice_intitule($exercice) {
+	$data = sql_fetsel("intitule", 'spip_asso_exercices','id_exercice='.$exercice);
+	return $data['intitule'];
+}
+function exercice_date_debut($exercice) {
+	$data = sql_fetsel("debut", 'spip_asso_exercices','id_exercice='.$exercice);
+	return $data['debut'];
+}
+function exercice_date_fin($exercice) {
+	$data = sql_fetsel("fin", 'spip_asso_exercices','id_exercice='.$exercice);
+	return $data['fin'];
+}
+
 // affichage du nom des membres
 function association_calculer_nom_membre($civilite, $prenom, $nom) {
 	$res = ($GLOBALS['association_metas']['civilite']=="on")?$civilite.' ':'';

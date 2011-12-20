@@ -2,7 +2,7 @@
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations             *
  *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
+ *  Copyright (c) 2007 Bernard Blazin & Franï¿½ois de Montlivault (V1)       *
  *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -36,6 +36,7 @@ function exec_association() {
 		$res.=association_icone(_T('asso:categories_de_cotisations'),  generer_url_ecrire("categories"), 'cotisation.png',  '');
 		$res.=association_icone(_T('asso:plan_comptable'),  generer_url_ecrire("plan"), 'plan_compte.png',  '');
 		if ($GLOBALS['association_metas']['destinations']=="on") $res.=association_icone(_T('asso:destination_comptable'),  generer_url_ecrire("destination"), 'plan_compte.png',  '');
+		$res.=association_icone(_T('asso:exercices_budgetaires_titre'),  generer_url_ecrire("exercices"), 'plan_compte.png',  '');
 
 		echo bloc_des_raccourcis($res);
 		echo debut_droite("",true);	
@@ -69,7 +70,7 @@ function exec_association() {
 		
 		echo fin_page_association();
 		
-		//Petite routine pour mettre à jour les statuts de cotisation "échu"
+		//Petite routine pour mettre ï¿½ jour les statuts de cotisation "ï¿½chu"
 		sql_updateq('spip_asso_membres', 
 			array("statut_interne"=> 'echu'),
 			"statut_interne = 'ok' AND validite < CURRENT_DATE() ");

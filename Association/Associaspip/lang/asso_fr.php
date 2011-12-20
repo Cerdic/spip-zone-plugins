@@ -544,6 +544,21 @@ Commentaire: @commentaire@
 			'donnees_perso' => 'Donn&eacute;es Personnelles',
 			'donnees_internes' => 'Donn&eacute;es Internes',
 	
+	# Exercices Budgetaires
+		'exercices_budgetaires_titre' => 'Exercices Budg&eacute;taires',
+		'exercice_budgetaire_titre' => 'Exercice Budg&eacute;taire',
+		'ajouter_un_exercice' => 'Ajouter un exercice',
+		'tous_les_exercices' => 'Tous les exercices',
+		'exercice_intitule' => 'Intitul&eacute;',
+		'exercice_commentaire' => 'Commentaire',
+		'exercice_debut' => 'Date d&eacute;but',
+		'exercice_fin' => 'Date fin',
+		'exercice_debut_aaaa' => 'Date d&eacute;but (AAAA-MM-JJ)',
+		'exercice_fin_aaaa' => 'Date fin (AAAA-MM-JJ)',		
+		'exercice_budgetaire_edition_titre' => 'Edition exercice budg&eacute;taire',
+		'exercice_budgetaire_supprime' => 'Suppression exercice budg&eacute;taire',
+		'vous_vous_appretez_a_effacer_exercice_budgetaire' => 'Vous vous appr&ecirc;tez &agrave; effacer l\'exercice budg&eacute;taire',
+
 	# Plan comptable
 		#Message
 			'plan_info' => 'Vous pouvez d&eacute;finir ici les comptes de votre plan comptable.<br />Vous devez au minimum d&eacute;finir les comptes de produits n&eacute;cessaires &agrave; la configuration du plugin et les comptes financiers relatifs aux diff&eacute;rentes modes de paiement.',
