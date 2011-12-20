@@ -60,6 +60,25 @@ function 	zengarden_liste_themes($tous){
 	// ceux de plugins/
 	$themes = array_merge($themes,zengarden_charge_themes(_DIR_PLUGINS,$tous));
 
+	// si on utilise ZPIP-v2 ou ZPIP-v2 invalider les themes qui n'utilisent pas
+	// ce skel
+	$search = "";
+	if (defined('_DIR_PLUGIN_ZCORE')) $search="zpip";
+	if (defined('_DIR_PLUGIN_Z')) $search="z";
+	if ($search){
+		foreach ($themes as $k => $theme){
+			$keep = false;
+			foreach ($theme['utilise'] as $u){
+				if (strncasecmp($u['nom'],$search,max(strlen($u['nom']),strlen($search)))==0){
+					$keep = true;
+					continue;
+				}
+			}
+			if (!$keep)
+				unset($themes[$k]);
+		}
+	}
+
 	// et voila
 	return $themes;
 }
