@@ -110,7 +110,7 @@ function svp_afficher_credits($balise_serialisee, $sep=', ') {
 			// Si le credit en cours n'est pas un array c'est donc un copyright
 			$texte .= 
 				(!is_array($_credit)) 
-				? PtoBR(propre(($_credit)) // propre pour les [lien->url] des auteurs de plugin.xml ...
+				? PtoBR(propre($_credit)) // propre pour les [lien->url] des auteurs de plugin.xml ...
 				: ($_credit['url'] ? '<a href="' . $_credit['url'] . '">' : '') . 
 				  $_credit['nom'] .
 				  ($_credit['url'] ? '</a>' : '');
