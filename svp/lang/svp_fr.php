@@ -232,6 +232,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_plugin' => 'Plugin',
 	'titre_plugins' => 'Plugins',
 	'tout_cocher' => 'Tout cocher',
+	'tout_cocher_up' => 'Cocher les mises à jour',
 	'tout_decocher' => 'Tout décocher',
 );
 

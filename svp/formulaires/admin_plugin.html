@@ -15,7 +15,11 @@
 		</div>
 		<div class="actions_multiples">
 			<fieldset class="boutons">
-				<p class="cocher"><a href="#" id="select_tous"><:svp:tout_cocher:></a> | <a href="#" id="select_aucun"><:svp:tout_decocher:></a></p>
+				<p class="cocher">
+					<a href="#" id="select_tous"><:svp:tout_cocher:></a><span class="sep"> | </span>
+					<a href="#" id="select_aucun"><:svp:tout_decocher:></a><span class="sep"> | </span>
+					<a href="#" id="select_up"><:svp:tout_cocher_up:></a>
+				</p>
 				<select class="action" name="action_globale">
 					<option value="on"><:svp:bouton_activer:></option>
 					<option value="off"><:svp:bouton_desactiver:></option>
@@ -35,6 +39,19 @@
 						jQuery("input.select_plugin").attr("checked",false);
 						return false;
 					});
+					var cocher_plugins_up = function(){
+						if (jQuery(".plugins li.item.up").length != 0) {
+							jQuery("#select_up").click(function(){
+								jQuery(".plugins li.item.up input.select_plugin").attr("checked",true);
+								return false;
+							});
+						} else {
+							jQuery("#select_up").hide();
+							jQuery("#select_up").prev(".sep").hide();
+						}
+					}
+					cocher_plugins_up();
+					onAjaxLoad(cocher_plugins_up);
 				});
 			//]]>
 			</script>
