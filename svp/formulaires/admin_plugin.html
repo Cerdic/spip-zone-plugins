@@ -14,20 +14,20 @@
 			</fieldset>
 		</div>
 		<div class="actions_multiples">
-			<fieldset class="boutons">
+			[<fieldset class="boutons">(#VAL{'_DIR_EXTENSIONS'}|in_array{#ENV{constante,#ARRAY}}|non)
 				<p class="cocher">
 					<a href="#" id="select_tous"><:svp:tout_cocher:></a><span class="sep"> | </span>
 					<a href="#" id="select_aucun"><:svp:tout_decocher:></a><span class="sep"> | </span>
 					<a href="#" id="select_up"><:svp:tout_cocher_up:></a>
 				</p>
 				<select class="action" name="action_globale">
-					<option value="on"><:svp:bouton_activer:></option>
-					<option value="off"><:svp:bouton_desactiver:></option>
+					[(#ENV{actif}|=={oui}|non)<option value="on"><:svp:bouton_activer:></option>]
+					[(#ENV{actif}|=={non}|non)<option value="off"><:svp:bouton_desactiver:></option>]
 					<option value="up"><:svp:bouton_up:></option>
-					<option value="stop"><:svp:bouton_desinstaller:></option>
+					[(#ENV{actif}|=={non}|non)<option value="stop"><:svp:bouton_desinstaller:></option>]
 				</select>
 				<input type="submit" class="submit" name="appliquer" value="<:svp:bouton_appliquer:>" />
-			</fieldset>
+			</fieldset>]
 			<script type="text/javascript">
 			//<![CDATA[
 				jQuery(function(){
