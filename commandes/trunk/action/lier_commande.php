@@ -24,7 +24,7 @@ function action_lier_commande_dist($arg=null) {
     if ($f=charger_fonction('lier_commande_'.$objet, 'inc')) {
         $f($id_commande,$id_objet);
     } else {
-		spip_log("action_lier_commande_".$objet."_dist $arg pas compris");
+		spip_log("action_lier_commande_".$objet."_dist $arg pas compris","commandes");
     }
 
 }

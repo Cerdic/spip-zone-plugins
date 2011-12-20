@@ -36,7 +36,7 @@ function formulaires_lier_commande_traiter_dist($id_commande, $objet, $id_objet 
     if ($f=charger_fonction('lier_commande_'.$objet, 'inc')) {
         $f($id_commande,$id_objet);
     } else {
-		spip_log("cvt_lier_commande_".$objet."_dist $arg pas compris");
+		spip_log("cvt_lier_commande_".$objet."_dist $arg pas compris", "commandes");
     }    
 
     set_request('recherche_objet');

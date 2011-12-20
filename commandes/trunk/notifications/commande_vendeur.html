@@ -1,0 +1,35 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 SPIP
+  Distribue sous licence GPL
+
+][(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" xml:lang="#LANG" lang="#LANG">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=#CHARSET" />
+<meta name="language" content="#LANG" />
+<title>[(#NOM_SITE_SPIP|textebrut)] - Commande</title>
+</head>
+<body>
+
+<BOUCLE_art(COMMANDES){id_commande}{statut?}{tout}>
+	<:zcommerce:une_commande_sur{nom=#NOM_SITE_SPIP}:>
+
+	<BOUCLE_contact(CONTACTS){id_auteur}>
+		#CIVILITE #NOM #PRENOM
+	</BOUCLE_contact>
+
+   <p><:zcommerce:commande_ref{ref=#REFERENCE}:></p>
+   <INCLURE{fond=inclure/commande,id_commande=#ID_COMMANDE,statut=#STATUT}>
+   
+   <hr />
+   
+   <p><a href="#URL_SITE_SPIP">#URL_SITE_SPIP</a></p>
+
+</BOUCLE_art>
+</body>
+</html>
+#FILTRE{filtrer_entites|trim}

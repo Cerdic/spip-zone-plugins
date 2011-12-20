@@ -2,7 +2,7 @@
 	<nom>Commandes</nom>
 	<auteur>[Ateliers CYM->http://www.cym.fr], [Les D&#233;veloppements Durables->http://www.ldd.fr], [Matthieu Marcillaud->http://magraine.net]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.4.9</version>
+	<version>0.5.0</version>
 	<version_base>0.2</version_base>
 	<etat>dev</etat>
     
@@ -59,11 +59,18 @@
 	</bouton>
 
 	<bouton id='commandes21' parent='bando_reactions'> 
-			<url>commandes</url> 
-			<icone>images/commande-16.png</icone> 
-			<titre>commandes:nom_bouton_plugin</titre> 
+		<url>commandes</url> 
+		<icone>images/commande-16.png</icone> 
+		<titre>commandes:nom_bouton_plugin</titre> 
 	</bouton> 
-	
+
+	<bouton id='configurer_commande' parent="bando_configuration">
+		<titre>commandes:nom_bouton_plugin</titre>
+		<icone>images/commande-16.png</icone>
+		<url>configurer_commandes</url>
+	</bouton>
+
 	<necessite id="SPIP" version="[2.1.10;2.1.99]" />
+	<necessite id="saisies" version="[1.18.2;]" />
 	<necessite id="prix" version="[0.1.0;]" />
 </plugin>

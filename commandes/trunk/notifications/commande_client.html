@@ -1,0 +1,24 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 SPIP
+  Distribue sous licence GPL
+
+][(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]#CACHE{0}
+<BOUCLE_art(COMMANDES){id_commande}{statut?}{tout}>
+	<:zcommerce:votre_commande_sur{nom=#NOM_SITE_SPIP}:>
+
+	<BOUCLE_contact(CONTACTS){id_auteur}>
+		#CIVILITE #NOM #PRENOM
+	</BOUCLE_contact>
+
+	<p><:zcommerce:merci_de_votre_commande{ref=#REFERENCE}:></p>
+
+	<INCLURE{fond=inclure/commande,id_commande=#ID_COMMANDE,statut=#STATUT}>
+
+   <hr />
+   
+   <p><a href="#URL_SITE_SPIP">#URL_SITE_SPIP</a></p>
+
+</BOUCLE_art>
+#FILTRE{filtrer_entites|trim}

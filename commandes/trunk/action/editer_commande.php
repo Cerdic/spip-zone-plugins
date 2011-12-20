@@ -208,7 +208,7 @@ function instituer_commande($id_commande, $c, $calcul_details=true){
 		}
 	}
 	
-	spip_log("il ya un flux post_edition sur commande",'commande');
+	spip_log("instituer_commande : il y a un flux post_edition sur commande",'commandes');
 
 	// Pipeline
 	pipeline(

@@ -14,8 +14,7 @@ function commandes_insert_head_css($flux){
 function commandes_optimiser_base_disparus($flux){
 	include_spip('inc/config');
 	// On cherche la date depuis quand on a le droit d'avoir fait la commande (par défaut 1h)
-	$depuis = date('Y-m-d H:i:s', time() - 3600);
-	
+	$depuis = date('Y-m-d H:i:s', time() - lire_config('commandes/duree_vie', 3600));
 	// On récupère les commandes trop vieilles
 	$commandes = sql_allfetsel(
 		'id_commande',

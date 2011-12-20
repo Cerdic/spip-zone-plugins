@@ -14,11 +14,36 @@ function commandes_lister_statuts($statut=false){
 		'retour' => _T('commandes:statut_retour'),
 		'retour_partiel' => _T('commandes:statut_retour_partiel'),
 	);
-	
+
 	if ($statut and $nom = $statuts[$statut])
 		return $nom;
 	else
 		return $statuts;
+}
+
+// Qui est le premier webmester ?
+function commandes_id_premier_webmestre()
+{
+	include_spip('base/abstract_sql');
+	$query = sql_select("id_auteur","spip_auteurs","statut = '0minirezo' AND webmestre = 'oui'","","id_auteur");
+	if ($row = sql_fetch($query)) {
+		return( $row["id_auteur"] );
+	}
+	return false;
+}
+
+// Quel est l'email de l'auteur ?
+function commandes_email_auteur($id) {
+	if (
+		intval($id) == $id
+		and $id > 0
+		and $email = sql_getfetsel('email', 'spip_auteurs', 'id_auteur = '.$id)
+	){
+		return $email;
+	}
+	// Sinon rien
+	else
+		return null;
 }
 
 ?>

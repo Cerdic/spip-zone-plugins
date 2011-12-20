@@ -21,7 +21,7 @@ function action_instituer_commande($arg=null) {
 
 	$id_commande = intval($id_commande);
 	
-	spip_log("action_instituer_commande id_commande= $id_commande et statut= $statut",'commande');
+	spip_log("action_instituer_commande id_commande= $id_commande et statut= $statut",'commandes');
 
 
 	include_spip('action/editer_commande');
