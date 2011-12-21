@@ -18,7 +18,7 @@
 	</slogan>
 	<description>
     	<multi>
-      [fr]Convertit les formats de type wiki, phpBB, quark xpress tags en format SPIP et vice versa ; int&#232;gre au besoin les textes convertis dans des articles ; on peut uploader plusierus textes en un seul coup en les zippant au pr&#233;alable
+      [fr]Convertit les formats de type wiki, phpBB, quark xpress tags en format SPIP et vice versa ; int&#232;gre au besoin les textes convertis dans des articles ; on peut uploader plusieurs textes en un seul coup en les zippant au pr&#233;alable
     	[en]Converts various formats (wiki, phpBB) into SPIP format
       </multi>
 	</description>
