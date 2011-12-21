@@ -1,14 +1,14 @@
 <plugin>
 	<nom>Activit&#233; &#233;ditoriale</nom>
 	<slogan>Un site, c'est bien ! Un site &#224; jour, c'est mieux !</slogan>
-	<auteur>[St&#233;phanie Caron de Clever Age->http://www.clever-age.com/], [Maïeul ROUQUETTE (am&#233;lioration)->http://www.maieul.net]</auteur>
+	<auteur>[St&#233;phanie Caron de Clever Age->http://www.clever-age.com/], [Ma&#239;eul ROUQUETTE (am&#233;lioration)->http://www.maieul.net]</auteur>
 	<licence>GNU/GPL</licence>
 	<version>1.0.0</version>
 	<version_base>0.1</version_base>
 	<description>Ce plugin a pour objectif de compl&#233;ter les fonctionnalit&#233;s de suivi de l'activit&#233; &#233;ditoriale de SPIP.
 
 Sont d&#233;j&#224; propos&#233;s :
--* l'ajout de deux champs aux rubriques pour indiquer un d&#233;lai en jour au dela duquel elle doivent &#234;tre aliment&#233;es, ainsi que les personnes &#224; pr&#233;venir
+-* l'ajout de deux champs aux rubriques pour indiquer un d&#233;lai en jour au del&#224; duquel elle doivent &#234;tre aliment&#233;es, ainsi que les personnes &#224; pr&#233;venir
 -* des alertes par e-mail selon ces deux param&#232;tres
 -* un tableau de bord pr&#233;sentant les m&#234;mes informations
 
