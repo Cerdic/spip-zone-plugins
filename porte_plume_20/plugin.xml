@@ -2,7 +2,7 @@
 	<nom><multi>[fr]Porte plume[en]Quill[ar]&#1575;&#1604;&#1585;&#1610;&#1588;&#1577;[de]Federhalter</multi></nom>
 	<slogan>
 		<multi>
-		[fr]Une barre d'outil pour bien &eacute;crire
+		[fr]Une barre d'outil pour bien &#233;crire
 		[en]A toolbar to enhance your texts
 		[ar]&#1588;&#1585;&#1610;&#1591; &#1571;&#1583;&#1608;&#1575;&#1578; &#1604;&#1578;&#1581;&#1587;&#1610;&#1606; &#1575;&#1604;&#1603;&#1578;&#1575;&#1576;&#1577;
 		[de]Eine Me&#252;leiste zum Versch&#246;nern der Texte
@@ -16,7 +16,7 @@
 	[fr]Porte plume est une barre d'outil extensible pour SPIP qui
 	utilise la librairie javascript [MarkItUp->http://markitup.jaysalvat.com/home/]
 
-	Les icones proviennent de la librairie [FamFamFam->http://www.famfamfam.com/]
+	Les ic&#244;nes proviennent de la librairie [FamFamFam->http://www.famfamfam.com/]
 	[en]The Quill is a SPIP extensible toolbar which uses the javascript library 
 	[MarkItUp->http://markitup.jaysalvat.com/home/]
 	
