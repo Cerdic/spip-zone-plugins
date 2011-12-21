@@ -7,7 +7,7 @@
     <description>
 		<multi>
 [fr]Liste les plugins actifs et affiche une description sommaire de ceux-ci.
-_ Il sert à afficher sur une page de type « à propos du site » un récapitulatif des plugins actifs, y compris l'icone de ceux-ci.
+_ Il sert à afficher sur une page de type « à propos du site » un récapitulatif des plugins actifs, y compris l'ic&#244;ne de ceux-ci.
 _ Vous pouvez utiliser la nouvelle balise #APROPOS dans vos squelettes. Cette balise a 4 paramètres : <br />
 -* soit vous écrivez :  <code>#APROPOS{liste}</code> pour retourner la liste des plugins, <br />
 -* soit vous écrivez :  <code>#APROPOS{nombre}</code> pour n'afficher que le nombre de plugins ET d'extensions actifs.<br />

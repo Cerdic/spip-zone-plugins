@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     
 
-    Il sert &agrave; afficher sur une page de type &laquo;&nbsp;&agrave; propos du site&nbsp;&raquo; un r&eacute;capitulatif des plugins actifs, y compris l\'icone de ceux-ci.
+    Il sert &agrave; afficher sur une page de type &laquo;&nbsp;&agrave; propos du site&nbsp;&raquo; un r&eacute;capitulatif des plugins actifs, y compris l\'ic&#244;ne de ceux-ci.
 
     <br />
 

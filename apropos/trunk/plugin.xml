@@ -8,7 +8,7 @@
     <multi>
 	[fr] Liste les plugins actifs et affiche une description sommaire de ceux-ci.
     
-    Il sert à afficher sur une page de type « à propos du site » un récapitulatif des plugins actifs, y compris l'icone de ceux-ci.
+    Il sert à afficher sur une page de type « à propos du site » un récapitulatif des plugins actifs, y compris l'ic&#244;ne de ceux-ci.
     <br />
 	Vous pouvez utiliser la nouvelle balise #APROPOS dans vos squelettes. Cette balise a 4 paramètres : <br />
 	
