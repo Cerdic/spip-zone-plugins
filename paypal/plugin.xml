@@ -25,5 +25,6 @@
 	</bouton>
 	<traduire gestionnaire="salvatore" module="paypal" reference="fr" />
    <necessite id="SPIP" version="[2.1.8;2.1.99]" />
+	<necessite id="saisies" version="[1.9.8;]" />
 	<categorie>outil</categorie>
 </plugin>
