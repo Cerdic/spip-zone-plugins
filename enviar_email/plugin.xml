@@ -5,18 +5,24 @@
 		[fr]Envoyer par mail
 		</multi>
 	</nom>
+	<slogan>
+		<multi>
+		[es]Enviar la referencia al art√≠culo o a la breve por email
+		[fr]Envoyer la r&#233;f&#233;rence de l'article par mail
+		</multi>
+	</slogan>
 	<auteur>[joseluis->joseluis@digital77.com]</auteur>
 	<licence>GPL - (c) 2006</licence>
 	<version>0.1.0</version>
 	<etat>test</etat>
 	<description>
 		<multi>	
-			[es]Enviar la referencia al artÌculo o a la breve por email
-			- Para utilizarla coloca la baliza #ENVIAR_EMAIL** donde quieras que aparezca el enlace (artÌculos o breves)
-			- Los dos ** asteriscos son importantes, no los olvides.
-			[fr]Envoyer la r&#233;f&#233;rence de l'article par mail
-			- Pour l'utiliser coller la balise #ENVIAR_EMAIL** dans votre squelette
-			- les deux ast&#233;risques sont indispensables
+[es]Enviar la referencia al art√≠culo o a la breve por email
+- Para utilizarla coloca la baliza <code>#ENVIAR_EMAIL**</code> donde quieras que aparezca el enlace (art√≠culos o breves)
+- Los dos ** asteriscos son importantes, no los olvides.
+[fr]Envoyer la r&#233;f&#233;rence de l'article par mail
+- Pour l'utiliser coller la balise <code>#ENVIAR_EMAIL**</code> dans votre squelette
+- les deux ast&#233;risques sont indispensables
 		</multi>
 	</description>
 
