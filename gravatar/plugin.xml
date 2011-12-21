@@ -14,7 +14,7 @@
 		<multi>
 			[fr]Permet d'utiliser un cache pour stocker les gravatars.
 _ &#192; utiliser dans une boucle de cette mani&#232;re : <code>#GRAVATAR{email, taille, url image par
-defaut}</code>
+d&#233faut}</code>
 _ Exemple : <code>#GRAVATAR{#EMAIL,80,#URL_SITE_SPIP/defaut-gravatar.gif}</code>
 
 &#201;tend la balise #LOGO_AUTEUR de mani&#232;re &#224; prendre en compte le gravatar d'un auteur s'il existe, y compris dans les forums et p&#233;titions.
