@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 _ Les auteurs peuvent etre associés à des zones pour avoir le droit d\'y accéder.
 
 _ Toutes les boucles natives de SPIP sont surchargées pour en filtrer les résultats en fonction des droits du visiteur.',
-	'accesrestreint_nom' => 'Acces Restreint',
-	'accesrestreint_slogan' => 'Gestion de zones d\'acces restreint',
+	'accesrestreint_nom' => 'Accès Restreint',
+	'accesrestreint_slogan' => 'Gestion de zones d\'accès restreint',
 );
 ?>

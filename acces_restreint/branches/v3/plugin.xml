@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	<multi>[fr]Acces Restreint[es]Acceso restringido[en]Restricted Access[de]Zugangskontrolle</multi>
+	<multi>[fr]Acc&#232s Restreint[es]Acceso restringido[en]Restricted Access[de]Zugangskontrolle</multi>
 	</nom>
 	<icon>img_pack/zones-acces-48.png</icon>
 	<auteur>[cedric.morin@yterium.com->http://www.yterium.net]</auteur>
@@ -10,8 +10,8 @@
 	<etat>stable</etat>
 	<slogan>
 	<multi>
-	[fr]Gestion de zones d'acces restreint
-	[es]Gesti&oacute;n de zonas de acceso restringido
+	[fr]Gestion de zones d'acc&#232s restreint
+	[es]Gesti&#243;n de zonas de acceso restringido
 	[de]Verwaltung von Bereichen mit Zugangskontrolle
 	</multi>
 	</slogan>
@@ -19,20 +19,20 @@
 	<multi>
 	[fr]
 _ Chaque zone contient des rubriques.
-_ Les auteurs peuvent etre associes a des zones pour avoir le droit d'y acceder.
-_ Toutes les boucles natives de SPIP sont surchargees pour en filtrer les resultats en fonction des droits du visiteur.
+_ Les auteurs peuvent &#234tre associ&#233s &#224 des zones pour avoir le droit d'y acc&#232der.
+_ Toutes les boucles natives de SPIP sont surcharg&#232es pour en filtrer les r&#232sultats en fonction des droits du visiteur.
 	[es]
 _ Cada zona contiene secciones.
-_ Los autores podr&aacute;n ser asociados a ciertas zonas restringidas para tener derechos de acceso a ellas.
-_ Todos los bucles nativos de SPIP quedan modificados para filtrar los resultados en funci&oacute;n de los derechos del visitante.
+_ Los autores podr&#225;n ser asociados a ciertas zonas restringidas para tener derechos de acceso a ellas.
+_ Todos los bucles nativos de SPIP quedan modificados para filtrar los resultados en funci&#243;n de los derechos del visitante.
 	[en]
 _ Each area contains sections.
 _ Authors can be associated with these areas to gain access to them.
 _ All SPIP's loops are loaded with the necessary tools to filter the results according to the visitors' access priviliges.
 	[de]
-_ Jeder Bereich enthält Rubriken.
-_ Einzelnen Autoren können Zugangsrechte für Bereiche zugeordnet werden.
-_ ALle Standardschleifen (Abfragen) von SPIP werden überladen, und um die Überprüfung der Rechte des jeweiligen Sitebesuchers ergänzt.
+_ Jeder Bereich enth&#228;lt Rubriken.
+_ Einzelnen Autoren k&#246;nnen Zugangsrechte für Bereiche zugeordnet werden.
+_ ALle Standardschleifen (Abfragen) von SPIP werden &#252;berladen, und um die &#220;berpr&#252;fung der Rechte des jeweiligen Sitebesuchers erg&#228;nzt.
 	</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Acces-Restreint-3-0</lien>
