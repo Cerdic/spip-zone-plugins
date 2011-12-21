@@ -10,7 +10,7 @@
 	</slogan>
 	<description>
 		<multi>
-[fr]Le plugin Social Tags permet d'ajouter des ic&#224;nes de partage de liens vers les sites tels que Digg, Facebook, Delicious....
+[fr]Le plugin Social Tags permet d'ajouter des ic&#244;nes de partage de liens vers les sites tels que Digg, Facebook, Delicious....
 _ A partir de la version 0.8, une option permet de r&#233;server l'affichage du bouton de partage aux seuls utilisateurs en provenance de Facebook. 
 En outre, si le plugin Google+1 est actif, il est possible de rajouter le bouton correspondanr dans la liste des liens de Social tags.
 		</multi>
