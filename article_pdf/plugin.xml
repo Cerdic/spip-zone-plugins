@@ -13,7 +13,7 @@
 		<multi>
 		[fr]Conversion d'un article au format pdf pour t&#233;l&#233;chargement. N&#233;cessite GD2 sur votre serveur et le t&#233;l&#233;chargement et installation de la librairie FPDF dans le r&#233;pertoire lib
 
-Inserez la balise <code>#ARTICLE_PDF</code> dans votre squelette pour avoir un lien de t&#233;l&#233;chargement de l'article au format PDF
+Ins&#233;rez la balise <code>#ARTICLE_PDF</code> dans votre squelette pour avoir un lien de t&#233;l&#233;chargement de l'article au format PDF
 		[de]Konvertierung eines Artikels in das PDF Format zum herunterladen. Ben&#246;tigt GD2 auf Ihrem Server
 
 F&#252;gen Sie den Tag <code>#ARTICLE_PDF</code> in Ihr Skelett ein um &#252;ber einen Link zum Herunterladen des Artikels im PDF Format zu verf&#252;gen
