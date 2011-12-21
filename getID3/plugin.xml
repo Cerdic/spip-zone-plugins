@@ -2,7 +2,7 @@
 	<nom>GetId3</nom>
 	<slogan>
 		<multi>
-			[fr]Lire et ecrire les tags audio
+			[fr]Lire et &#233;crire les tags audio
 			[en]Read and write audio tags
 		</multi>
 	</slogan>
@@ -15,7 +15,7 @@
 	<etat>test</etat>
 	<description>
 		<multi>
-			[fr]Lire et ecrire les tags audio sur les documents de type audio
+			[fr]Lire et &#233;crire les tags audio sur les documents de type audio
 _ [->http://getid3.sourceforge.net/]
 			[en]Read and write audio tags to audio documents
 _ [->http://getid3.sourceforge.net/]
