@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'comments_slogan' => 'Des commentaires, tout simplement',
-	'comments_description' => 'ATTENTION, VERSION EN DEVELOPPEMENT, POUR SPIP&nbsp;3&nbsp;!<br />Affichage des messages en liste, façon commentaires de blog, avec formulaire simplifié. Commentaires microformatés, nomenclature homogéne.',
+	'comments_description' => 'ATTENTION, VERSION EN DEVELOPPEMENT, POUR SPIP&nbsp;3&nbsp;!<br />Affichage des messages en liste, façon commentaires de blog, avec formulaire simplifié. Commentaires microformatés, nomenclature homogène.',
 
 );
 
