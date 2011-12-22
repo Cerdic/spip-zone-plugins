@@ -54,7 +54,7 @@ function paniers_id_panier_encours(){
 		$cookie = $panier['cookie'];
 		
 		// Mais ce panier n'est valide que s'il n'est pas trop vieux !
-		if (time() < strtotime("$date + ".lire_config('paniers/limite_enregistres', 7*24*3600).'seconds')){
+		if (time() < $st=strtotime("$date + " . 3600*intval(lire_config('paniers/limite_enregistres', 168)).'seconds')){
 			// Dans ce cas on le prend
 			$id_panier = intval($panier['id_panier']);
 		}

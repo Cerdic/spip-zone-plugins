@@ -8,10 +8,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'action_ajouter' => 'Ajouter au panier',
 
+	// C
+	'configurer_titre' => 'Configurer le plugin Paniers',
+
+	// L
+	'limite_enregistres_label' => 'Visiteurs enregistrés',
+	'limite_ephemere_label' => 'Visiteurs non enregistrés',
+	'limite_titre' => 'Durée de vie des paniers',
+	'limite_explication' => 'Saisir la durée de vie (en heures) des paniers selon le type de visiteurs',
+
 	// M
 	'mon_panier' => 'Mon panier',
 	'mon_panier_modifier' => 'Modifier mon panier',
 	'mon_panier_voir' => 'Voir mon panier',
+
+	// N
+	'nom_bouton_plugin' => 'Paniers',
 
 	// P
 	'panier_description' => 'Description',
@@ -26,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'panier_total_ttc' => 'Total',
 	'panier_valider' => 'Valider mon panier',
 	'panier_vide' => 'Le panier est vide.',
-	'paniers' => 'Paniers'
+	'paniers' => 'Paniers',
 );
 
 ?>

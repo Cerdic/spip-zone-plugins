@@ -14,27 +14,26 @@ function paniers_upgrade($nom_meta_version_base, $version_cible){
 		|| (($version_actuelle = $GLOBALS['meta'][$nom_meta_version_base]) != $version_cible)
 	){
 		
+		$config = lire_config('paniers');
+		if (!is_array($config)) {
+			$config = array();
+		}
+		$config = array_merge(array(
+			'limite_ephemere' => '24',
+			'limite_enregistres' => '168'
+		), $config);
+
 		if (version_compare($version_actuelle,'0.0','=')){
 			// Création des tables
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			creer_base();
 			
-			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
+			ecrire_meta($nom_meta_version_base, $version_actuelle='0.0', 'non');
 		}
 		
-		/*if (version_compare($version_actuelle,'0.5','<')){
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
-			
-			// Modification de paniers
-			sql_alter('');
-						
-			// On change la version
-			echo "Mise à jour du plugin paniers en version 0.5<br/>";
-			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
-		}*/
-	
+		ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
+		ecrire_meta('paniers', serialize($config));
 	}
 
 }
@@ -49,6 +48,7 @@ function paniers_vider_tables($nom_meta_version_base){
 	sql_drop_table('spip_paniers_liens');
 		
 	// On efface la version entregistrée
+	effacer_meta('paniers');
 	effacer_meta($nom_meta_version_base);
 
 }
