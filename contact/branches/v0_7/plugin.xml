@@ -12,12 +12,7 @@
 			[en]A configurable contact form, with multiple options
 		</multi>
 	</slogan>
-	<auteur>
-		<multi>
-			[fr]Pierre Fiches, RastaPopoulos, Superyms (traduction) 
-			[en]Pierre Fiches, RastaPopoulos, Superyms (translation)
-		</multi>
-	</auteur>
+	<auteur>Pierre Fiches, RastaPopoulos, Superyms</auteur>
 	<icon>images/contact-128.png</icon>
 	<licence>GPL v3</licence>
 	<version>0.7.3</version>
