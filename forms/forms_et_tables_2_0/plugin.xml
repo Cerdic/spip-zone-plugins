@@ -3,7 +3,7 @@
 		<multi>[ar]&#1575;&#1604;&#1575;&#1587;&#1578;&#1605;&#1575;&#1585;&#1575;&#1578;
 		[en]Forms
 		[de]Formulare und Tabellen
-		[fr]Formulaires&amp;Tables
+		[fr]Formulaires et Tables
 		[it]Forms
 		[es]Formularios
 		</multi>
@@ -19,18 +19,6 @@
 		[en]editable forms management an administration. This plugin can also publish polls and surveys, store the replies in the database and upload them in CSV format
 
 		[fr]Gestion et administration de formulaires &#233;ditables. Ce plugin permet &#233;galement la publication de sondages et enqu&#232;tes, la collecte des reponses dans la base de donn&#233;es et le t&#233;l&#233;chargement au format csv. 
-
-Quelques remarques concernant l'adaptation pour Spip 2 :
--* champ de type monetaire : L'unite saisie en administration est exploitee uniquement dans le tableau des reponses. Il serait interessant de voir si on ne peut pas laisser un choix a la saisie (soit au moment de la construction du formulaire soit au moment de la saisie par l'utilisateur). Il serait ensuite interessant d'exploiter cette donnee ailleurs (export, suivi des reponses).
-_ To do : faire ces modifications pour utiliser la donnee monetaire.
-
--* Nous avons reactive le tableau des resultats (nous ne le voyons pas en SPIP 1.9+) : par contre, dans ce tableau les tris sur "id" et "date" marchent. Ca ne marche pas sur les autres champs.
-_ To do : generaliser le tri sur les autres champs
-
--* Probleme confirmation d'une reponse a un sondage (a voir). La fonction de confirmation d'une reponse dans un sondage est pour l'instant by passee, la reponse est automatiquement valide sans passage par confirmation = attente. Cette fonction doit servir a traiter des  multiple via des robots ou quelque chose comme ça.
-_ To do : faire marcher cette fonction de confirmation de la reponse, sur SPIP2, et enlever le by pass decrit ci-dessus.
-
-<a href="http://zone.spip.org/trac/spip-zone/wiki/SpipForms" target="_new">documentation</a> 
 
 		[it]Gestione ed amministrazione di form modificabili. Questo plugin consente anche la publicazione di sondaggi ed inchieste, la raccolta delle risposte all'interno della base dati e le mette a disposizione per lo scaricamento in formato csv
 
