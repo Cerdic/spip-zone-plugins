@@ -1,14 +1,11 @@
 <plugin>
 	<nom>Profil public</nom>
-	<slogan>une page profil &agrave; la iGoogle</slogan>
+	<slogan>Une page profil &#224; la iGoogle</slogan>
 	<auteur>cris</auteur>
-	<version>0.1</version>
+	<version>0.1.0</version>
 	<etat>test</etat>
 	<description>
-	Le plugin  permet de cr&#233;er une page perso pour les auteurs enregistr&#233;s, 
-	rassemblant divers widgets d&#233;placables, r&#233;ductibles et refermables &agrave; l'envie
-	l'appel se fait via la page spip.php?page=profil.
-	Vous pouvez choisir les widgets &agrave; afficher avec cfg
+	Le plugin  permet de cr&#233;er une page perso pour les auteurs enregistr&#233;s, rassemblant divers widgets d&#233;placables, r&#233;ductibles et refermables &#224; l'envie. L'appel se fait via la page spip.php?page=profil. Vous pouvez choisir les widgets &#224; afficher avec cfg.
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-profil-public</lien>
 	<icon>img/icon.png</icon>
