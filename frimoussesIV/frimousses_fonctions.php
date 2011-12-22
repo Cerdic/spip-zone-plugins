@@ -91,9 +91,8 @@ function frimousses_pre_propre($chaine) {
   }
 
 	// pas de & dans les smileys donc on peut remplacer avec 1 OU 2 uniquement
-	if (strpos($chaine,'&')===false)
     $chaine = preg_replace(array_keys($replace1),array_values($replace1),$chaine);
-	else
+	if (strpos($chaine,'&')!==false)
 		$chaine = preg_replace(array_keys($replace2),array_values($replace2),$chaine);
 
 	return $chaine;
