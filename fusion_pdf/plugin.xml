@@ -4,17 +4,16 @@
 	<version>0.2.3</version>
 	<etat>test</etat>
 	<icon>img/fusionpdf_120.png</icon>
-    <slogan>Extrait et fusionne les pages d'un pdf</slogan>
+   <slogan>Extrait et fusionne les pages d'un pdf</slogan>
 	<description>
-    Fabriquer un pdf -de plusieurs pages- a partir d'un autre.
-    - Attention MODIF essentielle sur fpdf/fpdf.php: fusion marche uniquement sur file (case 'F') ligne 1049 remplacer break par return true;
-    </description>
+    Fabriquer un pdf de plusieurs pages &#224; partir d'un autre. Attention MODIF essentielle sur fpdf/fpdf.php : fusion marche uniquement sur file (case 'F') ligne 1049 remplacer break par return true;
+   </description>
 	<lien>http://www.spip-contrib.net/</lien>
 	<prefix>fusionpdf</prefix>
 	<fonctions>inc/fusionpdf_fonctions.php</fonctions>
 	<necessite id="lib:PDFMerger" src="http://pdfmerger.codeplex.com/" />
-    <necessite id="SPIP" version="[2.0.0;2.1.99]" />
-    <traduire gestionnaire="salvatore" module="fusionpdf" reference="fr" />
+   <necessite id="SPIP" version="[2.0.0;2.1.99]" />
+   <traduire gestionnaire="salvatore" module="fusionpdf" reference="fr" />
 
 	<categorie>divers</categorie>
 </plugin>
