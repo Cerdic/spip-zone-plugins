@@ -3,8 +3,8 @@
 	<slogan>Librairie FPDF pour fabriquer des pdfs.</slogan>
 
 	<description>
-		Ce plugin sert à généré des pdfs via la librairie fpdf pour n'import quelle table. 
-		Il vous suffit de personnaliser exports.php et extends.php en fonction de votre projet et de les insérés dans votre plugin.
+		Ce plugin sert à généré des pdfs via la librairie fpdf pour n'importe quelle table.
+		Il vous suffit de personnaliser exports.php et extends.php en fonction de votre projet et de les insérer dans votre plugin.
 	</description>
 
 	<auteur>[Pierre KUHN->http://www.pierre-kuhn.org], Olivier PLATHEY</auteur>
