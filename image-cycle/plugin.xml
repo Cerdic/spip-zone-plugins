@@ -4,7 +4,7 @@
 	<auteur>Christophe Vallois</auteur>
 	<version>0.2.0</version>
 	<etat>test</etat>
-	<description>Ce plugin permet d'afficher une image aléatoire provenant de toutes les images du site et renvoyant sur l’article d’origine de l’image. Utilise le plugin [jQuery Cycle->http://jquery.malsup.com/cycle/]
+	<description>Ce plugin permet d'afficher une image al&#233;atoire provenant de toutes les images du site et renvoyant sur l'article d'origine de l'image. Utilise le plugin [jQuery Cycle->http://jquery.malsup.com/cycle/]
 	</description>
 	<icon>css/images/logo_article.png</icon>
 	<lien>http://www.spip-contrib.net/Une-image-aleatoire-en-page-d</lien>
