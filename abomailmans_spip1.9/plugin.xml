@@ -1,14 +1,13 @@
 <plugin>
-	<nom>Abonnement &#224; des listes de diff. mailman et sympa</nom>
-	<icon></icon>
+	<nom>Abonnement &#224; des listes de diffusion</nom>
 	<auteur>MaZiaR [NetAktiv->http://www.netaktiv.com]</auteur>
 	<version>0.2.0</version>
 	<etat>dev</etat>
 	<description>
-	Ce plugin permet via une balise #FORMULAIRE_ABOMAILMAN d&rsquo;afficher un formulaire d&rsquo;abonnement &agrave; l&rsquo;ensemble des listes renseign&eacute;es Mailman.
-	Cette inscription se fait via l&rsquo;interface priv&eacute;e de SPIP par le menu &laquo; Edition &gt; Abomailmans &gt; les listes de diffusions mailman &raquo;
-	Ensuite il vous est possible de s&eacute;lectionner des articles de votre SPIP, par des crit&egrave;res de date, de rubrique et/ou de mot cl&eacute; et envoyer leurs contenus &agrave; ces listes, en utilisant des squelettes de mise en page du contenu.
-    Le lien avec les listes Mailman et Sympa se fait par des envois d&rsquo;e-mail.
+			Ce plugin permet via une balise <code>#FORMULAIRE_ABOMAILMAN</code> d'afficher un formulaire d'abonnement &#224; l'ensemble des listes [Mailman->http://www.gnu.org/software/mailman/], [Ezmlm->http://www.ezmlm.org/] ou [Sympa->http://www.sympa.org] renseign&#233;es.
+			Cette inscription se fait via l'interface priv&#233;e de SPIP par le menu "Edition Abomailmans les listes de diffusions mailman".
+			Ensuite il vous est possible de s&#233;lectionner des articles de votre SPIP, par des crit&#232;res de date, de rubrique et/ou de mot cl&#233; et envoyer leurs contenus &#224; ces listes, en utilisant des squelettes de mise en page du contenu.
+			Le lien avec les listes Mailman, Ezmlm et Sympa se fait par des envois d'e-mail.
 	</description>
 	<lien>http://www.spip-contrib.net/Abomailmans-pour-s-abonner-a-des</lien>
 	<options>abomailmans_options.php</options>
@@ -30,6 +29,6 @@
 		<inclure>abomailmans_interface.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[1.9.0;2.0.0)" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>communication</categorie>
 </plugin>
