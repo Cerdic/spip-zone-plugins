@@ -6,7 +6,7 @@
 	<description>
 			Ce plugin permet via une balise <code>#FORMULAIRE_ABOMAILMAN</code> d'afficher un formulaire d'abonnement &#224; l'ensemble des listes [Mailman->http://www.gnu.org/software/mailman/], [Ezmlm->http://www.ezmlm.org/] ou [Sympa->http://www.sympa.org] renseign&#233;es.
 			Cette inscription se fait via l'interface priv&#233;e de SPIP par le menu "Edition Abomailmans les listes de diffusions mailman".
-			Ensuite il vous est possible de s&#233;lectionner des articles de votre SPIP, par des crit&#232;res de date, de rubrique et/ou de mot cl&#233; et envoyer leurs contenus &#224; ces listes, en utilisant des squelettes de mise en page du contenu.
+			Ensuite il vous est possible de s&#233;lectionner des articles de votre SPIP, par des crit&#232;res de date, de rubrique et/ou de mot-cl&#233; et envoyer leurs contenus &#224; ces listes, en utilisant des squelettes de mise en page du contenu.
 			Le lien avec les listes Mailman, Ezmlm et Sympa se fait par des envois d'e-mail.
 	</description>
 	<lien>http://www.spip-contrib.net/Abomailmans-pour-s-abonner-a-des</lien>
