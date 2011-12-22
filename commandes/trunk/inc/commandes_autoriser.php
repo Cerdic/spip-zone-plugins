@@ -19,10 +19,12 @@ function autoriser_commander_dist($faire, $quoi, $id, $qui, $options){
 
 // on ne laisse pas les redacteurs voir les commandes
 // ni voir les commandes dans la recherche spip
+// Sauf pour celles dont il est l'auteur
 function autoriser_commande_dist($faire, $quoi, $id, $qui, $options) {
 	return
-		$qui['statut'] == '0minirezo'
-		AND !$qui['restreint'];
+		$qui['id_auteur'] == sql_getfetsel('id_auteur', 'spip_commandes', 'id_commande = '.sql_quote($id)) OR 
+			( $qui['statut'] == '0minirezo'
+			  AND !$qui['restreint'] );
 }
 
 ?>
