@@ -25,7 +25,7 @@
 
 	<description>
 		<multi>
-		[fr]Remplace les codes hexa des couleurs dans un texte SPIP, par un bloc de la dite couleur, en conservant son code &agrave; l'interieur.
+		[fr]Remplace les codes hexa des couleurs dans un texte SPIP, par un bloc de la dite couleur, en conservant son code &#224; l'int&#233;rieur.
 		[en]Replaces hexadecimal color codes in a SPIP text, with a bloc with the relevant color in background, mentionning its hexa code.
 		</multi>
 	</description>
