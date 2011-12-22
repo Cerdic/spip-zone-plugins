@@ -21,5 +21,7 @@
 		'label_style_formulaire32' => 'Grand (32px)',
 		'legend_formulaire_public' => 'Formulaire public',
 		'legend_style_formulaire' => 'Style du formulaire',
-		'login_first' => "D&eacute;sol&eacute; l'action requiert d'&ecirc;tre enregistr&eacute;, authentifiez-vous d'abord"
+		'login_first' => "D&eacute;sol&eacute; l'action requiert d'&ecirc;tre enregistr&eacute;, authentifiez-vous d'abord",
+        
+        'configurer'=>'Configurer'
 	);
