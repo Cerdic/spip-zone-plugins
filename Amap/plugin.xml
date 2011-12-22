@@ -4,15 +4,15 @@
 
 	<description>
 		Le plugin est d&#233;velopp&#233; pour g&#233;r&#233; les paniers et adh&#233;rents (dit amapiens). 
-		Les paniers sont cr&#233;&#233; et attribu&#233;s &#224; un amapien, ce dernier pourra mettre &#224; disposition un panier si il n'est pas pr&#233;sent 
-		pour le r&#233;cup&#233;r&#233; le jour pr&#233;vu.
+		Les paniers sont cr&#233;&#233;s et attribu&#233;s &#224; un amapien, ce dernier pourra mettre &#224; disposition un panier si il n'est pas pr&#233;sent 
+		pour le r&#233;cup&#233;rer le jour pr&#233;vu.
 	</description>
 
 	<auteur>St&#233;phane Moulinet, E-cosystems, [Pierre KUHN->http://www.pierre-kuhn.org] </auteur>
 	<version>2.2.0</version>
 	<version_base>1.0</version_base>
 
-	<licence>GNU/GPL - (c) 2010 - 2011</licence>
+	<licence>GNU/GPL - (c) 2010-2011</licence>
 	<etat>dev</etat>
 
 	<prefix>amap</prefix>
