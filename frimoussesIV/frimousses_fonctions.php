@@ -55,13 +55,13 @@ function frimousses_liste_smileys() {
   $les_smileys[':!'] = 'face20-16.png'; 
   $les_smileys['8-)'] = 'face21-16.png'; 
   $les_smileys['8)'] = 'face21-16.png'; 
-  $les_smileys['MONK'] = 'face22-16.png'; 	 
+  #$les_smileys['MONK'] = 'face22-16.png';
   $les_smileys['|-)'] = 'face23-16.png'; 
   $les_smileys['|)'] = 'face23-16.png'; 
   $les_smileys['O-)'] = 'face24-16.png'; 
   $les_smileys['O)'] = 'face24-16.png'; 
-  $les_smileys['ATTN'] = 'important-16.png'; 
-  $les_smileys['SVNT'] = 'puce-16.png';  
+  #$les_smileys['ATTN'] = 'important-16.png';
+  #$les_smileys['SVNT'] = 'puce-16.png';
 
   return $les_smileys;
 }
@@ -73,6 +73,8 @@ function frimousses_liste_smileys() {
 // http://www.spip-contrib.net/Smileys-III-Un-point-d-entree-pour
 
 function frimousses_pre_propre($chaine) {
+	if (strpos($chaine, ':')===false && strpos($chaine, ')')===false) {return $chaine;}
+
 	static $replace1 = null;
 	static $replace2 = null;
 	if (!$replace1 OR !$replace2){
