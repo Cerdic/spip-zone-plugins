@@ -1,13 +1,13 @@
 <plugin>
 	<nom>
 		<multi>
-			[fr]M&#233;tadonn&#233;es pour la M&#233;diath&egrave;que
+			[fr]M&#233;tadonn&#233;es pour la M&#233;diath&#232;que
 			[en]Metadata for the media library
 		</multi>
 	</nom>
 	<slogan>
 		<multi>
-			[fr]Afficher les infos EXIF, GPS et IPTC dans la m&#233;diath&egrave;que
+			[fr]Afficher les infos EXIF, GPS et IPTC dans la m&#233;diath&#232;que
 			[en]Display EXIF, GPS et IPTC informations in media library
 		</multi>
 	</slogan>
@@ -17,9 +17,9 @@
 	<etat>stable</etat>
 	<description>
 		<multi>
-			[fr]Ce plugin constitue une glue entre le plugin m&#233;diath&egrave;que et le plugins M#233;tadonn&#233;es photo. Il permet d'afficher les informations EXIF, GPS et IPTC d'un fichier JPEG dans l'arborescence de la m&#233;diath&egrave;que.
+			[fr]Ce plugin constitue une glue entre le plugin m&#233;diath&#232;que et le plugins M&#233;tadonn&#233;es photo. Il permet d'afficher les informations EXIF, GPS et IPTC d'un fichier JPEG dans l'arborescence de la m&#233;diath&#232;que.
 
-Les informations EXIF, IPTC, GPS et histogramme sont extraite grace au plugin M#233;tadonn&#233;es photo de ARNO*.
+Les informations EXIF, IPTC, GPS et histogramme sont extraite grace au plugin M&#233;tadonn&#233;es photo de ARNO*.
 
 			[en]This plugin is a glue between the media library and  the plugin metadata. It allows to view EXIF, IPTC and GPS data from a JPEG file in the plugin Media Library.
 
