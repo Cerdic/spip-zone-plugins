@@ -1,7 +1,7 @@
 <?php
-
+  
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-':-)*'=> 'sourire',
+':-)*'=> 'bisou',
 ':-)'=> 'sourire',
 'o:)'=> 'ange',
 'O:)'=> 'ange',
@@ -12,6 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ';)'=> 'clin d\'oeil',
 ':-('=> 'triste',
 ':('=> 'triste',
+':\'-(' => 'très triste',
+':\'(' => 'très triste',
 ':-O'=> 'bouche ronde',
 ':O)'=> 'clown',
 ':O'=> 'bouche ronde',
@@ -22,8 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ':0'=> 'smiley &#058;&#048;',
 ':-|'=> 'sans voix',
 ':|'=> 'sans voix',
-':-/'=> 'smiley &#058;&#045;&#047;',
-':/'=> 'smiley &#058;&#047;',
+':-/'=> 'perplexe',
+':/'=> 'perplexe',
 ':-p'=> 'langue tir&eacute;e',
 ':p'=> 'langue tir&eacute;e',
 ':-...'=> 'sans voix',
@@ -34,13 +36,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ':.'=> 'sans voix',
 ':-x'=> 'bisous',
 ':x'=> 'bisous',
+':-*' => 'bisou',
+':*' => 'bisou',
 'B-)'=> 'lunettes de soleil',
 'B)'=> 'lunettes de soleil',
 ':-@'=> 'love',
 ':@'=> 'love',
 ':$'=> 'smiley &#058;&#036;',
-':-*'=> 'smiley &#058;&#045;&#042;',
-':*'=> 'smiley &#058;&#042;',
 ':-!'=> 'smiley &#058;&#045;&#033;',
 ':!'=> 'smiley &#058;&#033;',
 '8-)'=> 'lunettes de soleil',
@@ -52,7 +54,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'O)'=> 'smiley &#079;&#041;',
 'ATTN'=> 'ATTENTION',
 'SVNT'=> 'SUIVANT',
-":\\'-("=> 'triste',
-":\\'("=> 'triste'
 );
+
 ?>

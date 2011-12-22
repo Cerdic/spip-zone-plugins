@@ -9,59 +9,56 @@ function frimousses_liste_smileys() {
   /*Listes des images a associer aux smileys*/
 
   $les_smileys = array();
-  $les_smileys[':-)*'] = 'face13-16.png';
-  $les_smileys[':-)'] = 'face1-16.png'; 
-  $les_smileys['o:)'] = 'face18-16.png'; 
-  $les_smileys['O:)'] = 'face18-16.png'; 
-  $les_smileys['0:)'] = 'face18-16.png'; 
-  $les_smileys[':)'] = 'face1-16.png'; 
-  $les_smileys['%-)'] = 'face2-16.png'; 
-  $les_smileys[';-)'] = 'face3-16.png'; 
-  $les_smileys[';)'] = 'face3-16.png'; 
-  $les_smileys[':-('] = 'face4-16.png'; 
-  $les_smileys[':('] = 'face4-16.png'; 
-  $les_smileys[':-O'] = 'face5-16.png';
-  $les_smileys[':O)'] = 'face7-16.png'; 
-  $les_smileys[':O'] = 'face5-16.png';
-  $les_smileys[':-D'] = 'face6-16.png'; 
-  $les_smileys[':D'] = 'face6-16.png'; 
-  $les_smileys[':o)'] = 'face7-16.png'; 
-  $les_smileys[':0)'] = 'face7-16.png'; 
-  $les_smileys[':0'] =  'face5-16.png';
-  $les_smileys[':-|'] = 'face8-16.png'; 
-  $les_smileys[':|'] = 'face8-16.png'; 
-  $les_smileys[':-/'] = 'face9-16.png'; 
-  $les_smileys[':/'] = 'face9-16.png'; 
-  $les_smileys[':-p'] = 'face10-16.png'; 
-  $les_smileys[':p'] = 'face10-16.png'; 
-  $les_smileys[':\'-('] = 'face11-16.png'; 
-  $les_smileys[':\'('] = 'face11-16.png'; 
-  $les_smileys[':-...'] = 'face12-16.png'; 
-  $les_smileys[':...'] = 'face12-16.png'; 
-  $les_smileys[':-..'] = 'face12-16.png'; 
-  $les_smileys[':..'] = 'face12-16.png'; 
-  $les_smileys[':-.'] = 'face12-16.png'; 
-  $les_smileys[':.'] = 'face12-16.png'; 
-  $les_smileys[':-x'] = 'face14-16.png'; 
-  $les_smileys[':x'] = 'face14-16.png'; 
-  $les_smileys['B-)'] = 'face15-16.png'; 
-  $les_smileys['B)'] = 'face15-16.png'; 
-  $les_smileys[':-@'] = 'face16-16.png'; 
-  $les_smileys[':@'] = 'face16-16.png'; 
-  $les_smileys[':$'] = 'face17-16.png'; 
-  $les_smileys[':-*'] = 'face19-16.png'; 
-  $les_smileys[':*'] = 'face19-16.png'; 
-  $les_smileys[':-!'] = 'face20-16.png'; 
-  $les_smileys[':!'] = 'face20-16.png'; 
-  $les_smileys['8-)'] = 'face21-16.png'; 
-  $les_smileys['8)'] = 'face21-16.png'; 
-  #$les_smileys['MONK'] = 'face22-16.png';
-  $les_smileys['|-)'] = 'face23-16.png'; 
-  $les_smileys['|)'] = 'face23-16.png'; 
-  $les_smileys['O-)'] = 'face24-16.png'; 
-  $les_smileys['O)'] = 'face24-16.png'; 
-  #$les_smileys['ATTN'] = 'important-16.png';
-  #$les_smileys['SVNT'] = 'puce-16.png';
+  $les_smileys[':-)*'] = 'smiley-kiss-16.png';
+	$les_smileys[':-*'] = 'smiley-kiss-16.png';
+	$les_smileys[':*'] = 'smiley-kiss-16.png';
+  $les_smileys[':-)'] = 'smiley-16.png';
+  $les_smileys['o:)'] = 'smiley-angel-16.png'; 
+  $les_smileys['O:)'] = 'smiley-angel-16.png'; 
+  $les_smileys['0:)'] = 'smiley-angel-16.png'; 
+  $les_smileys[':)'] = 'smiley-16.png'; 
+  $les_smileys['%-)'] = 'smiley-eek-16.png'; 
+  $les_smileys[';-)'] = 'smiley-wink-16.png'; 
+  $les_smileys[';)'] = 'smiley-wink-16.png'; 
+  $les_smileys[':-('] = 'smiley-sad-16.png'; 
+  $les_smileys[':('] = 'smiley-sad-16.png'; 
+  $les_smileys[':-O'] = 'smiley-yell-16.png';
+  $les_smileys[':O)'] = 'smiley-16.png'; 
+  $les_smileys[':O'] = 'smiley-yell-16.png';
+  $les_smileys[':-D'] = 'smiley-lol-16.png'; 
+  $les_smileys[':D'] = 'smiley-lol-16.png'; 
+  $les_smileys[':o)'] = 'smiley-16.png'; 
+  $les_smileys[':0)'] = 'smiley-16.png'; 
+  $les_smileys[':0'] =  'smiley-yell-16.png';
+  $les_smileys[':-|'] = 'smiley-neutral-16.png'; 
+  $les_smileys[':|'] = 'smiley-neutral-16.png'; 
+  $les_smileys[':-/'] = 'smiley-confuse-16.png'; 
+  $les_smileys[':/'] = 'smiley-confuse-16.png'; 
+  $les_smileys[':-p'] = 'smiley-razz-16.png'; 
+  $les_smileys[':p'] = 'smiley-razz-16.png'; 
+  $les_smileys[':\'-('] = 'smiley-cry-16.png'; 
+  $les_smileys[':\'('] = 'smiley-cry-16.png'; 
+  $les_smileys[':-...'] = 'smiley-red-16.png'; 
+  $les_smileys[':...'] = 'smiley-red-16.png'; 
+  $les_smileys[':-..'] = 'smiley-red-16.png'; 
+  $les_smileys[':..'] = 'smiley-red-16.png'; 
+  $les_smileys[':-.'] = 'smiley-red-16.png'; 
+  $les_smileys[':.'] = 'smiley-red-16.png'; 
+  $les_smileys[':-x'] = 'smiley-zipper-16.png'; 
+  $les_smileys[':x'] = 'smiley-zipper-16.png'; 
+  $les_smileys['B-)'] = 'smiley-cool-16.png'; 
+  $les_smileys['B)'] = 'smiley-cool-16.png'; 
+  $les_smileys[':-@'] = 'smiley-sleep-16.png'; 
+  $les_smileys[':@'] = 'smiley-sleep-16.png'; 
+  $les_smileys[':$'] = 'smiley-money-16.png'; 
+  $les_smileys[':-*'] = 'smiley-kiss-16.png'; 
+  $les_smileys[':*'] = 'smiley-kiss-16.png'; 
+  $les_smileys[':-!'] = 'smiley-roll-16.png'; 
+  $les_smileys[':!'] = 'smiley-roll-16.png'; 
+  $les_smileys['8-)'] = 'smiley-eek-16.png'; 
+  $les_smileys['8)'] = 'smiley-eek-16.png'; 
+  $les_smileys['|-)'] = 'smiley-neutral-16.png';
+  $les_smileys['|)'] = 'smiley-neutral-16.png'; 
 
   return $les_smileys;
 }
@@ -82,7 +79,7 @@ function frimousses_pre_propre($chaine) {
 			$alt = _T('smileys:'.$smiley);
 		  $alt = attribut_html($alt);
 			$smiley = preg_quote($smiley,'/');
-			$r = "<img src=\"".find_in_path('frimousses/'.$file).'" width="16" height="16" alt="'.$alt.'" class="smiley" />';
+			$r = "<img src=\"".find_in_path('frimousses/'.$file).'" width="16" height="16" alt="'.$alt.'" title="'.$alt.'" class="smiley" />';
 			// 4 regexp simples qui accrochent sur le premier char
 			// sont plus rapides qu'une regexp complexe qui oblige a des retour en arriere
 			$replace1['/^'.$smiley.'/imsS'] = "<html>$r</html>";
@@ -92,8 +89,7 @@ function frimousses_pre_propre($chaine) {
 		}
   }
 
-	// pas de & dans les smileys donc on peut remplacer avec 1 OU 2 uniquement
-    $chaine = preg_replace(array_keys($replace1),array_values($replace1),$chaine);
+  $chaine = preg_replace(array_keys($replace1),array_values($replace1),$chaine);
 	if (strpos($chaine,'&')!==false)
 		$chaine = preg_replace(array_keys($replace2),array_values($replace2),$chaine);
 
@@ -106,7 +102,7 @@ function balise_SMILEY_DISPO($p) {
   foreach(frimousses_liste_smileys() as $smiley => $file) {
 		$alt = _T('smileys:'.$smiley);
 		$alt = attribut_html($alt);
-		$p->code .= "<li class=\\\"item smiley\\\"><span class=\\\"smiley_nom\\\">$smiley</span><img  class=\\\"smiley_image\\\" src=\\\"".find_in_path("frimousses/$file")."\\\" width=\\\"16\\\" height=\\\"16\\\" alt=\\\"$alt\\\"/><span class=\\\"smiley_alt\\\" />$alt</span></li>\n";
+		$p->code .= "<li class=\\\"item smiley\\\"> <span class=\\\"smiley_nom\\\">$smiley</span><img  class=\\\"smiley_image\\\" src=\\\"".find_in_path("frimousses/$file")."\\\" width=\\\"16\\\" height=\\\"16\\\" alt=\\\"$alt\\\"/> <span class=\\\"smiley_alt\\\" />$alt</span></li>\n";
   }
   $p->code .= '</ul>"';
   $p->type = 'html';
