@@ -5,7 +5,7 @@
 			 [de]Zus&#228;tzliche Administrations-Buttons
 		 </multi>
     </nom>
-	 <slogan>Des boutons d’administration suppl&#233;mentaires dans l’interface publique</slogan>
+	 <slogan>Des boutons d&#8217;administration suppl&#233;mentaires dans l&#8217;interface publique</slogan>
     <version>2.4.0</version>
     <prefix>boutons_admin_supp</prefix>
     <etat>stable</etat>
@@ -26,7 +26,7 @@
 
     La technique employ&#233;e (surcharge du fichier <code>formulaire_admin.html</code>) n&#8217;a rien d&#8217;original : elle est par exemple expliqu&#233;e dans [cette page->http://www.spip-contrib.net/Administrer-un-site-web-depuis-l]. La seule originalit&#233; est qu&#8217;elle se pr&#233;sente ici sous la forme d&#8217;un plugin, qui ne n&#233;cessite donc pas de modification de fichiers ou d&#8217;ajout de squelettes et permet des mises &#224; jour simplifi&#233;es. L&#8217;intitul&#233; des boutons suppl&#233;mentaire est localis&#233; et s&#8217;affichera dans la langue choisie pour l&#8217;interface.
 
-    Noter que les rubriques, articles, br&#224;ves ou r&#233;f&#233;rences &#224; des sites externes cr&#233;&#233;s par ce biais sont par d&#233;faut class&#233;s dans la rubrique depuis laquelle on a cliqu&#233; sur le bouton dans la partie publique du site.
+    Noter que les rubriques, articles, br&#232;ves ou r&#233;f&#233;rences &#224; des sites externes cr&#233;&#233;s par ce biais sont par d&#233;faut class&#233;s dans la rubrique depuis laquelle on a cliqu&#233; sur le bouton dans la partie publique du site.
 
     Un fichier de configuration permet de choisir les boutons suppl&#233;mentaires qu&#8217;on d&#233;sire voir appara&#238;tre afin de masquer d&#233;finitivement ceux qui ne semblent pas utiles. La configuration est globale et concerne tous les utilisateurs.
     [de]Dieses Plugin f&#252;gt im &#246;ffentlichen Bereich zus&#228;tzliche Administrations-Buttons hinzu, die Beispielsweise erm&#246;glichen, den Text eines Artikels, einer Rubrik direkt zu editieren, in den privaten Redaktionsbereich zu gelangen, eine neuen Artikel zu erzeugen, etc. Die M&#246;glichkeiten h&#228;ngen vom Status ab: nur die Administratoren zum Beispiel k&#246;nnen eine Rubrik erzeugen.
