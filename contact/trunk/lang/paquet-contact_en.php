@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
-	'contact_description' => 'This extension provides a contact form with multiple options.',
+	'contact_description' => 'This plugin allows you to compose a contact form (name, address, phone number,...) and to choose the recipient list to receive collected informations by email.',
 	'contact_nom' => 'Advanced Contact Form',
 	'contact_slogan' => 'This extension provides a contact form with multiple options',
 );
