@@ -9,14 +9,11 @@
 	<install>base/acronymes_upgrade.php</install>
 	<etat>stable</etat>
 	<description>
-	D&#233;tection et ajout des d&#233;finitions des acronymes &#224; partir d'une base syndiqu&#233;e ou d'une rubrique.
-	Les acronymes sont d&#233;finis dans des articles, le titre correspond &#224; l'acronyme
-	(en majuscule, sans point de s&#233;paration) et le descriptif au contenu &#224; ajouter dans la balise.
-	Les d&#233;finitions peuvent &#234;tre regroup&#233;es dans une rubrique ou sur un site distant syndiqu&#233;
+	D&#233;tection et ajout des d&#233;finitions des acronymes &#224; partir d'une base syndiqu&#233;e ou d'une rubrique. Les acronymes sont d&#233;finis dans des articles, le titre correspond &#224; l'acronyme (en majuscule, sans point de s&#233;paration) et le descriptif au contenu &#224; ajouter dans la balise. Les d&#233;finitions peuvent &#234;tre regroup&#233;es dans une rubrique ou sur un site distant syndiqu&#233;
 
-	Pour d&#233;finir la rubrique et/ou le site, aller dessus dans l'interface d'admin et cliquer selectionnez-le dans le cadre blanc situ&#233; en bas &#224; gauche (ou en haut a droite si vous &#232;tes en &#233;cran large)
+	Pour d&#233;finir la rubrique et/ou le site, aller dessus dans l'interface d'admin et cliquer selectionnez-le dans le cadre blanc situ&#233; en bas &#224; gauche (ou en haut a droite si vous &#234;tes en &#233;cran large)
 
-	Une page de test boucle sur l'ensemble des articles du site et rep&#232;re tout ce qui ressemble de pr&#232;s ou de loin a un accronyme. Elle permet de v&#233;rifier la compl&#232;tude de votre base.
+	Une page de test boucle sur l'ensemble des articles du site et rep&#232;re tout ce qui ressemble de pr&#232;s ou de loin a un accronyme. Elle permet de v&#233;rifier la compl&#233;tude de votre base.
 	</description>
 	<lien></lien>
 	<prefix>acronymes</prefix>
