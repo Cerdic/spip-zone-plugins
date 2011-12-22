@@ -1,9 +1,10 @@
 <?php
+if (!isset($GLOBALS['spip_version_branche']) OR intval($GLOBALS['spip_version_branche'])<2){
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	define('_DIR_PLUGIN_FRIMOUSSES',(_DIR_PLUGINS.end($p)).'/');
+}
 
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_FRIMOUSSESIV',(_DIR_PLUGINS.end($p)));
-
-function smileys_liste_smileys() {
+function frimousses_liste_smileys() {
   
   /*Listes des images a associer aux smileys*/
 
@@ -71,30 +72,36 @@ function smileys_liste_smileys() {
 // smileys, etc ; reportez vous au forum de l'article :
 // http://www.spip-contrib.net/Smileys-III-Un-point-d-entree-pour
 
-function smileys_pre_propre($chaine) {
-  global $flag_ecrire;
-
-  foreach(smileys_liste_smileys() as $smiley => $file) {
-	$alt = _T('smileys:'.$smiley);
-	if(!$alt) {
-	  $alt = htmlentities($smiley);
-	}
-	$smiley = preg_quote($smiley,'/');
-	$chaine = preg_replace('/(^'.$smiley.'\s|\s'.$smiley.'\s|\s'.$smiley.'$)/', "<html>&nbsp;<img src=\""._DIR_PLUGIN_FRIMOUSSESIV.'/smileys/'.$file.'" alt="'.$alt.'" class="smiley" /></html>', $chaine);	
+function frimousses_pre_propre($chaine) {
+	static $replace1 = null;
+	static $replace2 = null;
+	if (!$replace1 OR !$replace2){
+		foreach(frimousses_liste_smileys() as $smiley => $file) {
+			$alt = _T('smileys:'.$smiley);
+		  $alt = attribut_html($alt);
+			$smiley = preg_quote($smiley,'/');
+			$r = "<img src=\""._DIR_PLUGIN_FRIMOUSSES.'smileys/'.$file.'" alt="'.$alt.'" class="smiley" />';
+			// 4 regexp simples qui accrochent sur le premier char
+			// sont plus rapides qu'une regexp complexe qui oblige a des retour en arriere
+			$replace1['/^'.$smiley.'/imsS'] = "<html>$r</html>";
+			$replace1['/\s'.$smiley.'/imsS'] = "<html>&nbsp;$r</html>";
+			$replace2['/^&nbsp;'.$smiley.'/imsS'] = "<html>$r</html>";
+			$replace2['/&nbsp;'.$smiley.'/imsS'] = "<html>&nbsp;$r</html>";
+		}
   }
-  return echappe_html($chaine);
+  $chaine = preg_replace(array_keys($replace1),array_values($replace1),$chaine);
+	if (strpos($chaine,'&')!==false)
+		$chaine = preg_replace(array_keys($replace2),array_values($replace2),$chaine);
+	return $chaine;
 }
 
 function balise_SMILEY_DISPO($p) {
 
-
   $p->code = '"<ul class=\"listes_smileys\">';
-  foreach(smileys_liste_smileys() as $smiley => $file) {
-	$alt = _T('smileys:'.$smiley);
-	if(!$alt) {
-	  $alt = htmlentities(texte_script($smiley),ENT_QUOTES);
-	}
-	$p->code .= "<li class=\\\"un_smiley\\\"><span class=\\\"smiley_nom\\\">$smiley</span><img  class=\\\"smiley_image\\\" src=\\\""._DIR_PLUGIN_FRIMOUSSESIV."/smileys/$file\\\"  alt=\\\"$alt\\\"/><span class=\\\"smiley_alt\\\" />$alt</span></li>\n";
+  foreach(frimousses_liste_smileys() as $smiley => $file) {
+		$alt = _T('smileys:'.$smiley);
+		$alt = attribut_html($alt);
+		$p->code .= "<li class=\\\"un_smiley\\\"><span class=\\\"smiley_nom\\\">$smiley</span><img  class=\\\"smiley_image\\\" src=\\\""._DIR_PLUGIN_FRIMOUSSES."smileys/$file\\\"  alt=\\\"$alt\\\"/><span class=\\\"smiley_alt\\\" />$alt</span></li>\n";
   }
   $p->code .= '</ul>"';
   $p->type = 'html';
