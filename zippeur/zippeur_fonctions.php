@@ -46,7 +46,7 @@ function zippeur_zipper($chemin,$array,$cmd,$plat){
 			
 			
 		}
-		if ($plat==oui)
+		if ($plat=='oui')
 			$erreur = $zip->add($array,PCLZIP_OPT_REMOVE_ALL_PATH);
 		else
 			$erreur = $zip->add($array,PCLZIP_OPT_REMOVE_PATH, $plat);
