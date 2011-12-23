@@ -10,7 +10,7 @@ function ziptex_polyglossia($lang){
 }
 function ziptex_dir($array){
 	foreach ($array as $dir){
-		sous_repertoire(_DIR_ZIPTEX.'/'.$dir);	
+		sous_repertoire(_DIR_ZIPTEX.$dir);	
 	}
 }
 function ziptex_zipper($array){
@@ -38,11 +38,11 @@ function ziptex_zipper($array){
 function ziptex_creer_tex($squel,$nom,$options=array()){
 
 	$contenu = recuperer_fond($squel,$options);
-	ecrire_fichier(_DIR_ZIPTEX.'/'.$nom,$contenu);
+	ecrire_fichier(_DIR_ZIPTEX.$nom,$contenu);
 	
 }
 
 function ziptex_copier_tex($orig,$dest){
-	copy(find_in_path($orig),_DIR_ZIPTEX.'/'.$dest);
+	copy(find_in_path($orig),_DIR_ZIPTEX.$dest);
 }
 ?>
