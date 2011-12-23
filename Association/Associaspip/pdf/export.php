@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION"))
 	return;
 
 define('FPDF_FONTPATH', 'font/');
-include_spip('pdf/fpdf');
+include_spip('fpdf');
 include_spip('inc/charsets');
 include_spip('inc/association_plan_comptable');
 
@@ -35,9 +35,10 @@ class EXPORT_PDF extends FPDF {
 	var $space_h = 2;
 	var $largeur_utile = 0; // largeur sans les marges droites et gauches
 	var $largeur_pour_titre = 0; // largeur utile sans icone
-	var $annee;
+	var $exercice;
 	var $join;
 	var $sel;
+	var $where;
 	var $having;
 	var $order;
 	var $total_charges;
@@ -45,11 +46,12 @@ class EXPORT_PDF extends FPDF {
 
 	function init($var) {
 		$tableau = @unserialize($var);
-		$this->annee = $tableau[0];
+		$this->exercice = $tableau[0];
 		$this->join = $tableau[1];
 		$this->sel = $tableau[2];
-		$this->having = $tableau[3];
-		$this->order = $tableau[4];
+		$this->where = $tableau[3];
+		$this->having = $tableau[4];
+		$this->order = $tableau[5];
 
 		$this->largeur_utile = $this->largeur - $this->marge_gauche - $this->marge_droite;
 		$this->largeur_pour_titre = $this->largeur_utile - $this->icone_h - 3 * $this->space_h;
@@ -59,12 +61,16 @@ class EXPORT_PDF extends FPDF {
 
 		$this->total_charges = 0;
 		$this->total_produits = 0;
+
+		$this->SetAuthor('Marcel BOLLA');
+		$this->SetCreator('Associaspip & Fpdf');
+		$this->SetTitle('Module Comptabilite de Associaspip');
+		$this->SetSubject('Compte de Resultat');
 	}
 
 	function Footer() {
 		//Positionnement a 2 fois la marge du bas
 		$this->SetY(-2 * $this->marge_bas);
-		//$this->SetY($this->yy + $this->space_v);
 		//Arial italique 8
 		$this->SetFont('Arial', 'I', 8);
 		//Couleur du texte en gris
@@ -115,7 +121,7 @@ class EXPORT_PDF extends FPDF {
 		$this->SetFillColor(235);
 		//Sous titre Date début et fin de l'exercice
 		$this->SetXY($xc, $yc);
-		$this->Cell($this->largeur_pour_titre, 6, utf8_decode("Exercice : " . $this->annee), 0, 0, 'C', true);
+		$this->Cell($this->largeur_pour_titre, 6, utf8_decode("Exercice : " . exercice_intitule($this->exercice)), 0, 0, 'C', true);
 		$yc += 6;
 		//Saut de ligne
 		$this->Ln($this->space_v);
@@ -151,13 +157,14 @@ class EXPORT_PDF extends FPDF {
 		$yc += $this->space_v;
 
 		$quoi = "sum(depense) AS valeurs";
-		$query = sql_select("imputation, " . $quoi . ", date_format(date, '%Y') AS annee$this->sel",
-				"spip_asso_comptes$this->join",
-				"",
-				$this->order . "annee",
-				"code ASC",
-				'',
-				"annee=$this->annee$this->having$classe");
+		$query = sql_select(
+			"imputation, " . $quoi . ", date_format(date, '%Y') AS annee".$this->sel,
+			"spip_asso_comptes".$this->join,
+			$this->where,
+			$this->order,
+			"code ASC",
+			"",
+			$this->having.$classe);
 
 		$chapitre = '';
 		$i = 0;
@@ -251,13 +258,14 @@ class EXPORT_PDF extends FPDF {
 		$yc += $this->space_v;
 
 		$quoi = "sum(recette) AS valeurs";
-		$query = sql_select("imputation, " . $quoi . ", date_format(date, '%Y') AS annee$this->sel",
-				"spip_asso_comptes$this->join",
-				"",
-				$this->order . "annee",
-				"code ASC",
-				'',
-				"annee=$this->annee$this->having$classe");
+		$query = sql_select(
+			"imputation, " . $quoi . ", date_format(date, '%Y') AS annee".$this->sel,
+			"spip_asso_comptes".$this->join,
+			$this->where,
+			$this->order,
+			"code ASC",
+			"",
+			$this->having.$classe);
 
 		$chapitre = '';
 		$i = 0;
@@ -387,13 +395,14 @@ class EXPORT_PDF extends FPDF {
 		$charges_evaluees = $produits_evalues = 0;
 
 		$quoi = "sum(depense) AS charge_evaluee, sum(recette) AS produit_evalue";
-		$query = sql_select("imputation, " . $quoi . ", date_format(date, '%Y') AS annee$this->sel",
-				"spip_asso_comptes$this->join",
-				"",
-				$this->order . "annee",
+		$query = sql_select(
+			"imputation, " . $quoi . ", date_format(date, '%Y') AS annee".$this->sel,
+			"spip_asso_comptes".$this->join,
+				$this->where,
+				$this->order,
 				"code ASC",
-				'',
-				"annee=$this->annee$this->having$classe");
+				"",
+				$this->having.$classe);
 
 		$chapitre = '';
 		$i = 0;
