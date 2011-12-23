@@ -89,7 +89,7 @@ commande:
   match: "#\\(.*)/debut(.*)/fin#"
   replace: supprimer_verb
   is_callback: Y
-  priority: 0
+  priority: -10
 #  if_str: "\subsection"
   
   
