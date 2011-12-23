@@ -12,5 +12,4 @@
 	</description>
 	<fonctions>ziptex_fonctions.php</fonctions>
 	<options>ziptex_options.php</options>
-	<necessite id="Z" />
 </plugin>
