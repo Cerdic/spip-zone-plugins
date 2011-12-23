@@ -51,11 +51,12 @@ function caracteres_latex($texte){
 }
 	
 function supprimer_verb($code){
-
+	
 	$texte = $code[0];
+	$texte_a_traiter = $code[2];
 	$array = array();
 	
-	preg_match_all('#verb¡(.*)\¡#',$texte,$array,PREG_SET_ORDER);
+	preg_match_all('#verb¡(.*)\¡#',$texte_a_traiter,$array,PREG_SET_ORDER);
 	
 	foreach ($array as $i){
 		$texte = str_replace("\\".$i[0],caracteres_latex($i[1]),$texte);	
