@@ -1,5 +1,8 @@
 <?php
 
+// Sécurité
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function mesfavoris_insert_head_css($flux){
 	$config = "";
 	if (isset($GLOBALS['meta']['mesfavoris']))

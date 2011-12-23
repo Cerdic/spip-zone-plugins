@@ -14,6 +14,7 @@
 		'remove_from' => 'Retirer de ma s&eacute;lection',
 
 		'mes_favoris' => 'Mes favoris',
+		'ses_favoris' => 'Ses favoris',
 		'ajoute_le' => 'Ajout&eacute; le',
 
 		'label_style_formulaire16' => 'Petit (16px)',

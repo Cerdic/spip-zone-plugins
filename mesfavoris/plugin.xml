@@ -7,7 +7,7 @@
 	<etat>stable</etat>
 	<prefix>mesfavoris</prefix>
 	<auteur>Olivier Sallou, [C&#233;dric Morin->yterium.net]</auteur>
-	<description>(D&#233;)S&#233;lectionne un article pour g&#233;rer des articles favoris pour un visiteur authentifi&#233;</description>
+	<description>(D&#233;)S&#233;lectionne un objet pour g&#233;rer des objets (articles, rubriques ...) favoris pour un visiteur authentifi&#233;</description>
 	<install>base/mesfavoris.php</install>
 	<lien>http://www.spip-contrib.net/Mes-Favoris-2-0</lien>
 	<pipeline>
@@ -21,6 +21,10 @@
 	<pipeline>
 		<nom>insert_head_css</nom>
 		<inclure>mesfavoris_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>mesfavoris_autoriser.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<categorie>navigation</categorie>
