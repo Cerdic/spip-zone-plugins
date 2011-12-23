@@ -8,6 +8,7 @@
  */
 
 include_spip('public/agenda');
+include_spip('inc/agenda_filtres');
 
 /**
  * Ajout d'un offset a une date
