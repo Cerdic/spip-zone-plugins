@@ -44,34 +44,21 @@ function tx_latex_traiter_liens($lien){
 	
 	return $texte;	
 }
+
+function caracteres_latex($texte){
+	// function qui traite les caractère latex
+	return preg_replace(',(\$|%|&|_|#),',"\\\\$1",$texte);	
+}
+	
 function supprimer_verb($code){
-	// d'abord le décodage du echappe_html général
+
 	$texte = $code[0];
-	
-	$array = array();
-	preg_match_all("#<span class=\"base64\" title=\"(.*)\"></span>#",$texte,$array);
-	
-	foreach ($array[1] as $i){
-		$texte = str_replace("<span class=\"base64\" title=\"$i\"></span>",base64_decode($i),$texte);
-		
-	}
-	
-	
-	// ensuite décodage du echappe_html propre à latex
-	$array = array();
-	preg_match_all("#<span class=\"base64latex\" title=\"(.*)\"></span>#",$texte,$array);
-	
-	foreach ($array[1] as $i){
-		$texte = str_replace("<span class=\"base64latex\" title=\"$i\"></span>",base64_decode($i),$texte);
-		
-	}
-	
-	
 	$array = array();
 	
 	preg_match_all('#verb¡(.*)\¡#',$texte,$array,PREG_SET_ORDER);
+	
 	foreach ($array as $i){
-		$texte = str_replace("\\".$i[0],$i[1],$texte);	
+		$texte = str_replace("\\".$i[0],caracteres_latex($i[1]),$texte);	
 		$texte = str_replace("\begin{english}","",$texte);
 		$texte = str_replace("\end{english}","",$texte);
 	}

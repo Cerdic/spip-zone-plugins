@@ -9,7 +9,7 @@ function propre_latex($t) {
 	$t = appliquer_regles_wheel($t,array('latex/latex.yaml'));
 	$t = latex_traiter_modeles($t);
 	$t = echappe_retour(echappe_retour($t),'latex');
-	
+	$t = appliquer_regles_wheel($t,array('latex/latex-retour.yaml'));
 	return $t;
 }
 
