@@ -59,7 +59,7 @@ function auth_pmb_retrouver_login($login, $serveur='') {
 	// or là, on n'a pas encore le pass.
 		// connexion webservices pmb
 		#include_spip('pmb_fonctions');
-		#pmb_ws_charger_client($ws, '');
+		#pmb_ws_charger_client($ws);
 
 	// ici, c'est un login PMB "peut être"...
 	// on demande à SPIP d'autoriser les connexions avec un mot de passe non
@@ -85,7 +85,7 @@ function auth_pmb_dist ($login, $pass, $serveur='') {
 
 	//connexion webservices pmb
 	include_spip('pmb_fonctions');
-	pmb_ws_charger_client($ws, '');
+	pmb_ws_charger_client($ws);
 
 	
 	// Utilisateur connu ?

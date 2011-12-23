@@ -29,9 +29,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $rpc_client = NULL;
 include_spip('inc/config');
 
-function pmb_section_extraire($id_section, $url_base='') {
+function pmb_section_extraire($id_section) {
 	$tableau_sections = Array();
-	pmb_ws_charger_client($ws, $url_base);
+	pmb_ws_charger_client($ws);
 	try {
 	      //récupérer les infos sur la section parent
 	      $section_parent = $ws->pmbesOPACGeneric_get_section_information($id_section);
@@ -61,9 +61,9 @@ function pmb_section_extraire($id_section, $url_base='') {
 	return $tableau_sections;
 }
 
-function pmb_location_extraire($id_location, $url_base='') {
+function pmb_location_extraire($id_location) {
 	$tableau_locationsections = Array();
-	pmb_ws_charger_client($ws, $url_base);
+	pmb_ws_charger_client($ws);
 	try {
 	      $tab_locations = $ws->pmbesOPACGeneric_get_location_information_and_sections($id_location);
 	      //récupérer les infos sur la localisation parent
@@ -89,9 +89,9 @@ function pmb_location_extraire($id_location, $url_base='') {
 	} 
 	return $tableau_locationsections;
 }
-function pmb_liste_afficher_locations($url_base) {
+function pmb_liste_afficher_locations() {
 	$tableau_sections = Array();
-	pmb_ws_charger_client($ws, $url_base);
+	pmb_ws_charger_client($ws);
 	try {
 	      $tab_locations = $ws->pmbesOPACGeneric_list_locations();
 	      $cpt = 0;
@@ -109,13 +109,14 @@ function pmb_liste_afficher_locations($url_base) {
 	return $tableau_locations;
 }
 
-function pmb_notices_section_extraire($id_section, $url_base, $debut=0, $fin=5) {
+/* aucune occurrence ? */
+function pmb_notices_section_extraire($id_section, $debut=0, $fin=5) {
 	$tableau_resultat = Array();
 	
 	$search = array();
 	$search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);
 			
-	pmb_ws_charger_client($ws, $url_base);
+	pmb_ws_charger_client($ws);
 	try {	
 			$tableau_resultat[0] = Array();
 					
@@ -149,7 +150,7 @@ function pmb_notices_section_extraire($id_section, $url_base, $debut=0, $fin=5) 
 function pmb_collection_extraire($id_collection, $debut=0, $nbresult=5, $id_session=0) {
 	$tableau_resultat = Array();
 	
-	pmb_ws_charger_client($ws, $url_base);
+	pmb_ws_charger_client($ws);
 	try {
 	      $result = $ws->pmbesCollections_get_collection_information_and_notices($id_collection,$id_session);
 	      if ($result) {
@@ -190,7 +191,7 @@ function pmb_collection_extraire($id_collection, $debut=0, $nbresult=5, $id_sess
 function pmb_editeur_extraire($id_editeur, $debut=0, $nbresult=5, $id_session=0) {
 	$tableau_resultat = Array();
 	
-	pmb_ws_charger_client($ws, $url_base);
+	pmb_ws_charger_client($ws);
 	try {
 	      $result = $ws->pmbesPublishers_get_publisher_information_and_notices($id_editeur,$id_session);
 	      if ($result) {
@@ -234,7 +235,7 @@ function pmb_editeur_extraire($id_editeur, $debut=0, $nbresult=5, $id_session=0)
 function pmb_auteur_extraire($id_auteur, $debut=0, $nbresult=5, $id_session=0) {
 	$tableau_resultat = Array();
 	
-	pmb_ws_charger_client($ws, $url_base);
+	pmb_ws_charger_client($ws);
 	try {
 	      $result = $ws->pmbesAuthors_get_author_information_and_notices($id_auteur,$id_session);
 	      if ($result) {
@@ -284,7 +285,7 @@ function pmb_auteur_extraire($id_auteur, $debut=0, $nbresult=5, $id_session=0) {
 
 }
 
-function pmb_recherche_extraire($recherche='', $url_base, $look_ALL='', $look_AUTHOR='', $look_PUBLISHER='', $look_COLLECTION='', $look_SUBCOLLECTION='', $look_CATEGORY='', $look_INDEXINT='', $look_KEYWORDS='', $look_TITLE='', $look_ABSTRACT='', $id_section='', $debut=0, $fin=5, $typdoc='',$id_location='') {
+function pmb_recherche_extraire($recherche='', $look_ALL='', $look_AUTHOR='', $look_PUBLISHER='', $look_COLLECTION='', $look_SUBCOLLECTION='', $look_CATEGORY='', $look_INDEXINT='', $look_KEYWORDS='', $look_TITLE='', $look_ABSTRACT='', $id_section='', $debut=0, $fin=5, $typdoc='',$id_location='') {
 	$tableau_resultat = Array();
 	//$recherche = strtolower($recherche);
 	$search = array();
@@ -356,7 +357,7 @@ function pmb_recherche_extraire($recherche='', $url_base, $look_ALL='', $look_AU
 			  if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
 		}
 	}
-	pmb_ws_charger_client($ws, $url_base);
+	pmb_ws_charger_client($ws);
 	try {	
 			$tableau_resultat[0] = Array();
 					
@@ -399,7 +400,7 @@ function pmb_recherche_extraire($recherche='', $url_base, $look_ALL='', $look_AU
 function pmb_recuperer_champs_recherche($langue=0) {
 	$tresultat = Array();
 	
-	pmb_ws_charger_client($ws, $url_base);
+	pmb_ws_charger_client($ws);
 	try {
 	     $result = $ws->pmbesSearch_getAdvancedSearchFields('opac|search_fields',$langue,true);
 	     $cpt=0;
@@ -633,7 +634,7 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 function pmb_ws_autres_lecteurs($id_notice) {
 
 	$tresultat = Array();
-	pmb_ws_charger_client($ws, $url_base);
+	pmb_ws_charger_client($ws);
 	
 	try {	
 	     if ($ws->pmbesOPACGeneric_is_also_borrowed_enabled()) {
@@ -658,7 +659,7 @@ function pmb_ws_autres_lecteurs($id_notice) {
 function pmb_ws_documents_numeriques ($id_notice, $id_session=0) {
 
 	$tresultat = Array();
-	pmb_ws_charger_client($ws, $url_base);
+	pmb_ws_charger_client($ws);
 	
 	try {	
 		$r=$ws->pmbesNotices_listNoticeExplNums($id_notice, $id_session);
@@ -685,7 +686,7 @@ function pmb_ws_documents_numeriques ($id_notice, $id_session=0) {
 function pmb_ws_dispo_exemplaire($id_notice, $id_session=0) {
   
 	$tresultat = Array();
-	pmb_ws_charger_client($ws, $url_base);
+	pmb_ws_charger_client($ws);
 	
 	try {	
 	     $r=$ws->pmbesItems_fetch_notice_items($id_notice, $id_session);
@@ -763,7 +764,7 @@ function pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat) {
 }
 
 //charger les webservices
-function pmb_ws_charger_client(&$ws, $url_base) {
+function pmb_ws_charger_client(&$ws) {
 	global $rpc_client;
 	if ($rpc_client)
 		$ws = $rpc_client;
@@ -809,7 +810,7 @@ function pmb_ws_liste_tri_recherche() {
 	...
       )*/
 	$tresultat = Array();
-	pmb_ws_charger_client($ws, $url_base);
+	pmb_ws_charger_client($ws);
 	
 	try {	
 	     $tresultat=$ws->pmbesSearch_get_sort_types();
@@ -821,23 +822,21 @@ function pmb_ws_liste_tri_recherche() {
 }
 
 // retourne un tableau associatif contenant tous les champs d'une notice 
-function pmb_notice_extraire ($id_notice, $url_base) {
+function pmb_notice_extraire ($id_notice) {
 	$tableau_resultat = Array();
-	pmb_ws_charger_client($ws, $url_base);
+	pmb_ws_charger_client($ws);
 	pmb_ws_recuperer_notice($id_notice, $ws, $tableau_resultat);
 	return $tableau_resultat;
 }
 
 
 // retourne un tableau associatif contenant tous les champs d'un tableau d'id de notices 
-function pmb_tabnotices_extraire ($tabnotices, $url_base) {
+function pmb_tabnotices_extraire ($tabnotices) {
 	$tableau_resultat = Array();
 	$listenotices = Array();
-	pmb_ws_charger_client($ws, $url_base);
+	pmb_ws_charger_client($ws);
 	if (is_array($tabnotices)) {
-		foreach($tabnotices as $cle=>$valeur){
-		    $listenotices[] = $valeur;
-		}
+		$listenotices = array_values($tabnotices);
 	}
 	
 	pmb_ws_recuperer_tab_notices ($listenotices, $ws, $tableau_resultat);
@@ -846,9 +845,9 @@ function pmb_tabnotices_extraire ($tabnotices, $url_base) {
 }
 
 // retourne un tableau associatif contenant les prêts en cours
-function pmb_prets_extraire ($session_id, $url_base, $type_pret=0) {
+function pmb_prets_extraire ($session_id, $type_pret=0) {
 	$tableau_resultat = Array();
-	pmb_ws_charger_client($ws, $url_base);
+	pmb_ws_charger_client($ws);
 	try{
 	      $loans = $ws->pmbesOPACEmpr_list_loans($session_id, $type_pret);
 	      $liste_notices = Array();
@@ -892,9 +891,9 @@ function pmb_prets_extraire ($session_id, $url_base, $type_pret=0) {
 			
 }
 
-function pmb_reservations_extraire($pmb_session, $url_base) {
+function pmb_reservations_extraire($pmb_session) {
 	$tableau_resultat = Array();
-	pmb_ws_charger_client($ws, $url_base);
+	pmb_ws_charger_client($ws);
 	$reservations = $ws->pmbesOPACEmpr_list_resas($pmb_session);
 	$liste_notices = Array();
 	
@@ -929,10 +928,10 @@ function pmb_reservations_extraire($pmb_session, $url_base) {
 	return $tableau_resultat;
 
 }
-function pmb_tester_session($pmb_session, $id_auteur, $url_base) {
+function pmb_tester_session($pmb_session, $id_auteur) {
 	
 	//tester si la session pmb est toujours active
-	pmb_ws_charger_client($ws, $url_base);
+	pmb_ws_charger_client($ws);
 	
 
 	try {
@@ -952,8 +951,8 @@ function pmb_tester_session($pmb_session, $id_auteur, $url_base) {
 		return 0;
 	}
 }
-function pmb_reserver_ouvrage($session_id, $notice_id, $bulletin_id, $location, $url_base) {
-	pmb_ws_charger_client($ws, $url_base);
+function pmb_reserver_ouvrage($session_id, $notice_id, $bulletin_id, $location) {
+	pmb_ws_charger_client($ws);
 	$result= Array();
 
 	$result = $ws->pmbesOPACEmpr_add_resa($session_id, $notice_id, $bulletin_id, $location);
