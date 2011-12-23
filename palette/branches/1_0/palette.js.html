@@ -1,0 +1,17 @@
+[(#REM)
+
+  Charge la librairie farbtastic ainsi que le javascript du plugin Palette
+  
+  Ajax : pour disposer de palette dans du code html retourné par Ajax, comme par exemple
+  dans un contrôleur renvoyé par le plugin crayons, introduisez dans le code html retourné par la requête xmlHTTPrequest
+  un appel à la méthode init_palette, comme ceci :
+  
+<script language="javascript">
+  try {init_palette();}
+  catch(e) {}
+</script>';
+
+
+]#CACHE{7*24*86400}#HTTP_HEADER{'Content-Type: text/javascript'}
+[(#INCLURE{lib/farbtastic/farbtastic.js}|compacte_js)]
+[(#INCLURE{fond=javascript/palette2.js}|compacte_js)]

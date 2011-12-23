@@ -1,0 +1,39 @@
+<plugin>
+	<nom>Palette</nom>
+	<slogan>
+		<multi>
+		[fr]S&#233;lecteur de couleurs
+		[en]Color picker
+		</multi>
+	</slogan>
+	<auteur>Daniel FAIVRE (&#224; partir de travaux de Marcimat)</auteur>
+	<licence>&#169; 2008 GNU/LGPL</licence>
+	<version>1.0.1</version>
+	<etat>stable</etat>
+	<install>palette_install.php</install>
+	
+	<description>
+		<multi>
+		[fr]Donnez la classe palette &#224; un input pour lui ajouter un s&#233;lecteur de couleurs : <code><input class="palette" name="couleur" value="#dfdfdf" /></code>
+		[en]Set class palette to an input to add a color picker: <code><input class="palette" name="couleur" value="#dfdfdf" /></code>
+		</multi>
+	</description>
+   <lien>http://www.spip-contrib.net/Palette</lien>
+	<prefix>palette</prefix>
+	<icon>images/palette.png</icon>
+	<options>palette_options.php</options>
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>palette_pipeline.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>header_prive</action>
+		<inclure>palette_pipeline.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
+	<utilise id="cfg" version="[1.10.4;]" />
+	<categorie>outil</categorie>
+</plugin>
