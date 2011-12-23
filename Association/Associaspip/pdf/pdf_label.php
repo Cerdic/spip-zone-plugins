@@ -2,29 +2,34 @@
 ////////////////////////////////////////////////////
 // PDF_Label 
 //
-// Classe afin d'éditer au format PDF des étiquettes
+// Classe afin d'ï¿½diter au format PDF des ï¿½tiquettes
 //
-// Basé sur le  script deLaurent PASSEBECQ <lpasseb@numericable.fr>
+// Basï¿½ sur le  script deLaurent PASSEBECQ <lpasseb@numericable.fr>
 ////////////////////////////////////////////////////
 
-require_once('fpdf.php');
+if (!defined("_ECRIRE_INC_VERSION"))
+	return;
+
+define('FPDF_FONTPATH', 'font/');
+include_spip('fpdf');
+include_spip('inc/charsets');
 
 class PDF_Label extends FPDF {
 
-	// Propriétés privées
-	var $_Avery_Name	= '';				// Nom du format de l'étiquette
-	var $_Margin_Left	= 0;				// Marge de gauche de l'étiquette
-	var $_Margin_Top	= 0;				// Marge en haut de la page avant la première étiquette
-	var $_X_Space 		= 0;				// Espace horizontal entre 2 bandes d'étiquettes
-	var $_Y_Space 		= 0;				// Espace vertical entre 2 bandes d'étiquettes
-	var $_X_Number 		= 0;				// Nombre d'étiquettes sur la largeur de la page
-	var $_Y_Number 	= 0;				// Nombre d'étiquettes sur la hauteur de la page
-	var $_Width 			= 0;				// Largeur de chaque étiquette
-	var $_Height 			= 0;				// Hauteur de chaque étiquette
-	var $_Char_Size		= 10;				// Hauteur des caractères
-	var $_Line_Height	= 10;				// Hauteur par défaut d'une ligne
-	var $_Metric 			= 'mm';			// Unité de mesure des étiquettes. Aidera à calculer les bonnes valeurs
-	var $_Metric_Doc 	= 'mm';			// Unité de mesure du document
+	// Propriï¿½tï¿½s privï¿½es
+	var $_Avery_Name	= '';				// Nom du format de l'ï¿½tiquette
+	var $_Margin_Left	= 0;				// Marge de gauche de l'ï¿½tiquette
+	var $_Margin_Top	= 0;				// Marge en haut de la page avant la premiï¿½re ï¿½tiquette
+	var $_X_Space 		= 0;				// Espace horizontal entre 2 bandes d'ï¿½tiquettes
+	var $_Y_Space 		= 0;				// Espace vertical entre 2 bandes d'ï¿½tiquettes
+	var $_X_Number 		= 0;				// Nombre d'ï¿½tiquettes sur la largeur de la page
+	var $_Y_Number 	= 0;				// Nombre d'ï¿½tiquettes sur la hauteur de la page
+	var $_Width 			= 0;				// Largeur de chaque ï¿½tiquette
+	var $_Height 			= 0;				// Hauteur de chaque ï¿½tiquette
+	var $_Char_Size		= 10;				// Hauteur des caractï¿½res
+	var $_Line_Height	= 10;				// Hauteur par dï¿½faut d'une ligne
+	var $_Metric 			= 'mm';			// Unitï¿½ de mesure des ï¿½tiquettes. Aidera ï¿½ calculer les bonnes valeurs
+	var $_Metric_Doc 	= 'mm';			// Unitï¿½ de mesure du document
 	var $_Font_Name	= 'Arial';			// Nom de la police (voir dossier font/)
 
 	var $_COUNTX = 1;
@@ -44,7 +49,7 @@ class PDF_Label extends FPDF {
 
 	// Give the height for a char size given.
 	function _Get_Height_Chars($pt) {
-		// Tableau de concordance entre la hauteur des caractères et de l'espacement entre les lignes
+		// Tableau de concordance entre la hauteur des caractï¿½res et de l'espacement entre les lignes
 		$_Table_Hauteur_Chars = array(
 			6=>2, 
 			7=>2.5, 
@@ -89,7 +94,7 @@ class PDF_Label extends FPDF {
 		$this->SetAutoPageBreak(false); 
 		
 		$this->_Metric_Doc = $unit;
-		// Permet de commencer l'impression à l'étiquette désirée dans le cas où la page a déjà servi
+		// Permet de commencer l'impression ï¿½ l'ï¿½tiquette dï¿½sirï¿½e dans le cas oï¿½ la page a dï¿½jï¿½ servi
 		if ($posX > 1) $posX--; else $posX=0;
 		if ($posY > 1) $posY--; else $posY=0;
 		if ($posX >=  $this->_X_Number) $posX =  $this->_X_Number-1;
@@ -98,7 +103,7 @@ class PDF_Label extends FPDF {
 		$this->_COUNTY = $posY;
 	}
 
-	// Méthode pour modifier la taille des caractères
+	// Mï¿½thode pour modifier la taille des caractï¿½res
 	// Cela modifiera aussi l'espace entre chaque ligne
 	function Set_Font_Size($pt) {
 		if ($pt > 3) {
@@ -116,7 +121,7 @@ class PDF_Label extends FPDF {
 		}
 	}
 
-	// On imprime une étiqette
+	// On imprime une ï¿½tiqette
 	function Add_PDF_Label($texte) {
 		// On est sur une nouvelle page, donc on doit ajouter une page
 		if (($this->_COUNTX ==0) and ($this->_COUNTY==0)) {

@@ -2,13 +2,18 @@
 ////////////////////////////////////////////////////
 // PDF_Table
 //
-// Classe afin d'éditer des tableaux au format PDF 
+// Classe afin d'ï¿½diter des tableaux au format PDF 
 //
-// Basé sur les fonctions d'Olivier : oliver@fpdf.org
+// Basï¿½ sur les fonctions d'Olivier : oliver@fpdf.org
 //
 ////////////////////////////////////////////////////
 
-require('fpdf.php');
+if (!defined("_ECRIRE_INC_VERSION"))
+	return;
+
+define('FPDF_FONTPATH', 'font/');
+include_spip('fpdf');
+include_spip('inc/charsets');
 
 class PDF_Table extends FPDF{
 	var $ProcessingTable=false;
@@ -18,7 +23,7 @@ class PDF_Table extends FPDF{
 	var $RowColors;
 	var $ColorIndex;
 
-	function Header(){ 	//Imprime l'en-tête du tableau si nécessaire
+	function Header(){ 	//Imprime l'en-tï¿½te du tableau si nï¿½cessaire
 		if($this->ProcessingTable)
 			$this->TableHeader();
 	}
@@ -35,9 +40,9 @@ class PDF_Table extends FPDF{
 	}
 	
 	function Footer(){
-		$this->SetY(-15);										//Positionnement à 1,5 cm du bas
+		$this->SetY(-15);										//Positionnement ï¿½ 1,5 cm du bas
 		$this->SetFont('Arial','',8); 								//Police Arial 8
-		$this->Cell(0,10,'Page '.$this->PageNo(),0,0,'R');	//Numéro de page à droite
+		$this->Cell(0,10,'Page '.$this->PageNo(),0,0,'R');	//Numï¿½ro de page ï¿½ droite
 	}
 	
 	function Row($data){
@@ -81,13 +86,13 @@ class PDF_Table extends FPDF{
 	}
 
 	function Table($query,$prop=array()){
-		//Exécute la requête
+		//Exï¿½cute la requï¿½te
 		$res=spip_query($query);
 		$this->Query($res,$prop);
 	}
 
 	function Query($res, $prop=array()){
-		//Traite les propriétés
+		//Traite les propriï¿½tï¿½s
 		if(!isset($prop['width']))
 			$prop['width']=0;
 		if($prop['width']==0)
@@ -108,7 +113,7 @@ class PDF_Table extends FPDF{
 		$this->RowColors=array($prop['color1'],$prop['color2']);
 		//Calcule les largeurs des colonnes
 		$this->CalcWidths($prop['width'],$prop['align']);
-		//Imprime l'en-tête
+		//Imprime l'en-tï¿½te
 		$this->TableHeader();
 		//Imprime les lignes
 		$this->SetFont('Arial','',8);
