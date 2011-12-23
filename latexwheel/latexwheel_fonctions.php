@@ -2,13 +2,13 @@
 
 function propre_latex($t) {
 	
-	$t = latex_echappe_coloration($t);
+//	$t = latex_echappe_coloration($t);
 	
 	$t = echappe_html($t); 
 	
 	$t = appliquer_regles_wheel($t,array('latex/latex.yaml'));
-	$t = latex_traiter_modeles($t);
-	$t = echappe_retour(echappe_retour($t),'latex');
+//	$t = latex_traiter_modeles($t);
+//	$t = echappe_retour(echappe_retour($t),'latex');
 	
 	return $t;
 }
@@ -22,6 +22,7 @@ function latex_proteger_index($texte){
 }
 
 function latex_echappe_coloration($texte){
+	//var_dump($texte);
 	return appliquer_regles_wheel($texte,array('latex/latex-code.yaml'));
 }
 
