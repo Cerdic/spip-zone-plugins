@@ -5,6 +5,19 @@
 include_spip('inc/plugin'); // plugin_installes_meta();
 
 
+// on fait la verif du path avant tout,
+// et l'installation des qu'on est dans la colonne principale
+// si jamais la liste des plugins actifs change, il faut faire un refresh du hit
+// pour etre sur que les bons fichiers seront charges lors de l'install
+$new = actualise_plugins_actifs();
+if ($new AND _request('actualise')<2) {
+	include_spip('inc/headers');
+	redirige_par_entete(parametre_url(self(),'actualise',_request('actualise')+1,'&'));
+}
+
+
+	
+
 function svp_presenter_actions_realisees() {
 	// presenter les traitements realises... si tel est le cas...
 	include_spip('inc/svp_actionner');
