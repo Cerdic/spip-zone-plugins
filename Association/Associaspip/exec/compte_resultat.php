@@ -88,7 +88,7 @@ function exec_compte_resultat() {
 			echo "<tr style='background-color: #DBE1C5;'>";
 			echo "<td style='text-align:right;'>"._T('asso:cpte_resultat_mode_exportation')."</td>";
 			foreach(array('pdf','csv','xml') as $type) { // exports possibles
-				$h = generer_url_ecrire('export_compte_resultat', "type=$type&var=$var");
+				$h = generer_url_ecrire('export_compte_resultat_'.$type, "var=$var");
 				echo "<td style='text-align:center;'><a href='$h'><strong>".ucfirst($type)."</strong></td>";
 			}
 			echo '</tr></table>';
