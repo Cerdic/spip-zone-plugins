@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION"))
 
 // Export du Compte de Resultat au format Pdf, Csv ou Xml
 
-function exec_export_compte_resultat_pdf() {
+function exec_export_compte_resultat_xml() {
 	if (!autoriser('associer', 'export_compte_resultat')) {
 		include_spip('inc/minipres');
 		echo minipres();
