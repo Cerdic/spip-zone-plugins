@@ -30,7 +30,7 @@ function ziptex_zipper($array){
 	foreach ($array[1] as $spip){
 		ziptex_creer_tex($spip[0],$spip[1],$spip[3]);	
 	}
-	$zip = zippeur(array(_DIR_ZIPTEX),date("Y-m-d H:i:s",time()),'','ziptex','local');
+	defined('_DIR_SITE')  ? $zip = zippeur(array(_DIR_ZIPTEX),date("Y-m-d H:i:s",time()),'','ziptex',_DIR_SITE.'local') : $zip = zippeur(array(_DIR_ZIPTEX),date("Y-m-d H:i:s",time()),'','ziptex','local') ;
 	return $zip;
 
 }
