@@ -1,7 +1,7 @@
 <paquet
 	prefix="plugonet"
 	categorie="outil"
-	version="0.6.0"
+	version="0.6.1"
 	etat="stable"
 	compatibilite="[3.0.0-beta;3.0.*]"
 	logo="plugonet-64.png"
@@ -11,7 +11,7 @@
 	<nom>PlugOnet</nom>
 	<!-- Migrer de la DTD plugin à celle de paquet -->
 
-	<auteur>Eric Lupinacci</auteur>
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
 	<auteur>Emmanuel Saint-James</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
