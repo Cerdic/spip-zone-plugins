@@ -28,7 +28,7 @@
 			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES){par hasard}{url==notice_display}{0,2}>
 				
 				[(#SET{notice_id,[(#URL_ARTICLE|extraire_attribut_url{id})]})]
-				[(#SET{notice, [(#GET{notice_id}|pmb_notice_extraire{#CONFIG{spip_pmb/url},'force'})]})]
+				[(#SET{notice, [(#GET{notice_id}|pmb_notice_extraire{#CONFIG{spip_pmb/url}})]})]
 				<INCLURE{fond=inclure/inc-notice-resume}{notice=#GET{notice}}>[(#SET{compteur_nouveautes,[(#GET{compteur_nouveautes}|plus{1})]})]
 		
 			</BOUCLE_syndic_pmb>

@@ -41,7 +41,7 @@
 			<ul class="liste-items">
 			
 			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){descriptif!=""}{pmb_photo_src!=""} {par hasard} {0,2}>
-				[(#SET{notice, [(#PMB_ID_NOTICE|pmb_notice_extraire{#CONFIG{spip_pmb/url},'force'})]})]
+				[(#SET{notice, [(#PMB_ID_NOTICE|pmb_notice_extraire{#CONFIG{spip_pmb/url}})]})]
 								<INCLURE{fond=inclure/inc-notice-resume}{notice=#GET{notice}}>
 
 			</BOUCLE_syndic_pmb>

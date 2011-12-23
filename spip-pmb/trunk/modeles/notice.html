@@ -1,2 +1,2 @@
-[(#SET{notice, [(#ENV{id}|pmb_notice_extraire{#CONFIG{spip_pmb/url},'force'})]})] 
+[(#SET{notice, [(#ENV{id}|pmb_notice_extraire{#CONFIG{spip_pmb/url}})]})] 
  <INCLURE{fond=inclure/inc-notice_display}{notice=#GET{notice}}{env}>
