@@ -1008,15 +1008,10 @@ function pmb_prepare_recherche ($recherche) {
 function pmb_remplacer ($chaine, $p1, $p2) {
 	return str_replace($p1,$p2,$chaine);
 }
+
 function contient($texte, $findme) {
 	return (strpos($texte, $findme) !== false);
 }
-function extraire_attribut_url($url,$attribut) {
-		if ($url) {
-		  preg_match('`'.$attribut.'=[0-9]+$`',$url, $result);		
-		  return(substr($result[0], 3));
-		}
-		return '';
-}
+
 
 ?>

@@ -2,7 +2,7 @@
 
 [(#REM) les urls de RSS le PMB contiennent "notice_display" ]
 <BOUCLE_syndic_pmb(SYNDIC_ARTICLES){url==notice_display}{!par date}{0,100}>
-[(#SET{tab_ids,[(#GET{tab_ids}|push{[(#URL_ARTICLE|extraire_attribut_url{id})]})]})]
+[(#SET{tab_ids,[(#GET{tab_ids}|push{[(#URL_ARTICLE|parametre_url{id})]})]})]
 </BOUCLE_syndic_pmb>
 
 
