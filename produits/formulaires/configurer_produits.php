@@ -11,6 +11,7 @@ function formulaires_configurer_produits_saisies_dist(){
 			'options' => array(
 				'nom' => 'taxe',
 				'label' => _T('produits:configurer_taxe_defaut_label'),
+				'explication' => _T('produits:configurer_taxe_defaut_explication'),
 				'defaut' => lire_config('produits/taxe', 0),
 			),
 			'verifier' => array(
