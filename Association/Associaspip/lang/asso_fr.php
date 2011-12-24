@@ -14,13 +14,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-		
+
 # Titres globaux
 	'titre_gestion_pour_association' => 'Gestion pour Association',
 	'titre_relance' => 'Renouvellement de votre cotisation',
 	'titre_menu_gestion_association' => 'Gestion Association',
 	'titre_page_config' => 'Configuration du plugin',
-		
+
 # Navigation
 	'menu2_titre_association' => 'L\'association',
 	'menu2_titre_gestion_membres' => 'Membres',
@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_onglet_ventes' => 'Gestion des ventes',
 	'titre_onglet_comptes' => 'Gestion comptable',
 	'titre_onglet_prets' => 'Gestion des pr&ecirc;ts',
-			
+
 #Configuration
 	# Libelle
 	'config_libelle_nom' => 'Nom',
@@ -53,6 +53,35 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'n_tva' => 'N&deg; TVA',
 	'config_libelle_declaration' => 'N&deg; de d&eacute;claration',
 	'config_libelle_prefet' => 'Pr&eacute;fecture ou Sous-pr&eacute;fecture',
+	'config_libelle_objet' => 'Objet',
+	'config_info_recufiscal' => 'Re&ccedil;u fiscal fran&ccedil;ais',
+	'config_libelle_cgi200' => 'R&eaucute;ductions d\'imp&ocirc;ts selon Art. 200 du CGI applicable',
+	'config_libelle_cgi238' => 'R&eaucute;ductions d\'imp&ocirc;ts selon Art. 238 bis du CGI applicable',
+	'config_libelle_cgi885' => 'R&eaucute;ductions d\'imp&ocirc;ts selon Art. 885-0 V bis A du CGI applicable',
+	'config_libelle_recufiscal' => 'Type',
+	'config_libelle_infofiscal' => 'Pr&eacute;cision(s)',
+	'config_libelle_tauxfiscal' => '% cotisation statutaire',
+	'config_libelle_recufisc0' => 'D&eacute;sactiver (gestion manuelle ou non usage)',
+	'config_libelle_recufisc1' => 'Association/fondation reconnue d\'utilit&eacute; publique (pr&eacute;ciser dates)',
+	'config_libelle_recufisc2' => 'Association de Moselle/Bas-Rhin/Haut-Rhin dont la mission est reconnue d\'utilit&eacute; publique (pr&eacute;ciser date)',
+	'config_libelle_recufisc3' => 'Fondation universitaire/partenariale',
+	'config_libelle_recufisc4' => 'Fondation d\'entreprise',
+	'config_libelle_recufisc5' => '&OElig;uvre/organisme d\'int&eacute;r&egrave;t g&eacute;n&eacute;ral',
+	'config_libelle_recufisc6' => 'Mus&eacute;e de France',
+	'config_libelle_recufisc7' => '&Eacute;tablissement d\'enseignement sup&eacute;rieur/artistique public/priv&eacute;, d\'int&eacute;r&egrave;t g&eacute;n&eacute;ral, &agrave; but non lucratif',
+	'config_libelle_recufisc8' => 'Organisme dont l\'objet exclusif est la participation financi&egrave;re &agrave; la cr&eacute;ation d\'entreprises',
+	'config_libelle_recufisc9' => 'Association culturelle ou de bienfaisance et &eacute;tablissement public des cultes reconnus d\'Alsace-Moselle',
+	'config_libelle_recufisc10' => 'Organisme ayant pour activit&eacute; principale l\'organisation de festivals',
+	'config_libelle_recufisc11' => 'Association fournissant gratuitement une aide alimentaire ou des soins m&eacute;dicaux &agrave; des personnes en difficult&eacute; ou favorisant leur logement',
+	'config_libelle_recufisc12' => 'Fondation du patrimoine ou fondation/association lui affectant ses dons',
+	'config_libelle_recufisc13' => '&Eacute;tablissement de recherche public/priv&eacute;, d\'int&eacute;r&ecirc;t g&eacute;n&eacute;ral, &agrave; but non lucratif',
+	'config_libelle_recufisc14' => 'Entreprise d\'insertion ou entreprise de travail temporaire d\'insertion',
+	'config_libelle_recufisc15' => 'Associations interm&eacute;diaires',
+	'config_libelle_recufisc16' => 'Ateliers/chantiers d\'insertion',
+	'config_libelle_recufisc17' => 'Entreprises adapt&eacute;es',
+	'config_libelle_recufisc18' => 'Agence Nationale de la Recherche',
+	'config_libelle_recufisc19' => 'Soci&eacute;t&eacute;/organisme agr&eacute;&eacute; de recherche scientifique/technique',
+	'config_libelle_recufisc20' => 'Autre organisme (&agrave; pr&eacute;ciser)',
 	'config_info_asso' => 'Donn&eacute;es de l\'association',
 	'config_info_plugin' => 'Options du plugin',
 	'config_info_membres' => 'Options de gestion des membres',
@@ -79,7 +108,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_id_asso'=>'Libre',
 	'config_libelle_num_pc'=>'R&eacute;f. comptable',
 	'config_libelle_num_dc'=>'Dest. comptable',
-	'config_libelle_secteurs'=>'Secteurs (s&eacute;par&eacute;s par des virgules)',	
+	'config_libelle_secteurs'=>'Secteurs (s&eacute;par&eacute;s par des virgules)',
 	'config_libelle_spip_listes'=> 'Liste de diffusion par d&eacute;faut (n&eacute;cessite le plugin Spip_listes)',
 	'config_libelle_import_nom_auteur' => 'Lors de l\'import/cr&eacute;ation d\'un membre depuis la liste des auteurs SPIP, le nom de l\'auteur a le format suivant:',
 	'config_libelle_utiliser_champ_id_asso' => 'R&eacute;f&eacute;rence interne <abbr title="Attention, ce champ est purement informatif les membres sont toujours d&eacute;sign&eacute;s et organis&eacute;s par leur id auteur SPIP mais il permet aux associations qui le d&eacute;sirent d\'avoir une r&eacute;f&eacute;rence membre de leur choix et de conserver cette information dans les tables du plugin">(&agrave; caract&egrave;re informatif)</abbr>',
@@ -94,7 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'import_nom_auteur_nom_prenom' => 'Nom Pr&eacute;nom',
 	'import_nom_auteur_prenom_nom' => 'Pr&eacute;nom Nom',
 	'import_nom_auteur_nom' => 'Nom',
-	
+
 	# Meta utilisateurs
 	'editer_meta_utilisateur' => '&Eacute;diter le champs utilisateur',
 	'supprimer_meta_utilisateur' => 'Supprimer le champs utilisateur',
@@ -110,8 +139,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_nom_meta_utilisateur_trop_long' => 'Le nom d\'un champs est limit&eacute; &agrave; 237 caract&egrave;res',
 	'erreur_pas_de_nom_meta_utilisateur' => 'Le nom d\'un champs ne peut pas &ecirc;tre vide, si vous voulez supprimer un champs, utilisez le bouton supprimer sur la page listant tous les champs utilisateur.',
 	'erreur_meta_utilisateur_deja_definie' => 'Ce champs utilisateur est d&eacute;j&agrave; d&eacute;fini.',
-	
-		
+
+
 	# Groupes
 	'gerer_les_groupes' => 'G&eacute;rer les groupes',
 	'gestion_groupes' => 'Gestion des groupes',
@@ -142,11 +171,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'quitter_un_groupe' => 'Quitter un groupe',
 	'adherent_message_degrouper' => '<p>S&eacute;lectionner les groupes dont les adh&eacute;rents seront exclus.</p>',
 	'titre_voir_groupe' => 'Voir le groupe',
-				
+
 	# Entetes globales
 	'entete_id' => 'ID',
 	'entete_action' => 'Action',
-		
+
 	# Boutons globaux
 	'bouton_retour' => 'Retour',
 	'bouton_confirmer' => 'Confirmer',
@@ -157,7 +186,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer' => 'Supprimer',
 	'bouton_desactiver' => 'D&eacute;sactiver',
 	'bouton_impression' => 'Impression',
-	
+
 	'categories_de_cotisations' => 'Cat&eacute;gories de cotisations',
 	'toutes_categories_de_cotisations' => 'Toutes les cat&eacute;gories de cotisations',
 	'configuration' => 'Configuration',
@@ -170,21 +199,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sujet' => 'Sujet',
 	'message_relance' => '
 Bonjour,
-		
+
 Votre adh&eacute;sion est arriv&eacute;e &agrave; &eacute;ch&eacute;ance.
 Si vous souhaitez continuer l\'aventure en notre compagnie, n\'oubliez pas de reconduire celle-ci.
 Vous pouvez nous faire parvenir votre r&egrave;glement &agrave; votre convenance (ch&egrave;que, mandat  ou virement ).
 
 Le bureau de l\'association.
 
-Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique 
+Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	',
 	'message_adhesion_webmaster' =>'
-	
+
 	',
 	'profil_de_lassociation' => 'Profil de l\'association',
 	'le_bureau' => 'Bureau de l\'association',
-	
+
 # Adherents
  # Actions
 	'selectionner_tout' => 'D&eacute;/S&eacute;lectionner tout',
@@ -239,7 +268,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_libelle_statut_relance' => 'Relanc&eacute;',
 	'adherent_libelle_statut_sorti' => 'D&eacute;sactiv&eacute;',
 	'adherent_libelle_statut_prospect' => 'Prospect',
-	
+
 
 	'adherent_libelle_oui' => 'oui',
 	'adherent_libelle_non' => 'non',
@@ -317,7 +346,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_message_detail_suppression' => 'Les adh&eacute;rents supprim&eacute;s le sont uniquement de la liste des membres de l\'association. Si vous souhaitez supprimer aussi l\'auteur spip, il faut passer par la page de gestion des auteurs.',
 	'adherent_message_detail_desactivation' => 'Les adh&eacute;rents d&eacute;sactiv&eacute;s ne sont pas supprim&eacute;s. Il suffit de faire afficher les adh&eacute;rents désactiv&eacute;s pour les r&eacute;-activ&eacute;s &agrave; nouveau.',
 	'adherent_message_detail_activation' => 'Les adh&eacute;rents seront r&eacute;activ&eacute;s avec le statut \'prospect\'',
-	
+
 	# Liste
 	'adherent_liste_legende' => 'En bleu : Relanc&eacute;<br />En rose : A &eacute;ch&eacute;ance<br />En vert : A jour<br />En brun : D&eacute;sactiv&eacute;<br />En jaune paille : Prospect',
 	'adherent_liste_nombre' => 'Nombre de membres',
@@ -341,7 +370,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'synchronise_asso_membre_lien' => 'Synchroniser la liste des membres depuis la liste des auteurs',
 	'membres_ajoutes' => ' membres ins&eacute;r&eacute;s dans la liste des membres',
 	'membre_ajoute' => ' membre ins&eacute;r&eacute; dans la liste des membres',
-	
+
 	# relances
 	'emails_envoyes' => ' emails envoy&eacute;s',
 	'email_envoye' => ' email envoy&eacute;',
@@ -355,7 +384,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'gestion_cotisations_limitee' => 'La gestion comptable &eacute;tant desactiv&eacute;e, seule la date de validit&eacute; est prise en charge par la gestion des cotisations.',
 
 # ACTIVITES
-		
+
 	# Titres
 	'activite_titre_action_sur_inscriptions' => 'Action sur les inscriptions',
 	'activite_titre_mise_a_jour_inscriptions' => 'Mise &agrave; jour des inscriptions',
@@ -366,7 +395,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	# Sous-titres
 	'activite_mise_a_jour_inscription' => 'Mettre &agrave; jour une inscription',
 	'activite_ajouter_inscription' => 'Ajouter une inscription',
-	
+
 	# Libelle
 	'activite_libelle_inscription' => 'Inscription n&deg;',
 	'activite_libelle_date' => 'Date',
@@ -450,50 +479,50 @@ De: @nom@
 Activit&eacute;: @activite@
 Nombre: @inscrits@
 Commentaire: @commentaire@
-	',	
+	',
 	'date_du_jour' => 'Nous sommes le '.date('d/m/Y'),
 	'date_du_jour_heure' => 'Nous sommes le '.date('d/m/Y').' et il est '.date('H:i'),
-	
+
 # VENTES
-		
+
 	#Entetes
 		'vente_entete_id' => 'ID',
 		'vente_entete_date' => 'Date',
 		'vente_entete_article' => 'Article',
 		'vente_entete_quantites' => 'Quantit&eacute;',
 		'vente_entete_date_envoi' => 'Date d\'envoi',
-			
+
 		'dons_titre_mise_a_jour' => 'Mise &agrave; jour des dons',
 		'adherent_bouton_maj_vente' => 'Editer la vente',
 
 # RESSOURCES
-		
+
 	#Messages
 		'ressources_info' => 'Vous pouvez g&eacute;rer ici les diff&eacute;rentes ressources pr&ecirc;t&eacute;es aux membres (livres, mat&eacute;riels, ...)<br />La puce indique la disponibilit&eacute; des diff&eacute;rentes ressources',
 		'ressources_danger_suppression' => 'Vous vous appr&ecirc;tez &agrave; effacer l\'article n&deg; @id_ressource@ !',
-		
+
 	# Titres
 		'ressources_titre_gestion_ressources' => 'Gestion des ressources',
 		'ressources_titre_edition_ressources' => 'Edition de ressource',
 		'ressources_titre_suppression_ressources' => 'Suppression de ressource',
 		'ressources_titre_liste_ressources' => 'Liste des ressources',
 		'ressources_titre_mise_a_jour' => 'Mise &agrave; jour des ventes',
-		
+
 	# En-tete
 		'ressources_entete_intitule' => 'Article',
 		'ressources_entete_code' => 'Code',
 		'ressources_entete_montant' => 'Montant',
-		
+
 	# Navigation
 		'ressources_nav_gestion_' => 'Gestion des ressources',
 		'ressources_nav_ajouter' => 'Ajouter une ressource',
 		'ressources_nav_supprimer' => 'Supprimer la ressource',
-		'ressources_nav_editer' => 'Editer la ressource',	
-		
+		'ressources_nav_editer' => 'Editer la ressource',
+
 	# Libelle
 		'ressources_num' => 'RESSOURCE N&deg;',
 		'ressources_libelle_code' => 'Code',
-		'ressources_libelle_intitule' => 'Article',	
+		'ressources_libelle_intitule' => 'Article',
 		'ressources_libelle_date_acquisition' => 'Date d\'acquisition (AAAA-MM-JJ)',
 		'ressources_libelle_prix_location' => 'Prix de la location (en euros)',
 		'ressources_libelle_statut' => 'Statut',
@@ -502,18 +531,18 @@ Commentaire: @commentaire@
 		'ressources_libelle_statut_suspendu' => 'En suspend',
 		'ressources_libelle_statut_sorti' => 'D&eacute;saffect&eacute;',
 		'ressources_libelle_commentaires' => 'Commentaires',
-	
+
 	# Prêts
-			
+
 	    #Messages
 		'prets_danger_suppression' => 'Vous vous appr&ecirc;tez &agrave; effacer la r&eacute;servation n&deg; @id_pret@ !',
-			
+
 	    # Titres
 		'prets_titre_gestion_prets' => 'Gestion des r&eacute;servations',
 		'prets_titre_edition_prets' => 'Edition de r&eacute;servation',
 		'prets_titre_suppression_prets' => 'Suppression de r&eacute;servation',
 		'prets_titre_liste_reservations' => 'Liste des r&eacute;servations',
-			
+
 			# En-tete
 				'prets_entete_date_sortie' => 'Date sortie',
 				'prets_entete_nom' => 'Nom',
@@ -521,13 +550,13 @@ Commentaire: @commentaire@
 				'prets_entete_date_retour' => 'Date retour',
 				'prets_entete_reservation' => 'R&eacute;servation',
 				'prets_entete_retour' => 'Restitution',
-			
+
 			# Navigation
 				'prets_nav_gerer' => 'G&eacute;rer les r&eacute;servations',
 				'prets_nav_ajouter' => 'Ajouter une r&eacute;servation',
 				'prets_nav_annuler' => 'Annuler la r&eacute;servation',
-				'prets_nav_editer' => 'Editer la r&eacute;servation',	
-			
+				'prets_nav_editer' => 'Editer la r&eacute;servation',
+
 			# Libelle
 				'prets_libelle_date_sortie' => 'Date de sortie',
 				'prets_libelle_duree' => 'Dur&eacute;e',
@@ -536,14 +565,14 @@ Commentaire: @commentaire@
 				'prets_libelle_date_retour' => 'Date de retour',
 				'prets_libelle_montant' => 'Montant (en euros)',
 				'prets_libelle_mode_paiement' => 'Mode de paiement',
-			
+
 		#Votre association
 			'votre_asso' => 'Votre association',
 			'president' => 'Pr&eacute;esident',
 			'votre_equipe' => 'Votre &eacute;quipe',
 			'donnees_perso' => 'Donn&eacute;es Personnelles',
 			'donnees_internes' => 'Donn&eacute;es Internes',
-	
+
 	# Exercices Budgetaires
 		'exercices_budgetaires_titre' => 'Exercices Budg&eacute;taires',
 		'exercice_budgetaire_titre' => 'Exercice Budg&eacute;taire',
@@ -554,7 +583,7 @@ Commentaire: @commentaire@
 		'exercice_debut' => 'Date d&eacute;but',
 		'exercice_fin' => 'Date fin',
 		'exercice_debut_aaaa' => 'Date d&eacute;but (AAAA-MM-JJ)',
-		'exercice_fin_aaaa' => 'Date fin (AAAA-MM-JJ)',		
+		'exercice_fin_aaaa' => 'Date fin (AAAA-MM-JJ)',
 		'exercice_budgetaire_edition_titre' => 'Edition exercice budg&eacute;taire',
 		'exercice_budgetaire_supprime' => 'Suppression exercice budg&eacute;taire',
 		'vous_vous_appretez_a_effacer_exercice_budgetaire' => 'Vous vous appr&ecirc;tez &agrave; effacer l\'exercice budg&eacute;taire',
@@ -566,10 +595,10 @@ Commentaire: @commentaire@
 			'non_implemente' => 'Fonctionnalit&eacute; non encore impl&eacute;ment&eacute;e !',
 		# Titres
 			'plan_comptable' => 'Plan comptable',
-		
+
 		# En-tete
 			'plan_entete_tous' => 'Tous',
-		
+
 		# Navigation
 			'plan_nav_ajouter' => 'Ajouter une r&eacute;f&eacute;rence comptable',
 			'operations_comptables' => 'Op&eacute;rations comptables',
@@ -593,7 +622,7 @@ Commentaire: @commentaire@
 	'bilan_recettes' => 'Recettes',
 	'bilan_solde' => 'Solde',
 		# Comptes
-			'compte_financier' => 'Compte financier',			
+			'compte_financier' => 'Compte financier',
 			'bilan' => 'Bilan',
 			'compte_cree_automatiquement' => 'Compte cr&eacute;&eacute; automatiquement par Associaspip',
 			'virement_interne' => 'Virement interne',
@@ -679,9 +708,9 @@ Commentaire: @commentaire@
 			'maj_desactive_gestion_comptable' => 'Gestion d\'association: &agrave; partir de cette mise &agrave; jour, il n\'est plus possible d\'activer la gestion comptable si le plan comptable n\'est pas valide. Votre plan comptable n\'est pas valide, la gestion comptable a donc &eacute;t&eacute; desactiv&eacute;e. Pour la reactiver, rendez vous sur la d\'&eacute;dition du plan comptable puis celle de configuration du plugin',
 			'maj_desactive_modules' => 'Gestion d\'association : &agrave; partir de cette mise &agrave; jour, il n\'est plus possible d\'activer les modules de gestion de dons, ventes, prets ou activit&eacute;s si la gestion comptable n\'est pas activ&eacute;e. Votre configuration actuelle du plugin n\'&eacute;tant plus autoris&eacute;e, les modules de gestions activ&eacute;s ont &eacute;t&eacute; d&eacute;sactiv&eacute;s(aucune donn&eacute; n\'a  &eacute;t&eacute; &eacute;ffac&eacute;e). Rendez vous sur la page de configuration du plugin pour les r&eacute;activer.',
 
-		
-	# MaJ Generation des etiquette	
-		
+
+	# MaJ Generation des etiquette
+
 			'eti_avec_civilite' => 'Avec la civilit&eacute;',
 			'eti_nb_colonne' => 'Nb &eacute;tiquettes en largeur',
 			'eti_nb_ligne' => 'Nb &eacute;tiquettes en hauteur',
@@ -710,7 +739,7 @@ Commentaire: @commentaire@
 			'format_des_pages' => 'Format des pages',
 			'marges_des_etiquettes' => 'Marge des &eacute;tiquettes',
 
-	
+
 			// chaines collectee automatiquement
 
 'a_developper' => 'A d&eacute;velopper',

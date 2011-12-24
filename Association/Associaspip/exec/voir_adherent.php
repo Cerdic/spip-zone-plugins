@@ -15,9 +15,9 @@ include_spip('inc/presentation');
 include_spip('inc/autoriser');
 include_spip ('inc/navigation_modules');
 include_spip ('inc/voir_adherent');
-	
+
 function exec_voir_adherent(){
-		
+
 	$id_auteur= intval($_GET['id']);
 	$full = autoriser('associer', 'adherents');
 	$data = sql_fetsel("m.sexe, m.nom_famille, m.prenom, m.validite, m.id_asso, c.libelle",'spip_asso_membres as m LEFT JOIN spip_asso_categories as c ON m.categorie=c.id_categorie', "m.id_auteur=$id_auteur");
@@ -44,13 +44,13 @@ function exec_voir_adherent(){
 			default :
 				$statut='visiteur'; break;
 		}
-		
+
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets(_T('asso:titre_onglet_membres'));
-		
+
 		echo debut_gauche("",true);
-		
+
 		echo debut_boite_info(true);
 		echo '<div class="infos"><div class="numero"><a href="'.generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur).'" title="'._T('asso:adherent_label_modifier_'.$statut).'">'._T('asso:adherent_libelle_numero_'.$statut);
 		echo '<p>';
@@ -77,7 +77,7 @@ function exec_voir_adherent(){
 
 		echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.$nom."</div>".$coord;
 		if ($GLOBALS['association_metas']['id_asso'] == 'on') {
-			
+
 			$id_asso = ($data['id_asso'])?_T('asso:adherent_libelle_reference_interne').'<br/>'.$data['id_asso']:_T('asso:pas_de_reference_interne_attribuee');
 			echo '<p style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.$id_asso."</p>";
 		}
@@ -85,13 +85,13 @@ function exec_voir_adherent(){
 		// Afficher les champs extras
 		echo '<div style="text-align: center" class="verdana1 spip_xx-small">'.pipeline('afficher_contenu_objet', array ('args'=>array('type'=>'asso_membre', 'id_objet'=>$id_auteur, 'contexte'=>array()), 'data'=>'')).'</div>';
 
-		echo '<br/><div style="text-align:center;">'.association_date_du_jour().'</div>';	
+		echo '<br/><div style="text-align:center;">'.association_date_du_jour().'</div>';
 		 echo fin_boite_info(true);
-		
+
 		 echo association_retour();
 
 		 echo debut_droite("",true);
-		
+
 		 debut_cadre_relief(  "", false, "", $titre = $nom_membre);
 
 		// Liste des groupes
@@ -110,7 +110,9 @@ function exec_voir_adherent(){
 
 		// FICHE HISTORIQUE COTISATIONS
 		echo '<fieldset><legend>'._T('asso:adherent_titre_historique_cotisations').'</legend>';
-		echo _T('asso:liens_vers_les_justificatifs'), ' ', voir_adherent_recus($id_auteur), '<br /><br />';
+		/* afficher le lien vers les justificatifs seulemeunt si active/configure */
+		if ($GLOBALS['association_metas']['recufiscal'])
+			echo _T('asso:liens_vers_les_justificatifs'), ' ', voir_adherent_recus($id_auteur), '<br /><br />';
 		/* si on a l'autorisation admin, on ajoute un bouton pour ajouter une cotisation */
 		if ($full) {
 			echo '<a href="'.generer_url_ecrire('ajout_cotisation', 'id='.$id_auteur).'">'._T('asso:adherent_label_ajouter_cotisation').'</a>';
@@ -118,8 +120,8 @@ function exec_voir_adherent(){
 		echo voir_adherent_cotisations($id_auteur, $full);
 
 		echo '</fieldset>';
-		
-		// FICHE HISTORIQUE ACTIVITES	
+
+		// FICHE HISTORIQUE ACTIVITES
 		if ($GLOBALS['association_metas']['activites']=="on"){
 			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_activites').'</legend>';
 			echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
@@ -132,7 +134,7 @@ function exec_voir_adherent(){
 			echo '<td><strong>&nbsp;</strong></td>';
 			echo '</tr>';
 			$critere='id_adherent='.$id_auteur;
-			$query = sql_select("*", "spip_asso_activites", $critere, '', "date DESC" );			
+			$query = sql_select("*", "spip_asso_activites", $critere, '', "date DESC" );
 			while ($data = sql_fetch($query)) {
 				$id_evenement=$data['id_evenement'];
 				echo '<tr style="background-color: #EEEEEE;">';
@@ -152,7 +154,7 @@ function exec_voir_adherent(){
 			echo '</table>';
 			echo '</fieldset>';
 		}
-		
+
 		// FICHE HISTORIQUE VENTES
 		if ($GLOBALS['association_metas']['ventes']=="on"){
 
@@ -177,13 +179,13 @@ function exec_voir_adherent(){
 			echo '<td><strong>&nbsp;</strong></td>';
 			echo '</tr>';
 			$critere='id_emprunteur='._q($id_auteur);
-			$query = sql_select("*", "spip_asso_prets AS P LEFT JOIN spip_asso_ressources AS R ON P.id_ressource=R.id_ressource", $critere, '', "id_pret DESC" );			
+			$query = sql_select("*", "spip_asso_prets AS P LEFT JOIN spip_asso_ressources AS R ON P.id_ressource=R.id_ressource", $critere, '', "id_pret DESC" );
 			while ($data = sql_fetch($query)) {
 				switch($data['statut']){
 				case "ok": $puce= "verte"; break;
 				case "reserve": $puce= "rouge"; break;
 				case "suspendu": $puce="orange"; break;
-				case "sorti": $puce="poubelle"; break;	   
+				case "sorti": $puce="poubelle"; break;
 				}
 				echo "\n<tr style='background-color: #EEEEEE;'>";
 				echo '<td class="arial11 border1">';
@@ -200,10 +202,10 @@ function exec_voir_adherent(){
 			echo '</table>';
 			echo '</fieldset>';
 		}
-		
+
 		echo fin_cadre_relief(true);
 		echo fin_page_association();
-	} 
+	}
 }
 
 ?>

@@ -37,6 +37,10 @@
 								<input type="text" name="telephone" [value="(#ENV{telephone})"] id="telephone"  class='formo'/>
 							</li>
 							<li>
+								<label for="objet"><strong><:asso:config_libelle_objet:></strong></label>
+								<textarea name="objet" id="objet" rows="3" cols="80" class='formo'>[(#ENV{objet})]</textarea>
+							</li>
+							<li>
 								<label for="declaration"><strong><:asso:config_libelle_declaration:></strong></label>
 								<input type="text" name="declaration" [value="(#ENV{declaration})"] id="declaration"  class='formo'/>
 							</li>
@@ -44,12 +48,66 @@
 								<label for="prefet"><strong><:asso:config_libelle_prefet:></strong></label>
 								<input type="text" name="prefet" [value="(#ENV{prefet})"] id="prefet"  class='formo'/>
 							</li>
-							<BOUCLE_metas_utilisateur(ASSOCIATION_METAS){nom LIKE meta_utilisateur_%}{par nom}>
+						<BOUCLE_metas_utilisateur(ASSOCIATION_METAS){nom LIKE meta_utilisateur_%}{par nom}>
 							<li>
 								<label for="#NOM"><strong>[(#NOM|replace{meta_utilisateur}|_T)]</strong></label>
 								<input type="text" name="#NOM" [value="(#VALEUR)"] id="#NOM"  class='formo'/>
-							</li>	
+							</li>
 						</BOUCLE_metas_utilisateur>
+						</ul>
+					</fieldset>
+				</li>
+				<li class="fieldset">
+					<!-- Options de recus fiscaux globaux -->
+					<fieldset>
+						<h3 class="legend"><:asso:config_info_recufiscal:></h3>
+						<ul>
+							<li>
+								<label for="recufiscal"><strong><:asso:config_libelle_recufiscal:></strong></label>
+								<select name="recufiscal" id="recufiscal"  class='formo'/>
+									<option value="0"[(#ENV{recufiscal}|=={0}|oui) selected="selected"]><:asso:config_libelle_recufisc0:></option>
+									<option value="1"[(#ENV{recufiscal}|=={1}|oui) selected="selected"]><:asso:config_libelle_recufisc1:></option>
+									<option value="2"[(#ENV{recufiscal}|=={2}|oui) selected="selected"]><:asso:config_libelle_recufisc2:></option>
+									<option value="3"[(#ENV{recufiscal}|=={3}|oui) selected="selected"]><:asso:config_libelle_recufisc3:></option>
+									<option value="4"[(#ENV{recufiscal}|=={4}|oui) selected="selected"]><:asso:config_libelle_recufisc4:></option>
+									<option value="5"[(#ENV{recufiscal}|=={5}|oui) selected="selected"]><:asso:config_libelle_recufisc5:></option>
+									<option value="6"[(#ENV{recufiscal}|=={6}|oui) selected="selected"]><:asso:config_libelle_recufisc6:></option>
+									<option value="7"[(#ENV{recufiscal}|=={7}|oui) selected="selected"]><:asso:config_libelle_recufisc7:></option>
+									<option value="8"[(#ENV{recufiscal}|=={8}|oui) selected="selected"]><:asso:config_libelle_recufisc8:></option>
+									<option value="9"[(#ENV{recufiscal}|=={9}|oui) selected="selected"]><:asso:config_libelle_recufisc9:></option>
+									<option value="10"[(#ENV{recufiscal}|=={10}|oui) selected="selected"]><:asso:config_libelle_recufisc10:></option>
+									<option value="11"[(#ENV{recufiscal}|=={11}|oui) selected="selected"]><:asso:config_libelle_recufisc11:></option>
+									<option value="12"[(#ENV{recufiscal}|=={12}|oui) selected="selected"]><:asso:config_libelle_recufisc12:></option>
+									<option value="13"[(#ENV{recufiscal}|=={13}|oui) selected="selected"]><:asso:config_libelle_recufisc13:></option>
+									<option value="14"[(#ENV{recufiscal}|=={14}|oui) selected="selected"]><:asso:config_libelle_recufisc14:></option>
+									<option value="15"[(#ENV{recufiscal}|=={15}|oui) selected="selected"]><:asso:config_libelle_recufisc15:></option>
+									<option value="16"[(#ENV{recufiscal}|=={16}|oui) selected="selected"]><:asso:config_libelle_recufisc16:></option>
+									<option value="17"[(#ENV{recufiscal}|=={17}|oui) selected="selected"]><:asso:config_libelle_recufisc17:></option>
+									<option value="18"[(#ENV{recufiscal}|=={18}|oui) selected="selected"]><:asso:config_libelle_recufisc18:></option>
+									<option value="19"[(#ENV{recufiscal}|=={19}|oui) selected="selected"]><:asso:config_libelle_recufisc19:></option>
+									<option value="20"[(#ENV{recufiscal}|=={20}|oui) selected="selected"]><:asso:config_libelle_recufisc20:></option>
+								</select>
+							</li>
+							<li>
+								<label for="objet"><strong><:asso:config_libelle_infofiscal:></strong></label>
+								<input type="text" name="infofiscal" [value="(#ENV{objet})"] id="objet" class='formo' />
+							</li>
+							<li>
+								<label for="tauxfiscal"><strong><:asso:config_libelle_tauxfiscal:></strong></label>
+								<input type="text" name="tauxfiscal" [value="(#ENV{tauxfiscal})"] id="tauxfiscal" class='formo'/>
+							</li>
+							<li>
+								<label for="cgi200"><strong><:asso:config_libelle_cgi200:></strong></label>
+								<input type="checkbok" name="cgi200" [(#ENV{cgi200}|oui) checked="checked"] id="cgi200" class='formo'/>
+							</li>
+							<li>
+								<label for="cgi238"><strong><:asso:config_libelle_cgi238:></strong></label>
+								<input type="checkbok" name="cgi238" [(#ENV{cgi238}|oui) checked="checked"] id="cgi238" class='formo'/>
+							</li>
+							<li>
+								<label for="cgi885"><strong><:asso:config_libelle_cgi885:></strong></label>
+								<input type="checkbok" name="cgi885" [(#ENV{cgi885}|oui) checked="checked"] id="cgi885" class='formo'/>
+							</li>
 						</ul>
 					</fieldset>
 				</li>
@@ -195,7 +253,7 @@
 								</BOUCLE_classe_produits>
 					</select>
 					</li>
-					
+
 					#SET{erreurs,#ENV**{erreurs}|table_valeur{classe_contributions_volontaires}}
 					[<span class='erreur_message'>(#GET{erreurs})</span>]
 					<li>
