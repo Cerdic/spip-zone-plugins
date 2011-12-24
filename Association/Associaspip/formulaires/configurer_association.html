@@ -94,19 +94,19 @@
 							</li>
 							<li>
 								<label for="tauxfiscal"><strong><:asso:config_libelle_tauxfiscal:></strong></label>
-								<input type="text" name="tauxfiscal" [value="(#ENV{tauxfiscal})"] id="tauxfiscal" class='formo'/>
+								<input type="text" name="tauxfiscal" [value="(#ENV{tauxfiscal}|sinon{100})"] id="tauxfiscal" class='formo'/>
 							</li>
 							<li>
 								<label for="cgi200"><strong><:asso:config_libelle_cgi200:></strong></label>
-								<input type="checkbok" name="cgi200" [(#ENV{cgi200}|oui) checked="checked"] id="cgi200" class='formo'/>
+								<input type="checkbox" name="cgi200" [(#ENV{cgi200}|oui) checked="checked"] id="cgi200" class='formo'/>
 							</li>
 							<li>
 								<label for="cgi238"><strong><:asso:config_libelle_cgi238:></strong></label>
-								<input type="checkbok" name="cgi238" [(#ENV{cgi238}|oui) checked="checked"] id="cgi238" class='formo'/>
+								<input type="checkbox" name="cgi238" [(#ENV{cgi238}|oui) checked="checked"] id="cgi238" class='formo'/>
 							</li>
 							<li>
 								<label for="cgi885"><strong><:asso:config_libelle_cgi885:></strong></label>
-								<input type="checkbok" name="cgi885" [(#ENV{cgi885}|oui) checked="checked"] id="cgi885" class='formo'/>
+								<input type="checkbox" name="cgi885" [(#ENV{cgi885}|oui) checked="checked"] id="cgi885" class='formo'/>
 							</li>
 						</ul>
 					</fieldset>
