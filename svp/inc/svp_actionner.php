@@ -791,11 +791,17 @@ class Actionneur {
 					$meta_plug_installes[] = $plug;
 					ecrire_meta('plugin_installes',serialize($meta_plug_installes),'non');
 				}
-				if (is_array($infos)){
+
+				if (!is_array($infos)) {
+					// l'installation avait deja ete faite un autre jour
+					return true; 
+				} else {
+					// l'installation est neuve
 					list($ok, $trace) = $infos['install_test'];
 					if ($ok) {
 						return true;
 					}
+					// l'installation est en erreur
 					$this->err(_T('svp:message_action_finale_install_fail',
 						array('plugin' => $info['n'], 'version'=>$info['v'])) . "<br />" . $trace);
 				}
