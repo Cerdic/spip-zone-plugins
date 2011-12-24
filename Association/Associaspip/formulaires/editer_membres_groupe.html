@@ -13,7 +13,7 @@
 		<th><:asso:fonction:></th>
 		<th><:asso:action:><th>
 	</tr>
-<BOUCLE_groupes(ASSO_GROUPES_LIAISONS asso_membres){id_groupe=#ENV{id_groupe}}{par nom_famille,prenom}{pagination 10}>
+<BOUCLE_groupes(ASSO_GROUPES_LIAISONS asso_membres){id_groupe=#ENV{id_groupe}}{par nom_famille}{pagination}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{'pair','impair'})]">
 		<td>#ID_AUTEUR</td>
 		<td><a title="<:asso:adherent_label_voir_membre:>" href="#URL_ECRIRE{voir_adherent, id=#ID_AUTEUR}">[(#SEXE|association_calculer_nom_membre{#PRENOM, #NOM_FAMILLE}) ]</a></td>
