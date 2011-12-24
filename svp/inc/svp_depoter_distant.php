@@ -161,10 +161,12 @@ function svp_nettoyer_apres_suppression($id_depot, $vmax) {
 	// Maintenant on calcule la liste des plugins du depot qui ne sont pas heberges 
 	// par un autre depot => donc a supprimer
 	// - Liste de tous les plugins encore lies a un autre depot
-	$liens = sql_allfetsel('id_plugin', 'spip_depots_plugins');
-	$autres_plugins = array_map('reset', $liens);
+	// tous les plugins correspondants aux anciens paquets
+	$plugins_restants = sql_allfetsel('DISTINCT(id_plugin)', 'spip_paquets', sql_in('id_plugin', $plugins_depot));
+	$plugins_restants = array_map('array_shift', $plugins_restants);
+
 	// - L'intersection des deux tableaux renvoie les plugins a supprimer	
-	$plugins_a_supprimer = array_diff($plugins_depot, $autres_plugins);
+	$plugins_a_supprimer = array_diff($plugins_depot, $plugins_restants);
 
 	// On supprimer les plugins identifies
 	sql_delete('spip_plugins', sql_in('id_plugin', $plugins_a_supprimer));	
