@@ -563,6 +563,7 @@ function svp_inserer_multi(&$insert_plugins, &$insert_paquets, &$insert_contribs
 	// et n'ont pas de plugin rattachés.
 	if (count($insert_contribs)) {
 		sql_insertq_multi('spip_paquets', $insert_contribs);
+		$insert_contribs = array();
 	}
 }
 
