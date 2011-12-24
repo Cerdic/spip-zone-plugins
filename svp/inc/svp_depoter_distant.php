@@ -310,6 +310,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	// tableaux d'actions
 	$insert_paquets = array();
 	$insert_plugins = array();
+	$insert_contribs = array();
 	$prefixes = array(); // prefixe => id_plugin
 	
 	// On met a jour ou on cree chaque paquet a partir du contenu du fichier xml
@@ -437,9 +438,9 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 						'id_depot=' . sql_quote($insert_paquet['id_depot']),
 						'nom_archive=' . sql_quote($insert_paquet['nom_archive']));
 				if (!$id_paquet = sql_getfetsel('id_paquet', 'spip_paquets', $where)) {
-					// Ce n'est pas un plugin, donc id_plugin=0 et toutes les infos plugin sont nulles 
+					// Ce n'est pas un plugin, donc id_plugin=0 et toutes les infos plugin sont nulles
 					$insert_paquet['id_plugin'] = 0;
-					$insert_paquets[] = $insert_paquet;				}
+					$insert_contribs[] = $insert_paquet;				}
 				else
 					$collision = true;
 			}
@@ -460,7 +461,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 			
 			// on effectue les traitements en attente
 			// pour que les updates soient corrects
-			svp_inserer_multi($insert_plugins, $insert_paquets, $prefixes);
+			svp_inserer_multi($insert_plugins, $insert_paquets, $insert_contribs, $prefixes);
 			
 			
 			// On met a jour le paquet en premier lieu qu'il soit un plugin ou une contribution
@@ -483,7 +484,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 
 	// on effectue les traitements en attente
 	// pour que les updates soient corrects
-	svp_inserer_multi($insert_plugins, $insert_paquets, $prefixes);
+	svp_inserer_multi($insert_plugins, $insert_paquets, $insert_contribs, $prefixes);
 
 	// On rajoute le plugin comme heberge par le depot si celui-ci n'est pas encore enregistre comme tel
 	$ids = sql_allfetsel('p.id_plugin',
@@ -523,7 +524,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 // insertion en masse de plugins ou de paquets.
 // les paquets peuvent de pas avoir d'info "prefixe" (a transformer en id_plugin)
 // lorsqu'ils ne proviennent pas de plugin (squelettes...)
-function svp_inserer_multi(&$insert_plugins, &$insert_paquets, &$prefixes) {
+function svp_inserer_multi(&$insert_plugins, &$insert_paquets, &$insert_contribs, &$prefixes) {
 
 	if (count($insert_plugins)) {
 		sql_insertq_multi('spip_plugins', $insert_plugins);
@@ -558,6 +559,11 @@ function svp_inserer_multi(&$insert_plugins, &$insert_paquets, &$prefixes) {
 		$insert_paquets = array();
 	}
 
+	// les contribs n'ont pas le même nombre de champs dans les insertions
+	// et n'ont pas de plugin rattachés.
+	if (count($insert_contribs)) {
+		sql_insertq_multi('spip_paquets', $insert_contribs);
+	}
 }
 
 
