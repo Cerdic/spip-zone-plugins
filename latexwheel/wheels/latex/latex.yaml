@@ -8,12 +8,7 @@ liens:
   is_callback: Y
 
 
-guillemet:
-  match: ['«','»']
-  replace: ['\enquote/debut','/fin']
-  type: str
-  priority: -120
-  
+
 caractereslatex:
   #proteges les caractères spécifiques à latex : & _ et d'autres
   match : ",(\$|%|&|_|#),"
