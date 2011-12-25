@@ -273,12 +273,12 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 
 
 	// On supprime tous les paquets du depot
-	// qui ont etes evacues, c'est a dire ceux dont les signatures
+	// qui ont ete evacues, c'est a dire ceux dont les signatures
 	// ne correspondent pas aux nouveaux...
 	// et on retablit les vmax des plugins restants...
 	$signatures = array();
-	foreach ($paquets as $p) {
-		$signatures[] = $p['md5'];
+	foreach ($paquets as $_paquet) {
+		$signatures[] = $_paquet['md5'];
 	}
 
 	// tous les paquets du depot qui ne font pas parti des signatures
@@ -286,7 +286,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	$anciens_paquets = array_map('array_shift', $anciens_paquets);
 
 	// tous les plugins correspondants aux anciens paquets
-	$anciens_plugins = sql_allfetsel('p.id_plugin',	array('spip_plugins AS p', 'spip_paquets AS pa'), array('p.id_plugin=pa.id_plugin', sql_in('pa.id_paquet', $anciens_paquets)));
+	$anciens_plugins = sql_allfetsel('pl.id_plugin',	array('spip_plugins AS pl', 'spip_paquets AS pa'), array('pl.id_plugin=pa.id_plugin', sql_in('pa.id_paquet', $anciens_paquets)));
 	$anciens_plugins = array_map('array_shift', $anciens_plugins);
 
 	// suppression des anciens paquets
@@ -301,8 +301,8 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	// on ne garde que les paquets qui ne sont pas presents dans la base
 	$signatures = sql_allfetsel('signature', 'spip_paquets', 'id_depot='.sql_quote($id_depot));
 	$signatures = array_map('array_shift', $signatures);
-	foreach ($paquets as $cle=>$infos) {
-		if (in_array($infos['md5'], $signatures)) {
+	foreach ($paquets as $cle => $_infos) {
+		if (in_array($_infos['md5'], $signatures)) {
 			unset($paquets[$cle]);
 		}
 	}
@@ -406,27 +406,33 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 					// On traite d'abord le plugin du paquet pour recuperer l'id_plugin
 					// On rajoute le plugin dans la table spip_plugins si celui-ci n'y est pas encore ou on recupere
 					// l'id si il existe deja et on le met a jour si la version du paquet est plus elevee
-					if (!$plugin = sql_fetsel('id_plugin, vmax', 'spip_plugins',
+					if (!$plugin = sql_fetsel('id_plugin, vmax, nom, slogan', 'spip_plugins',
 						array('prefixe=' . sql_quote($insert_plugin['prefixe'])))) {
 						$insert_plugins[ $insert_plugin['prefixe'] ] = array_merge($insert_plugin, array('vmax' => $insert_paquet['version']));
 					}
 					else {
 						$id_plugin = $plugin['id_plugin'];
-						$prefixes[ $insert_plugin['prefixe'] ] = $id_plugin;
-						
+						$prefixes[$insert_plugin['prefixe']] = $id_plugin;
+
+						// Attention : si le plugin a été mis à jour par un paquet local, le slogan et le nom
+						// peuvent etre inseres comme des items de langue. Dans ce cas, si un paquet distant peut
+						// le mettre a jour il faut le faire !
+						$update_plugin = array();
+						if (($plugin['nom'] == strtolower($insert_plugin['prefixe']) . '_nom')
+						OR ($plugin['slogan'] == strtolower($insert_plugin['prefixe']) . '_slogan'))
+							$update_plugin = $insert_plugin;
 						if (spip_version_compare($plugin['vmax'], $insert_paquet['version'], '<='))
+							$update_plugin = array_merge($insert_plugin, array('vmax' => $insert_paquet['version']));
+						if ($update_plugin)
 							sql_updateq('spip_plugins',
-										array_merge($insert_plugin, array('vmax' => $insert_paquet['version'])),
+										$update_plugin,
 										'id_plugin=' . sql_quote($id_plugin));
 					}
 	
 					// On traite maintenant le paquet connaissant l'id du plugin
-					
 					// temporaire qui sera supprime lors de la connaissance de l'id_paquet
 					$insert_paquet['prefixe'] = $insert_plugin['prefixe']; 
 					$insert_paquets[] = $insert_paquet;
-					
-					
 				}
 				else
 					$collision = true;
