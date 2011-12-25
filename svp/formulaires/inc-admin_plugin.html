@@ -11,12 +11,12 @@
 			</div>]
 			[(#REM) <!-- Resume du plugin -->]
 			<div class="resume">
-				<h3 class="nom"><a[ href="(#VERSION)"] rel="info">[(#NOM)]</a></h3>
+				<h3 class="nom"><a[ href="(#VERSION)"] rel="info">[(#NOM|extraire_multi)]</a></h3>
 				<span class="version">[(#VERSION)]</span>
 				<span class="etat">[ - (#ETAT)]</span>
 				[<span class="information"> - (#OBSOLETE|=={oui}|oui)<:svp:info_plugin_obsolete:></span>]
 				[<span class="information"> - (#GET{incompatible}|oui)<:svp:info_plugin_incompatible:></span>]
-				<div class="short">[(#SLOGAN|svp_T{#PREFIXE}|typo)]</div>
+				<div class="short">[(#SLOGAN|extraire_multi|typo)]</div>
 				[(#LOGO|oui)<div class="icon">
 					[(#ACTIF|=={oui}|?{
 						#CONSTANTE|constant|concat{#SRC_ARCHIVE/#LOGO}|image_reduire{32},
@@ -61,7 +61,7 @@
 			<div class="details" style="display:none">
 				<dl class="description">
 					<dd class="desc">
-						[(#DESCRIPTION*|svp_T{#PREFIXE}|propre)]
+						[(#DESCRIPTION|extraire_multi|propre)]
 						[<em class="site">
 							<a href="(#LIEN_DOC)" class="spip_out" title="<:svp:bulle_aller_documentation:>"><:en_savoir_plus:></a>
 						</em>]

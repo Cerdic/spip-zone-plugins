@@ -1,29 +1,5 @@
 <?php
 
-/**
- * Retourne une chaine traduite si elle existe
- * dans spip, sinon dans le paquet, sinon retourne la chaine
- * - _T('code'),
- * - sinon _T('paquet-prefixe:code')
- * - sinon  'code'
- *
- * Tout cela parque plugin.xml et paquet.xml ne sont pas
- * geres de la meme facon...
- * 
-**/
-function svp_T($texte, $prefixe) {
-	
-	// si elle existe dans le fichier de paquet
-	$paquet = 'paquet-' . strtolower($prefixe) . ':';
-	if ($retour = _T($paquet . strtolower($texte), array(), array('force'=>false))) {
-		return $retour;
-	}
-
-	// sinon on la retourne telle quelle, c'est qu'elle est déjà traduite !
-	return $texte;
-}
-
-
 function svp_afficher_intervalle($intervalle, $logiciel){
 	if (!strlen($intervalle)) return '';
 	if (!preg_match(',^[\[\(\]]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-\*]*)[\]\)\[]$,Uis',$intervalle,$regs)) return false;
