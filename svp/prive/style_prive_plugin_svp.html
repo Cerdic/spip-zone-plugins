@@ -17,6 +17,18 @@
 
 /* **************** EXEC ADMIN PLUGIN ***************** */
 .onglets_simple.second ul.verrouille li.first {margin-#ENV{left}:30px;}
+.onglets_simple.second ul li span.off {
+	display: block;
+	float: left;
+	padding: 4px 7px;
+	margin-bottom: 5px;
+	margin-left: 0;
+	margin-right: 5px;
+	border: 1px solid #909090;
+	background-color: #eeeeee;
+	color: #6c6c6c;
+	opacity: 0.6;
+}
 
 .actions_multiples .boutons { text-align: #ENV{left}; }
 .actions_multiples .action { width: 30%; }
@@ -48,7 +60,7 @@
 
 /* Styles des etats provoquant un affichage specifique des plugins */
 /* -- installe (donc actif) */
-.installe{ color: #999; background: url(#CHEMIN_IMAGE{fond-installe.png}) repeat fixed 0 0 !important; }
+.installe { color: #999; background: url(#CHEMIN_IMAGE{fond-installe.png}) repeat fixed 0 0 !important; }
 .installe:hover {	background-color:#F0F0F0 !important; }
 /* -- verrouille (extension) */
 .verrou { background:url(#CHEMIN_IMAGE{fond-verrou.png}) repeat fixed 0 0 #FDFDFD !important;}
