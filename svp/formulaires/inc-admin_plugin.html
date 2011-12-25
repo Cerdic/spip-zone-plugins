@@ -35,11 +35,13 @@
 				]
 				[(#ACTIF|=={oui}|non)
 					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{on})]" class="submit" value="<:svp:bouton_activer:>" />
-					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{kill})]" class="submit" value="<:svp:bouton_supprimer:>" />
 				]
 				[(#MAJ_VERSION|oui)
 					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{up})]" class="submit" value="<:svp:bouton_up:>" />
 				]
+			]
+			[(#ACTIF|=={oui}|non)
+				<input type="submit" name="[(#ID_PAQUET|svp_nom_action{kill})]" class="submit" value="<:svp:bouton_supprimer:>" />
 			]
 			[(#CONSTANTE|=={_DIR_EXTENSIONS}|oui)
 				<span class="information"><:svp:info_verrouille:></span>
