@@ -17,19 +17,28 @@ function fusionner_intervalles($intervalle_a, $intervalle_b) {
 		$borne_b['min']['valeur'] = _SVP_VERSION_SPIP_MIN;
 		$borne_b['min']['incluse'] = true;
 	}
-	
+
+	// On initialise la borne max de chaque intervalle a la version SPIP max incluse si vide
+	if (!$borne_a['max']['valeur']) {
+		$borne_a['max']['valeur'] = _SVP_VERSION_SPIP_MAX;
+		$borne_a['max']['incluse'] = true;
+	}
+	if (!$borne_b['max']['valeur']) {
+		$borne_b['max']['valeur'] = _SVP_VERSION_SPIP_MAX;
+		$borne_b['max']['incluse'] = true;
+	}
+
 	// On calcul maintenant :
 	// -- la borne min de l'intervalle fusionne = min(min_a, min_b)
-	// -- suivant l'intervalle retenu la borne max est forcement dans l'autre intervalle = max(autre intervalle)
-	//    On presuppose evidemment que les intervalles ne sont pas disjoints et coherents entre eux
-	if (spip_version_compare($borne_a['min']['valeur'], $borne_b['min']['valeur'], '<=')) {
+	if (spip_version_compare($borne_a['min']['valeur'], $borne_b['min']['valeur'], '<='))
 		$bornes_fusionnees['min'] = $borne_a['min'];
-		$bornes_fusionnees['max'] = $borne_b['max'];
-	}
-	else {
+	else
 		$bornes_fusionnees['min'] = $borne_b['min'];
+	// -- la borne max de l'intervalle fusionne = max(max_a, max_b)
+	if (spip_version_compare($borne_a['max']['valeur'], $borne_b['max']['valeur'], '<='))
+		$bornes_fusionnees['max'] = $borne_b['max'];
+	else
 		$bornes_fusionnees['max'] = $borne_a['max'];
-	}
 
 	return contruire_intervalle($bornes_fusionnees);
 }
