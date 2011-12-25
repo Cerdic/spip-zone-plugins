@@ -434,20 +434,41 @@ class Actionneur {
 	 * Effectue une des actions qui reste a faire.  
 	**/
 	function one_action() {
-		// s'il reste des actions, on en prend une, et on la fait.
-		if (count($this->end)) {
+		// s'il reste des actions, on en prend une, et on la fait
+		// de meme si une action est en cours mais pas terminee (timeout)
+		// on tente de la refaire...
+		if (count($this->end) OR $this->work) {
+			// on verrouille avec l'auteur en cours pour
+			// que seul lui puisse effectuer des actions a ce moment la
 			if (!$this->est_verrouille()) {
 				$this->verrouiller();
-			} elseif (!$this->est_verrouille($GLOBALS['visiteur_session']['id_auteur'])) {
-				// si ce n'est pas verrouille par l'auteur en cours...
-				// ce n'est pas normal, donc on quitte sans rien faire.
+			}
+			// si ce n'est pas verrouille par l'auteur en cours...
+			// ce n'est pas normal, donc on quitte sans rien faire.
+			elseif (!$this->est_verrouille($GLOBALS['visiteur_session']['id_auteur'])) {
 				return false;
 			}
-			$action = $this->work = array_shift($this->end);
+
+			// si pas d'action en cours
+			if (!$this->work) {
+				// on prend une des actions en attente
+				$this->work = array_shift($this->end);
+			}
+			$action = $this->work;
 			$this->sauver_actions();
+			// effectue l'action dans work
 			$this->do_action();
+
+			// si la liste des actions en attente est maintenant vide
+			// on deverrouille aussitot.
+			if (!count($this->end)) {
+				$this->deverrouiller();
+				$this->sauver_actions();
+			}
 			return $action;
 		} else {
+			// on ne devrait normalement plus tomber sur un cas de verrouillage ici
+			// mais sait-on jamais. Tester ne couter rien :)
 			if ($this->est_verrouille()) {
 				$this->deverrouiller();
 				$this->sauver_actions();
@@ -880,6 +901,23 @@ class Actionneur {
 		}
 		return constant($constante);
 	}
+
+	/**
+	 * Teste si le plugin SVP (celui-ci donc) a ete desinstalle / desactive dans les actions realisees 
+	 *
+	 * @return bool C'est le cas ou non.
+	**/
+	function tester_si_svp_desactive() {
+		foreach ($this->done as $d) {
+			if ($d['p'] == 'SVP'
+			AND $d['done'] == true
+			AND in_array($d['todo'], array('off', 'stop'))) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }
 
 

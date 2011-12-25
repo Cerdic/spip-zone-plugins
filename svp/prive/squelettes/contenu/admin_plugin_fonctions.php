@@ -32,8 +32,8 @@ function svp_presenter_actions_realisees() {
 	$actionneur->get_actions();
 	$pres = $actionneur->presenter_actions($fin = true);
 
-	// s'il ne reste aucune action a faire ou si on force un nettoyage.
-	if (!$actionneur->est_verrouille()) {
+	// s'il ne reste aucune action a faire
+	if (!$actionneur->est_verrouille() OR !count($actionneur->end)) {
 		$actionneur->nettoyer_actions();
 	}
 		

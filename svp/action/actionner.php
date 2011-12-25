@@ -18,7 +18,15 @@ function action_actionner_dist() {
 	$actionneur->log = true;
 	$actionneur->get_actions();
 	if ($actionneur->one_action()) {
-		$url = generer_action_auteur('actionner', '',  _request('redirect'));
+		// si SVP a été enlevé des actifs, on redirige sur la fin...
+		// sinon cette page d'action/actionner devient introuvable.
+		// dans ce cas précis, les autres actions prévues venant après la desactivation de SVP
+		// ne pourront être traitees... SVP n'étant plus là !
+		if ($actionneur->tester_si_svp_desactive()) {
+			$url = _request('redirect');
+		} else {
+			$url = generer_action_auteur('actionner', '',  _request('redirect'));
+		}
 
 		if (_SVP_DEBUG) {
 			include_spip('inc/minipres');
