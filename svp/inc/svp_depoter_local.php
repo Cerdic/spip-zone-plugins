@@ -190,8 +190,18 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 
 	foreach($paquets_locaux as $const_dir => $paquets) {
 		foreach ($paquets as $chemin => $paquet) {
-			$le_paquet = $paquet_base;
+			// Si on est en presence d'un plugin dont la dtd est "paquet" on compile en multi
+			// les nom, slogan et description a partir des fichiers de langue.
+			// De cette façon, les informations des plugins locaux et distants seront identiques
+			// => On evite l'utilisation de _T() dans les squelettes
+			if ($paquet['dtd'] == 'paquet') {
+				$multis = svp_compiler_multis($paquet['prefix'], constant($const_dir) . '/' . $chemin);
+				if (isset($multis['nom'])) $paquet['nom'] = $multis['nom'];
+				if (isset($multis['slogan'])) $paquet['slogan'] = $multis['slogan'];
+				if (isset($multis['description'])) $paquet['description'] = $multis['description'];
+			}
 
+			$le_paquet = $paquet_base;
 			#$le_paquet['traductions'] = serialize($paquet['traductions']);
 
 			if ($champs = $preparer_sql_paquet($paquet)) {
@@ -385,6 +395,47 @@ function svp_base_actualiser_paquets_actifs() {
 		}
 	}
 
+}
+
+// Construit le contenu multi des balises nom, slogan et description a partir des items de langue
+// contenus dans les fichiers paquet-prefixe_langue.php
+function svp_compiler_multis($prefixe, $dir_source) {
+
+	$multis =array();
+
+	$module = "paquet-$prefixe";
+	$item_nom = $prefixe . "_nom";
+	$item_slogan = $prefixe . "_slogan";
+	$item_description = $prefixe . "_description";
+
+	// On cherche tous les fichiers de langue destines a la traduction du paquet.xml
+	if ($fichiers_langue = glob($dir_source . "/lang/{$module}_*.php")) {
+		$nom = $slogan = $description = '';
+		foreach ($fichiers_langue as $_fichier_langue) {
+			$nom_fichier = basename($_fichier_langue, '.php');
+			$langue = substr($nom_fichier, strlen($module) + 1 - strlen($nom_fichier));
+			// Si la langue est reconnue, on traite la liste des items de langue
+			if (isset($GLOBALS['codes_langues'][$langue])) {
+				$GLOBALS['idx_lang'] = $langue;
+				include($_fichier_langue);
+				foreach ($GLOBALS[$langue] as $_item => $_traduction) {
+					if ($_item == $item_nom)
+						$nom .= "\n[$langue]$_traduction";
+					if ($_item == $item_slogan)
+						$slogan .= "\n[$langue]$_traduction";
+					if ($_item == $item_description)
+						$description .= "\n[$langue]$_traduction";
+				}
+			}
+		}
+
+		// Finaliser la construction des balises multi
+		if ($nom) $multis['nom'] = "<multi>$nom</multi>";
+		if ($slogan) $multis['slogan'] = "<multi>$slogan</multi>";
+		if ($description) $multis['description'] = "<multi>$description</multi>";
+	}
+
+	return $multis;
 }
 
 ?>
