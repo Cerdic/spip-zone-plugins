@@ -13,6 +13,12 @@ function notifications_modes_email_envoyer_dist($contact, $contenu){
 		// Si on a une version HTML
 		if ($contenu['html'])
 			$corps['html'] = $contenu['html'];
+        //si un expéditeur est défini
+        if ($contenu['from'])
+            $corps['from'] = $contenu['from'];
+        //si un nom d'expéditeur est défini
+        if ($contenu['nom_envoyeur'])
+            $corps['nom_envoyeur'] = $contenu['nom_envoyeur'];
 	}
 	// Sinon c'est juste le texte
 	else{
