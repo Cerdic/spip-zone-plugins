@@ -11,8 +11,10 @@ include_spip('inc/plugin'); // plugin_installes_meta();
 // pour etre sur que les bons fichiers seront charges lors de l'install
 $new = actualise_plugins_actifs();
 if ($new AND _request('actualise')<2) {
+	$url = parametre_url(self(),'actualise',_request('actualise')+1,'&');
 	include_spip('inc/headers');
-	redirige_par_entete(parametre_url(self(),'actualise',_request('actualise')+1,'&'));
+	echo redirige_formulaire($url);
+	exit;
 }
 
 
