@@ -20,7 +20,7 @@ define('RECU_FISCAL', find_in_path('recu_fiscal.pdf'));
 if (!defined('SIGNATURE_PRES')) define('SIGNATURE_PRES', find_in_path('signature_pres.png'));
 
 include_spip('pdf/fpdi_pdf_parser');
-include_spip('pdf/fpdf');
+include_spip('fpdf');
 include_spip('pdf/fpdf_tpl');
 include_spip('pdf/fpdi');
 include_spip('pdf/chiffreEnLettre');
