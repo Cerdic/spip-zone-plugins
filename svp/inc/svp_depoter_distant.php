@@ -406,7 +406,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 					// On traite d'abord le plugin du paquet pour recuperer l'id_plugin
 					// On rajoute le plugin dans la table spip_plugins si celui-ci n'y est pas encore ou on recupere
 					// l'id si il existe deja et on le met a jour si la version du paquet est plus elevee
-					if (!$plugin = sql_fetsel('id_plugin, vmax, nom, slogan', 'spip_plugins',
+					if (!$plugin = sql_fetsel('id_plugin, vmax', 'spip_plugins',
 						array('prefixe=' . sql_quote($insert_plugin['prefixe'])))) {
 						$insert_plugins[ $insert_plugin['prefixe'] ] = array_merge($insert_plugin, array('vmax' => $insert_paquet['version']));
 					}
@@ -414,18 +414,9 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 						$id_plugin = $plugin['id_plugin'];
 						$prefixes[$insert_plugin['prefixe']] = $id_plugin;
 
-						// Attention : si le plugin a été mis à jour par un paquet local, le slogan et le nom
-						// peuvent etre inseres comme des items de langue. Dans ce cas, si un paquet distant peut
-						// le mettre a jour il faut le faire !
-						$update_plugin = array();
-						if (($plugin['nom'] == strtolower($insert_plugin['prefixe']) . '_nom')
-						OR ($plugin['slogan'] == strtolower($insert_plugin['prefixe']) . '_slogan'))
-							$update_plugin = $insert_plugin;
 						if (spip_version_compare($plugin['vmax'], $insert_paquet['version'], '<='))
-							$update_plugin = array_merge($insert_plugin, array('vmax' => $insert_paquet['version']));
-						if ($update_plugin)
 							sql_updateq('spip_plugins',
-										$update_plugin,
+										array_merge($insert_plugin, array('vmax' => $insert_paquet['version'])),
 										'id_plugin=' . sql_quote($id_plugin));
 					}
 	
