@@ -254,8 +254,8 @@ function spipdf_recuperer_fond($flux) {
 
             // dans balise_page, on ne récupère que quelques possibilité dont le format
             if(!empty($GLOBALS['valeurs_page'])) {
-                if(!empty($GLOBALS['valeurs_page']['format_page'])) {
-                    $format_page = $GLOBALS['valeurs_page']['format_page'];
+                if(!empty($GLOBALS['valeurs_page']['format'])) {
+                    $format_page = $GLOBALS['valeurs_page']['format'];
                 }
             }
 
