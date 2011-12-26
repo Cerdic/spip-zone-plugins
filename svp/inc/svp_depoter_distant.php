@@ -495,7 +495,9 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	foreach($news_id as $id) {
 		$insert_dp[] = array('id_depot'=>$id_depot, 'id_plugin'=>$id);
 	}
-	sql_insertq_multi('spip_depots_plugins', $insert_dp);
+	if ($insert_dp) {
+		sql_insertq_multi('spip_depots_plugins', $insert_dp);
+	}
 	
 
 	// On compile maintenant certaines informations des paquets mis a jour dans les plugins
