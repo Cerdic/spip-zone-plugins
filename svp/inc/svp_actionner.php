@@ -645,6 +645,34 @@ class Actionneur {
 			$dir = constant($i['constante']) . $i['src_archive'];
 			if (supprimer_repertoire($dir)) {
 				sql_delete('spip_paquets', 'id_paquet=' . sql_quote($info['i']));
+				
+				// on tente un nettoyage jusqu'a la racine de auto/
+				// si la suppression concerne une profondeur d'au moins 2
+				// et que les repertoires sont vides
+				$chemins = explode('/', $i['src_archive']); // auto / prefixe / version
+				// le premier c'est auto
+				array_shift($chemins);
+				// le dernier est deja fait...
+				array_pop($chemins);
+				// entre les deux...
+				while (count($chemins)) {
+					$vide = true;
+					$dir = constant($i['constante']) . 'auto/' . implode('/', $chemins);
+					$fichiers = scandir($dir);
+					if ($fichiers) {
+						foreach ($fichiers as $f) {
+							if ($f[0] != '.') {
+								$vide = false;
+								break;
+							}
+						}
+					}
+					// on tente de supprimer si c'est effectivement vide.
+					if ($vide and !supprimer_repertoire($dir)) {
+						break;
+					}
+					array_pop($chemins);
+				}
 				return true;
 			}
 		}
@@ -848,7 +876,43 @@ class Actionneur {
 			$this->log("Recuperer l'archive : " . $i['nom_archive'] );
 			if ($adresse = sql_getfetsel('url_archives', 'spip_depots', 'id_depot='.sql_quote($i['id_depot']))) {
 				$zip = $adresse . '/' . $i['nom_archive'];
-				$dest = substr($i['nom_archive'], 0, -4); // enlever .zip ...
+
+				// destination : auto/prefixe/version (sinon auto/nom_archive/version)
+				$prefixe = sql_getfetsel('pl.prefixe',
+					array('spip_paquets AS pa', 'spip_plugins AS pl'),
+					array('pa.id_plugin = pl.id_plugin', 'pa.id_paquet=' . sql_quote($i['id_paquet'])));
+
+				// prefixe
+				$base =  ($prefixe ? strtolower($prefixe) : substr($i['nom_archive'], 0, -4) ); // enlever .zip ...
+
+				// prefixe/version
+				$dest = $base . '/v' . $i['version'];
+				
+				// si on tombe sur un auto/X ayant des fichiers (et pas uniquement des dossiers)
+				// ou un dossier qui ne commence pas par 'v'
+				// c'est que auto/X n'était pas chargé avec SVP
+				// ce qui peut arriver lorsqu'on migre de SPIP 2.1 à 3.0
+				// dans ce cas, on supprime auto X pour mettre notre nouveau paquet.
+				$ecraser_base = false;
+				if (is_dir(_DIR_PLUGINS_AUTO . $base)) {
+					$base_files = scandir(_DIR_PLUGINS_AUTO . $base);
+					if (is_array($base_files)) {
+						$base_files = array_diff($base_files, array('.', '..'));
+						foreach ($base_files as $f) {
+							if (($f[0] != '.' and $f[0] != 'v') // commence pas par v
+							OR ($f[0] != '.' and !is_dir(_DIR_PLUGINS_AUTO . $base . '/' . $f))) { // commence par v mais pas repertoire
+								$ecraser_base = true;
+								break;
+							}
+						}
+					}
+				}
+				if ($ecraser_base) {
+					supprimer_repertoire(_DIR_PLUGINS_AUTO . $base);
+				}
+
+
+
 				// on recupere la mise a jour...
 				include_spip('action/teleporter');
 				$teleporter_composant = charger_fonction('teleporter_composant', 'action');
