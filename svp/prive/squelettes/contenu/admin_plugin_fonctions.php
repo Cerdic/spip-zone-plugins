@@ -3,6 +3,20 @@
 // on installe les plugins maintenant,
 // cela permet aux scripts d'install de faire des affichages (moches...)
 include_spip('inc/plugin'); // plugin_installes_meta();
+
+
+// on fait la verif du path avant tout,
+// et l'installation des qu'on est dans la colonne principale
+// si jamais la liste des plugins actifs change, il faut faire un refresh du hit
+// pour etre sur que les bons fichiers seront charges lors de l'install
+$new = actualise_plugins_actifs();
+if ($new AND _request('actualise')<2) {
+	$url = parametre_url(self(),'actualise',_request('actualise')+1,'&');
+	include_spip('inc/headers');
+	echo redirige_formulaire($url);
+	exit;
+}
+
 	
 
 function svp_presenter_actions_realisees() {
