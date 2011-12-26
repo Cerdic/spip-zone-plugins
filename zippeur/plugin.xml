@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Zippeur</nom>
 	<slogan>Zippez facilement vos documents joints</slogan>
-	<auteur>Maïeul Rouquette, Julien Coste-Louret</auteur>
+	<auteur>[Maïeul Rouquette->http://www.maieul.net], Julien Coste-Louret</auteur>
 	<version>1.4.1</version>
 	<version_base>0.3</version_base>
   	<categorie>multimedia</categorie>
@@ -23,7 +23,7 @@
 <plugin spip='[3.0.0-dev;3.0.99]'>
 	<nom>Zippeur</nom>
 	<slogan>Zippez facilement vos documents joints</slogan>
-	<auteur>Maïeul Rouquette, Julien Coste-Louret</auteur>
+	<auteur>[Maïeul Rouquette->http://www.maieul.net], Julien Coste-Louret</auteur>
 	<version>1.4.1</version>
 	<version_base>0.3</version_base>
   	<categorie>multimedia</categorie>
