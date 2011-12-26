@@ -40,8 +40,7 @@ define('_LANGONET_FILES', '(?<!/charsets|/lang|/req)(/[^/]*\.(php))$');
 
 function inc_langonet_verifier_l($module, $ou_fichier) {
 
-	$item_md5 = array();
-	$fichier_non = array();
+	$item_md5 = $fichier_non = array();
 	$files = preg_files(_DIR_RACINE.$ou_fichier, _LANGONET_FILES);
 	foreach ($files as $_fichier) {
 		foreach ($contenu = file($_fichier) as $ligne => $texte) {
@@ -59,12 +58,12 @@ function inc_langonet_verifier_l($module, $ou_fichier) {
 				}
 		}
 	}
-
-	$resultats['module'] = $module;
-	$resultats['ou_fichier'] = $ou_fichier;
-	$resultats['item_non'] = array_keys($item_md5);
-	$resultats['fichier_non'] = $fichier_non;
-	$resultats['item_md5'] = $item_md5;
-	return $resultats;
+	return array(
+		     'module' => $module,
+		     'ou_fichier' => $ou_fichier,
+		     'item_non' => array_keys($item_md5),
+		     'fichier_non' => $fichier_non,
+		     'item_md5' => $item_md5
+		     );
 }
 ?>

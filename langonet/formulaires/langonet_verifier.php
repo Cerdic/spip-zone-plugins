@@ -76,7 +76,9 @@ function formulaires_langonet_verifier_traiter() {
 			$extra = array();
 			foreach ($all as $item) {
 				// indefini si dejo normalise
-				$extra[$item] = @$resultats['item_md5'][$item]; 			}
+				$index = preg_match('/^(.*)[{].*[}]$/', $item, $m) ? $m[1] : $item; 
+				$extra[$index] = @$resultats['item_md5'][$item];
+ 			}
 			$mode = $_l ?'fonction_l' :  'oublie';
 		} else {
 			$extra = $resultats['item_non'];
@@ -548,7 +550,7 @@ function creer_script($resultats, $verification) {
 		}
 		// Un item avec $ est intraduisible.
 		if (strpos($occ, '$') !== false)  continue;
-		$occ = str_replace('%', '\\%', $occ);
+		$occ = str_replace('%', '\\%', str_replace('[', '\\[', $occ));
 		$cite = $_l ? "s%_L *( *.$occ *.%_T('$prefixe$index'%;" : "s%<:$occ%<:$prefixe$index%;";
 		$sed[$cite]=strlen($occ); 
 	}
@@ -612,7 +614,8 @@ function langonet_index_brut($occ)
 function langonet_index($occ, $item_md5)
 {
 	$index = langonet_index_brut($occ);
-	return (isset($item_md5[$index]) AND strcasecmp($item_md5[$index], $occ)) ? md5($occ) :	$index;
+	$x =  (isset($item_md5[$index]) AND strcasecmp($item_md5[$index],$occ));
+	return $x ? md5($occ) :	$index;
 }
 
 // fonction purement utilitaire
