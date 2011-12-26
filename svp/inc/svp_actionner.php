@@ -563,7 +563,10 @@ class Actionneur {
 						$this->activer_plugin_dossier($dirs['dossier'], $maj);
 					}
 
-					if (substr($i['src_archive'], 0, 5) == 'auto/') {
+					// l'ancien repertoire a supprimer pouvait etre auto/X
+					// alors que le nouveau est auto/X/Y ...
+					// il faut prendre en compte ce cas particulier et ne pas ecraser auto/X !
+					if (substr($i['src_archive'], 0, 5) == 'auto/' and (false === strpos($dirs['dossier'], $i['src_archive']))) {
 						if (supprimer_repertoire( constant($i['constante']) . $i['src_archive']) ) {
 							sql_delete('spip_paquets', 'id_paquet=' . sql_quote($info['i']));
 						}
