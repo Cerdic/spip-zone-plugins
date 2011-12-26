@@ -572,7 +572,7 @@ class Actionneur {
 						}
 					}
 				}
-
+							
 				$this->ajouter_plugin_interessants_meta($dirs['dossier']);
 				return $dirs;
 			}
@@ -648,10 +648,28 @@ class Actionneur {
 
 		if (in_array($i['constante'], array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL'))
 		and substr($i['src_archive'], 0, 5) == 'auto/') {
+			
 			$dir = constant($i['constante']) . $i['src_archive'];
 			if (supprimer_repertoire($dir)) {
+				$id_plugin = sql_getfetsel('id_plugin', 'spip_paquets', 'id_paquet=' . sql_quote($info['i']));
+
+				// on supprime le paquet
 				sql_delete('spip_paquets', 'id_paquet=' . sql_quote($info['i']));
-				
+
+				// ainsi que le plugin s'il n'est plus utilise
+				$utilise = sql_allfetsel(
+					'pl.id_plugin',
+					array('spip_paquets AS pa', 'spip_plugins AS pl'),
+					array('pa.id_plugin = pl.id_plugin', 'pa.id_plugin=' . sql_quote($id_plugin)));
+				if (!$utilise) {
+					sql_delete('spip_plugins', 'id_plugin=' . sql_quote($id_plugin));
+				} else {
+					// on met a jour d'eventuels obsoletes qui ne le sont plus maintenant
+					// ie si on supprime une version superieure à une autre qui existe en local...
+					include_spip('inc/svp_depoter_local');
+					svp_corriger_obsolete_paquets(array($id_plugin));
+				}
+					
 				// on tente un nettoyage jusqu'a la racine de auto/
 				// si la suppression concerne une profondeur d'au moins 2
 				// et que les repertoires sont vides

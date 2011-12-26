@@ -288,32 +288,13 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 	
 	if ($insert_paquets) {
 
-		$obsoletes = array();
+		// sert pour le calcul d'obsolescence
+		$id_plugin_concernes = array();
+		
 		foreach ($insert_paquets as $c => $p) {
 			$insert_paquets[$c]['id_plugin'] = $cle_plugins[$p['prefixe']];
+			$id_plugin_concernes[ $insert_paquets[$c]['id_plugin'] ] = true;
 			unset($insert_paquets[$c]['prefixe']);
-			$obsoletes[$p['prefixe']][] = $c;
-			// si 2 paquet locaux ont le meme prefixe, mais pas la meme version,
-			// l'un est obsolete : la version la plus ancienne
-			if (count($obsoletes[$p['prefixe']]) > 1) {
-				foreach ($obsoletes[$p['prefixe']] as $cle) {
-					if ($cle == $c) continue;
-					
-					// je suis plus petit qu'un autre
-					if (spip_version_compare($insert_paquets[$c]['version'], $insert_paquets[$cle]['version'], '<')) {
-						if ($insert_paquets[$c]['etatnum'] <= $insert_paquets[$cle]['etatnum']) {
-							$insert_paquets[$c]['obsolete'] = 'oui';
-						}
-					}
-					
-					// je suis plus grand qu'un autre...
-					// si mon etat est meilleur, rendre obsolete les autres
-					elseif ($insert_paquets[$c]['etatnum'] > $insert_paquets[$cle]['etatnum']) {
-						$insert_paquets[$cle]['obsolete'] = 'oui';
-					}
-					
-				}
-			}
 
 			// remettre les necessite, utilise, librairie dans la cle 0
 			// comme SVP
@@ -334,6 +315,8 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 		}
 
 		sql_insertq_multi('spip_paquets', $insert_paquets);
+
+		svp_corriger_obsolete_paquets( array_keys($id_plugin_concernes) );
 	}
 
 	if (count($cle_plugins)) {
@@ -438,4 +421,92 @@ function svp_compiler_multis($prefixe, $dir_source) {
 	return $multis;
 }
 
+
+/**
+ * Met à jour les informations d'obsolescence
+ * des paquets locaux.
+ *
+ * @param array $ids_plugin
+ * 		Identifiant de plugins concernes par les mises a jour
+ * 		En cas d'absence, passera sur tous les paquets locaux
+**/
+function svp_corriger_obsolete_paquets($ids_plugin = array()) {
+	// on minimise au maximum le nombre de requetes.
+	// 1 pour lister les paquets
+	// 1 pour mettre à jour les obsoletes à oui
+	// 1 pour mettre à jour les obsoletes à non
+
+	$where = array('pa.id_plugin = pl.id_plugin', 'id_depot='.sql_quote(0));
+	if ($ids_plugin) {
+		$where[] = sql_in('pl.id_plugin', $ids_plugin);
+	}
+	
+	// comme l'on a de nouveaux paquets locaux...
+	// certains sont peut etre devenus obsoletes
+	// parmis tous les plugins locaux presents
+	// concernes par les memes prefixes que les plugins ajoutes.
+	$obsoletes = array();
+	$changements = array();
+	
+	$paquets = sql_allfetsel(
+		array('pa.id_paquet', 'pl.prefixe', 'pa.version', 'pa.etatnum', 'pa.obsolete'),
+		array('spip_paquets AS pa', 'spip_plugins AS pl'),
+		$where);
+
+	foreach ($paquets as $c => $p) {
+		
+		$obsoletes[$p['prefixe']][] = $c;
+		
+		// si 2 paquet locaux ont le meme prefixe, mais pas la meme version,
+		// l'un est obsolete : la version la plus ancienne
+		if (count($obsoletes[$p['prefixe']]) > 1) {
+			foreach ($obsoletes[$p['prefixe']] as $cle) {
+				if ($cle == $c) continue;
+				
+				// je suis plus petit qu'un autre
+				if (spip_version_compare($paquets[$c]['version'], $paquets[$cle]['version'], '<')) {
+					if ($paquets[$c]['etatnum'] <= $paquets[$cle]['etatnum']) {
+						if ($paquets[$c]['obsolete'] != 'oui') {
+							$paquets[$c]['obsolete'] = 'oui';
+							$changements[$c] = true;
+						}
+					}
+				}
+				
+				// je suis plus grand qu'un autre...
+				// si mon etat est meilleur, rendre obsolete les autres
+				elseif ($paquets[$c]['etatnum'] >= $paquets[$cle]['etatnum']) {
+						if ($paquets[$cle]['obsolete'] != 'oui') {
+							$paquets[$cle]['obsolete'] = 'oui';
+							$changements[$cle] = true;
+						}
+				}
+				
+			}
+		} else {
+			if ($paquets[$c]['obsolete'] != 'non') {
+				$paquets[$c]['obsolete'] = 'non';
+				$changements[$c] = true;
+			}
+		}
+	}
+
+	if (count($changements)) {
+		$oui = $non = array();
+		foreach ($changements as $c => $null) {
+			if ($paquets[$c]['obsolete'] == 'oui') {
+				$oui[] = $paquets[$c]['id_paquet'];
+			} else {
+				$non[] = $paquets[$c]['id_paquet'];
+			}
+		}
+
+		if ($oui) {
+			sql_updateq('spip_paquets', array('obsolete'=>'oui'), sql_in('id_paquet', $oui));
+		}
+		if ($non) {
+			sql_updateq('spip_paquets', array('obsolete'=>'non'), sql_in('id_paquet', $non));
+		}
+	}
+}
 ?>
