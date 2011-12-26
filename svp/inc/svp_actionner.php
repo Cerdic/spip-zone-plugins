@@ -538,6 +538,9 @@ class Actionneur {
 			return false;
 		}
 
+		// $i est le paquet a mettre à jour (donc present)
+		// $maj est le paquet a telecharger qui est a jour (donc distant)
+		
 		$i = sql_fetsel('*','spip_paquets','id_paquet='.sql_quote($info['i']));
 
 		// on cherche la mise a jour...
@@ -555,13 +558,13 @@ class Actionneur {
 				// il faut :
 				// - activer le plugin sur son nouvel emplacement (uniquement si l'ancien est actif)...
 				// - supprimer l'ancien (si faisable)
-				if (($dirs['src_archive'] . '/') != $i['src_archive']) {
+				if (($dirs['dossier'] . '/') != $i['src_archive']) {
 					if ($i['actif'] == 'oui') {
 						$this->activer_plugin_dossier($dirs['dossier'], $maj);
 					}
 
-					if (substr($i['dossier'], 0, 5) == 'auto/') {
-						if (supprimer_repertoire($dirs['dir'])) {
+					if (substr($i['src_archive'], 0, 5) == 'auto/') {
+						if (supprimer_repertoire( constant($i['constante']) . $i['src_archive']) ) {
 							sql_delete('spip_paquets', 'id_paquet=' . sql_quote($info['i']));
 						}
 					}
