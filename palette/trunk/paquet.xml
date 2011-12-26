@@ -19,7 +19,7 @@
 	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL 3</licence>
 
 	<traduire module="palette" reference="fr" gestionnaire="salvatore" />
-
+	<menu nom="configurer_palette" titre="palette:palette" parent="menu_configuration" icone='images/palette-16.png' />
 	<pipeline nom="insert_head" inclure="palette_pipeline.php" />
 	<pipeline nom="header_prive" inclure="palette_pipeline.php" />
 
