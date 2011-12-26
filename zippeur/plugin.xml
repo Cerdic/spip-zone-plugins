@@ -19,7 +19,6 @@
        <inclure>zippeur_pipelines.php</inclure>
    </pipeline>
 	<licence>GPL</licence>
-	<lien>http://www.spip-contrib.net/Zippeur</lien>
 </plugin>
 <plugin spip='[3.0.0-dev;3.0.99]'>
 	<nom>Zippeur</nom>
