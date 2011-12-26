@@ -1,0 +1,27 @@
+<paquet
+	prefix="palette"
+	categorie="outil"
+	version="1.4"
+	etat="dev"
+	compatibilite="[3.0.0-beta;3.0.*]"
+	logo="images/palette-128.png"
+	schema="0.1"
+	documentation="http://www.spip-contrib.net/Palette"
+>	
+
+	<nom>Palette</nom>
+	<!-- Sélecteur de couleurs -->
+
+	<auteur>Daniel FAIVRE (à partir de travaux de Marcimat)</auteur>
+
+	<copyright>2008</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL 3</licence>
+
+	<traduire module="palette" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="insert_head" inclure="palette_pipeline.php" />
+	<pipeline nom="header_prive" inclure="palette_pipeline.php" />
+
+	<lib nom="farbtastic_1_3_1" lien="http://kent1.sklunk.net/IMG/zip/farbtastic_1_3_1.zip" />
+</paquet>
