@@ -5,10 +5,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // Version SPIP minimale quand un plugin ne le precise pas
 // -- Version SPIP correspondant a l'apparition des plugins
-define('_SVP_VERSION_SPIP_MIN', '1.9.0');
+if (!defined('_SVP_VERSION_SPIP_MIN')) {
+	define('_SVP_VERSION_SPIP_MIN', '1.9.0');
+}
 
 // -- Pour l'instant on ne connait pas la borne sup exacte
-define('_SVP_VERSION_SPIP_MAX', '3.0.99');
+if (!defined('_SVP_VERSION_SPIP_MIN')) {
+	define('_SVP_VERSION_SPIP_MAX', '3.0.99');
+}
 
 // Liste des branches significatives de SPIP et de leurs bornes (versions min et max)
 // A mettre a jour en fonction des sorties
