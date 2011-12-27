@@ -10,6 +10,15 @@ define('_SVP_VERSION_SPIP_MIN', '1.9.0');
 // -- Pour l'instant on ne connait pas la borne sup exacte
 define('_SVP_VERSION_SPIP_MAX', '3.0.99');
 
+// Liste des branches significatives de SPIP et de leurs bornes (versions min et max)
+// A mettre a jour en fonction des sorties
+# define('_INFOS_BRANCHES_SPIP', serialize($infos_branches_spip));
+$GLOBALS['infos_branches_spip'] = array(
+	'1.9' => array(_SVP_VERSION_SPIP_MIN,'1.9.2'),
+	'2.0' => array('2.0.0','2.0.99'),
+	'2.1' => array('2.1.0','2.1.99'),
+	'3.0' => array('3.0.0',_SVP_VERSION_SPIP_MAX) 
+);
 
 // Liste des licences de plugin
 # define('_LICENCES_PLUGIN', serialize($licences_plugin));

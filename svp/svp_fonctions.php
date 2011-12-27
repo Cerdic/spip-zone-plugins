@@ -252,6 +252,7 @@ function balise_SVP_CATEGORIES($p) {
 function calcul_svp_categories($categorie) {
 
 	$retour = array();
+	include_spip('inc/svp_phraser'); // pour $GLOBALS['categories_plugin']
 	$svp_categories = $GLOBALS['categories_plugin'];
 
 	if (is_array($svp_categories)) {
@@ -283,6 +284,7 @@ function balise_SVP_BRANCHES_SPIP($p) {
 function calcul_svp_branches_spip($branche) {
 
 	$retour = array();
+	include_spip('inc/svp_outiller'); // pour $GLOBALS['infos_branches_spip']
 	$svp_branches = $GLOBALS['infos_branches_spip'];
 
 	if (is_array($svp_branches)) {
