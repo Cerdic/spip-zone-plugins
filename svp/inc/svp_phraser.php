@@ -5,6 +5,25 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/xml');
 
 
+
+// Type parseur XML a appliquer pour recuperer les infos du plugin 
+// - plugin, pour utiliser plugin.xml 
+// - paquet, pour paquet.xml 
+define('_SVP_DTD_PLUGIN', 'plugin'); 
+define('_SVP_DTD_PAQUET', 'paquet'); 
+
+// Regexp de recherche des balises principales de archives.xml
+define('_SVP_REGEXP_BALISE_DEPOT', '#<depot[^>]*>(.*)</depot>#Uims');
+define('_SVP_REGEXP_BALISE_ARCHIVES', '#<archives[^>]*>(.*)</archives>#Uims');
+define('_SVP_REGEXP_BALISE_ARCHIVE', '#<archive[^>]*>(.*)</archive>#Uims');
+define('_SVP_REGEXP_BALISE_ZIP', '#<zip[^>]*>(.*)</zip>#Uims');
+define('_SVP_REGEXP_BALISE_TRADUCTIONS', '#<traductions[^>]*>(.*)</traductions>#Uims');
+define('_SVP_REGEXP_BALISE_PLUGIN', '#<plugin[^>]*>(.*)</plugin>#Uims');
+define('_SVP_REGEXP_BALISE_PAQUET', '#<paquet[^>]*>(.*)</paquet>#Uims');
+define('_SVP_REGEXP_BALISE_MULTIS', '#<multis[^>]*>(.*)</multis>#Uims');
+
+
+
 /**
  * Phraser un fichier de source dont l'url est donnee
  * Le fichier est un fichier XML contenant deux balises principales :

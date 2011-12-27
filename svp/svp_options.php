@@ -24,21 +24,6 @@ define('_SVP_CRON_ACTUALISATION_DEPOTS', true);
 // - Periode d'actualisation en nombre d'heures (de 1 a 24)
 define('_SVP_PERIODE_ACTUALISATION_DEPOTS', 6);
 
-// Type parseur XML a appliquer pour recuperer les infos du plugin 
-// - plugin, pour utiliser plugin.xml 
-// - paquet, pour paquet.xml 
-define('_SVP_DTD_PLUGIN', 'plugin'); 
-define('_SVP_DTD_PAQUET', 'paquet'); 
-
-// Regexp de recherche des balises principales de archives.xml
-define('_SVP_REGEXP_BALISE_DEPOT', '#<depot[^>]*>(.*)</depot>#Uims');
-define('_SVP_REGEXP_BALISE_ARCHIVES', '#<archives[^>]*>(.*)</archives>#Uims');
-define('_SVP_REGEXP_BALISE_ARCHIVE', '#<archive[^>]*>(.*)</archive>#Uims');
-define('_SVP_REGEXP_BALISE_ZIP', '#<zip[^>]*>(.*)</zip>#Uims');
-define('_SVP_REGEXP_BALISE_TRADUCTIONS', '#<traductions[^>]*>(.*)</traductions>#Uims');
-define('_SVP_REGEXP_BALISE_PLUGIN', '#<plugin[^>]*>(.*)</plugin>#Uims');
-define('_SVP_REGEXP_BALISE_PAQUET', '#<paquet[^>]*>(.*)</paquet>#Uims');
-define('_SVP_REGEXP_BALISE_MULTIS', '#<multis[^>]*>(.*)</multis>#Uims');
 
 // Liste des balises techniques autorisees dans la balise <spip> et des balises autorisant une traduction
 $GLOBALS['balises_techniques'] = array(
