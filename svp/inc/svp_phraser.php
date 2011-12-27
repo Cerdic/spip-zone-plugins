@@ -22,6 +22,14 @@ define('_SVP_REGEXP_BALISE_PLUGIN', '#<plugin[^>]*>(.*)</plugin>#Uims');
 define('_SVP_REGEXP_BALISE_PAQUET', '#<paquet[^>]*>(.*)</paquet>#Uims');
 define('_SVP_REGEXP_BALISE_MULTIS', '#<multis[^>]*>(.*)</multis>#Uims');
 
+// Liste des balises techniques autorisees dans la balise <spip> et des balises autorisant une traduction
+# define('_BALISES_TECHNIQUES', serialize($balises_techniques));
+$GLOBALS['balises_techniques'] = array(
+	'menu', 'chemin', 'lib', 'necessite', 'onglet', 'procure', 'pipeline', 'utilise',
+	'options', 'fonctions', 'install');
+# define('_BALISES_MULTIS', serialize($balises_multis));
+$GLOBALS['balises_multis'] = array(
+	'nom', 'slogan', 'description');
 
 
 /**

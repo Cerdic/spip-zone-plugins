@@ -25,13 +25,6 @@ define('_SVP_CRON_ACTUALISATION_DEPOTS', true);
 define('_SVP_PERIODE_ACTUALISATION_DEPOTS', 6);
 
 
-// Liste des balises techniques autorisees dans la balise <spip> et des balises autorisant une traduction
-$GLOBALS['balises_techniques'] = array(
-	'menu', 'chemin', 'lib', 'necessite', 'onglet', 'procure', 'pipeline', 'utilise',
-	'options', 'fonctions', 'install');
-$GLOBALS['balises_multis'] = array(
-	'nom', 'slogan', 'description');
-
 // Liste des categories de plugin
 $GLOBALS['categories_plugin'] = array(
 	'auteur', 
@@ -50,55 +43,6 @@ $GLOBALS['categories_plugin'] = array(
 	'aucune'
 );
 
-// Liste des licences de plugin
-$GLOBALS['licences_plugin'] = array(
-	'apache' => array(
-		'versions' => array('2.0', '1.1', '1.0'),
-		'nom' => 'Apache licence, version @version@',
-		'url' => 'http://www.apache.org/licenses/LICENSE-@version@'),
-	'art' => array(
-		'versions' => array('1.3'),
-		'nom' => 'Art libre @version@',
-		'url' => 'http://artlibre.org/licence/lal'),
-	'mit' => array(
-		'versions' => array(),
-		'nom' => 'MIT',
-		'url' => 'http://opensource.org/licenses/mit-license.php'),
-	'bsd' => array(
-		'versions' => array(),
-		'nom' => 'BSD',
-		'url' => 'http://www.freebsd.org/copyright/license.html'),
-	'agpl' => array(
-		'versions' => array('3'),
-		'nom' => 'AGPL @version@',
-		'url' => 'http://www.gnu.org/licenses/agpl.html'),
-	'fdl' => array(
-		'versions' => array('1.3', '1.2', '1.1'),
-		'nom' => 'FDL @version@',
-		'url' => 'http://www.gnu.org/licenses/fdl-@version@.html'),
-	'lgpl' => array(
-		'versions' => array('3.0', '2.1'),
-		'nom' => array('3.0' => 'LGPL 3', '2.1' => 'LGPL 2.1'),
-		'url' => 'http://www.gnu.org/licenses/lgpl-@version@.html'),
-	'gpl' => array(
-		'versions' => array('3', '2', '1'),
-		'nom' => 'GPL @version@',
-		'url' => 'http://www.gnu.org/licenses/gpl-@version@.0.html'),
-	'ccby' => array(
-		'versions' => array('2.0', '2.5', '3.0'),
-		'suffixes' => array('-sa', '-nc', '-nd', '-nc-nd', '-nc-sa'),
-		'nom' => 'CC BY@suffixe@ @version@',
-		'url' => 'http://creativecommons.org/licenses/by@suffixe@/@version@/')
-);
-
-// Version SPIP minimale quand un plugin ne le precise pas
-// -- Version SPIP correspondant a l'apparition des plugins
-define('_SVP_VERSION_SPIP_MIN', '1.9.0');
-// -- Pour l'instant on ne connait pas la borne sup exacte
-define('_SVP_VERSION_SPIP_MAX', '3.0.99');
-
-// Branche SPIP stable
-define('_SVP_BRANCHE_STABLE', '2.1');
 
 // Liste des branches significatives de SPIP et de leurs bornes (versions min et max)
 // A mettre a jour en fonction des sorties
