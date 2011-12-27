@@ -399,7 +399,7 @@ class Decideur {
 						if ($info = $this->sera_actif_id($id)
 						or  $info_off = $this->sera_off_id($id)) {
 							// annuler le signalement en "proposition" (due a une mise a 'off' recursive)
-							// de cet arret de plugin, vu qu'on de demande reellement
+							// de cet arret de plugin, vu qu'on le demande reellement
 							if (!$info) {
 								$info = $info_off;
 								$this->annule_change($info);

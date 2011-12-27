@@ -34,7 +34,9 @@ class Actionneur {
 	// Verrou.
 	// Le verrou est posé au moment de passer à l'action.
 	var $lock = array('id_auteur'=>0, 'time'=>'');
-	
+
+	// SVP (ce plugin) est a desactiver ?
+	var $svp_off = false;
 
 	function Actionneur(){
 		include_spip('inc/svp_decider');
@@ -165,8 +167,23 @@ class Actionneur {
 		foreach ($this->middle as $acts) {
 			$this->end = array_merge($this->end, $acts);
 		}
+
+		// si on a vu une desactivation de SVP
+		// on le met comme derniere action...
+		// sinon on ne pourrait pas faire les suivantes !
+		if ($this->svp_off) {
+			$this->log("SVP a desactiver a la fin.");
+			foreach ($this->end as $c => $info) {
+				if ($info['p'] == 'SVP') {
+					unset($this->end[$c]);
+					$this->end[] = $info;
+					break;
+				}
+			}
+		}
+	
 		$this->log("------------");
-		#$$this->log("Fin du tri :");
+		#$this->log("Fin du tri :");
 		#$this->log($this->end);
 	}
 
@@ -269,6 +286,11 @@ class Actionneur {
 		$p = $info['p'];
 		$this->log("OFF: $p $action");
 
+		// signaler la desactivation de SVP
+		if ($p == 'SVP') {
+			$this->svp_off = true;
+		}
+		
 		// si dependance, il faut le mettre avant !
 		$in = $out = array();
 		// raz des cles pour avoir les memes que $out (utile reellement ?)
@@ -281,10 +303,13 @@ class Actionneur {
 		}
 
 		if (!$in) {
-			// pas de dependance, on le met en dernier !
-				$this->log("- placer $p tout en bas");
-				$this->middle['off'][] = $info;
+			// ce plugin n'a pas de dependance, on le met en dernier !
+			$this->log("- placer $p tout en bas");
+			$this->middle['off'][] = $info;
 		} else {
+			// ce plugin a des dependances,
+			// on le desactive juste avant elles.
+			
 			// intersection = dependance presente aussi
 			// on place notre action juste avant la premiere dependance
 			if ($diff = array_intersect($in, $out)) {
@@ -294,9 +319,11 @@ class Actionneur {
 				$this->log("- placer $p avant " . $this->middle['off'][$key]['p']);
 				array_splice($this->middle['off'], $key, 0, array($info));
 			} else {
-				// pas de dependance, on le met en premier !
+				// aucune des dependances n'est a desactiver
+				// (du moins à ce tour ci),
+				// on le met en premier !
 				$this->log("- placer $p tout en haut");
-				array_unshift($this->middle['on'], $info);
+				array_unshift($this->middle['off'], $info); // etait ->middle['on'] ?? ...
 			}
 		}
 		unset($diff, $in, $out);
