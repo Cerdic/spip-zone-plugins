@@ -40,7 +40,7 @@
 					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{up})]" class="submit" value="<:svp:bouton_up:>" />
 				]
 			]
-			[(#ACTIF|=={oui}|non)
+			[(#ACTIF|=={oui}|non|et{[(#SRC_ARCHIVE|couper{5}|=={auto/})]})
 				<input type="submit" name="[(#ID_PAQUET|svp_nom_action{kill})]" class="submit" value="<:svp:bouton_supprimer:>" />
 			]
 			[(#CONSTANTE|=={_DIR_EXTENSIONS}|oui)
