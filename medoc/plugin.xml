@@ -3,12 +3,12 @@
 <prefix>medoc</prefix>
 <icon>icon/medoc.png</icon>
 
-<version>0.1.1</version>
+<version>0.1.2</version>
 <etat>test</etat>
 <categorie>edition</categorie>
 
-<slogan>Inserez vos documents avec <code><doc></code></slogan>
-<description>Rustine unifiant la syntaxe d'insertion des documents avec <code><doc></code> seulement.</description>
+<slogan>Insertion simplifi&eacute;e des documents</slogan>
+<description>Rustine unifiant le comportement et la syntaxe d'insertion des documents avec <code><doc></code> seulement.</description>
 
 <necessite id="SPIP" version="[2.1.0;3.0.99]" />
 <utilise id="medias" version="[;]" />
