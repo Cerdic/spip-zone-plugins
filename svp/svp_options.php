@@ -1,10 +1,5 @@
 <?php
 
-// definir le chemin des librairies
-// que l'on installe
-if (!defined('_DIR_LIB')) {
-	define('_DIR_LIB', _DIR_RACINE . 'lib/');
-}
 
 // passer ou pas en mode debug
 if (!defined('_SVP_DEBUG')) {

@@ -389,4 +389,15 @@ function filtre_construire_recherche_plugins($phrase='', $categorie='', $etat=''
 
 }
 
+/**
+ * Retourner le nombre d'heure entre chaque actualisation
+ * si le cron est activé.
+ *
+ * @return nb d'heures (sinon 0)
+**/
+function filtre_svp_periode_actualisation_depots() {
+	include_spip('genie/svp_taches_generales_cron');
+	return _SVP_CRON_ACTUALISATION_DEPOTS ? _SVP_PERIODE_ACTUALISATION_DEPOTS : 0;
+}
+
 ?>
