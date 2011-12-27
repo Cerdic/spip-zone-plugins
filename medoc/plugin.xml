@@ -1,0 +1,15 @@
+<plugin>
+<nom>Mod&#232;le <code><doc></code></nom>
+<prefix>medoc</prefix>
+<icon>icon/medoc.png</icon>
+
+<version>0.1.1</version>
+<etat>test</etat>
+<categorie>edition</categorie>
+
+<slogan>Inserez vos documents avec <code><doc></code></slogan>
+<description>Rustine unifiant la syntaxe d'insertion des documents avec <code><doc></code> seulement.</description>
+
+<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+<utilise id="medias" version="[;]" />
+</plugin>
