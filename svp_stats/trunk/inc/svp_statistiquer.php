@@ -2,6 +2,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// - Adresse de la page fournissant les statistiques par json
+if (!defined('_SVP_SOURCE_STATS')) {
+	define('_SVP_SOURCE_STATS', 'http://stats.spip.org/spip.php?page=stats.json');
+}
+
 // ----------------------- Traitements des stats ---------------------------------
 
 /**

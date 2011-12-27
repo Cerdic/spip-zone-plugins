@@ -1,6 +1,17 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// Mise a jour automatique des depots (CRON)
+// - Flag de declenchement
+if (!defined('_SVP_CRON_ACTUALISATION_STATS')) {
+	define('_SVP_CRON_ACTUALISATION_STATS', true);
+}
+
+// - Periode d'actualisation en nombre de jours
+if (!defined('_SVP_PERIODE_ACTUALISATION_STATS')) {
+	define('_SVP_PERIODE_ACTUALISATION_STATS', 7);
+}
+
 function svpstats_taches_generales_cron($taches_generales) {
 
 	// Ajout de la tache CRON de mise a jour reguliere des statistiques d'utilisation des plugins
