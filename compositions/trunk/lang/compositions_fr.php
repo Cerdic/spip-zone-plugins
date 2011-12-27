@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_styliser_auto' => 'Ne pas utiliser la s&eacute;lection automatique. La s&eacute;lection est prise en charge par mes squelettes.',
 	'label_tout_verrouiller' => 'Tout verrouiller',
 	'label_toutes_verrouilles' => 'Toutes les compositions sont verrouill&eacute;es.',
-	'label_verrouiller_toutes_compositions' => 'Verrouiller toutes les compositions (seuls les webmasters pourront les modifier).',
+	'label_verrouiller_toutes_compositions' => 'Verrouiller toutes les compositions (seuls les webmestres pourront les modifier).',
 
 	// U
 	'une_utilisation' => '1 utilisation',
