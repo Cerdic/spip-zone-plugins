@@ -26,13 +26,16 @@
 			</div>
 			
 			<div class="actions">
-			[(#OBSOLETE|=={non}|et{#CONSTANTE|!={_DIR_EXTENSIONS}}|et{#GET{incompatible}|non}|oui)
+			[(#REM) on peut desactiver un plugin - qu'il soit obsolete ou pas ]
+			[(#CONSTANTE|!={_DIR_EXTENSIONS}|et{#GET{incompatible}|non}|oui)
 				[(#ACTIF|=={oui}|oui)
 					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{off})]" class="submit" value="<:svp:bouton_desactiver:>" />
 					[(#INSTALLE|=={oui}|et{#AUTORISER{webmestre}}|oui)
 						<input type="submit" name="[(#ID_PAQUET|svp_nom_action{stop})]" class="submit" value="<:svp:bouton_desinstaller:>" />
 					]
 				]
+			]
+			[(#OBSOLETE|=={non}|et{#CONSTANTE|!={_DIR_EXTENSIONS}}|et{#GET{incompatible}|non}|oui)
 				[(#ACTIF|=={oui}|non)
 					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{on})]" class="submit" value="<:svp:bouton_activer:>" />
 				]
@@ -40,6 +43,7 @@
 					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{up})]" class="submit" value="<:svp:bouton_up:>" />
 				]
 			]
+			[(#REM) si la configuration le permet, on peut activer un plugin obsolete ]
 			[(#OBSOLETE|=={oui}|et{#CONSTANTE|!={_DIR_EXTENSIONS}}|et{#GET{incompatible}|non}|oui)
 				[(#ACTIF|=={oui}|non|et{#CONFIG{svp/autoriser_activer_paquets_obsoletes}|=={oui}})
 					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{on})]" class="submit" value="<:svp:bouton_activer:>" />

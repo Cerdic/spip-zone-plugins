@@ -360,9 +360,29 @@ class Decideur {
 						// ajouter ce plugin dans la liste
 						if (!$this->sera_actif_id($id)) {
 							$i = $this->infos_courtes_id($id);
-							if ($i['i'][$id]) {
-								$this->add($i['i'][$id]);
-								$this->ask($i['i'][$id], $i['i'][$id]['local'] ? 'on' : 'geton' );
+							if ($i = $i['i'][$id]) {
+								$this->log("--> $t : " . $i['p'] . ' en version : ' . $i['v'] );
+
+								// se mefier : on peut tenter d'activer
+								// un plugin de meme prefixe qu'un autre deja actif
+								// mais qui n'est pas de meme version ou de meme etat
+								// par exemple un plugin obsolete ou un plugin au contraire plus a jour.
+								// dans ce cas, on desactive l'ancien (sans desactiver les dependences)
+								// et on active le nouveau.
+								// Si une dependance ne suit pas, une erreur se produira du coup.
+								if (isset($this->end['p'][ $i['p'] ])) {
+									$old = $this->end['p'][ $i['p'] ];
+									$this->log("-->> off : " . $old['p'] . ' en version : ' . $old['v'] );
+									$this->ask($old, 'off');
+									$this->todo($old, 'off');
+									$this->off($old, false); // a priori, les dependences devraient suivre...
+
+								}
+								
+								// pas de prefixe equivalent actif...
+								$this->add($i);
+								$this->ask($i, $i['local'] ? 'on' : 'geton' );
+								
 							} else {
 								// la c'est vraiment pas normal... Erreur plugin inexistant...
 								// concurrence entre administrateurs ?
@@ -376,8 +396,11 @@ class Decideur {
 						// ajouter ce plugin dans la liste et retirer l'ancien
 						$i = $this->infos_courtes_id($id);
 						if ($i = $i['i'][$id]) {
+							$this->log("--> $t : " . $i['p'] . ' en version : ' . $i['v'] );
+
 							// new : plugin a installer
 							if ($new = $this->chercher_plugin_recent($i['p'], $i['v'])) {
+								$this->log("--> maj : " . $new['p'] . ' en version : ' . $new['v'] );
 								// ajouter seulement si on l'active !
 								// ou si le plugin est actuellement actif
 								if ($t == 'upon' or $this->sera_actif_id($id)) {
@@ -407,6 +430,7 @@ class Decideur {
 								$info = $info_off;
 								$this->annule_change($info);
 							}
+							$this->log("--> $t : " . $info['p'] . ' en version : ' . $info['v'] );
 							$this->ask($info, $t);
 							$this->todo($info, $t);
 							$this->off($info, true);
@@ -421,6 +445,7 @@ class Decideur {
 					case 'get':
 					case 'kill':
 						if ($info = $this->infos_courtes_id($id)) {
+							$this->log("--> $t : " . $info['i'][$id]['p'] . ' en version : ' . $info['i'][$id]['v'] );
 							$this->ask($info['i'][$id], $t);
 						} else {
 							// pas normal... plugin inconnu... concurrence entre administrateurs ?
