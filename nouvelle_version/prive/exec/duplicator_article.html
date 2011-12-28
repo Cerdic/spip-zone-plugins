@@ -1,0 +1,9 @@
+#SET{tri,#ENV{tri}|sinon{nom}}
+#SET{ordre,#ENV{ordre}|sinon{''}}
+
+<h1 class="grostitre">Dupliquer un article</h1>
+
+
+<h2>Duplication de l'article [(#ENV{id_objet})] (<BOUCLE_NomArt(ARTICLES){id_article=#ENV{id_objet}}{statut IN prop,prepa,publie,refuse,poubelle}>#TITRE</BOUCLE_NomArt>)</h2>
+
+<div class="ajax">#FORMULAIRE_DUPLICATOR_ARTICLE_CONFIRM{#ENV{id_objet}}</div>

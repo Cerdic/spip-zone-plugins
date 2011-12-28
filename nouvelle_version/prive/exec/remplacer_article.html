@@ -1,0 +1,16 @@
+#SET{tri,#ENV{tri}|sinon{nom}}
+#SET{ordre,#ENV{ordre}|sinon{''}}
+
+<h1 class="grostitre">Publication d'une nouvelle version d'un article</h1>
+
+
+<h2>Publication d'une nouvelle version de l'article [(#ENV{id_orig})] (<BOUCLE_NomArt(ARTICLES){id_article=#ENV{id_orig}}{statut IN prop,prepa,publie,refuse,poubelle,archive}>#TITRE</BOUCLE_NomArt>)</h2>
+
+<div class="ajax">
+[(#PLUGIN{maparchi}|oui)
+#FORMULAIRE_PUBLICATOR_ARTICLE_CONFIRM{#ENV{id_objet},#ENV{id_orig},'archi'} 
+]
+[(#PLUGIN{maparchi}|non)
+#FORMULAIRE_PUBLICATOR_ARTICLE_CONFIRM{#ENV{id_objet},#ENV{id_orig}} 
+]
+</div>
