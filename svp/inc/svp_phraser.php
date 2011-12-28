@@ -3,7 +3,15 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/xml');
+include_spip('inc/config');
 
+// Mode d'utilisation de SVP runtime ou pas :
+// - En mode runtime (true), on ne charge que les plugins compatibles avec la version courante
+// - En mode non runtime (false) on charge tous les plugins : cas du site Plugins SPIP
+// Runtime est le mode par defaut
+if (!defined('_SVP_MODE_RUNTIME')) {
+	define('_SVP_MODE_RUNTIME', (lire_config('svp/mode_runtime', 'oui') == 'oui' ? true : false));
+}
 
 
 // Type parseur XML a appliquer pour recuperer les infos du plugin 

@@ -54,7 +54,30 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'categorie_squelette' => 'Squelette',
 	'categorie_statistique' => 'Référencement, statistiques',
 	'categorie_theme' => 'Thème',
+	'configurer_svp' => 'Configurer le Service de paquetage',
+	'config_activer_runtime' => 'Activer le mode runtime&nbsp;?',
+	'config_activer_runtime_explication' => '
+		Le mode runtime (oui) ne charge que les plugins compatibles avec la version courante de votre SPIP,
+		ce qui est fortement conseillé pour la plupart des usages.
+		
+		En mode non runtime (non), tous les plugins d\'un dépot sont chargés,
+		quelque soit la version du SPIP en cours. Cela est uniquement utile pour
+		utiliser SVP afin de présenter tous les plugins existants comme le fait
+		le site Plugins SPIP (plugins.spip.net)',
+	'config_activer_pas_a_pas' => 'Activer le mode pas à pas&nbsp;?',
+	'config_activer_pas_a_pas_explication' => "Activer ce mode permet d'afficher un bilan
+		après chaque action réalisée, au lieu d'avoir uniquement un bilan global
+		de toutes les actions effectuées à la fin des traitements.",
+	'config_activer_log_verbeux' => 'Activer les logs verbeux&nbsp;?',
+	'config_activer_log_verbeux_explication' => 'Cette option rend les logs de SVP beaucoup plus locaces…',
+	'config_autoriser_activer_paquets_obsoletes' => 'Autoriser l\'activation des paquets obsolètes&nbsp;?',
+	'config_autoriser_activer_paquets_obsoletes_explication' => 'Les paquets obsolètes sont des paquets
+		locaux présents qui sont plus anciens que d\'autres paquets locaux. L\'obsolescence
+		est comparée sur la base de l\'état (stable, test, dev) du paquet ainsi que sur la
+		base de sa version.
 
+		Activez cette option si vous souhaitez pouvoir malgré tout activer ces plugins obsolètes.
+		',
 // E
 	'erreur_actions_non_traitees' => 'Certaines actions n\'ont pas été réalisées.
 			Cela peut provenir d\'une erreur lors des actions à réaliser, ou d\'un affichage de cette page
@@ -70,6 +93,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_dir_dib_indefini' => 'Le répertoire _DIR_LIB n\'est pas défini. Impossible d\'y charger une bibliothèque !',
 	'erreur_dir_plugins_auto_ecriture' => 'Le répertoire de paquets @dir@ n\'est pas accessible en écriture. Impossible d\'y charger un paquet !',
 	'erreur_dir_plugins_auto_indefini' => 'Le répertoire _DIR_PLUGIN_AUTO n\'est pas défini. Impossible d\'y charger un paquet !',
+
+// F
+	'fieldset_fonctionnement' => 'Fonctionnement',
+	'fieldset_debug' => 'Débug',
+
 // I
 	'info_1_depot' => '1 dépôt',
 	'info_1_paquet' => '1 paquet',
@@ -216,6 +244,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plugins_verrouilles_liste' => 'Verrouillés',
 	'plugins_non_verrouilles_liste' => 'Non verrouillés',
 
+// S
+	'svp' => 'Service de paquetages',
+	
 // T
 	'titre_depot' => 'Dépôt',
 	'titre_depots' => 'Dépôts',

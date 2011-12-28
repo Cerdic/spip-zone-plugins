@@ -40,6 +40,11 @@
 					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{up})]" class="submit" value="<:svp:bouton_up:>" />
 				]
 			]
+			[(#OBSOLETE|=={oui}|et{#CONSTANTE|!={_DIR_EXTENSIONS}}|et{#GET{incompatible}|non}|oui)
+				[(#ACTIF|=={oui}|non|et{#CONFIG{svp/autoriser_activer_paquets_obsoletes}|=={oui}})
+					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{on})]" class="submit" value="<:svp:bouton_activer:>" />
+				]
+			]
 			[(#ACTIF|=={oui}|non|et{[(#SRC_ARCHIVE|couper{5}|=={auto/})]})
 				<input type="submit" name="[(#ID_PAQUET|svp_nom_action{kill})]" class="submit" value="<:svp:bouton_supprimer:>" />
 			]

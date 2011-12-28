@@ -35,7 +35,10 @@ class Decideur {
 	var $log = false;   // loguer les differents elements
 
 
-	function Decideur () {}
+	function Decideur () {
+		include_spip('inc/config');
+		$this->log = (lire_config('svp/mode_log_verbeux') == 'oui');
+	}
 
 
 	/* Liste des plugins deja actifs */
@@ -674,9 +677,7 @@ class Decideur {
  * @return bool Operation ok.
 **/
 function svp_decider_verifier_actions_demandees($a_actionner, &$erreurs) {
-			
 	$decideur = new Decideur;
-	$decideur->log = true;
 	$decideur->verifier_dependances($a_actionner);
 
 	if (!$decideur->ok) {

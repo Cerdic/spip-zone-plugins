@@ -15,7 +15,6 @@ function action_actionner_dist() {
 	include_spip('inc/svp_actionner');
 	include_spip('inc/headers');
 	$actionneur = new Actionneur();
-	$actionneur->log = true;
 	$actionneur->get_actions();
 	if ($actionneur->one_action()) {
 		// si SVP a été enlevé des actifs, on redirige sur la fin...
@@ -28,7 +27,12 @@ function action_actionner_dist() {
 			$url = generer_action_auteur('actionner', '',  _request('redirect'));
 		}
 
-		if (_SVP_DEBUG) {
+		
+		// en mode pas à pas, on affiche un bilan entre chaque action
+		// et on demande a l'utilistateur de cliquer pour realiser
+		// l'action suivante.
+		include_spip('inc/config');
+		if (lire_config('svp/mode_pas_a_pas') == 'oui') {
 			include_spip('inc/minipres');
 			$pres = $actionneur->presenter_actions();
 			$btn = "<a href='$url'>[ Action Suivante ]</a>";

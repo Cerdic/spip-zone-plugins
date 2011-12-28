@@ -23,7 +23,6 @@ function svp_presenter_actions_realisees() {
 	// presenter les traitements realises... si tel est le cas...
 	include_spip('inc/svp_actionner');
 	$actionneur = new Actionneur();
-	$actionneur->log = true;
 	
 	// s'il ne reste aucune action a faire ou si on force un nettoyage.
 	if (_request('nettoyer_actions')) {

@@ -39,6 +39,9 @@ class Actionneur {
 	var $svp_off = false;
 
 	function Actionneur(){
+		include_spip('inc/config');
+		$this->log = (lire_config('svp/mode_log_verbeux') == 'oui');
+		
 		include_spip('inc/svp_decider');
 		$this->decideur = new Decideur();
 		#$this->decideur->start();
@@ -1046,7 +1049,6 @@ class Actionneur {
 **/
 function svp_actionner_traiter_actions_demandees($actions, &$retour) {
 		$actionneur = new Actionneur();
-		$actionneur->log = true;
 		$actionneur->ajouter_actions($actions);
 		$actionneur->verrouiller();
 		$actionneur->sauver_actions();
