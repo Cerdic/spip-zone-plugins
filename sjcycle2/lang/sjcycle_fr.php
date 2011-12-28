@@ -8,14 +8,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		Consultez l\'aide pour connaître les paramètres disponibles.',
 
 	// C
-	'cfg_boite_sjcycle' => 'Configuration du plugin Spip jQuery Cycle.<br /><br />
-		Consulter l\'aide en ligne pour connaître les autres paramètres disponibles localement dans un article.',
-	'cfg_descr_sjcycle' => '<h4>sjcycle</h4>Plugin jQuery Cycle pour SPIP',
-	'cfg_titre_sjcycle' => 'Spip jQuery Cycle Plugin',
+	'configurer_titre' => 'Configurer jQuery Cycle',
 	
 	// E
 	'erreur_config_creer_preview' => 'Attention : la génération de miniatures des images est actuellement inactive, veuillez  l\'activer dans les <a href=".?exec=config_fonctions">fonctions avancées</a> de la configuration du site !',
-	'erreur_config_image_process' => 'Attention : Méthode de fabrication des vignettes n\'a pas été choisie, veuillez  en sélectionner une dans les <a href=".?exec=config_fonctions">fonctions avancées</a> de la configuration du site !',
+	'erreur_config_image_process' => 'Attention : La méthode de fabrication des vignettes n\'a pas été choisie, veuillez  en sélectionner une dans les <a href=".?exec=config_fonctions">fonctions avancées</a> de la configuration du site !',
 	'explication_afficher_aide'=>'Afficher la boite d\'aide dans la colonne de gauche des pages d\'édition des articles',
 	'explication_fancy'=>'Au clic, afficher l\'image originale dans une fancybox jQuery. Nécessite le plugin <a href="http://www.spip-contrib.net/FancyBox,3020" target="_blank">FancyBox</a>',
 	'explication_fx'=>'Consultez les exemples en ligne : <a href="http://malsup.com/jquery/cycle/browser.html" target="_blank">jQuery Cycle Plugin</a>',
@@ -82,6 +79,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_alea_defaut' => 'Au Hasard',
 	'noisette_titre_noisette' => 'Titre :',
 	'noisette_titre_sites_defaut' => 'Liens',
+
+	// T
+	'titre_menu' => 'jQuery Cycle',
 
 	// V
 	'valeur_hex' => 'Valeur hexadecimale ou "transparent"',

@@ -1,5 +1,5 @@
 <?php
-// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Pour le plugin Manuel de redaction du site http://www.spip-contrib.net/Manuel-de-redaction-du-site
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(

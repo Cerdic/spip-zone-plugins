@@ -1,8 +1,8 @@
 <plugin>
-	<nom>Spip jQuery Cycle 2</nom>
+	<nom>jQuery Cycle</nom>
 	<slogan>Un diaporama param&#233;trable pour Spip</slogan>
 	<auteur>Yffic d'apr&#232;s la version 1 de [Minimalteck->http://www.minimalteck.fr/]</auteur>
-	<version>1.7.8</version>
+	<version>1.8.0</version>
 	<version_base>0.5</version_base>
 	<etat>stable</etat>
 	<description>
@@ -33,10 +33,20 @@
 		<nom>affiche_gauche</nom>
 		<inclure>sjcycle_prive_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="cfg" version="[1.10;]" />
+	<bouton id='sjcycle' parent='configuration'>
+		<icone>images/sjcycle-24.png</icone>
+		<titre>sjcycle:titre_menu</titre>
+		<url>configurer_sjcycle</url>
+	</bouton>
+	<bouton id='sjcycle2' parent='bando_squelette'>
+		<icone>images/sjcycle-16.png</icone>
+		<titre>sjcycle:titre_menu</titre>
+		<url>configurer_sjcycle</url>
+	</bouton>
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
-	<necessite id="saisies" version="[1.1;]" />
+	<necessite id="saisies" version="[1.9.0;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
+	<utilise id="aveline" version="[1.7.0;]" />
 	<utilise id="palette" version="[1.2.2;]" />
 	<categorie>multimedia</categorie>
 </plugin>

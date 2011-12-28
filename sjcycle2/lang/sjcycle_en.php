@@ -8,10 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	Consult the inline help to know other parameters.',
 
 	// C
-	'cfg_boite_sjcycle' => 'Spip jQuery Cycle plugin configuration.<br /><br />
-	Consult the inline help to know other parameters.',
-	'cfg_descr_sjcycle' => '<h4>sjcycle</h4>jQuery Cycle plugin for SPIP',
-	'cfg_titre_sjcycle' => 'Spip jQuery Cycle Plugin',
+	'configurer_titre' => 'jQuery Cycle Configuration',
 
 	// E
 	'erreur_config_creer_preview' => 'Caution: the generation of miniatures of the images is currently inactive, please activate it in the <a href=".?exec=config_fonctions">advanced functions</a> of the site configuration !',
@@ -82,6 +79,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_alea_defaut' => 'Randomly',
 	'noisette_titre_noisette' => 'Title&nbsp;:',
 	'noisette_titre_sites_defaut' => 'Links',
+
+	// T
+	'titre_menu' => 'jQuery Cycle',
 
 	// V
 	'valeur_hex' => 'Hexadecimal value or "transparent"',
