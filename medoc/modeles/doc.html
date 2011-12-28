@@ -1,38 +1,32 @@
 <BOUCLE_doc(DOCUMENTS){id_document}{tout}>
 [(#REM)
 
-	Modele pour <doc> en dl/dt/dd
+	Modele CONSTANT pour <doc> en dl/dt/dd
 	cf. http://pompage.net/pompe/listesdefinitions/
 
-	La largeur de la legende est egale a la largeur de l'image
-	avec un minimum de 120px, et un maximum de 350px.
+	La largeur du titre est egale a la largeur de la vignette,
+	avec un minimum de 120px et un maximum de 350px.
+	
 ]
 
 [(#SET{fichier,[(#LOGO_DOCUMENT|extraire_attribut{src})]})]
 [(#SET{width,[(#LOGO_DOCUMENT|extraire_attribut{width})]})]
 [(#SET{height,[(#LOGO_DOCUMENT|extraire_attribut{height})]})]
 
-[(#ENV{largeur,0}|ou{#ENV{hauteur,0}})
-#SET{fichier,#GET{fichier}|image_reduire{#ENV{largeur,0},#ENV{hauteur,0}}}
-#SET{width,#GET{fichier}|largeur}
-#SET{height,#GET{fichier}|hauteur}
-#SET{fichier,#GET{fichier}|extraire_attribut{src}}
-]
-
 [(#SET{info,<small class="info_document">([<abbr title="<:info_document:> #TYPE_DOCUMENT" class="ext">(#EXTENSION|strtoupper)</abbr> - ][(#LARGEUR|?{[(#LARGEUR)[ x (#HAUTEUR) pixels]],''}) - ][<strong>(#TAILLE|taille_en_octets)</strong>])</small>})]
 
 [(#SET{url,#URL_DOCUMENT})]
 [(#SET{titre,[(#TITRE|sinon{[(#FICHIER|basename)]})]})]
-[(#SET{title,[(#TITRE|sinon{[(#FICHIER|basename)]}|couper{80}) ][(#GET{info})]})]
+[(#SET{title,[(#GET{titre}|couper{80}) ][(#GET{info})]})]
 [(#SET{alt,[(#GET{title})]})]
 
 [(#REM)
 
 	Dans le cas d'une simple image, on affiche sa vignette,
-	avec lien vers la version originale si elle est plus grande.
+	avec lien vers la version originale, si elle est plus grande.
 	
 ]
-[(#MIME_TYPE|substr{0,[(#MIME_TYPE|strpos{/})]}|=={image}|oui)
+[(#EXTENSION|match{jpg|gif|png}|oui)
 	[(#SET{titre,''})]
 	[(#LARGEUR|>={350}|?{
 		[(#SET{url,#URL_DOCUMENT})]
@@ -46,7 +40,7 @@
 ]
 
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
-	<dt>[<a href="(#GET{url})"[ title="(#GET{title}|attribut_html)"][ type="(#MIME_TYPE)"][ (#DISTANT|oui)rel="external"][ class="(#ENV{lien_class})"]>][(#LOGO_DOCUMENT|vider_attribut{class}|inserer_attribut{alt,[(#GET{alt}|attribut_html)]})][(#GET{url}|?{</a>})]</dt>[
-	<dt class='#EDIT{titre} spip_doc_titre'[ style='width:(#GET{width}|min{350}|max{120})px;']><strong>(#GET{titre})</strong></dt>]
+	<dt>[<a href="(#GET{url})"[ title="(#GET{title}|attribut_html)"][ type="(#MIME_TYPE)"][ (#DISTANT|oui)rel="external"][ class="(#ENV{lien_class})"]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}'[ alt="(#GET{alt}|attribut_html)"] />[(#GET{url}|?{</a>})]</dt>[
+	<dt class='#EDIT{titre} spip_doc_titre'[ style='width:(#GET{width}|min{350}|max{120})px;']>(#GET{titre})</dt>]
 </dl>
 </BOUCLE_doc>
