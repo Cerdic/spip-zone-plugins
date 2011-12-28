@@ -1071,10 +1071,17 @@ jQuery.geoportail =
 		{	att.popup(feature, pos, hover);
 			return;
 		}
-		// Popup par defaut
+		// Style des Popups
 		var spip_popup;
+		var savePath = OpenLayers.ImgPath;
 		if (hover) spip_popup = OpenLayers.Class(OpenLayers.Popup.Anchored, { 'autoSize': true, 'displayClass':"Anchored Anchored_hover" });
-		else spip_popup = OpenLayers.Class(OpenLayers.Popup[jQuery.geoportail.spip_popup], { 'autoSize': true, 'displayClass':jQuery.geoportail.spip_popup });
+		else 
+		{	if (jQuery.geoportail.spip_popup == "spip")
+			{	OpenLayers.ImgPath = jQuery.geoportail.imgPath;		// Path du repertoire spip (image : cloud-popup-relative.png)
+				spip_popup = OpenLayers.Class(OpenLayers.Popup['FramedCloud'], { 'autoSize': true, 'displayClass':jQuery.geoportail.spip_popup });
+			}
+			else spip_popup = OpenLayers.Class(OpenLayers.Popup[jQuery.geoportail.spip_popup], { 'autoSize': true, 'displayClass':jQuery.geoportail.spip_popup });
+		}
 		var html = "";
 		var lien = null;
 		if (att.url) 
@@ -1109,6 +1116,8 @@ jQuery.geoportail =
 		popup.hover = hover;
 		feature.popup = popup;
 		feature.layer.map.addPopup(popup);
+		// Remise de l'ancien path
+		OpenLayers.ImgPath = savePath;
 	},
 
 	unpopupFeature: function(feature) 

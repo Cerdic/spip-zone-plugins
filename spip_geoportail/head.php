@@ -10,6 +10,9 @@ function geoportail_insert_head($flux)
 	$popup = $GLOBALS['meta']['geoportail_popup'];
 	$popup = "jQuery.geoportail.spip_popup = '".($popup?$popup:"Anchored")."';"
 		." jQuery.geoportail.hover = ".($GLOBALS['meta']['geoportail_hover'] ?"true;":"false;");
+	// Repertoire du popup
+	$repop = dirname(chemin('img/cloud-popup-relative.png'));
+	$repop = "jQuery.geoportail.imgPath = '$repop/';";
 
 	$flux .= 
 '
@@ -25,6 +28,7 @@ function geoportail_insert_head($flux)
 .($GLOBALS['meta']['geoportail_osm_layer'] ? "jQuery.geoportail.osm_layer='".$GLOBALS['meta']['geoportail_osm_layer']."';" : "jQuery.geoportail.osm_mquest='mapnik';")
 ."\n".$logo
 ."\n".$popup
+."\n".$repop
 .'
 </script>
 <!--_GEOPORTAIL_HEADER_-->

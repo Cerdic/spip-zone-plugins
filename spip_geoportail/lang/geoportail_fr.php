@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'geoportail_popup'		=> 'Forme des infobulles',
 'popup_anchored'		=> 'postIt!',
 'popup_framecloud'		=> 'bulles',
+'popup_spip'			=> 'Spip',
 'geoportail_hover'		=> 'Afficher une information au survol.',
 'geopopup_info'			=> 'Sous quelle forme vont s\'afficher les infobulles sur les cartes&nbsp;?',
 'geoportail_objet'		=> 'Types d\'objets &agrave; g&eacute;or&eacute;f&eacute;rencer',
