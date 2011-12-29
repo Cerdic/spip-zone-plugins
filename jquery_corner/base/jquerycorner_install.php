@@ -22,7 +22,7 @@ function jquerycorner_upgrade($nom_meta_base_version,$version_cible){
 			$config = array();
 		}
 		$config = array_merge(array(
-				'nombre' => '2'
+				'nombre' => '0'
 		), $config);
 		ecrire_meta('jquerycorner', serialize($config));
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');

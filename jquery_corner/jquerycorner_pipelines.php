@@ -14,12 +14,15 @@ function jquerycorner_insert_head($flux){
 			$les_effets .= ");" ;
 		}
 	}
-	$flux .="\n".'<script src="'.url_absolue(find_in_path('javascript/jquery.corner.js')).'" type="text/javascript"></script>';
-	$flux .= '
+	// S'il y a au moins un element
+	if($conf_jquerycorner["nombre"]>0) {
+		$flux .="\n".'<script src="'.url_absolue(find_in_path('javascript/jquery.corner.js')).'" type="text/javascript"></script>';
+		$flux .= '
 <script type="text/javascript">/* <![CDATA[ */
 	jQuery(document).ready(function(){'.$les_effets.'});
 /* ]]> */</script>
 ';
+	}
 	return $flux;
 }
 
