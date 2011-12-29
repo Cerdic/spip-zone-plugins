@@ -2,13 +2,12 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-$idart = lire_config('manuelsite/id_article') ;
-$texte = ($idart > 0) ? '<a href="?exec=articles&amp;id_article='.$idart.'" title="Editor manual">the article '.$idart.'</a> of your website.' : 'an article of the website.' ;
-
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
-	'cfg_boite_manuelsite' => 'Website Editor Manual plugin configuration.<br /><br />This plugin installs an help icon making it possible to post since any page of private space the Website Editor Manual. This manual is '.$texte.' The purpose of it is to explain to the editors the architecture of the site, in which heading to arrange what, how code and install a video… So, all that you want and which is specific to your website.',
-	'cfg_titre_manuelsite' => 'Website Editor Manual',
+	'configurer_explication' => 'This plugin installs an help icon making it possible to post since any page of private space the Website Editor Manual. This manual is @texte@ The purpose of it is to explain to the editors the architecture of the site, in which heading to arrange what, how code and install a video… So, all that you want and which is specific to your website.',
+	'configurer_explication_l_article' => '<a href="?exec=articles&amp;id_article=@idart@" title="Manuel de redaction">l’article @idart@</a> de votre site.',
+	'configurer_explication_un_article' => 'an article of the website.',
+	'configurer_titre' => 'Configure the Website Editor Manual',
 
 	// E
 	'erreur_article' => 'The article of the manuel defined in the plugin\'s configuration is untraceable : @idart@',
@@ -42,6 +41,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende_contenu' => 'Contents' ,
 
 	// T
+	'titre_faq' => 'FAQ of the Website Editor Manual',
 	'titre_manuel' => 'Website Editor Manual'
+	'titre_menu' => 'Website Editor Manual',
 );
 ?>

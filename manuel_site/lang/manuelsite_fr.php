@@ -2,13 +2,13 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-$idart = lire_config('manuelsite/id_article') ;
-$texte = ($idart > 0) ? '<a href="?exec=articles&amp;id_article='.$idart.'" title="Manuel de redaction">l’article '.$idart.'</a> de votre site.' : 'un article du site.' ;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
-	'cfg_boite_manuelsite' => 'Configuration du plugin Manuel de rédaction du site.<br /><br />Ce plugin installe une icône d’aide permettant d’afficher depuis n’importe quelle page de l’espace privé le manuel de rédaction du site. Ce manuel est '.$texte.' Il a pour but d’expliquer aux rédacteurs l’architecture du site, dans quelle rubrique ranger quoi, comment encoder et installer une vidéo... Bref tout ce que vous voulez et qui est spécifique à votre site.',
-	'cfg_titre_manuelsite' => 'Manuel de rédaction du site',
+	'configurer_explication' => 'Ce plugin installe une icône d’aide permettant d’afficher depuis n’importe quelle page de l’espace privé le manuel de rédaction du site. Ce manuel est @texte@ Il a pour but d’expliquer aux rédacteurs l’architecture du site, dans quelle rubrique ranger quoi, comment encoder et installer une vidéo... Bref tout ce que vous voulez et qui est spécifique à votre site.',
+	'configurer_explication_l_article' => '<a href="?exec=articles&amp;id_article=@idart@" title="Manuel de redaction">l’article @idart@</a> de votre site.',
+	'configurer_explication_un_article' => 'un article du site.',
+	'configurer_titre' => 'Configurer le manuel de rédaction du site',
 
 	// E
 	'erreur_article' => 'L’article du manuel défini dans la configuration du plugin est introuvable : @idart@',
@@ -44,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// T
 	'titre_faq' => 'FAQ du Manuel de rédaction',
-	'titre_manuel' => 'Manuel de rédaction du site'
+	'titre_manuel' => 'Manuel de rédaction du site',
+	'titre_menu' => 'Manuel de rédaction du site',
 );
 ?>

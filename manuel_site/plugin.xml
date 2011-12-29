@@ -13,7 +13,7 @@
 	</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.6.1</version>
+	<version>0.7.0</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<description>
@@ -46,10 +46,19 @@
 		<nom>affiche_gauche</nom>
 		<inclure>manuelsite_prive_pipelines.php</inclure>
 	</pipeline>
+	<bouton id='manuelsite' parent='configuration'>
+		<icone>images/manuelsite-24.png</icone>
+		<titre>manuelsite:titre_menu</titre>
+		<url>configurer_manuelsite</url>
+	</bouton>
+	<bouton id='manuelsite2' parent='bando_configuration'>
+		<icone>images/manuelsite-16.png</icone>
+		<titre>manuelsite:titre_menu</titre>
+		<url>configurer_manuelsite</url>
+	</bouton>
 	<fonctions>manuelsite_fonctions.php</fonctions>
-	<necessite id="cfg" version="[1.10;]" />
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
-	<necessite id="saisies" version="[1.1;]" />
+	<necessite id="saisies" version="[1.9.0;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<necessite id="yaml" version="[1.1;]" />
 	<utilise id="palette" version="[1.2.2;]" />
