@@ -4,13 +4,13 @@
 
 	<description>
 		Ce plugin sert à générer des pdfs via la librairie fpdf pour n'importe quelle table.
-		Il vous suffit de personnaliser exports.php et extends.php en fonction de votre projet et de les insérer dans votre plugin.
+		Adapter le en vous servant des tutoriaux du dossier demo.
 	</description>
 
 	<auteur>[Pierre KUHN->http://www.pierre-kuhn.org], Olivier PLATHEY</auteur>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 
-	<licence>Apache License, Version 2.0 - (c) 2004-2011</licence>
+	<licence>Apache license - (c) 2004-2011</licence>
 	<etat>dev</etat>
 
 	<prefix>fpdf</prefix>
