@@ -31,7 +31,6 @@
 	</bouton>
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="saisies" version="[1.9.0;]" />
-	<necessite id="Iterateurs" version="[0.3.0;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<categorie>multimedia</categorie>
 </plugin>
