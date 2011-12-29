@@ -13,11 +13,9 @@
 [(#SET{width,[(#LOGO_DOCUMENT|extraire_attribut{width})]})]
 [(#SET{height,[(#LOGO_DOCUMENT|extraire_attribut{height})]})]
 
-[(#SET{info,<small class="info_document">([<abbr title="<:info_document:> #TYPE_DOCUMENT" class="ext">(#EXTENSION|strtoupper)</abbr> - ][(#LARGEUR|?{[(#LARGEUR)[ x (#HAUTEUR) pixels]],''}) - ][<strong>(#TAILLE|taille_en_octets)</strong>])</small>})]
-
 [(#SET{url,#URL_DOCUMENT})]
 [(#SET{titre,[(#TITRE|sinon{[(#FICHIER|basename)]})]})]
-[(#SET{title,[(#GET{titre}|couper{80}) ][(#GET{info})]})]
+[(#SET{title,[(#GET{titre}|couper{80})][ (#MODELE{info_document})]})]
 [(#SET{alt,[(#GET{title})]})]
 
 [(#REM)
