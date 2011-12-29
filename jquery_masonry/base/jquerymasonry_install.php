@@ -22,7 +22,7 @@ function jquerymasonry_upgrade($nom_meta_base_version,$version_cible){
 			$config = array();
 		}
 		$config = array_merge(array(
-				'nombre' => '1',
+				'nombre' => '0',
 		), $config);
 		ecrire_meta('jquerymasonry', serialize($config));
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');

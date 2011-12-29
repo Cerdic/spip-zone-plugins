@@ -22,11 +22,14 @@ function jquerymasonry_insert_head($flux){
 			$executer .= "});" ;
 		}
 	}
-	$flux .= "\n".'<script src="'.url_absolue(find_in_path('javascript/jquery.masonry.js')).'" type="text/javascript"></script>';
-	if($conf_jquerymasonry["multicolonne".$i] != "on") {
-		$flux .= "\n".'<style type="text/css">'.$styles.'</style>';
-	}
-	$flux .= "\n".'
+
+	// S'il y a au moins un element
+	if($conf_jquerymasonry["nombre"]>0) {
+		$flux .= "\n".'<script src="'.url_absolue(find_in_path('javascript/jquery.masonry.js')).'" type="text/javascript"></script>';
+		if($conf_jquerymasonry["multicolonne".$i] != "on") {
+			$flux .= "\n".'<style type="text/css">'.$styles.'</style>';
+		}
+		$flux .= "\n".'
 <script type="text/javascript">/* <![CDATA[ */
 	jQuery(document).ready(function(){
 		function jquerymasonry_init(){
@@ -37,7 +40,7 @@ function jquerymasonry_insert_head($flux){
 	});
 /* ]]> */</script>
 ';
-
+	}
 	return $flux;
 }
 
