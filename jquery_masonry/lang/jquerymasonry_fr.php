@@ -4,9 +4,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
-	'cfg_boite_jquerymasonry' => 'Configuration du plugin jQuery Masonry.<br /><br />Consultez le <a href="http://masonry.desandro.com/" target="_blank">site du plugin jQuery Masonry</a> pour une démonstration de ses possibilités.',
-	'cfg_titre_jquerymasonry' => 'jQuery Masonry',
-	
+	'configurer_explication' => 'Consultez le <a href="http://masonry.desandro.com/" target="_blank">site du plugin jQuery Masonry</a> pour une démonstration de ses possibilités.',
+	'configurer_titre' => 'Configurer jQuery Masonry',
+
 	// E
 	'explication_animation' => 'Animer le repositionnement des blocs lors d\'un redimensionnement du container ?',
 	'explication_container' => 'Classe ou id du container des éléments à traiter (saisir par exemple .maconner)',
@@ -22,10 +22,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_largeur' => 'Largeur',
 	'label_marge' => 'Marge',
 	'label_multicolonne' => 'Multi-colonne',
+	'label_nombre' => 'Nombre d\'éléments',
 	'legend_jquerymasonry_nombre' => 'Nombre d\'éléments à traiter',
 	'legend_jquerymasonry' => 'Paramètrage @numero@',
 
-	// N
-	'nombre_elements' => 'Nombre d\'éléments'
+	// T
+	'titre_menu' => 'jQuery Masonry',
+
 );
 ?>
