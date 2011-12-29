@@ -9,10 +9,7 @@
 	
 ]
 
-[(#SET{fichier,[(#LOGO_DOCUMENT|extraire_attribut{src})]})]
-[(#SET{width,[(#LOGO_DOCUMENT|extraire_attribut{width})]})]
-[(#SET{height,[(#LOGO_DOCUMENT|extraire_attribut{height})]})]
-
+[(#SET{fichier,[(#LOGO_DOCUMENT)]})]
 [(#SET{url,#URL_DOCUMENT})]
 [(#SET{titre,[(#TITRE|sinon{[(#FICHIER|basename)]})]})]
 [(#SET{title,[(#GET{titre}|couper{80})][ (#MODELE{info_document})]})]
@@ -25,8 +22,9 @@
 	
 ]
 [(#EXTENSION|match{jpg|gif|png}|oui)
+	[(#SET{fichier,[(#FICHIER|image_reduire{150})]})]
 	[(#SET{titre,''})]
-	[(#LARGEUR|>={350}|?{
+	[(#LARGEUR|>{150}|?{
 		[(#SET{url,#URL_DOCUMENT})]
 		[(#SET{title,[(#TITRE|sinon{[(#FICHIER|basename)]}|couper{80})]})]
 		[(#SET{alt,[(#GET{title}|couper{60})]})]
@@ -36,6 +34,10 @@
 		[(#SET{alt,[(#TITRE|couper{60})]})]
 	})]
 ]
+
+#SET{width,#GET{fichier}|largeur}
+#SET{height,#GET{fichier}|hauteur}
+#SET{fichier,#GET{fichier}|extraire_attribut{src}}
 
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 	<dt>[<a href="(#GET{url})"[ title="(#GET{title}|attribut_html)"][ type="(#MIME_TYPE)"][ (#DISTANT|oui)rel="external"][ class="(#ENV{lien_class})"]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}'[ alt="(#GET{alt}|attribut_html)"] />[(#GET{url}|?{</a>})]</dt>[
