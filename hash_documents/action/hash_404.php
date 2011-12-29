@@ -19,7 +19,7 @@ $doc = preg_replace(',^.*?IMG/,', '', $_SERVER['REQUEST_URI']);
 
 if (($dest = hasher_adresser_document($doc)
 AND file_exists('../'.$GLOBALS['meta']['dir_img'].$dest))
-OR ($dest1 = hasher_adresser_document($doc, true)
+OR ($dest = hasher_adresser_document($doc, true)
 AND file_exists('../'.$GLOBALS['meta']['dir_img'].$dest))
 ) {
 	$url = 'http://'.$_SERVER['HTTP_HOST'].preg_replace(',^(.*?IMG/).*,', '\1', $_SERVER['REQUEST_URI']).$dest;
