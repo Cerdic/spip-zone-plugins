@@ -49,5 +49,5 @@ function jquerysuperfish_insert_head($flux){
 	$flux .= jquerysuperfish_insert_head_css(''); // compat pour les vieux spip
 	return $flux;
 }
-//sf-menu sf-vertical sf-js-enabled sf-shadow
+
 ?>

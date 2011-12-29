@@ -3,7 +3,7 @@
 	<slogan>Affiche un menu d&#232;roulant</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.2.0</version>
+	<version>0.3.0</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<icon>images/jquerysuperfish-32.png</icon>
@@ -23,10 +23,19 @@
 		<nom>insert_head</nom>
 		<inclure>jquerysuperfish_pipelines.php</inclure>
 	</pipeline>
+	<bouton id='jquerysuperfish' parent='configuration'>
+		<icone>images/jquerysuperfish-24.png</icone>
+		<titre>jquerysuperfish:titre_menu</titre>
+		<url>configurer_jquerysuperfish</url>
+	</bouton>
+	<bouton id='jquerysuperfish2' parent='bando_squelette'>
+		<icone>images/jquerysuperfish-16.png</icone>
+		<titre>jquerysuperfish:titre_menu</titre>
+		<url>configurer_jquerysuperfish</url>
+	</bouton>
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
-	<necessite id="cfg" version="[1.10;]" />
-	<necessite id="spip_bonux" version="[1.8;]" /> <!-- Pour Saisies -->
-	<necessite id="saisies" version="[1.1;]" />
+	<necessite id="spip_bonux" version="[1.8;]" />
+	<necessite id="saisies" version="[1.9;]" />
 	<necessite id="YAML" version="[1.5;]" />
 	<categorie>navigation</categorie>
 </plugin>

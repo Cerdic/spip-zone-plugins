@@ -4,9 +4,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
-	'cfg_boite_jquerysuperfish' => 'Configuration du plugin Menu jQuery Superfish',
-	'cfg_titre_jquerysuperfish' => 'Menu jQuery Superfish',
-	
+	'configurer_titre' => 'Configurer jQuery Superfish',
+
 	// E
 	'explication_animation'=>'Un objet equivalent au premier paramètre de la méthode jQuery .animate() permettant d\'animer les sous-menus. Par exemple <strong>opacity:\'show\',height:\'show\'</strong>, équivaut à une animation fade-in et slide-down',
 	'explication_classe'=>'Classe de l\'élément ul sur lequel portera le menu',
@@ -22,5 +21,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_tester' => 'Si la configuration est enregistrée, vous pouvez <a href="@lien@">tester ce type de menu</a>' ,
+	'titre_menu' => 'jQuery Superfish',
 );
 ?>
