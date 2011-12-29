@@ -431,6 +431,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 // http://doc.spip.org/@affiche_raccourci_doc
 function affiche_raccourci_doc($doc, $id, $align) {
 	static $num = 0;
+	$doc = 'doc';
 
 	if ($align) {
 		$pipe = "|$align";
@@ -544,9 +545,9 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 				$raccourci .= "<div style='padding:2px; ' class='arial1 spip_xx-small'>";
 				$raccourci .= "<b>"._T('info_inclusion_directe')."</b><br />";
 				$raccourci .= "<div style='color: 333333'>"
-				. affiche_raccourci_doc('emb', $id_document, 'left')
-				. affiche_raccourci_doc('emb', $id_document, 'center')
-				. affiche_raccourci_doc('emb', $id_document, 'right')
+				. affiche_raccourci_doc('doc|emb', $id_document, 'left')
+				. affiche_raccourci_doc('doc|emb', $id_document, 'center')
+				. affiche_raccourci_doc('doc|emb', $id_document, 'right')
 				. "</div>\n";
 				$raccourci .= "</div>";
 			}
@@ -584,7 +585,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		if (strlen($descriptif) > 0 OR strlen($titre) > 0)
 			$doc = 'doc';
 		else
-			$doc = 'img';
+			$doc = 'doc|img';
 
 		if ($doublon)
 			$raccourci .= affiche_raccourci_doc($doc, $id_document, '');
