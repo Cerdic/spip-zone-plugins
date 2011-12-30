@@ -7,7 +7,13 @@
 [(#REM) <!-- Barre d'onglets de second niveau de ajouter : rechercher / depots --> ]
 <div class="onglets_simple second clearfix">
 	<ul>
-		<li><a[ href="(#URL_ECRIRE{charger_plugin})"]><:svp:titre_plugins:></a></li>
+		<li>
+		[(#VAL{depot}|svp_compter|table_valeur{depot}|>{0}|?{
+			<a[ href="(#URL_ECRIRE{charger_plugin})"]><:svp:titre_plugins:></a>,
+			<span class="off"><:svp:titre_plugins:></span>}
+		)]
+		</li>
+		</li>
 		<li><strong><:svp:titre_depots:></strong></li>
 	</ul>
 </div>
