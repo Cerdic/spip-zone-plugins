@@ -11,7 +11,7 @@
 				<p class="explication">
 				[(#ENV{verrouille}|=={oui}|?{
 					<:svp:info_admin_plugin_verrouille:>,
-					[(#VAL{svp:info_admin_plugin}|concat{[_actif_(#ENV{actif})], [_verrou_(#ENV{verrouille})]}|_T)]}
+					[(#VAL{svp:info_admin_plugin}|concat{[_actif_(#ENV{actif, oui})], [_verrou_(#ENV{verrouille, non})]}|_T)]}
 				)]
 				</p>
 				<INCLURE{fond=formulaires/inc-admin_plugin,env} />
