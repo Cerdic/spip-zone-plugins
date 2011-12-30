@@ -114,7 +114,7 @@ function queue_ajouter_boutons($flux) {
 		$menu = "configuration";
 		$icone = _DIR_PLUGIN_QUEUE."prive/themes/spip/images/queue-process-24.png";
 		// on voit le bouton dans la barre "configuration"
-		$flux[$menu]->sousmenu['queue']= new Bouton($icone, 'Job queue');
+		$flux[$menu]->sousmenu['job_queue']= new Bouton($icone, 'Job queue');
 	}
 	return $flux;
 }
