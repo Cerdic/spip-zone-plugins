@@ -20,7 +20,7 @@ function formulaires_admin_plugin_charger_dist($voir='actif', $verrouille='non')
 	if ($verrouille == 'oui')
 		$valeurs['constante'] = array('_DIR_EXTENSIONS');
 	if ($verrouille == 'tous')
-		$valeurs['constante'] = '';
+		$valeurs['constante'] = array();
 	
 	$valeurs['verrouille'] = $verrouille;
 	$valeurs['actions'] = array();
