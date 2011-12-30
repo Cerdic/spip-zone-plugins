@@ -1,13 +1,17 @@
 [(#REM) Fil d'Ariane ]
-<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{catalogue}"><:pmb:catalogue:></a> &gt; <strong class="on">[(#ENV{notice}|table_valeur{'titre'}|couper{80})]</strong></p>
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{catalogue}"><:pmb:catalogue:></a> &gt; <strong class="on">[(#ENV{notice/titre}|couper{80})]</strong></p>
 	
 
 <div class="cartouche">
-	[(#ENV{notice}|table_valeur{logo_src}|oui)
-	      [(#REM|?{'','<img />'}|inserer_attribut{style,'max-width:200px;'}|inserer_attribut{class,spip_logos}|inserer_attribut{alt,''}|inserer_attribut{src,[(#ENV{notice}|table_valeur{'logo_src'})]})]
+	[(#ENV{notice/logo_src}|oui)
+	      [(#VAL{<img />}
+			|inserer_attribut{style,'max-width:200px;'}
+			|inserer_attribut{class,spip_logos}
+			|inserer_attribut{alt,''}
+			|inserer_attribut{src,[(#ENV{notice/logo_src})]})]
 	]
-	<h1 class="h1">[(#ENV{notice}|table_valeur{titre})]</h1>
-	[<p class="soustitre">(#ENV{notice}|table_valeur{soustitre})</p>]
+	<h1 class="h1">[(#ENV{notice/titre})]</h1>
+	[<p class="soustitre">(#ENV{notice/soustitre})</p>]
 
 	
 </div>

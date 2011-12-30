@@ -7,11 +7,13 @@
             <ul class="liste-items">
               <BOUCLE_tab_resultat1(POUR){tableau #ENV{tab_locations}}>
                 <li class="item">
-                    	<a href="[(#URL_PAGE{catalogue}|parametre_url{id_location,[(#ENV{tab_locations}|table_valeur{#CLE/location_id})]})]">[(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#CHEMIN{img/logo-localisation.png})]}|image_reduire{0,50})]
-			</a>
+                    <a href="[(#URL_PAGE{catalogue}|parametre_url{id_location,[(#ENV{tab_locations/#CLE/location_id})]})]">
+						[(#CHEMIN{img/logo-localisation.png}
+							|image_reduire{0,50}
+							|inserer_attribut{class,spip_logos})]
+					</a>
 
-			<h3><a href="[(#URL_PAGE{catalogue}|parametre_url{id_location,[(#ENV{tab_locations}|table_valeur{#CLE/location_id})]})]">[(#ENV{tab_locations}|table_valeur{#CLE/location_caption}|ucfirst)]</a></h3>
-                	
+					<h3><a href="[(#URL_PAGE{catalogue}|parametre_url{id_location,[(#ENV{tab_locations/#CLE/location_id})]})]">[(#ENV{tab_locations/#CLE/location_caption}|ucfirst)]</a></h3>
                 </li>
                 </BOUCLE_tab_resultat1>
             </ul>
@@ -26,15 +28,19 @@
 		      <BOUCLE_tab_resultat2(POUR){tableau #ENV{tab_locationsections}}>
 			[(#COMPTEUR_BOUCLE|>{1}|oui)
 			    <li class="item">
-				    <a href="[(#URL_PAGE{catalogue}|parametre_url{id_section,[(#ENV{tab_locationsections}|table_valeur{#CLE/section_id})]}|parametre_url{id_location_memo,[(#ENV{tab_locationsections}|table_valeur{#CLE/section_location})]})]">
-				    [(#ENV{tab_locationsections}|table_valeur{#CLE/section_image}|contient{rayonnage}|non)
-				      [(#REM|?{'','<img />'}|inserer_attribut{width,'100'}|inserer_attribut{class,spip_logos}|inserer_attribut{style,'max-width:100px; width:auto; _width:100px'}|inserer_attribut{src,[(#ENV{tab_locationsections}|table_valeur{#CLE/section_image})]})]
+				    <a href="[(#URL_PAGE{catalogue}|parametre_url{id_section,[(#ENV{tab_locationsections/#CLE/section_id})]}|parametre_url{id_location_memo,[(#ENV{tab_locationsections/#CLE/section_location})]})]">
+				    [(#ENV{tab_locationsections/#CLE/section_image}|contient{rayonnage}|non)
+						[(#ENV{tab_locationsections/#CLE/section_image}
+							|image_reduire{100,0}
+							|inserer_attribut{class,spip_logos})]
 				    ]
-				    [(#ENV{tab_locationsections}|table_valeur{#CLE/section_image}|contient{rayonnage}|oui)
-				      [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#CHEMIN{img/logo-section.png})]}|image_reduire{0,50})]
+				    [(#ENV{tab_locationsections/#CLE/section_image}|contient{rayonnage}|oui)
+						[(#CHEMIN{img/logo-section.png}
+							|image_reduire{0,50}
+							|inserer_attribut{class,spip_logos})]
 				    ]
 				    </a>
-				    <h3><a href="[(#URL_PAGE{catalogue}|parametre_url{id_section,[(#ENV{tab_locationsections}|table_valeur{#CLE/section_id})]}|parametre_url{id_location_memo,[(#ENV{tab_locationsections}|table_valeur{#CLE/section_location})]})]">[(#ENV{tab_locationsections}|table_valeur{#CLE/section_caption}|ucfirst)]</a></h3>
+				    <h3><a href="[(#URL_PAGE{catalogue}|parametre_url{id_section,[(#ENV{tab_locationsections/#CLE/section_id})]}|parametre_url{id_location_memo,[(#ENV{tab_locationsections/#CLE/section_location})]})]">[(#ENV{tab_locationsections/#CLE/section_caption}|ucfirst)]</a></h3>
 				    
 			    </li>
 			  ]
@@ -49,15 +55,19 @@
 						  <ul class="liste-items">
 						    <BOUCLE_tab_resultat3(POUR){tableau #ENV{tab_sections}}>[(#COMPTEUR_BOUCLE|>{1}|oui)
 						      <li class="item">
-							      <a href="[(#URL_PAGE{catalogue}|parametre_url{id_section,[(#ENV{tab_sections}|table_valeur{#CLE/section_id})]}|parametre_url{id_location_memo,[(#ENV{tab_sections}|table_valeur{#CLE/section_location})]})]">
-							      [(#ENV{tab_sections}|table_valeur{#CLE/section_image}|contient{rayonnage}|non)
-								[(#REM|?{'','<img />'}|inserer_attribut{width,'100'}|inserer_attribut{style,'max-width:100px; width:auto; _width:100px'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#ENV{tab_sections}|table_valeur{#CLE/section_image})]})]
-							      ]
-							      [(#ENV{tab_sections}|table_valeur{#CLE/section_image}|contient{rayonnage}|oui)
-								[(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#CHEMIN{img/logo-section.png})]}|image_reduire{0,50})]
-							      ]
+							      <a href="[(#URL_PAGE{catalogue}|parametre_url{id_section,[(#ENV{tab_sections/#CLE/section_id})]}|parametre_url{id_location_memo,[(#ENV{tab_sections/#CLE/section_location})]})]">
+									[(#ENV{tab_sections/#CLE/section_image}|contient{rayonnage}|non)
+										[(#ENV{tab_sections/#CLE/section_image}
+											|image_reduire{100,0}
+											|inserer_attribut{class,spip_logos})]
+									]
+									[(#ENV{tab_sections/#CLE/section_image}|contient{rayonnage}|oui)
+										[(#CHEMIN{img/logo-section.png}
+											|image_reduire{0,50}
+											|inserer_attribut{class,spip_logos})]
+									]
 							      </a>
-							      <h3><a href="[(#URL_PAGE{catalogue}|parametre_url{id_section,[(#ENV{tab_sections}|table_valeur{#CLE/section_id})]}|parametre_url{id_location_memo,[(#ENV{tab_sections}|table_valeur{#CLE/section_location})]})]">[(#ENV{tab_sections}|table_valeur{#CLE/section_caption}|ucfirst)]</a></h3>
+							      <h3><a href="[(#URL_PAGE{catalogue}|parametre_url{id_section,[(#ENV{tab_sections/#CLE/section_id})]}|parametre_url{id_location_memo,[(#ENV{tab_sections/#CLE/section_location})]})]">[(#ENV{tab_sections/#CLE/section_caption}|ucfirst)]</a></h3>
 							      
 						      </li>
 						      ]</BOUCLE_tab_resultat3>

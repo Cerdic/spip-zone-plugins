@@ -4,7 +4,7 @@
 	<ul class="liste-items">
 	<BOUCLE_tab_noticesconsultees(POUR){tableau #SESSION{tab_noticesconsultees}}>
 		<li class="item">
-					[(#SESSION{tab_noticesconsultees}|table_valeur{#CLE})]		
+			[(#SESSION{tab_noticesconsultees/#CLE})]		
 		</li>
 	</BOUCLE_tab_noticesconsultees>
 	</ul>
