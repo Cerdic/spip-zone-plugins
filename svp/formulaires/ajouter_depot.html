@@ -19,7 +19,7 @@
 						<a class="spip_out" title="<:svp:bulle_ajouter_spipzone:>" href="http://files.spip.org/spip-zone/archives.xml" onclick="$('#xml_paquets').attr('value',$(this).attr('href')).focus();return false;"><:svp:info_adresse_spipzone:></a>
 					</p>
 					[<span class="erreur_message">(#ENV{erreurs}|table_valeur{xml_paquets})</span>]
-					<input type="text" name="xml_paquets" id="xml_paquets" value="" class="text" />						
+					<input type="text" name="xml_paquets" id="xml_paquets" value="[http://files.spip.org/spip-zone/archives.xml(#VAL{depot}|svp_compter|table_valeur{depot}|=={0}|oui)]" class="text" />						
 				</li>
 			</ul>
 	
