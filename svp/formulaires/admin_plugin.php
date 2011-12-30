@@ -9,23 +9,21 @@ function formulaires_admin_plugin_charger_dist($voir='actif', $verrouille='non')
 	include_spip('inc/svp_depoter_local');
 	svp_actualiser_paquets_locaux();
 		
-	$valeurs['constante'] = array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL');
+
 	$valeurs['actif'] = 'oui';
-	
 	if ($voir == 'inactif')
 		$valeurs['actif'] = 'non';
-	
 	if ($voir == 'tous')
 		$valeurs['actif'] = '';
-	
+
+	$valeurs['constante'] = array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL');
 	if ($verrouille == 'oui')
 		$valeurs['constante'] = array('_DIR_EXTENSIONS');
-	
 	if ($verrouille == 'tous')
 		$valeurs['constante'] = '';
 	
+	$valeurs['verrouille'] = $verrouille;
 	$valeurs['actions'] = array();
-	
 	$valeurs['ids_paquet'] = _request('ids_paquet');
 	$valeurs['_todo'] = _request('_todo');
 			

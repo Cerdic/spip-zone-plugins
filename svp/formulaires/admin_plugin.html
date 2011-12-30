@@ -3,13 +3,17 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	<form method="post" action="#ENV{action}">
-
 		<INCLURE{fond=formulaires/inc-confirmer_actions, env} />
 		
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<div class="liste-plugins">
 			<fieldset>
-				<p class="explication"><:texte_presente_plugin:></p>
+				<p class="explication">
+				[(#ENV{verrouille}|=={oui}|?{
+					<:svp:info_admin_plugin_verrouille:>,
+					[(#VAL{svp:info_admin_plugin}|concat{[_actif_(#ENV{actif})], [_verrou_(#ENV{verrouille})]}|_T)]}
+				)]
+				</p>
 				<INCLURE{fond=formulaires/inc-admin_plugin,env} />
 			</fieldset>
 		</div>

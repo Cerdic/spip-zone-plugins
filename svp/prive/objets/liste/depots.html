@@ -60,5 +60,9 @@
 	[<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_liste_depots>
-	[(#ENV{affichage}|=={complet}|oui)<p><:svp:info_aucun_depot_ajoute:></p>]
+[(#ENV{affichage}|=={complet}|oui)
+	#BOITE_OUVRIR{'','notice'}
+		<p><:svp:info_aucun_depot_ajoute:></p>
+	#BOITE_FERMER
+]
 <//B_liste_depots>

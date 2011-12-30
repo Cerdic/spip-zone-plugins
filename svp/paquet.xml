@@ -1,7 +1,7 @@
 <paquet
 	prefix="svp"
 	categorie="maintenance"
-	version="0.72.1"
+	version="0.72.2"
 	etat="test"
 	compatibilite="[3.0.0-beta;3.0.*]"
 	logo="svp-64.png"
@@ -13,6 +13,7 @@
 	<!-- SerVeur d'information et de téléchargement des Plugins -->
 
 	<auteur>Eric Lupinacci</auteur>
+	<auteur>Collectif SPIP</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
@@ -20,13 +21,7 @@
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/svp_declarer.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/svp_declarer.php" />
 	<pipeline nom="taches_generales_cron" inclure="genie/svp_taches_generales_cron.php" />
-	<pipeline nom="autoriser" inclure="inc/svp_autoriser.php" />
-	<onglet 
-		nom="charger_plugin"
-		titre="plugin_titre_automatique_ajouter"
-		parent="plugins"
-		icone="images/plugin-add-24.png"
-		action="charger_plugin"
-	/>
-	
+	<pipeline nom="autoriser" inclure="svp_pipelines.php" />
+	<pipeline nom="ajouter_onglets" inclure="svp_pipelines.php" />
+
 </paquet>
