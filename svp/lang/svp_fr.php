@@ -54,7 +54,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'categorie_squelette' => 'Squelette',
 	'categorie_statistique' => 'Référencement, statistiques',
 	'categorie_theme' => 'Thème',
-	'configurer_svp' => 'Configurer le Service de paquetage',
 	'config_activer_runtime' => 'Activer le mode runtime&nbsp;?',
 	'config_activer_runtime_explication' => '
 		Le mode runtime (oui) ne charge que les plugins compatibles avec la version courante de votre SPIP,
@@ -245,12 +244,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plugins_non_verrouilles_liste' => 'Non verrouillés',
 
 // S
-	'svp' => 'Service de paquetages',
-	
+
 // T
 	'titre_depot' => 'Dépôt',
 	'titre_depots' => 'Dépôts',
 	'titre_form_ajouter_depot' => 'Ajouter un dépôt',
+	'titre_form_configurer_svp' => 'Configurer le Serveur de Plugins',
 	'titre_liste_autres_contributions' => 'Squelettes, bibliothèques, jeux d\'icônes...',
 	'titre_liste_autres_depots' => 'Autres dépôts',
 	'titre_liste_depots' => 'Liste des dépôts disponibles',
@@ -259,6 +258,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_depot' => 'Logo du dépôt',
 	'titre_logo_plugin' => 'Logo du plugin',
 	'titre_nouveau_depot' => 'Nouveau dépôt',
+	'titre_page_configurer' => 'Serveur de Plugins',
 	'titre_paquet' => 'Paquet',
 	'titre_paquets' => 'Paquets',
 	'titre_plugin' => 'Plugin',
