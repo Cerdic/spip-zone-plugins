@@ -34,9 +34,9 @@
 				<dl>
 					<dd class="desc">
 						[(#VALEUR{description}|extraire_multi|propre)]
-						[<em class="site">
-							<a href="(#LIEN_DOC)" class="spip_out" title="<:svp:bulle_aller_documentation:>"><:en_savoir_plus:></a>
-						</em>]
+						<em class="site">
+							<a[ href="http://plugins.spip.net/(#PREFIXE|strtolower).html"] class="spip_out" title="<:svp:bulle_aller_documentation:>"><:en_savoir_plus:></a>
+						</em>
 					</dd>
 					[<dt class="auteurs"><:public:par_auteur:></dt>
 					<dd class="auteurs">(#AUTEUR*|svp_afficher_credits)</dd>]
