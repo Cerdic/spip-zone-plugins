@@ -9,7 +9,7 @@
   <auteur>Cedric, Fil</auteur>
   <version>0.6.5</version>
   <version_base>0.3.4</version_base>
-  <necessite id='spip' version='[2.1.0;2.1.99]' />
+  <necessite id='spip' version='[2.0.10;2.1.99]' />
   <etat>test</etat>
   <description>
   	<multi>
@@ -46,12 +46,13 @@
 		<nom>affichage_final</nom>
 		<inclure>queue_pipelines.php</inclure>
 	</pipeline>
-
+    <pipeline>
+    	<nom>ajouter_boutons</nom>
+        <inclure>queue_pipelines.php</inclure>
+    </pipeline>
 	<bouton id="job_queue" parent='bando_administration'>
 		<icone>images/queue-process-16.png</icone>
 		<titre>Job Queue</titre>
 	</bouton>
-
 	<categorie>performance</categorie>
-
 </plugin>

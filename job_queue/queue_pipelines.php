@@ -104,4 +104,18 @@ function queue_autoriser(){}
 function autoriser_queue_purger_dist(){
 	return autoriser('webmestre');
 }
+
+/**
+ * preserver la compatibilite 2.0 sans le plugin bandeau-2.1
+ */
+function queue_ajouter_boutons($flux) {
+	// si on est webmestre
+	if (autoriser('purger','queue') AND !isset($flux['bando_configuration'])) {
+		$menu = "configuration";
+		$icone = _DIR_PLUGIN_QUEUE."prive/themes/spip/images/queue-process-24.png";
+		// on voit le bouton dans la barre "configuration"
+		$flux[$menu]->sousmenu['queue']= new Bouton($icone, 'Job queue');
+	}
+	return $flux;
+}
 ?>
