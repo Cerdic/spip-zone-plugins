@@ -43,7 +43,7 @@
 						]
 						<BOUCLE_valeurs_champs(POUR){tableau #GET{valeurs_champs}}>
 							[(#GET{valeur_sav/id}|=={17}|oui)
-							  <option  value='[(#VALEUR{value_id})]'[(#ENV{typdoc}|=={[(#GET{valeurs_champs/#CLE/value_id})]}|?{' ',''})selected="selected")]>[(#VALEUR{value_caption})]</option>
+							  <option  value='[(#VALEUR{value_id})]'[(#ENV{typdoc}|=={[(#GET{valeurs_champs/#CLE/value_id})]}|oui)selected="selected")]>[(#VALEUR{value_caption})]</option>
 							]
 						</BOUCLE_valeurs_champs> 
 						[(#GET{valeur_sav/id}|=={17}|oui)

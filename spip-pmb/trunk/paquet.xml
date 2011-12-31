@@ -1,7 +1,7 @@
 <paquet
 	prefix="pmb"
 	categorie="divers"
-	version="1.101.4"
+	version="1.101.5"
 	etat="dev"
 	compatibilite="[3.0.0-beta;3.0.*]"
 	logo="img/logo-spip-pmb.png"
