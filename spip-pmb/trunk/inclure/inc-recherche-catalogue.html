@@ -1,5 +1,5 @@
 [(#SET{tab_resultat, [(#ENV**{recherche}|urldecode|pmb_prepare_recherche|sinon{*}
-	|pmb_recherche_extraire{#ENV{look_ALL,0}, #ENV{look_AUTHOR,0}, #ENV{look_PUBLISHER,0}, #ENV{look_COLLECTION,0}, #ENV{look_SUBCOLLECTION,0}, ENV{look_CATEGORY, 0}, [(#ENV{look_INDEXINT})], #ENV{look_KEYWORDS,0}, #ENV{look_TITLE,0}, #ENV{look_ABSTRACT,0}, #ENV{id_section,0}, #ENV{debut,0}, #ENV{fin,5}, #ENV{typdoc,''}, #ENV{id_location_memo,''}})]})]
+	|pmb_recherche_extraire{#ENV{look_ALL,0}, #ENV{look_AUTHOR,0}, #ENV{look_PUBLISHER,0}, #ENV{look_COLLECTION,0}, #ENV{look_SUBCOLLECTION,0}, #ENV{look_CATEGORY, 0}, #ENV{look_INDEXINT}, #ENV{look_KEYWORDS,0}, #ENV{look_TITLE,0}, #ENV{look_ABSTRACT,0}, #ENV{id_section,0}, #ENV{debut,0}, #ENV{fin,5}, #ENV{typdoc,''}, #ENV{id_location_memo,''}})]})]
 
 [(#SET{url,[(#ENV{id_section}
 	|?{#URL_PAGE{catalogue},#URL_PAGE{recherche}}
@@ -19,7 +19,7 @@
 	|parametre_url{typdoc,#ENV{typdoc}}
 	|parametre_url{id_location_memo,#ENV{id_location_memo}}
 	|parametre_url{id_section,#ENV{id_section}})]})]
-					
+	
 <a id="resultats_recherche"></a>
 <div class="menu articles">
 	<B_tab_resultat>

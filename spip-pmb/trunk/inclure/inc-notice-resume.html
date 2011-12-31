@@ -1,35 +1,39 @@
+[(#SET{url,[(#URL_PAGE{notice_display}
+		|parametre_url{id,#ENV{notice/id}}
+		|parametre_url{url_ret,#ENV{url_ret}})]})]
+
 <li class="item hentry[ (#ENV{surlignable}|oui)surlignable][ (#ENV{compteur}|=={1}|oui)premier]">
   <div class="logo-encart">
-	  <a href="[(#URL_PAGE{notice_display,id=[(#ENV{notice}|table_valeur{'id'})][&amp;url_ret=(#ENV{url_ret})]})]">
-			[(#ENV{notice}|table_valeur{logo_src}|oui)
+	  <a href="#GET{url}">
+		 
+			[(#ENV{notice/logo_src}|oui)
 					[(#ENV{copieimage,non}|=={non}|non)
-						[(#ENV{notice}
-							|table_valeur{logo_src}
+						[(#ENV{notice/logo_src}
 							|copie_locale{force}
 							|image_reduire{#ENV{largeur,100},#ENV{hauteur,0}}
 							|inserer_attribut{class,spip_logos})]
 					]
 					[(#ENV{copieimage,non}|=={non}|oui)
-						[(#ENV{notice}
-							|table_valeur{logo_src}
+						[(#ENV{notice/logo_src}
+							|image_reduire{#ENV{largeur,100},#ENV{hauteur,0}}
 							|inserer_attribut{class,spip_logos}
 							|inserer_attribut{alt,''})]
 					]
 			]
-			[(#ENV{notice}|table_valeur{logo_src}|non)
+			[(#ENV{notice/logo_src}|non)
 				[(#REM) pas de logo, on regarde si une image est en document joint ]
-				[(#SET{tab_docnum,[(#ENV{notice}|table_valeur{id}|pmb_ws_documents_numeriques)]})]
+				[(#SET{tab_docnum,[(#ENV{notice/id}|pmb_ws_documents_numeriques)]})]
 				[(#INCLURE{fond=inclure/inc-image-doc-joint,tab_docnum=#GET{tab_docnum},env})]
 			]
 		</a>
 	</div>
-	<h3 class="h3 entry-title[ (#ENV{surlignable}|oui)surlignable]"><a href="[(#URL_PAGE{notice_display,id=[(#ENV{notice}|table_valeur{'id'})][&amp;url_ret=(#ENV{url_ret})]})]"[ title="(#NOM_SITE|texte_backend)"]>[(#ENV{notice}|table_valeur{titre})]</a></h3> 
+	<h3 class="h3 entry-title[ (#ENV{surlignable}|oui)surlignable]"><a href="#GET{url}"[ title="(#NOM_SITE|texte_backend)"]>[(#ENV{notice/titre})]</a></h3> 
 		[<span class="auteurs[ (#ENV{surlignable}|oui)surlignable]"><:par_auteur:> 
-			  (#ENV{notice}|table_valeur{'liensauteurs'})</a>[, (#ENV{notice}|table_valeur{'liensauteurs2'})</a>][, (#ENV{notice}|table_valeur{'liensauteurs23'})]
+			  (#ENV*{notice/liensauteurs})</a>[, (#ENV*{notice/liensauteurs2})</a>][, (#ENV*{notice/liensauteurs23})]
 		</span>]
-	[<div class="introduction entry-content[ (#ENV{surlignable}|oui)surlignable]">(#ENV{notice}|table_valeur{'resume'}|couper{[(#ENV{longueur_resume,250})],'...'})</div>]
+	[<div class="introduction entry-content[ (#ENV{surlignable}|oui)surlignable]">(#ENV{notice/resume}|couper{#ENV{longueur_resume,250},'&ndash;'})</div>]
 	<div class="meta-publi">
-		<a class="lire-la-suite" href="[(#URL_PAGE{notice_display,id=[(#ENV{notice}|table_valeur{'id'})][&amp;url_ret=(#ENV{url_ret})]})]"><:zpip:lire_la_suite:><span class="lire-la-suite-titre"><:zpip:lire_la_suite_de:> <em>[(#ENV{notice}|table_valeur{titre})]</em></span></a>
+		<a class="lire-la-suite" href="#GET{url}"><:zpip:lire_la_suite:><span class="lire-la-suite-titre"><:zpip:lire_la_suite_de:> <em>[(#ENV{notice/titre})]</em></span></a>
 	</div>
 	<br class="nettoyeur" />
 								

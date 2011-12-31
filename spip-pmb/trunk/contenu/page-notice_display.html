@@ -1,10 +1,7 @@
 [(#REM) Fil d'Ariane ]
 <p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{catalogue}"><:pmb:catalogue:></a> &gt; <strong class="on">[(#ENV{notice/titre}|couper{80})]</strong></p>
-	
 
 <div class="cartouche">
-#ENV{notice/logo_src}
-
 	[(#ENV{notice/logo_src}|oui)
 	      [(#VAL{<img />}
 			|inserer_attribut{style,'max-width:200px;'}
