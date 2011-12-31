@@ -152,36 +152,35 @@ function pmb_collection_extraire($id_collection, $debut=0, $nbresult=5, $id_sess
 	
 	pmb_ws_charger_client($ws);
 	try {
-	      $result = $ws->pmbesCollections_get_collection_information_and_notices($id_collection,$id_session);
-	      if ($result) {
-		  $tableau_resultat['collection_id'] = $result->information->collection_id;
-		  $tableau_resultat['collection_name'] = $result->information->collection_name;
-		  $tableau_resultat['collection_parent'] = $result->information->collection_parent;
-		  $tableau_resultat['collection_issn'] = $result->information->collection_issn;
-		  $tableau_resultat['collection_web'] = $result->information->collection_web;
-		   $tableau_resultat['notice_ids'] = Array();
+		$result = $ws->pmbesCollections_get_collection_information_and_notices($id_collection,$id_session);
+		if ($result) {
+			$tableau_resultat['collection_id']     = $result->information->collection_id;
+			$tableau_resultat['collection_name']   = $result->information->collection_name;
+			$tableau_resultat['collection_parent'] = $result->information->collection_parent;
+			$tableau_resultat['collection_issn']   = $result->information->collection_issn;
+			$tableau_resultat['collection_web']    = $result->information->collection_web;
+			$tableau_resultat['notice_ids']        = Array();
 
-		$liste_notices = Array();
-		  $cpt=0;
-		  if (is_array($result->notice_ids)) {
-			      foreach($result->notice_ids as $cle=>$valeur) {
-				if (($cpt>=$debut) && ($cpt<$nbresult+$debut)) $liste_notices[] = $valeur;
-				$cpt++;
-			      }
-		  }
-		  pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);
-		  $tableau_resultat['notice_ids'][0]['nb_resultats'] = $cpt;
+			$liste_notices = Array();
+			$cpt=0;
+			if (is_array($result->notice_ids)) {
+				foreach($result->notice_ids as $cle=>$valeur) {
+					if (($cpt>=$debut) && ($cpt<$nbresult+$debut)) $liste_notices[] = $valeur;
+					$cpt++;
+				}
+			}
+			pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);
+			$tableau_resultat['notice_ids'][0]['nb_resultats'] = $cpt;
 
-		  $cpt=0;
-		  if (is_array($liste_notices)) {
-			foreach($liste_notices as $notice) {
-			    $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
-			    $cpt++;
-			  }
-		  }
+			$cpt=0;
+			if (is_array($liste_notices)) {
+				foreach($liste_notices as $notice) {
+					$tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
+					$cpt++;
+				}
+			}
 		}
 	      
-
 	} catch (Exception $e) {
 		 echo 'Exception reçue (5) : ',  $e->getMessage(), "\n";
 	} 
@@ -433,7 +432,7 @@ function pmb_recuperer_champs_recherche($langue=0) {
 
 
 function pmb_ws_parser_notice_array($value, &$tresultat) {
-	    include_spip("/inc/filtres_images");
+	    include_spip("inc/filtres_images");
 	    
 	    $indice_exemplaire = 0;
 	    $tresultat = Array();
@@ -615,20 +614,20 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 	    	}
 	    }
 	    
-	    $tresultat['liensauteurs']=implode(', ', $authors_700);
-	    $tresultat['liensauteurs2']=implode(', ', $authors_701);
-	    $tresultat['liensauteurs3']=implode(', ', $authors_702);
+	    $tresultat['liensauteurs']  = implode(', ', $authors_700);
+	    $tresultat['liensauteurs2'] = implode(', ', $authors_701);
+	    $tresultat['liensauteurs3'] = implode(', ', $authors_702);
 	    
-	    if ($tresultat['lesauteurs'] == "")
-		  $tresultat['lesauteurs'] = $tresultat['auteur'];
-	     $tresultat['logo_src'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac")."/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$tresultat['isbn']);
+	    if ($tresultat['lesauteurs'] == "") {
+			$tresultat['lesauteurs'] = $tresultat['auteur'];
+		}
+	    $tresultat['logo_src'] = rtrim(lire_config("spip_pmb/url","http://tence.bibli.fr/opac"),'/')."/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$tresultat['isbn']);
 
 	    //si pas de numéro isbn (exemple jouets ludothèque) il n'y aura pas de logo
-	     if ($tresultat['isbn'] == '') $tresultat['logo_src'] = '';
+	    if ($tresultat['isbn'] == '') $tresultat['logo_src'] = '';
 	     
 	    $tresultat['id'] = $id_notice;
-
-	  
+ 
 }
 
 function pmb_ws_autres_lecteurs($id_notice) {
@@ -742,8 +741,6 @@ function pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat) {
 	
 	
 	try {	
-	
-		  $tresultat['id'] = $id_notice;
 		  $r=$ws->pmbesNotices_fetchNoticeListArray($listenotices,"utf-8",true,false);
 		  $cpt=0;
 		  if (is_array($r)) {
