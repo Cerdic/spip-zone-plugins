@@ -3,7 +3,7 @@
 	<slogan>Autoriser les forums sur un secteur particulier</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.2.1</version>
+	<version>0.3.0</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<description>
@@ -20,9 +20,18 @@
 		<nom>pre_insertion</nom>
 		<inclure>forumsectorise_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="cfg" version="[1.10;]" />
+	<bouton id='forumsectorise' parent='configuration'>
+		<icone>images/forumsectorise-24.png</icone>
+		<titre>forumsectorise:titre_menu</titre>
+		<url>configurer_forumsectorise</url>
+	</bouton>
+	<bouton id='forumsectorise2' parent='bando_configuration'>
+		<icone>images/forumsectorise-16.png</icone>
+		<titre>forumsectorise:titre_menu</titre>
+		<url>configurer_forumsectorise</url>
+	</bouton>
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
-	<necessite id="saisies" version="[1.1;]" />
+	<necessite id="saisies" version="[1.9.0;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<categorie>communication</categorie>
 </plugin>
