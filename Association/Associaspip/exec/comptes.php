@@ -99,8 +99,14 @@ function exec_comptes_args($exercice, $vu, $imputation, $debut, $max_par_page, $
 	echo '<option value="%" ';
 	if ($imputation=="%") { echo ' selected="selected"'; }
 	echo '>Tous</option>';
-	/* ne pas afficher les codes de la classe financiere : ce n'est pas une imputation et les inactifs  */
-	$sql = sql_select('code, classe, intitule', 'spip_asso_plan','classe <> '.$GLOBALS['association_metas']['classe_banques'].' AND active' , '', "classe,code");
+	/* Remplir le select uniquement avec les comptes utilises */
+	$sql = sql_select(
+		"imputation , code, intitule, classe",
+		"spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code",
+		/* ne pas afficher les codes de la classe financiere : ce n'est pas une imputation et les inactifs  */
+		"classe <> ".$GLOBALS['association_metas']['classe_banques']." AND active AND date >= \"".exercice_date_debut($exercice)."\" AND date <= \"".exercice_date_fin($exercice)."\"",
+		"code",
+		"code ASC");	
 	while ($plan = sql_fetch($sql)) {
 		echo '<option value="'.$plan['code'].'" ';
 		if ($imputation==$plan['code']) { echo ' selected="selected"'; }
