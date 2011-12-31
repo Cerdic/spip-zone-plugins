@@ -1,0 +1,18 @@
+<div class="liste menu articles ouvrages">
+	[(#SET{tab_notices,[(#ENV{tab_resultat/notice_ids})]})]
+	<B_tab_resultat>
+	[(#INCLURE{fond=inclure/nb_resultats,resultats=#GET{tab_notices/0/nb_resultats},debut,fin})]
+	<h2 class="h2"><:pmb:ouvrages:></h2>
+	<ul class="liste-items">
+		<BOUCLE_tab_resultat(POUR){tableau #GET{tab_notices}}>
+			[(#COMPTEUR_BOUCLE|>{1}|oui)
+				<INCLURE{fond=inclure/inc-notice-resume}{notice=#VALEUR}{surlignable=1}{compteur=#COMPTEUR_BOUCLE|moins{1}}>	
+			]
+		</BOUCLE_tab_resultat>
+	</ul>
+	[(#INCLURE{fond=inclure/nb_resultats,resultats=#GET{tab_notices/0/nb_resultats},debut,fin,bilan=non})]
+	
+	</B_tab_resultat>
+		<:pmb:pas_d_ouvrages_trouves:>
+	<//B_tab_resultat>
+</div> 
