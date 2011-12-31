@@ -1,8 +1,15 @@
-<BOUCLE_tab_docnumimages(POUR){tableau #ENV{tab_docnum}}{0,1}>[(#ENV{tab_docnum}|table_valeur{#CLE/mimetype}|contient{image}|oui)							[(#ENV{'copieimage','non'}|=={'non'}|non)
-		[(#REM|sinon{'<img />'}|inserer_attribut{src,[(#ENV{tab_docnum}|table_valeur{#CLE/downloadUrl}|sinon{[(#ENV{tab_docnum}|table_valeur{#CLE/url})]})]}|image_reduire{0,100}|inserer_attribut{class,spip_logos})]
+<BOUCLE_tab_docnumimages(POUR){tableau #ENV{tab_docnum}}{0,1}>
+[(#ENV{tab_docnum/#CLE/mimetype}|contient{image}|oui)
+	[(#ENV{copieimage,non}|=={non}|non)
+		[(#ENV{tab_docnum/#CLE/downloadUrl,#ENV{tab_docnum/#CLE/url}}
+			|copie_locale{force}
+			|image_reduire{0,100}
+			|inserer_attribut{class,spip_logos})]
 	]
-	[(#ENV{'copieimage','non'}|=={'non'}|oui)
-		[(#REM|sinon{'<img />'}|inserer_attribut{width,'100'}|inserer_attribut{src,[(#ENV{tab_docnum}|table_valeur{#CLE/downloadUrl}|sinon{[(#ENV{tab_docnum}|table_valeur{#CLE/url})]})]}|inserer_attribut{class,spip_logos})]				
+	[(#ENV{copieimage,non}|=={non}|oui)
+		[(#ENV{tab_docnum/#CLE/downloadUrl,#ENV{tab_docnum/#CLE/url}}
+			|image_reduire{0,100}
+			|inserer_attribut{class,spip_logos})]
 	]
-	
+]
 ]</BOUCLE_tab_docnumimages>
