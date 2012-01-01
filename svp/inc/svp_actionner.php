@@ -814,7 +814,8 @@ class Actionneur {
 			$new_action = array_merge($this->work, array(
 				'todo'=>'install',
 				'dossier'=>rtrim($dossier,'/'),
-				'constante'=>$i['constante']
+				'constante'=>$i['constante'],
+				'v'=>$i['version'], // pas forcement la meme version qu'avant lors d'une mise a jour.
 			));
 			array_unshift($this->end, $new_action);
 			$this->log("Demande d'installation de $dossier");
