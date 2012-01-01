@@ -1,7 +1,7 @@
 <paquet
 	prefix="svp"
 	categorie="maintenance"
-	version="0.72.4"
+	version="0.73.0"
 	etat="test"
 	compatibilite="[3.0.0-beta;3.0.*]"
 	logo="svp-64.png"
@@ -22,6 +22,7 @@
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/svp_declarer.php" />
 	<pipeline nom="taches_generales_cron" inclure="genie/svp_taches_generales_cron.php" />
 	<pipeline nom="autoriser" inclure="svp_pipelines.php" />
+	<pipeline nom="pre_boucle" inclure="svp_pipelines.php" />
 	<pipeline nom="ajouter_onglets" inclure="svp_pipelines.php" />
 
 </paquet>
