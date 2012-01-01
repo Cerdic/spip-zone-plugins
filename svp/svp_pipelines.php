@@ -44,7 +44,7 @@ function svp_ajouter_onglets($flux){
 /**
  * On affiche dans les boucles (PLUGINS) (DEPOTS) et (PAQUETS)
  * que les distants par defaut
- * Utiliser id_depot= ou tout pour tout avoir.
+ * Utiliser {tout} pour tout avoir.
  *
  * @param 
  * @return 
@@ -60,7 +60,8 @@ function svp_pre_boucle($boucle) {
 		$id_table = $boucle->id_table;
 		$m_id_depot = $id_table .'.id_depot';
 		// Restreindre aux depots distants
-		if (!isset($boucle->modificateur['criteres']['id_depot']) && 
+		if (
+			#!isset($boucle->modificateur['criteres']['id_depot']) && 
 			!isset($boucle->modificateur['tout'])) {
 				$boucle->where[] = array("'>'", "'$m_id_depot'", "'\"0\"'");				
 		}
@@ -68,18 +69,23 @@ function svp_pre_boucle($boucle) {
 	// PLUGINS
 	elseif ($boucle->type_requete == 'plugins') {
 		$id_table = $boucle->id_table;
+		/*
 		// les modificateurs ne se creent que sur les champs de la table principale
 		// pas sur une jointure, il faut donc analyser les criteres passes pour
 		// savoir si l'un deux est un 'id_depot'...
-		// pff...
+
 		$id_depot = false;
 		foreach($boucle->criteres as $c){
-			if ($c->param[0][0]->texte == 'id_depot') {
+			if (($c->op == 'id_depot') // {id_depot} ou {id_depot?}
+			OR ($c->param[0][0]->texte == 'id_depot')) // {id_depot=x}
+			{
 				$id_depot = true;
 				break;
 			}
 		}
-		if (!$id_depot && 
+		*/
+		if (
+		#	!$id_depot && 
 			!isset($boucle->modificateur['tout'])) {
 				// Restreindre aux mots cles non techniques
 				$boucle->from["depots_plugins"] =  "spip_depots_plugins";
