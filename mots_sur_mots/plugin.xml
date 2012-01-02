@@ -1,0 +1,28 @@
+<plugin>
+	<nom>Momo</nom>
+	<slogan>
+		Momo&nbsp;: les mots sur les mots&nbsp;!
+	</slogan>
+	<auteur>Bertrand Marne</auteur>
+	<licence>GNU/GPL</licence>
+	<version>0.0.1</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<description>
+		Momo (diminutif de mots sur mots), vous permet de lier des mots-cl&eacute;s &agrave; d'autres mot-cl&eacute;s.
+	</description>
+	<prefix>momo</prefix>
+	<icon>images/tag-32.png</icon>
+	<install>base/momo_installation.php</install>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/momo_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/momo_tables.php</inclure>
+	</pipeline>
+	<fonctions>momo_fonctions.php</fonctions>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<categorie>navigation</categorie>
+</plugin>
