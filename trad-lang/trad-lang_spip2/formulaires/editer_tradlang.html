@@ -22,13 +22,13 @@
 				#SET{comm_orig,#COMM}
 				[(#ENV{lang_orig}|=={#ENV{lang_mere}}|oui)<label><:tradlang:label_version_originale{lang=#ENV{lang_orig}}:></label>]
 				[(#ENV{lang_orig}|=={#ENV{lang_mere}}|non)<label><:tradlang:label_version_selectionnee{lang=#ENV{lang_orig}}:></label>]
-				<textarea class="texte" name="lang_orig" id="lang_orig_str" readonly="readonly">[(#STR*|entites_html)]</textarea>
+				<textarea class="texte" name="lang_orig" id="lang_orig_str" readonly="readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR*|entites_html)]</textarea>
 				</BOUCLE_orig>
 				</B_orig>
 				<BOUCLE_mere(TRADLANG){id=#ENV{id}}{lang=#ENV{lang_mere}}{0,1}>
 				#SET{comm_orig,#COMM}
 				<label><:tradlang:label_version_originale{lang=#ENV{lang_mere}}:></label>
-				<textarea class="texte" name="lang_orig" id="lang_orig_str" readonly="readonly">[(#STR*|entites_html)]</textarea>
+				<textarea class="texte" name="lang_orig" id="lang_orig_str" readonly="readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR*|entites_html)]</textarea>
 				</BOUCLE_mere>
 				<//B_orig>
 				<input type="hidden" class="hidden" value="#ENV{lang_orig}" />
@@ -41,12 +41,12 @@
 			<li class='readonly'>
 				[(#ENV{lang_orig}|=={#ENV{lang_mere}}|oui)<label><:tradlang:label_version_originale_comm{lang=#ENV{lang_orig}}:></label>]
 				[(#ENV{lang_orig}|=={#ENV{lang_mere}}|non)<label><:tradlang:label_version_selectionnee_comm{lang=#ENV{lang_orig}}:></label>]
-				<textarea class="texte" name="comm_orig" id="comm_orig" readonly="readonly">[(#GET*{comm}|entites_html)]</textarea>
+				<textarea class="texte" name="comm_orig" id="comm_orig" readonly="readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#GET*{comm}|entites_html)]</textarea>
 			</li>
 			<li class='editer_comm[(#ENV{erreurs}|table_valeur{comm}|oui)erreur]'>
 				<label for='comm'><:tradlang:label_tradlang_comm:></label>[
 				<span class="erreur_message">(#ENV{erreurs}|table_valeur{comm})</span>]
-				<textarea class="texte" name="comm" id="comm">[(#ENV*{comm}|entites_html)]</textarea>
+				<textarea class="texte" name="comm" id="comm" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#ENV*{comm}|entites_html)]</textarea>
 			</li>
 		</ul>
 		<p class='boutons'>
