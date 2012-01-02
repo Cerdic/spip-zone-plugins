@@ -137,9 +137,9 @@
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 		<td>#ID</td>
 		<BOUCLE_revise_inexistants_orig(TRADLANG){module}{lang=#ENV{lang_orig}}{id=#ID}>
-		<td>[(#STR**|entites_html)]</td>
+		<td style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|entites_html)]</td>
 		</BOUCLE_revise_inexistants_orig>
-		<td><:tradlang:str_existe_pas_in_langue:></td>
+		<td style="text-align:#LANG_LEFT;" dir="#LANG_DIR"><:tradlang:str_existe_pas_in_langue:></td>
 		<//B_revise_inexistants_orig>
 		<td>#STATUT</td>
 	</tr>
@@ -170,7 +170,7 @@
 	<BOUCLE_revise_en_trop(TRADLANG){module}{lang=#ENV{lang_cible}}{!id IN #GET{str_mere}}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 		<td>#ID</td>
-		<td>[(#STR**|entites_html)]</td>
+		<td style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|entites_html)]</td>
 		<td>#STATUT</td>
 	</tr>
 	</BOUCLE_revise_en_trop>
