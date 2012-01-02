@@ -196,9 +196,10 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 			// => On evite l'utilisation de _T() dans les squelettes
 			if ($paquet['dtd'] == 'paquet') {
 				$multis = svp_compiler_multis($paquet['prefix'], constant($const_dir) . '/' . $chemin);
-				if (isset($multis['nom'])) $paquet['nom'] = $multis['nom'];
-				if (isset($multis['slogan'])) $paquet['slogan'] = $multis['slogan'];
-				if (isset($multis['description'])) $paquet['description'] = $multis['description'];
+				if (isset($multis['nom']))
+					$paquet['nom'] = $multis['nom'];
+				$paquet['slogan'] = (isset($multis['slogan'])) ? $multis['slogan'] : '';
+				$paquet['description'] = (isset($multis['description'])) ? $multis['description'] : '';
 			}
 
 			$le_paquet = $paquet_base;
@@ -402,12 +403,14 @@ function svp_compiler_multis($prefixe, $dir_source) {
 				$GLOBALS['idx_lang'] = $langue;
 				include($_fichier_langue);
 				foreach ($GLOBALS[$langue] as $_item => $_traduction) {
-					if ($_item == $item_nom)
-						$nom .= "\n[$langue]$_traduction";
-					if ($_item == $item_slogan)
-						$slogan .= "\n[$langue]$_traduction";
-					if ($_item == $item_description)
-						$description .= "\n[$langue]$_traduction";
+					if ($_traduction = trim($_traduction)) {
+						if ($_item == $item_nom)
+							$nom .= "[$langue]$_traduction";
+						if ($_item == $item_slogan)
+							$slogan .= "[$langue]$_traduction";
+						if ($_item == $item_description)
+							$description .= "[$langue]$_traduction";
+					}
 				}
 			}
 		}
