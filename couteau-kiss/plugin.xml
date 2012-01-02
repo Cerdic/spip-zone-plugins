@@ -25,6 +25,6 @@ une unique page de configuration pour les r&#233;glages cach&#233;s de SPIP.
 		<url>configurer_ck</url>
 	</bouton>
 
-	<necessite id="SPIP" version="[2.0.0;3.1.0)" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<categorie>maintenance</categorie>
 </plugin>
