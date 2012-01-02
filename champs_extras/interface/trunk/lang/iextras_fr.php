@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 						pris en compte dans les formulaires d'&eacute;dition.",
 	'info_description_champ_extra_creer' => "Vous pouvez cr&eacute;er de nouveaux champs qui s'afficheront alors
 						sur cette page, dans le cadre «Liste des champs extras», ainsi que dans les formulaires.",		
-	'info_description_champ_extra_presents' => "Enfin, si des champs existent d&eacute;j&agrave; dans votre base de donn&eacute;e,
+	'info_description_champ_extra_presents' => "Enfin, si des champs existent d&eacute;j&agrave; dans votre base de donn&eacute;es,
 						mais ne sont pas d&eacute;clar&eacute;s (par un plugin ou un jeu de squelettes), vous
 						pouvez demander &agrave; ce plugin de les g&eacute;rer. Ces champs, s'il y en a,
 						apparaissent dans un cadre «Liste des champs pr&eacute;sents non g&eacute;r&eacute;s».",	
