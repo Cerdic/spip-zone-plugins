@@ -614,6 +614,7 @@ Commentaire: @commentaire@
 		# Destination comptable
 			'ajouter_destination' => 'ajouter une destination',
 			'supprimer_destination' => 'supprimer',
+			'utilise' => 'Utilis&eacute;',
 		# Titres
 			'destination_comptable' => 'Destination comptable',
 		# Bilan
