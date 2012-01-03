@@ -109,6 +109,18 @@ function metas_formulaire ($vars = "")
 		$objet = 'breve';
 		$id_objet = $vars["args"]["id_breve"];
 	}
+    if ($vars["args"]["id_auteur"] and $exec=='auteur_infos') {
+		$objet = 'auteur';
+		$id_objet = $vars["args"]["id_auteur"];
+	}
+    if ($vars["args"]["id_mot"] and $exec=='mots_edit') {
+		$objet = 'mot';
+		$id_objet = $vars["args"]["id_mot"];
+	}
+    if ($vars["args"]["id_groupe"] and $exec=='mots_type') {
+		$objet = 'groupe';
+		$id_objet = $vars["args"]["id_groupe"];
+	}
 	$data =	$vars["data"];
 
 	if ($id_objet > 0) {
