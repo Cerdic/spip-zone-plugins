@@ -53,8 +53,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fulltext_cree' => 'FULLTEXT créé',
 	'fulltext_creer' => 'Créer l\'index @index@',
 	'fulltext_documentation' => 'Pour plus d\'information sur la configuration, consultez la documentation en ligne :',
-  'fulltext_index' => 'Fulltext - Index',
-  'fulltext_documents' => 'Fulltext - Documents',
+	'fulltext_documents' => 'Fulltext - Documents',
+	'fulltext_index' => 'Fulltext - Index',
 
 	// G
 	'general' => 'Général',

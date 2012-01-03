@@ -8,8 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accents_pas_pris' => 'Prízvuky sa neberú do úvahu ("článok" alebo "clanok", dá rovnaký výsledok, to isté "článok", "članok", "clánok"...)',
-	'activer_indexation' => 'Aktivovať indexovanie', # MODIF
+	'accents_pas_pris' => 'Diakritika sa neberie do úvahy ("článok" alebo "clanok", vyhľadá rovnaký výsledok, to isté "článok", "članok", "clánok"...)',
+	'activer_indexation' => 'Aktivovať indexovanie súborov @ext@',
 	'asie' => 'Ázia',
 	'asterisque_terminale' => 'nevyhľadá žiadne výsledky: hviezdička musí byť na konci',
 	'aussi' => 'tiež',
@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'casse_indifferente' => 'Spôsob písania písmen v slove (malé písmená/veľké písmená) nemá vplyv.',
 	'configuration_indexation_document' => 'Nastavenie indexovania dokumentov',
-	'configurer_egalement_doc' => 'Vous pouvez également configurer l\'indexation des documents :', # MODIF
+	'configurer_egalement_doc' => 'Môžete nastaviť aj indexovanie súborov:',
 	'convertir_myisam' => 'Konvertovať do MyISAM',
 	'convertir_toutes' => 'Konvertovať všetky tabuľky do MyISAM',
 	'convertir_utf8' => 'obnoviť koherenciu konverziou do UTF-8 ',
@@ -26,35 +26,37 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'des_utilisations' => '@nb@ použití',
 	'descriptif' => 'Popis',
-	'documents_proteges' => 'Chránené dokumenty', # MODIF
+	'documents_proteges' => 'Chránené dokumenty',
 
 	// E
-	'enfan' => 'cudz',
+	'enfan' => '', # MODIF
 	'enfance' => 'detstvo',
 	'enfant' => 'dieťa',
 	'enfanter' => 'dieťa',
 	'enfantillage' => 'detskosť',
 	'enfants' => 'deti',
-	'erreur_binaire_indisponible' => 'Ce logiciel n\'est pas disponible sur le serveur.', # NEW
-	'erreur_doc_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .doc', # MODIF
-	'erreur_intervalle_cron' => 'Vous devez indiquer un intervalle supérieur à une seconde.', # MODIF
-	'erreur_nb_docs' => 'Vous devez indiquer un nombre de documents à traiter par itération supérieur à un.', # MODIF
-	'erreur_pdf_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .pdf', # MODIF
-	'erreur_ppt_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .ppt', # MODIF
-	'erreur_taille_index' => 'Il faut au moins indexer un caractère.', # MODIF
-	'erreur_verifier_configuration' => 'Il y a des erreurs de configuration.', # NEW
-	'erreur_xls_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .xls', # MODIF
+	'erreur_binaire_indisponible' => 'Tento softvér nie je na serveri dostupný.',
+	'erreur_doc_bin' => 'Musíte sa naučiť používať binárnu hodnotu na rozbaľovanie súborov .doc',
+	'erreur_intervalle_cron' => 'Musíte uviesť interval väčší ako jedna sekunda.',
+	'erreur_nb_docs' => 'Musíte uviesť počet súborov, ktorý sa má spracovať v priebehu viac ako jedného opakovania.',
+	'erreur_pdf_bin' => 'Musíte sa naučiť používať binárnu hodnotu na rozbaľovanie súborov .pdf',
+	'erreur_ppt_bin' => 'Musíte sa naučiť používať binárnu hodnotu na rozbaľovanie súborov .ppt',
+	'erreur_taille_index' => 'Zaindexovať znak chvíľu trvá.',
+	'erreur_verifier_configuration' => 'Pri konfigurácii sa vyskytli chyby.',
+	'erreur_xls_bin' => 'Musíte sa naučiť používať binárnu hodnotu na rozbaľovanie súborov .xls',
 	'et' => 'A',
 	'etranger' => 'cudzinec',
 	'exemples' => 'Príklady použitia',
-	'explication_option_readonly' => 'Cette option est forcée sur ce site et n\'est donc pas configurable.', # NEW
+	'explication_option_readonly' => 'Táto možnosť je stránke nanútená a&nbsps;nedá sa zmeniť.',
 
 	// F
-	'fant' => 'udz',
+	'fant' => '', # MODIF
 	'fonctionnement_recherche' => 'Ako funguje vyhľadávací systém na tejto stránke ',
 	'fulltext_cree' => 'FULLTEXT vytvorený',
-	'fulltext_creer' => 'Créer l\'index @index@', # NEW
-	'fulltext_documentation' => 'Pour plus d\'information sur la configuration, consultez la documentation en ligne :', # NEW
+	'fulltext_creer' => 'Vytvoriť index @index@',
+	'fulltext_documentation' => 'Viac informácií o nastaveniach nájdete v dokumentácii na internete:',
+	'fulltext_documents' => 'Fulltext - Documents', # NEW
+	'fulltext_index' => 'Fulltext - Index', # NEW
 
 	// G
 	'general' => 'Všeobecné',
@@ -65,15 +67,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'incoherence_charset' => 'Sada znakov na vašej stránke je nezlúčiteľná s tou v databáze. To môže viesť k nesprávnemu výsledku vo vyhľadávaní v prípade, že používate znaky s diakritikou:',
 	'index_regenere' => 'tabuľka indexov bola obnovená',
 	'index_reinitialise' => 'Boli reinicializované dokumenty, ktoré zaznamenali chybu ',
-	'index_reinitialise_ptg' => 'Les documents protégés ont tous été réinitialisés', # NEW
-	'index_reinitialise_totalement' => 'Les document ont tous été réinitialisés', # NEW
+	'index_reinitialise_ptg' => 'Chránené súbory boli úplne obnovené',
+	'index_reinitialise_totalement' => 'Súbor bol úplne obnovený',
 	'index_supprime' => 'index bol zmazaný',
-	'indiquer_chemin_bin' => 'Indiquer le chemin vers le binaire traitant l\'indexation des', # NEW
-	'indiquer_options_bin' => 'Indiquer les options pour l\'indexation des', # NEW
+	'indiquer_chemin_bin' => 'Uveďte umiestnenie binárnej hodnoty, ktorá zabezpečuje indexovanie',
+	'indiquer_options_bin' => 'Uveďte možnosti indexovania',
 	'infos' => 'Údaje',
-	'infos_documents_proteges' => 'Vous trouverez ici la liste des documents protégés et donc non-indexés par Fulltext', # NEW
-	'infos_fulltext_document' => 'Vous pourrez ici choisir quels type de documents sont indexés par Fulltext et configurer les binaires utilisés et leurs options.', # NEW
-	'intervalle_cron' => 'Intervalle de temps entre deux passages du CRON (en secondes).', # NEW
+	'infos_documents_proteges' => 'Toto je zoznam chránených súborov, ktoré Fulltext z tohto dôvodu nezaindexoval',
+	'infos_fulltext_document' => 'Tu si môžete vybrať, ktorý typ súborov sa zaindexuje, nastaviť binárne hodnoty a ich možnosti',
+	'intervalle_cron' => 'Časový interval medzi dvomi časťami CRONu (v sekundách).',
 
 	// L
 	'liste_tables_connues' => 'Tu je zoznam tabuliek, ktoré vyhľadávanie zohľadňuje. Môžete vložiť viaceré prvky FULLTEXTu -- pozri dokumentáciu v',
@@ -81,28 +83,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'mais_pas' => 'ale NIE',
-	'message_ok_configuration' => 'Enregistrement de vos préférences terminée', # MODIF
-	'message_ok_update_configuration' => 'Mise à jour de vos préférences terminée', # MODIF
+	'message_ok_configuration' => 'Úplný záznam vašich predvolieb',
+	'message_ok_update_configuration' => 'Aktualizácia predvolieb dokončená',
 
 	// N
 	'nb_err' => 'Chyba indexovania',
-	'nb_index' => 'Indexov', # MODIF
-	'nb_non_index' => 'Nezaindexovaných', # MODIF
-	'nb_ptg' => 'Chránených (nezaindexovaných)', # MODIF
-	'necessite_version_php' => '(nécessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip)', # MODIF
-	'nombre_caracteres' => 'Nombre de caractères indexés (depuis le debut du document).', # MODIF
-	'nombre_documents' => 'Nombre de documents à traiter par itération du CRON', # MODIF
+	'nb_index' => 'Zaindexovaných',
+	'nb_non_index' => 'Nezaindexovaných',
+	'nb_ptg' => 'Chránených (nezaindexovaných)',
+	'necessite_version_php' => '(vyžaduje sa minimálne PHP 5.2, ako aj možnosť -enable-zip)',
+	'nombre_caracteres' => 'Počet zaindexovaných znakov (od začiatku súboru)',
+	'nombre_documents' => 'Počet súborov, ktoré sa majú spracovať opakovaním v plánovači úloh CRON',
 
 	// O
 	'ou_bien' => 'alebo tiež',
 
 	// P
-	'pas_document_ptg' => 'Il n\'y a pas de document protégé.', # NEW
+	'pas_document_ptg' => 'Nie sú tu žiadne chránené súbory.',
 	'pas_index' => 'Chýba index FULLTEXTu',
 	'premier_soit' => 'BUĎ',
 
 	// Q
-	'que_des_exemples' => 'NB : les adresses de binaires et options proposées ici ab initio ne sont que des exemples.', # MODIF
+	'que_des_exemples' => 'Pozn.: adresy binárnych hodnôt a možnosti, ktoré sú tu od začiatku uvedené, sú iba príklady.',
 
 	// R
 	'regenerer_tous' => 'Obnoviť všetky FULLTEXTové indexy ',
@@ -110,7 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reinitialise_index_ptg' => 'Znova začať indexovať chránené dokumenty',
 	'reinitialise_totalement_doc' => 'Znova začať indexovanie všetkých dokumentov',
 	'reserve_webmestres' => 'Táto stránka je prístupná len správcovi webových stránok',
-	'retour_configuration_fulltext' => 'Návrat na nastavenie Fulltextu', # MODIF
+	'retour_configuration_fulltext' => 'Návrat na nastavenia Fulltextu',
 	'retourne' => 'Vyhľadá text obsahujúci',
 
 	// S
@@ -124,7 +126,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'table_format' => 'Formát tejto tabuľky je',
 	'table_non_reconnue' => 'obsah tabuľky je neznámy',
 	'textes_premier' => 'ale zobrazuje najskôr texty, ktoré obsahujú',
-	'titre_page_fulltext_index' => 'Configuration des index de recherche', # NEW
+	'titre_page_fulltext_index' => 'Nastavenie vyhľadávacieho indexu',
 
 	// U
 	'une_utilisation' => '1 použitie',
