@@ -1,11 +1,11 @@
 <traduction module="palette" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/palette/trunk/lang/" reference="fr">
 	<langue code="ast">
-		<traducteur nom="xuacu" />
+		<traducteur nom="Xuacu" />
 	</langue>
 	<langue code="ca" />
 	<langue code="de" />
 	<langue code="en">
-		<traducteur nom="mark_baber" />
+		<traducteur nom="Mark" />
 	</langue>
 	<langue code="fa" />
 	<langue code="fr" />
