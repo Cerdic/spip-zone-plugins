@@ -2,4 +2,8 @@
 	<langue code="en">
 		<traducteur nom="davood" />
 	</langue>
+	<langue code="fr" />
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
 </traduction>
