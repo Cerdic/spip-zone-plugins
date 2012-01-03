@@ -1,19 +1,13 @@
 <?php
-
-/// @file
-/// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-/// 
-///  Fichier produit par PlugOnet
-/// Module: paquet-tradlang
-/// Langue: fr
-/// Date: 07-10-2011 16:03:20
-/// Items: 2
-
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/trad-lang/trad-lang_spip2/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-// T
+
+	// T
 	'tradlang_description' => 'Un plugin pour gérer directement les fichiers de langues depuis SPIP.',
-	'tradlang_slogan' => 'Gérer les fichiers de langue',
+	'tradlang_slogan' => 'Gérer les fichiers de langue'
 );
+
 ?>
