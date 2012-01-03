@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'add_to_cart' => 'Pridať do košíka',
+	'add_to_cart' => 'Pridať do vozíka',
 
 	// B
 	'buy' => 'Kúpiť',
@@ -18,17 +18,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'c_email' => 'E-mail',
 	'c_google_checkout' => 'Google Checkout',
 	'c_paypal' => 'PayPal',
-	'cart_configuration' => 'Nastavenie nákupného košíka',
-	'cart_headers' => 'Nadpisy nákupného košíka',
-	'cart_headers_explication' => '<Môžete upraviť to, ako sa nákupný košík zobrazí. Ak chcete vedieť viac, prečítajte si <a href="http://simplecartjs.com/documentation.html">stránku o nastaveniach formátu nákupného košíka.</a>',
+	'cart_configuration' => 'Nastavenia nákupného vozíka',
+	'cart_headers' => 'Nadpisy nákupného vozíka',
+	'cart_headers_explication' => 'Môžete upraviť to, ako sa nákupný vozík zobrazí. Ak chcete vedieť viac, prečítajte si <a href="http://simplecartjs.com/documentation.html">stránku o nastaveniach formátu nákupného vozíka.</a>',
 	'checkout' => 'Pokladňa',
 	'checkout2email' => 'Platba e-mailom',
-	'checkout2email_explication' => 'Objednávka bola odoslaná na túto e-mailovú adresu. NEUVÁDZA žiaden konkrétny spôsob platby.',
+	'checkout2email_explication' => 'Objednávka bola odoslaná na túto e-mailovú adresu. Nepoužíva sa žiaden konkrétny spôsob platby.',
 	'checkout_methods' => 'Spôsoby platby',
 	'checkout_to' => 'Platba',
 
 	// D
-	'description' => 'Jednoduchý javascriptový nákupný košík',
+	'description' => 'Jednoduchý nákupný vozík v javascripte',
 	'devise' => 'Mena',
 	'devise_choix' => 'Výber meny',
 	'devise_explication' => 'Peňažná mena, ktorou sa bude platiť (dopredu skontrolujte, či je kompatibilná s vybraným spôsobom platby)',
@@ -39,30 +39,30 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dineromail_country_explication' => 'Vyberte si krajinu, kde ste si zaregistrovali svoj účet DineroMail.',
 	'dineromail_country_mexico' => 'Mexiko',
 	'dineromail_currency' => 'Mena transakcie',
-	'dineromail_currency_explication' => '<MODIF>Currency type for the transaction. There is no currency conversion. Prices must be given in the selected currency', # NEW
+	'dineromail_currency_explication' => 'Typ meny na transakciu. Neprebieha žiaden prevod. Ceny treba zadať vo vybranej mene',
 	'dineromail_currency_local' => 'Miestna mena',
 	'dineromail_currency_usd' => 'Americký dolár',
 	'dineromail_header_image' => 'Obrázok hlavičky',
-	'dineromail_header_image_explication' => '<MODIF>The absolute URL of a logo to show on the DineroMail header (jpg or gif, 150px x 50px)', # NEW
+	'dineromail_header_image_explication' => 'Absolútna URL loga, ktoré sa zobrazí v hlavičke DineroMailu (jpg alebo gif, 150 px x 50 px)',
 	'dineromail_merchant_id' => 'Číslo obchodníka',
-	'dineromail_merchant_id_explication' => '<MODIF>Merchant number ID of your DineroMail account, without the verification digit', # NEW
+	'dineromail_merchant_id_explication' => 'Identifikačné číslo vášho účtu DineroMail bez overovacieho čísla',
 	'dineromail_payments_methods' => 'Spôsob platby cez DineroMail ',
-	'dineromail_payments_methods_explication' => '<MODIF>Text string which defines the authorised payment methods. Leave it blank to enable all methods available for the country', # NEW
+	'dineromail_payments_methods_explication' => 'Textový reťazec, ktorý uvádza povolené spôsoby platby. Ak chcete povoliť všetky spôsoby platby dostupné v danej krajine, nevypĺňajte toto pole.',
 	'dineromail_see' => 'Zobraziť',
 	'dineromail_seller_name' => 'Názov predávajúceho',
-	'dineromail_seller_name_explication' => '<MODIF>Text replacement for \'email\' in the header. Leave it blank if you do not want it replaced', # NEW
+	'dineromail_seller_name_explication' => 'Text, ktorý v hlavičke nahradí e-mail. Ak ho nechcete nahradiť, nevypĺňajte toto pole.',
 
 	// E
 	'empty' => 'Prázdny',
-	'error_url' => '<MODIF>Purchase error URL', # NEW
-	'error_url_explication' => '<MODIF>URL where the customer is redirected in case of an error in the transaction', # NEW
+	'error_url' => 'URL chyby pri nákupe',
+	'error_url_explication' => 'URL kde bude zákazník presmerovaný v prípade chyby pri transakcii',
 
 	// F
 	'final_total' => 'Spolu',
 
 	// G
 	'google_merchant_id' => 'Č. obchodníka',
-	'google_merchant_id_explication' => '<MODIF>ID number of your Google Merchant account', # NEW
+	'google_merchant_id_explication' => 'Identifikačné číslo vášho účtu Google Merchant',
 
 	// H
 	'header_name' => 'Názov',
@@ -76,15 +76,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'other_parameters' => 'Iné parametre',
 
 	// P
-	'paypal_account' => 'PayPal účet',
+	'paypal_account' => 'Účet PayPal',
 	'paypal_account_explication' => 'E-mail vášho PayPal účtu, ak nejaký máte.',
-	'pending_url' => 'Purchase pending URL', # NEW
-	'pending_url_explication' => 'URL where customer is redirected in case of a pending transaction', # NEW
+	'pending_url' => 'URL čakajúcej transakcie',
+	'pending_url_explication' => 'URL, kde bude zákazník presmerovaný v prípade čakajúcej transakce',
 
 	// S
 	'shipping_cost' => 'Náklady na prepravu',
-	'shipping_flat_rate' => 'Shipping flat rate', # NEW
-	'shipping_flat_rate_explication' => '<MODIF>Add a flat shipping rate to the entire order', # NEW
+	'shipping_flat_rate' => 'Fixná sadzba poštovného',
+	'shipping_flat_rate_explication' => 'K celej objednávke pridajte fixnú sadzbu poštovného',
 	'shipping_quantity_rate' => 'Sadzba prepravy podľa množstva',
 	'shipping_quantity_rate_explication' => 'Pridať fixné náklady na prepravu pre každú položku vo vozíku',
 	'shipping_total_rate' => 'Percentuálna sadzba prepravy',
