@@ -1,16 +1,16 @@
 <traduction module="comments" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/comments/comments-200/lang/" reference="fr">
 	<langue code="ast">
-		<traducteur nom="xuacu" />
+		<traducteur nom="Xuacu" />
 	</langue>
 	<langue code="ca" />
 	<langue code="de" />
 	<langue code="en">
-		<traducteur nom="paolo2" />
+		<traducteur nom="Paolo" />
 		<traducteur nom="kent1" />
 	</langue>
 	<langue code="es" />
 	<langue code="fa">
-		<traducteur nom="davood" />
+		<traducteur nom="Davood Hossein" />
 	</langue>
 	<langue code="fr" />
 	<langue code="fr_tu">
@@ -19,7 +19,7 @@
 	<langue code="it" />
 	<langue code="pt" />
 	<langue code="pt_br">
-		<traducteur nom="rporto" />
+		<traducteur nom="Ricardo Porto" />
 	</langue>
 	<langue code="sk">
 		<traducteur nom="jaro" />
