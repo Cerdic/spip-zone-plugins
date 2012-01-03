@@ -14,8 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'limite_enregistres_label' => 'Visiteurs enregistrés',
 	'limite_ephemere_label' => 'Visiteurs non enregistrés',
-	'limite_titre' => 'Durée de vie des paniers',
 	'limite_explication' => 'Saisir la durée de vie (en heures) des paniers selon le type de visiteurs',
+	'limite_titre' => 'Durée de vie des paniers',
 
 	// M
 	'mon_panier' => 'Mon panier',
@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'panier_total_ttc' => 'Total',
 	'panier_valider' => 'Valider mon panier',
 	'panier_vide' => 'Le panier est vide.',
-	'paniers' => 'Paniers',
+	'paniers' => 'Paniers'
 );
 
 ?>

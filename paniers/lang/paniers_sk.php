@@ -10,10 +10,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'action_ajouter' => 'Pridať do vozíka',
 
+	// C
+	'configurer_titre' => 'Nastaviť zásuvný modul Paniers',
+
+	// L
+	'limite_enregistres_label' => 'Zaregistrovaní návštevníci',
+	'limite_ephemere_label' => 'Nezaregistrovaní návštevníci',
+	'limite_explication' => 'Zadajte životnosť vozíkov podľa typu návštevníkov (v hodinách)',
+	'limite_titre' => 'Životnosť vozíkov',
+
 	// M
 	'mon_panier' => 'Môj nákupný vozík',
 	'mon_panier_modifier' => 'Upraviť môj nákupný vozík',
 	'mon_panier_voir' => 'Zobraziť môj nákupný vozík',
+
+	// N
+	'nom_bouton_plugin' => 'Paniers',
 
 	// P
 	'panier_description' => 'Popis',

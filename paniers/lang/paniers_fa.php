@@ -10,10 +10,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'action_ajouter' => 'افزودن به سبد',
 
+	// C
+	'configurer_titre' => 'Configurer le plugin Paniers', # NEW
+
+	// L
+	'limite_enregistres_label' => 'Visiteurs enregistrés', # NEW
+	'limite_ephemere_label' => 'Visiteurs non enregistrés', # NEW
+	'limite_explication' => 'Saisir la durée de vie (en heures) des paniers selon le type de visiteurs', # NEW
+	'limite_titre' => 'Durée de vie des paniers', # NEW
+
 	// M
 	'mon_panier' => 'سبد من',
 	'mon_panier_modifier' => 'تعديل سبد من',
 	'mon_panier_voir' => 'سبدم را ببين',
+
+	// N
+	'nom_bouton_plugin' => 'Paniers', # NEW
 
 	// P
 	'panier_description' => 'شرح',
