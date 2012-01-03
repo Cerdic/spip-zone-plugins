@@ -83,7 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fonction_administrateur' => 'Administrátor',
 	'fonction_webmaster' => 'Webmaster',
 	'forme' => 'Právnický',
-	'forme_comment' => 'Société (<i>précisez le statut ...</i>), association ...', # NEW
+	'forme_comment' => 'Spoločnosť (<i>uveďte právnu formu...</i>), združenie...',
 	'forme_label' => 'Právna forma',
 
 	// H
@@ -234,25 +234,25 @@ Depuis sa version 1.1, le plugin propose une adaptation Z-compatible des squelet
 	'proprietaire_titre_page' => 'Plateforme Mentions Légales', # NEW
 	'proprietaire_titre_page_short' => 'Plateforme', # NEW
 	'pskels_info_mentions_legales' => 'Les blocs ci-dessous permettent de définir les informations concernant les <b>Créateur</b> et <b>Hébergeur</b> du site afin de mettre en place automatiquement des <b>Mentions Légales</b> et <b >Conditions d\'Utilisation</b>.<br /><br />Ces textes représentent <u>le minimum légal pour tout site web</u> et sont très génériques ... Ils doivent être considérés comme une base de travail pour créer vos propres textes.<br /><br />Vous pouvez les modifier sur la page \'Textes de langue propriétaire\' si vous activez l\'option ci-dessous.', # NEW
-	'pskels_legal_legend_createur' => 'Informations sur le créateur du site', # NEW
-	'pskels_legal_legend_hebergeur' => 'Informations sur l\'hébergeur du site', # NEW
-	'pskels_titre_page' => 'Configuration des squelettes', # NEW
-	'ptexte_cliquez_pour_editer' => 'Cliquez ici pour éditer l′entrée avec les raccourcis de mise en page', # NEW
-	'ptexte_editable_ttl' => 'Cliquez sur la ligne pour la modifier ...', # NEW
-	'ptexte_form_titre' => 'Édition complète / Nouvelle entrée', # NEW
+	'pskels_legal_legend_createur' => 'Údaje o tvorcovi stránky',
+	'pskels_legal_legend_hebergeur' => 'Údaje o poskytovateľovi webhostingu',
+	'pskels_titre_page' => 'Nastavenie šablón',
+	'ptexte_cliquez_pour_editer' => 'Na upravenie zápisu klávesovými skratkami kliknite sem',
+	'ptexte_editable_ttl' => 'Ak to chcete zmeniť, kliknite na daný riadok.',
+	'ptexte_form_titre' => 'Úpravy dokončené/Nový zápis',
 	'ptexte_info_supp' => '<br /><b>Utilisation des chaînes de cette page</b><br /><br />Les chaînes de cette page sont enregistrées dans un fichier de langue nommé \'<b>proprietaire</b>\', vous pourrez donc les appeler dans vos squelettes en utilisant la formulation :<br /><br /><center><code>&lt;:proprietaire:raccourci:&gt;</code></center><br />A noter que, si vous utilisez des raccourcis typographiques dans vos textes, il vous faut ajouter dans l\'appel ci-dessus le filtre \'<b>|propre</b>\'. Cela donnerait un appel, pour l\'exemple ci-dessus, de la forme :<br /><br /><center><code>&lt;:proprietaire:raccourci|propre:&gt;</code></center><br />Vous pouvez, plus simplement, utiliser la balise <b>TEXTES_PROPRIETAIRE</b> de cette façon :<br /><br /><center><code>#TEXTES_PROPRIETAIRE{<br />raccourci,<br />arguments,<br />traitement}</code></center><br />où "arguments" correspond à un array des arguments à passer à la chaîne et "traitement" au nom de la fonction de traitement du texte (<i>"propre" par défaut</i>).', # NEW
 	'ptexte_info_tags' => '<br /><b>Vous pouvez utiliser les tags ci-dessous dans vos textes (<i>ils doivent être indiqués comme écrit ici : ’@texte@’</i>) :</b><ul><li>@nom_site@</li><li>@url_site@</li><li>@descriptif_site@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom _responsable@</li><li>@proprietaire_fonction_ responsable_texte@</li><li>@proprietaire_ mail_administratif@</li></ul>Cette liste est <b>non-exhaustive</b>, si des tags présents dans les textes ne sont pas listés ici, conservez-les ...', # NEW
 	'ptexte_info_texte' => '<ul><li><b>Les fichiers de langue</b><br />Les entrées des fichiers de langue se définissent en indiquant une chaîne d\'appel (<i>les entrées \'raccourci\' du tableau</i>) à laquelle correspond un texte complet (<i>les entrées \'texte affiché\' du tableau</i>), qui peut contenir une mise en forme et être aussi long que souhaité.<br /></li><li><b>Nomenclature des raccourcis</b><br />Les raccourcis doivent être des chaînes de texte <u>sans espace et sans caractères spéciaux</u> (<i>vous pouvez ici saisir vos raccourcis avec des espaces, qui seront remplacés par des underscore</i>).</li><li><b>Mise en forme des textes</b><br />Vous pouvez rédiger vos textes de la même manière que vos articles SPIP ...</li></ul>', # NEW
 	'ptexte_info_titre' => 'Aide / Rappels ...', # NEW
 	'ptexte_supprimer' => 'Vymazať vstup',
 	'ptexte_texte' => 'Cette page vous permet de gérer certains textes nécessaires au site sans passer par le mode d\'édition habituel (<i>modification du fichier de langue sur le serveur</i>).<br /><br />Les entrées \'Texte affiché\' du tableau sont éditables par un simple clic sur la ligne \'raccourci\' correspondante. Vous pouvez également ajouter des entrées en utilisant le formulaire \'Édition complète\'.', # NEW
-	'ptexte_titre_page' => 'Textes de langue propriétaire', # NEW
+	'ptexte_titre_page' => 'Texty v jazyku majiteľa',
 	'ptexte_titre_page_short' => 'Texty jazyka',
 
 	// R
-	'responsable_fonction_label' => 'Fonction du responsable', # NEW
-	'responsable_mail_label' => 'Adresse mail du responsable', # NEW
-	'responsable_nom_label' => 'Nom du responsable', # NEW
+	'responsable_fonction_label' => 'Funkcia zodpovedného zamestnanca',
+	'responsable_mail_label' => 'E-mailová adresa zodpovedného zamestnanca',
+	'responsable_nom_label' => 'Meno zodpovedného zamestnanca',
 	'retour' => 'Späť',
 	'rue_label' => 'Ulica',
 
@@ -279,12 +279,12 @@ Depuis sa version 1.1, le plugin propose une adaptation Z-compatible des squelet
 	'telecopie_label' => 'Fax',
 	'telephone_label' => 'Telefónne číslo',
 	'testing_page_bloc' => 'Blok údajov',
-	'testing_page_bloc_complet' => 'Blok s celým kontaktom',
+	'testing_page_bloc_complet' => 'Blok s úplným kontaktom',
 	'testing_page_business_cards' => 'Vizitky (<i>v-karty a vizitky</i>)',
 	'testing_page_business_cards_complet' => 'Celé texty vizitiek',
 	'testing_page_carte_visite' => 'Vizitky (<i>vo vývoji</i>)',
 	'testing_page_carte_visite_administrateur' => 'Vizitka administrátora',
-	'testing_page_carte_visite_chef' => 'Carte de visite du responsable', # NEW
+	'testing_page_carte_visite_chef' => 'Vizitka zodpovedného zamestnanca',
 	'testing_page_carte_visite_normale' => 'Klasická vizitka (<i>predvolené</i>)',
 	'testing_page_carte_visite_site' => 'Vizitka celej stránky (<i>internetové odkazy</i>)',
 	'testing_page_carte_visite_webmaster' => 'Vizitka webmastera',
@@ -311,7 +311,7 @@ Tiež vám odporúčame, aby ste sa pozreli na  [informácie právneho charakter
 	'utiliser_ce_plugin' => 'Použitie tohto zásuvného modulu',
 
 	// V
-	'valider_pour_forcer' => '(vous pouvez cependant forcer une valeur vide en indiquant un underscore seul : "_")', # NEW
+	'valider_pour_forcer' => '(môžete si vynútiť prázdnu hodnotu zadaním jedného podčiarkovníka: "_")',
 	'ville_label' => 'Mesto'
 );
 
