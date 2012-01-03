@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/commandes/lang/
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/commandes/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -20,9 +20,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_modifier' => 'Modifier la commande :',
 	'commande_montant' => 'Montant',
 	'commande_nouvelle' => 'Nouvelle commande',
-	'commande_numero' => 'Commande n° ',
+	'commande_numero' => 'Commande n° ', # MODIF
 	'commande_reference' => 'Référence',
-	'commande_reference_numero' => 'Référence n° ',
+	'commande_reference_numero' => 'Référence n° ', # MODIF
 	'commande_statut' => 'Statut',
 	'configurer_titre' => 'Configurer le plugin Commande',
 	'confirmer_supprimer_commande' => 'Confirmez-vous la suppression de la commande ?',
@@ -53,21 +53,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nom_bouton_plugin' => 'Commandes',
-	'notifications_activer_label' => 'Activer',
 	'notifications_activer_explication' => 'Envoyer par mail des notifications de commande ?',
+	'notifications_activer_label' => 'Activer',
 	'notifications_cfg_titre' => 'Notifications',
-	'notifications_client_label' => 'Client',
 	'notifications_client_explication' => 'Envoyer les notifications au client ?',
-	'notifications_explication' => 'Les notifications permettent d’envoyer des emails suite aux changements de statut des commandes : En attente de validation, en cours, envoyée, partiellement payée, payée, retournée, retour partiel',
+	'notifications_client_label' => 'Client',
+	'notifications_expediteur_administrateur_label' => 'Choisir un administrateur :',
 	'notifications_expediteur_choix_administrateur' => 'un administrateur',
 	'notifications_expediteur_choix_email' => 'un email',
 	'notifications_expediteur_choix_facteur' => 'idem plugin Facteur',
 	'notifications_expediteur_choix_webmaster' => 'un webmestre',
+	'notifications_expediteur_email_label' => 'Saisir un email :',
 	'notifications_expediteur_explication' => 'Choisir l’expéditeur des notifications pour le vendeur et l’acheteur',
 	'notifications_expediteur_label' => 'Expéditeur',
-	'notifications_expediteur_administrateur_label' => 'Choisir un administrateur :',
-	'notifications_expediteur_email_label' => 'Saisir un email :',
 	'notifications_expediteur_webmaster_label' => 'Choisir un webmestre :',
+	'notifications_explication' => 'Les notifications permettent d’envoyer des emails suite aux changements de statut des commandes : En attente de validation, en cours, envoyée, partiellement payée, payée, retournée, retour partiel',
 	'notifications_parametres' => 'Paramètres des notifications',
 	'notifications_quand_explication' => 'Quel(s) changement(s) de statut déclenche(nt) l’envoi d’une notification ?',
 	'notifications_quand_label' => 'Déclenchement',
@@ -101,11 +101,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_paye' => 'Payée',
 	'statut_retour' => 'Retournée',
 	'statut_retour_partiel' => 'Retour partiel',
-	
-	//U
-	'une_commande_sur'=>'Une commande sur @nom@',
+
+	// U
+	'une_commande_sur' => 'Une commande sur @nom@',
+
 	// V
-	'votre_commande_sur'=>'Votre commande sur @nom@',
+	'votre_commande_sur' => 'Votre commande sur @nom@'
 );
 
 ?>

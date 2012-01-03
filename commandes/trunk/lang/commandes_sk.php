@@ -9,32 +9,33 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'action_facture' => 'Faktúra',
-	'action_modifier' => 'Modifier', # NEW
+	'action_modifier' => 'Zmeniť',
 	'action_supprimer' => 'Odstrániť',
 	'adresse_facturation' => 'Fakturačná adresa',
 	'adresse_livraison' => 'Doručovacia adresa',
 
 	// C
 	'commande_client' => 'Zákazník',
-	'commande_date' => 'Dátum objednávky', # MODIF
-	'commande_date_paiement' => 'Dátum platby', # MODIF
-	'commande_editer' => 'Éditer la commande', # NEW
-	'commande_modifier' => 'Modifier la commande :', # NEW
+	'commande_date' => 'Dátum',
+	'commande_date_paiement' => 'Dátum platby',
+	'commande_editer' => 'Upraviť objednávku',
+	'commande_modifier' => 'Zmeniť objednávku:',
 	'commande_montant' => 'Množstvo',
-	'commande_nouvelle' => 'Nouvelle commande', # NEW
-	'commande_numero' => 'Commande n° ', # NEW
-	'commande_reference' => 'Naše číslo',
-	'commande_reference_numero' => 'Référence n° ', # NEW
+	'commande_nouvelle' => 'Nová objednávka',
+	'commande_numero' => 'Objednávka č. ',
+	'commande_reference' => 'Značka',
+	'commande_reference_numero' => 'Značka č. ',
 	'commande_statut' => 'Stav',
+	'configurer_titre' => 'Nastaviť zásuvný modul Commande',
 	'confirmer_supprimer_commande' => 'Môžete potvrdiť odstránenie tejto objednávky?',
-	'contact_label' => 'Contact :', # NEW
+	'contact_label' => 'Kontakt:',
 	'contenu' => 'Obsah',
 
 	// D
-	'date_commande_label' => 'Date de création :', # NEW
-	'date_envoi_label' => 'Date d\'envoi :', # NEW
-	'date_maj_label' => 'Date de mise à jour :', # NEW
-	'date_paiement_label' => 'Date de paiement :', # NEW
+	'date_commande_label' => 'Dátum vytvorenia:',
+	'date_envoi_label' => 'Dátum odoslania:',
+	'date_maj_label' => 'Dátum aktualizácie:',
+	'date_paiement_label' => 'Dátum platby:',
 	'designation' => 'Označenie',
 
 	// E
@@ -45,30 +46,69 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facture_num' => 'Faktúra č. <span>@num@</span>',
 
 	// I
-	'info_numero_commande' => 'COMMANDE NUMÉRO :', # NEW
+	'info_numero_commande' => 'OBJEDNÁVKA ČÍSLO:',
 	'info_toutes_commandes' => 'Všetky objednávky',
 
 	// M
-	'modifier_commande_statut' => 'Cette commande est :', # NEW
+	'modifier_commande_statut' => 'Táto objednávka je:',
 	'montant' => 'Množstvo',
 
 	// N
 	'nom_bouton_plugin' => 'Objednávky',
+	'notifications_activer_explication' => 'Posielať e-mailom oznamy o príkaze?',
+	'notifications_activer_label' => 'Aktivovať',
+	'notifications_cfg_titre' => 'Oznamy',
+	'notifications_client_explication' => 'Posielať zákazníkovi oznamy?',
+	'notifications_client_label' => 'Zákazník',
+	'notifications_expediteur_administrateur_label' => 'Vybrať administrátora:',
+	'notifications_expediteur_choix_administrateur' => 'administrátor',
+	'notifications_expediteur_choix_email' => 'e-mail',
+	'notifications_expediteur_choix_facteur' => 'idem plugin Facteur', # NEW
+	'notifications_expediteur_choix_webmaster' => 'webmaster',
+	'notifications_expediteur_email_label' => 'Zadajte e-mailovú adresu:',
+	'notifications_expediteur_explication' => 'Vyberte odosielateľa oznamov pre predávajúceho a kupujúceho',
+	'notifications_expediteur_label' => 'Odosielateľ',
+	'notifications_expediteur_webmaster_label' => 'Vybrať webmastera:',
+	'notifications_explication' => 'Oznamy sa používajú na posielanie e-mailov po zmenách v stave spracovania objednávky: čaká, vybavuje sa, odoslaná, čiastočne zaplatená, zaplatená, vrátená, čiastočne vrátiť',
+	'notifications_parametres' => 'Parametre oznamov',
+	'notifications_quand_explication' => 'Pri akých zmenách stavu poslať oznam?',
+	'notifications_quand_label' => 'Spustenie',
+	'notifications_vendeur_administrateur_label' => 'Vyberte jedného administrátora alebo viacerých:',
+	'notifications_vendeur_choix_administrateur' => 'jeden administrátor alebo viacerí',
+	'notifications_vendeur_choix_email' => 'jeden e-mail alebo viacero e-mailov',
+	'notifications_vendeur_choix_webmaster' => 'jeden webmaster alebo viacerí',
+	'notifications_vendeur_email_explication' => 'Zadajte jednu e-mailovú adresu alebo viac e-mailových adries a oddeľte ich čiarkami:',
+	'notifications_vendeur_email_label' => 'E-mail(y) :',
+	'notifications_vendeur_explication' => 'Vyberte príjemcu (-ov) oznamov na odoslanie predávajúcemu ',
+	'notifications_vendeur_label' => 'Predávajúci',
+	'notifications_vendeur_webmaster_label' => 'Vyberte jedného webmastera alebo viacerých:',
+
+	// P
+	'parametres_cfg_titre' => 'Parametre',
+	'parametres_duree_vie_explication' => 'Zadajte čas platnosti objednávky v tomto stave spracovania (v sekundách):',
+	'parametres_duree_vie_label' => 'Čas platnosti',
 
 	// R
-	'reference' => 'Naše číslo',
-	'reference_label' => 'Référence :', # NEW
-	'reference_ref' => 'Référence @ref@', # NEW
+	'reference' => 'Značka',
+	'reference_label' => 'Značka:',
+	'reference_ref' => 'Značka @ref@',
 
 	// S
+	'simuler' => 'Simulovať zmenu stavu',
 	'statut_attente' => 'Čaká',
 	'statut_encours' => 'Vybavuje sa',
 	'statut_envoye' => 'Odoslaná',
-	'statut_label' => 'Statut :', # NEW
+	'statut_label' => 'Stav:',
 	'statut_partiel' => 'Čiastočne zaplatená',
 	'statut_paye' => 'Zaplatená',
-	'statut_retour' => 'Vrátiť',
-	'statut_retour_partiel' => 'Čiastočne vrátiť'
+	'statut_retour' => 'Vrátená',
+	'statut_retour_partiel' => 'Čiastočne vrátiť',
+
+	// U
+	'une_commande_sur' => 'Vaša objednávka – @nom@',
+
+	// V
+	'votre_commande_sur' => 'Vaša objednávka – @nom@'
 );
 
 ?>
