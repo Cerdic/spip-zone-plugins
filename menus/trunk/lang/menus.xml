@@ -1,12 +1,12 @@
 <traduction module="menus" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/menus/trunk/lang/" reference="fr">
 	<langue code="ca" />
 	<langue code="de">
-		<traducteur nom="klaus" />
+		<traducteur nom="klaus++" />
 	</langue>
 	<langue code="en">
-		<traducteur nom="suske" />
+		<traducteur nom="Suske" />
 		<traducteur nom="RastaPopoulos" />
-		<traducteur nom="mark_baber" />
+		<traducteur nom="Mark" />
 		<traducteur nom="kent1" />
 	</langue>
 	<langue code="es">
