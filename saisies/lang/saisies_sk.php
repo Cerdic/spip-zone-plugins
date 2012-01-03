@@ -14,33 +14,33 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_parcourir_mediatheque' => 'Prehľadať knižnicu multimédií',
 
 	// C
-	'construire_action_annuler' => 'Annuler', # NEW
-	'construire_action_configurer' => 'Configurer', # NEW
-	'construire_action_deplacer' => 'Déplacer', # NEW
-	'construire_action_dupliquer' => 'Dupliquer', # NEW
-	'construire_action_dupliquer_copie' => '(copie)', # NEW
-	'construire_action_supprimer' => 'Supprimer', # NEW
-	'construire_ajouter_champ' => 'Ajouter un champ', # NEW
-	'construire_attention_enregistrer' => 'N\'oubliez pas d\'enregistrer vos modifications !', # NEW
+	'construire_action_annuler' => 'Zrušiť',
+	'construire_action_configurer' => 'Nastaviť',
+	'construire_action_deplacer' => 'Presunúť',
+	'construire_action_dupliquer' => 'Duplikovať',
+	'construire_action_dupliquer_copie' => '(kópia)',
+	'construire_action_supprimer' => 'Odstrániť',
+	'construire_ajouter_champ' => 'Pridať pole',
+	'construire_attention_enregistrer' => 'Nezabudnite uložiť zmeny!',
 	'construire_attention_modifie' => 'Le formulaire ci-dessous est différent du formulaire initial. Vous avez la possibilité de le réinitialiser à son état avant vos modifications.', # NEW
 	'construire_attention_supprime' => 'Vos modifications comportent des suppressions de champs. Veuillez confirmer l\'enregistrement de cette nouvelle version du formulaire.', # NEW
-	'construire_aucun_champs' => 'Il n\'y a pour l\'instant aucun champ dans ce formulaire.', # NEW
-	'construire_confirmer_supprimer_champ' => 'Voulez-vous vraiment supprimer ce champ ?', # NEW
+	'construire_aucun_champs' => 'V tomto formulári nie je momentálne žiadne pole',
+	'construire_confirmer_supprimer_champ' => 'Chcete odstrániť toto pole?',
 	'construire_info_nb_champs_masques' => '@nb@ champ(s) masqué(s) le temps de configurer le groupe.', # NEW
 	'construire_position_explication' => 'Indiquez devant quel autre champ sera placé celui-ci.', # NEW
-	'construire_position_fin_formulaire' => 'À la fin du formulaire', # NEW
-	'construire_position_fin_groupe' => 'À la fin du groupe @groupe@', # NEW
-	'construire_position_label' => 'Position du champ', # NEW
+	'construire_position_fin_formulaire' => 'Na koniec formulára',
+	'construire_position_fin_groupe' => 'Na koniec skupiny @groupe@',
+	'construire_position_label' => 'Umiestnenie poľa',
 	'construire_reinitialiser' => 'Réinitialiser le formulaire', # NEW
 	'construire_reinitialiser_confirmer' => 'Vous allez perdre toutes vos modifications. Êtes-vous sûr de vouloir revenir au formulaire initial ?', # NEW
-	'construire_verifications_aucune' => 'Aucune', # NEW
-	'construire_verifications_label' => 'Type de vérification à effectuer', # NEW
+	'construire_verifications_aucune' => 'Žiadne',
+	'construire_verifications_label' => 'Typ overenia, ktorý sa má vykonať',
 
 	// E
 	'erreur_option_nom_unique' => 'Ce nom est déjà utilisé par un autre champ et il doit être unique dans ce formulaire.', # NEW
 
 	// I
-	'info_configurer_saisies' => 'Page de test des Saisies', # NEW
+	'info_configurer_saisies' => 'Testovacia stránka Saisies',
 
 	// L
 	'label_annee' => 'Rok',
@@ -56,11 +56,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_rub_interface_label' => 'Viacjazyčné zobrazenie',
 	'option_attention_explication' => 'Správa je dôležitejšia ako vysvetlivka.',
 	'option_attention_label' => 'Varovanie',
-	'option_autocomplete_defaut' => 'Laisser par défaut', # NEW
+	'option_autocomplete_defaut' => 'Nechať ako predvolené',
 	'option_autocomplete_explication' => 'Au chargement de la page, votre navigateur peut pré-remplir le champ en fonction de son historique', # NEW
-	'option_autocomplete_label' => 'Pré-remplissage du champ', # NEW
-	'option_autocomplete_off' => 'Désactiver', # NEW
-	'option_autocomplete_on' => 'Activer', # NEW
+	'option_autocomplete_label' => 'Automaticky vyplniť pole',
+	'option_autocomplete_off' => 'Deaktivovať',
+	'option_autocomplete_on' => 'Aktivovať',
 	'option_cacher_option_intro_label' => 'Skryť prvý prázdny výber',
 	'option_choix_destinataires_explication' => 'Jeden autor alebo viacerí, z ktorých si používateľ môže vybrať. Ak nie je vybratý žiaden, vyberie sa autor, ktorý nainštaloval stránku.',
 	'option_choix_destinataires_label' => 'Možní príjemcovia',
@@ -97,7 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_nom_label' => 'Názov poľa',
 	'option_obligatoire_label' => 'Povinné pole',
 	'option_option_intro_label' => 'Označenie prvého prázdneho výberu',
-	'option_option_statut_label' => 'Afficher les statuts', # NEW
+	'option_option_statut_label' => 'Zobraziť stav',
 	'option_pliable_label' => 'Roztiahnuteľné',
 	'option_pliable_label_case' => 'Skupina polí sa dá roztiahnuť alebo stiahnuť.',
 	'option_plie_label' => 'Už stiahnutá',
@@ -119,8 +119,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_text' => 'Normálny',
 
 	// S
-	'saisie_auteurs_explication' => 'Permet de sélectionner un ou plusieurs auteurs', # NEW
-	'saisie_auteurs_titre' => 'Auteurs', # NEW
+	'saisie_auteurs_explication' => 'Umožňuje vám vybrať jedného alebo viacerých autorov',
+	'saisie_auteurs_titre' => 'Autori',
 	'saisie_case_explication' => 'Používa sa na aktivovanie alebo deaktivovanie konkrétnej možnosti.',
 	'saisie_case_titre' => 'Jedno zaškrtávacie políčko',
 	'saisie_checkbox_explication' => 'Používa sa na výber niekoľkých možností pomocou zaškrtávacích políčok.',

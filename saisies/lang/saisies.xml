@@ -3,13 +3,16 @@
 	<langue code="de">
 		<traducteur nom="klaus" />
 	</langue>
-	<langue code="en" />
+	<langue code="en">
+		<traducteur nom="kent1" />
+	</langue>
 	<langue code="es">
 		<traducteur nom="severo" />
 	</langue>
 	<langue code="fa">
 		<traducteur nom="davood" />
 	</langue>
+	<langue code="fr" />
 	<langue code="fr_tu">
 		<traducteur nom="beatnick" />
 	</langue>

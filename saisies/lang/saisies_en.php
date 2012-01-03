@@ -14,33 +14,33 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_parcourir_mediatheque' => 'Browse through the multimedia library',
 
 	// C
-	'construire_action_annuler' => 'Annuler', # NEW
-	'construire_action_configurer' => 'Configurer', # NEW
-	'construire_action_deplacer' => 'Déplacer', # NEW
-	'construire_action_dupliquer' => 'Dupliquer', # NEW
-	'construire_action_dupliquer_copie' => '(copie)', # NEW
-	'construire_action_supprimer' => 'Supprimer', # NEW
-	'construire_ajouter_champ' => 'Ajouter un champ', # NEW
-	'construire_attention_enregistrer' => 'N\'oubliez pas d\'enregistrer vos modifications !', # NEW
-	'construire_attention_modifie' => 'Le formulaire ci-dessous est différent du formulaire initial. Vous avez la possibilité de le réinitialiser à son état avant vos modifications.', # NEW
-	'construire_attention_supprime' => 'Vos modifications comportent des suppressions de champs. Veuillez confirmer l\'enregistrement de cette nouvelle version du formulaire.', # NEW
-	'construire_aucun_champs' => 'Il n\'y a pour l\'instant aucun champ dans ce formulaire.', # NEW
-	'construire_confirmer_supprimer_champ' => 'Voulez-vous vraiment supprimer ce champ ?', # NEW
-	'construire_info_nb_champs_masques' => '@nb@ champ(s) masqué(s) le temps de configurer le groupe.', # NEW
-	'construire_position_explication' => 'Indiquez devant quel autre champ sera placé celui-ci.', # NEW
-	'construire_position_fin_formulaire' => 'À la fin du formulaire', # NEW
-	'construire_position_fin_groupe' => 'À la fin du groupe @groupe@', # NEW
-	'construire_position_label' => 'Position du champ', # NEW
-	'construire_reinitialiser' => 'Réinitialiser le formulaire', # NEW
-	'construire_reinitialiser_confirmer' => 'Vous allez perdre toutes vos modifications. Êtes-vous sûr de vouloir revenir au formulaire initial ?', # NEW
-	'construire_verifications_aucune' => 'Aucune', # NEW
-	'construire_verifications_label' => 'Type de vérification à effectuer', # NEW
+	'construire_action_annuler' => 'Cancel',
+	'construire_action_configurer' => 'Set up',
+	'construire_action_deplacer' => 'Move',
+	'construire_action_dupliquer' => 'Duplicate',
+	'construire_action_dupliquer_copie' => '(copy)',
+	'construire_action_supprimer' => 'Delete',
+	'construire_ajouter_champ' => 'Add a field',
+	'construire_attention_enregistrer' => 'Remember to save your changes!',
+	'construire_attention_modifie' => 'The form below is different from the initial form. You can reset it to the state before the changes.',
+	'construire_attention_supprime' => 'Your changes include deletions of fields. Please confirm the registration of the new version of the form.',
+	'construire_aucun_champs' => 'There is currently no field in this form.',
+	'construire_confirmer_supprimer_champ' => 'Do you really want to delete this field?',
+	'construire_info_nb_champs_masques' => '@nb@ hidden field(s) the time to set up the group.',
+	'construire_position_explication' => 'Specify before which other field this one should be placed.',
+	'construire_position_fin_formulaire' => 'At the end of the form',
+	'construire_position_fin_groupe' => 'At the end of the group @groupe@',
+	'construire_position_label' => 'Position of the field',
+	'construire_reinitialiser' => 'Reset form',
+	'construire_reinitialiser_confirmer' => 'You will lose all your changes. Are you sure you want to go back to the original form?',
+	'construire_verifications_aucune' => 'None',
+	'construire_verifications_label' => 'Type of verification to be performed',
 
 	// E
-	'erreur_option_nom_unique' => 'Ce nom est déjà utilisé par un autre champ et il doit être unique dans ce formulaire.', # NEW
+	'erreur_option_nom_unique' => 'This name is already used by another field and it must be unique in this form.',
 
 	// I
-	'info_configurer_saisies' => 'Page de test des Saisies', # NEW
+	'info_configurer_saisies' => 'Test page for Entries',
 
 	// L
 	'label_annee' => 'Year',
@@ -56,11 +56,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_rub_interface_label' => 'Multilingual display',
 	'option_attention_explication' => 'A message more important than the explanation.',
 	'option_attention_label' => 'Warning',
-	'option_autocomplete_defaut' => 'Laisser par défaut', # NEW
-	'option_autocomplete_explication' => 'Au chargement de la page, votre navigateur peut pré-remplir le champ en fonction de son historique', # NEW
-	'option_autocomplete_label' => 'Pré-remplissage du champ', # NEW
-	'option_autocomplete_off' => 'Désactiver', # NEW
-	'option_autocomplete_on' => 'Activer', # NEW
+	'option_autocomplete_defaut' => 'Leave the default',
+	'option_autocomplete_explication' => 'At page load, your browser may pre-fill the field based on its history',
+	'option_autocomplete_label' => 'Pre-fill the field',
+	'option_autocomplete_off' => 'Disable',
+	'option_autocomplete_on' => 'Enable',
 	'option_cacher_option_intro_label' => 'Hide the first empty choice',
 	'option_choix_destinataires_explication' => 'One or several authors among which the user can make his choice. If nothing selected, it will be the author who installed the site to be chosen.',
 	'option_choix_destinataires_label' => 'Possible recipients',
@@ -97,7 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_nom_label' => 'Field name',
 	'option_obligatoire_label' => 'Required field',
 	'option_option_intro_label' => 'Label for the first empty choice',
-	'option_option_statut_label' => 'Afficher les statuts', # NEW
+	'option_option_statut_label' => 'Show the status',
 	'option_pliable_label' => 'Expandable',
 	'option_pliable_label_case' => 'The group of fields can be expanded or shrunk.',
 	'option_plie_label' => 'Already shrunk',
@@ -119,8 +119,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_text' => 'Normal',
 
 	// S
-	'saisie_auteurs_explication' => 'Permet de sélectionner un ou plusieurs auteurs', # NEW
-	'saisie_auteurs_titre' => 'Auteurs', # NEW
+	'saisie_auteurs_explication' => 'Allows you to select one or more authors',
+	'saisie_auteurs_titre' => 'Autors',
 	'saisie_case_explication' => 'Used to activate or deactivate a particular option.',
 	'saisie_case_titre' => 'Single check box',
 	'saisie_checkbox_explication' => 'Used to select several options using check boxes.',
