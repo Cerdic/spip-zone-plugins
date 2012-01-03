@@ -3,6 +3,7 @@
 		<traducteur nom="kent1" />
 	</langue>
 	<langue code="es" />
+	<langue code="fr" />
 	<langue code="sk">
 		<traducteur nom="jaro" />
 	</langue>
