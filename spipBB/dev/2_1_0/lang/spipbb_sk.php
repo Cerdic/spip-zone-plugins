@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'a_propos_auteur_dpt' => 'Všetko o:',
 	'admin_action_01_configuration' => 'Konfigurácia',
-	'admin_action_02_etat' => 'Prehľad diskusných fór',
+	'admin_action_02_etat' => 'Stav diskusných fór',
 	'admin_action_ZZ_debug' => 'Ladiť',
 	'admin_action_effacer' => 'Zamietnuté príspevky',
 	'admin_action_fromphorum' => 'Import z Phorumu',
@@ -63,7 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_form_messages' => ' ',
 	'admin_form_monter' => 'Nahor',
 	'admin_form_sujets' => ' ',
-	'admin_forums_affiche_membre_defaut' => 'Chcete aktivovať uvádzanie mien používateľov v zozname používateľov, keď sa nerozhodli sami?<br />[Predvolená možnosť je Nie ]',
+	'admin_forums_affiche_membre_defaut' => 'Chcete aktivovať uvádzanie mien používateľov v zozname používateľov, keď sa nerozhodli sami?<br />[Predvolená možnosť je Nie]',
 	'admin_forums_configuration' => 'Nastavenie SpipBB',
 	'admin_forums_configuration_avatar' => 'Všeobecné nastavenia avatarov',
 	'admin_forums_configuration_options' => 'Možnosti SpipBB',
@@ -162,7 +162,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_orig_extra_info' => 'Polia s údajmi NAVIAC alebo iná databázová tabuľka, tabuľka auteurs_profils.',
 	'config_spipbb' => 'Základné nastavenie SpipBB, aby ste mohli používať diskusné fóra s týmto zásuvným modulom.',
 	'contacter' => 'Kontakt',
-	'contacter_dpt' => 'Kontakt: ',
+	'contacter_dpt' => 'Kontaktovať: ',
 	'creer_categorie' => 'Vytvoriť novú kategóriu',
 	'creer_forum' => 'Vytvoriť nové diskusné fórum',
 
@@ -383,7 +383,7 @@ nbr_post@ príspevkov. Budú vymazané spolu s ňou!\\n',
 	'posts_effaces' => 'Témy odstránené!',
 	'posts_refuses' => 'Zamietnuté témy na vymazanie!',
 	'previsualisation' => 'Ukážka',
-	'profil' => 'Vizitka –  ',
+	'profil' => 'Vizitka  ',
 
 	// R
 	'raison_clic' => 'Kliknite sem',
@@ -402,7 +402,7 @@ nbr_post@ príspevkov. Budú vymazané spolu s ňou!\\n',
 	'retour_forum' => 'Späť na úvodnú stránku diskusného fóra',
 
 	// S
-	's_abonner_a' => 'RSS: prihlásiť sa na odber tejto témy',
+	's_abonner_a' => 'RSS. Odoberať:',
 	'secteur_forum' => 'KOREŇOVÝ ADRESÁR',
 	'selection_efface' => 'Zmazať výber...',
 	'selection_tri_dpt' => 'Vyberte si kritérium triedenia:',
@@ -445,7 +445,7 @@ _ • [pomocníka a podporu na spipbb.spip-zone.info.->http://spipbb.spip-zone.
 	'sw_admin_no_spam' => 'Žiadny spam',
 	'sw_ban_ip_titre' => 'Zakázať aj IP adresu?',
 	'sw_config_exceptions' => 'Tu môžete nastaviť výnimky pre privilegovaných používateľov. Používatelia, ktorí spĺňajú tieto kritériá budú môcť posielať spamové slová.',
-	'sw_config_exceptions_titre' => 'Výnimky',
+	'sw_config_exceptions_titre' => 'Riadenie výnimiek',
 	'sw_config_generale' => 'Nastavené slová v spamoch:',
 	'sw_config_generale_titre' => 'Všeobecné nastavenia filtrovania spamu',
 	'sw_config_warning' => 'Tu môžete zadať text na rozoslanie cez odkazovač pre svojich používateľov, ak sa rozhodnete ich varovať cez odkazovač, keď odošlú spamové slovo (max. 255 znakov).',
@@ -484,9 +484,9 @@ _ • [pomocníka a podporu na spipbb.spip-zone.info.->http://spipbb.spip-zone.
 
 	// V
 	'visible_annuaire_forum' => 'Zobraziť v zozname používateľov',
-	'visites' => 'Návštev',
+	'visites' => 'Zobrazené',
 	'voir' => 'POZRI',
-	'votre_bio' => 'Slovom krátky životopis.',
+	'votre_bio' => 'Krátky životopis niekoľkými slovami.',
 	'votre_email' => 'Váš e-mailová adresa',
 	'votre_nouveau_passe' => 'Nové heslo',
 	'votre_signature' => 'Váš podpis',
