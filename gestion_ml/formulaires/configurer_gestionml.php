@@ -95,7 +95,6 @@ function gestionml_auteurs_listes($config) {
 	$auteurs = sql_allfetsel("id_auteur, nom", "spip_auteurs", "statut='0minirezo'", "", "nom");
 	foreach($auteurs as $ligne)
 	{
-		spip_log("gestionml_auteurs_listes id_auteur ".$ligne['id_auteur']." config ".$config['listes_auteur_'.$ligne['id_auteur']],"gestionml");
 		$saisies[] = array(
 			'saisie' => 'selection_multiple',
 			'options' => array(
