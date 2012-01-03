@@ -1,28 +1,28 @@
 <traduction module="crayons" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/crayons/lang/" reference="fr">
 	<langue code="ast">
-		<traducteur nom="xuacu" />
+		<traducteur nom="Xuacu" />
 	</langue>
 	<langue code="ca" />
 	<langue code="de" />
 	<langue code="en">
-		<traducteur nom="paolo2" />
+		<traducteur nom="Paolo" />
 		<traducteur nom="kent1" />
 	</langue>
 	<langue code="es">
 		<traducteur nom="severo" />
 	</langue>
 	<langue code="fa">
-		<traducteur nom="davood" />
+		<traducteur nom="Davood Hossein" />
 	</langue>
 	<langue code="fr" />
 	<langue code="fr_tu">
 		<traducteur nom="beatnick" />
 	</langue>
 	<langue code="it">
-		<traducteur nom="filou" />
+		<traducteur nom="Fil" />
 	</langue>
 	<langue code="nl">
-		<traducteur nom="michelpossoz" />
+		<traducteur nom="mpossoz" />
 	</langue>
 	<langue code="sk">
 		<traducteur nom="jaro" />
