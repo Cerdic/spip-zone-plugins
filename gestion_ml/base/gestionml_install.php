@@ -22,7 +22,11 @@ function gestionml_upgrade($nom_meta_base_version,$version_cible){
 			$config = array();
 		}
 		$config = array_merge(array(
-				'hebergeur' => '0'
+				'hebergeur' => '0',
+				'serveur_distant' => 'https://www.ovh.com/soapi/soapi-re-1.28.wsdl',
+				'domaine' => 'mondomaine.tld',
+				'identifiant' => '',
+				'mot_de_passe' => '',
 		), $config);
 		ecrire_meta('gestionml', serialize($config));
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');

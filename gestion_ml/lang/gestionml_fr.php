@@ -16,8 +16,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'btn_ajouter' => 'Ajouter',
 
 	// C
-	'config_local_legend' => 'Paramétrage du serveur local' ,
-	'config_ovh_legend' => 'Paramétrage OVH' ,
+	'configurer_local_legend' => 'Paramétrage du serveur local' ,
+	'configurer_ovh_legend' => 'Paramétrage OVH' ,
+	'configurer_explication' => 'Consultez le <a href="http://jquery.malsup.com/corner/" target="_blank">site du plugin jQuery Corner</a> pour une démonstration de ses possibilités.',
+	'configurer_titre' => 'Configurer Gestion ML',
 	'confirmer_suppression' => 'Etes-vous sûr de vouloir supprimer cet email ?',
 
 	// D
@@ -37,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_infos' => 'Information sur la liste',
 
 	// L
-	'label_afficher_hebergeurs' => 'Choisir votre hébergeur de listes' ,
+	'label_hebergeur' => 'Choisir votre hébergeur de listes' ,
 	'label_ajouter_mail' => 'Ajouter un email',
 	'label_auteurs_listes' => 'Configuration des listes gérables par auteur' ,
 	'label_domaine' => 'Votre domaine' ,
@@ -58,5 +60,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'supprimer_abonne' => 'Supprimer l\'abonné',
+
+	// T
+	'titre_menu_configurer' => 'Gestion ML',
+	'titre_menu_gerer' => 'Gestion des listes de diffusion',
 );
 ?>
