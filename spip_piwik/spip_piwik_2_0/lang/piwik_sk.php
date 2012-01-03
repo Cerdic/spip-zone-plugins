@@ -14,8 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_description_piwik' => 'Tu môžete uviesť svoj identifikátor pre piwik, ako aj adresu svojho štatistického servera.',
 	'cfg_erreur_recuperation_data' => 'Pri komunikácii so serverom sa vyskytol problém – prosím, skontrolujte adresu a token',
-	'cfg_erreur_token' => 'Your identification token is invalid', # NEW
-	'cfg_erreur_user_token' => 'The username and token do not match each other.', # NEW
+	'cfg_erreur_token' => 'Váš identifikačný reťazec je neplatný',
+	'cfg_erreur_user_token' => 'Používateľské meno alebo reťazec nie sú správne.',
 
 	// E
 	'explication_adresse_serveur' => 'Zadajte adresu stránky bez "http://" alebo "https://" a bez lomky na konci',
@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_restreindre_auteurs_public' => 'Obmedziť prístup určitým prihláseným používateľom (verejné)',
 	'label_restreindre_statut_prive' => 'Obmedziť prístup do súkromnej zóny pre určité funkcie',
 	'label_restreindre_statut_public' => 'Obmedziť prístup do súkromnej zóny pre určité funkcie',
-	'label_token' => 'Identification token on the server', # NEW
+	'label_token' => 'Identifikačný reťazec na server',
 
 	// M
 	'mode_insertion_balise' => 'Vložiť pomocou tagu #PIWIK (musíte upraviť svoje šablóny)',
