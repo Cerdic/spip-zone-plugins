@@ -1,10 +1,9 @@
 <traduction module="contacts" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/contacts_et_organisations/trunk/lang/" reference="fr">
 	<langue code="en">
 		<traducteur nom="RastaPopoulos" />
-		<traducteur nom="davood" />
 	</langue>
 	<langue code="fa">
-		<traducteur nom="davood" />
+		<traducteur nom="Davood Hossein" />
 	</langue>
 	<langue code="fr" />
 	<langue code="sk">
