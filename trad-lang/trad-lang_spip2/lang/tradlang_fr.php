@@ -30,8 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'entrerlangue' => 'Ajouter un code langue',
-	'erreur_aucun_module' => 'Il n\'y a pas de modules disponibles dans la base.',
 	'erreur_aucun_item_langue_mere' => 'La langue mère "@lang_mere@" ne contient aucun item de langue.',
+	'erreur_aucun_module' => 'Il n\'y a pas de modules disponibles dans la base.',
 	'erreur_autorisation_modifier_modules' => 'Vous n\'êtes pas autorisé à traduire les modules de langue.',
 	'erreur_choisir_lang_cible' => 'Choisissez une langue cible de traduction.',
 	'erreur_choisir_lang_orig' => 'Choisissez une langue d\'origine qui servira de base à la traduction.',
@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_filtrer_status' => 'Filtrer par statut :',
 	'info_langue_mere' => '(langue mère)',
 	'info_module_traduction' => '@total@ @statut@ (@percent@%)',
-	'info_module_traduit_pc' => 'Module traduit à @pc@%', 
+	'info_module_traduit_pc' => 'Module traduit à @pc@%',
 	'info_nb_tradlang' => '@nb@ chaînes de langue',
 	'info_nb_tradlang_module' => '@nb@ modules de langue',
 	'info_status_ok' => 'OK',

@@ -1,6 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/trad-lang/trad-lang_spip2/lang/
+// extrait automatiquement de http://trad.spip.org
+// ** ne pas modifier le fichier **
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -30,8 +32,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'entrerlangue' => 'إضافة رمز لغة',
-	'erreur_aucun_module' => 'لا توجد اي وحدة متاحة في قاعدة البيانات.',
 	'erreur_aucun_item_langue_mere' => 'لا تحتوي اللغة الأم "@lang_mere@" على أي بند لغة.',
+	'erreur_aucun_module' => 'لا توجد اي وحدة متاحة في قاعدة البيانات.',
 	'erreur_autorisation_modifier_modules' => 'لا يحق لك ترجمة وحدات اللغات.',
 	'erreur_choisir_lang_cible' => 'اختر لغة تكون هدفاً للترجمة.',
 	'erreur_choisir_lang_orig' => 'اختر لغة تكون مصدراً للترجمة.',

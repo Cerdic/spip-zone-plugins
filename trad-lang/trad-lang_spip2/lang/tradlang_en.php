@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.mediaspip.net/spip.php?page=tradlang
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucunmodule' => 'No module.',
 
 	// B
+	'bouton_activer_lang' => 'Activer la langue "@lang@" pour ce module', # NEW
 	'bouton_supprimer_module' => 'Delete this module',
 	'bouton_traduire' => 'Translate >>',
 
@@ -27,9 +28,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_legende_autorisation_modifier' => 'Edit translations',
 	'cfg_legende_autorisation_voir' => 'show translation interface',
 	'codelangue' => 'Language code',
+	'crayon_changer_statut' => 'Attention! Vous avez modifié le contenu de la chaîne sans en modifier le statut.', # NEW
 
 	// E
 	'entrerlangue' => 'Add a language code',
+	'erreur_aucun_item_langue_mere' => 'La langue mère "@lang_mere@" ne contient aucun item de langue.', # NEW
 	'erreur_aucun_module' => 'There are no modules available in the database.',
 	'erreur_autorisation_modifier_modules' => 'You are not allowed to translate the language modules.',
 	'erreur_choisir_lang_cible' => 'Choose a target language to translate.',
@@ -38,9 +41,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_code_langue_existant' => 'This alternative language already exists for this module',
 	'erreur_code_langue_invalide' => 'This language code is invalid',
 	'erreur_langues_autorisees_insuffisantes' => 'You should at least select two languages',
+	'erreur_langues_differentes' => 'Choisissez une langue cible différente de la langue originale', # NEW
 	'erreur_module_inconnu' => 'This module is not available',
 	'erreur_pas_langue_cible' => 'Select a language',
 	'erreur_repertoire_local_inexistant' => 'Warning: the directory used to save files localy does not exist: "squelettes/lang"',
+	'explication_langue_cible' => 'La langue vers laquelle vous traduisez.', # NEW
+	'explication_langue_origine' => 'La langue depuis laquelle vous traduisez (Seules les langues 100% complètes sont disponibles).', # NEW
 	'explication_langues_autorisees' => 'Users will be able to create a new translation only in the selected languages​​.',
 	'explication_sauvegarde_locale' => 'Will save the files in the "squelettes" folder of the site',
 	'explication_sauvegarde_post_edition' => 'Will save temporary files each time you change a language string',
@@ -57,6 +63,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_chaine_originale' => 'This string is the source',
 	'info_filtrer_status' => 'Filter by status:',
 	'info_langue_mere' => '(parent language)',
+	'info_module_traduction' => '@total@ @statut@ (@percent@%)', # NEW
+	'info_module_traduit_pc' => 'Module traduit à @pc@%', # NEW
 	'info_nb_tradlang' => '@nb@ language strings',
 	'info_nb_tradlang_module' => '@nb@ language modules',
 	'info_status_ok' => 'OK',
@@ -65,6 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_creer_langue_cible' => 'Create a new target language',
 	'item_langue_cible' => 'Target language: ',
 	'item_langue_origine' => 'Source language:',
+	'item_manquant' => '1 item est manquant dans cette langue (par rapport à la langue mère)', # NEW
 	'items_en_trop' => '@nb@ items are over in that language (from the parent language)',
 	'items_manquants' => '@nb@ items are missing in that language (from the parent language)',
 	'items_modif' => 'Modified items',
@@ -78,6 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_langue_mere' => 'Parent language',
 	'label_langues_autorisees' => 'Allow only selected languages',
 	'label_nommodule' => 'Module name',
+	'label_priorite' => 'Priorité', # NEW
 	'label_proposition_google_translate' => 'Google Translate proposal',
 	'label_recherche_module' => 'In the module:',
 	'label_recherche_status' => 'With the status:',
@@ -108,11 +118,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_recharger_page' => 'Reload the page.',
 	'lien_recherche_avancee' => 'Advanced search',
 	'lien_retour' => 'Back',
+	'lien_retour_module' => 'Retour au module "@module@"', # NEW
 	'lien_revenir_traduction' => 'Back to the translation page',
 	'lien_sauvegarder' => 'Backup / Restore the current file.',
 	'lien_telecharger' => '[Download]',
 	'lien_traduction_module' => 'Module ',
 	'lien_traduction_vers' => ' to ',
+	'lien_trier_langue_non' => 'Afficher le bilan global.', # NEW
 	'lien_utiliser_google_translate' => 'Use this version',
 	'lien_voir_toute_chaines_module' => 'See all the strings of the module.',
 
@@ -189,31 +201,42 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_total_chaine_traduite' => 'Number of translated strings:',
 	'texte_tout_selectionner' => 'Select all',
 	'texte_type_operation' => 'Operation type',
+	'texte_voir_bilan' => 'Voir le <a href="@url@" class="spip_in">bilan des traductions</a>.', # NEW
+	'th_avancement' => 'Avancement', # NEW
+	'th_comm' => 'Commentaire', # NEW
+	'th_items_modifs' => 'Items modifiés', # NEW
+	'th_items_new' => 'Nouveaux items', # NEW
+	'th_items_traduits' => 'Items traduits', # NEW
 	'th_langue' => 'Language',
+	'th_langue_mere' => 'Langue mère', # NEW
 	'th_langue_origine' => 'Text in the source language',
 	'th_module' => 'Module',
 	'th_status' => 'Status',
+	'th_total_items_module' => 'Nombre total d\'items', # NEW
 	'th_traduction' => 'Translation',
 	'titre_bilan' => 'Review of translations',
+	'titre_bilan_langue' => 'Bilan des traductions de la langue "@lang@"', # NEW
+	'titre_bilan_module' => 'Bilan des traductions du module "@module@"', # NEW
 	'titre_commentaires_chaines' => 'Comments on this string',
+	'titre_logo_tradlang_module' => 'Logo du module', # NEW
 	'titre_modifications_chaines' => 'Recent changes in this string',
 	'titre_page_configurer_tradlang' => 'Setup of the Trad-lang plugin',
+	'titre_page_tradlang_module' => 'Module #@id@ : @module@', # NEW
 	'titre_recherche_tradlang' => 'Language strings
 	',
 	'titre_revisions_sommaire' => 'Recent changes',
 	'titre_tradlang' => 'Trad-lang',
 	'titre_tradlang_chaines' => 'Trad-lang language string',
 	'titre_tradlang_module' => 'Trad-lang language modules',
+	'titre_tradlang_modules' => 'Modules de langue de Trad-lang', # NEW
 	'titre_traduction' => 'Translations',
 	'titre_traduction_chaine_de_vers' => 'Translation of the string "@chaine@" of the module "@module@" from <abbr title="@lang_orig_long@">@lang_orig@</abbr> to <abbr title="@lang_cible_long@">@lang_cible@</abbr>',
 	'titre_traduction_de' => 'Translation of',
 	'titre_traduction_module_de_vers' => 'Translation of the module "@module@" from <abbr title="@lang_orig_long@">@lang_orig@</abbr> to <abbr title="@lang_cible_long@">@lang_cible@</abbr>',
+	'titre_traduire' => 'Traduire', # NEW
 	'tradlang' => 'Trad-Lang',
 	'traduction' => 'Translation @lang@',
-	'traductions' => 'Translations',
-
-	// V
-	'visumodule' => 'Module summary'
+	'traductions' => 'Translations'
 );
 
 ?>
