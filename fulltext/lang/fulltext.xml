@@ -1,9 +1,9 @@
 <traduction module="fulltext" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/fulltext/lang/" reference="fr">
 	<langue code="ar">
-		<traducteur nom="kandalaft" />
+		<traducteur nom="George" />
 	</langue>
 	<langue code="ast">
-		<traducteur nom="xuacu" />
+		<traducteur nom="Xuacu" />
 	</langue>
 	<langue code="ca" />
 	<langue code="cs" />
