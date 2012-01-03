@@ -55,6 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_numero' => 'رقم',
 	'label_objets_actifs' => 'Objets', # NEW
 	'label_pays' => 'البلد',
+	'label_telephone' => 'Téléphone', # NEW
 	'label_titre' => 'Titre', # NEW
 	'label_type_adresse' => 'Type d\'adresse', # NEW
 	'label_type_email' => 'Type de courriel', # NEW

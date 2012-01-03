@@ -50,11 +50,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_boite_postale' => 'Poštová schránka',
 	'label_code_postal' => 'PSČ',
-	'label_complement' => 'Doplňujúce informácie', # MODIF
+	'label_complement' => 'Iné',
 	'label_email' => 'E-mail',
 	'label_numero' => 'Telefónne číslo',
 	'label_objets_actifs' => 'Objekty',
 	'label_pays' => 'Krajina',
+	'label_telephone' => 'Téléphone', # NEW
 	'label_titre' => 'Nadpis',
 	'label_type_adresse' => 'Typ adresy',
 	'label_type_email' => 'Typ e-mailu',
