@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_librairies' => 'Unable to locate OpenID authentification libraries',
 	'erreur_openid' => 'OpenID authentication error: have you entered a valid OpenID?',
-	'erreur_openid_info_manquantes' => 'Votre fournisseur OpenID ne nous a pas envoyé toutes les informations nécessaires', # NEW
+	'erreur_openid_info_manquantes' => 'Votre fournisseur OpenID ne nous a pas envoyé toutes les informations nécessaires', # MODIF
 
 	// F
 	'form_forum_indiquer_openid' => 'You can sign up on this site with your OpenID address',
@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_login_openid_inconnu' => 'Cette adresse OpenID est inconnue. Corrigez, ou enregistrez-la dans votre profil.', # NEW
 	'form_login_openid_ok' => 'This login uses OpenID.',
 	'form_login_openid_pass' => 'Connect with password.',
-	'form_login_statut_nouveau' => 'Pour votre première connexion, vous devez utiliser le mot de passe qui vous a été envoyé par mail', # NEW
+	'form_login_statut_nouveau' => 'Pour votre première connexion, vous devez utiliser le mot de passe qui vous a été envoyé par mail', # MODIF
 	'form_pet_votre_openid' => 'OpenID login',
 
 	// O
