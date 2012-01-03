@@ -1,15 +1,18 @@
-<traduction module="menus" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/menus/branches/v0_9/lang/" reference="fr">
+<traduction module="menus" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/menus/trunk/lang/" reference="fr">
 	<langue code="ca" />
 	<langue code="de">
 		<traducteur nom="klaus" />
 	</langue>
 	<langue code="en">
 		<traducteur nom="suske" />
+		<traducteur nom="RastaPopoulos" />
 		<traducteur nom="mark_baber" />
+		<traducteur nom="kent1" />
 	</langue>
 	<langue code="es">
 		<traducteur nom="tin" />
 	</langue>
+	<langue code="fr" />
 	<langue code="it" />
 	<langue code="sk">
 		<traducteur nom="jaro" />
