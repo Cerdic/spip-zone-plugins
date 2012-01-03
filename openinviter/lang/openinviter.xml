@@ -1,4 +1,5 @@
 <traduction module="openinviter" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/openinviter/lang/" reference="fr">
+	<langue code="fr" />
 	<langue code="sk">
 		<traducteur nom="jaro" />
 	</langue>
