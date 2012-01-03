@@ -1,20 +1,20 @@
 <traduction module="spipbb" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/spipBB/dev/2_1_0/lang/" reference="fr">
 	<langue code="ast">
-		<traducteur nom="xuacu" />
+		<traducteur nom="Xuacu" />
 	</langue>
 	<langue code="ca">
 		<traducteur nom="merce" />
 	</langue>
 	<langue code="de">
-		<traducteur nom="klaus" />
+		<traducteur nom="klaus++" />
 	</langue>
 	<langue code="en">
-		<traducteur nom="mark_baber" />
-		<traducteur nom="davood" />
+		<traducteur nom="Mark" />
+		<traducteur nom="Davood Hossein" />
 	</langue>
 	<langue code="es" />
 	<langue code="fa">
-		<traducteur nom="davood" />
+		<traducteur nom="Davood Hossein" />
 	</langue>
 	<langue code="fr" />
 	<langue code="fr_tu">
@@ -23,7 +23,7 @@
 	<langue code="gl" />
 	<langue code="km" />
 	<langue code="nl">
-		<traducteur nom="michelpossoz" />
+		<traducteur nom="mpossoz" />
 	</langue>
 	<langue code="pt" />
 	<langue code="sk">
