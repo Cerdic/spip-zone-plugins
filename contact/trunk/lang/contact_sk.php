@@ -8,107 +8,107 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'alerte_effacement' => 'Confirmez l\'effacement des données de configuration de contact.',
-	'aucun_message' => 'Aucun message à afficher', # NEW
+	'alerte_effacement' => 'Potvrďte nastavenie údajov kontaktu.',
+	'aucun_message' => 'Žiadna správa, ktorá by sa dala zobraziť', # NEW
 
 	// B
-	'bouton_effacer' => 'Gommer', # NEW
+	'bouton_effacer' => 'Vymazať', # NEW
 
 	// C
-	'champ_adresse' => 'Address', # MODIF
-	'champ_civi_explication' => 'Réglages avancées du champ civilité', # NEW
+	'champ_adresse' => 'Adresa',
+	'champ_civi_explication' => 'Podrobné nastavenia poľa Oslovenie', # NEW
 	'champ_civi_mademoiselle_ok' => 'V poli oslovenie ponúkať možnosť "slečna"', # NEW
-	'champ_civilite' => 'Civility',
-	'champ_code_postal' => 'Zip Code', # MODIF
-	'champ_etat' => 'State',
-	'champ_impose' => 'field imposed',
-	'champ_infolettre' => 'Newsletter', # MODIF
-	'champ_mail' => 'Mail', # MODIF
-	'champ_nom' => 'Last Name', # MODIF
-	'champ_obligatoire' => 'Mandatory ?', # MODIF
-	'champ_organisation' => 'Organisation', # MODIF
-	'champ_pays' => 'Country', # MODIF
-	'champ_portable' => 'Mobile Phone Number', # MODIF
-	'champ_prenom' => 'First Name',
-	'champ_sujet' => 'Subject', # MODIF
-	'champ_telephone' => 'Phone Number',
-	'champ_texte' => 'Text', # MODIF
-	'champ_ville' => 'City', # MODIF
+	'champ_civilite' => 'Oslovenie',
+	'champ_code_postal' => 'PSČ',
+	'champ_etat' => 'Štát',
+	'champ_impose' => 'pole zavedené',
+	'champ_infolettre' => 'Buletin',
+	'champ_mail' => 'E-mail',
+	'champ_nom' => 'Priezvisko',
+	'champ_obligatoire' => 'Povinné?',
+	'champ_organisation' => 'Spoločnosť',
+	'champ_pays' => 'Krajina',
+	'champ_portable' => 'Číslo na mobil',
+	'champ_prenom' => 'Krstné meno',
+	'champ_sujet' => 'Predmet',
+	'champ_telephone' => 'Telefónne číslo',
+	'champ_texte' => 'Text',
+	'champ_ville' => 'Mesto',
 	'configuration_barre_forum' => 'Pridať klávesový panel do diskusných fór.',
-	'configuration_barre_impossible' => 'Un autre plugin interdit l\'usage du porte-plume dans l\'espace public, les réglages ci-dessous seront sans effets.',
-	'configuration_barre_oui' => 'View the complete bar typo.',
-	'configuration_champs_message' => 'PenHolder Settings.',
-	'configuration_champs_message_explication' => 'Typo toolbar settings, associated to the text\'s message.',
-	'configuration_description' => 'Customize your contact form.', # MODIF
-	'configuration_destinataires' => 'Recipients', # MODIF
-	'configuration_destinataires_explication' => 'Choose one or more authors recipients your visitors may contact. When not defined, the first author will be used (the person who installed the website).',
-	'configuration_destinataires_plusieurs' => 'Allow visitors to choose among <b>several</b> recipient authors',
-	'configuration_destinataires_plusieurs_et' => 'Allow visitors to choose among <b>several</b> recipients from the selected list above andadd those from the group of authors eventually passed to the form.',
-	'configuration_destinataires_plusieurs_ou' => 'Allow visitors to choose among <b>several</b> recipients from the selected list above or from the group of authors eventually passed to the form',
-	'configuration_destinataires_tous' => 'Make <b>all</b> authors as contact email recipients', # MODIF
-	'configuration_destinataires_tous_et' => 'Make <b>all</b> these authors as recipients of the email and add the group of authors passed to the form',
-	'configuration_destinataires_tous_ou' => 'Make <b>all</b> these authors as recipients of the email or only those passed to the form',
-	'configuration_destinataires_un' => 'Allow visitors to choose <b>a single</b> recipient author',
-	'configuration_destinataires_un_et' => 'Force visitors to choose <b>a single</b> recipient from the selected list above andadd those from the group of authors eventually passed to the form.',
-	'configuration_destinataires_un_ou' => 'Force visitors to choose <b>a single</b> recipient from the selected list above or from the group of authors eventually passed to the form',
-	'configuration_intro' => 'Introduction', # MODIF
-	'configuration_intro_explication' => 'You may here add a text that will introduce your contact form.',
-	'configuration_no_barre' => 'Do not show typo toolbar.', # MODIF
-	'configuration_no_previsualisation' => 'Show typo toolbar without preview.',
-	'configuration_pj' => 'Attachement',
-	'configuration_pj_autoriser' => 'Allow adding attachement',
-	'configuration_pj_facteur_absent' => 'You have to install the Facteur plugin to use this functionality.', # MODIF
-	'configuration_pj_nb_max' => 'Maximum number of attachments',
-	'configuration_regle_liste_explication' => 'Select a calculation rule from the list of potential recipients and the selection method proposed to the visitors.',
+	'configuration_barre_impossible' => 'Un autre plugin interdit l\'usage du porte-plume dans l\'espace public, les réglages ci-dessous seront sans effets.', # MODIF
+	'configuration_barre_oui' => 'View the complete bar typo.', # MODIF
+	'configuration_champs_message' => 'Nastavenie modulu porte-plume.',
+	'configuration_champs_message_explication' => 'Typo toolbar settings, associated to the text\'s message.', # MODIF
+	'configuration_description' => 'Upravte si kontaktný formulár.',
+	'configuration_destinataires' => 'Príjemcovia',
+	'configuration_destinataires_explication' => 'Choose one or more authors recipients your visitors may contact. When not defined, the first author will be used (the person who installed the website).', # MODIF
+	'configuration_destinataires_plusieurs' => 'Allow visitors to choose among <b>several</b> recipient authors', # MODIF
+	'configuration_destinataires_plusieurs_et' => 'Allow visitors to choose among <b>several</b> recipients from the selected list above andadd those from the group of authors eventually passed to the form.', # MODIF
+	'configuration_destinataires_plusieurs_ou' => 'Allow visitors to choose among <b>several</b> recipients from the selected list above or from the group of authors eventually passed to the form', # MODIF
+	'configuration_destinataires_tous' => 'Medzi príjemcov kontaktného e-mailu pridať <b>všetkých</b> autorov.',
+	'configuration_destinataires_tous_et' => 'Make <b>all</b> these authors as recipients of the email and add the group of authors passed to the form', # MODIF
+	'configuration_destinataires_tous_ou' => '...alebo len tí, eventuálne pridaní do formulára',
+	'configuration_destinataires_un' => 'Prinútiť návštevníkov vybrať si <b>jedného</b> jedného príjemcu z tohto zoznamu',
+	'configuration_destinataires_un_et' => '...prevažne autori eventuálne pridaní do formulára.',
+	'configuration_destinataires_un_ou' => '...alebo medzi skupinou autorov eventuálne pridanou do formulára',
+	'configuration_intro' => 'Úvod',
+	'configuration_intro_explication' => 'Zadajte nejaký text, ktorým predstavíte formulár.',
+	'configuration_no_barre' => 'Nezobrazovať typografický panel s nástrojmi',
+	'configuration_no_previsualisation' => 'Zobraziť panel s nástrojmi bez tlačidla ukážky.',
+	'configuration_pj' => 'Prílohy',
+	'configuration_pj_autoriser' => 'Povoliť pridávanie príloh',
+	'configuration_pj_facteur_absent' => 'Na to, aby ste mohli využívať túto funkciu, si musíte nainštalovať zásuvný modul Facteur.',
+	'configuration_pj_nb_max' => 'Maximálny počet príloh',
+	'configuration_regle_liste_explication' => 'Vyberte pravidlo na vytvorenie zoznamu potenciálnych príjemcov a na spôsob výberu, ktorý sa ponúkne používateľovi',
 	'configuration_texteinfolettre' => 'Text bulletinu',
 	'configuration_texteinfolettre_explication' => 'Môžete zmeniť text priradený k týmto zaškrtávacím políčkam ',
-	'consulter_memoire' => 'This message is saved on your site:',
-	'courriel_de' => 'From', # MODIF
-	'courriel_pour' => 'To', # MODIF
+	'consulter_memoire' => 'Táto správa bola uložená na vašu stránku:',
+	'courriel_de' => 'Od (koho?)',
+	'courriel_pour' => 'Komu',
 
 	// D
-	'deplacement_possible' => 'Vertical displacement by drag and drop',
-	'description_menu_contact' => 'Élément de menu vers la page du formulaire de contact', # NEW
+	'deplacement_possible' => 'Zvislý presun metódou drag and drop',
+	'description_menu_contact' => 'Odkaz v menu na stránku kontaktného formulára', # NEW
 	'description_page-contact' => 'Prístupné cez <i>spip.php?page=contact,</i> táto stránka môže poskytnúť alternatívny kontaktný formulár (pamätajte si, že treba pridať odkaz do vášho menu).',
 
 	// F
-	'form_destinataire' => 'Choose a recipient', # MODIF
-	'form_destinataires' => 'Choose recipients', # MODIF
-	'form_pj_ajouter_pluriel' => 'Add attachements',
-	'form_pj_ajouter_singulier' => 'Add attachement',
-	'form_pj_fichier_ajoute' => 'The file has been added : ',
-	'form_pj_importer' => 'Import a file', # MODIF
-	'form_pj_previsu_pluriel' => 'Attachements',
-	'form_pj_previsu_singulier' => 'Attachement',
-	'form_pj_supprimer' => 'Delete', # MODIF
-	'form_pj_titre' => 'File title', # MODIF
-	'forum_attention_nbre_caracteres' => '<b>Warning!</b> Your message needs to be at least @nbre_caract@ characters in length.',
+	'form_destinataire' => 'Vyberte príjemcu',
+	'form_destinataires' => 'Vyberte príjemcov',
+	'form_pj_ajouter_pluriel' => 'Pridať prílohy',
+	'form_pj_ajouter_singulier' => 'Pridať prílohu',
+	'form_pj_fichier_ajoute' => 'Bol pripojený súbor: ',
+	'form_pj_importer' => 'Nahrať súbor',
+	'form_pj_previsu_pluriel' => 'Prílohy',
+	'form_pj_previsu_singulier' => 'Príloha',
+	'form_pj_supprimer' => 'Odstrániť',
+	'form_pj_titre' => 'Názov súboru',
+	'forum_attention_nbre_caracteres' => '<b>Pozor!</b> Vaša správa musí mať aspoň @nbre_caract@ znakov.',
 
 	// H
-	'horodatage' => 'Form posted on: @horodatage@.', # MODIF
+	'horodatage' => 'Formulár odoslaný: @horodatage@.',
 
 	// I
-	'inforigine' => 'Information from the form: ', # MODIF
-	'informez_moi' => 'I agree to receive, by e-mail, information from your organisation.',
-	'infos_collecte' => 'Information collected',
-	'infos_supplementaires' => 'Additional Infos',
+	'inforigine' => 'Údaje z formulára: ',
+	'informez_moi' => 'Súhlasím s prijímaním informácií od Vašej spoločnosti prostredníctvom elektronickej pošty.',
+	'infos_collecte' => 'Získané údaje',
+	'infos_supplementaires' => 'Ďalšie údaje',
 
 	// M
-	'madame' => 'Madam', # MODIF
-	'mademoiselle' => 'Mademoiselle', # NEW
+	'madame' => 'Pani',
+	'mademoiselle' => 'Slečna', # NEW
 	'modele_label_auteur' => 'Dopredu vybrať autora (nepovinné)?',
 	'modele_nom_formulaire' => 'Podrobný kontaktný formulár',
-	'monsieur' => 'Mister', # MODIF
-	'msg_accueil' => 'Here are messages from contacts you have received.',
-	'msg_contact' => 'Message from contact', # MODIF
+	'monsieur' => 'Pán',
+	'msg_accueil' => 'Tu sú kontaktné správy, ktoré ste dostali.',
+	'msg_contact' => 'Správa od kontaktu',
 	'msg_contacts' => 'Správy od kontaktu',
-	'msg_expediteur' => 'Sender: ',
-	'msg_lus' => 'Messages already read',
-	'msg_messagerie' => 'Contact messaging', # MODIF
-	'msg_nouveaux' => 'New messages', # MODIF
-	'msg_pas_nouveaux' => 'You havn\'t new messages.', # MODIF
-	'msg_revenir_accueil' => 'Return to the list of contact messages.',
-	'msg_supprimer_message' => 'Delete this message', # MODIF
+	'msg_expediteur' => 'Odosielateľ: ',
+	'msg_lus' => 'Správa bola už prečítaná',
+	'msg_messagerie' => 'Kontakt e-mailom',
+	'msg_nouveaux' => 'Nové správy',
+	'msg_pas_nouveaux' => 'Nemáte nové správy.',
+	'msg_revenir_accueil' => 'Vrátiť sa na zoznam kontakných správ.',
+	'msg_supprimer_message' => 'Odstrániť túto správu',
 
 	// N
 	'noisette_label_afficher_titre_noisette' => 'Zobraziť názov?',
@@ -119,17 +119,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'par' => 'Pre:',
-	'preselection' => 'Décocher tous les items de la liste de destinataires', # NEW
+	'preselection' => 'Odznačiť všetky položky v zozname príjemcov', # NEW
 
 	// S
-	'sauv_message' => 'Save contact messages', # MODIF
-	'sauv_message_explication' => 'Allow to save messages from contacts, and display them in a dedicated interface.',
-	'sauv_message_ok' => 'Save contact messages', # MODIF
-	'succes' => 'Thank you, your message has been sent.<br />We will reply as soon as possible.<br />The team of @equipe_site@',
+	'sauv_message' => 'Uložiť kontaktné správy',
+	'sauv_message_explication' => 'Dokáže zaznamenať kontaktné správy a zobraziť ich v príslušnom e-maile.',
+	'sauv_message_ok' => 'Uložiť kontaktné správy',
+	'succes' => 'Ďakujeme, vaša správa bola odoslaná.<br />Odpovieme Vám len čo to bude možné.<br />Tím stránky @equipe_site@',
 
 	// T
-	'titre' => 'Contact Form', # MODIF
-	'titre_court' => 'Contact' # NE
+	'titre' => 'Kontaktný formulár',
+	'titre_court' => 'Kontakt' # NE
 );
 
 ?>
