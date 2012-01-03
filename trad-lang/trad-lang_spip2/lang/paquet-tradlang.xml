@@ -2,4 +2,7 @@
 	<langue code="ar" />
 	<langue code="en" />
 	<langue code="fr" />
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
 </traduction>
