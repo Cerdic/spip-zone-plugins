@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'confirmer_supprimer_entree' => 'Voulez-vous vraiment supprimer cette entrée ?', # NEW
+	'confirmer_supprimer_entree' => 'Do you really want delete this entry?',
 
 	// D
 	'description_menu_accueil' => 'Link to website\'s home page.',
@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_rubriques' => 'Displays a list of sections and, if desired, the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
 	'description_menu_rubriques_articles' => 'Display a list of sections, optionally including sub-sections and articles nested to several levels. By default, all sections will be displayed starting from the site root and sorted by title (numerically then alphabetically).Articles in a given section will always be listed after any sub-sections.',
 	'description_menu_secteurlangue' => 'This entry can be used by sites which have one language per sector. It displays a menu which lists the sections of the sector corresponding to the language of the page, and if desired the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
-	'description_menu_texte_libre' => 'Just the text that you would like', # MODIF
+	'description_menu_texte_libre' => 'Just the text that you would like, or a SPIP language code (<:...:>)',
 
 	// E
 	'editer_menus_editer' => 'Edit this menu',
@@ -33,8 +33,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menus_exporter' => 'Export this menu',
 	'editer_menus_nouveau' => 'Create a new menu',
 	'editer_menus_titre' => 'Site menus',
-	'entree_afficher_articles' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)', # NEW
-	'entree_afficher_item_suite' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)', # NEW
+	'entree_afficher_articles' => 'Include articles in the menu? (put "oui" for this)',
+	'entree_afficher_item_suite' => 'Include articles in the menu? (put "oui" for this)',
 	'entree_articles_max' => 'Si oui, afficher les articles seulement si la rubrique contient au maximum xx articles ? (mettre le nombre maximum d\'articles, laissez vide pour afficher tous les articles)', # NEW
 	'entree_articles_max_affiches' => 'Si oui, limiter le nombre d\'articles listés à xx maximum (suivis d\'un item "... Tous les articles" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum d\'articles, laissez vide pour afficher tous les articles)', # NEW
 	'entree_aucun' => 'None',
@@ -72,14 +72,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_tri_alpha' => 'Sort criterion (alphabetic)', # MODIF
 	'entree_tri_alpha_articles' => 'Critère de tri des articles (alphabétique). Si vous saisissez "date", le critère ajouté sera {par date} et les articles seront triés par date', # NEW
 	'entree_tri_alpha_articles_inverse' => 'Inverser le critère de tri alphabétique ? (mettre "oui" pour cela)', # NEW
-	'entree_tri_alpha_inverse' => 'Inverser le critère de tri alphabétique ? (mettre "oui" pour cela)', # NEW
+	'entree_tri_alpha_inverse' => 'Reverse the alphabetical sorting? (put "oui" for this)',
 	'entree_tri_num' => 'Sort criterion (numeric)', # MODIF
 	'entree_tri_num_articles' => 'Critère de tri des articles (numérique). Si vous saisissez "titre", le critère ajouté sera {par num titre} et les articles seront triés par numéro de titre', # NEW
 	'entree_tri_num_articles_inverse' => 'Inverser le critère de tri numérique ? (mettre "oui" pour cela)', # NEW
-	'entree_tri_num_inverse' => 'Inverser le critère de tri numérique ? (mettre "oui" pour cela)', # NEW
+	'entree_tri_num_inverse' => 'Reverse the digital sort order? (put "oui" for this)',
 	'entree_type_objet' => 'Object type',
 	'entree_url' => 'URL',
-	'entree_url_public' => 'Return address after logging in', # MODIF
+	'entree_url_public' => 'Return address after logging in',
 	'erreur_aucun_type' => 'No item type was found.',
 	'erreur_autorisation' => 'You are not allowed to modify menus.',
 	'erreur_identifiant_deja' => 'This identifier is already used by another menu.',
@@ -88,7 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_mise_a_jour' => 'An error occured during database update.',
 	'erreur_parametres' => 'There is an error in the parameters of the page',
 	'erreur_type_menu' => 'You need to choose a type of menu',
-	'erreur_type_menu_inexistant' => 'Ce type de menu n\'est pas/plus disponible', # NEW
+	'erreur_type_menu_inexistant' => 'This kind of menu is not / no longer available',
 
 	// F
 	'formulaire_ajouter_entree' => 'Add a menu item',
@@ -120,26 +120,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_titre' => 'Title',
 
 	// I
-	'info_afficher_articles' => 'Les articles seront inclus dans le menu.', # NEW
-	'info_articles_max' => 'Seulement si la rubrique contient au plus @max@ articles', # NEW
-	'info_articles_max_affiches' => 'Affichage limité à @max@ articles', # NEW
-	'info_classe_parent' => 'Classe des éléments parents : ', # NEW
+	'info_afficher_articles' => 'The articles will be included in the menu.',
+	'info_articles_max' => 'Only if the section contains more than @max@ articles',
+	'info_articles_max_affiches' => 'Display limited to @max@ articles',
+	'info_classe_parent' => 'Class of the parent elements:',
 	'info_connexion_obligatoire' => 'Connection required',
 	'info_deconnexion_obligatoire' => 'Only when disconnected',
-	'info_masquer_articles_uniques' => 'Articles uniques masqués', # NEW
+	'info_masquer_articles_uniques' => 'Unique articles hidden',
 	'info_numero_menu' => 'MENU NUMBER:',
 	'info_page_speciale' => 'Link to the page « @page@ »',
 	'info_page_speciale_zajax' => 'Modalbox for the "@page@" page for the "@bloc@" block',
-	'info_rubrique_courante' => 'Rubrique courante', # NEW
-	'info_rubriques_exclues' => ' / sauf rubrique(s) @id_rubriques@', # NEW
-	'info_rubriques_max_affichees' => 'Affichage limité à @max@ rubriques', # NEW
-	'info_secteur_exclus' => ' / sauf secteur(s) @id_secteur@', # NEW
+	'info_rubrique_courante' => 'Current section',
+	'info_rubriques_exclues' => ' / except section(s) @id_rubriques@',
+	'info_rubriques_max_affichees' => 'Display limited to @max@ sections',
+	'info_secteur_exclus' => ' / except sector(s) @id_secteur@',
 	'info_sousrub_cond' => 'Only the subsections of the current section are displayed.',
 	'info_tous_groupes_mots' => 'All keyword groups',
 	'info_traduction_recuperee' => 'The context will determine the selected translation',
-	'info_tri' => 'Sort:', # MODIF
+	'info_tri' => 'Sort sections:',
 	'info_tri_alpha' => '(alphabetical)',
-	'info_tri_articles' => 'Tri des articles :', # NEW
+	'info_tri_articles' => 'Sort articles:',
 	'info_tri_num' => '(numerical)',
 
 	// N
@@ -158,14 +158,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_objet' => 'Article, section or other SPIP object',
 	'nom_menu_page_speciale' => 'Link to a page template',
 	'nom_menu_page_speciale_zajax' => 'A block in a Zpip page',
-	'nom_menu_rubriques' => 'List or tree of sections', # MODIF
+	'nom_menu_rubriques' => 'List or tree of sections and articles',
 	'nom_menu_rubriques_evenements' => 'Section-related events',
 	'nom_menu_secteurlangue' => 'Language sectors',
 	'nom_menu_texte_libre' => 'Free text',
 
 	// T
-	'tous_les_articles' => '... Tous les articles', # NEW
-	'toutes_les_rubriques' => '... Toutes les rubriques' # NEW
+	'tous_les_articles' => '... All articles',
+	'toutes_les_rubriques' => '... All sections'
 );
 
 ?>
