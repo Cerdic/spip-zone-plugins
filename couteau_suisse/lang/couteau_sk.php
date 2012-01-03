@@ -11,75 +11,75 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts' => '@objet@:',
 
 	// A
-	'attente_confirmation' => 'Waiting for confirmation', # MODIF
+	'attente_confirmation' => 'Čakajú na schválenie',
 
 	// B
-	'base_donnees' => 'Base de données', # NEW
-	'bloc_deplier' => 'Déplier', # NEW
-	'bloc_replier' => 'Replier', # NEW
+	'base_donnees' => 'Databáza', # NEW
+	'bloc_deplier' => 'Rozložiť', # NEW
+	'bloc_replier' => 'Poskladať', # NEW
 
 	// C
-	'colorer_fond' => 'Colour the background', # MODIF
-	'colorer_texte' => 'Colour the text', # MODIF
-	'configurer' => 'Configure the Penknife', # MODIF
-	'connections' => 'Connections', # MODIF
+	'colorer_fond' => 'Farba pozadia',
+	'colorer_texte' => 'Farba textu',
+	'configurer' => 'Nastaviť modul Vreckový nožík',
+	'connections' => 'Prihlásenia',
 
 	// D
-	'date_court' => '@jour@/@mois@/@annee@', # MODIF
-	'derniers_connectes' => 'Last connected:',
+	'date_court' => '@jour@. @mois@. @annee@',
+	'derniers_connectes' => 'Posledné prihlásenie:',
 
 	// E
-	'email_forum' => 'Please give your email address!',
-	'explique_spam' => 'Warning : you have used forbidden tags, characters or words. <br /><br />Start again!',
+	'email_forum' => 'Uveďte, prosím, svoju e-mailovú adresu!',
+	'explique_spam' => 'Pozor: použili ste zakázané tagy, znaky alebo slová. <br /><br />Začnite odznova!',
 
 	// L
-	'lancer_test' => 'Lancer le test !', # NEW
-	'lutte_spam' => 'Fight against SPAM', # MODIF
+	'lancer_test' => 'Spustiť test !', # NEW
+	'lutte_spam' => 'Bojujte proti SPAMU',
 
 	// M
 	'maj_actu' => 'Nanútiť aktualizáciu na diaľku',
-	'maj_liste' => 'List of detected plugins:',
-	'maj_maj' => 'Update the selected plugin',
-	'maj_ok' => 'This [plugin->@zip@] appears to be [up-to-date->@url@].',
+	'maj_liste' => 'Zoznam nájdených zásuvných modulov:',
+	'maj_maj' => 'Aktualizovať vybratý zásuvný modul',
+	'maj_ok' => 'Zdá sa, že tento [zásuvný modul->@zip@] je [aktuálny.->@url@]',
 	'maj_rev' => 'Ver. @revision@',
-	'maj_rev_ko' => 'The [remote version->@url@] could not be found.',
-	'maj_rev_ok' => 'Version [@revision@->@url@] is [available->@zip@].',
+	'maj_rev_ko' => '[Vzdialenú verziu->@url@] sa nepodarilo nájsť.',
+	'maj_rev_ok' => '[K dispozícii->@zip@] je verzia [@revision@.->@url@]',
 	'maj_spip' => 'Potom, čo ste starostlivo aktualizovali všetky zásuvné moduly, sa veľmi odporúča aktualizovať aj SPIP tak, že kliknete na odkaz vyššie a dodržíte odporúčané pokyny.',
-	'maj_svn' => 'This SVN plugin appears to be [up-to-date->@url@].',
-	'maj_verif' => 'First check which file is right for you:',
-	'maj_verif2' => 'N.B. After clicking on the button above, make sure that the file you downloaded corresponds to the plugin you wish to update.',
-	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu être identifié.',
-	'msg_publies' => 'Uniquement les messages publiés', # NEW
+	'maj_svn' => 'Zdá sa, že tento zásuvný modul SVN je [aktuálny.->@url@]',
+	'maj_verif' => 'Najprv skontrolujte, ktorý archív je pre vás vhodný:',
+	'maj_verif2' => 'Pozor! Po kliknutí na tlačidlo sa uistite, že súbor, ktorý ste si stiahli, sa zhoduje so zásuvným modulom, ktorý chcete aktualizovať.',
+	'maj_zip_ko' => 'Vzdialený súbor .zip sa nepodarilo identifikovať.',
+	'msg_publies' => 'Iba publikované správy', # NEW
 
 	// N
-	'nom_email_forum' => 'Please give your name or email address!',
-	'nom_forum' => 'Please give your name!',
-	'non_confirmes' => 'Unconfirmed:',
+	'nom_email_forum' => 'Uveďte, prosím, svoje meno a svoju e-mailovú adresu!',
+	'nom_forum' => 'Uveďte, prosím, svoje meno!',
+	'non_confirmes' => 'Neschválené:',
 
 	// O
-	'objet_article' => 'Article', # MODIF
-	'objet_articles' => 'Articles', # MODIF
-	'objet_auteur' => 'Author', # MODIF
-	'objet_auteurs' => 'Authors', # MODIF
-	'objet_breve' => 'News item',
-	'objet_breves' => 'News items',
-	'objet_mot' => 'Keyword', # MODIF
-	'objet_mots' => 'Keywords', # MODIF
-	'objet_petition' => 'Petition',
-	'objet_petitions' => 'Petitions',
-	'objet_rubrique' => 'Section', # MODIF
-	'objet_rubriques' => 'Sections', # MODIF
-	'objet_syndic' => 'Site', # MODIF
-	'objet_syndics' => 'Sites', # MODIF
+	'objet_article' => 'Článok',
+	'objet_articles' => 'Články',
+	'objet_auteur' => 'Autor',
+	'objet_auteurs' => 'Autori',
+	'objet_breve' => 'Novinka',
+	'objet_breves' => 'Novinky',
+	'objet_mot' => 'Kľúčové slovo',
+	'objet_mots' => 'Kľúčové slová',
+	'objet_petition' => 'Petícia',
+	'objet_petitions' => 'Petície',
+	'objet_rubrique' => 'Rubrika',
+	'objet_rubriques' => 'Rubriky',
+	'objet_syndic' => 'Stránka',
+	'objet_syndics' => 'Stránky',
 
 	// P
-	'page_debut' => 'First page',
-	'page_fin' => 'Last page',
-	'page_lien' => 'Page @page@: @title@', # MODIF
-	'page_precedente' => 'Previous page',
-	'page_suivante' => 'Next page', # MODIF
-	'plug_actifs' => 'Active plugins', # MODIF
-	'plug_inactifs' => 'Inactive plugins', # MODIF
+	'page_debut' => 'Prvá strana',
+	'page_fin' => 'Posledná strana',
+	'page_lien' => 'Strana @page@: @title@',
+	'page_precedente' => 'Predchádzajúca strana',
+	'page_suivante' => 'Ďalšia strana',
+	'plug_actifs' => 'Aktívne zásuvné moduly',
+	'plug_inactifs' => 'Neaktívne zásuvné moduly',
 	'plugin_xml' => 'Kolekcia malých, užitočných nástrojov, aby bolo riadenie vašej stránky ešte ľahšie.
 
 Každý nástroj sa dá osobitne (de)aktivovať  na [administračnej stránke zásuvného modulu->./?exec=admin_couteau_suisse]. Ak chcete nastaviť niekoľko možností stránky, kliknite na {{Konfiguráciu}}, potom vyberte kartu{{Vreckový nožík}}.
@@ -92,58 +92,58 @@ Prečítajte si dokumentáciu na: [spip-contrib.net->http://www.spip-contrib.net
 
 Kompatibilita: SPIP 1.92x and v2.0.x',
 	'pp_autobr' => 'Vložte blok textu s automatickým dopĺňaním',
-	'pp_blocs_bloc' => 'Insérer un bloc replié', # NEW
-	'pp_blocs_visible' => 'Insérer un bloc déplié', # NEW
-	'pp_chatons_inserer' => 'Insérer le chaton « @chaton@ »', # NEW
-	'pp_chatons_inserer_drop' => 'Insérer un chaton dans votre texte', # NEW
-	'pp_couleur_fond' => 'Fond @couleur@', # NEW
+	'pp_blocs_bloc' => 'Vložiť poskladaný blok', # NEW
+	'pp_blocs_visible' => 'Vložiť rozložený blok', # NEW
+	'pp_chatons_inserer' => 'Vložiť mačiatko "@chaton@"', # NEW
+	'pp_chatons_inserer_drop' => 'Vložiť mačiatko do vášho textu', # NEW
+	'pp_couleur_fond' => 'Pozadie @couleur@', # NEW
 	'pp_couleur_icone_fond' => 'F', # NEW
 	'pp_couleur_icone_texte' => 'T', # NEW
-	'pp_couleur_texte' => 'Texte @couleur@', # NEW
-	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
-	'pp_decoration_inserer' => 'Décoration « @balise@.@racc@ »', # NEW
-	'pp_decoration_inserer_drop' => 'Appliquer au texte une « décoration » personnalisée', # NEW
-	'pp_decoupe_onglets' => 'Insérer un système d\'onglet',
-	'pp_decoupe_separateur' => 'Insérer un séparateur de page ou d\'onglet',
-	'pp_filets_inserer' => 'Insérer un filet de style « @filet@ »', # NEW
-	'pp_filets_inserer_drop' => 'Insérer un filet de séparation', # NEW
-	'pp_smileys_inserer' => 'Insérer une frimousse @smiley@', # NEW
-	'pp_un_titre' => 'Un titre', # NEW
-	'pp_votre_texte' => 'Placez votre texte ici', # NEW
-	'pp_votre_titre' => 'Titre @nb@', # NEW
+	'pp_couleur_texte' => 'Text @couleur@', # NEW
+	'pp_couteau_suisse_drop' => 'Používať nástroj Vreckový nožík', # NEW
+	'pp_decoration_inserer' => 'Formátovanie "@balise@.@racc@"', # NEW
+	'pp_decoration_inserer_drop' => 'Použiť na text vlastné formátovanie', # NEW
+	'pp_decoupe_onglets' => 'Vložiť zoznam na základe tabulátorov',
+	'pp_decoupe_separateur' => 'Vložiť oddeľovač alebo tabulátor',
+	'pp_filets_inserer' => 'Vložiť zoznam v štýle "@filet@"', # NEW
+	'pp_filets_inserer_drop' => 'Vložiť rozbaľovací zoznam', # NEW
+	'pp_smileys_inserer' => 'Vložiť smajlíka @smiley@', # NEW
+	'pp_un_titre' => 'Názov', # NEW
+	'pp_votre_texte' => 'Svoj text umiestnite sem', # NEW
+	'pp_votre_titre' => 'Názov @nb@', # NEW
 
 	// S
-	'smileys_dispos' => 'Available smileys:', # MODIF
+	'smileys_dispos' => 'Dostupné smajlíky:',
 	'sommaire_page' => ', p@page@',
 	'sommaire_page_long' => ', page @page@',
-	'sommaire_titre' => 'Table of contents', # MODIF
+	'sommaire_titre' => 'Obsah',
 	'stats_auteur' => '@icon@ @nom@, @date@',
-	'stats_date' => '@jour@/@mois@/@annee@ at @h@:@m@',
+	'stats_date' => '@jour@. @mois@. @annee@ o @h@.@m@',
 
 	// T
-	'test_base' => 'Test de la base de données', # NEW
-	'test_manuel' => 'Test manuel', # NEW
-	'texte_formatspip' => 'ORIGINAL TEXT IN SPIP FORMAT', # MODIF
-	'textes_formatspip' => 'ORIGINAL TEXTS IN SPIP FORMAT', # MODIF
-	'titre' => 'Penknife', # MODIF
-	'tri_auteurs' => 'ORDER OF AUTHORS', # MODIF
-	'tri_descendre' => 'Move this author down', # MODIF
-	'tri_monter' => 'Move this author up', # MODIF
+	'test_base' => 'Testuje sa databáza', # NEW
+	'test_manuel' => 'Manuálny test', # NEW
+	'texte_formatspip' => 'PÔVODNÝ TEXT VO FORMÁTE SPIPu',
+	'textes_formatspip' => 'PÔVODNÉ TEXTY VO FORMÁTE SPIPu',
+	'titre' => 'Vreckový nožík',
+	'tri_auteurs' => 'PRADIE AUTOROV',
+	'tri_descendre' => 'Tohto autora posunúť nadol',
+	'tri_monter' => 'Tohto autora posunúť nahor',
 
 	// U
 	'url_verrouillee' => 'Adresa je zamknutá',
-	'urls_propres_erreur' => 'This format does not take into account the URLs listed below own',
-	'urls_propres_format' => 'Thecurrent format of URLs is: {{« @format@ »}}. [<span>[Configuration->@url@]</span>]',
-	'urls_propres_lien' => 'Public access link',
-	'urls_propres_objet' => 'Here is the list of the clean URLs stored in the database which visitors can use to explore your site.',
-	'urls_propres_titre' => 'URLs OWN', # MODIF
+	'urls_propres_erreur' => 'Tento formát nezohľadňuje internetové adresy uvedené nižšie .',
+	'urls_propres_format' => 'Aktuálny formát internetových adries je: {{"@format@".}} [<span>[Konfigurácia->@url@]</span>]',
+	'urls_propres_lien' => 'Verejný odkaz na prístup',
+	'urls_propres_objet' => 'Tu je zoznam čistých internetových adries uložených v databáze, ktoré môžu návštevníci použiť na prezeranie stránky.',
+	'urls_propres_titre' => 'Čisté internetové adresy',
 
 	// V
-	'variable_vide' => '(Empty)', # MODIF
-	'visiteurs_connectes' => 'Logged in visitors: @nb@',
+	'variable_vide' => '(Prázdna)',
+	'visiteurs_connectes' => 'Prihlásených návštevníkov: @nb@',
 
 	// W
-	'webmestres' => 'SPIP webmasters' # MODIF
+	'webmestres' => 'Webmasteri SPIPu'
 );
 
 ?>
