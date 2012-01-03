@@ -122,7 +122,7 @@ function critere_gis_dist($idb, &$boucles, $crit) {
 		$boucle->join['gis_liens']= array("'$id_table'","'id_objet'","'$primary'","'gis_liens.objet='.sql_quote('$objet')");
 		$boucle->from['gis'] = 'spip_gis';
 		$boucle->join['gis']= array("'gis_liens'","'id_gis'");
-		// bien renvoyer tous les points son attachés à l'objet
+		// bien renvoyer tous les points qui son attachés à l'objet
 		$boucle->group[] = 'gis_liens.id_gis';
 		// ajouter gis aux jointures et spécifier les jointures explicites pour pouvoir utiliser les balises de la table de jointure
 		// permet de passer dans trouver_champ_exterieur() depuis index_tables_en_pile()
