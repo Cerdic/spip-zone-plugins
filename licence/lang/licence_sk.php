@@ -15,25 +15,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_art_libre' => 'Licencia Free Art',
-	'description_cc_by' => 'Creative Commons - Attribution',
-	'description_cc_by_nc' => 'Creative Commons - Attribution Non-Commercial',
-	'description_cc_by_nc_nd' => 'Creative Commons - Attribution Non-Commercial No Derivatives',
-	'description_cc_by_nc_sa' => 'Creative Commons - Attribution Non-Commercial Share Alike', # MODIF
-	'description_cc_by_nd' => 'Creative Commons - Attribution No Derivatives',
-	'description_cc_by_sa' => 'Creative Commons - Attribution Share Alike', # MODIF
+	'description_cc_by' => 'Licencia Creative Commons - Attribution',
+	'description_cc_by_nc' => 'Licencia Creative Commons - Attribution Non-Commercial',
+	'description_cc_by_nc_nd' => 'Licencia Creative Commons - Attribution Non-Commercial No Derivatives',
+	'description_cc_by_nc_sa' => 'Licencia Creative Commons - Attribution Non-Commercial Share Alike',
+	'description_cc_by_nd' => 'Licencia Creative Commons - Attribution No Derivatives',
+	'description_cc_by_sa' => 'Licencia Creative Commons - Attribution Share Alike',
 	'description_copyright' => '© copyright autor článku',
-	'description_gpl' => 'Licencia GPL', # MODIF
+	'description_gpl' => 'Licencia GNU/GPL',
 
 	// L
 	'label_select_licence' => 'Vyberte licenciu',
 	'lien_art_libre' => 'http://artlibre.org/licence/lal/en',
-	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/deed.en', # NEW
-	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/deed.en', # NEW
-	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en', # NEW
-	'lien_cc_by_nc_sa' => 'http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en', # NEW
-	'lien_cc_by_nd' => 'http://creativecommons.org/licenses/by-nd/3.0/deed.en', # NEW
-	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/deed.en', # NEW
-	'lien_gfdl' => 'http://www.gnu.org/licenses/fdl.html', # NEW
+	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/legalcode',
+	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/legalcode',
+	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/legalcode',
+	'lien_cc_by_nc_sa' => 'http://creativecommons.org/licenses/by-nc-sa/3.0/legalcode',
+	'lien_cc_by_nd' => 'http://creativecommons.org/licenses/by-nd/3.0/legalcode',
+	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/legalcode',
+	'lien_gfdl' => 'http://www.gnu.org/licenses/fdl.html',
 	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
 
 	// N
@@ -49,15 +49,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_art_libre' => 'FAL',
-	'titre_cc_by' => 'CC by', # NEW
-	'titre_cc_by_nc' => 'CC by-nc', # NEW
-	'titre_cc_by_nc_nd' => 'CC by-nc-nd', # NEW
-	'titre_cc_by_nc_sa' => 'CC by-nc-sa', # NEW
-	'titre_cc_by_nd' => 'CC by-nd', # NEW
-	'titre_cc_by_sa' => 'CC by-sa', # NEW
+	'titre_cc_by' => 'Licencia CC by',
+	'titre_cc_by_nc' => 'Licencia CC by-nc',
+	'titre_cc_by_nc_nd' => 'Licencia CC by-nc-nd',
+	'titre_cc_by_nc_sa' => 'Licencia CC by-nc-sa',
+	'titre_cc_by_nd' => 'Licencia CC by-nd',
+	'titre_cc_by_sa' => 'Licencia CC by-sa',
 	'titre_copyright' => 'Autorské práva',
-	'titre_gfdl' => 'GNU FDL', # NEW
-	'titre_gpl' => 'GNU GPL' # MODIF
+	'titre_gfdl' => 'Licencia GNU FDL',
+	'titre_gpl' => 'Licencia GNU GPL'
 );
 
 ?>

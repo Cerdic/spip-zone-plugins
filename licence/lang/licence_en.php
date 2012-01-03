@@ -18,8 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_cc_by' => 'Creative Commons - Attribution',
 	'description_cc_by_nc' => 'Creative Commons - Attribution Non-Commercial',
 	'description_cc_by_nc_nd' => 'Creative Commons - Attribution Non-Commercial No Derivatives',
-	'description_cc_by_nc_sa' => 'Creative Commons - Attribution Non-Commercial Share Alike', # MODIF
-	'description_cc_by_nd' => 'Creative Commons - Attribution No Derivatives', # MODIF
+	'description_cc_by_nc_sa' => 'Creative Commons - Attribution Non-Commercial Share Alike',
+	'description_cc_by_nd' => 'Creative Commons - Attribution No Derivatives',
 	'description_cc_by_sa' => 'Creative Commons - Attribution Share Alike',
 	'description_copyright' => '© copyright the article\'s author',
 	'description_gpl' => 'GNU/GPL License',
@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_cc_by_nc_sa' => 'http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en',
 	'lien_cc_by_nd' => 'http://creativecommons.org/licenses/by-nd/3.0/deed.en',
 	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/deed.en',
-	'lien_gfdl' => 'http://www.gnu.org/licenses/fdl.html', # NEW
+	'lien_gfdl' => 'http://www.gnu.org/licenses/fdl.html',
 	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
 
 	// N
@@ -56,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_cc_by_nd' => 'CC by-nd',
 	'titre_cc_by_sa' => 'CC by-sa',
 	'titre_copyright' => 'Copyright',
-	'titre_gfdl' => 'GNU FDL', # NEW
+	'titre_gfdl' => 'GNU FDL',
 	'titre_gpl' => 'GNU GPL'
 );
 
