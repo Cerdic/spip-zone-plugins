@@ -1,6 +1,6 @@
 <traduction module="minibando" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/minibando/branches/v0/lang/" reference="fr">
 	<langue code="ar">
-		<traducteur nom="kandalaft" />
+		<traducteur nom="George" />
 	</langue>
 	<langue code="de">
 		<traducteur nom="jaro" />
@@ -12,7 +12,7 @@
 		<traducteur nom="otalazt" />
 	</langue>
 	<langue code="fa">
-		<traducteur nom="davood" />
+		<traducteur nom="Davood Hossein" />
 	</langue>
 	<langue code="fr" />
 	<langue code="sk">
