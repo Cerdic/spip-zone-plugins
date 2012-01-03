@@ -1,13 +1,13 @@
 <traduction module="coordonnees" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/coordonnees/trunk/lang/" reference="fr">
 	<langue code="ar">
-		<traducteur nom="superyms" />
+		<traducteur nom="SuperYMS" />
 	</langue>
 	<langue code="en">
-		<traducteur nom="davood" />
+		<traducteur nom="Davood Hossein" />
 		<traducteur nom="stefdn" />
 	</langue>
 	<langue code="fa">
-		<traducteur nom="davood" />
+		<traducteur nom="Davood Hossein" />
 	</langue>
 	<langue code="fr" />
 	<langue code="sk">
