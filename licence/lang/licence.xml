@@ -1,12 +1,12 @@
 <traduction module="licence" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/licence/lang/" reference="fr">
 	<langue code="ca" />
 	<langue code="de">
-		<traducteur nom="klaus" />
+		<traducteur nom="klaus++" />
 	</langue>
 	<langue code="en">
-		<traducteur nom="davood" />
+		<traducteur nom="Davood Hossein" />
 		<traducteur nom="kent1" />
-		<traducteur nom="mark_baber" />
+		<traducteur nom="Mark" />
 	</langue>
 	<langue code="fr" />
 	<langue code="fr_tu">
