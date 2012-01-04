@@ -1,9 +1,9 @@
 <traduction module="fulltext" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/fulltext/lang/" reference="fr">
 	<langue code="ar">
-		<traducteur nom="George" />
+		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
 	</langue>
 	<langue code="ast">
-		<traducteur nom="Xuacu" />
+		<traducteur nom="Xuacu" lien="http://trad.spip.org/auteur/xuacu" />
 	</langue>
 	<langue code="ca" />
 	<langue code="cs" />
@@ -25,7 +25,7 @@
 	<langue code="pt" />
 	<langue code="ro" />
 	<langue code="sk">
-		<traducteur nom="jaro" />
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
 	<langue code="tr" />
 	<langue code="uk" />
