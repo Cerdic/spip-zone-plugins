@@ -37,7 +37,7 @@
 	<langue code="ro" />
 	<langue code="sc" />
 	<langue code="sk">
-		<traducteur nom="jaro" />
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
 	<langue code="sq" />
 	<langue code="sv" />
