@@ -237,8 +237,9 @@ function cs_lire_data_outil($outil, $casier_=false) {
 	if(isset($datas[$casier])) 
 		return $datas[$casier];
 	// recherche dans le fichier cache
-	if(!$GLOBALS['cs_outils']) include_once(_DIR_CS_TMP . 'mes_outils.php');
-	if(function_exists($f='cs_data_'.$casier)) 
+	if(!$GLOBALS['cs_outils'] && @is_readable($f = _DIR_CS_TMP.'mes_outils.php'))
+		include_once($f);
+	if(function_exists($f = 'cs_data_'.$casier)) 
 		return $datas[$casier] = $f();
 	// installation de l'outil
 	include_spip('outils/'.$outil);
