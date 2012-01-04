@@ -1,20 +1,25 @@
 <traduction module="menus" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/menus/trunk/lang/" reference="fr">
 	<langue code="ca" />
 	<langue code="de">
-		<traducteur nom="klaus++" />
+		<traducteur nom="klaus++" lien="http://trad.spip.org/auteur/klaus" />
 	</langue>
 	<langue code="en">
-		<traducteur nom="Suske" />
-		<traducteur nom="RastaPopoulos" />
-		<traducteur nom="Mark" />
-		<traducteur nom="kent1" />
+		<traducteur nom="Suske" lien="http://trad.spip.org/auteur/suske" />
+		<traducteur nom="RastaPopoulos" lien="" />
+		<traducteur nom="Suske" lien="http://trad.spip.org/auteur/suske" />
+		<traducteur nom="Mark" lien="http://trad.spip.org/auteur/mark" />
+		<traducteur nom="Mark" lien="http://trad.spip.org/auteur/mark" />
+		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
+		<traducteur nom="Suske" lien="http://trad.spip.org/auteur/suske" />
+		<traducteur nom="kent1" lien="" />
+		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
 	</langue>
 	<langue code="es">
-		<traducteur nom="tin" />
+		<traducteur nom="tin" lien="http://trad.spip.org/auteur/tin" />
 	</langue>
 	<langue code="fr" />
 	<langue code="it" />
 	<langue code="sk">
-		<traducteur nom="jaro" />
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
 </traduction>
