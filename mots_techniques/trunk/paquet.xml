@@ -6,7 +6,7 @@
 		compatibilite="[3.0.0-beta;3.0.*]"
 		logo="prive/themes/spip/images/mots-techniques-48.png"
 		schema="0.3"
-		documentation=""
+		documentation="http://www.spip-contrib.net/?art3726"
 >
 
 	<nom>Mots techniques</nom>
@@ -17,8 +17,7 @@
 	
 	<credit lien="http://www.iconfinder.com/icondetails/10622/48/orange_tag_icon">MidTone Design (logo)</credit>
 
-	<necessite nom="cextras" compatibilite="[2.0.0-dev;[" />
-	<necessite nom="SPIP" compatibilite="[3.0.0-beta;[" />
+	<necessite nom="cextras" compatibilite="[3.0.0;[" />
 	<utilise nom="mots" compatibilite="[2.4.0;[" />
 
 	<pipeline nom="pre_boucle" inclure="mots_techniques_pipelines.php" />
