@@ -1,19 +1,19 @@
 <traduction module="thumbsites" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/thumbsites/lang/" reference="fr">
 	<langue code="ast">
-		<traducteur nom="Xuacu" />
+		<traducteur nom="Xuacu" lien="http://trad.spip.org/auteur/xuacu" />
 	</langue>
 	<langue code="ca" />
 	<langue code="de" />
 	<langue code="en" />
 	<langue code="fa">
-		<traducteur nom="Davood Hossein" />
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" />
 	<langue code="fr_tu" />
 	<langue code="pt_br">
-		<traducteur nom="Ricardo Porto" />
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.org/auteur/ricardo-porto" />
 	</langue>
 	<langue code="sk">
-		<traducteur nom="jaro" />
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
 </traduction>
