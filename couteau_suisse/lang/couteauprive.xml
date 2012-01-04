@@ -1,24 +1,24 @@
 <traduction module="couteauprive" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/couteau_suisse/lang/" reference="fr">
 	<langue code="ast" />
 	<langue code="ca">
-		<traducteur nom="merce" />
+		<traducteur nom="merce" lien="http://trad.spip.org/auteur/merce" />
 	</langue>
 	<langue code="en">
-		<traducteur nom="Mark" />
-		<traducteur nom="sQuonk" />
-		<traducteur nom="merce" />
+		<traducteur nom="Mark" lien="http://trad.spip.org/auteur/mark" />
+		<traducteur nom="sQuonk" lien="http://trad.spip.org/auteur/squonk" />
+		<traducteur nom="merce" lien="http://trad.spip.org/auteur/merce" />
 	</langue>
 	<langue code="es" />
 	<langue code="fr" />
 	<langue code="fr_tu">
-		<traducteur nom="beatnick" />
+		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
 	</langue>
 	<langue code="gl" />
 	<langue code="nl">
-		<traducteur nom="mpossoz" />
+		<traducteur nom="mpossoz" lien="http://trad.spip.org/auteur/mpossoz" />
 	</langue>
 	<langue code="sk">
-		<traducteur nom="jaro" />
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
 	<langue code="tr" />
 </traduction>
