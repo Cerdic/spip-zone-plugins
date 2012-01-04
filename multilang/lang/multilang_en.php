@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.mediaspip.net/spip.php?page=tradlang
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_explication_crayons' => 'Requires multilang to be activated in the public space of the site.',
 	'cfg_lbl_article' => 'of the articles',
 	'cfg_lbl_auteur' => 'of the authors',
-	'cfg_lbl_breve' => 'des breves',
+	'cfg_lbl_breve' => 'of the news items',
 	'cfg_lbl_crayons' => 'Use multilang in the pencils',
 	'cfg_lbl_document' => 'of the documents',
 	'cfg_lbl_espace_public' => 'Use multilang in the public space',
