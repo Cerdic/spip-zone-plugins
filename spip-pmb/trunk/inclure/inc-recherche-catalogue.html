@@ -27,12 +27,12 @@
 
 
 <a id="resultats_recherche"></a>
-<div class="menu articles">
+<div class="liste articles">
 	<B_tab_resultat>
 	<h2 class="h2"><:pmb:resultats_dans_catalogue:></h2>
 
 	[(#INCLURE{fond=inclure/nb_resultats,resultats=#GET{nb_resultats},debut,fin,url=#GET{url},ancre=ajax-recherche-catalogue})]
-	<ul class="liste-items">
+	<ul class="liste-items items">
 	<BOUCLE_tab_resultat(POUR){tableau #GET{tab_resultat}}>
 	
 		[(#SET{url_ret,[(#GET{url}|parametre_url{debut,#ENV{debut}}|trim|urlencode)]})]

@@ -6,7 +6,7 @@
 	<B_tab_resultat>
 	[(#INCLURE{fond=inclure/nb_resultats,resultats=#GET{nb_resultats},debut,fin})]
 	<h2 class="h2"><:pmb:ouvrages:></h2>
-	<ul class="liste-items">
+	<ul class="liste-items items">
 		<BOUCLE_tab_resultat(POUR){tableau #GET{tab_notices}}>
 			<INCLURE{fond=inclure/inc-notice-resume}{notice=#VALEUR}{surlignable=1}{compteur=#COMPTEUR_BOUCLE}>	
 		</BOUCLE_tab_resultat>
