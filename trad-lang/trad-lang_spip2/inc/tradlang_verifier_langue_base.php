@@ -45,6 +45,7 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 				$array['statut'] = 'NEW';
 				unset($array['ts']);
 				unset($array['id_tradlang']);
+				unset($array['traducteur']);
 				$id_tradlang = sql_insertq('spip_tradlang',$array);
 				$inserees++;
 			}
