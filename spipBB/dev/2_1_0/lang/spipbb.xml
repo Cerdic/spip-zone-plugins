@@ -1,33 +1,33 @@
 <traduction module="spipbb" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/spipBB/dev/2_1_0/lang/" reference="fr">
 	<langue code="ast">
-		<traducteur nom="Xuacu" />
+		<traducteur nom="Xuacu" lien="http://trad.spip.org/auteur/xuacu" />
 	</langue>
 	<langue code="ca">
-		<traducteur nom="merce" />
+		<traducteur nom="merce" lien="http://trad.spip.org/auteur/merce" />
 	</langue>
 	<langue code="de">
-		<traducteur nom="klaus++" />
+		<traducteur nom="klaus++" lien="http://trad.spip.org/auteur/klaus" />
 	</langue>
 	<langue code="en">
-		<traducteur nom="Mark" />
-		<traducteur nom="Davood Hossein" />
+		<traducteur nom="Mark" lien="http://trad.spip.org/auteur/mark" />
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
 	</langue>
 	<langue code="es" />
 	<langue code="fa">
-		<traducteur nom="Davood Hossein" />
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" />
 	<langue code="fr_tu">
-		<traducteur nom="beatnick" />
+		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
 	</langue>
 	<langue code="gl" />
 	<langue code="km" />
 	<langue code="nl">
-		<traducteur nom="mpossoz" />
+		<traducteur nom="mpossoz" lien="http://trad.spip.org/auteur/mpossoz" />
 	</langue>
 	<langue code="pt" />
 	<langue code="sk">
-		<traducteur nom="jaro" />
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
 	<langue code="tr" />
 </traduction>
