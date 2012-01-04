@@ -15,7 +15,7 @@
 	<langue code="pt_br" />
 	<langue code="ro" />
 	<langue code="sk">
-		<traducteur nom="jaro" />
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
 	<langue code="tr" />
 </traduction>
