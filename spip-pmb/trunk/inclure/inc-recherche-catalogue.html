@@ -1,6 +1,11 @@
 [(#SET{tab_resultat, [(#ENV**{recherche}|urldecode|pmb_prepare_recherche|sinon{*}
 	|pmb_recherche_extraire{#ENV{look_ALL,0}, #ENV{look_AUTHOR,0}, #ENV{look_PUBLISHER,0}, #ENV{look_COLLECTION,0}, #ENV{look_SUBCOLLECTION,0}, #ENV{look_CATEGORY, 0}, #ENV{look_INDEXINT}, #ENV{look_KEYWORDS,0}, #ENV{look_TITLE,0}, #ENV{look_ABSTRACT,0}, #ENV{id_section,0}, #ENV{debut,0}, #ENV{fin,5}, #ENV{typdoc,''}, #ENV{id_location_memo,''}})]})]
 
+[(#REM) le nombre de resultats est stocke dans la cle 0 ... ]
+#SET{nb_resultats,#GET{tab_resultat/0/nb_resultats}}
+#SET{tab_resultat,#GET{tab_resultat}|depile}
+
+
 [(#SET{url,[(#ENV{id_section}
 	|?{#URL_PAGE{catalogue},#URL_PAGE{recherche}}
 	|parametre_url{connect,''}
@@ -19,55 +24,25 @@
 	|parametre_url{typdoc,#ENV{typdoc}}
 	|parametre_url{id_location_memo,#ENV{id_location_memo}}
 	|parametre_url{id_section,#ENV{id_section}})]})]
-	
+
+
 <a id="resultats_recherche"></a>
 <div class="menu articles">
 	<B_tab_resultat>
 	<h2 class="h2"><:pmb:resultats_dans_catalogue:></h2>
+
+	[(#INCLURE{fond=inclure/nb_resultats,resultats=#GET{nb_resultats},debut,fin,url=#GET{url},ancre=ajax-recherche-catalogue})]
+	<ul class="liste-items">
 	<BOUCLE_tab_resultat(POUR){tableau #GET{tab_resultat}}>
 	
-	[(#COMPTEUR_BOUCLE|=={2}|oui)
-		[(#GET{tab_resultat/0/nb_resultats}|>{1}|oui)
-			  [<p><:pmb:resultats:> [(#ENV{debut}|plus{1})] <:pmb:a:> [(#ENV{debut}|plus{#ENV{fin,5}}|min{#GET{tab_resultat/0/nb_resultats}})] <:pmb:sur:> (#GET{tab_resultat/0/nb_resultats}) <:pmb:ouvrages_trouves:>.</p>]
-		 ]
-		[(#GET{tab_resultat/0/nb_resultats}|>{1}|non)
-			  [<p>(#GET{tab_resultat/0/nb_resultats}) <:pmb:ouvrage_trouve:> :</p>]
-		 ]
-		[(#GET{tab_resultat/0/nb_resultats}|moins{5}|<={0}|non)
-			<a style="float: right;" class="pmb_pagination_suiv" href="[(#GET{url}|parametre_url{debut,[(#ENV{debut}|plus{5})]})#ajax-recherche-catalogue]">
-				<:pmb:resultats_suivants:> >>
-			</a>
-		]
-		[(#ENV{debut}|moins{5}|>={0}|oui)
-			<a style="float: left;" class="pmb_pagination_prec" href="[(#GET{url}|parametre_url{debut,[(#ENV{debut}|moins{5})]})#ajax-recherche-catalogue]">
-				<< <:pmb:resultats_precedents:>
-			</a>
-		]
-		<br class="nettoyeur" />
-	
-		<ul class="liste-items">
-	]
-	[(#COMPTEUR_BOUCLE|>{1}|oui)
-		
 		[(#SET{url_ret,[(#GET{url}|parametre_url{debut,#ENV{debut}}|trim|urlencode)]})]
 		<INCLURE{fond=inclure/inc-notice-resume}{notice=#VALEUR}
-			{url_ret=#GET{url_ret}}{surlignable=0}{compteur=#COMPTEUR_BOUCLE|moins{1}}>
-		
-	]
+			{url_ret=#GET{url_ret}}{surlignable=0}{compteur=#COMPTEUR_BOUCLE}>
+			
 	</BOUCLE_tab_resultat>
-		</ul>
-		<br class="nettoyeur" />
-		[(#GET{tab_resultat/0/nb_resultats}|moins{5}|<={0}|non)
-			<a style="float: right;" class="pmb_pagination_suiv" href="[(#GET{url}|parametre_url{debut,[(#ENV{debut}|plus{5})]})#ajax-recherche-catalogue]">
-				<:pmb:resultats_suivants:> >>
-			</a>
-		]
-		[(#ENV{debut}|moins{5}|>={0}|oui)
-			<a style="float: left;" class="pmb_pagination_prec" href="[(#GET{url}|parametre_url{debut,[(#ENV{debut}|moins{5})]})#ajax-recherche-catalogue]">
-				<< <:pmb:resultats_precedents:>
-			</a>
-		]
-		[(#COMPTEUR_BOUCLE|=={1}|oui)<:pmb:pas_d_ouvrages_trouves:>]
+	</ul>
+	[(#INCLURE{fond=inclure/nb_resultats,resultats=#GET{nb_resultats},debut,fin,bilan=non,url=#GET{url},ancre=ajax-recherche-catalogue})]
+
 	</B_tab_resultat>
 		<:pmb:pas_d_ouvrages_trouves:>
 	<//B_tab_resultat>

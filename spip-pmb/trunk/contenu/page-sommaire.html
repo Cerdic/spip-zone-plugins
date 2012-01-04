@@ -22,18 +22,14 @@
 <B_syndic_pmb>
 <div class="menu articles nouveautes liste sommaire">
 <h2 class="h2"><:pmb:nouveautes:></h2>
-			<a href="#URL_PAGE{nouveautes}" class="plus-de-liens"><:pmb:toutes_nouveautes:> +</a>
-			<ul class="liste-items">
-			[(#SET{compteur_nouveautes,0})]
-			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES){par hasard}{url==notice_display}{0,2}>			
-				[(#SET{notice_id,[(#URL_ARTICLE|parametre_url{id})]})]
-				[(#SET{notice, [(#GET{notice_id}|pmb_notice_extraire)]})]
-				<INCLURE{fond=inclure/inc-notice-resume}{notice=#GET{notice}}>[(#SET{compteur_nouveautes,[(#GET{compteur_nouveautes}|plus{1})]})]
-		
-			</BOUCLE_syndic_pmb>
-			</ul>
+	<a href="#URL_PAGE{nouveautes}" class="plus-de-liens"><:pmb:toutes_nouveautes:> +</a>
+	<ul class="liste-items">
+	<BOUCLE_syndic_pmb(SYNDIC_ARTICLES){par hasard}{url==notice_display}{0,2}>
+		[(#SET{notice_id,[(#URL_ARTICLE|parametre_url{id})]})]
+		[(#SET{notice, [(#GET{notice_id}|pmb_notice_extraire)]})]
+		<INCLURE{fond=inclure/inc-notice-resume}{notice=#GET{notice}}>
+	</BOUCLE_syndic_pmb>
+	</ul>
 </div>
 </B_syndic_pmb>
 
-
-		

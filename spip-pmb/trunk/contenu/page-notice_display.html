@@ -3,11 +3,9 @@
 
 <div class="cartouche">
 	[(#ENV{notice/logo_src}|oui)
-	      [(#VAL{<img />}
-			|inserer_attribut{style,'max-width:200px;'}
-			|inserer_attribut{class,spip_logos}
-			|inserer_attribut{alt,''}
-			|inserer_attribut{src,[(#ENV{notice/logo_src})]})]
+		[(#ENV{notice/logo_src}
+			|image_reduire{200,0}
+			|inserer_attribut{class,spip_logos})]
 	]
 	<h1 class="h1">[(#ENV{notice/titre})]</h1>
 	[<p class="soustitre">(#ENV{notice/soustitre})</p>]

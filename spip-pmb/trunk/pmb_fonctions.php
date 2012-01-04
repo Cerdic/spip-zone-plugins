@@ -3,11 +3,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /*************************************************************************************/
 /*                                                                                   */
-/*      Portail web pour PMB	                                                            		 */
+/*      Portail web pour PMB                                                         */
 /*                                                                                   */
-/*      Copyright (c) OpenStudio		                                     */
-/*	email : info@openstudio.fr		        	                             	 */
-/*      web : http://www.openstudio.fr						   							 */
+/*      Copyright (c) OpenStudio                                                     */
+/*      email : info@openstudio.fr                                                   */
+/*      web : http://www.openstudio.fr                                               */
 /*                                                                                   */
 /*      This program is free software; you can redistribute it and/or modify         */
 /*      it under the terms of the GNU General Public License as published by         */
@@ -28,6 +28,30 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $rpc_client = NULL;
 include_spip('inc/config');
+
+
+/**
+ * Depile un element de tableau et renvoie le tableau (pas l'element depile !)
+ * 
+ * #SET{total,#GET{tableau/0/nb_resultat}}
+ * #SET{tableau,#GET{tableau}|depile}
+ * #SET{tableau,#GET{tableau}|depile{0}}
+ *
+ * @param array Tableau a depiler
+ * @param string Eventuellement cle du tableau a enlever, sinon prend la premiere (array_shift)
+ * @return array Tableau depossede d'une cle...
+**/
+function depile($tableau, $cle=null) {
+	if (is_null($cle)) {
+		array_shift($tableau);
+	} else {
+		if (!is_array($cle) and !is_object($cle)) {
+			unset($tableau[$cle]);
+		}
+	}
+	return $tableau;
+}
+
 
 function pmb_section_extraire($id_section) {
 	$tableau_sections = Array();
@@ -180,7 +204,7 @@ function pmb_collection_extraire($id_collection, $debut=0, $nbresult=5, $id_sess
 				}
 			}
 		}
-	      
+	
 	} catch (Exception $e) {
 		 echo 'Exception reçue (5) : ',  $e->getMessage(), "\n";
 	} 
@@ -288,109 +312,110 @@ function pmb_recherche_extraire($recherche='', $look_ALL='', $look_AUTHOR='', $l
 	$tableau_resultat = Array();
 	//$recherche = strtolower($recherche);
 	$search = array();
-	$searchType = 0;	
+	$searchType = 0;
 	$type_recherche=0;
 
-	if ($recherche=='*') $recherche='';
+	if ($recherche=='*') {
+		$recherche='';
+	}
 	
 	if ($look_ALL) {
-		  if ($recherche) $search[] = array("inter"=>"or","field"=>42,"operator"=>"BOOLEAN", "value"=>$recherche);	
-		  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
-		  if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);								
-		  if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
+		if ($recherche) $search[] = array("inter"=>"or","field"=>42,"operator"=>"BOOLEAN", "value"=>$recherche);	
+		if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
+		if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);								
+		if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
 	} else {
 		if ($look_TITLE) {
-			  $searchType = 1;
-			  if ($recherche) $search[] = array("inter"=>"or","field"=>1,"operator"=>"BOOLEAN", "value"=>$recherche);
-			  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
-			  if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
+			$searchType = 1;
+			if ($recherche) $search[] = array("inter"=>"or","field"=>1,"operator"=>"BOOLEAN", "value"=>$recherche);
+			if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
+			if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
 		}
 
 		if ($look_AUTHOR) {
-			  $searchType = 2;
-			  if ($recherche) $search[] = array("inter"=>"or","field"=>2,"operator"=>"BOOLEAN", "value"=>$recherche);
-			  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
-			  if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
+			$searchType = 2;
+			if ($recherche) $search[] = array("inter"=>"or","field"=>2,"operator"=>"BOOLEAN", "value"=>$recherche);
+			if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
+			if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
 		}
 	    
 		if ($look_PUBLISHER) {
-			  $searchType = 3;
-			  if ($recherche) $search[] = array("inter"=>"or","field"=>3,"operator"=>"BOOLEAN", "value"=>$recherche);
-			  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
-			  if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
+			$searchType = 3;
+			if ($recherche) $search[] = array("inter"=>"or","field"=>3,"operator"=>"BOOLEAN", "value"=>$recherche);
+			if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
+			if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
 		}
 
 		if ($look_COLLECTION) {
-			  $searchType = 4;
-			  if ($recherche) $search[] = array("inter"=>"or","field"=>4,"operator"=>"BOOLEAN", "value"=>$recherche);
-			  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
-			  if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
+			$searchType = 4;
+			if ($recherche) $search[] = array("inter"=>"or","field"=>4,"operator"=>"BOOLEAN", "value"=>$recherche);
+			if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
+			if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
 		}
 
 		if ($look_ABSTRACT) {
-			  if ($recherche) $search[] = array("inter"=>"or","field"=>10,"operator"=>"BOOLEAN", "value"=>$recherche);
-			  if ($typdoc) $search[] = array("inter"=>"AND","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
-			  if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
+			if ($recherche) $search[] = array("inter"=>"or","field"=>10,"operator"=>"BOOLEAN", "value"=>$recherche);
+			if ($typdoc) $search[] = array("inter"=>"AND","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
+			if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
 		}
 	  
 		if ($look_CATEGORY) {
-			  $searchType = 6;
-			  if ($recherche) $search[] = array("inter"=>"or","field"=>11,"operator"=>"BOOLEAN", "value"=>$recherche);
-			  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
-			  if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
+			$searchType = 6;
+			if ($recherche) $search[] = array("inter"=>"or","field"=>11,"operator"=>"BOOLEAN", "value"=>$recherche);
+			if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
+			if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
 		}
 
 		if ($look_INDEXINT) {
-			  if ($recherche) $search[] = array("inter"=>"or","field"=>12,"operator"=>"BOOLEAN", "value"=>$recherche);
-			  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
-			  if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
+			if ($recherche) $search[] = array("inter"=>"or","field"=>12,"operator"=>"BOOLEAN", "value"=>$recherche);
+			if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
+			if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
 		}
 
 		if ($look_KEYWORDS) {
-			  if ($recherche) $search[] = array("inter"=>"","field"=>13,"operator"=>"BOOLEAN", "value"=>$recherche);
-			  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
-			  if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
+			if ($recherche) $search[] = array("inter"=>"","field"=>13,"operator"=>"BOOLEAN", "value"=>$recherche);
+			if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
+			if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
 		}
 		if ((!$look_TITLE) && (!$look_AUTHOR) && (!$look_PUBLISHER) && (!$look_COLLECTION) && (!$look_ABSTRACT) && (!$look_CATEGORY) && (!$look_INDEXINT) && (!$look_KEYWORDS)) {
-			  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
-			  if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
+			if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
+			if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
 		}
 	}
 	pmb_ws_charger_client($ws);
 	try {	
-			$tableau_resultat[0] = Array();
-					
-			//cas d'une recherche simple 
-			if (($look_ALL)&&(!$id_section)&&(!$typdoc)){
-			  $r=$ws->pmbesOPACAnonymous_simpleSearch($searchType,$recherche);
-			/*} else if (($look_ALL)&&($id_section)&&(!$typdoc)){
-			  $r=$ws->pmbesSearch_simpleSearchLocalise($searchType,$recherche,$id_location,$id_section);
-			*/} 
-			 else {
-			 try {
-			  $r=$ws->pmbesOPACAnonymous_advancedSearch($search);
-			 }catch (Exception $e) {
-				 echo 'Exception reçue (8) : ',  $e->getMessage(), "\n";
+		$tableau_resultat[0] = Array();
+
+		//cas d'une recherche simple 
+		if (($look_ALL)&&(!$id_section)&&(!$typdoc)){
+			$r = $ws->pmbesOPACAnonymous_simpleSearch($searchType,$recherche);
+		/*
+		} else if (($look_ALL)&&($id_section)&&(!$typdoc)){
+			$r=$ws->pmbesSearch_simpleSearchLocalise($searchType,$recherche,$id_location,$id_section);
+		*/
+		} else {
+			try {
+				$r=$ws->pmbesOPACAnonymous_advancedSearch($search);
+			} catch (Exception $e) {
+				echo 'Exception reçue (8) : ',  $e->getMessage(), "\n";
 			}
-			 
-			}
-			$searchId=$r->searchId;
-			$tableau_resultat[0]['nb_resultats'] = $r->nbResults;
-	    
-			$r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArray($searchId,$debut,$fin,"utf-8");
-			$i = 1;
-			  if (is_array($r)) {
-			      foreach($r as $value) {
-				    $tableau_resultat[$i] = Array();				
-				
-				    pmb_ws_parser_notice_array($value, $tableau_resultat[$i]);
-				    $i++;
-			      }
-			  }
+		}
 		
+		$searchId=$r->searchId;
+		$tableau_resultat[0]['nb_resultats'] = $r->nbResults;
+
+		$r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArray($searchId,$debut,$fin,"utf-8");
+		$i = 1;
+		if (is_array($r)) {
+			foreach($r as $value) {
+				$tableau_resultat[$i] = Array();
+				pmb_ws_parser_notice_array($value, $tableau_resultat[$i]);
+				$i++;
+			}
+		}
 
 	} catch (Exception $e) {
-		 echo 'Exception reçue (8) : ',  $e->getMessage(), "\n";
+		echo 'Exception reçue (8) : ',  $e->getMessage(), "\n";
 	} 
 
 	return $tableau_resultat;
@@ -717,47 +742,35 @@ function pmb_ws_dispo_exemplaire($id_notice, $id_session=0) {
 
 //récuperer une notice en xml via les webservices
 function pmb_ws_recuperer_notice ($id_notice, &$ws, &$tresultat) {
-	
 	try {	
-	$listenotices = array(''.$id_notice);
-	$tresultat['id'] = $id_notice;
-		  $r=$ws->pmbesNotices_fetchNoticeListArray($listenotices,"utf-8",true,false);
-		  if (is_array($r)) {
-		      foreach($r as $value) {
-			      pmb_ws_parser_notice_array($value, $tresultat);
+		$listenotices = array(''.$id_notice);
+		$tresultat['id'] = $id_notice;
+		$r=$ws->pmbesNotices_fetchNoticeListArray($listenotices,"utf-8",true,false);
+		if (is_array($r)) {
+			foreach($r as $value) {
+				pmb_ws_parser_notice_array($value, $tresultat);
 			}
-		  }
-		
-
+		}
 	} catch (Exception $e) {
-		 echo 'Exception reçue (13) : ',  $e->getMessage(), "\n";
-	} 
-
-	
-
+		echo 'Exception reçue (13) : ',  $e->getMessage(), "\n";
+	}
 }
+
 //récuperer une notice en xml via les webservices
 function pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat) {
-	
-	
 	try {	
-		  $r=$ws->pmbesNotices_fetchNoticeListArray($listenotices,"utf-8",true,false);
-		  $cpt=0;
-		  if (is_array($r)) {
-		      foreach($r as $value) {
-			    $tresultat[$cpt] = Array();
-			    pmb_ws_parser_notice_array($value, $tresultat[$cpt]);
-			    $cpt++;
+		$r=$ws->pmbesNotices_fetchNoticeListArray($listenotices,"utf-8",true,false);
+		$cpt=0;
+		if (is_array($r)) {
+			foreach($r as $value) {
+				$tresultat[$cpt] = Array();
+				pmb_ws_parser_notice_array($value, $tresultat[$cpt]);
+				$cpt++;
 			}
-		  }
-		
-
+		}
 	} catch (Exception $e) {
-		 echo 'Exception reçue (14) : ',  $e->getMessage(), "\n";
+		echo 'Exception reçue (14) : ',  $e->getMessage(), "\n";
 	} 
-
-	
-
 }
 
 //charger les webservices
