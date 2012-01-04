@@ -1,27 +1,27 @@
 <traduction module="comments" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/comments/comments-200/lang/" reference="fr">
 	<langue code="ast">
-		<traducteur nom="Xuacu" />
+		<traducteur nom="Xuacu" lien="http://trad.spip.org/auteur/xuacu" />
 	</langue>
 	<langue code="ca" />
 	<langue code="de" />
 	<langue code="en">
-		<traducteur nom="Paolo" />
-		<traducteur nom="kent1" />
+		<traducteur nom="Paolo" lien="http://trad.spip.org/auteur/paolo" />
+		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
 	</langue>
 	<langue code="es" />
 	<langue code="fa">
-		<traducteur nom="Davood Hossein" />
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" />
 	<langue code="fr_tu">
-		<traducteur nom="beatnick" />
+		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
 	</langue>
 	<langue code="it" />
 	<langue code="pt" />
 	<langue code="pt_br">
-		<traducteur nom="Ricardo Porto" />
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.org/auteur/ricardo-porto" />
 	</langue>
 	<langue code="sk">
-		<traducteur nom="jaro" />
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
 </traduction>
