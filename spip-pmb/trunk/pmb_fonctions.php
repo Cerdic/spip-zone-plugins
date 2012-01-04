@@ -42,6 +42,9 @@ include_spip('inc/config');
  * @return array Tableau depossede d'une cle...
 **/
 function depile($tableau, $cle=null) {
+	if (!is_array($tableau)) {
+		return array();
+	}
 	if (is_null($cle)) {
 		array_shift($tableau);
 	} else {
@@ -89,27 +92,25 @@ function pmb_location_extraire($id_location) {
 	$tableau_locationsections = Array();
 	pmb_ws_charger_client($ws);
 	try {
-	      $tab_locations = $ws->pmbesOPACGeneric_get_location_information_and_sections($id_location);
-	      //récupérer les infos sur la localisation parent
-	      $tableau_locationsections[0] = Array();
-	      $tableau_locationsections[0]['location_id'] = $tab_locations->location->location_id;
-	      $tableau_locationsections[0]['location_caption'] = $tab_locations->location->location_caption;
+		$tab_locations = $ws->pmbesOPACGeneric_get_location_information_and_sections($id_location);
+		//récupérer les infos sur la localisation parent
+		$tableau_locationsections[0] = Array();
+		$tableau_locationsections[0]['location_id'] = $tab_locations->location->location_id;
+		$tableau_locationsections[0]['location_caption'] = $tab_locations->location->location_caption;
 
-	      $cpt = 1;
-	      if (is_array($tab_locations->sections)) {
-		      foreach ($tab_locations->sections as $section) {
-			    $tableau_locationsections[$cpt] = Array();
-			    $tableau_locationsections[$cpt]['section_id'] = $section->section_id;
-			    $tableau_locationsections[$cpt]['section_location'] = $section->section_location;
-			    $tableau_locationsections[$cpt]['section_caption'] = $section->section_caption;
-			    $tableau_locationsections[$cpt]['section_image'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section->section_image;
-
-			    
-			    $cpt++;
-		      }
-	      }
+		$cpt = 1;
+		if (is_array($tab_locations->sections)) {
+			foreach ($tab_locations->sections as $section) {
+				$tableau_locationsections[$cpt] = Array();
+				$tableau_locationsections[$cpt]['section_id'] = $section->section_id;
+				$tableau_locationsections[$cpt]['section_location'] = $section->section_location;
+				$tableau_locationsections[$cpt]['section_caption'] = $section->section_caption;
+				$tableau_locationsections[$cpt]['section_image'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section->section_image;
+				$cpt++;
+			}
+		}
 	} catch (Exception $e) {
-		 echo 'Exception reçue (2) : ',  $e->getMessage(), "\n";
+		echo 'Exception reçue (2) : ',  $e->getMessage(), "\n";
 	} 
 	return $tableau_locationsections;
 }

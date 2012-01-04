@@ -30,89 +30,66 @@
 	</ul>
 </div>
 </B_tab_resultat1>
-  
-	[(#REM) Une location et ses sections ]
-	[(#REM) Ce code est tres tres proche de la boucle B_tab_resultat3... Il faudrait mutualiser... ]
+
+	[(#REM) la valeur 0 contient des infos ininterressantes. ]
+	#SET{tab,#ENV{tab_locationsections}|depile}
+
+	[(#REM) Si pas d'info de location + section, on tente juste section ]
+	[(#GET{tab}|count|non)
+		#SET{tab,#ENV{tab_sections}|depile}
+	]
+
+	[(#REM) Une location et ses sections OU uniquement les sections ]
 	<B_tab_resultat2>
 	<div class="liste menu articles">
 		<h2 class="invisible"><:articles_rubrique:></h2>
 		<ul class="liste-items">
-		<BOUCLE_tab_resultat2(POUR){tableau #ENV{tab_locationsections}}>
+		<BOUCLE_tab_resultat2(POUR){tableau #GET{tab}}>
 			[(#SET{url,[(#GET{self}
-					|parametre_url{id_section,#ENV{tab_locationsections/#CLE/section_id}}
-					|parametre_url{id_location_memo,#ENV{tab_locationsections/#CLE/section_location}})]})]
+				|parametre_url{id_section,#GET{tab/#CLE/section_id}}
+				|parametre_url{id_location_memo,#GET{tab/#CLE/section_location}})]})]
 		
 			<li class="item">
 				<a href="#GET{url}">
-				[(#ENV{tab_locationsections/#CLE/section_image}|contient{rayonnage}|non)
-					[(#ENV{tab_locationsections/#CLE/section_image}
+				[(#GET{tab/#CLE/section_image}|contient{rayonnage}|non)
+					[(#GET{tab/#CLE/section_image}
 						|image_reduire{#ENV{largeur,100},#ENV{hauteur,0}}
 						|inserer_attribut{class,spip_logos})]
 				]
-				[(#ENV{tab_locationsections/#CLE/section_image}|contient{rayonnage}|oui)
+				[(#GET{tab/#CLE/section_image}|contient{rayonnage}|oui)
 					[(#CHEMIN{img/logo-section.png}
 						|image_reduire{#ENV{largeur,0},#ENV{hauteur,50}}
 						|inserer_attribut{class,spip_logos})]
 				]
 				</a>
-				<h3><a href="#GET{url}">[(#ENV{tab_locationsections/#CLE/section_caption}|ucfirst)]</a></h3>
+				<h3><a href="#GET{url}">[(#GET{tab/#CLE/section_caption}|ucfirst)]</a></h3>
 			</li>
-		
 		</BOUCLE_tab_resultat2>
 		</ul>
 	</div>
 	</B_tab_resultat2>
 
-		[(#REM) Sections ]
-		[(#REM) Ce code est tres tres proche de la boucle B_tab_resultat2... Il faudrait mutualiser... ]
-		<B_tab_resultat3>
-		<div class="liste menu articles">
-		<h2 class="invisible"><:articles_rubrique:></h2>
-		<ul class="liste-items">
-			<BOUCLE_tab_resultat3(POUR){tableau #ENV{tab_sections}}>[(#COMPTEUR_BOUCLE|>{1}|oui)
-				[(#SET{url,[(#GET{self}
-					|parametre_url{id_section,#ENV{tab_locationsections/#CLE/section_id}}
-					|parametre_url{id_location_memo,#ENV{tab_locationsections/#CLE/section_location}})]})]
-			  <li class="item">
-				<a href="#GET{url}">
-					[(#ENV{tab_sections/#CLE/section_image}|contient{rayonnage}|non)
-						[(#ENV{tab_sections/#CLE/section_image}
-							|image_reduire{#ENV{largeur,100},#ENV{hauteur,0}}
-							|inserer_attribut{class,spip_logos})]
-					]
-					[(#ENV{tab_sections/#CLE/section_image}|contient{rayonnage}|oui)
-						[(#CHEMIN{img/logo-section.png}
-							|image_reduire{#ENV{largeur,0},#ENV{hauteur,50}}
-							|inserer_attribut{class,spip_logos})]
-					]
-				</a>
-				<h3><a href="#GET{url}">[(#ENV{tab_sections/#CLE/section_caption}|ucfirst)]</a></h3>
-				
-			</li>
-			]</BOUCLE_tab_resultat3>
-		</ul>
-		</div>
-		</B_tab_resultat3>
-			
-			<div id="ajax-recherche-catalogue" class="ajax-content"><img src="#CHEMIN{img/ajaxLoader.gif}" class="ajax-loader" alt="<:pmb:chargement:>" width="43" height="43" /></div>
-			<INCLURE{fond=inclure/inc-recherche-avancee}{recherche}{env}>
-			
-			<script type="text/javascript">
-				$(document).ready(function() {
-				$('#ajax-recherche-catalogue').load("[(#URL_PAGE{ajax-recherche-catalogue})]", {
-					'recherche': '[(#ENV{recherche}|urlencode)]', 'look_ALL': '#ENV{look_ALL}',
-					'look_AUTHOR': '#ENV{look_AUTHOR}', 'look_PUBLISHER': '#ENV{look_PUBLISHER}',
-					'look_COLLECTION': '#ENV{look_COLLECTION}', 'look_SUBCOLLECTION': '#ENV{look_SUBCOLLECTION}',
-					'look_CATEGORY': '#ENV{look_CATEGORY}', 'look_INDEXINT': '#ENV{look_INDEXINT}',
-					'look_KEYWORDS': '#ENV{look_KEYWORDS}', 'look_TITLE': '#ENV{look_TITLE}',
-					'look_ABSTRACT': '#ENV{look_ABSTRACT}', 'id_section': '#ENV{id_section}',
-					'debut': '#ENV{debut}', 'fin': '#ENV{fin}', 'typdoc': '#ENV{typdoc}',
-					'id_location_memo': '#ENV{id_location_memo}' },
-					function (responseText, textStatus, XMLHttpRequest) {
-						$(this).find('.ajax-loader').remove();
-					});
-				});
-			</script>
-		  <//B_tab_resultat3>
-	<//B_tab_resultat2>
+
+
+
+	<div id="ajax-recherche-catalogue" class="ajax-content"><img src="#CHEMIN{img/ajaxLoader.gif}" class="ajax-loader" alt="<:pmb:chargement:>" width="43" height="43" /></div>
+	<INCLURE{fond=inclure/inc-recherche-avancee}{recherche}{env}>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+		$('#ajax-recherche-catalogue').load("[(#URL_PAGE{ajax-recherche-catalogue})]", {
+			'recherche': '[(#ENV{recherche}|urlencode)]', 'look_ALL': '#ENV{look_ALL}',
+			'look_AUTHOR': '#ENV{look_AUTHOR}', 'look_PUBLISHER': '#ENV{look_PUBLISHER}',
+			'look_COLLECTION': '#ENV{look_COLLECTION}', 'look_SUBCOLLECTION': '#ENV{look_SUBCOLLECTION}',
+			'look_CATEGORY': '#ENV{look_CATEGORY}', 'look_INDEXINT': '#ENV{look_INDEXINT}',
+			'look_KEYWORDS': '#ENV{look_KEYWORDS}', 'look_TITLE': '#ENV{look_TITLE}',
+			'look_ABSTRACT': '#ENV{look_ABSTRACT}', 'id_section': '#ENV{id_section}',
+			'debut': '#ENV{debut}', 'fin': '#ENV{fin}', 'typdoc': '#ENV{typdoc}',
+			'id_location_memo': '#ENV{id_location_memo}' },
+			function (responseText, textStatus, XMLHttpRequest) {
+				$(this).find('.ajax-loader').remove();
+			});
+		});
+	</script>
+
 <//B_tab_resultat1> 
