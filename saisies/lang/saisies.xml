@@ -1,20 +1,20 @@
 <traduction module="saisies" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/saisies/lang/" reference="fr">
 	<langue code="ca" />
 	<langue code="de">
-		<traducteur nom="klaus++" />
+		<traducteur nom="klaus++" lien="http://trad.spip.org/auteur/klaus" />
 	</langue>
 	<langue code="en">
-		<traducteur nom="kent1" />
+		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
 	</langue>
 	<langue code="es" />
 	<langue code="fa">
-		<traducteur nom="Davood Hossein" />
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" />
 	<langue code="fr_tu">
-		<traducteur nom="beatnick" />
+		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
 	</langue>
 	<langue code="sk">
-		<traducteur nom="jaro" />
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
 </traduction>
