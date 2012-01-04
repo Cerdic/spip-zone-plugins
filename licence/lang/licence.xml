@@ -1,19 +1,21 @@
 <traduction module="licence" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/licence/lang/" reference="fr">
 	<langue code="ca" />
 	<langue code="de">
-		<traducteur nom="klaus++" />
+		<traducteur nom="klaus++" lien="http://trad.spip.org/auteur/klaus" />
 	</langue>
 	<langue code="en">
-		<traducteur nom="Davood Hossein" />
-		<traducteur nom="kent1" />
-		<traducteur nom="Mark" />
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
+		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
+		<traducteur nom="Mark" lien="http://trad.spip.org/auteur/mark" />
+		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
 	</langue>
 	<langue code="fr" />
 	<langue code="fr_tu">
-		<traducteur nom="beatnick" />
+		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
 	</langue>
 	<langue code="it" />
 	<langue code="sk">
-		<traducteur nom="jaro" />
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
 </traduction>
