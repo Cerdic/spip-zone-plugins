@@ -8,7 +8,7 @@
 	<langue code="cs" />
 	<langue code="de" />
 	<langue code="en">
-		<traducteur nom="Mark" />
+		<traducteur nom="Mark" lien="http://trad.spip.org/auteur/mark" />
 	</langue>
 	<langue code="eo" />
 	<langue code="es" />
@@ -31,7 +31,7 @@
 	<langue code="pt_br" />
 	<langue code="ro" />
 	<langue code="sk">
-		<traducteur nom="jaro" />
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
 	<langue code="sv" />
 	<langue code="tr" />
