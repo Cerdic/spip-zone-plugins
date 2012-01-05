@@ -1,3 +1,5 @@
 #INCLURE{fond=prive/objets/liste/gis_tous,env}
 
-[(#URL_ECRIRE{gis_edit}|parametre_url{nouveau,oui}|icone_verticale{<:gis:editer_gis_nouveau:>,#CHEMIN{images/gis-24.png},new,#LANG_RIGHT})]
+#BOITE_OUVRIR{'',raccourcis}
+[(#URL_ECRIRE{gis_edit,nouveau=oui}|icone_horizontale{<:gis:editer_gis_nouveau:>,gis,new})]
+#BOITE_FERMER
