@@ -1,47 +1,60 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/_dev_/notifications/lang
-if (!defined("_ECRIRE_INC_VERSION")) return;
+// extrait automatiquement de http://trad.spip.org
+// ** ne pas modifier le fichier **
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
 	// A
 	'alt_logo_conf' => 'Notifications plugin logo',
 	'article_prive' => 'Articles publishing',
-	'article_prive_admins_restreints' => '<strong>Administrators</strong>&nbsp;: Administrators get notified when article(s) is(are) proposed in their section',
-	'article_prive_auteurs' => '<strong>Authors</strong>&nbsp;: Authors get notified when their article(s) is(are) published',
-
+	'article_prive_admins_restreints' => '<strong>Administrators</strong> : Administrators get notified when article(s) is(are) proposed in their section',
+	'article_prive_auteurs' => '<strong>Authors</strong> : Authors get notified when their article(s) is(are) published',
+	'article_propose_detail' => 'The article "@titre@" is submitted for publication.',
 	'article_propose_sujet' => '[@nom_site_spip@] Submitted : @titre@',
 	'article_propose_titre' => 'Article submitted
 	---------------',
-	'article_propose_detail' => 'The article "@titre@" is submitted for publication.',
 	'article_propose_url' => 'You are invited to review it and to give your opinion
 	in the forum linked to it. It is available at the address :',
-	
-	'article_valide_sujet' => '[@nom_site_spip@] VALIDATED : @titre@',
-	'article_valide_titre' => 'Article validated
-	--------------',
-	'article_valide_detail' => 'The article "@titre@" is validated by @connect_nom@.',
-	'article_valide_date' => 'Without change, this article will be published',
-	'article_valide_url' => 'Meanwhile, it is visible at this temporary address :',
-	
+	'article_publie_detail' => 'The article "@titre@" was validated by @connect_nom@.',
 	'article_publie_sujet' => '[@nom_site_spip@] PUBLISHED: @titre@',
 	'article_publie_titre' => 'Article published
 	--------------',
-	'article_publie_detail' => 'The article "@titre@" was validated by @connect_nom@.',
+	'article_valide_date' => 'Without change, this article will be published',
+	'article_valide_detail' => 'The article "@titre@" is validated by @connect_nom@.',
+	'article_valide_sujet' => '[@nom_site_spip@] VALIDATED : @titre@',
+	'article_valide_titre' => 'Article validated
+	--------------',
+	'article_valide_url' => 'Meanwhile, it is visible at this temporary address :',
+
+	// B
+	'breve_propose_detail' => 'La brève "@titre@" est proposée à la publication
+	depuis', # NEW
+	'breve_propose_sujet' => '[@nom_site_spip@] Propose : @titre@', # NEW
+	'breve_propose_titre' => 'Brève proposée
+	---------------', # NEW
+	'breve_propose_url' => 'Vous êtes invité à venir la consulter et à donner votre opinion
+	dans le forum qui lui est attaché. Elle est disponible à l\'adresse :', # NEW
+	'breve_publie_detail' => 'La brève "@titre@" vient d\'être publiée par @connect_nom@.', # NEW
+	'breve_publie_sujet' => '[@nom_site_spip@] PUBLIE : @titre@', # NEW
+	'breve_publie_titre' => 'Brève publiée
+	--------------', # NEW
 
 	// E
 	'evenement_notification' => 'Following events may generate email notifications.',
 
 	// F
-	'forum_prives_auteur' => '<strong>Authors</strong>&nbsp;: Authors get notified when comments are posted to their article(s) or comment(s) on the private area.',
+	'forum_prives_auteur' => '<strong>Authors</strong> : Authors get notified when comments are posted to their article(s) or comment(s) on the private area.',
 	'forum_prives_moderateur' => 'Please write here moderators\' email adress for private forums, coma separated.',
-	'forum_prives_thread' => '<strong>Forum thread</strong>&nbsp;: Posters to the same thread get notified when a new comment is posted to the (private) thread.',
+	'forum_prives_thread' => '<strong>Forum thread</strong> : Posters to the same thread get notified when a new comment is posted to the (private) thread.',
 	'forums_prives' => 'Forums in private area',
 	'forums_public' => 'Public forums',
 	'forums_public_a_noter' => 'Note : if forums are awaiting validation from moderators before publication, only authors with rights to validate forums get notified when the comment is posted ; other recipients get notified only when moderators validate the comment.',
-	'forums_public_auteurs' => '<strong>Authors</strong>&nbsp;: Authors get notified when new comments are posted to their article(s) on the public area.',
+	'forums_public_auteurs' => '<strong>Authors</strong> : Authors get notified when new comments are posted to their article(s) on the public area.',
 	'forums_public_moderateur' => 'Please write here moderators\' email adress for public forums, coma separated.',
-	'forums_public_thread' => '<strong>Forum thread</strong>&nbsp;: Posters to the same thread get notified when a new comment is posted to the (public) thread.',
+	'forums_public_thread' => '<strong>Forum thread</strong> : Posters to the same thread get notified when a new comment is posted to the (public) thread.',
 
 	// I
 	'inscription' => 'Editors registration',
@@ -57,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_voir_configuration' => 'Look at the notification setup',
 	'messagerie_interne' => 'Private messages',
-	'messagerie_interne_signaler' => '<strong>Notify new private messages</strong>&nbsp;: activate this to get redactors notified when they haven\'t seen a Private Message had been sent to them. Redactors get notified 20 minutes after the Private Message is sent, in order to avoid spam, when the redactor is connected to the private area.',
+	'messagerie_interne_signaler' => '<strong>Notify new private messages</strong> : activate this to get redactors notified when they haven\'t seen a Private Message had been sent to them. Redactors get notified 20 minutes after the Private Message is sent, in order to avoid spam, when the redactor is connected to the private area.',
 	'moderateur' => '<strong>Moderator</strong>',
 
 	// N
@@ -77,9 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suivis_public_notif_desactiver' => 'TODO: Tickbox to stop notifications',
 	'suivis_public_vos_forums' => 'Your forums',
 	'suivis_public_vos_forums_date' => 'Your forums, by date',
-	'suivis_public_votre_page' => 'This is your personnal Notifications follow-up for the website', // #NOM_SITE_SPIP
-
-
+	'suivis_public_votre_page' => 'This is your personnal Notifications follow-up for the website'
 );
 
 ?>
