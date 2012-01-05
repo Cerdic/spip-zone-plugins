@@ -2,21 +2,9 @@
 [<a href="(#ENV{url_ret}|urldecode)" class="lien-retour-recherche"><:pmb:retour_recherche:></a>]
 
 [(#ENV{afficher_logo}|=={oui}|oui)
-	[(#ENV{notice/logo_src}|oui)
-		[(#ENV{copieimage,non}|=={non}|non)
-			[(#ENV{notice/logo_src}
-				|copie_locale{force}
-				|image_reduire{130,0}
-				|inserer_attribut{class,spip_logos})]
-		]
-		[(#ENV{copieimage,non}|=={non}|oui)
-			[(#ENV{notice/logo_src}
-				|image_reduire{130,0}
-				|inserer_attribut{class,spip_logos}
-				|inserer_attribut{alt,''})]
-		]
-	]
+	[(#INCLURE{fond=inclure/pmb-inc-logo, notice, largeur=130})]
 ]
+
 <div class="corps-conteneur surlignable">
 	[(#ENV{afficher_info}|=={non}|non)
 	<div class="pmb-ouvrage-infos">	

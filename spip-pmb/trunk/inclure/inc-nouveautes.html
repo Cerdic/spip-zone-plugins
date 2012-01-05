@@ -12,7 +12,7 @@
 <div class="liste articles nouveautes avec_resume">
 	 #ANCRE_PAGINATION
 	[<p class="pagination">(#PAGINATION)</p>]
-	<ul class="liste-items">
+	<ul class="liste-items items">
 	<BOUCLE_tab_resultat(POUR){tableau #GET{tab_notices}}{pagination 5}>
 		<INCLURE{fond=inclure/inc-notice-resume}{notice=#VALEUR}{compteur=#COMPTEUR_BOUCLE}>
 	</BOUCLE_tab_resultat>

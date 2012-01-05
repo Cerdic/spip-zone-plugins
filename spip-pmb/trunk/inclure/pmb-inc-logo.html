@@ -1,0 +1,20 @@
+
+[(#ENV{notice/logo_src}|oui)
+		[(#ENV{copieimage,non}|=={non}|non)
+			[(#ENV{notice/logo_src}
+				|copie_locale{force}
+				|image_reduire{#ENV{largeur,100},#ENV{hauteur,0}}
+				|inserer_attribut{class,spip_logos})]
+		]
+		[(#ENV{copieimage,non}|=={non}|oui)
+			[(#ENV{notice/logo_src}
+				|image_reduire{#ENV{largeur,100},#ENV{hauteur,0}}
+				|inserer_attribut{class,spip_logos}
+				|inserer_attribut{alt,''})]
+		]
+]
+[(#ENV{notice/logo_src}|non)
+	[(#REM) pas de logo, on regarde si une image est en document joint ]
+	[(#SET{tab_docnum,[(#ENV{notice/id}|pmb_ws_documents_numeriques)]})]
+	[(#INCLURE{fond=inclure/inc-image-doc-joint,tab_docnum=#GET{tab_docnum},env})]
+]

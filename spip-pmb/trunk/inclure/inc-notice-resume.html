@@ -2,30 +2,12 @@
 	|parametre_url{id,#ENV{notice/id}}
 	|parametre_url{url_ret,#ENV{url_ret}})]})]
 
-<li class="item hentry[ (#ENV{surlignable}|oui)surlignable][ (#ENV{compteur}|=={1}|oui)premier]">
-	<div class="logo-encart">
-		<a href="#GET{url}">
-		[(#ENV{notice/logo_src}|oui)
-			[(#ENV{copieimage,non}|=={non}|non)
-				[(#ENV{notice/logo_src}
-					|copie_locale{force}
-					|image_reduire{#ENV{largeur,100},#ENV{hauteur,0}}
-					|inserer_attribut{class,spip_logos})]
-			]
-			[(#ENV{copieimage,non}|=={non}|oui)
-				[(#ENV{notice/logo_src}
-					|image_reduire{#ENV{largeur,100},#ENV{hauteur,0}}
-					|inserer_attribut{class,spip_logos}
-					|inserer_attribut{alt,''})]
-			]
-		]
-		[(#ENV{notice/logo_src}|non)
-			[(#REM) pas de logo, on regarde si une image est en document joint ]
-			[(#SET{tab_docnum,[(#ENV{notice/id}|pmb_ws_documents_numeriques)]})]
-			[(#INCLURE{fond=inclure/inc-image-doc-joint,tab_docnum=#GET{tab_docnum},env})]
-		]
-		</a>
-	</div>
+[(#SET{logo,[(#INCLURE{fond=inclure/pmb-inc-logo,notice,largeur,hauteur}|trim)]})]
+
+<li class="item hentry[(#GET{logo}) avec_logo][ (#ENV{surlignable}|oui)surlignable][ (#ENV{compteur}|=={1}|oui)premier]">
+	[<div class="logo-encart">
+		<a href="#GET{url}">(#GET{logo})</a>
+	</div>]
 	<h3 class="h3 entry-title[ (#ENV{surlignable}|oui)surlignable]">
 		<a href="#GET{url}"[ title="(#NOM_SITE|texte_backend)"]>[(#ENV{notice/titre})]</a>
 	</h3>

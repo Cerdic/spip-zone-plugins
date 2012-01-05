@@ -3,12 +3,12 @@
 	[(#ENV{copieimage,non}|=={non}|non)
 		[(#ENV{tab_docnum/#CLE/downloadUrl,#ENV{tab_docnum/#CLE/url}}
 			|copie_locale{force}
-			|image_reduire{0,100}
+			|image_reduire{#ENV{largeur,0},#ENV{hauteur,100}}
 			|inserer_attribut{class,spip_logos})]
 	]
 	[(#ENV{copieimage,non}|=={non}|oui)
 		[(#ENV{tab_docnum/#CLE/downloadUrl,#ENV{tab_docnum/#CLE/url}}
-			|image_reduire{0,100}
+			|image_reduire{#ENV{largeur,0},#ENV{hauteur,100}}
 			|inserer_attribut{class,spip_logos})]
 	]
 ]</BOUCLE_tab_docnumimages>
