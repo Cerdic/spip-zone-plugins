@@ -29,9 +29,6 @@ function formulaires_editer_tradlang_verifier($id_tradlang='aucun',$retour='',$l
 
 function formulaires_editer_tradlang_traiter($id_tradlang='aucun',$retour='',$lang_orig=''){
 	$ret = formulaires_editer_objet_traiter('tradlang',$id_tradlang,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
-	if(_request('statut') != ''){
-		
-	}
 	return $ret;
 }
 ?>
