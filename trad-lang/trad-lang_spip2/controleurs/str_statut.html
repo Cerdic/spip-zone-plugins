@@ -10,16 +10,13 @@
 <BOUCLE_a(TRADLANG tradlang_modules){id_tradlang}>
 <li class="editer_statut">
 	<script type='text/javascript'>
-	var contenu_orig = '[(#STR**|entites_html)]';
+	var contenu_orig = '[(#STR**|entites_html|replace{"\n","_"}|replace{"\r",""}|replace{"\t",""})]';
 	var me = cQuery(".tradlang-str_statut-#ID_TRADLANG");
 	var id = me.crayon().find('form');
 	cQuery(id).submit(function(){
 		var newstatut = $(this).find('#statut').val();
-		var new_contenu = $(this).find('#str').val();
+		var new_contenu = $(this).find('#str').val().replace(/\n/,'_');
 		if((new_contenu != contenu_orig) && (newstatut != 'OK'))
-			//if (!confirm("Voulez-vous changer la couleur de fond de page ?")) { // Clic sur OK
-			//	return false;
-			//}
 			alert('<:tradlang:crayon_changer_statut|filtrer_entites|texte_script:>');
 	});
 	</script>
