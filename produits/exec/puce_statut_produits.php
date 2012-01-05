@@ -26,6 +26,6 @@ function exec_puce_statut_produits_args($id, $type)
 		$statut = 'prop'; // arbitraire
 	}
 	$puce_statut = charger_fonction('puce_statut', 'inc');
-	ajax_retour($puce_statut($id,$statut,$id_formulaire,$type, true));
+	ajax_retour($puce_statut($id,$statut,$id_rubrique,$type, true));
 }
 ?>
