@@ -186,24 +186,7 @@ function pmb_collection_extraire($id_collection, $debut=0, $nbresult=5, $id_sess
 			$tableau_resultat['collection_web']    = $result->information->collection_web;
 			$tableau_resultat['notice_ids']        = Array();
 
-			$liste_notices = Array();
-			$cpt=0;
-			if (is_array($result->notice_ids)) {
-				foreach($result->notice_ids as $cle=>$valeur) {
-					if (($cpt>=$debut) && ($cpt<$nbresult+$debut)) $liste_notices[] = $valeur;
-					$cpt++;
-				}
-			}
-			pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);
-			$tableau_resultat['notice_ids'][0]['nb_resultats'] = $cpt;
-
-			$cpt=0;
-			if (is_array($liste_notices)) {
-				foreach($liste_notices as $notice) {
-					$tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
-					$cpt++;
-				}
-			}
+			pmb_extraire_resultats(&$ws, $result, $tableau_resultat, $debut, $nbresult);
 		}
 	
 	} catch (Exception $e) {
@@ -212,46 +195,64 @@ function pmb_collection_extraire($id_collection, $debut=0, $nbresult=5, $id_sess
 	return $tableau_resultat;
 }
 
+
+/**
+ * Calculer le total des elements
+ * Extraire la pagination
+ * Et calculer les valeurs des resultats
+ *
+ * @param 
+ * @return 
+**/
+function pmb_extraire_resultats(&$ws, $result, &$tableau_resultat, $debut, $nbresult) {
+	$liste_notices = Array();
+	$cpt=0;
+	if (is_array($result->notice_ids)) {
+		$cpt = count($result->notice_ids);
+		$liste_notices = array_slice($result->notice_ids, $debut, $nbresult);
+	}
+	pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);
+	array_unshift($tableau_resultat['notice_ids'], array('nb_resultats' => $cpt));
+	#pmb_remettre_id_dans_resultats($tableau_resultat, $liste_notices);
+}
+
+/**
+ * A priori du code mort...
+ * Mais on le mutualise dans une fonction
+ *
+**/
+function pmb_remettre_id_dans_resultats(&$tabreau_resultat, $liste_notices) {
+	if (is_array($liste_notices)) {
+		foreach($liste_notices as $cle => $notice) {
+			$tableau_resultat['notice_ids'][$cle]['id'] = $notice;
+		}
+	}
+}
+
+
 function pmb_editeur_extraire($id_editeur, $debut=0, $nbresult=5, $id_session=0) {
 	$tableau_resultat = Array();
 	
 	pmb_ws_charger_client($ws);
 	try {
-	      $result = $ws->pmbesPublishers_get_publisher_information_and_notices($id_editeur,$id_session);
-	      if ($result) {
-		  $tableau_resultat['publisher_id'] = $result->information->publisher_id;
-		  $tableau_resultat['publisher_name'] = $result->information->publisher_name;
-		  $tableau_resultat['publisher_address1'] = $result->information->publisher_address1;
-		  $tableau_resultat['publisher_address2'] = $result->information->publisher_address2;
-		  $tableau_resultat['publisher_zipcode'] = $result->information->publisher_zipcode;
-		  $tableau_resultat['publisher_city'] = $result->information->publisher_city;
-		  $tableau_resultat['publisher_country'] = $result->information->publisher_country;
-		  $tableau_resultat['publisher_web'] = $result->information->publisher_web;
-		  $tableau_resultat['publisher_comment'] = $result->information->publisher_comment;
-		   $tableau_resultat['notice_ids'] = Array();
+		$result = $ws->pmbesPublishers_get_publisher_information_and_notices($id_editeur,$id_session);
+		if ($result) {
+			$tableau_resultat['publisher_id']       = $result->information->publisher_id;
+			$tableau_resultat['publisher_name']     = $result->information->publisher_name;
+			$tableau_resultat['publisher_address1'] = $result->information->publisher_address1;
+			$tableau_resultat['publisher_address2'] = $result->information->publisher_address2;
+			$tableau_resultat['publisher_zipcode']  = $result->information->publisher_zipcode;
+			$tableau_resultat['publisher_city']     = $result->information->publisher_city;
+			$tableau_resultat['publisher_country']  = $result->information->publisher_country;
+			$tableau_resultat['publisher_web']      = $result->information->publisher_web;
+			$tableau_resultat['publisher_comment']  = $result->information->publisher_comment;
+			$tableau_resultat['notice_ids'] = Array();
 
-		  $liste_notices = Array();
-		  $cpt=0;
-		  if (is_array($result->notice_ids)) {
-			foreach($result->notice_ids as $cle=>$valeur) {
-			  if (($cpt>=$debut) && ($cpt<$nbresult+$debut)) $liste_notices[] = $valeur;
-			  $cpt++;
-			}
-		  }
-		  pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);
-		  $tableau_resultat['notice_ids'][0]['nb_resultats'] = $cpt;
-
-		  $cpt=0;
-		  if (is_array($liste_notices)) {
-			foreach($liste_notices as $notice) {
-			  $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
-			  $cpt++;
-			}
-		  }
+			pmb_extraire_resultats(&$ws, $result, $tableau_resultat, $debut, $nbresult);
 		}
-	} catch (Exception $e) {
-		 echo 'Exception reçue (6) : ',  $e->getMessage(), "\n";
-	} 
+	}catch (Exception $e) {
+		echo 'Exception reçue (6) : ',  $e->getMessage(), "\n";
+	}
 	return $tableau_resultat;
 
 }
@@ -261,46 +262,30 @@ function pmb_auteur_extraire($id_auteur, $debut=0, $nbresult=5, $id_session=0) {
 	
 	pmb_ws_charger_client($ws);
 	try {
-	      $result = $ws->pmbesAuthors_get_author_information_and_notices($id_auteur,$id_session);
-	      if ($result) {
-		  $tableau_resultat['author_id'] = $result->information->author_id;
-		  $tableau_resultat['author_type'] = $result->information->author_type;
-		  $tableau_resultat['author_name'] = $result->information->author_name;
-		  $tableau_resultat['author_rejete'] = $result->information->author_rejete;
-		  if ($result->information->author_rejete) {
-		      $tableau_resultat['author_nomcomplet'] =  $tableau_resultat['author_rejete'].' '.$tableau_resultat['author_name'];
-		  } else {
-		      $tableau_resultat['author_nomcomplet'] = $tableau_resultat['author_name'];
-		  }
-
-		  $tableau_resultat['author_see'] = $result->information->author_see;
-		  $tableau_resultat['author_date'] = $result->information->author_date;
-		  $tableau_resultat['author_web'] = $result->information->author_web;
-		  $tableau_resultat['author_comment'] = $result->information->author_comment;
-		  $tableau_resultat['author_lieu'] = $result->information->author_lieu;
-		  $tableau_resultat['author_ville'] = $result->information->author_ville;
-		  $tableau_resultat['author_pays'] = $result->information->author_pays;
-		  $tableau_resultat['author_subdivision'] = $result->information->author_subdivision;
-		  $tableau_resultat['author_numero'] = $result->information->author_numero;
-		  $tableau_resultat['notice_ids'] = Array();
-
-		  $liste_notices = Array();
-		  $cpt=0;
-		  if (is_array($result->notice_ids)) {
-			foreach($result->notice_ids as $cle=>$valeur) {
-			  if (($cpt>=$debut) && ($cpt<$nbresult+$debut)) $liste_notices[] = $valeur;
-			  $cpt++;
+		$result = $ws->pmbesAuthors_get_author_information_and_notices($id_auteur,$id_session);
+		if ($result) {
+			$tableau_resultat['author_id']     = $result->information->author_id;
+			$tableau_resultat['author_type']   = $result->information->author_type;
+			$tableau_resultat['author_name']   = $result->information->author_name;
+			$tableau_resultat['author_rejete'] = $result->information->author_rejete;
+			if ($result->information->author_rejete) {
+				$tableau_resultat['author_nomcomplet'] =  $tableau_resultat['author_rejete'].' '.$tableau_resultat['author_name'];
+			} else {
+				$tableau_resultat['author_nomcomplet'] = $tableau_resultat['author_name'];
 			}
-		  }
-		  pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);
-		   $tableau_resultat['notice_ids'][0]['nb_resultats'] = $cpt;
-		  $cpt=0;
-		  if (is_array($liste_notices)) {
-			foreach($liste_notices as $notice) {
-			  $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
-			  $cpt++;
-			}
-		   }
+
+			$tableau_resultat['author_see']      = $result->information->author_see;
+			$tableau_resultat['author_date']     = $result->information->author_date;
+			$tableau_resultat['author_web']      = $result->information->author_web;
+			$tableau_resultat['author_comment']  = $result->information->author_comment;
+			$tableau_resultat['author_lieu']     = $result->information->author_lieu;
+			$tableau_resultat['author_ville']    = $result->information->author_ville;
+			$tableau_resultat['author_pays']     = $result->information->author_pays;
+			$tableau_resultat['author_subdivision'] = $result->information->author_subdivision;
+			$tableau_resultat['author_numero']      = $result->information->author_numero;
+			$tableau_resultat['notice_ids'] = Array();
+
+			pmb_extraire_resultats(&$ws, $result, $tableau_resultat, $debut, $nbresult);
 		}
 	} catch (Exception $e) {
 		 echo 'Exception reçue (7) : ',  $e->getMessage(), "\n";
@@ -456,204 +441,209 @@ function pmb_recuperer_champs_recherche($langue=0) {
 	return $tresultat;
 }
 
+function pmb_ws_parser_notice($value) {
+	$res = array();
+	return pmb_ws_parser_notice_array($value, $res);
+}
 
 function pmb_ws_parser_notice_array($value, &$tresultat) {
-	    include_spip("inc/filtres_images");
-	    
-	    $indice_exemplaire = 0;
-	    $tresultat = Array();
-	    $id_notice = $value->id;
-	    $authors_700 = array();
-	    $authors_701 = array();
-	    $authors_702 = array();
-	    
-	    if (isset($value->f) && is_array($value->f)) {
-	    	foreach($value->f as $a_field_f) {
-	    		$field_type = $a_field_f->c;
-	    		$field_id = $a_field_f->id;
-	    		
-	    		if (isset($a_field_f->s) && is_array($a_field_f->s)) {
-	    			foreach($a_field_f->s as $a_field_s) {
-	    				$field_subtype = $a_field_s->c;
-	    				$field_value = $a_field_s->value;
-	    				
-	    				switch($field_type) {
-	    					case '010': {
-	    						switch($field_subtype) {
-	    							case 'a': {
-	    								$tresultat['isbn'] .= $field_value;
-	    								break;
-	    							}
-	    							case 'b': {
-	    								$tresultat['reliure'] .= $field_value;
-	    								break;
-	    							}
-	    							case 'd': {
-	    								$tresultat['prix'] .= $field_value;
-	    								break;
-	    							}
-	    						}
-	    						break;
-	    					}
-	    					case '101': {
-	    						 switch($field_subtype) {
-	    							case 'a': {
-	    								$tresultat['langues'] .= $field_value;
-	    								break;
-	    							}
-	    						}
-	    						break;
-	    					}
-	    					case '102': {
-	    						switch($field_subtype) {
-	    							case 'a': {
-	    								$tresultat['pays'] .= $field_value;
-	    								break;
-	    							}
-	    						}
-	    						break;
-	    					}
-	    					case '200': {
-	    						switch($field_subtype) {
-	    							case 'a': {
-	    								$tresultat['titre'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$field_value))))));
-	    								break;
-	    							}
-	    							 case 'e': {
-	    								$tresultat['soustitre'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$field_value))))));
-	    								break;
-	    							}
-	    							case 'f': {
-	    								$tresultat['auteur'] .= $field_value;
-	    								break;
-	    							}
-	    						}
-	    						break;
-	    					}
-	    					case '210': {
-	    						switch($field_subtype) {
-	    							case 'c': {
-	    								$tresultat['editeur'] .= $field_value;
-	    								break;
-	    							}
-	    							case 'a': {
-	    								$tresultat['editeur'] .= ' ('.$field_value.')';
-	    								$tresultat['id_editeur'] = $field_id;
-	    								break;
-	    							}
-	    							case 'd': {
-	    								$tresultat['annee_publication'] .= $field_value;
-	    								break;
-	    							}
-	    						}
-	    						break;
-	    					}
-	    					case '215': {
-	    						switch($field_subtype) {
-	    							case 'a': {
-	    								$tresultat['importance'] .= $field_value;
-	    								break;
-	    							}
-	    							case 'c': {
-	    								$tresultat['presentation'] .= $field_value;
-	    								break;
-	    							}
-	    							case 'd': {
-	    								$tresultat['format'] .= $field_value;
-	    								break;
-	    							}
-	    						}
-	    						break;
-	    					}
-	    					case '225': {
-	    						switch($field_subtype) {
-	    							case 'a': {
-	    								$tresultat['collection'] .= $field_value;
-	    								$tresultat['id_collection'] = $field_id;
-	    								break;
-	    							}
-	    						}
-	    						break;
-	    					}
-	    					case '330': {
-	    						switch($field_subtype) {
-	    							case 'a': {
-	    								$tresultat['resume'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$field_value))))));
-	    								break;
-	    							}
-	    						}
-	    						break;
-	    					}
-	    					case '700': {
-	    						switch($field_subtype) {
-	    							case 'a': {
-										$tresultat['id_auteur'] = $field_id;
-										$authors_700[] = "<a href=\"?page=author_see&amp;id=".$field_id."\">".$field_value."</a>";
-										$tresultat['lesauteurs'] .= $field_value;
-										break;	    								
-	    							}
-	    							case 'b': {
-										$tresultat['lesauteurs'] = $field_value." ".$tresultat['lesauteurs'];
-										$tresultat['liensauteurs'] .= " ".$field_value;
-										break;	    								
-	    							}
-	    						}
-	    						break;
-	    					}
-	    					case '701': {
-	    						switch($field_subtype) {
-	    							case 'a': {
-										$tresultat['id_auteur2'] = $field_id;
-										$authors_701[] = "<a href=\"?page=author_see&amp;id=".$field_id."\">".$field_value."</a>";
-										$tresultat['lesauteurs2'] .= $field_value;
-										break;	    								
-	    							}
-	    							case 'b': {
-										$tresultat['lesauteurs2'] = $field_value." ".$tresultat['lesauteurs'];
-										$tresultat['liensauteurs2'] .= " ".$field_value;
-										break;	    								
-	    							}
-	    						}
-	    						break;
-	    					}
-	    					case '702': {
-	    						switch($field_subtype) {
-	    							case 'a': {
-										$tresultat['id_auteur3'] = $field_id;
-										$authors_702[] = "<a href=\"?page=author_see&amp;id=".$field_id."\">".$field_value."</a>";
-										$tresultat['lesauteurs3'] .= $field_value;
-										break;	    								
-	    							}
-	    							case 'b': {
-										$tresultat['lesauteurs3'] = $field_value." ".$tresultat['lesauteurs'];
-										$tresultat['liensauteurs3'] .= " ".$field_value;
-										break;	    								
-	    							}
-	    						}
-	    						break;
-	    					}
-	    				}
+	include_spip("inc/filtres_images");
+	
+	$indice_exemplaire = 0;
+	$tresultat = Array();
+	$id_notice = $value->id;
+	$authors_700 = array();
+	$authors_701 = array();
+	$authors_702 = array();
+	
+	if (isset($value->f) && is_array($value->f)) {
+		foreach($value->f as $a_field_f) {
+			$field_type = $a_field_f->c;
+			$field_id = $a_field_f->id;
+			
+			if (isset($a_field_f->s) && is_array($a_field_f->s)) {
+				foreach($a_field_f->s as $a_field_s) {
+					$field_subtype = $a_field_s->c;
+					$field_value = $a_field_s->value;
+					
+					switch($field_type) {
+						case '010': {
+							switch($field_subtype) {
+								case 'a': {
+									$tresultat['isbn'] .= $field_value;
+									break;
+								}
+								case 'b': {
+									$tresultat['reliure'] .= $field_value;
+									break;
+								}
+								case 'd': {
+									$tresultat['prix'] .= $field_value;
+									break;
+								}
+							}
+							break;
+						}
+						case '101': {
+							switch($field_subtype) {
+								case 'a': {
+									$tresultat['langues'] .= $field_value;
+									break;
+								}
+							}
+							break;
+						}
+						case '102': {
+							switch($field_subtype) {
+								case 'a': {
+									$tresultat['pays'] .= $field_value;
+									break;
+								}
+							}
+							break;
+						}
+						case '200': {
+							switch($field_subtype) {
+								case 'a': {
+									$tresultat['titre'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$field_value))))));
+									break;
+								}
+								case 'e': {
+									$tresultat['soustitre'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$field_value))))));
+									break;
+								}
+								case 'f': {
+									$tresultat['auteur'] .= $field_value;
+									break;
+								}
+							}
+							break;
+						}
+						case '210': {
+							switch($field_subtype) {
+								case 'c': {
+									$tresultat['editeur'] .= $field_value;
+									break;
+								}
+								case 'a': {
+									$tresultat['editeur'] .= ' ('.$field_value.')';
+									$tresultat['id_editeur'] = $field_id;
+									break;
+								}
+								case 'd': {
+									$tresultat['annee_publication'] .= $field_value;
+									break;
+								}
+							}
+							break;
+						}
+						case '215': {
+							switch($field_subtype) {
+								case 'a': {
+									$tresultat['importance'] .= $field_value;
+									break;
+								}
+								case 'c': {
+									$tresultat['presentation'] .= $field_value;
+									break;
+								}
+								case 'd': {
+									$tresultat['format'] .= $field_value;
+									break;
+								}
+							}
+							break;
+						}
+						case '225': {
+							switch($field_subtype) {
+								case 'a': {
+									$tresultat['collection'] .= $field_value;
+									$tresultat['id_collection'] = $field_id;
+									break;
+								}
+							}
+							break;
+						}
+						case '330': {
+							switch($field_subtype) {
+								case 'a': {
+									$tresultat['resume'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$field_value))))));
+									break;
+								}
+							}
+							break;
+						}
+						case '700': {
+							switch($field_subtype) {
+								case 'a': {
+									$tresultat['id_auteur'] = $field_id;
+									$authors_700[] = "<a href=\"?page=author_see&amp;id=".$field_id."\">".$field_value."</a>";
+									$tresultat['lesauteurs'] .= $field_value;
+									break;
+								}
+								case 'b': {
+									$tresultat['lesauteurs'] = $field_value." ".$tresultat['lesauteurs'];
+									$tresultat['liensauteurs'] .= " ".$field_value;
+									break;
+								}
+							}
+							break;
+						}
+						case '701': {
+							switch($field_subtype) {
+								case 'a': {
+									$tresultat['id_auteur2'] = $field_id;
+									$authors_701[] = "<a href=\"?page=author_see&amp;id=".$field_id."\">".$field_value."</a>";
+									$tresultat['lesauteurs2'] .= $field_value;
+									break;
+								}
+								case 'b': {
+									$tresultat['lesauteurs2'] = $field_value." ".$tresultat['lesauteurs'];
+									$tresultat['liensauteurs2'] .= " ".$field_value;
+									break;
+								}
+							}
+							break;
+						}
+						case '702': {
+							switch($field_subtype) {
+								case 'a': {
+									$tresultat['id_auteur3'] = $field_id;
+									$authors_702[] = "<a href=\"?page=author_see&amp;id=".$field_id."\">".$field_value."</a>";
+									$tresultat['lesauteurs3'] .= $field_value;
+									break;
+								}
+								case 'b': {
+									$tresultat['lesauteurs3'] = $field_value." ".$tresultat['lesauteurs'];
+									$tresultat['liensauteurs3'] .= " ".$field_value;
+									break;
+								}
+							}
+							break;
+						}
+					}
 
-	    			}
-	    		}
-	    		
-	    	}
-	    }
-	    
-	    $tresultat['liensauteurs']  = implode(', ', $authors_700);
-	    $tresultat['liensauteurs2'] = implode(', ', $authors_701);
-	    $tresultat['liensauteurs3'] = implode(', ', $authors_702);
-	    
-	    if ($tresultat['lesauteurs'] == "") {
-			$tresultat['lesauteurs'] = $tresultat['auteur'];
+				}
+			}
+			
 		}
-	    $tresultat['logo_src'] = rtrim(lire_config("spip_pmb/url","http://tence.bibli.fr/opac"),'/')."/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$tresultat['isbn']);
+	}
+	
+	$tresultat['liensauteurs']  = implode(', ', $authors_700);
+	$tresultat['liensauteurs2'] = implode(', ', $authors_701);
+	$tresultat['liensauteurs3'] = implode(', ', $authors_702);
 
-	    //si pas de numéro isbn (exemple jouets ludothèque) il n'y aura pas de logo
-	    if ($tresultat['isbn'] == '') $tresultat['logo_src'] = '';
-	     
-	    $tresultat['id'] = $id_notice;
- 
+	if ($tresultat['lesauteurs'] == "") {
+		$tresultat['lesauteurs'] = $tresultat['auteur'];
+	}
+	$tresultat['logo_src'] = rtrim(lire_config("spip_pmb/url","http://tence.bibli.fr/opac"),'/')."/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$tresultat['isbn']);
+
+	//si pas de numéro isbn (exemple jouets ludothèque) il n'y aura pas de logo
+	if ($tresultat['isbn'] == '') $tresultat['logo_src'] = '';
+
+	$tresultat['id'] = $id_notice;
+	
+	return $tresultat;
 }
 
 function pmb_ws_autres_lecteurs($id_notice) {
@@ -661,26 +651,26 @@ function pmb_ws_autres_lecteurs($id_notice) {
 	$tresultat = Array();
 	pmb_ws_charger_client($ws);
 	
-	try {	
-	     if ($ws->pmbesOPACGeneric_is_also_borrowed_enabled()) {
-		$r=$ws->pmbesOPACGeneric_also_borrowed($id_notice,0);
-		$listenotices = Array();
-		if (is_array($r)) {
-		    if (is_array($r)) {
-			foreach ($r as $notice) {
-			    $listenotices[] = $notice['notice_id'];
+	try {
+		if ($ws->pmbesOPACGeneric_is_also_borrowed_enabled()) {
+			$r=$ws->pmbesOPACGeneric_also_borrowed($id_notice,0);
+			$listenotices = Array();
+			if (is_array($r)) {
+				foreach ($r as $notice) {
+					$listenotices[] = $notice['notice_id'];
+				}
 			}
-		    }
+			if (count($listenotices)>0) {
+				pmb_ws_recuperer_tab_notices ($listenotices, $ws, $tresultat);
+			}
 		}
-		if (count($listenotices)>0) {
-		      pmb_ws_recuperer_tab_notices ($listenotices, $ws, $tresultat);
-		}
-	    }
-	} catch (Exception $e) {
-		 echo 'Exception reçue (10) : ',  $e->getMessage(), "\n";
+	}catch (Exception $e) {
+		echo 'Exception reçue (10) : ',  $e->getMessage(), "\n";
 	} 
 	return $tresultat;
 }
+
+
 function pmb_ws_documents_numeriques ($id_notice, $id_session=0) {
 
 	$tresultat = Array();
@@ -763,11 +753,7 @@ function pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat) {
 		$r=$ws->pmbesNotices_fetchNoticeListArray($listenotices,"utf-8",true,false);
 		$cpt=0;
 		if (is_array($r)) {
-			foreach($r as $value) {
-				$tresultat[$cpt] = Array();
-				pmb_ws_parser_notice_array($value, $tresultat[$cpt]);
-				$cpt++;
-			}
+			$tresultat = array_map('pmb_ws_parser_notice', $r);
 		}
 	} catch (Exception $e) {
 		echo 'Exception reçue (14) : ',  $e->getMessage(), "\n";
@@ -823,12 +809,11 @@ function pmb_ws_liste_tri_recherche() {
 	$tresultat = Array();
 	pmb_ws_charger_client($ws);
 	
-	try {	
-	     $tresultat=$ws->pmbesSearch_get_sort_types();
-	 
+	try {
+		$tresultat=$ws->pmbesSearch_get_sort_types();
 	} catch (Exception $e) {
-		 echo 'Exception reçue (16) : ',  $e->getMessage(), "\n";
-	} 
+		echo 'Exception reçue (16) : ',  $e->getMessage(), "\n";
+	}
 	return $tresultat;
 }
 
@@ -852,7 +837,6 @@ function pmb_tabnotices_extraire ($tabnotices) {
 	
 	pmb_ws_recuperer_tab_notices ($listenotices, $ws, $tableau_resultat);
 	return $tableau_resultat;
-			
 }
 
 // retourne un tableau associatif contenant les prêts en cours
@@ -860,41 +844,36 @@ function pmb_prets_extraire ($session_id, $type_pret=0) {
 	$tableau_resultat = Array();
 	pmb_ws_charger_client($ws);
 	try{
-	      $loans = $ws->pmbesOPACEmpr_list_loans($session_id, $type_pret);
-	      $liste_notices = Array();
-	      $cpt = 0;
-	      if (is_array($loans)) {
-		foreach ($loans as $loan) {
-			$tableau_resultat[$cpt] = Array();
-			$tableau_resultat[$cpt]['empr_id'] = $loan->empr_id;
-			$liste_notices[] = $loan->notice_id;
-			$tableau_resultat[$cpt]['notice_id'] = $loan->notice_id;
-			$tableau_resultat[$cpt]['bulletin_id'] = $loan->bulletin_id;
-			$tableau_resultat[$cpt]['expl_id'] = $loan->expl_id;
-			$tableau_resultat[$cpt]['expl_cb'] = $loan->expl_cb;
-			$tableau_resultat[$cpt]['expl_support'] = $loan->expl_support;
-			$tableau_resultat[$cpt]['expl_location_id'] = $loan->expl_location_id;
-			$tableau_resultat[$cpt]['expl_location_caption'] = $loan->expl_location_caption;
-			$tableau_resultat[$cpt]['expl_section_id'] = $loan->expl_section_id;
-			$tableau_resultat[$cpt]['expl_section_caption'] = $loan->expl_section_caption;
-			$tableau_resultat[$cpt]['expl_libelle'] = $loan->expl_libelle;
-			$tableau_resultat[$cpt]['loan_startdate'] = $loan->loan_startdate;
-			$tableau_resultat[$cpt]['loan_returndate'] = $loan->loan_returndate;
-			
-			$cpt++;
-		  }
-	      }
-	      if ($cpt>0) {
-		    $tableau_resultat['notice_ids'] = Array();
-		    pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);  
-	      }
-	      $cpt=0;
-	      if (is_array($liste_notices)) {
-		foreach($liste_notices as $notice) {
-		      $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
-		      $cpt++;
-		  }
-	      }
+		$loans = $ws->pmbesOPACEmpr_list_loans($session_id, $type_pret);
+		$liste_notices = Array();
+		$cpt = 0;
+		if (is_array($loans)) {
+			foreach ($loans as $loan) {
+				$liste_notices[] = $loan->notice_id;
+				$tableau_resultat[$cpt] = Array();
+				$tableau_resultat[$cpt]['empr_id'] = $loan->empr_id;
+				$tableau_resultat[$cpt]['notice_id'] = $loan->notice_id;
+				$tableau_resultat[$cpt]['bulletin_id'] = $loan->bulletin_id;
+				$tableau_resultat[$cpt]['expl_id'] = $loan->expl_id;
+				$tableau_resultat[$cpt]['expl_cb'] = $loan->expl_cb;
+				$tableau_resultat[$cpt]['expl_support'] = $loan->expl_support;
+				$tableau_resultat[$cpt]['expl_location_id'] = $loan->expl_location_id;
+				$tableau_resultat[$cpt]['expl_location_caption'] = $loan->expl_location_caption;
+				$tableau_resultat[$cpt]['expl_section_id'] = $loan->expl_section_id;
+				$tableau_resultat[$cpt]['expl_section_caption'] = $loan->expl_section_caption;
+				$tableau_resultat[$cpt]['expl_libelle'] = $loan->expl_libelle;
+				$tableau_resultat[$cpt]['loan_startdate'] = $loan->loan_startdate;
+				$tableau_resultat[$cpt]['loan_returndate'] = $loan->loan_returndate;
+				
+				$cpt++;
+			}
+		}
+		if ($cpt>0) {
+			$tableau_resultat['notice_ids'] = Array();
+			pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);  
+		}
+		#pmb_remettre_id_dans_resultats(&$tabreau_resultat, $liste_notices);
+		
 	} catch (Exception $e) {
 		 echo 'Exception reçue (17) : ',  $e->getMessage(), "\n";
 	} 
@@ -911,31 +890,25 @@ function pmb_reservations_extraire($pmb_session) {
 	$cpt = 0;
 	if (is_array($reservations)) {
 		foreach ($reservations as $reservation) {
-		      $tableau_resultat[$cpt] = Array();
-		      $tableau_resultat[$cpt]['resa_id'] = $reservation->resa_id;
-		      $tableau_resultat[$cpt]['empr_id'] = $reservation->empr_id;
-		      $tableau_resultat[$cpt]['notice_id'] = $reservation->notice_id;
-		      $liste_notices[] = $reservation->notice_id;
-		      $tableau_resultat[$cpt]['bulletin_id'] = $reservation->bulletin_id;
-		      $tableau_resultat[$cpt]['resa_rank'] = $reservation->resa_rank;
-		      $tableau_resultat[$cpt]['resa_dateend'] = $reservation->resa_dateend;
-		      $tableau_resultat[$cpt]['resa_retrait_location_id '] = $reservation->resa_retrait_location_id ;
-		      $tableau_resultat[$cpt]['resa_retrait_location'] = $reservation->resa_retrait_location;
-		  
-		      $cpt++;
+			$liste_notices[] = $reservation->notice_id;
+			$tableau_resultat[$cpt] = Array();
+			$tableau_resultat[$cpt]['resa_id']      = $reservation->resa_id;
+			$tableau_resultat[$cpt]['empr_id']      = $reservation->empr_id;
+			$tableau_resultat[$cpt]['notice_id']   = $reservation->notice_id;
+			$tableau_resultat[$cpt]['bulletin_id']  = $reservation->bulletin_id;
+			$tableau_resultat[$cpt]['resa_rank']    = $reservation->resa_rank;
+			$tableau_resultat[$cpt]['resa_dateend'] = $reservation->resa_dateend;
+			$tableau_resultat[$cpt]['resa_retrait_location_id '] = $reservation->resa_retrait_location_id ;
+			$tableau_resultat[$cpt]['resa_retrait_location']     = $reservation->resa_retrait_location;
+
+			$cpt++;
 		}
 	}
 	if ($cpt>0) {
-	      $tableau_resultat['notice_ids'] = Array();
-	      pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);  
+		$tableau_resultat['notice_ids'] = Array();
+		pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);  
 	}
-	$cpt=0;
-	if (is_array($liste_notices)) {
-		foreach($liste_notices as $notice) {
-		    $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
-		    $cpt++;
-		}
-	}
+	#pmb_remettre_id_dans_resultats(&$tabreau_resultat, $liste_notices)
 	return $tableau_resultat;
 
 }
@@ -944,24 +917,20 @@ function pmb_tester_session($pmb_session, $id_auteur) {
 	//tester si la session pmb est toujours active
 	pmb_ws_charger_client($ws);
 	
-
 	try {
-	      if ($ws->pmbesOPACEmpr_get_account_info($pmb_session)) {
-	  	return 1;
-	      } else {
-		 $m = sql_updateq('spip_auteurs_pmb', array(
-				      'pmb_session' => ''),
-				      "id_auteur=".$id_auteur);
-		return 0;
-	      }
-
+		if ($ws->pmbesOPACEmpr_get_account_info($pmb_session)) {
+			return 1;
+		} else {
+			$m = sql_updateq('spip_auteurs_pmb', array('pmb_session' => ''), "id_auteur=".$id_auteur);
+			return 0;
+		}
 	} catch (Exception $e) {
-		$m = sql_updateq('spip_auteurs_pmb', array(
-				      'pmb_session' => ''),
-				      "id_auteur=".$id_auteur);
+		$m = sql_updateq('spip_auteurs_pmb', array('pmb_session' => ''), "id_auteur=".$id_auteur);
 		return 0;
 	}
 }
+
+
 function pmb_reserver_ouvrage($session_id, $notice_id, $bulletin_id, $location) {
 	pmb_ws_charger_client($ws);
 	$result= Array();

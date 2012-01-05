@@ -1,20 +1,27 @@
-
 <div class="corps-conteneur surlignable">
+	[(#REM) seulement si du contenu... ]
+	[(#ENV{notice/serie}
+		|ou{#ENV{tab_resultat/author_date}}
+		|ou{#ENV{tab_resultat/author_web}}
+		|ou{#ENV{tab_resultat/author_lieu}}
+		|ou{#ENV{tab_resultat/author_ville}}
+		|ou{#ENV{tab_resultat/author_pays}})
 	<div class="pmb-ouvrage-infos">	
 		<table class="spip pmb-tableau">
-			  <tbody>
-			   [<tr><td><strong><:pmb:serie:></strong></td><td>(#ENV{notice/serie})</td></tr>]
-			  
-		[<tr><td><strong><:pmb:author_date:></strong></td><td>(#ENV{tab_resultat/author_date})</td></tr>]
-		[<tr><td><strong><:pmb:author_web:></strong></td><td><a class="spip_out" href="[(#ENV{tab_resultat/author_web})]">(#ENV{tab_resultat/author_web})</a></td></tr>]
-		[<tr><td><strong><:pmb:author_lieu:></strong></td><td>(#ENV{tab_resultat/author_lieu})</td></tr>]
-		[<tr><td><strong><:pmb:author_ville:></strong></td><td>(#ENV{tab_resultat/author_ville})</td></tr>]
-		[<tr><td><strong><:pmb:author_pays:></strong></td><td>(#ENV{tab_resultat/author_pays})</td></td>]
-			  </tbody>
+			<tbody>
+			[<tr><td><strong><:pmb:serie:></strong></td><td>(#ENV{notice/serie})</td></tr>]
+			[<tr><td><strong><:pmb:author_date:></strong></td><td>(#ENV{tab_resultat/author_date})</td></tr>]
+			[<tr>
+				<td><strong><:pmb:author_web:></strong></td>
+				<td><a class="spip_out" href="[(#ENV{tab_resultat/author_web})]">(#ENV{tab_resultat/author_web})</a></td>
+			</tr>]
+			[<tr><td><strong><:pmb:author_lieu:></strong></td><td>(#ENV{tab_resultat/author_lieu})</td></tr>]
+			[<tr><td><strong><:pmb:author_ville:></strong></td><td>(#ENV{tab_resultat/author_ville})</td></tr>]
+			[<tr><td><strong><:pmb:author_pays:></strong></td><td>(#ENV{tab_resultat/author_pays})</td></td>]
+			</tbody>
 		</table>
-		
-		
 	</div>
+	]
 	[<div class="texte entry-content">(#ENV{tab_resultat/author_comment}|ucfirst|paragrapher)</div>]
 </div>
 

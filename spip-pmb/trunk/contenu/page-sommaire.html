@@ -9,7 +9,7 @@
 <div class="liste articles sommaire">
 	#ANCRE_PAGINATION
 	<h2 class="h2"><:derniers_articles:></h2>
-	<ul class="liste-items">
+	<ul class="liste-items items">
 		<BOUCLE_articles(ARTICLES) {!par date} {pagination 2}>
 		#INCLURE{fond=inclure/article-resume,id_article}
 		</BOUCLE_articles>
@@ -20,10 +20,10 @@
 
 [(#REM) Nouveaux ouvrages ]
 <B_syndic_pmb>
-<div class="menu articles nouveautes liste sommaire">
+<div class="liste articles nouveautes pmb sommaire">
 <h2 class="h2"><:pmb:nouveautes:></h2>
 	<a href="#URL_PAGE{nouveautes}" class="plus-de-liens"><:pmb:toutes_nouveautes:> +</a>
-	<ul class="liste-items">
+	<ul class="liste-items items">
 	<BOUCLE_syndic_pmb(SYNDIC_ARTICLES){par hasard}{url==notice_display}{0,2}>
 		[(#SET{notice_id,[(#URL_ARTICLE|parametre_url{id})]})]
 		[(#SET{notice, [(#GET{notice_id}|pmb_notice_extraire)]})]

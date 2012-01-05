@@ -4,7 +4,7 @@
 
 [(#SET{logo,[(#INCLURE{fond=inclure/pmb-inc-logo,notice,largeur,hauteur}|trim)]})]
 
-<li class="item hentry[(#GET{logo}) avec_logo][ (#ENV{surlignable}|oui)surlignable][ (#ENV{compteur}|=={1}|oui)premier]">
+<li class="item hentry[(#GET{logo}|oui) avec_logo][ (#ENV{surlignable}|oui)surlignable][ (#ENV{compteur}|=={1}|oui)premier]">
 	[<div class="logo-encart">
 		<a href="#GET{url}">(#GET{logo})</a>
 	</div>]

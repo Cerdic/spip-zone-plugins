@@ -1,4 +1,4 @@
-<div class="liste menu articles ouvrages">
+<div class="liste menu articles ouvrages pmb">
 	[(#SET{tab_notices,[(#ENV{tab_resultat/notice_ids})]})]
 	#SET{nb_resultats,#GET{tab_notices/0/nb_resultats}}
 	#SET{tab_notices,#GET{tab_notices}|depile}
