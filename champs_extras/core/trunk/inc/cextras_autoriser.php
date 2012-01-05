@@ -101,8 +101,7 @@ function autoriser_voirextra_dist($faire, $type, $id, $qui, $opt){
   * Autorisation de modifier un champ extra
   * autoriser('modifierextra_prenom','auteur', $id_auteur);
   * 
-  *    Attention au 0 pour separer la table du champ
-  * -> autoriser_auteur_modiierextra_prenom_dist()
+  * -> autoriser_auteur_modifierextra_prenom_dist()
   */
 function autoriser_modifierextra_dist($faire, $type, $id, $qui, $opt){
 	if (isset($opt['saisie'])) {
