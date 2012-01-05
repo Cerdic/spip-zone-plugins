@@ -74,7 +74,12 @@ class InlineStyle
 		foreach($stylesheet as $ss) {
 			foreach($this->parseStylesheet($ss) as $arr) {
 				list($selector, $style) = $arr;
-				$this->applyRule($selector, $style);
+				try {
+					$this->applyRule($selector, $style);
+				}
+				catch(Exception $e) { // ne pas casser sur un sélecteur inconnu ou une erreur dans le CSS
+					spip_log("Erreur dans la transcription des styles en ligne: ".$e->getMessage(),'facteur');
+				}
 			}
 		}
 		return $this;
