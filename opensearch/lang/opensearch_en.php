@@ -1,9 +1,11 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-if (!defined("_ECRIRE_INC_VERSION")) return;
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/opensearch/lang/
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	//C
+
+	// C
 	'cfg_boite_opensearch' => 'OpenSearch plugin configuration',
 	'cfg_descr_opensearch' => 'OpenSearch : custom search engine for your website.',
 	'cfg_inf_id_rubrique' => 'Select the section in which to search.',
@@ -13,4 +15,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_option_tout' => 'the whole website',
 	'cfg_titre_opensearch' => 'OpenSearch'
 );
+
 ?>
