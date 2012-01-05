@@ -1,4 +1,4 @@
-<traduction module="inscription2" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/inscription2/inscription2_2_0/lang" reference="fr">
+<traduction module="inscription2" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/inscription2/inscription2_2_0/lang/" reference="fr">
 	<langue code="ast" />
 	<langue code="ca">
 		<traducteur nom="merce" lien="http://trad.spip.org/auteur/merce" />
