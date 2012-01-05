@@ -143,8 +143,11 @@ function autoriser_tradlang_modifier_dist($faire, $type, $id, $qui, $opt){
 	/**
 	 * Utilisation du CFG si possible
 	 */
+	if(!function_exists('lire_config')){
+		include_spip('inc/config');	
+	}
 	if(function_exists('lire_config')){
-		$type = lire_config('tradlang/autorisations/modifier_type', 'par_statut');
+		$type = lire_config('tradlang/modifier_type', 'par_statut');
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
@@ -152,15 +155,15 @@ function autoriser_tradlang_modifier_dist($faire, $type, $id, $qui, $opt){
 				break;
 			case 'par_statut':
 				// Traitement spécifique pour la valeur 'tous'
-				if(in_array('tous',lire_config('tradlang/autorisations/modifier_statuts',array()))){
+				if(in_array('tous',lire_config('tradlang/modifier_statuts',array()))){
 					return true;
 				}
 				// Autorisation par statut
-				$autorise = in_array($qui['statut'], lire_config('tradlang/autorisations/modifier_statuts',array('0minirezo')));
+				$autorise = in_array($qui['statut'], lire_config('tradlang/modifier_statuts',array('0minirezo')));
 				break;
 			case 'par_auteur':
 				// Autorisation par id d'auteurs
-				$autorise = in_array($qui['id_auteur'], lire_config('tradlang/autorisations/modifier_auteurs',array()));
+				$autorise = in_array($qui['id_auteur'], lire_config('tradlang/modifier_auteurs',array()));
 				break;
 		}
 		if($autorise == true){
@@ -216,7 +219,7 @@ function autoriser_tradlang_voir_dist($faire, $type, $id, $qui, $opt){
 	 * Utilisation du CFG si possible
 	 */
 	if(function_exists('lire_config')){
-		$type = lire_config('tradlang/autorisations/voir_type', 'par_statut');
+		$type = lire_config('tradlang/voir_type', 'par_statut');
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
@@ -224,15 +227,15 @@ function autoriser_tradlang_voir_dist($faire, $type, $id, $qui, $opt){
 				break;
 			case 'par_statut':
 				// Traitement spécifique pour la valeur 'tous'
-				if(in_array('tous',lire_config('tradlang/autorisations/voir_statuts',array()))){
+				if(in_array('tous',lire_config('tradlang/voir_statuts',array()))){
 					return true;
 				}
 				// Autorisation par statut
-				$autorise = in_array($qui['statut'], lire_config('tradlang/autorisations/voir_statuts',array('0minirezo','1comite')));
+				$autorise = in_array($qui['statut'], lire_config('tradlang/voir_statuts',array('0minirezo','1comite')));
 				break;
 			case 'par_auteur':
 				// Autorisation par id d'auteurs
-				$autorise = in_array($qui['id_auteur'], lire_config('tradlang/autorisations/voir_auteurs',array()));
+				$autorise = in_array($qui['id_auteur'], lire_config('tradlang/voir_auteurs',array()));
 				break;
 		}
 		if($autorise == true){

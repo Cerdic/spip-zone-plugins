@@ -34,11 +34,19 @@ table.liste_traductions tr.statut_new td.statut,.traducteur #navigation ul.infos
 	padding-left:10px;
 }
 
+#bilan table td.non_traduit{
+	background-image:url(images/back_new.png);
+}
+
 table.liste_traductions tr.statut_modif td.statut,.traducteur #navigation ul.infos p.items_modif{
 	background-image:url(images/back_modify.png);
 	background-repeat:no-repeat;
 	background-position:2px center;
 	padding-left:10px;
+}
+
+#bilan table td.traduit{
+	background-image:url(images/back_modify.png);
 }
 
 .liste-objets .caption{background-repeat:no-repeat;height:24px;display:block;padding-left: 30px;}
