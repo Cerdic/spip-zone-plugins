@@ -1,40 +1,40 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-if (!defined("_ECRIRE_INC_VERSION")) return;
+// extrait automatiquement de http://trad.spip.org
+// ** ne pas modifier le fichier **
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-
-	// B
+	'accueil' => 'Accueil', # NEW
+	'adapte_de' => 'adapté de', # MODIF
 
 	// C
-	'conception_graphique_par' => 'Dise&ntilde;o gr&aacute;fico (c)',
 	'commentaire' => 'comentario',
 	'commentaires' => 'comentarios',
+	'conception_graphique_par' => 'Diseño gráfico (c)',
 
 	// D
-
-	// I
+	'date_forum' => 'Le @date@ à @heure@', # MODIF
 
 	// L
 	'lire_la_suite' => 'Seguir leyendo',
 	'lire_la_suite_de' => '',
 
-	// M
-
 	// P
-
-	// R
+	'pagination_next' => 'Suivant »', # MODIF
+	'pagination_pages' => 'Pages', # NEW
+	'pagination_prev' => '« Précédent', # MODIF
+	'personaliser_nav' => 'Personnaliser ce menu', # NEW
 
 	// S
 	'sous_licence' => 'bajo Licencia',
 
-	// T
-
-	// V
-
 	// Z
+	'zapl_loading' => 'Chargement en cours...', # NEW
+	'zapl_reload_off' => 'Cliquer ici si la page reste incomplète (ou activer le javascript dans votre navigateur)' # MODIF
 );
 
 ?>
