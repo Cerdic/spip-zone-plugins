@@ -49,7 +49,7 @@ function facteur_upgrade($nom_meta_base_version, $version_cible){
 			ecrire_meta('facteur_smtp_secure', 'non');
 			ecrire_meta('facteur_smtp_sender', '');
 			ecrire_meta('facteur_filtre_images', 1);
-			ecrire_meta('facteur_filtre_css', 1);
+			ecrire_meta('facteur_filtre_css', '');
 			ecrire_meta('facteur_filtre_iso_8859', 1);
 			ecrire_meta('facteur_adresse_envoi', 'non');
 		}
