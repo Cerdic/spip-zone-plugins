@@ -270,15 +270,21 @@ class Facteur extends PHPMailer {
 		}
 	}
 
-
 	function ConvertirStylesEnligne() {
 		include_spip('inline-style/InlineStyle');
 		include_spip('inline-style/CSSQuery');
+
+		libxml_use_internal_errors(true); // supprime les warnings d'un HTML mal formé
 		$bodyStyleenLigne = new InlineStyle(charset2unicode($this->Body,'utf-8')); // inlineStyle préfère l'unicode
+		foreach (libxml_get_errors() as $error) {
+			spip_log("Erreur dans la lecture du HTML de la lettre: ".$error->message." ligne ".$error->line,'facteur');
+		}
+		libxml_clear_errors();
+		libxml_use_internal_errors(false);
+
 		$bodyStyleenLigne->applyStylesheet($bodyStyleenLigne->extractStylesheets());
 		$this->Body = $bodyStyleenLigne->getHTML();
 	}
-
 
 	function safe_utf8_decode($text,$mode='texte_brut') {
 		if (!is_utf8($text))
