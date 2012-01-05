@@ -1,10 +1,13 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-if (!defined("_ECRIRE_INC_VERSION")) return;
+// extrait automatiquement de http://trad.spip.org
+// ** ne pas modifier le fichier **
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	//C
+	// C
 	'cfg_1' => 'Social tags plugin configuration',
 	'cfg_2' => 'Ici vous pouvez choisir les sites de partages de vos articles.',
 	'cfg_3' => 'Documentation',
@@ -19,8 +22,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_en_bas' => 'At the bottom of each page',
 	'cfg_exemples' => 'Examples (using the dist templates):',
 	'cfg_explication_boite_info' => 'Here you can choose the social websites to share with for your articles.',
-	'cfg_insertion' => 'Insertion into web pages:',
 	'cfg_inserer' => 'Insert the social-tags block below the following tag:',
+	'cfg_insertion' => 'Insertion into web pages:',
 	'cfg_liste_site' => 'List of the social websites',
 	'cfg_plusone' => 'Google plus one',
 	'cfg_plusone_existe' => 'To work with Google+1, install the plugin (<a href="http://www.spip-contrib.net/Google-1" class="spip_out">aide sur spip-contrib</a>).',
@@ -40,10 +43,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'noisette_action_like' => 'Like',
 	'noisette_action_recommand' => 'Recommand',
-	'noisette_label_action' => 'Action' ,
+	'noisette_label_action' => 'Action',
 	'noisette_label_afficher_send' => 'Send button?',
 	'noisette_label_afficher_titre_noisette' => 'Display a title?',
-   'noisette_label_niveau_titre' => 'Choose the title level',
+	'noisette_label_niveau_titre' => 'Choose the title level',
 	'noisette_label_show_faces' => 'Display profile photos below the button?',
 	'noisette_label_titre_noisette' => 'Title:',
 	'noisette_label_titre_noisette_perso' => 'If custom title:',
@@ -53,10 +56,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_noisette_facebook_like' => 'Facebook-like button',
 
 	// T
-	'titre_sur_facebook' => 'On Facebook',
 	'titre_mon_badge_facebook' => 'My Facebook badge',
 	'titre_perso' => 'Custom title',
-
-
+	'titre_sur_facebook' => 'On Facebook'
 );
+
 ?>

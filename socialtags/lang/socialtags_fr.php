@@ -1,10 +1,11 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-if (!defined("_ECRIRE_INC_VERSION")) return;
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/socialtags/lang/
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	//C
+	// C
 	'cfg_1' => 'Configuration du plugin Social tags',
 	'cfg_2' => 'Ici vous pouvez choisir les sites de partages de vos articles.',
 	'cfg_3' => 'Documentation',
@@ -40,10 +41,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'noisette_action_like' => 'J\'aime',
 	'noisette_action_recommand' => 'Recommander',
-	'noisette_label_action' => 'Action' ,
+	'noisette_label_action' => 'Action',
 	'noisette_label_afficher_send' => 'Bouton Envoyer ?',
 	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?',
-   'noisette_label_niveau_titre' => 'Choisir le niveau du titre',
+	'noisette_label_niveau_titre' => 'Choisir le niveau du titre',
 	'noisette_label_show_faces' => 'Afficher les photos de profil sous le bouton ?',
 	'noisette_label_titre_noisette' => 'Titre :',
 	'noisette_label_titre_noisette_perso' => 'Si titre personnalisé :',
@@ -53,9 +54,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_noisette_facebook_like' => 'Bouton Facebook-like',
 
 	// T
-	'titre_sur_facebook' => 'Sur Facebook',
 	'titre_mon_badge_facebook' => 'Mon badge facebook',
 	'titre_perso' => 'Titre personnalisé',
-
+	'titre_sur_facebook' => 'Sur Facebook'
 );
+
 ?>
