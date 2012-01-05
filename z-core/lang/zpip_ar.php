@@ -1,48 +1,40 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-if (!defined("_ECRIRE_INC_VERSION")) return;
+// extrait automatiquement de http://trad.spip.org
+// ** ne pas modifier le fichier **
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'adapte_de' => 'adapt&eacute; de',
 	'accueil' => 'Accueil',
-	// B
+	'adapte_de' => 'adapté de',
 
 	// C
-	'conception_graphique_par' => 'Habillage visuel &copy;',
 	'commentaire' => 'commentaire',
 	'commentaires' => 'commentaires',
+	'conception_graphique_par' => 'Habillage visuel ©',
 
 	// D
-	'date_forum' => 'Le @date@ &agrave; @heure@',
-
-	// I
+	'date_forum' => 'Le @date@ à @heure@',
 
 	// L
 	'lire_la_suite' => 'Lire la suite',
 	'lire_la_suite_de' => ' de ',
 
-	// M
-
 	// P
-	'pagination_next' => 'Suivant &raquo;',
+	'pagination_next' => 'Suivant »',
 	'pagination_pages' => 'Pages',
-	'pagination_prev' => '&laquo; Pr&eacute;c&eacute;dent',
+	'pagination_prev' => '« Précédent',
 	'personaliser_nav' => 'Personnaliser ce menu',
-
-	// R
 
 	// S
 	'sous_licence' => 'sous Licence',
 
-	// T
-
-	// V
-
 	// Z
 	'zapl_loading' => 'Chargement en cours...',
-	'zapl_reload_off' => 'Cliquer ici si la page reste incompl&egrave;te (ou activer le javascript dans votre navigateur)',
+	'zapl_reload_off' => 'Cliquer ici si la page reste incomplète (ou activer le javascript dans votre navigateur)'
 );
 
 ?>
