@@ -24,7 +24,7 @@
 			<INCLURE{fond=inc/mode_de_paiement, journal, classe_banques}>
 		</li>
 
-		<!-- si la variable destinations est assignee, on insere l'editeur de destinations -->
+		[(#REM)<!-- si la variable destinations est assignee, on insere l'editeur de destinations -->]
 		[#SET{erreurs,#ENV**{erreurs}|table_valeur{destinations}}
 		<li [ class="(#GET{erreurs}|oui)erreur"]>
 			[<span class='erreur_message'>(#GET{erreurs})</span>]
@@ -37,7 +37,7 @@
 		</li>
 
 		]
-	
+
 		[(#ENV{classe_banques}|et{#ENV{comptes}}|non)
 			<span class='erreur'><:asso:gestion_cotisations_limitee:></span>
 		]

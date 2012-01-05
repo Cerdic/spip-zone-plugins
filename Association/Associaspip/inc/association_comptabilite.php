@@ -22,7 +22,7 @@ function association_liste_destinations_associees($id_compte)
 		$destination = array();
 		while ($destination_op = sql_fetch($destination_query))	{
 			/* soit recette soit depense est egal a 0, donc pour l'affichage du montant on se contente les additionner */
-			$destination[$destination_op[id_destination]] = $destination_op[recette]+$destination_op[depense]; 
+			$destination[$destination_op[id_destination]] = $destination_op[recette]+$destination_op[depense];
 		}
 		if (count($destination) == 0) $destination = '';
 	}
@@ -57,7 +57,7 @@ function association_editeur_destinations($destination, $unique='', $defaut='')
 	$liste_destination = association_toutes_destination_option_list();
 
 	$res = '';
-	
+
 	if ($liste_destination)	{
 		$res = "<script type='text/javascript' src='".find_in_path("javascript/jquery.destinations_form.js")."'></script>";
 		$res .= '<label for="destination"><strong>'
@@ -67,9 +67,9 @@ function association_editeur_destinations($destination, $unique='', $defaut='')
 
 		$idIndex=1;
 		if ($destination != '') { /* si on a une liste de destinations (on edite une operation) */
-			foreach ($destination as $destId => $destMontant) {						
+			foreach ($destination as $destId => $destMontant) {
 				$liste_destination_selected = preg_replace('/(value=\''.$destId.'\')/', '$1 selected="selected"', $liste_destination);
-				$res .= '<div class="formo" id="row'.$idIndex.'">';
+				$res .= '<div class="formo" id="row'.$idIndex.'"><ul>';
 				$res .= '<li class="editer_id_dest['.$idIndex.']">'
 				. '<select name="id_dest['.$idIndex.']" id="id_dest['.$idIndex.']" >'
 				. $liste_destination_selected
@@ -83,7 +83,7 @@ function association_editeur_destinations($destination, $unique='', $defaut='')
 						$res .= "<button class='destButton' type='button' onClick='removeFormField(\"#row".$idIndex."\"); return false;'>-</button>";
 					}
 				}
-				$res .= '</div>';
+				$res .= '<ul></div>';
 				$idIndex++;
 			}
 		}
@@ -91,14 +91,14 @@ function association_editeur_destinations($destination, $unique='', $defaut='')
 			if ($defaut!='') {
 				$liste_destination = preg_replace('/(value=\''.$defaut.'\')/', '$1 selected="selected"', $liste_destination);
 			}
-			$res .= '<div id="row1" class="formo"><li class="editer_id_dest[1]"><select name="id_dest[1]" id="id_dest[1]" >'
+			$res .= '<div id="row1" class="formo"><ul><li class="editer_id_dest[1]"><select name="id_dest[1]" id="id_dest[1]" >'
 			. $liste_destination
 			. '</select></li>';
 			if (!$unique) {
 				$res .= '<li class="editer_montant_dest[1]"><input name="montant_dest[1]" value="'
 				. ''
 				. '" type="text" id="montant_dest[1]"/></li>'
-				. "<button class='destButton' type='button' onClick='addFormField(); return false;'>+</button>";
+				. "</ul><button class='destButton' type='button' onClick='addFormField(); return false;'>+</button>";
 			}
 			$res .= '</div>';
 		}
@@ -112,7 +112,7 @@ function association_editeur_destinations($destination, $unique='', $defaut='')
 /* Ajouter une operation dans spip_asso_comptes ainsi que si necessaire dans spip_asso_destination_op */
 function association_ajouter_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal)
 {
-	include_spip('base/association');		
+	include_spip('base/association');
 
 	$id_compte = sql_insertq('spip_asso_comptes', array(
 		    'date' => $date,
@@ -143,7 +143,7 @@ function association_ajouter_operation_comptable($date, $recette, $depense, $jus
 /* modifier une operation dans spip_asso_comptes ainsi que si necessaire dans spip_asso_destination_op */
 function association_modifier_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal, $id_compte)
 {
-	include_spip('base/association');		
+	include_spip('base/association');
 
 	/* Si on doit gerer les destinations */
 	if ($GLOBALS['association_metas']['destinations']=="on")
@@ -193,7 +193,7 @@ function association_verifier_montant_destinations($montant_attendu)
 
 	if (count($toutesDestinations) > 1) {
 		foreach ($toutesDestinations as $id => $id_destination)
-		{		
+		{
 			/* on verifie qu'on n'a pas deja insere une destination avec cette id */
 			if (!array_key_exists($id_destination,$id_inserted)) {
 				$id_inserted[$id_destination]=0;
@@ -204,7 +204,7 @@ function association_verifier_montant_destinations($montant_attendu)
 
 			$total_destination += association_recupere_montant($toutesDestinationsMontants[$id]); /* les montants sont dans un autre tableau aux meme cles */
 		}
-	
+
 		/* on verifie que la somme des montants des destinations correspond au montant attendu */
 		if ($montant_attendu != $total_destination) {
 			$err .= _T('asso:erreur_montant_destination');

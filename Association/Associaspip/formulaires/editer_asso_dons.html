@@ -24,7 +24,7 @@
 			<label for="id_adherent"><strong><:asso:nd_de_membre:></strong></label>
 			<input type="text" name="id_adherent" [value="(#ENV{id_adherent})"] id="id_adherent"  class='formo'/>
 		</li>
-		
+
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{argent}}
 		<li class="editer_argent">
 			[<span class='erreur_message'>(#GET{erreurs})</span>]
@@ -38,7 +38,7 @@
 		</li>
 		]
 
-		<!-- si la variable destinations est assignee, on insere l'editeur de destinations -->
+		[(#REM)<!-- si la variable destinations est assignee, on insere l'editeur de destinations -->]
 		[#SET{erreurs,#ENV**{erreurs}|table_valeur{destinations}}
 		<li [ class="(#GET{erreurs}|oui)erreur"]>
 			[<span class='erreur_message'>(#GET{erreurs})</span>]

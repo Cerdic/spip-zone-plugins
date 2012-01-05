@@ -10,7 +10,7 @@
 						<h3 class="legend"><:asso:modification_des_comptes:></h3>
 						#BOUTON_TYPE_OPERATION
 						<ul>
-							
+
 							#SET{erreurs,#ENV**{erreurs}|table_valeur{imputation}}
 							<li class="editer_imputation">
 								[<span class='erreur_message'>(#GET{erreurs})</span>]
@@ -27,7 +27,7 @@
 								</select>
 								#SELECTEUR_IMPUTATION
 							</li>
-			
+
 							#SET{erreurs,#ENV**{erreurs}|table_valeur{date}}
 							<li class="editer_date[ (#GET{erreurs}|oui)erreur]">
 								[<span class='erreur_message'>(#GET{erreurs})</span>]
@@ -50,7 +50,7 @@
 									<input type="text" name="depense" value="[(#ENV{depense})]" id="depense"  class='formo'/>
 								</li>
 							</div>
-							
+
 							<div id='saisie_recette' name='saisie_recette' class='[(#ENV{type_operation}|affichage_div{produits-contributions_volontaires})]'>
 								#SET{erreurs,#ENV**{erreurs}|table_valeur{recette}}
 								<li class="editer_recette[ (#GET{erreurs}|oui)erreur]">
@@ -58,7 +58,7 @@
 									<label for="recette">
 										<div id="saisie_label_recette" name="saisie_label_recette" class="[(#ENV{type_operation}|affichage_div{produits})]">
 											<strong><:asso:montant:></strong>
-										</div>									
+										</div>
 										<div id="saisie_label_recette_evaluee" name="saisie_label_recette_evaluee" class="[(#ENV{type_operation}|affichage_div{contributions_volontaires})]">
 											<strong><:asso:recette_evaluee:></strong>
 										</div>
@@ -81,18 +81,18 @@
 									<input type="text" name="justification" [value="(#ENV{justification})"] id="justification"  class='formo'/>
 								</li>
 							</div>
-							
+
 							<div id='saisie_destination' name='saisie_destination' class='[(#ENV{type_operation}|affichage_div{charges-produits-contributions_volontaires})]'>
-								<!-- si la variable destinations est assignee, on insere l'editeur de destinations -->
+								[(#REM)<!-- si la variable destinations est assignee, on insere l'editeur de destinations -->]
 								#SET{erreurs,#ENV**{erreurs}|table_valeur{destinations}}
 								[<li [ class="(#GET{erreurs}|oui)erreur"]>
 									[<span class='erreur_message'>(#GET{erreurs})</span>]
 									(#ENV{destinations_on}|oui)#EDITEUR_DESTINATIONS
 								</li>]
 							</div>
-							
+
 						</ul>
-						
+
 						<p class="boutons"><input type="submit" value="<:pass_ok:>" class="submit" /></p>
 
 					</fieldset>
