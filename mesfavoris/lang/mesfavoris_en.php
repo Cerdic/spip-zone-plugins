@@ -1,27 +1,37 @@
 <?php
-/*
- * Plugin mesfavoris
- * (c) 2009-2010 Olivier Sallou, Cedric Morin
- * Distribue sous licence GPL
- *
- */
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.org
+// ** ne pas modifier le fichier **
 
-	$GLOBALS[$GLOBALS['idx_lang']] = array(
-		'add' => 'Add',
-		'remove' => 'Remove',
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
-		'add_to' => 'Add to favorites',
-		'remove_from' => 'Remove from favorites',
-        
-		'mes_favoris' => 'My favs',
-		'ajoute_le' => 'Added',
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
-		'label_style_formulaire16' => 'Small (16px)',
-		'label_style_formulaire24' => 'Medium (24px)',
-		'label_style_formulaire32' => 'Big (32px)',
-		'legend_formulaire_public' => 'Public form',
-		'legend_style_formulaire' => 'Form style',
-		'login_first' => 'Sorry, action required to be logged, please login first',
-        
-        'configurer'=>'Configure'
-	);
+	// A
+	'add' => 'Add',
+	'add_to' => 'Add to favorites',
+	'ajoute_le' => 'Added',
+
+	// C
+	'configurer' => 'Configure',
+
+	// L
+	'label_style_formulaire16' => 'Small (16px)',
+	'label_style_formulaire24' => 'Medium (24px)',
+	'label_style_formulaire32' => 'Big (32px)',
+	'legend_formulaire_public' => 'Public form',
+	'legend_style_formulaire' => 'Form style',
+	'login_first' => 'Sorry, action required to be logged, please login first',
+
+	// M
+	'mes_favoris' => 'My favs',
+
+	// R
+	'remove' => 'Remove',
+	'remove_from' => 'Remove from favorites',
+
+	// S
+	'ses_favoris' => 'Ses favoris' # NEW
+);
+
+?>

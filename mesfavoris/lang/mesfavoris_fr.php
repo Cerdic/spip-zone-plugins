@@ -1,28 +1,35 @@
 <?php
-/*
- * Plugin mesfavoris
- * (c) 2009-2010 Olivier Sallou, Cedric Morin
- * Distribue sous licence GPL
- *
- */
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/mesfavoris/lang/
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
-	$GLOBALS[$GLOBALS['idx_lang']] = array(
-		'add' => 'Ajouter',
-		'remove' => 'Retirer',
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
-		'add_to' => 'Ajouter &agrave; ma s&eacute;lection',
-		'remove_from' => 'Retirer de ma s&eacute;lection',
+	// A
+	'add' => 'Ajouter',
+	'add_to' => 'Ajouter à ma sélection',
+	'ajoute_le' => 'Ajouté le',
 
-		'mes_favoris' => 'Mes favoris',
-		'ses_favoris' => 'Ses favoris',
-		'ajoute_le' => 'Ajout&eacute; le',
+	// C
+	'configurer' => 'Configurer',
 
-		'label_style_formulaire16' => 'Petit (16px)',
-		'label_style_formulaire24' => 'Moyen (24px)',
-		'label_style_formulaire32' => 'Grand (32px)',
-		'legend_formulaire_public' => 'Formulaire public',
-		'legend_style_formulaire' => 'Style du formulaire',
-		'login_first' => "D&eacute;sol&eacute; l'action requiert d'&ecirc;tre enregistr&eacute;, authentifiez-vous d'abord",
-        
-        'configurer'=>'Configurer'
-	);
+	// L
+	'label_style_formulaire16' => 'Petit (16px)',
+	'label_style_formulaire24' => 'Moyen (24px)',
+	'label_style_formulaire32' => 'Grand (32px)',
+	'legend_formulaire_public' => 'Formulaire public',
+	'legend_style_formulaire' => 'Style du formulaire',
+	'login_first' => 'Désolé l\'action requiert d\'être enregistré, authentifiez-vous d\'abord',
+
+	// M
+	'mes_favoris' => 'Mes favoris',
+
+	// R
+	'remove' => 'Retirer',
+	'remove_from' => 'Retirer de ma sélection',
+
+	// S
+	'ses_favoris' => 'Ses favoris'
+);
+
+?>

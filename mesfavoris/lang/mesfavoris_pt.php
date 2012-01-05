@@ -1,27 +1,37 @@
 <?php
-/*
- * Plugin mesfavoris
- * (c) 2009-2010 Olivier Sallou, Cedric Morin
- * Distribue sous licence GPL
- *
- */
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.org
+// ** ne pas modifier le fichier **
 
-	$GLOBALS[$GLOBALS['idx_lang']] = array(
-		'add' => 'Acrescentar',
-		'remove' => 'Retirar',
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
-		'add_to' => 'Acrescentar à minha seleção',
-		'remove_from' => 'Retirar da minha seleção',
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
-		'mes_favoris' => 'Os meus favoritos',
-		'ajoute_le' => 'Acrescentado no',
+	// A
+	'add' => 'Acrescentar',
+	'add_to' => 'Acrescentar à minha seleção',
+	'ajoute_le' => 'Acrescentado no',
 
-		'label_style_formulaire16' => 'Pequeno (16px)',
-		'label_style_formulaire24' => 'Médio (24px)',
-		'label_style_formulaire32' => 'Grande (32px)',
-		'legend_formulaire_public' => 'Formulário público',
-		'legend_style_formulaire' => 'Estilo do formulário',
-		'login_first' => "Lamentamos mas a operação requer o seu registo, autentifique-se primeiro",
-        
-        'configurer'=>'Configurar'
-	);
+	// C
+	'configurer' => 'Configurar',
+
+	// L
+	'label_style_formulaire16' => 'Pequeno (16px)',
+	'label_style_formulaire24' => 'Médio (24px)',
+	'label_style_formulaire32' => 'Grande (32px)',
+	'legend_formulaire_public' => 'Formulário público',
+	'legend_style_formulaire' => 'Estilo do formulário',
+	'login_first' => 'Lamentamos mas a operação requer o seu registo, autentifique-se primeiro',
+
+	// M
+	'mes_favoris' => 'Os meus favoritos',
+
+	// R
+	'remove' => 'Retirar',
+	'remove_from' => 'Retirar da minha seleção',
+
+	// S
+	'ses_favoris' => 'Ses favoris' # NEW
+);
+
+?>
