@@ -40,10 +40,12 @@
 		<BOUCLE_langue_module(POUR){tableau #GET{langues}}>
 			<BOUCLE_compte_tradlang(TRADLANG){module}{lang=#CLE}{statut=OK}> </BOUCLE_compte_tradlang>
 			#SET{class,'non_traduit'}
-			[(#TOTAL_BOUCLE|=={#GET{full}}|oui)#SET{class,traduit_full}]
+			[(#TOTAL_BOUCLE|=={#GET{full}}|oui)[(#SET{class,traduit_full})][(#SET{percent,100})]]
 			[(#TOTAL_BOUCLE|=={#GET{full}}|non)
+			#SET{percent,#TOTAL_BOUCLE|div{#GET{full}}|mult{100}}
 			[(#TOTAL_BOUCLE|>={#GET{full}|div{100}|mult{50}}|oui)#SET{class,traduit}]]
-			[(#_langue_module:CLE|!={#GET{langue_mere}}|oui)<td class="#GET{class}"><a href="[(#URL_TRADLANG_MODULE{#ID_TRADLANG_MODULE}|parametre_url{lang_cible,#CLE})]">#TOTAL_BOUCLE</a></td>]
+			#SET{traduites,#TOTAL_BOUCLE}
+			[(#_langue_module:CLE|!={#GET{langue_mere}}|oui)<td class="#GET{class}"><a href="[(#URL_TRADLANG_MODULE{#ID_TRADLANG_MODULE}|parametre_url{lang_cible,#CLE})]" title="<:tradlang:info_percent_chaines{total=#GET{full},traduites=#GET{traduites}}:>">[(#GET{percent}|floor)%]</a></td>]
 			[(#_langue_module:CLE|=={#GET{langue_mere}}|oui)<td class="[(#GET{class})] lang_mere">#TOTAL_BOUCLE</td>]
 			</B_compte_tradlang>
 			<td class="non_traduit"><a href="[(#URL_TRADLANG_MODULE{#ID_TRADLANG_MODULE}|parametre_url{lang_cible,#CLE})]"> - </a></td>
