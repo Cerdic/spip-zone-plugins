@@ -22,10 +22,14 @@
 				<span class="erreur_message">(#ENV{erreurs}|table_valeur{lang_mere})</span>]
 				<INCLURE{fond=formulaires/tradlang_selecteur_langue_module_dispo}{name=lang_mere}{module=#ENV{module}}{lang_select=#ENV{lang_mere}}{env}>
 			</li>
+			<B_langues>
 			<li>
 				<label><:tradlang:languesdispo:></label>
-				#ENV{langues}
+				<BOUCLE_langues(POUR){tableau #ENV{_langues}}>
+				<abbr title="[(#VALEUR|traduire_nom_langue)]">#VALEUR</abbr>
+				</BOUCLE_langues>
 			</li>
+			</B_langues>
 			<li class='editer editer_codelangue[(#ENV{erreurs}|table_valeur{codelangue}|oui)erreur]'>
 				<label for='codelangue'><:tradlang:entrerlangue:></label>[
 				<span class="erreur_message">(#ENV{erreurs}|table_valeur{codelangue})</span>]

@@ -14,10 +14,10 @@ function formulaires_editer_tradlang_module_charger($id_tradlang_module,$retour=
 	$modok = $modules[$valeurs['module']];
 	foreach($modok as $cle=>$item){
 		if (strncmp($cle, "langue_", 7) == 0)
-			$lgs .= substr($cle,7)." ";
+			$lgs[] .= substr($cle,7);
 	}
 	
-	$valeurs['langues'] = $lgs;
+	$valeurs['_langues'] = $lgs;
 	$valeurs['codelangue'] = _request('codelangue');
 	return $valeurs;
 }
