@@ -2,7 +2,7 @@
 <B_objets>
 <div class='liste champs_extras_objets'>
 	<ul class='liste-items'>
-<BOUCLE_objets(DATA){source tableau,#VAL|lister_tables_objets_sql}{par cle}{valeur != ''}>
+<BOUCLE_objets(DATA){source tableau,#VAL|lister_tables_objets_sql}{par cle}{editable = oui}>
 	[(#CLE|is_string|oui)
 		<li class='item  [(#COMPTEUR_BOUCLE|alterner{unit,lastUnit})] size1of2'>
 			[(#SET{nb,[(#CLE|compter_champs_extras)]})]
