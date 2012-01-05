@@ -1,4 +1,5 @@
 <?php
+define('_TAILLE_MAX_GRAVATAR',80); // taille max des gravatars à récupérer sur le site 
 
 /**
  *
@@ -69,7 +70,7 @@ function gravatar_img($email, $logo_auteur='') {
 	$config = function_exists('lire_config')?lire_config('gravatar'):unserialize($GLOBALS['meta']['gravatar']);
 	$default = '404'; // par defaut rien si ni logo ni gravatar (consigne a passer a gravatar)
 	$image_default = ''; // image
-	$t=$config['taille'] ; // taille du gravatar telle que définie dans la config de gravatar
+
 	if ($config
 	  AND strlen($image_default=$config['image_defaut'])
 		AND strpos($image_default,".")===FALSE){
@@ -81,7 +82,7 @@ function gravatar_img($email, $logo_auteur='') {
 	// logo_auteur si il existe
 	// ou gravatar si on a un email et si on trouve le gravatar
 	if (!$img = $logo_auteur){
-		if (!$g = gravatar($email,$default,$t)) // chercher le gravatar etendu pour cet email, ce type de gravatar par défaut et cette taille
+		if (!$g = gravatar($email,$default)) // chercher le gravatar etendu pour cet email
 			$img = '';
 		else
 			$img = gravatar_balise_img($g, "", "spip_logos photo avatar");
@@ -105,7 +106,7 @@ function gravatar_img($email, $logo_auteur='') {
 		return '';
 
 	// mises en formes optionnelles du gravatar
-	if ($config AND $t){
+	if ($config AND $t=$config['taille']){
 		$img = filtrer('image_passe_partout',$img,$t);
 		$img = filtrer('image_recadre',$img,$t,$t,'center');
 	}
@@ -141,7 +142,7 @@ function gravatar_verifier_index($tmp) {
  * @param     int         $default  code de la page
  * @return    null|string           le chemin du fichier gravatar, s'il existe
  */
-function gravatar($email, $default='404',$t='60') {
+function gravatar($email, $default='404') {
 	static $nb=5; // ne pas en charger plus de 5 anciens par tour
 	static $max=10; // et en tout etat de cause pas plus de 10 nouveaux
 
@@ -153,7 +154,7 @@ function gravatar($email, $default='404',$t='60') {
 	// faire d'abord une requete avec 404, cela permet de partager le cache
 	// pour ceux qui ont vraiment un gravatar
 	if ($default!=='404'){
-		if ($gravatar_cache = gravatar($email,'404',$t))
+		if ($gravatar_cache = gravatar($email))
 			return $gravatar_cache;
 	}
 
@@ -180,8 +181,8 @@ function gravatar($email, $default='404',$t='60') {
 			$nb--;
 			include_spip("inc/distant");
 			if ($gravatar
-			= recuperer_page('http://www.gravatar.com/avatar/'.$md5_email.($default?"?d=$default":"").($t?"&s=$t":"")
-			)) {
+			= recuperer_page('http://www.gravatar.com/avatar/'.$md5_email.($default?"?d=$default":"")."&s="._TAILLE_MAX_GRAVATAR) 
+			) {
 				spip_log('gravatar ok pour '.$email);
 				ecrire_fichier($gravatar_cache, $gravatar);
 				// si c'est un png, le convertir en jpg
