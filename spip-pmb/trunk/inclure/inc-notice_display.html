@@ -2,7 +2,7 @@
 [<a href="(#ENV{url_ret}|urldecode)" class="lien-retour-recherche"><:pmb:retour_recherche:></a>]
 
 [(#ENV{afficher_logo}|=={oui}|oui)
-[(#ENV{notice/logo_src}|oui)
+	[(#ENV{notice/logo_src}|oui)
 		[(#ENV{copieimage,non}|=={non}|non)
 			[(#ENV{notice/logo_src}
 				|copie_locale{force}
@@ -15,7 +15,7 @@
 				|inserer_attribut{class,spip_logos}
 				|inserer_attribut{alt,''})]
 		]
-]
+	]
 ]
 <div class="corps-conteneur surlignable">
 	[(#ENV{afficher_info}|=={non}|non)
@@ -38,7 +38,7 @@
 	<br class="nettoyeur" />
 	]
 	[(#ENV{afficher_resume}|=={oui}|oui)
-		[<div class="texte entry-content">(#ENV{notice/resume})</div>]
+		[<div class="texte entry-content">(#ENV*{notice/resume}|paragrapher)</div>]
 	]
 </div>
 <br class="nettoyeur" />
@@ -56,15 +56,15 @@
   <script type="text/javascript">
 $(document).ready(function() {
 [(#ENV{afficher_docnum}|=={non}|non)
-	  $('#docnum-ajax').load("[(#URL_PAGE{ajax-docnum})]", { 'id': '#ENV{id}' });
+	$('#docnum-ajax').load("[(#URL_PAGE{ajax-docnum})]", { 'id': '#ENV{id}' });
 ]
 
 [(#ENV{afficher_dispo}|=={non}|non)
-	  $('#disponibilite-ajax').load("[(#URL_PAGE{ajax-notice-dispo})]", { 'id': '#ENV{id}', 'titre_notice' : "[(#ENV{notice/titre}|urlencode)]" }, function (responseText, textStatus, XMLHttpRequest) { $(this).find('.ajax-loader').remove();});
+	$('#disponibilite-ajax').load("[(#URL_PAGE{ajax-notice-dispo})]", { 'id': '#ENV{id}', 'titre_notice' : "[(#ENV{notice/titre}|urlencode)]" }, function (responseText, textStatus, XMLHttpRequest) { $(this).find('.ajax-loader').remove();});
 ]
 
 [(#ENV{afficher_autres}|=={non}|non)
-	  $('#autreslecteurs-ajax').load("[(#URL_PAGE{ajax-autreslecteurs})]", { 'id': '#ENV{id}' });
+	$('#autreslecteurs-ajax').load("[(#URL_PAGE{ajax-autreslecteurs})]", { 'id': '#ENV{id}' });
 ]
 });
 </script>
@@ -73,7 +73,7 @@ $(document).ready(function() {
 <h2><:pmb:compte_lecteur:></h2>
 <B_auteurpmb>
 <BOUCLE_auteurpmb(AUTEURS_PMB){id_auteur=#SESSION{id_auteur}}>
-	  [(#ENV{afficher_toolbox}|=={non}|non)
+	[(#ENV{afficher_toolbox}|=={non}|non)
 		[(#PMB_SESSION|oui)
 		[(#ENV{reserver}|=={1}|oui)
 			<strong>[(#PMB_SESSION|pmb_reserver_ouvrage{#ENV{notice/id},'',''})]</strong>
