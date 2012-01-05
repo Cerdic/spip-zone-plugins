@@ -3,7 +3,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_editer_tradlang_dist($arg=null) {
-
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
@@ -14,16 +13,16 @@ function action_editer_tradlang_dist($arg=null) {
 	if (!$id_tradlang = intval($arg)) {
 		return false;
 	}
-	spip_log("edition du tradlang $id_tradlang");
+
 	// Enregistre l'envoi dans la BD
-	$err = tradlang_set($id_tradlang);
+	$err = tradlang_set($arg);
  
-	return array($id_tradlang,'');
+	return array($arg,'');
 }
 
 function tradlang_set($id_tradlang,$set=null){
 	$err = '';
-	
+
 	include_spip('inc/modifier');
 	include_spip('inc/filtres');
 	
@@ -35,8 +34,19 @@ function tradlang_set($id_tradlang,$set=null){
 		// donnees eventuellement fournies
 		$set
 	);
-	spip_log(objet_info('tradlang','champs_editables'));
-	spip_log($c);
+	
+	if($GLOBALS['visiteur_session']['id_auteur'] > 0){
+		$traducteurs = array();
+		$traducteur = sql_getfetsel('traducteur','spip_tradlang','id_tradlang='.intval($id_tradlang));
+		if($traducteur){
+			$traducteurs = array_map('trim',explode(',',$traducteur));
+		}
+		if(!in_array($GLOBALS['visiteur_session']['id_auteur'],$traducteurs)){
+			$traducteurs[] = $GLOBALS['visiteur_session']['id_auteur'];
+			$c['traducteur'] = implode(', ',$traducteurs);
+		}
+	}
+	
 	$invalideur = "id='id_tradlang/$id_tradlang'";
 	
 	if ($err = objet_modifier_champs('tradlang', $id_tradlang,
@@ -49,18 +59,18 @@ function tradlang_set($id_tradlang,$set=null){
 		$c)){
 		return $err;
 	}
-
-	if($statut = _request('statut')){
+	
+	if($statut = (_request('statut') ? _request('statut') : $c['statut'])){
 		sql_updateq('spip_tradlang',array('statut' => $statut),'id_tradlang='.intval($id_tradlang));
 	}
-
+	
 	//$c = collecter_requests(array('statut'),array(),$set);
 	//$err .= instituer_tradlang($id_tradlang, $c);
 
 	return $err;
 }
 
-// $c est un array ('statut', 'id_parent' = changement de rubrique)
+// $c est un array
 //
 // statut et rubrique sont lies, car un admin restreint peut deplacer
 // un article publie vers une rubrique qu'il n'administre pas
