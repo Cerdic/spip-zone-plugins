@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="3.0.0"
 	etat="test"
-	compatibilite="[3.0.0-beta;3.0.*]"
+	compatibilite="[3.0.0-beta2;3.0.*]"
 	logo="images/cextras-64.png"
 	documentation="http://www.spip-contrib.net/?article4028"
 >
