@@ -1,17 +1,13 @@
 <?php
-
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-// Fichier produit par PlugOnet
-// Module: paquet-coloration_code
-// Langue: en
-// Date: 18-10-2011 15:01:44
-// Items: 3
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.org
+// ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// C
+	// C
 	'coloration_code_description' => 'You just have to put it between the tags:
 _ {{&lt;code class="language"&gt;...&lt;/code&gt;}}
 _ or with a frame
@@ -26,6 +22,7 @@ _ {{&lt;code class="php sans_telechargement"&gt;}}
 You may also use {coloration_code_color} as a filter in a squelette as 
 _ <code>#TEXTE**|coloration_code_color{spip,code}</code>: highlights #TEXTE with langage "spip" in format code (without frame), see example lecode.html. From article url would be <code>#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV{id_article}</code>',
 	'coloration_code_nom' => 'Code higlighting',
-	'coloration_code_slogan' => 'Syntax higlighting of code placed in articles',
+	'coloration_code_slogan' => 'Syntax higlighting of code placed in articles'
 );
+
 ?>

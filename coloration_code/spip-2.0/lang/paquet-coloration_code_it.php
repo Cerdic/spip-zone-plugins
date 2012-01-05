@@ -1,17 +1,13 @@
 <?php
-
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-// Fichier produit par PlugOnet
-// Module: paquet-coloration_code
-// Langue: it
-// Date: 18-10-2011 15:01:44
-// Items: 3
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.org
+// ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// C
+	// C
 	'coloration_code_description' => 'Dovete solo utilizzare il segnaposto:
 _ {{&lt;code class="linguaggio"&gt;...&lt;/code&gt;}}
 _ o con riquadro
@@ -25,6 +21,7 @@ _ {{&lt;code class="php sans_telechargement"&gt;}}
 _ Potete utilizzare {coloration_code_color} anche come un filtro in scheletro in questo modo: 
 _ <code>#TEXTE**|coloration_code_color{spip,code}</code>: colora #TEXTE con le regole del linguaggio "spip" in formato code (senza il riquadro), vedi l\'esempio lecode.html. L\'url per vedere il codice dell\'articolo dalla sua stessa pagina sará: <code>#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV{id_article}</code>',
 	'coloration_code_nom' => 'Colorazione del codice',
-	'coloration_code_slogan' => 'Colorazione sintattica del codice utilizzato nel testo',
+	'coloration_code_slogan' => 'Colorazione sintattica del codice utilizzato nel testo'
 );
+
 ?>
