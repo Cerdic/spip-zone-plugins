@@ -1,21 +1,21 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-if (!defined("_ECRIRE_INC_VERSION")) return;
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/jquery_ui/lang/
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	
-	//A
-	'afficher_calendrier' => 'Afficher le calendrier',
-	
-	//C
-	'cfg_boite_jqueryui' => 'Configuration de jQuery UI',
-	'cfg_explication_plugins' => 'Choisissez les plugins &agrave; ins&eacute;rer dans l\'ent&ecirc;te des pages publiques.',
-	'cfg_explication_themes' => 'Choisissez le th&egrave;mes pour l\'habillage de jQuery-UI.',
-	'cfg_no_css' => 'ne pas charger les CSS de jQuery-UI',
-	'cfg_lbl_plugins' => 'Plugins',
-	'cfg_lbl_themes' => 'Th&egrave;me',
-	'cfg_titre_jqueryui' => 'jQuery UI',
 
+	// A
+	'afficher_calendrier' => 'Afficher le calendrier',
+
+	// C
+	'cfg_boite_jqueryui' => 'Configuration de jQuery UI',
+	'cfg_explication_plugins' => 'Choisissez les plugins à insérer dans l\'entête des pages publiques.',
+	'cfg_explication_themes' => 'Choisissez le thèmes pour l\'habillage de jQuery-UI.',
+	'cfg_lbl_plugins' => 'Plugins',
+	'cfg_lbl_themes' => 'Thème',
+	'cfg_no_css' => 'ne pas charger les CSS de jQuery-UI',
+	'cfg_titre_jqueryui' => 'jQuery UI',
 	'cfg_val_complete' => 'jQuery UI complet',
 	'cfg_val_effects_blind' => 'Effet blind',
 	'cfg_val_effects_bounce' => 'Effet bounce',
@@ -47,8 +47,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_val_ui_sortable' => 'UI sortable',
 	'cfg_val_ui_tabs' => 'UI tabs',
 	'cfg_val_ui_widget' => 'UI widget',
-	
-	//D
+
+	// D
 	'date_mois_10_abbr' => 'oct.',
 	'date_mois_11_abbr' => 'nov.',
 	'date_mois_12_abbr' => 'déc.',
@@ -61,6 +61,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mois_7_abbr' => 'juil.',
 	'date_mois_8_abbr' => 'août',
 	'date_mois_9_abbr' => 'sept.'
-	
 );
+
 ?>
