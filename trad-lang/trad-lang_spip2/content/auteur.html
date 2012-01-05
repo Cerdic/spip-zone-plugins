@@ -15,6 +15,8 @@
 	<INCLURE{fond=liste/articles-auteur,id_auteur,env,ajax} />
 	[(#SET{titre,[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{<:mesfavoris:mes_favoris:>,<:mesfavoris:ses_favoris:>})]})]
 	<INCLURE{fond=inclure/mesfavoris,id_auteur=#ID_AUTEUR,titre=#GET{titre},ajax}>
+	#SET{url_modif,#URL_PAGE{tradlang_revision}}
+	<INCLURE{fond=prive/objets/liste/versions,objet=tradlang,url_modif=#GET{url_modif},env,ajax,sinon=<:revisions:info_aucune_revision:>} />
 </div>
 [<div class="notes"><hr />(#NOTES)</div>]
 
