@@ -1,20 +1,16 @@
 <?php
-
-/// @file
-/// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-/// 
-///  Fichier produit par PlugOnet
-/// Module: paquet-autorite
-/// Langue: de
-/// Date: 14-10-2011 21:24:39
-/// Items: 3
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.org
+// ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-// A
+
+	// A
 	'autorite_description' => 'Dieses Plugin ermöglicht es Ihnen, unterschiedliche Berechtigungen als die Standard-Konfiguration.',
 	'autorite_nom' => 'Autorität',
-	'autorite_slogan' => 'Feineinstellungen der Benutzerrechte (füge eigene hinzu!)',
+	'autorite_slogan' => 'Feineinstellungen der Benutzerrechte (füge eigene hinzu!)'
 );
+
 ?>
