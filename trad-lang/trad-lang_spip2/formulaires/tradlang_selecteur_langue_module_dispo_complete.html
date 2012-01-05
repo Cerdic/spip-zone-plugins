@@ -4,7 +4,7 @@
 		[(#ENV{option_vide}|oui)
 			<option value="">--</option>]
 		<BOUCLE_module_langue_dispo(TRADLANG){id_tradlang_module}{lang != #ENV{lang_exclue}}{langue_complete}{par lang}>
-			<option value="#LANG"[(#LANG|=={#ENV{#ENV{name,langues}}}|oui)selected="selected"]>&#91;#LANG&#93; [(#LANG|traduire_nom_langue)][(#LANG|=={#LANG_MERE}|oui)<:tradlang:info_langue_mere:>]</option>]
+			<option value="#LANG"[(#LANG|=={#ENV{#ENV{name,langues}}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)][(#LANG|=={#LANG_MERE}|oui)<:tradlang:info_langue_mere:>]</option>]
 		</BOUCLE_module_langue_dispo>
 	</select>
 </B_module_langue_dispo>
