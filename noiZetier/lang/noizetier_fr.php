@@ -1,7 +1,7 @@
 <?php
-
-// Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/noiZetier/lang/
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -26,12 +26,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_noizetier_compositions_titre' => 'Compositions du noiZetier',
 	'editer_noizetier_explication' => 'Configurer ici les noisettes à ajouter aux pages de votre site.',
 	'editer_noizetier_titre' => 'noiZetier',
-	'editer_nouvelle_composition'=> 'Créer une nouvelle composition',
+	'editer_nouvelle_composition' => 'Créer une nouvelle composition',
 	'erreur_doit_choisir_noisette' => 'Vous devez choisir une noisette.',
 	'erreur_mise_a_jour' => 'Une erreur s\'est produite pendant la mise à jour de la base de donnée.',
 	'explication_heritages_composition' => 'Vous pouvez définir ici les compositions qui seront héritées par les objets de la branche.',
 	'explication_noizetier_css' => 'Vous pouvez ajouter à la noisette d\'éventuelles classes CSS supplémentaires.',
-	'explication_raccourcis_typo' => 'Vous pouvez utiliser les raccourcis typographiques de SPIP.',
 	'explication_raccourcis_typo' => 'Vous pouvez utiliser les raccourcis typographiques de SPIP.',
 
 	// F
@@ -105,14 +104,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'oui' => 'Oui',
-	
+
 	// P
 	'page' => 'Page',
 
 	// W
 	'warning_noisette_plus_disponible' => 'ATTENTION : cette noisette n\'est plus disponible.',
-	'warning_noisette_plus_disponible_details' => 'Le squelette de cette noisette (<i>@squelette@</i>) n\'est plus accessible. Il se peut qu\'il s\'agisse d\'une noisette nécessitant un plugin que vous avez désactivé ou désinstallé.',
-
+	'warning_noisette_plus_disponible_details' => 'Le squelette de cette noisette (<i>@squelette@</i>) n\'est plus accessible. Il se peut qu\'il s\'agisse d\'une noisette nécessitant un plugin que vous avez désactivé ou désinstallé.'
 );
 
 ?>

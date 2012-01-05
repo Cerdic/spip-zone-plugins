@@ -1,7 +1,9 @@
 <?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.org
+// ** ne pas modifier le fichier **
 
-// Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -26,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_noizetier_compositions_titre' => 'Kompositionen des Nussbaums',
 	'editer_noizetier_explication' => 'Konfigurieren sie hier die Code-Nüsse für die Seiten ihrer Website.',
 	'editer_noizetier_titre' => 'Nussbaum',
-	'editer_nouvelle_composition'=> 'Neue Komposition anlegen',
+	'editer_nouvelle_composition' => 'Neue Komposition anlegen',
 	'erreur_doit_choisir_noisette' => 'Sie müssen eine Code-Nuss auswählen.',
 	'erreur_mise_a_jour' => 'Beim Aktualisieren der Datenbank ist ein Fehler aufgetreten.',
 	'explication_heritages_composition' => 'Hier können sie die Kompositionen festlegen, die den Objekten des Zweigs vererbt weden.',
@@ -104,13 +106,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'oui' => 'Ja',
-	
+
 	// P
 	'page' => 'Seite',
 
 	// W
 	'warning_noisette_plus_disponible' => 'ACHTUNG: Diese Code-Nuss ist nicht merh verfügbar.',
-	'warning_noisette_plus_disponible_details' => 'Das Skelett (<i>@squelette@</i>) dieser Code-Nuss ist nicht mehr verfügbar. Es handelt sich möglicherweise um eine Code-Nuss, die ein Plugin benötigt, dass sie deaktiviert oder deinstalliert haben.',
+	'warning_noisette_plus_disponible_details' => 'Das Skelett (<i>@squelette@</i>) dieser Code-Nuss ist nicht mehr verfügbar. Es handelt sich möglicherweise um eine Code-Nuss, die ein Plugin benötigt, dass sie deaktiviert oder deinstalliert haben.'
 );
 
 ?>
