@@ -1,19 +1,23 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-if (!defined("_ECRIRE_INC_VERSION")) return;
+// extrait automatiquement de http://trad.spip.org
+// ** ne pas modifier le fichier **
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
 	// C
-	'cfg_titre' => 'Memoization',
 	'cfg_description' => 'Memoization. This configuration page is reserved for the webmaster.',
+	'cfg_titre' => 'Memoization',
 
 	// E
 	'explication_memcache_servers' => 'indicate a server line, as <kbd>host:port</kbd>',
 
 	// L
 	'label_cache_pages' => 'Manage the page cache',
-	'label_methode' => 'Select the memoization mode',
 	'label_memcache_serveurs' => 'Memcache server(s) :',
+	'label_methode' => 'Select the memoization mode',
 	'legend_cache_methode' => 'Memoization method',
 	'legend_cache_pages' => 'Page cache',
 	'legend_memcache' => 'Memcache settings',
@@ -29,8 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_methode_filecache' => 'Files (filecache)',
 	'option_methode_memcache' => 'Memcache',
 	'option_methode_nocache' => 'Disabled (nocache)',
-	'option_methode_xcache' => 'XCache',
-
+	'option_methode_xcache' => 'XCache'
 );
 
 ?>
