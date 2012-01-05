@@ -30,8 +30,7 @@ function champs_extras_autorisation($faire, $quoi='', $saisies=array(), $args=ar
 	if (!$saisies) return array();
 	foreach ($saisies as $cle=>$saisie) {
 		$id = isset($args['id']) ? $args['id'] : $args['id_objet'];
-		$autoriser_quoi = $quoi . _SEPARATEUR_CEXTRAS_AUTORISER . $saisie['options']['nom'];
-		if (!autoriser($faire . 'extra', $autoriser_quoi, $id, '', array(
+		if (!autoriser($faire . 'extra_' . $saisie['options']['nom'], $quoi, $id, '', array(
 			'type' => $quoi,
 			'id_objet' => $id,
 			'contexte' => $args['contexte'],

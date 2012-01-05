@@ -7,8 +7,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function cextras_autoriser(){}
 
 
-define('_SEPARATEUR_CEXTRAS_AUTORISER', '0');
-
 /**
  * Retourne si une saisie peut s'afficher ou non 
  *
@@ -88,8 +86,9 @@ function champs_extras_restrictions($saisie, $action, $table, $id, $qui, $opt) {
 
 /**
   * Autorisation de voir un champ extra
-  * autoriser('voirextra','auteur_prenom', $id_auteur);
-  * -> autoriser_auteur_prenom_voirextra_dist() ...
+  * autoriser('voirextra_prenom','auteur', $id_auteur);
+  *
+  * -> autoriser_auteur_voirextra_prenom_dist() ...
   */
 function autoriser_voirextra_dist($faire, $type, $id, $qui, $opt){
 	if (isset($opt['saisie'])) {
@@ -100,8 +99,10 @@ function autoriser_voirextra_dist($faire, $type, $id, $qui, $opt){
 
 /**
   * Autorisation de modifier un champ extra
-  * autoriser('modifierextra','auteur_prenom', $id_auteur);
-  * -> autoriser_auteur_prenom_modifierextra_dist() ...
+  * autoriser('modifierextra_prenom','auteur', $id_auteur);
+  * 
+  *    Attention au 0 pour separer la table du champ
+  * -> autoriser_auteur_modiierextra_prenom_dist()
   */
 function autoriser_modifierextra_dist($faire, $type, $id, $qui, $opt){
 	if (isset($opt['saisie'])) {
@@ -142,19 +143,18 @@ function restreindre_extras($objet, $noms=array(), $ids=array(), $cible='rubriqu
 	$ids = var_export($ids, true);
 	$recursif = var_export($recursif, true);
 
-	$m = '_modifierextra_dist';
-	$v = '_voirextra_dist';
 	foreach ($noms as $nom) {
-		$nom = str_replace('_', '', $nom);
-		$f = "autoriser_$objet" . _SEPARATEUR_CEXTRAS_AUTORISER . "$nom";
+		$m = "autoriser_" . $objet . "_modifierextra_" . $nom . "_dist";
+		$v = "autoriser_" . $objet . "_voirextra_" . $nom . "_dist";
+
 		$code = "
-			if (!function_exists('$f$m')) {
-				function $f$m(\$faire, \$quoi, \$id, \$qui, \$opt) {
+			if (!function_exists('$m')) {
+				function $m(\$faire, \$quoi, \$id, \$qui, \$opt) {
 					return _restreindre_extras_objet('$objet', \$id, \$opt, $ids, '$cible', $recursif);
 				}
 			}
-			if (!function_exists('$f$v')) {
-				function $f$v(\$faire, \$quoi, \$id, \$qui, \$opt) {
+			if (!function_exists('$v')) {
+				function $v(\$faire, \$quoi, \$id, \$qui, \$opt) {
 					return autoriser('modifierextra', \$quoi, \$id, \$qui, \$opt);
 				}
 			}
