@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteurs' => 'authors',
 
 	// B
-	'bouton_configurer_acces' => 'Configuration des accès .htaccess', # NEW
+	'bouton_configurer_acces' => 'Configuring .htaccess access',
 	'bouton_creer_la_zone' => 'Create new area',
 
 	// C
@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_ajouter_auteurs' => 'Are you sure you want to add this author to the area?',
 	'confirmer_retirer_auteur_zone' => 'Are you sure you wish to remove this author from this area?',
 	'confirmer_retirer_auteurs' => 'Are you sure you wish to remove all authors from this area?',
-	'confirmer_retirer_rubrique_zone' => 'Êtes vous sûr de vouloir retirer cette rubrique de cette zone ?', # NEW
+	'confirmer_retirer_rubrique_zone' => 'Are you sure you want to remove this section of this zone?',
 	'confirmer_supprimer_zone' => 'Are you sure you want to delete this area?',
 	'creer_zone' => 'Create a new area',
 
@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif' => 'Description',
 
 	// E
-	'explication_creer_htaccess' => 'Cette option interdit la lecture des documents joints si le texte auquel ils se rattachent n\'est pas publi&eacute', # NEW
+	'explication_creer_htaccess' => 'This option prevents reading the attached documents if the text to which they relate is not published',
 
 	// I
 	'icone_menu_config' => 'Restricted access',
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucune_zone' => 'No areas',
 	'info_auteurs_lies_zone' => 'Authors with access to this area',
 	'info_lien_action_proteger' => 'Restrict access to this section',
-	'info_nb_zones' => '@nb@ zones', # NEW
+	'info_nb_zones' => '@nb@ zones',
 	'info_page' => 'This page allows you to create restricted areas in your site',
 	'info_retirer_auteurs' => 'Remove all authors',
 	'info_retirer_zone' => 'Remove from area',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_rubrique_dans_zones' => 'This section is in areas:',
 
 	// L
-	'label_creer_htaccess' => 'Accès aux document joints par leur URL', # NEW
+	'label_creer_htaccess' => 'Access to the attached document by their URL',
 	'label_creer_htaccess_non' => 'allow read',
 	'label_creer_htaccess_oui' => 'forbid the reading',
 
@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_ajouter_zone' => 'Add a zone',
-	'texte_creer_associer_zone' => 'Créer et associer une zone', # NEW
+	'texte_creer_associer_zone' => 'Create and assign a zone',
 	'titre' => 'Title',
 	'titre_ajouter_zone' => 'Add to a restricted area',
 	'titre_boite_protegee_non' => 'Unrestricted access',
