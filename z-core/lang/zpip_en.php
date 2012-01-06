@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accueil' => 'Accueil', # NEW
+	'accueil' => 'Home',
 	'adapte_de' => 'adapted from',
 
 	// C
@@ -24,9 +24,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lire_la_suite_de' => ' of ',
 
 	// P
-	'pagination_next' => 'Suivant »', # MODIF
-	'pagination_pages' => 'Pages', # NEW
-	'pagination_prev' => '« Précédent', # MODIF
+	'pagination_next' => 'Next »',
+	'pagination_pages' => 'Pages',
+	'pagination_prev' => '« Previous',
 	'personaliser_nav' => 'Customize this menu',
 
 	// S
