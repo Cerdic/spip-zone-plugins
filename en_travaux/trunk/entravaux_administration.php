@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin En Travaux
- * (c) 2006-2009 Arnaud Ventre, Cedric Morin
+ * (c) 2006-2012 Arnaud Ventre, Cedric Morin
  * Distribue sous licence GPL
  *
  */
@@ -42,7 +42,6 @@ function entravaux_upgrade($nom_meta_base_version,$version_cible){
  * @param string $nom_meta_base_version
  */
 function entravaux_vider_tables($nom_meta_base_version) {
-
 	effacer_meta("entravaux_id_auteur");
 	effacer_meta("entravaux_message");
 	effacer_meta($nom_meta_base_version);
