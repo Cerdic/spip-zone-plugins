@@ -55,5 +55,10 @@ function normaliser_datepicker_datetime_dist($valeur, $options, &$erreur) {
 		return false;
 	}
 
-	return date("Y-m-d H:i:s", $date);
+	$date = date("Y-m-d H:i:s", $date);
+	$date = vider_date($date); // enlever les valeurs considerees comme nulles (1 1 1970, etc...)
+	if (!$date) {
+		$date = $defaut;
+	}
+	return $date;
 }
