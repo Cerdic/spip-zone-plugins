@@ -15,8 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur' => 'Author',
 
 	// B
-	'bouton_radio_fermee' => 'Fermée', # NEW
-	'bouton_radio_ouvert' => 'Ouverte', # NEW
+	'bouton_radio_fermee' => 'Closed',
+	'bouton_radio_ouvert' => 'Opened',
 	'bouton_voter' => 'Vote',
 
 	// C
@@ -28,8 +28,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_tables' => 'Create the tables',
 
 	// D
-	'date' => 'date', # NEW
-	'derniers_votes' => 'Derniers votes', # NEW
+	'date' => 'date',
+	'derniers_votes' => 'Last votes',
 	'destruction' => 'Destruction of tables',
 	'detruire' => '<strong style="color:red">Warning, this command will destroy the tables of the plugin !</strong><br />You should use it only if you want to uninstall the plugin...',
 	'detruit' => 'Tables destroyed...',
@@ -39,14 +39,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'err_balise' => '[ NOTATION_ERR : tag outside an article loop ]',
 	'err_db_notation' => '[ RATING ERROR : only one rating by article ]',
 	'exemple' => 'Score distribution (score = 5, weighting factor = @ponderation@) : ',
-	'explication_accepter_note' => 'Si "fermée", la notation sera activable au cas par cas sur les objets ayant cette fonctionnalité.', # NEW
+	'explication_accepter_note' => 'If "closed", the rating can be activated individually on objects that have this feature.',
 
 	// I
 	'info_acces' => 'Open voting : ',
 	'info_etoiles' => 'This setting allows you to change the maximum value of the note (the number of stars between 1 and 10, and 5 by default).<br />
                     <strong style="color:red">/!\\ Warning</strong> : you should not modify this setting after the scoring to be initiated because the ratings will not be calculated again and this can cause inconsistencies in the scoring ...<br />
                     This parameter must be fixed once and for all when creating ratings.',
-	'info_fonctionnement_note' => 'Fonctionnement de la notation', # NEW
+	'info_fonctionnement_note' => 'How rating works',
 	'info_ip' => 'To be the easiest possible to use, the rating is attached to the IP address of the voter, which avoids two successive votes in the database, with a few drawbacks ...  especially if you manage author\'s votes.<br />
 				In this case, we set the note on the user identifier (when he is registered, of course).<br />
                 If you want to guarantee the uniqueness of the note, limit the voting <b>only</b> to registered users (above).',
@@ -68,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'jechangedavis' => 'I withdraw my opinion',
 
 	// L
-	'label_accepter_note' => 'Statut de la notation sur tous les objets', # NEW
+	'label_accepter_note' => 'Status of the rating on all objects',
 
 	// M
 	'moyenne' => 'Average',
@@ -92,7 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'note_7' => 'Rating : 7',
 	'note_8' => 'Rating : 8',
 	'note_9' => 'Rating : 9',
-	'note_pond' => 'Notes ponderées', # NEW
+	'note_pond' => 'Weighted ratings',
 	'notes' => 'Ratings',
 
 	// O
