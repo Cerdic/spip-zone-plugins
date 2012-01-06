@@ -107,9 +107,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traductions_mots_differents' => 'Synchronise the keywords',
 
 	// V
-	'voir_article_source' => 'Voir l\'article source', # NEW
-	'voir_les_revisions_de_la_source' => 'Voir les révisions de la source', # NEW
-	'voir_rubrique_source' => 'Voir la rubrique source', # NEW
+	'voir_article_source' => 'Show the source article',
+	'voir_les_revisions_de_la_source' => 'Show the revisions of the source',
+	'voir_rubrique_source' => 'Show the source section',
 
 	// Z
 	'zbug_critere_necessite_parametre' => 'The {@critere@} criteria requires a parameter'
