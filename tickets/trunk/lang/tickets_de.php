@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'assignes_a' => 'Zugewiesen zu',
 
 	// C
-	'cfg_bouton_radio_desactiver_forum_public' => 'Désactiver l\'utilisation des forums publics.', # NEW
+	'cfg_bouton_radio_desactiver_forum_public' => 'Désactiver l\'utilisation des forums publics.', # MODIF
 	'cfg_descr_tickets' => 'Konfiguration des Plugins Tickets für SPIP',
 	'cfg_explication_composants' => 'Séparez les composants par le caractère ":".', # NEW
 	'cfg_explication_jalons' => 'Séparez les jalons par le caractère ":".', # NEW
@@ -26,13 +26,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_explication_readonly' => 'Cette partie de la configuration est déjà définie autre part.', # NEW
 	'cfg_explication_versions' => 'Séparez les versions par le caractère ":".', # NEW
 	'cfg_form_tickets_autorisations' => 'Zugriffsrechte einstellen',
-	'cfg_form_tickets_general' => 'Configuration générale', # NEW
+	'cfg_form_tickets_general' => 'Configuration générale', # MODIF
 	'cfg_inf_type_autorisation' => 'Wenn Sie Status oder Autor als Kriterium festlegen,
 	müssen Sie weiter unten Status oder Autor/en auswählen.',
 	'cfg_lbl_autorisation_auteurs' => 'Mehrere Autoren autorisieren',
 	'cfg_lbl_autorisation_statuts' => 'Nach Autorenstatus autorisieren',
 	'cfg_lbl_autorisation_webmestre' => 'Nur Webmaster autorisieren',
-	'cfg_lbl_case_notification_publique' => 'Être notifié dans l\'espace public plutôt que dans l\'espace privé (Nécessite Zpip)', # NEW
+	'cfg_lbl_case_notification_publique' => 'Être notifié dans l\'espace public plutôt que dans l\'espace privé (Nécessite Zpip)', # MODIF
 	'cfg_lbl_case_selecteur_navigateur' => 'Disposer d\'un sélecteur de navigateur dans le formulaire d\'édition de ticket', # NEW
 	'cfg_lbl_composants' => 'Composants', # NEW
 	'cfg_lbl_forums_publics' => 'Commentaires sur les tickets', # NEW
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_tickets' => 'Tickets',
 	'champ_assigner' => 'Zuweisen:',
 	'champ_composant' => 'Element:',
-	'champ_createur' => 'Créé par :', # NEW
+	'champ_createur' => 'Créé par :', # MODIF
 	'champ_date' => 'Datum:',
 	'champ_date_modif' => 'Bearbeitet am',
 	'champ_description' => 'Beschreibung des Tickets',
@@ -63,7 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_jalon' => 'Meilenstein:',
 	'champ_maj' => 'MAJ :', # NEW
 	'champ_maj_long' => 'Date de mise à jour', # NEW
-	'champ_navigateur' => 'Navigateur :', # NEW
+	'champ_navigateur' => 'Navigateur :', # MODIF
 	'champ_nouveau_commentaire' => 'Neuer Kommentar',
 	'champ_projet' => 'Projekt:',
 	'champ_severite' => 'Kritisch:',
@@ -96,7 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	Geben Sie insbesondere an, ob das Problem immer oder nur gelegentlich auftritt.
 	Wenn es sich um einen Darstellungsfehler handelt, geben Sie bitte Bezeichnung und Versionsnummer Ihres Webbrowsers an.',
 	'explication_description_ticket_ss_nav' => 'Décrivez aussi précisément que possible le besoin ou le problème rencontré.
-	Indiquez en particulier s’il se produit systématiquement ou occasionnellement.', # NEW
+	Indiquez en particulier s’il se produit systématiquement ou occasionnellement.', # MODIF
 	'explication_redaction' => 'Wenn Sie das Ticket fertig eingegeben haben,
 	geben Sie ihm den Status «Geöffnet und beschrieben.',
 	'explication_url_exemple' => 'Geben Sie hier den URL einer Seite mit dem Problem an.',
@@ -115,7 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tickets_redac' => 'in Bearbeitung',
 
 	// L
-	'label_paginer_par' => 'Paginer par :', # NEW
+	'label_paginer_par' => 'Paginer par :', # MODIF
 
 	// M
 	'mail_texte_message_auto' => 'Dies ist eine automatisch erstellte Nachricht: Bitte nicht beantworten.',
@@ -154,7 +154,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_redac' => 'In Bearbeitung',
 	'statut_resolu' => 'Erledigt',
 	'statut_resolu_long' => 'Alle erledigten Tickets',
-	'syndiquer_ticket' => 'Syndiquer le ticket :', # NEW
+	'syndiquer_ticket' => 'Syndiquer le ticket :', # MODIF
 	'syndiquer_tickets' => 'Syndiquer les tickets du site', # NEW
 
 	// T
