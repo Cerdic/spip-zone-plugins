@@ -8,15 +8,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'afficher_calendrier' => 'Afficher le calendrier', # NEW
+	'afficher_calendrier' => 'Show calendar',
 
 	// C
 	'cfg_boite_jqueryui' => 'jQuery UI setup',
 	'cfg_explication_plugins' => 'Choose here the plugins to insert in the website.',
-	'cfg_explication_themes' => 'Choisissez le thèmes pour l\'habillage de jQuery-UI.', # NEW
+	'cfg_explication_themes' => 'Choose the themes for the jQuery-UI look.',
 	'cfg_lbl_plugins' => 'Plugins',
-	'cfg_lbl_themes' => 'Thème', # NEW
-	'cfg_no_css' => 'ne pas charger les CSS de jQuery-UI', # NEW
+	'cfg_lbl_themes' => 'Theme',
+	'cfg_no_css' => 'do not load jQuery-UI CSS',
 	'cfg_titre_jqueryui' => 'jQuery UI',
 	'cfg_val_complete' => 'The complete jQuery UI',
 	'cfg_val_effects_blind' => 'Blind effect',
@@ -51,18 +51,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_val_ui_widget' => 'UI widget',
 
 	// D
-	'date_mois_10_abbr' => 'oct.', # NEW
-	'date_mois_11_abbr' => 'nov.', # NEW
-	'date_mois_12_abbr' => 'déc.', # NEW
-	'date_mois_1_abbr' => 'janv.', # NEW
-	'date_mois_2_abbr' => 'févr.', # NEW
-	'date_mois_3_abbr' => 'mars', # NEW
-	'date_mois_4_abbr' => 'avr.', # NEW
-	'date_mois_5_abbr' => 'mai', # NEW
-	'date_mois_6_abbr' => 'juin', # NEW
-	'date_mois_7_abbr' => 'juil.', # NEW
-	'date_mois_8_abbr' => 'août', # NEW
-	'date_mois_9_abbr' => 'sept.' # NEW
+	'date_mois_10_abbr' => 'Oct',
+	'date_mois_11_abbr' => 'Nov',
+	'date_mois_12_abbr' => 'Dec',
+	'date_mois_1_abbr' => 'Jan',
+	'date_mois_2_abbr' => 'Feb',
+	'date_mois_3_abbr' => 'Mar',
+	'date_mois_4_abbr' => 'Apr',
+	'date_mois_5_abbr' => 'May',
+	'date_mois_6_abbr' => 'Jun',
+	'date_mois_7_abbr' => 'Jul',
+	'date_mois_8_abbr' => 'Aug',
+	'date_mois_9_abbr' => 'Sep'
 );
 
 ?>
