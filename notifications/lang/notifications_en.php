@@ -30,17 +30,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_valide_url' => 'Meanwhile, it is visible at this temporary address :',
 
 	// B
-	'breve_propose_detail' => 'La brève "@titre@" est proposée à la publication
-	depuis', # NEW
-	'breve_propose_sujet' => '[@nom_site_spip@] Propose : @titre@', # NEW
-	'breve_propose_titre' => 'Brève proposée
-	---------------', # NEW
-	'breve_propose_url' => 'Vous êtes invité à venir la consulter et à donner votre opinion
-	dans le forum qui lui est attaché. Elle est disponible à l\'adresse :', # NEW
-	'breve_publie_detail' => 'La brève "@titre@" vient d\'être publiée par @connect_nom@.', # NEW
-	'breve_publie_sujet' => '[@nom_site_spip@] PUBLIE : @titre@', # NEW
-	'breve_publie_titre' => 'Brève publiée
-	--------------', # NEW
+	'breve_propose_detail' => 'The news item "@titre@" is proposed for publication since',
+	'breve_propose_sujet' => '[@nom_site_spip@] Proposed : @titre@',
+	'breve_propose_titre' => 'Proposed news item
+	---------------',
+	'breve_propose_url' => 'You are invited to view it and give your opinion
+	in the forum attached to it. It is available at:',
+	'breve_publie_detail' => 'The news item "@titre@" has just been published by @connect_nom@.',
+	'breve_publie_sujet' => '[@nom_site_spip@] PUBLISHED : @titre@',
+	'breve_publie_titre' => 'News item published
+	--------------',
 
 	// E
 	'evenement_notification' => 'Following events may generate email notifications.',
