@@ -47,7 +47,7 @@ function tradlang_forum_objets_depuis_env($array){
  * Insertion dans le pipeline post_edition
  * Si configuré comme tel on regénère les fichiers à chaque modification de chaine de langue
  * 
- * @param object $array
+ * @param object $flux
  * @return
  */
 function tradlang_post_edition($flux){
@@ -68,6 +68,10 @@ function tradlang_post_edition($flux){
 	return $flux;
 }
 
+/**
+ * Insertion dans le pipeline insert_head_css
+ * On ajoute les deux feuilles de style dans le head
+ */
 function tradlang_insert_head_css($flux){
 	static $done = false;
 	if (!$done) {
@@ -89,5 +93,23 @@ function tradlang_pre_boucle($boucle){
 		array_unshift($boucle->where,array("'='", "'$id_table." ."id_tradlang'", "'0'"));
 	}
 	return $boucle;
+}
+
+/**
+ * Insertion dans le pipeline affiche_milieu
+ * Sur la fiche des auteurs, on ajoute la liste des révisions de chaines de l'auteur
+ */
+function tradlang_affiche_milieu($flux){
+	if (($flux['args']['exec'] == 'auteur') && (intval($flux['args']['id_auteur']) > 0)){
+		$texte = recuperer_fond(
+			'prive/objets/liste/versions',
+			array(
+				'objet'=>'tradlang',
+				'id_auteur'=>intval($flux['args']['id_auteur'])
+			)
+		);
+		$flux['data'] .= $texte;
+	}
+	return $flux;
 }
 ?>

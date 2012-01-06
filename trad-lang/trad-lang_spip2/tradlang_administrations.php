@@ -49,6 +49,11 @@ function tradlang_upgrade($nom_meta_base_version,$version_cible){
 	$maj['0.3.8'] = array(
 		array('maj_tables',array('spip_tradlang_modules'))
 	);
+	$maj['0.3.9'] = array(
+		array('sql_alter',"TABLE spip_tradlang_modules DROP INDEX nom_mod"),
+		array('sql_alter',"TABLE spip_tradlang_modules CHANGE nom_mod nom_mod text DEFAULT '' NOT NULL"),
+		array('sql_alter',"TABLE spip_tradlang_modules ADD INDEX `nom_mod` ( `nom_mod` ( 255 ) )")
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

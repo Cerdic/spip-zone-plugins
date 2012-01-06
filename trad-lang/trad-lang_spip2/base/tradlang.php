@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Tradlang
- * Licence GPL (c) 2009 
+ * Licence GPL (c) 2009-2012 
  */
 
 
@@ -20,7 +20,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 		'texte_objet' => 'tradlang:titre_tradlang_module',
 		'texte_objets' => 'tradlang:titre_tradlang_modules',
 		'texte_modifier' => 'tradlang:icone_modifier_tradlang_module',
-		'icone_objet' => 'spip_lang-24',
+		'icone_objet' => 'spip_lang',
 		'texte_logo_objet' => 'tradlang:titre_logo_tradlang_module',
 		'info_aucun_objet'=> 'tradlang:info_aucun_tradlang_module',
 		'info_1_objet' => 'tradlang:info_1_tradlang_module',
@@ -30,7 +30,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 		'field'=> array(
 			"id_tradlang_module" => "bigint(21) NOT NULL AUTO_INCREMENT",
 			"module" => "varchar(128) NOT NULL",
-			"nom_mod" => "varchar(32) NOT NULL",
+			"nom_mod" => "text DEFAULT '' NOT NULL",
 			"lang_mere" => "varchar(16) NOT NULL default 'fr'",
 			"type_export" => "varchar(16) NOT NULL default 'spip'",
 			"dir_lang" => "varchar(255) NOT NULL",
@@ -40,7 +40,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 		),
 		'key' => array(
 			"PRIMARY KEY" => "id_tradlang_module",
-			"KEY" => "nom_mod",
+			"KEY" => "nom_mod (`nom_mod` ( 255 ))",
 			"UNIQUE" => "module"
 		),
 		'join' => array(
@@ -61,7 +61,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 		'texte_retour' => 'icone_retour',
 		'texte_objets' => 'tradlang:titre_tradlang_chaines',
 		'texte_modifier' => 'tradlang:icone_modifier_tradlang',
-		'icone_objet' => 'spip_lang-24',
+		'icone_objet' => 'spip_lang',
 		'info_aucun_objet'=> 'tradlang:info_aucun_tradlang',
 		'info_1_objet' => 'tradlang:info_1_tradlang',
 		'info_nb_objets' => 'tradlang:info_nb_tradlang',
