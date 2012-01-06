@@ -28,7 +28,7 @@ function formulaires_configurer_entravaux_charger_dist(){
  */
 function formulaires_configurer_entravaux_traiter_dist(){
 
-	include_spip('entravaux_install');
+	include_spip('entravaux_administrations');
 	if (_request('accesferme'))
 		entravaux_poser_verrou('accesferme');
 	else
