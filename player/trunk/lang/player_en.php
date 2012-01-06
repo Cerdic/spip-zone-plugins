@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'autohide' => 'Auto-hide',
 
 	// B
-	'blogo_vous_ecoutez' => 'En ce moment vous écoutez :', # NEW
+	'blogo_vous_ecoutez' => 'You are now listening:',
 
 	// C
 	'configuration_player' => 'Configure Multimedia Player',
@@ -48,11 +48,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_onclicktarget' => 'URL\'s target on click : ',
 	'label_ondoubleclick' => 'Double-click action on video (\'none\', \'fullscreen\', \'playpause\', or URL to open) : ',
 	'label_ondoubleclicktarget' => 'URL\'s target on double-click : ',
-	'label_player_mp3' => 'Choisissez le lecteur qui sera utilisé pour les fichiers MP3', # NEW
-	'label_player_mp3_dewplayer' => 'Dew player', # NEW
-	'label_player_mp3_eraplayer' => 'Erational player', # NEW
-	'label_player_mp3_neoplayer' => 'Neolao player', # NEW
-	'label_player_mp3_pixplayer' => 'One pixel out player', # NEW
+	'label_player_mp3' => 'Choose the player that will be used for MP3 files',
+	'label_player_mp3_dewplayer' => 'Dew player',
+	'label_player_mp3_eraplayer' => 'Erational player',
+	'label_player_mp3_neoplayer' => 'Neolao player',
+	'label_player_mp3_pixplayer' => 'One pixel out player',
 	'label_playeralpha' => 'Player background transparency : ',
 	'label_playercolor' => 'Player color : ',
 	'label_playertimeout' => 'Time (in seconds) before player hides : ',
