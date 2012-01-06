@@ -31,10 +31,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_auteurs' => 'Configuring authors',
 	'config_auteurs_rubriques' => 'What types of authors could be associated <b>to sections</b>?',
 	'config_auteurs_statut' => 'When creating an author, what is <b>the default status</b>?',
-	'config_plugin_qui' => 'Qui peut <strong>modifier la configuration</strong> des plugins (activation...) ?', # NEW
+	'config_plugin_qui' => 'Who can <strong>modify the configuration</strong> of the plugins (activation...)?',
 	'config_site' => 'Configuring site',
 	'config_site_qui' => 'Who can edit the <strong>site configuration</strong>?',
-	'crayons' => 'Crayons', # NEW
+	'crayons' => 'Pencils',
 
 	// D
 	'deja_defini' => 'The following permissions are already defined elsewhere:',
@@ -94,7 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ouvrir_visiteurs_tous' => 'Open to all visitors site:',
 
 	// P
-	'pas_acces_espace_prive' => '<strong>Pas d\'accès à l\'espace privé :</strong> les rédacteurs n\'ont pas accès à l\'espace privé.', # NEW
+	'pas_acces_espace_prive' => '<strong>No access to the private area:</ strong> editors don\'t have access to the private area.',
 	'personne' => 'Not any one',
 	'petitions_qui' => '<strong>Signatures :</strong> who can change the signatures on petitions:',
 	'publication' => 'Publication',

@@ -94,7 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ouvrir_visiteurs_tous' => 'لجميع زوار الموقع:',
 
 	// P
-	'pas_acces_espace_prive' => '<strong>Pas d\'accès à l\'espace privé :</strong> les rédacteurs n\'ont pas accès à l\'espace privé.', # NEW
+	'pas_acces_espace_prive' => '<strong>Pas d\'accès à l\'espace privé :</strong> les rédacteurs n\'ont pas accès à l\'espace privé.', # MODIF
 	'personne' => 'لا أحد',
 	'petitions_qui' => '<strong>التوقيعات:</strong> من يمكنه تعديل توقيعات العرائض:',
 	'publication' => 'النشر',
