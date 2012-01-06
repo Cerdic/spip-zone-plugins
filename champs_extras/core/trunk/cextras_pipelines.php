@@ -177,8 +177,9 @@ function cextras_formulaire_verifier($flux){
 		include_spip('inc/autoriser');
 		include_spip('inc/saisies');
 
-		$verifier = charger_fonction('verifier', 'inc', true);
-		$saisies = saisies_lister_avec_sql($saisies);
+		$verifier   = charger_fonction('verifier', 'inc', true);
+		$normaliser = charger_fonction('normaliser', 'inc', true);
+		$saisies    = saisies_lister_avec_sql($saisies);
 
 		// restreindre la vue selon les autorisations
 		$id_objet = $flux['args']['args'][0]; // ? vraiment toujours ?
@@ -191,10 +192,23 @@ function cextras_formulaire_verifier($flux){
 			and !_request($nom))
 			{
 				$flux['data'][$nom] = _T('info_obligatoire');
+			
 			// verifier (api)
 			} elseif ($verifier AND isset($saisie['verifier']) and $verif = $saisie['verifier']['type']) {
-				if ($erreur = $verifier(_request($nom), $verif, $saisie['verifier']['options'])) {
+				$options = isset($saisie['verifier']['options']) ? $saisie['verifier']['options'] : array();
+				if ($erreur = $verifier(_request($nom), $verif, $options)) {
 					$flux['data'][$nom] = $erreur;
+				}
+			}
+
+			// normaliser (api)
+			if (!isset($flux['data'][$nom]) and $normaliser and  isset($saisie['normaliser']) and $type = $saisie['normaliser']['type']) {
+				$options = isset($saisie['normaliser']['options']) ? $saisie['normaliser']['options'] : array();
+				$norm = $normaliser(_request($nom), $type, $options);
+				if ($norm['erreur']) {
+					$flux['data'][$nom] = $norm['erreur'];
+				} elseif ($norm['changement']) {
+					set_request($nom, $norm['valeur']);
 				}
 			}
 		}

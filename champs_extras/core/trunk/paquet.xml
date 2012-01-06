@@ -25,9 +25,6 @@
 	<pipeline nom="afficher_contenu_objet" inclure="cextras_pipelines.php" />
 	<pipeline nom="pre_edition" inclure="cextras_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="cextras_pipelines.php" />
-	<!--
-	<pipeline nom="declarer_tables_objets_sql" inclure="base/cextras.php" />
-	-->
 
 	<necessite nom="saisies" compatibilite="[1.10.0;]" />
 
