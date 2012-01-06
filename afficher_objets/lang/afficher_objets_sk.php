@@ -8,13 +8,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'info_statut' => 'Status',
+	'info_statut' => 'Stav',
 
 	// N
-	'nb_articles' => '@nb@ articles',
+	'nb_articles' => '@nb@ článkov',
 
 	// R
-	'rang' => 'Rank'
+	'rang' => 'Hodnotenie'
 );
 
 ?>
