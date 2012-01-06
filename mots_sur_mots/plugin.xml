@@ -5,11 +5,17 @@
 	</slogan>
 	<auteur>Bertrand Marne</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<description>
-		Momo (diminutif de mots sur mots), vous permet de lier des mots-cl&eacute;s &agrave; d'autres mot-cl&eacute;s.
+Momo (diminutif de mots sur mots), vous permet de lier des mots-cl&eacute;s &agrave; d'autres mot-cl&eacute;s.
+
+
+-* Il y a un squelette de d&eacute;mo: /spip.php?page=demomo
+-* Il y a deux mod&egrave;les pour tester&nbsp;:
+-** <code>enfants_mots</code> qui donne r&eacute;cursivement tous les enfants d'un mot
+-** <code>parents_mots</code> qui liste les parents d'un mot
 	</description>
 	<prefix>momo</prefix>
 	<icon>images/tag-32.png</icon>

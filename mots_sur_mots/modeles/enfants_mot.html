@@ -1,0 +1,27 @@
+[(#REM)
+
+exemple d'utilisation du critère id_mot_parent du plugin Momo
+
+Fait la liste des mots-clés enfants (et leurs enfants de façon récursive) d'un mot clé passé en paramètre.
+Si id_mot n'est pas défini c'est les enfants -éventuels- de tous les mots qui sont retournés
+
+]
+<B_mot_parent_ou_tous>
+[(#ENV{id_mot}|non)<ul>]
+<BOUCLE_mot_parent_ou_tous(MOTS){id_mot ?}{par num titre}>
+	<B_Liste_mots_enfants>
+[(#ENV{id_mot}|non)<li><a href="#URL_MOT" title="<:momo:plus_d_info_sur{titre=#TITRE}|attribut_html:>">#TITRE</a>]<ul[ id=(#ENV{id})][ class=(#ENV{class})]>
+	<BOUCLE_Liste_mots_enfants(MOTS){id_mot_parent = #ID_MOT}{par num titre}>
+		<BOUCLE_Recursion(BOUCLE_Liste_mots_enfants)>
+		</BOUCLE_Recursion>
+	<li>
+		<a href="[(#URL_MOT|parametre_url{id_contexte,#_mot_parent_ou_tous:ID_MOT})]" title="<:momo:plus_d_info_sur{titre=#TITRE}|attribut_html:>">#TITRE</a>
+	</li>
+		<//B_Recursion>
+	</BOUCLE_Liste_mots_enfants>
+</ul>[(#ENV{id_mot}|non)</li>]
+	</B_Liste_mots_enfants>
+</BOUCLE_mot_parent_ou_tous>
+[(#ENV{id_mot}|non)</ul>]
+</B_mot_parent_ou_tous>
+#FILTRE{trim}
