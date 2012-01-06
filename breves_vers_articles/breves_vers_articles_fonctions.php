@@ -11,6 +11,14 @@
 
 include_spip('base/breves_vers_articles_base');
 
+include_spip('plugins/installer'); // spip_version_compare 3.x
+include_spip('inc/plugin'); // spip_version_compare 2.x
+if (spip_version_compare($GLOBALS['spip_version_branche'], '3.0.0alpha', '>=')) {
+	define('_SPIP3', true);
+	include_spip('action/editer_liens');
+} else {
+	define('_SPIP3', false);
+}
 
 function breves_vers_articles($id_breve, $id_rubrique, $id_auteur, $statut_br) {
 	$nouvel_article = array();
@@ -63,8 +71,10 @@ function breves_vers_articles($id_breve, $id_rubrique, $id_auteur, $statut_br) {
 	
 
 	// recherche du titre du secteur de la breve
-	$secteur = sql_getfetsel('titre', 'spip_rubriques', 'id_rubrique='.$res['id_rubrique']);
-	$nouvel_article['surtitre'] = $secteur;
+	if (BREVE_SECTION_VERS_ARTICLE_SURTITRE) {
+		$secteur = sql_getfetsel('titre', 'spip_rubriques', 'id_rubrique='.$res['id_rubrique']);
+		$nouvel_article['surtitre'] = $secteur;
+	}
 	
 	// champs par defaut sur la création d'un article
 	$nouvel_article['accepter_forum'] = 'pos';
@@ -78,8 +88,15 @@ function breves_vers_articles($id_breve, $id_rubrique, $id_auteur, $statut_br) {
 	$message.="<br>Bréve n°".$id_breve." vers l'article ".$id_article;
 
 	// relation article <=> auteur
-	if($id_auteur != '')
-		sql_insertq('spip_auteurs_articles', array('id_auteur' => $id_auteur, 'id_article' => $id_article));
+	if($id_auteur != '') {
+		if (_SPIP3) {
+			objet_associer(
+				array("auteur"=>$id_auteur),
+				array("article"=>$id_article));
+		} else {
+			sql_insertq('spip_auteurs_articles', array('id_auteur' => $id_auteur, 'id_article' => $id_article));
+		}
+	}
 
 	// on s'occupe du logo
 	$logobr = IMG_SPIP_PATH."/breveon".$id_breve;
@@ -94,9 +111,19 @@ function breves_vers_articles($id_breve, $id_rubrique, $id_auteur, $statut_br) {
 	if($ext!="") if(!rename($logobr.$ext, $logoart.$ext)) $message.="<br>impossible de renommer:".$logobr.$ext;
 
 	// on s'occupe des mots clés
-	$mots = sql_select('id_mot', 'spip_mots_breves', 'id_breve='.$id_breve);
-	while($motscles = sql_fetch($mots)) {		
-		sql_insertq('spip_mots_articles', array('id_mot' => $motscles['id_mot'], 'id_article' => $id_article));
+	if (_SPIP3) {
+		
+		$mots = sql_allfetsel('id_mot', 'spip_mots_liens', array('objet='.sql_quote('breve'), 'id_objet='.$id_breve));
+		if ($mots and $mots = array_map('array_shift', $mots)) {
+			objet_associer(
+				array("mot"=>$mots),
+				array("article"=>$id_article));
+		}
+	} else {
+		$mots = sql_select('id_mot', 'spip_mots_breves', 'id_breve='.$id_breve);
+		while($motscles = sql_fetch($mots)) {		
+			sql_insertq('spip_mots_articles', array('id_mot' => $motscles['id_mot'], 'id_article' => $id_article));
+		}
 	}
 
 	// on s'occupe des forums : ok

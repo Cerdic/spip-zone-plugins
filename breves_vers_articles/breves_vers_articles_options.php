@@ -20,6 +20,8 @@ define('IMG_SPIP_PATH', realpath(_DIR_IMG));
 
 define('TABLE_BREVES_ARTICLES', 'spip_breves_articles');
 
+define('BREVE_SECTION_VERS_ARTICLE_SURTITRE', false);
+
 include_spip('base/breves_vers_articles_base');
 
 ?>
