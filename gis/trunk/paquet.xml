@@ -23,7 +23,7 @@
 	<traduire module="paquet-gis" reference="fr" gestionnaire="salvatore" />
 
 	<utilise nom="selecteur_generique" compatibilite="[1.12;]" />
-	<necessite nom="saisies" compatibilite="[1.7.1;]" />
+	<necessite nom="saisies" compatibilite="[1.19.0;]" />
 	<lib nom="mxn-gis-2.0.9" lien="http://www.mediaspip.net/sites/www.mediaspip.net/squelettes/paquets/mxn-gis/mxn-gis-2.0.9.zip" />
 
 	<pipeline
