@@ -45,4 +45,24 @@ function ziptex_creer_tex($squel,$nom,$options=array()){
 function ziptex_copier_tex($orig,$dest){
 	copy(find_in_path($orig),_DIR_ZIPTEX.$dest);
 }
+function ziptex_copier_img($orig){
+	/* Récuperation de l'extension */
+	$match = array();
+	if (preg_match(",\.([^.]+)$,", $orig, $match)){
+		$ext = $match[1];
+	}
+	
+	/* Cas particulier des .gif qui seront converti en .png*/
+	if ($ext == 'gif'){
+		include_spip('filtres/images_transforme');
+		$orig = image_format($orig);	
+	}
+	
+	/* Copie */
+	
+	$destination = _DIR_ZIPTEX._DIR_ZIPTEX_IMG.md5($orig).'.'.$ext;
+	sous_repertoire(_DIR_ZIPTEX._DIR_ZIPTEX_IMG);
+	copy($orig,$destination);
+	return _DIR_ZIPTEX_IMG.basename($destination);
+}
 ?>

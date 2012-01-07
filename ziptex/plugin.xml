@@ -1,7 +1,7 @@
 <plugin>
 	<nom>ZipTeX</nom>
 	<auteur>Maïeul Rouquette</auteur>
-	<version>0.2.0</version>
+	<version>0.3.0</version>
 	<etat>dev</etat>
 	<categorie>divers</categorie>
 	<prefix>ziptex</prefix>
