@@ -4,7 +4,7 @@ function afficheDiv(){
 		_modifie_div(arguments[i],'');
 	}
 }
-	
+
 function cacheDiv(){
 	nb = arguments.length;
 	for (var i = 0; i < nb; i++) {
@@ -37,19 +37,28 @@ function _modifie_div(nomDiv,val) {
 function remplirSelectImputation(numClasse, numImputation) {
 	var i = 0;
 	var numSelect = 0;
+	document.getElementById('type_operation_imputation').innerHTML = '<select name="imputation" id="imputation" class="formo"> <option value="0">-- choisissez un code</option> </select>';
 	var myselect = document.getElementById("imputation");
+	window.alert(numClasse + ' - ' + numImputation);
 	for (var code in eval('classe'+numClasse)) {
-		leCode = code;
-		if (leCode == numImputation) {
+		if (code == numImputation) {
 			numSelect = i;
 		}
 		laValeur = code + ' - ' + eval('classe'+numClasse)[code];
-		lOption = new Option(laValeur, leCode, [], []);
-		myselect.options[i] = lOption;
+		myselect.options[i] = new Option(laValeur, code);;
+//		var myoption = document.createElement('option');
+//		myoption.text = code + ' - ' + eval('classe'+numClasse)[code];
+//		myoption.value = code;
+//		try {
+//			myselect.add(myoption, i); // standards compliant : i=myselect.options[myselect.selectedIndex]; doesn't work in IE
+//		} catch(exeption_ie) {
+//			myselect.add(myoption, myselect.selectedIndex); // IE only
+//		}
 		i++;
 	}
 	myselect.selectedIndex = numSelect;
-	myselect.length = i;
+//	myselect.length = i;
+////	history.go(0); // After creating an Option object you must refresh the document by using this at the end of the code.
 }
 
 function chkForm(frm) {

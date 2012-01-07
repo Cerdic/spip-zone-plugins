@@ -33,7 +33,6 @@ function balise_BOUTON_TYPE_OPERATION_dist($p) {
 function balise_BOUTON_TYPE_OPERATION_dyn($id_compte, $type_operation) {
 	$res = "<script type='text/javascript' src='" . find_in_path("javascript/association.js") . "'></script>";
 	$res .= "\n<li class='editer_type_operation'><label><strong>" . _T('asso:bouton_radio_type_operation_titre') . "</strong></label>";
-
 	$res .= "\n<div class='choix'>";
 
 	$pc_ok = FALSE; // controle l'existence de references comptables
@@ -45,9 +44,9 @@ function balise_BOUTON_TYPE_OPERATION_dyn($id_compte, $type_operation) {
 		$res .= (($id_compte && ($type_operation !== $num_classe)) ? " disabled='disabled' " : " ");
 		$res .= "class='radio' name='type_operation' value='" . $num_classe . "' id='type_operation_depense'";
 		$res .= (($type_operation == $num_classe) ? " checked='checked'" : "");
-		$res .= " onclick=\"remplirSelectImputation(" . $num_classe . ");
-		afficheDiv('label_imputation','label_depense','depense','label_journal_depense','mode_paiement','justification','destination');
-			cacheDiv('label_destination','label_depense_evaluee','label_journal_recette','recette'); \" />";
+		$res .= " onClick=\"remplirSelectImputation(" . $num_classe . ");
+afficheDiv('label_imputation','label_depense','depense','label_journal_depense','mode_paiement','justification','destination');
+cacheDiv('label_destination','label_depense_evaluee','label_journal_recette','recette'); \" />";
 		$res .= "\n<label for='type_operation_depense'>D&eacute;pense</label>";
 	}
 
@@ -58,9 +57,9 @@ function balise_BOUTON_TYPE_OPERATION_dyn($id_compte, $type_operation) {
 		$res .= (($id_compte && ($type_operation !== $num_classe)) ? " disabled='disabled' " : " ");
 		$res .= "class='radio' name='type_operation' value='" . $num_classe . "' id='type_operation_recette'";
 		$res .= (($type_operation == $num_classe) ? " checked='checked'" : "");
-		$res .= " onclick=\"remplirSelectImputation(" . $num_classe . ");
-		afficheDiv('label_imputation','label_recette','recette','label_journal_recette','mode_paiement','justification','destination');
-			cacheDiv('label_destination','label_recette_evaluee','label_journal_depense','depense'); \" />";
+		$res .= " onClick=\"remplirSelectImputation(" . $num_classe . ");
+afficheDiv('label_imputation','label_recette','recette','label_journal_recette','mode_paiement','justification','destination');
+cacheDiv('label_destination','label_recette_evaluee','label_journal_depense','depense'); \" />";
 		$res .= "\n<label for='type_operation_recette'>Recette</label>";
 	}
 
@@ -72,9 +71,9 @@ function balise_BOUTON_TYPE_OPERATION_dyn($id_compte, $type_operation) {
 		$res .= (($id_compte && ($type_operation !== $num_classe)) ? " disabled='disabled' " : " ");
 		$res .= "class='radio' name='type_operation' value='" . $num_classe . "' id='type_operation_virement'";
 		$res .= (($type_operation == $num_classe) ? " checked='checked'" : "");
-		$res .= " onclick=\"remplirSelectImputation(" . $num_classe . ");
-		afficheDiv('label_destination','label_depense','depense','label_journal_depense','mode_paiement','justification');
-			cacheDiv('label_imputation','label_depense_evaluee','label_journal_recette','recette','destination'); \" />";
+		$res .= " onClick=\"remplirSelectImputation(" . $num_classe . ");
+afficheDiv('label_destination','label_depense','depense','label_journal_depense','mode_paiement','justification');
+cacheDiv('label_imputation','label_depense_evaluee','label_journal_recette','recette','destination'); \" />";
 		$res .= "\n<label for='type_operation_virement'>Virement</label>";
 	}
 
@@ -85,9 +84,9 @@ function balise_BOUTON_TYPE_OPERATION_dyn($id_compte, $type_operation) {
 		$res .= (($id_compte && ($type_operation !== $num_classe)) ? " disabled='disabled' " : " ");
 		$res .= "class='radio' name='type_operation' value='" . $num_classe . "' id='type_operation_contribution_volontaire'";
 		$res .= (($type_operation == $num_classe) ? " checked='checked'" : "");
-		$res .= " onclick=\"remplirSelectImputation(" . $num_classe . ");
-			afficheDiv('label_imputation','label_depense_evaluee','label_recette_evaluee','depense','recette','justification','destination');
-			cacheDiv('label_destination','label_depense','label_recette','mode_paiement'); \" />";
+		$res .= " onClick=\"remplirSelectImputation(" . $num_classe . ");
+afficheDiv('label_imputation','label_depense_evaluee','label_recette_evaluee','depense','recette','justification','destination');
+cacheDiv('label_destination','label_depense','label_recette','mode_paiement'); \" />";
 		$res .= "\n<label for='type_operation_contribution_volontaire'>Contrib. volontaire</label>";
 	}
 
@@ -97,7 +96,7 @@ function balise_BOUTON_TYPE_OPERATION_dyn($id_compte, $type_operation) {
 
 	$res .= "\n</div>";
 	$res .= "\n</li>";
-	
+
 	return $res;
 }
 

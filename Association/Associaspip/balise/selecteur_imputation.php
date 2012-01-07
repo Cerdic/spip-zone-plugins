@@ -20,13 +20,27 @@ function balise_SELECTEUR_IMPUTATION_dist($p) {
 	return calculer_balise_dynamique($p, 'SELECTEUR_IMPUTATION', array('id_compte', 'type_operation', 'imputation'));
 }
 
-function balise_SELECTEUR_IMPUTATION_dyn($id_compte, $type_operation, $imputation) {	
-	if (!$id_compte) {
-		$res = "<script> remplirSelectImputation(" . $type_operation . ");</script>";
+function balise_SELECTEUR_IMPUTATION_dyn($id_compte, $type_operation, $imputation) {
+	/* Nota: il faut creer un conteneur (appeler ici 'type_operation_imputation') pour pouvoir y injecter par JS le select#imputation (ce qui se fait dans la fonction appelee et non ici pour eviter certains effets de bord de Tidy). Cette acrobatie est necessaire parce-que "<select> <option>aucun</option> <script>rSI...</script> <noscript>...opts...</noscript> </select>" n'est pas valide (et est malencontreusement corrige par Tidi) ; mais que la forme correcte est "<script>document.write('<select><option>aucun</option></select>');rSI..</script> <noscrip><select><option>aucun</option>...opts...</select></noscript>" */
+	$res = "<span id='type_operation_imputation'> </span> <script type='text/javascript'>\n<!--//--><![CDATA[//><!--\n
+	remplirSelectImputation($type_operation";
+	if ($id_compte) {
+		$res .= ",$imputation";
 	}
-	else {
-		$res = "<script> remplirSelectImputation(" . $type_operation . "," . $imputation . ");</script>";
+	$intro = '<select name="imputation" id="imputation" class="formo">
+<option value="0">-- ' . _T('choisir_un_code') . '</option>';
+	$res .= ");\n//--><!]]>\n</script><noscript>\n$intro";
+	foreach ($GLOBALS['association_metas'] as $key => $val) {
+		if (substr($key, 0, 6) === "classe") {
+			$tableau = association_liste_plan_comptable($val);
+			foreach ($tableau as $k => $v) {
+				if($k!=581) { // code virement interne
+					$res .= "\n<option value='$k'" . (($k==$imputation)?' selected="selected"':'') . ">$k - $v</option>";
+				}
+			}
+		}
 	}
+	$res .= "\n</select>\n</noscript>";
 	return $res;
 }
 

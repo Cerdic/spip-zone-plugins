@@ -8,9 +8,8 @@
 				<li class="fieldset">
 					<fieldset>
 						<h3 class="legend"><:asso:modification_des_comptes:></h3>
-						#BOUTON_TYPE_OPERATION
 						<ul>
-
+							#BOUTON_TYPE_OPERATION
 							#SET{erreurs,#ENV**{erreurs}|table_valeur{imputation}}
 							<li class="editer_imputation">
 								[<span class='erreur_message'>(#GET{erreurs})</span>]
@@ -22,9 +21,6 @@
 										 <strong><:asso:compte_credite:></strong>
 									</div>
 								</label>
-								<select name="imputation" id="imputation" class="formo" >
-									<option value="0" selected="selected">-- choisissez un code</option>
-								</select>
 								#SELECTEUR_IMPUTATION
 							</li>
 
