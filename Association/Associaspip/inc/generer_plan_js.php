@@ -17,7 +17,7 @@ echo "<!-- // --><![CDATA[ // ><!--\n";
 foreach ($GLOBALS['association_metas'] as $key => $val) {
 	if (substr($key, 0, 6) === "classe") { // ne prendre dans les metas que les classes !!!
 		echo "var classe$val = new Array();\n";
-		$tableau = association_liste_plan_comptable($val);
+		$tableau = association_liste_plan_comptable($val,1);
 		foreach ($tableau as $k => $v) {
 			if($k!=581) { // code virement interne !!!!
 				echo "classe$val" . "['$k'] = '". addslashes($v) ."';\n";

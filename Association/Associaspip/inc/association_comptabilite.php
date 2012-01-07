@@ -288,11 +288,12 @@ function association_valider_plan_comptable()
 
 	return true;
 }
+
 /* retourne un tableau $code => $intitule trie sur $code et de classe $val */
-function association_liste_plan_comptable($val) {
+function association_liste_plan_comptable($val,$actives='') {
 	$res = array();
 	/* recupere le code et l'intitule de tous les comptes de classe $val */
-	$query = sql_select("code, intitule", "spip_asso_plan", "classe='".$val."'", "", "code");
+	$query = sql_select("code, intitule", "spip_asso_plan", "classe='$val'".($actives?" AND acti=$actives":""), "", "code");
 	while ($data = sql_fetch($query)) {
 		$code = $data['code'];
 		$intitule = $data['intitule'];

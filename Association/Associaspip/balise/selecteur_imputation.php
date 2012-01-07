@@ -32,7 +32,7 @@ function balise_SELECTEUR_IMPUTATION_dyn($id_compte, $type_operation, $imputatio
 	$res .= ");\n//--><!]]>\n</script><noscript>\n$intro";
 	foreach ($GLOBALS['association_metas'] as $key => $val) {
 		if (substr($key, 0, 6) === "classe") {
-			$tableau = association_liste_plan_comptable($val);
+			$tableau = association_liste_plan_comptable($val,1);
 			foreach ($tableau as $k => $v) {
 				if($k!=581) { // code virement interne
 					$res .= "\n<option value='$k'" . (($k==$imputation)?' selected="selected"':'') . ">$k - $v</option>";
