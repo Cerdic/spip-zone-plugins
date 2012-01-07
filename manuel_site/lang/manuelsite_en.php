@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_faq' => 'FAQ of the Website Editor Manual',
-	'titre_manuel' => 'Website Editor Manual'
+	'titre_manuel' => 'Website Editor Manual',
 	'titre_menu' => 'Website Editor Manual',
 );
 ?>
