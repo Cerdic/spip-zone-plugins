@@ -1,0 +1,19 @@
+[(#REM) gère l’affichage de l’ensemble de la page ]
+
+#CACHE{0}
+[(#SET{id_blink,[(#VAL{id_blink}|_request|sinon{new})]})]
+<BOUCLE_si_autorise(CONDITION){si (#AUTORISER{modifier,lien,#GET{id_blink}})}>
+	[(#SET{retour, #URL_ECRIRE{blinks}})]
+	<BOUCLE_titre(BLINKS){id_blink=#GET{id_blink}}{tout}>
+		[(#SET{titre, #IDENTIFIANT_BLINK})]
+		[(#SET{retour, [(#URL_ECRIRE{lien_voir}|parametre_url{id_blink,#ID_BLINK})]})]
+	</BOUCLE_titre>
+		
+	[(#INCLURE{fond=prive/editer/lien,
+		id_blink=#GET{id_blink},
+		icone_retour=[(#ENV{retour,#GET{retour}}
+			|icone{<:icone_retour:>, #CHEMIN{images/blinks-24.png}, #LANG_LEFT })],
+		titre=#GET{titre}
+	})]
+	
+</BOUCLE_si_autorise>

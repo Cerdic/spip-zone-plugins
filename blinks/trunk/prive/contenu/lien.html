@@ -1,0 +1,16 @@
+[(#REM) contenu à afficher au centre ]
+
+<BOUCLE_afficher_contenu(BLINKS){id_blink=#ENV{id}}{tout}>
+<div class="champ contenu_identifiant_blink[ (#IDENTIFIANT_BLINK*|strlen|?{'',vide})]">
+	<div class='label'><:blinks:label_identifiant_blink:></div>
+	<div dir='#LANG_DIR' class='#EDIT{identifiant_blink} identifiant_blink'>#IDENTIFIANT_BLINK</div>
+</div>
+<div class="champ contenu_url_blink[ (#URL_BLINK*|strlen|?{'',vide})]">
+	<div class='label'><:blinks:label_url_blink:></div>
+	<div dir='#LANG_DIR' class='#EDIT{url_blink} url_blink'>#URL_BLINK</div>
+</div>
+<div class="champ contenu_keywords_blink[ (#KEYWORDS_BLINK*|strlen|?{'',vide})]">
+	<div class='label'><:blinks:label_keywords_blink:></div>
+	<div dir='#LANG_DIR' class='#EDIT{keywords_blink} keywords_blink'>#KEYWORDS_BLINK</div>
+</div>
+</BOUCLE_afficher_contenu>

@@ -1,0 +1,36 @@
+[(#REM) gère l’ensemble de la page ]
+
+<BOUCLE_si_autorise(CONDITION){si (#ID_BLINK|intval|et{#AUTORISER{voir,lien,#ID_BLINK}})}>
+<BOUCLE_lien(BLINKS){id_blink}{tout}>
+<div class='fiche_objet'>
+	[(#AUTORISER{modifier,lien,#ID_BLINK})
+		<div class='bandeau_actions'>
+			[(#URL_ECRIRE{lien_edit}
+				|parametre_url{id_blink,#ID_BLINK}
+				|parametre_url{retour,#SELF}
+				|icone{<:blinks:action_modifier:>, #CHEMIN{images/blinks-24.png}, #LANG_RIGHT, edit.gif})]
+		</div>
+	]
+	<h1>#IDENTIFIANT_BLINK</h1>
+	<div id='wysiwyg'>
+		[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{
+			args,[(#ARRAY{
+				type,lien,
+				id_objet,#ID_BLINK,
+				contexte,[(#ARRAY{
+					id_blink,#ID_BLINK})]})],
+			data,[(#INCLURE{fond=prive/contenu/lien,id=#ID_BLINK})]})]})]
+	</div>
+</div>
+<!--#navigation-->
+[(#REM) Ce pipeline charge prive/infos/$type ]
+[<div class='cadre cadre-info'>
+	(#PIPELINE{boite_infos,[(#ARRAY{
+		args,[(#ARRAY{
+			type,lien,
+			id,#ID_BLINK})],
+		data,''})]})
+</div>]
+<!--/#navigation-->
+</BOUCLE_lien>
+</BOUCLE_si_autorise>

@@ -1,0 +1,10 @@
+[(#REM) charge le formulaire. On pourrait cela dit mettre l’intégralité de ce fichier dans le premier. Cette inclusion est simplement là pour reprendre le même schéma que le core de SPIP. ]
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	#ENV**{icone_retour}
+	[<:blinks:info_modifier_lien:>
+	<h1>(#ENV{titre,<:blinks:texte_nouveau_lien:>})</h1>]
+</div>
+#FORMULAIRE_EDITER_LIEN{#ENV{id_blink,new},#ENV{redirect}}
+</div>
