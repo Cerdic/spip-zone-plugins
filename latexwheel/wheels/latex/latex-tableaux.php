@@ -159,7 +159,6 @@ function latex_traiter_tableau($bloc) {
 	
 	// calcul des alignements de tableaux : par défaut, p{1/cellule*\textwith}
 	$largeur_cellule = round(1/$n,2,PHP_ROUND_HALF_DOWN);	// par défaut, taille de colonne constante
-	var_dump($largeur_cellule);
 	$alignement = '/debut'.str_repeat(p.'/debut'.$largeur_cellule.'\textwidth/fin',$n).'/fin';
 
 	// en latex, contrairement au html, on ne marque pas la fin de la dernière cellule d'une ligne
