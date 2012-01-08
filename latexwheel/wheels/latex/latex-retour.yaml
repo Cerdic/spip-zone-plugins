@@ -7,7 +7,7 @@ commande:
 #  if_str: "\subsection"
 
 fin:
-  match: ['/debut', '/fin']
-  replace: ['{', '}']
+  match: ['/debut', '/fin','/sepcel']
+  replace: ['{', '}','&']
   type: str
   priority: 0

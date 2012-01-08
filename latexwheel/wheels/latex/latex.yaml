@@ -1,7 +1,10 @@
 --- # Syntaxe des raccourcis SPIP, version 0.0.1
     #
     # Si on nomme une regle, elle devient surchargeable
-
+# Quelques caractères spéciaux :
+#	- /debut 	-> donnera {
+#	- /fin		-> donnera }
+#	- /sepcel	-> donnera & (pour les tableaux)  
 intro:
   # suppr raccourci <intro>
   # + suppression de <intro>
@@ -87,3 +90,11 @@ intertitres-compliques:
   replace: ["$1\n\n\n\subsection/debut", "/fin\n\n\n$1"]
   if_str: '}}}}'
   priority: -150
+ 
+tableaux:
+  type: all
+  replace: latex/latex-tableaux.yaml
+  is_wheel: Y
+  if_str: "\n|"
+  priority: -180 # avant les raccourcis
+
