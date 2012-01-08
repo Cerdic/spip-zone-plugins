@@ -60,33 +60,22 @@ function pmb_section_extraire($id_section) {
 	$tableau_sections = Array();
 	pmb_ws_charger_client($ws);
 	try {
-	      //récupérer les infos sur la section parent
-	      $section_parent = $ws->pmbesOPACGeneric_get_section_information($id_section);
-	      $tableau_sections[0] = Array();
-	      $tableau_sections[0]['section_id'] = $section_parent->section_id;
-	      $tableau_sections[0]['section_location'] = $section_parent->section_location;
-	      $tableau_sections[0]['section_caption'] = $section_parent->section_caption;
-	      $tableau_sections[0]['section_image'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section_parent->section_image;
+		//récupérer les infos sur la section parent
+		$section_parent = $ws->pmbesOPACGeneric_get_section_information($id_section);
+		$tableau_sections[0] = Array();
+		$tableau_sections[0]['section_id'] = $section_parent->section_id;
+		$tableau_sections[0]['section_location'] = $section_parent->section_location;
+		$tableau_sections[0]['section_caption'] = $section_parent->section_caption;
+		$tableau_sections[0]['section_image'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section_parent->section_image;
 
-	      $tab_sections = $ws->pmbesOPACGeneric_list_sections($id_section);
-	      $cpt = 1;
-	      if (is_array($tab_sections)) {
-			  foreach ($tab_sections as $section) {
-				$tableau_sections[$cpt] = Array();
-				$tableau_sections[$cpt]['section_id'] = $section->section_id;
-				$tableau_sections[$cpt]['section_location'] = $section->section_location;
-				$tableau_sections[$cpt]['section_caption'] = $section->section_caption;
-				$tableau_sections[$cpt]['section_image'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section->section_image;
-
-				
-				$cpt++;
-			  }
-	      }
+		$tab_sections = $ws->pmbesOPACGeneric_list_sections($id_section);
+		pmb_extraire_sections_infos($tableau_sections, $tab_sections);
 	} catch (Exception $e) {
 		 echo 'Exception reçue (1): ',  $e->getMessage(), "\n";
-	} 
+	}
 	return $tableau_sections;
 }
+
 
 function pmb_location_extraire($id_location) {
 	$tableau_locationsections = Array();
@@ -98,36 +87,43 @@ function pmb_location_extraire($id_location) {
 		$tableau_locationsections[0]['location_id'] = $tab_locations->location->location_id;
 		$tableau_locationsections[0]['location_caption'] = $tab_locations->location->location_caption;
 
-		$cpt = 1;
-		if (is_array($tab_locations->sections)) {
-			foreach ($tab_locations->sections as $section) {
-				$tableau_locationsections[$cpt] = Array();
-				$tableau_locationsections[$cpt]['section_id'] = $section->section_id;
-				$tableau_locationsections[$cpt]['section_location'] = $section->section_location;
-				$tableau_locationsections[$cpt]['section_caption'] = $section->section_caption;
-				$tableau_locationsections[$cpt]['section_image'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section->section_image;
-				$cpt++;
-			}
-		}
+		pmb_extraire_sections_infos($tableau_locationsections, $tab_locations->sections);
 	} catch (Exception $e) {
 		echo 'Exception reçue (2) : ',  $e->getMessage(), "\n";
-	} 
+	}
 	return $tableau_locationsections;
 }
+
+
+function pmb_extraire_sections_infos(&$tableau, $sections) {
+	$cpt = 1;
+	if (is_array($sections)) {
+		foreach ($sections as $section) {
+			$tableau[$cpt] = Array();
+			$tableau[$cpt]['section_id']		= $section->section_id;
+			$tableau[$cpt]['section_location']	= $section->section_location;
+			$tableau[$cpt]['section_caption']	= $section->section_caption;
+			$tableau[$cpt]['section_image']		= lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section->section_image;
+			$cpt++;
+		}
+	}
+}
+
+
 function pmb_liste_afficher_locations() {
 	$tableau_sections = Array();
 	pmb_ws_charger_client($ws);
 	try {
-	      $tab_locations = $ws->pmbesOPACGeneric_list_locations();
-	      $cpt = 0;
-	      if (is_array($tab_locations)) {
-		      foreach ($tab_locations as $location) {
-			    $tableau_locations[$cpt] = Array();
-			    $tableau_locations[$cpt]['location_id'] = $location->location_id;
-			    $tableau_locations[$cpt]['location_caption'] = $location->location_caption;
-			    $cpt++;
-		      }
-	      }
+		$tab_locations = $ws->pmbesOPACGeneric_list_locations();
+		$cpt = 0;
+		if (is_array($tab_locations)) {
+			foreach ($tab_locations as $location) {
+				$tableau_locations[$cpt] = Array();
+				$tableau_locations[$cpt]['location_id'] = $location->location_id;
+				$tableau_locations[$cpt]['location_caption'] = $location->location_caption;
+				$cpt++;
+			}
+		}
 	} catch (Exception $e) {
 		 echo 'Exception reçue (3) : ',  $e->getMessage(), "\n";
 	}
@@ -140,29 +136,18 @@ function pmb_notices_section_extraire($id_section, $debut=0, $fin=5) {
 	
 	$search = array();
 	$search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);
-			
+	
 	pmb_ws_charger_client($ws);
-	try {	
-			$tableau_resultat[0] = Array();
-					
-			$r=$ws->pmbesOPACAnonymous_advancedSearch($search);
-			
-			$searchId=$r["searchId"];
-			$tableau_resultat[0][' '] = $r["nbResults"];
-	    
-			 //$r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,$debut,$fin,"serialized_unimarc","utf-8");
-			 $r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArray($searchId,$debut,$fin,"utf-8");
-			  $i = 1;
-			  if (is_array($r)) {
-			      foreach($r as $value) {
-					$tableau_resultat[$i] = Array();				
-				    
-					pmb_ws_parser_notice_array($value, $tableau_resultat[$i]);
-					$i++;
-			      }
-			  }
-		
-
+	try {
+		$r=$ws->pmbesOPACAnonymous_advancedSearch($search);
+		$searchId=$r["searchId"];
+		$nb = $r["nbResults"];
+		//$r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,$debut,$fin,"serialized_unimarc","utf-8");
+		$r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArray($searchId,$debut,$fin,"utf-8");
+		if (is_array($r)) {
+			$tableau_resultat = array_map('pmb_ws_parser_notice', $r);
+		}
+		array_unshift($tableau_resultat, array('nb_resultats' => $nb));
 	} catch (Exception $e) {
 		 echo 'Exception reçue (4) : ',  $e->getMessage(), "\n";
 	} 
@@ -388,67 +373,66 @@ function pmb_recherche_extraire($recherche='', $look_ALL='', $look_AUTHOR='', $l
 		}
 		
 		$searchId=$r->searchId;
-		$tableau_resultat[0]['nb_resultats'] = $r->nbResults;
-
+		$nb = $r->nbResults;
 		$r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArray($searchId,$debut,$fin,"utf-8");
-		$i = 1;
 		if (is_array($r)) {
-			foreach($r as $value) {
-				$tableau_resultat[$i] = Array();
-				pmb_ws_parser_notice_array($value, $tableau_resultat[$i]);
-				$i++;
-			}
+			$tableau_resultat = array_map('pmb_ws_parser_notice', $r);
 		}
-
+		array_unshift($tableau_resultat, array('nb_resultats' => $nb));
 	} catch (Exception $e) {
 		echo 'Exception reçue (8) : ',  $e->getMessage(), "\n";
-	} 
-
+	}
+	
 	return $tableau_resultat;
 }
+
 
 function pmb_recuperer_champs_recherche($langue=0) {
 	$tresultat = Array();
 	
 	pmb_ws_charger_client($ws);
 	try {
-	     $result = $ws->pmbesSearch_getAdvancedSearchFields('opac|search_fields',$langue,true);
-	     $cpt=0;
-	     if (is_array($result)) {
-			      foreach ($result as &$res) {
-					    $tresultat[$cpt] = Array();
-					    $tresultat[$cpt]['id'] = $res->id;
-					    $tresultat[$cpt]['label'] = $res->label;
-					    $tresultat[$cpt]['type'] = $res->type;
-					    $tresultat[$cpt]['operators'] = $res->operators;
-					    $tresultat[$cpt]['values'] = Array();
-					    $cpt2=0;
-					    if (is_array($res->values)) {
-						    foreach ($res->values as &$value) {
-							$tresultat[$cpt]['values'][$cpt2]['value_id'] = $value->value_id;
-							$tresultat[$cpt]['values'][$cpt2]['value_caption'] = $value->value_caption;
-							$cpt2++;
-						    }
-					    }
-					    $cpt++;
+		$result = $ws->pmbesSearch_getAdvancedSearchFields('opac|search_fields',$langue,true);
+		$cpt=0;
+		if (is_array($result)) {
+			foreach ($result as &$res) {
+				$tresultat[$cpt] = Array();
+				$tresultat[$cpt]['id'] = $res->id;
+				$tresultat[$cpt]['label'] = $res->label;
+				$tresultat[$cpt]['type'] = $res->type;
+				$tresultat[$cpt]['operators'] = $res->operators;
+				$tresultat[$cpt]['values'] = Array();
+				$cpt2=0;
+				if (is_array($res->values)) {
+					foreach ($res->values as &$value) {
+						$tresultat[$cpt]['values'][$cpt2]['value_id'] = $value->value_id;
+						$tresultat[$cpt]['values'][$cpt2]['value_caption'] = $value->value_caption;
+						$cpt2++;
+					}
 				}
-	      }
-	    
-
+				$cpt++;
+			}
+		}
 	} catch (Exception $e) {
 		 echo 'Exception reçue (9) : ',  $e->getMessage(), "\n";
 	} 
 	return $tresultat;
 }
 
-function pmb_ws_parser_notice($value) {
-	$res = array();
-	return pmb_ws_parser_notice_array($value, $res);
-}
 
-function pmb_ws_parser_notice_array($value, &$tresultat) {
+/**
+ * Analyse un tableau de proprietes UNIMARC
+ * Contrairement aux apparences, ces numeros
+ * et cles signifient quelque chose !
+ * 
+ * http://www.bnf.fr/fr/professionnels/anx_formats/a.unimarc_manuel_format_bibliographique.html
+ *  
+ * @param array $value Tableau UNIMARC a traduire
+ * @return array Tableau traduit
+**/
+function pmb_ws_parser_notice($value) {
+
 	include_spip("inc/filtres_images");
-	
 	$indice_exemplaire = 0;
 	$tresultat = Array();
 	$id_notice = $value->id;
@@ -676,19 +660,19 @@ function pmb_ws_documents_numeriques ($id_notice, $id_session=0) {
 	$tresultat = Array();
 	pmb_ws_charger_client($ws);
 	
-	try {	
+	try {
 		$r=$ws->pmbesNotices_listNoticeExplNums($id_notice, $id_session);
 		$cpt = 0;
 		if (is_array($r)) {
 			foreach ($r as $docnum) {
-			    $tresultat[$cpt] = Array();
-			    $tresultat[$cpt]['name'] = str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$docnum->name))))));
-			    $tresultat[$cpt]['mimetype'] = $docnum->mimetype;
-			    $tresultat[$cpt]['url'] = $docnum->url;
-			    $tresultat[$cpt]['downloadUrl'] = $docnum->downloadUrl;
-			    
-			    $cpt++;
-		      }
+				$tresultat[$cpt] = Array();
+				$tresultat[$cpt]['name'] = str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$docnum->name))))));
+				$tresultat[$cpt]['mimetype'] = $docnum->mimetype;
+				$tresultat[$cpt]['url'] = $docnum->url;
+				$tresultat[$cpt]['downloadUrl'] = $docnum->downloadUrl;
+
+				$cpt++;
+			}
 		}
 
 	} catch (Exception $e) {
@@ -703,27 +687,26 @@ function pmb_ws_dispo_exemplaire($id_notice, $id_session=0) {
 	$tresultat = Array();
 	pmb_ws_charger_client($ws);
 	
-	try {	
-	     $r=$ws->pmbesItems_fetch_notice_items($id_notice, $id_session);
-	      $cpt = 0;
-	      if (is_array($r)) {
+	try {
+		$r=$ws->pmbesItems_fetch_notice_items($id_notice, $id_session);
+		$cpt = 0;
+		if (is_array($r)) {
 			foreach ($r as $exemplaire) {
-			    $tresultat[$cpt] = Array();
-			    $tresultat[$cpt]['id'] = $exemplaire->id;
-			    $tresultat[$cpt]['cb'] = $exemplaire->cb;
-			    $tresultat[$cpt]['cote'] = $exemplaire->cote;
-			    $tresultat[$cpt]['location_id'] = $exemplaire->location_id;
-			    $tresultat[$cpt]['location_caption'] = $exemplaire->location_caption;
-			    $tresultat[$cpt]['section_id'] = $exemplaire->section_id;
-			    $tresultat[$cpt]['section_caption'] = $exemplaire->section_caption;
-			    $tresultat[$cpt]['statut'] = $exemplaire->statut;
-			    $tresultat[$cpt]['support'] = $exemplaire->support;
-			    $tresultat[$cpt]['situation'] = $exemplaire->situation;
-			    
-			    $cpt++;
-		      }
+				$tresultat[$cpt] = Array();
+				$tresultat[$cpt]['id'] = $exemplaire->id;
+				$tresultat[$cpt]['cb'] = $exemplaire->cb;
+				$tresultat[$cpt]['cote'] = $exemplaire->cote;
+				$tresultat[$cpt]['location_id'] = $exemplaire->location_id;
+				$tresultat[$cpt]['location_caption'] = $exemplaire->location_caption;
+				$tresultat[$cpt]['section_id'] = $exemplaire->section_id;
+				$tresultat[$cpt]['section_caption'] = $exemplaire->section_caption;
+				$tresultat[$cpt]['statut'] = $exemplaire->statut;
+				$tresultat[$cpt]['support'] = $exemplaire->support;
+				$tresultat[$cpt]['situation'] = $exemplaire->situation;
+
+				$cpt++;
+			}
 		}
-		
 
 	} catch (Exception $e) {
 		 echo 'Exception reçue (12) : ',  $e->getMessage(), "\n";
@@ -731,27 +714,11 @@ function pmb_ws_dispo_exemplaire($id_notice, $id_session=0) {
 	return $tresultat;
 }
 
-//récuperer une notice en xml via les webservices
-function pmb_ws_recuperer_notice ($id_notice, &$ws, &$tresultat) {
-	try {	
-		$listenotices = array(''.$id_notice);
-		$tresultat['id'] = $id_notice;
-		$r=$ws->pmbesNotices_fetchNoticeListArray($listenotices,"utf-8",true,false);
-		if (is_array($r)) {
-			foreach($r as $value) {
-				pmb_ws_parser_notice_array($value, $tresultat);
-			}
-		}
-	} catch (Exception $e) {
-		echo 'Exception reçue (13) : ',  $e->getMessage(), "\n";
-	}
-}
 
 //récuperer une notice en xml via les webservices
 function pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat) {
-	try {	
+	try {
 		$r=$ws->pmbesNotices_fetchNoticeListArray($listenotices,"utf-8",true,false);
-		$cpt=0;
 		if (is_array($r)) {
 			$tresultat = array_map('pmb_ws_parser_notice', $r);
 		}
@@ -778,7 +745,7 @@ function pmb_ws_charger_client(&$ws) {
 		$rpc_client = $ws;
 	}
 	catch (Exception $e) {
-		    echo 'Exception reçue (15) : ',  $e->getMessage(), "\n";
+		echo 'Exception reçue (15) : ',  $e->getMessage(), "\n";
 	} 
 
 }
@@ -821,8 +788,9 @@ function pmb_ws_liste_tri_recherche() {
 function pmb_notice_extraire ($id_notice) {
 	$tableau_resultat = Array();
 	pmb_ws_charger_client($ws);
-	pmb_ws_recuperer_notice($id_notice, $ws, $tableau_resultat);
-	return $tableau_resultat;
+	pmb_ws_recuperer_tab_notices(array((string)$id_notice), $ws, $tableau_resultat);
+	$notice = array_shift($tableau_resultat);
+	return $notice;
 }
 
 
@@ -892,14 +860,14 @@ function pmb_reservations_extraire($pmb_session) {
 		foreach ($reservations as $reservation) {
 			$liste_notices[] = $reservation->notice_id;
 			$tableau_resultat[$cpt] = Array();
-			$tableau_resultat[$cpt]['resa_id']      = $reservation->resa_id;
-			$tableau_resultat[$cpt]['empr_id']      = $reservation->empr_id;
-			$tableau_resultat[$cpt]['notice_id']   = $reservation->notice_id;
-			$tableau_resultat[$cpt]['bulletin_id']  = $reservation->bulletin_id;
-			$tableau_resultat[$cpt]['resa_rank']    = $reservation->resa_rank;
-			$tableau_resultat[$cpt]['resa_dateend'] = $reservation->resa_dateend;
-			$tableau_resultat[$cpt]['resa_retrait_location_id '] = $reservation->resa_retrait_location_id ;
-			$tableau_resultat[$cpt]['resa_retrait_location']     = $reservation->resa_retrait_location;
+			$tableau_resultat[$cpt]['resa_id']		= $reservation->resa_id;
+			$tableau_resultat[$cpt]['empr_id']		= $reservation->empr_id;
+			$tableau_resultat[$cpt]['notice_id']	= $reservation->notice_id;
+			$tableau_resultat[$cpt]['bulletin_id']	= $reservation->bulletin_id;
+			$tableau_resultat[$cpt]['resa_rank']	= $reservation->resa_rank;
+			$tableau_resultat[$cpt]['resa_dateend']	= $reservation->resa_dateend;
+			$tableau_resultat[$cpt]['resa_retrait_location_id ']	= $reservation->resa_retrait_location_id ;
+			$tableau_resultat[$cpt]['resa_retrait_location']		= $reservation->resa_retrait_location;
 
 			$cpt++;
 		}
@@ -938,42 +906,43 @@ function pmb_reserver_ouvrage($session_id, $notice_id, $bulletin_id, $location) 
 	$result = $ws->pmbesOPACEmpr_add_resa($session_id, $notice_id, $bulletin_id, $location);
 
 	if (!$result->success) {
-	    if ($result->error == "no_session_id") return "La réservation n'a pas pu être réalisée pour la raison suivante : pas de session";
-
-	    else if ($result->error == "no_empr_id") return "La réservation n'a pas pu être réalisée pour la raison suivante : pas d'id emprunteur";
-	    else if ($result->error == "check_empr_exists") return "La réservation n'a pas pu être réalisée pour la raison suivante : id emprunteur inconnu";
-	    else if ($result->error == "check_notice_exists") return "La réservation n'a pas pu être réalisée pour la raison suivante : Notice inconnue";
-	    else if ($result->error == "check_quota") return "La réservation n'a pas pu être réalisée pour la raison suivante : violation de quotas: Voir message complémentaire";
-	    else if ($result->error == "check_resa_exists") return "La réservation n'a pas pu être réalisée pour la raison suivante : Document déjà réservé par ce lecteur";
-	    else if ($result->error == "check_allready_loaned") return "La réservation n'a pas pu être réalisée pour la raison suivante : Document déjà emprunté par ce lecteur";
-	    else if ($result->error == "check_statut") return "La réservation n'a pas pu être réalisée pour la raison suivante : Pas de document prêtable";
-	    else if ($result->error == "check_doc_dispo") return "La réservation n'a pas pu être réalisée pour la raison suivante : Document disponible, mais non réservable";
-	    else if ($result->error == "check_localisation_expl") return "La réservation n'a pas pu être réalisée pour la raison suivante : Document non réservable dans les localisations autorisées";
-	    else if ($result->error == "resa_no_create") return "La réservation n'a pas pu être réalisée pour la raison suivante : échec de l'enregistrement de la résevation";
-	    else return "La réservation n'a pas pu être réalisée pour la raison suivante : ".$result->error;
-	} else return "Votre réservation a été enregistrée";
+		if ($result->error == "no_session_id") return "La réservation n'a pas pu être réalisée pour la raison suivante : pas de session";
+		else if ($result->error == "no_empr_id") return "La réservation n'a pas pu être réalisée pour la raison suivante : pas d'id emprunteur";
+		else if ($result->error == "check_empr_exists") return "La réservation n'a pas pu être réalisée pour la raison suivante : id emprunteur inconnu";
+		else if ($result->error == "check_notice_exists") return "La réservation n'a pas pu être réalisée pour la raison suivante : Notice inconnue";
+		else if ($result->error == "check_quota") return "La réservation n'a pas pu être réalisée pour la raison suivante : violation de quotas: Voir message complémentaire";
+		else if ($result->error == "check_resa_exists") return "La réservation n'a pas pu être réalisée pour la raison suivante : Document déjà réservé par ce lecteur";
+		else if ($result->error == "check_allready_loaned") return "La réservation n'a pas pu être réalisée pour la raison suivante : Document déjà emprunté par ce lecteur";
+		else if ($result->error == "check_statut") return "La réservation n'a pas pu être réalisée pour la raison suivante : Pas de document prêtable";
+		else if ($result->error == "check_doc_dispo") return "La réservation n'a pas pu être réalisée pour la raison suivante : Document disponible, mais non réservable";
+		else if ($result->error == "check_localisation_expl") return "La réservation n'a pas pu être réalisée pour la raison suivante : Document non réservable dans les localisations autorisées";
+		else if ($result->error == "resa_no_create") return "La réservation n'a pas pu être réalisée pour la raison suivante : échec de l'enregistrement de la résevation";
+		else return "La réservation n'a pas pu être réalisée pour la raison suivante : ".$result->error;
+	} else {
+		return "Votre réservation a été enregistrée";
+	}
 /* Description des entrées:
 
-      session_id type string        Le numéro de session
-      notice_id type integer        l'id de la notice
-      bulletin_id type integer        l'id du bulletin
-      location type integer        la localisation de retrait ni applicable
-      Description des retours:
+	session_id type string        Le numéro de session
+	notice_id type integer        l'id de la notice
+	bulletin_id type integer        l'id du bulletin
+	location type integer        la localisation de retrait ni applicable
+	Description des retours:
 
-      success type boolean        Un boolean indiquant le succès éventuel de l'opération
-      error type string        Code d'erreur si la réservation n'est pas effectuée:
-      no_session_id (pas de session)
-      no_empr_id (pas d'id emprunteur)
-      check_empr_exists (id emprunteur inconnu)
-      check_notice_exists (Notice inconnue)
-      check_quota (violation de quotas: Voir message complémentaire)
-      check_resa_exists (Document déjà réservé par ce lecteur)
-      check_allready_loaned (Document déjà emprunté par ce lecteur)
-      check_statut (Pas de document prêtable)
-      check_doc_dispo (Document disponible, mais non réservable)
-      check_localisation_expl (Document non réservable dans les localisations autorisées)
-      resa_no_create (échec de l'enregistrement de la résevation)
-      message type string        Message d'information complémentaire
+	success type boolean        Un boolean indiquant le succès éventuel de l'opération
+	error type string        Code d'erreur si la réservation n'est pas effectuée:
+	no_session_id (pas de session)
+	no_empr_id (pas d'id emprunteur)
+	check_empr_exists (id emprunteur inconnu)
+	check_notice_exists (Notice inconnue)
+	check_quota (violation de quotas: Voir message complémentaire)
+	check_resa_exists (Document déjà réservé par ce lecteur)
+	check_allready_loaned (Document déjà emprunté par ce lecteur)
+	check_statut (Pas de document prêtable)
+	check_doc_dispo (Document disponible, mais non réservable)
+	check_localisation_expl (Document non réservable dans les localisations autorisées)
+	resa_no_create (échec de l'enregistrement de la résevation)
+	message type string        Message d'information complémentaire
 */
 }
 
