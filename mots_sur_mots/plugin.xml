@@ -38,7 +38,6 @@ Dans la partie publique, le plugin Momo propose:
 		<nom>affiche_milieu</nom>
 		<inclure>momo_pipelines.php</inclure>
 	</pipeline>
-	<fonctions>momo_fonctions.php</fonctions>
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<categorie>navigation</categorie>
 </plugin>
