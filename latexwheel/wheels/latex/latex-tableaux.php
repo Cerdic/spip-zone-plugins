@@ -72,10 +72,8 @@ function latex_traiter_tableau($bloc) {
 		if ($l) {
 			// Gerer les listes a puce dans les cellules
 			if (strpos($ligne,"\n-*")!==false OR strpos($ligne,"\n-#")!==false)
-				$ligne = traiter_listes($ligne);
+				$ligne = appliquer_regles_wheel($ligne,array('latex/latex-listes.yaml'));
 
-			// Pas de paragraphes dans les cellules
-			$ligne = preg_replace("/\n{2,}/", "<br /><br />\n", $ligne);
 
 			// tout mettre dans un tableau 2d
 			preg_match_all('/\|([^|]*)/S', $ligne, $cols);
