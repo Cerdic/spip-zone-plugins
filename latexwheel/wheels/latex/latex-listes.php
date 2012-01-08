@@ -1,11 +1,6 @@
 <?php
 # not usefull as this file is include by the engine itself
 # require_once 'engine/textwheel.php';
-function latex_traiter_list($t){
-	var_dump($t);
-	return $t;	
-}
-
 function latex_liste_init($t){
 	return latex_liste_item($t,'init');
 }
