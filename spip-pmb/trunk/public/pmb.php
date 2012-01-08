@@ -241,7 +241,7 @@ function inc_pmb_notices_select_dist(&$command) {
 	}
 
 	// autres lecteurs : ceux qui ont lu ceci ont aussi emprunte cela
-	if (pmb_recherche_critere($criteres, 'autres_lectures')) {
+	if (pmb_recherche_critere($criteres, 'autres_lecteurs')) {
 		$ids = pmb_ws_ids_notices_autres_lecteurs($ids);
 	}
 

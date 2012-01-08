@@ -26,7 +26,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /*************************************************************************************/
 
 
-$rpc_client = NULL;
 include_spip('inc/config');
 
 // charger les fonctions pour le compilateur SPIP
@@ -62,9 +61,9 @@ function depile($tableau, $cle=null) {
 
 function pmb_section_extraire($id_section) {
 	$tableau_sections = Array();
-	pmb_ws_charger_client($ws);
 	try {
 		//récupérer les infos sur la section parent
+		$ws = pmb_webservice();
 		$section_parent = $ws->pmbesOPACGeneric_get_section_information($id_section);
 		$tableau_sections[0] = Array();
 		$tableau_sections[0]['section_id'] = $section_parent->section_id;
@@ -83,8 +82,8 @@ function pmb_section_extraire($id_section) {
 
 function pmb_location_extraire($id_location) {
 	$tableau_locationsections = Array();
-	pmb_ws_charger_client($ws);
 	try {
+		$ws = pmb_webservice();
 		$tab_locations = $ws->pmbesOPACGeneric_get_location_information_and_sections($id_location);
 		//récupérer les infos sur la localisation parent
 		$tableau_locationsections[0] = Array();
@@ -116,8 +115,8 @@ function pmb_extraire_sections_infos(&$tableau, $sections) {
 
 function pmb_liste_afficher_locations() {
 	$tableau_sections = Array();
-	pmb_ws_charger_client($ws);
 	try {
+		$ws = pmb_webservice();
 		$tab_locations = $ws->pmbesOPACGeneric_list_locations();
 		$cpt = 0;
 		if (is_array($tab_locations)) {
@@ -140,9 +139,9 @@ function pmb_notices_section_extraire($id_section, $debut=0, $fin=5) {
 	
 	$search = array();
 	$search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);
-	
-	pmb_ws_charger_client($ws);
+
 	try {
+		$ws = pmb_webservice();
 		$r=$ws->pmbesOPACAnonymous_advancedSearch($search);
 		$searchId=$r["searchId"];
 		$nb = $r["nbResults"];
@@ -164,8 +163,8 @@ function pmb_notices_section_extraire($id_section, $debut=0, $fin=5) {
 function pmb_collection_extraire($id_collection, $debut=0, $nbresult=5, $id_session=0) {
 	$tableau_resultat = Array();
 	
-	pmb_ws_charger_client($ws);
 	try {
+		$ws = pmb_webservice();
 		$result = $ws->pmbesCollections_get_collection_information_and_notices($id_collection,$id_session);
 		if ($result) {
 			$tableau_resultat['collection_id']     = $result->information->collection_id;
@@ -175,7 +174,7 @@ function pmb_collection_extraire($id_collection, $debut=0, $nbresult=5, $id_sess
 			$tableau_resultat['collection_web']    = $result->information->collection_web;
 			$tableau_resultat['notice_ids']        = Array();
 
-			pmb_extraire_resultats(&$ws, $result, $tableau_resultat, $debut, $nbresult);
+			pmb_extraire_resultats($result, $tableau_resultat, $debut, $nbresult);
 		}
 	
 	} catch (Exception $e) {
@@ -193,14 +192,14 @@ function pmb_collection_extraire($id_collection, $debut=0, $nbresult=5, $id_sess
  * @param 
  * @return 
 **/
-function pmb_extraire_resultats(&$ws, $result, &$tableau_resultat, $debut, $nbresult) {
+function pmb_extraire_resultats($result, &$tableau_resultat, $debut, $nbresult) {
 	$liste_notices = Array();
 	$cpt=0;
 	if (is_array($result->notice_ids)) {
 		$cpt = count($result->notice_ids);
 		$liste_notices = array_slice($result->notice_ids, $debut, $nbresult);
 	}
-	pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);
+	$tableau_resultat['notice_ids'] = pmb_ws_recuperer_tab_notices($liste_notices);
 	array_unshift($tableau_resultat['notice_ids'], array('nb_resultats' => $cpt));
 	#pmb_remettre_id_dans_resultats($tableau_resultat, $liste_notices);
 }
@@ -221,9 +220,9 @@ function pmb_remettre_id_dans_resultats(&$tabreau_resultat, $liste_notices) {
 
 function pmb_editeur_extraire($id_editeur, $debut=0, $nbresult=5, $id_session=0) {
 	$tableau_resultat = Array();
-	
-	pmb_ws_charger_client($ws);
+
 	try {
+		$ws = pmb_webservice();
 		$result = $ws->pmbesPublishers_get_publisher_information_and_notices($id_editeur,$id_session);
 		if ($result) {
 			$tableau_resultat['publisher_id']       = $result->information->publisher_id;
@@ -237,7 +236,7 @@ function pmb_editeur_extraire($id_editeur, $debut=0, $nbresult=5, $id_session=0)
 			$tableau_resultat['publisher_comment']  = $result->information->publisher_comment;
 			$tableau_resultat['notice_ids'] = Array();
 
-			pmb_extraire_resultats(&$ws, $result, $tableau_resultat, $debut, $nbresult);
+			pmb_extraire_resultats($result, $tableau_resultat, $debut, $nbresult);
 		}
 	}catch (Exception $e) {
 		echo 'Exception reçue (6) : ',  $e->getMessage(), "\n";
@@ -249,8 +248,8 @@ function pmb_editeur_extraire($id_editeur, $debut=0, $nbresult=5, $id_session=0)
 function pmb_auteur_extraire($id_auteur, $debut=0, $nbresult=5, $id_session=0) {
 	$tableau_resultat = Array();
 	
-	pmb_ws_charger_client($ws);
 	try {
+		$ws = pmb_webservice();
 		$result = $ws->pmbesAuthors_get_author_information_and_notices($id_auteur,$id_session);
 		if ($result) {
 			$tableau_resultat['author_id']     = $result->information->author_id;
@@ -274,7 +273,7 @@ function pmb_auteur_extraire($id_auteur, $debut=0, $nbresult=5, $id_session=0) {
 			$tableau_resultat['author_numero']      = $result->information->author_numero;
 			$tableau_resultat['notice_ids'] = Array();
 
-			pmb_extraire_resultats(&$ws, $result, $tableau_resultat, $debut, $nbresult);
+			pmb_extraire_resultats($result, $tableau_resultat, $debut, $nbresult);
 		}
 	} catch (Exception $e) {
 		 echo 'Exception reçue (7) : ',  $e->getMessage(), "\n";
@@ -357,8 +356,9 @@ function pmb_recherche_extraire($recherche='', $look_ALL='', $look_AUTHOR='', $l
 			if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
 		}
 	}
-	pmb_ws_charger_client($ws);
-	try {	
+
+	try {
+		$ws = pmb_webservice();
 		$tableau_resultat[0] = Array();
 
 		//cas d'une recherche simple 
@@ -394,8 +394,8 @@ function pmb_recherche_extraire($recherche='', $look_ALL='', $look_AUTHOR='', $l
 function pmb_recuperer_champs_recherche($langue=0) {
 	$tresultat = Array();
 	
-	pmb_ws_charger_client($ws);
 	try {
+		$ws = pmb_webservice();
 		$result = $ws->pmbesSearch_getAdvancedSearchFields('opac|search_fields',$langue,true);
 		$cpt=0;
 		if (is_array($result)) {
@@ -436,11 +436,20 @@ function pmb_recuperer_champs_recherche($langue=0) {
  * @return array Tableau traduit
 **/
 function pmb_ws_parser_notice($value) {
-
+	
+	// mise en cache des resultats en fonction de $value
+	static $resultats = array();
+	// on utilise le cache s'il est la.
+	$hash = md5(serialize($value));
+	if (isset($resultats[$hash])) {
+		return $resultats[$hash];
+	}
+	
+	$id_notice = $value->id;
+	
 	include_spip("inc/filtres_images");
 	$indice_exemplaire = 0;
 	$tresultat = Array();
-	$id_notice = $value->id;
 	$authors_700 = array();
 	$authors_701 = array();
 	$authors_702 = array();
@@ -631,7 +640,9 @@ function pmb_ws_parser_notice($value) {
 	if ($tresultat['isbn'] == '') $tresultat['logo_src'] = '';
 
 	$tresultat['id'] = $id_notice;
-	
+
+	// on stocke en cache
+	$resultats[$hash] = $tresultat;
 	return $tresultat;
 }
 
@@ -650,12 +661,10 @@ function pmb_ws_ids_notices_autres_lecteurs($ids_notice) {
 	}
 
 	$listenotices = Array();
-	
-	pmb_ws_charger_client($ws);
-	
+
 	try {
+		$ws = pmb_webservice();
 		if ($ws->pmbesOPACGeneric_is_also_borrowed_enabled()) {
-			
 			foreach ($ids_notice as $id_notice) {
 				$r = $ws->pmbesOPACGeneric_also_borrowed($id_notice, 0);
 				if (is_array($r)) {
@@ -679,9 +688,9 @@ function pmb_ws_ids_notices_autres_lecteurs($ids_notice) {
 function pmb_ws_documents_numeriques ($id_notice, $id_session=0) {
 
 	$tresultat = Array();
-	pmb_ws_charger_client($ws);
-	
+
 	try {
+		$ws = pmb_webservice();
 		$r=$ws->pmbesNotices_listNoticeExplNums($id_notice, $id_session);
 		$cpt = 0;
 		if (is_array($r)) {
@@ -706,9 +715,9 @@ function pmb_ws_documents_numeriques ($id_notice, $id_session=0) {
 function pmb_ws_dispo_exemplaire($id_notice, $id_session=0) {
   
 	$tresultat = Array();
-	pmb_ws_charger_client($ws);
-	
+
 	try {
+		$ws = pmb_webservice();
 		$r=$ws->pmbesItems_fetch_notice_items($id_notice, $id_session);
 		$cpt = 0;
 		if (is_array($r)) {
@@ -736,23 +745,69 @@ function pmb_ws_dispo_exemplaire($id_notice, $id_session=0) {
 }
 
 
-//récuperer une notice en xml via les webservices
-function pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat) {
+// récuperer une notice en xml via les webservices
+// les parser, et stocker en cache statique car cette fonction
+// est utilisee par toutes les boucles (PMB:NOTICES)
+function pmb_ws_recuperer_tab_notices($listenotices) {
+
+	if (!is_array($listenotices)) {
+		return false;
+	}
+	
+	// on met en cache le resultat et on utilise le cache.
+	// afin d'optimiser si plusieurs boucles sont utilisees.
+	static $notices = array();
+	$wanted = $listenotices;
+	// ce qu'on a trouve...
+	$res = array();
+	
+	foreach ($listenotices as $c=>$l) {
+		if (isset($notices[$l])) {
+			$res[$c] = $notices[$l];
+			unset($wanted[$c]);
+		}
+	}
+
+	// si on a tout trouve, on s'en va...
+	if (!count($wanted)) {
+		return $res;
+	}
+
+	// sinon on complete ce qui manque en interrogeant PMB
 	try {
-		$r=$ws->pmbesNotices_fetchNoticeListArray($listenotices,"utf-8",true,false);
+		$ws = pmb_webservice();
+		$r=$ws->pmbesNotices_fetchNoticeListArray($wanted,"utf-8",true,false);
 		if (is_array($r)) {
-			$tresultat = array_map('pmb_ws_parser_notice', $r);
+			$r = array_map('pmb_ws_parser_notice', $r);
+			// on complete notre tableau de resultat
+			// avec nos trouvailles
+			foreach ($r as $notice) {
+				$key = array_search($notice['id'], $listenotices);
+				if ($key !== false) {
+					$notices[ $notice['id'] ] = $res[$key] = $notice;
+				}
+			}
 		}
 	} catch (Exception $e) {
 		echo 'Exception reçue (14) : ',  $e->getMessage(), "\n";
-	} 
+	}
+	
+	return $res;
 }
 
-//charger les webservices
-function pmb_ws_charger_client(&$ws) {
-	global $rpc_client;
-	if ($rpc_client)
-		$ws = $rpc_client;
+
+/**
+ * Charge le web service
+ * qui permet de requeter sur notre PMB
+ * 
+ * @return object WebService pour PMB
+**/
+function pmb_webservice() {
+	static $ws = null;
+	if ($ws) {
+		return $ws;
+	}
+
 	try {
 		$rpc_type = lire_config("spip_pmb/rpc_type","soap");
 		if ($rpc_type == "soap") {
@@ -763,12 +818,12 @@ function pmb_ws_charger_client(&$ws) {
 			include_spip('jsonRPCClient');
 			$ws = new jsonRPCClient(lire_config("spip_pmb/jsonrpc", ""), false);
 		}
-		$rpc_client = $ws;
 	}
 	catch (Exception $e) {
 		echo 'Exception reçue (15) : ',  $e->getMessage(), "\n";
 	} 
 
+	return $ws;
 }
 
 
@@ -797,9 +852,9 @@ function pmb_ws_liste_tri_recherche() {
 	...
       )*/
 	$tresultat = Array();
-	pmb_ws_charger_client($ws);
 	
 	try {
+		$ws = pmb_webservice();
 		$tresultat=$ws->pmbesSearch_get_sort_types();
 	} catch (Exception $e) {
 		echo 'Exception reçue (16) : ',  $e->getMessage(), "\n";
@@ -809,9 +864,7 @@ function pmb_ws_liste_tri_recherche() {
 
 // retourne un tableau associatif contenant tous les champs d'une notice 
 function pmb_notice_extraire ($id_notice) {
-	$tableau_resultat = Array();
-	pmb_ws_charger_client($ws);
-	pmb_ws_recuperer_tab_notices(array((string)$id_notice), $ws, $tableau_resultat);
+	$tableau_resultat = pmb_ws_recuperer_tab_notices(array((string)$id_notice));
 	$notice = array_shift($tableau_resultat);
 	return $notice;
 }
@@ -819,22 +872,19 @@ function pmb_notice_extraire ($id_notice) {
 
 // retourne un tableau associatif contenant tous les champs d'un tableau d'id de notices 
 function pmb_tabnotices_extraire ($tabnotices) {
-	$tableau_resultat = Array();
 	$listenotices = Array();
-	pmb_ws_charger_client($ws);
 	if (is_array($tabnotices)) {
 		$listenotices = array_values($tabnotices);
 	}
 
-	pmb_ws_recuperer_tab_notices ($listenotices, $ws, $tableau_resultat);
-	return $tableau_resultat;
+	return pmb_ws_recuperer_tab_notices($listenotices);
 }
 
 // retourne un tableau associatif contenant les prêts en cours
 function pmb_prets_extraire ($session_id, $type_pret=0) {
 	$tableau_resultat = Array();
-	pmb_ws_charger_client($ws);
 	try{
+		$ws = pmb_webservice();
 		$loans = $ws->pmbesOPACEmpr_list_loans($session_id, $type_pret);
 		$liste_notices = Array();
 		$cpt = 0;
@@ -860,8 +910,7 @@ function pmb_prets_extraire ($session_id, $type_pret=0) {
 			}
 		}
 		if ($cpt>0) {
-			$tableau_resultat['notice_ids'] = Array();
-			pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);  
+			$tableau_resultat['notice_ids'] = pmb_ws_recuperer_tab_notices($liste_notices);  
 		}
 		#pmb_remettre_id_dans_resultats(&$tabreau_resultat, $liste_notices);
 		
@@ -874,7 +923,8 @@ function pmb_prets_extraire ($session_id, $type_pret=0) {
 
 function pmb_reservations_extraire($pmb_session) {
 	$tableau_resultat = Array();
-	pmb_ws_charger_client($ws);
+	
+	$ws = pmb_webservice();
 	$reservations = $ws->pmbesOPACEmpr_list_resas($pmb_session);
 	$liste_notices = Array();
 	
@@ -896,19 +946,19 @@ function pmb_reservations_extraire($pmb_session) {
 		}
 	}
 	if ($cpt>0) {
-		$tableau_resultat['notice_ids'] = Array();
-		pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);  
+		$tableau_resultat['notice_ids'] = pmb_ws_recuperer_tab_notices($liste_notices);  
 	}
 	#pmb_remettre_id_dans_resultats(&$tabreau_resultat, $liste_notices)
 	return $tableau_resultat;
 
 }
+
+/**
+ *  tester si la session pmb est toujours active
+**/
 function pmb_tester_session($pmb_session, $id_auteur) {
-	
-	//tester si la session pmb est toujours active
-	pmb_ws_charger_client($ws);
-	
 	try {
+		$ws = pmb_webservice();
 		if ($ws->pmbesOPACEmpr_get_account_info($pmb_session)) {
 			return 1;
 		} else {
@@ -923,9 +973,10 @@ function pmb_tester_session($pmb_session, $id_auteur) {
 
 
 function pmb_reserver_ouvrage($session_id, $notice_id, $bulletin_id, $location) {
-	pmb_ws_charger_client($ws);
+
 	$result= Array();
 
+	$ws = pmb_webservice();
 	$result = $ws->pmbesOPACEmpr_add_resa($session_id, $notice_id, $bulletin_id, $location);
 
 	if (!$result->success) {

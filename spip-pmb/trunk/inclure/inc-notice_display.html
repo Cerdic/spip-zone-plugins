@@ -69,7 +69,7 @@ $(document).ready(function() {
 		<ul class="spip">
 			<li><a href="[(#CONFIG{spip_pmb/url}|concat{addtags.php}|parametre_url{noticeid,#ENV{id}})]" class="lien-modal"><:pmb:ajouter_tag:></a></li>
 			<li><a href="[(#CONFIG{spip_pmb/url}|concat{avis.php}|parametre_url{todo,liste}|parametre_url{noticeid,#ENV{id}})]" class="lien-modal"><:pmb:donner_avis:></a></li>
-			<li><a href="[(#URL_PAGE{notice_display}|parametre_url{id,#ENV{id}}|parametre_url{reserver,1})]#compte-lecteur"><:pmb:reserver_ouvrage:></a></li>
+			<li><a href="[(#URL_NOTICE{#ENV{id}}|parametre_url{reserver,1})]#compte-lecteur"><:pmb:reserver_ouvrage:></a></li>
 		</ul>
 		]
 		[(#PMB_SESSION|non)

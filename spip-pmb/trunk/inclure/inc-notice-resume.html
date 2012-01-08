@@ -1,4 +1,4 @@
-[(#SET{url,[(##URL_NOTICE{#ENV{notice/id}}|parametre_url{url_ret,#ENV{url_ret}})]})]
+[(#SET{url,[(#URL_NOTICE{#ENV{notice/id}}|parametre_url{url_ret,#ENV{url_ret}})]})]
 
 [(#SET{logo,[(#INCLURE{fond=inclure/pmb-inc-logo,notice,largeur,hauteur}|trim)]})]
 
@@ -7,7 +7,7 @@
 		<a href="#GET{url}">(#GET{logo})</a>
 	</div>]
 	<h3 class="h3 entry-title[ (#ENV{surlignable}|oui)surlignable]">
-		<a href="#GET{url}"[ title="(#NOM_SITE|texte_backend)"]>[(#ENV{notice/titre})]</a>
+		<a href="#GET{url}"[ title="(#NOM_SITE|texte_backend)"]>#ENV{notice/titre}</a>
 	</h3>
 	
 	[<span class="auteurs[ (#ENV{surlignable}|oui)surlignable]">
