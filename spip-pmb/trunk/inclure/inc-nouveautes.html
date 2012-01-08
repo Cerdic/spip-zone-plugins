@@ -1,17 +1,9 @@
-#SET{tab_ids, #ARRAY{}}
-
-[(#REM) les urls de RSS le PMB contiennent "notice_display" ]
-<BOUCLE_syndic_pmb(SYNDIC_ARTICLES){pmb_notices}{!par date}{0,100}>
-[(#SET{tab_ids,[(#GET{tab_ids}|push{[(#URL_ARTICLE|parametre_url{id})]})]})]
-</BOUCLE_syndic_pmb>
-
-
 <B_resultat>
 <div class="liste articles nouveautes avec_resume pmb">
 	 #ANCRE_PAGINATION
 	[<p class="pagination">(#PAGINATION)</p>]
 	<ul class="liste-items items">
-	<BOUCLE_resultat(PMB:NOTICES){liste #GET{tab_ids}}{pagination 5}>
+	<BOUCLE_resultat(PMB:NOTICES){nouveautes}{pagination 5}>
 		<INCLURE{fond=inclure/inc-notice-resume}{notice=#VALEUR}{compteur=#COMPTEUR_BOUCLE}>
 	</BOUCLE_resultat>
 	</ul>

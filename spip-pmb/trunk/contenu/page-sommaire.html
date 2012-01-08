@@ -19,17 +19,15 @@
 </B_articles>
 
 [(#REM) Nouveaux ouvrages ]
-<B_syndic_pmb>
+<B_pmb_nouveautes>
 <div class="liste articles nouveautes pmb sommaire">
 <h2 class="h2"><:pmb:nouveautes:></h2>
 	<a href="#URL_PAGE{nouveautes}" class="plus-de-liens"><:pmb:toutes_nouveautes:> +</a>
 	<ul class="liste-items items">
-	<BOUCLE_syndic_pmb(SYNDIC_ARTICLES){par hasard}{url==notice_display}{0,2}>
-		[(#SET{notice_id,[(#URL_ARTICLE|parametre_url{id})]})]
-		[(#SET{notice, [(#GET{notice_id}|pmb_notice_extraire)]})]
+	<BOUCLE_pmb_nouveautes(PMB:NOTICES){nouveautes}{par hasard}{0,2}>
 		<INCLURE{fond=inclure/inc-notice-resume}{notice=#GET{notice}}>
-	</BOUCLE_syndic_pmb>
+	</BOUCLE_pmb_nouveautes>
 	</ul>
 </div>
-</B_syndic_pmb>
+</B_pmb_nouveautes>
 
