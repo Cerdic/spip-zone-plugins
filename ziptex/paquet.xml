@@ -1,0 +1,16 @@
+<paquet
+	prefix="ziptex"
+	categorie="outil"
+	version="0.3.0"
+	etat="test"
+	compatibilite="];["
+>	
+
+	<nom>ZipTeX</nom>
+	<auteur>Maïeul Rouquette</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<necessite nom="zippeur" compatibilite="[1.4.0;[" />
+	<necessite nom="latexwheel" />
+</paquet>
