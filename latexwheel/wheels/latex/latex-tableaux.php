@@ -91,20 +91,20 @@ function latex_traiter_tableau($bloc) {
 	// Si on va veur le HTML, on distingue les colonnes numeriques a point ou a virgule,
 	// pour les alignements eventuels sur "," ou "."
 	// pour le moment on ne gère pas encore cela, car il faut que je regarde comme faire en latex
-//	$numeric_class = array('.'=>'point',','=>'virgule');
-//	for($i=0;$i<$n;$i++) {
-//	  $align = true;
-//	  for ($j=0;$j<$k;$j++) {
-//		  $rowspans[$j][$i] = 1;
-//			if ($align AND preg_match('/^\d+([.,]?)\d*$/', trim($lignes[$j][$i]), $r)){
-//				if ($r[1])
-//					$align = $r[1];
-//			}
-//			else
-//				$align = '';
-//	  }
-//	  $numeric[$i] = $align ? (" class='numeric ".$numeric_class[$align]."'") : '';
-//	}
+	$numeric_class = array('.'=>'point',','=>'virgule');
+	for($i=0;$i<$n;$i++) {
+	  $align = true;
+	  for ($j=0;$j<$k;$j++) {
+		  $rowspans[$j][$i] = 1;
+			if ($align AND preg_match('/^\d+([.,]?)\d*$/', trim($lignes[$j][$i]), $r)){
+				if ($r[1])
+					$align = $r[1];
+			}
+			else
+				$align = '';
+	  }
+	  $numeric[$i] = $align ? (" class='numeric ".$numeric_class[$align]."'") : '';
+	}
 
 	for ($j=0;$j<$k;$j++) {
 		if (preg_match($reg_line_all, $lignes[$j][0])) {
@@ -118,13 +118,13 @@ function latex_traiter_tableau($bloc) {
 
 	// et on parcourt le tableau a l'envers pour ramasser les
 	// colspan et rowspan en passant
+
 	$html = '';
 
 	for($l=count($lignes)-1; $l>=0; $l--) {
 		$cols= $lignes[$l];
 		$colspan=1;
 		$ligne='';
-
 		for($c=count($cols)-1; $c>=0; $c--) {
 			$attr= $numeric[$c]; 
 			$cell = trim($cols[$c]);
@@ -132,16 +132,19 @@ function latex_traiter_tableau($bloc) {
 			  $colspan++;
 
 			} elseif($cell=='^') {
-			  $rowspans[$l-1][$c]+=$rowspans[$l][$c];
-
+			  	$rowspans[$l-1][$c]+=$rowspans[$l][$c];
+				$ligne= "\n/sepcel".$ligne; 	
 			} else {
 
-			  if(($x=$rowspans[$l][$c])>1) {
-				$attr.= " rowspan='$x'";
-			  }
+
 			  $b = ($c==0 AND isset($hl[$l]))?'th':'td';
 				$h = (isset($hc[$c])?$hc[$c]:'').' '.(($b=='td' AND isset($hl[$l]))?$hl[$l]:'');
-				if($colspan>1) {
+				//fusion des lignes
+				if(($x=$rowspans[$l][$c])>1) {
+					$ligne= "\n\multirow/debut$x/fin/debut*/fin/debut".$cols[$c]."/fin/sepcel".$ligne;
+			  	}
+				// fusion des colonnes
+				elseif($colspan>1) {
 					$largeur = round($colspan * round(1/$n,2,PHP_ROUND_HALF_DOWN),2,PHP_ROUND_HALF_DOWN);
 					$ligne= "\n\multicolumn/debut$colspan/fin/debutp/debut$largeur".'\textwidth'."/fin/fin/debut".$cols[$c]."/fin/sepcel".$ligne;
 					$colspan=1;
@@ -160,7 +163,7 @@ function latex_traiter_tableau($bloc) {
 	// calcul des alignements de tableaux : par défaut, p{1/cellule*\textwith}
 	$largeur_cellule = round(1/$n,2,PHP_ROUND_HALF_DOWN);	// par défaut, taille de colonne constante
 	$alignement = '/debut'.str_repeat(p.'/debut'.$largeur_cellule.'\textwidth/fin',$n).'/fin';
-
+	
 	// en latex, contrairement au html, on ne marque pas la fin de la dernière cellule d'une ligne
 	$debut_table 	= str_replace('/sepcel\\','\\',$debut_table);
 	$html 			= str_replace('/sepcel\\','\\',$html);
