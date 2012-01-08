@@ -1,47 +1,6 @@
 --- # Syntaxe des raccourcis SPIP, version 0.0.1
     #
     # Si on nomme une regle, elle devient surchargeable
-liens:
-  match: "/\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*)\]/msS"# repris de la constante '_RACCOURCI_LIEN' -> comment fait on pour appeler morceaux php
-  priority: -15
-  replace: tx_latex_traiter_liens
-  is_callback: Y
-
-
-
-caractereslatex:
-  #proteges les caractères spécifiques à latex : & _ et d'autres
-  match : ",(\$|%|&|_|#),"
-  replace: "\\$1"
-  priority: -10
-
-intertitres:
-  # raccourcis en {{{..}}}
-  # intertitres
-  match: ['{{{', '}}}']
-  replace: ["\n\n\n\subsection/debut", "/fin\n\n\n"]
-  if_str: '{{{'
-  type: str
-  priority: -140
-
-
-intertitres-compliques:
-  # raccourcis imbriques en {{{{..}}}}
-  # intertitres
-  match: ['/(^|[^{])[{][{][{]/S', '/[}][}][}]($|[^}])/S']
-  replace: ["$1\n\n\n\subsection/debut", "/fin\n\n\n$1"]
-  if_str: '}}}}'
-  priority: -150
-
-gras:
-  # raccourcis en {{..}}
-  # strong
-  match: ['{{', '}}']
-  replace: ['\textbf/debut', '/fin']
-  type: str
-  if_str: '{{'
-  priority: -130
-
 
 intro:
   # suppr raccourci <intro>
@@ -50,6 +9,34 @@ intro:
   replace: ['', '']
   if_str: '<intro>'
   type: str
+
+
+caractereslatex:
+  #proteges les caractères spécifiques à latex : & _ et d'autres
+  match : ",(\$|%|&|_|#),"
+  replace: "\\$1"
+  priority: -10
+
+liens:
+  match: "/\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*)\]/msS"# repris de la constante '_RACCOURCI_LIEN' -> comment fait on pour appeler morceaux php
+  priority: -15
+  replace: tx_latex_traiter_liens
+  is_callback: Y
+
+
+listes:
+  if_str: "\n-"
+  is_wheel: Y
+  type: all
+  replace: latex/latex-listes.yaml
+  priority: -20 # avant !paragraphes
+
+glossaire:
+  if_str: "[?"
+  match: "/\[\?+\s*([^][<>]+)\]/S"			# '_RACCOURCI_GLOSES'
+  is_callback: Y
+  priority: -25
+  replace: tx_latex_traiter_glossaire
 
 italiques:
   # raccourcis en {..}
@@ -68,16 +55,24 @@ quote:
   type: str
   priority: -120
 
-listes:
-  if_str: "\n-"
-  is_wheel: Y
-  type: all
-  replace: latex/latex-listes.yaml
-  priority: -20 # avant !paragraphes
+gras:
+  # raccourcis en {{..}}
+  # strong
+  match: ['{{', '}}']
+  replace: ['\textbf/debut', '/fin']
+  type: str
+  if_str: '{{'
+  priority: -130
 
+intertitres:
+  # raccourcis en {{{..}}}
+  # intertitres
+  match: ['{{{', '}}}']
+  replace: ["\n\n\n\subsection/debut", "/fin\n\n\n"]
+  if_str: '{{{'
+  type: str
+  priority: -140
 
-  
-  
 notes:
   if_str: '[['
   match: ['[[', ']]']
@@ -85,9 +80,10 @@ notes:
   replace: ['\footnote/debut', '/fin']
   priority: -140
   
-glossaire:
-  if_str: "[?"
-  match: "/\[\?+\s*([^][<>]+)\]/S"			# '_RACCOURCI_GLOSES'
-  is_callback: Y
-  priority: -25
-  replace: tx_latex_traiter_glossaire
+intertitres-compliques:
+  # raccourcis imbriques en {{{{..}}}}
+  # intertitres
+  match: ['/(^|[^{])[{][{][{]/S', '/[}][}][}]($|[^}])/S']
+  replace: ["$1\n\n\n\subsection/debut", "/fin\n\n\n$1"]
+  if_str: '}}}}'
+  priority: -150
