@@ -1,13 +1,13 @@
 [(#AUTORISER{voir, blinks})
 	<h1><:blinks:liste_des_liens:></h1>
 	<div class='ajax'>
-	<INCLURE{fond=inclure/liste_liens,env,ajax} />
+	<INCLURE{fond=inclure/liste_blinks,env,ajax} />
 	</div>
 	<!--#navigation-->
 	<div class='cadre cadre-info'>
 		<p><:blinks:description_liens:></p>
-		[(#AUTORISER{modifier, lien})
-			[(#URL_ECRIRE{lien_edit}
+		[(#AUTORISER{modifier, blink})
+			[(#URL_ECRIRE{blink_edit}
 				|parametre_url{new,oui}
 				|icone{<:blinks:action_ajouter:>, #CHEMIN{images/blinks-24.png}, center, creer.gif})]
 		]

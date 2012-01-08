@@ -1,34 +1,42 @@
 <plugin>
 	<nom>Blinks</nom>
 	<version>1.0</version>
-	<slogan>Keyword Stuffer for Linkbuilders ! That's SEO b*tch !</slogan>
-	<categorie>statistique</categorie>
-	<auteur>Loiseau2nuit</auteur>
-	<licence>(c) 2012 CGG &quot;<a href="http://alias.codiferes.net/wordpress/?page_id=51">Cr&eacute;atif Grande Gueule</a>&quot; v1 - </licence>
-	
 	<etat>dev</etat>
+	
+	<slogan>Keyword Stuffer for Linkbuilders ! That's SEO b*tch !</slogan>
 	<description>
 		Keyword Stuffer for Linkbuilders !
 		NON FONCTIONNEL ! (on vous aura prévenu ...) 		
 	</description>
 	<lien>http://trikapalanet.lachimere.net/</lien>
 	<icon>images/blinks-128.png</icon>
-	<prefix>blinks</prefix>
 	
-	<bouton id='blink' parent='naviguer'>
+	<auteur>Loiseau2nuit</auteur>
+	<licence>(c) 2012 CGG &quot;<a href="http://alias.codiferes.net/wordpress/?page_id=51">Cr&eacute;atif Grande Gueule</a>&quot; v1 - </licence>
+	
+	<categorie>statistique</categorie>
+	<necessite id="SPIP" version="[2.0.9;]" />
+	<necessite id="spip_bonux" version="[1.8.10;]" />
+	<necessite id="saisies" version="[1.7.5;]" />
+	
+	<prefix>blinks</prefix>
+	<version_base>1.0</version_base>
+	<install>base/blinks_upgrade.php</install>
+	
+	<bouton id='blinks' parent='naviguer'>
 		<icone>images/blinks-24.png</icone>
 		<titre>blinks:blinks</titre>
 	</bouton>
-	
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>blinks_autorisations.php</inclure>
+	</pipeline>
+
 	<bouton id="blinks" parent="bando_configuration">
 		<icone>images/blinks-24.png</icone>
 		<titre>blinks:blinks</titre>
 		<url>blinks</url>   
 	</bouton>	
-	
-	<necessite id="SPIP" version="[2.0.9;]" />
-	<version_base>1.1</version_base>
-	<install>base/blinks_upgrade.php</install>
 	
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
@@ -38,10 +46,7 @@
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/blinks.php</inclure>
 	</pipeline>
-	<pipeline>
-		<nom>autoriser</nom>
-		<inclure>blinks_autorisations.php</inclure>
-	</pipeline>
+
 
 	
 </plugin>
