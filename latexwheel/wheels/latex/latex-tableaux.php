@@ -135,20 +135,20 @@ function latex_traiter_tableau($bloc) {
 			  $rowspans[$l-1][$c]+=$rowspans[$l][$c];
 
 			} else {
-			  if($colspan>1) {
-				$attr .= " colspan='$colspan'";
-				$colspan=1;
-			  }
+
 			  if(($x=$rowspans[$l][$c])>1) {
 				$attr.= " rowspan='$x'";
 			  }
 			  $b = ($c==0 AND isset($hl[$l]))?'th':'td';
 				$h = (isset($hc[$c])?$hc[$c]:'').' '.(($b=='td' AND isset($hl[$l]))?$hl[$l]:'');
-				// inutile de garder le strong qui n'a servi que de marqueur
-				if ($b=='th') {
-					$cols[$c] = str_replace(array('{','}'), '', $cols[$c]);
+				if($colspan>1) {
+					$largeur = round($colspan * round(1/$n,2,PHP_ROUND_HALF_DOWN),2,PHP_ROUND_HALF_DOWN);
+					$ligne= "\n\multicolumn/debut$colspan/fin/debutp/debut$largeur".'\textwidth'."/fin/fin/debut".$cols[$c]."/fin/sepcel".$ligne;
+					$colspan=1;
 				}
-			  $ligne= "\n".$cols[$c]."/sepcel".$ligne;
+				else{
+			  		$ligne= "\n".$cols[$c]."/sepcel".$ligne;
+				}
 			}
 		}
 
@@ -156,9 +156,11 @@ function latex_traiter_tableau($bloc) {
 		$html = "$ligne\\\\\n$html";
 	}
 	
+	
 	// calcul des alignements de tableaux : par défaut, p{1/cellule*\textwith}
-	$largeur_cellule = round(1/$k,2,PHP_ROUND_HALF_DOWN);	// par défaut, taille de colonne constante
-	$alignement = '/debut'.str_repeat(p.'/debut'.$largeur_cellule.'\textwidth/fin',$k).'/fin';
+	$largeur_cellule = round(1/$n,2,PHP_ROUND_HALF_DOWN);	// par défaut, taille de colonne constante
+	var_dump($largeur_cellule);
+	$alignement = '/debut'.str_repeat(p.'/debut'.$largeur_cellule.'\textwidth/fin',$n).'/fin';
 
 	// en latex, contrairement au html, on ne marque pas la fin de la dernière cellule d'une ligne
 	$debut_table 	= str_replace('/sepcel\\','\\',$debut_table);
