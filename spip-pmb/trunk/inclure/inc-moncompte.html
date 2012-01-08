@@ -52,17 +52,17 @@
 		</thead>
 		<tbody>
 		<BOUCLE_tab_resultat(POUR){tableau #GET{tab_prets}}>
-		[(#SET{notice, #GET{tab_prets/notice_ids/#CLE}})]
+			[(#SET{notice, #GET{tab_prets/notice_ids/#CLE}})]
 			<tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
-				<td><a href="[(#URL_PAGE{notice_display,id=#GET{notice/id}})]">
+				<td><a href="#URL_NOTICE{#GET{notice/id}}">
 				[(#GET{notice/logo_src}
 					|image_reduire{0,80}
-					|inserer_attribut{class,spip_logos})]</a> [(#GET{tab_prets/#CLE/expl_cb})]
+					|inserer_attribut{class,spip_logos})]</a> #GET{tab_prets/#CLE/expl_cb}
 				</td>
-				<td><a href="[(#URL_PAGE{notice_display,id=#GET{tab_prets/#CLE/notice_id}})]">[(#GET{tab_prets/#CLE/expl_libelle})]</a></td>
-				<td>[(#GET{tab_prets/#CLE/expl_support})]</td>
-				<td>[(#GET{tab_prets/#CLE/loan_startdate})]</td>
-				<td>[(#GET{tab_prets/#CLE/loan_returndate})]</td>
+				<td><a href="#URL_NOTICE{#GET{tab_prets/#CLE/notice_id}}">#GET{tab_prets/#CLE/expl_libelle}</a></td>
+				<td>#GET{tab_prets/#CLE/expl_support}</td>
+				<td>#GET{tab_prets/#CLE/loan_startdate}</td>
+				<td>#GET{tab_prets/#CLE/loan_returndate}</td>
 			</tr>
 		</BOUCLE_tab_resultat>
 		</tbody>
@@ -88,14 +88,14 @@
 		<BOUCLE_tab_resultat3(POUR){tableau #GET{tab_reservations}}>
 			[(#SET{notice, [(#GET{tab_reservations/notice_ids/#CLE})]})]
 			<tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
-				<td><a href="[(#URL_PAGE{notice_display,id=#GET{notice/id}})]">
+				<td><a href="#URL_NOTICE{#GET{notice/id}}">
 					[(#GET{notice/logo_src}
 						|image_reduire{0,80}
 						|inserer_attribut{class,spip_logos})]
 					</a>
 				</td>
-				<td><a href="[(#URL_PAGE{notice_display,id=#GET{tab_reservations/#CLE/notice_id})]})]">[(#GET{notice/titre})]</a></td>
-				<td>[(#GET{tab_reservations/#CLE/resa_rank})]</td>
+				<td><a href="#URL_NOTICE{#GET{tab_reservations/#CLE/notice_id}}">#GET{notice/titre}</a></td>
+				<td>#GET{tab_reservations/#CLE/resa_rank}</td>
 			</tr>
 		</BOUCLE_tab_resultat3>
 		</tbody>

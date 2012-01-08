@@ -7,11 +7,11 @@
 		<tbody>
 		<BOUCLE_autres_lecteurs(PMB:NOTICES){id}{autres_lecteurs}>
 		  <tr class="[(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})]">
-		      <td><a href="[(#URL_PAGE{notice_display,id=#VALEUR{id}})]">
+		      <td><a href="#URL_NOTICE">
 				  [(#VALEUR{logo_src}
 					|image_reduire{0,80}
 					|inserer_attribut{class,spip_logos})]</a></td>
-		      <td><a href="[(#URL_PAGE{notice_display,id=#ID})]">#TITRE</a></td>
+		      <td><a href="#URL_NOTICE">#TITRE</a></td>
 		      <td><a href="[(#URL_PAGE{author_see,id=#ID_AUTEUR})]">#VALEUR{lesauteurs}</a></td>
 		  </tr>
 		</BOUCLE_autres_lecteurs>

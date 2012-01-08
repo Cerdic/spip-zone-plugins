@@ -1,6 +1,4 @@
-[(#SET{url,[(#URL_PAGE{notice_display}
-	|parametre_url{id,#ENV{notice/id}}
-	|parametre_url{url_ret,#ENV{url_ret}})]})]
+[(#SET{url,[(##URL_NOTICE{#ENV{notice/id}}|parametre_url{url_ret,#ENV{url_ret}})]})]
 
 [(#SET{logo,[(#INCLURE{fond=inclure/pmb-inc-logo,notice,largeur,hauteur}|trim)]})]
 

@@ -369,4 +369,23 @@ function critere_SYNDIC_ARTICLES_pmb_notices($idb, &$boucles, $crit) {
 	
 	$boucle->where[] = $c;
 }
+
+
+/**
+ * Balise #URL_NOTICE
+ * et #URL_NOTICE{18}
+ * 
+**/
+function balise_URL_NOTICE_dist($p) {
+
+	if (!$id = interprete_argument_balise(1, $p)) {
+		$id = champ_sql('id', $p);
+	}
+
+	$page = 'notice_display';
+	$p->code = "generer_url_public('$page', 'id='.$id)";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
 ?>
