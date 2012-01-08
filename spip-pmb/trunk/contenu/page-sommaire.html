@@ -25,7 +25,7 @@
 	<a href="#URL_PAGE{nouveautes}" class="plus-de-liens"><:pmb:toutes_nouveautes:> +</a>
 	<ul class="liste-items items">
 	<BOUCLE_pmb_nouveautes(PMB:NOTICES){nouveautes}{par hasard}{0,2}>
-		<INCLURE{fond=inclure/inc-notice-resume}{notice=#GET{notice}}>
+		<INCLURE{fond=inclure/inc-notice-resume,id}>
 	</BOUCLE_pmb_nouveautes>
 	</ul>
 </div>

@@ -1,8 +1,8 @@
-
+<BOUCLE_notice(PMB:NOTICES){id}>
 [<a href="(#ENV{url_ret}|urldecode)" class="lien-retour-recherche"><:pmb:retour_recherche:></a>]
 
 [(#ENV{afficher_logo}|=={oui}|oui)
-	[(#INCLURE{fond=inclure/pmb-inc-logo, notice, largeur=130})]
+	[(#INCLURE{fond=inclure/pmb-inc-logo, notice=#VALEUR, largeur=130})]
 ]
 
 <div class="corps-conteneur surlignable">
@@ -10,66 +10,66 @@
 	<div class="pmb-ouvrage-infos">	
 		<table class="spip pmb-tableau">
 			<tbody>
-				[<tr><td><strong><:pmb:auteur:></strong></td><td>(#ENV*{notice/liensauteurs})[, (#ENV*{notice/liensauteurs2})][, (#ENV*{notice/liensauteurs23})]</td></tr>]
-				[<tr><td><strong><:pmb:serie:></strong></td><td>(#ENV{notice/serie})</td></tr>]
-				[<tr><td><strong><:pmb:type:></strong></td><td>(#ENV{notice/type})</td></tr>]
-				[<tr><td><strong><:pmb:editeur:></strong></td><td>[(#ENV{notice/id_editeur}|oui)<a href="[(#URL_PAGE{publisher_see}|parametre_url{id,[(#ENV{notice/id_editeur})]})]">](#ENV{notice/editeur})[(#ENV{notice/id_editeur}|oui)</a>]</td></tr>]
-				[<tr><td><strong><:pmb:collection:></strong></td><td>[(#ENV{notice/id_collection}|oui)<a href="[(#URL_PAGE{coll_see}|parametre_url{id,[(#ENV{notice/id_collection})]})]">](#ENV{notice/collection})[(#ENV{notice/id_collection}|oui)</a>]</td></tr>]
-				[<tr><td><strong><:pmb:format:></strong></td><td>(#ENV{notice/format})</td></tr>]
-				[<tr><td><strong><:pmb:annee_publication:></strong></td><td>(#ENV{notice/annee_publication})</td></tr>]
-				[<tr><td><strong><:pmb:importance:></strong></td><td>(#ENV{notice/importance})</td></tr>]
-				[<tr><td><strong><:pmb:presentation:></strong></td><td>(#ENV{notice/presentation})</td></tr>]
-				[<tr><td><strong><:pmb:isbn:></strong></td><td>(#ENV{notice/isbn})</td></tr>]
+				[<tr><td><strong><:pmb:auteur:></strong></td><td>(#LIENSAUTEURS)[, (#LIENSAUTEURS2)][, (#LIENSAUTEURS23)]</td></tr>]
+				[<tr><td><strong><:pmb:serie:></strong></td><td>(#SERIE)</td></tr>]
+				[<tr><td><strong><:pmb:type:></strong></td><td>(#TYPE)</td></tr>]
+				[<tr><td><strong><:pmb:editeur:></strong></td><td>[(#ID_EDITEUR|oui)<a href="[(#URL_PAGE{publisher_see}|parametre_url{id,#ID_EDITEUR})]">](#EDITEUR)[(#ID_EDITEUR|oui)</a>]</td></tr>]
+				[<tr><td><strong><:pmb:collection:></strong></td><td>[(#ID_COLLECTION|oui)<a href="[(#URL_PAGE{coll_see}|parametre_url{id,#ID_COLLECTION})]">](#COLLECTION)[(#ID_COLLECTION|oui)</a>]</td></tr>]
+				[<tr><td><strong><:pmb:format:></strong></td><td>(#FORMAT)</td></tr>]
+				[<tr><td><strong><:pmb:annee_publication:></strong></td><td>(#ANNEE_PUBLICATION)</td></tr>]
+				[<tr><td><strong><:pmb:importance:></strong></td><td>(#IMPORTANCE)</td></tr>]
+				[<tr><td><strong><:pmb:presentation:></strong></td><td>(#PRESENTATION)</td></tr>]
+				[<tr><td><strong><:pmb:isbn:></strong></td><td>(#ISBN)</td></tr>]
 			</tbody>
 		</table>
 	</div>
 	<br class="nettoyeur" />
 	]
 	[(#ENV{afficher_resume}|=={oui}|oui)
-		[<div class="texte entry-content">(#ENV*{notice/resume}|paragrapher)</div>]
+		[<div class="texte entry-content">(#RESUME|paragrapher)</div>]
 	]
 </div>
 <br class="nettoyeur" />
 
 <div id="docnum-ajax" class="ajax-content">
-	<a href="[(#URL_PAGE{ajax-docnum}|parametre_url{id,#ENV{id}})]" class="invisible"><:titre_documents_joints:></a>
+	<a href="[(#URL_PAGE{ajax-docnum}|parametre_url{id,#ID})]" class="invisible"><:titre_documents_joints:></a>
 </div>
 <div id="disponibilite-ajax" class="ajax-content">
 	<img src="#CHEMIN{img/ajaxLoader.gif}" class="ajax-loader" alt="<:pmb:chargement:>" width="43" height="43" />
-	<a href="[(#URL_PAGE{ajax-notice-dispo}|parametre_url{id,#ENV{id}}|parametre_url{titre_notice,[(#ENV{notice/titre}|urlencode)]})]" class="invisible"><:pmb:exemplaires:></a>
+	<a href="[(#URL_PAGE{ajax-notice-dispo}|parametre_url{id,#ID}|parametre_url{titre_notice,[(#TITRE|urlencode)]})]" class="invisible"><:pmb:exemplaires:></a>
 </div>
 <div id="autreslecteurs-ajax" class="ajax-content">
-	<a href="[(#URL_PAGE{ajax-autreslecteurs}|parametre_url{id,#ENV{id}})]" class="invisible"><:pmb:autres_lecteurs:></a>
+	<a href="[(#URL_PAGE{ajax-autreslecteurs}|parametre_url{id,#ID})]" class="invisible"><:pmb:autres_lecteurs:></a>
 </div>
-  <script type="text/javascript">
+
+<script type="text/javascript">
 $(document).ready(function() {
 [(#ENV{afficher_docnum}|=={non}|non)
-	$('#docnum-ajax').load("[(#URL_PAGE{ajax-docnum})]", { 'id': '#ENV{id}' });
+	$('#docnum-ajax').load("[(#URL_PAGE{ajax-docnum})]", { 'id': '#ID' });
 ]
 
 [(#ENV{afficher_dispo}|=={non}|non)
-	$('#disponibilite-ajax').load("[(#URL_PAGE{ajax-notice-dispo})]", { 'id': '#ENV{id}', 'titre_notice' : "[(#ENV{notice/titre}|urlencode)]" }, function (responseText, textStatus, XMLHttpRequest) { $(this).find('.ajax-loader').remove();});
+	$('#disponibilite-ajax').load("[(#URL_PAGE{ajax-notice-dispo})]", { 'id': '#ID', 'titre_notice' : "[(#TITRE|urlencode)]" }, function (responseText, textStatus, XMLHttpRequest) { $(this).find('.ajax-loader').remove();});
 ]
 
 [(#ENV{afficher_autres}|=={non}|non)
-	$('#autreslecteurs-ajax').load("[(#URL_PAGE{ajax-autreslecteurs})]", { 'id': '#ENV{id}' });
+	$('#autreslecteurs-ajax').load("[(#URL_PAGE{ajax-autreslecteurs})]", { 'id': '#ID' });
 ]
 });
 </script>
 
 <div class="pmb-toolbox" id="compte-lecteur">
 <h2><:pmb:compte_lecteur:></h2>
-<B_auteurpmb>
 <BOUCLE_auteurpmb(AUTEURS_PMB){id_auteur=#SESSION{id_auteur}}>
 	[(#ENV{afficher_toolbox}|=={non}|non)
 		[(#PMB_SESSION|oui)
 		[(#ENV{reserver}|=={1}|oui)
-			<strong>[(#PMB_SESSION|pmb_reserver_ouvrage{#ENV{notice/id},'',''})]</strong>
+			<strong>[(#PMB_SESSION|pmb_reserver_ouvrage{#ID,'',''})]</strong>
 		]
 		<ul class="spip">
-			<li><a href="[(#CONFIG{spip_pmb/url}|concat{addtags.php}|parametre_url{noticeid,#ENV{id}})]" class="lien-modal"><:pmb:ajouter_tag:></a></li>
-			<li><a href="[(#CONFIG{spip_pmb/url}|concat{avis.php}|parametre_url{todo,liste}|parametre_url{noticeid,#ENV{id}})]" class="lien-modal"><:pmb:donner_avis:></a></li>
-			<li><a href="[(#URL_NOTICE{#ENV{id}}|parametre_url{reserver,1})]#compte-lecteur"><:pmb:reserver_ouvrage:></a></li>
+			<li><a href="[(#CONFIG{spip_pmb/url}|concat{addtags.php}|parametre_url{noticeid,#ID})]" class="lien-modal"><:pmb:ajouter_tag:></a></li>
+			<li><a href="[(#CONFIG{spip_pmb/url}|concat{avis.php}|parametre_url{todo,liste}|parametre_url{noticeid,#ID})]" class="lien-modal"><:pmb:donner_avis:></a></li>
+			<li><a href="[(#URL_NOTICE|parametre_url{reserver,1})]#compte-lecteur"><:pmb:reserver_ouvrage:></a></li>
 		</ul>
 		]
 		[(#PMB_SESSION|non)
@@ -83,5 +83,5 @@ $(document).ready(function() {
   ]
 <//B_auteurpmb>
 
-</div>	
-
+</div>
+</BOUCLE_notice>
