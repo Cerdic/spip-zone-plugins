@@ -1,15 +1,20 @@
 [(#REM) Fil d'Ariane ]
-<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{catalogue}"><:pmb:catalogue:></a> &gt; <strong class="on">[(#ENV{notice/titre}|couper{80})]</strong></p>
+<BOUCLE_notice(PMB:NOTICES){id}>
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+	&gt; <a href="#URL_PAGE{catalogue}"><:pmb:catalogue:></a>
+	&gt; <strong class="on">[(#TITRE|couper{80})]</strong></p>
 
 <div class="cartouche">
-	[(#ENV{notice/logo_src}|oui)
-		[(#ENV{notice/logo_src}
+	[(#VALEUR{logo_src}|oui)
+		[(#VALEUR{logo_src}
 			|image_reduire{200,0}
 			|inserer_attribut{class,spip_logos})]
 	]
-	<h1 class="h1">[(#ENV{notice/titre})]</h1>
-	[<p class="soustitre">(#ENV{notice/soustitre})</p>]
+	<h1 class="h1">#TITRE</h1>
+	[<p class="soustitre">(#SOUSTITRE)</p>]
 </div>
 
-<INCLURE{fond=inclure/inc-notice_display}{env}{afficher_logo=non}{afficher_resume=oui}>
+<INCLURE{fond=inclure/inc-notice_display}{env}
+	{notice=#VALEUR}{afficher_logo=non}{afficher_resume=oui}>
 
+</BOUCLE_notice>

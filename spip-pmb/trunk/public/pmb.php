@@ -94,9 +94,22 @@ class IterateurPMB extends IterateurData {
 			$this->select_liste();
 		}
 
+		// demande sortie du cache ou recalculee
+		$cle = $this->creer_cle_cache();
+		if ($cache = $this->use_cache($cle)) {
+			$this->tableau = $cache;
+		} else {
+			$select = charger_fonction($this->type . '_select', 'inc', true);
+			$this->tableau = $select($this->command);
 
-		$select = charger_fonction($this->type . '_select', 'inc', true);
-		$this->tableau = $select($this->command);
+			// cache d'une heure par defaut.
+			$ttl = isset($this->command['datacache']) ? $this->command['datacache'] : 3600;
+			
+			if (is_array($this->tableau) AND $ttl>0) {
+				$this->cache_set($cle, $ttl);
+			}
+		}
+
 
 		// Si a ce stade on n'a pas de table, il y a un bug
 		if (!is_array($this->tableau)) {
@@ -118,6 +131,46 @@ class IterateurPMB extends IterateurData {
 		$this->rewind();
 		#var_dump($this->tableau);
 	}
+
+
+	/**
+	 * Retourne les donnees en caches
+	 * pour la boucle demandees
+	 * si elles existent et ne sont
+	 * pas perimees
+	 *
+	**/
+	protected function use_cache($cle) {
+
+		$cache = $this->cache_get($cle);
+
+		// Time to live
+		if (isset($this->command['datacache'])) {
+			$ttl = intval($this->command['datacache']);
+		}
+		
+		if ($cache AND ($cache['time'] + (isset($ttl) ? $ttl : $cache['ttl']) > time())
+		AND !(_request('var_mode') === 'recalcul' AND include_spip('inc/autoriser') AND autoriser('recalcul'))) {
+			return $cache['data'];
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * Cree une cle unique
+	 * pour sauvegarder une analyse de donnees
+	 * basee sur les criteres de boucle demandes 
+	 *
+	**/
+	protected function creer_cle_cache() {
+		$cle = $this->command;
+		$cle['from'][0] = $this->type; 
+		unset($cle['id']); // pas le nom de la boucle
+		$cle = md5(serialize($cle));
+		return $cle;
+	}
 }
 
 
@@ -132,6 +185,20 @@ class IterateurPMB extends IterateurData {
  */
 function critere_PMB_liste_dist($idb, &$boucles, $crit) {
 	return critere_DATA_liste_dist($idb, $boucles, $crit);
+}
+
+
+/**
+ * Modifier la duree du cache des boucles PMB
+ * par defaut a 1 heure (si memoization actif)
+ * {datacache 3600}
+ *
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
+ */
+function critere_PMB_datacache_dist($idb, &$boucles, $crit) {
+	return critere_DATA_datacache_dist($idb, $boucles, $crit);
 }
 
 
