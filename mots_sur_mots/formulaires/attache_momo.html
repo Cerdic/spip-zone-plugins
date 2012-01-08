@@ -1,0 +1,57 @@
+[(#REM)
+
+Formulaire pour le pipleine affiche_milieu permettant d'attacher des mots parents à un mot-clé.
+La structure HTML est copiée du formulaire d'ajout de mots-clés des articles.
+
+
+]
+
+<form name="#FORM" action="[(#ENV{action}|parametre_url{redirect,''})]" method="post">
+		[(#ACTION_FORMULAIRE{[(#ENV{action}|parametre_url{redirect,''})],#FORM})]
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{statut}}
+<BOUCLE_Mot_enfant(MOTS){id_mot=#ENV{id_mot}}>
+<input type='hidden' name='id_mot_enfant' value='#ID_MOT' />
+<input type='hidden' name='liste_mots_parents' value='[(#MODELE{doublons_parents_directs_mot}{id_mot})]' />
+<div id='editer_momo-#ID_MOT' class='editer_mots'><a id='access-j' href='#access-j' accesskey='j'></a>
+<div class='cadre cadre-e' style=''><img src='#CHEMIN{prive/images/mot-cle-24.gif}'
+alt=""  class='cadre-icone' width='24' height='24' />
+
+<div id='mots_parents' class='titrem replie'[ onmouseover="jQuery(this).depliant('#mots_parents-(#ID_MOT)');"]><a href='#'[ onclick="return jQuery(this).depliant_clicancre('#mots_parents-(#ID_MOT)');"] class='titremancre'></a><:momo:ajouter_mos_parents:></div>
+<div class='cadre_padding'><a id='access-i' href='#access-i' accesskey='i'></a>
+<div class='cadre cadre-liste' style=''><div><div id='t#ID_MOT' class='bloc_depliable blocdeplie'>
+		<table width='100%' cellpadding='2' cellspacing='0' border='0'>
+	<BOUCLE_Mot_Parents_attaches(MOTS){id_mot IN #MODELE{doublons_parents_directs_mot}{id_mot}|explode{','}}{doublons deja_attache}{par id_groupe}{par titre}>
+			<tr class='tr_liste'>
+				<td class="arial11" style='width: 25px;'><a href="#URL_SITE_SPIP/ecrire/exec=mots_edit&id_mot=#ID_MOT"><img src='#CHEMIN{prive/images/petite-cle.gif}' alt='' /></a></td>
+				<td class="arial2"><a href="#URL_SITE_SPIP/ecrire/exec=mots_edit&id_mot=#ID_MOT">#TITRE</a></td>
+				<td class="arial2"><a href="#URL_SITE_SPIP/ecrire/exec=mots_type&id_groupe=#ID_GROUPE">#TYPE</a></td>
+				<td class="arial1"><input type='checkbox' name='mots[]' value='#ID_MOT' id='#ID_MOT' checked='checked' /></td>
+	</BOUCLE_Mot_Parents_attaches>
+		</table>
+		<div class='nettoyeur'></div>
+		</div><div class='nettoyeur'></div></div></div>
+		<div[ id='mots_parents-(#ID_MOT)' ]class='bloc_depliable blocdeplie'><div style='text-align: right' class='arial1'></div><input type='submit' value='<:momo:retirer_mots_parents:>'  class='spip_xx-small' id='retirer_#ID_MOT' style='float:right' /><br />
+		<div style='float:right; width:280px;position:relative;display:inline;'><div>
+	[(#REM) Pour éviter les liens circulaires, on ne peut pas associer un mot à un de ses enfants]
+	[(#SET{mots_interdits,#MODELE{doublons_enfants_mot}{id_mot}|explode{','}})]
+		<BOUCLE_Groupes_Mots(GROUPES_MOTS){par titre}>
+			<B_Mots_candidats_parents>
+			<div>
+				<select name="mots[]" id='mots_#ID_GROUPE' size='1' style='width: 180px;' onchange="findObj_forcer('valider_groupe_#ID_GROUPE').style.visibility='visible';">
+					[<option value="" style='font-variant: small-caps;'>(#TITRE)</option>]
+			<BOUCLE_Mots_candidats_parents(MOTS){id_groupe}{!id_mot IN #GET{mots_interdits}}{doublons deja_attache}{par titre}>
+					[<option value="#ID_MOT">&nbsp;&nbsp;&nbsp;(#TITRE)</option>]
+			</BOUCLE_Mots_candidats_parents>
+				</select>
+				&nbsp;<span><input type='submit' value='<:spip:bouton_choisir:>'  class='visible_au_chargement spip_xx-small' id='valider_groupe_#ID_GROUPE' /></span>
+			</div>
+			</B_Mots_candidats_parents>
+		</BOUCLE_Groupes_Mots>
+		</div></div>
+		<div class='nettoyeur'></div>
+		</div><div class='nettoyeur'>
+</div>
+</div>
+</div>
+</BOUCLE_Mot_enfant>
+</form>
