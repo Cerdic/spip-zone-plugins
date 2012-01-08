@@ -29,6 +29,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $rpc_client = NULL;
 include_spip('inc/config');
 
+// charger les fonctions pour le compilateur SPIP
+// boucles (PMB:NOTICES) ...
+include_spip('public/pmb');
+
 
 /**
  * Depile un element de tableau et renvoie le tableau (pas l'element depile !)
@@ -426,7 +430,8 @@ function pmb_recuperer_champs_recherche($langue=0) {
  * et cles signifient quelque chose !
  * 
  * http://www.bnf.fr/fr/professionnels/anx_formats/a.unimarc_manuel_format_bibliographique.html
- *  
+ * http://www.bnf.fr/documents/UNIMARC%28B%29_conversion.pdf
+ * 
  * @param array $value Tableau UNIMARC a traduire
  * @return array Tableau traduit
 **/

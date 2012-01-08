@@ -6,17 +6,15 @@
 </BOUCLE_syndic_pmb>
 
 
-[(#SET{tab_notices,[(#GET{tab_ids}|pmb_tabnotices_extraire)]})]	
-
-<B_tab_resultat>
+<B_resultat>
 <div class="liste articles nouveautes avec_resume pmb">
 	 #ANCRE_PAGINATION
 	[<p class="pagination">(#PAGINATION)</p>]
 	<ul class="liste-items items">
-	<BOUCLE_tab_resultat(POUR){tableau #GET{tab_notices}}{pagination 5}>
+	<BOUCLE_resultat(PMB:NOTICES){liste #GET{tab_ids}}{pagination 5}>
 		<INCLURE{fond=inclure/inc-notice-resume}{notice=#VALEUR}{compteur=#COMPTEUR_BOUCLE}>
-	</BOUCLE_tab_resultat>
+	</BOUCLE_resultat>
 	</ul>
 	[<p class="pagination">(#PAGINATION)</p>]
 </div>
-</B_tab_resultat>
+</B_resultat>
