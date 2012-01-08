@@ -8,7 +8,7 @@
 	<etat>stable</etat>
 	<description>Ce plugin ajoute des raccourcis typographiques et des boutons au porte plume. Par exemple :
 -* Paragraphes :
--** {{Sous-titres}} <code>{n{</code>Texte du titre<code>}n}</code>, n variant de 2 &#224; 5, la barre de raccourcis ne proposant que 2 et 3
+-** {{Sous-titres}} <code>{{{**</code>Texte du titre<code>}}}</code>, le nombre d'&#233;toiles (*) variant de 2 &#224; 5, la barre de raccourcis ne proposant que 2 et 3
 -** {{Centrer}} <code>[|</code>Paragraphe centr&#233;<code>|]</code>
 -** {{Aligner &#224; droite}} <code>[/</code>Paragraphe align&#233; &#224; droite<code>/]</code>
 -** {{Encadrer}} <code>[(</code>Paragraphe &#224; encadrer<code>)]</code>
