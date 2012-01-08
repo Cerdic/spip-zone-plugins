@@ -203,6 +203,11 @@ function critere_PMB_datacache_dist($idb, &$boucles, $crit) {
 
 
 /**
+ * (PMB:NOTICES) {id} 
+ * (PMB:NOTICES) {liste #TABLEAU_IDS} 
+ * (PMB:NOTICES) {id} {autres_lectures} 
+ * (PMB:NOTICES) {liste #TABLEAU_IDS} {autres_lectures}
+ * 
  * Selectionner les notices demandees
  * et retourner un tableau des elements parsees
  */
@@ -210,7 +215,7 @@ function inc_pmb_notices_select_dist(&$command) {
 
 	// on peut fournir une liste l'id
 	// ou egalement un critere id=x
-
+var_dump($command);
 	$ids = array();
 
 	// depuis une liste
@@ -227,11 +232,20 @@ function inc_pmb_notices_select_dist(&$command) {
 		}
 	}
 
+	// autres lecteurs : ceux qui ont lu ceci ont aussi emprunte cela
+	if (pmb_recherche_critere($command['where'], 'autres_lectures')) {
+		$ids = pmb_ws_ids_notices_autres_lecteurs($ids);
+	}
+	
 	// retourner les notices selectionnees
 	$res = pmb_tabnotices_extraire($ids);
 
 	return $res;
 }
+
+
+
+
 
 
 /**
@@ -251,4 +265,23 @@ function pmb_critere_donne($criteres, $cle, $op = '=') {
 	}
 	return $res;
 }
+
+
+/**
+ * Chercher la presence d'un critere dans le tableau where. 
+ *
+ * @return array, un element par valeur trouvee
+**/
+function pmb_recherche_critere($criteres, $cle) {
+	if (!is_array($criteres) OR !$criteres) {
+		return $res;
+	}
+	foreach ($criteres as $c) {
+		if (is_array($c) AND $c[1] == $cle) {
+			return true;
+		}
+	}
+	return false;
+}
+
 ?>

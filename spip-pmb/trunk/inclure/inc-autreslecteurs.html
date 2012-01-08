@@ -1,5 +1,3 @@
-[(#SET{tab_notices,[(#ENV{id}|pmb_ws_autres_lecteurs)]})]	
-		
 <B_autres_lecteurs>
 <div class="pmb-autreslecteurs">
 	<h2><:pmb:autres_lecteurs:></h2>
@@ -7,14 +5,14 @@
 	<table class="spip" style="width: 99%;">
 		<thead><tr class="row_first"><th></th><th><:pmb:titre:></th><th><:pmb:auteur:></th></tr></thead>
 		<tbody>
-		<BOUCLE_autres_lecteurs(POUR){tableau #GET{tab_notices}}>
+		<BOUCLE_autres_lecteurs(PMB:NOTICES){id}{autres_lecteurs}>
 		  <tr class="[(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})]">
 		      <td><a href="[(#URL_PAGE{notice_display,id=#VALEUR{id}})]">
 				  [(#VALEUR{logo_src}
 					|image_reduire{0,80}
 					|inserer_attribut{class,spip_logos})]</a></td>
-		      <td><a href="[(#URL_PAGE{notice_display,id=#VALEUR{id}})]">[(#VALEUR{titre})]</a></td>
-		      <td><a href="[(#URL_PAGE{author_see,id=#VALEUR{id_auteur}})]">[(#VALEUR{lesauteurs})]</a></td>
+		      <td><a href="[(#URL_PAGE{notice_display,id=#ID})]">#TITRE</a></td>
+		      <td><a href="[(#URL_PAGE{author_see,id=#ID_AUTEUR})]">#VALEUR{lesauteurs}</a></td>
 		  </tr>
 		</BOUCLE_autres_lecteurs>
 		</tbody>

@@ -635,29 +635,45 @@ function pmb_ws_parser_notice($value) {
 	return $tresultat;
 }
 
-function pmb_ws_autres_lecteurs($id_notice) {
 
-	$tresultat = Array();
+/**
+ * Retourne la liste des notices
+ * ayant etes empruntees par les autres lecteurs
+ * ayant empruntes la ou les notices en parametres
+ *
+ * @param array identifiant(s) de notice
+ * @return array identifiant(s) de notices en relation
+**/
+function pmb_ws_ids_notices_autres_lecteurs($ids_notice) {
+	if (!is_array($ids_notice)) {
+		$ids_notice = array($ids_notice);
+	}
+
+	$listenotices = Array();
+	
 	pmb_ws_charger_client($ws);
 	
 	try {
 		if ($ws->pmbesOPACGeneric_is_also_borrowed_enabled()) {
-			$r=$ws->pmbesOPACGeneric_also_borrowed($id_notice,0);
-			$listenotices = Array();
-			if (is_array($r)) {
-				foreach ($r as $notice) {
-					$listenotices[] = $notice['notice_id'];
+			
+			foreach ($ids_notice as $id_notice) {
+				$r = $ws->pmbesOPACGeneric_also_borrowed($id_notice, 0);
+				if (is_array($r)) {
+					foreach ($r as $notice) {
+						$listenotices[] = $notice['notice_id'];
+					}
 				}
 			}
-			if (count($listenotices)>0) {
-				pmb_ws_recuperer_tab_notices ($listenotices, $ws, $tresultat);
-			}
+			$listenotices = array_unique($listenotices);
 		}
 	}catch (Exception $e) {
 		echo 'Exception reçue (10) : ',  $e->getMessage(), "\n";
-	} 
-	return $tresultat;
+	}
+	
+	return $listenotices;
 }
+
+
 
 
 function pmb_ws_documents_numeriques ($id_notice, $id_session=0) {
@@ -754,6 +770,8 @@ function pmb_ws_charger_client(&$ws) {
 	} 
 
 }
+
+
 function pmb_ws_liste_tri_recherche() {
 	//retourne un tableau contenant la liste des tris possibles
 	/* Exemple de retour:
@@ -807,7 +825,7 @@ function pmb_tabnotices_extraire ($tabnotices) {
 	if (is_array($tabnotices)) {
 		$listenotices = array_values($tabnotices);
 	}
-	
+
 	pmb_ws_recuperer_tab_notices ($listenotices, $ws, $tableau_resultat);
 	return $tableau_resultat;
 }
