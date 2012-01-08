@@ -10,7 +10,7 @@ Si id_mot n'est pas défini c'est les enfants -éventuels- de tous les mots qui 
 [(#ENV{id_mot}|non)<ul>]
 <BOUCLE_mot_parent_ou_tous(MOTS){id_mot ?}{par num titre}>
 	<B_Liste_mots_enfants>
-[(#ENV{id_mot}|non)<li><a href="#URL_MOT" title="<:momo:plus_d_info_sur{titre=#TITRE}|attribut_html:>">#TITRE</a>]<ul[ id=(#ENV{id})][ class=(#ENV{class})]>
+[(#ENV{id_mot}|!={#ID_MOT}|oui)<li><a href="#URL_MOT" title="<:momo:plus_d_info_sur{titre=#TITRE}|attribut_html:>">#TITRE</a>]<ul[ id=(#ENV{id})][ class=(#ENV{class})]>
 	<BOUCLE_Liste_mots_enfants(MOTS){id_mot_parent = #ID_MOT}{par num titre}>
 		<BOUCLE_Recursion(BOUCLE_Liste_mots_enfants)>
 		</BOUCLE_Recursion>
@@ -19,7 +19,7 @@ Si id_mot n'est pas défini c'est les enfants -éventuels- de tous les mots qui 
 	</li>
 		<//B_Recursion>
 	</BOUCLE_Liste_mots_enfants>
-</ul>[(#ENV{id_mot}|non)</li>]
+</ul>[(#ENV{id_mot}|!={#ID_MOT}|oui)</li>]
 	</B_Liste_mots_enfants>
 </BOUCLE_mot_parent_ou_tous>
 [(#ENV{id_mot}|non)</ul>]

@@ -2,6 +2,9 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //A
+
+	'ajouter_mos_parents' => 'Mots-cl&eacute;s parents (ajouter/retirer)',
+
 //B
 //C
 //D
@@ -22,6 +25,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plus_d_info_sur' => 'Plus d\'informations sur &laquo;&nbsp;@titre@&nbsp;&raquo;',
 //Q
 //R
+
+	'retirer_mots_parents' => 'Retirer les mots-cl&eacute;s d&eacute;cochés',
+
 //S
 //T
 //U

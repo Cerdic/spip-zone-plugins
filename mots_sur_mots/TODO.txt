@@ -2,11 +2,10 @@ TODO list pour Momo (Mots sur Mots)
 
 N'hésitez pas à entammer ces chantiers ! :-)
 
-- rajouts de l'interface d'attribution des mots-clés dans la partie privée
 - rajout d'un critère {est_parent} sur la boucle MOTS pour ne choisir que les mots-clés qui ont des "enfants" (un enfant est un mot-clé auquel est attribué un mot-clé parent) ou qui n'en ont pas {!est_parent}
 - rajout d'un critère {branche} sur la boucle MOTS pour choisir tous les "enfants" d'un mot-clé
 - rajout d'un critère {parents} sur la boucle MOTS pour choisir tous les "parents" d'un mot-clé
 
 et peut-être:
-- rajout d'un type sur les liens entre les mots (pour l'instant le type c'est plutôt "type de"), mais on pourraît immaginer d'autres liens, comme "partie de", "sorte de", "est un", etc.
+- rajout d'un type sur les liens entre les mots (pour l'instant le type c'est plutôt "type de"), mais on pourraît immaginer d'autres liens, comme "partie de", "est un", etc.
 - rajout d'un pondération sur le lien ?

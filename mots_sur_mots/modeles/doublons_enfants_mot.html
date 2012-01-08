@@ -1,0 +1,11 @@
+[(#REM)
+
+Retourne une liste des mots-clés enfants (et leurs enfants récursivement) d'un mot clé passé en paramètre.
+
+]
+	<BOUCLE_Liste_mots_enfants(MOTS){id_mot_parent = #ENV{id_mot}}{doublons}>
+		<BOUCLE_Recursion(BOUCLE_Liste_mots_enfants)>
+		</BOUCLE_Recursion>
+	</BOUCLE_Liste_mots_enfants>
+#DOUBLONS*{mots}
+#FILTRE{trim}

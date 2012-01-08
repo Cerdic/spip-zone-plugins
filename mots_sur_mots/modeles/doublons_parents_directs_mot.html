@@ -1,0 +1,11 @@
+[(#REM)
+
+Retourne une liste des mots-clés parents (directs seulement) d'un mot clé passé en paramètre.
+
+]
+	<BOUCLE_Liste_mots_parents(MOMO){id_mot}>
+		<BOUCLE_Details_mot_parent(MOTS){id_mot=#ID_PARENT}{doublons}>
+		</BOUCLE_Details_mot_parent>
+	</BOUCLE_Liste_mots_parents>
+#DOUBLONS*{mots}
+#FILTRE{trim} 
