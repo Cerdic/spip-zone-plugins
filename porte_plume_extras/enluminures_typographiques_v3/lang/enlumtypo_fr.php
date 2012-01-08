@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cfg_puces' => 'Traitement des puces',
 'cfg_titraille' => 'Titraille',
 'cfg_insertcss' => 'Insertion CSS',
+'configuration_typoenluminee' => 'Enluminures Typographiques',
 
 'tableau_enregistrer' => 'Enregistrer',
 'tableau_prem_ligne' => 'Premi&egrave;re ligne',

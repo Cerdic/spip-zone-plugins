@@ -4,7 +4,7 @@
 	version="3.3.0"
 	etat="stable"
 	compatibilite="[2.0.3;3.0.99]"
-	logo="img_pack/moinecopiste.gif"
+	logo="prive/themes/spip/images/typoenluminee-32.png"
 	documentation="http://www.spip-contrib.net/Enluminures-typographiques-V3-pour-SPIP-2-avec"
 >	
 
@@ -28,6 +28,8 @@
 	<pipeline nom="header_prive" inclure="typoenluminee_pipelines.php" />
 	<pipeline nom="porte_plume_barre_pre_charger" inclure="enluminures_typo_pipelines.php" />
 	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="enluminures_typo_pipelines.php" />
+	
+	<menu nom="configurer_typoenluminee" titre="enlumtypo:configuration_typoenluminee" parent="menu_squelette" icone="images/typoenluminee-16.png" />
 
 	<necessite nom="porte_plume" compatibilite="[1.2.2;[" />
 </paquet>
