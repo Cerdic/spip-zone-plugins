@@ -215,7 +215,6 @@ function inc_pmb_notices_select_dist(&$command) {
 
 	// on peut fournir une liste l'id
 	// ou egalement un critere id=x
-var_dump($command);
 	$ids = array();
 
 	// depuis une liste
@@ -284,4 +283,29 @@ function pmb_recherche_critere($criteres, $cle) {
 	return false;
 }
 
+
+/**
+ * 
+ * Critere d'extraction des nouveautes de PMB
+ * 
+ * (SYNDIC_ARTICLES){pmb_notices}
+ * (SYNDIC_ARTICLES){!pmb_notices}
+ *
+ * Recherche dans les syndications les articles
+ * ce qui concerne des notices PMB...
+ * 
+**/
+function critere_SYNDIC_ARTICLES_pmb_nouveautes($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$prim = $boucle->primary;
+	$table = $boucle->id_table;
+	
+	$c = array("'REGEXP'", "'$table.url'", "sql_quote('notice_display')");
+
+	if ($crit->not) {
+		$c = array("'NOT'", $c);
+	}
+	
+	$boucle->where[] = $c;
+}
 ?>
