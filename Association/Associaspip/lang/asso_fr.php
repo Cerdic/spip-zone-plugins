@@ -86,7 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_recufisc20' => 'Autre organisme (&agrave; pr&eacute;ciser)',
 	'config_aide_recufiscal' => 'sigles :
 	&agrave;-b-n-l = &agrave; but non lucratif ;
-	d-i-p = d\'int&eacute;r&egrave;t g&eacute;n&eacute;ral ;
+	d-i-g = d\'int&eacute;r&egrave;t g&eacute;n&eacute;ral ;
 	d-u-p = d\'utilit&eacute; publique
 	<br />abbr&eacute;viations :
 	asso. = association(s) ;
