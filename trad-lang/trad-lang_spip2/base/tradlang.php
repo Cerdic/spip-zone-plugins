@@ -8,13 +8,13 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function tradlang_declarer_tables_interfaces($interface){
-	
 	$interface['table_des_tables']['tradlang'] = 'tradlang';
 	$interface['table_des_tables']['tradlang_modules'] = 'tradlang_modules';
 	return $interface;
 }
 
 function tradlang_declarer_tables_objets_sql($tables){
+	$tables['spip_auteurs']['field']['langues_preferees'] = "text DEFAULT '' NOT NULL";
 	$tables['spip_tradlang_modules'] = array(
 		'texte_retour' => 'icone_retour',
 		'texte_objet' => 'tradlang:titre_tradlang_module',

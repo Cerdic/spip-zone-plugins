@@ -8,18 +8,30 @@
 			[(#LOGO_AUTEUR|image_reduire{200,200})]
 			<h1 class="h1 #EDIT{qui} fn">#NOM</h1>
 		</div>
-	
+		
 		[<div class="#EDIT{bio} texte bio">(#BIO)</div>]
+		<B_langues_preferees>
+		<p class="langues_preferees">
+			<:tradlang:info_langues_preferees:>
+		<BOUCLE_langues_preferees(POUR){tableau #LANGUES_PREFEREES|?{#LANGUES_PREFEREES,#ARRAY|serialize}|unserialize}{', '}>
+		<abbr title="#VALEUR">[(#VALEUR|traduire_nom_langue)]</abbr>
+		</BOUCLE_langues_preferees>
+		</p>
+		</B_langues_preferees>
 		[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="url spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 	</div>[(#REM) / vcard]
-	<INCLURE{fond=liste/articles-auteur,id_auteur,env,ajax} />
-	[(#SET{titre,[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{<:mesfavoris:mes_favoris:>,<:mesfavoris:ses_favoris:>})]})]
-	<INCLURE{fond=inclure/mesfavoris,id_auteur=#ID_AUTEUR,titre=#GET{titre},ajax}>
-	#SET{url_modif,#URL_PAGE{tradlang_revision}}
-	<INCLURE{fond=prive/objets/liste/versions,objet=tradlang,url_modif=#GET{url_modif},env,ajax,sinon=<:revisions:info_aucune_revision:>} />
+	[(#ENV{vue}|in_array{#ARRAY{0,profil}}|oui)
+		<INCLURE{fond=inclure/auteur_profil,env}>
+	]
+	[(#ENV{vue}|in_array{#ARRAY{0,profil}}|non)
+		<INCLURE{fond=liste/articles-auteur,id_auteur,env,ajax} />
+		[(#SET{titre,[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{<:mesfavoris:mes_favoris:>,<:mesfavoris:ses_favoris:>})]})]
+		<INCLURE{fond=inclure/mesfavoris,id_auteur=#ID_AUTEUR,titre=#GET{titre},ajax}>
+		#SET{url_modif,#URL_PAGE{tradlang_revision}}
+		<INCLURE{fond=prive/objets/liste/versions,objet=tradlang,url_modif=#GET{url_modif},env,ajax,sinon=<:revisions:info_aucune_revision:>} />
+	]
 </div>
-[<div class="notes"><hr />(#NOTES)</div>]
-
+[(#ENV{vue}|in_array{#ARRAY{0,profil}}|non)
 #FORMULAIRE_ECRIRE_AUTEUR
-
+]
 </BOUCLE_content>

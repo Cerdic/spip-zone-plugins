@@ -112,4 +112,52 @@ function tradlang_affiche_milieu($flux){
 	}
 	return $flux;
 }
+
+/**
+ * ajouter un champ langues préférées sur le formulaire CVT editer_auteur
+ *
+ * @param array $flux
+ * @return array
+ */
+function tradlang_editer_contenu_objet($flux){
+	if ($flux['args']['type']=='auteur') {
+		$langue_preferee = recuperer_fond('formulaires/inc-langues_preferees', $flux['args']['contexte']);
+		$flux['data'] = preg_replace('%(<li class=["\'][^"\']*editer_bio(.*?)</li>)%is', "\n".$langue_preferee."\n".'$1', $flux['data']);
+	}
+	return $flux;
+}
+
+/**
+ * Ajouter la valeur langues_preferees dans la liste des champs de la fiche auteur
+ *
+ * @param array $flux
+ */
+function tradlang_formulaire_charger($flux){
+	// si le charger a renvoye false ou une chaine, ne rien faire
+	if (is_array($flux['data'])){
+		if ($flux['args']['form']=='editer_auteur'){
+			$flux['data']['langues_preferees'] = '';
+			if ($id_auteur = intval($flux['data']['id_auteur'])){
+				$flux['data']['langues_preferees'] = sql_getfetsel('langues_preferees','spip_auteurs','id_auteur='.intval($id_auteur));
+			}
+		}
+	}
+	return $flux;
+}
+
+/**
+ * ajouter les langues_preferees soumises lors de la soumission du formulaire CVT editer_auteur
+ * 
+ * @param array $flux
+ * @return array
+ */
+function tradlang_pre_edition($flux){
+	if ($flux['args']['table']=='spip_auteurs') {
+		spip_log(_request('langues_preferees'),'test');
+		if (is_array($langues_preferees = _request('langues_preferees'))) {
+			$flux['data']['langues_preferees'] = serialize($langues_preferees);
+		}
+	}
+	return $flux;
+}
 ?>
