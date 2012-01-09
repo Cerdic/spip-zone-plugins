@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin OpenID
- * Licence GPL (c) 2007-2010 Edouard Lafargue, Mathieu Marcillaud, Cedric Morin, Fil
+ * Licence GPL (c) 2007-2012 Edouard Lafargue, Mathieu Marcillaud, Cedric Morin, Fil
  *
  */
 
@@ -10,8 +10,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS['liste_des_authentifications']['openid'] = 'openid';
 
 /**
- * Pipeline permettant de modifier le tableau des informations pass�e � l'action
- * finale d'authentification apr�s r�cup�ration des informations du provider
+ * Pipeline permettant de modifier le tableau des informations passee a l'action
+ * finale d'authentification apres recuperation des informations du provider
  *
  * cf : inc/openid.php
  */
@@ -19,7 +19,7 @@ $GLOBALS['spip_pipeline']['openid_recuperer_identite'] = '';
 
 /**
  * Pipeline permettant de modifier l'url de redirection de l'action
- * finale d'identification pour y ajouter en param�tre les champs demand�s
+ * finale d'identification pour y ajouter en parametre les champs demandes
  *
  * cf : action/inscrire_openid.php
  */
