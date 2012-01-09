@@ -426,199 +426,68 @@ function pmb_ws_parser_notice($value) {
 		return $resultats[$hash];
 	}
 	
-	$id_notice = $value->id;
-	
-	include_spip("inc/filtres_images");
-	$indice_exemplaire = 0;
-	$tresultat = Array();
-	$authors_700 = array();
-	$authors_701 = array();
-	$authors_702 = array();
-	
-	if (isset($value->f) && is_array($value->f)) {
-		foreach($value->f as $a_field_f) {
-			$field_type = $a_field_f->c;
-			$field_id = $a_field_f->id;
-			
-			if (isset($a_field_f->s) && is_array($a_field_f->s)) {
-				foreach($a_field_f->s as $a_field_s) {
-					$field_subtype = $a_field_s->c;
-					$field_value = $a_field_s->value;
-					
-					switch($field_type) {
-						case '010': {
-							switch($field_subtype) {
-								case 'a': {
-									$tresultat['isbn'] .= $field_value;
-									break;
-								}
-								case 'b': {
-									$tresultat['reliure'] .= $field_value;
-									break;
-								}
-								case 'd': {
-									$tresultat['prix'] .= $field_value;
-									break;
-								}
-							}
-							break;
-						}
-						case '101': {
-							switch($field_subtype) {
-								case 'a': {
-									$tresultat['langues'] .= $field_value;
-									break;
-								}
-							}
-							break;
-						}
-						case '102': {
-							switch($field_subtype) {
-								case 'a': {
-									$tresultat['pays'] .= $field_value;
-									break;
-								}
-							}
-							break;
-						}
-						case '200': {
-							switch($field_subtype) {
-								case 'a': {
-									$tresultat['titre'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$field_value))))));
-									break;
-								}
-								case 'e': {
-									$tresultat['soustitre'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$field_value))))));
-									break;
-								}
-								case 'f': {
-									$tresultat['auteur'] .= $field_value;
-									break;
-								}
-							}
-							break;
-						}
-						case '210': {
-							switch($field_subtype) {
-								case 'c': {
-									$tresultat['editeur'] .= $field_value;
-									break;
-								}
-								case 'a': {
-									$tresultat['editeur'] .= ' ('.$field_value.')';
-									$tresultat['id_editeur'] = $field_id;
-									break;
-								}
-								case 'd': {
-									$tresultat['annee_publication'] .= $field_value;
-									break;
-								}
-							}
-							break;
-						}
-						case '215': {
-							switch($field_subtype) {
-								case 'a': {
-									$tresultat['importance'] .= $field_value;
-									break;
-								}
-								case 'c': {
-									$tresultat['presentation'] .= $field_value;
-									break;
-								}
-								case 'd': {
-									$tresultat['format'] .= $field_value;
-									break;
-								}
-							}
-							break;
-						}
-						case '225': {
-							switch($field_subtype) {
-								case 'a': {
-									$tresultat['collection'] .= $field_value;
-									$tresultat['id_collection'] = $field_id;
-									break;
-								}
-							}
-							break;
-						}
-						case '330': {
-							switch($field_subtype) {
-								case 'a': {
-									$tresultat['resume'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$field_value))))));
-									break;
-								}
-							}
-							break;
-						}
-						case '700': {
-							switch($field_subtype) {
-								case 'a': {
-									$tresultat['id_auteur'] = $field_id;
-									$authors_700[] = "<a href=\"?page=author_see&amp;id=".$field_id."\">".$field_value."</a>";
-									$tresultat['lesauteurs'] .= $field_value;
-									break;
-								}
-								case 'b': {
-									$tresultat['lesauteurs'] = $field_value." ".$tresultat['lesauteurs'];
-									$tresultat['liensauteurs'] .= " ".$field_value;
-									break;
-								}
-							}
-							break;
-						}
-						case '701': {
-							switch($field_subtype) {
-								case 'a': {
-									$tresultat['id_auteur2'] = $field_id;
-									$authors_701[] = "<a href=\"?page=author_see&amp;id=".$field_id."\">".$field_value."</a>";
-									$tresultat['lesauteurs2'] .= $field_value;
-									break;
-								}
-								case 'b': {
-									$tresultat['lesauteurs2'] = $field_value." ".$tresultat['lesauteurs'];
-									$tresultat['liensauteurs2'] .= " ".$field_value;
-									break;
-								}
-							}
-							break;
-						}
-						case '702': {
-							switch($field_subtype) {
-								case 'a': {
-									$tresultat['id_auteur3'] = $field_id;
-									$authors_702[] = "<a href=\"?page=author_see&amp;id=".$field_id."\">".$field_value."</a>";
-									$tresultat['lesauteurs3'] .= $field_value;
-									break;
-								}
-								case 'b': {
-									$tresultat['lesauteurs3'] = $field_value." ".$tresultat['lesauteurs'];
-									$tresultat['liensauteurs3'] .= " ".$field_value;
-									break;
-								}
-							}
-							break;
-						}
-					}
 
+	include_spip('inc/unimarc');
+
+	$tresultat = Array();
+	$id_notice = $value->id;
+
+	if (isset($value->f) && is_array($value->f)) {
+
+		foreach($value->f as $informations) {
+
+			if ($res = pmb_parse_unimarc($informations)) {
+				foreach ($res as $r) {
+					$cle = $r['cle'];
+					
+					// pour chaque variable retournee, on la stocke
+					// dans le tableau de resultat.
+					// il se peut qu'il y ait des traitements a effectuer
+					// tel que merger des champs s'ils existaient deja.
+					
+					if (isset($r['params']) AND isset($r['params']['@post_traitements'])) {
+						$tr = $r['params']['@post_traitements'];
+						
+						// il n'existait aucune valeur avant ?
+						if (!isset($tresultat[$cle]) or !$tresultat[$cle]) {
+							$tresultat[$cle] = $r['valeur'];
+						} else {
+							// inter : equivalent de {', '} en spip
+							// placer_avant : place le resultat avant ou apres l'ancien.
+							$before = isset($tr['placer_avant']) and $tr['placer_avant'];
+							$inter = isset($tr['inter']) ? $tr['inter'] : '';
+							
+							if ($inter) {
+								if ($before) {
+									$tresultat[$cle] = $r['valeur'] . $inter . $tresultat[$cle] ;
+								} else {
+									$tresultat[$cle] .= $inter . $r['valeur'];
+								}
+							}
+						}
+					} else {
+						$tresultat[$cle] = $r['valeur'];
+					}
 				}
 			}
-			
 		}
 	}
-	
-	$tresultat['liensauteurs']  = implode(', ', $authors_700);
-	$tresultat['liensauteurs2'] = implode(', ', $authors_701);
-	$tresultat['liensauteurs3'] = implode(', ', $authors_702);
 
-	if ($tresultat['lesauteurs'] == "") {
+	// si pas d'auteur, on prend le responsable
+	if (!$tresultat['lesauteurs']) {
 		$tresultat['lesauteurs'] = $tresultat['auteur'];
 	}
-	$tresultat['logo_src'] = rtrim(lire_config("spip_pmb/url","http://tence.bibli.fr/opac"),'/')."/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$tresultat['isbn']);
 
-	//si pas de numéro isbn (exemple jouets ludothèque) il n'y aura pas de logo
-	if ($tresultat['isbn'] == '') $tresultat['logo_src'] = '';
+	// si pas de logo, mais isbn, on tente une demande a amazon
+	if (!isset($tresultat['logo_src']) OR !$tresultat['logo_src']) {
+		if (isset($tresultat['isbn']) and $tresultat['isbn']) {
+			// je me demande si un copie local de l'url d'amazon irait pas plus vite directement...
+			$tresultat['logo_src'] =
+				rtrim(lire_config("spip_pmb/url","http://tence.bibli.fr/opac"),'/')
+				 . "/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode="
+				 . str_replace("-","",$tresultat['isbn']);
+		}
+	}
 
 	$tresultat['id'] = $id_notice;
 
@@ -796,7 +665,7 @@ function pmb_webservice() {
 			$ws = new SoapClient(lire_config("spip_pmb/wsdl", "http://tence.bibli.fr/pmbws/PMBWsSOAP_1?wsdl"), array("features" => SOAP_SINGLE_ELEMENT_ARRAYS, 'encoding' => 'iso8859-1'));
 		}
 		else {
-			include_spip('jsonRPCClient');
+			include_spip('inc/jsonRPCClient');
 			$ws = new jsonRPCClient(lire_config("spip_pmb/jsonrpc", ""), false);
 		}
 	}

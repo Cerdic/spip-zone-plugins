@@ -54,8 +54,8 @@
 			<strong>[(#PMB_SESSION|pmb_reserver_ouvrage{#ID,'',''})]</strong>
 		]
 		<ul class="spip">
-			<li><a href="[(#CONFIG{spip_pmb/url}|concat{addtags.php}|parametre_url{noticeid,#ID})]" class="lien-modal"><:pmb:ajouter_tag:></a></li>
-			<li><a href="[(#CONFIG{spip_pmb/url}|concat{avis.php}|parametre_url{todo,liste}|parametre_url{noticeid,#ID})]" class="lien-modal"><:pmb:donner_avis:></a></li>
+			<li><a href="[(#CONFIG{spip_pmb/url}|concat{addtags.php}|parametre_url{noticeid,#ID})]" class="mediabox"><:pmb:ajouter_tag:></a></li>
+			<li><a href="[(#CONFIG{spip_pmb/url}|concat{avis.php}|parametre_url{todo,liste}|parametre_url{noticeid,#ID})]" class="mediabox"><:pmb:donner_avis:></a></li>
 			<li><a href="[(#URL_NOTICE|parametre_url{reserver,1})]#compte-lecteur"><:pmb:reserver_ouvrage:></a></li>
 		</ul>
 		]
