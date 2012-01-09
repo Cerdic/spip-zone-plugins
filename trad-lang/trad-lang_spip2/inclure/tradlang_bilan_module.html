@@ -4,7 +4,7 @@
 <p><a href="[(#SELF|parametre_url{id_tradlang_module,''})]"><:tradlang:lien_trier_langue_non:></a></p>
 
 #SET{langues,#ARRAY}
-<BOUCLE_langues_sort(TRADLANG){fusion lang}>
+<BOUCLE_langues_sort(TRADLANG){fusion lang}{langues_preferees}>
 <BOUCLE_strings_ok(TRADLANG){lang=#LANG}{statut = 'OK'}> </BOUCLE_strings_ok>
 #SET{langues,#GET{langues}|array_merge{#ARRAY{#LANG,#COMPTEUR_BOUCLE}}}
 </B_strings_ok>

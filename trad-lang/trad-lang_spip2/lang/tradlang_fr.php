@@ -62,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_chaine_originale' => 'Cette chaîne est la chaine originale',
 	'info_filtrer_status' => 'Filtrer par statut :',
 	'info_langue_mere' => '(langue mère)',
+	'info_langues_non_preferees' => 'Autres langues :',
 	'info_langues_preferees' => 'Langue(s) préférée(s) :',
 	'info_module_traduction' => '@total@ @statut@ (@percent@%)',
 	'info_module_traduit_pc' => 'Module traduit à @pc@%',

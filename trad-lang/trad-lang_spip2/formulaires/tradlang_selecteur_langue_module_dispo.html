@@ -1,10 +1,21 @@
-<B_module_langue_dispo>
+<BOUCLE_module_langue_dispo_sur(TRADLANG tradlang_modules){module?}{id_tradlang_module?}{lang != #ENV{lang_exclue}}{fusion lang}{par lang}{0,1}>
 	<select name="#ENV{name,langues}" id="#ENV{name,langues}">
 		[(#ENV{option_vide}|oui)
 			<option value="">--</option>]
-	<BOUCLE_module_langue_dispo(TRADLANG tradlang_modules){module?}{id_tradlang_module?}{fusion lang}{par lang}>
-		[(#LANG|=={#ENV{lang_exclue}}|non)
-			<option value="#LANG"[(#LANG|=={#ENV{#ENV{name,langues}}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)][(#LANG|=={#LANG_MERE}|oui)<:tradlang:info_langue_mere:>]</option>]
+	<B_module_langue_dispo_pref>
+	<optgroup label="<:tradlang:info_langues_preferees|attribut_html:>">
+	<BOUCLE_module_langue_dispo_pref(TRADLANG tradlang_modules){langues_preferees}{module?}{id_tradlang_module?}{lang != #ENV{lang_exclue}}{fusion lang}{par lang}>
+		<option value="#LANG"[(#LANG|=={#ENV{#ENV{name,langues}}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)][(#LANG|=={#LANG_MERE}|oui)<:tradlang:info_langue_mere:>]</option>
+	</BOUCLE_module_langue_dispo_pref>
+	[(#SET{optgroup,'oui'})]
+	</optgroup>
+	</B_module_langue_dispo_pref>
+	<B_module_langue_dispo>
+	[(#GET{optgroup}|=={oui})<optgroup label="<:tradlang:info_langues_non_preferees|attribut_html:>">]
+	<BOUCLE_module_langue_dispo(TRADLANG tradlang_modules){!langues_preferees}{module?}{id_tradlang_module?}{lang != #ENV{lang_exclue}}{fusion lang}{par lang}>
+		<option value="#LANG"[(#LANG|=={#ENV{#ENV{name,langues}}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)][(#LANG|=={#LANG_MERE}|oui)<:tradlang:info_langue_mere:>]</option>
 	</BOUCLE_module_langue_dispo>
+	[(#GET{optgroup}|=={oui})</optgroup>]
+	</B_module_langue_dispo>
 	</select>
-</B_module_langue_dispo>
+</BOUCLE_module_langue_dispo_sur>

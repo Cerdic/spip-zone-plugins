@@ -170,6 +170,40 @@ function boucle_TRADLANG_dist($id_boucle, &$boucles) {
 }
 
 /**
+ * Le critère des langues préférées {langues_preferees}...
+ * 
+ * {langues_preferees} : Sur une table avec le champ lang retourne uniquement les résultats dans les 
+ * langues préférées des utilisateurs, si aucune langue préférée, ne retourne rien
+ * {!langues_preferees} : Sur une table avec le champ lang retourne uniquement les résultats dans les 
+ * langues non préférées des utilisateurs, si aucune langue préférée, renverra tout
+ * 
+ * Le critère est sessionné ... Le résultat des boucles l'utilisant est donc modifié en fonction de la session utilisateur
+ */
+function critere_langues_preferees_dist($idb,&$boucles,$crit){
+	$boucle = &$boucles[$idb];
+    $id_table = $boucle->id_table;
+	$not = ($crit->not ? '' : 'NOT');
+	$primary = 'lang';
+	$c = "sql_in('".$id_table.'.'.$primary."', prepare_langues_preferees(".$boucle->serveur.")".($not=='NOT' ? "" : ",'NOT'").")";
+	$boucle->where[] = $c;
+	$boucles[$idb]->descr['session'] = true;
+}
+
+function prepare_langues_preferees($serveur='') {
+	include_spip('inc/lang_liste');
+	if(isset($GLOBALS['visiteur_session']['id_auteur']) && $GLOBALS['visiteur_session']['id_auteur'] > 1){
+		$langues_preferees = sql_getfetsel('langues_preferees','spip_auteurs','id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']));
+		if($langues_preferees && count(unserialize($langues_preferees)) > 0)
+			$langues_array = unserialize($langues_preferees);
+		else
+			$langues_array = array_keys($GLOBALS['codes_langues']);
+	}else{
+		$langues_array = array_keys($GLOBALS['codes_langues']);
+	}
+	spip_log($langues_array,'test');
+	return $langues_array;
+}
+/**
  * Critère permettant de sélection les langues complêtement traduites d'un module 
  * soit dans l'environnement soit passé en paramètre
  * {langue_complete} ou {langue_complete #ID_TRADLANG_MODULE}

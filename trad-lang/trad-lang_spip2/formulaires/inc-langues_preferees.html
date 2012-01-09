@@ -4,7 +4,7 @@
 <B_langues>
 <li class="editer editer_langues_preferees">
 	<label for="langues_preferees">[(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:tradlang:label_langues_preferees_auteur:>,<:tradlang:label_langues_preferees_autre:>})]</label>
-	<select multiple="multiple" name="langues_preferees[]" id="langues_preferees">
+	<select multiple="multiple" name="langues_preferees[]" id="langues_preferees" size="12">
 	<BOUCLE_langues(POUR){tableau #GET{langues}}>
 	<option value="#VALEUR"[(#VALEUR|in_array{#GET{langues_preferees}}|oui)selected="selected"]>[(#VALEUR|traduire_nom_langue)]</option>
 	</BOUCLE_langues>

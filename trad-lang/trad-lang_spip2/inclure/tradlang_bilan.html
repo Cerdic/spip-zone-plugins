@@ -1,6 +1,6 @@
 #SET{langues,#ARRAY}
 #SET{langues_vides,#ARRAY}
-<BOUCLE_langues_sort(TRADLANG){fusion lang}>
+<BOUCLE_langues_sort(TRADLANG){fusion lang}{langues_preferees}>
 <BOUCLE_strings_ok(TRADLANG){lang=#LANG}{statut=OK}> </BOUCLE_strings_ok>
 [(#TOTAL_BOUCLE|>{2}|oui)
 #SET{langues,#GET{langues}|array_merge{#ARRAY{#LANG,#TOTAL_BOUCLE}}}]
