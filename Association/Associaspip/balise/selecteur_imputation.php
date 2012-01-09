@@ -28,7 +28,7 @@ function balise_SELECTEUR_IMPUTATION_dyn($id_compte, $type_operation, $imputatio
 		$res .= ",$imputation";
 	}
 	$intro = '<select name="imputation" id="imputation" class="formo">
-<option value="0">-- ' . _T('choisir_un_code') . '</option>';
+<option value="0">-- ' . _T('choisir_ref_compte') . '</option>';
 	$res .= ");\n//--><!]]>\n</script><noscript>\n$intro";
 	foreach ($GLOBALS['association_metas'] as $key => $val) {
 		if (substr($key, 0, 6) === "classe") {

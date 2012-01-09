@@ -4,396 +4,425 @@
     <form name="formulaire_#FORM" method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-			<ul>
-				<li class="fieldset">
-					<!-- Informations sur l'association -->
-					<fieldset>
-						<h3 class="legend"><:asso:config_info_asso:></h3>
-						<ul>
-							<li class="obligatoire"> <!-- il faut au moins le nom de l'association !!!! -->
-								#SET{erreurs,#ENV**{erreurs}|table_valeur{nom}}
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
-								<label for="nom"><strong><:asso:config_libelle_nom:></strong></label>
-								<input type="text" name="nom" [value="(#ENV{nom})"] id="nom" class='formo'/>
-							</li>
-							<li>
-								<label for="rue"><strong><:asso:config_libelle_rue:></strong></label>
-								<textarea name="rue" id="rue" rows="3" cols="80" class='formo'>[(#ENV{rue})]</textarea>
-							</li>
-							<li>
-								<label for="cp"><strong><:asso:config_libelle_codepostal:></strong></label>
-								<input type="text" name="cp" [value="(#ENV{cp})"] id="cp"  class='formo'/>
-							</li>
-							<li>
-								<label for="ville"><strong><:asso:config_libelle_ville:></strong></label>
-								<input type="text" name="ville" [value="(#ENV{ville})"] id="ville"  class='formo'/>
-							</li>
-							<li>
-								<label for="email"><strong><:asso:config_libelle_email:></strong></label>
-								<input type="text" name="email" [value="(#ENV{email})"] id="email"  class='formo'/>
-							</li>
-							<li>
-								<label for="telephone"><strong><:asso:config_libelle_telephone:></strong></label>
-								<input type="text" name="telephone" [value="(#ENV{telephone})"] id="telephone"  class='formo'/>
-							</li>
-							<li>
-								<label for="objet"><strong><:asso:config_libelle_objet:></strong></label>
-								<textarea name="objet" id="objet" rows="3" cols="80" class='formo'>[(#ENV{objet})]</textarea>
-							</li>
-							<li>
-								<label for="declaration"><strong><:asso:config_libelle_declaration:></strong></label>
-								<input type="text" name="declaration" [value="(#ENV{declaration})"] id="declaration"  class='formo'/>
-							</li>
-							<li>
-								<label for="prefet"><strong><:asso:config_libelle_prefet:></strong></label>
-								<input type="text" name="prefet" [value="(#ENV{prefet})"] id="prefet"  class='formo'/>
-							</li>
-						<BOUCLE_metas_utilisateur(ASSOCIATION_METAS){nom LIKE meta_utilisateur_%}{par nom}>
-							<li>
-								<label for="#NOM"><strong>[(#NOM|replace{meta_utilisateur}|_T)]</strong></label>
-								<input type="text" name="#NOM" [value="(#VALEUR)"] id="#NOM"  class='formo'/>
-							</li>
-						</BOUCLE_metas_utilisateur>
-						</ul>
-					</fieldset>
-				</li>
-				<li class="fieldset">
-					<!-- Options de recus fiscaux globaux -->
-					<fieldset>
-						<h3 class="legend"><:asso:config_info_recufiscal:></h3>
-						<ul>
-							<li>
-								<label for="recufiscal"><strong><:asso:config_libelle_recufiscal:></strong></label>
-								<select name="recufiscal" id="recufiscal"  class='formo'/>
-									<option value="0"[(#ENV{recufiscal}|=={0}|oui) selected="selected"]><:asso:config_libelle_recufisc0:></option>
-									<option value="1"[(#ENV{recufiscal}|=={1}|oui) selected="selected"]><:asso:config_libelle_recufisc1:></option>
-									<option value="2"[(#ENV{recufiscal}|=={2}|oui) selected="selected"]><:asso:config_libelle_recufisc2:></option>
-									<option value="3"[(#ENV{recufiscal}|=={3}|oui) selected="selected"]><:asso:config_libelle_recufisc3:></option>
-									<option value="4"[(#ENV{recufiscal}|=={4}|oui) selected="selected"]><:asso:config_libelle_recufisc4:></option>
-									<option value="5"[(#ENV{recufiscal}|=={5}|oui) selected="selected"]><:asso:config_libelle_recufisc5:></option>
-									<option value="6"[(#ENV{recufiscal}|=={6}|oui) selected="selected"]><:asso:config_libelle_recufisc6:></option>
-									<option value="7"[(#ENV{recufiscal}|=={7}|oui) selected="selected"]><:asso:config_libelle_recufisc7:></option>
-									<option value="8"[(#ENV{recufiscal}|=={8}|oui) selected="selected"]><:asso:config_libelle_recufisc8:></option>
-									<option value="9"[(#ENV{recufiscal}|=={9}|oui) selected="selected"]><:asso:config_libelle_recufisc9:></option>
-									<option value="10"[(#ENV{recufiscal}|=={10}|oui) selected="selected"]><:asso:config_libelle_recufisc10:></option>
-									<option value="11"[(#ENV{recufiscal}|=={11}|oui) selected="selected"]><:asso:config_libelle_recufisc11:></option>
-									<option value="12"[(#ENV{recufiscal}|=={12}|oui) selected="selected"]><:asso:config_libelle_recufisc12:></option>
-									<option value="13"[(#ENV{recufiscal}|=={13}|oui) selected="selected"]><:asso:config_libelle_recufisc13:></option>
-									<option value="14"[(#ENV{recufiscal}|=={14}|oui) selected="selected"]><:asso:config_libelle_recufisc14:></option>
-									<option value="15"[(#ENV{recufiscal}|=={15}|oui) selected="selected"]><:asso:config_libelle_recufisc15:></option>
-									<option value="16"[(#ENV{recufiscal}|=={16}|oui) selected="selected"]><:asso:config_libelle_recufisc16:></option>
-									<option value="17"[(#ENV{recufiscal}|=={17}|oui) selected="selected"]><:asso:config_libelle_recufisc17:></option>
-									<option value="18"[(#ENV{recufiscal}|=={18}|oui) selected="selected"]><:asso:config_libelle_recufisc18:></option>
-									<option value="19"[(#ENV{recufiscal}|=={19}|oui) selected="selected"]><:asso:config_libelle_recufisc19:></option>
-									<option value="20"[(#ENV{recufiscal}|=={20}|oui) selected="selected"]><:asso:config_libelle_recufisc20:></option>
-								</select>
-							</li>
-							<li>
-								<label for="objet"><strong><:asso:config_libelle_infofiscal:></strong></label>
-								<input type="text" name="infofiscal" [value="(#ENV{objet})"] id="objet" class='formo' />
-							</li>
-							<li>
-								<label for="tauxfiscal"><strong><:asso:config_libelle_tauxfiscal:></strong></label>
-								<input type="text" name="tauxfiscal" [value="(#ENV{tauxfiscal}|sinon{100})"] id="tauxfiscal" class='formo'/>
-							</li>
-							<li>
-								<label for="cgi200"><strong><:asso:config_libelle_cgi200:></strong></label>
-								<input type="checkbox" name="cgi200" [(#ENV{cgi200}|oui) checked="checked"] id="cgi200" class='formo'/>
-							</li>
-							<li>
-								<label for="cgi238"><strong><:asso:config_libelle_cgi238:></strong></label>
-								<input type="checkbox" name="cgi238" [(#ENV{cgi238}|oui) checked="checked"] id="cgi238" class='formo'/>
-							</li>
-							<li>
-								<label for="cgi885"><strong><:asso:config_libelle_cgi885:></strong></label>
-								<input type="checkbox" name="cgi885" [(#ENV{cgi885}|oui) checked="checked"] id="cgi885" class='formo'/>
-							</li>
-						</ul>
-					</fieldset>
-				</li>
-				<li class="fieldset">
-					<!-- Options de gestion des membres -->
-					<fieldset>
-						<h3 class="legend"><:asso:config_info_membres:></h3>
-						<ul>
-							<li>
-								<label><strong><:asso:config_libelle_gerer_champs_membres:></strong></label>
-								<div class="choix">
-									<input type="checkbox" name="civilite" [(#ENV{civilite}|=={on}|?{checked="checked"})] id="civilite" />
-										   <label for="civilite"><strong><:asso:adherent_libelle_sexe:></strong></label><br/>
-								</div>
-								<div class="choix">
-									<input type="checkbox" name="prenom" [(#ENV{prenom}|=={on}|?{checked="checked"})] id="prenom" />
-										   <label for="prenom"><strong><:asso:adherent_libelle_prenom:></strong></label><br/>
-								</div>
-								<div class="choix">
-									<input type="checkbox" name="id_asso" [(#ENV{id_asso}|=={on}|?{checked="checked"})] id="id_asso" />
-										   <label for="id_asso"><strong><:asso:config_libelle_utiliser_champ_id_asso:></strong></label>
-								</div>
-							</li>
-
-							<li>
-								<div class="choix">
-									<input type="checkbox" name="aff_id_auteur" [(#ENV{aff_id_auteur}|=={on}|?{checked="checked"})] id="aff_id_auteur" />
-										   <label for="aff_id_auteur"><strong><:asso:adherent_libelle_id_auteur:></strong></label><br/>
-								</div>
-								<div class="choix">
-									<input type="checkbox" name="aff_photo" [(#ENV{aff_photo}|=={on}|?{checked="checked"})] id="aff_photo" />
-										   <label for="aff_photo"><strong><:asso:adherent_libelle_photo:></strong></label><br/>
-								</div>
-								<label><strong><:asso:config_libelle_affichage_champs_page_membres:></strong></label>
-								[(#ENV{civilite}|=={on}|oui)
-								<div class="choix">
-									<input type="checkbox" name="aff_civilite" [(#ENV{aff_civilite}|=={on}|?{checked="checked"})] id="aff_civilite" />
-										   <label for="aff_civilite"><strong><:asso:adherent_libelle_sexe:></strong></label><br/>
-								</div>
-								]
-								[(#ENV{prenom}|=={on}|oui)
-								<div class="choix">
-									<input type="checkbox" name="aff_prenom" [(#ENV{aff_prenom}|=={on}|?{checked="checked"})] id="aff_prenom" />
-										   <label for="aff_prenom"><strong><:asso:adherent_libelle_prenom:></strong></label><br/>
-								</div>
-								]
-								[(#ENV{id_asso}|=={on}|oui)
-								<div class="choix">
-									<input type="checkbox" name="aff_id_asso" [(#ENV{aff_id_asso}|=={on}|?{checked="checked"})] id="aff_id_asso" />
-										   <label for="aff_id_asso"><strong><:asso:config_libelle_utiliser_champ_id_asso:></strong></label>
-								</div>
-								]
-								<div class="choix">
-									<input type="checkbox" name="aff_groupes" [(#ENV{aff_groupes}|=={on}|?{checked="checked"})] id="aff_groupes" />
-										   <label for="aff_groupes"><strong><:asso:adherent_libelle_groupes:></strong></label><br/>
-								</div>
-								<div class="choix">
-									<input type="checkbox" name="aff_categorie" [(#ENV{aff_categorie}|=={on}|?{checked="checked"})] id="aff_categorie" />
-										   <label for="aff_categorie"><strong><:asso:adherent_libelle_categorie:></strong></label><br/>
-								</div>
-								<div class="choix">
-									<input type="checkbox" name="aff_validite" [(#ENV{aff_validite}|=={on}|?{checked="checked"})] id="aff_validite" />
-										   <label for="aff_validite"><strong><:asso:adherent_libelle_validite:></strong></label><br/>
-								</div>
-							</li>
-
-							<li>
-								<label><strong><:asso:config_libelle_import_nom_auteur:></strong> </label>
-								<select name="import_nom_auteur" id="import_nom_auteur">
-									<option value=""><:asso:import_nom_auteur_nom_prenom:></option> <!-- c'est l'option par defaut, elle n'a donc pas de valeur et est donc selectionne meme si on n'a pas touche a ce reglage -->
-									<option value="prenom_nom" [(#ENV{import_nom_auteur}|=={prenom_nom}|?{selected="selected"})]><:asso:import_nom_auteur_prenom_nom:></option>
-									<option value="nom" [(#ENV{import_nom_auteur}|=={nom}|?{selected="selected"})]><:asso:import_nom_auteur_nom:></option>
-								</select>
-							</li>
-							<B_categories>
-							<li>
-								<label><strong><:asso:config_libelle_categorie_par_defaut:></strong></label>
-								<select name="categorie_par_defaut" id="categorie_par_defaut">
-									<option value=""><:asso:aucune_categorie_par_defaut:></option>
-									<BOUCLE_categories(ASSO_CATEGORIES){par valeur}>
-										<option value="#ID_CATEGORIE" [(#ENV{categorie_par_defaut}|=={#ID_CATEGORIE}|?{selected="selected"})]>#VALEUR</option>
-									</BOUCLE_categories>
-								</select>
-							</li>
-							</B_categories>
-						</ul>
-					</fieldset>
-				</li>
-
-				<li class="fieldset">
-					<!-- Options du plugin: gestion comptable -->
-					<fieldset>
-						<h3 class="legend"><:asso:config_libelle_comptes:></h3>
-			#SET{erreurs,#ENV**{erreurs}|table_valeur{comptes}}
-						<ul>
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
-								<li>
-									<div class="choix">
-										<input type="checkbox" name="plan_comptable_prerenseigne" [(#ENV{plan_comptable_prerenseigne}|=={on}|?{checked="checked"})] id="plan_comptable_prerenseigne" />
-										<label for="plan_comptable_prerenseigne"><strong><:asso:config_plan_comptable_prerenseigne:></strong></label>
-									</div>
-								</li>
-								<li>
-								<div class="choix">
-									<input type="checkbox" name="destinations" [(#ENV{destinations}|=={on}|?{checked="checked"})] id="destinations" />
-									   <label for="destinations"><strong><:asso:config_libelle_destinations:></strong></label>
-								</div>
-							</li>
-								<li>
-								<B_classe_banques>
-									<div class="choix">
-										<input name= "comptes" [(#ENV{comptes}|=={on}|?{checked="checked"})] id="comptes" type="checkbox"/>
-											   <label for="comptes"><strong><:asso:config_libelle_activer_comptes:></strong></label>
-									</div>
-								</li>
-								<li>
-					<label><strong><:asso:config_libelle_classe_banques:></strong> </label>
-					<select name="classe_banques" id="classe_banques" >
-				<BOUCLE_classe_banques(ASSO_PLAN){fusion classe}{par classe}>
-					<option value="#CLASSE" [(#ENV{classe_banques}|=={#CLASSE}|?{selected="selected"})]>#CLASSE </option>
-								</BOUCLE_classe_banques>
-					</select>
-					</li>
-
-					#SET{erreurs,#ENV**{erreurs}|table_valeur{classe_charges}}
-					[<span class='erreur_message'>(#GET{erreurs})</span>]
-					<li>
-					<label><strong><:asso:config_libelle_classe_charges:></strong> </label>
-					<select name="classe_charges" id="classe_charges" >
-				<BOUCLE_classe_charges(ASSO_PLAN){fusion classe}{par classe}>
-					<option value="#CLASSE" [(#ENV{classe_charges}|=={#CLASSE}|?{selected="selected"})]>#CLASSE </option>
-								</BOUCLE_classe_charges>
-					</select>
-					</li>
-
-					#SET{erreurs,#ENV**{erreurs}|table_valeur{classe_produits}}
-					[<span class='erreur_message'>(#GET{erreurs})</span>]
-					<li>
-					<label><strong><:asso:config_libelle_classe_produits:></strong> </label>
-					<select name="classe_produits" id="classe_produits" >
-				<BOUCLE_classe_produits(ASSO_PLAN){fusion classe}{par classe}>
-					<option value="#CLASSE" [(#ENV{classe_produits}|=={#CLASSE}|?{selected="selected"})]>#CLASSE </option>
-								</BOUCLE_classe_produits>
-					</select>
-					</li>
-
-					#SET{erreurs,#ENV**{erreurs}|table_valeur{classe_contributions_volontaires}}
-					[<span class='erreur_message'>(#GET{erreurs})</span>]
-					<li>
-					<label><strong><:asso:config_libelle_classe_contributions_volontaires:></strong> </label>
-					<select name="classe_contributions_volontaires" id="classe_contributions_volontaires" >
-				<BOUCLE_classe_contributions_volontaires(ASSO_PLAN){fusion classe}{par classe}>
-					<option value="#CLASSE" [(#ENV{classe_contributions_volontaires}|=={#CLASSE}|?{selected="selected"})]>#CLASSE </option>
-								</BOUCLE_classe_contributions_volontaires>
-					</select>
-					</li>
-
-							</ul>
+		<ul>
+			<li class="fieldset">
+				<!-- Informations sur l'association -->
+				<fieldset>
+					<h3 class="legend"><:asso:config_info_asso:></h3>
+					<ul>
+						<li class="obligatoire"> <!-- il faut au moins le nom de l'association !!!! -->
+							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{nom})</span>]
+							<label for="nom"><strong><:asso:config_libelle_nom:></strong></label>
+							<input type="text" name="nom" [value="(#ENV{nom})"] id="nom" class="formo" />
+						</li>
+						<li>
+							<label for="rue"><strong><:asso:config_libelle_rue:></strong></label>
+							<textarea name="rue" id="rue" rows="3" cols="80" class="formo">[(#ENV{rue})]</textarea>
+						</li>
+						<li>
+							<label for="cp"><strong><:asso:config_libelle_codepostal:></strong></label>
+							<input type="text" name="cp" [value="(#ENV{cp})"] id="cp" class="formo" />
+						</li>
+						<li>
+							<label for="ville"><strong><:asso:config_libelle_ville:></strong></label>
+							<input type="text" name="ville" [value="(#ENV{ville})"] id="ville" class="formo" />
+						</li>
+						<li>
+							<label for="email"><strong><:asso:config_libelle_email:></strong></label>
+							<input type="text" name="email" [value="(#ENV{email})"] id="email" class="formo" />
+						</li>
+						<li>
+							<label for="telephone"><strong><:asso:config_libelle_telephone:></strong></label>
+							<input type="text" name="telephone" [value="(#ENV{telephone})"] id="telephone" class="formo" />
+						</li>
+						<li>
+							<label for="objet"><strong><:asso:config_libelle_objet:></strong></label>
+							<textarea name="objet" id="objet" rows="3" cols="80" class="formo">[(#ENV{objet})]</textarea>
+						</li>
+						<li>
+							<label for="declaration"><strong><:asso:config_libelle_declaration:></strong></label>
+							<input type="text" name="declaration" [value="(#ENV{declaration})"] id="declaration" class="formo" />
+						</li>
+						<li>
+							<label for="prefet"><strong><:asso:config_libelle_prefet:></strong></label>
+							<input type="text" name="prefet" [value="(#ENV{prefet})"] id="prefet" class="formo" />
+						</li>
+					<BOUCLE_metas_utilisateur(ASSOCIATION_METAS){nom LIKE meta_utilisateur_%}{par nom}>
+						<li>
+							<label for="#NOM"><strong>[(#NOM|replace{meta_utilisateur}|_T)]</strong></label>
+							<input type="text" name="#NOM" [value="(#VALEUR)"] id="#NOM" class="formo" />
+						</li>
+					</BOUCLE_metas_utilisateur>
+					</ul>
 				</fieldset>
 			</li>
+			<li class="fieldset">
+				<!-- Options de recus fiscaux globaux -->
+				<fieldset>
+					<h3 class="legend"><:asso:config_info_recufiscal:></h3>
+					<ul>
+						<li>
+							<label for="recufiscal"><strong><:asso:config_libelle_recufiscal:></strong></label>
+							<select name="recufiscal" id="recufiscal" class="formo" />
+								<option value="0"[(#ENV{recufiscal}|=={0}|oui) selected="selected"]><:asso:config_libelle_recufisc0:></option>
+								<option value="1"[(#ENV{recufiscal}|=={1}|oui) selected="selected"]><:asso:config_libelle_recufisc1:></option>
+								<option value="2"[(#ENV{recufiscal}|=={2}|oui) selected="selected"]><:asso:config_libelle_recufisc2:></option>
+								<option value="3"[(#ENV{recufiscal}|=={3}|oui) selected="selected"]><:asso:config_libelle_recufisc3:></option>
+								<option value="4"[(#ENV{recufiscal}|=={4}|oui) selected="selected"]><:asso:config_libelle_recufisc4:></option>
+								<option value="5"[(#ENV{recufiscal}|=={5}|oui) selected="selected"]><:asso:config_libelle_recufisc5:></option>
+								<option value="6"[(#ENV{recufiscal}|=={6}|oui) selected="selected"]><:asso:config_libelle_recufisc6:></option>
+								<option value="7"[(#ENV{recufiscal}|=={7}|oui) selected="selected"]><:asso:config_libelle_recufisc7:></option>
+								<option value="8"[(#ENV{recufiscal}|=={8}|oui) selected="selected"]><:asso:config_libelle_recufisc8:></option>
+								<option value="9"[(#ENV{recufiscal}|=={9}|oui) selected="selected"]><:asso:config_libelle_recufisc9:></option>
+								<option value="10"[(#ENV{recufiscal}|=={10}|oui) selected="selected"]><:asso:config_libelle_recufisc10:></option>
+								<option value="11"[(#ENV{recufiscal}|=={11}|oui) selected="selected"]><:asso:config_libelle_recufisc11:></option>
+								<option value="12"[(#ENV{recufiscal}|=={12}|oui) selected="selected"]><:asso:config_libelle_recufisc12:></option>
+								<option value="13"[(#ENV{recufiscal}|=={13}|oui) selected="selected"]><:asso:config_libelle_recufisc13:></option>
+								<option value="14"[(#ENV{recufiscal}|=={14}|oui) selected="selected"]><:asso:config_libelle_recufisc14:></option>
+								<option value="15"[(#ENV{recufiscal}|=={15}|oui) selected="selected"]><:asso:config_libelle_recufisc15:></option>
+								<option value="16"[(#ENV{recufiscal}|=={16}|oui) selected="selected"]><:asso:config_libelle_recufisc16:></option>
+								<option value="17"[(#ENV{recufiscal}|=={17}|oui) selected="selected"]><:asso:config_libelle_recufisc17:></option>
+								<option value="18"[(#ENV{recufiscal}|=={18}|oui) selected="selected"]><:asso:config_libelle_recufisc18:></option>
+								<option value="19"[(#ENV{recufiscal}|=={19}|oui) selected="selected"]><:asso:config_libelle_recufisc19:></option>
+								<option value="20"[(#ENV{recufiscal}|=={20}|oui) selected="selected"]><:asso:config_libelle_recufisc20:></option>
+							</select>
+						</li>
+						<li>
+							<label for="infofiscal"><strong><:asso:config_libelle_infofiscal:></strong></label>
+							<input type="text" name="infofiscal" [value="(#ENV{infofiscal})"] id="infofiscal" class="formo" />
+						</li>
+						<li>
+							<label for="tauxfiscal"><strong><:asso:config_libelle_tauxfiscal:></strong></label>
+							<input type="text" name="tauxfiscal" [value="(#ENV{tauxfiscal}|sinon{100})"] id="tauxfiscal" class="formo" />
+						</li>
+						<li>
+							<label><strong><:asso:config_libelle_codefiscal:></strong></label>
+							<div class="choix">
+								<input type="checkbox" name="cgi200" [(#ENV{cgi200}|oui) checked="checked"] id="cgi200" />
+								<label for="cgi200"><strong><:asso:config_libelle_cgi200:></strong></label>
+								<br />
+								<input type="checkbox" name="cgi238" [(#ENV{cgi238}|oui) checked="checked"] id="cgi238" />
+								<label for="cgi238"><strong><:asso:config_libelle_cgi238:></strong></label>
+								<br />
+								<input type="checkbox" name="cgi885" [(#ENV{cgi885}|oui) checked="checked"] id="cgi885" />
+								<label for="cgi885"><strong><:asso:config_libelle_cgi885:></strong></label>
+							</div>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset">
+				<!-- Options de gestion des membres -->
+				<fieldset>
+					<h3 class="legend"><:asso:config_info_membres:></h3>
+					<ul>
+						<li>
+							<label><strong><:asso:config_libelle_gerer_champs_membres:></strong></label>
+							<div class="choix">
+								<input type="checkbox" name="civilite" [(#ENV{civilite}|=={on}|?{checked="checked"})] id="civilite" />
+								<label for="civilite"><strong><:asso:adherent_libelle_sexe:></strong></label>
+								<br />
+								<input type="checkbox" name="prenom" [(#ENV{prenom}|=={on}|?{checked="checked"})] id="prenom" />
+								<label for="prenom"><strong><:asso:adherent_libelle_prenom:></strong></label>
+								<br />
+								<input type="checkbox" name="id_asso" [(#ENV{id_asso}|=={on}|?{checked="checked"})] id="id_asso" />
+								<label for="id_asso"><strong><:asso:config_libelle_utiliser_champ_id_asso:></strong></label>
+							</div>
+						</li>
+						<li>
+							<div class="choix">
+								<input type="checkbox" name="aff_id_auteur" [(#ENV{aff_id_auteur}|=={on}|?{checked="checked"})] id="aff_id_auteur" />
+								<label for="aff_id_auteur"><strong><:asso:adherent_libelle_id_auteur:></strong></label>
+								<br />
+								<input type="checkbox" name="aff_photo" [(#ENV{aff_photo}|=={on}|?{checked="checked"})] id="aff_photo" />
+								<label for="aff_photo"><strong><:asso:adherent_libelle_photo:></strong></label>
+							</div>
+							<label><strong><:asso:config_libelle_affichage_champs_page_membres:></strong></label>
+							<div class="choix">
+						[(#ENV{civilite}|=={on}|oui)
+								<input type="checkbox" name="aff_civilite" [(#ENV{aff_civilite}|=={on}|?{checked="checked"})] id="aff_civilite" />
+								<label for="aff_civilite"><strong><:asso:adherent_libelle_sexe:></strong></label>
+								<br />
+						]
+						[(#ENV{prenom}|=={on}|oui)
+								<input type="checkbox" name="aff_prenom" [(#ENV{aff_prenom}|=={on}|?{checked="checked"})] id="aff_prenom" />
+								<label for="aff_prenom"><strong><:asso:adherent_libelle_prenom:></strong></label>
+								<br />
+						]
+						[(#ENV{id_asso}|=={on}|oui)
+								<input type="checkbox" name="aff_id_asso" [(#ENV{aff_id_asso}|=={on}|?{checked="checked"})] id="aff_id_asso" />
+								<label for="aff_id_asso"><strong><:asso:config_libelle_utiliser_champ_id_asso:></strong></label>
+								<br />
+						]
+								<input type="checkbox" name="aff_groupes" [(#ENV{aff_groupes}|=={on}|?{checked="checked"})] id="aff_groupes" />
+								<label for="aff_groupes"><strong><:asso:adherent_libelle_groupes:></strong></label>
+								<br />
+								<input type="checkbox" name="aff_categorie" [(#ENV{aff_categorie}|=={on}|?{checked="checked"})] id="aff_categorie" />
+								<label for="aff_categorie"><strong><:asso:adherent_libelle_categorie:></strong></label>
+								<br />
+								<input type="checkbox" name="aff_validite" [(#ENV{aff_validite}|=={on}|?{checked="checked"})] id="aff_validite" />
+								<label for="aff_validite"><strong><:asso:adherent_libelle_validite:></strong></label>
+							</div>
+						</li>
+						<li>
+							<label for="import_nom_auteur"><strong><:asso:config_libelle_import_nom_auteur:></strong></label>
+							<select name="import_nom_auteur" id="import_nom_auteur">
+								<option value=""><:asso:import_nom_auteur_nom_prenom:></option> <!-- c'est l'option par defaut, elle n'a donc pas de valeur et est donc selectionne meme si on n'a pas touche a ce reglage -->
+								<option value="prenom_nom" [(#ENV{import_nom_auteur}|=={prenom_nom}|?{selected="selected"})]><:asso:import_nom_auteur_prenom_nom:></option>
+								<option value="nom" [(#ENV{import_nom_auteur}|=={nom}|?{selected="selected"})]><:asso:import_nom_auteur_nom:></option>
+							</select>
+						</li>
+						<li>
+					<B_categories>
+							<label for="categorie_par_defaut"><strong><:asso:config_libelle_categorie_par_defaut:></strong></label>
+							<select name="categorie_par_defaut" id="categorie_par_defaut">
+								<option value=""><:asso:aucune_categorie_par_defaut:></option>
+					<BOUCLE_categories(ASSO_CATEGORIES){par valeur}>
+								<option value="#ID_CATEGORIE" [(#ENV{categorie_par_defaut}|=={#ID_CATEGORIE}|?{selected="selected"})]>#VALEUR</option>
+					</BOUCLE_categories>
+							</select>
+					</B_categories>
+							<a class="spip_form_erreur" href="#URL_ECRIRE{categories}"><:asso:erreur_pas_de_categorie:></a>
+					<//B_categories>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset">
+				<!-- Options du plugin: gestion comptable -->
+				<fieldset>
+					<h3 class="legend"><:asso:config_libelle_comptes:></h3>
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{comptes})</span>]
+					<ul>
+						<li>
+							<div class="choix">
+								<input type="checkbox" name="plan_comptable_prerenseigne" [(#ENV{plan_comptable_prerenseigne}|=={on}|?{checked="checked"})] id="plan_comptable_prerenseigne" />
+								<label for="plan_comptable_prerenseigne"><strong><:asso:config_plan_comptable_prerenseigne:></strong></label>
+							</div>
+						</li>
+					<B_classe_banques>
+						<li>
+							<div class="choix">
+								<input name= "comptes" [(#ENV{comptes}|=={on}|?{checked="checked"})] id="comptes" type="checkbox"/>
+								<label for="comptes"><strong><:asso:config_libelle_activer_comptes:></strong></label>
+							</div>
+						</li>
+						<li>
+							<div class="choix">
+								<input type="checkbox" name="destinations" [(#ENV{destinations}|=={on}|?{checked="checked"})] id="destinations" />
+								<label for="destinations"><strong><:asso:config_libelle_destinations:></strong></label>
+							</div>
+						</li>
+						<li>
+							<label for="classe_banques"><strong><:asso:config_libelle_classe_banques:></strong></label>
+							<select name="classe_banques" id="classe_banques">
+								<option value=""><:asso:choisir_classe_compte:></option>
+					<BOUCLE_classe_banques(ASSO_PLAN){fusion classe}{par classe}>
+								<option value="#CLASSE" [(#ENV{classe_banques}|=={#CLASSE}|?{selected="selected"})]>#CLASSE [: (#VAL{classe_#CLASSE}|_T)]</option>
+					</BOUCLE_classe_banques>
+							</select>
+						</li>
+						<li>
+							<label for="pc_intravirements"><strong><:asso:config_libelle_virements_internes:></strong></label>
 
+							<select name="pc_intravirements" id="pc_intravirements">
+								<option value="[(#ENV{classe_banques}|sinon{5})81]"><:asso:choisir_ref_compte:></option>
+						<BOUCLE_classeSelect_virements(ASSO_PLAN){active=0}{fusion classe}{par classe}>
+								<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
+							<BOUCLE_pc_virements(ASSO_PLAN){classe}{active}{par code}>
+									<option value="#CODE" [(#ENV{pc_intravirements}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE</option>
+							</BOUCLE_pc_virements>
+								</optgroup>
+						</BOUCLE_classeSelect_virements>
+							</select>
+						</li>
+						<li>
+							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{classe_charges})</span>]
+							<label for="classe_charges"><strong><:asso:config_libelle_classe_charges:></strong></label>
+							<select name="classe_charges" id="classe_charges">
+								<option value=""><:asso:choisir_classe_compte:></option>
+						<BOUCLE_classe_charges(ASSO_PLAN){fusion classe}{par classe}>
+								<option value="#CLASSE" [(#ENV{classe_charges}|=={#CLASSE}|?{selected="selected"})]>#CLASSE [: (#VAL{classe_#CLASSE}|_T)]</option>
+						</BOUCLE_classe_charges>
+							</select>
+						</li>
+						<li>
+							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{classe_produits})</span>]
+							<label for="classe_produits"><strong><:asso:config_libelle_classe_produits:></strong></label>
+							<select name="classe_produits" id="classe_produits">
+								<option value=""><:asso:choisir_classe_compte:></option>
+						<BOUCLE_classe_produits(ASSO_PLAN){fusion classe}{par classe}>
+								<option value="#CLASSE" [(#ENV{classe_produits}|=={#CLASSE}|?{selected="selected"})]>#CLASSE [: (#VAL{classe_#CLASSE}|_T)]</option>
+						</BOUCLE_classe_produits>
+							</select>
+						</li>
+						<li>
+							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{classe_contributions_volontaires})</span>]
+							<label for="classe_contributions_volontaires"><strong><:asso:config_libelle_classe_contributions_volontaires:></strong></label>
+							<select name="classe_contributions_volontaires" id="classe_contributions_volontaires">
+								<option value=""><:asso:choisir_classe_compte:></option>
+						<BOUCLE_classe_contributions_volontaires(ASSO_PLAN){fusion classe}{par classe}>
+								<option value="#CLASSE" [(#ENV{classe_contributions_volontaires}|=={#CLASSE}|?{selected="selected"})]>#CLASSE [: (#VAL{classe_#CLASSE}|_T)]</option>
+						</BOUCLE_classe_contributions_volontaires>
+							</select>
+						</li>
+					</B_classe_banques>
+						<li>
+							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_pour_activer_ce_module:></a>
+							<input type="hidden" name="comptes" id="comptes" value="" /> [(#REM)<!-- pour etre bien sur de desactiver la gestion comptable -->]
+						</li>
+					<//B_classe_banques>
+					</ul>
+				</fieldset>
+			</li>
 			<li class="fieldset">
 				<!-- Options du plugin: gestion des cotisations -->
 				<fieldset>
 					<h3 class="legend"><:asso:config_libelle_cotisations:></h3>
 					<ul>
+					<B_classeSelect_cotisations>
 						<li>
-				#SET{erreurs,#ENV**{erreurs}|table_valeur{pc_cotisations}}
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
-							<label><strong><:asso:config_libelle_num_pc:></strong> </label>
-								<B_pc_cotisations>
-								<select name="pc_cotisations" id="pc_cotisations">
-								<BOUCLE_pc_cotisations(ASSO_PLAN){par classe}{par code}>
-									<option value="#CODE" [(#ENV{pc_cotisations}|=={#CODE}|?{selected="selected"})]>#CLASSE - #CODE - #INTITULE</option>
-								</BOUCLE_pc_cotisations>
-								</select>
-								</B_pc_cotisations>
-							</li>
+							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{pc_cotisations})</span>]
+							<label for="pc_cotisations"><strong><:asso:config_libelle_num_pc:></strong></label>
+							<select name="pc_cotisations" id="pc_cotisations">
+								<option value=""><:asso:choisir_ref_compte:></option>
+					<BOUCLE_classeSelect_cotisations(ASSO_PLAN){active=1}{fusion classe}{par classe}>
+								<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
+						<BOUCLE_pc_cotisations(ASSO_PLAN){classe}{active}{par code}>
+									<option value="#CODE" [(#ENV{pc_cotisations}|=={#CODE}|oui)selected="selected"]>#CODE - #INTITULE</option>
+						</BOUCLE_pc_cotisations>
+								</optgroup>
+					</BOUCLE_classeSelect_cotisations>
+							</select>
+						</li>
 						<li>
-							<label><strong><:asso:config_libelle_num_dc:></strong> </label>
+							<label for="dc_cotisations"><strong><:asso:config_libelle_num_dc:></strong></label>
 						<B_dc_cotisations>
 							<select name="dc_cotisations" id="dc_cotisations">
-								<BOUCLE_dc_cotisations(ASSO_DESTINATION){par intitule}>
-									<option value="#ID_DESTINATION" [(#ENV{dc_cotisations}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
-								</BOUCLE_dc_cotisations>
+								<option value=""><:asso:choisir_dest_compte:></option>
+						<BOUCLE_dc_cotisations(ASSO_DESTINATION){par intitule}>
+								<option value="#ID_DESTINATION" [(#ENV{dc_cotisations}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
+						</BOUCLE_dc_cotisations>
 							</select>
 						</B_dc_cotisations>
-						<span class="spip_form_erreur"><:asso:erreur_pas_de_destination:></span>
+							<span class="spip_form_erreur"><:asso:erreur_pas_de_destination:></span>
 						<//B_dc_cotisations>
-						</B_classe_banques>
-						<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_pour_activer_ce_module:></a>
-						<input type="hidden" name="comptes" id="comptes" value="" /> <!-- pour etre bien sur de desactiver la gestion comptable -->
-						<//B_classe_banques>
 						</li>
+					</B_classeSelect_cotisations>
+						<li>
+							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_pas_de_compte:></a>
+						</li>
+					<//B_classeSelect_cotisations>
 					</ul>
 				</fieldset>
 			</li>
-
 			<li class="fieldset">
 				<!-- Options du plugin: gestion des dons et colis -->
 				<fieldset>
 					<h3 class="legend"><:asso:config_libelle_dons:></h3>
-			#SET{erreurs,#ENV**{erreurs}|table_valeur{dons}}
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{dons})</span>]
 					<ul>
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<B_classeSelect_dons>
 						<li>
-						<B_pc_dons>
 							<div class="choix">
+								[<span class="erreur_message">(#ENV{comptes}|!={on}|oui)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
 								<input type="checkbox" name="dons" [(#ENV{dons}|=={on}|?{checked="checked"})] id="dons" />
-									   <label for="dons"><strong><:asso:config_libelle_activer_dons:></strong> </label>
+								<label for="dons"><strong><:asso:config_libelle_activer_dons:></strong></label>
 							</div>
-							</li>
-							<li>
-								<label><strong><:asso:config_libelle_num_pc:></strong> </label>
-								<select name="pc_dons" id="pc_dons" >
-									<BOUCLE_pc_dons(ASSO_PLAN){par classe}{par code}>
-										<option value="#CODE" [(#ENV{pc_dons}|=={#CODE}|?{selected="selected"})]>#CLASSE - #CODE - #INTITULE</option>
-									</BOUCLE_pc_dons>
-								</select>
-							</li>
-							<li>
-								<label><strong><:asso:config_libelle_num_dc:></strong> </label>
-							<B_dc_dons>
-								<select name="dc_dons" id="dc_dons">
-									<BOUCLE_dc_dons(ASSO_DESTINATION){par intitule}>
-										<option value="#ID_DESTINATION" [(#ENV{dc_dons}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
-									</BOUCLE_dc_dons>
-								</select>
-							</B_dc_dons>
-							<span class="spip_form_erreur">Aucune destination comptable définie !</span>
-							<//B_dc_dons>
-						</B_pc_dons>
-						<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
-						<//B_pc_dons>
 						</li>
+						<li>
+							<label for="pc_dons"><strong><:asso:config_libelle_num_pc:></strong></label>
+							<select name="pc_dons" id="pc_dons">
+								<option value=""><:asso:choisir_ref_compte:></option>
+					<BOUCLE_classeSelect_dons(ASSO_PLAN){active=1}{fusion classe}{par classe}>
+								<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
+						<BOUCLE_pc_dons(ASSO_PLAN){classe}{active}{par code}>
+									<option value="#CODE" [(#ENV{pc_dons}|=={#CODE}|oui)selected="selected"]>#CODE - #INTITULE</option>
+						</BOUCLE_pc_dons>
+								</optgroup>
+					</BOUCLE_classeSelect_dons>
+							</select>
+						</li>
+						<li>
+							<label for="dc_dons"><strong><:asso:config_libelle_num_dc:></strong></label>
+						<B_dc_dons>
+							<select name="dc_dons" id="dc_dons">
+								<option value=""><:asso:choisir_dest_compte:></option>
+						<BOUCLE_dc_dons(ASSO_DESTINATION){par intitule}>
+								<option value="#ID_DESTINATION" [(#ENV{dc_dons}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
+						</BOUCLE_dc_dons>
+							</select>
+						</B_dc_dons>
+							<span class="spip_form_erreur"><:asso:erreur_pas_de_destination:></span>
+						<//B_dc_dons>
+						</li>
+					</B_classeSelect_dons>
+						<li>
+							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
+						</li>
+					<//B_classeSelect_dons>
 					</ul>
 				</fieldset>
 			</li>
-
 			<li class="fieldset">
 				<!-- Options du plugin: gestion des ventes -->
 				<fieldset>
 					<h3 class="legend"><:asso:config_libelle_ventes:></h3>
-			#SET{erreurs,#ENV**{erreurs}|table_valeur{ventes}}
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{ventes})</span>]
 					<ul>
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<B_classeSelect_ventes>
 						<li>
-						<B_pc_ventes>
 							<div class="choix">
-								 <input type="checkbox" name="ventes" [(#ENV{ventes}|=={on}|?{checked="checked"})] id="ventes" />
-								   <label for="ventes"><strong><:asso:config_libelle_activer_ventes:></strong> </label>
+								[<span class="erreur_message">(#ENV{comptes}|!={on}|oui)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
+								<input type="checkbox" name="ventes" [(#ENV{ventes}|=={on}|?{checked="checked"})] id="ventes" />
+								<label for="ventes"><strong><:asso:config_libelle_activer_ventes:></strong></label>
 							</div>
-							</li>
-							<li>
-								<label><strong><:asso:config_libelle_num_pc:></strong> </label>
-								<select name="pc_ventes" id="pc_ventes">
-									<BOUCLE_pc_ventes(ASSO_PLAN){par classe}{par code}>
-										<option value="#CODE" [(#ENV{pc_ventes}|=={#CODE}|?{selected="selected"})]>#CLASSE - #CODE - #INTITULE</option>
-									</BOUCLE_pc_ventes>
-								</select>
-							</li>
-							<li>
-					#SET{erreurs,#ENV**{erreurs}|table_valeur{frais_envoi}}
-					[<span class='erreur_message'>(#GET{erreurs})</span>]
-								<label><strong><:asso:config_libelle_num_pc:>&nbsp;<:asso:config_libelle_frais_envoi:></strong> </label>
-							<B_pc_frais_envoi>
-								<select name="pc_frais_envoi" id="pc_frais_envoi">
-									<BOUCLE_pc_frais_envoi(ASSO_PLAN){par classe}{par code}>
-										<option value="#CODE" [(#ENV{pc_frais_envoi}|=={#CODE}|?{selected="selected"})]>#CLASSE - #CODE - #INTITULE</option>
-									</BOUCLE_pc_frais_envoi>
-								</select>
-							</B_pc_frais_envoi>
-							</li>
-							<li>
-								<label><strong><:asso:config_libelle_num_dc:></strong> </label>
-							<B_dc_ventes>
-								<select name="dc_ventes" id="dc_ventes">
-									<BOUCLE_dc_ventes(ASSO_DESTINATION){par intitule}>
-										<option value="#ID_DESTINATION" [(#ENV{dc_ventes}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
-									</BOUCLE_dc_ventes>
-								</select>
-							</B_dc_ventes>
-						</B_pc_ventes>
-						<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
-						<//B_pc_ventes>
 						</li>
+						<li>
+							<label for="pc_ventes"><strong><:asso:config_libelle_num_pc:></strong></label>
+							<select name="pc_ventes" id="pc_ventes">
+								<option value=""><:asso:choisir_ref_compte:></option>
+					<BOUCLE_classeSelect_ventes(ASSO_PLAN){active=1}{fusion classe}{par classe}>
+								<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
+						<BOUCLE_pc_ventes(ASSO_PLAN){classe}{active}{par code}>
+								<option value="#CODE" [(#ENV{pc_ventes}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE</option>
+						</BOUCLE_pc_ventes>
+								</optgroup>
+					</BOUCLE_classeSelect_ventes>
+							</select>
+						</li>
+						<li>
+							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{frais_envoi})</span>]
+							<label for="pc_frais_envoi"><strong><!--<:asso:config_libelle_num_pc:>&nbsp;--><:asso:config_libelle_frais_envoi:></strong></label>
+							<select name="pc_frais_envoi" id="pc_frais_envoi">
+								<option value=""><:asso:choisir_ref_compte:></option>
+						<BOUCLE_classeSelect_frais(ASSO_PLAN){active=1}{fusion classe}{par classe}>
+								<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
+							<BOUCLE_pc_frais_envoi(ASSO_PLAN){classe}{active}{par code}>
+									<option value="#CODE" [(#ENV{pc_frais_envoi}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE</option>
+							</BOUCLE_pc_frais_envoi>
+								</optgroup>
+						</BOUCLE_classeSelect_frais>
+							</select>
+						</li>
+						<li>
+							<label for="dc_ventes"><strong><:asso:config_libelle_num_dc:></strong></label>
+						<B_dc_ventes>
+							<select name="dc_ventes" id="dc_ventes">
+								<option value=""><:asso:choisir_dest_compte:></option>
+						<BOUCLE_dc_ventes(ASSO_DESTINATION){par intitule}>
+								<option value="#ID_DESTINATION" [(#ENV{dc_ventes}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
+						</BOUCLE_dc_ventes>
+							</select>
+						</B_dc_ventes>
+							<span class="spip_form_erreur"><:asso:erreur_pas_de_destination:></span>
+						<//B_dc_ventes>
+						</li>
+					</B_classeSelect_ventes>
+						<li>
+							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
+						</li>
+					<//B_classeSelect_ventes>
 					</ul>
 				</fieldset>
 			</li>
@@ -401,27 +430,54 @@
 				<!-- Options du plugin: gestion des activites -->
 				<fieldset>
 					<h3 class="legend"><:asso:config_libelle_activites:></h3>
-			#SET{erreurs,#ENV**{erreurs}|table_valeur{activites}}
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{activites})</span>]
 					<ul>
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<B_classeSelect_activites>
 						<li>
-						<B_pc_activites>
+						[(#PLUGIN{agenda}|?{
 							<div class="choix">
+								[<span class="erreur_message">(#ENV{comptes}|!={on}|oui)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
 								<input type="checkbox" name="activites" [(#ENV{activites}|=={on}|?{checked="checked"})] id="activites" />
-									   <label for="activites"><strong><:asso:config_libelle_activer_activites:></strong></label> <br />
+								<label for="activites"><strong><:asso:config_libelle_activer_activites:></strong></label>
 							</div>
-							</li>
-							<li>
-								<label><strong><:asso:config_libelle_num_pc:></strong> </label>
-								<select name="pc_activites" id="pc_activites">
-									<BOUCLE_pc_activites(ASSO_PLAN){par classe}{par code}>
-										<option value="#CODE" [(#ENV{pc_activites}|=={#CODE}|?{selected="selected"})]>#CLASSE - #CODE - #INTITULE</option>
-									</BOUCLE_pc_activites>
-								</select>
-						</B_pc_activites>
-						<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
-						<//B_pc_activites>
+						,
+							<span class="erreur_message"><:asso:installer_et_activer_le_plugin_Agenda2_pour_activer_ce_module:></span>
+							<input type="hidden" name="activites" value="" />
+						})]
 						</li>
+						<li>
+							<label for="pc_activites"><strong><:asso:config_libelle_num_pc:></strong></label>
+							<select name="pc_activites" id="pc_activites">
+								<option value=""><:asso:choisir_ref_compte:></option>
+					<BOUCLE_classeSelect_activites(ASSO_PLAN){active=1}{fusion classe}{par classe}>
+								<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
+						<BOUCLE_pc_activites(ASSO_PLAN){classe}{active}{par code}>
+								<option value="#CODE" [(#ENV{pc_activites}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE</option>
+						</BOUCLE_pc_activites>
+								</optgroup>
+					</BOUCLE_classeSelect_activites>
+							</select>
+						</li>
+						<!--
+						<li>
+							<label for="dc_activites"><strong><:asso:config_libelle_num_dc:></strong></label>
+						<B_dc_activites>
+							<select name="dc_activites" id="dc_activites">
+								<option value=""><:asso:choisir_dest_compte:></option>
+						<BOUCLE_dc_activites(ASSO_DESTINATION){par intitule}>
+								<option value="#ID_DESTINATION" [(#ENV{dc_activites}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
+						</BOUCLE_dc_activites>
+							</select>
+						</B_dc_activites>
+							<span class="spip_form_erreur"><:asso:erreur_pas_de_destination:></span>
+						<//B_dc_activites>
+						</li>
+						-->
+					</B_classeSelect_activites>
+						<li>
+							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
+						</li>
+					<//B_classeSelect_activites>
 					</ul>
 				</fieldset>
 			</li>
@@ -429,27 +485,49 @@
 				<!-- Options du plugin: gestion des prets -->
 				<fieldset>
 					<h3 class="legend"><:asso:config_libelle_prets:></h3>
-			#SET{erreurs,#ENV**{erreurs}|table_valeur{prets}}
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{prets})</span>]
 					<ul>
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<B_classeSelect_prets>
 						<li>
-						<B_pc_prets>
 							<div class="choix">
+								[<span class="erreur_message">(#ENV{comptes}|!={on}|oui)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
 								<input type="checkbox" name="prets" [(#ENV{prets}|=={on}|?{checked="checked"})] id="prets" />
-									   <label for="prets"><strong><:asso:config_libelle_activer_prets:></strong> </label><br />
+								<label for="prets"><strong><:asso:config_libelle_activer_prets:></strong></label><br />
 							</div>
-							</li>
-							<li>
-								<label><strong><:asso:config_libelle_num_pc:></strong> </label>
-								<select name="pc_prets" id="pc_prets">
-									<BOUCLE_pc_prets(ASSO_PLAN){par classe}{par code}>
-										<option value="#CODE" [(#ENV{pc_prets}|=={#CODE}|?{selected="selected"})]>#CLASSE - #CODE - #INTITULE</option>
-									</BOUCLE_pc_prets>
-								</select>
-						</B_pc_prets>
-						<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
-						<//B_pc_prets>
 						</li>
+						<li>
+							<label for="pc-prets"><strong><:asso:config_libelle_num_pc:></strong></label>
+							<select name="pc_prets" id="pc_prets">
+								<option value=""><:asso:choisir_ref_compte:></option>
+					<BOUCLE_classeSelect_prets(ASSO_PLAN){active=1}{fusion classe}{par classe}>
+								<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
+						<BOUCLE_pc_prets(ASSO_PLAN){classe}{active}{par code}>
+								<option value="#CODE" [(#ENV{pc_prets}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE</option>
+						</BOUCLE_pc_prets>
+								</optgroup>
+					</BOUCLE_classeSelect_prets>
+							</select>
+						</li>
+						<!--
+						<li>
+							<label for="dc_prets"><strong><:asso:config_libelle_num_dc:></strong></label>
+						<B_dc_prets>
+							<select name="dc_prets" id="dc_prets">
+								<option value=""><:asso:choisir_dest_compte:></option>
+						<BOUCLE_dc_prets(ASSO_DESTINATION){par intitule}>
+								<option value="#ID_DESTINATION" [(#ENV{dc_activites}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
+						</BOUCLE_dc_prets>
+							</select>
+						</B_dc_prets>
+							<span class="spip_form_erreur"><:asso:erreur_pas_de_destination:></span>
+						<//B_dc_prets>
+						</li>
+						-->
+					</B_classeSelect_prets>
+						<li>
+							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
+						</li>
+					<//B_classeSelect_prets>
 					</ul>
 				</fieldset>
 			</li>
@@ -458,5 +536,5 @@
 		<p class="boutons"><input type="submit" value="<:pass_ok:>" class="submit" /></p>
 
 	</div>
-</form>
+	</form>
 </div>
