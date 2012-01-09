@@ -227,16 +227,18 @@
 						<li>
 							<label for="pc_intravirements"><strong><:asso:config_libelle_virements_internes:></strong></label>
 
+						<B_pc_virements>
 							<select name="pc_intravirements" id="pc_intravirements">
 								<option value="[(#ENV{classe_banques}|sinon{5})81]"><:asso:choisir_ref_compte:></option>
-						<BOUCLE_classeSelect_virements(ASSO_PLAN){active=0}{fusion classe}{par classe}>
-								<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
-							<BOUCLE_pc_virements(ASSO_PLAN){classe}{active}{par code}>
+								<optgroup label="#ENV{classe_banques} [: (#VAL{classe_#ENV{classe_banques}}|_T)]">
+						<BOUCLE_pc_virements(ASSO_PLAN){classe=#ENV{classe_banques}}{par code}>
 									<option value="#CODE" [(#ENV{pc_intravirements}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE</option>
-							</BOUCLE_pc_virements>
+						</BOUCLE_pc_virements>
 								</optgroup>
-						</BOUCLE_classeSelect_virements>
 							</select>
+						</B_pc_virements>
+							<span class="erreur_message"><:asso:enregistrer_d_abord_une_classe_banque:></span>
+						<//B_pc_virements>
 						</li>
 						<li>
 							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{classe_charges})</span>]

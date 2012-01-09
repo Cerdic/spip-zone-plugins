@@ -308,18 +308,18 @@ function association_creer_compte_virement_interne() {
 	$res = association_liste_plan_comptable($GLOBALS['association_metas']['classe_banques']);
 	/* existe-t-il le compte 58x */
 	foreach($res as $code => $libelle) {
-		if (substr($code,0,2)=='58') {
+		if (substr($code,0,2)==substr($GLOBALS['association_metas']['pc_intravirements'],0,2) {
 			/* j'ai trouve un code qui commence par 58 */
 			$trouve = TRUE;
 		}
 	}
 	/* j'ai rien trouve, je cree le compte 581 et je retourne */
 	if(!$trouve) {
-		$code = '581';
+		$code = $GLOBALS['association_metas']['classe_banques'].'81';
 		$id_plan = sql_insertq('spip_asso_plan', array(
 			'code' => $code,
 			'intitule' => _T('asso:virement_interne'),
-			'classe' => '5',
+			'classe' => $GLOBALS['association_metas']['classe_banques'],
 			'type_op' => 'multi',
 			'solde_anterieur' => '0',
 			'date_anterieure' => date('Y-m-d'),

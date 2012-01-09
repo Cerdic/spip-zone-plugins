@@ -8,8 +8,8 @@
 	</div>
 </label>
 <B_mode_paiement>
-	<select name="journal" id="journal" class="formo" > 
-<BOUCLE_mode_paiement(ASSO_PLAN){par code}{active=1}{classe=#ENV{classe_banques}}{code!=581}>
+	<select name="journal" id="journal" class="formo" >
+<BOUCLE_mode_paiement(ASSO_PLAN){par code}{active=1}{classe=#ENV{classe_banques}}{code!=#META{/association/pc_intravirements}}>
 	<option value="#CODE" [(#ENV{journal}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE</option>
 </BOUCLE_mode_paiement>
 	</select>

@@ -34,7 +34,7 @@ function balise_SELECTEUR_IMPUTATION_dyn($id_compte, $type_operation, $imputatio
 		if (substr($key, 0, 6) === "classe") {
 			$tableau = association_liste_plan_comptable($val,1);
 			foreach ($tableau as $k => $v) {
-				if($k!=581) { // code virement interne
+				if($k!=$GLOBALS['association_metas']['pc_intravirements']) { // code virement interne
 					$res .= "\n<option value='$k'" . (($k==$imputation)?' selected="selected"':'') . ">$k - $v</option>";
 				}
 			}
