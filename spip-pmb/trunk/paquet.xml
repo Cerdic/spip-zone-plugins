@@ -21,5 +21,6 @@
 	<pipeline nom="declarer_tables_principales" inclure="base/pmb.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/pmb.php" />
 
-	<utilise nom="Zpip" compatibilite="[1.2.0;[" />
+	<utilise nom="Zpip" compatibilite="[1.2.0;]" />
+	<utilise nom="inclureajaxload" compatibilite="[1.1.0;]" />
 </paquet>

@@ -31,32 +31,19 @@
 </div>
 <br class="nettoyeur" />
 
-<div id="docnum-ajax" class="ajax-content">
-	<a href="[(#URL_PAGE{ajax-docnum}|parametre_url{id,#ID})]" class="invisible"><:titre_documents_joints:></a>
-</div>
-<div id="disponibilite-ajax" class="ajax-content">
-	<img src="#CHEMIN{img/ajaxLoader.gif}" class="ajax-loader" alt="<:pmb:chargement:>" width="43" height="43" />
-	<a href="[(#URL_PAGE{ajax-notice-dispo}|parametre_url{id,#ID}|parametre_url{titre_notice,[(#TITRE|urlencode)]})]" class="invisible"><:pmb:exemplaires:></a>
-</div>
-<div id="autreslecteurs-ajax" class="ajax-content">
-	<a href="[(#URL_PAGE{ajax-autreslecteurs}|parametre_url{id,#ID})]" class="invisible"><:pmb:autres_lecteurs:></a>
-</div>
 
-<script type="text/javascript">
-$(document).ready(function() {
 [(#ENV{afficher_docnum}|=={non}|non)
-	$('#docnum-ajax').load("[(#URL_PAGE{ajax-docnum})]", { 'id': '#ID' });
+	[(#INCLURE{fond=inclure/inc-docnum,env,id,ajax,ajaxload})]
 ]
 
 [(#ENV{afficher_dispo}|=={non}|non)
-	$('#disponibilite-ajax').load("[(#URL_PAGE{ajax-notice-dispo})]", { 'id': '#ID', 'titre_notice' : "[(#TITRE|urlencode)]" }, function (responseText, textStatus, XMLHttpRequest) { $(this).find('.ajax-loader').remove();});
+	[(#INCLURE{fond=inclure/inc-notice-dispo,env,id,titre_notice=#TITRE,ajax,ajaxload})]
 ]
 
-[(#ENV{afficher_autres}|=={non}|non)
-	$('#autreslecteurs-ajax').load("[(#URL_PAGE{ajax-autreslecteurs})]", { 'id': '#ID' });
+[(#ENV{afficher_dispo}|=={non}|non)
+	[(#INCLURE{fond=inclure/inc-autreslecteurs,env,id,ajax,ajaxload})]
 ]
-});
-</script>
+
 
 <div class="pmb-toolbox" id="compte-lecteur">
 <h2><:pmb:compte_lecteur:></h2>
