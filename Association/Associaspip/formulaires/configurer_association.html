@@ -86,10 +86,12 @@
 								<option value="19"[(#ENV{recufiscal}|=={19}|oui) selected="selected"]><:asso:config_libelle_recufisc19:></option>
 								<option value="20"[(#ENV{recufiscal}|=={20}|oui) selected="selected"]><:asso:config_libelle_recufisc20:></option>
 							</select>
+							<em class="explication"><:asso:config_aide_recufiscal:></em>
 						</li>
 						<li>
 							<label for="infofiscal"><strong><:asso:config_libelle_infofiscal:></strong></label>
 							<input type="text" name="infofiscal" [value="(#ENV{infofiscal})"] id="infofiscal" class="formo" />
+							<em class="explication"><:asso:config_aide_infofiscal:></em>
 						</li>
 						<li>
 							<label for="tauxfiscal"><strong><:asso:config_libelle_tauxfiscal:></strong></label>
