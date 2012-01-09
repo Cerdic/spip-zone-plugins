@@ -156,6 +156,8 @@ function tradlang_pre_edition($flux){
 		spip_log(_request('langues_preferees'),'test');
 		if (is_array($langues_preferees = _request('langues_preferees'))) {
 			$flux['data']['langues_preferees'] = serialize($langues_preferees);
+		}else{
+			$flux['data']['langues_preferees'] = serialize(array());
 		}
 	}
 	return $flux;
