@@ -29,4 +29,5 @@
 
 	<necessite nom="spip_bonux" compatibilite="[1.8.10;]" />
 	<utilise nom="Z" />
+	<utilise nom="Zpip" />
 </paquet>
