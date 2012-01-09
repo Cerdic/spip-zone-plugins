@@ -7,7 +7,7 @@
 		</multi>
 	</slogan>
 	<auteur>Fil, Gael Chareyre</auteur>
-	<version>0.6.6</version>
+	<version>0.6.7</version>
 	<version_base>0.2</version_base>
 	<etat>dev</etat>
 	<licence>&#169; 2009-2011 GNU/GPL</licence>
@@ -40,7 +40,7 @@ Pour un fonctionnement optimal, il faut installer des programmes compl&#233;ment
 	</prefix>
 	<fonctions>fulltext_fonctions.php</fonctions>
 	<icon>fulltext.png</icon>
-	<install>base/fulltext.php</install>
+	<install>base/fulltext_install.php</install>
 	<chemin dir='' />
 	<onglet id="fulltext" parent="configuration">
 		<icone>fulltext-22.png</icone>
