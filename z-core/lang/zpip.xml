@@ -6,7 +6,12 @@
 	</langue>
 	<langue code="es" />
 	<langue code="fr" />
-	<langue code="nl" />
+	<langue code="nl">
+		<traducteur nom="mpossoz" lien="http://trad.spip.org/auteur/mpossoz" />
+	</langue>
 	<langue code="pt" />
+	<langue code="sk">
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	</langue>
 	<langue code="sv" />
 </traduction>

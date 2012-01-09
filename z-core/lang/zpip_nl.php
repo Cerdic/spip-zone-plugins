@@ -8,8 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accueil' => 'Accueil', # NEW
-	'adapte_de' => 'adapté de', # MODIF
+	'accueil' => 'Welkom',
+	'adapte_de' => 'aangepast van',
 
 	// C
 	'commentaire' => 'reactie',
@@ -17,24 +17,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'conception_graphique_par' => 'Ontwerp (c)',
 
 	// D
-	'date_forum' => 'Le @date@ à @heure@', # MODIF
+	'date_forum' => 'De @date@ om @heure@',
 
 	// L
 	'lire_la_suite' => 'Lees meer',
 	'lire_la_suite_de' => ' over ',
 
 	// P
-	'pagination_next' => 'Suivant »', # MODIF
-	'pagination_pages' => 'Pages', # NEW
-	'pagination_prev' => '« Précédent', # MODIF
+	'pagination_next' => 'Volgende »',
+	'pagination_pages' => 'Pagina\'s',
+	'pagination_prev' => '« Vorig',
 	'personaliser_nav' => 'Personaliseer dit menu',
 
 	// S
 	'sous_licence' => 'onder licensie',
 
 	// Z
-	'zapl_loading' => 'Chargement en cours...', # NEW
-	'zapl_reload_off' => 'Cliquer ici si la page reste incomplète (ou activer le javascript dans votre navigateur)' # MODIF
+	'zapl_loading' => 'Loading ...',
+	'zapl_reload_off' => 'Klik hier als de pagina is niet volledig (of schakel javascript in uw browser)'
 );
 
 ?>
