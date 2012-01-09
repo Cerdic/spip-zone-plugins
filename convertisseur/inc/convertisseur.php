@@ -302,6 +302,9 @@ function nettoyer_format($t) {
   // cf. extract/quark.php
   $conv_formats['XTG_SPIP'] = 'quark';
 
+  // conversion DOCX
+  $conv_formats['DOCX_SPIP'] = 'docx';
+
 
   // Conversion SLA (Scribus) -> SPIP
   // SLA 1.2 http://docs.scribus.net/index.php?lang=en&sm=scribusfileformat&page=scribusfileformat
@@ -327,8 +330,9 @@ function nettoyer_format($t) {
   $conv_formats['Word'] = 'doc'; // function extract/
   $conv_formats['RTF'] = 'rtf'; // function extract/
   $conv_formats['PDF'] = 'pdf'; // function extract/
+  $conv_formats['docx'] = 'docx'; // function extract/
   $conv_formats['html_SPIP'] = 'html'; // function HTML2SPIP
-  
+
 
 	// FIN INITIALISATION
 
@@ -362,7 +366,8 @@ function conversion_format($conv_in, $format) {
 			$conv_out = eregi_replace($pattern, $replacement, $conv_out);
 		}
 	}
-	
+
+	// bizarre de ne pas utiliser plutot la fonction sale() !
 	// fonction HTML2SPIP - http://ftp.espci.fr/pub/html2spip/
 	else if ($format=="html_SPIP") { 	  
             if (file_exists(find_in_path('lib/html2spip-0.6/misc_tools.php'))) {                  
