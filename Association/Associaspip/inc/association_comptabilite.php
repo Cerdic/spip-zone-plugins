@@ -308,7 +308,7 @@ function association_creer_compte_virement_interne() {
 	$res = association_liste_plan_comptable($GLOBALS['association_metas']['classe_banques']);
 	/* existe-t-il le compte 58x */
 	foreach($res as $code => $libelle) {
-		if (substr($code,0,2)==substr($GLOBALS['association_metas']['pc_intravirements'],0,2) {
+		if (substr($code,0,2)==substr($GLOBALS['association_metas']['pc_intravirements'],0,2)) {
 			/* j'ai trouve un code qui commence par 58 */
 			$trouve = TRUE;
 		}
