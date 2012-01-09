@@ -1,0 +1,49 @@
+[(#ENV{id_section}|non)
+	[(#ENV{id_location}|non)
+		[(#SET{tab_locations,[(#REM|pmb_liste_afficher_locations)]})]
+	]
+]
+[(#ENV{id_location}|oui)
+	[(#SET{tab_locationsections,[(#ENV{id_location}|pmb_location_extraire)]})]
+]
+[(#ENV{id_section}|oui)
+	[(#SET{tab_sections,[(#ENV{id_section}|pmb_section_extraire)]})]
+	[(#SET{tab_locationsections_memo,[(#ENV{id_location_memo}|pmb_location_extraire)]})]
+]
+
+
+#SET{self,#ENV{url_origine,#URL_PAGE{catalogue}}}
+
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+ &gt; <a href="#GET{self}"><:pmb:catalogue:></a>
+[ &gt; <a href="[(#GET{self}|parametre_url{id_location,#GET{tab_locationsections_memo/0/location_id}})]">(#GET{tab_locationsections_memo/0/location_caption}|ucfirst)</a>]
+[ &gt; <strong class="on">(#GET{tab_locationsections/0/location_caption,#GET{tab_sections/0/section_caption}}|ucfirst)</strong>]
+</p>
+
+<div class="cartouche">
+	[(#GET{tab_sections/0/section_image}|oui)
+		[(#GET{tab_sections/0/section_image}|contient{rayonnage}|non)
+			[(#GET{tab_sections/0/section_image}
+				|copie_locale{force}
+				|image_reduire{200,200}
+				|inserer_attribut{class,spip_logos})]
+		]
+	]
+
+	<h1 class="h1">
+		[(#GET{tab_locationsections/0/location_caption}|ucfirst
+			|sinon{[(#GET{tab_locationsections_memo/0/location_caption}|ucfirst) / ][(#GET{tab_sections/0/section_caption}|ucfirst)]}
+			|sinon{<:pmb:catalogue:>})]
+	</h1>
+	
+</div>
+
+
+<INCLURE{fond=inclure/inc-catalogue}{env}
+	{tab_locations=#GET{tab_locations}}
+	{tab_locationsections=#GET{tab_locationsections}}
+	{tab_sections=#GET{tab_sections}}
+	{tab_locationsections_memo=#GET{tab_locationsections_memo}}
+>
+

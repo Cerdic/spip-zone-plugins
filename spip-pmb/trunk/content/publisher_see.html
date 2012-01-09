@@ -1,0 +1,13 @@
+[(#SET{tab_resultat,[(#ENV{id}|pmb_editeur_extraire{#ENV{debut,0},#ENV{fin,5}})]})]
+
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+&gt; <:pmb:editeurs:>
+&gt; <strong class="on">[(#GET{tab_resultat/publisher_name}|couper{80})]</strong></p>
+
+
+<div class="cartouche">
+	<h1 class="h1">#GET{tab_resultat/publisher_name}|couper{80}</h1>
+</div>
+
+<INCLURE{fond=inclure/inc-publisher_see}{env}{tab_resultat=#GET{tab_resultat}}>
