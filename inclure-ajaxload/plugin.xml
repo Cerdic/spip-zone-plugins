@@ -24,6 +24,6 @@
 		<nom>insert_head</nom>
 	</pipeline>
 	<chemin dir='' />
-	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 	<categorie>outil</categorie>
 </plugin>
