@@ -88,7 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	&agrave;-b-n-l = &agrave; but non lucratif ;
 	d-i-p = d\'int&eacute;r&egrave;t g&eacute;n&eacute;ral ;
 	d-u-p = d\'utilit&eacute; publique
-	<br />abbr&eocute;viations :
+	<br />abbr&eacute;viations :
 	asso. = association(s) ;
 	fond. = fondation(s) ;
 	ent. = entreprise(s) ;
