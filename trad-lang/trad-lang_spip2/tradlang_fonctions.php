@@ -152,7 +152,6 @@ function boucle_TRADLANG_MODULES_dist($id_boucle, &$boucles) {
  * On enlève les modules attic*
  */
 function boucle_TRADLANG_dist($id_boucle, &$boucles) {
-	spip_log($boucle->nom,'tradlang');
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 
@@ -200,7 +199,6 @@ function prepare_langues_preferees($serveur='') {
 	}else{
 		$langues_array = array_keys($GLOBALS['codes_langues']);
 	}
-	spip_log($langues_array,'test');
 	return $langues_array;
 }
 /**

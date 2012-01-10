@@ -225,6 +225,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_bilan' => 'Bilan des traductions',
 	'titre_bilan_langue' => 'Bilan des traductions de la langue "@lang@"',
 	'titre_bilan_module' => 'Bilan des traductions du module "@module@"',
+	'titre_changer_langue_selection' => 'Changer la langue sélectionnée',
 	'titre_commentaires_chaines' => 'Commentaires au sujet de cette chaine',
 	'titre_logo_tradlang_module' => 'Logo du module',
 	'titre_modifier' => 'Modifier',

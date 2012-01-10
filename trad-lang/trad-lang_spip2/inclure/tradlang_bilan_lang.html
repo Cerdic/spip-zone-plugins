@@ -1,9 +1,14 @@
 <h2><:tradlang:titre_bilan_langue{lang=#ENV{langue_modules}}:></h2>
 
+[(#SET{titre,<:tradlang:titre_changer_langue_selection:>})]
+
+
+[(#FORMULAIRE_TRADLANG_SWITCHER_LANGUE{'','',[(#GET{titre}|attribut_html)]})]
+
 <p><a href="[(#SELF|parametre_url{langue_modules,''})]"><:tradlang:lien_trier_langue_non:></a></p>
 
 <BOUCLE_priorites(TRADLANG_MODULES){fusion priorite}>
-<h3>#PRIORITE</h3>
+<h3 class="h3">#PRIORITE</h3>
 <div class="bilan">
 <table class="spip liste tablesorter">
 	<thead>

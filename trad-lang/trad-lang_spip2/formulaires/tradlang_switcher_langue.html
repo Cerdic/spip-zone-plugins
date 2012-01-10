@@ -1,0 +1,44 @@
+<div class="formulaire_spip formulaire_switcher_langue" id="formulaire_switcher_langue">
+<form action="[(#ENV{action})]" method="get"><div>
+	[(#ENV{action}|form_hidden)]
+	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
+	<ul>
+		[(#ENV{titre}|oui)
+		<li class="fieldset">
+			<fieldset>
+			<h3 class="legend">#ENV{titre}</h3>
+			<ul>
+		]
+		<li class="editer editer_langue_modules">
+		<BOUCLE_module_langue_dispo_sur(TRADLANG tradlang_modules){module?}{id_tradlang_module?}{lang != #ENV{lang_exclue}}{fusion lang}{par lang}{0,1}>
+			<select name="#ENV{name,langue_modules}" id="#ENV{name,langue_modules}">
+				[(#ENV{option_vide}|oui)
+				<option value="">--</option>]
+				<B_module_langue_dispo_pref>
+				<optgroup label="<:tradlang:info_langues_preferees|attribut_html:>">
+				<BOUCLE_module_langue_dispo_pref(TRADLANG tradlang_modules){langues_preferees}{module?}{id_tradlang_module?}{lang != #ENV{lang_exclue}}{fusion lang}{par lang}>
+					<option value="#LANG"[(#LANG|=={#ENV{#ENV{name,langue_modules}}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)][(#LANG|=={#LANG_MERE}|oui)<:tradlang:info_langue_mere:>]</option>
+				</BOUCLE_module_langue_dispo_pref>
+				[(#SET{optgroup,'oui'})]
+				</optgroup>
+				</B_module_langue_dispo_pref>
+				<B_module_langue_dispo>
+				[(#GET{optgroup}|=={oui})<optgroup label="<:tradlang:info_langues_non_preferees|attribut_html:>">]
+				<BOUCLE_module_langue_dispo(TRADLANG tradlang_modules){!langues_preferees}{module?}{id_tradlang_module?}{lang != #ENV{lang_exclue}}{fusion lang}{par lang}>
+					<option value="#LANG"[(#LANG|=={#ENV{#ENV{name,langue_modules}}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)][(#LANG|=={#LANG_MERE}|oui)<:tradlang:info_langue_mere:>]</option>
+				</BOUCLE_module_langue_dispo>
+				[(#GET{optgroup}|=={oui})</optgroup>]
+				</B_module_langue_dispo>
+			</select>
+		</BOUCLE_module_langue_dispo_sur>
+		[(#ENV{titre}|oui)
+				</fieldset>
+			</li>
+		</ul>]
+		</li>
+	</ul>
+	<p class="boutons">
+	<input type="submit" class="submit" value="<:bouton_valider:>" title="<:info_rechercher:>" />
+	</p>
+</div></form>
+</div>
