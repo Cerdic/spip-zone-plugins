@@ -20,7 +20,7 @@
 	<div class="pmb-ouvrage-infos">	
 		<table class="spip pmb-tableau">
 			<tbody>
-				[<tr><td><strong><:pmb:auteur:></strong></td><td>(#LIENSAUTEURS)[, (#LIENSAUTEURS2)][, (#LIENSAUTEURS23)]</td></tr>]
+				[<tr><td><strong><:pmb:auteur:></strong></td><td>(#TOUSLIENSAUTEURS)</td></tr>]
 				[<tr><td><strong><:pmb:serie:></strong></td><td>(#SERIE)</td></tr>]
 				[<tr><td><strong><:pmb:type:></strong></td><td>(#TYPE)</td></tr>]
 				[<tr><td><strong><:pmb:editeur:></strong></td><td>[(#ID_EDITEUR|oui)<a href="[(#URL_PAGE{publisher_see}|parametre_url{id,#ID_EDITEUR})]">](#EDITEUR)[(#ID_EDITEUR|oui)</a>]</td></tr>]
@@ -38,8 +38,8 @@
 				[<tr><td><strong><:pmb:prix:></strong></td><td>(#PRIX)</td></tr>]
 				[<tr><td><strong><:pmb:note_generale:></strong></td><td>(#NOTE_GENERALE)</td></tr>]
 				[<tr><td><strong><:pmb:note_contenu:></strong></td><td>(#NOTE_CONTENU)</td></tr>]
-				[(#CHEMIN{inclure/inc-notice_display-local.html}|oui)
-					[(#INCLURE{fond=inclure/inc-notice_display-local,id})]
+				[(#CHEMIN{inclure/inc-pmb_notice-local.html}|oui)
+					[(#INCLURE{fond=inclure/inc-pmb_notice-local,id})]
 				]
 			</tbody>
 		</table>

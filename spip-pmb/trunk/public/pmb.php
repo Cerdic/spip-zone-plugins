@@ -382,7 +382,7 @@ function balise_URL_NOTICE_dist($p) {
 		$id = champ_sql('id', $p);
 	}
 
-	$page = 'notice_display';
+	$page = 'pmb_notice';
 	$p->code = "generer_url_public('$page', 'id='.$id)";
 	$p->interdire_scripts = false;
 	return $p;
