@@ -23,19 +23,35 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function pmb_parse_unimarc($unimarc) {
 	$zone = $unimarc->c;
 	$id = $unimarc->id; // souvent vide
-
+	$res = array();
 	// Le champ $s contient la liste des informations
 	if (isset($unimarc->s) && is_array($unimarc->s)) {
-		foreach($unimarc->s as $element) {
+		$groupe = $unimarc->s;
+		
+		// si une fonction specifique existe, on la retourne
+		if (function_exists($parse = 'pmb_parse_unimarc_data_' . $zone)) {
+			return $parse($groupe);
+		}
+
+		// sinon, on utilise le parsage prevu...
+		foreach($groupe as $element) {
 			$sous_zone = $element->c;
 			$valeur = $element->value;
 
 			// correction systematique de la valeur
 			// car certains caracteres sont faux...
 			$valeur = pmb_nettoyer_caracteres($valeur);
-			return pmb_parse_unimarc_defaut($valeur, $zone, $sous_zone, $id, $element);
+			$new = pmb_parse_unimarc_defaut($valeur, $zone, $sous_zone, $id, $element, $groupe);
+			if ($new) {
+				$res = array_merge($res, $new);
+			} else {
+				// impossible de parser ce code.
+				# echo "<br />** ELEMENT NON TRAITE : $zone / $sous_zone";
+				# echo "\n<pre>"; print_r($element); echo "</pre>";
+			}
 		}
 	}
+	return $res;
 }
 
 
@@ -44,6 +60,8 @@ function pmb_parse_unimarc($unimarc) {
  * la zone et la sous zone demandees
  * et retourne la ou les couples cle/valeurs
  * correspondantes.
+ *
+ * [100]
  * 
  * 		Tableau des cles autorisees
  * 		'a' => 'isbn', // sous zone => nom de la correspondance humaine. Peut etre un tableau :
@@ -67,20 +85,36 @@ function pmb_parse_unimarc($unimarc) {
  * 				)
  * 			)
  * 		),
+ *
+ * Ou encore
+ *
+ * [100] => 'fonction()' // fonction a evaluer...
  * 
  * @return array
  * 		Tableau de tableau ('cle' => cle, 'valeur' => valeur)
 **/
-function pmb_parse_unimarc_defaut($valeur, $zone, $sous_zone, $id, $element) {
+function pmb_parse_unimarc_defaut($valeur, $zone, $sous_zone, $id, $element, $groupe) {
 	static $tab = false;
 	if (!$tab) {
 		$tab = pmb_parse_unimarc_data();
 	}
 
-	if (!isset($tab[$zone]) or !is_array($tab[$zone])) {
+	if (!isset($tab[$zone]) or !$tab[$zone]) {
 		return false;
 	}
 
+	// si c'est une chaine, c'est certainement une fonction a evaluer
+	// c'est le cas des 900 assez particuliers.
+	if (is_string($tab[$zone])) {
+		$res = eval("return $tab[$zone];");
+		if (is_array($res)) {
+			return $res;
+		}
+	}
+
+	if (!is_array($tab[$zone])) {
+		return false;
+	}
 
 	// si l'element est dedans, c'est bon signe !
 	if (isset($tab[$zone][$sous_zone]) and $t = $tab[$zone][$sous_zone]) {
@@ -164,7 +198,7 @@ function pmb_nettoyer_caracteres($valeur) {
  * 
 **/
 function pmb_parse_unimarc_data() {
-	return array(
+	$t = array(
 
 
 		// ISBN (International Standard Book Number)
@@ -197,6 +231,11 @@ function pmb_parse_unimarc_data() {
 		),
 
 
+		// Mention d’édition
+		'205' => array(
+			'a' => 'edition' // Mention d’édition
+		),
+		
 		// Publication, production, diffusion, etc.
 		'210' => array(
 			'a' => 'lieu_publication',
@@ -251,12 +290,18 @@ function pmb_parse_unimarc_data() {
 			'v' => 'numero_partie',
 		),
 
+		// Unité matérielle
+		'463' => array(
+			// y a aussi plusieurs 9 decrivant un lien... ?
+			't' => 'unite_materielle', // Titre
+		),
 
 		// Indexation en vocabulaire libre
 		// (mots cles)
-		'461' => array(
+		'610' => array(
 			'a' => 'mots_cles', // Descripteur
 		),
+		
 
 
 		// Classification décimale Dewey
@@ -274,14 +319,59 @@ function pmb_parse_unimarc_data() {
 
 		// Nom de personne - Responsabilité secondaire
 		'701' => pmb_parse_unimarc_data_70x(3),
-		
+
+
+
+		// Collectivité - Responsabilité principale
+		'710' => array(
+			'a' => array(
+				'collectivite' => '$valeur',
+				'id_collectivite' => '$id',
+			),
+			//'4' => '' // Code de fonction
+		),
+
+
+		// Collectivité - Autre responsabilité principale
+		'711' => array(
+			'a' => array(
+				'collectivite_autre' => '$valeur',
+				'id_collectivite_autre' => '$id',
+			),
+			//'4' => '' // Code de fonction
+		),
+
+
 		// Image associee
 		'896' => array(
 			'a' => 'logo_src',
 		),
 
+		// les 900 sont des donnees locales...
+		// et traitees separements...
+
 	);
+
+
+	// on propose une surcharge de notre tableau dans une fonction
+	// pmb_parse_unimarc_data_locales() qui permet egalement
+	// de modifier le tableau au besoin.
+	if (function_exists('pmb_parse_unimarc_data_locales')) {
+		$t = pmb_parse_unimarc_data_locales($t);
+	}
+	
+	return $t;
 }
+
+/*
+// exemple de fonction locale, a placer dans un fichier de fonctions SPIP.
+function pmb_parse_unimarc_data_locales($tab) {
+	$tab['900'] = array(
+		'a' => 'toto'
+	);
+	return $tab;
+}
+*/
 
 
 function pmb_parse_unimarc_data_70x($indice='') {
@@ -314,6 +404,54 @@ function pmb_parse_unimarc_data_70x($indice='') {
 			)*/
 		),
 	);
+}
+
+
+/**
+ * les 900 sont des donnees locales...
+ * et traitees separements...
+ * il ne semble pas possible de savoir toujours ce que c'est...
+ * cependant, PMB pour ses champs extras exportables envoie :
+ * [900]
+ * 		[a] Valeur du champ
+ * 		[l] Label du champ
+ * 		[n] Colonne SQL du champ.
+ *
+ * Il envoie plusieurs 900 aussi.
+ * On en fait autant de champ #N avec #LABEL_N
+ * fonction pour traiter les champs extras
+ * declares en 900
+ * 		n = champ sql
+ * 		a = valeur
+ * 		l = label humain
+ */
+function pmb_parse_unimarc_data_900($groupe) {
+	$cle = $label = $valeur = '';
+	foreach ($groupe as $element) {
+		switch($element->c) {
+			case 'n':
+				$cle = strtolower($element->value);
+				break;
+			case 'l':
+				$label = pmb_nettoyer_caracteres($element->value);
+				break;
+			case 'a':
+				$valeur = pmb_nettoyer_caracteres($element->value);
+				break;
+		}
+	}
+	if ($cle and $valeur and $label) {
+		return array(
+			array(
+				'cle'    => $cle,
+				'valeur' => pmb_nettoyer_caracteres($valeur),
+			),
+			array(
+				'cle'    => 'label_' . $cle,
+				'valeur' => pmb_nettoyer_caracteres($label),
+			),
+		);
+	}
 }
 
 ?>

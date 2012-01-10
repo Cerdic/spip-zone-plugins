@@ -32,6 +32,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'collection_issn' => 'ISSN',
 'collections' => 'Collections',
 'collection_web' => 'Site internet',
+'collectivite' => 'Collectivité',
+'collectivite_autre' => 'Autre collectivité',
 'comment_ca_fonctionne' => 'Comment &ccedil;a fonctionne ?',
 'compte_lecteur' => 'Votre compte de lecteur',
 'conferences' =>'P.U.L.P.',
@@ -49,9 +51,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'donner_avis' => 'Donnez votre avis',
 
 // E
-'ecrire_a' => '&Eacute;crire &agrave;',
-'editeur' => 'Editeur',
-'editeurs' => 'Editeurs',
+'ecrire_a' => 'Écrire à',
+'editeur' => 'Éditeur',
+'editeurs' => 'Éditeurs',
+'edition' => 'Édition',
 'en_savoir_plus' => 'en&nbsp;savoir&nbsp;+',
 'exemplaires' => 'Exemplaires',
 'format' =>'Format',
@@ -65,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message_compte_lecteur' => 'Prochainement, vous disposerez d\'une int\351gration compl\350te\nde votre compte lecteur sur ce site. \n\nEn attendant, vous allez \352tre redirig\351s vers l\'interface standard.',
 'message_recherche_avancee' => 'Prochainement, vous disposerez d\'une int\351gration compl\350te\nde la recherche avanc\351e sur ce site. \n\nEn attendant, vous allez \352tre redirig\351s vers l\'interface standard.',
 'mon_compte' => 'Mon compte',
+'mots_cles' => 'Mots clés',
 
 // N
 'newsletter' => 'Newsletter',
@@ -115,6 +119,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour' => 'Retour',
 'rpc_type' => 'Type de serveur',
 'rubriques' => 'Qui sommes-nous ?',
+
+// S
 'section' => 'Section',
 'se_deconnecter' => 'Se d&eacute;connecter',
 'serie' => 'S&eacute;rie',
@@ -122,12 +128,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'session_expire' => 'Votre session de lecteur a expir&eacute;. Veuillez vous d&eacute;connecter, puis vous identifier de nouveau.',
 'support' => 'Support',
 'sur' => 'sur',
+
+// T
 'titre_lien_pmb' => 'PMB, un SIGB enti&egrave;rement libre',
 'titre' => 'Titre',
 'tous_coupsdecoeur' => 'toutes les critiques',
 'toute_actualite' => 'toute l\'actualit&eacute;',
 'toutes_nouveautes' => 'toutes les nouveaut&eacute;s',
 'type' => 'Type',
+
+// U
+'unite_materielle' => 'Unité matérielle',
 'url' => 'Adresse',
 'vous_etes_identifies' => 'Vous &ecirc;tes identifi&eacute;',
 'wsdl' => 'Adresse du WSDL SOAP',

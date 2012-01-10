@@ -24,15 +24,23 @@
 				[<tr><td><strong><:pmb:serie:></strong></td><td>(#SERIE)</td></tr>]
 				[<tr><td><strong><:pmb:type:></strong></td><td>(#TYPE)</td></tr>]
 				[<tr><td><strong><:pmb:editeur:></strong></td><td>[(#ID_EDITEUR|oui)<a href="[(#URL_PAGE{publisher_see}|parametre_url{id,#ID_EDITEUR})]">](#EDITEUR)[(#ID_EDITEUR|oui)</a>]</td></tr>]
+				[<tr><td><strong><:pmb:edition:></strong></td><td>(#EDITION)</td></tr>]
 				[<tr><td><strong><:pmb:collection:></strong></td><td>[(#ID_COLLECTION|oui)<a href="[(#URL_PAGE{coll_see}|parametre_url{id,#ID_COLLECTION})]">](#COLLECTION)[(#ID_COLLECTION|oui)</a>]</td></tr>]
+				[<tr><td><strong><:pmb:unite_materielle:></strong></td><td>(#UNITE_MATERIELLE)</td></tr>]
+				[<tr><td><strong><:pmb:collectivite:></strong></td><td>(#COLLECTIVITE)</td></tr>]
+				[<tr><td><strong><:pmb:collectivite_autre:></strong></td><td>(#COLLECTIVITE_AUTRE)</td></tr>]
 				[<tr><td><strong><:pmb:format:></strong></td><td>(#FORMAT)</td></tr>]
 				[<tr><td><strong><:pmb:annee_publication:></strong></td><td>(#ANNEE_PUBLICATION)</td></tr>]
 				[<tr><td><strong><:pmb:importance:></strong></td><td>(#IMPORTANCE)</td></tr>]
+				[<tr><td><strong><:pmb:mots_cles:></strong></td><td>(#MOTS_CLES)</td></tr>]
 				[<tr><td><strong><:pmb:presentation:></strong></td><td>(#PRESENTATION)</td></tr>]
 				[<tr><td><strong><:pmb:isbn:></strong></td><td>(#ISBN)</td></tr>]
 				[<tr><td><strong><:pmb:prix:></strong></td><td>(#PRIX)</td></tr>]
 				[<tr><td><strong><:pmb:note_generale:></strong></td><td>(#NOTE_GENERALE)</td></tr>]
 				[<tr><td><strong><:pmb:note_contenu:></strong></td><td>(#NOTE_CONTENU)</td></tr>]
+				[(#CHEMIN{inclure/inc-notice_display-local.html}|oui)
+					[(#INCLURE{fond=inclure/inc-notice_display-local,id})]
+				]
 			</tbody>
 		</table>
 	</div>

@@ -433,9 +433,7 @@ function pmb_ws_parser_notice($value) {
 	$id_notice = $value->id;
 
 	if (isset($value->f) && is_array($value->f)) {
-
 		foreach($value->f as $informations) {
-
 			if ($res = pmb_parse_unimarc($informations)) {
 				foreach ($res as $r) {
 					$cle = $r['cle'];
@@ -469,6 +467,8 @@ function pmb_ws_parser_notice($value) {
 						$tresultat[$cle] = $r['valeur'];
 					}
 				}
+			} else {
+				#echo "\n<pre>"; print_r($informations); echo "</pre>";
 			}
 		}
 	}
