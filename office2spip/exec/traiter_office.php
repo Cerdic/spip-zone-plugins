@@ -136,9 +136,13 @@ function exec_traiter_office () {
 
 	$flag_editable = autoriser('publierdans','rubrique',$id_rubrique);
 	if ($flag_editable) {
-			
-		$pdf = _request("pdf");	
+		
+		# demander un PDF
+		$pdf = _request("pdf");
+
+		# joindre l'original
 		$original = _request("original");	
+
 		$distant = _request("distant");
 		$GLOBALS["distant"] = $distant; 
 		if (strlen($distant) > 0) {
@@ -228,10 +232,9 @@ function exec_traiter_office () {
 			$nom_html = $nom_dest;
 		}
 		else {
-			exec("soffice");			
-			exec("unoconv --format=html $nom_dest");
+			exec("soffice");
+			exec("unoconv --format=html $nom_dest", $retour, $err);
 		}
-		
 		
 		if (file_exists($nom_html)) {
 			$resultat = join(file($nom_html), "");
@@ -264,7 +267,17 @@ function exec_traiter_office () {
 					
 					$GLOBALS["new_article"] = $id_article;
 					
-					
+
+					if (_request('ignorer_images') == 'oui') {
+						$texte = preg_replace(
+						",\[(<img [^>]*src=[\"\']([^\"\']+)[\"\'][^>]*>)\-\>([^\]]*\.(jpg|gif|png))\],i", '<!-- image \2 -->',
+						$texte);
+						$texte = preg_replace(",(<img [^>]*src=[\"\']([^\"\']+)[\"\'][^>]*>),i", '<!-- image \2 -->', $texte);
+						sql_updateq("spip_articles", array(
+							"texte" => $texte
+						), "id_article=$id_article");
+					}
+
 					// Traiter les vignettes clicables menant ˆ des images
 					if ($texte = preg_replace_callback(",\[(<img [^>]*src=[\"\']([^\"\']+)[\"\'][^>]*>)\-\>([^\]]*\.(jpg|gif|png))\],i", "_remplacer_images_texte_liees", $texte) ) {
 						sql_updateq("spip_articles", array(
@@ -278,7 +291,7 @@ function exec_traiter_office () {
 							"texte" => $texte
 						), "id_article=$id_article");
 					}
-					
+
 					if ($pdf) {
 						$erreur = @exec("unoconv --format=pdf $nom_dest");
 						
@@ -311,10 +324,10 @@ function exec_traiter_office () {
 						// Verifier que c'est un format accepte
 						include_spip("base/typedoc");
 						if ($GLOBALS["tables_mime"]["$terminaison"]) {
-							copy($nom_dest, sous_repertoire(_DIR_IMG, $terminaison).$nom_original);
-							$taille = filesize($nom_original);
-							
-							
+							$dest = sous_repertoire(_DIR_IMG, $terminaison).$nom_original;
+							copy($nom_dest, $dest);
+							$taille = filesize($dest);
+
 							$id_document = sql_insertq("spip_documents", array(
 								"titre" => "Le document ".$GLOBALS["tables_documents"]["$terminaison"],
 								"extension" => "$terminaison",

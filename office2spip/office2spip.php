@@ -23,8 +23,9 @@ function office2spip_affiche_enfants($args) {
 		$ret .= "<div>ou indiquez l'adresse URL d’un document sur le Web&nbsp;</div>";
 		$ret .= "<div><input type='text' name='distant' /></div>";
 		
-		$ret .= "<div><input type='checkbox' value='oui' name='original' />Joindre le document d’origine à l'article</div>";
-		$ret .= "<div><input type='checkbox' value='oui' name='pdf' />Créer et joindre un fichier PDF du document</div>";
+		$ret .= "<div><label><input type='checkbox' value='oui' name='original' />Joindre le document d’origine à l'article</label></div>";
+		$ret .= "<div><label><input type='checkbox' value='oui' name='pdf' />Créer et joindre un fichier PDF du document</label></div>";
+		$ret .= "<div><label><input type='checkbox' value='oui' name='ignorer_images' />Ignorer les images du document</label></div>";
 		$ret .= "<div style='text-align: right;'><input type='submit' value='Installer' /></div>";
 		$ret .= "</form>";
 		$ret .= "</div>";
