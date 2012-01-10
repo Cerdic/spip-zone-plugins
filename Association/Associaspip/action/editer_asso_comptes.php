@@ -19,6 +19,8 @@ function action_editer_asso_comptes() {
 	$id_compte = $securiser_action();
 
 	include_spip('inc/association_comptabilite');
+	include_spip('base/association');
+	include_spip('inc/modifier');
 
 	$date= _request('date');
 	$imputation= _request('imputation');
@@ -43,7 +45,7 @@ function action_editer_asso_comptes() {
 	 */
 
 	if ($type_operation == $GLOBALS['association_metas']['classe_banques']) {
-		if(!$justification) $justification=_T('asso:virement_interne');
+		if(!$justification) $justification = _T('asso:virement_interne');
 		/* si le compte 58xx n'existe pas on le cree dans le plan comptable */
 		$compte_virement = association_creer_compte_virement_interne();
 		/* c'est forcément un ajout car pour l'instant l'edition d'un virement est "desactive" */
@@ -69,11 +71,21 @@ function action_editer_asso_comptes() {
 	else {
 		if (!$id_compte) { /* pas d'id_compte, c'est un ajout */
 			$id_compte = association_ajouter_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, 0);
-	}else { /* c'est une modif, la parametre id_journal de la fonction modifier operation comptable est mis a '' afin de ne pas le modifier dans la base */
+		}
+		else { /* c'est une modif, la parametre id_journal de la fonction modifier operation comptable est mis a '' afin de ne pas le modifier dans la base */
 			association_modifier_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, '', $id_compte);
 		}
-
 	}
+
+	/* on passe par modifier_contenu pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere */
+	$modifs = array("date"=> $date,
+					"recette"=> $recette,
+					"depense"=> $depense,
+					"justification"=> $justification,
+					"imputation" => $imputation,
+					"journal" => $journal);
+	modifier_contenu('asso_compte', $id_compte, '', $modifs);
+
 	return array($id_compte, '');
 }
 ?>

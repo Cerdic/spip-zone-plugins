@@ -17,6 +17,7 @@
 function association_objets_extensibles($objets){
 	return array_merge($objets, array(
 		'asso_membre' => _T('asso:membres'),
+		'asso_compte' => _T('asso:comptes'),
 	));
 }
 ?>
