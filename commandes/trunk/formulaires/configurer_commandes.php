@@ -6,13 +6,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function formulaires_configurer_commandes_saisies_dist(){
 	include_spip('inc/config');
 	include_spip('inc/plugin');
+	include_spip('commandes_fonctions');
 	$config = lire_config('commandes');
 
 	$choix_expediteurs = array(
-									'webmaster' => _T('commandes:notifications_expediteur_choix_webmaster'),
-									'administrateur' => _T('commandes:notifications_expediteur_choix_administrateur'),
-									'email' => _T('commandes:notifications_expediteur_choix_email')
-								) ;
+			'webmaster' => _T('commandes:notifications_expediteur_choix_webmaster'),
+			'administrateur' => _T('commandes:notifications_expediteur_choix_administrateur'),
+			'email' => _T('commandes:notifications_expediteur_choix_email')
+	);
+	
 	if (defined('_DIR_PLUGIN_FACTEUR')){
 		$choix_expediteurs['facteur'] = _T('commandes:notifications_expediteur_choix_facteur');
 	}
@@ -58,8 +60,10 @@ function formulaires_configurer_commandes_saisies_dist(){
 						'explication' => _T('commandes:notifications_activer_explication'),
 						'defaut' => $config['activer']
 					)
-				),
-				array(
+				)
+			)
+		),	
+		array(
 					'saisie' => 'fieldset',
 					'options' => array(
 						'nom' => 'fieldset_notifications_parametres',
@@ -78,6 +82,7 @@ function formulaires_configurer_commandes_saisies_dist(){
 								'defaut' => $config['quand']
 							)
 						),
+						
 						array(
 							'saisie' => 'selection',
 							'options' => array(
@@ -89,6 +94,7 @@ function formulaires_configurer_commandes_saisies_dist(){
 								'datas' => $choix_expediteurs
 							)
 						),
+						
 						array(
 							'saisie' => 'auteurs',
 							'options' => array(
@@ -161,6 +167,7 @@ function formulaires_configurer_commandes_saisies_dist(){
 								'afficher_si' => '@vendeur@ == "administrateur"',
 							)
 						),
+						
 						array(
 							'saisie' => 'input',
 							'options' => array(
@@ -180,8 +187,9 @@ function formulaires_configurer_commandes_saisies_dist(){
 								'defaut' => $config['client'],
 							)
 						)
-					)
-				)
+						
+					
+				
 			)
 		)
 	);
