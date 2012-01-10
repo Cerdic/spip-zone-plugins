@@ -373,6 +373,8 @@
 		if(function_exists('avant_sale'))
 			return avant_sale($contenu);
 
+		$contenu = preg_replace(',<!doctype[^>]*>\s*,si', '', $contenu);
+
 		// PRETRAITEMENTS
 		$contenu = str_replace("\n\r", "\r", $contenu); // echapper au greedyness de preg_replace
 		$contenu = str_replace("\r\n", "\r", $contenu); // dojo produit du \r\n
