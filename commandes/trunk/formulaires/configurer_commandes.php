@@ -103,7 +103,7 @@ function formulaires_configurer_commandes_saisies_dist(){
 								'statut' => '0minirezo',
 								'cacher_option_intro' => "on",
 								'webmestre' => 'oui',
-								'defaut' => $config['exp_webmaster'],
+								'defaut' => $config['expediteur_webmaster'],
 								'afficher_si' => '@expediteur@ == "webmaster"',
 							)
 						),
@@ -114,7 +114,7 @@ function formulaires_configurer_commandes_saisies_dist(){
 								'label' => _T('commandes:notifications_expediteur_administrateur_label'),
 								'statut' => '0minirezo',
 								'cacher_option_intro' => "on",
-								'defaut' => $config['exp_administrateur'],
+								'defaut' => $config['expediteur_administrateur'],
 								'afficher_si' => '@expediteur@ == "administrateur"',
 							)
 						),
@@ -123,7 +123,7 @@ function formulaires_configurer_commandes_saisies_dist(){
 							'options' => array(
 								'nom' => 'expediteur_email',
 								'label' => _T('commandes:notifications_expediteur_email_label'),
-								'defaut' => $config['exp_email'],
+								'defaut' => $config['expediteur_email'],
 								'afficher_si' => '@expediteur@ == "email"',
 							)
 						),
