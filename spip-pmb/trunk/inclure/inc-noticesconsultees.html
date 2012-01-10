@@ -3,9 +3,7 @@
 	<h2 class="h2"><:pmb:notices_consultees:></h2>
 	<ul class="liste-items">
 	<BOUCLE_tab_noticesconsultees(POUR){tableau #SESSION{tab_noticesconsultees}}>
-		<li class="item">
-			[(#SESSION{tab_noticesconsultees/#CLE})]		
-		</li>
+		<li class="item">#VALEUR</li>
 	</BOUCLE_tab_noticesconsultees>
 	</ul>
 </div>

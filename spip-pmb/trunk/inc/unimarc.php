@@ -30,7 +30,7 @@ function pmb_parse_unimarc($unimarc) {
 		
 		// si une fonction specifique existe, on la retourne
 		if (function_exists($parse = 'pmb_parse_unimarc_data_' . $zone)) {
-			return $parse($groupe);
+			return $parse($groupe, $id);
 		}
 
 		// sinon, on utilise le parsage prevu...
@@ -73,17 +73,6 @@ function pmb_parse_unimarc($unimarc) {
  * 		'a' => array(
  * 				'isbn' => '$valeur',
  * 				'id' => '$id',
- * 		,
- * 		'b' => array(
- * 				'titre => array(
- * 					// si tableau, les parametres seront aussi retournes.
- * 					// (cle, valeur, params)
- * 					'titre', array(
- * 						'@post_traitements' => array( 
- * 							'inter' => ' '
- * 						)
- * 				)
- * 			)
  * 		),
  *
  * @return array
@@ -101,31 +90,21 @@ function pmb_parse_unimarc_defaut($valeur, $zone, $sous_zone, $id, $element, $gr
 
 	// si l'element est dedans, c'est bon signe !
 	if (isset($tab[$zone][$sous_zone]) and $t = $tab[$zone][$sous_zone]) {
-		
-		// si tableau, c'est qu'il y a une fonction de traitement
-		// array( 'cle', 'func', array('un', 'deux'))
-		// $valeur = func($valeur, 'un', 'deux');
-		// ou une des associations cle / valeur directement
+
+		// si tableau, c'est qu'il y a 
+		// une association cle / valeur directement
 
 		if (is_array($t)) {
 			
 			// tableau de cle/valeurs
 			if (is_string(array_shift(array_keys($t)))) {
+
 				$res = array();
 				foreach ($t as $c => $v) {
-					if (is_array($v)) {
-						list($v, $params) = $v;
-						$res[] = array(
-							'cle' => $c,
-							'valeur' => eval('return ' . $v . ';'),
-							'params' => $params,
-						);
-					} else {
-						$res[] = array(
-							'cle' => $c,
-							'valeur' => eval('return ' . $v . ';'),
-						);
-					}
+					$res[] = array(
+						'cle' => $c,
+						'valeur' => eval('return ' . $v . ';'),
+					);
 				}
 				
 				return $res;
@@ -294,14 +273,10 @@ function pmb_parse_unimarc_data() {
 		),
 
 
-		// Nom de personne - Responsabilité principale
-		'700' => pmb_parse_unimarc_data_70x(),
-
-		// Nom de personne - Autre responsabilité principale
-		'701' => pmb_parse_unimarc_data_70x(2),
-
-		// Nom de personne - Responsabilité secondaire
-		'701' => pmb_parse_unimarc_data_70x(3),
+		// Traites a part dans des fonctions specialisees.
+		// 700 - Nom de personne - Responsabilité principale
+		// 701 - Nom de personne - Autre responsabilité principale
+		// 702 - Nom de personne - Responsabilité secondaire
 
 
 
@@ -331,7 +306,7 @@ function pmb_parse_unimarc_data() {
 		),
 
 		// les 900 sont des donnees locales...
-		// et traitees separements...
+		// traitees a part dans une fonction specialisee
 
 	);
 
@@ -357,36 +332,64 @@ function pmb_parse_unimarc_data_locales($tab) {
 */
 
 
-function pmb_parse_unimarc_data_70x($indice='') {
-	return array(
-		'a' => array(
-			"id_auteur$indice"  => '$id',
-			"liensauteurs$indice" => array(
-				'"<a href=\"?page=author_see&amp;id=" . $id . "\">" . $valeur . "</a>"', array(
-					'@post_traitements' => array('inter' => ', '),
-				)
+
+
+/**
+ * les 70x sont des liens vers des auteurs
+ * Et il peut y avoir plusieurs zones identiques.
+ * Il faut donc concatener avec les auteurs deja trouves
+ */
+
+// Nom de personne - Responsabilité principale
+function pmb_parse_unimarc_data_700($groupe, $id) {
+	return pmb_parse_unimarc_data_70x($groupe, $id);
+}
+
+// Nom de personne - Autre responsabilité principale
+function pmb_parse_unimarc_data_701($groupe, $id) {
+	return pmb_parse_unimarc_data_70x($groupe, $id, 2);
+}
+
+// Nom de personne - Responsabilité secondaire
+function pmb_parse_unimarc_data_702($groupe, $id) {
+	return pmb_parse_unimarc_data_70x($groupe, $id, 3);
+}
+
+
+function pmb_parse_unimarc_data_70x($groupe, $id, $indice='') {
+	$nom = $prenom = '';
+	foreach ($groupe as $element) {
+		switch($element->c) {
+			case 'a':
+				$nom = pmb_nettoyer_caracteres($element->value);
+				break;
+			case 'b':
+				$prenom = pmb_nettoyer_caracteres($element->value);
+				break;
+		}
+	}
+	if ($nom) {
+		if ($prenom) {
+			$nom = $prenom . ' ' . $nom;
+		}
+		return array(
+			array(
+				'cle' => "id_auteur$indice",
+				'valeur' => $id,
 			),
-			"lesauteurs$indice" => array(
-				'$valeur', array(
-					'@post_traitements' => array('inter' => ', '),
-				)
+			array(
+				'cle' => "liensauteurs$indice",
+				'valeur' => "<a href=\"" . generer_url_public('author_see', "id=$id") . "\">" . $nom . "</a>",
+				'@post_traitements' => array('inter' => ', '),
+			),
+			array(
+				'cle' => "lesauteurs$indice",
+				'valeur' => $nom,
+				'@post_traitements' => array('inter' => ', '),
 			),
 
-		),
-		'b' => array(
-			"lesauteurs$indice"   => array(
-				'$valeur', array(
-					'@post_traitements' => array('inter' => ' ', 'placer_avant' => true),
-				)
-			),
-			/*
-			"liensauteurs$indice" => array(
-				'$valeur', array(
-					'@post_traitements' => array('inter' => ' '),
-				)
-			)*/
-		),
-	);
+		);
+	}
 }
 
 
@@ -408,7 +411,7 @@ function pmb_parse_unimarc_data_70x($indice='') {
  * 		a = valeur
  * 		l = label humain
  */
-function pmb_parse_unimarc_data_900($groupe) {
+function pmb_parse_unimarc_data_900($groupe, $id) {
 	$cle = $label = $valeur = '';
 	foreach ($groupe as $element) {
 		switch($element->c) {

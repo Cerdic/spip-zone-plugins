@@ -1,7 +1,7 @@
 <BOUCLE_notice_resume(PMB:NOTICES){id}>
 [(#SET{url,[(#URL_NOTICE|parametre_url{url_ret,#ENV{url_ret}})]})]
 
-[(#SET{logo,[(#INCLURE{fond=inclure/pmb-inc-logo,notice=#VALEUR,largeur,hauteur}|trim)]})]
+[(#SET{logo,[(#INCLURE{fond=inclure/pmb-inc-logo,id,largeur,hauteur}|trim)]})]
 
 <li class="item hentry[(#GET{logo}|oui) avec_logo][ (#ENV{surlignable}|oui)surlignable][ (#ENV{compteur}|=={1}|oui)premier]">
 	[<div class="logo-encart">
