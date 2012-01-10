@@ -383,7 +383,43 @@ function balise_URL_NOTICE_dist($p) {
 	}
 
 	$page = 'pmb_notice';
-	$p->code = "generer_url_public('$page', 'id='.$id)";
+	$p->code = "(($id) ? generer_url_public('$page', 'id='.$id) : '')";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+
+/**
+ * Balise #URL_COLLECTION
+ * et #URL_COLLECTION{18}
+ * 
+**/
+function balise_URL_COLLECTION_dist($p) {
+
+	if (!$id = interprete_argument_balise(1, $p)) {
+		$id = champ_sql('id_collection', $p);
+	}
+
+	$page = 'pmb_collection';
+	$p->code = "(($id) ? generer_url_public('$page', 'id='.$id) : '')";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+
+/**
+ * Balise #URL_EDITEUR
+ * et #URL_EDITEUR{18}
+ * 
+**/
+function balise_URL_EDITEUR_dist($p) {
+
+	if (!$id = interprete_argument_balise(1, $p)) {
+		$id = champ_sql('id_editeur', $p);
+	}
+
+	$page = 'pmb_editeur';
+	$p->code = "(($id) ? generer_url_public('$page', 'id='.$id) : '')";
 	$p->interdire_scripts = false;
 	return $p;
 }
