@@ -86,10 +86,6 @@ function pmb_parse_unimarc($unimarc) {
  * 			)
  * 		),
  *
- * Ou encore
- *
- * [100] => 'fonction()' // fonction a evaluer...
- * 
  * @return array
  * 		Tableau de tableau ('cle' => cle, 'valeur' => valeur)
 **/
@@ -99,20 +95,7 @@ function pmb_parse_unimarc_defaut($valeur, $zone, $sous_zone, $id, $element, $gr
 		$tab = pmb_parse_unimarc_data();
 	}
 
-	if (!isset($tab[$zone]) or !$tab[$zone]) {
-		return false;
-	}
-
-	// si c'est une chaine, c'est certainement une fonction a evaluer
-	// c'est le cas des 900 assez particuliers.
-	if (is_string($tab[$zone])) {
-		$res = eval("return $tab[$zone];");
-		if (is_array($res)) {
-			return $res;
-		}
-	}
-
-	if (!is_array($tab[$zone])) {
+	if (!isset($tab[$zone]) or !is_array($tab[$zone])) {
 		return false;
 	}
 
