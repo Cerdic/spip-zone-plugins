@@ -477,6 +477,24 @@ function pmb_ws_parser_notice($value) {
 	if (!$tresultat['lesauteurs']) {
 		$tresultat['lesauteurs'] = $tresultat['auteur'];
 	}
+	
+	// tous les auteurs, pour se simplifier un peu...
+	$tous = array();
+	foreach (array('lesauteurs', 'lesauteurs2', 'lesauteurs3') as $a) {
+		if (isset($tresultat[$a]) and $tresultat[$a]) {
+			$tous[] = $tresultat[$a];
+		}
+	}
+	$tresultat['touslesauteurs'] = implode(', ', $tous);
+	
+	// tous les liens d'auteurs, pour se simplifier un peu...
+	$tous = array();
+	foreach (array('liensauteurs', 'liensauteurs2', 'liensauteurs3') as $a) {
+		if (isset($tresultat[$a]) and $tresultat[$a]) {
+			$tous[] = $tresultat[$a];
+		}
+	}
+	$tresultat['tousliensauteurs'] = implode(', ', $tous);
 
 	// si pas de logo, mais isbn, on tente une demande a amazon
 	if (!isset($tresultat['logo_src']) OR !$tresultat['logo_src']) {
