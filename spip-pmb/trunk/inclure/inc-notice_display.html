@@ -1,11 +1,21 @@
 <BOUCLE_notice(PMB:NOTICES){id}>
 [<a href="(#ENV{url_ret}|urldecode)" class="lien-retour-recherche"><:pmb:retour_recherche:></a>]
 
-[(#ENV{afficher_logo}|=={oui}|oui)
-	[(#INCLURE{fond=inclure/pmb-inc-logo, notice=#VALEUR, largeur=130})]
-]
-
 <div class="corps-conteneur surlignable">
+
+	[(#ENV{afficher_titre|=={oui}|oui)
+		<h1 class="h1">#TITRE</h1>
+		[<p class="soustitre">(#SOUSTITRE)</p>]
+	]
+	
+	[(#ENV{afficher_logo}|=={oui}|oui)
+		[(#INCLURE{fond=inclure/pmb-inc-logo, notice=#VALEUR, largeur=130})]
+	]
+
+	[(#ENV{afficher_resume}|=={oui}|oui)
+		[<div class="texte entry-content">(#RESUME|paragrapher)</div>]
+	]
+	
 	[(#ENV{afficher_info}|=={non}|non)
 	<div class="pmb-ouvrage-infos">	
 		<table class="spip pmb-tableau">
@@ -20,13 +30,13 @@
 				[<tr><td><strong><:pmb:importance:></strong></td><td>(#IMPORTANCE)</td></tr>]
 				[<tr><td><strong><:pmb:presentation:></strong></td><td>(#PRESENTATION)</td></tr>]
 				[<tr><td><strong><:pmb:isbn:></strong></td><td>(#ISBN)</td></tr>]
+				[<tr><td><strong><:pmb:prix:></strong></td><td>(#PRIX)</td></tr>]
+				[<tr><td><strong><:pmb:note_generale:></strong></td><td>(#NOTE_GENERALE)</td></tr>]
+				[<tr><td><strong><:pmb:note_contenu:></strong></td><td>(#NOTE_CONTENU)</td></tr>]
 			</tbody>
 		</table>
 	</div>
 	<br class="nettoyeur" />
-	]
-	[(#ENV{afficher_resume}|=={oui}|oui)
-		[<div class="texte entry-content">(#RESUME|paragrapher)</div>]
 	]
 </div>
 <br class="nettoyeur" />

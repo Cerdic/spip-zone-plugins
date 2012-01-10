@@ -30,6 +30,9 @@ function pmb_parse_unimarc($unimarc) {
 			$sous_zone = $element->c;
 			$valeur = $element->value;
 
+			// correction systematique de la valeur
+			// car certains caracteres sont faux...
+			$valeur = pmb_nettoyer_caracteres($valeur);
 			return pmb_parse_unimarc_defaut($valeur, $zone, $sous_zone, $id, $element);
 		}
 	}
@@ -136,11 +139,19 @@ function pmb_parse_unimarc_defaut($valeur, $zone, $sous_zone, $id, $element) {
 }
 
 
-function pmb_nettoyer_caracteres_titre($valeur) {
+function pmb_nettoyer_caracteres_texte($valeur) {
+	$valeur = str_replace(
+		array( "\n"),
+		array("<br />"), $valeur);
+	return $valeur;
+}
+
+
+function pmb_nettoyer_caracteres($valeur) {
 	$valeur = stripslashes($valeur);
 	$valeur = str_replace(
-		array("", "", "", "", "\n", ""),
-		array("'", "&oelig;", "\"", "\"", "<br />", "&euro;"), $valeur);
+		array("", "", "", "",  ""),
+		array("'", "&oelig;", "\"", "\"", "&euro;"), $valeur);
 	return $valeur;
 }
 
@@ -178,10 +189,10 @@ function pmb_parse_unimarc_data() {
 
 		// Titre et mention de responsabilité
 		'200' => array(
-			'a' => array('titre', 'pmb_nettoyer_caracteres_titre'),
-			'c' => array('titre_auteur_different', 'pmb_nettoyer_caracteres_titre'),
-			'd' => array('titre_parallele', 'pmb_nettoyer_caracteres_titre'),
-			'e' => array('soustitre', 'pmb_nettoyer_caracteres_titre'),
+			'a' => array('titre', 'pmb_nettoyer_caracteres_texte'),
+			'c' => array('titre_auteur_different', 'pmb_nettoyer_caracteres_texte'),
+			'd' => array('titre_parallele', 'pmb_nettoyer_caracteres_texte'),
+			'e' => array('soustitre', 'pmb_nettoyer_caracteres_texte'),
 			'f' => 'auteur', // premiere mention de responsabilite...
 		),
 
@@ -199,7 +210,7 @@ function pmb_parse_unimarc_data() {
 		// Description matérielle
 		'215' => array(
 			'a' => 'importance', // Indication du type de document et importance matérielle
-			'c' => array('presentation', 'pmb_nettoyer_caracteres_titre'), // Autres caracteristiques materielles
+			'c' => array('presentation', 'pmb_nettoyer_caracteres_texte'), // Autres caracteristiques materielles
 			'd' => 'format',
 			'e' => 'materiel_accompagnement', // Matériel d’accompagnement
 		),
@@ -224,19 +235,19 @@ function pmb_parse_unimarc_data() {
 
 		// Note de contenu
 		'327' => array(
-			'a' => array('note_contenu', 'pmb_nettoyer_caracteres_titre'),
+			'a' => array('note_contenu', 'pmb_nettoyer_caracteres_texte'),
 		),
 
 
 		// Résumé ou extrait
 		'330' => array(
-			'a' => array('resume', 'pmb_nettoyer_caracteres_titre'),
+			'a' => array('resume', 'pmb_nettoyer_caracteres_texte'),
 		),
 
 
 		// Parties, Ensembles
 		'461' => array(
-			't' => array('titre_partie', 'pmb_nettoyer_caracteres_titre'), // Partie de x
+			't' => array('titre_partie', 'pmb_nettoyer_caracteres_texte'), // Partie de x
 			'v' => 'numero_partie',
 		),
 

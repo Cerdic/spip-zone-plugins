@@ -65,13 +65,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message_compte_lecteur' => 'Prochainement, vous disposerez d\'une int\351gration compl\350te\nde votre compte lecteur sur ce site. \n\nEn attendant, vous allez \352tre redirig\351s vers l\'interface standard.',
 'message_recherche_avancee' => 'Prochainement, vous disposerez d\'une int\351gration compl\350te\nde la recherche avanc\351e sur ce site. \n\nEn attendant, vous allez \352tre redirig\351s vers l\'interface standard.',
 'mon_compte' => 'Mon compte',
+
+// N
 'newsletter' => 'Newsletter',
 'notices_consultees' => 'Notices consult&eacute;es',
+'note_generale' => 'Note générale',
+'note_contenu' => 'Note de contenu',
 'nouveautes' => 'Nouveaut&eacute;s du catalogue',
 'numero' => 'Num&eacute;ro',
+
+// O
 'ouvrages' => 'Ouvrages',
 'ouvrages_trouves' => 'ouvrages trouv&eacute;s',
 'ouvrage_trouve' => 'ouvrage trouv&eacute;',
+
+// P
 'parametrage_catalogue' => 'Param&eacute;trage du catalogue',
 'parametrage_plugin' => 'Param&eacute;trage du plugin',
 'pas_d_ouvrages_trouves' => 'Aucun ouvrage trouv&eacute; dans le catalogue',
@@ -80,12 +88,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'presentation' => 'Pr&eacute;sentation',
 'prets_en_cours' => 'Pr&ecirc;ts en cours',
 'prets_en_retard' => 'Pr&ecirc;ts en retard',
+'prix' => 'Prix',
 'publisher_address1' => 'Adresse',
 'publisher_address2' => 'Adresse (suite)',
 'publisher_city' => 'Ville',
 'publisher_country' => 'Pays',
 'publisher_web' => 'Site internet',
 'publisher_zipcode' => 'CP',
+
+// R
 'rang' => 'Rang',
 'recherche_avancee' => 'Recherche avanc&eacute;e',
 'recherche_catalogue' => 'Dans le catalogue',
