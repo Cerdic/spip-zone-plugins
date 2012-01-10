@@ -47,6 +47,12 @@
 //			$trans['&#176;'] = "°";
 			// des caracteres non supportes
 #			$trans["&nbsp;&euro;"]=' €';
+
+			# si &amp; est mentionne specifiquement, conserver un caractere
+			# de facon a pouvoir ecrire "é s'écrit <html>&eacute;</html>"
+			$trans['&amp;'] = '&#38;';
+
+
 	  	if ($GLOBALS['meta']['charset'] == 'utf-8'){
 				foreach ($trans as $key=>$value)
 					$transutf[$key]=utf8_encode($value);
@@ -378,7 +384,7 @@
 
 		$contenu = preg_replace("/<(script|style)\b.+?<\/\\1>/i", "", $contenu);
 		$contenu = preg_replace(",[\r\n],", " ", $contenu); // Virer les retours chariot pour rendre le texte lisible - les paragaphes et br les reintroduiront la ou necessaire
-		
+
 		return $contenu;
 	}
 
@@ -459,7 +465,7 @@
 		//Post Traitement
 		$contenu_propre = _spip_apres_sale($contenu_propre);
 
-		return $contenu_propre;
+		return trim($contenu_propre);
 	}
 
 ?>
