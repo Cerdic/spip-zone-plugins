@@ -33,9 +33,9 @@
 		if (!isset($trans)) {
 			$trans = get_html_translation_table(HTML_ENTITIES, $quote_style);
 			$trans = array_flip($trans);
-			$trans["&euro;"]='€';
-			$trans["&oelig;"]='œ';
-			$trans["&OElig;"]='Œ';
+#			$trans["&euro;"]='€';
+#			$trans["&oelig;"]='œ';
+#			$trans["&OElig;"]='Œ';
 			foreach ($trans as $key => $value){
 			   $trans['&#'.ord($value).';'] = $value;
 			}
@@ -46,7 +46,7 @@
 //			$trans['&#187;'] = "»";
 //			$trans['&#176;'] = "°";
 			// des caracteres non supportes
-			$trans["&nbsp;&euro;"]=' €';
+#			$trans["&nbsp;&euro;"]=' €';
 	  	if ($GLOBALS['meta']['charset'] == 'utf-8'){
 				foreach ($trans as $key=>$value)
 					$transutf[$key]=utf8_encode($value);
