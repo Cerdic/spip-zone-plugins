@@ -1,28 +1,34 @@
 <plugin>
-	<nom>SkipLinks</nom>
-	<slogan>Liens de navigation interne dans une page</slogan>
-	<icon>icon/skiplink-64.png</icon>
-	<version>2.1.1</version>
-	<etat>dev</etat>
-	<description>
-	<multi>
-	[fr]Ce plugin propose des liens facilitant la navigation dans la page (liens d'acc&#232;s rapide, retour en haut de page, dits &#171; skip navigation links &#187;) et leurs ancres. Ces liens sont indispensables pour les utilisateurs naviguant au clavier ou surfant sur t&#233;l&#233;phone portable.
-	[en]Skip Navigation Links
-	[ar]&#1585;&#1608;&#1575;&#1576;&#1591; &#1578;&#1587;&#1607;&#1617;&#1604; &#1575;&#1604;&#1578;&#1606;&#1602;&#1604; &#1601;&#1610; &#1575;&#1604;&#1589;&#1601;&#1581;&#1577;: &#1585;&#1608;&#1575;&#1576;&#1591; &#1608;&#1589;&#1608;&#1604; &#1587;&#1585;&#1610;&#1593; &#1608;&#1593;&#1608;&#1583;&#1577; &#1575;&#1604;&#1609; &#1571;&#1593;&#1604;&#1609; &#1575;&#1604;&#1589;&#1601;&#1581;&#1577; &#1608;&#1605;&#1585;&#1575;&#1587;&#1610;&#1607;&#1575;.&#1607;&#1584;&#1607; &#1575;&#1604;&#1585;&#1608;&#1575;&#1576;&#1591; &#1590;&#1585;&#1608;&#1585;&#1610;&#1577; &#1604;&#1604;&#1578;&#1606;&#1602;&#1604; &#1576;&#1575;&#1587;&#1578;&#1582;&#1583;&#1575;&#1605; &#1604;&#1608;&#1581;&#1577; &#1575;&#1604;&#1605;&#1601;&#1575;&#1578;&#1610;&#1581; &#1608;&#1605;&#1601;&#1610;&#1583;&#1577; &#1580;&#1583;&#1575;&#1611; &#1601;&#1610; &#1575;&#1604;&#1607;&#1608;&#1575;&#1578;&#1601; &#1575;&#1604;&#1580;&#1608;&#1575;&#1604;&#1577;.
-	</multi>
-	</description>
-	<lien>http://www.spip-contrib.net/?rubrique1213</lien>
-	<auteur>[romy.tetue.net->http://romy.tetue.net]</auteur>
-	<licence>2009-2011 GPL</licence>
-	<prefix>skiplink</prefix>
-	<pipeline>
-		<nom>affichage_final</nom>
-		<inclure>insere_skiplink.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>insert_head_css</nom>
-		<inclure>skiplink_pipelines.php</inclure>
-	</pipeline>
-	<categorie>navigation</categorie>
-	<necessite id='SPIP' version='[2.1.0;2.1.99]' />
+<nom>SkipLinks</nom>
+<prefix>skiplink</prefix>
+<icon>icon/skiplink-64.png</icon>
+
+<version>2.1.1</version>
+<etat>dev</etat>
+<categorie>navigation</categorie>
+
+<slogan>Liens de navigation interne dans une page</slogan>
+<description>
+<multi>
+[fr]<strong>ATTENTION&nbsp;! Ceci est une version en développement, inachevée&nbsp;!</strong>
+_ Utilisez plutôt la version précédente, SkipLinks&nbsp;1 (jusque [révision 49858->http://zone.spip.org/trac/spip-zone/changeset/49858/_plugins_/skiplink] comprise), [présentée ici->http://www.spip-contrib.net/3008].
+
+Ce plugin propose des liens facilitant la navigation dans la page (liens d'acc&#232;s rapide, retour en haut de page, dits &#171; skip navigation links &#187;) et leurs ancres. Ces liens sont indispensables pour les utilisateurs naviguant au clavier ou surfant sur t&#233;l&#233;phone portable.
+[en]Skip Navigation Links
+[ar]&#1585;&#1608;&#1575;&#1576;&#1591; &#1578;&#1587;&#1607;&#1617;&#1604; &#1575;&#1604;&#1578;&#1606;&#1602;&#1604; &#1601;&#1610; &#1575;&#1604;&#1589;&#1601;&#1581;&#1577;: &#1585;&#1608;&#1575;&#1576;&#1591; &#1608;&#1589;&#1608;&#1604; &#1587;&#1585;&#1610;&#1593; &#1608;&#1593;&#1608;&#1583;&#1577; &#1575;&#1604;&#1609; &#1571;&#1593;&#1604;&#1609; &#1575;&#1604;&#1589;&#1601;&#1581;&#1577; &#1608;&#1605;&#1585;&#1575;&#1587;&#1610;&#1607;&#1575;.&#1607;&#1584;&#1607; &#1575;&#1604;&#1585;&#1608;&#1575;&#1576;&#1591; &#1590;&#1585;&#1608;&#1585;&#1610;&#1577; &#1604;&#1604;&#1578;&#1606;&#1602;&#1604; &#1576;&#1575;&#1587;&#1578;&#1582;&#1583;&#1575;&#1605; &#1604;&#1608;&#1581;&#1577; &#1575;&#1604;&#1605;&#1601;&#1575;&#1578;&#1610;&#1581; &#1608;&#1605;&#1601;&#1610;&#1583;&#1577; &#1580;&#1583;&#1575;&#1611; &#1601;&#1610; &#1575;&#1604;&#1607;&#1608;&#1575;&#1578;&#1601; &#1575;&#1604;&#1580;&#1608;&#1575;&#1604;&#1577;.
+</multi>
+</description>
+<lien>http://www.spip-contrib.net/?rubrique1213</lien>
+<auteur>[romy.tetue.net->http://romy.tetue.net]</auteur>
+<licence>2009-2011 GPL</licence>
+
+<pipeline>
+	<nom>affichage_final</nom>
+	<inclure>insere_skiplink.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>insert_head_css</nom>
+	<inclure>skiplink_pipelines.php</inclure>
+</pipeline>
+<necessite id='SPIP' version='[2.1.0;2.1.99]' />
 </plugin>
