@@ -52,30 +52,5 @@
 	</B_modules_lang>
 </table>
 </B_langues_totales>
-bof
 <//B_langues_totales>
-<script type='text/javascript'><!--
-var modules = [];
-$('table.bilan th').each(function(i){
-	modules[i] = $(this).attr('title');
-});
-$('table.bilan tr').each(function() {
-	var lang = $('td',this).parent('tr').attr('title');
-	if (lang && (lang = lang.replace(/:.*/,'')) && lang != 'fr'){
-		$('td',this).each(function(i){
-			$(this).find('a').click(function(){
-				if (confirm('<:tradlang:message_confirm_redirection:> : '+modules[i]+' ['+lang+']')) {
-					var url = '[(#URL_PAGE{tradlang_module})]&module=' +modules[i] +'&lang_cible=' +lang;
-					if (window.parent)
-						window.parent.location = url;
-					else
-						window.location = url;
-				}else{
-					return false;
-				}
-			});
-		});
-	}
-});
-// --></script>
 </BOUCLE_module>

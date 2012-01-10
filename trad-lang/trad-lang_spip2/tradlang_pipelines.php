@@ -69,6 +69,17 @@ function tradlang_post_edition($flux){
 }
 
 /**
+ * Insertion dans le pipeline insert_head
+ * On ajoute les javascript dans le head
+ */
+function tradlang_insert_head($flux){
+	if(defined('_DIR_PLUGIN_TOOLTIP')){
+		$flux .= '<script type="text/javascript" src="'.find_in_path('tradlang_tooltip.js').'" ></script>'."\n";
+	}
+	return $flux;
+}
+
+/**
  * Insertion dans le pipeline insert_head_css
  * On ajoute les deux feuilles de style dans le head
  */
