@@ -401,6 +401,15 @@ function balise_URL_PMB_AUTEUR_dist($p) {
 	return pbm_balise_url($p, 'id_auteur', 'pmb_auteur');
 }
 
+/**
+ * Balise URL_PMB_NOUVEAUTES
+**/
+function balise_URL_PMB_NOUVEAUTES_dist($p) {
+	$page = 'pmb_nouveautes';
+	$p->code = "generer_url_public('$page')";
+	return $p;
+}
+
 
 function pbm_balise_url($p, $champ, $page) {
 	if (!$id = interprete_argument_balise(1, $p)) {
