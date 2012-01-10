@@ -27,6 +27,7 @@ function formulaires_insertion_video_verifier_dist($id_objet,$objet){
 		set_request('type','dist_youtu');
 		$lavideo = preg_replace('#(youtu\.be/|youtube\.com/watch\?v=|&.*$|\?hd=1)#','',$url);
 	}
+	/* On ne peut plus inserer les videos culture box
 	else if(preg_match('/culturebox/',$url)){
 		set_request('type','dist_cubox');
 		// Lien de type http://culturebox.france3.fr/#/roman/32428/l_or-et-la-toise-le-nouveau-roman-de-brice-tarvel
@@ -34,8 +35,8 @@ function formulaires_insertion_video_verifier_dist($id_objet,$objet){
 		$result=explode("/",_request('video_url'));
 		if(sizeof($result)>2)
 			$lavideo = $result[sizeof($result)-2];
-	}
-
+	}*/
+	
 	if(!$lavideo) $erreurs['message_erreur'] = _T('videos:erreur_adresse_invalide');
 	else set_request('lavideo',$lavideo);
 

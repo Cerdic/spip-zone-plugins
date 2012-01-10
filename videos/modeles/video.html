@@ -14,8 +14,7 @@
 [(#SET{lesExtensions,
 	#ARRAY{	1,dist_daily,
 			2,dist_youtu,
-			3,dist_vimeo,
-			4,dist_cubox
+			3,dist_vimeo
 	}
 })]
 [(#SET{lesExtensionsHtml5,
@@ -104,16 +103,6 @@
 	[(#EXTENSION|=={dist_youtu}|oui)
 	<iframe width="#GET{largeur}" height="#GET{hauteur}" src="http://www.youtube.com/embed/#GET{fichier}?hd=1&amp;wmode=#GET{wmode}" frameborder="0" allowfullscreen class="youtube-player"></iframe>
 	]
-	
-[(#REM)
-/** Traiter CultureBox france3 **/
-	http://culturebox.france3.fr
-]
-
-	[(#EXTENSION|=={dist_cubox}|oui)
-	<iframe src="http://culturebox.france3.fr/player.swf?video=#GET{fichier}&amp;wmode=#GET{wmode}" width="#GET{largeur}" height="#GET{hauteur}" frameborder="0"></iframe>
-	]
-	
 
 
 [(#REM)
