@@ -379,7 +379,7 @@ function pmb_parse_unimarc_data_70x($groupe, $id, $indice='') {
 			),
 			array(
 				'cle' => "liensauteurs$indice",
-				'valeur' => "<a href=\"" . generer_url_public('author_see', "id=$id") . "\">" . $nom . "</a>",
+				'valeur' => "<a href=\"" . generer_url_public('pmb_auteur', "id_auteur=$id") . "\">" . $nom . "</a>",
 				'@post_traitements' => array('inter' => ', '),
 			),
 			array(

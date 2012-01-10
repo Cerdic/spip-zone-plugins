@@ -372,56 +372,43 @@ function critere_SYNDIC_ARTICLES_pmb_notices($idb, &$boucles, $crit) {
 
 
 /**
- * Balise #URL_NOTICE
- * et #URL_NOTICE{18}
- * 
+ * Balise #URL_PMB_NOTICE et #URL_PMB_NOTICE{18}
 **/
-function balise_URL_NOTICE_dist($p) {
-
-	if (!$id = interprete_argument_balise(1, $p)) {
-		$id = champ_sql('id', $p);
-	}
-
-	$page = 'pmb_notice';
-	$p->code = "(($id) ? generer_url_public('$page', 'id='.$id) : '')";
-	$p->interdire_scripts = false;
-	return $p;
+function balise_URL_PMB_NOTICE_dist($p) {
+	return pbm_balise_url($p, 'id', 'pmb_notice');
 }
 
 
 /**
- * Balise #URL_COLLECTION
- * et #URL_COLLECTION{18}
- * 
+ * Balise #URL_PMB_COLLECTION et #URL_PMB_COLLECTION{18}
 **/
-function balise_URL_COLLECTION_dist($p) {
-
-	if (!$id = interprete_argument_balise(1, $p)) {
-		$id = champ_sql('id_collection', $p);
-	}
-
-	$page = 'pmb_collection';
-	$p->code = "(($id) ? generer_url_public('$page', 'id='.$id) : '')";
-	$p->interdire_scripts = false;
-	return $p;
+function balise_URL_PMB_COLLECTION_dist($p) {
+	return pbm_balise_url($p, 'id_collection', 'pmb_collection');
 }
 
 
 /**
- * Balise #URL_EDITEUR
- * et #URL_EDITEUR{18}
- * 
+ * Balise #URL_PMB_EDITEUR et #URL_PMB_EDITEUR{18}
 **/
-function balise_URL_EDITEUR_dist($p) {
+function balise_URL_PMB_EDITEUR_dist($p) {
+	return pbm_balise_url($p, 'id_editeur', 'pmb_editeur');
+}
 
+/**
+ * Balise #URL_PMB_AUTEUR et #URL_PMB_EDITEUR{18}
+**/
+function balise_URL_PMB_AUTEUR_dist($p) {
+	return pbm_balise_url($p, 'id_auteur', 'pmb_auteur');
+}
+
+
+function pbm_balise_url($p, $champ, $page) {
 	if (!$id = interprete_argument_balise(1, $p)) {
-		$id = champ_sql('id_editeur', $p);
+		$id = champ_sql($champ, $p);
 	}
 
-	$page = 'pmb_editeur';
-	$p->code = "(($id) ? generer_url_public('$page', 'id='.$id) : '')";
+	$p->code = "(($id) ? generer_url_public('$page', '$champ='.$id) : '')";
 	$p->interdire_scripts = false;
 	return $p;
 }
-
 ?>

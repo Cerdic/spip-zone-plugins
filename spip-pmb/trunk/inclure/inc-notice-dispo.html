@@ -2,7 +2,7 @@
 
 [(#SESSION_SET{tab_noticesconsultees, [(#SESSION{tab_noticesconsultees,#ARRAY}
 	|array_reverse
-	|push{<a href='[(#URL_PAGE{notice_display}|parametre_url{id,#ENV{id}})]'>
+	|push{<a href='[(#URL_PMB_NOTICE{#ENV{id}})]'>
 		[(#ENV{titre_notice}|urldecode)]
 	</a>}|array_unique|array_reverse|array_slice{0,3})]})]
 
