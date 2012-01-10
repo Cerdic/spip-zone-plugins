@@ -2,7 +2,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 /*
  * Plugin Notifications
- * (c) 2009 SPIP
+ * (c) 2012 SPIP
  * Distribue sous licence GPL
  *
  */
@@ -11,11 +11,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Fonction appelee par divers pipelines
 
 // Notes :
-// Actuellement la fonction ne peux envoyer de mails html que si l'expediteur est positionné (on n'utilise pas la config facteur)
+// Actuellement la fonction ne peux envoyer de mails html que si l'expediteur est positionne (on n'utilise pas la config facteur)
 // notifications_envoyer_mails() de spip ne peut pas envoyer de mails en html. Voir avec le plugin notifications avancees
 
-function notifications_commande_instituer_dist($quoi, $id_commande, $options) {
-	spip_log("notifications_commande_instituer_dist id_commande $id_commande",'commandes');
+function notifications_commande_instituer_dist($quoi, $id_commande, $options) {	
+
+	include_spip('commandes_fonctions');
 	include_spip('inc/config');
 	$config = lire_config('commandes');
 
@@ -24,15 +25,15 @@ function notifications_commande_instituer_dist($quoi, $id_commande, $options) {
 		spip_log("notifications_commande_instituer_dist : statut inchange ".$options['statut'],'commandes');
 		return;
 	}
-	// Si les notifications sont désactivées
+	// Si les notifications sont desactivees
 	if(!$config['activer']) {
-		spip_log("notifications_commande_instituer_dist : notifications désactivées",'commandes');
+		spip_log("notifications_commande_instituer_dist : notifications desactivees",'commandes');
 		return;
 	}
 
 	// Envoie une notification si la commande passe dans un des statuts choisis dans la config
 	if(!in_array($options['statut'],$config['quand'])) {
-		spip_log("notifications_commande_instituer_dist : pas de notificationpour ce nouveau statut ".$options['statut'],'commandes');
+		spip_log("notifications_commande_instituer_dist : pas de notification pour ce nouveau statut ".$options['statut'],'commandes');
 		return;
 	}
 
@@ -80,15 +81,18 @@ function notifications_commande_instituer_dist($quoi, $id_commande, $options) {
 
 
 	$destinataires = pipeline('notifications_destinataires',
-										array(
-											'args'=>array('quoi'=>$quoi,'id'=>$id_commande,'options'=>$options),
-											'data'=>$destinataires)
-										);
+				array(
+					'args'=>array('quoi'=>$quoi,'id'=>$id_commande,'options'=>$options),
+					'data'=>$destinataires)
+			);
 
 
-	spip_log("notifications_commande_instituer_dist Expediteur $expediteur, Envoi au(x) vendeur(s) ".implode(", ", $destinataires),'commandes');
+	spip_log("notifications_commande vendeur Expediteur $expediteur, Envoi au(x) vendeur(s) ".implode(", ", $destinataires),'commandes');
+	
 	$modele = "notifications/commande_vendeur";
 	$texte = recuperer_fond($modele,array($id_type=>$id_commande,"id"=>$id_commande));
+	
+	
 	notifications_nettoyer_emails($destinataires);
 	// Si un expediteur est impose, on doit utiliser la fonction envoyer_email pour rajouter l'expediteur
 	if($expediteur) {
@@ -106,19 +110,20 @@ function notifications_commande_instituer_dist($quoi, $id_commande, $options) {
 		if(!$id_auteur)
 			$id_auteur=sql_getfetsel("id_auteur","spip_commandes","id_commande=".$id_commande);
 		
-		//envoyer un mail different pour le client		
-		$mailclient = sql_getfetsel("email","spip_auteurs","id_auteur=".$id_auteur);
+		//envoyer un mail different pour le client	
+		$mailclient = array();
+		$mailclient[]= sql_getfetsel("email","spip_auteurs","id_auteur=".$id_auteur);
 	
-		if ($mailclient!=''){
+		if (count($mailclient)>0){
 			$modele = "notifications/commande_client";
 	
 			$destinataires = pipeline( 'notifications_destinataires',
-												array(
-													'args'=>array('quoi'=>$quoi,'id'=>$id_commande,'options'=>$options),
-													'data'=>$mailclient)
-													);
+						array(
+							'args'=>array('quoi'=>$quoi,'id'=>$id_commande,'options'=>$options),
+							'data'=>$mailclient)
+						);
 	
-			spip_log("notifications_commande_instituer_dist Expediteur $expediteur, Envoi au client $mailclient",'commandes');
+			spip_log("notifications_commande client Expediteur $expediteur, Envoi au client ". implode(", ", $mailclient),'commandes');
 			$texte = recuperer_fond($modele,array($id_type=>$id_commande,"id"=>$id_commande));
 			notifications_nettoyer_emails($destinataires);
 			if($expediteur) {
