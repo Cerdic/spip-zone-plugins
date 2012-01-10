@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
-	
+
 function exec_comptes() {
 
 	include_spip('inc/autoriser');
@@ -29,7 +29,7 @@ function exec_comptes() {
 			$exercice = sql_getfetsel("id_exercice","spip_asso_exercices","","","fin DESC");
 			if(!$exercice) $exercice=0;
 		}
-		
+
 		$vu = _request('vu');
 		if (!is_numeric($vu)) $vu = '';
 
@@ -58,11 +58,11 @@ function exec_comptes_args($exercice, $vu, $imputation, $debut, $max_par_page, $
 
 	echo debut_gauche("",true);
 	echo debut_boite_info(true);
-	echo association_date_du_jour();	
+	echo association_date_du_jour();
 	echo '<p>'. _T('asso:en_bleu_recettes_en_rose_depenses'). '</p>';
 	echo $totaux;
-	echo fin_boite_info(true);	
-	
+	echo fin_boite_info(true);
+
 	$url_bilan = generer_url_ecrire('bilan', "exercice=$exercice");
 	$url_compte_resultat = generer_url_ecrire('compte_resultat', "exercice=$exercice");
 	$url_annexe = generer_url_ecrire('annexe', "exercice=$exercice");
@@ -73,11 +73,11 @@ function exec_comptes_args($exercice, $vu, $imputation, $debut, $max_par_page, $
 	. association_icone(_T('asso:ajouter_une_operation'),  generer_url_ecrire('edit_compte'), 'ajout_don.png');
 
 	echo bloc_des_raccourcis($res);
-	
+
 	echo debut_droite("",true);
-	
+
 	debut_cadre_relief(  "", false, "",  _T('asso:informations_comptables'));
-	
+
 	echo "\n<table width='100%'>";
 	echo '<tr><td>';
 	echo '<form method="post" action="'.generer_url_ecrire('comptes',"imputation=$imputation").'"><div>';
@@ -91,7 +91,7 @@ function exec_comptes_args($exercice, $vu, $imputation, $debut, $max_par_page, $
 		if ($exercice==$val['id_exercice']) { echo ' selected="selected"'; }
 		echo '>'.$val['intitule'].'</option>';
 	}
-	echo '</select></div></form></td>';
+	echo '</select><noscript><input type="submit" value="'._T('lister').'" /></noscript></div></form></td>';
 
 	echo '<td>';
 	echo '<form method="post" action="'.generer_url_ecrire('comptes', "exercice=$exercice").'"><div>';
@@ -106,13 +106,13 @@ function exec_comptes_args($exercice, $vu, $imputation, $debut, $max_par_page, $
 		/* ne pas afficher les codes de la classe financiere : ce n'est pas une imputation et les inactifs  */
 		"classe <> ".$GLOBALS['association_metas']['classe_banques']." AND active AND date >= \"".exercice_date_debut($exercice)."\" AND date <= \"".exercice_date_fin($exercice)."\"",
 		"code",
-		"code ASC");	
+		"code ASC");
 	while ($plan = sql_fetch($sql)) {
 		echo '<option value="'.$plan['code'].'" ';
 		if ($imputation==$plan['code']) { echo ' selected="selected"'; }
 		echo '>'.$plan['code'].' - '.$plan['intitule'].'</option>';
 	}
-	echo '</select></div></form></td>';
+	echo '</select><noscript><input type="submit" value="'._T('filtrer').'" /></noscript></div></form></td>';
 	echo '</tr></table>';
 
 	/* (re)calculer la pagination en fonction de id_compte */
@@ -142,14 +142,14 @@ function exec_comptes_args($exercice, $vu, $imputation, $debut, $max_par_page, $
 		$pages=intval($nombre_selection/$max_par_page) + 1;
 		$args = 'exercice='.$exercice.'&imputation='.$imputation. (is_numeric($vu) ? "&vu=$vu" : '');
 		$nav = '';
-		if ($pages != 1) for ($i=0;$i<$pages;$i++) { 
+		if ($pages != 1) for ($i=0;$i<$pages;$i++) {
 			$position= $i * $max_par_page;
 			if ($position == $debut)
 			  { $nav .= '<strong>'.$position.' </strong>'; }
 			else { $h = generer_url_ecrire('comptes',$args.'&debut='.$position);
 			  $nav .= "<a href='$h'>$position</a>\n"; }
 		  }
-		
+
 		$table = "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>"
 		. "<tr style='background-color: #DBE1C5;'>\n"
 		. '<th style="text-align: center;">' . _T('asso:id'). "</th>\n"
@@ -163,11 +163,14 @@ function exec_comptes_args($exercice, $vu, $imputation, $debut, $max_par_page, $
 		. $table
 		. "</table>\n"
 		. "<table width='100%'><tr>\n<td>" . $nav . '</td><td style="text-align:right;"><input type="submit" value="' . _T('asso:valider') . '" class="fondo" /></td></tr></table>';
-	
+
 		echo generer_form_ecrire('action_comptes', $table);
 	}
-	fin_cadre_relief();  
-	echo fin_page_association(); 
+	else {
+		echo '<table width="100%"><tr><td style="text-align:center;">' .( $exercice ? _T('asso:aucune_operation') : "<a href='".generer_url_ecrire('exercices')."'>"._T('asso:definir_exercice').'</a>' ). '</td></tr></table>';
+	}
+	fin_cadre_relief();
+	echo fin_page_association();
 }
 
 function comptes_while($where, $limit, $id_compte)
@@ -181,7 +184,7 @@ function comptes_while($where, $limit, $id_compte)
 		if (substr($data['imputation'],0,2)=='58') { $class="vi";} // virement interne
 		if (substr($data['imputation'],0,2)=='86') { $class="cv";} // contribution volontaire
 		$id = $data['id_compte'];
-		
+
 		/* pour voir au chargement l'id_compte recherche */
 		if($id_compte==$id) {
 			$onload_option .= 'onLoad="document.getElementById(\'id_compte'.$id_compte.'\').scrollIntoView(true);"';
@@ -236,25 +239,25 @@ function comptes_totaux($where, $imputation)
 	$somme_recettes = $data['somme_recettes'];
 	$somme_depenses = $data['somme_depenses'];
 	$solde= $somme_recettes - $somme_depenses;
-			
-	return '<table width="100%">' . 
-	 '<tr>' . 
-	 '<td colspan="2"><strong>' . 
+
+	return '<table width="100%">' .
+	 '<tr>' .
+	 '<td colspan="2"><strong>' .
 	  _T('asso:totaux') . ($imputation=='%' ? '' : ' '.$imputation) .
-	 ' :</strong></td>' . 
-	 '</tr>' . 
-	 '<tr>' . 
-	 '<td><strong style="color:blue;">'. _T('asso:entrees') . '</strong></td>' . 
-	 '<td style="text-align:right;">'.association_nbrefr($somme_recettes).' &euro; </td>' . 
-	 '</tr>' . 
-	 '<tr>' . 
-	 '<td><strong style="color:pink;">' . _T('asso:sorties') . '</strong></td>' . 
-	 '<td style="text-align:right;">'.association_nbrefr($somme_depenses).' &euro;</td>' . 
-	 '</tr>' . 
-	 '<tr>' . 
-	 '<td><strong style="color: #9F1C30;">' . _T('asso:solde') . '</strong></td>' . 
-	 '<td class="impair" style="text-align:right;">'.association_nbrefr($solde).' &euro;</td>' . 
-	 '</tr>' . 
+	 ' :</strong></td>' .
+	 '</tr>' .
+	 '<tr>' .
+	 '<td><strong style="color:blue;">'. _T('asso:entrees') . '</strong></td>' .
+	 '<td style="text-align:right;">'.association_nbrefr($somme_recettes).' &euro; </td>' .
+	 '</tr>' .
+	 '<tr>' .
+	 '<td><strong style="color:pink;">' . _T('asso:sorties') . '</strong></td>' .
+	 '<td style="text-align:right;">'.association_nbrefr($somme_depenses).' &euro;</td>' .
+	 '</tr>' .
+	 '<tr>' .
+	 '<td><strong style="color: #9F1C30;">' . _T('asso:solde') . '</strong></td>' .
+	 '<td class="impair" style="text-align:right;">'.association_nbrefr($solde).' &euro;</td>' .
+	 '</tr>' .
 	 '</table>';
 }
 
