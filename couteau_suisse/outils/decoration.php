@@ -14,7 +14,8 @@ cs_log("decoration_installe_dist()");
 	$deco_balises = preg_split("/[\r\n]+/", _decoration_BALISES());
 	$aide = $trouve = $remplace = $alias = $auto_balises = $auto_remplace = $BT = array();
 	foreach ($deco_balises as $balise) {
-		if (preg_match('/(span|div|auto)\.([^.]+)\.(class|lang)\s*=(.+)$/', $balise, $regs)) {
+		$balise = trim($balise);
+		if (preg_match('/^(span|div|auto)\.([^.]+)\.(class|lang)\s*=(.+)$/', $balise, $regs)) {
 			// les class/lang
 			list($auto, $div, $racc, $attr, $valeur) = array($regs[1]=='auto', $regs[1], trim($regs[2]), trim($regs[3]), trim($regs[4]));
 			if (defined('_SPIP20100') && $attr=='lang') {
@@ -37,7 +38,7 @@ cs_log("decoration_installe_dist()");
 					$remplace[] = $b = "</$div>"; $remplace[] = $a.$b;
 				}
 			}
-		} elseif (preg_match('/(span|div|auto)\.([^=]+)=(.+)$/', $balise, $regs)) {
+		} elseif (preg_match('/^(span|div|auto)\.([^=]+)=(.+)$/', $balise, $regs)) {
 			// les styles inline
 			list($auto, $div, $racc, $style) = array($regs[1]=='auto', $regs[1], trim($regs[2]), trim($regs[3]));
 			$BT[] = array($racc, $auto, $div);
@@ -51,7 +52,7 @@ cs_log("decoration_installe_dist()");
 				$remplace[] = $a = "<$div $attr>";
 				$remplace[] = $b = "</$div>"; $remplace[] = $a.$b;
 			}
-		} elseif (preg_match('/([^=]+)=(.+)$/', $balise, $regs)) {
+		} elseif (preg_match('/^([^=]+)=(.+)$/', $balise, $regs)) {
 			// les alias
 			$alias[trim($regs[1])] = trim($regs[2]);
 		}
