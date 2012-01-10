@@ -12,20 +12,28 @@ if(!defined("_DUREE_CACHE_AJAXSTATIC")) define("_DUREE_CACHE_AJAXSTATIC", 7200);
 function balise_INCLURE($p) {
 	$f = balise_INCLURE_dist($p);
 
-	if (false !== strpos($f->code, "'ajaxload'"))
+	if (false !== strpos($f->code, "'ajaxload'")) {
 		$f->code = preg_replace('/recuperer_fond/', 'recuperer_fond_ajax',
-						$f->code, 1);
-						
-	// inserer UNE FOIS le X-Spip_Filtre:INCLUREAJAXLOAD_affichemeta
-	// equivalent a #FILTRE{INCLUREAJAXLOAD_affichemeta}
-	if(!defined("_INCLURE_AJAX_LOAD_INSERT")) {
-		define("_INCLURE_AJAX_LOAD_INSERT", "oui");
-		$f->code .= ".'<' . '"
-			.'?php header("X-Spip-Filtre: \'.'
-				."INCLUREAJAXLOAD_affichemeta"
-			. " . '\"); ?'.'>'";
+			$f->code, 1);
 
-		$f->interdire_scripts = false;
+		// inserer UNE FOIS le X-Spip_Filtre:INCLUREAJAXLOAD_affichemeta
+		// equivalent a #FILTRE{INCLUREAJAXLOAD_affichemeta}
+		
+		// attention cependant, si cet ajout est fait quelque soit la balise #INCLURE
+		// les tests [(#INCLURE{fond=x/y}|trim) si du contenu alors... ]
+		// ne fonctionnent plus car le retour peut contenir le code du header insere.
+		// on ne le fait donc uniquement si l'on croise un inclure avec {ajaxload}
+		// qui de toutes facons, lui, retourne la div pour le js.
+		
+		if(!defined("_INCLURE_AJAX_LOAD_INSERT")) {
+			define("_INCLURE_AJAX_LOAD_INSERT", "oui");
+			$f->code .= ".'<' . '"
+				.'?php header("X-Spip-Filtre: \'.'
+					."INCLUREAJAXLOAD_affichemeta"
+				. " . '\"); ?'.'>'";
+
+			$f->interdire_scripts = false;
+		}
 	}
 	return $f;
 }
