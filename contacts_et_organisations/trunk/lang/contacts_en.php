@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chercher_statut' => 'Status',
 	'confirmer_delier_contact' => 'Are you sure you want to unlink this organisation from this contact?',
 	'confirmer_delier_organisation' => 'Are you sure you want to unlink this contact from this organisation?',
-	'confirmer_delier_organisation_rubrique' => 'Êtes-vous sûr de vouloir délier cette organisation de cette rubrique ?', # NEW
+	'confirmer_delier_organisation_rubrique' => 'Are you sure you want to unlink this organization from this section?',
 	'confirmer_supprimer_contact' => 'Ares you sure you want to delete all information about this contact?',
 	'confirmer_supprimer_organisation' => 'Are you sure you want to delete all the information about this organisation?',
 	'contact' => 'One contact',
@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contact_voir' => 'See',
 	'contacts' => 'Contacts',
 	'contacts_nb' => '@nb@ contacts',
-	'contacts_un' => 'Un contact', # NEW
+	'contacts_un' => 'A contact',
 	'creer_auteur_contact' => 'Create a new author and link it to this contact',
 	'creer_auteur_organisation' => 'Create a new author and link it to this organization',
 
@@ -58,10 +58,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_statut_juridique' => 'company, organisation, ...',
 	'explication_supprimer_contact' => 'Deleting this contact will remove all the additional informations which have been filled on the author page.',
 	'explication_supprimer_organisation' => 'Deleting this organization will remove all the additional informations which have been filled on the author page.',
-	'explications_page_contacts' => '<MODIF>Page en cours de développement. <br /><br />Actions envisagées :<ul>
- <li>voir tous les contacts</li><li>transformer les auteurs en contacts</li><li>importer des contacts</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
-	'explications_page_organisations' => '<MODIF>Page en cours de développement. <br /><br />Actions envisagées :<ul>
- <li>voir toutes les organisations</li><li>transformer des auteurs en organisations</li><li>importer des organsations</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
+	'explications_page_contacts' => 'Page en cours de développement. <br /><br />Actions envisagées :<ul>
+ <li>voir tous les contacts</li><li>transformer les auteurs en contacts</li><li>importer des contacts</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)', # NEW
+	'explications_page_organisations' => 'Page en cours de développement. <br /><br />Actions envisagées :<ul>
+ <li>voir toutes les organisations</li><li>transformer des auteurs en organisations</li><li>importer des organsations</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)', # NEW
 
 	// I
 	'info_contacts_organisation' => 'Organisation\'s contacts',
