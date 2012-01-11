@@ -113,7 +113,7 @@ function association_editeur_destinations($destination, $unique='', $defaut='')
 function association_ajouter_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal)
 {
 	include_spip('base/association');
-	/* on passe par modifier_contenu (et non sql_inserteq) pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere */
+	/* on passe par modifier_contenu pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere */
 	include_spip('inc/modifier');
 
 	$id_compte = sql_insertq('spip_asso_comptes', array(
@@ -124,6 +124,7 @@ function association_ajouter_operation_comptable($date, $recette, $depense, $jus
 		    'journal' => $journal,
 		    'id_journal' => $id_journal,
 		    'justification' => $justification));
+	modifier_contenu('asso_compte', $id_compte, '', array());
 
 	// on laisse passer ce qui est peut-etre une erreur,
 	// pour ceux qui ne definisse pas de plan comptable.
