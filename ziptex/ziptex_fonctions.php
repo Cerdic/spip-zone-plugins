@@ -9,6 +9,7 @@ function ziptex_polyglossia($lang){
 	return $tableau[$lang];		
 }
 function ziptex_dir($array){
+	sous_repertoire(_DIR_ZIPTEX);
 	foreach ($array as $dir){
 		sous_repertoire(_DIR_ZIPTEX.$dir);	
 	}
