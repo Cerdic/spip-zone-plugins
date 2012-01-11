@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_rubriques' => 'Displays a list of sections and, if desired, the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
 	'description_menu_rubriques_articles' => 'Zobrazí zoznam rubrík, v ktorom môžu byť podrubriky a články včlenené do rôznych úrovní. Podľa predvolených nastavení sa zobrazia všetky rubriky počnúc koreňovým adresárom stránky a budú zotriedené podľa názvu (najprv čísla, potom písmená). Články v danej rubrike budú vždy uvedené po jej podrubrikách.',
 	'description_menu_secteurlangue' => 'This entry can be used by sites which have one language per sector. It displays a menu which lists the sections of the sector corresponding to the language of the page, and if desired the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
-	'description_menu_texte_libre' => 'Jednoducho text, ktorý chcete', # MODIF
+	'description_menu_texte_libre' => 'Jednoducho text, ktorý chcete, alebo kód jazyka SPIP (<:...:>)',
 
 	// E
 	'editer_menus_editer' => 'Upraviť toto menu',
@@ -88,7 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_mise_a_jour' => 'Počas aktualizácie databázy došlo k chybe.',
 	'erreur_parametres' => 'V parametroch stránky je chyba',
 	'erreur_type_menu' => 'Musíte si vybrať typ menu',
-	'erreur_type_menu_inexistant' => 'Ce type de menu n\'est pas/plus disponible', # NEW
+	'erreur_type_menu_inexistant' => 'Tento typ menu (už viac) nie je dostupný',
 
 	// F
 	'formulaire_ajouter_entree' => 'Pridať položku menu',
@@ -120,26 +120,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_titre' => 'Nadpis',
 
 	// I
-	'info_afficher_articles' => 'Les articles seront inclus dans le menu.', # NEW
-	'info_articles_max' => 'Seulement si la rubrique contient au plus @max@ articles', # NEW
-	'info_articles_max_affiches' => 'Affichage limité à @max@ articles', # NEW
-	'info_classe_parent' => 'Classe des éléments parents : ', # NEW
+	'info_afficher_articles' => 'Články budú zaradené do menu.',
+	'info_articles_max' => 'Iba ak v rubrike nie je viac ako @max@ článkov',
+	'info_articles_max_affiches' => 'Zobrazenie obmedzené na @max@ článkov',
+	'info_classe_parent' => 'Trieda nadradených prvkov: ',
 	'info_connexion_obligatoire' => 'Vyžaduje sa prihlásenie',
 	'info_deconnexion_obligatoire' => 'Iba keď ste odhlásený',
-	'info_masquer_articles_uniques' => 'Articles uniques masqués', # NEW
+	'info_masquer_articles_uniques' => 'Unikátne články skryté',
 	'info_numero_menu' => 'MENU ČÍSLO:',
 	'info_page_speciale' => 'Odkaz na stránku "@page@"',
 	'info_page_speciale_zajax' => 'Modalbox pre stránku "@page@" bloku "@bloc@" ',
-	'info_rubrique_courante' => 'Rubrique courante', # NEW
-	'info_rubriques_exclues' => ' / sauf rubrique(s) @id_rubriques@', # NEW
-	'info_rubriques_max_affichees' => 'Affichage limité à @max@ rubriques', # NEW
-	'info_secteur_exclus' => ' / sauf secteur(s) @id_secteur@', # NEW
+	'info_rubrique_courante' => 'Aktuálna rubrika',
+	'info_rubriques_exclues' => ' /okrem rubriky (-ík) @id_rubriques@',
+	'info_rubriques_max_affichees' => 'Zobrazenie obmedzené na @max@ rubrík',
+	'info_secteur_exclus' => ' /okrem sektora (-ov) @id_secteur@',
 	'info_sousrub_cond' => 'Sú zobrazené iba podrubriky aktuálnej rubriky.',
 	'info_tous_groupes_mots' => 'Všetky skupiny kľúčových slov',
 	'info_traduction_recuperee' => 'Kontext určí vybraný preklad',
 	'info_tri' => 'Triedenie:',
 	'info_tri_alpha' => '(abecedné)',
-	'info_tri_articles' => 'Tri des articles :', # NEW
+	'info_tri_articles' => 'Roztriediť články:',
 	'info_tri_num' => '(číselné)',
 
 	// N
@@ -164,8 +164,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_texte_libre' => 'Potvrdený text',
 
 	// T
-	'tous_les_articles' => '... Tous les articles', # NEW
-	'toutes_les_rubriques' => '... Toutes les rubriques' # NEW
+	'tous_les_articles' => '... Všetky články',
+	'toutes_les_rubriques' => '... Všetky rubriky'
 );
 
 ?>
