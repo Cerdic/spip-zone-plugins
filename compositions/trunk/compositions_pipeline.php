@@ -120,6 +120,7 @@ function compositions_affiche_milieu($flux){
 				) {
 				$deplie = $aut ? false : -1;
 				$ids = 'formulaire_editer_composition_objet-' . "$type-$id";
+				include_spip('inc/layer');
 				$bouton = bouton_block_depliable(strtoupper(_T('compositions:composition')), $deplie, $ids);
 
 				$out = '';
