@@ -1,9 +1,3 @@
-[(#REM) on peut passer url_origine pour revenir sur une autre page que le catalogue
-	par exemple si l'on appelle cette inclusion inclure/inc-catalogue depuis une rubrique
-	avec url_origine= # URL_RUBRIQUE ...
-]
-#SET{self,#ENV{url_origine,#URL_PAGE{catalogue}}}
-
 [(#REM) On peut egalement passer une largeur ou hauteur maximale pour les logos...
 	hauteur=...
 	largeur=...
@@ -15,7 +9,7 @@
 	<h2 class="invisible"><:articles_rubrique:></h2>
 	<ul class="liste-items">
 	  <BOUCLE_tab_resultat1(POUR){tableau #ENV{tab_locations}}>
-		[(#SET{url,[(#GET{self}
+		[(#SET{url,[(#URL_PMB_CATALOGUE
 			|parametre_url{id_location,#ENV{tab_locations/#CLE/location_id}})]})]
 		<li class="item">
 			<a href="#GET{url}">
@@ -45,7 +39,7 @@
 		<h2 class="invisible"><:articles_rubrique:></h2>
 		<ul class="liste-items">
 		<BOUCLE_tab_resultat2(POUR){tableau #GET{tab}}>
-			[(#SET{url,[(#GET{self}
+			[(#SET{url,[(#URL_PMB_CATALOGUE
 				|parametre_url{id_section,#GET{tab/#CLE/section_id}}
 				|parametre_url{id_location_memo,#GET{tab/#CLE/section_location}})]})]
 		
@@ -70,26 +64,18 @@
 	</B_tab_resultat2>
 
 
-
-
-	<div id="ajax-recherche-catalogue" class="ajax-content"><img src="#CHEMIN{img/ajaxLoader.gif}" class="ajax-loader" alt="<:pmb:chargement:>" width="43" height="43" /></div>
-	<INCLURE{fond=inclure/inc-recherche-avancee}{recherche}{env}>
+	[(#INCLURE{fond=inclure/inc-recherche-pmb_catalogue}{env}
+		{ajax}{ajaxload}
+		{recherche}
+		{look_ALL}
+		{look_AUTHOR}{look_PUBLISHER}
+		{look_COLLECTION}{look_SUBCOLLECTION}
+		{look_CATEGORY}{look_INDEXINT}
+		{look_KEYWORDS}{look_TITLE}{look_ABSTRACT}
+		{id_section}{id_location_memo}
+		{typdoc}
+		{debut}{fin} )]
 	
-	<script type="text/javascript">
-		$(document).ready(function() {
-		$('#ajax-recherche-catalogue').load("[(#URL_PAGE{ajax-recherche-catalogue})]", {
-			'recherche': '[(#ENV{recherche}|urlencode)]', 'look_ALL': '#ENV{look_ALL}',
-			'look_AUTHOR': '#ENV{look_AUTHOR}', 'look_PUBLISHER': '#ENV{look_PUBLISHER}',
-			'look_COLLECTION': '#ENV{look_COLLECTION}', 'look_SUBCOLLECTION': '#ENV{look_SUBCOLLECTION}',
-			'look_CATEGORY': '#ENV{look_CATEGORY}', 'look_INDEXINT': '#ENV{look_INDEXINT}',
-			'look_KEYWORDS': '#ENV{look_KEYWORDS}', 'look_TITLE': '#ENV{look_TITLE}',
-			'look_ABSTRACT': '#ENV{look_ABSTRACT}', 'id_section': '#ENV{id_section}',
-			'debut': '#ENV{debut}', 'fin': '#ENV{fin}', 'typdoc': '#ENV{typdoc}',
-			'id_location_memo': '#ENV{id_location_memo}' },
-			function (responseText, textStatus, XMLHttpRequest) {
-				$(this).find('.ajax-loader').remove();
-			});
-		});
-	</script>
+	<INCLURE{fond=inclure/inc-recherche-avancee}{recherche}{env}>
 
 <//B_tab_resultat1> 

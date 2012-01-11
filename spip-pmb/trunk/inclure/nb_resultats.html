@@ -16,14 +16,14 @@
 [(#ENV{resultats}|moins{5}|<={0}|non)
 <a style="float: right;" class="pmb_pagination_suiv" href="[(#GET{self}
 	|parametre_url{connect,''}
-	|parametre_url{debut,[(#ENV{debut}|plus{5})]})]##GET{ancre}">
+	|parametre_url{debut,[(#ENV{debut}|plus{5})]})]">
 <:pmb:resultats_suivants:> >>
 </a>]
 
 [(#ENV{debut}|moins{5}|>={0}|oui)
 <a style="float: left;" class="pmb_pagination_prec" href="[(#GET{self}
 	|parametre_url{connect,''}
-	|parametre_url{debut,[(#ENV{debut}|moins{5})]})]##GET{ancre}">
+	|parametre_url{debut,[(#ENV{debut}|moins{5})]})]">
 << <:pmb:resultats_precedents:>
 </a>]
 

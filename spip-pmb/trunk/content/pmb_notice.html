@@ -1,7 +1,7 @@
 [(#REM) Fil d'Ariane ]
 <BOUCLE_notice(PMB:NOTICES){id}>
 <p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
-	&gt; <a href="#URL_PAGE{catalogue}"><:pmb:catalogue:></a>
+	&gt; <a href="#URL_PMB_CATALOGUE"><:pmb:catalogue:></a>
 	&gt; <strong class="on">[(#TITRE|couper{80})]</strong></p>
 
 <div class="cartouche">
@@ -14,7 +14,7 @@
 	[<p class="soustitre">(#SOUSTITRE)</p>]
 </div>
 
-<INCLURE{fond=inclure/inc-pmb_notice}{env}
-	{notice=#VALEUR}{afficher_logo=non}{afficher_resume=oui}>
+<INCLURE{fond=inclure/inc-pmb_notice}{env}{id}
+	{afficher_logo=non}{afficher_resume=oui}>
 
 </BOUCLE_notice>

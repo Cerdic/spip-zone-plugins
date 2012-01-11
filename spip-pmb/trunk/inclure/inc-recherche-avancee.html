@@ -4,14 +4,14 @@
 	
 <div id="search">
 	<div class='formulaire_spip formulaire_recherche_avancee'>
-		<form action='[(#URL_PAGE{recherche}|ancre_url{ajax-recherche-catalogue})]' method='post'>	
+		<form action='[(#URL_PAGE{recherche}|ancre_url{ajax-recherche-catalogue})]' method='post'>
 			[<input type='hidden' name='id_section' value='(#ENV{id_section})'/>]
 			[<input type='hidden' name='id_location_memo' value='(#ENV{id_location_memo})'/>]
 			[<input type='hidden' name='titre_section' value='(#ENV{titre_section})'/>]
 			<input type='hidden' name='page' value='[(#ENV{page,recherche})]'/>
 			<input type='hidden' name='recherche_avancee' value='1'/>
 			<input type='hidden' name='look_PMB' value='1'/>
-			<input type='hidden' name='look_FIRSTACCESS' value='1' />		
+			<input type='hidden' name='look_FIRSTACCESS' value='1' />
 			<fieldset>
 				<legend><:pmb:recherche_avancee:></legend>
 
@@ -36,7 +36,7 @@
 							<option  value='#VALEUR{value_id}'[(#ENV{typdoc}|=={#GET{valeurs_champs/#CLE/value_id}}|oui)selected="selected")]>
 								#VALEUR{value_caption}
 							</option>
-						</BOUCLE_valeurs_champs>			
+						</BOUCLE_valeurs_champs>
 						</select>
 						</B_valeurs_champs>
 					</BOUCLE_tab_resultat>

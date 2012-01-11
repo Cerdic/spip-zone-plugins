@@ -407,8 +407,21 @@ function balise_URL_PMB_AUTEUR_dist($p) {
 function balise_URL_PMB_NOUVEAUTES_dist($p) {
 	$page = 'pmb_nouveautes';
 	$p->code = "generer_url_public('$page')";
+	$p->interdire_scripts = false;
 	return $p;
 }
+
+
+/**
+ * Balise URL_PMB_CATALOGUE
+**/
+function balise_URL_PMB_CATALOGUE_dist($p) {
+	$page = 'pmb_catalogue';
+	$p->code = "generer_url_public('$page')";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
 
 
 function pbm_balise_url($p, $champ, $page) {
