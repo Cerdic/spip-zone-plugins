@@ -199,28 +199,9 @@ function _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, $_id
  *
  * @return bool : autorise ou non .
  */
- /*
+ 
 function inc_restreindre_extras_objet_sur_rubrique_dist($objet, $id_objet, $opt, $ids, $recursif) {
 
-	list($id_rubrique, $ok) = _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, 'id_rubrique');
-	if ($ok) {
-		return true;
-	}
-	
-	// on teste si l'objet est dans une sous rubrique de celles mentionnee...
-	if ($id_rubrique and $recursif) {
-		$id_parent = $id_rubrique;
-		while ($id_parent = sql_getfetsel("id_parent", "spip_rubriques", "id_rubrique=" . sql_quote($id_parent))) {
-			if (in_array($id_parent, $ids)) {
-				return true;
-			}
-		}
-	}
-		  
-    return false;
-}*/
-
-function inc_restreindre_extras_objet_sur_rubrique_dist($objet, $id_objet, $opt, $ids, $recursif) {
 	list($id_rubrique, $ok) = _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, 'id_rubrique');
 	if ($ok) {
 		return true;
@@ -229,7 +210,6 @@ function inc_restreindre_extras_objet_sur_rubrique_dist($objet, $id_objet, $opt,
 	if (!$recursif) {
 		return false;
 	}
-
 
 	// tester si un parent proche existe lorsqu'on ne connait pas la rubrique.
 	if (!$id_rubrique AND $id_rubrique = _request('id_parent')) {
@@ -247,9 +227,9 @@ function inc_restreindre_extras_objet_sur_rubrique_dist($objet, $id_objet, $opt,
 			}
 		}
 	}
-		  
     return false;
 }
+
 
 
 
