@@ -3,7 +3,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * chargement des valeurs par defaut des champs du #FORMULAIRE_RECHERCHE
+ * chargement des valeurs par defaut des champs du #FORMULAIRE_TRADLANG_RECHERCHE_AVANCEE
  * on peut lui passer l'url de destination en premier argument
  *
  * @param string $lien

@@ -20,9 +20,11 @@
 #SET{langues_vides,#GET{langues_vides}|push{#LANG}}
 <//B_strings_ok>
 </BOUCLE_langues_sort>
+
 [(#ENV{langues_choisies}|is_array|oui)
-[(#SET{langues_string,[(#VAL{traduire_nom_langue}|array_map{#ENV{langues_choisies}}|implode{', '})]})]
+	[(#SET{langues_string,[(#VAL{traduire_nom_langue}|array_map{#ENV{langues_choisies}}|implode{', '})]})]
 	<div class="notice">
+		[(#FORMULAIRE_TRADLANG_SWITCHER_LANGUE{'',#ENV{langues_choisies},<:tradlang:titre_changer_langues_affichees:>,'langues_choisies',true})]
 		<:tradlang:message_langues_choisies_affichees{langues=#GET{langues_string}}:>
 	</div>
 ]
@@ -31,6 +33,7 @@
 [(#GET{langues_preferees_auteur}|count|>{0}|oui)
 	[(#SET{langues_string,[(#VAL{traduire_nom_langue}|array_map{#GET{langues_preferees_auteur}}|implode{', '})]})]
 	<div class="notice">
+		[(#FORMULAIRE_TRADLANG_SWITCHER_LANGUE{'',#GET{langues_preferees_auteur},<:tradlang:titre_changer_langues_affichees:>,'langues_choisies',' '})]
 		<:tradlang:message_langues_preferees_affichees{langues=#GET{langues_string}}:>
 	</div>]
 ]]
@@ -39,6 +42,7 @@
 [(#GET{langues_utilisees}|is_array|oui)
 	[(#SET{langues_string,[(#VAL{traduire_nom_langue}|array_map{#GET{langues_utilisees}}|implode{', '})]})]
 	<div class="notice">
+		[(#FORMULAIRE_TRADLANG_SWITCHER_LANGUE{'',#GET{langues_utilisees},<:tradlang:titre_changer_langues_affichees:>,'langues_choisies',true})]
 		<:tradlang:message_langues_utilisees_affichees{langues=#GET{langues_string},nb=#GET{nb_utilisees}}:>
 		[(#SESSION{id_auteur}|oui)
 		#SET{url_profil,#URL_AUTEUR{#SESSION{id_auteur}}|parametre_url{vue,profil}}

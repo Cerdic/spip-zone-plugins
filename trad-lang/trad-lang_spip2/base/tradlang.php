@@ -10,6 +10,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function tradlang_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['tradlang'] = 'tradlang';
 	$interface['table_des_tables']['tradlang_modules'] = 'tradlang_modules';
+	$interface['table_des_traitements']['PRIORITE'][]= 'typo(supprimer_numero(%s), "TYPO", $connect)';
 	return $interface;
 }
 
