@@ -37,7 +37,7 @@
 	<B_modules_lang>
 	<tbody>
 	<BOUCLE_modules_lang(TRADLANG_MODULES){priorite}>
-	<tr class="module #NOM_MOD[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+	<tr class="module #MODULE[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 		<td><a href="[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#ENV{langue_modules}}|parametre_url{langue_modules,''})]">[(#NOM_MOD)]</a></td>
 		<BOUCLE_compte_langue_mere(TRADLANG){module}{lang=#LANG_MERE}> </BOUCLE_compte_langue_mere>
 		<td><abbr title="[(#LANG_MERE|traduire_nom_langue)]">#LANG_MERE</abbr></td>

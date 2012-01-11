@@ -1,9 +1,9 @@
 #SET{langues,#ARRAY}
 #SET{langues_vides,#ARRAY}
 #SET{langues_preferees_auteur,#INFO_LANGUES_PREFEREES{auteur,#SESSION{id_auteur}}|unserialize}
-<BOUCLE_si_pas_langues(CONDITION){si #ENV{langues_choisies,#GET{langues_preferees_auteur}}|is_array|non}>
+<BOUCLE_si_pas_langues(CONDITION){si #ENV{langues_choisies,#GET{langues_preferees_auteur}}|is_array|non|et{#CONFIG{tradlang/limiter_langues_bilan}|=={on}|oui}|oui}>
 #SET{langues_utilisees,#ARRAY}
-#SET{nb_utilisees,10}
+#SET{nb_utilisees,#CONFIG{tradlang/limiter_langues_bilan_nb,10}}
 <BOUCLE_10_langues(TRADLANG){statut=OK}{fusion lang}{!par COUNT(*)}{0,#GET{nb_utilisees}}>
 #SET{langues_utilisees,#GET{langues_utilisees}|push{#LANG}}
 </BOUCLE_10_langues>
@@ -65,7 +65,7 @@
 	<B_modules_lang>
 	<tbody>
 	<BOUCLE_modules_lang(TRADLANG_MODULES){priorite}>
-	<tr class="module #NOM_MOD[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+	<tr class="module #MODULE[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 		<td><a href="[(#SELF|parametre_url{id_tradlang_module,#ID_TRADLANG_MODULE})]" title="[(#MODULE|attribut_html)]">[(#NOM_MOD)]</a></td>
 		#SET{full,''}
 		#SET{langue_mere,#LANG_MERE}

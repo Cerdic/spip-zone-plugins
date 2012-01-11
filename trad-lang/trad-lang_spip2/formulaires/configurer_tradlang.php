@@ -27,6 +27,8 @@ function formulaires_configurer_tradlang_traiter_dist(){
 		"sauvegarde_locale",
 		"sauvegarde_post_edition",
 		"langues_autorisees",
+		"limiter_langues_bilan",
+		"limiter_langues_bilan_nb",
 		"configurer_type",
 		"configurer_statuts",
 		"configurer_auteurs",

@@ -30,6 +30,15 @@
 				cacher_option_intro=oui,
 				datas=#ENV{_langues_possibles}})]
 			<INCLURE{fond=formulaires/tradlang_autorisations}{env}>
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:tradlang:legend_conf_bilan:></h3>
+					<ul>
+						[(#SAISIE{case,limiter_langues_bilan,label=<:tradlang:label_limiter_langues_bilan:>,explication=<:tradlang:explication_limiter_langues_bilan{nb=10}:>})]
+						[(#SAISIE{input,limiter_langues_bilan_nb,label=<:tradlang:label_limiter_langues_bilan_nb:>,explication=<:tradlang:explication_limiter_langues_bilan_nb:>,maxlength=2,defaut=10	})]
+					</ul>
+				</fieldset>
+			</li>
 		</ul>
 		<p class="boutons">
 			<input type="submit" class="submit" value="<:bouton_valider:>" />
