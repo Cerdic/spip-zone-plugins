@@ -19,8 +19,6 @@ function action_editer_asso_comptes() {
 	$id_compte = $securiser_action();
 
 	include_spip('inc/association_comptabilite');
-	include_spip('base/association');
-	include_spip('inc/modifier');
 
 	$date= _request('date');
 	$imputation= _request('imputation');
@@ -76,15 +74,6 @@ function action_editer_asso_comptes() {
 			association_modifier_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, '', $id_compte);
 		}
 	}
-
-	/* on passe par modifier_contenu pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere */
-	$modifs = array("date"=> $date,
-					"recette"=> $recette,
-					"depense"=> $depense,
-					"justification"=> $justification,
-					"imputation" => $imputation,
-					"journal" => $journal);
-	modifier_contenu('asso_compte', $id_compte, '', $modifs);
 
 	return array($id_compte, '');
 }

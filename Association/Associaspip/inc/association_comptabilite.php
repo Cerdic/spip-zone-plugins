@@ -113,6 +113,8 @@ function association_editeur_destinations($destination, $unique='', $defaut='')
 function association_ajouter_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal)
 {
 	include_spip('base/association');
+	/* on passe par modifier_contenu (et non sql_inserteq) pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere */
+	include_spip('inc/modifier');
 
 	$id_compte = sql_insertq('spip_asso_comptes', array(
 		    'date' => $date,
@@ -144,6 +146,8 @@ function association_ajouter_operation_comptable($date, $recette, $depense, $jus
 function association_modifier_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal, $id_compte)
 {
 	include_spip('base/association');
+	/* on passe par modifier_contenu (et non sql_updateq) pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere */
+	include_spip('inc/modifier');
 
 	/* Si on doit gerer les destinations */
 	if ($GLOBALS['association_metas']['destinations']=="on")
@@ -153,25 +157,28 @@ function association_modifier_operation_comptable($date, $recette, $depense, $ju
 
 	// tester $id_journal, si il est null, ne pas le modifier afin de ne pas endommager l'entree dans la base en editant directement depuis le libre de comptes
 	if ($id_journal) {
-		sql_updateq('spip_asso_comptes', array(
+		modifier_contenu('asso_compte', $id_compte, '', array(
+//		sql_updateq('spip_asso_comptes', array(
 			    'date' => $date,
 			    'imputation' => $imputation,
 			    'recette' => $recette,
 			    'depense' => $depense,
 			    'journal' => $journal,
 			    'id_journal' => $id_journal,
-			    'justification' => $justification),
-			    "id_compte=$id_compte");
+			    'justification' => $justification)//,
+//			    "id_compte=$id_compte");
+			    );
 	} else {
-		sql_updateq('spip_asso_comptes', array(
+		modifier_contenu('asso_compte', $id_compte, '', array(
+//		sql_updateq('spip_asso_comptes', array(
 			    'date' => $date,
 			    'imputation' => $imputation,
 			    'recette' => $recette,
 			    'depense' => $depense,
 			    'journal' => $journal,
-			    'justification' => $justification),
-			    "id_compte=$id_compte");
-
+			    'justification' => $justification)//,
+//			    "id_compte=$id_compte");
+			    );
 	}
 
 	return $err;
