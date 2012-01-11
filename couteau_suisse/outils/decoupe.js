@@ -56,9 +56,12 @@ function onglets_init() {
 		e.cancelBubble = true;
 		return false;
 	});
-	// activation d'un onglet grace a l'url
-	if(onglet_get && (this==document))
-		jQuery('#onglets_titre_'+onglet_get).click();
+	// activation d'onglet(s) grace a l'url
+	if(onglet_get && (this==document)) {
+		var onglets = onglet_get.split(',');
+		for (var i=0; i<onglets.length; i++)
+			jQuery('#onglets_titre_'+onglets[i]).click();
+	}
 	// clic vers une note dans un onglet
 	jQuery('.spip_note['+cs_sel_jQuery+'name^=nb], .spip_note['+cs_sel_jQuery+'id^=nb]').each(function(i) {
 		jQuery(this).click(function(e){
@@ -71,7 +74,7 @@ function onglets_init() {
 }
 
 function get_onglet(url) {
- tab=url.search.match(/[?&]onglet=([0-9]*)/) || url.hash.match(/#onglet([0-9]*)/);
+ tab=url.search.match(/[?&]onglet=([0-9,]*)/) || url.hash.match(/#onglet([0-9,]*)/);
  if (tab==null) return false;
  return tab[1];
 }
