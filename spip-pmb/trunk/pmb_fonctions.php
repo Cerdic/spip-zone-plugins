@@ -382,6 +382,10 @@ function pmb_ids_notices_recherches($demande, &$nbTotal, $debut=0, $nombre=5, $p
 		// demande de recherche...
 		if ($tous and !$id_section and !$id_location) {
 			$r = $ws->pmbesOPACAnonymous_simpleSearch($searchType,$recherche);
+/* 
+		} else if (($tous AND $id_section AND !$typdoc)){
+			$r=$ws->pmbesSearch_simpleSearchLocalise($searchType,$recherche,$id_location,$id_section);
+*/
 		} else {
 			$r=$ws->pmbesOPACAnonymous_advancedSearch($search);
 		}
@@ -422,95 +426,6 @@ function pmb_ids_notices_recherches($demande, &$nbTotal, $debut=0, $nombre=5, $p
 }
 
 
-function pmb_recherche_extraire($recherche='', $look_ALL='', $look_AUTHOR='', $look_PUBLISHER='', $look_COLLECTION='', $look_SUBCOLLECTION='', $look_CATEGORY='', $look_INDEXINT='', $look_KEYWORDS='', $look_TITLE='', $look_ABSTRACT='', $id_section='', $debut=0, $fin=5, $typdoc='',$id_location='') {
-	$tableau_resultat = Array();
-	//$recherche = strtolower($recherche);
-	$search = array();
-	$searchType = 0;
-	$type_recherche=0;
-
-	if ($recherche=='*') {
-		$recherche='';
-	}
-
-
-	if ($look_ALL) {
-		if ($recherche) $search[] = array("inter"=>"or","field"=>42,"operator"=>"BOOLEAN", "value"=>$recherche);
-	} else {
-		if ($look_TITLE) {
-			$searchType = 1;
-			if ($recherche) $search[] = array("inter"=>"or","field"=>1,"operator"=>"BOOLEAN", "value"=>$recherche);
-		}
-
-		if ($look_AUTHOR) {
-			$searchType = 2;
-			if ($recherche) $search[] = array("inter"=>"or","field"=>2,"operator"=>"BOOLEAN", "value"=>$recherche);
-		}
-	    
-		if ($look_PUBLISHER) {
-			$searchType = 3;
-			if ($recherche) $search[] = array("inter"=>"or","field"=>3,"operator"=>"BOOLEAN", "value"=>$recherche);
-		}
-
-		if ($look_COLLECTION) {
-			$searchType = 4;
-			if ($recherche) $search[] = array("inter"=>"or","field"=>4,"operator"=>"BOOLEAN", "value"=>$recherche);
-		}
-
-		if ($look_ABSTRACT) {
-			if ($recherche) $search[] = array("inter"=>"or","field"=>10,"operator"=>"BOOLEAN", "value"=>$recherche);
-		}
-	  
-		if ($look_CATEGORY) {
-			$searchType = 6;
-			if ($recherche) $search[] = array("inter"=>"or","field"=>11,"operator"=>"BOOLEAN", "value"=>$recherche);
-		}
-
-		if ($look_INDEXINT) {
-			if ($recherche) $search[] = array("inter"=>"or","field"=>12,"operator"=>"BOOLEAN", "value"=>$recherche);
-		}
-
-		if ($look_KEYWORDS) {
-			if ($recherche) $search[] = array("inter"=>"","field"=>13,"operator"=>"BOOLEAN", "value"=>$recherche);
-		}
-	}
-	
-	if ($typdoc)		$search[] = array("inter"=>"and", "field"=>15, "operator"=>"EQ", "value"=>$typdoc);
-	if ($id_section)	$search[] = array("inter"=>"and", "field"=>17, "operator"=>"EQ", "value"=>$id_section);
-	if ($id_location)	$search[] = array("inter"=>"and", "field"=>16, "operator"=>"EQ", "value"=>$id_location);
-	
-	try {
-		$ws = pmb_webservice();
-		$tableau_resultat[0] = Array();
-
-		//cas d'une recherche simple 
-		if (($look_ALL)&&(!$id_section)&&(!$typdoc)){
-			$r = $ws->pmbesOPACAnonymous_simpleSearch($searchType,$recherche);
-		/*
-		} else if (($look_ALL)&&($id_section)&&(!$typdoc)){
-			$r=$ws->pmbesSearch_simpleSearchLocalise($searchType,$recherche,$id_location,$id_section);
-		*/
-		} else {
-			try {
-				$r=$ws->pmbesOPACAnonymous_advancedSearch($search);
-			} catch (Exception $e) {
-				echo 'Exception reçue (8) : ',  $e->getMessage(), "\n";
-			}
-		}
-		
-		$searchId=$r->searchId;
-		$nb = $r->nbResults;
-		$r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArray($searchId,$debut,$fin,"utf-8");
-		if (is_array($r)) {
-			$tableau_resultat = array_map('pmb_ws_parser_notice', $r);
-		}
-		array_unshift($tableau_resultat, array('nb_resultats' => $nb));
-	} catch (Exception $e) {
-		echo 'Exception reçue (8) : ',  $e->getMessage(), "\n";
-	}
-	
-	return $tableau_resultat;
-}
 
 
 function pmb_recuperer_champs_recherche($langue=0) {
