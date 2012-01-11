@@ -32,15 +32,17 @@ $tables_a_supprimer=array(
 		'spip_asso_destination',
 		'spip_asso_destination_op',
 		'spip_asso_dons',
+    'spip_asso_exercices',
 		'spip_asso_plan',
 		'spip_asso_prets',
 		'spip_asso_ressources',
 		'spip_asso_ventes',
 		'spip_association_metas',
 		'spip_asso_groupes',
-		'spip_asso_groupes_liaisons');
+		'spip_asso_groupes_liaisons',
+    'spip_asso_membres');
 	
-	foreach($tables_a_supprimer as $table);
+	foreach($tables_a_supprimer as $table)
 		{
 		sql_drop_table($table);
 		spip_log("$table $nom_meta desinstalle");
