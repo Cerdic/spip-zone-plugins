@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_droits_auteur' => 'Me de rechten van toegang tot deze zone toevoegen',
-	'aucune_zone' => 'Aucune zone', # NEW
+	'aucune_zone' => 'Geen zone',
 	'auteurs' => 'auteurs',
 
 	// B
