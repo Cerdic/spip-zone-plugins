@@ -236,6 +236,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_bilan_langue' => 'جردة ترجمات اللغة "@lang@"',
 	'titre_bilan_module' => 'جردة ترجمات الوحدة "@module@"',
 	'titre_changer_langue_selection' => 'Changer la langue sélectionnée', # NEW
+	'titre_changer_langues_affichees' => 'Changer les langues affichées', # NEW
 	'titre_commentaires_chaines' => 'تعليق على هذه السلسلة',
 	'titre_logo_tradlang_module' => 'شعار الوحدة',
 	'titre_modifications_chaines' => 'أحدث تعديلات هذه السلسلة',
