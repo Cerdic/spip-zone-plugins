@@ -7,21 +7,17 @@
 	<p class="soustitre">&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</p>
 </div>]
 
-
-<INCLURE{fond=inclure/inc-recherche-avancee}{recherche}{env}>
-[(#ENV{look_SITE}|=={1}|oui)
-	<INCLURE{fond=inclure/inc-recherche-site}{recherche}{env}>
-]
-[(#ENV{look_PMB}|=={1}|oui)
+[(#VAL{PMB}|in_any{#ENV{look}}|oui)
 	[(#INCLURE{fond=inclure/inc-recherche-pmb_catalogue}{env}
-		{ajax}{ajaxload}
-		{recherche}
-		{look_ALL}
-		{look_AUTHOR}{look_PUBLISHER}
-		{look_COLLECTION}{look_SUBCOLLECTION}
-		{look_CATEGORY}{look_INDEXINT}
-		{look_KEYWORDS}{look_TITLE}{look_ABSTRACT}
+		{ajax}
+		{rechercher=#ENV{recherche}}{look}
 		{id_section}{id_location_memo}
 		{typdoc}
 		{debut}{fin} )]
 ]
+
+<INCLURE{fond=inclure/inc-recherche-avancee}{recherche}{env}>
+[(#ENV{look/SITE}|=={1}|oui)
+	<INCLURE{fond=inclure/inc-recherche-site}{recherche}{env}>
+]
+

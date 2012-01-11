@@ -63,10 +63,9 @@
 	</div>
 	</B_tab_resultat2>
 
-
 	[(#INCLURE{fond=inclure/inc-recherche-pmb_catalogue}{env}
-		{ajax}{ajaxload}
-		{recherche}
+		{ajax}
+		{rechercher=#ENV{recherche}}
 		{look_ALL}
 		{look_AUTHOR}{look_PUBLISHER}
 		{look_COLLECTION}{look_SUBCOLLECTION}

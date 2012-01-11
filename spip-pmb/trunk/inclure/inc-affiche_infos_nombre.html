@@ -1,0 +1,10 @@
+[(#ENV{resultats}|>{1}|oui)
+	<p>
+		<:pmb:resultats:> [(#ENV{debut}|plus{1})]
+		<:pmb:a:> [(#ENV{debut}|plus{#ENV{fin,5}}|min{#ENV{resultats}})] 
+		<:pmb:sur:> [(#ENV{resultats})] <:pmb:ouvrages_trouves:>.
+	</p>
+]
+[(#ENV{resultats}|>{1}|non)
+	[<p>(#ENV{resultats}) <:pmb:ouvrage_trouve:> :</p>]
+]

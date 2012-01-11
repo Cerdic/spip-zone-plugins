@@ -1,47 +1,24 @@
-[(#SET{tab_resultat, [(#ENV**{recherche}|urldecode|pmb_prepare_recherche|sinon{*}
-	|pmb_recherche_extraire{#ENV{look_ALL,0}, #ENV{look_AUTHOR,0}, #ENV{look_PUBLISHER,0}, #ENV{look_COLLECTION,0}, #ENV{look_SUBCOLLECTION,0}, #ENV{look_CATEGORY, 0}, #ENV{look_INDEXINT}, #ENV{look_KEYWORDS,0}, #ENV{look_TITLE,0}, #ENV{look_ABSTRACT,0}, #ENV{id_section,0}, #ENV{debut,0}, #ENV{fin,5}, #ENV{typdoc,''}, #ENV{id_location_memo,''}})]})]
-
-[(#REM) le nombre de resultats est stocke dans la cle 0 ... ]
-#SET{nb_resultats,#GET{tab_resultat/0/nb_resultats}}
-#SET{tab_resultat,#GET{tab_resultat}|depile}
-
-
-[(#SET{url,[(#ENV{id_section}
-	|?{#URL_PAGE{catalogue},#URL_PAGE{recherche}}
-	|parametre_url{recherche,[(#ENV{recherche}|urldecode)]}
-	|parametre_url{look_PMB,1}
-	|parametre_url{look_ALL,#ENV{look_ALL}}
-	|parametre_url{look_AUTHOR,#ENV{look_AUTHOR}}
-	|parametre_url{look_PUBLISHER,#ENV{look_PUBLISHER}}
-	|parametre_url{look_COLLECTION,#ENV{look_COLLECTION}}
-	|parametre_url{look_SUBCOLLECTION,#ENV{look_SUBCOLLECTION}}
-	|parametre_url{look_CATEGORY,#ENV{look_CATEGORY}}
-	|parametre_url{look_INDEXINT,#ENV{look_INDEXINT}}
-	|parametre_url{look_KEYWORDS,#ENV{look_KEYWORDS}}
-	|parametre_url{look_TITLE,#ENV{look_TITLE}}
-	|parametre_url{look_ABSTRACT,#ENV{look_ABSTRACT}}
-	|parametre_url{typdoc,#ENV{typdoc}}
-	|parametre_url{id_location_memo,#ENV{id_location_memo}}
-	|parametre_url{id_section,#ENV{id_section}})]})]
-
-
 <a id="resultats_recherche"></a>
 <div class="liste articles avec_resume pmb">
-	<B_tab_resultat>
+	<B_recherche>
 	<h2 class="h2"><:pmb:resultats_dans_catalogue:></h2>
 
-	[(#INCLURE{fond=inclure/nb_resultats,resultats=#GET{nb_resultats},debut,fin,url=#GET{url}})]
-
+	#PMB_AFFICHE_INFOS_NOMBRE
+	
+	[<p class="pagination">(#PAGINATION)</p>]
+	
 	<ul class="liste-items items">
-	<BOUCLE_tab_resultat(DATA){source tableau,#GET{tab_resultat}}>
+	<BOUCLE_recherche(PMB:NOTICES){rechercher}
+			{id_section ?}{id_location_memo ?}{look ?}{pagination 5}>
 		[(#SET{url_ret,[(#GET{url}|parametre_url{debut,#ENV{debut}}|trim|urlencode)]})]
-		<INCLURE{fond=inclure/inc-notice-resume}{id}{url_ret=#GET{url_ret}}{surlignable=0}{compteur=#COMPTEUR_BOUCLE}>
-	</BOUCLE_tab_resultat>
+		[(#INCLURE{fond=inclure/inc-notice-resume}{id}
+			{url_ret=#SELF}{surlignable=0}{compteur=#COMPTEUR_BOUCLE})]
+	</BOUCLE_recherche>
 	</ul>
 
-	[(#INCLURE{fond=inclure/nb_resultats,resultats=#GET{nb_resultats},debut,fin,bilan=non,url=#GET{url}})]
-
-	</B_tab_resultat>
+	[<p class="pagination">(#PAGINATION)</p>]
+	
+	</B_recherche>
 		<:pmb:pas_d_ouvrages_trouves:>
-	<//B_tab_resultat>
+	<//B_recherche>
 </div>

@@ -133,6 +133,7 @@ function pmb_liste_afficher_locations() {
 	return $tableau_locations;
 }
 
+
 /* aucune occurrence ? */
 function pmb_notices_section_extraire($id_section, $debut=0, $fin=5) {
 	$tableau_resultat = Array();
@@ -282,6 +283,145 @@ function pmb_auteur_extraire($id_auteur, $debut=0, $nbresult=5, $id_session=0) {
 
 }
 
+/**
+ * Retourne la liste des identifiants de notices trouvees 
+ *
+ * @param Array $demande
+ * 		Description des différentes criteres de recherche (cle/valeur)
+ * 		- recherche
+ *
+ * @param int $nbTotal
+ * 		Sera renseigne par le nombre total de resultats trouves
+ *
+ * @param int $debut
+ * 		Position du premier resultat renvoye
+ *
+ * @param int $nombre
+ * 		Nombre de resultats renvoyes
+ *
+ * @return array
+ * 		Ids des notices trouvees
+**/
+function pmb_ids_notices_recherches($demande, &$nbTotal, $debut=0, $nombre=5, $pagination=false) {
+	
+	$recherche   = $demande['recherche'];
+	$id_section  = $demande['id_section'];
+	$id_location = $demande['id_location'];
+	$typdoc      = $demande['type_document'];
+	$look        = $demande['look'];
+	if (!$look) $look = array();
+	$look = array_flip($look);
+	$tous = true;
+
+	
+	
+	// si tout coche
+	if (isset($look['ALL'])) {
+		$tous = true;
+	// ou tout pas coche mais autre chose de coche...
+	} elseif (count($look)) {
+		$tous = false;
+	}
+	
+	if ($recherche=='*') {
+		$recherche='';
+	}
+	
+	$searchType = 0;
+	$sort = '';
+	$ids = array();
+	$debut;   // indice du premier resultat
+	$nombre;  // nombre de resultats
+
+	// types de recherches
+	$types = array(
+		'TITLE' => 1,
+		'AUTHOR' => 2,
+		'PUBLISHER' => 3,
+		'COLLECTION' => 4,
+		'CATEGORY' => 6,
+	);
+	// je reproduis a peu pres tel que le code d'avant
+	// mais c'est assez etrange que si plusieurs choses
+	// sont cochees, c'est le dernier type qui est pris
+	// (le plus eleve)
+	foreach ($types as $nom=>$index) {
+		if (isset($look[$nom]) and $look[$nom]) {
+			$searchType = $index;
+		}
+	}
+
+	// ajout des criteres de recherche.
+	if ($recherche) {
+		$search[] = array("inter"=>"or", "field"=>42, "operator"=>"BOOLEAN", "value"=>$recherche);
+
+		$look_correspondances = array(
+			'TITLE' => 1,
+			'AUTHOR' => 2,
+			'PUBLISHER' => 3,
+			'COLLECTION' => 4,
+			'ABSTRACT' => 10,
+			'CATEGORY' => 11,
+			'INDEXINT' => 12,
+			'KEYWORDS' => 13,
+		);
+		foreach ($look_correspondances as $nom=>$id) {
+			if (isset($look[$nom]) and $look[$nom]) {
+				$search[] = array("inter"=>"or", "field"=>$id, "operator"=>"BOOLEAN", "value"=>$recherche);
+			}
+		}
+	}
+
+	if ($typdoc)		$search[] = array("inter"=>"and", "field"=>15, "operator"=>"EQ", "value"=>$typdoc);
+	if ($id_section)	$search[] = array("inter"=>"and", "field"=>17, "operator"=>"EQ", "value"=>$id_section);
+	if ($id_location)	$search[] = array("inter"=>"and", "field"=>16, "operator"=>"EQ", "value"=>$id_location);
+
+	try {
+		$ws = pmb_webservice();
+
+		// demande de recherche...
+		if ($tous and !$id_section and !$id_location) {
+			$r = $ws->pmbesOPACAnonymous_simpleSearch($searchType,$recherche);
+		} else {
+			$r=$ws->pmbesOPACAnonymous_advancedSearch($search);
+		}
+
+		// on obtient une cle specifique a PMB avec le nombre de resultats... c'est tout.
+		$searchId=$r->searchId;
+		$nbTotal = $r->nbResults;
+
+		// pas de nombre... pas la peine de continuer !
+		if ($nbTotal) {
+			// le critere de tri semble dependre de ce qui a ete defini dans PMB dans une table 'tris'
+			// l'inconvenient ici, c'est que PMB retourne tous les champs
+			// et pas uniquement l'identifiant, ce qui est inutile et charge la connexion
+			// et le travail de PMB, mais il n'y a pas de moyen a cette heure ci pour ne demmander que les ids.
+			$r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArraySorted($searchId,$debut,$nombre,"utf-8",false,false,$sort);
+			if (is_array($r)) {
+				foreach ($r as $n) {
+					$ids[] = $n->id;
+				}
+			}
+			// la, on fait un truc rigolo pour SPIP...
+			// on remplit de 0 avant le debut, et apres la fin de la pagination
+			// jusqu'au nombre de resultats, pour faire croire que tous les elements
+			// sont la.
+			// 15 resultats, debut = 5, nb = 5
+			// 0 0 0 0 0 2 4 5 12 18 0 0 0 0
+			if ($pagination) {
+				$vide = array_fill(0, $nbTotal, 0); // que des 0
+				array_splice($vide, $debut, $nombre, $ids);
+				$ids = $vide;
+			}
+		}
+	} catch (Exception $e) {
+		echo 'Exception reçue (8) : ',  $e->getMessage(), "\n";
+	}
+
+	return $ids;
+}
+
+
 function pmb_recherche_extraire($recherche='', $look_ALL='', $look_AUTHOR='', $look_PUBLISHER='', $look_COLLECTION='', $look_SUBCOLLECTION='', $look_CATEGORY='', $look_INDEXINT='', $look_KEYWORDS='', $look_TITLE='', $look_ABSTRACT='', $id_section='', $debut=0, $fin=5, $typdoc='',$id_location='') {
 	$tableau_resultat = Array();
 	//$recherche = strtolower($recherche);
@@ -292,6 +432,7 @@ function pmb_recherche_extraire($recherche='', $look_ALL='', $look_AUTHOR='', $l
 	if ($recherche=='*') {
 		$recherche='';
 	}
+
 
 	if ($look_ALL) {
 		if ($recherche) $search[] = array("inter"=>"or","field"=>42,"operator"=>"BOOLEAN", "value"=>$recherche);
@@ -619,12 +760,15 @@ function pmb_ws_dispo_exemplaire($id_notice, $id_session=0) {
 function pmb_ws_recuperer_tab_notices($listenotices) {
 
 	if (!is_array($listenotices)) {
-		return false;
+		return array();
 	}
 	
 	// on met en cache le resultat et on utilise le cache.
 	// afin d'optimiser si plusieurs boucles sont utilisees.
-	static $notices = array();
+	// par ailleurs, l'id 0, s'il se produit est incongru est
+	// provient du hack pour la pagination de ce plugin.
+	static $notices = array(0 => array());
+	
 	$wanted = $listenotices;
 	// ce qu'on a trouve...
 	$res = array();
@@ -647,6 +791,7 @@ function pmb_ws_recuperer_tab_notices($listenotices) {
 		$r=$ws->pmbesNotices_fetchNoticeListArray($wanted,"utf-8",true,false);
 		if (is_array($r)) {
 			$r = array_map('pmb_ws_parser_notice', $r);
+
 			// on complete notre tableau de resultat
 			// avec nos trouvailles
 			foreach ($r as $notice) {
@@ -659,7 +804,7 @@ function pmb_ws_recuperer_tab_notices($listenotices) {
 	} catch (Exception $e) {
 		echo 'Exception reçue (14) : ',  $e->getMessage(), "\n";
 	}
-	
+	ksort($res);
 	return $res;
 }
 
@@ -730,23 +875,17 @@ function pmb_ws_liste_tri_recherche() {
 	return $tresultat;
 }
 
-// retourne un tableau associatif contenant tous les champs d'une notice 
-function pmb_notice_extraire ($id_notice) {
-	$tableau_resultat = pmb_ws_recuperer_tab_notices(array((string)$id_notice));
-	$notice = array_shift($tableau_resultat);
-	return $notice;
-}
 
 
 // retourne un tableau associatif contenant tous les champs d'un tableau d'id de notices 
-function pmb_tabnotices_extraire ($tabnotices) {
-	$listenotices = Array();
-	if (is_array($tabnotices)) {
-		$listenotices = array_values($tabnotices);
+function pmb_extraire_notices_ids($ids_notices) {
+	if (!is_array($ids_notices)) {
+		$ids_notices = array();
 	}
 
-	return pmb_ws_recuperer_tab_notices($listenotices);
+	return pmb_ws_recuperer_tab_notices($ids_notices);
 }
+
 
 // retourne un tableau associatif contenant les prêts en cours
 function pmb_prets_extraire ($session_id, $type_pret=0) {
