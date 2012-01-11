@@ -1,12 +1,12 @@
 <paquet
 	prefix="entravaux"
 	categorie="maintenance"
-	version="3.1.6"
+	version="3.1.7"
 	etat="stable"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="prive/themes/spip/images/entravaux-32.png"
 	schema="0.2.0"
-	documentation="http://www.spip-contrib.net/plugin-en-travaux-2-0"
+	documentation="www.spip-contrib.net/?rubrique516"
 >	
 
 	<nom>En travaux</nom>

@@ -139,12 +139,9 @@ function entravaux_affichage_final($flux){
 		AND !_AJAX){
 		include_spip('inc/filtres'); // pour http_img_pack
 		$x = '<div id="icone_travaux" style="
-		padding-right: 5px;
-		padding-top: 2px;
-		padding-bottom: 5px;
-		position: absolute;
-		left: 26px;
-		top: 26px;
+		position: fixed;
+		left: 40px;
+		top: 40px;
 		">'
 		. http_img_pack(chemin_image('entravaux-64.png'), _T('entravaux:en_travaux'), '', _T('entravaux:en_travaux'))
 		. '</div>';
