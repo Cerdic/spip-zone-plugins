@@ -49,6 +49,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_langue_cible' => 'The language into which you translate.',
 	'explication_langue_origine' => 'The language from which you translate (Only 100% complete languages ​​are available).',
 	'explication_langues_autorisees' => 'Users will be able to create a new translation only in the selected languages​​.',
+	'explication_limiter_langues_bilan' => 'Par défaut, @nb@ langues seront affichées, si les utilisateurs n\'ont pas sélectionné de langues préférées dans leur profil.', # NEW
+	'explication_limiter_langues_bilan_nb' => 'Combien de langues seront affichées par défaut (les langues les plus traduites seront sélectionnées).', # NEW
 	'explication_sauvegarde_locale' => 'Will save the files in the "squelettes" folder of the site',
 	'explication_sauvegarde_post_edition' => 'Will save temporary files each time you change a language string',
 
@@ -92,6 +94,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_langues_autorisees' => 'Allow only selected languages',
 	'label_langues_preferees_auteur' => 'Vos ou votre langue(s) préférée(s)', # NEW
 	'label_langues_preferees_autre' => 'Ses ou sa langue(s) préférée(s)', # NEW
+	'label_limiter_langues_bilan' => 'Limiter le nombre de langues visibles dans le bilan', # NEW
+	'label_limiter_langues_bilan_nb' => 'Nombre de langues', # NEW
 	'label_nommodule' => 'Module name',
 	'label_priorite' => 'Priority',
 	'label_proposition_google_translate' => 'Google Translate proposal',
@@ -111,6 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_version_selectionnee' => 'String in the selected language (@lang@)',
 	'label_version_selectionnee_comm' => 'Comment in the selected language (@lang@)',
 	'languesdispo' => 'Languages available',
+	'legend_conf_bilan' => 'Affichage du bilan', # NEW
 	'lien_accueil_interface' => 'Home of the translation interface',
 	'lien_aide_recherche' => 'Search help',
 	'lien_aucun_status' => 'None',
@@ -147,6 +152,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_confirm_redirection' => 'You will be redirected to the modification of the module',
 	'message_demande_update_langues_cible_mere' => 'You can ask an administrator to resynchronize this language with the primary language.
 	',
+	'message_info_choisir_langues_profiles' => 'Vous pouvez séléctionner vos langues préférées <a href="@url_profil@">dans votre profil</a> pour les afficher par défaut.', # NEW
+	'message_langues_choisies_affichees' => 'Seules les langues que vous avez choisies sont affichées : @langues@', # NEW
+	'message_langues_preferees_affichees' => 'Seules vos langues préférées sont affichées : @langues@', # NEW
+	'message_langues_utilisees_affichees' => 'Seules les @nb@ langues les plus utilisées sont affichées : @langues@', # NEW
 	'message_module_langue_ajoutee' => 'The language "@language@" was added to the module "@module@".',
 	'message_module_updated' => 'The language module "@module@" has been updated.',
 	'message_passage_trad' => 'We go to the translation',
