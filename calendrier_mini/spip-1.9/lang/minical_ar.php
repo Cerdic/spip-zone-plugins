@@ -1,14 +1,20 @@
 <?php
-if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.org
+// ** ne pas modifier le fichier **
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	'date_jour_abbr_1' => '&#1571;&#1581;&#1583;',
-	'date_jour_abbr_2' => '&#1575;&#1579;&#1606;&#1610;&#1606;',
-	'date_jour_abbr_3' => '&#1579;&#1604;&#1579;&#1575;&#1569;',
-	'date_jour_abbr_4' => '&#1571;&#1585;&#1576;&#1593;&#1575;&#1569;',
-	'date_jour_abbr_5' => '&#1582;&#1605;&#1610;&#1587;',
-	'date_jour_abbr_6' => '&#1580;&#1605;&#1593;&#1577;',
-	'date_jour_abbr_7' => '&#1587;&#1576;&#1578;'
+
+	// D
+	'date_jour_abbr_1' => 'أحد',
+	'date_jour_abbr_2' => 'اثنين',
+	'date_jour_abbr_3' => 'ثلثاء',
+	'date_jour_abbr_4' => 'أربعاء',
+	'date_jour_abbr_5' => 'خميس',
+	'date_jour_abbr_6' => 'جمعة',
+	'date_jour_abbr_7' => 'سبت'
 );
 
 ?>
