@@ -6,8 +6,8 @@ La structure HTML est copiée du formulaire d'ajout de mots-clés des articles.
 
 ]
 
-<form name="#FORM" action="[(#ENV{action}|parametre_url{redirect,''})]" method="post">
-		[(#ACTION_FORMULAIRE{[(#ENV{action}|parametre_url{redirect,''})],#FORM})]
+<form name="#FORM" action="[(#ENV{action}|parametre_url{'redirect',''}|parametre_url{'edit',''})]" method="post">
+		[(#ACTION_FORMULAIRE{[(#ENV{action}|parametre_url{'redirect',''}|parametre_url{'edit',''})],#FORM})]
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{statut}}
 <BOUCLE_Mot_enfant(MOTS){id_mot=#ENV{id_mot}}>
 <input type='hidden' name='id_mot_enfant' value='#ID_MOT' />
@@ -48,7 +48,7 @@ alt=""  class='cadre-icone' width='24' height='24' />
 			</div>
 			</B_Mots_candidats_parents>
 		</BOUCLE_Groupes_Mots>
-		</div></div>
+		</div></div></div>
 		<div class='nettoyeur'></div>
 		</div><div class='nettoyeur'>
 </div>
