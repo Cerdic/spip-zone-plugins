@@ -73,9 +73,12 @@ function autoriser_ticket_ecrire_dist($faire, $type, $id, $qui, $opt){
 	if(autoriser('modifier', $type, $id, $qui, $opt)){
 		return autoriser('modifier', $type, $id, $qui, $opt);
 	}
-	// Utilisation du CFG si possible
-	if(function_exists('lire_config')){
-		$type = lire_config('tickets/autorisations/ecrire_type', 'par_statut');
+	
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
+	
+	$type = lire_config('tickets/autorisations/ecrire_type');
+	if($type){
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
@@ -97,13 +100,10 @@ function autoriser_ticket_ecrire_dist($faire, $type, $id, $qui, $opt){
 		if($autorise == true){
 			return $autorise;
 		}
-	}
-
-	if($type){
 		$utiliser_defaut = false;
 	}
 
-	// Si pas de CFG ou pas autorise dans le cfg => on teste les define
+	// Si pas configuré ou pas autorisé dans la conf => on teste les define
 	$liste = definir_autorisations_tickets('ecrire',$utiliser_defaut);
 	if ($liste['statut'])
 		$autorise = in_array($qui['statut'], $liste['statut']);
@@ -113,6 +113,21 @@ function autoriser_ticket_ecrire_dist($faire, $type, $id, $qui, $opt){
 	return $autorise;
 }
 
+
+/**
+ * Autorisation de créer des tickets
+ * (défini qui peut créer un ticket)
+ * 
+ * @param string $faire : l'action à faire
+ * @param string $type : le type d'objet sur lequel porte l'action
+ * @param int $id : l'identifiant numérique de l'objet
+ * @param array $qui : les éléments de session de l'utilisateur en cours
+ * @param array $opt : les options
+ * @return boolean true/false : true si autorisé, false sinon
+ */
+function autoriser_ticket_creer_dist($faire, $type, $id, $qui, $opt){
+	return	autoriser('ecrire','ticket', $id, $qui, $opt);
+}
 /**
  * Autorisation d'assignation des tickets
  * (défini qui peu assigner les tickets)
@@ -131,9 +146,12 @@ function autoriser_ticket_assigner_dist($faire, $type, $id, $qui, $opt){
 	if(autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt)){
 		return autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt);
 	}
-	// Utilisation du CFG si possible
-	if(function_exists('lire_config')){
-		$type = lire_config('tickets/autorisations/assigner_type', 'par_statut');
+	
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
+	
+	$type = lire_config('tickets/autorisations/assigner_type');
+	if($type){
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
@@ -155,9 +173,6 @@ function autoriser_ticket_assigner_dist($faire, $type, $id, $qui, $opt){
 		if($autorise == true){
 			return $autorise;
 		}
-	}
-
-	if($type){
 		$utiliser_defaut = false;
 	}
 
@@ -188,9 +203,12 @@ function autoriser_ticket_commenter_dist($faire, $type, $id, $qui, $opt){
 	if(autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt)){
 		return autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt);
 	}
-	// Utilisation du CFG si possible
-	if(function_exists('lire_config')){
-		$type = lire_config('tickets/autorisations/commenter_type', 'par_statut');
+	
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
+	
+	$type = lire_config('tickets/autorisations/commenter_type', 'par_statut');
+	if($type){
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
@@ -212,9 +230,6 @@ function autoriser_ticket_commenter_dist($faire, $type, $id, $qui, $opt){
 		if($autorise == true){
 			return $autorise;
 		}
-	}
-
-	if($type){
 		$utiliser_defaut = false;
 	}
 
@@ -253,9 +268,12 @@ function autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt){
 				return true;
 			}
 		}
-		// Utilisation du CFG si possible
-		if(function_exists('lire_config')){
-			$type = lire_config('tickets/autorisations/modifier_type', 'par_statut');
+		
+		if(!function_exists('lire_config'))
+			include_spip('inc/config');
+
+		$type = lire_config('tickets/autorisations/modifier_type', 'par_statut');
+		if($type){
 			switch($type) {
 				case 'webmestre':
 					// Webmestres uniquement
@@ -277,10 +295,6 @@ function autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt){
 			if($autorise == true){
 				return $autorise;
 			}
-		}
-	
-		// Si pas de configuration CFG, on utilise des valeurs par défaut
-		if($type){
 			$utiliser_defaut = false;
 		}
 	

@@ -21,14 +21,14 @@ function exec_ticket_editer() {
 	$contexte = array('id_ticket'=>$id_ticket,'icone' => $icone);
 
 	if(intval($id_ticket)){
-		$contexte['titre'] = sql_getfetsel("titre","spip_tickets","id_ticket=$id_ticket");
+		$contexte['titre'] = sql_getfetsel("titre","spip_tickets","id_ticket=".intval($id_ticket));
 	}else{
 		$contexte['titre'] = _T('tickets:creer_ticket');
 	}
 
 	$titre_page = _T('tickets:page_titre');
 	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
-	$rubrique = "forum";
+	$rubrique = "ticket";
 	$sous_rubrique = "ticket_afficher";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');

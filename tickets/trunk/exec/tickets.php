@@ -5,12 +5,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_tickets () {
 
 	include_spip('inc/presentation');
-	include_spip('inc/mots');
 
 	$titre_page = _T('tickets:titre_liste');
 
 	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
-	$rubrique = "forum";
+	$rubrique = "ticket";
 	$sous_rubrique = "tickets";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');

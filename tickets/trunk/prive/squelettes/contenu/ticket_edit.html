@@ -1,0 +1,19 @@
+[(#ID_TICKET|intval|oui)
+	[(#AUTORISER{modifier,ticket,#ID_TICKET}|sinon_interdire_acces)]
+][(#ID_TICKET|intval|non)
+	[(#AUTORISER{creer,ticket}|sinon_interdire_acces)]
+]
+#SET{retour,#ENV{redirect,#ENV{retour}}|sinon{#ID_TICKET|intval|?{#URL_ECRIRE{ticket,id_auteur=#ID_TICKET},#URL_ECRIRE{tickets}}}}
+[(#REM) Squelette du formulaire de la page d'edition d'un ticket (exec=ticket_editer)]
+<div class='cadre-formulaire-editer'>
+	<div class="entete-formulaire">
+		[(#GET{retour}|icone_verticale{<:icone_retour:>,ticket,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+		
+		[(#TICKET|intval|oui)
+			<:tickets:ticket:> ##TICKET</strong>
+		]
+		[<h1>(#ENV{titre,#INFO_TITRE{ticket,#ID_TICKET}|sinon{<:tickets:creer_ticket:>}})</h1>]
+	</div>
+	
+	#FORMULAIRE_EDITER_TICKET{#ENV{id_ticket,oui},#ENV{retour,#URL_ECRIRE{'ticket_afficher'}}}
+</div>
