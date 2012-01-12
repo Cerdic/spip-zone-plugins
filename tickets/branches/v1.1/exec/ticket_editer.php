@@ -10,12 +10,13 @@ function exec_ticket_editer() {
 
 	$id_ticket = _request('id_ticket') ? _request('id_ticket') : 'new';
 	$retour = _request('retour');
-
-	if($retour){
-		$icone = icone_inline(_L('Retour'), $retour, find_in_path("imgs/bugs.png"), "", $spip_lang_left);
-	}else if(intval($id_ticket)){
-		$icone = icone_inline(_L('Retour'), generer_url_ecrire("ticket_afficher","id_ticket=$id_ticket"), find_in_path("imgs/bugs.png"), "", $spip_lang_left);
+	if(!$retour && intval($id_ticket)){
+		$retour = generer_url_ecrire("ticket_afficher","id_ticket=$id_ticket");
+	}else if(!$retour){
+		$retour = generer_url_ecrire("tickets");
 	}
+	
+	$icone = icone_inline(_T('retour'), $retour, find_in_path("imgs/bugs.png"), "", $spip_lang_left);
 
 	$contexte = array('id_ticket'=>$id_ticket,'icone' => $icone);
 
