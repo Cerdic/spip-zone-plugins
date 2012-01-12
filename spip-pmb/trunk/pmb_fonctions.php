@@ -200,7 +200,7 @@ function pmb_extraire_resultats($result, &$tableau_resultat, $debut, $nbresult) 
 		$cpt = count($result->notice_ids);
 		$liste_notices = array_slice($result->notice_ids, $debut, $nbresult);
 	}
-	$tableau_resultat['notice_ids'] = pmb_ws_recuperer_tab_notices($liste_notices);
+	$tableau_resultat['notice_ids'] = pmb_extraire_notices_ids($liste_notices);
 	array_unshift($tableau_resultat['notice_ids'], array('nb_resultats' => $cpt));
 	#pmb_remettre_id_dans_resultats($tableau_resultat, $liste_notices);
 }
@@ -244,6 +244,14 @@ function pmb_editeur_extraire($id_editeur, $debut=0, $nbresult=5, $id_session=0)
 	}
 	return $tableau_resultat;
 
+}
+
+function pmb_extraire_auteurs_ids($ids_auteur) {
+	if (!is_array($ids_auteur)) {
+		return array();
+	}
+	
+	return array();
 }
 
 function pmb_auteur_extraire($id_auteur, $debut=0, $nbresult=5, $id_session=0) {
@@ -669,26 +677,44 @@ function pmb_ws_dispo_exemplaire($id_notice, $id_session=0) {
 }
 
 
-// récuperer une notice en xml via les webservices
-// les parser, et stocker en cache statique car cette fonction
-// est utilisee par toutes les boucles (PMB:NOTICES)
-function pmb_ws_recuperer_tab_notices($listenotices) {
 
-	if (!is_array($listenotices)) {
+/**
+ * Recupere les informations de notices
+ * dont les identifiants sont fournis par
+ * le tableau $ids_notices.
+ *
+ * Chaque identifiant calcule est mis en cache
+ * pour eviter des requetes intempestives
+ * sur un hit de page et permettre d'utiliser plusieurs
+ * fois une boucle telle que (PMB:NOTICES){id}
+ * sans avoir besoin de tout recalculer.
+ *
+ * Notons que l'on ne peut recuperer que les champs "exportables"
+ * dans PMB.
+ *
+ * @param array $ids_notices
+ * 		Tableau d'id de notices a recupereer
+ * @return array
+ * 		Tableau contenant pour chaque notice la liste des champs
+ * 		que l'on a pa recuperer.
+**/
+function pmb_extraire_notices_ids($ids_notices) {
+	if (!is_array($ids_notices)) {
 		return array();
 	}
-	
-	// on met en cache le resultat et on utilise le cache.
+
+	// On met en cache le resultat et on utilise le cache.
 	// afin d'optimiser si plusieurs boucles sont utilisees.
-	// par ailleurs, l'id 0, s'il se produit est incongru est
+	
+	// Par ailleurs, l'id 0, s'il se produit est incongru est
 	// provient du hack pour la pagination de ce plugin.
 	static $notices = array(0 => array());
 	
-	$wanted = $listenotices;
+	$wanted = $ids_notices;
 	// ce qu'on a trouve...
 	$res = array();
 	
-	foreach ($listenotices as $c=>$l) {
+	foreach ($ids_notices as $c=>$l) {
 		if (isset($notices[$l])) {
 			$res[$c] = $notices[$l];
 			unset($wanted[$c]);
@@ -710,7 +736,7 @@ function pmb_ws_recuperer_tab_notices($listenotices) {
 			// on complete notre tableau de resultat
 			// avec nos trouvailles
 			foreach ($r as $notice) {
-				$key = array_search($notice['id'], $listenotices);
+				$key = array_search($notice['id'], $ids_notices);
 				if ($key !== false) {
 					$notices[ $notice['id'] ] = $res[$key] = $notice;
 				}
@@ -792,16 +818,6 @@ function pmb_ws_liste_tri_recherche() {
 
 
 
-// retourne un tableau associatif contenant tous les champs d'un tableau d'id de notices 
-function pmb_extraire_notices_ids($ids_notices) {
-	if (!is_array($ids_notices)) {
-		$ids_notices = array();
-	}
-
-	return pmb_ws_recuperer_tab_notices($ids_notices);
-}
-
-
 // retourne un tableau associatif contenant les prêts en cours
 function pmb_prets_extraire ($session_id, $type_pret=0) {
 	$tableau_resultat = Array();
@@ -832,7 +848,7 @@ function pmb_prets_extraire ($session_id, $type_pret=0) {
 			}
 		}
 		if ($cpt>0) {
-			$tableau_resultat['notice_ids'] = pmb_ws_recuperer_tab_notices($liste_notices);  
+			$tableau_resultat['notice_ids'] = pmb_extraire_notices_ids($liste_notices);  
 		}
 		#pmb_remettre_id_dans_resultats(&$tabreau_resultat, $liste_notices);
 		
@@ -868,7 +884,7 @@ function pmb_reservations_extraire($pmb_session) {
 		}
 	}
 	if ($cpt>0) {
-		$tableau_resultat['notice_ids'] = pmb_ws_recuperer_tab_notices($liste_notices);  
+		$tableau_resultat['notice_ids'] = pmb_extraire_notices_ids($liste_notices);  
 	}
 	#pmb_remettre_id_dans_resultats(&$tabreau_resultat, $liste_notices)
 	return $tableau_resultat;

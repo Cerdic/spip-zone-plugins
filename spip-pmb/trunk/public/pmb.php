@@ -243,7 +243,7 @@ function critere_PMB_datacache_dist($idb, &$boucles, $crit) {
  *
  * Notices issues des recherches
  * (PMB:NOTICES) {rechercher}
- * (PMB:NOTICES) {rechercher}{look ?}
+ * (PMB:NOTICES) {rechercher}{look ?}{id_section ?}{id_location ?}{id_location_memo ?}
  * 
  */
 function inc_pmb_notices_select_dist(&$command, $iterateur) {
@@ -344,6 +344,49 @@ function inc_pmb_notices_select_dist(&$command, $iterateur) {
 
 	return $res;
 }
+
+
+
+
+/**
+ *
+ * Selectionne un ou plusieurs auteurs PMB
+ * et retourne un tableau des elements parsees
+ * 
+ * Un auteur
+ * (PMB:AUTEURS) {id_auteur}
+ *
+ * Des auteurs
+ * (PMB:AUTEURS) {liste #TABLEAU_IDS_AUTEUR}
+ * 
+ */
+function inc_pmb_auteurs_select_dist(&$command, $iterateur) {
+	$criteres = $command['where'];
+	
+	// on peut fournir une liste l'id
+	// ou egalement un critere id=x
+	$ids = array();
+	
+
+	// depuis une liste
+	if (is_array($command['liste']) and count($command['liste'])) {
+		$ids = $command['liste'];
+	}
+
+	// depuis un critere id_auteur=x ou {id_auteur?}
+	if ($id = pmb_critere_valeur($criteres, 'id_auteur')) {
+		$ids = pmb_intersect_ids($ids, $id);
+	}
+
+	// retourner les auteurs selectionnees
+	$res = pmb_extraire_auteurs_ids($ids);
+
+	return $res;
+}
+
+
+
+
 
 
 // retourne l'intersection des ids trouves
