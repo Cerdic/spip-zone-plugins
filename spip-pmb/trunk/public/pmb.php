@@ -224,6 +224,13 @@ function critere_PMB_datacache_dist($idb, &$boucles, $crit) {
 	return critere_DATA_datacache_dist($idb, $boucles, $crit);
 }
 
+/**
+ * Modifier le critere racine
+ */
+function critere_PMB_racine_dist($idb, &$boucles, $crit) {
+	$c = array("'='", "racine", 1);
+	$boucles[$idb]->where[] = $c;
+}
 
 /**
  *
@@ -401,6 +408,56 @@ function inc_pmb_auteurs_select_dist(&$command, $iterateur) {
 
 	// retourner les auteurs selectionnees
 	$res = pmb_extraire_auteurs_ids($ids);
+
+	return $res;
+}
+
+
+
+
+
+/**
+ *
+ * Selectionne les lieux de classement des notices
+ * et retourne un tableau des elements parsees
+ * Un lieu est au sens PMB / systeme de documentation
+ * 
+ * - Location : c'est comme un centre de doc physique, une adresse.
+ * 		1 PMB permet de gérer plusieurs Locations. On peut dire
+ * 		qu'il permet de gérer un groupement de bibliotheques/centre de docs.
+ *
+ * - Section : C'est comme un rayonnage de centre de doc. Un theme de classement en quelque sorte.
+ * 
+ * Les centres de docs a la racine
+ * (PMB:LIEUX)
+ * (PMB:LIEUX) {racine}
+ *
+ * 
+ * 
+ */
+function inc_pmb_lieux_select_dist(&$command, $iterateur) {
+	$criteres = $command['where'];
+
+	// racine indique... on ne s'occupe pas du reste...
+	// depuis un critere {racine}
+	if (pmb_recherche_critere($criteres, 'racine')) {
+		// retourner les auteurs selectionnees
+		$iterateur->exception_des_criteres('racine');
+		return pmb_extraire_locations_racine();
+	}
+
+	$res = array();
+
+	// testons la presence de id_section ou id_location
+	// en leur absence, on boucle sur la racine.
+	$id_location = pmb_critere_valeur($criteres, 'id_location');
+	$id_section = pmb_critere_valeur($criteres,  'id_section');
+	
+	if (!$id_location and !$id_section) {
+		return pmb_extraire_locations_racine();
+	}
+
+	
 
 	return $res;
 }

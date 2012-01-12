@@ -113,25 +113,42 @@ function pmb_extraire_sections_infos(&$tableau, $sections) {
 }
 
 
-function pmb_liste_afficher_locations() {
-	$tableau_sections = Array();
+
+
+/**
+ * Recupere les informations de locations racine,
+ * c'est a dire la liste des centres documentaires geres par ce PMB
+ * 
+ * @return array
+ * 		Tableau contenant pour chaque lieu la liste des champs
+ * 		que l'on a pu recuperer.
+**/
+function pmb_extraire_locations_racine() {
+
+	static $locations = array();
+	if (count($locations)) {
+		return $locations;
+	}
+
 	try {
 		$ws = pmb_webservice();
-		$tab_locations = $ws->pmbesOPACGeneric_list_locations();
-		$cpt = 0;
-		if (is_array($tab_locations)) {
-			foreach ($tab_locations as $location) {
-				$tableau_locations[$cpt] = Array();
-				$tableau_locations[$cpt]['location_id'] = $location->location_id;
-				$tableau_locations[$cpt]['location_caption'] = $location->location_caption;
-				$cpt++;
+		$r = $ws->pmbesOPACGeneric_list_locations();
+		if (is_array($r)) {
+			foreach ($r as $index => $location) {
+				$locations[$index] = Array();
+				$locations[$index]['id_location'] = $location->location_id;
+				$locations[$index]['titre'] = $location->location_caption;
+				$locations[$index]['type'] = "racine";
 			}
 		}
 	} catch (Exception $e) {
 		 echo 'Exception reçue (3) : ',  $e->getMessage(), "\n";
 	}
-	return $tableau_locations;
+	return $locations;
 }
+
+
+
 
 
 /* aucune occurrence ? */
