@@ -21,7 +21,7 @@
                 <th>[(#TRI{date,Posté le,ajax})]</th>
                 <th>[(#TRI{id_auteur,Par,ajax})]</th>
                 <th>[(#TRI{titre,Sujet,ajax})]</th>
-                <th>[(#TRI{type,Type,ajax})]</th>
+                <th>[(#TRI{tracker,Tracker,ajax})]</th>
                 <th>[(#TRI{severite,Séverité,ajax})]</th>
                 <th>[(#TRI{statut,Statut,ajax})]</th>
                 <th>[(#TRI{id_assigne,Assigné à,ajax})]</th>
@@ -55,7 +55,7 @@
             <td class="#EDIT{id_auteur}">#NOM_AUTEUR{#ID_AUTEUR}</td>
             <td class="arial2 #EDIT{titre}[(#STATUT|in_array{#ARRAY{0,ferme,1,resolu}}|oui) del]"[ title="(#GET{discussion}|texte_backend)"]><a href="?exec=ticket_afficher&amp;id_ticket=#ID_TICKET">#TITRE</a><br />[(#TEXTE|PtoBR|couper{100})]</td>
             <td class="arial0">
-                [(#TYPE|tickets_texte_type)]
+                [(#TRACKER|tickets_texte_tracker)]
             </td>			
             <td class="arial0 #EDIT{severite}">
                 <img[ src="(#CHEMIN{[prive/images/(#SEVERITE|tickets_icone_severite)]})"][ alt="(#SEVERITE|tickets_texte_severite)"] />

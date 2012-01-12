@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Fonction pour le pipeline, n'a rien a effectuer
  *
@@ -57,19 +59,19 @@ function definir_autorisations_tickets($action,$utiliser_defaut=true){
  * Autorisation d'écrire des tickets
  * (défini qui peut créer un ticket)
  * 
- * @param object $faire
- * @param object $type
- * @param object $id
- * @param object $qui
- * @param object $opt
- * @return 
+ * @param string $faire : l'action à faire
+ * @param string $type : le type d'objet sur lequel porte l'action
+ * @param int $id : l'identifiant numérique de l'objet
+ * @param array $qui : les éléments de session de l'utilisateur en cours
+ * @param array $opt : les options
+ * @return boolean true/false : true si autorisé, false sinon
  */
 function autoriser_ticket_ecrire_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 	$utiliser_defaut = true;
 
-	if(autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt)){
-		return autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt);
+	if(autoriser('modifier', $type, $id, $qui, $opt)){
+		return autoriser('modifier', $type, $id, $qui, $opt);
 	}
 	// Utilisation du CFG si possible
 	if(function_exists('lire_config')){
@@ -77,7 +79,7 @@ function autoriser_ticket_ecrire_dist($faire, $type, $id, $qui, $opt){
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
-				$autorise = tickets_verifier_webmestre($qui);
+				$autorise = ($qui['webmestre'] == 'oui');
 				break;
 			case 'par_statut':
 				// Traitement spécifique pour la valeur 'tous'
@@ -115,12 +117,12 @@ function autoriser_ticket_ecrire_dist($faire, $type, $id, $qui, $opt){
  * Autorisation d'assignation des tickets
  * (défini qui peu assigner les tickets)
  * 
- * @param object $faire
- * @param object $type
- * @param object $id
- * @param object $qui
- * @param object $opt
- * @return 
+ * @param string $faire : l'action à faire
+ * @param string $type : le type d'objet sur lequel porte l'action
+ * @param int $id : l'identifiant numérique de l'objet
+ * @param array $qui : les éléments de session de l'utilisateur en cours
+ * @param array $opt : les options
+ * @return boolean true/false : true si autorisé, false sinon
  */
 function autoriser_ticket_assigner_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
@@ -135,7 +137,7 @@ function autoriser_ticket_assigner_dist($faire, $type, $id, $qui, $opt){
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
-				$autorise = tickets_verifier_webmestre($qui);
+				$autorise = ($qui['webmestre'] == 'oui');
 				break;
 			case 'par_statut':
 				// Traitement spécifique pour la valeur 'tous'
@@ -172,12 +174,12 @@ function autoriser_ticket_assigner_dist($faire, $type, $id, $qui, $opt){
  * Autorisation de notification des tickets
  * (défini qui doit être notifié)
  * 
- * @param object $faire
- * @param object $type
- * @param object $id
- * @param object $qui
- * @param object $opt
- * @return 
+ * @param string $faire : l'action à faire
+ * @param string $type : le type d'objet sur lequel porte l'action
+ * @param int $id : l'identifiant numérique de l'objet
+ * @param array $qui : les éléments de session de l'utilisateur en cours
+ * @param array $opt : les options
+ * @return boolean true/false : true si autorisé, false sinon
  */
 function autoriser_ticket_commenter_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
@@ -192,7 +194,7 @@ function autoriser_ticket_commenter_dist($faire, $type, $id, $qui, $opt){
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
-				$autorise = tickets_verifier_webmestre($qui);
+				$autorise = ($qui['webmestre'] == 'oui');
 				break;
 			case 'par_statut':
 				// Traitement spécifique pour la valeur 'tous'
@@ -231,72 +233,70 @@ function autoriser_ticket_commenter_dist($faire, $type, $id, $qui, $opt){
  * - Les personnes assignées
  * - Les personnes correspondant à la configuration
  * 
- * @param object $faire
- * @param object $type
- * @param object $id
- * @param object $qui
- * @param object $opt
- * @return 
+ * @param string $faire : l'action à faire
+ * @param string $type : le type d'objet sur lequel porte l'action
+ * @param int $id : l'identifiant numérique de l'objet
+ * @param array $qui : les éléments de session de l'utilisateur en cours
+ * @param array $opt : les options
+ * @return boolean true/false : true si autorisé, false sinon
  */ 
 function autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 	$utiliser_defaut = true;
 
-	// Si l'auteur en question est l'auteur assigné au ticket,
-	// il peut modifier le ticket
-	if(intval($id)){
-		$id_assigne = sql_getfetsel('id_assigne','spip_tickets','id_ticket='.intval($id));
-		if($id_assigne && ($id_assigne == $qui['id_auteur'])){
-			return true;
+	if(is_numeric($id)){
+		// Si l'auteur en question est l'auteur assigné au ticket,
+		// il peut modifier le ticket
+		if(intval($id)){
+			$id_assigne = sql_getfetsel('id_assigne','spip_tickets','id_ticket='.intval($id));
+			if($id_assigne && ($id_assigne == $qui['id_auteur'])){
+				return true;
+			}
+		}
+		// Utilisation du CFG si possible
+		if(function_exists('lire_config')){
+			$type = lire_config('tickets/autorisations/modifier_type', 'par_statut');
+			switch($type) {
+				case 'webmestre':
+					// Webmestres uniquement
+					$autorise = ($qui['webmestre'] == 'oui');
+					break;
+				case 'par_statut':
+					// Traitement spécifique pour la valeur 'tous'
+					if(in_array('tous',lire_config('tickets/autorisations/modifier_statuts',array()))){
+						return true;
+					}
+					// Autorisation par statut
+					$autorise = in_array($qui['statut'], lire_config('tickets/autorisations/modifier_statuts',array('0minirezo')));
+					break;
+				case 'par_auteur':
+					// Autorisation par id d'auteurs
+					$autorise = in_array($qui['id_auteur'], lire_config('tickets/autorisations/modifier_auteurs',array()));
+					break;
+			}
+			if($autorise == true){
+				return $autorise;
+			}
+		}
+	
+		// Si pas de configuration CFG, on utilise des valeurs par défaut
+		if($type){
+			$utiliser_defaut = false;
+		}
+	
+		// Si $utiliser_defaut = true, on utilisera les valeurs par défaut
+		// Sinon on ajoute la possibilité de régler par define
+		$liste = definir_autorisations_tickets('modifier',$utiliser_defaut);
+		if ($liste['statut'])
+			$autorise = in_array($qui['statut'], $liste['statut']);
+		else if ($liste['auteur'])
+			$autorise = in_array($qui['id_auteur'], $liste['auteur']);
+		if(!$autorise){
+			$id_auteur = sql_getfetsel('id_auteur','spip_tickets','id_ticket='.intval($id));
+			if($id_auteur == $qui['id_auteur'])
+				$autorise = true;
 		}
 	}
-	// Utilisation du CFG si possible
-	if(function_exists('lire_config')){
-		$type = lire_config('tickets/autorisations/modifier_type', 'par_statut');
-		switch($type) {
-			case 'webmestre':
-				// Webmestres uniquement
-				$autorise = tickets_verifier_webmestre($qui);
-				break;
-			case 'par_statut':
-				// Traitement spécifique pour la valeur 'tous'
-				if(in_array('tous',lire_config('tickets/autorisations/modifier_statuts',array()))){
-					return true;
-				}
-				// Autorisation par statut
-				$autorise = in_array($qui['statut'], lire_config('tickets/autorisations/modifier_statuts',array('0minirezo')));
-				break;
-			case 'par_auteur':
-				// Autorisation par id d'auteurs
-				$autorise = in_array($qui['id_auteur'], lire_config('tickets/autorisations/modifier_auteurs',array()));
-				break;
-		}
-		if($autorise == true){
-			return $autorise;
-		}
-	}
-
-	// Si pas de configuration CFG, on utilise des valeurs par défaut
-	if($type){
-		$utiliser_defaut = false;
-	}
-
-	// Si $utiliser_defaut = true, on utilisera les valeurs par défaut
-	// Sinon on ajoute la possibilité de régler par define
-	$liste = definir_autorisations_tickets('modifier',$utiliser_defaut);
-	if ($liste['statut'])
-		$autorise = in_array($qui['statut'], $liste['statut']);
-	else if ($liste['auteur'])
-		$autorise = in_array($qui['id_auteur'], $liste['auteur']);
 	return $autorise;
-}
-
-function tickets_verifier_webmestre($qui){
-	$webmestre =  false;
-	$webmestre = in_array($qui['id_auteur'],explode(':', _ID_WEBMESTRES));
-	if(!$webmestre && ($qui['webmestre']=='oui')){
-		$webmestre =  true;
-	}
-	return $webmestre;
 }
 ?>

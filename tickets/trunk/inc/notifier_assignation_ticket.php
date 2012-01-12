@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function inc_notifier_assignation_ticket($id_ticket,$options){
 
 	$row = sql_select("*","spip_tickets","id_ticket=$id_ticket");

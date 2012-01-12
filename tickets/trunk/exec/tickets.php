@@ -1,4 +1,6 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // Traitement de la page recapitulative des tickets
 function exec_tickets () {
 

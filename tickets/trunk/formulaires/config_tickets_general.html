@@ -53,12 +53,21 @@
 					[(#SAISIE{case, selecteur_navigateur,
 						label=<:tickets:cfg_lbl_selecteur_navigateur:>,
 						label_case=<:tickets:cfg_lbl_case_selecteur_navigateur:>})]
+					[(#SAISIE{case, joindre_fichiers,
+						label=<:tickets:cfg_lbl_joindre_fichiers:>,
+						label_case=<:tickets:cfg_lbl_case_joindre_fichiers:>})]
 				</ul>
 			</li>
 			
 			<li class="fieldset">
-				<h3 class="legend"><:tickets:cfg_lgd_champs_optionnels:></h3>
+				<h3 class="legend"><:tickets:cfg_lgd_champs_options_autres:></h3>
 				<ul>
+				[(#SAISIE{oui_non, desactiver_public,
+					label=<:tickets:cfg_lbl_desactiver_public:>,
+					defaut=''})]
+				[(#SAISIE{oui_non, cacher_moteurs,
+					label=<:tickets:cfg_lbl_cacher_moteurs:>,
+					defaut=on})]
 				[(#SAISIE{case, notification_publique,
 					label=<:tickets:cfg_lbl_notification_publique:>,
 					label_case=<:tickets:cfg_lbl_case_notification_publique:>})]
@@ -82,8 +91,4 @@
 			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
 		</p>
 	</div></form>
-</div>
-<div id="bloc_debug">
-	<h3> Debug - Etat des variables du fond:</h3>
-	#CFG_ARBO{tickets/general}
 </div>

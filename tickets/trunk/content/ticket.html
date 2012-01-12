@@ -1,6 +1,7 @@
 <BOUCLE_ticket_contenu(TICKETS){id_ticket}>
 <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><a href="#URL_PAGE{tickets}"><:tickets:tickets:></a>[<span class="sep"> &gt; </span><strong class="on">(#TITRE|couper{80})</strong>]</div>
-
+[(#AUTORISER{commenter, ticket, #ID_TICKET}|oui)
+[(#SET{autoriser_commenter,oui})]]
 <div class="ticket contenu-principal">
 
 	<div class="cartouche">
@@ -8,17 +9,20 @@
 		<a class="i_edit" href="[(#URL_PAGE{editer_ticket}|parametre_url{id_ticket,#ID_TICKET})]"><:tickets:icone_modifier_ticket:></a>
 	]
 		<h1 class="h1 titre #EDIT{titre}"><:tickets:ticket:> <small>##ID_TICKET</small> : #TITRE</h1>
+		<div class="actions rss">
+			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_ticket,#ID_TICKET})]"><:tickets:suivre_tickets_rss_unique:></a>
+		</div>
 	</div>
 
 	[(#REM) Statut, severite, assignement]
 	<div class="infos">
 		<dl>
-			[<dt><:tickets:champ_statut:></dt><dd>(#STATUT|tickets_texte_statut)</dd>]
+			[<dt><:tickets:champ_statut:></dt><dd>[(#STATUT|tickets_icone_statut{true}) ](#STATUT|tickets_texte_statut)</dd>]
 			<BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}{tous}>
 			<dt><:tickets:assigne_a:></dt><dd><a href="#URL_AUTEUR" class="spip_in">#NOM</a></dd>
 			</BOUCLE_assigne>
-			[<dt><:tickets:champ_severite:></dt><dd>(#SEVERITE|tickets_texte_severite)</dd>]
-			[<dt><:tickets:champ_type:></dt><dd>(#TYPE|tickets_texte_type)</dd>]
+			[<dt><:tickets:champ_severite:></dt><dd>[(#SEVERITE|tickets_icone_severite{true}) ](#SEVERITE|tickets_texte_severite)</dd>]
+			[<dt><:tickets:champ_type:></dt><dd>(#TRACKER|tickets_texte_tracker)</dd>]
 			[<dt><:tickets:champ_date:></dt><dd>(#DATE|affdate)</dd>]
 			<B_auteur><dt><:tickets:champ_createur:></dt><BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}><dd><a href="#URL_AUTEUR" class="spip_in">#NOM</a></dd></BOUCLE_auteur>
 			[<dt><:tickets:champ_projet:></dt><dd class="#EDIT{projet}">(#PROJET)</dd>]
@@ -39,10 +43,9 @@
 	[(#REM) - Texte du ticket et url d'exemple]
 	[<div class="#EDIT{texte} texte">(#TEXTE|propre)</div>]
 	[<div><:tickets:champ_exemple:> <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
-
 	[(#REM) - Extensions, Extras 2 entre autre]
 	[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,ticket,id_objet,#ID_TICKET,contexte,[(#ENV**|unserialize)]})],data,''})]})]
-
+	<INCLURE{fond=inclure/documents_tickets,id_ticket=#ID_TICKET}>
 </div>
 
 [(#PARAMETRES_FORUM|?{''})]
@@ -72,20 +75,22 @@
 		<li class="comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
 			[(#MODELE{comment}{id_forum}{compteur=#COMPTEUR_BOUCLE}{thread=oui})]
 			[(#BOUTONS_ADMIN_FORUM)]
+			[(#GET{autoriser_commenter}|=={oui}|oui)
 			[<p class="repondre"><a
 				href="(#PARAMETRES_FORUM|url_reponse_forum)"
 				onclick="jQuery(this).add_reply_to([(#ID_FORUM)]);return false;"
-				rel="noindex nofollow"><:repondre_message:></a></p>]
+				rel="noindex nofollow"><:repondre_message:></a></p>]]
 			<B_comments-fils>
 			<ul class="comments-ul comments-fils">
 				<BOUCLE_comments-fils(FORUMS){id_parent}{par date}>
 				<li class="comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
 					[(#MODELE{comment}{id_forum}{thread=oui})]
 					[(#BOUTONS_ADMIN_FORUM)]
+					[(#GET{autoriser_commenter}|=={oui}|oui)
 					[<p class="repondre"><a
 						href="(#PARAMETRES_FORUM|url_reponse_forum)"
 						onclick="jQuery(this).add_reply_to([(#ID_FORUM)]);return false;"
-						rel="noindex nofollow"><:repondre_message:></a></p>]
+						rel="noindex nofollow"><:repondre_message:></a></p>]]
 					<BOUCLE_comments-fils-etc(boucle_comments-fils)></BOUCLE_comments-fils-etc>
 				</li>
 				</BOUCLE_comments-fils>
@@ -109,18 +114,20 @@
 				<li class="comment-li[ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)last]">
 					<INCLURE{fond=modeles/comment}{id_forum}{thread=oui}>
 					[(#BOUTONS_ADMIN_FORUM)]
+					[(#GET{autoriser_commenter}|=={oui}|oui)
 					[<p class="repondre"><a
 						href="(#PARAMETRES_FORUM|url_reponse_forum)"
 						onclick="jQuery(this).add_reply_to([(#ID_THREAD)]);return false;"
-						rel="noindex nofollow"><:repondre_message:></a></p>]
+						rel="noindex nofollow"><:repondre_message:></a></p>]]
 				</li>
 				</BOUCLE_comments-fils-1>
 			</ul>
 			</B_comments-fils-1>
+			[(#GET{autoriser_commenter}|=={oui}|oui)
 			[<p class="repondre"><a
 					href="(#PARAMETRES_FORUM|url_reponse_forum)"
 					onclick="jQuery(this).add_reply_to([(#ID_THREAD)]);return false;"
-					rel="noindex nofollow"><:repondre_message:></a></p>]
+					rel="noindex nofollow"><:repondre_message:></a></p>]]
 		</li>
 		</BOUCLE_comments-list-1>
 		[<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
@@ -151,16 +158,26 @@
 	</ul>
 	</B_messages>
 	[(#REM) Bloc 3: formulaire d'ajout d'un commentaire sur le ticket]
-	[(#AUTORISER{commenter, ticket, #ID_TICKET}|oui)
+	[(#GET{autoriser_commenter}|=={oui}|oui)
 		#FORMULAIRE_FORUM{#SELF}
 	]
-	[(#AUTORISER{commenter, ticket, #ID_TICKET}|non)
-		<p><:tickets:tickets_sur_inscription:>
-			[(#CONFIG{accepter_inscriptions}|=={oui}|oui) <a href="#URL_PAGE{inscription}"><:tickets:sinscrire:></a> ]
-		</p>
-
-		<h2 class='titre'><:tickets:titre_identification:></h2>
-		[(#FORMULAIRE_LOGIN{#SELF})]
+	[(#GET{autoriser_commenter}|=={oui}|non)
+		[(#SESSION{id_auteur}|non)
+			<p><:tickets:tickets_sur_inscription:>
+				[(#CONFIG{accepter_inscriptions}|=={oui}|oui) <a href="#URL_PAGE{inscription}"><:tickets:sinscrire:></a> ]
+			</p>
+	
+			<h2 class='titre'><:tickets:titre_identification:></h2>
+			[(#FORMULAIRE_LOGIN{#SELF})]
+		]
+		[(#SESSION{id_auteur}|oui)
+			<p>
+				<:tickets:tickets_sur_inscription:>
+			</p>
+			<p>
+				<:tickets:tickets_sur_inscription_droits:>
+			</p>
+		]
 	]
 </div>
 </BOUCLE_ticket_contenu>

@@ -12,7 +12,7 @@
 	<thead>
 		<tr style="color:#999;">
 			<th colspan="3" style="text-align:center;"><:tickets:champ_titre:></th>
-			[(#ENV{type}|non)
+			[(#ENV{tracker}|non)
 			<th><:tickets:champ_type:></th>
 			]
 			<th><:tickets:champ_importance:></th>
@@ -20,14 +20,14 @@
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_detaillee(TICKETS){par severite}{par type}{!par date}{pagination 10 #ENV{bloc}}{id_auteur?}{id_assigne=0}{statut?}{type?}{jalon?}>
+<BOUCLE_detaillee(TICKETS){par severite}{par tracker}{!par date}{pagination 10 #ENV{bloc}}{id_auteur?}{id_assigne=0}{statut?}{tracker?}{jalon?}>
 		<tr class="tr_liste">
 			<td style="width: 10px;"><img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"] /></td>
 			<td class="arial1"><b>##ID_TICKET</b></td>
 			<td class="arial2"><a href="[(#ID_TICKET|generer_url_entite{ticket})]">#TITRE</a></td>
-			[(#REM) Si le type est explicite, on ne l'affiche pas ]
-			[(#ENV{type}|non)
-			<td class="arial0">[(#TYPE|tickets_texte_type)]</td>
+			[(#REM) Si le tracker est explicite, on ne l'affiche pas ]
+			[(#ENV{tracker}|non)
+			<td class="arial0">[(#TRACKER|tickets_texte_tracker)]</td>
 			]
 			<td class="arial0">
 				<img[ src="(#CHEMIN{[prive/images/(#SEVERITE|tickets_icone_severite)]})"][ alt="(#SEVERITE|tickets_texte_severite)"] />

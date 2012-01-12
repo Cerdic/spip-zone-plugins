@@ -1,5 +1,6 @@
 <plugin>
 	<nom>
+	<nom>
 		<multi>
 		[fr]Tickets
 		[en]Bug reports
@@ -13,7 +14,7 @@
 		[de]System zur Fehler-Nachverfolgung
 		</multi>
 	</slogan>
-	<auteur>ARNO*, Kent1, Eric Lupinacci</auteur>
+	<auteur>ARNO*, [kent1->http://www.kent1.info], Eric Lupinacci</auteur>
 	<licence>GPL v3</licence>
 	<description>
 		<multi>
@@ -23,9 +24,10 @@
 		</multi>
 	</description>
 	<icon>imgs/logo-bugs.png</icon>
-
+	<lien>http://www.spip-contrib.net/Tickets-suivi-de-bugs</lien>
+	
 	<version>2.0.0</version>
-	<version_base>1.1</version_base>
+	<version_base>1.4</version_base>
 	<etat>dev</etat>
 
 	<prefix>tickets</prefix>
@@ -48,11 +50,6 @@
 		<inclure>tickets_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>affiche_droite</nom>
-		<action>droite</action>
-		<inclure>tickets_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>affiche_gauche</nom>
 		<action>gauche</action>
 		<inclure>tickets_pipelines.php</inclure>
@@ -68,10 +65,6 @@
 	<!-- avec plugin champs extras 2 -->
 	<pipeline>
 		<nom>objets_extensibles</nom>
-		<inclure>tickets_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>revisions_liste_objets</nom>
 		<inclure>tickets_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
@@ -110,7 +103,11 @@
 		<nom>formulaire_traiter</nom>
 		<inclure>tickets_pipelines.php</inclure>
 	</pipeline>
-
+	<pipeline>
+		<nom>notifications_destinataires</nom>
+		<inclure>tickets_pipelines.php</inclure>
+	</pipeline>
+	
 	<bouton id='tickets' parent='bando_publication'>
 		<icone>images/ticket-16.png</icone>
 		<titre>tickets:titre</titre>

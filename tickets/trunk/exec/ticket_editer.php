@@ -28,7 +28,7 @@ function exec_ticket_editer() {
 	$titre_page = _T('tickets:page_titre');
 	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = "forum";
-	$sous_rubrique = "tickets";
+	$sous_rubrique = "ticket_afficher";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo($commencer_page($titre_page.' - '.$contexte['titre'], $rubrique, $sous_rubrique));

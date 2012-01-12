@@ -2,11 +2,11 @@
 	Cette page génère le contenu d'un article
 	pour un flux RSS, appelé depuis backend.html
 
-]<BOUCLE_un_ticket(TICKETS){id_ticket} {statut?}>
+]<BOUCLE_un_ticket(FORUMS){id_forum} {statut?}>
 	<item[ xml:lang="(#LANG)"]>
-		<title>[(#TITRE|supprimer_tags|texte_backend)]</title>
-		<link>[(#URL_TICKET|url_absolue)]</link>
-		[<guid isPermaLink="true">(#URL_TICKET|url_absolue)</guid>]
+		<title><:tickets:info_commentaire{id=#ID_FORUM}:> [(#TITRE|supprimer_tags|texte_backend)]</title>
+		<link>[(#URL_TICKET{#ENV{id_ticket}}|ancre_url{forum#ID_FORUM}|url_absolue)]</link>
+		[<guid isPermaLink="true">(#URL_TICKET{#ENV{id_ticket}}|ancre_url{forum#ID_FORUM}|url_absolue)</guid>]
 		[<dc:date>(#DATE|date_iso)</dc:date>]
 		<dc:format>text/html</dc:format>
 		[<dc:language>(#LANG)</dc:language>]
@@ -26,11 +26,10 @@
 		]
 		</content:encoded>
 ]
-		<comments>[(#URL_TICKET|ancre_url{forum}|url_absolue)]</comments>
 [(#REM)
-	Le bloc qui suit diffuse l'adresse des documents associes aux tickets ;
+	Le bloc qui suit diffuse l'adresse des documents associes au forum ;
 	ajouter par ex. {extension=mp3} pour limiter a un certain type de document.
-]		<BOUCLE_documents(DOCUMENTS){id_ticket}{mode=document}{doublons}>[
+]		<BOUCLE_documents(DOCUMENTS){id_forum}{doublons}>[
 		<enclosure url="(#URL_DOCUMENT|url_absolue|unique)"[ length="(#TAILLE)"][ type="(#MIME_TYPE)"] />]
 		</BOUCLE_documents>
 	</item>

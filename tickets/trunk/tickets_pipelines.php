@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // Ajout du bouton permettant de se rendre sur la page de gestion des tickets
 function tickets_ajouterBoutons($boutons_admin) {
 	// uniquement si le plugin bandeau n'est pas la (ou SPIP 2.1)
@@ -46,20 +49,6 @@ function menu_colonne () {
 	return $ret;
 }
 
-// Pipeline menu a droite
-function tickets_droite ($flux) {
-	$exec = $flux["args"]["exec"];
-
-// 	if ($exec == "accueil") {
-// 		$data = $flux["data"];
-//
-// 		$ret = menu_colonne();
-//
-// 		$flux["data"] = $data.$ret;
-// 	}
-	return $flux;
-}
-
 /**
  * Insertion dans le pipeline affiche_aguche
  * @param object $flux
@@ -86,41 +75,6 @@ function tickets_gauche ($flux) {
  */
 function tickets_objets_extensibles($objets){
 	return array_merge($objets, array('ticket' => _T('tickets:tickets')));
-}
-
-/**
- * Insertion dans le pipeline gouverneur_infos_tables_versions
- * (utile pour le plugin revisions en 2.1)
- * Permet de gérer les révisions sur les tickets
- *
- * @param object $array
- * @return
- */
-function tickets_gouverneur_infos_tables($array){
-	$array['spip_tickets'] = array(
-		'table_objet' => 'tickets',
-		'type' => 'ticket',
-		'url_voir' => 'ticket_afficher',
-		'texte_retour' => 'tickets:icone_retour_ticket',
-		'url_edit' => 'ticket_editer',
-		'texte_modifier' => 'tickets:icone_modifier_ticket',
-		'icone_objet' => 'ticket',
-		'texte_unique' => 'tickets:ticket',
-		'texte_multiple' => 'tickets:tickets',
-		'champs_versionnes' => array('titre','exemple', 'texte')
-	);
-	return $array;
-}
-
-/**
- * Insertion dans le pipeline revisions_liste_objets du plugin revisions (2.1)
- * Definir la liste des tables possibles
- * @param object $array
- * @return
- */
-function tickets_revisions_liste_objets($array){
-	$array['tickets'] = 'tickets:tickets';
-	return $array;
 }
 
 /**
@@ -271,8 +225,8 @@ function tickets_formulaire_charger($flux){
  */
 function tickets_recuperer_fond($flux){
 	$args = $flux['args'];
-	$type = $args['fond'];
-	if ($type == 'formulaires/forum'){
+	$fond = $args['fond'];
+	if ($fond == 'formulaires/forum'){
 		if(is_numeric($args['contexte']['id_ticket'])){
 			$infos_ticket = sql_fetsel('statut,id_assigne','spip_tickets','id_ticket='.intval($args['contexte']['id_ticket']));
 			if(_request('id_assigne')){
@@ -308,16 +262,46 @@ function tickets_formulaire_traiter($flux){
 				instituer_ticket($id_ticket,array('statut'=>$new_statut));
 			}
 			if(($new_assigne=_request('id_assigne')) && ($new_assigne != $infos_ticket['id_assigne'])){
+				include_spip('action/editer_ticket');
 				revision_ticket($id_ticket, array('id_assigne'=>$new_assigne));
 			}
 		}
-		if ($notifications = charger_fonction('notifications', 'inc')) {
-			$notifications('commenterticket', $flux['args']['args'][6],
-			array(
-					'id_auteur' => id_assigne,
-					'texte' => texte
-			)
-			);
+	}
+	return $flux;
+}
+
+/**
+ * Insertion dans le pipeline notifications_destinataires (Forum)
+ * Ajoute des destinataires dans les notifications
+ * 
+ * @param array $flux : le contexte du pipeline
+ * @return array $flux : le contexte modifié
+ */
+function tickets_notifications_destinataires($flux){
+	/**
+	 * Notification des auteurs de tickets et des assignés et des autres forumeurs lorsque le post est validé
+	 */
+	if(($flux['args']['quoi'] == 'forumvalide')){
+		if(($flux['args']['options']['forum']['objet'] == 'ticket') && ($id_ticket = intval($flux['args']['options']['forum']['id_objet']))){
+			/**
+			 * On notifie l'id_auteur et l'id_assigné du ticket s'ils ne sont pas l'auteur du post en question
+			 */
+			$auteurs = sql_fetsel('id_auteur,id_assigne','spip_tickets','id_ticket='.intval($id_ticket).' AND id_auteur !='.intval($flux['args']['options']['forum']['id_auteur']));
+			if(is_array($auteurs)){
+				foreach($auteurs as $auteur){
+					$email = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($auteur));
+					$flux['data'][] = $email;
+				}
+			}
+			/**
+			 * On notifie les autres forumeurs du ticket
+			 * GROUP BY id_auteur
+			 */
+			$id_forums = sql_select('*','spip_forum','objet='.sql_quote('ticket').' AND id_objet='.intval($id_ticket).' AND id_forum != '.intval($flux['args']['options']['forum']['id_forum']),array('id_auteur'));
+			while($forum = sql_fetch($id_forums)){
+				$email = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($forum['id_auteur']));
+				$flux['data'][] = $email;
+			}
 		}
 	}
 	return $flux;

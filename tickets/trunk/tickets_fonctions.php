@@ -1,5 +1,30 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+/**
+ * <BOUCLE(TICKETS)>
+ */
+function boucle_TICKETS_dist($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+	$mstatut = $id_table .'.statut';
+
+	// Restreindre aux elements considérés comme publiés soit pas en :
+	// -* poubelle (poubelle)
+	// -* en cours de rédac (redac)
+	if (!isset($boucle->modificateur['criteres']['statut']) OR !isset($boucle->modificateur['criteres']['tout'])) {
+		array_unshift($boucle->where,array("'IN'", "'$mstatut'", "'(\\'ouvert\\',\\'resolu\\',\\'ferme\\',\\'redac\\')'"));
+	}
+	if(function_exists('lire_config')){
+		$desactiver_public = lire_config('tickets/general/desactiver_public','off');
+		if(($desactiver_public == 'on') && !test_espace_prive()){
+			array_unshift($boucle->where,array("'='", "'$mstatut'", "'(\\'none\\')'"));
+		}
+	}
+
+	return calculer_boucle($id_boucle, $boucles);
+}
 /**
  * Crée la liste des options du select des champs :
  * -* jalon
@@ -101,7 +126,7 @@ function tickets_bouton_block_depliable($texte,$deplie,$page="",$ids=""){
 
 // creation des fonction de selection de texte
 // encore en truc a reprendre !
-foreach (array('severite', 'type', 'statut', 'navigateur') as $nom){
+foreach (array('severite', 'tracker', 'statut', 'navigateur') as $nom){
 	eval("function tickets_texte_$nom(\$valeur) {
 		\$type = tickets_liste_$nom();
 		if (isset(\$type[\$valeur])) {
@@ -110,24 +135,31 @@ foreach (array('severite', 'type', 'statut', 'navigateur') as $nom){
 	}");
 }
 
-function tickets_icone_statut ($niveau) {
+function tickets_icone_statut ($niveau,$full=false) {
 	$img = array(
 		"redac" => "puce-blanche.gif",
 		"ouvert" => "puce-orange.gif",
 		"resolu" => "puce-verte.gif",
-		"ferme" => "puce-poubelle.gif"
+		"ferme" => "puce-poubelle.gif",
+		"poubelle" => "puce-poubelle.gif"
 		);
-	return $img[$niveau];
+	if($full)
+		return '<img src="'.find_in_path('prive/images/'.$img[$niveau]).'" alt="'.tickets_texte_statut($niveau).'" />';
+	else
+		return $img[$niveau];
 }
 
-function tickets_icone_severite ($niveau) {
+function tickets_icone_severite ($niveau,$full=false) {
 	$img = array(
 		1 => "puce-rouge-breve.gif",
 		2 => "puce-orange-breve.gif",
 		3 => "puce-verte-breve.gif",
 		4 => "puce-poubelle-breve.gif"
 		);
-	return $img[$niveau];
+	if($full)
+		return '<img src="'.find_in_path('prive/images/'.$img[$niveau]).'" alt="'.tickets_texte_severite($niveau).'" />';
+	else
+		return $img[$niveau];
 }
 
 function tickets_liste_statut($connecte = true){
@@ -136,6 +168,7 @@ function tickets_liste_statut($connecte = true){
 		"ouvert" => _T("tickets:statut_ouvert"),
 		"resolu" => _T("tickets:statut_resolu"),
 		"ferme" => _T("tickets:statut_ferme"),
+		"poubelle" => _T("tickets:statut_poubelle")
 	);
 	if (!$connecte) {
 		unset($statuts['redac']);
@@ -144,13 +177,13 @@ function tickets_liste_statut($connecte = true){
 }
 
 
-function tickets_liste_type($id_ticket = null){
-	$types = array(
+function tickets_liste_tracker($id_ticket = null){
+	$trackers = array(
 		1 => _T("tickets:type_probleme"),
 		2 => _T("tickets:type_amelioration"),
 		3 => _T("tickets:type_tache"),
 	);
-	return $types;
+	return $trackers;
 }
 
 function tickets_liste_severite($id_ticket = null){

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Plugin Tickets pour Spip 2.0
- * Licence GPL (c) 2008-2009
+ * Plugin Tickets pour Spip 2.x
+ * Licence GPL (c) 2008-2011
  *
  */
 
@@ -47,20 +47,38 @@ function tickets_set($id_ticket) {
 
 	$c = array();
 	foreach (array(
-		'titre', 'texte', 'severite', 'type', 'id_assigne', 'exemple', 'composant','jalon','version','projet','navigateur'
+		'titre', 'texte', 'severite', 'tracker', 'id_assigne', 'exemple', 'composant','jalon','version','projet','navigateur','sticked'
 	) as $champ)
-		$c[$champ] = _request($champ);
+		$c[$champ] = trim(_request($champ));
 
 	include_spip('inc/modifier');
 	revision_ticket($id_ticket, $c);
 
+	// Ajouter un document
+	if (isset($_FILES['ajouter_document'])
+	AND $_FILES['ajouter_document']['tmp_name']) {
+		$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
+		$ajouter_documents(
+			$_FILES['ajouter_document']['tmp_name'],
+			$_FILES['ajouter_document']['name'], 'ticket', $id_ticket,
+			'document', 0, $documents_actifs);
+		// supprimer le temporaire et ses meta donnees
+		spip_unlink($_FILES['ajouter_document']['tmp_name']);
+		spip_unlink(preg_replace(',\.bin$,',
+			'.txt', $_FILES['ajouter_document']['tmp_name']));
+	}
+	
+	// Invalider les caches
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='id_ticket/$id_ticket'");
+	
 	// Modification de statut. On ne peut passer par inc/modifier
 	$c = array();
 	foreach (array('statut') as $champ)
 		$c[$champ] = _request($champ);
 		$c['date'] = date('Y-m-d H:i:s');
 	$err .= instituer_ticket($id_ticket, $c);
-
+	
 	return $err;
 }
 
@@ -125,11 +143,22 @@ function instituer_ticket($id_ticket, $c) {
 
 		// En cas de publication, fixer la date a "maintenant"
 		// sauf si $c commande autre chose
-		if ($champs['statut'] == 'ouvert' AND !in_array($statut_ancien, array('ouvert'))) {
+		if ($champs['statut'] == 'ouvert' AND in_array($statut_ancien, array('redac'))) {
 			if (!is_null($date))
 				$champs['date'] = $date;
 			else
 				$champs['date'] = date('Y-m-d H:i:s');
+			
+			// On publie les documents du ticket
+			$documents = sql_select('id_document','spip_documents_liens','objet="ticket" AND id_objet='.intval($id_ticket));
+			while($document = sql_fetch($documents)){
+				spip_log("On update le doc ".$document['id_document'],'tickets');
+				$champs = array(
+					'statut'=>'publie',
+					'date_publication'=>date('Y-m-d H:i:s'));
+				$id_document=$document['id_document'];
+				sql_updateq('spip_documents',$champs,"id_document=$id_document AND statut='prepa'");
+			}
 		}
 		// On met à jour la date_modif à chaque mise à jour de statut
 		$champs['date_modif'] = date('Y-m-d H:i:s');
@@ -174,6 +203,32 @@ function instituer_ticket($id_ticket, $c) {
 			array('statut' => $statut, 'statut_ancien' => $statut_ancien)
 		);
 	}
+
+	return ''; // pas d'erreur
+}
+
+/**
+ * Enregistre une revision de ticket
+ *
+ * @param int $id_ticket : l'identifiant numérique du ticket
+ * @param array $c[optional] : un array des champs à modifier en base
+ * @return
+ */
+function revision_ticket($id_ticket, $c=false) {
+
+	// invalider le cache quelque soit la circonstance.
+	// une modification de base = effacer les caches.
+	$invalideur = "id='id_ticket/$id_ticket'";
+	$indexation = true;
+
+	modifier_contenu('ticket', $id_ticket,
+		array(
+			'nonvide' => array('titre' => _T('info_sans_titre')),
+			'invalideur' => $invalideur,
+			'indexation' => $indexation,
+			'date_modif' => 'date_modif' // champ a mettre a date('Y-m-d H:i:s') s'il y a modif
+		),
+		$c);
 
 	return ''; // pas d'erreur
 }

@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_case_notification_publique' => 'Être notifié dans l\'espace public plutôt que dans l\'espace privé (Nécessite Zpip)',
 	'cfg_lbl_case_selecteur_navigateur' => 'Disposer d\'un sélecteur de navigateur dans le formulaire d\'édition de ticket',
 	'cfg_lbl_composants' => 'Composants',
+	'cfg_lbl_desactiver_public' => 'Désactiver l\'accès public', 
 	'cfg_lbl_forums_publics' => 'Commentaires sur les tickets',
 	'cfg_lbl_jalons' => 'Jalons',
 	'cfg_lbl_liste_auteurs' => 'Auteurs du site',
@@ -49,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lgd_notifs_forums' => 'Forums et notifications',
 	'cfg_titre_tickets' => 'Tickets',
 	'champ_assigner' => 'Assigner à :',
-	'champ_composant' => 'Composant:',
+	'champ_composant' => 'Composant :',
 	'champ_createur' => 'Créé par :',
 	'champ_date' => 'Date :',
 	'champ_date_modif' => 'Modifié le',
@@ -147,6 +148,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_inchange' => 'Le statut n\'a pas été modifié.',
 	'statut_mis_a_jour' => 'Statut mis à jour',
 	'statut_ouvert' => 'Ouvert et discuté',
+	'statut_poubelle' => 'À la poubelle', 
 	'statut_redac' => 'En cours de rédaction',
 	'statut_resolu' => 'Résolu',
 	'statut_resolu_long' => 'Tous les tickets résolus',
@@ -160,10 +162,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tickets_autorisations' => 'Les autorisations',
 	'tickets_derniers_commentaires' => 'Les derniers commentaires',
 	'tickets_general' => 'Général',
-	'tickets_sur_inscription' => '
-		L\'écriture des tickets ou commentaires n\'est
-		possible qu\'aux personnes identifiées.
-	',
+	'tickets_sur_inscription' => "L'écriture des tickets ou commentaires n'est possible qu'aux personnes identifiées.", 
+ 	'tickets_sur_inscription_droits' => 'Les droits dont vous disposez sont insuffisants.', 
 	'tickets_traites' => 'Tous les tickets traités',
 	'titre' => 'Tickets, suivi de bugs',
 	'titre_identification' => 'Identification',
