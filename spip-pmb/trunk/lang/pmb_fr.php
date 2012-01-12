@@ -40,6 +40,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'configurer_pmb' =>'Configuration de SPIP-PMB',
 'configurer_rpc_json' =>'JSON-RPC (plus rapide, choisir par d&eacute;faut)',
 'configurer_rpc_soap' =>'SOAP',
+'config_pmb_partout' => 'Afficher la colonne de PMB partout sur le site ?',
+'config_pmb_partout_explication' => 'PMB peut surcharger les fichiers de Zpip pour
+	afficher sa colonne quelque soit la page du site. Par défaut sa colonne n\'est
+	affichée que pour les pages concernant PMB. Mettre oui ici, l\'affichera partout (ou presque).',
+
 'cote' => 'Cote',
 
 // D
@@ -84,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ouvrage_trouve' => 'ouvrage trouv&eacute;',
 
 // P
+'parametrage_options' => 'Options du plugin SPIP-PMB',
 'parametrage_catalogue' => 'Param&eacute;trage du catalogue',
 'parametrage_plugin' => 'Param&eacute;trage du plugin',
 'pas_d_ouvrages_trouves' => 'Aucun ouvrage trouv&eacute; dans le catalogue',

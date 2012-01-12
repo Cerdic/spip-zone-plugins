@@ -9,12 +9,13 @@
 	schema="1.0.0"
 >
 
-	<nom>Portail Web pour PMB</nom>
+	<nom>SPIP-PMB</nom>
 	<!-- Utiliser SPIP comme portail web du logiciel PMB -->
 
 	<auteur lien="http://www.openstudio.fr">OpenStudio</auteur>
+	<auteur lien="http://magraine.net">Matthieu Marcillaud</auteur>
 
-	<copyright>2010</copyright>
+	<copyright>2010-2012</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
