@@ -246,50 +246,85 @@ function pmb_editeur_extraire($id_editeur, $debut=0, $nbresult=5, $id_session=0)
 
 }
 
+
+
+/**
+ * Recupere les informations d'auteurs
+ * dont les identifiants sont fournis par
+ * le tableau $ids_auteurs.
+ *
+ * Chaque identifiant calcule est mis en cache
+ * pour eviter des requetes intempestives
+ * sur un hit de page et permettre d'utiliser plusieurs
+ * fois une boucle telle que (PMB:AUTEURS){id}
+ * sans avoir besoin de tout recalculer.
+ *
+ * Notons que l'on ne peut recuperer que les champs "exportables"
+ * dans PMB.
+ *
+ * @param array $ids_auteurs
+ * 		Tableau d'id d'auteurs a recupereer
+ * @return array
+ * 		Tableau contenant pour chaque auteur la liste des champs
+ * 		que l'on a pu recuperer.
+**/
 function pmb_extraire_auteurs_ids($ids_auteur) {
 	if (!is_array($ids_auteur)) {
 		return array();
 	}
 	
-	return array();
-}
+	// retrouver les infos en cache
+	list($res, $wanted) = pmb_cacher('auteurs', $ids_auteur);
 
-function pmb_auteur_extraire($id_auteur, $debut=0, $nbresult=5, $id_session=0) {
-	$tableau_resultat = Array();
-	
+	// si on a tout trouve, on s'en va...
+	if (!count($wanted)) {
+		return $res;
+	}
+
 	try {
 		$ws = pmb_webservice();
-		$result = $ws->pmbesAuthors_get_author_information_and_notices($id_auteur,$id_session);
-		if ($result) {
-			$tableau_resultat['author_id']     = $result->information->author_id;
-			$tableau_resultat['author_type']   = $result->information->author_type;
-			$tableau_resultat['author_name']   = $result->information->author_name;
-			$tableau_resultat['author_rejete'] = $result->information->author_rejete;
-			if ($result->information->author_rejete) {
-				$tableau_resultat['author_nomcomplet'] =  $tableau_resultat['author_rejete'].' '.$tableau_resultat['author_name'];
-			} else {
-				$tableau_resultat['author_nomcomplet'] = $tableau_resultat['author_name'];
+		foreach ($wanted as $id_auteur) {
+			// second parametre $id_session n'etait pas utilise... kesako ?
+			$r = $ws->pmbesAuthors_get_author_information_and_notices($id_auteur);
+			if ($r) {
+				//infos de l'auteur
+				$a = array();
+				$a['id_auteur']			= $r->information->author_id;
+				$a['id_type_auteur']	= $r->information->author_type;
+				$a['nom']				= $r->information->author_name;
+				$a['prenom']			= $r->information->author_rejete;
+				if ($r->information->author_rejete) {
+					$a['nomcomplet'] =  $a['prenom'].' '.$a['nom'];
+				} else {
+					$a['nomcomplet'] = $a['nom'];
+				}
+				// what's 'see' ?
+				$a['id_voir']			= $r->information->author_see;
+				$a['date']				= $r->information->author_date;
+				$a['web']				= $r->information->author_web;
+				$a['commentaire']		= $r->information->author_comment;
+				$a['lieu']				= $r->information->author_lieu;
+				$a['ville']				= $r->information->author_ville;
+				$a['pays']				= $r->information->author_pays;
+				$a['subdivision']		= $r->information->author_subdivision;
+				$a['numero']			= $r->information->author_numero;
+				$a['ids_notice']		= $r->notice_ids;
+
+				$key = array_search($id_auteur, $ids_auteur);
+				if ($key !== false) {
+					$res[$key] = $a;
+					pmb_cacher('notices', $id_auteur, $a, true);
+				}
 			}
-
-			$tableau_resultat['author_see']      = $result->information->author_see;
-			$tableau_resultat['author_date']     = $result->information->author_date;
-			$tableau_resultat['author_web']      = $result->information->author_web;
-			$tableau_resultat['author_comment']  = $result->information->author_comment;
-			$tableau_resultat['author_lieu']     = $result->information->author_lieu;
-			$tableau_resultat['author_ville']    = $result->information->author_ville;
-			$tableau_resultat['author_pays']     = $result->information->author_pays;
-			$tableau_resultat['author_subdivision'] = $result->information->author_subdivision;
-			$tableau_resultat['author_numero']      = $result->information->author_numero;
-			$tableau_resultat['notice_ids'] = Array();
-
-			pmb_extraire_resultats($result, $tableau_resultat, $debut, $nbresult);
 		}
+
 	} catch (Exception $e) {
 		 echo 'Exception reçue (7) : ',  $e->getMessage(), "\n";
-	} 
-	return $tableau_resultat;
+	}
 
+	return $res;
 }
+
 
 /**
  * Retourne la liste des identifiants de notices trouvees 
@@ -679,6 +714,63 @@ function pmb_ws_dispo_exemplaire($id_notice, $id_session=0) {
 
 
 /**
+ * Sauve ou restaure un cache d'information
+ * sur la base [$type_cache][$id] = valeur
+ *
+ * @param string $type
+ * 		Le type de cache (notices, auteurs, ...)
+ * @param int|array $id
+ * 		L'identifiant desire ou une liste d'identifiants desires
+ * @param mixed $valeur
+ * 		La valeur a stocker si stockage demande
+ * @param bool $set
+ * 		Est-ce un stockage demande ?
+ * @return mixed
+ * 		Si stockage : true
+ * 		Sinon,
+ * 		si $id simple, sa $valeur enregistree
+ * 		si $id tableau, retourne array($res, $wanted),
+ * 		2 tableaux contenants les resultats trouves et ceux non trouves
+ * 		en conservant les cles du tableau $id en entree.
+**/
+function pmb_cacher($type, $id, $valeur=null, $set=false) {
+	static $cache = array();
+	if (!isset($cache[$type])) {
+		// Par ailleurs, l'id 0, s'il se produit est incongru est
+		// provient du hack pour la pagination de ce plugin.
+		$cache[$type] = array(0 => array());
+	}
+	
+	// mise en cache
+	if ($set) {
+		$cache[$type][$id] = $valeur;
+		return true;
+	}
+	
+	// lecture du cache
+	// 1 seul element demande
+	if (!is_array($id)) {
+		return $cache[$type][$id];
+	}
+	
+	// n elements demandes...
+	// id est un tableau d'id
+	// on retourne un tableau $res et $wanted
+	// contenant ce qu'on a et ce qu'on n'a pas.
+	$wanted = $id;
+	// ce qu'on a trouve...
+	$res = array();
+	
+	foreach ($id as $c=>$l) {
+		if (isset($cache[$type][$l])) {
+			$res[$c] = $cache[$type][$l];
+			unset($wanted[$c]);
+		}
+	}
+	return array($res, $wanted);
+}
+
+/**
  * Recupere les informations de notices
  * dont les identifiants sont fournis par
  * le tableau $ids_notices.
@@ -696,30 +788,15 @@ function pmb_ws_dispo_exemplaire($id_notice, $id_session=0) {
  * 		Tableau d'id de notices a recupereer
  * @return array
  * 		Tableau contenant pour chaque notice la liste des champs
- * 		que l'on a pa recuperer.
+ * 		que l'on a pu recuperer.
 **/
 function pmb_extraire_notices_ids($ids_notices) {
 	if (!is_array($ids_notices)) {
 		return array();
 	}
 
-	// On met en cache le resultat et on utilise le cache.
-	// afin d'optimiser si plusieurs boucles sont utilisees.
-	
-	// Par ailleurs, l'id 0, s'il se produit est incongru est
-	// provient du hack pour la pagination de ce plugin.
-	static $notices = array(0 => array());
-	
-	$wanted = $ids_notices;
-	// ce qu'on a trouve...
-	$res = array();
-	
-	foreach ($ids_notices as $c=>$l) {
-		if (isset($notices[$l])) {
-			$res[$c] = $notices[$l];
-			unset($wanted[$c]);
-		}
-	}
+	// retrouver les infos en cache
+	list($res, $wanted) = pmb_cacher('notices', $ids_notices);
 
 	// si on a tout trouve, on s'en va...
 	if (!count($wanted)) {
@@ -738,7 +815,8 @@ function pmb_extraire_notices_ids($ids_notices) {
 			foreach ($r as $notice) {
 				$key = array_search($notice['id'], $ids_notices);
 				if ($key !== false) {
-					$notices[ $notice['id'] ] = $res[$key] = $notice;
+					$res[$key] = $notice;
+					pmb_cacher('notices', $notice['id'], $notice, true);
 				}
 			}
 		}

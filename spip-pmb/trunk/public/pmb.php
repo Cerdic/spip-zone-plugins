@@ -241,6 +241,9 @@ function critere_PMB_datacache_dist($idb, &$boucles, $crit) {
  * Notices issues des syndications d'articles
  * (PMB:NOTICES) {nouveautes}
  *
+ * Notices issues des auteurs
+ * (PMB:NOTICES) {id_auteur}
+ *
  * Notices issues des recherches
  * (PMB:NOTICES) {rechercher}
  * (PMB:NOTICES) {rechercher}{look ?}{id_section ?}{id_location ?}{id_location_memo ?}
@@ -278,6 +281,24 @@ function inc_pmb_notices_select_dist(&$command, $iterateur) {
 		$ids = pmb_intersect_ids($ids, $idsn);
 	}
 
+	// id_auteur : trouver les notices d'un auteur
+	if ($id = pmb_critere_valeur($criteres, 'id_auteur')) {
+		foreach ($id as $id_auteur) {
+			// tout le temps sauf si IN
+			if (!is_array($id_auteur)) {
+				$id_auteur = array($id_auteur);
+			}
+			$auteurs = pmb_extraire_auteurs_ids($id_auteur);
+			if ($auteurs) {
+				$n = array();
+				foreach ($auteurs as $a) {
+					$n = array_unique(array_merge($n, $a['ids_notice']));
+				}
+				$ids = pmb_intersect_ids($ids, $n);
+			}
+		}
+		unset($auteurs);
+	}
 
 	// recherche de notices
 	if (pmb_recherche_critere($criteres, 'rechercher')) {

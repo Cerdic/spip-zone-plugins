@@ -1,14 +1,17 @@
-[(#SET{tab_resultat,[(#ENV{id_auteur}|pmb_auteur_extraire{#ENV{debut,0},#ENV{fin,5}})]})
-]
+<BOUCLE_auteur(PMB:AUTEURS){id_auteur}>
+
 
 [(#REM) Fil d'Ariane ]
 <p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+&gt; <a href="#URL_PMB_CATALOGUE"><:pmb:catalogue:></a>
 &gt; <:pmb:auteurs:>
-&gt; <strong class="on">[(#GET{tab_resultat/author_nomcomplet}|couper{80})]</strong></p>
+&gt; <strong class="on">[(#NOMCOMPLET|couper{80})]</strong></p>
 
 
 <div class="cartouche">
-	<h1 class="h1">#GET{tab_resultat/author_nomcomplet}</h1>
+	<h1 class="h1">#NOMCOMPLET</h1>
 </div>
 
-<INCLURE{fond=inclure/inc-pmb_auteur}{env}{tab_resultat=#GET{tab_resultat}}>
+<INCLURE{fond=inclure/inc-pmb_auteur}{env}{id_auteur}>
+
+</BOUCLE_auteur>
