@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_adresse_utilisee_par' => 'This address used by :', # MODIF
-	'info_email_utilise_par' => 'This email is used by :', # MODIF
+	'info_email_utilise_par' => 'Email used by :',
 	'info_gauche_numero_adresse' => 'Address id',
 	'info_gauche_numero_email' => 'Email id',
 	'info_gauche_numero_numero' => 'Number id', # MODIF
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_boite_postale' => 'Postal box',
 	'label_code_postal' => 'Postal code',
-	'label_complement' => 'Additional information', # MODIF
+	'label_complement' => 'Additional information',
 	'label_email' => 'Email',
 	'label_numero' => 'Phone number', # MODIF
 	'label_objets_actifs' => 'Objects',
