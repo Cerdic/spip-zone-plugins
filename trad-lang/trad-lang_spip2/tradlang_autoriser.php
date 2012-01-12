@@ -71,11 +71,12 @@ function autoriser_tradlang_configurer_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 	$utiliser_defaut = true;
 
-	/**
-	 * Utilisation du CFG si possible
-	 */
-	if(function_exists('lire_config')){
-		$type = lire_config('tradlang/autorisations/configurer_type', 'par_statut');
+	if(!function_exists('lire_config')){
+		include_spip('inc/config');	
+	}
+	
+	$type = lire_config('tradlang/autorisations/configurer_type');
+	if($type){
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
@@ -97,9 +98,6 @@ function autoriser_tradlang_configurer_dist($faire, $type, $id, $qui, $opt){
 		if($autorise == true){
 			return $autorise;
 		}
-	}
-
-	if($type){
 		$utiliser_defaut = false;
 	}
 
@@ -140,14 +138,12 @@ function autoriser_tradlang_modifier_dist($faire, $type, $id, $qui, $opt){
 		return autoriser_tradlang_configurer_dist($faire, $type, $id, $qui, $opt);
 	}
 	
-	/**
-	 * Utilisation du CFG si possible
-	 */
 	if(!function_exists('lire_config')){
 		include_spip('inc/config');	
 	}
-	if(function_exists('lire_config')){
-		$type = lire_config('tradlang/modifier_type', 'par_statut');
+	
+	$type = lire_config('tradlang/modifier_type');
+	if($type){
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
@@ -169,13 +165,9 @@ function autoriser_tradlang_modifier_dist($faire, $type, $id, $qui, $opt){
 		if($autorise == true){
 			return $autorise;
 		}
-	}
 	
-	// Si pas de configuration CFG, on utilise des valeurs par défaut
-	if($type){
 		$utiliser_defaut = false;
 	}
-
 	// Si $utiliser_defaut = true, on utilisera les valeurs par défaut
 	// Sinon on ajoute la possibilité de régler par define
 	$liste = definir_autorisations_tradlang('modifier',$utiliser_defaut);
@@ -215,11 +207,12 @@ function autoriser_tradlang_voir_dist($faire, $type, $id, $qui, $opt){
 		return autoriser_tradlang_modifier_dist($faire, $type, $id, $qui, $opt);
 	}
 	
-	/**
-	 * Utilisation du CFG si possible
-	 */
-	if(function_exists('lire_config')){
-		$type = lire_config('tradlang/voir_type', 'par_statut');
+	if(!function_exists('lire_config')){
+		include_spip('inc/config');	
+	}
+	
+	$type = lire_config('tradlang/voir_type');
+	if($type){
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
@@ -241,9 +234,6 @@ function autoriser_tradlang_voir_dist($faire, $type, $id, $qui, $opt){
 		if($autorise == true){
 			return $autorise;
 		}
-	}
-
-	if($type){
 		$utiliser_defaut = false;
 	}
 	

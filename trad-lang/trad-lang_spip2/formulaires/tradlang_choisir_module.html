@@ -25,7 +25,7 @@
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lang_cible})</span>
 				]<INCLURE{fond=formulaires/tradlang_selecteur_langue_module_dispo}{env}{lang_select=#ENV{lang_cible}}{lang_exclue=#ENV{lang_mere}}{name=lang_cible}>
 		    </li>
-			[(#AUTORISER{tradlang,configurer}|oui)<INCLURE{fond=formulaires/tradlang_selecteur_langue_possible_creation}{env}>]
+			[(#AUTORISER{modifier,tradlang}|oui)<INCLURE{fond=formulaires/tradlang_selecteur_langue_possible_creation}{env}>]
 		</ul>
 		<p class='boutons'>
 			<input type='submit' class='submit' name='traduire' value='<:tradlang:bouton_traduire:>' />

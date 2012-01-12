@@ -115,7 +115,8 @@
 [(#GET{total_inexistants}|=={#GET{total_mere}}|oui)
 <div class="actions">
 	[(#SET{texte_bouton,[(#VAL{tradlang:bouton_activer_lang}|_T{#ARRAY{lang,#ENV{lang_cible}}})]})]
-	[(#BOUTON_ACTION{#GET{texte_bouton},[(#URL_ACTION_AUTEUR{tradlang_creer_langue_cible,#ID_TRADLANG_MODULE,#SELF}|parametre_url{lang_crea,#ENV{lang_cible}})]})]
+	[(#AUTORISER{modifier,tradlang}|oui)
+	[(#BOUTON_ACTION{#GET{texte_bouton},[(#URL_ACTION_AUTEUR{tradlang_creer_langue_cible,#ID_TRADLANG_MODULE,#SELF}|parametre_url{lang_crea,#ENV{lang_cible}})]})]]
 </div>
 ]
 <table class="spip liste_traductions tablesorter">
