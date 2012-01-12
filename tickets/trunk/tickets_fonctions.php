@@ -106,24 +106,6 @@ function tickets_classer_par_jalon($bidon) {
 	return $page;
 }
 
-// Affichage des blocs de liste depliables et ajaxes
-function tickets_debut_block_depliable($deplie,$id=""){
-	include_spip('inc/layer');
-	return debut_block_depliable($deplie,$id);
-}
-function tickets_fin_block() {
-	include_spip('inc/layer');
-	return fin_block();
-}
-function tickets_bouton_block_depliable($texte,$deplie,$page="",$ids=""){
-	include_spip('inc/layer');
-	if ($page)
-		return bouton_block_depliable(afficher_plus(generer_url_ecrire($page)).$texte,$deplie,$ids);
-	else
-		return bouton_block_depliable($texte,$deplie,$ids);
-	
-}
-
 // creation des fonction de selection de texte
 // encore en truc a reprendre !
 foreach (array('severite', 'tracker', 'statut', 'navigateur') as $nom){
@@ -194,12 +176,6 @@ function tickets_liste_severite($id_ticket = null){
 		4 => _T("tickets:severite_peu_important"),
 	);
 	return $severites;
-}
-
-if(!function_exists('barre_typo')){
-	function barre_typo(){
-		return;
-	}
 }
 
 /**

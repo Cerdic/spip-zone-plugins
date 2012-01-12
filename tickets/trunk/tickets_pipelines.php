@@ -84,7 +84,7 @@ function tickets_objets_extensibles($objets){
  */
 function tickets_accueil_informations($flux){
 	global $spip_lang_left;
-
+	include_spip('inc/presentation');
 	$q = sql_select("COUNT(*) AS cnt, statut", 'spip_tickets', '', 'statut', '','', "COUNT(*)<>0");
 
 	$cpt = array();

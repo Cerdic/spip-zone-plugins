@@ -1,6 +1,4 @@
 [(#REM) Noisette servant a l'affichage du menu des tickets presente en colonne droite ou gauche]
-#CACHE{0}
-#SET{visible,true}
 [(#SET{defaut_tri,#ARRAY{
     date,-1,
     statut,1
@@ -9,12 +7,9 @@
 ]
 
 <B_simple>
-<div class="cadre cadre-liste">
-	[(#ENV{titre}|tickets_bouton_block_depliable{#GET{visible,true}|=={true}})]
-	[(#GET{visible,true}|=={true}|tickets_debut_block_depliable)]
+#BOITE_OUVRIR{#CHEMIN_IMAGE{ticket-24.png}|balise_img{'',cadre-icone}|concat{#ENV{titre}},'simple','titrem'}
 	[<div class="arial1 tranches pagination">(#PAGINATION)</div>]
-	<table width="100%" cellpadding="2" cellspacing="0" border="0">
-    
+	<table width="100%" cellpadding="2" cellspacing="0" border="0" class="spip">
         <thead>
             <tr>
                 <th>[(#TRI{id_ticket,#,ajax})]</th>
@@ -76,6 +71,5 @@
 </BOUCLE_simple>
 		</tbody>
 	</table>
-	[(#VAL|tickets_fin_block)]
-</div>
+#BOITE_FERMER
 </B_simple>
