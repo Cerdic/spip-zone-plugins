@@ -1,16 +1,11 @@
-<!-- autoriser=webmestre -->
-<!-- refus=<:cfg:refus_configuration_webmestre:> -->
-<!-- presentation=non -->
-<!-- nom=tickets -->
-<!-- casier=general -->
 <div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_configurer_tickets_general">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 			<li class="fieldset">
+				<fieldset>
 				<h3 class="legend"><:tickets:cfg_lgd_champs_optionnels:></h3>
 				<ul>
 					#SET{readonly,''}
@@ -57,9 +52,11 @@
 						label=<:tickets:cfg_lbl_joindre_fichiers:>,
 						label_case=<:tickets:cfg_lbl_case_joindre_fichiers:>})]
 				</ul>
+				</fieldset>
 			</li>
 			
 			<li class="fieldset">
+				<fieldset>
 				<h3 class="legend"><:tickets:cfg_lgd_champs_options_autres:></h3>
 				<ul>
 				[(#SAISIE{oui_non, desactiver_public,
@@ -71,22 +68,20 @@
 				[(#SAISIE{case, notification_publique,
 					label=<:tickets:cfg_lbl_notification_publique:>,
 					label_case=<:tickets:cfg_lbl_case_notification_publique:>})]
-		
-				[(#REM) uniquement avec le plugin forums ]
-				[(#PLUGIN{forum,version}|>{'1.0'}|oui)
-					[(#SAISIE{radio, forums_publics,
-						label=<:tickets:cfg_lbl_forums_publics:>,
-						defaut=posteriori,
-						datas=[(#ARRAY{
-							non,<:tickets:cfg_bouton_radio_desactiver_forum_public:>,
-							posteriori,<:bouton_radio_publication_immediate:>,
-							priori,<:bouton_radio_moderation_priori:>,
-							abo,<:bouton_radio_enregistrement_obligatoire:>,
-						})]})]
-				]
+				[(#SAISIE{radio, forums_publics,
+					label=<:tickets:cfg_lbl_forums_publics:>,
+					defaut=posteriori,
+					datas=[(#ARRAY{
+						non,<:tickets:cfg_bouton_radio_desactiver_forum_public:>,
+						posteriori,<:forum:bouton_radio_publication_immediate:>,
+						priori,<:forum:bouton_radio_moderation_priori:>,
+						abo,<:forum:bouton_radio_enregistrement_obligatoire:>,
+					})]})]
 				</ul>
+				</fieldset>
 			</li>
 		</ul>
+		<input type="hidden" name="_meta_casier" value="tickets/general" />
 		<p class="boutons">
 			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
 		</p>
