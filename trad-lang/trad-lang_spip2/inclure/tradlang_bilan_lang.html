@@ -36,13 +36,14 @@
 			<th class="avancement">
 				<:tradlang:th_avancement:>
 			</th>
+			<th></th>
 		</tr>
 	</thead>
 	<B_modules_lang>
 	<tbody>
 	<BOUCLE_modules_lang(TRADLANG_MODULES){priorite}>
 	<tr class="module #MODULE[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-		<td><a href="[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#ENV{langue_modules}}|parametre_url{langue_modules,''})]" title="<:tradlang:info_traduire_module_lang{lang=#ENV{langue_modules},langue_longue=#GET{langue_longue},module=#NOM_MOD}|attribut_html:>">[(#NOM_MOD)]</a></td>
+		<td><a href="[(#SELF|parametre_url{langue_modules,''}|parametre_url{id_tradlang_module,#ID_TRADLANG_MODULE})]" title="<:tradlang:lien_voir_bilan_module{module=#MODULE,nom_mod=#NOM_MOD}|attribut_html:>">[(#NOM_MOD)]</a></td>
 		<BOUCLE_compte_langue_mere(TRADLANG){module}{lang=#LANG_MERE}> </BOUCLE_compte_langue_mere>
 		<td><abbr title="[(#LANG_MERE|traduire_nom_langue)]">#LANG_MERE</abbr></td>
 		#SET{total_mere,#GRAND_TOTAL}
@@ -112,6 +113,12 @@
 				<div class="new" style="left: [(#GET{percent_ok}|plus{#GET{percent_modif}})]px; width: #GET{percent_new}px"> </div>
 			</div>
 		</td>
+		<td>
+			[(#ENV{langue_modules}|=={#LANG_MERE}|non)
+			<a href="[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#CLE})]" title="<:tradlang:info_traduire_module_lang{lang=#ENV{langue_modules},langue_longue=#GET{langue_longue},module=#NOM_MOD}|attribut_html:>">
+			<:tradlang:bouton_traduire:>
+			</a>]
+		</td>
 	</tr>
 	</BOUCLE_modules_lang>
 	</tbody>
@@ -147,6 +154,7 @@
 				<div class="new" style="left: [(#GET{percent_ok_full}|plus{[(#GET{total_modif_full}|div{#TOTAL_BOUCLE}|floor)]})]px; width: [(#GET{percent_ok_new})]px"> </div>
 			</div>
 		</td>
+		<td></td>
 	</tfoot>
 	</tbody>
 	</B_modules_lang>

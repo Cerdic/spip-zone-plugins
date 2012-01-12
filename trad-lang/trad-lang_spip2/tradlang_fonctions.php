@@ -115,9 +115,14 @@ function tradlang_dir_lang(){
  * 
  * @param array $array
  */
-function langues_sort($array){
+function langues_sort($array,$defaut=null){
 	if(is_array($array)){
 		arsort($array);
+		if(isset($defaut)){
+			$langue_defaut = array($defaut => $array[$defaut]);
+			unset($array[$defaut]);
+			$array = array_merge($langue_defaut,$array);
+		}
 		return $array;
 	}
 	return false;

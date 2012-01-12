@@ -156,6 +156,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_traduction_vers' => ' vers ',
 	'lien_trier_langue_non' => 'Afficher le bilan global.',
 	'lien_utiliser_google_translate' => 'Utiliser cette version',
+	'lien_voir_bilan_lang' => 'Voir le bilan de la langue @langue_longue@ (@lang@)',
+	'lien_voir_bilan_module' => 'Voir le bilan du module @nom_mod@ - @module@',
 	'lien_voir_toute_chaines_module' => 'Voir toutes les chaines du module.',
 
 	// M
