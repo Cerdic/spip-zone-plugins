@@ -18,7 +18,7 @@ include_spip('action/editer_gis');
  */
 function crud_gis_create_dist($dummy,$set=null){
 	if ($id = insert_gis()){
-		list($e,$ok) = revision_gis($id,$set);
+		list($e,$ok) = revisions_gis($id,$set);
 	}
 	else{
 		$e = _L('create error');
