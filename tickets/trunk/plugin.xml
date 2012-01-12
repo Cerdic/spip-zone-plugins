@@ -70,11 +70,6 @@
 		<nom>objets_extensibles</nom>
 		<inclure>tickets_pipelines.php</inclure>
 	</pipeline>
-	<!-- avec plugin revisions (2.1) -->
-	<pipeline>
-		<nom>gouverneur_infos_tables</nom>
-		<inclure>tickets_pipelines.php</inclure>
-	</pipeline>
 	<pipeline>
 		<nom>revisions_liste_objets</nom>
 		<inclure>tickets_pipelines.php</inclure>
@@ -127,15 +122,15 @@
 		<url>ticket_editer</url>
 		<args>id_ticket=new</args>
 	</bouton>
-	
-	<chemin dir='' />
-	<chemin dir='spip21/' />
 
 	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[3.0.0-dev;3.0.99]" />
 	<necessite id="saisies" version="[1.3;]" />
+	<necessite id="Zpip" version="[2.0.3;]" />
+	
 	<!-- pour les boucles pour des "selections" de saisies -->
 	<necessite id="spip_bonux" version="[1.8;]" />
+		
 	<!-- 
 		pour la gestion des forums dans la table spip_forums 
 		svn://zone.spip.org/spip-zone/_core_/branches/spip-2.1/plugins/forum
