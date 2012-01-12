@@ -1,13 +1,15 @@
 <plugin>
-   <nom>Calculette d'hydraulique à surface libre</nom>
+   <nom><multi>
+   [fr]Calculette d'hydraulique
+   [en]Calculator for hydraulic</multi></nom>
    <auteur>David Dorchies</auteur>
    <licence>GNU/GLP</licence>
    <version>0.3 alpha</version>
    <necessite id="lib:dist" src="https://bitbucket.org/cleonello/jqplot/downloads/jquery.jqplot.1.0.0b2_r1012.zip" />
-	<slogan>
-		<multi>[fr]Des calculs d'hydraulique sous SPIP !
-		[en]Hydraulic calculations on SPIP !</multi>
-	</slogan>
+    <slogan>
+        <multi>[fr]Des calculs d'hydraulique sous SPIP !
+        [en]Hydraulic calculations on SPIP !</multi>
+    </slogan>
    <description>
    <multi>
    [fr]Calculatrice permettant d'effectuer des calculs en hydraulique adaptés aux canaux et cours d'eau. Le plugin se présente
@@ -17,7 +19,6 @@
    <ul>
       <li>&lt;hyd|courberemous&gt; : Calcul d'une courbe de remous dans un canal trapézoïdal à surface libre</li>
    </ul>
-   Voir le site du plugin pour plus d'informations : <a href="http://sic.g-eau.net/spip.php?rubrique80">http://sic.g-eau.net</a>
    [en]Calculator for performing calculations in hydraulic
 adapted to canals and rivers. The plugin comes
 as models to be inserted into articles, sections or
@@ -26,7 +27,6 @@ skeletons.
    <ul>
       <li>&lt;hyd|courberemous&gt; : Calculation of a backwater curve in a trapezoidal channel with free surface</li>
    </ul>
-   See the plugin website for more information : <a href="http://sic.g-eau.net/spip.php?rubrique80">http://sic.g-eau.net</a>
    </multi>
    </description>
    <icon>logo32.png</icon>

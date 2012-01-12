@@ -25,7 +25,7 @@ function calcul_courbe_remous($oParam,$oSection,$oLog,$iPrec) {
       $trX[] = round($x,$iPrec);
       $trY[] = (real)$oSection->CalcPasX($oParam, $oSection->rY);
       if($oParam->rDx > 0 xor !($oSection->rY < $oSection->rHautCritique)) {
-         $oLog->Add('(x='.$x.') '._T('hydraulic:arret_calcul'));
+         $oLog->Add(_T('hydraulic:arret_calcul').' '.$x. ' m');
          break;
       }
    }
