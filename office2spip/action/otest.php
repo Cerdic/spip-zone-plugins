@@ -35,6 +35,7 @@ function action_otest() {
 					case 'spip':
 						include_spip('inc/fonctionsale');
 						$file['spip'] = sale($html);
+						break;
 					default:
 						include_spip('inc/filtres');
 						include_spip('inc/charset');
@@ -57,7 +58,20 @@ function action_otest() {
 		}
 	}
 
-	echo json_encode($res);
+	if ($res)
+		$offi = new offi(
+			200,
+			'Sucessfully converted',
+			$res
+		);
+	else
+		$offi = new offi(
+			500,
+			'Conversion error',
+			$res
+		);
+
+	$offi->json();
 }
 
 
@@ -87,12 +101,40 @@ function office_controler_secret() {
 	include_spip('inc/securiser_action');
 	$secret = substr(md5('otest+'.secret_du_site()), 0,6);
 
-	if (_request('secret') != $secret) {
+	if (!_request('secret')) {
 		if (!autoriser('ecrire'))
-			echo "Connectez-vous pour connaitre le secret.";
+			$res = new offi(
+				401,
+				"Connectez-vous pour connaitre le secret."
+			);
 		else
-			echo "Le secret : ".$secret;
+			$res = new offi(
+				200,
+				"Voici le secret",
+				$secret
+			);
+		$res->json();
+	}
+	else if (_request('secret')!= $secret) {
+		$res = new offi(
+			403,
+			"Authentication failed"
+		);
+		$res->json();
+	}
+}
 
+
+class offi {
+	function offi($code=200, $message='', $result=null) {
+		$this->code = $code;
+		$this->message = $message;
+		$this->result = $result;
+	}
+
+	function json() {
+		header('Content-Type: text/plain; charset=utf-8');
+		echo json_encode($this);
 		exit;
 	}
 }
