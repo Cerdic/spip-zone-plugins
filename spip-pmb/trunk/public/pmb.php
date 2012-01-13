@@ -247,7 +247,8 @@ function critere_PMB_SECTIONS_id_parent_dist($idb, &$boucles, $crit) {
  * et retourne un tableau des elements parsees
  * 
  * Une ou n notices
- * (PMB:NOTICES) {id} 
+ * (PMB:NOTICES) {id}
+ * (PMB:NOTICES) {id_notice}
  * (PMB:NOTICES) {liste #TABLEAU_IDS}
  *
  * Notices lies a celle(s) donnees
@@ -280,6 +281,11 @@ function inc_pmb_notices_select_dist(&$command, $iterateur) {
 
 	// depuis un critere id=x ou {id?}
 	if ($id = pmb_critere_valeur($criteres, 'id')) {
+		$ids = pmb_intersect_ids($ids, $id);
+	}
+
+	// depuis un critere id_notice=x ou {id_notice?}
+	if ($id = pmb_critere_valeur($criteres, 'id_notice')) {
 		$ids = pmb_intersect_ids($ids, $id);
 	}
 
@@ -381,7 +387,6 @@ function inc_pmb_notices_select_dist(&$command, $iterateur) {
 		}
 
 		$idsr = pmb_ids_notices_recherches($demande, $total_resultats, $debut, $nombre, $pagination);
-
 		$ids = pmb_intersect_ids($ids, $idsr);
 		$iterateur->total = $total_resultats;
 
@@ -505,6 +510,23 @@ function inc_pmb_collections_select_dist(&$command, $iterateur) {
 function inc_pmb_editeurs_select_dist(&$command, $iterateur) {
 	return inc_pmb_select_abstract_dist(&$command, $iterateur, 'editeurs', 'id_editeur');
 }
+
+
+
+/**
+ *
+ * Selectionne les exemplaires disponibles d'une notice
+ * et retourne un tableau des elements parsees
+ * 
+ * Liste des exemplaires
+ * (PMB:EXEMPLAIRES) {id_notice}
+ * (PMB:EXEMPLAIRES) {liste #TABLEAU_IDS_NOTICE}
+ * 
+ */
+function inc_pmb_exemplaires_select_dist(&$command, $iterateur) {
+	return inc_pmb_select_abstract_dist(&$command, $iterateur, 'exemplaires', 'id_notice');
+}
+
 
 
 /**
@@ -823,7 +845,7 @@ function critere_SYNDIC_ARTICLES_pmb_notices($idb, &$boucles, $crit) {
  * Balise #URL_PMB_NOTICE et #URL_PMB_NOTICE{18}
 **/
 function balise_URL_PMB_NOTICE_dist($p) {
-	return pbm_balise_url($p, 'id', 'pmb_notice');
+	return pbm_balise_url($p, 'id_notice', 'pmb_notice');
 }
 
 
@@ -854,6 +876,16 @@ function balise_URL_PMB_AUTEUR_dist($p) {
 **/
 function balise_URL_PMB_NOUVEAUTES_dist($p) {
 	$page = 'pmb_nouveautes';
+	$p->code = "generer_url_public('$page')";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+/**
+ * Balise URL_PMB_RECHERCHE
+**/
+function balise_URL_PMB_RECHERCHE_dist($p) {
+	$page = 'pmb_recherche';
 	$p->code = "generer_url_public('$page')";
 	$p->interdire_scripts = false;
 	return $p;

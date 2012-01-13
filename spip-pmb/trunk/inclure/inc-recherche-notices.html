@@ -10,9 +10,9 @@
 	
 	<ul class="liste-items items">
 		<BOUCLE_liste_notices(PMB:NOTICES)
-			{id ?}{id_auteur ?}{id_collection ?}{id_editeur ?}
+			{id_notice ?}{id_auteur ?}{id_collection ?}{id_editeur ?}
 			{pagination 5}>
-				<INCLURE{fond=inclure/inc-notice-resume}{id}{surlignable=1}{compteur=#COMPTEUR_BOUCLE}>	
+				[(#INCLURE{fond=inclure/inc-notice-resume,id_notice, surlignable=1, compteur=#COMPTEUR_BOUCLE})]
 		</BOUCLE_liste_notices>
 	</ul>
 

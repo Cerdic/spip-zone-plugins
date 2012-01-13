@@ -111,6 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'rang' => 'Rang',
 'recherche_avancee' => 'Recherche avanc&eacute;e',
 'recherche_catalogue' => 'Dans le catalogue',
+'rechercher_dans_catalogue' => 'Rechercher dans le catalogue',
 'recherche_dans' => 'Recherche dans',
 'recherche_portail_web' => 'Dans le site',
 'reservation_ko' => 'Votre r&eacute;servation &agrave; n\'a pas pu &ecirc;tre prise en compte.',

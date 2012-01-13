@@ -184,7 +184,7 @@ function pmb_extraire_section($section) {
  * Chaque identifiant calcule est mis en cache
  * pour eviter des requetes intempestives
  * sur un hit de page et permettre d'utiliser plusieurs
- * fois une boucle telle que (PMB:NOTICES){id}
+ * fois une boucle telle que (PMB:NOTICES){id_notice}
  * sans avoir besoin de tout recalculer.
  *
  * Notons que l'on ne peut recuperer que les champs "exportables"
@@ -766,7 +766,7 @@ function pmb_ws_parser_notice($value) {
 		}
 	}
 
-	$tresultat['id'] = $id_notice;
+	$tresultat['id'] = $tresultat['id_notice'] = $id_notice;
 
 	// on stocke en cache
 	$resultats[$hash] = $tresultat;
@@ -839,36 +839,51 @@ function pmb_ws_documents_numeriques ($id_notice, $id_session=0) {
 
 }
 
-function pmb_ws_dispo_exemplaire($id_notice, $id_session=0) {
-  
-	$tresultat = Array();
+
+/**
+ * Retourne la liste des exemplaires (item)
+ * d'une notice (identifiant d'un ouvrage/document)
+ *
+ * @param string $ids_notice
+ * 		Liste des identifiants de notices dont les exemplaires sont a recuperer
+ * 
+ * @return array
+ * 		Liste des exemplaires
+**/
+function pmb_extraire_exemplaires_ids($ids_notice) {
+	if (!$ids_notice) {
+		return array();
+	}
+	$res = Array();
 
 	try {
 		$ws = pmb_webservice();
-		$r=$ws->pmbesItems_fetch_notice_items($id_notice, $id_session);
-		$cpt = 0;
-		if (is_array($r)) {
-			foreach ($r as $exemplaire) {
-				$tresultat[$cpt] = Array();
-				$tresultat[$cpt]['id'] = $exemplaire->id;
-				$tresultat[$cpt]['cb'] = $exemplaire->cb;
-				$tresultat[$cpt]['cote'] = $exemplaire->cote;
-				$tresultat[$cpt]['location_id'] = $exemplaire->location_id;
-				$tresultat[$cpt]['location_caption'] = $exemplaire->location_caption;
-				$tresultat[$cpt]['section_id'] = $exemplaire->section_id;
-				$tresultat[$cpt]['section_caption'] = $exemplaire->section_caption;
-				$tresultat[$cpt]['statut'] = $exemplaire->statut;
-				$tresultat[$cpt]['support'] = $exemplaire->support;
-				$tresultat[$cpt]['situation'] = $exemplaire->situation;
-
-				$cpt++;
+		foreach ($ids_notice as $id_notice) {
+			// second parametre $id_session non utilise
+			$exemplaires = $ws->pmbesItems_fetch_notice_items($id_notice);
+			if (is_array($exemplaires)) {
+				foreach ($exemplaires as $exemplaire) {
+					$e = Array();
+					$e['id']               = $exemplaire->id;
+					$e['id_notice']        = $id_notice;
+					$e['code_barre']       = $exemplaire->cb;
+					$e['cote']             = $exemplaire->cote;
+					$e['id_location']      = $exemplaire->location_id;
+					$e['titre_location']   = $exemplaire->location_caption;
+					$e['id_section']       = $exemplaire->section_id;
+					$e['titre_section']    = $exemplaire->section_caption;
+					$e['statut']           = $exemplaire->statut;
+					$e['support']          = $exemplaire->support;
+					$e['situation']        = $exemplaire->situation;
+					$res[] = $e;
+				}
 			}
 		}
-
 	} catch (Exception $e) {
 		 echo 'Exception reçue (12) : ',  $e->getMessage(), "\n";
-	} 
-	return $tresultat;
+	}
+	
+	return $res;
 }
 
 
@@ -1028,19 +1043,19 @@ function pmb_extraire_prets_ids($ids_pmb_session, $type_pret=0) {
 		if (is_array($prets)) {
 			foreach ($prets as $pret) {
 				$p = array();
-				$p['id_emprunteur']         = $pret->empr_id;
-				$p['id_notice']             = $pret->notice_id;
-				$p['id_bulletin']           = $pret->bulletin_id;
-				$p['expl_id']               = $pret->expl_id;
-				$p['expl_cb']               = $pret->expl_cb;
-				$p['expl_support']          = $pret->expl_support;
-				$p['expl_id_location']      = $pret->expl_location_id;
-				$p['expl_location_titre']   = $pret->expl_location_caption;
-				$p['expl_id_section']       = $pret->expl_section_id;
-				$p['expl_section_titre']    = $pret->expl_section_caption;
-				$p['expl_libelle']          = $pret->expl_libelle;
-				$p['loan_startdate']        = $pret->loan_startdate;
-				$p['loan_returndate']       = $pret->loan_returndate;
+				$p['id_emprunteur']             = $pret->empr_id;
+				$p['id_notice']                 = $pret->notice_id;
+				$p['id_bulletin']               = $pret->bulletin_id;
+				$p['exemplaire_id']             = $pret->expl_id;
+				$p['exemplaire_code_barre']     = $pret->expl_cb;
+				$p['exemplaire_support']        = $pret->expl_support;
+				$p['exemplaire_id_location']    = $pret->expl_location_id;
+				$p['exemplaire_titre_location'] = $pret->expl_location_caption;
+				$p['exemplaire_id_section']     = $pret->expl_section_id;
+				$p['exemplaire_titre_section']  = $pret->expl_section_caption;
+				$p['exemplaire_libelle']        = $pret->expl_libelle;
+				$p['date_debut']                = $pret->loan_startdate;
+				$p['date_retour']               = $pret->loan_returndate;
 				$notices[] = $pret->notice_id;
 				$prets[] = $p;
 			}
