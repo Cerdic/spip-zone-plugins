@@ -25,22 +25,32 @@
 					<li class="boutons">
 						<input type='submit' name='ok' value='Rechercher' class='boutonrechercher'/>
 					</li>
-					<li>
-					[(#SET{tab_resultat, [(#VAL{0}|pmb_recuperer_champs_recherche)]})]
-					#SET{valeurs,#ARRAY}
-					<BOUCLE_tab_resultat(POUR){tableau #GET{tab_resultat}}>
-						<B_valeurs_champs>
-						<select name='typdoctemp' class="invisible">
-							<option  value=''>tout type de document</option>
-						<BOUCLE_valeurs_champs(POUR){tableau #VALEUR{values}}{si (#VALEUR{id}|=={17})}>
-							<option  value='#VALEUR{value_id}'[(#ENV{typdoc}|=={#GET{valeurs_champs/#CLE/value_id}}|oui)selected="selected")]>
-								#VALEUR{value_caption}
-							</option>
-						</BOUCLE_valeurs_champs>
-						</select>
-						</B_valeurs_champs>
-					</BOUCLE_tab_resultat>
 
+<BOUCLE_non(CONDITION){si 0}>
+[(#REM)
+	Il faudrait prevoir quels champs on decide d'afficher
+	dans les options de recherche, par exemple avec une conf...
+	bon, il faut aussi pouvoir les traiter ensuite :)
+]
+					[(#SET{tab_resultat, [(#VAL{0}|pmb_recuperer_champs_recherche)]})]
+					<BOUCLE_categories_recherche(DATA){source tableau,#GET{tab_resultat}}>
+						[(#REM) {si (# VALEUR{id}|=={17}) ]
+						[(#REM) {si (# VALEUR{label}|oui)} ]
+					<li>
+						<B_categorie_options>
+						<select name='categorie[#ID]'>
+							<option value=''>[(#LABEL|sinon{'...'})]</option>
+						<BOUCLE_categorie_options(DATA){source tableau,#VALEUR{values}}>
+							<option value='#VALUE_ID'[ (#ENV{categorie/#ID}|=={#VALUE_ID}|oui)selected="selected"]>
+								#VALUE_CAPTION
+							</option>
+						</BOUCLE_categorie_options>
+						</select>
+						</B_categorie_options>
+					</li>
+					</BOUCLE_categories_recherche>
+</BOUCLE_non>
+					<li>
 						<select name='typdoc'>  
 							<option  value=''>Tout type de document</option>
 							<option  value='a'[(#ENV{typdoc}|=={a}|oui)selected="selected")]>texte imprim&eacute;</option>

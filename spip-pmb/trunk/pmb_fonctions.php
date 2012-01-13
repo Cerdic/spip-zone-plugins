@@ -501,13 +501,15 @@ function pmb_ids_notices_recherches($demande, &$nbTotal, $debut=0, $nombre=5, $p
 	$id_section         = $demande['id_section'];
 	$id_section_parent  = $demande['id_section_parent'];
 	$id_location        = $demande['id_location'];
+	$typdoc             = $demande['type_document'];
+	$look               = $demande['look'];
 	
 	if ($id_section_parent) {
 		$id_location = $id_section_parent; // a n'y rien comprendre...
 	}
-	
-	$typdoc      = $demande['type_document'];
-	$look        = $demande['look'];
+
+	$recherche = str_replace("+"," ",$recherche);
+
 	if (!$look) $look = array();
 	$look = array_flip($look);
 	$tous = true;
@@ -1011,19 +1013,19 @@ function pmb_prets_extraire ($session_id, $type_pret=0) {
 			foreach ($loans as $loan) {
 				$liste_notices[] = $loan->notice_id;
 				$tableau_resultat[$cpt] = Array();
-				$tableau_resultat[$cpt]['empr_id'] = $loan->empr_id;
-				$tableau_resultat[$cpt]['notice_id'] = $loan->notice_id;
-				$tableau_resultat[$cpt]['bulletin_id'] = $loan->bulletin_id;
-				$tableau_resultat[$cpt]['expl_id'] = $loan->expl_id;
-				$tableau_resultat[$cpt]['expl_cb'] = $loan->expl_cb;
-				$tableau_resultat[$cpt]['expl_support'] = $loan->expl_support;
-				$tableau_resultat[$cpt]['expl_location_id'] = $loan->expl_location_id;
+				$tableau_resultat[$cpt]['empr_id']               = $loan->empr_id;
+				$tableau_resultat[$cpt]['notice_id']             = $loan->notice_id;
+				$tableau_resultat[$cpt]['bulletin_id']           = $loan->bulletin_id;
+				$tableau_resultat[$cpt]['expl_id']               = $loan->expl_id;
+				$tableau_resultat[$cpt]['expl_cb']               = $loan->expl_cb;
+				$tableau_resultat[$cpt]['expl_support']          = $loan->expl_support;
+				$tableau_resultat[$cpt]['expl_location_id']      = $loan->expl_location_id;
 				$tableau_resultat[$cpt]['expl_location_caption'] = $loan->expl_location_caption;
-				$tableau_resultat[$cpt]['expl_section_id'] = $loan->expl_section_id;
-				$tableau_resultat[$cpt]['expl_section_caption'] = $loan->expl_section_caption;
-				$tableau_resultat[$cpt]['expl_libelle'] = $loan->expl_libelle;
-				$tableau_resultat[$cpt]['loan_startdate'] = $loan->loan_startdate;
-				$tableau_resultat[$cpt]['loan_returndate'] = $loan->loan_returndate;
+				$tableau_resultat[$cpt]['expl_section_id']       = $loan->expl_section_id;
+				$tableau_resultat[$cpt]['expl_section_caption']  = $loan->expl_section_caption;
+				$tableau_resultat[$cpt]['expl_libelle']          = $loan->expl_libelle;
+				$tableau_resultat[$cpt]['loan_startdate']        = $loan->loan_startdate;
+				$tableau_resultat[$cpt]['loan_returndate']       = $loan->loan_returndate;
 				
 				$cpt++;
 			}
@@ -1037,7 +1039,6 @@ function pmb_prets_extraire ($session_id, $type_pret=0) {
 		 echo 'Exception reçue (17) : ',  $e->getMessage(), "\n";
 	} 
 	return $tableau_resultat;
-			
 }
 
 function pmb_reservations_extraire($pmb_session) {
@@ -1139,17 +1140,6 @@ function pmb_reserver_ouvrage($session_id, $notice_id, $bulletin_id, $location) 
 */
 }
 
-
-/*mettre le champ de recherche au format de pmb */
-function pmb_prepare_recherche ($recherche) {
-	$recherche = str_replace("+"," ",$recherche);
-	return $recherche;
-}
-
-/* fonction str_replace avec l'ordre des parametres compatible spip */
-function pmb_remplacer ($chaine, $p1, $p2) {
-	return str_replace($p1,$p2,$chaine);
-}
 
 function contient($texte, $findme) {
 	return (strpos($texte, $findme) !== false);
