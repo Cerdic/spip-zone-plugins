@@ -45,10 +45,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
         'text/plain',
         'text/html');
     // ----------------------------------------------------------
-    // Table des sites autorises
-    $url_autorisees = array(
-		"http://wxs.ign.fr/"	// pour les recherches par adresses
-    );
+    // Table des sites autorises (dans fichier Options)
+    $geoportail_url_autorisees = $GLOBALS['geoportail_url_autorisees'];
+    if ($geoportail_url_autorisees AND is_array($geoportail_url_autorisees))
+		$url_autorisees = $geoportail_url_autorisees;
+	else $url_autorisees = array();
+	// Pour les recherches par adresses
+	$url_autorisees[] = "http://wxs.ign.fr/";
 
     //
     // écriture d'un message de log
