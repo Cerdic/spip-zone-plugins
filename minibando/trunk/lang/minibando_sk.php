@@ -10,11 +10,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'mode_debug' => 'Režim ladenia',
 	'mode_inclure' => 'Režim vkladania',
-	'mode_profile' => 'Režim vizitky',
+	'mode_profile' => 'Režim profilovania',
 
 	// T
 	'titre_debug' => 'Ladiť',
-	'titre_outils_rapides' => 'Vytváranie' # MODIF
+	'titre_outils_rapides' => 'Vytvorenie'
 );
 
 ?>
