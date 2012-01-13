@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfgform_titre_options_url' => 'Pridaný (-é) argument(y) k \'URL vytvoreného odkazu podľa tagu',
 	'cfgform_titre_patron' => 'Šablóna odoslaného e-mailu',
 	'cfgform_titre_patron_html' => 'Šablóna e-mailu vo formáte HTML',
-	'cfgform_titre_reset' => 'Action du bouton d\'annulation', # NEW
+	'cfgform_titre_reset' => 'Akcia tlačidla na zrušenie',
 	'cfgform_titre_squelette' => 'Šablóna, ktorá sa použije na formulár tipafriendu',
 	'cfgform_titre_taf_css' => 'Predvoliť pridávanie definícií CSS',
 
@@ -170,10 +170,10 @@ Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubr
 
 	// T
 	'taftest_arguments_balise_dyn' => 'Arguments reçus dans balise dynamique', # NEW
-	'taftest_arguments_balise_stat' => 'Arguments reçus dans balise statique', # NEW
+	'taftest_arguments_balise_stat' => 'Argumenty získané v statickom tagu ',
 	'taftest_chargement_patron' => 'chargement du patron \'@patron@\'', # NEW
 	'taftest_content' => '<b><u>Podrobnosti odoslaného e-mailu</u></b>',
-	'taftest_contexte_modele' => 'Contexte envoyé au modèle', # NEW
+	'taftest_contexte_modele' => 'Kontext odoslaný do šablóny',
 	'taftest_creation_objet_champs' => 'Création d\'un objet \'Champs\' pour l\'ID objet', # NEW
 	'taftest_creation_objet_texte' => 'Création d\'un objet \'Texte\' pour le nom d\'objet', # NEW
 	'taftest_from' => '<b><i>Odosielateľ</i></b>',
