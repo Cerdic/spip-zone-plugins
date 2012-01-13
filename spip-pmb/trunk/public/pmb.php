@@ -497,7 +497,7 @@ function inc_pmb_lieux_select_dist(&$command, $iterateur) {
  * (PMB:SECTIONS)
  * (PMB:SECTIONS) {id_section ?} // la section
  * (PMB:SECTIONS) {id_parent ?}  // sections enfants
- * (PMB:SECTIONS) {id_lieu ?} // sections dans le lieu...
+ * (PMB:SECTIONS) {id_location ?} // sections dans le lieu...
  * 
  */
 function inc_pmb_sections_select_dist(&$command, $iterateur) {
@@ -518,7 +518,6 @@ function inc_pmb_sections_select_dist(&$command, $iterateur) {
 	}
 
 	// testons la presence de id_parent (un id_section) ou id_location
-	#$ids_location = pmb_critere_valeur($criteres, 'id_location');
 	if ($ids_parents = pmb_critere_valeur($criteres,  'id_parent')) {
 		$iterateur->exception_des_criteres('id_parent');
 		$sections = pmb_extraire_sections_depuis_sections_ids($ids_parents);
@@ -616,6 +615,8 @@ function pmb_critere_valeur($criteres, $cle, $op = '=') {
 
 		}
 	}
+	// on enleve les valeurs vides ''
+	$res = array_filter($res);
 	return $res;
 }
 
