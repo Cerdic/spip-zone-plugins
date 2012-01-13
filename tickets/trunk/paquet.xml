@@ -19,7 +19,7 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/tickets_install.php" />
-	<pipeline nom="declarer_tables_principales" inclure="base/tickets_install.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/tickets_install.php" />
 	<pipeline nom="ajouter_boutons" action="ajouterBoutons" inclure="tickets_pipelines.php" />
 	<pipeline nom="affiche_gauche" action="gauche" inclure="tickets_pipelines.php" />
 	<pipeline nom="autoriser" inclure="inc/tickets_autoriser.php" />

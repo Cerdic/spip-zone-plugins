@@ -3,78 +3,47 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/meta');
-include_spip('base/create');
 
 function tickets_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = "0.0";
-	include_spip('base/tickets_install');
 	
 	// On traite le cas de la premiere version de Tickets sans version_base
 	if ((!isset($GLOBALS['meta'][$nom_meta_base_version])) && tickets_existe())
 		$current_version = "0.1";
-		
-	if (isset($GLOBALS['meta'][$nom_meta_base_version]))
-		$current_version = $GLOBALS['meta'][$nom_meta_base_version];
-		
-	if ($current_version=="0.0") {
-		creer_base();
-		ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
-	}
-	if (version_compare($current_version,"0.2","<")){
-		// modifications de la table spip_tickets,
-		// ajout des champs jalon, version, composant, projet
-		maj_tables('spip_tickets');
-		ecrire_meta($nom_meta_base_version,$current_version="0.2");
-	}
-	if (version_compare($current_version,"0.6","<")){
-		// modifications de la table spip_tickets
-		sql_alter("TABLE spip_tickets MODIFY jalon varchar(30) DEFAULT '' NOT NULL");
-		sql_alter("TABLE spip_tickets MODIFY version varchar(30) DEFAULT '' NOT NULL");
-		
-		ecrire_meta($nom_meta_base_version,$current_version="0.6");
-	}
-	if (version_compare($current_version,"0.7","<")){
-		// ajout des champs ip
-		maj_tables(array('spip_tickets', 'spip_tickets_forum'));
-		ecrire_meta($nom_meta_base_version,$current_version="0.7");
-	}
-	// au dessus de 1.0, c'est specifique SPIP >= 2.1
-	if (version_compare($current_version,"1.0","<")) {
-		// migrer sur la table forums pour la version 2.1...
-		migrer_commentaires_tickets_vers_forums();
-		sql_drop_table("spip_tickets_forum");
-		ecrire_meta($nom_meta_base_version,$current_version="1.0");
-	}
-	if (version_compare($current_version,"1.1","<")){
-		// modifications de la table spip_tickets,
-		// ajout du champ navigateur
-		maj_tables('spip_tickets');
-		ecrire_meta($nom_meta_base_version,$current_version="1.1");
-	}
-	if (version_compare($current_version,"1.2","<")){
-		// modifications de la table spip_tickets,
-		// ajout du champ navigateur
-		maj_tables('spip_tickets');
-		ecrire_meta($nom_meta_base_version,$current_version="1.2");
-	}
-	if (version_compare($current_version,"1.3","<")){
-		// modifications de la table spip_tickets,
-		// ajout du champ navigateur
-		sql_alter("TABLE spip_tickets DROP tracker");
-		sql_alter("TABLE spip_tickets CHANGE type tracker integer DEFAULT '0' NOT NULL");
-		ecrire_meta($nom_meta_base_version,$current_version="1.3");
-	}
-	if (version_compare($current_version,"1.4","<")){
-		// modifications de la table spip_tickets,
-		// ajout du champ sticked
-		maj_tables('spip_tickets');
-		ecrire_meta($nom_meta_base_version,$current_version="1.4");
-	}
+	
+	$maj = array();
+	$maj['create'] = array(
+		array('maj_tables',array('spip_tickets'))
+	);
+	
+	$maj['0.2'] = array('maj_tables',array('spip_tickets'));
+	$maj['0.6'] = array(
+		array('sql_alter',"TABLE spip_tickets MODIFY jalon varchar(30) DEFAULT '' NOT NULL"),
+		array('sql_alter',"TABLE spip_tickets MODIFY version varchar(30) DEFAULT '' NOT NULL")
+	);
+	$maj['0.7'] = array('maj_tables',array('spip_tickets'));
+	$maj['1.1'] = array(
+		array('maj_tables',array('spip_tickets')),
+		array('migrer_commentaires_tickets_vers_forums','');
+		array('sql_drop_table',"spip_tickets_forum")
+	);
+	$maj['1.2'] = array(
+		array('maj_tables',array('spip_tickets'))
+	);
+	$maj['1.3'] = array(
+		array('sql_alter',"TABLE spip_tickets DROP tracker"),
+		array('sql_alter',"TABLE spip_tickets CHANGE type tracker integer DEFAULT '0' NOT NULL")
+	);
+	$maj['1.4'] = array(
+		array('maj_tables',array('spip_tickets'))
+	);
+
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 function tickets_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_tickets");
-	sql_drop_table("spip_tickets_forum");
 	effacer_meta($nom_meta_base_version);
 }
 
@@ -85,7 +54,6 @@ function tickets_existe() {
 	else
 		return true;
 }
-
 
 function migrer_commentaires_tickets_vers_forums() {
 	$res = sql_select('*', 'spip_tickets_forum');

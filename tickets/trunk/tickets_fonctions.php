@@ -179,26 +179,6 @@ function tickets_liste_severite($id_ticket = null){
 }
 
 /**
- * 
- * Fonction de génération d'url privée de tickets
- * 
- * @param int $id
- * @param string $args
- * @param string $ancre
- * @param string $statut
- * @param string $connect
- */
-function generer_url_ecrire_ticket($id, $args='', $ancre='', $statut='', $connect='') {
-	$a = "id_ticket=" . intval($id);
-	if (!$statut) {
-		$statut = sql_getfetsel('statut', 'spip_tickets', $a,'','','','',$connect);
-	}
-	$h = generer_url_ecrire('ticket_afficher', $a . ($args ? "&$args" : ''))
-	. ($ancre ? "#$ancre" : '');
-	return $h;
-}
-
-/**
  * Liste des navigateurs possibles
  */
 function tickets_liste_navigateur($nav=false){

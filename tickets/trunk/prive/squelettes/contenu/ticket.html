@@ -1,15 +1,24 @@
-[(#REM) Squelette du contenu de la page (exec=ticket_afficher)
+[(#REM) Squelette du contenu de la page (exec=ticket)
 	- servant a l'affichage du ticket
 	- permettant l'acces a son edition
 	- donnant acces a la modification du statut et de l'assignation
 	- permettant la depose de messages
 ]
-[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
 <BOUCLE_afficher_contenu(TICKETS){id_ticket=#ENV{id_ticket}}{statut?}>
-<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
-<div class='label'><:info_titre:></div>
-<div dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</div>
-</div>
+[(#BOITE_OUVRIR{[
+				
+	[(#AUTORISER{modifier,ticke,#ID_TICKET})
+				
+		[(#ID_TICKET|afficher_qui_edite{ticket}|non)
+			[(#URL_ECRIRE{ticket_edit,id_ticket=#ID_TICKET}|icone_verticale{<:tickets:icone_modifier_ticket:>,ticket,edit,right ajax preload})]
+		]
+		[(#ID_TICKET|afficher_qui_edite{ticket}|oui)
+			[(#URL_ECRIRE{ticket_edit,id_ticket=#ID_TICKET}|icone_verticale{#ID_TICKET|afficher_qui_edite{article},warning-24,'',right ajax preload})]
+		]
+	]
+	<h4 class='surtitre'><:info_titre:></h4>
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{ticket-24.png}|balise_img{article,cadre-icone})]</h1>
+],simple fiche_objet})]
 <div>
 		<div style="float: #LANG_RIGHT; padding-#LANG_RIGHT: 20px;">
 			[<div class="champ">
@@ -55,4 +64,5 @@
 <div dir='#LANG_DIR' class='#EDIT{notes} notes'>(#NOTES)</div>
 </div>]
 [<div><:tickets:champ_exemple:> : <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
+#BOITE_FERMER
 </BOUCLE_afficher_contenu>
