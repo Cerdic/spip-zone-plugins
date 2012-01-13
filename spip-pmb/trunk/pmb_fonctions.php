@@ -427,6 +427,71 @@ function pmb_editeur_extraire($id_editeur, $debut=0, $nbresult=5, $id_session=0)
 }
 
 
+/**
+ * Fonction d'abstraction pour mutualiser les
+ * codes de selections en interrogeant PMB
+ * et en mettant en cache les resultats,
+ * identifiant par identifiant.
+ *
+ * @param string $objet
+ * 		L'objet (pluriel) 'auteurs'
+ * 		necessite une fonction pmb_extraire_resultat_$objet_id()
+ * 		soit donc ici pmb_extraire_resultat_auteur_id()
+ *
+ * @param array $ids_objets
+ * 		Les ids a obtenir les infos
+ * 
+ * @param string $ws_methode
+ * 		Methode la classe de webservice de PMB a interroger
+ * 		pour obtenir les resultats
+ * 
+ * @param string $extraire_fonction
+ * 		Fonction pour parser chaque resultat obtenu
+ * 		Par defaut : pmb_extraire_resultat_{$objet}_id
+ *
+ * @return array
+ * 		Un tableau cle/valeur par element touve
+ * 
+**/
+function pmb_extraire_abstract_ids($objet, $ids_objet, $ws_methode, $extraire_fonction='') {
+	if (!is_array($ids_objet)) {
+		return array();
+	}
+	
+	// retrouver les infos en cache
+	list($res, $wanted) = pmb_cacher($objet, $ids_objet);
+
+	// si on a tout trouve, on s'en va...
+	if (!count($wanted)) {
+		return $res;
+	}
+
+	try {
+		$ws = pmb_webservice();
+		foreach ($wanted as $id_objet) {
+			// second parametre $id_session n'etait pas utilise... kesako ?
+			// et pas present partout...
+			$r = $ws->$ws_methode($id_objet);
+			if ($r) {
+				if (!$extraire_fonction) {
+					$extraire_fonction = 'pmb_extraire_resultat_' . $objet . '_id';
+				}
+				$infos = $extraire_fonction($r);
+				
+				$key = array_search($id_objet, $ids_objet);
+				$res[$key] = $infos;
+				pmb_cacher($objet, $id_objet, $infos, true);
+			}
+		}
+
+	} catch (Exception $e) {
+		 echo 'Exception reçue (7) : ',  $e->getMessage(), "\n";
+	}
+
+	return $res;
+}
+
+
 
 /**
  * Recupere les informations d'auteurs
@@ -449,60 +514,37 @@ function pmb_editeur_extraire($id_editeur, $debut=0, $nbresult=5, $id_session=0)
  * 		que l'on a pu recuperer.
 **/
 function pmb_extraire_auteurs_ids($ids_auteur) {
-	if (!is_array($ids_auteur)) {
-		return array();
+	return pmb_extraire_abstract_ids('auteurs', $ids_auteur, 'pmbesAuthors_get_author_information_and_notices');
+}
+
+/**
+ * Partie d'extraction d'un auteur
+ * dans un resultat de requete a PMB
+**/ 
+function pmb_extraire_resultat_auteurs_id($ws_result) {
+	$r = $ws_result;
+	$a = array();
+	$a['id_auteur']			= $r->information->author_id;
+	$a['id_type_auteur']	= $r->information->author_type;
+	$a['nom']				= $r->information->author_name;
+	$a['prenom']			= $r->information->author_rejete;
+	if ($r->information->author_rejete) {
+		$a['nomcomplet'] =  $a['prenom'].' '.$a['nom'];
+	} else {
+		$a['nomcomplet'] = $a['nom'];
 	}
-	
-	// retrouver les infos en cache
-	list($res, $wanted) = pmb_cacher('auteurs', $ids_auteur);
-
-	// si on a tout trouve, on s'en va...
-	if (!count($wanted)) {
-		return $res;
-	}
-
-	try {
-		$ws = pmb_webservice();
-		foreach ($wanted as $id_auteur) {
-			// second parametre $id_session n'etait pas utilise... kesako ?
-			$r = $ws->pmbesAuthors_get_author_information_and_notices($id_auteur);
-			if ($r) {
-				//infos de l'auteur
-				$a = array();
-				$a['id_auteur']			= $r->information->author_id;
-				$a['id_type_auteur']	= $r->information->author_type;
-				$a['nom']				= $r->information->author_name;
-				$a['prenom']			= $r->information->author_rejete;
-				if ($r->information->author_rejete) {
-					$a['nomcomplet'] =  $a['prenom'].' '.$a['nom'];
-				} else {
-					$a['nomcomplet'] = $a['nom'];
-				}
-				// what's 'see' ?
-				$a['id_voir']			= $r->information->author_see;
-				$a['date']				= $r->information->author_date;
-				$a['web']				= $r->information->author_web;
-				$a['commentaire']		= $r->information->author_comment;
-				$a['lieu']				= $r->information->author_lieu;
-				$a['ville']				= $r->information->author_ville;
-				$a['pays']				= $r->information->author_pays;
-				$a['subdivision']		= $r->information->author_subdivision;
-				$a['numero']			= $r->information->author_numero;
-				$a['ids_notice']		= $r->notice_ids;
-
-				$key = array_search($id_auteur, $ids_auteur);
-				if ($key !== false) {
-					$res[$key] = $a;
-					pmb_cacher('auteurs', $id_auteur, $a, true);
-				}
-			}
-		}
-
-	} catch (Exception $e) {
-		 echo 'Exception reçue (7) : ',  $e->getMessage(), "\n";
-	}
-
-	return $res;
+	// what's 'see' ?
+	$a['id_voir']			= $r->information->author_see;
+	$a['date']				= $r->information->author_date;
+	$a['web']				= $r->information->author_web;
+	$a['commentaire']		= $r->information->author_comment;
+	$a['lieu']				= $r->information->author_lieu;
+	$a['ville']				= $r->information->author_ville;
+	$a['pays']				= $r->information->author_pays;
+	$a['subdivision']		= $r->information->author_subdivision;
+	$a['numero']			= $r->information->author_numero;
+	$a['ids_notice']		= $r->notice_ids;
+	return $a;
 }
 
 
