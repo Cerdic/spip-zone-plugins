@@ -1,5 +1,5 @@
+[(#INCLURE{fond=inclure/colonne-extra-pmb-haut,env})]
 
-<INCLURE{fond=inclure/inc-connexionpmb}{env}>
 <BOUCLE_breve_principal(BREVES) {id_breve}>
   [(#REM) Breves dans la meme rubrique ]
   <B_breves>
@@ -26,7 +26,4 @@
   </B_mots>
 </BOUCLE_breve_principal>
 
-
-<INCLURE{fond=inclure/inc-noticesconsultees}{env}>
-
-<INCLURE{fond=inclure/inc-lienpmb}>
+[(#INCLURE{fond=inclure/colonne-extra-pmb-bas,env})]

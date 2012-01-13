@@ -1,5 +1,5 @@
 
-<INCLURE{fond=inclure/inc-connexionpmb}{env}>
+[(#INCLURE{fond=inclure/colonne-extra-pmb-haut,env})]
 
 <BOUCLE_principale(MOTS) {id_mot} {doublons}>
 	[(#REM) Menu de navigation mots-cles : les autres mots cles du meme groupe ]
@@ -31,7 +31,4 @@
   </B_groupes_freres>
 </BOUCLE_principale>
 
-
-<INCLURE{fond=inclure/inc-noticesconsultees}{env}>
-
-<INCLURE{fond=inclure/inc-lienpmb}>
+[(#INCLURE{fond=inclure/colonne-extra-pmb-bas,env})]

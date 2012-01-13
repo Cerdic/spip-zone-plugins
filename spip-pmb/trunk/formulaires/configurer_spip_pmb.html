@@ -24,6 +24,20 @@
 				[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
 			</div>
 		</li>
+		#SET{name,pmb_logo}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<label><:pmb:config_pmb_logo:></label>
+			<div class='explication'><:pmb:config_pmb_logo_explication:></div>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]<div class="choix">
+				<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+				[(#ENV{#GET{name}}|=={non}|non)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+				[(#ENV{#GET{name}}|=={non}|oui)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
+			</div>
+		</li>
 	</ul>
 
 	  <input type='hidden' class='hidden' name='_meta_casier' value="spip_pmb" />

@@ -44,7 +44,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_pmb_partout_explication' => 'PMB peut surcharger les fichiers de Zpip pour
 	afficher sa colonne quelque soit la page du site. Par défaut sa colonne n\'est
 	affichée que pour les pages concernant PMB. Mettre oui ici, l\'affichera partout (ou presque).',
-
+'config_pmb_logo' => 'Logo de PMB',
+'config_pmb_logo_explication' => 'Afficher le logo de PMB dans la colonne ?',
 'cote' => 'Cote',
 
 // D

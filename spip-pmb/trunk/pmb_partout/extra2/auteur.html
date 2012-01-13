@@ -1,5 +1,5 @@
 
-<INCLURE{fond=inclure/inc-connexionpmb}{env}>
+[(#INCLURE{fond=inclure/colonne-extra-pmb-haut,env})]
 
 <BOUCLE_extra_auteur(AUTEURS){id_auteur}{tous}>
 	[(#REM) Autres auteurs ]
@@ -18,6 +18,4 @@
 </BOUCLE_extra_auteur>
 
 
-<INCLURE{fond=inclure/inc-noticesconsultees}{env}>
-
-<INCLURE{fond=inclure/inc-lienpmb}>
+[(#INCLURE{fond=inclure/colonne-extra-pmb-bas,env})]
