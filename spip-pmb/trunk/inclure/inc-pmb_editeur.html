@@ -1,20 +1,19 @@
+<BOUCLE_editeur(PMB:EDITEURS){id_editeur}>
 <div class="corps-conteneur surlignable">
 	<div class="pmb-ouvrage-infos">	
-	
-	<table class="spip pmb-tableau">
-		  <tbody>
-		  
-			[<tr><td><strong><:pmb:publisher_address1:></strong></td><td>(#ENV{tab_resultat/publisher_address1})</td></tr>]
-			[<tr><td><strong><:pmb:publisher_address2:></strong></td><td>(#ENV{tab_resultat/publisher_address2})</td></tr>]
-			[<tr><td><strong><:pmb:publisher_zipcode:></strong></td><td>(#ENV{tab_resultat/publisher_zipcode})</td></tr>]
-			[<tr><td><strong><:pmb:publisher_city:></strong></td><td>(#ENV{tab_resultat/publisher_city})</td></tr>]
-			[<tr><td><strong><:pmb:publisher_country:></strong></td><td>(#ENV{tab_resultat/publisher_country})</td></tr>]
-			[<tr><td><strong><:pmb:publisher_web:></strong></td><td><a class="spip_out" href="[(#ENV{tab_resultat/publisher_web})]">(#ENV{tab_resultat/publisher_web})</a></td></tr>]
-		
-		  </tbody>
-	  </table>
+		<table class="spip pmb-tableau">
+			<tbody>
+				[<tr><td><strong><:pmb:publisher_address1:></strong></td><td>(#ADRESSE1)</td></tr>]
+				[<tr><td><strong><:pmb:publisher_address2:></strong></td><td>(#ADRESSE2})</td></tr>]
+				[<tr><td><strong><:pmb:publisher_zipcode:></strong></td><td>(#CODE_POSTAL)</td></tr>]
+				[<tr><td><strong><:pmb:publisher_city:></strong></td><td>(#VILLE)</td></tr>]
+				[<tr><td><strong><:pmb:publisher_country:></strong></td><td>(#PAYS)</td></tr>]
+				[<tr><td><strong><:pmb:publisher_web:></strong></td><td><a class="spip_out" href="#WEB">(#WEB)</a></td></tr>]
+			</tbody>
+		</table>
 	</div>
-	[<div class="texte entry-content">(#ENV{tab_resultat/publisher_comment}|ucfirst|paragrapher)</div>]
+	[<div class="texte entry-content">(#COMMENTAIRE|paragrapher)</div>]
 </div>
 
-[(#INCLURE{fond=inclure/inc-recherche-ouvrage,env})]
+[(#INCLURE{fond=inclure/inc-recherche-notices,env,id_editeur})]
+</BOUCLE_editeur>

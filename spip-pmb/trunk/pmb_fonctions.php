@@ -33,33 +33,6 @@ include_spip('inc/config');
 include_spip('public/pmb');
 
 
-/**
- * Depile un element de tableau et renvoie le tableau (pas l'element depile !)
- * 
- * #SET{total,#GET{tableau/0/nb_resultat}}
- * #SET{tableau,#GET{tableau}|depile}
- * #SET{tableau,#GET{tableau}|depile{0}}
- *
- * @param array Tableau a depiler
- * @param string Eventuellement cle du tableau a enlever, sinon prend la premiere (array_shift)
- * @return array Tableau depossede d'une cle...
-**/
-function depile($tableau, $cle=null) {
-	if (!is_array($tableau)) {
-		return array();
-	}
-	if (is_null($cle)) {
-		array_shift($tableau);
-	} else {
-		if (!is_array($cle) and !is_object($cle)) {
-			unset($tableau[$cle]);
-		}
-	}
-	return $tableau;
-}
-
-
-
 
 /**
  * Recupere les informations de locations racine,
@@ -93,30 +66,6 @@ function pmb_extraire_locations_racine() {
 	return $locations;
 }
 
-
-/**
- * Petite fonction d'aide pour recuperer d'une liste de tableaux
- * les valeurs compilees d'une cle de ces tableaux
- * 
- * entree :
- * 		tab[0][cle] = [n] (tableau...)
- * 		tab[1][cle] = [n]
- * 		tab[i][cle] = [n]
- * 
- * sortie :
- * 		tab[n] (merge de tous les tableaux [n])
- *
-**/
-function pmb_get_enfants($tableau, $cle) {
-	$enfants = array();
-	foreach ($tableau as $t) {
-		if (isset($t[$cle]) and is_array($t[$cle])) {
-			$enfants = array_merge($enfants, $t[$cle]);
-		}
-	}
-	return $enfants;
-}
-
 /**
  * Retourne la liste de tous les rayonnages d'un lieu racine
  *
@@ -128,59 +77,37 @@ function pmb_get_enfants($tableau, $cle) {
  * 		que l'on a pu recuperer.
 **/
 function pmb_extraire_sections_depuis_locations_ids($ids_location) {
-	if (!is_array($ids_location)) {
-		return array();
-	}
-
-	// retrouver les infos en cache
-	list($res, $wanted) = pmb_cacher('locations', $ids_location);
-
-	// si on a tout trouve, on s'en va...
-	// avec juste les sections !
-	if (!count($wanted)) {
-		return pmb_get_enfants($res, 'sections');
-	}
-
-
-	try {
-		$ws = pmb_webservice();
-		foreach ($wanted as $id_location) {
-			$r = $ws->pmbesOPACGeneric_get_location_information_and_sections($id_location);
-			if ($r) {
-				
-				//infos de la location
-				//récupérer les infos sur la localisation parent
-				$l = array();
-				$l['id_location_parent'] = $r->location->location_id;
-				$l['titre_parent'] = $r->location->location_caption;
-				$l['sections'] = array();
-				
-				if (count($r->sections)) {
-					foreach ($r->sections as $section) {
-						// enlever l'image par defaut
-						$l['sections'][] = $s = pmb_extraire_section($section);
-						// on ne met pas en cacheces sections ci
-						// parce qu'on ne sait pas si elles ont ou non des enfants...
-						// on laissera pmb_extraire_sections_depuis_sections_ids decider...
-						#pmb_cacher('sections', $section->section_id, $s, true);
-					}
-				}
-
-				$key = array_search($id_location, $ids_location);
-				if ($key !== false) {
-					$res[$key] = $l;
-					pmb_cacher('locations', $id_location, $l, true);
-				}
-			}
-		}
-
-	} catch (Exception $e) {
-		 echo 'Exception reçue (2) : ',  $e->getMessage(), "\n";
-	}
-
-	// on part avec juste les sections...
-	// c'est a dire les locations enfants... hum...
+	$res = pmb_extraire_abstract_ids('locations', $ids_location,
+		'pmbesOPACGeneric_get_location_information_and_sections');
+		
 	return pmb_get_enfants($res, 'sections');
+}
+
+/**
+ * Partie d'extraction d'une location
+ * dans un resultat de requete a PMB
+**/
+function pmb_extraire_resultat_locations_id($ws_result) {
+	$r = $ws_result;
+
+	//infos de la location
+	//récupérer les infos sur la localisation parent
+	$l = array();
+	$l['id_location_parent'] = $r->location->location_id;
+	$l['titre_parent']       = $r->location->location_caption;
+	$l['sections'] = array();
+
+	if (count($r->sections)) {
+		foreach ($r->sections as $section) {
+			// enlever l'image par defaut
+			$l['sections'][] = $s = pmb_extraire_section($section);
+			// on ne met pas en cacheces sections ci
+			// parce qu'on ne sait pas si elles ont ou non des enfants...
+			// on laissera pmb_extraire_sections_depuis_sections_ids decider...
+			#pmb_cacher('sections', $section->section_id, $s, true);
+		}
+	}
+	return $l;
 }
 
 
@@ -200,7 +127,6 @@ function pmb_extraire_sections_depuis_sections_ids($ids_section) {
 }
 
 
-
 /**
  * Retourne les rayonnages demandes...
  *
@@ -212,58 +138,31 @@ function pmb_extraire_sections_depuis_sections_ids($ids_section) {
  * 		que l'on a pu recuperer.
 **/
 function pmb_extraire_sections_ids($ids_section) {
-	if (!is_array($ids_section)) {
-		return array();
-	}
-
-	// retrouver les infos en cache
-	list($res, $wanted) = pmb_cacher('sections', $ids_section);
-
-	// si on a tout trouve, on s'en va...
-	if (!count($wanted)) {
-		return $res;
-	}
-
-	try {
-		$ws = pmb_webservice();
-		foreach ($wanted as $id_section) {
-			// recherche de la section
-			$r = $ws->pmbesOPACGeneric_get_section_information($id_section);
-			if ($r) {
-				$s = pmb_extraire_section($r);
-				// recherche de sous sections
-				$sections = $ws->pmbesOPACGeneric_list_sections($id_section);
-				if (count($sections)) {
-					foreach ($sections as $section) {
-						$s['sections'][] = $ss = pmb_extraire_section($section);
-						#pmb_cacher('sections_simples', $ss['id_section'], $ss, true);
-					}
-				}
-
-				$key = array_search($id_section, $ids_section);
-				if ($key !== false) {
-					$res[$key] = $s;
-					// on met en cache lorsqu'on est sur d'avoir calcule
-					// d'eventuelles sous_sections.
-					pmb_cacher('sections', $id_section, $s, true);
-				}
-			}
-		}
-
-	} catch (Exception $e) {
-		 echo 'Exception reçue (2) : ',  $e->getMessage(), "\n";
-	}
-
-	return $res;
+	return pmb_extraire_abstract_ids('sections', $ids_section, 'pmbesOPACGeneric_get_section_information');
 }
 
+/**
+ * Partie d'extraction d'une section
+ * dans un resultat de requete a PMB
+**/
+function pmb_extraire_resultat_sections_id($ws_result, $id_section) {
+	$r = $ws_result;
+	$s = pmb_extraire_section($r);
+	// recherche de sous sections
+	$ws = pmb_webservice();
+	$sections = $ws->pmbesOPACGeneric_list_sections($id_section);
+	if (count($sections)) {
+		foreach ($sections as $section) {
+			$s['sections'][] = $ss = pmb_extraire_section($section);
+			#pmb_cacher('sections_simples', $ss['id_section'], $ss, true);
+		}
+	}
+	return $s;
+}
 
 
 /**
  * Retourne des petites infos sur les sections issues de requetes a pmb 
- *
- * @param 
- * @return 
 **/
 function pmb_extraire_section($section) {
 	// enlever l'image par defaut
@@ -277,19 +176,72 @@ function pmb_extraire_section($section) {
 }
 
 
+/**
+ * Recupere les informations de notices
+ * dont les identifiants sont fournis par
+ * le tableau $ids_notices.
+ *
+ * Chaque identifiant calcule est mis en cache
+ * pour eviter des requetes intempestives
+ * sur un hit de page et permettre d'utiliser plusieurs
+ * fois une boucle telle que (PMB:NOTICES){id}
+ * sans avoir besoin de tout recalculer.
+ *
+ * Notons que l'on ne peut recuperer que les champs "exportables"
+ * dans PMB.
+ *
+ * @param array $ids_notices
+ * 		Tableau d'id de notices a recupereer
+ * @return array
+ * 		Tableau contenant pour chaque notice la liste des champs
+ * 		que l'on a pu recuperer.
+**/
+function pmb_extraire_notices_ids($ids_notices) {
+	if (!is_array($ids_notices)) {
+		return array();
+	}
+
+	// retrouver les infos en cache
+	list($res, $wanted) = pmb_cacher('notices', $ids_notices);
+
+	// si on a tout trouve, on s'en va...
+	if (!count($wanted)) {
+		return $res;
+	}
+
+	// sinon on complete ce qui manque en interrogeant PMB
+	try {
+		$ws = pmb_webservice();
+		$r=$ws->pmbesNotices_fetchNoticeListArray($wanted,"utf-8",true,false);
+		if (is_array($r)) {
+			$r = array_map('pmb_ws_parser_notice', $r);
+
+			// on complete notre tableau de resultat
+			// avec nos trouvailles
+			foreach ($r as $notice) {
+				$key = array_search($notice['id'], $ids_notices);
+				if ($key !== false) {
+					$res[$key] = $notice;
+					pmb_cacher('notices', $notice['id'], $notice, true);
+				}
+			}
+		}
+	} catch (Exception $e) {
+		echo 'Exception reçue (14) : ',  $e->getMessage(), "\n";
+	}
+	ksort($res);
+	return $res;
+}
+
+
+
 
 
 /**
  * Recupere les informations des collections
  * dont les identifiants sont fournis par
  * le tableau $ids_collection.
- *
- * Chaque identifiant calcule est mis en cache
- * pour eviter des requetes intempestives
- * sur un hit de page et permettre d'utiliser plusieurs
- * fois une boucle telle que (PMB:COLLECTIONS){id_collection}
- * sans avoir besoin de tout recalculer.
- *
+ * 
  * @param array $ids_collection
  * 		Tableau d'id de collections a recupereer
  * @return array
@@ -297,93 +249,66 @@ function pmb_extraire_section($section) {
  * 		que l'on a pu recuperer.
 **/
 function pmb_extraire_collections_ids($ids_collection) {
-	if (!is_array($ids_collection)) {
-		return array();
-	}
-	
-	// retrouver les infos en cache
-	list($res, $wanted) = pmb_cacher('collections', $ids_collection);
+	return pmb_extraire_abstract_ids('collections', $ids_collection, 'pmbesCollections_get_collection_information_and_notices');
+}
 
-	// si on a tout trouve, on s'en va...
-	if (!count($wanted)) {
-		return $res;
-	}
-
-	try {
-		$ws = pmb_webservice();
-		foreach ($wanted as $id_collection) {
-			// second parametre $id_session n'etait pas utilise... kesako ?
-			$r = $ws->pmbesCollections_get_collection_information_and_notices($id_collection);
-			if ($r) {
-				//infos de la collection
-				$c = array();
-				$c['id_collection']  = $r->information->collection_id;
-				$c['titre']          = $r->information->collection_name;
-				$c['id_parent']      = $r->information->collection_parent;
-				$c['issn']           = $r->information->collection_issn;
-				$c['web']            = $r->information->collection_web;
-				$c['ids_notice']     = $r->notice_ids;
-				
-				$key = array_search($id_collection, $ids_collection);
-				if ($key !== false) {
-					$res[$key] = $c;
-					pmb_cacher('collections', $id_collection, $c, true);
-				}
-			}
-		}
-
-	} catch (Exception $e) {
-		 echo 'Exception reçue (7) : ',  $e->getMessage(), "\n";
-	}
-
-	return $res;
+/**
+ * Partie d'extraction d'une collection
+ * dans un resultat de requete a PMB
+**/ 
+function pmb_extraire_resultat_collections_id($ws_result) {
+	$r = $ws_result;
+	//infos de la collection
+	$c = array();
+	$c['id_collection']  = $r->information->collection_id;
+	$c['titre']          = $r->information->collection_name;
+	$c['id_parent']      = $r->information->collection_parent;
+	$c['issn']           = $r->information->collection_issn;
+	$c['web']            = $r->information->collection_web;
+	$c['ids_notice']     = $r->notice_ids;
+	return $c;
 }
 
 
-
-function pmb_collection_extraire($id_collection, $debut=0, $nbresult=5, $id_session=0) {
-	$tableau_resultat = Array();
-	
-	try {
-		$ws = pmb_webservice();
-		$result = $ws->pmbesCollections_get_collection_information_and_notices($id_collection,$id_session);
-		if ($result) {
-			$tableau_resultat['collection_id']     = $result->information->collection_id;
-			$tableau_resultat['collection_name']   = $result->information->collection_name;
-			$tableau_resultat['collection_parent'] = $result->information->collection_parent;
-			$tableau_resultat['collection_issn']   = $result->information->collection_issn;
-			$tableau_resultat['collection_web']    = $result->information->collection_web;
-			$tableau_resultat['notice_ids']        = Array();
-
-			pmb_extraire_resultats($result, $tableau_resultat, $debut, $nbresult);
-		}
-	
-	} catch (Exception $e) {
-		 echo 'Exception reçue (5) : ',  $e->getMessage(), "\n";
-	} 
-	return $tableau_resultat;
-}
 
 
 /**
- * Calculer le total des elements
- * Extraire la pagination
- * Et calculer les valeurs des resultats
+ * Recupere les informations des editeurs
+ * dont les identifiants sont fournis par
+ * le tableau $ids_editeur.
  *
- * @param 
- * @return 
+ * @param array $ids_editeur
+ * 		Tableau d'id des editeurs a recupereer
+ * @return array
+ * 		Tableau contenant pour chaque editeur la liste des champs
+ * 		que l'on a pu recuperer.
 **/
-function pmb_extraire_resultats($result, &$tableau_resultat, $debut, $nbresult) {
-	$liste_notices = Array();
-	$cpt=0;
-	if (is_array($result->notice_ids)) {
-		$cpt = count($result->notice_ids);
-		$liste_notices = array_slice($result->notice_ids, $debut, $nbresult);
-	}
-	$tableau_resultat['notice_ids'] = pmb_extraire_notices_ids($liste_notices);
-	array_unshift($tableau_resultat['notice_ids'], array('nb_resultats' => $cpt));
-	#pmb_remettre_id_dans_resultats($tableau_resultat, $liste_notices);
+function pmb_extraire_editeurs_ids($ids_editeur) {
+	return pmb_extraire_abstract_ids('editeurs', $ids_editeur, 'pmbesPublishers_get_publisher_information_and_notices');
 }
+
+/**
+ * Partie d'extraction d'un editeur
+ * dans un resultat de requete a PMB
+**/ 
+function pmb_extraire_resultat_editeurs_id($ws_result) {
+	$r = $ws_result;
+	$e = array();
+	//infos de l'editeur
+	$e['id_editeur']   = $r->information->publisher_id;
+	$e['nom']          = $r->information->publisher_name;
+	$e['adresse1']     = $r->information->publisher_address1;
+	$e['adresse2']     = $r->information->publisher_address2;
+	$e['code_postal']  = $r->information->publisher_zipcode;
+	$e['ville']        = $r->information->publisher_city;
+	$e['pays']         = $r->information->publisher_country;
+	$e['web']          = $r->information->publisher_web;
+	$e['commentaire']  = $r->information->publisher_comment;
+	$e['ids_notice']   = $r->notice_ids;
+	return $e;
+}
+
+
 
 /**
  * A priori du code mort...
@@ -399,40 +324,17 @@ function pmb_remettre_id_dans_resultats(&$tabreau_resultat, $liste_notices) {
 }
 
 
-function pmb_editeur_extraire($id_editeur, $debut=0, $nbresult=5, $id_session=0) {
-	$tableau_resultat = Array();
-
-	try {
-		$ws = pmb_webservice();
-		$result = $ws->pmbesPublishers_get_publisher_information_and_notices($id_editeur,$id_session);
-		if ($result) {
-			$tableau_resultat['publisher_id']       = $result->information->publisher_id;
-			$tableau_resultat['publisher_name']     = $result->information->publisher_name;
-			$tableau_resultat['publisher_address1'] = $result->information->publisher_address1;
-			$tableau_resultat['publisher_address2'] = $result->information->publisher_address2;
-			$tableau_resultat['publisher_zipcode']  = $result->information->publisher_zipcode;
-			$tableau_resultat['publisher_city']     = $result->information->publisher_city;
-			$tableau_resultat['publisher_country']  = $result->information->publisher_country;
-			$tableau_resultat['publisher_web']      = $result->information->publisher_web;
-			$tableau_resultat['publisher_comment']  = $result->information->publisher_comment;
-			$tableau_resultat['notice_ids'] = Array();
-
-			pmb_extraire_resultats($result, $tableau_resultat, $debut, $nbresult);
-		}
-	}catch (Exception $e) {
-		echo 'Exception reçue (6) : ',  $e->getMessage(), "\n";
-	}
-	return $tableau_resultat;
-
-}
-
 
 /**
  * Fonction d'abstraction pour mutualiser les
- * codes de selections en interrogeant PMB
- * et en mettant en cache les resultats,
- * identifiant par identifiant.
- *
+ * codes de selections en interrogeant PMB.
+
+ * Chaque identifiant calcule (pour chaque objet) est mis en cache
+ * pour eviter des requetes intempestives
+ * sur un hit de page et permettre d'utiliser plusieurs
+ * fois une boucle telle que (PMB:EDITEURS){id_editeur}
+ * sans avoir besoin de tout recalculer.
+ * 
  * @param string $objet
  * 		L'objet (pluriel) 'auteurs'
  * 		necessite une fonction pmb_extraire_resultat_$objet_id()
@@ -476,7 +378,7 @@ function pmb_extraire_abstract_ids($objet, $ids_objet, $ws_methode, $extraire_fo
 				if (!$extraire_fonction) {
 					$extraire_fonction = 'pmb_extraire_resultat_' . $objet . '_id';
 				}
-				$infos = $extraire_fonction($r);
+				$infos = $extraire_fonction($r, $id_objet); // id_objet, aucasou
 				
 				$key = array_search($id_objet, $ids_objet);
 				$res[$key] = $infos;
@@ -489,6 +391,32 @@ function pmb_extraire_abstract_ids($objet, $ids_objet, $ws_methode, $extraire_fo
 	}
 
 	return $res;
+}
+
+
+
+
+/**
+ * Petite fonction d'aide pour recuperer d'une liste de tableaux
+ * les valeurs compilees d'une cle de ces tableaux
+ * 
+ * entree :
+ * 		tab[0][cle] = [n] (tableau...)
+ * 		tab[1][cle] = [n]
+ * 		tab[i][cle] = [n]
+ * 
+ * sortie :
+ * 		tab[n] (merge de tous les tableaux [n])
+ *
+**/
+function pmb_get_enfants($tableau, $cle) {
+	$enfants = array();
+	foreach ($tableau as $t) {
+		if (isset($t[$cle]) and is_array($t[$cle])) {
+			$enfants = array_merge($enfants, $t[$cle]);
+		}
+	}
+	return $enfants;
 }
 
 
@@ -524,26 +452,26 @@ function pmb_extraire_auteurs_ids($ids_auteur) {
 function pmb_extraire_resultat_auteurs_id($ws_result) {
 	$r = $ws_result;
 	$a = array();
-	$a['id_auteur']			= $r->information->author_id;
-	$a['id_type_auteur']	= $r->information->author_type;
-	$a['nom']				= $r->information->author_name;
-	$a['prenom']			= $r->information->author_rejete;
+	$a['id_auteur']       = $r->information->author_id;
+	$a['id_type_auteur']  = $r->information->author_type;
+	$a['nom']             = $r->information->author_name;
+	$a['prenom']          = $r->information->author_rejete;
 	if ($r->information->author_rejete) {
 		$a['nomcomplet'] =  $a['prenom'].' '.$a['nom'];
 	} else {
 		$a['nomcomplet'] = $a['nom'];
 	}
 	// what's 'see' ?
-	$a['id_voir']			= $r->information->author_see;
-	$a['date']				= $r->information->author_date;
-	$a['web']				= $r->information->author_web;
-	$a['commentaire']		= $r->information->author_comment;
-	$a['lieu']				= $r->information->author_lieu;
-	$a['ville']				= $r->information->author_ville;
-	$a['pays']				= $r->information->author_pays;
-	$a['subdivision']		= $r->information->author_subdivision;
-	$a['numero']			= $r->information->author_numero;
-	$a['ids_notice']		= $r->notice_ids;
+	$a['id_voir']     = $r->information->author_see;
+	$a['date']        = $r->information->author_date;
+	$a['web']         = $r->information->author_web;
+	$a['commentaire'] = $r->information->author_comment;
+	$a['lieu']        = $r->information->author_lieu;
+	$a['ville']       = $r->information->author_ville;
+	$a['pays']        = $r->information->author_pays;
+	$a['subdivision'] = $r->information->author_subdivision;
+	$a['numero']      = $r->information->author_numero;
+	$a['ids_notice']  = $r->notice_ids;
 	return $a;
 }
 
@@ -569,10 +497,10 @@ function pmb_extraire_resultat_auteurs_id($ws_result) {
 **/
 function pmb_ids_notices_recherches($demande, &$nbTotal, $debut=0, $nombre=5, $pagination=false) {
 	
-	$recherche   = $demande['recherche'];
-	$id_section  = $demande['id_section'];
+	$recherche          = $demande['recherche'];
+	$id_section         = $demande['id_section'];
 	$id_section_parent  = $demande['id_section_parent'];
-	$id_location = $demande['id_location'];
+	$id_location        = $demande['id_location'];
 	
 	if ($id_section_parent) {
 		$id_location = $id_section_parent; // a n'y rien comprendre...
@@ -697,7 +625,10 @@ function pmb_ids_notices_recherches($demande, &$nbTotal, $debut=0, $nombre=5, $p
 
 
 
-
+/**
+ * Retourne la liste de toutes les options de recherche
+ * (il semblerait !)
+**/
 function pmb_recuperer_champs_recherche($langue=0) {
 	$tresultat = Array();
 	
@@ -997,62 +928,7 @@ function pmb_cacher($type, $id, $valeur=null, $set=false) {
 	return array($res, $wanted);
 }
 
-/**
- * Recupere les informations de notices
- * dont les identifiants sont fournis par
- * le tableau $ids_notices.
- *
- * Chaque identifiant calcule est mis en cache
- * pour eviter des requetes intempestives
- * sur un hit de page et permettre d'utiliser plusieurs
- * fois une boucle telle que (PMB:NOTICES){id}
- * sans avoir besoin de tout recalculer.
- *
- * Notons que l'on ne peut recuperer que les champs "exportables"
- * dans PMB.
- *
- * @param array $ids_notices
- * 		Tableau d'id de notices a recupereer
- * @return array
- * 		Tableau contenant pour chaque notice la liste des champs
- * 		que l'on a pu recuperer.
-**/
-function pmb_extraire_notices_ids($ids_notices) {
-	if (!is_array($ids_notices)) {
-		return array();
-	}
 
-	// retrouver les infos en cache
-	list($res, $wanted) = pmb_cacher('notices', $ids_notices);
-
-	// si on a tout trouve, on s'en va...
-	if (!count($wanted)) {
-		return $res;
-	}
-
-	// sinon on complete ce qui manque en interrogeant PMB
-	try {
-		$ws = pmb_webservice();
-		$r=$ws->pmbesNotices_fetchNoticeListArray($wanted,"utf-8",true,false);
-		if (is_array($r)) {
-			$r = array_map('pmb_ws_parser_notice', $r);
-
-			// on complete notre tableau de resultat
-			// avec nos trouvailles
-			foreach ($r as $notice) {
-				$key = array_search($notice['id'], $ids_notices);
-				if ($key !== false) {
-					$res[$key] = $notice;
-					pmb_cacher('notices', $notice['id'], $notice, true);
-				}
-			}
-		}
-	} catch (Exception $e) {
-		echo 'Exception reçue (14) : ',  $e->getMessage(), "\n";
-	}
-	ksort($res);
-	return $res;
-}
 
 
 /**

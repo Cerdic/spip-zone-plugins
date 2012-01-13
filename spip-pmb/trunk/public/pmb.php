@@ -297,33 +297,27 @@ function inc_pmb_notices_select_dist(&$command, $iterateur) {
 		$ids = pmb_intersect_ids($ids, $idsn);
 	}
 
-	// id_auteur : trouver les notices d'un auteur
-	if ($ids_auteur = pmb_critere_valeur($criteres, 'id_auteur')) {
-		$auteurs = pmb_extraire_auteurs_ids($ids_auteur);
-		if ($auteurs) {
-			$n = array();
-			foreach ($auteurs as $a) {
-				$n = array_unique(array_merge($n, $a['ids_notice']));
-			}
-			$ids = pmb_intersect_ids($ids, $n);
-		}
-		unset($auteurs);
-	}
-
-
+	// id_auteur :     trouver les notices d'un auteur
 	// id_collection : trouver les notices d'une collection
-	if ($ids_collection = pmb_critere_valeur($criteres, 'id_collection')) {
-		$collections = pmb_extraire_collections_ids($ids_collection);
-		if ($collections) {
-			$n = array();
-			foreach ($collections as $c) {
-				$n = array_unique(array_merge($n, $c['ids_notice']));
+	// id_editeur :    trouver les notices d'un editeur
+	foreach (array(
+		'auteurs' => 'id_auteur',
+		'collections' => 'id_collection',
+		'editeurs' => 'id_editeur') as $objet => $_id_objet)
+	{
+		if ($ids_objet = pmb_critere_valeur($criteres, $_id_objet)) {
+			$pmb_extraire_objet_ids = 'pmb_extraire_' . $objet . '_ids';
+			$objets = $pmb_extraire_objet_ids($ids_objet);
+			if ($objets) {
+				$n = array();
+				foreach ($objets as $o) {
+					$n = array_unique(array_merge($n, $o['ids_notice']));
+				}
+				$ids = pmb_intersect_ids($ids, $n);
 			}
-			$ids = pmb_intersect_ids($ids, $n);
+			unset($objets);
 		}
-		unset($collections);
 	}
-
 
 
 	// recherche de notices
@@ -472,6 +466,43 @@ function inc_pmb_collections_select_dist(&$command, $iterateur) {
 
 	// retourner les collections selectionnees
 	$res = pmb_extraire_collections_ids($ids);
+
+	return $res;
+}
+
+
+
+/**
+ *
+ * Selectionne une ou plusieurs editeurs PMB
+ * et retourne un tableau des elements parsees
+ * 
+ * Un editeur
+ * (PMB:EDITEURS) {id_editeur}
+ *
+ * Des editeurs
+ * (PMB:EDITEURS) {liste #TABLEAU_IDS_EDITEUR}
+ * 
+ */
+function inc_pmb_editeurs_select_dist(&$command, $iterateur) {
+	$criteres = $command['where'];
+	
+	// on peut fournir une liste l'id
+	// ou egalement un critere id=x
+	$ids = array();
+
+	// depuis une liste
+	if (is_array($command['liste']) and count($command['liste'])) {
+		$ids = $command['liste'];
+	}
+
+	// depuis un critere id_collection=x ou {id_editeur?}
+	if ($id = pmb_critere_valeur($criteres, 'id_editeur')) {
+		$ids = pmb_intersect_ids($ids, $id);
+	}
+
+	// retourner les collections selectionnees
+	$res = pmb_extraire_editeurs_ids($ids);
 
 	return $res;
 }
@@ -770,7 +801,7 @@ function balise_URL_PMB_EDITEUR_dist($p) {
 }
 
 /**
- * Balise #URL_PMB_AUTEUR et #URL_PMB_EDITEUR{18}
+ * Balise #URL_PMB_AUTEUR et #URL_PMB_AUTEUR{18}
 **/
 function balise_URL_PMB_AUTEUR_dist($p) {
 	return pbm_balise_url($p, 'id_auteur', 'pmb_auteur');
