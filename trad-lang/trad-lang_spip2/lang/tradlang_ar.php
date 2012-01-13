@@ -158,6 +158,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_traduction_vers' => ' نحو ',
 	'lien_trier_langue_non' => 'عرض الجردة الاجمالية.',
 	'lien_utiliser_google_translate' => 'استخدام هذا الاصدار',
+	'lien_voir_bilan_lang' => 'Voir le bilan de la langue @langue_longue@ (@lang@)', # NEW
+	'lien_voir_bilan_module' => 'Voir le bilan du module @nom_mod@ - @module@', # NEW
 	'lien_voir_toute_chaines_module' => 'عرض كل سلاسل الوحدة.',
 
 	// M
