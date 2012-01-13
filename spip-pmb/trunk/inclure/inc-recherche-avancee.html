@@ -4,12 +4,11 @@
 	
 <div id="search">
 	<div class='formulaire_spip formulaire_recherche_avancee'>
-		<form action='#URL_PAGE{recherche}' method='post'>
+		<form action='#URL_PAGE{pmb_recherche}' method='post'>
 			[<input type='hidden' name='id_section' value='(#ENV{id_section})'/>]
 			[<input type='hidden' name='id_location_memo' value='(#ENV{id_location_memo})'/>]
 			[<input type='hidden' name='id_section_memo' value='(#ENV{id_section_memo})'/>]
 			[<input type='hidden' name='titre_section' value='(#ENV{titre_section})'/>]
-			<input type='hidden' name='type-page' value='[(#ENV{type-page,recherche})]'/>
 			<input type='hidden' name='recherche_avancee' value='1'/>
 			<input type='hidden' name='look[]' value='PMB'/>
 			<input type='hidden' name='look[]' value='FIRSTACCESS' />
