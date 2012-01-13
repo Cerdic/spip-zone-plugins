@@ -24,7 +24,7 @@ function tickets_upgrade($nom_meta_base_version,$version_cible){
 	$maj['0.7'] = array('maj_tables',array('spip_tickets'));
 	$maj['1.1'] = array(
 		array('maj_tables',array('spip_tickets')),
-		array('migrer_commentaires_tickets_vers_forums','');
+		array('migrer_commentaires_tickets_vers_forums',''),
 		array('sql_drop_table',"spip_tickets_forum")
 	);
 	$maj['1.2'] = array(
