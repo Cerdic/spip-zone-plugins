@@ -2,11 +2,11 @@
 <tr class="[(#ENV{compteur}|alterner{row_odd,row_even})] statut_[(#STATUT|strtolower)]" id="tradlang-#ID_TRADLANG">
 		<td class="code_langue">#ID</td>
 		<BOUCLE_revise_orig(TRADLANG){module}{lang=#ENV{lang_orig}}{id=#ID}>
-		<td class="origine" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[&lt;(#STATUT|!={OK}|?{#STATUT})&gt; ][(#STR**|entites_html)]</td>
+		<td class="origine" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[&lt;(#STATUT|!={OK}|?{#STATUT})&gt; ][(#STR**|entites_html|nl2br)]</td>
 		</BOUCLE_revise_orig>
 		<td class="origine" style="text-align:#LANG_LEFT;" dir="#LANG_DIR"><:tradlang:str_existe_plus:></td>
 		<//B_revise_orig>
-		<td class="cible #EDIT{str_statut}" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|entites_html)]</td>
+		<td class="cible #EDIT{str_statut}" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|entites_html|nl2br)]</td>
 		<td class="statut" width="50px">[(#STATUT|sinon{<:tradlang:info_status_ok:>})]</td>
 		<td class="modifier" width="50px"><a href="[(#URL_TRADLANG|parametre_url{lang_orig,#ENV{lang_orig}}|parametre_url{retour,#SELF})]"><:tradlang:lien_editer_chaine:></a></td>
 	</tr>

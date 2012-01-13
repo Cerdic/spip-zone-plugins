@@ -59,12 +59,12 @@
 		<td>#NOM_MOD</td>
 		<BOUCLE_revise_orig(TRADLANG){lang=#LANG_MERE}{id=#ID}{0,1}>
 		#SET{id_lang_mere,#ID_TRADLANG}
-		<td class="status[_(#STATUT|strtolower)]">[(#STR**|entites_html)]</td>
+		<td class="status[_(#STATUT|strtolower)]">[(#STR**|entites_html|nl2br)]</td>
 		</BOUCLE_revise_orig>
 		<td><:tradlang:str_existe_plus:></td>
 		<//B_revise_orig>
 		<td class="#EDIT{str_statut}">
-			[(#GET{id_lang_mere}|=={#ID_TRADLANG}|non)[(#STR**|entites_html)]]
+			[(#GET{id_lang_mere}|=={#ID_TRADLANG}|non)[(#STR**|entites_html|nl2br)]]
 			[(#GET{id_lang_mere}|=={#ID_TRADLANG}|oui)<em><:tradlang:info_chaine_originale:></em>]
 		</td>
 		<td class="lang" width="50px"><abbr title="[(#LANG|traduire_nom_langue)]"><a href="[(#URL_PAGE{tradlang_bilan}|parametre_url{langue_modules,#LANG})]">#LANG</a></abbr></td>
