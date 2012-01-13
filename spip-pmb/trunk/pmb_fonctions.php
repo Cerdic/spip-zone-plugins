@@ -999,46 +999,68 @@ function pmb_ws_liste_tri_recherche() {
 
 
 
-// retourne un tableau associatif contenant les prêts en cours
-function pmb_prets_extraire ($session_id, $type_pret=0) {
-	$tableau_resultat = Array();
-	try{
-		$ws = pmb_webservice();
-		$loans = $ws->pmbesOPACEmpr_list_loans($session_id, $type_pret);
-		$liste_notices = Array();
-		$cpt = 0;
-		if (is_array($loans)) {
-			foreach ($loans as $loan) {
-				$liste_notices[] = $loan->notice_id;
-				$tableau_resultat[$cpt] = Array();
-				$tableau_resultat[$cpt]['empr_id']               = $loan->empr_id;
-				$tableau_resultat[$cpt]['notice_id']             = $loan->notice_id;
-				$tableau_resultat[$cpt]['bulletin_id']           = $loan->bulletin_id;
-				$tableau_resultat[$cpt]['expl_id']               = $loan->expl_id;
-				$tableau_resultat[$cpt]['expl_cb']               = $loan->expl_cb;
-				$tableau_resultat[$cpt]['expl_support']          = $loan->expl_support;
-				$tableau_resultat[$cpt]['expl_location_id']      = $loan->expl_location_id;
-				$tableau_resultat[$cpt]['expl_location_caption'] = $loan->expl_location_caption;
-				$tableau_resultat[$cpt]['expl_section_id']       = $loan->expl_section_id;
-				$tableau_resultat[$cpt]['expl_section_caption']  = $loan->expl_section_caption;
-				$tableau_resultat[$cpt]['expl_libelle']          = $loan->expl_libelle;
-				$tableau_resultat[$cpt]['loan_startdate']        = $loan->loan_startdate;
-				$tableau_resultat[$cpt]['loan_returndate']       = $loan->loan_returndate;
-				
-				$cpt++;
+/**
+ * Retourne la liste des prets
+ * d'un auteur pmb authentifie
+ *
+ * @param string $ids_pmb_session
+ * 		Sessions pmb de/des auteurs
+ *
+ * @param int $type_pret
+ * 		Type de reponse :
+ * 		1 : les prets en cours
+ * 		0 : les prets en retard
+ * 
+ * @return array
+ * 		Liste des prets
+**/
+function pmb_extraire_prets_ids($ids_pmb_session, $type_pret=0) {
+	$ids_pmb_session = array_filter($ids_pmb_session);
+	if (!$ids_pmb_session) {
+		return array();
+	}
+	$prets = array();
+	$notices = Array();
+	$ws = pmb_webservice();
+	
+	foreach ($ids_pmb_session as $id_pmb_session) {
+		$prets = $ws->pmbesOPACEmpr_list_loans($id_pmb_session, $type_pret);
+		if (is_array($prets)) {
+			foreach ($prets as $pret) {
+				$p = array();
+				$p['id_emprunteur']         = $pret->empr_id;
+				$p['id_notice']             = $pret->notice_id;
+				$p['id_bulletin']           = $pret->bulletin_id;
+				$p['expl_id']               = $pret->expl_id;
+				$p['expl_cb']               = $pret->expl_cb;
+				$p['expl_support']          = $pret->expl_support;
+				$p['expl_id_location']      = $pret->expl_location_id;
+				$p['expl_location_titre']   = $pret->expl_location_caption;
+				$p['expl_id_section']       = $pret->expl_section_id;
+				$p['expl_section_titre']    = $pret->expl_section_caption;
+				$p['expl_libelle']          = $pret->expl_libelle;
+				$p['loan_startdate']        = $pret->loan_startdate;
+				$p['loan_returndate']       = $pret->loan_returndate;
+				$notices[] = $pret->notice_id;
+				$prets[] = $p;
 			}
 		}
-		if ($cpt>0) {
-			$tableau_resultat['notice_ids'] = pmb_extraire_notices_ids($liste_notices);  
+	}
+	if ($prets) {
+		// on integre les informations des notices
+		$notices = pmb_extraire_notices_ids($notices);
+		// (pas tres optimise... mais y en a pas beaucoup)
+		foreach ($prets as $p) {
+			foreach ($notices as $n) {
+				if ($p['id_notice'] == $n['id_notice']) {
+					$p['notice'] = $n;
+					break;
+				}
+			}
 		}
-		#pmb_remettre_id_dans_resultats(&$tabreau_resultat, $liste_notices);
-		
-	} catch (Exception $e) {
-		 echo 'Exception reçue (17) : ',  $e->getMessage(), "\n";
-	} 
-	return $tableau_resultat;
+	}
+	return $prets;
 }
-
 
 /**
  * Retourne les reservations demandes...
@@ -1062,7 +1084,7 @@ function pmb_extraire_reservations_ids($ids_pmb_session) {
 	$ws = pmb_webservice();
 	
 	foreach ($ids_pmb_session as $id_pmb_session) {
-		$reservations = $ws->pmbesOPACEmpr_list_resas($pmb_session);
+		$reservations = $ws->pmbesOPACEmpr_list_resas($id_pmb_session);
 		if (is_array($reservations)) {
 			foreach ($reservations as $reservation) {
 				$r = array();

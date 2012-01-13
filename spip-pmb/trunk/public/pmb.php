@@ -415,7 +415,7 @@ function inc_pmb_auteurs_select_dist(&$command, $iterateur) {
 
 /**
  *
- * Selectionne les reservations d'an auteurs identifie a PMB
+ * Selectionne les reservations d'un ou plusieurs auteurs identifies a PMB
  * et retourne un tableau des elements parsees
  * 
  * Liste des reservations
@@ -425,6 +425,50 @@ function inc_pmb_auteurs_select_dist(&$command, $iterateur) {
  */
 function inc_pmb_reservations_select_dist(&$command, $iterateur) {
 	return inc_pmb_select_abstract_dist(&$command, $iterateur, 'reservations', 'pmb_session');
+}
+
+
+/**
+ *
+ * Selectionne les prets d'un ou plusieurs auteurs identifies a PMB
+ * et retourne un tableau des elements parsees
+ * 
+ * Liste des prets
+ * (PMB:PRETS) {pmb_session}{type=0} // en retard // todo : ameliorer le nom du critere type :p
+ * (PMB:PRETS) {pmb_session}{type=1} // en cours
+ * (PMB:PRETS) {liste #TABLEAU_PMB_SESSIONS}
+ *
+ */
+function inc_pmb_prets_select_dist(&$command, $iterateur) {
+	$criteres = $command['where'];
+	
+	// on peut fournir une liste l'id
+	// ou egalement un critere id=x
+	$ids = array();
+
+	// depuis une liste
+	if (is_array($command['liste']) and count($command['liste'])) {
+		$ids = $command['liste'];
+	}
+
+	// depuis un critere pmb_session=x ou {pmb_session?}
+	if ($id = pmb_critere_valeur($criteres, 'pmb_session')) {
+		$iterateur->exception_des_criteres('pmb_session'); 
+		$ids = pmb_intersect_ids($ids, $id);
+	}
+
+	$type = 0;
+	// {type=1} 
+	if ($types = pmb_critere_valeur($criteres, 'type')) {
+		$iterateur->exception_des_criteres('type');
+		// le premier trouve...
+		$type = array_shift($types);
+	}
+
+	// retourner les objets selectionnees
+	$res = pmb_extraire_prets_ids($ids, $type);
+
+	return $res;
 }
 
 
@@ -495,6 +539,8 @@ function inc_pmb_select_abstract_dist(&$command, $iterateur, $objet, $_id_objet)
 	// depuis un critere id_objet=x ou {id_objet?}
 	if ($id = pmb_critere_valeur($criteres, $_id_objet)) {
 		$ids = pmb_intersect_ids($ids, $id);
+		// pas la peine de filtrer dessus... surtout pour {pmb_session} qui n'y est plus ensuite
+		$iterateur->exception_des_criteres($_id_objet);
 	}
 
 	// retourner les objets selectionnees

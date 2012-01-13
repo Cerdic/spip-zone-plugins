@@ -42,38 +42,47 @@
 	1,[(#LISTE{pmb-pretscours,<:pmb:prets_en_cours:>,'Pas de pr&ecirc;t en cours'})],
 	0,[(#LISTE{pmb-pretsretard,<:pmb:prets_en_retard:>,'Pas de pr&ecirc;t en retard'})]})]})]
 	
-<BOUCLE_prets(POUR){tableau #GET{prets}}>
+<BOUCLE_prets_types(POUR){tableau #GET{prets}}>
 	<div id="#VALEUR{0}" class="ps surlignable"><h2 class="pas_surlignable">#VALEUR{1}</h2>
 	<div>
-	[(#SET{tab_prets,[(#PMB_SESSION|pmb_prets_extraire{#CLE})]})]
-		<B_tab_resultat>
+	<B_prets>
 		<table class="spip pmb-tableau">
 		<thead>
-			<tr class="row_first"><th><:pmb:code_barre:></th><th><:pmb:titre:></th><th><:pmb:support:></th><th><:pmb:date:></th><th><:pmb:retour:></th></tr>
+			<tr class="row_first">
+				<th><:pmb:code_barre:></th>
+				<th><:pmb:titre:></th>
+				<th><:pmb:support:></th>
+				<th><:pmb:date:></th>
+				<th><:pmb:retour:></th>
+			</tr>
 		</thead>
 		<tbody>
-		<BOUCLE_tab_resultat(POUR){tableau #GET{tab_prets}}>
-			[(#SET{notice, #GET{tab_prets/notice_ids/#CLE}})]
+	<BOUCLE_prets(PMB:PRETS){pmb_session}{type=#CLE}>
 			<tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
-				<td><a href="#URL_PMB_NOTICE{#GET{notice/id}}">
-				[(#GET{notice/logo_src}
-					|image_reduire{0,80}
-					|inserer_attribut{class,spip_logos})]</a> #GET{tab_prets/#CLE/expl_cb}
+				<td>
+				[(#VALEUR{notice/logo_src}|oui)
+					<a href="#URL_PMB_NOTICE">
+					[(#VALEUR{notice/logo_src}
+						|image_reduire{0,80}
+						|inserer_attribut{class,spip_logos})]
+					</a>
+				]
+				#EXPL_CB
 				</td>
-				<td><a href="#URL_PMB_NOTICE{#GET{tab_prets/#CLE/notice_id}}">#GET{tab_prets/#CLE/expl_libelle}</a></td>
-				<td>#GET{tab_prets/#CLE/expl_support}</td>
-				<td>#GET{tab_prets/#CLE/loan_startdate}</td>
-				<td>#GET{tab_prets/#CLE/loan_returndate}</td>
+				<td><a href="#URL_PMB_NOTICE">#EXPL_LIBELLE</a></td>
+				<td>#EXPL_SUPPORT</td>
+				<td>#LOAN_STARTDATE</td>
+				<td>#LOAN_RETURNDATE</td>
 			</tr>
-		</BOUCLE_tab_resultat>
+	</BOUCLE_prets>
 		</tbody>
 		</table>
-		</B_tab_resultat>
-			[(#_prets:VALEUR{2})]
-		<//B_tab_resultat>
+	</B_prets>
+		[(#_prets_types:VALEUR{2})]
+	<//B_prets>
 	</div>
 	</div>
-</BOUCLE_prets>
+</BOUCLE_prets_types>
 
 
 <div id="pmb-reservations" class="ps surlignable">
@@ -91,13 +100,14 @@
 		<tbody>
 		<BOUCLE_reservations(PMB:RESERVATIONS){pmb_session}>
 			<tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
-				<td><a href="#URL_PMB_NOTICE">
+				<td>
 					[(#VALEUR{notice/logo_src}|oui)
+					<a href="#URL_PMB_NOTICE">
 						[(#VALEUR{notice/logo_src}
 							|image_reduire{0,80}
 							|inserer_attribut{class,spip_logos})]
-					]
 					</a>
+					]
 				</td>
 				<td><a href="#URL_PMB_NOTICE">#VALEUR{notice/titre}</a></td>
 				<td>#RANK</td>
