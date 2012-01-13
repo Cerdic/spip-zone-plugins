@@ -16,11 +16,12 @@ function tickets_declarer_tables_objets_sql($tables){
 	$tables['spip_tickets'] = array(
 		'page' => 'ticket',
 		'url_edit' => 'ticket_edit',
-		'editable' => true,
+		'editable' => 'oui',
 		'texte_retour' => 'tickets:icone_retour_ticket',
 		'texte_objet' => 'tickets:ticket',
 		'texte_objets' => 'tickets:tickets',
 		'texte_modifier' => 'tickets:icone_modifier_ticket',
+		'texte_creer' => 'tickets:nouveau_ticket',
 		'icone_objet' => 'ticket',
 		'info_aucun_objet'=> 'tickets:info_ticket_aucun',
 		'info_1_objet' => 'tickets:info_ticket_1',
