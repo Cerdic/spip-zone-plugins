@@ -413,6 +413,20 @@ function inc_pmb_auteurs_select_dist(&$command, $iterateur) {
 }
 
 
+/**
+ *
+ * Selectionne les reservations d'an auteurs identifie a PMB
+ * et retourne un tableau des elements parsees
+ * 
+ * Liste des reservations
+ * (PMB:RESERVATIONS) {pmb_session}
+ * (PMB:RESERVATIONS) {liste #TABLEAU_PMB_SESSIONS}
+ * 
+ */
+function inc_pmb_reservations_select_dist(&$command, $iterateur) {
+	return inc_pmb_select_abstract_dist(&$command, $iterateur, 'reservations', 'pmb_session');
+}
+
 
 /**
  *

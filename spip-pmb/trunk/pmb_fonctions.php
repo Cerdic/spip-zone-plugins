@@ -964,8 +964,12 @@ function pmb_webservice() {
 }
 
 
+/**
+ * Retourne un tableau contenant la liste des tris possibles
+ * (non utilisee)
+**/
 function pmb_ws_liste_tri_recherche() {
-	//retourne un tableau contenant la liste des tris possibles
+	//
 	/* Exemple de retour:
 	  Array
 	  (
@@ -979,12 +983,6 @@ function pmb_ws_liste_tri_recherche() {
 	  (
 	  [sort_name] => num_2
 	  [sort_caption] => Indexation décimale
-	  )
-	  
-	  [2] => Array
-	  (
-	  [sort_name] => text_3
-	  [sort_caption] => Auteur
 	  )
 	...
       )*/
@@ -1041,37 +1039,64 @@ function pmb_prets_extraire ($session_id, $type_pret=0) {
 	return $tableau_resultat;
 }
 
-function pmb_reservations_extraire($pmb_session) {
-	$tableau_resultat = Array();
-	
-	$ws = pmb_webservice();
-	$reservations = $ws->pmbesOPACEmpr_list_resas($pmb_session);
-	$liste_notices = Array();
-	
-	$cpt = 0;
-	if (is_array($reservations)) {
-		foreach ($reservations as $reservation) {
-			$liste_notices[] = $reservation->notice_id;
-			$tableau_resultat[$cpt] = Array();
-			$tableau_resultat[$cpt]['resa_id']		= $reservation->resa_id;
-			$tableau_resultat[$cpt]['empr_id']		= $reservation->empr_id;
-			$tableau_resultat[$cpt]['notice_id']	= $reservation->notice_id;
-			$tableau_resultat[$cpt]['bulletin_id']	= $reservation->bulletin_id;
-			$tableau_resultat[$cpt]['resa_rank']	= $reservation->resa_rank;
-			$tableau_resultat[$cpt]['resa_dateend']	= $reservation->resa_dateend;
-			$tableau_resultat[$cpt]['resa_retrait_location_id ']	= $reservation->resa_retrait_location_id ;
-			$tableau_resultat[$cpt]['resa_retrait_location']		= $reservation->resa_retrait_location;
 
-			$cpt++;
+/**
+ * Retourne les reservations demandes...
+ *
+ * @param array $ids_pmb_session
+ * 		Les demandes, des 'pmb_session' (table spip_auteurs_pmb)
+ * 
+ * @return array
+ * 		Tableau contenant les reservations
+ * 		Et dans 'notice' de chaque reservation
+ * 		les informations de la notice correspondante.
+**/
+function pmb_extraire_reservations_ids($ids_pmb_session) {
+	$ids_pmb_session = array_filter($ids_pmb_session);
+	if (!$ids_pmb_session) {
+		return array();
+	}
+	
+	$resas = array();
+	$notices = Array();
+	$ws = pmb_webservice();
+	
+	foreach ($ids_pmb_session as $id_pmb_session) {
+		$reservations = $ws->pmbesOPACEmpr_list_resas($pmb_session);
+		if (is_array($reservations)) {
+			foreach ($reservations as $reservation) {
+				$r = array();
+				$r['id_reservation']      = $reservation->resa_id;
+				$r['id_emprunteur']       = $reservation->empr_id;
+				$r['id_notice']           = $reservation->notice_id;
+				$r['id_bulletin']         = $reservation->bulletin_id;
+				$r['rank']                = $reservation->resa_rank;
+				$r['date_fin']            = $reservation->resa_dateend;
+				$r['retrait_id_location'] = $reservation->resa_retrait_location_id ;
+				$r['retrait_location']    = $reservation->resa_retrait_location;
+				$notices[] = $reservation->notice_id;
+				$resas[] = $r;
+			}
 		}
 	}
-	if ($cpt>0) {
-		$tableau_resultat['notice_ids'] = pmb_extraire_notices_ids($liste_notices);  
+	if ($resas) {
+		// on integre les informations des notices
+		$notices = pmb_extraire_notices_ids($notices);
+		// (pas tres optimise... mais y en a pas beaucoup)
+		foreach ($resas as $r) {
+			foreach ($notices as $n) {
+				if ($r['id_notice'] == $n['id_notice']) {
+					$r['notice'] = $n;
+					break;
+				}
+			}
+		}
 	}
-	#pmb_remettre_id_dans_resultats(&$tabreau_resultat, $liste_notices)
-	return $tableau_resultat;
-
+	return $resas;
 }
+
+
+
 
 /**
  *  tester si la session pmb est toujours active
@@ -1092,6 +1117,10 @@ function pmb_tester_session($pmb_session, $id_auteur) {
 }
 
 
+/**
+ * Reserve pour un auteur identifie a pmb une notice
+ *
+**/
 function pmb_reserver_ouvrage($session_id, $notice_id, $bulletin_id, $location) {
 
 	$result= Array();
