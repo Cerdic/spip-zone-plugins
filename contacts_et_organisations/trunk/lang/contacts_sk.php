@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contact_voir' => 'Zobraziť',
 	'contacts' => 'Kontakty',
 	'contacts_nb' => '@nb@ kontaktov',
-	'contacts_un' => 'Kontakt',
+	'contacts_un' => 'Jeden kontakt',
 	'creer_auteur_contact' => 'Vytvoriť nového autora a prepojiť ho s týmto kontaktom',
 	'creer_auteur_organisation' => 'Vytvoriť nového autora a prepojiť ho s touto organizáciou',
 
