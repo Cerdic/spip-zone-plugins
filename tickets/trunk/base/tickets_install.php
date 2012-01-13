@@ -14,7 +14,9 @@ function tickets_declarer_tables_interfaces($interface){
 
 function tickets_declarer_tables_objets_sql($tables){
 	$tables['spip_tickets'] = array(
-		'page'=>'ticket',
+		'page' => 'ticket',
+		'url_edit' => 'ticket_edit',
+		'editable' => true,
 		'texte_retour' => 'tickets:icone_retour_ticket',
 		'texte_objet' => 'tickets:ticket',
 		'texte_objets' => 'tickets:tickets',
@@ -23,7 +25,7 @@ function tickets_declarer_tables_objets_sql($tables){
 		'info_aucun_objet'=> 'tickets:info_ticket_aucun',
 		'info_1_objet' => 'tickets:info_ticket_1',
 		'info_nb_objets' => 'tickets:info_ticket_nb',
-		'titre' => "titre",
+		'titre' => "titre, '' AS lang",
 		'principale' => 'oui',
 		'champs_editables' => array('titre', 'texte', 'exemple', 'descriptif','severite', 'tracker', 'composant', 'jalon','version', 'navigateur','sticked'),
 		'field'=> array(
@@ -63,6 +65,24 @@ function tickets_declarer_tables_objets_sql($tables){
 			'projet' => 3,
 			'jalon' => 3
 		),
+		'statut' => array(
+			 array('champ'=>'statut','publie'=>'ouvert,resolu,ferme','previsu'=>'redac','exception'=>'statut')
+		),
+		'statut_images' => array(
+			'redac' => 'puce-blanche.gif',
+			'ouvert' => 'puce-orange.gif',
+			'resolu' => 'puce-verte.gif',
+			'ferme' => 'puce-poubelle.gif',
+			'poubelle' => 'puce-poubelle.gif'
+		),
+		'statut_textes_instituer' =>  array(
+			'redac' => _T('tickets:statut_redac'),
+			'ouvert' => _T('tickets:statut_ouvert'),
+			'resolu' => _T('tickets:statut_resolu'),
+			'ferme' => _T('tickets:statut_ferme'),
+			'poubelle' => _T('tickets:statut_poubelle')
+		),
+		'texte_changer_statut' => 'tickets:texte_ticket_statut',
 		'champs_versionnes' => array('titre','texte','severite','projet','tracker','composant','projet','jalon','version','navigateur','sticked')
 	);
 	return $tables;

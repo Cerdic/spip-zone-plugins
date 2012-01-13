@@ -3,7 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Ajout du bouton permettant de se rendre sur la page de gestion des tickets
-function tickets_ajouterBoutons($boutons_admin) {
+function tickets_ajouter_boutons($boutons_admin) {
 	// uniquement si le plugin bandeau n'est pas la (ou SPIP 2.1)
 	if(!$boutons_admin['bando_publication']){
 		// affiche le bouton dans "Forum" si les forums sont activés, tout le monde peut voir cette page
@@ -26,25 +26,26 @@ function tickets_ajouterBoutons($boutons_admin) {
 }
 
 // Menu des tickets presente a droite ou a gauche de la page
-function menu_colonne () {
-	$ret = "<div class='cadre cadre-e'><div class='cadre_padding'>";
-	$ret .= icone_horizontale(_T('tickets:afficher_tickets'), generer_url_ecrire("tickets"), find_in_path("prive/themes/spip/images/ticket-24.png"), "", false);
-
-	$contexte = array("titre"=>_T('tickets:vos_tickets_en_cours'), "id_auteur"=>$connect_id_auteur, "statut"=>"redac", "bloc"=>"_bloc1");
-	$options = array("ajax"=>true);
-	$page = recuperer_fond("prive/contenu/inc_liste_simple", $contexte, $options);
-	$ret .= $page;
-
-	$contexte = array("titre"=>_T('tickets:tous_tickets_ouverts'), "statut"=>"ouvert", "bloc"=>"_bloc2");
-	$options = array("ajax"=>true);
-	$page = recuperer_fond("prive/contenu/inc_liste_simple", $contexte, $options);
-	$ret .= $page;
-
+function menu_colonne ($flux) {
+	include_spip('inc/presentation'); # pour icone_horizontale
+	
+	$ret = boite_ouvrir('','simple');
+	$ret .= icone_horizontale(_T('tickets:afficher_tickets'), generer_url_ecrire("tickets"), "ticket-24", "", false);
 	include_spip('inc/tickets_autoriser');
-	if (autoriser('ecrire', 'ticket')) {
-		$ret .= icone_horizontale(_T('tickets:creer_ticket'), generer_url_ecrire("ticket_editer","id_ticket=new"), find_in_path("prive/themes/spip/images/ticket-24.png"), "creer.gif", false);
+	if ($flux['args']['exec'] != 'ticket_edit' && autoriser('ecrire', 'ticket')) {
+		$ret .= icone_horizontale(_T('tickets:creer_ticket'), generer_url_ecrire('ticket_edit','new=oui'), 'ticket-24.png', 'creer.gif', false);
 	}
-	$ret .= "</div></div>";
+	$ret .= boite_fermer();
+	
+	$contexte = array('titre'=>_T('tickets:vos_tickets_en_cours'), 'id_auteur'=>$connect_id_auteur, "statut"=>"redac", 'bloc'=>'_bloc1');
+	$options = array("ajax"=>true);
+	$page = recuperer_fond('prive/contenu/inc_liste_simple', $contexte, $options);
+	$ret .= $page;
+
+	$contexte = array('titre'=>_T('tickets:tous_tickets_ouverts'), 'statut'=>'ouvert', 'bloc'=>'_bloc2');
+	$options = array('ajax'=>true);
+	$page = recuperer_fond('prive/contenu/inc_liste_simple', $contexte, $options);
+	$ret .= $page;
 
 	return $ret;
 }
@@ -54,13 +55,13 @@ function menu_colonne () {
  * @param object $flux
  * @return
  */
-function tickets_gauche ($flux) {
+function tickets_affiche_gauche ($flux) {
 	$exec = $flux["args"]["exec"];
 
-	if (($exec == "ticket_afficher") OR ($exec == "ticket_editer")) {
+	if (($exec == "ticket") OR ($exec == "ticket_edit")) {
 		$data = $flux["data"];
 
-		$ret = menu_colonne();
+		$ret = menu_colonne($flux);
 		$flux["data"] = $data.$ret;
 	}
 	return $flux;
@@ -103,14 +104,20 @@ function tickets_accueil_informations($flux){
 				$cpt2[$r] = intval($row['cnt']) . '/';
 			}
 		}
-		$res .= afficher_plus(generer_url_ecrire("tickets",""))."<b>"._T('tickets:info_tickets')."</b>";
-		$res .= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
-		if (isset($cpt['redac'])) $res .= "<li>"._T('tickets:info_tickets_redac').": ".$cpt2['redac'].$cpt['redac'] . '</li>';
-		if (isset($cpt['ouvert'])) $res .= "<li><b>"._T('tickets:info_tickets_ouvert').": ".$cpt2['ouvert'] .$cpt['ouvert'] . "</b>" .'</li>';
+		$afficher_plus = 'afficher_plus_info';
+		$plus = "";
+		if (!function_exists($afficher_plus))
+			$afficher_plus = 'afficher_plus';
+		
+		$plus = $afficher_plus(generer_url_ecrire("tickets",""));
+		$res .= "<h4>$plus"._T('tickets:info_tickets')."</h4>";
+		$res .= "<ul class=\"liste-items\">";
+		if (isset($cpt['redac'])) $res .= "<li class=\"item\">"._T('tickets:info_tickets_redac').": ".$cpt2['redac'].$cpt['redac'] . "</li>";
+		if (isset($cpt['ouvert'])) $res .= "<li class=\"item\">"._T('tickets:info_tickets_ouvert').": ".$cpt2['ouvert'] .$cpt['ouvert'] . "</li>";
 		$res .= "</ul>";
 	}
 
-	$flux .= "<div class='verdana1'>" . $res . "</div>";
+	$flux .= "<div class=\"accueil_informations ticket liste\">" . $res . "</div>";
 	return $flux;
 }
 
@@ -123,7 +130,7 @@ function tickets_accueil_gadgets($gadget){
 
 	include_spip('inc/tickets_autoriser');
 	if (autoriser('ecrire', 'ticket')) {
-		$icone = icone_horizontale(_T('tickets:creer_ticket'), generer_url_ecrire("ticket_editer","id_ticket=new"), find_in_path("prive/themes/spip/images/ticket-24.png"), "creer.gif", false);
+		$icone = icone_horizontale(_T('tickets:creer_ticket'), generer_url_ecrire("ticket_edit","new=oui"), find_in_path("prive/themes/spip/images/ticket-24.png"), "creer.gif", false);
 
 		$colonnes = extraire_balises($gadget, 'td');
 		$derniere_colonne = fmod(floor(count($colonnes)/2), 4) == 0 ? true : false;

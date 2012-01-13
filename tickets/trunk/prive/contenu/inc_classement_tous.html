@@ -47,7 +47,7 @@
         <tr class="tr_liste">
             <td class="arial1"><b>##ID_TICKET</b></td>
             <td>[(#DATE|affdate{'d-m-Y'})]</td>
-            <td class="#EDIT{id_auteur}">#NOM_AUTEUR{#ID_AUTEUR}</td>
+            <td class="#EDIT{id_auteur}">#INFO_NOM{auteur,#ID_AUTEUR}</td>
             <td class="arial2 #EDIT{titre}[(#STATUT|in_array{#ARRAY{0,ferme,1,resolu}}|oui) del]"[ title="(#GET{discussion}|texte_backend)"]><a href="?exec=ticket_afficher&amp;id_ticket=#ID_TICKET">#TITRE</a><br />[(#TEXTE|PtoBR|couper{100})]</td>
             <td class="arial0">
                 [(#TRACKER|tickets_texte_tracker)]
@@ -60,7 +60,7 @@
                 <img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"] />
                 [&nbsp;(#STATUT|tickets_texte_statut)]
             </td>
-            <td class="#EDIT{id_assigne}">[(#NOM_AUTEUR{#ID_ASSIGNE}|sinon{<:tickets:no_assignation:>})]</td>
+            <td class="#EDIT{id_assigne}">[(#INFO_NOM{auteur,#ID_ASSIGNE}|sinon{<:tickets:no_assignation:>})]</td>
             <td>[(#MAJ|affdate{'d-m-Y'})]</td>
             <td class="#EDIT{projet}">[(#PROJET|sinon{'-'})]</td>
             <td class="#EDIT{composant}">[(#COMPOSANT|sinon{'-'})]</td>

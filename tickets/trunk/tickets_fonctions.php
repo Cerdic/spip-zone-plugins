@@ -6,6 +6,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * <BOUCLE(TICKETS)>
  */
 function boucle_TICKETS_dist($id_boucle, &$boucles) {
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
+	
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$mstatut = $id_table .'.statut';
@@ -205,22 +208,6 @@ function tickets_liste_navigateur($nav=false){
 		'autre' => _T('tickets:option_navigateur_autre')
 	);
 	return $navs;
-}
-
-// Balise #NOM_AUTEUR
-// Permet de retrouver le nom d'un auteur
-// d'après le id_assigne et le id_auteur de tickets
-function balise_NOM_AUTEUR($p) {
-	$id_auteur = interprete_argument_balise (1, $p);
-	$p->code = "trouve_nom(".$id_auteur.")";
-	$p->statut = 'php';
-	return $p;
-}
-function trouve_nom($id_auteur) {
-	$nom = sql_getfetsel("nom","spip_auteurs", "id_auteur=" . intval($id_auteur));
-	if (!empty($nom))
-		return $nom;
-	return '';
 }
 
 ?>

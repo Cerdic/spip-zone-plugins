@@ -188,6 +188,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'syndiquer_tickets' => 'Syndiquer les tickets du site',
 
 	// T
+	'texte_ticket_statut' => 'Statut du ticket :',
 	'ticket' => 'Ticket',
 	'ticket_enregistre' => 'Ticket enregistré',
 	'tickets' => 'Tickets',

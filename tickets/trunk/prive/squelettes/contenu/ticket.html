@@ -7,13 +7,13 @@
 <BOUCLE_afficher_contenu(TICKETS){id_ticket=#ENV{id_ticket}}{statut?}>
 [(#BOITE_OUVRIR{[
 				
-	[(#AUTORISER{modifier,ticke,#ID_TICKET})
+	[(#AUTORISER{modifier,ticket,#ID_TICKET})
 				
 		[(#ID_TICKET|afficher_qui_edite{ticket}|non)
-			[(#URL_ECRIRE{ticket_edit,id_ticket=#ID_TICKET}|icone_verticale{<:tickets:icone_modifier_ticket:>,ticket,edit,right ajax preload})]
+			[(#URL_ECRIRE{ticket_edit,id_ticket=#ID_TICKET}|icone_verticale{<:tickets:icone_modifier_ticket:>,ticket,edit,right})]
 		]
 		[(#ID_TICKET|afficher_qui_edite{ticket}|oui)
-			[(#URL_ECRIRE{ticket_edit,id_ticket=#ID_TICKET}|icone_verticale{#ID_TICKET|afficher_qui_edite{article},warning-24,'',right ajax preload})]
+			[(#URL_ECRIRE{ticket_edit,id_ticket=#ID_TICKET}|icone_verticale{#ID_TICKET|afficher_qui_edite{ticket},warning-24,'',right})]
 		]
 	]
 	<h4 class='surtitre'><:info_titre:></h4>
@@ -47,7 +47,7 @@
 		[(#PROJET|ou{#COMPOSANT}|ou{#VERSION}|ou{#JALON}|oui)
 		<div>
 			[<div><:tickets:champ_projet:> <strong>(#PROJET)</strong></div>]
-			[<div><:tickets:champ_composant:> <strong>(#COMPOSANT)</strong></div>]
+			[<div><:tickets:champ_comosant:> <strong>(#COMPOSANT)</strong></div>]
 			[<div><:tickets:champ_version:> <strong>(#VERSION)</strong></div>]
 			[<div><:tickets:champ_jalon:> <strong>(#JALON)</strong></div>]
 		</div>]

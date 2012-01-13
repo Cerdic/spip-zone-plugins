@@ -3,7 +3,7 @@
 ][(#ID_TICKET|intval|non)
 	[(#AUTORISER{creer,ticket}|sinon_interdire_acces)]
 ]
-#SET{retour,#ENV{redirect,#ENV{retour}}|sinon{#ID_TICKET|intval|?{#URL_ECRIRE{ticket,id_auteur=#ID_TICKET},#URL_ECRIRE{tickets}}}}
+#SET{retour,#ENV{redirect,#ENV{retour}}|sinon{#ID_TICKET|intval|?{#URL_ECRIRE{ticket,id_ticket=#ID_TICKET},#URL_ECRIRE{tickets}}}}
 [(#REM) Squelette du formulaire de la page d'edition d'un ticket (exec=ticket_editer)]
 <div class='cadre-formulaire-editer'>
 	<div class="entete-formulaire">
