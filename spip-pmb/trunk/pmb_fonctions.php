@@ -278,6 +278,69 @@ function pmb_extraire_section($section) {
 
 
 
+
+/**
+ * Recupere les informations des collections
+ * dont les identifiants sont fournis par
+ * le tableau $ids_collection.
+ *
+ * Chaque identifiant calcule est mis en cache
+ * pour eviter des requetes intempestives
+ * sur un hit de page et permettre d'utiliser plusieurs
+ * fois une boucle telle que (PMB:COLLECTIONS){id_collection}
+ * sans avoir besoin de tout recalculer.
+ *
+ * @param array $ids_collection
+ * 		Tableau d'id de collections a recupereer
+ * @return array
+ * 		Tableau contenant pour chaque collection la liste des champs
+ * 		que l'on a pu recuperer.
+**/
+function pmb_extraire_collections_ids($ids_collection) {
+	if (!is_array($ids_collection)) {
+		return array();
+	}
+	
+	// retrouver les infos en cache
+	list($res, $wanted) = pmb_cacher('collections', $ids_collection);
+
+	// si on a tout trouve, on s'en va...
+	if (!count($wanted)) {
+		return $res;
+	}
+
+	try {
+		$ws = pmb_webservice();
+		foreach ($wanted as $id_collection) {
+			// second parametre $id_session n'etait pas utilise... kesako ?
+			$r = $ws->pmbesCollections_get_collection_information_and_notices($id_collection);
+			if ($r) {
+				//infos de la collection
+				$c = array();
+				$c['id_collection']  = $r->information->collection_id;
+				$c['titre']          = $r->information->collection_name;
+				$c['id_parent']      = $r->information->collection_parent;
+				$c['issn']           = $r->information->collection_issn;
+				$c['web']            = $r->information->collection_web;
+				$c['ids_notice']     = $r->notice_ids;
+				
+				$key = array_search($id_collection, $ids_collection);
+				if ($key !== false) {
+					$res[$key] = $c;
+					pmb_cacher('collections', $id_collection, $c, true);
+				}
+			}
+		}
+
+	} catch (Exception $e) {
+		 echo 'Exception reçue (7) : ',  $e->getMessage(), "\n";
+	}
+
+	return $res;
+}
+
+
+
 function pmb_collection_extraire($id_collection, $debut=0, $nbresult=5, $id_session=0) {
 	$tableau_resultat = Array();
 	

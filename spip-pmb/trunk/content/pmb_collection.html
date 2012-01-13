@@ -1,13 +1,14 @@
-[(#SET{tab_resultat,[(#ENV{id}|pmb_collection_extraire{#ENV{debut,0},#ENV{fin,5}})]})]
+<BOUCLE_collection(PMB:COLLECTIONS){id_collection}>
 
 [(#REM) Fil d'Ariane ]
 <p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
 &gt; <:pmb:collections:> 
-&gt; <strong class="on">[(#GET{tab_resultat/collection_name}|couper{80})]</strong></p>
+&gt; <strong class="on">[(#TITRE|couper{80})]</strong></p>
 
 
 <div class="cartouche">	
-	<h1 class="h1">#GET{tab_resultat/collection_name}</h1>
+	<h1 class="h1">#TITRE</h1>
 </div>
 
-<INCLURE{fond=inclure/inc-pmb_collection}{env}{tab_resultat=#GET{tab_resultat}}>
+<INCLURE{fond=inclure/inc-pmb_collection}{env}{id_collection}>
+</BOUCLE_collection>

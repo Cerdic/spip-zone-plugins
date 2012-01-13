@@ -310,6 +310,22 @@ function inc_pmb_notices_select_dist(&$command, $iterateur) {
 		unset($auteurs);
 	}
 
+
+	// id_collection : trouver les notices d'une collection
+	if ($ids_collection = pmb_critere_valeur($criteres, 'id_collection')) {
+		$collections = pmb_extraire_collections_ids($ids_collection);
+		if ($collections) {
+			$n = array();
+			foreach ($collections as $c) {
+				$n = array_unique(array_merge($n, $c['ids_notice']));
+			}
+			$ids = pmb_intersect_ids($ids, $n);
+		}
+		unset($collections);
+	}
+
+
+
 	// recherche de notices
 	if (pmb_recherche_critere($criteres, 'rechercher')) {
 		// valeur cherchee (parametre)
@@ -418,6 +434,44 @@ function inc_pmb_auteurs_select_dist(&$command, $iterateur) {
 
 	// retourner les auteurs selectionnees
 	$res = pmb_extraire_auteurs_ids($ids);
+
+	return $res;
+}
+
+
+
+/**
+ *
+ * Selectionne une ou plusieurs collections PMB
+ * et retourne un tableau des elements parsees
+ * 
+ * Une collection
+ * (PMB:COLLECTIONS) {id_collection}
+ *
+ * Des collections
+ * (PMB:COLLECTIONS) {liste #TABLEAU_IDS_COLLECTION}
+ * 
+ */
+function inc_pmb_collections_select_dist(&$command, $iterateur) {
+	$criteres = $command['where'];
+	
+	// on peut fournir une liste l'id
+	// ou egalement un critere id=x
+	$ids = array();
+	
+
+	// depuis une liste
+	if (is_array($command['liste']) and count($command['liste'])) {
+		$ids = $command['liste'];
+	}
+
+	// depuis un critere id_collection=x ou {id_collection?}
+	if ($id = pmb_critere_valeur($criteres, 'id_collection')) {
+		$ids = pmb_intersect_ids($ids, $id);
+	}
+
+	// retourner les collections selectionnees
+	$res = pmb_extraire_collections_ids($ids);
 
 	return $res;
 }

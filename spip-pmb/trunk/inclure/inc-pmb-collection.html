@@ -1,12 +1,15 @@
+<BOUCLE_collection(PMB:COLLECTIONS){id_collection}>
+
 <div class="corps-conteneur surlignable">
 	<div class="pmb-ouvrage-infos">	
 		<table class="spip pmb-tableau">
-			  <tbody>
-			  [<tr><td><:pmb:collection_issn:></td><td>(#ENV{tab_resultat/collection_issn})</td></tr>]
-				[<tr><td><:pmb:publisher_web:></td><td><a href="[(#ENV{tab_resultat/collection_web})]">(#ENV{tab_resultat/collection_web})</a></td></tr>]
+			<tbody>
+				[<tr><td><:pmb:collection_issn:></td><td>(#ISSN)</td></tr>]
+				[<tr><td><:pmb:publisher_web:></td><td><a href="#WEB">(#WEB)</a></td></tr>]
 			</tbody>
 		</table>
 	</div>
 </div>
 
-[(#INCLURE{fond=inclure/inc-recherche-ouvrage,env})]
+[(#INCLURE{fond=inclure/inc-recherche-notices,env,id_collection})]
+</BOUCLE_collection>

@@ -9,8 +9,10 @@
 	[<p class="pagination">(#PAGINATION)</p>]
 	
 	<ul class="liste-items items">
-		<BOUCLE_liste_notices(PMB:NOTICES){id ?}{id_auteur ?}{pagination 5}>
-			<INCLURE{fond=inclure/inc-notice-resume}{id}{surlignable=1}{compteur=#COMPTEUR_BOUCLE}>	
+		<BOUCLE_liste_notices(PMB:NOTICES)
+			{id ?}{id_auteur ?}{id_collection ?}
+			{pagination 5}>
+				<INCLURE{fond=inclure/inc-notice-resume}{id}{surlignable=1}{compteur=#COMPTEUR_BOUCLE}>	
 		</BOUCLE_liste_notices>
 	</ul>
 
