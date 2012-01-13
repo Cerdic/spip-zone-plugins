@@ -1,42 +1,50 @@
 
-[(#ENV{id_location}|oui)
-	[(#SET{tab_locationsections,[(#ENV{id_location}|pmb_location_extraire)]})]
-]
-[(#ENV{id_section}|oui)
-	[(#SET{tab_sections,[(#ENV{id_section}|pmb_section_extraire)]})]
-	[(#SET{tab_locationsections_memo,[(#ENV{id_location_memo}|pmb_location_extraire)]})]
-]
 
-[(#REM) Fil d'Ariane ]
+[(#REM) Fil d'Ariane un rien complexe ... ]
 <p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
- &gt; <a href="#URL_PMB_CATALOGUE"><:pmb:catalogue:></a>
-[ &gt; <a href="[(#URL_PMB_CATALOGUE|parametre_url{id_location,#GET{tab_locationsections_memo/0/location_id}})]">(#GET{tab_locationsections_memo/0/location_caption}|ucfirst)</a>]
-[ &gt; <strong class="on">(#GET{tab_locationsections/0/location_caption,#GET{tab_sections/0/section_caption}}|ucfirst)</strong>]
+	&gt; <a href="#URL_PMB_CATALOGUE"><:pmb:catalogue:></a>
+  
+	<BOUCLE_ariane_lieu(PMB:LIEUX){id_location}>
+	[ &gt; <strong class="on">(#TITRE)</strong>]
+	</BOUCLE_ariane_lieu>
+
+	<BOUCLE_ariane_parent(PMB:LIEUX){id_location=#ENV{id_location_memo}}>
+	[ &gt; <a href="#URL_PMB_CATALOGUE{#ID_LOCATION}">(#TITRE)</a>]
+	</BOUCLE_ariane_parent>
+
+	<BOUCLE_ariane_section_parente(PMB:SECTIONS){id_section=#ENV{id_section_memo}}>
+	[ &gt; <a href="[(#URL_PMB_CATALOGUE
+		|parametre_url{id_location_memo,#ENV{id_location_memo}}
+		|parametre_url{id_section,#ENV{id_section_memo}})]">(#TITRE)</a>]
+	</BOUCLE_ariane_section_parente>
+	
+	<BOUCLE_ariane_section(PMB:SECTIONS){id_section}>
+	[ &gt; <strong class="on">(#TITRE)</strong>]
+	</BOUCLE_ariane_section>
 </p>
 
 <div class="cartouche">
-	[(#GET{tab_sections/0/section_image}|oui)
-		[(#GET{tab_sections/0/section_image}|contient{rayonnage}|non)
-			[(#GET{tab_sections/0/section_image}
-				|copie_locale{force}
-				|image_reduire{200,200}
-				|inserer_attribut{class,spip_logos})]
-		]
+	#SET{titre_pour_recherche,''}
+	<BOUCLE_section_image(PMB:SECTIONS){id_section}>
+	[(#IMAGE|oui)
+		[(#IMAGE|copie_locale{force}
+			|image_reduire{200,200}
+			|inserer_attribut{class,spip_logos})]
 	]
+	#SET{titre_pour_recherche,#TITRE}
+	</BOUCLE_section_image>
 
 	<h1 class="h1">
-		[(#GET{tab_locationsections/0/location_caption}|ucfirst
-			|sinon{[(#GET{tab_locationsections_memo/0/location_caption}|ucfirst) / ][(#GET{tab_sections/0/section_caption}|ucfirst)]}
-			|sinon{<:pmb:catalogue:>})]
+	<BOUCLE_titre_lieu(PMB:LIEUX){id_location}>#TITRE</BOUCLE_titre_lieu>
+		<BOUCLE_titre_location_parente(PMB:LIEUX){id_location=#ENV{id_location_memo}}>#TITRE</BOUCLE_titre_location_parente>
+		<BOUCLE_titre_section(PMB:SECTIONS){id_section}> / #TITRE</BOUCLE_titre_section>
+			<:pmb:catalogue:>
+		<//B_titre_section>
+	<//B_titre_lieu>
 	</h1>
-	
 </div>
 
 
 
-<INCLURE{fond=inclure/inc-pmb_catalogue}{env}
-	{tab_locationsections=#GET{tab_locationsections}}
-	{tab_sections=#GET{tab_sections}}
-	{tab_locationsections_memo=#GET{tab_locationsections_memo}}
->
+<INCLURE{fond=inclure/inc-pmb_catalogue}{env}{titre_pour_recherche=#GET{titre_pour_recherche}}>
 

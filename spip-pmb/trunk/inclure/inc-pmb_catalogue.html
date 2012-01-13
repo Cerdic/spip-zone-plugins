@@ -3,33 +3,57 @@
 	largeur=...
 ]
 
+[(#REM)
+
+	On affiche les lieux racines (si ni id_location, ni id_section n'est present)
+	Sinon, les sous sections d'une section,
+	Sinon, les sections d'un lieu...
+
+]
 <B_lieux>
 <div class="liste menu articles">
 	<ul class="liste-items">
-	<BOUCLE_lieux(PMB:LIEUX){id_location ?}{id_section ?}>
-		
-		[(#SET{url,[(#URL_PMB_CATALOGUE|parametre_url{id_location,#ID_LOCATION})]})]
-
+	<BOUCLE_lieux(PMB:LIEUX){si (#ENV{id_location}|non|et{#ENV{id_section}|non})}>
 		<li class="item">
-			<a href="#GET{url}">
+			<a href="#URL_PMB_CATALOGUE{#ID_LOCATION}">
 				[(#CHEMIN{img/logo-localisation.png}
-					|image_reduire{#ENV{largeur,0},#ENV{hauteur,50}}
+					|image_reduire{#ENV{largeur,30},#ENV{hauteur,30}}
 					|inserer_attribut{class,spip_logos})]
 			</a>
-
-			<h3><a href="#GET{url}">#TITRE</a></h3>
+			<h3><a href="#URL_PMB_CATALOGUE{#ID_LOCATION}">#TITRE</a></h3>
 		</li>
 	</BOUCLE_lieux>
 	</ul>
 </div>
 </B_lieux>
 
+<B_sections>
+<div class="liste menu articles">
+	<ul class="liste-items">
+	<BOUCLE_sections(PMB:SECTIONS){id_location ?}{id_parent ?}>
+		[(#SET{url,[(#URL_PMB_CATALOGUE
+			|parametre_url{id_section,#ID_SECTION}
+			|parametre_url{id_location_memo,#ENV{id_location_memo,#ENV{id_location}}}
+			|parametre_url{id_section_memo,#ENV{id_section}})]})]
+
+		<li class="item">
+			<a href="#GET{url}">
+			[(#IMAGE|sinon{#CHEMIN{img/logo-section.png}}
+				|image_reduire{#ENV{largeur,30},#ENV{hauteur,30}}
+				|inserer_attribut{class,spip_logos})]
+			</a>
+			<h3><a href="#GET{url}">#TITRE</a></h3>
+		</li>
+	</BOUCLE_sections>
+	</ul>
+</div>
+</B_sections>
+
 [(#REM)
 	Si on est dans une section,
 	on affiche ses notices et la recherche
 ]
 [(#ENV{id_section}|oui)
-
 	[(#INCLURE{fond=inclure/inc-recherche-pmb_catalogue}{env}
 		{ajax}
 		{rechercher=#ENV{recherche}}
@@ -38,51 +62,10 @@
 		{look_COLLECTION}{look_SUBCOLLECTION}
 		{look_CATEGORY}{look_INDEXINT}
 		{look_KEYWORDS}{look_TITLE}{look_ABSTRACT}
-		{id_section}{id_location_memo}
+		{id_section}{id_location_memo}{id_section_memo}
 		{typdoc}
 		{debut}{fin} )]
 
 	<INCLURE{fond=inclure/inc-recherche-avancee}{recherche}{env}>
 
 ]
-
-
-[(#REM) la valeur 0 contient des infos ininterressantes. ]
-#SET{tab,#ENV{tab_locationsections}|depile}
-
-[(#REM) Si pas d'info de location + section, on tente juste section ]
-[(#GET{tab}|count|non)
-	#SET{tab,#ENV{tab_sections}|depile}
-]
-
-[(#REM) Une location et ses sections OU uniquement les sections ]
-<B_tab_resultat2>
-<div class="liste menu articles">
-	<h2 class="invisible"><:articles_rubrique:></h2>
-	<ul class="liste-items">
-	<BOUCLE_tab_resultat2(POUR){tableau #GET{tab}}>
-		[(#SET{url,[(#URL_PMB_CATALOGUE
-			|parametre_url{id_section,#GET{tab/#CLE/section_id}}
-			|parametre_url{id_location_memo,#GET{tab/#CLE/section_location}})]})]
-	
-		<li class="item">
-			<a href="#GET{url}">
-			[(#GET{tab/#CLE/section_image}|contient{rayonnage}|non)
-				[(#GET{tab/#CLE/section_image}
-					|image_reduire{#ENV{largeur,100},#ENV{hauteur,0}}
-					|inserer_attribut{class,spip_logos})]
-			]
-			[(#GET{tab/#CLE/section_image}|contient{rayonnage}|oui)
-				[(#CHEMIN{img/logo-section.png}
-					|image_reduire{#ENV{largeur,0},#ENV{hauteur,50}}
-					|inserer_attribut{class,spip_logos})]
-			]
-			</a>
-			<h3><a href="#GET{url}">[(#GET{tab/#CLE/section_caption}|ucfirst)]</a></h3>
-		</li>
-	</BOUCLE_tab_resultat2>
-	</ul>
-</div>
-</B_tab_resultat2>
-
-

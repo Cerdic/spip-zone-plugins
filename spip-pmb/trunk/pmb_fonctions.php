@@ -59,60 +59,6 @@ function depile($tableau, $cle=null) {
 }
 
 
-function pmb_section_extraire($id_section) {
-	$tableau_sections = Array();
-	try {
-		//récupérer les infos sur la section parent
-		$ws = pmb_webservice();
-		$section_parent = $ws->pmbesOPACGeneric_get_section_information($id_section);
-		$tableau_sections[0] = Array();
-		$tableau_sections[0]['section_id'] = $section_parent->section_id;
-		$tableau_sections[0]['section_location'] = $section_parent->section_location;
-		$tableau_sections[0]['section_caption'] = $section_parent->section_caption;
-		$tableau_sections[0]['section_image'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section_parent->section_image;
-
-		$tab_sections = $ws->pmbesOPACGeneric_list_sections($id_section);
-		pmb_extraire_sections_infos($tableau_sections, $tab_sections);
-	} catch (Exception $e) {
-		 echo 'Exception reçue (1): ',  $e->getMessage(), "\n";
-	}
-	return $tableau_sections;
-}
-
-
-function pmb_location_extraire($id_location) {
-	$tableau_locationsections = Array();
-	try {
-		$ws = pmb_webservice();
-		$tab_locations = $ws->pmbesOPACGeneric_get_location_information_and_sections($id_location);
-		//récupérer les infos sur la localisation parent
-		$tableau_locationsections[0] = Array();
-		$tableau_locationsections[0]['location_id'] = $tab_locations->location->location_id;
-		$tableau_locationsections[0]['location_caption'] = $tab_locations->location->location_caption;
-
-		pmb_extraire_sections_infos($tableau_locationsections, $tab_locations->sections);
-	} catch (Exception $e) {
-		echo 'Exception reçue (2) : ',  $e->getMessage(), "\n";
-	}
-	return $tableau_locationsections;
-}
-
-
-function pmb_extraire_sections_infos(&$tableau, $sections) {
-	$cpt = 1;
-	if (is_array($sections)) {
-		foreach ($sections as $section) {
-			$tableau[$cpt] = Array();
-			$tableau[$cpt]['section_id']		= $section->section_id;
-			$tableau[$cpt]['section_location']	= $section->section_location;
-			$tableau[$cpt]['section_caption']	= $section->section_caption;
-			$tableau[$cpt]['section_image']		= lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section->section_image;
-			$cpt++;
-		}
-	}
-}
-
-
 
 
 /**
@@ -135,10 +81,10 @@ function pmb_extraire_locations_racine() {
 		$r = $ws->pmbesOPACGeneric_list_locations();
 		if (is_array($r)) {
 			foreach ($r as $index => $location) {
-				$locations[$index] = Array();
-				$locations[$index]['id_location'] = $location->location_id;
-				$locations[$index]['titre'] = $location->location_caption;
-				$locations[$index]['type'] = "racine";
+				$locations[] = array(
+					'id_location' => $location->location_id,
+					'titre'       => $location->location_caption,
+				);
 			}
 		}
 	} catch (Exception $e) {
@@ -148,32 +94,186 @@ function pmb_extraire_locations_racine() {
 }
 
 
+/**
+ * Petite fonction d'aide pour recuperer d'une liste de tableaux
+ * les valeurs compilees d'une cle de ces tableaux
+ * 
+ * entree :
+ * 		tab[0][cle] = [n] (tableau...)
+ * 		tab[1][cle] = [n]
+ * 		tab[i][cle] = [n]
+ * 
+ * sortie :
+ * 		tab[n] (merge de tous les tableaux [n])
+ *
+**/
+function pmb_get_enfants($tableau, $cle) {
+	$enfants = array();
+	foreach ($tableau as $t) {
+		if (isset($t[$cle]) and is_array($t[$cle])) {
+			$enfants = array_merge($enfants, $t[$cle]);
+		}
+	}
+	return $enfants;
+}
 
+/**
+ * Retourne la liste de tous les rayonnages d'un lieu racine
+ *
+ * @param array $ids_location
+ * 		Les parents
+ * 
+ * @return array
+ * 		Tableau contenant pour chaque section la liste des champs
+ * 		que l'on a pu recuperer.
+**/
+function pmb_extraire_sections_depuis_locations_ids($ids_location) {
+	if (!is_array($ids_location)) {
+		return array();
+	}
 
+	// retrouver les infos en cache
+	list($res, $wanted) = pmb_cacher('locations', $ids_location);
 
-/* aucune occurrence ? */
-function pmb_notices_section_extraire($id_section, $debut=0, $fin=5) {
-	$tableau_resultat = Array();
-	
-	$search = array();
-	$search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);
+	// si on a tout trouve, on s'en va...
+	// avec juste les sections !
+	if (!count($wanted)) {
+		return pmb_get_enfants($res, 'sections');
+	}
+
 
 	try {
 		$ws = pmb_webservice();
-		$r=$ws->pmbesOPACAnonymous_advancedSearch($search);
-		$searchId=$r["searchId"];
-		$nb = $r["nbResults"];
-		//$r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,$debut,$fin,"serialized_unimarc","utf-8");
-		$r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArray($searchId,$debut,$fin,"utf-8");
-		if (is_array($r)) {
-			$tableau_resultat = array_map('pmb_ws_parser_notice', $r);
-		}
-		array_unshift($tableau_resultat, array('nb_resultats' => $nb));
-	} catch (Exception $e) {
-		 echo 'Exception reçue (4) : ',  $e->getMessage(), "\n";
-	} 
+		foreach ($wanted as $id_location) {
+			$r = $ws->pmbesOPACGeneric_get_location_information_and_sections($id_location);
+			if ($r) {
+				
+				//infos de la location
+				//récupérer les infos sur la localisation parent
+				$l = array();
+				$l['id_location_parent'] = $r->location->location_id;
+				$l['titre_parent'] = $r->location->location_caption;
+				$l['sections'] = array();
+				
+				if (count($r->sections)) {
+					foreach ($r->sections as $section) {
+						// enlever l'image par defaut
+						$l['sections'][] = $s = pmb_extraire_section($section);
+						// on ne met pas en cacheces sections ci
+						// parce qu'on ne sait pas si elles ont ou non des enfants...
+						// on laissera pmb_extraire_sections_depuis_sections_ids decider...
+						#pmb_cacher('sections', $section->section_id, $s, true);
+					}
+				}
 
-	return $tableau_resultat;
+				$key = array_search($id_location, $ids_location);
+				if ($key !== false) {
+					$res[$key] = $l;
+					pmb_cacher('locations', $id_location, $l, true);
+				}
+			}
+		}
+
+	} catch (Exception $e) {
+		 echo 'Exception reçue (2) : ',  $e->getMessage(), "\n";
+	}
+
+	// on part avec juste les sections...
+	// c'est a dire les locations enfants... hum...
+	return pmb_get_enfants($res, 'sections');
+}
+
+
+/**
+ * Retourne la liste de tous les sous rayonnages d'un rayonnage...
+ *
+ * @param array $ids_section
+ * 		Les parents
+ * 
+ * @return array
+ * 		Tableau contenant pour chaque section la liste des champs
+ * 		que l'on a pu recuperer.
+**/
+function pmb_extraire_sections_depuis_sections_ids($ids_section) {
+	$res = pmb_extraire_sections_ids($ids_section);
+	return pmb_get_enfants($res, 'sections');
+}
+
+
+
+/**
+ * Retourne les rayonnages demandes...
+ *
+ * @param array $ids_section
+ * 		Les demandes
+ * 
+ * @return array
+ * 		Tableau contenant pour chaque section la liste des champs
+ * 		que l'on a pu recuperer.
+**/
+function pmb_extraire_sections_ids($ids_section) {
+	if (!is_array($ids_section)) {
+		return array();
+	}
+
+	// retrouver les infos en cache
+	list($res, $wanted) = pmb_cacher('sections', $ids_section);
+
+	// si on a tout trouve, on s'en va...
+	if (!count($wanted)) {
+		return $res;
+	}
+
+	try {
+		$ws = pmb_webservice();
+		foreach ($wanted as $id_section) {
+			// recherche de la section
+			$r = $ws->pmbesOPACGeneric_get_section_information($id_section);
+			if ($r) {
+				$s = pmb_extraire_section($r);
+				// recherche de sous sections
+				$sections = $ws->pmbesOPACGeneric_list_sections($id_section);
+				if (count($sections)) {
+					foreach ($sections as $section) {
+						$s['sections'][] = $ss = pmb_extraire_section($section);
+						#pmb_cacher('sections_simples', $ss['id_section'], $ss, true);
+					}
+				}
+
+				$key = array_search($id_section, $ids_section);
+				if ($key !== false) {
+					$res[$key] = $s;
+					// on met en cache lorsqu'on est sur d'avoir calcule
+					// d'eventuelles sous_sections.
+					pmb_cacher('sections', $id_section, $s, true);
+				}
+			}
+		}
+
+	} catch (Exception $e) {
+		 echo 'Exception reçue (2) : ',  $e->getMessage(), "\n";
+	}
+
+	return $res;
+}
+
+
+
+/**
+ * Retourne des petites infos sur les sections issues de requetes a pmb 
+ *
+ * @param 
+ * @return 
+**/
+function pmb_extraire_section($section) {
+	// enlever l'image par defaut
+	$image = (false !== strpos($section->section_image,'rayonnage') ? '' : $section->section_image);
+	$s = array(
+		'id_section'   => $section->section_id,
+		'titre'        => $section->section_caption,
+		'image'        => $image,
+	);
+	return $s;
 }
 
 
@@ -330,7 +430,7 @@ function pmb_extraire_auteurs_ids($ids_auteur) {
 				$key = array_search($id_auteur, $ids_auteur);
 				if ($key !== false) {
 					$res[$key] = $a;
-					pmb_cacher('notices', $id_auteur, $a, true);
+					pmb_cacher('auteurs', $id_auteur, $a, true);
 				}
 			}
 		}
@@ -366,15 +466,20 @@ function pmb_ids_notices_recherches($demande, &$nbTotal, $debut=0, $nombre=5, $p
 	
 	$recherche   = $demande['recherche'];
 	$id_section  = $demande['id_section'];
+	$id_section_parent  = $demande['id_section_parent'];
 	$id_location = $demande['id_location'];
+	
+	if ($id_section_parent) {
+		$id_location = $id_section_parent; // a n'y rien comprendre...
+	}
+	
 	$typdoc      = $demande['type_document'];
 	$look        = $demande['look'];
 	if (!$look) $look = array();
 	$look = array_flip($look);
 	$tous = true;
 
-	
-	
+
 	// si tout coche
 	if (isset($look['ALL'])) {
 		$tous = true;

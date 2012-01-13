@@ -233,6 +233,15 @@ function critere_PMB_racine_dist($idb, &$boucles, $crit) {
 }
 
 /**
+ * Modifier le critere id_parent pour la boucle PMB:SECTIONS
+ */
+function critere_PMB_SECTIONS_id_parent_dist($idb, &$boucles, $crit) {
+	$id_section = kwote(calculer_argument_precedent($idb, 'id_section', $boucles));
+	$c = array("'='", "id_parent", $id_section);
+	$boucles[$idb]->where[] = $c;
+}
+
+/**
  *
  * Selectionne les notices demandees
  * et retourne un tableau des elements parsees
@@ -258,7 +267,7 @@ function critere_PMB_racine_dist($idb, &$boucles, $crit) {
  */
 function inc_pmb_notices_select_dist(&$command, $iterateur) {
 	$criteres = $command['where'];
-	
+
 	// on peut fournir une liste l'id
 	// ou egalement un critere id=x
 	$ids = array();
@@ -289,20 +298,14 @@ function inc_pmb_notices_select_dist(&$command, $iterateur) {
 	}
 
 	// id_auteur : trouver les notices d'un auteur
-	if ($id = pmb_critere_valeur($criteres, 'id_auteur')) {
-		foreach ($id as $id_auteur) {
-			// tout le temps sauf si IN
-			if (!is_array($id_auteur)) {
-				$id_auteur = array($id_auteur);
+	if ($ids_auteur = pmb_critere_valeur($criteres, 'id_auteur')) {
+		$auteurs = pmb_extraire_auteurs_ids($ids_auteur);
+		if ($auteurs) {
+			$n = array();
+			foreach ($auteurs as $a) {
+				$n = array_unique(array_merge($n, $a['ids_notice']));
 			}
-			$auteurs = pmb_extraire_auteurs_ids($id_auteur);
-			if ($auteurs) {
-				$n = array();
-				foreach ($auteurs as $a) {
-					$n = array_unique(array_merge($n, $a['ids_notice']));
-				}
-				$ids = pmb_intersect_ids($ids, $n);
-			}
+			$ids = pmb_intersect_ids($ids, $n);
 		}
 		unset($auteurs);
 	}
@@ -350,18 +353,25 @@ function inc_pmb_notices_select_dist(&$command, $iterateur) {
 		// on affine notre demande avec d'autres contraintes si elles sont presentes.
 		foreach (array(
 			'id_section' => 'id_section',
+			'id_section_memo' => 'id_section_parent',
 			'id_location_memo' => 'id_location',
 			'id_location' => 'id_location',
 			'look' => 'look') as $nom=>$requete)
 		{
 			if ($valeurs = pmb_critere_valeur($criteres, $nom)) {
-				$iterateur->exception_des_criteres($nom); 
+				$iterateur->exception_des_criteres($nom);
 				// on ajoute le premier venu...
-				$demande[$requete] = array_shift($valeurs);
+				// sauf pour look, où on veut toutes les valeurs...
+				if ($nom == 'look') {
+					$demande[$requete] = $valeur;
+				} else {
+					$demande[$requete] = array_shift($valeurs);
+				}
 			}
 		}
 
 		$idsr = pmb_ids_notices_recherches($demande, $total_resultats, $debut, $nombre, $pagination);
+
 		$ids = pmb_intersect_ids($ids, $idsr);
 		$iterateur->total = $total_resultats;
 
@@ -369,7 +379,7 @@ function inc_pmb_notices_select_dist(&$command, $iterateur) {
 
 	// retourner les notices selectionnees
 	$res = pmb_extraire_notices_ids($ids);
-
+	
 	return $res;
 }
 
@@ -420,19 +430,25 @@ function inc_pmb_auteurs_select_dist(&$command, $iterateur) {
  *
  * Selectionne les lieux de classement des notices
  * et retourne un tableau des elements parsees
- * Un lieu est au sens PMB / systeme de documentation
+ * Un lieu est au sens PMB "location"
  * 
  * - Location : c'est comme un centre de doc physique, une adresse.
  * 		1 PMB permet de gérer plusieurs Locations. On peut dire
  * 		qu'il permet de gérer un groupement de bibliotheques/centre de docs.
  *
  * - Section : C'est comme un rayonnage de centre de doc. Un theme de classement en quelque sorte.
+ * 		Une section est independante d'une location, au sens ou une meme section
+ * 		peut être presente sur plusieurs locations.
+ *
+ * En SPIP, on pourrait dire que
+ * - Location = rubriques racines,
+ * - Sections = Groupes de mots clés (hierarchiques)
  * 
  * Les centres de docs a la racine
  * (PMB:LIEUX)
  * (PMB:LIEUX) {racine}
- *
  * 
+ * (PMB:LIEUX) {id_location}
  * 
  */
 function inc_pmb_lieux_select_dist(&$command, $iterateur) {
@@ -440,29 +456,83 @@ function inc_pmb_lieux_select_dist(&$command, $iterateur) {
 
 	// racine indique... on ne s'occupe pas du reste...
 	// depuis un critere {racine}
+	/*
 	if (pmb_recherche_critere($criteres, 'racine')) {
 		// retourner les auteurs selectionnees
 		$iterateur->exception_des_criteres('racine');
 		return pmb_extraire_locations_racine();
+	}*/
+	
+	$res = pmb_extraire_locations_racine();
+
+	if (pmb_recherche_critere($criteres, 'id_location')) {
+		if (!$ids_location = pmb_critere_valeur($criteres,  'id_location')) {
+			return array();
+		}
+
+		$iterateur->exception_des_criteres('id_location');
+		foreach ($res as $c => $l) {
+			if (!in_array($l['id_location'], $ids_location)) {
+				unset($res[$c]);
+			}
+		}
+		$res = array_values($res);
 	}
 
-	$res = array();
 
-	// testons la presence de id_section ou id_location
-	// en leur absence, on boucle sur la racine.
-	$id_location = pmb_critere_valeur($criteres, 'id_location');
-	$id_section = pmb_critere_valeur($criteres,  'id_section');
-	
-	if (!$id_location and !$id_section) {
-		return pmb_extraire_locations_racine();
-	}
-
-	
 
 	return $res;
 }
 
 
+
+
+/**
+ *
+ * Selectionne les themes (sections) de classement des notices
+ * et retourne un tableau des elements parsees
+ * Un lieu est au sens PMB "location"
+ * 
+ * Les centres de docs a la racine
+ * (PMB:SECTIONS)
+ * (PMB:SECTIONS) {id_section ?} // la section
+ * (PMB:SECTIONS) {id_parent ?}  // sections enfants
+ * (PMB:SECTIONS) {id_lieu ?} // sections dans le lieu...
+ * 
+ */
+function inc_pmb_sections_select_dist(&$command, $iterateur) {
+	$criteres = $command['where'];
+
+	// on peut fournir une liste l'id
+	// ou egalement un critere id=x
+	$ids = array();
+
+	// depuis une liste
+	if (is_array($command['liste']) and count($command['liste'])) {
+		$ids = $command['liste'];
+	}
+
+	// depuis un critere id_section=x ou {id_section ?}
+	if ($id = pmb_critere_valeur($criteres, 'id_section')) {
+		$ids = pmb_intersect_ids($ids, $id);
+	}
+
+	// testons la presence de id_parent (un id_section) ou id_location
+	#$ids_location = pmb_critere_valeur($criteres, 'id_location');
+	if ($ids_parents = pmb_critere_valeur($criteres,  'id_parent')) {
+		$iterateur->exception_des_criteres('id_parent');
+		$sections = pmb_extraire_sections_depuis_sections_ids($ids_parents);
+		return $sections;
+	}
+
+	if ($ids_location = pmb_critere_valeur($criteres,  'id_location')) {
+		$iterateur->exception_des_criteres('id_location');
+		$sections = pmb_extraire_sections_depuis_locations_ids($ids_location);
+		return $sections;
+	}
+
+	return pmb_extraire_sections_ids($ids);
+}
 
 
 
@@ -539,7 +609,8 @@ function pmb_critere_valeur($criteres, $cle, $op = '=') {
 					$v = explode(',', trim($regs[3], ' ()'));
 					// enlever tous les guillemets entourants
 					foreach($v as $a=>$b) { $v[$a] = trim($b, "'"); }
-					$res[] = $v;
+					// comme c'est deja un tableau, on le merge aux resultats deja obtenus
+					$res = array_unique(array_merge($res, $v));
 				}
 			}
 
@@ -663,10 +734,15 @@ function balise_URL_PMB_NOUVEAUTES_dist($p) {
 
 /**
  * Balise URL_PMB_CATALOGUE
+ * et #URL_PMB_CATALOGUE{#ID_LOCATION}
 **/
 function balise_URL_PMB_CATALOGUE_dist($p) {
 	$page = 'pmb_catalogue';
-	$p->code = "generer_url_public('$page')";
+	if ($id_location = interprete_argument_balise(1, $p)) {
+		$p->code = "parametre_url(generer_url_public('$page'), 'id_location', $id_location)";
+	} else {
+		$p->code = "generer_url_public('$page')";
+	}
 	$p->interdire_scripts = false;
 	return $p;
 }

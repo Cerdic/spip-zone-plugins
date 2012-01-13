@@ -9,7 +9,7 @@
 	
 	<ul class="liste-items items">
 	<BOUCLE_recherche(PMB:NOTICES){rechercher}
-			{id_section ?}{id_location_memo ?}{look ?}{pagination 5}>
+			{id_section ?}{id_location_memo ?}{id_section_memo ?}{look ?}{pagination 5}>
 		[(#SET{url_ret,[(#GET{url}|parametre_url{debut,#ENV{debut}}|trim|urlencode)]})]
 		[(#INCLURE{fond=inclure/inc-notice-resume}{id}
 			{url_ret=#SELF}{surlignable=0}{compteur=#COMPTEUR_BOUCLE})]
