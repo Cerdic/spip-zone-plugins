@@ -25,34 +25,49 @@ function action_editer_ticket() {
 			include_spip('inc/headers');
 			redirige_url_ecrire();
 		}*/
-		$id_ticket = insert_ticket($id_auteur);
+		$id_ticket = ticket_inserer($id_auteur);
 	}
 
 	// Enregistre l'envoi dans la BD
-	if ($id_ticket > 0) $err = tickets_set($id_ticket);
+	if ($id_ticket > 0) $err = ticket_modifier($id_ticket);
 
 	return array($id_ticket,$err);
 }
 
 /**
  *
- * Mettre a jour une zone
+ * Mettre a jour un ticket
  *
  * @return
  * @param int $id_ticket
  *
  */
-function tickets_set($id_ticket) {
+function ticket_modifier($id_ticket, $set=null) {
 	$err = '';
 
-	$c = array();
-	foreach (array(
-		'titre', 'texte', 'severite', 'tracker', 'id_assigne', 'exemple', 'composant','jalon','version','projet','navigateur','sticked'
-	) as $champ)
-		$c[$champ] = trim(_request($champ));
-
 	include_spip('inc/modifier');
-	revision_ticket($id_ticket, $c);
+	include_spip('inc/filtres');
+	$c = collecter_requests(
+		// white list
+		objet_info('ticket','champs_editables'),
+		// black list
+		array('date','statut','id_auteur'),
+		// donnees eventuellement fournies
+		$set
+	);
+
+	$invalideur = "id='article/$id_article'";
+	$indexation = true;
+		
+	if ($err = objet_modifier_champs('ticket', $id_ticket,
+		array(
+			'nonvide' => array('titre' => _T('ticket:nouveau_ticket')." "._T('info_numero_abbreviation').$id_ticket),
+			'invalideur' => $invalideur,
+			'indexation' => $indexation,
+			'date_modif' => 'date_modif' // champ a mettre a date('Y-m-d H:i:s') s'il y a modif
+		),
+		$c))
+		return $err;
 
 	// Ajouter un document
 	if (isset($_FILES['ajouter_document'])
@@ -73,11 +88,9 @@ function tickets_set($id_ticket) {
 	suivre_invalideur("id='id_ticket/$id_ticket'");
 	
 	// Modification de statut. On ne peut passer par inc/modifier
-	$c = array();
-	foreach (array('statut') as $champ)
-		$c[$champ] = _request($champ);
-		$c['date'] = date('Y-m-d H:i:s');
-	$err .= instituer_ticket($id_ticket, $c);
+	// Modification de statut, changement de rubrique ?
+	$c = collecter_requests(array('date', 'statut', 'statut'),array(),$set);
+	$err = ticket_instituer($id_ticket, $c);
 	
 	return $err;
 }
@@ -87,7 +100,7 @@ function tickets_set($id_ticket) {
  *
  * @return int
  */
-function insert_ticket($id_auteur) {
+function ticket_inserer($id_auteur) {
 	/* Si anonyme, on ne propose pas le ticket en redaction : on ouvre aussitot en lecture
 	 * vu que l'autorisation de modifier de ticket dans instituer_ticket()
 	 * risque d'interdire l'edition ensuite si l'autorisation de creation et de modification
@@ -102,13 +115,36 @@ function insert_ticket($id_auteur) {
 	 */
 	$ip = $id_auteur ? '' : $GLOBALS['ip'];
 	$statut = intval($id_auteur) ? 'redac' : 'ouvert';
-	$id_ticket = sql_insertq("spip_tickets", array(
-		'statut' => $statut,
+	
+	$champs = array(
+		'statut' =>  $statut,
 		'date' => date('Y-m-d H:i:s'),
 		'date_modif' => date('Y-m-d H:i:s'),
 		'ip' => $ip,
-		'id_auteur' => $id_auteur));
+		'id_auteur' => $id_auteur);
+		
+	// Envoyer aux plugins
+	$champs = pipeline('pre_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_tickets',
+			),
+			'data' => $champs
+		)
+	);
+	
+	$id_ticket = sql_insertq("spip_tickets", $champs);
 
+	pipeline('post_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_tickets',
+				'id_objet' => $id_ticket
+			),
+			'data' => $champs
+		)
+	);
+	
 	return $id_ticket;
 }
 
@@ -123,7 +159,7 @@ function insert_ticket($id_auteur) {
  * @param int $id_ticket
  * @param array $c
  */
-function instituer_ticket($id_ticket, $c) {
+function ticket_instituer($id_ticket, $c) {
 	include_spip('inc/autoriser');
 	include_spip('inc/modifier');
 
@@ -207,29 +243,8 @@ function instituer_ticket($id_ticket, $c) {
 	return ''; // pas d'erreur
 }
 
-/**
- * Enregistre une revision de ticket
- *
- * @param int $id_ticket : l'identifiant numérique du ticket
- * @param array $c[optional] : un array des champs à modifier en base
- * @return
- */
-function revision_ticket($id_ticket, $c=false) {
-
-	// invalider le cache quelque soit la circonstance.
-	// une modification de base = effacer les caches.
-	$invalideur = "id='id_ticket/$id_ticket'";
-	$indexation = true;
-
-	modifier_contenu('ticket', $id_ticket,
-		array(
-			'nonvide' => array('titre' => _T('info_sans_titre')),
-			'invalideur' => $invalideur,
-			'indexation' => $indexation,
-			'date_modif' => 'date_modif' // champ a mettre a date('Y-m-d H:i:s') s'il y a modif
-		),
-		$c);
-
-	return ''; // pas d'erreur
+// Obsolete
+function revision_ticket ($id_ticket, $c=false) {
+	return ticket_modifier($id_ticket,$c);
 }
 ?>

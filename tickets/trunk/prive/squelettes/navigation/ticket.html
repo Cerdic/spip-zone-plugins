@@ -1,0 +1,6 @@
+[(#ID_TICKET|generer_info_entite{ticket,[(#VAL{ticket}|id_table_objet)],'**'}|intval|=={#ID_TICKET}|sinon_interdire_acces)]
+
+#BOITE_OUVRIR{'','info'}
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','ticket','id',#ID_TICKET}}}
+#BOITE_FERMER
+

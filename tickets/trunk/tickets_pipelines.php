@@ -25,31 +25,6 @@ function tickets_ajouter_boutons($boutons_admin) {
 	return ($boutons_admin);
 }
 
-// Menu des tickets presente a droite ou a gauche de la page
-function menu_colonne ($flux) {
-	include_spip('inc/presentation'); # pour icone_horizontale
-	
-	$ret = boite_ouvrir('','simple');
-	$ret .= icone_horizontale(_T('tickets:afficher_tickets'), generer_url_ecrire("tickets"), "ticket-24", "", false);
-	include_spip('inc/tickets_autoriser');
-	if ($flux['args']['exec'] != 'ticket_edit' && autoriser('ecrire', 'ticket')) {
-		$ret .= icone_horizontale(_T('tickets:creer_ticket'), generer_url_ecrire('ticket_edit','new=oui'), 'ticket-24.png', 'creer.gif', false);
-	}
-	$ret .= boite_fermer();
-	
-	$contexte = array('titre'=>_T('tickets:vos_tickets_en_cours'), 'id_auteur'=>$connect_id_auteur, "statut"=>"redac", 'bloc'=>'_bloc1');
-	$options = array("ajax"=>true);
-	$page = recuperer_fond('prive/contenu/inc_liste_simple', $contexte, $options);
-	$ret .= $page;
-
-	$contexte = array('titre'=>_T('tickets:tous_tickets_ouverts'), 'statut'=>'ouvert', 'bloc'=>'_bloc2');
-	$options = array('ajax'=>true);
-	$page = recuperer_fond('prive/contenu/inc_liste_simple', $contexte, $options);
-	$ret .= $page;
-
-	return $ret;
-}
-
 /**
  * Insertion dans le pipeline affiche_aguche
  * @param object $flux
@@ -61,7 +36,27 @@ function tickets_affiche_gauche ($flux) {
 	if (($exec == "ticket") OR ($exec == "ticket_edit")) {
 		$data = $flux["data"];
 
-		$ret = menu_colonne($flux);
+		include_spip('inc/autoriser');
+	
+		$ret = '';
+		
+		if ($flux['args']['exec'] != 'ticket_edit' && autoriser('ecrire', 'ticket')) {
+			include_spip('inc/presentation'); # pour icone_horizontale
+			$ret .= boite_ouvrir('','simple');
+			$ret .= icone_horizontale(_T('tickets:creer_ticket'), generer_url_ecrire('ticket_edit','new=oui'), 'ticket-24.png', 'creer.gif', false);
+			$ret .= boite_fermer();
+		}
+		
+		$contexte = array('titre'=>_T('tickets:vos_tickets_en_cours'), 'id_auteur'=>$connect_id_auteur, "statut"=>"redac", 'bloc'=>'_bloc1');
+		$options = array("ajax"=>true);
+		$page = recuperer_fond('prive/contenu/inc_liste_simple', $contexte, $options);
+		$ret .= $page;
+	
+		$contexte = array('titre'=>_T('tickets:tous_tickets_ouverts'), 'statut'=>'ouvert', 'bloc'=>'_bloc2');
+		$options = array('ajax'=>true);
+		$page = recuperer_fond('prive/contenu/inc_liste_simple', $contexte, $options);
+		$ret .= $page;
+		
 		$flux["data"] = $data.$ret;
 	}
 	return $flux;

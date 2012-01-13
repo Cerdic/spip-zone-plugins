@@ -28,7 +28,7 @@ function tickets_declarer_tables_objets_sql($tables){
 		'info_nb_objets' => 'tickets:info_ticket_nb',
 		'titre' => "titre, '' AS lang",
 		'principale' => 'oui',
-		'champs_editables' => array('titre', 'texte', 'exemple', 'descriptif','severite', 'tracker', 'composant', 'jalon','version', 'navigateur','sticked'),
+		'champs_editables' => array('titre', 'texte', 'severite', 'tracker', 'id_assigne', 'exemple', 'composant','jalon','version','projet','navigateur','sticked'),
 		'field'=> array(
 			"id_ticket"	=> "bigint(21) NOT NULL",
 			"titre"	=> "text NOT NULL",
@@ -66,8 +66,11 @@ function tickets_declarer_tables_objets_sql($tables){
 			'projet' => 3,
 			'jalon' => 3
 		),
+		'rechercher_jointures' => array(
+			'auteur' => array('nom' => 10),
+		),
 		'statut' => array(
-			 array('champ'=>'statut','publie'=>'ouvert,resolu,ferme','previsu'=>'redac','exception'=>'statut')
+			 array('champ'=>'statut','publie'=>'ouvert,resolu,ferme','previsu'=>'redac,ouvert,resolu,ferme','exception'=>'statut')
 		),
 		'statut_images' => array(
 			'redac' => 'puce-blanche.gif',

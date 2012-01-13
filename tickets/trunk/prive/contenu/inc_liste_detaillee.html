@@ -1,7 +1,7 @@
 [(#REM) Noisette d'affichage d'une liste detaillee des tickets suivant des criteres passes en arguments]
 <B_detaillee>
 #BOITE_OUVRIR{#CHEMIN_IMAGE{ticket-24.png}|balise_img{'',cadre-icone}|concat{#ENV{titre}},'simple','titrem'}
-[<div class="arial1 tranches pagination">(#PAGINATION)</div>]
+[<div class="pagination">(#PAGINATION)</div>]
 <table width="100%" class="spip">
 	<thead>
 		<tr>
@@ -15,7 +15,7 @@
 	</thead>
 	<tbody>
 	<BOUCLE_detaillee(TICKETS){par severite}{par tracker}{!par date}{pagination 10 #ENV{bloc}}{id_auteur?}{id_assigne?}{statut?}{tracker?}{jalon?}>
-		<tr class="tr_liste">
+		<tr>
 			<td style="width: 10px;"><img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"] /></td>
 			<td><b>##ID_TICKET</b></td>
 			<td><a href="[(#ID_TICKET|generer_url_entite{ticket})]">#TITRE</a></td>

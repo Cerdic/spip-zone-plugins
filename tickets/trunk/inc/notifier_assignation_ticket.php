@@ -17,7 +17,7 @@ function inc_notifier_assignation_ticket($id_ticket,$options){
 	if(lire_config('tickets/general/notification_publique') == 'on'){
 		$url_ticket = url_absolue(generer_url_entite($id_ticket,'ticket'));
 	}else{
-		$url_ticket = url_absolue(generer_url_ecrire('ticket_afficher',"id_ticket=$id_ticket"));
+		$url_ticket = url_absolue(generer_url_ecrire('ticket',"id_ticket=$id_ticket"));
 	}
 
 	$titre = trim($datas['titre']);
@@ -38,14 +38,14 @@ function inc_notifier_assignation_ticket($id_ticket,$options){
 
 	// Determiner la liste des auteurs a notifier
 	include_spip('inc/tickets_autoriser');
-	$select = array('email');
+
 	$from = array('spip_auteurs AS t1');
 	$autorises = definir_autorisations_tickets('notifier');
 	if ($autorises['statut'])
 		$where = array(sql_in('t1.statut', $autorises['statut']), 't1.email LIKE '.sql_quote('%@%'));
 	else
 		$where = array(sql_in('t1.id_auteur', $autorises['auteur']), 't1.email LIKE '.sql_quote('%@%'));
-	$query_auteurs = sql_select($select, $from, $where);
+	$query_auteurs = sql_select('email', $from, $where);
 
 	// Envoi des mails
 	while ($row_auteur = sql_fetch($query_auteurs)) {

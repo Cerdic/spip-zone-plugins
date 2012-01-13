@@ -16,7 +16,7 @@ function inc_notifier_publication_ticket($id_ticket,$statut_nouveau='',$statut_a
    	if(lire_config('tickets/general/notification_publique') == 'on'){
 		$url_ticket = url_absolue(generer_url_entite($id_ticket,'ticket'));
 	}else{
-		$url_ticket = url_absolue(generer_url_ecrire('ticket_afficher',"id_ticket=$id_ticket"));
+		$url_ticket = url_absolue(generer_url_ecrire('ticket',"id_ticket=$id_ticket"));
 	}
 
 	$titre = trim($datas['titre']);

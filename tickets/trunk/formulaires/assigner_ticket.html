@@ -6,7 +6,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			<li class="editer_assigner">
+			<li class="editer_assigner editer">
 				<label for="id_assigne"><:tickets:champ_assigner:></label>
 				<select name="id_assigne" id="id_assigne" class="text" onchange="jQuery('#validation_bouton_assigner').slideDown();">
 					<option value="0" [(#ENV{id_assigne}|=={0}|?{" selected='selected'",""})]><:tickets:no_assignation:></option>
