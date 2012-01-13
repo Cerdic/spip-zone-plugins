@@ -409,27 +409,7 @@ function inc_pmb_notices_select_dist(&$command, $iterateur) {
  * 
  */
 function inc_pmb_auteurs_select_dist(&$command, $iterateur) {
-	$criteres = $command['where'];
-	
-	// on peut fournir une liste l'id
-	// ou egalement un critere id=x
-	$ids = array();
-	
-
-	// depuis une liste
-	if (is_array($command['liste']) and count($command['liste'])) {
-		$ids = $command['liste'];
-	}
-
-	// depuis un critere id_auteur=x ou {id_auteur?}
-	if ($id = pmb_critere_valeur($criteres, 'id_auteur')) {
-		$ids = pmb_intersect_ids($ids, $id);
-	}
-
-	// retourner les auteurs selectionnees
-	$res = pmb_extraire_auteurs_ids($ids);
-
-	return $res;
+	return inc_pmb_select_abstract_dist(&$command, $iterateur, 'auteurs', 'id_auteur');
 }
 
 
@@ -447,27 +427,7 @@ function inc_pmb_auteurs_select_dist(&$command, $iterateur) {
  * 
  */
 function inc_pmb_collections_select_dist(&$command, $iterateur) {
-	$criteres = $command['where'];
-	
-	// on peut fournir une liste l'id
-	// ou egalement un critere id=x
-	$ids = array();
-	
-
-	// depuis une liste
-	if (is_array($command['liste']) and count($command['liste'])) {
-		$ids = $command['liste'];
-	}
-
-	// depuis un critere id_collection=x ou {id_collection?}
-	if ($id = pmb_critere_valeur($criteres, 'id_collection')) {
-		$ids = pmb_intersect_ids($ids, $id);
-	}
-
-	// retourner les collections selectionnees
-	$res = pmb_extraire_collections_ids($ids);
-
-	return $res;
+	return inc_pmb_select_abstract_dist(&$command, $iterateur, 'collections', 'id_collection');
 }
 
 
@@ -485,6 +445,28 @@ function inc_pmb_collections_select_dist(&$command, $iterateur) {
  * 
  */
 function inc_pmb_editeurs_select_dist(&$command, $iterateur) {
+	return inc_pmb_select_abstract_dist(&$command, $iterateur, 'editeurs', 'id_editeur');
+}
+
+
+/**
+ * Editeurs, auteurs et collections sont les memes principes
+ * on les regroupe dans une fonction d'abstraction...
+ *
+ * @param array $command
+ * 		Le tableau command de l'iterateur
+ *
+ * @param array $iterateur
+ * 		L'iterateur complet
+ *
+ * @param string $objet
+ * 		Le nom de l'objet (pluriel) ex:auteurs
+ *
+ * @param string $_id_objet
+ *		Le nom de l'identifant de l'objet 'id_auteur'
+**/ 
+// 
+function inc_pmb_select_abstract_dist(&$command, $iterateur, $objet, $_id_objet) {
 	$criteres = $command['where'];
 	
 	// on peut fournir une liste l'id
@@ -496,17 +478,17 @@ function inc_pmb_editeurs_select_dist(&$command, $iterateur) {
 		$ids = $command['liste'];
 	}
 
-	// depuis un critere id_collection=x ou {id_editeur?}
-	if ($id = pmb_critere_valeur($criteres, 'id_editeur')) {
+	// depuis un critere id_objet=x ou {id_objet?}
+	if ($id = pmb_critere_valeur($criteres, $_id_objet)) {
 		$ids = pmb_intersect_ids($ids, $id);
 	}
 
-	// retourner les collections selectionnees
-	$res = pmb_extraire_editeurs_ids($ids);
+	// retourner les objets selectionnees
+	$pmb_extraire_ids = 'pmb_extraire_' . $objet . '_ids';
+	$res = $pmb_extraire_ids($ids);
 
 	return $res;
 }
-
 
 
 
