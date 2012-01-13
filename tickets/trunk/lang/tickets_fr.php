@@ -1,9 +1,10 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-if (!defined("_ECRIRE_INC_VERSION")) return;
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/tickets/trunk/lang/
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
 	// A
 	'afficher_tickets' => 'Afficher les tickets',
 	'assignation_attribuee_a' => 'Le ticket a été assigné à @nom@.',
@@ -11,12 +12,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'assignation_modifiee' => 'Assignation mise à jour',
 	'assignation_non_modifiee' => 'Assignation non mise à jour',
 	'assignation_supprimee' => 'L\'assignation de ce ticket a été supprimée.',
+	'assigne_a' => 'Assigné à :',
 	'assignes_a' => 'Assignés à',
-	'assigne_a' => 'Assigné à&nbsp;:',
 	'autres_tickets_ouverts' => 'Les autres tickets ouverts',
 
 	// C
-	'cfg_bouton_radio_desactiver_forum_public' => "Désactiver l'utilisation des forums publics.",
+	'cfg_bouton_radio_desactiver_forum_public' => 'Désactiver l\'utilisation des forums publics.',
 	'cfg_descr_tickets' => 'Configuration du plugin Tickets pour SPIP',
 	'cfg_explication_cacher_moteurs' => 'Cache les tickets des moteurs de recherche en leur demandant de ne pas indexer leur contenus lorsqu\'ils sont affichés dans l\'espace public.',
 	'cfg_explication_composants' => 'Séparez les composants par le caractère ":".',
@@ -32,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_autorisation_webmestre' => 'Autoriser les webmestres uniquement',
 	'cfg_lbl_cacher_moteurs' => 'Cacher des moteurs de recherche',
 	'cfg_lbl_case_joindre_fichiers' => 'Autoriser à joindre un ou plusieurs fichiers aux tickets',
-	'cfg_lbl_case_notification_publique' => 'Être notifié dans l\'espace public plut&ocirc;t que dans l\'espace privé (Nécessite Zpip)',
+	'cfg_lbl_case_notification_publique' => 'Être notifié dans l\'espace public plutôt que dans l\'espace privé (Nécessite Zpip)',
 	'cfg_lbl_case_selecteur_navigateur' => 'Disposer d\'un sélecteur de navigateur dans le formulaire d\'édition de ticket',
 	'cfg_lbl_composants' => 'Composants',
 	'cfg_lbl_desactiver_public' => 'Désactiver l\'accès public',
@@ -47,43 +48,43 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_type_autorisation' => 'Méthode d\'autorisation',
 	'cfg_lbl_versions' => 'Versions',
 	'cfg_lgd_autorisation_assigner' => 'Assigner les tickets',
+	'cfg_lgd_autorisation_commenter' => 'Commenter les tickets',
 	'cfg_lgd_autorisation_ecrire' => 'Écrire les tickets',
 	'cfg_lgd_autorisation_modifier' => 'Modifier les tickets',
-	'cfg_lgd_autorisation_commenter' => 'Commenter les tickets',
 	'cfg_lgd_champs_optionnels' => 'Champs optionnels',
 	'cfg_lgd_champs_options_autres' => 'Autres options',
 	'cfg_lgd_notifs_forums' => 'Forums et notifications',
 	'cfg_titre_tickets' => 'Tickets',
-	'champ_assigner' => 'Assigner à&nbsp;:',
-	'champ_composant' => 'Composant&nbsp;:',
-	'champ_createur' => 'Créé par&nbsp;:',
-	'champ_date' => 'Date&nbsp;:',
-	'champ_date_debut' => 'À partir de&nbsp;:',
-	'champ_date_fin' => 'Jusqu\'à&nbsp;:',
+	'champ_assigner' => 'Assigner à :',
+	'champ_composant' => 'Composant :',
+	'champ_createur' => 'Créé par :',
+	'champ_date' => 'Date :',
+	'champ_date_debut' => 'À partir de :',
+	'champ_date_fin' => 'Jusqu\'à :',
 	'champ_date_modif' => 'Modifié le',
 	'champ_description' => 'Description du ticket',
-	'champ_exemple' => 'Exemple&nbsp;:',
+	'champ_exemple' => 'Exemple :',
 	'champ_fichier' => 'Joindre un fichier',
 	'champ_id' => 'Numéro',
-	'champ_id_auteur' => 'Auteur&nbsp;:',
-	'champ_id_assigne' => 'Assigné à&nbsp;:',
-	'champ_importance' => 'Importance&nbsp;:',
-	'champ_jalon' => 'Jalon&nbsp;',
+	'champ_id_assigne' => 'Assigné à :',
+	'champ_id_auteur' => 'Auteur :',
+	'champ_importance' => 'Importance :',
+	'champ_jalon' => 'Jalon ',
 	'champ_maj' => 'MAJ :',
 	'champ_maj_long' => 'Date de mise à jour',
-	'champ_navigateur' => 'Navigateur&nbsp;:',
+	'champ_navigateur' => 'Navigateur :',
 	'champ_nouveau_commentaire' => 'Nouveau commentaire',
-	'champ_projet' => 'Projet&nbsp;:',
-	'champ_recherche' => 'Recherche&nbsp;:',
-	'champ_severite' => 'Sévérité&nbsp;:',
-	'champ_statut' => 'Statut&nbsp;:',
-	'champ_sticked' => 'Épinglé&nbsp;:',
+	'champ_projet' => 'Projet :',
+	'champ_recherche' => 'Recherche :',
+	'champ_severite' => 'Sévérité :',
+	'champ_statut' => 'Statut :',
+	'champ_sticked' => 'Épinglé :',
 	'champ_texte' => 'Texte',
 	'champ_titre' => 'Résumé',
 	'champ_titre_ticket' => 'Titre du ticket',
-	'champ_type' => 'Type&nbsp;:',
-	'champ_url_exemple' => 'URL d&rsquo;exemple',
-	'champ_version' => 'Version&nbsp;:',
+	'champ_type' => 'Type :',
+	'champ_url_exemple' => 'URL d’exemple',
+	'champ_version' => 'Version :',
 	'changement_statut_mail' => 'Le statut de ce ticket a été modifié de "@ancien@" à "@nouveau@".',
 	'classement_assigne' => 'Tickets par assignation',
 	'classement_asuivre' => 'Vos tickets à suivre',
@@ -91,8 +92,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'classement_termine' => 'Tickets terminés',
 	'classement_type' => 'Tickets par type',
 	'commentaire' => 'commentaire',
-	'commentaires' => 'commentaires',
 	'commentaire_aucun' => 'Aucun commentaire',
+	'commentaires' => 'commentaires',
 	'commenter_ticket' => 'Commenter ce ticket',
 	'creer_ticket' => 'Créer un ticket',
 
@@ -104,40 +105,40 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_verifier_formulaire' => 'Vérifiez votre formulaire',
 	'explication_champ_sticked' => 'Les tickets épinglés sont toujours affichés en premier, quelque soit leur statut.',
 	'explication_description_ticket' => 'Décrivez aussi précisément que possible le besoin ou le problème rencontré.
-	Indiquez en particulier s&rsquo;il se produit systématiquement ou occasionnellement.
-	S&rsquo;il s&rsquo;agit d&rsquo;un problème d\'affichage, précisez avec quel navigateur vous le rencontrez.',
+	Indiquez en particulier s’il se produit systématiquement ou occasionnellement.
+	S’il s’agit d’un problème d\'affichage, précisez avec quel navigateur vous le rencontrez.',
 	'explication_description_ticket_ss_nav' => 'Décrivez aussi précisément que possible le besoin ou le problème rencontré.
-	Indiquez en particulier s&rsquo;il se produit systématiquement ou occasionnellement.',
+	Indiquez en particulier s’il se produit systématiquement ou occasionnellement.',
 	'explication_fichier' => 'Ajoutez un fichier à votre ticket.',
-	'explication_redaction' => 'Quand vous avez terminé la rédaction de votre ticket, sélectionnez le statut &laquo;ouvert et discuté&raquo;.',
-	'explication_url_exemple' => 'Indiquez ici l&rsquo;URL d&rsquo;une page concernée par ce ticket.',
+	'explication_redaction' => 'Quand vous avez terminé la rédaction de votre ticket, sélectionnez le statut «ouvert et discuté».',
+	'explication_url_exemple' => 'Indiquez ici l’URL d’une page concernée par ce ticket.',
 
 	// F
 	'forum_message' => 'Votre message',
-	'forum_sans_previsu' => 'Attention&nbsp;: pas de prévisualisation&nbsp;; votre message est publié immédiatement.',
+	'forum_sans_previsu' => 'Attention : pas de prévisualisation ; votre message est publié immédiatement.',
 
 	// I
+	'icone_modifier_ticket' => 'Modifier ce ticket',
+	'icone_retour_ticket' => 'Retour au ticket',
 	'info_commentaire' => 'Commentaire #@id@ :',
 	'info_document_ajoute' => 'Ajouté :',
 	'info_liste_tickets' => 'Tickets',
-	'info_numero_ticket' => 'TICKET NUMéRO&nbsp;:',
+	'info_numero_ticket' => 'TICKET NUMéRO :',
+	'info_tickets' => 'Tickets',
 	'info_tickets_ouvert' => 'ouverts et discutés',
 	'info_tickets_redac' => 'en cours de rédaction',
-	'info_tickets' => 'Tickets',
-	'icone_modifier_ticket' => 'Modifier ce ticket',
-	'icone_retour_ticket' => 'Retour au ticket',
 
 	// L
-	'label_paginer_par' => 'Paginer par&nbsp;:',
+	'label_paginer_par' => 'Paginer par :',
 	'lien_filtrer' => 'Filtrer les tickets',
 	'lien_supprimer_filtres' => 'Enlever tous les filtres',
-	
+
 	// M
 	'mail_texte_message_auto' => 'Ceci est un message automatique : n\'y repondez pas.',
 	'message_aucun_ticket_recherche' => 'Aucun ticket ne correspond à votre recherche',
 	'message_automatique' => 'Ceci est un message automatique : n\'y repondez pas.',
-	'message_poste_par' => 'Message posté par',
 	'message_le' => 'le @date@',
+	'message_poste_par' => 'Message posté par',
 	'message_publie' => 'Votre message est publié',
 
 	// N
@@ -149,7 +150,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'option_navigateur_autre' => 'Autre',
 	'option_navigateur_tous' => 'Tous les navigateurs',
-	
+
 	// P
 	'page_titre' => 'Tickets, système de suivi de bugs',
 
@@ -157,15 +158,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'revenir_gestion' => 'Revenir à la gestion des tickets',
 
 	// S
-	'sinscrire' => "S'inscrire",
 	'severite_bloquant' => 'Bloquant',
 	'severite_important' => 'Important',
 	'severite_normal' => 'Normal',
 	'severite_peu_important' => 'Peu important',
-	'statut_mis_a_jour' => 'Statut mis à jour',
+	'sinscrire' => 'S\'inscrire',
 	'statut_ferme' => 'Fermé',
 	'statut_ferme_long' => 'Tous les tickets fermés',
 	'statut_inchange' => 'Le statut n\'a pas été modifié.',
+	'statut_mis_a_jour' => 'Statut mis à jour',
 	'statut_ouvert' => 'Ouvert et discuté',
 	'statut_poubelle' => 'À la poubelle',
 	'statut_redac' => 'En cours de rédaction',
@@ -176,11 +177,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suivre_tickets_comments_rss' => 'Suivre ces commentaires par RSS',
 	'suivre_tickets_de' => 'Les tickets de @nom@',
 	'suivre_tickets_id' => 'Suivi du ticket #@id@ : @titre@',
-	'suivre_tickets_statut' => 'Les tickets ayant le ou les statuts :',
 	'suivre_tickets_rss' => 'Suivre ces tickets par RSS',
 	'suivre_tickets_rss_unique' => 'Suivre ce ticket par RSS',
+	'suivre_tickets_statut' => 'Les tickets ayant le ou les statuts :',
 	'suivre_tickets_tous' => 'Tous les tickets',
-	'syndiquer_ticket' => 'Syndiquer le ticket&nbsp;:',
+	'syndiquer_ticket' => 'Syndiquer le ticket :',
 	'syndiquer_tickets' => 'Syndiquer les tickets du site',
 
 	// T
@@ -192,7 +193,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tickets_en_cours_auteur' => 'Les tickets de @nom@ en cours de traitement',
 	'tickets_general' => 'Général',
 	'tickets_sticked' => 'Tickets épinglés',
-	'tickets_sur_inscription' => "L'écriture des tickets ou commentaires n'est possible qu'aux personnes identifiées.",
+	'tickets_sur_inscription' => 'L\'écriture des tickets ou commentaires n\'est possible qu\'aux personnes identifiées.',
 	'tickets_sur_inscription_droits' => 'Les droits dont vous disposez sont insuffisants.',
 	'tickets_traites' => 'Tous les tickets traités',
 	'tickets_tries' => 'Tickets correspondant à vos critères',
@@ -211,8 +212,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vos_tickets_assignes' => 'Les tickets qui vous sont assignés',
 	'vos_tickets_assignes_auteur' => 'Les tickets de @nom@ qui vous sont assignés',
 	'vos_tickets_en_cours' => 'Vos tickets en cours de rédaction'
-
 );
-
 
 ?>

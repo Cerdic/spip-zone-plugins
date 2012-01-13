@@ -14,12 +14,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'assignation_modifiee' => 'Zuweisung des Tickets aktualisiert',
 	'assignation_non_modifiee' => 'Zuweisung des Tickets nicht aktualisiert',
 	'assignation_supprimee' => 'Die Zuweisung des Tickets wurde gelöscht.',
-	'assigne_a' => 'Zugewiesen zu:',
+	'assigne_a' => 'Zugewiesen zu:', # MODIF
 	'assignes_a' => 'Zugewiesen zu',
+	'autres_tickets_ouverts' => 'Les autres tickets ouverts', # NEW
 
 	// C
 	'cfg_bouton_radio_desactiver_forum_public' => 'Désactiver l\'utilisation des forums publics.', # MODIF
 	'cfg_descr_tickets' => 'Konfiguration des Plugins Tickets für SPIP',
+	'cfg_explication_cacher_moteurs' => 'Cache les tickets des moteurs de recherche en leur demandant de ne pas indexer leur contenus lorsqu\'ils sont affichés dans l\'espace public.', # NEW
 	'cfg_explication_composants' => 'Séparez les composants par le caractère ":".', # NEW
 	'cfg_explication_jalons' => 'Séparez les jalons par le caractère ":".', # NEW
 	'cfg_explication_projets' => 'Séparez les projets par le caractère ":".', # NEW
@@ -32,11 +34,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_autorisation_auteurs' => 'Mehrere Autoren autorisieren',
 	'cfg_lbl_autorisation_statuts' => 'Nach Autorenstatus autorisieren',
 	'cfg_lbl_autorisation_webmestre' => 'Nur Webmaster autorisieren',
+	'cfg_lbl_cacher_moteurs' => 'Cacher des moteurs de recherche', # NEW
+	'cfg_lbl_case_joindre_fichiers' => 'Autoriser à joindre un ou plusieurs fichiers aux tickets', # NEW
 	'cfg_lbl_case_notification_publique' => 'Être notifié dans l\'espace public plutôt que dans l\'espace privé (Nécessite Zpip)', # MODIF
 	'cfg_lbl_case_selecteur_navigateur' => 'Disposer d\'un sélecteur de navigateur dans le formulaire d\'édition de ticket', # NEW
 	'cfg_lbl_composants' => 'Composants', # NEW
+	'cfg_lbl_desactiver_public' => 'Désactiver l\'accès public', # NEW
 	'cfg_lbl_forums_publics' => 'Commentaires sur les tickets', # NEW
 	'cfg_lbl_jalons' => 'Jalons', # NEW
+	'cfg_lbl_joindre_fichiers' => 'Joindre un ou des fichiers', # NEW
 	'cfg_lbl_liste_auteurs' => 'Autoren der Website',
 	'cfg_lbl_notification_publique' => 'Notification publique', # NEW
 	'cfg_lbl_projets' => 'Projets', # NEW
@@ -49,31 +55,39 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lgd_autorisation_ecrire' => 'Tickets anlegen',
 	'cfg_lgd_autorisation_modifier' => 'Tickets ändern',
 	'cfg_lgd_champs_optionnels' => 'Champs optionnels', # NEW
+	'cfg_lgd_champs_options_autres' => 'Autres options', # NEW
 	'cfg_lgd_notifs_forums' => 'Forums et notifications', # NEW
 	'cfg_titre_tickets' => 'Tickets',
-	'champ_assigner' => 'Zuweisen:',
-	'champ_composant' => 'Element:',
+	'champ_assigner' => 'Zuweisen:', # MODIF
+	'champ_composant' => 'Element:', # MODIF
 	'champ_createur' => 'Créé par :', # MODIF
-	'champ_date' => 'Datum:',
+	'champ_date' => 'Datum:', # MODIF
+	'champ_date_debut' => 'À partir de :', # NEW
+	'champ_date_fin' => 'Jusqu\'à :', # NEW
 	'champ_date_modif' => 'Bearbeitet am',
 	'champ_description' => 'Beschreibung des Tickets',
-	'champ_exemple' => 'Beispiel:',
+	'champ_exemple' => 'Beispiel:', # MODIF
+	'champ_fichier' => 'Joindre un fichier', # NEW
 	'champ_id' => 'Nummmer',
-	'champ_importance' => 'Bedeutung:',
-	'champ_jalon' => 'Meilenstein:',
+	'champ_id_assigne' => 'Assigné à :', # NEW
+	'champ_id_auteur' => 'Auteur :', # NEW
+	'champ_importance' => 'Bedeutung:', # MODIF
+	'champ_jalon' => 'Meilenstein:', # MODIF
 	'champ_maj' => 'MAJ :', # NEW
 	'champ_maj_long' => 'Date de mise à jour', # NEW
 	'champ_navigateur' => 'Navigateur :', # MODIF
 	'champ_nouveau_commentaire' => 'Neuer Kommentar',
-	'champ_projet' => 'Projekt:',
-	'champ_severite' => 'Kritisch:',
-	'champ_statut' => 'Status:',
+	'champ_projet' => 'Projekt:', # MODIF
+	'champ_recherche' => 'Recherche :', # NEW
+	'champ_severite' => 'Kritisch:', # MODIF
+	'champ_statut' => 'Status:', # MODIF
+	'champ_sticked' => 'Épinglé :', # NEW
 	'champ_texte' => 'Text',
 	'champ_titre' => 'Zusammenfassung',
 	'champ_titre_ticket' => 'Ticket-Bezeichnung',
-	'champ_type' => 'Typ:',
-	'champ_url_exemple' => 'Beispiel-URL',
-	'champ_version' => 'Version',
+	'champ_type' => 'Typ:', # MODIF
+	'champ_url_exemple' => 'Beispiel-URL', # MODIF
+	'champ_version' => 'Version', # MODIF
 	'changement_statut_mail' => 'Der Status des Tickets wurde von "@ancien@" zu "@nouveau@" geändert.',
 	'classement_assigne' => 'Tickets nach Zuständigkeit',
 	'classement_asuivre' => 'Ihre Tickets in Bearbeitung',
@@ -92,33 +106,40 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_texte_longueur_mini' => 'Mindeslänge des Texts sind @nb@ Zeichen.',
 	'erreur_verifier_formulaire' => 'Überprüfen Sie das Formular',
+	'explication_champ_sticked' => 'Les tickets épinglés sont toujours affichés en premier, quelque soit leur statut.', # NEW
 	'explication_description_ticket' => 'Beschreiben Sie die Anforderung oder das Problem so genau wie möglich.
 	Geben Sie insbesondere an, ob das Problem immer oder nur gelegentlich auftritt.
-	Wenn es sich um einen Darstellungsfehler handelt, geben Sie bitte Bezeichnung und Versionsnummer Ihres Webbrowsers an.',
+	Wenn es sich um einen Darstellungsfehler handelt, geben Sie bitte Bezeichnung und Versionsnummer Ihres Webbrowsers an.', # MODIF
 	'explication_description_ticket_ss_nav' => 'Décrivez aussi précisément que possible le besoin ou le problème rencontré.
 	Indiquez en particulier s’il se produit systématiquement ou occasionnellement.', # MODIF
+	'explication_fichier' => 'Ajoutez un fichier à votre ticket.', # NEW
 	'explication_redaction' => 'Wenn Sie das Ticket fertig eingegeben haben,
-	geben Sie ihm den Status «Geöffnet und beschrieben.',
-	'explication_url_exemple' => 'Geben Sie hier den URL einer Seite mit dem Problem an.',
+	geben Sie ihm den Status «Geöffnet und beschrieben.', # MODIF
+	'explication_url_exemple' => 'Geben Sie hier den URL einer Seite mit dem Problem an.', # MODIF
 
 	// F
 	'forum_message' => 'Ihre Nachricht',
-	'forum_sans_previsu' => 'Achtung, keine Vorschau. Ihre Nachricht wird sofort veröffentlicht.',
+	'forum_sans_previsu' => 'Achtung, keine Vorschau. Ihre Nachricht wird sofort veröffentlicht.', # MODIF
 
 	// I
 	'icone_modifier_ticket' => 'Ticket ändern',
 	'icone_retour_ticket' => 'Zurück zum Ticket',
+	'info_commentaire' => 'Commentaire #@id@ :', # NEW
+	'info_document_ajoute' => 'Ajouté :', # NEW
 	'info_liste_tickets' => 'Tickets', # NEW
-	'info_numero_ticket' => 'TICKET NUMMER:',
+	'info_numero_ticket' => 'TICKET NUMMER:', # MODIF
 	'info_tickets' => 'Tickets',
 	'info_tickets_ouvert' => 'geöffnet und beschrieben',
 	'info_tickets_redac' => 'in Bearbeitung',
 
 	// L
 	'label_paginer_par' => 'Paginer par :', # MODIF
+	'lien_filtrer' => 'Filtrer les tickets', # NEW
+	'lien_supprimer_filtres' => 'Enlever tous les filtres', # NEW
 
 	// M
 	'mail_texte_message_auto' => 'Dies ist eine automatisch erstellte Nachricht: Bitte nicht beantworten.',
+	'message_aucun_ticket_recherche' => 'Aucun ticket ne correspond à votre recherche', # NEW
 	'message_automatique' => 'Dies ist eine automatisch erstellte Nachricht: Bitte nicht beantworten.',
 	'message_le' => 'am @date@',
 	'message_poste_par' => 'Nachricht gesendet von',
@@ -151,9 +172,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_inchange' => 'Der Status wurde nicht geändert.',
 	'statut_mis_a_jour' => 'Status aktualisiert',
 	'statut_ouvert' => 'Geöffnet und beschrieben',
+	'statut_poubelle' => 'À la poubelle', # NEW
 	'statut_redac' => 'In Bearbeitung',
 	'statut_resolu' => 'Erledigt',
 	'statut_resolu_long' => 'Alle erledigten Tickets',
+	'suivre_tickets_assignes_a' => 'Tickets assignés à @nom@', # NEW
+	'suivre_tickets_comments' => 'Suivi des commentaires de tickets', # NEW
+	'suivre_tickets_comments_rss' => 'Suivre ces commentaires par RSS', # NEW
+	'suivre_tickets_de' => 'Les tickets de @nom@', # NEW
+	'suivre_tickets_id' => 'Suivi du ticket #@id@ : @titre@', # NEW
+	'suivre_tickets_rss' => 'Suivre ces tickets par RSS', # NEW
+	'suivre_tickets_rss_unique' => 'Suivre ce ticket par RSS', # NEW
+	'suivre_tickets_statut' => 'Les tickets ayant le ou les statuts :', # NEW
+	'suivre_tickets_tous' => 'Tous les tickets', # NEW
 	'syndiquer_ticket' => 'Syndiquer le ticket :', # MODIF
 	'syndiquer_tickets' => 'Syndiquer les tickets du site', # NEW
 
@@ -163,12 +194,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tickets' => 'Tickets',
 	'tickets_autorisations' => 'Les autorisations', # NEW
 	'tickets_derniers_commentaires' => 'Die letzten Kommentare',
+	'tickets_en_cours_auteur' => 'Les tickets de @nom@ en cours de traitement', # NEW
 	'tickets_general' => 'Général', # NEW
+	'tickets_sticked' => 'Tickets épinglés', # NEW
 	'tickets_sur_inscription' => '
 		Nur angemeldete Benutzer können
 		Tickets anlegen.
-	',
+	', # MODIF
+	'tickets_sur_inscription_droits' => 'Les droits dont vous disposez sont insuffisants.', # NEW
 	'tickets_traites' => 'Alle bearbeiteten Tickets',
+	'tickets_tries' => 'Tickets correspondant à vos critères', # NEW
 	'titre' => 'Tickets - System zur Fehler-Nachverfolgung',
 	'titre_identification' => 'Identifikation',
 	'titre_liste' => 'Liste der Tickets',
@@ -182,6 +217,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// V
 	'vos_tickets_assignes' => 'Ihnen zugewiesene Tickets',
+	'vos_tickets_assignes_auteur' => 'Les tickets de @nom@ qui vous sont assignés', # NEW
 	'vos_tickets_en_cours' => 'Ihre Tickets in Bearbeitung'
 );
 
