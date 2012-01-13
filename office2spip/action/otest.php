@@ -76,7 +76,7 @@ function action_otest() {
 
 
 function office_load($file, $rep) {
-	if (!preg_match(',\.(docx|doc|rtf|xls|xlsx|odt)$,', $file['name'], $r))
+	if (!preg_match(',\.(docx|doc|rtf|xls|xlsx|odt|pdf)$,', $file['name'], $r))
 		return;
 
 	$ext = $r[1];
@@ -86,7 +86,16 @@ function office_load($file, $rep) {
 	AND $dst = md5_file($tmp)
 	AND rename($tmp, $rep.$dst.'.'.$ext)) {
 		# ici on pourrait job_queue
-		office_convertir($rep.$dst.'.'.$ext);
+		switch($ext) {
+			case 'pdf':
+				pdf_convertir($rep.$dst.'.'.$ext);
+				break;
+		
+			default:
+				office_convertir($rep.$dst.'.'.$ext);
+				break;
+		}
+
 		return $dst;
 	}
 }
@@ -94,6 +103,16 @@ function office_load($file, $rep) {
 
 function office_convertir($doc) {
 	exec("unoconv --format=html $doc");
+}
+
+function pdf_convertir($doc) {
+	$dir = dirname($doc);
+	$doc = basename($doc);
+	$html = preg_replace(',\.pdf$,', '.html', $doc);
+	$pwd = getcwd();
+	chdir($dir);
+	exec("pdftohtml -noframes -nodrm $doc $html");
+	chdir($pwd);
 }
 
 // securiser en demandant le secret

@@ -387,6 +387,10 @@
 		$contenu = preg_replace("/<(script|style)\b.+?<\/\\1>/i", "", $contenu);
 		$contenu = preg_replace(",[\r\n],", " ", $contenu); // Virer les retours chariot pour rendre le texte lisible - les paragaphes et br les reintroduiront la ou necessaire
 
+		# en cas de presence de nombreux insecables, les nettoyer
+		if (substr_count($contenu, '&nbsp;') > sqrt(strlen($contenu)/10)) {
+			$contenu = preg_replace(',\s*&nbsp;\s*,', ' ', $contenu);
+		}
 		return $contenu;
 	}
 

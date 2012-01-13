@@ -36,31 +36,31 @@ function _remplacer_images_texte_liees($matches) {
 		@copy($source, $dest);
 	}
 	
-	include_spip("inc/filtres");
-	$largeur = largeur($dest);
-	$hauteur = hauteur($dest);
-	$taille = filesize($dest);
+	if ($taille = @filesize($dest)) {
+		include_spip("inc/filtres");
+		$largeur = largeur($dest);
+		$hauteur = hauteur($dest);
 	
-	$id_document = sql_insertq("spip_documents", array(
-		"extension" => $terminaison,
-		"date" => "NOW()",
-		"fichier" => $url_fichier,
-		"mode" => "document",
-		"distant" => "non",
-		"maj" => "NOW()",
-		"largeur" => $largeur,
-		"hauteur" => $hauteur,
-		"taille" => $taille
-	));
-	if ($id_document > 0) {
-		sql_insertq("spip_documents_liens", array(
-			"id_document" => $id_document,
-			"id_objet" => $id_article,
-			"objet" => "article",
-			"vu" => "non"
+		$id_document = sql_insertq("spip_documents", array(
+			"extension" => $terminaison,
+			"date" => "NOW()",
+			"fichier" => $url_fichier,
+			"mode" => "document",
+			"distant" => "non",
+			"maj" => "NOW()",
+			"largeur" => $largeur,
+			"hauteur" => $hauteur,
+			"taille" => $taille
 		));
-		
-		return "<doc$id_document|$align>";
+		if ($id_document > 0) {
+			sql_insertq("spip_documents_liens", array(
+				"id_document" => $id_document,
+				"id_objet" => $id_article,
+				"objet" => "article",
+				"vu" => "non"
+			));
+			return "<doc$id_document|$align>";
+		}
 	}
 }
 
@@ -101,31 +101,32 @@ function _remplacer_images_texte($matches) {
 		@copy($source, $dest);
 	}
 	
-	include_spip("inc/filtres");
-	$largeur = largeur($dest);
-	$hauteur = hauteur($dest);
-	$taille = filesize($dest);
-	
-	$id_document = sql_insertq("spip_documents", array(
-		"extension" => $terminaison,
-		"date" => "NOW()",
-		"fichier" => $url_fichier,
-		"mode" => "image",
-		"distant" => "non",
-		"maj" => "NOW()",
-		"largeur" => $largeur,
-		"hauteur" => $hauteur,
-		"taille" => $taille
-	));
-	if ($id_document > 0) {
-		sql_insertq("spip_documents_liens", array(
-			"id_document" => $id_document,
-			"id_objet" => $id_article,
-			"objet" => "article",
-			"vu" => "non"
+	if ($taille = @filesize($dest)) {
+		include_spip("inc/filtres");
+		$largeur = largeur($dest);
+		$hauteur = hauteur($dest);
+
+		$id_document = sql_insertq("spip_documents", array(
+			"extension" => $terminaison,
+			"date" => "NOW()",
+			"fichier" => $url_fichier,
+			"mode" => "image",
+			"distant" => "non",
+			"maj" => "NOW()",
+			"largeur" => $largeur,
+			"hauteur" => $hauteur,
+			"taille" => $taille
 		));
-		
-		return "<doc$id_document|$align>";
+		if ($id_document > 0) {
+			sql_insertq("spip_documents_liens", array(
+				"id_document" => $id_document,
+				"id_objet" => $id_article,
+				"objet" => "article",
+				"vu" => "non"
+			));
+			
+			return "<doc$id_document|$align>";
+		}
 	}
 }
 
@@ -230,6 +231,15 @@ function exec_traiter_office () {
 		
 		if ($terminaison == "html") {
 			$nom_html = $nom_dest;
+		}
+		else if ($terminaison == "pdf") {
+			$doc = basename($nom_dest);
+			$dir = dirname($nom_dest);
+			$html = preg_replace(',\.pdf$,', '.html', $doc);
+			$pwd = getcwd();
+			chdir($dir);
+			exec("pdftohtml -noframes -nodrm $doc $html");
+			chdir($pwd);
 		}
 		else {
 			exec("soffice");
