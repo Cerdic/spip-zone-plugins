@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'articles_utilisant' => 'Články, ktoré používajú túto tabuľku',
+	'articles_utilisant' => 'Články, ktoré využívajú túto tabuľku',
 	'aucune_reponse' => 'Žiadne údaje',
 
 	// C
