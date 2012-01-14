@@ -9,15 +9,16 @@
 		[de]Mediathek
 		</multi>
 	</nom>
+	<prefix>medias</prefix>
+	<icon>img_pack/portfolio-64.png</icon>
 	<slogan>
 		<multi>
 			[fr]G&#233;rer vos documents de fa&#231;on centralis&#233;e
 			[en]Manage your documents in a centralized way
 		</multi>
 	</slogan>
-	<icon>img_pack/portfolio-64.png</icon>
 	<auteur>[Cedric MORIN->http://www.yterium.net], [romy.tetue.net->http://romy.tetue.net], superyms--(traduction)</auteur>
-	<version>1.6.7</version>
+	<version>1.6.8</version>
 	<version_base>0.12</version_base>
 	<etat>stable</etat>
 	<description><multi>
@@ -31,7 +32,6 @@
 	<lien>http://www.spip-contrib.net/mediatheque</lien>
 	<install>base/medias.php</install>
 	<fonctions>medias_fonctions.php</fonctions>
-	<prefix>medias</prefix>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/medias.php</inclure>

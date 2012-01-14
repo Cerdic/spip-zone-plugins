@@ -67,18 +67,20 @@ a.bouton_fermer {display:block;text-align:#GET{right};}
 
 .galerie { float: none; width: 100%; padding:0;}
 .galerie .pagination {clear:both;}
-.galerie table { width: 100%; border: none; }
+.galerie table { width: 100%; border: 0; border-collapse: collapse; border-spacing: 0; }
 .galerie table thead { background: [#(#GET{foncee}|couleur_foncer)];color:#fff; }
 .galerie table tbody tr:hover { background: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
 .galerie table td { min-height: 100px; vertical-align: top; }
-.galerie table th, .galerie table td { padding: 0.5em .3em; border-bottom: 1px solid #ccc; }
+.galerie table th,
+.galerie table td { padding: 0.5em .3em; border-bottom: 1px solid #ccc; }
 .galerie table th.id { text-align: right; }
 .galerie table td.id { width: 80px; text-align: right; vertical-align: top; line-height: normal; }
 .galerie table td.id strong { font-size: 1.6em; color: #666; font-weight: normal; }
-.galerie table td.statut { width: 9px; }
+.galerie table td.statut { width: 9px; text-align: center; }
 .galerie table td.logo { width: 250px; overflow: hidden; }
-.galerie table td.logo img { /*border: 1px solid #666;*/ }
+.galerie table td.logo img {}
 .galerie table .fichier {font-size:0.8em;width:250px;overflow:hidden;font-style:italic;}
+.galerie table .fichier img { float: left; }
 
 .galerie table td.exif { width: 140px;  }
 .galerie table td.exif small { display: inline; }
@@ -89,10 +91,6 @@ a.bouton_fermer {display:block;text-align:#GET{right};}
 .galerie table td.descriptif { }
 
 .galerie table .supprimer {display:block;font-size:0.8em;margin-top:1em;}
-
-.galerie.media-image h2 { background: url(#CHEMIN{images/media-image-32.png}) no-repeat center left; padding: 6px;padding-left: 40px;}
-.galerie.media-audio h2 { background: url(#CHEMIN{images/media-audio-32.png}) no-repeat center left; padding: 6px;padding-left: 40px;}
-.galerie.media-video h2 { background: url(#CHEMIN{images/media-video-32.png}) no-repeat center left; padding: 6px;padding-left: 40px;}
 
 .galerie table td.exif { background-repeat: no-repeat; background-position: top right; }
 

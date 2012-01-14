@@ -79,7 +79,6 @@
 	[<div class="pagination">(#PAGINATION{page})</div>]
 	<table>
 	<thead>
-		<th></th>
 		<th class="id"><:medias:id:></th>
 		<th></th>
 		<th><:medias:logo:></th>
@@ -89,27 +88,25 @@
 	</thead>
 	<BOUCLE_galerie(DOCUMENTS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?} {tri id_document,inverse}{media?}{extension?}{distant?}{brise?}{statut==#ENV{statut,.*}}{orphelins?}{titre==(#ENV{sanstitre}|?{'^$','.*'})}{pagination 10}>
 	<tr class="[(#ENV{media}|non)[ media-(#MEDIA)]]">
-		<td class='infos'>
-		[(#DISTANT|=={oui}|non)#SET{missing,#FICHIER|file_exists|non}]
-		[(#ENV{media}|non|et{#MEDIA|!={file}})[(#CHEMIN{images/media-#MEDIA|concat{-32.png}}|tag_img|inserer_attribut{alt,#VAL{medias:media_#MEDIA}|_T}|inserer_attribut{title,#VAL{medias:media_#MEDIA}|_T})]]
-		[(#GET{missing}|oui)<img src='#CHEMIN{images/document-manquant-24.png}' width='22' height='22' alt='<:medias:fichier_manquant:>' />]
-		[(#DISTANT|=={oui}|oui)<img src='#CHEMIN{images/document-distant-24.png}' width='22' height='22' alt='<:medias:fichier_distant:>' />]
-		</td>
 		<td class="id">
 			<strong>#ID_DOCUMENT</strong>
 		</td>
 		<td class='statut'>
-		[(#ID_DOCUMENT|medias_puce_statut_document{#STATUT})]
+			[(#ID_DOCUMENT|medias_puce_statut_document{#STATUT})]
 		</td>
 		<td class="logo">
-		#SET{fichier,#DISTANT|=={oui}|?{#FICHIER,#FICHIER|basename}}
-		[(#MEDIA|=={image}|oui)[
-			<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#GET{fichier})"]>(#LOGO_DOCUMENT{apercu,250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>
-		]]
-		[(#MEDIA|=={image}|non)[<div class="#EDIT{vignette} resize-250">
-			<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#GET{fichier})"]>(#LOGO_DOCUMENT{auto,250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>
-		</div>]]
-		<div class="fichier">#GET{fichier}</div>
+			#SET{fichier,#DISTANT|=={oui}|?{#FICHIER,#FICHIER|basename}}
+			[(#MEDIA|=={image}|oui)[
+				<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#GET{fichier})"]>(#LOGO_DOCUMENT{apercu,250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>
+			]]
+			[(#MEDIA|=={image}|non)[<div class="#EDIT{vignette} resize-250">
+				<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#GET{fichier})"]>(#LOGO_DOCUMENT{auto,250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>
+			</div>]]
+			<div class="fichier">
+			[(#DISTANT|=={oui}|non)#SET{missing,#FICHIER|file_exists|non}]
+			[(#GET{missing}|oui)<img src='#CHEMIN{images/document-manquant-24.png}' alt='<:medias:fichier_manquant:>' width='22' height='22' />]
+			[(#DISTANT|=={oui}|oui)<img src='#CHEMIN{images/document-distant-24.png}' alt='<:medias:fichier_distant:>' width='22' height='22' />]
+			#GET{fichier}</div>
 		</td>
 		<td class="exif">
 			[<strong class="extension">(#EXTENSION)</strong>]
