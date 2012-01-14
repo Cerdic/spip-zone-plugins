@@ -14,7 +14,6 @@
 ]
 [(#VALEUR{logo_src}|non)
 	[(#REM) pas de logo, on regarde si une image est en document joint ]
-	[(#SET{tab_docnum,[(#ID|pmb_ws_documents_numeriques)]})]
-	[(#INCLURE{fond=inclure/inc-image-doc-joint,tab_docnum=#GET{tab_docnum},env})]
+	[(#INCLURE{fond=inclure/inc-image-doc-joint,id_notice,copieimage,largeur,hauteur})]
 ]
 </BOUCLE_logo_notice>

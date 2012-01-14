@@ -135,19 +135,13 @@ function pmb_parse_unimarc_defaut($valeur, $zone, $sous_zone, $id, $element, $gr
 }
 
 
+/**
+ * Passe les \n en <br /> 
+**/
 function pmb_nettoyer_caracteres_texte($valeur) {
 	$valeur = str_replace(
 		array( "\n"),
 		array("<br />"), $valeur);
-	return $valeur;
-}
-
-
-function pmb_nettoyer_caracteres($valeur) {
-	$valeur = stripslashes($valeur);
-	$valeur = str_replace(
-		array("", "", "", "",  ""),
-		array("'", "&oelig;", "\"", "\"", "&euro;"), $valeur);
 	return $valeur;
 }
 

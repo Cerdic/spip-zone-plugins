@@ -310,20 +310,6 @@ function pmb_extraire_resultat_editeurs_id($ws_result) {
 
 
 
-/**
- * A priori du code mort...
- * Mais on le mutualise dans une fonction
- *
-**/
-function pmb_remettre_id_dans_resultats(&$tabreau_resultat, $liste_notices) {
-	if (is_array($liste_notices)) {
-		foreach($liste_notices as $cle => $notice) {
-			$tableau_resultat['notice_ids'][$cle]['id'] = $notice;
-		}
-	}
-}
-
-
 
 /**
  * Fonction d'abstraction pour mutualiser les
@@ -474,6 +460,269 @@ function pmb_extraire_resultat_auteurs_id($ws_result) {
 	$a['ids_notice']  = $r->notice_ids;
 	return $a;
 }
+
+
+
+
+
+/**
+ * Retourne la liste des notices
+ * ayant etes empruntees par les autres lecteurs
+ * ayant empruntes la ou les notices en parametres
+ *
+ * @param array identifiant(s) de notice
+ * @return array identifiant(s) de notices en relation
+**/
+function pmb_ids_notices_autres_lecteurs($ids_notice) {
+	if (!is_array($ids_notice)) {
+		$ids_notice = array($ids_notice);
+	}
+
+	$listenotices = Array();
+
+	try {
+		$ws = pmb_webservice();
+		if ($ws->pmbesOPACGeneric_is_also_borrowed_enabled()) {
+			foreach ($ids_notice as $id_notice) {
+				$r = $ws->pmbesOPACGeneric_also_borrowed($id_notice, 0);
+				if (is_array($r)) {
+					foreach ($r as $notice) {
+						$listenotices[] = $notice['notice_id'];
+					}
+				}
+			}
+			$listenotices = array_unique($listenotices);
+		}
+	}catch (Exception $e) {
+		echo 'Exception reçue (10) : ',  $e->getMessage(), "\n";
+	}
+	
+	return $listenotices;
+}
+
+
+
+/**
+ * Retourne la liste des documents d'une notice
+ *
+ * @param string $ids_notice
+ * 		Liste des identifiants de notices dont les documents sont a recuperer
+ * 
+ * @return array
+ * 		Liste des documents
+**/
+function pmb_extraire_documents_ids($ids_notice) {
+
+	// retrouver les infos en cache
+	list($res, $wanted) = pmb_cacher('documents', $ids_notice);
+
+	// si on a tout trouve, on s'en va...
+	if (!count($wanted)) {
+		return pmb_get_enfants($res, 'documents');
+	}
+	
+	try {
+		$ws = pmb_webservice();
+		foreach ($ids_notice as $id_notice) {
+			// 2e. parametre $id_session non ulitise
+			$r=$ws->pmbesNotices_listNoticeExplNums($id_notice);
+			$documents = array();
+			if (is_array($r)) {
+				foreach ($r as $document) {
+					$d = array();
+					$d['nom']         = pmb_nettoyer_caracteres($document->name);
+					$d['id_document'] = pmb_nettoyer_caracteres($document->id);
+					$d['id_notice']   = $id_notice;
+					$d['mimetype']    = pmb_nettoyer_caracteres($document->mimetype);
+					$d['image']       = (strpos($d['mimetype'],'image')!==false)?'oui':'non';
+					$d['url']         = pmb_nettoyer_caracteres($document->url);
+					$d['url_telechargement'] = pmb_nettoyer_caracteres($document->downloadUrl);
+					$documents[] = $d;
+				}
+			}
+			// remettre dans les demandes et sauver en cache
+			$key = array_search($id_notice, $ids_notice);
+			$res[$key] = array('documents'=>$documents);
+			pmb_cacher('documents', $id_notice, $res[$key], true);
+		}
+
+	} catch (Exception $e) {
+		 echo 'Exception reçue (11) : ',  $e->getMessage(), "\n";
+	} 
+
+	// si on a tout trouve, on s'en va...
+	return pmb_get_enfants($res, 'documents');
+	
+}
+
+
+/**
+ * Retourne la liste des exemplaires (item)
+ * d'une notice (identifiant d'un ouvrage/document)
+ *
+ * @param string $ids_notice
+ * 		Liste des identifiants de notices dont les exemplaires sont a recuperer
+ * 
+ * @return array
+ * 		Liste des exemplaires
+**/
+function pmb_extraire_exemplaires_ids($ids_notice) {
+	# meme fonctionnement que pmb_extraire_documents_ids()
+	if (!$ids_notice) {
+		return array();
+	}
+	$res = Array();
+
+	try {
+		$ws = pmb_webservice();
+		foreach ($ids_notice as $id_notice) {
+			// second parametre $id_session non utilise
+			$exemplaires = $ws->pmbesItems_fetch_notice_items($id_notice);
+			if (is_array($exemplaires)) {
+				foreach ($exemplaires as $exemplaire) {
+					$e = Array();
+					$e['id']               = $exemplaire->id;
+					$e['id_notice']        = $id_notice;
+					$e['code_barre']       = $exemplaire->cb;
+					$e['cote']             = $exemplaire->cote;
+					$e['id_location']      = $exemplaire->location_id;
+					$e['titre_location']   = $exemplaire->location_caption;
+					$e['id_section']       = $exemplaire->section_id;
+					$e['titre_section']    = $exemplaire->section_caption;
+					$e['statut']           = $exemplaire->statut;
+					$e['support']          = $exemplaire->support;
+					$e['situation']        = $exemplaire->situation;
+					$res[] = $e;
+				}
+			}
+		}
+	} catch (Exception $e) {
+		 echo 'Exception reçue (12) : ',  $e->getMessage(), "\n";
+	}
+	
+	return $res;
+}
+
+
+/**
+ * Retourne la liste des prets
+ * d'un auteur pmb authentifie
+ *
+ * @param string $ids_pmb_session
+ * 		Sessions pmb de/des auteurs
+ *
+ * @param int $type_pret
+ * 		Type de reponse :
+ * 		1 : les prets en cours
+ * 		0 : les prets en retard
+ * 
+ * @return array
+ * 		Liste des prets
+**/
+function pmb_extraire_prets_ids($ids_pmb_session, $type_pret=0) {
+	$ids_pmb_session = array_filter($ids_pmb_session);
+	if (!$ids_pmb_session) {
+		return array();
+	}
+	$prets = array();
+	$notices = Array();
+	$ws = pmb_webservice();
+	
+	foreach ($ids_pmb_session as $id_pmb_session) {
+		$prets = $ws->pmbesOPACEmpr_list_loans($id_pmb_session, $type_pret);
+		if (is_array($prets)) {
+			foreach ($prets as $pret) {
+				$p = array();
+				$p['id_emprunteur']             = $pret->empr_id;
+				$p['id_notice']                 = $pret->notice_id;
+				$p['id_bulletin']               = $pret->bulletin_id;
+				$p['exemplaire_id']             = $pret->expl_id;
+				$p['exemplaire_code_barre']     = $pret->expl_cb;
+				$p['exemplaire_support']        = $pret->expl_support;
+				$p['exemplaire_id_location']    = $pret->expl_location_id;
+				$p['exemplaire_titre_location'] = $pret->expl_location_caption;
+				$p['exemplaire_id_section']     = $pret->expl_section_id;
+				$p['exemplaire_titre_section']  = $pret->expl_section_caption;
+				$p['exemplaire_libelle']        = $pret->expl_libelle;
+				$p['date_debut']                = $pret->loan_startdate;
+				$p['date_retour']               = $pret->loan_returndate;
+				$notices[] = $pret->notice_id;
+				$prets[] = $p;
+			}
+		}
+	}
+	if ($prets) {
+		// on integre les informations des notices
+		$notices = pmb_extraire_notices_ids($notices);
+		// (pas tres optimise... mais y en a pas beaucoup)
+		foreach ($prets as $p) {
+			foreach ($notices as $n) {
+				if ($p['id_notice'] == $n['id_notice']) {
+					$p['notice'] = $n;
+					break;
+				}
+			}
+		}
+	}
+	return $prets;
+}
+
+/**
+ * Retourne les reservations demandes...
+ *
+ * @param array $ids_pmb_session
+ * 		Les demandes, des 'pmb_session' (table spip_auteurs_pmb)
+ * 
+ * @return array
+ * 		Tableau contenant les reservations
+ * 		Et dans 'notice' de chaque reservation
+ * 		les informations de la notice correspondante.
+**/
+function pmb_extraire_reservations_ids($ids_pmb_session) {
+	$ids_pmb_session = array_filter($ids_pmb_session);
+	if (!$ids_pmb_session) {
+		return array();
+	}
+	
+	$resas = array();
+	$notices = Array();
+	$ws = pmb_webservice();
+	
+	foreach ($ids_pmb_session as $id_pmb_session) {
+		$reservations = $ws->pmbesOPACEmpr_list_resas($id_pmb_session);
+		if (is_array($reservations)) {
+			foreach ($reservations as $reservation) {
+				$r = array();
+				$r['id_reservation']      = $reservation->resa_id;
+				$r['id_emprunteur']       = $reservation->empr_id;
+				$r['id_notice']           = $reservation->notice_id;
+				$r['id_bulletin']         = $reservation->bulletin_id;
+				$r['rank']                = $reservation->resa_rank;
+				$r['date_fin']            = $reservation->resa_dateend;
+				$r['retrait_id_location'] = $reservation->resa_retrait_location_id ;
+				$r['retrait_location']    = $reservation->resa_retrait_location;
+				$notices[] = $reservation->notice_id;
+				$resas[] = $r;
+			}
+		}
+	}
+	if ($resas) {
+		// on integre les informations des notices
+		$notices = pmb_extraire_notices_ids($notices);
+		// (pas tres optimise... mais y en a pas beaucoup)
+		foreach ($resas as $r) {
+			foreach ($notices as $n) {
+				if ($r['id_notice'] == $n['id_notice']) {
+					$r['notice'] = $n;
+					break;
+				}
+			}
+		}
+	}
+	return $resas;
+}
+
+
 
 
 /**
@@ -774,119 +1023,6 @@ function pmb_ws_parser_notice($value) {
 }
 
 
-/**
- * Retourne la liste des notices
- * ayant etes empruntees par les autres lecteurs
- * ayant empruntes la ou les notices en parametres
- *
- * @param array identifiant(s) de notice
- * @return array identifiant(s) de notices en relation
-**/
-function pmb_ws_ids_notices_autres_lecteurs($ids_notice) {
-	if (!is_array($ids_notice)) {
-		$ids_notice = array($ids_notice);
-	}
-
-	$listenotices = Array();
-
-	try {
-		$ws = pmb_webservice();
-		if ($ws->pmbesOPACGeneric_is_also_borrowed_enabled()) {
-			foreach ($ids_notice as $id_notice) {
-				$r = $ws->pmbesOPACGeneric_also_borrowed($id_notice, 0);
-				if (is_array($r)) {
-					foreach ($r as $notice) {
-						$listenotices[] = $notice['notice_id'];
-					}
-				}
-			}
-			$listenotices = array_unique($listenotices);
-		}
-	}catch (Exception $e) {
-		echo 'Exception reçue (10) : ',  $e->getMessage(), "\n";
-	}
-	
-	return $listenotices;
-}
-
-
-
-
-function pmb_ws_documents_numeriques ($id_notice, $id_session=0) {
-
-	$tresultat = Array();
-
-	try {
-		$ws = pmb_webservice();
-		$r=$ws->pmbesNotices_listNoticeExplNums($id_notice, $id_session);
-		$cpt = 0;
-		if (is_array($r)) {
-			foreach ($r as $docnum) {
-				$tresultat[$cpt] = Array();
-				$tresultat[$cpt]['name'] = str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$docnum->name))))));
-				$tresultat[$cpt]['mimetype'] = $docnum->mimetype;
-				$tresultat[$cpt]['url'] = $docnum->url;
-				$tresultat[$cpt]['downloadUrl'] = $docnum->downloadUrl;
-
-				$cpt++;
-			}
-		}
-
-	} catch (Exception $e) {
-		 echo 'Exception reçue (11) : ',  $e->getMessage(), "\n";
-	} 
-	return $tresultat;
-
-}
-
-
-/**
- * Retourne la liste des exemplaires (item)
- * d'une notice (identifiant d'un ouvrage/document)
- *
- * @param string $ids_notice
- * 		Liste des identifiants de notices dont les exemplaires sont a recuperer
- * 
- * @return array
- * 		Liste des exemplaires
-**/
-function pmb_extraire_exemplaires_ids($ids_notice) {
-	if (!$ids_notice) {
-		return array();
-	}
-	$res = Array();
-
-	try {
-		$ws = pmb_webservice();
-		foreach ($ids_notice as $id_notice) {
-			// second parametre $id_session non utilise
-			$exemplaires = $ws->pmbesItems_fetch_notice_items($id_notice);
-			if (is_array($exemplaires)) {
-				foreach ($exemplaires as $exemplaire) {
-					$e = Array();
-					$e['id']               = $exemplaire->id;
-					$e['id_notice']        = $id_notice;
-					$e['code_barre']       = $exemplaire->cb;
-					$e['cote']             = $exemplaire->cote;
-					$e['id_location']      = $exemplaire->location_id;
-					$e['titre_location']   = $exemplaire->location_caption;
-					$e['id_section']       = $exemplaire->section_id;
-					$e['titre_section']    = $exemplaire->section_caption;
-					$e['statut']           = $exemplaire->statut;
-					$e['support']          = $exemplaire->support;
-					$e['situation']        = $exemplaire->situation;
-					$res[] = $e;
-				}
-			}
-		}
-	} catch (Exception $e) {
-		 echo 'Exception reçue (12) : ',  $e->getMessage(), "\n";
-	}
-	
-	return $res;
-}
-
-
 
 /**
  * Sauve ou restaure un cache d'information
@@ -1015,127 +1151,6 @@ function pmb_ws_liste_tri_recherche() {
 
 
 /**
- * Retourne la liste des prets
- * d'un auteur pmb authentifie
- *
- * @param string $ids_pmb_session
- * 		Sessions pmb de/des auteurs
- *
- * @param int $type_pret
- * 		Type de reponse :
- * 		1 : les prets en cours
- * 		0 : les prets en retard
- * 
- * @return array
- * 		Liste des prets
-**/
-function pmb_extraire_prets_ids($ids_pmb_session, $type_pret=0) {
-	$ids_pmb_session = array_filter($ids_pmb_session);
-	if (!$ids_pmb_session) {
-		return array();
-	}
-	$prets = array();
-	$notices = Array();
-	$ws = pmb_webservice();
-	
-	foreach ($ids_pmb_session as $id_pmb_session) {
-		$prets = $ws->pmbesOPACEmpr_list_loans($id_pmb_session, $type_pret);
-		if (is_array($prets)) {
-			foreach ($prets as $pret) {
-				$p = array();
-				$p['id_emprunteur']             = $pret->empr_id;
-				$p['id_notice']                 = $pret->notice_id;
-				$p['id_bulletin']               = $pret->bulletin_id;
-				$p['exemplaire_id']             = $pret->expl_id;
-				$p['exemplaire_code_barre']     = $pret->expl_cb;
-				$p['exemplaire_support']        = $pret->expl_support;
-				$p['exemplaire_id_location']    = $pret->expl_location_id;
-				$p['exemplaire_titre_location'] = $pret->expl_location_caption;
-				$p['exemplaire_id_section']     = $pret->expl_section_id;
-				$p['exemplaire_titre_section']  = $pret->expl_section_caption;
-				$p['exemplaire_libelle']        = $pret->expl_libelle;
-				$p['date_debut']                = $pret->loan_startdate;
-				$p['date_retour']               = $pret->loan_returndate;
-				$notices[] = $pret->notice_id;
-				$prets[] = $p;
-			}
-		}
-	}
-	if ($prets) {
-		// on integre les informations des notices
-		$notices = pmb_extraire_notices_ids($notices);
-		// (pas tres optimise... mais y en a pas beaucoup)
-		foreach ($prets as $p) {
-			foreach ($notices as $n) {
-				if ($p['id_notice'] == $n['id_notice']) {
-					$p['notice'] = $n;
-					break;
-				}
-			}
-		}
-	}
-	return $prets;
-}
-
-/**
- * Retourne les reservations demandes...
- *
- * @param array $ids_pmb_session
- * 		Les demandes, des 'pmb_session' (table spip_auteurs_pmb)
- * 
- * @return array
- * 		Tableau contenant les reservations
- * 		Et dans 'notice' de chaque reservation
- * 		les informations de la notice correspondante.
-**/
-function pmb_extraire_reservations_ids($ids_pmb_session) {
-	$ids_pmb_session = array_filter($ids_pmb_session);
-	if (!$ids_pmb_session) {
-		return array();
-	}
-	
-	$resas = array();
-	$notices = Array();
-	$ws = pmb_webservice();
-	
-	foreach ($ids_pmb_session as $id_pmb_session) {
-		$reservations = $ws->pmbesOPACEmpr_list_resas($id_pmb_session);
-		if (is_array($reservations)) {
-			foreach ($reservations as $reservation) {
-				$r = array();
-				$r['id_reservation']      = $reservation->resa_id;
-				$r['id_emprunteur']       = $reservation->empr_id;
-				$r['id_notice']           = $reservation->notice_id;
-				$r['id_bulletin']         = $reservation->bulletin_id;
-				$r['rank']                = $reservation->resa_rank;
-				$r['date_fin']            = $reservation->resa_dateend;
-				$r['retrait_id_location'] = $reservation->resa_retrait_location_id ;
-				$r['retrait_location']    = $reservation->resa_retrait_location;
-				$notices[] = $reservation->notice_id;
-				$resas[] = $r;
-			}
-		}
-	}
-	if ($resas) {
-		// on integre les informations des notices
-		$notices = pmb_extraire_notices_ids($notices);
-		// (pas tres optimise... mais y en a pas beaucoup)
-		foreach ($resas as $r) {
-			foreach ($notices as $n) {
-				if ($r['id_notice'] == $n['id_notice']) {
-					$r['notice'] = $n;
-					break;
-				}
-			}
-		}
-	}
-	return $resas;
-}
-
-
-
-
-/**
  *  tester si la session pmb est toujours active
 **/
 function pmb_tester_session($pmb_session, $id_auteur) {
@@ -1207,9 +1222,20 @@ function pmb_reserver_ouvrage($session_id, $notice_id, $bulletin_id, $location) 
 }
 
 
-function contient($texte, $findme) {
-	return (strpos($texte, $findme) !== false);
+/**
+ * Nettoyer des caracteres etranges
+ * qui proviennent des requetes de PMB... 
+ *
+ * @param string $valeur
+ * 		Chaine a nettoyer
+ * @return string
+ * 		Chaine nettoyee
+**/
+function pmb_nettoyer_caracteres($valeur) {
+	$valeur = stripslashes($valeur);
+	$valeur = str_replace(
+		array("", "", "", "",  ""),
+		array("'", "&oelig;", "\"", "\"", "&euro;"), $valeur);
+	return $valeur;
 }
-
-
 ?>

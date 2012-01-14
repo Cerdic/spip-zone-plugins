@@ -280,6 +280,7 @@ function inc_pmb_notices_select_dist(&$command, $iterateur) {
 	}
 
 	// depuis un critere id=x ou {id?}
+	// a supprimer ?
 	if ($id = pmb_critere_valeur($criteres, 'id')) {
 		$ids = pmb_intersect_ids($ids, $id);
 	}
@@ -291,7 +292,7 @@ function inc_pmb_notices_select_dist(&$command, $iterateur) {
 
 	// autres lecteurs : ceux qui ont lu ceci ont aussi emprunte cela
 	if (pmb_recherche_critere($criteres, 'autres_lecteurs')) {
-		$ids = pmb_ws_ids_notices_autres_lecteurs($ids);
+		$ids = pmb_ids_notices_autres_lecteurs($ids);
 	}
 
 	// nouveautes de la syndication
@@ -526,6 +527,28 @@ function inc_pmb_editeurs_select_dist(&$command, $iterateur) {
 function inc_pmb_exemplaires_select_dist(&$command, $iterateur) {
 	return inc_pmb_select_abstract_dist(&$command, $iterateur, 'exemplaires', 'id_notice');
 }
+
+
+
+/**
+ *
+ * Selectionne les documents d'une ou plusieurs notices
+ * et retourne un tableau des elements parsees
+ * 
+ * Liste des documents
+ * (PMB:DOCUMENTS) {id_notice}
+ * (PMB:DOCUMENTS) {id_notice}{image=oui} // s'appuie sur le mime type image/
+ * (PMB:DOCUMENTS) {id_notice}{image=non}
+ *
+ */
+function inc_pmb_documents_select_dist(&$command, $iterateur) {
+	// comme boucle_PMB_DOCUMENTS() ne fonctionne pas
+	// on annule certains criteres passes par boucle_DOCUMENTS() de mediatheque
+	$iterateur->exception_des_criteres('.mode'); // hum le .
+	$iterateur->exception_des_criteres('.taille'); // hum le .
+	return inc_pmb_select_abstract_dist(&$command, $iterateur, 'documents', 'id_notice');
+}
+
 
 
 
@@ -814,6 +837,16 @@ function pmb_interprete_argument_critere($criteres, $cle, $index) {
 
 
 
+/**
+ * Boucle PMB:DOCUMENTS
+ * eviter les traitements auto de SPIP
+ *
+ * note:mais ça marche pas (pas de prise en compte de la fonction
+ * le connect est pas teste dans spip actuellement comme pour les criteres)
+**/
+#function boucle_PMB_DOCUMENTS($id_boucle, &$boucles) {
+#	return calculer_boucle($id_boucle, $boucles);
+#}
 
 /**
  * 

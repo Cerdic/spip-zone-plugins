@@ -1,36 +1,34 @@
-[(#SET{tab_docnum, [(#ENV{id}|pmb_ws_documents_numeriques)]})]
-
 [(#REM) Portfolio : album d'images ]
-<B_tab_docnumimages>
+<B_portfolio>
 <div class="documents documents_portfolio">
 	<h2 class="h2"><:info_portfolio:></h2>
-	<BOUCLE_tab_docnumimages(POUR){tableau #GET{tab_docnum}}>
-		[(#GET{tab_docnum/#CLE/mimetype}|contient{image}|oui)[
-		<a href="(#GET{tab_docnum/#CLE/downloadUrl})" type="[(#GET{tab_docnum/#CLE/mimetype})]"[ title="(#GET{tab_docnum/#CLE/name}|attribut_html|couper{80})"]>
-			[(#GET{tab_docnum/#CLE/downloadUrl,#GET{tab_docnum/#CLE/url}}
-				|image_reduire{0,100}
-				|inserer_attribut{class,spip_logos}
-				|inserer_attribut{alt,[(#GET{tab_docnum/#CLE/name}|attribut_html|couper{80})]})]
-		</a>]]
-	</BOUCLE_tab_docnumimages>
+<BOUCLE_portfolio(PMB:DOCUMENTS){id_notice}{image=oui}>
+	[<a href="(#URL_TELECHARGEMENT)" type="#MIMETYPE"[ title="(#NAME|attribut_html|couper{80})"]>
+		[(#URL_TELECHARGEMENT|sinon{#URL}
+			|image_reduire{0,100}
+			|inserer_attribut{class,spip_logos}
+			|inserer_attribut{alt,[(#NAME|attribut_html|couper{80})]})]
+	</a>]
+</BOUCLE_portfolio>
 </div>
-</B_tab_docnumimages>
+</B_portfolio>
+
 
 [(#REM) Liste des autres documents joints ]
-<B_tab_docnumjoints>
+<B_docs>
 <div class="liste documents documents_joints">
 	<h2 class="h2"><:titre_documents_joints:></h2>
-	<ul class="liste-items">
-	<BOUCLE_tab_docnumjoints(POUR){tableau #GET{tab_docnum}}>
-		[(#GET{tab_docnum/#CLE/mimetype}|contient{image}|non)[
-		<li class="item">
+	<ul class="liste-items items">
+	<BOUCLE_docs(PMB:DOCUMENTS){id_notice}{image=non}>
+		[<li class="item">
 			<strong>
-				<a href="(#GET{tab_docnum/#CLE/downloadUrl})" title="<:bouton_telecharger:>" type="[(#GET{tab_docnum/#CLE/mimetype})]">
-					[(#GET{tab_docnum/#CLE/name,<:info_document:>})]
+				<a href="(#URL_TELECHARGEMENT)" title="<:bouton_telecharger:>" type="#MIMETYPE">
+					[(#NOM|sinon{<:info_document:>})]
 				</a>
 			</strong>
-		</li>]]
-	</BOUCLE_tab_docnumjoints>
+		</li>]
+	</BOUCLE_docs>
 	</ul>
 </div>
-</B_tab_docnumjoints>
+</B_docs>
+
