@@ -10,8 +10,6 @@ function gdocs_init() {
 	# ces valeurs sont a definir dans mes_options.php
 	# todo : les passer en CFG
 
-	defined('GDATA_USER') or define('GDATA_USER', 'recifs@gmail.com');
-	defined('GDATA_PASS') or define('GDATA_PASS', 'totoro99');
 	defined('GDATA_USER') or define('GDATA_USER', 'user@gmail.com');
 	defined('GDATA_PASS') or define('GDATA_PASS', 'xxxxx');
 
