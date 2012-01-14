@@ -9,14 +9,12 @@
 	<p class="soustitre">&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</p>
 </div>]
 
-[(#REM) ok est poste par le formulaire de recherche ]
-[(#ENV{ok}|oui)
-	[(#INCLURE{fond=inclure/inc-recherche-pmb_catalogue}
-		{env}{ajax}{rechercher=#ENV{recherche}})]
+
+[(#ENV{recherche}
+	|ou{#ENV{look}}
+	|ou{#ENV{categorie}}
+	|ou{#ENV{typedoc}}|oui)
+		[(#INCLURE{fond=inclure/inc-pmb-recherche-catalogue}{env}{ajax}{rechercher=#ENV{recherche}})]
 ]
 
-<INCLURE{fond=inclure/inc-recherche-avancee}{recherche}{env}>
-[(#ENV{look/SITE}|=={1}|oui)
-	<INCLURE{fond=inclure/inc-recherche-site}{recherche}{env}>
-]
-
+<INCLURE{fond=inclure/inc-pmb-recherche-formulaire}{recherche}{env}>

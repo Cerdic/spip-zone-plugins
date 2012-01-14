@@ -54,8 +54,7 @@
 	on affiche ses notices et la recherche
 ]
 [(#ENV{id_section}|oui)
-	[(#INCLURE{fond=inclure/inc-recherche-pmb_catalogue}{env}{ajax}{rechercher=#ENV{recherche}})]
+	[(#INCLURE{fond=inclure/inc-pmb-recherche-catalogue}{env}{ajax}{rechercher=#ENV{recherche}})]
 
-	<INCLURE{fond=inclure/inc-recherche-avancee}{recherche}{env}>
-
+	<INCLURE{fond=inclure/inc-pmb-recherche-formulaire}{recherche}{env}>
 ]
