@@ -1,13 +1,13 @@
 <plugin>
 	<nom>Guillemets typographiques</nom>
 	<prefix>typo_guillemets</prefix>
-	<icon>icon.png</icon>
+	<icon>icon/typo_guillemets.png</icon>
 	
 	<version>1.5.0</version>
 	<etat>stable</etat>
 	<categorie>edition</categorie>
 	
-	<slogan>Affecte les guillemets corespondant &#224; la langue d'affichage</slogan>
+	<slogan>Correction automatique des guillemets, selon la langue</slogan>
 	<description>Ce plugin remplace automatiquement les guillemets droits (") par les guillemets typographiques (&#171;&#187;&#8220;&#8221;&#8222;) de la langue de composition et guillemette correctement la balise <code><q></code>. Les liens automatiques <code>[->1]</code> vers des articles dont le titre contient des &#171;guillemets fran&#231;ais&#187; passent en guillemets &#8220;de second niveau&#8221;. Le remplacement, transparent pour l'utilisateur, ne modifie pas le texte mais seulement l'affichage final.</description>
 	<lien>http://www.spip-contrib.net/article1592.html</lien>
 	<auteur>[Vincent Ramos->http://www.spip-contrib.net/auteur7639.html]</auteur>
