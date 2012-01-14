@@ -1,0 +1,17 @@
+<BOUCLE_auteur(AUTEURS){id_auteur}{id_auteur=#SESSION{id_auteur}}{tous}>
+<B_auteurpmb>
+<li class="item">
+<h2><:pmb:compte_lecteur:></h2>
+<BOUCLE_auteurpmb(AUTEURS_PMB){id_auteur}>
+	[(#PMB_SESSION|oui)
+		<INCLURE{fond=inclure/inc-pmb-moncompte-lecteur-infos}{env}>
+	]
+	[(#PMB_SESSION|non)
+		<div class="texte entry-content">
+			Votre session a expir&eacute;, veuillez vous identifier de nouveau.
+		</div>
+	]
+</BOUCLE_auteurpmb>
+</li>
+</B_auteurpmb>
+</BOUCLE_auteur>
