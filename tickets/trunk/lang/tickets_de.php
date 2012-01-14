@@ -128,6 +128,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_document_ajoute' => 'Ajouté :', # NEW
 	'info_liste_tickets' => 'Tickets', # NEW
 	'info_numero_ticket' => 'TICKET NUMMER:', # MODIF
+	'info_ticket_1' => '1 ticket', # NEW
+	'info_ticket_aucun' => 'Aucun ticket', # NEW
+	'info_ticket_nb' => '@nb@ tickets', # NEW
 	'info_tickets' => 'Tickets',
 	'info_tickets_ouvert' => 'geöffnet und beschrieben',
 	'info_tickets_redac' => 'in Bearbeitung',
@@ -189,6 +192,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'syndiquer_tickets' => 'Syndiquer les tickets du site', # NEW
 
 	// T
+	'texte_ticket_statut' => 'Statut du ticket :', # NEW
 	'ticket' => 'Ticket',
 	'ticket_enregistre' => 'Ticket gespeichert',
 	'tickets' => 'Tickets',
