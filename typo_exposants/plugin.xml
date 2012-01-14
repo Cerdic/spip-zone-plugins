@@ -1,21 +1,25 @@
 <plugin>
-	<nom>Corrections typographiques (mise en exposant)</nom>
-	<version>1.0.0</version>
-	<prefix>typo</prefix>
+	<nom>Exposants typographiques</nom>
+	<prefix>typo_exposants</prefix>
+	<icon>icon/typo_exposants.png</icon>
+	
+	<version>1.0.1</version>
 	<etat>stable</etat>
-	<auteur>[Vincent Ramos->http://www.spip-contrib.net/auteur7639.html]</auteur>
-	<lien>http://www.spip-contrib.net/article1564.html</lien>
+	<categorie>edition</categorie>
+	
+	<slogan>Am&eacute;lioration typographique des abr&eacute;viations</slogan>
 	<description>
-	Ce plugin am&eacute;liore le rendu typographique d'abr&eacute;viations fr&eacute;quentes, notamment par la mise en exposant de leurs &eacute;l&eacute;ments et/ou leur correction. Il se sert d'expressions r&eacute;guli&egrave;res publi&eacute;es sur  [Spip-Contrib.net->http://www.spip-contrib.net/Filtre-typographique-exposants] par Rapha&euml;l Meyssan.
-	Les abr&eacute;viations obtenues sont conformes &agrave; celles de l'Imprimerie nationale telles qu'indiqu&eacute;es dans le {Lexique des r&egrave;gles typographiques en usage &agrave; l'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l'Imprimerie nationale, Paris, 2002).
+	Ce plugin am&eacute;liore le rendu typographique d'abr&eacute;viations fr&eacute;quentes, notamment par la mise en exposant de leurs &eacute;l&eacute;ments et/ou leur correction. Les abr&eacute;viations obtenues sont conformes &agrave; celles de l'Imprimerie nationale telles qu'indiqu&eacute;es dans le {Lexique des r&egrave;gles typographiques en usage &agrave; l'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l'Imprimerie nationale, Paris, 2002).
 	</description>
+	<lien>http://www.spip-contrib.net/article1564.html</lien>
+	<auteur>[Rapha&euml;l Meyssan->http://www.spip-contrib.net/Filtre-typographique-exposants], [Vincent Ramos->http://www.spip-contrib.net/auteur7639.html]</auteur>
 	<licence>GNU/GPL</licence>
+	
 	<pipeline>
 		<nom>post_typo</nom>
 		<action>exposants</action>
 		<inclure>typo_exposants_fonctions.php</inclure>
 	</pipeline>
-
-	<categorie>edition</categorie>
+	
 	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 </plugin>
