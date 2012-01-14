@@ -54,17 +54,7 @@
 	on affiche ses notices et la recherche
 ]
 [(#ENV{id_section}|oui)
-	[(#INCLURE{fond=inclure/inc-recherche-pmb_catalogue}{env}
-		{ajax}
-		{rechercher=#ENV{recherche}}
-		{look_ALL}
-		{look_AUTHOR}{look_PUBLISHER}
-		{look_COLLECTION}{look_SUBCOLLECTION}
-		{look_CATEGORY}{look_INDEXINT}
-		{look_KEYWORDS}{look_TITLE}{look_ABSTRACT}
-		{id_section}{id_location_memo}{id_section_memo}
-		{typdoc}
-		{debut}{fin} )]
+	[(#INCLURE{fond=inclure/inc-recherche-pmb_catalogue}{env}{ajax}{rechercher=#ENV{recherche}})]
 
 	<INCLURE{fond=inclure/inc-recherche-avancee}{recherche}{env}>
 
