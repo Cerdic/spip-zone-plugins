@@ -3,8 +3,8 @@
 <div class="documents documents_portfolio">
 	<h2 class="h2"><:info_portfolio:></h2>
 <BOUCLE_portfolio(PMB:DOCUMENTS){id_notice}{image=oui}>
-	[<a href="(#URL_TELECHARGEMENT)" type="#MIMETYPE"[ title="(#TITRE|attribut_html|couper{80})"]>
-		[(#URL_TELECHARGEMENT|sinon{#URL}
+	[<a href="(#SOURCE_TELECHARGEMENT)" type="#MIMETYPE"[ title="(#TITRE|attribut_html|couper{80})"]>
+		[(#SOURCE_TELECHARGEMENT|sinon{#SOURCE}
 			|image_reduire{0,100}
 			|inserer_attribut{class,spip_logos}
 			|inserer_attribut{alt,[(#NAME|attribut_html|couper{80})]})]
@@ -22,7 +22,7 @@
 	<BOUCLE_docs(PMB:DOCUMENTS){id_notice}{image=non}>
 		[<li class="item">
 			<strong>
-				<a href="(#URL_TELECHARGEMENT)" title="<:bouton_telecharger:>" type="#MIMETYPE">
+				<a href="(#SOURCE_TELECHARGEMENT)" title="<:bouton_telecharger:>" type="#MIMETYPE">
 					[(#TITRE|sinon{<:info_document:>})]
 				</a>
 			</strong>

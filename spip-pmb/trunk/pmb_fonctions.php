@@ -535,8 +535,8 @@ function pmb_extraire_documents_ids($ids_notice) {
 					$d['id_notice']   = $id_notice;
 					$d['mimetype']    = $document->mimetype;
 					$d['image']       = (strpos($d['mimetype'],'image')!==false)?'oui':'non';
-					$d['url']                = $document->url;
-					$d['url_telechargement'] = $document->downloadUrl;
+					$d['source']                = $document->url;
+					$d['source_telechargement'] = $document->downloadUrl;
 					$documents[] = $d;
 				}
 			}
@@ -1005,10 +1005,10 @@ function pmb_ws_parser_notice($value) {
 	$tresultat['tousliensauteurs'] = implode(', ', $tous);
 
 	// si pas de logo, mais isbn, on tente une demande a amazon
-	if (!isset($tresultat['url_logo']) OR !$tresultat['url_logo']) {
+	if (!isset($tresultat['source_logo']) OR !$tresultat['source_logo']) {
 		if (isset($tresultat['isbn']) and $tresultat['isbn']) {
 			// je me demande si un copie local de l'url d'amazon irait pas plus vite directement...
-			$tresultat['url_logo'] =
+			$tresultat['source_logo'] =
 				rtrim(lire_config("spip_pmb/url","http://tence.bibli.fr/opac"),'/')
 				 . "/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode="
 				 . str_replace("-","",$tresultat['isbn']);

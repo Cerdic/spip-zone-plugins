@@ -1,8 +1,8 @@
 <BOUCLE_logo_notice(PMB:NOTICES){id_notice}>
-#SET{logo,#URL_LOGO}
+#SET{logo,#SOURCE_LOGO}
 [(#REM) sinon chercher si un document joint est une image ]
-<BOUCLE_notice_image(PMB:DOCUMENTS){id_notice}{image=oui}{0,1}{si (#URL_LOGO|non)}>
-#SET{logo,#URL_TELECHARGEMENT|sinon{#URL}}
+<BOUCLE_notice_image(PMB:DOCUMENTS){id_notice}{image=oui}{0,1}{si (#SOURCE_LOGO|non)}>
+#SET{logo,#SOURCE_TELECHARGEMENT|sinon{#SOURCE}}
 </BOUCLE_notice_image>
 
 [(#GET{logo}|oui)
