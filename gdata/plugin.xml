@@ -1,0 +1,28 @@
+<plugin>
+	<nom>GData: boucles Google
+	</nom>
+	<auteur>
+	Fil
+	</auteur>
+	<licence>
+		&#169; 2012 - GNU/GPL
+	</licence>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Faire des boucles sur des données google (google documents)
+	</description>
+	<prefix>
+	gdata
+	</prefix>
+	<icon>gdata.png</icon>
+	<!-- <lien>http://www.spip-contrib.net/Plugin-GData</lien> -->
+	<chemin dir='' />
+	<fonctions>gdata_fonctions.php</fonctions>
+	<categorie>outil</categorie>
+	<necessite id="SPIP" version="[2.1.0;]" />
+</plugin>

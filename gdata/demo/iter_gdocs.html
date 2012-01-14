@@ -1,0 +1,25 @@
+#CACHE{0}
+
+<h1>Google Docs</h1>
+
+<B_gdocs>
+	[<p class="pagination">(#PAGINATION)</p>]
+<BOUCLE_gdocs(DATA) {source gdocs} {!par date}
+{pagination 1}>
+
+[<h1>(#VALEUR{title}|typo)</h1>]
+
+[<a href="(#VALEUR{src})">Consulter</a>]
+
+[<p>Mise à jour: <b>(#VALEUR{date}|affdate)</b></p>]
+
+
+<blockquote>
+[(#VALEUR{src}|gdocs_contenu|replace{^.*<body>})]
+</bolckquote>
+
+<hr />
+
+</BOUCLE_gdocs>
+
+
