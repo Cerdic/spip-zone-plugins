@@ -72,7 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_module_traduit_pc' => 'Module translated at @pc@%',
 	'info_module_traduit_pc_lang' => 'Module "@module@" translated at @pc@% in @lang@ (@langue_longue@)',
 	'info_modules_priorite_traduits_pc' => 'The modules of priority "@priorite@" are @pc@% translated in @lang@',
-	'info_nb_items_module' => '@nb@ items in the module "@module@"', # MODIF
+	'info_nb_items_module' => '@nb@ items in the module "@module@"',
 	'info_nb_items_module_modif' => '@nb@ items of the module "@module@" are modified and to verify in @lang@ (@langue_longue@)"',
 	'info_nb_items_module_modif_aucun' => 'No item of the module "@module@" is modified and to verify in @lang@ (@langue_longue@)',
 	'info_nb_items_module_modif_un' => 'An item of the module "@module@" is modified and to verify in @lang@ (@langue_longue@)"',
@@ -158,8 +158,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_traduction_vers' => ' to ',
 	'lien_trier_langue_non' => 'Show the global balance.',
 	'lien_utiliser_google_translate' => 'Use this version',
-	'lien_voir_bilan_lang' => 'Voir le bilan de la langue @langue_longue@ (@lang@)', # NEW
-	'lien_voir_bilan_module' => 'Voir le bilan du module @nom_mod@ - @module@', # NEW
+	'lien_voir_bilan_lang' => 'Display the language balance @langue_longue@ (@lang@)',
+	'lien_voir_bilan_module' => 'Display the module balance @nom_mod@ - @module@',
 	'lien_voir_toute_chaines_module' => 'See all the strings of the module.',
 
 	// M
