@@ -9,7 +9,7 @@
 	]
 	
 	[(#ENV{afficher_logo}|=={oui}|oui)
-		[(#INCLURE{fond=inclure/pmb-inc-logo, id_notice, largeur=130})]
+		[(#INCLURE{fond=inclure/inc-pmb-notice-logo, id_notice, largeur=130})]
 	]
 
 	[(#ENV{afficher_resume}|=={oui}|oui)
@@ -59,7 +59,7 @@
 ]
 
 [(#ENV{afficher_autreslecteurs}|=={non}|non)
-	[(#INCLURE{fond=inclure/inc-autreslecteurs,env,id_notice,ajax,ajaxload})]
+	[(#INCLURE{fond=inclure/inc-pmb-notices-autres-lecteurs,env,id_notice,ajax,ajaxload})]
 ]
 
 

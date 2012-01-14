@@ -31,6 +31,8 @@
 
 
 
-<INCLURE{fond=inclure/inc-noticesconsultees}{env}>
+<INCLURE{fond=inclure/inc-pmb-notices-consultees}{env}>
 
-<INCLURE{fond=inclure/inc-lienpmb}>
+[(#CONFIG{spip_pmb/pmb_logo,oui}|=={oui}|oui)
+	<INCLURE{fond=inclure/inc-pmb-lien}>
+]

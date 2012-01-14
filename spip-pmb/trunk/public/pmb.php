@@ -967,7 +967,7 @@ function pbm_balise_url($p, $champ, $page) {
  * Pour afficher dans une boucle notices avec {pagination}
  * "Résultats de x à y sur z ouvrages"
 **/
-function balise_PMB_AFFICHE_INFOS_NOMBRE_dist($p) {
+function balise_PMB_NOMBRE_RESULTATS_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	
 	$pas = $p->boucles[$b]->total_parties;
@@ -975,7 +975,7 @@ function balise_PMB_AFFICHE_INFOS_NOMBRE_dist($p) {
 	$nb = "(isset(\$Numrows['$b']['grand_total']) ? \$Numrows['$b']['grand_total'] : \$Numrows['$b']['total'])";
 
 	$p->boucles[$b]->numrows = true;
-	$p->code = "recuperer_fond('inclure/inc-affiche_infos_nombre', array(
+	$p->code = "recuperer_fond('inclure/inc-pmb-nombre-resultats', array(
 		'resultats' => $nb,
 		'debut' => _request('debut' . $type),
 		'fin' => $pas))";
