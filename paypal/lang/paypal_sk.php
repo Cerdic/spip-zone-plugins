@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'api_prod' => 'Výroba API',
-	'api_test' => 'Test API',
+	'api_test' => 'Testovacia aplikácia',
 
 	// C
 	'configuration_paypal' => 'Paypal',
@@ -34,17 +34,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_account' => 'Účet (e-mail)',
 	'label_currency_code' => 'Mena',
 	'label_currency_code_eur' => 'Euro (€)',
-	'label_currency_code_usd' => 'Americký dolár (
-)',
+	'label_currency_code_usd' => 'Americký dolár ($)',
 	'label_environnement' => 'Prostredie',
 	'label_environnement_prod' => 'Výrobné prostredie',
-	'label_environnement_test' => 'Otestovať prostredie',
+	'label_environnement_test' => 'Testovacie prostredie',
 	'label_identifiant_vendeur' => 'ID predávajúceho',
-	'label_password' => 'Heslo API (heslo)',
+	'label_password' => 'Heslo aplikácie (heslo)',
 	'label_signature' => 'Podpis',
 	'label_soumission' => 'Prihlasovací formulár',
 	'label_tax' => 'Dane',
-	'label_username' => 'Používateľské meno API'
+	'label_username' => 'Používateľské meno aplikácie (identifikátor)'
 );
 
 ?>
