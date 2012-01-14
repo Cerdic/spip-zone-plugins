@@ -1,7 +1,7 @@
 #CACHE{0}
-
+oui
 <BOUCLE_auteurpmb(AUTEURS_PMB){id_auteur=#SESSION{id_auteur}}>
-
+non
 [(#PMB_SESSION|pmb_tester_session{#ID_AUTEUR}|non)
   <:pmb:session_expire:>[(#SET{session_expire,1})]
 ]

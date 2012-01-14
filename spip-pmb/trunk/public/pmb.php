@@ -915,6 +915,16 @@ function balise_URL_PMB_NOUVEAUTES_dist($p) {
 }
 
 /**
+ * Balise URL_PMB_COMPTE
+**/
+function balise_URL_PMB_COMPTE_dist($p) {
+	$page = 'pmb_compte';
+	$p->code = "generer_url_public('$page')";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+/**
  * Balise URL_PMB_RECHERCHE
 **/
 function balise_URL_PMB_RECHERCHE_dist($p) {
