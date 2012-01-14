@@ -139,6 +139,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'session_expire' => 'Votre session de lecteur a expir&eacute;. Veuillez vous d&eacute;connecter, puis vous identifier de nouveau.',
 'support' => 'Support',
 'sur' => 'sur',
+'source' => 'Lien sur cette ressource',
 
 // T
 'titre_lien_pmb' => 'PMB, un SIGB enti&egrave;rement libre',

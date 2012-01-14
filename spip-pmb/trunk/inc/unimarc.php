@@ -294,6 +294,11 @@ function pmb_parse_unimarc_data() {
 		),
 
 
+		// Adresse électronique et mode d'accès
+		'856' => array(
+			'u' => 'source', // Identificateur électronique normalisé (URI ex URL)
+		),
+		
 		// Image associee
 		'896' => array(
 			'a' => 'source_logo',
