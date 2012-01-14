@@ -71,6 +71,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lire_la_suite' => 'Lire la suite',
 'localisation_abbr' => 'Loc.',
 'localisation' => 'Localisation',
+
+// M
 'message_compte_lecteur' => 'Prochainement, vous disposerez d\'une int\351gration compl\350te\nde votre compte lecteur sur ce site. \n\nEn attendant, vous allez \352tre redirig\351s vers l\'interface standard.',
 'message_recherche_avancee' => 'Prochainement, vous disposerez d\'une int\351gration compl\350te\nde la recherche avanc\351e sur ce site. \n\nEn attendant, vous allez \352tre redirig\351s vers l\'interface standard.',
 'mon_compte' => 'Mon compte',
