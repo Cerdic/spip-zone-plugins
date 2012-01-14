@@ -530,13 +530,13 @@ function pmb_extraire_documents_ids($ids_notice) {
 			if (is_array($r)) {
 				foreach ($r as $document) {
 					$d = array();
-					$d['nom']         = pmb_nettoyer_caracteres($document->name);
-					$d['id_document'] = pmb_nettoyer_caracteres($document->id);
+					$d['titre']         = pmb_nettoyer_caracteres($document->name);
+					$d['id_document'] = $document->id;
 					$d['id_notice']   = $id_notice;
-					$d['mimetype']    = pmb_nettoyer_caracteres($document->mimetype);
+					$d['mimetype']    = $document->mimetype;
 					$d['image']       = (strpos($d['mimetype'],'image')!==false)?'oui':'non';
-					$d['url']         = pmb_nettoyer_caracteres($document->url);
-					$d['url_telechargement'] = pmb_nettoyer_caracteres($document->downloadUrl);
+					$d['url']                = $document->url;
+					$d['url_telechargement'] = $document->downloadUrl;
 					$documents[] = $d;
 				}
 			}
