@@ -1,19 +1,21 @@
 <BOUCLE_logo_notice(PMB:NOTICES){id_notice}>
-[(#VALEUR{logo_src}|oui)
+#SET{logo,#URL_LOGO}
+[(#REM) sinon chercher si un document joint est une image ]
+<BOUCLE_notice_image(PMB:DOCUMENTS){id_notice}{image=oui}{0,1}{si (#URL_LOGO|non)}>
+#SET{logo,#URL_TELECHARGEMENT|sinon{#URL}}
+</BOUCLE_notice_image>
+
+[(#GET{logo}|oui)
 	[(#ENV{copieimage,non}|=={non}|non)
-		[(#VALEUR{logo_src}
+		[(#GET{logo}
 			|copie_locale{force}
 			|image_reduire{#ENV{largeur,100},#ENV{hauteur,0}}
 			|inserer_attribut{class,spip_logos})]
 	]
 	[(#ENV{copieimage,non}|=={non}|oui)
-		[(#VALEUR{logo_src}
+		[(#GET{logo}
 			|image_reduire{#ENV{largeur,100},#ENV{hauteur,0}}
 			|inserer_attribut{class,spip_logos})]
 	]
-]
-[(#VALEUR{logo_src}|non)
-	[(#REM) pas de logo, on regarde si une image est en document joint ]
-	[(#INCLURE{fond=inclure/inc-image-doc-joint,id_notice,copieimage,largeur,hauteur})]
 ]
 </BOUCLE_logo_notice>

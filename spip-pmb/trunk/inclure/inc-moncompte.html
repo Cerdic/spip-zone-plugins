@@ -60,9 +60,9 @@
 	<BOUCLE_prets(PMB:PRETS){pmb_session}{type=#CLE}>
 			<tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
 				<td>
-				[(#VALEUR{notice/logo_src}|oui)
+				[(#URL_LOGO|oui)
 					<a href="#URL_PMB_NOTICE">
-					[(#VALEUR{notice/logo_src}
+					[(#URL_LOGO
 						|image_reduire{0,80}
 						|inserer_attribut{class,spip_logos})]
 					</a>

@@ -296,7 +296,7 @@ function pmb_parse_unimarc_data() {
 
 		// Image associee
 		'896' => array(
-			'a' => 'logo_src',
+			'a' => 'url_logo',
 		),
 
 		// les 900 sont des donnees locales...

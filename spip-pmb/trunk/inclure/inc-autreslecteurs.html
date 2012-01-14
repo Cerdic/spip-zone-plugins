@@ -8,7 +8,7 @@
 		<BOUCLE_autres_lecteurs(PMB:NOTICES){id_notice}{autres_lecteurs}>
 			<tr class="[(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})]">
 				<td><a href="#URL_PMB_NOTICE">
-				[(#VALEUR{logo_src}
+				[(#URL_LOGO
 					|image_reduire{0,80}
 					|inserer_attribut{class,spip_logos})]</a></td>
 				<td><a href="#URL_PMB_NOTICE">#TITRE</a></td>

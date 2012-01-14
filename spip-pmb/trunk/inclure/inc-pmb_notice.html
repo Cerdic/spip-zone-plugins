@@ -50,12 +50,12 @@
 <br class="nettoyeur" />
 
 
-[(#ENV{afficher_docnum}|=={non}|non)
-	[(#INCLURE{fond=inclure/inc-docnum,env,id_notice,ajax,ajaxload})]
+[(#ENV{afficher_documents}|=={non}|non)
+	[(#INCLURE{fond=inclure/inc-pmb_documents,env,id_notice,ajax,ajaxload})]
 ]
 
-[(#ENV{afficher_dispo}|=={non}|non)
-	[(#INCLURE{fond=inclure/inc-notice-dispo,env,id_notice,titre_notice=#TITRE,ajax,ajaxload})]
+[(#ENV{afficher_exemplaires}|=={non}|non)
+	[(#INCLURE{fond=inclure/inc-pmb_exemplaires,env,id_notice,titre_notice=#TITRE,ajax,ajaxload})]
 ]
 
 [(#ENV{afficher_autreslecteurs}|=={non}|non)
