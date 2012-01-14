@@ -4,7 +4,7 @@
 	[<p class="pagination">(#PAGINATION)</p>]
 	<ul class="liste-items items">
 	<BOUCLE_resultat(PMB:NOTICES){nouveautes}{pagination 5}>
-		<INCLURE{fond=inclure/inc-notice-resume}{id}{compteur=#COMPTEUR_BOUCLE}>
+		<INCLURE{fond=inclure/inc-pmb-notice-resume}{id_notice}{compteur=#COMPTEUR_BOUCLE}>
 	</BOUCLE_resultat>
 	</ul>
 	[<p class="pagination">(#PAGINATION)</p>]
