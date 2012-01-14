@@ -16,7 +16,7 @@
 <a class='annule_filtre' href='[(#GET{self}|parametre_url{id_document,''})]' title="<:medias:tout_voir|attribut_html:>">[(#CHEMIN{images/annuler-recherche.png}|tag_img|inserer_attribut{alt,<:medias:tout_voir:>})]</a>
 ]
 
-<div class='onglets_simple second'>
+<div class='nav_simple'>
 <ul class='statut'>
 [<li class='first'>(#GET{self}|parametre_url{statut,''}|aoustrong{<:medias:documents_tous:>,#ENV{statut,.*}|=={.*},ajax})</li>]
 [<li>(#GET{self}|parametre_url{statut,publie}|aoustrong{<:medias:documents_publies:>,#ENV{statut}|=={publie},ajax})</li>]
