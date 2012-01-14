@@ -1,26 +1,29 @@
 <plugin>
-	<nom>Court-circuit 2</nom>
-	<icon>images/courtcircuit-128.png</icon>
-	<slogan>Acc&#234;s direct aux articles</slogan>
-	<lien></lien>
-	<version>2.3.1</version>
-	<etat>stable</etat>
-	<auteur>[romy.tetue.net->http://romy.tetue.net], [Joseph->http://www.spip-contrib.net/Joseph]</auteur>
-	<description>Court-circuit 2 permet de rediriger certaines rubriques vers un article particulier. Vous pouvez configurer, dans l'espace priv&#233;, les r&#234;gles de redirection &#224; appliquer.
-	</description>
+	<nom>Court-circuit</nom>
 	<prefix>courtcircuit</prefix>
+	<icon>icon/courtcircuit-128.png</icon>
+
+	<version>2.3.2</version>
+	<etat>stable</etat>
+	<categorie>outil</categorie>
+	
+	<slogan>Acc&#234;s direct aux articles</slogan>
+	<description>Permet de rediriger certaines rubriques vers un article particulier. Vous pouvez configurer, dans l'espace priv&#233;, les r&eacute;gles de redirection &#224;&nbsp;appliquer.</description>
+	<lien>http://www.spip-contrib.net/?article3831</lien>
+	<auteur>[romy.tetue.net->http://romy.tetue.net], [Joseph->http://www.spip-contrib.net/Joseph]</auteur>
+	
 	<fonctions>courtcircuit_fonctions.php</fonctions>
 	<pipeline>
 		<nom>styliser</nom>
 		<inclure>courtcircuit_pipelines.php</inclure>
 	</pipeline>
 	<bouton id='courtcircuit' parent='configuration'>
-		<icone>images/courtcircuit-24.png</icone>
+		<icone>icon/courtcircuit-24.png</icone>
 		<titre>courtcircuit:courtcircuit</titre>
 		<url>configurer_courtcircuit</url>
 	</bouton>
 	<bouton id='courtcircuit21' parent='bando_squelette'>
-		<icone>images/courtcircuit-16.png</icone>
+		<icone>icon/courtcircuit-16.png</icone>
 		<titre>courtcircuit:courtcircuit</titre>
 		<url>configurer_courtcircuit</url>
 	</bouton>
@@ -31,5 +34,4 @@
 	<necessite id='SPIP' version='[2.1.0;2.1.99]' />
 	<utilise id="Z" />
 	<utilise id="compositions" />
-	<categorie>outil</categorie>
 </plugin>
