@@ -2,9 +2,9 @@
 	<nom>SVN Update</nom>
 	<slogan>Pouvoir faire une mise &#224; jour SVN du site</slogan>
 	<auteur>Cedric, Fil</auteur>
-	<licence>&#169; 2006 GNU/GPL</licence>
-	<version>0.32.0</version>
-	<etat>stable</etat>
+	<licence>&#169; 2006-2012 GNU/GPL</licence>
+	<version>0.33.0</version>
+	<etat>dev</etat>
 	<description>
 	Un utilisateur (par defaut, l'administrateur numero 1) est autoris&#233; &#224; faire une mise &#224; jour SVN du site ou de tout autre r&#233;pertoire. Pour cela il doit se rendre sur la page <code>ecrire/?exec=svn_update</code> et s&#233;lectionner les &#233;l&#233;ments &#224; mettre &#224; jour.
 
@@ -19,8 +19,7 @@ _ <code>svn://zone.spip.org/spip-zone/_plugins_/_stable_/cfg plugins/cfg</code>
 	</description>
 	<lien>http://www.spip-contrib.net/SVN-Update-Notes</lien>
 	<prefix>svn_update</prefix>
-	<necessite id="SPIP" version="[1.9.0;2.0.99]" />
-	<necessite id="cfg" version="[1.0;]"/>
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<options>svn_update_options.php</options>
 	<categorie>outil</categorie>
 </plugin>

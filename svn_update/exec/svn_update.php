@@ -31,7 +31,15 @@ function exec_svn_update() {
 	debut_gauche();
 	debut_droite();
 
-	$config = explode("\n",lire_config('svn_update/file'));
+	# si on a un fichier de config (comme dans la doc), le respecter
+	# sinon passer par cfg (mais attention c'est que du vieux cfg qui necessite
+	# des plugins cfg_compat etc… à revoir !
+	if ($f = find_in_path('svn_update_list.txt'))
+		lire_fichier($f, $config);
+	else
+		$config = lire_config('svn_update/file');
+
+	$config = explode("\n", $config);
 
 	$dirs_ok = array();
 	foreach ($config as $l) {
