@@ -1,7 +1,7 @@
 <paquet
 	prefix="accordeon"
 	categorie="navigation"
-	version="2.1.1"
+	version="2.2.0"
 	etat="test"
 	compatibilite="[2.1.0;3.0.99]"
 	logo="images/accordeon-32.png"
