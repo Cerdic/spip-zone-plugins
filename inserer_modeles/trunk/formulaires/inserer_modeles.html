@@ -1,6 +1,6 @@
-<div class="formulaire_spip formulaire_inserer_modeles">
+<div class="ajax formulaire_spip formulaire_configurer formulaire_inserer_modeles">
 [(#ENV{formulaire_modele}|non)<h3 class="titrem">
-	[(#CHEMIN{images/inserer_modeles-24.png}|image_reduire{24}|inserer_attribut{class, 'cadre-icone'}|inserer_attribut{alt, ''})]
+	<img src="#CHEMIN_IMAGE{modele-add-24.png}" class="cadre-icone" />
 	<:inserer_modeles:titre_inserer_modeles:>
 </h3>]
 [(#ENV{formulaire_modele}|oui)<h3 class="titrem">
@@ -35,13 +35,14 @@
 		<B_choix>
 		<strong><:inserer_modeles:choisir_modele:></strong>
 		<ul>
+		<li>
 		<BOUCLE_choix(POUR){tableau #ENV{_liste_formulaires_modeles}}{par valeur}>
-		<li class="choix">
-			[(#CHEMIN{#VALEUR|table_valeur{logo}}|image_reduire{24}|inserer_attribut{'alt',''})]
+		<div class="choix">
 			<input type="radio" class="radio" name="formulaire_modele" id="#CLE" value="#CLE" style="vertical-align:top;" />
-			<label for="#CLE">[(#VALEUR|table_valeur{nom}|_T_ou_typo)]</label>
-		</li>
+			<label for="#CLE">[(#VALEUR|table_valeur{nom}|_T_ou_typo)]
+		</div>
 		</BOUCLE_choix>
+		</li>
 		</ul>
 		<p class="boutons">
 			<input type="submit" class="submit" name="choisir" value="<:inserer_modeles:bouton_choisir:>" />

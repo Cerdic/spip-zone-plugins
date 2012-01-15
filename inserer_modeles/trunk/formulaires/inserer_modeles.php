@@ -1,9 +1,14 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formulaires_inserer_modeles_charger_dist($id_article,$id_rubrique,$id_breve,$formulaire_modele='',$modalbox='') {
+function formulaires_inserer_modeles_charger_dist($formulaire_modele,$modalbox,$env) {
 	include_spip('inc/inserer_modeles');
+	$env = unserialize($env);
 	$contexte = array();
+	// Toujours transmettre les id_(article/rubrique/breve...)
+	foreach ($env as $var => $val)
+		if (substr($var,0,3)=='id_')
+			$contexte[$var] = $val;
 	
 	if ((!_request('formulaire_modele') && $formulaire_modele=='') || _request('annuler')) {
 		$contexte['_liste_formulaires_modeles'] = inserer_modeles_lister_formulaires_modeles();
@@ -30,12 +35,7 @@ function formulaires_inserer_modeles_charger_dist($id_article,$id_rubrique,$id_b
 			$contexte['_code_modele'] = _request('_code_modele');
 	}
 	
-	if (is_numeric($id_article))
-		$contexte['id_article'] = $id_article;
-	if (is_numeric($id_rubrique))
-		$contexte['id_rubrique'] = $id_rubrique;
-	if (is_numeric($id_breve))
-		$contexte['id_breve'] = $id_breve;
+	// Code à vérifier ultérieurement
 	if ($modalbox!='') {
 		$contexte['modalbox'] = 'oui';
 		$_modalbox_retour = url_absolue(generer_url_ecrire('inserer_modeles','',true));
@@ -66,7 +66,7 @@ function formulaires_inserer_modeles_verifier_dist() {
 		$infos = charger_infos_formulaire_modele(_request('formulaire_modele'));
 		$erreurs = saisies_verifier($infos['parametres']);
 	}
-	spip_log("formulaires_inserer_modeles_verifier_dist "._request('id_modele'),"bug");
+	
 	return $erreurs;
 }
 
