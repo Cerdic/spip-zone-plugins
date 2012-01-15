@@ -7,9 +7,8 @@ function formulaires_inserer_modeles_charger_dist($formulaire_modele,$modalbox,$
 	$contexte = array();
 	// Toujours transmettre les id_(article/rubrique/breve...)
 	foreach ($env as $var => $val)
-		if (substr($var,0,3)=='id_')
+		if (substr($var,0,3)=='id_' && is_numeric($val))
 			$contexte[$var] = $val;
-	
 	if ((!_request('formulaire_modele') && $formulaire_modele=='') || _request('annuler')) {
 		$contexte['_liste_formulaires_modeles'] = inserer_modeles_lister_formulaires_modeles();
 	} else {
@@ -35,19 +34,16 @@ function formulaires_inserer_modeles_charger_dist($formulaire_modele,$modalbox,$
 			$contexte['_code_modele'] = _request('_code_modele');
 	}
 	
-	// Code à vérifier ultérieurement
 	if ($modalbox!='') {
 		$contexte['modalbox'] = 'oui';
 		$_modalbox_retour = url_absolue(generer_url_ecrire('inserer_modeles','',true));
 		if (substr($formulaire_modele,-5)=='.yaml')
 				$formulaire_modele = substr($formulaire_modele,0,-5);
 		$_modalbox_retour = parametre_url($_modalbox_retour,'formulaire_modele',$formulaire_modele,'&');
-		if (is_numeric($id_article))
-			$_modalbox_retour = parametre_url($_modalbox_retour,'id_article',$id_article,'&');
-		if (is_numeric($id_rubrique))
-			$_modalbox_retour = parametre_url($_modalbox_retour,'id_rubrique',$id_rubrique,'&');
-		if (is_numeric($id_breve))
-			$_modalbox_retour = parametre_url($_modalbox_retour,'id_breve',$id_breve,'&');
+		// Il faut aussi transmettre les id ici
+		foreach ($env as $var => $val)
+			if (substr($var,0,3)=='id_' && is_numeric($val))
+				$_modalbox_retour = parametre_url($_modalbox_retour,$var,$val,'&');
 		$contexte['_modalbox_retour'] = $_modalbox_retour;
 	}
 	
