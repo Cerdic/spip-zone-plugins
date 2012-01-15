@@ -124,6 +124,13 @@ function analyser_spams($texte) {
 	$liens = array_filter(extraire_balises($texte,'a'),'pas_lien_ancre');
 	$infos['nombre_liens'] = count($liens);
 
+	// repérer le contenu caché par des ruses html
+	$hidden = "@\<.*style.*(display|position|overflow|visibility|height)\s*:.*>@i";
+	// ne pas analyser les extraits de code
+	$texte_humain = preg_replace('@<(?:code|pre).*>[^<]*</(?:code|pre)>@', '', $texte);
+	if (preg_match($hidden,$texte_humain))
+		$infos['contenu_cache'] = true;
+
 	// taille du titre de lien minimum
 	if (count($liens)) {
 		// supprimer_tags() s'applique a tout le tableau,

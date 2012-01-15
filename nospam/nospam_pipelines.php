@@ -216,7 +216,10 @@ function nospam_pre_edition($flux){
 			include_spip("inc/nospam"); // pour analyser_spams()
 			foreach($flux['data'] as $champ=>$valeur) {
 				$infos = analyser_spams($valeur);
-				if ($infos['nombre_liens'] > 0) {
+				if ($infos['contenu_cache']) {
+					// s'il y a du contenu caché avec des styles => spam direct
+					$flux['data']['statut'] = 'spam';
+				}elseif ($infos['nombre_liens'] > 0) {
 					// si un lien a un titre de moins de 3 caracteres, c'est louche...
 					if ($infos['caracteres_texte_lien_min'] < 3) {
 						$flux['data']['statut'] = 'prop'; // en dur en attendant une idee plus generique
