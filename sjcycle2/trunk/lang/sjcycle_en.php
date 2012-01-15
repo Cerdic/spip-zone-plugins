@@ -6,6 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'boite_info' =>'Recopy one of these shortcuts and insert it inside the box "Text", where you wish to locate the slideshow in your article.<br /><br />
 	Consult the inline help to know other parameters.',
+	'boite_info_titre' =>'Slideshow',
 
 	// C
 	'configurer_titre' => 'jQuery Cycle Configuration',
