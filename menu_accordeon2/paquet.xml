@@ -1,0 +1,24 @@
+<paquet
+	prefix="accordeon"
+	categorie="navigation"
+	version="2.1.1"
+	etat="test"
+	compatibilite="[2.1.0;3.0.99]"
+	logo="images/accordeon-32.png"
+	documentation="http://www.spip-contrib.net/?article3763"
+>	
+
+	<nom>Menu accord&#233;on 2</nom>
+	<!-- Animer le menu de SPIP avec un effet d'ouverture de tiroir -->
+
+	<auteur>Maïeul Rouquette d'après b_b</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="jqueryui_plugins" inclure="accordeon_pip.php" />
+	<pipeline nom="insert_head" inclure="accordeon_pip.php" />
+
+	<necessite nom="jqueryui" />
+
+	<utilise nom="menus" compatibilite="[0.8.10;[" />
+</paquet>

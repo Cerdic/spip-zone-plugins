@@ -5,16 +5,7 @@
 <!-- descriptif=[(#GET{logo})] <:accordeon:cfg_boite_accordeon:>-->
 <!-- autoriser=webmestre -->
 <!-- refus=<:cfg:refus_configuration_webmestre:> -->
-<div class="formulaire_spip">
-	<form action="#SELF" method="post">
-    [<div>(#ENV{_cfg_}|form_hidden)</div>]
-     <ul>
-         <li>
-             <label for="options"><:accordeon:label_options:></label>
-             <div class="explication"><:accordeon:explication_options:></div>
-             <textarea name="options" id="options" rows="3" cols="40">#ENV{options}</textarea>
-         </li>
-     </ul>
-    <p class="boutons"><input type="submit" name="_cfg_ok" value="<:OK:>" /></p>
-	</form>
+#CACHE{0}
+<div class="ajax">
+#FORMULAIRE_CONFIGURER_ACCORDEON
 </div>
