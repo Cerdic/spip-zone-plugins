@@ -20,7 +20,7 @@
 	gdata
 	</prefix>
 	<icon>gdata.png</icon>
-	<!-- <lien>http://www.spip-contrib.net/Plugin-GData</lien> -->
+	<lien>http://www.spip-contrib.net/4044</lien>
 	<chemin dir='' />
 	<fonctions>gdata_fonctions.php</fonctions>
 	<categorie>outil</categorie>
