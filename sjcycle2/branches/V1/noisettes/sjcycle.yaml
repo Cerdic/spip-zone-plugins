@@ -1,0 +1,41 @@
+nom: '<:sjcycle:noisette_nom_noisette:>'
+description: '<:sjcycle:noisette_description:>'
+icon: 'images/sjcycle-24.png'
+parametres:
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'sjcycle_afficher_titre_noisette'
+      label: '<:sjcycle:noisette_label_afficher_titre_menu:>'
+      defaut: 'on'
+  -
+    saisie: 'input'
+    options:
+      nom: 'sjcycle_titre_noisette'
+      label: '<:sjcycle:noisette_titre_noisette:>'
+      explication: '<:aveline:explication_raccourcis_typo:>'
+      afficher_si: '@sjcycle_afficher_titre_noisette@ == "on"'  -
+  -
+    saisie: 'input'
+    options:
+      nom: 'id_sjcycle'
+      obligatoire: 'oui'
+      label: '<:sjcycle:noisette_id_sjcycle:>'
+    verifier:
+      type: 'entier'
+  -
+    saisie: 'input'
+    options:
+      nom: 'largeur'
+      defaut: '200'
+      label: '<:sjcycle:noisette_largeur:>'
+    verifier:
+      type: 'entier'
+  -
+    saisie: 'input'
+    options:
+      nom: 'hauteur'
+      defaut: '0'
+      label: '<:sjcycle:noisette_hauteur:>'
+    verifier:
+      type: 'entier'

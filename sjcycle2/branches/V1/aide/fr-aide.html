@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <title>Utilisation de Spip jQuery Cycle "sjcycle"</title>
+	<link rel='stylesheet' href='http://www.spip.net/prive/spip_admin.css' type='text/css' />
+</head>
+
+<body>
+<h1>Aide Sjcycle</h1>
+<h2>sjcycle/Param&egrave;tres</h2>
+<h3 class="spip">D&eacute;cryptage de la syntaxe et param&egrave;tres du raccourci typographique "sjcycle"</h3>
+
+<div>
+  <p style="background:#eee;color:#666;padding:10px;font-weight:700">Le raccourci typographique "sjcycle" permet d'ins&eacute;rer facilement un ou plusieurs diaporamas au sein d'un article : il vous suffit de le recopier &agrave; l’int&eacute;rieur de la case « Texte » de l'article, l&agrave; vous d&eacute;sirez situer le diaporama. Exemples d'utilisation par ici.
+	<br /><br />
+	Ce raccourci comporte plusieurs param&egrave;tres s&eacute;par&eacute;s par le caract&egrave;re "|".</p>
+   
+	<ol>
+      <li>
+         <h4>&lt;sjcycle<span style="color:red">N</span>&gt;</h4>
+         <strong>Param&egrave;tre "<span style="color:#666">N</span>",  <span style="color:red">obligatoire</span> :</strong>
+         <br />Correspond au num&eacute;ro de l'article en cours.
+         <br />Il permet de cibler les images li&eacute;es &agrave; un unique article.
+         <p style="background:#eee;color:#666;padding:10px;">
+            <strong>Astuce :</strong> Vous pouvez ainsi ins&eacute;rer un diaporama avec les images d'un article dans un autre article.
+         </p>
+      </li>
+      <li>
+         <h4>&lt;sjcycleN<span style="color:red">|ALIGN</span>&gt;</h4>
+         <strong>Param&egrave;tre "<span style="color:#666">ALIGN</span>", optionnel :</strong>
+         <br />Permet de sp&eacute;cifier l'alignement du diaporama au sein du texte.
+         <br />S'il n'est pas pr&eacute;cis&eacute;, l'alignement  est "center".
+         <br /><strong>Les options de l'alignement :</strong>
+         <ul>
+            <li>"<em>left</em>" : &agrave; gauche du texte;</li>
+            <li>"<em>center</em>" : centrer dans le texte;</li>
+            <li>"<em>right</em>" : &agrave; droite du texte.</li>
+         </ul>
+      </li>
+      <li>
+         <h4>&lt;sjcycleN|ALIGN|<span style="color:red">docs=n1,n2</span>&gt;</h4>
+         <strong>Param&egrave;tre "<span style="color:#666">docs=n1,n2,[...],nx</span>", optionnel :</strong>
+         <br />Permet de sp&eacute;cifier la liste d'images &agrave; afficher dans le diaporama.
+         <br />Ainsi, on peut afficher plusieurs diaporamas dans au sein d'un même texte, isoler des images.
+         <br />S'il n'est pas pr&eacute;cis&eacute;, l'ensemble des images sont s&eacute;lectionn&eacute;es par d&eacute;faut.
+         <br />
+         <br /><strong>Les arguments de s&eacute;lection "<em>n1,n2,[...],nx</em>" du param&egrave;tre "<em>|docs=</em>" :</strong><br />
+         Ils se composent d'une suite de num&eacute;ros d'images s&eacute;par&eacute;es par des virgules sans espace.
+         <br />Sous chaque image est indiqu&eacute; un raccourci typographique du type "<em>&lt;imgXX|left&gt;</em>", "<em>&lt;docXX|left&gt;</em>" ou "<em>&lt;docXX&gt;</em>",
+          où "<em>XX</em>" d&eacute;signe le num&eacute;ro de l'image correspondante.<br />
+         Ainsi le param&egrave;tre "<em>|docs=1,3</em>", s&eacute;lectionne les images num&eacute;ro 1 et 3 de l'article courant.
+         <p style="background:#eee;color:#666;padding:10px;">
+            <strong>Astuce :</strong> Vous pouvez utiliser le raccourci en ne passant qu'un seul num&eacute;ro d'image au param&egrave;tre "<em>|docs=</em>" afin de b&eacute;n&eacute;ficier de l'effet "FancyBox" : un clic sur l'image redimensionnée du diaporama permet d'afficher l'image originale en superposition.
+         </p>
+      </li>
+      <li>
+   
+        <h4>&lt;sjcycleN|ALIGN|<span style="color:red">id_diapo=X</span>&gt;</h4>
+        <strong>Param&egrave;tre &quot;<span style="color:#666">id_diapo=X</span>&quot;, optionnel :</strong> <br />
+   Permet d’attribuer un id sp&eacute;cifique à un diaporama afin de pouvoir le cibler en css par dsjcycle_X<br />
+Depuis la version 1.1, n’est plus n&eacute;cessaire pour afficher plusieurs diaporamas dans le m&egrave;me article <br />
+   <strong>Exemple :</strong><br />
+   &lt;sjcycle16|center|docs=101,102,103,104|id_diapo=1&gt;<br />
+   &lt;sjcycle16|center|docs=105,106,107,108,109|id_diapo=2|opt=fx:'shuffle',timeout:2000&gt;<br />
+   Ceci affiche 2 diaporamas dans le même article, le premier sur 4 images avec les paramètres par défaut du site et le second sur 5 images, avec des paramètres différents de ceux par défaut.<br />
+      </li>
+      <li>
+      	<h4>&lt;sjcycleN|ALIGN|<span style="color:red">legende=X</span>&gt;</h4>
+        <strong>Param&egrave;tre &quot;<span style="color:#666">legende=X</span>&quot;, optionnel :</strong> <br />
+	Permet d’afficher une légende sous le diaporama
+		<ul>
+          <li>Si X=1, on affiche comme légende le titre des images</li>
+          <li>Si X=modele, on affiche comme légende le texte fourni par le modèle sjcycle_modele. Ceci permet de créer une légende contenant le nomde l’auteur, le titre de l’article, enfin ce qu’on veut...
+          <li>Si X=un texte, ce texte est affiché comme légende
+          </ul>
+      </li>
+      <li>
+        <h4>&lt;sjcycleN|ALIGN|<span style="color:red">opt=p1:v1;p2:v2</span>&gt;</h4>
+        <strong>Param&egrave;tre &quot;<span style="color:#666">opt=p1:v1;p2:v2;[...];px:vx</span>&quot;, optionnel :</strong> <br />
+   Permet d'utiliser les options du script jcycle.
+         La liste complète est définie sur le site du plugin jquery jcycle <a href="http://malsup.com/jquery/cycle/options.html" target="_blank">par ici</a><br />
+   Ces valeurs écrasent 
+         celles définies dans la page de configuration du plugin.<br />
+   Les options possibles correspondent à celles de la version utilisée dans ce plugin spip et non à celles proposées sur la page citée ci-dessus. Actuellement, c'est la version 2.88 (08-JUN-2010) qui est utilisée<br />
+   <strong>Exemple :</strong><br />
+   &lt;sjcycle16|center|opt=autostop:1;autostopCount:5&gt; : diaporama sur toutes les images de l'article 16 mais qui s'arrêtera à la cinquième image<br />
+   &lt;sjcycle16|center|opt=fx:'fade'&gt; : diaporama sur toutes les images de l'article 16 avec un effet de transition &quot;fade&quot; qui remplace celui défini globalement pour le site entier</li>
+      <li>
+        <h4>&lt;sjcycleN|ALIGN|<span style="color:red">lien_article=XXX|forcer_lien_reference=on</span>&gt;</h4>
+        <strong>Param&egrave;tres &quot;<span style="color:#666">lien_article=XXX</span>&quot; et  &quot;<span style="color:#666">forcer_lien_reference=on</span>&quot;, optionnels :</strong> <br />
+        Permet de poser un lien sur le diaporama vers un article d'identifiant XXX autre que celui contenant les images. Dans le cas d'un site multilingue, fournir l'id de l'article de référence, le modèle se charge de trouver l'id de l'article correspondant à la langue du visiteur. Cette option désactive l'ouverture vers une box. Si l'article n'existe pas dans la langue courante on met ou pas un lien
+        vers l'article de référence suivant que le paramètre forcer_lien_reference soit défini ou pas.<br />
+  <strong>Exemple :</strong><br />
+  &lt;sjcycle16|center|lien_article=171&gt; : diaporama sur toutes les images de l'article 16 avec un lien vers l'article 171 </li>
+      <li>
+        <h4>&lt;sjcycleN|ALIGN|<span style="color:red">liens_individuels=valeur</span>&gt;</h4>
+        <strong>Param&egrave;tre &quot;<span style="color:#666">liens_individuels=valeur</span>&quot;, optionnels :</strong> <br />
+        Permet de poser un lien sur chaque image du diaporama vers un article, une rubrique ou un site externe suivant la valeur du paramètre (article, rubrique, externe). Si la valeur vaut article ou rubrique, l'identifiant de l'objet est pris dans le champ descriptif de chaque image. Si la valeur vaut externe, le champ descriptif de chaque image doit contenir un lien http.<br />
+        <strong>Exemple :</strong><br />
+  &lt;sjcycle16|center|liens_individuels=article&gt; : diaporama sur toutes les images de l'article 16 avec sur chaque image un lien vers l'article dont l'identifiant est contenu dans le descriptif de l'image.</li>
+      <li><h4>&lt;sjcycleN|ALIGN|<span style="color:red">param=valeur</span>&gt;</h4>
+         <strong>Autres param&egrave;tres optionnels :</strong>
+      <br />
+         Ces paramètres écrasent localement les valeurs définies dans la page de configuration du plugin :
+          <ul>
+            <li><em>width</em> : largeur  en pixels des images recadrées</li>
+            <li><em>height</em> : hauteur   en pixels des images recadrées</li>
+            <li><em>position</em> : position de l'image de d'origine dans l'image recadrée (left top, left center, left bottom, center top, center, center bottom, right top, right center, right bottom)</li>
+            <li><em>background</em> : couleur de fond des images recadrées (au format #FF0000)</li>
+            <li><em>border_color</em> : couleur de la bordure des images recadrées (au format #FF0000)</li>
+            <li><em>border_width</em> : largeur en pixels de la bordure</li>
+            <li><em>div_margin</em> : marge en pixels autour des images recadrées</li>
+          </ul>
+          <br />
+           <img src="../plugins/sjcycle2/aide/exemple_sjcyle2.png" width="300" height="300" alt="exemple" /><br />
+     </li>
+   </ol>
+</div>
+</body>
+</html>

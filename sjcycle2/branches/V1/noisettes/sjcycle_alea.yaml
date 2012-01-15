@@ -1,0 +1,84 @@
+nom: '<:sjcycle:noisette_alea_nom_noisette:>'
+description: '<:sjcycle:noisette_alea_description:>'
+icon: 'images/sjcycle_alea-24.png'
+parametres:
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'sjcycle_alea_afficher_titre_noisette'
+      label: '<:sjcycle:noisette_label_afficher_titre_menu:>'
+      defaut: 'on'
+  -
+    saisie: 'input'
+    options:
+      nom: 'sjcycle_alea_titre_noisette'
+      label: '<:sjcycle:noisette_titre_noisette:>'
+      defaut: '<:sjcycle:noisette_titre_alea_defaut:>'
+      explication: '<:aveline:explication_raccourcis_typo:>'
+      afficher_si: '@sjcycle_alea_afficher_titre_noisette@ == "on"'  -
+  -
+    saisie: 'input'
+    options:
+      nom: 'sjcycle_alea_nombre'
+      defaut: '10'
+      label: '<:sjcycle:noisette_nb:>'
+    verifier:
+      type: 'entier'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'sjcycle_alea_fx'
+      defaut: 'fade'
+      label: '<:sjcycle:noisette_fx:>'
+      datas:
+        blindX: 'blindX'
+        blindY: 'blindY'
+        blindZ: 'blindZ'
+        cover: 'cover'
+        curtainX: 'curtainX'
+        curtainY: 'curtainY'
+        fade: 'fade'
+        fadeZoom: 'fadeZoom'
+        growX: 'growX'
+        growY: 'growY'
+        scrollUp: 'scrollUp'
+        scrollDown: 'scrollDown'
+        scrollLeft: 'scrollLeft'
+        scrollRight: 'scrollRight'
+        scrollHorz: 'scrollHorz'
+        scrollVert: 'scrollVert'
+        shuffle: 'shuffle'
+        slideX: 'slideX'
+        slideY: 'slideY'
+        toss: 'toss'
+        turnUp: 'turnUp'
+        turnDown: 'turnDown'
+        turnLeft: 'turnLeft'
+        turnRight: 'turnRight'
+        uncover: 'uncover'
+        wipe: 'wipe'
+        zoom: 'zoom'
+  -
+    saisie: 'input'
+    options:
+      nom: 'sjcycle_alea_duree'
+      defaut: '5000'
+      label: '<:sjcycle:noisette_duree:>'
+    verifier:
+      type: 'entier'
+  -
+    saisie: 'input'
+    options:
+      nom: 'sjcycle_alea_largeur'
+      defaut: '200'
+      label: '<:sjcycle:noisette_largeur:>'
+    verifier:
+      type: 'entier'
+  -
+    saisie: 'input'
+    options:
+      nom: 'sjcycle_alea_hauteur'
+      defaut: '0'
+      label: '<:sjcycle:noisette_hauteur:>'
+    verifier:
+      type: 'entier'
