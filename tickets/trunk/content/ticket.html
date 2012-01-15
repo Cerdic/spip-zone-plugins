@@ -52,8 +52,9 @@
 #SET{config_thread,#CONFIG{comments/comments_fil,list}}
 <div class="ticket_commentaires comments comments-#GET{config_thread}">
 	<BOUCLE_decompte(FORUMS){id_ticket} {plat} />[<h2 class="h2">(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})
-	[(#TOTAL_BOUCLE|=={1}|?{<:tickets:commentaire:>,<:tickets:commentaires:>})]</h2>]
-	[(#TOTAL_BOUCLE|=={0}|oui)<h2><:tickets:commentaire_aucun:></h2>]
+	[(#GRAND_TOTAL|singulier_ou_pluriel{tickets:commentaire,tickets:commentaires})]</h2>]
+	</B_decompte>
+	<h2><:tickets:commentaire_aucun:></h2>
 	<//B_decompte>
 
 	[(#REM) Bloc 2: liste des commentaires sur le ticket]

@@ -101,6 +101,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_creation_auteur' => 'Ticket créé le <strong>@date@</strong> par <strong>@nom@</strong>',
 
 	// E
+	'erreur_date_saisie' => 'Cette date est invalide',
+	'erreur_date_saisie_superieure' => 'La date maximale doit être supérieure à la date minimale',
 	'erreur_texte_longueur_mini' => 'La longueur minimale du texte est de @nb@ caractères.',
 	'erreur_verifier_formulaire' => 'Vérifiez votre formulaire',
 	'explication_champ_sticked' => 'Les tickets épinglés sont toujours affichés en premier, quelque soit leur statut.',
@@ -112,10 +114,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_fichier' => 'Ajoutez un fichier à votre ticket.',
 	'explication_redaction' => 'Quand vous avez terminé la rédaction de votre ticket, sélectionnez le statut «ouvert et discuté».',
 	'explication_url_exemple' => 'Indiquez ici l’URL d’une page concernée par ce ticket.',
-
-	// F
-	'forum_message' => 'Votre message',
-	'forum_sans_previsu' => 'Attention : pas de prévisualisation ; votre message est publié immédiatement.',
 
 	// I
 	'icone_modifier_ticket' => 'Modifier ce ticket',
@@ -140,9 +138,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mail_texte_message_auto' => 'Ceci est un message automatique : n\'y repondez pas.',
 	'message_aucun_ticket_recherche' => 'Aucun ticket ne correspond à votre recherche',
 	'message_automatique' => 'Ceci est un message automatique : n\'y repondez pas.',
-	'message_le' => 'le @date@',
-	'message_poste_par' => 'Message posté par',
-	'message_publie' => 'Votre message est publié',
 
 	// N
 	'no_assignation' => 'Personne',

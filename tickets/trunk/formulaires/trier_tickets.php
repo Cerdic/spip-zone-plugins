@@ -42,7 +42,7 @@ function formulaires_trier_tickets_verifier_dist($lien_filtre = NULL,$lien_arg =
 			$date = _request($recherche);
 			$date = recup_date($date);
 			if(!is_numeric($date[0]) OR !is_numeric($date[1]) OR !is_numeric($date[2])){
-				$erreurs[$recherche] = _T('mediaspip_core:erreur_date_saisie');
+				$erreurs[$recherche] = _T('tickets:erreur_date_saisie');
 			}else{
 				$date_fin[$recherche] = $date[0].''.$date[1].''.(($date[2] > 10) ? $date[2] :'0'.$date[2]);
 			} 
@@ -50,11 +50,11 @@ function formulaires_trier_tickets_verifier_dist($lien_filtre = NULL,$lien_arg =
 	}
 	if(_request('date_debut') && _request('date_fin')){
 		if($date_fin['date_debut'] > $date_fin['date_fin']){
-			$erreurs['date_fin'] = _T('mediaspip_core:erreur_date_saisie_superieure');
+			$erreurs['date_fin'] = _T('tickets:erreur_date_saisie_superieure');
 		}
 	}
 	if(count($erreurs) > 0){
-		$erreurs['message_erreur'] = _T('mediaspip_core:erreur_verifier_form');
+		$erreurs['message_erreur'] = _T('tickets:erreur_verifier_formulaire');
 	}
 	return $erreurs;
 }

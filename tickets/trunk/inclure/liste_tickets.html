@@ -105,7 +105,7 @@
 	</B_pour_trackers>
 	[(#ENV{tracker}|oui)
 		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{tracker,''})]})]
-		<p><:tickets:champ_tracker:> [(#ENV{tracker}|tickets_texte_tracker)]</p>
+		<p><:tickets:champ_type:> [(#ENV{tracker}|tickets_texte_tracker)]</p>
 	]
 	[(#ENV{projet}|oui)
 		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{projet,''})]})]

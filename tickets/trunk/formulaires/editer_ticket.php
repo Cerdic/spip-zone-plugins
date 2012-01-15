@@ -63,7 +63,7 @@ function formulaires_editer_ticket_verifier($id_ticket='new', $retour='', $confi
         $caracteres = compter_caracteres_utiles($texte);
         // moins de 10 caracteres sans les liens = spam !
         if ($caracteres < 10){
-                $erreurs['texte'] = _T('forum_attention_dix_caracteres');
+                $erreurs['texte'] = _T('forum:forum_attention_dix_caracteres');
         }
         // on analyse le titre
         $infos_titre = analyser_spams(_request('titre'));
