@@ -373,20 +373,24 @@
 					ecrire_meta('spip_lettres_fond_lettre_html', 'emails/lettre_html');
 	}
 	function spip_lettres_creer_repertoire_documents() {
-				include_spip('inc/getdocument');
+				include_spip('inc/documents');
 				creer_repertoire_documents('lettres');
 	}
+	
 	function lettres_vider_tables($nom_meta_base_version) {
+		
 		include_spip('inc/meta');
 		include_spip('base/abstract_sql');
 		include_spip('classes/lettre');
 
 		$res = sql_select('id_lettre', 'spip_lettres');
-		while ($arr = sql_fetch($res)) {
-			$lettre = new lettre($arr['id_lettre']);
-			$lettre->supprimer();
+		if ($res) {
+			while ($arr = sql_fetch($res)) {
+				$lettre = new lettre($arr['id_lettre']);
+				$lettre->supprimer();
+			}
 		}
-		include_spip('base/abstract_sql');
+
 		sql_drop_table('spip_abonnes', true);
 		sql_drop_table('spip_clics', true);
 		sql_drop_table('spip_desabonnes', true);
@@ -418,8 +422,7 @@
 		effacer_meta('spip_lettres_abonnement_par_defaut');
 		effacer_meta('spip_lettres_cliquer_anonyme');
 		effacer_meta('spip_lettres_admin_abo_toutes_rubriques');
-		include_spip('inc/getdocument');
-		effacer_repertoire_temporaire(_DIR_LETTRES);
+		supprimer_repertoire(_DIR_LETTRES);
 		effacer_meta($nom_meta_base_version);
 	}
 
