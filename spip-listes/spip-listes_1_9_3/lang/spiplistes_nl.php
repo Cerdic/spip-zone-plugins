@@ -487,7 +487,10 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'erreur_mail' => 'Error: het bericht kan  niet verstuurd worden (nagaan of de php mail () beschikbaar is)'
 , 'modif_abonnement_text' => 'Om uw abonnement te wijzigen, gelieve de volgende link aan te klikken: '
 , 'msg_abonne_sans_format' => "format de reception manquant"
-, 'modif_abonnement_html' => "<br />Cliquez ici pour modifier votre abonnement"
+, 'modif_abonnement_html' => '<br />Klik hier om uw abonnement te wijzigen '
+, 'modif_abonnement_text' => 'Om uw abonnement te wijzigen, gelieve u naar volgende pagina te begeven: '
+, 'stop_abonnement_html' => 'Teneinde een einde te maken aan uw abonnement, klik hier. '
+, 'stop_abonnement_text' => 'Teneinde een einde te maken aan uw abonnement, klik op volgende link: '
 
 // inc/spiplistes_naviguer_paniers.php
 // inc/spiplistes_pipeline_I2_cfg_form.php

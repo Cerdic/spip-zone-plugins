@@ -25,7 +25,10 @@ Der Versand der Mails kann einige Minuten in Anspruch nehmen: Die Empf&auml;nger
 'abonnement_bouton'=>'Ihr Abonnement bearbeiten',
 'abonnement_cdt' => '<a href=\'http://bloog.net/spip-listes/\'>SPIP-Listes</a>' ,
 'abonnement_change_format'=>'Sie k&ouml;nnen das Format, in dem Sie den Newsletter erhalten &auml;ndern: ',
-'modif_abonnement_text' => 'Um Ihr Abonnement zu bearbeiten, gehen Sie bitte zu dieser Adresse',
+'modif_abonnement_html' => '<br />Klicken Sie hier, um Ihr Abonnement zu&#228;ndern',
+'modif_abonnement_text' => 'Um Ihr Abonnement zu&#228;ndern, gehen Sie bitte zu dieser Adresse',
+'stop_abonnement_html' => 'Um Ihr Abonnement zu k&#252;ndigen, klicken Sie hier.',
+'stop_abonnement_text' => 'Um Ihr Abonnement zu k&#252;ndigen, klicken Sie auf diesem Link:',
 'abonnement_mail_passcookie' => '(Dieses ist eine automatische Nachricht)
 Um Ihr Abonnement der Website: @nom_site_spip@ (@adresse_site@) zu bearbeiten,
 gehen Sie bitte zu dieser Adresse:
