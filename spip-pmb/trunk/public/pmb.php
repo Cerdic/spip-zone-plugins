@@ -299,6 +299,9 @@ function inc_pmb_notices_select_dist(&$command, $iterateur) {
 	if (pmb_recherche_critere($criteres, 'nouveautes')) {
 		// prendra 50 nouveautes par defaut...
 		// sauf si {nouveautes 3}
+		// /!\ ça ne recupere que 3, pas #ENV{nb,3}, peut etre parce
+		// que c'est le premier argument d'un critere (limitation connue de SPIP).
+		// on peut utiliser : {nouveautes 3}{0,#ENV{nb,3}} pour limiter entre 1 et 3 donc.
 		$nombre = pmb_interprete_argument_critere($criteres, 'nouveautes', 1);
 		$idsn = pmb_ids_notices_nouveautes('', $nombre);
 		$ids = pmb_intersect_ids($ids, $idsn);

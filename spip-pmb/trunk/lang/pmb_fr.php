@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ecrire_a' => 'Écrire à',
 'editeur' => 'Éditeur',
 'editeurs' => 'Éditeurs',
-'edition' => 'Édition',
+'edition' => 'Mention d\'édition',
 'en_savoir_plus' => 'en&nbsp;savoir&nbsp;+',
 'exemplaires' => 'Exemplaires',
 'format' =>'Format',
@@ -150,7 +150,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'type' => 'Type',
 
 // U
-'unite_materielle' => 'Unité matérielle',
+'unite_materielle' => 'Unité matérielle', // fait partie de...
 'url' => 'Adresse',
 'vous_etes_identifies' => 'Vous &ecirc;tes identifi&eacute;',
 'wsdl' => 'Adresse du WSDL SOAP',

@@ -67,6 +67,7 @@ function pmb_parse_unimarc($unimarc) {
  * 		'a' => 'isbn', // sous zone => nom de la correspondance humaine. Peut etre un tableau :
  * 		'b' => array('titre', 'pmb_nettoyer_caracteres') // filtre a appliquer sur la valeur
  * 		'c' => array('texte', 'couper', 300) // filtre a appliquer sur la valeur : couper($valeur, 300)
+ * 		'9' => 'id/nom' // recherche la cle 9 et une valeur extraite d'une valeur 'id:xxx' 
  * 
  * 		Ou encore, possibilite pour un attribut de donner plusieurs champs
  * 		en indiquant directement les valeurs a retourner A EVALUER (eval)...
@@ -120,15 +121,31 @@ function pmb_parse_unimarc_defaut($valeur, $zone, $sous_zone, $id, $element, $gr
 			}
 		// juste la valeur
 		} else {
-			$cle = $t;
+			// soit 'nom' soit 'id:nom'
+			list($t, $sous) = explode(':', $t);
+			if (!$sous) {
+				// simple 'nom'
+				$cle = $t;
+			} else {
+				// 'id:nom'
+				list($valeur_cle, $valeur) = explode(':', $valeur, 2);
+				if ($valeur AND $valeur_cle==$t) {
+					$cle = $sous;
+					$valeur = $valeur;
+				} else {
+					$cle = $valeur = '';
+				}
+			}
 		}
-
-		return array(
-			array(
-				'cle' => $cle,
-				'valeur' => $valeur,
-			)
-		);
+		
+		if ($cle and strlen($valeur)) {
+			return array(
+				array(
+					'cle' => $cle,
+					'valeur' => $valeur,
+				)
+			);
+		}
 	}
 
 	return false;
@@ -195,7 +212,10 @@ function pmb_parse_unimarc_data() {
 		// Publication, production, diffusion, etc.
 		'210' => array(
 			'a' => 'lieu_publication',
-			'c' => 'editeur',
+			'c' => array(
+				'editeur'=>'$valeur',
+				'id_editeur'=>'$id',
+			),
 			'd' => 'annee_publication',
 			'e' => 'lieu_fabrication',
 			'h' => 'date_fabrication',
@@ -247,9 +267,13 @@ function pmb_parse_unimarc_data() {
 		),
 
 		// Unité matérielle
+		// a quelle unite apartient cette notice,
+		// c'est a dire un chapitre (notice) pour un livre (unite);
+		// il y a normalement un id a recuperer...
 		'463' => array(
 			// y a aussi plusieurs 9 decrivant un lien... ?
 			't' => 'unite_materielle', // Titre
+			'9' => 'id:id_unite_materielle', // il y a differents 9... avec des valeurs 'id:3219'
 		),
 
 		// Indexation en vocabulaire libre
@@ -271,28 +295,9 @@ function pmb_parse_unimarc_data() {
 		// 700 - Nom de personne - Responsabilité principale
 		// 701 - Nom de personne - Autre responsabilité principale
 		// 702 - Nom de personne - Responsabilité secondaire
-
-
-
-		// Collectivité - Responsabilité principale
-		'710' => array(
-			'a' => array(
-				'collectivite' => '$valeur',
-				'id_collectivite' => '$id',
-			),
-			//'4' => '' // Code de fonction
-		),
-
-
-		// Collectivité - Autre responsabilité principale
-		'711' => array(
-			'a' => array(
-				'collectivite_autre' => '$valeur',
-				'id_collectivite_autre' => '$id',
-			),
-			//'4' => '' // Code de fonction
-		),
-
+		// 710 - Nom de collectivite - Responsabilité principale
+		// 711 - Nom de collectivite - Autre responsabilité principale
+		// 712 - Nom de collectivite - Responsabilité secondaire
 
 		// Adresse électronique et mode d'accès
 		'856' => array(
@@ -341,22 +346,39 @@ function pmb_parse_unimarc_data_locales($tab) {
 
 // Nom de personne - Responsabilité principale
 function pmb_parse_unimarc_data_700($groupe, $id) {
-	return pmb_parse_unimarc_data_70x($groupe, $id);
+	return pmb_parse_unimarc_data_7xx($groupe, $id, 'personne');
 }
 
 // Nom de personne - Autre responsabilité principale
 function pmb_parse_unimarc_data_701($groupe, $id) {
-	return pmb_parse_unimarc_data_70x($groupe, $id, 2);
+	return pmb_parse_unimarc_data_7xx($groupe, $id, 'personne', 2);
 }
 
 // Nom de personne - Responsabilité secondaire
 function pmb_parse_unimarc_data_702($groupe, $id) {
-	return pmb_parse_unimarc_data_70x($groupe, $id, 3);
+	return pmb_parse_unimarc_data_7xx($groupe, $id, 'personne', 3);
 }
 
 
-function pmb_parse_unimarc_data_70x($groupe, $id, $indice='') {
+// Nom de collectif - Responsabilité principale
+function pmb_parse_unimarc_data_710($groupe, $id) {
+	return pmb_parse_unimarc_data_7xx($groupe, $id, 'collectivite');
+}
+
+// Nom de collectif - Autre responsabilité principale
+function pmb_parse_unimarc_data_711($groupe, $id) {
+	return pmb_parse_unimarc_data_7xx($groupe, $id, 'collectivite', 2);
+}
+
+// Nom de collectif - Responsabilité secondaire
+function pmb_parse_unimarc_data_712($groupe, $id) {
+	return pmb_parse_unimarc_data_7xx($groupe, $id, 'collectivite', 3);
+}
+
+// type : 'personne', 'collectivite' ...
+function pmb_parse_unimarc_data_7xx($groupe, $id, $type, $indice='') {
 	$nom = $prenom = '';
+	$type = '_' . $type;
 	foreach ($groupe as $element) {
 		switch($element->c) {
 			case 'a':
@@ -373,16 +395,16 @@ function pmb_parse_unimarc_data_70x($groupe, $id, $indice='') {
 		}
 		return array(
 			array(
-				'cle' => "id_auteur$indice",
+				'cle' => "id_auteur$type$indice",
 				'valeur' => $id,
 			),
 			array(
-				'cle' => "liensauteurs$indice",
+				'cle' => "liensauteurs$type$indice",
 				'valeur' => "<a href=\"" . generer_url_public('pmb_auteur', "id_auteur=$id") . "\">" . $nom . "</a>",
 				'@post_traitements' => array('inter' => ', '),
 			),
 			array(
-				'cle' => "lesauteurs$indice",
+				'cle' => "lesauteurs$type$indice",
 				'valeur' => $nom,
 				'@post_traitements' => array('inter' => ', '),
 			),

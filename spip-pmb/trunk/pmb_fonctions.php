@@ -942,6 +942,7 @@ function pmb_ws_parser_notice($value) {
 
 	if (isset($value->f) && is_array($value->f)) {
 		foreach($value->f as $informations) {
+			#echo "\n<pre>"; print_r($informations); echo "</pre>";
 			if ($res = pmb_parse_unimarc($informations)) {
 				foreach ($res as $r) {
 					$cle = $r['cle'];
@@ -986,23 +987,22 @@ function pmb_ws_parser_notice($value) {
 		$tresultat['lesauteurs'] = $tresultat['auteur'];
 	}
 	
-	// tous les auteurs, pour se simplifier un peu...
-	$tous = array();
-	foreach (array('lesauteurs', 'lesauteurs2', 'lesauteurs3') as $a) {
-		if (isset($tresultat[$a]) and $tresultat[$a]) {
-			$tous[] = $tresultat[$a];
+	// tous les auteurs et tous les liens d'auteurs
+	// pour se simplifier un peu...
+	foreach (array('lesauteurs', 'liensauteurs') as $quoi) {
+		$tous = array();
+		foreach (
+			array(
+				$quoi.'_personne'    , $quoi.'_personne2'    , $quoi.'_personne3', 
+				$quoi.'_collectivite', $quoi.'_collectivite2', $quoi.'_collectivite3', 
+		) as $a) {
+			if (isset($tresultat[$a]) and $tresultat[$a]) {
+				$tous[] = $tresultat[$a];
+			}
 		}
+		$tresultat['tous'.$quoi] = implode(', ', $tous);
 	}
-	$tresultat['touslesauteurs'] = implode(', ', $tous);
-	
-	// tous les liens d'auteurs, pour se simplifier un peu...
-	$tous = array();
-	foreach (array('liensauteurs', 'liensauteurs2', 'liensauteurs3') as $a) {
-		if (isset($tresultat[$a]) and $tresultat[$a]) {
-			$tous[] = $tresultat[$a];
-		}
-	}
-	$tresultat['tousliensauteurs'] = implode(', ', $tous);
+
 
 	// si pas de logo, mais isbn, on tente une demande a amazon
 	if (!isset($tresultat['source_logo']) OR !$tresultat['source_logo']) {
