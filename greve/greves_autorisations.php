@@ -1,7 +1,7 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 // fonction pour le pipeline, n'a rien a effectuer
-function chats_autoriser(){}
+function greve_autoriser(){}
 // declarations d'autorisations
 function autoriser_greves_bouton_dist($faire, $type, $id, $qui, $opt) {
         return autoriser('edit', 'greves', $id, $qui, $opt);
