@@ -1,0 +1,24 @@
+<B_greves>
+[<p class='pagination'>(#PAGINATION)</p>]
+<table class='spip greves'>
+<thead>
+<tr class='row_first'>
+	<th><:greves:label_id:></th>
+	<td><:greves:label_titre:></td>
+	<td><:greves:label_texte:></td>
+	<td><:greves:label_debut:></td>
+	<td><:greves:label_fin:></td>
+</tr>
+</thead>
+<BOUCLE_greves(GREVES){!par debut}{pagination}>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+		<td>#ID_GREVE</td>
+		<td><a href="#URL_ECRIRE{greve_edit,id_greve=#ID_GREVE}">#TITRE</td>
+		<td>#TEXTE</td>
+		<td>[(#DEBUT|affdate)]</td>
+		<td>[(#FIN|affdate)]</td>
+	</tr>
+</BOUCLE_greves>
+</table>
+[<p class='pagination'>(#PAGINATION)</p>]
+</B_greves>
