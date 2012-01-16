@@ -103,6 +103,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_creation_auteur' => 'Bug report created on <strong>@date@</strong> by <strong>@nom@</strong>',
 
 	// E
+	'erreur_date_saisie' => 'Cette date est invalide', # NEW
+	'erreur_date_saisie_superieure' => 'La date maximale doit être supérieure à la date minimale', # NEW
 	'erreur_texte_longueur_mini' => 'The minimum length of text is @nb@ characters.',
 	'erreur_verifier_formulaire' => 'Verify your form',
 	'explication_champ_sticked' => 'The sticked bug reports are listed first regardless of their status.',
@@ -115,10 +117,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_redaction' => 'When you\'re finished writing your bug report, select the status «open and discussed».',
 	'explication_url_exemple' => 'Enter here the URL of a page covered by this bug report.',
 
-	// F
-	'forum_message' => 'Your message',
-	'forum_sans_previsu' => 'Warning: no preview, your message is published immediately.',
-
 	// I
 	'icone_modifier_ticket' => 'Edit this bug report',
 	'icone_retour_ticket' => 'Back to the bug report',
@@ -126,9 +124,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_document_ajoute' => 'Added:',
 	'info_liste_tickets' => 'Bug reports',
 	'info_numero_ticket' => 'BUG REPORT NUMBER:',
-	'info_ticket_1' => '1 ticket', # NEW
-	'info_ticket_aucun' => 'Aucun ticket', # NEW
-	'info_ticket_nb' => '@nb@ tickets', # NEW
+	'info_ticket_1' => '1bug report',
+	'info_ticket_aucun' => 'No bug report',
+	'info_ticket_nb' => '@nb@ bug reports',
 	'info_tickets' => 'Bug reports',
 	'info_tickets_ouvert' => 'opened and discussed',
 	'info_tickets_redac' => 'being edited',
@@ -142,9 +140,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mail_texte_message_auto' => 'This is an automatic message: please don\'t answer.',
 	'message_aucun_ticket_recherche' => 'No ticket matches your search',
 	'message_automatique' => 'This is an automatic message: please don\'t answer.',
-	'message_le' => 'on @date@',
-	'message_poste_par' => 'Message posted by',
-	'message_publie' => 'Your message has been published',
 
 	// N
 	'no_assignation' => 'No one',
@@ -190,7 +185,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'syndiquer_tickets' => 'Syndicate the bug reports of the website',
 
 	// T
-	'texte_ticket_statut' => 'Statut du ticket :', # NEW
+	'texte_ticket_statut' => 'Bug report status:',
 	'ticket' => 'Bug report',
 	'ticket_enregistre' => 'The bug report has been saved.',
 	'tickets' => 'Bug reports',

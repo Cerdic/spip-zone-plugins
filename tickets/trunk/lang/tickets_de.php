@@ -104,6 +104,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_creation_auteur' => 'Ticket angelegt am <strong>@date@</strong> von <strong>@nom@</strong>',
 
 	// E
+	'erreur_date_saisie' => 'Cette date est invalide', # NEW
+	'erreur_date_saisie_superieure' => 'La date maximale doit être supérieure à la date minimale', # NEW
 	'erreur_texte_longueur_mini' => 'Mindeslänge des Texts sind @nb@ Zeichen.',
 	'erreur_verifier_formulaire' => 'Überprüfen Sie das Formular',
 	'explication_champ_sticked' => 'Les tickets épinglés sont toujours affichés en premier, quelque soit leur statut.', # NEW
@@ -116,10 +118,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_redaction' => 'Wenn Sie das Ticket fertig eingegeben haben,
 	geben Sie ihm den Status «Geöffnet und beschrieben.', # MODIF
 	'explication_url_exemple' => 'Geben Sie hier den URL einer Seite mit dem Problem an.', # MODIF
-
-	// F
-	'forum_message' => 'Ihre Nachricht',
-	'forum_sans_previsu' => 'Achtung, keine Vorschau. Ihre Nachricht wird sofort veröffentlicht.', # MODIF
 
 	// I
 	'icone_modifier_ticket' => 'Ticket ändern',
@@ -144,9 +142,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mail_texte_message_auto' => 'Dies ist eine automatisch erstellte Nachricht: Bitte nicht beantworten.',
 	'message_aucun_ticket_recherche' => 'Aucun ticket ne correspond à votre recherche', # NEW
 	'message_automatique' => 'Dies ist eine automatisch erstellte Nachricht: Bitte nicht beantworten.',
-	'message_le' => 'am @date@',
-	'message_poste_par' => 'Nachricht gesendet von',
-	'message_publie' => 'Ihre Nachricht wurde veröffentlicht',
 
 	// N
 	'no_assignation' => 'Niemand',
