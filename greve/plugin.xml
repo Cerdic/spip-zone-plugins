@@ -33,4 +33,10 @@
 	</pipeline>
 	<necessite id='spip_bonux' />
 	<necessite id='saisies' />
+	<utilkse id="Z" />
+	<options>greves_options.php</options>
+	<pipeline>
+		<nom>styliser</nom>
+		<inclure>greves_pipelines.php</inclure>
+	</pipeline>
 </plugin>
