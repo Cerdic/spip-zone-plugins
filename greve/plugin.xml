@@ -8,11 +8,18 @@
     <version_base>0.1</version_base>
   	<slogan>Ce n'est qu'un début, continuons le combat !</slogan>
     <etat>dev</etat>
-
+	<install>base/greves_upgrade.php</install>
     <description>Permet de mettre temporairement un site hors service pour protester</description>
-      <prefix>greve</prefix>
-   <necessite id="SPIP" version="[2.0.0;3.0.99]" />
-
+      <prefix>greves</prefix>
+   	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+	<pipeline>
+        <nom>declarer_tables_interfaces</nom>
+        <inclure>base/greves.php</inclure>
+	</pipeline>
+	<pipeline>
+        <nom>declarer_tables_principales</nom>
+        <inclure>base/greves.php</inclure>
+	</pipeline>
 
 
 </plugin>
