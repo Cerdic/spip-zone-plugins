@@ -26,10 +26,12 @@
 	</pipeline>
 	<bouton id='greves' parent='naviguer'>
         <titre>greves:greves</titre>
+        <icone>prive/themes/spip/images/greves-24.png</icone>
 	</bouton>
 	<bouton id='greves2' parent='bando_edition'>
         <titre>greves:greves</titre>
         <url>greves</url>
+        <icone>prive/themes/spip/images/greves-24.png</icone>
 	</bouton>
 	<pipeline>
         <nom>autoriser</nom>
