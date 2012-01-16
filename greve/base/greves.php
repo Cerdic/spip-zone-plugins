@@ -9,8 +9,8 @@ function greves_declarer_tables_principales($tables_principales){
 	//-- Table GREVES ------------------------------------------
 	$greves = array(
 			"id_greve"	=> "bigint(21) NOT NULL",
-			"texte"	=> "longtext DEFAULT '' NOT NULL",
 			"titre"	=> "tinytext DEFAULT '' NOT NULL",
+			"texte"	=> "longtext DEFAULT '' NOT NULL",
 			"debut"	=> "datetime",
 			"fin"	=> "datetime"
 			);
