@@ -1,6 +1,6 @@
 (function($){
 /*
- *	crayons.js (c) Fil, toggg, 2006-2011-- licence GPL
+ *	crayons.js (c) Fil, toggg, 2006-2012-- licence GPL
  */
 
 // le prototype configuration de Crayons
@@ -336,7 +336,8 @@ $.fn.activatecrayon = function(percent) {
 					triggerAjaxLoad(tous.get());
 				}
 			}})
-			.one('submit', function(){
+			.bind('form-submit-validate',function(form,a, e, options, veto){
+				if(!veto.veto)
 				crayon
 				.find('form')
 					.css('opacity', 0.5)
