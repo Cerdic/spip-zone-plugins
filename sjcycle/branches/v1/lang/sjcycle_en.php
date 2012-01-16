@@ -17,12 +17,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_fancy'=>'On clic, display the original image in a jQuery fancybox. Need the <a href="http://www.spip-contrib.net/FancyBox,3020" target="_blank">FancyBox plugin</a>',
 	'explication_fx'=>'Consultez les exemples en ligne : <a href="http://malsup.com/jquery/cycle/browser.html" target="_blank">jQuery Cycle Plugin</a>',
 	'explication_img_background' => 'Type the background color in hexa format or with the palette if the Palette Plugin is available. To force transparent background, type "transparent" (in which case, the final images will be with in png format)',
-	'explication_img_recadre'=>'This treatment is carried out on the images according to<br />
-	- their position in the slideshow, combination of the values of alignment "left/center/right" and "top/center/bottom" (ex "left center")<br />
-	- their desired final size (width height)<br /><br />
-	To know more, consult the explanation on spip.net of the functions<br />
-	- <a href="http://www.spip.net/fr_article3327.html#image_reduire" target="_blank">image_reduire</a>;<br />
-	- <a href="http://www.spip.net/fr_article3327.html#image_recadre" target="_blank">image_recadre</a>.',
+	'explication_imgparams'=>'Images are automatically resized and cropped in order to preserve the page layout during the insertion of the slideshow within the text. This treatment is carried out on the images according to:
+-* their position in the slideshow, combination of the values of alignment "left/center/right" and "top/center/bottom" (ex "left center")
+-* their desired final size (width height)',
 	'explication_mediabox'=>'On clic, display the original image in a jQuery mediabox. Need the <a href="http://www.spip-contrib.net/MediaBox" target="_blank">Mediabox plugin</a>',
 	'explication_pause'=>'Enable pause of the slideshow on hover',
 	'explication_random'=>'true for random, false for sequence (not applicable to shuffle fx) ',	
@@ -31,9 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_timeout'=>'Milliseconds between slide transitions (0 to disable auto advance)',
 	'explication_tooltip'=>'On hover, display a tooltip with image title and description. Use the jQuery tooltip plugin',
 	'explication_tooltip_carac'=>'Display the characteristics of the original image in the tooltip: width, heigth and size',
-
-	// I
-	'img_recadre' => 'Images are automatically resized and cropped in order to preserve the page layout during the insertion of the slideshow within the text.',
 
 	// L
 	'label_afficher_aide' => 'Display the help box',
@@ -82,9 +76,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_menu' => 'jQuery Cycle',
-
-	// V
-	'valeur_hex' => 'Hexadecimal value or "transparent"',
-	'valeur_px' => 'Value in pixels',
 );
 ?>
