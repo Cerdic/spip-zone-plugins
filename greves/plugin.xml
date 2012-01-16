@@ -8,6 +8,7 @@
     <version_base>0.1</version_base>
   	<slogan>Ce n'est qu'un d&#233;but, continuons le combat !</slogan>
     <etat>dev</etat>
+    <icon>prive/themes/spip/images/greves-64.png</icon>
 	<install>base/greves_upgrade.php</install>
     <description>Permet de mettre temporairement un site hors service pour protester. On peut &#233;diter une gr&#232;ve, qui reçoit un titre, un texte explicatif, une date de d&#233;but et une de fin.
     
@@ -36,7 +37,7 @@
 	</pipeline>
 
 	<necessite id='saisies' />
-	<necessite id="bonux" />
+	<necessite id="spip_bonux" />
 	<utilise id="Z" />
 	<options>greves_options.php</options>
 	<pipeline>
