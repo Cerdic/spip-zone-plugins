@@ -4,6 +4,9 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 function formulaires_editer_greve_charger_dist($id_greve='new', $retour=''){
 	$valeurs = formulaires_editer_objet_charger('greve', $id_greve, '', '', $retour, '');
+	if ($valeurs['titre']==''){
+		$valeurs['titre']==_T('greves:texte_nouvelle_greve');
+	}
 	$valeurs['debut'] = separer_date_heure($valeurs['fin']);
 	if ($valeurs['debut']!=''){
 		$valeurs['date_debut'] = affdate($valeurs['debut'][0],'d/m/Y');
