@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_destinataires_plusieurs' => 'مجوز به بازديدكنندگان براي انتخاب <b>چند </b> گيرنده از ميان نويسندگان منتخب زير ',
 	'configuration_destinataires_plusieurs_et' => 'دادن اجازه‌ي انتخاب از ميان چند دريافت‌ كننده از ميان فهرست منتخب بالا و افزودن كساني از اين گروه نويسندگان كه به فرم اضافه شده‌اند.  ',
 	'configuration_destinataires_plusieurs_ou' => 'دادن اجازه‌ي انتخاب چند دريافت كننده از ميان فهرست منتخب بالا يا از ميان نويسندگاني كه به فرم اضافه شده اند. ',
-	'configuration_destinataires_tous' => 'تمام</b> نويسندگان ايميل‌ها را دريافت كنند', # b
+	'configuration_destinataires_tous' => 'تمام</b> نويسندگان ايميل‌ها را دريافت كنند', # MODIF
 	'configuration_destinataires_tous_et' => '<b>تمام</b> نويسندگان ايميل‌ها را دريافت مي‌كنند و به فرم اضافه مي‌شوند. ',
 	'configuration_destinataires_tous_ou' => ' <b>تمام</b> نويسندگان ايميل‌ها را دريافت كنند يا فقط كساني كه به اين فرم اضافه شده‌اند دريافت كنند. ',
 	'configuration_destinataires_un' => 'دادن اجازه به بازديدكنندگان براي انتخاب <b> يك نويسنده</b> از ميان فهرست زير به عنوان دريافت كننده ',
@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_pj_previsu_singulier' => 'پيوست',
 	'form_pj_supprimer' => 'حذف ',
 	'form_pj_titre' => 'تيتر پرونده',
-	'forum_attention_nbre_caracteres' => 'توجه!</b> پيام شما بايد دست كم @nbre_caract@  كاراكتر داشته باشد', # b
+	'forum_attention_nbre_caracteres' => 'توجه!</b> پيام شما بايد دست كم @nbre_caract@  كاراكتر داشته باشد', # MODIF
 
 	// H
 	'horodatage' => 'فرم به اينجا پست شد : @horodatage@.',
