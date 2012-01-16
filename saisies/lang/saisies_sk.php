@@ -22,22 +22,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_action_supprimer' => 'Odstrániť',
 	'construire_ajouter_champ' => 'Pridať pole',
 	'construire_attention_enregistrer' => 'Nezabudnite uložiť zmeny!',
-	'construire_attention_modifie' => 'Le formulaire ci-dessous est différent du formulaire initial. Vous avez la possibilité de le réinitialiser à son état avant vos modifications.', # NEW
-	'construire_attention_supprime' => 'Vos modifications comportent des suppressions de champs. Veuillez confirmer l\'enregistrement de cette nouvelle version du formulaire.', # NEW
+	'construire_attention_modifie' => 'Tento formulár sa odlišuje od pôvodného. Máte možnosť ho obnoviť do stavu pred svojimi zmenami.',
+	'construire_attention_supprime' => 'Medzi vašimi zmenami je vymazanie niekoľkých polí. Potvrďte, prosím, registráciu tejto verzie formulára.',
 	'construire_aucun_champs' => 'V tomto formulári nie je momentálne žiadne pole',
 	'construire_confirmer_supprimer_champ' => 'Chcete odstrániť toto pole?',
-	'construire_info_nb_champs_masques' => '@nb@ champ(s) masqué(s) le temps de configurer le groupe.', # NEW
-	'construire_position_explication' => 'Indiquez devant quel autre champ sera placé celui-ci.', # NEW
+	'construire_info_nb_champs_masques' => '@nb@ skryté (-ých) pole (-í/-ia) času na nastavenie skupiny.',
+	'construire_position_explication' => 'Uveďte akékoľvek ďalšie pole predtým, ako sa vloží.',
 	'construire_position_fin_formulaire' => 'Na koniec formulára',
 	'construire_position_fin_groupe' => 'Na koniec skupiny @groupe@',
 	'construire_position_label' => 'Umiestnenie poľa',
-	'construire_reinitialiser' => 'Réinitialiser le formulaire', # NEW
-	'construire_reinitialiser_confirmer' => 'Vous allez perdre toutes vos modifications. Êtes-vous sûr de vouloir revenir au formulaire initial ?', # NEW
+	'construire_reinitialiser' => 'Znova načítať formulár',
+	'construire_reinitialiser_confirmer' => 'Stratíte všetky svoje zmeny. Určite sa chcete vrátiť na pôvodný formulár?',
 	'construire_verifications_aucune' => 'Žiadne',
 	'construire_verifications_label' => 'Typ overenia, ktorý sa má vykonať',
 
 	// E
-	'erreur_option_nom_unique' => 'Ce nom est déjà utilisé par un autre champ et il doit être unique dans ce formulaire.', # NEW
+	'erreur_option_nom_unique' => 'Tento názov už používa iné pole, a v tomto formulári musí byť jedinečný.',
 
 	// I
 	'info_configurer_saisies' => 'Testovacia stránka Saisies',
@@ -57,7 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_attention_explication' => 'Správa je dôležitejšia ako vysvetlivka.',
 	'option_attention_label' => 'Varovanie',
 	'option_autocomplete_defaut' => 'Nechať ako predvolené',
-	'option_autocomplete_explication' => 'Au chargement de la page, votre navigateur peut pré-remplir le champ en fonction de son historique', # NEW
+	'option_autocomplete_explication' => 'Pri nahrávaní stránky môže váš prehliadač automaticky vyplniť polia podľa histórie',
 	'option_autocomplete_label' => 'Automaticky vyplniť pole',
 	'option_autocomplete_off' => 'Deaktivovať',
 	'option_autocomplete_on' => 'Aktivovať',
