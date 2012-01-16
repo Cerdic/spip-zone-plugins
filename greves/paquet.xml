@@ -1,0 +1,28 @@
+<paquet
+	prefix="greves"
+	categorie="communication"
+	version="0.1.1"
+	etat="dev"
+	compatibilite="[3.0.0-beta;3.0.*]"
+	schema="0.1"
+>	
+
+	<nom>En gr&#232;ve</nom>
+	<!-- Ce n'est qu'un début, continuons le combat ! -->
+
+	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/greves.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/greves.php" />
+	<pipeline nom="autoriser" inclure="greves_autorisations.php" />
+	<pipeline nom="styliser" inclure="greves_pipelines.php" />
+
+	<necessite nom="saisies" />
+
+	<utilise nom="Z" />
+
+	<menu nom="greves" titre="greves:greves" parent="naviguer" />
+	<menu nom="greves2" titre="greves:greves" parent="bando_edition" action="greves" />
+</paquet>
