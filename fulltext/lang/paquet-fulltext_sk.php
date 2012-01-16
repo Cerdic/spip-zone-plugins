@@ -32,7 +32,7 @@ Pour un fonctionnement optimal, il faut installer des programmes complémentaire
 -* Pour les {{ODT, DOCX, PPTX, XLSX}} :
 -** Utilise des fonctions et des classes PHP (nécessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip).
   ', # NEW
-	'fulltext_slogan' => 'Indexovanie FULLTEXT na zrýchlenie vyhľadávaní'
+	'fulltext_slogan' => 'Indexovanie CELÉHO TEXTU na zrýchlenie vyhľadávaní'
 );
 
 ?>

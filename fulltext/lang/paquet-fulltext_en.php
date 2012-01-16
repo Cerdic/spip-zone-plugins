@@ -31,7 +31,7 @@ Pour un fonctionnement optimal, il faut installer des programmes complémentaire
 -** Définir les constantes correspondantes (ou utiliser le panneau de configuration) de la meme maniêre que pour les PDF.
 -* Pour les {{ODT, DOCX, PPTX, XLSX}} :
 -** Utilise des fonctions et des classes PHP (nécessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip).
-  ',
+  ', # NEW
 	'fulltext_slogan' => 'FULLTEXT indexation to speed up searches'
 );
 
