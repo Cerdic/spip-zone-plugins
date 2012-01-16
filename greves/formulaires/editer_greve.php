@@ -27,8 +27,8 @@ function formulaires_editer_greve_verifier_dist($id_greve='new', $retour=''){
 function formulaires_editer_greve_traiter_dist($id_greve='new', $retour=''){
 	$valeurs['titre']	= _request('titre');
 	$valeurs['texte']	= _request('texte');
-	$valeurs['debut']	= convertir_date(_request('date_debut')) . ' ' . _request('heure_debut').':OO';
-	$valeurs['fin']		= convertir_date(_request('date_fin')) . ' ' . _request('heure_fin').':OO';
+	$valeurs['debut']	= convertir_date(_request('date_debut')) . ' ' . _request('heure_debut').':00';
+	$valeurs['fin']		= convertir_date(_request('date_fin')) . ' ' . _request('heure_fin').':00';
 	if ($id_greve!='new'){
 		sql_updateq('spip_greves',$valeurs,'id_greve='.intval($id_greve));
 	}
