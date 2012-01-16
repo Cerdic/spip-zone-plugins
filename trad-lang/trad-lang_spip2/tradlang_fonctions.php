@@ -238,4 +238,13 @@ function inc_prepare_module_dist($id_module,  $serveur='') {
 	$having = "COUNT(*)=$count";
 	return $having;
 }
+
+function tradlang_utf8($str){
+	$str = unicode_to_utf_8(
+		html_entity_decode(
+			preg_replace('/&([lg]t;)/S', '&amp;\1', $str),
+			ENT_NOQUOTES, 'utf-8')
+	);
+	return $str;
+}
 ?>

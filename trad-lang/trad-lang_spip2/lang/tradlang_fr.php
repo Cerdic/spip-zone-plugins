@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'crayon_changer_statut' => 'Attention! Vous avez modifié le contenu de la chaîne sans en modifier le statut.',
 
 	// E
-	'entrerlangue' => 'Ajouter un code langue',
+	'entrerlangue' => 'Ajouter un code langue', 
 	'erreur_aucun_item_langue_mere' => 'La langue mère "@lang_mere@" ne contient aucun item de langue.',
 	'erreur_aucun_module' => 'Il n\'y a pas de modules disponibles dans la base.',
 	'erreur_autorisation_modifier_modules' => 'Vous n\'êtes pas autorisé à traduire les modules de langue.',
@@ -44,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_module_inconnu' => 'Ce module n\'est pas disponible',
 	'erreur_pas_langue_cible' => 'Sélectionnez une langue cible',
 	'erreur_repertoire_local_inexistant' => 'Attention : le répertoire pour la sauvegarde locale "squelettes/lang" est inexistant',
+	'explication_comm' => 'Le commentaire est une information ajoutée dans le fichier de langue afin d\'expliciter par exemple un choix de traduction particulier.',
 	'explication_langue_cible' => 'La langue vers laquelle vous traduisez.',
 	'explication_langue_origine' => 'La langue depuis laquelle vous traduisez (Seules les langues 100% complètes sont disponibles).',
 	'explication_langues_autorisees' => 'Les utilisateurs ne pourront créer de nouvelles traductions que dans les langues sélectionnées.',

@@ -27,7 +27,7 @@
 	[(#GET{sync}|non)
 		<p><img src="#CHEMIN{images/rouge.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_pas_ok:></p>
 		[(#GET{auth_trad}|oui)
-			[(#BOUTON_ACTION{<:tradlang:label_synchro_base_fichier:>,#URL_ACTION_AUTEUR{tradlang_synchro_base_fichier,#ENV{module},#SELF}})]
+			[(#BOUTON_ACTION{<:tradlang:label_synchro_base_fichier:>,#URL_ACTION_AUTEUR{tradlang_synchro_base_fichier,#MODULE,#SELF}})]
 		]
 	]]
 </li>
@@ -71,7 +71,7 @@
 	<p class="attention"><:tradlang:items_en_trop{nb=#GET{nb_trop}}:></p></B_total_item_trop>
 	[(#GET{update}|=={oui}|oui)
 		[(#GET{auth_trad}|oui)
-			[(#BOUTON_ACTION{<:tradlang:label_update_langues_cible_mere:>,#URL_ACTION_AUTEUR{tradlang_verifier_langue_base,#ENV{module}-#LANG,#SELF}})]
+			[(#BOUTON_ACTION{<:tradlang:label_update_langues_cible_mere:>,#URL_ACTION_AUTEUR{tradlang_verifier_langue_base,#MODULE/#LANG,#SELF}})]
 		]
 		[(#GET{auth_trad}|non)
 			<p><:tradlang:message_demande_update_langues_cible_mere:></p>
@@ -83,7 +83,7 @@
 	[(#GET{sync}|non)
 		<p><img src="#CHEMIN{images/rouge.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_pas_ok:></p>
 		[(#GET{auth_trad}|oui)
-			[(#BOUTON_ACTION{<:tradlang:label_synchro_base_fichier:>,#URL_ACTION_AUTEUR{tradlang_synchro_base_fichier,#ENV{module},#SELF}})]
+			[(#BOUTON_ACTION{<:tradlang:label_synchro_base_fichier:>,#URL_ACTION_AUTEUR{tradlang_synchro_base_fichier,#MODULE,#SELF}})]
 		]
 	]]
 </li>
