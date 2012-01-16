@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 function greves_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['greves'] = 'greves';	
 	$interface['table_des_traitements']['TEXTE']['greve'] = _TRAITEMENT_TYPO;
