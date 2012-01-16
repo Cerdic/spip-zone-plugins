@@ -3,6 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	'action_ajouter'		=>'Programmer une gr&eacute;ve',
 	'explications'			=>'Entre les dates comprises dans une grève, on ne peut plus consulter le site. À la place s\'affiche le texte de la grève',
 	'greves'				=> 'Gr&egrave;ves',
 	'info_modifier_greve'	=>'Modifier une gr&egrave;ve',
