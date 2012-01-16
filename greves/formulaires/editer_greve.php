@@ -7,7 +7,7 @@ function formulaires_editer_greve_charger_dist($id_greve='new', $retour=''){
 	if ($valeurs['titre']==''){
 		$valeurs['titre']==_T('greves:texte_nouvelle_greve');
 	}
-	$valeurs['debut'] = separer_date_heure($valeurs['fin']);
+	$valeurs['debut'] = separer_date_heure($valeurs['debut']);
 	if ($valeurs['debut']!=''){
 		$valeurs['date_debut'] = affdate($valeurs['debut'][0],'d/m/Y');
 		$valeurs['heure_debut'] = substr($valeurs['debut'][1],0,5);
