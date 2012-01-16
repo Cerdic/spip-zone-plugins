@@ -46,4 +46,5 @@
 		<nom>styliser</nom>
 		<inclure>greves_pipelines.php</inclure>
 	</pipeline>
+	<lien>http://www.spip-contrib.net/Mettre-son-site-en-greve</lien>
 </plugin>
