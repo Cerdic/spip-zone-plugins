@@ -5,6 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0-beta;3.0.*]"
 	schema="0.1"
+	logo="prive/themes/spip/images/greves-64.png"
 >	
 
 	<nom>En gr&#232;ve</nom>
@@ -23,6 +24,5 @@
 
 	<utilise nom="Z" />
 
-	<menu nom="greves" titre="greves:greves" parent="naviguer" />
-	<menu nom="greves2" titre="greves:greves" parent="bando_edition" action="greves" />
+	<menu nom="greves" titre="greves:greves" parent="bando_edition" action="greves"  icone='images/greves-16.png'  />
 </paquet>
