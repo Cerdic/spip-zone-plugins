@@ -91,7 +91,6 @@ function embed_url($url) {
 			$AE = new AutoEmbed();
 	
 	
-	
 			// load the embed source from a remote url
 			if (!$AE->parseUrl($url)) {
 				$code_ae = "";
