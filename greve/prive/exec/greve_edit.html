@@ -1,0 +1,16 @@
+#CACHE{0}
+[(#SET{id_greve,[(#VAL{id_greve}|_request|sinon{new})]})]
+<BOUCLE_si_autorise(CONDITION){si (#AUTORISER{modifier,greve,#GET{id_greve}})}>
+	[(#SET{retour, [(#VAL|generer_url_ecrire{exec=greves})]	})]
+	<BOUCLE_titre(GREVES){id_greve=#GET{id_greve}}{tout}>
+		[(#SET{titre, #TITRE})]
+	</BOUCLE_titre>
+	
+	[(#INCLURE{fond=prive/editer/greve,
+		id_greve=#GET{id_greve},
+		icone_retour=[(#ENV{retour,#GET{retour}}
+			|icone{<:icone_retour:>, #CHEMIN{images/greve-24.png}, #LANG_LEFT })],
+		titre=#GET{titre}
+	})]
+	
+</BOUCLE_si_autorise>

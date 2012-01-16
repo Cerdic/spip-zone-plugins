@@ -11,7 +11,7 @@
 	<install>base/greves_upgrade.php</install>
     <description>Permet de mettre temporairement un site hors service pour protester</description>
       <prefix>greves</prefix>
-   	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+   	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<pipeline>
         <nom>declarer_tables_interfaces</nom>
         <inclure>base/greves.php</inclure>
@@ -20,6 +20,17 @@
         <nom>declarer_tables_principales</nom>
         <inclure>base/greves.php</inclure>
 	</pipeline>
-
-
+	<bouton id='greves' parent='naviguer'>
+        <titre>greves:greves</titre>
+	</bouton>
+	<bouton id='greves2' parent='bando_edition'>
+        <titre>greves:greves</titre>
+        <url>greves</url>
+	</bouton>
+	<pipeline>
+        <nom>autoriser</nom>
+        <inclure>greves_autorisations.php</inclure>
+	</pipeline>
+	<necessite id='spip_bonux' />
+	<necessite id='saisies' />
 </plugin>

@@ -1,0 +1,34 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_greve,nouveau}'>
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable}|oui)
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_greve' value='#ENV{id_greve}' />
+		<ul>
+		[(#SAISIE{input, titre,
+			label=<:greves:label_titre:>,
+			obligatoire=oui})]
+			
+		[(#SAISIE{textarea, texte,
+			label=<:greves:label_texte:>})]
+		<li class='obligatoire'>
+		<label for='date_debut'><:greves:label_debut:></label>
+			<input type='text' class='text date' name='date_debut' id='date_debut' size='10' maxlength='10' value="[(#ENV{date_debut,#ENV{date}|affdate{d/m/Y}})]" />
+
+			<input type='text' class='text heure' name='heure_debut' id='heure_debut' size='5' maxlength='10' value="[(#ENV{heure_debut,#ENV{date}|affdate{H:i}})]" />
+		</li>
+		<li class='obligatoire'>
+		<label for='date_fin'><:greves:label_fin:></label>
+			<input type='text' class='text date' name='date_fin' id='date_fin' size='10' maxlength='10' value="[(#ENV{date_fin,#ENV{date}|affdate{d/m/Y}})]" />
+
+			<input type='text' class='text heure' name='heure_fin' id='heure_fin' size='5' maxlength='10' value="[(#ENV{heure_fin,#ENV{date}|affdate{H:i}})]" />
+		</li>
+		 [<div style='display:none'>(#SAISIE{date,hidden})</div>] 
+		</ul>
+		
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>
