@@ -14,7 +14,7 @@
     Entre la date de d&#233;but et la date de fin, le site n'affiche plus que le titre de la gr&#232;ve et son explication.
     </description>
       <prefix>greves</prefix>
-   	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+   	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<pipeline>
         <nom>declarer_tables_interfaces</nom>
         <inclure>base/greves.php</inclure>
@@ -36,7 +36,8 @@
 	</pipeline>
 
 	<necessite id='saisies' />
-	<utilkse id="Z" />
+	<necessite id="bonux" />
+	<utilise id="Z" />
 	<options>greves_options.php</options>
 	<pipeline>
 		<nom>styliser</nom>
