@@ -158,6 +158,13 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 			),
 			'saisies' => array(
 				array(
+					'saisie' => 'explication',
+					'options' => array(
+						'nom' => 'explication',
+						'texte' => _T('sjcycle:explication_imgparams')
+					)
+				),
+				array(
 					'saisie' => 'selection',
 					'options' => array(
 						'nom' => 'img_position',

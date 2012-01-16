@@ -17,12 +17,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_fancy'=>'Au clic, afficher l\'image originale dans une fancybox jQuery. Nécessite le plugin <a href="http://www.spip-contrib.net/FancyBox,3020" target="_blank">FancyBox</a>',
 	'explication_fx'=>'Consultez les exemples en ligne : <a href="http://malsup.com/jquery/cycle/browser.html" target="_blank">jQuery Cycle Plugin</a>',
 	'explication_img_background' => 'Saisir la couleur de fond au format hexadecimal (#FF0000 par exemple) ou via la palette si le plugin Palette est installé. Pour un fond transparent, saisir "transparent" (auquel cas, les images finales seront au format png).',
-	'explication_img_recadre'=>'Ce traitement se réalise sur les images suivant<br />
-	- leur position dans le diaporama, combinaison des valeurs d\'alignement "left/center/right" et "top/center/bottom" (ex "left center")<br />
-	- leur taille finale souhaitée (largeur hauteur)<br /><br />
-	Pour en savoir plus, consulter l\'explication sur spip.net des fonctions<br />
-	- <a href="http://www.spip.net/fr_article3327.html#image_reduire" target="_blank">image_reduire</a>;<br />
-	- <a href="http://www.spip.net/fr_article3327.html#image_recadre" target="_blank">image_recadre</a>.',
+	'explication_imgparams'=>'Les images sont redimensionnées et recadrées automatiquement afin de préserver la mise en page lors de l\'insertion du diaporama au sein du texte. Ce traitement se réalise sur les images suivant :
+-* leur position dans le diaporama, combinaison des valeurs d\'alignement "left/center/right" et "top/center/bottom" (ex "left center")
+-* leur taille finale souhaitée (largeur, hauteur)',
 	'explication_mediabox'=>'Au clic, afficher l\'image originale dans une mediabox jQuery. Nécessite le plugin <a href="http://www.spip-contrib.net/MediaBox" target="_blank">Mediabox</a>',
 	'explication_pause'=>'Active la mise en pause du diaporama automatique au survol de la souris',
 	'explication_random'=>'Active le défilement aléatoire',
@@ -31,9 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_timeout'=>'Exprime le temps en millisecondes entre 2 transitions (0 désactive le défilement automatique)',
 	'explication_tooltip'=>'Au survol, affiche une infobulle contenant titre et descriptif de l’image. Utilisation du plugin tooltip de jquery',
 	'explication_tooltip_carac'=>'Afficher les caractéristiques de l\'image originale dans l\'infobulle : largeur, hauteur et poids',
-
-	// I
-	'img_recadre' => 'Les images sont redimensionnées et recadrées automatiquement afin de préserver la mise en page lors de l\'insertion du diaporama au sein du texte.',
 
 	// L
 	'label_afficher_aide' => 'Afficher la boite d\'aide',
@@ -82,9 +76,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_menu' => 'jQuery Cycle',
-
-	// V
-	'valeur_hex' => 'Valeur hexadecimale ou "transparent"',
-	'valeur_px' => 'Valeur en pixels',
 );
 ?>
