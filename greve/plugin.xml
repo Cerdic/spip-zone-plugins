@@ -1,0 +1,18 @@
+<plugin>
+
+    <nom>En grève</nom>
+	<licence>GPL</licence>
+    <categorie>communication</categorie>
+    <auteur>[Maïeul Rouquette->http://www.maieul.net]</auteur>
+    <version>0.1.0</version>
+    <version_base>0.1</version_base>
+  	<slogan>Ce n'est qu'un début, continuons le combat !</slogan>
+    <etat>dev</etat>
+
+    <description>Permet de mettre temporairement un site hors service pour protester</description>
+      <prefix>greve</prefix>
+   <necessite id="SPIP" version="[2.0.0;3.0.99]" />
+
+
+
+</plugin>
