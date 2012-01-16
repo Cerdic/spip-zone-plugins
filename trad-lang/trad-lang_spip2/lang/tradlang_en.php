@@ -187,9 +187,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'moduletitre' => 'Modules available',
 
 	// N
+	'nb_item_langue_en_trop' => '1 item est en trop dans la langue "@langue_longue@" (@langue@).', # NEW
+	'nb_item_langue_inexistant' => '1 item est inexistant dans la langue "@langue_longue@" (@langue@).', # NEW
+	'nb_item_langue_mere' => 'La langue principale de ce module comporte 1 item.', # NEW
 	'nb_items_langue_cible' => 'The target language "@langue@" includes @nb@ items defined in the parent language.',
-	'nb_items_langue_en_trop' => '@nb@ items are too much in the language "@langue@".',
-	'nb_items_langue_inexistants' => '@nb@ items does not exists in the language "@langue@".',
+	'nb_items_langue_en_trop' => '@nb@ items are too much in the language "@langue@".', # MODIF
+	'nb_items_langue_inexistants' => '@nb@ items does not exists in the language "@langue@".', # MODIF
 	'nb_items_langue_mere' => 'The main language of this module includes @nb@ items.',
 
 	// R

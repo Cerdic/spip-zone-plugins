@@ -186,9 +186,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'moduletitre' => 'الوحدات المتوافرة',
 
 	// N
+	'nb_item_langue_en_trop' => '1 item est en trop dans la langue "@langue_longue@" (@langue@).', # NEW
+	'nb_item_langue_inexistant' => '1 item est inexistant dans la langue "@langue_longue@" (@langue@).', # NEW
+	'nb_item_langue_mere' => 'La langue principale de ce module comporte 1 item.', # NEW
 	'nb_items_langue_cible' => 'تحتوي اللغة الهدف "@langue@" على @nb@ بند محدد من اللغة الأم.',
-	'nb_items_langue_en_trop' => 'هناك @nb@ بند زائد في اللغة "@langue@".',
-	'nb_items_langue_inexistants' => 'هناك @nb@ بند لا وجود لها في اللغة "@langue@".',
+	'nb_items_langue_en_trop' => 'هناك @nb@ بند زائد في اللغة "@langue@".', # MODIF
+	'nb_items_langue_inexistants' => 'هناك @nb@ بند لا وجود لها في اللغة "@langue@".', # MODIF
 	'nb_items_langue_mere' => 'تحتوي اللغة الأساسية لهذه الوحدة على @nb@ بند.',
 
 	// R
