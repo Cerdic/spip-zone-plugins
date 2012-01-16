@@ -9,7 +9,10 @@
   	<slogan>Ce n'est qu'un début, continuons le combat !</slogan>
     <etat>dev</etat>
 	<install>base/greves_upgrade.php</install>
-    <description>Permet de mettre temporairement un site hors service pour protester</description>
+    <description>Permet de mettre temporairement un site hors service pour protester. On peut éditer une grève, qui reçoit un titre, un texte explicatif, une date de début et une de fin.
+    
+    Entre la date de début et la date de fin, le site n'affiche plus que le titre de la grève et son explication.
+    </description>
       <prefix>greves</prefix>
    	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<pipeline>
