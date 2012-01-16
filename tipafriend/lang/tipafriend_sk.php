@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfgform_titre_taf_css' => 'Predvoliť pridávanie definícií CSS',
 
 	// D
-	'doc_chapo' => 'Le plugin "Tip A Friend" propose un formulaire complet pour envoyer une page d\'un site SPIP ({n\'importe laquelle}) à une liste d\'adresses e-mail.', # NEW
+	'doc_chapo' => 'Zásuvný modul "Tip A Friend" ponúka kompletný formulár na odoslanie ({hocijakej}) stránky v SPIPe na viacero e-mailových adries.',
 	'doc_en_ligne' => 'Dokumentácia zásuvného modulu na Spip-Contribe',
 	'doc_titre_court' => 'Dokumentácia TipAFriendu',
 	'doc_titre_page' => 'Dokumentácia zásuvného modulu "Tip A Friend"',
@@ -109,21 +109,21 @@ Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubr
 	'error_dest' => 'Neuviedli ste žiadneho príjemcu',
 	'error_exp' => 'Neuviedli ste vašu e-mailovú adresu',
 	'error_exp_nom' => 'Musíte zadať svoje meno',
-	'error_not_mail' => 'Il semble que l\'adresse saisie ne soit pas un e-mail', # NEW
-	'error_one_is_not_mail' => 'Il semble qu\'une des adresses saisies au moins ne soit pas un e-mail', # NEW
+	'error_not_mail' => 'Zdá sa, že adresa, ktorú ste zadali, nie je e-mail',
+	'error_one_is_not_mail' => 'Zdá sa, že aspoň jedna zo zadaných adries nie je e-mail',
 
 	// F
 	'form_dest_label' => 'E-mailové adresy príjemcov',
 	'form_exp_label' => 'Vaša e-mailová adresa',
 	'form_exp_nom_label' => 'Vaše meno',
-	'form_exp_send_label' => '<em>Vous joindre en copie du mail (champ "Cc")</em>', # NEW
+	'form_exp_send_label' => '<em>Pripojíte kópiu e-mailu (pole "Cc")</em>',
 	'form_intro' => 'Pour transmettre l\'adresse de cette page, indiquez les adresses e-mail de vos contacts, votre propre adresse e-mail ainsi que vote nom. Vous pouvez également si vous le souhaitez ajouter un commentaire qui sera inclus dans le corps du message.<br /><small>{{*}} {Aucune de ces informations ne sera conservée.}</small>', # NEW
 	'form_message_label' => 'Môžete pridať text',
-	'form_separe_virgule' => '<em>Vous pouvez indiquer plusieurs adresses, en les séparant par un point-virgule.</em>', # NEW
+	'form_separe_virgule' => '<em>Môžete uviesť viac adries oddelených bodkočiarkou.</em>',
 	'form_title' => 'Poslať stránku e-mailom',
 
 	// I
-	'info_doc' => 'Si vous rencontrez des problèmes pour afficher cette page, [cliquez-ici->@link@].', # NEW
+	'info_doc' => 'Ak máte problémy so zobrazením tejto stránky, [kliknite sem.->@link@]',
 	'info_doc_titre' => 'Poznámka o zobrazení tejto stránky',
 	'info_skel_doc' => 'Cette page de documentation est conçue sous forme de squelette SPIP fonctionnant avec la distribution standard ({fichiers du répertoire "squelettes-dist/"}). Si vous ne parvenez pas à visualiser la page, ou que votre site utilise ses propres squelettes, les liens ci-dessous vous permettent de gérer son affichage :
 
@@ -156,7 +156,7 @@ Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubr
 	// P
 	'page_test' => 'Testovacia stránka (lokálne)',
 	'page_test_balise' => 'Zápis tagu TIPAFRIEND',
-	'page_test_cfg_pas_installe' => 'Le Plugin [CFG->http://www.spip-contrib.net/?rubrique575] ne semble pas installé ...', # NEW
+	'page_test_cfg_pas_installe' => 'Zdá sa, že zásuvný modul [CFG->http://www.spip-contrib.net/?rubrique575] nie je nainštalovaný.',
 	'page_test_fin_simulation' => '-- Koniec pridávania na simuláciu',
 	'page_test_in_new_window' => 'Testovacia stránka v novom okne',
 	'page_test_menu_inclure' => 'Inclure le modèle \'tipafriend_mail_default.html\'', # NEW
@@ -169,13 +169,13 @@ Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubr
 	'popup_name' => 'Poslať informáciu e-mailom',
 
 	// T
-	'taftest_arguments_balise_dyn' => 'Arguments reçus dans balise dynamique', # NEW
+	'taftest_arguments_balise_dyn' => 'Parametre prijaté v dymanickom tagu',
 	'taftest_arguments_balise_stat' => 'Argumenty získané v statickom tagu ',
 	'taftest_chargement_patron' => 'chargement du patron \'@patron@\'', # NEW
 	'taftest_content' => '<b><u>Podrobnosti odoslaného e-mailu</u></b>',
 	'taftest_contexte_modele' => 'Kontext odoslaný do šablóny',
-	'taftest_creation_objet_champs' => 'Création d\'un objet \'Champs\' pour l\'ID objet', # NEW
-	'taftest_creation_objet_texte' => 'Création d\'un objet \'Texte\' pour le nom d\'objet', # NEW
+	'taftest_creation_objet_champs' => 'Vytvorenie objektu "Polia" pre objekt ID',
+	'taftest_creation_objet_texte' => 'Vytvorenie objektu "Text" pre názov objektu',
 	'taftest_from' => '<b><i>Odosielateľ</i></b>',
 	'taftest_mail_content' => '<b><i>Jadro e-mailu</i></b>',
 	'taftest_mail_content_html' => '<b><i>Corps du mail version HTML</i></b>', # NEW
