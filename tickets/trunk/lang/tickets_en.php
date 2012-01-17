@@ -103,8 +103,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_creation_auteur' => 'Bug report created on <strong>@date@</strong> by <strong>@nom@</strong>',
 
 	// E
-	'erreur_date_saisie' => 'Cette date est invalide', # NEW
-	'erreur_date_saisie_superieure' => 'La date maximale doit être supérieure à la date minimale', # NEW
+	'erreur_date_saisie' => 'This date is invalid',
+	'erreur_date_saisie_superieure' => 'The maximum date must be greater than the minimum date',
 	'erreur_texte_longueur_mini' => 'The minimum length of text is @nb@ characters.',
 	'erreur_verifier_formulaire' => 'Verify your form',
 	'explication_champ_sticked' => 'The sticked bug reports are listed first regardless of their status.',
