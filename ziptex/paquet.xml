@@ -4,10 +4,12 @@
 	version="0.3.1"
 	etat="test"
 	compatibilite="];["
+	logo="spiplatex.png"
+	documentation="http://www.spip-contrib.net/Livre-avec-SPIP"
 >	
 
 	<nom>ZipTeX</nom>
-	<auteur>[Maïeul Rouquette->http://www.maieul.net]</auteur>
+	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
