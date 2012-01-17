@@ -10,7 +10,7 @@ $poids_max_image = (_IMG_MAX_SIZE == "0") ? $max_filesize : round(_IMG_MAX_SIZE/
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'forum_q' => 'Comment gérer les forums ?',
-'forum' => 'Les forums sont activés par défaut sur vos articles @complement@ ; ils sont désactivables au cas par cas... Les visiteurs peuvent donc réagir à vos articles... Vous serez prévenu par mail à chaque fois qu’un message est posté sur un de vos articles. Petit revers de médaille : les spams qui ne sont pas toujours évident à repérer et que vous devrez parfois gérer manuellement. Pour traiter un message de forum (le supprimer s’il ne vous plait pas ou le signaler comme spam si s’en est un) :
+'forum' => 'Les forums sont activés par défaut sur vos articles @complement@ ; ils sont désactivables au cas par cas... Les visiteurs peuvent donc réagir à vos articles... Vous serez prévenu par mail à chaque fois qu’un message est posté sur un de vos articles. Petit revers de médaille : les spams qui ne sont pas toujours évident à repérer et que vous devrez parfois gérer manuellement. Pour traiter un message de forum (le supprimer s’il ne vous plait pas ou le signaler comme spam si c’en est un) :
 -* Dans le site public, sur la page de l’article, si vous êtes identifiés, il y a 2 boutons "Supprimer ce Message" ou "SPAM"
 -* Dans l’espace privé, via le menu Activité / Suivre les Forums',
 
@@ -57,6 +57,6 @@ Associer le fichier créé à votre article comme un document joint, lui donner 
 _ {Attention, la taille max d’un fichier est de '.$max_filesize.', soit environ une durée de '.$duree_video_320x240_max_mn.' minutes}',
 
 'video_dist_q' => 'Comment ajouter une vidéo dailymotion (youtube,...) à un article ?',
-'video_dist' => 'Si votre vidéo est hébergée sur DailyMotion, YouTube, Viméo ou CultureBox, dans un nouvel onglet de votre navigateur, aller sur la page de visionnage de la vidéo, et copier l’url. Dans la page d’édition de votre article cliquer sur "Ajouter une vidéo" et coller l’url. Insérer alors dans la zone texte de l’article <code><videoXX|center></code>',
+'video_dist' => 'Si votre vidéo est hébergée sur DailyMotion, YouTube ou Viméo, dans un nouvel onglet de votre navigateur, aller sur la page de visionnage de la vidéo, et copier l’url. Dans la page d’édition de votre article cliquer sur "Ajouter une vidéo" et coller l’url. Insérer alors dans la zone texte de l’article <code><videoXX|center></code>',
 );
 ?>
