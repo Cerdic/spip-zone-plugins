@@ -629,9 +629,9 @@ function pmb_extraire_prets_ids($ids_pmb_session, $type_pret=0) {
 	$ws = pmb_webservice();
 	
 	foreach ($ids_pmb_session as $id_pmb_session) {
-		$prets = $ws->pmbesOPACEmpr_list_loans($id_pmb_session, $type_pret);
-		if (is_array($prets)) {
-			foreach ($prets as $pret) {
+		$les_prets = $ws->pmbesOPACEmpr_list_loans($id_pmb_session, $type_pret);
+		if (is_array($les_prets)) {
+			foreach ($les_prets as $pret) {
 				$p = array();
 				$p['id_emprunteur']             = $pret->empr_id;
 				$p['id_notice']                 = $pret->notice_id;
@@ -655,10 +655,10 @@ function pmb_extraire_prets_ids($ids_pmb_session, $type_pret=0) {
 		// on integre les informations des notices
 		$notices = pmb_extraire_notices_ids($notices);
 		// (pas tres optimise... mais y en a pas beaucoup)
-		foreach ($prets as $p) {
+		foreach ($prets as $c=>$p) {
 			foreach ($notices as $n) {
 				if ($p['id_notice'] == $n['id_notice']) {
-					$p['notice'] = $n;
+					$prets[$c]['notice'] = $n;
 					break;
 				}
 			}
@@ -710,10 +710,10 @@ function pmb_extraire_reservations_ids($ids_pmb_session) {
 		// on integre les informations des notices
 		$notices = pmb_extraire_notices_ids($notices);
 		// (pas tres optimise... mais y en a pas beaucoup)
-		foreach ($resas as $r) {
+		foreach ($resas as $c=>$r) {
 			foreach ($notices as $n) {
 				if ($r['id_notice'] == $n['id_notice']) {
-					$r['notice'] = $n;
+					$resas[$c]['notice'] = $n;
 					break;
 				}
 			}
@@ -1179,8 +1179,7 @@ function pmb_reserver_ouvrage($session_id, $notice_id, $bulletin_id, $location) 
 
 	$ws = pmb_webservice();
 	$result = $ws->pmbesOPACEmpr_add_resa($session_id, $notice_id, $bulletin_id, $location);
-
-	if (!$result->success) {
+	if (!$result->status) {
 		if ($result->error == "no_session_id") return "La réservation n'a pas pu être réalisée pour la raison suivante : pas de session";
 		else if ($result->error == "no_empr_id") return "La réservation n'a pas pu être réalisée pour la raison suivante : pas d'id emprunteur";
 		else if ($result->error == "check_empr_exists") return "La réservation n'a pas pu être réalisée pour la raison suivante : id emprunteur inconnu";

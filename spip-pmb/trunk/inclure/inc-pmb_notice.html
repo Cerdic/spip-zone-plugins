@@ -68,13 +68,24 @@
 	[(#ENV{afficher_toolbox}|=={non}|non)
 		[(#PMB_SESSION|oui)
 		[(#ENV{reserver}|=={1}|oui)
-			<strong>[(#PMB_SESSION|pmb_reserver_ouvrage{#ID,'',''})]</strong>
+			<strong>[(#PMB_SESSION|pmb_reserver_ouvrage{#ID_NOTICE,'',''})]</strong>
 		]
 		<ul class="spip">
-			<li><a href="[(#CONFIG{spip_pmb/url}|concat{addtags.php}|parametre_url{noticeid,#ID})]" class="mediabox"><:pmb:ajouter_tag:></a></li>
-			<li><a href="[(#CONFIG{spip_pmb/url}|concat{avis.php}|parametre_url{todo,liste}|parametre_url{noticeid,#ID})]" class="mediabox"><:pmb:donner_avis:></a></li>
+			<li><a href="[(#CONFIG{spip_pmb/url}|concat{addtags.php}|parametre_url{noticeid,#ID})]" class="mediabox_iframe"><:pmb:ajouter_tag:></a></li>
+			<li><a href="[(#CONFIG{spip_pmb/url}|concat{avis.php}|parametre_url{todo,liste}|parametre_url{noticeid,#ID})]" class="mediabox_iframe"><:pmb:donner_avis:></a></li>
 			<li><a href="[(#URL_PMB_NOTICE|parametre_url{reserver,1})]#compte-lecteur"><:pmb:reserver_ouvrage:></a></li>
 		</ul>
+		<script type='text/javascript'>
+		(function($){
+		$(document).ready(function() {
+			$('.mediabox_iframe').click(function() {
+				url = $(this).attr('href');
+				$.modalbox(url,{iframe:true,inline:false,fastIframe:false,height:'50%',width:'560px'});
+				return false;
+			});
+		});
+		})(jQuery);
+		</script>
 		]
 		[(#PMB_SESSION|non)
 		  <i>Identifiez-vous pour r&eacute;server cet ouvrage ou donner votre avis.</i>

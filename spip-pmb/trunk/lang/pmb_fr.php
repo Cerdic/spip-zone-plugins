@@ -140,6 +140,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'support' => 'Support',
 'sur' => 'sur',
 'source' => 'Lien sur cette ressource',
+'sous_collection' => 'Sous collection',
 
 // T
 'titre_lien_pmb' => 'PMB, un SIGB enti&egrave;rement libre',
