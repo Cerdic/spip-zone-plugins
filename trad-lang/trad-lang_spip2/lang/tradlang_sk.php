@@ -46,8 +46,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_module_inconnu' => 'Tento modul nie je dostupný',
 	'erreur_pas_langue_cible' => 'Vyberte si cieľový jazyk',
 	'erreur_repertoire_local_inexistant' => 'Pozor: priečinok, ktorý sa používa na ukladanie súborov lokálne, "squelettes/lang" neexistuje',
+	'explication_comm' => 'Komentár je informácia v jazykovom súbore napríklad na vysvetlenie toho, prečo bol daný reťazec preložený určitým spôsobom.',
 	'explication_langue_cible' => 'Jazyk, do ktorého prekladáte.',
-	'explication_langue_origine' => 'Jazyk, z ktorého prekladáte (dostupné sú iba jazyky doplnené na 100 %).',
+	'explication_langue_origine' => 'Jazyk, z ktorého prekladáte (dostupné sú iba jazyky preložené na 100 %).',
 	'explication_langues_autorisees' => 'Používatelia budú môcť vytvárať nové preklady iba vo zvolených jazykoch.',
 	'explication_limiter_langues_bilan' => 'Podľa predvolených nastavení sa zobrazí @nb@ jazykov, ak si používatelia nezvolia preferované jazyky v svojom profile.',
 	'explication_limiter_langues_bilan_nb' => 'Koľko jazykov sa zobrazí podľa predvolených nastavení (bude vybraná väčšina jazykov).',
@@ -128,7 +129,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_tradlang_str' => 'Preložený reťazec',
 	'label_update_langues_cible_mere' => 'Aktualizovať tento jazyk v databáze',
 	'label_version_originale' => 'Originálny reťazec (@lang@)',
-	'label_version_originale_comm' => 'Komentár originálnej verzie (@lang@)',
+	'label_version_originale_comm' => 'Komentár k pôvodnej verzii (@lang@)',
 	'label_version_selectionnee' => 'Reťazec vo vybranom jazyku (@lang@)',
 	'label_version_selectionnee_comm' => 'Komentár vo vybranom jazyku (@lang@)',
 	'languesdispo' => 'Dostupné jazyky',
@@ -186,12 +187,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'moduletitre' => 'Dostupné moduly',
 
 	// N
-	'nb_item_langue_en_trop' => '1 item est en trop dans la langue "@langue_longue@" (@langue@).', # NEW
-	'nb_item_langue_inexistant' => '1 item est inexistant dans la langue "@langue_longue@" (@langue@).', # NEW
-	'nb_item_langue_mere' => 'La langue principale de ce module comporte 1 item.', # NEW
+	'nb_item_langue_en_trop' => 'V jazyku "@langue_longue@" (@langue@) je 1 položka naviac.',
+	'nb_item_langue_inexistant' => 'V jazyku "@langue_longue@" (@langue@) neexistuje 1 položka.',
+	'nb_item_langue_mere' => 'Hlavný jazyk tohto modulu obsahuje 1 položku.',
 	'nb_items_langue_cible' => 'Cieľový jazyk "@langue@" obsahuje @nb@ položiek definovaných v jazyku autora.',
-	'nb_items_langue_en_trop' => '@nb@ položiek je príliš veľa v jazyku "@langue@".', # MODIF
-	'nb_items_langue_inexistants' => 'V jazyku "@langue@" neexistuje @nb@ položiek.', # MODIF
+	'nb_items_langue_en_trop' => 'V jazyku "@langue_longue@" (@langue@) je @nb@ položiek naviac.',
+	'nb_items_langue_inexistants' => 'V jazyku "@langue_longue@" (@langue@) neexistuje @nb@ položiek.',
 	'nb_items_langue_mere' => 'Hlavný jazyk tohto modulu obsahuje @nb@ položiek.',
 
 	// R

@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'crayon_changer_statut' => 'Attention! Vous avez modifié le contenu de la chaîne sans en modifier le statut.',
 
 	// E
-	'entrerlangue' => 'Ajouter un code langue', 
+	'entrerlangue' => 'Ajouter un code langue',
 	'erreur_aucun_item_langue_mere' => 'La langue mère "@lang_mere@" ne contient aucun item de langue.',
 	'erreur_aucun_module' => 'Il n\'y a pas de modules disponibles dans la base.',
 	'erreur_autorisation_modifier_modules' => 'Vous n\'êtes pas autorisé à traduire les modules de langue.',

@@ -46,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_module_inconnu' => 'هذه الوحدة غير متوافرة',
 	'erreur_pas_langue_cible' => 'اختر لغة لتكون هدفاً',
 	'erreur_repertoire_local_inexistant' => 'تنبيه: مجلد "squelettes/lang" لحفظ النسخة المحلية غير موجود',
+	'explication_comm' => 'Le commentaire est une information ajoutée dans le fichier de langue afin d\'expliciter par exemple un choix de traduction particulier.', # NEW
 	'explication_langue_cible' => 'اللغة التي تترجم اليها.',
 	'explication_langue_origine' => 'اللغة التي تترجم منها (اللغات الكاملة ١٠٠٪ هي الوحيدة المتوافرة).',
 	'explication_langues_autorisees' => 'لا يمكن للمستخدمين إنشاء ترجمات جديدة الا للغات المحددة.',

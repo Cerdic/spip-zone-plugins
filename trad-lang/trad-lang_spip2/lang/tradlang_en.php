@@ -46,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_module_inconnu' => 'This module is not available',
 	'erreur_pas_langue_cible' => 'Select a language',
 	'erreur_repertoire_local_inexistant' => 'Warning: the directory used to save files localy does not exist: "squelettes/lang"',
+	'explication_comm' => 'The comment is an added information in the language file in order to explain for example a particular choice of translation.',
 	'explication_langue_cible' => 'The language into which you translate.',
 	'explication_langue_origine' => 'The language from which you translate (Only 100% complete languages ​​are available).',
 	'explication_langues_autorisees' => 'Users will be able to create a new translation only in the selected languages​​.',
@@ -187,12 +188,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'moduletitre' => 'Modules available',
 
 	// N
-	'nb_item_langue_en_trop' => '1 item est en trop dans la langue "@langue_longue@" (@langue@).', # NEW
-	'nb_item_langue_inexistant' => '1 item est inexistant dans la langue "@langue_longue@" (@langue@).', # NEW
-	'nb_item_langue_mere' => 'La langue principale de ce module comporte 1 item.', # NEW
+	'nb_item_langue_en_trop' => '1 item is too much in the language "@langue_longue@" (@langue@).',
+	'nb_item_langue_inexistant' => '1 item doesn\'t exist in the language "@langue_longue@" (@langue@).',
+	'nb_item_langue_mere' => 'The main language of this module includes 1 item.',
 	'nb_items_langue_cible' => 'The target language "@langue@" includes @nb@ items defined in the parent language.',
-	'nb_items_langue_en_trop' => '@nb@ items are too much in the language "@langue@".', # MODIF
-	'nb_items_langue_inexistants' => '@nb@ items does not exists in the language "@langue@".', # MODIF
+	'nb_items_langue_en_trop' => '@nb@ items are too much in the language "@langue_longue@" (@langue@).',
+	'nb_items_langue_inexistants' => '@nb@ items does not exists in the language "@langue_longue@" (@langue@).',
 	'nb_items_langue_mere' => 'The main language of this module includes @nb@ items.',
 
 	// R
