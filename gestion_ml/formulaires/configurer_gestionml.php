@@ -25,8 +25,8 @@ function formulaires_configurer_gestionml_saisies_dist(){
 			'saisie' => 'fieldset',
 			'options' => array(
 				'nom' => 'config_ovh',
-				'label' => _T('gestionml:config_ovh_legend'),
-				'afficher_si' => _T('@hebergeur@ == 1')
+				'label' => _T('gestionml:configurer_ovh_legend'),
+				'afficher_si' => '@hebergeur@ == 1'
 			),
 			'saisies' => array(
 				array(
