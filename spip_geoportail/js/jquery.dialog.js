@@ -114,12 +114,11 @@
 		// Gestion des raccourcis clavier
 		jQuery(document).keydown(function (e) 
 		{	var code = (e.keyCode ? e.keyCode : e.which); 
-			//if (code == 13) { $.jqDialog.action('ok'); return false; }
+//			if (param.ok && code == 13) { $.jqDialog.action('ok'); return false; }
 			if (code == 27) { $.jqDialog.action('undo'); return false; }
  			return true;
 		});
-		input = jQuery('#jqDialog input');
-		if (input.length) input[0].focus();
+		jQuery('#jqDialog input[type=text]').focus().select();
 		
 	};
 	
