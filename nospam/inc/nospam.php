@@ -114,6 +114,20 @@ function analyser_spams($texte) {
 
 	if (!$texte) return $infos;
 
+	// on travaille d'abord sur le texte 'brut' tel que saisi par
+	// l'utilisateur pour ne pas avoir les class= et style= que spip ajoute
+	// sur les raccourcis.
+	
+	// on ne tient pas compte des blocs <code> et <cadre> ni de leurs contenus
+	$texte_humain = preg_replace(',<(code|cadre)\s*[^>]*>.*</\1>,UimsS', ' ', $texte);
+	// on repère dans ce qui reste la présence de style= ou class= qui peuvent
+	// servir à masquer du contenu
+	$hidden = ",\s(?:style|class)=[^>]+>,UimsS";
+	if (preg_match($hidden,$texte_humain)) {
+		// suspicion de spam
+		$infos['contenu_cache'] = true;
+	}
+
 	include_spip('inc/texte');
 	$texte = propre($texte);
 
@@ -123,15 +137,6 @@ function analyser_spams($texte) {
 	// nombre de liens
 	$liens = array_filter(extraire_balises($texte,'a'),'pas_lien_ancre');
 	$infos['nombre_liens'] = count($liens);
-
-	// on ne tient pas compte des blocs <code> et <cadre> ni de leurs contenus
-	$texte_humain = preg_replace(',<(code|cadre)\s*[^>]*>.*</\1>,UimsS', ' ', $texte);
-	// on repère dans ce qui reste la présence de style= ou class= qui peuvent
-	// servir à masquer du contenu
-	$hidden = ",\s(?:style|class)=[^>]+>,UimsS";
-	if (preg_match($hidden,$texte_humain))
-		// suspicion de spam
-		$infos['contenu_cache'] = true;
 
 	// taille du titre de lien minimum
 	if (count($liens)) {
