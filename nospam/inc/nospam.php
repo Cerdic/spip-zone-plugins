@@ -124,11 +124,13 @@ function analyser_spams($texte) {
 	$liens = array_filter(extraire_balises($texte,'a'),'pas_lien_ancre');
 	$infos['nombre_liens'] = count($liens);
 
-	// repérer le contenu caché par des ruses html
-	$hidden = "@\<.*style.*(display|position|overflow|visibility|height)\s*:.*>@i";
-	// ne pas analyser les extraits de code
-	$texte_humain = preg_replace('@<(?:code|pre).*>[^<]*</(?:code|pre)>@', '', $texte);
+	// on ne tient pas compte des blocs <code> et <cadre> ni de leurs contenus
+	$texte_humain = preg_replace(',<(code|cadre)\s*[^>]*>.*</\1>,UimsS', ' ', $texte);
+	// on repère dans ce qui reste la présence de style= ou class= qui peuvent
+	// servir à masquer du contenu
+	$hidden = ",\s(?:style|class)=[^>]+>,UimsS";
 	if (preg_match($hidden,$texte_humain))
+		// suspicion de spam
 		$infos['contenu_cache'] = true;
 
 	// taille du titre de lien minimum
