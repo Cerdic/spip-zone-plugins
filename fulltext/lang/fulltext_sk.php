@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'documents_proteges' => 'Chránené dokumenty',
 
 	// E
-	'enfan' => '', # MODIF
+	'enfan' => 'deti',
 	'enfance' => 'detstvo',
 	'enfant' => 'dieťa',
 	'enfanter' => 'dieťa',
@@ -50,13 +50,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_option_readonly' => 'Táto možnosť je stránke nanútená a&nbsps;nedá sa zmeniť.',
 
 	// F
-	'fant' => '', # MODIF
+	'fant' => 'eťa',
 	'fonctionnement_recherche' => 'Ako funguje vyhľadávací systém na tejto stránke ',
 	'fulltext_cree' => 'FULLTEXT vytvorený',
 	'fulltext_creer' => 'Vytvoriť index @index@',
 	'fulltext_documentation' => 'Viac informácií o nastaveniach nájdete v dokumentácii na internete:',
-	'fulltext_documents' => 'Fulltext - Documents', # NEW
-	'fulltext_index' => 'Fulltext - Index', # NEW
+	'fulltext_documents' => 'Fulltext – Dokumenty',
+	'fulltext_index' => 'Fulltext – Register',
 
 	// G
 	'general' => 'Všeobecné',
