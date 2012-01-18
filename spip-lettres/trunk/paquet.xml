@@ -1,0 +1,54 @@
+<paquet
+	prefix="lettres"
+	categorie="communication"
+	version="5.6.2"
+	etat="dev"
+	compatibilite="[3.0.0-dev;["
+	logo="prive/images/lettre-48.png"
+	schema="5.4"
+	documentation="http://www.spip-contrib.net/Spip-Lettres-gestionnaire-de-newsletter"
+>	
+
+	<nom>SPIP-Lettres</nom>
+	<!-- Gestion de lettres d'information -->
+
+	<auteur lien="www.artego.fr">Art&#233;go</auteur>
+	<auteur lien="www.yterium.net">Cedric Morin</auteur>
+
+	<licence lien="http://artlibre.org/licence/lal">Art libre 1.3</licence>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/lettres.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/lettres.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/lettres.php" />
+	<pipeline nom="declarer_tables_objets_surnoms" inclure="inc/lettres_pipelines.php" />
+	<pipeline nom="rechercher_liste_des_champs" inclure="inc/lettres_pipelines.php" />
+	<pipeline nom="autoriser" inclure="inc/lettres_autorisations.php" />
+	<pipeline nom="objet_compte_enfants" inclure="inc/lettres_pipelines.php" />
+	<pipeline nom="calculer_rubriques" inclure="inc/lettres_pipelines.php" />
+	<pipeline nom="trig_propager_les_secteurs" inclure="inc/lettres_pipelines.php" />
+	<pipeline nom="trig_calculer_langues_rubriques" inclure="inc/lettres_pipelines.php" />
+	<pipeline nom="affiche_enfants" inclure="inc/lettres_pipelines.php" />
+	<pipeline nom="editer_contenu_objet" inclure="inc/lettres_pipelines.php" />
+	<pipeline nom="libelle_association_mots" inclure="inc/lettres_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="inc/lettres_pipelines.php" />
+
+	<necessite nom="facteur" compatibilite="[1.5.1;[" />
+	<necessite nom="YAML" compatibilite="[1.5;[" />
+	<necessite nom="saisies" compatibilite="[1.9.6;[" />
+
+	<menu nom="lettres_tous" titre="lettresprive:lettres_information" parent="naviguer" icone="prive/images/lettre-24.png" />
+	<menu nom="abonnes_tous" titre="lettresprive:abonnes" parent="auteurs" icone="prive/images/abonne.png" />
+	<menu nom="lettres_tous2" titre="lettresprive:lettres_information" parent="bando_edition" icone="images/lettre-16.png" action="lettres_tous" />
+	<menu nom="abonnes_tous2" titre="lettresprive:abonnes" parent="bando_reactions" icone="images/lettre-abonne-16.png" action="abonnes_tous" />
+	<menu nom="config_lettres" titre="lettresprive:lettres_information" parent="bando_configuration" icone="images/lettre-16.png" action="config_lettres_formulaire" />
+
+	<onglet nom="config_lettres_formulaire_top" titre="lettresprive:lettres_information" parent="configuration" icone="prive/images/lettre-24.png" action="config_lettres_formulaire" />
+	<onglet nom="config_lettres_formulaire" titre="lettresprive:config_formulaire" parent="lettres" icone="prive/images/config_formulaire.png" />
+	<onglet nom="config_lettres_squelettes" titre="lettresprive:config_squelettes" parent="lettres" icone="prive/images/config_squelettes.png" />
+	<onglet nom="config_lettres_cron" titre="lettresprive:config_cron" parent="lettres" icone="prive/images/cron-24.png" />
+
+	<chemin path="crayons/" type="public" />
+	<chemin path="" />
+</paquet>

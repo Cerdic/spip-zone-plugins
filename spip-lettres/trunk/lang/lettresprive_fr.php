@@ -238,6 +238,10 @@
 		'description_page-lettres' => 'Cette page est utilis&eacute;e pour g&eacute;r&eacute;r les abonnements aux lettres d\'information.',
 	
 
+	'oui' => 'Oui',
+	'non' => 'Non',
+	'notifications' => 'Notifications',
+
 
 	);
 
