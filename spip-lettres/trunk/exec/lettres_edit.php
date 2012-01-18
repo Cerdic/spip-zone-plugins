@@ -72,12 +72,12 @@
 
 
 		$oups = ($new
-			? generer_url_ecrire("naviguer","id_rubrique=".$id_rubrique)
+			? generer_url_ecrire('rubrique',"id_rubrique=".$id_rubrique)
 			: generer_url_ecrire("lettres","id_lettre=".$id_lettre)
 			);
 
 		$contexte = array(
-		'icone_retour'=>icone_inline(_T('icone_retour'), $oups, find_in_path("prive/images/lettre-24.png"), "rien.gif",$GLOBALS['spip_lang_left']),
+		'icone_retour'=>icone_inline(_T('icone_retour'), $oups, "lettre-24.png", "rien.gif",$GLOBALS['spip_lang_left']),
 		'redirect'=>generer_url_ecrire("lettres"),
 		'titre'=>$lettre->titre,
 		'new'=>$id_lettre,

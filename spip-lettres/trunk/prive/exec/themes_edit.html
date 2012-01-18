@@ -20,7 +20,7 @@
 				<ul class="instituer">
 					<li><strong><:rubrique|ucfirst:> : </strong> 
 					    <BOUCLE_rubrique(RUBRIQUES){tout}{id_rubrique}>
-							<a href="[(#URL_ECRIRE{naviguer}|parametre_url{id_rubrique, #ID_RUBRIQUE})]">#TITRE</a>
+							<a href="[(#URL_ECRIRE{rubrique}|parametre_url{id_rubrique, #ID_RUBRIQUE})]">#TITRE</a>
 						</BOUCLE_rubrique>
 					</li>
 				</ul>

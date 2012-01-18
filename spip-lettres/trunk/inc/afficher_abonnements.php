@@ -31,7 +31,7 @@
 
 		$vals[] = http_img_pack(_DIR_PLUGIN_LETTRES.'prive/images/rubrique-12.png', "rub", '');
 
-		$s = "<a href='".generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique)."'$dir_lang style=\"display:block;\">";
+		$s = "<a href='".generer_url_ecrire('rubrique', 'id_rubrique='.$id_rubrique)."'$dir_lang style=\"display:block;\">";
 		if ($id_rubrique == 0) {
 			$s.= _T('lettresprive:racine_du_site');
 		} else {

@@ -121,7 +121,7 @@ TODO
 
 		$raccourcis = icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire('abonnes_tous'), _DIR_PLUGIN_LETTRES.'prive/images/abonne.png', 'rien.gif', false);
 		if ($id_rubrique)
-			$raccourcis.= icone_horizontale(_T('lettresprive:retour_rubrique'), generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique), _DIR_PLUGIN_LETTRES.'prive/images/rubrique-24.png', 'rien.gif', false);
+			$raccourcis.= icone_horizontale(_T('lettresprive:retour_rubrique'), generer_url_ecrire('rubrique', 'id_rubrique='.$id_rubrique), _DIR_PLUGIN_LETTRES.'prive/images/rubrique-24.png', 'rien.gif', false);
 		echo bloc_des_raccourcis($raccourcis);
   		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'naviguer_import'),'data'=>''));
 

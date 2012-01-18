@@ -91,8 +91,8 @@
 		echo '</div>';
 
 		echo bloc_des_raccourcis(
-				icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire("abonnes_tous"), _DIR_PLUGIN_LETTRES."prive/images/abonne.png", 'rien.gif', false).
-				icone_horizontale(_T('lettresprive:ajouter_abonne'), generer_url_ecrire('abonnes_edit'), _DIR_PLUGIN_LETTRES.'prive/images/abonne.png', 'creer.gif', false)
+				icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire("abonnes_tous"), 'abonne-24.png', 'rien.gif', false).
+				icone_horizontale(_T('lettresprive:ajouter_abonne'), generer_url_ecrire('abonnes_edit'), 'abonne-24.png', 'creer.gif', false)
 			);
 
   		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'abonnes', 'id_abonne' => $abonne->id_abonne), 'data'=>''));
@@ -107,7 +107,7 @@
 		global $table_des_abonnes;
 		echo '<div class="bandeau_actions">';
 		echo '<div style="float: right;">';
-		echo icone_inline($table_des_abonnes[$abonne->objet]['url_prive_titre'], generer_url_ecrire($table_des_abonnes[$abonne->objet]['url_prive'], $table_des_abonnes[$abonne->objet]['champ_id'].'='.$abonne->id_objet), _DIR_PLUGIN_LETTRES.'prive/images/abonne.png', "edit.gif", $GLOBALS['spip_lang_left']);
+		echo icone_inline($table_des_abonnes[$abonne->objet]['url_prive_titre'], generer_url_ecrire($table_des_abonnes[$abonne->objet]['url_prive'], $table_des_abonnes[$abonne->objet]['champ_id'].'='.$abonne->id_objet), _DIR_PLUGIN_LETTRES.'prive/images/abonne-24.png', "edit.gif", $GLOBALS['spip_lang_left']);
 		echo '</div>';
 		echo '</div>';
 
@@ -135,7 +135,7 @@
 					$titre = sql_getfetsel('titre', $rubouthem, 'id_rubrique='.intval($id_rubrique));
 				echo "<tr style='background-color: #eeeeee;'>";
 				echo '<td width="12">'.http_img_pack(_DIR_PLUGIN_LETTRES.'prive/images/rubrique-12.png', "rub", '').'</td>';
-				echo '<td><a href="'.generer_url_ecrire("naviguer","id_rubrique=".$id_rubrique).'">'.typo($titre).'</a></td>';
+				echo '<td><a href="'.generer_url_ecrire('rubrique',"id_rubrique=".$id_rubrique).'">'.typo($titre).'</a></td>';
 				echo '<td width="60" class="arial1">'._T('lettresprive:'.$statut).'</td>';
 				echo '<td width="100" class="arial1">'.affdate($abo['date_abonnement']).'</td>';
 				echo '<td width="70" class="arial1">'."<a href='" . generer_url_ecrire('abonnes', "id_abonne=$id_abonne&desabonner=".$id_rubrique) . "'>"._T('lettresprive:desabonner').'</a></td>';

@@ -37,7 +37,7 @@
 		if ($row['id_rubrique'] == 0)
 			$vals[] = _T('lettresprive:racine_du_site');
 		else
-			$vals[] = '<a href="'.generer_url_ecrire('naviguer', 'id_rubrique='.$row['id_rubrique']).'">'.typo($row['titre_rub']).'</a>';
+			$vals[] = '<a href="'.generer_url_ecrire('rubrique', 'id_rubrique='.$row['id_rubrique']).'">'.typo($row['titre_rub']).'</a>';
 
 		$vals[] = '<a href="'.generer_url_ecrire('config_lettres_formulaire', 'supprimer_theme='.$row['id_theme']).'">'._T('lettresprive:supprimer_theme').'</a>';
 

@@ -28,13 +28,13 @@
 	function afficher_cron_boucle($row, $own) {
 		$vals = '';
 
-		$vals[] = http_img_pack('../'._DIR_PLUGIN_LETTRES.'prive/images/cron-16.png', "case", '');
+		$vals[] = http_img_pack('cron-16.png', "case", '');
 
 		$vals[] = typo($row['titre']);
 
 		$vals[] = http_img_pack('../'._DIR_PLUGIN_LETTRES.'prive/images/rubrique-12.png', "rub", '');
 
-		$vals[] = '<a href="'.generer_url_ecrire('naviguer', 'id_rubrique='.$row['id_rubrique']).'">'.typo($row['titre_rub']).'</a>';
+		$vals[] = '<a href="'.generer_url_ecrire('rubrique', 'id_rubrique='.$row['id_rubrique']).'">'.typo($row['titre_rub']).'</a>';
 
 		$vals[] = '<a href="'.generer_url_ecrire('config_lettres_cron', 'supprimer_cron='.$row['id_rubrique']).'">'._T('lettresprive:supprimer_cron').'</a>';
 
