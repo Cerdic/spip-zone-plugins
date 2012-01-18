@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_suppression_adresse' => 'Voulez-vous vraiment supprimer cette adresse ?',
 	'confirmer_suppression_email' => 'Voulez-vous vraiment supprimer ce courriel ?',
 	'confirmer_suppression_numero' => 'Voulez-vous vraiment supprimer ce numéro ?',
+	'contacts' => 'Contacts',
 
 	// E
 	'editer_adresse' => 'Éditer une adresse',
@@ -72,6 +73,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouvel_email' => 'Nouveau courriel',
 	'nouvelle_adresse' => 'Nouvelle adresse',
 	'numeros' => 'Numéros',
+
+	// O
+	'organisations' => 'Organisations',
 
 	// R
 	'rubriques' => 'Rubriques',

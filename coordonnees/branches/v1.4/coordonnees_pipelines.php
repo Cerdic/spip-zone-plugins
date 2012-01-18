@@ -13,11 +13,11 @@
 **/
 function liste_objets_coordonnees($quoi = '') {
 	$liste = array(
-		'auteur'       => array('titre'=>_T('coordonnees:auteurs'),   'exec'=>'auteur_infos'),
-		'article'      => array('titre'=>_T('coordonnees:articles'),  'exec'=>'articles'),
-		'rubrique'     => array('titre'=>_T('coordonnees:rubriques'), 'exec'=>'naviguer'),
-		'contact'      => array('titre'=>_T('contacts:contacts'),     'exec'=>'contact'),
-		'organisation' => array('titre'=>_T('contacts:organisations'),'exec'=>'organisation'),
+		'auteur'       => array('titre'=>_T('coordonnees:auteurs'),      'exec'=>'auteur_infos'),
+		'article'      => array('titre'=>_T('coordonnees:articles'),     'exec'=>'articles'),
+		'rubrique'     => array('titre'=>_T('coordonnees:rubriques'),    'exec'=>'naviguer'),
+		'contact'      => array('titre'=>_T('coordonnees:contacts'),     'exec'=>'contact'),
+		'organisation' => array('titre'=>_T('coordonnees:organisations'),'exec'=>'organisation'),
 	);
 	
 	if (!$quoi) {
