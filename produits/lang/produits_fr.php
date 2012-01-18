@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'configurer_taxe_defaut_explication' => 'Saisir la taxe par défaut applicable aux produits sous la forme 0.196 pour une TVA à 19,6% par exemple (cette valeur peut être surchargée ensuite pour chaque produit). Attention cependant à ne pas configurer à nouveau cette taxe dans un autre plugin (Paypal par exemple), sinon laissez 0.',
+	'configurer_taxe_defaut_explication' => 'Saisir la taxe par défaut applicable aux produits sous la forme 0.196 pour une TVA à 19,6% par exemple (cette valeur peut être surchargée ensuite pour chaque produit).',
 	'configurer_taxe_defaut_label' => 'Taxe par défaut',
 	'configurer_titre' => 'Configuration des produits',
 
