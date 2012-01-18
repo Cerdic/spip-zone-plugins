@@ -274,9 +274,10 @@ class DOCXtoHTML {
             $mediaFolder = pathinfo($this->docxPath,PATHINFO_BASENAME);
             $ext = pathinfo($this->docxPath,PATHINFO_EXTENSION);
             $MediaFolder = strtolower(str_replace(".".$ext,"",str_replace(" ","-",$mediaFolder)));
-            $this->mediaDir = "../../uploads/media/".$MediaFolder;
+            $this->mediaDir = "../../uploads/media/".$MediaFolder;              
         } else {
-            $this->mediaDir = "../../uploads/media/".$this->content_folder;
+           //$this->mediaDir = "../../uploads/mediaDDD55/".$this->content_folder;
+           $this->mediaDir = "../IMG/".$this->content_folder;           
         }
         if($this->mkdir_p($this->mediaDir)){
             return true;

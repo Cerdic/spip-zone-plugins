@@ -27,6 +27,7 @@ function docx_to_html($filepath) {
 
 	$extract->docxPath = $filepath;
 	$extract->tempDir = $PostOffice->tempDir; # URK c'est dans le rep du plugin !
+	$path_info = pathinfo($filepath);
 	$extract->content_folder = strtolower(str_replace("." . $path_info['extension'], "", str_replace(" ", "-", $path_info['basename'])));
 	$extract->image_max_width = $postoffice_max_image;
 	$extract->imagePathPrefix = _DIR_TMP;#plugins_url();
@@ -44,7 +45,7 @@ function docx_to_html($filepath) {
 		$extract->allowColor = ($_POST['postoffice_colors'] == "true") ? true : false;
 	} else {
 		$extract->allowColor = false;
-	}
+	}	
 	$extract->Init();
 
 	//handle the output of the class and define variables needed for the WP post

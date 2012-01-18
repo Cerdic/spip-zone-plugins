@@ -303,7 +303,7 @@ function nettoyer_format($t) {
   $conv_formats['XTG_SPIP'] = 'quark';
 
   // conversion DOCX
-  $conv_formats['DOCX_SPIP'] = 'docx';
+  $conv_formats['DOCX_SPIP'] = 'docx';  // function extract/
 
 
   // Conversion SLA (Scribus) -> SPIP

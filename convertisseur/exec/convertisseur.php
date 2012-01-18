@@ -164,7 +164,6 @@ function exec_convertisseur(){
 
 	echo "<h3>"._L("Votre texte &agrave; convertir :")."</h3>\n";
 
-
 	// format memorise pour avoir le selected dans le menu
 	if (!$format)
 		$format = $GLOBALS['auteur_session']['prefs']['convertisseur_format'];
