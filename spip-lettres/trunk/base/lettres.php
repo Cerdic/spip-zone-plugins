@@ -78,7 +78,7 @@ function lettres_declarer_tables_principales($tables_principales) {
 					);
 	$spip_abonnes_key = array(
 						"PRIMARY KEY" 	=> "id_abonne",
-						"UNIQUE code"	=> "code"
+						"KEY code"	=> "code"
 					);
 	$spip_clics = array(
 						"id_clic"		=> "BIGINT(21) NOT NULL",
@@ -87,7 +87,7 @@ function lettres_declarer_tables_principales($tables_principales) {
 					);
 	$spip_clics_key = array(
 						"PRIMARY KEY"	=> "id_clic",
-						"UNIQUE lettre"	=> "id_lettre, url"
+						"KEY lettre"	=> "id_lettre, url"
 					);
 	$spip_desabonnes = array(
 						"id_desabonne"	=> "BIGINT(21) NOT NULL",
@@ -95,7 +95,7 @@ function lettres_declarer_tables_principales($tables_principales) {
 					);
 	$spip_desabonnes_key = array(
 						"PRIMARY KEY" 	=> "id_desabonne",
-						"UNIQUE email"	=> "email"
+						"KEY email"	=> "email"
 					);
 	$spip_lettres = array(
 						"id_lettre"				=> "BIGINT(21) NOT NULL",
@@ -125,11 +125,11 @@ function lettres_declarer_tables_principales($tables_principales) {
 						"titre"					=> "TEXT NOT NULL"
 					);
 	$spip_rubriques_crontabs_key = array(
-						"UNIQUE id_rubrique"	=> "id_rubrique"
+						"KEY id_rubrique"		=> "id_rubrique"
 					);
 	$spip_themes = array(
 						"id_theme"					=> "BIGINT(21) NOT NULL",
-						"id_rubrique"				=> "BIGINT (21) DEFAULT '0' NOT NULL",
+						"id_rubrique"				=> "BIGINT(21) DEFAULT '0' NOT NULL",
 						"titre"						=> "TEXT NOT NULL",
 						"lang"						=> "VARCHAR(10) NOT NULL",
 						"expediteur_type"			=> "ENUM('default','webmaster','author','custom') NOT NULL DEFAULT 'default'",
@@ -139,7 +139,7 @@ function lettres_declarer_tables_principales($tables_principales) {
 					);
 	$spip_themes_key = array(
 						"PRIMARY KEY"			=> "id_theme",
-						"UNIQUE id_rubrique"	=> "id_rubrique"
+						"KEY id_rubrique"	=> "id_rubrique"
 					);
 	$tables_principales['spip_abonnes'] =
 		array('field' => &$spip_abonnes, 'key' => &$spip_abonnes_key);
@@ -186,8 +186,8 @@ function lettres_declarer_tables_auxiliaires($tables_auxiliaires) {
 					);
 	$spip_abonnes_statistiques = array(
 						"periode"				=> "VARCHAR(7) NOT NULL",
-						"nb_inscriptions"		=> "BIGINT (21) DEFAULT '0' NOT NULL",
-						"nb_desinscriptions"	=> "BIGINT (21) DEFAULT '0' NOT NULL"
+						"nb_inscriptions"		=> "BIGINT(21) DEFAULT '0' NOT NULL",
+						"nb_desinscriptions"	=> "BIGINT(21) DEFAULT '0' NOT NULL"
 					);
 	$spip_abonnes_statistiques_key = array(
 						"PRIMARY KEY"	=> "periode"
@@ -203,7 +203,7 @@ function lettres_declarer_tables_auxiliaires($tables_auxiliaires) {
 					);
 	$spip_lettres_statistiques = array(
 						"periode"		=> "VARCHAR(7) NOT NULL",
-						"nb_envois"		=> "BIGINT (21) DEFAULT '0' NOT NULL"
+						"nb_envois"		=> "BIGINT(21) DEFAULT '0' NOT NULL"
 					);
 	$spip_lettres_statistiques_key = array(
 						"PRIMARY KEY"	=> "periode"

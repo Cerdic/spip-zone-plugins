@@ -13,17 +13,11 @@ function lettres_upgrade($nom_meta_base_version,$version_cible){
 	$maj = array();
 
 	$maj['create'] = array(
-		array('maj_tables',array('spip_abonnes_clics',
-								'spip_abonnes_lettres',
-								'spip_desabonnes',
-								'spip_abonnes_rubriques',
-								'spip_articles_lettres',
-								'spip_lettres_statistiques',
-								'spip_themes',
-								'spip_lettres',
-								'spip_rubriques_crontabs')),
-
+		array('creer_base'),
+		array('spip_lettres_update_meta'),
+		array('spip_lettres_creer_repertoire_documents'),
 	);
+	
 	$maj['0.1'] = array( 
 		array('spip_lettres_update_meta',$version_plugin,$nom_meta_base_versio,$current_version,$version_cible),	
 		array('spip_lettres_creer_repertoire_documents'),

@@ -49,7 +49,7 @@
 		while ($row = sql_fetch($r))
 		  sql_updateq('spip_rubriques', array('statut_tmp'=>'publie', 'date_tmp'=>$row['date_h']), "id_rubrique=".$row['id']);
 		// Effacer les abonnements à des rubriques qui n'existent plus
-		$orphelins = sql_select('AR.id_rubrique AS id_rubrique', 'spip_abonnes_rubriques AS AR LEFT JOIN spip_rubriques AS R ON R.id_rubrique=AR.id_rubrique', 'ISNULL(R.id_rubrique) AND AR.id_rubrique!=0', 'AR.id_rubrique');
+		$orphelins = sql_select('AR.id_rubrique AS id_rubrique', 'spip_abonnes_rubriques AS AR LEFT JOIN spip_rubriques AS R ON R.id_rubrique=AR.id_rubrique', 'R.id_rubrique IS NULL AND AR.id_rubrique!=0', 'AR.id_rubrique');
 		while ($arr = sql_fetch($orphelins))
 			sql_delete('spip_abonnes_rubriques', 'id_rubrique='.intval($arr['id_rubrique']));
 		return $flux;
