@@ -117,6 +117,7 @@
 				$this->id_abonne = sql_insertq('spip_abonnes', 
 												array(
 													'objet' => $this->objet, 
+													'id_objet' => $this->id_objet, 
 													'code' => $this->code, 
 													'format' => $this->format
 													)
@@ -401,8 +402,8 @@
 				// on récupère le 1er auteur; pas traité si plusieurs auteurs
 				$envoyeur = sql_fetsel(
 					"nom, email", 
-					"spip_auteurs LEFT JOIN spip_auteurs_lettres USING(id_auteur)",
-					"id_lettre=".$id_lettre
+					"spip_auteurs AS a LEFT JOIN spip_auteurs_liens AS al",
+					array("al.id_objet=".$id_lettre, "al.objet=".sql_quote('lettre'), 'a.id_auteur=al.id_auteur')
 					);
 				$nom_envoyeur = $envoyeur['nom'];
 				$email_envoyeur = $envoyeur['email'];
@@ -426,9 +427,9 @@
 					case "author":
 						$auteur = sql_fetsel(
 							"email", 
-							"spip_auteurs LEFT JOIN spip_auteurs_lettres USING(id_auteur)",
-							"id_lettre=".$id_lettre
-						);
+							"spip_auteurs AS a LEFT JOIN spip_auteurs_liens AS al",
+							array("al.id_objet=".$id_lettre, "al.objet=".sql_quote('lettre'), 'a.id_auteur=al.id_auteur')
+							);
 						$corps['adresse_erreur'] = $auteur['email'];
 						break;
 

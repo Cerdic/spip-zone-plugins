@@ -183,7 +183,6 @@ function lettres_vider_tables($nom_meta_base_version) {
 	sql_drop_table('spip_abonnes_rubriques', true);
 	sql_drop_table('spip_abonnes_statistiques', true);
 	sql_drop_table('spip_articles_lettres', true);
-	sql_drop_table('spip_auteurs_lettres', true);
 	sql_drop_table('spip_documents_lettres', true);
 	sql_drop_table('spip_lettres_statistiques', true);
 	sql_drop_table('spip_mots_lettres', true);

@@ -86,13 +86,15 @@
 
 		function enregistrer() {
 			if ($this->id_lettre == -1 and $this->statut == 'brouillon') {
+				$id_secteur = sql_getfetsel('id_secteur', 'spip_rubriques', 'id_rubrique='.intval($this->id_rubrique));
 				$champs = array(
 								'id_rubrique' => intval($this->id_rubrique),
-								'titre' => $this->titre,
-								'descriptif' => $this->descriptif,
-								'chapo' => $this->chapo,
-								'texte' => $this->texte,
-								'ps' => $this->ps,
+								'id_secteur' => intval($id_secteur),
+								'titre' => $this->titre ? $this->titre : '',
+								'descriptif' => $this->descriptif ? $this->descriptif : '',
+								'chapo' => $this->chapo ? $this->chapo : '',
+								'texte' => $this->texte ? $this->texte : '',
+								'ps' => $this->ps ? $this->ps : '',
 								'date' => 'NOW()',
 								'maj' => 'NOW()'
 								);
@@ -137,7 +139,7 @@
 				unset($GLOBALS['var_nocache']);
 				unset($GLOBALS['var_mode']);
 			}
-			$auteurs = sql_select('A.email', 'spip_auteurs AS A INNER JOIN spip_auteurs_lettres AS AL ON AL.id_auteur=A.id_auteur', 'AL.id_lettre='.intval($this->id_lettre));
+			$auteurs = sql_select('A.email', 'spip_auteurs AS A INNER JOIN spip_auteurs_liens AS AL', array('AL.id_objet='.intval($this->id_lettre), 'AL.id_auteur=A.id_auteur', 'AL.objet='.sql_quote('lettre')));
 			while ($auteur = sql_fetch($auteurs)) {
 				$abonne = new abonne(0, $auteur['email']);
 				if (!$abonne->existe)
@@ -286,7 +288,10 @@
 		function enregistrer_auteur($id_auteur) {
 			$verif_email = sql_countsel('spip_auteurs', 'id_auteur='.intval($id_auteur).' AND email!=""');
 			if ($verif_email) {
-				sql_replace('spip_auteurs_lettres', array('id_auteur' => intval($id_auteur), 'id_lettre' => intval($this->id_lettre)));
+				include_spip('action/editer_liens');
+				objet_associer(
+					array("auteur"=>$id_auteur),
+					array("lettre"=>$this->id_lettre));
 				$email = sql_getfetsel('email', 'spip_auteurs', 'id_auteur='.intval($id_auteur));
 				$abonne = new abonne(0, $email);
 				if (!$abonne->existe)
@@ -317,7 +322,7 @@
 				$this->extra					= $lettre_a_copier->extra;
 				$this->enregistrer();
 				// auteurs
-				$auteurs = sql_select('id_auteur', 'spip_auteurs_lettres', 'id_lettre='.intval($lettre_a_copier->id_lettre));
+				$auteurs = sql_select('id_auteur', 'spip_auteurs_liens', array('id_objet='.intval($lettre_a_copier->id_lettre), 'objet='.sql_quote('lettre')));
 				while ($arr = sql_fetch($auteurs))
 					$this->enregistrer_auteur($arr['id_auteur']);
 				// logos
@@ -377,7 +382,10 @@
 			sql_delete('spip_clics', 'id_lettre='.intval($this->id_lettre));
 			sql_delete('spip_mots_lettres', 'id_lettre='.intval($this->id_lettre));
 			sql_delete('spip_abonnes_lettres', 'id_lettre='.intval($this->id_lettre));
-			sql_delete('spip_auteurs_lettres', 'id_lettre='.intval($this->id_lettre));
+			include_spip('action/editer_liens');
+			objet_dissocier(
+				array("auteur"=>'*'),
+				array("lettre"=>$this->id_lettre));
 			// suppression logos
 			$logo_f = charger_fonction('chercher_logo', 'inc');
 			if ($logo_on = $logo_f($this->id_lettre, 'id_lettre', 'on'))
