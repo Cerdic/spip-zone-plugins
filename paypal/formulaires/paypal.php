@@ -21,7 +21,6 @@ function formulaires_paypal_charger($options = array()) {
 	$valeurs = array(
 		'identifiant_vendeur' => $conf['api'][$envr]['account'],
 		'soumission' => $conf['soumission'],
-		//'tax' => $conf['tax'], // ca ca va pas !
 		'currency_code' => $conf['currency_code'],
 	);
 

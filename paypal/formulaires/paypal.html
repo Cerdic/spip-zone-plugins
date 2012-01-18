@@ -8,10 +8,6 @@
 [(#REM) Quelle devise ?]
 <input name="currency_code" type="hidden" value="[(#ENV{currency_code})]" />
 
-[(#REM) Valeur de tva ?]
-[<input name="tax" type="hidden" value="(#ENV{tax})" />]
-
-
 [(#REM) Frais d'envoi ? ]
 <input name="shipping" type="hidden" value="#ENV{shipping,0.00}" />
 [<input name="handling_cart" type="hidden" value="(#ENV{handling_cart})" />]
