@@ -82,11 +82,11 @@ function clevermail_declarer_tables_objets_sql($tables) {
 			  "pst_id" => "bigint(20) NOT NULL auto_increment",
 			  "lst_id" => "int(11) NOT NULL",
 			  "pst_date_create" => "int(11) NOT NULL",
-			  "pst_date_update" => "int(11) NOT NULL",
-			  "pst_date_sent" => "int(11) NOT NULL",
-			  "pst_subject" => "varchar(255) NOT NULL",
-			  "pst_html" => "longtext NOT NULL",
-			  "pst_text" => "longtext NOT NULL"
+			  "pst_date_update" => "int(11) DEFAULT 0 NOT NULL",
+			  "pst_date_sent" => "int(11) DEFAULT 0 NOT NULL",
+			  "pst_subject" => "varchar(255) DEFAULT '' NOT NULL",
+			  "pst_html" => "longtext DEFAULT '' NOT NULL",
+			  "pst_text" => "longtext DEFAULT '' NOT NULL"
 			),
 		'key' => array(
 			"PRIMARY KEY" => "pst_id"),
