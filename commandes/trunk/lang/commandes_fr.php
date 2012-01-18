@@ -42,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'facture_date' => 'Date : <span>@date@</span>',
 	'facture_num' => 'Facture n° <span>@num@</span>',
+	'facture_titre' => 'Facture',
 
 	// I
 	'info_numero_commande' => 'COMMANDE NUMÉRO :',
