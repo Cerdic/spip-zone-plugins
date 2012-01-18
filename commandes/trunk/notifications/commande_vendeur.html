@@ -16,13 +16,13 @@
 <body>
 
 <BOUCLE_art(COMMANDES){id_commande}{statut?}{tout}>
-	<:zcommerce:une_commande_sur{nom=#NOM_SITE_SPIP}:>
+	<:commandes:une_commande_sur{nom=#NOM_SITE_SPIP}:>
 
 	<BOUCLE_contact(CONTACTS){id_auteur}>
 		#CIVILITE #NOM #PRENOM
 	</BOUCLE_contact>
 
-   <p><:zcommerce:commande_ref{ref=#REFERENCE}:></p>
+   <p><:commandes:commande_numero:>#REFERENCE</p>
    <INCLURE{fond=inclure/commande,id_commande=#ID_COMMANDE,statut=#STATUT}>
    
    <hr />

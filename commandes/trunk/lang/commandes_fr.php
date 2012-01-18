@@ -48,7 +48,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_numero_commande' => 'COMMANDE NUMÉRO :',
 	'info_toutes_commandes' => 'Toutes les commandes',
 
+	// L
+	'label_recherche' => 'Rechercher',
+
 	// M
+	'merci_de_votre_commande' => 'Nous vous remercions de votre commande @ref@',
 	'modifier_commande_statut' => 'Cette commande est :',
 	'montant' => 'Montant',
 
@@ -97,11 +101,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_attente' => 'En attente de validation',
 	'statut_encours' => 'En cours',
 	'statut_envoye' => 'Envoyée',
+	'statut_erreur' => 'Erreur',
 	'statut_label' => 'Statut :',
 	'statut_partiel' => 'Partiellement payée',
 	'statut_paye' => 'Payée',
 	'statut_retour' => 'Retournée',
 	'statut_retour_partiel' => 'Retour partiel',
+	'supprimer' => 'Supprimer',
 
 	// U
 	'une_commande_sur' => 'Une commande sur @nom@',
