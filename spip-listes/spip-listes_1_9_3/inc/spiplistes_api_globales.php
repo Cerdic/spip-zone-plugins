@@ -95,9 +95,11 @@ function spiplistes_log ($texte, $level = LOG_WARNING) {
 function spiplistes_debug_log ($msg = '')
 {
 	static $debug;
-		
-	if ($debug === null)
+	static $passe = false;
+	
+	if ($debug === null and !$passe)
 	{
+		$passe = true; // eviter une recursion si aucune meta n'est renseigne
 		$debug = (spiplistes_pref_lire('opt_console_debug') == 'oui');
 	}
 	$msg = trim ($msg);
