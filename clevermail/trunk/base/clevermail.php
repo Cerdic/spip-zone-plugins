@@ -110,7 +110,7 @@ function clevermail_declarer_tables_objets_sql($tables) {
 
 	// spip_cm_posts_links
 
-	$tables["spip_posts_links"]=array(
+	$tables["spip_cm_posts_links"]=array(
 		'principale' => "oui",
 		'field'=> array(
 			  "lnk_id" => "bigint(20) NOT NULL",
@@ -157,7 +157,7 @@ function clevermail_declarer_tables_objets_sql($tables) {
 		'field'=> array(
 			  "sub_id" => "bigint(20) NOT NULL auto_increment",
 			  "sub_email" => "varchar(255) NOT NULL",
-			  "sub_profile" => "varchar(32) NOT NULL"
+			  "sub_profile" => "varchar(32) DEFAULT '' NOT NULL"
 			),
 		'key' => array(
 			"PRIMARY KEY" => "sub_id",
