@@ -20,6 +20,11 @@ function dictionnaires_upgrade($nom_meta_version_base, $version_cible){
 			include_spip('base/abstract_sql');
 			creer_base();
 			
+			// Valeurs de config par défaut
+			include_spip('inc/config');
+			ecrire_config('dictionnaires/remplacer_premier_defaut', 'on');
+			ecrire_config('dictionnaires/remplacer_premier_abbr', 'on');
+			
 			echo "Installation du plugin dictionnaires<br/>";
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		}

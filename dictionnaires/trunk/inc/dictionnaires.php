@@ -157,7 +157,7 @@ function dictionnaires_remplacer_defaut_dist($mot, $definition){
  * (car seuls les gens avec des yeux valides et un pointeur de souris ont accès à l'information)
  */
 #function dictionnaires_remplacer_abbr_dist($mot, $definition){
-#	return '<abbr title="'.str_replace('"', '&quot;', trim(attribut_html(supprimer_tags(propre($definition['texte']))))).'">'.$mot.'</abbr>';
+#	return '<abbr title="'.str_replace('"', '&quot;', trim(attribut_html(supprimer_tags(typo($definition['texte']))))).'">'.$mot.'</abbr>';
 #}
 
 ?>

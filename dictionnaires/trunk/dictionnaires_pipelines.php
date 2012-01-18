@@ -97,8 +97,8 @@ function dictionnaires_replace_callback($captures){
 		
 		// Si on a demandé à remplacer uniquement le premier mot trouvé
 		if (
-			($type and lire_config('dictionnaires/remplacer_premier_'.$type, true))
-			or (!$type and lire_config('dictionnaires/remplacer_premier_defaut', true))
+			($type and lire_config('dictionnaires/remplacer_premier_'.$type))
+			or (!$type and lire_config('dictionnaires/remplacer_premier_defaut'))
 		){
 			foreach ($definition['termes'] as $terme){
 				if (in_array($terme, $deja_remplaces)){

@@ -55,6 +55,11 @@
 		<icone>images/dictionnaire-16.png</icone>
 		<url>dictionnaires</url>
 	</bouton>
+	<bouton id='dictionnaires_configuration' parent="bando_configuration">
+		<titre>dictionnaire:configurer_titre</titre>
+		<icone>images/dictionnaire-16.png</icone>
+		<url>configurer_dictionnaires</url>
+	</bouton>
 
 	<necessite id="SPIP" version="[2.1.12;]" />
 	<necessite id="spip_bonux" version="[2.2.17;]" />
