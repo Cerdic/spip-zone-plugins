@@ -5,14 +5,28 @@
 ]
 <BOUCLE_commande(COMMANDES){id_commande}>
 <div id="bloc-details">
-<table>
 <B_liste>
+<table>
 	<thead>
-	<tr>
-		<th class="descriptif"><:commandes:designation:></th>
-		<th class="prix_ht"><:prix:label_prix_ht:></th>
-	</tr>
+      <tr>
+         <th class="descriptif"><:commandes:designation:></th>
+         <th class="prix_ht"><:prix:label_prix_ht:></th>
+      </tr>
 	</thead>
+	<tfoot>
+      <tr>
+         <td class="def"><:prix:label_total_ht:></td>
+         <td class="prix">[(#PRIX_HT)]</td>
+      </tr>		
+      <tr>
+         <td class="def"><:prix:label_taxes:></td>
+         <td class="prix">[(#PRIX*|moins{#PRIX_HT*}|prix_formater)]</td>
+      </tr>		
+      <tr class='total'>
+         <td class="def"><:prix:label_total_ttc:></td>
+         <td class="prix">[(#PRIX)]</td>
+      </tr>		
+	</tfoot>
 	<tbody>
 <BOUCLE_liste(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}>
 	<tr>
@@ -21,8 +35,11 @@
 	</tr>
 </BOUCLE_liste>
 	</tbody>
+</table>
 </B_liste>
-	<tfoot>
+
+[(#REM) Si pas de details]
+<table>
 	<tr>
 		<td class="def"><:prix:label_total_ht:></td>
 		<td class="prix">[(#PRIX_HT)]</td>
@@ -35,7 +52,7 @@
 		<td class="def"><:prix:label_total_ttc:></td>
 		<td class="prix">[(#PRIX)]</td>
 	</tr>		
-	</tfoot>
 </table>
+<//B_liste>
 </div>
 </BOUCLE_commande>
