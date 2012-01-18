@@ -4,12 +4,13 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'convertir_titre' => 'Convertisseur de formats',
-'convertir_desc' => 'Permet de convertir des formats divers (wiki, phpBB) en format SPIP<br /><br />Pour le format Word Office, vous pouvez utiliser <a href=\'http://www.spip-contrib.net/Macro-word\'>la macro word</a>',
+'convertir_desc' => 'Permet de convertir des formats divers (wiki, docx, pdf, phpBB) en format SPIP',
 'convertir' => 'Convertir',
 'from' => 'De ',
 'convertir_en' => 'R&eacute;sultat de la conversion: ',
 
 // les formats
+'DOCX_SPIP' => 'DOCX (Word 2007) vers SPIP',
 'MediaWiki_SPIP' => 'Wiki (MediaWiki) vers SPIP', 
 'MoinWiki_SPIP' => 'Wiki (MoinWiki) vers SPIP', 
 'BBcode_SPIP' => 'BBcode (PhpBB) vers SPIP', 
@@ -27,8 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // les erreurs
 'unknown_format' => 'Erreur: format inconnu',
-'erreur_extracteur' => 'Erreur : l\'extracteur n\'a pas fonctionn&eacute;' ,
-'erreur_html2SPIP' => 'Erreur: pour utiliser cette fonction vous devez installer la librarie <a href="http://ftp.espci.fr/pub/html2spip/html2spip-0.6.zip">HTML2SPIP</a> dans le r&eacute;pertoire ./lib/'
+'erreur_extracteur' => 'Erreur : l\'extracteur n\'a pas fonctionn&eacute;'
 );
 
 ?>
