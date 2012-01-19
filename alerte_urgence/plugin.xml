@@ -1,14 +1,18 @@
 <plugin>
-	<nom>Alerte d'Urgence</nom>
-	<version>1.0.1</version>
-	<prefix>alerte_urgence</prefix>
-	<etat>stable</etat>
-	<auteur>Cerdic</auteur>
-	<licence>GNU/GPL</licence>
-	<description>Un bandeau d'alerte d'urgence pour diffuser un message</description>
-	<pipeline>
-		<nom>affichage_final</nom>
-		<inclure>alerte_urgence_pipelines.php</inclure>
-	</pipeline>
-	<categorie>outil</categorie>
+<nom>Alerte d'urgence</nom>
+<prefix>alerte_urgence</prefix>
+
+<version>1.0.2</version>
+<etat>stable</etat>
+<categorie>outil</categorie>
+
+<slogan>Bandeau d'alerte pour diffuser un message d'urgence</slogan>
+<description>Bandeau d'alerte pour diffuser un message d'urgence</description>
+<auteur>Cerdic</auteur>
+<licence>GNU/GPL</licence>
+
+<pipeline>
+	<nom>affichage_final</nom>
+	<inclure>alerte_urgence_pipelines.php</inclure>
+</pipeline>
 </plugin>
