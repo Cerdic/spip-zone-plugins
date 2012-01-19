@@ -80,7 +80,7 @@ function formulaires_editer_composition_noizetier_verifier($id, $nouveau){
 	// On vérifie, dans le cas d'une nouvelle composition que $compo n'est pas déjà pris (compo du noizetier ou compo existante).
 	// On vérifie aussi que $compo ne contient ni espace, ni tiret, ni 
 	if (_request('nouveau')=='oui' AND _request('compo')) {
-		include_spip('inc/noizetier');
+		include_spip('noizetier_fonctions');
 		$type = _request('type');
 		$compo = _request('compo');
 		$liste_pages = noizetier_lister_pages();

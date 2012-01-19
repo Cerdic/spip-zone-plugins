@@ -3,7 +3,7 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/noizetier');
+include_spip('noizetier_fonctions');
 
 function formulaires_configurer_bloc_charger($bloc,$page,$infos_bloc){
 	$contexte = array();

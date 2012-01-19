@@ -7,7 +7,7 @@
 <div class="formulaire_spip">
 <ul class="liste_items liste_noizetier_pages">
 	<BOUCLE_pages(POUR){tableau #NOIZETIER_LISTE_PAGES}{par cle}>
-	<li class="item" [ style="background-image:url((#VALEUR|table_valeur{icon}|chemin|image_reduire{24}|extraire_attribut{src}));"]>
+	<li class="item" [ style="background-image:url((#VALEUR|table_valeur{icon}|find_in_path|image_reduire{24}|extraire_attribut{src}));"]>
 		<div class="ligne">
 			<div class="titre">[(#VALEUR|table_valeur{nom})]</div>
 			[<div class="infos">(#VALEUR|table_valeur{description})</div>]
@@ -51,6 +51,6 @@
 <!--/#navigation-->
 
 <!--#extra-->
-[(#PLUGIN{compositions}|non)<:noizetier:compositions_non_installe:><p />]
-[(#PLUGIN{ieconfig}|non)<:noizetier:ieconfig_non_installe:><p />]
+[(#PLUGIN{compositions}|non)<p><:noizetier:compositions_non_installe:></p>]
+[(#PLUGIN{ieconfig}|non)<p><:noizetier:ieconfig_non_installe:></p>]
 <!--/#extra-->

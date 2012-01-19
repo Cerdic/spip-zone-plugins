@@ -6,10 +6,10 @@ function action_supprimer_noisettes_page_dist(){
 	$arg = $securiser_action();
 	$page = $arg;
 	
-	include_spip('inc/noizetier');
+	include_spip('noizetier_fonctions');
 	supprimer_noisettes_page_noizetier($page);
 	
-		// Redirection
+	// Redirection
 	include_spip('inc_headers');
 	redirige_par_entete("./?exec=configurer_page&page=$page");
 }

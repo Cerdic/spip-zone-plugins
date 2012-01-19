@@ -41,7 +41,7 @@ function formulaires_editer_composition_heritages_noizetier_charger($id){
 
 function formulaires_editer_composition_heritages_noizetier_traiter($id){
 	include_spip('inc/autoriser');
-	include_spip('inc/noizetier');
+	include_spip('noizetier_fonctions');
 	$retours = array();
 	$type = noizetier_page_type($id);
 	$compo = noizetier_page_composition($id);

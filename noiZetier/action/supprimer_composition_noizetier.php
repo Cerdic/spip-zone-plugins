@@ -10,7 +10,7 @@ function action_supprimer_composition_noizetier_dist(){
 	
 	
 	if ($arg!=''){
-		include_spip('inc/noizetier');
+		include_spip('noizetier_fonctions');
 		$type = noizetier_page_type($arg);
 		$compo = noizetier_page_composition($arg);
 		$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);

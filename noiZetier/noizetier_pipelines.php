@@ -20,7 +20,7 @@ function noizetier_header_prive($flux){
  */
 function noizetier_recuperer_fond($flux){
 	if (defined('_NOIZETIER_RECUPERER_FOND')?_NOIZETIER_RECUPERER_FOND:true) {
-		include_spip('inc/noizetier');
+		include_spip('noizetier_fonctions');
 		$fond = $flux['args']['fond'];
 		$composition = $flux['args']['contexte']['composition'];
 		// Si une composition est définie et si elle n'est pas déjà dans le fond, on l'ajoute au fond

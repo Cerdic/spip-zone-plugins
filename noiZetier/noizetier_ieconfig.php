@@ -44,7 +44,7 @@ function noizetier_ieconfig($flux){
 	
 	// Tableau d'export
 	if ($action=='export' && _request('noizetier_export_option')=='on') {
-		include_spip('inc/noizetier');
+		include_spip('noizetier_fonctions');
 		$flux['data']['noizetier'] = noizetier_tableau_export();
 	}
 	
@@ -160,7 +160,7 @@ function noizetier_ieconfig($flux){
 	
 	// Import de la configuration
 	if ($action=='import' && isset($flux['args']['config']['noizetier']) && _request('noizetier_type_import')!='') {
-		include_spip('inc/noizetier');
+		include_spip('noizetier_fonctions');
 		if (!noizetier_importer_configuration(_request('noizetier_type_import'),_request('noizetier_import_compos'),$flux['args']['config']['noizetier']))
 			$flux['data'] .= _T('noizetier:ieconfig_probleme_import_config').'<br />';
 	}

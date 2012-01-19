@@ -1,6 +1,6 @@
 <?php
 
-// Sécurité
+// Securite
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_CACHE_AJAX_NOISETTES', 'noisettes_ajax.php');
@@ -8,7 +8,7 @@ define('_CACHE_CONTEXTE_NOISETTES', 'noisettes_contextes.php');
 define('_CACHE_DESCRIPTIONS_NOISETTES', 'noisettes_descriptions.php');
 define('_CACHE_INCLUSIONS_NOISETTES', 'noisettes_inclusions.php');
 
-// Pour compatibilité avec PHP4
+// Pour compatibilite avec PHP4
 
 if (!function_exists('array_intersect_key'))
 {
@@ -91,11 +91,11 @@ function noizetier_obtenir_infos_noisettes() {
 	
 	// seulement 1 fois par appel, on lit ou calcule tous les contextes
 	if ($noisettes === false) {
-		// lire le cache des descriptions sauvées
+		// lire le cache des descriptions sauvees
 		lire_fichier_securise(_DIR_CACHE . _CACHE_DESCRIPTIONS_NOISETTES, $noisettes);
 		$noisettes = @unserialize($noisettes);
 		// s'il en mode recalcul, on recalcule toutes les descriptions des noisettes trouvees.
-		// ou si le cache est désactivé
+		// ou si le cache est desactive
 		if (!$noisettes or (_request('var_mode') == 'recalcul') or (defined('_NO_CACHE') and _NO_CACHE!=0)) {
 			$noisettes = noizetier_obtenir_infos_noisettes_direct();
 			ecrire_fichier_securise(_DIR_CACHE . _CACHE_DESCRIPTIONS_NOISETTES, serialize($noisettes));
@@ -192,7 +192,7 @@ function noizetier_charger_infos_noisette_yaml($noisette, $info=""){
 }
 
 /**
- * Charger les informations des paramètres d'une noisette
+ * Charger les informations des parametres d'une noisette
  *
  * @param string $noisette
  * @staticvar array $params_noisettes
@@ -228,8 +228,8 @@ function noizetier_charger_contexte_noisette($noisette){
 
 
 /**
- * Transforme un tableau au format du plugin saisies en un tableau de parametres dont les clés sont les noms des paramètres
- * S'il y a de fieldset, les paramètres sont extraits de son entrée saisies
+ * Transforme un tableau au format du plugin saisies en un tableau de parametres dont les cles sont les noms des paramï¿½tres
+ * S'il y a de fieldset, les parametres sont extraits de son entree saisies
  *
  * @param string $parametres
  * @return array
@@ -260,8 +260,8 @@ function extrait_parametres_noisette($parametres){
 
 /**
  * Lister les pages pouvant recevoir des noisettes
- * Par défaut, cette liste est basée sur le contenu du répertoire contenu/
- * Le tableau de résultats peut-être modifié via le pipeline noizetier_lister_pages.
+ * Par defaut, cette liste est basee sur le contenu du repertoire contenu/
+ * Le tableau de resultats peut-etre modifie via le pipeline noizetier_lister_pages.
  *
  * @staticvar array $liste_pages
  * @return array
@@ -273,14 +273,14 @@ function noizetier_lister_pages(){
 		$liste_pages = array();
 		$match = ".+[.]html$";
 
-		// lister les fonds disponibles dans le répertoire contenu
+		// lister les fonds disponibles dans le repertoire contenu
 		$rep = defined('_NOIZETIER_REPERTOIRE_PAGES')?_NOIZETIER_REPERTOIRE_PAGES:'contenu/';
 		$liste = find_all_in_path($rep, $match);
 		if (count($liste)){
 			foreach($liste as $squelette=>$chemin) {
 				$page = preg_replace(',[.]html$,i', '', $squelette);
 				$dossier = str_replace($squelette, '', $chemin);
-				// Les éléments situés dans prive/contenu sont écartés
+				// Les elements situes dans prive/contenu sont ecartes
 				if (substr($dossier,-14)!='prive/contenu/')
 					if(count($infos_page = noizetier_charger_infos_page($dossier,$page))>0)
 						$liste_pages[$page] = $infos_page;
@@ -338,8 +338,8 @@ function noizetier_charger_infos_page($dossier,$page, $info=""){
 		// on peut appeler avec le nom du squelette
 		$page = preg_replace(',[.]html$,i','',$page);
 		
-		// On autorise le fait que le fichier xml ne soit pas dans le même plugin que le fichier .html
-		// Au cas où le fichier .html soit surchargé sans que le fichier .xml ne le soit
+		// On autorise le fait que le fichier xml ne soit pas dans le meme plugin que le fichier .html
+		// Au cas ou le fichier .html soit surcharge sans que le fichier .xml ne le soit
 		$rep = defined('_NOIZETIER_REPERTOIRE_PAGES')?_NOIZETIER_REPERTOIRE_PAGES:'contenu/';
 		$fichier = find_in_path("$rep$page.xml");
 		
@@ -357,7 +357,7 @@ function noizetier_charger_infos_page($dossier,$page, $info=""){
 			$infos_page['nom'] = _T_ou_typo(spip_xml_aplatit($xml['nom']));
 			$infos_page['description'] = isset($xml['description']) ? _T_ou_typo(spip_xml_aplatit($xml['description'])) : '';
 			$infos_page['icon'] = isset($xml['icon']) ? reset($xml['icon']) : '';
-			// Décomposition des blocs
+			// Decomposition des blocs
 			if (spip_xml_match_nodes(',^bloc,', $xml, $blocs)){
 				$infos_page['blocs'] = array();
 				foreach (array_keys($blocs) as $bloc){
@@ -383,7 +383,7 @@ function noizetier_charger_infos_page($dossier,$page, $info=""){
 			$infos_page['icon'] = 'img/ic_page.png';
 		}
 		
-		// Si les blocs n'ont pas été définis, on applique les blocs par défaut
+		// Si les blocs n'ont pas ete definis, on applique les blocs par defaut
 		if (count($infos_page)>0 AND !isset($infos_page['blocs']))
 			$infos_page['blocs'] = noizetier_blocs_defaut();
 		
@@ -396,7 +396,7 @@ function noizetier_charger_infos_page($dossier,$page, $info=""){
 
 /**
  * Charger les informations d'une page, contenues dans un xml de config s'il existe
- * La liste des blocs par défaut d'une page peut être modifiée via le pipeline noizetier_blocs_defaut.
+ * La liste des blocs par defaut d'une page peut etre modifiee via le pipeline noizetier_blocs_defaut.
  *
  * @staticvar array $blocs_defaut
  * @return array
@@ -428,7 +428,7 @@ function noizetier_blocs_defaut(){
 }
 
 /**
- * Supprime de spip_noisettes les noisettes liées à une page
+ * Supprime de spip_noisettes les noisettes liees a une page
  *
  * @param text $page
  * 
@@ -468,7 +468,7 @@ function noizetier_page_composition($page) {
 }
 
 /**
- * Liste les blocs pour lesquels il y a des noisettes à insérer.
+ * Liste les blocs pour lesquels il y a des noisettes a inserer.
  *
  * @staticvar array $liste_blocs
  * @return array
@@ -496,7 +496,7 @@ function noizetier_lister_blocs_avec_noisettes(){
 }
 
 /**
- * Liste d'icônes obtenues en fouillant les répertoires img/ images/ image/ et /img-pack.
+ * Liste d'icones obtenues en fouillant les repertoires img/ images/ image/ et /img-pack.
  *
  * @staticvar array $liste_icones
  * @return array
@@ -528,7 +528,7 @@ function noizetier_lister_icones(){
 function noizetier_choisir_contexte($noisette, $contexte_entrant, $id_noisette) {
 	$contexte_noisette = array_flip(noizetier_obtenir_contexte($noisette));
 
-	// On transmet toujours l'id_noisette et les variables se terminant par _$id_noisette (utilisées par exemple par Aveline pour la pagination)
+	// On transmet toujours l'id_noisette et les variables se terminant par _$id_noisette (utilisees par exemple par Aveline pour la pagination)
 	$contexte_min = array('id_noisette' => $id_noisette);
 	
 	if (isset($contexte_noisette['env'])) {
@@ -569,7 +569,6 @@ function noizetier_obtenir_contexte($noisette) {
 		
 		// s'il en mode recalcul, on recalcule tous les contextes des noisettes trouvees.
 		if (!$noisettes or (_request('var_mode') == 'recalcul')) {
-			include_spip('inc/noizetier');
 			$infos = noizetier_lister_noisettes();
 			$noisettes = array();
 			foreach ($infos as $cle_noisette => $infos) {
@@ -587,7 +586,7 @@ function noizetier_obtenir_contexte($noisette) {
 }
 
 /**
- * Retourne true ou false pour indiquer si la noisette doit être inclue en ajax 
+ * Retourne true ou false pour indiquer si la noisette doit Ãªtre inclue en ajax 
  *
  * @param 
  * @return 
@@ -603,7 +602,6 @@ function noizetier_ajaxifier_noisette($noisette) {
 		
 		// s'il en mode recalcul, on recalcule tous les contextes des noisettes trouvees.
 		if (!$noisettes or (_request('var_mode') == 'recalcul')) {
-			include_spip('inc/noizetier');
 			$infos = noizetier_lister_noisettes();
 			$noisettes = array();
 			foreach ($infos as $cle_noisette => $infos) {
@@ -621,7 +619,7 @@ function noizetier_ajaxifier_noisette($noisette) {
 }
 
 /**
- * Retourne true ou false pour indiquer si la noisette doit être inclue dynamiquement
+ * Retourne true ou false pour indiquer si la noisette doit Ãªtre inclue dynamiquement
  *
  * @param 
  * @return 
@@ -637,7 +635,6 @@ function noizetier_inclusion_dynamique($noisette) {
 		
 		// s'il en mode recalcul, on recalcule tous les contextes des noisettes trouvees.
 		if (!$noisettes or (_request('var_mode') == 'recalcul')) {
-			include_spip('inc/noizetier');
 			$infos = noizetier_lister_noisettes();
 			$noisettes = array();
 			foreach ($infos as $cle_noisette => $infos) {
@@ -656,7 +653,6 @@ function noizetier_inclusion_dynamique($noisette) {
 
 /**
  * Retourne le tableau des noisettes et des compositions du noizetier pour les exports
- *
  * 
  * @return 
 **/
@@ -676,7 +672,7 @@ function noizetier_tableau_export() {
 	foreach ($data['noisettes'] as $cle => $noisette)
 		$data['noisettes'][$cle]['parametres'] = unserialize($noisette['parametres']);
 	
-	// On récupère les compositions du noizetier
+	// On recupere les compositions du noizetier
 	$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
 	if (is_array($noizetier_compositions) AND count($noizetier_compositions)>0)
 		$data['noizetier_compositions'] = $noizetier_compositions;
@@ -702,7 +698,7 @@ function noizetier_importer_configuration($type_import, $import_compos, $config)
 	
 	$config = pipeline('noizetier_config_import',$config);
 	
-	// On s'occupe déjà des noisettes
+	// On s'occupe deja des noisettes
 	$noisettes = $config['noisettes'];
 	include_spip('base/abstract_sql');
 	if (is_array($noisettes) AND count($noisettes)>0) {
