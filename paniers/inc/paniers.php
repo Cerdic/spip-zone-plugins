@@ -63,7 +63,7 @@ function paniers_id_panier_encours(){
 	// Si on a bien un panier et un cookie à la fin
 	if ($id_panier > 0 and $cookie){
 		// On met son cookie en mémoire
-		spip_setcookie($nom_cookie, $_COOKIE[$nom_cookie] = $cookie, time()+lire_config('paniers/limite_ephemere', 24*3600));
+		spip_setcookie($nom_cookie, $_COOKIE[$nom_cookie] = $cookie, time()+3600*lire_config('paniers/limite_ephemere', 24));
 	}
 	// Sinon on vide le cookie
 	else{
@@ -104,7 +104,7 @@ function paniers_creer_panier(){
 	
 	// Si on a un id_panier correct de créé, on le lie à un cookie
 	if ($id_panier > 0){
-		spip_setcookie($nom_cookie, $_COOKIE[$nom_cookie] = $cookie, time()+lire_config('paniers/limite_ephemere', 24*3600));
+		spip_setcookie($nom_cookie, $_COOKIE[$nom_cookie] = $cookie, time()+3600*lire_config('paniers/limite_ephemere', 24));
 		// Et on met aussi le panier dans la session
 		session_set('id_panier', $id_panier);
 	}
