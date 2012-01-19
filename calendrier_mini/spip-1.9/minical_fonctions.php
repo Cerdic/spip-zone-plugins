@@ -20,12 +20,12 @@ function balise_DATE_ARCHIVES($p) {
 
 function critere_archives($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
-	$champ_date = "'" . $boucle->id_table ."." .
-	$GLOBALS['table_date'][$boucle->type_requete] . "'";
-	$boucle->where[] = array(
-		'REGEXP',
-		$champ_date, 
-		"sql_quote(('^' . interdire_scripts(entites_html(\$Pile[0]['".VAR_DATE."']))))"
+ $champ_date = "'" . $boucle->id_table ."." .
+  $GLOBALS['table_date'][$boucle->type_requete] . "'";
+ $boucle->where[] = array(
+  'REGEXP',
+  $champ_date, 
+  "spip_abstract_quote(('^' . interdire_scripts(entites_html(\$Pile[0]['".VAR_DATE."']))))"
  );
  
 }
