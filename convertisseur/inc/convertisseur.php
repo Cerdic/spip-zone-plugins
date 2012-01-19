@@ -47,6 +47,11 @@ function nettoyer_format($t) {
 	// syntaxe SPIP
 	// http://www.spip-contrib.net/IMG/html/antiseche_spip-3.html
 	
+	
+	//
+  //  Les conversions qqchose .... vers SPIP
+  //
+	
 	// Conversion MediaWiki -> SPIP
   // ref. syntaxe: http://www.mediawiki.org/wiki/Help:Formatting
   $conv_functions_pre['MediaWiki_SPIP'] = array("convertisseur_add_ln","mediawiki_doQuotes");
@@ -311,6 +316,9 @@ function nettoyer_format($t) {
   $conv_formats['XTG_SPIP'] = 'quark'; // function extract/
   $conv_formats['html_SPIP'] = 'html'; // function sale ou HTML2SPIP
   
+  //
+  //  Les conversions SPIP vers qqchose ....
+  //
   
   // Conversion SPIP -> txt
   $conv_formats['SPIP_txt'] = array(
@@ -327,6 +335,46 @@ function nettoyer_format($t) {
         'url' => "\\1 (\\2)",       
       )      
   );
+  
+  // Conversion SPIP -> mediawiki
+  $conv_formats['SPIP_mediawiki'] = array(
+      "pattern" => array(
+        'h'     => "%{{{([^}}}]*)}}}%",
+        'b'     => "%{{([^}}]*)}}%",
+        'i'     => "%{([^}]*)}%",
+        'ul'    => "%\n-\*%",
+        'ol'    => "%\n-\\#%",
+        'br'    => "%\n_ %",
+        'poesie' => "%<poesie>%",
+        'poesie2' => "%</poesie>%",
+        'cadre' => "%<cadre>%",
+        'cadre2' => "%</cadre>%",
+        'url_externe'   => "%\\[([^\\[]*)->http([^(\\[| )]*)\\]%",  // tant pis on gere pas autres protocpe        
+        'url_interne_anchor'   => "%\\[([^\\[]*)->\\#([^(\\[| )]*)\\]%",
+        'url_interne'   => "%\\[([^\\[]*)->([^(\\[| )]*)\\]%",
+        'url_wiki' => "%\\[\\?([^\\[]*)]%",
+        'anchor' => '%\\[([^\\[]*)<-\\]%'
+      ),
+      "replacement" => array(
+        'h'   => "\n===\\1===\n",   // on force le retour ligne 
+        'b'   => "'''\\1'''",
+        'i'   => "''\\1''",
+        'ul'  => "*\\1",
+        'ol'  => "#\\1",
+        'br'  => "<br />",
+        'poesie' => "<pre>",
+        'poesie2' => "</pre>",
+        'cadre' => "<pre>",
+        'cadre2' => "</pre>",
+        'url_externe' => "[http\\2 \\1]",
+        'url_interne_anchor' => "[[#\\2]]", 
+        'url_interne' => "[[\\2 \\1]]", 
+        'url_wiki' => "[http://fr.wikipedia.org/\\1 \\1]",
+        'anchor' => "<div id='\\1'></div>",      
+      )      
+  );
+  
+
   
 
 

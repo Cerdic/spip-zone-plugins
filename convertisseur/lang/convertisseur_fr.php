@@ -14,13 +14,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'MediaWiki_SPIP' => 'Wiki (MediaWiki) vers SPIP', 
 'MoinWiki_SPIP' => 'Wiki (MoinWiki) vers SPIP', 
 'BBcode_SPIP' => 'BBcode (PhpBB) vers SPIP', 
-'SPIP_txt' => 'SPIP vers texte brut',
-'SPIP_html' => 'SPIP vers HTML',  
-'SPIPrich_SPIP' => 'SPIP enrichie vers SPIP standard', 
 'DotClear_SPIP'=> 'DotClear vers SPIP', 
 'XTG_SPIP' => 'XTG (XPressTags) vers SPIP', 
 'SLA_SPIP' => 'SLA (Scribus) vers SPIP',
-'html_SPIP' => 'HTML vers SPIP', 
+'html_SPIP' => 'HTML vers SPIP',
+'SPIP_txt' => 'SPIP vers texte brut',
+'SPIP_mediawiki' => 'SPIP vers Wiki (MediaWiki)',  
 
 // les erreurs
 'unknown_format' => 'Erreur: format inconnu',
