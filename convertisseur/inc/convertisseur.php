@@ -349,11 +349,18 @@ function nettoyer_format($t) {
         'poesie2' => "%</poesie>%",
         'cadre' => "%<cadre>%",
         'cadre2' => "%</cadre>%",
-        'url_externe'   => "%\\[([^\\[]*)->http([^(\\[| )]*)\\]%",  // tant pis on gere pas autres protocpe        
+        'pipe_tag_exception' => '%<([^\\|]*)\\|([^>]*)>%', // sortir les pipelines modele <xxx|www> et lien  avt traitemnt table
+        'url_externe'   => "%\\[([^\\[]*)->http([^(\\[| )]*)\\]%",  // tant pis on gere pas autres protocoloe irc, ftp, mailto        
         'url_interne_anchor'   => "%\\[([^\\[]*)->\\#([^(\\[| )]*)\\]%",
         'url_interne'   => "%\\[([^\\[]*)->([^(\\[| )]*)\\]%",
         'url_wiki' => "%\\[\\?([^\\[]*)]%",
-        'anchor' => '%\\[([^\\[]*)<-\\]%'
+        'anchor' => '%\\[([^\\[]*)<-\\]%',         
+        'img' => '%<(img|emb|doc)([0-9]*)([^>]*)>%',
+        'table_pipe_fin' => '%\\|\r\n\\|%',        
+        'table_pipe' => '%\\|%',
+        'table_start' => '%([^\\|]*)\n([^\\|]*)\n\\|%',
+        'table_fin' => '%\\|([^\\|]*)\n([^\\|]*)\n%',
+        'pipe_tag_exception2' => '%_______%',    //on reinjecte ls pipelines des modeles
       ),
       "replacement" => array(
         'h'   => "\n===\\1===\n",   // on force le retour ligne 
@@ -366,11 +373,18 @@ function nettoyer_format($t) {
         'poesie2' => "</pre>",
         'cadre' => "<pre>",
         'cadre2' => "</pre>",
+        'pipe_tag_exception' => "<\\1_______\\2>",
         'url_externe' => "[http\\2 \\1]",
         'url_interne_anchor' => "[[#\\2]]", 
         'url_interne' => "[[\\2 \\1]]", 
-        'url_wiki' => "[http://fr.wikipedia.org/\\1 \\1]",
-        'anchor' => "<div id='\\1'></div>",      
+        'url_wiki' => "[http://fr.wikipedia.org/\\1 \\1]",  
+        'anchor' => "<div id='\\1'></div>", 
+        'img' => "[[File:\\1\\2\\3]]",        
+        'table_pipe_fin' => "|-\r|",                
+        'table_pipe' => "\n|", 
+        'table_start' => "\\1{|", 
+        'table_fin' => "|}\\1", 
+        'pipe_tag_exception2' => "|",
       )      
   );
   
