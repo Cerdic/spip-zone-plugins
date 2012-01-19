@@ -5,11 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // -------------------------------
 // Main 
 // ------------------------------
-function exec_convertisseur(){
-
-	include_spip("inc/vieilles_defs");
-	define('_SIGNALER_ECHOS', false); // on sait qu'on est vieux-code
-	
+function exec_convertisseur(){  
 	include_spip("inc/presentation");
 	include_spip('inc/convertisseur');
 
@@ -25,13 +21,13 @@ function exec_convertisseur(){
   // check rights (utile ?)
   global $connect_statut;
 	global $connect_toutes_rubriques;
-  if ($connect_statut != '0minirezo') {    
-		echo debut_page(_T("convertisseur:convertir_titre"), "naviguer", "plugin");
+  if ($connect_statut != '0minirezo') { 
+    $commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T("convertisseur:convertir_titre"),_T("convertisseur:convertir_titre"),_T("convertisseur:convertir_titre"));
 		echo _T('avis_non_acces_page');
-		echo fin_page();
+		fin_page();
 		exit;
 	}
-
 
 
 	// ---------------------------------------------------------------------
@@ -127,6 +123,9 @@ function exec_convertisseur(){
 					$id_article = inserer_conversion($out[$f], $id_rubrique, $f);
 					$article[$f] = $id_article;
 			}
+      if (is_string($conv_formats[$format]))
+              $conv_in = "";             // sur les formats extract, ne pas retourner texte intro (fichier binaire)
+
 
 		}
 
@@ -137,13 +136,15 @@ function exec_convertisseur(){
   // ---------------------------------------------------------------------------
   // HTML output 
   // ---------------------------------------------------------------------------
-	echo debut_page(_T("convertisseur:convertir_titre"), "naviguer", "plugin");	
-  debut_gauche();
-	echo debut_boite_info();
-	echo _T("convertisseur:convertir_desc");
-	echo fin_boite_info();
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T("convertisseur:convertir_titre"),_T("convertisseur:convertir_titre"),_T("convertisseur:convertir_titre"));
+	echo debut_gauche('', true);
+	echo debut_boite_info(true)._T("convertisseur:convertir_desc");
+	echo fin_boite_info(true);
+  
+	echo debut_droite('', true);
 	
-	echo debut_droite();
+
 	echo $log;
 	echo "<form method='post' enctype='multipart/form-data'>\n";
 
@@ -162,7 +163,7 @@ function exec_convertisseur(){
 		echo "</div>\n";
 	}
 
-	echo "<h3>"._L("Votre texte &agrave; convertir :")."</h3>\n";
+	echo "<h3>"._T("convertisseur:texte_a_convertir")."</h3>\n";
 
 	// format memorise pour avoir le selected dans le menu
 	if (!$format)
@@ -180,14 +181,14 @@ function exec_convertisseur(){
 	echo "</select></p>\n";
 
 
-	echo _L("Copiez-le ci-dessous :")."<br />\n";
+	echo _T("convertisseur:texte_a_copier")."<br />\n";
 
 	$conv_in = entites_html(substr($conv_in,0,40000));
 	echo "<textarea name='conv_in' cols='65' rows='12'>$conv_in</textarea><br />\n";
 
 
 	echo "<div style='float:$spip_lang_right;'>";
-	echo _L("ou choisissez un fichier :")."<br />\n";
+	echo _T("convertisseur:texte_fichier")."<br />\n";
 	echo "<input type='file' name='upload' />\n";
 	echo "</div>\n";
 
@@ -195,13 +196,13 @@ function exec_convertisseur(){
 
 	echo "<p align='right'><small>Il est possible de convertir plusieurs fichiers en une seule fois, en les regroupant dans une archive ZIP</small></p>\n";
 
-	echo "<h5>"._L('Options:')."</h5>\n";
+	echo "<h5>"._T("convertisseur:options")."</h5>\n";
 
 	$checked = $GLOBALS['auteur_session']['prefs']['convertisseur_cvcharset']
 		? ' checked="checked"'
 		: '';
 	echo "<label><input type='checkbox' value='true' name='convert_charset'$checked
-	/>"._L("convertir en UTF-8")."\n";
+	/>"._T("convertisseur:convertir_utf")."\n";
 	echo "</label>\n";
 
 
@@ -218,6 +219,6 @@ function exec_convertisseur(){
   echo "</form>\n"; 
 
   
-  echo fin_page();
+  echo fin_gauche(),fin_page();
 }
 ?>
