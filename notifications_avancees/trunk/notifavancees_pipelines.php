@@ -356,13 +356,13 @@ function notifications_envoyer($destinataire, $mode, $quoi, $id=0, $options=arra
 		$contexte['id_objet'] = $id;
 		$contexte[$cle_objet] = $id;
 
-        //Si un expéditeur est défini on l'utiliser
-        if ($options['from'])
-            $contenu['from'] = $options['from'];
-
-        //si un nom d'expéditeur est défini
-        if ($options['nom_envoyeur'])
-            $contenu['nom_envoyeur'] = $options['nom_envoyeur'];
+		//Si un expéditeur est défini on l'utilise
+		if ($options['from'])
+			$contenu['from'] = $options['from'];
+		
+		//si un nom d'expéditeur est défini
+		if ($options['nom_envoyeur'])
+			$contenu['nom_envoyeur'] = $options['nom_envoyeur'];
 		
 		// Le contenu de base est le contenu texte
 		// S'il n'existe pas on cherche le squelette directement
