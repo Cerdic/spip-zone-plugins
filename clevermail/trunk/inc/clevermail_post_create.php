@@ -17,6 +17,9 @@ function clevermail_post_create($lst_id) {
 				'date' => date("Y-m-d",$last_create),
 				'lst_id' => intval($lst_id),
 			);
+		  if (!_CLEVERMAIL_AGE_PLACE_SUR_DERNIER_ENVOI) {
+			unset($contexte['date']);
+		  }
 		  $post['pst_html'] = recuperer_fond($list['lst_url_html'], $contexte);
 	  }
 	  
@@ -31,6 +34,9 @@ function clevermail_post_create($lst_id) {
   				'date' => date("Y-m-d",$last_create),
   				'lst_id' => intval($lst_id),
   			);
+		  if (!_CLEVERMAIL_AGE_PLACE_SUR_DERNIER_ENVOI) {
+			unset($contexte['date']);
+		  }
   		  $post['pst_text'] = recuperer_fond($list['lst_url_text'], $contexte);
   	  }
       $post['pst_text'] = strip_tags($post['pst_text']);
