@@ -18,12 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'SPIP_html' => 'SPIP vers HTML',  
 'SPIPrich_SPIP' => 'SPIP enrichie vers SPIP standard', 
 'DotClear_SPIP'=> 'DotClear vers SPIP', 
-'XPressTags' => 'XPressTags vers SPIP', 
-'XTG_SPIP' => 'XTG vers SPIP', 
+'XTG_SPIP' => 'XTG (XPressTags) vers SPIP', 
 'SLA_SPIP' => 'SLA (Scribus) vers SPIP',
-'Word' => 'Word vers texte', 
-'RTF' => 'RTF vers texte', 
-'PDF' => 'PDF vers texte', 
 'html_SPIP' => 'HTML vers SPIP', 
 
 // les erreurs

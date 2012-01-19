@@ -52,42 +52,42 @@ function nettoyer_format($t) {
   $conv_functions_pre['MediaWiki_SPIP'] = array("convertisseur_add_ln","mediawiki_doQuotes");
   $conv_formats['MediaWiki_SPIP'] = array(
       "pattern" => array( 
-        'model'  => "\{\{([^\}\}]*)\}\}",   // FIXME si template ds template       
+        'model'  => "%\{\{([^\}\}]*)\}\}%",   // FIXME si template ds template       
          // applies anywhere        
-        'ib' => "<i><b>([^<]*)</b></i>",            
-        'b' => "<b>([^<]*)</b>",  
-        'i'   => "<i>([^<]*)</i>", 
-        'ib_post' => "<ib>([^<]*)</ib>",        
+        'ib' => "%<i><b>([^<]*)</b></i>%",            
+        'b' => "%<b>([^<]*)</b>%",  
+        'i'   => "%<i>([^<]*)</i>%", 
+        'ib_post' => "%<ib>([^<]*)</ib>%",        
         // only at the beginning of the line         
-        'h4'     => "\n=====([^=====]*)=====",
-        'h3'     => "\n====([^====]*)====",
-        'h2'     => "\n===([^=====]*)===",
-        'h1'     => "\n==([^==]*)==",
-        'ul_3'     => "\n\*\*\*", 
-        'ul_2'     => "\n\*\*",  
-        'ul_1'     => "\n\*", 
-        'ol_3'     => "\n\#\#\#", 
-        'ol_2'     => "\n\#\#",  
-        'ol_1'     => "\n\#",  
-        'dt'     => "\n\;([^\r]*)", 
-        'dd'     => "\n\:([^\r]*)", 
+        'h4'     => "%\n=====([^=====]*)=====%", 
+        'h3'     => "%\n====([^====]*)====%",
+        'h2'     => "%\n===([^=====]*)===%",
+        'h1'     => "%\n==([^==]*)==%",
+        'ul_3'     => "%\n\*\*\*#%", 
+        'ul_2'     => "%\n\*\*#%",  
+        'ul_1'     => "%\n\*#%", 
+        'ol_3'     => "%\n\#\#\#%", 
+        'ol_2'     => "%\n\#\#%",  
+        'ol_1'     => "%\n\#%",  
+        'dt'     => "%\n\;([^\r]*)%", 
+        'dd'     => "%\n\:([^\r]*)%", 
         // TODO: Preformatted text
         
         // links - http://www.mediawiki.org/wiki/Help:Links 
-        'comment' => "<!--([^\-]*)-->",
-        'link_img'  => "\[\[(Image|Media):([^\[\[]*)\]\]", 
-        'link_cat'  => "\[\[(Category|Catégorie|:Category):([^\[\[]*)\]\]",
-        'link_user'  => "\[\[(Utilisateur|User):([^|\[]*)\|([^\[]*)\]\]",  // avec pipe
-        'link_user2'  => "\[\[(Utilisateur|User):([^\[]*)\]\]", 
-        'link_lang'  => "\[\[([^\:\[]*):([^\[]*)\]\]",  
-        'link_int'  => "\[\[([^|\[]*)\|([^\[]*)\]\]",                     // avec pipe
-        'link_int2'  => "\[\[([^\[\[]*)\]\]", 
-        'link_ext0'  => "\nhttp([^ \r]*)", 
-        'link_ext1'  => " http([^ \r]*)", 
-        'link_ext2'  => "\\[([^\\[ ]*) ([^(\\[|)]*)\\]",                  // support ext., supporte plusieurs blancs
-        'ref' => "<ref>", 
-        'ref2' => "</ref>",
-        
+        'comment' => "%<!--([^\-]*)-->%",
+        'link_img'  => "%\[\[(Image|Media):([^\[\[]*)\]\]%", 
+        'link_cat'  => "%\[\[(Category|Catégorie|:Category):([^\[\[]*)\]\]%",
+        'link_user'  => "%\[\[(Utilisateur|User):([^|\[]*)\|([^\[]*)\]\]%",  // avec pipe
+        'link_user2'  => "%\[\[(Utilisateur|User):([^\[]*)\]\]%", 
+        'link_lang'  => "%\[\[([^\:\[]*):([^\[]*)\]\]%",  
+        'link_int'  => "%\[\[([^|\[]*)\|([^\[]*)\]\]%",                     // avec pipe
+        'link_int2'  => "%\[\[([^\[\[]*)\]\]%", 
+        'link_ext0'  => "%\nhttp([^ \r]*)%", 
+        'link_ext1'  => "% http([^ \r]*)%", 
+        'link_ext2'  => "%\\[([^\\[ ]*) ([^(\\[|)]*)\\]%",                  // support ext., supporte plusieurs blancs
+        'ref' => "%<ref>%", 
+        'ref2' => "%</ref>%",
+         
         // TODO: Table (http://www.mediawiki.org/wiki/Help:Tables)
         ),
       "replacement" => array(
@@ -96,7 +96,7 @@ function nettoyer_format($t) {
         'b' => "{{\\1}}",   
         'i' => "{\\1}", 
         'ib_post' => "{{<i>\\1</i>}}",
-        'h4'     => "{{{\\1}}}", 
+        'h4'     => "{{{\\1}}}",
         'h3'     => "{{{\\1}}}", 
         'h2'     => "{{{\\1}}}",  
         'h1'     => "{{{\\1}}}", 
@@ -120,8 +120,7 @@ function nettoyer_format($t) {
         'link_ext1'  => " [->http\\1]",   
         'link_ext2'  => "[\\2->\\1]",
         'ref'  => "[[ ",
-        'ref2'  => " ]]",
-        
+        'ref2'  => " ]]",           
         )
   );
 	
@@ -131,25 +130,25 @@ function nettoyer_format($t) {
   // ref. syntaxe: http://moinmo.in/HelpOnFormatting?highlight=%28formatting%29 
   $conv_formats['MoinWiki_SPIP'] = array(
       "pattern" => array(
-        'code'   => "{{{([^}}}]*)}}}", // FIXME si } dans {{{ }}}                
-        'bold3'  => "'''''([^''''']*)'''''",
-        'bold2'  => "''''([^'''']*)''''",
-        'bold'   => "'''([^''']*)'''", 
-        'i'      => "''([^'']*)''",      
-        'under'  => "__([^\_]*)__",  
-        'del'    => "~~([^\~]*)~~",
-        'h4'     => "==== ([^ ====]*) ====",
-        'h3'     => "=== ([^ ===]*) ===",
-        'h2'     => "== ([^ ==]*) ==",
-        'h'      => "= ([^ =]*) =", 
-        'link2'  => "\\[([^\\[]*) ([^(\\[| )]*)\\]", // FIXME si plusieurs espaces blanc
-        'cell'   => "\|\|([^\|]*)\|\|",
-        'ul'     => "([^ ]*)\*([^ \*]*)",  
-        'ul_pas2'=> " -\*", 
-        'ul2'    => "  -\*", 
-        'ul3'    => "  -\**",        
-        'ol2'    => "   ([^ ]*)1.([^ 1.]*)",
-        'ol'     => " 1\.([^ 1\.]*)",
+        'code'   => "%{{{([^}}}]*)}}}%", // FIXME si } dans {{{ }}}                
+        'bold3'  => "%'''''([^''''']*)'''''%",
+        'bold2'  => "%''''([^'''']*)''''%",
+        'bold'   => "%'''([^''']*)'''%", 
+        'i'      => "%''([^'']*)''%",      
+        'under'  => "%__([^\_]*)__%",  
+        'del'    => "%~~([^\~]*)~~%",
+        'h4'     => "%==== ([^ ====]*) ====%",
+        'h3'     => "%=== ([^ ===]*) ===%",
+        'h2'     => "%== ([^ ==]*) ==%",
+        'h'      => "%= ([^ =]*) =%", 
+        'link2'  => "%\\[([^\\[]*) ([^(\\[| )]*)\\]%", // FIXME si plusieurs espaces blanc
+        'cell'   => "%\|\|([^\|]*)\|\|%",
+        'ul'     => "%([^ ]*)\*([^ \*]*)%",  
+        'ul_pas2'=> "% -\*%", 
+        'ul2'    => "%  -\*%", 
+        'ul3'    => "%  -\**%",        
+        'ol2'    => "%   ([^ ]*)1.([^ 1.]*)%",
+        'ol'     => "% 1\.([^ 1\.]*)%",
         
         ),
       "replacement" => array(
@@ -181,20 +180,20 @@ function nettoyer_format($t) {
   // question: detecter si barre enrichie pour adopter la syntaxte etendue ?
   $conv_formats['BBcode_SPIP'] = array(
       "pattern" => array(
-        'url'   => "\\[url]([^\\[]*)\\[/url\\]",
-        'url2'  => "\\[url=([^\\[]*)\\]([^\\[]*)\\[/url\\]",
-        'email' => "\\[email\\]([^\\[]*)\\[/email\\]",
-        'email2'=> "\\[email=([^\\[]*)\\]([^\\[]*)\\[/email\\]",
-        'color' => "\\[color=([^\\[]*)\\]([^\\[]*)\\[/color\\]",
-        'size'  => "\\[size=([^\\[]*)\\]([^\\[]*)\\[/size\\]",
+        'url'   => "%\\[url]([^\\[]*)\\[/url\\]%",
+        'url2'  => "%\\[url=([^\\[]*)\\]([^\\[]*)\\[/url\\]%",
+        'email' => "%\\[email\\]([^\\[]*)\\[/email\\]%",
+        'email2'=> "%\\[email=([^\\[]*)\\]([^\\[]*)\\[/email\\]%",
+        'color' => "%\\[color=([^\\[]*)\\]([^\\[]*)\\[/color\\]%",
+        'size'  => "%\\[size=([^\\[]*)\\]([^\\[]*)\\[/size\\]%",
         //'list'  => "!\[list\](.+)\[/list\]!Umi",
         //'list2' => "!\[\*\](.+)(?=(\[\*\]|</ul>))!Umi",
-        'code'  => "\\[code]([^\\[]*)\\[/code\\]",
-        'quote' => "\\[quote]([^\\[]*)\\[/quote\\]",
-        'b'     => "\\[b]([^\\[]*)\\[/b\\]",
-        'i'     => "\\[i]([^\\[]*)\\[/i\\]",
-        'center'=> "\\[center]([^\\[]*)\\[/center\\]",
-        'img'   => "\\[img]([^\\[]*)\\[/img\\]",
+        'code'  => "%\\[code]([^\\[]*)\\[/code\\]%",
+        'quote' => "%\\[quote]([^\\[]*)\\[/quote\\]%",
+        'b'     => "%\\[b]([^\\[]*)\\[/b\\]%",
+        'i'     => "%\\[i]([^\\[]*)\\[/i\\]%",
+        'center'=> "%\\[center]([^\\[]*)\\[/center\\]%",
+        'img'   => "%\\[img]([^\\[]*)\\[/img\\]%",
       ),
       "replacement" => array(
         'url'   => "[\\1->\\1]",
@@ -214,53 +213,38 @@ function nettoyer_format($t) {
       )      
   );
   
-  // Conversion SPIP -> txt
-  $conv_formats['SPIP_txt'] = array(
-      "pattern" => array(
-        'h'     => "{{{([^}}}]*)}}}",
-        'b'     => "{{([^}}]*)}}",
-        'i'     => "{([^}]*)}",
-        'url'   => "\\[([^\\[]*)->([^(\\[| )]*)\\]",         
-      ),
-      "replacement" => array(
-        'h'   => "\\1\n",
-        'b'   => "* \\1 *",
-        'i'   => "\\1",
-        'url' => "\\1 (\\2)",       
-      )      
-  );
-  
+ 
   // Conversion DotClear -> SPIP
   // http://doc.dotclear.net/1.2/usage/syntaxes
   $conv_formats['DotClear_SPIP'] = array(
       "pattern" => array(
         // faux amis 
-        'q3' => '{{([^{]*)\|([^\{]*)\|([^\{]*)}}',       
-        'q2' => '{{([^{]*)\|([^\{]*)}}',
-        'q' => '{{([^{]*)}}',
+        'q3' => '%{{([^{]*)\|([^\{]*)\|([^\{]*)}}%',       
+        'q2' => '%{{([^{]*)\|([^\{]*)}}%',
+        'q' => '%{{([^{]*)}}%',
         
         // type bloc
-        'h3'  => "\n\!\!\!([^\r]*)",
-        'h4'  => "\n\!\!([^\r]*)",
-        'h5'   => "\n\!([^\r]*)", 
-        'ul'   => "\n\* ([^\r]*)",
-        'ol'   => "\n# ([^\r]*)",     // FIXME gerer les ss listes
+        'h3'  => "%\n\!\!\!([^\r]*)%",
+        'h4'  => "%\n\!\!([^\r]*)%",
+        'h5'   => "%\n\!([^\r]*)%", 
+        'ul'   => "%\n\* ([^\r]*)%",
+        'ol'   => "%\n# ([^\r]*)%",     // FIXME gerer les ss listes
         
         // en ligne
-        'br'   => "%%%", 
-        'em' => '\'\'([^\']*)\'\'',
-        'strong' => '__([^\_]*)__',
-        'ins' => '\+\+([^\+]*)\+\+',
-        'del' => '--([^\+]*)--',
-        'code'=> '@@([^\@]*)@@',
-        'img' => '\(\(([^\)]*)\)\)',
-        'href_0' => '\[([^\|[]*)\]',                                  // 0 pipe
-        'href_3' => '\[([^\[]*)\|([^\[]*)\|([^\[]*)\|([^\[\|]*)\]',   // 3 pipes
-        'href_2' => '\[([^\[]*)\|([^\[]*)\|([^\[\|]*)\]',             // 2 pipes
-        'href_1' => '\[([^\[]*)\|([^\[\|]*)\]',                       // 1 pipe
-        'a' => '~([^~]*)~',
-        'acronym' => '\?\?([^\?]*)\|([^\?]*)\?\?',
-        'note' => '\$\$([^\$]*)\$\$',
+        'br'   => "#%%%#", 
+        'em' => '%\'\'([^\']*)\'\'%',
+        'strong' => '%__([^\_]*)__%',
+        'ins' => '%\+\+([^\+]*)\+\+%',
+        'del' => '%--([^\+]*)--%',
+        'code'=> '%@@([^\@]*)@@%',
+        'img' => '%\(\(([^\)]*)\)\)%',
+        'href_0' => '%\[([^\|[]*)\]%',                                  // 0 pipe
+        'href_3' => '%\[([^\[]*)\|([^\[]*)\|([^\[]*)\|([^\[\|]*)\]%',   // 3 pipes
+        'href_2' => '%\[([^\[]*)\|([^\[]*)\|([^\[\|]*)\]%',             // 2 pipes
+        'href_1' => '%\[([^\[]*)\|([^\[\|]*)\]%',                       // 1 pipe
+        'a' => '%~([^~]*)~%',
+        'acronym' => '%\?\?([^\?]*)\|([^\?]*)\?\?%',
+        'note' => '%\$\$([^\$]*)\$\$%',
         
         
       ),
@@ -295,13 +279,6 @@ function nettoyer_format($t) {
       )      
   );
   
-  // Conversion XTG -> SPIP
-  // format demandé par Jean Luc Girard
-  // http://195.13.83.33/twiki/bin/view/FipDoc/QuarkTagsList
-  // http://www.macworld.com/downloads/magazine/XPressTagsList.pdf   
-  // cf. extract/quark.php
-  $conv_formats['XTG_SPIP'] = 'quark';
-
   // conversion DOCX
   $conv_formats['DOCX_SPIP'] = 'docx';  // function extract/
 
@@ -311,10 +288,10 @@ function nettoyer_format($t) {
   // SLA 1.3 http://wiki.scribus.net/index.php/File_Format_for_Scribus_1.3.x 
   $conv_formats['SLA_SPIP'] = array(
       "pattern" => array(
-        'ch'    => " CH=\"([^\"]*)\" ",  // "CH=\"<([^>]*)\""
-        'br'    => "&#x5;",
-        'sp'    => "&#x1d;",        
-        'tag'   => "<([^\>]*)>", 
+        'ch'    => "% CH=\"([^\"]*)\" %",  // "CH=\"<([^>]*)\""
+        'br'    => "%&#x5;%",
+        'sp'    => "%&#x1d;%",        
+        'tag'   => "%<([^\>]*)>%", 
 
       ),
       "replacement" => array(
@@ -326,11 +303,31 @@ function nettoyer_format($t) {
   );
 
 
-  $conv_formats['XPressTags'] = 'quark'; // function extract/
-  $conv_formats['Word'] = 'doc'; // function extract/
-  $conv_formats['RTF'] = 'rtf'; // function extract/
-  $conv_formats['PDF'] = 'pdf'; // function extract/
-  $conv_formats['html_SPIP'] = 'html'; // function HTML2SPIP
+  // Conversion XTG -> SPIP
+  // format demandé par Jean Luc Girard
+  // http://195.13.83.33/twiki/bin/view/FipDoc/QuarkTagsList
+  // http://www.macworld.com/downloads/magazine/XPressTagsList.pdf   
+  // cf. extract/quark.php
+  $conv_formats['XTG_SPIP'] = 'quark'; // function extract/
+  $conv_formats['html_SPIP'] = 'html'; // function sale ou HTML2SPIP
+  
+  
+  // Conversion SPIP -> txt
+  $conv_formats['SPIP_txt'] = array(
+      "pattern" => array(
+        'h'     => "%{{{([^}}}]*)}}}%",
+        'b'     => "%{{([^}}]*)}}%",
+        'i'     => "%{([^}]*)}%",
+        'url'   => "%\\[([^\\[]*)->([^(\\[| )]*)\\]%",         
+      ),
+      "replacement" => array(
+        'h'   => "\\1\n",
+        'b'   => "* \\1 *",
+        'i'   => "\\1",
+        'url' => "\\1 (\\2)",       
+      )      
+  );
+  
 
 
 	// FIN INITIALISATION
@@ -362,7 +359,7 @@ function conversion_format($conv_in, $format) {
 		// on convertit (en avant les regex!)
 		foreach($conv_formats[$format]['pattern'] as $key=>$pattern) {
 			$replacement = $conv_formats[$format]['replacement'][$key];
-			$conv_out = eregi_replace($pattern, $replacement, $conv_out);
+			$conv_out = preg_replace($pattern, $replacement, $conv_out);
 		}
 	}
 
