@@ -26,5 +26,11 @@ function rubrique_a_linscription_upgrade($nom_meta_base_version,$version_cible){
 	}	
 	ecrire_metas();
 }
+function rubrique_a_linscription_vider_tables($nom_meta_base_version){
+	sql_alter("TABLE spip_auteurs DROP rubrique_a_linscription");
+	effacer_meta('rubrique_a_linscription');
+	effacer_meta($nom_meta_base_version);
+	ecrire_metas();	
+}
 
 ?>
