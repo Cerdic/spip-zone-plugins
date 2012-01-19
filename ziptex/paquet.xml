@@ -1,7 +1,7 @@
 <paquet
 	prefix="ziptex"
 	categorie="outil"
-	version="0.3.1"
+	version="0.3.2"
 	etat="test"
 	compatibilite="];["
 	logo="spiplatex.png"
