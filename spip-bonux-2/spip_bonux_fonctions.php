@@ -304,7 +304,7 @@ function filtre_profondeur_dist ($id_rubrique) {
 	// sauver les calculs deja faits
 	static $profs = array();
 	if (isset($profs[$id_rubrique])) {
-		return $profs[$id_rubrique]
+		return $profs[$id_rubrique];
 	}
 
 	// recuperer le parent.
