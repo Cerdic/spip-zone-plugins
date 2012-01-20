@@ -38,7 +38,7 @@ function commandes_paypal_traitement_paypal($flux){
 			$statut_nouveau = 'erreur';
 		}
 
-		spip_log("commandes_paypal_traitement envoi vers instituer $id_commande-$statut_nouveau",'commande');
+		spip_log("commandes_paypal_traitement envoi vers instituer $id_commande-$statut_nouveau",'commandes');
 		
 		//on institue la commande
 		$action = charger_fonction('instituer_commande', 'action');
