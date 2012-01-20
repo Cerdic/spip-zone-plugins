@@ -8,8 +8,8 @@ function del2seen_post_syndication($flux){
 		// préparer les données du seen
 		// unicode2charset ne traite pas les entites < &#128;
 		$titre = html_entity_decode($flux[2]['titre'],ENT_QUOTES,$GLOBALS['meta']['charset']);
+		$comment = html_entity_decode($flux[2]['descriptif'],ENT_QUOTES,$GLOBALS['meta']['charset']);
 		$link = $flux[2]['url'];
-		$comment = $flux[2]['descriptif'];
 		foreach($flux[2]['tags'] as $tag) {
 			$tag = textebrut($tag);
 			if (strlen($tag) > 0) {
