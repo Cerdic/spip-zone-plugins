@@ -34,9 +34,7 @@
 	<necessite nom="spip_bonux" compatibilite="[1.8.10;[" />
 	<necessite nom="YAML" compatibilite="[1.4.1;[" />
 	<necessite nom="saisies" compatibilite="[1.8.5;[" />
-	<necessite nom="jqueryui" compatibilite="[1.8.5;[" />
 	<necessite nom="verifier" />
-
 	<utilise nom="compositions" compatibilite="[2.0.0;[" />
 
 	<menu nom="noizetier" titre="noizetier:editer_noizetier_titre" parent="configuration" icone="img/noizetier-24.png" action="noizetier" />

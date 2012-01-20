@@ -251,7 +251,7 @@ function noizetier_lister_pages(){
 		}
 		
 		// Dans le cas de Zpip, il faut supprimer la page 'page.html' et la page 'z_apl.html'
-		if (defined('_DIR_PLUGIN_Z')) {
+		if (defined('_DIR_PLUGIN_Z') OR defined('_DIR_PLUGIN_ZCORE')) {
 			unset($liste_pages['page']);
 			unset($liste_pages['z_apl']);
 		}
@@ -368,24 +368,24 @@ function noizetier_blocs_defaut(){
 	static $blocs_defaut = null;
 
 	if (is_null($blocs_defaut)){
-	$blocs_defaut = array (
-		'contenu' => array(
-			'nom' => _T('noizetier:nom_bloc_contenu'),
-			'description' => _T('noizetier:description_bloc_contenu'),
-			'icon' => 'img/ic_bloc_contenu.png'
-			),
-		'navigation' => array(
-			'nom' => _T('noizetier:nom_bloc_navigation'),
-			'description' => _T('noizetier:description_bloc_navigation'),
-			'icon' => 'img/ic_bloc_navigation.png'
-			),
-		'extra' => array(
-			'nom' => _T('noizetier:nom_bloc_extra'),
-			'description' => _T('noizetier:description_bloc_extra'),
-			'icon' => 'img/ic_bloc_extra.png'
-			),
-	);
-	$blocs_defaut = pipeline('noizetier_blocs_defaut',$blocs_defaut);
+		$blocs_defaut = array (
+			'contenu' => array(
+				'nom' => _T('noizetier:nom_bloc_contenu'),
+				'description' => _T('noizetier:description_bloc_contenu'),
+				'icon' => 'img/ic_bloc_contenu.png'
+				),
+			'navigation' => array(
+				'nom' => _T('noizetier:nom_bloc_navigation'),
+				'description' => _T('noizetier:description_bloc_navigation'),
+				'icon' => 'img/ic_bloc_navigation.png'
+				),
+			'extra' => array(
+				'nom' => _T('noizetier:nom_bloc_extra'),
+				'description' => _T('noizetier:description_bloc_extra'),
+				'icon' => 'img/ic_bloc_extra.png'
+				),
+		);
+		$blocs_defaut = pipeline('noizetier_blocs_defaut',$blocs_defaut);
 	}
 	return $blocs_defaut;
 }
@@ -399,7 +399,10 @@ function noizetier_blocs_defaut(){
 function supprimer_noisettes_page_noizetier($page) {
 	$type_compo = explode ('-',$page,2);
 	$type = $type_compo[0];
-	$composition = $type_compo[1];
+	if(isset($type_compo[1]))
+		$composition = $type_compo[1];
+	else
+		$composition = $type_compo[0];
 	
 	sql_delete('spip_noisettes','type='.sql_quote($type).'and composition='.sql_quote($composition));
 
@@ -714,7 +717,6 @@ function noizetier_importer_configuration($type_import, $import_compos, $config)
 	// On invalide le cache
 	include_spip('inc/invalideur');
 	suivre_invalideur('noizetier-import-config');
-	
 	return $ok;
 }
 
