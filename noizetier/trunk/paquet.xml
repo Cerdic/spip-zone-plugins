@@ -1,0 +1,44 @@
+<paquet
+	prefix="noizetier"
+	categorie="maintenance"
+	version="0.13.0"
+	etat="stable"
+	compatibilite="[2.1.0;3.0.99]"
+	logo="img/noizetier-128.png"
+	schema="0.4"
+	documentation="http://www.spip-contrib.net/noiZetier"
+>	
+
+	<nom>NoiZetier</nom>
+	<!-- Gestionnaire de noisettes, nativement fonctionnel avec les squelettes Z -->
+
+	<auteur>Joseph</auteur>
+	<auteur>Matthieu Marcillaud</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_principales" inclure="base/noizetier_tables.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/noizetier_tables.php" />
+	<pipeline nom="autoriser" inclure="noizetier_autoriser.php" />
+	<pipeline nom="header_prive" inclure="noizetier_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="noizetier_pipelines.php" />
+	<pipeline nom="styliser" inclure="noizetier_pipelines.php" />
+	<pipeline nom="compositions_lister_disponibles" inclure="noizetier_pipelines.php" />
+	<pipeline nom="ieconfig" inclure="noizetier_ieconfig.php" />
+	<pipeline nom="jqueryui_plugins" inclure="noizetier_pipelines.php" action="jqueryui_forcer" />
+	<pipeline nom="noizetier_lister_pages" inclure="noizetier_pipelines.php" />
+	<pipeline nom="noizetier_blocs_defaut" inclure="noizetier_pipelines.php" />
+	<pipeline nom="noizetier_config_export" inclure="noizetier_pipelines.php" />
+	<pipeline nom="noizetier_config_import" inclure="noizetier_pipelines.php" />
+
+	<necessite nom="spip_bonux" compatibilite="[1.8.10;[" />
+	<necessite nom="YAML" compatibilite="[1.4.1;[" />
+	<necessite nom="saisies" compatibilite="[1.8.5;[" />
+	<necessite nom="jqueryui" compatibilite="[1.8.5;[" />
+	<necessite nom="verifier" />
+
+	<utilise nom="compositions" compatibilite="[2.0.0;[" />
+
+	<menu nom="noizetier" titre="noizetier:editer_noizetier_titre" parent="configuration" icone="img/noizetier-24.png" action="noizetier" />
+	<menu nom="bando_noizetier" titre="noizetier:editer_noizetier_titre" parent="bando_squelette" icone="images/noizetier-16.png" action="noizetier" />
+</paquet>
