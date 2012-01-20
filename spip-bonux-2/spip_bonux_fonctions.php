@@ -298,7 +298,7 @@ function filtre_sinon_interdire_acces_dist($ok=false, $url='', $statut=0){
  *
  * @return int
 */
-function filtre_profondeur_dist ($id_rubrique) {
+function filtre_profondeur_dist($id_rubrique) {
 	$id_rubrique = intval($id_rubrique);
 	
 	// sauver les calculs deja faits
@@ -316,7 +316,7 @@ function filtre_profondeur_dist ($id_rubrique) {
 	}
 
 	// sinon, on trouve la profondeur du parent
-	$parent = filtre_profondeur_dist ($id_parent);
+	$parent = filtre_profondeur_dist($id_parent);
 	$profs[$id_rubrique] = ($parent + 1);
 	return $profs[$id_rubrique];
 }
