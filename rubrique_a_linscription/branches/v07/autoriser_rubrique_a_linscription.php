@@ -19,7 +19,9 @@ function autoriser_voir($faire, $type, $id, $qui, $opt) {
 		return autoriser_voir_dist($faire, $type, $id, $qui, $opt);
 	}
 	
-	$liste_rubriques_auteur = liste_rubriques_auteur($qui['id_auteur']);
+	$liste_rubriques_auteur = remonter_hierarchie_rubriques(liste_rubriques_auteur($qui['id_auteur']));
+	
+	
 	if ($type == 'document')
 		return autoriser_document_voir_dist($faire, $type, $id, $qui, $opt);
 	if ($type == 'groupemots') {
@@ -48,5 +50,16 @@ function autoriser_voir($faire, $type, $id, $qui, $opt) {
 	
 	
 }
-
+function remonter_hierarchie_rubriques($rubriques){
+	$toutes_rubriques	= array();
+	include_spip('base/abstract');
+	foreach ($rubriques as $id_rubrique){
+		$toutes_rubriques[]	= $id_rubrique;
+		while ($id_rubrique = sql_getfetsel("id_parent","spip_rubriques","id_rubrique=" . $id_rubrique,"","","", "", $connect)){
+			settype($id_rubrique,'int')	;
+		 	$toutes_rubriques[] = $id_rubrique ;
+		 }	 
+	}
+	return $toutes_rubriques;
+}
 ?>
