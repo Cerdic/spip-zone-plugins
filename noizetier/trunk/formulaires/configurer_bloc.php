@@ -12,7 +12,10 @@ function formulaires_configurer_bloc_charger($bloc,$page,$infos_bloc){
 	$contexte['page'] = $page;
 	$type_compo = explode ('-',$page,2);
 	$contexte['type'] = $type_compo[0];
-	$contexte['composition'] = $type_compo[1];
+	if(!isset($type_compo[1]))
+		$contexte['composition'] = $type_compo[0];
+	else 
+		$contexte['composition'] = $type_compo[1];
 	$contexte['bloc_page'] = $bloc.'-'.$page;
 	$contexte['_infos_bloc'] = $infos_bloc;
 	
@@ -164,7 +167,10 @@ function formulaires_configurer_bloc_traiter($bloc,$page){
 			$t_bloc_page = explode ('-',$bloc_page,3);
 			$bloc = $t_bloc_page[0];
 			$type = $t_bloc_page[1];
-			$composition = $t_bloc_page[2];
+			if(!isset($t_bloc_page[2]))
+				$composition = $t_bloc_page[1];
+			else 
+				$composition = $t_bloc_page[2];
 			$id_noisette = sql_insertq(
 				'spip_noisettes',
 				array(
