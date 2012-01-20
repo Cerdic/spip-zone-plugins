@@ -40,7 +40,10 @@ function dictionnaires_lister_definitions($purger=false){
 		$purger == true
 		or !lire_fichier($fichier_cache, $definitions_actives)
 		or !($definitions_actives = unserialize($definitions_actives))
+		or !is_array($definitions_actives)
 	){
+		$definitions_actives = array();
+		
 		// On récupère tous les dictionnaires actifs
 		$dicos_actifs = sql_allfetsel('id_dictionnaire', 'spip_dictionnaires', 'actif = 1');
 		if ($dicos_actifs and is_array($dicos_actifs)){
