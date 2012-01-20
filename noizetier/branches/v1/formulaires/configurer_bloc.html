@@ -1,0 +1,42 @@
+<div class="formulaire_spip formulaire_editer [formulaire_(#ENV{form})][ formulaire_(#ENV{form})-#ENV{bloc_page}]">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	[(#ENV{editable})
+	
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="titre_bloc"[ style="background-image:url((#ENV{_infos_bloc}|table_valeur{icon}|find_in_path|image_reduire{24}|extraire_attribut{src})); background-repeat:no-repeat; background-position:right; padding-top:5px;"]>
+						<:noizetier:formulaire_configurer_bloc:> [<i>(#ENV{_infos_bloc}|table_valeur{nom}|sinon{#ENV{bloc}})</i>]
+					</h3>
+					[<div class="description_bloc">(#ENV{_infos_bloc}|table_valeur{description})</div>]
+					<input style="display:none;" type="submit" class="submit" name="enregistrer" value="<:bouton_enregistrer:>" />
+					#INCLURE{fond=formulaires/inc-configurer-noisettes, env}
+				</fieldset>
+			</li>
+		</ul>
+	</div></form>
+	
+	]
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		$('.noisette .actions').hide();
+		$('.noisette .ligne')
+			.hover(
+				function(){
+					$(this).find('.actions').show();
+				},
+				function(){
+					$(this).find('.actions').hide();
+				}
+			);
+	});
+</script>

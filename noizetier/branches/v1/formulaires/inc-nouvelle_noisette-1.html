@@ -1,0 +1,46 @@
+<ul>
+	<li class="editer_type[(#ENV**{erreurs}|table_valeur{type}|oui)erreur]">
+		<label><:noizetier:choisir_noisette:></label>
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{erreur_noisette})</span>]
+			<B_type_noisettes>
+			[(#SET{nom_type,[(#NOIZETIER_LISTE_PAGES|table_valeur{#ENV{type}}|table_valeur{nom})]})]
+			<div class="choix" style="padding:3px;border-bottom:1px solid #eee;"><strong><:noizetier:noisettes_page{type=#GET{nom_type}}:></strong></div>
+			<BOUCLE_type_noisettes(POUR){tableau #ENV{_noisettes_type}}{par valeur}>
+			<div class="choix" style="padding:3px;border-bottom:1px solid #eee;">
+				[(#CHEMIN{#VALEUR|table_valeur{icon}}|image_reduire{24})]
+				<input type="radio" class="radio" name="noisette" id="noisette_#CLE" value="#CLE" style="vertical-align:top;" />
+				<label for="noisette_#CLE">[(#VALEUR|table_valeur{nom})]</label>
+			</div>
+			</BOUCLE_type_noisettes>
+		
+		<BOUCLE_test_composition(CONDITION){si #ENV{composition}|oui}>
+			<B_composition_noisettes>
+			[(#SET{nom_composition,[(#NOIZETIER_LISTE_PAGES|table_valeur{#ENV{type}-#ENV{composition}}|table_valeur{nom})]})]
+			<div class="choix" style="padding:3px;border-bottom:1px solid #eee;"><strong><:noizetier:noisettes_composition{composition=#GET{nom_composition}}:></strong></div>
+			<BOUCLE_composition_noisettes(POUR){tableau #ENV{_noisettes_composition}}{par valeur}>
+			<div class="choix" style="padding:3px;border-bottom:1px solid #eee;">
+				[(#CHEMIN{#VALEUR|table_valeur{icon}}|image_reduire{24})]
+				<input type="radio" class="radio" name="noisette" id="noisette_#CLE" value="#CLE" style="vertical-align:top;" />
+				<label for="noisette_#CLE">[(#VALEUR|table_valeur{nom})]</label>
+			</div>
+			</BOUCLE_composition_noisettes>
+		</BOUCLE_test_composition>
+		
+		<B_page_noisettes>
+		<div class="choix" style="padding:3px;border-bottom:1px solid #eee;"><strong><:noizetier:noisettes_toutes_pages:></strong></div>
+		<BOUCLE_page_noisettes(POUR){tableau #ENV{_noisettes_toutes_pages}}{par valeur}>
+		<div class="choix" style="padding:3px;border-bottom:1px solid #eee;">
+			[(#CHEMIN{#VALEUR|table_valeur{icon}}|image_reduire{24})]
+			<input type="radio" class="radio" name="noisette" id="noisette_#CLE" value="#CLE" style="vertical-align:top;" />
+			<label for="noisette_#CLE">[(#VALEUR|table_valeur{nom})]</label>
+		</div>
+		</BOUCLE_page_noisettes>
+	</li>
+</ul>
+
+<p class='boutons'>
+	<span class='image_loading'></span>
+	<input type="hidden" name="demander_nouvelle_noisette" value="#ENV{bloc_page}" />
+	<input type="submit" class="submit link" name="bloc_page_nouvelle_noisette" value="<:icone_retour:>" />
+	<input type="submit" class="submit" name="suivant" value="<:bouton_suivant:>" />
+</p>

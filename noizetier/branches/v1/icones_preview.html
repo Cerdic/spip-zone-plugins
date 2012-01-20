@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<title><:noizetier:liste_icones:></title>
+</head>
+<body>
+<h1><:noizetier:liste_icones:></h1>
+<BOUCLE_dossiers(POUR){tableau #NOIZETIER_LISTE_ICONES}>
+<B_icones>
+[<h2>(#CLE)/</h2>]
+<table>
+<BOUCLE_icones(POUR){tableau #VALEUR}>
+	<tr>
+		<td>#_dossiers:CLE/#CLE<td>
+		<td><img src="#VALEUR" ></td>
+	</tr>
+</BOUCLE_icones>
+</table>
+<B_icones>
+</BOUCLE_dossiers>
+</body>
+</html>
