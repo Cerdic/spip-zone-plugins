@@ -21,18 +21,3 @@
 (#URL_ACTION_AUTEUR{supprimer_composition_noizetier,#ENV{id},#URL_ECRIRE{noizetier_compositions}}|icone{<:noizetier:formulaire_supprimer_composition:>,#CHEMIN{img/compositions-24.png},center,supprimer.gif})
 </div>]
 ]
-
-<!--#navigation-->
-[(#ENV{id}|oui)
-<div class="cadre infos cadre-info">
-	<div class="numero">
-		[<p><img src="(#GET{compo_infos}|table_valeur{icon}|find_in_path|image_reduire{24}|extraire_attribut{src})" /></p>]
-		<:noizetier:info_composition:>
-		<p style='font-size:1.75em;'>#ENV{id}</p>
-	</div>
-</div>
-]
-<!--/#navigation-->
-
-<!--#extra-->
-<!--/#extra-->

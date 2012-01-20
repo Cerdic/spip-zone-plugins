@@ -1,0 +1,8 @@
+#BOITE_OUVRIR
+	<div class="numero">
+		[<p><img src="(#NOIZETIER_LISTE_PAGES|table_valeur{#ENV{page}}|table_valeur{icon}|find_in_path|image_reduire{24}|extraire_attribut{src})" alt="#ENV{page}"/></p>]
+		<:noizetier:info_page:>
+		<p style='font-size:1.75em;'>[(#ENV{page})]</p>
+	</div>
+#BOITE_FERMER
+
