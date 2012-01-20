@@ -1,9 +1,10 @@
 /* CSS Document */
-#navigation div#calendar{
+#calendar{
 	/*border-top: 1px solid #F0F0F0;*/
+	margin-bottom:1em;
 }
 
-#navigation div#calendar table{
+#calendar table{
 	width: 100%;
 	font-size: 0.8em;
 	text-align: center;
@@ -11,42 +12,43 @@
 	border-collapse: collapse;
 }
 
-#navigation div#calendar table caption{
+#calendar table caption{
 	margin: 0 auto;
+	padding:0;
 }
 
-#navigation div#calendar table th{
-	color: #493;
+#calendar table th{
 	background: transparent;
+	padding:0;
 }
 
-#navigation div#calendar table td{
+#calendar table td{
 	width: 14%;
 	line-height: 2em;
 	border: 1px solid #EEE;
+	padding:0;
 }
 
-#navigation div#calendar table td a{
+#calendar table td a{
 	display: block;
-	background: #EFA;
-	color: #493;
+	background: #fff;
 	font-weight: bold;
 	text-decoration: none;
 }
 
-#navigation div#calendar table td.today a{
+#calendar table td.today a{
 	border: 1px solid #493;
 }
 
-#navigation div#calendar table td a:hover{
+#calendar table td a:hover{
 	background: #DBB8DC;
 	color: #636;
 }
 
-#navigation div#calendar table td.today a:hover{
+#calendar table td.today a:hover{
 	border: 1px solid #636;
 }
 
-#navigation div#calendar span{
+#calendar span{
 	display: none;
 }

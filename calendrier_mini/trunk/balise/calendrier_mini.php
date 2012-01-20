@@ -1,15 +1,15 @@
 <?php
 
-/*
-	Balise #CALENDRIER_MINI
-	Auteur James (c) 2006
-	Plugin pour spip 1.9.1
-	Licence GNU/GPL
-*/
+/**
+ * Balise #CALENDRIER_MINI
+ * Auteur James (c) 2006-2012
+ * Plugin pour SPIP 3.0.0
+ * Licence GNU/GPL
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-include_spip('minical_fonctions');
+include_spip('calendriermini_fonctions');
 
 function balise_CALENDRIER_MINI($p) {
 	return calculer_balise_dynamique($p,'CALENDRIER_MINI', array(VAR_DATE, 'id_rubrique','id_article', 'id_mot'));
