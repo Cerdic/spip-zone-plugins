@@ -1,0 +1,30 @@
+<paquet
+	prefix="ieconfig"
+	categorie="maintenance"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0-beta;3.0.99]"
+	logo="prive/themes/spip/images/ieconfig-32.png"
+	documentation="http://www.spip-contrib.net/spip.php?article3703"
+>
+
+	<nom>Import-Export</nom>
+	<!-- Importer, exporter des configurations de plugins -->
+
+	<auteur lien="http://www.spip-contrib.net/Joseph">Joseph</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="autoriser" inclure="ieconfig_autoriser.php" />
+	<pipeline nom="mes_fichiers_a_sauver" inclure="ieconfig_mes_fichiers_a_sauver.php" />
+
+	<necessite nom="saisies" compatibilite="[1.7.9;[" />
+	<necessite nom="verifier" />
+	<necessite nom="YAML" />
+
+	<menu nom="ieconfigexport" titre="ieconfig:titre_export" parent="menu_administration" icone="images/config-export-16.png" action="ieconfig_export" />
+	<menu nom="ieconfigimport" titre="ieconfig:titre_import" parent="menu_administration" icone="images/config-import-16.png" action="ieconfig_import" />
+
+	<onglet nom="ieconfigexport" titre="ieconfig:titre_export" parent="ieconfig" icone="images/config-export-24.png" action="ieconfig_export" />
+	<onglet nom="ieconfigimport" titre="ieconfig:titre_import" parent="ieconfig" icone="images/config-import-24.png" action="ieconfig_import" />
+</paquet>
