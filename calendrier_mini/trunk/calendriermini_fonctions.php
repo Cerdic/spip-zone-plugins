@@ -14,9 +14,7 @@ function balise_DATE_ARCHIVES($p) {
 function critere_archives($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$objet = objet_type($boucle->id_table);
-	spip_log($objet,'test');
 	$date = objet_info($objet,'date');
-	spip_log($date,'test');
 	$champ_date = "'" . $boucle->id_table ."." .
 	$date . "'";
 	$boucle->where[] = array(
