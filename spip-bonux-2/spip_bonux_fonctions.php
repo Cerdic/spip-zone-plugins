@@ -308,7 +308,7 @@ function filtre_profondeur_dist ($id_rubrique) {
 	}
 
 	// recuperer le parent.
-	$id_parent = sql_getfetsel('id_parent', 'spip rubriques', 'id_rubrique='.$id_rubrique);
+	$id_parent = sql_getfetsel('id_parent', 'spip_rubriques', 'id_rubrique='.$id_rubrique);
 
 	// pas de parent, on est tout en haut...
 	if (!$id_parent) {
