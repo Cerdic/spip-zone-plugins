@@ -4,7 +4,7 @@
 	<auteur>Joseph</auteur>
 	<licence>GPL v3</licence>
 	<version>0.2.6</version>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description>Ce plugin permet d'exporter la configuration de SPIP et des plugins compatibles dans un seul et unique fichier au format YAML. Ces fichiers de configuration peuvent ensuite &#234;tre import&#233;s.</description>
 	<lien>http://www.spip-contrib.net/spip.php?article3703</lien>
 	<icon>img/ieconfig-128.png</icon>
