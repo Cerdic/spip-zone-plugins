@@ -5,13 +5,13 @@
   Distribue sous licence GPL
 
 ][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
-[[(#NOM_SITE_SPIP|textebrut)]] [<:forum_forum:>][ (#TITRE|nettoyer_titre_email)]
+[[(#NOM_SITE_SPIP|textebrut)]] [<:forum:forum_forum:>][ (#TITRE|nettoyer_titre_email)]
 
 <:form_forum_message_auto:>
 
 [(#ENV{par_auteur})
 ][
-(#STATUT|=={publie}|?{<:forum_ne_repondez_pas:>})][
+(#STATUT|=={publie}|oui)<:forum:forum_ne_repondez_pas:>][
 (#STATUT|=={spam}|oui) (SPAM)][
 (#ENV{url}|url_absolue)]
 
