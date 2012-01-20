@@ -124,6 +124,7 @@ var map[(#GET{id})];
 				id_forum : (#ENV{id_forum}),][
 				id_gis : (#ENV{id_gis}),][
 				recherche : "(#ENV{recherche})",][
+				mots : (#ENV{mots}|json_encode),][
 				limit : (#ENV{limit,#ENV{limite,500}})]
 			},
 			function(data) {
