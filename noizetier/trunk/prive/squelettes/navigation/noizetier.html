@@ -1,4 +1,8 @@
-#BOITE_OUVRIR
+[(#PLUGIN{compositions}|ou{#PLUGIN{ieconfig}}|oui)
+#SET{boite,oui}
+]
+[(#GET{boite}|oui)
+#BOITE_OUVRIR]
 	[(#PLUGIN{compositions}|oui)
 	<div>
 		<a href="#URL_ECRIRE{noizetier_compositions}" class="cellule-h">
@@ -21,4 +25,5 @@
 		</a>
 	</div>
 	]
-#BOITE_FERMER
+[(#GET{boite}|oui)
+#BOITE_FERMER]
