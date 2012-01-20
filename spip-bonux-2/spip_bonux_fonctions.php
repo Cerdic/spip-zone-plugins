@@ -292,4 +292,33 @@ function filtre_sinon_interdire_acces_dist($ok=false, $url='', $statut=0){
 	exit;
 }
 
+/**
+ * Calculer et retourner la profondeur de la rubrique  
+ * (dans spip3, c'est un champ de la table rubrique)
+ *
+ * @return int
+*/
+function filtre_profondeur_dist ($id_rubrique) {
+	$id_rubrique = intval($id_rubrique);
+	
+	// sauver les calculs deja faits
+	static $profs = array();
+	if (isset($profs[$id_rubrique])) {
+		return $profs[$id_rubrique]
+	}
+
+	// recuperer le parent.
+	$id_parent = sql_getfetsel('id_parent', 'spip rubriques', 'id_rubrique='.$id_rubrique);
+
+	// pas de parent, on est tout en haut...
+	if (!$id_parent) {
+		return $profs[$id_rubrique] = 1;
+	}
+
+	// sinon, on trouve la profondeur du parent
+	$parent = filtre_profondeur($id_parent);
+	$profs[$id_rubrique] = ($parent + 1);
+	return $profs[$id_rubrique];
+}
+
 ?>
