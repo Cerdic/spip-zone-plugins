@@ -25,7 +25,7 @@ function formulaires_configurer_refbase_charger_dist(){
 	$valeurs['liens'] = 'oui';
 	$valeurs['max'] = 100;
 	$valeurs['doublons'] = 'non';
-	$valeurs['liens_export'] = 'oui';
+	$valeurs['liens_exports'] = 'oui';
 	
 	if ($config = unserialize($GLOBALS['meta']['refbase']))
 		$valeurs = array_merge($valeurs,$config);

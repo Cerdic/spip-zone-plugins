@@ -1,7 +1,7 @@
 <paquet
 	prefix="refbase"
 	categorie="edition"
-	version="2.1.1"
+	version="2.1.2"
 	etat="stable"
 	compatibilite="[3.0.0-dev;3.0.99]"
 	logo="prive/themes/spip/images/refbase-48.png"
