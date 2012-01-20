@@ -1,9 +1,9 @@
 <paquet
 	prefix="noizetier"
 	categorie="maintenance"
-	version="0.13.0"
-	etat="stable"
-	compatibilite="[2.1.0;3.0.99]"
+	version="0.14.0"
+	etat="dev"
+	compatibilite="[3.0.0-beta;3.0.99]"
 	logo="img/noizetier-128.png"
 	schema="0.4"
 	documentation="http://www.spip-contrib.net/noiZetier"
