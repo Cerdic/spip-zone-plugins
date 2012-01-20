@@ -47,7 +47,7 @@
 			[<em class='attention'>(#ENV*{attention})</em>]
 			[(#INCLURE{fond=saisies/#ENV{type_saisie},env,disable=#GET{disable},readonly=#GET{readonly}})]
 			[(#ENV{disable_avec_post}|et{#ENV{disable_avec_post}|!={non}}|oui)<input type='hidden' name='#ENV{nom}' value="#ENV{valeur,#ENV{defaut}}" />]
-			#ENV*{inserer_fin}
+			#ENV**{inserer_fin}
 		</li>
 	]
 ]

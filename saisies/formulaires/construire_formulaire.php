@@ -80,7 +80,9 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 	$saisie = $saisies_actuelles[$nom_ou_id];
 	$formulaire_config = $saisies_disponibles[$saisie['saisie']]['options'];
 	array_walk_recursive($formulaire_config, 'formidable_transformer_nom', "saisie_modifiee_${nom}[options][@valeur@]");
-
+	$formulaire_config = saisie_identifier(array('saisies'=>$formulaire_config));
+	$formulaire_config = $formulaire_config['saisies'];
+	
 	// Si la saisie possede un identifiant, on l'ajoute
 	// au formulaire de configuration pour ne pas le perdre en route
 	if (isset($saisie['identifiant']) and $saisie['identifiant']) {
@@ -460,10 +462,8 @@ function formidable_generer_saisie_configurable($saisie, $env){
 			'fin'
 		);
 	}
-	
 	// On génère le HTML de la saisie
 	$html = saisies_generer_html($saisie, $env);
-	
 	return $html;
 }
 
