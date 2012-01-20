@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_spip_interactivite_export_explication' => 'Vous pouvez exporter les paramètres définis sous l\'onglet <i><a href="./?exec=config_contenu">Interactivité</a></i> dans la Configuration du site.',
 	'texte_spip_interactivite_import_explication' => 'Ce fichier contient des valeurs pour l\'onglet <i>Interactivité</i> dans la configuration du site. Si vous l\'importez, les paramètres suivants seront modifiés :',
 	'titre_export' => 'Exporter la configuration',
-	'titre_ieconfig' => 'Importeur / Exporteur de configuration',
+	'titre_ieconfig' => 'Import / Export de configurations',
 	'titre_import' => 'Importer une configuration',
 
 );
