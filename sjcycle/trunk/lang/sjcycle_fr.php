@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
-	'boite_info' =>'Recopiez l\'un de ces raccourcis et insérez-le à l’intérieur de la case « Texte », là où vous désirez situer le diaporama dans votre article.<br /><br />Consultez l\'aide pour connaître les paramètres disponibles.',
+	'boite_info' =>'Recopiez l\'un de ces raccourcis et insérez-le à l’intérieur de la case « Texte », là où vous désirez situer le diaporama dans votre article.<br /><br />Consultez l\'aide pour connaître les paramètres disponibles.<br /><br />',
 	'boite_info_titre' =>'Diaporama',
 
 	// C
