@@ -1,0 +1,9 @@
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		<h2><:ieconfig:titre_export:></h2>
+	</div>
+	[(#AUTORISER{configurer,ieconfig}|oui)
+		#FORMULAIRE_IECONFIG_EXPORT
+	]
+</div>
+<div class="nettoyeur" />

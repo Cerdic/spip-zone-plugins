@@ -1,0 +1,11 @@
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		<h2><:ieconfig:titre_import:></h2>
+	</div>
+	[(#AUTORISER{configurer,ieconfig}|oui)
+		<div class="ajax">
+		#FORMULAIRE_IECONFIG_IMPORT
+		</div>
+	]
+</div>
+<div class="nettoyeur" />
