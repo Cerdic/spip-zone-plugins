@@ -86,12 +86,19 @@ function champs_extras_restrictions($saisie, $action, $table, $id, $qui, $opt) {
 
 /**
   * Autorisation de voir un champ extra
-  * autoriser('voirextra_prenom','auteur', $id_auteur);
+  * autoriser('voirextra','auteur', $id_auteur,'',array('champ'=>'prenom', 'saisie'=>$saisie, ...));
   *
   * -> autoriser_auteur_voirextra_prenom_dist() ...
   */
 function autoriser_voirextra_dist($faire, $type, $id, $qui, $opt){
 	if (isset($opt['saisie'])) {
+		// tester des fonctions d'autorisations plus precises declarees
+		if ($opt['champ']) {
+			$f = 'autoriser_' . $opt['table'] . '_voirextra_' . $opt['champ'];
+			if (function_exists($f) OR function_exists($f .= '_dist')) {
+				return $f($faire, $type, $id, $qui, $opt);
+			}
+		}
 		return champs_extras_restrictions($opt['saisie'], substr($faire, 0, -5), $opt['table'], $id, $qui, $opt);
 	}
 	return true;
@@ -99,12 +106,19 @@ function autoriser_voirextra_dist($faire, $type, $id, $qui, $opt){
 
 /**
   * Autorisation de modifier un champ extra
-  * autoriser('modifierextra_prenom','auteur', $id_auteur);
+  * autoriser('modifierextra','auteur', $id_auteur,'',array('champ'=>'prenom', 'saisie'=>$saisie, ...));
   * 
   * -> autoriser_auteur_modifierextra_prenom_dist()
   */
 function autoriser_modifierextra_dist($faire, $type, $id, $qui, $opt){
 	if (isset($opt['saisie'])) {
+		// tester des fonctions d'autorisations plus precises declarees
+		if ($opt['champ']) {
+			$f = 'autoriser_' . $opt['table'] . '_modifierextra_' . $opt['champ'];
+			if (function_exists($f) OR function_exists($f .= '_dist')) {
+				return $f($faire, $type, $id, $qui, $opt);
+			}
+		}
 		return champs_extras_restrictions($opt['saisie'], substr($faire, 0, -5), $opt['table'], $id, $qui, $opt);
 	}
 	return true;

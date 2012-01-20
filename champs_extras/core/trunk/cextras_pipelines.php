@@ -30,12 +30,13 @@ function champs_extras_autorisation($faire, $quoi='', $saisies=array(), $args=ar
 	if (!$saisies) return array();
 	foreach ($saisies as $cle=>$saisie) {
 		$id = isset($args['id']) ? $args['id'] : $args['id_objet'];
-		if (!autoriser($faire . 'extra_' . $saisie['options']['nom'], $quoi, $id, '', array(
+		if (!autoriser($faire . 'extra', $quoi, $id, '', array(
 			'type' => $quoi,
 			'id_objet' => $id,
 			'contexte' => $args['contexte'],
 			'table' => table_objet_sql($quoi),
-			'saisie' => $saisie
+			'saisie' => $saisie,
+			'champ' => $saisie['options']['nom'],
 		))) {
 			// on n'est pas autorise
 			unset($saisies[$cle]);
