@@ -34,19 +34,19 @@ function notifications_forumprive_dist($quoi, $id_forum, $options) {
 	if ($GLOBALS['notifications']['prevenir_auteurs_prive']) {
 
 		// 1.1. Les auteurs du message (si c'est un message)
-		if ($t['id_message']) {
-			$result = sql_select("auteurs.email","spip_auteurs AS auteurs, spip_auteurs_messages AS lien","lien.id_message=".intval($t['id_message'])." AND auteurs.id_auteur=lien.id_auteur");
+		if ($t['objet']=='message' AND $t['id_objet']) {
+			$result = sql_select("auteurs.email","spip_auteurs AS auteurs, spip_auteurs_liens AS lien ON auteurs.id_auteur=lien.id_auteur","lien.objet='message' AND lien.id_objet=".intval($t['id_objet']));
 
 			while ($qui = sql_fetch($result))
 				$tous[] = $qui['email'];
 
-			$url = url_absolue(generer_url_entite($id_message, 'message'));
+			$url = url_absolue(generer_url_entite($t['id_objet'], 'message'));
 			$t['texte'] .= "\n\n"._T('forum_ne_repondez_pas')."\n<html>$url</html>";
 		}
 
 		// 1.2. Les auteurs de l'article (si c'est un article)
-		elseif ($t['id_article']) {
-			$result = sql_select("auteurs.email","spip_auteurs AS auteurs, spip_auteurs_articles AS lien","lien.id_article=".intval($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
+		elseif ($t['objet']=='article' AND $t['id_objet']) {
+			$result = sql_select("auteurs.email","spip_auteurs AS auteurs, spip_auteurs_liens AS lien ON auteurs.id_auteur=lien.id_auteur","lien.objet='article' AND lien.id_objet=".intval($t['id_objet']));
 
 			while ($qui = sql_fetch($result))
 				$tous[] = $qui['email'];
