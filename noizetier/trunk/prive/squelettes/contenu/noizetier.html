@@ -4,7 +4,7 @@
 </div>
 
 #SET{auth,#AUTORISER{configurer,noizetier}}
-<div class="formulaire_spip">
+#BOITE_OUVRIR
 <ul class="liste_items liste_noizetier_pages">
 	<BOUCLE_pages(POUR){tableau #NOIZETIER_LISTE_PAGES}{par cle}>
 	<li class="item" [ style="background-image:url((#VALEUR|table_valeur{icon}|find_in_path|image_reduire{24}|extraire_attribut{src}));"]>
@@ -18,5 +18,5 @@
 		</div>
 	</li>
 	</BOUCLE_pages>
-</ul>
+#BOITE_FERMER
 </div>
