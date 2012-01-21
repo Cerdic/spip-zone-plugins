@@ -1,6 +1,6 @@
 
 titre: '<:saisies:saisie_selecteur_rubrique_titre:>'
-description: '<:saisies:saisie_selecteur_rubrique_explication:>'
+description: '<:saisies:saisie_selecteur_rubrique:>'
 icone: 'images/saisies_selecteur_rubrique.png'
 options:
   -
