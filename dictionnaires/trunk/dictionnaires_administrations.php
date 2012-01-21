@@ -77,6 +77,7 @@ function dictionnaires_migrer_acronymes(){
 							'id_dictionnaire' => $id_dictionnaire,
 							'titre' => $titre,
 							'texte' => forms_calcule_les_valeurs('forms_donnees_champs', $acronyme['id_donnee'], 'texte_1', $id_form,' ', true),
+							'type' => 'abbr',
 							'date' => $acronyme['date'],
 							'statut' => ($acronyme['statut'] == 'publie') ? 'publie' : 'prop',
 							'lang' => forms_calcule_les_valeurs('forms_donnees_champs', $acronyme['id_donnee'], 'select_2', $id_form,' ', true)
