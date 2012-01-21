@@ -148,8 +148,8 @@ function dictionnaires_remplacer_defaut_dist($mot, $definition){
 	return $mot
 		.'<sup><a href="'
 		.($definition['url']?$definition['url']:generer_url_entite($definition['id_definition'],'definition'))
-		.'">'
-		._T('definition:titre_definition')
+		.'" title="'._T('definition:titre_definition').': '.trim(attribut_html(supprimer_tags(typo($definition['texte'])))).'">'
+		.'?'
 		.'</a></sup>';
 }
 
@@ -159,8 +159,8 @@ function dictionnaires_remplacer_defaut_dist($mot, $definition){
  * Mais ce code est une MAUVAISE PRATIQUE en accessibilité
  * (car seuls les gens avec des yeux valides et un pointeur de souris ont accès à l'information)
  */
-#function dictionnaires_remplacer_abbr_dist($mot, $definition){
-#	return '<abbr title="'.str_replace('"', '&quot;', trim(attribut_html(supprimer_tags(typo($definition['texte']))))).'">'.$mot.'</abbr>';
-#}
+function dictionnaires_remplacer_abbr_dist($mot, $definition){
+	return '<abbr title="'.str_replace('"', '&quot;', trim(attribut_html(supprimer_tags(typo($definition['texte']))))).'">'.$mot.'</abbr>';
+}
 
 ?>
