@@ -26,7 +26,7 @@
 
 	<necessite nom="cextras" compatibilite="[3.0.4;]" />
 	<necessite nom="saisies" compatibilite="[1.21.0;]" />
-	<necessite nom="verifier" compatibilite="[0.1.9;]" />
+	<necessite nom="verifier" compatibilite="[0.1.12;]" />
 	<necessite nom="yaml" compatibilite="[1.5.0;]" />
 
 	<menu nom="champs_extras" titre="iextras:champs_extras" parent="menu_configuration" icone="images/iextras-16.png" />
