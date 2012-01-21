@@ -1,0 +1,26 @@
+<paquet
+	prefix="Zcore"
+	categorie="squelette"
+	version="2.0.0-dev"
+	etat="dev"
+	compatibilite="[3.0.0-dev;["
+	logo="img/z-core-32.png"
+	documentation="http://www.yterium.net/108"
+>	
+
+	<nom>Z-core</nom>
+	<!-- Z Framework pour SPIP (Zpip) -->
+
+	<auteur>Matthieu Marcillaud</auteur>
+	<auteur>Cédric Morin</auteur>
+	<auteur>Romy Tetue</auteur>
+	<auteur>Collectif SPIP</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_url_objets" inclure="zcore_pipelines.php" />
+	<pipeline nom="styliser" inclure="zcore_pipelines.php" />
+	<pipeline nom="insert_head" inclure="zcore_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="zcore_pipelines.php" />
+	<pipeline nom="pre_propre" inclure="zcore_pipelines.php" />
+</paquet>
