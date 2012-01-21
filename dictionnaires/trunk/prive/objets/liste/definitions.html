@@ -29,7 +29,7 @@
 			<td class='statut'>[(#ID_DEFINITION|puce_changement_statut{#STATUT,#ID_DICTIONNAIRE,definition,true})]</td>
 			<td class='titre principale'><a href="[(#ID_DEFINITION|generer_url_entite{definition})]"
 				title="<:info_numero_abbreviation|attribut_html:> #ID_DEFINITION">[(#RANG). ]#TITRE</a></td>
-			<td dir='#LANG_DIR' class='#EDIT{texte} descriptif'>[(#TEXTE|ptobr)]</td>
+			<td dir='#LANG_DIR' class='#EDIT{texte} descriptif'>[(#TEXTE|ptobr|couper{80})]</td>
 			<td class='id'>[(#AUTORISER{modifier,definition,#ID_DEFINITION}|?{
 				<a href="[(#URL_ECRIRE{definition_edit,id_definition=#ID_DEFINITION})]">#ID_DEFINITION</a>,
 				#ID_DEFINITION

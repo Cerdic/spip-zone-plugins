@@ -4,6 +4,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+'bulledaide_definitions' => 'Consulter le glossaire du site (sigles et définitions)',
 'champ_statut_label' => 'Statut',
 'champ_termes_explication' => 'Des termes supplémentaires qui permettront de détecter la définition, séparés par des virgules.',
 'champ_termes_label' => 'Termes',

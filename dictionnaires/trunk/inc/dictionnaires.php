@@ -51,7 +51,7 @@ function dictionnaires_lister_definitions($purger=false){
 		
 			// À l'intérieur on récupère toutes les définitions publiées
 			$definitions_publiees = sql_allfetsel(
-				'id_definition, titre, termes, type, texte',
+				'id_dictionnaire, id_definition, titre, termes, type, texte',
 				'spip_definitions',
 				array(
 					sql_in('id_dictionnaire', $dicos_actifs),
@@ -148,7 +148,7 @@ function dictionnaires_remplacer_defaut_dist($mot, $definition){
 	return $mot
 		.'<sup><a href="'
 		.($definition['url']?$definition['url']:generer_url_entite($definition['id_definition'],'definition'))
-		.'" title="'._T('definition:titre_definition').': '.trim(attribut_html(supprimer_tags(typo($definition['texte'])))).'">'
+		.'" title="'._T('definition:titre_definition').': '.couper(trim(attribut_html(supprimer_tags(typo($definition['texte'])))),80).'">'
 		.'?'
 		.'</a></sup>';
 }
@@ -159,8 +159,8 @@ function dictionnaires_remplacer_defaut_dist($mot, $definition){
  * Mais ce code est une MAUVAISE PRATIQUE en accessibilité
  * (car seuls les gens avec des yeux valides et un pointeur de souris ont accès à l'information)
  */
-function dictionnaires_remplacer_abbr_dist($mot, $definition){
-	return '<abbr title="'.str_replace('"', '&quot;', trim(attribut_html(supprimer_tags(typo($definition['texte']))))).'">'.$mot.'</abbr>';
-}
+#function dictionnaires_remplacer_abbr_dist($mot, $definition){
+#	return '<abbr title="'.couper(trim(attribut_html(supprimer_tags(typo($definition['texte'])))),80).'">'.$mot.'</abbr>';
+#}
 
 ?>
