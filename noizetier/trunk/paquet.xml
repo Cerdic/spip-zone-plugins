@@ -40,4 +40,6 @@
 	<utilise nom="ieconfig" />
 
 	<menu nom="bando_noizetier" titre="noizetier:editer_noizetier_titre" parent="menu_squelette" icone="images/noizetier-16.png" action="noizetier" />
+	
+	<traduire module="noizetier" reference="fr" gestionnaire="salvatore" />
 </paquet>
