@@ -97,3 +97,5 @@ defaut:
     sql: "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"
   verifier:
     type: 'date'
+    options:
+      normaliser: 'datetime'
