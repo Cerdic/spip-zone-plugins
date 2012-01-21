@@ -194,22 +194,15 @@ function cextras_formulaire_verifier($flux){
 			{
 				$flux['data'][$nom] = _T('info_obligatoire');
 			
-			// verifier (api)
+			// verifier (api) + normalisation
 			} elseif ($verifier AND isset($saisie['verifier']) and $verif = $saisie['verifier']['type']) {
 				$options = isset($saisie['verifier']['options']) ? $saisie['verifier']['options'] : array();
-				if ($erreur = $verifier(_request($nom), $verif, $options)) {
+				$normaliser = null;
+				if ($erreur = $verifier(_request($nom), $verif, $options, $normaliser)) {
 					$flux['data'][$nom] = $erreur;
-				}
-			}
-
-			// normaliser (api)
-			if (!isset($flux['data'][$nom]) and $normaliser and  isset($saisie['normaliser']) and $type = $saisie['normaliser']['type']) {
-				$options = isset($saisie['normaliser']['options']) ? $saisie['normaliser']['options'] : array();
-				$norm = $normaliser(_request($nom), $type, $options);
-				if ($norm['erreur']) {
-					$flux['data'][$nom] = $norm['erreur'];
-				} elseif ($norm['changement']) {
-					set_request($nom, $norm['valeur']);
+				// si une valeur de normalisation a ete transmis, la prendre.
+				} elseif (!is_null($normaliser)) {
+					set_request($nom, $normaliser);
 				}
 			}
 		}
