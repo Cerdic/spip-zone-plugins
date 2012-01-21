@@ -1,0 +1,35 @@
+<plugin>
+	<nom>Projection</nom>
+	<auteur>fil@rezo.net</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<icon>projection.png</icon>
+	<description>
+		<multi>
+			[fr]
+				enregistre les articles sous forme de fichiers et permet de les t四残harger / t四思erser
+		</multi>
+	</description>
+	<prefix>projection</prefix>
+
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>projection_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>projection</nom>
+		<!-- action vide pour provoquer l'inclusion de projection.php -->
+		<action>go</action>
+		<inclure>projection_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>post_edition</nom>
+		<action>post_edition</action>
+		<inclure>projection_pipelines.php</inclure>
+	</pipeline>
+
+	<necessite id='spip' version='[2.0.10;]' />
+	<categorie>edition</categorie>
+</plugin>
