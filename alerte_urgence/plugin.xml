@@ -1,6 +1,7 @@
 <plugin>
 <nom>Alerte d'urgence</nom>
 <prefix>alerte_urgence</prefix>
+<icon>icon/alerte_urgence.png</icon>
 
 <version>1.0.2</version>
 <etat>stable</etat>
