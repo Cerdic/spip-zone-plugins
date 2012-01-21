@@ -1,19 +1,20 @@
 <paquet
 	prefix="noizetier"
 	categorie="maintenance"
-	version="0.14.0"
+	version="1.0.0"
 	etat="dev"
 	compatibilite="[3.0.0-beta;3.0.99]"
-	logo="img/noizetier-128.png"
+	logo="prive/themes/spip/images/noizetier-32.png"
 	schema="0.4"
 	documentation="http://www.spip-contrib.net/noiZetier"
 >	
 
-	<nom>NoiZetier</nom>
+	<nom>noiZetier</nom>
 	<!-- Gestionnaire de noisettes, nativement fonctionnel avec les squelettes Z -->
 
-	<auteur>Joseph</auteur>
-	<auteur>Matthieu Marcillaud</auteur>
+	<auteur lien="http://www.spip-contrib.net/Joseph">Joseph</auteur>
+	<auteur lien="http://www.spip-contrib.net/Matthieu-Marcillaud">Matthieu Marcillaud</auteur>
+	<auteur lien="http://www.spip-contrib.net/kent1">kent1</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
@@ -36,7 +37,7 @@
 	<necessite nom="saisies" compatibilite="[1.8.5;[" />
 	<necessite nom="verifier" />
 	<utilise nom="compositions" compatibilite="[2.0.0;[" />
+	<utilise nom="ieconfig" />
 
-	<menu nom="noizetier" titre="noizetier:editer_noizetier_titre" parent="configuration" icone="img/noizetier-24.png" action="noizetier" />
-	<menu nom="bando_noizetier" titre="noizetier:editer_noizetier_titre" parent="bando_squelette" icone="images/noizetier-16.png" action="noizetier" />
+	<menu nom="bando_noizetier" titre="noizetier:editer_noizetier_titre" parent="menu_squelette" icone="images/noizetier-16.png" action="noizetier" />
 </paquet>
