@@ -1,7 +1,7 @@
 <paquet
 	prefix="iextras"
 	categorie="outil"
-	version="3.0.1"
+	version="3.0.2"
 	etat="test"
 	compatibilite="[3.0.0-beta2;3.0.*["
 	logo="images/iextras-64.png"
@@ -24,8 +24,8 @@
 	<pipeline nom="autoriser" inclure="inc/iextras_autoriser.php" />
 	<pipeline nom="formulaire_verifier" inclure="inc/iextras.php" />
 
-	<necessite nom="cextras" compatibilite="[3.0.0;]" />
-	<necessite nom="saisies" compatibilite="[1.10.0;]" />
+	<necessite nom="cextras" compatibilite="[3.0.4;]" />
+	<necessite nom="saisies" compatibilite="[1.21.0;]" />
 	<necessite nom="verifier" compatibilite="[0.1.9;]" />
 	<necessite nom="yaml" compatibilite="[1.5.0;]" />
 

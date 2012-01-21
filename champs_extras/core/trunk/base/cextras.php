@@ -24,10 +24,18 @@ function cextras_declarer_tables_objets_sql($tables){
 				if (!isset($tables[$table]['field'][$nom])) {
 					$tables[$table]['field'][$nom] = $saisie['options']['sql'];
 				}
-				if (isset($saisie['options']['rechercher'])) {
+				// ajouter le champ dans les analyses de recherche si demande
+				// l'option rechercher peut valoir 'on', true, ou 5 (entier) pour l'indice de ponderation
+				// par defaut, la ponderation est de 2.
+				if (isset($saisie['options']['rechercher']) and $saisie['options']['rechercher']) {
 					$ponderation = $saisie['options']['rechercher'];
 					if ($ponderation === 'on' OR $ponderation === true) {
-						$ponderation = 2;
+						// le plugin d'interface donne la valeur de ponderation dans une option separee.
+						if (isset($saisie['options']['rechercher_ponderation']) and $saisie['options']['rechercher_ponderation']) {
+							$ponderation = intval($saisie['options']['rechercher_ponderation']);
+						} else {
+							$ponderation = 2;
+						}
 					} else {
 						$ponderation = intval($ponderation);
 					}

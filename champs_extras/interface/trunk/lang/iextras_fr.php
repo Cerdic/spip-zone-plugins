@@ -49,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_explication' => 'Explications de la saisie',
 	'label_attention' => 'Explications tr&egrave;s importantes',
 	'label_rechercher' => 'Recherche',
+	'label_rechercher_ponderation' => 'Pondération de la recherche',
 	'label_restrictions_auteur' => 'Par auteur',
 	'label_restrictions_secteurs' => 'Par secteur',
 	'label_restrictions_branches' => 'Par branche',
@@ -87,6 +88,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		&Agrave; utiliser avec beaucoup de mod&eacute;ration !
 		Peut &ecirc;tre une cha&icirc;ne de langue &laquo;plugin:chaine&raquo;.',
 	'precisions_pour_rechercher' => 'Inclure ce champ dans le moteur de recherche ?',
+	'precisions_pour_rechercher_ponderation' => 'SPIP pondère une recherche dans une colonne par un coefficient de ponderation.
+		Celui-ci permet de mettre en avant les colonnes les plus pertinentes (titre par exemple) par rapport à d\'autres qui le sont moins.
+		Le coefficient appliqué sur les champs extras est par défaut 2. Pour vous donner un ordre d\'idée, notez que SPIP utilise 8 pour le titre, 1 pour le texte.',
 	'precisions_pour_saisie' => 'Afficher une saisie de type :',
 	'precisions_pour_nouvelle_saisie' => 'Permet de changer le type de saisie utilisée pour ce champ',
 	'precisions_pour_nouvelle_saisie_attention' => 'Attention cependant, un changement de type de saisie perd les options de configuration de la saisie actuelle qui ne sont pas communes avec la nouvelle saisie sélectionnée !',

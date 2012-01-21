@@ -152,20 +152,19 @@ function iextras_formulaire_verifier($flux) {
 					)
 				);
 		}
-		
-				
+
+
 		$flux['data'][$nom] = saisies_inserer($flux['data'][$nom], array(
 			'saisie' => 'fieldset',
 			'options' => array(
 				'nom' => "saisie_modifiee_${name}[options][restrictions]",
-				'label' => _T('iextras:legend_restriction'),			
+				'label' => _T('iextras:legend_restriction'),
 			),
 			'saisies' => $saisies_restrictions
 		));
 
-		
-		
-		
+
+
 		// on récupère les informations de la saisie
 		// pour savoir si c'est un champs éditable (il a une ligne SQL)
 		// et dans ce cas, on ajoute les options techniques
@@ -186,7 +185,7 @@ function iextras_formulaire_verifier($flux) {
 				'saisie' => 'fieldset',
 				'options' => array(
 					'nom' => "saisie_modifiee_${name}[options][options_techniques]",
-					'label' => _T('iextras:legend_options_techniques'),			
+					'label' => _T('iextras:legend_options_techniques'),
 				),
 				'saisies' => array(
 					array(
@@ -206,6 +205,16 @@ function iextras_formulaire_verifier($flux) {
 							'label' => _T('iextras:label_rechercher'),
 							'explication' => _T('iextras:precisions_pour_rechercher'),
 							'defaut' => ''
+						)
+					),
+					array(
+						'saisie' => 'input',
+						'options' => array(
+							'nom' => "saisie_modifiee_${name}[options][rechercher_ponderation]",
+							'label' => _T('iextras:label_rechercher_ponderation'),
+							'explication' => _T('iextras:precisions_pour_rechercher_ponderation'),
+							'defaut' => 2,
+							'afficher_si' => "@saisie_modifiee_${name}[options][rechercher]@ != ''",
 						)
 					),
 					array(
