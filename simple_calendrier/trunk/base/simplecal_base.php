@@ -9,28 +9,28 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 function simplecal_declarer_tables_interfaces($interfaces) {
-	$interfaces['table_des_tables']['evenements'] = 'evenements';
-	
-	// Titre pour URL propres
+    $interfaces['table_des_tables']['evenements'] = 'evenements';
+    
+    // Titre pour URL propres
     //$interface['table_titre']['evenements'] = "titre, '' AS lang";
     
     //$interface['table_des_traitements']['DATE_DEBUT'][] = 'normaliser_date(%s)';
     //$interface['table_des_traitements']['DATE_FIN'][] = 'normaliser_date(%s)';
     
     // ---------------------------------------------------------------------------
-	// Champs de type 'date' pour la gestion des critères age, age_relatif, etc.
+    // Champs de type 'date' pour la gestion des critères age, age_relatif, etc.
     // ---------------------------------------------------------------------------
     // Note : provoque l'enregistrement de la date de publication (lors de sa modif) dans date
     //$interface['table_date']['evenements'] = 'date'; 
     
-	return $interfaces;
+    return $interfaces;
 }
 
 
 function simplecal_declarer_tables_objets_sql($tables){
-	
+    
     // Champs de la table spip_evenements
-	$fields = array(
+    $fields = array(
         "id_evenement"      => "bigint(21) NOT NULL auto_increment",
         "id_secteur"        => "bigint(21) NOT NULL DEFAULT '0'",
         "id_rubrique"       => "bigint(21) NOT NULL DEFAULT '0'",
@@ -47,21 +47,21 @@ function simplecal_declarer_tables_objets_sql($tables){
         "lang"              => "varchar(10) NOT NULL DEFAULT ''",
         "langue_choisie"    => "varchar(3) NULL DEFAULT 'non'", 
         "maj"               => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
-	);
+    );
     
     // champs qui possedent les cles
-	$key = array(
+    $key = array(
         "PRIMARY KEY"     => "id_evenement",
         "KEY id_secteur"  => "id_secteur",
         "KEY id_rubrique" => "id_rubrique"
-	);
+    );
 
     // champs candidats à la jointure
-	$join = array(
-	    "id_evenement" => "id_evenement",
+    $join = array(
+        "id_evenement" => "id_evenement",
         "id_secteur"   => "id_secteur",
         "id_rubrique"  => "id_rubrique"
-	);
+    );
     
     // champ 'statut'
     $statut = array(
@@ -77,7 +77,7 @@ function simplecal_declarer_tables_objets_sql($tables){
         'prop' => 'simplecal:titre_evenement_propose',
         'publie' => 'simplecal:titre_evenement_publie',
         'refuse' => 'simplecal:titre_evenement_refuse',
-		'poubelle'=>'simplecal:titre_evenement_supprime'
+        'poubelle'=>'simplecal:titre_evenement_supprime'
     );
     
     $statut_textes_instituer = array(
@@ -90,41 +90,42 @@ function simplecal_declarer_tables_objets_sql($tables){
     
     // La Table
     $tables['spip_evenements'] = array(
-		'texte_retour' => 'icone_retour',
-		'texte_objets' => 'simplecal:evenements',
-		'texte_objet' => 'simplecal:evenement',
-		'texte_modifier' => 'simplecal:icone_modifier_evenement',
-		'texte_creer' => 'simplecal:icone_nouvel_evenement',
-		'info_aucun_objet'=> 'simplecal:info_aucun_evenement',
-		'info_1_objet' => 'simplecal:info_1_evenement',
-		'info_nb_objets' => 'simplecal:info_nb_evenements',
-		'texte_logo_objet' => 'simplecal:logo_evenement',
-		'titre' => 'titre, lang',
-		'date' => 'date', // indique le nom du field pour le formulaires_dater_charger_dist
-		'principale' => 'oui',
-		'field'=> $fields,
-		'key' => $key,
-		'join' => $join,
-		'statut' =>  array($statut),
-		'statut_titres' => $statut_titres,
-		'statut_textes_instituer' => $statut_textes_instituer,
+        'texte_retour' => 'icone_retour',
+        'texte_objets' => 'simplecal:evenements',
+        'texte_objet' => 'simplecal:evenement',
+        'texte_modifier' => 'simplecal:icone_modifier_evenement',
+        'texte_creer' => 'simplecal:icone_nouvel_evenement',
+        'info_aucun_objet'=> 'simplecal:info_aucun_evenement',
+        'info_1_objet' => 'simplecal:info_1_evenement',
+        'info_nb_objets' => 'simplecal:info_nb_evenements',
+        'texte_logo_objet' => 'simplecal:logo_evenement',
+        'titre' => 'titre, lang',
+        'date' => 'date', // indique le nom du field pour le formulaires_dater_charger_dist
+        'principale' => 'oui',
+        'field'=> $fields,
+        'key' => $key,
+        'join' => $join,
+        'statut' =>  array($statut),
+        'texte_changer_statut' => 'simplecal:entree_evenement_publie',
+        'statut_titres' => $statut_titres,
+        'statut_textes_instituer' => $statut_textes_instituer,
         
         'tables_jointures' => array('id_auteur' => 'auteurs_liens'),
 
-		'rechercher_champs' => array('titre'=>8, 'descriptif'=>4, 'texte'=>2),
+        'rechercher_champs' => array('titre'=>8, 'descriptif'=>4, 'texte'=>2),
         
-		'rechercher_jointures' => array(
-			'document' => array('titre' => 2, 'descriptif' => 1)
-		),
-		'champs_versionnes' => array('id_rubrique', 'titre', 'descriptif', 'texte', 'lieu', 'date_debut', 'date_fin'),
-	);
+        'rechercher_jointures' => array(
+            'document' => array('titre' => 2, 'descriptif' => 1)
+        ),
+        'champs_versionnes' => array('id_rubrique', 'titre', 'descriptif', 'texte', 'lieu', 'date_debut', 'date_fin'),
+    );
     
     // On peut lire dans :
     // - Extensions/mots/base/mots.php     : jointures sur les mots pour tous les objets
     // - Extensions/medias/base/medias.php : jointures sur les documents pour tous les objets
     // - Extensions/forum/base/forum.php   : jointures sur les forums pour tous les objets
     
-	return $tables;
+    return $tables;
 }
 
 ?>

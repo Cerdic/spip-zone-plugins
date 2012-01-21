@@ -89,7 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'explication_titre' => 'Libell&eacute; de l\'&eacute;v&egrave;nement',
     'explication_ref' => 'La r&eacute;f&eacute;rence &agrave; un article ou une br&egrave;ve (ex : article23 ; breve45)',
     'explication_texte' => 'Le texte qui d&eacute;crit l\'&eacute;v&egrave;nement.',
-    'entree_evenement_publie' => 'Statut de cet &eacute;v&egrave;nement :',
+    'entree_evenement_publie' => 'Cet &eacute;v&egrave;nement est :',
     'enregistrer_dabord_une_fois' => "C'est possible ! <br /><br />Pour cela, veuillez enregistrer la fiche une premi&egrave;re fois...",
     'evenement' => "&Eacute;v&egrave;nement",
     'evenements' => "&Eacute;v&egrave;nements",
@@ -102,6 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'html_title' => 'Calendrier',
 
 // I
+    'info_aucun_evenement' => 'Aucun &eacute;v&egrave;nement',
     'info_titre' => 'Titre',
     'info_date_debut' => 'Date de d&eacute;but',
     'info_date_fin' => 'Date de fin',
@@ -129,7 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'info_evenements' => 'Ev&egrave;nements',
     'info_evenements_02' => 'Ev&egrave;nements',
     'info_evenements_valider' => 'Ev&egrave;nements &agrave; valider',
-    'info_evenement_lie' => 'Ev&egrave;nement li&eacute;',
+    'info_evenements_lies' => 'Ev&egrave;nements associ&eacute;s',
     'icone_nouvel_evenement' => '&Eacute;crire un nouvel &eacute;v&egrave;nement',
     'icone_evenements' => 'Ev&egrave;nements',
 

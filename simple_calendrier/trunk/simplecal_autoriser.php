@@ -86,7 +86,7 @@ function autoriser_evenement_modifier($faire, $type, $id, $qui, $opt) {
             $row = sql_fetsel("statut", "spip_evenements", "id_evenement=$id");
             if ($row['statut'] != 'publie') {
                 // Propriétaire ?
-                $nb = sql_countsel('spip_auteurs_evenements', "id_evenement=".$id." and id_auteur = ".$qui['id_auteur']);
+                $nb = sql_countsel('spip_auteurs_liens as lien', "lien.objet='evenement' and lien.id_objet=".$id." and lien.id_auteur = ".$qui['id_auteur']);
                 if ($nb>0){
                     $autorise = true;
                 }

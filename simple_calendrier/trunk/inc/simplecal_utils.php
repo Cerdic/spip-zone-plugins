@@ -80,26 +80,6 @@ function simplecal_get_tuple_from_ref($ref){
     return $tab;
 }
 
-// 'breve', '17' => 'breve17'
-function simplecal_get_ref_from_obj($type, $id_objet){
-    $le_type = '';
-    $id = '';
-    
-    if (preg_match("/^(article|breve)$/i", $type, $matches)){
-        $le_type = $matches[0];
-    }
-    
-    if (preg_match("/^([0-9]*)$/i", $id_objet, $matches)){
-        $id = $matches[0];
-    }    
-    
-    $ref = '';
-    if ($le_type && $id){
-        $ref = $le_type.$id;
-    }
-    
-    return $ref;
-}
 
 // 'breve', '17' => 'Le titre de la breve n°17'
 function simplecal_get_titre_from_obj($type, $id_objet){
@@ -153,32 +133,6 @@ function simplecal_get_url_refobj($type, $id_objet){
     }
     
     return $url;
-}
-
-// Portlet d'ajout d'évènement (fiche article/breve)
-function simplecal_get_portlet_ajout($type, $id_objet){
-    $ref = $type.$id_objet;
-    
-    $bloc = "";
-    $bloc .= debut_cadre_enfonce(_DIR_SIMPLECAL_IMG_PACK."simplecal-logo-24.png", $return=true, $fonction='', $titre=_T('simplecal:titre_boite_refobj'));
-    
-    $ul = "";
-    $rows = sql_allfetsel("e.*", "spip_evenements as e", "e.type='".$type."' and e.id_objet=".$id_objet);
-    foreach ($rows as $row){
-        $id_evt = $row['id_evenement'];
-        $ul .= '<li><a href="'.generer_url_ecrire("evenement_voir", "id_evenement=$id_evt").'">'.simplecal_affiche_dates($row['date_debut'], $row['date_fin']).'</a></li>';
-    }
-    if ($ul!=""){
-        $ul = '<ul>'.$ul.'</ul>';
-        $bloc .= $ul;
-    }
-    
-    if (autoriser('creer', 'evenement', null)){
-        $bloc .= icone_horizontale(_T('simplecal:raccourcis_ajouter_date'), generer_url_ecrire("evenements_edit", "new=oui&retour=objet&refobj=$ref"), _DIR_SIMPLECAL_IMG_PACK."simplecal-logo-24.png", "creer.gif", false);
-    }
-    $bloc .= fin_cadre_enfonce(true);
-    
-    return $bloc;
 }
 
 // Portlet de gestion des evenements de la rubrique

@@ -56,7 +56,7 @@ function evenement_inserer($id_rubrique) {
 
 	$champs = array(
 		'id_rubrique' => $id_rubrique,
-		'statut' => 'prop',
+		'statut' => 'prepa',
 		'date' => date('Y-m-d H:i:s'),
 		'lang' => $lang,
 		'langue_choisie' => 'non');
@@ -99,7 +99,7 @@ function evenement_modifier ($id_evenement, $set=null) {
 	include_spip('inc/modifier');
 	$c = collecter_requests(
 		// white list
-		array('titre', 'date_debut', 'date_fin', 'lieu', 'descriptif', 'texte'),
+		array('titre', 'date_debut', 'date_fin', 'lieu', 'descriptif', 'texte', 'type', 'id_objet'),
 		// black list
 		array('id_parent', 'statut'),
 		// donnees eventuellement fournies

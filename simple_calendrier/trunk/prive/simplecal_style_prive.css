@@ -19,3 +19,6 @@
 
 /* datepicker */
 #ui-datepicker-div { font-size:0.7em; }
+
+ul.simplecal-portlet { list-style-type:disc; }
+ul.simplecal-portlet li { margin-left:20px; }

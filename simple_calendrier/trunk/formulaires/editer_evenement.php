@@ -19,8 +19,21 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_rubr
     $valeurs["date_debut"] = date_sql2affichage($valeurs["date_debut"]);
     $valeurs["date_fin"] = date_sql2affichage($valeurs["date_fin"]);
     
-    // champ ref = assemblage du champ type et id_objet
-    $valeurs["ref"] = $valeurs["type"].$valeurs["id_objet"];    
+    // Champ ref ("0" en base qd pas renseigné)
+    if (!empty($valeurs["id_objet"])) {
+        // assemblage du champ type et id_objet
+        $valeurs["ref"] = $valeurs["type"].$valeurs["id_objet"];
+    }
+    
+    // Appel en creation via portlet
+    if (_request("new")=='oui'){
+        $type = trim(_request("type"));
+        $id_objet = trim(_request("id_objet"));
+        if ($type and $id_objet){
+            // assemblage du champ type et id_objet
+            $valeurs["ref"] = $type.$id_objet;
+        }
+    }
     
     return $valeurs;
 }
@@ -30,25 +43,25 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_rubr
  * ne representent pas l'objet edite
  */
 function formulaires_editer_evenement_identifier_dist($id_evenement='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='evenements_edit_config', $row=array(), $hidden=''){
-	return serialize(array(intval($id_evenement),$lier_trad));
+    return serialize(array(intval($id_evenement),$lier_trad));
 }
 
 
 // Choix par defaut des options de presentation
 function evenements_edit_config($row)
 {
-	global $spip_ecran, $spip_lang, $spip_display;
+    global $spip_ecran, $spip_lang, $spip_display;
 
-	$config = $GLOBALS['meta'];
-	$config['lignes'] = ($spip_ecran == "large")? 8 : 5;
-	$config['langue'] = $spip_lang;
+    $config = $GLOBALS['meta'];
+    $config['lignes'] = ($spip_ecran == "large")? 8 : 5;
+    $config['langue'] = $spip_lang;
 
-	$config['restreint'] = ($row['statut'] == 'publie');
-	return $config;
+    $config['restreint'] = ($row['statut'] == 'publie');
+    return $config;
 }
 
 function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='evenements_edit_config', $row=array(), $hidden=''){
-	// Verifications automatiques
+    // Verifications automatiques
     // ---------------------------
     $champs_obligatoires = array('titre', 'date_debut');
     $erreurs = formulaires_editer_objet_verifier('evenement', $id_evenement, $champs_obligatoires);
@@ -103,11 +116,11 @@ function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_rub
         }
     }
     
-	return $erreurs;
+    return $erreurs;
 }
 
 function formulaires_editer_evenement_traiter_dist($id_evenement='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='evenements_edit_config', $row=array(), $hidden=''){
-	
+    
     // On remet les dates au format SQL ('14/08/2011' => '14/08/2011 00:00:00')
     set_request("date_debut", date_saisie2sql(_request("date_debut")));
     set_request("date_fin", date_saisie2sql(_request("date_fin")));
@@ -133,11 +146,6 @@ function formulaires_editer_evenement_traiter_dist($id_evenement='new', $id_rubr
     }
     
     
-    
-    
-    
     return formulaires_editer_objet_traiter('evenement',$id_evenement,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
 }
-
-
 ?>

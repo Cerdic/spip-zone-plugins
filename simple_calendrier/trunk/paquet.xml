@@ -39,7 +39,7 @@
     
     <pipeline nom="accueil_encours" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
     <pipeline nom="accueil_informations" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
-    <pipeline nom="compter_contributions_auteur" inclure="simplecal_pipelines.php" />
+    <pipeline nom="compter_contributions_auteur" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
     
     <!-- prise en compte du squelette evenement.html pour les urls de type spip.php?evenement123 -->
     <pipeline nom="declarer_url_objets" inclure="simplecal_pipelines.php" />

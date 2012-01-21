@@ -167,19 +167,21 @@ function simplecal_affiche_gauche($flux) {
                 'type' => 'article',
                 'id_objet'=>$id_article
             );
-            $portlet = recuperer_fond('prive/squelettes/inclure/portlet_article', $contexte);
-            
-            //$bloc = simplecal_get_portlet_ajout('article', $id_article);
+            $portlet = recuperer_fond('prive/squelettes/inclure/portlet_refobj', $contexte);
             $flux['data'] .= $portlet;
         }
     }
     
     // On se trouve sur une brève
-    if ($exec == 'breves_voir'){ 
+    if ($exec == 'breve'){ 
         if ($GLOBALS['meta']['simplecal_refobj'] == 'oui'){
             $id_breve = intval($flux['args']['id_breve']);
-            $bloc = simplecal_get_portlet_ajout('breve', $id_breve);
-            $flux['data'] .= $bloc;
+            $contexte = array(
+                'type' => 'breve',
+                'id_objet'=>$id_breve
+            );
+            $portlet = recuperer_fond('prive/squelettes/inclure/portlet_refobj', $contexte);
+            $flux['data'] .= $portlet;
         }
     }
 
@@ -188,25 +190,14 @@ function simplecal_affiche_gauche($flux) {
 }
 
 
-// Liste des contributions d'un auteur (depuis spip 2.1.0)
-// http://programmer.spip.org/compter_contributions_auteur
+// Liste des contributions d'un auteur (bloc auteur)
 function simplecal_compter_contributions_auteur($flux){
     $id_auteur = intval($flux['args']['id_auteur']);
-    $nb = sql_countsel("spip_auteurs_evenements as lien", "lien.id_auteur = ".$id_auteur);
-    
-    if ($nb == 1){
-        $phrase = $nb." "._T('simplecal:terme_evenement');
-    } else if ($nb > 1){
-        $phrase = $nb." "._T('simplecal:terme_evenements');
-    } else {
-        $phrase = "";
-    }
-    
-    if ($nb>0){
-        $flux['data'][] = $phrase;
-    }
-    
-    return $flux;
+	if ($cpt = sql_countsel("spip_auteurs_liens AS lien", "lien.objet='evenement' and lien.id_auteur=".intval($flux['args']['id_auteur']))){
+		$contributions = singulier_ou_pluriel($cpt,'simplecal:info_1_evenement','simplecal:info_n_evenements');
+		$flux['data'][] = $contributions;
+	}
+	return $flux;
 }
 
 // Pour ajouter du contenu aux formulaires CVT du core.

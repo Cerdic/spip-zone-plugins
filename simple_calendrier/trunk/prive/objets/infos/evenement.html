@@ -2,29 +2,26 @@
 <div class='infos'>
 <div class='numero'><:simplecal:info_gauche_numero_evenement:><p>#ID_EVENEMENT</p></div>
 
-[(#REM)
-	Bloc de changement de statut
-]
-[(#ID_EVENEMENT|instituer_evenement{#ID_RUBRIQUE,#STATUT})]
+#FORMULAIRE_INSTITUER_OBJET{evenement,#ID_EVENEMENT}
 
 
 [(#REM)
-	Bouton voir en ligne    
+
+    Bouton voir en ligne
+    
 ]
-
-
 <BOUCLE_publiee(EVENEMENTS){id_evenement}>
-	[(#VAL{redirect}
-		|generer_url_action{type=evenement&id=#ID_EVENEMENT}
-		|parametre_url{var_mode,calcul}
-		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+    [(#VAL{redirect}
+        |generer_url_action{type=evenement&id=#ID_EVENEMENT}
+        |parametre_url{var_mode,calcul}
+        |icone_horizontale{<:icone_voir_en_ligne:>,racine})]
 </BOUCLE_publiee>
-	[(#AUTORISER{previsualiser,evenement,#ID_EVENEMENT,'',#ARRAY{statut,#STATUT}})
-		[(#VAL{redirect}
-			|generer_url_action{type=evenement&id=#ID_EVENEMENT}
-			|parametre_url{var_mode,preview}
-			|icone_horizontale{<:previsualiser:>,preview})]
-	]
+    [(#AUTORISER{previsualiser,evenement,#ID_EVENEMENT,'',#ARRAY{statut,#STATUT}})
+        [(#VAL{redirect}
+            |generer_url_action{type=evenement&id=#ID_EVENEMENT}
+            |parametre_url{var_mode,preview}
+            |icone_horizontale{<:previsualiser:>,preview})]
+    ]
 <//B_publiee>
 
 </div>
