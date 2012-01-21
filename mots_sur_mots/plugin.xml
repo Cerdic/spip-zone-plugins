@@ -18,8 +18,8 @@ Dans la partie publique, le plugin Momo propose:
 -* un nouveau crit&egrave;re de la boucle MOTS: <code>{id_mot_parent=xxx}</code> o&ugrave; <code>xxx</code> est un id_mot qui permet de ne retourner que les mots-cl&eacute;s ayant un parent donn&eacute;.
 -* Il y a un squelette de d&eacute;mo: /spip.php?page=demomo
 -* Il y a des mod&egrave;les pour tester&nbsp;:
--** <code>enfants_mots</code> qui donne r&eacute;cursivement tous les enfants d'un mot
--** <code>parents_mots</code> qui liste les parents d'un mot
+-** <code>enfants_mot</code> qui donne r&eacute;cursivement tous les enfants d'un mot
+-** <code>parents_mot</code> qui liste les parents d'un mot
 -** <code>doublons_enfants_mot</code> qui retourne une liste des id_mot de tous les enfants d'un mot, r&eacute;cursivement. Cette liste est brute et peut &ecirc;tre exploit&eacute;e avec un <code>|explode{','}</code> dans les crit&egrave;res d'une boucle (ex.: <code><BOUCLE_Enfants du mot(MOTS){id_mot IN #MODELE{doublons_enfants_mot}{id_mot}|explode{','}}></code> voir le formulaire <code>attache_momo</code>)
 -** <code>doublons_parents_directs_mot</code> qui retourne une liste des id_mot des parents directs d'un mot. Cette liste est brute et peut &ecirc;tre exploit&eacute;e avec un <code>|explode{','}</code> dans les crit&egrave;res d'une boucle (ex.: <code><BOUCLE_Mot_Parents_directs(MOTS){id_mot IN #MODELE{doublons_parents_directs_mot}{id_mot}|explode{','}}></code> voir le formulaire <code>attache_momo</code>)
 	</description>
