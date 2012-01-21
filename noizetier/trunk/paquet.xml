@@ -18,6 +18,8 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
+	<traduire module="noizetier" reference="fr" gestionnaire="salvatore" />
+
 	<pipeline nom="declarer_tables_principales" inclure="base/noizetier_tables.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/noizetier_tables.php" />
 	<pipeline nom="autoriser" inclure="noizetier_autoriser.php" />
@@ -40,6 +42,4 @@
 	<utilise nom="ieconfig" />
 
 	<menu nom="bando_noizetier" titre="noizetier:editer_noizetier_titre" parent="menu_squelette" icone="images/noizetier-16.png" action="noizetier" />
-	
-	<traduire module="noizetier" reference="fr" gestionnaire="salvatore" />
 </paquet>
