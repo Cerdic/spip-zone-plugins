@@ -64,10 +64,9 @@
 							</div>
 
 							<div id='saisie_mode_paiement' name='saisie_mode_paiement' class='[(#ENV{type_operation}|affichage_div{charges-produits-banques})]'>
-								[(#ENV{classe_banques}|oui) <!-- si il n'a pas de classe banques definie, on ne propose pas de mode de paiement !!!!!!! BIGRE !!!! OUPS !!!!! -->
-								<li class="editer_journal">
+								[(#REM)<!-- si il n'a pas de classe banques definie, on ne propose pas de mode de paiement -->]
+								[(#ENV{classe_banques}|oui)
 									<INCLURE{fond=inc/mode_de_paiement, journal, classe_banques, type_operation}>
-								</li>
 								]
 							</div>
 

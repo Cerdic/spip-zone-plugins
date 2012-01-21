@@ -20,9 +20,10 @@
 			<input type="text" name="montant" value="[(#ENV{montant})]" id="montant"  class='formo'/>
 		</li>
 
-		<li class="editer_journal">
-			<INCLURE{fond=inc/mode_de_paiement, journal, classe_banques}>
-		</li>
+		[(#REM)<!-- si il n'a pas de classe banques definie, on ne propose pas de mode de paiement -->]
+		[(#ENV{classe_banques}|oui)
+			<INCLURE{fond=inc/mode_de_paiement, journal, classe_banques, type_operation=#META{/association/classe_produits}}>
+		]
 
 		[(#REM)<!-- si la variable destinations est assignee, on insere l'editeur de destinations -->]
 		[#SET{erreurs,#ENV**{erreurs}|table_valeur{destinations}}
