@@ -13,9 +13,9 @@
 
 	<auteur lien="http://www.spip-contrib.net/Joseph">Joseph</auteur>
 
-	<traduire module="ieconfig" reference="fr" gestionnaire="salvatore" />
-
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<traduire module="ieconfig" reference="fr" gestionnaire="salvatore" />
 
 	<pipeline nom="autoriser" inclure="ieconfig_autoriser.php" />
 	<pipeline nom="mes_fichiers_a_sauver" inclure="ieconfig_mes_fichiers_a_sauver.php" />
@@ -29,5 +29,5 @@
 
 	<onglet nom="ieconfigexport" titre="ieconfig:titre_export" parent="ieconfig" icone="images/config-export-24.png" action="ieconfig_export" />
 	<onglet nom="ieconfigimport" titre="ieconfig:titre_import" parent="ieconfig" icone="images/config-import-24.png" action="ieconfig_import" />
-	
+
 </paquet>
