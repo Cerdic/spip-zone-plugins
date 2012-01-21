@@ -1,9 +1,11 @@
 [(#ENV{id}|oui)
-#BOITE_OUVRIR
+#BOITE_OUVRIR{'','info'}
+<div class="infos">
 	<div class="numero">
-		[<p><img src="(#GET{compo_infos}|table_valeur{icon}|find_in_path|image_reduire{24}|extraire_attribut{src})" /></p>]
+		[<p>(#GET{compo_infos}|table_valeur{icon}|find_in_path|image_reduire{24}|extraire_attribut{src}|balise_img)</p>]
 		<:noizetier:info_composition:>
-		<p style='font-size:1.75em;'>#ENV{id}</p>
+		<p>#ENV{id}</p>
 	</div>
+</div>
 #BOITE_FERMER
 ]
