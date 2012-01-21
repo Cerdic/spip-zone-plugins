@@ -196,8 +196,7 @@ function instituer_definition($id_definition, $c){
 			'data' => $champs
 		)
 	);
-	
-	// S'il a ce stade il n'y a pas de champs à modifier
+	// Si à ce stade il n'y a pas de champs à modifier
 	// on arrête là mais on refait quand même le cache des définitions si besoin
 	if (!count($champs)){
 		// On refait le cache des définitions si le nouveau ou l'ancien statut était publié

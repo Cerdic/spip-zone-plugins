@@ -28,7 +28,7 @@ function dictionnaires_lister_definitions($purger=false){
 	static $definitions_actives;
 	
 	// Si ça contient déjà quelque chose à ce stade, c'est avec le static donc on ne fait rien d'autre
-	if ($definitions_actives and is_array($definitions_actives)){
+	if (!$purger and $definitions_actives and is_array($definitions_actives)){
 		return $definitions_actives;
 	}
 	else{
