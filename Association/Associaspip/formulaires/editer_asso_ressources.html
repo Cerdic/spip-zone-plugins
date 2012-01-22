@@ -9,26 +9,26 @@
 
 		<li class="editer_code">
 			<label for="code"><strong><:asso:ressources_libelle_code:></strong></label>
-			<input type="text" name="code" [value="(#ENV{code})"] id="code"  class='formo'/>
+			<input type="text" name="code" [value="(#ENV{code})"] id="code"  class="formo" />
 		</li>
 
 		<li class="editer_intitule">
 			<label for="intitule"><strong><:asso:ressources_libelle_intitule:></strong></label>
-			<input type="text" name="intitule" [value="(#ENV{intitule})"] id="intitule"  class='formo'/>
+			<input type="text" name="intitule" [value="(#ENV{intitule})"] id="intitule"  class="formo" />
 		</li>
 
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{date_acquisition}}
 		<li class="editer_date_acquisition">
 			[<span class='erreur_message'>(#GET{erreurs})</span>]
 			<label for="date_acquisition"><strong><:asso:ressources_libelle_date_acquisition:></strong></label>
-			<input type="text" name="date_acquisition" [value="(#ENV{date_acquisition}|affdate{Y-m-d})"] id="date_acquisition"  class='formo'/>
+			<input type="text" name="date_acquisition" [value="(#ENV{date_acquisition}|affdate{Y-m-d})"] id="date_acquisition"  class="formo" />
 		</li>
 
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{pu}}
 		<li class="editer_pu">
 			[<span class='erreur_message'>(#GET{erreurs})</span>]
 			<label for="pu"><strong><:asso:ressources_libelle_prix_location:></strong></label>
-			<input type="text" name="pu" [value="(#ENV{pu})"] id="pu"  class='formo'/>
+			<input type="text" name="pu" [value="(#ENV{pu})"] id="pu"  class="formo" />
 		</li>
 
 		<li class="editer_statut">
@@ -53,7 +53,7 @@
 
 		<li class="editer_commentaire">
 			<label for="commentaire"><strong><:asso:remarques:></strong></label>
-			<input type="text" name="commentaire" [value="(#ENV{commentaire})"] id="commentaire"  class='formo'/>
+			<textarea name="commentaire" id="commentaire"  class="formo" rows="3" cols="80">[(#ENV{commentaire})]</textarea>
 		</li>
 
 	</ul>
