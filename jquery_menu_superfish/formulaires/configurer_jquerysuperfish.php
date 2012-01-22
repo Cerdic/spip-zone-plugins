@@ -10,6 +10,13 @@ function formulaires_configurer_jquerysuperfish_saisies_dist(){
 
 	return array(
 		array(
+			'saisie' => 'explication',
+			'options' => array(
+				'nom' => 'explication',
+				'texte' => _T('jquerysuperfish:configurer_explication')
+			)
+		),
+		array(
 			'saisie' => 'fieldset',
 			'options' => array(
 				'nom' => 'fmenu_hori',
@@ -60,7 +67,7 @@ function formulaires_configurer_jquerysuperfish_saisies_dist(){
 					'options' => array(
 						'nom' => 'tester_hori',
 						'texte' => _T('jquerysuperfish:texte_tester',
-										  array('lien'=>'/spip.php?page=demo/jquerysuperfish&amp;classe_menu='.$config['classe_hori'])),
+										  array('lien'=>url_de_base().'/spip.php?page=demo/jquerysuperfish&amp;classe_menu='.$config['classe_hori'])),
                   'afficher_si' => '@menu_hori@ == "on"' 
 					)
 				)
@@ -117,7 +124,7 @@ function formulaires_configurer_jquerysuperfish_saisies_dist(){
 					'options' => array(
 						'nom' => 'tester_vert',
 						'texte' => _T('jquerysuperfish:texte_tester',
-										  array('lien'=>'/spip.php?page=demo/jquerysuperfish&amp;classe_menu='.$config['classe_vert'])),
+										  array('lien'=>url_de_base().'/spip.php?page=demo/jquerysuperfish&amp;classe_menu='.$config['classe_vert'])),
                   'afficher_si' => '@menu_vert@ == "on"' 
 					)
 				)
@@ -174,7 +181,7 @@ function formulaires_configurer_jquerysuperfish_saisies_dist(){
 					'options' => array(
 						'nom' => 'tester_navbar',
 						'texte' => _T('jquerysuperfish:texte_tester',
-										  array('lien'=>'/spip.php?page=demo/jquerysuperfish&amp;classe_menu='.$config['classe_navbar'])),
+										  array('lien'=>url_de_base().'/spip.php?page=demo/jquerysuperfish&amp;classe_menu='.$config['classe_navbar'])),
                   'afficher_si' => '@menu_navbar@ == "on"' 
 					)
 				)

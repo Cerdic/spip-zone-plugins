@@ -4,6 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
+	'configurer_explication' => 'Consultez le <a href="http://users.tpg.com.au/j_birch/plugins/superfish/" target="_blank">site du plugin jQuery SuperFish</a> pour une démonstration de ses possibilités.',
 	'configurer_titre' => 'Configurer jQuery Superfish',
 
 	// E

@@ -1,0 +1,26 @@
+<paquet
+	prefix="jquerysuperfish"
+	categorie="navigation"
+	version="0.4.0"
+	etat="stable"
+	compatibilite="[2.1.0;3.0.99]"
+	logo="prive/themes/spip/images/jquerysuperfish-32.png"
+	schema="0.1"
+	documentation="http://www.spip-contrib.net/Menu-jQuery-Superfish"
+>	
+
+	<nom>Menu jQuery Superfish</nom>
+	<!-- Affiche un menu dèroulant -->
+
+	<auteur>Yffic</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="insert_head_css" inclure="jquerysuperfish_pipelines.php" />
+	<pipeline nom="insert_head" inclure="jquerysuperfish_pipelines.php" />
+
+	<necessite nom="saisies" compatibilite="[1.9;[" />
+	<necessite nom="YAML" compatibilite="[1.5;[" />
+
+	<menu nom="jquerysuperfish" titre="jquerysuperfish:titre_menu" parent="bando_squelette" icone="images/jquerysuperfish-16.png" action="configurer_jquerysuperfish" />
+</paquet>

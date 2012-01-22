@@ -24,26 +24,22 @@ function jquerysuperfish_insert_head($flux){
 	$flux .= "\n".'<script src="'.url_absolue(find_in_path('javascript/superfish.js')).'" type="text/javascript"></script>';
 	$flux .= "\n".'<script type="text/javascript">/* <![CDATA[ */'."\n".'jQuery(document).ready(function(){' ;
 	if($conf_jquerysuperfish["menu_hori"]) {
-		$flux .= "\n".'
-		$(".'.$conf_jquerysuperfish["classe_hori"].'").addClass("sf-menu sf-shadow").superfish({ 
-					animation: {'.$conf_jquerysuperfish["animation_hori"].'},
-					delay:'.$conf_jquerysuperfish["delai_hori"].'
-			  });';
+		$flux .= "\n".'var params_h = {};' ;
+		if($conf_jquerysuperfish["animation_hori"]) $flux .= "\n".'params_h.animation = {'.$conf_jquerysuperfish["animation_hori"].'};' ;
+		if($conf_jquerysuperfish["delai_hori"]) $flux .= "\n".'params_h.delay = '.$conf_jquerysuperfish["delai_hori"].';' ;
+		$flux .= "\n".'$(".'.$conf_jquerysuperfish["classe_hori"].'").addClass("sf-menu sf-shadow").superfish(params_h);';
 	}
 	if($conf_jquerysuperfish["menu_vert"]) {
-		$flux .= "\n".'
-		$(".'.$conf_jquerysuperfish["classe_vert"].'").addClass("sf-menu sf-vertical sf-shadow").superfish({ 
-					animation: {'.$conf_jquerysuperfish["animation_vert"].'},
-					delay:'.$conf_jquerysuperfish["delai_vert"].'
-			  });';
+		$flux .= "\n".'var params_v = {};' ;
+		if($conf_jquerysuperfish["animation_vert"]) $flux .= "\n".'params_v.animation = {'.$conf_jquerysuperfish["animation_vert"].'};' ;
+		if($conf_jquerysuperfish["delai_vert"]) $flux .= "\n".'params_v.delay = '.$conf_jquerysuperfish["delai_vert"].';' ;
+		$flux .= "\n".'$(".'.$conf_jquerysuperfish["classe_vert"].'").addClass("sf-menu sf-vertical sf-shadow").superfish(params_v);';
 	}
 	if($conf_jquerysuperfish["menu_navbar"]) {
-		$flux .= "\n".'
-		$(".'.$conf_jquerysuperfish["classe_navbar"].'").addClass("sf-menu sf-navbar sf-shadow").superfish({ 
-					animation: {'.$conf_jquerysuperfish["animation_navbar"].'},
-					pathClass:"on",
-					delay:'.$conf_jquerysuperfish["delai_navbar"].'
-			  });';
+		$flux .= "\n".'var params_n = {pathClass:"on"};' ;
+		if($conf_jquerysuperfish["animation_navbar"]) $flux .= "\n".'params_n.animation = {'.$conf_jquerysuperfish["animation_navbar"].'};' ;
+		if($conf_jquerysuperfish["delai_navbar"]) $flux .= "\n".'params_n.delay = '.$conf_jquerysuperfish["delai_navbar"].';' ;
+		$flux .= "\n".'$(".'.$conf_jquerysuperfish["classe_vert"].'").addClass("sf-menu sf-vertical sf-shadow").superfish(params_n);';
 	}
 	$flux .= "});\n/* ]]> */</script>";
 	$flux .= jquerysuperfish_insert_head_css(''); // compat pour les vieux spip
