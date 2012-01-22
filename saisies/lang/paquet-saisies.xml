@@ -1,4 +1,7 @@
 <traduction module="paquet-saisies" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/saisies/lang/" reference="fr">
 	<langue code="en" />
 	<langue code="fr" />
+	<langue code="sk">
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	</langue>
 </traduction>
