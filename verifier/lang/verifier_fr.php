@@ -39,10 +39,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url_protocole_exact' => 'L\'adresse saisie <em>(@url@)</em> ne commence pas par un protocole valide (http:// par exemple)',
 
 	// N
-	'normaliser_option_date' => 'Normaliser la date&nbsp;?',
+	'normaliser_option_date' => 'Normaliser la date ?',
 	'normaliser_option_date_aucune' => 'Non',
 	'normaliser_option_date_en_datetime' => 'Au format «Datetime» (pour SQL)',
-	
+
 	// O
 	'option_decimal_nb_decimales_label' => 'Nombre de décimales après la virgule',
 	'option_email_disponible_label' => 'Adresse disponible',

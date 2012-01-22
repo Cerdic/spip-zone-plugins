@@ -40,6 +40,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url_protocole' => 'Die eingegebene Adresse <em>(@url@)</em> muß mit @protocole@ beginnen.',
 	'erreur_url_protocole_exact' => 'Die eingegebene Adresse <em>(@url@)</em> beginnt nicht mit einem gültigen Protokoll (zum Beispiel http:// ).',
 
+	// N
+	'normaliser_option_date' => 'Normaliser la date ?', # NEW
+	'normaliser_option_date_aucune' => 'Non', # NEW
+	'normaliser_option_date_en_datetime' => 'Au format «Datetime» (pour SQL)', # NEW
+
 	// O
 	'option_decimal_nb_decimales_label' => 'Dezimalstellen nach dem Komma',
 	'option_email_disponible_label' => 'Adresse verfügbar',
