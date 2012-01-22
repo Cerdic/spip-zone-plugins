@@ -6,4 +6,7 @@
 	<langue code="es" />
 	<langue code="fr" />
 	<langue code="it" />
+	<langue code="sk">
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	</langue>
 </traduction>
