@@ -3,9 +3,9 @@
 function ziptex_polyglossia($lang){
 	// function permettant de convertir une #LANG en nom du package polyglossia
 	$tableau = array(
-		'fr' => 'french',
 		'en' => 'english',
-		'es' => 'spanish');
+		'es' => 'spanish',
+		'fr' => 'french');
 	return $tableau[$lang];		
 }
 function ziptex_dir($array){
