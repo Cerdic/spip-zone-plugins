@@ -11,7 +11,7 @@
 			[fr]Une adaptation pour Spip du plugin [JQuery Corner->http://jquery.malsup.com/corner/]
 		</multi>
 	</description>
-	<icon>images/jquerycorner-32.png</icon>
+	<icon>prive/themes/spip/images/jquerycorner-32.png</icon>
 	<lien>http://www.spip-contrib.net/JQuery-Corner</lien>
 	<prefix>jquerycorner</prefix>
 	<install>base/jquerycorner_install.php</install>
@@ -20,12 +20,12 @@
 		<inclure>jquerycorner_pipelines.php</inclure>
 	</pipeline>
 	<bouton id='jquerycorner' parent='configuration'>
-		<icone>images/jquerycorner-24.png</icone>
+		<icone>prive/themes/spip/images/jquerycorner-24.png</icone>
 		<titre>jquerycorner:titre_menu</titre>
 		<url>configurer_jquerycorner</url>
 	</bouton>
 	<bouton id='jquerycorner2' parent='bando_squelette'>
-		<icone>images/jquerycorner-16.png</icone>
+		<icone>prive/themes/spip/images/jquerycorner-16.png</icone>
 		<titre>jquerycorner:titre_menu</titre>
 		<url>configurer_jquerycorner</url>
 	</bouton>
