@@ -1,0 +1,40 @@
+<div class="formulaire_spip formulaire_#FORM">
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form name="formulaire_#FORM" method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<h3 class="legend"><:asso:categories_de_cotisations:></h3>
+		<ul>
+			<li class="editer_valeur[ (#ENV**{erreurs}|table_valeur{valeur}|oui)erreur]">
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{valeur})</span>]
+				<label for="valeur"><strong><:asso:categorie:></strong></label>
+				<input name="valeur" type="text" [value="(#ENV{valeur})"] id="valeur" class="formo" />
+			</li>
+			<li class="editer_libelle">
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{libelle})</span>]
+				<label for="libelle"><strong><:asso:libelle_complet:></strong></label>
+				<input name="libelle" type="text" [value="(#ENV{libelle})"] id="libelle" class="formo" />
+			</li>
+			<li class="editer_duree[ (#GET{erreurs}|oui)erreur]">
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{duree})</span>]
+				<label for="duree"><strong><:asso:duree:></strong></label>
+				<input name="duree" type="text" [value="(#ENV{duree})"] id="duree" class="formo" />
+			</li>
+			<li class="editer_cotisation[ (#GET{erreurs}|oui)erreur]">
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{cotisation})</span>]
+				<label for="cotisation"><strong><:asso:montant_en_euros:></strong></label>
+				<input name="cotisation" type="text" [value="(#ENV{cotisation})"] id="cotisation" class="formo" />
+			</li>
+			<li class="editer_commentaires[ (#GET{erreurs}|oui)erreur]">
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{commentaires})</span>]
+				<label for="commentaires"><strong><:asso:commentaires:></strong></label>
+				<textarea name="commentaires" id="commentaires" class="formo" rows="3" cols="80" >[(#ENV{commentaires})] </textarea>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" value="<:asso:bouton_envoyer:>" class="submit" />
+		</p>
+	</div>
+	</form>
+</div>
