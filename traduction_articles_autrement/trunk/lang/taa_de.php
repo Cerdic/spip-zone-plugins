@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'necesite_afficher_objet' => 'Diese Fuktion erfordert die Installierung des Plugins',
 
 	// O
-	'options' => '<MODIF>Sprachoptionen verändern',
+	'options' => 'Sprachoptionen verändern', # MODIF
 
 	// R
 	'rang' => 'Rang', # NEW
