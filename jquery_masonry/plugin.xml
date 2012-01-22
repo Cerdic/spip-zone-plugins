@@ -10,7 +10,7 @@
 		<multi>[fr]Une adaptation pour Spip du plugin [JQuery Masonry->http://masonry.desandro.com/]
 		</multi>
 	</description>
-	<icon>images/jquerymasonry-32.png</icon>
+	<icon>prive/themes/spip/images/jquerymasonry-32.png</icon>
 	<lien>http://www.spip-contrib.net/JQuery-Masonry</lien>
 	<prefix>jquerymasonry</prefix>
 	<install>base/jquerymasonry_install.php</install>
@@ -19,12 +19,12 @@
 		<inclure>jquerymasonry_pipelines.php</inclure>
 	</pipeline>
 	<bouton id='jquerymasonry' parent='configuration'>
-		<icone>images/jquerymasonry-24.png</icone>
+		<icone>prive/themes/spip/images/jquerymasonry-24.png</icone>
 		<titre>jquerymasonry:titre_menu</titre>
 		<url>configurer_jquerymasonry</url>
 	</bouton>
 	<bouton id='jquerymasonry2' parent='bando_squelette'>
-		<icone>images/jquerymasonry-16.png</icone>
+		<icone>prive/themes/spip/images/jquerymasonry-16.png</icone>
 		<titre>jquerymasonry:titre_menu</titre>
 		<url>configurer_jquerymasonry</url>
 	</bouton>

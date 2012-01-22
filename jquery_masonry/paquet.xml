@@ -4,7 +4,7 @@
 	version="0.3.0"
 	etat="test"
 	compatibilite="[2.1.0;3.0.99]"
-	logo="images/jquerymasonry-32.png"
+	logo="prive/themes/spip/images/jquerymasonry-32.png"
 	schema="0.1"
 	documentation="http://www.spip-contrib.net/JQuery-Masonry"
 >	
