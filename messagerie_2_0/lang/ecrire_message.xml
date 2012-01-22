@@ -1,4 +1,7 @@
 <traduction module="ecrire_message" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/messagerie_2_0/lang/" reference="fr">
 	<langue code="es" />
 	<langue code="fr" />
+	<langue code="sk">
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	</langue>
 </traduction>
