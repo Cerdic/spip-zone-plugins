@@ -142,7 +142,7 @@ U kunt hier bepaalde kortere wegen van SPIP bepalen. Een lege waarde staat gelij
 {Let op: of het « [.->pucesli] » werktuig aktief is, het vervangen van de « - » wordt niet meer gedaan; een &lt;ul>&lt;li> lijst wordt dan gebruikt.}
 
 SPIP gebruikt gewoonlijk het baken &lt;h3&gt; voor intertitres. Kies hier een andere vervanging :[[%racc_h1%]][[->%racc_h2%]]', # MODIF
-	'class_spip:description4' => '<MODIF>
+	'class_spip:description4' => '
 
 SPIP heeft verkozen om het baken &lt;strong> te gebruiken om vette letters te schrijven. Maar &lt;b> had eveneens kunnen passen. Aan u om te beslissen :[[%racc_g1%]][[->%racc_g2%]]
 
@@ -173,7 +173,7 @@ Opgelet: door deze tweede parameter te wijzigen, verliest u dan de standaardstij
 	'compacte_tout' => 'Niet comprimeren op alle (annuleert de vorige opties)',
 	'contrib' => 'Meer info : @url@',
 	'copie_vers' => 'Copie vers : @dir@', # NEW
-	'corbeille:description' => '<MODIF>SPIP verwijdert automatisch de objecten mis au rebuts na 24 uren, en dit meestal rond 4u \'s morgens, dit dankzij «CRON» (een periodieke en/of een automatische lancering van het voorgeprogrammeerde proces). Hier kunt u het proces verhinderen zodanig dat u beter vat hebt op het beheer van prullenmand.[[%arret_optimisation%]]',
+	'corbeille:description' => 'SPIP verwijdert automatisch de objecten mis au rebuts na 24 uren, en dit meestal rond 4u \'s morgens, dit dankzij «CRON» (een periodieke en/of een automatische lancering van het voorgeprogrammeerde proces). Hier kunt u het proces verhinderen zodanig dat u beter vat hebt op het beheer van prullenmand.[[%arret_optimisation%]]', # MODIF
 	'corbeille:nom' => 'Het mandje',
 	'corbeille_objets' => '@nb@ onderwerp(en) in het mandje.',
 	'corbeille_objets_lies' => '@nb_lies@ ontdekte(n) verbinding.',
@@ -192,7 +192,7 @@ Idem om de bodem te veranderen, als de keuze hieronder het toelaat:@_CS_EXEMPLE_
 @_CS_ASTER@Het formaat van deze verpersoonlijkte bakens moet bestaande kleuren op een lijst zetten of paren «balise=couleur», bepalen, alles die door komma\'s wordt gescheiden. Voorbeelden. Exemples : «grijs, rood», «zwak=geel, sterk=rood», «beneden=#99CC11, boven=brown» of nog «grijs=#DDDDCC, rood=#EE3300». Voor de eerste en het laatste voorbeeld, zijn de toegelaten bakens : <code>[grijs]</code> en <code>[rood]</code> (<code>[fond grijs]</code> en <code>[fond rood]</code> als de middelen toegestaan zijn).', # MODIF
 	'couleurs:nom' => 'Erg in kleuren',
 	'couleurs_fonds' => ', <b>[fond coul]text[/coul]</b>, <b>[bg coul]text[/coul]</b>',
-	'cs_comportement:description' => '<MODIF>@puce@ {{Logs.}}Vele inlichtingen zijn te verkrijgen over de plugin \'Couteau Suisse (Zwitsers mesje)\' in de folders {spip.log} deze kunt U vinden in het repertoire: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
+	'cs_comportement:description' => '@puce@ {{Logs.}}Vele inlichtingen zijn te verkrijgen over de plugin \'Couteau Suisse (Zwitsers mesje)\' in de folders {spip.log} deze kunt U vinden in het repertoire: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
 
 @puce@{{Options SPIP.}} SPIP zet de  plugins in een specifieke orde. Om zeker te zijn dat \'le Couteau Suisse\' in het begin staat en zo enkele SPIP opties automatisch beïnvloedt, moet u de volgende optie aanvinken. Indien de rechten van u server het toestaan, zal de folder{@_CS_FILE_OPTIONS@} automatisch gemodifieerd worden en de volgende folder insluiten {@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php}.
 [[%spip_options_on%]]
@@ -209,7 +209,7 @@ Idem om de bodem te veranderen, als de keuze hieronder het toelaat:@_CS_EXEMPLE_
 
 	// D
 	'decoration:aide' => 'Versiering : <b>&lt;balise&gt;test&lt;/balise&gt;</b>, met <b>balise</b> = @liste@',
-	'decoration:description' => '<MODIF>Nieuwe lettertype zijn te parametreren in u teksten en toegankelijk dankzij des balises à chevrons. Voorbeeld : 
+	'decoration:description' => 'Nieuwe lettertype zijn te parametreren in u teksten en toegankelijk dankzij des balises à chevrons. Voorbeeld : 
 &lt;mabalise&gt;texte&lt;/mabalise&gt; ou : &lt;mabalise/&gt;.<br />Definier hieronder de CSS die u nodig heeft, une balise per lijn, zoals de hierna volgende syntaxes  :
 - {type.mabalise = mon style CSS}
 - {type.mabalise.class = ma classe CSS}
@@ -225,7 +225,7 @@ De parameter {type} hieronder kan drie verschillende waarden:
 	'decoration:nom' => 'Versiering',
 	'decoupe:aide' => 'Blok tabben : <b>&lt;onglets>&lt;/onglets></b><br/>Séparateur van bladzijdes of tabben : @sep@', # MODIF
 	'decoupe:aide2' => 'Alias : @sep@',
-	'decoupe:description' => '<MODIF>@puce@ Découpe l\'affichage public d\'un article en plusieurs pages grâce à une pagination automatique. Placez simplement dans votre article quatre signes plus consécutifs (<code>++++</code>) à l\'endroit qui doit recevoir la coupure.
+	'decoupe:description' => '@puce@ Découpe l\'affichage public d\'un article en plusieurs pages grâce à une pagination automatique. Placez simplement dans votre article quatre signes plus consécutifs (<code>++++</code>) à l\'endroit qui doit recevoir la coupure.
 
 Par défaut, le Couteau Suisse insère la pagination en tête et en pied d\'article automatiquement. Mais vous avez la possibilité de placer cette pagination ailleurs dans votre squelette grâce à une balise #CS_DECOUPE que vous pouvez activer ici :
 [[%balise_decoupe%]]
@@ -297,10 +297,10 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 	'en_travaux:description' => 'Maakt het mogelijk om een aanpasbaar bericht te geven gedurende een onderhoudfase op de hele openbare site, eventueel ook op het private deel.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1">%avertir_travaux%</admin_travaux>]][[%prive_travaux%]]', # MODIF
 	'en_travaux:nom' => 'Site in werkzaamheden',
-	'erreur:bt' => '<MODIF><span style=\\"color:red;\\">Attention :</span> la barre typographique (version @version@) schijnt oud.<br />Het Zwitsers mes  (Couteau Suisse)stemt overeen met een hogere versie of gelijk aan @mini@.', # MODIF
+	'erreur:bt' => '<span style=\\"color:red;\\">Attention :</span> la barre typographique (version @version@) schijnt oud.<br />Het Zwitsers mes  (Couteau Suisse)stemt overeen met een hogere versie of gelijk aan @mini@.', # MODIF
 	'erreur:description' => 'id gebrek hebbend aan in de definitie van het werktuig !',
 	'erreur:distant' => 'de verwijderde server',
-	'erreur:jquery' => '<MODIF>{{Note}} : de bibliotheek {jQuery} schijnt inactief op deze pagina. Consulteer:[ici->http://www.spip-contrib.net/?article2166] de paragraaf op de \'dépendances\' van de plugin of  herlaad deze pagina.',
+	'erreur:jquery' => '{{Note}} : de bibliotheek {jQuery} schijnt inactief op deze pagina. Consulteer:[ici->http://www.spip-contrib.net/?article2166] de paragraaf op de \'dépendances\' van de plugin of  herlaad deze pagina.', # MODIF
 	'erreur:js' => 'Een fout JavaScript schijnt op deze bladzijde voorgekomen zijn en verhindert zijn goede werking. Gelieve JavaScript op uw navigator activeren om af-activeren sommige plugins SPIP van uw site.',
 	'erreur:nojs' => 'JavaScript wordt op deze bladzijde af-activeerd.',
 	'erreur:nom' => 'Fout !',
@@ -312,7 +312,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 	'etendu' => 'Uitgestrekt',
 
 	// F
-	'f_jQuery:description' => '<MODIF>Verhindert de installatie van {jQuery} in het openbare deel teneinde economischer te werk te gaan en tijd te besparen. Deze bibliotheek ([- > http://jquery.com/]) brengt talrijke mogelijkheden in de programmering van Javascript en kan door bepaalde plugins gebruikt worden. SPIP gebruikt het in het privé gedeelte.
+	'f_jQuery:description' => 'Verhindert de installatie van {jQuery} in het openbare deel teneinde economischer te werk te gaan en tijd te besparen. Deze bibliotheek ([- > http://jquery.com/]) brengt talrijke mogelijkheden in de programmering van Javascript en kan door bepaalde plugins gebruikt worden. SPIP gebruikt het in het privé gedeelte.
 
 Opgelet: bepaalde werktuigen van het Zwitserse Mes (couteau suisse) vereisen de functies van {jQuery}.', # MODIF
 	'f_jQuery:nom' => 'Inactieve jQuery.',
@@ -320,7 +320,7 @@ Opgelet: bepaalde werktuigen van het Zwitserse Mes (couteau suisse) vereisen de 
 	'filets_sep:description' => 'Neemt scheidingsnetten op, aan de persoonlijke behoeften aanpasbaar door bladen van stijl, in alle teksten van SPIP.
 _ De syntaxis is : "__code__", waar de code vertegenwoordigt ofwel het identificatienummer (van 0 tot 7) van het net dat in rechtstreeks verband met de overeenkomstige stijlen, ofwel de naam van een beeld moet opgenomen worden dat in het dossier wordt geplaatst plugins/couteau_suisse/img/filets.', # MODIF
 	'filets_sep:nom' => 'Scheidingsnetten',
-	'filtrer_javascript:description' => '<MODIF>Om javascript in de artikelen te beheren, zijn drie manieren beschikbaar :
+	'filtrer_javascript:description' => 'Om javascript in de artikelen te beheren, zijn drie manieren beschikbaar :
 - <i>nooit</i>: javascript wordt overal geweigerd
 - <i>het gebrek</i>: javascript is in rood in de privé ruimte aangeduid
 - <i>nog steeds</i>: javascript wordt overal aanvaard.
@@ -349,7 +349,7 @@ Opgelet: in de forums, petities, georganiseerde stromen, enz., het beleid van ja
 	'guillemets:nom' => 'Typografische aanhalingstekens',
 
 	// H
-	'help' => '<MODIF>{{Deze bladzijde is alleen toegankelijk voor de site verantwoordelijken.}} Zij geeft toegang tot de verschillende aanvullende functies die door plugin worden gebracht«{{Le Couteau Suisse}}».',
+	'help' => '{{Deze bladzijde is alleen toegankelijk voor de site verantwoordelijken.}} Zij geeft toegang tot de verschillende aanvullende functies die door plugin worden gebracht«{{Le Couteau Suisse}}».', # MODIF
 	'help2' => 'Plaatselijke versie : @version@',
 	'help3' => '<p>Band van documentatie :<br/>• [Le Couteau Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Réinitialisatie :
 _ • [Verborgen werktuigen|Aan de eerste schijn van deze bladzijde terugkomen->@hide@]
@@ -483,7 +483,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:style_h' => 'Uw stijl :',
 	'label:style_p' => 'Uw stijl :',
 	'label:suite_introduction' => 'Punten van vervolg :',
-	'label:terminaison_urls_page' => '<MODIF>De uitgang van URls (ex : .html) :',
+	'label:terminaison_urls_page' => 'De uitgang van URls (ex : .html) :', # MODIF
 	'label:titre_travaux' => 'Titel van het bericht :',
 	'label:titres_etendus' => 'Activer l\'utilisation étendue des balises #TITRE_XXX :', # NEW
 	'label:tout_rub' => 'Afficher en public tous les objets suivants :', # NEW
@@ -636,16 +636,16 @@ Als u plugin réinitialiserd door op een pakijs te klikken, reconfiguratie van h
 	'simpl_interface:description' => 'Deactiveer het menu van snelle statuut verandering van een artikel aan het overzicht van zijn kleurrijke chip. Dat is nuttig als u probeert om het meest ontdaan mogelijke van particuliere een interface te verkrijgen ten einde de prestaties klant te optimaliseren.',
 	'simpl_interface:nom' => 'Vermindering van de particuliere interface',
 	'smileys:aide' => 'Smileys : @liste@',
-	'smileys:description' => '<MODIF>Insère des smileys dans tous les textes où apparaît un raccourci du genre <acronym>:-)</acronym>. Idéal pour les  forums.
+	'smileys:description' => 'Insère des smileys dans tous les textes où apparaît un raccourci du genre <acronym>:-)</acronym>. Idéal pour les  forums.
 _ Une balise est disponible pour aficher un tableau de smileys dans vos squelettes : #SMILEYS.
 _ Dessins : [Sylvain Michel->http://www.guaph.net/]', # MODIF
 	'smileys:nom' => 'Smileys',
-	'soft_scroller:description' => '<MODIF>Offre à votre site public un défilement  adouci de la page lorsque le visiteur clique sur un lien pointant vers une ancre : très utile pour éviter de se perdre dans une page complexe ou un texte très long...
+	'soft_scroller:description' => 'Offre à votre site public un défilement  adouci de la page lorsque le visiteur clique sur un lien pointant vers une ancre : très utile pour éviter de se perdre dans une page complexe ou un texte très long...
 
 Attention, cet outil a besoin pour fonctionner de pages au «DOCTYPE XHTML» (non HTML !) et de deux plugins {jQuery} : {ScrollTo} et {LocalScroll}. Le Couteau Suisse peut les installer directement si vous cochez les cases suivantes. [[%scrollTo%]][[-->%LocalScroll%]]
 @_CS_PLUGIN_JQUERY192@', # MODIF
 	'soft_scroller:nom' => 'Zachte ankers',
-	'sommaire:description' => '<MODIF>Construit un sommaire pour le texte de vos articles et de vos rubriques afin d’accéder rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
+	'sommaire:description' => 'Construit un sommaire pour le texte de vos articles et de vos rubriques afin d’accéder rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
 
 @puce@ Vous pouvez définir ici le nombre maximal de caractères retenus des intertitres pour construire le sommaire :[[%lgr_sommaire% caractères]]
 
@@ -717,7 +717,7 @@ Cet outil est compatible avec : « [.->sommaire] ».', # NEW
 	'tous' => 'Iedereen',
 	'toutes_couleurs' => 'De 36 kleuren van de css stijlen :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Meertalige blokken : <b><:trad:></b>',
-	'toutmulti:description' => '<MODIF>À l\'instar de ce vous pouvez déjà faire dans vos squelettes, cet outil vous permet d\'utiliser librement les chaînes de langues (de SPIP ou de vos squelettes) dans tous les contenus de votre site (articles, titres, messages, etc.) à l\'aide du raccourci <code><:chaine:></code>.
+	'toutmulti:description' => 'À l\'instar de ce vous pouvez déjà faire dans vos squelettes, cet outil vous permet d\'utiliser librement les chaînes de langues (de SPIP ou de vos squelettes) dans tous les contenus de votre site (articles, titres, messages, etc.) à l\'aide du raccourci <code><:chaine:></code>.
  
 Consultez [ici ->http://www.spip.net/fr_article2128.html] la documentation de SPIP à ce sujet.
 
@@ -733,7 +733,7 @@ La fonction SPIP utilisée en PHP est <code>_T(\'chaine\')</code> sans argument,
 	'travaux_prochainement' => 'Deze site zal zeer binnenkort hersteld worden.
 _ Bedankt voor uw begrip.', # MODIF
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
-	'tri_articles:description' => '<MODIF>En naviguant sur le site en partie privée ([->./?exec=auteurs]), choisissez ici le tri à utiliser pour afficher vos articles à l\'intérieur de vos rubriques.
+	'tri_articles:description' => 'En naviguant sur le site en partie privée ([->./?exec=auteurs]), choisissez ici le tri à utiliser pour afficher vos articles à l\'intérieur de vos rubriques.
 
 Les propositions ci-dessous sont basées sur la fonctionnalité SQL \'ORDER BY\' : n\'utilisez le tri personnalisé que si vous savez ce que vous faites (champs disponibles : {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
 [[%tri_articles%]][[->%tri_perso%]]', # MODIF
@@ -754,7 +754,7 @@ _ Un modèle est également disponible pour vos contenus : placez <code><bolo300
 
 @puce@ {{#LESMOTS}} : ', # MODIF
 	'trousse_balises:nom' => 'Trousse à balises', # NEW
-	'type_urls:description' => '<MODIF>@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'accès aux pages de votre site.
+	'type_urls:description' => '@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'accès aux pages de votre site.
 
 Plus d\'infos : [->http://www.spip.net/fr_article765.html]. L\'outil « [.->boites_privees] » vous permet de voir sur la page de chaque objet SPIP l\'URL propre associée.
 [[%radio_type_urls3%]]
@@ -800,7 +800,7 @@ _ Exemple : <code>article.php3?id_article=123</code>
 <q1>• Provoquer l\'ajout systématique de {{l\'id de l\'objet}} à son URL (en suffixe, en préfixe, etc.).
 _ (exemples : <code>/Mon-titre-d-article,457</code> ou <code>/457-Mon-titre-d-article</code>)</q1>', # MODIF
 	'type_urls:nom' => 'Formaat van URLs',
-	'typo_exposants:description' => '<MODIF>{{Textes français}} : améliore le rendu typographique des abréviations courantes, en mettant en exposant les éléments nécessaires (ainsi, {<acronym>Mme</acronym>} devient {M<sup>me</sup>}) et en corrigeant les erreurs courantes ({<acronym>2ème</acronym>} ou  {<acronym>2me</acronym>}, par exemple, deviennent {2<sup>e</sup>}, seule abréviation correcte).
+	'typo_exposants:description' => '{{Textes français}} : améliore le rendu typographique des abréviations courantes, en mettant en exposant les éléments nécessaires (ainsi, {<acronym>Mme</acronym>} devient {M<sup>me</sup>}) et en corrigeant les erreurs courantes ({<acronym>2ème</acronym>} ou  {<acronym>2me</acronym>}, par exemple, deviennent {2<sup>e</sup>}, seule abréviation correcte).
 
 Les abréviations obtenues sont conformes à celles de l\'Imprimerie nationale telles qu\'indiquées dans le {Lexique des règles typographiques en usage à l\'Imprimerie nationale} (article « Abréviations », presses de l\'Imprimerie nationale, Paris, 2002).
 
@@ -832,7 +832,7 @@ Choisissez ici de mettre en exposant certains raccourcis supplémentaires, malgr
 	'urls_enregistrer' => 'Dit URL in de database opslaan',
 	'urls_id_sauf_rubriques' => 'Exclure les rubriques', # MODIF
 	'urls_minuscules' => 'Lettres minuscules', # NEW
-	'urls_nouvelle' => '<MODIF>Éditer l\'URL « propres » :', # MODIF
+	'urls_nouvelle' => 'Éditer l\'URL « propres » :', # MODIF
 	'urls_num_objet' => 'Nummer :',
 	'urls_purger' => 'Alles legen',
 	'urls_purger_tables' => 'De geselecteerde tafels legen',
@@ -841,7 +841,7 @@ Choisissez ici de mettre en exposant certains raccourcis supplémentaires, malgr
 	'urls_titre_objet' => 'Titre enregistré  :', # NEW
 	'urls_type_objet' => 'Objet :', # NEW
 	'urls_url_calculee' => 'Publiek URL « @type@ » :',
-	'urls_url_objet' => '<MODIF>URL « propres » enregistrée :', # MODIF
+	'urls_url_objet' => 'URL « propres » enregistrée :', # MODIF
 	'urls_valeur_vide' => '(Une valeur vide entraine la suppression de l\'URL)', # MODIF
 	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.', # NEW
 

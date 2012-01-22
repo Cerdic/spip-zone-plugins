@@ -198,7 +198,7 @@ Fon rengini değiştirmek için (eğer yukarıdaki seçenek izin veriyorsa) :@_C
 
 	// D
 	'decoration:aide' => 'Dekorasyon : <b>&lt;balise&gt;test&lt;/balise&gt;</b> ile <b>balise</b> = @liste@',
-	'decoration:description' => '<NEW>De nouveaux styles paramétrables dans vos textes et accessibles grâce à des balises à chevrons. Exemple : 
+	'decoration:description' => 'De nouveaux styles paramétrables dans vos textes et accessibles grâce à des balises à chevrons. Exemple : 
 &lt;mabalise&gt;texte&lt;/mabalise&gt; ou : &lt;mabalise/&gt;.<br />Définissez ci-dessous les styles CSS dont vous avez besoin, une balise par ligne, selon les syntaxes suivantes :
 - {type.mabalise = mon style CSS}
 - {type.mabalise.class = ma classe CSS}
@@ -210,7 +210,7 @@ Le paramètre {type} ci-dessus peut prendre trois valeurs :
 - {div} : balise créant un nouveau paragraphe (type Block)
 - {auto} : balise déterminée automatiquement par le plugin
 
-[[%decoration_styles%]]', # MODIF
+[[%decoration_styles%]]', # NEW
 	'decoration:nom' => 'Dekorasyon',
 	'decoupe:aide' => 'Tırnak bloğu : <b>&lt;onglets>&lt;/onglets></b><br/>Sayfa veya tırnak ayracı : @sep@', # MODIF
 	'decoupe:aide2' => 'Alias : @sep@',
@@ -728,7 +728,7 @@ Aşağıdaki öneriler SQL \'ORDER BY\' fonksiyonuna dayanmaktadır: bu kişisel
 	'tri_perso' => 'Kişiselleştirilmiş SQL sıralaması ORDER BY :',
 	'tri_publi' => 'Yayın tarihine göre sıralama (ORDER BY date DESC)',
 	'tri_titre' => 'Başlığa göre sıralama (ORDER BY 0+titre,titre)',
-	'trousse_balises:description' => '<NEW>Outil en cours de développement. Vous offre quelques balises très simples et bien pratiques pour améliorer la lisibilité de vos squelettes.
+	'trousse_balises:description' => 'Outil en cours de développement. Vous offre quelques balises très simples et bien pratiques pour améliorer la lisibilité de vos squelettes.
 
 @puce@ {{#BOLO}} : génère un faux texte d\'environ 3000 caractères ("bolo" ou "[?lorem ipsum]") dans les squelettes pendant leur mise au point. L\'argument optionnel de cette fonction spécifie la longueur du texte voulu. Exemple : <code>#BOLO{300}</code>. Cette balise accepte tous les filtres de SPIP. Exemple : <code>[(#BOLO|majuscules)]</code>.
 _ Un modèle est également disponible pour vos contenus : placez <code><bolo300></code> dans n\'importe quelle zone de texte (chapo, descriptif, texte, etc.) pour obtenir 300 caractères de faux texte.
@@ -737,7 +737,7 @@ _ Un modèle est également disponible pour vos contenus : placez <code><bolo300
 
 - {{#CHR<html>{XX}</html>}} : balise équivalente à <code>#EVAL{"chr(XX)"}</code> et pratique pour coder des caractères spéciaux (le retour à la ligne par exemple) ou des caractères réservés par le compilateur de SPIP (les crochets ou les accolades).
 
-@puce@ {{#LESMOTS}} : ', # MODIF
+@puce@ {{#LESMOTS}} : ', # NEW
 	'trousse_balises:nom' => 'Komut kutusu',
 	'type_urls:description' => '@puce@ SPIP, sitenizin sayfalarına erişime izin veren bağlantılar üretmek için için  bir takım URL\'ler sunar. 
 

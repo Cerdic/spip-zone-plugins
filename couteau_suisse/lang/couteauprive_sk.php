@@ -43,7 +43,7 @@ Hodnota 1~000~000 pixelov sa zdá byť rozumná na nastavenie, ak máte málo do
 	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
 
 Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.', # NEW
-	'aff_tout:nom' => 'Affiche tout', # NEW
+	'aff_tout:nom' => 'Zobraziť všetky',
 	'attente' => 'Čaká sa...',
 	'auteur_forum:description' => 'Požiadajte všetkých autorov verejných stráv, aby vyplnili (aspoň jedným písmenom!) meno a/alebo email, aby sa predišlo úplne anonymným správam. Majte na pamäti, že tento nástroj vykonáva overenie cez Javascript v prehliadači používateľa. [[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
 {Upozornenie: Tretia možnosť ruší ostatné. Je dôležité overiť si, že formuláre vašej šablóny sú kompatibilné s týmto nástrojom.}',
@@ -183,7 +183,7 @@ Pozn.: zmenou  druhého parametra stratíte štandardné štýly priradené k t
 	'corbeille_objets_vider' => 'Delete the selected objects',
 	'corbeille_vider' => 'Empty the wastebin:',
 	'couleurs:aide' => 'Farba textu: <b>[coul]text[/coul]</b>@fond@ with <b>coul</b> = @liste@',
-	'couleurs:description' => '<MODIF>Provide shortcuts to add colours in any text of the site (articles, news items, titles, forums, ...)
+	'couleurs:description' => 'Provide shortcuts to add colours in any text of the site (articles, news items, titles, forums, ...)
 
 Here are two identical examples to change the colour of text:@_CS_EXEMPLE_COULEURS2@
 
@@ -194,7 +194,7 @@ In the same way, to change the font if the following option allows:@_CS_EXEMPLE_
 @_CS_ASTER@The format of this personalised tags have to be of existing colours or define pairs «tag=colour», separated by comas. Examples : «grey, red», «smooth=yellow, strong=red», «low=#99CC11, high=brown» but also «grey=#DDDDCC, red=#EE3300». For the first and last example, the allowed tags are: <code>[grey]</code> et <code>[red]</code> (<code>[fond grey]</code> et <code>[fond red]</code> if the backgrounds are allowed).', # MODIF
 	'couleurs:nom' => 'Zafarbený text',
 	'couleurs_fonds' => ', <b>[fond coul]text[/coul]</b>, <b>[bg coul]text[/coul]</b>',
-	'cs_comportement:description' => '<MODIF>@puce@ {{Logs.}} Record a lot of information about the working of the Penknife in the {spip.log} files which can be found in this directory: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
+	'cs_comportement:description' => '@puce@ {{Logs.}} Record a lot of information about the working of the Penknife in the {spip.log} files which can be found in this directory: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
 
 @puce@ {{SPIP options.}} SPIP places plugins in order. To be sure that the Penknife is at the head and is thus able to control certain SPIP options, check the following option. If the permissions on your server allow it, the file {@_CS_FILE_OPTIONS@} will be modified to include {@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php}.
 [[%spip_options_on%]]
@@ -270,15 +270,15 @@ This tool may be combined with "[.->sommaire]".', # MODIF
 	'distant_echoue' => 'Chyba pri nahrávaní, tento nástroj možno nefunguje!',
 	'distant_inactif' => 'Súbor sa nenašiel (nástroj neaktívny).',
 	'distant_present' => 'Súbor existuje v knižnici od @date@.',
-	'docgen' => 'Documentation générale', # NEW
-	'docwiki' => 'Carnet d\'idées', # NEW
+	'docgen' => 'Všeobecná dokumentácia',
+	'docwiki' => 'Zápisník nápadov',
 	'dossier_squelettes:description' => 'Changes which template directory to use. For example: "squelettes/mytemplate". You can register several directories by separating them with a colon <html>":"</html>. If you leave the following box empty (or type "dist" in it), then the default "dist" template, supplied with SPIP, will be used.[[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'Priečinok šablón',
 
 	// E
 	'ecran_activer' => 'Povoliť bezpečnostnú obrazovku',
 	'ecran_conflit' => 'Varovanie: súbor "@file@" spôsobuje konflikt a mal by byť odstránený!',
-	'ecran_conflit2' => 'Poznámka: statický súbor s názvom "@file@" sa našiel a bol aktivovaný. Modul Vreckový nožík ho nevedel aktualizovať ani nastaviť.', # MODIF
+	'ecran_conflit2' => 'Poznámka: statický súbor s názvom "@file@" sa našiel a bol aktivovaný. Modul Couteau Suisse  ho nevedel aktualizovať alebo nastaviť.',
 	'ecran_ko' => 'Neaktívna obrazovka!',
 	'ecran_maj_ko' => 'K dispozícii je verzia {{@n@}} bezpečnostnej obrazovky. Prosím, aktualizujte vzdialený súbor tejto utility.',
 	'ecran_maj_ko2' => 'K dispozícii je verzia @n@ bezpečnostnej obrazovky. Môžete aktualizovať vzdialený súbor " [.->ecran_securite] ".',
@@ -296,7 +296,7 @@ When making an official update, update the associated remote file (click above o
 - Local file version: ', # NEW
 	'ecran_securite:nom' => 'Bezpečnostná obrazovka',
 	'effaces' => 'Deleted',
-	'en_travaux:description' => '<MODIF>Makes it possible to display a customised message on the public site and also in the editing area during maintenance work.
+	'en_travaux:description' => 'Makes it possible to display a customised message on the public site and also in the editing area during maintenance work.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]', # MODIF
 	'en_travaux:nom' => 'Stránka v režime údržby',
 	'erreur:bt' => '<span style=\\"color:red;\\">Warning:</span> the typographical bar appears to be an old version (@version@).<br />The Penknife is compatible only with version @mini@ or newer.', # MODIF
@@ -314,7 +314,7 @@ When making an official update, update the associated remote file (click above o
 	'etendu' => 'Expanded',
 
 	// F
-	'f_jQuery:description' => '<MODIF>Prevents the installation of {jQuery} on the public site in order to economise some "machine resources". The jQuery library ([->http://jquery.com/]) is useful in Javascript programming and many plugins use it. SPIP uses it in the editing interface.
+	'f_jQuery:description' => 'Prevents the installation of {jQuery} on the public site in order to economise some "machine resources". The jQuery library ([->http://jquery.com/]) is useful in Javascript programming and many plugins use it. SPIP uses it in the editing interface.
 
 N.B: some Penknife tools require {jQuery} to be installed. ', # MODIF
 	'f_jQuery:nom' => 'Deactivate jQuery',
@@ -371,7 +371,7 @@ _ • [Celý zásuvný modul|Nastaviť na pôvodné nastavenia zásuvného modul
 	'horloge:nom' => 'Hodiny',
 
 	// I
-	'icone_visiter:description' => '<MODIF>Replaces the standard "Visit" button (top right on this page) by the site logo, if it exists.
+	'icone_visiter:description' => 'Replaces the standard "Visit" button (top right on this page) by the site logo, if it exists.
 
 To set this logo, go to the page "Site configuration" by clicking the "Configuration" button.', # MODIF
 	'icone_visiter:nom' => 'Tlačidlo "Navštíviť"',
@@ -379,7 +379,7 @@ To set this logo, go to the page "Site configuration" by clicking the "Configura
 	'insert_head:nom' => 'Tag #INSERT_HEAD',
 	'insertions:description' => 'N.B.: tool in development!! [[%insertions%]]',
 	'insertions:nom' => 'Automatické opravy',
-	'introduction:description' => '<MODIF>This tag can be used in templates to generate short summaries of articles, new items, etc.</p>
+	'introduction:description' => 'This tag can be used in templates to generate short summaries of articles, new items, etc.</p>
 <p>{{Beware}} : If you have another plugin defining the fonction {balise_INTRODUCTION()} or you have defined it in your templates, you will get a compilation error.</p>
 @puce@ You can specify (as a percentage of the default value) the length of the text generated by the tag #INTRODUCTION. A null value, or a value equal to 100 will not modify anything and return the defaults: 500 characters for the articles, 300 for the news items and 600 for forums and sections.
 [[%lgr_introduction%&nbsp;%]]
@@ -387,7 +387,7 @@ To set this logo, go to the page "Site configuration" by clicking the "Configura
 [[%suite_introduction%]]
 @puce@ If the #INTRODUCTION tag is used to give a summary of an article, the Penknife can generate a link to the article on the 3 dots or string marking that there is more text available. For example : &laquo;Read the rest of the article…&raquo;
 [[%lien_introduction%]]
-',
+', # MODIF
 	'introduction:nom' => 'Tag #INTRODUCTION',
 
 	// J
@@ -465,7 +465,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:log_couteau_suisse' => 'Aktivovať:',
 	'label:logo_Hmax' => 'Maximálna výška loga:',
 	'label:long_url' => 'Dĺžka klikateľného popisu:',
-	'label:marqueurs_urls_propres' => '<MODIF>Add markers to distinguish between objects (SPIP>=2.0) :<br/>(e.g.. : " - " for -My-section-, " @ " for @My-site@) ',
+	'label:marqueurs_urls_propres' => 'Add markers to distinguish between objects (SPIP>=2.0) :<br/>(e.g.. : " - " for -My-section-, " @ " for @My-site@) ', # MODIF
 	'label:max_auteurs_page' => 'Autorov na stránku:',
 	'label:message_travaux' => 'Vaša správa týkajúca sa údržby:',
 	'label:moderation_admin' => 'Automaticky schvaľovať príspevky od:',
@@ -498,7 +498,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:terminaison_urls_page' => 'URL endings (e.g.: .html):',
 	'label:titre_travaux' => 'Názov príspevku:',
 	'label:titres_etendus' => 'Activate the extended use of the tags #TITRE_XXX:',
-	'label:tout_rub' => 'Afficher en public tous les objets suivants :', # NEW
+	'label:tout_rub' => 'Verejne zobraziť všetky tieto objekty:',
 	'label:url_arbo_minuscules' => 'Nechať veľkosť písma podľa názvu vo www adrese:',
 	'label:url_arbo_sep_id' => 'Oddeľovač \'title-id\', ktorý sa použije v prípade duplicity:<br/>(nepoužívajte /)',
 	'label:url_glossaire_externe2' => 'Odkaz na externý slovník:',
@@ -529,15 +529,15 @@ _ • {By default}: automatic replacement (from SPIP version 2.0).
 	// M
 	'mailcrypt:description' => 'Hides all the email links in your textes and replaces them with a Javascript link which activates the visitor\'s email programme when the link is clicked. This antispam tool attempts to prevent web robots from collecting email addresses which have been placed in forums or in the text displayed by the tags in your templates.',
 	'mailcrypt:nom' => 'Šifrovanie pošty',
-	'maj_auto:description' => '<NEW>Cet outil vous permet de gérer facilement la mise à jour de vos différents plugins, récupérant notamment le numéro de révision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouvé sur <code>zone.spip.org</code>.
+	'maj_auto:description' => 'Cet outil vous permet de gérer facilement la mise à jour de vos différents plugins, récupérant notamment le numéro de révision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouvé sur <code>zone.spip.org</code>.
 
 La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tentez de procéder manuellement à la mise à jour du plugin.
 
-Note : les paquets <code>.zip</code> n\'étant pas reconstruits instantanément, il se peut que vous soyez obligé d\'attendre un certain délai avant de pouvoir effectuer la totale mise à jour d\'un plugin tout récemment modifié.', # MODIF
+Note : les paquets <code>.zip</code> n\'étant pas reconstruits instantanément, il se peut que vous soyez obligé d\'attendre un certain délai avant de pouvoir effectuer la totale mise à jour d\'un plugin tout récemment modifié.', # NEW
 	'maj_auto:nom' => 'Automatické aktualizácie',
-	'masquer:description' => '<NEW>Cet outil permet de masquer sur le site public et sans modification particulière de vos squelettes, les contenus (rubriques ou articles) qui ont le mot-clé défini ci-dessous. Si une rubrique est masquée, toute sa branche l\'est aussi.[[%mot_masquer%]]
+	'masquer:description' => 'Cet outil permet de masquer sur le site public et sans modification particulière de vos squelettes, les contenus (rubriques ou articles) qui ont le mot-clé défini ci-dessous. Si une rubrique est masquée, toute sa branche l\'est aussi.[[%mot_masquer%]]
 
-Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère <code>{tout_voir}</code> aux boucles de votre squelette.', # MODIF
+Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère <code>{tout_voir}</code> aux boucles de votre squelette.', # NEW
 	'masquer:nom' => 'Šifrovanie odkazu',
 	'meme_rubrique:description' => 'Define here the number of objects listed in the panel labelled "<:info_meme_rubrique:>" available on some of the private zone pages.[[%meme_rubrique%]]', # NEW
 	'message_perso' => 'Veľká vďaka prekladateľom, ktorí sa dostali až sem. Pat ;-)',
@@ -587,7 +587,7 @@ Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère
 
 	// P
 	'pack_actuel' => 'Balík @date@',
-	'pack_actuel_avert' => '<MODIF>Warning: the overrides of globals and of "define()" are not specified here',
+	'pack_actuel_avert' => 'Warning: the overrides of globals and of "define()" are not specified here', # MODIF
 	'pack_actuel_titre' => 'AKTUÁLNY BALÍK S NASTAVENIAMI MODULU VRECKOVÝ NOŽÍK',
 	'pack_alt' => 'See the current configuration parameters',
 	'pack_delete' => 'Vymazanie balíka s nastaveniami',
@@ -612,15 +612,15 @@ If you reset the plugin by clicking on a pack, the Penknife will reconfigure its
 	'paragrapher2:description' => 'The SPIP function <code>paragrapher()</code> inserts the tags <p> and </p> around all texts which do not have paragraphs. In order to have a finer control over your styles and layout, you can give a uniform look to your texts throughout the site.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Odseky',
 	'pipelines' => 'Entry points used:',
-	'previsualisation:description' => '<NEW>Par défaut, SPIP permet de prévisualiser un article dans sa version publique et stylée, mais uniquement lorsque celui-ci a été « proposé à l’évaluation ». Hors cet outil permet aux auteurs de prévisualiser également les articles pendant leur rédaction. Chacun peut alors prévisualiser et modifier son texte à sa guise.
+	'previsualisation:description' => 'Par défaut, SPIP permet de prévisualiser un article dans sa version publique et stylée, mais uniquement lorsque celui-ci a été « proposé à l’évaluation ». Hors cet outil permet aux auteurs de prévisualiser également les articles pendant leur rédaction. Chacun peut alors prévisualiser et modifier son texte à sa guise.
 
 
 
-@puce@ Attention : cette fonctionnalité ne modifie pas les droits de prévisualisation. Pour que vos rédacteurs aient effectivement le droit de prévisualiser leurs articles « en cours de rédaction », vous devez l’autoriser (dans le menu {[Configuration&gt;Fonctions avancées->./?exec=config_fonctions]} de l’espace privé).', # MODIF
+@puce@ Attention : cette fonctionnalité ne modifie pas les droits de prévisualisation. Pour que vos rédacteurs aient effectivement le droit de prévisualiser leurs articles « en cours de rédaction », vous devez l’autoriser (dans le menu {[Configuration&gt;Fonctions avancées->./?exec=config_fonctions]} de l’espace privé).', # NEW
 	'previsualisation:nom' => 'Zobrazujú sa články',
 	'puceSPIP' => 'Povoliť klávesové skratky "*"',
 	'puceSPIP_aide' => 'Odrážka SPIPU: <b>*</b>',
-	'pucesli:description' => '<MODIF>Replaces bullets «-» (simple dash) in articles with ordered lists «-*» (transformed into  &lt;ul>&lt;li>…&lt;/li>&lt;/ul> in HTML) whose style may be customised using CSS.', # MODIF
+	'pucesli:description' => 'Replaces bullets «-» (simple dash) in articles with ordered lists «-*» (transformed into  &lt;ul>&lt;li>…&lt;/li>&lt;/ul> in HTML) whose style may be customised using CSS.', # MODIF
 	'pucesli:nom' => 'Pekné odrážky',
 
 	// Q
@@ -649,7 +649,7 @@ If you reset the plugin by clicking on a pack, the Penknife will reconfigure its
 	'simpl_interface:description' => 'Deactivates the pop-up menu for changing article status which shows onmouseover on the coloured status bullets. This can be useful if you wish to have an editing interface which is as simple as possible for the users.',
 	'simpl_interface:nom' => 'Simplification of the editing interface',
 	'smileys:aide' => 'Smajlíky: @liste@',
-	'smileys:description' => '<MODIF>Inserts smileys in texts containing a shortcut in this form <acronym>:-)</acronym>. Ideal for forums.
+	'smileys:description' => 'Inserts smileys in texts containing a shortcut in this form <acronym>:-)</acronym>. Ideal for forums.
 _ A tag is available for displaying a table of smileys in templates: #SMILEYS.
 _ Images : [Sylvain Michel->http://www.guaph.net/]', # MODIF
 	'smileys:nom' => 'Smajlíky',
@@ -658,7 +658,7 @@ _ Images : [Sylvain Michel->http://www.guaph.net/]', # MODIF
 N.B. In order to work, this tool needs to be used in «DOCTYPE XHTML» pages (not HTML!). It also requires two {jQuery} plugins: {ScrollTo} et {LocalScroll}. The Penknife can install them itself if you check the following two boxes. [[%scrollTo%]][[->%LocalScroll%]]
 @_CS_PLUGIN_JQUERY192@', # MODIF
 	'soft_scroller:nom' => 'Ľahké kotvy',
-	'sommaire:description' => '<MODIF>Builds a summary of your articles in order to access the main headings quickly (HTML tags &lt;h3>A Subtitle&lt;/h3> or SPIP subtitle shortcuts in the form: <code>{{{My subtitle}}}</code>).
+	'sommaire:description' => 'Builds a summary of your articles in order to access the main headings quickly (HTML tags &lt;h3>A Subtitle&lt;/h3> or SPIP subtitle shortcuts in the form: <code>{{{My subtitle}}}</code>).
 
 @puce@ You can define the maximum number of characters of the subtitles used to make the summary:[[%lgr_sommaire% characters]]
 
@@ -677,7 +677,7 @@ The summary can be used in conjunction with : {[.->decoupe]}.', # MODIF
 	'sommaire_avec' => 'An article with summary: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'An article without summary: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'sommaire_titres' => 'Štruktúrované podnadpisy: <b><html>{{{*Nadpis}}}</html></b>, <b><html>{{{**Podnadpis}}}</html></b>, atď.',
-	'spam:description' => '<MODIF>Attempts to fight against the sending of abusive and automatic messages through forms on the public site. Some words and the tags  &lt;a>&lt;/a> are prohibited. Train your authors to use SPIP shortcuts for links.
+	'spam:description' => 'Attempts to fight against the sending of abusive and automatic messages through forms on the public site. Some words and the tags  &lt;a>&lt;/a> are prohibited. Train your authors to use SPIP shortcuts for links.
 
 @puce@ List here the sequences you wish to prohibit separating them with spaces. [[%spam_mots%]]
 <q1>• Expressions containing spaces should be placed within inverted commas.
@@ -702,7 +702,7 @@ _ Example:~{<html>\\"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/\\"</html>}.</q1>
 @puce@ If the #CACHE tag is not found in a template then by default SPIP caches a page for 24 hours before recalculating it. You can modify this default here.[[%duree_cache% heures]]
 
 @puce@ If you are running several mutualised sites, you can specify here the default value for all the local sites (SPIP 2.0 mini).[[%duree_cache_mutu% heures]]', # MODIF
-	'spip_cache:description1' => '<MODIF>@puce@ By default, SPIP calculates all the public pages and caches them in order to accelerate their display. It can be useful, when developing the site to disable the cache temporarily, in order to see the effect of changes immediately.@_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]',
+	'spip_cache:description1' => '@puce@ By default, SPIP calculates all the public pages and caches them in order to accelerate their display. It can be useful, when developing the site to disable the cache temporarily, in order to see the effect of changes immediately.@_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]', # MODIF
 	'spip_cache:description2' => '@puce@ Four options to configure the cache: <q1>
 _ • {Normal usage}: SPIP places all the calculated pages of the public site in the cache in order to speed up their delivery. After a certain time the cache is recalculated and stored again.
 _ • {Permanent cache}: the cache is never recalculated (time limits in the templates are ignored).
@@ -732,11 +732,11 @@ Note: For keywords, #TITRE_GROUPE is an alias of #TITRE_PARENT. SPIP treats the 
 For example, in an (ARTICLES) loop, #TITRE_SECTEUR will give the title of the sector of the current article, since the identifier #ID_SECTEUR (or the field  \'id_secteur\') is available in the loop.[[%titres_etendus%]]', # MODIF
 	'titre_parent:nom' => 'Tagy #TITRE_PARENT/OBJECT',
 	'titre_tests' => 'The Penknife - Test page',
-	'titres_typo:description' => '<NEW>Transforme tous les intertitres <html>« {{{Mon intertitre}}} »</html> en image typographique paramétrable.[[%i_taille% pt]][[%i_couleur%]][[%i_police%
+	'titres_typo:description' => 'Transforme tous les intertitres <html>« {{{Mon intertitre}}} »</html> en image typographique paramétrable.[[%i_taille% pt]][[%i_couleur%]][[%i_police%
 
 Polices disponibles : @_CS_FONTS@]][[%i_largeur% px]][[%i_hauteur% pt]][[%i_padding% px]][[%i_align%]]
 
-Cet outil est compatible avec : « [.->sommaire] ».', # MODIF
+Cet outil est compatible avec : « [.->sommaire] ».', # NEW
 	'titres_typo:nom' => 'Medzititulok v obrázku',
 	'tous' => 'Všetko',
 	'toutes_couleurs' => '36 farieb v štýloch CSS: @_CS_EXEMPLE_COULEURS@',
@@ -752,12 +752,12 @@ The SPIP function used is: <code>_T(\'a_text\')</code> (with no parmameters), an
 Do not forget to check that the variable used <code>\'a_text\'</code> is defined in the language files.', # MODIF
 	'toutmulti:nom' => 'Viacjazyčné bloky',
 	'travaux_masquer_avert' => 'Schovať rám, ktorý uvádza na verejnej stránke, že sa vykonáva údržba',
-	'travaux_nocache' => 'Désactiver également le cache de SPIP', # NEW
+	'travaux_nocache' => 'Deaktivovať aj cache SPIPu',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'This site will be back online soon.
 _ Thank you for your understanding.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
-	'tri_articles:description' => '<MODIF>Choose the sort order to be used for displaying articles in the editing interface ([->./?exec=auteurs]), within the sections.
+	'tri_articles:description' => 'Choose the sort order to be used for displaying articles in the editing interface ([->./?exec=auteurs]), within the sections.
 
 The options below use the SQL function \'ORDER BY\'. Only use the customised option if you know what you are doing (the available fields are: {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
 [[%tri_articles%]][[->%tri_perso%]]', # MODIF
@@ -767,7 +767,7 @@ The options below use the SQL function \'ORDER BY\'. Only use the customised opt
 	'tri_perso' => 'Sort by customised SQL, ORDER BY:',
 	'tri_publi' => 'Zotriediť podľa dátumu publikovania (ZORADIŤ PODĽA DÁTUMU PUBLIKOVANIA)',
 	'tri_titre' => 'Zotriediť podľa názvu (ZORADIŤ PODĽA 0+názov, názov)',
-	'trousse_balises:description' => '<MODIF>Tool in development. It offers a few simple tags for templates.
+	'trousse_balises:description' => 'Tool in development. It offers a few simple tags for templates.
 
 @puce@ {{#BOLO}}: generates a dummy text of about 3000 characters ("bolo" ou "lorem ipsum") for use with templates in development. An optional argument specifies the length of the text, e.g. <code>#BOLO{300}</code>. The tag accepts all SPIP\'s filters. For example, <code>[(#BOLO|majuscules)]</code>.
 _ It can also be used as a model in content. Place <code><bolo300></code> in any text zone in order to obtain 300 characters of dummy text.
@@ -778,7 +778,7 @@ _ It can also be used as a model in content. Place <code><bolo300></code> in any
 
 @puce@ {{#LESMOTS}}: ', # MODIF
 	'trousse_balises:nom' => 'Box of tags',
-	'type_urls:description' => '<MODIF>@puce@ SPIP offers a choice between several types of URLs for your site:
+	'type_urls:description' => '@puce@ SPIP offers a choice between several types of URLs for your site:
 
 More information: [->http://www.spip.net/en_article3588.html] The "[.->boites_privees]" tool allows you to see on the page of each SPIP object the clean URL which is associated with it.
 [[%radio_type_urls3%]]
@@ -886,7 +886,7 @@ _ version_plein_texte : extracts the full text content from an html page.', # MO
 	'visiteurs_connectes:description' => 'Vytvorí fragment HTML pre vaše šablóny, ktorý zobrazí počet návštevníkov, ktorí sú práve pripojení na verejnej stránke.
 
 Jednoducho do šablóny pridajte <code><INCLURE{fond=fonds/visiteurs_connectes}>.</code>',
-	'visiteurs_connectes:inactif' => 'Attention : les statistiques du site ne sont pas activées.', # NEW
+	'visiteurs_connectes:inactif' => 'Pozor: štatistiky stránky nie sú aktivované.',
 	'visiteurs_connectes:nom' => 'Prihlásení návštevníci',
 	'voir' => 'Pozri: @voir@',
 	'votre_choix' => 'Váš výber:',
