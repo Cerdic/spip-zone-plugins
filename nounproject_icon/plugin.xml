@@ -1,0 +1,26 @@
+<plugin
+	prefix="nounproject"
+	categorie="maintenance"
+	version="0.0.2"
+	etat="experimental"
+	compatibilite=""
+	logo="nounproject_logo.jpg"
+	>
+<nom>Theme NounProject</nom>
+<prefix>nounproject</prefix>
+<icon>nounproject_logo.jpg</icon>
+<etat>experimental</etat>
+<version>0.0.2</version>
+	<slogan>
+	Remplacer les icônes de SPIP par celle de [TheNounProjet->http://thenounproject.com/]
+	</slogan>
+	<description>
+		Le thème NounProject est un jeu d'icônes pour l'espace privé de SPIP basé sur les icônes de [TheNounProject->http://thenounproject.com/]
+	</description>
+	<auteur>Equipe NounProject</auteur>
+	<auteur>Teddy Payet</auteur>
+	<licence>CC by SA3 et CC0</licence>
+	<categorie>maintenance</categorie>
+	<options>nounproject_options.php</options>
+	<necessite id="SPIP" version="[3.0.0-alpha2;[" />
+</plugin>
