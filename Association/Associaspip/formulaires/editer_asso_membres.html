@@ -3,110 +3,99 @@
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
     <form name="formulaire_#FORM" method="post" action="#ENV{action}">
 	<div>
-
-	#ACTION_FORMULAIRE{#ENV{action}}
-	<ul>
-		<h3 class="legend"><:asso:adherent_titre_modifier_membre:></h3>
-
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<h3 class="legend"><h3 class="legend"><:asso:adherent_titre_modifier_membre:></h3>
+		<ul>
 		[(#ENV{meta_civilite}|oui)
-		<li class="editer_sexe">
-			<label for="sexe"><strong><:asso:adherent_libelle_sexe:></strong></label>
-			<input type="text" name="sexe" value="[(#ENV{sexe})]" id="sexe"  class="formo" />
-		</li>
+			<li class="editer_sexe">
+				<label for="sexe"><strong><:asso:adherent_libelle_sexe:></strong></label>
+				<input type="text" name="sexe" value="[(#ENV{sexe})]" id="sexe"  class="formo" />
+			</li>
 		]
-
-		<li class="editer_nom_famille">
-			<label for="nom_famille"><strong><:asso:adherent_libelle_nom_famille:></strong></label>
-			<input type="text" name="nom_famille" value="[(#ENV{nom_famille})]" id="nom_famille"  class="formo" />
-		</li>
-
+			<li class="editer_nom_famille">
+				<label for="nom_famille"><strong><:asso:adherent_libelle_nom_famille:></strong></label>
+				<input type="text" name="nom_famille" value="[(#ENV{nom_famille})]" id="nom_famille"  class="formo" />
+			</li>
 		[(#ENV{meta_prenom}|oui)
-		<li class="editer_prenom">
-			<label for="prenom"><strong><:asso:adherent_libelle_prenom:></strong></label>
-			<input type="text" name="prenom" value="[(#ENV{prenom})]" id="prenom"  class="formo" />
-		</li>
+			<li class="editer_prenom">
+				<label for="prenom"><strong><:asso:adherent_libelle_prenom:></strong></label>
+				<input type="text" name="prenom" value="[(#ENV{prenom})]" id="prenom"  class="formo" />
+			</li>
 		]
-
-		<li class="editer_categorie">
-			<label for="categorie"><strong><:asso:adherent_libelle_categorie:></strong></label>
+			<li class="editer_categorie">
+				<label for="categorie"><strong><:asso:adherent_libelle_categorie:></strong></label>
 			<B_categorie>
-			<select name="categorie" id="categorie" class="formo" >
+				<select name="categorie" id="categorie" class="formo" >
 			<BOUCLE_categorie(ASSO_CATEGORIES){par libelle}>
-			<option value="#ID_CATEGORIE" [(#ENV{categorie}|=={#ID_CATEGORIE}|?{selected="selected"})]>#LIBELLE</option>
+					<option value="#ID_CATEGORIE" [(#ENV{categorie}|=={#ID_CATEGORIE}|?{selected="selected"})]>#LIBELLE</option>
 			</BOUCLE_categorie>
-			</select>
+				</select>
 			</B_categorie>
-			<span class="erreur_message"><:asso:erreur_pas_de_categorie:></span>
+				<span class="erreur_message"><:asso:erreur_pas_de_categorie:></span>
 			<//B_categorie>
-		</li>
-
-		#SET{erreurs,#ENV**{erreurs}|table_valeur{validite}}
-		<li class="editer_validite">
-			[<span class='erreur_message'>(#GET{erreurs})</span>]
-			<label for="validite"><strong><:asso:adherent_libelle_validite:></strong></label>
-			<input type="text" name="validite" value="[(#ENV{validite}|affdate{Y-m-d})]" id="validite"  class="formo" />
-		</li>
-
-		<li class="editer_statut_interne[ (#ENV**{erreurs}|table_valeur{statut_interne}|oui)erreur]">
-			<label for="statut_interne"><strong><:asso:adherent_libelle_statut:></strong></label>[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{statut_interne})</span>]
-			[(#STATUT_INTERNE|instituer_adherent_ici)]
-		</li>
-
+			</li>
+			<li class="editer_validite">
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{validite})</span>]
+				<label for="validite"><strong><:asso:adherent_libelle_validite:></strong></label>
+				<input type="text" name="validite" value="[(#ENV{validite}|affdate{Y-m-d})]" id="validite"  class="formo" />
+			</li>
+			<li class="editer_statut_interne[ (#ENV**{erreurs}|table_valeur{statut_interne}|oui)erreur]">
+				<label for="statut_interne"><strong><:asso:adherent_libelle_statut:></strong></label>[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{statut_interne})</span>]
+				[(#STATUT_INTERNE|instituer_adherent_ici)]
+			</li>
 		[(#ENV{meta_id_asso}|oui)
-		<li class="editer_id_asso">
-			<label for="id_asso"><strong><:asso:adherent_libelle_reference_interne:></strong></label>
-			<input type="text" name="id_asso" value="[(#ENV{id_asso})]" id="id_asso"  class="formo" />
-		</li>
+			<li class="editer_id_asso">
+				<label for="id_asso"><strong><:asso:adherent_libelle_reference_interne:></strong></label>
+				<input type="text" name="id_asso" value="[(#ENV{id_asso})]" id="id_asso"  class="formo" />
+			</li>
 		]
+			<li class="editer_commentaire">
+				<label for="commentaire"><strong><:asso:adherent_libelle_commentaires:></strong></label>
+				<textarea name="commentaire" id="commentaire"  class="formo" rows="3" cols="80">[(#ENV{commentaire})]</textarea>
+			</li>
+		</ul>
 
-		<li class="editer_commentaire">
-			<label for="commentaire"><strong><:asso:adherent_libelle_commentaires:></strong></label>
-			<textarea name="commentaire" id="commentaire"  class="formo" rows="3" cols="80">[(#ENV{commentaire})]</textarea>
-		</li>
+		[(#REM)<!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
+		<!--extra-->
 
-	</ul>
+	<B_groupes_membre>
+		<p class="pagination">#PAGINATION</p>
+		<table class="formulaire_table_editable arial2" border="0" cellpadding="2" cellspacing="0" width="100%" style="border: 1px solid #aaaaaa;">
+			<tr style="background-color: #DBE1C5;">
+				<th><:asso:nom:></th>
+				<th><:asso:fonction:></th>
+				<th><:asso:action:><th>
+			</tr>
+	<BOUCLE_groupes_membre(ASSO_GROUPES_LIAISONS asso_groupes){id_auteur=#ENV{id_auteur}}{par nom}{pagination}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{'pair','impair'})]">
+				<td><a title="<:asso:adherent_label_voir_membre:>" href="#URL_ECRIRE{edit_groupe, id=#ID_GROUPE}">#NOM</a></td>
+				<td><input type="text" value="[(#FONCTION)]" name="fonctions[#ID_GROUPE]" class="formo"></td>
+				<td><a title="<:asso:exclure_du_groupe:>" href="#URL_ACTION_AUTEUR{exclure_du_groupe, #VAL{#ID_GROUPE}-#ENV{id_auteur}, #SELF}"><img src="#CHEMIN{img_pack/poubelle-12.gif}"></a><td>
+			</tr>
+	</BOUCLE_groupes_membre>
+		</table>
+	</B_groupes_membre>
 
-	[(#REM)<!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
-	<!--extra-->
+	<B_groupes_non_membre>
+		<div class="cadre_padding">
+			<h3 class="legend"><:asso:rejoindre_un_groupe:></h3>
+			<p class="pagination">#PAGINATION</p>
+			<ul>
+	<BOUCLE_groupes_non_membre(ASSO_GROUPES asso_groupes_liaisons){!id_auteur=#ENV{id_auteur}}{par nom}{pagination 40}>
+				<li class="liste_auteurs">
+					<div class="choix">
+						<input type="checkbox" name="id_groupes[]" value="#ID_GROUPE" />
+						<label>[(#NOM)]</label>
+					</div>
+				</li>
+	</BOUCLE_groupes_non_membre>
+			</ul>
+		</div>
+	<B_groupes_non_membre>
 
-<B_groupes_membre>
-<p class="pagination">#PAGINATION</p>
-<table class='formulaire_table_editable arial2' border='0' cellpadding='2' cellspacing='0' width='100%' style='border: 1px solid #aaaaaa;'>
-	<tr style='background-color: #DBE1C5;'>
-		<th><:asso:nom:></th>
-		<th><:asso:fonction:></th>
-		<th><:asso:action:><th>
-	</tr>
-<BOUCLE_groupes_membre(ASSO_GROUPES_LIAISONS asso_groupes){id_auteur=#ENV{id_auteur}}{par nom}{pagination}>
-	<tr class="[(#COMPTEUR_BOUCLE|alterner{'pair','impair'})]">
-		<td><a title="<:asso:adherent_label_voir_membre:>" href="#URL_ECRIRE{edit_groupe, id=#ID_GROUPE}">#NOM</a></td>
-		<td><input type="text" value="[(#FONCTION)]" name="fonctions[#ID_GROUPE]" class="formo"></td>
-		<td><a title="<:asso:exclure_du_groupe:>" href="#URL_ACTION_AUTEUR{exclure_du_groupe, #VAL{#ID_GROUPE}-#ENV{id_auteur}, #SELF}"><img src="#CHEMIN{img_pack/poubelle-12.gif}"></a><td>
-	</tr>
-</BOUCLE_groupes_membre>
-</table>
-</B_groupes_membre>
-
-<B_groupes_non_membre>
-<div class="cadre_padding">
-	#ACTION_FORMULAIRE{#ENV{action}}
-	<h3 class="legend"><:asso:rejoindre_un_groupe:></h3>
-	<p class="pagination">#PAGINATION</p>
-	<ul>
-<BOUCLE_groupes_non_membre(ASSO_GROUPES asso_groupes_liaisons){!id_auteur=#ENV{id_auteur}}{par nom}{pagination 40}>
-		<li class="liste_auteurs">
-			<div class="choix">
-				<input type="checkbox" name="id_groupes[]" value="#ID_GROUPE" />
-				<label>[(#NOM)]</label>
-			</div>
-		</li>
-</BOUCLE_groupes_non_membre>
-	</ul>
-</div>
-<B_groupes_non_membre>
-
-	<p class="boutons"><input type="submit" value="<:pass_ok:>" class="submit" name="bsubmit" /></p>
-
+		<p class="boutons">
+			<input type="submit" value="<:pass_ok:>" class="submit" name="bsubmit" />
+		</p>
 	</div>
     </form>
 </div>

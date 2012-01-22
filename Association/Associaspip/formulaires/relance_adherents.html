@@ -4,17 +4,30 @@
 [(#ENV{editable})
 <form method="post" action="#ENV{action}">
 <div style="padding:1em;">
-	#ACTION_FORMULAIRE{#ENV{action}}	
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<h3 class="legend"><:asso:relance_de_cotisations:></h3>
+	<p><strong><:asso:vous_vous_appretez_a_envoyer:> [(#ENV{_nb_messages})] [(#ENV{_nb_messages}|>{1}|?{<:asso:relances:>,<:asso:relance:>})]</strong></p>
 	<ul>
-		<h3 class="legend"><:asso:relance_de_cotisations:></h3>
-		<p><strong><:asso:vous_vous_appretez_a_envoyer:> [(#ENV{_nb_messages})] [(#ENV{_nb_messages}|>{1}|?{<:asso:relances:>,<:asso:relance:>})]</strong></p>
-		<fieldset>
-		<p><strong>[(#ENV{_sujet})]</strong></p>
-		<p>[(#ENV{_message}|nl2br)]</p>
-		</fieldset>
+		<li class="fieldset">
+			<fieldset>
+				<ul>
+					<li class="obligatoire editer_sujet[ (#GET{erreurs}|oui)erreur]">
+						[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{_sujet})</span>]
+						<label for="sujet"><strong><:asso:sujet:></strong></label>
+						<input name="_sujet" type="text" [value="(#ENV{_sujet})"] id="sujet" class="formo" />
+					</li>
+					<li class="obligatoire editer_message[ (#GET{erreurs}|oui)erreur]">
+						[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{message})</span>]
+						<label for="messaige"><strong><:asso:message:></strong></label>
+						<textarea name="_message" id="message" class="formo" rows="30" cols="80">[(#ENV{_message})]</textarea>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
 	</ul>
-
-<p class="boutons"><input type="submit" value="<:pass_ok:>" class="submit" /></p>
+	<p class="boutons">
+		<input type="submit" value="<:pass_ok:>" class="submit" />
+	</p>
 
 </div>
 </form>
