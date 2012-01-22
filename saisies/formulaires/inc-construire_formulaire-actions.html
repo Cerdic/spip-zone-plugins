@@ -1,9 +1,11 @@
 <div class="actions">
 	#SET{nom,#ENV{identifiant,#ENV{nom}}}
 	[(#ENV{formulaire_config}|is_array|non)
+	[(#ENV{deplacable}|oui)
 	<span class="move deplacer_saisie" title="<:saisies:construire_action_deplacer:>">
 		<img src="[(#CHEMIN{images/formulaire-deplacer-16.png})]" alt="<:saisies:construire_action_deplacer:>"/>
 	</span>
+	]
 	<button type="submit" class="submit configurer_saisie" name="configurer_saisie" value="#GET{nom}" title="<:saisies:construire_action_configurer:>">
 		<img src="[(#CHEMIN{images/formulaire-configurer-16.png})]" alt="<:saisies:construire_action_configurer:>"/>
 	</button>

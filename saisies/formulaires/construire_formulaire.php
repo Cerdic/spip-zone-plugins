@@ -41,6 +41,17 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 	
 	$contexte['fond_generer'] = 'formulaires/inc-generer_saisies_configurables';
 	
+	// On cherche jquery UI pour savoir si on pourra glisser-déplacer
+	if (find_in_path('javascript/ui/jquery.ui.sortable.js') and find_in_path('javascript/ui/jquery.ui.draggable.js')){
+		$contexte['_chemin_ui'] = 'javascript/ui/';
+	}
+	elseif (find_in_path('javascript/jquery-ui-1.8.16/ui/jquery.ui.sortable.js') and find_in_path('javascript/jquery-ui-1.8.16/ui/jquery.ui.draggable.js')){
+		$contexte['_chemin_ui'] = 'javascript/jquery-ui-1.8.16/ui/';
+	}
+	else{
+		$contexte['_chemin_ui'] = false;
+	}
+	
 	return $contexte;
 }
 
@@ -359,7 +370,12 @@ function formidable_generer_saisie_configurable($saisie, $env){
 			$saisie,
 			recuperer_fond(
 				'formulaires/inc-construire_formulaire-actions',
-				array('nom' => $nom, 'identifiant' => $identifiant, 'formulaire_config' => $formulaire_config)
+				array(
+					'nom' => $nom,
+					'identifiant' => $identifiant, 
+					'formulaire_config' => $formulaire_config,
+					'deplacable' => $env['_chemin_ui']
+				)
 			),
 			'debut'
 		);

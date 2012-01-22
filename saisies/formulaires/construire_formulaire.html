@@ -104,16 +104,11 @@
 						.find('> fieldset > ul').show();
 				});
 				
-			[(#ENV{erreurs}|non)
-				[(#CHEMIN{javascript/ui/jquery.ui.sortable.js}|oui)
-					[(#SET{sortable,1})]
-				]
-			]
-			[(#ENV{erreurs}|non|et{#GET{sortable}})
-				$.getScript("#CHEMIN{javascript/ui/jquery.ui.core.js}", function(){
-				$.getScript("#CHEMIN{javascript/ui/jquery.ui.widget.js}", function(){
-				$.getScript("#CHEMIN{javascript/ui/jquery.ui.mouse.js}", function(){
-				$.getScript("#CHEMIN{javascript/ui/jquery.ui.sortable.js}", function(){
+			[(#ENV{erreurs}|non|et{#ENV{_chemin_ui}})
+				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.core.js}", function(){
+				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.widget.js}", function(){
+				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.mouse.js}", function(){
+				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.sortable.js}", function(){
 					if ($.fn.sortable) {
 						$( "#deplacable, #deplacable ul" ).sortable({
 							revert: true,
@@ -152,17 +147,11 @@
 						});
 					}
 				});});});});
-			]
-			[(#ENV{erreurs}|non)
-				[(#CHEMIN{javascript/ui/jquery.ui.draggable.js}|oui)
-					[(#SET{draggable,1})]
-				]
-			]
-			[(#ENV{erreurs}|non|et{#GET{draggable}})
-				$.getScript("#CHEMIN{javascript/ui/jquery.ui.core.js}", function(){
-				$.getScript("#CHEMIN{javascript/ui/jquery.ui.widget.js}", function(){
-				$.getScript("#CHEMIN{javascript/ui/jquery.ui.mouse.js}", function(){
-				$.getScript("#CHEMIN{javascript/ui/jquery.ui.draggable.js}", function(){
+				
+				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.core.js}", function(){
+				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.widget.js}", function(){
+				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.mouse.js}", function(){
+				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.draggable.js}", function(){
 					if ($.fn.draggable) {
 						$( "#attrapable" ).draggable({
 							connectToSortable: "#deplacable, #deplacable ul",
@@ -170,7 +159,7 @@
 						});
 					}
 				});});});});
-			]			
+			]
 		});
 		
 		function formulaire_configurer_onglets(){
