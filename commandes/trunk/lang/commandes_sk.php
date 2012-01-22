@@ -44,12 +44,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'facture_date' => 'Dátum: <span>@date@</span>',
 	'facture_num' => 'Faktúra č. <span>@num@</span>',
+	'facture_titre' => 'Facture', # NEW
 
 	// I
 	'info_numero_commande' => 'OBJEDNÁVKA ČÍSLO:',
 	'info_toutes_commandes' => 'Všetky objednávky',
 
+	// L
+	'label_recherche' => 'Rechercher', # NEW
+
 	// M
+	'merci_de_votre_commande' => 'Nous vous remercions de votre commande @ref@', # NEW
 	'modifier_commande_statut' => 'Táto objednávka je:',
 	'montant' => 'Množstvo',
 
@@ -98,11 +103,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_attente' => 'Čaká',
 	'statut_encours' => 'Vybavuje sa',
 	'statut_envoye' => 'Odoslaná',
+	'statut_erreur' => 'Erreur', # NEW
 	'statut_label' => 'Stav:',
 	'statut_partiel' => 'Čiastočne zaplatená',
 	'statut_paye' => 'Zaplatená',
 	'statut_retour' => 'Vrátená',
 	'statut_retour_partiel' => 'Čiastočne vrátiť',
+	'supprimer' => 'Supprimer', # NEW
 
 	// U
 	'une_commande_sur' => 'Vaša objednávka – @nom@',
