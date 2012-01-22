@@ -8,49 +8,49 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'articles_utilisant' => '<NEW>Články, ktoré používajú tento formulár',
-	'aucune_reponse' => '<NEW>Žiadna odpoveď',
+	'articles_utilisant' => 'Články, ktoré využívajú tento formulár',
+	'aucune_reponse' => 'Žiadna odpoveď',
 
 	// C
-	'champs_formulaire' => '<NEW>Pole formulára',
+	'champs_formulaire' => 'Polia formulára',
 
 	// F
-	'formulaire' => '<NEW>Formulár',
+	'formulaire' => 'Formulár',
 
 	// I
-	'icone_ajouter_donnees' => '<NEW>Pridať odpovede',
-	'icone_creer_table' => '<NEW>Vytvoriť nový formulár',
-	'importer_donnees_csv' => '<NEW>Načítať odpovede',
-	'info_supprimer_formulaire' => '<NEW>Naozaj chcete tento formulár odstrániť?',
-	'info_supprimer_formulaire_reponses' => '<NEW>K tomuto formuláru je priradených niekoľko odpovedí. 
-Naozaj ho chcete vymazať?',
+	'icone_ajouter_donnees' => 'Pridať odpovede',
+	'icone_creer_table' => 'Vytvoriť nový formulár',
+	'importer_donnees_csv' => 'Nahrávajú sa odpovede',
+	'info_supprimer_formulaire' => 'Naozaj chcete odstrániť tento formulár?',
+	'info_supprimer_formulaire_reponses' => 'K tomuto formuláru je priradených niekoľko odpovedí. 
+Naozaj ho chcete odstrániť?',
 
 	// L
-	'lien_retirer_donnee_liante' => '<NEW>Odstrániť odkaz z tejto odpovede',
-	'lien_retirer_donnee_liee' => '<NEW>Odstrániť túto odpoveď',
+	'lien_retirer_donnee_liante' => 'Odstrániť odkaz z tejto odpovede',
+	'lien_retirer_donnee_liee' => 'Odstrániť túto odpoveď',
 
 	// N
-	'nombre_reponses' => '<NEW>@nombre@ odpovedí',
-	'nouveau_formulaire' => '<NEW>Nový formulár',
+	'nombre_reponses' => 'odpovedí: @nombre@',
+	'nouveau_formulaire' => 'Nový formulár',
 
 	// S
-	'suivi_reponses' => '<NEW>Zobraziť odpovede',
-	'supprimer_formulaire' => '<NEW>Vymazať tento formulár',
+	'suivi_reponses' => 'Zobraziť odpovede',
+	'supprimer_formulaire' => 'Odstrániť tento formulár',
 
 	// T
-	'telecharger_reponses' => '<NEW>Stiahnuť odpovede',
-	'texte_donnee_statut' => '<NEW>Status tejto odpovede',
-	'texte_statut_poubelle' => '<NEW>Odpoveď bola odstránená',
-	'texte_statut_prepa' => '<NEW>Odpoveď sa upravuje',
-	'texte_statut_prop' => '<NEW>Navrhovaná odpoveď',
-	'texte_statut_publie' => '<NEW>Publikovaná odpoveď',
-	'texte_statut_refuse' => '<NEW>Zamietnutá odpoveď',
-	'titre_formulaire' => '<NEW>Názov formulára',
-	'toutes_tables' => '<NEW>Všetky formuláre',
-	'type_des_tables' => '<NEW>Formuláre',
+	'telecharger_reponses' => 'Stiahnite si odpovede',
+	'texte_donnee_statut' => 'Stav spracovania tejto odpovede',
+	'texte_statut_poubelle' => 'Odstránená odpoveď',
+	'texte_statut_prepa' => 'Odpoveď sa upravuje',
+	'texte_statut_prop' => 'Odoslaná odpoveď',
+	'texte_statut_publie' => 'Publikovaná odpoveď',
+	'texte_statut_refuse' => 'Zamietnutá odpoveď',
+	'titre_formulaire' => 'Názov formulára',
+	'toutes_tables' => 'Všetky formuláre',
+	'type_des_tables' => 'Formuláre',
 
 	// U
-	'une_reponse' => '<NEW>Jedna odpoveď'
+	'une_reponse' => 'Jedna odpoveď'
 );
 
 ?>
