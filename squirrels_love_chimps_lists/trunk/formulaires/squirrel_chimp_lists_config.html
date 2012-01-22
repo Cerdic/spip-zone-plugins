@@ -1,4 +1,4 @@
-<fieldset>
+<fieldset class="donnees_lists">
 	<legend><:scl:gestion_listes:></legend>
 	#SET{apikey,#CONFIG{squirrel_chimp/apiKey}}
 	<ul>
@@ -65,7 +65,7 @@
 		</li>	
 	</ul>
 </fieldset>
-<fieldset>
+<fieldset class="donnees_lists_supp">
 	<legend><:scl:champs_supp:></legend>
 
 	<ul>
@@ -91,10 +91,6 @@
 				</BOUCLE_champs>
 				
 			</BOUCLE_listes2>
-
-				
-			
-
 		</li>	
 	</ul>
 	<div class="submit"><input name="sync_auteurs" value="<:scl:sync_auteurs:>" type="submit"></div>
