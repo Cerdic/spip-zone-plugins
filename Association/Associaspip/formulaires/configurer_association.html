@@ -500,7 +500,7 @@
 							</div>
 						</li>
 						<li>
-							<label for="pc-prets"><strong><:asso:config_libelle_num_pc:></strong></label>
+							<label for="pc_prets"><strong><:asso:config_libelle_num_pc:></strong></label>
 							<select name="pc_prets" id="pc_prets">
 								<option value=""><:asso:choisir_ref_compte:></option>
 					<BOUCLE_classeSelect_prets(ASSO_PLAN){active=1}{fusion classe}{par classe}>
@@ -512,21 +512,19 @@
 					</BOUCLE_classeSelect_prets>
 							</select>
 						</li>
-						<!--
 						<li>
 							<label for="dc_prets"><strong><:asso:config_libelle_num_dc:></strong></label>
 						<B_dc_prets>
 							<select name="dc_prets" id="dc_prets">
 								<option value=""><:asso:choisir_dest_compte:></option>
 						<BOUCLE_dc_prets(ASSO_DESTINATION){par intitule}>
-								<option value="#ID_DESTINATION" [(#ENV{dc_activites}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
+								<option value="#ID_DESTINATION" [(#ENV{dc_prets}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
 						</BOUCLE_dc_prets>
 							</select>
 						</B_dc_prets>
 							<span class="spip_form_erreur"><:asso:erreur_pas_de_destination:></span>
 						<//B_dc_prets>
 						</li>
-						-->
 					</B_classeSelect_prets>
 						<li>
 							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>

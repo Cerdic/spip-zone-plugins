@@ -35,7 +35,7 @@ function association_bouton($texte, $image, $script, $args='', $img_attributes='
 	return '<a href="'
 	. generer_url_ecrire($script, $args)
 	. '"><img src="'
-	. _DIR_PLUGIN_ASSOCIATION_ICONES. $image 
+	. _DIR_PLUGIN_ASSOCIATION_ICONES. $image
 	. '" alt=" " title="'
 	. $texte
 	. '" '
@@ -76,30 +76,11 @@ function association_ajouterBoutons($boutons_admin) {
 			_DIR_PLUGIN_ASSOCIATION_ICONES.$icone,  // icone
 			_T('asso:titre_menu_gestion_association') //titre
 			);
-			
+
 	}
 	return $boutons_admin;
 }
-	
 
-function association_mode_de_paiement($journal, $label)
-{
-	$sel = '';
-	$sql = sql_select("code,intitule", "spip_asso_plan", "classe=".sql_quote($GLOBALS['association_metas']['classe_banques']), '', "code") ;
-	while ($banque = sql_fetch($sql)) {
-		$c = $banque['code'];
-		$sel .= "<option value='$c'"
-		. (($journal==$c) ? ' selected="selected"' : '')
-		. '>' . $banque['intitule'] ."</option>\n";
-	}
-
-	return '<label for="journal"><strong>'
-	  . $label
-	  . "&nbsp;:</strong></label>\n"
-	  . (!$sel 
-	      ? "<input name='journal' id='journal' class='formo' />"
-	      : "<select name='journal' id='journal' class='formo'>$sel</select>\n");
-}
 
 # ensemble de fonctions pour recuperer les donnees de l'exercice en cours
 // TODO ---> POO !!!
@@ -125,12 +106,12 @@ function association_calculer_nom_membre($civilite, $prenom, $nom) {
 }
 
 //Conversion de date
-function association_datefr($date) { 
-		$split = explode('-',$date); 
-		$annee = $split[0]; 
-		$mois = $split[1]; 
-		$jour = $split[2]; 
-		return $jour.'/'.$mois.'/'.$annee; 
+function association_datefr($date) {
+		$split = explode('-',$date);
+		$annee = $split[0];
+		$mois = $split[1];
+		$jour = $split[2];
+		return $jour.'/'.$mois.'/'.$annee;
 	}
 
 function association_verifier_date($date) {
@@ -139,7 +120,7 @@ function association_verifier_date($date) {
 	if (!checkdate($mois, $jour, $annee)) return _T('asso:erreur_date');
 	return;
 }
-	
+
 function association_nbrefr($montant) {
 		$montant = number_format(floatval($montant), 2, ',', ' ');
 		return $montant;
@@ -155,11 +136,11 @@ function association_recupere_montant ($valeur) {
 	return $valeur;
 }
 
-	//Affichage du message indiquant la date 
+	//Affichage du message indiquant la date
 function association_date_du_jour($heure=false) {
 		return '<p>'.($heure ? _T('asso:date_du_jour_heure') : _T('asso:date_du_jour')).'</p>';
 	}
-	
+
 function association_flottant($s)
 {
 	return number_format(floatval($s), 2, ',', ' ');
@@ -240,7 +221,7 @@ function instituer_statut_interne_ici($auteur=array()){
 include_spip('balise/meta');
 // charger les metas donnees
 $inc_meta = charger_fonction('meta', 'inc'); // inc_version l'a deja chargee
-$inc_meta('association_metas'); 
+$inc_meta('association_metas');
 
 // pouvoir utiliser les fonctions de coordonnees comme filtre
 if (test_plugin_actif('COORDONNEES')) {
