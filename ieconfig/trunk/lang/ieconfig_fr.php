@@ -1,14 +1,19 @@
 <?php
-
-// Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/ieconfig/trunk/lang/
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	
+
+	// E
 	'explication_ieconfig_import_fichier' => 'Fichier de configuration au format YAML.',
 	'explication_ieconfig_import_local' => 'Liste des configurations détectées dans un sous-répertoire <i>ieconfig/</i> ou dans le répertoire <i>tmp/ieconfig/</i>.',
+
+	// I
 	'item_sauvegarder' => 'Sauvegarder le fichier',
 	'item_telecharger' => 'Télécharger le fichier',
+
+	// L
 	'label_elements_a_exporter' => 'éléments à exporter :',
 	'label_exporter' => 'Exporter ?',
 	'label_ieconfig_export' => 'Options générales d\'export',
@@ -19,10 +24,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_ieconfig_import_fichier' => 'Fichier à importer :',
 	'label_ieconfig_import_local' => 'Configurations disponibles localement :',
 	'label_importer' => 'Importer ?',
+
+	// M
 	'message_erreur_export' => 'Une erreur s\'est produite lors de l\'enregistrement du fichier <i>@filename@</i> dans le répertoire <i>tmp/ieconfig/</i>.',
 	'message_erreur_fichier_import_manquant' => 'Vous devez spécifier un fichier de configuration à importer.',
 	'message_ok_export' => 'Le fichier <i>@filename@</i> a été sauvegardé dans le répertoire <i>tmp/ieconfig/</i>.',
 	'message_ok_import' => 'La configuration a été correctement importée.',
+
+	// T
 	'texte_configuration_identique' => 'La configuration contenue dans ce fichier est identique à votre configuration actuelle.',
 	'texte_description' => 'Description :',
 	'texte_ieconfig_export_explication' => 'Vous pouvez sauvegarder localement votre export au format YAML dans le répertoire <i>tmp/ieconfig/</i> ou bien le télécharger.',
@@ -35,8 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_spip_interactivite_import_explication' => 'Ce fichier contient des valeurs pour l\'onglet <i>Interactivité</i> dans la configuration du site. Si vous l\'importez, les paramètres suivants seront modifiés :',
 	'titre_export' => 'Exporter la configuration',
 	'titre_ieconfig' => 'Import / Export de configurations',
-	'titre_import' => 'Importer une configuration',
-
+	'titre_import' => 'Importer une configuration'
 );
 
 ?>
