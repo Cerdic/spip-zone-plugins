@@ -25,10 +25,9 @@
 							<label for="id_emprunteur"><strong><:asso:prets_libelle_num_emprunteur:></strong></label>
 							<input name="id_emprunteur" type="text" [value="(#ENV{id_emprunteur})"] id="date_sortie" class="formo" />
 						</li>
-						<li class="editer_commentaire_sortie[ (#GET{erreurs}|oui)erreur]">
-							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{commentaire_sortie})</span>]
+						<li class="editer_commentaire_sortie">
 							<label for="commentaire_sortie"><strong><:asso:prets_libelle_commentaires:></strong></label>
-							<textarea name="commentaire_sortie" id="commentaire_sortie" class="formo" rows="3" cols="80" >[(#ENV{commentaire_sortie})] </textarea>
+							<textarea name="commentaire_sortie" id="commentaire_sortie" class="formo" rows="3">[(#ENV{commentaire_sortie})]</textarea>
 						</li>
 					</ul>
 				</fieldset>
@@ -51,10 +50,9 @@
 						[(#ENV{classe_banques}|oui)
 							<INCLURE{fond=inc/mode_de_paiement, journal, classe_banques, type_operation=#META{/association/classe_produits}}>
 						]
-						<li class="editer_commentaire_retour[ (#GET{erreurs}|oui)erreur]">
-							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{commentaire_retour})</span>]
+						<li class="editer_commentaire_retour">
 							<label for="commentaire_retour"><strong><:asso:prets_libelle_commentaires:></strong></label>
-							<textarea name="commentaire_retour" id="commentaire_retour" class="formo" rows="3" cols="80" >[(#ENV{commentaire_retour})] </textarea>
+							<textarea name="commentaire_retour" id="commentaire_retour" class="formo" rows="3">[(#ENV{commentaire_retour})]</textarea>
 						</li>
 					</ul>
 				</fieldset>

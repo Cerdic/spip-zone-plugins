@@ -12,7 +12,7 @@
 
 		<li class="editer_commentaires">
 			<label for="commentaires"><strong><:asso:commentaires:></strong></label>
-			<textarea name="commentaires" id="commentaires"  class="formo" rows="3" cols="80">[(#ENV{commentaires})]</textarea>
+			<textarea name="commentaires" id="commentaires"  class="formo" rows="3">[(#ENV{commentaires})]</textarea>
 		</li>
 
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{affichage}}
