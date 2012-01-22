@@ -14,13 +14,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attente_confirmation' => 'En espera de confirmación',
 
 	// B
-	'base_donnees' => '<NEW>Base de datos',
-	'bloc_deplier' => '<NEW>Desplegar',
-	'bloc_replier' => '<NEW>Replegar',
+	'base_donnees' => 'Base de datos', # NEW
+	'bloc_deplier' => 'Desplegar', # NEW
+	'bloc_replier' => 'Replegar', # NEW
 
 	// C
-	'colorer_fond' => '<NEW>Colorear el fondo',
-	'colorer_texte' => '<NEW>Colorear el texto',
+	'colorer_fond' => 'Colorear el fondo', # NEW
+	'colorer_texte' => 'Colorear el texto', # NEW
 	'configurer' => 'Configurar la Navaja Suiza',
 	'connections' => 'Conexiones',
 
@@ -33,19 +33,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explique_spam' => 'Cuidado: has utilizado balizas, caracteres o palabras prohibidas.<br /><br />¡Vuelve atrás!',
 
 	// L
-	'lancer_test' => '<NEW>Ejecute la prueba!',
+	'lancer_test' => 'Ejecute la prueba!', # NEW
 	'lutte_spam' => 'Lucha contra el SPAM',
 
 	// M
-	'maj_actu' => '<MODIF>Forzar la actualisación',
-	'maj_liste' => '<NEW>Lista de plugins detectda:',
-	'maj_maj' => '<NEW>Actualice el plugin seleccionado',
-	'maj_ok' => '<NEW>Este [plugin->@zip@] parece [actualizado->@url@].',
-	'maj_rev' => '<NEW>Rev. @revision@',
-	'maj_rev_ko' => '<NEW>La [revisión remota->@url@] no se pudo encontrar.',
-	'maj_rev_ok' => '<NEW>La revisión [@revision@->@url@] está [disponible->@zip@].',
+	'maj_actu' => 'Forzar la actualisación', # MODIF
+	'maj_liste' => 'Lista de plugins detectda:', # NEW
+	'maj_maj' => 'Actualice el plugin seleccionado', # NEW
+	'maj_ok' => 'Este [plugin->@zip@] parece [actualizado->@url@].', # NEW
+	'maj_rev' => 'Rev. @revision@', # NEW
+	'maj_rev_ko' => 'La [revisión remota->@url@] no se pudo encontrar.', # NEW
+	'maj_rev_ok' => 'La revisión [@revision@->@url@] está [disponible->@zip@].', # NEW
 	'maj_spip' => 'Après avoir mis à jour tous vos plugins avec précaution, il est vivement conseillé de mettre à jour SPIP lui-même en cliquant sur le lien ci-dessus et en suivant les instructions proposées.', # NEW
-	'maj_svn' => '<NEW>Este plugin SVN parece [actualizado->@url@].',
+	'maj_svn' => 'Este plugin SVN parece [actualizado->@url@].', # NEW
 	'maj_verif' => 'Vérifiez préalablement l\'archive qui vous convient :', # NEW
 	'maj_verif2' => 'Attention : après avoir cliqué sur le bouton ci-dessus, vérifiez bien que l\'archive téléchargée correspond au plugin qu\'il vous faut mettre à jour.', # NEW
 	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu être identifié.', # NEW
