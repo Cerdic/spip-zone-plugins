@@ -1,35 +1,24 @@
 <div class="formulaire_spip formulaire_demo">
-[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>
-<div class="onglet" style="text-align:center; margin:0.5em auto; width:50%;"><a href="#URL_ECRIRE{adherents}"><:asso:menu2_titre_gestion_membres:></a></div>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>
+	<div class="onglet" style="text-align:center; margin:0.5em auto; width:50%;"><a href="#URL_ECRIRE{adherents}"><:asso:menu2_titre_gestion_membres:></a></div>]
 [(#ENV{editable})
-<form method="post" action="#ENV{action}">
-<div style="padding:1em;">
-	#ACTION_FORMULAIRE{#ENV{action}}
-	<h3 class="legend"><:asso:relance_de_cotisations:></h3>
-	<p><strong><:asso:vous_vous_appretez_a_envoyer:> [(#ENV{_nb_messages})] [(#ENV{_nb_messages}|>{1}|?{<:asso:relances:>,<:asso:relance:>})]</strong></p>
-	<ul>
-		<li class="fieldset">
-			<fieldset>
-				<ul>
-					<li class="obligatoire editer_sujet[ (#GET{erreurs}|oui)erreur]">
-						[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{_sujet})</span>]
-						<label for="sujet"><strong><:asso:sujet:></strong></label>
-						<input name="_sujet" type="text" [value="(#ENV{_sujet})"] id="sujet" class="formo" />
-					</li>
-					<li class="obligatoire editer_message[ (#GET{erreurs}|oui)erreur]">
-						[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{message})</span>]
-						<label for="messaige"><strong><:asso:message:></strong></label>
-						<textarea name="_message" id="message" class="formo" rows="30" cols="80">[(#ENV{_message})]</textarea>
-					</li>
-				</ul>
-			</fieldset>
-		</li>
-	</ul>
-	<p class="boutons">
-		<input type="submit" value="<:pass_ok:>" class="submit" />
-	</p>
-
-</div>
-</form>
+	<form method="post" action="#ENV{action}">
+	<div style="padding:1em;">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<h3 class="legend"><:asso:relance_de_cotisations:></h3>
+		<p><em class="explication"><:asso:vous_vous_appretez_a_envoyer:> [(#ENV{_nb_messages})] [(#ENV{_nb_messages}|>{1}|?{<:asso:relances:>,<:asso:relance:>})]</em></p>
+		<div class="fieldset previsu">
+			<p class="titre">
+				[<strong>(#ENV{_sujet})</strong>]
+			</p>
+			<div class="texte">
+				[(#ENV{_message}|nl2br)]
+			</div>
+		</div>
+		<p class="boutons">
+			<input type="submit" value="<:pass_ok:>" class="submit" />
+		</p>
+	</div>
+	</form>
 ]
 </div>
