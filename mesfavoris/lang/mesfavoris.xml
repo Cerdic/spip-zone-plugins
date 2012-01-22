@@ -9,4 +9,7 @@
 	<langue code="it" />
 	<langue code="pt" />
 	<langue code="ru" />
+	<langue code="sk">
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	</langue>
 </traduction>
