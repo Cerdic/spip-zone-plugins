@@ -56,7 +56,7 @@
 		<url>dictionnaires</url>
 	</bouton>
 	<bouton id='dictionnaires_configuration' parent="bando_configuration">
-		<titre>dictionnaire:configurer_titre</titre>
+		<titre>dictionnaire:titre_dictionnaires</titre>
 		<icone>images/dictionnaire-16.png</icone>
 		<url>configurer_dictionnaires</url>
 	</bouton>
