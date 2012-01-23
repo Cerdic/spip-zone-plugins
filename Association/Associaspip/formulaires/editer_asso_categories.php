@@ -14,10 +14,10 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/association_comptabilite');
 
-function formulaires_editer_asso_categories_charger_dist($id_categorie='new')
+function formulaires_editer_asso_categories_charger_dist($id_categorie='')
 {
+	$id_categorie = intval(_request('id')); // ??
 	/* charger dans $contexte tous les champs de la table spip_asso_categories associes a l'id_categorie passe en param */
-	$id_categorie = intval(_request('id'));
 	$contexte = formulaires_editer_objet_charger('asso_categories', $id_categorie, '', '',  generer_url_ecrire('categories'), '');
 //	$contexte = !$id_categorie? '' : sql_fetsel("*", "spip_asso_categories", "id_categorie=$id_categorie");
 
@@ -34,9 +34,9 @@ function formulaires_editer_asso_categories_verifier_dist($id_categorie)
 	$erreurs = array();
 
 	/* on verifie que cotisation et duree ne sont pas negatifs */
-	if (association_recupere_montant(_request('cotisation')<0))
+	if (association_recupere_montant(_request('cotisation'))<0)
 		$erreurs['cotisation'] = _T('asso:erreur_montant');
-	if (association_recupere_montant(_request('duree')<0))
+	if (association_recupere_montant(_request('duree'))<0)
 		$erreurs['duree'] = _T('asso:erreur_montant');
 
 	if (count($erreurs)) {
