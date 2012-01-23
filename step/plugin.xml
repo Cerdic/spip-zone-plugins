@@ -9,7 +9,7 @@
 	</slogan>
 	<auteur>Matthieu Marcillaud</auteur>
 	<licence>&#169; 2008-2011 GPL</licence>
-	<version>0.15.5</version>
+	<version>0.15.6</version>
 	<version_base>0.6</version_base>
 	<install>base/step_upgrade.php</install>
 	<lien>http://www.spip-contrib.net/STEP-Systeme-de-Telechargements-de-Plugins</lien>
@@ -18,7 +18,7 @@
 	<etat>dev</etat>
     <description>
     	<multi>
-    		[fr]STEP est un outil permettant de t&#233;l&#233;charger des plugins de SPIP en g&#233;rant leurs d&#233;pendances et en proposant de les t&#233;l&#233;charger &#233;galement. Il permet de plus de d&#233;terminer les plugins &#224; mettre &#224; jour et de les effectuer. Il permet enfin de supprimer (physiquement) les plugins.
+    		[fr]STEP est un outil pour les plugins SPIP. Il permet de t&#233;l&#233;charger les plugins avec leurs d&#233;pendances, de d&#233;tecter et d'effectuer les mises &#224; jour et de supprimer physiquement les plugins si besoin.
 			[en]This plugin allows you to manage SPIP plugins, their 
 			dependencies and downloads
 			[de]Dieses Plugin verwaltet SPIP-Plugins, ihre Abh&#228;ngigkeiten und Downloads.

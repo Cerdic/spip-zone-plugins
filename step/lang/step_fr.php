@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_action_lib' => 'R&eacute;cup&eacute;rer et installer la librairie &laquo;@plugin@&raquo; (depuis : <a href="@version" class="spip_out">@version@</a>)',
 	'message_action_finale_lib_fail' => 'L\'installation de la librairie &laquo;@plugin@&raquo; a &eacute;chou&eacute;',
 	'message_action_finale_lib_ok' => 'La librairie &laquo;@plugin@&raquo; a &eacute;t&eacute; install&eacute;e',
-	'messages_actions_realisees' => 'L\'ensemble des actions demand&eacute;es ont &eacute;t&eacute; r&eacute;alis&eacute;es.',
+	'messages_actions_realisees' => 'L\'ensemble des actions demand&eacute;es a &eacute;t&eacute; r&eacute;alis&eacute;.',
 	'message_dependance_plugin' => 'Le plugin @plugin@ d&eacute;pend de @dependance@.',
 	'message_dependance_plugin_version' => 'Le plugin @plugin@ d&eacute;pend de @dependance@ @version@',
 	'message_erreur_ecriture_lib' => '&laquo;@plugin@&raquo; a besion de la librairie <a href=\'@lib_url@\'>@lib@</a>
