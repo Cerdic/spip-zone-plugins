@@ -20,6 +20,7 @@
 	</thead>
 	<tbody>
 	<BOUCLE_liste_definitions(DEFINITIONS)
+		{id_dictionnaire?}
 		{statut?}
 		{recherche?}
 		{tri #ENV{par,#ENV{recherche}|?{points,titre}},#GET{defaut_tri}}

@@ -26,7 +26,7 @@
 		<tr class="[(COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="statut">[(#ACTIF|?{<:dictionnaire:champ_actif_oui:>, <:dictionnaire:champ_actif_non:>})]</td>
 			<td class="titre principale"><a href="[(#ID_DICTIONNAIRE|generer_url_entite{dictionnaire})]"
-				title="<:info_numero_abbreviation|attribut_html:> #ID_DICTIONNAIRE">[(#RANG). ]#TITRE <BOUCLE_nb_definitions(DEFINITIONS){id_dictionnaire}{tout}> </BOUCLE_nb_definitions>(<:definition:info_nb_definitions{nb=#TOTAL_BOUCLE}:>)</B_nb_definitions></a></td>
+				title="<:info_numero_abbreviation|attribut_html:> #ID_DICTIONNAIRE">[(#RANG). ]#TITRE <BOUCLE_nb_definitions(DEFINITIONS){id_dictionnaire}{tout}/>[(#TOTAL_BOUCLE|oui)([(#TOTAL_BOUCLE|singulier_ou_pluriel{definition:info_1_definition, definition:info_nb_definitions})])]<//B_nb_definitions></a></td>
 			<td class="id">[(#AUTORISER{modifier,dictionnaire,#ID_DICTIONNAIRE}|?{
 				<a href="[(#URL_ECRIRE{dictionnaire_edit,id_dictionnaire=#ID_DICTIONNAIRE})]">#ID_DICTIONNAIRE</a>,
 				#ID_DICTIONNAIRE
