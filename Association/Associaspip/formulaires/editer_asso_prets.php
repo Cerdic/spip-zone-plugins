@@ -72,9 +72,9 @@ function formulaires_editer_asso_ressources_verifier_dist($id_pret='')
 	$erreurs = array();
 
 	/* on verifie que montant et duree ne soient pas negatifs */
-	if (association_recupere_montant(_request('montant')<0)
+	if (association_recupere_montant(_request('montant')<0))
 		$erreurs['montant'] = _T('asso:erreur_montant');
-	if (association_recupere_montant(_request('duree')<0)
+	if (association_recupere_montant(_request('duree')<0))
 		$erreurs['duree'] = _T('asso:erreur_montant');
 
 	/* verifier si on a un numero d'adherent qu'il existe dans la base */
