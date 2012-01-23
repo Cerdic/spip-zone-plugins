@@ -8,13 +8,13 @@ include_spip('inc/meta');
 // Installation et mise à jour
 function dictionnaires_upgrade($nom_meta_version_base, $version_cible){
 
-	$version_actuelle = '0.0';
+	$version_actuelle = '0.0.0';
 	if (
 		(!isset($GLOBALS['meta'][$nom_meta_version_base]))
 		|| (($version_actuelle = $GLOBALS['meta'][$nom_meta_version_base]) != $version_cible)
 	){
 		
-		if (version_compare($version_actuelle,'0.0','=')){
+		if (version_compare($version_actuelle,'0.0.0','=')){
 			// Création des tables
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
@@ -32,17 +32,15 @@ function dictionnaires_upgrade($nom_meta_version_base, $version_cible){
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		}
 		
-		/*if (version_compare($version_actuelle,'0.5','<')){
-			include_spip('base/create');
+		if (version_compare($version_actuelle,'0.2.0','<')){
 			include_spip('base/abstract_sql');
 			
-			// Modification de dictionnaires
-			sql_alter('');
-						
+			// On ajoute un champ pour choisir le type par défaut dans un dictionnaire
+			sql_alter("TABLE spip_dictionnaires ADD COLUMN type_defaut varchar(255) not null default ''");
+			
 			// On change la version
-			echo "Mise à jour du plugin dictionnaires en version 0.5<br/>";
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
-		}*/
+		}
 	
 	}
 

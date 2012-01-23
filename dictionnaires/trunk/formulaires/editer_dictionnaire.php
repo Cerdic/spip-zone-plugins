@@ -23,6 +23,15 @@ function formulaires_editer_dictionnaire_saisies_dist($id_dictionnaire='new', $r
 			)
 		),
 		array(
+			'saisie' => 'case',
+			'options' => array(
+				'nom' => 'type_defaut',
+				'label' => _T('dictionnaire:champ_type_defaut_label'),
+				'label_case' => _T('dictionnaire:champ_type_defaut_label_case'),
+				'valeur_oui' => 'abbr',
+			)
+		),
+		array(
 			'saisie' => 'selection',
 			'options' => array(
 				'nom' => 'actif',

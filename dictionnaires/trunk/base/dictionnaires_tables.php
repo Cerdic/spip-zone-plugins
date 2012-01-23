@@ -30,6 +30,7 @@ function dictionnaires_declarer_tables_principales($tables_principales){
 		'id_dictionnaire' => 'bigint(21) not null',
 		'titre' => 'text not null default ""',
 		'descriptif' => 'text not null default ""',
+		'type_defaut' => 'varchar(255) not null default ""',
 		'actif' => 'tinyint(1) not null default 0',
 		'maj' => 'timestamp',
 	);

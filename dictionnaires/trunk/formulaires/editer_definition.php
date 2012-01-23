@@ -56,6 +56,12 @@ function formulaires_editer_definition_saisies_dist($id_definition='new', $id_di
 
 function formulaires_editer_definition_charger_dist($id_definition='new',  $id_dictionnaire=0, $retour=''){
 	$contexte = formulaires_editer_objet_charger('definition', $id_definition, $id_dictionnaire, 0, $retour, '');
+	
+	// Pour une case à cocher on est obligé de faire ça ici car la valeur "defaut" de la saisie ne marche pas
+	if (!($id_definition>0) and $id_dictionnaire>0){
+		$contexte['type'] = sql_getfetsel('type_defaut', 'spip_dictionnaires', 'id_dictionnaire = '.$id_dictionnaire);
+	}
+	
 	return $contexte;
 }
 
