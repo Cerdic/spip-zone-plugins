@@ -12,6 +12,19 @@ function rubrique_a_linscription_formulaire_charger($flux){
 	return $flux;
 }
 
+function rubrique_a_linscription_formulaire_verifier($flux){
+	$meta = unserialize(lire_meta('rubrique_a_linscription'));
+	if ($flux['args']['form']=='editer_article' and $meta['espace_prive_creer']=='on') {
+		$id_rubrique =_request('id_parent');
+		settype($id_rubrique,"string");
+		if (! autoriser('creerarticledans','rubrique',$id_rubrique)){
+			$flux['data']['erreurs']['id_parent'] = _T('rubrique_a_linscription:pas_autoriser_rubriquer_creerarticledans');
+		}
+	}
+	return $flux;
+}
+
+
 /* Traiter */
 function rubrique_a_linscription_formulaire_traiter($flux){
 	$meta = unserialize(lire_meta('rubrique_a_linscription'));
@@ -78,7 +91,7 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 		}
 		
 	}
-	
+
 	
 	
 	return $flux;	

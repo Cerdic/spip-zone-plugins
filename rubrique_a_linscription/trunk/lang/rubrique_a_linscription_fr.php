@@ -29,7 +29,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rubrique_reserve_0minirezo'=>"L'espace privé de ce site est ouvert aux visiteurs, après inscription. Une fois enregistré, vous pourrez consulter les articles en cours de rédaction, proposer des articles et participer à tous les forums. Vous disposerez également d'une rubrique réservée où vous pourrez poster vos articles.",
 	'rubrique_reserve_1comite'=>"L'espace privé de ce site est ouvert aux visiteurs, après inscription. Une fois enregistré, vous pourrez consulter les articles en cours de rédaction, proposer des articles et participer à tous les forums. Vous disposerez également d'une rubrique réservée où vous pourrez proposer vos articles.",
 	'rubrique_reserve_0minirezo_on'=>"L'espace privé de ce site est ouvert aux visiteurs, après inscription. Une fois enregistré, vous disposerez d'une rubrique réservée où vous pourrez poster vos articles.",
-	'rubrique_reserve_1comite_on'=>"L'espace privé de ce site est ouvert aux visiteurs, après inscription. Une fois enregistré, vous disposerez d'une rubrique réservée où vous pourrez proposer vos articles."
+	'rubrique_reserve_1comite_on'=>"L'espace privé de ce site est ouvert aux visiteurs, après inscription. Une fois enregistré, vous disposerez d'une rubrique réservée où vous pourrez proposer vos articles.",
+	'pas_autoriser_rubriquer_creerarticledans'=>'Vous n\'êtes pas pas autorisé à créer un article dans cette rubrique'
 	
 	
 );

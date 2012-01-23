@@ -33,6 +33,11 @@
        <nom>formulaire_charger</nom>
        <inclure>rubrique_a_linscription.php</inclure>
    	</pipeline>
+   	<pipeline>
+       <nom>formulaire_verifier</nom>
+       <inclure>rubrique_a_linscription.php</inclure>
+   	</pipeline>
+
 	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>autoriser_rubrique_a_linscription.php</inclure>
