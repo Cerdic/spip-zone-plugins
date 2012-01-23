@@ -23,23 +23,14 @@ function exec_edit_pret(){
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
-		$data = !$id_pret ? '' : sql_fetsel('*', 'spip_asso_prets', "id_pret=$id_pret");
-		if ($data) {
-			$id_ressource=intval($data['id_ressource']);
-			$duree=$data['duree'];
-			$id_emprunteur=$data['id_emprunteur'];
-			$commentaire_sortie=$data['commentaire_sortie'];
-			$commentaire_retour=$data['commentaire_retour'];
-			$date_retour=$data['date_retour'];
-			$date_sortie=$data['date_sortie'];
+		if ($id_pret) {
+//			$id_ressource = intval($data['id_ressource']);
 			$action = 'modifier';
 			$texte = _T('asso:bouton_modifier');
 		} else {
+			$id_ressource = intval($id_pret);
 			$action = 'ajouter';
-			$id_ressource= $id_pret;
 			$texte = _T('asso:bouton_ajoute');
-			$date_retour=$date_sortie=date('Y-m-d');
-			$id_emprunteur=$commentaire_sortie=$commentaire_retour='';
 		}
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -64,28 +55,11 @@ function exec_edit_pret(){
 		echo debut_droite('', true);
 
 		echo recuperer_fond("prive/editer/editer_asso_prets", array (
-			'id_pret' => $id_pret,
 			'id_ressource' => $id_ressource,
+			'id_pret' => $id_pret,
 		));
 
-/**
-		$query = sql_select("*", "spip_asso_comptes", "id_journal=$id_pret ");
-		while($data = sql_fetch($query)) {
-			$journal=$data['journal'];
-			$montant=$data['recette'];
-		}
-		if( $action=="ajouter" ){
-			$montant=$pu;
-			$date_sortie=date('Y-m-d');
-		}
-
-
-//... formulaire ...
-
-
-		echo redirige_action_post($action .'_prets', $id_pret, 'prets', "id=$id_ressource", $res);
-**/
 		echo fin_page_association();
-		}
 	}
+}
 ?>

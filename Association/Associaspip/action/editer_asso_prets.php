@@ -19,32 +19,28 @@ function action_editer_asso_prets()
 {
 
     $securiser_action = charger_fonction('securiser_action', 'inc');
-    $id_pret=$securiser_action();
-
-    include_spip('base/association');
+    $id_pret = $securiser_action();
 
     $id_compte = intval(_request('id_compte'));
     $id_ressource = intval(_request('id_ressource'));
     $id_emprunteur = intval(_request('id_emprunteur'));
     $date_sortie = _request('date_sortie');
-    $date_retour = _request('date_retour'));
+    $date_retour = _request('date_retour');
     $duree = association_recupere_montant(_request('duree'));
     $montant = association_recupere_montant(_request('montant'));
     $commentaire_sortie = _request('commentaire_sortie');
     $commentaire_retour = _request('commentaire_retour');
     $statut = _request('statut');
     $journal = _request('journal');
-	$justification='[pret n&deg; '.$id_pret.'->pret'.$id_pret.'] - '.$id_emprunteur;
-	$recette=$quantite*$prix_vente;
 
+    include_spip('base/association');
     if ($id_pret) { /* modification */
 	prets_modifier($duree, $date_sortie, $date_retour, $id_emprunteur, $commentaire_sortie, $id_pret, $journal, $montant);
     } else { /* ajout */
-	$id_vente = prets_insert($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $commentaire_sortie,$commentaire_retour);
-
+	$id_pret = prets_ajouter($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $commentaire_sortie,$commentaire_retour);
     }
 
-    return array($id_vente, '');
+    return array($id_pret, '');
 }
 
 function prets_modifier($duree, $date_sortie, $date_retour, $id_emprunteur, $commentaire_sortie, $id_pret, $journal, $montant)
@@ -64,7 +60,7 @@ function prets_modifier($duree, $date_sortie, $date_retour, $id_emprunteur, $com
     // mettre a jour les destinations comptables
 }
 
-function prets_insert($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $commentaire_sortie,$commentaire_retour)
+function prets_ajouter($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $commentaire_sortie,$commentaire_retour)
 {
     $id_pret = sql_insertq('spip_asso_prets', array(
 	'id_ressource' => $id_ressource,
@@ -80,7 +76,7 @@ function prets_insert($id_ressource, $id_emprunteur, $date_sortie, $duree, $date
 	    'date' => $date_sortie,
 	    'journal' => $journal,
 	    'recette' => $montant,
-	    'justification' => _T('asso:pret_nd').$id_ressource.'/'.$id_pret,
+	    'justification' => _T('asso:pret_nd')."$id_ressource-$id_emprunteur/$id_pret",
 	    'imputation' => $GLOBALS['association_metas']['pc_prets'],
 	    'id_journal' => $id_pret
 	));

@@ -12,31 +12,37 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/editer');
+include_spip('inc/association_comptabilite');
 
-function formulaires_editer_asso_prets_charger_dist($id_pret,  $id='')
+function formulaires_editer_asso_prets_charger_dist($id_pret='')
 {
 	/* cet appel va charger dans $contexte tous les champs de la table spip_asso_prets associes a l'id_pret passe en param */
+	$id_pret = intval(_request('id_pret'));
 	$contexte = formulaires_editer_objet_charger('asso_prets', $id_pret, '', '',  generer_url_ecrire('prets'), '');
 
-	if (!$id_pret OR $contexte['agir']=='ajouter') { /* si c'est une nouvelle operation, on charge la date d'aujourd'hui, charge un id_compte et journal null, le statut et le prix de location de base */
+	if (!$id_pret) { /* si c'est une nouvelle operation, on charge la date d'aujourd'hui, charge un id_compte et journal null, le statut et le prix de location de base */
 		$contexte['date_sortie'] = $contexte['date_retour'] = date('Y-m-d');
+		$contexte['commentaire_sortie'] = $contexte['commentaire_retour'] = '';
 		$id_compte = $journal = '';
-		$id_ressource = _request('id');
-		$ressource = sql_fetsel("pu,statut", "spip_asso_ressources", "id_ressource=$id_ressource");
-		$contexte['statut']=$ressource['statut'];
-		$contexte['montant']=$ressource['pu'];
+		$contexte['id_ressource'] = intval(_request('id_ressource'));;
+		$ressource = sql_fetsel("pu,statut", "spip_asso_ressources", "id_ressource=$contexte[id_ressource]");
+		$contexte['statut'] = $ressource['statut'];
+		$montant = $ressource['pu'];
 	} else { /* sinon on recupere l'id_compte correspondant et le journal dans la table des comptes */
 //		$contexte['date_retour'] = date('Y-m-d');
-		$comptes = sql_fetsel("id_compte,journal", "spip_asso_comptes", "imputation=".$GLOBALS['association_metas']['pc_prets']." AND id_journal=$id_pret");
+		$comptes = sql_fetsel("id_compte,journal,recette", "spip_asso_comptes", "imputation=".$GLOBALS['association_metas']['pc_prets']." AND id_journal=$id_pret");
 		$id_compte = $comptes['id_compte'];
 		$journal = $comptes['journal'];
+		$montant = $comptes['recette'];
 	}
 
-	/* ajout du journal qui ne se trouve pas dans la table asso_prets mais asso_comptes et n'est donc pas charge par editer_objet_charger */
+	/* ajout du journal et du montant qui ne se trouvent pas dans la table asso_prets et ne sont donc pas charges par editer_objet_charger */
 	$contexte['journal'] = $journal;
+	$contexte['montant'] = $montant;
 
-	/* on concatene au _hidden inserer dans $contexte par l'appel a formulaire_editer_objet l'id_compte qui sera utilise dans l'action editer_asso_dons */
+	/* on concatene au _hidden inseres dans $contexte par l'appel a formulaire_editer_objet les id_compte et id_ressource qui seront utilises dans l'action editer_asso_prets */
 	$contexte['_hidden'] .= "<input type='hidden' name='id_compte' value='$id_compte' />";
+	$contexte['_hidden'] .= "<input type='hidden' name='id_ressource' value='$contexte[id_ressource]' />";
 
 	/* si id_emprunteur est egal a 0, c'est que le champ est vide, on ne prerempli rien */
 	if (!$contexte['id_emprunteur'])
@@ -49,7 +55,6 @@ function formulaires_editer_asso_prets_charger_dist($id_pret,  $id='')
 	// on ajoute les metas de classe_banques et destinations
 	$contexte['classe_banques'] = $GLOBALS['association_metas']['classe_banques'];
 	if ($GLOBALS['association_metas']['destinations']) {
-		include_spip('inc/association_comptabilite');
 		$contexte['destinations_on'] = true;
 		/* on recupere les destinations associes a id_compte */
 		$dest_id_montant = association_liste_destinations_associees($id_compte);
@@ -67,20 +72,19 @@ function formulaires_editer_asso_prets_charger_dist($id_pret,  $id='')
 	return $contexte;
 }
 
-function formulaires_editer_asso_ressources_verifier_dist($id_pret='')
+function formulaires_editer_asso_prets_verifier_dist($id_pret)
 {
 	$erreurs = array();
 
 	/* on verifie que montant et duree ne soient pas negatifs */
-	if (association_recupere_montant(_request('montant')<0))
+	if (association_recupere_montant(_request('montant'))<0)
 		$erreurs['montant'] = _T('asso:erreur_montant');
-	if (association_recupere_montant(_request('duree')<0))
+	if (association_recupere_montant(_request('duree'))<0)
 		$erreurs['duree'] = _T('asso:erreur_montant');
 
 	/* verifier si on a un numero d'adherent qu'il existe dans la base */
-	$id_emprunteur = _request('id_emprunteur');
-	if ($id_emprunteur != '') {
-		$id_emprunteur = intval($id_emprunteur);
+	$id_emprunteur = intval(_request('id_emprunteur'));
+	if ($id_emprunteur != 0) {
 		if (sql_countsel('spip_asso_membres', "id_auteur=$id_emprunteur")==0) {
 			$erreurs['id_emprunteur'] = _T('asso:erreur_id_adherent');
 		}
@@ -103,9 +107,8 @@ function formulaires_editer_asso_ressources_verifier_dist($id_pret='')
 	return $erreurs;
 }
 
-function formulaires_editer_asso_ressources_traiter($id_pret='')
+function formulaires_editer_asso_prets_traiter($id_pret)
 {
-	$action = _request('agir');
 	return formulaires_editer_objet_traiter('asso_prets', $id_pret, '', '',  generer_url_ecrire('prets'), '');
 }
 ?>
