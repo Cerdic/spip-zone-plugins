@@ -2,7 +2,7 @@
 	<nom>Dictionnaires</nom>
 	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<version_base>0.1.0</version_base>
 	<etat>dev</etat>
 	<description>Permet la création de dictionnaires regroupant des définitions. Les termes définis sont automatiquement détectés dans les textes du site et il est alors possible de les insérer dans le HTML du texte de manière accessible.</description>
@@ -63,6 +63,7 @@
 
 	<necessite id="SPIP" version="[2.1.12;]" />
 	<necessite id="spip_bonux" version="[2.2.17;]" />
-	<necessite id="queue" version="[0.6.5;]" />
+<!--	<necessite id="queue" version="[0.6.5;]" />-->
 	<necessite id="saisies" version="[1.20.0;]" />
+	<necessite id="afficher_objets" version="[1.2.1;]" />
 </plugin>

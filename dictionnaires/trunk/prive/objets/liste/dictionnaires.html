@@ -6,14 +6,14 @@
 }})
 ]<B_liste_dictionnaires>
 #ANCRE_PAGINATION
-<div class="liste-objets dictionnaires">
-<table class='spip liste'>
+<div class="liste-elements liste-objets dictionnaires">
+<table class="spip liste">
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{dictionnaire:info_1_dictionnaire,dictionnaire:info_nb_dictionnaires}})</strong></caption>]
 	<thead>
-		<tr class='first_row'>
-			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
-			<th class='titre principale' scope='col'>[(#TRI{titre,<:dictionnaire:champ_titre_label:>,ajax})]</th>
-			<th class='id' scope='col'>[(#TRI{id_dictionnaire,<:info_numero_abbreviation:>,ajax})]</th>
+		<tr class="first_row">
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class="titre principale" scope="col">[(#TRI{titre,<:dictionnaire:champ_titre_label:>,ajax})]</th>
+			<th class="id" scope="col">[(#TRI{id_dictionnaire,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -24,10 +24,10 @@
 		{pagination #ENV{pagination,10}}
 	>
 		<tr class="[(COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class='statut'>[(#ACTIF|?{<:dictionnaire:champ_actif_oui:>, <:dictionnaire:champ_actif_non:>})]</td>
-			<td class='titre principale'><a href="[(#ID_DICTIONNAIRE|generer_url_entite{dictionnaire})]"
-				title="<:info_numero_abbreviation|attribut_html:> #ID_DICTIONNAIRE">[(#RANG). ]#TITRE</a></td>
-			<td class='id'>[(#AUTORISER{modifier,dictionnaire,#ID_DICTIONNAIRE}|?{
+			<td class="statut">[(#ACTIF|?{<:dictionnaire:champ_actif_oui:>, <:dictionnaire:champ_actif_non:>})]</td>
+			<td class="titre principale"><a href="[(#ID_DICTIONNAIRE|generer_url_entite{dictionnaire})]"
+				title="<:info_numero_abbreviation|attribut_html:> #ID_DICTIONNAIRE">[(#RANG). ]#TITRE <BOUCLE_nb_definitions(DEFINITIONS){id_dictionnaire}{tout}> </BOUCLE_nb_definitions>(<:definition:info_nb_definitions{nb=#TOTAL_BOUCLE}:>)</B_nb_definitions></a></td>
+			<td class="id">[(#AUTORISER{modifier,dictionnaire,#ID_DICTIONNAIRE}|?{
 				<a href="[(#URL_ECRIRE{dictionnaire_edit,id_dictionnaire=#ID_DICTIONNAIRE})]">#ID_DICTIONNAIRE</a>,
 				#ID_DICTIONNAIRE
 			})]</td>
@@ -38,5 +38,5 @@
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_liste_dictionnaires>[
-<div class="liste-objets dictionnaires caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+<div class="liste-elements liste-objets dictionnaires caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
 ]<//B_liste_dictionnaires>
