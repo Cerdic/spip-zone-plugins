@@ -32,7 +32,7 @@ function dictionnaires_upgrade($nom_meta_version_base, $version_cible){
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		}
 		
-		if (version_compare($version_actuelle,'0.2.0','<')){
+		if (version_compare($version_actuelle,$version_cible='0.2.0','<')){
 			include_spip('base/abstract_sql');
 			
 			// On ajoute un champ pour choisir le type par défaut dans un dictionnaire
