@@ -26,7 +26,7 @@ function exec_changestatut(){
 	$id_auteur = intval($GLOBALS['visiteur_session']['id_auteur']) ;
 	$auteur = sql_fetsel("*", "spip_auteurs", "id_auteur=$id_auteur");
 
-	spip_log("id_auteur : $id_auteur - statut_demande : $statut_demande");
+	spip_log("exec_changestatut id_auteur : $id_auteur - statut_demande : $statut_demande","changestatut");
 	
 	$erreur=false;
 	switch($statut_demande){

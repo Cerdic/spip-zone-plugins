@@ -1,0 +1,26 @@
+<paquet
+	prefix="changestatut"
+	categorie="outil"
+	version="0.3.0"
+	etat="test"
+	compatibilite="[2.1.0;3.0.99]"
+	logo="prive/themes/spip/images/changestatut-32.png"
+	schema="0.1"
+	documentation="http://www.spip-contrib.net/Change-Statut"
+>	
+
+	<nom>Change Statut</nom>
+	<!-- Modifier, le temps d'un test, son statut de webmestre -->
+
+	<auteur>Yffic</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/changestatut_tables.php" />
+	<pipeline nom="header_prive" inclure="changestatut_prive_pipelines.php" />
+	<pipeline nom="autoriser" inclure="inc/changestatut_autoriser.php" />
+
+	<menu nom="versredacteur21" titre="changestatut:versredacteur" parent="outils_rapides" icone="images/changestatut_versredacteur-16.png" action="changestatut" parametres="statut=redacteur" />
+	<menu nom="versadmin21" titre="changestatut:versadmin" parent="outils_rapides" icone="images/changestatut_versadmin-16.png" action="changestatut" parametres="statut=admin" />
+	<menu nom="verswebmestre21" titre="changestatut:verswebmestre" parent="outils_rapides" icone="images/changestatut_verswebmestre-16.png" action="changestatut" parametres="statut=webmestre" />
+</paquet>
