@@ -6,6 +6,27 @@ function autoriser_rubrique_a_linscription($faire, $type, $id, $qui,  $opt){
 		return autoriser_configurer_dist($faire,$type,$id,$qui,$opt);	
 	}
 }
+
+function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
+	
+	include_spip('inc/autoriser');
+	$espace_prive_creer 	= unserialize(lire_meta('rubrique_a_linscription'));
+	$espace_prive_creer	= $espace_prive_creer['espace_prive_creer'];
+	$resultat = sql_fetsel('rubrique_a_linscription','spip_auteurs','id_auteur='.$qui['id_auteur']);
+	if (!$espace_prive_creer or is_null($resultat['rubrique_a_linscription'])){
+		return $id AND autoriser('voir','rubrique',$id);
+	}
+	else {
+		
+		if ($resultat['rubrique_a_linscription'] == $id){
+			return true;	
+		}
+		else{
+			return false;
+		}
+	}
+}
+
 function autoriser_voir($faire, $type, $id, $qui, $opt) {
 
 	include_spip('inc/autoriser');
