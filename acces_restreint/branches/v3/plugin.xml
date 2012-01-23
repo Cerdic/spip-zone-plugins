@@ -10,7 +10,7 @@
 	<etat>stable</etat>
 	<slogan>
 	<multi>
-	[fr]Gestion de zones d'acc&#232s restreint
+	[fr]Gestion de zones d'acc&#232;s restreint
 	[es]Gesti&#243;n de zonas de acceso restringido
 	[de]Verwaltung von Bereichen mit Zugangskontrolle
 	</multi>
@@ -19,8 +19,8 @@
 	<multi>
 	[fr]
 _ Chaque zone contient des rubriques.
-_ Les auteurs peuvent &#234tre associ&#233s &#224 des zones pour avoir le droit d'y acc&#232der.
-_ Toutes les boucles natives de SPIP sont surcharg&#232es pour en filtrer les r&#232sultats en fonction des droits du visiteur.
+_ Les auteurs peuvent &#234;tre associ&#233;s &#224; des zones pour avoir le droit d'y acc&#232;der.
+_ Toutes les boucles natives de SPIP sont surcharg&#232;es pour en filtrer les r&#232;sultats en fonction des droits du visiteur.
 	[es]
 _ Cada zona contiene secciones.
 _ Los autores podr&#225;n ser asociados a ciertas zonas restringidas para tener derechos de acceso a ellas.
