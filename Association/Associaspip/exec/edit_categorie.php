@@ -22,20 +22,6 @@ function exec_edit_categorie(){
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
-		$id=intval(_request('id'));
-
-		$data = !$id ? '' : sql_fetsel("*", "spip_asso_categories", "id_categorie=$id");
-		if ($data) {
-			$valeur=$data['valeur'];
-			$libelle=$data['libelle'];
-			$duree=$data['duree'];
-			$cotisation=$data['cotisation'];
-			$commentaires=$data["commentaires"];
-			$action = 'modifier';
-		} else {
-			$valeur=$libelle=$duree=$cotisation=$commentaires='';
-			$action = 'ajouter';
-		}
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:categories_de_cotisations')) ;
