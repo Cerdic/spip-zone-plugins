@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Formidable</nom>
 	<slogan>G&#233;n&#233;rateur de formulaires</slogan>
-	<auteur>RastaPopoulos</auteur>
+	<auteur>RastaPopoulos, [Les Développements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
 	<version>0.6.5</version>
 	<version_base>0.5.1</version_base>
