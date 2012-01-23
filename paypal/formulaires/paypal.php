@@ -17,13 +17,15 @@ function formulaires_paypal_charger($options = array()) {
 	
 	$conf = lire_config('paypal/');
 	$envr = $conf['environnement'];
+	$confsup = lire_config('paypal_api_'.$envr);
+	
 	
 	$valeurs = array(
-		'identifiant_vendeur' => $conf['api'][$envr]['account'],
+		'identifiant_vendeur' => $confsup['account'],
 		'soumission' => $conf['soumission'],
 		'currency_code' => $conf['currency_code'],
 	);
-
+	
 	$valeurs = array_merge($valeurs, $options);
 	
 	return $valeurs;
