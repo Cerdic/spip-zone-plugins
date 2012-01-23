@@ -4,7 +4,7 @@
 	<auteur>RastaPopoulos</auteur>
 	<licence>GPL v3</licence>
 	<version>1.0.0</version>
-	<version_base>0.3</version_base>
+	<version_base>0..5.1</version_base>
 	<etat>dev</etat>
 	<description>Cr&#233;ation de formulaires avec une interface graphique et configuration des traitements associ&#233;s (envoyer par courriel, enregistrer les r&#233;ponses, etc).</description>
 	<lien>http://www.spip-contrib.net/Formidable-le-generateur-de</lien>

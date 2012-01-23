@@ -24,31 +24,30 @@ function formidable_upgrade($nom_meta_version_base, $version_cible){
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		}
 		
-		/*if (version_compare($version_actuelle,'0.5','<')){
+		// Ajout du choix de ce qu'on affiche à la fin des traitements
+		if (version_compare($version_actuelle,$version_cible='0.4.0','<')){	
 			include_spip('base/create');
-			include_spip('base/abstract_sql');
-			
-			// Modification de formidable
-			sql_alter('');
-						
-			// On change la version
-			echo "Mise à jour du plugin formidable en version 0.5<br/>";
-			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
-		}*/
-		
-		if (version_compare($version_actuelle,'0.5.7','<')){	
-			include_spip('base/create');
-      maj_tables('spip_formulaires');
-			
-			echo "Mise à jour du plugin formidable en version 0.5.7<br/>";
+			maj_tables('spip_formulaires');
+
+			echo "Mise à jour du plugin formidable en version 0.4.0<br/>";
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		}
 		
-		if (version_compare($version_actuelle,'0.6.5','<')){	
+		// Ajout d'une URL de redirection
+		if (version_compare($version_actuelle,$version_cible='0.5.0','<')){	
 			include_spip('base/create');
-      maj_tables('spip_formulaires');
+			maj_tables('spip_formulaires');
 			
-			echo "Mise à jour du plugin formidable en version 0.6.5<br/>";
+			echo "Mise à jour du plugin formidable en version 0.5.0<br/>";
+			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
+		}
+		
+		// Modif du type du message de retour pour pouvoir mettre plus de chose
+		if (version_compare($version_actuelle,$version_cible='0.5.1','<')){	
+			include_spip('base/abstract_sql');
+			sql_alter('TABLE spip_formulaires CHANGE message_retour message_retour text NOT NULL default ""');
+			
+			echo "Mise à jour du plugin formidable en version 0.5.1<br/>";
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		}
 	}
