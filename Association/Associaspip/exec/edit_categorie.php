@@ -44,4 +44,5 @@ function exec_edit_categorie(){
 		echo fin_page_association();
 	}
 }
+
 ?>

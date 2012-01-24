@@ -68,4 +68,5 @@ function exec_categories(){
 		echo fin_page_association();
 	}
 }
+
 ?>

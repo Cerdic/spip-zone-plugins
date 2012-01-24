@@ -12,11 +12,12 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_editer_asso_categories()
+function action_editer_asso_categories_dist()
 {
 
     $securiser_action = charger_fonction('securiser_action', 'inc');
     $id_categorie = $securiser_action();
+    $erreur = '';
 
     include_spip('inc/association_comptabilite');
     $libelle = _request('libelle');
@@ -30,9 +31,11 @@ function action_editer_asso_categories()
 	categorie_modifier($id_categorie, $cotisation, $valeur, $duree, $libelle, $commentaires);
     } else { /* ajout */
 	$id_categorie = categorie_ajouter($cotisation, $valeur, $duree, $libelle, $commentaires);
+	if (!$id_categorie)
+	    $erreur = _T('Erreur_BdD_ou_SQL');
     }
 
-    return array($id_categorie, '');
+    return array($id_categorie, $erreur);
 }
 
 function categorie_modifier($id_categorie, $cotisation, $valeur, $duree, $libelle, $commentaires)
@@ -55,6 +58,7 @@ function categorie_ajouter($cotisation, $valeur, $duree, $libelle, $commentaires
 	'valeur' => $valeur,
 	'commentaires' => $commentaires
     ));
+    return $id_categorie;
 }
 
 ?>
