@@ -23,8 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_montant' => 'Množstvo',
 	'commande_nouvelle' => 'Nová objednávka',
 	'commande_numero' => 'Objednávka č. ',
-	'commande_reference' => 'Značka',
-	'commande_reference_numero' => 'Značka č. ',
+	'commande_reference' => 'Číslo',
+	'commande_reference_numero' => 'Č. objednávky ',
 	'commande_statut' => 'Stav',
 	'configurer_titre' => 'Nastaviť zásuvný modul Commande',
 	'confirmer_supprimer_commande' => 'Môžete potvrdiť odstránenie tejto objednávky?',
@@ -44,17 +44,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'facture_date' => 'Dátum: <span>@date@</span>',
 	'facture_num' => 'Faktúra č. <span>@num@</span>',
-	'facture_titre' => 'Facture', # NEW
+	'facture_titre' => 'Faktúra',
 
 	// I
 	'info_numero_commande' => 'OBJEDNÁVKA ČÍSLO:',
 	'info_toutes_commandes' => 'Všetky objednávky',
 
 	// L
-	'label_recherche' => 'Rechercher', # NEW
+	'label_recherche' => 'Vyhľadávať',
 
 	// M
-	'merci_de_votre_commande' => 'Nous vous remercions de votre commande @ref@', # NEW
+	'merci_de_votre_commande' => 'Ďakujeme Vám za objednávku č. @ref@',
 	'modifier_commande_statut' => 'Táto objednávka je:',
 	'montant' => 'Množstvo',
 
@@ -103,13 +103,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_attente' => 'Čaká',
 	'statut_encours' => 'Vybavuje sa',
 	'statut_envoye' => 'Odoslaná',
-	'statut_erreur' => 'Erreur', # NEW
+	'statut_erreur' => 'Chyba',
 	'statut_label' => 'Stav:',
 	'statut_partiel' => 'Čiastočne zaplatená',
 	'statut_paye' => 'Zaplatená',
 	'statut_retour' => 'Vrátená',
 	'statut_retour_partiel' => 'Čiastočne vrátiť',
-	'supprimer' => 'Supprimer', # NEW
+	'supprimer' => 'Odstrániť',
 
 	// U
 	'une_commande_sur' => 'Vaša objednávka – @nom@',
