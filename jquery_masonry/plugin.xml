@@ -3,7 +3,7 @@
 	<slogan>Le plugin qui range vos blocs</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.3.01</version>
+	<version>0.3.1</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<description>
@@ -17,6 +17,10 @@
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>jquerymasonry_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		 <nom>autoriser</nom>
+		 <inclure>inc/jquerymasonry_autoriser.php</inclure>
 	</pipeline>
 	<bouton id='jquerymasonry' parent='configuration'>
 		<icone>prive/themes/spip/images/jquerymasonry-24.png</icone>
