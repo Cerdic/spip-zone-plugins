@@ -4,13 +4,13 @@
 		{tableau #GET{boutons}}
 		{cle=menu_accueil}><li [class="(#VAL{first}|unique)"]><a 
 			href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
-			id="bando1_#CLE">[(#VALEUR{libelle}|_T)]</a><span></span>
+			id="bando1_#CLE">[(#VALEUR{libelle}|_T)]</a><span>&nbsp;</span>
 	<ul><li><p><:espace_prive:></p></li></ul>
 	</li></BOUCLE_accueil>
 	<li class="minibando_sep">&nbsp;</li>
 	<B_creer>
 	<li id="minibando_outils_rapides">
-		<a href="#"><:minibando:titre_outils_rapides:></a><span></span>
+		<a href="#"><:minibando:titre_outils_rapides:></a><span>&nbsp;</span>
 		<ul>
 			<li><p><:minibando:titre_outils_rapides:></p></li>
 			<BOUCLE_creer(POUR)
@@ -30,20 +30,20 @@
 		{cle!=outils_collaboratifs}>[<li (#CLE|=={menu_accueil}|ou{#VALEUR{sousmenu}}|?{' ',#SET{li,''}}) #SET{li,'</li>'}
 			[class="(#VAL{first}|unique)"]><a
 			href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
-			id="bando1_#CLE">[(#VALEUR{libelle}|_T)]</a><span></span>]<B_sous><ul><li><p>[(#VALEUR{libelle}|_T)]</p></li><BOUCLE_sous(POUR)
+			id="bando1_#CLE">[(#VALEUR{libelle}|_T)]</a><span>&nbsp;</span>]<B_sous><ul><li><p>[(#VALEUR{libelle}|_T)]</p></li><BOUCLE_sous(POUR)
 			{tableau #VALEUR{sousmenu}}>[<li><a
 					href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
 					class="bando2_#CLE">(#VALEUR{libelle}|_T)</a></li>]</BOUCLE_sous></ul></B_sous>#GET{li}</BOUCLE_boutons>
 	<li class="minibando_sep">&nbsp;</li>
 	[(#ENV{objet}|oui)
 		[<li id="minibando_bouton_modifier"><a href="[(#ENV{voir_#ENV{objet}})]" id="voir_#ENV{objet}">
-			[(#ENV{objet}|objet_info{texte_objet}|_T)]((#ENV{id_objet}))</a><span></span><ul><li><p><:bouton_modifier:> ([(#ENV{objet}|objet_info{texte_objet}|_T)] [(#ENV{id_objet})])</p></li></ul></li>]
+			[(#ENV{objet}|objet_info{texte_objet}|_T)]((#ENV{id_objet}))</a><span>&nbsp;</span><ul><li><p><:bouton_modifier:> ([(#ENV{objet}|objet_info{texte_objet}|_T)] [(#ENV{id_objet})])</p></li></ul></li>]
 	]<li id="minibando_bouton_recalcul"><a href="[(#SELF|parametre_url{var_mode,#ENV{calcul}})]" id="var_mode">
-		<:admin_recalculer:>[(#ENV{use_cache})]</a><span></span><ul><li><p><:admin_recalculer:></p></li></ul></li>
+		<:admin_recalculer:>[(#ENV{use_cache})]</a><span>&nbsp;</span><ul><li><p><:admin_recalculer:></p></li></ul></li>
 	<!--extra-->[<a href="(#ENV{preview})" id="preview"><:previsualisation:></a>][(#SESSION{statut}|=={0minirezo}|oui)
 	<li class="minibando_sep">&nbsp;</li>
 	<li id="minibando_bouton_debug"><a href="#">
-		<:minibando:titre_debug:></a><span></span><ul><li><p><:minibando:titre_debug:></p></li>[
+		<:minibando:titre_debug:></a><span>&nbsp;</span><ul><li><p><:minibando:titre_debug:></p></li>[
 	<li><a href="(#ENV{debug})" id="debug"><:admin_debug:></a></li>][
 	<li><a href="(#ENV{analyser})" id="analyser"><:analyse_xml:>[ ((#ENV{xhtml_error}))]</a></li>]
 		<li><a href="[(#SELF|parametre_url{var_mode,debug})]"><:minibando:mode_debug:></a></li>

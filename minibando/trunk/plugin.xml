@@ -1,7 +1,7 @@
 <plugin>
 	<nom>minibando</nom>
 	<auteur>b_b</auteur>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<etat>stable</etat>
 	<prefix>minibando</prefix>
 	<slogan>Un minibando pour un maximum de fonctionnalit&#233;s !</slogan>
