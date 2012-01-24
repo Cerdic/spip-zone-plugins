@@ -41,9 +41,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url_protocole_exact' => 'Zadaná adresa <em>(@url@)</em> sa nezačína s platným protokolom (napr. http://)',
 
 	// N
-	'normaliser_option_date' => 'Normaliser la date ?', # NEW
-	'normaliser_option_date_aucune' => 'Non', # NEW
-	'normaliser_option_date_en_datetime' => 'Au format «Datetime» (pour SQL)', # NEW
+	'normaliser_option_date' => 'Štandardizovať dátum?',
+	'normaliser_option_date_aucune' => 'Nie',
+	'normaliser_option_date_en_datetime' => 'Vo formáte "Dátum-čas" (pre SQL)',
 
 	// O
 	'option_decimal_nb_decimales_label' => 'Počet desatinných miest',

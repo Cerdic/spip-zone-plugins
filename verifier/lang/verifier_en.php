@@ -41,9 +41,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url_protocole_exact' => 'The address entered <em>(@url@)</em> does not start with a valid protocol (e.g. http://)',
 
 	// N
-	'normaliser_option_date' => 'Normaliser la date ?', # NEW
-	'normaliser_option_date_aucune' => 'Non', # NEW
-	'normaliser_option_date_en_datetime' => 'Au format «Datetime» (pour SQL)', # NEW
+	'normaliser_option_date' => 'Normalize the date?',
+	'normaliser_option_date_aucune' => 'No',
+	'normaliser_option_date_en_datetime' => '"Datetime" format (for SQL)',
 
 	// O
 	'option_decimal_nb_decimales_label' => 'Number of decimal places',
