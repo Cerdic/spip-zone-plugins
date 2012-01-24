@@ -1,5 +1,5 @@
 <?php
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
 function formulaires_paypal_charger($options = array()) {
 	/*
 	$options = array(
