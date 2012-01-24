@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'configurer_taxe_defaut_explication' => 'Zadajte predvolenú daň, ktorá sa použije na výrobky vo forme 0.196 napríklad pre DPH 19,6 % (túto hodnotu potom môžete pri každom výrobku prepísať). Dajte si pozor na to, aby ste nenastavili novú daň v inom zásuvnom module (napríklad Paypal), v opačnom prípade nechajte 0.', # MODIF
+	'configurer_taxe_defaut_explication' => 'Zadajte predvolenú daň na výrobky vo forme 0.196 napríklad pre DPH 19,6 % (túto hodnotu potom môžete pri každom výrobku prepísať).',
 	'configurer_taxe_defaut_label' => 'Predvolená daň',
 	'configurer_titre' => 'Nastavenia výrobkov',
 
