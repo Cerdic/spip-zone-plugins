@@ -12,7 +12,7 @@ function minibando_outils_rapides($boutons, $contexte = array()){
 				. bando_lister_sous_menu($boutons['outils_rapides']->sousmenu,$contexte,'bouton',true)
 				. "</ul>";
 
-	return "<li id='minibando_outils_rapides'>\n<a href='#'>"._T('minibando:titre_outils_rapides')."</a><span></span>$res</li>";
+	return "<li id='minibando_outils_rapides'>\n<a href='#'>"._T('minibando:titre_outils_rapides')."</a><span>&nbsp;</span>$res</li>";
 }
 
 function minibando($boutons, $contexte = array()) {
@@ -32,7 +32,7 @@ function minibando($boutons, $contexte = array()) {
                $bulle_accueil = ($detail->url == 'accueil') ? "<ul><li><p>" . _T('public:espace_prive') . "</p></li></ul>" : '';
                $res .= "<li$first>" . "<a href='$url' id='bando1_$page'>" . _T($detail->libelle) . "</a>";
 					$li_ouvert = true ;
-               $res .= "<span></span>";
+               $res .= "<span>&nbsp;</span>";
                $res .= $bulle_accueil;
                if($first) {
                	$res .= "</li>";
