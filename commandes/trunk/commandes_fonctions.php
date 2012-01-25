@@ -32,18 +32,5 @@ function commandes_id_premier_webmestre()
 	return false;
 }
 
-// Quel est l'email de l'auteur ?
-function commandes_email_auteur($id) {
-	if (
-		intval($id) == $id
-		and $id > 0
-		and $email = sql_getfetsel('email', 'spip_auteurs', 'id_auteur = '.$id)
-	){
-		return $email;
-	}
-	// Sinon rien
-	else
-		return null;
-}
 
 ?>

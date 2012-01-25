@@ -73,4 +73,55 @@ function creer_commande_encours(){
 	return $id_commande;
 }
 
+/*
+ * Envoyer un mail de notification
+ * => On veut envoyer du html pour que le tableau de commandes soit lisible par le client
+ * => On peut avoir un expediteur specifique
+ * => Mais notifications_envoyer_mails() de spip ne peut pas envoyer de mails en html. On ne peut pas non plus y specifier un expediteur.
+ * Donc si les plugins notifications_avancees et Facteur sont presents, on prepare un joli mail en html. Sinon un moche en texte.
+ *
+ * @param string $qui : vendeur ou client
+ * @param string $id_type
+ * @param int $id_commande
+ * @param string $expediteur
+ * @param array $destinataires
+ *
+ */
+function commandes_envoyer_notification( $qui, $id_type, $id_commande, $expediteur, $destinataires){
+	spip_log("commandes_envoyer_notification qui? $qui, id_type $id_type, id_commande $id_commande, expediteur $expediteur, destinataires ".implode(", ", $destinataires),'commandes');
+	
+	notifications_nettoyer_emails($destinataires);
+
+	if(defined('_DIR_PLUGIN_NOTIFAVANCEES') && defined('_DIR_PLUGIN_FACTEUR')) {
+		spip_log("commandes_envoyer_notification via Notifications avancées",'commandes');
+		if( !notifications_envoyer( $destinataires,
+											 "email",
+											 "commande_".$qui,
+											 $id_commande,
+											 $options=array('from'=>$expediteur)))
+			spip_log("commandes_envoyer_notification Erreur d'envoi via Notifications avancées",'commandes');
+	} else {
+		$texte = recuperer_fond("notifications/commande",array($id_type=>$id_commande,
+																				 "id"=>$id_commande,
+																				 "format_envoi"=>"plain",
+																				 "qui"=>$qui));
+		if( $qui == "client" ) {
+			$sujet = _T('commandes:votre_commande_sur', array('nom'=>$GLOBALS['meta']["nom_site"])) ;
+		} else {
+			$sujet = _T('commandes:une_commande_sur', array('nom'=>$GLOBALS['meta']["nom_site"])) ;
+		}
+		// Si un expediteur est impose, on doit utiliser la fonction envoyer_email pour rajouter l'expediteur
+		if($expediteur) {
+			$envoyer_mail = charger_fonction('envoyer_mail','inc');
+			spip_log("commandes_envoyer_notification via $envoyer_mail",'commandes');
+			if( !$envoyer_mail($destinataires, $sujet, $texte, $expediteur))
+				spip_log("commandes_envoyer_notification Erreur d'envoi via $envoyer_mail",'commandes');
+
+		} else {
+			spip_log("commandes_envoyer_notification via notifications_envoyer_mails",'commandes');
+			if( !notifications_envoyer_mails($destinataires, $texte, $sujet))
+				spip_log("commandes_envoyer_notification Erreur d'envoi via notifications_envoyer_mails",'commandes');
+		}
+	}
+}
 ?>

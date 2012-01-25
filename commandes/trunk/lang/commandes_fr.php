@@ -12,6 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adresse_facturation' => 'Adresse de facturation',
 	'adresse_livraison' => 'Adresse de livraison',
 
+	// B
+	'bonjour' => 'Bonjour',
+
 	// C
 	'commande_client' => 'Client',
 	'commande_date' => 'Date',
@@ -35,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_maj_label' => 'Date de mise à jour :',
 	'date_paiement_label' => 'Date de paiement :',
 	'designation' => 'Désignation',
+	'details_commande' => "Détails de commande :",
 
 	// E
 	'etat' => 'État',
@@ -52,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_recherche' => 'Rechercher',
 
 	// M
-	'merci_de_votre_commande' => 'Nous vous remercions de votre commande @ref@',
+	'merci_de_votre_commande' => 'Nous avons bien enregistré votre commande et nous vous remercions de votre confiance.',
 	'modifier_commande_statut' => 'Cette commande est :',
 	'montant' => 'Montant',
 
@@ -72,7 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_expediteur_explication' => 'Choisir l’expéditeur des notifications pour le vendeur et l’acheteur',
 	'notifications_expediteur_label' => 'Expéditeur',
 	'notifications_expediteur_webmaster_label' => 'Choisir un webmestre :',
-	'notifications_explication' => 'Les notifications permettent d’envoyer des emails suite aux changements de statut des commandes : En attente de validation, en cours, envoyée, partiellement payée, payée, retournée, retour partiel',
+	'notifications_explication' => 'Les notifications permettent d’envoyer des emails suite aux changements de statut des commandes : En attente de validation, en cours, envoyée, partiellement payée, payée, retournée, retour partiel. Cette fonctionnalité nécessite le plugin Notifications Avancées.',
 	'notifications_parametres' => 'Paramètres des notifications',
 	'notifications_quand_explication' => 'Quel(s) changement(s) de statut déclenche(nt) l’envoi d’une notification ?',
 	'notifications_quand_label' => 'Déclenchement',
@@ -92,6 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'parametres_duree_vie_label' => 'Durée de vie',
 
 	// R
+	'recapitulatif' => 'Récapitulatif de commande :',
 	'reference' => 'Référence',
 	'reference_label' => 'Référence :',
 	'reference_ref' => 'Référence @ref@',
@@ -111,9 +116,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// U
 	'une_commande_sur' => 'Une commande sur @nom@',
+	'une_commande_de' => 'Une commande de : ',
 
 	// V
-	'votre_commande_sur' => 'Votre commande sur @nom@'
+	'votre_commande_sur' => '@nom@ : votre commande'
 );
 
 ?>

@@ -154,7 +154,7 @@ function instituer_commande($id_commande, $c, $calcul_details=true){
 		//if (autoriser('modifier', 'commande', $id_commande))
 			$statut = $champs['statut'] = $s;
 		//else
-		//	spip_log("editer_commande $id_commande refus " . join(' ', $c),'commande');
+		//	spip_log("editer_commande $id_commande refus " . join(' ', $c),'commandes');
 
 		// Si on doit changer la date explicitement
 		if ($d){
@@ -225,12 +225,25 @@ function instituer_commande($id_commande, $c, $calcul_details=true){
 	);
 	
 	// Notifications
-	if ($notifications = charger_fonction('notifications', 'inc', true)) {
-		$notifications('commande_instituer', $id_commande,
-			array('statut' => $statut, 'statut_ancien' => $statut_ancien, 'date'=>$date)
-		);
+	include_spip('inc/config');
+	$config = lire_config('commandes');
+	if (($statut != $statut_ancien) &&
+		 ($config['activer']) &&
+		 (in_array($statut,$config['quand'])) &&
+		 ($notifications = charger_fonction('notifications', 'inc', true))
+		) {
+
+		// Determiner l'expediteur
+		$options = array();
+		if( $config['expediteur'] != "facteur" )
+			$options['expediteur'] = $config['expediteur_'.$config['expediteur']];
+
+		// Envoyer au vendeur et au client
+		$notifications('commande_vendeur', $id_commande, $options);
+		if($config['client'])
+			$notifications('commande_client', $id_commande, $options);
 	}
-	
+
 	return '';
 }
 
