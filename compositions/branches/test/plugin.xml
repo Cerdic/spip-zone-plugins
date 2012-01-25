@@ -38,6 +38,6 @@ Les rubriques peuvent aussi se voir attribuer un article d'accueil. Les champs i
 		<nom>pre_insertion</nom>
 		<inclure>compositions_pipeline.php</inclure>
 	</pipeline>
- 	<necessite id='SPIP' version='[2.1;]' />
+ 	<necessite id='SPIP' version='[2.1.0;2.1.99]' />
 	<necessite id='spip_bonux' version='[1.8.10;]' />
 </plugin>
