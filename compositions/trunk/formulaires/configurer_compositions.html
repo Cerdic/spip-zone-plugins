@@ -17,8 +17,8 @@
 
 			<li class='configurer_chemin_compositions'>
 				<label for="chemin_compositions"><:compositions:label_chemin_compositions:></label>
-				<div class='explication'><:compositions:label_chemin_compositions_details:></div>
-				<input type="text" name="chemin_compositions" value="[(#REM|compositions_chemin|entites_html)]" id="chemin_compositions" class="text" />
+				[(#PLUGIN{z}|ou{#PLUGIN{zcore}}|non)<div class='explication'><:compositions:label_chemin_compositions_details:></div>]
+				<input type="text" name="chemin_compositions" value="[(#REM|compositions_chemin|entites_html)]" id="chemin_compositions" class="text" [(#PLUGIN{z}|ou{#PLUGIN{zcore}}|oui)disabled="true"] />
 			</li>
 			<li class='configurer_styliser_auto'>
 				<label><:compositions:label_styliser:></label>

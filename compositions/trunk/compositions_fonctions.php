@@ -37,7 +37,7 @@ function compositions_chemin(){
 	if (defined('_DIR_PLUGIN_Z') OR defined('_DIR_PLUGIN_ZCORE'))
 		$config_chemin = (isset($GLOBALS['z_blocs'])?reset($GLOBALS['z_blocs']):'contenu').'/';
 
-	if (isset($GLOBALS['meta']['compositions'])){
+	elseif (isset($GLOBALS['meta']['compositions'])){
 		$config = unserialize($GLOBALS['meta']['compositions']);
 		if (isset ($config['chemin_compositions'])){
 			$config_chemin = rtrim($config['chemin_compositions'],'/').'/';
