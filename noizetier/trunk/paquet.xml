@@ -34,10 +34,10 @@
 	<pipeline nom="noizetier_config_export" inclure="noizetier_pipelines.php" />
 	<pipeline nom="noizetier_config_import" inclure="noizetier_pipelines.php" />
 
-	<necessite nom="spip_bonux" compatibilite="[1.8.10;[" />
 	<necessite nom="YAML" compatibilite="[1.4.1;[" />
-	<necessite nom="saisies" compatibilite="[1.8.5;[" />
+	<necessite nom="saisies" compatibilite="[1.20.0;[" />
 	<necessite nom="verifier" />
+
 	<utilise nom="compositions" compatibilite="[2.0.0;[" />
 	<utilise nom="ieconfig" />
 
