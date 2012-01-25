@@ -1,0 +1,28 @@
+[(#REM)
+
+exemple de récupération des hiérarchies d'un mot avec Momo
+
+Fait la liste des hiérarchies d'un mot.
+
+"id_mot" est obligatoire
+
+si "id_groupe" est passé en paramètre alors il affiche préférenciellement la hiérarchie dont un mot de ce groupe est le plus haut (dans cette hiérarchie). On peut aussi passer un paramètre "tableau_id_groupe" qui contient la liste des id_groupe auxquels ont veut que le mot le plus haut appartienne (attention à bien les séparer par des virgules). Dans tous ces cas un id_groupe doit être passé en paramètre. Cf la doc de ?IN: http://www.spip.net/fr_article4010.html
+
+"nombre" est le nombre de hiérarchies retournées. Si nombre=1 alors seule la hiérarchie est retournée, sans la structure de liste.
+
+]
+#SET{les_hierarchies,#MODELE{doublons_hierarchies_mot}{id_mot=#ID_MOT}}
+
+[(#SET{tableau_id_groupe,[(#ENV{tableau_id_groupe}|explode{','}|sinon{#ARRAY}|push{#ID_GROUPE})]})]
+
+[(#ENV{nombre}|!={1}|oui)<ul>]
+<BOUCLE_Mots_identifiant_la_hierarchie(MOTS){id_groupe ?IN #GET{tableau_id_groupe}}{id_mot IN #GET{les_hierarchies}|unserialize|table_valeur{id_mot_hierarchies}}{0,#ENV{nombre,100}}>
+	[(#ENV{nombre}|!={1}|oui)<li><:momo:hierachie_guidee_par{titre=#TITRE}:> ]
+	<BOUCLE_Une_hierarchie(MOTS){id_mot IN #GET{les_hierarchies}|unserialize|table_valeur{hierarchie_#ID_MOT}}{"&nbsp;&rarr; "}>
+		<a href="#URL_MOT" title="<:momo:plus_d_info_sur{titre=#TITRE}|attribut_html:>">#TITRE</a>
+	</BOUCLE_Une_hierarchie>
+	[(#ENV{nombre}|!={1}|oui)</li>]
+</BOUCLE_Mots_identifiant_la_hierarchie>
+[(#ENV{nombre}|!={1}|oui)</ul>]
+
+#FILTRE{trim}

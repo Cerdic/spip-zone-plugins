@@ -7,4 +7,15 @@
 		<:momo:parents_du_mot_ou_des_mots:>
 		[(#MODELE{parents_mot}{id_mot=#ID_MOT})]
 	</li>
+<BOUCLE_Mot_param_ou_hasard(MOTS){id_mot}>
+	<li id="hierarchie_mot">
+		<:momo:hierarchies_mot:>
+		<dl>
+			<dt>#TITRE</dt>
+			<dd>
+				[(#MODELE{hierarchies_mot}{id_mot=#ID_MOT})]
+			</dd>
+		</dl>
+	</li>
+</BOUCLE_Mot_param_ou_hasard>
 </ul>
