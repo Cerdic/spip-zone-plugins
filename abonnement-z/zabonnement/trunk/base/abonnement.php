@@ -16,9 +16,6 @@ function abonnement_declarer_tables_interfaces($interfaces){
 	$interfaces['table_des_tables']['contacts_abonnements'] = 'contacts_abonnements';
 	// champs date
 	$interfaces['table_date']['contacts_abonnements']='date';
-	// jointures ?
-	$interfaces['exception_des_jointures']['id_contact']=array('spip_contacts','id_auteur');
-
 	return $interfaces;
 }
 

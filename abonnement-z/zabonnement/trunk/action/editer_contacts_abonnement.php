@@ -55,8 +55,8 @@ function insert_contacts_abonnement($champs=array()) {
 			$verif = sql_fetsel('*', $table, 'id_'."$objet = " . $id_objet);
 			if (!$verif) 
 			{
-				if (_DEBUG_ABONNEMENT) spip_log("$objet $id_objet inexistant",'abonnement');
-				die("$objet $id_objet inexistant");
+				if (_DEBUG_ABONNEMENT) spip_log("insert_contacts_abonnement $objet $id_objet inexistant",'abonnement');
+				die("Action insert_contacts_abonnement $objet $id_objet inexistant");
 			}
 			
 		//creation

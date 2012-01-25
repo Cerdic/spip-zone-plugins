@@ -12,7 +12,7 @@
 		<td>#PRIX</td>
 		<td style='height:50px; width:100px'>
 		[(#BOUTON_ACTION{<:commander_ce_numero:>,
-		#URL_ACTION_AUTEUR{remplir_panier,rubrique-#ID_RUBRIQUE,#ENV{vers,#URL_PAGE{panier}}},ajax})] 
+		#URL_ACTION_AUTEUR{remplir_panier,rubrique-#ID_RUBRIQUE,#ENV{vers,#SELF}},ajax})] 
 		</td>
 		</tr>
 </BOUCLE_rubriques></table>
