@@ -20,7 +20,7 @@ function commandes_upgrade($nom_meta_base_version, $version_cible){
 		}
 		$id_webmestre = commandes_id_premier_webmestre();
 		$config = array_merge(array(
-				'duree_vie' => '3600',
+				'duree_vie' => '1',
 				'activer' => '',
 				'quand' => array_keys(commandes_lister_statuts()),
 				'expediteur' => 'webmaster',
@@ -41,6 +41,11 @@ function commandes_upgrade($nom_meta_base_version, $version_cible){
 		if (version_compare($current_version,"0.2","<")){
 			maj_tables('spip_commandes_details');
 			ecrire_meta($nom_meta_base_version, $current_version="0.2");
+		}
+		// La duree de vie des commandes passent de secondes en heures
+		if (version_compare($current_version,"0.3","<")){
+			$config['duree_vie'] = intval($config['duree_vie'] / 3600) ;
+			ecrire_meta($nom_meta_base_version, $current_version="0.3");
 		}
 		ecrire_meta('commandes', serialize($config));
 	}
