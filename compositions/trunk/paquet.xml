@@ -4,17 +4,17 @@
 	version="3.0.2"
 	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*]"
-	logo="images/compositions-64.png"
+	logo="prive/themes/spip/images/compositions-32.png"
 	schema="0.5.0"
 	documentation="http://www.spip-contrib.net/?article3777"
->	
+>
 
 	<nom>Compositions</nom>
 	<!-- Varier les mises en page selon les rubriques, les articles... -->
 
 	<auteur lien="http://www.yterium.com">Cedric Morin</auteur>
 
-	<copyright>2007-2009</copyright>
+	<copyright>2007-2012</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 

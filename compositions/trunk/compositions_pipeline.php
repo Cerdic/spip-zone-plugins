@@ -104,7 +104,7 @@ function compositions_affiche_milieu($flux){
 				$bouton = bouton_block_depliable(strtoupper(_T('compositions:composition')), $deplie, $ids);
 
 				$out = '';
-				$out .= debut_cadre('e', find_in_path('compositions-24.png','images/'),'',$bouton, '', '', true);
+				$out .= debut_cadre('e', chemin_image('composition-24.png'),'',$bouton, '', '', true);
 				$out .= recuperer_fond('prive/editer/compositions', array_merge($flux['args'], array('type'=>$type,'id'=>$id)));
 				$out .= fin_cadre();
 
