@@ -19,7 +19,7 @@ define('_COMPOSITIONS_MATCH','-([^0-9][^.]*)');
 function compositions_chemin(){
 	$config_chemin = 'compositions/';
 	if (defined('_DIR_PLUGIN_Z') OR defined('_DIR_PLUGIN_ZCORE'))
-		$config_chemin = (isset($GLOBALS['z_blocs'])?reset($GLOBALS['z_blocs']):'contenu/');
+		$config_chemin = (isset($GLOBALS['z_blocs'])?reset($GLOBALS['z_blocs']).'/':'contenu/');
 
 	if (isset($GLOBALS['meta']['compositions'])){
 		$config = unserialize($GLOBALS['meta']['compositions']);
