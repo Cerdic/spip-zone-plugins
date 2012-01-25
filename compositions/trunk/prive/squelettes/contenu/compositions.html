@@ -14,7 +14,7 @@
         </B_heritages>
 
 		<B_util>
-			[(#TOTAL_BOUCLE|affiche_un_ou_plusieurs{compositions:une_utilisation,compositions:des_utilisations})]
+			[(#TOTAL_BOUCLE|singulier_ou_pluriel{compositions:une_utilisation,compositions:des_utilisations})]
 			<ul>
 			<BOUCLE_util(POUR){tableau #_compositions:CLE|compositions_lister_utilisations{#CLE}}>
 			<li><a href="[(#VALEUR|table_valeur{id}|generer_url_entite{#_compositions:CLE})]">[(#VALEUR|table_valeur{titre}|supprimer_numero)][ | (#VALEUR|table_valeur{id})]</a></li>
