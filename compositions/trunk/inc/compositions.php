@@ -89,7 +89,7 @@ function compositions_cacher($liste=null){
 	$config = compositions_objets_actives();
 
 	$liste = array_intersect($config,array_keys($liste));
-	ecrire_meta('compositions_types',implode(',',array_keys($liste)));
+	ecrire_meta('compositions_types',implode(',',$liste));
 	spip_log('compositions: maj des compositions_types ['.$GLOBALS['meta']['compositions_types'].']');
 }
 
