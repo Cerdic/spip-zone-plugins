@@ -17,7 +17,7 @@ include_spip('inc/association_comptabilite');
 function formulaires_editer_asso_prets_charger_dist($id_pret='')
 {
 	/* cet appel va charger dans $contexte tous les champs de la table spip_asso_prets associes a l'id_pret passe en param */
-	$id_pret = intval(_request('id_pret'));
+	$id_pret = intval(_request('id_pret')); // ?
 	$contexte = formulaires_editer_objet_charger('asso_prets', $id_pret, '', '',  generer_url_ecrire('prets'), '');
 
 	if (!$id_pret) { /* si c'est une nouvelle operation, on charge la date d'aujourd'hui, charge un id_compte et journal null, le statut et le prix de location de base */
@@ -107,8 +107,10 @@ function formulaires_editer_asso_prets_verifier_dist($id_pret)
 	return $erreurs;
 }
 
-function formulaires_editer_asso_prets_traiter($id_pret)
+function formulaires_editer_asso_prets_traiter_dist($id_pret)
 {
-	return formulaires_editer_objet_traiter('asso_prets', $id_pret, '', '',  generer_url_ecrire('prets'), '');
+	$id_ressource = intval(_request('id_ressource')); // ?
+	return formulaires_editer_objet_traiter('asso_prets', $id_pret, '', '',  generer_url_ecrire('prets',"id=$id_ressource"), '');
 }
+
 ?>

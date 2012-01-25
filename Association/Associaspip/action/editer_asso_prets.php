@@ -15,11 +15,12 @@ include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
 include_spip('inc/association_comptabilite');
 
-function action_editer_asso_prets()
+function action_editer_asso_prets_dist()
 {
 
     $securiser_action = charger_fonction('securiser_action', 'inc');
     $id_pret = $securiser_action();
+    $erreur = '';
 
     $id_compte = intval(_request('id_compte'));
     $id_ressource = intval(_request('id_ressource'));
@@ -38,9 +39,11 @@ function action_editer_asso_prets()
 	prets_modifier($duree, $date_sortie, $date_retour, $id_emprunteur, $commentaire_sortie, $id_pret, $journal, $montant);
     } else { /* ajout */
 	$id_pret = prets_ajouter($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $commentaire_sortie,$commentaire_retour);
+	if (!$id_pret)
+	    $erreur = _T('Erreur_BdD_ou_SQL');
     }
 
-    return array($id_pret, '');
+    return array($id_pret, $erreur);
 }
 
 function prets_modifier($duree, $date_sortie, $date_retour, $id_emprunteur, $commentaire_sortie, $id_pret, $journal, $montant)
@@ -86,6 +89,7 @@ function prets_ajouter($id_ressource, $id_emprunteur, $date_sortie, $duree, $dat
 	);
     }
     // ajouter destinations comptables
+    return $id_pret;
 }
 
 ?>

@@ -62,4 +62,5 @@ function exec_edit_pret(){
 		echo fin_page_association();
 	}
 }
+
 ?>
