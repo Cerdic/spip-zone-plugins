@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_elements_a_exporter' => 'éléments à exporter :',
-	'label_exporter' => 'Exporter ?',
+	'label_exporter' => 'Exporter la configuration ?',
 	'label_ieconfig_export' => 'Options générales d\'export',
 	'label_ieconfig_export_choix' => 'Que souhaitez-vous ?',
 	'label_ieconfig_export_description' => 'Description :',
