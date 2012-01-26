@@ -11,7 +11,7 @@
 
 	#ENV*{inserer_debut}
 	<fieldset>
-		[<legend>[(#ENV{icone}|oui)[<img src="(#CHEMIN_IMAGE{#ENV{icone}}|sinon{#CHEMIN{#ENV{icone}}}|image_reduire{#ENV{taille_icone}|sinon{16}}|extraire_attribut{src})" alt="#ENV*{label}" /> ]]<span>(#ENV*{label})</span></legend>]
+		[<h3 "legend">[(#ENV{icone}|oui)[<img src="(#CHEMIN_IMAGE{#ENV{icone}}|sinon{#CHEMIN{#ENV{icone}}}|image_reduire{#ENV{taille_icone}|sinon{16}}|extraire_attribut{src})" alt="#ENV*{label}" /> ]]<span>(#ENV*{label})</span></h3>]
 		[<p class='explication'>(#ENV*{explication})</p>]
 		[(#ENV{saisies}|is_array|oui)
 		<ul>
