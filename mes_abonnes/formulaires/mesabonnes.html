@@ -6,26 +6,30 @@
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
 	  #SET{erreurs,#ENV**{erreurs}|table_valeur{mesabos_nom}}
-		<li class="editer_mesabos_nom[ (#GET{erreurs}|oui)erreur]">
+		<li class="editer editer_mesabos_nom[ (#GET{erreurs}|oui)erreur]">
 			<label for="mesabos_nom"><:nom:></label>
 			[<span class='erreur_message'>(#GET{erreurs})</span>]
 			<input type='text' name='mesabos_nom' id='mesabos_nom' value="#ENV{mesabos_nom}" class="text" />
 		</li>
 		
     #SET{erreurs,#ENV**{erreurs}|table_valeur{mesabos_email}}
-		<li class="editer_mesabos_email obligatoire[ (#GET{erreurs}|oui)erreur]">
+		<li class="editer editer_mesabos_email obligatoire[ (#GET{erreurs}|oui)erreur]">
 			<label for="mesabos_email"><:email:></label>
 			[<span class='erreur_message'>(#GET{erreurs})</span>]
 			<input type='text' name='mesabos_email' id='mesabos_email' value="#ENV{mesabos_email}" class="text" />
 		</li>
 		
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{mesabos_subscribe}}
-		<li class="editer_mesabos_sub">		
-      	[<span class='erreur_message'>(#GET{erreurs})</span>]				
-			<input type='radio' name='mesabos_subscribe' id='mesabos_subscribe' value="subscribe" class="radio"[(#ENV{type_abonnement}|=={subscribe}|oui) checked="checked"]/>
-			<label for="mesabos_subscribe"><:mesabonnes:subscribe:></label>
-			<input type='radio' name='mesabos_subscribe' id='mesabos_unsubscribe' value="unsubscribe" class="radio"[(#ENV{type_abonnement}|=={unsubscribe}|oui) checked="checked"]/>
-			<label for="mesabos_unsubscribe"><:mesabonnes:unsubscribe:></label>
+		<li class="editer editer_mesabos_sub">
+      	[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<div class="choix">
+				<input type='radio' name='mesabos_subscribe' id='mesabos_subscribe' value="subscribe" class="radio"[(#ENV{type_abonnement}|=={subscribe}|oui) checked="checked"]/>
+				<label for="mesabos_subscribe"><:mesabonnes:subscribe:></label>
+			</div>
+			<div class="choix">
+				<input type='radio' name='mesabos_subscribe' id='mesabos_unsubscribe' value="unsubscribe" class="radio"[(#ENV{type_abonnement}|=={unsubscribe}|oui) checked="checked"]/>
+				<label for="mesabos_unsubscribe"><:mesabonnes:unsubscribe:></label>
+			</div>
 		</li>	
 	
 	</ul>
