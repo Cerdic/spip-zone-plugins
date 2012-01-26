@@ -98,20 +98,19 @@ function compositions_affiche_milieu($flux){
 			if (($config['masquer_formulaire'] != 'oui' OR $aut)
 				AND (is_array(reset(compositions_lister_disponibles($type))) OR ($type == 'rubrique' AND $config['tout_verrouiller'] != 'oui'))
 				) {
-				$deplie = $aut ? false : -1;
 				$ids = 'formulaire_editer_composition_objet-' . "$type-$id";
-				include_spip('inc/layer');
-				$bouton = bouton_block_depliable(strtoupper(_T('compositions:composition')), $deplie, $ids);
-
-				$out = '';
-				$out .= debut_cadre('e', chemin_image('composition-24.png'),'',$bouton, '', '', true);
-				$out .= recuperer_fond('prive/editer/compositions', array_merge($flux['args'], array('type'=>$type,'id'=>$id)));
-				$out .= fin_cadre();
+				$texte = recuperer_fond(
+					'prive/editer/compositions',
+					array(
+						'type'=>$type,
+						'id'=>$id,
+					)
+				);
 
 				if (($p = strpos($flux['data'],'<!--affiche_milieu-->'))!==false)
-					$flux['data'] = substr_replace($flux['data'],$out,$p,0);
+					$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
 				else
-					$flux['data'] .= $out;
+					$flux['data'] .= $texte;
 			}
 		}
 	}

@@ -7,10 +7,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'composition' => 'Composition',
 	'compositions' => 'Compositions',
-	'composition_defaut' => 'Composition par d&eacute;faut',
-	'composition_heritee' => 'composition h&eacute;rit&eacute;e',
-	'composition_verrouillee' => 'Cette composition est verrouill&eacute; par le webmestre',
-	'composition_utilisee' => 'Utilise&nbsp;:',
+	'composition_defaut' => 'composition par d&eacute;faut',
+	'composition_heritee' => 'h&eacute;rit&eacute;e',
+	'composition_verrouillee' => 'Cette composition est verrouill&eacute; par le webmestre.',
+	'composition_utilisee' => 'Composition&nbsp;:',
 
 	// D
 	'des_utilisations' => '@nb@ utilisations',
@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_branche_verrouillee' => 'Les compositions de cette branche sont verrouill&eacute;es.',
 	'label_chemin_compositions' => 'Dossier des compositions',
 	'label_chemin_compositions_details' => 'Indiquez le chemin dans lequel seront recherch&eacute;s les squelettes de composition.',
-	'label_composition' => 'Type de composition',
+	'label_composition' => 'Composition',
 	'label_composition_branche_lock' => 'Verrouiller la composition de tous les objets de la branche',
 	'label_composition_explication' => 'Vous &ecirc;tes Webmestre, vous pouvez',
 	'label_composition_lock' => 'Verrouiller la composition',

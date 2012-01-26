@@ -16,7 +16,7 @@ include_spip('inc/compositions');
  * @param int $id
  * @return array
  */
-function formulaires_editer_composition_objet_charger($type,$id,$hide_form=false){
+function formulaires_editer_composition_objet_charger($type,$id){
 	$valeurs = array();
 	$table_objet_sql = table_objet_sql($type);
 	$id_table_objet = id_table_objet($type);
@@ -26,7 +26,6 @@ function formulaires_editer_composition_objet_charger($type,$id,$hide_form=false
 	$valeurs['id'] = "$type-$id";
 	$valeurs['id_objet'] = $id;
 	$valeurs['objet'] = $type;
-	$valeurs['_hide'] = (($hide_form AND is_null(_request('composition')))?' ':'');
 
 	$row = sql_fetsel('composition,composition_lock',$table_objet_sql,"$id_table_objet=".intval($id));
 	$valeurs['composition'] = $row['composition'];
@@ -57,7 +56,7 @@ function formulaires_editer_composition_objet_charger($type,$id,$hide_form=false
 		);
 	}
 	
-	// Si on h�rite d'une composition
+	// Si on herite d'une composition
 	// On modifie le tableau des compositions
 	if ($valeurs['composition_heritee'] AND $valeurs['composition_heritee'] != '-') {
 		$compo_defaut = $valeurs['_compositions'][$valeurs['composition_heritee']];
