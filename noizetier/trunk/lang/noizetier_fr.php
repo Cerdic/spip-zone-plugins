@@ -95,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisettes_composition' => 'Noisettes spécifiques à la composition <i>@composition@</i> :',
 	'noisettes_page' => 'Noisettes spécifiques à la page <i>@type@</i> :',
 	'noisettes_toutes_pages' => 'Noisettes communes à toutes les pages :',
+	'noizetier' => 'noiZetier',
 	'nom_bloc_contenu' => 'Contenu',
 	'nom_bloc_extra' => 'Extra',
 	'nom_bloc_navigation' => 'Navigation',
