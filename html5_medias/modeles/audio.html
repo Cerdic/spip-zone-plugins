@@ -1,0 +1,65 @@
+[(#REM) 
+/** Valeurs communes surchargeables **/
+]
+#SET{document,#ENV{document}|sinon{#ID}}
+#SET{titre_descriptif,#ENV{titre_descriptif,#CONFIG{html5_medias/titre_descriptif,'non'}}}
+[(#SET{lesExtensionsHtml5,
+	#ARRAY{ 1,mp3,
+			2,oga
+	}
+})]
+
+<BOUCLE_LePodcast(DOCUMENTS){id_document=#GET{document}}{tout}>
+
+[(#SET{fichier,#FICHIER*})]
+[(#GET{liste_definition}|=={oui}|oui)
+<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+<dt class='spip_doc_titre'>
+]
+
+[(#REM)
+/** Traiter les podcasts en HTML5 **/
+]
+	[(#EXTENSION|in_array{#GET{lesExtensionsHtml5}}|oui)
+	<div class="playerAudio">
+		<section>
+		<figure>
+			[(#SET{nomPodcast,[(#FICHIER|basename|replace{\.#EXTENSION,''})]})]
+			[(#FICHIER|basename|pathinfo|table_valeur{filename}|oui) [(#SET{nomPodcast,[(#FICHIER|basename|pathinfo|table_valeur{filename})]})] ]
+			<INCLURE{fond=noisettes/balise_audio_html5,nomPodcast=#GET{nomPodcast},largeur=#GET{largeur},hauteur=#GET{hauteur},env} />
+			[(#GET{titre_descriptif}|=={oui}|oui)
+			<figcaption>
+				<p><strong>#TITRE</strong></p> 
+				#DESCRIPTIF
+			</figcaption>
+			]
+		</figure>
+		</section>
+	</div> <!-- Fermeture de ID : playerVideo -->
+	]
+	
+	
+[(#REM)
+/** CAS GENERAL == MODELE AUDIO DE DIST DE SPIP **/
+]
+	[(#EXTENSION|in_array{#GET{lesExtensionsHtml5}}|non)
+	[(#EXTENSION|match{dist_}|non)
+		[(#INCLURE{fond=prive/modeles/audio,id=#GET{document},env,emb=' '})]
+	]]
+
+[(#REM)
+/** Titre et Descriptif **/
+]
+[(#GET{liste_definition}|=={oui}|oui)
+	[(#GET{titre_descriptif}|=={oui}|oui)
+	[(#EXTENSION|in_array{#GET{lesExtensionsHtml5}}|non)
+	[<br /><strong>(#TITRE)</strong>]
+	]]
+</dt>
+	[(#GET{titre_descriptif}|=={oui}|oui)
+	[(#EXTENSION|in_array{#GET{lesExtensionsHtml5}}|non)
+	[<dd class='spip_doc_descriptif'[ style='width:(#GET{largeur})']>(#DESCRIPTIF|PtoBR)</dd>]
+	]]
+</dl>
+]
+</BOUCLE_LePodcast>

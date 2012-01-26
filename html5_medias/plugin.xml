@@ -1,0 +1,59 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]HTML5 M&#233;dia(s)
+			[en]HTML5 Media(s)
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+			[fr]Mod&#232;les HTML5 d'insertion de vid&#233;os et de podcasts
+			[en]Integration models of HTML5 videos and podcasts
+		</multi>
+	</slogan>
+	<auteur>[XDjuj@apsulis.com->http://demo.apsulis.com]</auteur>
+	<licence>GPL &#169; 2012</licence>
+	
+	<version>0.0.1</version>
+	<!-- <version_video_js>3.0.7</version_video_js> // http://videojs.com -->
+	<!-- <necessite id="lib:video_js-3.0.7" src="https://github.com/downloads/zencoder/video-js/video-js-3.0.7.zip" /> -->
+	<!-- <version_dewplayer>3.0.7</version_dewplayer> // http://www.alsacreations.fr/dewplayer.html -->
+	<necessite id="lib:dewplayer" src="http://www.alsacreations.fr/dl/dewplayer.zip" />
+	
+	<icon>theme/img/html5_medias-32.png</icon>
+	<etat>dev</etat>
+	<description>
+		<multi>
+		[fr]Ce plugin permet
+			l&#8217;affichage HTML5 des vid&#233;os aux formats MP4, H264, Ogg,
+			WebM et Mkv ainsi que des fichiers audio MP3, OGG, etc. m&#234;me dans les navigateurs mobiles.
+			Respecte l'accessibilit&#233; des vid&#233;os en permettant &#233;galement la gestion des sous-titres, descriptions, etc.
+		[en]This plugin allows the HTML5 display
+			of video or audio in MP3, MP4, H.264, Ogg, WebM anf Mkv formats, even in mobile browsers.
+			Accessibility proof with management for subtitles, description and so on.
+		</multi>
+	</description>
+	<!-- <lien>http://www.spip-contrib.net/?articleXXXX</lien> -->
+	<prefix>html5_medias</prefix>
+	
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>pipelines/html5_medias_insert_head.php</inclure>
+	</pipeline>
+
+	<bouton id='html5_medias' parent='configuration'>
+		<icone>theme/img/html5_medias-24.png</icone>
+		<titre>html5_medias:titre_admin</titre>
+		<url>configurer_html5_medias</url>
+	</bouton>
+	<bouton id='html5_medias2' parent='bando_squelette'>
+		<icone>theme/img/html5_medias-16.png</icone>
+		<titre>html5_medias:titre_admin</titre>
+		<url>configurer_html5_medias</url>
+	</bouton>
+	
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<utilise id="cfg" version="[1.9.4;]" />
+	
+	<categorie>multimedia</categorie>
+</plugin>

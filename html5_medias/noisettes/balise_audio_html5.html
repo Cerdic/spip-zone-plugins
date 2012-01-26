@@ -1,0 +1,26 @@
+[(#REM)
+	http://dev.w3.org/html5/markup/audio.html
+]
+<audio id="audioplayer_#ENV{id_document}" preload controls loop style="width='#ENV{largeur}'">
+	[(#REM) 3 boucles pour donner la préférence au MP3 et pour bien nommer les types ]
+	<BOUCLE_mp3(DOCUMENTS){fichier==^(mp3)/#ENV{nomVideo}\.(mp3)$}{par num titre}>
+		<source src="#FICHIER" type='audio/mp3' />
+	</BOUCLE_mp3>
+	<BOUCLE_ogg(DOCUMENTS){fichier==^(ogg)/#ENV{nomVideo}\.(ogg)$}{par num titre}>
+		<source src="#FICHIER" type='audio/ogg' />
+	</BOUCLE_ogg>
+	<BOUCLE_aac(DOCUMENTS){fichier==^(aac)/#ENV{nomVideo}\.(aac)$}{par num titre}>
+		<source src="#FICHIER" type='audio/mp4' />
+	</BOUCLE_aac>
+</audio>
+[(#REM)
+TODO :
+- voir si le fallback classique fonctionne
+- sinon utiliser le fallback suivant avec peut être jPlayer ? Voir si on arrive à mettre Dewplayer
+<script type="text/javascript">
+    var audioTag = document.createElement('audio');
+    if (!(!!(audioTag.canPlayType) && ("no" != audioTag.canPlayType("audio/mpeg")) && ("" != audioTag.canPlayType("audio/mpeg")))) {
+        AudioPlayer.embed("audioplayer", {soundFile: "audio.mp3"});
+    }
+</script>
+]

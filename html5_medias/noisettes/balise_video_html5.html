@@ -1,0 +1,27 @@
+[(#REM)
+	http://www.w3.org/TR/html5/video.html#video
+TODO :
+	- Rajouter la gestion du "poster"
+	- Rajouter la gestion du data-setup
+	- du preload ?
+	- gestion des sous titres et autres pour accessibilité :
+	---- <track kind="subtitles" src="demo-subtitles.srt" />
+	---- <track kind="captions" src="" />
+	---- <track kind="chapters" src="" />
+	---- <track kind="descriptions" src="" />
+]
+<video id='video_#ENV{id_document}' class="video-js vjs-default-skin" width="#ENV{largeur}" height="#ENV{hauteur}" preload="metadata" tabindex="-1" controls autobuffer[(#ENV{autoplay}|oui)autoplay]>
+	[(#REM) 4 boucles pour donner la préférence au H264 qui a besoin d'être en premier pour iPad notamment et pour bien nommer les types ]
+	<BOUCLE_h264(DOCUMENTS){fichier==^(m4v|mp4)/#ENV{nomVideo}\.(m4v|mp4)$}{par num titre}>
+		<source src="#FICHIER" type='video/mp4' /> [(#REM) ; codecs="avc1.42E01E, mp4a.40.2" H264 peut utiliser plusieurs codecs, on l'oublie donc ]
+	</BOUCLE_h264>
+	<BOUCLE_webm(DOCUMENTS){fichier==^webm/#ENV{nomVideo}\.webm$}{par num titre}>
+		<source src="#FICHIER" type='video/webm; codecs="vp8, vorbis"' /> 
+	</BOUCLE_webm>
+	<BOUCLE_ogg(DOCUMENTS){fichier==^ogv/#ENV{nomVideo}\.ogv$}{par num titre}>
+		<source src="#FICHIER" type='video/ogg' /> [(#REM) ; codecs="theora, vorbis" OGV peut utiliser plusieurs codecs, on l'oublie donc ]
+	</BOUCLE_ogg>
+	<BOUCLE_mkv(DOCUMENTS){fichier==^mkv/#ENV{nomVideo}\.mkv$}{par num titre}>
+		<source src='#FICHIER' type='video/x-matroska; codecs="theora, vorbis"' />
+	</BOUCLE_mkv>
+</video>
