@@ -5,6 +5,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // B
     'bye' => 'L\'adresse @email@ a été retirée de notre liste de diffusion, merci.',
+		'bouton_ok' => 'OK',
     
     // E
     'export_abonnes' => 'Exporter les abonnés au format',
