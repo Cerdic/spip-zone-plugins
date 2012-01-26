@@ -27,7 +27,7 @@ function crud_mots_create_dist($dummy,$set=null){
 		$e		= $result['sucess'];
 	 }
 	else{
-		$e = _L('create error');
+		$e = _T('crud:erreur_creation',array('objet'=>'mot'));
 	}
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }

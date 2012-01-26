@@ -21,7 +21,7 @@ function crud_breves_create_dist($dummy,$set=null){
 	if ($id = insert_breve($set['id_rubrique']))
 		list($e,$ok) = revisions_breves($id,$set);
 	else
-		$e = _L('create error');
+		$e = _T('crud:erreur_creation',array('objet'=>'breve'));
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_breves_update_dist($id,$set=null){

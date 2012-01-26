@@ -20,7 +20,7 @@ function crud_rubriques_create_dist($dummy,$set=null){
 	if ($id = insert_rubrique($set['id_parent']))
 		list($e,$ok) = revisions_rubriques($id,$set);
 	else
-		$e = _L('create error');
+		$e = _T('crud:erreur_creation',array('objet'=>'rubrique'));
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_rubriques_update_dist($id,$set=null){

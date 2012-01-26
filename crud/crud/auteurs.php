@@ -20,7 +20,7 @@ function crud_auteurs_create_dist($dummy,$set = null){
 	if ($id = insert_auteur($set['source']))
 		list($e,$ok) = auteurs_set($id,$set);
 	else
-		$e = _L('create error');
+		$e = _T('crud:erreur_creation',array('objet'=>'auteur'));
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_auteurs_update_dist($id,$set=null){

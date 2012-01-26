@@ -43,7 +43,7 @@ function crud_documents_create_dist($dummy,$set=null){
 		list($id,$ok) = $resultat;
 	}
 	else
-		$e = _L('create error');
+		$e = _T('crud:erreur_creation',array('objet'=>'document'));
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_documents_update_dist($id,$set=null){

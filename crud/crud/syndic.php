@@ -20,7 +20,7 @@ function crud_syndic_create_dist($dummy,$set=null){
 	if ($id = insert_syndic($set['id_rubrique']))
 		list($e,$ok) = revisions_sites($id,$set);
 	else
-		$e = _L('create error');
+		$e = _T('crud:erreur_creation',array('objet'=>'site'));
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_syndic_update_dist($id,$set=null){

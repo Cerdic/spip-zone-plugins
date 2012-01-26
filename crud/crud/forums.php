@@ -19,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function crud_forums_create_dist($dummy,$set=null){
 	$id = sql_insertq('spip_forum',$set);
 	if (!$id)
-		$e = _L('message_erreur');
+		$e = _T('crud:erreur_creation',array('objet'=>'forum'));
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_forums_update_dist($id,$set=null){

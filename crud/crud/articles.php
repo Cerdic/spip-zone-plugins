@@ -23,7 +23,7 @@ function crud_articles_create_dist($dummy,$set=null){
 	else if(!$id_rubrique){
 		$e = _T('crud:erreur_rubrique_inconnue',array('id'=>$set['id_rubrique']));
 	}else{
-		$e = _L('create error');
+		$e = _T('crud:erreur_creation',array('objet'=>'article'));
 	}
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
@@ -34,7 +34,7 @@ function crud_articles_update_dist($id,$set=null){
 	}else if(autoriser('modifier','article',$id)){
 		list($e,$ok) = articles_set($id,$set);
 	}else{
-		$e = _L('update error');
+		$e = _T('crud:erreur_update',array('objet'=>'article','id'=>$id));
 	}
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
