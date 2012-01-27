@@ -1,14 +1,17 @@
 <plugin>
 	<nom><multi>[fr]Devise [es]Divisa [en]Currency</multi></nom>
+	<slogan><multi>
+	[fr]Outils de manipulation de devises internationales
+	[es]Herramientas de manipulaci&#243;n de divisas internacionales
+	[en]Tools for manipulating international currencies
+	</multi></slogan>
 	<auteur>[davux->http://da.weeno.net/]</auteur>
 	<icon>img/pig-64.png</icon>
 	<version>0.2.0</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<description><multi>
-[fr] Outils de manipulation de devises internationales.
-
-Dans son &#233;tat actuel, ce plugin fournit:
+[fr] Dans son &#233;tat actuel, ce plugin fournit:
 -* une balise <code>#DEVISES</code> qui renvoie un tableau contenant les codes &#224; 3 lettres de toutes les devises existantes (y compris Bitcoin).
 -* les noms des devises accessibles, sous 3 formes, via des cha&icirc;nes de langue:
 -** le nom de la monnaie (par exemple <code><:devise:EUR:></code> renvoie "Euro")
@@ -23,9 +26,7 @@ Il serait pratique d'int&#233;grer une fonction de conversion en temps r&#233;el
 pour s'adapter aux variations de taux de change.
 
 Les noms de devises sont en anglais, fran&#231;ais et espagnol.
-[en] Tools for manipulating international currencies.
-
-In its current state, this plugin provides:
+[en] In its current state, this plugin provides:
 -* a <code>#DEVISES</code> tag that gives an array containing all three-letter codes for existing currencies (including Bitcoin).
 -* currency names under 3 forms, through language files:
 -** the currency name (e.g. <code><:devise:USD:></code> returns "US Dollar")
@@ -40,9 +41,7 @@ In its current state, this plugin provides:
 It would be useful to include a real-time conversion feature (e.g. through a webservice), in order to use the current exchange rate.
 
 The currency names are in English, French and Spanish.
-[es] Herramientas de manipulaci&#243;n de divisas internacionales.
-
-En su estado actual, este plugin proporciona:
+[es] En su estado actual, este plugin proporciona:
 -* una baliza <code>#DEVISES</code> que devuelve una matriz con todos los c&#243;digos de 3 letras de las divisas existentes (incluyendo Bitcoin).
 -* nombres de divisas en 3 formas, a trav&#233;s de archivos de idioma:
 -** el nombre de la divisa (p.e. <code><:devise:MXN:></code> devuelve "Peso Mexicano")
