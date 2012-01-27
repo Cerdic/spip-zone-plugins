@@ -13,9 +13,9 @@
 	</slogan>
 	<icon>img_pack/licence_logo.png</icon>
 	<auteur>[fanouch->lesguppies@free.fr], sur une id&#233;e originale de erational</auteur>
-	<version>0.3.6</version>
+	<version>0.4.0</version>
 	<version_base>0.2</version_base>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description>
 		<multi>
 			[fr]Permet de relier une licence d'utilisation &#224; un article ou un document
@@ -48,6 +48,14 @@
 	</pipeline>
 	<pipeline>
 		<nom>editer_contenu_objet</nom>
+		<inclure>licence_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>xmlrpc_methodes</nom>
+		<inclure>licence_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>xmlrpc_server_class</nom>
 		<inclure>licence_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.10;2.1.99]" />

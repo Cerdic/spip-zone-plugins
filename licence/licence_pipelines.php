@@ -80,4 +80,27 @@ function licence_pre_edition($flux){
 	}
 	return $flux;
 }
+
+/**
+ * Insertion dans le pipeline xmlrpc_methodes (xmlrpc)
+ * Ajout de méthodes xml-rpc spécifiques à Licence
+ * 
+ * @param array $flux : un array des methodes déjà présentes, fonctionnant sous la forme :
+ * -* clé = nom de la méthode;
+ * -* valeur = le nom de la fonction à appeler;
+ * @return array $flux : l'array complété avec nos nouvelles méthodes 
+ */
+function licence_xmlrpc_methodes($flux){
+	$flux['spip.liste_licences'] = 'licence_liste_licences';
+	return $flux;
+}
+
+/**
+ * Insertion dans le pipeline xmlrpc_server_class (xmlrpc)
+ * Ajout de fonctions spécifiques utilisées par le serveur xml-rpc 
+ */
+function licence_xmlrpc_server_class($flux){
+	include_spip('inc/licence_xmlrpc');
+	return $flux;
+}
 ?>
