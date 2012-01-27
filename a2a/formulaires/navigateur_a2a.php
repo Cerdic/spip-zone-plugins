@@ -23,6 +23,8 @@ function formulaires_navigateur_a2a_traiter($id_article){
 	$retour = array('editable' => true);
 	
 	$parents = _request('parents');
+	$type = 'uni';
+	$type = _request('both') ? 'both' : 'uni';
 	$type_liaison = _request('type_liaison');	
 
 	foreach($parents as $p){
@@ -30,7 +32,7 @@ function formulaires_navigateur_a2a_traiter($id_article){
 		if (preg_match('/^[a-z0-9_]+$/i', $objet=$p[0])){ // securite
 			$id_article_cible = intval($p[1]);
 			$action_a2a = charger_fonction('a2a_lier_article','action');
-			$action_a2a($id_article_cible, $id_article, NULL, $type_liaison);
+			$action_a2a($id_article_cible, $id_article, $type, $type_liaison);
 		}
 	}
 
