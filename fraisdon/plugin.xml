@@ -1,14 +1,22 @@
 <plugin>
 	<nom>Notes de frais et dons</nom>
+	<slogan>Notes de frais et dons aux associations</slogan>
 	<icon>img_pack/fraisdon-24.png</icon>
 	<auteur>Bruno DARCET</auteur>
-	<licence>&copy; 2011 - GPL</licence>
+	<licence>(c) 2011 - GPL</licence>
 	<version>1.0.0</version>
 	<etat>stable</etat>
 	<categorie>divers</categorie>
 	<prefix>fraisdon</prefix>
-	<description>
-	Notes de frais et dons aux associations !
+	<description>Un plugin pour g&#233;rer les notes de frais et dons des membres d'une association. Ce plugin prend en charge :
+-* la saisie des notes de frais
+-* les frais simples ou kilom&#233;triques
+-* les pi&#232;ces justificatives
+-* la validation par le d&#233;clarant
+-* la comptabilisation par le tr&#233;sorier
+-* conservation des informations de type "frais rembours&#233;s" ou "don &#224; association" sur chaque ann&#233;e comptable.
+
+Le plugin utilise l'architecture de squelettes ZPIP.
 	</description>
 	<lien>http://www.spip-contrib.net/spip.php?article3974</lien>
 	<options>fraisdon_mes_options.php</options>
@@ -24,5 +32,5 @@
  	<necessite id="CFG" version="[1.0;]" />
  	<necessite id="spip_bonux" version="[1.8;]" />
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
-	<utilise Z />
+	<utilise id="Z" />
 </plugin>
