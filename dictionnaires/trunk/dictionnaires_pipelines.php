@@ -62,10 +62,14 @@ function dictionnaires_post_propre($texte){
 		$textes_a_traiter = preg_replace_callback($masques, 'dictionnaires_replace_callback', $textes_a_traiter);
 		
 		foreach ($textes_a_traiter as $cle2 => $texte_a_traiter){
-			$textes_a_traiter[$cle2] = $texte_a_traiter . $balises[$cle2][0];
+			$textes_a_traiter[$cle2] = $texte_a_traiter ;
+			if (isset($balises[$cle2][0])) 
+				$textes_a_traiter[$cle2] .= $balises[$cle2][0];
 		}
 		
-		$morceaux_a_traiter[$cle] = join('', $textes_a_traiter) . $balises_echap[$cle][0];
+		$morceaux_a_traiter[$cle] = join('', $textes_a_traiter);
+		if (isset($balises_echap[$cle][0])) 
+			$morceaux_a_traiter[$cle] .= $balises_echap[$cle][0];
 	}
 	$texte = join('', $morceaux_a_traiter);
 	
