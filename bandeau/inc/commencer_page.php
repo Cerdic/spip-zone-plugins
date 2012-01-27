@@ -67,6 +67,9 @@ function init_entete($titre='', $id_rubrique=0, $minipres=false) {
 // http://doc.spip.org/@init_body
 function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='',$menu=true) {
 	global $connect_id_auteur, $auth_can_disconnect;
+	global $spip_ecran;
+
+	if ($spip_ecran == "large") $largeur = 974; else $largeur = 750;
 
 	$GLOBALS['spip_display'] = isset($GLOBALS['visiteur_session']['prefs']['display'])
 		? $GLOBALS['visiteur_session']['prefs']['display']
