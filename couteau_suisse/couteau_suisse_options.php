@@ -63,7 +63,7 @@ $metas_outils = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['m
 $metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
 
 // on active tout de suite les logs, si l'outil est actif.
-if (($metas_outils['cs_comportement']['actif'] && $metas_vars['log_couteau_suisse'])
+if ((isset($metas_outils['cs_comportement']['actif']) && $metas_outils['cs_comportement']['actif'] && $metas_vars['log_couteau_suisse'])
  || defined('_LOG_CS_FORCE') || in_array('log', $GLOBALS['cs_params']))	@define('_LOG_CS', 1);
 if(defined('_LOG_CS')) {
 	cs_log(str_repeat('-', 80), '', sprintf('COUTEAU-SUISSE. [#%04X]. ', rand()));
@@ -99,7 +99,7 @@ else {
 	// fichiers testes : tmp/couteau-suisse/mes_options.php et tmp/couteau-suisse/mes_spip_options.php
 	$cs_exists = file_exists($f_mo = _DIR_CS_TMP.'mes_options.php');
 	$f_mso = _DIR_CS_TMP.'mes_spip_options.php';
-	if(!$GLOBALS['cs_spip_options']) $cs_exists &= file_exists($f_mso);
+	if(isset($GLOBALS['cs_spip_options']) && !$GLOBALS['cs_spip_options']) $cs_exists &= file_exists($f_mso);
 	if(!$cs_exists) cs_log(" -- '$f_mo' ou '$f_mso' introuvable !");
 
 	// lancer l'initialisation du plugin. on force la compilation si cs=calcul
@@ -108,7 +108,7 @@ else {
 	if(defined('_LOG_CS')) cs_log("PUIS : couteau_suisse_options, initialisation terminee");
 
 	// inclusion des options hautes de SPIP, si ce n'est pas deja fait par config/mes_options.php
-	if (!$GLOBALS['cs_spip_options']) {
+	if (isset($GLOBALS['cs_spip_options']) && !$GLOBALS['cs_spip_options']) {
 		if(file_exists($f_mso)) {
 			if(defined('_LOG_CS')) cs_log(" -- inclusion de '$f_mso'");
 			include_once($f_mso);
