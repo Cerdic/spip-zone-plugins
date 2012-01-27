@@ -1,7 +1,7 @@
-[(#CACHE{0})][
-(#SET{z-index,2000})]
+[(#CACHE{0})][(#SET{z-index,2000})]
 .cNavKeyRub {
-  text-align: #LANG_LEFT;[
+  text-align: #LANG_LEFT;
+  display: block;[
   z-index: (#GET{z-index});]
 }
 .cNavKeyRub .bloc-title {
@@ -13,7 +13,7 @@
   text-align: #LANG_LEFT;
   [border-top: 1px solid (#VAR{acsRubnavSep});]
   font-weight: normal;[
-  z-index: (#GET{z-index}|plus{1});]
+  z-index: (#GET{z-index}|plus{2});]
 }
 .cNavKeyRub .menu-item a {
   display: block;
@@ -46,12 +46,15 @@
 [.cNavKeyRub ul ul ul ul ul {background: (#VAR{acsRubnavFond5});}]
 [.cNavKeyRub ul ul ul ul ul ul {background: (#VAR{acsRubnavFond6});}]
 
-.cNavKeyRub ul.hidden {
-  display: none;
+.cNavKeyRub ul.sous-menu {
+  clear: left;
   position: absolute;
   #LANG_LEFT: 100%;
   width: 100%;[
-  z-index: (#GET{z-index}|plus{1});]
+  z-index: (#GET{z-index}|plus{2});]
+}
+.cNavKeyRub ul.hidden {
+  display: none;
 }
 .cNavKeyRub .menu-item:hover>ul.hidden {
   display: block;

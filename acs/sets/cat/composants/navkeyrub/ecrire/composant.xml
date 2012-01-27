@@ -21,6 +21,14 @@
   </variable>
 
   <variable>
+    <nom>Orientation</nom>
+    <type>choix</type>
+    <option>vertical</option>
+    <option>horizontal</option>
+    <valeur>vertical</valeur>
+  </variable>
+
+  <variable>
     <nom>Bord</nom>
     <type>bord</type>
   </variable>
@@ -77,11 +85,26 @@
     <valeur>oui</valeur>
   </variable>
   <variable>
+    <nom>LogoMax</nom>
+    <type>text</type>
+    <valeur>20</valeur>
+  </variable>
+  <variable>
     <nom>CouleurMot</nom>
     <type>choix</type>
     <option>oui</option>
     <option>non</option>
     <valeur>oui</valeur>
   </variable>
-
+  <variable>
+    <nom>Articles</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>non</valeur>
+  </variable>
+  <variable>
+    <nom>FondArticle</nom>
+    <type>color</type>
+  </variable>
 </composant>

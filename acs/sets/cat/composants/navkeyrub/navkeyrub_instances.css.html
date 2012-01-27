@@ -1,5 +1,5 @@
 [(#CACHE{0})]
-.cNavKeyRub#NIC, .cNavKeyRub#NIC ul.hidden {[
+.cNavKeyRub#NIC, .cNavKeyRub#NIC ul.sous-menu {[
   (#MODELE{c_css_shadow}{c=Navkeyrub}{nic})]
 }
 .cNavKeyRub#NIC {
@@ -7,15 +7,15 @@
   [border-style: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Bord/Style'}});]
   [border-color: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Bord/Color'}});]
 }
-.cNavKeyRub#NIC ul.hidden {
+.cNavKeyRub#NIC ul.sous-menu {
   [border-width: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Bord2/Width'}});]
   [border-style: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Bord2/Style'}});]
   [border-color: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Bord2/Color'}});]
 }
-.cNavKeyRub#NIC {[
-  (#MODELE{c_css_border-radius}{c=Navkeyrub}{nic}{var=BordRond})]
+[.cNavKeyRub#NIC {
+  (#MODELE{c_css_border-radius}{c=Navkeyrub}{nic}{var=BordRond})
 }
-.cNavKeyRub#NIC ul.hidden {[
+].cNavKeyRub#NIC ul.sous-menu {[
   (#MODELE{c_css_border-radius}{c=Navkeyrub}{nic}{var=BordRond})]
   border-radius-top#LANG_LEFT: 0;
   -moz-border-radius-top#LANG_LEFT: 0;
@@ -23,10 +23,25 @@
   -khtml-border-radius-top#LANG_LEFT: 0;
 }
 
-.cNavKeyRub#NIC ul.hidden {[
+.cNavKeyRub#NIC ul.sous-menu {[
   top: -(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Bord2/Width'}});]
 }
-.cNavKeyRub#NIC .bloc-title {
-  [background: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'TitreFond'}})[ url("(#ACS_CHEMIN{trame/#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'TitreFondImage'}}})") repeat top left];][
+.cNavKeyRub#NIC .bloc-title {[
+  background: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'TitreFond'}})[ url("(#ACS_CHEMIN{trame/#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'TitreFondImage'}}})") repeat top left];][
   (#MODELE{c_css_border-radius}{c=Navkeyrub}{nic}{var=BordRond}{sauf=bottom})]
+}
+
+[(#REM) orientation horizontale ][(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Orientation'}}|=={horizontal}|?{" "})
+.cNavKeyRub#NIC li.mots {
+  display: block;
+  float : left;
+}
+.cNavKeyRub#NIC ul.sm1 {[
+  (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'LogoMot'}}|!={non}|?{" "})top: [(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'LogoMax'},20}|plus{7})]px;]
+  #LANG_LEFT: 0;
+}]
+
+.cNavKeyRub#NIC .titre-article {[
+  background: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'FondArticle'}});]
+  font-style: italic;
 }
