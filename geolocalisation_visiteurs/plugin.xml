@@ -1,5 +1,6 @@
 <plugin>
     <nom>G&#233;olocalisation visiteurs</nom>
+	<slogan>G&#233;olocaliser les visiteurs en fonction de leur ip</slogan>
     <categorie>divers</categorie>
     <auteur>Bernt</auteur>
     <version>0.1.0</version>
