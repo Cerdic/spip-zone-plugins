@@ -1,5 +1,6 @@
 <plugin>
 	<nom>Catalogue</nom>
+	<slogan>Transformer les articles SPIP en articles de catalogue</slogan>
 	<auteur>[Cyril MARION->http://www.cym.fr]</auteur>
 	<version>1.5.0</version>
 	<version_base>1.5</version_base>
