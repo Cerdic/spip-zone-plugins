@@ -1,7 +1,7 @@
 <?php
 
 function accessibilite_pre_liens($texte){
-	define('_ACCESSIBILITE_CONSERVER_BULLE', false);
+	if (!defined('_ACCESSIBILITE_CONSERVER_BULLE')) define('_ACCESSIBILITE_CONSERVER_BULLE', false);
 	$regs = $match = array();
 	// pour chaque lien
 	if (preg_match_all(_RACCOURCI_LIEN, $texte, $regs, PREG_SET_ORDER)) {	
