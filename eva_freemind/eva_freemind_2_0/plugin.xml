@@ -1,5 +1,6 @@
 <plugin>
-	<nom>Int&#233;gration d'activit&#233;s Freemind et Freeplane</nom>
+	<nom>Freemind</nom>
+	<slogan>Int&#233;gration d'activit&#233;s Freemind</slogan>
 	<icon>img_pack/freemind_icon-24.png</icon>
 	<auteur>[Olivier Gautier->http://www.eva-web.edres74.ac-grenoble.fr], Dominique Lepaisant, Gilles Quiniou</auteur>
 	<licence>GNU/GPL</licence>

@@ -1,5 +1,6 @@
 <plugin>
-	<nom>Int&#233;gration d'activit&#233;s Freemind</nom>
+	<nom>Freemind</nom>
+	<slogan>Int&#233;gration d'activit&#233;s Freemind</slogan>
 	<auteur>[Olivier Gautier->http://www.eva-web.edres74.ac-grenoble.fr], Gilles Quiniou</auteur>
 	<licence>GNU/GPL</licence>
 	<version>1.0.0</version>
