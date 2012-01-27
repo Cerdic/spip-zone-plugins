@@ -1,7 +1,8 @@
 <plugin>
 	<prefix>imapdepart</prefix>
 	<nom>Image map des d&#233;partements</nom>
-	<auteur>cy_altern, </auteur>
+	<slogan>Mod&#233;le pour afficher une imagemap des d&#233;partements fran&#231;ais</slogan>
+	<auteur>cy_altern</auteur>
 	<licence>GNU/GPL - (c) 2010</licence>
 	<version>0.2.0</version>
 	<etat>dev</etat>
