@@ -64,7 +64,7 @@ function dictionnaires_migrer_acronymes(){
 				// On lui met des champs par défaut
 				dictionnaire_set($id_dictionnaire, array(
 					'titre' => _T('dictionnaire:importer_acronymes_titre'),
-					'actif' => 0,
+					'actif' => 1,
 					'descriptif' => _T('dictionnaire:importer_acronymes_descriptif'),
 					'type_defaut' => 'abbr',
 				));
