@@ -66,6 +66,7 @@ function dictionnaires_migrer_acronymes(){
 					'titre' => _T('dictionnaire:importer_acronymes_titre'),
 					'actif' => 0,
 					'descriptif' => _T('dictionnaire:importer_acronymes_descriptif'),
+					'type_defaut' => 'abbr',
 				));
 				
 				// On parcourt ensuite les acronymes à importer pour récupérer leurs infos
