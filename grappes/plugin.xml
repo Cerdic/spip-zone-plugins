@@ -1,5 +1,6 @@
 <plugin>
 	<nom><multi>[fr]Grappes [en]Bunches of grapes [es]Racimos[de]Trauben</multi></nom>
+	<slogan>Regrouper des objets Spip dans un m&#234;me univers</slogan>
 	<auteur>Matthieu Marcillaud</auteur>
 	<version>0.3.2</version>
 	<version_base>0.2.1</version_base>
