@@ -179,6 +179,7 @@ function typoenluminee_pre_typo($texte) {
 				$local_barre_typo_pas_de_fausses_puces = (lire_config('bte/puces','Non') == 'Oui')?true:false;
 			}
 		}
+		global $class_spip;
 		tester_variable('debut_italique', "<i$class_spip>");
 		tester_variable('fin_italique', '</i>');
 		
