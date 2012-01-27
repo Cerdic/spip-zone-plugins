@@ -23,7 +23,6 @@ function formulaires_navigateur_a2a_traiter($id_article){
 	$retour = array('editable' => true);
 	
 	$parents = _request('parents');
-	$type = 'uni';
 	$type = _request('both') ? 'both' : 'uni';
 	$type_liaison = _request('type_liaison');	
 
