@@ -72,7 +72,7 @@ function insert_definition($champs=array()) {
  * @param unknown_type $set
  * @return $err
  */
-function definition_set($id_definition, $set=null) {
+function definition_set($id_definition, $set=null, $purger_cache=true) {
 	$err = '';
 
 	include_spip('inc/saisies');
@@ -97,7 +97,7 @@ function definition_set($id_definition, $set=null) {
 		'date', 'statut', 'id_dictionnaire'
 	) as $champ)
 		$c[$champ] = _request($champ, $set);
-	$err .= instituer_definition($id_definition, $c);
+	$err .= instituer_definition($id_definition, $c, $purger_cache);
 
 	return $err;
 }
@@ -129,7 +129,7 @@ function revision_definition($id_definition, $c=false) {
  * @param array $c
  * @return
  */
-function instituer_definition($id_definition, $c){
+function instituer_definition($id_definition, $c, $purger_cache=true){
 	include_spip('inc/autoriser');
 	include_spip('inc/rubriques');
 	include_spip('inc/modifier');
@@ -200,7 +200,7 @@ function instituer_definition($id_definition, $c){
 	// on arrête là mais on refait quand même le cache des définitions si besoin
 	if (!count($champs)){
 		// On refait le cache des définitions si le nouveau ou l'ancien statut était publié
-		if ($statut_ancien == 'publie'){
+		if ($purger_cache and $statut_ancien == 'publie'){
 			include_spip('inc/dictionnaires');
 			dictionnaires_lister_definitions(true);
 		}
@@ -238,7 +238,7 @@ function instituer_definition($id_definition, $c){
 	);
 	
 	// On refait le cache des définitions si le nouveau ou l'ancien statut était publié
-	if ($champs['statut'] == 'publie' or $statut_ancien == 'publie'){
+	if ($purger_cache and ($champs['statut'] == 'publie' or $statut_ancien == 'publie')){
 		include_spip('inc/dictionnaires');
 		dictionnaires_lister_definitions(true);
 	}

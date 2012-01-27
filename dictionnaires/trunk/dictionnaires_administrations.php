@@ -82,13 +82,17 @@ function dictionnaires_migrer_acronymes(){
 							'lang' => forms_calcule_les_valeurs('forms_donnees_champs', $acronyme['id_donnee'], 'select_2', $id_form,' ', true)
 						);
 						
-						// On crée la définition dans la base
+						// On crée la définition dans la base SANS calculer le cache
 						include_spip('action/editer_definition');
 						if ($id_definition = insert_definition()){
-							definition_set($id_definition, $definition);
+							definition_set($id_definition, $definition, false);
 						}
 					}
 				}
+				
+				// On calcule le cache des définitions une seule fois à la fin
+				include_spip('inc/dictionnaires');
+				dictionnaires_lister_definitions(true);
 			}
 		}
 	}
