@@ -1,5 +1,13 @@
 <plugin>
 	<nom>GoogleMap Api</nom>
+	<slogan>
+		<multi>
+			[gl]Configurar a API Googlemaps
+			[es]Configurar la API Googlemaps
+			[fr]Configuer l'API Googlemaps
+			[en]Configure the Googlemap's API
+		</multi>
+	</slogan>
 	<icon></icon>
 	<version>0.2.0</version>
 	<etat>dev</etat>
@@ -9,7 +17,7 @@
 _ Permite empregar a API con vaios plugins (Gis, GeoForms...).
  [es] Plugin para configurar la API Googlemaps en la parte privada de tu sitio SPIP.
 _ Permite utilizar la API con varios plugins (Gis, GeoForms...).
-_ Una pa&tilde;gina de pruebas del plugin en [www.spip.escoitar.org->http://www.spip.escoitar.org]
+_ Una p&#225;gina de pruebas del plugin en [www.spip.escoitar.org->http://www.spip.escoitar.org]
  [fr]Plugin pour configurer l'API Googlemaps dans la partie priv&#233;e de votre site SPIP.
 _ Permet d'utiliser l'API avec plusieurs plugins (Gis, Geoforms...).
  [en]Plugin to configure the Googlemap's API in the private area of you spip website.
