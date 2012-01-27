@@ -1,5 +1,6 @@
 <plugin>
 	<nom>Dotclear2SPIP</nom>
+	<slogan>Importer le contenu d'une bdd Dotclear 2 dans un site SPIP</slogan>
 	<icon>dc.png</icon>
 	<categorie>divers</categorie>
 	<auteur>[Ma&#239;eul Rouquette->http://www.maieul.net]</auteur>
@@ -7,7 +8,7 @@
 	<version>0.2.0</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
-	<description> Un plugin pour importer du contenu d'une bdd Dotclear 2 dans un site SPIP.</description>
+	<description>Vous aviez un blog sous Dotclear 2 et vous souhaitez le migrer vers SPIP ? Ce plugin est l&#224; pour vous aider &#224; passer de l&#8217;un &#224; l&#8217;autre. Tout n&#8217;est cependant pas encore &#171; automatis&#233; &#187; et il vous restera donc encore des manips &#224; effectuer &#224; la main.</description>
 	<prefix>dot2</prefix>
 	<necessite id="crud" />
 	<necessite id="sale" />
