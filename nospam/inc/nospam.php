@@ -31,8 +31,7 @@ function creer_jeton($form, $qui=NULL) {
 	if (is_null($qui)){
 		if (isset($GLOBALS['visiteur_session']['id_auteur']) AND intval($GLOBALS['visiteur_session']['id_auteur']))
 			$qui = ":".$GLOBALS['visiteur_session']['id_auteur'].":".$GLOBALS['visiteur_session']['nom'];
-		else {
-			include_spip('inc/session');
+		elseif (!defined('_IS_BOT') OR !_IS_BOT) { // pas de jeton pour les bots qui n'ont rien d'interessant a poster
 			$qui = nospam_hash_env();
 		}
 	}
@@ -57,7 +56,6 @@ function verifier_jeton($jeton, $form, $qui=NULL) {
 		if (isset($GLOBALS['visiteur_session']['id_auteur']) AND intval($GLOBALS['visiteur_session']['id_auteur']))
 			$qui = ":".$GLOBALS['visiteur_session']['id_auteur'].":".$GLOBALS['visiteur_session']['nom'];
 		else {
-			include_spip('inc/session');
 			$qui = nospam_hash_env();
 		}
 	}
