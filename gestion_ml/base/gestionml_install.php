@@ -27,6 +27,7 @@ function gestionml_upgrade($nom_meta_base_version,$version_cible){
 				'domaine' => 'mondomaine.tld',
 				'identifiant' => '',
 				'mot_de_passe' => '',
+				'cacher_admin_restreints' => '',
 		), $config);
 		ecrire_meta('gestionml', serialize($config));
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');

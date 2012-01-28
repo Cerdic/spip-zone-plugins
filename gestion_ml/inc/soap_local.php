@@ -2,7 +2,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if (!class_exists('SoapClient', false)) {
-	trigger_error("Impossible de charger la classe SoapClient. L'extension php est-elle activ&eacute;e ?", E_USER_WARNING);
+	trigger_error("Impossible de charger la classe SoapClient. L'extension php_soap est-elle activ&eacute;e ?", E_USER_WARNING);
 	exit;
 }
 class SoapClientLocal extends SoapClient{

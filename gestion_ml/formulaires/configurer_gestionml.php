@@ -87,14 +87,28 @@ function formulaires_configurer_gestionml_saisies_dist(){
 function gestionml_auteurs_listes($config) {
 	$saisies = array() ;
 	
+	$saisies[] = array(
+		'saisie' => 'case',
+		'options' => array(
+			'nom' => 'cacher_admin_restreints',
+			'label' => _T('gestionml:label_cacher_admin_restreints'),
+			'explication' => _T('gestionml:explication_cacher_admin_restreints'),
+			'defaut' => $config['cacher_admin_restreints']
+		)
+	) ;
+
 	include_spip('inc/gestionml_api');
 	$resultat = gestionml_api_listes_toutes(true) ;
 	$nom_listes = array_keys($resultat['listes']) ;
 	$listes = array_combine($nom_listes,$nom_listes) ;
-	
-	$auteurs = sql_allfetsel("id_auteur, nom", "spip_auteurs", "statut='0minirezo'", "", "nom");
-	foreach($auteurs as $ligne)
-	{
+
+	if($config['cacher_admin_restreints']) {
+		$auteurs = sql_allfetsel("auteurs.id_auteur,auteurs.nom", "spip_auteurs AS auteurs LEFT JOIN spip_auteurs_rubriques AS restreints ON auteurs.id_auteur=restreints.id_auteur", "restreints.id_auteur IS NULL AND auteurs.statut='0minirezo'");
+	} else {
+		$auteurs = sql_allfetsel("id_auteur, nom", "spip_auteurs", "statut='0minirezo'", "", "nom");
+	}
+
+	foreach($auteurs as $ligne){
 		$saisies[] = array(
 			'saisie' => 'selection_multiple',
 			'options' => array(

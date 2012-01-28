@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description' => 'Gestion de Mailing Lists',
 
 	// E
+	'explication_cacher_admin_restreints' => 'Ne pas afficher les administrateurs restreints dans la liste ci-dessous' ,
 	'explication_domaine' => 'Saisissez votre domaine sans les www' ,
 	'explication_identifiant' => 'Votre identifiant de connexion au serveur SOAP (nic-handle)' ,
 	'explication_liste_de' => 'Choisissez la ou les listes que pourra gérer l\'auteur @nom@' ,
@@ -39,10 +40,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_infos' => 'Information sur la liste',
 
 	// L
-	'label_hebergeur' => 'Choisir votre hébergeur de listes' ,
 	'label_ajouter_mail' => 'Ajouter un email',
 	'label_auteurs_listes' => 'Configuration des listes gérables par auteur' ,
+	'label_cacher_admin_restreints' => 'Admins restreints' ,
 	'label_domaine' => 'Votre domaine' ,
+	'label_hebergeur' => 'Choisir votre hébergeur de listes' ,
 	'label_hebergeur_simule' => 'Hébergeur simulé (pour tests)' ,
 	'label_identifiant' => 'Identifiant' ,
 	'label_liste_de' => '@nom@' ,
