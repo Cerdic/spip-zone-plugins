@@ -35,11 +35,11 @@ function formulaires_configurer_forumsectorise_saisies_dist(){
 				'cacher_option_intro' => 'on',
 				'defaut' => $config['type'],
             'datas' => array(
-               'pos' => _T('bouton_radio_modere_posteriori'),
-               'pri' => _T('bouton_radio_modere_priori'),
-               'abo' => _T('bouton_radio_modere_abonnement'),
-               'non' => _T('info_pas_de_forum')
-            )
+						'pos' => _T('forumsectorise:bouton_radio_publication_immediate'),
+						'pri' => _T('forumsectorise:bouton_radio_moderation_priori'),
+						'abo' => _T('forumsectorise:bouton_radio_enregistrement_obligatoire'),
+						'non' => _T('forumsectorise:bouton_radio_info_pas_de_forum')
+				)
 			)
 		),
 		array(
@@ -51,10 +51,10 @@ function formulaires_configurer_forumsectorise_saisies_dist(){
 				'multiple' => 'oui',
 				'defaut' => $config['option'],
             'datas' => array(
-               'futur' => _T('bouton_radio_articles_futurs'),
-               'saufnon' => _T('bouton_radio_articles_tous_sauf_forum_desactive'),
-               'tous' => _T('bouton_radio_articles_tous')
-            )
+               'futur' => _T('forumsectorise:bouton_radio_articles_futurs'),
+               'saufnon' => _T('forumsectorise:bouton_radio_articles_tous_sauf_forum_desactive'),
+               'tous' => _T('forumsectorise:bouton_radio_articles_tous')
+				)
 			)
 		)
 	);

@@ -3,7 +3,7 @@
 	<slogan>Autoriser les forums sur un secteur particulier</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.3.0</version>
+	<version>0.4.0</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<description>
@@ -12,8 +12,7 @@
 		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Forum-sectorise</lien>
-	<icon>images/forumsectorise-32.png</icon>
-	<lien></lien>
+	<icon>prive/themes/spip/images/forumsectorise-32.png</icon>
 	<prefix>forumsectorise</prefix>
 	<install>base/forumsectorise_install.php</install>
 	<pipeline>
@@ -21,12 +20,12 @@
 		<inclure>forumsectorise_pipelines.php</inclure>
 	</pipeline>
 	<bouton id='forumsectorise' parent='configuration'>
-		<icone>images/forumsectorise-24.png</icone>
+		<icone>prive/themes/spip/images/forumsectorise-24.png</icone>
 		<titre>forumsectorise:titre_menu</titre>
 		<url>configurer_forumsectorise</url>
 	</bouton>
 	<bouton id='forumsectorise2' parent='bando_configuration'>
-		<icone>images/forumsectorise-16.png</icone>
+		<icone>prive/themes/spip/images/forumsectorise-16.png</icone>
 		<titre>forumsectorise:titre_menu</titre>
 		<url>configurer_forumsectorise</url>
 	</bouton>

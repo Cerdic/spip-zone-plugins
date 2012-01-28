@@ -1,0 +1,25 @@
+<paquet
+	prefix="forumsectorise"
+	categorie="communication"
+	version="0.4.0"
+	etat="stable"
+	compatibilite="[2.1.0;3.0.99]"
+	logo="prive/themes/spip/images/forumsectorise-32.png"
+	schema="0.2"
+	documentation="http://www.spip-contrib.net/Forum-sectorise"
+>	
+
+	<nom>Forum Sectoris&#233;</nom>
+	<!-- Autoriser les forums sur un secteur particulier -->
+
+	<auteur>Yffic</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="pre_insertion" inclure="forumsectorise_pipelines.php" />
+	<pipeline nom="autoriser" inclure="inc/forumsectorise_autoriser.php" />
+
+	<necessite nom="saisies" compatibilite="[1.9.0;[" />
+
+	<menu nom="forumsectorise" titre="forumsectorise:titre_menu" parent="bando_configuration" icone="images/forumsectorise-16.png" action="configurer_forumsectorise" />
+</paquet>
