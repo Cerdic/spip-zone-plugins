@@ -19,11 +19,11 @@ _ [emthanh@free.fr->emthanh@free.fr]
 	<etat>stable</etat>
 	<description>
 		<multi>
-			[fr]Une galerie d&acute;image qui utilise la librairie javascript Galleria.Le plugin propose un mod&#232;le SPIP galleria.
+			[fr]Une galerie d'images qui utilise la librairie javascript Galleria. Le plugin propose un mod&#232;le SPIP galleria.
 			SPIP n&#233;cessite le plugin {{jQuery}} pour les versions de SPIP &lt; 1.9.2
  
-Vous pouvez cr&#233;er des galerie d'images qui utilisent la librairie javascript Galleria.
-_ Pour cr&#233;er une galerie d'image ajoutez une balise &lt;galleria##> dans un article ,ou ## est l'ID de l'article.
+Vous pouvez cr&#233;er des galeries d'images qui utilisent la librairie javascript Galleria.
+_ Pour cr&#233;er une galerie d'images, ajoutez une balise &lt;galleriaXX&gt; dans un article ,ou XX est l'ID de l'article.
  
 Les options du mod&#232;le sont :
 -* width
@@ -64,7 +64,7 @@ ex : <code><galleria22></code> a gallery in the article 22 ; <code><galleria22|l
 	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<categorie>multimedia</categorie>
 	<lien>http://www.spip-contrib.net/Galleria</lien>
-	<prefix>Galleria</prefix>
+	<prefix>galleria</prefix>
 	<pipeline>
 	 <nom>insert_head</nom>
 	 <inclure>head.php</inclure>

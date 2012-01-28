@@ -1,14 +1,14 @@
 <?php
 
-function Galleria_insert_head($flux){
-	$flux .= '<!--[ insert_head ]-->';
+function galleria_insert_head($flux){
+	$flux .= '<!-- insert_head -->';
 	$flux .= insert_js();
 	return $flux;
 }
 
-function Galleria_header_prive($flux){
+function galleria_header_prive($flux){
 	include_spip("inc/filtres");
-	$flux .= '<!--[ header_prive ]-->';
+	$flux .= '<!-- header_prive -->';
 	$flux .= insert_js();
 	return $flux;
 }
