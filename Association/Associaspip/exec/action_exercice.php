@@ -30,22 +30,22 @@ function exec_action_exercice() {
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:exercice_budgetaire_supprime'));
-		echo debut_gauche("", true);
+		echo debut_gauche('', true);
 
 		echo debut_boite_info(true);
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
 
-		echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'), generer_url_ecrire('exercices'), "retour-24.png"));
+		echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'), generer_url_ecrire('exercices'), 'retour-24.png'));
 
-		echo debut_droite("", true);
+		echo debut_droite('', true);
 
-		echo debut_cadre_relief("", false, "", _T('asso:exercice_budgetaire_titre'));
+		echo debut_cadre_relief('', false, '', _T('asso:exercice_budgetaire_titre'));
 
 		$intitule_exercice = sql_getfetsel('intitule', 'spip_asso_exercices', "id_exercice=$id_exercice");
 
 		echo '<p><strong>' . _T('asso:vous_vous_appretez_a_effacer_exercice_budgetaire') . ' : ' . $intitule_exercice . '</strong></p>';
-		$res = '<p style="float:right;"><input type="submit" value="' . _T('asso:bouton_confirmer') . '" class="fondo" /></p>';
+		$res = '<p class="boutons"><input type="submit" value="' . _T('asso:bouton_confirmer') . '" class="fondo" /></p>';
 		echo redirige_action_post('supprimer_exercice', $id_exercice, 'exercices', '', $res);
 
 		fin_cadre_relief();

@@ -10,24 +10,20 @@
 \***************************************************************************/
 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
 
 function action_editer_asso_comptes() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_compte = $securiser_action();
-
 	include_spip('inc/association_comptabilite');
-
 	$date= _request('date');
 	$imputation= _request('imputation');
-
 	$recette = association_recupere_montant(_request('recette'));
 	$depense = association_recupere_montant(_request('depense'));
 	$justification= _request('justification');
 	$journal= _request('journal');
-
 	$type_operation = _request('type_operation');
 	/* dans le cas ou c'est un virement on va generer 2 ecritures
 	 * Supposons un virement de 400€ du compte 5171 (Caisse d'epargne) vers le compte 531 (caisse)
@@ -41,8 +37,7 @@ function action_editer_asso_comptes() {
 	 *
 	 * Dans Bilan et Compte de résultat, le compte 581 doit avoir un solde = 0 !!!!
 	 */
-
-	if ($type_operation == $GLOBALS['association_metas']['classe_banques']) {
+	if ($type_operation==$GLOBALS['association_metas']['classe_banques']) {
 		if(!$justification) $justification = _T('asso:virement_interne');
 		/* si le compte 58xx n'existe pas on le cree dans le plan comptable */
 		$compte_virement = association_creer_compte_virement_interne();
@@ -74,7 +69,7 @@ function action_editer_asso_comptes() {
 			association_modifier_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, '', $id_compte);
 		}
 	}
-
 	return array($id_compte, '');
 }
+
 ?>

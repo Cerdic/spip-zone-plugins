@@ -8,21 +8,21 @@
 		<ul>
 			<li class="editer_code">
 				<label for="code"><strong><:asso:ressources_libelle_code:></strong></label>
-				<input type="text" name="code" [value="(#ENV{code})"] id="code"  class="formo" />
+				<input type="text" name="code" [value="(#ENV{code})"] id="code"  class="text" />
 			</li>
 			<li class="editer_intitule">
 				<label for="intitule"><strong><:asso:ressources_libelle_intitule:></strong></label>
-				<input type="text" name="intitule" [value="(#ENV{intitule})"] id="intitule"  class="formo" />
+				<input type="text" name="intitule" [value="(#ENV{intitule})"] id="intitule"  class="text" />
 			</li>
 			<li class="editer_date_acquisition">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_acquisition})</span>]
 				<label for="date_acquisition"><strong><:asso:ressources_libelle_date_acquisition:></strong></label>
-				<input type="text" name="date_acquisition" [value="(#ENV{date_acquisition}|affdate{Y-m-d})"] id="date_acquisition"  class="formo" />
+				<input type="[(HTML5|?{date,text})]" name="date_acquisition" [value="(#ENV{date_acquisition}|affdate{Y-m-d})"] id="date_acquisition"  class="date" />
 			</li>
 			<li class="editer_pu">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{pu})</span>]
 				<label for="pu"><strong><:asso:ressources_libelle_prix_location:></strong></label>
-				<input type="text" name="pu" [value="(#ENV{pu})"] id="pu"  class="formo" />
+				<input type="[(HTML5|?{number,text})]" name="pu" [value="(#ENV{pu})"] id="pu"  class="number float price" />
 			</li>
 			<li class="editer_statut">
 				<label for="statut"><strong><:asso:ressources_libelle_statut:></strong></label>

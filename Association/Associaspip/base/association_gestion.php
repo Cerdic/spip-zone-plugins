@@ -9,8 +9,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
 
 include_spip('base/association');
 include_spip('base/abstract_sql');
@@ -75,9 +75,9 @@ function association_upgrade($meta, $courante, $table='meta')
 		return 0; // Reussite (supposee !)
 	} else {
 	// compatibilite avec les numeros de version non entiers
-		$installee = ($n > 1) ? $n : ($n * 100);
+		$installee = ($n>1) ? $n : ($n*100);
 		$GLOBALS['association_maj_erreur'] = 0;
-		if ($courante > $installee) {
+		if ($courante>$installee) {
 			include_spip('base/upgrade');
 			$n = maj_while($installee, $courante, $GLOBALS['association_maj'], $meta, $table);
 			$n = $n ? $n[0] : $GLOBALS['association_maj_erreur'];
@@ -122,7 +122,7 @@ $GLOBALS['association_maj'][63] = array(
 
 function association_maj_64()
 {
-	if (_ASSOCIATION_AUTEURS_ELARGIS == 'spip_auteurs_elargis') {
+	if (_ASSOCIATION_AUTEURS_ELARGIS=='spip_auteurs_elargis') {
 		sql_alter("TABLE spip_auteurs_elargis ADD validite date NOT NULL default '0000-00-00'");
 		sql_alter("TABLE spip_auteurs_elargis ADD montant float NOT NULL default '0'");
 		sql_alter("TABLE spip_auteurs_elargis ADD date date NOT NULL default '0000-00-00' ");
@@ -344,7 +344,7 @@ function association_maj_48001()
 		}
 	} else { /* l'utilisateur veut effectuer la maj, on controle si il y a des precision quand a l'ecrasement de donnees existentes */
 			$choix_donnees = _request('association_maj_coordonnees_traitement_data');
-			if ($choix_donnees == "merge") { /* on integre les donnees d'association dans Coordonnees */
+			if ($choix_donnees=='merge') { /* on integre les donnees d'association dans Coordonnees */
 				include_spip('action/editer_numero');
 				include_spip('action/editer_adresse');
 				include_spip('inc/modifier');

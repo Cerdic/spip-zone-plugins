@@ -28,7 +28,7 @@ function exec_edit_exercice() {
 	else {
 		$id = intval(_request('id'));
 
-		$data = !$id ? '' : sql_fetsel("*", "spip_asso_exercices", "id_exercice=$id");
+		$data = !$id ? '' : sql_fetsel('*', 'spip_asso_exercices', "id_exercice=$id");
 		if ($data) {
 			$intitule = $data['intitule'];
 			$commentaire = $data['commentaire'];
@@ -45,7 +45,7 @@ function exec_edit_exercice() {
 		echo $commencer_page(_T('asso:exercice_budgetaire_edition_titre'));
 		association_onglets();
 
-		echo debut_gauche("", true);
+		echo debut_gauche('', true);
 
 		echo debut_boite_info(true);
 		echo association_date_du_jour();
@@ -53,9 +53,9 @@ function exec_edit_exercice() {
 
 		echo association_retour();
 
-		echo debut_droite("", true);
+		echo debut_droite('', true);
 
-		echo debut_cadre_relief("", false, "", _T('asso:exercice_budgetaire_titre'));
+		echo debut_cadre_relief('', false, '', _T('asso:exercice_budgetaire_titre'));
 
 		$res = '<label for="intitule"><strong>' . _T('asso:exercice_intitule'). '</strong></label>'
 			. '<input name="intitule" type="text" value="'.$intitule .'" id="intitule" class="formo" />'
@@ -65,10 +65,10 @@ function exec_edit_exercice() {
 			. '<input name="debut" type="text" value="'.$debut . '" id="debut" class="formo" />'
 			. '<label for="fin"><strong>' . _T('asso:exercice_fin_aaaa'). '</strong></label>'
 			. '<input name="fin" type="text" value="'. $fin . '" id="fin" class="formo" />'
-			. '<div style="float:right;">'
-			. '<input name="submit" type="submit" value="'. _T('asso:bouton_envoyer'). '" class="fondo" /></div>';
+			. '<p class="boutons">'
+			. '<input name="submit" type="submit" value="'. _T('asso:bouton_envoyer'). '" class="fondo" /></p>';
 
-		echo redirige_action_post($action . '_exercice', $id, 'exercices', "", "<div>$res</div>");
+		echo redirige_action_post($action . '_exercice', $id, 'exercices', '', "<div>$res</div>");
 		echo fin_cadre_relief(true);
 		echo fin_page_association();
 	}

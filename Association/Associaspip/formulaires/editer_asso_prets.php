@@ -9,7 +9,9 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
+
 include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/association_comptabilite');
@@ -19,23 +21,20 @@ function formulaires_editer_asso_prets_charger_dist($id_pret='')
 	/* cet appel va charger dans $contexte tous les champs de la table spip_asso_prets associes a l'id_pret passe en param */
 	$id_pret = intval(_request('id_pret')); // ?
 	$contexte = formulaires_editer_objet_charger('asso_prets', $id_pret, '', '',  generer_url_ecrire('prets'), '');
-
 	if (!$id_pret) { /* si c'est une nouvelle operation, on charge la date d'aujourd'hui, charge un id_compte et journal null, le statut et le prix de location de base */
 		$contexte['date_sortie'] = $contexte['date_retour'] = date('Y-m-d');
 		$contexte['commentaire_sortie'] = $contexte['commentaire_retour'] = '';
 		$id_compte = $journal = '';
 		$contexte['id_ressource'] = intval(_request('id_ressource'));;
-		$ressource = sql_fetsel("pu,statut", "spip_asso_ressources", "id_ressource=$contexte[id_ressource]");
+		$ressource = sql_fetsel('pu,statut', 'spip_asso_ressources', "id_ressource=$contexte[id_ressource]");
 		$contexte['statut'] = $ressource['statut'];
 		$montant = $ressource['pu'];
 	} else { /* sinon on recupere l'id_compte correspondant et le journal dans la table des comptes */
-//		$contexte['date_retour'] = date('Y-m-d');
-		$comptes = sql_fetsel("id_compte,journal,recette", "spip_asso_comptes", "imputation=".$GLOBALS['association_metas']['pc_prets']." AND id_journal=$id_pret");
+		$comptes = sql_fetsel('id_compte,journal,recette', 'spip_asso_comptes', "imputation='".$GLOBALS['association_metas']['pc_prets']."' AND id_journal=$id_pret");
 		$id_compte = $comptes['id_compte'];
 		$journal = $comptes['journal'];
 		$montant = $comptes['recette'];
 	}
-
 	/* ajout du journal et du montant qui ne se trouvent pas dans la table asso_prets et ne sont donc pas charges par editer_objet_charger */
 	$contexte['journal'] = $journal;
 	$contexte['montant'] = $montant;
@@ -47,16 +46,13 @@ function formulaires_editer_asso_prets_charger_dist($id_pret='')
 	/* si id_emprunteur est egal a 0, c'est que le champ est vide, on ne prerempli rien */
 	if (!$contexte['id_emprunteur'])
 		$contexte['id_emprunteur']='';
-
 	/* paufiner la presentation des valeurs  */
 	if ($contexte['montant'])
 		$contexte['montant'] = association_nbrefr($contexte['montant']);
-
-	// on ajoute les metas de classe_banques et destinations
-	$contexte['classe_banques'] = $GLOBALS['association_metas']['classe_banques'];
+	// on ajoute les metas destinations
 	if ($GLOBALS['association_metas']['destinations']) {
-		$contexte['destinations_on'] = true;
-		/* on recupere les destinations associes a id_compte */
+		include_spip('inc/association_comptabilite');
+		/* on recupere les destinations associees */
 		$dest_id_montant = association_liste_destinations_associees($id_compte);
 		if (is_array($dest_id_montant)) {
 			$contexte['id_dest'] = array_keys($dest_id_montant);
@@ -68,42 +64,41 @@ function formulaires_editer_asso_prets_charger_dist($id_pret='')
 		$contexte['unique_dest'] = true;
 		$contexte['defaut_dest'] = $GLOBALS['association_metas']['dc_prets'];; /* ces variables sont recuperees par la balise dynamique directement dans l'environnement */
 	}
-
 	return $contexte;
 }
 
 function formulaires_editer_asso_prets_verifier_dist($id_pret)
 {
 	$erreurs = array();
-
 	/* on verifie que montant et duree ne soient pas negatifs */
 	if (association_recupere_montant(_request('montant'))<0)
 		$erreurs['montant'] = _T('asso:erreur_montant');
 	if (association_recupere_montant(_request('duree'))<0)
 		$erreurs['duree'] = _T('asso:erreur_montant');
-
 	/* verifier si on a un numero d'adherent qu'il existe dans la base */
 	$id_emprunteur = intval(_request('id_emprunteur'));
-	if ($id_emprunteur != 0) {
+	if ($id_emprunteur!=0) {
 		if (sql_countsel('spip_asso_membres', "id_auteur=$id_emprunteur")==0) {
 			$erreurs['id_emprunteur'] = _T('asso:erreur_id_adherent');
 		}
 	}
-
+	/* verifier si besoin que le montant des destinations correspond bien au montant de l'opération */
+	if (($GLOBALS['association_metas']['destinations']) && !array_key_exists('montant', $erreurs)) {
+		include_spip('inc/association_comptabilite');
+		if ($err_dest = association_verifier_montant_destinations($montant)) {
+			$erreurs['destinations'] = $err_dest;
+		}
+	}
 	/* verifier les dates */
 	if ($erreur_date = association_verifier_date(_request('date_sortie'))) {
-		$erreurs['date_sortie'] = _request('date_sortie')."&nbsp;:&nbsp;".$erreur_date; /* on ajoute la date eronee entree au debut du message d'erreur car le filtre affdate corrige de lui meme et ne reaffiche plus les valeurs eronees */
+		$erreurs['date_sortie'] = _request('date_sortie').'&nbsp;:&nbsp;'.$erreur_date; /* on ajoute la date eronee entree au debut du message d'erreur car le filtre affdate corrige de lui meme et ne reaffiche plus les valeurs eronees */
 	}
 	if ($erreur_date = association_verifier_date(_request('date_retour'))) {
-		$erreurs['date_retour'] = _request('date_retour')."&nbsp;:&nbsp;".$erreur_date; /* on ajoute la date eronee entree au debut du message d'erreur car le filtre affdate corrige de lui meme et ne reaffiche plus les valeurs eronees */
+		$erreurs['date_retour'] = _request('date_retour').'&nbsp;:&nbsp;'.$erreur_date; /* on ajoute la date eronee entree au debut du message d'erreur car le filtre affdate corrige de lui meme et ne reaffiche plus les valeurs eronees */
 	}
-
-	/* verifier les destinations comptables */
-
 	if (count($erreurs)) {
 		$erreurs['message_erreur'] = _T('asso:erreur_titre');
 	}
-
 	return $erreurs;
 }
 

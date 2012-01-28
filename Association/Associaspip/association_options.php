@@ -9,18 +9,19 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
 
 // Le premier element indique un ancien membre
 $GLOBALS['association_liste_des_statuts'] =
   array('sorti','prospect','ok','echu','relance');
 
 $GLOBALS['association_styles_des_statuts'] = array(
-	"echu" => "impair",
-	"ok" => "valide",
-	"prospect" => "prospect",
-	"relance" => "pair",
-	"sorti" => "sortie"
+	'echu' => 'impair',
+	'ok' => 'valide',
+	'prospect' => 'prospect',
+	'relance' => 'pair',
+	'sorti' => 'sortie'
 );
 
 define('_DIR_PLUGIN_ASSOCIATION_ICONES', _DIR_PLUGIN_ASSOCIATION.'img_pack/');
@@ -45,32 +46,32 @@ function association_bouton($texte, $image, $script, $args='', $img_attributes='
 
 function association_retour($adresse_retour='')
 {
-	return bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  ($adresse_retour=='')?str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']):$adresse_retour, "retour-24.png"));
+	return bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  ($adresse_retour=='')?str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']):$adresse_retour, 'retour-24.png'));
 }
 
 function request_statut_interne()
 {
 	$statut_interne = _request('statut_interne');
 	if (in_array($statut_interne, $GLOBALS['association_liste_des_statuts'] ))
-		return "statut_interne=" . sql_quote($statut_interne);
-	elseif ($statut_interne == 'tous')
+		return 'statut_interne='. sql_quote($statut_interne);
+	elseif ($statut_interne=='tous')
 		return "statut_interne LIKE '%'";
 	else {
 		set_request('statut_interne', 'defaut');
 		$a = $GLOBALS['association_liste_des_statuts'];
 		array_shift($a);
-		return sql_in("statut_interne", $a);
+		return sql_in('statut_interne', $a);
 	}
 }
 
 function association_ajouterBoutons($boutons_admin) {
 		// si on est admin
-	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
-		$menu = "naviguer";
-		$icone = "annonce.gif";
+	if ($GLOBALS['connect_statut']=='0minirezo' && $GLOBALS['connect_toutes_rubriques']) {
+		$menu = 'naviguer';
+		$icone = 'annonce.gif';
 		if (isset($boutons_admin['bando_reactions'])){
-			$menu = "bando_reactions";
-			$icone = "annonce.gif";
+			$menu = 'bando_reactions';
+			$icone = 'annonce.gif';
 		}
 		$boutons_admin[$menu]->sousmenu['association']= new Bouton(
 			_DIR_PLUGIN_ASSOCIATION_ICONES.$icone,  // icone
@@ -85,23 +86,36 @@ function association_ajouterBoutons($boutons_admin) {
 # ensemble de fonctions pour recuperer les donnees de l'exercice en cours
 // TODO ---> POO !!!
 function exercice_intitule($exercice) {
-	$data = sql_fetsel("intitule", 'spip_asso_exercices','id_exercice='.$exercice);
+	$data = sql_fetsel('intitule', 'spip_asso_exercices','id_exercice='.$exercice);
 	return $data['intitule'];
 }
 function exercice_date_debut($exercice) {
-	$data = sql_fetsel("debut", 'spip_asso_exercices','id_exercice='.$exercice);
+	$data = sql_fetsel('debut', 'spip_asso_exercices','id_exercice='.$exercice);
 	return $data['debut'];
 }
 function exercice_date_fin($exercice) {
-	$data = sql_fetsel("fin", 'spip_asso_exercices','id_exercice='.$exercice);
+	$data = sql_fetsel('fin', 'spip_asso_exercices','id_exercice='.$exercice);
 	return $data['fin'];
 }
 
 // affichage du nom des membres
-function association_calculer_nom_membre($civilite, $prenom, $nom) {
-	$res = ($GLOBALS['association_metas']['civilite']=="on")?$civilite.' ':'';
-	$res .= ($GLOBALS['association_metas']['prenom']=="on")?$prenom.' ':'';
-	$res .= $nom;
+function association_calculer_nom_membre($civilite, $prenom, $nom, $html_tag='') {
+	$res = '';
+	if ($html_tag) {
+		$res = '<'.$html_tag.' class="'. (($civilite || $prenonm)?'n':'fn') .'">';
+	}
+	if ($GLOBALS['association_metas']['civilite']=='on' && $civilite) {
+		$res .= ($html_tag?'<span class="honorific-prefix">':'') .$civilite. ($html_tag?'</span>':'') .' ';
+	}
+	if ($GLOBALS['association_metas']['prenom']=='on' && $prenom) {
+		$res .= ($html_tag?'<span class="given-name">':'') .$prenom. ($html_tag?'</span>':'') .' ';
+	}
+	if ($nom) {
+		$res .= ($html_tag?'<span class="family-name">':'') .$nom. ($html_tag?'</span>':'') .' ';
+	}
+	if ($html_tag) {
+		$res .= '</'.$html_tag'>';
+	}
 	return $res;
 }
 
@@ -112,11 +126,11 @@ function association_datefr($date) {
 		$mois = $split[1];
 		$jour = $split[2];
 		return $jour.'/'.$mois.'/'.$annee;
-	}
+}
 
 function association_verifier_date($date) {
 	if (!preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $date)) return _T('asso:erreur_format_date');
-	list($annee, $mois, $jour) = explode("-",$date);
+	list($annee, $mois, $jour) = explode('-',$date);
 	if (!checkdate($mois, $jour, $annee)) return _T('asso:erreur_date');
 	return;
 }
@@ -128,11 +142,12 @@ function association_nbrefr($montant) {
 
 /* prend en parametre le nom de l'argument a chercher dans _request et retourne un float */
 function association_recupere_montant ($valeur) {
-	if ($valeur != '') {
-		$valeur = str_replace(" ", "", $valeur); /* suppprime les espaces separateurs de milliers */
-		$valeur = str_replace(",", ".", $valeur); /* convertit les , en . */
+	if ($valeur!='') {
+		$valeur = str_replace(' ', '', $valeur); /* suppprime les espaces separateurs de milliers */
+		$valeur = str_replace(',', '.', $valeur); /* convertit les , en . */
 		$valeur = floatval($valeur);
-	} else $valeur = 0.0;
+	} else
+		$valeur = 0.0;
 	return $valeur;
 }
 
@@ -162,7 +177,7 @@ function affichage_div($type_operation,$list_operation) {
 		$operations = explode('-', $list_operation);
 		$res = 'cachediv';
 		for($i=0;$i<count($operations);$i++) {
-			$operation = $GLOBALS['association_metas']["classe_".$operations[$i]];
+			$operation = $GLOBALS['association_metas']['classe_'.$operations[$i]];
 			if($type_operation===$operation) {
 				$res = '';
 				break;
@@ -170,7 +185,7 @@ function affichage_div($type_operation,$list_operation) {
 		}
 	}
 	else {
-		$res = ($type_operation===$GLOBALS['association_metas']["classe_".$list_operation])?'':'cachediv';
+		$res = ($type_operation===$GLOBALS['association_metas']['classe_'.$list_operation])?'':'cachediv';
 	}
 	return $res;
 }
@@ -184,7 +199,7 @@ function encadre($texte,$avant='[',$apres=']') {
 // le raccourci "don" implique de declarer le raccourci "asso_don" etc.
 
 function generer_url_asso_don($id, $param='', $ancre='') {
-	return  generer_url_ecrire('edit_don', "id=" . intval($id));
+	return  generer_url_ecrire('edit_don', 'id='.intval($id));
 }
 
 function generer_url_don($id, $param='', $ancre='') {
@@ -192,7 +207,7 @@ function generer_url_don($id, $param='', $ancre='') {
 }
 
 function generer_url_asso_membre($id, $param='', $ancre='') {
-	return  generer_url_ecrire('voir_adherent', "id=" . intval($id));
+	return  generer_url_ecrire('voir_adherent', 'id='.intval($id));
 }
 
 function generer_url_membre($id, $param='', $ancre='') {
@@ -200,7 +215,7 @@ function generer_url_membre($id, $param='', $ancre='') {
 }
 
 function generer_url_asso_vente($id, $param='', $ancre='') {
-	return  generer_url_ecrire('edit_vente', "id=" . intval($id));
+	return  generer_url_ecrire('edit_vente', 'id='.intval($id));
 }
 
 function generer_url_vente($id, $param='', $ancre='') {
@@ -227,4 +242,5 @@ $inc_meta('association_metas');
 if (test_plugin_actif('COORDONNEES')) {
 	include_spip('inc/association_coordonnees');
 }
+
 ?>

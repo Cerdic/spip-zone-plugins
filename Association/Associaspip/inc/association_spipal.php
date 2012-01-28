@@ -11,7 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // Fonction prenant en charge la validation d'une notification de paiement Paypal
-// Voir les specifications dans 
+// Voir les specifications dans
 // http://www.spip-contrib.net/Plugin-SPIPAL
 
 // Actuellement on considère que tout paiement est un don.
@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function inc_association_spipal($env)
 {
   	$custom = @unserialize($env['custom']);
-	$id = ($custom['id_auteur'] < 0) ? (0-$custom['id_auteur']) : intval($custom['id_auteur']);
+	$id = ($custom['id_auteur']<0) ? (0-$custom['id_auteur']) : intval($custom['id_auteur']);
 	$montant = intval($env['payment_fee']?$env['payment_fee']:$env['mc_fee']);
 	$where = "id_adherent=$id AND argent=$montant AND vu=0";
 

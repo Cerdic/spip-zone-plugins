@@ -15,14 +15,14 @@ include_spip ('inc/navigation_modules');
 include_spip('inc/association_comptabilite');
 
 function action_editer_asso_ventes(){
-	
+
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_vente=$securiser_action();
 
 	include_spip('base/association');
-		
+
 	$id_compte=intval(_request('id_compte'));
-	
+
 	$date_vente = _request('date_vente');
 	$article = _request('article');
 	$code = _request('code');
@@ -33,7 +33,7 @@ function action_editer_asso_ventes(){
 	$date_envoi = _request('date_envoi');
 	$frais_envoi = association_recupere_montant(_request('frais_envoi'));
 	$prix_vente =  association_recupere_montant(_request('prix_vente'));
-	
+
 	$journal = _request('journal');
 	$justification='[vente n&deg; '.$id_vente.'->vente'.$id_vente.'] - '.$article;
 	$commentaire=$_POST['commentaire'];
@@ -74,7 +74,7 @@ function ventes_modifier($date_vente, $article, $code, $acheteur, $id_acheteur, 
 		$critere = $association_imputation('pc_frais_envoi');
 		$critere .= ($critere ? ' AND ' : '') . "id_journal=$id_vente";
 
-		association_modifier_operation_comptable($date_vente, $frais_envoi, 0, $justification.' - frais d\'envoi', $GLOBALS['association_metas']['pc_frais_envoi'], $journal, $id_vente, sql_getfetsel("id_compte", "spip_asso_comptes", $critere));
+		association_modifier_operation_comptable($date_vente, $frais_envoi, 0, $justification.' - frais d\'envoi', $GLOBALS['association_metas']['pc_frais_envoi'], $journal, $id_vente, sql_getfetsel('id_compte', 'spip_asso_comptes', $critere));
 	}
 }
 

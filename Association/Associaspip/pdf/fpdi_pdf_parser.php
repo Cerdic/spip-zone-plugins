@@ -28,38 +28,38 @@ class fpdi_pdf_parser extends pdf_parser {
      * @var array
      */
     var $pages;
-    
+
     /**
      * Page count
      * @var integer
      */
     var $page_count;
-    
+
     /**
      * actual page number
      * @var integer
      */
     var $pageno;
-    
+
     /**
      * PDF Version of imported Document
      * @var string
      */
     var $pdfVersion;
-    
+
     /**
      * FPDI Reference
      * @var object
      */
     var $fpdi;
-    
+
     /**
      * Available BoxTypes
      *
      * @var array
      */
     var $availableBoxes = array('/MediaBox', '/CropBox', '/BleedBox', '/TrimBox', '/ArtBox');
-        
+
     /**
      * Constructor
      *
@@ -68,28 +68,24 @@ class fpdi_pdf_parser extends pdf_parser {
      */
     function fpdi_pdf_parser($filename, &$fpdi) {
         $this->fpdi =& $fpdi;
-		
         parent::pdf_parser($filename);
-
         // resolve Pages-Dictonary
         $pages = $this->pdf_resolve_object($this->c, $this->root[1][1]['/Pages']);
-
         // Read pages
         $this->read_pages($this->c, $pages, $this->pages);
-        
         // count pages;
         $this->page_count = count($this->pages);
     }
-    
+
     /**
      * Overwrite parent::error()
      *
      * @param string $msg  Error-Message
      */
     function error($msg) {
-    	$this->fpdi->error($msg);	
+    	$this->fpdi->error($msg);
     }
-    
+
     /**
      * Get pagecount from sourcefile
      *
@@ -106,15 +102,15 @@ class fpdi_pdf_parser extends pdf_parser {
      * @param int $pageno Pagenumber to use
      */
     function setPageno($pageno) {
-        $pageno = ((int) $pageno) - 1;
+        $pageno = ((int) $pageno)-1;
 
-        if ($pageno < 0 || $pageno >= $this->getPageCount()) {
+        if ($pageno<0 || $pageno >= $this->getPageCount()) {
             $this->fpdi->error('Pagenumber is wrong!');
         }
 
         $this->pageno = $pageno;
     }
-    
+
     /**
      * Get page-resources from current page
      *
@@ -123,7 +119,7 @@ class fpdi_pdf_parser extends pdf_parser {
     function getPageResources() {
         return $this->_getPageResources($this->pages[$this->pageno]);
     }
-    
+
     /**
      * Get page-resources from /Page
      *
@@ -138,7 +134,7 @@ class fpdi_pdf_parser extends pdf_parser {
     	// parent object.
         if (isset ($obj[1][1]['/Resources'])) {
     		$res = $this->pdf_resolve_object($this->c, $obj[1][1]['/Resources']);
-    		if ($res[0] == PDF_TYPE_OBJECT)
+    		if ($res[0]==PDF_TYPE_OBJECT)
                 return $res[1];
             return $res;
     	} else {
@@ -146,7 +142,7 @@ class fpdi_pdf_parser extends pdf_parser {
     			return false;
     		} else {
                 $res = $this->_getPageResources($obj[1][1]['/Parent']);
-                if ($res[0] == PDF_TYPE_OBJECT)
+                if ($res[0]==PDF_TYPE_OBJECT)
                     return $res[1];
                 return $res;
     		}
@@ -163,18 +159,17 @@ class fpdi_pdf_parser extends pdf_parser {
      */
     function getContent() {
         $buffer = '';
-        
+
         if (isset($this->pages[$this->pageno][1][1]['/Contents'])) {
             $contents = $this->_getPageContent($this->pages[$this->pageno][1][1]['/Contents']);
             foreach($contents AS $tmp_content) {
                 $buffer .= $this->_rebuildContentStream($tmp_content) . ' ';
             }
         }
-        
         return $buffer;
     }
-    
-    
+
+
     /**
      * Resolve all content-objects
      *
@@ -183,20 +178,18 @@ class fpdi_pdf_parser extends pdf_parser {
      */
     function _getPageContent($content_ref) {
         $contents = array();
-        
-        if ($content_ref[0] == PDF_TYPE_OBJREF) {
+        if ($content_ref[0]==PDF_TYPE_OBJREF) {
             $content = $this->pdf_resolve_object($this->c, $content_ref);
-            if ($content[1][0] == PDF_TYPE_ARRAY) {
+            if ($content[1][0]==PDF_TYPE_ARRAY) {
                 $contents = $this->_getPageContent($content[1]);
             } else {
                 $contents[] = $content;
             }
-        } else if ($content_ref[0] == PDF_TYPE_ARRAY) {
+        } else if ($content_ref[0]==PDF_TYPE_ARRAY) {
             foreach ($content_ref[1] AS $tmp_content_ref) {
                 $contents = array_merge($contents,$this->_getPageContent($tmp_content_ref));
             }
         }
-
         return $contents;
     }
 
@@ -209,38 +202,35 @@ class fpdi_pdf_parser extends pdf_parser {
      */
     function _rebuildContentStream($obj) {
         $filters = array();
-        
         if (isset($obj[1][1]['/Filter'])) {
             $_filter = $obj[1][1]['/Filter'];
 
-            if ($_filter[0] == PDF_TYPE_OBJREF) {
+            if ($_filter[0]==PDF_TYPE_OBJREF) {
                 $tmpFilter = $this->pdf_resolve_object($this->c, $_filter);
                 $_filter = $tmpFilter[1];
             }
-            
-            if ($_filter[0] == PDF_TYPE_TOKEN) {
+
+            if ($_filter[0]==PDF_TYPE_TOKEN) {
                 $filters[] = $_filter;
-            } else if ($_filter[0] == PDF_TYPE_ARRAY) {
+            } else if ($_filter[0]==PDF_TYPE_ARRAY) {
                 $filters = $_filter[1];
             }
         }
-
         $stream = $obj[2][1];
-
         foreach ($filters AS $_filter) {
             switch ($_filter[1]) {
                 case '/FlateDecode':
                 	// $stream .= "\x0F\x0D"; // in an errorious stream this suffix could work
                 	if (function_exists('gzuncompress')) {
-                        $stream = (strlen($stream) > 0) ? @gzuncompress($stream) : '';
+                        $stream = (strlen($stream)>0) ? @gzuncompress($stream) : '';
                     } else {
                         $this->error(sprintf('To handle %s filter, please compile php with zlib support.',$_filter[1]));
                     }
-                    
-                    if ($stream === false) {
+
+                    if ($stream===false) {
                     	$this->error('Error while decompressing stream.');
                     }
-                break;
+                    break;
                 case '/LZWDecode':
                     include_once('filters/FilterLZW_FPDI.php');
                     $decoder = new FilterLZW_FPDI($this->fpdi);
@@ -253,16 +243,15 @@ class fpdi_pdf_parser extends pdf_parser {
                     break;
                 case null:
                     $stream = $stream;
-                break;
+                    break;
                 default:
                     $this->error(sprintf('Unsupported Filter: %s',$_filter[1]));
             }
         }
-        
         return $stream;
     }
-    
-    
+
+
     /**
      * Get a Box from a page
      * Arrayformat is same as used by fpdf_tpl
@@ -277,13 +266,11 @@ class fpdi_pdf_parser extends pdf_parser {
         $box = null;
         if (isset($page[1][1][$box_index]))
             $box =& $page[1][1][$box_index];
-        
-        if (!is_null($box) && $box[0] == PDF_TYPE_OBJREF) {
+        if (!is_null($box) && $box[0]==PDF_TYPE_OBJREF) {
             $tmp_box = $this->pdf_resolve_object($this->c, $box);
             $box = $tmp_box[1];
         }
-            
-        if (!is_null($box) && $box[0] == PDF_TYPE_ARRAY) {
+        if (!is_null($box) && $box[0]==PDF_TYPE_ARRAY) {
             $b =& $box[1];
             return array('x' => $b[0][1]/$k,
                          'y' => $b[1][1]/$k,
@@ -303,7 +290,7 @@ class fpdi_pdf_parser extends pdf_parser {
 
     /**
      * Get all page boxes by page no
-     * 
+     *
      * @param int The page number
      * @param float Scale factor from user space units to points
      * @return array
@@ -311,7 +298,7 @@ class fpdi_pdf_parser extends pdf_parser {
      function getPageBoxes($pageno, $k) {
         return $this->_getPageBoxes($this->pages[$pageno-1], $k);
     }
-    
+
     /**
      * Get all boxes from /Page
      *
@@ -320,13 +307,11 @@ class fpdi_pdf_parser extends pdf_parser {
      */
     function _getPageBoxes($page, $k) {
         $boxes = array();
-
         foreach($this->availableBoxes AS $box) {
             if ($_box = $this->getPageBox($page, $box, $k)) {
                 $boxes[$box] = $_box;
             }
         }
-
         return $boxes;
     }
 
@@ -339,12 +324,12 @@ class fpdi_pdf_parser extends pdf_parser {
     function getPageRotation($pageno) {
         return $this->_getPageRotation($this->pages[$pageno-1]);
     }
-    
+
     function _getPageRotation($obj) { // $obj = /Page
     	$obj = $this->pdf_resolve_object($this->c, $obj);
     	if (isset ($obj[1][1]['/Rotate'])) {
     		$res = $this->pdf_resolve_object($this->c, $obj[1][1]['/Rotate']);
-    		if ($res[0] == PDF_TYPE_OBJECT)
+    		if ($res[0]==PDF_TYPE_OBJECT)
                 return $res[1];
             return $res;
     	} else {
@@ -352,13 +337,13 @@ class fpdi_pdf_parser extends pdf_parser {
     			return false;
     		} else {
                 $res = $this->_getPageRotation($obj[1][1]['/Parent']);
-                if ($res[0] == PDF_TYPE_OBJECT)
+                if ($res[0]==PDF_TYPE_OBJECT)
                     return $res[1];
                 return $res;
     		}
     	}
     }
-    
+
     /**
      * Read all /Page(es)
      *
@@ -369,16 +354,14 @@ class fpdi_pdf_parser extends pdf_parser {
     function read_pages(&$c, &$pages, &$result) {
         // Get the kids dictionary
     	$_kids = $this->pdf_resolve_object ($c, $pages[1][1]['/Kids']);
-        
         if (!is_array($_kids))
             $this->error('Cannot find /Kids in current /Page-Dictionary');
-            
-        if ($_kids[1][0] == PDF_TYPE_ARRAY) {
+
+        if ($_kids[1][0]==PDF_TYPE_ARRAY) {
             $kids = $_kids[1][1];
         } else {
             $kids = $_kids[1];
         }
-        
         foreach ($kids as $v) {
     		$pg = $this->pdf_resolve_object ($c, $v);
             if ($pg[1][1]['/Type'][1] === '/Pages') {
@@ -391,8 +374,8 @@ class fpdi_pdf_parser extends pdf_parser {
     	}
     }
 
-    
-    
+
+
     /**
      * Get PDF-Version
      *
@@ -402,5 +385,5 @@ class fpdi_pdf_parser extends pdf_parser {
         parent::getPDFVersion();
         $this->fpdi->setPDFVersion(max($this->fpdi->getPDFVersion(), $this->pdfVersion));
     }
-    
+
 }

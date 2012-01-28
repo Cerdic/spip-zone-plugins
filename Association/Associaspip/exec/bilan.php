@@ -14,9 +14,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
-	
+
 function exec_bilan(){
-		
+
 	include_spip('inc/autoriser');
 	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
@@ -30,84 +30,69 @@ function exec_bilan(){
 			$exercice = sql_getfetsel("id_exercice","spip_asso_exercices","","","fin DESC");
 			if(!$exercice) $exercice=0;
 		}
-		
-		$url_bilan = generer_url_ecrire('bilan', "exercice=$exercice");		
-		
+
+		$url_bilan = generer_url_ecrire('bilan', "exercice=$exercice");
+
 		// recupere l'id_destination de la ou des destinations dans POST ou cree une entree a 0 dans le tableau
 		if (!($ids_destination_bilan = _request('destination'))) $ids_destination_bilan = array(0);
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(propre(_T('asso:titre_gestion_pour_association')), "", _DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg','rien.gif');
-		association_onglets(_T('asso:titre_onglet_comptes'));		
+		association_onglets(_T('asso:titre_onglet_comptes'));
 
-		echo debut_gauche("",true);		
-		
+		echo debut_gauche("",true);
+
 		echo debut_boite_info(true);
-		echo association_date_du_jour();
-
-		if ($GLOBALS['association_metas']['destinations']=="on")
+		if ($GLOBALS['association_metas']['destinations']=='on')
 		{
 			// cree un menu a choix multiple des destinations a inserer dans la boite info et recupere les intitule de toutes les destinations dans un tableau
 			$select_destination = '';
 			$intitule_destinations = array();
-			$query = sql_select(
-				"id_destination, intitule",
-				'spip_asso_destination',
-				"",
-				"",
-				"intitule" );
+			$query = sql_select('id_destination, intitule', 'spip_asso_destination', '', '', 'intitule');
 			while ($data = sql_fetch($query)) {
-				$select_destination .= "<option value='".$data['id_destination']."'";
-				if (!(array_search($data['id_destination'], $ids_destination_bilan) === FALSE)) $select_destination .= " selected='selected'";
-				$select_destination .=">".$data['intitule']."</option>";
+				$select_destination .= '<option value="'.$data['id_destination'].'"';
+				if (!(array_search($data['id_destination'], $ids_destination_bilan)===FALSE)) $select_destination .= ' selected="selected"';
+				$select_destination .= '>'.$data['intitule'].'</option>';
 				$intitule_destinations[$data['id_destination']] = $data['intitule'];
 			}
-
 			echo '<form method="post" action="'.$url_bilan.'"><div>';
 			echo '<select name ="destination[]" class="fondl" multiple>';
 			echo '<option value="0"';
-			if (!(array_search(0, $ids_destination_bilan) === FALSE)) echo ' selected="selected"';
+			if (!(array_search(0, $ids_destination_bilan)===FALSE)) echo ' selected="selected"';
 			echo '>Total</option><option disabled="disabled">--------</option>'.$select_destination;
 			echo '</select>';
-			echo '<input type="submit" value="Bilan" />';
+			echo '<p class="boutons"><input type="submit" value="Bilan" /></p>';
 			echo '</div></form>';
 		}
+		echo association_date_du_jour();
 		echo fin_boite_info(true);
-
 		$url_compte_resultat = generer_url_ecrire('compte_resultat', "exercice=$exercice");
 		$url_annexe = generer_url_ecrire('annexe', "exercice=$exercice");
 		$res = association_icone(_T('asso:cpte_resultat_titre_general'),  $url_compte_resultat, 'finances.jpg')
 		. association_icone(_T('asso:annexe_titre_general'),  $url_annexe, 'finances.jpg');
-		
 		echo bloc_des_raccourcis($res);
-
-		echo debut_droite("",true);
-		
-		debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES."finances.jpg", false, "", '&nbsp;'.propre( _T('asso:bilans_comptables').' : '.exercice_intitule($exercice)));
-		
-		$clas_banque=$GLOBALS['association_metas']['classe_banques'];
-		$clas_contrib_volontaire=$GLOBALS['association_metas']['classe_contributions_volontaires']; // une contribution benevole ne doit pas etre comptabilisee en charge/produit
-		
+		echo debut_droite('',true);
+		debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg', false, '', '&nbsp;'.propre( _T('asso:bilans_comptables').' : '.exercice_intitule($exercice)));
+		$clas_banque = $GLOBALS['association_metas']['classe_banques'];
+		$clas_contrib_volontaire = $GLOBALS['association_metas']['classe_contributions_volontaires']; // une contribution benevole ne doit pas etre comptabilisee en charge/produit
 		if ($plan) {
-			$join = " RIGHT JOIN spip_asso_plan ON imputation=code";
-			$sel = ", code, intitule, classe";
-			$where = " date >= \"".exercice_date_debut($exercice)."\" AND date <= \"".exercice_date_fin($exercice)."\"";
-			$having =  "classe <> " . sql_quote($clas_banque). " AND classe <> " .sql_quote($clas_contrib_volontaire);
-			$order = "code";
-		} else $join = $sel = $where = $having = $order = '';
-		
+			$join = ' RIGHT JOIN spip_asso_plan ON imputation=code';
+			$sel = ', code, intitule, classe';
+			$where = ' date >= \''.exercice_date_debut($exercice).'\' AND date <= \''.exercice_date_fin($exercice).'\'';
+			$having =  'classe <> \'' . sql_quote($clas_banque). '\' AND classe <> \'' .sql_quote($clas_contrib_volontaire) .'\'';
+			$order = 'code';
+		} else {
+			$join = $sel = $where = $having = $order = '';
+		}
 		// on boucle sur le tableau des destinations en refaisant le fetch a chaque iteration
 		foreach ($ids_destination_bilan as $id_destination) {
-
 			$total_recettes=$total_depenses=$total_soldes=0;
 			//TABLEAU EXPLOITATION
-			if ($id_destination != 0) {
+			if ($id_destination!=0) {
 				$intitule_destination_bilan = $intitule_destinations[$id_destination];
+			} else {
+				if ($GLOBALS['association_metas']['destinations']=='on') $intitule_destination_bilan = _T('asso:toutes_destination');
 			}
-			else {
-				if ($GLOBALS['association_metas']['destinations']=="on") $intitule_destination_bilan = _T('asso:toutes_destination');
-			}
-
 			echo "\n<fieldset>";
 			echo '<legend><strong>'. _T('asso:resultat_courant') . ' ' .$intitule_destination_bilan. '</strong></legend>';
 			echo "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
@@ -117,21 +102,16 @@ function exec_bilan(){
 			echo "<td width='50' style='text-align:center;'><strong>\n" . _T('asso:bilan_depenses') . '</strong></td>';
 			echo "<td width='50' style='text-align:center;'><strong>\n" . _T('asso:bilan_solde').'</strong></td>';
 			echo "</tr>\n";
-			
 			// si on fait le bilan sur toutes les destinations (ou que destination n'est pas on)
-			if ($id_destination == 0) {
+			if ($id_destination==0) {
 				$query = sql_select(
-					"imputation, sum( recette ) AS recettes, sum( depense ) AS depenses, date_format( date, '%Y' ) AS annee".$sel,
+					"imputation, SUM(recette) AS recettes, SUM(depense) AS depenses, DATE_FORMAt(date, '%Y') AS annee".$sel,
 					"spip_asso_comptes".$join,
-					$where,
-					$order,
-					"",
-					"",
-					$having);
+					$where, $order, '', '', $having);
 				while ($data = sql_fetch($query)) {
-					$recettes=$data['recettes'];
-					$depenses=$data['depenses']; 
-					$solde=$recettes - $depenses;
+					$recettes = $data['recettes'];
+					$depenses = $data['depenses'];
+					$solde = $recettes-$depenses;
 					echo '<tr style="background-color: #EEEEEE;">';
 					echo "<td class='arial11 border1'>" . $data['code'] . "</td>";
 					echo "<td class='arial11 border1'>" . $data['intitule'] . "</td>";
@@ -139,13 +119,11 @@ function exec_bilan(){
 					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($depenses, 2, ',', ' ').'</td>';
 					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($solde, 2, ',', ' ').'</td>';
 					echo '</tr>';
-					$total_recettes += $recettes;	
-					$total_depenses += $depenses;	
-					$total_soldes += $solde;	
+					$total_recettes += $recettes;
+					$total_depenses += $depenses;
+					$total_soldes += $solde;
 				}
-			}
-			else // on fait le bilan d'une seule destination
-			{
+			} else { // on fait le bilan d'une seule destination
 				$query = sql_select(
 					"imputation, date_format( date, '%Y' ) AS annee,
 					sum( spip_asso_destination_op.recette ) AS recettes,
@@ -153,14 +131,11 @@ function exec_bilan(){
 					spip_asso_destination_op.id_destination".$sel,
 					"spip_asso_comptes LEFT JOIN spip_asso_destination_op ON spip_asso_destination_op.id_compte=spip_asso_comptes.id_compte".$join,
 					"spip_asso_destination_op.id_destination=".$id_destination." AND ".$where,
-					$order,
-					"",
-					"",
-					$having);
+					$order, '', '', $having);
 				while ($data = sql_fetch($query)) {
-					$recettes=$data['recettes'];
-					$depenses=$data['depenses']; 
-					$solde=$recettes - $depenses;
+					$recettes = $data['recettes'];
+					$depenses = $data['depenses'];
+					$solde = $recettes-$depenses;
 					echo '<tr style="background-color: #EEEEEE;">';
 					echo "<td class='arial11 border1'>" . $data['code'] . "</td>";
 					echo "<td class='arial11 border1'>" . $data['intitule'] . "</td>";
@@ -168,25 +143,25 @@ function exec_bilan(){
 					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($depenses, 2, ',', ' ').'</td>';
 					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($solde, 2, ',', ' ').'</td>';
 					echo '</tr>';
-					$total_recettes += $recettes;	
-					$total_depenses += $depenses;	
-					$total_soldes += $solde;	
+					$total_recettes += $recettes;
+					$total_depenses += $depenses;
+					$total_soldes += $solde;
 				}
 			}
-			$total_recettes=number_format($total_recettes, 2, ',', ' '); 
-			$total_depenses=number_format($total_depenses, 2, ',', ' '); 
-			$total_soldes=number_format($total_soldes, 2, ',', ' '); 
+			$total_recettes = number_format($total_recettes, 2, ',', ' ');
+			$total_depenses = number_format($total_depenses, 2, ',', ' ');
+			$total_soldes = number_format($total_soldes, 2, ',', ' ');
 			echo '<tr style="background-color: #EEEEEE;">';
 			echo "\n<td colspan='2' class='arial11 border1' style='color: #9F1C30;'><strong>" . _T('asso:resultat_courant') . '</strong></td>';
-			echo "\n<td class='arial11 border1' style='text-align:right;color: #9F1C30;'><strong>".$total_recettes.'</strong></td>'; 
+			echo "\n<td class='arial11 border1' style='text-align:right;color: #9F1C30;'><strong>".$total_recettes.'</strong></td>';
 			echo "\n<td class='arial11 border1' style='text-align:right;color: #9F1C30;'><strong>".$total_depenses.'</strong></td>';
-			echo "\n<td class='arial11 border1' style='text-align:right;color: #9F1C30;'><strong>".$total_soldes.'</strong></td></tr>'; 
+			echo "\n<td class='arial11 border1' style='text-align:right;color: #9F1C30;'><strong>".$total_soldes.'</strong></td></tr>';
 			echo '</table>';
 			echo '</fieldset>';
 		}
-		
-		if ($plan) bilan_encaisse();
-		fin_cadre_relief();  
+		if ($plan)
+			bilan_encaisse();
+		fin_cadre_relief();
 		echo fin_page_association();
 	}
 }
@@ -206,14 +181,10 @@ function exec_bilan(){
 function bilan_encaisse()
 {
 	$lesEcritures = array();
-
 	$laDateDuJour = date('Y-m-d'); # pour ne pas comptabiliser les opérations au delà d'aujourd'hui !!!!
-
 	$laClasseBanque = $GLOBALS['association_metas']['classe_banques'];
 	$laClasseContributionVolontaire = $GLOBALS['association_metas']['classe_contributions_volontaires'];
-
-	$query = sql_select('*', 'spip_asso_plan', "classe=".sql_quote($laClasseBanque)." OR classe=".sql_quote($laClasseContributionVolontaire), '',  "code" );
-
+	$query = sql_select('*', 'spip_asso_plan', 'classe='.sql_quote($laClasseBanque).' OR classe='.sql_quote($laClasseContributionVolontaire), '',  'code' );
 	while ($val = sql_fetch($query)) {
 		$code = $val['code'];
 		/* on declare un tableau et on le rempli avec les donnees du compte */
@@ -222,15 +193,12 @@ function bilan_encaisse()
 		$lesEcritures[$code]['intitule'] = $val['intitule'];
 		$lesEcritures[$code]['date_solde'] = $val['date_anterieure'];
 		$lesEcritures[$code]['solde_anterieur'] = $val['solde_anterieur'];
-		
 		/* ne pas comptabiliser les opérations au delà d'aujourd'hui meme si il y a des echeances futures !!!! */
-		$compte = sql_fetsel("sum(recette) AS recettes, sum(depense) AS depenses, date, imputation",
-			"spip_asso_comptes",
-			"date >= ".sql_quote($lesEcritures[$code]['date_solde'])." AND date <= ".sql_quote($laDateDuJour)." AND (journal = ".sql_quote($code)." OR imputation = ".sql_quote($code).")",
+		$compte = sql_fetsel('SUM(recette) AS recettes, SUM(depense) AS depenses, date, imputation',
+			'spip_asso_comptes',
+			'date >= '.sql_quote($lesEcritures[$code]['date_solde']).' AND date <= '.sql_quote($laDateDuJour).' AND (journal = '.sql_quote($code).' OR imputation = '.sql_quote($code).')',
 			'journal');
-
 		if ($compte) {
-
 			if(substr($compte['imputation'],0,1)===$GLOBALS['association_metas']['classe_contributions_volontaires']) {
 				/* c'est une contribution volontaire du type 8xxx :
 				 * c'est une dépense evaluee si 86xx ou recette évaluée si 87xx
@@ -238,21 +206,17 @@ function bilan_encaisse()
 				 */
 				$lesEcritures['86xx']['solde'] = $compte['depenses'];
 				$lesEcritures['87xx']['solde'] = $compte['recettes'];
-			}
-			elseif (substr($compte['imputation'],0,1)===$GLOBALS['association_metas']['classe_banques']) {
+			} elseif (substr($compte['imputation'],0,1)===$GLOBALS['association_metas']['classe_banques']) {
 				/* c'est un virement interne avec le code 58xx :
 				 * le solde du compte doit être à zero sinon il y a erreur !
 				 */
-				 $lesEcritures['58xx']['solde'] = $compte['recettes'] - $compte['depenses'];
-//				 $lesEcritures[$code]['solde'] = $compte['recettes'] - $compte['depenses'];
-			}
-			else {
+				 $lesEcritures['58xx']['solde'] = $compte['recettes']-$compte['depenses'];
+			} else {
 				/* c'est une recette ou une depense */
-				$lesEcritures[$code]['solde'] = $compte['recettes'] - $compte['depenses'];
+				$lesEcritures[$code]['solde'] = $compte['recettes']-$compte['depenses'];
 			}
 		}
 	}
-
 	echo "\n<fieldset>";
 	echo '<legend><strong>' . _T('asso:encaisse') . '</strong></legend>';
 	echo "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
@@ -261,9 +225,7 @@ function bilan_encaisse()
 	echo '<td style="text-align:center;" colspan="2"><strong>', _T('asso:avoir_initial') . "</strong></td>\n";
 	echo "<td style='text-align:center;'><strong>\n" . _T('asso:avoir_actuel') . "</strong></td>\n";
 	echo '</tr>';
-
 	$total_actuel = $total_initial = 0;
-
 	foreach($lesEcritures as $compteFinancier) {
 		/* c'est un compte banque 53xx ou un compte caisse 51xx */
 		if(substr($compteFinancier['code'],0,2)==='51' OR substr($compteFinancier['code'],0,2)==='53') {
@@ -271,27 +233,26 @@ function bilan_encaisse()
 			echo "\n<td class='arial11 border1'>" . $compteFinancier['code'] . ' : ' . $compteFinancier['intitule'] . '</td>';
 			echo "\n<td class='arial11 border1' style='text-align:right;'>".association_datefr($compteFinancier['date_solde']).'</td>';
 			echo "\n<td class='arial11 border1' style='text-align:right;'>".number_format($compteFinancier['solde_anterieur'], 2, ',', ' ').'</td>';
-			echo "\n<td class='arial11 border1' style='text-align:right;'>".number_format($compteFinancier['solde_anterieur'] + $compteFinancier['solde'], 2, ',', ' ').'</td></tr>';
+			echo "\n<td class='arial11 border1' style='text-align:right;'>".number_format($compteFinancier['solde_anterieur']+$compteFinancier['solde'], 2, ',', ' ').'</td></tr>';
 			$total_initial += $compteFinancier['solde_anterieur'];
-			$total_actuel += $compteFinancier['solde_anterieur'] + $compteFinancier['solde'];
+			$total_actuel += $compteFinancier['solde_anterieur']+$compteFinancier['solde'];
 		}
 		else {
-			if($compteFinancier['58xx']['solde'] != 0) {
+			if($compteFinancier['58xx']['solde']!=0) {
 				$erreur58=TRUE;
 				$messageErreur58 = "Attention : Virement interne non &eacute;quilibr&eacute; !";
 			}
-			if($compteFinancier['86xx']['solde'] != $compteFinancier['87xx']['solde']) {
+			if($compteFinancier['86xx']['solde']!=$compteFinancier['87xx']['solde']) {
 				$erreur8687=TRUE;
 				$messageErreur8687 = "Attention : Comptes 86xx et 87xx ne sont pas &eacute;quilibr&eacute;s !";
 			}
 		}
 	}
-
 	$total_initial = number_format($total_initial, 2, ',', ' ');
 	$total_actuel = number_format($total_actuel, 2, ',', ' ');
 	echo '<tr style="background-color: #EEEEEE;">';
 	echo "\n<td class='arial11 border1' style='color: #9F1C30;'><strong>" . _T('asso:encaisse') . "</strong></td>\n";
-	echo '<td class="arial11 border1" style="text-align:right;color: #9F1C30;"><strong>&nbsp;</strong></td>'; 
+	echo '<td class="arial11 border1" style="text-align:right;color: #9F1C30;"><strong>&nbsp;</strong></td>';
 	echo '<td class="arial11 border1" style="text-align:right;color: #9F1C30;"><strong>'.$total_initial.'</strong></td>';
 	echo '<td class="arial11 border1" style="text-align:right;color: #9F1C30;"><strong>'.$total_actuel.'</strong></td></tr>';
 	echo '</table>';
@@ -303,4 +264,5 @@ function bilan_encaisse()
 	}
 	echo '</fieldset>';
 }
+
 ?>

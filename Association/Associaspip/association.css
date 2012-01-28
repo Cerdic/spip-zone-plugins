@@ -1,21 +1,55 @@
 /* CSS Document */
-
 /* Espace prive*/
-td { font-size: 8pt; }
-td.pair { background:#DCF3F4; }
-td.impair { background:#F0DCF4; }
-tr.pair { background:#DCF3F4; }
-tr.impair { background:#F0DCF4; }
-td.valide { background:#A0FFA0; }
-td.sortie { background:#E6EAC9; }
-td.prospect { background:#FFF8DC; }
 
-td.vi { background:#b4ffb4; } /* virement interne */
-td.cv { background:#ffbc61; } /* contribution volontaire */
 
-border1 {border-top: 1px solid #CCCCCC;}
+/* Tableaux */
 
-h1.asso_titre { text-align:center; }
+td
+{ font-size: 8pt; }
+tr.pair, td.pair
+{
+	background:#DCF3F4;
+}
+tr.impair, td.impair
+{ background:#F0DCF4; }
+tr.valide, td.valide
+{ background:#A0FFA0; }
+tr.sortie, td.sortie
+{ background:#E6EAC9; }
+tr.prospect, td.prospect
+{ background:#FFF8DC; }
+tr.vi, td.vi
+{ background:#b4ffb4; } /* virement interne */
+tr.cv, td.cv
+{ background:#ffbc61; } /* contribution volontaire */
+
+border1
+{border-top: 1px solid #CCCCCC;}
+
+td.nombre
+{
+}
+td.decimal
+{
+}
+td.entier, td.mondant, td.horodatage
+{
+	text-align:right;
+}
+td.montant
+{
+}
+
+td.actions
+{
+	text-align:center;
+}
+
+/* Titres */
+
+h1.asso_titre
+{ text-align:center; }
+
 
 /* Formulaires*/
 .formulaire_ajouter_membres_groupe {margin-top: 2em;}

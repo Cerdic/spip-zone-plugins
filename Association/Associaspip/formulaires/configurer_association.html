@@ -10,47 +10,47 @@
 				<fieldset>
 					<h3 class="legend"><:asso:config_info_asso:></h3>
 					<ul>
-						<li class="obligatoire"> <!-- il faut au moins le nom de l'association !!!! -->
+						<li class="editer_nom obligatoire"> <!-- il faut au moins le nom de l'association !!!! -->
 							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{nom})</span>]
 							<label for="nom"><strong><:asso:config_libelle_nom:></strong></label>
-							<input type="text" name="nom" [value="(#ENV{nom})"] id="nom" class="formo" />
+							<input type="text" name="nom" [value="(#ENV{nom})"] id="nom" class="text" />
 						</li>
-						<li>
+						<li class="editer_rue">
 							<label for="rue"><strong><:asso:config_libelle_rue:></strong></label>
-							<textarea name="rue" id="rue" rows="3" class="formo">[(#ENV{rue})]</textarea>
+							<textarea name="rue" id="rue" rows="3">[(#ENV{rue})]</textarea>
 						</li>
-						<li>
+						<li class="editer_cp">
 							<label for="cp"><strong><:asso:config_libelle_codepostal:></strong></label>
-							<input type="text" name="cp" [value="(#ENV{cp})"] id="cp" class="formo" />
+							<input type="text" name="cp" [value="(#ENV{cp})"] id="cp" class="text" />
 						</li>
-						<li>
+						<li class="editer_ville">
 							<label for="ville"><strong><:asso:config_libelle_ville:></strong></label>
-							<input type="text" name="ville" [value="(#ENV{ville})"] id="ville" class="formo" />
+							<input type="text" name="ville" [value="(#ENV{ville})"] id="ville" class="text" />
 						</li>
-						<li>
+						<li class="editer_email">
 							<label for="email"><strong><:asso:config_libelle_email:></strong></label>
-							<input type="text" name="email" [value="(#ENV{email})"] id="email" class="formo" />
+							<input type="[(HTML5|?{email,text})]" name="email" [value="(#ENV{email})"] id="email" class="email" />
 						</li>
-						<li>
+						<li class="editer_telephone">
 							<label for="telephone"><strong><:asso:config_libelle_telephone:></strong></label>
-							<input type="text" name="telephone" [value="(#ENV{telephone})"] id="telephone" class="formo" />
+							<input type="[(HTML5|?{tel,text})]" name="telephone" [value="(#ENV{telephone})"] id="telephone" class="tel" />
 						</li>
-						<li>
+						<li class="editer_objet">
 							<label for="objet"><strong><:asso:config_libelle_objet:></strong></label>
-							<textarea name="objet" id="objet" rows="3" class="formo">[(#ENV{objet})]</textarea>
+							<textarea name="objet" id="objet" rows="3">[(#ENV{objet})]</textarea>
 						</li>
-						<li>
+						<li class="editer_declaration">
 							<label for="declaration"><strong><:asso:config_libelle_declaration:></strong></label>
-							<input type="text" name="declaration" [value="(#ENV{declaration})"] id="declaration" class="formo" />
+							<input type="text" name="declaration" [value="(#ENV{declaration})"] id="declaration" class="text" />
 						</li>
-						<li>
+						<li class="editer_prefet">
 							<label for="prefet"><strong><:asso:config_libelle_prefet:></strong></label>
-							<input type="text" name="prefet" [value="(#ENV{prefet})"] id="prefet" class="formo" />
+							<input type="text" name="prefet" [value="(#ENV{prefet})"] id="prefet" class="text" />
 						</li>
 					<BOUCLE_metas_utilisateur(ASSOCIATION_METAS){nom LIKE meta_utilisateur_%}{par nom}>
-						<li>
+						<li class="editer_#NOM">
 							<label for="#NOM"><strong>[(#NOM|replace{meta_utilisateur}|_T)]</strong></label>
-							<input type="text" name="#NOM" [value="(#VALEUR)"] id="#NOM" class="formo" />
+							<input type="text" name="#NOM" [value="(#VALEUR)"] id="#NOM" class="text" />
 						</li>
 					</BOUCLE_metas_utilisateur>
 					</ul>
@@ -61,9 +61,9 @@
 				<fieldset>
 					<h3 class="legend"><:asso:config_info_recufiscal:></h3>
 					<ul>
-						<li>
+						<li class="editer_recufiscal">
 							<label for="recufiscal"><strong><:asso:config_libelle_recufiscal:></strong></label>
-							<select name="recufiscal" id="recufiscal" class="formo" />
+							<select name="recufiscal" id="recufiscal">
 								<option value="0"[(#ENV{recufiscal}|=={0}|oui) selected="selected"]><:asso:config_libelle_recufisc0:></option>
 								<option value="1"[(#ENV{recufiscal}|=={1}|oui) selected="selected"]><:asso:config_libelle_recufisc1:></option>
 								<option value="2"[(#ENV{recufiscal}|=={2}|oui) selected="selected"]><:asso:config_libelle_recufisc2:></option>
@@ -88,16 +88,16 @@
 							</select>
 							<em class="explication"><:asso:config_aide_recufiscal:></em>
 						</li>
-						<li>
+						<li class="editer_infofiscal">
 							<label for="infofiscal"><strong><:asso:config_libelle_infofiscal:></strong></label>
-							<input type="text" name="infofiscal" [value="(#ENV{infofiscal})"] id="infofiscal" class="formo" />
+							<input type="text" name="infofiscal" [value="(#ENV{infofiscal})"] id="infofiscal" class="date" />
 							<em class="explication"><:asso:config_aide_infofiscal:></em>
 						</li>
-						<li>
+						<li class="editer_tauxfiscal">
 							<label for="tauxfiscal"><strong><:asso:config_libelle_tauxfiscal:></strong></label>
-							<input type="text" name="tauxfiscal" [value="(#ENV{tauxfiscal}|sinon{100})"] id="tauxfiscal" class="formo" />
+							<input type="[(HTML5|?{number,text})]" name="tauxfiscal" [value="(#ENV{tauxfiscal}|sinon{100})"] id="tauxfiscal" class="number float rate" />
 						</li>
-						<li>
+						<li class="editer_codefiscal">
 							<label><strong><:asso:config_libelle_codefiscal:></strong></label>
 							<div class="choix">
 								<input type="checkbox" name="cgi200" [(#ENV{cgi200}|oui) checked="checked"] id="cgi200" />
@@ -166,7 +166,7 @@
 								<label for="aff_validite"><strong><:asso:adherent_libelle_validite:></strong></label>
 							</div>
 						</li>
-						<li>
+						<li class="editer_import_nom_auteur">
 							<label for="import_nom_auteur"><strong><:asso:config_libelle_import_nom_auteur:></strong></label>
 							<select name="import_nom_auteur" id="import_nom_auteur">
 								<option value=""><:asso:import_nom_auteur_nom_prenom:></option> <!-- c'est l'option par defaut, elle n'a donc pas de valeur et est donc selectionne meme si on n'a pas touche a ce reglage -->
@@ -174,7 +174,7 @@
 								<option value="nom" [(#ENV{import_nom_auteur}|=={nom}|?{selected="selected"})]><:asso:import_nom_auteur_nom:></option>
 							</select>
 						</li>
-						<li>
+						<li class="editer_categorie_par_defaut">
 					<B_categories>
 							<label for="categorie_par_defaut"><strong><:asso:config_libelle_categorie_par_defaut:></strong></label>
 							<select name="categorie_par_defaut" id="categorie_par_defaut">
@@ -203,19 +203,19 @@
 							</div>
 						</li>
 					<B_classe_banques>
-						<li>
+						<li class="editer_comptes">
 							<div class="choix">
 								<input name= "comptes" [(#ENV{comptes}|=={on}|?{checked="checked"})] id="comptes" type="checkbox"/>
 								<label for="comptes"><strong><:asso:config_libelle_activer_comptes:></strong></label>
 							</div>
 						</li>
-						<li>
+						<li class="editer_destinations">
 							<div class="choix">
 								<input type="checkbox" name="destinations" [(#ENV{destinations}|=={on}|?{checked="checked"})] id="destinations" />
 								<label for="destinations"><strong><:asso:config_libelle_destinations:></strong></label>
 							</div>
 						</li>
-						<li>
+						<li class="editer_classe_banques">
 							<label for="classe_banques"><strong><:asso:config_libelle_classe_banques:></strong></label>
 							<select name="classe_banques" id="classe_banques">
 								<option value=""><:asso:choisir_classe_compte:></option>
@@ -224,7 +224,7 @@
 					</BOUCLE_classe_banques>
 							</select>
 						</li>
-						<li>
+						<li class="editer_pc_intravirements">
 							<label for="pc_intravirements"><strong><:asso:config_libelle_virements_internes:></strong></label>
 
 						<B_pc_virements>
@@ -240,7 +240,7 @@
 							<span class="erreur_message"><:asso:enregistrer_d_abord_une_classe_banque:></span>
 						<//B_pc_virements>
 						</li>
-						<li>
+						<li class="editer_classe_charges">
 							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{classe_charges})</span>]
 							<label for="classe_charges"><strong><:asso:config_libelle_classe_charges:></strong></label>
 							<select name="classe_charges" id="classe_charges">
@@ -250,7 +250,7 @@
 						</BOUCLE_classe_charges>
 							</select>
 						</li>
-						<li>
+						<li class="editer_classe_produits">
 							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{classe_produits})</span>]
 							<label for="classe_produits"><strong><:asso:config_libelle_classe_produits:></strong></label>
 							<select name="classe_produits" id="classe_produits">
@@ -260,7 +260,7 @@
 						</BOUCLE_classe_produits>
 							</select>
 						</li>
-						<li>
+						<li class="editer_classe_contributions_volontaires">
 							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{classe_contributions_volontaires})</span>]
 							<label for="classe_contributions_volontaires"><strong><:asso:config_libelle_classe_contributions_volontaires:></strong></label>
 							<select name="classe_contributions_volontaires" id="classe_contributions_volontaires">
@@ -271,7 +271,7 @@
 							</select>
 						</li>
 					</B_classe_banques>
-						<li>
+						<li class="editer_comptes">
 							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_pour_activer_ce_module:></a>
 							<input type="hidden" name="comptes" id="comptes" value="" /> [(#REM)<!-- pour etre bien sur de desactiver la gestion comptable -->]
 						</li>
@@ -285,7 +285,7 @@
 					<h3 class="legend"><:asso:config_libelle_cotisations:></h3>
 					<ul>
 					<B_classeSelect_cotisations>
-						<li>
+						<li class="editer_pc_cotisations">
 							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{pc_cotisations})</span>]
 							<label for="pc_cotisations"><strong><:asso:config_libelle_num_pc:></strong></label>
 							<select name="pc_cotisations" id="pc_cotisations">
@@ -299,7 +299,7 @@
 					</BOUCLE_classeSelect_cotisations>
 							</select>
 						</li>
-						<li>
+						<li class="editer_dc_cotisations">
 							<label for="dc_cotisations"><strong><:asso:config_libelle_num_dc:></strong></label>
 						<B_dc_cotisations>
 							<select name="dc_cotisations" id="dc_cotisations">
@@ -313,7 +313,7 @@
 						<//B_dc_cotisations>
 						</li>
 					</B_classeSelect_cotisations>
-						<li>
+						<li class="erreur">
 							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_pas_de_compte:></a>
 						</li>
 					<//B_classeSelect_cotisations>
@@ -327,14 +327,14 @@
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{dons})</span>]
 					<ul>
 					<B_classeSelect_dons>
-						<li>
+						<li class="editer_dons">
 							<div class="choix">
 								[<span class="erreur_message">(#ENV{comptes}|!={on}|oui)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
 								<input type="checkbox" name="dons" [(#ENV{dons}|=={on}|?{checked="checked"})] id="dons" />
 								<label for="dons"><strong><:asso:config_libelle_activer_dons:></strong></label>
 							</div>
 						</li>
-						<li>
+						<li class="editer_pc_dons">
 							<label for="pc_dons"><strong><:asso:config_libelle_num_pc:></strong></label>
 							<select name="pc_dons" id="pc_dons">
 								<option value=""><:asso:choisir_ref_compte:></option>
@@ -347,7 +347,7 @@
 					</BOUCLE_classeSelect_dons>
 							</select>
 						</li>
-						<li>
+						<li class="editer_dc_dons">
 							<label for="dc_dons"><strong><:asso:config_libelle_num_dc:></strong></label>
 						<B_dc_dons>
 							<select name="dc_dons" id="dc_dons">
@@ -361,7 +361,7 @@
 						<//B_dc_dons>
 						</li>
 					</B_classeSelect_dons>
-						<li>
+						<li class="erreur">
 							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
 						</li>
 					<//B_classeSelect_dons>
@@ -375,14 +375,14 @@
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{ventes})</span>]
 					<ul>
 					<B_classeSelect_ventes>
-						<li>
+						<li class="editer_ventes">
 							<div class="choix">
 								[<span class="erreur_message">(#ENV{comptes}|!={on}|oui)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
 								<input type="checkbox" name="ventes" [(#ENV{ventes}|=={on}|?{checked="checked"})] id="ventes" />
 								<label for="ventes"><strong><:asso:config_libelle_activer_ventes:></strong></label>
 							</div>
 						</li>
-						<li>
+						<li class="editer_pc_ventes">
 							<label for="pc_ventes"><strong><:asso:config_libelle_num_pc:></strong></label>
 							<select name="pc_ventes" id="pc_ventes">
 								<option value=""><:asso:choisir_ref_compte:></option>
@@ -395,7 +395,7 @@
 					</BOUCLE_classeSelect_ventes>
 							</select>
 						</li>
-						<li>
+						<li class="editer_pc_frais_envoi">
 							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{frais_envoi})</span>]
 							<label for="pc_frais_envoi"><strong><!--<:asso:config_libelle_num_pc:>&nbsp;--><:asso:config_libelle_frais_envoi:></strong></label>
 							<select name="pc_frais_envoi" id="pc_frais_envoi">
@@ -409,7 +409,7 @@
 						</BOUCLE_classeSelect_frais>
 							</select>
 						</li>
-						<li>
+						<li class="editer_dc_ventes">
 							<label for="dc_ventes"><strong><:asso:config_libelle_num_dc:></strong></label>
 						<B_dc_ventes>
 							<select name="dc_ventes" id="dc_ventes">
@@ -423,7 +423,7 @@
 						<//B_dc_ventes>
 						</li>
 					</B_classeSelect_ventes>
-						<li>
+						<li class="erreur">
 							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
 						</li>
 					<//B_classeSelect_ventes>
@@ -437,7 +437,7 @@
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{activites})</span>]
 					<ul>
 					<B_classeSelect_activites>
-						<li>
+						<li class="editer_activites">
 						[(#PLUGIN{agenda}|?{
 							<div class="choix">
 								[<span class="erreur_message">(#ENV{comptes}|!={on}|oui)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
@@ -449,7 +449,7 @@
 							<input type="hidden" name="activites" value="" />
 						})]
 						</li>
-						<li>
+						<li class="editer_pc_activites">
 							<label for="pc_activites"><strong><:asso:config_libelle_num_pc:></strong></label>
 							<select name="pc_activites" id="pc_activites">
 								<option value=""><:asso:choisir_ref_compte:></option>
@@ -463,7 +463,7 @@
 							</select>
 						</li>
 						<!--
-						<li>
+						<li class="editer_dc_activites">
 							<label for="dc_activites"><strong><:asso:config_libelle_num_dc:></strong></label>
 						<B_dc_activites>
 							<select name="dc_activites" id="dc_activites">
@@ -478,7 +478,7 @@
 						</li>
 						-->
 					</B_classeSelect_activites>
-						<li>
+						<li class="erreur">
 							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
 						</li>
 					<//B_classeSelect_activites>
@@ -492,14 +492,14 @@
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{prets})</span>]
 					<ul>
 					<B_classeSelect_prets>
-						<li>
+						<li class="editer_prets">
 							<div class="choix">
 								[<span class="erreur_message">(#ENV{comptes}|!={on}|oui)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
 								<input type="checkbox" name="prets" [(#ENV{prets}|=={on}|?{checked="checked"})] id="prets" />
 								<label for="prets"><strong><:asso:config_libelle_activer_prets:></strong></label><br />
 							</div>
 						</li>
-						<li>
+						<li class="editer_pc_prets">
 							<label for="pc_prets"><strong><:asso:config_libelle_num_pc:></strong></label>
 							<select name="pc_prets" id="pc_prets">
 								<option value=""><:asso:choisir_ref_compte:></option>
@@ -512,7 +512,7 @@
 					</BOUCLE_classeSelect_prets>
 							</select>
 						</li>
-						<li>
+						<li class="editer_dc_prets">
 							<label for="dc_prets"><strong><:asso:config_libelle_num_dc:></strong></label>
 						<B_dc_prets>
 							<select name="dc_prets" id="dc_prets">
@@ -526,7 +526,7 @@
 						<//B_dc_prets>
 						</li>
 					</B_classeSelect_prets>
-						<li>
+						<li class="erreur">
 							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
 						</li>
 					<//B_classeSelect_prets>
@@ -534,9 +534,9 @@
 				</fieldset>
 			</li>
 		</ul>
-
-		<p class="boutons"><input type="submit" value="<:pass_ok:>" class="submit" /></p>
-
+		<p class="boutons">
+			<input type="submit" value="<:pass_ok:>" class="submit" />
+		</p>
 	</div>
 	</form>
 </div>

@@ -75,7 +75,7 @@
 							</li>
 							#SET{erreurs,#ENV**{erreurs}|table_valeur{imputation}}
 							<li class="editer_imputation">
-								[<span class='erreur_message'>(#GET{erreurs})</span>]
+								[<span class="erreur_message">(#GET{erreurs})</span>]
 								<label for="imputation">
 									<div id="saisie_label_imputation" name="saisie_label_imputation" class="[(#ENV{type_operation}|affichage_div{charges-produits-contributions_volontaires})]">
 										 <strong><:asso:imputation:></strong>
@@ -86,76 +86,50 @@
 								</label>
 								#SELECTEUR_IMPUTATION
 							</li>
-
-							#SET{erreurs,#ENV**{erreurs}|table_valeur{date}}
-							<li class="editer_date[ (#GET{erreurs}|oui)erreur]">
-								[<span class='erreur_message'>(#GET{erreurs})</span>]
+							<li class="editer_date">
+								[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date})</span>]
 								<label for="date"><strong><:asso:date_aaaa_mm_jj:></strong></label>
-								<input type="text" name="date" [value="(#ENV{date}|affdate{Y-m-d})"] id="date"  class='formo'/>
+								<input type="[(HTML5|?{date,text})]" name="date" [value="(#ENV{date}|affdate{Y-m-d})"] id="date" class="date" />
 							</li>
-
-							<div id='saisie_depense' name='saisie_depense' class='[(#ENV{type_operation}|affichage_div{charges-banques-contributions_volontaires})]'>
-								#SET{erreurs,#ENV**{erreurs}|table_valeur{depense}}
-								<li class="editer_depense[ (#GET{erreurs}|oui)erreur]">
-									[<span class='erreur_message'>(#GET{erreurs})</span>]
-									<label for="depense">
-										<div id="saisie_label_depense" name="saisie_label_depense" class="[(#ENV{type_operation}|affichage_div{charges})]">
-											<strong><:asso:montant:></strong>
-										</div>
-										<div id="saisie_label_depense_evaluee" name="saisie_label_depense_evaluee" class="[(#ENV{type_operation}|affichage_div{contributions_volontaires})]">
-											<strong><:asso:depense_evaluee:></strong>
-										</div>
-									</label>
-									<input type="text" name="depense" value="[(#ENV{depense})]" id="depense"  class='formo'/>
-								</li>
-							</div>
-
-							<div id='saisie_recette' name='saisie_recette' class='[(#ENV{type_operation}|affichage_div{produits-contributions_volontaires})]'>
-								#SET{erreurs,#ENV**{erreurs}|table_valeur{recette}}
-								<li class="editer_recette[ (#GET{erreurs}|oui)erreur]">
-									[<span class='erreur_message'>(#GET{erreurs})</span>]
-									<label for="recette">
-										<div id="saisie_label_recette" name="saisie_label_recette" class="[(#ENV{type_operation}|affichage_div{produits})]">
-											<strong><:asso:montant:></strong>
-										</div>
-										<div id="saisie_label_recette_evaluee" name="saisie_label_recette_evaluee" class="[(#ENV{type_operation}|affichage_div{contributions_volontaires})]">
-											<strong><:asso:recette_evaluee:></strong>
-										</div>
-									</label>
-									<input type="text" name="recette" value="[(#ENV{recette})]" id="recette" class='formo' />
-								</li>
-							</div>
-
-							<div id='saisie_mode_paiement' name='saisie_mode_paiement' class='[(#ENV{type_operation}|affichage_div{charges-produits-banques})]'>
-								[(#REM)<!-- si il n'a pas de classe banques definie, on ne propose pas de mode de paiement -->]
-								[(#ENV{classe_banques}|oui)
-									<INCLURE{fond=inc/mode_de_paiement, journal, classe_banques, type_operation}>
-								]
-							</div>
-
-							<div id='saisie_justification' name='saisie_justification' class='[(#ENV{type_operation}|affichage_div{charges-produits-banques-contributions_volontaires})]'>
-								<li class="editer_justification">
-									<label for="justification"><strong><:asso:justification:></strong></label>
-									<input type="text" name="justification" [value="(#ENV{justification})"] id="justification"  class='formo'/>
-								</li>
-							</div>
-
-							<div id='saisie_destination' name='saisie_destination' class='[(#ENV{type_operation}|affichage_div{charges-produits-contributions_volontaires})]'>
-								[(#REM)<!-- si la variable destinations est assignee, on insere l'editeur de destinations -->]
-								#SET{erreurs,#ENV**{erreurs}|table_valeur{destinations}}
-								[<li [ class="(#GET{erreurs}|oui)erreur"]>
-									[<span class='erreur_message'>(#GET{erreurs})</span>]
-									(#ENV{destinations_on}|oui)#EDITEUR_DESTINATIONS
-								</li>]
-							</div>
-
+							<li id="saisie_depense" class="editer_depense [(#ENV{type_operation}|affichage_div{charges-banques-contributions_volontaires})]">
+								[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{depense})</span>]
+								<label for="depense">
+									<div id="saisie_label_depense" name="saisie_label_depense" class="[(#ENV{type_operation}|affichage_div{charges})]">
+										<strong><:asso:montant:></strong>
+									</div>
+									<div id="saisie_label_depense_evaluee" name="saisie_label_depense_evaluee" class="[(#ENV{type_operation}|affichage_div{contributions_volontaires})]">
+										<strong><:asso:depense_evaluee:></strong>
+									</div>
+								</label>
+								<input type="[(HTML5|?{number,text})]" name="depense" value="[(#ENV{depense})]" id="depense"  class="number float price" />
+							</li>
+							<li id="saisie_recette" class="editer_recette [(#ENV{type_operation}|affichage_div{produits-contributions_volontaires})]">
+								[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{recette})</span>]
+								<label for="recette">
+									<div id="saisie_label_recette" name="saisie_label_recette" class="[(#ENV{type_operation}|affichage_div{produits})]">
+										<strong><:asso:montant:></strong>
+									</div>
+									<div id="saisie_label_recette_evaluee" name="saisie_label_recette_evaluee" class="[(#ENV{type_operation}|affichage_div{contributions_volontaires})]">
+										<strong><:asso:recette_evaluee:></strong>
+									</div>
+								</label>
+								<input type="[(HTML5|?{number,text})]" name="recette" value="[(#ENV{recette})]" id="recette" class="number float price" />
+							</li>
+							<INCLURE{fond=inc/mode_de_paiement, journal, type_operation}>
+							<li id="saisie_justification" class="editer_justification [(#ENV{type_operation}|affichage_div{charges-produits-banques-contributions_volontaires})]">
+								<label for="justification"><strong><:asso:justification:></strong></label>
+								<input type="text" name="justification" [value="(#ENV{justification})"] id="justification"  class="text" />
+							</li>
+							[<li id='saisie_destination' class="editer_destinations[ (#ENV{type_operation}|affichage_div{charges-produits-contributions_volontaires})]">
+								[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{destinations})</span>]
+								(#EDITEUR_DESTINATIONS)
+							</li>]
 						</ul>
-
 						[(#REM)<!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
 						<!--extra-->
-
-						<p class="boutons"><input type="submit" value="<:pass_ok:>" class="submit" /></p>
-
+						<p class="boutons">
+							<input type="submit" value="<:pass_ok:>" class="submit" />
+						</p>
 					</fieldset>
 				</li>
 			</ul>

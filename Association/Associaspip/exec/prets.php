@@ -32,7 +32,7 @@ function exec_prets(){
 		echo debut_boite_info(true);
 
 		$id_ressource = intval(_request('id'));
-		$data = sql_fetsel("*", "spip_asso_ressources", "id_ressource=$id_ressource" ) ;
+		$data = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
 
 		echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:ressources_num').'<br />';
 		echo '<span class="spip_xx-large">'.$data['id_ressource'].'</span></div>';
@@ -44,8 +44,8 @@ function exec_prets(){
 		echo bloc_des_raccourcis(association_icone(_T('asso:prets_nav_ajouter'), generer_url_ecrire('edit_pret','id_ressource='.$id_ressource.'&id_pret='), 'livredor.png', 'creer.gif'));
 
 		echo association_retour();
-		echo debut_droite("",true);
-		echo debut_cadre_relief(  "", false, "", $titre =_T('asso:prets_titre_liste_reservations'));
+		echo debut_droite('',true);
+		echo debut_cadre_relief('', false, '', $titre =_T('asso:prets_titre_liste_reservations'));
 
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo "<tr style='background-color: #DBE1C5;'>\n";
@@ -56,44 +56,49 @@ function exec_prets(){
 		echo '<th>'._T('asso:prets_entete_duree').'</th>';
 		echo '<th>'._T('asso:prets_entete_date_retour').'</th>';
 		echo '<th colspan="2" style="text-align:center;">'._T('asso:entete_action').'</th>';
-		echo'  </tr>';
+		echo "</tr>\n";
 
-		$query = sql_select("*", "spip_asso_prets", "id_ressource=$id_ressource", '', "date_sortie DESC" ) ;
+		$query = sql_select('*', 'spip_asso_prets', "id_ressource=$id_ressource", '', 'date_sortie DESC' ) ;
 		while ($data = sql_fetch($query)) {
-			echo '<tr style="background-color: #EEEEEE;">';
+			echo "<tr style='background-color: #EEEEEE;'>\n";
 			echo '<td class="arial11 border1">';
-			$s = $data['statut'];
-			switch($s) {
-				case "du":
-					$puce = "rouge";
+			$statut_pret = $data['statut'];
+			switch($statut_pret) {
+				case 'du':
+					$puce = 'rouge';
 					break;
-				case "attendu":
-					$puce ="orange";
+				case 'attendu':
+					$puce = 'orange';
 					break;
-				case "annule":
-					$puce ="poubelle";
+				case 'annule':
+					$puce = 'poubelle';
 					break;
-				case "ok":
+				case 'ok':
 				default:
-					$puce = "verte";
+					$puce = 'verte';
 					break;
 			}
-			echo http_img_pack('puce-'.$puce.'.gif', $s), '</td>';
+			echo http_img_pack('puce-'.$puce.'.gif', $statut_pret), '</td>';
 			echo '<td class="arial11 border1">'.$data['id_pret'].'</td>';
-			echo '<td class="arial11 border1" style="text-align:right">'.association_datefr($data['date_sortie']).'</td>';
+			echo '<td class="arial11 border1 horodatage"><abbr class="dtstart date" title="'.$data['date_sortie'].'">'. association_datefr($data['date_sortie']) .'</abbr></td>';
 			$id_emprunteur = intval($data['id_emprunteur']);
 
-			$auteur = sql_fetsel("*", "spip_asso_membres", "id_auteur=$id_emprunteur");
-			echo '<td class="arial11 border1">'.$auteur['nom'].' '.$auteur['prenom'].'</td>';
-			echo '<td class="arial11 border1" style="text-align:right;">'.$data['duree'].'</td>';
-			echo '<td class="arial11 border1" style="text-align:right">';
-			if ($data['date_retour']==0) { echo '&nbsp';} else {echo association_datefr($data['date_retour']);}
+			$auteur = sql_fetsel('*', 'spip_asso_membres', "id_auteur=$id_emprunteur");
+			echo '<td class="arial11 border1 n">'.association_calculer_nom_membre($auteur['sexe'], $auteur['prenom'], $auteur['nom_famille'],'span');
+			echo '</td><td class="arial11 border1 horodatage"><abbr class="duration" title="P'.$data['duree'].'">'.$data['duree'].'</abbr></td>';
+			echo '<td class="arial11 border1 horodatage">';
+			if ($data['date_retour']==0) {
+				echo '&nbsp';
+			} else {
+				echo '<abbr class="dtend date" title="'.$data['date_retour'].'">'. association_datefr($data['date_retour']) .'</abbr>';
+			}
 			echo '</td>';
-			echo '<td class="arial11 border1" style="text-align:center;">'. association_bouton(_T('asso:prets_nav_annuler'), 'poubelle-12.gif', 'action_prets', 'id_pret='.$data['id_pret'].'&id_ressource='.$id_ressource) . "</td>\n";
-			echo '<td class="arial11 border1" style="text-align:center;">' . association_bouton(_T('asso:prets_nav_editer'), 'edit-12.gif', 'edit_pret', 'id_pret='.$data['id_pret']) . "</td>\n";
-			echo'  </tr>';
+
+			echo '<td class="arial11 border1" style="text-align:center;">'. association_bouton(_T('asso:prets_nav_annuler'), 'poubelle-12.gif', 'action_prets', 'id_pret='.$data['id_pret'].'&id_ressource='.$id_ressource) . '</td>';
+			echo '<td class="arial11 border1" style="text-align:center;">' . association_bouton(_T('asso:prets_nav_editer'), 'edit-12.gif', 'edit_pret', 'id_pret='.$data['id_pret']) . '</td>';
+			echo "  </tr>\n";
 		}
-		echo'</table>';
+		echo "</table>\n";
 
 		fin_cadre_relief();
 		echo fin_page_association();

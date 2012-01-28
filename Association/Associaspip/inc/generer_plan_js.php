@@ -15,7 +15,7 @@ echo "<script type=\"text/javascript\" >\n";
 echo "<!-- // --><![CDATA[ // ><!--\n";
 
 foreach ($GLOBALS['association_metas'] as $key => $val) {
-	if (substr($key, 0, 6) === "classe") { // ne prendre dans les metas que les classes !!!
+	if (substr($key, 0, 6)==="classe") { // ne prendre dans les metas que les classes !!!
 		echo "var classe$val = new Array();\n";
 		$tableau = association_liste_plan_comptable($val,1);
 		foreach ($tableau as $k => $v) {

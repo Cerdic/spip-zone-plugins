@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
-	
+
 function exec_edit_destination(){
 
 	include_spip('inc/autoriser');
@@ -21,29 +21,23 @@ function exec_edit_destination(){
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		
-		$url_asso = generer_url_ecrire('association');
-		$url_destination = generer_url_ecrire('destination');
-		$url_action_destination=generer_url_ecrire('action_destination');
-
 		$id_destination= intval(_request('id'));
-		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;		
+		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets();
-		echo debut_gauche("",true);
+		echo debut_gauche('',true);
 		echo debut_boite_info(true);
-		echo association_date_du_jour();	
+		echo association_date_du_jour();
 		echo fin_boite_info(true);
 		echo association_retour();
-		echo debut_droite("",true);
-		
-		debut_cadre_relief(  "", false, "", $titre = _T('asso:destination_nav_ajouter'));
-		
-		$data = !$id_destination ? '' : sql_fetsel("*", "spip_asso_destination", "id_destination=$id_destination");
+		echo debut_droite('',true);
+
+		debut_cadre_relief('', false, '', $titre = _T('asso:destination_nav_ajouter'));
+
+		$data = !$id_destination ? '' : sql_fetsel('*', 'spip_asso_destination', "id_destination=$id_destination");
 		if ($data) {
 			$intitule=$data['intitule'];
-			$commentaire=$data["commentaire"];
+			$commentaire=$data['commentaire'];
 			$action = 'modifier';
 		} else {
 			$intitule=$commentaire='';
@@ -58,15 +52,16 @@ function exec_edit_destination(){
 		. '<textarea name="commentaire" id="commentaire" class="formo" rows="4" cols="80">'
 		. $commentaire
 		. "</textarea>\n"
-		. '<div style="float:right;">'
+		. '<p class="boutons">'
 		. '<input type="submit" value="'
 		. _T('asso:bouton_envoyer')
-		. '" class="fondo" /></div>';
+		. '" class="fondo" /></p>';
 
 		echo redirige_action_post($action . '_destinations' , $id_destination, 'destination', "", "<div>$res</div>");
 
-		fin_cadre_relief();  	
+		fin_cadre_relief();
 		echo fin_gauche(), fin_page();
 	}
 }
+
 ?>

@@ -16,44 +16,42 @@ include_spip ('inc/navigation_modules');
 include_spip ('inc/association_comptabilite');
 
 function exec_edit_vente() {
-		
+
 	include_spip('inc/autoriser');
 	if (!autoriser('associer', 'ventes')) {
 		include_spip('inc/minipres');
 		echo minipres();
-	} else {		
-		$id_vente= intval(_request('id'));		
+	} else {
+		$id_vente= intval(_request('id'));
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page() ;
-		
 		association_onglets(_T('asso:titre_onglet_ventes'));
-		
-		echo debut_gauche("",true);
-		
+
+		echo debut_gauche('',true);
+
 		echo debut_boite_info(true);
 		if ($id_vente) {
 			echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:vente_entete_id').'<br />';
 			echo '<span class="spip_xx-large">';
 			echo $id_vente;
-			echo '</span></div><br />';
+			echo '</span></div>';
 		}
-		echo '<div>'.association_date_du_jour().'</div>';	
-		
-		echo fin_boite_info(true);	
+		echo association_date_du_jour();
+		echo fin_boite_info(true);
 
 		echo association_retour();
-		
-		echo debut_droite("",true);
 
-		echo recuperer_fond("prive/editer/editer_asso_ventes", array (
+		echo debut_droite('',true);
+
+		echo recuperer_fond('prive/editer/editer_asso_ventes', array (
 			'id_vente' => $id_vente
 		));
 
-		echo fin_page_association(); 
+		echo fin_page_association();
 
 
-		
-	}  
+
+	}
 }
 ?>

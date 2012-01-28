@@ -10,21 +10,27 @@
 \***************************************************************************/
 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+    return;
+
 include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
 include_spip('inc/association_comptabilite');
 
 function action_editer_asso_prets_dist()
 {
-
     $securiser_action = charger_fonction('securiser_action', 'inc');
     $id_pret = $securiser_action();
     $erreur = '';
-
+    include_spip('base/association');
+    include_spip('inc/association_comptabilite');
     $id_compte = intval(_request('id_compte'));
     $id_ressource = intval(_request('id_ressource'));
     $id_emprunteur = intval(_request('id_emprunteur'));
+    if (!$emprunteur AND $id_emprunteur) {
+	$data =  sql_fetsel('sexe, nom_famille, prenom', 'spip_asso_membres', "id_auteur=$id_emprunteur");
+	$emprunteur = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
+    }
     $date_sortie = _request('date_sortie');
     $date_retour = _request('date_retour');
     $duree = association_recupere_montant(_request('duree'));
@@ -33,63 +39,47 @@ function action_editer_asso_prets_dist()
     $commentaire_retour = _request('commentaire_retour');
     $statut = _request('statut');
     $journal = _request('journal');
-
-    include_spip('base/association');
     if ($id_pret) { /* modification */
-	prets_modifier($duree, $date_sortie, $date_retour, $id_emprunteur, $commentaire_sortie, $id_pret, $journal, $montant);
-    } else { /* ajout */
-	$id_pret = prets_ajouter($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $commentaire_sortie,$commentaire_retour);
-	if (!$id_pret)
-	    $erreur = _T('Erreur_BdD_ou_SQL');
-    }
-
-    return array($id_pret, $erreur);
-}
-
-function prets_modifier($duree, $date_sortie, $date_retour, $id_emprunteur, $commentaire_sortie, $id_pret, $journal, $montant)
-{
-    sql_updateq('spip_asso_prets', array(
-	'duree' => $duree,
-	'date_sortie' => $date_sortie,
-	'date_retour' => $date_retour,
-	'id_emprunteur' => $id_emprunteur,
-	'commentaire_sortie' => $commentaire_sortie
-    ), "id_pret=$id_pret" );
-    sql_updateq('spip_asso_comptes', array(
-	'journal' => $journal,
-	'recette' => $montant,
-	'date' => $date_sortie
-    ), "id_journal=$id_pret");
-    // mettre a jour les destinations comptables
-}
-
-function prets_ajouter($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $commentaire_sortie,$commentaire_retour)
-{
-    $id_pret = sql_insertq('spip_asso_prets', array(
-	'id_ressource' => $id_ressource,
-	'date_sortie' => $date_sortie,
-	'duree' => $duree,
-	'date_retour' => $date_retour,
-	'id_emprunteur' => $id_emprunteur,
-	'commentaire_sortie' => $commentaire_sortie,
-	'commentaire_retour' => $commentaire_retour
-    ));
-    if ($id_pret) {
-	$id_pret = sql_insertq('spip_asso_comptes', array(
-	    'date' => $date_sortie,
-	    'journal' => $journal,
-	    'recette' => $montant,
-	    'justification' => _T('asso:pret_nd')."$id_ressource-$id_emprunteur/$id_pret",
-	    'imputation' => $GLOBALS['association_metas']['pc_prets'],
-	    'id_journal' => $id_pret
-	));
+	// on modifie l'operation comptable associe au don
+	association_modifier_operation_comptable($date_retour, $montant, 0, "[pret$id_pret->pret$id_pret] - ". ($id_emprunteur?"[$emprunteur->membre$id_emprunteur]":$emprunteur), $GLOBALS['association_metas']['pc_prets'], $journal, '', $id_compte);
+	// on modifie les informations relatives au pret
+	sql_updateq('spip_asso_prets', array(
+	    'duree' => $duree,
+	    'date_sortie' => $date_sortie,
+	    'date_retour' => $date_retour,
+	    'id_emprunteur' => $id_emprunteur,
+	    'commentaire_sortie' => $commentaire_sortie,
+	    'statut' => $statut,
+	), "id_pret=$id_pret" );
+	// on met a jour le statut de la ressource
 	sql_updateq('spip_asso_ressources',
-	    array('statut' => 'reserve'),
+	    array('statut' => $statut),
 	    "id_ressource=$id_ressource"
 	);
+    } else { /* ajout */
+	// on ajoute les informations relatives au pret
+	$id_pret = sql_insertq('spip_asso_prets', array(
+	    'id_ressource' => $id_ressource,
+	    'date_sortie' => $date_sortie,
+	    'duree' => $duree,
+	    'date_retour' => $date_retour,
+	    'id_emprunteur' => $id_emprunteur,
+	    'commentaire_sortie' => $commentaire_sortie,
+	    'commentaire_retour' => $commentaire_retour
+	));
+	if ($id_pret) {
+	// on met a jour le statut de la ressource
+	    sql_updateq('spip_asso_ressources',
+		array('statut' => 'reserve'),
+		"id_ressource=$id_ressource"
+	    );
+	} else
+	    $erreur = _T('Erreur_BdD_ou_SQL');
+	// on ajoute l'operation comptable associe au pret
+	association_ajouter_operation_comptable($date_sortie, $montant, 0, "[pret$id_pret->pret$id_pret] - ". ($id_emprunteur?"[$emprunteur->membre$id_emprunteur]":$emprunteur), $GLOBALS['association_metas']['pc_prets'], $journal, $id_pret);
+	$id_pret = prets_ajouter($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $commentaire_sortie,$commentaire_retour);
     }
-    // ajouter destinations comptables
-    return $id_pret;
+    return array($id_pret, $erreur);
 }
 
 ?>

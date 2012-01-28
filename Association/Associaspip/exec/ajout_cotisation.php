@@ -12,13 +12,13 @@
 
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-	
+
 include_spip('inc/presentation');
 include_spip('inc/autoriser');
 include_spip ('inc/navigation_modules');
 
 function exec_ajout_cotisation(){
-		
+
 	$id_auteur = intval(_request('id'));
 	$row = sql_fetsel("sexe, nom_famille,prenom,categorie,validite",'spip_asso_membres', "id_auteur=$id_auteur");
 	if (!autoriser('associer', 'adherents', $id_auteur) OR !$row) {
@@ -42,20 +42,21 @@ function exec_ajout_cotisation(){
 		echo debut_boite_info(true);
 		echo "<h3><a href='$h'>".$nom_membre.'</a></h3>';
 		echo $categorie_libelle ? ('<strong>'.$categorie_libelle['libelle'].'</strong>') :'';
-		echo association_date_du_jour();	
+		echo association_date_du_jour();
 		echo fin_boite_info(true);
 
-		echo debut_droite("",true);
+		echo debut_droite('',true);
 
-		echo debut_cadre_relief(  "", false, "", _T('asso:nouvelle_cotisation'));
-		echo recuperer_fond("prive/editer/editer_cotisations", array (
+		echo debut_cadre_relief('', false, '', _T('asso:nouvelle_cotisation'));
+		echo recuperer_fond('prive/editer/editer_cotisations', array (
 			'id_auteur' => $id_auteur,
 			'nom_prenom' => $nom_membre,
 			'categorie' => $categorie,
 			'validite' => $validite
 		));
-		echo fin_cadre_relief(true);  
+		echo fin_cadre_relief(true);
 		echo fin_page_association();
 	}
 }
+
 ?>

@@ -27,7 +27,7 @@ function exec_edit_categorie(){
 		echo $commencer_page(_T('asso:categories_de_cotisations')) ;
 		association_onglets();
 
-		echo debut_gauche("",true);
+		echo debut_gauche('',true);
 
 		echo debut_boite_info(true);
 		echo association_date_du_jour();
@@ -35,9 +35,9 @@ function exec_edit_categorie(){
 
 		echo association_retour();
 
-		echo debut_droite("",true);
+		echo debut_droite('',true);
 
-		echo recuperer_fond("prive/editer/editer_asso_categories", array (
+		echo recuperer_fond('prive/editer/editer_asso_categories', array (
 			'id_categorie' => $id_categorie
 		));
 

@@ -16,7 +16,7 @@ include_spip('inc/autoriser');
 function formulaires_editer_membres_groupe_charger_dist($id_groupe='') {
 	$contexte['id_groupe'] = $id_groupe;
 	/* pour passer securiser action */
-	$contexte['_action'] = array("editer_membres_groupe",$id_groupe);
+	$contexte['_action'] = array('editer_membres_groupe', $id_groupe);
 	return $contexte;
 }
 
@@ -25,18 +25,17 @@ function formulaires_editer_membres_groupe_traiter($id_groupe='') {
 	$res=array();
 	// eviter la redirection forcee par l'action...
 	set_request('redirect');
-	
 	$bsubmit = _request('bsubmit');
-	if($bsubmit == _T('pass_ok')) {
+	if($bsubmit==_T('pass_ok')) {
 		$action_editer_membres = charger_fonction('editer_membres_groupe','action');
 		$action_editer_membres($id_groupe);
-	} else if ($bsubmit == _T('asso:exclure')) {
+	} else if ($bsubmit==_T('asso:exclure')) {
 		$action_supprimer_membres = charger_fonction('exclure_du_groupe','action');
 		$action_supprimer_membres($id_groupe);
 	}
-	$res['message_ok'] = ''; 
+	$res['message_ok'] = '';
 	$res['redirect'] = generer_url_ecrire('edit_groupe', 'id='.$id_groupe);
 	return $res;
-	
 }
+
 ?>

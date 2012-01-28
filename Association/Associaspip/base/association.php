@@ -11,20 +11,20 @@
 
 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
 
 // Declaration des tables
 function association_declarer_tables_principales($tables_principales)
 {
 
-
 //-- Table CATEGORIES COTISATION ------------------------------------------
 $spip_asso_categories = array(
-	"id_categorie" => "INT unsigned NOT NULL auto_increment",
+	"id_categorie" => "INT UNSIGNED NOT NULL auto_increment",
 	"valeur" => "TINYTEXT NOT NULL",
 	"libelle" => "TEXT NOT NULL",
-	"duree" => "TEXT NOT NULL",
-	"cotisation" => "DECIMAL(19,4) NOT NULL default '0'",
+	"duree" => "INT UNSIGNED NOT NULL",
+	"cotisation" => "DECIMAL(19,2) NOT NULL default '0'",
 	"commentaires" => "TEXT NOT NULL",
 	"maj" => "TIMESTAMP NOT NULL"
 );
@@ -38,10 +38,10 @@ $tables_principales['spip_asso_categories'] = array(
 
 //-- Table DONS ------------------------------------------
 $spip_asso_dons = array(
-	"id_don" => "BIGINT unsigned NOT NULL auto_increment",
-	"date_don" => "DATE NOT NULL default '0000-00-00'",
+	"id_don" => "BIGINT UNSIGNED NOT NULL auto_increment",
+	"date_don" => "DATE NOT NULL DEFAULT '0000-00-00'",
 	"bienfaiteur" => "TEXT NOT NULL",
-	"id_adherent" => "BIGINT NOT NULL",
+	"id_adherent" => "BIGINT UNSIGNED NOT NULL",
 	"argent" => "TINYTEXT", // ??
 	"colis" => "TEXT",
 	"valeur" => "TEXT NOT NULL", // ??
@@ -59,16 +59,16 @@ $tables_principales['spip_asso_dons'] = array(
 
 //-- Table VENTES ------------------------------------------
 $spip_asso_ventes = array(
-	"id_vente" => "BIGINT unsigned NOT NULL auto_increment",
+	"id_vente" => "BIGINT UNSIGNED NOT NULL auto_increment",
 	"article" => "TINYTEXT NOT NULL",
 	"code" => "TINYTEXT NOT NULL",
 	"acheteur" => "TINYTEXT NOT NULL",
-	"id_acheteur" => "BIGINT NOT NULL",
-	"quantite" => "TINYTEXT NOT NULL", // ??
+	"id_acheteur" => "BIGINT UNSIGNED NOT NULL",
+	"quantite" => "FLOAT NOT NULL", // ??
 	"date_vente" => "DATE NOT NULL DEFAULT '0000-00-00'",
 	"date_envoi" => "DATE DEFAULT '0000-00-00'",
-	"prix_vente" => "DECIMAL(19,4) NOT NULL default '0'",
-	"frais_envoi" => "DECIMAL(19,4) NOT NULL default '0'",
+	"prix_vente" => "DECIMAL(19,2) NOT NULL default '0'",
+	"frais_envoi" => "DECIMAL(19,2) NOT NULL default '0'",
 	"commentaire" => "TEXT",
 	"maj" => "TIMESTAMP NOT NULL"
 );
@@ -82,14 +82,14 @@ $tables_principales['spip_asso_ventes'] = array(
 
 //-- Table COMPTES ------------------------------------------
 $spip_asso_comptes = array(
-	"id_compte" => "BIGINT unsigned NOT NULL auto_increment",
+	"id_compte" => "BIGINT UNSIGNED NOT NULL auto_increment",
 	"date" => "DATE default NULL",
-	"recette" => "DECIMAL(19,4) NOT NULL default '0'",
-	"depense" => "DECIMAL(19,4) NOT NULL default '0'",
+	"recette" => "DECIMAL(19,2) NOT NULL default '0'",
+	"depense" => "DECIMAL(19,2) NOT NULL default '0'",
 	"justification" => "TEXT",
 	"imputation" => "TINYTEXT",
 	"journal" => "TINYTEXT",
-	"id_journal" => "BIGINT NOT NULL default '0'",
+	"id_journal" => "BIGINT UNSIGNED NOT NULL default '0'",
 	"vu" => "BOOLEAN default 0",
 	"maj" => "TIMESTAMP NOT NULL"
 );
@@ -103,13 +103,13 @@ $tables_principales['spip_asso_comptes'] = array(
 
 //-- Table PLAN COMPTABLE ------------------------------------------
 $spip_asso_plan = array(
-	"id_plan" => "INT unsigned NOT NULL auto_increment",
+	"id_plan" => "INT UNSIGNED NOT NULL auto_increment",
 	"code" => "TINYTEXT NOT NULL",
 	"intitule" => "TINYTEXT NOT NULL",
 	"classe" =>"TEXT NOT NULL",
 	"type_op" => "ENUM('credit','debit', 'multi') NOT NULL default 'multi'",
-	"solde_anterieur" => "DECIMAL(19,4) NOT NULL default '0'",
-	"date_anterieure" => "DATE NOT NULL default '0000-00-00'",
+	"solde_anterieur" => "DECIMAL(19,2) NOT NULL default '0'",
+	"date_anterieure" => "DATE NOT NULL DEFAULT '0000-00-00'",
 	"commentaire" => "TEXT NOT NULL",
 	"active" => "BOOLEAN default 1",
 	"maj" => "TIMESTAMP NOT NULL"
@@ -124,7 +124,7 @@ $tables_principales['spip_asso_plan'] = array(
 
 //-- Tables DESTINATION ----------------------------------------
 $spip_asso_destination = array(
-	"id_destination" => "INT unsigned NOT NULL auto_increment",
+	"id_destination" => "INT UNSIGNED NOT NULL auto_increment",
 	"intitule" => "TINYTEXT NOT NULL",
 	"commentaire" => "TEXT NOT NULL",
 );
@@ -136,11 +136,11 @@ $tables_principales['spip_asso_destination'] = array(
 	'key' => &$spip_asso_destination_key
 );
 $spip_asso_destination_op = array(
-	"id_dest_op" => "INT unsigned NOT NULL auto_increment",
-	"id_compte" => "BIGINT NOT NULL",
-	"id_destination" => "INT NOT NULL",
-	"recette" => "DECIMAL(19,4) NOT NULL default '0'",
-	"depense" => "DECIMAL(19,4) NOT NULL default '0'",
+	"id_dest_op" => "INT UNSIGNED NOT NULL auto_increment",
+	"id_compte" => "BIGINT UNSIGNED NOT NULL",
+	"id_destination" => "INT UNSIGNED NOT NULL",
+	"recette" => "DECIMAL(19,2) NOT NULL default '0'",
+	"depense" => "DECIMAL(19,2) NOT NULL default '0'",
 );
 $spip_asso_destination_op_key = array(
 	"PRIMARY KEY" => "id_dest_op"
@@ -152,11 +152,11 @@ $tables_principales['spip_asso_destination_op'] = array(
 
 //-- Table RESSOURCES ------------------------------------------
 $spip_asso_ressources = array(
-	"id_ressource" => "BIGINT unsigned NOT NULL auto_increment",
+	"id_ressource" => "BIGINT UNSIGNED NOT NULL auto_increment",
 	"code" => "TINYTEXT NOT NULL",
 	"intitule" => "TINYTEXT NOT NULL",
-	"date_acquisition" => "DATE NOT NULL default '0000-00-00'",
-	"pu" => "DECIMAL(19,4) NOT NULL default '0'",
+	"date_acquisition" => "DATE NOT NULL DEFAULT '0000-00-00'",
+	"pu" => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
 	"statut" => "TINYTEXT NOT NULL",
 	"commentaire" => "TEXT NOT NULL",
 	"maj" => "TIMESTAMP NOT NULL"
@@ -171,12 +171,12 @@ $tables_principales['spip_asso_ressources'] = array(
 
 //-- Table PRETS ------------------------------------------
 $spip_asso_prets = array(
-	"id_pret" => "BIGINT unsigned NOT NULL auto_increment",
+	"id_pret" => "BIGINT UNSIGNED NOT NULL auto_increment",
 	"id_ressource" => "VARCHAR(20) NOT NULL",
-	"date_sortie" => "DATE NOT NULL default '0000-00-00'",
-	"duree" => "INT NOT NULL default '0'",
-	"date_retour" => "DATE NOT NULL default '0000-00-00'",
-	"id_emprunteur" => "BIGINT NOT NULL",
+	"date_sortie" => "DATE NOT NULL DEFAULT '0000-00-00'",
+	"duree" => "INT UNSIGNED NOT NULL DEFAULT '0'",
+	"date_retour" => "DATE NOT NULL DEFAULT '0000-00-00'",
+	"id_emprunteur" => "BIGINT UNSIGNED NOT NULL",
 	"statut" => "TINYTEXT NOT NULL",
 	"commentaire_sortie" => "TEXT NOT NULL",
 	"commentaire_retour" => "TEXT NOT NULL",
@@ -192,20 +192,20 @@ $tables_principales['spip_asso_prets'] = array(
 
 //-- Table ACTIVITES ------------------------------------------
 $spip_asso_activites = array(
-	"id_activite" => "BIGINT unsigned NOT NULL auto_increment",
-	"id_evenement" => "BIGINT NOT NULL",
+	"id_activite" => "BIGINT UNSIGNED NOT NULL auto_increment",
+	"id_evenement" => "BIGINT UNSIGNED NOT NULL",
 	"nom" => "TEXT NOT NULL",
-	"id_adherent" => "BIGINT NOT NULL",
+	"id_adherent" => "BIGINT UNSIGNED NOT NULL",
 	"membres" => "TEXT NOT NULL",
 	"non_membres" => "TEXT NOT NULL",
-  	"inscrits" => "INT NOT NULL default '0'",
-	"date" => "date NOT NULL default '0000-00-00'",
+  	"inscrits" => "INT NOT NULL DEFAULT '0'",
+	"date" => "DATE NOT NULL DEFAULT '0000-00-00'",
 	"telephone" => "TEXT NOT NULL",
 	"adresse" => "TEXT NOT NULL",
 	"email" => "TEXT NOT NULL",
 	"commentaire" => "TEXT NOT NULL",
-	"montant" => "DECIMAL(19,4) NOT NULL default '0'",
-	"date_paiement" => "DATE NOT NULL default '0000-00-00'",
+	"montant" => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
+	"date_paiement" => "DATE NOT NULL DEFAULT '0000-00-00'",
 	"statut" => "TINYTEXT NOT NULL",
 	"maj" => "TIMESTAMP NOT NULL"
 );
@@ -219,10 +219,10 @@ $tables_principales['spip_asso_activites'] = array(
 
 //-- Table groupes de membres: deux tables: groupe et liaison -----------------
 $spip_asso_groupes= array(
-	"id_groupe" => "BIGINT unsigned NOT NULL auto_increment",
+	"id_groupe" => "INT UNSIGNED NOT NULL auto_increment",
 	"nom" => "VARCHAR(128) NOT NULL",
 	"commentaires" => "TEXT",
-	"affichage" => "TINYINT NOT NULL default 0",
+	"affichage" => "TINYINT NOT NULL DEFAULT 0",
 	"maj" => "TIMESTAMP NOT NULL"
 );
 $spip_asso_groupes_key = array(
@@ -233,11 +233,11 @@ $tables_principales['spip_asso_groupes'] = array(
 	'key' => &$spip_asso_groupes_key
 );
 $spip_asso_groupes_liaisons= array(
-	"id_groupe" => "BIGINT NOT NULL",
-	"id_auteur" => "BIGINT NOT NULL",
+	"id_groupe" => "BIGINT UNSIGNED NOT NULL",
+	"id_auteur" => "BIGINT UNSIGNED NOT NULL",
 	"fonction" => "VARCHAR(128) NOT NULL",
-	"date_debut" => "DATE NOT NULL default '0000-00-00'",
-	"date_fin" => "DATE NOT NULL default '0000-00-00'",
+#	"date_debut" => "DATE NOT NULL DEFAULT '0000-00-00'",
+#	"date_fin" => "DATE NOT NULL DEFAULT '0000-00-00'",
 	"commentaires" => "TEXT",
 	"maj" => "TIMESTAMP NOT NULL"
 );
@@ -250,7 +250,7 @@ $tables_principales['spip_asso_groupes_liaisons'] = array(
 );
 
 $spip_asso_membres= array(
-  "id_auteur" => "BIGINT unsigned NOT NULL auto_increment",
+  "id_auteur" => "BIGINT UNSIGNED NOT NULL auto_increment",
   "id_asso" => "TINYTEXT NOT NULL",
   "nom_famille" => "TEXT NOT NULL",
   "prenom" => "TEXT NOT NULL",
@@ -258,7 +258,7 @@ $spip_asso_membres= array(
   "categorie" => "TEXT NOT NULL",
   "statut_interne" => "TINYTEXT NOT NULL",
   "commentaire" => "TEXT NOT NULL",
-  "validite" => "DATE NOT NULL default '0000-00-00'"
+  "validite" => "DATE NOT NULL DEFAULT '0000-00-00'"
 );
 $spip_asso_membres_key= array(
 	"PRIMARY KEY" => "id_auteur"
@@ -270,7 +270,7 @@ $tables_principales['spip_asso_membres'] = array(
 
 //-- Tables EXERCICES ----------------------------------------
 $spip_asso_exercices = array(
-	"id_exercice" => "INT unsigned NOT NULL auto_increment",
+	"id_exercice" => "INT UNSIGNED NOT NULL auto_increment",
 	"intitule" => "TINYTEXT NOT NULL",
 	"commentaire" => "TEXT NOT NULL",
 	"debut" => "DATE NOT NULL default '0000-00-00'",
@@ -288,58 +288,51 @@ return $tables_principales;
 
 }
 
-
 function association_declarer_tables_auxiliaires($tables_auxiliaires)
 {
 
-$spip_asso_metas = array(
+	$spip_asso_metas = array(
 		"nom" => "VARCHAR(255) NOT NULL",
 		"valeur" => "TEXT DEFAULT ''",
 		"impt" => "ENUM('non', 'oui') DEFAULT 'oui' NOT NULL",
 		"maj" => "TIMESTAMP"
-);
-$spip_asso_metas_key = array(
+	);
+	$spip_asso_metas_key = array(
 		"PRIMARY KEY" => "nom"
-);
-$tables_auxiliaires['spip_association_metas'] = array(
+	);
+	$tables_auxiliaires['spip_association_metas'] = array(
 	'field' => &$spip_asso_metas,
 	'key' => &$spip_asso_metas_key
-);
-
-return $tables_auxiliaires;
-
+	);
+	return $tables_auxiliaires;
 }
 
 
 function association_declarer_tables_interfaces($tables_interfaces)
 {
+	$tables_interfaces['table_des_tables']['asso_dons'] = 'asso_dons';
+	$tables_interfaces['table_des_tables']['asso_ventes'] = 'asso_ventes';
+	$tables_interfaces['table_des_tables']['asso_comptes'] = 'asso_comptes';
+	$tables_interfaces['table_des_tables']['comptes'] = 'asso_comptes';
+	$tables_interfaces['table_des_tables']['asso_categories'] = 'asso_categories';
+	$tables_interfaces['table_des_tables']['asso_plan'] = 'asso_plan';
+	$tables_interfaces['table_des_tables']['asso_ressources'] = 'asso_ressources';
+	$tables_interfaces['table_des_tables']['asso_prets'] = 'asso_prets';
+	$tables_interfaces['table_des_tables']['asso_activites'] = 'asso_activites';
+	$tables_interfaces['table_des_tables']['asso_membres'] = 'asso_membres';
+	$tables_interfaces['table_des_tables']['association_metas'] = 'association_metas';
+	$tables_interfaces['table_des_tables']['asso_destination'] = 'asso_destination';
+	$tables_interfaces['table_des_tables']['asso_destination_op'] = 'asso_destination_op';
+	$tables_interfaces['table_des_tables']['asso_groupes'] = 'asso_groupes';
+	$tables_interfaces['table_des_tables']['asso_groupes_liaisons'] = 'asso_groupes_liaisons';
+	$tables_interfaces['table_des_tables']['asso_exercices'] = 'asso_exercices';
 
-$tables_interfaces['table_des_tables']['asso_dons'] = 'asso_dons';
-$tables_interfaces['table_des_tables']['asso_ventes'] = 'asso_ventes';
-$tables_interfaces['table_des_tables']['asso_comptes'] = 'asso_comptes';
-$tables_interfaces['table_des_tables']['comptes'] = 'asso_comptes';
-$tables_interfaces['table_des_tables']['asso_categories'] = 'asso_categories';
-$tables_interfaces['table_des_tables']['asso_plan'] = 'asso_plan';
-$tables_interfaces['table_des_tables']['asso_ressources'] = 'asso_ressources';
-$tables_interfaces['table_des_tables']['asso_prets'] = 'asso_prets';
-$tables_interfaces['table_des_tables']['asso_activites'] = 'asso_activites';
-$tables_interfaces['table_des_tables']['asso_membres'] = 'asso_membres';
-$tables_interfaces['table_des_tables']['association_metas'] = 'association_metas';
-$tables_interfaces['table_des_tables']['asso_destination'] = 'asso_destination';
-$tables_interfaces['table_des_tables']['asso_destination_op'] = 'asso_destination_op';
-$tables_interfaces['table_des_tables']['asso_groupes'] = 'asso_groupes';
-$tables_interfaces['table_des_tables']['asso_groupes_liaisons'] = 'asso_groupes_liaisons';
-$tables_interfaces['table_des_tables']['asso_exercices'] = 'asso_exercices';
-
-// Pour que les raccourcis ci-dessous heritent d'une zone de clic pertinente
-//$tables_interfaces['table_titre']['asso_membres']= "nom_famille AS titre, '' AS lang";
-$tables_interfaces['table_titre']['asso_dons']= "CONCAT('don ', id_don) AS titre, '' AS lang";
-
+	// Pour que les raccourcis ci-dessous heritent d'une zone de clic pertinente
+	$tables_interfaces['table_titre']['asso_membres']= "nom_famille AS titre, '' AS lang";
+	$tables_interfaces['table_titre']['asso_dons']= "CONCAT('don ', id_don) AS titre, '' AS lang";
 	/* jointures */
 	$tables_interfaces['tables_jointures']['spip_asso_membres']['id_auteur'] = 'asso_groupes_liaisons';
- return  $tables_interfaces;
-
+	return  $tables_interfaces;
 }
-
 
 ?>

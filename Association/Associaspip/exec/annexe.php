@@ -14,57 +14,44 @@
  * une erreur lors de son activation dans les raccourcis de compte
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
 
 include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
-	
+
 function exec_annexe(){
-		
+
 	include_spip('inc/autoriser');
 	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
-	} 
-	else {
+	} else {
 		$plan = sql_countsel('spip_asso_plan');
-
 		$exercice= intval(_request('exercice'));
 		if(!$exercice){
 			/* on recupere l'id_exercice dont la date "fin" est "la plus grande" */
-			$exercice = sql_getfetsel("id_exercice","spip_asso_exercices","","","fin DESC");
+			$exercice = sql_getfetsel('id_exercice','spip_asso_exercices', '', '', 'fin DESC');
 			if(!$exercice) $exercice=0;
 		}
-		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(propre(_T('asso:titre_gestion_pour_association')), "", _DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg','rien.gif');
-		association_onglets(_T('asso:titre_onglet_comptes'));		
-
-		echo debut_gauche("",true);		
-		
+		association_onglets(_T('asso:titre_onglet_comptes'));
+		echo debut_gauche('',true);
 		echo debut_boite_info(true);
 		echo association_date_du_jour();
-
 		echo fin_boite_info(true);
-
 		$url_compte_resultat = generer_url_ecrire('compte_resultat', "exercice=$exercice");
 		$url_bilan = generer_url_ecrire('bilan', "exercice=$exercice");
 		$res = association_icone(_T('asso:cpte_resultat_titre_general'),  $url_compte_resultat, 'finances.jpg')
 		. association_icone(_T('asso:bilan'),  $url_bilan, 'finances.jpg');
-		
 		echo bloc_des_raccourcis($res);
-
-		echo debut_droite("",true);
-		
-		debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES."finances.jpg", false, "", '&nbsp;' .propre( _T('asso:annexe_titre_general').' : '.exercice_intitule($exercice)));
-		
+		echo debut_droite('',true);
+		debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg', false, '', '&nbsp;' .propre( _T('asso:annexe_titre_general').' : '.exercice_intitule($exercice)));
 		echo _T('asso:non_implemente');
-
-		fin_cadre_relief();  
-
+		fin_cadre_relief();
 		echo fin_page_association();
 	}
 }
-
 
 ?>

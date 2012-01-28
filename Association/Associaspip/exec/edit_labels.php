@@ -16,35 +16,36 @@ include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
 
 function exec_edit_labels(){
-		
+
 	include_spip('inc/autoriser');
 	if (!autoriser('associer', 'adherents')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		
+
 		$url_asso = generer_url_ecrire('association');
-		$url_edit_relances = generer_url_ecrire('edit_relances');		
-		
+		$url_edit_relances = generer_url_ecrire('edit_relances');
+
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
-		
+
 		association_onglets();
-		
-		echo debut_gauche("",true);
-		
+
+		echo debut_gauche('',true);
+
 		echo debut_boite_info(true);
-		echo association_date_du_jour();	
-		echo fin_boite_info(true);	
-		
+		echo association_date_du_jour();
+		echo fin_boite_info(true);
+
 		echo association_retour();
-		
-		echo debut_droite("",true);
-		
-		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:toutes_les_etiquettes_a_generer'));
-		
+
+		echo debut_droite('',true);
+
+		echo debut_cadre_relief('', false, '', $titre = _T('asso:toutes_les_etiquettes_a_generer'));
+
 		$statut_interne = _request('statut_interne');
-		if (!$statut_interne) $statut_interne= "ok";
+		if (!$statut_interne)
+			$statut_interne = 'ok';
 
 
 
@@ -78,16 +79,16 @@ function exec_edit_labels(){
 
 			echo generer_form_ecrire('action_labels', $corps, '', _T('asso:Etiquettes'));
 		}
-		fin_cadre_relief();  
+		fin_cadre_relief();
 		echo fin_page_association();
 	}
 }
 
 function labels_adherents($statut_interne)
 {
-	$query = sql_select("*",'spip_asso_membres', "statut_interne like '$statut_interne'", '', "nom_famille, sexe DESC" );
+	$query = sql_select('*','spip_asso_membres', "statut_interne like '$statut_interne'", '', 'nom_famille, sexe DESC' );
 	// originale semblait contenir une vieillerie:
-	//  spip_auteurs_elargis INNER JOIN spip_asso_adherents ON spip_auteurs_elargis.id_auteur=spip_asso_adherents.id_auteur 
+	//  spip_auteurs_elargis INNER JOIN spip_asso_adherents ON spip_auteurs_elargis.id_auteur=spip_asso_adherents.id_auteur
 
 	$res = '';
 
@@ -95,21 +96,30 @@ function labels_adherents($statut_interne)
 		$sexe=$data['sexe'];
 		$id = $data['id_auteur'];
 		switch($data['statut_interne']) {
-			case "echu": $class= "impair"; break;
-			case "ok": $class="valide"; break;
-			case "relance": $class="pair"; break;
-			case "prospect": $class="prospect"; break;	   
+			case 'echu':
+				$class = 'impair'; break;
+			case 'ok':
+				$class = 'valide'; break;
+			case 'relance':
+				$class = 'pair'; break;
+			case 'prospect':
+				$class = 'prospect'; break;
 		}
-			
 		$res .= '<tr> ';
 		$res .= '<td style="text-align:right;vertical-align:top;" class="'.$class. ' border1">';
 		$res .= $id;
 		$res .= '</td>';
 		$res .= '<td style="vertical-align:top;" class="'.$class. ' border1">';
-		if ($sexe=='H'){ $res .= 'M.'; }
-		elseif ($sexe=='F'){ $res .= 'Mme'; }
-		else { $res .= '&nbsp;'; }
-		$res .= ' '.$data['prenom'].' '.$data["nom_famille"].'</td>';
+		if ($sexe=='H'){
+			$res .= 'M.';
+		}
+		elseif ($sexe=='F'){
+			$res .= 'Mme';
+		}
+		else {
+			$res .= '&nbsp;';
+		}
+		$res .= ' '.$data['prenom'].' '.$data['nom_famille'].'</td>';
 		$res .= '<td style="vertical-align:top;" class="'.$class. ' border1">'.$data['adresse'].'<br />'.$data['code_postal'].' '.$data['ville'].'</td>';
 		$res .= '<td style="text-align:center;vertical-align:top;" class="'.$class. ' border1">';
 		$res .= '<input name="label[]" type="checkbox" value="'.$id.'" checked="checked" />';
@@ -118,4 +128,5 @@ function labels_adherents($statut_interne)
 	}
 	return $res;
 }
+
 ?>

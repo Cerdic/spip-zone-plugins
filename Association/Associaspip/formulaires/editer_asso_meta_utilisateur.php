@@ -24,7 +24,7 @@ function formulaires_editer_asso_meta_utilisateur_verifier_dist($nom_meta='') {
 	if (preg_match('/[^A-Za-z0-9 ]+/', $nom_meta_form)) {
 		$erreurs['nom_meta'] = _T('asso:erreur_nom_meta_utilisateur_incorrect');
 	} else {
-	
+
 		/* on verifie que le nom de la meta ne depasse pas 237 catacteres(il faut laisser de la place pour le prefixe et ne pas depasser 255) */
 		if (strlen($nom_meta_form)>237) {
 			$erreurs['nom_meta'] = _T('asso:erreur_nom_meta_utilisateur_trop_long');
@@ -35,7 +35,7 @@ function formulaires_editer_asso_meta_utilisateur_verifier_dist($nom_meta='') {
 			} else {
 				$nom_meta_form = "meta_utilisateur_".str_replace(' ', '_', strtolower($nom_meta_form));
 				$meta_lower_cased = array_change_key_case($GLOBALS['association_metas']);
-				if ((strtolower($nom_meta) != $nom_meta_form) && isset($meta_lower_cased[$nom_meta_form])) { /* on verifie qu'on n'ecrase pas une autre meta_utilisateur */
+				if ((strtolower($nom_meta)!=$nom_meta_form) && isset($meta_lower_cased[$nom_meta_form])) { /* on verifie qu'on n'ecrase pas une autre meta_utilisateur */
 					$erreurs['nom_meta'] = _T('asso:erreur_meta_utilisateur_deja_definie');
 				}
 			}
@@ -45,7 +45,7 @@ function formulaires_editer_asso_meta_utilisateur_verifier_dist($nom_meta='') {
 	if (count($erreurs)) {
 	$erreurs['message_erreur'] = _T('asso:erreur_titre');
 	}
-	
+
 	return $erreurs;
 }
 
@@ -55,14 +55,14 @@ function formulaires_editer_asso_meta_utilisateur_traiter($nom_meta='') {
 		if ($nom_meta!='') { /* un changement de nom de meta, on recupere la valeur de la meta, cree la nouvelle puis on la supprime */
 			$valeur_meta = $GLOBALS['association_metas'][$nom_meta];
 			effacer_meta($nom_meta, 'association_metas');
-			ecrire_meta($nouveau_nom_meta, $valeur_meta, 'oui', 'association_metas');	
+			ecrire_meta($nouveau_nom_meta, $valeur_meta, 'oui', 'association_metas');
 		} else { /* creation d'une nouvelle meta */
 			ecrire_meta($nouveau_nom_meta, '', 'oui', 'association_metas');
 		}
 	}
 
 	$res = array();
-	$res['message_ok'] = ''; 
+	$res['message_ok'] = '';
 	$res['redirect'] = generer_url_ecrire('editer_asso_metas_utilisateur');
 	return $res;
 }

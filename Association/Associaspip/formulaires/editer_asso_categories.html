@@ -6,29 +6,29 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<h3 class="legend"><:asso:categories_de_cotisations:></h3>
 		<ul>
-			<li class="editer_valeur[ (#ENV**{erreurs}|table_valeur{valeur}|oui)erreur]">
+			<li class="editer_valeur">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{valeur})</span>]
 				<label for="valeur"><strong><:asso:categorie:></strong></label>
-				<input name="valeur" type="text" [value="(#ENV{valeur})"] id="valeur" class="formo" />
+				<input name="valeur" type="text" [value="(#ENV{valeur})"] id="valeur" class="text" />
 			</li>
 			<li class="editer_libelle">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{libelle})</span>]
 				<label for="libelle"><strong><:asso:libelle_complet:></strong></label>
-				<input name="libelle" type="text" [value="(#ENV{libelle})"] id="libelle" class="formo" />
+				<input name="libelle" type="text" [value="(#ENV{libelle})"] id="libelle" class="text" />
 			</li>
-			<li class="editer_duree[ (#GET{erreurs}|oui)erreur]">
+			<li class="editer_duree">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{duree})</span>]
 				<label for="duree"><strong><:asso:duree:></strong></label>
-				<input name="duree" type="text" [value="(#ENV{duree})"] id="duree" class="formo" />
+				<input name="duree" type="[(HTML5|?{number,text})]" [value="(#ENV{duree})"] id="duree" class="number integer" />
 			</li>
-			<li class="editer_cotisation[ (#GET{erreurs}|oui)erreur]">
+			<li class="editer_cotisation">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{cotisation})</span>]
 				<label for="cotisation"><strong><:asso:montant_en_euros:></strong></label>
-				<input name="cotisation" type="text" [value="(#ENV{cotisation})"] id="cotisation" class="formo" />
+				<input name="cotisation" type="[(HTML5|?{number,text})]" [value="(#ENV{cotisation})"] id="cotisation" class="number float price" />
 			</li>
 			<li class="editer_commentaires">
 				<label for="commentaires"><strong><:asso:commentaires:></strong></label>
-				<textarea name="commentaires" id="commentaires" class="formo" rows="3">[(#ENV{commentaires})]</textarea>
+				<textarea name="commentaires" id="commentaires" rows="3">[(#ENV{commentaires})]</textarea>
 			</li>
 		</ul>
 		<p class="boutons">
