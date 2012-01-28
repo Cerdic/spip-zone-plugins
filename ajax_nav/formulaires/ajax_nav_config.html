@@ -1,0 +1,29 @@
+<div class="formulaire_spip formulaire_#FORM">
+  [<p class='formulaire_ok'>(#ENV*{message_ok})</p>]
+  [<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+  <form action="#ENV{action}" method="post"><div>
+      #ACTION_FORMULAIRE{#ENV{action}}
+      <ul>
+    [(#SAISIE{fieldset, ajaxNavConfig, label=<:ajax_nav:conf_plugin:>})]
+
+    <strong><:ajax_nav:url_prefix_titre:></strong>
+    #SAISIE{input, urlPrefix, defaut=#ENV{urlPrefix}}
+
+    <strong><:ajax_nav:pages_titre:></strong>
+    [(#SAISIE{input, pagesToAjaxify, defaut=#ENV{pagesToAjaxify}, explication=<:ajax_nav:pages_expli:>})]
+
+    <strong><:ajax_nav:ajax_divs_titre:></strong>
+    [(#SAISIE{input, ajaxDivs, defaut=#ENV{ajaxDivs}, explication=<:ajax_nav:ajax_divs_expli:>})]
+
+    <strong><:ajax_nav:loc_divs_titre:></strong>
+    [(#SAISIE{input, localizedDivs, defaut=#ENV{localizedDivs}, explication=<:ajax_nav:loc_divs_expli:>})]
+
+    <strong><:ajax_nav:html4:></strong>
+    <input id="champ_html4Fallback" class="checkbox" type="checkbox" name="html4Fallback"
+           label="cocher pour activer"[(#ENV{html4Fallback}|=={on}|?{ checked="checked",})] />
+
+      </ul>
+      <p class="boutons"><input type="submit" value='<:bouton_enregistrer:>' /></p>
+    </div>
+  </form>
+</div>
