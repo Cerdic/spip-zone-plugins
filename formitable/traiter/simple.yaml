@@ -1,0 +1,33 @@
+
+titre: 'Simple Table Utilisateur'
+description: 'La sauvegarde est faite dans une table utilisateur, sans alimenter la table de formidable'
+options:
+  -
+    saisie: 'input'
+    options:
+      nom: 'table_destinataire'
+      label: 'table destinataire'
+      explication: 'Indiquez le nom de la table destinataire des enregistrements'
+  -
+    saisie: 'textarea'
+    options:
+      nom: 'correspondance_champs_formulaire_table'
+      label: 'correspondances du formulaire vers la table'
+      explication : 'Indiquez pour chaque champ du formulaire, le nom du champ de la table utilisateur'
+      defaut: 'input_1|titre...'
+  -
+    saisie: 'input'
+    options:
+      nom: 'champ_statut'
+      label: 'champ statut'
+      explication: 'Indiquez le nom du champ qui contient le statut de chaque enregistrement sil existe. Videz sinon.'
+      defaut: 'statut'
+  -
+    saisie: 'radio'
+    options:
+      nom: 'moderation'
+      label: '<:formidable:traiter_enregistrement_option_moderation_label:>'
+      datas:
+        posteriori: '<:bouton_radio_modere_posteriori:>'
+        priori: '<:bouton_radio_modere_priori:>'
+      defaut: 'posteriori'
