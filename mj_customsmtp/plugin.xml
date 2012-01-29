@@ -1,0 +1,17 @@
+<plugin>
+	<nom>Mailjet settings</nom>
+	<auteur>Mailjet SAS</auteur>
+	<version>1.0</version>
+	<etat>stable</etat>
+	<description>Envoyez vos emails via l'API Mailjet.</description>
+	<lien>http://www.mailjet.com</lien>
+	<prefix>mj_customsmtp</prefix>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>mj_customsmtp_config_fonctions.php</inclure>
+	</pipeline>
+
+	<install>base/mj_customsmtp_installer.php</install>
+	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>communication</categorie>
+</plugin>
