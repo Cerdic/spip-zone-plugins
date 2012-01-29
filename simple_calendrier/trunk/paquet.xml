@@ -24,7 +24,7 @@
     <pipeline nom="insert_head" inclure="simplecal_pipelines.php" />
     <pipeline nom="boite_infos" inclure="simplecal_pipelines.php" />
     <pipeline nom="affiche_milieu" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
-    <pipeline nom="affiche_gauche" inclure="simplecal_pipelines.php" />
+    <pipeline nom="affiche_gauche" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
     <pipeline nom="affiche_auteurs_interventions" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
     
     
@@ -37,6 +37,8 @@
     <!-- Listing des nombres d'objet par mot clef (exec/mot_tous -> inc/grouper_mots) -->
     <pipeline nom="afficher_nombre_objets_associes_a" inclure="simplecal_pipelines.php" />
     
+    <pipeline nom="rubrique_encours" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
+    <pipeline nom="affiche_enfants" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
     <pipeline nom="accueil_encours" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
     <pipeline nom="accueil_informations" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
     <pipeline nom="compter_contributions_auteur" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->

@@ -30,13 +30,13 @@ $corbeille_params["evenements"] = array (
 
 
 
-function simplecal_evenements_where($mode='', $annee='', $mois=''){
+function simplecal_evenements_where($where='', $mode='', $annee='', $mois=''){
     
     // Note : date_fin non obligatoire => like nécessaire
     
     if ($annee && $mois) {
-        $date_min = $annee."-".$mois."01";
-        $date_max = $annee."-".$mois."31";
+        $date_min = $annee."-".$mois."-01";
+        $date_max = $annee."-".$mois."-31";
         $req = "((date_debut like '%".$annee."-".$mois."%'";
         $req .= " OR date_fin like '%".$annee."-".$mois."%')";
         $req .= " OR (date_debut <= '$date_max' AND date_fin >= '$date_min'))"; 
@@ -53,7 +53,17 @@ function simplecal_evenements_where($mode='', $annee='', $mois=''){
         $req = "";
     }
     
-    return $req;
+    if ($where and $req){
+        $s = $where." AND ".$req;
+    } else if ($where){
+        $s = $where;
+    } else {
+        $s = $req;
+    }
+    //echo("where=".$where);
+    //die("req=".$req);
+    
+    return $s;
 }
 
 ?>

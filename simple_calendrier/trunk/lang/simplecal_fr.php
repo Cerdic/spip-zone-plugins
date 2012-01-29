@@ -176,6 +176,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'texte_issu_autre_objet' => 'Texte issu d\'un autre contenu',
     'texte' => 'Texte',
     'titre_evenements' => 'Les &eacute;v&egrave;nements',
+    'titre_contenu_rubrique' => 'Les &eacute;v&egrave;nements contenus dans cette rubrique',
     'tous' => 'Tous',
     'titre_boite_refobj' => 'dans le calendrier',
     'titre_boite_rubrique' => 'Calendrier',

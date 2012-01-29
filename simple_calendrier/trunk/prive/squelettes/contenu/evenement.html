@@ -1,5 +1,4 @@
 <BOUCLE_evenement(EVENEMENTS){id_evenement}{statut?}{si #ENV{exec}|=={evenement}}>
-
 [(#BOITE_OUVRIR{[
 				
 	[(#AUTORISER{modifier,evenement,#ID_EVENEMENT})
@@ -14,11 +13,9 @@
 	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{evenement-24.png}|balise_img{evenement,cadre-icone})]</h1>
 ],simple fiche_objet})]
 
-
 <div class="ajax">
     #FORMULAIRE_DATER{evenement,#ID_EVENEMENT}
 </div>
-
 
 <div class="ajax">
 	#FORMULAIRE_EDITER_LIENS{auteurs,evenement,#ID_EVENEMENT}

@@ -3,7 +3,7 @@
 Liste des évènements - Page appelée depuis :
 - exec = accueil    (titre, statut,    par=date)
 - exec = info_perso (titre, id_auteur, par=date)
-- exec = evenements (titre, statut, date_like)
+- exec = evenements (titre, statut)
 
 
 Le seul moyen d'accéder aux parametres mode,anne,mois dans la boucle 
@@ -14,10 +14,8 @@ Note : css automatique dans /prive/themes/spip/lists.css.html
 -->
 ]
 
-
-
-
-[(#SET{where,[(#VAL{#ENV{mode,''}}|simplecal_evenements_where{#ENV{annee,''},#ENV{mois,''}})]})]
+<!-- simplecal_evenements_where(where='', mode='', annee='', mois='') -->
+[(#SET{where,[(#VAL{#WHERE}|simplecal_evenements_where{#ENV{mode,''}, #ENV{annee,''},#ENV{mois,''}})]})]
 
 [(#REM) <!--
 *** objets/liste/evenements.html *** 

@@ -80,6 +80,13 @@ function evenement_inserer($id_rubrique) {
 			'data' => $champs
 		)
 	);
+    
+    // Lien auteur/evenement
+	if ($id_evenement > 0 AND $GLOBALS['visiteur_session']['id_auteur']) {
+		include_spip('action/editer_auteur');
+		auteur_associer($GLOBALS['visiteur_session']['id_auteur'], array('evenement'=>$id_evenement));
+	}
+    
 	return $id_evenement;
 }
 

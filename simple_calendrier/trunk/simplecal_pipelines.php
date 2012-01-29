@@ -46,15 +46,72 @@ function simplecal_insert_head($flux) {
 function simplecal_accueil_encours($flux) {
     $lister_objets = charger_fonction('lister_objets','inc');
 
-	$flux .= $lister_objets('evenements', array(
-		'titre'=>afficher_plus_info(generer_url_ecrire('evenements', 'mode=avenir'))._T('simplecal:info_evenements_valider'),
-		'statut'=>array('prop'),
-		'par'=>'date'));
+    $flux .= $lister_objets('evenements', array(
+        'titre'=>afficher_plus_info(generer_url_ecrire('evenements', 'mode=avenir'))._T('simplecal:info_evenements_valider'),
+        'statut'=>array('prop'),
+        'par'=>'date'));
 
-	return $flux;
+    return $flux;
 }
 
+// Pipeline : éléments 'en cours' d'une rubrique
+function simplecal_rubrique_encours($flux) {
+    if ($flux['args']['type'] == 'rubrique') {
+        $lister_objets = charger_fonction('lister_objets','inc');
 
+        $id_rubrique = $flux['args']['id_objet'];
+
+        $flux['data'] .= $lister_objets('evenements', array(
+            'titre'=>_T('simplecal:info_evenements_valider'),
+            'statut'=>array('prop'),
+            'id_rubrique'=>$id_rubrique,
+            'par'=>'date'));
+    }
+    return $flux;
+}
+
+// Pipeline : les événements référencés au niveau d'une rubrique
+function simplecal_affiche_enfants($flux) {
+	if ($e = trouver_objet_exec($flux['args']['exec']) AND $e['type'] == 'rubrique' AND $e['edition'] == false) {
+		$id_rubrique = $flux['args']['id_rubrique'];
+        $affiche = false;
+        
+        $config_rubrique = $GLOBALS['meta']['simplecal_rubrique'];
+        // affichage si config = 'partout' ou 'secteur'
+        if ($config_rubrique != 'non'){
+            $affiche = true;
+            // si config = 'secteur', on verifie que la rubrique est un secteur
+            if ($config_rubrique == 'secteur'){
+                $row_tmp = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=$id_rubrique");
+                $id_parent = intval($row_tmp['id_parent']);
+                if ($id_parent == 0){
+                    $affiche = true; // car secteur
+                } else {
+                    $affiche = false; // car pas un secteur
+                }                
+            }
+        }
+        
+		if ($affiche) {
+			$lister_objets = charger_fonction('lister_objets','inc');
+			$bouton_evenements = '';
+			$id_parent = sql_getfetsel('id_parent', 'spip_rubriques', 'id_rubrique='.$id_rubrique);
+			if (autoriser('creerevenementdans','rubrique',$id_rubrique,NULL,array('id_parent'=>$id_parent))) {
+				$bouton_evenements .= icone_verticale(_T('simplecal:icone_nouvel_evenement'), generer_url_ecrire("evenement_edit","id_rubrique=$id_rubrique&new=oui"), "evenement-24.png","new", 'right')
+				. "<br class='nettoyeur' />";
+			}
+            
+			$flux['data'] .= $lister_objets('evenements', array(
+                'titre'=>_T('simplecal:titre_contenu_rubrique'), 
+                'where'=>"statut != 'prop' AND statut != 'prepa'", 
+                'id_rubrique'=>$id_rubrique, 
+                'par'=>'date')
+            );
+			$flux['data'] .= $bouton_evenements;
+		}
+	}
+	return $flux;
+}
 
 // Pipeline : synthèse des éléments 'publiés' de la page d'accueil
 function simplecal_accueil_informations($texte) {
@@ -68,8 +125,8 @@ function simplecal_affiche_milieu($flux) {
     
     // Page de configuration
     if ($exec == "configurer_contenu") {
-		$flux["data"] .=  recuperer_fond('prive/squelettes/inclure/configurer',array('configurer'=>'configurer_evenements'));
-	}
+        $flux["data"] .=  recuperer_fond('prive/squelettes/inclure/configurer',array('configurer'=>'configurer_evenements'));
+    }
     
     return $flux;
 }
@@ -80,10 +137,10 @@ function simplecal_affiche_auteurs_interventions($flux){
     $id_auteur = intval($flux['args']['id_auteur']);
     
     $lister_objets = charger_fonction('lister_objets','inc');
-	$listing = $lister_objets('evenements', array(
-		'titre'=>afficher_plus_info(generer_url_ecrire('evenements', 'mode=avenir'))._T('simplecal:liste_evenements_auteur'),
-		'id_auteur'=>$id_auteur,
-		'par'=>'date'));
+    $listing = $lister_objets('evenements', array(
+        'titre'=>afficher_plus_info(generer_url_ecrire('evenements', 'mode=avenir'))._T('simplecal:liste_evenements_auteur'),
+        'id_auteur'=>$id_auteur,
+        'par'=>'date'));
 
     
     $flux['data'] .= $listing;
@@ -131,34 +188,6 @@ function simplecal_configurer_liste_metas($metas) {
 function simplecal_affiche_gauche($flux) {
     $exec =  $flux['args']['exec'];
     
-    // On se trouve sur une rubrique
-    if ($exec == 'naviguer') {
-        $config_rubrique = $GLOBALS['meta']['simplecal_rubrique'];
-        // affichage du portlet si config = 'partout' ou 'secteur'
-        if ($config_rubrique != 'non'){
-            $id_rubrique = intval($flux['args']['id_rubrique']);
-            // Pas à la racine
-            if ($id_rubrique != 0){
-                $affiche = true;
-                // si config = 'secteur', on verifie que la rubrique est un secteur
-                if ($config_rubrique == 'secteur'){
-                    $row_tmp = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=$id_rubrique");
-                    $id_parent = intval($row_tmp['id_parent']);
-                    if ($id_parent == 0){
-                        $affiche = true; // car secteur
-                    } else {
-                        $affiche = false; // car pas un secteur
-                    }                
-                }
-                
-                if ($affiche){
-                    $bloc = simplecal_get_portlet_rubrique($id_rubrique);
-                    $flux['data'] .= $bloc;
-                }
-            }
-        }
-    }
-    
     // On se trouve sur un article
     if ($exec == 'article') {
         if ($GLOBALS['meta']['simplecal_refobj'] == 'oui'){
@@ -184,8 +213,7 @@ function simplecal_affiche_gauche($flux) {
             $flux['data'] .= $portlet;
         }
     }
-
-       
+    
     return $flux;
 }
 
@@ -193,11 +221,11 @@ function simplecal_affiche_gauche($flux) {
 // Liste des contributions d'un auteur (bloc auteur)
 function simplecal_compter_contributions_auteur($flux){
     $id_auteur = intval($flux['args']['id_auteur']);
-	if ($cpt = sql_countsel("spip_auteurs_liens AS lien", "lien.objet='evenement' and lien.id_auteur=".intval($flux['args']['id_auteur']))){
-		$contributions = singulier_ou_pluriel($cpt,'simplecal:info_1_evenement','simplecal:info_n_evenements');
-		$flux['data'][] = $contributions;
-	}
-	return $flux;
+    if ($cpt = sql_countsel("spip_auteurs_liens AS lien", "lien.objet='evenement' and lien.id_auteur=".intval($flux['args']['id_auteur']))){
+        $contributions = singulier_ou_pluriel($cpt,'simplecal:info_1_evenement','simplecal:info_n_evenements');
+        $flux['data'][] = $contributions;
+    }
+    return $flux;
 }
 
 // Pour ajouter du contenu aux formulaires CVT du core.
