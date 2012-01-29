@@ -16,14 +16,6 @@ function ieconfig_ieconfig_metas($table){
 	$table['logos']['titre'] = _T('info_logos');
 	$table['logos']['icone'] = 'image-16.png';
 	$table['logos']['metas_brutes'] = 'activer_logos,activer_logos_survol';
-	// Annonces
-	$table['annonces']['titre'] = _T('info_envoi_email_automatique');
-	$table['annonces']['icone'] = 'annonce-16.png';
-	$table['annonces']['metas_brutes'] = 'suivi_edito,adresse_suivi,adresse_suivi_inscription,quoi_de_neuf,adresse_neuf,jours_neuf,email_envoi';
-	// Avertisseur
-	$table['avertisseur']['titre'] = _T('info_travail_colaboratif');
-	$table['avertisseur']['icone'] = 'article-16.png';
-	$table['avertisseur']['metas_brutes'] = 'articles_modif';
 	// Flux
 	$table['flux']['titre'] = _T('ical_titre_rss');
 	$table['flux']['icone'] = 'rss-16.png';
@@ -32,30 +24,38 @@ function ieconfig_ieconfig_metas($table){
 	$table['langue']['titre'] = _T('info_langue_principale');
 	$table['langue']['icone'] = 'langue-16.png';
 	$table['langue']['metas_brutes'] = 'langue_site';
-	// Moderniseur
-	$table['moderniseur']['titre'] = _T('info_compatibilite_html');
-	$table['moderniseur']['icone'] = 'compat-16.png';
-	$table['moderniseur']['metas_brutes'] = 'version_html_max';
 	// Multilinguisme
 	$table['multilinguisme']['titre'] = _T('info_multilinguisme');
 	$table['multilinguisme']['icone'] = 'traduction-16.png';
 	$table['multilinguisme']['metas_brutes'] = 'multi_secteurs,multi_objets,gerer_trad_objets,langues_multilingue';
-	// Prévisualiseur
-	$table['previsualiseur']['titre'] = _T('previsualisation');
-	$table['previsualiseur']['icone'] = 'preview-16.png';
-	$table['previsualiseur']['metas_brutes'] = 'preview';
 	// Rédacteurs
 	$table['redacteurs']['titre'] = _T('info_inscription_automatique');
 	$table['redacteurs']['icone'] = 'auteur-1comite-16.png';
 	$table['redacteurs']['metas_brutes'] = 'accepter_inscriptions';
+	// Visiteurs
+	$table['visiteurs']['titre'] = _T('info_visiteurs');
+	$table['visiteurs']['icone'] = 'auteur-6forum-16.png';
+	$table['visiteurs']['metas_brutes'] = 'accepter_visiteurs';
+	// Annonces
+	$table['annonces']['titre'] = _T('info_envoi_email_automatique');
+	$table['annonces']['icone'] = 'annonce-16.png';
+	$table['annonces']['metas_brutes'] = 'suivi_edito,adresse_suivi,adresse_suivi_inscription,quoi_de_neuf,adresse_neuf,jours_neuf,email_envoi';
 	// Réducteur
 	$table['reducteur']['titre'] = _T('info_generation_miniatures_images');
 	$table['reducteur']['icone'] = 'image-16.png';
 	$table['reducteur']['metas_brutes'] = 'creer_preview,taille_preview'; // on se limite volontairement aux vignettes, le process dépendant de chaque install
-	
-	
-	
-	
+	// Avertisseur
+	$table['avertisseur']['titre'] = _T('info_travail_colaboratif');
+	$table['avertisseur']['icone'] = 'article-16.png';
+	$table['avertisseur']['metas_brutes'] = 'articles_modif';
+	// Prévisualiseur
+	$table['previsualiseur']['titre'] = _T('previsualisation');
+	$table['previsualiseur']['icone'] = 'preview-16.png';
+	$table['previsualiseur']['metas_brutes'] = 'preview';
+	// Moderniseur
+	$table['moderniseur']['titre'] = _T('info_compatibilite_html');
+	$table['moderniseur']['icone'] = 'compat-16.png';
+	$table['moderniseur']['metas_brutes'] = 'version_html_max';
 	
 	return $table;
 }
