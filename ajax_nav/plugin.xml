@@ -1,40 +1,45 @@
 <plugin>
-  <nom>
-    <multi>
-      [fr]Navigation AJAX
-      [en]AJAX Navigation
-    </multi>
-  </nom>
-  <auteur>bystrano</auteur>
-  <licence>GNU/GPL</licence>
-  <version>0.8</version>
-  <etat>test</etat>
-  <description>
-    <multi>
-      [fr]Ce plugin permet de facilement transformer un site SPIP pour que la navigation se fasse sans recharger compl&egrave;tement la page, mais en r&eacute;cuperant les &eacute;lements &agrave; changer en AJAX.
-      [en]This plugin lets you easily transform your SPIP website so that a part or all of your inner links don't make the whole page reload, but only replace some chosen elements using AJAX requests.
-    </multi>
-    <a href=".?exec=ajax_nav_admin" class="ajnav_configure"><h1>
-      <multi>
-	[fr]Configurer
-	[en]Configure
-      </multi>
-    </h1></a>
-  </description>
-  <lien>http://www.spip-contrib.net/Navigation-AJAX</lien>
-  <prefix>ajax_nav</prefix>
-  <pipeline>
-    <nom>insert_head</nom>
-    <inclure>ajax_nav_insert_head.php</inclure>
-  </pipeline>
-  <pipeline>
-    <nom>header_prive</nom>
-    <inclure>prive/ajax_nav_header_prive.php</inclure>
-  </pipeline>
-  <pipeline>
-    <nom>affichage_final</nom>
-    <inclure>ajax_nav_affichage_final.php</inclure>
-  </pipeline>
-  <necessite id="SPIP" version="[2.1;]" />
-  <necessite id="saisies" version="[1.8.12;]" />
+	<nom>
+		<multi>
+[fr]Ajouter de l'AJAX &#224; la navigation dans votre site
+[en]Add AJAX navigation to your site
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+[fr]Navigation AJAX
+[en]AJAX Navigation
+		</multi>
+	</slogan>
+	<auteur>bystrano</auteur>
+	<licence>GNU/GPL</licence>
+	<version>0.8.0</version>
+	<etat>test</etat>
+	<description>
+		<multi>
+[fr]Ce plugin permet de facilement transformer un site SPIP pour que la navigation se fasse sans recharger compl&#232;tement la page, mais en r&#233;cuperant les &#233;lements &#224; changer en AJAX.
+_ Pour configurer le plugin se rendre sur la page exec=ajax_nav_admin.       
+[en]This plugin lets you easily transform your SPIP website so that a part or all of your inner links don't make the whole page reload, but only replace some chosen elements using AJAX requests.
+_ To configure the plugin go to page exec=ajax_nav_admin.
+		</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/Navigation-AJAX</lien>
+	<prefix>ajax_nav</prefix>
+	<categorie>navigation</categorie>
+
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>ajax_nav_insert_head.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>prive/ajax_nav_header_prive.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>ajax_nav_affichage_final.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[2.1.0;2.0.99]" />
+	<necessite id="saisies" version="[1.8.12;]" />
 </plugin>
