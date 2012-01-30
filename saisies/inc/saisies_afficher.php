@@ -319,14 +319,16 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 
 /*
  * Lorsque l'on affiche les saisies (#VOIR_SAISIES), les saisies ayant une option afficher_si
- * et dont les conditions ne sont pas remplies doivent être retirées du tableau de saisies
+ * et dont les conditions ne sont pas remplies doivent être retirées du tableau de saisies.
+ * Cette fonction sert aussi lors de la vérification des saisies avec saisies_verifier().
+ * A ce moment la, les saisies non affichees sont retirees de _request (on passe leur valeur a NULL).
  *
  * @param array $saisies Un tableau de saisies
- * @param array $env Les variables d'environnement
+ * @param array $env le tableau d'environnement transmis dans inclure/voi_saisies.html, NULL si on doit rechercher dans _request (pour saisies_verifier()).
  * @return array Un tableau de saisies
  */
 
-function saisies_verifier_afficher_si($saisies, $env) {
+function saisies_verifier_afficher_si($saisies, $env=NULL) {
 	// eviter une erreur par maladresse d'appel :)
 	if (!is_array($saisies)) {
 		return array();
@@ -342,11 +344,22 @@ function saisies_verifier_afficher_si($saisies, $env) {
 				else
 					$condition = preg_replace('#@plugin:'.$plug.'@#U', 'false', $condition);
 			}
+			// On gère le cas @config:plugin:meta@ suivi d'un test
+			preg_match_all('#@config:(.+):(.+)@#U', $condition, $matches);
+			foreach ($matches[1] as $plugin) {
+				$config = lire_config($plugin);
+				$condition = preg_replace('#@config:'.$plugin.':'.$matches[2][0].'@#U', '"'.$config[$matches[2][0]].'"', $condition);
+			}
 			// On transforme en une condition valide
-			$condition = preg_replace('#@(.+)@#U', '$env["valeurs"][\'$1\']', $condition);
+			if (is_null($env))
+				$condition = preg_replace('#@(.+)@#U', '_request(\'$1\')', $condition);
+			else
+				$condition = preg_replace('#@(.+)@#U', '$env["valeurs"][\'$1\']', $condition);
 			eval('$ok = '.$condition.';');
-			if (!$ok)
+			if (!$ok) {
 				unset($saisies[$cle]);
+				if (is_null($env)) set_request($saisie['options']['nom'],NULL);
+			}
 		}
 	}
 	return $saisies;

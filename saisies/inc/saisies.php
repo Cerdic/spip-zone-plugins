@@ -167,12 +167,17 @@ function saisie_identifier($saisie, $regenerer = false) {
  * Vérifier tout un formulaire tel que décrit avec les Saisies
  *
  * @param array $formulaire Le contenu d'un formulaire décrit dans un tableau de Saisies
+ * @param bool $saisies_masquees_nulles   Si TRUE, les saisies masquees selon afficher_si ne seront pas verifiees, leur valeur etant forcee a NULL.
+ *                                        Cette valeur NULL est transmise a traiter (via set_request).
  * @return array Retourne un tableau d'erreurs
  */
-function saisies_verifier($formulaire){
+function saisies_verifier($formulaire,$saisies_masquees_nulles=FALSE){
 	include_spip('inc/verifier');
 	$erreurs = array();
 	$verif_fonction = charger_fonction('verifier','inc',true);
+	
+	if ($saisies_masquees_nulles)
+		$formulaire = saisies_verifier_afficher_si($formulaire);
 	
 	$saisies = saisies_lister_par_nom($formulaire);
 	foreach ($saisies as $saisie){
