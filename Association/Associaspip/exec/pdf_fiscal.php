@@ -97,7 +97,7 @@ function build_pdf($code, $montant, $isodate, $nom, $prenoms, $adresse, $cp, $co
     $pdf->Write(0, $code);
     // Beneficiaire des versements : Nom ou denomination
     $pdf->SetXY(20, 42);
-    $pdf->Write(0, utf8_decode($GLOBALS['association_metas']['nom']);
+    $pdf->Write(0, utf8_decode($GLOBALS['association_metas']['nom']));
     // Beneficiaire des versements : Adresse : No - Rue
     #$rue=strtok($GLOBALS['association_metas']['rue'], ' '); // on debute par le numero s'il es mentionne, mais toutes les adresses n'ont pas de numero...
     $pdf->SetXY(24, 53);
@@ -229,7 +229,7 @@ function build_pdf($code, $montant, $isodate, $nom, $prenoms, $adresse, $cp, $co
     $pdf->Write(0, utf8_decode($adresse));
     // Donateur : Code postal
     $pdf->SetXY(40, 44);
-    $pdf->Write(0, utf8_decode(($cp));
+    $pdf->Write(0, utf8_decode($cp));
     // Donateur : Commune
     $pdf->SetXY(80, 44);
     $pdf->Write(0, utf8_decode($ville));
