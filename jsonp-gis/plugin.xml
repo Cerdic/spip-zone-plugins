@@ -1,0 +1,25 @@
+<plugin>
+	<nom>Jsonp Gis</nom>
+	<slogan>
+		[fr]G&#233;n&#233;rer un fichier Jsonp contenant les articles publi&#233;s
+		[en]Generate a Jsonp file containing geolocated articles
+		[gl]Xera un arquivo Jsonp que cont&#233;n artigos xeolocalizados
+	</slogan>
+	<auteur>Berio Molina (pumpun.com)</auteur>
+	<version>0.1.0</version>
+	<etat>dev</etat>
+	<licence>&#169; 2006-2012 - GNU/GPL</licence>
+	<description>
+		<multi>
+		[fr]Cr&#233;er deux fichiers Jsonp similaire &#224; RSS. Le premier permet d'acc&#233;der &#224; tous les domaines et l'autre est configurable, vous permettant de s&#233;lectionner ces domaines.
+		[gl]Xenera dous arquivos Jsonp similares ao rss. Un deles permite acceder a todos os artigos mostrando tan s&oacute; ainformaci&oacute;n relativa &aacute; xeolocalizaci&oacute;n e a id. O outro permite acceder a informaci&oacute;n detallada dun artigo dado
+		[en]Plugin jsonp that allows SPIP to generate a Jsonp file that contains data about the articles published
+		</multi>
+  	</description>
+	<icon>images/jsonp-128.png</icon>
+	<lien>http://imasd.pumpun.com/plugin-jsonp-para-spip/</lien>
+	<prefix>jsonpgis</prefix>
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id="gis" version="[0.1;]" />
+</plugin>
