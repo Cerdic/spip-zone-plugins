@@ -112,9 +112,16 @@ function critere_gis_dist($idb, &$boucles, $crit) {
 		$boucle->select[]= $select;
 		$boucle->order[]= $order;
 	} else {
-		// ajouter le titre et le descriptif du point au select
+		// ajouter tous les champs du point au select 
+		// et les suffixer pour lever toute ambiguite avec des champs homonymes
 		$boucle->select[]= 'gis.titre AS titre_gis';
 		$boucle->select[]= 'gis.descriptif AS descriptif_gis';
+		$boucle->select[]= 'gis.adresse AS adresse_gis';
+		$boucle->select[]= 'gis.pays AS pays_gis';
+		$boucle->select[]= 'gis.code_pays AS code_pays_gis';
+		$boucle->select[]= 'gis.region AS region_gis';
+		$boucle->select[]= 'gis.ville AS ville_gis';
+		$boucle->select[]= 'gis.code_postal AS code_postal_gis';
 		// jointure sur spip_gis_liens/spip_gis
 		// cf plugin notation
 		// $boucle->join["surnom (as) table de liaison"] = array("surnom de la table a lier", "cle primaire de la table de liaison", "identifiant a lier", "type d'objet de l'identifiant");
