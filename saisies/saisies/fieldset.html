@@ -9,6 +9,7 @@
 	#SET{plie, ''}
 ]
 
+<li class="fieldset[ fieldset_(#ENV{nom})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})][ (#GET{pliable})[ (#GET{plie})]]"[ data-id="(#ENV{id_saisie})"]> 
 	#ENV*{inserer_debut}
 	<fieldset>
 		[<h3 "legend">[(#ENV{icone}|oui)[<img src="(#CHEMIN_IMAGE{#ENV{icone}}|sinon{#CHEMIN{#ENV{icone}}}|image_reduire{#ENV{taille_icone}|sinon{16}}|extraire_attribut{src})" alt="#ENV*{label}" /> ]]<span>(#ENV*{label})</span></h3>]
@@ -20,4 +21,4 @@
 		]
 	</fieldset>
 	#ENV*{inserer_fin}
-
+</li>
