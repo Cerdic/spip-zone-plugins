@@ -27,7 +27,7 @@ function exec_exercices(){
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:exercices_budgetaires_titre')) ;
 		association_onglets();
-		echo debut_gauche(,true);
+		echo debut_gauche('',true);
 		echo debut_boite_info(true);
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
