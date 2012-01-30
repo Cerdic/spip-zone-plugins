@@ -189,6 +189,11 @@ OR false // autre possibilite de surcharge ?
 ) {
 if (!function_exists('autoriser_article_modifier')) {
 function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
+	if (intval($GLOBALS['spip_version_branche'])<3)
+		$auteurs_articles = "spip_auteurs_articles WHERE id_article=";
+	else
+		$auteurs_articles = "spip_auteurs_liens WHERE objet='article' AND id_objet=";
+
 	$s = spip_query(
 	"SELECT id_rubrique,id_secteur,statut FROM spip_articles WHERE id_article="._q($id));
 	$r = sql_fetch($s);
@@ -219,7 +224,7 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 				array('0minirezo', '1comite', '6forum'))
 			AND in_array($r['statut'],
 				array('publie', 'prop', 'prepa', 'poubelle'))
-			AND sql_fetch(spip_query("SELECT * FROM spip_auteurs_articles WHERE id_auteur=".intval($qui['id_auteur'])." AND id_article=".intval($id)))
+			AND sql_fetch(spip_query("SELECT * FROM $auteurs_articles".intval($id)." AND id_auteur=".intval($qui['id_auteur'])))
 		)
 		OR (
 			// un redacteur peut-il modifier un article propose ?
@@ -370,13 +375,18 @@ OR false // autre possibilite de surcharge ?
 ) {
 if (!function_exists('autoriser_modererforum')) {
 function autoriser_modererforum($faire, $type, $id, $qui, $opt) {
+	if (intval($GLOBALS['spip_version_branche'])<3)
+		$auteurs_articles = "spip_auteurs_articles WHERE id_article=";
+	else
+		$auteurs_articles = "spip_auteurs_liens WHERE objet='article' AND id_objet=";
+
 	return
 		autoriser('modifier', $type, $id, $qui, $opt)
 		OR (
 			$GLOBALS['autorite']['auteur_modere_forum']
 			AND $type == 'article'
 			AND in_array($qui['statut'], array('0minirezo', '1comite'))
-			AND sql_fetch(spip_query("SELECT * FROM spip_auteurs_articles WHERE id_auteur=".intval($qui['id_auteur'])." AND id_article=".intval($id)))
+			AND sql_fetch(spip_query("SELECT * FROM $auteurs_articles".intval($id)." AND id_auteur=".intval($qui['id_auteur'])))
 		);
 }
 } else
@@ -391,13 +401,17 @@ OR false // autre possibilite de surcharge ?
 ) {
 if (!function_exists('autoriser_modererpetition')) {
 function autoriser_modererpetition($faire, $type, $id, $qui, $opt) {
+	if (intval($GLOBALS['spip_version_branche'])<3)
+		$auteurs_articles = "spip_auteurs_articles WHERE id_article=";
+	else
+		$auteurs_articles = "spip_auteurs_liens WHERE objet='article' AND id_objet=";
 	return
 		autoriser('modifier', $type, $id, $qui, $opt)
 		OR (
 			$GLOBALS['autorite']['auteur_modere_petition']
 			AND $type == 'article'
 			AND in_array($qui['statut'], array('0minirezo', '1comite'))
-			AND sql_fetch(spip_query("SELECT * FROM spip_auteurs_articles WHERE id_auteur=".intval($qui['id_auteur'])." AND id_article=".intval($id)))
+			AND sql_fetch(spip_query("SELECT * FROM $auteurs_articles".intval($id)." AND id_auteur=".intval($qui['id_auteur'])))
 		);
 }
 } else
