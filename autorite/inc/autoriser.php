@@ -146,8 +146,10 @@ if ($GLOBALS['autorite']['espace_wiki_motsclef']) {
 	function autorisation_wiki_motsclef_visiteur($qui, $id_article) {
 
 	    //determine les mots clef affectÃ©s Ã  l'article
-	    $s = spip_query(
-	    "SELECT id_mot FROM spip_mots_articles WHERE id_article=".$id_article);
+	    if (intval($GLOBALS['spip_version_branche'])<3)
+	      $s = spip_query("SELECT id_mot FROM spip_mots_articles WHERE id_article=".$id_article);
+	    else
+	      $s = spip_query("SELECT id_mot FROM spip_mots_liens WHERE objet='article' AND id_objet=".$id_article);
 
 	    //obtient la liste des mots clefs affectÃ© Ã  l'article
         while ( $r = sql_fetch($s) ) { 
