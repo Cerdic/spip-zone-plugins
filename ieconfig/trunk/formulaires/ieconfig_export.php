@@ -52,34 +52,43 @@ $saisies = array (
 			)
 		)
 	);
-	// On passe via le pipeline ieconfig
+	// Gestion des plugins utilisant le pipeline ieconfig_metas
+	$ieconfig_metas = array();
+	foreach(pipeline('ieconfig_metas',array()) as $prefixe => $data){
+		if (isset($data['icone'])) {
+			$icone = chemin_image($data['icone']);
+			if (!$icone) $icone = find_in_path($data['icone']);
+			if ($icone) $icone = '<img src="'.$icone.'" alt="" style="margin-left:-50px; margin-right:34px;" />';
+		} else $icone= '';
+		$ieconfig_metas[$prefixe] = $icone . (isset($data['titre']) ? $data['titre'] : $prefixe);
+	}
+	if (count($ieconfig_metas)>0)
+		$saisies[] = array(
+			'saisie' => 'fieldset',
+			'options' => array(
+				'nom' => 'metas_fieldset',
+				'label' => _T('ieconfig:label_configurations_a_exporter'),
+				'icone' => 'config-export-16.png'
+			),
+			'saisies' => array(
+				array(
+					'saisie' => 'checkbox',
+					'options' => array(
+						'nom' => 'export_metas',
+						'label' => _T('ieconfig:label_configurations_a_exporter'),
+						'datas' => $ieconfig_metas
+					)
+				)
+			)
+		);
+	
+	// On passe via le pipeline ieconfig (pour les cas particuliers)
 	$saisies = pipeline('ieconfig',array(
 		'args' => array(
 			'action' => 'form_export'
 		),
 		'data' => $saisies
 	));
-	// Gestion des plugins utilisant le pipeline ieconfig_metas
-	foreach(pipeline('ieconfig_metas',array()) as $prefixe => $data){
-		$saisies[] = array(
-			'saisie' => 'fieldset',
-			'options' => array(
-				'nom' => $prefixe,
-				'label' => isset($data['titre']) ? $data['titre'] : $prefixe,
-				'icone' => isset($data['icone']) ? $data['icone'] : ''
-			),
-			'saisies' => array(
-				array(
-					'saisie' => 'oui_non',
-					'options' => array(
-						'nom' => 'export_'.$prefixe,
-						'label' => _T('ieconfig:label_exporter'),
-						'defaut' => ''
-					)
-				)
-			)
-		);
-	}
 	return $saisies;
 }
 
@@ -112,8 +121,11 @@ function formulaires_ieconfig_export_traiter_dist() {
 	));
 	
 	// Gestion des plugins utilisant le pipeline ieconfig_metas
+	$export_metas = _request('export_metas');
+	if (!is_array($export_metas)) $export_metas = array();
+	
 	foreach(pipeline('ieconfig_metas',array()) as $prefixe => $data){
-		if(_request('export_'.$prefixe)=='on') {
+		if(in_array($prefixe,$export_metas)) {
 			$export_plugin = array();
 			if(isset($data['metas_brutes']))
 				foreach(explode(',',$data['metas_brutes']) as $meta)
@@ -142,6 +154,7 @@ function formulaires_ieconfig_export_traiter_dist() {
 	// Si telechargement
 	if(_request('ieconfig_export_choix')=='telecharger') {
 		refuser_traiter_formulaire_ajax();
+		set_request('action', 'courcircuiter_affichage_usage_memoire'); // Pour empêcher l'extension dev d'ajouter un div avec l'usage mémoire.
 		Header("Content-Type: text/x-yaml;");
 		Header("Content-Disposition: attachment; filename=$filename");
 		Header("Content-Length: ".strlen($export));
