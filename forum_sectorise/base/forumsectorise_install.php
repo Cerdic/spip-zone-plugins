@@ -26,13 +26,24 @@ function forumsectorise_upgrade($nom_meta_base_version,$version_cible){
 			ecrire_meta($nom_meta_base_version, $current_version="0.0", 'non');
 		}
 
-		if (version_compare($current_version,'0.2','<=')){	
+		if (version_compare($current_version,'0.2','<')){	
 			if (!isset($config)) {
 				$config = lire_config('forumsectorise');
 			}
 			// On peut maintenant selectionner plusieurs secteurs avec la saisie secteur
 			$config['id_secteur'] = array( 0 => $config['id_secteur'] );
 			ecrire_meta($nom_meta_base_version, $current_version="0.2", 'non');
+			echo _T('forumsectorise:msg_maj_version', array('version'=>$current_version))."<br/>";
+		}
+
+		if (version_compare($current_version,'0.3','<')){	
+			if (!isset($config)) {
+				$config = lire_config('forumsectorise');
+			}
+			// On peut maintenant selectionner plusieurs secteurs avec la saisie secteur
+			$config['ident_secteur'] = $config['id_secteur'] ;
+			unset($config['id_secteur']);
+			ecrire_meta($nom_meta_base_version, $current_version="0.3", 'non');
 			echo _T('forumsectorise:msg_maj_version', array('version'=>$current_version))."<br/>";
 		}
 

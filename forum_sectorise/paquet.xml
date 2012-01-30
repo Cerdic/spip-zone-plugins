@@ -1,11 +1,11 @@
 <paquet
 	prefix="forumsectorise"
 	categorie="communication"
-	version="0.4.0"
+	version="0.5.0"
 	etat="stable"
 	compatibilite="[2.1.0;3.0.99]"
 	logo="prive/themes/spip/images/forumsectorise-32.png"
-	schema="0.2"
+	schema="0.3"
 	documentation="http://www.spip-contrib.net/Forum-sectorise"
 >	
 

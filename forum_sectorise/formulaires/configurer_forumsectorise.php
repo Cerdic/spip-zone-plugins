@@ -19,11 +19,11 @@ function formulaires_configurer_forumsectorise_saisies_dist(){
 		array(
 			'saisie' => 'secteur',
 			'options' => array(
-				'nom' => 'id_secteur',
-				'label' => _T('forumsectorise:label_id_secteur'),
-				'explication' => _T('forumsectorise:explication_id_secteur'),
+				'nom' => 'ident_secteur',
+				'label' => _T('forumsectorise:label_ident_secteur'),
+				'explication' => _T('forumsectorise:explication_ident_secteur'),
 				'multiple' => 'oui',
-				'defaut' => $config['id_secteur']
+				'defaut' => $config['ident_secteur']
 			)
 		),
 		array(
@@ -62,12 +62,12 @@ function formulaires_configurer_forumsectorise_saisies_dist(){
 }
 
 function formulaires_configurer_forumsectorise_traiter(){
-	$tab_secteur = _request('id_secteur');
+	$tab_secteur = _request('ident_secteur');
 	$type = _request('type');
 	$option = _request('option');
 	$config = lire_config('forumsectorise');
 	
-	if ($tab_secteur != $config['id_secteur']) {
+	if ($tab_secteur != $config['ident_secteur']) {
 		include_spip('inc/invalideur');
 		purger_repertoire(_DIR_SKELS);
 	}

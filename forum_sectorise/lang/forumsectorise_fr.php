@@ -18,12 +18,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_titre' => 'Configuration du plugin Forum sectorisé',
 
 	// E
-	'explication_id_secteur' => 'Sélectionner le(s) secteur(s) à traiter',
+	'explication_ident_secteur' => 'Sélectionner le(s) secteur(s) à traiter',
 	'explication_type' => 'Choisir le type de forum à activer pour ce secteur',
 	'explication_option' => 'Choisir une des options',
 
 	// L
-	'label_id_secteur' => 'Secteur(s)',
+	'label_ident_secteur' => 'Secteur(s)',
 	'label_type' => 'Type de forum',
 	'label_option' => 'Options',
 
