@@ -114,7 +114,7 @@ function association_calculer_nom_membre($civilite, $prenom, $nom, $html_tag='')
 		$res .= ($html_tag?'<span class="family-name">':'') .$nom. ($html_tag?'</span>':'') .' ';
 	}
 	if ($html_tag) {
-		$res .= '</'.$html_tag'>';
+		$res .= '</'.$html_tag.'>';
 	}
 	return $res;
 }

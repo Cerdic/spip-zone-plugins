@@ -526,4 +526,20 @@ $GLOBALS['association_maj'][57429] = array(
 	array ('sql_alter', "TABLE spip_asso_activites CHANGE montant montant DECIMAL(19,4) NOT NULL"),
 );
 
+// correction d'une etourderie, et rajout de deux champs confirmes
+$GLOBALS['association_maj'][57780] = array(
+	array ('sql_alter', "TABLE spip_asso_categories CHANGE cotisation cotisation DECIMAL(19,2) NOT NULL"),
+	array ('sql_alter', "TABLE spip_asso_ventes CHANGE prix_vente prix_vente DECIMAL(19,2) NOT NULL"),
+	array ('sql_alter', "TABLE spip_asso_ventes CHANGE frais_envoi frais_envoi DECIMAL(19,2) NOT NULL"),
+	array ('sql_alter', "TABLE spip_asso_comptes CHANGE recette recette DECIMAL(19,2) NOT NULL"),
+	array ('sql_alter', "TABLE spip_asso_comptes CHANGE depense depense DECIMAL(19,2) NOT NULL"),
+	array ('sql_alter', "TABLE spip_asso_plan CHANGE solde_anterieur solde_anterieur DECIMAL(19,2) NOT NULL"),
+	array ('sql_alter', "TABLE spip_asso_destination_op CHANGE recette recette DECIMAL(19,2) NOT NULL"),
+	array ('sql_alter', "TABLE spip_asso_destination_op CHANGE depense depense DECIMAL(19,2) NOT NULL"),
+	array ('sql_alter', "TABLE spip_asso_ressources CHANGE pu pu DECIMAL(19,4) NOT NULL"),
+	array ('sql_alter', "TABLE spip_asso_activites CHANGE montant montant DECIMAL(19,2) NOT NULL"),
+	array ('sql_alter', "TABLE spip_asso_prets CHANGE argent argent DECIMAL(19,2) NOT NULL"),
+	array ('sql_alter', "TABLE spip_asso_prets CHANGE valeur valeur DECIMAL(19,2) NOT NULL"),
+);
+
 ?>

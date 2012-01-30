@@ -3,8 +3,7 @@
 	<div class="onglet" style="text-align:center; margin:0.5em auto; width:50%;"><a href="#URL_ECRIRE{adherents}"><:asso:menu2_titre_gestion_membres:></a></div>]
 [(#ENV{editable})
 	<form method="post" action="#ENV{action}">
-	<div style="padding:1em;">
-		#ACTION_FORMULAIRE{#ENV{action}}
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<h3 class="legend"><:asso:relance_de_cotisations:></h3>
 		<p><em class="explication"><:asso:vous_vous_appretez_a_envoyer:> [(#ENV{_nb_messages})] [(#ENV{_nb_messages}|>{1}|?{<:asso:relances:>,<:asso:relance:>})]</em></p>
 		<div class="fieldset previsu">
@@ -18,7 +17,6 @@
 		<p class="boutons">
 			<input type="submit" value="<:pass_ok:>" class="submit" />
 		</p>
-	</div>
 	</form>
 ]
 </div>

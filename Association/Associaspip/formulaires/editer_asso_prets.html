@@ -2,89 +2,77 @@
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
     <form name="formulaire_#FORM" method="post" action="#ENV{action}">
-	<div>
-		#ACTION_FORMULAIRE{#ENV{action}}
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<h3 class="legend"><:asso:prets_titre_edition_prets:></h3>
-		<ul>
-			<li class="fieldset">
-				<fieldset>
-					<legend class="legend"><:asso:prets_entete_reservation:></legend>
-					<ul>
-						<li class="editer_date_sortie">
-							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_sortie})</span>]
-							<label for="date_sortie"><strong><:asso:prets_libelle_date_sortie:></strong></label>
-							<input name="date_sortie" type="[(HTML5|?{date,text})]" [value="(#ENV{date_sortie})"] id="date_sortie" class="date" />
-						</li>
-						<li class="editer_duree">
-							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{duree})</span>]
-							<label for="duree"><strong><:asso:prets_libelle_duree:></strong></label>
-							<input name="duree" type="[(HTML5|?{number,text})]" [value="(#ENV{duree})"] id="duree" class="number integer" />
-						</li>
-						<li class="editer_id_emprunteur">
-							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{id_emprunteur})</span>]
-							<label for="id_emprunteur"><strong><:asso:prets_libelle_num_emprunteur:></strong></label>
-							<input name="id_emprunteur" type="[(HTML5|?{number,text})]" [value="(#ENV{id_emprunteur})"] id="date_sortie" class="number intege" />
-						</li>
-						<li class="editer_commentaire_sortie">
-							<label for="commentaire_sortie"><strong><:asso:prets_libelle_commentaires:></strong></label>
-							<textarea name="commentaire_sortie" id="commentaire_sortie" rows="3">[(#ENV{commentaire_sortie})]</textarea>
-						</li>
-					</ul>
-				</fieldset>
-			</li>
-			<li class="fieldset">
-				<fieldset>
-					<legend class="legend"><:asso:prets_entete_retour:></legend>
-					<ul>
-						<li class="editer_date_retour">
-							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_retour})</span>]
-							<label for="date_retour"><strong><:asso:prets_libelle_date_retour:></strong></label>
-							<input name="date_retour" type="[(HTML5|?{date,text})]" [value="(#ENV{date_retour})"] id="date_retour" class="date" />
-						</li>
-					[(#ENV{id_pret}|oui)
-						<li class="editer_statut">
-							<label><strong><:asso:ressources_libelle_statut:></strong></label>
-							<div class="choix">
-								<input type="radio" class="radio" name="statut" value="ok" id="statut_ok"[ (#ENV{statut}|=={ok}|oui)checked="checked"] />
-								<label for="statut_ok"><:asso:ressources_libelle_statut_ok:></label>
-							</div>
-							<div class="choix">
-								<input type="radio" class="radio" name="statut" value="reserve" id="statut_reserve"[ (#ENV{statut}|=={attendu}|oui)checked="checked"] />
-								<label for="statut_reserve"><:asso:ressources_libelle_statut_reserve:></label>
-							</div>
-							<div class="choix">
-								<input type="radio" class="radio" name="statut" value="suspendu" id="statut_suspendu"[ (#ENV{statut}|=={annule}|oui)checked="checked"] />
-								<label for="statut_suspendu"><:asso:ressources_libelle_statut_suspendu:></label>
-							</div>
-							<div class="choix">
-								<input type="radio" class="radio" name="statut" value="sorti" id="statut_sorti"[ (#ENV{statut}|=={du}|oui)checked="checked"] />
-								<label for="statut_sorti"><:asso:ressources_libelle_statut_sorti:></label>
-							</div>
-						</li>
-					]
-						<li class="editer_montant">
-							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{montant})</span>]
-							<label for="montant"><strong><:asso:prets_libelle_montant:></strong></label>
-							<input name="montant" type="[(HTML5|?{number,text})]" [value="(#ENV{montant})"] id="montant" class="number float price" />
-						</li>
-						<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}}>
-						[<li class="editer_destinations">
-							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{destinations})</span>]
-							(#EDITEUR_DESTINATIONS)
-						</li>]
-					[(#ENV{id_pret}|oui)
-						<li class="editer_commentaire_retour">
-							<label for="commentaire_retour"><strong><:asso:prets_libelle_commentaires:></strong></label>
-							<textarea name="commentaire_retour" id="commentaire_retour" rows="3">[(#ENV{commentaire_retour})]</textarea>
-						</li>
-					]
-					</ul>
-				</fieldset>
-			</li>
-		</ul>
+		<fieldset>
+			<legend><:asso:prets_entete_reservation:></legend>
+			<ul>
+				<li class="editer_date_sortie">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_sortie})</span>]
+					<label for="date_sortie"><:asso:prets_libelle_date_sortie:></label>
+					<input name="date_sortie" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_sortie})"] id="date_sortie" class="date" />
+				</li>
+				<li class="editer_duree">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{duree})</span>]
+					<label for="duree"><:asso:prets_libelle_duree:></label>
+					<input name="duree" type="[(#HTML5|?{number,text})]" [value="(#ENV{duree})"] id="duree" class="number integer" />
+				</li>
+				<li class="editer_id_emprunteur">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{id_emprunteur})</span>]
+					<label for="id_emprunteur"><:asso:prets_libelle_num_emprunteur:></label>
+					<input name="id_emprunteur" type="[(#HTML5|?{number,text})]" [value="(#ENV{id_emprunteur})"] id="date_sortie" class="number intege" />
+				</li>
+				<li class="editer_commentaire_sortie">
+					<label for="commentaire_sortie"><:asso:prets_libelle_commentaires:></label>
+					<textarea name="commentaire_sortie" id="commentaire_sortie" rows="3">[(#ENV{commentaire_sortie})]</textarea>
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend><:asso:prets_entete_retour:></legend>
+			<ul>
+				<li class="editer_date_retour">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_retour})</span>]
+					<label for="date_retour"><:asso:prets_libelle_date_retour:></label>
+					<input name="date_retour" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_retour})"] id="date_retour" class="date" />
+				</li>
+			[(#ENV{id_pret}|oui)
+				<li class="editer_statut">
+					<label><:asso:ressources_libelle_statut:></label>
+					<div class="choix">
+						<input type="radio" class="radio" name="statut" value="ok" id="statut_ok"[ (#ENV{statut}|=={ok}|oui)checked="checked"] />
+						<label for="statut_ok"><:asso:ressources_libelle_statut_ok:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" class="radio" name="statut" value="reserve" id="statut_reserve"[ (#ENV{statut}|=={attendu}|oui)checked="checked"] />
+						<label for="statut_reserve"><:asso:ressources_libelle_statut_reserve:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" class="radio" name="statut" value="suspendu" id="statut_suspendu"[ (#ENV{statut}|=={annule}|oui)checked="checked"] />
+						<label for="statut_suspendu"><:asso:ressources_libelle_statut_suspendu:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" class="radio" name="statut" value="sorti" id="statut_sorti"[ (#ENV{statut}|=={du}|oui)checked="checked"] />
+						<label for="statut_sorti"><:asso:ressources_libelle_statut_sorti:></label>
+					</div>
+				</li>
+			]
+				<li class="editer_montant">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{montant})</span>]
+					<label for="montant"><:asso:prets_libelle_montant:></label>
+					<input name="montant" type="[(#HTML5|?{number,text})]" [value="(#ENV{montant})"] id="montant" class="number float price" />
+				</li>
+				<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}}>
+			[(#ENV{id_pret}|oui)
+				<li class="editer_commentaire_retour">
+					<label for="commentaire_retour"><:asso:prets_libelle_commentaires:></label>
+					<textarea name="commentaire_retour" id="commentaire_retour" rows="3">[(#ENV{commentaire_retour})]</textarea>
+				</li>
+			]
+			</ul>
+		</fieldset>
 		<p class="boutons">
 			<input type="submit" value="[(#ENV{id_pret}|?{<:asso:bouton_modifier:>,<:asso:bouton_ajoute:>})]" class="submit" />
 		</p>
-	</div>
 	</form>
 </div>

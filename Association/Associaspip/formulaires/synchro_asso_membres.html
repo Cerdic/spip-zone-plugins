@@ -3,8 +3,7 @@
 	<div class="onglet" style="text-align:center; margin:0.5em auto; width:50%;"><a href="#URL_ECRIRE{adherents}"><:asso:menu2_titre_gestion_membres:></a></div>]
 [(#ENV{editable})
 	<form method="post" action="#ENV{action}">
-	<div>
-		#ACTION_FORMULAIRE{#ENV{action}}
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<h3 class="legend"><:asso:synchroniser_choix:></h3>
 		<ul>
 			<li class="editer_tous">
@@ -31,7 +30,6 @@
 		<p class="boutons">
 			<input type="submit" value="<:pass_ok:>" class="submit" />
 		</p>
-	</div>
 	</form>
 ]
 </div>

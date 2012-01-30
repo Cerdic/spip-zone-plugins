@@ -52,6 +52,12 @@ h1.asso_titre
 
 
 /* Formulaires*/
+
+.formulaire_spip label
+{
+	font-weight: bold;
+}
+
 .formulaire_ajouter_membres_groupe {margin-top: 2em;}
 .formulaire_ajouter_membres_groupe .pagination {margin: 0px;}
 .formulaire_table_editable input.formo {padding: 2px; width:90%;}

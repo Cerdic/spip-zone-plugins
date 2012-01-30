@@ -2,29 +2,24 @@
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
     <form name="formulaire_#FORM" method="post" action="#ENV{action}">
-	<div>
-		#ACTION_FORMULAIRE{#ENV{action}}
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<ul>
 		[(#META{/association/classe_banques}|et{#META{/association/comptes}}|oui)
 			[(#REM)<!-- s'il n'a pas de classe banques definie ou si la gestion comptable est desactivee, on ne propose pas les champs correspondants mais uniquement la validite qui la seule a pouvoir etre geree sans gestion comptable -->]
 			<li class="editer_date">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date})</span>]
-				<label for="date"><strong><:asso:date_du_paiement_aaaa_mm_jj:></strong></label>
-				<input type="[(HTML5|?{date,text})]" name="date" [value="(#ENV{date}|affdate{Y-m-d})"] id="date" class="date" />
+				<label for="date"><:asso:date_du_paiement_aaaa_mm_jj:></label>
+				<input type="[(#HTML5|?{date,text})]" name="date" [value="(#ENV{date}|affdate{Y-m-d})"] id="date" class="date" />
 			</li>
 			<li class="editer_montant">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{montant})</span>]
-				<label for="montant"><strong><:asso:montant_paye_en_euros:></strong></label>
-				<input type="[(HTML5|?{number,text})]" name="montant" value="[(#ENV{montant})]" id="montant"  class="number float price" />
+				<label for="montant"><:asso:montant_paye_en_euros:></label>
+				<input type="[(#HTML5|?{number,text})]" name="montant" value="[(#ENV{montant})]" id="montant"  class="number float price" />
 			</li>
 			<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}}>
-			[<li class="editer_destiations">
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{destinations})</span>]
-				(#EDITEUR_DESTINATIONS)
-			</li>]
 			<li class="editer_justification">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{justification})</span>]
-				<label for="justification"><strong><:asso:justification:></strong></label>
+				<label for="justification"><:asso:justification:></label>
 				<input type="text" name="justification" [value="(#ENV{justification})"] id="justification"  class="text" />
 			</li>
 		]
@@ -35,13 +30,12 @@
 		]
 			<li class="editer_validite">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{validite})</span>]
-				<label for="validite"><strong><:asso:validite:></strong></label>
-				<input type="[(HTML5|?{date,text})]" name="validite" [value="(#ENV{validite})"] id="validite"  class="date" />
+				<label for="validite"><:asso:validite:></label>
+				<input type="[(#HTML5|?{date,text})]" name="validite" [value="(#ENV{validite})"] id="validite"  class="date" />
 			</li>
 		</ul>
 		<p class="boutons">
 			<input type="submit" value="<:pass_ok:>" class="submit" />
 		</p>
-	</div>
 	</form>
 </div>

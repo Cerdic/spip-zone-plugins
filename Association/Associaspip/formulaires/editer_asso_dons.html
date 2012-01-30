@@ -8,43 +8,39 @@
 		<ul>
 			<li class="editer_date_don">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_don})</span>]
-				<label for="date_don"><strong><:asso:date_aaaa_mm_jj:></strong></label>
-				<input type="[(HTML5|?{number,text})]" name="date_don" [value="(#ENV{date_don}|affdate{Y-m-d})"] id="date_don"  class="date" />
+				<label for="date_don"><:asso:date_aaaa_mm_jj:></label>
+				<input type="[(#HTML5|?{number,text})]" name="date_don" [value="(#ENV{date_don}|affdate{Y-m-d})"] id="date_don"  class="date" />
 			</li>
 			<li class="editer_bienfaiteur">
-				<label for="bienfaiteur"><strong><:asso:nom_du_bienfaiteur:></strong></label>
+				<label for="bienfaiteur"><:asso:nom_du_bienfaiteur:></label>
 				<input type="text" name="bienfaiteur" [value="(#ENV{bienfaiteur})"] id="bienfaiteur"  class="text" />
 			</li>
 			<li class="editer_id_adherent">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{id_adherent})</span>]
-				<label for="id_adherent"><strong><:asso:nd_de_membre:></strong></label>
-				<input type="[(HTML5|?{number,text})]" name="id_adherent" [value="(#ENV{id_adherent})"] id="id_adherent"  class="number integer" />
+				<label for="id_adherent"><:asso:nd_de_membre:></label>
+				<input type="[(#HTML5|?{number,text})]" name="id_adherent" [value="(#ENV{id_adherent})"] id="id_adherent"  class="number integer" />
 			</li>
 			<li class="editer_argent">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{argent})</span>]
-				<label for="argent"><strong><:asso:don_financier_en_e__:></strong></label>
-				<input type="[(HTML5|?{number,text})]" name="argent" [value="(#ENV{argent})"] id="argent"  class="number float price" />
+				<label for="argent"><:asso:don_financier_en_e__:></label>
+				<input type="[(#HTML5|?{number,text})]" name="argent" [value="(#ENV{argent})"] id="argent"  class="number float price" />
 			</li>
 			<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}}>
-			[<li class="editer_destinations">
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{destinations})</span>]
-				(#EDITEUR_DESTINATIONS)
-			</li>]
 			<li class="editer_colis">
-				<label for="colis"><strong><:asso:colis:></strong></label>
+				<label for="colis"><:asso:colis:></label>
 				<input type="text" name="colis" [value="(#ENV{colis})"] id="colis"  class="text" />
 			</li>
 			<li class="editer_valeur">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{valeur})</span>]
-				<label for="valeur"><strong><:asso:contre_valeur_en_e__:></strong></label>
-				<input type="[(HTML5|?{number,text})]" name="valeur" [value="(#ENV{valeur})"] id="valeur"  class="number fleat price" />
+				<label for="valeur"><:asso:contre_valeur_en_e__:></label>
+				<input type="[(#HTML5|?{number,text})]" name="valeur" [value="(#ENV{valeur})"] id="valeur"  class="number fleat price" />
 			</li>
 			<li class="editer_contrepartie">
-				<label for="contrepartie"><strong><:asso:geste_association:></strong></label>
+				<label for="contrepartie"><:asso:geste_association:></label>
 				<input type="text" name="contrepartie" [value="(#ENV{contrepartie})"] id="contrepartie"  class="text" />
 			</li>
 			<li class="editer_commentaire">
-				<label for="commentaire"><strong><:asso:remarques:></strong></label>
+				<label for="commentaire"><:asso:remarques:></label>
 				<textarea name="commentaire" id="commentaire"  rows="3">[(#ENV{commentaire})]</textarea>
 			</li>
 		</ul>

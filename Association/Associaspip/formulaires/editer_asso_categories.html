@@ -8,26 +8,26 @@
 		<ul>
 			<li class="editer_valeur">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{valeur})</span>]
-				<label for="valeur"><strong><:asso:categorie:></strong></label>
+				<label for="valeur"><:asso:categorie:></label>
 				<input name="valeur" type="text" [value="(#ENV{valeur})"] id="valeur" class="text" />
 			</li>
 			<li class="editer_libelle">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{libelle})</span>]
-				<label for="libelle"><strong><:asso:libelle_complet:></strong></label>
+				<label for="libelle"><:asso:libelle_complet:></label>
 				<input name="libelle" type="text" [value="(#ENV{libelle})"] id="libelle" class="text" />
 			</li>
 			<li class="editer_duree">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{duree})</span>]
-				<label for="duree"><strong><:asso:duree:></strong></label>
-				<input name="duree" type="[(HTML5|?{number,text})]" [value="(#ENV{duree})"] id="duree" class="number integer" />
+				<label for="duree"><:asso:duree:></label>
+				<input name="duree" type="[(#HTML5|?{number,text})]" [value="(#ENV{duree})"] id="duree" class="number integer" />
 			</li>
 			<li class="editer_cotisation">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{cotisation})</span>]
-				<label for="cotisation"><strong><:asso:montant_en_euros:></strong></label>
-				<input name="cotisation" type="[(HTML5|?{number,text})]" [value="(#ENV{cotisation})"] id="cotisation" class="number float price" />
+				<label for="cotisation"><:asso:montant_en_euros:></label>
+				<input name="cotisation" type="[(#HTML5|?{number,text})]" [value="(#ENV{cotisation})"] id="cotisation" class="number float price" />
 			</li>
 			<li class="editer_commentaires">
-				<label for="commentaires"><strong><:asso:commentaires:></strong></label>
+				<label for="commentaires"><:asso:commentaires:></label>
 				<textarea name="commentaires" id="commentaires" rows="3">[(#ENV{commentaires})]</textarea>
 			</li>
 		</ul>

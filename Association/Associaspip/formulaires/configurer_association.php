@@ -38,31 +38,20 @@ function formulaires_configurer_association_verifier_dist() {
 		}
 		// on verifie qu'il n'a pas deux fois la meme reference comptable en incluant celle des cotisations ou qu'on n'a pas attribue aux cotisations ou modules de gestion une reference comptable de la classe des comptes financiers
 		$classe_financier = _request('classe_banques');
-		$classe_attribuee[$classe_financier]='classe_banques';
-		$ref_attribuee[$pc_cotisations]='pc_cotisations';
+		$classe_attribuee[$classe_financier] = 'classe_banques';
+		$ref_attribuee[$pc_cotisations] = 'pc_cotisations';
 		// le premier caractere du code de la reference comptable est sa classe
-		if ($pc_cotisations[0]==$classe_financier) $erreurs['pc_cotisations'] = _T('asso:erreur_configurer_association_reference_financier');
+		if ($pc_cotisations[0]==$classe_financier)
+			$erreurs['pc_cotisations'] = _T('asso:erreur_configurer_association_reference_financier');
 		// on verifie que les classes sont uniques
-		$classe_charge = _request('classe_charges');
-		if(array_key_exists($classe_charge, $classe_attribuee)) {
-			$erreurs['classe_charges'] = _T('asso:erreur_configurer_association_classe_identique');
-			$erreurs[$ref_attribuee[$classe_charge]] = _T('asso:erreur_configurer_association_classe_identique');
+		foreach( array('classe_charges','classe_produits','classe_contributions_volontaires') as $index=>$classe_testee) {
+			$$classe_testee = _request($classe_testee);
+			if (array_key_exists($$classe_testee, $classe_attribuee)) {
+				$erreurs[$classe_testee] = _T('asso:erreur_configurer_association_classe_identique');
+				$erreurs[$ref_attribuee[$$classe_testee]] = _T('asso:erreur_configurer_association_classe_identique');
+			}
+			$classe_attribuee[$$classe_testee] = $classe_testee;
 		}
-		$classe_attribuee[$classe_charge]='classe_charges';
-
-		$classe_produit = _request('classe_produits');
-		if(array_key_exists($classe_produit, $classe_attribuee)) {
-			$erreurs['classe_produits'] = _T('asso:erreur_configurer_association_classe_identique');
-			$erreurs[$ref_attribuee[$classe_produit]] = _T('asso:erreur_configurer_association_classe_identique');
-		}
-		$classe_attribuee[$classe_produit]='classe_produits';
-
-		$classe_contribution_volontaire = _request('classe_contributions_volontaires');
-		if(array_key_exists($classe_contribution_volontaire, $classe_attribuee)) {
-			$erreurs['classe_contributions_volontaires'] = _T('asso:erreur_configurer_association_classe_identique');
-			$erreurs[$ref_attribuee[$classe_contribution_volontaire]] = _T('asso:erreur_configurer_association_classe_identique');
-		}
-		$classe_attribuee[$classe_contribution_volontaire]='classe_contributions_volontaires';
 	}
 	if ($dons=='on') {
 		if (!$comptes) {
@@ -70,9 +59,9 @@ function formulaires_configurer_association_verifier_dist() {
 		} else {
 			if (!array_key_exists($pc_dons,$ref_attribuee)) {
 				// le premier caractere du code de la reference comptable est sa classe
-				if ($pc_dons[0] == $classe_financier) $erreurs['dons'] = _T('asso:erreur_configurer_association_reference_financier');
-			}
-			else {
+				if ($pc_dons[0]==$classe_financier)
+					$erreurs['dons'] = _T('asso:erreur_configurer_association_reference_financier');
+			} else {
 				$erreurs['dons'] = _T('asso:erreur_configurer_association_reference_multiple');
 				$erreurs[$ref_attribuee[$pc_dons]] = _T('asso:erreur_configurer_association_reference_multiple');
 			}
@@ -85,7 +74,8 @@ function formulaires_configurer_association_verifier_dist() {
 		} else {
 			if (!array_key_exists($pc_ventes,$ref_attribuee)) {
 				// le premier caractere du code de la reference comptable est sa classe
-				if ($pc_ventes[0]==$classe_financier) $erreurs['ventes'] = _T('asso:erreur_configurer_association_reference_financier');
+				if ($pc_ventes[0]==$classe_financier)
+					$erreurs['ventes'] = _T('asso:erreur_configurer_association_reference_financier');
 			} else {
 				$erreurs['ventes'] = _T('asso:erreur_configurer_association_reference_multiple');
 				$erreurs[$ref_attribuee[$pc_ventes]] = _T('asso:erreur_configurer_association_reference_multiple');
@@ -105,13 +95,14 @@ function formulaires_configurer_association_verifier_dist() {
 			}
 		}
 	}
-	if ($prets == 'on') {
+	if ($prets=='on') {
 		if (!$comptes) {
 			$erreurs['prets'] = _T('asso:erreur_configurer_association_gestion_comptable_non_activee');
 		} else {
 			if (!array_key_exists($pc_prets,$ref_attribuee)) {
 				// le premier caractere du code de la reference comptable est sa classe
-				if ($pc_prets[0]==$classe_financier) $erreurs['prets'] = _T('asso:erreur_configurer_association_reference_financier');
+				if ($pc_prets[0]==$classe_financier)
+					$erreurs['prets'] = _T('asso:erreur_configurer_association_reference_financier');
 			} else {
 				$erreurs['prets'] = _T('asso:erreur_configurer_association_reference_multiple');
 				$erreurs[$ref_attribuee[$pc_prets]] = _T('asso:erreur_configurer_association_reference_multiple');
@@ -125,7 +116,8 @@ function formulaires_configurer_association_verifier_dist() {
 		} else {
 			if (!array_key_exists($pc_activites,$ref_attribuee)) {
 				// le premier caractere du code de la reference comptable est sa classe
-				if ($pc_activites[0]==$classe_financier) $erreurs['activites'] = _T('asso:erreur_configurer_association_reference_financier');
+				if ($pc_activites[0]==$classe_financier)
+					$erreurs['activites'] = _T('asso:erreur_configurer_association_reference_financier');
 			} else {
 				$erreurs['activites'] = _T('asso:erreur_configurer_association_reference_multiple');
 				$erreurs[$ref_attribuee[$pc_activites]] = _T('asso:erreur_configurer_association_reference_multiple');

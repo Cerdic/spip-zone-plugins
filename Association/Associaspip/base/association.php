@@ -24,7 +24,7 @@ $spip_asso_categories = array(
 	"valeur" => "TINYTEXT NOT NULL",
 	"libelle" => "TEXT NOT NULL",
 	"duree" => "INT UNSIGNED NOT NULL",
-	"cotisation" => "DECIMAL(19,2) NOT NULL default '0'",
+	"cotisation" => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
 	"commentaires" => "TEXT NOT NULL",
 	"maj" => "TIMESTAMP NOT NULL"
 );
@@ -42,10 +42,10 @@ $spip_asso_dons = array(
 	"date_don" => "DATE NOT NULL DEFAULT '0000-00-00'",
 	"bienfaiteur" => "TEXT NOT NULL",
 	"id_adherent" => "BIGINT UNSIGNED NOT NULL",
-	"argent" => "TINYTEXT", // ??
-	"colis" => "TEXT",
-	"valeur" => "TEXT NOT NULL", // ??
-	"contrepartie" => "TINYTEXT",
+	"argent" => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
+	"colis" => "TINYTEXT NOT NULL",
+	"valeur" => "DECIMAL(19,2) NOT NULL DEFAULT '0'", // ??
+	"contrepartie" => "TINYTEXT NOT NULL",
 	"commentaire" => "TEXT",
 	"maj" => "TIMESTAMP NOT NULL"
 );

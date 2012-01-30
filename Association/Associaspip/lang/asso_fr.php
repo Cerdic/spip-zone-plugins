@@ -14,13 +14,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 # Titres globaux
 	'titre_gestion_pour_association' => 'Gestion pour Association',
 	'titre_relance' => 'Renouvellement de votre cotisation',
 	'titre_menu_gestion_association' => 'Gestion Association',
 	'titre_page_config' => 'Configuration du plugin',
-
 # Navigation
 	'menu2_titre_association' => 'L\'association',
 	'menu2_titre_gestion_membres' => 'Membres',
@@ -30,7 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'menu2_titre_gestion_activites' => 'Activit&eacute;s',
 	'menu2_titre_livres_comptes' => 'Comptes',
 	'menu2_titre_gestion_prets' => 'Pr&ecirc;ts',
-
 # Titres onglets
 	'titre_onglet_activite' => 'Gestion des activit&eacute;s',
 	'titre_onglet_membres' => 'Gestion des membres',
@@ -38,7 +35,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_onglet_ventes' => 'Gestion des ventes',
 	'titre_onglet_comptes' => 'Gestion comptable',
 	'titre_onglet_prets' => 'Gestion des pr&ecirc;ts',
-
 #Configuration
 	# Libelle
 	'config_libelle_nom' => 'Nom',
@@ -47,10 +43,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_rue' => 'Rue',
 	'config_libelle_num_rue' => 'N&deg;',
 	'config_libelle_ville' => 'Ville',
+	'config_libelle_pays' => 'Pays',
+	'config_aide_pays' => 'code alpha-2 ISO 3166-1',
 	'config_libelle_codepostal' => 'Code Postal',
 	'config_libelle_telephone' => 'T&eacute;l&eacute;phone',
-	'n_siret' => 'N&deg; SIRET',
-	'n_tva' => 'N&deg; TVA',
 	'config_libelle_declaration' => 'N&deg; de d&eacute;claration',
 	'config_libelle_prefet' => 'Pr&eacute;fecture ou Sous-pr&eacute;fecture',
 	'config_libelle_objet' => 'Objet',
@@ -70,13 +66,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_recufisc4' => 'Fondation d\'entreprise',
 	'config_libelle_recufisc5' => '&OElig;uvre/org. d-i-g',
 	'config_libelle_recufisc6' => 'Mus&eacute;e de France',
-	'config_libelle_recufisc7' => 'Ets. d\'enseignement sup./artistique pub./priv&eacute;, d-i-g, &agrave;-b-n-l',
+	'config_libelle_recufisc7' => 'Ets. d\'enseignement sup./artistique pub./priv&eacute;, d-i-g, s-b-l',
 	'config_libelle_recufisc8' => 'Org. dont l\'objet exclusif est la participation financi&egrave;re &agrave; la cr&eacute;ation d\'ent.',
 	'config_libelle_recufisc9' => 'Asso. culturelle ou de bienfaisance et ets. pub. des cultes reconnus d\'Alsace-Moselle',
 	'config_libelle_recufisc10' => 'Org. ayant pour activit&eacute; principale l\'organisation de festivals',
 	'config_libelle_recufisc11' => 'Asso. fournissant gratuitement aide/soins &agrave; pers. en difficult&eacute;...',
 	'config_libelle_recufisc12' => 'Fond. du patrimoine ou fond./asso. lui affectant ses dons',
-	'config_libelle_recufisc13' => 'Ets. de recherche public/priv&eacute;, d-i-g, &agrave;-b-n-l',
+	'config_libelle_recufisc13' => 'Ets. de recherche public/priv&eacute;, d-i-g, s-b-l',
 	'config_libelle_recufisc14' => 'Ent. d\'insertion ou ent. de travail temporaire d\'insertion',
 	'config_libelle_recufisc15' => 'Asso. interm&eacute;diaires',
 	'config_libelle_recufisc16' => 'Ateliers/chantiers d\'insertion',
@@ -85,9 +81,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_recufisc19' => 'St&eacute;./org. agr&eacute;&eacute; de recherche scientifique/technique',
 	'config_libelle_recufisc20' => 'Autre organisme (&agrave; pr&eacute;ciser)',
 	'config_aide_recufiscal' => 'sigles :
-	&agrave;-b-n-l = &agrave; but non lucratif ;
+	s-b-l = &agrave; but non lucratif ;
 	d-i-g = d\'int&eacute;r&egrave;t g&eacute;n&eacute;ral ;
-	d-u-p = d\'utilit&eacute; publique
+	d-u-p = d\'utilit&eacute; publique ;
 	<br />abbr&eacute;viations :
 	asso. = association(s) ;
 	fond. = fondation(s) ;
@@ -136,7 +132,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_affichage_champs_page_membres' => 'S&eacute;lectionner les champs &agrave; afficher sur la page des membres',
 	'aucune_categorie_par_defaut' => 'Aucune cat&eacute;gorie par d&eacute;faut',
 	'config_libelle_virements_internes' => 'R&eacute;f. virements internes',
-
 	# Options
 	'import_nom_auteur_nom_prenom' => 'Nom Pr&eacute;nom',
 	'import_nom_auteur_prenom_nom' => 'Pr&eacute;nom Nom',
@@ -144,7 +139,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choisir_ref_compte' => '-- Choisir une r&eacute;f&eacute;rence comptable',
 	'choisir_dest_compte' => '-- Choisir une destination par d&eacute;faut',
 	'choisir_classe_compte' => '-- Classe comptable ind&eacute;termin&eacute;e',
-
 	# Meta utilisateurs
 	'editer_meta_utilisateur' => '&Eacute;diter le champs utilisateur',
 	'supprimer_meta_utilisateur' => 'Supprimer le champs utilisateur',
@@ -612,20 +606,17 @@ Commentaire: @commentaire@
 	# Plan comptable
 		#Message
 			'plan_info' => 'Vous pouvez d&eacute;finir ici les comptes de votre plan comptable.<br />Vous devez au minimum d&eacute;finir les comptes de produits n&eacute;cessaires &agrave; la configuration du plugin et les comptes financiers relatifs aux diff&eacute;rentes modes de paiement.',
-                        'edit_plan' => '<p>Vous devez choisir d\'abord une "CLASSE" puis un "CODE" dont le 1er chiffre doit correspondre &agrave; la "classe". Par exemple : classe 5 et code 5171</p>Si vous avez activ&eacute; l\'aide &agrave; la d&eacute;claration du plan comptable fran&ccedil;ais, un s&eacute;lecteur de code listant tous les codes et intitul&eacute;s correspondant vous permettra de remplir directement les cases code et intitul&eacute; que vous pourrez modifier ensuite, ce sont elles qui seront consid&eacute;r&eacute;es et non le s&eacute;lecteur.',
+            'edit_plan' => '<p>Vous devez choisir d\'abord une "CLASSE" puis un "CODE" dont le 1er chiffre doit correspondre &agrave; la "classe". Par exemple : classe 5 et code 5171</p>Si vous avez activ&eacute; l\'aide &agrave; la d&eacute;claration du plan comptable fran&ccedil;ais, un s&eacute;lecteur de code listant tous les codes et intitul&eacute;s correspondant vous permettra de remplir directement les cases code et intitul&eacute; que vous pourrez modifier ensuite, ce sont elles qui seront consid&eacute;r&eacute;es et non le s&eacute;lecteur.',
 			'non_implemente' => 'Fonctionnalit&eacute; non encore impl&eacute;ment&eacute;e !',
 		# Titres
 			'plan_comptable' => 'Plan comptable',
-
 		# En-tete
 			'plan_entete_tous' => 'Tous',
-
 		# Navigation
 			'plan_nav_ajouter' => 'Ajouter une r&eacute;f&eacute;rence comptable',
 			'operations_comptables' => 'Op&eacute;rations comptables',
 			'liens_vers_les_justificatifs' => 'Liens vers les justificatifs',
-		'destination_nav_ajouter' => 'Ajouter une destination comptable',
-
+			'destination_nav_ajouter' => 'Ajouter une destination comptable',
 		#Libelle
 			'plan_libelle_comptes_actifs' => 'Comptes actifs',
 			'plan_libelle_comptes_desactives' => 'Comptes d&eacute;sactiv&eacute;s',
@@ -640,25 +631,25 @@ Commentaire: @commentaire@
 			'destination_comptable' => 'Destination comptable',
 		# Bilan
 			'toutes_destination' => 'toutes destinations',
-	'bilan_depenses' => 'D&eacute;penses',
-	'bilan_recettes' => 'Recettes',
-	'bilan_solde' => 'Solde',
+			'bilan_depenses' => 'D&eacute;penses',
+			'bilan_recettes' => 'Recettes',
+			'bilan_solde' => 'Solde',
 		# Comptes
 			'compte_financier' => 'Compte financier',
 			'bilan' => 'Bilan',
 			'compte_cree_automatiquement' => 'Compte cr&eacute;&eacute; automatiquement par Associaspip',
 			'virement_interne' => 'Virement interne',
 			'bouton_radio_type_operation_titre' => 'Type d\'op&eacute;ration',
-	'imputation' => 'Imputation',
-	'compte_origine' => 'Compte Origine',
-	'compte_destination' => 'Compte Destination',
-	'montant' => 'Montant',
-	'depense' => 'D&eacute;pense',
-	'depense_evaluee' => 'D&eacute;pense &eacute;valu&eacute;e',
-	'recette' => 'Recette',
-	'recette_evaluee' => 'Recette &eacute;valu&eacute;e',
-	'compte_debite' => 'Compte d&eacute;bit&eacute;',
-	'compte_credite' => 'Compte cr&eacute;dit&eacute;',
+			'imputation' => 'Imputation',
+			'compte_origine' => 'Compte Origine',
+			'compte_destination' => 'Compte Destination',
+			'montant' => 'Montant',
+			'depense' => 'D&eacute;pense',
+			'depense_evaluee' => 'D&eacute;pense &eacute;valu&eacute;e',
+			'recette' => 'Recette',
+			'recette_evaluee' => 'Recette &eacute;valu&eacute;e',
+			'compte_debite' => 'Compte d&eacute;bit&eacute;',
+			'compte_credite' => 'Compte cr&eacute;dit&eacute;',
 			'aucun' => 'aucun',
 			'tous' => 'tous',
 			'aucun_achat_pour_l_instant' => 'Aucun achat pour l\'instant',
@@ -667,7 +658,6 @@ Commentaire: @commentaire@
 			'aucune_activite_payante_pour_l_instant' => 'Aucun activit&eacute; payante pour l\'instant',
 			'aucune_cotisation_pour_l_instant' => 'Aucune cotisation pour l\'instant',
 			'totaux' => 'Totaux',
-
 		# Compte de Resultat
 			'cpte_resultat_titre_general' => 'Compte de R&eacute;sultat',
 			'cpte_resultat_bouton_voir' => 'Voir',
@@ -682,12 +672,10 @@ Commentaire: @commentaire@
 			'cpte_resultat_depense_evaluee' => 'D&eacute;pense<br />&eacute;valu&eacute;e',
 			'cpte_resultat_mode_exportation' => 'Exporter le Compte de R&eacute;sultat en ',
 			'cpte_resultat_pied_page_export_pdf' => 'Associaspip - Gestion d\'une association sous licence GPL',
-		'cpte_resultat_total_produits_evalues' => 'Total des Produits &Eacute;valu&eacute;s',
-	'cpte_resultat_total_charges_evaluees' => 'Total des Charges &Eacute;valu&eacute;es',
-
+			'cpte_resultat_total_produits_evalues' => 'Total des Produits &Eacute;valu&eacute;s',
+			'cpte_resultat_total_charges_evaluees' => 'Total des Charges &Eacute;valu&eacute;es',
 		# annexe
 			'annexe_titre_general' => 'Annexe',
-
 		# Verifications
 			'erreur_titre' => 'Une erreur est pr&eacute;sente dans votre saisie',
 			'erreur_recette_depense' => 'Une op&eacute;ration ne peut contenir simultan&eacute;ment des d&eacute;penses et recettes. Par ailleurs les d&eacute;penses ou recettes ne peuvent pas &ecirc;tre n&eacute;gatives ou toutes les deux nulles',
@@ -716,8 +704,8 @@ Commentaire: @commentaire@
 			'erreur_montant' => 'Les valeurs n&eacute;gatives ne sont pas autoris&eacute;es',
 			'erreur_configurer_association_plan_comptable_non_valide' => 'Vous ne pouvez pas activer le module de gestion comptable car votre plan comptable n\'est pas valide.<br/>Pour &ecirc;tre valide, un plan comptable doit suivre les r&egrave;gles suivantes :<ul><li>Contenir des comptes d\'au moins deux classes diff&eacute;rentes.<li><li>Les classes sont un chiffre entre 0 et 9.</li><li>Les codes des comptes doivent &ecirc;tre unique.</li><li>Les codes doivent commencer par un chiffre &eacute;gal &agrave; la classe du compte.</li><li>Les codes sont au format : 2 chiffres suivis de caract&egrave;res alphanum&eacute;riques</li></ul>',
 			'erreur_configurer_association_reference_financier' => 'La r&eacute;f&eacute;rence comptable associ&eacute;e a un type d\'op&eacute;ration ne peut pas &ecirc;tre de la classe des comptes financiers',
-
-	# MaJ integration de coodonnees
+	# MaJ
+		# MaJ integration de coodonnees
 			'effectuer_la_maj' => 'Effectuer la mise &agrave; jour maintenant',
 			'maj_coordonnees_notes' => 'Notes&nbsp;:<ul><li>Si vous choissisez de ne pas effectuer la mise &agrave; jour, ce choix vous sera propos&eacute; &agrave; chaque chargement de la page de gestion des plugins.</li><li>Ne pas tenir compte du message Echec au bas de ce cadre.</li><li>Vous pouvez ignorer ce message et g&eacute;rer les autres plugins normalement, la mise &agrave; jour ne sera alors pas effectu&eacute;e(et ce message continuera donc &agrave; apparaitre).</li><li>Le champ email de la table spip_asso_membres est normalement vide - cette information &eacute;tant contenue dans la table spip_auteurs - il sera &eacute;limin&eacute; sans sauvegarde.</li>',
 			'maj_coordonnees_intro' => 'Vous vous appretez &agrave; effectuer une mise &agrave; jour du plugin Association basculant la gestion des adresses et t&eacute;l&eacute;phones vers le plugin Coordonn&eacute;es. A l\'issu de cette M&agrave;j, les champs correspondants &agrave; ces donn&eacute;es seront supprim&eacute;s des tables du plugin Association.<br/><strong>Ca pourrait &ecirc;tre une bonne id&eacute;e de faire une sauvegarde de votre base de donn&eacute;es avant de continuer (au minimum des tables spip_asso_membres ainsi que spip_adresses, spip_adresses_liens, spip_numeros et spip_numeros_liens si elles sont pr&eacute;sentes)</strong>',

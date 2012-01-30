@@ -9,25 +9,28 @@
 	    #SELECTEUR_CLASSE_COMPTABLE
 	    <li class="editer_code">
 		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{code})</span>]
-		<label for="code"><strong><:asso:code:></strong></label>
+		<label for="code"><:asso:code:></label>
 		#SELECTEUR_CODE_COMPTABLE
 		<input type="text" name="code" [value="(#ENV{code})"] id="code" class="text" />
 	    </li>
 	    <li class="editer_intitule">
-		<label for="intitule"><strong><:asso:intitule:></strong></label>
+		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{intitule})</span>]
+		<label for="intitule"><:asso:intitule:></label>
 		<input type="text" name="intitule" [value="(#ENV{intitule})"] id="intitule" class="text" />
 	    </li>
 	    <li class="editer_solde_anterieur">
-		<label for="solde_anterieur"><strong><:asso:solde_reporte_en_euros:></strong></label>
+		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{solde_anterieur})</span>]
+		<label for="solde_anterieur"><:asso:solde_reporte_en_euros:></label>
 		<input type="text" name="solde_anterieur" [value="(#ENV{solde_anterieur})"] id="solde_anterieur" class="text" />
 	    </li>
 	    <li class="editer_date_anterieure">
 		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_anterieure})</span>]
-		<label for="date_anterieure"><strong><:asso:date_report_aaaa_mm_jj:></strong></label>
-		<input type="[(HTML5|?{date,text})]" name="date_anterieure" [value="(#ENV{date_anterieure}|affdate{Y-m-d})"] id="date_anterieure"  class="date" />
+		<label for="date_anterieure"><:asso:date_report_aaaa_mm_jj:></label>
+		<input type="[(#HTML5|?{date,text})]" name="date_anterieure" [value="(#ENV{date_anterieure}|affdate{Y-m-d})"] id="date_anterieure"  class="date" />
 	    </li>
 	    <li class="editer_type_op">
-		<label for="type_op"><strong><:asso:direction_plan:></strong></label>
+		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{type_op})</span>]
+		<label for="type_op"><:asso:direction_plan:></label>
 		<select name="type_op" id="type_op">
 		    <option value="multi" [(#ENV{type_op}|=={multi}|?{selected="selected"})]>multi</option>
 		    <option value="credit" [(#ENV{type_op}|=={credit}|?{selected="selected"})]>credit</option>
@@ -35,11 +38,11 @@
 		</select>
 	    </li>
 	    <li class="editer_active">
-		<label for="active"><strong><:asso:compte_active:></strong></label>
+		<label for="active"><:asso:compte_active:></label>
 		<input type="checkbox" name="active" [(#ENV{active}|?{checked="checked"})] id="active" />
 	    </li>
 	    <li class="editer_commentaire">
-		<label for="commentaire"><strong><:asso:commentaires:></strong></label>
+		<label for="commentaire"><:asso:commentaires:></label>
 		<textarea rows="3" name="commentaire" id="commentaire">[(#ENV{commentaire})]</textarea>
 	    </li>
 	</ul>

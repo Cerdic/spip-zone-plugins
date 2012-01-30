@@ -7,25 +7,28 @@
 		<h3 class="legend"><:asso:ressources_titre_edition_ressources:></h3>
 		<ul>
 			<li class="editer_code">
-				<label for="code"><strong><:asso:ressources_libelle_code:></strong></label>
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{code})</span>]
+				<label for="code"><:asso:ressources_libelle_code:></label>
 				<input type="text" name="code" [value="(#ENV{code})"] id="code"  class="text" />
 			</li>
 			<li class="editer_intitule">
-				<label for="intitule"><strong><:asso:ressources_libelle_intitule:></strong></label>
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{intitule})</span>]
+				<label for="intitule"><:asso:ressources_libelle_intitule:></label>
 				<input type="text" name="intitule" [value="(#ENV{intitule})"] id="intitule"  class="text" />
 			</li>
 			<li class="editer_date_acquisition">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_acquisition})</span>]
-				<label for="date_acquisition"><strong><:asso:ressources_libelle_date_acquisition:></strong></label>
-				<input type="[(HTML5|?{date,text})]" name="date_acquisition" [value="(#ENV{date_acquisition}|affdate{Y-m-d})"] id="date_acquisition"  class="date" />
+				<label for="date_acquisition"><:asso:ressources_libelle_date_acquisition:></label>
+				<input type="[(#HTML5|?{date,text})]" name="date_acquisition" [value="(#ENV{date_acquisition}|affdate{Y-m-d})"] id="date_acquisition"  class="date" />
 			</li>
 			<li class="editer_pu">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{pu})</span>]
-				<label for="pu"><strong><:asso:ressources_libelle_prix_location:></strong></label>
-				<input type="[(HTML5|?{number,text})]" name="pu" [value="(#ENV{pu})"] id="pu"  class="number float price" />
+				<label for="pu"><:asso:ressources_libelle_prix_location:></label>
+				<input type="[(#HTML5|?{number,text})]" name="pu" [value="(#ENV{pu})"] id="pu"  class="number float price" />
 			</li>
 			<li class="editer_statut">
-				<label for="statut"><strong><:asso:ressources_libelle_statut:></strong></label>
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{statut})</span>]
+				<label for="statut"><:asso:ressources_libelle_statut:></label>
 				<div class="choix">
 					<input type="radio" class="radio" name="statut" value="ok" id="statut_ok"[ (#ENV{statut}|=={ok}|oui)checked="checked"] />
 					<label for="statut_ok"><:asso:ressources_libelle_statut_ok:></label>
@@ -44,7 +47,7 @@
 				</div>
 			</li>
 			<li class="editer_commentaire">
-				<label for="commentaire"><strong><:asso:remarques:></strong></label>
+				<label for="commentaire"><:asso:remarques:></label>
 				<textarea name="commentaire" id="commentaire"  class="formo" rows="3">[(#ENV{commentaire})]</textarea>
 			</li>
 		</ul>
