@@ -20,7 +20,7 @@ function menus_ieconfig($flux){
 				'options' => array(
 					'nom' => 'menus_export',
 					'label' => '<:menus:editer_menus_titre:>',
-					'icone' => 'images/menus-24.png'
+					'icone' => 'menu-16.png'
 				),
 				'saisies' => array(
 					array(
@@ -59,7 +59,7 @@ function menus_ieconfig($flux){
 				'options' => array(
 					'nom' => 'menus_import',
 					'label' => '<:menus:editer_menus_titre:>',
-					'icone' => 'images/menus-24.png'
+					'icone' => 'menu-16.png'
 				),
 				'saisies' => array(
 					array(
