@@ -23,6 +23,9 @@
 <pipeline nom="declarer_tables_auxiliaires" inclure="base/structure.php" />
 <pipeline nom="autoriser" inclure="pipelines/sel_autorisations.php" />
 <pipeline nom="editer_contenu_objet" inclure="pipelines/complement_editer_auteur.php" />
+<pipeline nom="formulaire_charger" inclure="pipelines/complement_editer_auteur.php" />
+<pipeline nom="formulaire_verifier" inclure="pipelines/complement_editer_auteur.php" />
+<pipeline nom="formulaire_traiter" inclure="pipelines/complement_editer_auteur.php" />
 
 <!-- ERGONOMIE DANS ESPACE PRIVE A REVOIR ET UNIFORMISER AVEC PLUGIN.XML -->
 <menu nom="sels" titre="sel:titre_sel" parent="menu_edition" icone="images/sel-16.png" />

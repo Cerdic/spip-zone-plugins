@@ -22,6 +22,9 @@
 		'entree_tel2_2' => "2e Téléphone",
 		'entree_commentaires' => "Commentaires",
 		
+		//F
+		'form_erreur_information_obligatoire' => 'Cette information est obligatoire',
+		
 		//I
 		'info_coordonnees' => "Coordonnées",
 		'info_admin_statuer_webmestre' => "Donner à cet administrateur les droits de webmestre, co-Admnistrateur global du catalogue",

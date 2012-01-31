@@ -1,3 +1,8 @@
+<style>
+div.choix-webmestre, div.rubriques_restreintes {
+	display: none;
+}
+</style>
 
 <li class='editer_localisation fieldset'>
 		<fieldset>
@@ -46,9 +51,23 @@
 			</li>
 			<li>Membre de : (liste JEU / SELs dans spip_sels) - Stocker les appartenances bipartites auteur -> SEL dans spip_correspondances</li>
 			<li>Correspondant de : (liste ateliers, intersel... spip_organisations) au nom de : liste des SELs - Stocker les correspondances tripartites auteur -> SEL/orga dans spip_correspondances</li>
+
+			
+			
+			[(#REM) Si pas connecté, ou connecté comme visiteur ou rédacteur, le choix du statut a disparu, on le remplace par ceci. ]
+			[(#SESSION{statut}|non
+					  |or{#SESSION{statut}|=={6forum}}
+						|or{#SESSION{statut}|=={1comite}}|oui)
+						<li><input type='text' name='statut' id='statut' value="[(#ENV**{statut})]" /></li>
+			]
+
+
+			
 		</ul>
 		</fieldset>
 </li>
+
+
 
 <!--
 A définir dans editer_auteur.php :

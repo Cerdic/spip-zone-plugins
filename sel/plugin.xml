@@ -82,6 +82,18 @@
 		<inclure>pipelines/complement_editer_auteur.php"</inclure>
 	</pipeline>
 
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>pipelines/complement_editer_auteur.php"</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>pipelines/complement_editer_auteur.php"</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>pipelines/complement_editer_auteur.php"</inclure>
+	</pipeline>
 	
    <!-- precise les dependances vis-vis de d'autres plugins (ou de spip), voir plus bas <necessite id="nomplugin" version="[versionminimale;versionmax]" />-->  
 	<necessite id="SPIP" version='[2.0.0;]' />
