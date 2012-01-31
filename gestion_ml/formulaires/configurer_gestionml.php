@@ -128,6 +128,7 @@ function formulaires_configurer_gestionml_verifier_dist(){
 	$erreurs = array() ;
 	
 	if( _request('hebergeur') != "0" ) {
+		include_spip('inc/gestionml_api');
 		$erreurs = gestionml_api_tester(_request('serveur_distant'), _request('identifiant'), _request('mot_de_passe')) ;
 	}
 	return ($erreurs);
