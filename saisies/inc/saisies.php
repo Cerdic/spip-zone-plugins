@@ -171,7 +171,7 @@ function saisie_identifier($saisie, $regenerer = false) {
  *                                        Cette valeur NULL est transmise a traiter (via set_request).
  * @return array Retourne un tableau d'erreurs
  */
-function saisies_verifier($formulaire,$saisies_masquees_nulles=FALSE){
+function saisies_verifier($formulaire, $saisies_masquees_nulles=true){
 	include_spip('inc/verifier');
 	$erreurs = array();
 	$verif_fonction = charger_fonction('verifier','inc',true);
