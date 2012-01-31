@@ -18,9 +18,7 @@
 	<description>
 		<multi>
 [fr]Ce plugin permet de facilement transformer un site SPIP pour que la navigation se fasse sans recharger compl&#232;tement la page, mais en r&#233;cuperant les &#233;lements &#224; changer en AJAX.
-_ Pour configurer le plugin se rendre sur la page exec=ajax_nav_admin.       
 [en]This plugin lets you easily transform your SPIP website so that a part or all of your inner links don't make the whole page reload, but only replace some chosen elements using AJAX requests.
-_ To configure the plugin go to page exec=ajax_nav_admin.
 		</multi>
 	</description>
 	<icon>ajax_nav.png</icon>
