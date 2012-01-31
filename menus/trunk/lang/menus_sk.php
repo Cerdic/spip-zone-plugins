@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'confirmer_supprimer_entree' => 'Voulez-vous vraiment supprimer cette entrée ?', # NEW
+	'confirmer_supprimer_entree' => 'Chcete odstrániť tento záznam?',
 
 	// D
 	'description_menu_accueil' => 'Odkaz na úvodnú stránku webu.',
@@ -33,8 +33,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menus_exporter' => 'Exportovať toto menu',
 	'editer_menus_nouveau' => 'Vytvoriť nové menu',
 	'editer_menus_titre' => 'Ponuky menu stránky',
-	'entree_afficher_articles' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)', # NEW
-	'entree_afficher_item_suite' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)', # NEW
+	'entree_afficher_articles' => 'Zaradiť články do menu? (na to využite možnosť "áno")',
+	'entree_afficher_item_suite' => 'Zaradiť články do menu? (použite na to možnosť "áno")',
 	'entree_articles_max' => 'Si oui, afficher les articles seulement si la rubrique contient au maximum xx articles ? (mettre le nombre maximum d\'articles, laissez vide pour afficher tous les articles)', # NEW
 	'entree_articles_max_affiches' => 'Si oui, limiter le nombre d\'articles listés à xx maximum (suivis d\'un item "... Tous les articles" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum d\'articles, laissez vide pour afficher tous les articles)', # NEW
 	'entree_aucun' => 'Žiadny',
@@ -50,8 +50,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_objet' => 'Číslo',
 	'entree_id_rubrique' => 'Číslo nadradenej rubriky',
 	'entree_id_rubrique_ou_courante' => 'Numéro de la rubrique parente ou "courante" si la rubrique parente est la rubrique courante du contexte', # NEW
-	'entree_id_rubriques_exclues' => 'Numéros des rubriques à exclure, séparés par des virgules', # NEW
-	'entree_id_secteur_exclus' => 'Numéros des secteurs à exclure, séparés par des virgules', # NEW
+	'entree_id_rubriques_exclues' => 'Čísla rubrík, ktoré majú byť vylúčené, oddelené čiarkami',
+	'entree_id_secteur_exclus' => 'Čísla sektorov, ktoré majú byť vylúčené, oddelené čiarkami',
 	'entree_infini' => 'Do nekonečna',
 	'entree_mapage' => 'Moja stránka',
 	'entree_masquer_articles_uniques' => 'Si oui et si une rubrique contient un seul article, le masquer ? (mettre "oui" pour cela)', # NEW
@@ -71,12 +71,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_traduction_objet' => 'Pri článku vyberajte preklad v závislosti od kontextu (na to, aby se to dosiahli, vložte "trad")',
 	'entree_tri_alpha' => 'Kritérium triedenia (abecedné)',
 	'entree_tri_alpha_articles' => 'Critère de tri des articles (alphabétique). Si vous saisissez "date", le critère ajouté sera {par date} et les articles seront triés par date', # NEW
-	'entree_tri_alpha_articles_inverse' => 'Inverser le critère de tri alphabétique ? (mettre "oui" pour cela)', # NEW
-	'entree_tri_alpha_inverse' => 'Inverser le critère de tri alphabétique ? (mettre "oui" pour cela)', # NEW
+	'entree_tri_alpha_articles_inverse' => 'Obrátiť poradie abecedného triedenia? (použite na to možnosť "áno")',
+	'entree_tri_alpha_inverse' => 'Obrátiť poradie abecedného triedenia? (použite na to možnosť "áno")',
 	'entree_tri_num' => 'Kritérium triedenia (číselné)',
 	'entree_tri_num_articles' => 'Critère de tri des articles (numérique). Si vous saisissez "titre", le critère ajouté sera {par num titre} et les articles seront triés par numéro de titre', # NEW
-	'entree_tri_num_articles_inverse' => 'Inverser le critère de tri numérique ? (mettre "oui" pour cela)', # NEW
-	'entree_tri_num_inverse' => 'Inverser le critère de tri numérique ? (mettre "oui" pour cela)', # NEW
+	'entree_tri_num_articles_inverse' => 'Obrátiť poradie číselného triedenia? (použite na to možnosť "áno")',
+	'entree_tri_num_inverse' => 'Obrátiť poradie číselného triedenia? (použite na to možnosť "áno")',
 	'entree_type_objet' => 'Typ objektu',
 	'entree_url' => 'Internetová adresa',
 	'entree_url_public' => 'Po prihlásení vypísať adresu',
