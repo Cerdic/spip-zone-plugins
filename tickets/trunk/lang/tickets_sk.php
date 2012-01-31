@@ -23,9 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_descr_tickets' => 'Nastavenia zásuvného modulu lístky pre SPIP',
 	'cfg_explication_cacher_moteurs' => 'Cache les tickets des moteurs de recherche en leur demandant de ne pas indexer leur contenus lorsqu\'ils sont affichés dans l\'espace public.', # NEW
 	'cfg_explication_composants' => 'Súčasti oddeľte znakom ":".',
-	'cfg_explication_jalons' => 'Séparez les jalons par le caractère ":".', # NEW
+	'cfg_explication_jalons' => 'Míľniky oddeľte znamkom ":".',
 	'cfg_explication_projets' => 'Projekty oddeľte znakom ":".',
-	'cfg_explication_readonly' => 'Cette partie de la configuration est déjà définie autre part.', # NEW
+	'cfg_explication_readonly' => 'Táto časť nastavení je nastavená inde.',
 	'cfg_explication_versions' => 'Verzie oddeľte znakom ":".',
 	'cfg_form_tickets_autorisations' => 'Nastavenie povolení',
 	'cfg_form_tickets_general' => 'Všeobecné nastavenia',
@@ -34,13 +34,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_autorisation_statuts' => 'Povoliť podľa funkcie autora',
 	'cfg_lbl_autorisation_webmestre' => 'Povoliť iba webmasterom',
 	'cfg_lbl_cacher_moteurs' => 'Schovať vyhľadávače',
-	'cfg_lbl_case_joindre_fichiers' => 'Autoriser à joindre un ou plusieurs fichiers aux tickets', # NEW
+	'cfg_lbl_case_joindre_fichiers' => 'Povoliť pripájanie súborov k lístkom',
 	'cfg_lbl_case_notification_publique' => 'Être notifié dans l\'espace public plutôt que dans l\'espace privé (Nécessite Zpip)', # NEW
 	'cfg_lbl_case_selecteur_navigateur' => 'Disposer d\'un sélecteur de navigateur dans le formulaire d\'édition de ticket', # NEW
 	'cfg_lbl_composants' => 'Súčasti',
 	'cfg_lbl_desactiver_public' => 'Deaktivovať verejný prístup',
 	'cfg_lbl_forums_publics' => 'Komentáre na lístky',
-	'cfg_lbl_jalons' => 'Jalons', # NEW
+	'cfg_lbl_jalons' => 'Míľniky',
 	'cfg_lbl_joindre_fichiers' => 'Pripojiť jeden súbor alebo viac',
 	'cfg_lbl_liste_auteurs' => 'Autori stránky',
 	'cfg_lbl_notification_publique' => 'Verejný oznam',
@@ -71,8 +71,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_id_assigne' => 'Priradený k:',
 	'champ_id_auteur' => 'Autor:',
 	'champ_importance' => 'Importance :', # NEW
-	'champ_jalon' => 'Jalon ', # NEW
-	'champ_maj' => 'MAJ :', # NEW
+	'champ_jalon' => 'Míľnik ',
+	'champ_maj' => 'AKTUALIZÁCIA:',
 	'champ_maj_long' => 'Dátum aktualizácie',
 	'champ_navigateur' => 'Prehliadač:',
 	'champ_nouveau_commentaire' => 'Nový komentár',
@@ -85,13 +85,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_titre' => 'Zhrnutie',
 	'champ_titre_ticket' => 'Názov lístka',
 	'champ_type' => 'Typ:',
-	'champ_url_exemple' => 'URL d’exemple', # NEW
+	'champ_url_exemple' => 'URL príkladu',
 	'champ_version' => 'Verzia:',
-	'changement_statut_mail' => 'Le statut de ce ticket a été modifié de "@ancien@" à "@nouveau@".', # NEW
+	'changement_statut_mail' => 'Stav tohto lístka sa zmenil z(o) "@ancien@" na "@nouveau@".',
 	'classement_assigne' => 'Lístky podľa priradenia',
 	'classement_asuivre' => 'Vaše lístky na sledovanie',
-	'classement_jalon' => 'Tickets par jalon', # NEW
-	'classement_termine' => 'Tickets terminés', # NEW
+	'classement_jalon' => 'Lístky podľa míľnika',
+	'classement_termine' => 'Ukončené lístky',
 	'classement_type' => 'Lístky podľa typu',
 	'commentaire' => 'komentár',
 	'commentaire_aucun' => 'Žiaden komentár',
@@ -100,14 +100,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_ticket' => 'Vytvoriť lístok',
 
 	// D
-	'date_creation_auteur' => 'Ticket créé le <strong>@date@</strong> par <strong>@nom@</strong>', # NEW
+	'date_creation_auteur' => 'Lístok vytvoril(a) <strong>@nom@</strong> <strong>@date@</strong>',
 
 	// E
 	'erreur_date_saisie' => 'Tento dátum je neplatný',
-	'erreur_date_saisie_superieure' => 'La date maximale doit être supérieure à la date minimale', # NEW
-	'erreur_texte_longueur_mini' => 'La longueur minimale du texte est de @nb@ caractères.', # NEW
+	'erreur_date_saisie_superieure' => 'Maximálny dátum musí byť väčší ako minimálny dátum',
+	'erreur_texte_longueur_mini' => 'Minimálna dĺžka textu je @nb@ znakov.',
 	'erreur_verifier_formulaire' => 'Skontrolujte si svoj formulár',
-	'explication_champ_sticked' => 'Les tickets épinglés sont toujours affichés en premier, quelque soit leur statut.', # NEW
+	'explication_champ_sticked' => 'Lístky budú vždy zobrazené najprv ako prilepené, a to bez ohľadu na ich stav.',
 	'explication_description_ticket' => 'Décrivez aussi précisément que possible le besoin ou le problème rencontré.
 	Indiquez en particulier s’il se produit systématiquement ou occasionnellement.
 	S’il s’agit d’un problème d\'affichage, précisez avec quel navigateur vous le rencontrez.', # NEW
@@ -134,11 +134,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_paginer_par' => 'Paginer par :', # NEW
 	'lien_filtrer' => 'Rozriediť lístky',
-	'lien_supprimer_filtres' => 'Enlever tous les filtres', # NEW
+	'lien_supprimer_filtres' => 'Odstrániť všetky filtre',
 
 	// M
 	'mail_texte_message_auto' => 'Ceci est un message automatique : n\'y repondez pas.', # NEW
-	'message_aucun_ticket_recherche' => 'Aucun ticket ne correspond à votre recherche', # NEW
+	'message_aucun_ticket_recherche' => 'Podmienkam vyhľadávania nevyhovuje žiaden lístok',
 	'message_automatique' => 'Ceci est un message automatique : n\'y repondez pas.', # NEW
 
 	// N
@@ -155,14 +155,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_titre' => 'Lístky, systém na sledovanie chýb',
 
 	// R
-	'revenir_gestion' => 'Revenir à la gestion des tickets', # NEW
+	'revenir_gestion' => 'Späť na riadenie lístkov',
 
 	// S
 	'severite_bloquant' => 'Bloquant', # NEW
 	'severite_important' => 'Important', # NEW
 	'severite_normal' => 'Normal', # NEW
 	'severite_peu_important' => 'Peu important', # NEW
-	'sinscrire' => 'S\'inscrire', # NEW
+	'sinscrire' => 'Zaregistrovať sa',
 	'statut_ferme' => 'Uzavretý',
 	'statut_ferme_long' => 'Všetky uzavreté lístky',
 	'statut_inchange' => 'Stav sa nezmenil.',
@@ -175,14 +175,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suivre_tickets_assignes_a' => 'Lístky pripojené k @nom@',
 	'suivre_tickets_comments' => 'Suivi des commentaires de tickets', # NEW
 	'suivre_tickets_comments_rss' => 'Suivre ces commentaires par RSS', # NEW
-	'suivre_tickets_de' => 'Les tickets de @nom@', # NEW
+	'suivre_tickets_de' => 'Lístky @nom@',
 	'suivre_tickets_id' => 'Sledovať lístok #@id@ : @titre@',
 	'suivre_tickets_rss' => 'Suivre ces tickets par RSS', # NEW
 	'suivre_tickets_rss_unique' => 'Suivre ce ticket par RSS', # NEW
 	'suivre_tickets_statut' => 'Les tickets ayant le ou les statuts :', # NEW
 	'suivre_tickets_tous' => 'Všetky lístky',
 	'syndiquer_ticket' => 'Syndikovať lístok:',
-	'syndiquer_tickets' => 'Syndiquer les tickets du site', # NEW
+	'syndiquer_tickets' => 'Syndikovať lístky zo stránky',
 
 	// T
 	'texte_ticket_statut' => 'Stav lístka:',
@@ -204,14 +204,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tous_tickets_ouverts' => 'Všetky otvorené lístky',
 	'type_amelioration' => 'Amélioration', # NEW
 	'type_amelioration_long' => 'Les tickets demandant une amélioration', # NEW
-	'type_probleme' => 'Problème', # NEW
-	'type_probleme_long' => 'Les problèmes à résoudre', # NEW
+	'type_probleme' => 'Problém',
+	'type_probleme_long' => 'Problémy, ktoré treba vyriešiť',
 	'type_tache' => 'Úloha',
 	'type_tache_long' => 'Úlohy, ktoré treba vykonať',
 
 	// V
 	'vos_tickets_assignes' => 'Lístky, ktoré boli priradené vám',
-	'vos_tickets_assignes_auteur' => 'Les tickets de @nom@ qui vous sont assignés', # NEW
+	'vos_tickets_assignes_auteur' => 'Lístky @nom@, ktoré boli priradené vám',
 	'vos_tickets_en_cours' => 'Vaše lístky, ktoré sa upravujú'
 );
 
