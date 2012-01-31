@@ -97,6 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisettes_composition' => 'Code-Nüsse der Komposition <i>@composition@</i> :',
 	'noisettes_page' => 'Code-Nüsse der Seite <i>@type@</i> :',
 	'noisettes_toutes_pages' => 'Code-Nüsse für alle Seiten:',
+	'noizetier' => 'noiZetier', # NEW
 	'nom_bloc_contenu' => 'Inhalt',
 	'nom_bloc_extra' => 'Extra',
 	'nom_bloc_navigation' => 'Navigation',
