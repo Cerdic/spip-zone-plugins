@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'jaime' => 'Páči sa mi',
 	'jaimepas' => 'Nepáči sa mi',
 	'jaimeplus' => 'Už sa mi viac nepáči',
-	'jechangedavis' => 'Je retire mon avis', # NEW
+	'jechangedavis' => 'Sťahujem svoj názor',
 
 	// L
 	'label_accepter_note' => 'Stav hodnotenia všetkých objektov',
