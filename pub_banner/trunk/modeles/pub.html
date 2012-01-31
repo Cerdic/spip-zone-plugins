@@ -1,4 +1,4 @@
-[(#SET{goto_clicker,#ENV{java_goto}&id_publicite=#ENV{id_publicite}&id_banniere=#ENV{id_banniere}})]
+[(#SET{goto_clicker,#ENV{java_goto}|parametre_url{id_publicite,#ENV{id_publicite}}|parametre_url{id_banniere,#ENV{id_banniere}}})]
 
 [(#ENV{type}|=={img}|oui)
 <a href="[(#GET{goto_clicker}|parametre_url{redirect,#ENV{url,#ADRESSE_SITE}|urlencode})]" 
