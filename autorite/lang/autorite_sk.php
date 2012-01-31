@@ -87,8 +87,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'non_webmestres' => 'Toto nastavenie neplatí pre webmasterov.',
 	'note_rubriques' => '(Notez que seuls les administrateurs peuvent créer des rubriques, et, pour les administrateurs restreints, cela ne peut se faire que dans leurs rubriques.)', # NEW
-	'nouvelles_rubriques' => 'de nouvelles rubriques à la racine du site', # NEW
-	'nouvelles_sous_rubriques' => 'de nouvelles sous-rubriques dans l\'arborescence.', # NEW
+	'nouvelles_rubriques' => 'z nových rubrík do koreňového adresára stránky',
+	'nouvelles_sous_rubriques' => 'z nových podrubrík v stromovej štruktúre.',
 
 	// O
 	'ouvrir_redacs' => 'Otvoriť redaktorom stránky:',
@@ -96,7 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ouvrir_visiteurs_tous' => 'Otvoriť všetkým návštevníkom stránky:',
 
 	// P
-	'pas_acces_espace_prive' => '<strong>Pas d\'accès à l\'espace privé :</strong> les rédacteurs n\'ont pas accès à l\'espace privé.', # NEW
+	'pas_acces_espace_prive' => '<strong>Bez prístupu do súkromnej zóny:</strong> redaktori nemajú prístup do súkromnej zóny.',
 	'personne' => 'Hocikto',
 	'petitions_qui' => '<strong>Podpisy:</strong> kto môže meniť podpisy pod petíciami:',
 	'publication' => 'Publikovanie',
@@ -106,8 +106,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redac_tous' => 'Všetci redaktori',
 	'redacs' => 'redaktorom stránky',
 	'redacteur' => 'redaktor',
-	'redacteur_lire_stats' => '<strong>Rédacteur voit stats</strong> : les rédacteurs peuvent visualiser les statistiques.', # NEW
-	'redacteur_modifie_article' => '<strong>Rédacteur modifie proposés</strong> : chaque rédacteur peut modifier un article proposé à la publication, même s\'il n\'en est pas auteur.', # NEW
+	'redacteur_lire_stats' => '<strong>Redaktori môžu vidieť štatistiky:</strong> redaktori môžu vidieť štatistiky.',
+	'redacteur_modifie_article' => '<strong>Redactor upravuje odoslané články:</strong> každý redaktor môže upravovať články odoslaný na publikovanie aj ak je bez autora.',
 	'refus_1' => '<p>Iba webmasteri stránky',
 	'refus_2' => 'sont autorisés à modifier ces paramètres.</p>
 <p>Pour en savoir plus, voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>.</p>', # NEW
