@@ -16,8 +16,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_telecharger' => 'Stiahnuť súbor',
 
 	// L
-	'label_elements_a_exporter' => 'prvky na export:',
-	'label_exporter' => 'Exportovať?',
+	'label_configurations_a_exporter' => 'Configurations à exporter', # NEW
+	'label_exporter' => 'Exportovať?', # MODIF
 	'label_ieconfig_export' => 'Všeobecné možnosti exportu',
 	'label_ieconfig_export_choix' => 'Čo chcete?',
 	'label_ieconfig_export_description' => 'Popis:',
@@ -40,10 +40,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_importer_configuration' => 'Cette option vous permet de restaurer une sauvegarde précédemment effectuée votre configuration ou bien importer une configuration fournie par un plugin. Soyez prudent avec cette fonctionnalité : <strong>les modifications, pertes éventuelles, sont irréversibles</strong>.', # NEW
 	'texte_nom' => 'Názov:',
 	'texte_plugins_manquants' => 'Ce fichier contient des configurations pour les plugins suivants qui ne sont pas activés sur votre site : <i>@plugins@</i>. Ces configurations ne seront donc pas importées.', # NEW
-	'texte_spip_contenu_export_explication' => 'Vous pouvez exporter la configuration des contenus du site que vous avez défini dans la <a href="./?exec=config_contenu">Configuration du site</a>.', # NEW
-	'texte_spip_contenu_import_explication' => 'Ce fichier contient des valeurs de configuration pour les contenus de votre site. Si vous l\'importez, les paramètres suivants seront modifiés :', # NEW
-	'texte_spip_interactivite_export_explication' => 'Vous pouvez exporter les paramètres définis sous l\'onglet <i><a href="./?exec=config_contenu">Interactivité</a></i> dans la Configuration du site.', # NEW
-	'texte_spip_interactivite_import_explication' => 'Ce fichier contient des valeurs pour l\'onglet <i>Interactivité</i> dans la configuration du site. Si vous l\'importez, les paramètres suivants seront modifiés :', # NEW
 	'titre_export' => 'Exportovať nastavenia',
 	'titre_ieconfig' => 'Nahrať/Exportovať nastavenia',
 	'titre_import' => 'Nahrať nastavenia'
