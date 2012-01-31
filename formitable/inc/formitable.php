@@ -33,4 +33,15 @@ function traitement_champ ($valeur, $table, $champ, $nom) {
 }; */
 
 
+/*
+ * Génère le nom du cookie qui sera utilisé par le plugin lors d'une réponse
+ * par un visiteur non-identifié.
+ *
+ * @param int $id_formulaire L'identifiant du formulaire
+ * @return string Retourne le nom du cookie
+ */
+function formitable_generer_nom_cookie($id_formulaire){
+	return $GLOBALS['cookie_prefix'].'cookie_formitable_'.$id_formulaire;
+}
+
 ?>
