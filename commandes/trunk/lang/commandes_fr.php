@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_maj_label' => 'Date de mise à jour :',
 	'date_paiement_label' => 'Date de paiement :',
 	'designation' => 'Désignation',
-	'details_commande' => "Détails de commande :",
+	'details_commande' => 'Détails de commande :',
 
 	// E
 	'etat' => 'État',
@@ -115,8 +115,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer' => 'Supprimer',
 
 	// U
-	'une_commande_sur' => 'Une commande sur @nom@',
 	'une_commande_de' => 'Une commande de : ',
+	'une_commande_sur' => 'Une commande sur @nom@',
 
 	// V
 	'votre_commande_sur' => '@nom@ : votre commande'
