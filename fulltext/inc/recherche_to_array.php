@@ -145,12 +145,12 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 				if (in_array($jtable, $lesliens))
 					$from .= "
 					LEFT JOIN spip_${jtable}s_liens as lien$i ON lien$i.id_objet=t.$_id_table AND lien$i.objet='${table}'
-					LEFT JOIN spip_${jtable}s as obj$i ON obj$i.$_id_join=lien$i.$_id_join
+					INNER JOIN spip_${jtable}s as obj$i ON obj$i.$_id_join=lien$i.$_id_join
 					";
 				else
 					$from .= "
 					LEFT JOIN spip_${jtable}s_${table}s as lien$i ON lien$i.$_id_table=t.$_id_table
-					LEFT JOIN spip_${table_join} AS obj$i ON lien$i.$_id_join=obj$i.$_id_join
+					INNER JOIN spip_${table_join} AS obj$i ON lien$i.$_id_join=obj$i.$_id_join
 					";
 			}
 		}
