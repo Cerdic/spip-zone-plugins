@@ -8,12 +8,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
-	'player_description' => 'Ce plugin permet la lecture et l\'affichage de sons ou de vidéos.
-Il ajoute des lecteurs flash adaptés aux formats .mp3.
-Il agit sur tous les <code><docXX|player></code> insérés dans les textes, aussi bien que dans les squelettes.
+	'player_description' => 'Tento zásuvný modul umožňuje prehrávanie a zobrazenie zvukov alebo videí.
+Pridáva údaje zo zariadení USB vo formáte .mp3.
+Funguje na všetkých <code><docXX|player></code> vložených v texte, ako aj v šablónach.
 
--* Dans un texte <code><docXX|player></code> affiche un lecteur flash audio (plusieurs lecteurs au choix);
--* Dans un squelette <code>#MODELE{playliste}</code> permet d\'afficher une playliste des derniers mp3', # NEW
+-* v texte <code><docXX|player></code> zobrazí údaje zo zariadení USB (môžete si vybrať z viacerých zariadení),
+-* v šablóne <code>#MODELE{playliste}</code> umožňuje zobraziť zoznam skladieb z posledných mp3',
 	'player_slogan' => 'Prehrávanie zvukov a videí'
 );
 
