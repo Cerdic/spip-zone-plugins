@@ -513,7 +513,7 @@ $GLOBALS['association_maj'][55177] = array(
 );
 
 /* Changer les champs FLOAT en DECIMAL */
-$GLOBALS['association_maj'][57429] = array(
+$GLOBALS['association_maj'][57896] = array(
 	array ('sql_alter', "TABLE spip_asso_categories CHANGE cotisation cotisation DECIMAL(19,4) NOT NULL"),
 	array ('sql_alter', "TABLE spip_asso_ventes CHANGE prix_vente prix_vente DECIMAL(19,4) NOT NULL"),
 	array ('sql_alter', "TABLE spip_asso_ventes CHANGE frais_envoi frais_envoi DECIMAL(19,4) NOT NULL"),
