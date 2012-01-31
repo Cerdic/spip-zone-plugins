@@ -1,0 +1,29 @@
+<plugin>
+	<nom>
+		Sisyphus
+	</nom>
+	<auteur>
+[->http://coding.smashingmagazine.com/2011/12/05/sisyphus-js-client-side-drafts-and-more/] mis en plugin par Fil
+	</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>Sauvegarde des formulaires de saisie</description>
+	<lien></lien>
+	<prefix>sisyphus</prefix>
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>sisyphus_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>jquery_plugins</nom>
+		<inclure>sisyphus_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
+		<inclure>sisyphus_pipelines.php</inclure>
+	</pipeline>
+
+	<categorie>outil</categorie>
+</plugin>
