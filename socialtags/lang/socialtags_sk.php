@@ -21,13 +21,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_badge_js_1' => ' (automaticky zaradené do <code>@code@</code>)',
 	'cfg_en_bas' => 'V spodnej časti každej stránky',
 	'cfg_exemples' => 'Exemples (sur les squelettes dist) :', # NEW
-	'cfg_explication_boite_info' => 'Ici vous pouvez choisir les sites de partages de vos articles.', # NEW
-	'cfg_inserer' => 'Insérer le bloc social-tags en-dessous du bloc suivant :', # NEW
+	'cfg_explication_boite_info' => 'Tu si môžete vybrať, s ktorými stránkami sa podelíte o svoje články.',
+	'cfg_inserer' => 'Vložiť blok tagov sociálnych sietí pod nasledujúci blok:',
 	'cfg_insertion' => 'Vloženie medzi stránky:',
 	'cfg_liste_site' => 'Zoznam sociálnych stránok',
 	'cfg_plusone' => 'Google plus one',
-	'cfg_plusone_existe' => 'Pour activer Google+1, installer le plugin (<a href="http://www.spip-contrib.net/Google-1" class="spip_out">aide sur spip-contrib</a>).', # NEW
-	'cfg_referer' => 'N\'afficher le badge et les boutons que pour les visiteurs originaires des sites concernés.', # NEW
+	'cfg_plusone_existe' => 'Na aktivovanie Google+1 inštalovať zásuvný modul (<a href="http://www.spip-contrib.net/Google-1" class="spip_out">pomoc pre spip-contrib.</a>)',
+	'cfg_referer' => 'Zobraziť len odznak a tlačidlá pre návštevníkov týchto stránok.',
 	'cfg_selector' => 'Sélecteur :', # NEW
 	'cfg_sous_bloc' => 'Pod blokom názvu stránok "článok"',
 	'cfg_sous_div' => 'S divom s názvom id=socialtags',
@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_tout_decocher' => 'Odznačiť všetko',
 
 	// D
-	'description_noisette_badge_facebook' => 'Affiche le badge Facebook défini dans la page de configuration', # NEW
+	'description_noisette_badge_facebook' => 'Zobrazí odznak Facebooku definovaný na stránke s nastaveniami',
 	'description_noisette_facebook_like' => 'Zobrazí tlačidlo <b>Páči sa mi to</b> alebo <b>Odporučiť,</b> prípadne <b>Poslať</b>',
 
 	// N
