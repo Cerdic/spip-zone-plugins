@@ -54,8 +54,8 @@
 [(#REM) Avoir les details ]
 [(#ENV{details}|et{#ENV{type}|=={abonnement}|non}|oui) 
     #INCLURE{fond=formulaires/inc-paypal-details,details=#ENV{details}}
-<input type="hidden" name="cmd" value="_cart"> 
-<input type="hidden" name="upload" value="1">
+<input type="hidden" name="cmd" value="_cart" /> 
+<input type="hidden" name="upload" value="1" />
 <input alt="<:paypal:info_bouton_paypal:>" name="submit" src="[(#ENV{bouton_paypal_acheter}|sinon{https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif})]" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
 ]
 
