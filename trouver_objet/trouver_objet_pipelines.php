@@ -42,11 +42,27 @@ function trouver_objet_inserer_js_recherche_objet(){
 EOS;
 }
 
+/*
+todo passer en jQuery UI Autocomplete 1.8.16 et etre compatible avec selecteur_generique
+en attendant, on utilise le vieux autocomplete 1.1 et on force son insertion
+*/
+function selecteurgenerique_verifier_js_trouverobjet($flux){
+	$contenu = "";
+    if(strpos($flux,'jquery.autocomplete.js')===FALSE){
+		$autocompleter = find_in_path('javascript/jquery.autocomplete.js');
+		$autocompletecss = find_in_path('iautocompleter.css');
+		$contenu .= "
+<script type='text/javascript' src='$autocompleter'></script>
+<link rel='stylesheet' href='$autocompletecss' type='text/css' media='all' />
+";
+	};
+	return $contenu;
+}
+
 function trouver_objet_inserer_javascript($flux){
 	//ne pas doublonner > verifie si grappe existe et lui laisse la priorite
 	if (defined('_DIR_PLUGIN_GRAPPES')) return $flux;
-	include_spip('selecteurgenerique_fonctions');
-	$flux .= selecteurgenerique_verifier_js($flux);
+	$flux .= selecteurgenerique_verifier_js_trouverobjet($flux);
 
 	$js = trouver_objet_inserer_js_recherche_objet();
 	$js = "<script type='text/javascript'><!--\n/*trouver_objet*/ \n$js\n // --></script>\n ";
