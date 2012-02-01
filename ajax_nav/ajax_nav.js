@@ -11,6 +11,14 @@ function AjaxNav() {
     onAjaxNavLoad		= $.Event("onAjaxNavLoad"),
     onAjaxNavLocalisedLoad	= $.Event("onAjaxNavLocalisedLoad");
 
+    if ((document.URL.match(/^https/)!==null) &&
+	(SITE_URL.match(/^http[^s]/)!==null)) {
+	SITE_URL = SITE_URL.replace(/^http/, 'https');
+    } else if ((document.URL.match(/^http[^s]/)!==null) &&
+	       (SITE_URL.match(/^https/)!==null)) {
+	SITE_URL = SITE_URL.replace(/^https/, 'http');
+    }
+
     // parse la partie dynamique d'une url et retourne un objet contenant les parametres spip.
     function urlToVariables(urlString) {
 	var tmpArray	= [],
