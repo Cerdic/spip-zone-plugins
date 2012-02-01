@@ -21,6 +21,10 @@ function formulaires_ajax_nav_config_charger_dist() {
 		   "localizedDivs"	=> "navigation",
 		   /* Active les urls hashbang pour les navigateurs html4 */
 		   "html4Fallback"	=> "",
+		   /* Utilise la lib modernizr fournie avec le plug */
+		   "useModernLib"	=> "on",
+		   /* Utilise la lib history.js fournie avec le plug */
+		   "useHistoryLib"	=> "on",		   
 		   );
   return $options;
 }
@@ -62,6 +66,8 @@ function formulaires_ajax_nav_config_traiter_dist() {
 	  'ajaxDivs'		=> _request('ajaxDivs'),
 	  'localizedDivs'	=> _request('localizedDivs'),
 	  'html4Fallback'	=> _request('html4Fallback'),
+	  'useModernLib'	=> _request('useModernLib'),
+	  'useHistoryLib'	=> _request('useHistoryLib'),
 	  );
 
   $options = array(

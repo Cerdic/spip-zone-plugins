@@ -18,10 +18,24 @@
     <strong><:ajax_nav:loc_divs_titre:></strong>
     [(#SAISIE{input, localizedDivs, defaut=#ENV{localizedDivs}, explication=<:ajax_nav:loc_divs_expli:>})]
 
-    <strong><:ajax_nav:html4:></strong>
-    <input id="champ_html4Fallback" class="checkbox" type="checkbox" name="html4Fallback"
-           label="cocher pour activer"[(#ENV{html4Fallback}|=={on}|?{ checked="checked",})] />
+    <li>
+      <strong><:ajax_nav:html4:></strong>
+      <input id="champ_html4Fallback" class="checkbox" type="checkbox" name="html4Fallback"
+             label="cocher pour activer"[(#ENV{html4Fallback}|=={on}|?{ checked="checked",})] />
+    </li>
 
+    <li>
+      <strong><:ajax_nav:use_modern_lib:></strong>
+      <input id="champ_useModernLib" class="checkbox" type="checkbox" name="useModernLib"
+             label="cocher pour activer"[(#ENV{useModernLib}|=={on}|?{ checked="checked",})] />
+    </li>
+
+    <li>
+      <strong><:ajax_nav:use_history_lib:></strong>
+      <input id="champ_useHistoryLib" class="checkbox" type="checkbox" name="useHistoryLib"
+             label="cocher pour activer"[(#ENV{useHistoryLib}|=={on}|?{ checked="checked",})] />
+    </li>
+    
       </ul>
       <p class="boutons"><input type="submit" value='<:bouton_enregistrer:>' /></p>
     </div>

@@ -19,14 +19,22 @@ function ajax_nav_insert_head($flux) {
   $historyLibFile = ($options['html4Fallback'] == 'on') ?
     'plugins/ajax_nav/lib/balupton-history.js/scripts/bundled/html4+html5/jquery.history.js' : '';
 
-  $flux .= "<script type='text/javascript' src='plugins/ajax_nav/lib/modernizr.js'></script>
-<script type='text/javascript'>
-Modernizr.load([
-    {
+  if ($options['useModernLib'] == "on") {
+    $flux .= "<script type='text/javascript' src='plugins/ajax_nav/lib/modernizr.js'></script>";
+  }
+
+  $flux .= "<script type='text/javascript'>
+Modernizr.load([";
+
+  if ($options['useHistoryLib'] == "on") {
+    $flux .= "    {
     	test : Modernizr.history,
         yep : ['plugins/ajax_nav/lib/balupton-history.js/scripts/bundled/html5/jquery.history.js'],
 	nope : ['" . $historyLibFile . "']
-    },
+    },";
+  }
+
+  $flux .= "
     {
 	test : Modernizr.history,
 	yep : ['plugins/ajax_nav/ajax_nav.js'],

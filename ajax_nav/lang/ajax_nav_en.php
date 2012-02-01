@@ -13,6 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'loc_divs_titre' => 'The ids of the elements to be reloaded only if the language changes :',
 'loc_divs_expli' => 'a list of space-separated ids, like : "menu navigation"',
 'html4' => 'Use hash urls with old browsers :',
+'use_modern_lib' => 'Use the provided Modernizr library : ',
+'use_history_lib' => 'Use the provided History.js library : ',
 );
 
 ?>

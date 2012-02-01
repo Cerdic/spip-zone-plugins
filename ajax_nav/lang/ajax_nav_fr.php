@@ -13,6 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'loc_divs_titre' => 'Les ids des div &agrave; recharger en cas de changement de langue :',
 'loc_divs_expli' => 'une liste d\'id separ&eacute;s par des espaces. p.ex: "menu navigation"',
 'html4' => 'Activer les urls hash pour les vieux navigateurs (exp&eacute;rimental) :',
+'use_modern_lib' => 'Utiliser la librairie Modernizr fournie avec le plugin : ',
+'use_history_lib' => 'Utiliser la libraire History.js fournie avec le plugin : ',
 );
 
 ?>
