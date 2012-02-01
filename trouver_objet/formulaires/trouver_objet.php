@@ -8,7 +8,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // chargement des valeurs par defaut des champs du formulaire
-function formulaires_trouver_objet_charger($objet, $source, $id_source, $identifiant,$paramselecteur='',$retour,$ancre){
+function formulaires_trouver_objet_charger($objet, $source, $id_source, $identifiant,$paramselecteur='',$retour='',$ancre=''){
  // on considere objet au singulier + s
 	return 
 		array(
