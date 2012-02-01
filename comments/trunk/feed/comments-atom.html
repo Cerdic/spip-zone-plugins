@@ -12,7 +12,7 @@
 <link rel="alternate" type="text/html" href="#URL_SITE_SPIP"></link>
 <//B_article>
 
-<BOUCLE_comments(FORUMS) {statut IN publie} {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat} {!par date}>
+<BOUCLE_comments(FORUMS) {statut IN publie} {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat} {!par date}{0,#ENV{nb,100}}>
     <item>
         <entry>
             [<title>(#TITRE|texte_backend)</title>]
