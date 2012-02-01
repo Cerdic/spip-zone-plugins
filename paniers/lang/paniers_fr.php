@@ -58,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_panier' => 'Panier',
 	
 	// V
+	'vider_le_panier' => 'Vider le panier',
 	'voir_mon_panier' => 'Voir mon panier',
 );
 
