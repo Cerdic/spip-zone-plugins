@@ -36,6 +36,9 @@ function openid_login_form($texte,$contexte){
 	else
 		$message = _T('openid:form_login_openid');
 
+	// pas de required sur password
+	$texte = preg_replace(",(<input[^>]*id='password'[^>]*)required='required'([^>]*/>),Uims","$1$2",$texte);
+
 	$texte .= "<style type='text/css'><!--"
 	."input#var_login {width:10em;background-image : url(".find_in_path('images/openid-16.png').");background-repeat:no-repeat;background-position:center left;padding-left:18px !important;}\n"
 	."input#password {width:10em;padding-right:18px;}\n"
