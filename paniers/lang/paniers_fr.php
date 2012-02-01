@@ -13,7 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// D
 	'description_noisette' => 'Affiche le mini-panier (Nombre d\'articles et prix total)',
-
+	'dont_total_taxe' => 'Dont total des taxes',
+	
 	// L
 	'limite_enregistres_label' => 'Visiteurs enregistrés',
 	'limite_ephemere_label' => 'Visiteurs non enregistrés',

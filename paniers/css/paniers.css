@@ -28,3 +28,7 @@
 .formulaire_panier .total_ttc td{
 	padding:1em 0.5em;
 }
+.formulaire_panier .taxes td{
+	padding:1em 0.5em;
+	border-top:1px solid #ddd;
+}
