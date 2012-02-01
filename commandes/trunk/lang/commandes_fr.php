@@ -94,6 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'parametres_cfg_titre' => 'Paramètres',
 	'parametres_duree_vie_explication' => 'Saisir la durée de vie (en heures) d’une commande avec le statut en cours',
 	'parametres_duree_vie_label' => 'Durée de vie',
+	'passer_la_commande' => 'Passer la commande',
 
 	// R
 	'recapitulatif' => 'Récapitulatif de commande :',
