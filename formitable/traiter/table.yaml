@@ -1,44 +1,41 @@
 
-titre: 'Table utilisateur'
-description: 'La sauvegarde est faite dans une table utilisateur'
+titre: 'Enregistrement dans une table utilisateur'
+description: 'La sauvegarde est faite dans une table utilisateur, sans se référer à la table de réponse gérée par formidable'
 options:
   -
     saisie: 'input'
     options:
       nom: 'table_destinataire'
-      label: 'table destinataire'
+      label: 'Table destinataire'
       explication: 'Indiquez le nom de la table destinataire des enregistrements'
   -
     saisie: 'textarea'
     options:
       nom: 'correspondance_champs_formulaire_table'
-      label: 'correspondances du formulaire vers la table'
-      explication : 'Indiquez pour chaque champ du formulaire, le nom du champ de la table utilisateur'
+      label: 'Correspondances du formulaire vers la table'
+      explication: 'Indiquez pour chaque champ du formulaire, le nom du champ de la table utilisateur'
       defaut: 'input_1|titre...'
+      rows: 6
   -
-    saisie: 'oui_non'
+    saisie: 'input'
     options:
-      nom: 'multiple'
-      label: '<:formidable:traiter_enregistrement_option_multiple_label:>'
-      explication: '<:formidable:traiter_enregistrement_option_multiple_explication:>'
-      defaut: 'on'
+      nom: 'champ_primary'
+      label: 'Nom de la clé primaire de votre table'
+      explication: 'Indiquez le nom du champ contenant les id_auteurs dand la table destinataire des enregistrements'
   -
-    saisie: 'oui_non'
+    saisie: 'input'
     options:
-      nom: 'modifiable'
-      label: '<:formidable:traiter_enregistrement_option_modifiable_label:>'
-      explication: '<:formidable:traiter_enregistrement_option_modifiable_explication:>'
-      defaut: ''
+      nom: 'champ_id_auteur'
+      label: 'Champ id_auteur de votre table'
+      explication: 'Indiquez le nom du champ contenant les id_auteurs dand la table destinataire des enregistrements'
+      defaut: 'id_auteur'
   -
-    saisie: 'radio'
+    saisie: 'input'
     options:
-      nom: 'identification'
-      label: '<:formidable:traiter_enregistrement_option_identification_label:>'
-      explication: '<:formidable:traiter_enregistrement_option_identification_explication:>'
-      datas:
-        cookie: '<:formidable:identification_par_cookie:>'
-        id_auteur: '<:formidable:identification_par_id_auteur:>'
-      defaut: 'cookie'
+      nom: 'champ_statut'
+      label: 'Champ statut'
+      explication: 'Indiquez le nom du champ qui contient le statut de chaque enregistrement sil existe. Videz sinon.'
+      defaut: 'statut'
   -
     saisie: 'radio'
     options:
@@ -48,3 +45,10 @@ options:
         posteriori: '<:bouton_radio_modere_posteriori:>'
         priori: '<:bouton_radio_modere_priori:>'
       defaut: 'posteriori'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'multiple'
+      label: '<:formidable:traiter_enregistrement_option_multiple_label:>'
+      explication: '<:formidable:traiter_enregistrement_option_multiple_explication:>'
+      defaut: 'on'
