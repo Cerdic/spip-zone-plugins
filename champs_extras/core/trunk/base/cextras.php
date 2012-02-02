@@ -15,6 +15,13 @@ function cextras_declarer_tables_objets_sql($tables){
 	// recuperer les champs crees par les plugins
 	// array($table => array(Liste de saisies))
 	include_spip('inc/saisies');
+	
+	// si saisies a ete supprime par ftp, on sort tranquilou sans tuer SPIP.
+	// champs extras sera ensuite desactive par admin plugins.
+	if (!function_exists('saisies_lister_avec_sql')) {
+		return $tables;
+	}
+	
 	$saisies_tables = pipeline('declarer_champs_extras', array());
 	foreach ($saisies_tables as $table => $saisies) {
 		if (isset($tables[$table])) {
@@ -57,14 +64,20 @@ function cextras_declarer_tables_objets_sql($tables){
 function cextras_declarer_tables_interfaces($interface){
 
 	include_spip('inc/cextras');
-	
+	include_spip('inc/saisies');
+
+	// si saisies a ete supprime par ftp, on sort tranquilou sans tuer SPIP.
+	// champs extras sera ensuite desactive par admin plugins.
+	if (!function_exists('saisies_lister_avec_sql')) {
+		return $tables;
+	}
+
 	// recuperer les champs crees par les plugins
 	$saisies_tables = pipeline('declarer_champs_extras', array());
 	if (!$saisies_tables) {
 		return $interface;
 	}
-	
-	include_spip('inc/saisies');
+
 	foreach ($saisies_tables as $table=>$saisies) {
 		$saisies = saisies_lister_avec_sql($saisies);
 		$saisies = saisies_lister_avec_traitements($saisies);
