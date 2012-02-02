@@ -1,38 +1,55 @@
 <?php
+// Auteur : JLuc
+//
+// inc/formitable.php
+// - fonctions de traitement des champs
+// - petites fonctions utilitaires
 
+//==============================
+// Fonctions de traitements des champs
 
-// convertir le format des dates issu de formidable � un format SQL de type DATE
+// convertir le format des dates issu de formidable à un format SQL de type DATE
+// si la date est un tableau, c'est dans l'ordre jour mois an (31, 01, 2012)
 function traitement_date_fr_vers_sql ($date) {
-	sscanf ($date, "%2d/%2d/%4d%s",$jour,$mois,$an,$s);
-	return "$an-$mois-$jour";
+    spip_log ("traitement_date_fr_vers_sql de ".print_r($date,true),"formitable");
+    if (is_array($date)) {
+        return $date[2]."-".$date[1]."-".$date[0];
+    }
+    $jour=$mois=$an="";
+    if (sscanf ($date, "%2d/%2d/%4d", $jour, $mois, $an))
+	    return "$an-$mois-$jour";
 };
 
-// Exemples :
-// - $valeur : valeur renvoy�e par la saisie
-// - $table : table SQL utilisateur destinatrice des donn�es
-// - $champ : champ de la table SQL
-// - $nom : id de l'input dans le formulaire g�n�r� par spip
-//
 // function traitement_champ_bateau_couleur ($valeur, $table, $champ, $nom)
 // function traitement_champ_date_debut ($valeur, $table, $champ, $nom)
 // function traitement_champ_evenement_date_debut ($valeur, $table, $champ, $nom)
 // function traitement_champ ($valeur, $table, $nom)
+//
+// - $valeur : valeur renvoyee par la saisie. string ou array.
+// - $table : table SQL utilisateur destinatrice des données
+// - $champ : champ de la table SQL
+// - $nom : id de l'input dans le formulaire généré par spip
 
-function traitement_champ_naissance ($valeur, $table, $champ, $nom) {
-	return traitement_date_fr_vers_sql($valeur);
-};
+/* exemples d'usage :
+    function traitement_champ_naissance ($valeur, $table, $champ, $nom) {
+    	return traitement_date_fr_vers_sql($valeur);
+    };
 
-/* exemple d'usage :
+    function traitement_champ_lestrois ($valeur, $table, $champ, $nom) {
+    	return traitement_date_fr_vers_sql($valeur);
+    };
+
+// pour que toutes les saisies DATES soient stockées dans un format un champt de type DATE
 function traitement_champ ($valeur, $table, $champ, $nom) {
-	// Toutes les saisies DATES sont stock�es dans un format un champt de type DATE
 	if (strpos($nom,'date')===0) {
 		$valeur = traitement_date_fr_vers_sql($valeur);
-//		echo "<br>Re�u date fr et convertit vers SQL = $valeur";
+//		spip_log ("Reçu date fr et convertit vers SQL = $valeur","formitable");
 	};
 	return $valeur;
 }; */
 
-
+//==============================
+// Autres utilités
 /*
  * Génère le nom du cookie qui sera utilisé par le plugin lors d'une réponse
  * par un visiteur non-identifié.

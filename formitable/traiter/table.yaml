@@ -29,13 +29,7 @@ options:
       label: 'Champ id_auteur de votre table'
       explication: 'Indiquez le nom du champ contenant les id_auteurs dand la table destinataire des enregistrements'
       defaut: 'id_auteur'
-  -
-    saisie: 'input'
-    options:
-      nom: 'champ_statut'
-      label: 'Champ statut'
-      explication: 'Indiquez le nom du champ qui contient le statut de chaque enregistrement sil existe. Videz sinon.'
-      defaut: 'statut'
+      afficher_si: '@champ_cle_primaire@'
   -
     saisie: 'radio'
     options:
@@ -45,6 +39,14 @@ options:
         posteriori: '<:bouton_radio_modere_posteriori:>'
         priori: '<:bouton_radio_modere_priori:>'
       defaut: 'posteriori'
+  -
+    saisie: 'input'
+    options:
+      nom: 'champ_statut'
+      label: 'Champ statut'
+      explication: 'Indiquez le nom du champ qui contient le statut de chaque enregistrement sil existe. Videz sinon.'
+      defaut: 'statut'
+      afficher_si: '@moderation@ == "priori"'
   -
     saisie: 'oui_non'
     options:
