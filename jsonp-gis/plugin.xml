@@ -16,7 +16,7 @@
 		[en]Plugin jsonp that allows SPIP to generate a Jsonp file that contains data about the articles published
 		</multi>
   	</description>
-	<icon>images/jsonp-128.png</icon>
+	<icon>images/jsonpgis-128.png</icon>
 	<lien>http://imasde.pumpun.com/plugin-jsonp-gis/</lien>
 	<prefix>jsonpgis</prefix>
 	<categorie>edition</categorie>
