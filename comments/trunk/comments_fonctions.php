@@ -101,7 +101,7 @@ jQuery('#formulaire_forum .reponse_formulaire').detach().appendTo(jQuery('#forum
 jQuery('#forum$id_forum').parent().positionner();
 //window.location.hash='forum$id_forum';
 }
-jQuery(function(){jQuery('.comments').ajaxReload({callback:move_comment$id_forum})});</script>";
+jQuery(function(){jQuery('.comments-posts').ajaxReload({callback:move_comment$id_forum})});</script>";
 
 			}
 		}
