@@ -1,9 +1,11 @@
 <plugin>
 	<nom>Jsonp Gis</nom>
 	<slogan>
+		<multi>
 		[fr]G&#233;n&#233;rer un fichier Jsonp contenant les articles publi&#233;s
 		[en]Generate a Jsonp file containing geolocated articles
 		[gl]Xera un arquivo Jsonp que cont&#233;n artigos xeolocalizados
+		</multi>
 	</slogan>
 	<auteur>Berio Molina (pumpun.com)</auteur>
 	<version>0.1.0</version>
