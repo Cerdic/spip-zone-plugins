@@ -19,7 +19,7 @@ options:
   -
     saisie: 'input'
     options:
-      nom: 'champ_primary'
+      nom: 'champ_cle_primaire'
       label: 'Nom de la clé primaire de votre table'
       explication: 'Indiquez le nom du champ contenant les id_auteurs dand la table destinataire des enregistrements'
   -
