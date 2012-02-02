@@ -16,7 +16,7 @@ Ce plugin facilite compl&#232;tement l&#8217;utilisation de ces polices, et pren
 	<prefix>webfonts</prefix>
 	<lien>http://www.spip-contrib.net/Webfonts</lien>
 	<categorie>outil</categorie>
-	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
+	<necessite id="SPIP" version="[2.0.10;3.0.99]" />
 	<pipeline>
 		<nom>insert_head_css</nom>
 		<inclure>webfonts_pipeline.php</inclure>
