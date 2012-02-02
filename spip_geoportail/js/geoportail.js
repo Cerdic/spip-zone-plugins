@@ -1151,7 +1151,128 @@ jQuery.geoportail =
 				if (c[i].id != id_map[j]) c[i].synchro[id_map[j]] = c[j];
 		}
 //		registerMouseMove();
+	},
+	
+	/** Gestion de l'affichage plein ecran / adapte la carte a la dimention de la fenetre
+		@param map : la carte a mettre en plein ecran
+		@param divHeight : tableau des division a soustraire en hauteur (ex : ["#entete","#pied"])
+		@param divWidth : tableau des division a soustraire en largeur (panneaux latteraux)
+		@param callback : function callback(map,w,h) : a appeler en fin de redimentionnement (si d'autres choses a faire)
+		
+		Attention : 
+		- il faut s'assurer que les div qui contiennent la map sont correctements parametrees (width et height = auto).
+		- il faut s'assurer que les hauteurs / largeur des div pour le calcul (argument 2 et 3) sont correctement 
+		  parametree dans le css (hauteur et largeur fixes de preference)
+		
+		Exemple d'utilisation :
+		1- jQuery.geoportail.fullscreen (map0, ["#entete","#pied"]);	// Initialisation de la carte a afficher
+		2- jQuery.geoportail.fullscreen ();			// Actualiser la dimention de la carte
+		3- jQuery.geoportail.fullscreen (true);		// Masque les divHeigth et divWidth
+		4- jQuery.geoportail.fullscreen (false);	// Affiche les divHeight et divWidth
+		5- jQuery.geoportail.fullscreen ("toggle");	// Affiche/masque les divHeight et divWidth
+		6- jQuery.geoportail.fullscreen ("no");		// Desactive l'affichage plein ecran (a appeler avant tout appel)
+	*/
+	fullscreen: function(map, divHeight, divWidth, callback)
+	{	// Demande de reactualisation
+		if (jQuery.geoportail.isFullscreen) 
+		{	var i;
+			if (map===true) 
+			{	for (i=0; i<jQuery.geoportail.fsHeight.length; i++) jQuery(jQuery.geoportail.fsHeight[i]).slideUp(400);
+				for (i=0; i<jQuery.geoportail.fsWidth.length; i++) jQuery(jQuery.geoportail.fsWidth[i]).hide();
+				setTimeout (resizeMap,500);
+			}
+			else if (map===false)
+			{	for (i=0; i<jQuery.geoportail.fsHeight.length; i++) jQuery(jQuery.geoportail.fsHeight[i]).slideDown(400);
+				for (i=0; i<jQuery.geoportail.fsWidth.length; i++) jQuery(jQuery.geoportail.fsWidth[i]).show();
+				setTimeout (resizeMap,500);
+			}
+			else if (map=="toggle") 
+			{	if (jQuery.geoportail.isFullscreen && jQuery.geoportail.fsHeight.length > 0) 
+					jQuery.geoportail.fullscreen(jQuery(jQuery.geoportail.fsHeight[0]).css('display')!='none');
+			}
+			else resizeMap();
+			return;
+		}
+			
+		if (!map || typeof(map)!="object" || !map.map) 
+		{	// Demande de blocage
+			if (map == "no") jQuery.geoportail.isFullscreen = true;
+			return;
+		}
+		
+		// Definition de la carte a mettre en plein ecran
+		jQuery.geoportail.isFullscreen = true;
+		jQuery.geoportail.fsCompteur = 0;
+		jQuery.geoportail.fsHeight =(divHeight && divHeight.length) ? divHeight : new Array();
+		jQuery.geoportail.fsWidth = (divWidth && divWidth.length) ? divWidth : new Array();
+		jQuery.geoportail.fsMap = map;
+		
+		function delayResizeMap()
+		{	if ((--jQuery.geoportail.fsCompteur) > 0) return;
+			if (!jQuery.geoportail.fsMap) return;
+			var i;
+			jQuery.geoportail.fsCompteur = 0;
+			// Calcul hauteur et largeur
+			var de = document.documentElement;
+			var w = window.innerWidth || self.innerWidth || (de&&de.clientWidth) || document.body.clientWidth;
+			var h = window.innerHeight || self.innerHeight || (de&&de.clientHeight) || document.body.clientHeight
+			var h2 = h;
+			for (i=0; i<jQuery.geoportail.fsHeight.length; i++)
+			{	h2 -= jQuery(jQuery.geoportail.fsHeight[i]).css('display')=='none' ? 0 : jQuery(jQuery.geoportail.fsHeight[i]).outerHeight(true);
+			}
+			var w2 = w;
+			for (i=0; i<jQuery.geoportail.fsWidth.length; i++)
+			{	w2 -= jQuery(jQuery.geoportail.fsWidth[i]).css('display')=='none' ? 0 : jQuery(jQuery.geoportail.fsWidth[i]).outerWidth(true);
+			}
+			
+			jQuery.geoportail.fsMap.setSize(Math.round(w2),Math.round(h2));
+			if (typeof (callback) == 'function') callback(map,h2,w2);
+			// Forcer le refraichissement
+			setTimeout("jQuery.geoportail.fsMap.getMap().setCenter(jQuery.geoportail.fsMap.getMap().getCenter())",500);
+		}
+		function resizeMap()
+		{	jQuery.geoportail.fsCompteur++;
+			setTimeout (delayResizeMap,200);
+		}
+		// Bug IE ??? <<
+		/*
+		for (i=0; i<jQuery.geoportail.fsHeight.length; i++)
+			$(jQuery.geoportail.fsHeight[i]).css("margin",0).css("border","0px").css("padding",0);
+		for (i=0; i<jQuery.geoportail.fsWidth.length; i++)
+			$(jQuery.geoportail.fsWidth[i]).css("margin",0).css("border","0px").css("padding",0);
+		*/
+		// >>
+		if (map) 
+		{	// Au cas ou ce n'est pas fait dans le css...
+			jQuery("body").css("width","100%").css("overflow","hidden");
+			jQuery("#page").css("width","100%");
+			jQuery("#"+map.div.id).parent().css("width","auto").css("height","auto");
+			jQuery("#"+map.div.id).parent().parent().css("width","auto").css("height","auto");
+			// Lancer la mise a jour
+			resizeMap();
+			if (map) jQuery(window).bind('resize', resizeMap);
+		}
 	}
+}
+
+// Pour ancien jQuery (SPIP 1.9.x), definition des fonctions
+if (!$.fn.outerHeight)
+{	jQuery.fn.extend ({
+		outerHeight:function(b) 
+		{	var totalHeight = this.height();
+			totalHeight += parseInt(this.css("padding-top")) + parseInt(this.css("padding-bottom"));			//Total Padding Height
+			totalHeight += parseInt(this.css("borderTopWidth")) + parseInt(this.css("borderBottomWidth"));		//Total Border Height
+			if (b) totalHeight += parseInt(this.css("margin-top")) + parseInt(this.css("margin-bottom"));		//Total Margin Height
+			return totalHeight;
+		},
+		outerWidth:function(b) 
+		{	var totalWidth = this.width();
+			totalWidth += parseInt(this.css("padding-left")) + parseInt(this.css("padding-right"));				//Total Padding Width
+			totalWidth += parseInt(this.css("borderLeftWidth")) + parseInt(this.css("borderRightWidth"));		//Total Border Width
+			if (b) totalWidth += parseInt(this.css("margin-left")) + parseInt(this.css("margin-right"));		//Total Margin Width
+			return totalWidth;
+		}
+	});
 }
 
 /** Fonction de gestion de la synchronisation */
