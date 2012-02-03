@@ -43,22 +43,24 @@ function exec_dons() {
 		}
 		$query = sql_select("DATE_FORMAT(date_don, '%Y')  AS annee", 'spip_asso_dons', '', 'annee', 'annee');
 		while ($data = sql_fetch($query)) {
-		 	if ($data['annee']==$annee)
-			{echo "\n<strong>".$data['annee'].'</strong>';}
-			else {echo ' <a href="'. generer_url_ecrire('dons', '&annee='.$data['annee']) .'">'.$data['annee']."</a>\n";}
+		 	if ($data['annee']==$annee) {
+				echo "\n<strong>".$data['annee'].'</strong>';
+			} else {
+				echo ' <a href="'. generer_url_ecrire('dons', '&annee='.$data['annee']) .'">'.$data['annee']."</a>\n";
+			}
 		}
 		echo '</td></tr>';
 		echo '</table>';
 		//TABLEAU
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo "<tr style='background-color: #DBE1C5;'>\n";
-		echo '<th>' . _T('asso:id') .'</th>';
-		echo '<th>' . _T('asso:date') .'</th>';
-		echo '<th>' . _T('asso:nom') .'</th>';
-		echo '<th style="text-align:right;">' . _T('asso:argent') .'</th>';
-		echo '<th>' . _T('asso:colis') .'</th>';
-		echo '<th style="text-align:right;">' . _T('asso:valeur') .'</th>';
-		echo '<th>' . _T('asso:contrepartie') .'</th>';
+		echo '<th>'. _T('asso:entete_id') .'</th>';
+		echo '<th>'. _T('asso:entete_date') .'</th>';
+		echo '<th>'. _T('asso:entete_nom') .'</th>';
+		echo '<th>'. _T('asso:argent') .'</th>';
+		echo '<th>'. _T('asso:colis') .'</th>';
+		echo '<th>'. _T('asso:valeur') .'</th>';
+		echo '<th>'. _T('asso:contrepartie') .'</th>';
 		echo '<th colspan="2">' . _T('asso:action') .'</th>';
 		echo '</tr>';
 		$association_imputation = charger_fonction('association_imputation', 'inc');
@@ -70,20 +72,21 @@ function exec_dons() {
 			$id_don = $data['id_don'];
 			echo "<tr id='don$id_don' style='background-color: #EEEEEE;'>";
 			echo "<td class='arial11 border1'>$id_don</td>\n";
-			echo '<td class="arial11 border1">'. association_datefr($data['date_don']) .'</td>';
-			echo '<td class="arial11 border1">'. propre($data['bienfaiteur']) .'</td>';
-			echo '<td class="arial11 border1" style="text-align:right;">'. association_flottant($data['argent']) .'&nbsp;&euro;</td>';
-			echo '<td class="arial11 border1">'.$data['colis'].'</td>';
-			echo ($data['vu'] ?
-				("<td class='$class' colspan='2' style='border-top: 1px solid #CCCCCC;'>&nbsp;</td>\n")
-			      : ('<td class="arial11 border1" style="text-align:right;">'.association_flottant($data['valeur']).'&nbsp;&euro;</td>'
-				 . '<td class="arial11 border1">'. propre($data['contrepartie']) .'</td>'));
-			echo '<td  class="arial11 border1" style="text-align:center;">'. association_bouton(_T('asso:supprimer_le_don'), 'poubelle-12.gif', 'action_dons', "id=$id_don") .'</td>';
-			echo '<td class="arial11 border1" style="text-align:center;">' . association_bouton(_T('asso:mettre_a_jour_le_don'), 'edit-12.gif', 'edit_don', "id=$id_don") .'</td>';;
+			echo '<td class="date">'. association_datefr($data['date_don']) .'</td>';
+			echo '<td class="text">'. association_calculer_lien_nomid($data['bienfaiteur'],$data['id_adherent']) .'</td>';
+			echo '<td class="decimal">'. association_prixfr($data['argent']) .'</td>';
+			echo '<td class="text">'.$data['colis'].'</td>';
+			echo ($data['vu']
+				? ('<td class="text" colspan="2">'.&nbsp;.'</td>')
+			    : ('<td class="decimal">'.association_prixfr($data['valeur']).'</td>'
+				 . '<td class="text">'. propre($data['contrepartie']) .'</td>')
+				);
+			echo '<td  class="actions">'. association_bouton('supprimer_le_don', 'poubelle-12.gif', 'action_dons', "id=$id_don") .'</td>';
+			echo '<td class="actions">' . association_bouton('mettre_a_jour_le_don', 'edit-12.gif', 'edit_don', "id=$id_don") .'</td>';;
 			echo '</tr>';
 		}
 		echo '</table>';
-		fin_cadre_relief();
+		echo fin_cadre_relief();
 		echo fin_page_association();
 	}
 }

@@ -16,16 +16,13 @@ if (!defined('_ECRIRE_INC_VERSION'))
 include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
 
-function exec_plan(){
-
+function exec_plan()
+{
 	include_spip('inc/autoriser');
 	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$url_plan = generer_url_ecrire('plan');
-		$url_edit_plan=generer_url_ecrire('edit_plan');
-		$url_action_plan=generer_url_ecrire('action_plan');
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:plan_comptable')) ;
 		association_onglets();
@@ -34,8 +31,8 @@ function exec_plan(){
 		echo propre(_T('asso:plan_info'));
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
-		$res = association_icone(_T('asso:plan_nav_ajouter'), $url_edit_plan, 'EuroOff.gif', 'creer.gif');
-		$res.= association_icone(_T('asso:bouton_retour'), generer_url_ecrire('association'), 'retour-24.png');echo bloc_des_raccourcis($res);
+		$res = association_icone(_T('asso:plan_nav_ajouter'), generer_url_ecrire('edit_plan'), 'EuroOff.gif', 'creer.gif');
+		$res .= association_icone(_T('asso:bouton_retour'), generer_url_ecrire('association'), 'retour-24.png');echo bloc_des_raccourcis($res);
 		echo debut_droite('',true);
 		debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION_ICONES.'EuroOff.gif', false, '',  '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . _T('asso:plan_comptable'));
 		$classe = _request('classe');
@@ -52,18 +49,18 @@ function exec_plan(){
 			if ($data['classe']==$classe) {
 				echo ' <strong>'.$data['classe'].' </strong>';
 			} else {
-				echo '<a href="'.$url_plan.'&classe='.$data['classe'].'">'.$data['classe'].'</a> ';
+				echo '<a href="'.generer_url_ecrire('plan', 'classe='.$data['classe']).'">'.$data['classe'].'</a> ';
 			}
 		}
 		if ($classe=='%') {
 			echo ' <strong>'._T('asso:plan_entete_tous').'</strong>';
 		} else {
-			echo ' <a href="'.$url_plan.'">'._T('asso:plan_entete_tous').'</a>';
+			echo ' <a href="'.generer_url_ecrire('plan').'">'._T('asso:plan_entete_tous').'</a>';
 		}
 		echo '</td>';
 		echo '<td style="text-align:right;">';
 		//Filtre active
-		echo '<form method="post" action="'.$url_plan.'"><div>';
+		echo '<form method="post" action="'.generer_url_ecrire('plan').'"><div>';
 		echo '<input type="hidden" name="classe" value="'.$classe.'" />';
 		echo '<select name ="active" class="fondl" onchange="form.submit()">';
 		echo '<option value="1" ';
@@ -81,40 +78,41 @@ function exec_plan(){
 		echo '</td>';
 		echo '</tr></table>';
 		//Affichage de la table
-		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-		echo "<tr style='background-color: #DBE1C5;'>\n";
-		echo '<th>' . _T('asso:classe') .'</th>';
-		echo '<th>' . _T('asso:code') .'</th>';
-		echo '<th>' . _T('asso:intitule') .'</th>';
-		echo '<th style="text-align:right;">' . _T('asso:solde_initial') . '</th>';
-		echo '<th>' . _T('asso:date') .'</th>';
-		echo '<th colspan="2" style="text-align:center;">' . _T('asso:action') .'</th>';
-		echo'  </tr>';
+		echo "<table width='100%' class='asso_tablo' id='asso_tablo_plan'>\n";
+		echo "<thead>\n<tr>";
+		echo '<th>'. _T('asso:classe') .'</th>';
+		echo '<th>'. _T('asso:code') .'</th>';
+		echo '<th>'. _T('asso:intitule') .'</th>';
+		echo '<th>'. _T('asso:solde_initial') .'</th>';
+		echo '<th>'. _T('asso:date') .'</th>';
+		echo '<th colspan="2">' . _T('asso:action') .'</th>';
+		echo "</tr>\n</thead><tbody>";
 		$query = sql_select('*', 'spip_asso_plan', 'classe LIKE '. sql_quote($classe) .' AND active=' . sql_quote($active), '', 'classe, code' );
-		$classe = ''; $i = 0;
+		$classe = '';
+		$i = 0;
         while ($data = sql_fetch($query)) {
-			echo '<tr style="background-color: #EEEEEE;">';
+			echo '<tr>';
 			if ($classe!=$data['classe']) {
 				if ($i!=0) {
-					echo '<td colspan="8"><hr style="color: #EEE;" /></td>';
-					echo '<tr style="background-color: #EEEEEE;">';
+					echo '<td colspan="8" style="border:0;"><hr style="color: #EEE;" /></td>';
+					echo '<tr>';
 				} else {
 					$i++;
 				}
 				$classe = $data['classe'];
-				echo '<td class="arial11 border1" style="text-align:center;">' . $data['classe'] . '</td>';
+				echo '<td class="actions">'. $data['classe'] .'</td>';
 			} else {
-				echo '<td class="arial11 border1"> </td>';
+				echo '<td> </td>';
 			}
-			echo '<td class="arial11 border1">'.$data['code'].'</td>';
-			echo '<td class="arial11 border1">'.$data['intitule'].'</td>';
-			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($data['solde_anterieur'], 2, ',', ' ').' &euro;</td>';
-			echo '<td class="arial11 border1">'.association_datefr($data['date_anterieure']).'</td>';
-			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_action_plan.'&id='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer"></a></td>';
-			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_edit_plan.'&id_plan='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Modifier"></a></td>';
-			echo'  </tr>';
+			echo '<td class="text">'.$data['code'].'</td>';
+			echo '<td class="text">'.$data['intitule'].'</td>';
+			echo '<td class="decimal">'. association_prixfr($data['solde_anterieur']).'</td>';
+			echo '<td class="date">'.association_datefr($data['date_anterieure']).'</td>';
+			echo '<td class="actions"><a href="'.generer_url_ecrire('action_plan','id='.$data['id_plan']).'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer"></a></td>';
+			echo '<td class="actions"><a href="'.generer_url_ecrire('edit_plan','id_plan='.$data['id_plan']).'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Modifier"></a></td>';
+			echo "</tr>\n";
 		}
-		echo'</table>';
+		echo "</tbody>\n</table>\n";
 		fin_cadre_relief();
 		echo fin_page_association();
 	}

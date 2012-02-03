@@ -26,24 +26,24 @@ $GLOBALS['association_styles_des_statuts'] = array(
 
 define('_DIR_PLUGIN_ASSOCIATION_ICONES', _DIR_PLUGIN_ASSOCIATION.'img_pack/');
 
+// gros lien=bouton+texte de raccourci dans la colonne gauche/droite
 function association_icone($texte, $lien, $image, $sup='rien.gif')
 {
 	return icone_horizontale($texte, $lien, _DIR_PLUGIN_ASSOCIATION_ICONES. $image, $sup, false);
 }
 
-function association_bouton($texte, $image, $script, $args='', $img_attributes='')
+// boutons d'action (si page de script indiquee) dans les listing
+function association_bouton($texte, $image, $script='', $args='', $img_attributes='')
 {
-	return '<a href="'
-	. generer_url_ecrire($script, $args)
-	. '"><img src="'
-	. _DIR_PLUGIN_ASSOCIATION_ICONES. $image
-	. '" alt=" " title="'
-	. $texte
-	. '" '
-	. $img_attributes
-	.' /></a>';
+	$res = ($script ? '<a href="'.generer_url_ecrire($script, $args).'">' : '' );
+	$res .= '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.$image.'" alt="';
+	$res .= ($texte ? _T('asso:'.$texte).'" title="'._T('asso:'.$texte) : ' ' );
+	$res .= '" '.$img_attributes.' />';
+	$res .= ($script?'</a>':'');
+	return $res;
 }
 
+// bloc de raccourci constitue uniquement du bouton retour
 function association_retour($adresse_retour='')
 {
 	return bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  ($adresse_retour=='')?str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']):$adresse_retour, 'retour-24.png'));
@@ -65,7 +65,7 @@ function request_statut_interne()
 }
 
 function association_ajouterBoutons($boutons_admin) {
-		// si on est admin
+	// si on est admin
 	if ($GLOBALS['connect_statut']=='0minirezo' && $GLOBALS['connect_toutes_rubriques']) {
 		$menu = 'naviguer';
 		$icone = 'annonce.gif';
@@ -77,28 +77,34 @@ function association_ajouterBoutons($boutons_admin) {
 			_DIR_PLUGIN_ASSOCIATION_ICONES.$icone,  // icone
 			_T('asso:titre_menu_gestion_association') //titre
 			);
-
 	}
 	return $boutons_admin;
 }
 
+// recupere dans une chaine un champ d'une table spip_asso_XX pour un enregistrement identifie par son id_XX
+function sql_asso1champ($table, $id, $champ) {
+	$data = sql_fetsel($champ, "spip_asso_$table", "id_$table"=intval($id));
+	return $data[$champ];
+}
+
+// recupere dans un tableau associatif un enregistrement d'une table spip_asso_XX identifie par son id_XX
+function sql_asso1ligne($table, $id) {
+	$data = sql_fetsel('*', "spip_asso_$table", "id_$table"=intval($id));
+	return $data;
+}
 
 # ensemble de fonctions pour recuperer les donnees de l'exercice en cours
-// TODO ---> POO !!!
 function exercice_intitule($exercice) {
-	$data = sql_fetsel('intitule', 'spip_asso_exercices','id_exercice='.$exercice);
-	return $data['intitule'];
+	return sql_asso1champ('exercice', &exercice, 'intitule');
 }
 function exercice_date_debut($exercice) {
-	$data = sql_fetsel('debut', 'spip_asso_exercices','id_exercice='.$exercice);
-	return $data['debut'];
+	return sql_asso1champ('exercice', &exercice, 'debut');
 }
 function exercice_date_fin($exercice) {
-	$data = sql_fetsel('fin', 'spip_asso_exercices','id_exercice='.$exercice);
-	return $data['fin'];
+	return sql_asso1champ('exercice', &exercice, 'fin');
 }
 
-// affichage du nom des membres
+// Affichage micro-formate d'un nom complet (de membre) suivant la configuration du plugin (i.e. champs geres ou non)
 function association_calculer_nom_membre($civilite, $prenom, $nom, $html_tag='') {
 	$res = '';
 	if ($html_tag) {
@@ -119,26 +125,234 @@ function association_calculer_nom_membre($civilite, $prenom, $nom, $html_tag='')
 	return $res;
 }
 
-//Conversion de date
-function association_datefr($date) {
-		$split = explode('-',$date);
-		$annee = $split[0];
-		$mois = $split[1];
-		$jour = $split[2];
-		return $jour.'/'.$mois.'/'.$annee;
+// Affichage (dans un listing) du nom avec le lien vers la page correspondante
+// En fait c'est pour les modules dons/ventes/activites/prets ou l'acteur (donateur/acheteur/inscrit/emprunteur)
+// peut etre un membre/auteur (son id_acteur est alors renseigne) mais pas forcement son nom (qui peut etre different)
+// ou peut etre une personne exterieure a l'association (on a juste le nom obligatoire alors)
+function association_calculer_lien_nomid($nom, $id, $type='membre', $html_tag='') {
+	$res = '';
+	if ($html_tag) {
+		$res = '<'.$html_tag.' class="fn">';
+	}
+	if ($id) {
+		$res .= '[';
+	}
+	$res .= $nom;
+	if ($id) {
+		$res .= '->'.$type.']';
+	}
+	if ($html_tag) {
+		$res .= '</'.$html_tag.'>';
+	}
+	return $res;
 }
 
-function association_verifier_date($date) {
-	if (!preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $date)) return _T('asso:erreur_format_date');
+// Affichage de date localisee et micro-formatee
+function association_datefr($iso_date, $css_class='', $htm_abbr='abbr')
+{
+	$res = ($css_class?"<$htm_abbr class='$css_class' title='$iso_date'>":'');
+	$res .= affdate_base($iso_date, 'entier'); // on fait appel a la fonction centrale des filtres SPIP... comme ca c'est traduit et formate dans les langues supportees ! si on prefere les mois en chiffres et non en lettre, y a qu'a changer les chaines de langue date_mois_XX
+	$res .= ($css_class?"</$htm_abbr>":'');
+	return $res;
+}
+
+function association_verifier_date($date)
+{
+	if (!preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $date))
+		return _T('asso:erreur_format_date');
 	list($annee, $mois, $jour) = explode('-',$date);
-	if (!checkdate($mois, $jour, $annee)) return _T('asso:erreur_date');
+	if (!checkdate($mois, $jour, $annee))
+		return _T('asso:erreur_date');
 	return;
 }
 
-function association_nbrefr($montant) {
-		$montant = number_format(floatval($montant), 2, ',', ' ');
-		return $montant;
+// Affichage de duree localisee et micro-formatee
+// Nota: les cas de minutes/secondes doivent etre specifie comme des heures au format ISO...
+function association_dureefr($nombre, $unite='', $htm_abbr='abbr')
+{
+	$frmt_h = '';
+	$frmt_m = 'P';
+	switch(strtoupper($unite)) { // http://ufxtract.com/testsuite/documentation/iso-duration.htm
+		case 'Y' : // year
+		case 'A' : // annee
+			$nombre = intval($nombre);
+			$frmt_m .= $nombre.'Y';
+			$valeur = association_nbrefr($nombre,0);
+			$unite = ($nombre<=1) ? _T('spip:date_une_annee') : _T('spip:date_annees');
+			break;
+		case 'M' : // month/mois
+			$nombre = intval($nombre);
+			$frmt_m .= $nombre.'M';
+			$valeur = association_nbrefr($nombre,0);
+			$unite = ($nombre<=1) ? _T('spip:date_un_mois') : _T('spip:date_mois');
+			break;
+		case 'W' : // week
+		case 'S' : // semaine
+			$nombre = intval($nombre);
+			$frmt_m .= $nombre.'W';
+			$valeur = association_nbrefr($nombre,0);
+			$unite = ($nombre<=1) ? _T('spip:date_une_semaine') : _T('spip:date_semaines');
+			break;
+		case 'D' : // day
+		case 'J' : // jour
+			$nombre = intval($nombre);
+			$frmt_m .= $nombre.'D';
+			$valeur = association_nbrefr($nombre,0);
+			$unite = ($nombre<=1) ? _T('spip:date_un_jour') : _T('spip:date_jours');
+			break;
+		case 'H' : // hour/heure
+			$frmt_m .= 'T'.str_replace('00M', '',  str_replace(':','H',$nombre.':00').'M' );
+			$valeur = association_nbrefr($nombre,0);
+			if (intval($nombre)>1)
+				$unite = _T('spip:date_heures');
+			elseif (is_numeric($nombre))
+				$unite = _T('spip:date_une_heure');
+			elseif (strstr($nombre,'0:00'))
+				$unite = _T('spip:date_une_minute');
+			else {
+				$nombre = explode(':',$nombre);
+				$frmt_h = _T('spip:date_fmt_heures_minutes', array('h'=>$nombre[0],'m'=>$nombre[1]));
+			}
+			break;
+		case 'T' : // (full) ISO Time : no check...
+			$frmt_m .= 'T'.str_replace( array('HM','HS','MS','00H','00M'), array('H','H','M'), preg_replace('m:m','M',preg_replace('h:h','H',$nombre,1),1).'S' );
+			$nombre = explode(':',$nombre,2);
+			$frmt_h = _T('spip:date_fmt_heures_minutes', array('h'=>$nombre[0],'m'=>$nombre[1]));
+			break;
+		default : // (full) ISO DateTime or Date : no check !!!
+			$frmt_m .= $nombre;
+			$nombre = explode('T',$nombre,2);
+			$ladate = explode(':',$nombre[0]);
+			switch($ladate[0]) { // nombre d'annee
+				case 0:
+					$frmt_h = '';
+					break;
+				case 1:
+					$frmt_h = _T('duree_temps', array('nombre'=>1,'unite'=>$_T('spip:date_une_annee')));
+					break;
+				default:
+					$frmt_h =  _T('duree_temps', array('nombre'=>association_nbrefr($ladate[0],0),'unite'=>$_T('spip:date_annees')));
+					break;
+			}
+			if ($ladate[1])
+				$frmt_h .= ', ';
+			switch($ladate[1]) { // nombre de mois
+				case 0:
+					$frmt_h .= '';
+					break;
+				case 1:
+					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>$_T('spip:date_un_mois')));
+					break;
+				default:
+					$frmt_h .= _T('duree_temps', array('nombre'=>association_nbrefr($ladate[1],0),'unite'=>$_T('spip:date_mois')));
+					break;
+			}
+			if ($ladate[2])
+				$frmt_h .= ', ';
+			switch($ladate[2]) { // nombre de jours
+				case 0:
+					$frmt_h .= '';
+					break;
+				case 1:
+					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>$_T('spip:date_un_jour')));
+					break;
+				default:
+					$frmt_h .= _T('duree_temps', array('nombre'=>association_nbrefr($ladate[2],0),'unite'=>$_T('spip:date_jours')));
+					break;
+			}
+			if (count($lheure))
+				$frmt_h .= ', ';
+			$lheure = explode(':',$nombre[1]);
+			switch($lheure[0]) { // nombre d'heures
+				case 0:
+					$frmt_h .= '';
+					break;
+				case 1:
+					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>$_T('spip:date_une_heure')));
+					break;
+				default:
+					$frmt_h .=  _T('duree_temps', array('nombre'=>association_nbrefr($lheure[0],0),'unite'=>$_T('spip:date_heures')));
+					break;
+			}
+			if ($lheure[1])
+				$frmt_h .= ', ';
+			switch($lheure[1]) { // nombre d'heures
+				case 0:
+					$frmt_h .= '';
+					break;
+				case 1:
+					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>$_T('spip:date_une_minute')));
+					break;
+				default:
+					$frmt_h .=  _T('duree_temps', array('nombre'=>association_nbrefr($lheure[1],0),'unite'=>$_T('spip:date_minutes')));
+					break;
+			}
+			if ($lheure[2])
+				$frmt_h .= ', ';
+			switch($lheure[2]) { // nombre d'heures
+				case 0:
+					$frmt_h = '';
+					break;
+				case 1:
+					$frmt_h = _T('duree_temps', array('nombre'=>1,'unite'=>$_T('spip:date_une_seconde')));
+					break;
+				default:
+					$frmt_h =  _T('duree_temps', array('nombre'=>association_nbrefr($lheure[2],0),'unite'=>$_T('spip:date_secondes')));
+					break;
+			}
+			$frmt_h .= '. ';
+			break;
 	}
+	if (!$frmt_h)
+		$frmt_h = _T('duree_temps', array('nombre'=>$valeur,'unite'=>$unite));
+	return "<$htm_abbr class='duration' title='$frmt_m'>$frmt_h</$htm_abbr>";
+}
+
+// micro-Formatage des montants avec devise
+// on n'utilise pas la fontcion PHP money_format() --qui ne fonctionne pas sous Windows-- car on veut micro-formater avec une devise fixee par la configuration (en fait les chaines de langue) du plugin
+function association_prixfr($montant, $unite_code='', $unite_nom='', $htm_span='span', $htm_abbr='abbr') {
+	$res = "<$htm_span class='money price'>"; // pour la reference est "price" <http://microformats.org/wiki/hproduct> (reconnu par les moteurs de recherche), mais "money" <http://microformats.org/wiki/currency-brainstorming> est d'usage courant aussi
+	$montant = "<$htm_abbr class='amount' title='$montant'>". association_nbrefr($montant) ."</$htm_abbr>";
+	$devise = "<$htm_abbr class='currency' title='". _T('asso:devise_code_iso') .'\'>'. _T('asso:devise_symbole') ."</$htm_abbr>";
+	$res .= _T('asso:devise_montant', array('montant'=>$montant, 'devise'=>$devise) );
+	$res .= ($unite_code?" <$htm_abbr class='unit' title='".($unite_nom?$unite_nom:$unite_code)."'>$unite_code</$htm_abbr>":'');
+	return "$res</$htm_span>";
+}
+
+// Formatage des nombres selon la langue de l'interface
+// @: http://stackoverflow.com/a/437642
+function association_nbrefr($montant, $decimales=2, $l10n='')
+{
+	/** recuperer le code des parametres regionnaux a utiliser
+	 * dans un premier temps, on essaye d'utiliser la langue puisque SPIP gere bien cela et offre la possibilite d'en faire plus avec  http://programmer.spip.org/Forcer-la-langue-selon-le-visiteur
+	 * comme ce n'est pas suffisant (le code de localisation est de la forme langue-pays ou langue_PAYS en utilisant les codes ISO), et recuperer le pays n'est pas simple sans faire appel a l'IP-geolocalisation http://stackoverflow.com/questions/2156231/how-do-you-detect-a-website-visitors-country-specifically-us-or-not
+	 * ni SPIP ni PHP n'offrant de moyen "simple" d'arriver a nos fin bah...
+	 **/
+	if (!$l10n) { // pas de localae specifiee
+		$l10n = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+		if (!$l10n) { // pas specifie par le navigateur non plus ?
+			$l10n = array('french', 'fr_FR', 'fr_FR@euro', 'fr_FR.iso88591', 'fr_FR.iso885915@euro', 'fr_FR.utf8', 'fr_FR.utf8@euro'); // alors on s'impose...
+		} else { // si specifie, on va transformer en tableau http://www.thefutureoftheweb.com/blog/use-accept-language-header
+			preg_match_all('/([a-z]{1,8}(-[a-z]{1,8})?)\s*(;\s*q\s*=\s*(1|0\.[0-9]+))?/i', $l10n, $lang_parse);
+			if (count($lang_parse[1])) { // creer la liste locale=>preference
+				$langues = array_combine($lang_parse[1], $lang_parse[4]);
+				foreach ($langues as $langue => $taux) { // pour les taux de preferences non specifies, mettre a 100%
+					if ($taux==='')
+						$langues[$langue] = 1;
+				}
+				arsort($langues, SORT_NUMERIC); // ordonne par taux de preferences
+				$l10n = array_keys($langues); // on recupere la liste des langues triees
+			}
+
+		}
+	}
+	/** formater selon la langue choisie/recuperee
+	 * @: http://stackoverflow.com/a/437642
+	 **/
+	setlocale(LC_NUMERIC, $l10n);
+	$locale = localeconv();
+    return number_format(floatval($montant), $decimales, $locale['decimal_point'], $locale['thousands_sep']);
+}
 
 /* prend en parametre le nom de l'argument a chercher dans _request et retourne un float */
 function association_recupere_montant ($valeur) {
@@ -152,13 +366,16 @@ function association_recupere_montant ($valeur) {
 }
 
 	//Affichage du message indiquant la date
-function association_date_du_jour($heure=false) {
-		return '<p>'.($heure ? _T('asso:date_du_jour_heure') : _T('asso:date_du_jour')).'</p>';
-	}
-
-function association_flottant($s)
+function association_date_du_jour($heure=false)
 {
-	return number_format(floatval($s), 2, ',', ' ');
+	$ladate = affdate(date('d/m/Y'));
+	$hr = ($heure?date('H'):'');
+	$mn = ($heure?date('i'):'');
+	$res = '<p class="'. ($heure?'datetime':'date');
+	$res .= '" title="'. date('Y-m-d') . ($heure?"T$hr:$mn":'');
+	$lheure = ($heure? _T('spip:date_fmt_heures_minutes', array('h'=>$hr,'m'=>$mn)) :'');
+	$res .= '">'.( $heure ? _T('asso:date_du_jour_heure', array('date'=>$ladate)) : _T('asso:date_du_jour',array('date'=>$ladate,'time'=>$lheure)) ).'</p>';
+	return $res;
 }
 
 function association_header_prive($flux){

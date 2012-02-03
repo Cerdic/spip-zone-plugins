@@ -16,8 +16,8 @@ include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
 include_spip('inc/association_comptabilite');
 
-function exec_ventes(){
-
+function exec_ventes()
+{
 	include_spip('inc/autoriser');
 	if (!autoriser('associer', 'ventes')) {
 		include_spip('inc/minipres');
@@ -30,24 +30,22 @@ function exec_ventes(){
 		association_onglets(_T('asso:titre_onglet_ventes'));
 		echo debut_gauche('',true);
 		echo debut_boite_info(true);
-		echo '<p>', _T('asso:en_rose_vente_enregistree_en_bleu_vente_expediee') . '</p>';
+		echo '<p>', _T('asso:en_rose_vente_enregistree_en_bleu_vente_expediee') .'</p>';
 		// TOTAUX
 		$association_imputation = charger_fonction('association_imputation', 'inc');
 		$critere = $association_imputation('pc_ventes');
 		if ($critere) $critere .= ' AND ';
-		$query = sql_select('imputation, sum(recette) AS somme_recettes, sum(depense) AS somme_depenses', 'spip_asso_comptes', $critere . "date_format( date, '%Y' ) =$annee", "imputation");
+		$query = sql_select('imputation, sum(recette) AS somme_recettes, sum(depense) AS somme_depenses', 'spip_asso_comptes', $critere . "DATE_FORMAT(date, '%Y')=$annee", "imputation");
 		while ($data = sql_fetch($query)) {
-			$solde= $data['somme_depenses']+$data['somme_recettes'];
+			$solde = $data['somme_depenses']+$data['somme_recettes'];
 			$imputation = $data['imputation'];
-			echo "\n<table width='100%'>";
-			echo '<tr>';
-			echo '<th colspan="2">' . _T('asso:totaux').' '.$annee.' :</td>';
+			echo '<table width="100%">' .'<caption>'.
+	  _T('asso:totaux_titre', array('titre'=>$annee)) .'</caption><tbody>';
+			echo '<tr class="'.($solde>0?'impair':'pair').'">';
+			echo '<th class="solde">'.  _T('asso:entete_solde') . '</th>';
+			echo '<td class="decimal">'.association_prixfr($solde).'</td>';
 			echo '</tr>';
-			echo '<tr>';
-			echo '<th style="color: #9F1C30;">' .  _T('asso:solde') . '</th>';
-			echo '<td class="impair nombre">'.association_nbrefr($solde).' &euro;</td>';
-			echo '</tr>';
-			echo '</table>';
+			echo '</tbody></table>';
 		}
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
@@ -57,7 +55,7 @@ function exec_ventes(){
 		debut_cadre_relief('', false, '', $titre = _T('asso:toutes_les_ventes'));
 		// PAGINATION ET FILTRES
 		echo "\n<table><tr><td>";
-		$query = sql_select("date_format( date_vente, '%Y' )  AS annee", 'spip_asso_ventes', '', 'annee', 'annee');
+		$query = sql_select("DATE_FORMAT(date_vente, '%Y')  AS annee", 'spip_asso_ventes', '', 'annee', 'annee');
 		while ($data = sql_fetch($query)) {
 			$a = $data['annee'];
 			if ($a==$annee)	{echo ' <strong>'.$a.'</strong>';}
@@ -65,46 +63,38 @@ function exec_ventes(){
 		}
 		echo "</td></tr></table>\n";
 		//TABLEAU
-		$ventes = '';
-		$query = sql_select('*', 'spip_asso_ventes', "date_format( date_vente, '%Y' )=$annee", '',  "id_vente DESC") ;
+		echo "<table width='100%' class='asso_tablo' id='asso_tablo_ventes'>\n";
+		echo "<thead>\n<tr>";
+		echo '<th>'. _T('asso:entete_id') .'</th>';
+		echo '<th>'. _T('asso:entete_date') .'</th>';
+		echo '<th>'. _T('asso:vente_entete_article') .'</th>';
+		echo '<th>'. _T('asso:entete_code') .'</th>';
+		echo '<th>'. _T('asso:vente_entete_acheteur') .'</th>';
+		echo '<th>'. _T('asso:vente_entete_quantite') . '</th>';
+		echo '<th>'. _T('asso:entete_montant') .'</th>';
+		echo '<th colspan="2" class="actions">&nbsp;</th>';
+		echo "</tr>\n</thead><tbody>";
+		$query = sql_select('*', 'spip_asso_ventes', "DATE_FORMAT(date_vente, '%Y')=$annee", '',  'id_vente DESC') ;
 		while ($data = sql_fetch($query)) {
-			$class = ' class="border1 '. ($data['date_envoi'] ?'pair':'impair') . '"';
+			$class = ' class="'. ($data['date_envoi']=='0000-00-00' ?'pair':'impair') . '"';
 			$id = $data['id_vente'];
-			$q = $data['quantite'];
-			$ventes .= '<tr> '
-			. "\n<td$class style='text-align:right'>".$id.'</td>'
-			. "\n<td$class style='text-align:right'>"
-			. association_datefr($data['date_vente']).'</td>'
-			. "\n<td$class>".$data['article'].'</td>'
-			. "\n<td$class>".$data['code'].'</td>'
-			. "\n<td$class>".$data['acheteur'].'</td>'
-			. "\n<td$class>".$data['id_acheteur'].'</td>'
-			. "\n<td$class style='text-align:right'>".$q.'</td>'
-			. "\n<td$class style='text-align:right'>"
-			. association_nbrefr($q*$data['prix_vente']).'</td>'
-			. "\n<td$class style='text-align:center;'>"
-			. association_bouton(_T('asso:mettre_a_jour_la_vente'), 'edit-12.gif', 'edit_vente',"id=$id") . '</td>'
-			."\n<td$class style='text-align:center;'><input name='delete[]' type='checkbox' value='$id' /></td>"
-			.'</tr>';
+			echo "<tr$class'>";
+			echo '<td class="integer">'.$id.'</td>';
+			echo '<td class="date">'. association_datefr($data['date_vente'],'dtstart') .'</td>';
+			echo '<td class="text">'.propre($data['article']).'</td>';
+			echo '<td class="texte">'.$data['code'].'</td>';
+			echo '<td class="text">'. association_calculer_lien_nomid($data['acheteur'],$data['id_acheteur']) .'</td>';
+			echo '<td class="decimal">'.$data['quantite'].'</td>';
+			echo '<td class="decimal">'
+			. association_prixfr($data['quantite']*$data['prix_vente']).'</td>';
+			echo '<td class="actions">'
+			. association_bouton('mettre_a_jour_la_vente', 'edit-12.gif', 'edit_vente',"id=$id") . '</td>';
+			echo '<td class="actions"><input name="delete[]" type="checkbox" value="'.$id.'" /></td>';
+			echo "</tr>\n";
 		}
-		if ($ventes) {
-			$corps =  "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
-			. "<tr style='background-color: #DBE1C5;'>\n"
-			. '<th style="text-align:right">' . _T('asso:id') . '</th>'
-			. '<th style="text-align:right">' . _T('asso:date') . '</th>'
-			. '<th>' . _T('asso:article') . '</th>'
-			. '<th>' . _T('asso:code') . '</th>'
-			. '<th>' . _T('asso:acheteur') . '</th>'
-			. '<th>'. _T('asso:membre') . '</th>'
-			. '<th style="text-align:right">' . _T('asso:qte') . '</th>'
-			. '<th style="text-align:right">' . _T('asso:montant') . '</th>'
-			. '<td colspan="2" style="text-align:center;"><strong>&nbsp;</strong></td>'
-			. '</tr>'
-			. $ventes
-			. "</table>\n";
-			echo generer_form_ecrire('action_ventes', $corps, '', _T('asso:bouton_supprimer'));
-		}
-		fin_cadre_relief();
+		echo "</tbody>\n</table>\n";
+		echo generer_form_ecrire('action_ventes', $corps, '', _T('asso:bouton_supprimer'));
+		echo fin_cadre_relief();
 		echo fin_page_association();
 	}
 }

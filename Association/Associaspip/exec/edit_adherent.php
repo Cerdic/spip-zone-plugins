@@ -32,9 +32,9 @@ function exec_edit_adherent() {
 		} else {
 			include_spip('inc/association_coordonnees');
 			$nom_membre = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
-			$adresses = association_recuperer_adresses_string(array($id_auteur));
-			$emails = association_recuperer_emails_string(array($id_auteur));
-			$telephones = association_recuperer_telephones_string(array($id_auteur));
+			$adresses = association_formater_adresses(array($id_auteur));
+			$emails = association_formater_emails(array($id_auteur));
+			$telephones = association_formater_telephones(array($id_auteur));
 			$statut = sql_getfetsel('statut', 'spip_auteurs', 'id_auteur='.$id_auteur);
 			switch($statut)	{
 				case '0minirezo':
@@ -54,13 +54,12 @@ function exec_edit_adherent() {
 			echo '<p>'.$id_auteur.'</p></a></div></div>';
 			$nom = htmlspecialchars($nom_membre);
 			$adh = generer_url_ecrire('voir_adherent',"id=$id_auteur");
-			$nom = "<a href='$adh' title=\"" . _T('asso:adherent_label_voir_membre') . '">'.$nom.'</a>';
-			$coord = '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">';
-			if ($adresses[$id_auteur]) $coord .= '<br />' . $adresses[$id_auteur] . '<br/>';
-			if ($emails[$id_auteur]) $coord .= '<br/>' . $emails[$id_auteur];
+			$nom = "<a class='fn' href='$adh' title='" . _T('asso:adherent_label_voir_membre') . "'>$nom</a>";
+			$coord = '';
+			if ($adresses[$id_auteur]) $coord .= '<br />' . $adresses[$id_auteur];
+			if ($emails[$id_auteur]) $coord .= '<br />' . $emails[$id_auteur];
 			if ($telephones[$id_auteur]) $coord .=  '<br/>'.$telephones[$id_auteur];
-			$coord .= '</div>';
-			echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.$nom.'</div>'.$coord;
+			echo '<div class="vcard" style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.$nom.$coord.'</div>';
 			echo association_date_du_jour();
 			echo fin_boite_info(true);
 			echo association_retour();

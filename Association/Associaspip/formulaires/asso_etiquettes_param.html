@@ -9,7 +9,7 @@
 			<ul>
 				<li class="editer_avec_civilite">
 					<div class="choix">
-						<input type="checkbox" name="avec_civilite" value="oui" id="avec_civilite"  class="checkbox" [(#ENV{avec_civilite}|oui) checked="checked"]/>
+						<input type="checkbox" name="avec_civilite" value="oui" id="avec_civilite"  [(#ENV{avec_civilite}|oui) checked="checked"]/>
 						<label for="avec_civilite"><:asso:eti_avec_civilite:></label>
 					</div>
 				</li>
@@ -28,7 +28,7 @@
 				</li>
 				<li class="editer_marge_haut_page">
 					<label for="marge_haut_page"><:asso:eti_marge_haut_page:></label>
-					<input type="[(#HTML5|?{number,text})]" name="marge_haut_page" value="[(#ENV{marge_haut_page})]" id="marge_haut_page"  class="number integer" />
+					<input type="[(#HTML5|?{number,text})]" name="marge_haut_page" value="[(#ENV{marge_haut_page})]" id="marge_haut_page" class="number integer" />
 				</li>
 				<li class="editer_marge_bas_page">
 					<label for="marge_bas_page"><:asso:eti_marge_bas_page:></label>
@@ -36,11 +36,11 @@
 				</li>
 				<li class="editer_marge_gauche_page">
 					<label for="marge_gauche_page"><:asso:eti_marge_gauche_page:></label>
-					<input type="[(#HTML5|?{number,text})]" name="marge_gauche_page" value="[(#ENV{marge_gauche_page})]" id="marge_gauche_page"  class="number integer" />
+					<input type="[(#HTML5|?{number,text})]" name="marge_gauche_page" value="[(#ENV{marge_gauche_page})]" id="marge_gauche_page" class="number integer" />
 				</li>
 				<li class="editer_marge_droite_page">
 					<label for="marge_droite_page"><:asso:eti_marge_droite_page:></label>
-					<input type="[(#HTML5|?{number,text})]" name="marge_droite_page" value="[(#ENV{marge_droite_page})]" id="marge_droite_page"  class="number integer" />
+					<input type="[(#HTML5|?{number,text})]" name="marge_droite_page" value="[(#ENV{marge_droite_page})]" id="marge_droite_page" class="number integer" />
 				</li>
 			</ul>
 		</fieldset>
@@ -49,19 +49,19 @@
 			<ul>
 				<li class="editer_nb_colonne">
 					<label for="nb_colonne"><:asso:eti_nb_colonne:></label>
-					<input type="[(#HTML5|?{number,text})]" name="nb_colonne" value="[(#ENV{nb_colonne})]" id="nb_colonne"  class="number integer" />
+					<input type="[(#HTML5|?{number,text})]" name="nb_colonne" value="[(#ENV{nb_colonne})]" id="nb_colonne" class="number integer" />
 				</li>
 				<li class="editer_nb_ligne">
 					<label for="nb_ligne"><:asso:eti_nb_ligne:></label>
-					<input type="[(#HTML5|?{number,text})]" name="nb_ligne" value="[(#ENV{nb_ligne})]" id="nb_ligne"  class="number integer" />
+					<input type="[(#HTML5|?{number,text})]" name="nb_ligne" value="[(#ENV{nb_ligne})]" id="nb_ligne" class="number integer" />
 				</li>
 				<li class="editer_espace_etiquettesl">
 					<label for="espace_etiquettesl"><:asso:eti_espace_etiquettesl:></label>
-					<input type="[(#HTML5|?{number,text})]" name="espace_etiquettesl" value="[(#ENV{espace_etiquettesl})]" id="espace_etiquettesl"  class="number integer" />
+					<input type="[(#HTML5|?{number,text})]" name="espace_etiquettesl" value="[(#ENV{espace_etiquettesl})]" id="espace_etiquettesl" class="number integer" />
 				</li>
 				<li class="editer_espace_etiquettesh">
 					<label for="espace_etiquettesh"><:asso:eti_espace_etiquettesh:></label>
-					<input type="[(#HTML5|?{number,text})]" name="espace_etiquettesh" value="[(#ENV{espace_etiquettesh})]" id="espace_etiquettesh"  class="number integer" />
+					<input type="[(#HTML5|?{number,text})]" name="espace_etiquettesh" value="[(#ENV{espace_etiquettesh})]" id="espace_etiquettesh" class="number integer" />
 				</li>
 			</ul>
 		</fieldset>
@@ -70,15 +70,15 @@
 			<ul>
 				<li class="editer_marge_haut_etiquette">
 					<label for="marge_haut_etiquette"><:asso:eti_marge_haut_etiquette:></label>
-					<input type="[(#HTML5|?{number,text})]" name="marge_haut_etiquette" value="[(#ENV{marge_haut_etiquette})]" id="marge_haut_etiquette"  class="number integer" />
+					<input type="[(#HTML5|?{number,text})]" name="marge_haut_etiquette" value="[(#ENV{marge_haut_etiquette})]" id="marge_haut_etiquette" class="number integer" />
 				</li>
 				<li class="editer_marge_gauche_etiquette">
 					<label for="marge_gauche_etiquette"><:asso:eti_marge_gauche_etiquette:></label>
-					<input type="[(#HTML5|?{number,text})]" name="marge_gauche_etiquette" value="[(#ENV{marge_gauche_etiquette})]" id="marge_gauche_etiquette"  class="number integer" />
+					<input type="[(#HTML5|?{number,text})]" name="marge_gauche_etiquette" value="[(#ENV{marge_gauche_etiquette})]" id="marge_gauche_etiquette" class="number integer" />
 				</li>
 				<li class="editer_marge_droite_etiquette">
 					<label for="marge_droite_etiquette"><:asso:eti_marge_droite_etiquette:></label>
-					<input type="[(#HTML5|?{number,text})]" name="marge_droite_etiquette" value="[(#ENV{marge_droite_etiquette})]" id="marge_droite_etiquette"  class="number integer" />
+					<input type="[(#HTML5|?{number,text})]" name="marge_droite_etiquette" value="[(#ENV{marge_droite_etiquette})]" id="marge_droite_etiquette" class="number integer" />
 				</li>
 			</ul>
 		</fieldset>

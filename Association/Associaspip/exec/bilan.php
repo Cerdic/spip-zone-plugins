@@ -114,10 +114,10 @@ function exec_bilan(){
 					$solde = $recettes-$depenses;
 					echo '<tr style="background-color: #EEEEEE;">';
 					echo "<td class='arial11 border1'>" . $data['code'] . "</td>";
-					echo "<td class='arial11 border1'>" . $data['intitule'] . "</td>";
-					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($recettes, 2, ',', ' ').'</td>';
-					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($depenses, 2, ',', ' ').'</td>';
-					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($solde, 2, ',', ' ').'</td>';
+					echo '<td class="text">'. $data['intitule'] .'</td>';
+					echo '<td class="decimal">'.association_nbrefr($recettes).'</td>';
+					echo '<td class="decimal">'.association_nbrefr($depenses).'</td>';
+					echo '<td class="decimal">'.association_nbrefr($solde).'</td>';
 					echo '</tr>';
 					$total_recettes += $recettes;
 					$total_depenses += $depenses;
@@ -139,18 +139,18 @@ function exec_bilan(){
 					echo '<tr style="background-color: #EEEEEE;">';
 					echo "<td class='arial11 border1'>" . $data['code'] . "</td>";
 					echo "<td class='arial11 border1'>" . $data['intitule'] . "</td>";
-					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($recettes, 2, ',', ' ').'</td>';
-					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($depenses, 2, ',', ' ').'</td>';
-					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($solde, 2, ',', ' ').'</td>';
+					echo '<td class="decimal">'.association_nbrefr($recettes).'</td>';
+					echo '<td class="decimal">'.association_nbrefr($depenses).'</td>';
+					echo '<td class="decimal">'.association_nbrefr($solde).'</td>';
 					echo '</tr>';
 					$total_recettes += $recettes;
 					$total_depenses += $depenses;
 					$total_soldes += $solde;
 				}
 			}
-			$total_recettes = number_format($total_recettes, 2, ',', ' ');
-			$total_depenses = number_format($total_depenses, 2, ',', ' ');
-			$total_soldes = number_format($total_soldes, 2, ',', ' ');
+			$total_recettes = association_nbrefr($total_recettes);
+			$total_depenses = association_nbrefr($total_depenses);
+			$total_soldes = association_nbrefr($total_soldes);
 			echo '<tr style="background-color: #EEEEEE;">';
 			echo "\n<td colspan='2' class='arial11 border1' style='color: #9F1C30;'><strong>" . _T('asso:resultat_courant') . '</strong></td>';
 			echo "\n<td class='arial11 border1' style='text-align:right;color: #9F1C30;'><strong>".$total_recettes.'</strong></td>';
@@ -231,9 +231,9 @@ function bilan_encaisse()
 		if(substr($compteFinancier['code'],0,2)==='51' OR substr($compteFinancier['code'],0,2)==='53') {
 			echo '<tr style="background-color: #EEEEEE;">';
 			echo "\n<td class='arial11 border1'>" . $compteFinancier['code'] . ' : ' . $compteFinancier['intitule'] . '</td>';
-			echo "\n<td class='arial11 border1' style='text-align:right;'>".association_datefr($compteFinancier['date_solde']).'</td>';
-			echo "\n<td class='arial11 border1' style='text-align:right;'>".number_format($compteFinancier['solde_anterieur'], 2, ',', ' ').'</td>';
-			echo "\n<td class='arial11 border1' style='text-align:right;'>".number_format($compteFinancier['solde_anterieur']+$compteFinancier['solde'], 2, ',', ' ').'</td></tr>';
+			echo '<td class="date">'.association_datefr($compteFinancier['date_solde']).'</td>';
+			echo '<td class="decimal">'.association_nbrefr($compteFinancier['solde_anterieur']).'</td>';
+			echo '<td class="decimal">'.association_nbrefr($compteFinancier['solde_anterieur']+$compteFinancier['solde']).'</td></tr>';
 			$total_initial += $compteFinancier['solde_anterieur'];
 			$total_actuel += $compteFinancier['solde_anterieur']+$compteFinancier['solde'];
 		}
@@ -248,8 +248,8 @@ function bilan_encaisse()
 			}
 		}
 	}
-	$total_initial = number_format($total_initial, 2, ',', ' ');
-	$total_actuel = number_format($total_actuel, 2, ',', ' ');
+	$total_initial = association_nbrefr($total_initial);
+	$total_actuel = association_nbrefr($total_actuel);
 	echo '<tr style="background-color: #EEEEEE;">';
 	echo "\n<td class='arial11 border1' style='color: #9F1C30;'><strong>" . _T('asso:encaisse') . "</strong></td>\n";
 	echo '<td class="arial11 border1" style="text-align:right;color: #9F1C30;"><strong>&nbsp;</strong></td>';

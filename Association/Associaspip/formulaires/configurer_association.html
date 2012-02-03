@@ -72,7 +72,7 @@
 				</fieldset>
 			</li>
 		[(#PLUGIN{fpdf}|oui)
-			<INCLURE{fond=inc/configurer_recufiscal}>
+			<INCLURE{fond=inc/configurer_recufiscal, env}>
 		]
 			<li class="fieldset">
 				<!-- Options de gestion des membres -->
@@ -139,7 +139,7 @@
 					<B_categories>
 							<label for="categorie_par_defaut"><:asso:config_libelle_categorie_par_defaut:></label>
 							<select name="categorie_par_defaut" id="categorie_par_defaut">
-								<option value=""><:asso:aucune_categorie_par_defaut:></option>
+								<option value=""><:asso:choisir_cat_defaut:></option>
 					<BOUCLE_categories(ASSO_CATEGORIES){par valeur}>
 								<option value="#ID_CATEGORIE" [(#ENV{categorie_par_defaut}|=={#ID_CATEGORIE}|?{selected="selected"})]>#VALEUR</option>
 					</BOUCLE_categories>
@@ -152,7 +152,7 @@
 				</fieldset>
 			</li>
 		[(#PLUGIN{fpdf}|oui)
-			<INCLURE{fond=inc/configurer_comptabilite}>
+			<INCLURE{fond=inc/configurer_comptabilite, env}>
 		]
 		</ul>
 		<p class="boutons">

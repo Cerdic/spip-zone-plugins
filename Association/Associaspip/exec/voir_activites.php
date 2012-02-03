@@ -15,8 +15,8 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip ('inc/navigation_modules');
 
-function exec_voir_activites(){
-
+function exec_voir_activites()
+{
 	include_spip('inc/autoriser');
 	if (!autoriser('associer', 'activites')) {
 		include_spip('inc/minipres');
@@ -50,12 +50,10 @@ function exec_voir_activites(){
 			echo '<p><strong style="color:blue;">';
 			echo _T('asso:activite_liste_nombre_inscrits',array('total' => $data['inscrits'])).'</strong><br />';
 			echo '<strong style="color: #9F1C30;">';
-			echo _T('asso:activite_liste_total_participations',array('total' => number_format($data['encaisse'], 2, ',', ' ')));
+			echo _T('asso:activite_liste_total_participations',array('total' => association_prixfr($data['encaisse'])));
 			echo '</strong><br/></p>';
 		}
 		echo fin_boite_info(true);
-
-
 		$res=association_icone(_T('asso:activite_bouton_ajouter_inscription'),  generer_url_ecrire('edit_activite', 'id_evenement='.$id_evenement), 'panier_in.gif');
 		$res.=association_icone(_T('asso:activite_bouton_voir_liste_inscriptions'),  generer_url_ecrire('pdf_activite','id='.$id_evenement), 'print-24.png');
 
@@ -113,16 +111,18 @@ function exec_voir_activites(){
 			echo '</td>';
 			echo '<td style="text-align: right;" class="'.$class. ' border1">'.$adh.'</td>';
 			echo '<td style="text-align: right;" class="'.$class. ' border1">'.$data['inscrits'].'</td>';
-			echo '<td style="text-align: right;" class="'.$class. ' border1">'.number_format($data['montant'], 2, ',', ' ').'</td>';
-			echo '<td style="text-align: center;" class="'.$class. ' border1">', association_bouton(_T('asso:activite_bouton_maj_inscription'), 'edit-12.gif', 'edit_activite','id='.$data['id_activite']), '</td>';
-			echo '<td style="text-align: center;" class="'.$class. ' border1">', association_bouton(_T('asso:activite_bouton_ajouter_inscription'), 'cotis-12.gif', 'ajout_participation', 'id='.$data['id_activite']), '</td>';
+			echo '<td style="text-align: right;" class="'.$class. ' border1">'.association_prixfr($data['montant']).'</td>';
+			echo '<td style="text-align: center;" class="'.$class. ' border1">', association_bouton('activite_bouton_maj_inscription', 'edit-12.gif', 'edit_activite','id='.$data['id_activite']), '</td>';
+			echo '<td style="text-align: center;" class="'.$class. ' border1">', association_bouton('activite_bouton_ajouter_inscription', 'cotis-12.gif', 'ajout_participation', 'id='.$data['id_activite']), '</td>';
 			echo '<td style="text-align: center;" class="'.$class. ' border1"><input name="delete[]" type="checkbox" value="'.$data['id_activite'].'" /></td>';
 			echo '</tr>';
-			if ($data['commentaire']) {	echo '<tr><td colspan="10" style="text-align: justify;" class ='.$class.'>'.$data['commentaire']."</td></tr>\n"; }
+			if ($data['commentaire']) {
+				echo '<tr><td colspan="10" style="text-align: justify;" class ='.$class.'>'.$data['commentaire']."</td></tr>\n";
+			}
 		}
 		echo '</table>';
 		echo "\n<table width='100%'><tr><td style='text-align: right;'>";
-		echo '<input type="submit" value="'._T('asso:activite_bouton_supprimer').'" class="fondo" />';
+		echo '<input type="submit" value="'._T('asso:bouton_supprimer').'" class="fondo" />';
 		echo "</td></tr></table>\n";
 		echo '</form>';
 		fin_cadre_relief();

@@ -113,9 +113,9 @@ function exec_activites_evenements($mot){
 		while ($inscrits = sql_fetch($sql)) {
 			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;">'.$inscrits['total'].'</td>';
 		}
-		echo '<td style="border-top: 1px solid #CCCCCC;text-align:center">' . association_bouton(_T('asso:activite_bouton_modifier_article'), 'edit-12.gif', 'articles', 'id_article='.$data['id_article']) . '</td>';
-		echo '<td style="border-top: 1px solid #CCCCCC;text-align:center">' . association_bouton(_T('asso:activite_bouton_ajouter_inscription'), 'creer-12.gif', 'edit_activite', 'id_evenement='.$data['id_evenement']) . '</td>';
-		echo '<td style="border-top: 1px solid #CCCCCC;text-align:center">' . association_bouton(_T('asso:activite_bouton_voir_liste_inscriptions'), 'voir-12.png', 'voir_activites', 'id='.$data['id_evenement']) . '</td>';
+		echo '<td style="border-top: 1px solid #CCCCCC;text-align:center">' . association_bouton('activite_bouton_modifier_article', 'edit-12.gif', 'articles', 'id_article='.$data['id_article']) . '</td>';
+		echo '<td style="border-top: 1px solid #CCCCCC;text-align:center">' . association_bouton('activite_bouton_ajouter_inscription', 'creer-12.gif', 'edit_activite', 'id_evenement='.$data['id_evenement']) . '</td>';
+		echo '<td style="border-top: 1px solid #CCCCCC;text-align:center">' . association_bouton('activite_bouton_voir_liste_inscriptions', 'voir-12.png', 'voir_activites', 'id='.$data['id_evenement']) . '</td>';
 		echo '</tr>';
 	}
 	echo '</table>';

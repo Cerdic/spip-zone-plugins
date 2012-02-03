@@ -115,16 +115,16 @@ function compte_resultat_charges_produits($var, $class) {
 			echo '</tr><tr style="background-color: #EEEEEE;">';
 		}
 		echo "<td>&nbsp;</td>";
-		echo "<td class='arial11 border1'>" . $data['code'] . '</td>';
-		echo "<td class='arial11 border1'>" . $data['intitule'] . '</td>';
-		echo '<td class="arial11 border1" style="text-align:right;">' . number_format($valeurs, 2, ',', ' ') . '</td>';
+		echo '<td class="text">'. $data['code'] .'</td>';
+		echo '<td class="text">'. $data['intitule'] .'</td>';
+		echo '<td class="decimal">'.association_nbrefr($valeurs) .'</td>';
 		echo '</tr>';
 		$total += $valeurs;
 	}
 	echo '<tr style="background-color: #EEEEEE;">';
 	echo "<td>&nbsp;</td><td>&nbsp;</td>";
 	echo "<td class='arial11 border1' style='text-align:right;color: #9F1C30;'><strong>" . (($class==$GLOBALS['association_metas']['classe_charges']) ? _T('asso:cpte_resultat_total_charges') : _T('asso:cpte_resultat_total_produits')) . '</strong></td>';
-	echo "<td class='arial11 border1' style='text-align:right;color: #9F1C30;'><strong>" . number_format($total, 2, ',', ' ') . '</strong></td>';
+	echo '<th class="decimal">'. association_nbrefr($total) . '</th>';
 	echo "</tr>";
 	echo '</table>';
 	return $total;
@@ -136,7 +136,7 @@ function compte_resultat_benefice_perte($recettes, $depenses) {
 	echo "<td width='30'><strong>&nbsp;</strong></td>";
 	$res = $recettes-$depenses;
 	echo "<td class='arial11 border1' style='text-align:right;color: #9F1C30;'><strong>" . (($res<0) ? _T('asso:cpte_resultat_perte') : _T('asso:cpte_resultat_benefice')) . "</strong></td>";
-	echo "<td width='80' class='arial11 border1' style='text-align:right;color: #9F1C30;'><strong>" . number_format($res, 2, ',', ' ') . "</strong></td>";
+	echo '<td width="80" class="decimal">'. association_nbrefr($res) .'</td>';
 	echo "</tr></table>";
 }
 
@@ -167,21 +167,21 @@ function compte_resultat_benevolat($var, $class) {
 			$chapitre = $new_chapitre;
 			echo '</tr><tr style="background-color: #EEEEEE;">';
 		}
-		echo "<td>&nbsp;</td>";
-		echo "<td class='arial11 border1'>" . $data['code'] . '</td>';
-		echo "<td class='arial11 border1'>" . $data['intitule'] . '</td>';
-		echo '<td class="arial11 border1" style="text-align:right;">' . number_format($recettes, 2, ',', ' ') . '</td>';
-		echo '<td class="arial11 border1" style="text-align:right;">' . number_format($depenses, 2, ',', ' ') . '</td>';
+		echo '<td>&nbsp;</td>';
+		echo '<td class="text">'. $data['code'] .'</td>';
+		echo '<td class="text">'. $data['intitule'] .'</td>';
+		echo '<td class="decimal">'. association_nbrefr($recettes) .'</td>';
+		echo '<td class="decimal">'. association_nbrefr($depenses) .'</td>';
 		echo '</tr>';
 		$total_recettes += $recettes;
 		$total_depenses += $depenses;
 	}
-	$total_recettes = number_format($total_recettes, 2, ',', ' ');
-	$total_depenses = number_format($total_depenses, 2, ',', ' ');
+	$total_recettes = association_nbrefr($total_recettes);
+	$total_depenses = association_nbrefr($total_depenses);
 	echo '<tr style="background-color: #EEEEEE;">';
-	echo "<td class='arial11 border1' style='text-align:right;color: #9F1C30;' colspan='3'><strong>" . _T('asso:resultat_courant') . '</strong></td>';
-	echo "<td class='arial11 border1' style='text-align:right;color: #9F1C30;'><strong>" . $total_recettes . '</strong></td>';
-	echo "<td class='arial11 border1' style='text-align:right;color: #9F1C30;'><strong>" . $total_depenses . '</strong></td>';
+	echo '<th class="decimal" colspan="3">'. _T('asso:resultat_courant') .'</th>';
+	echo '<th class="decimal">'. $total_recettes .'</th>';
+	echo '<th class="decimal">'. $total_depenses .'</th>';
 	echo "</tr>";
 	echo '</table>';
 }
