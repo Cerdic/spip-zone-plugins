@@ -13,23 +13,31 @@ options:
     options:
       nom: 'correspondance_champs_formulaire_table'
       label: 'Correspondances du formulaire vers la table'
-      explication: 'Indiquez pour chaque champ du formulaire, le nom du champ de la table utilisateur'
+      explication: 'Indiquez pour chaque champ du formulaire, le nom du champ de la table utilisateur, sous la forme de lignes : input_1|champtitre ou input_3+input_4+input_5|lestrois'
       defaut: 'input_1|titre...'
       rows: 6
   -
     saisie: 'input'
     options:
-      nom: 'champ_cle_primaire'
-      label: 'Nom de la clé primaire de votre table'
-      explication: 'Indiquez le nom du champ contenant les id_auteurs dand la table destinataire des enregistrements'
+      nom: 'champ_id_auteur'
+      label: 'Champ auteur'
+      explication: 'Indiquez le nom du champ contenant les identifiants des auteurs'
+      defaut: 'id_auteur'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'multiple'
+      label: '<:formidable:traiter_enregistrement_option_multiple_label:>'
+      explication: '<:formidable:traiter_enregistrement_option_multiple_explication:>'
+      defaut: 'on'
   -
     saisie: 'input'
     options:
-      nom: 'champ_id_auteur'
-      label: 'Champ id_auteur de votre table'
-      explication: 'Indiquez le nom du champ contenant les id_auteurs dand la table destinataire des enregistrements'
-      defaut: 'id_auteur'
-      afficher_si: '@champ_cle_primaire@'
+      nom: 'champ_cle_primaire'
+      label: 'Clé primaire'
+      explication: 'Indiquez le nom la clé primaire de la table destinataire (obligatoire si vous interdisez les réponses multiples)'
+      defaut: 'id_...'
+      afficher_si: '@multiple@!="on"'
   -
     saisie: 'radio'
     options:
@@ -44,13 +52,6 @@ options:
     options:
       nom: 'champ_statut'
       label: 'Champ statut'
-      explication: 'Indiquez le nom du champ qui contient le statut de chaque enregistrement sil existe. Videz sinon.'
+      explication: 'Indiquez le nom du champ qui contient le statut de chaque enregistrement sil existe (obligatoire si vous choisissez la modération a priori)'
       defaut: 'statut'
-      afficher_si: '@moderation@ == "priori"'
-  -
-    saisie: 'oui_non'
-    options:
-      nom: 'multiple'
-      label: '<:formidable:traiter_enregistrement_option_multiple_label:>'
-      explication: '<:formidable:traiter_enregistrement_option_multiple_explication:>'
-      defaut: 'on'
+      afficher_si: '@moderation@=="priori"'
