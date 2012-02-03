@@ -100,7 +100,7 @@ function skeleditor_extraire_css($texte){
 				$css[$s] = explode('&',
 					str_replace('&amp;', '&', $r[2]), 2);
 			else
-				$css[$s] = $src;
+				$css[$s] = preg_replace(",[?]\d+$,","",$src);
 		}
 	}
 	return $css;
@@ -115,7 +115,8 @@ function skeleditor_affichage_final($texte){
 				jQuery(this).html(\"<a class='sepopin' href='$url\"+jQuery(this).html()+\"'>\"+jQuery(this).html()+'<'+'/a>');
 			});"
 			//."jQuery('a.sepopin').click(function(){if (jQuery.modalbox) jQuery.modalbox(parametre_url(this.href,'var_zajax','contenu'));return false;});"
-			."});</script></body>";
+			."});</script><style>.spip-admin-boutons {display:block;float:left;margin-right:10px;} .spip-admin-boutons a{display:block;opacity:0.7;} .spip-admin-boutons:hover,.spip-admin-boutons a:hover {opacity:1.0;}</style>
+			</body>";
 			$texte = preg_replace(",</body>,",$inserer,$texte);
 			
 			$css = skeleditor_extraire_css($texte);
@@ -129,7 +130,7 @@ function skeleditor_affichage_final($texte){
 			.">".basename($src)."<\/a>";
 			}
 			if (count($lienplus)){
-				$lienplus = implode('<br />',$lienplus);
+				$lienplus = implode('',$lienplus);
 				$lienplus = "<span class='spip-admin-boutons' id='inclure'>$lienplus<\/span>";
 			};
 
