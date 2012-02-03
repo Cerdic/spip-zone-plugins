@@ -3,6 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_deplacer_saisie_dist() {
+	include_spip('inc/session');
 	
 	$session 	 = _request('session');
 	$identifiant = _request('saisie');
@@ -32,7 +33,6 @@ function action_deplacer_saisie_dist() {
 
 	// On sauve tout ca
 	$formulaire_actuel = session_set($session, $formulaire_actuel);
-	
 }
 
 ?>

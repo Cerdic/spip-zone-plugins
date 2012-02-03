@@ -126,6 +126,8 @@ function saisies_generer_html($champ, $env=array()){
 	else{
 		// On récupère la liste des erreurs
 		$contexte['erreurs'] = $env['erreurs'];
+		// On ajoute toujours le bon self
+		$contexte['self'] = self();
 	}
 
 	// Dans tous les cas on récupère de l'environnement la valeur actuelle du champ
