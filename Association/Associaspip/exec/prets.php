@@ -47,7 +47,7 @@ function exec_prets()
 		echo '<th>'._T('asso:prets_entete_date_sortie').'</th>';
 		echo '<th>'._T('asso:entete_nom').'</th>';
 		echo '<th>'._T('asso:prets_entete_duree').'</th>';
-		echo '<th>'._T('asso:entete_date_retour').'</th>';
+		echo '<th>'._T('asso:prets_entete_date_retour').'</th>';
 		echo '<th colspan="2" class="actions">'._T('asso:entete_action').'</th>';
 		echo "</tr>\n</thead><tbody>";
 		$query = sql_select('*', 'spip_asso_prets', "id_ressource=$id_ressource", '', 'date_sortie DESC' );
@@ -76,7 +76,7 @@ function exec_prets()
 			$auteur = sql_fetsel('*', 'spip_asso_membres', "id_auteur=$id_emprunteur");
 			echo '<td class="n">'.association_calculer_nom_membre($auteur['sexe'], $auteur['prenom'], $auteur['nom_famille'],'span');
 			echo '</td><td class="date">' .association_dureefr($data['duree'],'j') .'</td>';
-			echo '<td class="date">'. ($data['date_retour']=='0000-00-00' ? '&nbsp' : association_datefr($data['date_retour'],'dtend') .'</td>';
+			echo '<td class="date">'. ($data['date_retour']=='0000-00-00' ? '&nbsp' : association_datefr($data['date_retour'],'dtend') ) .'</td>';
 			echo '<td class="actions">'. association_bouton('prets_nav_annuler', 'poubelle-12.gif', 'action_prets', 'id_pret='.$data['id_pret'].'&id_ressource='.$id_ressource) .'</td>';
 			echo '<td class="actions">' . association_bouton('prets_nav_editer', 'edit-12.gif', 'edit_pret', 'id_pret='.$data['id_pret']) . '</td>';
 			echo "</tr>\n";

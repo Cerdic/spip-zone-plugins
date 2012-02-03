@@ -24,6 +24,9 @@
  -** .assso_autres seulement pour l'instant
  ** Les identifiants englobants (idem) prennet le nom de l'objet (au singulier) ou de la collection/table (au pluriel) -- nom qui est souvent le nom de la page-- et sont prefixees par le nom de la classe
 
+ */
+
+
 
 /** Titres
  ******************************/
@@ -48,29 +51,29 @@ table.asso_tablo
 	font-family: Arial, Sans, sans-serif;
 	font-size: 8pt;
 } /* @: http://stackoverflow.com/a/7129454 http://w3schools.com/cssref/pr_tab_border-collapse.asp */
-table.asso_tbl thead tr
+table.asso_tablo thead tr
 {
 	background-color: #dbe1c5; /* HTML: TR bgcolor=#dbe1c5 */
 }
-table.asso_tbl tbody tr
+table.asso_tablo tbody tr
 {
 	background-color: #eee; /* HTML: TR bgcolor=#eeeeee */
 }
-table.asso_tbl tfoot tr
+table.asso_tablo tfoot tr
 {
 	background-color: #eee; /* HTML: TR bgcolor=#eeeeee */
 }
-table.asso_tbl th, table.asso td
+table.asso_tablo th, table.asso_tablo td
 { /* cas par defaut des cellules */
 	text-align: left; /* HTML: TD align=left */
 	padding: 2px; /* HTML: TABLE cellpadding=2 */
-	font-size: 11px; /* HTML: class=arial11 */
+/*	font-size: 11px; /* HTML: class=arial11 ? */
 }
-table.asso_tbl tbody td
+table.asso_tablo tbody td
 {
 	border-top: 1px solid #ccc; /* class=border1 */
 }
-table.asso_tbl tfoot td
+table.asso_tablo tfoot td
 {
 	color: #9F1C30;
 /*	text-align: right; */
@@ -78,11 +81,11 @@ table.asso_tbl tfoot td
 /* couleurs de texte specifiques */
 td.entree, th.entree
 {
-	color: "blue";
+	color: #00f; /* blue */
 }
 td.sortie, th.sortie
 {
-	color: "pink";
+	color: #FF1493; /* pink */
 }
 td.solde, th.solde
 {

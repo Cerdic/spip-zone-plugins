@@ -77,7 +77,7 @@ function exec_dons() {
 			echo '<td class="decimal">'. association_prixfr($data['argent']) .'</td>';
 			echo '<td class="text">'.$data['colis'].'</td>';
 			echo ($data['vu']
-				? ('<td class="text" colspan="2">'.&nbsp;.'</td>')
+				? ('<td class="text" colspan="2">&nbsp;</td>')
 			    : ('<td class="decimal">'.association_prixfr($data['valeur']).'</td>'
 				 . '<td class="text">'. propre($data['contrepartie']) .'</td>')
 				);

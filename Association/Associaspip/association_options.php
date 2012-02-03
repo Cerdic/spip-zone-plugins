@@ -83,25 +83,25 @@ function association_ajouterBoutons($boutons_admin) {
 
 // recupere dans une chaine un champ d'une table spip_asso_XX pour un enregistrement identifie par son id_XX
 function sql_asso1champ($table, $id, $champ) {
-	$data = sql_fetsel($champ, "spip_asso_$table", "id_$table"=intval($id));
+	$data = sql_fetsel($champ, "spip_asso_{$table}s", "id_$table=".intval($id));
 	return $data[$champ];
 }
 
 // recupere dans un tableau associatif un enregistrement d'une table spip_asso_XX identifie par son id_XX
 function sql_asso1ligne($table, $id) {
-	$data = sql_fetsel('*', "spip_asso_$table", "id_$table"=intval($id));
+	$data = sql_fetsel('*', "spip_asso_{$table}s", "id_$table=".intval($id));
 	return $data;
 }
 
 # ensemble de fonctions pour recuperer les donnees de l'exercice en cours
 function exercice_intitule($exercice) {
-	return sql_asso1champ('exercice', &exercice, 'intitule');
+	return sql_asso1champ('exercice', $exercice, 'intitule');
 }
 function exercice_date_debut($exercice) {
-	return sql_asso1champ('exercice', &exercice, 'debut');
+	return sql_asso1champ('exercice', $exercice, 'debut');
 }
 function exercice_date_fin($exercice) {
-	return sql_asso1champ('exercice', &exercice, 'fin');
+	return sql_asso1champ('exercice', $exercice, 'fin');
 }
 
 // Affichage micro-formate d'un nom complet (de membre) suivant la configuration du plugin (i.e. champs geres ou non)
@@ -139,12 +139,12 @@ function association_calculer_lien_nomid($nom, $id, $type='membre', $html_tag=''
 	}
 	$res .= $nom;
 	if ($id) {
-		$res .= '->'.$type.']';
+		$res .= "->$type$id]";
 	}
 	if ($html_tag) {
 		$res .= '</'.$html_tag.'>';
 	}
-	return $res;
+	return propre($res);
 }
 
 // Affichage de date localisee et micro-formatee

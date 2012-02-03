@@ -45,7 +45,7 @@ function exec_ressources()
 		echo '<th>'._T('asso:ressources_entete_code').'</th>';
 		echo '<th>'._T('asso:entete_montant').'</th>';
 		echo '<th colspan="3" class="actions">'._T('asso:entete_action').'</th>';
-		echo "</tr>\n";
+		echo "</tr>\n</thead><tbody>";
 		$query = sql_select('*', 'spip_asso_ressources', '','',  'id_ressource') ;
 		while ($data = sql_fetch($query)) {
 			echo '<tr>';

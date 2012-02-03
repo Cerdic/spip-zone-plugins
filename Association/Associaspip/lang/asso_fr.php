@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entete_montant' => 'Montant',
 	'entete_nom' => 'Nom',
 	'entete_statut' => 'Statut',
-	'entete_solde' => 'Solde'.
+	'entete_solde' => 'Solde',
 	'entete_tous' => 'Tous',
 	# Libelles communes
 	'libelle_commentaire' => 'Commentaire',
@@ -91,7 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'devise_montant' => '@montant@&nbsp;@devise@', // pays francophones/luxophone/etc. : '@nombre@&nbsp;@devise@' ; pays anglophones/germanophones/etc. : '@devise@&nbsp;@nombre@' ; pour l'usage, cf. <http://programmer.spip.org/Syntaxe-complete-des-codes-de> & <http://programmer.spip.org/Codes-de-langue-en-PHP>
 	'duree_temps' => '@nombre@&nbsp;@unite@',
 	'nombre_fois' => '@nombre@ fois',
-	'totaux_titre' => 'Totaux@titre@ : ',
+	'totaux_titre' => 'Totaux @titre@',
 	'date_du_jour' => 'Nous sommes le @date@',
 	'date_du_jour_heure' => 'Nous sommes le @date@ et il est @time@',
 
