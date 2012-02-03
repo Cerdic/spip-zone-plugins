@@ -1,10 +1,10 @@
 <?php
 
-function formulaires_contact_libre_charger_dist($adresse, $url=''){
+function formulaires_contact_libre_charger_dist($adresse, $url='', $sujet=''){
 	include_spip('inc/texte');
 	
 	$valeurs = array(
-		'sujet_message'=>'',
+		'sujet_message'=>$sujet,
 		'texte_message'=>'',
 		'email_message'=>$GLOBALS['visiteur_session']['email']
 	);
@@ -15,7 +15,7 @@ function formulaires_contact_libre_charger_dist($adresse, $url=''){
 	return $valeurs;
 }
 
-function formulaires_contact_libre_verifier_dist($adresse, $url=''){
+function formulaires_contact_libre_verifier_dist($adresse, $url='', $sujet=''){
 	$erreurs = array();
 	include_spip('inc/filtres');
 	include_spip('inc/texte');
@@ -28,7 +28,7 @@ function formulaires_contact_libre_verifier_dist($adresse, $url=''){
 	if (!$sujet=_request('sujet_message'))
 		$erreurs['sujet_message'] = _T("info_obligatoire");
 	elseif(!(strlen($sujet)>3))
-		$erreurs['sujet_message'] = _T('forum_attention_trois_caracteres');
+		$erreurs['sujet_message'] = _T('forum_attention_trois_caracteres','',array('force'=>false)) ? _T('forum_attention_trois_caracteres') : _T('forum:forum_attention_trois_caracteres');
 
 	if (!$texte=_request('texte_message'))
 		$erreurs['texte_message'] = _T("info_obligatoire");
@@ -41,7 +41,7 @@ function formulaires_contact_libre_verifier_dist($adresse, $url=''){
 		$caracteres = compter_caracteres_utiles($texte);
 		// moins de 10 caracteres sans les liens = spam !
 		if ($caracteres < 10){
-			$erreurs['texte_message'] = _T('forum_attention_dix_caracteres');
+			$erreurs['texte_message'] = _T('forum_attention_dix_caracteres','',array('force'=>false)) ? _T('forum_attention_dix_caracteres') : _T('forum:forum_attention_dix_caracteres');
 		}
 		// on analyse le sujet
 		$infos_sujet = analyser_spams($sujet);
@@ -67,7 +67,7 @@ function formulaires_contact_libre_verifier_dist($adresse, $url=''){
 	return $erreurs;
 }
 
-function formulaires_contact_libre_traiter_dist($adresse, $url=''){
+function formulaires_contact_libre_traiter_dist($adresse, $url='', $sujet=''){
 	
 	$adres = _request('email_message');
 	$sujet=_request('sujet_message');
