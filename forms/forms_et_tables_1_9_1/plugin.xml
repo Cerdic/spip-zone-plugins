@@ -1,21 +1,17 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	<multi>[ar]&#1575;&#1604;&#1575;&#1587;&#1578;&#1605;&#1575;&#1585;&#1575;&#1578;[en]Forms[fr]Formulaires&amp;Tables[it] Forms[es] Formularios</multi> (SPIP 1.9.1+)
+	<nom>
+		<multi>
+			[ar]&#1575;&#1604;&#1575;&#1587;&#1578;&#1605;&#1575;&#1585;&#1575;&#1578;
+			[en]Forms and tables
+			[fr]Formulaires&amp;Tables
+			[it]Forms
+			[es]Formularios
+			</multi>
 	</nom>
 	<icon>img_pack/form-24.png</icon>
-	<auteur>	<!-- Auteur du plugin -->
-		<multi>[ar]&#1575;&#1606;&#1591;&#1608;&#1575;&#1606; &#1576;&#1578;&#1585;&#1608;&#1548; &#1587;&#1610;&#1583;&#1585;&#1610;&#1603; &#1605;&#1608;&#1585;&#1575;&#1606;&#1548; &#1585;&#1610;&#1606;&#1575;&#1578;&#1608;
-		[fr]Antoine Pitrou, Cedric Morin, Renato Formato
-		[it]Antoine Pitrou, Cedric Morin, Renato Formato
-	  [es]Antoine Pitrou, Cedric Morin, Renato Formato
-		</multi>
-	</auteur>
-	<version>
-	0.305
-	</version>
-	<etat>
-	stable
-	</etat>
+	<auteur>Antoine Pitrou, Cedric Morin, Renato Formato</auteur>
+	<version>0.3.5</version>
+	<etat>stable</etat>
 	<description>
 	<multi>
 	[ar]&#1573;&#1583;&#1575;&#1585;&#1577; &#1575;&#1604;&#1575;&#1587;&#1578;&#1605;&#1575;&#1585;&#1575;&#1578; &#1608;&#1578;&#1581;&#1585;&#1610;&#1585;&#1607;&#1575;.
@@ -31,21 +27,11 @@
 	</multi>
 	</description>
 	<lien>http://zone.spip.org/trac/spip-zone/wiki/SpipForms</lien> <!-- URI de documentation -->
-	<options> <!-- fichier charge a chaque hit -->
-	forms_options.php
-	</options>
-	<fonctions> <!-- fichier charge a chaque recalul de page -->
-	forms_fonctions.php
-	</fonctions>
-	<fonctions> <!-- fichier charge a chaque recalul de page -->
-	public/forms_boucles.php
-	</fonctions>
-	<fonctions> <!-- fichier charge a chaque recalul de page -->
-	public/forms_balises.php
-	</fonctions>
-	<prefix>
-	Forms
-	</prefix>
+	<options>forms_options.php</options>
+	<fonctions>forms_fonctions.php</fonctions>
+	<fonctions>public/forms_boucles.php</fonctions>
+	<fonctions>public/forms_balises.php</fonctions>
+	<prefix>Forms</prefix>
 	<install>base/forms_upgrade.php</install>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
