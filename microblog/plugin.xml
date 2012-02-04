@@ -1,5 +1,6 @@
 <plugin>
 	<nom>Microblog</nom>
+	<slogan>Envoyer des micro-messages sur les sites de microblog (compatibles Twitter)</slogan>
 	<auteur>Fil &#169; 2009-2010</auteur>
 	<icon>prive/themes/spip/images/microblog-32.png</icon>
 	<licence>LGPL</licence>
@@ -8,7 +9,7 @@
 	<etat>stable</etat>
 	<description>
 		<multi>
-			[fr]Envoyer des micromessages vers les plateformes laconica, twitter (via supertweet.net), twitter (via l'API oAuth), spip.org etc. Fournit une fonction <code>microblog($statut, $user, $pass, $service);</code>.
+			[fr]Envoyer des micro-messages vers les plateformes laconica, twitter (via supertweet.net), twitter (via l'API oAuth), spip.org etc. Fournit une fonction <code>microblog($statut, $user, $pass, $service);</code>.
 	
 Utilise la librairie [twitteroauth->http://github.com/abraham/twitteroauth] d'Abraham Williams pour l'API oAuth de Twitter.
 			[en]Send micromessages to the microblogging platforms like laconica, twitter (via supertweet.net), twitter (via l'API oAuth), spip.org etc. Provides a function <code>microblog($statut, $user, $pass, $service);</code>.
@@ -44,7 +45,7 @@ Uses the library [twitteroauth->http://github.com/abraham/twitteroauth] of Abrah
 		<titre>microblog:titre_microblog</titre>
 		<icone>images/microblog-16.png</icone>
 	</bouton>
-	<necessite id="SPIP" version="[2.1.0;3.0.0]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 
 	<categorie>communication</categorie>
 </plugin>
