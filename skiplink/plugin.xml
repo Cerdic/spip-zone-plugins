@@ -1,5 +1,6 @@
 <plugin>
 <nom>SkipLinks</nom>
+<slogan>Liens de navigation interne &#224; une page</slogan>
 <prefix>skiplink</prefix>
 <icon>icon/skiplink-64.png</icon>
 
