@@ -1,5 +1,6 @@
 <plugin>
 	<nom>Twitstream</nom>
+	<slogan>Afficher des recherches dans Twitter par hashtag</slogan>
 	<auteur>cyp</auteur>
     <licence>GNU/GPL - (c) 2010</licence>
 	<version>0.1.0</version>
