@@ -1555,6 +1555,15 @@ array(
     'embed-height' => '255',
     'iframe-player' => 'http://www.qwiki.com/embed/$2',
   ),
+array( /*  http://500px.com/photo/4778494 */
+    'title' => '500px',
+    'website' => 'http://500px.com',
+    'url-match' => 'http://(.*\.)?500px\.com/photo/.*',
+    'fetch-match' => '<meta property=\"og:image\" content=\"([^\"]*)\"\/>',
+    'embed-width' => '280',
+    'embed-height' => '280',
+    'image-src' => '$2',
+  ),
 
   /*
  array(

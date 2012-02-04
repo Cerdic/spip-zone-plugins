@@ -98,10 +98,12 @@ function embed_url($url) {
 			} else {
 				$AE->setParam('autoplay','false');
 				
+				
 				$attributs = $AE->getObjectAttribs();
 				$w = $attributs["width"];
 				$h = $attributs["height"];
 				
+				//print_r($attributs);
 				if ($w > $max_w) {
 					$rapport = $w / $max_w;
 					
@@ -121,7 +123,7 @@ function embed_url($url) {
 				if ($source == "YouTube") {
 					$embed = rawurlencode($embed);
 					$embed = "<div onclick=\"$(this).html(decodeURIComponent('$embed'));\" style='width: ".$w."px; height: ".$h."px; background: url($vignette) center center; cursor: pointer;'></div>";
-				} else if ($source == "Twitpic") {
+				} else if ($source == "Twitpic" OR $source == "500px") {
 					$embed = "<a href='$url'><img src='$vignette' alt='' style='max-width:200px; max-height: 200px;' /></a>";
 				}
 				
