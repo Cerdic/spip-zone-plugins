@@ -1,11 +1,11 @@
 <plugin>
 	<nom>Forum urbAgora</nom>
+	<slogan>Forums arborescents</slogan>
 	<auteur>Franz</auteur>
 	<licence>GNU/GPL - (c) 2010</licence>
 	<version>0.1.0</version>
 	<etat>test</etat>
 	<description>Forums arborescents d&#233;velopp&#233;s pour l'association <a href="http://urbagora.be/" class="spip_out">urbAgora</a> (Li&#232;ge)</description>
-	<lien>http://urbagora.be/</lien>
 	<prefix>forum_urbagora</prefix>
 	<icon>forum_urbagora.png</icon>
 	<fonctions>forum_urbagora_fonctions.php</fonctions>
