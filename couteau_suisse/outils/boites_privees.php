@@ -78,8 +78,7 @@ function boites_privees_affiche_droite($flux) {
 function cs_pipeline_boite_privee(&$flux, $endroit) {
 	// liste de filtres
 	$globale = 'boites_privees_'.$endroit;
-	if(!isset($GLOBALS[$globale])) return $flux;
-	if(!is_array($GLOBALS[$globale])) return $flux;
+	if(!(isset($GLOBALS[$globale]) && is_array($GLOBALS[$globale]))) return $flux;
 	$liste = array_unique($GLOBALS[$globale]);
 	foreach($liste as $f)
 		if (function_exists($f)) $flux['data'] = $f($flux['data'], $flux['args']['exec']);

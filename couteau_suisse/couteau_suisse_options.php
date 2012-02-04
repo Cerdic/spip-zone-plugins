@@ -99,7 +99,7 @@ else {
 	// fichiers testes : tmp/couteau-suisse/mes_options.php et tmp/couteau-suisse/mes_spip_options.php
 	$cs_exists = file_exists($f_mo = _DIR_CS_TMP.'mes_options.php');
 	$f_mso = _DIR_CS_TMP.'mes_spip_options.php';
-	if(isset($GLOBALS['cs_spip_options']) && !$GLOBALS['cs_spip_options']) $cs_exists &= file_exists($f_mso);
+	if(!(isset($GLOBALS['cs_spip_options']) && $GLOBALS['cs_spip_options'])) $cs_exists &= file_exists($f_mso);
 	if(!$cs_exists) cs_log(" -- '$f_mo' ou '$f_mso' introuvable !");
 
 	// lancer l'initialisation du plugin. on force la compilation si cs=calcul
@@ -108,7 +108,7 @@ else {
 	if(defined('_LOG_CS')) cs_log("PUIS : couteau_suisse_options, initialisation terminee");
 
 	// inclusion des options hautes de SPIP, si ce n'est pas deja fait par config/mes_options.php
-	if (isset($GLOBALS['cs_spip_options']) && !$GLOBALS['cs_spip_options']) {
+	if(!(isset($GLOBALS['cs_spip_options']) && $GLOBALS['cs_spip_options'])) {
 		if(file_exists($f_mso)) {
 			if(defined('_LOG_CS')) cs_log(" -- inclusion de '$f_mso'");
 			include_once($f_mso);
