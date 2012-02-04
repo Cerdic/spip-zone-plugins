@@ -46,15 +46,14 @@ class AutoEmbed {
    *
    * @return boolean - whether or not the url contains valid/supported video
    */
-  public function parseUrl($url) {
+  public function parseUrl($url, $html=null) {
     global $AutoEmbed_stubs;
 
     foreach ($AutoEmbed_stubs as $stub) { 
       if ( preg_match('~'.$stub['url-match'].'~imu', $url, $match) ) {
         $this->_stub = $stub;
-        
         if ( isset($stub['fetch-match'] ) ) {
-          return $this->_parseLink($url);
+          return $this->_parseLink($url, $html);
 
         } else {
           $this->_media_id = $match;
@@ -235,8 +234,10 @@ class AutoEmbed {
   /**
    * Attempt to parse the embed id from a given URL
    */ 
-  private function _parseLink($url) {
-    $source = preg_replace('/[^(\x20-\x7F)]*/','', file_get_contents($url));
+  private function _parseLink($url, $html=null) {
+	  if (!$html)
+		  $html = file_get_contents($url);
+    $source = preg_replace('/[^(\x20-\x7F)]*/','', $html);
 	// echo _stub['fetch-match'];
     if ( preg_match('~'.$this->_stub['fetch-match'].'~imu', $source, $match) ) {
       $this->_media_id = $match;
