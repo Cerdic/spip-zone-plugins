@@ -1,10 +1,11 @@
 <plugin>
-	<nom>Mes abonnes</nom>
+	<nom>Mes abonn&#233;s</nom>
+	<slogan>Gestion d'abonnement pour logiciels de publipostages</slogan>
 	<auteur>[erational->http://www.erational.org]</auteur>
 	<licence>GNU/GLP</licence>
 	<version>0.3.3</version>
 	<etat>test</etat>
-	<description>module d'abonnement pour logiciels de publipostages de type MaxBulker Mailer</description>
+	<description>Module d'abonnement pour logiciels de publipostages de type MaxBulker Mailer</description>
 	<lien>http://www.spip-contrib.net/Mes-abonnes</lien>
 	<prefix>mesabonnes</prefix>
 	<icon>images/logo_mesabonnes_48.png</icon>
