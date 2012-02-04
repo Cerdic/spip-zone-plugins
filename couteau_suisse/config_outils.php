@@ -1362,6 +1362,28 @@ add_variable( array(
 	'code:%s<>30' => "define('_SPIP_SELECT_MAX_AUTEURS', %s);"
 ));
 
+// largeur d'ecran de la partie privee
+add_variable( array(
+	'nom' => 'spip_ecran',
+	'format' => _format_CHAINE,
+	'radio' => array('defaut' => 'couteauprive:par_defaut', 'large' => 'spip:info_grand_ecran', 'etroit' => 'spip:info_petit_ecran'),
+	'defaut' => 'defaut',
+	'label' => '@_CS_CHOIX@',
+	"code:%s!='defaut'" => "\$GLOBALS['spip_ecran']=\$_COOKIE['spip_ecran']=%s;",
+));
+add_outil( array(
+	'id' => 'spip_ecran',
+	'categorie' => 'interface',
+	'code:spip_options' => '%%spip_ecran%%',
+	'pipelinecode:header_prive' => '
+$e = _request(\'exec\');
+if(( $e==\'configurer_preferences\' ||  $e==\'config_preferences\' /* SPIP < 3 */) && "%%spip_ecran%%"!="defaut") {
+	$flux.=\'<script type="text/javascript"><!--
+function disable_spip_ecran(){ jQuery("[name=\\"spip_ecran\\"]").attr("disabled", "disabled"); }
+if(typeof onAjaxLoad=="function") onAjaxLoad(disable_spip_ecran);
+if(window.jQuery) jQuery(document).ready(disable_spip_ecran);
+//--></script>\'; }',
+));
 
 // Recuperer tous les outils (et leurs variables) de la forme outils/toto_config.xml
 foreach (find_all_in_path('outils/', '\w+_config\.xml$') as $f) {

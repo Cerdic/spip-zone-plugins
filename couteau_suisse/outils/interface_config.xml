@@ -91,7 +91,7 @@
 </outil>
 
 
-<!--	--------- Largeur d'ecran ---------	-->
+<!--	--------- Largeur d'ecran ---------	
 <variable>
 	<id>spip_ecran</id>
 	<format>string</format>
@@ -112,7 +112,6 @@
 	<label>@_CS_CHOIX@</label>
 	<defaut_php>defaut</defaut_php>
 	<code>
-		<!-- ![CDATA[ non encore supporte par SPIP ! -->
 		<condition_php>%s!='defaut'</condition_php>
 		<script_php>$GLOBALS['spip_ecran']=$_COOKIE['spip_ecran']=%s;</script_php>
 	</code>
@@ -124,7 +123,7 @@
 		<type>spip_options</type>
 		<script_php>%%spip_ecran%%</script_php>
 	</code>
-</outil>
+</outil> -->
 
 <!--	--------- Allegement de l'interface privee ---------	-->
 <outil>
