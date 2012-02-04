@@ -1,5 +1,6 @@
 <plugin>
 	<nom>Jappix Mini</nom>
+	<slogan>Un chat dans votre spip</slogan>
 	<auteur>[davux->http://da.weeno.net/]</auteur>
 	<icon>images/jappix.png</icon>
 	<lien>http://www.spip-contrib.net/Jappix-Mini</lien>
