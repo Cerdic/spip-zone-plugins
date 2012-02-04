@@ -3,7 +3,8 @@
 	<auteur>[BoOz->BoOz@rezo.net]</auteur>
 	<version>1.9.0</version>
 	<etat>dev</etat>
-	<description>Listes d'informations par email</description>
+	<slogan>Listes d'informations par email</slogan>
+	<description>SPIP-listes permet la gestion et l'envoi de lettres d'information (newsletters) au moyen d'un courriel au format html ou texte. Il est possible d'envoyer des messages aux abonn&#233;s qui se sont formellement inscrits &#224; une ou plusieurs lettres d'information via un formulaire d'inscription.	</description>
 	<options>spiplistes_mes_options.php</options>
 	<fonctions>spiplistes_mes_fonctions.php</fonctions>
 	<prefix>spiplistes</prefix>
@@ -17,6 +18,6 @@
 		<nom>taches_generales_cron</nom>
 	</pipeline>
       
-	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.1]" />
 	<categorie>communication</categorie>
 </plugin>

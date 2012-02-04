@@ -4,11 +4,20 @@
 	<version>1.97.0</version>
 	<etat>test</etat>
 	<icon>spip-listes.png</icon>
-	<description>
+	<slogan>
 		<multi>
 			[fr]Listes d'informations par email
 			[en]Newsletter by e-mail
 			[ar]&#1606;&#1588;&#1585;&#1577; &#1576;&#1585;&#1610;&#1583;&#1610;&#1577;
+			[es]Listas para informar por email (emails y boletines informativos)
+		</multi>
+	</slogan>
+	<description>
+		<multi>
+			[fr]SPIP-listes permet la gestion et l'envoi de lettres d'information (newsletters) au moyen d'un courriel au format html ou texte. Il est possible d'envoyer des messages aux abonn&#233;s qui se sont formellement inscrits &#224; une ou plusieurs lettres d'information via un formulaire d'inscription.
+			[en]Newsletter by e-mail
+			[ar]&#1606;&#1588;&#1585;&#1577; &#1576;&#1585;&#1610;&#1583;&#1610;&#1577;
+			[es]Listas para informar por email (emails y boletines informativos)
 		</multi>
 	</description>
 	<options>spiplistes_mes_options.php</options>
