@@ -27,8 +27,7 @@ function accessibilite_pre_liens($texte){
 				// Quand un title est spécifie il doit etre plus plus long que l'intitule
 				// car les lecteurs d'ecran lisent le plus long des deux
 				$title = ((($intitule[1]) && _ACCESSIBILITE_CONSERVER_BULLE) ? 
-					/*textebrut(supprimer_numero(typo($titredoc))). ' &ndash; ' .*/ // Si on met une bulle d'aide explicte, ce n'est pas pour la retrouver précédée du titre du doc
-					textebrut(supprimer_numero(typo($intitule[1]))):textebrut(supprimer_numero(typo($titredoc)))) // Le texte du lien + Nom du doc
+						textebrut(supprimer_numero(typo($intitule[1]))) . ' (' . textebrut(supprimer_numero(typo($titredoc))) . ')':textebrut(supprimer_numero(typo($titredoc)))) // Le texte du lien + Nom du doc
 					. ' &ndash; ' . $row['T2'] // Le type du doc
 					. ' (' . taille_en_octets($row['taille']) . ')' // sa taille
 					. (($intitule[2]) ? ' ('.traduire_nom_langue($intitule[2]).')':''); // La langue presente dans le lien (malheureusement, info non disponible dans la table spip_documents)
