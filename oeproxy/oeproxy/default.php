@@ -139,70 +139,129 @@ function oeproxy_default_autoembed($url,$options,$html=null){
 		$AE->setHeight($h);
 	}
 
-	$embed = $AE->getEmbedCode();
-	#$vignette = $AE->getImageURL();
-
-	#$source = $AE->getStub("title");
-	#$code_ae = "<div class='oembed-container'>".$embed."</div>";
-
 	$p = stripos($html,'</head>');
 	include_spip('inc/filtres');
 	$title = extraire_balise($p?substr($html,0,$p):$html,"title");
 	$title = strip_tags($title);
 
+	// si c'est un stub photo, generer un format photo
+	if ($AE->getStub("image-src")
+		AND !$AE->getStub("iframe-player")
+	  AND !$AE->getStub("embed-src")){
 
-	$result = array(
-		// type (required)
-    // The resource type. Valid values, along with value-specific parameters, are described below.
-		'type' => 'rich',
+		$result = array(
+			// type (required)
+	    // The resource type. Valid values, along with value-specific parameters, are described below.
+			'type' => 'photo',
 
-		// version (required)
-    // The oEmbed version number. This must be 1.0.
-		'version' => '1.0',
+			// version (required)
+	    // The oEmbed version number. This must be 1.0.
+			'version' => '1.0',
 
-		// title (optional)
-    // A text title, describing the resource.
-		'title' => $title,
+			// title (optional)
+	    // A text title, describing the resource.
+			'title' => $title,
 
-		// html (required)
-    // The HTML required to display the resource. The HTML should have no padding or margins. Consumers may wish to load the HTML in an off-domain iframe to avoid XSS vulnerabilities. The markup should be valid XHTML 1.0 Basic.
-		'html' => oeproxy_cite($url,$title,$embed),
+			// html (required)
+	    // The HTML required to display the resource. The HTML should have no padding or margins. Consumers may wish to load the HTML in an off-domain iframe to avoid XSS vulnerabilities. The markup should be valid XHTML 1.0 Basic.
+			'url' => $AE->getImageURL(),
 
-		// width (required)
-    // The width in pixels required to display the HTML.
-		'width' => $w,
+			// width (required)
+	    // The width in pixels required to display the HTML.
+			'width' => $AE->getStub("embed-width"),
 
-		// height (required)
-    // The height in pixels required to display the HTML.
-		'height' => $h,
+			// height (required)
+	    // The height in pixels required to display the HTML.
+			'height' => $AE->getStub("embed-height"),
 
-		// author_name (optional)
-    // The name of the author/owner of the resource.
-		// NIY
-		// 'author_name' => '',
+			// author_name (optional)
+	    // The name of the author/owner of the resource.
+			// NIY
+			//'author_name' => $show['user']['username'],
 
-		// author_url (optional)
-    // A URL for the author/owner of the resource.
-		// NIY
-		// 'author_url' => '',
+			// author_url (optional)
+	    // A URL for the author/owner of the resource.
+			// NIY
+			//'author_url' => "http://twitpic.com/photos/".$show['user']['username'],
 
 
-		// thumbnail_url (optional)
-    // A URL to a thumbnail image representing the resource. The thumbnail must respect any maxwidth and maxheight parameters. If this paramater is present, thumbnail_width and thumbnail_height must also be present.
-		// NIY
-		// 'thumbnail_url' => '',
+			// thumbnail_url (optional)
+	    // A URL to a thumbnail image representing the resource. The thumbnail must respect any maxwidth and maxheight parameters. If this paramater is present, thumbnail_width and thumbnail_height must also be present.
+			//'thumbnail_url' => 'http://twitpic.com/show/thumb/'.$id,
 
-		// thumbnail_width (optional)
-    // The width of the optional thumbnail. If this paramater is present, thumbnail_url and thumbnail_height must also be present.
-		// NIY
-		// 'thumbnail_width' => '',
+			// thumbnail_width (optional)
+	    // The width of the optional thumbnail. If this paramater is present, thumbnail_url and thumbnail_height must also be present.
+			//'thumbnail_width' => '150',
 
-		// thumbnail_height (optional)
-    // The height of the optional thumbnail. If this paramater is present, thumbnail_url and thumbnail_width must also be present.
-		// NIY
-		// 'thumbnail_height' => '',
+			// thumbnail_height (optional)
+	    // The height of the optional thumbnail. If this paramater is present, thumbnail_url and thumbnail_width must also be present.
+			//'thumbnail_height' => '150',
+		);
+	}
 
-	);
+	// sinon format rich
+	else {
+
+		$embed = $AE->getEmbedCode();
+		#$vignette = $AE->getImageURL();
+
+		#$source = $AE->getStub("title");
+		#$code_ae = "<div class='oembed-container'>".$embed."</div>";
+
+
+		$result = array(
+			// type (required)
+	    // The resource type. Valid values, along with value-specific parameters, are described below.
+			'type' => 'rich',
+
+			// version (required)
+	    // The oEmbed version number. This must be 1.0.
+			'version' => '1.0',
+
+			// title (optional)
+	    // A text title, describing the resource.
+			'title' => $title,
+
+			// html (required)
+	    // The HTML required to display the resource. The HTML should have no padding or margins. Consumers may wish to load the HTML in an off-domain iframe to avoid XSS vulnerabilities. The markup should be valid XHTML 1.0 Basic.
+			'html' => oeproxy_cite($url,$title,$embed),
+
+			// width (required)
+	    // The width in pixels required to display the HTML.
+			'width' => $w,
+
+			// height (required)
+	    // The height in pixels required to display the HTML.
+			'height' => $h,
+
+			// author_name (optional)
+	    // The name of the author/owner of the resource.
+			// NIY
+			// 'author_name' => '',
+
+			// author_url (optional)
+	    // A URL for the author/owner of the resource.
+			// NIY
+			// 'author_url' => '',
+
+
+			// thumbnail_url (optional)
+	    // A URL to a thumbnail image representing the resource. The thumbnail must respect any maxwidth and maxheight parameters. If this paramater is present, thumbnail_width and thumbnail_height must also be present.
+			// NIY
+			// 'thumbnail_url' => '',
+
+			// thumbnail_width (optional)
+	    // The width of the optional thumbnail. If this paramater is present, thumbnail_url and thumbnail_height must also be present.
+			// NIY
+			// 'thumbnail_width' => '',
+
+			// thumbnail_height (optional)
+	    // The height of the optional thumbnail. If this paramater is present, thumbnail_url and thumbnail_width must also be present.
+			// NIY
+			// 'thumbnail_height' => '',
+
+		);
+	}
 
 	return $result;
 }
