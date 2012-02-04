@@ -178,7 +178,7 @@ function oeproxy_cite($url,$title,$html){
 }
 
 /**
- * Détecter les liens oembed dans le head d'une page web
+ * Dï¿½tecter les liens oembed dans le head d'une page web
  *
  * @param string $url
  * @param array $args
@@ -196,9 +196,10 @@ function oeproxy_verifier_annonce($url, $args, $html=null) {
 
 	if ($html) {
 		$providers = array();
-		// types de liens oembed à détecter
+		// types de liens oembed ï¿½ dï¿½tecter
 		$linktypes = array(
 			'application/json+oembed' => 'json',
+			'text/json+oembed' => 'json', // ex de 500px
 			'text/xml+oembed' => 'xml',
 			'application/xml+oembed' => 'xml', // uniquement pour Vimeo
 		);
