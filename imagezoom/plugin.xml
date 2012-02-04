@@ -1,5 +1,6 @@
 <plugin>
 	<nom>Loupe Photo</nom>
+	<slogan>Un mod&#232;le pour afficher une loupe sur une image</slogan>
 	<auteur>[Pierre Andrews->mortimer.pa@free.fr], J&#224;nos T&#242;th</auteur>
 	<licence>GNU/GPL</licence>
 	<version>0.1.0</version>
