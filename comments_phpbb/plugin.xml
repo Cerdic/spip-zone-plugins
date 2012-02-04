@@ -1,16 +1,17 @@
 <plugin>
 	<nom>Commentaires PhpBB</nom>
+	<slogan>Cr&#233;e un topic dans un forum PhpBB &#224; chaque nouvel article publi&#233;</slogan>
 	<icon>img_pack/comments_phpbb.png</icon>
 	<version>0.6.0</version>
 	<version_base>0.5</version_base>
 	<prefix>comments_phpbb</prefix>
 	<etat>test</etat>
 	<auteur>jfefe, Dorch</auteur>
-	<description>Ce plugin cr&#233;e un nouveau sujet sur votre forum PhpBB &agrave; chaque publication d'un nouvel article dans SPIP, afin d'y accueillir les commentaires des forumeurs.
+	<description>Ce plugin cr&#233;e un nouveau sujet sur votre forum PhpBB &#224; chaque publication d'un nouvel article dans SPIP, afin d'y accueillir les commentaires des forumeurs.
 
 	Deux nouvelles balises pour les squelettes (boucles ARTICLES) :
-	- #NB_COMMENTAIRES : affiche le nombre de commentaires dans le topic phpBB
-	- #TOPIC_ID : identifiant du topic cr&#233;e dans phpBB (pour faire un lien vers le topic : http://leforum.tld/viewtopic.php?t=#TOPIC_ID)
+	- <code>#NB_COMMENTAIRES</code> : affiche le nombre de commentaires dans le topic phpBB
+	- <code>#TOPIC_ID</code> : identifiant du topic cr&#233;e dans phpBB (pour faire un lien vers le topic : http://leforum.tld/viewtopic.php?t=#TOPIC_ID)
 	</description>
 	<lien>http://www.spip-contrib.net/article3015</lien>
 	
