@@ -202,6 +202,7 @@ function oembed_detecter_lien($url) {
 		// types de liens oembed à détecter
 		$linktypes = array(
 			'application/json+oembed' => 'json',
+			'text/json+oembed' => 'json', // ex de 500px
 			'text/xml+oembed' => 'xml',
 			'application/xml+oembed' => 'xml', // uniquement pour Vimeo
 		);
