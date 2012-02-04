@@ -1,5 +1,6 @@
 <plugin>
 	<nom>Notifications</nom>
+	<slogan>Signaler par mail des modifications</slogan>
 	<auteur>[fil->fil@rezo.net]</auteur>
 	<version>0.5.6</version>
 	<etat>test</etat>
