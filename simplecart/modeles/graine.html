@@ -1,0 +1,19 @@
+<BOUCLE_shelfItem(DOCUMENTS spip_documents_liens){id_document=#ENV{id}}{tout}>
+	<div class="simpleCart_shelfItem">
+[(#LOGO_DOCUMENT|image_reduire{0,130}|image_recadre{110,110,center,'transparent'}|inserer_attribut{'class', 'item_image'})]
+	   [<h5 class="item_name #EDIT{titre}">(#TITRE)</h5>]
+	   [<p class="item_Description #EDIT{descriptif}">
+	   (#ARGUMENT_VENTE|sinon{#DESCRIPTIF}|couper{75}|textebrut)
+	   </p>]
+<small class="item_ref"><a href="[(#URL_ARTICLE{#ID_OBJET})]" class="openbox" id="lien#ID_OBJET" title="<:en_savoir_plus:>">D&eacute;tail</a></small>
+	   [<span class="item_price #EDIT{prix}">[(#CONFIG{simplecart/devise_id}|iso_devise|sinon{$})](#PRIX)</span>]
+	   <a href="javascript:;" class="item_add"><:simplecart:add_to_cart:></a>
+	   <span class="item_thumb">
+[(#LOGO_DOCUMENT|image_reduire{0,90}|image_recadre{75,75,center,'transparent'}|extraire_attribut{'src'})]</span>
+	</div>
+</BOUCLE_shelfItem>
+
+
+
+
+

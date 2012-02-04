@@ -4,6 +4,7 @@ include_spip('inc/utils');
 
     function simplecart_insert_head($stream){
             $js = '<script src=\''.url_absolue(find_in_path('simpleCart.js')).'\' type=\'text/javascript\'></script>';
+            $js .= '<script src=\''.url_absolue(find_in_path('javascript/detail_simplecart.js')).'\' type=\'text/javascript\'></script>';
             $js .= '<script type="text/javascript">';
             
             $js .= lire_config('simplecart/cart_headers') ? 'simpleCart.cartHeaders ='.lire_config('simplecart/cart_headers').';': '';

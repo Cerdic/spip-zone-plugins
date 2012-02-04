@@ -1,0 +1,29 @@
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:catalogue:></strong></p>
+
+<div class="contenu-principal">
+<div class="cartouche">
+	<h1 class="h1"><:catalogue:></h1>
+</div>
+
+
+<BOUCLE_rubriques(RUBRIQUES){par id_secteur, titre}>
+<div id='[(#_rubriques:TITRE|textebrut|trim)]'></div>
+	<BOUCLE_articles(ARTICLES){id_rubrique}>
+	
+	<B_Graines>
+		[(#REM) On ne met le titre de la rubrique qu'une fois et que si il y a des graines a vendre!]
+		
+		[<h2>(#_rubriques:TITRE|unique)</h2>
+		<br class="nettoyeur" />]
+		
+		<BOUCLE_Graines(DOCUMENTS){id_article}{par titre}{prix>0}>
+		[(#MODELE{graine}{id_document})]
+		</BOUCLE_Graines>
+	</B_Graines>
+	
+	</BOUCLE_articles>
+<br class="nettoyeur" />
+</BOUCLE_rubriques>
+
+</div>

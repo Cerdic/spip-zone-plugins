@@ -1,108 +1,252 @@
-    .itemContainer{
-        width:100%;
-        float:left;
-    }
-    
-    .itemContainer div{
-        float:left;
-        margin: 5px 20px 5px 20px ;
-    }
-    
-    .itemContainer a{
-        text-decoration:none;
-    }
+/**********************************
+Here lies the CSS for the simpleCart(js) Official Demo.
+You don't need any of this for simpleCart(js) to work.
+PLEASE USE YOUR OWN STYLESHEET AS WE WILL NOT OFFER SUPPORT FOR ANY STYLING ISSUES. 
+**********************************/
 
-    
-    .cartHeaders div{
-        float:left;
-        margin: 5px 10px;
-    }
-    
-.item_thumb{
-    display:none;
+
+/**********************************
+RESETS 
+(Commented out since its already in the simplecartjs.com global.css, 
+but since I know some of you will just use this stylesheet I'm leaving 
+it in here, please uncomment the resets if you intend on using 
+this stylesheet. Otherwise you may run into unexpected results. Thanks!)
+**********************************/
+/*
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td { margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent;
+}
+body { line-height: 1;
+}
+ol, ul { list-style: none;
+}
+blockquote, q { quotes: none;
 }
 
+/ remember to define focus styles! /
+:focus { outline: 0;
+}
 
+/ remember to highlight inserts somehow! /
+ins { text-decoration: none;
+}
+del { text-decoration: line-through;
+}
 
+/ tables still need �cellspacing=�0�� in the markup /
+table { border-collapse: collapse; border-spacing: 0;
+}
+*/
+/**********************************
+DEMO STYLES
+**********************************/
+.itemname, .itemQuantity input, .itemTotal, #viewFullDemoLink, .simpleCart_empty{color:#555}
 
-
-
+#demoContainer{
+	width:855px;
+	height:832px;
+	padding:81px 0 0 49px;
+	margin:0 auto;
+}
 .simpleCart_shelfItem{
-    float:left;
-    margin:5px 10px;
-    width:250px;
-    height:141px;
-    line-height:100%;
-    position:relative;
-    font-size: 12px;
+ background: none repeat scroll 0 0 #F8F8F8;
+    color: #555555;
+    float: left;
+    font: 16px "HelveticaNeue-Light","Helvetica Neue","HelveticaNeue",Helvetica,Arial,sans-serif;
+    height: 141px;
+    margin: 30px 10px 20px 0;
+    padding: 5px;
+    position: relative;
+    width: 240px;
 }
+
+
 .item_image{
-    float:left;
-    margin-right:15px;
+	float:left;
+	margin-right:15px;
 }
 .item_name{
-    margin-top:15px;
+	text-transform:uppercase;
+	font:bold 12px "Helvetica", Arial, sans-serif;
+	color:#000;
+	margin: 10px 0 0;
 }
 .item_Description{
-    font-size:11px;
-    padding:5px 0;
+	font-size:11px;
+	padding:5px 0;
+	margin: 0;
 }
 
+#templatemo_content p.item_Description{
+		text-align: left;
+margin:0;
+}
 
-
+.item_price{
+	font:bold 12px "Helvetica", Arial, sans-serif;
+	color:#000;
+	float:left;
+	margin:6px 3px 0 0;
+	position:absolute;
+	bottom:13px;
+	left:118px;
+}
+.item_thumb{
+	display:none;
+}
 .item_add{
-    display:block;
-    font-size: 1.2em;
-    height:25px;
+	display:block;
+	width:85px;
+	height:25px;
+	text-indent:-9999px;
+	overflow:hidden;
+	background:url(../images/demoSprite.png) 0 -21px;
+	position:absolute;
+	bottom:8px;
+	right:3px;
+}
+.item_add:hover{
+	background-position:-85px -21px;
+}
+.item_add:active{
+	background-position:-170px -21px;
 }
 
+a.item_add:focus{
+	background:transparent url(../images/demoSprite.png) -85px -21px !important;
+ outline: 0; color:transparent;
+}
+
+.simpleCart_items{
+	clear:both;
+	float:left;
+	margin: 18px 0px 0px 11px;
+	position:relative;
+}
 .cartHeaders{
-    display:none;
+	display:none;
 }
-
+.itemContainer{
+    background: none repeat scroll 0 0 #F8F8F8;
+    bottom: 0;
+    float: left;
+    height: 200px;
+    margin: 10px 0 10px 10px;
+    padding: 5px;
+    position: relative;
+    text-align: center;
+    width: 120px;
+}
+#templatmeo_sidebar .itemContainer{
+	width: 100px;
+}
+.itemname{
+	font:bold 11px "Helvetica", Arial, sans-serif;
+	text-transform:uppercase;
+}
+.itemthumb{
+	float:none;
+	margin:0;
+	padding-top:5px;
+	height: 80px;
+}
+.itemQuantity{
+	float:left;
+	clear:both;
+	margin-top:5px;
+	display:inline;
+	margin-left:30px;
+}
 .itemQuantity input{
-    background:none;
-    border:1px;
-    width:21px;
-    height:17px;
-    text-align:center;
-    font:bold 11px Arial, sans-serif;
-    padding:0 9px;
-    margin:0 5px 0 0;
-    vertical-align:top;
-    padding-top:3px;
+	background:none;
+	border:none;
+	width:21px;
+	height:17px;
+	background:url(../images/demoSprite.png);
+	text-align:center;
+	font:bold 11px Arial, sans-serif;
+	padding:0 9px;
+	margin:0 5px 0 0;
+	vertical-align:top;
+	padding-top:3px;
 }
-
 .itemQuantity input:focus{
-    outline:none;
+	outline:none;
 }
-
+.itemincrement a{
+	display:block;
+	background:url(../images/demoSprite.png) -278px -29px;
+	width:7px;
+	height:5px;
+	text-indent:-9999px;
+	overflow:hidden;
+	margin:10px 0 0 0;
+}
+.itemdecrement a{
+	display:block;
+	background:url(../images/demoSprite.png) -278px -35px;
+	width:7px;
+	height:5px;
+	text-indent:-9999px;
+	overflow:hidden;
+	margin:3px 0 0 0;
+}
+.itemTotal{
+	font:bold 11px Arial, sans-serif;
+	margin:8px 0 0 0;
+	padding:0;
+	clear:both;
+}
 #cartTotal{
-    clear:both;
-    text-align:right;
-    font:11px Arial, sans-serif;
-    text-shadow:none;
-    margin-top:23px;
-    float:left;
-    width:100%;
-    margin-left:-65px;
-}
-
-.simpleCart_checkout {
+   border-top: 1px dotted #555555;
+    clear: both;
     float: right;
-    font-size: 1.3em;
-    padding:6px;
-    text-decoration:none;
+    font: 11px Arial,sans-serif;
+    margin-right: 20px;
+    margin-top: 10px;
+    padding-top: 10px;
+    text-align: right;
+    text-shadow: none;
 }
-
-.simpleCart_empty {
+#viewFullDemoLink{
+	clear:both;
+	font:10px Arial, sans-serif;
+	display:block;
+	padding:5px 0 0 0;
+	margin-left:140px;
+	text-decoration:none;
+}
+#viewFullDemoLink:hover{
+	text-decoration:underline;
+}
+.simpleCart_empty{
+  display: block;
     float: right;
-    font-size: 1.3em;
-    padding:6px;
-    text-decoration:none;
+    font-size: 11px;
+    margin: 3px 0 10px 5px;
+    padding: 10px;
+}
+.simpleCart_checkout{
+ background: none repeat scroll 0 0 #FFFFFF;
+    display: block;
+    clear: right;
+    font-weight: bold;
+    margin: 3px -10px 10px 5px;
+    padding: 10px;
+    text-transform: uppercase;
 }
 
-.simpleCart_clear {
-    clear:both;
-    margin-bottom:5px;
+.totalpanier{clear:both;background:#EEE;margin-right: 10px;}
+.totalpanier h3{
+	margin:35px 3px 0 3px;
+	padding:20px 0 0;
+	font:bold 20px "Helvetica", Arial, sans-serif;
 }
+
