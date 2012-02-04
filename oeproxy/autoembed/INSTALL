@@ -1,0 +1,10 @@
+
+La classe AutoEmbed est développée ici:
+http://autoembed.com/
+
+Cette version légèrement modifiée contient, surtout, le fichier index.php qui permet d'avoir un serveur ultra-léger de fichiers Embed. La version ne dépend absolument pas de SPIP (elle est auto-suffisante). Il suffit d'installer le dossier autoembed, et d'interroger:
+http://www.monsite.com/autoembed/?url=mavideodechatquivole
+
+Il ne s'agit pas d'un oEmbed, puisque ça retourne directement le code HTML à intégrer dans sa page.
+
+
