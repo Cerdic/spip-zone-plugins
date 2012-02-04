@@ -250,3 +250,6 @@ a.item_add:focus{
 	font:bold 20px "Helvetica", Arial, sans-serif;
 }
 
+#cboxContent {
+    text-align: left;
+}
