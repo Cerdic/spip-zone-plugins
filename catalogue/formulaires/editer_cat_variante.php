@@ -29,7 +29,7 @@ function formulaires_editer_cat_variante_verifier_dist($id_cat_variante='new', $
 function formulaires_editer_cat_variante_traiter_dist($id_cat_variante='new', $id_article='', $retour=''){
 	set_request('date', cat_date_picker_to_date(_request('date')));
 	set_request('date_redac', cat_date_picker_to_date(_request('date_redac')));
-	
+
 	// si redirection demandee, on refuse le traitement en ajax
 	if ($retour) refuser_traiter_formulaire_ajax();
 	return formulaires_editer_objet_traiter('cat_variante', $id_cat_variante, '', '', $retour, '');
@@ -46,4 +46,6 @@ function cat_date_picker_to_date($datePicker, $heurePicker = '00:00'){
 
 	return date("Y-m-d H:i:s",$date);
 }
+
+
 ?>

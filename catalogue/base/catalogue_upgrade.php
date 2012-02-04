@@ -14,21 +14,22 @@ function catalogue_upgrade($nom_meta_base_version, $version_cible){
 		$current_version = $GLOBALS['meta'][$nom_meta_base_version];
 		spip_log('12:14 Version actuelle : '.$current_version,'catalogue');
 	}
-	
+
 	if ($current_version=="0.0") {
 		creer_base();
-		#include_spip('base/catalogue_peupler_base');
-		#catalogue_peupler_base();
+#		include_spip('base/catalogue_peupler_base');
+#		catalogue_peupler_base(); // donnees de test
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 		spip_log('Base de données Catalogue correctement peuplée','catalogue');
 	}
+
 	if (version_compare($current_version,"1.3","<")){
 		maj_tables('spip_variantes');
 		maj_tables('spip_options');
 		maj_tables('spip_options_articles');
 		maj_tables('spip_transactions');
 		maj_tables('spip_lignes_transactions');
-				
+
 		ecrire_meta($nom_meta_base_version,$current_version="1.3");
 		spip_log('Tables du plugin Catalogue correctement passsées en version 1.3','catalogue');
 	}
@@ -58,25 +59,43 @@ function catalogue_upgrade($nom_meta_base_version, $version_cible){
 		sql_alter('TABLE spip_cat_lignes_transactions CHANGE id_ligne id_cat_ligne bigint(21) NOT NULL auto_increment');
 		sql_alter('TABLE spip_cat_lignes_transactions CHANGE id_transaction id_cat_transaction bigint(21) NOT NULL DEFAULT 0');
 		sql_alter('TABLE spip_cat_options_articles CHANGE id_option id_cat_option bigint(21) NOT NULL DEFAULT 0');
-		
+
 		ecrire_meta($nom_meta_base_version, $current_version="1.4.0");
 		spip_log('Tables du plugin Catalogue correctement passsées en version 1.4.0','catalogue');
 	}
 
 	// pas de gestion de transactions dans ce plugin !
+	// ce plugin peut etre couple avec "Panier"...
 	if (version_compare($current_version,"1.5.0","<")){
 		sql_drop_table("spip_lignes_transactions");
 		sql_drop_table("spip_transactions");
 		ecrire_meta($nom_meta_base_version, $current_version="1.5.0");
-		spip_log('Tables du plugin Catalogue correctement passsées en version 1.5.0','catalogue');		
+		spip_log('Tables du plugin Catalogue correctement passsées en version 1.5.0','catalogue');
 	}
+
+	// Arrivee des quantites et leur unite de base
+	if (version_compare($current_version,"1.6.0","<")){
+		if (!sql_alter("TABLE spip_cat_variantes ADD quantite FLOAT DEFAULT 0 NOT NULL")) spip_log('Probleme lors de la modif de la table variantes (ajout quantite)','catalogue'); // on change les quantites (et non stocks disponibles --parfois c'est pareil, mais pas toujours)
+		if (!sql_alter("TABLE spip_variantes ADD unite VARCHAR(10) DEFAULT '' NOT NULL")) spip_log('Probleme lors de la modif de la table variantes (ajout unite)','catalogue'); // on ajoute les unites de mesure (abreviation SI) associees aux quantites vendues (et non posseedees --parfois c'est pareil mais pas toujours)
+
+		ecrire_meta($nom_meta_base_version, $current_version="1.6.0");
+		spip_log('Tables du plugin Catalogue correctement passsées en version 1.6.0','catalogue');
+	}
+
+,'catalogue'); // on change le type de "descriptif" de TINYTEXT à TEXT
+
+		ecrire_meta($nom_meta_base_version, $current_version="1.3.1");
+		spip_log('Tables du plugin Catalogue correctement passsées en version 1.3.1','catalogue');
+	}
+
+
 }
 
 
 function catalogue_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_options_articles");
-	sql_drop_table("spip_options");
-	sql_drop_table("spip_variantes");
+	sql_drop_table("spip_cat_options");
+	sql_drop_table("spip_cat_variantes");
 
 	spip_log('Plugin Catalogue correctement désinstallé.','catalogue');
 	effacer_meta($nom_meta_base_version);

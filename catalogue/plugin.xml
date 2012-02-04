@@ -2,8 +2,8 @@
 	<nom>Catalogue</nom>
 	<slogan>Transformer les articles SPIP en articles de catalogue</slogan>
 	<auteur>[Cyril MARION->http://www.cym.fr]</auteur>
-	<version>1.5.0</version>
-	<version_base>1.5</version_base>
+	<version>1.6.0</version>
+	<version_base>1.6</version_base>
 	<etat>test</etat>
 	<description>
 	<multi>
@@ -52,7 +52,7 @@ _ This plugin requires [Contacts &amp; Organisations->http://files.spip.org/spip
 	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>catalogue_autorisations.php</inclure>
-	</pipeline>	
+	</pipeline>
 
 	<pipeline>
 		<nom>affiche_milieu</nom>

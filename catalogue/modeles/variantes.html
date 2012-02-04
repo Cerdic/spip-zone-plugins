@@ -1,21 +1,21 @@
+[(#REM)<!-- squelette modeles/variantes.html
+Affiche la liste des variantes de produit, associées à un article
 
-<!-- squelette modeles/variantes.html -->
+parametres :
+id_article : ID de l'article-produit
 
-[(#REM)
-
-	Affiche la liste des variantes de produit, associées à un article
-	
-]
+-->]
 
 
+<B_variantes>
+<dl class='fiche[-(#:article:STATUT] properties listprice'>
 <BOUCLE_variantes(CAT_VARIANTES){statut IN prop,prepa,publie}{id_article=#ID}{par prix_ht}>
-<dl class='fiche[(#STATUT|=={publie}|non)prop]'>
+	<dt class="desc #EDIT{titre} property"><label for="variante_#ID_CAT_VARIANTE">#TITRE[<span class="italique #EDIT{descriptif}">&nbsp;(#DESCRIPTIF|PtoBR|sinon{'ajouter descriptif &agrave; la variante...'})</span>]</label></dt>
 	<dd class="radio"><input type="radio" name="id_cat_variante" id="variante_#ID_CAT_VARIANTE" value="#ID_CAT_VARIANTE" [ (#STATUT|=={publie}|oui)checked='checked'] [(#STATUT|=={publie}|non) disabled='disabled']/></dd>
-	<dd class="desc #EDIT{titre}"><label for="variante_#ID_CAT_VARIANTE">#TITRE[<span class="italique #EDIT{descriptif}">&nbsp;(#DESCRIPTIF|PtoBR|sinon{'ajouter descriptif &agrave; la variante...'})</span>]</label></dd>
-	[<dd class="prix #EDIT{prix_ht}">(#PRIX_HT|monetaire)</dd>]
-	[<!--dd class="prix">(#EVAL{[(#EVAL{1+#TVA})]*[(#PRIX_HT)]}|monetaire)</dd-->]
-</dl>
+	[<dd class="prix price"><span class="amount #EDIT{prix_ht}">(#PRIX_HT|monetaire)</span>[ / <span class="unit #EDIT{unite}">(#UNITE)</span>]</dd>]
+	[<!--dd class="prix price"><span class="amount #EDIT{prix_ht}">(#EVAL{[(#EVAL{1+#TVA})]*[(#PRIX_HT)]}|monetaire)</span>[ / <span class="unit #EDIT{unite}">(#UNITE)</span>]</dd-->]
 </BOUCLE_variantes>
+</dl>
 </B_variantes>
 <!-- Aucune variante trouv&eacute;e pour ce produit -->
 <//B_variantes>

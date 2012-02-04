@@ -6,23 +6,23 @@
 
 // xxx_declarer_tables_interfaces est l'endroit ou l'on indique les raccourcis à utiliser comme table de boucle SPIP
 function catalogue_declarer_tables_interfaces($interface){
-	
+
 	$interface['table_des_tables']['cat_variantes'] = 'cat_variantes';
 	$interface['table_des_tables']['cat_options'] = 'cat_options';
 	$interface['table_des_tables']['cat_options_articles'] = 'cat_options_articles';
 	$interface['table_des_tables']['cat_transactions'] = 'cat_transactions';
 	$interface['table_des_tables']['cat_lignes_transactions'] = 'cat_lignes_transactions';
-	
+
 	/**
 	 * Objectif : pouvoir utiliser les champs liés dans les boucles...
 	 *
 	 */
 	$interface['tables_jointures']['spip_articles'][]= 'cat_variantes';
-	$interface['tables_jointures']['spip_cat_variantes'][]= 'articles';
-	$interface['tables_jointures']['spip_cat_options']['id_cat_option']= 'spip_cat_options_articles';
-	$interface['tables_jointures']['spip_articles']['id_article']= 'spip_cat_options_articles';
+	$interface['tables_jointures']['spip_cat_variantes'][] = 'articles';
+	$interface['tables_jointures']['spip_cat_options']['id_cat_option'] = 'spip_cat_options_articles';
+	$interface['tables_jointures']['spip_articles']['id_article'] = 'spip_cat_options_articles';
 
-	
+
 	/**
 	 * Objectif : autoriser les traitements SPIP sur certains champs texte...
 	 *
@@ -41,15 +41,17 @@ function catalogue_declarer_tables_principales($tables_principales){
 
 	//-- Table variantes ------------------------------------------
 	$cat_variantes = array(
-		"id_cat_variante" 	=> "bigint(21) NOT NULL auto_increment",
-		"id_article" 	=> "bigint(21) NOT NULL DEFAULT 0",
-		"titre" 		=> "tinytext DEFAULT '' NOT NULL",
-		"descriptif" 	=> "text DEFAULT '' NOT NULL",
+		"id_cat_variante" 	=> "BIGINT NOT NULL auto_increment",
+		"id_article" 	=> "BIGINT NOT NULL DEFAULT 0",
+		"titre" 		=> "TINYTEXT DEFAULT '' NOT NULL",
+		"descriptif" 	=> "TEXT DEFAULT '' NOT NULL",
 		"statut"		=> "VARCHAR(10) NOT NULL DEFAULT 0",
-		"prix_ht" 		=> "decimal(6,2) default NULL",
-		"tva"			=> "decimal(4,3) default '0.196'",
-		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",
-		"date_redac" 	=> "datetime NOT NULL default '0000-00-00 00:00:00'",
+		"prix_ht" 		=> "DECIMAL(6,2) NOT NULL DEFAULT 0",
+		"tva"			=> "DECIMAL(4,3) NOT NULL DEFAULT '0.196'",
+		"quantite"		=> "FLOAT NOT NULL DEFAULT 0",
+		"unite"			=> "VARCHAR(10) NOT NULL DEFAULT ''",
+		"date" 			=> "DATETIME NOT NULL default '0000-00-00 00:00:00'",
+		"date_redac" 	=> "DATETIME NOT NULL default '0000-00-00 00:00:00'",
 		"maj"			=> "TIMESTAMP"
 		);
 	$cat_variantes_key = array(
@@ -62,13 +64,13 @@ function catalogue_declarer_tables_principales($tables_principales){
 
 	//-- Table options ------------------------------------------
 	$cat_options = array(
-		"id_cat_option" 	=> "bigint(21) NOT NULL auto_increment",
-		"titre" 		=> "tinytext DEFAULT '' NOT NULL",
-		"descriptif" 	=> "text DEFAULT '' NOT NULL",
+		"id_cat_option" 	=> "BIGINT NOT NULL auto_increment",
+		"titre" 		=> "TINYTEXT DEFAULT '' NOT NULL",
+		"descriptif" 	=> "TEXT DEFAULT '' NOT NULL",
 		"statut"		=> "VARCHAR(10) NOT NULL DEFAULT 0",
-		"prix_ht" 		=> "decimal(6,2) default 0",
-		"tva"			=> "decimal(4,3) default '0.196'",
-		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",
+		"prix_ht" 		=> "DECIMAL(6,2) NOT NULL DEFAULT 0",
+		"tva"			=> "DECIMAL(4,3) NOT NULL DEFAULT '0.196'",
+		"date" 			=> "DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'",
 		"maj"			=> "TIMESTAMP"
 		);
 	$cat_options_key = array(
@@ -79,7 +81,6 @@ function catalogue_declarer_tables_principales($tables_principales){
 
 
 	return $tables_principales;
-
 }
 
 function catalogue_declarer_tables_auxiliaires($tables_auxiliaires){
@@ -95,8 +96,9 @@ function catalogue_declarer_tables_auxiliaires($tables_auxiliaires){
 	$tables_principales['spip_cat_options_articles'] =
 		array('field' => &$cat_options_articles, 'key' => &$cat_options_articles_key);
 
-	
+
 	return $tables_auxiliaires;
 }
+
 
 ?>
