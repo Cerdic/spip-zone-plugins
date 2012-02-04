@@ -1,5 +1,6 @@
 <plugin>
 	<nom>Masquer</nom>
+	<slogan>Cacher des contenus sur le site public</slogan>
 	<auteur>Nicolas Hoizey, [St&#233;phanie Caron de Clever Age->http://www.clever-age.com/]</auteur>
 	<licence>GNU/GPL</licence>
 	<version>0.4.0</version>
