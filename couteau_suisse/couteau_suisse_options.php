@@ -95,7 +95,7 @@ else {
 		(isset($_GET['page']) && in_array($_GET['page'], array('print','imprimer','imprimir_articulo','imprimir_breve','article_pdf')))
 	   ) define('_CS_PRINT', 1);
 
-	// recherche des fichiers a inclure : si les fichiers sont absent, on recompilera le plugin
+	// recherche des fichiers a inclure : si les fichiers sont absents, on recompilera le plugin
 	// fichiers testes : tmp/couteau-suisse/mes_options.php et tmp/couteau-suisse/mes_spip_options.php
 	$cs_exists = file_exists($f_mo = _DIR_CS_TMP.'mes_options.php');
 	$f_mso = _DIR_CS_TMP.'mes_spip_options.php';

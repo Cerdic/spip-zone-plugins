@@ -690,7 +690,7 @@ _ • Uniquement pour les articles contenant la balise <code>@_CS_AVEC_SOMMAIRE@
 
 Ce sommaire est compatible avec « [.->decoupe] » et « [.->titres_typo] ».',
 	'sommaire:nom' => 'Sommaire automatique',
-	'sommaire_ancres' => 'Ancres choisies : <b><html>{{{Mon Titre<mon_ancre>}}}</html></b>',
+	'sommaire_ancres' => 'Ancres choisies : <b><html>{{{Mon Titre&lt;mon_ancre>}}}</html></b>',
 	'sommaire_avec' => 'Un texte avec sommaire : <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un texte sans sommaire : <b>@_CS_SANS_SOMMAIRE@</b>',
 	'sommaire_titres' => 'Intertitres hiérarchisés : <b><html>{{{*Titre}}}</html></b>, <b><html>{{{**Sous-titre}}}</html></b>, etc.',
