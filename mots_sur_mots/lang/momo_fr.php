@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //O
 //P
 	'parents_du_mot_ou_des_mots' => 'Parents de tous les mots-cl&eacute;s (qui en ont !)',
+	'pas_de_parents' => 'Ce mot-cl&eacute; n\'a pas de mot-cl&eacute; parent',
 	'plus_d_info_sur' => 'Plus d\'informations sur &laquo;&nbsp;@titre@&nbsp;&raquo;',
 //Q
 //R

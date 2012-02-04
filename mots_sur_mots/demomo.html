@@ -7,13 +7,19 @@
 		<:momo:parents_du_mot_ou_des_mots:>
 		[(#MODELE{parents_mot}{id_mot=#ID_MOT})]
 	</li>
-<BOUCLE_Mot_param_ou_hasard(MOTS){id_mot}>
+<BOUCLE_Mot_param_ou_hasard(MOTS){id_mot?}{par hasard}{0,1}>
 	<li id="hierarchie_mot">
 		<:momo:hierarchies_mot:>
 		<dl>
-			<dt>#TITRE</dt>
+			<dt>&#35;TITRE&nbsp;= <strong>#TITRE</strong> (&#35;ID_MOT&nbsp;= <strong>#ID_MOT</strong>)</dt>
 			<dd>
-				[(#MODELE{hierarchies_mot}{id_mot=#ID_MOT})]
+				[(#MODELE{hierarchies_mot}
+						{id_mot=#ID_MOT}
+						{id_groupe=#ENV{id_groupe}}
+						{tableau_id_groupe=#ENV{tableau_id_groupe}}
+						{nombre=#ENV{nombre}}
+					|sinon{<:momo:pas_de_parents:>}
+				)]
 			</dd>
 		</dl>
 	</li>
