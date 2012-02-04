@@ -1,5 +1,6 @@
 <plugin>
 	<nom>Dictionnaires</nom>
+	<slogan>Créer des dictionnaires</slogan>
 	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
 	<version>0.2.3</version>
