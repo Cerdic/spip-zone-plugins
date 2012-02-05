@@ -56,14 +56,16 @@
 
 ]
 <BOUCLE_Parents(MOMO)>
-	<BOUCLE_Est_un_parent(MOTS){id_mot=#ID_PARENT}{doublons sommets_potentiels}>
+	<BOUCLE_Est_un_parent(MOTS)
+				{id_mot=#ID_PARENT}
+				{doublons sommets_potentiels}>
 		<BOUCLE_Est_enfant(MOMO){id_mot}> </BOUCLE_Est_enfant>
 		</B_Est_enfant>
 		<div	class="boite"
 			id="id#ID_MOT"
 			style="	[top:(#GET{pos_h}|plus{1}|mult{#GET{hauteur}})em];"
 		>
-			<a href="#URL_MOT" title="<:momo:plus_d_info_sur{titre=#TITRE}|attribut_html:>">sommet: #TITRE</a>
+			<a href="#URL_MOT" title="<:momo:plus_d_info_sur{titre=#TITRE}|attribut_html:>">#TITRE</a>
 		</div>
 		[(#SET{pos_l,0})]
 [
@@ -83,6 +85,7 @@
 	et donc que c'est la première fois que l'on passe
 
 ]		[(#DOUBLONS{mots,enfants}|array_count_values|table_valeur{#ID_MOT}|>{1}|non)
+			[(#SET{pos_l_precedente,[(#GET{pos_l})]})]
 			[(#SET{pos_l,[(#GET{pos_l}|plus{1})]})]
 		<div	class="boite"
 			id="id#ID_MOT"
@@ -96,6 +99,7 @@
 				</BOUCLE_Recursion>
 				</B_Recursion>
 		[(#DOUBLONS{mots,enfants}|array_count_values|table_valeur{#ID_MOT}|>{1}|non)
+				[(#SET{pos_l_precedente,[(#GET{pos_l})]})]
 			[(#SET{pos_l,[(#GET{pos_l}|moins{1})]})]
 			[(#SET{pos_h_precedente,[(#GET{pos_h})]})]
 			[(#SET{pos_h,[(#GET{pos_h}|plus{1})]})]
@@ -103,12 +107,15 @@
 				<//B_Recursion>
 			</BOUCLE_Liste_mots_enfants>
 		[(#DOUBLONS{mots,enfants}|array_count_values|table_valeur{#ID_MOT}|>{1}|non)
-			[(#GET{pos_h_precedente}|>={#GET{largeur}}|oui)
+			[(#GET{pos_h_precedente}|<={#GET{pos_h}}|oui)
+				[(#SET{pos_l_precedente,[(#GET{pos_l})]})]
 				[(#SET{pos_l,[(#GET{pos_l}|moins{1})]})]
 			]
 		]
 			</B_Liste_mots_enfants>
-		[(#SET{pos_h,[(#GET{pos_h}|plus{1})]})]
+		[(#GET{pos_l_precedente}|<={#GET{pos_l}}|oui)
+			[(#SET{pos_h,[(#GET{pos_h}|plus{1})]})]
+		]
 		<//B_Est_enfant>
 	</BOUCLE_Est_un_parent>
 </BOUCLE_Parents>
