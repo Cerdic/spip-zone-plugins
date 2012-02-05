@@ -40,7 +40,7 @@
 			style="	[top:(#COMPTEUR_BOUCLE|moins{1}|mult{10})em];
 				[left:(#GET{nodes_ajoutes}|mult{15})em];"
 		>
-			#TITRE
+			<a href="#URL_MOT" title="<:momo:plus_d_info_sur{titre=#TITRE}|attribut_html:>">#TITRE</a>
 		</div>
 		[(#SET{hauteur_max,
 			[(#GET{hauteur_max}|<{[(#COMPTEUR_BOUCLE|mult{10})]}
@@ -58,7 +58,7 @@
 				[left:(#GET{nodes_ajoutes}|mult{7.5}|moins{7,5})em];
 				background-color:bisque;"
 		>
-			#TITRE
+			<a href="#URL_MOT" title="<:momo:plus_d_info_sur{titre=#TITRE}|attribut_html:>">#TITRE</a>
 		</div>
 	</BOUCLE_Ajout_Mot_central>
 </B_Tete_Hierarchie>
