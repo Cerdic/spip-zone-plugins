@@ -3,9 +3,12 @@
 Retourne une liste des mots-clés enfants (et leurs enfants récursivement) d'un mot clé passé en paramètre.
 
 ]
-	<BOUCLE_Liste_mots_enfants(MOTS){id_mot_parent = #ENV{id_mot}}{doublons}>
+<BOUCLE_mot_parent(MOTS){id_mot}>
+	<BOUCLE_Liste_mots_enfants(MOTS){id_mot_parent = #ID_MOT}>
+		[(#SET{liste_mots,[(#GET{liste_mots}|sinon{','})#ID_MOT,]})]
 		<BOUCLE_Recursion(BOUCLE_Liste_mots_enfants)>
 		</BOUCLE_Recursion>
 	</BOUCLE_Liste_mots_enfants>
-#DOUBLONS*{mots}
+#GET{liste_mots}
+</BOUCLE_mot_parent>
 #FILTRE{trim}
