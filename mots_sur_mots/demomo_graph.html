@@ -33,20 +33,35 @@
 	<div style="position:absolute">
 <BOUCLE_Tete_Hierarchie(MOTS){id_mot IN #GET{tableaux}|unserialize|table_valeur{id_mot_hierarchies}}>
 	<BOUCLE_Ajout_Nodes(MOTS)
-			{id_mot ?IN #GET{tableaux}|unserialize|table_valeur{hierarchie_#ID_MOT}|push{#_Mot_param_ou_hasard:ID_MOT}}
+			{id_mot ?IN #GET{tableaux}|unserialize|table_valeur{hierarchie_#ID_MOT}}
 			{doublons nodes}>
 		<div	class="boite"
 			id="id#ID_MOT"
 			style="	[top:(#COMPTEUR_BOUCLE|moins{1}|mult{10})em];
-				[left:(#GET{nodes_ajoutes}|mult{15})em];
-				[(#ID_MOT|=={#_Mot_param_ou_hasard:ID_MOT}|?{background-color:bisque;})]"
+				[left:(#GET{nodes_ajoutes}|mult{15})em];"
 		>
 			#TITRE
 		</div>
+		[(#SET{hauteur_max,
+			[(#GET{hauteur_max}|<{[(#COMPTEUR_BOUCLE|mult{10})]}
+				|?{[(#COMPTEUR_BOUCLE|mult{10})],#GET{hauteur_max}}
+			)]}
+		)]
 	</BOUCLE_Ajout_Nodes>
 		[(#SET{nodes_ajoutes,[(#GET{nodes_ajoutes}|plus{1})]})]
 	</B_Ajout_Nodes>
 </BOUCLE_Tete_Hierarchie>
+	<BOUCLE_Ajout_Mot_central(MOTS){id_mot = #_Mot_param_ou_hasard:ID_MOT}{doublons nodes}>
+		<div	class="boite"
+			id="id#ID_MOT"
+			style="	[top:(#GET{hauteur_max})em];
+				[left:(#GET{nodes_ajoutes}|mult{7.5}|moins{7,5})em];
+				background-color:bisque;"
+		>
+			#TITRE
+		</div>
+	</BOUCLE_Ajout_Mot_central>
+</B_Tete_Hierarchie>
 <p><strong><:momo:pas_de_parents:></strong></p>
 <//B_Tete_Hierarchie>
 	</div>
