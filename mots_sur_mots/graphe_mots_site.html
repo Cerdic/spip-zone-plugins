@@ -1,0 +1,142 @@
+<html>
+<head>
+	<title><:momo:graphe_site:></title>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<script type='text/javascript' src='http://code.jquery.com/jquery-1.6.2.js'></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.js"></script>
+	<script type='text/javascript' src="http://jsplumb.googlecode.com/files/jquery.jsPlumb-1.3.5-all-min.js"></script>
+<style>
+.boite { 
+	border:2px solid #346789;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-o-border-radius: 8px;
+	border-radius: 8px;
+	background-color:lightgrey;
+	opacity:0.8; 
+	filter:alpha(opacity=80);
+ 	width:8em; 
+	z-index:20; 
+	position:absolute; 
+	font-size:0.8em;
+	text-align: center;
+	padding: 1em;
+}
+.en-tete {
+ 	width:8em; 
+	position:absolute; 
+	font-size:0.8em;
+	text-align: center;
+	padding: 1em;
+	font-weight: bold;
+	height: 10000px;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
+	overflow: visible;
+	z-index:0;
+}
+</style>
+[(#SET{largeur,15})][(#SET{hauteur,8})]
+<body>
+	<h1><:momo:graphe_site:></h1>
+	<p><:momo:deplacement_possible:></p>
+	<div style="position:absolute">
+		<div class="en-tete" style="top: 0; [left:(#GET{largeur}|mult{0})em];"><:momo:sommet:></div>
+[
+(#REM) un compteur horrible pour ne pas dépendre de Bonux ou itérateurs
+	et afficher l'en tête des 5 sous-niveaux
+
+]<BOUCLE_COMPTEUR_HORRIBLE_niveaux(MOTS){0,5}>[(#SET{niv,#COMPTEUR_BOUCLE})]
+		<div class="en-tete" style="top: 0; [left:(#GET{largeur}|mult{#GET{niv}})em];"><:momo:sous_niveau{niv=#GET{niv}}:></div>
+</BOUCLE_COMPTEUR_HORRIBLE_niveaux>
+[
+(#REM) On choisi les mots qui sont parents et qui n'en ont pas: ce sont les sommets
+	la boucle _Est_un_parent vérifie la présence d'enfants
+	la boucle _Est_enfant permet de vérifier l'absence de parents (<//B_Est_enfant>)
+
+]
+<BOUCLE_Parents(MOMO)>
+	<BOUCLE_Est_un_parent(MOTS){id_mot=#ID_PARENT}{doublons sommets_potentiels}>
+		<BOUCLE_Est_enfant(MOMO){id_mot}> </BOUCLE_Est_enfant>
+		</B_Est_enfant>
+		<div	class="boite"
+			id="id#ID_MOT"
+			style="	[top:(#GET{pos_h}|plus{1}|mult{#GET{hauteur}})em];"
+		>
+			<a href="#URL_MOT" title="<:momo:plus_d_info_sur{titre=#TITRE}|attribut_html:>">sommet: #TITRE</a>
+		</div>
+		[(#SET{pos_l,0})]
+[
+(#REM) On cherche récursivement tous les enfants des sommets
+	on utilise pas le modèle doublons_enfants_mot car il faut gérer la position des boites
+	(la gestion se fait -péniblement- avec pos_h, pos_l, pos_h_precedente)
+
+]
+			<BOUCLE_Liste_mots_enfants(MOTS)
+					{id_mot_parent = #ID_MOT}
+					{par num titre}
+					{doublons enfants}>
+[
+(#REM) petit bug des doublons dans une boucle récursive:
+	on peut repasser plusieurs fois sur le même mot dans certains cas !
+	ce test permet de vérifier que le mot n'est présent qu'une fois dans le doublons
+	et donc que c'est la première fois que l'on passe
+
+]		[(#DOUBLONS{mots,enfants}|array_count_values|table_valeur{#ID_MOT}|>{1}|non)
+			[(#SET{pos_l,[(#GET{pos_l}|plus{1})]})]
+		<div	class="boite"
+			id="id#ID_MOT"
+			style="	[left:(#GET{pos_l}|mult{#GET{largeur}})em];
+				[top:(#GET{pos_h}|plus{1}|mult{#GET{hauteur}})em];"
+		>
+			<a href="#URL_MOT" title="<:momo:plus_d_info_sur{titre=#TITRE}|attribut_html:>">#TITRE</a>
+		</div>
+		]
+				<BOUCLE_Recursion(BOUCLE_Liste_mots_enfants){doublons enfants}>
+				</BOUCLE_Recursion>
+				</B_Recursion>
+		[(#DOUBLONS{mots,enfants}|array_count_values|table_valeur{#ID_MOT}|>{1}|non)
+			[(#SET{pos_l,[(#GET{pos_l}|moins{1})]})]
+			[(#SET{pos_h_precedente,[(#GET{pos_h})]})]
+			[(#SET{pos_h,[(#GET{pos_h}|plus{1})]})]
+		]
+				<//B_Recursion>
+			</BOUCLE_Liste_mots_enfants>
+		[(#DOUBLONS{mots,enfants}|array_count_values|table_valeur{#ID_MOT}|>{1}|non)
+			[(#GET{pos_h_precedente}|>={#GET{largeur}}|oui)
+				[(#SET{pos_l,[(#GET{pos_l}|moins{1})]})]
+			]
+		]
+			</B_Liste_mots_enfants>
+		[(#SET{pos_h,[(#GET{pos_h}|plus{1})]})]
+		<//B_Est_enfant>
+	</BOUCLE_Est_un_parent>
+</BOUCLE_Parents>
+	</div>
+</body>
+<B_Trace_Liens>
+[
+(#REM) On crée les liens avec tous les mots qui sont placés, c'est à dire le contenu des deux doublons:
+	#DOUBLONS{mots,sommets_potentiels} et #DOUBLONS{mots,enfants}
+	on rajoute un {doublons} supplémentaire à cause du bug des doublons dans les boucles récursives
+
+]<script type="text/javascript" charset="utf-8">/* <![CDATA[ */
+$(window).load(function(){
+<BOUCLE_Trace_Liens(MOTS){id_mot IN #DOUBLONS{mots,sommets_potentiels}|array_merge{#DOUBLONS{mots,enfants}}}{doublons}>
+	<BOUCLE_Details_parent(MOTS){id_mot IN #MODELE{doublons_parents_directs_mot}{id_mot}|explode{','}}>
+	jsPlumb.connect({source:"id#ID_MOT",
+			target:"id#_Trace_Liens:ID_MOT",
+		   	endpoint:"Blank",
+			paintStyle:{lineWidth:3,strokeStyle:"#056"},
+			anchor:"AutoDefault",
+			anchor:"Continuous",
+			overlays:[ ["PlainArrow", {location:1, width:20, length:12} ]]
+			});
+	</BOUCLE_Details_parent>
+</BOUCLE_Trace_Liens>
+	// make all .boite divs draggable
+	jsPlumb.draggable(jsPlumb.getSelector(".boite"));
+});
+/* ]]> */</script>
+</B_Trace_Liens>
+</html>
