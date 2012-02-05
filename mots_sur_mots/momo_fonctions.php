@@ -14,7 +14,7 @@ function momo_tourne_tableau($first) {
 
 	return $second;
 }
-function momo_nomme_les_chemins($tableau,$tableau_tous) {
+function momo_nomme_les_chemins($tableau) {
 	$nom_chemins = "hierarchie_";
 	$premier_mot = $tableau[0][0];
 	$liste_mots_identifiant_chemin[0] = $premier_mot;
@@ -36,7 +36,7 @@ function momo_nomme_les_chemins($tableau,$tableau_tous) {
 	}
 
 
-	return array_merge(array("id_mot_hierarchies" => $liste_mots_identifiant_chemin,"id_mot_tous" => $tableau_tous),$nouveau_tableau);
+	return array_merge(array("id_mot_hierarchies" => $liste_mots_identifiant_chemin),$nouveau_tableau);
 
 }
 

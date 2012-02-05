@@ -30,12 +30,6 @@
 #SET{tableaux,#MODELE{doublons_hierarchies_mot}{id_mot=#ID_MOT}}
 
 	<p>&#35;TITRE&nbsp;= <strong>#TITRE</strong> (&#35;ID_MOT&nbsp;= <strong>#ID_MOT</strong>)</p>
-
-[(#SET{a_des_parents,oui})]
-[(#GET{tableaux}|unserialize|table_valeur{id_mot_tous}|count|non)
-	<strong><:momo:pas_de_parents:></strong>
-	[(#SET{a_des_parents,''})]
-]
 	<div style="position:absolute">
 <BOUCLE_Tete_Hierarchie(MOTS){id_mot IN #GET{tableaux}|unserialize|table_valeur{id_mot_hierarchies}}>
 	<BOUCLE_Ajout_Nodes(MOTS)
@@ -44,19 +38,23 @@
 		<div	class="boite"
 			id="id#ID_MOT"
 			style="	[top:(#COMPTEUR_BOUCLE|moins{1}|mult{10})em];
-				[left:(#_Tete_Hierarchie:COMPTEUR_BOUCLE|moins{1}|mult{15})em];
+				[left:(#GET{nodes_ajoutes}|mult{15})em];
 				[(#ID_MOT|=={#_Mot_param_ou_hasard:ID_MOT}|?{background-color:bisque;})]"
 		>
 			#TITRE
 		</div>
 	</BOUCLE_Ajout_Nodes>
+		[(#SET{nodes_ajoutes,[(#GET{nodes_ajoutes}|plus{1})]})]
+	</B_Ajout_Nodes>
 </BOUCLE_Tete_Hierarchie>
+<p><strong><:momo:pas_de_parents:></strong></p>
+<//B_Tete_Hierarchie>
 	</div>
 </body>
+<B_Trace_Liens>
 <script type="text/javascript" charset="utf-8">/* <![CDATA[ */
 $(window).load(function(){
-[(#GET{a_des_parents}|?{#SET{tableaux2,#GET{tableaux}}})]
-<BOUCLE_Trace_Liens(MOTS){id_mot ?IN #GET{tableaux2}|unserialize|table_valeur{id_mot_tous}|push{#ID_MOT}}>
+<BOUCLE_Trace_Liens(MOTS){!doublons nodes}>
 	<BOUCLE_Details_parent(MOTS){id_mot IN #MODELE{doublons_parents_directs_mot}{id_mot}|explode{','}}>
 	jsPlumb.connect({source:"id#ID_MOT",
 			target:"id#_Trace_Liens:ID_MOT",
@@ -72,5 +70,6 @@ $(window).load(function(){
 	jsPlumb.draggable(jsPlumb.getSelector(".boite"));
 });
 /* ]]> */</script>
+</B_Trace_Liens>
 </html>
 </BOUCLE_Mot_param_ou_hasard>
