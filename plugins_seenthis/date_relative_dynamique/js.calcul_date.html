@@ -110,11 +110,13 @@ $(document).ready(function() {
 		type: "POST",
 		url: "[(#CHEMIN{vide_date.html}|url_absolue)]",
 		complete: function(data, textStatus) {
-			var dateStr = data.getResponseHeader('Date');
-			var dateServer =  Date.parse(new Date(Date.parse(dateStr)).toUTCString());
-			date_now = Math.floor(dateServer/1000);
-			$(".calcul_date").css({"visibility": "visible"});
-			afficher_dates();
+			if (data.getResponseHeader('Date') != null) {
+				var dateStr = data.getResponseHeader('Date');
+				var dateServer =  Date.parse(new Date(Date.parse(dateStr)).toUTCString());
+				date_now = Math.floor(dateServer/1000);
+				$(".calcul_date").css({"visibility": "visible"});
+				afficher_dates();
+			}
 		}
 	});	
 
