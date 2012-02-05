@@ -42,7 +42,7 @@ id_mot est obligatoire
 	</BOUCLE_recusion_par_parents_directs>
 	[(#SET{niveau,#GET{niveau}|moins{1}})]
 </BOUCLE_init>
-[(#SET{tableau_des_hierarchies,[(#GET{tableau_des_hierarchies}|push{#GET{tableau_hierarchie_courante}})]})]
+[(#SET{tableau_des_hierarchies,[(#GET{tableau_des_hierarchies}|push{#GET{tableau_hierarchie_courante}|momo_tourne_tableau})]})]
 </B_init>
 </B_mot_enfant_ou_tous>
 [(#GET{tableau_des_hierarchies}|momo_nomme_les_chemins{#DOUBLONS{mots,tous}}|serialize)]
