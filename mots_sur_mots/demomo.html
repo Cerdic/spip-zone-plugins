@@ -7,7 +7,7 @@
 		<:momo:parents_du_mot_ou_des_mots:>
 		[(#MODELE{parents_mot}{id_mot=#ID_MOT})]
 	</li>
-<BOUCLE_Mot_param_ou_hasard(MOTS){id_mot?}{par hasard}{0,1}>
+<BOUCLE_Avec_parents(MOMO){id_mot?}{par hasard}{0,1}><BOUCLE_Mot_param_ou_hasard(MOTS){id_mot}>
 	<li id="hierarchie_mot">
 		<:momo:hierarchies_mot:>
 		<dl>
@@ -18,10 +18,11 @@
 						{id_groupe=#ENV{id_groupe}}
 						{tableau_id_groupe=#ENV{tableau_id_groupe}}
 						{nombre=#ENV{nombre}}
-					|sinon{<:momo:pas_de_parents:>}
 				)]
 			</dd>
 		</dl>
 	</li>
-</BOUCLE_Mot_param_ou_hasard>
+</BOUCLE_Mot_param_ou_hasard></BOUCLE_Avec_parents>
+	<li id="hierarchie_mot"><strong><:momo:pas_de_parents:></strong></li>
+<//B_Avec_parents>
 </ul>
