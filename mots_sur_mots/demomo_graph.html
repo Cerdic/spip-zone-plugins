@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<BOUCLE_Mot_param_ou_hasard(MOTS){id_mot?}{par hasard}{0,1}>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<script type='text/javascript' src='http://code.jquery.com/jquery-1.6.2.js'></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.js"></script>
+	<script type='text/javascript' src="http://jsplumb.googlecode.com/files/jquery.jsPlumb-1.3.5-all-min.js"></script>
+<style>
+.boite { 
+	border:2px solid #346789;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-o-border-radius: 8px;
+	border-radius: 8px;
+	background-color:white;
+	opacity:0.8; 
+	filter:alpha(opacity=80);
+ 	width:8em; 
+	z-index:20; 
+	position:absolute; 
+	font-size:0.8em;
+	text-align: center;
+	padding: 1em;
+}
+</style>
+<body>
+	<h1><:momo:hierarchies_mot:></h1>
+
+#SET{tableaux,#MODELE{doublons_hierarchies_mot}{id_mot=#ID_MOT}}
+
+	<p>&#35;TITRE&nbsp;= <strong>#TITRE</strong> (&#35;ID_MOT&nbsp;= <strong>#ID_MOT</strong>)</p>
+
+[(#SET{a_des_parents,oui})]
+[(#GET{tableaux}|unserialize|table_valeur{id_mot_tous}|count|non)
+	<strong><:momo:pas_de_parents:></strong>
+	[(#SET{a_des_parents,''})]
+]
+	<div style="position:absolute">
+<BOUCLE_Tete_Hierarchie(MOTS){id_mot IN #GET{tableaux}|unserialize|table_valeur{id_mot_hierarchies}}>
+	<BOUCLE_Ajout_Nodes(MOTS)
+			{id_mot ?IN #GET{tableaux}|unserialize|table_valeur{hierarchie_#ID_MOT}|push{#_Mot_param_ou_hasard:ID_MOT}}
+			{doublons nodes}>
+		<div	class="boite"
+			id="id#ID_MOT"
+			style="	[top:(#COMPTEUR_BOUCLE|moins{1}|mult{10})em];
+				[left:(#_Tete_Hierarchie:COMPTEUR_BOUCLE|moins{1}|mult{15})em];
+				[(#ID_MOT|=={#_Mot_param_ou_hasard:ID_MOT}|?{background-color:bisque;})]"
+		>
+			#TITRE
+		</div>
+	</BOUCLE_Ajout_Nodes>
+</BOUCLE_Tete_Hierarchie>
+	</div>
+</body>
+<script type="text/javascript" charset="utf-8">/* <![CDATA[ */
+$(window).load(function(){
+[(#GET{a_des_parents}|?{#SET{tableaux2,#GET{tableaux}}})]
+<BOUCLE_Trace_Liens(MOTS){id_mot ?IN #GET{tableaux2}|unserialize|table_valeur{id_mot_tous}|push{#ID_MOT}}>
+	<BOUCLE_Details_parent(MOTS){id_mot IN #MODELE{doublons_parents_directs_mot}{id_mot}|explode{','}}>
+	jsPlumb.connect({source:"id#ID_MOT",
+			target:"id#_Trace_Liens:ID_MOT",
+		   	endpoint:"Blank",
+			paintStyle:{lineWidth:3,strokeStyle:"#056"},
+			anchor:"AutoDefault",
+			anchor:"Continuous",
+			overlays:[ ["PlainArrow", {location:1, width:20, length:12} ]]
+			});
+	</BOUCLE_Details_parent>
+</BOUCLE_Trace_Liens>
+	// make all .boite divs draggable
+	jsPlumb.draggable(jsPlumb.getSelector(".boite"));
+});
+/* ]]> */</script>
+</html>
+</BOUCLE_Mot_param_ou_hasard>

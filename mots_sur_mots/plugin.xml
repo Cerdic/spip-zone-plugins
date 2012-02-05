@@ -5,7 +5,7 @@
 	</slogan>
 	<auteur>[Bertrand Marne->http://www.spip-contrib.net/Beurt]</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.0.6</version>
+	<version>0.0.7</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<description>
@@ -16,8 +16,10 @@ Dans la partie priv&eacute;e, le plugin Momo propose une inteface pour associer 
 Dans la partie publique, le plugin Momo propose:
 
 -* un nouveau crit&egrave;re de la boucle MOTS: <code>{id_mot_parent=xxx}</code> o&ugrave; <code>xxx</code> est un id_mot qui permet de ne retourner que les mots-cl&eacute;s ayant un parent donn&eacute;.
--* Il y a un squelette de d&eacute;mo: <code>/spip.php?page=demomo</code> (&agrave; qui on peut donner un id_mot en param&egrave;tre: <code>&id_mot=XXX</code> o&ugrave; <code>XXX</code> est l'id_mot).
--* Il y a des mod&egrave;les pour tester&nbsp;:
+-* Il y a deux squelettes de d&eacute;mo:
+-** <code>/spip.php?page=demomo</code> qui affiche parents, enfants et hi&eacute;rarchie(s) d'un ou tous les mots (on peut notamment donner un id_mot en param&egrave;tre: <code>&id_mot=XXX</code> o&ugrave; <code>XXX</code> est l'id_mot).
+-** <code>/spip.php?page=demomo_graph</code> qui utilise des librairies javascript externes (connexion &agrave; internet n&eacute;cessaire) dont l'exellente JSplump pour afficher {{graphiquement}} toutes les hi&eacute;rarchies d'un mot-cl&eacute; pass&eacute; en param&egrave;tre (<code>&id_mot=XXX</code> o&ugrave; <code>XXX</code> est l'id_mot).
+-* Il y a aussi des mod&egrave;les pour tester&nbsp;:
 -** <code>enfants_mot</code> qui donne r&eacute;cursivement tous les enfants d'un mot
 -** <code>parents_mot</code> qui liste les parents d'un mot
 -** <code>hierarchies_mot</code> qui liste les fils d'Ariane possibles pour un mot donn&eacute; (voir le squelette du mod&egrave;le pour comprendre comment choisir l'un des fils d'Ariane: avec un ou plusieurs id_groupe)

@@ -4,11 +4,13 @@ Retourne les hierarchies d'un mot sous forme de tableaux d'id_mot (sérialisés)
 
 	- un premier tableau indexé sur "id_mot_hierarchies" contient une liste de mots qui identifient chaque hierarchies (il sont l'un des mots de chaque hiérérchie)
 	- des tableaux indexés "hierachie_XXX" où XXX est l'un des id_mot du tabeau ci-dessus. Ces tableaux contiennent une suite d'id_mot (à prendre dans l'ordre !) correspondant à l'une des hiérérchies possibles du mot.
+	- un tableau indexé "id_mot_tous" de l'ensemble des id_mot de tous les ancêtres (parents et parents de parents) du mot, en vrac.
 
 Donc si le ce squelette est inclus dans un SET, comme ceci: #SET{bidule,#MODELE{doublons_hierarchies_mot}{id_mot=#ID_MOT}} alors on peut récupérer les mot identifiant les héirarchies ainsi:
 	[(#GET{bidule}|unserialize|table_valeur{id_mot_hierarchies})] (et ce qui est retourné est un #ARRAY que l'on peut par exemple utiliser dans un critère de boucle avec IN)
 Et si #ID_MOT est défini on peut récupérer la hiérarchie qui le contient au plus haut niveau ainsi:
 	[(#GET{bidule}|unserialize|table_valeur{hierarchie_#ID_MOT})] (et ce qui est retourné est un #ARRAY que l'on peut par exemple utiliser dans un critère de boucle avec IN... Attention à ne pas changer l'ordre par un critère "par" !)
+Avec [(#GET{bidule}|unserialize|table_valeur{id_mot_tous})] on récupère la liste des id_mot de tous les ancêtres du mot, en vrac.
 
 id_mot est obligatoire
 
@@ -16,7 +18,7 @@ id_mot est obligatoire
 <BOUCLE_mot_enfant_ou_tous(MOTS){id_mot}>
 	<B_Liste_mots_parents>
 	<BOUCLE_Liste_mots_parents(MOMO){id_mot=#ID_PARENT|sinon{#ID_MOT}}>
-		<BOUCLE_Details_mot_parent(MOTS){id_mot=#ID_PARENT}{doublons #ID_MOT}>
+		<BOUCLE_Details_mot_parent(MOTS){id_mot=#ID_PARENT}{doublons #ID_MOT}{doublons tous}>
 			<BOUCLE_Recursion(BOUCLE_Liste_mots_parents)>
 			</BOUCLE_Recursion>
 		</BOUCLE_Details_mot_parent>
@@ -43,6 +45,6 @@ id_mot est obligatoire
 [(#SET{tableau_des_hierarchies,[(#GET{tableau_des_hierarchies}|push{#GET{tableau_hierarchie_courante}})]})]
 </B_init>
 </B_mot_enfant_ou_tous>
-[(#GET{tableau_des_hierarchies}|momo_nomme_les_chemins|serialize)]
+[(#GET{tableau_des_hierarchies}|momo_nomme_les_chemins{#DOUBLONS{mots,tous}}|serialize)]
 
 #FILTRE{trim}
