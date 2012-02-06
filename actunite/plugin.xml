@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Actunite</nom>
-	<nom>Actualit&#233;s "Unite Like"</nom>
+	<slogan>Actualit&#233;s "Unite Like"</slogan>
 	<prefix>actunite</prefix>
 	<version>0.1.0</version>
 	<auteur>Cyril MARION</auteur>
