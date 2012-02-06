@@ -15,7 +15,7 @@ La structure HTML est copiée du formulaire d'ajout de mots-clés des articles.
 <div id='editer_momo-#ID_MOT' class='editer_mots'><a id='access-j' href='#access-j' accesskey='j'></a>
 <div class='cadre cadre-e' style=''><img src='#CHEMIN{prive/images/mot-cle-24.gif}'
 alt=""  class='cadre-icone' width='24' height='24' />
-<div id='mots_parents' class='titrem replie'[ onmouseover="jQuery(this).depliant('#mots_parents-(#ID_MOT)');"]><a href='#'[ onclick="return jQuery(this).depliant_clicancre('#mots_parents-(#ID_MOT)');"] class='titremancre'></a><:momo:ajouter_mos_parents:></div>
+<div id='mots_parents' class='titrem replie'[ onmouseover="jQuery(this).depliant('#mots_parents_(#ID_MOT)');"]><a href='#'[ onclick="return jQuery(this).depliant_clicancre('#mots_parents_(#ID_MOT)');"] class='titremancre'></a><:momo:ajouter_mos_parents:></div>
 <div class='cadre_padding'><a id='access-i' href='#access-i' accesskey='i'></a>
 <div class='cadre cadre-liste' style=''><div><div id='t#ID_MOT' class='bloc_depliable blocdeplie'>
 	<B_Mot_Parents_attaches>
@@ -31,7 +31,8 @@ alt=""  class='cadre-icone' width='24' height='24' />
 	</B_Mot_Parents_attaches>
 		<div class='nettoyeur'></div>
 		</div><div class='nettoyeur'></div></div></div>
-		<div[ id='mots_parents-(#ID_MOT)' ]class='bloc_depliable blocdeplie'><div style='text-align: right' class='arial1'></div>[(#GET{avec_des_parents}|oui)<input type='submit' value='<:momo:retirer_mots_parents:>'  class='spip_xx-small' id='retirer_#ID_MOT' style='float:right' /><br />]
+		[(#GET{avec_des_parents}|oui)<input type='submit' value='<:momo:retirer_mots_parents:>'  class='spip_xx-small' id='retirer_#ID_MOT' style='float:right' /><br />]
+		<div[ id='mots_parents_(#ID_MOT)' ]class='bloc_depliable blocreplie'><div style='text-align: right' class='arial1'></div>
 		<div style='float:right; width:280px;position:relative;display:inline;'><div>
 	[(#REM) Pour éviter les liens circulaires, on ne peut pas associer un mot à un de ses enfants]
 	[(#SET{mots_interdits,#MODELE{doublons_enfants_mot}{id_mot}|explode{','}})]
@@ -50,6 +51,10 @@ alt=""  class='cadre-icone' width='24' height='24' />
 		</BOUCLE_Groupes_Mots>
 		</div></div></div>
 		<div class='nettoyeur'></div>
+		[<div>
+			<p><:momo:hierarchies_courantes:></p>
+			(#MODELE{hierarchies_mot}{nocomment=oui}{id_mot=#ID_MOT}{id_groupe=''})
+		</div>]
 		</div><div class='nettoyeur'>
 </div>
 </div>

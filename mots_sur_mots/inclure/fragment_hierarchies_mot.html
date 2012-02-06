@@ -8,7 +8,7 @@ Pour pouvoir passer deux fois dans la boucle "_identifiant_la_hierarchie" avec d
 			{id_groupe ?IN #ENV*{tableau_id_groupe}|unserialize}
 			{id_mot IN #ENV*{les_hierarchies}|unserialize|table_valeur{id_mot_hierarchies}}
 			{0,#ENV{nombre,100}}>
-	[(#ENV{nombre}|!={1}|oui)<li><:momo:hierachie_guidee_par{titre=#TITRE}:> ]
+	[(#ENV{nombre}|!={1}|oui)<li>[(#ENV{nocomment}|non)<:momo:hierachie_guidee_par{titre=#TITRE}:> ]]
 		<BOUCLE_Une_hierarchie(MOTS)
 				{id_mot IN #ENV*{les_hierarchies}|unserialize|table_valeur{hierarchie_#ID_MOT}}
 				{"&nbsp;&rarr; "}>

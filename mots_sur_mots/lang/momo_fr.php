@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //G
 	'graphe_site' => 'Graphe de tous les mots-cl&eacute;s hi&eacute;rachis&eacute;s',
 //H
+	'hierarchies_courantes' => 'Hi&eacute;rarchies des mots-cl&eacute;s parents courantes&nbsp;:',
 	'hierachie_guidee_par' => 'Fil d\'Ariane guid&eacute; par le mot &laquo;&nbsp;@titre@&nbsp;&raquo;&nbsp;:',
 	'hierarchies_mot' => 'Diff&eacute;rentes hi&eacute;rarchies d\'un mot-cl&eacute; pass&eacute; en param&egrave;tre',
 //I

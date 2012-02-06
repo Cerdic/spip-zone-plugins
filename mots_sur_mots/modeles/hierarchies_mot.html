@@ -12,11 +12,14 @@ Fait la liste des hiérarchies d'un mot.
 
 - "nombre" est le nombre de hiérarchies retournées. Si nombre=1 alors seule la hiérarchie est retournée, sans la structure de liste. Si id_mot n'est pas fourni c'est maximum 100 chemins hiérarchiques différents qui seront retournés.
 
+- si "nocomment" est non nul, on ne retourne que les hiérarchies, sans préciser par quel mot elles sont guidées (sans la chaîne <:momo:hierachie_guidee_par{titre=#TITRE}:>).
+
 ]
 <BOUCLE_Mot(MOTS){id_mot}>
 #SET{les_hierarchies,#MODELE{doublons_hierarchies_mot}{id_mot=#ID_MOT}}
 
-[(#SET{tableau_id_groupe,[(#ENV{tableau_id_groupe}|explode{','}|sinon{#ARRAY}|push{#ENV{id_groupe}}|push{#ID_GROUPE})]})]
+[(#SET{tableau_id_groupe,[(#ENV{tableau_id_groupe}|explode{','}|sinon{#ARRAY}|push{#ENV{id_groupe}})]})]
+
 
 [
 
@@ -39,11 +42,13 @@ Fait la liste des hiérarchies d'un mot.
 			{id_groupe=#ID_GROUPE}
 			{tableau_id_groupe=[(#GET{tableau_id_groupe}|serialize)]}
 			{les_hierarchies=#GET{les_hierarchies}}
+			{nocomment=#ENV{nocomment}}
 			{nombre=#ENV{nombre}}|sinon{
 				[(#INCLURE{fond=inclure/fragment_hierarchies_mot}
 					{id_groupe=''}
 					{les_hierarchies=#GET{les_hierarchies}}
 					{nombre=#ENV{nombre}}
+					{nocomment=#ENV{nocomment}}
 				)]
 			}
 		|trim
