@@ -1,6 +1,7 @@
 [(#REM) Noisette servant a l'affichage du menu des ticketskiss presente en colonne droite ou gauche]
 #CACHE{0}
 #SET{visible,true}
+#SET{pagination_defaut, #EVAL{_TICKETS_PAGINATION_DEFAUT}}
 
 <B_simple>
 <div class="cadre cadre-liste">
@@ -9,7 +10,7 @@
 	[<div class="arial1 tranches pagination">(#PAGINATION)</div>]
 	<table width="100%" cellpadding="2" cellspacing="0" border="0">
 		<tbody>
-<BOUCLE_simple(TICKETS){par date}{inverse}{pagination 10 #ENV{bloc}}{id_auteur?}{id_assigne?}{statut?}>
+<BOUCLE_simple(TICKETS){par date}{inverse}{pagination #GET{pagination_defaut} #ENV{bloc}}{id_auteur?}{id_assigne?}{statut?}>
 			<tr class="tr_liste">
 				<td style="width: 10px;"><img[ src="(#CHEMIN{[prive/images/(#STATUT|ticketskiss_icone_statut)]})"][ alt="(#STATUT|ticketskiss_texte_statut)"] /></td>
 				<td class="arial2"><a href="?exec=ticket_afficher&amp;id_ticket=#ID_TICKET">#TITRE</a></td>

@@ -38,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'classement_asuivre' => 'Your tickets to follow',
 	'classement_jalon' => 'Tickets by milestone',
 	'classement_termine' => 'Closed bug reports',
+    'classement_tous' => 'All the tickets',
 	'classement_type' => 'Bug reports by type',
 	'commenter_ticket' => 'Comment this bug report',
 	'creer_ticket' => 'Create a bug report',

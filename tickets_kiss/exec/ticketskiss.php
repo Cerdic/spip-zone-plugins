@@ -20,14 +20,14 @@ function exec_ticketskiss () {
 		$rubrique,
 		$sous_rubrique
 	);
-	
+
 	// Valeur par défaut du contexte
-	$contexte = array('classement' => 'asuivre');
+	$contexte = array('classement' => (defined('_TICKETS_CLASSEMENT_DEFAUT'))? _TICKETS_CLASSEMENT_DEFAUT : 'asuivre');
 	// On écrase par l'environnement
 	$contexte = array_merge($contexte, $_GET, $_POST);
 	// On appelle la noisette de presentation
 	echo recuperer_fond('prive/contenu/ticketskiss', $contexte);
-	
+
 	echo fin_page();
 }
 

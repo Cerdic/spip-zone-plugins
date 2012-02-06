@@ -13,8 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'assignation_modifiee' => 'Assignation mise &agrave; jour',
 	'assignation_non_modifiee' => 'Assignation non mise &agrave; jour',
 	'assignation_supprimee' => 'L\'assignation de ce ticket a &eacute;t&eacute; supprim&eacute;e.',
-	
-	// C 
+
+	// C
 	'champ_assigner' => 'Assigner &agrave;',
 	'champ_composant' => 'Composant',
 	'champ_date' => 'Date',
@@ -35,44 +35,45 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'classement_asuivre' => 'Vos tickets &agrave; suivre',
 	'classement_jalon' => 'Tickets par jalon',
 	'classement_termine' => 'Tickets termin&eacute;s',
+    'classement_tous' => 'Tous les tickets',
 	'classement_type' => 'Tickets par type',
 	'comment_mail_titre' => 'Commentaire sur ce ticket',
 	'commenter_ticket' => 'Commenter ce ticket',
 	'creer_ticket' => 'Cr&eacute;er un ticket',
-	
+
 	// D
 	'date_creation_auteur' => 'Ticket cr&eacute;&eacute; le <strong>@date@</strong> par <strong>@nom@</strong>',
-	
+
 	// E
 	'erreur_texte_longueur_mini' => 'La longueur minimale du texte est de @nb@ caract&egrave;res.',
 	'erreur_verifier_formulaire' => 'V&eacute;rifiez votre formulaire',
-	'explication_description_ticket' => 'D&eacute;crivez aussi pr&eacute;cis&eacute;ment que possible le besoin ou le probl&egrave;me rencontr&eacute;. 
-	Indiquez en particulier s&rsquo;il se produit syst&eacute;matiquement ou occasionnellement. 
+	'explication_description_ticket' => 'D&eacute;crivez aussi pr&eacute;cis&eacute;ment que possible le besoin ou le probl&egrave;me rencontr&eacute;.
+	Indiquez en particulier s&rsquo;il se produit syst&eacute;matiquement ou occasionnellement.
 	S&rsquo;il s&rsquo;agit d&rsquo;un probl&egrave;me d\'affichage, pr&eacute;cisez avec quel navigateur vous le rencontrez.',
 	'explication_url_exemple' => 'Indiquez ici l&rsquo;URL d&rsquo;une page concern&eacute;e par ce ticket.',
 	'explication_redaction' => 'Quand vous avez termin&eacute; la r&eacute;daction de votre ticket, s&eacute;lectionnez le statut &laquo;ouvert et discut&eacute;&raquo;.',
-	
+
 	// F
 	'forum_message' => 'Votre message',
 	'forum_sans_previsu' => 'Attention&nbsp;: pas de pr&eacute;visualisation&nbsp;; votre message est publi&eacute; imm&eacute;diatement.',
-	
+
 	// M
 	'message_automatique' => 'Ceci est un message automatique : n\'y repondez pas.',
 	'message_publie' => 'Votre message est publi&eacute;',
 	'mail_texte_message_auto' => 'Ceci est un message automatique : n\'y repondez pas.',
 	'modifier_ticket' => 'Modifier le ticket',
-	
+
 	// N
 	'no_assignation' => 'Personne',
 	'non_assignes' => 'Non assign&eacute;s',
 	'nouveau_ticket' => 'Nouveau ticket',
-	
+
 	// P
 	'page_titre' => 'Tickets, syst&egrave;me de suivi de bugs',
-	
+
 	// R
 	'retour' => 'Retour',
-	
+
 	// S
 	'severite_bloquant' => 'bloquant',
 	'severite_important' => 'important',
