@@ -20,7 +20,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return string
  *   Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
  */
-function verifier_date_dist($valeur, $options=array(), &$valeur_normalisee){
+function verifier_date_dist($valeur, $options=array(), &$valeur_normalisee=null){
 	$erreur = _T('verifier:erreur_date_format');
 	if (!is_string($valeur))
 		return $erreur;
