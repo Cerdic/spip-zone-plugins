@@ -673,7 +673,7 @@ _ • Only for articles containing the <code>@_CS_AVEC_SOMMAIRE@</code> tag.
 
 The summary can be used in conjunction with : {[.->decoupe]}.', # MODIF
 	'sommaire:nom' => 'Automatické zhrnutie',
-	'sommaire_ancres' => 'Vybrané kotvy: <b><html>{{{My Názov<my_anchor>}}}</html></b>',
+	'sommaire_ancres' => 'Vybrané kotvy: <b><html>{{{My Názov<my_anchor>}}}</html></b>', # MODIF
 	'sommaire_avec' => 'An article with summary: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'An article without summary: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'sommaire_titres' => 'Štruktúrované podnadpisy: <b><html>{{{*Nadpis}}}</html></b>, <b><html>{{{**Podnadpis}}}</html></b>, atď.',

@@ -699,7 +699,7 @@ _ • Només pels articles que continguin l\'etiqueta <code>@_CS_AVEC_SOMMAIRE@<
 
 Aquest resum es compatible amb « [.->decoupe] » i « [.->titres_typo] ».',
 	'sommaire:nom' => 'Resum automàtic',
-	'sommaire_ancres' => 'àncores escollides: <b><html>{{{Mon Titre&lt;mon_ancre&gt;}}}</html></b>',
+	'sommaire_ancres' => 'àncores escollides: <b><html>{{{Mon Titre&lt;mon_ancre&gt;}}}</html></b>', # MODIF
 	'sommaire_avec' => 'Un text amb sumari:  <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un text sense sumari: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'sommaire_titres' => 'Subtítols jerarquitzats: <b><html>{{{*Titre}}}</html></b>, <b><html>{{{**Sous-titre}}}</html></b>, etc.',

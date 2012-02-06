@@ -843,7 +843,7 @@ _ • Only for articles containing the <code>@_CS_AVEC_SOMMAIRE@</code> tag.
 
 The summary can be used in conjunction with: \\"{[.->decoupe]}\\" and \\" [.->titres_typo] \\".', # MODIF
 	'sommaire:nom' => 'Automatic T.O.C.',
-	'sommaire_ancres' => 'Selected anchors: <b><html>{{{My Title<my_anchor>}}}</html></b>',
+	'sommaire_ancres' => 'Selected anchors: <b><html>{{{My Title<my_anchor>}}}</html></b>', # MODIF
 	'sommaire_avec' => 'An article with summary: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'An article without summary: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'sommaire_titres' => 'Structured sub-headings: <b><html>{{{*Title}}}</html></b>, <b><html>{{{**Sub-title}}}</html></b>, etc.',
