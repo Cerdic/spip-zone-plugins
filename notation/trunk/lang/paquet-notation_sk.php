@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
-	'notation_description' => 'Définition de la balise <code>#FORMULAIRE_NOTATION</code> permettant la saisie et l\'affichage de la note d\'un élément de boucle.
-_ Définition des modèles <code><autxx|notation|id_article=yy></code> qui donne la note de l\'auteur <i>xx</i> pour l\'article <i>yy</i>
-et <code><notation|topten></code> qui donne les 10 meilleurs articles.', # NEW
+	'notation_description' => 'Definícia tagu <code> FORMULAIRE_NOTATION # </ code> na zadávanie a zobrazenie poznámky prvku cyklu.
+_ Definícia modelov <code> <autxx|notation|id_article=yy>,</ code> ktorá vypíše poznámku o autorovi <i> xx </ i> k článku <i> yy </ i>
+a <code> <notation|topten> </ code> ktorá vypíše najlepších 10 článkov.',
 	'notation_nom' => 'Hodnotenie',
 	'notation_slogan' => 'Priradiť prvkom SPIPu hodnotenie'
 );
