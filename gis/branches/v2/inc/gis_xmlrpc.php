@@ -6,12 +6,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Récupère la liste des points géolocalisés
  * 
  * Arguments possibles :
- * -* login
- * -* pass
- * -* objet
- * -* id_objet
- * -* tri
- * -* limite
+ * -* login string 
+ * -* pass string
+ * -* objet string : le type d'objets liés
+ * -* id_objet int : l'identifiant numérique de l'objet lié
+ * -* tri string array/string : les éléments de tri
+ * -** Si 'distance' dans le tri
+ * -*** lat float : la latitude à partir de laquelle chercher
+ * -*** lon float : la longitude à partir de laquelle chercher
+ * -* limite int : le nombre d'éléments maximum à retourner
  */
 function spip_liste_gis($args) {
 	global $spip_xmlrpc_serveur;
@@ -20,20 +23,47 @@ function spip_liste_gis($args) {
 		return false;
 	
 	$limite = $args['limite'] ? $args['limite'] : '20';
-	
-	$where = '';
+	$objet = 'gis';
+	$what = 'gis.id_gis';
+	$from = 'spip_gis as gis LEFT JOIN spip_gis_liens as lien ON gis.id_gis=lien.id_gis';
+	$where = array();
 	$order = array();
-	if(intval($args['id_objet']) && $args['objet']){
-		$where = 'lien.id_objet='.intval($args['id_objet']).' AND lien.objet='.sql_quote($args['objet']);
+	if((intval($args['id_objet']) > 0) && $args['objet']){
+		$where[] = 'lien.id_objet='.intval($args['id_objet']).' AND lien.objet='.sql_quote($args['objet']);
 	}
 	
-	if($args['tri']){
+	if(is_array($args['tri'])){
+		$order = $args['tri'];
+	}else if($args['tri']){
 		$order = array_map('trim',explode(',',$args['tri']));
 	}
-
+	
+	if(in_array('distance',$order)){
+		$distance = true;
+		$lat = $args['lat'];
+		$lon = $args['lon'];
+		if(!is_numeric($lon) OR !is_numeric($lat)){
+			$erreur = _T('gis:erreur_xmlrpc_lat_lon');
+			return new IXR_Error(-32601, attribut_html($erreur));
+		}else{
+			$what .= ", (6371 * acos( cos( radians(\"$lat\") ) * cos( radians( gis.lat ) ) * cos( radians( gis.lon ) - radians(\"$lon\") ) + sin( radians(\"$lat\") ) * sin( radians( gis.lat ) ) ) ) AS distance";
+		}
+	}
+	
+	/**
+	 * Une recherche
+	 */	
+	if(is_string($args['recherche']) AND strlen($args['recherche']) > 3){
+		$prepare_recherche = charger_fonction('prepare_recherche', 'inc');
+		list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $objet.'s', $where);
+		$what .= ', '.$rech_select;
+		$from .= ' INNER JOIN spip_resultats AS resultats ON ( resultats.id = gis.id_gis ) ';
+		$where = 'resultats.'.$rech_where;
+	}
+	
 	$points_struct = array();
 
-	if($points = sql_select('gis.id_gis','spip_gis as gis LEFT JOIN spip_gis_liens as lien ON gis.id_gis=lien.id_gis',$where,array('gis.id_gis'),$order,$limite)){
+	if($points = sql_select($what,$from,$where,'',$order,$limite)){
 		while($point = sql_fetch($points)){
 			$struct=array();
 			$args['id_gis'] = $point['id_gis'];
@@ -41,6 +71,8 @@ function spip_liste_gis($args) {
 			 * On utilise la fonction geodiv_lire_media pour éviter de dupliquer trop de code
 			 */
 			$struct = spip_lire_gis($args);
+			if($distance)
+				$struct['distance'] = $point['distance'];
 			$points_struct[] = $struct;
 		}
 	}
@@ -83,4 +115,5 @@ function spip_lire_gis($args){
 	$gis_struct = array_map('texte_backend',$gis_struct);
 	return $gis_struct;
 }
+
 ?>
