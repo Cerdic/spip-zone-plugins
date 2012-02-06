@@ -254,18 +254,18 @@ function oeproxy_echec($status=404){
 	switch ($status){
 		case 501:
 			header("Status: 501 Not Implemented");
-			echo "501 Not Implemented";
+			echo "501 Not Implemented : The provider cannot return a response in the requested format";
 			break;
 
 		case 401:
 			http_status('401');
-			echo "401 Unauthorized";
+			echo "401 Unauthorized : The specified URL contains a private (non-public) resource";
 			break;
 
 		case 404:
 		default:
 			http_status('404');
-			echo "404 Not Found";
+			echo "404 Not Found : The provider has no response for the requested url parameter";
 			break;
 	}
 
