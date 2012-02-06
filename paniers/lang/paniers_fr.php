@@ -10,11 +10,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configurer_titre' => 'Configurer le plugin Paniers',
-	
+
 	// D
 	'description_noisette' => 'Affiche le mini-panier (Nombre d\'articles et prix total)',
 	'dont_total_taxe' => 'Dont total des taxes',
-	
+
 	// L
 	'limite_enregistres_label' => 'Visiteurs enregistrés',
 	'limite_ephemere_label' => 'Visiteurs non enregistrés',
@@ -27,14 +27,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mon_panier_voir' => 'Voir mon panier',
 
 	// N
-	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?',
 	'noisette_label_afficher_lien_page_panier' => 'Afficher un lien vers la page spip.php?page=panier ?',
-   'noisette_label_niveau_titre' => 'Choisir le niveau du titre',
+	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?',
+	'noisette_label_niveau_titre' => 'Choisir le niveau du titre',
 	'noisette_label_titre_noisette' => 'Titre :',
 	'noisette_label_titre_noisette_perso' => 'Si titre personnalisé :',
 	'noisette_titre_perso' => 'Titre personnalisé',
-	'nom_noisette' => 'Mini panier',
 	'nom_bouton_plugin' => 'Paniers',
+	'nom_noisette' => 'Mini panier',
 
 	// P
 	'panier_description' => 'Description',
@@ -52,15 +52,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'paniers' => 'Paniers',
 	'produit_un' => '1 produit',
 	'produits_plusieurs' => '@nb@ produits',
-	
-	
+
 	// T
 	'titre_mon_panier' => 'Mon panier',
 	'titre_panier' => 'Panier',
-	
+
 	// V
 	'vider_le_panier' => 'Vider le panier',
-	'voir_mon_panier' => 'Voir mon panier',
+	'voir_mon_panier' => 'Voir mon panier'
 );
 
 ?>

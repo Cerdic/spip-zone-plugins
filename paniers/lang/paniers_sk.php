@@ -13,6 +13,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'configurer_titre' => 'Nastaviť zásuvný modul Paniers',
 
+	// D
+	'description_noisette' => 'Affiche le mini-panier (Nombre d\'articles et prix total)', # NEW
+	'dont_total_taxe' => 'Dont total des taxes', # NEW
+
 	// L
 	'limite_enregistres_label' => 'Zaregistrovaní návštevníci',
 	'limite_ephemere_label' => 'Nezaregistrovaní návštevníci',
@@ -25,7 +29,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mon_panier_voir' => 'Zobraziť môj nákupný vozík',
 
 	// N
+	'noisette_label_afficher_lien_page_panier' => 'Afficher un lien vers la page spip.php?page=panier ?', # NEW
+	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?', # NEW
+	'noisette_label_niveau_titre' => 'Choisir le niveau du titre', # NEW
+	'noisette_label_titre_noisette' => 'Titre :', # NEW
+	'noisette_label_titre_noisette_perso' => 'Si titre personnalisé :', # NEW
+	'noisette_titre_perso' => 'Titre personnalisé', # NEW
 	'nom_bouton_plugin' => 'Paniers',
+	'nom_noisette' => 'Mini panier', # NEW
 
 	// P
 	'panier_description' => 'Popis',
@@ -40,7 +51,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'panier_total_ttc' => 'Celkom',
 	'panier_valider' => 'Potvrdiť nákupný vozík',
 	'panier_vide' => 'Nákupný vozík je prázdny.',
-	'paniers' => 'Nákupné vozíky'
+	'paniers' => 'Nákupné vozíky',
+	'produit_un' => '1 produit', # NEW
+	'produits_plusieurs' => '@nb@ produits', # NEW
+
+	// T
+	'titre_mon_panier' => 'Mon panier', # NEW
+	'titre_panier' => 'Panier', # NEW
+
+	// V
+	'vider_le_panier' => 'Vider le panier', # NEW
+	'voir_mon_panier' => 'Voir mon panier' # NEW
 );
 
 ?>
