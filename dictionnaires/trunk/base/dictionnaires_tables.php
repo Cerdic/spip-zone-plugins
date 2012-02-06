@@ -8,10 +8,6 @@ function dictionnaires_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['dictionnaires'] = 'dictionnaires';
 	$interface['table_des_tables']['definitions'] = 'definitions';
 	
-	$interface['tables_jointures']['spip_dictionnaires'][]= 'auteurs';
-	$interface['tables_jointures']['spip_auteurs'][]= 'auteurs_dictionnaires';
-	$interface['tables_jointures']['spip_dictionnaires'][] = 'auteurs_dictionnaires';
-		
 	$interface['table_date']['definitions'] = 'date';
 	
 	$interface['table_titre']['dictionnaires'] = 'titre, "" as lang';

@@ -26,6 +26,12 @@
 
 <INCLURE{fond=prive/objets/contenu/dictionnaire-enfants,id_dictionnaire=#ID_DICTIONNAIRE,ajax=enfants}>
 
+[(#AUTORISER{supprimer, dictionnaire, #ID_DICTIONNAIRE}|oui)
+[<div class="actions">
+	(#URL_ACTION_AUTEUR{supprimer_dictionnaire,#ID_DICTIONNAIRE,#URL_ECRIRE{dictionnaires}}|icone{<:dictionnaire:icone_supprimer_dictionnaire:>,#CHEMIN{prive/themes/spip/images/dictionnaire-del-24.png},center})
+</div>]
+]
+
 <!--#navigation-->
 <div class="cadre infos cadre-info">
 	<div class="numero">

@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'configurer_titre' => 'Configurer les dictionnaires',
 'icone_creer_dictionnaire' => 'Ajouter un nouveau dictionnaire',
 'icone_modifier_dictionnaire' => 'Modifier ce dictionnaire',
+'icone_supprimer_dictionnaire' => 'Supprimer ce dictionnaire',
 'importer_acronymes_descriptif' => 'Sigles et acronymes',
 'importer_acronymes_titre' => 'Sigles',
 'info_1_dictionnaire' => 'Un dictionnaire',
