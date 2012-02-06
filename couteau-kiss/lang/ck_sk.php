@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_cache_taille_mini' => 'Cache nemôže byť menšia ako 10 MB',
-	'erreur_dossier_squelette_invalide' => 'Le dossier squelette ne peut pas être un chemin absolu ni contenir de référence <tt>../</tt>', # NEW
+	'erreur_dossier_squelette_invalide' => 'Priečinok šablóny nemôže byť  absolútne umiestnenie ani nemôže obsahovať odkaz <tt>../</tt>',
 	'explication_dossier_squelettes' => 'Vous pouvez indiquer plusieurs répertoires séparés par \':\', qui seront pris dans l\'ordre. Le répertoire intitulé "<tt>squelettes</tt>" est toujours pris en dernier si il existe.', # NEW
 	'explication_image_seuil_document' => 'Les images téléchargées peuvent être automatiquement passées en mode document au dela d\'une largeur prédéfinie', # NEW
 	'explication_introduction_suite' => 'Les points de suite sont ajoutés par la balise <tt>#INTRODUCTION</tt> lorsqu\'elle coupe un texte. Par défaut <tt> (...)</tt>', # NEW
@@ -26,8 +26,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_derniere_modif_invalide' => 'Aktualizovať cache vždy po novom publikovaní',
 	'label_docs_seuils' => 'Obmedziť veľkosť dokumentov pri sťahovaní',
 	'label_dossier_squelettes' => 'Priečinok <tt>squelettes</tt>',
-	'label_forcer_lang' => 'Forcer la langue de l\'url ou du visiteur (<tt>$forcer_lang</tt>)', # NEW
-	'label_image_seuil_document' => 'Largeur des images mode document', # NEW
+	'label_forcer_lang' => 'Predvoliť jazyk internetovej adresy alebo návštevníka (<tt>$forcer_lang</tt>)',
+	'label_image_seuil_document' => 'Šírka obrázkov v režime dokumentu',
 	'label_imgs_seuils' => 'Obmedziť veľkosť obrázkov pri sťahovaní',
 	'label_inhiber_javascript_ecrire' => 'Deaktivovať javascript v článkoch',
 	'label_introduction_suite' => 'Points de suite', # NEW
@@ -37,11 +37,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_max_size' => 'Maximálna veľkosť (kB)',
 	'label_max_width' => 'Maximálna šírka (v pixeloch)',
 	'label_nb_objets_tranches' => 'Počet objektov v zoznamoch',
-	'label_no_set_html_base' => 'Pas d\'ajout automatique de <tt>&lt;base href="..."&gt;</tt>', # NEW
+	'label_no_set_html_base' => 'Žiadne automatické pridávanie <tt>&lt;základný odkaz href="..."&gt;</tt>',
 	'label_options_ecrire_perfo' => 'Výkon',
 	'label_options_ecrire_secu' => 'Zabezpečenie',
-	'label_options_skel' => 'Calcul des pages', # NEW
-	'label_options_typo' => 'Traitements des textes', # NEW
+	'label_options_skel' => 'Počítanie stránok',
+	'label_options_typo' => 'Spracovanie textov',
 	'label_supprimer_numero' => 'Automaticky odstrániť čísla názvov',
 	'label_toujours_paragrapher' => 'Encapsuler tous les paragraphes dans un <tt>&lt;p&gt;</tt> (même les texte constitués d\'un seul paragraphe)', # NEW
 	'legend_cache_controle' => 'Ovládanie cache',
