@@ -2,20 +2,37 @@
 Affiche la liste des variantes de produit, associées à un article
 
 parametres :
-id_article : ID de l'article-produit
+id_article (entier) : ID de l'article-produit
+statut (texte) : permet de filter selon un statut (sinon tous par defaut)
+statut (texte) : permet de filter selon un taux de TVA (sinon tous par defaut)
+ttc (booleen) : pour afficher le prix TTC au lieu du prix HT (cas par defaut)
+qte (booleen) : pour afficher la quantite disponible pour cette variante (masque par defaut)
+tri (texte) : nom du champ par lequel trier (prix_ht par defaut)
 
 -->]
 
 
 <B_variantes>
-<dl class='fiche[-(#:article:STATUT] properties listprice'>
-<BOUCLE_variantes(CAT_VARIANTES){statut IN prop,prepa,publie}{id_article=#ID}{par prix_ht}>
-	<dt class="desc #EDIT{titre} property"><label for="variante_#ID_CAT_VARIANTE">#TITRE[<span class="italique #EDIT{descriptif}">&nbsp;(#DESCRIPTIF|PtoBR|sinon{'ajouter descriptif &agrave; la variante...'})</span>]</label></dt>
-	<dd class="radio"><input type="radio" name="id_cat_variante" id="variante_#ID_CAT_VARIANTE" value="#ID_CAT_VARIANTE" [ (#STATUT|=={publie}|oui)checked='checked'] [(#STATUT|=={publie}|non) disabled='disabled']/></dd>
-	[<dd class="prix price"><span class="amount #EDIT{prix_ht}">(#PRIX_HT|monetaire)</span>[ / <span class="unit #EDIT{unite}">(#UNITE)</span>]</dd>]
-	[<!--dd class="prix price"><span class="amount #EDIT{prix_ht}">(#EVAL{[(#EVAL{1+#TVA})]*[(#PRIX_HT)]}|monetaire)</span>[ / <span class="unit #EDIT{unite}">(#UNITE)</span>]</dd-->]
+<table class="spip variantes-#ID_ARTICLE properties listprice">
+	<thead>
+		<tr class="row_first">
+			<th><:catalogue:label_titre:></th>
+			<th><:catalogue:tarif:> [<sub>(#ENV{ttc}|?{<:catalogue:prix_avec_taxe:>,<:catalogue:prix_sans_taxe:>})</sub>]</th>
+			[(#ENV{qte}|oui) <th><:catalogue:label_quantite:></th>]
+			<th><:catalogue:label_descriptif:></th>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_variantes(CAT_VARIANTES){statut?IN}{tva?IN}{id_article=#ID}{par #ENV{tri,prix_ht}}>
+		<tr [class="row_(#COMPTEUR_BOUCLE|alterner{odd, even})" ]id="variante-#ID_CAT_VARIANTE">
+			<td class="#EDIT{titre} property">#TITRE</td>
+			<td class="prix price"> [<span class="value #EDIT{prix_ht}">(#ENV{ttc}|?{ [(#EVAL{[(#EVAL{1+#TVA})]*[(#PRIX_HT)]}|monetaire)] , [(#PRIX_HT|monetaire)] })</span> [ / <span class="unit #EDIT{unite}">(#UNITE)</span>] ] </td>
+			[(#ENV{qte}|oui)<td class="quantite stock"> [<span class="value #EDIT{quantite}">(#QUANTITE)</span> [<span class="unit #EDIT{unite}">(#UNITE)</span>] ] </td>]
+			<td class="explication #EDIT{descriptif}">[&nbsp;<small>(#DESCRIPTIF|PtoBR)</small>]</td>
+		</tr>
 </BOUCLE_variantes>
-</dl>
+	<tbody>
+</table>
 </B_variantes>
-<!-- Aucune variante trouv&eacute;e pour ce produit -->
+<!-- Aucun resultat -->
 <//B_variantes>

@@ -5,20 +5,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'activites' => 'Activities',
-	'activites_explications' => 'Do you wish to take part in oour animations during the week?',
-	'activites_type' => 'If yes, which type of activities?',
-	'adresse_suite' => '(postal address complement)',
-	'ajouter_panier' => 'Register with this option',
-	'aller_fiche' => 'Register online with this option',
+	'ajouter_variante' => 'Add a variante',
+
+	// B
+	'bouton_ajouter_variante' => 'Add a variante',
 
 	// C
 	'catalogue' => 'Plugin Catalogue',
-	'code_ville' => 'Postal code + City',
-	'contre_indication_explications' => 'Avez-vous une contre-indication quelconque (r&eacute;gime alimentaire, allergie...)',
-	'contre_indication_nature' => 'Si oui, nature de la contre-indication',
+	'configurer_le_catalogue' => "Configure the catalogue",
+	'creer_variante' => 'Create a new variante of price for this item',
+	'cat_variantes' => "Variantes",
+	'confirmer_suppression_variante' => "Do you want to delete this variante of price ?",
 
 	// E
-	'etape_suivante' => 'Further step',
+	'edition_variante' => '&Eacute;dition variante',
+	'editer_variante' => 'Edit the variante',
 
 	// G
 	'go' => 'Go !',
@@ -33,10 +34,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_articles' => "List all articles of the site with the attribute of catalog item.",
 	'label_titre' => "Title",
 	'label_descriptif' => "Description",
-	'label_prix_ht' => "Net Price",
-	'label_tva' => "VAT",
+	'label_prix_ht' => "Price ex VAT",
+	'label_tva' => "VAT rate", // value added tax
 	'label_quantite' => "Quantity",
-	'label_unite' => "SI Unit",
+	'label_unite' => "Unit",
 	'label_date' => "Date",
 	'label_date_redac' => "Date of preparation",
 	'label_statut' => "Status",
@@ -50,19 +51,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'ok' => 'OK !',
+	'option_dispo' => 'Available option',
 	'options_dispo' => 'Available options',
 
 	// P
-	'partage' => 'Room',
-	'partage_explications' => 'Do you wish to share your room with someone else precisely (if you have not register for the "single room" option) ',
-	'partage_nom' => 'If yes, the name of this person',
+	'prix_avec_taxes' => 'i.a.t', // including all taxes
+	'prix_sans_taxes' => 'ex VAT', // excluding VAT
 
-	// V
-	'votre_nom' => 'Your first name',
-	'votre_prenom' => 'Your last name',
-	'votre_adresse' => 'Your postal address',
-	'votre_niveau' => 'Your salsa skills',
-	'votre_style' => 'Your salsa style',
+	// T
+	'tarif' => 'Price',
+	'tarifs' => 'Prices',
+	'titre_bloc_catalogue' => "CATALOGUE : article prices and options",
+	'titre_page_gestion' => 'Catalogue managemement page',
 
 );
 ?>

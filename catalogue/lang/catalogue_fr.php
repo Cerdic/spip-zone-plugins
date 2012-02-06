@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_prix_ht' => "Prix HT",
 	'label_tva' => "TVA",
 	'label_quantite' => "Quantit&eacute;",
-	'label_unite' => "Unit&eacute; SI",
+	'label_unite' => "Unit&eacute;", // pas que SI (cl, km, kg, etc.) aussi "pack/lot de N", etc.
 	'label_date' => "Date",
 	'label_date_redac' => "Date de r&eacute;daction",
 	'label_statut' => "Statut",
@@ -58,7 +58,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'ok' => 'OK !',
+	'option_dispo' => 'Option disponible',
 	'options_dispo' => 'Options disponibles',
+
+	// P
+	'prix_avec_taxes' => 'ttc',
+	'prix_sans_taxes' => 'ht',
 
 	// R
 	'retour_article' => 'Retour &agrave; l\'article ',
@@ -69,7 +74,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer_variante' => "Supprimer",
 
 	// T
-	'titre_bloc_catalogue' => 'CATALOGUE : prix et options li&eacute;s &agrave; l\'article',
+	'tarif' => 'Prix unique',
+	'tarifs' => 'Tarifs',
+	'titre_bloc_catalogue' => "CATALOGUE : prix et options li&eacute;s &agrave; l'article",
 	'titre_page_gestion' => 'Page de gestion du catalogue',
 
 );

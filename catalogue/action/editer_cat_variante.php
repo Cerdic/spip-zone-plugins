@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Plugin Coordonnées 
- * Licence GPL (c) 2010 Matthieu Marcillaud 
+ * Plugin Coordonnées
+ * Licence GPL (c) 2010 Matthieu Marcillaud
 **/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -28,7 +28,7 @@ function insert_cat_variante() {
 	$champs = array(
 		'titre' => _T('item_nouveau_titre')
 	);
-	
+
 	// Envoyer aux plugins
 	$champs = pipeline('pre_insertion', array(
 		'args' => array(
@@ -36,7 +36,7 @@ function insert_cat_variante() {
 		),
 		'data' => $champs
 	));
-	
+
 	$id_cat_variante = sql_insertq("spip_cat_variantes", $champs);
 	return $id_cat_variante;
 }
@@ -51,7 +51,7 @@ function revisions_cat_variantes($id_cat_variante, $c=false) {
 		foreach (array(
 				'id_article',
 				'titre', 'descriptif', 'statut',
-				'prix_ht', 'tva', 'date', 'date_redac') as $champ
+				'prix_ht', 'tva', 'date', 'date_redac', 'quantite', 'unite' ) as $champ
 		) {
 			if (($a = _request($champ)) !== null) {
 				$c[$champ] = $a;
@@ -67,7 +67,7 @@ function revisions_cat_variantes($id_cat_variante, $c=false) {
 
 
 	$champs = array();
-	
+
 	// Changer le statut de la variante ?
 	if ($statut = _request('statut', $c)) {
 		$statut_ancien = sql_getfetsel("statut", "spip_cat_variantes", "id_cat_variante=$id_cat_variante");
@@ -75,7 +75,7 @@ function revisions_cat_variantes($id_cat_variante, $c=false) {
 			$champs['statut'] = _request('statut', $c);
 		}
 	}
-	
+
 	if ($champs) {
 		sql_updateq('spip_cat_variantes', $champs, "id_cat_variante=$id_cat_variante");
 	}
@@ -83,6 +83,6 @@ function revisions_cat_variantes($id_cat_variante, $c=false) {
 	// Invalider les caches
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='id_cat_variante/$id_cat_variante'");
-	
+
 }
 ?>

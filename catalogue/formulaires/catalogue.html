@@ -1,0 +1,75 @@
+#CACHE{0}
+[(#REM)<!-- Affiche une fiche produit, avec ses options et ses variantes -->]
+
+<div class="formulaire_spip formulaire_#FORM formulaire_#FORM-#ID">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<B_catalogue_article>
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data" class="hproduct"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+	<BOUCLE_catalogue_article(ARTICLES){id_article=#ID}{statut IN prop,prepa,publie}>
+		<ul>
+	[(#REM)<!-- Choix du prix en fonction de la variante/declinaison -->]
+		<B_cat_art_variantes>
+			<li class="edit editer_id_cat_variante properties listprices">
+				<label>[(#TOTAL_BOUCLE|singulier_ou_pluriel{<:catalogue:tarif:>,<:catalogue:tarifs:>})]</label>
+			<BOUCLE_cat_art_variantes(CAT_VARIANTES){statut IN prop,prepa,publie}{id_article}{par prix_ht,date}>
+			[(#REM)<!-- Pour n'afficher que les variantes disponibles :
+			- {quantite>N} : que s'il y a au moins une quantite N "en stock"
+			- {age_modif>N} : qu'a plus de N jours a partir de la date d'effet
+			-->]
+				<div class="choix">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{prix_ht})</span>]
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{prix})</span>]
+					[(#ENV{tva}|?{
+						#SET{prix_affiche,[(#EVAL{[(#EVAL{1+#TVA})]*[(#PRIX_HT)]})] }
+					,
+						#SET{prix_affiche,#PRIX_HT}
+					})]
+					<input type="radio" class="radio" name="[(#ENV{tva}|?{prix,prix_ht})]" id="variante_#ID_CAT_VARIANTE" value="#GET{prix_affiche}" [(#ENV{id_cat_variante}|=={#ID_CAT_VARIANTE}|oui)checked="checked"] [(#STATUT|=={publie}|non) disabled="disabled"] />
+					<label for="variante_#ID_CAT_VARIANTE">
+						<span class="property title name">#TITRE</span>
+						:
+						<span class="prix price hmeasure">
+							[<span class="amount currency value #EDIT{prix_ht}">(#GET{prix_affiche}|monetaire)</span>]
+							[<sub>(#ENV{tva}|?{<:catalogue:prix_avec_taxes:>,<:catalogue:prix_sans_taxes:>})</sub>]
+							[ / <span class="unit #EDIT{unite}">(#UNITE)</span>]
+						</span>
+					</label>
+					[<em class="desc explication #EDIT{descriptif}">(#DESCRIPTIF|PtoBR)</em>]
+				</div>
+			</BOUCLE_cat_art_variantes>
+			</li>
+		</B_cat_art_variantes>
+		[(#REM)<!-- Aucune variante trouv&eacute;e pour ce produit : on applique le prix de base en cherchant "prix_ht" (et "tva" du coup) ou "prix" qui sont les noms communements utilises et reconnus par le plugin Montants (bon c'est vrai, il y a SpipPal qui utilise "prix_unitaire_ht" dans sa table produits...) -->]
+			<li class="edit editer_id_cat_variante">
+				<label for="variante_0"><:catalogue:tarif:></label>
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{prix_ht})</span>]
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{prix})</span>]
+				<input type="text" class="number" name="[(#ENV{tva}|?{prix,prix_ht})]" id="variante_0" value="[(#ENV{tva}|?{ [(#PRIX|sinon{#PRIX_HT}|monetaire) <:catalogue:prix_avec_taxes:>] , [(#PRIX_HT|sinon{#PRIX}|monetaire) <:catalogue:prix_sans_taxes:>] })]" readonly="readonly" />
+			</li>
+		<//B_cat_art_variantes>
+			<li class="edit editer_quantite">
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{quantite})</span>]
+				<label for="quantite"><:catalogue:quantite:></label>
+				<input name="quantite" id="quantite" type="[(#HTML5|?{number,text})]" class="number" />
+			</li>
+	[(#REM)<!-- Choix d'options (caracteristiques et prix) complementaires -->]
+		<B_cat_art_options>
+			<li class="edit editer_id_cat_option properties listclass">
+				<label>[(#TOTAL_BOUCLE|singulier_ou_pluriel{<:catalogue:option_dispo:>,<:catalogue:options_dispo:>})]</label>
+			<BOUCLE_cat_art_options(CAT_OPTIONS){id_article}{statut=publie}{!par prix_ht}>
+					[(#REM)<!-- to do -->]
+			</BOUCLE_cat_art_options>
+			</li>
+		</B_cat_art_options>
+		<//B_cat_art_options>
+		</ul>
+	[(#REM)<!-- Validation du choix (le traitement demandera le paiement ou ajoutera au panier ou ce qu'on veut) -->]
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:catalogue:ok:>" />
+		</p>
+	</BOUCLE_catalogue_article>
+	</div></form>
+</div>
+</B_catalogue_article>
