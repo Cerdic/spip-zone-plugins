@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adresse_livraison' => 'Doručovacia adresa',
 
 	// B
-	'bonjour' => 'Bonjour', # NEW
+	'bonjour' => 'Dobrý deň',
 
 	// C
 	'commande_client' => 'Zákazník',
@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_maj_label' => 'Dátum aktualizácie:',
 	'date_paiement_label' => 'Dátum platby:',
 	'designation' => 'Označenie',
-	'details_commande' => 'Détails de commande :', # NEW
+	'details_commande' => 'Podrobnosti objednávky:',
 
 	// E
 	'etat' => 'Stav',
@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_recherche' => 'Vyhľadávať',
 
 	// M
-	'merci_de_votre_commande' => 'Ďakujeme Vám za objednávku č. @ref@', # MODIF
+	'merci_de_votre_commande' => 'Vašu objednávku sme zaregistrovali a ceníme si Vašu dôveru.',
 	'modifier_commande_statut' => 'Táto objednávka je:',
 	'montant' => 'Množstvo',
 
@@ -78,7 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_expediteur_explication' => 'Vyberte odosielateľa oznamov pre predávajúceho a kupujúceho',
 	'notifications_expediteur_label' => 'Odosielateľ',
 	'notifications_expediteur_webmaster_label' => 'Vybrať webmastera:',
-	'notifications_explication' => 'Oznamy sa používajú na posielanie e-mailov po zmenách v stave spracovania objednávky: čaká, vybavuje sa, odoslaná, čiastočne zaplatená, zaplatená, vrátená, čiastočne vrátiť', # MODIF
+	'notifications_explication' => 'Oznamy sa používajú na posielanie e-mailov po zmenách v stave spracovania objednávky: čaká, vybavuje sa, odoslaná, čiastočne zaplatená, zaplatená, vrátená, čiastočne vrátiť. Táto funkcia si vyžaduje zásuvný modul Podrobné oznamy.',
 	'notifications_parametres' => 'Parametre oznamov',
 	'notifications_quand_explication' => 'Pri akých zmenách stavu poslať oznam?',
 	'notifications_quand_label' => 'Spustenie',
@@ -94,11 +94,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'parametres_cfg_titre' => 'Parametre',
-	'parametres_duree_vie_explication' => 'Zadajte čas platnosti objednávky v tomto stave spracovania (v sekundách):', # MODIF
+	'parametres_duree_vie_explication' => 'Zadajte čas platnosti objednávky v tomto stave spracovania (v hodinách):',
 	'parametres_duree_vie_label' => 'Čas platnosti',
+	'passer_la_commande' => 'Passer la commande', # NEW
 
 	// R
-	'recapitulatif' => 'Récapitulatif de commande :', # NEW
+	'recapitulatif' => 'Zhrnutie objednávky:',
 	'reference' => 'Značka',
 	'reference_label' => 'Značka:',
 	'reference_ref' => 'Značka @ref@',
@@ -117,11 +118,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer' => 'Odstrániť',
 
 	// U
-	'une_commande_de' => 'Une commande de : ', # NEW
+	'une_commande_de' => 'Objednávka: ',
 	'une_commande_sur' => 'Vaša objednávka – @nom@',
 
 	// V
-	'votre_commande_sur' => 'Vaša objednávka – @nom@' # MODIF
+	'votre_commande_sur' => '@nom@: Vaša objednávka'
 );
 
 ?>
