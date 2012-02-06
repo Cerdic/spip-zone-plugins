@@ -55,7 +55,7 @@ function player_insert_head_css($flux){
  */
 function player_insert_head($flux){
 	if (test_espace_prive()
-		OR (defined('_PLAYER_AFFICHAGE_FINAL') AND _PLAYER_AFFICHAGE_FINAL)){
+		OR (defined('_PLAYER_AFFICHAGE_FINAL') AND !_PLAYER_AFFICHAGE_FINAL)){
 		$flux .= player_call_js();
 	}
 	return $flux;
@@ -69,7 +69,8 @@ function player_insert_head($flux){
  * @return string
  */
 function player_affichage_final($flux){
-	if (!defined('_PLAYER_AFFICHAGE_FINAL') OR !_PLAYER_AFFICHAGE_FINAL){
+	if ((!defined('_PLAYER_AFFICHAGE_FINAL') OR _PLAYER_AFFICHAGE_FINAL)
+	  AND $GLOBALS['html']){
 		// inserer le head seulement si presente d'un rel='enclosure'
 		// il faut etre pas trop stricte car on peut avoir rel='nofollow encolsure' etc...
 		if ((strpos($flux,'enclosure')!==false)){
