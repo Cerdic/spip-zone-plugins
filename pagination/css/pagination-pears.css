@@ -13,6 +13,8 @@
 	font-weight: bold;
 	border: 1px solid #ddd;
 	background: #fff;
+	-moz-border-radius: 4px 4px 4px 4px;
+	-webkit-border-radius: 4px 4px 4px 4px; 
 	border-radius: 4px;
 	color: #2790ae;
 	text-decoration: none;
