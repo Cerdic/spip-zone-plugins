@@ -1,0 +1,29 @@
+/* http://pea.rs */
+.pagination-pears .sep,
+.pagination-pears .label { display: none; }
+.pagination-pears {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	text-align: center;
+}
+.pagination-pears .lien_pagination,
+.pagination-pears .on {
+	margin: 0 4px 0 0;
+	padding: 3px 8px;
+	font-weight: bold;
+	border: 1px solid #ddd;
+	background: #fff;
+	border-radius: 4px;
+	color: #2790ae;
+	text-decoration: none;
+}
+.pagination-pears .lien_pagination:hover,
+.pagination-pears .lien_pagination:active,
+.pagination-pears .on {
+	background: #f0f0f0;
+	border-color: #ccc;
+	color: #0F6780;
+}
+.pagination-pears .disabled {
+	display:none;
+}
