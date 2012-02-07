@@ -10,7 +10,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * -* pass string
  * -* objet string : le type d'objets liés
  * -* id_objet int : l'identifiant numérique de l'objet lié
- * -* tri string array/string : les éléments de tri
+ * -* where array : conditions à ajouter dans la clause where du select
+ * -* tri array : les éléments de tri
  * -** Si 'distance' dans le tri
  * -*** lat float : la latitude à partir de laquelle chercher
  * -*** lon float : la longitude à partir de laquelle chercher
@@ -22,20 +23,14 @@ function spip_liste_gis($args) {
 	if(!$spip_xmlrpc_serveur)
 		return false;
 	
-	$limite = $args['limite'] ? $args['limite'] : '20';
 	$objet = 'gis';
-	$what = 'gis.id_gis';
+	
+	$what[] = 'gis.id_gis';
 	$from = 'spip_gis as gis LEFT JOIN spip_gis_liens as lien ON gis.id_gis=lien.id_gis';
-	$where = array();
-	$order = array();
+	$where = is_array($args['where']) ? $args['where'] : array();
+	$order = is_array($args['tri']) ? $args['tri'] : array();
 	if((intval($args['id_objet']) > 0) && $args['objet']){
 		$where[] = 'lien.id_objet='.intval($args['id_objet']).' AND lien.objet='.sql_quote($args['objet']);
-	}
-	
-	if(is_array($args['tri'])){
-		$order = $args['tri'];
-	}else if($args['tri']){
-		$order = array_map('trim',explode(',',$args['tri']));
 	}
 	
 	if(in_array('distance',$order)){
@@ -46,7 +41,7 @@ function spip_liste_gis($args) {
 			$erreur = _T('gis:erreur_xmlrpc_lat_lon');
 			return new IXR_Error(-32601, attribut_html($erreur));
 		}else{
-			$what .= ", (6371 * acos( cos( radians(\"$lat\") ) * cos( radians( gis.lat ) ) * cos( radians( gis.lon ) - radians(\"$lon\") ) + sin( radians(\"$lat\") ) * sin( radians( gis.lat ) ) ) ) AS distance";
+			$what[] = "(6371 * acos( cos( radians(\"$lat\") ) * cos( radians( gis.lat ) ) * cos( radians( gis.lon ) - radians(\"$lon\") ) + sin( radians(\"$lat\") ) * sin( radians( gis.lat ) ) ) ) AS distance";
 		}
 	}
 	
@@ -56,14 +51,14 @@ function spip_liste_gis($args) {
 	if(is_string($args['recherche']) AND strlen($args['recherche']) > 3){
 		$prepare_recherche = charger_fonction('prepare_recherche', 'inc');
 		list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $objet.'s', $where);
-		$what .= ', '.$rech_select;
+		$what[] = $rech_select;
 		$from .= ' INNER JOIN spip_resultats AS resultats ON ( resultats.id = gis.id_gis ) ';
-		$where = 'resultats.'.$rech_where;
+		$where[] = 'resultats.'.$rech_where;
 	}
 	
 	$points_struct = array();
 
-	if($points = sql_select($what,$from,$where,'',$order,$limite)){
+	if($points = sql_select($what,$from,$where,'',$order,$args['limite'])){
 		while($point = sql_fetch($points)){
 			$struct=array();
 			$args['id_gis'] = $point['id_gis'];
