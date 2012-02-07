@@ -50,6 +50,7 @@ table.asso_tablo
 	border-collapse: collapse; /* HTML: TABLE cellspacing=0 */
 	font-family: Arial, Sans, sans-serif;
 	font-size: 8pt;
+	margin-bottom: .4em; /* ajout pour ne pas trop coller ce qui suit */
 } /* @: http://stackoverflow.com/a/7129454 http://w3schools.com/cssref/pr_tab_border-collapse.asp */
 table.asso_tablo thead tr
 {
@@ -69,7 +70,8 @@ table.asso_tablo th, table.asso_tablo td
 	padding: 2px; /* HTML: TABLE cellpadding=2 */
 /*	font-size: 11px; /* HTML: class=arial11 ? */
 }
-table.asso_tablo tbody td
+table.asso_tablo tbody td,
+tablo.asso_stats tfoot
 {
 	border-top: 1px solid #ccc; /* class=border1 */
 }
@@ -78,49 +80,52 @@ table.asso_tablo tfoot td
 	color: #9F1C30;
 /*	text-align: right; */
 }
+
 /* couleurs de texte specifiques */
 td.entree, th.entree
-{
+{ /* mini-bilan : entrees/recettes */
 	color: #00f; /* blue */
 }
 td.sortie, th.sortie
-{
+{ /* mini-bilan : sorties/depenses */
 	color: #FF1493; /* pink */
 }
 td.solde, th.solde
-{
+{ /* mini-bilan : solde/difference/benefice/perte */
 	color: #9F1C30;
 }
+
 /* couleurs de fond specifiques */
 tr.pair, td.pair
-{
-	background-color: #dcf3f4;
+{ /* membres : relances ; mini-bilan : entrees/recettes */
+	background-color: #dcf3f4 !important;
 }
 tr.impair, td.impair
-{
-	background-color: #f0dcf4;
+{ /* membres : echus ; mini-bilan : entrees/recettes */
+	background-color: #f0dcf4 !important;
 }
 tr.valide, td.valide
-{
-	background-color: #a0ffa0;
+{ /* membres : a jour (ok) */
+	background-color: #a0ffa0 !important;
 }
 tr.sortie, td.sortie
-{
-	background-color: #e6eac9;
+{ /* membres : desactives */
+	background-color: #e6eac9 !important;
 }
 tr.prospect, td.prospect
-{
-	background-color: #fff8dc;
+{ /* membres : prospects */
+	background-color: #fff8dc !important;
 }
 tr.vi, td.vi
-{ /* virement interne */
+{ /* comptes : virement interne */
 	background-color: #b4ffb4;
 }
 tr.cv, td.cv
-{ /* contribution volontaire */
+{ /* comptes : contribution volontaire */
 	background-color: #ffbc61;
 }
-/* alignements specifiques */
+
+/* alignements specifiques de cellules */
 td.boutons, td.icones
 td.buttons, td.icons, td.actions
 {
@@ -145,6 +150,16 @@ th.time, th.datetime
 	text-align: "h"; /* HTML: TD align=char char="h" */
 	/* On pourrait utiliser ":" mais je ne suis pas certain du resultat si on a des HH:MM:SS... */
 } /* @: http://stackoverflow.com/q/1363239 */
+td.formulaire
+table.asso_tablo_filtres td form
+{
+	text-align: right; /* HTML: TD align=right */
+}
+td.pagination
+{
+	text-align: left; /* HTML: TD align=right */
+}
+
 td.taux:after, td.pourcentage:after, td.pourcent:after,
 td.rate:after, td.percent:after, th.percent:after
 {
@@ -155,36 +170,16 @@ td.rate:after, td.percent:after, th.percent:after
 /** Formulaires
  ******************************/
 
-.formulaire_spip label
-{
-	font-weight: bold;
-}
-.formulaire_spip input,
-.formulaire_spip select,
-.formulaire_spip textarea
-{ /* adapte de de prive/minipress.css */
-	font-size: 1.1em;
-	background-color: #f8f8f9;
-	background-position: center bottom;
-	margin-bottom: 1em;
-	padding: 3px;
-	border: 1px inset #333;
-}
 input.text, input.password,
 input.url, input.email
-{ /* adapte de de prive/minipress.css */
-	width: 50%;
-	display: block;
+{ /* adapte de dans prive/minipress.css : pour cibler les input par type on leur rajourte des class="TYPE" car IE ne connait pas input[type="TYPE"] qu'on aurait pu utiliser. */
+	width: 50%; /* moitie de la ligne pour donner effet colonne sans utiliser de tableau (dans chaque LI/P/DIV il y a le input/select/textareau et le label) */
+	display: block; /* pour s'assurer de la rupture de lignes autour s'il y a un span.message_erreur et/ou em.explication ou autre */
 	/*behavior: url(win_width.htc); /* http://reference.sitepoint.com/css/behavior */
 }
-.formulaire_ajouter_membres_groupe {margin-top: 2em;}
-.formulaire_ajouter_membres_groupe .pagination {margin: 0px;}
-.formulaire_spip li.liste_auteurs
-{ /* liste auteurs 5 par lignes dans un formulaire */
-	padding: 2px;
-	width: 23%;
-	float: left;
-	clear: none;
+label
+{
+	font-weight: bold; /* HTML: B | STRONG */
 }
 .reponse_formulaire,
 .erreur_message
@@ -203,25 +198,77 @@ span.erreur {
 	color: red;
 }
 
-.formulaire_spip li div.formulaire_edition_destinations div li
+/* formulaires CVT */
+.formulaire_spip input,
+.formulaire_spip select,
+.formulaire_spip textarea
+{ /* adapte de .formo dans prive/minipress.css (voir s'il faut combiner avec celui de prive/styles_vieilles_def.html) */
+	font-size: 1.1em;
+	background-color: #f8f8f9;
+	background-position: center bottom;
+	margin-bottom: 1em;
+	padding: 3px;
+	border: 1px inset #333;
+}
+
+/* formulaires specifiques du plugin */
+.formulaire_ajouter_membres_groupe
+{
+	margin-top: 2em;
+}
+.formulaire_ajouter_membres_groupe .pagination
+{
+	margin: 0px;
+}
+.formulaire_spip li.liste_auteurs
+{ /* liste auteurs 5 par lignes dans un formulaire */
+	padding: 2px;
+	width: 23%;
+	float: left;
+	clear: none;
+}
+.formulaire_spip li .formulaire_edition_destinations li
 {
 	padding: 0px;
 	display: inline;
 }
-
 .formulaire_spip .editer_statut .choix,
 .formulaire_spip .editer_type_operation .choix
-{
+{ /* cases a cocher ou boutons regroupes en une ligne (au lieu d'un choix par ligne habituellement) */
     display: inline;
 }
-
 .cachediv
-{
+{ /* masquer certains blocs hors-contexte */
     visibility: hidden;
     overflow: hidden;
     height: 1px;
     margin-top: -1px;
     position: absolute;
 }
+.asso_tablo_filtres input,
+.asso_tablo_filtres select
+{ /* adapte de .fondl dans prive/styles_vielles_def.html */
+	margin-top: 0px;
+	padding: 0px; /* 3px dans styles_vieilles_def.html mais redefini a 0px dans style_prive.html pour les select ; et ca convient mieux ici */
+	background-color: #e4e4e4;
+	border: 1px solid #edf3fe;
+	background-position: center bottom;
+	float: none;
+	font-size: 11px;
+}
 
+.fondo {
+	margin-top: 0px;
+	background: #3874b0;
+	border: 1px outset #edf3fe;
+	float: none;
+	color: #fff;
+	font-size: 11px;
+	font-weight: bold;
+}
 
+input[type="submit"] {
+	font-weight: bold;
+	margin-top: 3px;
+}
+.fondf { margin-top: 0px; background-color: #fff; border-style: solid ; border-width: 1px; border-color: #e86519; color: #e86519; }

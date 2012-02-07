@@ -12,37 +12,46 @@
 
 
 function association_onglets($titre=''){
-	
+
 	/* onglet de retour a la page d'accueil */
 	$res = association_onglet1(_T('asso:menu2_titre_association'), 'association', 'Association', 'annonce.gif');
 
 	/* onglet de gestion des membres */
-	$res .= association_onglet1(_T('asso:menu2_titre_gestion_membres'), 'adherents', 'Membres', 'annonce.gif');  
+	$res .= association_onglet1(_T('asso:menu2_titre_gestion_membres'), 'adherents', 'Membres', 'annonce.gif');
 
+	/* onglet de gestion des dons */
 	if ($GLOBALS['association_metas']['dons']) {
-		$res .= association_onglet1(_T('asso:menu2_titre_gestion_dons'), 'dons', 'Dons', 'dons.gif'); 
+		$res .= association_onglet1(_T('asso:menu2_titre_gestion_dons'), 'dons', 'Dons', 'dons.gif');
 	}
+
+	/* onglet de gestion des ventes */
 	if ($GLOBALS['association_metas']['ventes']) {
-		$res .= association_onglet1(_T('asso:menu2_titre_ventes_asso'), 'ventes', 'Ventes', 'ventes.gif'); 
+		$res .= association_onglet1(_T('asso:menu2_titre_ventes_asso'), 'ventes', 'Ventes', 'ventes.gif');
 	}
+
+	/* onglet de gestion des activites */
 	if ($GLOBALS['association_metas']['activites']) {
-		$res .= association_onglet1(_T('asso:menu2_titre_gestion_activites'), 'activites', 'Activites', 'activites.gif'); 
+		$res .= association_onglet1(_T('asso:menu2_titre_gestion_activites'), 'activites', 'Activites', 'activites.gif');
 	}
+
+	/* onglet de gestion des prets */
 	if ($GLOBALS['association_metas']['prets']) {
-		$res .= association_onglet1(_T('asso:menu2_titre_gestion_prets'), 'ressources', 'Prets', 'pret1.gif'); 
+		$res .= association_onglet1(_T('asso:menu2_titre_gestion_prets'), 'ressources', 'Prets', 'pret1.gif');
 	}
+
+	/* onglet de gestion comptable */
 	if ($GLOBALS['association_metas']['comptes']) {
-		$res .= association_onglet1(_T('asso:menu2_titre_livres_comptes'), 'comptes', 'Comptes', 'comptes.gif'); 
+		$res .= association_onglet1(_T('asso:menu2_titre_livres_comptes'), 'comptes', 'Comptes', 'comptes.gif');
 	}
 
+	/* Affichage */
 	echo '<div class="table_page">';
-	echo '<h1 class="asso_titre">';
-	echo $titre?$titre:_T('asso:gestion_de_lassoc').' '.$GLOBALS['association_metas']['nom'];
-	echo '</h1>';
-
-	if ($res) echo "<div class='bandeau_actions'>", debut_onglet(), $res, fin_onglet(), '</div>';
-
-	echo "</div>";
+	// Nom du module
+	echo '<h1 class="asso_titre">', $titre?$titre:_T('asso:gestion_de_lassoc', array('nom'=>$GLOBALS['association_metas']['nom']) ), '</h1>';
+	// Onglets actifs
+	if ($res)
+		echo '<div class="bandeau_actions">', debut_onglet(), $res, fin_onglet(), '</div>';
+	echo '</div>';
 }
 
 function association_onglet1($texte, $objet, $libelle, $image)
@@ -51,7 +60,8 @@ function association_onglet1($texte, $objet, $libelle, $image)
 		include_spip('inc/presentation');
 		return onglet($texte, generer_url_ecrire($objet), '', $libelle, _DIR_PLUGIN_ASSOCIATION_ICONES . $image, 'rien.gif');
 	}
-	else return '';
+	else
+		return '';
 }
 
 function fin_page_association()

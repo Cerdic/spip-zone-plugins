@@ -28,7 +28,7 @@ function exec_destination()
 		association_onglets();
 		echo debut_gauche('',true);
 		echo debut_boite_info(true);
-		echo propre(_T('asso:plan_info'));
+//		echo propre(_T('asso:plan_info'));
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
 		$res = association_icone(_T('asso:destination_nav_ajouter'),  generer_url_ecrire('edit_destination'), 'EuroOff.gif',  'creer.gif');
@@ -50,7 +50,7 @@ function exec_destination()
 			echo '<tr>';
 			echo '<td class="integer">'.$data['id_destination'].'</td>';
 			echo '<td class="text">'.$data['intitule'].'</td>';
-			echo '<td class="integer">'. _T('nombre_fois', array('nombre'=>$utilise)).'</td>';
+			echo '<td class="integer">'. _T('asso:nombre_fois', array('nombre'=>$utilise)).'</td>';
 			echo '<td class="actions"><a href="'.generer_url_ecrire('action_destination','id='.$data['id_destination']).'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer"></a></td>';
 			echo '<td class="actions"><a href="'.generer_url_ecrire('edit_destination','id='.$data['id_destination']).'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Modifier"></a></td>';
 			echo "</tr>\n";

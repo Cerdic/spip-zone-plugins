@@ -22,9 +22,10 @@ include_spip('base/abstract_sql');
 // lors de l'appel des fonctions de ce fichier.
 
 // desinstatllation
-function association_vider_tables($nom_meta, $table)
+function association_vider_tables($nom_meta_base_version)
 {
 	$tables_a_supprimer=array(
+		'spip_association_metas',
 		'spip_asso_activites',
 		'spip_asso_categories',
 		'spip_asso_comptes',
@@ -32,22 +33,20 @@ function association_vider_tables($nom_meta, $table)
 		'spip_asso_destination_op',
 		'spip_asso_dons',
 		'spip_asso_exercices',
+		'spip_asso_groupes',
+		'spip_asso_groupes_liaisons',
+		'spip_asso_membres',
 		'spip_asso_plan',
 		'spip_asso_prets',
 		'spip_asso_ressources',
 		'spip_asso_ventes',
-		'spip_association_metas',
-		'spip_asso_groupes',
-		'spip_asso_groupes_liaisons',
-		'spip_asso_membres'
 	);
-	foreach($tables_a_supprimer as $table)
-		{
+	foreach($tables_a_supprimer as $table) {
 		sql_drop_table($table);
-		spip_log("$table $nom_meta desinstalle");
-		}
+		spip_log("Associaspip : $table desinstalle");
+	}
 	effacer_meta($nom_meta_base_version);
-	spip_log("$table $nom_meta desinstalle");
+	spip_log("Plugin Associaspip (vb:$nom_meta_base_version) correctement desinstalle");
 }
 
 // MAJ des tables de la base SQL

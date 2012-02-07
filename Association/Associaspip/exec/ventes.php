@@ -23,7 +23,7 @@ function exec_ventes()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$annee=intval(_request('annee'));
+		$annee = intval(_request('annee'));
 		if(!$annee) $annee = date('Y');
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;

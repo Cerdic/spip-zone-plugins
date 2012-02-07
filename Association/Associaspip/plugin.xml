@@ -10,7 +10,7 @@
 	<etat>dev</etat>
 	<slogan>Gestion d'associations</slogan>
 	<description>Gestion d'associations</description>
-	<prefix>association</prefix>	
+	<prefix>association</prefix>
 	<install>base/association_gestion.php</install>
 	<lien>http://www.spip-contrib.net/Associaspip</lien>
 	<icon>img_pack/annonce.gif</icon>
@@ -45,7 +45,7 @@
 		<nom>post_edition</nom>
 		<inclure>inc/post_edition.php</inclure>
 	</pipeline>
-	
+
 	<!-- Interface avec la page auteur infos-->
 	<pipeline>
 		<nom>affiche_gauche</nom>
@@ -63,10 +63,10 @@
 		<nom>autoriser</nom>
 		<inclure>association_autorisations.php</inclure>
 	</pipeline>
-	
+
 	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[2.1.8;2.1.99]" />
-	<necessite id="fpdf" version="[0.0.1;]" />
+	<utilise id="fpdf" version="[0.0.1;]" />
 	<utilise id="coordonnees" version="[1.4.5;]" />
 	<utilise id="cextras" version="[0.8;]" />
 </plugin>

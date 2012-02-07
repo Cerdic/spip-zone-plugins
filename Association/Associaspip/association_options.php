@@ -217,7 +217,62 @@ function association_dureefr($nombre, $unite='', $htm_abbr='abbr')
 		case 'T' : // (full) ISO Time : no check...
 			$frmt_m .= 'T'.str_replace( array('HM','HS','MS','00H','00M'), array('H','H','M'), preg_replace('m:m','M',preg_replace('h:h','H',$nombre,1),1).'S' );
 			$nombre = explode(':',$nombre,2);
-			$frmt_h = _T('spip:date_fmt_heures_minutes', array('h'=>$nombre[0],'m'=>$nombre[1]));
+			if ($nombre[0]>24) { // http://dev.mysql.com/doc/refman/4.1/en/time.html
+				$nombre['-1'] = intval($nombre[0]/24);
+				$nombre[0] = $nombre[0]%24;
+			}
+			switch($nombre['-1']) { // nombre de jours
+				case 0:
+				case '':
+					$frmt_h = '';
+					break;
+				case 1:
+					$frmt_h = _T('duree_temps', array('nombre'=>1,'unite'=>$_T('spip:date_un_jour')));
+					break;
+				default:
+					$frmt_h =  _T('duree_temps', array('nombre'=>association_nbrefr($nommbre['-1'],0),'unite'=>$_T('spip:date_jours')));
+					break;
+			}
+			if ($nombre[0])
+				$frmt_h .= ', ';
+			switch($nombre[0]) { // nombre d'heures
+				case 0:
+					$frmt_h .= '';
+					break;
+				case 1:
+					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>$_T('spip:date_une_heure')));
+					break;
+				default:
+					$frmt_h .= _T('duree_temps', array('nombre'=>association_nbrefr($nombre[0],0),'unite'=>$_T('spip:date_heures')));
+					break;
+			}
+			if ($nombre[1])
+				$frmt_h .= ', ';
+			switch($nombre[1]) { // nombre de minutes
+				case 0:
+					$frmt_h .= '';
+					break;
+				case 1:
+					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>$_T('spip:date_une_minute')));
+					break;
+				default:
+					$frmt_h .= _T('duree_temps', array('nombre'=>association_nbrefr($nombre[1],0),'unite'=>$_T('spip:date_minutes')));
+					break;
+			}
+			if ($nombre[2])
+				$frmt_h .= ', ';
+			switch($nombre[2]) { // nombre de secondes
+				case 0:
+					$frmt_h .= '';
+					break;
+				case 1:
+					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>$_T('spip:date_une_seconde')));
+					break;
+				default:
+					$frmt_h .= _T('duree_temps', array('nombre'=>association_nbrefr($nombre[2],0),'unite'=>$_T('spip:date_secondes')));
+					break;
+			}
+			$frmt_h .= '. ';
 			break;
 		default : // (full) ISO DateTime or Date : no check !!!
 			$frmt_m .= $nombre;
@@ -225,6 +280,7 @@ function association_dureefr($nombre, $unite='', $htm_abbr='abbr')
 			$ladate = explode(':',$nombre[0]);
 			switch($ladate[0]) { // nombre d'annee
 				case 0:
+				case '':
 					$frmt_h = '';
 					break;
 				case 1:
@@ -304,7 +360,7 @@ function association_dureefr($nombre, $unite='', $htm_abbr='abbr')
 			break;
 	}
 	if (!$frmt_h)
-		$frmt_h = _T('duree_temps', array('nombre'=>$valeur,'unite'=>$unite));
+		$frmt_h = _T('asso:duree_temps', array('nombre'=>$valeur, 'unite'=>$unite) );
 	return "<$htm_abbr class='duration' title='$frmt_m'>$frmt_h</$htm_abbr>";
 }
 
@@ -320,7 +376,6 @@ function association_prixfr($montant, $unite_code='', $unite_nom='', $htm_span='
 }
 
 // Formatage des nombres selon la langue de l'interface
-// @: http://stackoverflow.com/a/437642
 function association_nbrefr($montant, $decimales=2, $l10n='')
 {
 	/** recuperer le code des parametres regionnaux a utiliser
@@ -368,7 +423,7 @@ function association_recupere_montant ($valeur) {
 	//Affichage du message indiquant la date
 function association_date_du_jour($heure=false)
 {
-	$ladate = affdate(date('d/m/Y'));
+	$ladate = affdate_jourcourt(date('d/m/Y'));
 	$hr = ($heure?date('H'):'');
 	$mn = ($heure?date('i'):'');
 	$res = '<p class="'. ($heure?'datetime':'date');
@@ -400,8 +455,7 @@ function affichage_div($type_operation,$list_operation) {
 				break;
 			}
 		}
-	}
-	else {
+	} else {
 		$res = ($type_operation===$GLOBALS['association_metas']['classe_'.$list_operation])?'':'cachediv';
 	}
 	return $res;
@@ -418,7 +472,6 @@ function encadre($texte,$avant='[',$apres=']') {
 function generer_url_asso_don($id, $param='', $ancre='') {
 	return  generer_url_ecrire('edit_don', 'id='.intval($id));
 }
-
 function generer_url_don($id, $param='', $ancre='') {
 	return  array('asso_don', $id);
 }
@@ -426,7 +479,6 @@ function generer_url_don($id, $param='', $ancre='') {
 function generer_url_asso_membre($id, $param='', $ancre='') {
 	return  generer_url_ecrire('voir_adherent', 'id='.intval($id));
 }
-
 function generer_url_membre($id, $param='', $ancre='') {
 	return  array('asso_membre', $id);
 }
@@ -434,7 +486,6 @@ function generer_url_membre($id, $param='', $ancre='') {
 function generer_url_asso_vente($id, $param='', $ancre='') {
 	return  generer_url_ecrire('edit_vente', 'id='.intval($id));
 }
-
 function generer_url_vente($id, $param='', $ancre='') {
 	return  array('asso_vente', $id);
 }

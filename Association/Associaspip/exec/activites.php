@@ -86,9 +86,9 @@ function exec_activites_evenements($mot){
 	echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 	echo "<tr style='background-color: #DBE1C5;'>\n";
 	echo '<th style="text-align:right;">' . _T('asso:id') . '</th>';
-	echo '<th>'._T('asso:activite_entete_date').'</th>';
+	echo '<th>'._T('asso:entete_date').'</th>';
 	echo '<th>'._T('asso:activite_entete_heure').'</th>';
-	echo '<th>'._T('asso:activite_entete_intitule').'</th>';
+	echo '<th>'._T('asso:entete_intitule').'</th>';
 	echo '<th>'._T('asso:activite_entete_lieu').'</th>';
 	echo '<th>'._T('asso:activite_entete_inscrits').'</th>';
 	echo '<th colspan="3" style="text-align:center;">'._T('asso:activite_entete_action').'</th>';

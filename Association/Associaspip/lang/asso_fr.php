@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_relance' => 'Renouvellement de votre cotisation',
 	'titre_menu_gestion_association' => 'Gestion Association',
 	'titre_page_config' => 'Configuration du plugin',
-	# Navigation
+	# Navigation : Nom des onglets
 	'menu2_titre_association' => 'L\'association',
 	'menu2_titre_gestion_membres' => 'Membres',
 	'menu2_titre_relances_cotisations' => 'Relances des cotisations',
@@ -30,13 +30,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'menu2_titre_gestion_activites' => 'Activit&eacute;s',
 	'menu2_titre_livres_comptes' => 'Comptes',
 	'menu2_titre_gestion_prets' => 'Pr&ecirc;ts',
-	# Titres Onglets
+	# Navigation : Nom des modules
+	'titre_onglet_defaut' => 'Gestion de l\'association @nom@',
 	'titre_onglet_activite' => 'Gestion des activit&eacute;s',
+	'titre onglet association' => 'Param&eacute;trage de la gestion associative',
 	'titre_onglet_membres' => 'Gestion des membres',
 	'titre_onglet_dons' => 'Gestion des dons',
 	'titre_onglet_ventes' => 'Gestion des ventes',
 	'titre_onglet_comptes' => 'Gestion comptable',
 	'titre_onglet_prets' => 'Gestion des pr&ecirc;ts',
+# Communs
 	# Entetes communes
 	'entete_action' => 'Action',
 	'entete_actions' => 'Actions',
@@ -89,7 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'devise_symbole' => '&euro;', // pour les entites (X)HTML cf. <http://webdesign.about.com/od/localization/l/blhtmlcodes-cur.htm> & <http://fr.wikipedia.org/wiki/Symbole_mon%C3%A9taire> &  <http://fr.wikipedia.org/wiki/Aide:Liste_de_caract%C3%A8res_sp%C3%A9ciaux#Symboles_mon.C3.A9taires>
 	'devise_nom' => 'Euro', // les noms des monnaies ne dependent pas de la langue mais du pays et sont communs a beaucoup : cf <http://www.baudelet.net/monnaies/> ; utiliser le symbole pour indiquer le nom generique (cf. ) ou le code ISO pour preciser la devise exacte d'un pays : cf <http://fr.wikipedia.org/wiki/Liste_des_monnaies_en_circulation>
 	'devise_montant' => '@montant@&nbsp;@devise@', // pays francophones/luxophone/etc. : '@nombre@&nbsp;@devise@' ; pays anglophones/germanophones/etc. : '@devise@&nbsp;@nombre@' ; pour l'usage, cf. <http://programmer.spip.org/Syntaxe-complete-des-codes-de> & <http://programmer.spip.org/Codes-de-langue-en-PHP>
-	'duree_temps' => '@nombre@&nbsp;@unite@',
+	'duree_temps' => '@nombre@ @unite@',
 	'nombre_fois' => '@nombre@ fois',
 	'totaux_titre' => 'Totaux @titre@',
 	'date_du_jour' => 'Nous sommes le @date@',
@@ -244,13 +247,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adherent_message_degrouper' => '<p>S&eacute;lectionner les groupes dont les adh&eacute;rents seront exclus.</p>',
 	'titre_voir_groupe' => 'Voir le groupe',
 # Association (accueil)
+	'association_infos_contacts' => '', // information sur l'association (objet, declaration, etc.), ses coordonnees (adresse, numero et email principaux) et les contacts (nom, fonction, numero, email)
 	'categories_de_cotisations' => 'Cat&eacute;gories de cotisations',
 	'toutes_categories_de_cotisations' => 'Toutes les cat&eacute;gories de cotisations',
 	'configuration' => 'Configuration',
 	'gestion_association' => 'Gestion d\'une Association',
 	'gestion_des_banques' => 'Gestion des banques',
-	'gestion_de_lassoc' => 'Gestion de l\'association',
-	'info_doc' => '<p>Ce plugin vous permet de g&eacute;rer une petite association en ligne.</p> <p>Vous pouvez ainsi  visualiser, ajouter et modifier des membres actifs, lancer des mails de masse pour les relances de cotisations, g&eacute;rer des dons, des ventes associatives, des inscriptions aux activit&eacute;s, des pr&ecirc;ts de mat&eacute;riels et autres ressources, et tenir un livre de comptes.</p>',
+	'gestion_de_lassoc' => 'Gestion de l\'association @nom@',
+	'association_info_doc' => '<p>Ce plugin vous permet de g&eacute;rer une petite association en ligne.</p> <p>Vous pouvez ainsi  visualiser, ajouter et modifier des membres actifs, lancer des mails de masse pour les relances de cotisations, g&eacute;rer des dons, des ventes associatives, des inscriptions aux activit&eacute;s, des pr&ecirc;ts de mat&eacute;riels et autres ressources, et tenir un livre de comptes.</p>',
 	'message' => 'Message',
 	'sujet' => 'Sujet',
 	'message_relance' => '
@@ -330,7 +334,6 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_entete_lieu' => 'Lieu',
 	'adherent_entete_inscrits' => 'Inscrits',
 	'adherent_entete_notes' => 'Notes',
-	'adherent_entete_tous' => 'Tous',
 	'adherent_entete_supprimer_abrev' => 'Sup.<br /><abbr title="Pour supprimer plusieurs adh&eacute;rents. Si des adh&eacute;rents sont coch&eacute;s pour &ecirc;tre d&eacute;sactiv&eacute;s, ils seront seulement d&eacute;sactiv&eacute;s !">???</abbr>',
 	'adherent_entete_desactiver_abrev' => 'D&eacute;s.<br /><abbr title="Pour d&eacute;sactiver plusieurs adh&eacute;rents sans passer par leur &eacute;dition">???</abbr> ',
 
@@ -587,7 +590,7 @@ Commentaire: @commentaire@
 # Destination comptable
 	'ajouter_destination' => 'ajouter une destination',
 	'supprimer_destination' => 'supprimer',
-	'utilise' => 'Utilis&eacute;',
+	'destination_entete_utilise' => 'Utilis&eacute;',
 	# Titres
 	'destination_comptable' => 'Destination comptable',
 # Bilan

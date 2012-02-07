@@ -74,9 +74,12 @@ function exec_compte_resultat() {
 			echo "<br /><table cellpadding='2' cellspacing='6' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>";
 			echo "<tr style='background-color: #DBE1C5;'>";
 			echo "<td style='text-align:right;'>"._T('asso:cpte_resultat_mode_exportation')."</td>";
-			foreach(array('pdf','csv','xml') as $type) { // exports possibles
+			if (test_plugin_actif('FPDF')) { // export en PDF
+				echo "<td style='text-align:center;'><a href='".generer_url_ecrire('export_compte_resultat_pdf', "var=$var")."'><strong>PDF</strong></td>";
+			}
+			foreach(array('pdf','csv','xml') as $type) { // autres exports possibles
 				$h = generer_url_ecrire('export_compte_resultat_'.$type, "var=$var");
-				echo "<td style='text-align:center;'><a href='$h'><strong>".ucfirst($type)."</strong></td>";
+				echo "<td style='text-align:center;'><a href='$h'><strong>".strtoupper($type)."</strong></td>";
 			}
 			echo '</tr></table>';
 		}
