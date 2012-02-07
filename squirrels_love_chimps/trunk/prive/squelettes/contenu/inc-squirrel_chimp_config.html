@@ -16,7 +16,7 @@
 			[(#SET{fichier_langue,#VALEUR|table_valeur{fichier_langue}})]
 			]
 			[(#CHEMIN{[(#GET{chemin})][(#CLE)]_config.html}|oui)
-			<div class="onglet[ (#ENV{part}|=={#CLE}|non)onglet_off]"><a  href="[(#SELF|parametre_url{part,#CLE})]">#EVAL{_T('#GET{fichier_langue}:config_#CLE');}</a></div>
+			<div class="onglet[ (#ENV{part}|=={#CLE}|non)onglet_off]"><a  href="[(#SELF|parametre_url{part,#CLE})]">[(#VAL{#GET{fichier_langue}:config_#CLE}|_T)]</a></div>
 			]
 	</BOUCLE_objets>
 	</div>
