@@ -56,7 +56,7 @@ function recuperer_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_f
 		$verset_fin =='' and $i==$chapitre_fin ? $debut=1 : $debut=$debut;		
 		$fin == '' ? $fin ='' : $fin =$fin +1; 
 		
-		$tableau_resultat[$i] = recuperer_versets(lire_traiter_code(importer_charset(recuperer_page($url,'iso-latin-1'))),$debut,$fin);
+		$tableau_resultat[$i] = recuperer_versets(lire_traiter_code(importer_charset(recuperer_page($url,'utf-8'))),$debut,$fin);
 		
 		$i++;
 	}
