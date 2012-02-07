@@ -103,11 +103,11 @@ img.gpGeocodeMatchCodeMatchType
 }
 
 #popup .olPopupCloseBox, .gpPopupCloseBox
-{	background:transparent url(close.png) no-repeat scroll 0 0;
+{	background:transparent url("close.png") no-repeat scroll 0 0;
 	overflow:hidden;
 }
 #popup .olPopupCloseBox:hover, .gpPopupCloseBox:hover
-{	background:transparent url(close.png) no-repeat scroll 0 -17px
+{	background:transparent url("close.png") no-repeat scroll 0 -17px
 }
 
 /** Affichage des images */
@@ -127,4 +127,93 @@ img.gpGeocodeMatchCodeMatchType
 	margin:0;
 	padding:0;
 }
-	
+
+/** Affichage des popup Spip */
+.SpipPopupBack
+{	background-image:url("popup-back.png");
+}
+.SpipPopupTL
+{	background-position: left top;
+	background-repeat: no-repeat;
+}
+.SpipPopupTR
+{	background-position: right top;
+	background-repeat: no-repeat;
+}
+.SpipPopupBL
+{	background-position: left bottom;
+	background-repeat: no-repeat;
+}
+.SpipPopupBR
+{	background-position: right bottom;
+	background-repeat: no-repeat;
+}
+.SpipPopupC
+{	height:32px;
+	width:30px;
+}
+.SpipPopupCbr,
+.SpipPopupCbl
+{	background:url("popup-back-bot.png") no-repeat center;
+}
+.SpipPopupCtl,
+.SpipPopupCtr
+{	background:url("popup-back-top.png") no-repeat center;
+}
+
+.SpipPopup p.titre
+{	margin-top:6px;
+	margin-bottom:5px;
+}
+.SpipPopup .olPopupCloseBox
+{	top: 0px!important;
+	right: 0px!important;
+	margin: 9px 8px 0 0;
+}
+
+/** Popup avec ombre */
+.SpipPopupShadowBack
+{	background-image:url("popup-backombre.png");
+}
+.SpipPopupShadow .olPopupContent
+{	padding:4px 10px 10px;
+}
+.SpipPopupShadowC
+{	height:35px;
+	width:42px;
+}
+.SpipPopupShadowCbr,
+.SpipPopupShadowCbl
+{	background:url("popup-backombre-bot.png") no-repeat;
+}
+.SpipPopupShadowCtl,
+.SpipPopupShadowCtr
+{	background:url("popup-backombre-top.png") no-repeat;
+}
+.SpipPopupShadow .olPopupCloseBox
+{	margin: 10px 18px 0 0;
+}
+
+/** Popup pensee */
+.SpipPopupThinkBack
+{	background-image:url("popup-think.png");
+}
+.SpipPopupThinkC
+{	height:42px;
+	width:40px;
+}
+.SpipPopupThinkCbr,
+.SpipPopupThinkCbl
+{	background:url("popup-think-bot.png") no-repeat;
+}
+.SpipPopupThinkCtl,
+.SpipPopupThinkCtr
+{	background:url("popup-think-top.png") no-repeat;
+}
+.SpipPopupThink p.titre
+{	margin-top:0px;
+	margin-bottom:5px;
+}
+.SpipPopupThink .olPopupContent
+{	padding:12px 6px 12px 12px;
+}

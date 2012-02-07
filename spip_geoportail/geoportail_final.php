@@ -30,7 +30,9 @@ function geoportail_affichage_final($page)
     // ]]></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GEOPORTAIL.'js/Layer/GXT.js">// <![CDATA[
     // ]]></script>
-
+<script type="text/javascript" src="'._DIR_PLUGIN_GEOPORTAIL.'js/Popup/SpipPopup.js">// <![CDATA[
+    // ]]></script>
+    
 <script src="http://api.ign.fr/geoportail/api?v=1.2-e&key='.$GLOBALS['meta']['geoportail_key'].'&includeEngine=false"></script>
 
 

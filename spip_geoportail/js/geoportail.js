@@ -52,6 +52,7 @@ jQuery.geoportail =
 		if (!OpenLayers.Layer.Vector.Locator) GeoportailInitLayerLocator();			// Geoportal.Util.loadJS(dirPlug + "js/Layer/Locator.js");
 		if (!OpenLayers.Layer.GXT) GeoportailInitLayerGXT();						// Geoportal.Util.loadJS(dirPlug + "js/Layer/GXT.js");
 		if (!Geoportal.Format.Geoconcept.rip) GeoportailInitFormatCeoconcept();		// Geoportal.Util.loadJS(dirPlug + "js/Format/Ceoconcept_rip.js");
+		if (!OpenLayers.Popup.SpipPopup) GeoportailInitSpipPopup();					
 
 		//
 		var i;
@@ -1076,11 +1077,15 @@ jQuery.geoportail =
 		var savePath = OpenLayers.ImgPath;
 		if (hover) spip_popup = OpenLayers.Class(OpenLayers.Popup.Anchored, { 'autoSize': true, 'displayClass':"Anchored Anchored_hover" });
 		else 
-		{	if (jQuery.geoportail.spip_popup == "spip")
+		{	/*
+			if (jQuery.geoportail.spip_popup == "spip")
 			{	OpenLayers.ImgPath = jQuery.geoportail.imgPath;		// Path du repertoire spip (image : cloud-popup-relative.png)
 				spip_popup = OpenLayers.Class(OpenLayers.Popup['FramedCloud'], { 'autoSize': true, 'displayClass':jQuery.geoportail.spip_popup });
 			}
-			else spip_popup = OpenLayers.Class(OpenLayers.Popup[jQuery.geoportail.spip_popup], { 'autoSize': true, 'displayClass':jQuery.geoportail.spip_popup });
+			else 
+			*/
+			if (jQuery.geoportail.spip_popup == "spip") jQuery.geoportail.spip_popup = 'SpipPopup';
+			spip_popup = OpenLayers.Class(OpenLayers.Popup[jQuery.geoportail.spip_popup], { 'autoSize': true, 'displayClass':jQuery.geoportail.spip_popup });
 		}
 		var html = "";
 		var lien = null;
@@ -1099,7 +1104,7 @@ jQuery.geoportail =
 							pos ? pos:feature.geometry.getBounds().getCenterLonLat(),
 							new OpenLayers.Size(200,200),
 							html,
-							pos ? {size:new OpenLayers.Size(5,5), offset: new OpenLayers.Pixel(-3,-3) } : null,
+							pos ? { size:new OpenLayers.Size(0,5), offset: new OpenLayers.Pixel(0,-5) } : null,
 							(hover?false:true),
 							function(evt) { if (this.feature) jQuery.geoportail.unpopupFeature(this.feature); }
 						);
@@ -1179,18 +1184,18 @@ jQuery.geoportail =
 			if (map===true) 
 			{	for (i=0; i<jQuery.geoportail.fsHeight.length; i++) jQuery(jQuery.geoportail.fsHeight[i]).slideUp(400);
 				for (i=0; i<jQuery.geoportail.fsWidth.length; i++) jQuery(jQuery.geoportail.fsWidth[i]).hide();
-				setTimeout (resizeMap,500);
+				setTimeout (function(){ jQuery(window).resize() },500);
 			}
 			else if (map===false)
 			{	for (i=0; i<jQuery.geoportail.fsHeight.length; i++) jQuery(jQuery.geoportail.fsHeight[i]).slideDown(400);
 				for (i=0; i<jQuery.geoportail.fsWidth.length; i++) jQuery(jQuery.geoportail.fsWidth[i]).show();
-				setTimeout (resizeMap,500);
+				setTimeout (function(){ jQuery(window).resize() },500);
 			}
 			else if (map=="toggle") 
 			{	if (jQuery.geoportail.isFullscreen && jQuery.geoportail.fsHeight.length > 0) 
 					jQuery.geoportail.fullscreen(jQuery(jQuery.geoportail.fsHeight[0]).css('display')!='none');
 			}
-			else resizeMap();
+			else jQuery(window).resize();
 			return;
 		}
 			
@@ -1214,8 +1219,8 @@ jQuery.geoportail =
 			jQuery.geoportail.fsCompteur = 0;
 			// Calcul hauteur et largeur
 			var de = document.documentElement;
-			var w = window.innerWidth || self.innerWidth || (de&&de.clientWidth) || document.body.clientWidth;
-			var h = window.innerHeight || self.innerHeight || (de&&de.clientHeight) || document.body.clientHeight
+			var w = jQuery(window).width();//window.innerWidth || self.innerWidth || (de&&de.clientWidth) || document.body.clientWidth;
+			var h = jQuery(window).height();//window.innerHeight || self.innerHeight || (de&&de.clientHeight) || document.body.clientHeight
 			var h2 = h;
 			for (i=0; i<jQuery.geoportail.fsHeight.length; i++)
 			{	h2 -= jQuery(jQuery.geoportail.fsHeight[i]).css('display')=='none' ? 0 : jQuery(jQuery.geoportail.fsHeight[i]).outerHeight(true);
