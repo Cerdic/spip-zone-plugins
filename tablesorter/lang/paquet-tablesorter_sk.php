@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
-	'tablesorter_description' => 'Ce plugin permet de trier les tableaux portant la class CSS "spip" en cliquant simplement sur l\'entête d\'une colonne (le tableau HTML doit donc posséder les tags thead et tbody). Voir en ligne toutes les options de tri, sur le site de [->http://tablesorter.com].', # NEW
+	'tablesorter_description' => 'Tento zásuvný modul vám umožňuje triediť tabuľky s CSS triedou "spip" kliknutím na záhlavie stĺpca (v HTML tabuľke musia byť tagy thead a tbody). Všetky možnosti triedenia si môžete prezrieť na stránke [http://tablesorter.com.->http://tablesorter.com]',
 	'tablesorter_slogan' => 'S tableSorterom bude triedenie najlepšie!'
 );
 
