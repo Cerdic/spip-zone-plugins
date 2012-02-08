@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_explication_versions' => 'Verzie oddeľte znakom ":".',
 	'cfg_form_tickets_autorisations' => 'Nastavenie povolení',
 	'cfg_form_tickets_general' => 'Všeobecné nastavenia',
-	'cfg_inf_type_autorisation' => 'Si vous choisissez par statut ou par auteur, il vous sera demandé ci-dessous votre sélection de statuts ou d\'auteurs.', # NEW
+	'cfg_inf_type_autorisation' => 'Ak si zvolíte podľa stavu alebo autora, budete musieť zadať stav alebo autora.',
 	'cfg_lbl_autorisation_auteurs' => 'Povoliť podľa zoznamu autorov',
 	'cfg_lbl_autorisation_statuts' => 'Povoliť podľa funkcie autora',
 	'cfg_lbl_autorisation_webmestre' => 'Povoliť iba webmasterom',
@@ -115,7 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	Indiquez en particulier s’il se produit systématiquement ou occasionnellement.', # NEW
 	'explication_fichier' => 'Pridajte súbor k svojmu lístku.',
 	'explication_redaction' => 'Quand vous avez terminé la rédaction de votre ticket, sélectionnez le statut «ouvert et discuté».', # NEW
-	'explication_url_exemple' => 'Indiquez ici l’URL d’une page concernée par ce ticket.', # NEW
+	'explication_url_exemple' => 'Tu uveďte internetovú adresu stránky priradenú tomuto lístku.',
 
 	// I
 	'icone_modifier_ticket' => 'Upraviť tento lístok',
@@ -137,9 +137,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_supprimer_filtres' => 'Odstrániť všetky filtre',
 
 	// M
-	'mail_texte_message_auto' => 'Ceci est un message automatique : n\'y repondez pas.', # NEW
+	'mail_texte_message_auto' => 'Toto je automatická správa. Neodpovedajte na ňu.',
 	'message_aucun_ticket_recherche' => 'Podmienkam vyhľadávania nevyhovuje žiaden lístok',
-	'message_automatique' => 'Ceci est un message automatique : n\'y repondez pas.', # NEW
+	'message_automatique' => 'Toto je automatická správa. Neodpovedajte na ňu.',
 
 	// N
 	'no_assignation' => 'Hocikto',
@@ -173,13 +173,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_resolu' => 'Vyriešený',
 	'statut_resolu_long' => 'Všetky vyriešené lístky',
 	'suivre_tickets_assignes_a' => 'Lístky pripojené k @nom@',
-	'suivre_tickets_comments' => 'Suivi des commentaires de tickets', # NEW
-	'suivre_tickets_comments_rss' => 'Suivre ces commentaires par RSS', # NEW
+	'suivre_tickets_comments' => 'Sledovať komentáre k lístkom',
+	'suivre_tickets_comments_rss' => 'Sledovať tieto komentáre cez RSS',
 	'suivre_tickets_de' => 'Lístky @nom@',
 	'suivre_tickets_id' => 'Sledovať lístok #@id@ : @titre@',
-	'suivre_tickets_rss' => 'Suivre ces tickets par RSS', # NEW
-	'suivre_tickets_rss_unique' => 'Suivre ce ticket par RSS', # NEW
-	'suivre_tickets_statut' => 'Les tickets ayant le ou les statuts :', # NEW
+	'suivre_tickets_rss' => 'Sledovať tieto lístky cez RSS',
+	'suivre_tickets_rss_unique' => 'Sledovať tento lístok cez RSS',
+	'suivre_tickets_statut' => 'Lístky so stavom/stavmi:',
 	'suivre_tickets_tous' => 'Všetky lístky',
 	'syndiquer_ticket' => 'Syndikovať lístok:',
 	'syndiquer_tickets' => 'Syndikovať lístky zo stránky',
@@ -202,8 +202,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_identification' => 'Identification', # NEW
 	'titre_liste' => 'Zoznam lístkov',
 	'tous_tickets_ouverts' => 'Všetky otvorené lístky',
-	'type_amelioration' => 'Amélioration', # NEW
-	'type_amelioration_long' => 'Les tickets demandant une amélioration', # NEW
+	'type_amelioration' => 'Vylepšenie',
+	'type_amelioration_long' => 'Lístky žiadajú vylepšenie',
 	'type_probleme' => 'Problém',
 	'type_probleme_long' => 'Problémy, ktoré treba vyriešiť',
 	'type_tache' => 'Úloha',
