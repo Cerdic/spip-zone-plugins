@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'notifications_description' => 'Aktivuje oznamy e-mailom pri určitých akciách, vrátane diskusných fór a odkazovača v súkromnej zóne, ako aj odoslania e-mailov autorom pri publikovaní ich článkov.',
-	'notifications_slogan' => 'Podrobné oznamy' # MODIF
+	'notifications_slogan' => 'Oznámiť zmeny e-mailom'
 );
 
 ?>
