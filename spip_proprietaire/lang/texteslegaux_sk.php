@@ -70,7 +70,7 @@ Internetovú stránku {{[@nom_site@->@url_site@]}} vytvoril jej vlastník.
 
 	// E
 	'egalement_administrateur' => ' a riadi ju',
-	'enregistre_pres' => 'registered with', # NEW
+	'enregistre_pres' => 'zaregistrovaný cez',
 
 	// H
 	'hebergeur_mentions_legales' => '[hebergeur<-]{{{Hosting}}}
