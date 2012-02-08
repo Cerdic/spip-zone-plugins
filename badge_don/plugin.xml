@@ -1,0 +1,25 @@
+<plugin>
+	<nom>Badge pour dons</nom>
+	<auteur>b_b</auteur>
+	<version>0.1.0</version>
+	<etat>stable</etat>
+	<prefix>badge_don</prefix>
+	<slogan>Un badge pour appeler au don</slogan>
+	<description>Ce plugin permet d'afficher un badge dans les pages publiques de votre site pour inciter les visiteurs &#224; faire des dons.
+_ Cr&#233;dit ic&#244;ne : izo.
+_ Image du badge par d&#233;faut : CC-BY Les petits d&#233;brouillards Bretagne.
+	</description>
+	<lien>http://www.spip-contrib.net/1579</lien>
+	<licence>GPL v3</licence>
+	<icon>images/badge_don-128.png</icon>
+	<categorie>communication</categorie>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>badge_don_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>badge_don_pipelines.php</inclure>
+	</pipeline>
+ 	<necessite id='SPIP' version='[2.0;2.1.99]' />
+</plugin>
