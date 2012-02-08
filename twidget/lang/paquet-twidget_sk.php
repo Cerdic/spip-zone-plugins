@@ -8,13 +8,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
-	'twidget_description' => 'Un widget Twitter facile a installer
-_ Ajoutez une inclusion dans vos squelettes pour afficher un widget twitter :
+	'twidget_description' => 'Jednoduchý widget pre Twitter na nainštalovanie
+_ Umožniť pridávanie do šablón, aby sa zobrazil widget pre twitter:
 _ <code>#INCLURE{fond=inclure/twidget_profile,user=GusLeLapin}</code>
- ou <code>#INCLURE{fond=inclure/twidget_search,search=#SPIP,title=\'Suivez twitter\',subject=\'SPIP\'}</code>
+ alebo <code>#INCLURE{fond=inclure/twidget_search,search=#SPIP,title=\'Sledovať na Twitteri\',subject=\'SPIP\'}</code>
 
- Le plugin fait office de proxy afin qu\'aucune requête ne soit faite par vos visiteurs vers twitter
- et éviter tout traçage possible de leur activité (préservation de leur vie personnelle).', # NEW
+ Zásuvný modul funguje ako proxy, aby ho mohli vaši návštevníci používať na Twitteri 
+a zabrániť možnosti sledovania ich aktivity  (ukladania ich osobných údajov).',
 	'twidget_slogan' => 'Jednoduchý widget pre Twitter na nainštalovanie'
 );
 
