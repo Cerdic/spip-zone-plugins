@@ -54,7 +54,7 @@ function exec_categories(){
 			echo '<td class="decimal">'. association_dureefr($data['duree'],'m') .'</td>';
 			echo '<td class="decimal">'. association_prixfr($data['cotisation']) .'</td>';
 			echo '<td class="text">'. propre($data['commentaires']) .'</td>';
-			echo '<td class="actions">' . association_bouton('bouton_supprimer', 'poubelle-12.gif', echo fin_cadre_relief();'action_categorie','id='.$data['id_categorie']). '</td>';
+			echo '<td class="actions">' . association_bouton('bouton_supprimer', 'poubelle-12.gif', 'action_categorie','id='.$data['id_categorie']). '</td>';
 			echo '<td class="actions">' . association_bouton('bouton_modifier', 'edit-12.gif', 'edit_categorie','id='.$data['id_categorie']). '</td>';
 			echo "</tr>\n";
 		}

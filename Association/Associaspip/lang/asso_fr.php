@@ -43,12 +43,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	# Entetes communes
 	'entete_action' => 'Action',
 	'entete_actions' => 'Actions',
+	'entete_commentaire' => 'Commentaire',
 	'entete_date' => 'Date',
 	'entete_duree' => 'Dur&eacute;e',
 	'entete_intitule' => 'Intitul&eacute;',
 	'entete_id' => 'ID',
 	'entete_montant' => 'Montant',
 	'entete_nom' => 'Nom',
+	'entete_num' => 'N<sup>o</sup>',
 	'entete_statut' => 'Statut',
 	'entete_solde' => 'Solde',
 	'entete_tous' => 'Tous',
@@ -247,7 +249,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adherent_message_degrouper' => '<p>S&eacute;lectionner les groupes dont les adh&eacute;rents seront exclus.</p>',
 	'titre_voir_groupe' => 'Voir le groupe',
 # Association (accueil)
-	'association_infos_contacts' => '', // information sur l'association (objet, declaration, etc.), ses coordonnees (adresse, numero et email principaux) et les contacts (nom, fonction, numero, email)
+	'association_infos_contacts' => '  ', // information sur l'association (objet, declaration, etc.), ses coordonnees (adresse, numero et email principaux) et les contacts (nom, fonction, numero, email)
 	'categories_de_cotisations' => 'Cat&eacute;gories de cotisations',
 	'toutes_categories_de_cotisations' => 'Toutes les cat&eacute;gories de cotisations',
 	'configuration' => 'Configuration',

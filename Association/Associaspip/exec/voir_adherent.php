@@ -73,7 +73,11 @@ function exec_voir_adherent(){
 		echo '<div style="text-align: center" class="verdana1 spip_xx-small">'.pipeline('afficher_contenu_objet', array ('args'=>array('type'=>'asso_membre', 'id_objet'=>$id_auteur, 'contexte'=>array()), 'data'=>'')).'</div>';
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
-		echo association_retour();
+
+		$res = association_icone(_T('asso:adherent_label_modifier_membre'),  generer_url_ecrire('edit_adherent', 'id='.$id_auteur), 'edit.gif');
+		$res .= association_icone(_T('asso:bouton_retour'), str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']), 'retour-24.png');
+		echo bloc_des_raccourcis($res);
+
 		echo debut_droite('',true);
 		debut_cadre_relief('', false, '', $titre = $nom_membre);
 		// Liste des groupes

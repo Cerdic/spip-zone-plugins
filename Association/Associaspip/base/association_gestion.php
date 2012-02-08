@@ -15,17 +15,13 @@ if (!defined('_ECRIRE_INC_VERSION'))
 include_spip('base/association');
 include_spip('base/abstract_sql');
 
-// A chaque modif de la base SQL ou ses conventions (raccourcis etc)
-// le fichier plugin.xml doit indiquer le numero de depot qui l'implemente sur
-// http://zone.spip.org/trac/spip-zone/timeline
-// Ce numero est fourni automatiquement par la fonction spip_plugin_install
-// lors de l'appel des fonctions de ce fichier.
-
 // desinstatllation
-function association_vider_tables($nom_meta_base_version)
+#function association_vider_tables($nom_meta, $table) // appel avec deux parametes ???
+function association_vider_tables($nom_meta_base_version=0) // parametre non utilise... mis a zero au cas ou la fonction serait appelee sans parametre...
 {
-	$tables_a_supprimer=array(
-		'spip_association_metas',
+	$ok = TRUE;
+	// On liste les tables du plugin
+	$tables_a_supprimer = array(
 		'spip_asso_activites',
 		'spip_asso_categories',
 		'spip_asso_comptes',
@@ -40,13 +36,24 @@ function association_vider_tables($nom_meta_base_version)
 		'spip_asso_prets',
 		'spip_asso_ressources',
 		'spip_asso_ventes',
+		'spip_association_metas',
 	);
-	foreach($tables_a_supprimer as $table) {
-		sql_drop_table($table);
-		spip_log("Associaspip : $table desinstalle");
+	// On efface les tables du plugin en consignant le resultat dans /tmp/spip_prive.log
+	foreach($tables_a_supprimer as $table ) {
+		if (sql_drop_table($table))
+			spip_log("Associaspip : echec de la desinstallation de la table '$table' ");
+		else {
+			spip_log("Associaspip : echec de la desinstallation de la table '$table' ");
+			$ok = FALSE;
+		}
 	}
+
+/* Euh... Ceci ne sert plus (et devrait planter silencieusement) car Associaspip utilise sa propre table de metas (la derniere effacee)
+	// On efface la version entregistrée
+	effacer_meta('association');
 	effacer_meta($nom_meta_base_version);
-	spip_log("Plugin Associaspip (vb:$nom_meta_base_version) correctement desinstalle");
+	spip_log("Plugin Associaspip (vb:$nom_meta_base_version) dereference");
+*/
 }
 
 // MAJ des tables de la base SQL
@@ -86,6 +93,12 @@ function association_upgrade($meta, $courante, $table='meta')
 		return $GLOBALS['association_maj_erreur'];
 	}
 }
+
+// A chaque modif de la base SQL ou ses conventions (raccourcis etc)
+// le fichier plugin.xml doit indiquer le numero de depot qui l'implemente sur
+// http://zone.spip.org/trac/spip-zone/timeline
+// Ce numero est fourni automatiquement par la fonction spip_plugin_install
+// lors de l'appel des fonctions de ce fichier.
 
 $GLOBALS['association_maj'][21] = array(array('sql_alter',"TABLE spip_asso_membres ADD publication text NOT NULL AFTER secteur"));
 

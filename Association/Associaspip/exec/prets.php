@@ -26,7 +26,7 @@ function exec_prets()
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:prets_titre_liste_reservations')) ;
 		association_onglets(_T('asso:titre_onglet_prets'));
-		echo debut_gauche("",true);
+		echo debut_gauche('',true);
 		echo debut_boite_info(true);
 		$id_ressource = intval(_request('id'));
 		$data = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
@@ -35,6 +35,7 @@ function exec_prets()
 		echo '<p>'._T('asso:ressources_libelle_code').': '.$data['code'].'</p>';
 		echo '<p>'._T('asso:ressources_libelle_statut').': '._T('asso:ressources_libelle_statut_'.$data['statut']).'</p>';
 		echo '<p>'.$data['intitule'].'</p>';
+		echo association_date_du_jour();
 		echo fin_boite_info(true);
 		echo bloc_des_raccourcis(association_icone(_T('asso:prets_nav_ajouter'), generer_url_ecrire('edit_pret','id_ressource='.$id_ressource.'&id_pret='), 'livredor.png', 'creer.gif'));
 		echo association_retour();

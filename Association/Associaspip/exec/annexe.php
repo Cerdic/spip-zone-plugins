@@ -20,8 +20,8 @@ if (!defined('_ECRIRE_INC_VERSION'))
 include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
 
-function exec_annexe(){
-
+function exec_annexe()
+{
 	include_spip('inc/autoriser');
 	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
@@ -41,10 +41,9 @@ function exec_annexe(){
 		echo debut_boite_info(true);
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
-		$url_compte_resultat = generer_url_ecrire('compte_resultat', "exercice=$exercice");
-		$url_bilan = generer_url_ecrire('bilan', "exercice=$exercice");
-		$res = association_icone(_T('asso:cpte_resultat_titre_general'),  $url_compte_resultat, 'finances.jpg')
-		. association_icone(_T('asso:bilan'),  $url_bilan, 'finances.jpg');
+		$res = association_icone(_T('asso:cpte_resultat_titre_general'),  generer_url_ecrire('compte_resultat', "exercice=$exercice"), 'finances.jpg')
+		. association_icone(_T('asso:bilan'), generer_url_ecrire('bilan', "exercice=$exercice"), 'finances.jpg');
+		$res .= association_icone(_T('asso:bouton_retour'),  generer_url_ecrire('comptes', "exercice=$exercice"), 'retour-24.png');
 		echo bloc_des_raccourcis($res);
 		echo debut_droite('',true);
 		debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg', false, '', '&nbsp;' .propre( _T('asso:annexe_titre_general').' : '.exercice_intitule($exercice)));

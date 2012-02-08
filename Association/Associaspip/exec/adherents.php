@@ -29,7 +29,7 @@ function exec_adherents() {
 		/* recuperation des variables */
 		$critere = request_statut_interne(); // peut appeler set_request
 		$statut_interne = _request('statut_interne');
-		$lettre= _request('lettre');
+		$lettre = _request('lettre');
 		echo debut_boite_info(true);
 		// TOTAUX : personnes
 		echo '<table width="100%" class="asso_stats"><caption>'._T('asso:adherent_liste_nombres').'</caption><tbody>';
@@ -75,7 +75,6 @@ function exec_adherents() {
 			echo recuperer_fond('prive/inc_cadre_etiquette');
 			echo fin_cadre_enfonce(true);
 		}
-		/* on appelle ici la fonction qui calcule le code du formulaire/tableau de membres pour pouvoir recuperer la liste des membres affiches a transmettre a adherents_table pour la generation du pdf */
 		//Filtre ID et groupe : si le filtre id est actif, on ignore le filtre groupe
 		$id = intval(_request('id'));
 		if (!$id) {
@@ -86,6 +85,7 @@ function exec_adherents() {
 			$critere = "a.id_auteur=$id";
 			$id_groupe = 0;
 		}
+		/* on appelle ici la fonction qui calcule le code du formulaire/tableau de membres pour pouvoir recuperer la liste des membres affiches a transmettre a adherents_table pour la generation du pdf */
 		list($liste_id_auteurs, $code_liste_membres) = adherents_liste(intval(_request('debut')), $lettre, $critere, $statut_interne, $id_groupe);
 		if (test_plugin_actif('FPDF')) {
 			echo debut_cadre_enfonce('',true);
@@ -98,7 +98,7 @@ function exec_adherents() {
 		echo "<table width='100%' class='asso_tablo_filtres'>\n";
 		echo '<tr>';
 		// PAGINATION ALPHABETIQUE
-		echo '<td class="pagination">';
+		echo '<td width="30%" class="pagination0">';
 		if (!$lettre) {
 			$lettre = '%';
 		}
@@ -121,7 +121,7 @@ function exec_adherents() {
 		// FILTRES
 		//Filtre groupes
 #		if ($GLOBALS['association_metas']['aff_groupes']=='on') {
-			echo '</td><td>';
+			echo '</td><td width="25%" class="formulaire">';
 			echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
 			echo '<select class="fondl" name="id_groupe" onchange="form.submit()">';
 			$qGroupes = sql_select('nom, id_groupe', 'spip_asso_groupes', '', 'nom');
@@ -132,20 +132,19 @@ function exec_adherents() {
 					echo ' selected="selected"';
 				echo '>'.$groupe['nom'].'</option>';
 			}
-			echo '</select></div></form>';
+			echo '</select><noscript><input type="submit" value="'._T('lister').'" /></noscript></div></form>';
 #		}
 		//Filtre ID
-		echo '</td><td>';
+		echo '</td><td width="20%" class="formulaire">';
 		echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
-		echo '<input type="text" name="id"  class="fondl" style="padding:0.5px" onfocus=\'this.value=""\' size="10"  value="'. $id .'" onchange="form.submit()" />';
-		echo '</div></form>';
-		echo '</td><td>';
-		echo '<td style="text-align:right;">';
+		echo '<input type="text" name="id"  class="fondl" onfocus=\'this.value=""\' size="5"  value="'. $id .'" onchange="form.submit()" />';
+		echo '<noscript><input type="submit" value="'._T('lister').'" /></noscript></div></form>';
+		echo '</td><td width="25%" class="formulaire">';
 		//Filtre statut
 		echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
 		echo '<input type="hidden" name="lettre" value="'.$lettre.'" />';
-		echo "\n<select name='statut_interne' class='fondl' onchange='form.submit()'>\n";
-		echo "<option value='defaut'>"._T('asso:adherent_entete_statut_defaut')."</option>";
+		echo '<select name="statut_interne" class="fondl" onchange="form.submit()">';
+		echo '<option value="defaut">'._T('asso:adherent_entete_statut_defaut').'</option>';
 		foreach ($GLOBALS['association_liste_des_statuts'] as $statut) {
 			echo '<option value="'.$statut.'"';
 			if ($statut_interne==$statut) {
@@ -153,7 +152,7 @@ function exec_adherents() {
 			}
 			echo '> '._T('asso:adherent_entete_statut_'.$statut).'</option>';
 		}
-		echo '</select></div></form>';
+		echo '</select><noscript><input type="submit" value="'._T('lister').'" /></noscript></div></form>';
 		echo '</td>';
 		echo '</tr>';
 		echo '</table>';
@@ -280,29 +279,30 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe,
 	if ($GLOBALS['association_metas']['aff_validite']=='on') {
 		$res .= '<th>'._T('asso:adherent_libelle_validite').'</th>';
 	}
-	$res .= '<th colspan="4" class="actions">'._T('asso:entete_actions').'</th>'
+	$res .= '<th colspan="4" class="actions" width="30">'._T('asso:entete_actions').'</th>'
 	. '<th><input title="'._T('asso:selectionner_tout').'" type="checkbox" id="selectionnerTous" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName(\'id_auteurs[]\'); for (var i in checkboxList){checkboxList[i].checked=currentVal;}" /></th>'
 	. "</tr>\n</thead><tbody>"
 	. $auteurs
 	. "</tbody>\n</table>\n";
 	//SOUS-PAGINATION
+	$res .= "<table clall='asso_tablo_filtres'><tr>\n<td class='pagination0'>";
 	$nombre_selection = sql_countsel('spip_asso_membres', $critere);
 	$pages = intval($nombre_selection/$max_par_page)+1;
 	if ($pages!=1)	{
 		for ($i=0; $i<$pages; $i++)	{
 			$position = $i*$max_par_page;
 			if ($position==$debut)	{
-			$res .= '<strong>'.$position."</strong>\n";
+			$res .= '<strong>'.$position.'</strong>';
 			} else {
 				$h = generer_url_ecrire('adherents', 'lettre='.$lettre.'&debut='.$position.'&statut_interne='.$statut_interne);
 				$res .= "<a href='$h'>$position</a>\n";
 			}
 		}
 	}
-	$res .= "<div style='float:right;'>\n"
+	$res .= "</td><td class='formulaire'>\n"
 	.  (!$auteurs ? '' : ('<select name="action_adherents"><option value="" selected="">'._T('asso:choisir_action').'</option><option value="desactive">'.($statut_interne=='sorti'?_T('asso:reactiver_adherent'):_T('asso:desactiver_adherent')).'</option><option value="delete">'._T('asso:supprimer_adherent').'</option><option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_un_groupe').'</option></select><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" />'))
 	. '<input type="hidden" name="statut_courant" value="'.$statut_interne.'" />'
-	.  '</div>';
+	.  '</td></tr></table>';
 	return 	array($liste_id_auteurs, generer_form_ecrire('action_adherents', $res));
 }
 

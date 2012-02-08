@@ -41,9 +41,8 @@ function exec_association() {
 		echo debut_droite('',true);
 		debut_cadre_relief('', false, '', $titre = _T('asso:association_infos_contacts'));
 		echo '<div class="vcard" id="vcard-asso">';
-		echo debut_cadre_formulaire('',true);
 		// Profil de l'association
-//		echo '<div class="vcard">';
+		echo debut_cadre_formulaire('',true);
 		echo '<p class="fn org"><strong class="organization-name">'.$GLOBALS['association_metas']['nom']."</strong></p>\n";
 		echo '<p class="adr">';
 		echo '<span class="street-address">'.$GLOBALS['association_metas']['rue']."</span><br />\n";

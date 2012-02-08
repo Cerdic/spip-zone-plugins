@@ -27,7 +27,7 @@
 					</select>
 				</li>
 		</B_catalogue_produits>
-				[(#REM)<!-- Cette table est fournie par le plugin "Catalogue" S'il est installe, on utilise l'ID variante comme code de l'article, et on recupere directement l'intitule et le prix... Si non alternative classique... -->]
+				[(#REM)<!-- Cette table est fournie par le plugin "Catalogue" S'il est installe, on utilise l'ID variante comme code de l'article, et on recupere directement l'intitule (pour le prix on laisse la possibilite d'en saisir un different)... Si non alternative classique... -->]
 				<li class="editer_article">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{article})</span>]
 					<label for="article"><:asso:article:></label>
@@ -38,12 +38,12 @@
 					<label for="code"><:asso:code_de_l_article:></label>
 					<input type="text" name="code" [value="(#ENV{code})"] id="code"  class="text" />
 				</li>
+		<//B_catalogue_produits>
 				<li class="editer_prix_vente">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{prix_vente})</span>]
 					<label for="prix_vente"><:asso:prix_de_vente_en_e__:></label>
 					<input type="[(#HTML5|?{number,text})]" name="prix_vente" [value="(#ENV{prix_vente})"] id="prix_vente"  class="number float price" />
 				</li>
-		<//B_catalogue_produits>
 			</ul>
 		</fieldset>
 		<fieldset>

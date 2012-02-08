@@ -4,12 +4,12 @@
 	#SET{listeIdAuteurs, #GET{listeIdAuteurs}|push{#ID_AUTEUR}}
 </BOUCLE_listeID>
 #SET{emails,#ARRAY}
-#SET{emails,#GET{listeIdAuteurs}|association_formater_emails}
+#SET{emails,#GET{listeIdAuteurs}|appliquer_filtre{association_formater_emails}}
 #SET{telephones,#ARRAY}
-#SET{telephones,#GET{listeIdAuteurs}|association_formater_telephones}
+#SET{telephones,#GET{listeIdAuteurs}|appliquer_filtre{association_formater_telephones}}
 <B_groupes>
 <p class="pagination">#PAGINATION</p>
-<table width="100%" class="asso">
+<table width="100%" class="asso_tablo">
 	<thead>
 		<tr>
 			<th><:asso:nom:></th>

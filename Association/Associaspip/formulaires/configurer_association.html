@@ -30,10 +30,10 @@
 						<li class="editer_pays">
 							<label for="pays"><:asso:config_libelle_pays:></label>
 						<B_pays>
-							<select>
+							<select name="pays">
 								<option value=""></option>
 						<BOUCLE_pays(PAYS?) {par nom}>
-								<option value="#CODE" [(#ENV{pays}|=={#CODE}|?{selected="selected"})]>#NOM</option>
+								<option value="#CODE" [(#ENV{pays,FR}|=={#CODE}|?{selected="selected"})]>#NOM</option>
 						</BOUCLE_pays>
 							</select>
 						</B_pays>
@@ -151,7 +151,7 @@
 					</ul>
 				</fieldset>
 			</li>
-		[(#PLUGIN{fpdf}|oui)
+		[(#PLUGIN{association}|oui)
 			<INCLURE{fond=inc/configurer_comptabilite, env}>
 		]
 		</ul>

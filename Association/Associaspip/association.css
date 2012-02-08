@@ -71,11 +71,12 @@ table.asso_tablo th, table.asso_tablo td
 /*	font-size: 11px; /* HTML: class=arial11 ? */
 }
 table.asso_tablo tbody td,
-tablo.asso_stats tfoot
+tablo.asso_stats tfoot td,
+tablo.asso_stats tfoot th
 {
 	border-top: 1px solid #ccc; /* class=border1 */
 }
-table.asso_tablo tfoot td
+table.asso_tablo tfoot th
 {
 	color: #9F1C30;
 /*	text-align: right; */
@@ -158,6 +159,7 @@ table.asso_tablo_filtres td form
 td.pagination
 {
 	text-align: left; /* HTML: TD align=right */
+	width: 30%;
 }
 
 td.taux:after, td.pourcentage:after, td.pourcent:after,
