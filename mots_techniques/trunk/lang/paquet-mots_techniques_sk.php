@@ -8,10 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
-	'mots_techniques_description' => 'Par défaut, les boucles MOTS et GROUPES_MOTS filtreront les mots-clés 
-				techniques. Cependant, le critère <code>{tout}</code> permettra de renvoyer tous 
-				les mots clés et le critère <code>{technique=oui}</code> 
-				permet de sélectionner par type technique.', # NEW
+	'mots_techniques_description' => 'Podľa predvolených nastavení cykly MOTS a GROUPES_MOTS vyfiltrujú technické kľúčové slová. Kritérium <code>{tout}</code> však vypíše kľúčové slová a kritérium <code>{technique=oui}</code> 
+				umožní vybrať technické podľa typu.',
 	'mots_techniques_slogan' => 'Skupine kľúčových slov pridá spresnenie "technické"',
 	'mots_techniques_titre' => 'Technické kľúčové slová'
 );
