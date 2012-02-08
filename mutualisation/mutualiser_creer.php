@@ -71,7 +71,7 @@ function mutu_etape_code_activation($e, $options){
 			echo mutu_minipres(
 				_T('mutu:site_suspendu'),
 				"<div>" .$menu_langues ."<br /></div>\n" .
-				"<div><img alt='SPIP' src='".find_in_path('images/logo-spip.gif')." /></div>\n" .
+				"<div><img alt='SPIP' src='".find_in_path('images/logo-spip.gif')."' /></div>\n" .
 				"<h3>"._T('mutu:message_site_desactive',array('lien' => $lien))."</h3>",
 				" id='mutu'"
 			);
