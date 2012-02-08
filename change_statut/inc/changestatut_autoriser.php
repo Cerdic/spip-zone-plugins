@@ -3,7 +3,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function changestatut_autoriser(){}
 
 function autoriser_changestatut_dist($faire, $type, $id, $qui, $opt) {
-	// si on est ou etait admin
+	// si on est ou etait webmestre
 	return (($qui['webmestre'] == 'oui') OR ($qui['statut_orig'] == 'webmestre'));
 }
 // autorisation des boutons pour Spip 2.1
