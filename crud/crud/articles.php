@@ -18,7 +18,7 @@ include_spip('action/editer_article');
  */
 function crud_articles_create_dist($dummy,$set=null){
 	$id_rubrique = sql_getfetsel('id_rubrique','spip_rubriques','id_rubrique='.intval($set['id_rubrique']));
-	if (($id_rubrique > 0) && autoriser('creerarticledans','rubrique',$set['id_rubrique'],$GLOBALS['visiteur_session']) && ($id = insert_article($set['id_rubrique'])))
+	if (($id_rubrique > 0) && autoriser('creerarticledans','rubrique',$set['id_rubrique']) && ($id = insert_article($set['id_rubrique'])))
 		list($e,$ok) = articles_set($id,$set);
 	else if(!$id_rubrique){
 		$e = _T('crud:erreur_rubrique_inconnue',array('id'=>$set['id_rubrique']));
@@ -39,7 +39,11 @@ function crud_articles_update_dist($id,$set=null){
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_articles_delete_dist($id){
-	list($e,$ok) = articles_set($id,array('statut'=>'poubelle'));
+	if(autoriser('modifier','article',$id)){
+		list($e,$ok) = articles_set($id,array('statut'=>'poubelle'));
+	}else{
+		$e = _T('crud:erreur_suppression',array('objet'=>'article','id_objet'=>$id));
+	}
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 

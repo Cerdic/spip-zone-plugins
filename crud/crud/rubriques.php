@@ -17,14 +17,18 @@ include_spip('action/editer_rubrique');
  * Interface C(r)UD
  */
 function crud_rubriques_create_dist($dummy,$set=null){
-	if ($id = insert_rubrique($set['id_parent']))
+	if (autoriser('creerrubriquedans','rubrique',$set['id_parent']?$set['id_parent']:0) && ($id = insert_rubrique($set['id_parent'])))
 		list($e,$ok) = revisions_rubriques($id,$set);
 	else
 		$e = _T('crud:erreur_creation',array('objet'=>'rubrique'));
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_rubriques_update_dist($id,$set=null){
-	revisions_rubriques($id,$set);
+	if(autoriser('modifier','rubrique',$id)){
+		list($e,$ok) = revisions_rubriques($id,$set);
+	}else{
+		$e = _T('crud:erreur_update',array('objet'=>'rubrique','id_objet'=>$id));
+	}
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_rubriques_delete_dist($id){

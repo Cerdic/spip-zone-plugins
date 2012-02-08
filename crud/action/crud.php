@@ -53,10 +53,13 @@ function action_crud_dist($action=null,$table=null,$id=null,$args = array()){
 		AND (!$table = table_objet($table) OR !include_spip("crud/$table")))
 		$res = array('message'=>_T('crud:erreur_table_inconnue',array('table'=>$table)));
 
-	elseif ($f=charger_fonction("{$table}_{$action}","crud",true))
+	elseif ($f=charger_fonction("{$table}_{$action}","crud",true)){
+		include_spip('inc/autoriser');
 		$res = $f($id,$args);
-	elseif ($f=charger_fonction("{$action}","crud",true))
+	}elseif ($f=charger_fonction("{$action}","crud",true)){
+		include_spip('inc/autoriser');
 		$res = $f($table,$id,$args);
+	}
 
 	else
 		$res = array('message'=>_T('crud:erreur_action_inconnue_table',array('action'=>$action,'table'=>$table)));
@@ -78,12 +81,11 @@ function action_crud_dist($action=null,$table=null,$id=null,$args = array()){
 	// pour la fournir en resultat
 	if ($res['success'] AND isset($res['result']['id'])) {
 		$crud = charger_fonction('crud','action');
-		$res['result']['row'] = $crud('read',$table,$res['result']['id']);
-		$res['result']['row'] = reset($res['result']['row']);
+		$read = $crud('read',$table,$res['result']['id']);
+		$res['result']['row'] = $read['result'][0];
 	}
-
+	
 	return $res;
-
 }
 
 /**

@@ -23,7 +23,7 @@ function crud_forums_create_dist($dummy,$set=null){
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
 function crud_forums_update_dist($id,$set=null){
-	if (sql_getfetsel('id_forum','spip_forum','id_forum='.$id)==$id){
+	if ((sql_getfetsel('id_forum','spip_forum','id_forum='.$id)==$id) && autoriser('modifier','forum',$id)){
 		sql_updateq('spip_forum',$set,'id_forum='.$id);
 		return array('success'=>true,'message'=>$ok,'result'=>array('id'=>$id));
 	}
@@ -32,7 +32,7 @@ function crud_forums_update_dist($id,$set=null){
 	}
 }
 function crud_forums_delete_dist($id){
-	if (sql_updateq('spip_forum',array('statut'=>'off'),'id_forum='.$id))
+	if (sql_updateq('spip_forum',array('statut'=>'off'),'id_forum='.$id) && autoriser('modifier','forum',$id))
 		return array('success'=>true,'message'=>$ok,'result'=>array('id'=>$id));
 	else
 		return array('success'=>false,'message'=>sql_error(),'result'=>array('id'=>$id));
