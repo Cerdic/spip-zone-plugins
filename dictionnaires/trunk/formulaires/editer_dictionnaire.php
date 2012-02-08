@@ -36,6 +36,7 @@ function formulaires_editer_dictionnaire_saisies_dist($id_dictionnaire='new', $r
 			'options' => array(
 				'nom' => 'actif',
 				'label' => _T('dictionnaire:champ_actif_label'),
+				'explication' => _T('dictionnaire:champ_actif_explication'),
 				'datas' => array(
 					'0' => _T('dictionnaire:champ_actif_non'),
 					'1' => _T('dictionnaire:champ_actif_oui'),
@@ -60,6 +61,7 @@ function formulaires_editer_dictionnaire_verifier_dist($id_dictionnaire='new', $
 
 function formulaires_editer_dictionnaire_traiter_dist($id_dictionnaire='new', $retour=''){
 	if ($retour) refuser_traiter_formulaire_ajax();
+	if (is_null(_request('type_defaut'))){ set_request('type_defaut', ''); }
 	$retours = formulaires_editer_objet_traiter('dictionnaire', $id_dictionnaire, 0, 0, $retour, '');
 	
 	return $retours;

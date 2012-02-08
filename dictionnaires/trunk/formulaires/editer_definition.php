@@ -49,6 +49,15 @@ function formulaires_editer_definition_saisies_dist($id_definition='new', $id_di
 				'valeur_oui' => 'abbr',
 			)
 		),
+		array(
+			'saisie' => 'case',
+			'options' => array(
+				'nom' => 'casse',
+				'label' => _T('definition:champ_casse_label'),
+				'label_case' => _T('definition:champ_casse_label_case'),
+				'valeur_oui' => '1',
+			)
+		),
 	);
 	
 	return $saisies;
@@ -72,6 +81,8 @@ function formulaires_editer_definition_verifier_dist($id_definition='new',  $id_
 
 function formulaires_editer_definition_traiter_dist($id_definition='new',  $id_dictionnaire=0, $retour=''){
 	if ($retour) refuser_traiter_formulaire_ajax();
+	if (is_null(_request('type'))){ set_request('type', ''); }
+	if (is_null(_request('casse'))){ set_request('casse', ''); }
 	$retours = formulaires_editer_objet_traiter('definition', $id_definition, $id_dictionnaire, 0, $retour, '');
 	
 	return $retours;

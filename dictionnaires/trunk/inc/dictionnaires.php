@@ -51,7 +51,7 @@ function dictionnaires_lister_definitions($purger=false){
 		
 			// À l'intérieur on récupère toutes les définitions publiées
 			$definitions_publiees = sql_allfetsel(
-				'id_dictionnaire, id_definition, titre, termes, type, texte',
+				'id_dictionnaire, id_definition, titre, termes, type, casse, texte',
 				'spip_definitions',
 				array(
 					sql_in('id_dictionnaire', $dicos_actifs),
@@ -83,18 +83,20 @@ function dictionnaires_lister_definitions($purger=false){
 			
 			// Si c'est une abbréviation, on reconnait automatique une version avec des p.o.i.n.t.s.?
 			if ($definition['type'] == 'abbr'){
-				$titre = strtolower($definition['titre']);
+				$titre = $definition['casse'] ? $definition['titre'] : strtolower($definition['titre']);
 				$avec_points = $titre[0];
 				for ($i=1 ; $i<strlen($titre) ; $i++){
 					$avec_points .= '.'.$titre{$i};
 				}
-				$definition['termes'][] = $avec_points;
 				$definition['termes'][] = $avec_points.'.';
+				$definition['termes'][] = $avec_points;
 			}
 			
 			// On nettoie les termes = pas de truc vide, tout en minuscule, pas de doublons
 			$definition['termes'] = array_filter($definition['termes']);
-			$definition['termes'] = array_map('strtolower', $definition['termes']);
+			if (!$definition['casse']){
+				$definition['termes'] = array_map('strtolower', $definition['termes']);
+			}
 			$definition['termes'] = array_unique($definition['termes']);
 			
 			// On génère le masque de recherche
@@ -106,7 +108,7 @@ function dictionnaires_lister_definitions($purger=false){
 						$definition['termes']
 					)
 				)
-				.')(?=([^\w]|\s|&nbsp;|$))}is';
+				.')(?=([^\w]|\s|&nbsp;|$))}s'.($definition['casse']?'':'i');
 			
 			// Et voilà
 			$definitions_actives[$cle] = $definition;

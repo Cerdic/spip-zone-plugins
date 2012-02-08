@@ -36,12 +36,21 @@ function dictionnaires_upgrade($nom_meta_version_base, $version_cible){
 			include_spip('base/abstract_sql');
 			
 			// On ajoute un champ pour choisir le type par défaut dans un dictionnaire
-			sql_alter("TABLE spip_dictionnaires ADD COLUMN type_defaut varchar(255) not null default ''");
+			maj_tables('spip_dictionnaires');
 			
 			// On change la version
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		}
-	
+		
+		if (version_compare($version_actuelle,$version_cible='0.3.0','<')){
+			include_spip('base/abstract_sql');
+			
+			// On ajoute un champ pour forcer la prise en compte de la casse pour une définition
+			maj_tables('spip_definitions');
+			
+			// On change la version
+			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
+		}
 	}
 
 }

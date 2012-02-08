@@ -87,7 +87,7 @@ function definition_set($id_definition, $set=null, $purger_cache=true) {
 	if (isset($c['id_dictionnaire'])){
 		unset($c['id_dictionnaire']);
 	}
-
+	
 	include_spip('inc/modifier');
 	revision_definition($id_definition, $c);
 	

@@ -5,6 +5,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bulledaide_definitions' => 'Consulter le glossaire du site (sigles et définitions)',
+'champ_casse_label' => 'Sensibilité de la casse',
+'champ_casse_label_case' => 'La détection de ce terme sera sensible aux minuscules et majuscules.',
 'champ_statut_label' => 'Statut',
 'champ_termes_explication' => 'Des termes supplémentaires qui permettront de détecter la définition, séparés par des virgules.',
 'champ_termes_label' => 'Termes',
