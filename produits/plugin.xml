@@ -2,8 +2,8 @@
 	<nom>Produits</nom>
 	<auteur>[Les D&#233;veloppements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.1.6</version>
-	<version_base>0.1</version_base>
+	<version>0.2.0</version>
+	<version_base>0.2</version_base>
 	<etat>dev</etat>
     <slogan>Creer des produits &#224; vendre</slogan>
 	<description>Ce plugin permet la cr&#233;ation de produits commerciaux dans l'arborescence du site, c'est-&#224;-dire rang&#233;s dans les rubriques comme les articles. Un produit est un objet mat&#233;riel ou un service ayant un prix. La vente en ligne n'est pas le but de ce plugin, il ne s'occupe que de l'ajout de ce nouvel objet &#233;ditorial.</description>

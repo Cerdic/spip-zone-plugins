@@ -5,6 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function formulaires_configurer_produits_saisies_dist(){
 	include_spip('inc/config');
+	$config = lire_config('produits') ;
 	return array(
 		array(
 			'saisie' => 'input',
@@ -12,12 +13,32 @@ function formulaires_configurer_produits_saisies_dist(){
 				'nom' => 'taxe',
 				'label' => _T('produits:configurer_taxe_defaut_label'),
 				'explication' => _T('produits:configurer_taxe_defaut_explication'),
-				'defaut' => lire_config('produits/taxe', 0),
+				'defaut' => $config['taxe'],
 			),
 			'verifier' => array(
 				'type' => 'decimal'
 			)
-		)
+		),
+		array(
+			'saisie' => 'oui_non',
+			'options' => array(
+				'nom' => 'limiter_ajout',
+				'label' => _T('produits:limiter_ajout_label'),
+				'explication' => _T('produits:limiter_ajout_explication'),
+				'defaut' => $config['limiter_ajout'],
+			)
+		),
+		array(
+			'saisie' => 'secteur',
+			'options' => array(
+				'nom' => 'limiter_ident_secteur',
+				'label' => _T('produits:limiter_ident_secteur_label'),
+				'explication' => _T('produits:limiter_ident_secteur_explication'),
+				'multiple' => 'oui',
+				'defaut' => $config['limiter_ident_secteur'],
+				'afficher_si' => '@limiter_ajout@ == "on"' 
+			)
+		),
 	);
 }
 

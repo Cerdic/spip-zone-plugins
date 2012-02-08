@@ -12,28 +12,24 @@ function produits_upgrade($nom_meta_version_base, $version_cible){
 		(!isset($GLOBALS['meta'][$nom_meta_version_base]))
 		|| (($version_actuelle = $GLOBALS['meta'][$nom_meta_version_base]) != $version_cible)
 	){
-		
+		$config = lire_config('produits');
+		if (!is_array($config)) {
+			$config = array();
+		}
+		$config = array_merge(array(
+				'taxe' => '0',
+				'limiter_ajout' => '',
+		), $config);
+		ecrire_meta('produits', serialize($config));
+
 		if (version_compare($version_actuelle,'0.0','=')){
 			// Création des tables
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			creer_base();
-			
-			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		}
 		
-		/*if (version_compare($version_actuelle,'0.5','<')){
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
-			
-			// Modification de produits
-			sql_alter('');
-						
-			// On change la version
-			echo "Mise à jour du plugin produits en version 0.5<br/>";
-			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
-		}*/
-	
+		ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');	
 	}
 }
 
