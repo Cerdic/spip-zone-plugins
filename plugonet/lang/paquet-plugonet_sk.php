@@ -8,12 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
-	'plugonet_description' => 'Ce plugin permet de produire le nouveau fichier paquet.xml à partir du fichier
-plugin.xml. Des options de vérification sont disponibles pour nettoyer au préalable
-certaines balises du fichier d\'origine.
+	'plugonet_description' => 'Tento zásuvný modul vytvorí nový súbor zo súboru paquet.xml zo začiatku súboru plugin.xml. V prvom rade máte k dispozícii možnosti overenia vymazať niektoré tagy z pôvodného súboru.
 
-En outre, PlugOnet permet de valider des fichiers paquet.xml écrits manuellement et fournit
-une aide sur chaque balise de la nouvelle DTD.', # NEW
+Okrem toho PlugOnet umožňuje overiť manuálne napísané súbory paquet.xml a poskytuje pomoc ku každému tagu nového DTD.',
 	'plugonet_slogan' => 'Prechod zo zásuvného modulu DTD na tento balík'
 );
 
