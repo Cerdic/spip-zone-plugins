@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'svpstats_description' => 'Ce plugin est un module optionnel de SVP. 
-_ Il permet d\'acquérir, de mettre à jour et de restituer les statistiques d\'utilisation des plugins SPIP sur le net. 
-Ces statistiques sont issues du site <a href="http://stats.spip.org">stats.spip.org</a>.', # NEW
+	'svpstats_description' => 'Tento zásuvný modul je nepovinným modulom SVP.
+ _ Umožňuje vám zistiť, aktualizovať a vypísať štatistiky využívania zásuvných modulov SPIPu na internete.
+ Tieto štatistiky pochádzajú zo stránky <a href="http://stats.spip.org">stats.spip.org.</a>',
 	'svpstats_slogan' => 'Modul SVP na správu štatistík využívania zásuvných modulov'
 );
 
