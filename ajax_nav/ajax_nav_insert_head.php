@@ -14,13 +14,13 @@ function ajax_nav_insert_head($flux) {
   }
 
   $ajaxNavFile = ($options['html4Fallback'] == 'on') ?
-    'plugins/ajax_nav/ajax_nav.js' : '';
+    find_in_path('ajax_nav.js') : '';
 
   $historyLibFile = ($options['html4Fallback'] == 'on') ?
-    'plugins/ajax_nav/lib/balupton-history.js/scripts/bundled/html4+html5/jquery.history.js' : '';
+    find_in_path('lib/balupton-history.js/scripts/bundled/html4+html5/jquery.history.js') : '';
 
   if ($options['useModernLib'] == "on") {
-    $flux .= "<script type='text/javascript' src='plugins/ajax_nav/lib/modernizr.js'></script>";
+    $flux .= "<script type='text/javascript' src='" . find_in_path("lib/modernizr.js") . "'></script>";
   }
 
   $flux .= "<script type='text/javascript'>
@@ -29,7 +29,7 @@ Modernizr.load([";
   if ($options['useHistoryLib'] == "on") {
     $flux .= "    {
     	test : Modernizr.history,
-        yep : ['plugins/ajax_nav/lib/balupton-history.js/scripts/bundled/html5/jquery.history.js'],
+        yep : ['" . find_in_path("lib/balupton-history.js/scripts/bundled/html5/jquery.history.js") . "'],
 	nope : ['" . $historyLibFile . "']
     },";
   }
@@ -37,7 +37,7 @@ Modernizr.load([";
   $flux .= "
     {
 	test : Modernizr.history,
-	yep : ['plugins/ajax_nav/ajax_nav.js'],
+	yep : ['" . find_in_path("ajax_nav.js") . "'],
 	nope: ['" . $ajaxNavFile . "'],
 	complete : function () {
 	    if (typeof AjaxNav !== 'undefined') {
