@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adresses' => 'نشاني‌ها',
 	'ajouter_adresse' => 'افزودن نشاني',
 	'ajouter_email' => 'افزودن ايميل',
-	'ajouter_telephone' => 'افزودن شماره‌ي تلفن',
+	'ajouter_telephone' => 'افزودن شماره‌ي تلفن', # MODIF
 	'articles' => 'مقاله‌ها',
 	'auteurs' => 'نويسندگان',
 
@@ -21,12 +21,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_coordonnees' => 'پيكربندي coordonnées)',
 	'confirmer_suppression_adresse' => 'مي‌خواهيد اين نشاني را حذف كنيد؟',
 	'confirmer_suppression_email' => 'آيا مي‌خواهيد اين ايميل را حذف كنيد؟',
-	'confirmer_suppression_numero' => 'آيا مي‌خواهيد اين شماره تلفن را حذف كنيد؟',
+	'confirmer_suppression_numero' => 'آيا مي‌خواهيد اين شماره تلفن را حذف كنيد؟', # MODIF
 
 	// E
-	'editer_adresse' => 'ويرايش نشاني',
-	'editer_email' => 'ويرايش يك ايميل',
-	'editer_numero' => 'ويرايش شماره تلفن',
+	'editer_adresse' => 'ويرايش نشاني', # MODIF
+	'editer_email' => 'ويرايش يك ايميل', # MODIF
+	'editer_numero' => 'ويرايش شماره تلفن', # MODIF
 	'emails' => 'ايميل‌ها',
 	'explication_objets_actifs' => 'كوتوردينه روي كدام موضوع‌هاي ويرايشي پيشنهاد مي‌شود؟ (؟)',
 	'explication_type_adresse' => 'نوع مي‌تواند «شخصي» يا «كاري» باشد.',
@@ -37,13 +37,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fax' => 'فاكس.',
 
 	// I
-	'info_adresse_utilisee_par' => 'نشاني مورد استفاده‌ي: ',
-	'info_email_utilise_par' => 'ايميل مورد استفاد‌ه‌ي :',
+	'info_adresse_utilisee_par' => 'نشاني مورد استفاده‌ي: ', # MODIF
+	'info_email_utilise_par' => 'ايميل مورد استفاد‌ه‌ي :', # MODIF
 	'info_gauche_numero_adresse' => 'نشاني شماره‌ي ',
 	'info_gauche_numero_email' => 'ايميل شماره‌ي',
-	'info_gauche_numero_numero' => 'شماره تلفن شماره‌ي',
-	'info_numero_utilise_par' => 'شماره تلفن مورد استفاده‌ي: ',
-	'item_nouveau_numero' => 'شماره تلفن جديد',
+	'info_gauche_numero_numero' => 'شماره تلفن شماره‌ي', # MODIF
+	'info_numero_utilise_par' => 'شماره تلفن مورد استفاده‌ي: ', # MODIF
+	'item_nouveau_numero' => 'شماره تلفن جديد', # MODIF
 	'item_nouvel_email' => 'ايميل جديد',
 	'item_nouvelle_adresse' => 'نشاني جديد',
 
@@ -52,14 +52,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_code_postal' => 'كد پستي',
 	'label_complement' => 'اطلاعات تكميلي', # MODIF
 	'label_email' => 'ايميل ',
-	'label_numero' => 'شماره تلفن',
+	'label_numero' => 'شماره تلفن', # MODIF
 	'label_objets_actifs' => 'موضوع‌ها',
 	'label_pays' => 'كشورها',
 	'label_telephone' => 'Téléphone', # NEW
 	'label_titre' => 'تيتر',
 	'label_type_adresse' => 'نوع نشاني',
 	'label_type_email' => 'نوع ايميل ',
-	'label_type_numero' => 'نوع شماره تلفن',
+	'label_type_numero' => 'نوع شماره تلفن', # MODIF
 	'label_ville' => 'شهر',
 	'label_voie' => 'نشاني',
 
@@ -67,13 +67,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mobile' => 'موبايل',
 	'modifier_adresse' => 'ويرايش اين نشاني',
 	'modifier_email' => 'ويرايش اين ايميل',
-	'modifier_numero' => 'ويرايش اين شماره‌ي تلفن',
+	'modifier_numero' => 'ويرايش اين شماره‌ي تلفن', # MODIF
 
 	// N
-	'nouveau_numero' => 'شماره تلفن جديد',
+	'nouveau_numero' => 'شماره تلفن جديد', # MODIF
 	'nouvel_email' => 'ايميل جديد',
 	'nouvelle_adresse' => 'نشاني جديد',
-	'numeros' => 'شماره تلفن‌ها',
+	'numeros' => 'شماره تلفن‌ها', # MODIF
 
 	// R
 	'rubriques' => 'بخش‌ها',
@@ -81,10 +81,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'supprimer_adresse' => 'حذف اين نشاني',
 	'supprimer_email' => 'حذف اين ايميل',
-	'supprimer_numero' => 'حذف اين شماره تلفن',
+	'supprimer_numero' => 'حذف اين شماره تلفن', # MODIF
 
 	// T
-	'titre_coordonnees' => 'دفتر تلفن'
+	'titre_coordonnees' => 'دفتر تلفن' # MODIF
 );
 
 ?>
