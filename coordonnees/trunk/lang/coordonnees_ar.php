@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adresses' => 'عناوين',
 	'ajouter_adresse' => 'إضافة عنوان',
 	'ajouter_email' => 'إضافة بريد إلكتروني',
-	'ajouter_telephone' => 'إضافة رقم', # MODIF
+	'ajouter_telephone' => 'إضافة رقم',
 	'articles' => 'Articles', # NEW
 	'auteurs' => 'Auteurs', # NEW
 
@@ -21,12 +21,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_coordonnees' => 'Configuration des coordonnées', # NEW
 	'confirmer_suppression_adresse' => 'هل تريد حقاحذف هذا العنوان؟',
 	'confirmer_suppression_email' => 'هل تريد حقاحذف هذا البريد الإلكتروني؟',
-	'confirmer_suppression_numero' => 'هل تريد حقا حذف هذا الرقم؟', # MODIF
+	'confirmer_suppression_numero' => 'هل تريد حقا حذف هذا الرقم؟',
 
 	// E
-	'editer_adresse' => 'تعديل عنوان', # MODIF
-	'editer_email' => 'تعديل بريد إلكتروني', # MODIF
-	'editer_numero' => 'تعديل رقم', # MODIF
+	'editer_adresse' => 'تعديل عنوان',
+	'editer_email' => 'تعديل بريد إلكتروني',
+	'editer_numero' => 'تعديل رقم',
 	'emails' => 'البريد الإلكتروني',
 	'explication_objets_actifs' => 'Sur quels objets éditoriaux proposer les coordonnées ?', # NEW
 	'explication_type_adresse' => 'Le type peut être \'perso\' ou \'pro\'.', # NEW
@@ -41,9 +41,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_email_utilise_par' => 'Courriel utilisé par :', # NEW
 	'info_gauche_numero_adresse' => 'عدد العنوان',
 	'info_gauche_numero_email' => 'عدد البريد الإلكتروني',
-	'info_gauche_numero_numero' => 'عدد الرقم', # MODIF
+	'info_gauche_numero_numero' => 'عدد الرقم',
 	'info_numero_utilise_par' => 'Numéro utilisé par :', # NEW
-	'item_nouveau_numero' => 'رقم جديد', # MODIF
+	'item_nouveau_numero' => 'رقم جديد',
 	'item_nouvel_email' => 'بريد إلكتروني جديد',
 	'item_nouvelle_adresse' => 'عنوان جديد',
 
@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_code_postal' => 'رمز البريدي',
 	'label_complement' => 'Complément', # MODIF
 	'label_email' => 'بريد إلكتروني',
-	'label_numero' => 'رقم', # MODIF
+	'label_numero' => 'رقم',
 	'label_objets_actifs' => 'Objets', # NEW
 	'label_pays' => 'البلد',
 	'label_telephone' => 'Téléphone', # NEW

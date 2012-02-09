@@ -38,12 +38,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_adresse_utilisee_par' => 'This address used by :', # MODIF
-	'info_email_utilise_par' => 'Email used by :', # MODIF
+	'info_email_utilise_par' => 'Email used by :',
 	'info_gauche_numero_adresse' => 'Address id',
 	'info_gauche_numero_email' => 'Email id',
 	'info_gauche_numero_numero' => 'Number id', # MODIF
 	'info_numero_utilise_par' => 'This phone number is used by :', # MODIF
-	'item_nouveau_numero' => 'New phone number', # MODIF
+	'item_nouveau_numero' => 'New phone number',
 	'item_nouvel_email' => 'New email',
 	'item_nouvelle_adresse' => 'New address',
 

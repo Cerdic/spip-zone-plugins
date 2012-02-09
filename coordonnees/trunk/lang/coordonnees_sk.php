@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adresses' => 'Adresy',
 	'ajouter_adresse' => 'Pridať adresu',
 	'ajouter_email' => 'Pridať e-mail',
-	'ajouter_telephone' => 'Pridať číslo', # MODIF
+	'ajouter_telephone' => 'Pridať číslo',
 	'articles' => 'Články',
 	'auteurs' => 'Autori',
 
@@ -21,12 +21,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_coordonnees' => 'Nastavenie podrobností',
 	'confirmer_suppression_adresse' => 'Určite chcete odstrániť túto adresu?',
 	'confirmer_suppression_email' => 'Určite chcete odstrániť tento e-mail?',
-	'confirmer_suppression_numero' => 'Určite chcete odstrániť toto telefónne číslo?', # MODIF
+	'confirmer_suppression_numero' => 'Určite chcete odstrániť toto telefónne číslo?',
 
 	// E
-	'editer_adresse' => 'Upraviť adresu', # MODIF
-	'editer_email' => 'Upraviť e-mail', # MODIF
-	'editer_numero' => 'Upraviť telefónne číslo', # MODIF
+	'editer_adresse' => 'Upraviť adresu',
+	'editer_email' => 'Upraviť e-mail',
+	'editer_numero' => 'Upraviť telefónne číslo',
 	'emails' => 'E-maily',
 	'explication_objets_actifs' => 'Ktoré redakčné objekty ponúkajú podrobnosti?',
 	'explication_type_adresse' => 'Typ môže byť súkromný alebo do práce',
@@ -37,29 +37,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fax' => 'Fax.',
 
 	// I
-	'info_adresse_utilisee_par' => 'Túto adresu používa:', # MODIF
-	'info_email_utilise_par' => 'Tento e-mail používa:', # MODIF
+	'info_adresse_utilisee_par' => 'Túto adresu používa:',
+	'info_email_utilise_par' => 'Tento e-mail používa:',
 	'info_gauche_numero_adresse' => 'Č. adresy',
 	'info_gauche_numero_email' => 'Č. e-mailu',
-	'info_gauche_numero_numero' => 'P. č. tel. čísla', # MODIF
-	'info_numero_utilise_par' => 'Toto telefónne číslo používa:', # MODIF
-	'item_nouveau_numero' => 'Nové telefónne číslo', # MODIF
+	'info_gauche_numero_numero' => 'P. č. tel. čísla',
+	'info_numero_utilise_par' => 'Toto telefónne číslo používa:',
+	'item_nouveau_numero' => 'Nové telefónne číslo',
 	'item_nouvel_email' => 'Nový e-mail',
 	'item_nouvelle_adresse' => 'Nová adresa',
 
 	// L
 	'label_boite_postale' => 'Poštová schránka',
 	'label_code_postal' => 'PSČ',
-	'label_complement' => 'Iné', # MODIF
+	'label_complement' => 'Iné',
 	'label_email' => 'E-mail',
-	'label_numero' => 'Telefónne číslo', # MODIF
+	'label_numero' => 'Telefónne číslo',
 	'label_objets_actifs' => 'Objekty',
 	'label_pays' => 'Krajina',
-	'label_telephone' => 'Telefón', # MODIF
+	'label_telephone' => 'Telefón',
 	'label_titre' => 'Nadpis',
 	'label_type_adresse' => 'Typ adresy',
 	'label_type_email' => 'Typ e-mailu',
-	'label_type_numero' => 'Typ telefónneho čísla', # MODIF
+	'label_type_numero' => 'Typ telefónneho čísla',
 	'label_ville' => 'Mesto',
 	'label_voie' => 'Adresa',
 
@@ -67,13 +67,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mobile' => 'Mobil',
 	'modifier_adresse' => 'Upraviť túto adresu',
 	'modifier_email' => 'Upraviť tento e-mail',
-	'modifier_numero' => 'Upraviť toto telefónne číslo', # MODIF
+	'modifier_numero' => 'Upraviť toto telefónne číslo',
 
 	// N
-	'nouveau_numero' => 'Nové telefónne číslo', # MODIF
+	'nouveau_numero' => 'Nové telefónne číslo',
 	'nouvel_email' => 'Nový e-mail',
 	'nouvelle_adresse' => 'Nová adresa',
-	'numeros' => 'Telefónne čísla', # MODIF
+	'numeros' => 'Telefónne čísla',
 
 	// R
 	'rubriques' => 'Rubriky',
@@ -81,10 +81,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'supprimer_adresse' => 'Odstrániť túto adresu',
 	'supprimer_email' => 'Odstrániť tento e-mail',
-	'supprimer_numero' => 'Odstrániť toto telefónne číslo', # MODIF
+	'supprimer_numero' => 'Odstrániť toto telefónne číslo',
 
 	// T
-	'titre_coordonnees' => 'Adresár' # MODIF
+	'titre_coordonnees' => 'Adresár'
 );
 
 ?>
