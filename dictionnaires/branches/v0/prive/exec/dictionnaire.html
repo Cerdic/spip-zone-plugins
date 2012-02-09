@@ -1,0 +1,65 @@
+<BOUCLE_dictionnaire(DICTIONNAIRES){id_dictionnaire}{tous}>
+<!--#hierarchie-->
+<div id="chemin">
+	<span class="bloc">
+		<a href="#URL_ECRIRE{dictionnaires}" class="racine"><:dictionnaire:titre_dictionnaires:></a>
+	</span>
+	<span class="bloc">
+		<span class="sep">&gt;</span>
+		#TITRE
+	</span>
+</div>
+<!--/#hierarchie-->
+
+<div class="fiche_objet">
+	[(#AUTORISER{modifier,dictionnaire,#ID_DICTIONNAIRE})
+		[(#URL_ECRIRE{dictionnaire_edit,id_dictionnaire=#ID_DICTIONNAIRE}|icone{<:dictionnaire:icone_modifier_dictionnaire:>,#CHEMIN{prive/themes/spip/images/dictionnaire-24.png},right})]
+	]
+	<h1>#TITRE</h1>
+	
+	<div id="wysiwyg">
+	<INCLURE{fond=prive/objets/contenu/dictionnaire,id=#ID_DICTIONNAIRE,ajax=wysiwyg}>
+	</div>
+	
+	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,dictionnaire,id,#ID_DICTIONNAIRE},data,'<div class="nettoyeur"></div>'}}
+</div>
+
+<INCLURE{fond=prive/objets/contenu/dictionnaire-enfants,id_dictionnaire=#ID_DICTIONNAIRE,ajax=enfants}>
+
+[(#AUTORISER{supprimer, dictionnaire, #ID_DICTIONNAIRE}|oui)
+[<div class="actions">
+	(#URL_ACTION_AUTEUR{supprimer_dictionnaire,#ID_DICTIONNAIRE,#URL_ECRIRE{dictionnaires}}|icone{<:dictionnaire:icone_supprimer_dictionnaire:>,#CHEMIN{prive/themes/spip/images/dictionnaire-del-24.png},center})
+</div>]
+]
+
+<!--#navigation-->
+<div class="cadre infos cadre-info">
+	<div class="numero">
+		<:dictionnaire:info_numero_dictionnaire:>
+		<p>#ID_DICTIONNAIRE</p>
+	</div>
+	<ul class="instituer instituer_dictionnaire">
+		<li><:dictionnaire:champ_actif_label:>
+			<ul>
+				<li class="prop[ (#ACTIF|non)selected]">
+					[(#ACTIF|oui)<a onclick="javascript:return confirm(confirm_changer_statut);" href="#URL_ACTION_AUTEUR{instituer_dictionnaire, #ID_DICTIONNAIRE-0, #SELF}">]
+						<img width="9" height="9" alt="" src="#CHEMIN{images/puce-orange.gif}">
+						<:dictionnaire:champ_actif_non:>
+					[(#ACTIF|oui)</a>]
+				</li>
+				<li class="publie[ (#ACTIF|oui)selected]">
+					[(#ACTIF|non)<a onclick="javascript:return confirm(confirm_changer_statut);" href="#URL_ACTION_AUTEUR{instituer_dictionnaire, #ID_DICTIONNAIRE-1, #SELF}">]
+						<img width="9" height="9" alt="" src="#CHEMIN{images/puce-verte.gif}">
+						<:dictionnaire:champ_actif_oui:>
+					[(#ACTIF|non)</a>]
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<!--/#navigation-->
+
+<!--#extra-->
+
+<!--/#extra-->
+</BOUCLE_dictionnaire>

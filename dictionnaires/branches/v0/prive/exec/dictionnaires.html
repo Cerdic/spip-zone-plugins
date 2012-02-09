@@ -1,0 +1,7 @@
+<h1><:dictionnaire:titre_dictionnaires:></h1>
+
+[(#INCLURE{fond=prive/objets/liste/dictionnaires, sinon=<:dictionnaire:info_aucun_dictionnaire:>, env, ajax})]
+
+[(#AUTORISER{creer, dictionnaire}|oui)
+[(#URL_ECRIRE{dictionnaire_edit}|parametre_url{nouveau,oui}|icone{<:dictionnaire:icone_creer_dictionnaire:>,#CHEMIN{prive/themes/spip/images/dictionnaire-add-24.png},#LANG_RIGHT})]
+]

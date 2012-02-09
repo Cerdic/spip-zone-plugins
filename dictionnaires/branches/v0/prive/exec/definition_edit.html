@@ -1,0 +1,59 @@
+<BOUCLE_autoriser(CONDITION){si #ENV{id_definition}|et{#AUTORISER{modifier,definition,#ENV{id_definition}}}|ou{#ENV{id_definition}|non|et{#AUTORISER{creerdefinitiondans,dictionnaire,#ENV{id_dictionnaire}}}}}>
+#SET{id_dictionnaire,#ENV{id_dictionnaire}|sinon{#INFO_ID_DICTIONNAIRE{definition,#ENV{id_definition}}}}
+
+<!--#hierarchie-->
+<div id="chemin">
+	<span class="bloc">
+		<a href="#URL_ECRIRE{dictionnaires}" class="racine"><:dictionnaire:titre_dictionnaires:></a>
+	</span>
+	[(#GET{id_dictionnaire}|oui)
+	<span class="bloc">
+		<span class="sep">&gt;</span>
+		<a href="[(#GET{id_dictionnaire}|generer_url_entite{dictionnaire})]">#INFO_TITRE{dictionnaire,#GET{id_dictionnaire}}</a>
+	</span>
+	]
+	[(#ENV{id_definition}|oui)
+	<span class="bloc">
+		<span class="sep">&gt;</span>
+		<a href="[(#ENV{id_definition}|generer_url_entite{definition})]">#INFO_TITRE{definition,#ENV{id_definition}}</a>
+	</span>
+	<span class="bloc">
+		<span class="sep">&gt;</span>
+		<:definition:icone_modifier_definition:>
+	</span>
+	]
+	[(#ENV{id_definition}|non)
+	<span class="bloc">
+		<span class="sep">&gt;</span>
+		<:definition:info_nouveau_definition:>
+	</span>
+	]
+</div>
+<!--/#hierarchie-->
+
+#SET{redirect,#ENV{redirect}|sinon{#ENV{id_definition}|?{#ENV{id_definition}|generer_url_entite{definition},#ENV{id_dictionnaire}|generer_url_entite{dictionnaire}}}}
+
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		[(#GET{redirect}|icone{<:icone_retour:>,[(#ENV{id_definition}|?{#CHEMIN{prive/themes/spip/images/definition-24.png},#CHEMIN{prive/themes/spip/images/dictionnaire-24.png}})]})]
+		<:definition:icone_modifier_definition:>
+		<h1>
+			[(#ENV{id_definition}|oui)#INFO_TITRE{definition,#ENV{id_definition}}]
+			[(#ENV{id_definition}|non)<:definition:info_nouveau_definition:>]
+		</h1>
+	</div>
+	
+	#SET{redirect,#ENV{redirect,#ENV{id_definition}|generer_url_entite{definition}}}
+	<div class="">
+		#FORMULAIRE_EDITER_DEFINITION{#ENV{id_definition,oui},#ENV{id_dictionnaire},#GET{redirect}}
+	</div>
+</div>
+
+<!--#navigation-->
+
+<!--/#navigation-->
+
+<!--#extra-->
+
+<!--/#extra-->
+</BOUCLE_autoriser>
