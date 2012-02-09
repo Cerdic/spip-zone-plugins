@@ -37,9 +37,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'jour' => 'día',
 
 	// L
-	'latitude' => 'latitude', # NEW
+	'latitude' => 'latitud',
 	'lever_soleil' => 'salida del sol',
-	'longitude' => 'longitude', # NEW
+	'longitude' => 'longitud',
 
 	// M
 	'meteo' => 'meteorología',
