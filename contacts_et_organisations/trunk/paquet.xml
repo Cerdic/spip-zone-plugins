@@ -35,7 +35,7 @@
 	<pipeline nom="objets_extensibles" inclure="contacts_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[1.15.3;[" />
-	<necessite nom="spip_bonux" compatibilite="[3.0.0-dev;[" />
+	<!-- necessite nom="spip_bonux" compatibilite="[3.0.0-dev;[" / -->
 	<necessite nom="medias" compatibilite="[1.6;[" />
 
 	<utilise nom="coordonnees" compatibilite="[1.2.0;[" />
@@ -44,6 +44,6 @@
 	<menu nom="contacts_organisations" titre="contacts:bouton_contacts_organisations" parent="menu_edition" icone="images/contacts-16.png" action="repertoire" />
 
 	<onglet nom="repertoire" titre="contacts:bouton_repertoire" parent="contacts" icone="images/contacts-24.png" />
-	<onglet nom="organisations" titre="contacts:bouton_organisations" parent="contacts" icone="images/co_organisation-24.png" />
-	<onglet nom="contacts" titre="contacts:bouton_contacts" parent="contacts" icone="images/co_contact-24.png" />
+	<onglet nom="organisations" titre="contacts:bouton_organisations" parent="contacts" icone="images/organisation-24.png" />
+	<onglet nom="contacts" titre="contacts:bouton_contacts" parent="contacts" icone="images/contact-24.png" />
 </paquet>
