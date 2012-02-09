@@ -16,13 +16,14 @@ include_spip('inc/simplecal_classement'); // pour la page evenements !
 // ------------------------------------
 //  Plugin Corbeille - compatibilite
 // ------------------------------------
+/*
 global $corbeille_params;
 $corbeille_params["evenements"] = array (
     "statut" => "poubelle",
     "table" => "spip_evenements",
     "tableliee"  => array("spip_mots_evenements"),
 );
-
+*/
 
 // 2008-12-23 -> 2009-02-14
 // 2009-01

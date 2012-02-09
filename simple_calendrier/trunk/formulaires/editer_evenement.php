@@ -23,6 +23,11 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_rubr
     if (!empty($valeurs["id_objet"])) {
         // assemblage du champ type et id_objet
         $valeurs["ref"] = $valeurs["type"].$valeurs["id_objet"];
+    } 
+    // Cas ou le parametre vient de l'url (appel depuis portlet)
+    // Necessaire pour le rechargement si erreur a la validation...
+    else if (_request("ref")){
+        $valeurs["ref"] = trim(_request("ref"));
     }
     
     // Appel en creation via portlet

@@ -163,15 +163,15 @@ function simplecal_boite_infos($flux){
         $n_evt = sql_countsel("spip_evenements", "statut='publie' and id_rubrique=".$id);
     }
     
-    if ($type == 'auteur' or $type == 'rubrique'){
-        if ($n_evt > 0){
-            $aff = '<div>'.singulier_ou_pluriel($n_evt, 'simplecal:info_1_evenement', 'simplecal:info_n_evenements').'</div>';
-        }        
+    if (in_array($type, array("auteur", "rubrique"))){
         if (($pos = strpos($flux['data'],'<!--nb_elements-->'))!==FALSE) {
+            if ($n_evt > 0){
+                $aff = '<div>'.singulier_ou_pluriel($n_evt, 'simplecal:info_1_evenement', 'simplecal:info_n_evenements').'</div>';
+            }
             $flux['data'] = substr($flux['data'],0,$pos).$aff.substr($flux['data'],$pos);
-        }     
+        }
     }
-        
+    
     return $flux;
 }
 
@@ -228,48 +228,6 @@ function simplecal_compter_contributions_auteur($flux){
     return $flux;
 }
 
-// Pour ajouter du contenu aux formulaires CVT du core.
-function simplecal_editer_contenu_objet($flux){
-    // Pour le formulaire CVT 'editer_groupe_mot', on fait apparaitre les nouveaux objets
-    if ($flux['args']['type']=='groupe_mot') {
-        $fond = recuperer_fond('formulaires/inc-groupe-mot-evenement', $flux['args']['contexte']);
-        // que l'on insere ensuite a l'endroit approprie, a savoir avant le texte <!--choix_tables--> du formulaire
-        $flux['data'] = preg_replace('%(<!--choix_tables-->)%is', $fond."\n".'$1', $flux['data']);
-    }
-    return $flux;
-}
-
-
-// Page listant tous les groupes de mots (exec/mots_tous),
-// Pour l'affichage de '> Evenements'
-function simplecal_libelle_association_mots($flux){
-    $flux['evenements'] = 'simplecal:info_evenement_libelle';
-    return $flux;
-}
-
-// Listing des nombres d'objet par mot clé (exec/mot_tous -> inc/grouper_mots)
-function simplecal_afficher_nombre_objets_associes_a($flux){
-    $objet = $flux['args']['objet'];
-    $id_mot = $flux['args']['id_objet'];
-    
-    if ($objet == 'mot'){
-        $nb = sql_countsel("spip_mots_evenements AS lien", "lien.id_mot=$id_mot");
-        
-        if ($nb == 1) {
-            $texte_lie = _T('simplecal:info_1_evenement');
-        } else if ($nb > 1) {
-            $texte_lie = $nb."&nbsp;"._T('simplecal:info_n_evenements');
-        }
-    }
-    
-    if (isset($texte_lie)){
-        $flux['data'][] = $texte_lie;
-    }
-    
-    
-    return $flux;
-    
-}
 
 // Définir le squelette evenement.html pour les urls de type spip.php?evenement123
 // http://programmer.spip.org/declarer_url_objets
@@ -309,10 +267,61 @@ function simplecal_propres_creer_chaine_url($flux){
 }
 
 
-// CRON : Appel de genie/simplecal_nettoyer_base.php
-function simplecal_taches_generales_cron($taches_generales){
-    $taches_generales['simplecal_nettoyer_base'] = 2*24*3600; // tous les 2 jours
-    return $taches_generales;
+function simplecal_optimiser_base_disparus($flux){
+    $n = &$flux['data'];
+    $mydate = $flux['args']['date'];
+
+
+    # les evenements qui sont dans une id_rubrique inexistante
+    $res = sql_select(
+        "e.id_evenement AS id",
+        "spip_evenements AS e LEFT JOIN spip_rubriques AS r ON e.id_rubrique=r.id_rubrique",
+        "e.id_rubrique!=0 AND r.id_rubrique IS NULL AND e.maj < $mydate"
+    );
+
+    $n+= optimiser_sansref('spip_evenements', 'id_evenement', $res);
+
+    //
+    // Evenements
+    //
+
+    sql_delete("spip_evenements", "statut='poubelle' AND maj < $mydate");
+    
+    
+    # R.A.Z des type/id_objet inexistants
+    # -------------------------------------
+	$r = sql_select("DISTINCT type", "spip_evenements as e", "e.type is not null and e.type!=''");
+	while ($t = sql_fetch($r)){
+		$type = $t['type'];
+		$spip_table_objet = table_objet_sql($type);
+		$id_table_objet = id_table_objet($type);
+		
+        $res = sql_select(
+            "e.id_evenement AS id, e.id_objet",
+            "spip_evenements AS e LEFT JOIN $spip_table_objet AS o ON o.$id_table_objet=e.id_objet AND e.type=".sql_quote($type),
+            "o.$id_table_objet IS NULL"
+        );
+		
+        // sur une cle primaire composee, pas d'autres solutions que de traiter un a un
+		while ($row = sql_fetch($sel)){
+            $data = array();
+            $data['type'] = "";
+            $data['objet'] = null;
+            sql_updateq('spip_evenements', $data, "id_evenement=".$row['id']);
+            spip_log("- Reference '".$type."".$row['id_objet']."' retirée dans la table spip_evenements (id=".$row['id'].")", "simplecal");
+        }
+	}
+	
+    # -------------------------------------------------------------------------
+    # Nettoyage des liens vers des evenements inexistants 
+    # -------------------------------------------------------------------------
+    # spip_auteurs_liens   : Traite par SPIP (ecrire/genie/optimiser.php)
+    # spip_mots_liens      : Traite par l'extension 'mots'
+    # spip_documents_liens : Traite par l'extension 'media'
+    # spip_forums          : Traite par l'extension 'forums'
+    # -------------------------------------------------------------------------
+    
+    return $flux;
 }
 
 // pipeline : permettre la recherche dans les évènements
