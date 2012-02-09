@@ -17,6 +17,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_produit' => 'هيج كالا',
 	'info_nb_produits' => '@nb@ كالا',
 
+	// L
+	'limiter_ajout_explication' => 'Restreindre l\'ajout de produits à un ou plusieurs secteurs', # NEW
+	'limiter_ajout_label' => 'Limiter', # NEW
+	'limiter_ident_secteur_explication' => 'Choisir le ou les secteurs concernés', # NEW
+	'limiter_ident_secteur_label' => 'Choix', # NEW
+
 	// P
 	'produit_bouton_ajouter' => 'افزودن يك كالا',
 	'produit_champ_descriptif_label' => 'شرح مختصر',
@@ -33,7 +39,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'produit_numero' => 'كالاي شماره‌ي ',
 	'produit_reference' => 'ارجاع "@reference@"',
 	'produit_statut' => 'تغيير وضعيت:‌',
-	'produits_titre' => 'كالاها'
+	'produits_titre' => 'كالاها',
+
+	// S
+	'secteurs_autorises' => 'Choisir une rubrique dans un des secteurs autorisés : @secteurs@' # NEW
 );
 
 ?>

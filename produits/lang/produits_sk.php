@@ -17,6 +17,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_produit' => 'Žiaden výrobok',
 	'info_nb_produits' => '@nb@ výrobkov',
 
+	// L
+	'limiter_ajout_explication' => 'Restreindre l\'ajout de produits à un ou plusieurs secteurs', # NEW
+	'limiter_ajout_label' => 'Limiter', # NEW
+	'limiter_ident_secteur_explication' => 'Choisir le ou les secteurs concernés', # NEW
+	'limiter_ident_secteur_label' => 'Choix', # NEW
+
 	// P
 	'produit_bouton_ajouter' => 'Pridať výrobok',
 	'produit_champ_descriptif_label' => 'Krátky popis',
@@ -33,7 +39,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'produit_numero' => 'Výrobok č.',
 	'produit_reference' => 'Referencia "@reference@"',
 	'produit_statut' => 'Upraviť stav:',
-	'produits_titre' => 'Výrobky'
+	'produits_titre' => 'Výrobky',
+
+	// S
+	'secteurs_autorises' => 'Choisir une rubrique dans un des secteurs autorisés : @secteurs@' # NEW
 );
 
 ?>

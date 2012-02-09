@@ -14,12 +14,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_produit' => 'Un produit',
 	'info_aucun_produit' => 'Aucun produit',
 	'info_nb_produits' => '@nb@ produits',
-	
+
 	// L
-	'limiter_ajout_label' => 'Limiter',
 	'limiter_ajout_explication' => 'Restreindre l\'ajout de produits à un ou plusieurs secteurs',
-	'limiter_ident_secteur_label' => 'Choix',
+	'limiter_ajout_label' => 'Limiter',
 	'limiter_ident_secteur_explication' => 'Choisir le ou les secteurs concernés',
+	'limiter_ident_secteur_label' => 'Choix',
 
 	// P
 	'produit_bouton_ajouter' => 'Ajouter un produit',
@@ -38,9 +38,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'produit_reference' => 'Référence "@reference@"',
 	'produit_statut' => 'Modifier le statut :',
 	'produits_titre' => 'Produits',
-	
+
 	// S
-	'secteurs_autorises' => 'Choisir une rubrique dans un des secteurs autorisés : @secteurs@',
+	'secteurs_autorises' => 'Choisir une rubrique dans un des secteurs autorisés : @secteurs@'
 );
 
 ?>
