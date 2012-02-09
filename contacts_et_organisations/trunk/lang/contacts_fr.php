@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aucun_contact' => 'Il n\'y a aucun contact !',
 	'aucune_organisation' => 'Il n\'y a aucune organisation !',
+	'auteur_lie' => 'Id de l\'auteur lié',
 
 	// B
 	'bouton_contacts' => 'Contacts',
@@ -46,7 +47,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'definir_auteur_comme_contact' => 'Définir comme contact',
 	'definir_auteur_comme_organisation' => 'Définir comme organisation',
+	'delier_contact' => 'Désassocier', 
 	'delier_cet_auteur' => 'Désassocier',
+	'delier_organisation' => 'Désassocier',
 
 	// E
 	'est_un_contact' => 'Cet auteur est défini comme étant un contact.',
@@ -111,6 +114,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nb_contact' => '1 contact',
 	'nb_contacts' => '@nb@ contacts',
+	'nom_contact' => 'Nom',
+	'nom_organisation' => 'Nom',
 
 	// O
 	'organisation_associe_a_auteur_numero' => 'Associée à auteur numéro',
@@ -126,11 +131,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'organisations' => 'Organisations',
 	'organisations_nb' => '@nb@ organisations',
 
+	// P
+	'prenom' => 'Prénom',
+	
 	// R
 	'recherche_de' => 'Recherche de «@recherche@»',
 	'rechercher' => 'Rechercher',
 
 	// S
+	'statut_juridique' => 'Statut juridique',
 	'supprimer_contact' => 'Supprimer ce contact',
 	'supprimer_organisation' => 'Supprimer cette organisation',
 
