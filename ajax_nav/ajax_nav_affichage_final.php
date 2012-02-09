@@ -1,5 +1,5 @@
 <?php
-include(find_in_path('lib/phpQuery/phpQuery/phpQuery.php'));
+include_spip('lib/phpQuery/phpQuery/phpQuery');
 
 function ajax_nav_affichage_final($page) {
 
