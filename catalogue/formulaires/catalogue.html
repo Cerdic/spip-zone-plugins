@@ -7,7 +7,7 @@
 <B_catalogue_article>
 	<form method="post" action="#ENV{action}" enctype="multipart/form-data" class="hproduct"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-	<BOUCLE_catalogue_article(ARTICLES){id_article=#ID}{statut IN prop,prepa,publie}>
+	<BOUCLE_catalogue_article(ARTICLES){id_article=#ENV{id_article}}{statut IN prop,prepa,publie}>
 		<ul>
 	[(#REM)<!-- Choix du prix en fonction de la variante/declinaison -->]
 		<B_cat_art_variantes>
@@ -19,20 +19,14 @@
 			- {age_modif>N} : qu'a plus de N jours a partir de la date d'effet
 			-->]
 				<div class="choix">
-					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{prix_ht})</span>]
-					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{prix})</span>]
-					[(#ENV{tva}|?{
-						#SET{prix_affiche,[(#EVAL{[(#EVAL{1+#TVA})]*[(#PRIX_HT)]})] }
-					,
-						#SET{prix_affiche,#PRIX_HT}
-					})]
-					<input type="radio" class="radio" name="[(#ENV{tva}|?{prix,prix_ht})]" id="variante_#ID_CAT_VARIANTE" value="#GET{prix_affiche}" [(#ENV{id_cat_variante}|=={#ID_CAT_VARIANTE}|oui)checked="checked"] [(#STATUT|=={publie}|non) disabled="disabled"] />
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{id_cat_variante})</span>]
+					<input type="radio" class="radio" name="id_cat_variante" id="variante_#ID_CAT_VARIANTE" value="#ID_CAT_VARIANTE" [(#ENV{id_cat_variante}|=={#ID_CAT_VARIANTE}|oui)checked="checked"] [(#STATUT|=={publie}|non) disabled="disabled"] />
 					<label for="variante_#ID_CAT_VARIANTE">
 						<span class="property title name">#TITRE</span>
 						:
 						<span class="prix price hmeasure">
-							[<span class="amount currency value #EDIT{prix_ht}">(#GET{prix_affiche}|monetaire)</span>]
-							[<sub>(#ENV{tva}|?{<:catalogue:prix_avec_taxes:>,<:catalogue:prix_sans_taxes:>})</sub>]
+							<span class="amount currency value #EDIT{prix_ht}">[(#ENV{ttc}|?{ [(#EVAL{[(#EVAL{1+#TVA})]*[(#PRIX_HT)]}|monetaire)] , [(#PRIX_HT|monetaire)] })] </span>
+							[<sub>(#ENV{ttc}|?{<:catalogue:prix_avec_taxes:>,<:catalogue:prix_sans_taxes:>})</sub>]
 							[ / <span class="unit #EDIT{unite}">(#UNITE)</span>]
 						</span>
 					</label>
@@ -44,21 +38,21 @@
 		[(#REM)<!-- Aucune variante trouv&eacute;e pour ce produit : on applique le prix de base en cherchant "prix_ht" (et "tva" du coup) ou "prix" qui sont les noms communements utilises et reconnus par le plugin Montants (bon c'est vrai, il y a SpipPal qui utilise "prix_unitaire_ht" dans sa table produits...) -->]
 			<li class="edit editer_id_cat_variante">
 				<label for="variante_0"><:catalogue:tarif:></label>
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{prix_ht})</span>]
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{prix})</span>]
-				<input type="text" class="number" name="[(#ENV{tva}|?{prix,prix_ht})]" id="variante_0" value="[(#ENV{tva}|?{ [(#PRIX|sinon{#PRIX_HT}|monetaire) <:catalogue:prix_avec_taxes:>] , [(#PRIX_HT|sinon{#PRIX}|monetaire) <:catalogue:prix_sans_taxes:>] })]" readonly="readonly" />
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{id_cat_variante})</span>]
+				<input type="hidden" name="id_cat_variante" value="0" />
+				<input type="text" class="number" name="[(#ENV{ttc}|?{prix,prix_ht})]" id="variante_0" value="[(#ENV{ttc}|?{ [(#PRIX|sinon{#PRIX_HT}|monetaire) <:catalogue:prix_avec_taxes:>] , [(#PRIX_HT|sinon{#PRIX}|monetaire) <:catalogue:prix_sans_taxes:>] })]" readonly="readonly" disabled="disabled" />
 			</li>
 		<//B_cat_art_variantes>
 			<li class="edit editer_quantite">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{quantite})</span>]
 				<label for="quantite"><:catalogue:quantite:></label>
-				<input name="quantite" id="quantite" type="[(#HTML5|?{number,text})]" class="number" />
+				<input name="quantite" id="quantite" type="[(#HTML5|?{number,text})]" value="#ENV{quantite,1}" class="number" />
 			</li>
 	[(#REM)<!-- Choix d'options (caracteristiques et prix) complementaires -->]
 		<B_cat_art_options>
 			<li class="edit editer_id_cat_option properties listclass">
 				<label>[(#TOTAL_BOUCLE|singulier_ou_pluriel{<:catalogue:option_dispo:>,<:catalogue:options_dispo:>})]</label>
-			<BOUCLE_cat_art_options(CAT_OPTIONS){id_article}{statut=publie}{!par prix_ht}>
+			<BOUCLE_cat_art_options(CAT_OPTIONS?){statut=publie}{!par prix_ht}>
 					[(#REM)<!-- to do -->]
 			</BOUCLE_cat_art_options>
 			</li>
@@ -73,3 +67,5 @@
 	</div></form>
 </div>
 </B_catalogue_article>
+	?? ERREUR ARTICLE ??
+<//B_catalogue_article>
