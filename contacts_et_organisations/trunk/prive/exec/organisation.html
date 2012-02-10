@@ -27,7 +27,7 @@
 		|parametre_url{new,oui}
 		|parametre_url{id_parent,#ID_ORGANISATION}
 		|parametre_url{redirect,[(#ENV{redirect,#SELF})]}
-		|icone{<:contacts:organisation_creer_fille:>,#CHEMIN{images/co_organisation-24.png},right,creer.gif})]
+		|icone{<:contacts:organisation_creer_fille:>,organisation-24.png,right,creer.gif})]
 ]
 <br class='nettoyeur' />
 	
@@ -41,11 +41,9 @@
 		|parametre_url{new,oui}
 		|parametre_url{id_organisation,#ID_ORGANISATION}
 		|parametre_url{redirect,[(#ENV{redirect,#SELF})]}
-		|icone{<:contacts:contact_creer:>,#CHEMIN{images/co_contact-24.png},right,creer.gif})]
+		|icone{<:contacts:contact_creer:>,contact-24.png,right,creer.gif})]
 ]
 <br class='nettoyeur' />
-				
-#INCLURE{fond=prive/contenu/portfolio_document,objet=organisation,id_objet=#ID_ORGANISATION}
 
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,organisation,id,#ID_ORGANISATION},data,'<div class="nettoyeur"></div>'}}
 
