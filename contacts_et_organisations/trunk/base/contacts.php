@@ -2,32 +2,23 @@
 /**
  * Plugin Contacts & Organisations pour Spip 2.0
  * Auteurs : Cyril Marion, Matthieu Marcillaud
- * Licence GPL (c) 2009 - 2011- Ateliers CYM
+ * Licence GPL (c) 2009 - 2012- Ateliers CYM
  */
 
-function contacts_declarer_tables_interfaces($interface){	
+function contacts_declarer_tables_interfaces($interface){
+	
 	$interface['table_des_tables']['organisations'] = 'organisations';
 	$interface['table_des_tables']['organisations_liens'] = 'organisations_liens';
 	$interface['table_des_tables']['contacts'] = 'contacts';
 	$interface['table_des_tables']['contacts_liens'] = 'contacts_liens';
 	$interface['table_des_tables']['organisations_contacts'] = 'organisations_contacts';
 	
-	// -- Liaisons organisations/auteurs, contacts/auteurs et organisations/contacts
-	$interface['tables_jointures']['spip_contacts'][]= 'auteurs';
-	$interface['tables_jointures']['spip_contacts'][]= 'contacts_liens';
-	$interface['tables_jointures']['spip_auteurs'][] = 'contacts';
-	$interface['tables_jointures']['spip_organisations'][] = 'auteurs';
-	$interface['tables_jointures']['spip_organisations'][] = 'organisations_liens';
-	$interface['tables_jointures']['spip_auteurs'][] = 'organisations';
+	// -- Liaisons organisations/contacts
 	$interface['tables_jointures']['spip_organisations_contacts'][]= 'contacts';
 	$interface['tables_jointures']['spip_organisations_contacts'][]= 'organisations';
-	$interface['tables_jointures']['spip_contacts'][]= 'organisations_contacts';
-	$interface['tables_jointures']['spip_organisations'][]= 'organisations_contacts';
-
 
 	/**
 	 * Objectif : autoriser les traitements SPIP sur certains champs texte...
-	 *
 	 */
 	$interface['table_des_traitements']['NOM'][] = _TRAITEMENT_TYPO;
 	$interface['table_des_traitements']['PRENOM'][] = _TRAITEMENT_TYPO;
@@ -35,71 +26,133 @@ function contacts_declarer_tables_interfaces($interface){
 	$interface['table_des_traitements']['FONCTION'][] = _TRAITEMENT_TYPO;
 	$interface['table_des_traitements']['ACTIVITE'][] = _TRAITEMENT_TYPO;
 
-	// gerer le critere de date
-	$interface['table_date']['contacts'] = 'date_naissance';
-	$interface['table_date']['organisations'] = 'date_creation';
-
-	// titre
-	$interface['table_titre']['contacts'] = "nom AS titre, '' AS lang"; // pour avoir une #URL_CONTACT...
-	$interface['table_titre']['organisations'] = "nom AS titre, '' AS lang";
-	
 	return $interface;
 }
 
 
-function contacts_declarer_tables_principales($tables_principales){
-	//-- Table organisations ------------------------------------------
-	$organisations = array(
-		"id_organisation" 	=> "bigint(21) NOT NULL auto_increment",
-		"id_parent"			=> "bigint(21) NOT NULL default 0",
-		"id_auteur"   		=> "bigint(21) NOT NULL default 0",
-		"nom" 				=> "tinytext DEFAULT '' NOT NULL",
-        "statut_juridique"	=> "tinytext DEFAULT '' NOT NULL", // forme juridique : SA, SARL, association, etc.
-        "identification"	=> "tinytext DEFAULT '' NOT NULL", // N° d'identification : SIRET, SIREN, N° TVA...
-		"activite"			=> "tinytext DEFAULT '' NOT NULL", // Secteur d'activité : humanitaire, formation...
-		"date_creation"		=> "datetime NOT NULL default '0000-00-00 00:00:00'",
-		"descriptif"		=> "TEXT DEFAULT '' NOT NULL",
-		"maj"				=> "TIMESTAMP"
-		);
-	$organisations_key = array(
-		"PRIMARY KEY"		=> "id_organisation",
-		"KEY id_auteur"		=> "id_auteur",
-		);
-	$organisations_join = array(
-		// sinon (ORGANISATIONS){auteurs.statut = xxx} ne fonctionne pas...
-		// va comprendre...
-		"id_organisation" 	=> "id_organisation",
-		"id_auteur" 	=> "id_auteur"
+function contacts_declarer_tables_objets_sql($tables){
+	//-- Table organisations ----------------------------------------
+	$tables['spip_organisations'] = array(
+		'page'=>'organisation',
+		'texte_objets' => 'contacts:organisations',
+		'texte_objet' => 'contacts:organisation',
+		'texte_modifier' => 'contacts:organisation_editer',
+		'texte_creer' => 'contacts:organisation_creer',
+		'texte_creer_enfant' => 'contacts:organisation_creer_fille',
+		'texte_ajouter' => 'contacts:organisation_ajouter',
+		'texte_logo_objet' => 'contacts:organisation_logo',
+		'info_aucun_objet'=> 'contacts:organisation_aucun',
+		'info_1_objet' => 'contacts:organisation_un',
+		'info_nb_objets' => 'contacts:organisation_nb',
+		'titre' => 'nom AS titre, "" AS lang',
+		'date' => 'date_creation',
+		'principale' => 'oui',
+		'champs_editables' => array(
+			'id_parent', 'id_auteur',
+			'nom', 'statut_juridique', 'identification', 'activite',
+			'date_creation', 'descriptif'),
+		'field'=> array(
+			"id_organisation" 	=> "bigint(21) NOT NULL auto_increment",
+			"id_parent"			=> "bigint(21) NOT NULL default 0",
+			"id_auteur"   		=> "bigint(21) NOT NULL default 0",
+			"nom" 				=> "tinytext DEFAULT '' NOT NULL",
+			"statut_juridique"	=> "tinytext DEFAULT '' NOT NULL", // forme juridique : SA, SARL, association, etc.
+			"identification"	=> "tinytext DEFAULT '' NOT NULL", // N° d'identification : SIRET, SIREN, N° TVA...
+			"activite"			=> "tinytext DEFAULT '' NOT NULL", // Secteur d'activité : humanitaire, formation...
+			"date_creation"		=> "datetime NOT NULL default '0000-00-00 00:00:00'",
+			"descriptif"		=> "TEXT DEFAULT '' NOT NULL",
+			"maj"				=> "TIMESTAMP"
+		),
+		'key' => array(
+			"PRIMARY KEY"		=> "id_organisation",
+			"KEY id_auteur"		=> "id_auteur",
+		),
+		'join' => array(
+			"id_organisation" 	=> "id_organisation",
+			"id_auteur" 	=> "id_auteur"
+		),
+		'tables_jointures' => array(
+			'auteurs',
+			'organisations_liens',
+			'organisations_contacts',
+		),
+		'rechercher_champs' => array(
+		  'nom' => 8, 'descriptif' => 5, 'identification' => 5, 'activite' => 1, 'statut_juridique' => 1
+		),
+		/*
+		'rechercher_jointures' => array(
+			'auteur' => array('nom' => 2, 'bio' => 1)
+		),*/
+		'champs_versionnes' => array(
+			'id_parent', 'id_auteur',
+			 'nom', 'descriptif', 'identification', 'statut_juridique',
+			 'activite', 'date_creation'),
 	);
-	$tables_principales['spip_organisations'] =
-		array('field' => &$organisations, 'key' => &$organisations_key, 'join' => &$organisations_join);
 
-	//-- Table contacts ------------------------------------------
-	$contacts = array(
-		"id_contact"	=> "bigint(21) NOT NULL auto_increment",
-		"id_auteur"   	=> "bigint(21) NOT NULL default 0",
-		"civilite" 		=> "tinytext DEFAULT '' NOT NULL",
-		"nom" 			=> "tinytext DEFAULT '' NOT NULL",
-		"prenom"		=> "tinytext NOT NULL DEFAULT ''",
-		"fonction"		=> "tinytext DEFAULT '' NOT NULL", // gérant, membre, trésorier, etc.
-		"date_naissance"=> "datetime NOT NULL default '0000-00-00 00:00:00'",
-		"descriptif" 	=> "text DEFAULT '' NOT NULL",
-		"maj"			=> "TIMESTAMP"
-		);
-	$contacts_key = array(
-		"PRIMARY KEY"	=> "id_contact",
-		"KEY id_auteur"	=> "id_auteur",
-		);
-	$contacts_join = array(
-		"id_contact" => "id_contact",
-		"id_auteur"  => "id_auteur"
+
+
+	//-- Table contacts ----------------------------------------
+	$tables['spip_contacts'] = array(
+		'page'=>'contact',
+		'texte_objets' => 'contacts:contacts',
+		'texte_objet' => 'contacts:contact',
+		'texte_modifier' => 'contacts:contact_editer',
+		'texte_creer' => 'contacts:contact_creer',
+		'texte_ajouter' => 'contacts:contact_ajouter',
+		'texte_logo_objet' => 'contacts:contact_logo',
+		'info_aucun_objet'=> 'contacts:contact_aucun',
+		'info_1_objet' => 'contacts:ontact_un',
+		'info_nb_objets' => 'contacts:ontact_nb',
+		'titre' => 'nom AS titre, "" AS lang',
+		'date' => 'date_naissance',
+		'principale' => 'oui',
+		'champs_editables' => array(
+			'id_auteur', 'civilite', 'nom', 'prenom', 'fonction', 
+			'date_naissance', 'descriptif'),
+		'field'=> array(
+			"id_contact"	=> "bigint(21) NOT NULL auto_increment",
+			"id_auteur"   	=> "bigint(21) NOT NULL default 0",
+			"civilite" 		=> "tinytext DEFAULT '' NOT NULL",
+			"nom" 			=> "tinytext DEFAULT '' NOT NULL",
+			"prenom"		=> "tinytext NOT NULL DEFAULT ''",
+			"fonction"		=> "tinytext DEFAULT '' NOT NULL", // gérant, membre, trésorier, etc.
+			"date_naissance"=> "datetime NOT NULL default '0000-00-00 00:00:00'",
+			"descriptif" 	=> "text DEFAULT '' NOT NULL",
+			"maj"			=> "TIMESTAMP"
+		),
+		'key' => array(
+			"PRIMARY KEY"		=> "id_contact",
+			"KEY id_auteur"		=> "id_auteur",
+		),
+		'join' => array(
+			"id_contact" 	=> "id_contact",
+			"id_auteur" 	=> "id_auteur"
+		),
+		'tables_jointures' => array(
+			'auteurs',
+			'contacts_liens',
+			'organisations_contacts',
+		),
+		'rechercher_champs' => array(
+		  'nom' => 8, 'descriptif' => 5, 'prenom' => 5, 'fonction' => 1,
+		),
+		/*
+		'rechercher_jointures' => array(
+			'auteur' => array('nom' => 2, 'bio' => 1)
+		),*/
+		'champs_versionnes' => array(
+			'id_auteur', 'civilite', 'nom', 'prenom', 'fonction', 
+			'date_naissance', 'descriptif'),
 	);
-	$tables_principales['spip_contacts'] =
-		array('field' => &$contacts, 'key' => &$contacts_key, 'join' => &$contacts_join);
 
-	return $tables_principales;
+	//-- Jointures ----------------------------------------------------
+	$tables['spip_auteurs']['tables_jointures'][] = 'contacts';
+	$tables['spip_auteurs']['tables_jointures'][] = 'organisations';
 
+	return $tables;
 }
+
+
 
 
 function contacts_declarer_tables_auxiliaires($tables_auxiliaires){

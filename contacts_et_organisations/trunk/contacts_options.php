@@ -1,5 +1,6 @@
 <?php
 
+/*
 function generer_url_ecrire_organisation($id, $args='', $ancre='', $statut='', $connect=''){
 	$a = "id_organisation=" . intval($id);
 	$h = (!$statut OR $connect)
@@ -19,6 +20,6 @@ function generer_url_ecrire_contact($id, $args='', $ancre='', $statut='', $conne
 	return $h;
 }
 
-
+*/
 
 ?>

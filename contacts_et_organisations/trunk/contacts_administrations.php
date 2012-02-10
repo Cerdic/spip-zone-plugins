@@ -142,14 +142,19 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
+
+
 function contacts_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_organisations");
 	sql_drop_table("spip_contacts");
 	sql_drop_table("spip_contacts_liens");
-	sql_drop_table("spip_organisations_contacts");	
+	sql_drop_table("spip_organisations_contacts");
+	sql_drop_table("spip_organisations_liens");
 	
 	effacer_meta($nom_meta_base_version);
 }
+
+
 
 function contacts_maj_1_6_0(){
 	// remettre spip_organisations_contacts si besoin
@@ -178,6 +183,7 @@ function contacts_maj_1_6_0(){
 	// enlever les contacts de spip_organisations_liens
 	sql_delete('spip_organisations_liens', 'objet='.sql_quote('contact'));
 }
+
 
 function contacts_migrer_liens_auteurs() {
 	// remettre id_auteur sur spip_contacts et spip_organisations

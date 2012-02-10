@@ -20,7 +20,7 @@
 	<traduire module="contacts" reference="fr" gestionnaire="salvatore" />
 	<traduire module="paquet-contacts" reference="fr" gestionnaire="salvatore" />
 
-	<pipeline nom="declarer_tables_principales" inclure="base/contacts.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/contacts.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/contacts.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/contacts.php" />
 	<pipeline nom="header_prive" inclure="contacts_pipelines.php" />
