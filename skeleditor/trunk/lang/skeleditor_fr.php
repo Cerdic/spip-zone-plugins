@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'erreur_parsing'=>'Erreur fatale lors de l\'analyse des boucles',
   
 	'explications_filename_fichier_chemin' => 'Vous pouvez indiquer le chemin complet pour placer le fichier dans un sous dossier (ex "modeles/document.html")',
-	'exlications_creer_dossier_squelettes' => 'Pour utiliser l\'editeur de squelettes, creez un dossier <b>squelettes/</b> &agrave; la racine de votre site, s\'il n\'existe pas, et accordez lui les droits permettant l\'écriture.',
+	'explications_creer_dossier_squelettes' => 'Pour utiliser l\'editeur de squelettes, creez un dossier <b>squelettes/</b> &agrave; la racine de votre site, s\'il n\'existe pas, et accordez lui les droits permettant l\'écriture.',
   // F
   'fichier'=>"Fichier&nbsp;:",
   'fichier_enregistre'=>"Le fichier a &eacute;t&eacute; enregistr&eacute;",
