@@ -10,7 +10,8 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_dupliquer' => 'Dupliquer la rubrique',
-	
+	'se_rendre_sur_la_version' => "Voir la nouvelle version en cours d'édition",
+	'se_rendre_sur_l_original' => "Voir la version publiée",
 	'message_annuler' => 'Annuler',
 	'message_confirmer' => 'Confirmer',	
 	
