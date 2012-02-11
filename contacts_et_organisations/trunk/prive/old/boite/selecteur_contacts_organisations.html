@@ -14,10 +14,6 @@
 		#SET{id_organisation,#ID_ORGANISATION}
 		<a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]" title="<:contacts:organisation_voir:>">[(#CHEMIN_IMAGE{organisation-32.png}|image_reduire{48}|inserer_attribut{class,contact_logo})]</a>
 		<:contacts:est_une_organisation:>
-
-		[(#INCLURE{fond=prive/objets/liste/linked_contacts,id_organisation,
-			titre=<:contacts:info_contacts_organisation:>,
-			court=oui,ajax})]
 	</BOUCLE_est_une_organisation>
 			#SET{rien,1}
 	<//B_est_une_organisation>
