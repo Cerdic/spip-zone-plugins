@@ -1,7 +1,8 @@
 <?php
+
 /**
- * Plugin Contacts & Organisations pour Spip 2.0
- * Licence GPL (c) 2009 - 2010 - Ateliers CYM
+ * Plugin Contacts & Organisations pour Spip 3.0
+ * Licence GPL (c) 2009 - 2012 - Ateliers CYM
  */
  
 
@@ -53,7 +54,7 @@ function contacts_afficher_contenu_objet($flux)
 				{
 					$texte = _T('contacts:contact_editer');
 					$lien = parametre_url(generer_url_ecrire('contact_edit', 'id_contact='.$id_contact), 'redirect' , $self);
-					$fond = chemin_image('contact-24.png');				
+					$fond = chemin_image('contact-24.png');
 					$bouton_edit = icone_inline($texte, $lien, $fond, '', 'right');
 				}
 			}
@@ -68,7 +69,7 @@ function contacts_afficher_contenu_objet($flux)
 				{
 					$texte = _T('contacts:organisation_editer');
 					$lien = parametre_url(generer_url_ecrire('organisation_edit', 'id_organisation='.$id_organisation), 'redirect' , $self);
-					$fond = chemin_image('organisation-24.png');				
+					$fond = chemin_image('organisation-24.png');
 					$bouton_edit = icone_inline($texte, $lien, $fond, '', 'right');
 				}
 			}
@@ -82,26 +83,6 @@ function contacts_afficher_contenu_objet($flux)
 }
 
 
-function contacts_boite_infos($flux){
-	/*
-	if ($flux['args']['type'] == 'contact'){
-
-		$id_auteur = sql_getfetsel('id_objet', 
-		'spip_contacts_liens', 
-		'objet=\'auteur\' AND id_contact=' . intval($flux['args']['id_contact']));
-
-		if ( $id_auteur > 0 )
-		{
-			$auteur = sql_fetsel("*", "spip_auteurs", "id_auteur=$id_auteur");
-			
-			$flux['data']			.= '<div>toto</div>';			
-		}
-	}
-	
-	$flux['data']			=  $flux['data'] ;
-	*/
-	return $flux;
-}
 
 /**
  * Affichage du formulaire de choix Contact/Organisation
@@ -256,53 +237,15 @@ function contacts_affiche_milieu($flux){
 }
 
 
-/**
- * Prendre en compte les tables dans la recherche d'éléments. 
- *
- * @param 
- * @return 
-**/
-function contacts_rechercher_liste_des_champs($tables){
-	
-	// ajouter la recherche sur contact
-	$tables['contact']['id_contact'] = 12;
-	$tables['contact']['nom'] = 4;
-	$tables['contact']['prenom'] = 2;
-	
-	// ajouter la recherche sur organisations
-	$tables['organisation']['id_organisation'] = 12;
-	$tables['organisation']['nom'] = 4;
 
-	return $tables;
-}
-
-
-/**
- * Autoriser les champs extras sur les objets
- * Contacts et Organisations
-**/
-function contacts_objets_extensibles($objets){
-		return array_merge($objets, array(
-			'contact' => _T('contacts:contacts'),
-			'organisation' => _T('contacts:organisations'),
-		));
-}
 
 /**
  * Ajoute une feuille de style pour la v-card
  * Peut être surchargé ensuite
 **/
-function contacts_insert_head($flux){
-
-	$flux .= '<!-- insertion de la css contacts--><link rel="stylesheet" type="text/css" href="'.find_in_path('contacts.css').'" media="all" />';
-
+function contacts_insert_head_css($flux){
+	$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('contacts.css').'" media="all" />';
 	return $flux;
 }
-
-function contacts_declarer_url_objets($array){ 
-	$array[] = 'organisation'; 
-	$array[] = 'contact'; 
-	return $array; 
-} 
 
 ?>

@@ -25,14 +25,10 @@
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/contacts.php" />
 	<pipeline nom="header_prive" inclure="contacts_pipelines.php" />
 	<pipeline nom="affiche_gauche" inclure="contacts_pipelines.php" />
-	<pipeline nom="insert_head" action="insert_head" inclure="contacts_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="contacts_pipelines.php" />
 	<pipeline nom="afficher_contenu_objet" inclure="contacts_pipelines.php" />
-	<pipeline nom="boite_infos" inclure="contacts_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="contacts_pipelines.php" />
-	<pipeline nom="autoriser" inclure="contacts_autorisations.php" />
-	<pipeline nom="rechercher_liste_des_champs" inclure="contacts_pipelines.php" />
-	<pipeline nom="declarer_url_objets" inclure="contacts_pipelines.php" />
-	<pipeline nom="objets_extensibles" inclure="contacts_pipelines.php" />
+
 
 	<necessite nom="saisies" compatibilite="[1.15.3;[" />
 	<necessite nom="medias" compatibilite="[1.6;[" />
