@@ -11,7 +11,7 @@ function duplicator_boite_infos($flux){
 	$type = $flux['args']['type'];
 	$statut = $flux['args']['row']['statut'];
 	/// Existe t il une version de l'article déjà en cours d'édition
-	$row = sql_fetsel("id_article,statut", "spip_articles", "version_of=".$flux['args']['id'].", statut!='archi', statut!='poubelle'");
+	$row = sql_fetsel("id_article,statut", "spip_articles", "version_of=".$flux['args']['id']." AND statut!='archi' AND  statut!='poubelle'");
 	/// Si oui, on ne propose pas d'en recréer une mais de se rendre sur cette version:
 	if($idversion = intval($row['id_article']))
 	{
