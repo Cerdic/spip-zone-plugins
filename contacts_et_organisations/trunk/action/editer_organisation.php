@@ -16,11 +16,11 @@ function action_editer_organisation_dist($arg=null) {
 
 	// si id_organisation n'est pas un nombre, c'est une creation
 	if (!$id_organisation = intval($arg)) {
-		$id_organisation = insert_organisation();
+		$id_organisation = organisation_inserer();
 	}
 
 	// Enregistre l'envoi dans la BD
-	if ($id_organisation > 0) $err = organisation_set($id_organisation);
+	if ($id_organisation > 0) $err = organisation_modifier($id_organisation);
 
 	return array($id_organisation,$err);
 }
@@ -31,9 +31,8 @@ function action_editer_organisation_dist($arg=null) {
  * @param array $champs Un tableau avec les champs par défaut lors de l'insertion
  * @return int id_organisation
  */
-function insert_organisation($champs=array()) {
-	$id_organisation = false;
-	
+function organisation_inserer($champs=array()) {
+
 	// Envoyer aux plugins avant insertion
 	$champs = pipeline('pre_insertion',
 		array(
@@ -68,51 +67,32 @@ function insert_organisation($champs=array()) {
  * @param unknown_type $set
  * @return $err
  */
-function organisation_set($id_organisation, $set=null) {
-	$err = '';
-	
-	$champs = array(
-		'nom', 'statut_juridique', 'identification',
-		'activite', 'date_creation', 'descriptif'
-	);
-	
-	$c = array();
-	foreach ($champs as $champ)
-		$c[$champ] = _request($champ, $set);
+function organisation_modifier($id_organisation, $set=null) {
 
-		
 	include_spip('inc/modifier');
-	revision_organisation($id_organisation, $c);
-	
-	// Modification de statut, changement de rubrique ?
-	$c = array();
-	foreach (array(
-		'id_parent'
-	) as $champ)
-		$c[$champ] = _request($champ, $set);
-	$err .= instituer_organisation($id_organisation, $c);
-	
-	return $err;
-}
+	include_spip('inc/filtres');
+	$c = collecter_requests(
+		// white list
+		objet_info('organisation','champs_editables'),
+		// black list
+		array('id_parent'),
+		// donnees eventuellement fournies
+		$set
+	);
 
-/**
- * Enregistre une révision de organisation
- *
- * @param int $id_produit
- * @param array $c
- * @return
- */
-function revision_organisation($id_organisation, $c=false) {
-	$invalideur = "id='id_organisation/$id_organisation'";
-
-	modifier_contenu('organisation', $id_organisation,
+	if ($err = objet_modifier_champs('organisation', $id_organisation,
 		array(
-			'nonvide' => array('titre' => _T('info_sans_titre')),
-			'invalideur' => $invalideur
+			'nonvide' => array('titre' => _T('contacts:organisation_nouveau_titre')." "._T('info_numero_abbreviation').$id_organisation),
 		),
-		$c);
+		$c)) {
+		return $err;
+	}
 
-	return ''; // pas d'erreur
+	// Modification de statut, changement de rubrique ?
+	$c = collecter_requests(array('id_parent'),array(),$set);
+	$err = organisation_instituer($id_organisation, $c);
+
+	return $err;
 }
 
 /**
@@ -122,7 +102,7 @@ function revision_organisation($id_organisation, $c=false) {
  * @param array $c
  * @return
  */
-function instituer_organisation($id_organisation, $c, $calcul_rub=true){
+function organisation_instituer($id_organisation, $c, $calcul_rub=true){
 	include_spip('inc/autoriser');
 	include_spip('inc/rubriques');
 	include_spip('inc/modifier');
@@ -175,8 +155,7 @@ function instituer_organisation($id_organisation, $c, $calcul_rub=true){
 			'data' => $champs
 		)
 	);
-	
-	
+
 	return '';
 }
 

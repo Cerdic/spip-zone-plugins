@@ -4,12 +4,12 @@
 }})
 ]<B_contacts>
 #ANCRE_PAGINATION
-<div class="liste-elements contacts">
+<div class="liste-objets contacts">
 <table class='spip liste'>
 [<caption><strong class="caption">(#ENV*{titre,<:contacts:info_tous_contacts:>})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class="logo"></th>
+			<th class="picto"></th>
 			<th class="nom">[(#TRI{nom,<:contacts:label_nom:>,ajax})]</th>
 			[(#ENV{court}|non)
 			<th class="type">[(#TRI{type_liaison,<:contacts:label_type_liaison:>,ajax})]</th>
@@ -28,7 +28,7 @@
 			</BOUCLE_lien_contact>
 				[(#SET{url,[(#ID_CONTACT|generer_url_entite{contact})]})]
 			<//BOUCLE_lien_contact>
-			<td class="logo"><a href="#GET{url}">#INCLURE{fond=logo/contact, id_contact}</a></td>
+			<td class="picto"><a href="#GET{url}">#INCLURE{fond=logo/contact, id_contact}</a></td>
 			<td class='nom'><a href="[(#ID_CONTACT|generer_url_entite{contact})]">[(#_contacts:PRENOM) ]#_contacts:NOM</a></td>
 			[(#ENV{court}|non)
 			<td class='type #EDIT{type_liaison}'>[(#TYPE_LIAISON|sinon{-})]</td>
@@ -47,5 +47,5 @@
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_contacts>[
-<div class="liste-elements contacts"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+<div class="liste-objets contacts"><strong class="caption">(#ENV*{sinon,''})</strong></div>
 ]<//B_contacts>

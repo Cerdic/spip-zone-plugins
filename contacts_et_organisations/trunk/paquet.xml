@@ -35,7 +35,6 @@
 	<pipeline nom="objets_extensibles" inclure="contacts_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[1.15.3;[" />
-	<!-- necessite nom="spip_bonux" compatibilite="[3.0.0-dev;[" / -->
 	<necessite nom="medias" compatibilite="[1.6;[" />
 
 	<utilise nom="coordonnees" compatibilite="[1.2.0;[" />

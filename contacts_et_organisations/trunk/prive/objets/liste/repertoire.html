@@ -4,7 +4,7 @@
 }})
 ]<B_liste_orga>
 #ANCRE_PAGINATION
-<div class="liste-elements organisations repertoire">
+<div class="liste-objets organisations repertoire">
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 <table class='spip liste'>
 [<caption><strong class="caption">(#ENV*{titre,<:contacts:info_organisations_meres:>})</strong></caption>]
@@ -19,14 +19,14 @@
 			</BOUCLE_lien_organisation>
 				[(#SET{url,[(#ID_ORGANISATION|generer_url_entite{organisation})]})]
 			<//BOUCLE_lien_organisation>
-			<td class="logo"><a href="#GET{url}">#INCLURE{fond=logo/organisation, id_organisation}</a></td>
+			<td class="picto"><a href="#GET{url}">#INCLURE{fond=logo/organisation, id_organisation}</a></td>
 			<td class='nom'>
 				<a [ (#ENV{id_parent}|non)class="racine" ] href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a>
-				[(#INCLURE{fond=prive/liste/repertoire_contacts,
+				[(#INCLURE{fond=prive/objets/liste/repertoire_contacts,
 					id_organisation=#ID_ORGANISATION,
 					titre=<:contacts:contacts:>,
 					env, ajax})]
-				[(#INCLURE{fond=prive/liste/repertoire,
+				[(#INCLURE{fond=prive/objets/liste/repertoire,
 					id_parent=#ID_ORGANISATION,
 					titre=<:contacts:organisations:>,
 					env, ajax})]
@@ -38,5 +38,5 @@
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_liste_orga>[
-<div class="liste-elements organisations"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+<div class="liste-objets organisations"><strong class="caption">(#ENV*{sinon,''})</strong></div>
 ]<//B_liste_orga>

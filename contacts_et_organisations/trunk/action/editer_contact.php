@@ -16,7 +16,7 @@ function action_editer_contact_dist($arg=null) {
 
 	// si id_contact n'est pas un nombre, c'est une creation
 	if (!$id_contact = intval($arg)) {
-		$id_contact = insert_contact();
+		$id_contact = contact_inserer();
 		// si parent d'organisation transmis, on le sauve
 		if ($id_organisation = intval(_request('id_parent'))) {
 			$lier_contact = charger_fonction('lier_contact', 'action');
@@ -25,7 +25,7 @@ function action_editer_contact_dist($arg=null) {
 	}
 
 	// Enregistre l'envoi dans la BD
-	if ($id_contact > 0) $err = contact_set($id_contact);
+	if ($id_contact > 0) $err = contact_modifier($id_contact);
 
 	return array($id_contact, $err);
 }
@@ -34,11 +34,10 @@ function action_editer_contact_dist($arg=null) {
  * Crée un nouveau contact et retourne son ID
  *
  * @param array $champs Un tableau avec les champs par défaut lors de l'insertion
- * @return int id_organisation
+ * @return int id_contact
  */
-function insert_contact($champs=array()) {
-	$id_contact = false;
-	
+function contact_inserer($champs=array()) {
+
 	// Envoyer aux plugins avant insertion
 	$champs = pipeline('pre_insertion',
 		array(
@@ -67,50 +66,34 @@ function insert_contact($champs=array()) {
 
 
 /**
- * Appelle la fonction de modification d'une organisation
+ * Appelle la fonction de modification d'un contact
  *
  * @param int $id_contact
  * @param unknown_type $set
  * @return $err
  */
-function contact_set($id_contact, $set=null) {
-	$err = '';
-	
-	$champs = array(
-		'civilite', 'prenom', 'nom',
-		'fonction', 'date_naissance',
-		'descriptif'
-	);
-	
-	$c = array();
-	foreach ($champs as $champ)
-		$c[$champ] = _request($champ,$set);
+function contact_modifier($id_contact, $set=null) {
 
-		
 	include_spip('inc/modifier');
-	revision_contact($id_contact, $c);
-	
-	return $err;
-}
+	include_spip('inc/filtres');
+	$c = collecter_requests(
+		// white list
+		objet_info('contact','champs_editables'),
+		// black list
+		array(),
+		// donnees eventuellement fournies
+		$set
+	);
 
-/**
- * Enregistre une révision de contact
- *
- * @param int $id_produit
- * @param array $c
- * @return
- */
-function revision_contact($id_contact, $c=false) {
-	$invalideur = "id='id_contact/$id_contact'";
-
-	modifier_contenu('contact', $id_contact,
+	if ($err = objet_modifier_champs('contact', $id_contact,
 		array(
-			'nonvide' => array('titre' => _T('info_sans_titre')),
-			'invalideur' => $invalideur
+			'nonvide' => array('nom' => _T('contacts:contact_nouveau_titre')." "._T('info_numero_abbreviation').$id_contact),
 		),
-		$c);
+		$c)) {
+		return $err;
+	}
 
-	return ''; // pas d'erreur
+	return $err;
 }
 
 

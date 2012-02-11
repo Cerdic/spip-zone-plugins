@@ -73,8 +73,8 @@ function contacts_declarer_tables_objets_sql($tables){
 		),
 		'tables_jointures' => array(
 			'auteurs',
-			'organisations_liens',
 			'organisations_contacts',
+			'organisations_liens',
 		),
 		'rechercher_champs' => array(
 		  'nom' => 8, 'descriptif' => 5, 'identification' => 5, 'activite' => 1, 'statut_juridique' => 1
@@ -101,7 +101,7 @@ function contacts_declarer_tables_objets_sql($tables){
 		'texte_ajouter' => 'contacts:contact_ajouter',
 		'texte_logo_objet' => 'contacts:contact_logo',
 		'info_aucun_objet'=> 'contacts:contact_aucun',
-		'info_1_objet' => 'contacts:ontact_un',
+		'info_1_objet' => 'contacts:contact_un',
 		'info_nb_objets' => 'contacts:ontact_nb',
 		'titre' => 'nom AS titre, "" AS lang',
 		'date' => 'date_naissance',
@@ -130,8 +130,8 @@ function contacts_declarer_tables_objets_sql($tables){
 		),
 		'tables_jointures' => array(
 			'auteurs',
-			'contacts_liens',
 			'organisations_contacts',
+			'contacts_liens',
 		),
 		'rechercher_champs' => array(
 		  'nom' => 8, 'descriptif' => 5, 'prenom' => 5, 'fonction' => 1,
