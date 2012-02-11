@@ -21,6 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_cc_by_sa' => 'Creative Commons - Paternité Partage des Conditions Initiales à l\'Identique',
 	'description_copyright' => '© copyright auteur de l\'article',
 	'description_gpl' => 'licence GNU/GPL',
+	'description_wtfpl' => 'Licence Publique Rien À Branler',
+	'description_cc0' => 'Creative Common - Contenu libre de tout droit',
 
 	// L
 	'label_select_licence' => 'Choisissez une licence',
@@ -33,6 +35,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/deed.fr',
 	'lien_gfdl' => 'http://www.gnu.org/licenses/fdl.html',
 	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
+	'lien_whfpl' => 'http://sam.zoy.org/lprab/',
+	'lien_cc0' => 'http://vvlibri.org/fr/licence/cc0/10/fr/legalcode',
 
 	// N
 	'noisette_cacher_defaut' => 'Cacher lorsque la licence n\'est pas spécifiée ?',
@@ -55,7 +59,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_cc_by_sa' => 'CC by-sa',
 	'titre_copyright' => 'Copyright',
 	'titre_gfdl' => 'GNU FDL',
-	'titre_gpl' => 'GNU GPL'
+	'titre_gpl' => 'GNU GPL',
+	'titre_wtfpl' => 'LPRAB',
+	'titre_cc0' => 'CC0',
 );
 
 ?>

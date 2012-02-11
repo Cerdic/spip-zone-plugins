@@ -21,8 +21,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_cc_by_nc_sa' => 'Creative Commons - Attribution Non-Commercial Share Alike',
 	'description_cc_by_nd' => 'Creative Commons - Attribution No Derivatives',
 	'description_cc_by_sa' => 'Creative Commons - Attribution Share Alike',
-	'description_copyright' => '© copyright the article\'s author',
+	'description_copyright' => '© copyright by the article\'s author',
 	'description_gpl' => 'GNU/GPL License',
+	'description_wtfpl' => 'Do What The Fuck you want to Public License',
+	'description_cc0' => 'Creative Common - Zero',
 
 	// L
 	'label_select_licence' => 'Choose a license',
@@ -35,6 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/deed.en',
 	'lien_gfdl' => 'http://www.gnu.org/licenses/fdl.html',
 	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
+	'lien_whfpl' => 'http://sam.zoy.org/wtfpl/',
+	'lien_cc0' => 'http://creativecommons.org/publicdomain/zero/1.0/',
 
 	// N
 	'noisette_cacher_defaut' => 'Hide when the licence is not specified?',
@@ -58,6 +62,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_copyright' => 'Copyright',
 	'titre_gfdl' => 'GNU FDL',
 	'titre_gpl' => 'GNU GPL'
+	'titre_wtfpl' => 'WTFPL',
+	'titre_cc0' => 'CC0',
 );
 
 ?>
