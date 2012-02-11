@@ -197,7 +197,7 @@ function contacts_affiche_milieu($flux){
 				{
 					$texte = _T('contacts:organisation_creer_fille');
 					$lien = generer_url_ecrire('organisation_edit', 'new=oui&id_parent='.$id_organisation.'&redirect='.$self);
-					$fond = find_in_path('images/co_organisation-24.png');				
+					$fond = chemin_image('organisation-24.png');
 					$ajout = icone_verticale($texte, $lien, $fond, '', 'right') . '<br class="nettoyeur">'. $ajout ;
 				}
 
