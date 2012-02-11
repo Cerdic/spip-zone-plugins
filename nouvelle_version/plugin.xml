@@ -4,7 +4,7 @@
 	<icon>images/article_new_version-24.png</icon>
 	<auteur>[FwedBoot->mailto:fwedboot@gmail.com]</auteur>
 	<licence>GPL &#169; 2010</licence>
-	<version>0.1.0</version>
+	<version>0.2.0</version>
 
 	<etat>test</etat>
 	<description>Ce plugin permet de dupliquer un article et son contenu depuis l'espace privé en ajoutant un bouton dans la navigation de gauche dans l'espace privé, puis de le publier en lieu et place de l'article original.
