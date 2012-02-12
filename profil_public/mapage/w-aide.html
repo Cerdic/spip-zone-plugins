@@ -1,29 +1,34 @@
-	
-	
+
+
 	[<p>(#CONFIG{profil_public/texteaide})</p>]
-	
-	
-	
+
+
+
 	<p><a href="ecrire/?exec=articles_edit&new=oui">Ecrire un article</a></p>
-	
+
+	[(#PLUGIN{agenda}|oui)
 	<p>
 	<div class="head">Ajouter un &eacute;v&egrave;nement &agrave; l'agenda</div>
 	<div class="content">
 		[(#FORMULAIRE_EDITER_EVENEMENT)]
 	</div>
 	</p>
-		
-	<p>	
+	]
+
+	<B_contact>
+	<p>
 	<div class="head">Questionnez le responsable du site</div>
 	<div class="content">
 	<BOUCLE_contact(AUTEURS){id_auteur=#CONFIG{profil_public/webmestre}}>#FORMULAIRE_ECRIRE_AUTEUR</BOUCLE_contact>
 	</div>
 	</p>
-	
+	</B_contact>
+
+	<B_ajout_site>
 	<p>
 	<div class="head">Proposez un site à r&eacute;f&eacute;rencer</div>
 	<div class="content">
 	<BOUCLE_ajout_site(RUBRIQUES){id_rubrique=#CONFIG{profil_public/refsite}}>#FORMULAIRE_SITE</BOUCLE_ajout_site>
 	</div>
 	</p>
-	
+	</B_ajout_site>

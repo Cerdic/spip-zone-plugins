@@ -1,9 +1,9 @@
 
         <B_rss>
         <div class="menu articles">
-                     
+
             <ul>
-                <BOUCLE_rss(SYNDIC_ARTICLES) {titre_mot=igoogle} {age<180} {! par date} {0,5}>
+                <BOUCLE_rss(SYNDIC_ARTICLES) {id_mot=#CONFIG{profil_public/rss}} {age<180} {! par date} {0,5}>
                 <li>
                     <div class="head"><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></div>
 					<div class="content">
@@ -14,6 +14,6 @@
                 </li>
                 </BOUCLE_rss>
             </ul>
-           
+
         </div>
         </B_rss>

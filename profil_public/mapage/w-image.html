@@ -1,10 +1,10 @@
-[(#REM) images au hasard ]		
-		[(#CONFIG{profil_public/fader}|?{' ',''})
-		[(#MODELE{fadaleatoire})]	
-		]	
-			
+[(#REM) images au hasard ]
+		[(#CONFIG{profil_public/image}|=={fader}|oui)
+		[(#MODELE{fadaleatoire})]
+		]
 
-[(#REM) widget splickrbox ]		
-		[(#CONFIG{profil_public/splickrbox}|?{' ',''})	
+
+[(#REM) widget splickrbox ]
+		[(#CONFIG{profil_public/image}|=={splickrbox}|oui)
 			[(#MODELE{splickrbox}{taille=20}{colonnes=4})]
 		]

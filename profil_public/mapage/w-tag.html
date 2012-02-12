@@ -1,11 +1,16 @@
-[(#REM) plugin tagsphere ]		
-		[(#CONFIG{profil_public/tagsphere}|?{' ',''})
+[(#REM) plugin tagsphere ]
+		[(#CONFIG{profil_public/tag}|=={tagsphere}|oui)
 		<div class="box-tag"><INCLURE{fond=tagsphere}></div>
-		]	
-			
+		]
 
-[(#REM) mot clef ]		
-		[(#CONFIG{profil_public/tagspip}|?{' ',''})	
+
+[(#REM) plugin nuage ]
+		[(#CONFIG{profil_public/tag}|=={nuage}|oui)
+		<div class="box-tag">[(#MODELE{nuage})]</div>
+		]
+
+[(#REM) mot clef ]
+		[(#CONFIG{profil_public/tag}|=={tagspip}|oui)
 			<INCLURE{fond=mapage/tagspip}>
 		]
 
