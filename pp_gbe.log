@@ -1,0 +1,57 @@
+0.0	2010-04
+0.0.0	2010-04-06	On y songe...
+	Le Porte-plume a presqu'un an d'existance (comme plugin pour Spip 2.0.x) et est intégré dans Spip 2.1... Il est donc temps d'y passer en rajoutant nos boutons pour pouvoir migrer. 
+0.1	2010-07
+0.1.a	2010-07-12	Première tentative
+	Ajout des 3 boutons de caractères communs (e-d-o africains) en minuscule (la mise en majuscule native semble bien fonctionner) dans la barre.
+	Pour l'instant, on part avec trois parce-que ça surcharge la barre d'outils. 
+0.1.b	2010-07-14	Première version
+	Les icônes choisis n'apparaissaient pas parce-que className n'était pas utilisé... 
+0.1.c	2010-07-21	De 3 à 5 boutons
+	Rajout de deux boutons d'accents (aigüe et grave). 
+	La barre est vraiment surchargée... Et pourtant on n'a pas tout réimporté. La migration attendra encore un peu (tant que la 2.0.x est maintenue ça va). 
+0.1.d	2010-07-23	Avec textes explicatifs
+	Ajout des libellés aux survol. 
+0.2	2010-12
+0.2.a	2010-12-o6	Groupe des caractères Gbe
+	Ça y est, les boutons sont groupés sous un même onglet/icône ! (au logo de Ajavio) 
+	(Beaucoup de codes tierces parcourus pour comprendre comment faire : merci aux contributeurs.)
+0.2.b	2010-12-07	Nomenclature simple et cohérente
+	Renommage des "id" et des "className" en utilisant simplement la notation unicode (plus international) mais en minuscule (plus rapide à écrire) et sans le signe + (pas envi de tester pour savoir si cela pose des problèmes avec le nommage des classes CSS ou des variables PHP pour le fichier de langue : simple et portable) ; le tout préfixé de "chr_" (puisqu'il s'agit de caractères visibles).
+0.2.c	2010-12-08	Localisation
+	Utilisation d'étiquettes de langue avec pour chaînes/identifiants la nomenclature sans le préfixe : l'étiquette est ainsi "language neutral" (en tout cas pour les caractères qui n'ont pas une dénomination courante). 
+	Pour l'instant, seul le fichier "fr" est créé. On utilise systématiquement le nom courant du caractère si celui-ci existe (par exemple eng ou esh), sinon on essaye de faire un nom court en se basant sur l'appelation et la description Unicode. 
+	Les fichiers images portent les mêmes noms que les étiquelles de langue.
+0.2.d	2010-12-17	Plus de caractères
+	Ajout des majuscules (cela fait moins de manipulation pour les usagers) à côté de la minuscule correspondante (pour l'instant le tableau se présente en cinq colonnes, mais je n'ai pas la maitrise de l'affichage sinon j'aurais mis les majuscules sur une ligne et les nimuscules sur une autre avec les colonnes correspondantes en regard). 
+	Ajout de deux caractères communs à l'adja et à l'évhé (eng et gamma).
+	Ajout de plus d'accents (circonflexe, caron, macron, tilde).
+0.2.e	2010-12-21	Code clean-up and beautifullation 
+	Un peu de nettoyage dans le code ne lui feit pas de mal. 
+	On s'assure également que les icônes sont en 32x32 px.
+0.3	2011-02
+0.3.a	2011-02-03	Nomenclature toujours simplifiée
+	Le préfixe des fonctions est raccourci en "pp_gbe" où pp est l'abréviation de Porte-plume. 
+	Ce sera également le nom du dossier/plugin ; et sera utilisé partout aileur où ce sera nécessaire. 
+0.3.b	2011-02-04	20 symboles !
+	Ajout de deux caractères évhé (f-v scripts). 
+	Tri des lettres par ordre alphabétique (mais en gardant minuscule et majuscule ensemble dans cet ordre). 
+0.3.c	2011-02-08	20 icônes associés... 
+	Rajout des images oubliées. (c'est marrant, c'est celui du conteneur parent qui est alors hérité...) 
+0.4	2011-02
+0.4.a	2011-02-23	Balise <multi> encouragée
+	Étant souvent amené à insérer, dans les articles du site, des mots/phrases/expressions en langues étrangères (par rapport à la langue de l'article s'entend) je rajoute cette fonctionnalité sur le bouton du groupe ; cela devrait encourager les autres rédacteurs à abuser de cette balise pour le/la bon/bonne traitement/sémantique des articles (tout en évitant l'abus de l'italique). 
+0.4.b	2011-02-24	Indications de langue
+	On rajoute des indications de langue qui permettent d'adapter les boutons affichés à la langue de rédaction de l'article. Mais comme ce plugin est utilisé dans un contexte multinguistique (d'où la non implémentation volontaire de cette fonctionnalité depuis le début), cette partie du code est commentée (le code étant en GPL, ce sera utile pour ceux qui en auront besoin). Il est à noter que cela ne s'applique pas aux caractères communs (dits "-afro") qui sont toujours disponibles... 
+0.5	2011-03
+0.5.a	2011-03-04	Substitution au groupe par défaut
+	Pourquoi avoir deux onglets pour les caractères spéciaux ? En parcourant le code du Porte-Plume, j'ai trouvé où et comment (car cela implique l'importation des caractères ligaturés et des fonctions de changement de casse) substituer l'onglet natif par le notre... 
+	Pour faciliter le réverse éventuel du code, les ligne qui disparaissent sont marquées suffixées "//old//" et celles qui sont rajoutées sont suffixées "//new//" : il suffit de commenter les uns et de décommenter les autres pour passer d'un cas à l'autre. 
+0.5.b	2011-03-08	Ajustements suite à la substitution
+	Les "id" et "className" ne définis dans un autre groupe ne prennent pas (et inversement). On en profite donc pour réadapter le code pompé en suivant notre nomenclature, et on recopie et redéclare aussi les icônes dans le plugin. 
+	On en profite pour corriger quelques incohérences observées, et on ajoute le tréma. 
+0.5.c	2011-03-09	Réorganisation des boutons
+	Il est peut-être judicieux de mettre tous les accents  à la fin. (pour l'instant ils sont au milieux.) 
+	Penser plus tard à colorier le fond des accents d'une couleur rougeatre/oranger pour avertir que ce ne sont pas des caractères directs mais qu'ils modifient le caractère suivant (cas dan mon navigateur) ou précédant (ce que c'est supposé faire). Idem pour les transformations, qui ne mettent pas un caractère mais changent (ou pas) la casse des caractères sélectionnés. 
+0.6	2011-04
+
