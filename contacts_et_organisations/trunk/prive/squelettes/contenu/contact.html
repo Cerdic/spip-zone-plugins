@@ -2,7 +2,6 @@
 [(#BOITE_OUVRIR{[
 	
 	[(#AUTORISER{modifier,contact,#ID_CONTACT})
-				
 		[(#ID_CONTACT|afficher_qui_edite{contact}|non)
 			[(#URL_ECRIRE{contact_edit,id_contact=#ID_CONTACT}|icone_verticale{<:contacts:contact_editer:>,contact,edit,right ajax preload})]
 		]
@@ -22,10 +21,10 @@
 
 <div class="nettoyeur"></div>
 
-<INCLURE{fond=prive/objets/liste/linked_organisations,
-	id_contact=#ID_CONTACT,
-	titre=<:contacts:info_organisations_appartenance:>,
-	ajax}>
+
+<div class="ajax">
+	#FORMULAIRE_EDITER_LIENS_SIMPLES{organisations,contact,#ID_CONTACT,#AUTORISER{modifier,contact,#ID_CONTACT}}
+</div>
 
 
 [(#AUTORISER{modifier,contact,#ID_CONTACT})

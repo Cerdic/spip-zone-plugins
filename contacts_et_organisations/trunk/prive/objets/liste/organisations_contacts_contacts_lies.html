@@ -19,7 +19,7 @@ a mis a jour la valeur avec la page reelle]
 		<BOUCLE_lettre(CONTACTS){tout}{id_contact IN #GET{selection}}{where?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_contact==#GET{afficher_lettres}|?{'.*','A'}}>[
 		(#NOM**|extraire_multi|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
-		#SELF|parametre_url{debutcol,@#ID_AUTEUR}|ancre_url{paginationcol}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		#SELF|parametre_url{debutcol,@#ID_CONTACT}|ancre_url{paginationcol}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
 		}})]
 		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
 		(#SET{p,
@@ -31,7 +31,7 @@ a mis a jour la valeur avec la page reelle]
 	
 		<tr class='first_row'>
 			<th class="picto" scope='col'></th>
-			<th class="nom" scope='col'>[(#TRI{nom,<:contacts:label_nom:>,ajax})]</th>
+			<th class="nom" scope='col'>[(#TRI{multi nom,<:contacts:label_nom:>,ajax})]</th>
 			<th class="type" scope='col'>[(#TRI{type_liaison,<:contacts:label_type_liaison:>,ajax})]</th>
 			<th class='action' scope='col'></th>
 		</tr>

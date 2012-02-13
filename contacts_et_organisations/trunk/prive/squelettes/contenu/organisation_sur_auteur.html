@@ -1,4 +1,7 @@
-<BOUCLE_organisation(ORGANISATIONS){id_organisation}{tous}{si #ENV{exec}|=={auteur}}>
+[(#REM) copie beaucoup le squelette organisation
+	mais n'affiche pas tout (et pas d'ajax precharge)
+]
+<BOUCLE_organisation(ORGANISATIONS){id_organisation}{tous}>
 
 [(#AUTORISER{modifier,organisation,#ID_ORGANISATION})
 	[(#ID_ORGANISATION|afficher_qui_edite{organisation}|non)

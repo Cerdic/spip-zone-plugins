@@ -36,7 +36,7 @@ function formulaires_editer_organisation_traiter_dist($id_organisation='new', $i
 		if ($objet AND $id_objet AND autoriser('modifier',$objet,$id_objet)) {
 			// contact sur spip_organisations_contacts
 			if ($objet == 'contact') {
-				include_spip('action/editer_liens_simple');
+				include_spip('action/editer_liens_simples');
 				objet_associer_simples(array('organisation' => $id_organisation), array($objet => $id_objet));
 			} else {
 				include_spip('action/editer_liens');
