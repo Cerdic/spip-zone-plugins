@@ -1,0 +1,31 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+
+/* formulaire_editer_liens_simples (copie du css de formulaire_editer_liens) */
+.formulaire_editer_liens_simples .liste-objets {border:0;margin-left:-10px;margin-right:-10px;}
+.formulaire_editer_liens_simples .liste-objets-associer .caption {font-size:0.9em;}
+.formulaire_editer_liens_simples .liste-objets-associer .caption span.recherche {float:#ENV{right};margin-top:-3px;font-size:0.9em;}
+.formulaire_editer_liens_simples .liste-objets-associer .caption span.recherche .tout_voir {font-size:0.8em;}
+.formulaire_editer_liens_simples h3,.formulaire_editer_liens_simples .titrem {margin:0 -10px;padding:[(#ENV{margin-bottom}|div{2})em];}
+.formulaire_editer_liens_simples .liste-objets-lies {margin-bottom: 0;}
+.formulaire_editer_liens_simples .selecteur > .titrem {margin-bottom:0;}
+.formulaire_editer_liens_simples .selecteur .tout_voir {visibility:hidden;}
+.formulaire_editer_liens_simples .selecteur.filtre .tout_voir {visibility:visible;}
+.formulaire_editer_liens_simples.non_editable input,.formulaire_editer_liens_simples.non_editable button {display:none;}
+.formulaire_editer_liens_simples .action {text-align: #ENV{right};}
+.formulaire_editer_liens_simples .liste-objets tr > .action {text-align: #ENV{right}; /*width:120px;*/ width: 140px;}
+.formulaire_editer_liens_simples .liste-objets tr > .action button img {float:#ENV{right};margin-#ENV{left}:5px;}
