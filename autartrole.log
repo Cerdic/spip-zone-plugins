@@ -1,0 +1,24 @@
+AUTeurs_ARTicles_ROLEs_rang
+
+[v:0.0.x] hacks maison comme expliqué <http://archives.rezo.net/archives/spip-zone.mbox/GPY3HCLW4JI5UZEAKUWCVRQZAQQND6FJ/> <http://permalink.gmane.org/gmane.comp.web.spip.zone/26946>
+[v:0.1.0] mise en plugin pour réutilisation plus facile dans d'autres projets :P
+- La structure de la base de données ne change donc pas : un champ texte spip_auteurs_articles.role comme expliqué dans mon message
+
+[v:0.1.1] On profite du passage en plugin pour revoir l'interface...
+- Suis parti de <http://marcimat.magraine.net/Ajouter-un-champ-dans-une-table> ; mais il ne s'agit pas de completer un objet (plutôt de typer une liaison.) :-/ En regardant la liste des "points d'entrée" <http://doc.spip.org/@Les-points-d-entree-pipelines> j'ai pensé à utiliser "afficher_milieu" <http://programmer.spip.org/affiche_milieu> pour mieux m'intégrer dans l'espace privé
+- plus besoin d'aller sur une page listant les les articles sans rôle(s) puis, une fois l'article choisi, d'indiquer le rôle de chaque auteur(e). pour l'instant, un bloc supplémentaire est inséré dans le flux, mais l'idéal serait de remplacer le bloc natif d'ajout d'auteurs ^^ [consulter : ecrire/exec/articles.php ecrire/exec/editer_auteurs.php ecrire/inc/editeur_auteurs.php ]
+- plus besoin d'aller sur une page listant les auteurs sans rôle(s) puis, une fois l'auteur(e) choisi(e), d'indiquer son rôle pour chaque article. pour l'instant, un bloc supplémentaire est inséré dans le flux, mais l'idéal serait de remplacer le bloc natif listant les articles de l'auteur(e) ^^
+- pareil pour les modifications qui se feront à partir des nouveaux blocs insérés en non plus en passant par une page de sélection (critère inverse cette fois-ci : présence de rôle) préalable.
+
+[v:0.1.2] Correction de l'installation qui merdouille sur la machine de test :/
+Étant donné qu'on n'y reviendra pas et que le reste fonctionne (donc ce seront des mises à jour les fois suivantes) il est important que l'installation et la désinstallation se fassent correctement avant que le bébé soit présenté à la communauté.
+
+[v:0.2.0] Ajout des rangs à base de données.
+(comme c'est en usage interne seulement, il n'y a pas d'update de la base.)
+Adaptation perfectible du formulaire.
+
+[v:0.3.0] Ajout de liste de sélection à configurer (donc apparition d'une page de configuration)
+Le formulaire d'édition ne propose la liste qu'avec le plugin "Saisies" (je sais pas faire sans, ou alors en PHP). Une liste de sélection plutôt qu'un champ de saisie libre convient mieux à certains usages comme il ressort de la discussion initiée par Beurt ce 7 février <http://permalink.gmane.org/gmane.comp.web.spip.zone/26946>
+
+[v:0.3.1] Ajout des items de langue manquantes et correction de certaines autres. 
+Avec ça et une installation qui fonctionne, ce travail se poursuit sur la zone bien que je le jugeais pas assez mature (je ne suis pas content du dédoublement de l'interface et je pense sérieusement qu'il faudrait surcharger le core). Les derniers échanges (juste au moment où je passais en version 0.2) montrent que c'est un besoin commun (donc tests et contributions en perspective). 

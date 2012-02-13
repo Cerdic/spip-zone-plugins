@@ -1,0 +1,20 @@
+[(#AUTORISER{modifier,article,id_article}|oui)
+	<!--#hierarchie-->
+	<ul id="chemin">
+		<li><span class="bloc"><:autartrole:editer_role:></li>
+	</ul>
+	<!--/#hierarchie-->
+
+	<!--#navigation-->
+	<!--/#navigation-->
+
+	<div class="cadre-formulaire-editer">
+		<div class="entete-formulaire">
+			[(#ENV{retour,#SELF}|icone{<:icone_retour:>, #CHEMIN{img/autartrole_30x30.png}, #LANG_LEFT})]
+			<h3><:autartrole:editer_role:></h3>
+		</div>
+		<div class="ajax">
+		#FORMULAIRE_EDITER_AUTARTROLE{#ENV{id_auteur},#ENV{id_article},#ENV{retour},type_vue=article}
+		</div>
+	</div>
+]

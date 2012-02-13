@@ -1,0 +1,59 @@
+<div class='formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id_cat_variante,nouveau}'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable}|non)
+	<!--
+		<dl class="autartrole">
+			<dt><:article:></dt>
+				<dd>#INFO_TITRE{article,#ENV{id_article}}</dd>
+			<dt><:auteur:></dt>
+				<dd>#INFO_TITRE{auteur,#ENV{id_auteur}}</dd>
+			<dt><:label_role:></dt>
+				<dd>#ENV{role}</dd>
+		</dl>
+	-->
+	]
+	[(#ENV{editable}|oui)
+		<form method="post" action="[(#ENV{action})]"><div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<input type="hidden" name="id_auteur" value="#ENV{id_auteur}" />
+			<input type="hidden" name="id_article" value="#ENV{id_article}" />
+			<ul>
+		[(#ENV{type_vue}|=={article}|non)
+				<li>
+					<label><:article:></label>
+					#INFO_TITRE{article,#ENV{id_article}}
+				</li>
+		]
+		[(#ENV{type_vue}|=={auteur}|non)
+				<li>
+					<label><:auteur:></label>
+					#INFO_TITRE{auteur,#ENV{id_auteur}}
+				</li>
+		]
+		[(#PLUGIN{saisie}|et{#CONFIG{autartrole_liste_roles}}|?{
+			[(#SAISIE{
+				selection,	titre,
+				label=<:autartrole:label_role:>,
+				datas=#CONFIG{autartrole_liste_roles}|unserialize
+			})]
+		,
+				<li class="editer editer_role">
+					<label for="role"><:autartrole:label_role:></label>
+					<input name="role" id="role" type="text" value="#ENV{role}" class="text" />
+				</li>
+		})]
+				<li class="editer editer_rang">
+					<label for="rang"><:autartrole:label_rang:></label>
+					<input name="rang" id="rang" type="[(#HTML5|?{number,text})]" value="#ENV{rang}" class="number" />
+				</li>
+			</ul>
+			<p class="boutons">
+				<input type="submit" name="enregistrer" value="<:pass_ok:>" />
+			</p>
+		</div></form>
+	]
+
+</div>

@@ -1,0 +1,38 @@
+[(#SET{plie,0})]
+[(#SET{form,0})]
+[(#REM)<!--
+	si on est en ajax, on peut recevoir un id_xx
+	pour afficher le formulaire correspondant
+-->]
+[(#ENV{id_auteur}|oui)
+	[(#SET{plie,1})]
+	[(#SET{form,1})]
+]
+[(#SET{retour,[(#ENV{retour,#SELF}
+	|parametre_url{id_article,''})]
+})]
+
+
+<div id="editer_autartrole-aut#ID_ARTICLE" class="ajax-action editer_role">
+	<div class="cadre cadre-e cadre-liste">
+		<img src="#CHEMIN{img/autartrole_30x30.png}" class="cadre-icone" alt="" width="24" height="24" />
+		<div class='titrem[ (#GET{plie}|?{deplie,replie})]' onMouseOver="jQuery(this).depliant('#articles_roles_auteur');">
+			<a href="#" onClick="return jQuery(this).depliant_clicancre('#articles_roles_auteur');" class="titremancre"></a>
+			<:autartrole:titre_bloc_auteur:>
+		</div>
+		<div class="cadre_padding ajax">
+			[(#INCLURE{fond=prive/liste/autartrole_auteur, id_auteur, retour=#GET{retour}})]
+			<div id="articles_roles_auteur" class="bloc_depliable[ (#GET{plie}|?{blocdeplie,blocreplie})]">
+				<a id="access-r" href="#access-r" accesskey="r"></a>
+				[(#AUTORISER{modifier,auteur,id_auteur})
+					[(#ENV{id_auteur}|oui)
+						<h3><:autartrole:editer_role:></h3>
+						<div class="ajax">[(#FORMULAIRE_AUTARTROLE_EDIT{#ENV{id_auteur},#ENV{id_article},#GET{retour}#editer_autartrole-#ENV{id_article},auteur})]</div>
+					]
+				]
+			</div><!-- fin de articles_roles_auteur -->
+			<div class="nettoyeur"></div>
+		</div><!-- fin de cadre_padding -->
+	</div><!-- fin de cadre cadre-e -->
+</div><!-- fin de editer_autartrole -->
+

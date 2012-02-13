@@ -1,0 +1,51 @@
+<B_autartrole_liste>
+#ANCRE_PAGINATION
+<div id="autartrole-aut#ENV{id_auteur}" class="liste-elements _autartrole">
+	<table class="spip liste">
+		<caption class="caption"><:autartrole:liste_roles_auteur:></caption>
+		<tbody>
+	<BOUCLE_autartrole_liste(spip_auteurs_articles) {id_auteur} {pagination #ENV{nb,10}}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]  tr_liste" id="art#ID_ARTICLE">
+				[(#REM)<!-- statut (puce) -->]
+				[(#REM)<!-- rang (utile ici?) -->]
+				<td><a href="#URL_ECRIRE{articles,id_article=#ID_ARTICLE}">#INFO_TITRE{article,#ID_ARTICLE}</a> [(#REM)<!-- +logo -->]</td>
+				[(#REM)<!-- les auteurs... -->]
+				<td class="#EDIT{role}">#ROLE</td>
+				[(#REM)<!-- date -->]
+				[(#REM)<!-- num (utile ici?) -->]
+				<td class="action">
+			[(#AUTORISER{modifier,auteur,id_auteur}|oui)
+				[(#BOUTON_ACTION{
+					[(#CHEMIN{images/edit.gif}|balise_img{<:autartrole:modifier_role:>})],
+					[(#URL_ECRIRE{autartrole_auteur}
+						|parametre_url{id_auteur,#ID_AUTEUR}
+						|parametre_url{id_article,#ID_ARTICLE}
+						|parametre_url{retour,[(#ENV{retour,#SELF})]}
+					)],
+					ajax
+				})] [(#REM)<!-- bouton pour modifier le role -->]
+<!--
+				[(#BOUTON_ACTION{
+					[(#CHEMIN{images/supprimer.gif}|balise_img{<:autartrole:effacer_role:>})],
+					[(#URL_ACTION_AUTEUR{autartrole_clear,
+						#ID_AUTEUR,
+						#ID_ARTICLE,
+						[(#ENV{retour,#SELF})]
+					})],
+					ajax,
+					<:autartrole:confirmer_suppression_role:>
+				})] [(#REM)<!-- bouton pour effacer le role --!>]
+-->
+			]
+				</td>
+			</tr>
+	</BOUCLE_autartrole_liste>
+		</tbody>
+	</table>
+	[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_autartrole_liste>
+<div class="cadre cadre-couleur">
+	<:autartrole:message_aucun_role_article:>
+</div>
+<//B_autartrole_liste>

@@ -1,0 +1,20 @@
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="editer editer_roles">
+				<label for="roles"><:autartrole:label_roles:></label>
+				<em class="explication"><:autartrole:help_roles:></em>
+				<textarea id="roles" name="liste_roles" rows="10">#ENV{liste_roles}</textarea>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	</div></form>
+
+</div>

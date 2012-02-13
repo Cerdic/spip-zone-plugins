@@ -1,0 +1,30 @@
+<plugin>
+    <nom>R&ocirc;le d'auteur par article</nom>
+    <auteur>[gilcot->http://http://www.spip-contrib.net/gilcot]</auteur>
+    <licence>GLP</licence>
+    <version>0.3.1</version>
+    <slogan>R&ocirc;le de l'auteur par raport &agrave; un article</slogan>
+    <lien>http://www.spip-contrib.net/Specifier-role-auteur-par-article-(a-venir)</lien>
+    <icon>img/autartrole_100x100.png</icon>
+    <description>
+        Permettre de sp&eacute;cifier la liaison auteur-article
+    </description>
+    <etat>dev</etat>
+    <prefix>autartrole</prefix>
+    <categorie>divers</categorie>
+    <necessite id="SPIP" version="[2.0.3;2.1.99]" />
+    <version_base>20120202</version_base>
+    <install>base/autartrole_setup.php</install>
+    <pipeline>
+        <nom>declarer_tables_auxiliaires</nom>
+        <inclure>base/autartrole_table.php</inclure>
+    </pipeline>
+    <pipeline>
+        <nom>affiche_milieu</nom>
+        <inclure>autartrole_pipelines.php</inclure>
+    </pipeline>
+    <pipeline>
+        <nom>autoriser</nom>
+        <inclure>autartrole_autorisations.php</inclure>
+    </pipeline>
+</plugin>
