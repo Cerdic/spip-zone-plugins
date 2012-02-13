@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_art_libre' => 'licence Art libre',
+	'description_cc0' => 'Creative Common - Contenu libre de tout droit', # NEW
 	'description_cc_by' => 'Creative Commons - Paternité',
 	'description_cc_by_nc' => 'Creative Commons - Paternité Pas d\'Utilisation Commerciale',
 	'description_cc_by_nc_nd' => 'Creative Commons - Paternité Pas d\'Utilisation Commerciale Pas de Modification',
@@ -23,10 +24,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_cc_by_sa' => 'Creative Commons - Paternité Partage des Conditions Initiales à l\'Identique', # MODIF
 	'description_copyright' => '© copyright auteur de l\'article',
 	'description_gpl' => 'licence GPL', # MODIF
+	'description_wtfpl' => 'Licence Publique Rien À Branler', # NEW
 
 	// L
 	'label_select_licence' => 'Choisis une licence',
 	'lien_art_libre' => 'http://artlibre.org/',
+	'lien_cc0' => 'http://vvlibri.org/fr/licence/cc0/10/fr/legalcode', # NEW
 	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/deed.fr',
 	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/deed.fr',
 	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/deed.fr',
@@ -35,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/deed.fr',
 	'lien_gfdl' => 'http://www.gnu.org/licenses/fdl.html', # NEW
 	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
+	'lien_whfpl' => 'http://sam.zoy.org/lprab/', # NEW
 
 	// N
 	'noisette_cacher_defaut' => 'Cacher lorsque la licence n\'est pas spécifiée ?', # NEW
@@ -49,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_art_libre' => 'LAL',
+	'titre_cc0' => 'CC0', # NEW
 	'titre_cc_by' => 'CC by',
 	'titre_cc_by_nc' => 'CC by-nc',
 	'titre_cc_by_nc_nd' => 'CC by-nc-nd',
@@ -57,7 +62,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_cc_by_sa' => 'CC by-sa',
 	'titre_copyright' => 'Copyright',
 	'titre_gfdl' => 'GNU FDL', # NEW
-	'titre_gpl' => 'Gnu GPL' # MODIF
+	'titre_gpl' => 'Gnu GPL', # MODIF
+	'titre_wtfpl' => 'LPRAB' # NEW
 );
 
 ?>

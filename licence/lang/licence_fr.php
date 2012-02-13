@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_art_libre' => 'licence Art libre',
+	'description_cc0' => 'Creative Common - Contenu libre de tout droit',
 	'description_cc_by' => 'Creative Commons - Paternité',
 	'description_cc_by_nc' => 'Creative Commons - Paternité Pas d\'Utilisation Commerciale',
 	'description_cc_by_nc_nd' => 'Creative Commons - Paternité Pas d\'Utilisation Commerciale Pas de Modification',
@@ -22,11 +23,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_copyright' => '© copyright auteur de l\'article',
 	'description_gpl' => 'licence GNU/GPL',
 	'description_wtfpl' => 'Licence Publique Rien À Branler',
-	'description_cc0' => 'Creative Common - Contenu libre de tout droit',
 
 	// L
 	'label_select_licence' => 'Choisissez une licence',
 	'lien_art_libre' => 'http://artlibre.org/',
+	'lien_cc0' => 'http://vvlibri.org/fr/licence/cc0/10/fr/legalcode',
 	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/deed.fr',
 	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/deed.fr',
 	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/deed.fr',
@@ -36,7 +37,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_gfdl' => 'http://www.gnu.org/licenses/fdl.html',
 	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
 	'lien_whfpl' => 'http://sam.zoy.org/lprab/',
-	'lien_cc0' => 'http://vvlibri.org/fr/licence/cc0/10/fr/legalcode',
 
 	// N
 	'noisette_cacher_defaut' => 'Cacher lorsque la licence n\'est pas spécifiée ?',
@@ -51,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_art_libre' => 'LAL',
+	'titre_cc0' => 'CC0',
 	'titre_cc_by' => 'CC by',
 	'titre_cc_by_nc' => 'CC by-nc',
 	'titre_cc_by_nc_nd' => 'CC by-nc-nd',
@@ -60,8 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_copyright' => 'Copyright',
 	'titre_gfdl' => 'GNU FDL',
 	'titre_gpl' => 'GNU GPL',
-	'titre_wtfpl' => 'LPRAB',
-	'titre_cc0' => 'CC0',
+	'titre_wtfpl' => 'LPRAB'
 );
 
 ?>
