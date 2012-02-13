@@ -69,12 +69,9 @@ function contacts_afficher_contenu_objet($flux)
 function contacts_affiche_gauche($flux){
 
 	if ($flux['args']['exec'] == 'auteur'){
-
 		$flux['data'] .= recuperer_fond(
-			'prive/old/boite/selecteur_contacts_organisations',
-			array(
-				'id_auteur' => $flux['args']['id_auteur'] 
-			)
+			'prive/squelettes/extra/selecteur_contacts_organisations',
+			array('id_auteur' => $flux['args']['id_auteur'])
 		); 
 	
 	}
