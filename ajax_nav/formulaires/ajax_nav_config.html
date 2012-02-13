@@ -6,9 +6,6 @@
       <ul>
     [(#SAISIE{fieldset, ajaxNavConfig, label=<:ajax_nav:conf_plugin:>})]
 
-    <strong><:ajax_nav:url_prefix_titre:></strong>
-    #SAISIE{input, urlPrefix, defaut=#ENV{urlPrefix}}
-
     <strong><:ajax_nav:pages_titre:></strong>
     [(#SAISIE{input, pagesToAjaxify, defaut=#ENV{pagesToAjaxify}, explication=<:ajax_nav:pages_expli:>})]
 

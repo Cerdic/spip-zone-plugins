@@ -1,0 +1,14 @@
+#HTTP_HEADER{Content-Type: application/json; charset=#CHARSET}
+
+#SET{objet, #RECUPERER_FOND}
+#SET{id_objet, #ENV{id_#GET{objet}}}
+#SET{infos_page, #EXTRAIRE_INFOS_PAGE{#GET{objet}, #GET{id_objet}}}
+
+[(#REM) Une fois qu'on a toutes les infos, on les affiche au format JSON.]
+{
+    "page":"#GET{objet}",
+    ["id_#GET{objet}":"(#GET{id_objet})",]
+    "lang":"#LANG",
+    "body_classes":"[(#GET{infos_page}|table_valeur{body_classes})]",
+    "title":"[(#GET{infos_page}|table_valeur{title})]"
+}

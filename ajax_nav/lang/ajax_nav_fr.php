@@ -5,7 +5,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nom' => 'Navigation AJAX',
 'trouver_doc' => 'Pour de l\'aide sur la configuration de ce plugin, rendez-vous sur ',
 'conf_plugin' => 'Configuration du plugin :',
-'url_prefix_titre' => 'Le pr&eacute;fixe des urls de votre site. \'spip.php?\' par d&eacute;faut dans spip :',
 'pages_titre' => 'Les types de page qui seront charg&eacute;es en ajax :',
 'pages_expli' => 'une liste de types de page separ&eacute;s par des espaces. p.ex: "sommaire article rubrique"',
 'ajax_divs_titre' => 'Les ids des div &agrave; charger en ajax :',

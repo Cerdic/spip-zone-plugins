@@ -1,10 +1,7 @@
 <?php
 function ajax_nav_insert_head($flux) {
 
-  if ($res = sql_select('valeur', 'spip_meta', 'nom="ajax_nav_config"')) {
-    $options = sql_fetch($res);
-    $options = unserialize($options['valeur']);
-  }
+  $options = unserialize($GLOBALS['meta']['ajax_nav_config']);
 
   function prepare($options) {
     $options = preg_replace("/[^a-zA-Z0-9\-\_]+/", "', ", $options);
@@ -42,11 +39,9 @@ Modernizr.load([";
 	complete : function () {
 	    if (typeof AjaxNav !== 'undefined') {
 		AjaxNav.options = {
-		    urlPrefix: '"	. $options["urlPrefix"] . "',
 		    pagesToAjaxify: ["	. prepare($options["pagesToAjaxify"]) . "],
 		    ajaxDivs: ["	. prepare($options["ajaxDivs"]) . "],
-		    localizedDivs: ["	. prepare($options["localizedDivs"]) . "],
-		    siteURL: '"		. $GLOBALS['meta']['adresse_site'] . "/'
+		    localizedDivs: ["	. prepare($options["localizedDivs"]) . "]
 		};
 		AjaxNav();
 	    }

@@ -1,0 +1,11 @@
+[(#REM) on utilise au autre content-type que html pour eviter que INSERT_HEAD en soit ajoute deux
+fois si on active la fonction INSERT_HEAD du couteau suisse.]
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
+
+#SET{objet, #RECUPERER_FOND}
+#SET{id_objet, #ENV{id_#GET{objet}}}
+
+[(#REM) Une fois qu'on a toutes les infos, on calcule la page requise et on extrait le bloc
+demande.
+]
+#GET_BY_ID{#ENV{getbyid}, #GET{objet}, #GET{id_objet}}

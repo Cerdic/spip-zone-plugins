@@ -5,7 +5,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nom' => 'AJAX Navigation',
 'trouver_doc' => 'For more infos about this plugin\'s configuration, please go to ',
 'conf_plugin' => 'Plugin configuration :',
-'url_prefix_titre' => 'The prefix of your site\'s urls. \'spip.php?\' for a default install :',
 'pages_titre' => 'The types of pages that will be loaded asyncronously :',
 'pages_expli' => 'a list of space-separated page types, like: "sommaire article rubrique"',
 'ajax_divs_titre' => 'The ids of the elements to be loaded asynchronously :',

@@ -11,8 +11,6 @@ function formulaires_ajax_nav_config_charger_dist() {
 
   // Valeurs par defaut :
   $options = array(
-		   /* le prefix des urls. 'spip.php?' par defaut dans spip. */
-		   "urlPrefix"		=> "spip.php?",
 		   /* les types de page qui seront chargees en ajax. */
 		   "pagesToAjaxify"	=> "sommaire article rubrique",
 		   /* les id des div a charger en ajax. */
@@ -33,16 +31,6 @@ function formulaires_ajax_nav_config_verifier_dist() {
 
   $erreurs = array();
 
-  if (filter_var(_request('urlPrefix'), FILTER_VALIDATE_REGEXP,
-		 array(
-		       'options' => array(
-					  'regexp' => "/[,:;\'\"]/")
-		       )
-		 )
-      ) {
-    $erreurs['urlPrefix'] = "prefix d'url non-valide.";
-  }
-
   foreach(array('pagesToAjaxify', 'ajaxDivs', 'localizedDivs') as $i => $key) {
     if (filter_var(_request($key), FILTER_VALIDATE_REGEXP,
 		   array(
@@ -61,7 +49,6 @@ function formulaires_ajax_nav_config_traiter_dist() {
 
   $options =
     array(
-	  'urlPrefix'		=> _request('urlPrefix'),
 	  'pagesToAjaxify'	=> _request('pagesToAjaxify'),
 	  'ajaxDivs'		=> _request('ajaxDivs'),
 	  'localizedDivs'	=> _request('localizedDivs'),

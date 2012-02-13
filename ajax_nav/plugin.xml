@@ -13,7 +13,7 @@
 	</slogan>
 	<auteur>bystrano</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.8.0</version>
+	<version>0.9.0</version>
 	<etat>test</etat>
 	<description>
 		<multi>
@@ -26,6 +26,7 @@
 	<prefix>ajax_nav</prefix>
 	<categorie>navigation</categorie>
 
+	<fonctions>ajax_nav_balises.php</fonctions>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>ajax_nav_insert_head.php</inclure>
@@ -35,10 +36,11 @@
 		<inclure>prive/ajax_nav_header_prive.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>affichage_final</nom>
-		<inclure>ajax_nav_affichage_final.php</inclure>
+		<nom>styliser</nom>
+		<inclure>ajax_nav_styliser.php</inclure>
 	</pipeline>
 
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="saisies" version="[1.8.12;]" />
+	<necessite id="spip_bonux" version="[2.3.0;]" />
 </plugin>
