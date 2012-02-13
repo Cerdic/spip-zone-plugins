@@ -382,16 +382,17 @@ function encodage($source,$doc_attente){
 		 * Paramètres supplémentaires pour encoder en h264
 		 */
 		if($vcodec == '--vcodec libx264'){
-			$preset_quality = lire_config("spipmotion/vpreset_$extension_attente",'slow');
-			if(in_array('--enable-pthreads',@unserialize($spipmotion_compiler['configuration']))){
-				$infos_sup_normal .= "-threads 0";
-			}
 			/**
 			 * Encodage pour Ipod
 			 * http://rob.opendot.cl/index.php/useful-stuff/ipod-video-guide/
 			 */
 			if(lire_config("spipmotion/format_$extension_attente",'ipod') == 'ipod'){
-				$infos_sup_normal .= ' -vpre ipod640';
+				$infos_sup_normal .= ' -vpre baseline';
+			}
+			$preset_quality = lire_config("spipmotion/vpreset_$extension_attente",'slow');
+			$config = is_array(@unserialize($spipmotion_compiler['configuration'])) ? @unserialize($spipmotion_compiler['configuration']) : array();
+			if(in_array('--enable-pthreads',$config)){
+				$infos_sup_normal .= "-threads 0";
 			}
 			/**
 			 * Encodage pour PSP
@@ -402,8 +403,8 @@ function encodage($source,$doc_attente){
 				$infos_sup_normal .= ' -level 21';
 				$infos_sup_normal .= ' -refs 2';
 			}
-			$infos_sup_normal .= " -aspect $width_finale:$height_finale";
-			$infos_sup_normal .= ' -f '.lire_config("spipmotion/format_$extension_attente",'ipod');
+			//$infos_sup_normal .= " -aspect $width_finale:$height_finale";
+			//$infos_sup_normal .= ' -f '.lire_config("spipmotion/format_$extension_attente",'ipod');
 		}
 
 		$fichier_texte = "$dossier$query.txt";
@@ -453,7 +454,7 @@ function encodage($source,$doc_attente){
 					}else{
 						$infos_sup_normal = $preset_quality ? "-preset $preset_quality $infos_sup_normal" : $infos_sup_normal;
 					}
-					$metadatas = "-map_metadata 0:0";
+					//$metadatas = "-map_metadata 0:0";
 					$metadatas_supp = '';
 					$metas_orig = @unserialize($source['metas']);
 					

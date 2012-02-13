@@ -43,7 +43,6 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 		 * On crée un fichier contenant l'ensemble de la conf de ffmpeg
 		 */
 		supprimer_fichier($chemin_fichier);
-		
 		spimotion_write($chemin_fichier,"==VERSION==\n");
 		exec($spipmotion_sh.' --info "-version" --log '.$chemin_fichier,$retour,$bool);
 		spimotion_write($chemin_fichier,"\n==FORMATS==\n");
@@ -110,18 +109,6 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 
 			// Replace old vhook support
 			$data['spipmotion_compiler']['avfilter-support'] = (in_array('--enable-avfilter', $config_flags[0]) && !in_array('--disable-avfilter', $config_flags[0]) ? '1' : '0');
-			//$data['compiler']['vhook-support'] = in_array('--enable-vhook', $config_flags[0]) && !in_array('--disable-vhook', $config_flags[0]);
-
-			if(extension_loaded('ffmpeg')){
-				$data['spipmotion_compiler']['ffmpeg-php'] = true;
-				$data['spipmotion_compiler']['ffmpeg-php-infos']['ffmpeg-php-version'] = FFMPEG_PHP_VERSION_STRING;
-				$data['spipmotion_compiler']['ffmpeg-php-infos']['ffmpeg-php-builddate'] = FFMPEG_PHP_BUILD_DATE_STRING;
-				$data['spipmotion_compiler']['ffmpeg-php-infos']['libavcodec_build_number'] = LIBAVCODEC_BUILD_NUMBER;
-				$data['spipmotion_compiler']['ffmpeg-php-infos']['libavcodec_version_number'] = LIBAVCODEC_VERSION_NUMBER;
-				$data['spipmotion_compiler']['ffmpeg-php-infos']['ffmpeg-php-gdenabled'] = FFMPEG_PHP_GD_ENABLED;
-			}else{
-				$data['spipmotion_compiler']['ffmpeg-php'] = false;
-			}
 
 			/**
 			 * Récupération des formats disponibles
@@ -276,7 +263,6 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 		$data['spipmotion_flvtool2'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_flvtool2']);
 		$data['spipmotion_flvtoolplus'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_flvtoolplus']);
 		$data['spipmotion_mediainfo'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_mediainfo']);
-		spip_log($data,'test');
 	}
 	return $data;
 }

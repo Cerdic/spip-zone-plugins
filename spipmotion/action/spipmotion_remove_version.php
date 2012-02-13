@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * kent1 (kent1@arscenic.info)
- * 2008-2011 - Distribué sous licence GNU/GPL
+ * 2008-2012 - Distribué sous licence GNU/GPL
  *
  */
 

@@ -22,6 +22,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * -* flvtool++;
  * -* qt-faststart;
  * -* le script spipmotion.sh;
+ * -* le script spipmotion_vignette.sh;
  * -* la class ffmpeg-php;
  * -* mediainfo;
  *
@@ -127,13 +128,15 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 		}
 	
 		/**
-		 * Tester le script spipmotion.sh présent dans script_bash/
-		 * Si le safe_mode est activé, il doit se trouver dans le répertoire des scripts autorisés
+		 * Tester les scripts spipmotion.sh et spipmotion_vignette.sh présents dans script_bash/
+		 * Si le safe_mode est activé, il doivent se trouver dans le répertoire des scripts autorisés
 		 */
 		if($safe_mode == 1){
 			$spipmotion_sh = $safe_mode_path.'/spipmotion.sh';
+			$spipmotion_vignette_sh = $safe_mode_path.'/spipmotion_vignette.sh';
 		}else{
 			$spipmotion_sh = find_in_path('script_bash/spipmotion.sh');
+			$spipmotion_vignette_sh = find_in_path('script_bash/spipmotion_vignette.sh');
 		}
 		exec($spipmotion_sh." --help",$retour_spipmotionsh,$retour_spipmotionsh_int);
 		if($retour_spipmotionsh_int != 0){
@@ -142,7 +145,15 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 		}else{
 			effacer_config('spipmotion_spipmotionsh_casse');
 		}
-	
+		
+		exec($spipmotion_vignette_sh." --help",$retour_spipmotion_vignettesh,$retour_spipmotion_vignettesh_int);
+		if($retour_spipmotion_vignettesh_int != 0){
+			ecrire_config('spipmotion_spipmotion_vignette_sh_casse', 'oui');
+			$erreurs[] = 'spipmotion_vignette.sh';
+		}else{
+			effacer_config('spipmotion_spipmotion_vignette_sh_casse');
+		}
+		
 		/**
 		 * Tester ffmpeg
 		 */
@@ -165,12 +176,6 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 				}
 			}
 		}
-		if (!class_exists('ffmpeg_movie')) {
-			ecrire_config('spipmotion_ffmpeg-php_casse', 'oui');
-			$erreurs[] = 'ffmpeg-php';
-		}else{
-			effacer_config('spipmotion_ffmpeg-php_casse');
-		}
 	}
 
 	if(count($erreurs) > 0){
@@ -178,7 +183,7 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 	}else{
 		effacer_config('spipmotion_casse');
 	}
-
+	spip_log($erreurs,'test');
 	if($notif){
 		if ($notifications = charger_fonction('notifications', 'inc')) {
 			$notifications('spipmotion_verifier_binaires', 1,

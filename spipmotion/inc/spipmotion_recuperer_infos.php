@@ -72,54 +72,6 @@ function inc_spipmotion_recuperer_infos($id_document){
 		$mediainfo = charger_fonction('spipmotion_mediainfo','inc');
 		$infos = $mediainfo($fichier,$id_document);
 	}
-	else if(class_exists('ffmpeg_movie')){
-		$movie = new ffmpeg_movie($fichier, 0);
-	
-		$infos['bitrate'] = $movie->getBitRate();
-		$infos['duree'] = $movie->getDuration();
-		$infos['framecount'] = $movie->getFrameCount();
-		$infos['hauteur'] = $movie->getFrameHeight();
-		$infos['largeur'] = $movie->getFrameWidth();
-		$infos['hasvideo'] = '';
-		$infos['hasaudio'] = '';
-	
-		if($movie->hasVideo()){
-			$infos['videocodec'] = @$movie->getVideoCodec();
-			$infos['pixelformat'] = $movie->getPixelFormat();
-			$infos['videobitrate'] = $movie->getVideoBitRate();
-			$infos['framerate'] = $movie->getFrameRate();
-			$infos['hasvideo'] = 'oui';
-		}else{
-			$infos['hasvideo'] = 'non';
-		}
-		if($movie->hasAudio()){
-			$infos['hasaudio'] = 'oui';
-			$infos['audiocodec'] = @$movie->getAudioCodec();
-			$infos['audiobitrate'] = $movie->getAudioBitRate();
-			$infos['audiosamplerate'] = $movie->getAudioSampleRate();
-			$infos['audiochannels'] = $movie->getAudioChannels();
-		}else{
-			$infos['hasaudio'] = 'non';
-		}
-		if((($infos['videobitrate'] == 0)||($infos['audiobitrate'] == 0)|| ($infos['videocodec'] == 'flv')) && ($document['extension'] == 'flv')){
-			include_spip('inc/xml');
-			$arbre = spip_xml_parse($metadatas);
-			if(($infos['videobitrate'] == 0)||($infos['videocodec'] == 'flv')){
-				spip_xml_match_nodes(",^videocodecid,",$arbre, $videocodec_array);
-				$infos['videocodec'] = $videocodec_array['videocodecid'][0];
-	
-				spip_xml_match_nodes(",^videodatarate,",$arbre, $videobitrate_array);
-				$infos['videobitrate'] = floor($videobitrate_array['videodatarate'][0]*1000);
-			}
-			if($movie->hasAudio()){
-				spip_xml_match_nodes(",^audiocodecid,",$arbre, $audiocodec_array);
-				$infos['audiocodec'] = $audiocodec_array['audiocodecid'][0];
-	
-				spip_xml_match_nodes(",^audiodatarate,",$arbre, $audiobitrate_array);
-				$infos['audiobitrate'] = floor($audiobitrate_array['audiodatarate'][0]*1000);
-			}
-		}
-	}
 	
 	if(strlen($document['titre']) > 0){
 		unset($infos['titre']);
@@ -140,10 +92,8 @@ function inc_spipmotion_recuperer_infos($id_document){
 	if($infos['taille'] == '2147483647'){
 		$infos['taille'] = sprintf("%u", filesize($fichier));
 	}
-	spip_log($infos['taille'],'test');
-	spip_log(intval(filesize($fichier)),'test');
+
 	if(count($infos) > 0){
-		spip_log('on modifie','test');
 		include_spip('inc/modifier');
 		revision_document($id_document, $infos);
 	}
