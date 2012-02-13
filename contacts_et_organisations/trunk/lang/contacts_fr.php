@@ -36,11 +36,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contact_creer' => 'Créer un contact',
 	'contact_editer' => 'Éditer ce contact',
 	'contact_logo' => 'Logo de ce contact',
-	'contact_numero' => 'Contact numéro',
 	'contact_nouveau_titre' => 'Nouveau contact',
-	'contact_voir' => 'Voir',
+	'contact_numero' => 'Contact numéro',
 	'contact_un' => 'Un contact',
-	'contacts_nb' => '@nb@ contacts',
+	'contact_voir' => 'Voir',
 	'contacts' => 'Contacts',
 	'contacts_aucun' => 'Aucun contact',
 	'contacts_nb' => '@nb@ contacts',
@@ -51,8 +50,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'definir_auteur_comme_contact' => 'Définir comme contact',
 	'definir_auteur_comme_organisation' => 'Définir comme organisation',
-	'delier_contact' => 'Désassocier', 
 	'delier_cet_auteur' => 'Désassocier',
+	'delier_contact' => 'Désassocier',
 	'delier_organisation' => 'Désassocier',
 
 	// E
@@ -122,25 +121,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_organisation' => 'Nom',
 
 	// O
+	'organisation' => 'Organisation',
 	'organisation_ajouter' => 'Ajouter une organisation',
 	'organisation_associe_a_auteur_numero' => 'Associée à auteur numéro',
 	'organisation_associer_a_auteur' => 'Associer à un auteur',
+	'organisation_aucun' => 'Aucune organisation',
 	'organisation_creer' => 'Créer une organisation',
 	'organisation_creer_fille' => 'Créer une organisation fille',
 	'organisation_editer' => 'Éditer cette organisation',
 	'organisation_logo' => 'Logo de l\'organisation',
-	'organisation_numero' => 'Organisation numéro',
 	'organisation_nouveau_titre' => 'Nouvelle organisation',
-	'organisation_aucun' => 'Aucune organisation',
+	'organisation_numero' => 'Organisation numéro',
 	'organisation_un' => 'Une organisation',
 	'organisation_voir' => 'Voir',
 	'organisations' => 'Organisations',
-	'organisation' => 'Organisation',
 	'organisations_nb' => '@nb@ organisations',
 
 	// P
 	'prenom' => 'Prénom',
-	
+
 	// R
 	'recherche_de' => 'Recherche de «@recherche@»',
 	'rechercher' => 'Rechercher',
@@ -156,7 +155,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_contacts' => 'Gestion des contacts',
 	'titre_page_organisations' => 'Gestion des organisations',
 	'titre_page_repertoire' => 'Répertoire',
-	'tous' => 'Tous',
+	'tous' => 'Tous'
 );
 
 ?>

@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aucun_contact' => 'Žiaden kontakt tu nie je!',
 	'aucune_organisation' => 'Žiadna organizácia tu nie je!',
+	'auteur_lie' => 'Id de l\'auteur lié', # NEW
 
 	// B
 	'bouton_contacts' => 'Kontakty',
@@ -28,16 +29,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_delier_organisation_rubrique' => 'Určite chcete zrušiť prepojenie tejto organizácie s touto rubrikou?',
 	'confirmer_supprimer_contact' => 'Určite chcete zmazať všetky údaje o tomto kontakte?',
 	'confirmer_supprimer_organisation' => 'Určite chcete zmazať všetky údaje o tejto organizácii?',
-	'contact' => 'Jeden kontakt',
+	'contact' => 'Jeden kontakt', # MODIF
+	'contact_ajouter' => 'Ajouter un contact', # NEW
 	'contact_associe_a_auteur_numero' => 'Prepojiť s autorom číslo',
 	'contact_associer_a_auteur' => 'Prepojiť s autorom',
 	'contact_creer' => 'Vytvoriť kontakt',
 	'contact_editer' => 'Upraviť tento kontakt',
-	'contact_modifier' => 'Upraviť kontakt',
-	'contact_nouveau' => 'Nový kontakt',
+	'contact_logo' => 'Logo de ce contact', # NEW
+	'contact_nouveau_titre' => 'Nouveau contact', # NEW
 	'contact_numero' => 'Kontakt číslo',
+	'contact_un' => 'Un contact', # NEW
 	'contact_voir' => 'Zobraziť',
 	'contacts' => 'Kontakty',
+	'contacts_aucun' => 'Aucun contact', # NEW
 	'contacts_nb' => '@nb@ kontaktov',
 	'contacts_un' => 'Jeden kontakt',
 	'creer_auteur_contact' => 'Vytvoriť nového autora a prepojiť ho s týmto kontaktom',
@@ -47,6 +51,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'definir_auteur_comme_contact' => 'Nastaviť ako kontakt',
 	'definir_auteur_comme_organisation' => 'Definovať ako organizáciu',
 	'delier_cet_auteur' => 'Zrušiť prepojenie',
+	'delier_contact' => 'Désassocier', # NEW
+	'delier_organisation' => 'Désassocier', # NEW
 
 	// E
 	'est_un_contact' => 'Tento autor je nastavený ako kontakt',
@@ -106,26 +112,35 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nb_contact' => '1 kontakt',
 	'nb_contacts' => '@nb@ kontaktov',
+	'nom_contact' => 'Nom', # NEW
+	'nom_organisation' => 'Nom', # NEW
 
 	// O
+	'organisation' => 'Organisation', # NEW
+	'organisation_ajouter' => 'Ajouter une organisation', # NEW
 	'organisation_associe_a_auteur_numero' => 'Prepojené s autorom číslo',
 	'organisation_associer_a_auteur' => 'Prepojiť s autorom',
+	'organisation_aucun' => 'Aucune organisation', # NEW
 	'organisation_creer' => 'Zapísať organizáciu',
 	'organisation_creer_fille' => 'Zapísať podradenú organizáciu',
 	'organisation_editer' => 'Upraviť túto organizáciu',
-	'organisation_modifier' => 'Upraviť organizáciu',
-	'organisation_nouveau' => 'Nová organizácia',
+	'organisation_logo' => 'Logo de l\'organisation', # NEW
+	'organisation_nouveau_titre' => 'Nouvelle organisation', # NEW
 	'organisation_numero' => 'Organizácia číslo',
 	'organisation_un' => 'Jedna organizácia',
 	'organisation_voir' => 'Zobraziť',
 	'organisations' => 'Organizácie',
 	'organisations_nb' => '@nb@ organizácií',
 
+	// P
+	'prenom' => 'Prénom', # NEW
+
 	// R
 	'recherche_de' => 'Vyhľadať "@recherche@"',
 	'rechercher' => 'Vyhľadať',
 
 	// S
+	'statut_juridique' => 'Statut juridique', # NEW
 	'supprimer_contact' => 'Odstrániť tento kontakt',
 	'supprimer_organisation' => 'Odstrániť túto organizáciu',
 
@@ -134,7 +149,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_organisation' => 'Informácie o organizácii',
 	'titre_page_contacts' => 'Riadenie kontaktov',
 	'titre_page_organisations' => 'Riadenie organizácií',
-	'titre_page_repertoire' => 'Adresár'
+	'titre_page_repertoire' => 'Adresár',
+	'tous' => 'Tous' # NEW
 );
 
 ?>

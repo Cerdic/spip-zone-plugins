@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aucun_contact' => 'There is no contact !',
 	'aucune_organisation' => 'There is no organization',
+	'auteur_lie' => 'Id de l\'auteur lié', # NEW
 
 	// B
 	'bouton_contacts' => 'Contacts',
@@ -28,16 +29,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_delier_organisation_rubrique' => 'Are you sure you want to unlink this organization from this section?',
 	'confirmer_supprimer_contact' => 'Ares you sure you want to delete all information about this contact?',
 	'confirmer_supprimer_organisation' => 'Are you sure you want to delete all the information about this organisation?',
-	'contact' => 'One contact',
+	'contact' => 'One contact', # MODIF
+	'contact_ajouter' => 'Ajouter un contact', # NEW
 	'contact_associe_a_auteur_numero' => 'Link to author number',
 	'contact_associer_a_auteur' => 'Link to an author',
 	'contact_creer' => 'Create a contact',
 	'contact_editer' => 'Edit this contact',
-	'contact_modifier' => 'Modify a contact',
-	'contact_nouveau' => 'New contact',
+	'contact_logo' => 'Logo de ce contact', # NEW
+	'contact_nouveau_titre' => 'Nouveau contact', # NEW
 	'contact_numero' => 'Contact number',
+	'contact_un' => 'Un contact', # NEW
 	'contact_voir' => 'See',
 	'contacts' => 'Contacts',
+	'contacts_aucun' => 'Aucun contact', # NEW
 	'contacts_nb' => '@nb@ contacts',
 	'contacts_un' => 'A contact',
 	'creer_auteur_contact' => 'Create a new author and link it to this contact',
@@ -47,6 +51,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'definir_auteur_comme_contact' => 'Set as contact',
 	'definir_auteur_comme_organisation' => 'Set as organisation',
 	'delier_cet_auteur' => 'Unlink',
+	'delier_contact' => 'Désassocier', # NEW
+	'delier_organisation' => 'Désassocier', # NEW
 
 	// E
 	'est_un_contact' => 'This author is set as a contact.',
@@ -107,26 +113,35 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nb_contact' => '1 contact',
 	'nb_contacts' => '@nb@ contacts',
+	'nom_contact' => 'Nom', # NEW
+	'nom_organisation' => 'Nom', # NEW
 
 	// O
+	'organisation' => 'Organisation', # NEW
+	'organisation_ajouter' => 'Ajouter une organisation', # NEW
 	'organisation_associe_a_auteur_numero' => 'Linked to author number',
 	'organisation_associer_a_auteur' => 'Link to an author',
+	'organisation_aucun' => 'Aucune organisation', # NEW
 	'organisation_creer' => 'Create an organization',
 	'organisation_creer_fille' => 'Create a child organization',
 	'organisation_editer' => 'Edit this organizatino',
-	'organisation_modifier' => 'Modify an organization',
-	'organisation_nouveau' => 'New organization',
+	'organisation_logo' => 'Logo de l\'organisation', # NEW
+	'organisation_nouveau_titre' => 'Nouvelle organisation', # NEW
 	'organisation_numero' => 'Organization number',
 	'organisation_un' => 'One organization',
 	'organisation_voir' => 'See',
 	'organisations' => 'Organisations',
 	'organisations_nb' => '@nb@ organizations',
 
+	// P
+	'prenom' => 'Prénom', # NEW
+
 	// R
 	'recherche_de' => 'Search for "@recherche@"',
 	'rechercher' => 'Search',
 
 	// S
+	'statut_juridique' => 'Statut juridique', # NEW
 	'supprimer_contact' => 'Delete this contact',
 	'supprimer_organisation' => 'Delete this organisation',
 
@@ -135,7 +150,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_organisation' => 'Organization details',
 	'titre_page_contacts' => 'Contacts management',
 	'titre_page_organisations' => 'Organisations management',
-	'titre_page_repertoire' => 'Directory'
+	'titre_page_repertoire' => 'Directory',
+	'tous' => 'Tous' # NEW
 );
 
 ?>

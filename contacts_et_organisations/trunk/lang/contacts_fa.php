@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aucun_contact' => 'ارتباطي برقرار نيست!',
 	'aucune_organisation' => 'سازماني موجود نيست!',
+	'auteur_lie' => 'Id de l\'auteur lié', # NEW
 
 	// B
 	'bouton_contacts' => 'تماس‌ها',
@@ -28,16 +29,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_delier_organisation_rubrique' => 'مطمئن هستيد كه مي‌‌خواهيد ارتباط اين سازمان با اين بخش را قطع كنيد؟‌',
 	'confirmer_supprimer_contact' => 'مطمئن هستيد كه مي‌خواهيد تمام اطلاعات مربوط يه اين ارتباط را حذف كنيد؟‌',
 	'confirmer_supprimer_organisation' => 'مطمئن هستيد كه مي‌خواهيد تمام اطلاعات مربوط به اين سازمان را حذف كنيد؟‌',
-	'contact' => 'يك تماس',
+	'contact' => 'يك تماس', # MODIF
+	'contact_ajouter' => 'Ajouter un contact', # NEW
 	'contact_associe_a_auteur_numero' => 'پيوند به نويسنده‌ي شماره‌ي ',
 	'contact_associer_a_auteur' => 'پيوند به يك نويسنده',
 	'contact_creer' => 'ايجاد يك تماس',
 	'contact_editer' => 'ويرايش اين تماس',
-	'contact_modifier' => 'اصلاح يك تماس',
-	'contact_nouveau' => 'تماس جديد',
+	'contact_logo' => 'Logo de ce contact', # NEW
+	'contact_nouveau_titre' => 'Nouveau contact', # NEW
 	'contact_numero' => 'تماس شماره‌ي',
+	'contact_un' => 'Un contact', # NEW
 	'contact_voir' => 'بنگريد',
 	'contacts' => 'تماس‌ها',
+	'contacts_aucun' => 'Aucun contact', # NEW
 	'contacts_nb' => '@nb@ تماس ',
 	'contacts_un' => 'يك تماس ',
 	'creer_auteur_contact' => 'ايجاد يك نويسنده و پيوند او با اين تماس ',
@@ -47,6 +51,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'definir_auteur_comme_contact' => 'تعريف به عنوان تماس ',
 	'definir_auteur_comme_organisation' => 'تعريف به عنوان سازمان',
 	'delier_cet_auteur' => 'قطع',
+	'delier_contact' => 'Désassocier', # NEW
+	'delier_organisation' => 'Désassocier', # NEW
 
 	// E
 	'est_un_contact' => 'اين نويسنده به عنوان يك تماس تعريف مي‌شود.',
@@ -106,26 +112,35 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nb_contact' => 'تماس 1',
 	'nb_contacts' => '@nb@ تماس ',
+	'nom_contact' => 'Nom', # NEW
+	'nom_organisation' => 'Nom', # NEW
 
 	// O
+	'organisation' => 'Organisation', # NEW
+	'organisation_ajouter' => 'Ajouter une organisation', # NEW
 	'organisation_associe_a_auteur_numero' => 'ارتباط با شماره‌ي نويسنده',
 	'organisation_associer_a_auteur' => 'ارتباط با يك نويسنده',
+	'organisation_aucun' => 'Aucune organisation', # NEW
 	'organisation_creer' => 'ايجاد يك سازمان',
 	'organisation_creer_fille' => 'ايجاد يك پرونده‌ي سازمان',
 	'organisation_editer' => 'ويرايش اين سازمان',
-	'organisation_modifier' => 'تعديل يك سازمان',
-	'organisation_nouveau' => 'سازمان جديد',
+	'organisation_logo' => 'Logo de l\'organisation', # NEW
+	'organisation_nouveau_titre' => 'Nouvelle organisation', # NEW
 	'organisation_numero' => 'شماره‌ي سازمان',
 	'organisation_un' => 'يك سازمان',
 	'organisation_voir' => 'بنگريد',
 	'organisations' => 'سازمان‌ها',
 	'organisations_nb' => '@nb@ سازمان',
 
+	// P
+	'prenom' => 'Prénom', # NEW
+
 	// R
 	'recherche_de' => ' جستجوي «@recherche@»',
 	'rechercher' => 'جستجو',
 
 	// S
+	'statut_juridique' => 'Statut juridique', # NEW
 	'supprimer_contact' => 'حذف اين تماس ',
 	'supprimer_organisation' => 'حذف اين سازمان',
 
@@ -134,7 +149,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_organisation' => 'جزئيات سازمان',
 	'titre_page_contacts' => 'مديريت تماس‌ها',
 	'titre_page_organisations' => 'مديريت سازمان‌ها',
-	'titre_page_repertoire' => 'ديركتور'
+	'titre_page_repertoire' => 'ديركتور',
+	'tous' => 'Tous' # NEW
 );
 
 ?>
