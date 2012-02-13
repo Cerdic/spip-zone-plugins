@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_cc_by_sa' => 'CC by-sa',
 	'titre_copyright' => 'Copyright',
 	'titre_gfdl' => 'GNU FDL',
-	'titre_gpl' => 'GNU GPL'
+	'titre_gpl' => 'GNU GPL',
 	'titre_wtfpl' => 'WTFPL',
 	'titre_cc0' => 'CC0',
 );
