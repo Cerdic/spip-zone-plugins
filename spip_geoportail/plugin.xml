@@ -4,7 +4,7 @@
 	<slogan>Afficher des objets SPIP sur une carte</slogan>
 	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<licence>GNU/GPL, BSD pour l'API Geoportail/OpenLayers</licence>
-	<version>1.02.1</version>
+	<version>1.02.2</version>
 	<icon>img/geoportail.gif</icon>
 	<etat>test</etat>
 	<description>
@@ -36,11 +36,11 @@ Pour visualiser des exemples d'affichage de carte Geoportail, OSM, Google Maps, 
 	</install>
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>head.php</inclure>
+		<inclure>geoportail_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
-		<inclure>head_prive.php</inclure>
+		<inclure>geoportail_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>ajouter_boutons</nom>

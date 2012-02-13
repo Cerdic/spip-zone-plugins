@@ -1,11 +1,24 @@
 <?php
+/**
+* Plugin SPIP Geoportail
+*
+* @author:
+* Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2010
+* Logiciel distribue sous licence GNU/GPL.
+*
+* Pipelines
+*
+**/
+
 
 function geoportail_insert_head($flux)
 {	// Logo des couches SPIP
 	$logo = find_in_path(_DIR_IMG."geoserviceon0.png");
 	if (!$logo) $logo = find_in_path(_DIR_IMG."geoserviceon0.gif");
 	if (!$logo) $logo = find_in_path(_DIR_IMG."geoserviceon0.jpg");
-	if ($logo) $logo = "jQuery.geoportail.setOriginator ('$logo','".$GLOBALS['meta']['adresse_site']."')"; 
+	if ($logo) $logo = "jQuery.geoportail.setOriginator ('$logo','".$GLOBALS['meta']['adresse_site']."')";
 	// Type de popup
 	$popup = $GLOBALS['meta']['geoportail_popup'];
 	$popup = "jQuery.geoportail.spip_popup = '".($popup?$popup:"Anchored")."';"
@@ -14,7 +27,7 @@ function geoportail_insert_head($flux)
 	$repop = dirname(chemin('img/cloud-popup-relative.png'));
 	$repop = "jQuery.geoportail.imgPath = '$repop/';";
 
-	$flux .= 
+	$flux .=
 '
 <script type="text/javascript" src="'._DIR_PLUGIN_GEOPORTAIL.'js/geoportail.js"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GEOPORTAIL.'js/jquery.dialog.js"></script>
@@ -30,18 +43,16 @@ function geoportail_insert_head($flux)
 ."\n".$popup
 ."\n".$repop
 .'
-</script>
-<!--_GEOPORTAIL_HEADER_-->
-<link rel="stylesheet" href="'._DIR_PLUGIN_GEOPORTAIL.'css/jqdialog.css" type="text/css"  />
-<link rel="stylesheet" href="'._DIR_PLUGIN_GEOPORTAIL.'css/geoportail.css" type="text/css" />
-<link rel="stylesheet" href="'._DIR_PLUGIN_GEOPORTAIL.'css/geoportail_carte.css" type="text/css" />
-<!-- IE8 compatibility mode pour la version 1.0b4 -->
-<!--[if IE 8]>
-<meta http-equiv="X-UA-Compatible" content="IE=7"/>
-<![endif]-->
-
-';
-	return $flux;
+</script>';
+$flux .= recuperer_fond('geoportail_insert_head');
+return $flux;
 }
+
+
+function geoportail_header_prive($flux) {
+$flux .= recuperer_fond('geoportail_header_prive');
+return $flux;
+}
+
 
 ?>
