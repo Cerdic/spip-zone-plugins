@@ -1,0 +1,44 @@
+<BOUCLE_organisation(ORGANISATIONS){id_organisation}{tous}{si #ENV{exec}|=={auteur}}>
+
+[(#AUTORISER{modifier,organisation,#ID_ORGANISATION})
+	[(#ID_ORGANISATION|afficher_qui_edite{organisation}|non)
+		[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}
+			|parametre_url{redirect,#SELF}
+			|icone_verticale{<:contacts:organisation_editer:>,organisation,edit,right})]
+	]
+	[(#ID_ORGANISATION|afficher_qui_edite{organisation}|oui)
+		[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}
+			|parametre_url{redirect,#SELF}
+			|icone_verticale{#ID_ORGANISATION|afficher_qui_edite{organisation},warning-24,'',right})]
+	]
+]
+
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/organisation,id=#ID_ORGANISATION,id_organisation=#ID_ORGANISATION,ajax=wysiwyg}>
+</div>
+
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/organisations,
+	id_parent=#ID_ORGANISATION,
+	titre=<:contacts:info_organisations_filles:>,
+	ajax}>
+
+[(#AUTORISER{creer,organisation})
+	[(#URL_ECRIRE{organisation_edit,id_parent=#ID_ORGANISATION}
+		|parametre_url{redirect,#SELF}
+		|icone_verticale{<:contacts:organisation_creer_fille:>,organisation,add,right})]
+]
+
+<div class="nettoyeur"></div>
+
+<div class="ajax">
+	#FORMULAIRE_EDITER_LIENS_SIMPLES{organisation,#ID_ORGANISATION,contacts,#AUTORISER{modifier,organisation,#ID_ORGANISATION}}
+</div>
+
+
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,organisation,id,#ID_ORGANISATION},data,'<div class="nettoyeur"></div>'}}
+
+</BOUCLE_organisation>

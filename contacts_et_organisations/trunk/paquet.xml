@@ -33,6 +33,7 @@
 
 	<necessite nom="saisies" compatibilite="[1.15.3;[" />
 	<necessite nom="medias" compatibilite="[1.6;[" />
+	<necessite nom="editer_liens_simples" compatibilite="[1.0;[" />
 
 	<utilise nom="coordonnees" compatibilite="[1.2.0;[" />
 	<utilise nom="crayons" compatibilite="[1.10.0;[" />

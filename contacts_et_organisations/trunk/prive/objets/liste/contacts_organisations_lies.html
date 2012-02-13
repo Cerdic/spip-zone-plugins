@@ -1,0 +1,70 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi nom,1
+	type_liaison,1
+}})
+]
+#SET{selection,#ENV{objet_source}|lister_objets_lies_simples{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
+#SET{debut,#ENV{debutcol,#EVAL{_request("debutcol");}}}
+<B_contacts>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutcol,#EVAL{_request("debutcol");}}}
+#SET{afficher_lettres,#TRI|=={'multi nom'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies contacts">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{contacts:contact_un,contacts:contacts_nb}})</strong></caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(CONTACTS){tout}{id_contact IN #GET{selection}}{where?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_contact==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#NOM**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutcol,@#ID_AUTEUR}|ancre_url{paginationcol}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="4"><p class='pagination'>(#GET{p})</p></td></tr>]
+	
+		<tr class='first_row'>
+			<th class="picto" scope='col'></th>
+			<th class="nom" scope='col'>[(#TRI{nom,<:contacts:label_nom:>,ajax})]</th>
+			<th class="type" scope='col'>[(#TRI{type_liaison,<:contacts:label_type_liaison:>,ajax})]</th>
+			<th class='action' scope='col'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_contacts(CONTACTS)
+		{id_organisation=#ENV{id_objet}}{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} col}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_CONTACT|=={#ENV{id_lien_ajoute}}|oui)append]">
+		[(#REM) sur boucle pour le crayon ]
+		<BOUCLE_liaisons(organisations_contacts){id_contact}{id_organisation=#ENV{id_objet}}>
+			<BOUCLE_lien_contact(contacts_liens){id_contact}>
+				[(#SET{url,[(#ID_OBJET|generer_url_entite{#OBJET})]})]
+			</BOUCLE_lien_contact>
+				[(#SET{url,[(#ID_CONTACT|generer_url_entite{contact})]})]
+			<//BOUCLE_lien_contact>
+			<td class="picto"><a href="#GET{url}">#INCLURE{fond=logo/contact, id_contact}</a></td>
+			<td class='nom'><a href="[(#ID_CONTACT|generer_url_entite{contact})]">[(#_contacts:PRENOM) ]#_contacts:NOM</a></td>
+			<td class='type #EDIT{type_liaison}'>[(#TYPE_LIAISON|sinon{-})]</td>
+			<td class='action'>
+				[(#AUTORISER{modifier, contact, #ID_CONTACT}|oui)
+					<button class="button link delete" name="supprimer_lien#EVAL{chr(91)}organisation-#ID_ORGANISATION-contact-#ID_CONTACT#EVAL{chr(93)}" value="X"><:contacts:contact_retirer_lien:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+				]
+			</td>
+		</BOUCLE_liaisons>
+		</tr>
+	</BOUCLE_contacts>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien#EVAL{chr(91)}organisation-#ID_OBJET-contact-*#EVAL{chr(93)}" value="X"><:contacts:contact_retirer_tous_lien:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_contacts>
+<div class="liste-objets  liste-objets-lies contacts">
+	<strong class="caption">[(#ENV*{titre,<:contacts:contact_aucun:>})]</strong>
+</div>
+<//B_contacts>

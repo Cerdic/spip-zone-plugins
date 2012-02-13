@@ -1,7 +1,9 @@
 [(#VAL{inc/presentation}|include_spip|oui)]
 [(#SET{identifiant,[(#VAL{contacts_#ENV{id_auteur}})]})]
 [(#SET{plie,0})]
-#BOITE_OUVRIR{#CHEMIN_IMAGE{contacts-24.png}|balise_img{'',cadre-icone}|concat{#VAL{contacts:infos_contacts_ou_organisations}|_T},'simple','titrem'}
+#BOITE_OUVRIR{#CHEMIN_IMAGE{contacts-24.png}
+	|balise_img{'',cadre-icone}
+	|concat{#VAL{contacts:infos_contacts_ou_organisations}|_T},'simple','titrem'}
 #SET{rien,0}#SET{contact,0}
 
 <BOUCLE_est_un_contact(CONTACTS){id_auteur}>
@@ -25,13 +27,13 @@
 		<p class='explication'><:contacts:explication_contacts_ou_organisations:></p>
 		
 		[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{contact-24.png}
-			|balise_img{<:contacts:definir_auteur_comme_contact:>}
+			|balise_img{<:contacts:definir_auteur_comme_contact:>}|inserer_attribut{class,co_middle}
 			|concat{' ',<:contacts:definir_auteur_comme_contact:>})],
 			[(#URL_ACTION_AUTEUR{definir_contact,contact/#ID_AUTEUR,#SELF})],
 			ajax})]
 			
 		[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{organisation-24.png}
-			|balise_img{<:contacts:definir_auteur_comme_organisation:>}
+			|balise_img{<:contacts:definir_auteur_comme_organisation:>}|inserer_attribut{class,co_middle}
 			|concat{' ',<:contacts:definir_auteur_comme_organisation:>})],
 			[(#URL_ACTION_AUTEUR{definir_contact,organisation/#ID_AUTEUR,#SELF})],
 			ajax})]
@@ -53,12 +55,6 @@
 					[(#URL_ACTION_AUTEUR{supprimer_contact,contact/#GET{id_contact},#SELF})],
 					ajax icone horizontale danger,<:contacts:confirmer_supprimer_contact:>})]
 			</p>
-			</div>
-		]
-		[(#GET{id_contact}|non)
-			<h3 class='h3'><:contacts:lier_contact:></h3>
-			<div class='ajax'>
-			[(#FORMULAIRE_LIER_CONTACT{#GET{id_organisation}})]
 			</div>
 		]
 	]
