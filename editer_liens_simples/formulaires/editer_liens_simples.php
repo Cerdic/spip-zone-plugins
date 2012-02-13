@@ -50,17 +50,18 @@ function formulaires_editer_liens_simples_charger_dist($a,$b,$c,$editable=true){
 
 	// verifier existence de la table xxx_yyy
 	include_spip('action/editer_liens_simples');
-	if (!$table_liaison = objet_associable_simple($objet_lien, $objet_source))
+	$objet_dest = ($objet_lien==$objet_source ? $objet : $objet_source);
+	if (!$table_liaison = objet_associable_simple($objet_lien, $objet_dest))
 		return false;
 
-
-	if (!$editable AND !count(objet_trouver_liens_simples(array($objet_lien=>'*'),array(($objet_lien==$objet_source?$objet:$objet_source)=>'*'))))
+	if (!$editable AND !count(objet_trouver_liens_simples(array($objet_lien=>'*'),array($objet_dest=>'*'))))
 		return false;
-	
+
+	$skel = table_objet($objet_lien) . '_' . table_objet($objet_dest) . '_' . table_objet($objet_source);
 	$valeurs = array(
 		'id'=>"$table_source-$objet-$id_objet-$objet_lien", // identifiant unique pour les id du form
-		'_vue_liee' => $table_source . '_' . table_objet($objet_lien) . "_lies",
-		'_vue_ajout' => $table_source . '_' . table_objet($objet_lien) . "_associer",
+		'_vue_liee' =>  $skel . "_lies",
+		'_vue_ajout' =>  $skel . "_associer",
 		'_objet_lien' => $objet_lien,
 		'id_lien_ajoute'=>_request('id_lien_ajoute'),
 		'objet'=>$objet,
