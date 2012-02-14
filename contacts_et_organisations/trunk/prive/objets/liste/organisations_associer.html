@@ -44,7 +44,7 @@ a mis a jour la valeur avec la page reelle]
 	<tbody>
 	<BOUCLE_liste_orga(ORGANISATIONS){!id_organisation IN #GET{exclus}}
 		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} coa}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_CONTACT|=={#ENV{id_lien_ajoute}}|oui)append]">
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
 			<td class="picto"><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#INCLURE{fond=logo/organisation, id_organisation}</a></td>
 			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a></td>
 			<td class='action'>

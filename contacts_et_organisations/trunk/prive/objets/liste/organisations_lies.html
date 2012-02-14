@@ -1,6 +1,5 @@
 [(#SET{defaut_tri,#ARRAY{
 	multi nom,1
-	type_liaison,1
 }})
 ]
 #SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
@@ -31,15 +30,15 @@ a mis a jour la valeur avec la page reelle]
 	
 		<tr class='first_row'>
 			<th class="picto" scope='col'></th>
-			<th class='nom' scope='col'>[(#TRI{nom,<:info_nom:>,ajax})]</th>
-			<th class="type" scope='col'>[(#TRI{type_liaison,<:contacts:label_type_liaison:>,ajax})]</th>
+			<th class='nom' scope='col'>[(#TRI{multi nom,<:info_nom:>,ajax})]</th>
+			<th class="type" scope='col'><:contacts:label_type_liaison:></th>
 			<th class='action' scope='col'></th>
 		</tr>
 	</thead>
 	<tbody>
 	<BOUCLE_liste_orga(ORGANISATIONS){id_organisation IN #GET{selection}}
 		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} col}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_CONTACT|=={#ENV{id_lien_ajoute}}|oui)append]">
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_ORGANISATION|=={#ENV{id_lien_ajoute}}|oui)append]">
 			<td class="picto"><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#INCLURE{fond=logo/organisation, id_organisation}</a></td>
 			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a></td>
 
@@ -67,7 +66,7 @@ a mis a jour la valeur avec la page reelle]
 [(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien#EVAL{chr(91)}organisation-*-contact-#ID_OBJET#EVAL{chr(93)}" value="X"><:contacts:organisation_retirer_tous_lien:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
 </div>
 </B_liste_orga>
-<div class="liste-objets liste-objets-lies organisations">
+<div class="liste-objets liste-objets-lies organisations caption-wrap">
 	<strong class="caption">[(#ENV*{titre,<:contacts:organisation_aucun:>})]</strong>
 </div>
 <//B_liste_orga>

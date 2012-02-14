@@ -22,6 +22,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chercher_contact' => 'Chercher',
 	'chercher_organisation' => 'Chercher',
 	'chercher_statut' => 'Statut',
+	'cfg_lier_organisations_rubriques' => 'Lier aux rubriques',
+	'cfg_lier_organisations_rubriques_explication' => 'Permettre de lier les organisations aux rubriques ?
+		Cela affiche le sélecteur d\'organisations sur les rubriques ainsi que le sélecteur de rubriques sur les organisations.',
 	'confirmer_delier_contact' => 'Êtes-vous sûr de vouloir délier cette organisation de ce contact ?',
 	'confirmer_delier_organisation' => 'Êtes-vous sûr de vouloir délier ce contact de cette organisation ?',
 	'confirmer_delier_organisation_rubrique' => 'Êtes-vous sûr de vouloir délier cette organisation de cette rubrique ?',
@@ -161,6 +164,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_contacts' => 'Gestion des contacts',
 	'titre_page_organisations' => 'Gestion des organisations',
 	'titre_page_repertoire' => 'Répertoire',
+	'titre_page_configurer_contacts_et_organisations' => 'Configurer Contacts & Organisations',
+	'titre_parametrages' => 'Paramétrages',
 	'tous' => 'Tous'
 );
 

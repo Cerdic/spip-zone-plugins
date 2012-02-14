@@ -1,6 +1,5 @@
 [(#SET{defaut_tri,#ARRAY{
 	multi nom,1
-	type_liaison,1
 }})
 ]
 #SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
@@ -32,7 +31,7 @@ a mis a jour la valeur avec la page reelle]
 		<tr class='first_row'>
 			<th class="picto" scope='col'></th>
 			<th class="nom" scope='col'>[(#TRI{multi nom,<:contacts:label_nom:>,ajax})]</th>
-			<th class="type" scope='col'>[(#TRI{type_liaison,<:contacts:label_type_liaison:>,ajax})]</th>
+			<th class="type" scope='col'><:contacts:label_type_liaison:></th>
 			<th class='action' scope='col'></th>
 		</tr>
 	</thead>
@@ -68,7 +67,7 @@ a mis a jour la valeur avec la page reelle]
 [(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien#EVAL{chr(91)}organisation-#ID_OBJET-contact-*#EVAL{chr(93)}" value="X"><:contacts:contact_retirer_tous_lien:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
 </div>
 </B_contacts>
-<div class="liste-objets  liste-objets-lies contacts">
+<div class="liste-objets  liste-objets-lies contacts caption-wrap">
 	<strong class="caption">[(#ENV*{titre,<:contacts:contact_aucun:>})]</strong>
 </div>
 <//B_contacts>

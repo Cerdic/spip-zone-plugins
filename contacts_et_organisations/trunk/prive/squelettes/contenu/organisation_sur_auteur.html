@@ -40,7 +40,11 @@
 	#FORMULAIRE_EDITER_LIENS_SIMPLES{organisation,#ID_ORGANISATION,contacts,#AUTORISER{modifier,organisation,#ID_ORGANISATION}}
 </div>
 
-
+[(#CONFIG{contacts_et_organisations/lier_organisations_rubriques}|oui)
+<div class="ajax">
+	#FORMULAIRE_EDITER_LIENS{organisation,#ID_ORGANISATION,rubriques,#AUTORISER{modifier,organisation,#ID_ORGANISATION}}
+</div>
+]
 
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,organisation,id,#ID_ORGANISATION},data,'<div class="nettoyeur"></div>'}}
 

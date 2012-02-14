@@ -58,14 +58,17 @@ function contacts_afficher_contenu_objet($flux)
 	
 	if ($flux['args']['type'] == 'rubrique') 
 	{
-		$id = $flux['args']['id_objet'];
-		$infos = recuperer_fond('prive/objets/editer/liens', array(
-			'table_source'=>'organisations',
-			'objet'=>'rubrique',
-			'id_objet'=>$id,
-			'editable'=>autoriser('associerorganisation', 'rubrique', $id) ? 'oui':'non'
-		));
-		$flux['data'] .= $infos;
+		include_spip('inc/config');
+		if (lire_config('contacts_et_organisations/lier_organisations_rubriques')) {
+			$id = $flux['args']['id_objet'];
+			$infos = recuperer_fond('prive/objets/editer/liens', array(
+				'table_source'=>'organisations',
+				'objet'=>'rubrique',
+				'id_objet'=>$id,
+				'editable'=>autoriser('associerorganisation', 'rubrique', $id) ? 'oui':'non'
+			));
+			$flux['data'] .= $infos;
+		}
 	} 
 	
 	return $flux;
