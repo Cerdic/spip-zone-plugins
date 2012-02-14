@@ -52,7 +52,7 @@ a mis a jour la valeur avec la page reelle]
 					{id_objet=#ENV{id_objet}}{objet=#ENV{objet}}{id_organisation}>
 					<td class='type #EDIT{type_liaison}'>[(#TYPE_LIAISON|sinon{-})]</td>
 				</BOUCLE_liaison_autre>
-			<//B_sur_contact>
+			<//B_liaison_sur_contact>
 		
 			<td class='action'>
 				[(#AUTORISER{modifier, organisation, #ID_ORGANISATION}|oui)
