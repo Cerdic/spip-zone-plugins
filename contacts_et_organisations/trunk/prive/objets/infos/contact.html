@@ -2,7 +2,7 @@
 <div class='infos'>
 <div class='numero'><:contacts:contact_numero:><p>#ID_CONTACT</p></div>
 
-
+<BOUCLE_si_auteurs(CONDITION){si #CONFIG{contacts_et_organisations/associer_aux_auteurs}}>
 	<BOUCLE_auteur_lie(AUTEURS){id_auteur}{tout}{statut==.*}{si #ID_AUTEUR}>
 	<div class="numero">
 		<div class='num'>
@@ -22,6 +22,7 @@
 		]
 	</div>
 	</BOUCLE_auteur_lie>
+</BOUCLE_si_auteurs>
 
 </div>
 

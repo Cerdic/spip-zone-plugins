@@ -14,13 +14,15 @@
 function contacts_affiche_hierarchie($flux)
 {
 	if ($flux['args']['objet'] == 'auteur') {
-		$id = intval($flux['args']['id_objet']);
-		// cherchons un contact
-		if ($id_contact = sql_getfetsel('id_contact', 'spip_contacts', 'id_auteur ='.$id)) {
-			$flux['data'] = recuperer_fond('prive/squelettes/hierarchie/contact', array('id_contact'=>$id_contact)) . '<br />' . $flux['data'];
-		// sinon une organisation
-		} elseif ($id_organisation = sql_getfetsel('id_organisation', 'spip_organisations', 'id_auteur ='.$id)) {
-			$flux['data'] = recuperer_fond('prive/squelettes/hierarchie/organisation', array('id_organisation'=>$id_organisation)) . '<br />' . $flux['data'];
+		if (lire_config('contacts_et_organisations/associer_aux_auteurs')) {
+			$id = intval($flux['args']['id_objet']);
+			// cherchons un contact
+			if ($id_contact = sql_getfetsel('id_contact', 'spip_contacts', 'id_auteur ='.$id)) {
+				$flux['data'] = recuperer_fond('prive/squelettes/hierarchie/contact', array('id_contact'=>$id_contact)) . '<br />' . $flux['data'];
+			// sinon une organisation
+			} elseif ($id_organisation = sql_getfetsel('id_organisation', 'spip_organisations', 'id_auteur ='.$id)) {
+				$flux['data'] = recuperer_fond('prive/squelettes/hierarchie/organisation', array('id_organisation'=>$id_organisation)) . '<br />' . $flux['data'];
+			}
 		}
 	}
 
@@ -40,8 +42,8 @@ function contacts_afficher_contenu_objet($flux)
 {
 	if ($flux['args']['type'] == 'auteur') {
 
-		include_spip('inc/config');
-		if (lire_config('contacts_et_organisations/afficher_infos_sur_auteurs')) {
+		if (lire_config('contacts_et_organisations/associer_aux_auteurs') and
+			lire_config('contacts_et_organisations/afficher_infos_sur_auteurs')) {
 
 			$id = intval($flux['args']['id_objet']);
 
@@ -62,7 +64,6 @@ function contacts_afficher_contenu_objet($flux)
 	
 	if ($flux['args']['type'] == 'rubrique') 
 	{
-		include_spip('inc/config');
 		if (lire_config('contacts_et_organisations/lier_organisations_rubriques')) {
 			$id = $flux['args']['id_objet'];
 			$infos = recuperer_fond('prive/objets/editer/liens', array(
@@ -90,9 +91,11 @@ function contacts_afficher_contenu_objet($flux)
 function contacts_affiche_gauche($flux){
 
 	if ($flux['args']['exec'] == 'auteur'){
-		$flux['data'] .= recuperer_fond('prive/squelettes/extra/selecteur_contacts_organisations', array(
-			'id_auteur' => $flux['args']['id_auteur']
-		));
+		if (lire_config('contacts_et_organisations/associer_aux_auteurs')) {
+			$flux['data'] .= recuperer_fond('prive/squelettes/extra/selecteur_contacts_organisations', array(
+				'id_auteur' => $flux['args']['id_auteur']
+			));
+		}
 	}
 
 	return $flux;

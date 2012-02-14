@@ -28,6 +28,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_afficher_infos_sur_auteurs' => 'Affichage détaillé des auteurs ?',
 	'cfg_afficher_infos_sur_auteurs_explication' => 'Afficher les infos de contact ou d\'organisation
 		également sur les pages auteurs dans l\'espace privé ?',
+	'cfg_associer_aux_auteurs' => 'Associer aux auteurs ?',
+	'cfg_associer_aux_auteurs_explication' => 'Permettre d\'associer des contacts ou organisations
+		aux auteurs. Cela ajoute un formulaire pour associer un auteur sur les pages contact ou organisation,
+		et inversement cela ajoute un formulaire pour lier un contact ou une organisation sur les pages des auteurs.',
 	'cfg_lier_organisations_rubriques' => 'Lier aux rubriques',
 	'cfg_lier_organisations_rubriques_explication' => 'Permettre de lier les organisations aux rubriques ?
 		Cela affiche le sélecteur d\'organisations sur les rubriques ainsi que le sélecteur de rubriques sur les organisations.',
