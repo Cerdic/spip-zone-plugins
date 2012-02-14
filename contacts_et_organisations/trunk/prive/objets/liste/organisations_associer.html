@@ -1,6 +1,5 @@
 [(#SET{defaut_tri,#ARRAY{
 	multi nom,1
-	type_liaison,1
 }})
 ]
 #SET{exclus,#ENV**{exclus,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
@@ -39,7 +38,6 @@ a mis a jour la valeur avec la page reelle]
 		<tr class='first_row'>
 			<th class="picto" scope='col'></th>
 			<th class='nom' scope='col'>[(#TRI{multi nom,<:info_nom:>,ajax})]</th>
-			<th class="type" scope='col'>[(#TRI{type_liaison,<:contacts:label_type_liaison:>,ajax})]</th>
 			<th class='action' scope='col'></th>
 		</tr>
 	</thead>
@@ -49,7 +47,6 @@ a mis a jour la valeur avec la page reelle]
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_CONTACT|=={#ENV{id_lien_ajoute}}|oui)append]">
 			<td class="picto"><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#INCLURE{fond=logo/organisation, id_organisation}</a></td>
 			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a></td>
-			<td class='type'>[(#TYPE_LIAISON|sinon{-})]</td>
 			<td class='action'>
 				[(#AUTORISER{modifier, organisation, #ID_ORGANISATION}|oui)
 					<button class="button link add" name="ajouter_lien#EVAL{chr(91)}organisation-#ID_ORGANISATION-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="+"><:contacts:organisation_ajouter:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>

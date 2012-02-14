@@ -3,7 +3,7 @@
 	type_liaison,1
 }})
 ]
-#SET{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
+#SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
 #SET{debut,#ENV{debutcol,#EVAL{_request("debutcol");}}}
 <B_liste_orga>
 [(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
@@ -40,17 +40,25 @@ a mis a jour la valeur avec la page reelle]
 	<BOUCLE_liste_orga(ORGANISATIONS){id_organisation IN #GET{selection}}
 		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} col}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_CONTACT|=={#ENV{id_lien_ajoute}}|oui)append]">
-		[(#REM) sur boucle pour le crayon ]
-		<BOUCLE_liaisons(organisations_liens){id_objet=#ENV{id_objet}}{objet=#ENV{objet}}{id_organisation}>
 			<td class="picto"><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#INCLURE{fond=logo/organisation, id_organisation}</a></td>
-			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#_liste_orga:NOM</a></td>
-			<td class='type #EDIT{type_liaison}'>[(#TYPE_LIAISON|sinon{-})]</td>
+			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a></td>
+
+			[(#REM) sur boucle pour le crayon, en fonction de la table de liaison ]
+			<BOUCLE_liaison_sur_contact(organisations_contacts){si (#ENV{objet}|=={contact})}
+				{id_contact=#ENV{id_objet}}{id_organisation}>
+				<td class='type #EDIT{type_liaison}'>[(#TYPE_LIAISON|sinon{-})]</td>
+			</BOUCLE_liaison_sur_contact>
+				<BOUCLE_liaison_autre(organisations_liens)
+					{id_objet=#ENV{id_objet}}{objet=#ENV{objet}}{id_organisation}>
+					<td class='type #EDIT{type_liaison}'>[(#TYPE_LIAISON|sinon{-})]</td>
+				</BOUCLE_liaison_autre>
+			<//B_sur_contact>
+		
 			<td class='action'>
 				[(#AUTORISER{modifier, organisation, #ID_ORGANISATION}|oui)
 					<button class="button link delete" name="supprimer_lien#EVAL{chr(91)}organisation-#ID_ORGANISATION-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:contacts:organisation_retirer_lien:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
 				]
 			</td>
-		</BOUCLE_liaisons>
 		</tr>
 	</BOUCLE_liste_orga>
 	</tbody>
