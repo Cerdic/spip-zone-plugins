@@ -24,6 +24,7 @@ function action_lier_organisation_auteur_dist($arg=null) {
 	}
 }
 
+
 function action_lier_organisation_auteur_post($id_organisation, $id_auteur) {
 
 	$id_auteur = intval($id_auteur); // id_auteur peut valoir 0 pour une deliaison

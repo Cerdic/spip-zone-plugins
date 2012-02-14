@@ -19,8 +19,10 @@ function action_editer_contact_dist($arg=null) {
 		$id_contact = contact_inserer();
 		// si parent d'organisation transmis, on le sauve
 		if ($id_organisation = intval(_request('id_parent'))) {
-			$lier_contact = charger_fonction('lier_contact', 'action');
-			$lier_contact("$id_contact/$id_organisation");
+			include_spip('action/editer_liens_simples');
+			objet_associer_simples(
+				array('organisation'=>$id_organisation),
+				array('contact'=>$id_contact));
 		}
 	}
 

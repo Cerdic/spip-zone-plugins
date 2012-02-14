@@ -29,66 +29,24 @@ function action_definir_contact_dist($arg=null) {
 
 function action_definir_contact_post($id_auteur) {
 	$id_auteur = intval($id_auteur);
-	return insert_contact($id_auteur);
+	$nom = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . $id_auteur);
+	include_spip('action/editer_contact');
+	return contact_inserer(array(
+		'id_auteur' => $id_auteur,
+		'nom' => $nom,
+	));
 }
 
 function action_definir_organisation_post($id_auteur) {
 	$id_auteur = intval($id_auteur);
-	return insert_organisation($id_auteur);
-}
-
-
-function insert_contact($id_auteur=0) {
-	// récupérer le nom
-	$nom = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . $id_auteur);	
-
-	$champs = array(
+	$nom = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . $id_auteur);
+	include_spip('action/editer_organisation');
+	return organisation_inserer(array(
+		'id_auteur' => $id_auteur,
 		'nom' => $nom,
-		'id_auteur' => $id_auteur
-	);
-	
-	// Envoyer aux plugins
-	$champs = pipeline('pre_insertion', array(
-		'args' => array(
-			'table' => 'spip_contacts',
-		),
-		'data' => $champs
 	));
-
-	$id_contact = sql_insertq("spip_contacts", $champs);
-	
-	//compatibilite
-		$champs = array(
-			'id_contact' => $id_contact,
-			'objet' => 'auteur',
-			'id_objet' => $id_auteur
-		);
-		sql_insertq("spip_contacts_liens", $champs);
-	
-	return $id_contact;
 }
 
-function insert_organisation($id_auteur=0) {
-
-	// récupérer le nom
-	$nom = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . $id_auteur);	
-
-	$champs = array(
-		'nom' => $nom,
-		'id_auteur' => $id_auteur
-	);
-	
-	// Envoyer aux plugins
-	$champs = pipeline('pre_insertion', array(
-		'args' => array(
-			'table' => 'spip_organisations',
-		),
-		'data' => $champs
-	));
-
-	$id_organisation = sql_insertq("spip_organisations", $champs);
-	return $id_organisation;
-}
 
 
 ?>
