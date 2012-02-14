@@ -25,6 +25,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_activer_squelettes_publics_zpip1' => 'Squelettes publics ZPIP v1',
 	'cfg_activer_squelettes_publics_zpip1_explication' => 'Activer les squelettes publics pour ZPIP en version 1,
 		permettant le parcourir les contacts et organisations dans l\'espace public ?',
+	'cfg_afficher_infos_sur_auteurs' => 'Affichage détaillé des auteurs ?',
+	'cfg_afficher_infos_sur_auteurs_explication' => 'Afficher les infos de contact ou d\'organisation
+		également sur les pages auteurs dans l\'espace privé ?',
 	'cfg_lier_organisations_rubriques' => 'Lier aux rubriques',
 	'cfg_lier_organisations_rubriques_explication' => 'Permettre de lier les organisations aux rubriques ?
 		Cela affiche le sélecteur d\'organisations sur les rubriques ainsi que le sélecteur de rubriques sur les organisations.',
