@@ -22,6 +22,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chercher_contact' => 'Chercher',
 	'chercher_organisation' => 'Chercher',
 	'chercher_statut' => 'Statut',
+	'cfg_activer_squelettes_publics_zpip1' => 'Squelettes publics ZPIP v1',
+	'cfg_activer_squelettes_publics_zpip1_explication' => 'Activer les squelettes publics pour ZPIP en version 1,
+		permettant le parcourir les contacts et organisations dans l\'espace public ?',
 	'cfg_lier_organisations_rubriques' => 'Lier aux rubriques',
 	'cfg_lier_organisations_rubriques_explication' => 'Permettre de lier les organisations aux rubriques ?
 		Cela affiche le sélecteur d\'organisations sur les rubriques ainsi que le sélecteur de rubriques sur les organisations.',
