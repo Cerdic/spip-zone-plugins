@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		les informations relatives à cette organisation ?',
 	'contact' => 'Contact',
 	'contact_ajouter' => 'Ajouter un contact',
+	'contact_ajouter_lien' => 'Ajouter ce contact',
 	'contact_aucun' => 'Aucun contact',
 	'contact_associe_a_auteur_numero' => 'Associée à auteur numéro',
 	'contact_associer_a_auteur' => 'Associer à un auteur',
@@ -135,6 +136,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'organisation' => 'Organisation',
 	'organisation_ajouter' => 'Ajouter une organisation',
+	'organisation_ajouter_lien' => 'Ajouter cette organisation',
 	'organisation_associe_a_auteur_numero' => 'Associée à auteur numéro',
 	'organisation_associer_a_auteur' => 'Associer à un auteur',
 	'organisation_aucun' => 'Aucune organisation',

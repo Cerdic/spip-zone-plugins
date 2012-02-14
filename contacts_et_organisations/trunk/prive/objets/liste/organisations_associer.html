@@ -49,7 +49,7 @@ a mis a jour la valeur avec la page reelle]
 			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a></td>
 			<td class='action'>
 				[(#AUTORISER{modifier, organisation, #ID_ORGANISATION}|oui)
-					<button class="button link add" name="ajouter_lien#EVAL{chr(91)}organisation-#ID_ORGANISATION-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="+"><:contacts:organisation_ajouter:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
+					<button class="button link add" name="ajouter_lien#EVAL{chr(91)}organisation-#ID_ORGANISATION-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="+"><:contacts:organisation_ajouter_lien:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
 				]
 			</td>
 		</tr>
