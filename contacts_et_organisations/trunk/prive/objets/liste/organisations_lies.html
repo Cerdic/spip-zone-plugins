@@ -3,7 +3,7 @@
 	type_liaison,1
 }})
 ]
-#SET{selection,#ENV{objet_source}|lister_objets_lies_simples{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
+#SET{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
 #SET{debut,#ENV{debutcol,#EVAL{_request("debutcol");}}}
 <B_liste_orga>
 [(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
@@ -41,13 +41,13 @@ a mis a jour la valeur avec la page reelle]
 		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} col}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_CONTACT|=={#ENV{id_lien_ajoute}}|oui)append]">
 		[(#REM) sur boucle pour le crayon ]
-		<BOUCLE_liaisons(organisations_contacts){id_contact=#ENV{id_objet}}{id_organisation}>
+		<BOUCLE_liaisons(organisations_liens){id_objet=#ENV{id_objet}}{objet=#ENV{objet}}{id_organisation}>
 			<td class="picto"><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#INCLURE{fond=logo/organisation, id_organisation}</a></td>
 			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#_liste_orga:NOM</a></td>
 			<td class='type #EDIT{type_liaison}'>[(#TYPE_LIAISON|sinon{-})]</td>
 			<td class='action'>
 				[(#AUTORISER{modifier, organisation, #ID_ORGANISATION}|oui)
-					<button class="button link delete" name="supprimer_lien#EVAL{chr(91)}organisation-#ID_ORGANISATION-contact-#ID_CONTACT#EVAL{chr(93)}" value="X"><:contacts:organisation_retirer_lien:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+					<button class="button link delete" name="supprimer_lien#EVAL{chr(91)}organisation-#ID_ORGANISATION-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:contacts:organisation_retirer_lien:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
 				]
 			</td>
 		</BOUCLE_liaisons>
@@ -59,7 +59,7 @@ a mis a jour la valeur avec la page reelle]
 [(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien#EVAL{chr(91)}organisation-*-contact-#ID_OBJET#EVAL{chr(93)}" value="X"><:contacts:organisation_retirer_tous_lien:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
 </div>
 </B_liste_orga>
-<div class="liste-objets  liste-objets-lies organisations">
+<div class="liste-objets liste-objets-lies organisations">
 	<strong class="caption">[(#ENV*{titre,<:contacts:organisation_aucun:>})]</strong>
 </div>
 <//B_liste_orga>
