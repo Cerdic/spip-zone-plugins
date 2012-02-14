@@ -19,25 +19,25 @@
 
 				<B_oc>
 				<h3 class="h3"><:contacts:label_nom_organisation:></h3>
-                <ul>
+				<ul>
 				<BOUCLE_oc(ORGANISATIONS){id_contact}>
 				<li class="item #EDIT{nom}">#NOM</li>
 				</BOUCLE_oc>
 				</B_oc>
-                <li class="erreur">pas d'organisation trouvée</li>
+				<li class="erreur">pas d'organisation trouvée</li>
 				<//B_oc>
 				</ul>
 			
 				<h3 class="h3"><:contacts:label_fonction:></h3>
-                <ul class="liste-item">
+				<ul class="liste-item">
 				<li class="item #EDIT{fonction}">[(#FONCTION|sinon{'...'})]</li>
                 </ul>
 				
 				[(#PLUGIN{coordonnees}|oui)
-                    [(#INCLURE{fond=inclure/adresses, id_auteur})]
-                    [(#INCLURE{fond=inclure/telephones, id_auteur})]
-                    [(#INCLURE{fond=inclure/mails, id_auteur})]
-                ]
+					[(#INCLURE{fond=inclure/adresses, id_auteur})]
+					[(#INCLURE{fond=inclure/telephones, id_auteur})]
+					[(#INCLURE{fond=inclure/mails, id_auteur})]
+				]
 				
 			
 			</dl>
