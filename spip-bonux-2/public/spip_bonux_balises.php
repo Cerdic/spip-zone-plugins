@@ -529,37 +529,38 @@ function produire_fond_statique($fond, $contexte=array(), $options = array(), $c
 	}
 	else {
 		$extension = "html";
-		if (preg_match(',[.](css|js)$,',$fond,$m))
+		if (preg_match(',[.](css|js|json)$,',$fond,$m))
 			$extension = $m[1];
 	}
 	// recuperer le contenu produit par le squelette
 	$options['raw'] = true;
 	$cache = recuperer_fond($fond,$contexte,$options,$connect);
-
-  // calculer le nom de la css
+	
+	// calculer le nom de la css
 	$dir_var = sous_repertoire (_DIR_VAR, 'cache-'.$extension);
 	$filename = $dir_var . $extension."dyn-".md5($fond.serialize($contexte).$connect) .".$extension";
 
 	// mettre a jour le fichier si il n'existe pas
 	// ou trop ancien
-  if (!file_exists($filename)
-	  OR filemtime($filename)<$cache['lastmodified']
-    OR $GLOBALS['var_mode']=='recalcul'){
-
-	  $contenu = $cache['texte'];
-	  // passer les urls en absolu si c'est une css
-	  if ($extension=="css")
-	    $contenu = urls_absolues_css($contenu, generer_url_public($fond));
-
-    $comment = "/* #PRODUIRE{fond=$fond";
-    foreach($contexte as $k=>$v)
-	    $comment .= ",$k=$v";
-    $comment .="} le ".date("Y-m-d H:i:s")." */\n";
-	  // et ecrire le fichier
-    ecrire_fichier($filename,$comment.$contenu);
-  }
-
-  return $filename;
+	if (!file_exists($filename)
+		OR filemtime($filename)<$cache['lastmodified']
+		OR $GLOBALS['var_mode']=='recalcul') {
+		$contenu = $cache['texte'];
+		// passer les urls en absolu si c'est une css
+		if ($extension=="css")
+			$contenu = urls_absolues_css($contenu, generer_url_public($fond));
+		// ne pas insérer de commentaire si c'est du json
+		if ($extension!="json") {
+			$comment = "/* #PRODUIRE{fond=$fond";
+			foreach($contexte as $k=>$v)
+				$comment .= ",$k=$v";
+			$comment .="} le ".date("Y-m-d H:i:s")." */\n";
+		}
+		// et ecrire le fichier
+		ecrire_fichier($filename,$comment.$contenu);
+	}
+	
+	return $filename;
 }
 
 function produire_css_fond($fond, $contexte=array(), $options = array(), $connect=''){
