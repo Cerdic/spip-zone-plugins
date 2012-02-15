@@ -93,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_icones' => 'Zoznam ikon',
 
 	// N
-	'ne_pas_definir_d_heritage' => 'Ne pas définir d\'héritage', # NEW
+	'ne_pas_definir_d_heritage' => 'Nedefinovať dedičnosť',
 	'noisettes_composition' => 'Noisettes spécifiques à la composition <i>@composition@</i> :', # NEW
 	'noisettes_page' => 'Noisettes spécifiques à la page <i>@type@</i> :', # NEW
 	'noisettes_toutes_pages' => 'Oriešky spoločné pre všetky stránky:',
