@@ -1,10 +1,17 @@
 <?php
 
+
 // trac SVN
 # @define('_URL_BROWSER_TRAC', 'http://trac.rezo.net/trac/spip/browser/spip/');
 
 // trac GIT
-@define('_URL_BROWSER_TRAC', 'http://core.spip.org/trac/spip/browser/@file@?rev=spip-2.1');
+#@define('_URL_BROWSER_TRAC', 'http://core.spip.org/trac/spip/browser/@file@?rev=spip-2.1');
+
+// redmine SVN (trunk)
+@define('_URL_BROWSER_TRAC', 'http://core.spip.org/projects/spip/repository/entry/spip/@file@');
+
+// redmine SVN (branche 2.1)
+#@define('_URL_BROWSER_TRAC', 'http://core.spip.org/projects/spip/repository/entry/branches/spip-2.1/@file@');
 
 /*
  * Un raccourci pour des chemins vers de trac
