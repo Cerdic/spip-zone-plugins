@@ -253,4 +253,16 @@ function tradlang_utf8($str){
 	);
 	return $str;
 }
+
+/**
+ * Fonction qui vérifie que le code de langue spécifié en paramètre est utilisable
+ */
+function langue_possible($langue){
+	include_spip('inc/lang');
+	$langues = $GLOBALS['codes_langues'];
+	if(key_exists($langue,$langues)){
+		return true;
+	}
+	return false;
+}
 ?>

@@ -3,7 +3,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('base/abstract_sql');
 
-function formulaires_tradlang_choisir_module_charger($id_tradlang_module="",$lang_orig="",$lang_cible="",$lang_crea=""){
+function formulaires_tradlang_choisir_module_charger($id_tradlang_module="",$lang_orig="fr",$lang_cible="",$lang_crea=""){
 	$module_defaut = sql_getfetsel('id_tradlang_module','spip_tradlang_modules','',array('priorite','nom_mod'),'','0,1');
 	$id_tradlang_module = _request('id_tradlang_module') ? _request('id_tradlang_module') : $id_tradlang_module;
 	/**
@@ -20,10 +20,14 @@ function formulaires_tradlang_choisir_module_charger($id_tradlang_module="",$lan
 	
 	if(!sql_getfetsel('module','spip_tradlang_modules','id_tradlang_module='.intval($id_tradlang_module))){
 		$valeurs['id_tradlang_module'] = $id_tradlang_module = $module_defaut;
+	}else{
+		$valeurs['id_tradlang_module'] = $id_tradlang_module;
 	}
 	
 	include_spip('inc/autoriser');
 	if(autoriser('modifier','tradlang')){
+		$infos_module = sql_fetsel('*','spip_tradlang_modules',"id_tradlang_module=".intval($id_tradlang_module));
+
 		$valeurs = array('id_tradlang_module' => $id_tradlang_module,'lang_orig' => $lang_orig,'lang_cible'=>$lang_cible,'lang_crea'=> $lang_crea);
 		foreach($valeurs as $key => $val){
 			if(_request($key)){
@@ -31,9 +35,17 @@ function formulaires_tradlang_choisir_module_charger($id_tradlang_module="",$lan
 			}
 		}
 		
-		$infos_module = sql_fetsel('*','spip_tradlang_modules',"id_tradlang_module=".intval($id_tradlang_module));
+		/**
+		 * On vérifie que la langue d'origine choisie dans l'url est correctement traduite 
+		 * sinon on passe à la langue mère
+		 */
+		$compte_total_mere = sql_getfetsel('COUNT(*)','spip_tradlang','id_tradlang_module='.intval($valeurs['id_tradlang_module']).' AND statut="OK" AND lang='.sql_quote($infos_module['lang_mere']));
+		$compte_total_orig = sql_getfetsel('COUNT(*)','spip_tradlang','id_tradlang_module='.intval($valeurs['id_tradlang_module']).' AND statut="OK" AND lang='.sql_quote($lang_orig));
+		if($compte_total_mere != $compte_total_orig){
+			$valeurs['lang_orig'] = $infos_module['lang_mere'];
+		}
+
 		$valeurs['lang_mere'] = $infos_module['lang_mere'];
-		//$count_mere = sql_count('spip_tradlang','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($valeurs['lang_mere']))
 		include_spip('inc/lang_liste');
 		$langues_possibles = $GLOBALS['codes_langues'];
 		
@@ -61,7 +73,6 @@ function formulaires_tradlang_choisir_module_charger($id_tradlang_module="",$lan
 		if(!$lang_orig){
 			$valeurs['lang_orig'] = $valeurs['lang_mere'];
 		}
-		//spip_log($valeurs,'chiotte');
 	}else{
 		$valeurs['editable'] = false;
 		$valeurs['message_erreur'] = _T('tradlang:erreur_autorisation_modifier_modules');
