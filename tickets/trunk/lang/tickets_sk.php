@@ -35,8 +35,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_autorisation_webmestre' => 'Povoliť iba webmasterom',
 	'cfg_lbl_cacher_moteurs' => 'Schovať vyhľadávače',
 	'cfg_lbl_case_joindre_fichiers' => 'Povoliť pripájanie súborov k lístkom',
-	'cfg_lbl_case_notification_publique' => 'Être notifié dans l\'espace public plutôt que dans l\'espace privé (Nécessite Zpip)', # NEW
-	'cfg_lbl_case_selecteur_navigateur' => 'Disposer d\'un sélecteur de navigateur dans le formulaire d\'édition de ticket', # NEW
+	'cfg_lbl_case_notification_publique' => 'Oznamovať cez verejne prístupnú stránku namiesto súkromnej zóny (vyžaduje si Zpip)',
+	'cfg_lbl_case_selecteur_navigateur' => 'Ponúkať oddeľovač prehliadača vo formulári na úpravu lístka',
 	'cfg_lbl_composants' => 'Súčasti',
 	'cfg_lbl_desactiver_public' => 'Deaktivovať verejný prístup',
 	'cfg_lbl_forums_publics' => 'Komentáre na lístky',
@@ -132,7 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tickets_redac' => 'upravuje sa',
 
 	// L
-	'label_paginer_par' => 'Paginer par :', # NEW
+	'label_paginer_par' => 'Stránkovať od:',
 	'lien_filtrer' => 'Rozriediť lístky',
 	'lien_supprimer_filtres' => 'Odstrániť všetky filtre',
 
@@ -194,8 +194,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tickets_en_cours_auteur' => 'Lístky @nom@, ktoré sa spracúvajú',
 	'tickets_general' => 'Všeobecné',
 	'tickets_sticked' => 'Prilepené lístky',
-	'tickets_sur_inscription' => 'L\'écriture des tickets ou commentaires n\'est possible qu\'aux personnes identifiées.', # NEW
-	'tickets_sur_inscription_droits' => 'Les droits dont vous disposez sont insuffisants.', # NEW
+	'tickets_sur_inscription' => 'Písať lístky alebo komentáre môžu iba prihlásení používatelia',
+	'tickets_sur_inscription_droits' => 'Práva, ktoré máte, nie sú dostatočné.',
 	'tickets_traites' => 'Všetky spracované lístky',
 	'tickets_tries' => 'Lístky, ktoré vyhovujú vašim kriktériám',
 	'titre' => 'Lístky, sledovanie chýb',
