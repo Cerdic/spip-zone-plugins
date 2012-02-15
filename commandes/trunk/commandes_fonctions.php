@@ -7,6 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function commandes_lister_statuts($statut=false){
 	$statuts =  array(
 		'encours' => _T('commandes:statut_encours'),
+		'erreur' => _T('commandes:statut_erreur'),
 		'attente' => _T('commandes:statut_attente'),
 		'partiel' => _T('commandes:statut_partiel'),
 		'paye' => _T('commandes:statut_paye'),
@@ -18,7 +19,7 @@ function commandes_lister_statuts($statut=false){
 	if ($statut and $nom = $statuts[$statut])
 		return $nom;
 	else
-		return $statut;
+		return $statuts;
 }
 
 // Qui est le premier webmester ?
