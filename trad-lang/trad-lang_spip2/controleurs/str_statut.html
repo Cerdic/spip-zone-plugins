@@ -6,43 +6,43 @@
 #CACHE{0}
 <B_a>
 <BOUCLE_a(TRADLANG tradlang_modules){id_tradlang}>
-<fieldset style="#ENV{style}">
+<fieldset>
+<legend>TRADLANG ##ID_TRADLANG</legend>
 <ul>
-
-<li class="editer_statut">
-	<label><:tradlang:label_tradlang_status:></label>
-	<select class="text crayon_active" name="#ENV{name_statut}" id="statut">
-		<option value="OK"[(#STATUT|=={OK}|oui)selected="selected"]><:tradlang:str_status_traduit:></option>
-		<option value="MODIF"[(#STATUT|=={MODIF}|oui)selected="selected"]><:tradlang:str_status_modif:></option>
-		<option value="NEW"[(#STATUT|=={NEW}|oui)selected="selected"]><:tradlang:str_status_new:></option>
-	</select>
-</li>
-<BOUCLE_orig(TRADLANG){id=#ID}{module=#MODULE}{lang=#LANG_MERE}>
-<script type='text/javascript'>
-	var contenu_orig = '[(#STR**|tradlang_utf8|entites_html|replace{"\n","_"}|replace{"\r",""}|replace{"\t",""})]';
-	var me = cQuery(".tradlang-str_statut-#_a:ID_TRADLANG");
-	var id = me.crayon().find('form');
-	cQuery(id).bind('form-submit-validate',function(truc,a, e, options, veto){
-		var newstatut = cQuery(id).find('#statut').val();
-		var new_contenu = cQuery(id).find('#str').val().replace(/\n/,'_');
-		if((new_contenu != contenu_orig) && (newstatut != 'OK'))
-			if(!window.confirm('<:tradlang:crayon_changer_statut|filtrer_entites|texte_script:>')){
-				veto.veto = true;
-			}
-	});
-</script>
-<li class="original">
-	<div>
-	<label><:tradlang:label_version_originale{lang=#LANG}:></label>
-	<textarea readonly="readonly" class="crayon-active readonly" style="width:#ENV{largeur}px;text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
-	</div>
-</li>
-</BOUCLE_orig>
-<li class="editer_str">
-	<label><:tradlang:label_tradlang_str:></label>
-	<textarea class="crayon-active" name="#ENV{name_str}" id="str"
-	 style="width:#ENV{largeur}px; height:#ENV{hauteur}px;#ENV{style};text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
-</li>
+	<li class="editer editer_statut">
+		<label for="statut_#ID_TRADLANG"><:tradlang:label_tradlang_status:></label>
+		<select class="text crayon_active" name="#ENV{name_statut}" id="statut_#ID_TRADLANG" style="width:#ENV{largeur}px;text-align:#LANG_LEFT;" dir="#LANG_DIR">
+			<option value="OK"[(#STATUT|=={OK}|oui)selected="selected"]><:tradlang:str_status_traduit:></option>
+			<option value="MODIF"[(#STATUT|=={MODIF}|oui)selected="selected"]><:tradlang:str_status_modif:></option>
+			<option value="NEW"[(#STATUT|=={NEW}|oui)selected="selected"]><:tradlang:str_status_new:></option>
+		</select>
+	</li>
+	<BOUCLE_orig(TRADLANG){id=#ID}{module=#MODULE}{lang=#VAL{lang_orig}|_request|sinon{#LANG_MERE}}>
+	<li class="editer original">
+		<div>
+		<label><:tradlang:label_version_originale{lang=#LANG}:></label>
+		<textarea readonly="readonly" class="crayon-active readonly" style="width:#ENV{largeur}px;text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
+		</div>
+	</li>
+	</BOUCLE_orig>
+	<li class="editer editer_str">
+		<script type='text/javascript'>
+			var contenu_orig = '[(#STR**|tradlang_utf8|entites_html|replace{"\n","_"}|replace{"\r",""}|replace{"\t",""})]';
+			var me = cQuery(".tradlang-str_statut-#_a:ID_TRADLANG");
+			var id = me.crayon().find('form');
+			cQuery(id).bind('form-submit-validate',function(truc,a, e, options, veto){
+				var newstatut = cQuery(id).find('#statut_#ID_TRADLANG').val();
+				var new_contenu = cQuery(id).find('#str_#ID_TRADLANG').val().replace(/\n/g,'_').replace(/\r/g,'').replace(/\t/g,'');
+				if((new_contenu != contenu_orig) && (newstatut != 'OK'))
+					if(!window.confirm('<:tradlang:crayon_changer_statut|filtrer_entites|texte_script:>')){
+						veto.veto = true;
+					}
+			});
+		</script>
+		<label for="str_#ID_TRADLANG"><:tradlang:label_tradlang_str:></label>
+		<textarea class="crayon-active" name="#ENV{name_str}" id="str_#ID_TRADLANG"
+		 style="width:#ENV{largeur}px;text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
+	</li>
 </ul>
 </fieldset>
 </BOUCLE_a>

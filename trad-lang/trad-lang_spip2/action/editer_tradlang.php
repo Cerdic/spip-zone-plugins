@@ -35,7 +35,20 @@ function tradlang_set($id_tradlang,$set=null){
 		$set
 	);
 	
-	if($GLOBALS['visiteur_session']['id_auteur'] > 0){
+	/**
+	 * On vérifie s'il y a au moins un champ modifié pour ajouter l'id_auteur dans les traducteurs
+	 */
+	$infos_tradlang = sql_fetsel('*','spip_tradlang','id_tradlang='.intval($id_tradlang));
+	
+	$modifie = false;
+	foreach(objet_info('tradlang','champs_editables') as $champ){
+		if($c[$champ] != $infos_tradlang[$champ]){
+			$modifie = true;
+			break;
+		}
+	}
+	
+	if($modifie && ($GLOBALS['visiteur_session']['id_auteur'] > 0)){
 		$traducteurs = array();
 		$traducteur = sql_getfetsel('traducteur','spip_tradlang','id_tradlang='.intval($id_tradlang));
 		if($traducteur){

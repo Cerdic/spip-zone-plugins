@@ -115,7 +115,7 @@
 		</td>
 		<td>
 			[(#ENV{langue_modules}|=={#LANG_MERE}|non)
-			<a href="[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#CLE})]" title="<:tradlang:info_traduire_module_lang{lang=#ENV{langue_modules},langue_longue=#GET{langue_longue},module=#NOM_MOD}|attribut_html:>">
+			<a href="[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#ENV{langue_modules}})]" title="<:tradlang:info_traduire_module_lang{lang=#ENV{langue_modules},langue_longue=#GET{langue_longue},module=#NOM_MOD}|attribut_html:>">
 			<:tradlang:bouton_traduire:>
 			</a>]
 		</td>

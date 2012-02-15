@@ -1,0 +1,89 @@
+[(#SET{lang_orig,[(#VAL{lang_orig}|_request)]})]
+[(#SET{lang_cible,[(#VAL{lang_cible}|_request)]})]
+<script type='text/javascript'>
+	/**
+	 * On init les erreurs vides
+	 */
+	var error_tradlang_#ID_TRADLANG_MODULE = false;
+	var tradlang_errors_#ID_TRADLANG_MODULE = [];
+</script>
+
+<B_nb_tradlangs>
+<h4>[(#GRAND_TOTAL|singulier_ou_pluriel{tradlang:titre_tradlang_non_traduit,tradlang:titre_tradlang_non_traduits})]</h4>
+[(#GRAND_TOTAL|>{30}|oui)
+<div class="notice">
+	<p><:tradlang:notice_affichage_limite{nb=30}:></p>
+</div>
+]
+<div class="formulaire_spip">
+<form action="spip.php" method="post" enctype="multipart/form-data" class="formulaire_crayon" id="formulaire_tradlang_tous_#ENV{id_tradlang_module}">
+<input type="hidden" name="action" value="crayons" />
+<input type="hidden" name="redirect" value="[(#URL_TRADLANG_MODULE{#ENV{id_tradlang_module}}|parametre_url{edit,''}|parametre_url{lang_cible,#GET{lang_cible}}|parametre_url{lang_orig,#GET{lang_orig}})]" />
+<ul>
+<BOUCLE_nb_tradlangs(TRADLANG){id_tradlang_module}{statut IN MODIF,NEW}{lang=#GET{lang_cible}}>
+<li class="editer editer_tradlang">
+#CRAYON{str_statut}
+<script type='text/javascript'>
+	var contenu_orig_#ID_TRADLANG = '[(#STR**|tradlang_utf8|replace{"\n","_"}|replace{"\r",""}|replace{"\t",""}|texte_script)]';
+	$('#formulaire_tradlang_tous_#ENV{id_tradlang_module}').bind('submit',function(){
+		var newstatut_#ID_TRADLANG = $('#formulaire_tradlang_tous_#ENV{id_tradlang_module}').find('#statut_#ID_TRADLANG').val();
+		var new_contenu_#ID_TRADLANG =$('#formulaire_tradlang_tous_#ENV{id_tradlang_module}').find('#str_#ID_TRADLANG').val().replace(/\n/g,'_').replace(/\r/g,'').replace(/\t/g,'');
+		if((new_contenu_#ID_TRADLANG != contenu_orig_#ID_TRADLANG) && (newstatut_#ID_TRADLANG != 'OK')){
+			/**
+			 * On remplit les erreurs si besoin
+			 */
+			error_tradlang_#ID_TRADLANG_MODULE = true;
+			tradlang_errors_#ID_TRADLANG_MODULE.push('#ID_TRADLANG');
+		}
+	});
+</script>
+</li>
+</BOUCLE_nb_tradlangs>
+</ul>
+<p class="boutons">
+	<input type='submit' class="submit" />
+</p>
+</form>
+</div>
+</B_nb_tradlangs>
+<div class="error">
+	<p><:tradlang:erreur_aucun_tradlang_a_editer:></p>
+</div>
+<//B_nb_tradlangs>
+<script type='text/javascript'>
+if (window.jQuery)(function($){
+	var boutons = $('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})] .boutons');
+	var boutons_width = boutons.width();
+	$(window).scroll(function() {
+		var offset = $('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})]').offset();
+		var limite_haut = offset.top;
+		var limite_bas = limite_haut+$('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})]').height();
+		if(($(window).scrollTop() >= limite_haut) || (($(window).scrollTop()+$(window).height()) <= limite_bas)){
+			if(!boutons.hasClass('boutons_float'))
+				boutons.addClass('boutons_float')
+			boutons.css({'position': 'fixed', 'bottom': 0, 'width': boutons_width+'px'});
+		}
+		if(($(window).scrollTop() < limite_haut)||(($(window).scrollTop()+$(window).height()) > limite_bas) )
+			boutons.removeClass('boutons_float').css({'position': 'static', 'width': 'auto'});	
+	});
+	$('#formulaire_tradlang_tous_#ENV{id_tradlang_module}').bind('submit',function(){
+		if(error_tradlang_#ID_TRADLANG_MODULE){
+			if(!window.confirm('<:tradlang:crayon_changer_statuts|filtrer_entites|texte_script:>')){
+				$('li.erreur').removeClass('erreur');
+				for (var i=0; i<tradlang_errors_#ID_TRADLANG_MODULE.length; i++) {
+					erreur = tradlang_errors_[(#ID_TRADLANG_MODULE)][i];
+    				$('#statut_'+erreur).parent('li').addClass('erreur');
+				}
+				tradlang_errors_#ID_TRADLANG_MODULE = [];
+				error_tradlang_#ID_TRADLANG_MODULE = false;
+				$('li.erreur select').change(function(){
+					if($(this).val() == 'OK'){
+						$(this).parent('.erreur').removeClass('erreur');
+					}
+				});
+				return false;
+			}
+		}
+	});
+}(jQuery));
+</script>

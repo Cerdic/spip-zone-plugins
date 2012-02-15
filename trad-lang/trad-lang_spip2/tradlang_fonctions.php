@@ -5,6 +5,7 @@
  * Plugin SPIP de traduction de fichiers de langue
  * © Florent Jugla, Fil, kent1
  * 
+ * Fichier des fonctions spécifiques du plugin
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -136,12 +137,17 @@ function boucle_TRADLANG_MODULES_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 
-	// Par defaut, selectionner uniquement les modules qui ne sont pas attic*
+	/**
+	 * Par defaut, selectionner uniquement les modules qui ne sont pas attic*
+	 */ 
 	if (!isset($boucle->modificateur['tout'])) {
 		array_unshift($boucle->where,array("'NOT LIKE'", "'$id_table." ."module'", "'\"attic%\"'"));
 		array_unshift($boucle->where,array("'NOT LIKE'", "'$id_table." ."module'", "'\"contrib\"'"));
 	}
-
+	
+	/**
+	 * Par défaut on tri par priorité et nom_mod
+	 */
 	if (!isset($boucle->modificateur['par']) 
 		&& !isset($boucle->modificateur['tri'])) {
 			$boucle->order[] = "'$id_table." ."priorite'";

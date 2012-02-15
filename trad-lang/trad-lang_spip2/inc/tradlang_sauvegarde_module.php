@@ -1,9 +1,9 @@
 <?php
 /**
  * 
- * Trad-lang v1
+ * Trad-lang v2
  * Plugin SPIP de traduction de fichiers de langue
- * © Florent Jugla, Fil
+ * © Florent Jugla, Fil, kent1
  * 
  */
 
@@ -16,19 +16,29 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param object $langue la langue cible
  * @return 
  */
-function inc_tradlang_sauvegarde_module_dist($module,$langue,$dir_lang){
+function inc_tradlang_sauvegarde_module_dist($module,$langue){
+
+	include_spip('inc/flock');
+	
+	$dir_lang = _DIR_VAR.'/cache-lang/'.$module;
+	if(!is_dir(_DIR_VAR.'/cache-lang/')){
+		sous_repertoire(_DIR_VAR,'cache-lang');
+	}
+	if(!is_dir($dir_lang)){
+		sous_repertoire($dir_lang);
+		if(!is_dir($dir_lang)){
+			return false;	
+		}
+	}
 	// Debut du fichier de langue
 	$lang_prolog = "<"."?php\n// This is a SPIP language file  --  Ceci est un fichier langue de SPIP\nif (!defined('_ECRIRE_INC_VERSION')) return;\n\n";
 	// Fin du fichier de langue
 	$lang_epilog = "\n?".">\n";
 
-	if(!is_dir($dir_lang)){
-		return false;
-	}
-	$fic_exp = $dir_lang."/".$module["module"]."_".$langue.".php";
+	$fic_exp = $dir_lang."/".$module."_".$langue.".php";
 	$tab = array();
 	$conflit = array();  
-	$tab = tradlang_lirelang($module["module"], $langue);
+	$tab = tradlang_lirelang($module, $langue);
 
 	ksort($tab);
 	reset($tab);
@@ -58,12 +68,11 @@ function inc_tradlang_sauvegarde_module_dist($module,$langue,$dir_lang){
 
 	$texte = preg_replace("/\,\n$/", "\n\n);\n", $texte);
 	$texte .= $lang_epilog;
-	
-	include_spip('inc/flock');
+
 	ecrire_fichier($fic_exp,$texte);
 	@chmod($fic_exp, 0666);
   
-	return true;
+	return $fic_exp;
 }
 
 /**

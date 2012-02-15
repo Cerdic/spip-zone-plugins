@@ -1,7 +1,6 @@
 [(#AUTORISER{modifier,auteur,#ENV{id_auteur}}|oui)
 [(#SESSION{id_auteur}|=={#ENV{id_auteur}}|oui)[(#SET{auteur_env,oui})]]
 <div class="modifier">
-	<h2 class="h2"><:tradlang:titre_modifier:></h2>
 	<ul class="liste-item">
 		[(#ENV{vue}|=={profil}|non)<li>
 			<a href="[(#URL_AUTEUR|parametre_url{vue,profil})]">[(#GET{auteur_env}|=={oui}|?{<:tradlang:lien_profil_auteur:>,<:tradlang:lien_profil_autre:>})]</a>
@@ -16,7 +15,6 @@
 ]
 
 [<div class="ajax tradlang_choisir_module">
-	<h2 class="h2"><:tradlang:titre_traduire:></h2>
     (#FORMULAIRE_TRADLANG_CHOISIR_MODULE{#ENV{id_tradlang_module},#ENV{lang_orig},#ENV{lang_cible},#ENV{lang_crea}})
 </div>]
 [(#AUTORISER{modifier,tradlang}|et{#SESSION{statut}}|non)

@@ -33,7 +33,6 @@
 #SET{percent_modif,#GET{total_modif}|div{#GET{total_mere}}|mult{100}|floor}
 #SET{percent_new,#VAL{100}|moins{#GET{percent_ok}}|moins{#GET{percent_modif}}}
 
-
 <div class="info_module">
 	<:tradlang:info_module_traduit_pc{pc=#GET{percent_ok}}:>
 	<ul>
@@ -48,24 +47,50 @@
 		<li>
 			<div class="graph" title="<:tradlang:info_module_traduit_pc{pc=#GET{percent_ok}}:>">
 				<div class="ok"[ style="width: (#GET{percent_ok})px"]> </div>
-				<div class="modif" style="left: #GET{percent_ok}px; width: #GET{percent_modif}px"></div>
+				<div class="modif" style="[left: (#GET{percent_ok})px;][width: (#GET{percent_modif})px]"></div>
 				<div class="new" style="left: [(#GET{percent_ok}|plus{#GET{percent_modif}})]px; width: #GET{percent_new}px"> </div>
 			</div>
 		</li>
 	</ul>
+	[(#GET{total_ok}|=={0}|et{#GET{total_cible}|>{0}}|et{#AUTORISER{modifier,tradlang}}|oui)
+	[(#SET{texte_bouton_delete,<:tradlang:bouton_supprimer_langue_module:>}|attribut_html)]
+	<div class="actions">
+		[(#BOUTON_ACTION{#GET{texte_bouton_delete},[(#URL_ACTION_AUTEUR{tradlang_supprimer_langue_cible,[(#ID_TRADLANG_MODULE|concat{/#ENV{lang_cible}})],#URL_TRADLANG_MODULE|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}}})]})]
+	</div>]
+	[(#GET{total_ok}|>{0}|et{#GET{total_cible}|>{0}}|et{#AUTORISER{modifier,tradlang}}|oui)
+	<div class="actions">
+		[(#BOUTON_ACTION{[(#VAL{tradlang:bouton_exporter_fichier_langue}|_T{#ARRAY{lang,#ENV{lang_cible}}})],[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#ENV{lang_cible}})],[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]})]})]
+		[(#ENV{lang_orig}|et{#ENV{lang_orig}|!={#LANG_MERE}}|oui)
+		<span class="sep">
+			[(#BOUTON_ACTION{[(#VAL{tradlang:bouton_exporter_fichier_langue}|_T{#ARRAY{lang,#ENV{lang_orig}}})],[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#ENV{lang_orig}})],[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]})]})]
+		</span>
+		]<span class="sep">
+			[(#BOUTON_ACTION{<:tradlang:bouton_exporter_fichier_langue_original{lang_mere=#LANG_MERE}|attribut_html:>,[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#LANG_MERE})],[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]})]})]
+		</span>
+	</div>]
 </div>
-
 [(#REM)	
 [(#GET{total_mere}|>{0}|oui)<p><:tradlang:nb_items_langue_cible{nb=#GET{total_cible},langue=#ENV{lang_cible}}:></p>]]
 
+[(#ENV{edit}|=={1}|oui)
+<p><a href="[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}}|parametre_url{edit,2})]" class="ajax"><:tradlang:lien_retour_module{module=#NOM_MOD}:></a></p>
+]
+[(#ENV{edit}|=={1}|non)
+[(#GET{percent_ok}|!={100}|et{#AUTORISER{modifier,tradlang}}|oui)
+<p><a href="[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}}|parametre_url{edit,1})]" class="ajax"><:tradlang:lien_editer_tous:></a></p>]
+]
+<BOUCLE_si_edit(CONDITION){si #AUTORISER{modifier,tradlang}|et{#ENV{edit}|=={1}}}>
+[(#_module:CRAYON{tradlang_tous})]
+</BOUCLE_si_edit>
+</B_si_edit>
 <B_statut>
 [(#GRAND_TOTAL|>{1}|oui)
 <p class="filtrer"><:tradlang:info_filtrer_status:>
-[(#ENV{statut}|oui)<a href="[(#SELF|parametre_url{statut,''})]" class="ajax"><:tradlang:lien_aucun_status:></a><span class="sep"> | </span>]
+[(#ENV{statut}|oui)<a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,''}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="ajax"><:tradlang:lien_aucun_status:></a><span class="sep"> | </span>]
 [(#ENV{statut}|non)<:tradlang:lien_aucun_status:><span class="sep"> | </span>]]
 <BOUCLE_statut(TRADLANG){module}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{fusion statut}{'<span class="sep"> | </span>'}>
 [(#GRAND_TOTAL|>{1}|oui)
-[(#STATUT|!={#ENV{statut}}|oui)<a href="[(#URL_TRADLANG_MODULE|parametre_url{statut,#STATUT}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="ajax">#STATUT</a>]
+[(#STATUT|!={#ENV{statut}}|oui)<a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,#STATUT}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="ajax">#STATUT</a>]
 [(#STATUT|!={#ENV{statut}}|non)#STATUT]]
 #SET{statut,#STATUT}
 </BOUCLE_statut>
@@ -74,7 +99,7 @@
 [(#REM) Si un seul statut et pas celui de l'environnement c'est qu'on aura pas de résultats après]
 [(#GRAND_TOTAL|=={1}|et{#ENV{statut}}|et{#GET{statut}|!={#ENV{statut}}}|oui)
 <p><:tradlang:message_aucun_resultat_statut:></p>
-<p><a href="[(#URL_TRADLANG_MODULE|parametre_url{statut,''}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]"><:tradlang:lien_voir_toute_chaines_module:></a></p>
+<p><a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,''}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]"><:tradlang:lien_voir_toute_chaines_module:></a></p>
 ]
 </B_statut>
 
@@ -106,6 +131,9 @@
 			<th class="origine">
 				<:tradlang:traduction{lang=#ENV{lang_orig}}:>
 			</th>
+			<th class="date">
+				<:tradlang:th_date:>
+			</th>
 			<th class="statut">
 				<:tradlang:th_status:>
 			</th>
@@ -120,6 +148,7 @@
 		</BOUCLE_revise_inexistants_orig>
 		<td style="text-align:#LANG_LEFT;" dir="#LANG_DIR"><:tradlang:str_existe_pas_in_langue:></td>
 		<//B_revise_inexistants_orig>
+		<td style="text-align:#LANG_LEFT;" dir="#LANG_DIR">#TS</td>
 		<td>#STATUT</td>
 	</tr>
 	</BOUCLE_revise_inexistants>
@@ -140,6 +169,9 @@
 			<th class="cible">
 				<:tradlang:traduction{lang=#ENV{lang_cible}}:>
 			</th>
+			<th class="date">
+				<:tradlang:th_date:>
+			</th>
 			<th class="statut">
 				<:tradlang:th_status:>
 			</th>
@@ -150,6 +182,7 @@
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 		<td>#ID</td>
 		<td style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|entites_html|nl2br)]</td>
+		<td style="text-align:#LANG_LEFT;" dir="#LANG_DIR">#TS</td>
 		<td>#STATUT</td>
 	</tr>
 	</BOUCLE_revise_en_trop>
@@ -172,23 +205,38 @@
 			<th class="cible">
 				<:tradlang:traduction{lang=#ENV{lang_cible}}:>
 			</th>
-			<th class="statut" width="50px">
+			<th class="date">
+				<:tradlang:th_date:>
+			</th>
+			<th class="statut">
 				<:tradlang:th_status:>
 			</th>
-			<th class="modifier" width="50px">
+			<th class="modifier">
 				&nbsp;
 			</th>
 		</tr>
 	</thead>
 	<tbody>
 	[(#REM)on n'affiche que les id qui existent dans la langue mère] 
-	<BOUCLE_revise_cible(TRADLANG){module}{statut ?}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{tri #ENV{par,statut},#GET{defaut_tri}}{par id}>
-	<INCLURE{fond=inclure/tr_tradlang,id_tradlang,lang_orig,compteur=#COMPTEUR_BOUCLE,ajax}>
+	<BOUCLE_revise_cible(TRADLANG tradlang_modules){module}{statut ?}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{tri #ENV{par,statut},#GET{defaut_tri}}{par id}>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})] statut_[(#STATUT|strtolower)]" id="tradlang-#ID_TRADLANG">
+		<td class="code_langue">#ID</td>
+		<BOUCLE_revise_orig(TRADLANG){module}{lang=#ENV{lang_orig,#LANG_MERE}}{id=#ID}>
+		<td class="origine" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html|nl2br)]</td>
+		</BOUCLE_revise_orig>
+		<td class="origine" style="text-align:#LANG_LEFT;" dir="#LANG_DIR"><:tradlang:str_existe_plus:></td>
+		<//B_revise_orig>
+		<td class="cible #EDIT{str_statut}" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html|nl2br)]</td>
+		<td class="date">#TS</td>
+		<td class="statut" width="50px">[(#STATUT|sinon{<:tradlang:info_status_ok:>})]</td>
+		<td class="modifier" width="50px"><a href="[(#URL_TRADLANG|parametre_url{lang_orig,#ENV{lang_orig}}|parametre_url{retour,#SELF})]"><:tradlang:lien_editer_chaine:></a></td>
+	</tr>
 	</BOUCLE_revise_cible>
 	</tbody>
 </table>
 </B_revise_cible>
 <//B_revise_cible>
+<//B_si_edit>
 </BOUCLE_module>
 </B_module>
 <div class="formulaire_spip">

@@ -2,10 +2,6 @@
 <BOUCLE_compte_langue_mere(TRADLANG){module}{lang=#LANG_MERE}> </BOUCLE_compte_langue_mere>
 #SET{total_mere,#GRAND_TOTAL}
 </B_compte_langue_mere>
-<h3 class="h3"><:tradlang:titre_bilan_module{module=#NOM_MOD}:></h3>
-
-<p><a href="[(#SELF|parametre_url{id_tradlang_module,''})]"><:tradlang:lien_trier_langue_non:></a></p>
-
 #SET{langues,#ARRAY}
 <BOUCLE_langues_sort(TRADLANG){id_tradlang_module}{fusion lang}>
 <BOUCLE_strings_ok(TRADLANG){id_tradlang_module}{lang=#LANG}{statut = 'OK'}> </BOUCLE_strings_ok>
@@ -16,6 +12,13 @@
 </BOUCLE_langues_sort>
 #SET{langues,#GET{langues}|langues_sort{#LANG_MERE}}
 <B_langues_totales>
+#SET{langues_nb,#GET{langues}|count}
+
+<h3 class="h3"><:tradlang:titre_bilan_module{module=#NOM_MOD}:></h3>
+
+<p><:tradlang:info_module_traduit_langues{nb=#GET{langues_nb}}:></p>
+<p><a href="[(#SELF|parametre_url{id_tradlang_module,''})]"><:tradlang:lien_trier_langue_non:></a></p>
+
 <table class="bilan spip liste tablesorter">
 	<thead>
 		<tr class="row_first">
@@ -46,7 +49,7 @@
 	<BOUCLE_langues_totales(POUR){tableau #GET{langues}}>
 	#SET{langue_longue,#CLE|traduire_nom_langue}
 	<tr class="lang">
-		<td><a href="[(#SELF|parametre_url{id_tradlang_module,''}|parametre_url{langue_modules,#CLE})]" title="<:tradlang:lien_voir_bilan_lang{lang=#CLE,langue_longue=#GET{langue_longue}}|attribut_html:>">[(#GET{langue_longue})]</a></td>
+		<td><a href="[(#SELF|parametre_url{id_tradlang_module,''}|parametre_url{langue_modules,#CLE})]" title="<:tradlang:lien_voir_bilan_lang{lang=#CLE,langue_longue=#GET{langue_longue}}|attribut_html:>">[#CLE][ (#GET{langue_longue})]</a></td>
 		#SET{full,''}
 		#SET{langue_mere,#LANG_MERE}
 		<td>#LANG_MERE</td>

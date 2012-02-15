@@ -10,7 +10,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_activer_lang' => 'Activer la langue "@lang@" pour ce module',
+	'bouton_exporter_fichier_langue' => 'Exporter le fichier de langue en "@lang@"',
+	'bouton_exporter_fichier_langue_original' => 'Exporter le fichier de langue original ("@lang_mere@")',
 	'bouton_supprimer_module' => 'Supprimer ce module',
+	'bouton_supprimer_langue_module' => 'Supprimer cette langue du module',
 	'bouton_traduire' => 'Traduire',
 
 	// C
@@ -27,11 +30,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_legende_autorisation_voir' => 'Voir l\'interface de traduction',
 	'codelangue' => 'Code de langue',
 	'crayon_changer_statut' => 'Attention! Vous avez modifié le contenu de la chaîne sans en modifier le statut.',
+	'crayon_changer_statuts' => 'Attention! Vous avez modifié le contenu d\'une ou plusieurs chaînes sans en modifier le statut.',
 
 	// E
 	'entrerlangue' => 'Ajouter un code langue',
 	'erreur_aucun_item_langue_mere' => 'La langue mère "@lang_mere@" ne contient aucun item de langue.',
 	'erreur_aucun_module' => 'Il n\'y a pas de modules disponibles dans la base.',
+	'erreur_aucun_tradlang_a_editer' => 'Aucune chaîne de langue n\'est considérée comme non traduite.',
 	'erreur_autorisation_modifier_modules' => 'Vous n\'êtes pas autorisé à traduire les modules de langue.',
 	'erreur_autoriser_profil' => 'Vous n\'êtes pas autorisé à modifier ce profil.',
 	'erreur_choisir_lang_cible' => 'Choisissez une langue cible de traduction.',
@@ -70,6 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_module_traduction' => '@total@ @statut@ (@percent@%)',
 	'info_module_traduit_pc' => 'Module traduit à @pc@%',
 	'info_module_traduit_pc_lang' => 'Module "@module@" traduit à @pc@% en @lang@ (@langue_longue@)',
+	'info_module_traduit_langues' => 'Ce module est traduit ou partiellement traduit dans @nb@ langues.',
 	'info_modules_priorite_traduits_pc' => 'Les modules de priorité "@priorite@" sont traduits à @pc@% en @lang@',
 	'info_nb_items_module' => '@nb@ items dans le module "@module@"',
 	'info_nb_items_module_modif' => '@nb@ items du module "@module@" sont modifiés et à vérifier en @lang@ (@langue_longue@)"',
@@ -139,6 +145,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_code_langue' => 'Code langue non valide. Le code langue doit avoir au moins deux lettres  (code ISO-631).',
 	'lien_confirm_export' => 'Confirmer l\'export du fichier courant (c.a.d écrasement du fichier @fichier@)',
 	'lien_editer_chaine' => 'Modifier',
+	'lien_editer_tous' => 'Éditer toutes les chaînes non traduites',
 	'lien_export' => 'Exporter automatiquement le fichier actuel.',
 	'lien_page_depart' => 'Revenir à la page de garde ?',
 	'lien_profil_auteur' => 'Votre profil',
@@ -155,6 +162,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_telecharger' => '[Télécharger]',
 	'lien_traduction_module' => 'Module ',
 	'lien_traduction_vers' => ' vers ',
+	'lien_traduire_suivant_str_module' => 'Traduire la chaîne non traduite suivante du module "@module@"',
 	'lien_trier_langue_non' => 'Afficher le bilan global.',
 	'lien_utiliser_google_translate' => 'Utiliser cette version',
 	'lien_voir_bilan_lang' => 'Voir le bilan de la langue @langue_longue@ (@lang@)',
@@ -185,6 +193,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'moduletitre' => 'Modules disponibles',
 
 	// N
+	'notice_affichage_limite' => 'L\'affichage est limité à @nb@ chaînes de langue non traduites.',
 	'nb_item_langue_en_trop' => '1 item est en trop dans la langue "@langue_longue@" (@langue@).',
 	'nb_item_langue_inexistant' => '1 item est inexistant dans la langue "@langue_longue@" (@langue@).',
 	'nb_item_langue_mere' => 'La langue principale de ce module comporte 1 item.',
@@ -245,6 +254,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tfoot_total' => 'Total',
 	'th_avancement' => 'Avancement',
 	'th_comm' => 'Commentaire',
+	'th_date' => 'Date',
 	'th_items_modifs' => 'Items modifiés',
 	'th_items_new' => 'Nouveaux items',
 	'th_items_traduits' => 'Items traduits',
@@ -274,6 +284,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_tradlang_chaines' => 'Chaines de langue',
 	'titre_tradlang_module' => 'Module de langue',
 	'titre_tradlang_modules' => 'Modules de langue',
+	'titre_tradlang_non_traduit' => '1 chaîne de langue non traduite',
+	'titre_tradlang_non_traduits' => '@nb@ chaînes de langue non traduites',
 	'titre_traduction' => 'Traductions',
 	'titre_traduction_chaine_de_vers' => 'Traduction de la chaine «@chaine@» du module «@module@» de <abbr title="@lang_orig_long@">@lang_orig@</abbr> vers <abbr title="@lang_cible_long@">@lang_cible@</abbr>',
 	'titre_traduction_de' => 'Traduction de ',

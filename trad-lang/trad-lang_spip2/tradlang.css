@@ -11,14 +11,23 @@ table.liste_traductions{
 	font-size:.9em;
 	margin:10px 0 15px;
 	width:100%;
+	table-layout:fixed;
 }
 
-table.liste_traductions td {
+table.liste_traductions td, table.liste_traductions th{
 	text-overflow:ellipsis;
 	overflow:hidden;
 }
-
-table.liste_traductions td.statut{
+table.liste_traductions .code_langue{
+	width:180px;
+}
+table.liste_traductions .origine,table.liste_traductions .cible{
+	width:230px;
+}
+table.liste_traductions .date{
+	width:70px;
+}
+table.liste_traductions .statut{
 	width:50px;
 	vertical-align:middle;
 }

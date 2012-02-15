@@ -28,7 +28,28 @@ function formulaires_editer_tradlang_verifier($id_tradlang='aucun',$retour='',$l
 }
 
 function formulaires_editer_tradlang_traiter($id_tradlang='aucun',$retour='',$lang_orig=''){
-	$ret = formulaires_editer_objet_traiter('tradlang',$id_tradlang,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
-	return $ret;
+	$res = formulaires_editer_objet_traiter('tradlang',$id_tradlang,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
+	if(!test_espace_prive()){
+		$tradlang = sql_fetsel('*','spip_tradlang','id_tradlang='.intval($id_tradlang));
+		$module = sql_fetsel('module,nom_mod,lang_mere','spip_tradlang_modules','id_tradlang_module='.intval($tradlang['id_tradlang_module']));
+		$lang_orig = $lang_orig ? $lang_orig:$module['lang_mere'];
+		$url_module = parametre_url(parametre_url(generer_url_entite($tradlang['id_tradlang_module'],'tradlang_module'),'lang_orig',$lang_orig),'lang_cible',$tradlang['lang']);
+		$res['redirect'] = '';
+		if($id_tradlang_suivant = sql_getfetsel('id_tradlang','spip_tradlang','id_tradlang_module='.intval($tradlang['id_tradlang_module']).' AND lang='.sql_quote($tradlang['lang']).' AND statut != "OK" AND id_tradlang > '.intval($id_tradlang))){
+			$url_suivant = 	parametre_url(parametre_url(generer_url_entite($id_tradlang_suivant,'tradlang'),'lang_orig',$lang_orig),'lang_cible',$tradlang['lang']);
+		}else if($id_tradlang_suivant = sql_getfetsel('id_tradlang','spip_tradlang','id_tradlang_module='.intval($tradlang['id_tradlang_module']).' AND statut != "OK" AND lang='.sql_quote($tradlang['lang']))){
+			$url_suivant = 	parametre_url(parametre_url(generer_url_entite($id_tradlang_suivant,'tradlang'),'lang_orig',$lang_orig),'lang_cible',$tradlang['lang']);
+		}
+		$res['message_ok'] .= '<br />';
+		if(isset($url_suivant)){
+			$res['message_ok'] .= '<a href="'.$url_suivant.'"">'._T('tradlang:lien_traduire_suivant_str_module',array('module'=>$module['nom_mod'])).'</a>';
+		}else{
+			$res['message_ok'] .= _T('tradlang:info_module_traduit_pc',array('pc'=>'100'));
+		}
+		$res['message_ok'] .= '<br />';
+		$res['message_ok'] .= '<a href="'.$url_module.'"">'._T('tradlang:lien_retour_module',array('module'=>$module['nom_mod'])).'</a>';
+		$res['editable'] = true;
+	}
+	return $res;
 }
 ?>

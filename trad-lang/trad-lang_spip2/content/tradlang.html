@@ -1,11 +1,53 @@
 <BOUCLE_tradlang(TRADLANG){id_tradlang}>
 <div class="contenu-principal">
 <INCLURE{fond=inclure/tradlang_entete,env}>
-[(#AUTORISER{voir,tradlang}|oui)
-	<INCLURE{fond=noisettes/vues/tradlang-traduction_chaine,env,ajax}>
-]
-[(#AUTORISER{voir,tradlang}|non)
-	#LOGIN_PUBLIC
-]
+<BOUCLE_auth_voir(CONDITION){si #AUTORISER{voir,tradlang}|oui}>
+	[(#AUTORISER{modifier,tradlang,#ID_TRADLANG}|oui)
+	#SET{auth_modifier,oui}
+	]
+	<BOUCLE_module(TRADLANG_MODULES){module}>
+	#SET{lang_mere,#LANG_MERE}
+	<div id="hierarchie"><a href="[(#URL_TRADLANG_MODULE{#ID_TRADLANG_MODULE}|parametre_url{lang_cible,#_tradlang:LANG}|parametre_url{lang_orig,#ENV{lang_orig}})]"><:tradlang:lien_retour_module{module=#NOM_MOD}:></a></div>
+	</BOUCLE_module>
+	<div class="cartouche">
+		[(#ENV{lang_orig}|non)
+		#SET{lang_orig_long,#GET{lang_mere}|traduire_nom_langue}]
+		[(#ENV{lang_orig}|oui)
+		#SET{lang_orig_long,#ENV{lang_orig}|traduire_nom_langue}]
+		#SET{lang_orig,#ENV{lang_orig,#GET{lang_mere}}}
+		#SET{lang_cible_long,#LANG|traduire_nom_langue}
+		<h1><:tradlang:titre_traduction_chaine_de_vers{module=#MODULE,chaine=#ID,lang_orig=#GET{lang_orig},lang_orig_long=#GET{lang_orig_long},lang_cible=#LANG,lang_cible_long=#GET{lang_cible_long}}:></h1>
+		[(#INCLURE{fond=inclure/tradlang_precedent_suivant,id_tradlang,id_tradlang_module,lang_orig=#GET{lang_orig},lang_cible=#GET{lang_cible},statuts=#ARRAY{0,NEW,1,MODIF}})]
+	</div>
+	
+	[(#GET{auth_modifier}|=={oui}|oui)
+	<div class="ajax">
+	#FORMULAIRE_EDITER_TRADLANG{#ENV{id_tradlang},#ENV{retour},#GET{lang_orig}}
+	</div>]
+	
+	[(#GET{auth_modifier}|=={oui}|non)
+	Vous ne pouvez modifier cet item de langue
+	]
+	<div>
+		<h3>
+			<:tradlang:titre_modifications_chaines:>
+		</h3>
+		#SET{url_modif,#URL_PAGE{traduction}|parametre_url{etape,revision}}
+		[(#INCLURE{fond=prive/objets/liste/versions,objet=tradlang,url_modif=#GET{url_modif},id_objet=#ID_TRADLANG,env,ajax}|sinon{<p><:tradlang:info_chaine_jamais_modifiee:></p>})]
+	</div>
+	
+	<div>
+		<h3>
+			<:tradlang:titre_commentaires_chaines:>
+		</h3>
+		[(#REM) Forum de la chaine de langue ]
+		<a href="#forum" name="forum" id="forum"></a>
+		[(#INCLURE{fond=inclure/forum_tradlang,objet=tradlang,id_tradlang=#ID_TRADLANG}|trim|sinon{<p><:tradlang:info_aucun_commentaire_chaine:></p>})]
+		#FORMULAIRE_FORUM{#SELF,tradlang,#ID_TRADLANG}
+	</div>
+</BOUCLE_auth_voir>
+</B_auth_voir>
+#LOGIN_PUBLIC
+<//B_auth_voir>
 </div>
 </BOUCLE_tradlang>
