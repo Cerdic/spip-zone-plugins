@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_adresse_invalide' => 'This URL address is not valid. If you are trying to import an MP4 video, you must use the SPIP\'s document upload form.',
-	'explication_ajouter_video' => '(Remote vid&eacute;o YouTube, Vimeo, DailyMotion, CultureBox)',
+	'explication_ajouter_video' => '(Remote vid&eacute;o YouTube, Vimeo, DailyMotion)',
 
 	// L
 	'label_ajouter_video' => "Add a video",
