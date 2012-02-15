@@ -18,7 +18,7 @@ function commandes_lister_statuts($statut=false){
 	if ($statut and $nom = $statuts[$statut])
 		return $nom;
 	else
-		return $statuts;
+		return $statut;
 }
 
 ?>
