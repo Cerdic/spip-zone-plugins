@@ -10,16 +10,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aucun_contact' => 'Žiaden kontakt tu nie je!',
 	'aucune_organisation' => 'Žiadna organizácia tu nie je!',
-	'auteur_lie' => 'Id de l\'auteur lié', # NEW
+	'auteur_lie' => 'Id prepojeného autora',
 
 	// B
 	'bouton_contacts' => 'Kontakty',
-	'bouton_contacts_organisations' => 'Osobné kontakty a organizácie',
-	'bouton_organisations' => 'Organizácie',
+	'bouton_contacts_organisations' => 'Osobné kontakty a spoločnosti',
+	'bouton_organisations' => 'Spoločnosti',
 	'bouton_rechercher' => 'Vyhľadať',
 	'bouton_repertoire' => 'Adresár',
 
 	// C
+	'cfg_activer_squelettes_publics_zpip1' => 'Verejné šablóny ZPIPu v1',
+	'cfg_activer_squelettes_publics_zpip1_explication' => 'Aktivovať verejné šablóny pre ZPIP vo verzii 1,
+		ktoré umožňujú prehliadať kontakty na ľudí a spoločnosti na verejne prístupnej stránke?',
+	'cfg_afficher_infos_sur_auteurs' => 'Affichage détaillé des auteurs ?', # NEW
+	'cfg_afficher_infos_sur_auteurs_explication' => 'Afficher les infos de contact ou d\'organisation
+		également sur les pages auteurs dans l\'espace privé ?', # NEW
+	'cfg_associer_aux_auteurs' => 'Associer aux auteurs ?', # NEW
+	'cfg_associer_aux_auteurs_explication' => 'Permettre d\'associer des contacts ou organisations
+		aux auteurs. Cela ajoute un formulaire pour associer un auteur sur les pages contact ou organisation,
+		et inversement cela ajoute un formulaire pour lier un contact ou une organisation sur les pages des auteurs.', # NEW
+	'cfg_lier_organisations_rubriques' => 'Prepojiť s rubrikami',
+	'cfg_lier_organisations_rubriques_explication' => 'Umožniť prepájať spoločnosti s rubrikami?
+		Táto funkcia zobrazí oddeľovač spoločností podľa rubrík a oddeľovač rubrík podľa spoločností.',
 	'changer' => 'Zmeniť',
 	'chercher_contact' => 'Vyhľadať',
 	'chercher_organisation' => 'Vyhľadať',
@@ -29,21 +42,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_delier_organisation_rubrique' => 'Určite chcete zrušiť prepojenie tejto organizácie s touto rubrikou?',
 	'confirmer_supprimer_contact' => 'Určite chcete zmazať všetky údaje o tomto kontakte?',
 	'confirmer_supprimer_organisation' => 'Určite chcete zmazať všetky údaje o tejto organizácii?',
-	'contact' => 'Jeden kontakt', # MODIF
-	'contact_ajouter' => 'Ajouter un contact', # NEW
+	'contact' => 'Kontakt',
+	'contact_ajouter' => 'Pridať kontakt',
+	'contact_ajouter_lien' => 'Ajouter ce contact', # NEW
 	'contact_associe_a_auteur_numero' => 'Prepojiť s autorom číslo',
 	'contact_associer_a_auteur' => 'Prepojiť s autorom',
+	'contact_aucun' => 'Žiaden kontakt',
 	'contact_creer' => 'Vytvoriť kontakt',
+	'contact_creer_associer' => 'Vytvoriť kontakt a prepojiť',
 	'contact_editer' => 'Upraviť tento kontakt',
-	'contact_logo' => 'Logo de ce contact', # NEW
-	'contact_nouveau_titre' => 'Nouveau contact', # NEW
+	'contact_logo' => 'Logo kontaktu',
+	'contact_nouveau_titre' => 'Nový kontakt',
 	'contact_numero' => 'Kontakt číslo',
-	'contact_un' => 'Un contact', # NEW
+	'contact_retirer_lien' => 'Odstrániť kontakt',
+	'contact_retirer_tous_lien' => 'Odstrániť všetky kontakty',
+	'contact_un' => 'Jeden kontakt',
 	'contact_voir' => 'Zobraziť',
 	'contacts' => 'Kontakty',
-	'contacts_aucun' => 'Aucun contact', # NEW
 	'contacts_nb' => '@nb@ kontaktov',
-	'contacts_un' => 'Jeden kontakt',
 	'creer_auteur_contact' => 'Vytvoriť nového autora a prepojiť ho s týmto kontaktom',
 	'creer_auteur_organisation' => 'Vytvoriť nového autora a prepojiť ho s touto organizáciou',
 
@@ -51,8 +67,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'definir_auteur_comme_contact' => 'Nastaviť ako kontakt',
 	'definir_auteur_comme_organisation' => 'Definovať ako organizáciu',
 	'delier_cet_auteur' => 'Zrušiť prepojenie',
-	'delier_contact' => 'Désassocier', # NEW
-	'delier_organisation' => 'Désassocier', # NEW
+	'delier_contact' => 'Zrušiť prepojenie',
+	'delier_organisation' => 'Zrušiť prepojenie',
 
 	// E
 	'est_un_contact' => 'Tento autor je nastavený ako kontakt',
@@ -112,45 +128,51 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nb_contact' => '1 kontakt',
 	'nb_contacts' => '@nb@ kontaktov',
-	'nom_contact' => 'Nom', # NEW
-	'nom_organisation' => 'Nom', # NEW
+	'nom_contact' => 'Meno',
+	'nom_organisation' => 'Názov',
 
 	// O
-	'organisation' => 'Organisation', # NEW
-	'organisation_ajouter' => 'Ajouter une organisation', # NEW
+	'organisation' => 'Spoločnosť',
+	'organisation_ajouter' => 'Pridať spoločnosť',
+	'organisation_ajouter_lien' => 'Ajouter cette organisation', # NEW
 	'organisation_associe_a_auteur_numero' => 'Prepojené s autorom číslo',
 	'organisation_associer_a_auteur' => 'Prepojiť s autorom',
-	'organisation_aucun' => 'Aucune organisation', # NEW
+	'organisation_aucun' => 'Žiadna spoločnosť',
 	'organisation_creer' => 'Zapísať organizáciu',
+	'organisation_creer_associer' => 'Vytvoriť a vytvoriť prepojiť so spoločnosťou',
 	'organisation_creer_fille' => 'Zapísať podradenú organizáciu',
 	'organisation_editer' => 'Upraviť túto organizáciu',
-	'organisation_logo' => 'Logo de l\'organisation', # NEW
-	'organisation_nouveau_titre' => 'Nouvelle organisation', # NEW
+	'organisation_logo' => 'Logo spoločnosti',
+	'organisation_nouveau_titre' => 'Nová spoločnosť',
 	'organisation_numero' => 'Organizácia číslo',
+	'organisation_retirer_lien' => 'Odstrániť spoločnosť',
+	'organisation_retirer_tous_lien' => 'Odstrániť všetky spoločnosti',
 	'organisation_un' => 'Jedna organizácia',
 	'organisation_voir' => 'Zobraziť',
 	'organisations' => 'Organizácie',
 	'organisations_nb' => '@nb@ organizácií',
 
 	// P
-	'prenom' => 'Prénom', # NEW
+	'prenom' => 'Krstné meno',
 
 	// R
 	'recherche_de' => 'Vyhľadať "@recherche@"',
 	'rechercher' => 'Vyhľadať',
 
 	// S
-	'statut_juridique' => 'Statut juridique', # NEW
+	'statut_juridique' => 'Právna forma',
 	'supprimer_contact' => 'Odstrániť tento kontakt',
 	'supprimer_organisation' => 'Odstrániť túto organizáciu',
 
 	// T
 	'titre_contact' => 'Kontaktné údaje',
 	'titre_organisation' => 'Informácie o organizácii',
+	'titre_page_configurer_contacts_et_organisations' => 'Nastaviť Kontakty a spoločnosti',
 	'titre_page_contacts' => 'Riadenie kontaktov',
 	'titre_page_organisations' => 'Riadenie organizácií',
 	'titre_page_repertoire' => 'Adresár',
-	'tous' => 'Tous' # NEW
+	'titre_parametrages' => 'Nastavenie parametrov',
+	'tous' => 'Všetko'
 );
 
 ?>

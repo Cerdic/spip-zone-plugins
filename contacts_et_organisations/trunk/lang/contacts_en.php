@@ -20,6 +20,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_repertoire' => 'Directory',
 
 	// C
+	'cfg_activer_squelettes_publics_zpip1' => 'Squelettes publics ZPIP v1', # NEW
+	'cfg_activer_squelettes_publics_zpip1_explication' => 'Activer les squelettes publics pour ZPIP en version 1,
+		permettant le parcourir les contacts et organisations dans l\'espace public ?', # NEW
+	'cfg_afficher_infos_sur_auteurs' => 'Affichage détaillé des auteurs ?', # NEW
+	'cfg_afficher_infos_sur_auteurs_explication' => 'Afficher les infos de contact ou d\'organisation
+		également sur les pages auteurs dans l\'espace privé ?', # NEW
+	'cfg_associer_aux_auteurs' => 'Associer aux auteurs ?', # NEW
+	'cfg_associer_aux_auteurs_explication' => 'Permettre d\'associer des contacts ou organisations
+		aux auteurs. Cela ajoute un formulaire pour associer un auteur sur les pages contact ou organisation,
+		et inversement cela ajoute un formulaire pour lier un contact ou une organisation sur les pages des auteurs.', # NEW
+	'cfg_lier_organisations_rubriques' => 'Lier aux rubriques', # NEW
+	'cfg_lier_organisations_rubriques_explication' => 'Permettre de lier les organisations aux rubriques ?
+		Cela affiche le sélecteur d\'organisations sur les rubriques ainsi que le sélecteur de rubriques sur les organisations.', # NEW
 	'changer' => 'Change',
 	'chercher_contact' => 'Search',
 	'chercher_organisation' => 'Search',
@@ -31,19 +44,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_supprimer_organisation' => 'Are you sure you want to delete all the information about this organisation?',
 	'contact' => 'One contact', # MODIF
 	'contact_ajouter' => 'Ajouter un contact', # NEW
+	'contact_ajouter_lien' => 'Ajouter ce contact', # NEW
 	'contact_associe_a_auteur_numero' => 'Link to author number',
 	'contact_associer_a_auteur' => 'Link to an author',
+	'contact_aucun' => 'Aucun contact', # NEW
 	'contact_creer' => 'Create a contact',
+	'contact_creer_associer' => 'Créer et associer un contact', # NEW
 	'contact_editer' => 'Edit this contact',
 	'contact_logo' => 'Logo de ce contact', # NEW
 	'contact_nouveau_titre' => 'Nouveau contact', # NEW
 	'contact_numero' => 'Contact number',
+	'contact_retirer_lien' => 'Retirer le contact', # NEW
+	'contact_retirer_tous_lien' => 'Retirer tous les contacts', # NEW
 	'contact_un' => 'Un contact', # NEW
 	'contact_voir' => 'See',
 	'contacts' => 'Contacts',
-	'contacts_aucun' => 'Aucun contact', # NEW
 	'contacts_nb' => '@nb@ contacts',
-	'contacts_un' => 'A contact',
 	'creer_auteur_contact' => 'Create a new author and link it to this contact',
 	'creer_auteur_organisation' => 'Create a new author and link it to this organization',
 
@@ -119,15 +135,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'organisation' => 'Organisation', # NEW
 	'organisation_ajouter' => 'Ajouter une organisation', # NEW
+	'organisation_ajouter_lien' => 'Ajouter cette organisation', # NEW
 	'organisation_associe_a_auteur_numero' => 'Linked to author number',
 	'organisation_associer_a_auteur' => 'Link to an author',
 	'organisation_aucun' => 'Aucune organisation', # NEW
 	'organisation_creer' => 'Create an organization',
+	'organisation_creer_associer' => 'Créer et associer une organisation', # NEW
 	'organisation_creer_fille' => 'Create a child organization',
 	'organisation_editer' => 'Edit this organizatino',
 	'organisation_logo' => 'Logo de l\'organisation', # NEW
 	'organisation_nouveau_titre' => 'Nouvelle organisation', # NEW
 	'organisation_numero' => 'Organization number',
+	'organisation_retirer_lien' => 'Retirer l\'organisation', # NEW
+	'organisation_retirer_tous_lien' => 'Retirer toutes les organisations', # NEW
 	'organisation_un' => 'One organization',
 	'organisation_voir' => 'See',
 	'organisations' => 'Organisations',
@@ -148,9 +168,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_contact' => 'Contact details',
 	'titre_organisation' => 'Organization details',
+	'titre_page_configurer_contacts_et_organisations' => 'Configurer Contacts & Organisations', # NEW
 	'titre_page_contacts' => 'Contacts management',
 	'titre_page_organisations' => 'Organisations management',
 	'titre_page_repertoire' => 'Directory',
+	'titre_parametrages' => 'Paramétrages', # NEW
 	'tous' => 'Tous' # NEW
 );
 

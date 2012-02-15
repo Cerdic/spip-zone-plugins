@@ -20,6 +20,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_repertoire' => 'دايركتوري',
 
 	// C
+	'cfg_activer_squelettes_publics_zpip1' => 'Squelettes publics ZPIP v1', # NEW
+	'cfg_activer_squelettes_publics_zpip1_explication' => 'Activer les squelettes publics pour ZPIP en version 1,
+		permettant le parcourir les contacts et organisations dans l\'espace public ?', # NEW
+	'cfg_afficher_infos_sur_auteurs' => 'Affichage détaillé des auteurs ?', # NEW
+	'cfg_afficher_infos_sur_auteurs_explication' => 'Afficher les infos de contact ou d\'organisation
+		également sur les pages auteurs dans l\'espace privé ?', # NEW
+	'cfg_associer_aux_auteurs' => 'Associer aux auteurs ?', # NEW
+	'cfg_associer_aux_auteurs_explication' => 'Permettre d\'associer des contacts ou organisations
+		aux auteurs. Cela ajoute un formulaire pour associer un auteur sur les pages contact ou organisation,
+		et inversement cela ajoute un formulaire pour lier un contact ou une organisation sur les pages des auteurs.', # NEW
+	'cfg_lier_organisations_rubriques' => 'Lier aux rubriques', # NEW
+	'cfg_lier_organisations_rubriques_explication' => 'Permettre de lier les organisations aux rubriques ?
+		Cela affiche le sélecteur d\'organisations sur les rubriques ainsi que le sélecteur de rubriques sur les organisations.', # NEW
 	'changer' => 'تغيير',
 	'chercher_contact' => 'جستجو',
 	'chercher_organisation' => 'جستجو',
@@ -31,19 +44,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_supprimer_organisation' => 'مطمئن هستيد كه مي‌خواهيد تمام اطلاعات مربوط به اين سازمان را حذف كنيد؟‌',
 	'contact' => 'يك تماس', # MODIF
 	'contact_ajouter' => 'Ajouter un contact', # NEW
+	'contact_ajouter_lien' => 'Ajouter ce contact', # NEW
 	'contact_associe_a_auteur_numero' => 'پيوند به نويسنده‌ي شماره‌ي ',
 	'contact_associer_a_auteur' => 'پيوند به يك نويسنده',
+	'contact_aucun' => 'Aucun contact', # NEW
 	'contact_creer' => 'ايجاد يك تماس',
+	'contact_creer_associer' => 'Créer et associer un contact', # NEW
 	'contact_editer' => 'ويرايش اين تماس',
 	'contact_logo' => 'Logo de ce contact', # NEW
 	'contact_nouveau_titre' => 'Nouveau contact', # NEW
 	'contact_numero' => 'تماس شماره‌ي',
+	'contact_retirer_lien' => 'Retirer le contact', # NEW
+	'contact_retirer_tous_lien' => 'Retirer tous les contacts', # NEW
 	'contact_un' => 'Un contact', # NEW
 	'contact_voir' => 'بنگريد',
 	'contacts' => 'تماس‌ها',
-	'contacts_aucun' => 'Aucun contact', # NEW
 	'contacts_nb' => '@nb@ تماس ',
-	'contacts_un' => 'يك تماس ',
 	'creer_auteur_contact' => 'ايجاد يك نويسنده و پيوند او با اين تماس ',
 	'creer_auteur_organisation' => 'ايجاد يك نويسنده و پيوند او به اين سازمان',
 
@@ -118,15 +134,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'organisation' => 'Organisation', # NEW
 	'organisation_ajouter' => 'Ajouter une organisation', # NEW
+	'organisation_ajouter_lien' => 'Ajouter cette organisation', # NEW
 	'organisation_associe_a_auteur_numero' => 'ارتباط با شماره‌ي نويسنده',
 	'organisation_associer_a_auteur' => 'ارتباط با يك نويسنده',
 	'organisation_aucun' => 'Aucune organisation', # NEW
 	'organisation_creer' => 'ايجاد يك سازمان',
+	'organisation_creer_associer' => 'Créer et associer une organisation', # NEW
 	'organisation_creer_fille' => 'ايجاد يك پرونده‌ي سازمان',
 	'organisation_editer' => 'ويرايش اين سازمان',
 	'organisation_logo' => 'Logo de l\'organisation', # NEW
 	'organisation_nouveau_titre' => 'Nouvelle organisation', # NEW
 	'organisation_numero' => 'شماره‌ي سازمان',
+	'organisation_retirer_lien' => 'Retirer l\'organisation', # NEW
+	'organisation_retirer_tous_lien' => 'Retirer toutes les organisations', # NEW
 	'organisation_un' => 'يك سازمان',
 	'organisation_voir' => 'بنگريد',
 	'organisations' => 'سازمان‌ها',
@@ -147,9 +167,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_contact' => 'حزئيات تماس',
 	'titre_organisation' => 'جزئيات سازمان',
+	'titre_page_configurer_contacts_et_organisations' => 'Configurer Contacts & Organisations', # NEW
 	'titre_page_contacts' => 'مديريت تماس‌ها',
 	'titre_page_organisations' => 'مديريت سازمان‌ها',
 	'titre_page_repertoire' => 'ديركتور',
+	'titre_parametrages' => 'Paramétrages', # NEW
 	'tous' => 'Tous' # NEW
 );
 
