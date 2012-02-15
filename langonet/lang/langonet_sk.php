@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_arborescence_scannee' => 'Stromová štruktúra, ktorú treba naskenovať',
-	'label_avertissement' => 'Avertissements', # NEW
+	'label_avertissement' => 'Oznamy',
 	'label_chemin_langue' => 'Umiestnenie jazykového súboru',
 	'label_correspondance' => 'Typ zhody',
 	'label_correspondance_commence' => 'Začať od',
@@ -82,24 +82,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_ecriture_fichier' => 'Le fichier de langue «<em>@langue@</em>» du module «<em>@module@</em>» n\'a pas été créé car une erreur s\'est produite lors de son écriture !', # NEW
 	'message_nok_fichier_langue' => 'La génération a échoué car le fichier de langue «<em>@langue@</em>» du module «<em>@module@</em>» est introuvable dans le répertoire «<em>@dossier@</em>» !', # NEW
 	'message_nok_fichier_log' => 'Súbor protokolu s výsledkami overovania sa nedá vytvoriť!',
-	'message_nok_fichier_script' => 'Le fichier de script contenant les commandes de remplacement des fonctions _L par _T n\'a pas pu être créé!', # NEW
+	'message_nok_fichier_script' => 'Súbor skriptu s príkazmi  na nahradenie funkcií _L za _T sa nepodarilo vytvoriť!',
 	'message_nok_item_trouve' => 'Podmienkam vyhľadávania nevyhovuje žiadna jazyková položka!',
-	'message_ok_definis_incertains_0' => 'Aucun item de langue n\'est utilisé dans un contexte complexe, comme par exemple, _T(\'@module@:item_\'.$variable).', # NEW
+	'message_ok_definis_incertains_0' => 'Žiadna položka jazyka sa nepoužíva v celom kontexte, napríklad _T(\'@module@:item_\'.$variable).',
 	'message_ok_definis_incertains_1' => 'L\'item de langue ci-dessous est utilisé dans un contexte complexe et pourrait être non défini dans le fichier de langue  «<em>@langue@</em>». Nous vous invitons à le vérifier :', # NEW
 	'message_ok_definis_incertains_n' => 'Les @nberr@ items de langue ci-dessous sont utilisés dans un contexte complexe et pourraient être non définis dans le fichier de langue  «<em>@langue@</em>». Nous vous invitons à les vérifier un par un :', # NEW
 	'message_ok_fichier_genere' => 'Le fichier de langue «<em>@langue@</em>» du module «<em>@module@</em>» a été généré correctement.<br />Vous pouvez récupérer le fichier «<em>@fichier@</em>».', # NEW
 	'message_ok_fichier_log' => 'La vérification s\'est correctement déroulée. Vous pouvez consultez les résultats plus bas dans le formulaire.<br />Le fichier «<em>@log_fichier@</em>» a été créé pour sauvegarder ces résultats.', # NEW
 	'message_ok_fichier_log_script' => 'La vérification s\'est correctement déroulée. Vous pouvez consultez les résultats plus bas dans le formulaire.<br />Le fichier «<em>@log_fichier@</em>» a été créé pour sauvegarder ces résultats ainsi que le fichier des commandes de remplacement _L en _T, «<em>@script@</em>».', # NEW
 	'message_ok_fonction_l_0' => 'V priečinku <em>@ou_fichier@</em> nebol zistený žiaden prípad použitia funkcie _L() v súboroch PHP.',
-	'message_ok_fonction_l_1' => 'Un seul cas d\'utilisation de la fonction _L() a été détecté dans les fichiers PHP du répertoire «<em>@ou_fichier@</em>» :', # NEW
+	'message_ok_fonction_l_1' => 'Keď sa v súboroch PHP priečinka <em>"@ou_fichier@"</em> zistí jedno použitie funkcie _L():',
 	'message_ok_fonction_l_n' => '@nberr@ cas d\'utilisation de la fonction _L() ont été détectés dans les fichiers PHP du répertoire «<em>@ou_fichier@</em>» :', # NEW
 	'message_ok_item_trouve' => 'Vyhľadávanie reťazca @pattern@ bolo úspešné.',
 	'message_ok_item_trouve_commence_1' => 'Jazyková položka sa začína hľadaným reťazcom:',
-	'message_ok_item_trouve_commence_n' => 'Les @sous_total@ items ci-dessous commencent tous par la chaîne recherchée :', # NEW
+	'message_ok_item_trouve_commence_n' => 'Na hľadaný reťazec sa začína @sous_total@ položiek:',
 	'message_ok_item_trouve_contient_1' => 'Jazyková položka obsahuje hľadaný reťazec:',
 	'message_ok_item_trouve_contient_n' => 'Les @sous_total@ položiek obsahuje celý hľadaný reťazec:',
 	'message_ok_item_trouve_egal_1' => 'Jazyková položka presne zodpovedá vyhľadávanému reťazcu:',
-	'message_ok_item_trouve_egal_n' => 'Les @sous_total@ items ci-dessous correspondent exactement à la chaîne recherchée :', # NEW
+	'message_ok_item_trouve_egal_n' => 'Hľadanému reťazcu zodpovedá @sous_total@ položiek:',
 	'message_ok_non_definis_0' => 'Tous les items de langue du module «<em>@module@</em>» utilisés dans les fichiers du répertoire «<em>@ou_fichier@</em>» sont bien définis dans le fichier de langue «<em>@langue@</em>».', # NEW
 	'message_ok_non_definis_1' => 'L\'item de langue du module «<em>@module@</em>» affiché ci-dessous est utilisé dans des fichiers du répertoire «<em>@ou_fichier@</em>» mais n\'est pas défini dans le fichier de langue «<em>@langue@</em>» :', # NEW
 	'message_ok_non_definis_n' => 'Les @nberr@ items de langue du module «<em>@module@</em>» affichés ci-dessous sont utilisés dans des fichiers du répertoire «<em>@ou_fichier@</em>» mais ne sont pas définis dans le fichier de langue «<em>@langue@</em>» :', # NEW
@@ -125,7 +125,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aucun_dossier' => 'nevybrali ste žiadnu stromovú štruktúru',
 	'option_aucun_fichier' => 'nevybrali ste žiaden jazyk',
 	'option_mode_index' => 'Položka zdrojového jazyka',
-	'option_mode_new' => 'Balise &lt;NEW&gt; uniquement', # NEW
+	'option_mode_new' => 'Iba tag &lt;NEW&gt;',
 	'option_mode_new_index' => 'Pred položkou cieľového jazyka sa nachádza &lt;NEW&gt;',
 	'option_mode_new_valeur' => 'Pred reťazcom v zdrojovom jazyku sa nachádza &lt;NEW&gt;',
 	'option_mode_pas_item' => 'Nevytvoriť položku',
@@ -133,14 +133,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_mode_vide' => 'Prázdny reťazec',
 
 	// T
-	'test' => 'TEST : Cet item de langue sert pour la recherche de raccourci et est égal à test.', # NEW
+	'test' => 'TEST : Táto položka jazyka slúži na vyhľadávanie skratky a test zhodnosti.',
 	'test_item_1_variable' => 'TEST : Cet item de langue est bien défini dans le fichier de langue, mais est utilisé sous forme "complexe" dans les fichiers du répertoire scanné.', # NEW
 	'test_item_2_variable' => 'TEST : Cet item de langue est bien défini dans le fichier de langue, mais est utilisé sous forme "complexe" dans les fichiers du répertoire scanné.', # NEW
 	'test_item_non_utilise_1' => 'TEST : Cet item de langue est bien défini dans le fichier de langue (), mais n\'est pas utilisé dans les fichiers du répertoire scanné ().', # NEW
 	'test_item_non_utilise_2' => 'TEST : Cet item de langue est bien défini dans le fichier de langue (), mais n\'est pas utilisé dans les fichiers du répertoire scanné ().', # NEW
 	'texte_item_defini_ou' => '<em>definované v:</em>',
-	'texte_item_mal_defini' => '<em>mais pas défini dans le bon module :</em>', # NEW
-	'texte_item_non_defini' => '<em>mais défini nulle part !</em>', # NEW
+	'texte_item_mal_defini' => '<em>ale nie je definovaná v správnom module:</em>',
+	'texte_item_non_defini' => '<em>ale nikde nie je definovaná!</em>',
 	'texte_item_utilise_ou' => '<em>používa sa v:</em>',
 	'titre_bloc_langues_generees' => 'Jazykové súbory',
 	'titre_bloc_logs_definition' => 'Chýbajúce definície',
@@ -148,14 +148,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_bloc_logs_utilisation' => 'Zastaralé definície',
 	'titre_form_generer' => 'Vytvorenie jazykového súboru',
 	'titre_form_lister' => 'Zobrazenie jazykových súborov',
-	'titre_form_rechercher_item' => 'Recherche de raccourcis dans les fichiers de langue', # NEW
-	'titre_form_rechercher_texte' => 'Recherche de textes dans les fichiers de langue SPIP', # NEW
-	'titre_form_verifier' => 'Vérification des fichiers de langue', # NEW
+	'titre_form_rechercher_item' => 'Vyhľadávanie skratiek v jazykových súboroch',
+	'titre_form_rechercher_texte' => 'Vyhľadávanie v textoch jazykových súborov SPIPu',
+	'titre_form_verifier' => 'Kontrola jazykových súborov',
 	'titre_page' => 'LangOnet',
 	'titre_page_navigateur' => 'LangOnet',
 
 	// Z
-	'z_test' => 'TEST : Cet item de langue sert pour la recherche de raccourci et contient test.' # NEW
+	'z_test' => 'TEST: Táto položka jazyka slúži na vyhľadávanie skratiek a test obsahu.'
 );
 
 ?>
