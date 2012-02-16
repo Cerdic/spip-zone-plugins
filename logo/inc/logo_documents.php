@@ -46,6 +46,8 @@ if (!function_exists('check_upload_error')) {
 	      exit;
 	    }
 
+        include_spip('inc/minipres');
+
 	    echo minipres($msg,
 		          "<div style='text-align: $spip_lang_right'><a href='"  . rawurldecode($GLOBALS['redirect']) . "'><button type='button'>" . _T('ecrire:bouton_suivant') . "</button></a></div>");
 	    exit;
