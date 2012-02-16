@@ -586,11 +586,10 @@ class Videopian {
 			case 'vimeo' :
 			
 			# PHP serialized data URL
-			$url_data = 'http://vimeo.com/api/clip/'.self::$id.'/php';
-			
+			//$url_data = 'http://vimeo.com/api/clip/'.self::$id.'/php';
+			$url_data = 'http://vimeo.com/api/v2/video/'.self::$id.'.php';
 			# Data
 			$data = unserialize(file_get_contents($url_data));
-
 			# Title
 			self::$video->title = $data[0]['title'];
 
