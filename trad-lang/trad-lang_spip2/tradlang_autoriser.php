@@ -181,7 +181,7 @@ function autoriser_tradlang_modifier_dist($faire, $type, $id, $qui, $opt){
 	 * Pour plus tard ... 
 	 */
 	//if(intval($id) > 0){		
-	//	$infos_chaine = sql_fetsel('*','spip_tradlang','id_tradlang='.$id);
+	//	$infos_chaine = sql_fetsel('*','spip_tradlangs','id_tradlang='.$id);
 	//	$lang_mere = sql_getfetsel('lang_mere','spip_tradlang_modules','module='.sql_quote($infos_chaine['module']));
 	//	if($infos_chaine['lang'] == $lang_mere){
 	//		return false;

@@ -18,7 +18,7 @@ function tradlang_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
 	$maj = array();
 	$maj['create'] = array(
-		array('maj_tables',array('spip_tradlang','spip_tradlang_modules')),
+		array('maj_tables',array('spip_tradlangs','spip_tradlang_modules')),
 		array('tradlang_import_ancien_tradlang',true),
 		array('tradlang_maj_modules',true)
 	);
@@ -57,6 +57,13 @@ function tradlang_upgrade($nom_meta_base_version,$version_cible){
 	$maj['0.4.0'] = array(
 		array('maj_tables',array('spip_auteurs'))
 	);
+	$maj['0.4.1'] = array(
+		array('sql_alter',"TABLE spip_tradlang DROP maj"),
+		array('sql_alter',"TABLE spip_tradlang CHANGE ts maj timestamp(14) NOT NULL"),
+	);
+	$maj['0.4.2'] = array(
+		array('sql_alter',"TABLE spip_tradlang RENAME spip_tradlangs")
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -83,8 +90,10 @@ function tradlang_import_ancien_tradlang($affiche=false){
 			$string['langue_choisie'] = 'non';
 			$string['id_tradlang_module'] = sql_getfetsel('id_tradlang_module','spip_tradlang_modules','module='.sql_quote($string['module']));
 			$string['statut'] = $string['status'] ? $string['status'] : 'OK';
+			$string['maj'] = $string['ts'];
+			unset($string['ts']);
 			unset($string['status']);
-			sql_insertq('spip_tradlang',$string);
+			sql_insertq('spip_tradlangs',$string);
 			sql_updateq('trad_lang',array('orig' => 2),'md5='.sql_quote($string['md5']).' AND lang='.sql_quote($string['lang']));
 		}
 		if ($affiche) echo " .";
@@ -92,29 +101,29 @@ function tradlang_import_ancien_tradlang($affiche=false){
 	}
 }
 function tradlang_maj_id_tradlang_modules($affiche = false){
-	$strings = array_map('reset',sql_allfetsel('id_tradlang','spip_tradlang',"id_tradlang_module='0'",'','',"0,100"));
+	$strings = array_map('reset',sql_allfetsel('id_tradlang','spip_tradlangs',"id_tradlang_module='0'",'','',"0,100"));
 	while (count($strings)){
 		foreach($strings as $id_tradlang){
-			$module = sql_getfetsel('module','spip_tradlang','id_tradlang='.intval($id_tradlang));
+			$module = sql_getfetsel('module','spip_tradlangs','id_tradlang='.intval($id_tradlang));
 			$id_tradlang_module = sql_getfetsel('id_tradlang_module','spip_tradlang_modules','module='.sql_quote($module));
-			sql_updateq('spip_tradlang',array('id_tradlang_module' => $id_tradlang_module),'id_tradlang='.intval($id_tradlang));
+			sql_updateq('spip_tradlangs',array('id_tradlang_module' => $id_tradlang_module),'id_tradlang='.intval($id_tradlang));
 		}
 		if ($affiche) echo " .";
-	  	$strings = array_map('reset',sql_allfetsel('id_tradlang','spip_tradlang',"id_tradlang_module='0'",'','',"0,100"));
+	  	$strings = array_map('reset',sql_allfetsel('id_tradlang','spip_tradlangs',"id_tradlang_module='0'",'','',"0,100"));
 	}
 }
 
 function tradlang_maj_tradlang_titre($affiche = false){
-	$strings = array_map('reset',sql_allfetsel('id_tradlang','spip_tradlang',"titre=''",'','',"0,500"));
+	$strings = array_map('reset',sql_allfetsel('id_tradlang','spip_tradlangs',"titre=''",'','',"0,500"));
 	while (count($strings)){
 		spip_log(count($strings),'maj');
 		foreach($strings as $id_tradlang){
-			$tradlang = sql_fetsel('*','spip_tradlang','id_tradlang='.intval($id_tradlang));
+			$tradlang = sql_fetsel('*','spip_tradlangs','id_tradlang='.intval($id_tradlang));
 			$titre = $tradlang['id'].' : '.$tradlang['module'].' - '.$tradlang['lang'];
-			sql_updateq('spip_tradlang',array('titre' => $titre),'id_tradlang='.intval($id_tradlang));
+			sql_updateq('spip_tradlangs',array('titre' => $titre),'id_tradlang='.intval($id_tradlang));
 		}
 		if ($affiche) echo " .";
-	  	$strings = array_map('reset',sql_allfetsel('id_tradlang','spip_tradlang',"titre=''",'','',"0,500"));
+	  	$strings = array_map('reset',sql_allfetsel('id_tradlang','spip_tradlangs',"titre=''",'','',"0,500"));
 	}
 }
 
@@ -128,7 +137,7 @@ function tradlang_maj_modules($affiche=false){
 	while($module = sql_fetch($modules)){
 		spip_log($module['module']);
 		if ($affiche) echo " .";
-		$langues = sql_select('lang','spip_tradlang','id_tradlang_module='.intval($module['id_tradlang_module']).' AND lang!='.sql_quote($module['lang_mere']), array('lang'));
+		$langues = sql_select('lang','spip_tradlangs','id_tradlang_module='.intval($module['id_tradlang_module']).' AND lang!='.sql_quote($module['lang_mere']), array('lang'));
 		while($lang = sql_fetch($langues)){
 			$modifs = $tradlang_verifier_langue_base($module['module'],$lang['lang']);
 		}
@@ -141,25 +150,25 @@ function tradlang_maj_modules($affiche=false){
 function tradlang_maj_traducteurs($affiche=false){
 	$chaines_traducteurs = sql_select('*','trad_lang','status = "" AND traducteur != ""');
 	while($traduction = sql_fetch($chaines_traducteurs)){
-		sql_updateq('spip_tradlang',array('traducteur'=>$traduction['traducteur']),'module = '.sql_quote($traduction['module']).' AND id='.sql_quote($traduction['id']).' AND lang='.sql_quote($traduction['lang']));
+		sql_updateq('spip_tradlangs',array('traducteur'=>$traduction['traducteur']),'module = '.sql_quote($traduction['module']).' AND id='.sql_quote($traduction['id']).' AND lang='.sql_quote($traduction['lang']));
 	}
 	
 	$chaines_traducteurs_modif = sql_select('*','trad_lang','status = "MODIF" AND traducteur != ""');
 	while($traduction = sql_fetch($chaines_traducteurs_modif)){
-		sql_updateq('spip_tradlang',array('traducteur'=>$traduction['traducteur']),'module = '.sql_quote($traduction['module']).' AND id='.sql_quote($traduction['id']).' AND lang='.sql_quote($traduction['lang']));
+		sql_updateq('spip_tradlangs',array('traducteur'=>$traduction['traducteur']),'module = '.sql_quote($traduction['module']).' AND id='.sql_quote($traduction['id']).' AND lang='.sql_quote($traduction['lang']));
 	}
 }
 /**
  * Fonction de desinstallation
  * On supprime :
- * -* la table spip_tradlang
+ * -* la table spip_tradlangs
  * -* la table spip_tradlang_modules
  * -* les éléments de spip_versions concernant l'obet tradlang
  * -* les éléments de spip_versions_fragments concernant l'obet tradlang
  * @param unknown_type $nom_meta_base_version
  */
 function tradlang_vider_tables($nom_meta_base_version) {
-	sql_drop_table("spip_tradlang");
+	sql_drop_table("spip_tradlangs");
 	sql_drop_table("spip_tradlang_modules");
 	sql_delete('spip_versions','objet='.sql_quote('tradlang'));
 	sql_delete('spip_versions_fragments','objet='.sql_quote('tradlang'));

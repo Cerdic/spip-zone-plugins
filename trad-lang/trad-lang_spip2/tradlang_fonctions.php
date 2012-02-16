@@ -31,7 +31,7 @@ function tradlang_getmodules_base(){
 			 * Récupération des différentes langues et calcul du nom des 
 			 * fichiers de langue
 			 */
-			$res2 = sql_select("DISTINCT lang","spip_tradlang","module='$module'");
+			$res2 = sql_select("DISTINCT lang","spip_tradlangs","module='$module'");
 			while($row2=sql_fetch($res2)){
 				$lg = $row2["lang"];
 				$ret[$module]["langue_".$lg] = $row["lang_prefix"]."_".$lg.".php";
@@ -87,13 +87,13 @@ function tradlang_testesynchro($idmodule, $langue){
 
 	
 	// lit le timestamp  base
-	$tsb = sql_getfetsel("ts","spip_tradlang","module =".sql_quote($module)." AND lang=".sql_quote($langue),"","ts DESC","0,1");
+	$tsb = sql_getfetsel("maj","spip_tradlangs","module =".sql_quote($module)." AND lang=".sql_quote($langue),"","maj DESC","0,1");
 
 	return ($tsb == $tsf);
 }
 
 function tradlang_to_langue($id,$lang){
-	$str_lang = sql_getfetsel('str','spip_tradlang','id='.sql_quote($id).' AND lang='.sql_quote($lang));
+	$str_lang = sql_getfetsel('str','spip_tradlangs','id='.sql_quote($id).' AND lang='.sql_quote($lang));
 	return $str_lang;
 }
 
@@ -230,7 +230,7 @@ function critere_langue_complete_dist($id_boucle, &$boucles, $crit){
 		$module_having = $prepare_module('.$id_module.', "' . $boucle->sql_serveur . '");
 	';
 
-    if($id_table == 'tradlang'){
+    if($id_table == 'tradlangs'){
         array_unshift($boucle->where,array("'='", "'$id_table." ."statut'", "'\"OK\"'"));
         $boucles[$id_boucle]->group[] = "$id_table.lang";
         $boucles[$id_boucle]->having[] = "\n\t\t".'$module_having';
@@ -240,7 +240,7 @@ function critere_langue_complete_dist($id_boucle, &$boucles, $crit){
 
 function inc_prepare_module_dist($id_module,  $serveur='') {
 	$lang_mere = sql_getfetsel('lang_mere','spip_tradlang_modules','id_tradlang_module='.intval($id_module));
-	$count = sql_countsel('spip_tradlang','id_tradlang_module='.$id_module.' AND statut="OK" AND lang='.sql_quote($lang_mere));
+	$count = sql_countsel('spip_tradlangs','id_tradlang_module='.$id_module.' AND statut="OK" AND lang='.sql_quote($lang_mere));
 	$having = "COUNT(*)=$count";
 	return $having;
 }

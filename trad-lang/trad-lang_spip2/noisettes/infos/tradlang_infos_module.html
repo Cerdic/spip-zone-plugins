@@ -11,12 +11,12 @@
 <ul class="menu-items infos">
 <li class="item menu-entree odd">
 	<strong>[(#LANG_MERE|traduire_nom_langue)][ ((#LANG_MERE))] - <:tradlang:label_langue_mere:></strong>
-	<BOUCLE_langue_mere(TRADLANG){module}{lang=#LANG_MERE}>[(#SET{str_mere,[(#GET{str_mere}|push{#ID})]})] </BOUCLE_langue_mere>
+	<BOUCLE_langue_mere(TRADLANGS){module}{lang=#LANG_MERE}>[(#SET{str_mere,[(#GET{str_mere}|push{#ID})]})] </BOUCLE_langue_mere>
 	#SET{total_mere,#TOTAL_BOUCLE}<br /><:tradlang:items_total_nb:> : #TOTAL_BOUCLE
 	</B_langue_mere>
-	<BOUCLE_total_item_langue_mere_new(TRADLANG){module}{statut=NEW}{lang=#LANG_MERE}> </BOUCLE_total_item_langue_mere_new>
+	<BOUCLE_total_item_langue_mere_new(TRADLANGS){module}{statut=NEW}{lang=#LANG_MERE}> </BOUCLE_total_item_langue_mere_new>
 	<p class="items_new"><:tradlang:items_new:> : #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_new>
-	<BOUCLE_total_item_langue_mere_modif(TRADLANG){module}{statut=MODIF}{lang=#LANG_MERE}> </BOUCLE_total_item_langue_mere_modif>
+	<BOUCLE_total_item_langue_mere_modif(TRADLANGS){module}{statut=MODIF}{lang=#LANG_MERE}> </BOUCLE_total_item_langue_mere_modif>
 	<p class="items_modif"><:tradlang:items_modif:> : #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_modif>
 	[(#GET{sauvegarde_locale}|=={oui}|oui)
 	[(#SET{sync,[(#ID_TRADLANG_MODULE|tradlang_testesynchro{#LANG_MERE})]})]
@@ -34,22 +34,22 @@
 <B_langues>
 <ul class="menu-items infos">
 #ANCRE_PAGINATION
-<BOUCLE_langues(TRADLANG){module}{fusion lang}{lang !IN #LANG_MERE}{par lang}{pagination 20}>
+<BOUCLE_langues(TRADLANGS){module}{fusion lang}{lang !IN #LANG_MERE}{par lang}{pagination 20}>
 #SET{str_cible,#ARRAY}
 #SET{total,0}
 <li class="menu-entree item [(#COMPTEUR_BOUCLE|alterner{even,odd})]">
 	#SET{update,non}
 	#SET{str_cible,#ARRAY}
 	<strong><span class="lang" dir="#LANG_DIR">[[(#LANG)]]</span>[ (#LANG|traduire_nom_langue)]</strong>
-	<BOUCLE_total_item(TRADLANG){module}{lang=#LANG}>[(#SET{str_cible,#GET{str_cible}|push{#ID}})] </BOUCLE_total_item>
+	<BOUCLE_total_item(TRADLANGS){module}{lang=#LANG}>[(#SET{str_cible,#GET{str_cible}|push{#ID}})] </BOUCLE_total_item>
 	#SET{total,#TOTAL_BOUCLE}</B_total_item>
-	<BOUCLE_total_item_ok(TRADLANG){module}{statut=OK}{lang=#LANG}> </BOUCLE_total_item_ok>
+	<BOUCLE_total_item_ok(TRADLANGS){module}{statut=OK}{lang=#LANG}> </BOUCLE_total_item_ok>
 	#SET{total_ok,#GRAND_TOTAL}
 	</B_total_item_ok>#SET{total_ok,0}<//B_total_item_ok>
-	<BOUCLE_total_item_new(TRADLANG){module}{statut=NEW}{lang=#LANG}> </BOUCLE_total_item_new>
+	<BOUCLE_total_item_new(TRADLANGS){module}{statut=NEW}{lang=#LANG}> </BOUCLE_total_item_new>
 	#SET{total_new,#GRAND_TOTAL}
 	</B_total_item_new>#SET{total_new,0}<//B_total_item_new>
-	<BOUCLE_total_item_modif(TRADLANG){module}{statut=MODIF}{lang=#LANG}> </BOUCLE_total_item_modif>
+	<BOUCLE_total_item_modif(TRADLANGS){module}{statut=MODIF}{lang=#LANG}> </BOUCLE_total_item_modif>
 	#SET{total_modif,#GRAND_TOTAL}
 	</B_total_item_modif>#SET{total_modif,0}<//B_total_item_modif>
 	#SET{percent_ok,#GET{total_ok}|div{#GET{total_mere}}|mult{100}|floor}
@@ -61,11 +61,11 @@
 		<div class="modif" style="left: #GET{percent_ok}px; width: #GET{percent_modif}px"></div>
 		<div class="new" style="left: [(#GET{percent_ok}|plus{#GET{percent_modif}})]px; width: #GET{percent_new}px"> </div>
 	</div>
-	<BOUCLE_revise_inexistants(TRADLANG){module}{lang=#LANG_MERE}{!id IN #GET{str_cible}}> </BOUCLE_revise_inexistants>
+	<BOUCLE_revise_inexistants(TRADLANGS){module}{lang=#LANG_MERE}{!id IN #GET{str_cible}}> </BOUCLE_revise_inexistants>
 	[(#SET{nb_manquant,#TOTAL_BOUCLE})]  #SET{update,oui}
 	<div class="notice">[(#GET{nb_manquant}|singulier_ou_pluriel{tradlang:item_manquant,tradlang:items_manquants})]</div>
 	</B_revise_inexistants>
-	<BOUCLE_total_item_trop(TRADLANG){module}{lang=#LANG}{id !IN #GET{str_mere}}> </BOUCLE_total_item_trop>
+	<BOUCLE_total_item_trop(TRADLANGS){module}{lang=#LANG}{id !IN #GET{str_mere}}> </BOUCLE_total_item_trop>
 	#SET{nb_trop,#TOTAL_BOUCLE} #SET{update,oui}
 	<div class="notice"><:tradlang:items_en_trop{nb=#GET{nb_trop}}:></div></B_total_item_trop>
 	[(#GET{update}|=={oui}|oui)

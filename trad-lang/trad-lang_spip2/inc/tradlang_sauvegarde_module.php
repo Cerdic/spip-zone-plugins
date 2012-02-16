@@ -88,12 +88,12 @@ function tradlang_lirelang($module, $langue, $type=""){
 	$ret = array();
 
 	if ($type=="md5"){
-		$res = sql_select("id,md5","spip_tradlang","module='$module' AND lang='$langue' AND !ISNULL(md5)","","id ASC");
+		$res = sql_select("id,md5","spip_tradlangs","module='$module' AND lang='$langue' AND !ISNULL(md5)","","id ASC");
 		while($row = sql_fetch($res))
 		$ret[$row["id"]] = $row["md5"];
 	}
 	else{
-		$res = sql_select("id,str,statut","spip_tradlang","module = '$module' AND lang='$langue'","","id ASC");
+		$res = sql_select("id,str,statut","spip_tradlangs","module = '$module' AND lang='$langue'","","id ASC");
 		
 		while($row = sql_fetch($res)){
 			if (($row["statut"] != "") && ($row["statut"] != "OK"))
@@ -104,13 +104,13 @@ function tradlang_lirelang($module, $langue, $type=""){
 		}
 
 		// initialise la chaine de tag timestamp sauvegarde
-		$quer = "SELECT MAX(ts) as ts FROM spip_tradlang ".
+		$quer = "SELECT MAX(maj) as maj FROM spip_tradlangs ".
 			"WHERE module = '".$module."' AND lang='".$langue."'";
 		$res = sql_query($quer);
 		$row = sql_fetch($res);
-		$ts = $row["ts"];
+		$maj = $row["maj"];
 
-		$ret["zz_timestamp_nepastraduire"] = $ts;
+		$ret["zz_timestamp_nepastraduire"] = $maj;
 	}
 
 	return $ret;

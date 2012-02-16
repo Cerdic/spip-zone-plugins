@@ -1,4 +1,4 @@
-<BOUCLE_afficher_contenu(TRADLANG tradlang_modules){id_tradlang=#ENV{id}}>
+<BOUCLE_afficher_contenu(TRADLANGS tradlang_modules){id_tradlang=#ENV{id}}>
 <div class="champ contenu_module[ (#MODULE*|strlen|?{'',vide})]">
 <div class='label'><:tradlang:label_nommodule:></div>
 <div dir='#LANG_DIR' class='module'>#NOM_MOD[(#MODULE|=={#NOM_MOD}|non)([(#MODULE)])]</div>
@@ -23,7 +23,7 @@
 <div class='label'><:tradlang:label_tradlang_str:></div>
 <div dir='#LANG_DIR' class='str'>[(#STR**|entites_html)]</div>
 </div>
-<BOUCLE_chaine_orig(TRADLANG){id}{module}{lang=#LANG_MERE}>
+<BOUCLE_chaine_orig(TRADLANGS){id}{module}{lang=#LANG_MERE}>
 <div class="champ contenu_str_orig[ (#STR*|strlen|?{'',vide})]">
 <div class='label'><:tradlang:label_version_originale{lang=#LANG}:></div>
 <div dir='#LANG_DIR' class='str_orig'>[(#STR**|entites_html)]</div>

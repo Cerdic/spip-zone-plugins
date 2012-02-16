@@ -4,12 +4,12 @@
 #SET{str_cible,#ARRAY}
 #SET{str_statut,#ARRAY}
 #SET{langue_longue,#ENV{lang_cible}|traduire_nom_langue}
-[(#SET{defaut_tri,#ARRAY{statut,#ENV{statut_sens,1},id,1,str,1,ts,-1}})]
+[(#SET{defaut_tri,#ARRAY{statut,#ENV{statut_sens,1},id,1,str,1,maj,-1}})]
 
-<BOUCLE_revise(TRADLANG){module}{lang=#LANG_MERE}>[(#SET{str_mere,[(#GET{str_mere}|push{#ID})]})] </BOUCLE_revise>
+<BOUCLE_revise(TRADLANGS){module}{lang=#LANG_MERE}>[(#SET{str_mere,[(#GET{str_mere}|push{#ID})]})] </BOUCLE_revise>
 #SET{total_mere,#GRAND_TOTAL}
 <p><:tradlang:nb_items_langue_mere{nb=#GET{total_mere}}:></p>
-	<BOUCLE_total_orig(TRADLANG){module}{lang=#ENV{lang_orig}}{statut=OK}> </BOUCLE_total_orig>
+	<BOUCLE_total_orig(TRADLANGS){module}{lang=#ENV{lang_orig}}{statut=OK}> </BOUCLE_total_orig>
 		[(#GRAND_TOTAL|<{#GET{total_mere}})
 			#SET{compte_langue_orig,#GRAND_TOTAL}
 			#SET{lang_orig,#LANG_MERE}
@@ -30,15 +30,15 @@
 	</div>
 <//B_revise>
 
-<BOUCLE_total_item(TRADLANG){module}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}>[(#SET{str_cible,#GET{str_cible}|push{#ID}})] </BOUCLE_total_item>
+<BOUCLE_total_item(TRADLANGS){module}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}>[(#SET{str_cible,#GET{str_cible}|push{#ID}})] </BOUCLE_total_item>
 #SET{total_cible,#GRAND_TOTAL}</B_total_item>#SET{total_cible,0}<//B_total_item>
-<BOUCLE_total_item_ok(TRADLANG){module}{statut=OK}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}> </BOUCLE_total_item_ok>
+<BOUCLE_total_item_ok(TRADLANGS){module}{statut=OK}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}> </BOUCLE_total_item_ok>
 #SET{total_ok,#GRAND_TOTAL}
 </B_total_item_ok>#SET{total_ok,0}<//B_total_item_ok>
-<BOUCLE_total_item_new(TRADLANG){module}{statut=NEW}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}> </BOUCLE_total_item_new>
+<BOUCLE_total_item_new(TRADLANGS){module}{statut=NEW}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}> </BOUCLE_total_item_new>
 #SET{total_new,#GRAND_TOTAL}
 </B_total_item_new>#SET{total_new,0}<//B_total_item_new>
-<BOUCLE_total_item_modif(TRADLANG){module}{statut=MODIF}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}> </BOUCLE_total_item_modif>
+<BOUCLE_total_item_modif(TRADLANGS){module}{statut=MODIF}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}> </BOUCLE_total_item_modif>
 #SET{total_modif,#GRAND_TOTAL}
 </B_total_item_modif>#SET{total_modif,0}<//B_total_item_modif>
 #SET{percent_ok,#GET{total_ok}|div{#GET{total_mere}}|mult{100}|floor}
@@ -69,17 +69,17 @@
 	[(#GET{total_ok}|=={0}|et{#GET{total_cible}|>{0}}|et{#AUTORISER{modifier,tradlang}}|oui)
 	[(#SET{texte_bouton_delete,<:tradlang:bouton_supprimer_langue_module:>}|attribut_html)]
 	<div class="actions">
-		[(#BOUTON_ACTION{#GET{texte_bouton_delete},[(#URL_ACTION_AUTEUR{tradlang_supprimer_langue_cible,[(#ID_TRADLANG_MODULE|concat{/#ENV{lang_cible}})],#URL_TRADLANG_MODULE|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}}})]})]
+		[(#BOUTON_ACTION{#GET{texte_bouton_delete},[(#URL_ACTION_AUTEUR{tradlang_supprimer_langue_cible,[(#ID_TRADLANG_MODULE|concat{/#ENV{lang_cible}})],#SELF})]})]
 	</div>]
 	[(#GET{total_ok}|>{0}|et{#GET{total_cible}|>{0}}|et{#AUTORISER{modifier,tradlang}}|oui)
 	<div class="actions">
-		[(#BOUTON_ACTION{[(#VAL{tradlang:bouton_exporter_fichier_langue}|_T{#ARRAY{lang,#ENV{lang_cible}}})],[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#ENV{lang_cible}})],[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]})]})]
+		[(#BOUTON_ACTION{[(#VAL{tradlang:bouton_exporter_fichier_langue}|_T{#ARRAY{lang,#ENV{lang_cible}}})],[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#ENV{lang_cible}})],#SELF})]})]
 		[(#GET{lang_orig}|et{#GET{lang_orig}|!={#LANG_MERE}}|oui)
 		<span class="sep">
-			[(#BOUTON_ACTION{[(#VAL{tradlang:bouton_exporter_fichier_langue}|_T{#ARRAY{lang,#GET{lang_orig}}})],[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#GET{lang_orig}})],[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]})]})]
+			[(#BOUTON_ACTION{[(#VAL{tradlang:bouton_exporter_fichier_langue}|_T{#ARRAY{lang,#GET{lang_orig}}})],[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#GET{lang_orig}})],#SELF})]})]
 		</span>
 		]<span class="sep">
-			[(#BOUTON_ACTION{<:tradlang:bouton_exporter_fichier_langue_original{lang_mere=#LANG_MERE}|attribut_html:>,[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#LANG_MERE})],[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]})]})]
+			[(#BOUTON_ACTION{<:tradlang:bouton_exporter_fichier_langue_original{lang_mere=#LANG_MERE}|attribut_html:>,[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#LANG_MERE})],#SELF})]})]
 		</span>
 	</div>]
 </div>
@@ -87,12 +87,12 @@
 [(#GET{total_mere}|>{0}|oui)<p><:tradlang:nb_items_langue_cible{nb=#GET{total_cible},langue=#ENV{lang_cible}}:></p>]]
 
 [(#ENV{edit}|=={1}|oui)
-	<p><a href="[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}}|parametre_url{edit,2})]" class="ajax"><:tradlang:lien_retour_module{module=#NOM_MOD}:></a></p>
+	<p><a href="[(#SELF|parametre_url{edit,2})]" class="ajax"><:tradlang:lien_retour_module{module=#NOM_MOD}:></a></p>
 ]
 [(#ENV{edit}|=={1}|non)
 	[(#GET{module_existant,non}|=={oui}|oui)
 	[(#GET{percent_ok}|!={100}|et{#AUTORISER{modifier,tradlang}}|oui)
-	<p><a href="[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}}|parametre_url{edit,1})]" class="ajax"><:tradlang:lien_editer_tous:></a></p>]]
+	<p><a href="[(#SELF|parametre_url{edit,1})]" class="ajax"><:tradlang:lien_editer_tous:></a></p>]]
 ]
 <BOUCLE_si_edit(CONDITION){si #AUTORISER{modifier,tradlang}|et{#ENV{edit}|=={1}}}>
 [(#_module:CRAYON{tradlang_tous})]
@@ -103,7 +103,7 @@
 	<p class="filtrer"><:tradlang:info_filtrer_status:>
 	[(#ENV{statut}|oui)<a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,''}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="ajax"><:tradlang:lien_aucun_status:></a><span class="sep"> | </span>]
 	[(#ENV{statut}|non)<:tradlang:lien_aucun_status:><span class="sep"> | </span>]]
-<BOUCLE_statut(TRADLANG){module}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{fusion statut}{'<span class="sep"> | </span>'}>
+<BOUCLE_statut(TRADLANGS){module}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{fusion statut}{'<span class="sep"> | </span>'}>
 [(#GRAND_TOTAL|>{1}|oui)
 	[(#STATUT|!={#ENV{statut}}|oui)<a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,#STATUT}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="ajax">#STATUT</a>]
 	[(#STATUT|!={#ENV{statut}}|non)#STATUT]
@@ -166,15 +166,15 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_revise_inexistants(TRADLANG){module}{lang=#LANG_MERE}{id !IN #GET{str_cible}}>
+	<BOUCLE_revise_inexistants(TRADLANGS){module}{lang=#LANG_MERE}{id !IN #GET{str_cible}}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 		<td>#ID</td>
-		<BOUCLE_revise_inexistants_orig(TRADLANG){module}{lang=#GET{lang_orig}}{id=#ID}>
+		<BOUCLE_revise_inexistants_orig(TRADLANGS){module}{lang=#GET{lang_orig}}{id=#ID}>
 		<td style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|entites_html|nl2br)]</td>
 		</BOUCLE_revise_inexistants_orig>
 		<td style="text-align:#LANG_LEFT;" dir="#LANG_DIR"><:tradlang:str_existe_pas_in_langue:></td>
 		<//B_revise_inexistants_orig>
-		<td style="text-align:#LANG_LEFT;" dir="#LANG_DIR">#TS</td>
+		<td style="text-align:#LANG_LEFT;" dir="#LANG_DIR">#MAJ</td>
 		<td>#STATUT</td>
 	</tr>
 	</BOUCLE_revise_inexistants>
@@ -206,11 +206,11 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_revise_en_trop(TRADLANG){module}{lang=#ENV{lang_cible}}{!id IN #GET{str_mere}}>
+	<BOUCLE_revise_en_trop(TRADLANGS){module}{lang=#ENV{lang_cible}}{!id IN #GET{str_mere}}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 		<td>#ID</td>
 		<td style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|entites_html|nl2br)]</td>
-		<td style="text-align:#LANG_LEFT;" dir="#LANG_DIR">#TS</td>
+		<td style="text-align:#LANG_LEFT;" dir="#LANG_DIR">#MAJ</td>
 		<td>#STATUT</td>
 	</tr>
 	</BOUCLE_revise_en_trop>
@@ -248,16 +248,16 @@
 	</thead>
 	<tbody>
 	[(#REM)on n'affiche que les id qui existent dans la langue mère] 
-	<BOUCLE_revise_cible(TRADLANG tradlang_modules){module}{statut ?}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{tri #ENV{par,statut},#GET{defaut_tri}}{par id}>
+	<BOUCLE_revise_cible(TRADLANGS tradlang_modules){module}{statut ?}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{tri #ENV{par,statut},#GET{defaut_tri}}{par id}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})] statut_[(#STATUT|strtolower)]" id="tradlang-#ID_TRADLANG">
 		<td class="code_langue">#ID</td>
-		<BOUCLE_revise_orig(TRADLANG){module}{lang=#GET{lang_orig,#LANG_MERE}}{id=#ID}>
+		<BOUCLE_revise_orig(TRADLANGS){module}{lang=#GET{lang_orig,#LANG_MERE}}{id=#ID}>
 		<td class="origine" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html|nl2br)]</td>
 		</BOUCLE_revise_orig>
 		<td class="origine" style="text-align:#LANG_LEFT;" dir="#LANG_DIR"><:tradlang:str_existe_plus:></td>
 		<//B_revise_orig>
 		<td class="cible #EDIT{str_statut}" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html|nl2br)]</td>
-		<td class="date">#TS</td>
+		<td class="date">#MAJ</td>
 		<td class="statut" width="50px">[(#STATUT|sinon{<:tradlang:info_status_ok:>})]</td>
 		<td class="modifier" width="50px"><a href="[(#URL_TRADLANG|parametre_url{lang_orig,#GET{lang_orig}}|parametre_url{retour,#SELF})]"><:tradlang:lien_editer_chaine:></a></td>
 	</tr>

@@ -19,7 +19,7 @@ function action_tradlang_exporter_langue_dist(){
 	$id_tradlang_module = intval($r[1]);
 	$lang_cible = $r[2];
 	include_spip('inc/autoriser');
-	if($lang_cible && intval($id_tradlang_module) && autoriser('modifier','tradlang') && sql_countsel('spip_tradlang','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($lang_cible))){
+	if($lang_cible && intval($id_tradlang_module) && autoriser('modifier','tradlang') && sql_countsel('spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($lang_cible))){
 		$module = sql_getfetsel('module','spip_tradlang_modules','id_tradlang_module='.intval($id_tradlang_module));
 		$tradlang_sauvegarde_module = charger_fonction('tradlang_sauvegarde_module','inc');
 		$fichier = $tradlang_sauvegarde_module($module,$lang_cible);

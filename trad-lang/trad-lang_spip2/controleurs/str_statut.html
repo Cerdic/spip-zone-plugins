@@ -5,7 +5,7 @@
 ]
 #CACHE{0}
 <B_a>
-<BOUCLE_a(TRADLANG tradlang_modules){id_tradlang}>
+<BOUCLE_a(TRADLANGS tradlang_modules){id_tradlang}>
 <fieldset>
 <legend>TRADLANG ##ID_TRADLANG</legend>
 <ul>
@@ -17,7 +17,7 @@
 			<option value="NEW"[(#STATUT|=={NEW}|oui)selected="selected"]><:tradlang:str_status_new:></option>
 		</select>
 	</li>
-	<BOUCLE_orig(TRADLANG){id=#ID}{module=#MODULE}{lang=#VAL{lang_orig}|_request|sinon{#LANG_MERE}}>
+	<BOUCLE_orig(TRADLANGS){id=#ID}{module=#MODULE}{lang=#VAL{lang_orig}|_request|sinon{#LANG_MERE}}>
 	<li class="editer original">
 		<div>
 		<label><:tradlang:label_version_originale{lang=#LANG}:></label>

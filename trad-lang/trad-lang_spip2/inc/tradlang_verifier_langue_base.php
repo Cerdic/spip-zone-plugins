@@ -27,7 +27,7 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 	 * et donc à insérer
 	 */
 	$diff1 = array_diff($trad_langue_mere_id, $trad_langue_cible_id);
-	$diff1_array = sql_allfetsel('*','spip_tradlang','module='.sql_quote($module).' AND lang='.sql_quote($langue_mere).' AND '.sql_in('id',$diff1));
+	$diff1_array = sql_allfetsel('*','spip_tradlangs','module='.sql_quote($module).' AND lang='.sql_quote($langue_mere).' AND '.sql_in('id',$diff1));
 	$inserees = 0;
 	/**
 	 * $diff2 est l'ensemble des chaines en trop dans la langue fille
@@ -42,10 +42,10 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 				$array['lang'] = $langue;
 				$array['titre'] = $array['id'].' : '.$array['module'].' - '.$langue;
 				$array['statut'] = 'NEW';
-				unset($array['ts']);
+				unset($array['maj']);
 				unset($array['id_tradlang']);
 				unset($array['traducteur']);
-				$id_tradlang = sql_insertq('spip_tradlang',$array);
+				$id_tradlang = sql_insertq('spip_tradlangs',$array);
 				$inserees++;
 			}
 		}
@@ -53,8 +53,8 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 		foreach($diff2 as $key => $id){
 			$array['id'] = $module.'_'.$id;
 			$array['module'] = 'attic';
-			$id_tradlang = sql_getfetsel('id_tradlang','spip_tradlang','id='.sql_quote($id)." AND module=".sql_quote($module)." AND lang=".sql_quote($langue));
-			sql_updateq('spip_tradlang',$array,'id_tradlang='.intval($id_tradlang));
+			$id_tradlang = sql_getfetsel('id_tradlang','spip_tradlangs','id='.sql_quote($id)." AND module=".sql_quote($module)." AND lang=".sql_quote($langue));
+			sql_updateq('spip_tradlangs',$array,'id_tradlang='.intval($id_tradlang));
 			$supprimees++;
 		}
 	}else{

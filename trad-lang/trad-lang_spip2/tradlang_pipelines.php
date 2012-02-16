@@ -11,14 +11,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Insertion dans le pipeline declarer_tables_objets_surnoms (base/connect_sql.php)
- * La table spip_tradlang est une table ancienne, et n'a pas de S final ...
+ * La table spip_tradlangs est une table ancienne, et n'a pas de S final ...
  * Pour éviter les problèmes liés à cela, on surnomme les objets
  * 
  * @param array $flux La liste des surnoms
  * @return array Le $flux complété
  */
 function tradlang_declarer_tables_objets_surnoms($flux){
-	$flux['tradlang'] = 'tradlang';
+	//$flux['tradlang'] = 'tradlang';
 	return $flux;
 }
 
@@ -51,7 +51,7 @@ function tradlang_forum_objets_depuis_env($array){
  * @return
  */
 function tradlang_post_edition($flux){
-	if($flux['args']['table'] == "spip_tradlang"){
+	if($flux['args']['table'] == "spip_tradlangs"){
 		$config = @unserialize($GLOBALS['meta']['tradlang']);
 		if (!is_array($config))
 			return $flux;

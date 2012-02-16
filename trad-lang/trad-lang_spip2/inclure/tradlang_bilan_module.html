@@ -1,10 +1,10 @@
 <BOUCLE_module(TRADLANG_MODULES){id_tradlang_module}>
-<BOUCLE_compte_langue_mere(TRADLANG){module}{lang=#LANG_MERE}> </BOUCLE_compte_langue_mere>
+<BOUCLE_compte_langue_mere(TRADLANGS){module}{lang=#LANG_MERE}> </BOUCLE_compte_langue_mere>
 #SET{total_mere,#GRAND_TOTAL}
 </B_compte_langue_mere>
 #SET{langues,#ARRAY}
-<BOUCLE_langues_sort(TRADLANG){id_tradlang_module}{fusion lang}>
-<BOUCLE_strings_ok(TRADLANG){id_tradlang_module}{lang=#LANG}{statut = 'OK'}> </BOUCLE_strings_ok>
+<BOUCLE_langues_sort(TRADLANGS){id_tradlang_module}{fusion lang}>
+<BOUCLE_strings_ok(TRADLANGS){id_tradlang_module}{lang=#LANG}{statut = 'OK'}> </BOUCLE_strings_ok>
 #SET{langues,#GET{langues}|array_merge{#ARRAY{#LANG,#GRAND_TOTAL}}}
 </B_strings_ok>
 #SET{langues,#GET{langues}|array_merge{#ARRAY{#LANG,0}}}
@@ -54,7 +54,7 @@
 		#SET{langue_mere,#LANG_MERE}
 		<td>#LANG_MERE</td>
 		<td><abbr title="<:tradlang:nb_items_langue_mere{nb=#GET{total_mere}}|attribut_html:>">#GET{total_mere}</abbr></td>
-		<BOUCLE_ok_langue(TRADLANG){module}{lang=#CLE}{statut=OK}> </BOUCLE_ok_langue>
+		<BOUCLE_ok_langue(TRADLANGS){module}{lang=#CLE}{statut=OK}> </BOUCLE_ok_langue>
 		#SET{total_ok,#GRAND_TOTAL}
 		<td>
 			<abbr title="[(#GET{total_ok}|singulier_ou_pluriel{tradlang:info_nb_items_module_ok_un,tradlang:info_nb_items_module_ok,nb,#ARRAY{module,#NOM_MOD,lang,#CLE,langue_longue,#GET{langue_longue}}}|attribut_html)]">
@@ -69,7 +69,7 @@
 			</abbr>
 		</td>
 		<//B_ok_langue>
-		<BOUCLE_modif_langue(TRADLANG){module}{lang=#CLE}{statut=MODIF}> </BOUCLE_modif_langue>
+		<BOUCLE_modif_langue(TRADLANGS){module}{lang=#CLE}{statut=MODIF}> </BOUCLE_modif_langue>
 		#SET{total_modif,#GRAND_TOTAL}
 		<td>
 			<abbr title="[(#GET{total_modif}|singulier_ou_pluriel{tradlang:info_nb_items_module_modif_un,tradlang:info_nb_items_module_modif,nb,#ARRAY{module,#NOM_MOD,lang,#CLE,langue_longue,#GET{langue_longue}}}|attribut_html)]">
@@ -84,7 +84,7 @@
 			</abbr>
 		</td>
 		<//B_modif_langue>
-		<BOUCLE_new_langue(TRADLANG){module}{lang=#CLE}{statut=NEW}> </BOUCLE_new_langue>
+		<BOUCLE_new_langue(TRADLANGS){module}{lang=#CLE}{statut=NEW}> </BOUCLE_new_langue>
 		#SET{total_new,#GRAND_TOTAL}
 		<td>
 			<abbr title="[(#GET{total_new}|singulier_ou_pluriel{tradlang:info_nb_items_module_new_un,tradlang:info_nb_items_module_new,nb,#ARRAY{module,#NOM_MOD,lang,#CLE,langue_longue,#GET{langue_longue}}}|attribut_html)]">

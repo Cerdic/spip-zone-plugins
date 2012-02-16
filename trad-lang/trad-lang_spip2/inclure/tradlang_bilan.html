@@ -4,13 +4,13 @@
 <BOUCLE_si_pas_langues(CONDITION){si #ENV{langues_choisies,#GET{langues_preferees_auteur}}|is_array|non|et{#CONFIG{tradlang/limiter_langues_bilan}|=={on}|oui}|oui}>
 #SET{langues_utilisees,#ARRAY}
 #SET{nb_utilisees,#CONFIG{tradlang/limiter_langues_bilan_nb,10}}
-<BOUCLE_10_langues(TRADLANG){statut=OK}{fusion lang}{!par COUNT(*)}{0,#GET{nb_utilisees}}>
+<BOUCLE_10_langues(TRADLANGS){statut=OK}{fusion lang}{!par COUNT(*)}{0,#GET{nb_utilisees}}>
 #SET{langues_utilisees,#GET{langues_utilisees}|push{#LANG}}
 </BOUCLE_10_langues>
 </BOUCLE_si_pas_langues>
 #SET{langues_preferees,#ENV{langues_choisies,#GET{langues_preferees_auteur,#GET{langues_utilisees}}}}
-<BOUCLE_langues_sort(TRADLANG){fusion lang}{lang == ^((#GET{langues_preferees}|implode{|}|sinon{.*}))$}>
-<BOUCLE_strings_ok(TRADLANG){lang=#LANG}{statut=OK}> </BOUCLE_strings_ok>
+<BOUCLE_langues_sort(TRADLANGS){fusion lang}{lang == ^((#GET{langues_preferees}|implode{|}|sinon{.*}))$}>
+<BOUCLE_strings_ok(TRADLANGS){lang=#LANG}{statut=OK}> </BOUCLE_strings_ok>
 [(#TOTAL_BOUCLE|>{2}|oui)
 #SET{langues,#GET{langues}|array_merge{#ARRAY{#LANG,#TOTAL_BOUCLE}}}]
 [(#TOTAL_BOUCLE|>{2}|non)
@@ -75,11 +75,11 @@
 		<td><a href="[(#SELF|parametre_url{id_tradlang_module,#ID_TRADLANG_MODULE})]" title="<:tradlang:lien_voir_bilan_module{module=#MODULE,nom_mod=#NOM_MOD}|attribut_html:>">[(#NOM_MOD)]</a></td>
 		#SET{full,''}
 		#SET{langue_mere,#LANG_MERE}
-		<BOUCLE_compte_langue_mere(TRADLANG){module}{lang=#LANG_MERE}> </BOUCLE_compte_langue_mere>
+		<BOUCLE_compte_langue_mere(TRADLANGS){module}{lang=#LANG_MERE}> </BOUCLE_compte_langue_mere>
 		#SET{full,#GRAND_TOTAL}
 		</B_compte_langue_mere>
 		<BOUCLE_langue_module(POUR){tableau #GET{langues}}>
-			<BOUCLE_compte_tradlang(TRADLANG){module}{lang=#CLE}{statut=OK}> </BOUCLE_compte_tradlang>
+			<BOUCLE_compte_tradlang(TRADLANGS){module}{lang=#CLE}{statut=OK}> </BOUCLE_compte_tradlang>
 			[(#SET{class,'non_traduit'})]
 			
 			[(#TOTAL_BOUCLE|=={#GET{full}}|oui)

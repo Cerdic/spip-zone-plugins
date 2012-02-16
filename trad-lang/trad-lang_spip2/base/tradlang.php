@@ -8,7 +8,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function tradlang_declarer_tables_interfaces($interface){
-	$interface['table_des_tables']['tradlang'] = 'tradlang';
+	$interface['table_des_tables']['tradlangs'] = 'tradlangs';
 	$interface['table_des_tables']['tradlang_modules'] = 'tradlang_modules';
 	$interface['table_des_traitements']['PRIORITE'][]= 'typo(supprimer_numero(%s), "TYPO", $connect)';
 	return $interface;
@@ -57,7 +57,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 		'champs_versionnes' => array('module','nom_mod','texte','lang_mere','priorite')
 	);
 
-	$tables['spip_tradlang'] = array(
+	$tables['spip_tradlangs'] = array(
 		'page'=>'tradlang',
 		'texte_retour' => 'icone_retour',
 		'texte_objets' => 'tradlang:titre_tradlang_chaines',
@@ -79,13 +79,12 @@ function tradlang_declarer_tables_objets_sql($tables){
 			"langue_choisie"	=> "VARCHAR(3) DEFAULT 'non'",
 			"str" => "text NOT NULL", 
 			"comm" => "text NOT NULL",
-			"ts" => "timestamp(14) NOT NULL",
 			"statut" => "varchar(16) NOT NULL default 'NEW'",
 			"traducteur" => "varchar(32) default NULL",
 			"md5" => "varchar(32) default NULL",
 			"orig" => "tinyint(4) NOT NULL default '0'",
 			"date_modif" => "datetime default NULL",
-			"maj"	=> "TIMESTAMP"
+			"maj" => "timestamp(14) NOT NULL"
 		),
 		'key' => array(
 			"PRIMARY KEY" => "id_tradlang",

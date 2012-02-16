@@ -6,7 +6,7 @@ function inc_tradlang_ajouter_code_langue($module,$lang){
 	/**
 	 * Insertion des chaines de la langue mère avec le statut NEW
 	 */
-	$chaines_mere = sql_select('*','spip_tradlang',"module=".sql_quote($module['module'])." AND lang=".sql_quote($module['lang_mere']));
+	$chaines_mere = sql_select('*','spip_tradlangs',"module=".sql_quote($module['module'])." AND lang=".sql_quote($module['lang_mere']));
 	while($chaine = sql_fetch($chaines_mere)){
 		$chaine['titre'] = $chaine['id'].' : '.$chaine['module'].' - '.$lang;
 		$chaine['lang'] = $lang;
@@ -16,9 +16,9 @@ function inc_tradlang_ajouter_code_langue($module,$lang){
 		$chaine['md5'] = md5($chaine['str']);
 		$chaine['date_modif'] = date('Y-m-d H:i:s');
 		$chaine['langue_choisie'] = 'oui';
-		unset($chaine['ts']);
+		unset($chaine['maj']);
 		unset($chaine['id_tradlang']);
-		$res = sql_insertq('spip_tradlang',$chaine);
+		$res = sql_insertq('spip_tradlangs',$chaine);
 	}
 	
 	/**

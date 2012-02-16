@@ -30,14 +30,14 @@ function formulaires_editer_tradlang_verifier($id_tradlang='aucun',$retour='',$l
 function formulaires_editer_tradlang_traiter($id_tradlang='aucun',$retour='',$lang_orig=''){
 	$res = formulaires_editer_objet_traiter('tradlang',$id_tradlang,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
 	if(!test_espace_prive()){
-		$tradlang = sql_fetsel('*','spip_tradlang','id_tradlang='.intval($id_tradlang));
+		$tradlang = sql_fetsel('*','spip_tradlangs','id_tradlang='.intval($id_tradlang));
 		$module = sql_fetsel('module,nom_mod,lang_mere','spip_tradlang_modules','id_tradlang_module='.intval($tradlang['id_tradlang_module']));
 		$lang_orig = $lang_orig ? $lang_orig:$module['lang_mere'];
 		$url_module = parametre_url(parametre_url(generer_url_entite($tradlang['id_tradlang_module'],'tradlang_module'),'lang_orig',$lang_orig),'lang_cible',$tradlang['lang']);
 		$res['redirect'] = '';
-		if($id_tradlang_suivant = sql_getfetsel('id_tradlang','spip_tradlang','id_tradlang_module='.intval($tradlang['id_tradlang_module']).' AND lang='.sql_quote($tradlang['lang']).' AND statut != "OK" AND id_tradlang > '.intval($id_tradlang))){
+		if($id_tradlang_suivant = sql_getfetsel('id_tradlang','spip_tradlangs','id_tradlang_module='.intval($tradlang['id_tradlang_module']).' AND lang='.sql_quote($tradlang['lang']).' AND statut != "OK" AND id_tradlang > '.intval($id_tradlang))){
 			$url_suivant = 	parametre_url(parametre_url(generer_url_entite($id_tradlang_suivant,'tradlang'),'lang_orig',$lang_orig),'lang_cible',$tradlang['lang']);
-		}else if($id_tradlang_suivant = sql_getfetsel('id_tradlang','spip_tradlang','id_tradlang_module='.intval($tradlang['id_tradlang_module']).' AND statut != "OK" AND lang='.sql_quote($tradlang['lang']))){
+		}else if($id_tradlang_suivant = sql_getfetsel('id_tradlang','spip_tradlangs','id_tradlang_module='.intval($tradlang['id_tradlang_module']).' AND statut != "OK" AND lang='.sql_quote($tradlang['lang']))){
 			$url_suivant = 	parametre_url(parametre_url(generer_url_entite($id_tradlang_suivant,'tradlang'),'lang_orig',$lang_orig),'lang_cible',$tradlang['lang']);
 		}
 		$res['message_ok'] .= '<br />';

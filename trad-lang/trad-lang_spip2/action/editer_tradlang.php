@@ -38,7 +38,7 @@ function tradlang_set($id_tradlang,$set=null){
 	/**
 	 * On vérifie s'il y a au moins un champ modifié pour ajouter l'id_auteur dans les traducteurs
 	 */
-	$infos_tradlang = sql_fetsel('*','spip_tradlang','id_tradlang='.intval($id_tradlang));
+	$infos_tradlang = sql_fetsel('*','spip_tradlangs','id_tradlang='.intval($id_tradlang));
 	
 	$modifie = false;
 	foreach(objet_info('tradlang','champs_editables') as $champ){
@@ -50,7 +50,7 @@ function tradlang_set($id_tradlang,$set=null){
 	
 	if($modifie && ($GLOBALS['visiteur_session']['id_auteur'] > 0)){
 		$traducteurs = array();
-		$traducteur = sql_getfetsel('traducteur','spip_tradlang','id_tradlang='.intval($id_tradlang));
+		$traducteur = sql_getfetsel('traducteur','spip_tradlangs','id_tradlang='.intval($id_tradlang));
 		if($traducteur){
 			$traducteurs = array_map('trim',explode(',',$traducteur));
 		}
@@ -66,14 +66,13 @@ function tradlang_set($id_tradlang,$set=null){
 			'nonvide' => array(),
 			'invalideur' => $invalideur,
 			'indexation' => true,
-			'date_modif' => 'ts' // champ a mettre a date('Y-m-d H:i:s') s'il y a modif
 		),
 		$c)){
 		return $err;
 	}
 	
 	if($statut = (_request('statut') ? _request('statut') : $c['statut'])){
-		sql_updateq('spip_tradlang',array('statut' => $statut),'id_tradlang='.intval($id_tradlang));
+		sql_updateq('spip_tradlangs',array('statut' => $statut),'id_tradlang='.intval($id_tradlang));
 	}
 	
 	//$c = collecter_requests(array('statut'),array(),$set);
@@ -93,7 +92,7 @@ function instituer_tradlang($id_tradlang, $c) {
 	include_spip('inc/rubriques');
 	include_spip('inc/modifier');
 
-	$row = sql_fetsel("statut", "spip_tradlang", "id_tradlang=$id_tradlang");
+	$row = sql_fetsel("statut", "spip_tradlangs", "id_tradlang=$id_tradlang");
 	$statut_ancien = $statut = $row['statut'];
 	$champs = array();
 
@@ -111,7 +110,7 @@ function instituer_tradlang($id_tradlang, $c) {
 	$champs = pipeline('pre_edition',
 		array(
 			'args' => array(
-				'table' => 'spip_tradlang',
+				'table' => 'spip_tradlangs',
 				'objet' => 'tradlang',
 				'id_objet' => $id_tradlang,
 				'action'=>'instituer',
@@ -124,7 +123,7 @@ function instituer_tradlang($id_tradlang, $c) {
 	if (!count($champs)) return;
 
 	// Envoyer les modifs.
-	sql_updateq('spip_tradlang',$champs,"id_tradlang=$id_tradlang");
+	sql_updateq('spip_tradlangs',$champs,"id_tradlang=$id_tradlang");
 
 	// Invalider les caches
 	include_spip('inc/invalideur');
@@ -134,7 +133,7 @@ function instituer_tradlang($id_tradlang, $c) {
 	pipeline('post_edition',
 		array(
 			'args' => array(
-				'table' => 'spip_tradlang',
+				'table' => 'spip_tradlangs',
 				'objet' => 'tradlang',
 				'id_objet' => $id_tradlang,
 				'action'=>'instituer',

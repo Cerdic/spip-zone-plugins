@@ -39,8 +39,8 @@ function formulaires_tradlang_choisir_module_charger($id_tradlang_module="",$lan
 		 * On vérifie que la langue d'origine choisie dans l'url est correctement traduite 
 		 * sinon on passe à la langue mère
 		 */
-		$compte_total_mere = sql_getfetsel('COUNT(*)','spip_tradlang','id_tradlang_module='.intval($valeurs['id_tradlang_module']).' AND statut="OK" AND lang='.sql_quote($infos_module['lang_mere']));
-		$compte_total_orig = sql_getfetsel('COUNT(*)','spip_tradlang','id_tradlang_module='.intval($valeurs['id_tradlang_module']).' AND statut="OK" AND lang='.sql_quote($lang_orig));
+		$compte_total_mere = sql_getfetsel('COUNT(*)','spip_tradlangs','id_tradlang_module='.intval($valeurs['id_tradlang_module']).' AND statut="OK" AND lang='.sql_quote($infos_module['lang_mere']));
+		$compte_total_orig = sql_getfetsel('COUNT(*)','spip_tradlangs','id_tradlang_module='.intval($valeurs['id_tradlang_module']).' AND statut="OK" AND lang='.sql_quote($lang_orig));
 		if($compte_total_mere != $compte_total_orig){
 			$valeurs['lang_orig'] = $infos_module['lang_mere'];
 		}
@@ -50,7 +50,7 @@ function formulaires_tradlang_choisir_module_charger($id_tradlang_module="",$lan
 		$langues_possibles = $GLOBALS['codes_langues'];
 		
 		ksort($langues_possibles);
-		$langues_modules = sql_select('DISTINCT lang','spip_tradlang','module='.sql_quote($infos_module['module']));
+		$langues_modules = sql_select('DISTINCT lang','spip_tradlangs','module='.sql_quote($infos_module['module']));
 		while($langue = sql_fetch($langues_modules)){
 			$langues_presentes[$langue['lang']] = traduire_nom_langue($langue['lang']);
 		}

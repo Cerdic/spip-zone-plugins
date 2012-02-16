@@ -82,7 +82,7 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 				$statut[$id] = '';
 		}
 		
-		$res = sql_select("id, str, md5","spip_tradlang","module=".sql_quote($nom_mod)." AND lang=".sql_quote($langue));
+		$res = sql_select("id, str, md5","spip_tradlangs","module=".sql_quote($nom_mod)." AND lang=".sql_quote($langue));
 		if($mode == 'update'){
 			if(sql_count($res)>0){
 				spip_log("Fichier de langue $langue du module $nom_mod deja inclus dans la base\n","tradlang");
@@ -114,7 +114,7 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 				 * BDD / fichiers
 				 */
 				if (isset($md5) && ($id != 'zz_timestamp_nepastraduire')){
-					sql_insertq('spip_tradlang',array(
+					sql_insertq('spip_tradlangs',array(
 						'id' => $id,
 						'id_tradlang_module' => $module['id_tradlang_module'],
 						'module' => $module["module"],
@@ -140,7 +140,7 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 				else {
 					// modifier la chaine
 					$md5_new = $orig ? $md5 : $existant[$id];
-					sql_updateq("spip_tradlang",array(
+					sql_updateq("spip_tradlangs",array(
 						'str' => $str,
 						'md5' => $md5_new,
 						'statut' => '',
@@ -148,7 +148,7 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 					
 					// signaler le statut MODIF de ses traductions
 					if ($orig){
-						sql_updateq("spip_tradlang",array('statut'=>'MODIF'),"module=".sql_quote($nom_mod)." AND id=".sql_quote($id)." AND md5 !=".sql_quote($md5));
+						sql_updateq("spip_tradlangs",array('statut'=>'MODIF'),"module=".sql_quote($nom_mod)." AND id=".sql_quote($id)." AND md5 !=".sql_quote($md5));
 					}
 					
 					$modifiees++;
@@ -159,7 +159,7 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 			if (!isset($chs[$id]) AND isset($existant[$id])){
 				spip_log('cas 3','tradlang');
 				// mettre au grenier
-				sql_updateq("spip_tradlang",array(
+				sql_updateq("spip_tradlangs",array(
 					'id' => $nom_mod.'_'.$id,
 					'module' => 'attic'),"id=".sql_quote($id)." AND module=".sql_quote($nom_mod));
 				$supprimees++;

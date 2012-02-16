@@ -28,7 +28,7 @@ function action_tradlang_synchro_base_fichier_dist(){
 		$module_nom = $r[1];
 		$module = sql_fetsel('*','spip_tradlang_modules','module='.sql_quote($module_nom));
 		if(is_array($module)){
-			$langues = sql_select("DISTINCT lang","spip_tradlang","module='$module_nom'");
+			$langues = sql_select("DISTINCT lang","spip_tradlangs","module='$module_nom'");
 			while($langue=sql_fetch($langues)){
 				$lg = $langue["lang"];
 				$fichiers[$lg] = $module_nom."_".$lg.".php";
@@ -48,7 +48,7 @@ function action_tradlang_synchro_base_fichier_dist(){
 						$sauvegarder_module($module,$lg,$dir_lang);
 					}
 					else{
-						$ts_base = sql_getfetsel('ts','spip_tradlang','module='.sql_quote($module_nom).' AND lang='.sql_quote($lg),'','ts DESC','0,1');
+						$ts_base = sql_getfetsel('maj','spip_tradlangs','module='.sql_quote($module_nom).' AND lang='.sql_quote($lg),'','maj DESC','0,1');
 						
 						include($chemin_fichier);
 						$chs = $GLOBALS[$GLOBALS['idx_lang']];
@@ -56,7 +56,7 @@ function action_tradlang_synchro_base_fichier_dist(){
 						unset($GLOBALS[$GLOBALS['idx_lang']]);
 						
 						/**
-						 * Cas où la base est plus récente que le ts incorporé dans le fichier
+						 * Cas où la base est plus récente que le maj incorporé dans le fichier
 						 **/
 						if(!$ts_synchro OR ($ts_synchro < $ts_base)){
 							/**

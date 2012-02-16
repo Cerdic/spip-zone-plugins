@@ -17,14 +17,14 @@
 				</select>
 			</li>
 			<li class="editer readonly">
-				<BOUCLE_orig(TRADLANG){id=#ENV{id}}{lang=#ENV{lang_orig}}{0,1}>
+				<BOUCLE_orig(TRADLANGS){id=#ENV{id}}{lang=#ENV{lang_orig}}{0,1}>
 				#SET{comm_orig,#COMM}
 				[(#ENV{lang_orig}|=={#ENV{lang_mere}}|oui)<label><:tradlang:label_version_originale{lang=#ENV{lang_orig}}:></label>]
 				[(#ENV{lang_orig}|=={#ENV{lang_mere}}|non)<label><:tradlang:label_version_selectionnee{lang=#ENV{lang_orig}}:></label>]
 				<textarea class="texte" name="lang_orig" id="lang_orig_str" readonly="readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR*|tradlang_utf8|entites_html)]</textarea>
 				</BOUCLE_orig>
 				</B_orig>
-				<BOUCLE_mere(TRADLANG){id=#ENV{id}}{lang=#ENV{lang_mere}}{0,1}>
+				<BOUCLE_mere(TRADLANGS){id=#ENV{id}}{lang=#ENV{lang_mere}}{0,1}>
 				#SET{comm_orig,#COMM}
 				<label><:tradlang:label_version_originale{lang=#ENV{lang_mere}}:></label>
 				<textarea class="texte" name="lang_orig" id="lang_orig_str" readonly="readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR*|tradlang_utf8|entites_html)]</textarea>

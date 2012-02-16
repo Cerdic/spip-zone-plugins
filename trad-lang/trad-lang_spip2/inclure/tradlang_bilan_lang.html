@@ -44,7 +44,7 @@
 	<BOUCLE_modules_lang(TRADLANG_MODULES){priorite}>
 	<tr class="module #MODULE[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 		<td><a href="[(#SELF|parametre_url{langue_modules,''}|parametre_url{id_tradlang_module,#ID_TRADLANG_MODULE})]" title="<:tradlang:lien_voir_bilan_module{module=#MODULE,nom_mod=#NOM_MOD}|attribut_html:>">[(#NOM_MOD)]</a></td>
-		<BOUCLE_compte_langue_mere(TRADLANG){module}{lang=#LANG_MERE}> </BOUCLE_compte_langue_mere>
+		<BOUCLE_compte_langue_mere(TRADLANGS){module}{lang=#LANG_MERE}> </BOUCLE_compte_langue_mere>
 		<td><abbr title="[(#LANG_MERE|traduire_nom_langue)]">#LANG_MERE</abbr></td>
 		#SET{total_mere,#GRAND_TOTAL}
 		[(#SET{total_chaines,[(#GET{total_chaines}|plus{#GRAND_TOTAL})]})]
@@ -53,7 +53,7 @@
 		#SET{total_mere,0}
 		<td>#GET{total_mere}</td>
 		<//B_compte_langue_mere>
-		<BOUCLE_ok_langue(TRADLANG){module}{lang=#ENV{langue_modules}}{statut=OK}> </BOUCLE_ok_langue>
+		<BOUCLE_ok_langue(TRADLANGS){module}{lang=#ENV{langue_modules}}{statut=OK}> </BOUCLE_ok_langue>
 		#SET{total_ok,#GRAND_TOTAL}
 		<td>
 			<abbr title="[(#GET{total_ok}|singulier_ou_pluriel{tradlang:info_nb_items_module_ok_un,tradlang:info_nb_items_module_ok,nb,#ARRAY{module,#NOM_MOD,lang,#ENV{langue_modules},langue_longue,#GET{langue_longue}}}|attribut_html)]">
@@ -68,7 +68,7 @@
 			</abbr>
 		</td>
 		<//B_ok_langue>
-		<BOUCLE_modif_langue(TRADLANG){module}{lang=#ENV{langue_modules}}{statut=MODIF}> </BOUCLE_modif_langue>
+		<BOUCLE_modif_langue(TRADLANGS){module}{lang=#ENV{langue_modules}}{statut=MODIF}> </BOUCLE_modif_langue>
 		#SET{total_modif,#GRAND_TOTAL}
 		<td>
 			<abbr title="[(#GET{total_modif}|singulier_ou_pluriel{tradlang:info_nb_items_module_modif_un,tradlang:info_nb_items_module_modif,nb,#ARRAY{module,#NOM_MOD,lang,#ENV{langue_modules},langue_longue,#GET{langue_longue}}}|attribut_html)]">
@@ -83,7 +83,7 @@
 			</abbr>
 		</td>
 		<//B_modif_langue>
-		<BOUCLE_new_langue(TRADLANG){module}{lang=#ENV{langue_modules}}{statut=NEW}> </BOUCLE_new_langue>
+		<BOUCLE_new_langue(TRADLANGS){module}{lang=#ENV{langue_modules}}{statut=NEW}> </BOUCLE_new_langue>
 		#SET{total_new,#GRAND_TOTAL}
 		<td>
 			<abbr title="[(#GET{total_new}|singulier_ou_pluriel{tradlang:info_nb_items_module_new_un,tradlang:info_nb_items_module_new,nb,#ARRAY{module,#NOM_MOD,lang,#ENV{langue_modules},langue_longue,#GET{langue_longue}}}|attribut_html)]">
