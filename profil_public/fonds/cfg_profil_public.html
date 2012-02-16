@@ -1,23 +1,19 @@
-
-
-[(#REM) descriptif=
+<!-- descriptif=
 <h4>Page de profil pour les auteurs</h4>
 Vous pouvez configurer les &eacute;l&eacute;ments &agrave; afficher dans le profil public<br />
-Documentation sur <a href="http://www.spip-contrib.net">spip-contrib</a><br />
-Plugin complémentaire
-<a href="http://www.spip-contrib.net/cfg-references">Plugin cfg</a>
-]
+Documentation sur <a href="http://www.spip-contrib.net/Plugin-profil-public" class="spip_out">spip-contrib</a>
+-->
 
-[(#REM) titre=profil public]
-[(#REM) icone=img/icone-cfg.png]
+<!-- titre=profil public -->
+<!-- icone=img/icone-cfg.png -->
+<!-- logo=img/icon.png -->
 
 #CACHE{0}
 
-<form method="post">[(#ENV{_cfg_}|form_hidden)]
-	<h4>Page de profil pour les auteurs</h4>
-	<p>Vous pouvez configurer les &eacute;l&eacute;ments &agrave; afficher dans le profil public</p>
-	<fieldset>
-		<legend><:profilpublic:elements:></legend>
+<div class="formulaire_spip formulaire_cfg formulaire_configurer_profil_public">
+	<h3 class="titrem"><:profilpublic:elements:></h3>
+	<form method="post">
+		[(#ENV{_cfg_}|form_hidden)]
 		<table style="width:100%; border:solid 1px #ccc">
 			<tr style="width:100%">
 				<td style="width:50%">
@@ -36,7 +32,7 @@ Plugin complémentaire
 					<p>
 						<label for="mot_rss"><:profilpublic:rss:></label>
 						<select name="rss" id="mot_rss">
-							<option value=""></option>
+							<option value="">-- -- --</option>
 							<BOUCLE_rss_groupes(spip_groupes_mots){tables_liees LIKE %sites%}>
 						<optgroup label="#TITRE">
 								<BOUCLE_rss_mots(MOTS){id_syndic!=0}{id_groupe}>
@@ -116,18 +112,18 @@ Plugin complémentaire
 						<textarea name="texteaide" id="texteaide" rows="10";>[(#ENV{texteaide})]</textarea>
 					</p>
 					<p>
-						<label for="webmestre"><:profilpublic:idwebmestre:></label>
-						<select name="webmestre"	id="webmestre">
-							<option value=""></option>
+						<label for="idwebmestre"><:profilpublic:idwebmestre:></label>
+						<select name="webmestre" id="idwebmestre">
+							<option value="">-- -- --</option>
 						<BOUCLE_webmestres(AUTEURS){webmestre=oui}{par nom,login}>
 							<option value="#ID_AUTEUR" [(#CONFIG{profil_public/webmestre}|=={#ID_AUTEUR}|oui)selected="selected"]>#NOM &mdash; #LOGIN</option>
 						</BOUCLE_webmestres>
 						</select>
 					</p>
 					<p>
-						<label for="webmestre"><:profilpublic:refsite:></label>
+						<label for="refsite"><:profilpublic:refsite:></label>
 						<select  name="refsite" id="refsite">
-							<option value=""></option>
+							<option value="">-- -- --</option>
 						<BOUCLE_rub0(RUBRIQUES){racine}{par num titre}>
 							<option value="#ID_AUTEUR" [(#CONFIG{profil_public/refsite}|=={#ID_RUBRIQUE}|oui)selected="selected"]>#TITRE</option>
 							<BOUCLE_rub1(RUBRIQUES){id_parent=#ID_RUBRIQUE}{par num titre}>
@@ -139,10 +135,10 @@ Plugin complémentaire
 				</td>
 			</tr>
 		</table>
-	</fieldset>
-	<p class="boutons">
-		<input type="submit" name="_cfg_ok" value="<:OK:>" />
-		<input type="reset" value="<:Reset:>" />
-		<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
-	</p>
-</form>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:OK:>" />
+			<input type="reset" value="<:Reset:>" />
+			<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+		</p>
+	</form>
+</div>
