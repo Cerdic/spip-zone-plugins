@@ -12,6 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_activer_lang' => 'Enable the language "@lang@" for this module',
+	'bouton_exporter_fichier_langue' => 'Exporter le fichier de langue en "@lang@"', # NEW
+	'bouton_exporter_fichier_langue_original' => 'Exporter le fichier de langue original ("@lang_mere@")', # NEW
+	'bouton_supprimer_langue_module' => 'Supprimer cette langue du module', # NEW
 	'bouton_supprimer_module' => 'Delete this module',
 	'bouton_traduire' => 'Translate >>',
 
@@ -29,11 +32,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_legende_autorisation_voir' => 'show translation interface',
 	'codelangue' => 'Language code',
 	'crayon_changer_statut' => 'Warning! You changed the content of the string without changing the status.',
+	'crayon_changer_statuts' => 'Attention! Vous avez modifié le contenu d\'une ou plusieurs chaînes sans en modifier le statut.', # NEW
 
 	// E
 	'entrerlangue' => 'Add a language code',
 	'erreur_aucun_item_langue_mere' => 'Parent language "@lang_mere@" contains no language items.',
 	'erreur_aucun_module' => 'There are no modules available in the database.',
+	'erreur_aucun_tradlang_a_editer' => 'Aucune chaîne de langue n\'est considérée comme non traduite.', # NEW
 	'erreur_autorisation_modifier_modules' => 'You are not allowed to translate the language modules.',
 	'erreur_autoriser_profil' => 'You are not allowed to edit this profile',
 	'erreur_choisir_lang_cible' => 'Choose a target language to translate.',
@@ -41,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_choisir_module' => 'Choose a module to translate.',
 	'erreur_code_langue_existant' => 'This alternative language already exists for this module',
 	'erreur_code_langue_invalide' => 'This language code is invalid',
+	'erreur_langue_activer_impossible' => 'Le code de langue "@lang@" n\'existe pas.', # NEW
 	'erreur_langues_autorisees_insuffisantes' => 'You should at least select two languages',
 	'erreur_langues_differentes' => 'Choose a different target language différente than the parent language',
 	'erreur_module_inconnu' => 'This module is not available',
@@ -70,6 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues_non_preferees' => 'Other languages :',
 	'info_langues_preferees' => 'Favorite(s) language(s):',
 	'info_module_traduction' => '@total@ @statut@ (@percent@%)',
+	'info_module_traduit_langues' => 'Ce module est traduit ou partiellement traduit dans @nb@ langues.', # NEW
 	'info_module_traduit_pc' => 'Module translated at @pc@%',
 	'info_module_traduit_pc_lang' => 'Module "@module@" translated at @pc@% in @lang@ (@langue_longue@)',
 	'info_modules_priorite_traduits_pc' => 'The modules of priority "@priorite@" are @pc@% translated in @lang@',
@@ -141,6 +148,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_code_langue' => 'Invalid language code. The language code must have at least two letter code (ISO-631).',
 	'lien_confirm_export' => 'Confirm the export of the current file (ie overwrite the file @fichier@)',
 	'lien_editer_chaine' => 'Edit',
+	'lien_editer_tous' => 'Éditer toutes les chaînes non traduites', # NEW
 	'lien_export' => 'Automatically export the current file.',
 	'lien_page_depart' => 'Back to the main page?',
 	'lien_profil_auteur' => 'Your profile',
@@ -157,6 +165,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_telecharger' => '[Download]',
 	'lien_traduction_module' => 'Module ',
 	'lien_traduction_vers' => ' to ',
+	'lien_traduire_suivant_str_module' => 'Traduire la chaîne non traduite suivante du module "@module@"', # NEW
 	'lien_trier_langue_non' => 'Show the global balance.',
 	'lien_utiliser_google_translate' => 'Use this version',
 	'lien_voir_bilan_lang' => 'Display the language balance @langue_longue@ (@lang@)',
@@ -169,6 +178,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_aucun_resultat_chaine' => 'No results matching your criteria in the language strings.',
 	'message_aucun_resultat_statut' => 'No string matches the requested status.',
 	'message_aucune_nouvelle_langue_dispo' => 'This module is available in all languages',
+	'message_changement_lang_orig' => 'La langue d\'origine de traduction choisie ("@lang_orig@") n\'est pas assez traduite, elle est remplacée par la langue "@lang_nouvelle@".', # NEW
+	'message_changement_lang_orig_inexistante' => 'La langue d\'origine de traduction choisie ("@lang_orig@") est inexistante, elle est remplacée par la langue "@lang_nouvelle@".', # NEW
 	'message_confirm_redirection' => 'You will be redirected to the modification of the module',
 	'message_demande_update_langues_cible_mere' => 'You can ask an administrator to resynchronize this language with the primary language.
 	',
@@ -195,6 +206,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_items_langue_en_trop' => '@nb@ items are too much in the language "@langue_longue@" (@langue@).',
 	'nb_items_langue_inexistants' => '@nb@ items does not exists in the language "@langue_longue@" (@langue@).',
 	'nb_items_langue_mere' => 'The main language of this module includes @nb@ items.',
+	'notice_affichage_limite' => 'L\'affichage est limité à @nb@ chaînes de langue non traduites.', # NEW
 
 	// R
 	'readme' => 'This plugin allows you to manage the language files',
@@ -247,6 +259,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tfoot_total' => 'Total',
 	'th_avancement' => 'Progression',
 	'th_comm' => 'Comment',
+	'th_date' => 'Date', # NEW
 	'th_items_modifs' => 'Modified items',
 	'th_items_new' => 'New items',
 	'th_items_traduits' => 'Translated items',
@@ -277,6 +290,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_tradlang_chaines' => 'Language string',
 	'titre_tradlang_module' => 'Trad-lang language modules',
 	'titre_tradlang_modules' => 'Language modules',
+	'titre_tradlang_non_traduit' => '1 chaîne de langue non traduite', # NEW
+	'titre_tradlang_non_traduits' => '@nb@ chaînes de langue non traduites', # NEW
 	'titre_traduction' => 'Translations',
 	'titre_traduction_chaine_de_vers' => 'Translation of the string "@chaine@" of the module "@module@" from <abbr title="@lang_orig_long@">@lang_orig@</abbr> to <abbr title="@lang_cible_long@">@lang_cible@</abbr>',
 	'titre_traduction_de' => 'Translation of',

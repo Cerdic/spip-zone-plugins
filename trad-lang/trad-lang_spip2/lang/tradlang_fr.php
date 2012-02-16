@@ -12,8 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_activer_lang' => 'Activer la langue "@lang@" pour ce module',
 	'bouton_exporter_fichier_langue' => 'Exporter le fichier de langue en "@lang@"',
 	'bouton_exporter_fichier_langue_original' => 'Exporter le fichier de langue original ("@lang_mere@")',
-	'bouton_supprimer_module' => 'Supprimer ce module',
 	'bouton_supprimer_langue_module' => 'Supprimer cette langue du module',
+	'bouton_supprimer_module' => 'Supprimer ce module',
 	'bouton_traduire' => 'Traduire',
 
 	// C
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_choisir_module' => 'Choisissez un module à traduire.',
 	'erreur_code_langue_existant' => 'Cette variante de langue existe déjà pour ce module',
 	'erreur_code_langue_invalide' => 'Ce code de langue est invalide',
-	'erreur_langue_activer_impossible' => 'Le code de langue "@lang@" n\'existe pas.', 
+	'erreur_langue_activer_impossible' => 'Le code de langue "@lang@" n\'existe pas.',
 	'erreur_langues_autorisees_insuffisantes' => 'Vous devez au moins sélectionner deux langues',
 	'erreur_langues_differentes' => 'Choisissez une langue cible différente de la langue originale',
 	'erreur_module_inconnu' => 'Ce module n\'est pas disponible',
@@ -74,9 +74,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues_non_preferees' => 'Autres langues :',
 	'info_langues_preferees' => 'Langue(s) préférée(s) :',
 	'info_module_traduction' => '@total@ @statut@ (@percent@%)',
+	'info_module_traduit_langues' => 'Ce module est traduit ou partiellement traduit dans @nb@ langues.',
 	'info_module_traduit_pc' => 'Module traduit à @pc@%',
 	'info_module_traduit_pc_lang' => 'Module "@module@" traduit à @pc@% en @lang@ (@langue_longue@)',
-	'info_module_traduit_langues' => 'Ce module est traduit ou partiellement traduit dans @nb@ langues.',
 	'info_modules_priorite_traduits_pc' => 'Les modules de priorité "@priorite@" sont traduits à @pc@% en @lang@',
 	'info_nb_items_module' => '@nb@ items dans le module "@module@"',
 	'info_nb_items_module_modif' => '@nb@ items du module "@module@" sont modifiés et à vérifier en @lang@ (@langue_longue@)"',
@@ -196,7 +196,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'moduletitre' => 'Modules disponibles',
 
 	// N
-	'notice_affichage_limite' => 'L\'affichage est limité à @nb@ chaînes de langue non traduites.',
 	'nb_item_langue_en_trop' => '1 item est en trop dans la langue "@langue_longue@" (@langue@).',
 	'nb_item_langue_inexistant' => '1 item est inexistant dans la langue "@langue_longue@" (@langue@).',
 	'nb_item_langue_mere' => 'La langue principale de ce module comporte 1 item.',
@@ -204,6 +203,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_items_langue_en_trop' => '@nb@ items sont en trop dans la langue "@langue_longue@" (@langue@).',
 	'nb_items_langue_inexistants' => '@nb@ items sont inexistants dans la langue "@langue_longue@" (@langue@).',
 	'nb_items_langue_mere' => 'La langue principale de ce module comporte @nb@ items.',
+	'notice_affichage_limite' => 'L\'affichage est limité à @nb@ chaînes de langue non traduites.',
 
 	// R
 	'readme' => 'Ce plugin permet de gérer les fichiers langues',

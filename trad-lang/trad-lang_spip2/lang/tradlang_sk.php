@@ -12,6 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_activer_lang' => 'Aktivovať jazyk "@lang@" pre tento modul',
+	'bouton_exporter_fichier_langue' => 'Exporter le fichier de langue en "@lang@"', # NEW
+	'bouton_exporter_fichier_langue_original' => 'Exporter le fichier de langue original ("@lang_mere@")', # NEW
+	'bouton_supprimer_langue_module' => 'Supprimer cette langue du module', # NEW
 	'bouton_supprimer_module' => 'Odstrániť tento modul',
 	'bouton_traduire' => 'Prekladať',
 
@@ -29,11 +32,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_legende_autorisation_voir' => 'Zobraziť prekladateľské rozhranie',
 	'codelangue' => 'Kód jazyka',
 	'crayon_changer_statut' => 'Pozor! Zmenili ste text reťazca bez toho, aby ste zmenili jeho stav.',
+	'crayon_changer_statuts' => 'Attention! Vous avez modifié le contenu d\'une ou plusieurs chaînes sans en modifier le statut.', # NEW
 
 	// E
 	'entrerlangue' => 'Pridať kód jazyka',
 	'erreur_aucun_item_langue_mere' => 'Jazyk autora "@lang_mere@" neobsahuje žiadne položky',
 	'erreur_aucun_module' => 'V databáze nie sú k dispozícii žiadne moduly.',
+	'erreur_aucun_tradlang_a_editer' => 'Aucune chaîne de langue n\'est considérée comme non traduite.', # NEW
 	'erreur_autorisation_modifier_modules' => 'Jazykové moduly nemáte povolené prekladať.',
 	'erreur_autoriser_profil' => 'Nemáte povolené upravovať tento profil.',
 	'erreur_choisir_lang_cible' => 'Vyberte si cieľový jazyk prekladu.',
@@ -41,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_choisir_module' => 'Vyberte si modul, ktorý chcete preložiť.',
 	'erreur_code_langue_existant' => 'Táto variéta jazyka už v tomto module existuje',
 	'erreur_code_langue_invalide' => 'Tento kód jazyka je neplatný',
+	'erreur_langue_activer_impossible' => 'Le code de langue "@lang@" n\'existe pas.', # NEW
 	'erreur_langues_autorisees_insuffisantes' => 'Musíte si vybrať aspoň dva jazyky',
 	'erreur_langues_differentes' => 'Vyberte si iný cieľový jazyk ako jazyk autora',
 	'erreur_module_inconnu' => 'Tento modul nie je dostupný',
@@ -70,6 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues_non_preferees' => 'Iné jazyky:',
 	'info_langues_preferees' => 'Obľúbený (-é) jazyk(y):',
 	'info_module_traduction' => '@total@ @statut@ (@percent@ %)',
+	'info_module_traduit_langues' => 'Ce module est traduit ou partiellement traduit dans @nb@ langues.', # NEW
 	'info_module_traduit_pc' => 'Modul preložený na @pc@ %',
 	'info_module_traduit_pc_lang' => 'Modul "@module@" je do jazyka @lang@ (@langue_longue@) preložený na @pc@ % ',
 	'info_modules_priorite_traduits_pc' => 'Prioritné moduly "@priorite@" sú do jazyka @lang@ preložené na @pc@ %',
@@ -141,6 +148,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_code_langue' => 'Neplatný kód jazyka. V kóde jazyka musia byť aspoň dve písmená (kód ISO-631).',
 	'lien_confirm_export' => 'Potvrdiť export aktuálneho súboru (tzn. prepísať obsah súboru @fichier@)',
 	'lien_editer_chaine' => 'Upraviť',
+	'lien_editer_tous' => 'Éditer toutes les chaînes non traduites', # NEW
 	'lien_export' => 'Automaticky exportovať aktuálny súbor.',
 	'lien_page_depart' => 'Vrátiť sa na úvodnú stránku?',
 	'lien_profil_auteur' => 'Váš profil',
@@ -157,6 +165,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_telecharger' => '[Stiahnuť]',
 	'lien_traduction_module' => 'Modul ',
 	'lien_traduction_vers' => ' do ',
+	'lien_traduire_suivant_str_module' => 'Traduire la chaîne non traduite suivante du module "@module@"', # NEW
 	'lien_trier_langue_non' => 'Zobraziť celý zoznam.',
 	'lien_utiliser_google_translate' => 'Používať túto verziu',
 	'lien_voir_bilan_lang' => 'Zobraziť štatistiku jazyka @langue_longue@ (@lang@)',
@@ -169,6 +178,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_aucun_resultat_chaine' => 'Vašim kritériám nevyhovujú v jazykových reťazcoch žiadne výsledky.',
 	'message_aucun_resultat_statut' => 'Tento stav nemá nastavený žiaden reťazec.',
 	'message_aucune_nouvelle_langue_dispo' => 'Tento modul je dostupný vo všetkých jazykoch',
+	'message_changement_lang_orig' => 'La langue d\'origine de traduction choisie ("@lang_orig@") n\'est pas assez traduite, elle est remplacée par la langue "@lang_nouvelle@".', # NEW
+	'message_changement_lang_orig_inexistante' => 'La langue d\'origine de traduction choisie ("@lang_orig@") est inexistante, elle est remplacée par la langue "@lang_nouvelle@".', # NEW
 	'message_confirm_redirection' => 'Budete presmerovaný na zmenu modulu',
 	'message_demande_update_langues_cible_mere' => 'Môžete požiadať administrátora o opätovnú synchronizáciu tohto jazyka s hlavným jazykom.',
 	'message_info_choisir_langues_profiles' => '<a href="@url_profil@">Vo svojom profile</a> si môžete vybrať obľúbené jazyky a používať ich ako predvolené.',
@@ -194,6 +205,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_items_langue_en_trop' => 'V jazyku "@langue_longue@" (@langue@) je @nb@ položiek naviac.',
 	'nb_items_langue_inexistants' => 'V jazyku "@langue_longue@" (@langue@) neexistuje @nb@ položiek.',
 	'nb_items_langue_mere' => 'Hlavný jazyk tohto modulu obsahuje @nb@ položiek.',
+	'notice_affichage_limite' => 'L\'affichage est limité à @nb@ chaînes de langue non traduites.', # NEW
 
 	// R
 	'readme' => 'Tento modul umožňuje správu jazykových súborov',
@@ -246,6 +258,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tfoot_total' => 'Celkom',
 	'th_avancement' => 'Postup',
 	'th_comm' => 'Komentár',
+	'th_date' => 'Date', # NEW
 	'th_items_modifs' => 'Zmenené položky',
 	'th_items_new' => 'Nové položky',
 	'th_items_traduits' => 'Preložené položky',
@@ -275,6 +288,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_tradlang_chaines' => 'Jazykové reťazce',
 	'titre_tradlang_module' => 'Jazykový modul',
 	'titre_tradlang_modules' => 'Jazykové moduly',
+	'titre_tradlang_non_traduit' => '1 chaîne de langue non traduite', # NEW
+	'titre_tradlang_non_traduits' => '@nb@ chaînes de langue non traduites', # NEW
 	'titre_traduction' => 'Preklady',
 	'titre_traduction_chaine_de_vers' => 'Preklad reťazca "@chaine@" modulu "@module@" z(o) <abbr title="@lang_orig_long@">@lang_orig@</abbr> do <abbr title="@lang_cible_long@">@lang_cible@</abbr>',
 	'titre_traduction_de' => 'Preklad z',
