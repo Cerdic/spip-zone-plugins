@@ -60,6 +60,8 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 	}else{
 		return array('0','0');
 	}
+	include_spip('inc/invalideur');
+	suivre_invalideur('1');
 	return array($inserees,$supprimees);
 }
 ?>
