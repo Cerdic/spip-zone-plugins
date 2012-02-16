@@ -7,10 +7,6 @@
 <INCLURE{fond=prive/contenu/inc_classement_#ENV{classement,asuivre}}{env}>
 
 [(#AUTORISER{ecrire, ticket}|oui)
-	[(#URL_ECRIRE{ticket_edit,id_ticket=new}|parametre_url{redirect,#SELF}|icone_verticale{
-		<:tickets:creer_ticket:>,
-		#CHEMIN{imgs/bugs.png},
-		creer.gif,
-		right
-	})]
+	[(#URL_ECRIRE{ticket_edit,id_ticket=new}|parametre_url{redirect,#SELF}
+		|icone_verticale{<:tickets:creer_ticket:>,ticket,new,right})]
 ]

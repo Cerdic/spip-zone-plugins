@@ -1,7 +1,8 @@
 [(#REM) Noisette servant a l'affichage du menu des tickets presente en colonne droite ou gauche]
 <B_simple>
 #BOITE_OUVRIR{#CHEMIN_IMAGE{ticket-24.png}|balise_img{'',cadre-icone}|concat{#ENV{titre}},'simple','titrem'}
-	[<div class="pagination">(#PAGINATION)</div>]
+<div class="liste-objets tickets">
+	[<div class="pagination">(#PAGINATION{prive})</div>]
 	<table width="100%" class="spip">
 		<tbody>
 		<BOUCLE_simple(TICKETS){par date}{inverse}{pagination 10 #ENV{bloc}}{id_auteur?}{id_assigne?}{statut?}>
@@ -13,5 +14,6 @@
 		</BOUCLE_simple>
 		</tbody>
 	</table>
+</div>
 #BOITE_FERMER
 </B_simple>

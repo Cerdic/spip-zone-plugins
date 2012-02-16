@@ -2,28 +2,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// Ajout du bouton permettant de se rendre sur la page de gestion des tickets
-function tickets_ajouter_boutons($boutons_admin) {
-	// uniquement si le plugin bandeau n'est pas la (ou SPIP 2.1)
-	if(!$boutons_admin['bando_publication']){
-		// affiche le bouton dans "Forum" si les forums sont activés, tout le monde peut voir cette page
-		if($boutons_admin['forum']){
-			$boutons_admin['forum']->sousmenu['tickets'] = new Bouton(
-				find_in_path('ticket-24.png', 'prive/themes/spip/images/', false),
-				_T('tickets:titre'),
-				generer_url_ecrire('tickets')
-			);
-		}else{
-			// Sinon affiche les tickets en sous menu de Edition, aussi accessible pour tout le monde
-			$boutons_admin['naviguer']->sousmenu['tickets'] = new Bouton(
-				find_in_path('ticket-24.png', 'prive/themes/spip/images/', false),
-				_T('tickets:titre'),
-				generer_url_ecrire('tickets')
-			);
-		}
-	}
-	return ($boutons_admin);
-}
 
 /**
  * Insertion dans le pipeline affiche_aguche
@@ -62,16 +40,6 @@ function tickets_affiche_gauche ($flux) {
 	return $flux;
 }
 
-/**
- * Insertion dans le pipeline objets_extensibles (du plugin champs_extras)
- * Permet aux tickets d'avoir des champs supplémentaires
- *
- * @param object $objets
- * @return
- */
-function tickets_objets_extensibles($objets){
-	return array_merge($objets, array('ticket' => _T('tickets:tickets')));
-}
 
 /**
  * Insertion dans le pipeline accueil informations de l'etat des tickets
@@ -116,28 +84,6 @@ function tickets_accueil_informations($flux){
 	return $flux;
 }
 
-/**
- * Insertion dans le pipeline accueil gadgets le bouton de creation d'un ticket
- * @param string $gadget
- * @return string $gadget
- */
-function tickets_accueil_gadgets($gadget){
-
-	include_spip('inc/tickets_autoriser');
-	if (autoriser('ecrire', 'ticket')) {
-		$icone = icone_horizontale(_T('tickets:creer_ticket'), generer_url_ecrire("ticket_edit","new=oui"), find_in_path("prive/themes/spip/images/ticket-24.png"), "creer.gif", false);
-
-		$colonnes = extraire_balises($gadget, 'td');
-		$derniere_colonne = fmod(floor(count($colonnes)/2), 4) == 0 ? true : false;
-		if ($derniere_colonne) {
-			$gadget .= "<table><tr><td>$icone</td></tr></table>";
-		}
-		else {
-			$gadget = preg_replace(",</tr></table>$,is", "<td>$icone</td></tr></table>", $gadget);
-		}
-	}
-	return $gadget;
-}
 
 /**
  * Insertion dans le pipeline affiche milieu de la liste des tickets en cours de rédaction
@@ -168,34 +114,8 @@ function tickets_forum_objets_depuis_env($objets){
 	return $objets;
 }
 
-/**
- * Insertion dans le pipeline declarer_url_objets (SPIP ecrire/inc/urls)
- * 
- * Ajoute les tickets comme objet pouvant avoir des urls spécifiques (propres...)
- * 
- * @param array $flux Les objets ayant des urls
- * @return array $flux
- */
-function tickets_declarer_url_objets($flux){
-	$flux[] = 'ticket';
-	return $flux;
-}
 
-/**
- * Insertion dans le pipeline rechercher_liste_des_champs (SPIP)
- *
- * Ajoute les tickets dans la recherche
- *
- * @param array $tables
- * @return array $tables
- */
-function tickets_rechercher_liste_des_champs($tables){
-	$tables['ticket'] = array(
-		'titre' => 8,
-		'texte' => 5
-	);
-	return $tables;
-}
+
 
 /**
  * Insertion dans le pipeline formulaire_charger (SPIP)
@@ -261,11 +181,10 @@ function tickets_formulaire_traiter($flux){
 			$id_ticket = $flux['args']['args'][6];
 			$infos_ticket = sql_fetsel('*','spip_tickets','id_ticket='.intval($id_ticket));
 			if(($new_statut = _request('statut')) && ($new_statut != $infos_ticket['statut'])){
-				instituer_ticket($id_ticket,array('statut'=>$new_statut));
+				ticket_instituer($id_ticket, array('statut'=>$new_statut));
 			}
 			if(($new_assigne=_request('id_assigne')) && ($new_assigne != $infos_ticket['id_assigne'])){
-				include_spip('action/editer_ticket');
-				revision_ticket($id_ticket, array('id_assigne'=>$new_assigne));
+				ticket_modifier($id_ticket, array('id_assigne'=>$new_assigne));
 			}
 		}
 	}
