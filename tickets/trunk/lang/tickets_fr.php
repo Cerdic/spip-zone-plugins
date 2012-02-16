@@ -199,6 +199,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Tickets, suivi de bugs',
 	'titre_identification' => 'Identification',
 	'titre_liste' => 'Liste des tickets',
+	'tous_tickets_en_redaction' => 'Tous les tickets en rédaction',
 	'tous_tickets_ouverts' => 'Tous les tickets ouverts',
 	'type_amelioration' => 'Amélioration',
 	'type_amelioration_long' => 'Les tickets demandant une amélioration',

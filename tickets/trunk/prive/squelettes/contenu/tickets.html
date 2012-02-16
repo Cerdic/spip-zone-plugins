@@ -2,6 +2,23 @@
 	- recapitulatif des tickets presente suivant un classement donne]
 #CACHE{0}
 
+[(#REM)
+	Un menu pour les tris
+]
+[(#BOITE_OUVRIR)]
+	[(#SET{tris,#ARRAY{
+		asuivre,<:tickets:classement_asuivre:>,
+		type,<:tickets:classement_type:>,
+		assigne,<:tickets:classement_assigne:>,
+		termine,<:tickets:classement_termine:>}})]
+	[(#VAL{_TICKETS_LISTE_JALONS}defined|oui)
+		[(#SET{tris,#GET{tris}|array_merge{#ARRAY{jalon,<:tickets:classement_jalon:>}}})]
+	]
+	<BOUCLE_tri(DATA){source tableau,#GET{tris}}{"<span class='sep'> | </span>"}>
+	<a href="[(#SELF|parametre_url{classement,#CLE})]"[(#ENV{classement}|=={#CLE}|oui) class="on"]>#VALEUR</a>
+	</BOUCLE_tri>
+[(#BOITE_FERMER)]
+
 <h1>[(#VAL{tickets:classement_#ENV{classement,asuivre}}|_T)]</h1>
 
 <INCLURE{fond=prive/contenu/inc_classement_#ENV{classement,asuivre}}{env}>
