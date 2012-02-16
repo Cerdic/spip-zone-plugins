@@ -3,7 +3,7 @@
 #BOITE_OUVRIR{#CHEMIN_IMAGE{ticket-24.png}|balise_img{'',cadre-icone}|concat{#ENV{titre}},'simple','titrem'}
 <div class="liste-objets tickets">
 	[<div class="pagination">(#PAGINATION{prive})</div>]
-	<table width="100%" class="spip">
+	<table width="100%" class="spip liste">
 		<tbody>
 		<BOUCLE_simple(TICKETS){par date}{inverse}{pagination 10 #ENV{bloc}}{id_auteur?}{id_assigne?}{statut?}>
 			<tr class="tr_liste">

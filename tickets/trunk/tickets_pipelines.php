@@ -11,7 +11,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function tickets_affiche_gauche ($flux) {
 	$exec = $flux["args"]["exec"];
 
-	if (($exec == "ticket") OR ($exec == "ticket_edit")) {
+	if (($exec == "ticket")) {
 		$data = $flux["data"];
 
 		include_spip('inc/autoriser');

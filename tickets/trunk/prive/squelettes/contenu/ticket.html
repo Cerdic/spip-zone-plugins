@@ -4,16 +4,14 @@
 	- donnant acces a la modification du statut et de l'assignation
 	- permettant la depose de messages
 ]
-<BOUCLE_afficher_contenu(TICKETS){id_ticket=#ENV{id_ticket}}{statut?}>
+<BOUCLE_afficher_contenu(TICKETS){id_ticket=#ENV{id_ticket}}{statut?}{si #ENV{exec}|=={ticket}}>
 [(#BOITE_OUVRIR{[
-				
 	[(#AUTORISER{modifier,ticket,#ID_TICKET})
-				
 		[(#ID_TICKET|afficher_qui_edite{ticket}|non)
-			[(#URL_ECRIRE{ticket_edit,id_ticket=#ID_TICKET}|icone_verticale{<:tickets:icone_modifier_ticket:>,ticket,edit,right})]
+			[(#URL_ECRIRE{ticket_edit,id_ticket=#ID_TICKET}|icone_verticale{<:tickets:icone_modifier_ticket:>,ticket,edit,right ajax preload})]
 		]
 		[(#ID_TICKET|afficher_qui_edite{ticket}|oui)
-			[(#URL_ECRIRE{ticket_edit,id_ticket=#ID_TICKET}|icone_verticale{#ID_TICKET|afficher_qui_edite{ticket},warning-24,'',right})]
+			[(#URL_ECRIRE{ticket_edit,id_ticket=#ID_TICKET}|icone_verticale{#ID_TICKET|afficher_qui_edite{ticket},warning-24,'',right ajax preload})]
 		]
 	]
 	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{ticket-24.png}|balise_img{article,cadre-icone})]</h1>
@@ -65,4 +63,10 @@
 </div>]
 [<div><:tickets:champ_exemple:> : <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
 #BOITE_FERMER
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation');/*\]\]>*/</script>
+]
 </BOUCLE_afficher_contenu>
+[(#ENV**{exec}|=={ticket_edit}|?{#INCLURE{fond=prive/squelettes/contenu/ticket_edit,env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_afficher_contenu>

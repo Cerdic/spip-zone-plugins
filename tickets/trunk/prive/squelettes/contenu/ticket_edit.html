@@ -1,0 +1,28 @@
+[(#ID_TICKET|intval|oui)
+	[(#AUTORISER{modifier,ticket,#ID_TICKET}|sinon_interdire_acces)]
+][(#ID_TICKET|intval|non)
+	[(#AUTORISER{creer,ticket}|sinon_interdire_acces)]
+]
+#SET{retour,#ENV{redirect}|sinon{#ID_TICKET|intval|?{#URL_ECRIRE{ticket,id_ticket=#ID_TICKET},#URL_ECRIRE{tickets}}}}
+
+<div class='cadre-formulaire-editer'>
+	<div class="entete-formulaire">
+		[(#ID_TICKET|oui)
+		[(#GET{retour}|icone_verticale{<:icone_retour:>,ticket,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+		]
+		[[(#ID_TICKET|?{<:tickets:icone_modifier_ticket:>,<:tickets:creer_ticket:>})]
+		<h1>(#ENV{titre,#INFO_TITRE{ticket,#ID_TICKET}|sinon{<:info_sans_titre:>}})</h1>]
+	</div>
+
+	#SET{redirect,#ENV{redirect,#ID_TICKET|generer_url_entite{ticket}}}
+	[(#ENV{retourajax,''}|oui)
+		#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+		<div class="ajax">
+	]
+	#FORMULAIRE_EDITER_TICKET{#ENV{id_ticket,oui},#GET{redirect}}
+	[(#ENV{retourajax,''}|oui)
+		</div>
+		<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#extra');/*\]\]>*/</script>
+	]
+
+</div>
