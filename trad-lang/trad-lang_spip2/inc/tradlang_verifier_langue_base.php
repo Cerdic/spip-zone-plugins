@@ -12,12 +12,12 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 	 * On teste et on ajoute ce qu'il y a en trop
 	 */
 	$trad_langue_mere_id = array();
-	$trad_langue_mere = sql_select('*','spip_tradlang','module='.sql_quote($module).' AND lang='.sql_quote($langue_mere));
+	$trad_langue_mere = sql_select('*','spip_tradlangs','module='.sql_quote($module).' AND lang='.sql_quote($langue_mere));
 	while($row_langue_mere = sql_fetch($trad_langue_mere)){
 		$trad_langue_mere_id[] = $row_langue_mere['id']; 
 	}
 	$trad_langue_cible_id = array();
-	$trad_langue_cible  = sql_select('*','spip_tradlang','module='.sql_quote($module).' AND lang='.sql_quote($langue));
+	$trad_langue_cible  = sql_select('*','spip_tradlangs','module='.sql_quote($module).' AND lang='.sql_quote($langue));
 	while($row_langue_cible = sql_fetch($trad_langue_cible)){
 		$trad_langue_cible_id[] = $row_langue_cible['id']; 
 	}
