@@ -7,14 +7,14 @@
 	<langue code="es" />
 	<langue code="fa" />
 	<langue code="fr" />
-	<langue code="fr_tu">
+	<langue code="fr_tu" url="http://trad.spip.org/tradlang_module/forms?lang_cible=fr_tu">
 		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
 	</langue>
 	<langue code="gl" />
 	<langue code="it" />
 	<langue code="nl" />
 	<langue code="pt_br" />
-	<langue code="sk">
+	<langue code="sk" url="http://trad.spip.org/tradlang_module/forms?lang_cible=sk">
 		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
 	<langue code="tr" />
