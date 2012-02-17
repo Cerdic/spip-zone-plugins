@@ -1,29 +1,29 @@
 <traduction module="taa" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/traduction_articles_autrement/trunk/lang/" reference="fr">
-	<langue code="ast">
+	<langue code="ast" url="http://trad.spip.org/tradlang_module/taa?lang_cible=ast">
 		<traducteur nom="Xuacu" lien="http://trad.spip.org/auteur/xuacu" />
 	</langue>
-	<langue code="ca">
+	<langue code="ca" url="http://trad.spip.org/tradlang_module/taa?lang_cible=ca">
 		<traducteur nom="merce" lien="http://trad.spip.org/auteur/merce" />
 	</langue>
-	<langue code="de">
+	<langue code="de" url="http://trad.spip.org/tradlang_module/taa?lang_cible=de">
 		<traducteur nom="Rainer Müller" lien="http://trad.spip.org/auteur/rainer-muller" />
 	</langue>
-	<langue code="en">
+	<langue code="en" url="http://trad.spip.org/tradlang_module/taa?lang_cible=en">
 		<traducteur nom="Mark" lien="http://trad.spip.org/auteur/mark" />
 		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
 	</langue>
 	<langue code="es" />
-	<langue code="fa">
+	<langue code="fa" url="http://trad.spip.org/tradlang_module/taa?lang_cible=fa">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" />
-	<langue code="fr_tu">
+	<langue code="fr_tu" url="http://trad.spip.org/tradlang_module/taa?lang_cible=fr_tu">
 		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
 	</langue>
-	<langue code="pt_br">
+	<langue code="pt_br" url="http://trad.spip.org/tradlang_module/taa?lang_cible=pt_br">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.org/auteur/ricardo-porto" />
 	</langue>
-	<langue code="sk">
+	<langue code="sk" url="http://trad.spip.org/tradlang_module/taa?lang_cible=sk">
 		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
 </traduction>
