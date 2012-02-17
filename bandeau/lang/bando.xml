@@ -1,32 +1,32 @@
 <traduction module="bando" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/bandeau/lang/" reference="fr">
-	<langue code="ast">
+	<langue code="ast" url="http://trad.spip.org/tradlang_module/bando?lang_cible=ast">
 		<traducteur nom="Xuacu" lien="http://trad.spip.org/auteur/xuacu" />
 	</langue>
-	<langue code="ca">
+	<langue code="ca" url="http://trad.spip.org/tradlang_module/bando?lang_cible=ca">
 		<traducteur nom="merce" lien="http://trad.spip.org/auteur/merce" />
 	</langue>
 	<langue code="de" />
-	<langue code="en">
+	<langue code="en" url="http://trad.spip.org/tradlang_module/bando?lang_cible=en">
 		<traducteur nom="Fil" lien="http://trad.spip.org/auteur/fil" />
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
 		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
 		<traducteur nom="Mark" lien="http://trad.spip.org/auteur/mark" />
 	</langue>
-	<langue code="es">
+	<langue code="es" url="http://trad.spip.org/tradlang_module/bando?lang_cible=es">
 		<traducteur nom="davux" lien="http://trad.spip.org/auteur/davux" />
 	</langue>
-	<langue code="fa">
+	<langue code="fa" url="http://trad.spip.org/tradlang_module/bando?lang_cible=fa">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" />
-	<langue code="fr_tu">
+	<langue code="fr_tu" url="http://trad.spip.org/tradlang_module/bando?lang_cible=fr_tu">
 		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
 		<traducteur nom="orlammd" lien="http://trad.spip.org/auteur/orlammd" />
 	</langue>
-	<langue code="pt_br">
+	<langue code="pt_br" url="http://trad.spip.org/tradlang_module/bando?lang_cible=pt_br">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.org/auteur/ricardo-porto" />
 	</langue>
-	<langue code="sk">
+	<langue code="sk" url="http://trad.spip.org/tradlang_module/bando?lang_cible=sk">
 		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
 </traduction>
