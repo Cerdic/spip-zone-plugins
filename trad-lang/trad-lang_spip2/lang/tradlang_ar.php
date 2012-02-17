@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org
+// extrait automatiquement de http://trad.spip.org/tradlang_module/tradlang?lang_cible=ar
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -52,6 +52,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_module_inconnu' => 'هذه الوحدة غير متوافرة',
 	'erreur_pas_langue_cible' => 'اختر لغة لتكون هدفاً',
 	'erreur_repertoire_local_inexistant' => 'تنبيه: مجلد "squelettes/lang" لحفظ النسخة المحلية غير موجود',
+	'erreur_statut_js' => 'La chaîne de langue a été modifiée mais son statut ne l\'est pas', # NEW
+	'erreur_variable_manquante' => 'La partie de la chaîne suivante ne doit pas être modifiée :', # NEW
+	'erreur_variable_manquante_js' => 'Une ou plusieurs variables obligatoires ont été modifiées', # NEW
+	'erreur_variable_manquantes' => 'Les @nb@ parties de la chaîne suivantes ne doivent pas être modifiées :', # NEW
 	'explication_comm' => 'التعليق هو معلومة تضاف الى ملف اللغة لتوضيح بعض الامور مثل اختيار ترجمة معينة لسلسلة ما.',
 	'explication_langue_cible' => 'اللغة التي تترجم اليها.',
 	'explication_langue_origine' => 'اللغة التي تترجم منها (اللغات الكاملة ١٠٠٪ هي الوحيدة المتوافرة).',

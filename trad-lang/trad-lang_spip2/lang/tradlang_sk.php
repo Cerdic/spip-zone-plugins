@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org
+// extrait automatiquement de http://trad.spip.org/tradlang_module/tradlang?lang_cible=sk
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -52,6 +52,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_module_inconnu' => 'Tento modul nie je dostupný',
 	'erreur_pas_langue_cible' => 'Vyberte si cieľový jazyk',
 	'erreur_repertoire_local_inexistant' => 'Pozor: priečinok, ktorý sa používa na ukladanie súborov lokálne, "squelettes/lang" neexistuje',
+	'erreur_statut_js' => 'La chaîne de langue a été modifiée mais son statut ne l\'est pas', # NEW
+	'erreur_variable_manquante' => 'La partie de la chaîne suivante ne doit pas être modifiée :', # NEW
+	'erreur_variable_manquante_js' => 'Une ou plusieurs variables obligatoires ont été modifiées', # NEW
+	'erreur_variable_manquantes' => 'Les @nb@ parties de la chaîne suivantes ne doivent pas être modifiées :', # NEW
 	'explication_comm' => 'Komentár je informácia v jazykovom súbore napríklad na vysvetlenie toho, prečo bol daný reťazec preložený určitým spôsobom.',
 	'explication_langue_cible' => 'Jazyk, do ktorého prekladáte.',
 	'explication_langue_origine' => 'Jazyk, z ktorého prekladáte (dostupné sú iba jazyky preložené na 100 %).',

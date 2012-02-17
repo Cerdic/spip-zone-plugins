@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org
+// extrait automatiquement de http://trad.spip.org/tradlang_module/tradlang?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -12,11 +12,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_activer_lang' => 'Enable the language "@lang@" for this module',
-	'bouton_exporter_fichier_langue' => 'Exporter le fichier de langue en "@lang@"', # NEW
-	'bouton_exporter_fichier_langue_original' => 'Exporter le fichier de langue original ("@lang_mere@")', # NEW
-	'bouton_supprimer_langue_module' => 'Supprimer cette langue du module', # NEW
+	'bouton_exporter_fichier_langue' => 'Export the language file in "@lang@"',
+	'bouton_exporter_fichier_langue_original' => 'Export the original language file ("@lang_mere@")',
+	'bouton_supprimer_langue_module' => 'Delete this language from the module',
 	'bouton_supprimer_module' => 'Delete this module',
-	'bouton_traduire' => 'Translate >>',
+	'bouton_traduire' => 'Translate',
 
 	// C
 	'cfg_form_tradlang_autorisations' => 'Authorizations',
@@ -32,13 +32,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_legende_autorisation_voir' => 'show translation interface',
 	'codelangue' => 'Language code',
 	'crayon_changer_statut' => 'Warning! You changed the content of the string without changing the status.',
-	'crayon_changer_statuts' => 'Attention! Vous avez modifié le contenu d\'une ou plusieurs chaînes sans en modifier le statut.', # NEW
+	'crayon_changer_statuts' => 'Warning! You changed the content of one or more strings without affecting the status.',
 
 	// E
 	'entrerlangue' => 'Add a language code',
 	'erreur_aucun_item_langue_mere' => 'Parent language "@lang_mere@" contains no language items.',
 	'erreur_aucun_module' => 'There are no modules available in the database.',
-	'erreur_aucun_tradlang_a_editer' => 'Aucune chaîne de langue n\'est considérée comme non traduite.', # NEW
+	'erreur_aucun_tradlang_a_editer' => 'No language string is seen as untranslated.',
 	'erreur_autorisation_modifier_modules' => 'You are not allowed to translate the language modules.',
 	'erreur_autoriser_profil' => 'You are not allowed to edit this profile',
 	'erreur_choisir_lang_cible' => 'Choose a target language to translate.',
@@ -46,12 +46,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_choisir_module' => 'Choose a module to translate.',
 	'erreur_code_langue_existant' => 'This alternative language already exists for this module',
 	'erreur_code_langue_invalide' => 'This language code is invalid',
-	'erreur_langue_activer_impossible' => 'Le code de langue "@lang@" n\'existe pas.', # NEW
+	'erreur_langue_activer_impossible' => 'The language code "@lang@" does not exist.',
 	'erreur_langues_autorisees_insuffisantes' => 'You should at least select two languages',
 	'erreur_langues_differentes' => 'Choose a different target language différente than the parent language',
 	'erreur_module_inconnu' => 'This module is not available',
 	'erreur_pas_langue_cible' => 'Select a language',
 	'erreur_repertoire_local_inexistant' => 'Warning: the directory used to save files localy does not exist: "squelettes/lang"',
+	'erreur_statut_js' => 'La chaîne de langue a été modifiée mais son statut ne l\'est pas', # NEW
+	'erreur_variable_manquante' => 'La partie de la chaîne suivante ne doit pas être modifiée :', # NEW
+	'erreur_variable_manquante_js' => 'Une ou plusieurs variables obligatoires ont été modifiées', # NEW
+	'erreur_variable_manquantes' => 'Les @nb@ parties de la chaîne suivantes ne doivent pas être modifiées :', # NEW
 	'explication_comm' => 'The comment is an added information in the language file in order to explain for example a particular choice of translation.',
 	'explication_langue_cible' => 'The language into which you translate.',
 	'explication_langue_origine' => 'The language from which you translate (Only 100% complete languages ​​are available).',
@@ -76,7 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues_non_preferees' => 'Other languages :',
 	'info_langues_preferees' => 'Favorite(s) language(s):',
 	'info_module_traduction' => '@total@ @statut@ (@percent@%)',
-	'info_module_traduit_langues' => 'Ce module est traduit ou partiellement traduit dans @nb@ langues.', # NEW
+	'info_module_traduit_langues' => 'This module is translated or partially translated into ​​@nb@ languages.',
 	'info_module_traduit_pc' => 'Module translated at @pc@%',
 	'info_module_traduit_pc_lang' => 'Module "@module@" translated at @pc@% in @lang@ (@langue_longue@)',
 	'info_modules_priorite_traduits_pc' => 'The modules of priority "@priorite@" are @pc@% translated in @lang@',
@@ -148,7 +152,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_code_langue' => 'Invalid language code. The language code must have at least two letter code (ISO-631).',
 	'lien_confirm_export' => 'Confirm the export of the current file (ie overwrite the file @fichier@)',
 	'lien_editer_chaine' => 'Edit',
-	'lien_editer_tous' => 'Éditer toutes les chaînes non traduites', # NEW
+	'lien_editer_tous' => 'Edit all untranslated strings',
 	'lien_export' => 'Automatically export the current file.',
 	'lien_page_depart' => 'Back to the main page?',
 	'lien_profil_auteur' => 'Your profile',
@@ -165,7 +169,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_telecharger' => '[Download]',
 	'lien_traduction_module' => 'Module ',
 	'lien_traduction_vers' => ' to ',
-	'lien_traduire_suivant_str_module' => 'Traduire la chaîne non traduite suivante du module "@module@"', # NEW
+	'lien_traduire_suivant_str_module' => 'Translate the next untranslated string of the module "@module@"',
 	'lien_trier_langue_non' => 'Show the global balance.',
 	'lien_utiliser_google_translate' => 'Use this version',
 	'lien_voir_bilan_lang' => 'Display the language balance @langue_longue@ (@lang@)',
@@ -259,7 +263,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tfoot_total' => 'Total',
 	'th_avancement' => 'Progression',
 	'th_comm' => 'Comment',
-	'th_date' => 'Date', # NEW
+	'th_date' => 'Date',
 	'th_items_modifs' => 'Modified items',
 	'th_items_new' => 'New items',
 	'th_items_traduits' => 'Translated items',
@@ -290,8 +294,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_tradlang_chaines' => 'Language string',
 	'titre_tradlang_module' => 'Trad-lang language modules',
 	'titre_tradlang_modules' => 'Language modules',
-	'titre_tradlang_non_traduit' => '1 chaîne de langue non traduite', # NEW
-	'titre_tradlang_non_traduits' => '@nb@ chaînes de langue non traduites', # NEW
+	'titre_tradlang_non_traduit' => '1 untranslated language string',
+	'titre_tradlang_non_traduits' => '@nb@ untranslated language strings',
 	'titre_traduction' => 'Translations',
 	'titre_traduction_chaine_de_vers' => 'Translation of the string "@chaine@" of the module "@module@" from <abbr title="@lang_orig_long@">@lang_orig@</abbr> to <abbr title="@lang_cible_long@">@lang_cible@</abbr>',
 	'titre_traduction_de' => 'Translation of',
