@@ -21,24 +21,26 @@
 	<INCLURE{fond=noisettes/listes/tradlang_liste_tous,lang_orig=#GET{lang_orig},env,ajax}>
 ]
 [(#ENV{lang_cible}|et{#ENV{module,#ENV{id_tradlang_module}}}|non)
-<div class="editer formulaire_spip">
+<div class="error">
 	[(#ENV{module}|ou{#ENV{id_tradlang_module}}|non)
-	<p class="erreur_message"><:tradlang:erreur_choisir_module:></p>]
+	<:tradlang:erreur_choisir_module:>]
 	[(#ENV{lang_cible}|non)
-	<p class="erreur_message"><:tradlang:erreur_choisir_lang_cible:></p>]
+	<:tradlang:erreur_choisir_lang_cible:>]
 </div>
 ]
 [(#ENV{lang_cible}|=={#ENV{lang_orig}}|oui)
-	<div class="editer formulaire_spip">
-	<p class="erreur_message"><:tradlang:erreur_langues_differentes:></p>
+	<div class="error">
+		<:tradlang:erreur_langues_differentes:>
 	</div>
 ]
 </BOUCLE_module>
 [(#ENV{lang_cible}|et{#ENV{module,#ENV{id_tradlang_module}}}|non)
 	[(#ENV{module}|non)
-	<p class="erreur_message"><:tradlang:erreur_choisir_module:></p>]
+	<div class="error">
+		<:tradlang:erreur_choisir_module:>
+	</div>]
 	[(#ENV{lang_cible}|non)
-	<p class="erreur_message"><:tradlang:erreur_choisir_lang_cible:></p>]
+	<div class="error"><:tradlang:erreur_choisir_lang_cible:></div>]
 ]
 <//B_module>
 </BOUCLE_si_autorise>

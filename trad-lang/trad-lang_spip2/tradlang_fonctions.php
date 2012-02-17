@@ -162,7 +162,7 @@ function boucle_TRADLANG_MODULES_dist($id_boucle, &$boucles) {
  * <BOUCLE(TRADLANG)>
  * On enlève les modules attic*
  */
-function boucle_TRADLANG_dist($id_boucle, &$boucles) {
+function boucle_TRADLANGS_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 

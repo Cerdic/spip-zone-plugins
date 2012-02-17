@@ -1,11 +1,21 @@
+#CACHE{0}
 [(#SET{lang_orig,[(#VAL{lang_orig}|_request)]})]
 [(#SET{lang_cible,[(#VAL{lang_cible}|_request)]})]
 <script type='text/javascript'>
 	/**
 	 * On init les erreurs vides
+	 * error_tradlang_statut_X boolean : une erreur sur l'oubli de changement de statut (pas importante)
+	 * error_tradlang_statut_X boolean : une erreur sur l'oubli de changement de statut (très importante)
 	 */
-	var error_tradlang_#ID_TRADLANG_MODULE = false;
-	var tradlang_errors_#ID_TRADLANG_MODULE = [];
+	var error_tradlang_statut_#ID_TRADLANG_MODULE = false;
+	var error_tradlang_variables_#ID_TRADLANG_MODULE = false;
+	var tradlang_errors_statut_#ID_TRADLANG_MODULE = [];
+	var tradlang_errors_variables_#ID_TRADLANG_MODULE = [];
+	/**
+	 * Les messages d'erreur ajoutés au li parent
+	 */
+	var erreur_statut = '<:tradlang:erreur_statut_js|texte_script:>';
+	var erreur_variable = '<:tradlang:erreur_variable_manquante_js|texte_script:>';
 </script>
 
 <B_nb_tradlangs>
@@ -26,14 +36,25 @@
 <script type='text/javascript'>
 	var contenu_orig_#ID_TRADLANG = '[(#STR**|tradlang_utf8|replace{"\n","_"}|replace{"\r",""}|replace{"\t",""}|texte_script)]';
 	$('#formulaire_tradlang_tous_#ENV{id_tradlang_module}').bind('submit',function(){
-		var newstatut_#ID_TRADLANG = $('#formulaire_tradlang_tous_#ENV{id_tradlang_module}').find('#statut_#ID_TRADLANG').val();
-		var new_contenu_#ID_TRADLANG =$('#formulaire_tradlang_tous_#ENV{id_tradlang_module}').find('#str_#ID_TRADLANG').val().replace(/\n/g,'_').replace(/\r/g,'').replace(/\t/g,'');
+		var newstatut_#ID_TRADLANG = $('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})]').find('#statut_[(#ID_TRADLANG)]').val();
+		var new_contenu_#ID_TRADLANG =$('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})]').find('#str_#ID_TRADLANG').val().replace(/\n/g,'_').replace(/\r/g,'').replace(/\t/g,'');
+		var vars_#ID_TRADLANG = $('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})]').find('#str_orig_#ID_TRADLANG').val().match('@[^@]+@','gi');
+		if(vars_#ID_TRADLANG){
+			trad_#ID_TRADLANG = $('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})]').find('#str_#ID_TRADLANG').val();
+			for (i in vars_#ID_TRADLANG) {
+				if(!trad_#ID_TRADLANG.match(vars_[(#ID_TRADLANG)][i],'g')){
+					tradlang_errors_variables_[(#ID_TRADLANG_MODULE)].push('#ID_TRADLANG');
+					error_tradlang_variables_[(#ID_TRADLANG_MODULE)] = true;
+					break;
+				}
+			}
+		}
 		if((new_contenu_#ID_TRADLANG != contenu_orig_#ID_TRADLANG) && (newstatut_#ID_TRADLANG != 'OK')){
 			/**
 			 * On remplit les erreurs si besoin
 			 */
-			error_tradlang_#ID_TRADLANG_MODULE = true;
-			tradlang_errors_#ID_TRADLANG_MODULE.push('#ID_TRADLANG');
+			error_tradlang_statut_#ID_TRADLANG_MODULE = true;
+			tradlang_errors_statut_#ID_TRADLANG_MODULE.push('#ID_TRADLANG');
 		}
 	});
 </script>
@@ -52,6 +73,9 @@
 <//B_nb_tradlangs>
 <script type='text/javascript'>
 if (window.jQuery)(function($){
+	/**
+	 * On déplace le bouton de submit du formulaire au scroll si le formulaire est grand
+	 */
 	var boutons = $('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})] .boutons');
 	var boutons_width = boutons.width();
 	$(window).scroll(function() {
@@ -66,21 +90,39 @@ if (window.jQuery)(function($){
 		if(($(window).scrollTop() < limite_haut)||(($(window).scrollTop()+$(window).height()) > limite_bas) )
 			boutons.removeClass('boutons_float').css({'position': 'static', 'width': 'auto'});	
 	});
+	/**
+	 * On traite les erreurs potentielles
+	 */
 	$('#formulaire_tradlang_tous_#ENV{id_tradlang_module}').bind('submit',function(){
-		if(error_tradlang_#ID_TRADLANG_MODULE){
+		$('li.erreur .erreur_message').detach();
+		$('li.erreur').removeClass('erreur');
+		if(error_tradlang_variables_[(#ID_TRADLANG_MODULE)]){
+			for (var i=0; i<tradlang_errors_variables_[(#ID_TRADLANG_MODULE)].length; i++) {
+				erreur = tradlang_errors_variables_[(#ID_TRADLANG_MODULE)][i];
+				$('#str_'+erreur).parent('li').addClass('erreur');
+				$('#str_'+erreur).parent('li').prepend('<span class="erreur_message">'+erreur_variable+'<\/span>');
+			}
+			tradlang_errors_variables_[(#ID_TRADLANG_MODULE)] = [];
+			error_tradlang_variables_[(#ID_TRADLANG_MODULE)] = false;
+			jQuery('li.erreur').eq(0).positionner(true,true);
+			return false;
+		}
+		if(error_tradlang_statut_#ID_TRADLANG_MODULE){
 			if(!window.confirm('<:tradlang:crayon_changer_statuts|filtrer_entites|texte_script:>')){
-				$('li.erreur').removeClass('erreur');
-				for (var i=0; i<tradlang_errors_#ID_TRADLANG_MODULE.length; i++) {
-					erreur = tradlang_errors_[(#ID_TRADLANG_MODULE)][i];
+				for (var i=0; i<tradlang_errors_statut_#ID_TRADLANG_MODULE.length; i++) {
+					erreur = tradlang_errors_statut_[(#ID_TRADLANG_MODULE)][i];
     				$('#statut_'+erreur).parent('li').addClass('erreur');
+    				$('#statut_'+erreur).parent('li').prepend('<span class="erreur_message">'+erreur_statut+'<\/span>');
 				}
-				tradlang_errors_#ID_TRADLANG_MODULE = [];
-				error_tradlang_#ID_TRADLANG_MODULE = false;
+				tradlang_errors_statut_#ID_TRADLANG_MODULE = [];
+				error_tradlang_statut_#ID_TRADLANG_MODULE = false;
 				$('li.erreur select').change(function(){
 					if($(this).val() == 'OK'){
+						$(this).parent('.erreur').find('.erreur_message').detach();
 						$(this).parent('.erreur').removeClass('erreur');
 					}
 				});
+				jQuery('li.erreur').eq(0).positionner(true,true);
 				return false;
 			}
 		}

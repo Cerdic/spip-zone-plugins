@@ -24,6 +24,23 @@ function formulaires_editer_tradlang_charger($id_tradlang='aucun',$retour='',$la
 
 function formulaires_editer_tradlang_verifier($id_tradlang='aucun',$retour='',$lang_orig=''){
 	$erreurs = formulaires_editer_objet_verifier('tradlang',0,array('str','statut'));
+	
+	/**
+	 * On vérifie ici que les variables @...@ des chaines de langue ne sont pas modifiées
+	 */
+	$tradlang = sql_fetsel('chaine.id_tradlang_module,chaine.id,module.lang_mere','spip_tradlangs AS chaine LEFT JOIN spip_tradlang_modules AS module ON chaine.id_tradlang_module = module.id_tradlang_module','id_tradlang='.intval($id_tradlang));
+	$tradlang_mere = sql_getfetsel('str','spip_tradlangs','id_tradlang_module='.intval($tradlang['id_tradlang_module']).' AND lang='.sql_quote($tradlang['lang_mere']).' AND id='.sql_quote($tradlang['id']));
+	if(preg_match_all(',@[^@]+@,i',$tradlang_mere,$variables)){
+		foreach($variables[0] as $variable){
+			if(!preg_match("/$variable/",_request('str'))){
+				$variables_trouvees[] = $variable;
+			}
+			if(is_array($variables_trouvees)){
+				$erreurs['str'] = singulier_ou_pluriel(count($variables_trouvees),'tradlang:erreur_variable_manquante','tradlang:erreur_variable_manquantes');
+				$erreurs['str'] .= '<br />'.implode(' - ',$variables_trouvees);
+			}
+		}
+	}
 	return $erreurs;
 }
 
