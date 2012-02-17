@@ -3,7 +3,7 @@
 	<langue code="en" />
 	<langue code="es" />
 	<langue code="fr" />
-	<langue code="sk">
+	<langue code="sk" url="http://trad.spip.org/tradlang_module/nospam?lang_cible=sk">
 		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
 </traduction>
