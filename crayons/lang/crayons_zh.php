@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org
+// extrait automatiquement de http://trad.spip.org/tradlang_module/crayons?lang_cible=zh
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -24,10 +24,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_tout' => '编辑所有内容', # MODIF
 	'effets' => 'Effets', # NEW
 	'explication_exec_autorise' => 'Pages autorisées à la modification
-		(?exec=...) : (, pour séparer les exec).', # MODIF
+		(?exec=...) : (, pour séparer les exec).', # NEW
 	'explication_introduction_article' => 'L\'introduction d\'un article affiche le descriptif de l\'article, sinon affiche ses 600 premiers caractères (chapeau puis texte).', # NEW
 	'explication_reduire_logo' => 'Réduire le logo s\'il dépasse
-		la taille maximale indiquee en pixels. Exemple : 100. (0 = jamais)', # MODIF
+		la taille maximale indiquee en pixels. Exemple : 100. (0 = jamais)', # NEW
 
 	// L
 	'label_activer_barre_typo' => 'Activer la barre typographique dans les crayons ?', # NEW
