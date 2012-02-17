@@ -1,23 +1,23 @@
 <traduction module="couteauprive" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/couteau_suisse/lang/" reference="fr">
 	<langue code="ast" />
-	<langue code="ca">
+	<langue code="ca" url="http://trad.spip.org/tradlang_module/couteauprive?lang_cible=ca">
 		<traducteur nom="merce" lien="http://trad.spip.org/auteur/merce" />
 	</langue>
-	<langue code="en">
+	<langue code="en" url="http://trad.spip.org/tradlang_module/couteauprive?lang_cible=en">
 		<traducteur nom="Mark" lien="http://trad.spip.org/auteur/mark" />
 		<traducteur nom="sQuonk" lien="http://trad.spip.org/auteur/squonk" />
 		<traducteur nom="merce" lien="http://trad.spip.org/auteur/merce" />
 	</langue>
 	<langue code="es" />
 	<langue code="fr" />
-	<langue code="fr_tu">
+	<langue code="fr_tu" url="http://trad.spip.org/tradlang_module/couteauprive?lang_cible=fr_tu">
 		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
 	</langue>
 	<langue code="gl" />
-	<langue code="nl">
+	<langue code="nl" url="http://trad.spip.org/tradlang_module/couteauprive?lang_cible=nl">
 		<traducteur nom="mpossoz" lien="http://trad.spip.org/auteur/mpossoz" />
 	</langue>
-	<langue code="sk">
+	<langue code="sk" url="http://trad.spip.org/tradlang_module/couteauprive?lang_cible=sk">
 		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
 	<langue code="tr" />
