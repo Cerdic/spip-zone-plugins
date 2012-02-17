@@ -1,13 +1,13 @@
 <traduction module="edir" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/edition_directe/trunk/lang/" reference="fr">
-	<langue code="de">
+	<langue code="de" url="http://trad.spip.org/tradlang_module/edir?lang_cible=de">
 		<traducteur nom="abelass" lien="http://trad.spip.org/auteur/abelass" />
 	</langue>
 	<langue code="en" />
-	<langue code="fa">
+	<langue code="fa" url="http://trad.spip.org/tradlang_module/edir?lang_cible=fa">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" />
-	<langue code="sk">
+	<langue code="sk" url="http://trad.spip.org/tradlang_module/edir?lang_cible=sk">
 		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
 </traduction>
