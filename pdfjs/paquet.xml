@@ -1,0 +1,15 @@
+<paquet
+	prefix="pdfjs"
+	categorie="multimedia"
+	version="0.1.0"
+	etat="experimental"
+	compatibilite="[3.0.0-dev;["
+	logo="prive/themes/spip/images/pdfjs-32.png"
+	documentation="http://www.spip-contrib.net/Lecteur-pdf-javascript-pdf-js"
+>	
+	<nom>pdf.js</nom>
+	<auteur lien="http://mozilla.github.com/pdf.js/">andreas gal</auteur>
+	<credit lien="http://www.erational.org">erational (mise en plugin)</credit>  
+	<licence lien="https://github.com/mozilla/pdf.js/blob/master/LICENSE">license</licence>
+  <copyright>2011 Mozilla Foundation</copyright>
+</paquet>

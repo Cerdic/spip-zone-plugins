@@ -1,0 +1,12 @@
+[(#REM)
+     modele pour inserer le lecteur en ligne du plugin pdf.js
+     
+     
+     parametres:
+     - id:    id_document
+     - largeur (facultatif):   largeur de iframe 
+     - hauteur (facultatif):   hauteur de iframe 
+
+
+
+]<iframe src="[(#URL_PAGE{pdfjs}|parametre_url{id_document,#ENV{id}})]" width="[(#ENV{largeur}|?{#ENV{largeur},490})]" height="[(#ENV{hauteur}|?{#ENV{hauteur},600})]" class="lecteurpdf lecteufpdf-#ENV{id}"></iframe>
