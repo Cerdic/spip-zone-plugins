@@ -1,16 +1,20 @@
 <plugin>
-<nom>Galerie carr&eacute;e</nom>
-<icon>icon.jpg</icon>
+<nom>Galerie Caro</nom>
+<prefix>galcaro</prefix>
+<icon>icon/galcaro.png</icon>
+
+<categorie>multimedia</categorie>
+<slogan>Galerie d'images carr&eacute;es</slogan>
 <description>Galerie d'images carr&eacute;es, avec attribut longdesc.</description>
-<auteur>[romy.tetue.net->http://romy.tetue.net], Fil</auteur>
-<licence>&copy; 2009-2011 GPL</licence>
-<version>0.2.1</version>
+<auteur>Fil, [romy.tetue.net->http://romy.tetue.net]</auteur>
+<licence>GPL 2009-2011</licence>
+
+<version>0.2.2</version>
 <etat>dev</etat>
-<prefix>galerie_carree</prefix>
+<necessite id='SPIP' version='[2.0.0;]' />
+
 <pipeline>
 	<nom>insert_head</nom>
-	<inclure>galerie_carree_pipelines.php</inclure>
+	<inclure>galcaro_pipelines.php</inclure>
 </pipeline>
-<necessite id='SPIP' version='[2.0.0;]' />
-<categorie>multimedia</categorie>
 </plugin>

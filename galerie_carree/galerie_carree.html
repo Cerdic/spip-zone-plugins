@@ -13,11 +13,11 @@
 #SET{last,#ENV{last,999}}
 [(#SET{vu,[(#GET{id_article}|?{non,.})]})]
 
-<B_galerie_carree>
-<div class="galerie_carree">
+<B_galcaro>
+<div class="galcaro">
 	[(#TOTAL_BOUCLE|>{10}|?{' ',''})<p class="gentil_message"><:cliquer_pour_agrandir:></p>]
 	<ul>
-		<BOUCLE_galerie_carree(DOCUMENTS)
+		<BOUCLE_galcaro(DOCUMENTS)
 		{id_article?}
 		{vu?}
 		{extension IN jpg,gif,png}
@@ -46,7 +46,7 @@
 			[(#GET{desc}|?{[(#SET{vignette,[(#GET{vignette}
 				|sinon{<img style="display: none;" />}
 				|inserer_attribut{longdesc,[(#VAL{#desc}|concat{#ID_DOCUMENT})]})]})]})]
-			<a href="[(#FICHIER|copie_locale|image_reduire{800}|extraire_attribut{src})]" rel="galerie_carree#ID_ARTICLE"
+			<a href="[(#FICHIER|copie_locale|image_reduire{800}|extraire_attribut{src})]" rel="galcaro#ID_ARTICLE"
 			type="#MIME_TYPE"[
 			title="(#TITRE|sinon{#GET{tof_titre}|supprimer_tags}|texte_backend)"]>#GET{vignette}</a>
 		
@@ -62,7 +62,7 @@
 				[<div class="#EDIT{descriptif}">(#DESCRIPTIF)</div>]
 			</div>]
 		</li>
-		</BOUCLE_galerie_carree>
+		</BOUCLE_galcaro>
 
 	<BOUCLE_photos(DOCUMENTS)
 	{id_article?}
@@ -75,10 +75,10 @@
 	]
 	[(#ENV{pagination}|=={non}|?{'',' '})
 		[<p class="pagination">(#PAGINATION)[
-		((#_galerie_carree:TOTAL_BOUCLE)&nbsp;<:images:>)]</p>]
+		((#_galcaro:TOTAL_BOUCLE)&nbsp;<:images:>)]</p>]
 	]
 	<//B_photos>
 	</ul>
 	<br class="clear" />
-</div><!--.galerie_carree-->
-</B_galerie_carree>
+</div><!--.galcaro-->
+</B_galcaro>
