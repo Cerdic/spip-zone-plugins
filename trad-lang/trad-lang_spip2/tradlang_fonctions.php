@@ -239,8 +239,8 @@ function critere_langue_complete_dist($id_boucle, &$boucles, $crit){
 } 
 
 function inc_prepare_module_dist($id_module,  $serveur='') {
-	$lang_mere = sql_getfetsel('lang_mere','spip_tradlang_modules','id_tradlang_module='.intval($id_module));
-	$count = sql_countsel('spip_tradlangs','id_tradlang_module='.$id_module.' AND statut="OK" AND lang='.sql_quote($lang_mere));
+	$module = sql_fetsel('module,lang_mere','spip_tradlang_modules','id_tradlang_module='.intval($id_module));
+	$count = sql_countsel('spip_tradlangs','id_tradlang_module='.$id_module.' AND statut="OK" AND lang='.sql_quote($module['lang_mere']).' AND module='.sql_quote($module['module']));
 	$having = "COUNT(*)=$count";
 	return $having;
 }
