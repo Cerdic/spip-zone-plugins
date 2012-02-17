@@ -24,7 +24,7 @@ OpenLayers.Popup.SpipPopup =
   OpenLayers.Class(OpenLayers.Popup.Anchored, {
     
     // Recouvrement avec le bord (vertical)
-    dOverlap: 8,
+    dOverlap: 0,
     // Distance du bord (horizontal)
     dRound: 20,	
     // Classe pour l'affichage (les fonds sont definis dans le css
@@ -42,13 +42,11 @@ OpenLayers.Popup.SpipPopup =
 		// Prevoir le fond
         this.contentDiv.style.zIndex = 1;
         this.div.style.overflow = 'visible';
-        this.div.className = "SpipPopup "+this.div.className;
+        this.div.className = this.div.className+" SpipPopup";
         this.groupDiv.style.overflow = 'visible';
-        this.groupDiv.className = "SpipPopupGroup "+this.groupDiv.className;
-        this.contentDiv.className = "SpipPopupContent "+this.contentDiv.className;
-        if (closeBox) {
-            this.closeDiv.style.zIndex = 1;
-        }
+        this.groupDiv.className = this.groupDiv.className+" SpipPopupGroup";
+        this.contentDiv.className = "SpipPopupContent "+ this.contentDiv.className;
+        if (closeBox) this.closeDiv.style.zIndex = 1;
 
 		// Calcul de la taille des accroches (toutes identiques)
 		if (!jQuery("."+this.displayClass+"C").length)
@@ -191,8 +189,16 @@ OpenLayers.Popup.SpipPopup =
 
 /** Autres definition
 */
-OpenLayers.Popup.SpipPopupOmbre = OpenLayers.Class(OpenLayers.Popup.SpipPopup, { 'displayClass':OpenLayers.Popup.SpipPopupShadow, 'dOverlap':11 });
+OpenLayers.Popup.SpipPopupjqBubble = OpenLayers.Class(OpenLayers.Popup.SpipPopup, { 'displayClass':OpenLayers.Popup.SpipPopupjqBubble, 'dOverlap':5 });
 
-OpenLayers.Popup.SpipPopupThink = OpenLayers.Class(OpenLayers.Popup.SpipPopup, { 'displayClass':OpenLayers.Popup.SpipPopupThink, 'dOverlap':11, dRound:5 });
+OpenLayers.Popup.SpipPopupqTip = OpenLayers.Class(OpenLayers.Popup.SpipPopup, { 'displayClass':OpenLayers.Popup.SpipPopupqTip, 'dOverlap':5, dRound:-8 });
+
+OpenLayers.Popup.SpipPopupClassic = OpenLayers.Class(OpenLayers.Popup.SpipPopup, { 'displayClass':OpenLayers.Popup.SpipPopupClassic, 'dOverlap':8 });
+
+OpenLayers.Popup.SpipPopupShadow = OpenLayers.Class(OpenLayers.Popup.SpipPopup, { 'displayClass':OpenLayers.Popup.SpipPopupShadow, 'dOverlap':11 });
+
+OpenLayers.Popup.SpipPopupThink = OpenLayers.Class(OpenLayers.Popup.SpipPopup, { 'displayClass':OpenLayers.Popup.SpipPopupThink, 'dOverlap':18, dRound:15 });
+
+OpenLayers.Popup.SpipPopupBlack = OpenLayers.Class(OpenLayers.Popup.SpipPopup, { 'displayClass':OpenLayers.Popup.SpipPopupBlack, 'dOverlap':0 });
 
 }

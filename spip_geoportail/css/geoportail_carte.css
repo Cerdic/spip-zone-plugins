@@ -53,62 +53,6 @@ img.gpGeocodeMatchCodeMatchType
 .gpControlInformationMinimized {
   height: 18px;
 }
-/** Popup sur la carte **/
-#popup.Anchored, .gpPopup
-{	font-size:1em;
-	background-color:#FFC!important;
-	border:0!important;
-}
-#popup.FramedCloud
-{	font-size:1em;
-}
-
-#popup p
-{	margin:0;
-	padding:0;
-}
-#popup .titre, .gpPopup .gpPopupContent .gpPopupHead
-{	font-size:1em;
-	font-weight:bold;
-	margin:0;
-	background:transparent;
-}
-
-#popup .spip_logos,
-#popup.Anchored_hover .document .spip_logos
-{	margin:0 0.5em 0 0;
-	float:left;
-}
-#popup small
-{	color:Maroon;
-	padding-left:20px;
-}
-#popup a
-{	color:Navy;
-}
-
-#popup .document
-{	text-align:center;
-}
-#popup .document .spip_logos
-{	margin:auto;
-	float:none;
-}
-
-#popup.Anchored_hover .olPopupContent
-{	overflow:hidden;
-}
-#popup.Anchored_hover .document
-{	text-align:left;
-}
-
-#popup .olPopupCloseBox, .gpPopupCloseBox
-{	background:transparent url("close.png") no-repeat scroll 0 0;
-	overflow:hidden;
-}
-#popup .olPopupCloseBox:hover, .gpPopupCloseBox:hover
-{	background:transparent url("close.png") no-repeat scroll 0 -17px
-}
 
 /** Affichage des images */
 #jqDialog.viewer
@@ -126,6 +70,77 @@ img.gpGeocodeMatchCodeMatchType
 {	border:10px solid white;
 	margin:0;
 	padding:0;
+}
+
+/** Popup sur la carte **/
+.Anchored, .gpPopup
+{	font-size:1em;
+	background-color:#FFC!important;
+	border:0!important;
+}
+.FramedCloud
+{	font-size:1em;
+}
+
+.olPopupContent,
+.olFramedCloudPopupContent
+{	overflow:hidden;
+	padding:0.5em;
+}
+
+.olPopupContent p,
+.olFramedCloudPopupContent  p
+{	margin:0;
+	padding:0;
+}
+.olPopupContent .titre, 
+.olFramedCloudPopupContent .titre, 
+.gpPopup .gpPopupContent .gpPopupHead
+{	font-size:1em;
+	font-weight:bold;
+	margin:0;
+	background:transparent;
+}
+
+.olPopupContent .spip_logos,
+.olFramedCloudPopupContent .spip_logos,
+.Anchored_hover .document .spip_logos
+{	margin:0 0.5em 0 0;
+	float:left;
+}
+.olPopupContent small,
+.olFramedCloudPopupContent small
+{	color:Maroon;
+	padding-left:20px;
+}
+.olPopupContent a,
+.olFramedCloudPopupContent a
+{	color:Navy;
+}
+
+.olPopupContent .document,
+.olFramedCloudPopupContent .document
+{	text-align:center;
+}
+.olPopupContent .document .spip_logos,
+.olFramedCloudPopupContent .document .spip_logos
+{	margin:auto;
+	float:none;
+}
+
+.Anchored_hover .olPopupContent
+{	overflow:hidden;
+}
+.Anchored_hover .document
+{	text-align:left;
+}
+
+.olPopupCloseBox, .gpPopupCloseBox
+{	background:transparent url("close.png") no-repeat scroll 0 0;
+	overflow:hidden;
+}
+.olPopupCloseBox:hover, .gpPopupCloseBox:hover
+{	background:transparent url("close.png") no-repeat scroll 0 -17px
 }
 
 /** Affichage des popup Spip */
@@ -149,21 +164,16 @@ img.gpGeocodeMatchCodeMatchType
 	background-repeat: no-repeat;
 }
 .SpipPopupC
-{	height:32px;
-	width:30px;
+{	height:5px;
+	width:0;
 }
-.SpipPopupCbr,
-.SpipPopupCbl
-{	background:url("popup-back-bot.png") no-repeat center;
-}
-.SpipPopupCtl,
-.SpipPopupCtr
-{	background:url("popup-back-top.png") no-repeat center;
+
+.SpipPopup .olPopupContent
+{	padding:10px;
 }
 
 .SpipPopup p.titre
-{	margin-top:6px;
-	margin-bottom:5px;
+{	margin-bottom:5px;
 }
 .SpipPopup .olPopupCloseBox
 {	top: 0px!important;
@@ -171,12 +181,29 @@ img.gpGeocodeMatchCodeMatchType
 	margin: 9px 8px 0 0;
 }
 
+/** Popup Classic */
+.SpipPopupClassicBack 
+{	background-image:url("popup-backclassic.png");
+}
+.SpipPopupClassicC
+{	height:32px;
+	width:30px;
+}
+.SpipPopupClassicCbr,
+.SpipPopupClassicCbl
+{	background:url("popup-back-bot.png") no-repeat center;
+}
+.SpipPopupClassicCtl,
+.SpipPopupClassicCtr
+{	background:url("popup-back-top.png") no-repeat center;
+}
+
 /** Popup avec ombre */
 .SpipPopupShadowBack
 {	background-image:url("popup-backombre.png");
 }
 .SpipPopupShadow .olPopupContent
-{	padding:4px 10px 10px;
+{	padding:10px;
 }
 .SpipPopupShadowC
 {	height:35px;
@@ -192,6 +219,57 @@ img.gpGeocodeMatchCodeMatchType
 }
 .SpipPopupShadow .olPopupCloseBox
 {	margin: 10px 18px 0 0;
+}
+
+/** Popup avec jqBubble */
+.SpipPopupjqBubbleBack
+{	background-image:url("poup-jqBubble.png");
+}
+.SpipPopupjqBubble .olPopupContent
+{	padding:10px 5px 10px 10px;
+}
+.SpipPopupjqBubbleC
+{	height:11px;
+	width:13px;
+}
+.SpipPopupjqBubbleCbr,
+.SpipPopupjqBubbleCbl
+{	background:url("poup-jqBubble-bot.png") no-repeat;
+}
+.SpipPopupjqBubbleCtl,
+.SpipPopupjqBubbleCtr
+{	background:url("poup-jqBubble-top.png") no-repeat;
+}
+.SpipPopupjqBubbleCtl .olPopupCloseBox
+{	margin: 10px 18px 0 0;
+}
+
+/** Popup avec qTip */
+.SpipPopupqTipBack
+{	background-image:url("popup-qtip.png");
+}
+.SpipPopupqTip .olPopupContent
+{	padding:10px 5px 10px 10px;
+}
+.SpipPopupqTipC
+{	height:30px;
+	width:36px;
+}
+.SpipPopupqTipCbr
+{	background:url("popup-qtip-br.png") no-repeat;
+}
+.SpipPopupqTipCbl
+{	background:url("popup-qtip-bl.png") no-repeat;
+}
+.SpipPopupqTipCtl
+{	background:url("popup-qtip-tl.png") no-repeat;
+}
+.SpipPopupqTipCtr
+{	background:url("popup-qtip-tr.png") no-repeat;
+}
+.SpipPopupqTip .olPopupCloseBox:hover, .SpipPopupqTip .gpPopupCloseBox:hover,
+.SpipPopupqTip .olPopupCloseBox
+{	background-image:url("close-tip.png");
 }
 
 /** Popup pensee */
@@ -210,10 +288,39 @@ img.gpGeocodeMatchCodeMatchType
 .SpipPopupThinkCtr
 {	background:url("popup-think-top.png") no-repeat;
 }
-.SpipPopupThink p.titre
-{	margin-top:0px;
-	margin-bottom:5px;
-}
+
 .SpipPopupThink .olPopupContent
-{	padding:12px 6px 12px 12px;
+{	padding:17px 5px 10px 17px;
+}
+.SpipPopupThink .olPopupCloseBox
+{	margin: 16px 14px 0 0;
+}
+
+/** Popup pensee */
+.SpipPopupBlackBack
+{	background-image:url("popup-black.png");
+}
+.SpipPopupBlack .olPopupContent
+{	color:#eee;
+	padding:10px 5px 10px 10px;
+}
+.SpipPopupBlack a
+{	color:#ddd;
+}
+
+.SpipPopupBlack .olPopupCloseBox:hover, .SpipPopupBlack .gpPopupCloseBox:hover,
+.SpipPopupBlack .olPopupCloseBox
+{	background-image:url("close-black.png");
+}
+.SpipPopupBlackC
+{	height:20px;
+	width:28px;
+}
+.SpipPopupBlackCbr,
+.SpipPopupBlackCbl
+{	background:url("popup-black-bot.png") no-repeat;
+}
+.SpipPopupBlackCtl,
+.SpipPopupBlackCtr
+{	background:url("popup-black-top.png") no-repeat;
 }

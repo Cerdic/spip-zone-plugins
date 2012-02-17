@@ -1219,8 +1219,8 @@ jQuery.geoportail =
 			jQuery.geoportail.fsCompteur = 0;
 			// Calcul hauteur et largeur
 			var de = document.documentElement;
-			var w = jQuery(window).width();//window.innerWidth || self.innerWidth || (de&&de.clientWidth) || document.body.clientWidth;
-			var h = jQuery(window).height();//window.innerHeight || self.innerHeight || (de&&de.clientHeight) || document.body.clientHeight
+			var w = window.innerWidth || (de&&de.clientWidth) || document.body.clientWidth; // jQuery(window).width();
+			var h = window.innerHeight || (de&&de.clientHeight) || document.body.clientHeight; // jQuery(window).height();
 			var h2 = h;
 			for (i=0; i<jQuery.geoportail.fsHeight.length; i++)
 			{	h2 -= jQuery(jQuery.geoportail.fsHeight[i]).css('display')=='none' ? 0 : jQuery(jQuery.geoportail.fsHeight[i]).outerHeight(true);

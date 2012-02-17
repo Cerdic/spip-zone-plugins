@@ -65,6 +65,8 @@ function exec_geoportail_config_options()
  		$geoportail_popup = $GLOBALS['meta']['geoportail_popup'];
 		$ghover = ($GLOBALS['meta']['geoportail_hover'])?"CHECKED":"";
 
+		if ($geoportail_popup=='spip') $geoportail_popup = 'SpipPopup';
+		
 		/* Type d'objet a georef */
 		$form = debut_cadre_trait_couleur("administration-24.gif", true, "", _T('geoportail:options'))
 			.debut_cadre_relief("base-24.gif",true,"", _T('geoportail:geoportail_defaut'))
@@ -85,9 +87,17 @@ function exec_geoportail_config_options()
 			.debut_cadre_relief("forum-public-24.gif",true,"", _T('geoportail:geoportail_popup'))
 				. _T('geoportail:geopopup_info')
 				."<p>"
-				."<input type='radio' name='popup' class='fondl'id='Anchored' value='Anchored'".($geoportail_popup=='Anchored'?" checked /><label for='Anchored' style='font-weight:bold'>":"/><label for='Anchored'>")._T('geoportail:popup_anchored')."</label> &nbsp;"
-				."<input type='radio' name='popup' class='fondl' id='FramedCloud' value='FramedCloud'".($geoportail_popup=='FramedCloud'?" checked /><label for='FramedCloud' style='font-weight:bold'>":"/><label for='FramedCloud'>")._T('geoportail:popup_framecloud')."</label> &nbsp;"
-				."<input type='radio' name='popup' class='fondl' id='spip_popup' value='spip'".($geoportail_popup=='spip'?" checked /><label for='spip_popup' style='font-weight:bold'>":"/><label for='spip_popup'>")._T('geoportail:popup_spip')."</label> &nbsp;"
+				._T('geoportail:geopopup_forme')." <select name='popup' class='fondl'>"
+				."<option value='Anchored'".($geoportail_popup=='Anchored'?" selected >":">")._T('geoportail:popup_anchored')."</option>"
+				."<option value='FramedCloud'".($geoportail_popup=='FramedCloud'?" selected >":">")._T('geoportail:popup_framecloud')."</option>"
+				."<option value='SpipPopup'".($geoportail_popup=='SpipPopup'?" selected >":">")._T('geoportail:popup_spip')."</option>"
+				."<option value='SpipPopupjqBubble'".($geoportail_popup=='SpipPopupjqBubble'?" selected >":">")._T('geoportail:popup_jbubble')."</option>"
+				."<option value='SpipPopupqTip'".($geoportail_popup=='SpipPopupqTip'?" selected >":">")._T('geoportail:popup_qtip')."</option>"
+				."<option value='SpipPopupClassic'".($geoportail_popup=='SpipPopupClassic'?" selected >":">")._T('geoportail:popup_classic')."</option>"
+				."<option value='SpipPopupShadow'".($geoportail_popup=='SpipPopupShadow'?" selected >":">")._T('geoportail:popup_ombre')."</option>"
+				."<option value='SpipPopupThink'".($geoportail_popup=='SpipPopupThink'?" selected >":">")._T('geoportail:popup_pense')."</option>"
+				."<option value='SpipPopupBlack'".($geoportail_popup=='SpipPopupBlack'?" selected >":">")._T('geoportail:popup_black')."</option>"
+				."</select>"
 				."</p><p>"
 				."<input type='checkbox' name='hover' id='hover' $ghover><label for=hover>"._T('geoportail:geoportail_hover')."</label>"
 				."<input type='submit' name='setpopup' class='fondo' style='margin-left:3em;' value='"._T('bouton_valider')."' />"
