@@ -27,7 +27,9 @@
 
 	<menu nom="menus_tous" titre="menus:editer_menus_titre" parent="menu_squelette" icone="images/menu-16.png" />
 
-	<necessite nom="spip_bonux" compatibilite="[1.8.10;]" />
+	<!-- pour _T_ou_typo -->
+	<necessite nom="saisies" compatibilite="[1.9.10;]" />
+	
 	<utilise nom="Z" />
 	<utilise nom="Zpip" />
 </paquet>
