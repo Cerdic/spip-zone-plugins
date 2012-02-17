@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org
+// extrait automatiquement de http://trad.spip.org/tradlang_module/tickets?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -202,6 +202,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Bug reports, bug tracking',
 	'titre_identification' => 'Authentication',
 	'titre_liste' => 'List of the bug reports',
+	'tous_tickets_en_redaction' => 'Tous les tickets en rédaction', # NEW
 	'tous_tickets_ouverts' => 'All opened bug reports',
 	'type_amelioration' => 'Improvements',
 	'type_amelioration_long' => 'The improvements bug reports',
