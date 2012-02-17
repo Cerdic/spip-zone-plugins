@@ -1,0 +1,30 @@
+
+<h1><:tradsync:traductions_mots_differents:></h1>
+
+[(#SET_PUSH{ariane,[(#ARRAY{0,<:tradsync:espace_traducteurs:>,1,[(#URL_ECRIRE{traductions}|parametre_url{langue,#ENV{langue}})]})]})]
+[(#SET_PUSH{ariane,#ARRAY{0,<:tradsync:traductions_mots_differents:>}})]
+[(#INCLURE{fond=prive/exec/inc-ariane, ariane=#GET{ariane}, ecrire=0})]
+
+
+
+[(#SET{langue,[(#ENV{langue,#LANG}|traduire_nom_langue)]})]
+
+<!--#navigation-->
+
+<div class="cadre cadre-info">
+<p><:tradsync:explication_traductions_mots_differents:></p>
+<p><:tradsync:explication_traductions_mots_synchroniser:></p>
+</div>
+
+#FORMULAIRE_SELECTION_LANGUE_CIBLE
+<!--/#navigation-->
+
+
+<div class='cadre cadre_padding'>
+<h2><:tradsync:mots_cles_differents:></h2>
+
+
+[(#INCLURE{fond=prive/liste/articles_mots_differents, langue=#ENV{langue}, ajax})]
+[(#INCLURE{fond=prive/liste/rubriques_mots_differents, langue=#ENV{langue}, ajax})]
+
+</div>

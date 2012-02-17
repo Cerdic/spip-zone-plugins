@@ -1,0 +1,34 @@
+<div class='formulaire_spip formulaire_#FORM'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+[(#ENV{editable}|oui)
+	<form method='get' action='#ENV{action}'><div>
+		[(#ENV{action}|form_hidden)]
+		<ul>
+		[(#SAISIE{selecteur_langue, langue, 
+			label=<:tradsync:label_langue:>,
+			explication=<:tradsync:explication_langue:>})]
+		</ul>
+		
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons">
+			<input type='submit' class='submit' value='<:bouton_choisir:>' />
+		</p>
+	</div></form>
+]
+
+</div>
+<script type='text/javascript'>
+;(function($) {
+$(document).ready(function(){
+	trad = $('.formulaire_#FORM');
+	trad.find('p.boutons').hide();
+	trad.find('form').change(function(){
+		trad.find('p.boutons').show('normal');
+	});
+});
+})(jQuery);
+</script>
