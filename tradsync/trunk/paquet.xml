@@ -1,11 +1,11 @@
 <paquet
 	prefix="tradsync"
 	categorie="edition"
-	version="2.0.0-dev"
-	etat="dev"
+	version="2.0.0"
+	etat="test"
 	compatibilite="[3.0.0-beta2;3.0.*]"
 	logo="prive/themes/spip/images/tradsync-32.png"
->	
+>
 
 	<nom>Traductions synchrones</nom>
 	<!-- Aide à la synchronisation des traductions -->
@@ -19,8 +19,8 @@
 	<necessite nom="saisies" compatibilite="[1.6.6;[" />
 	<necessite nom="tradrub" compatibilite="[2.0.0;[" />
 
-	<!-- pour #SET_PUSH (defini aussi dans ce plugin) -->
-	<utilise nom="spip_bonux" compatibilite="[3.0.0-dev;[" />
+	<!-- pour #SET_PUSH , {compteur} et #COMPTEUR -->
+	<necessite nom="spip_bonux" compatibilite="[3.0.0-dev;[" />
 
 	<menu nom="traductions" titre="tradsync:espace_traducteurs" parent="menu_publication" icone="images/tradsync-16.png" />
 </paquet>

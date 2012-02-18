@@ -39,43 +39,21 @@ function action_synchroniser_mots_traductions_dist() {
 	// (a voir ulterieurement pour une option la dessus)...
 	$_id_objet = id_table_objet($objet);
 	$table = table_objet_sql($objet);
-	$in = sql_in($_id_objet, $ids);
 
-	// on ne prend que les elements qui ne sont des traductions, pas les originaux
-	if ($res = sql_select(array($_id_objet, 'id_trad'),	$table, array($in, 'id_trad>'.sql_quote(0), "$_id_objet <> id_trad"))) {
-		while ($trad = sql_fetch($res)) {
-			$id_ori = $trad['id_trad'];
-			$id_trad = $trad[$_id_objet];
-			$m_ori = $m_trad = array();
-			if ($mots = sql_select('id_mot', 'spip_mots_'.$objet, "$_id_objet = ".sql_quote($id_trad))) {
-				while ($mot = sql_fetch($mots)) {
-					$m_trad[] = $mot['id_mot'];
-				}
+	include_spip('action/editer_liens');
+	// les ids sont les traductions
+	// dont on veut synchroniser les mots avec leur source d'origine
+	foreach ($ids as $id) {
+		// on ne prend que les elements qui ne sont des traductions, pas les originaux
+		// et on recupere l'id de l'objet source
+		if ($id_source = sql_getfetsel('id_trad', $table, array("$_id_objet=".sql_quote($id), 'id_trad>'.sql_quote(0), "$_id_objet <> id_trad"))) {
+			// tous les mots sur l'objet d'origine de la traduction
+			$mots = objet_trouver_liens(array('mot'=>'*'), array($type=>$id_source));
+			foreach ($mots as $m) {
+				objet_associer(array('mot'=>$m['mot']), array($type=>$id), $m);
 			}
-			if ($mots = sql_select('id_mot', 'spip_mots_'.$objet, "$_id_objet = ".sql_quote($id_ori))) {
-				while ($mot = sql_fetch($mots)) {
-					$m_ori[] = $mot['id_mot'];
-				}
-			}			
-			$absents = array_diff($m_ori, $m_trad);
-			$surplus = array_diff($m_trad, $m_ori);
-			$vals = array();
-			if ($absents) {
-				foreach ($absents as $absent) {
-					$vals[] = array($_id_objet => $id_trad, 'id_mot' => $absent);
-				}
-				sql_insertq_multi('spip_mots_'.$objet, $vals);
-			}
-			/*
-			if ($surplus) {
-				foreach ($surplus as $trop) {
-					sql_delete('spip_mots_'.$objet, array($_id_objet => $id_trad, 'id_mot' => $trop));
-				}
-			}
-			*/		
 		}
 	}
-
 }
 
 ?>

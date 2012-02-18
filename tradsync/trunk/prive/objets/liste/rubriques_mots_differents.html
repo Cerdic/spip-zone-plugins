@@ -1,10 +1,10 @@
 #SET{id_differents,#ARRAY}
 <BOUCLE_rub_trad(RUBRIQUES){traductions #ENV{langue,#LANG}}{compteur mots}>
-	<BOUCLE_compte(mots_rubriques){id_rubrique}> </BOUCLE_compte>#SET{cpt,#TOTAL_BOUCLE}</B_compte>#SET{cpt,0}<//B_compte>
+	<BOUCLE_compte(mots_liens){objet=rubrique}{id_objet=#ID_RUBRIQUE}> </BOUCLE_compte>#SET{cpt,#TOTAL_BOUCLE}</B_compte>#SET{cpt,0}<//B_compte>
 	<BOUCLE_rub_origine(RUBRIQUES){id_rubrique=#ID_TRAD}{compteur mots}>
 		<BOUCLE_meme_nombre(CONDITION){si #GET{cpt}|=={#COMPTEUR{mots}}}>
 		[(#REM) si meme nombre, on les verifie un par un ... ]
-			<BOUCLE_mots_rub_trad(mots_rubriques){id_rubrique=#_rub_trad:ID_RUBRIQUE}>
+			<BOUCLE_mots_rub_trad(mots_liens){objet=rubrique}{id_objet=#_rub_trad:ID_RUBRIQUE}>
 				<BOUCLE_verifier_mot(RUBRIQUES){id_rubrique=#_rub_trad:ID_TRAD}{id_mot}> </BOUCLE_verifier_mot>
 					[(#SET_PUSH{id_differents,#_rub_trad:ID_RUBRIQUE})]
 				<//B_verifier_mot>

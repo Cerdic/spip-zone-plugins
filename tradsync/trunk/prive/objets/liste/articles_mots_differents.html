@@ -1,10 +1,10 @@
 #SET{id_differents,#ARRAY}
 <BOUCLE_art_trad(ARTICLES){traductions #ENV{langue,#LANG}}>
-	<BOUCLE_compte(mots_articles){id_article}> </BOUCLE_compte>#SET{cpt,#TOTAL_BOUCLE}</B_compte>#SET{cpt,0}<//B_compte>
+	<BOUCLE_compte(mots_liens){objet=article}{id_objet=#ID_ARTICLE}> </BOUCLE_compte>#SET{cpt,#TOTAL_BOUCLE}</B_compte>#SET{cpt,0}<//B_compte>
 	<BOUCLE_art_origine(ARTICLES){id_article=#ID_TRAD}{compteur mots}>
 		<BOUCLE_meme_nombre(CONDITION){si #GET{cpt}|=={#COMPTEUR{mots}}}>
 		[(#REM) si meme nombre, on les verifie un par un ... ]
-			<BOUCLE_mots_art_trad(mots_articles){id_article=#_art_trad:ID_ARTICLE}>
+			<BOUCLE_mots_art_trad(mots_liens){objet=article}{id_objet=#_art_trad:ID_ARTICLE}>
 				<BOUCLE_verifier_mot(ARTICLES){id_article=#_art_trad:ID_TRAD}{id_mot}> </BOUCLE_verifier_mot>
 					[(#SET_PUSH{id_differents,#_art_trad:ID_ARTICLE})]
 				<//B_verifier_mot>
