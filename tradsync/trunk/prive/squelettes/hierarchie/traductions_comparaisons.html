@@ -1,0 +1,4 @@
+
+[(#SET_PUSH{ariane,[(#ARRAY{0,<:tradsync:espace_traducteurs:>,1,[(#URL_ECRIRE{traductions}|parametre_url{langue,#ENV{langue}})]})]})]
+[(#SET_PUSH{ariane,#ARRAY{0,<:tradsync:comparer_arborescence:>}})]
+[(#INCLURE{fond=prive/squelettes/hierarchie/inc-ariane, ariane=#GET{ariane}, ecrire=0})]

@@ -1,13 +1,7 @@
 
 <h1><:tradsync:comparer_arborescence:></h1>
 
-[(#SET_PUSH{ariane,[(#ARRAY{0,<:tradsync:espace_traducteurs:>,1,[(#URL_ECRIRE{traductions}|parametre_url{langue,#ENV{langue}})]})]})]
-[(#SET_PUSH{ariane,#ARRAY{0,<:tradsync:comparer_arborescence:>}})]
-[(#INCLURE{fond=prive/exec/inc-ariane, ariane=#GET{ariane}, ecrire=0})]
-
 [(#SET{langue,[(#ENV{langue,#LANG}|traduire_nom_langue)]})]
-
-
 
 <style type='text/css'>
 #navigation {display:none;}
@@ -19,14 +13,12 @@
 .comparateur h2 {clear:both;}
 </style>
 
-<div class='cadre cadre_padding comparateur'>
+<div class='comparateur'>
 	<h2><:tradsync:navigateurs:></h2>
 
 	<div class='item_picker'>
 	[(#INCLURE{fond=formulaires/selecteur/navigateur, ajax, env, articles=1, picker_article=0})]
 	</div>
-
-
 
 	<div class='item_picker'>
 	[(#INCLURE{fond=formulaires/selecteur/navigateur, ajax, env, articles=1, picker_article=0})]

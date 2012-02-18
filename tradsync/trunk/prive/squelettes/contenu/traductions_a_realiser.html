@@ -1,14 +1,9 @@
 
 <h1><:tradsync:espace_traducteurs:></h1>
 
-
-
 [(#SET{langue,[(#ENV{langue,#LANG}|traduire_nom_langue)]})]
 
-
-<div class='cadre cadre_padding'>
 <h2><:tradsync:non_traduit:></h2>
-
 
 [(#INCLURE{fond=prive/objets/liste/articles_non_traduits, langue=#ENV{langue}, ajax})]
 [(#INCLURE{fond=prive/objets/liste/rubriques_non_traduites, langue=#ENV{langue}, ajax})]
@@ -17,4 +12,3 @@
 	[(#INCLURE{fond=prive/objets/liste/mots_non_traduits, langue=#ENV{langue}, ajax,
 		id_groupe=[(#CONFIG{tradsync}|table_valeur{groupe_mots_multi})]})]
 ]
-</div>
