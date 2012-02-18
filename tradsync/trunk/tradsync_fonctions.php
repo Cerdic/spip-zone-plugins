@@ -6,6 +6,37 @@
  */
 
 /**
+ * Définir #SET_PUSH
+ * pour éviter de dépendre de spip_bonux_3 juste pour ça. 
+ *
+ * -------- provient de SPIP BONUX 3 -----------
+ * Empile un element dans un tableau declare par #SET{tableau,#ARRAY}
+ * #SET_PUSH{tableau,valeur}
+ *
+ * @param object $p : objet balise
+ * @return ""
+**/
+if (!function_exists("balise_SET_PUSH_dist")) {
+function balise_SET_PUSH_dist($p){
+	$_nom = interprete_argument_balise(1,$p);
+	$_valeur = interprete_argument_balise(2,$p);
+
+	if ($_nom AND $_valeur)
+		// si le tableau n'existe pas encore, on le cree
+		// on ajoute la valeur ensuite (sans passer par array_push)
+		$p->code = "vide((\$cle=$_nom)
+			. (is_array(\$Pile['vars'][\$cle])?'':\$Pile['vars'][\$cle]=array())
+			. (\$Pile['vars'][\$cle][]=$_valeur))";
+	else
+		$p->code = "''";
+
+	$p->interdire_scripts = false; // la balise ne renvoie rien
+	return $p;
+}
+}
+ 
+
+/**
  * 
  * {traductions en} : tous les elements anglais etant des traductions
  * 	 = {!origine_traduction}{lang=en}

@@ -1,9 +1,10 @@
 <paquet
 	prefix="tradsync"
-	version="2.0.0"
-	etat="test"
-	compatibilite="[3.0.0-beta2;3.0.*["
-	logo="images/tradsync-32.png"
+	categorie="edition"
+	version="2.0.0-dev"
+	etat="dev"
+	compatibilite="[3.0.0-beta2;3.0.*]"
+	logo="prive/themes/spip/images/tradsync-32.png"
 >	
 
 	<nom>Traductions synchrones</nom>
@@ -16,9 +17,10 @@
 	<pipeline nom="autoriser" inclure="tradsync_autorisations.php" />
 
 	<necessite nom="saisies" compatibilite="[1.6.6;[" />
-	<necessite nom="spip_bonux" compatibilite="[1.8.6;[" />
-	<necessite nom="afficher_objets" compatibilite="[1.0.1;[" />
-	<necessite nom="tradrub" compatibilite="[1.0.1;[" />
+	<necessite nom="tradrub" compatibilite="[2.0.0;[" />
 
-	<menu nom="traductions" titre="tradsync:espace_traducteurs" parent="naviguer" icone="images/tradsync-22.png" />
+	<!-- pour #SET_PUSH (defini aussi dans ce plugin) -->
+	<utilise nom="spip_bonux" compatibilite="[3.0.0-dev;[" />
+
+	<menu nom="traductions" titre="tradsync:espace_traducteurs" parent="menu_publication" icone="images/tradsync-16.png" />
 </paquet>

@@ -1,0 +1,18 @@
+
+[(#REM) Hierarchie : on affiche le fil d'ariane
+	Huhu, vivement un fil plus simple !!!
+
+	Exemple d'appel :
+	[(#SET_PUSH{ariane,#ARRAY{0,<:tradsync:espace_traducteurs:>,1,#URL_ECRIRE{traductions}}})]
+	[(#SET_PUSH{ariane,#ARRAY{0,<:tradsync:comparer_arborescence:>}})]
+	[(#INCLURE{fond=prive/exec/inc-hierarchie, ariane=#GET{ariane}})]
+	
+]
+<B_chemin>
+[(#ENV{ecrire,1}|oui)
+<a href="[(#URL_ECRIRE)]"><:espace_prive:></a>
+]
+<BOUCLE_chemin(POUR){tableau #ENV{ariane}}{" > "}>
+	[<a href="(#VALEUR|table_valeur{1})">][(#VALEUR|table_valeur{0}|sinon{#VALEUR})][</a>(#VALEUR|table_valeur{1}|oui)]
+</BOUCLE_chemin>
+</B_chemin>

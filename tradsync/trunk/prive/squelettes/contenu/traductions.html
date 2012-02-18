@@ -1,20 +1,9 @@
 
 <h1><:tradsync:espace_traducteurs:></h1>
 
-[(#SET_PUSH{ariane,#ARRAY{0,<:tradsync:espace_traducteurs:>}})]
-[(#INCLURE{fond=prive/exec/inc-ariane, ariane=#GET{ariane}, ecrire=0})]
-
 
 
 [(#SET{langue,[(#ENV{langue,#LANG}|traduire_nom_langue)]})]
-
-<!--#navigation-->
-
-<div class="cadre cadre-info">
-<p><:tradsync:explication_espace_traducteurs:></p>
-</div>
-
-<!--/#navigation-->
 
 
 <div class='cadre cadre_padding' id="traductions_sommaire">
