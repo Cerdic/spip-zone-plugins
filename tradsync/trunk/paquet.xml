@@ -1,0 +1,24 @@
+<paquet
+	prefix="tradsync"
+	version="2.0.0"
+	etat="test"
+	compatibilite="[3.0.0-beta2;3.0.*["
+	logo="images/tradsync-32.png"
+>	
+
+	<nom>Traductions synchrones</nom>
+	<!-- Aide à la synchronisation des traductions -->
+
+	<auteur>Matthieu Marcillaud</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="autoriser" inclure="tradsync_autorisations.php" />
+
+	<necessite nom="saisies" compatibilite="[1.6.6;[" />
+	<necessite nom="spip_bonux" compatibilite="[1.8.6;[" />
+	<necessite nom="afficher_objets" compatibilite="[1.0.1;[" />
+	<necessite nom="tradrub" compatibilite="[1.0.1;[" />
+
+	<menu nom="traductions" titre="tradsync:espace_traducteurs" parent="naviguer" icone="images/tradsync-22.png" />
+</paquet>
