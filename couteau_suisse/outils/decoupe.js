@@ -1,4 +1,7 @@
-var onglet_actif = 0;
+// variable modifiable afin d'initialiser l'ouverture d'un onglet
+if(typeof(onglet_actif)=='undefined'){
+  var onglet_actif = '';
+}
 
 // fonction pour montrer un contenu
 jQuery.fn.montre_onglet = function( selector ) {
@@ -57,11 +60,8 @@ function onglets_init() {
 		return false;
 	});
 	// activation d'onglet(s) grace a l'url
-	if(onglet_get && (this==document)) {
-		var onglets = onglet_get.split(',');
-		for (var i=0; i<onglets.length; i++)
-			jQuery('#onglets_titre_'+onglets[i]).click();
-	}
+	var onglet_get = get_onglet(window.location);
+	if(onglet_get && (this==document)) clic_onglet(onglet_get)
 	// clic vers une note dans un onglet
 	jQuery('.spip_note['+cs_sel_jQuery+'name^=nb], .spip_note['+cs_sel_jQuery+'id^=nb]').each(function(i) {
 		jQuery(this).click(function(e){
@@ -73,10 +73,14 @@ function onglets_init() {
   }
 }
 
-function get_onglet(url) {
- tab=url.search.match(/[?&]onglet=([0-9,]*)/) || url.hash.match(/#onglet([0-9,]*)/);
- if (tab==null) return false;
- return tab[1];
+function clic_onglet(liste) {
+	var onglets = liste.split(',');
+	for (var i=0; i<onglets.length; i++)
+		jQuery('#onglets_titre_'+onglets[i]).click();
 }
 
-var onglet_get = get_onglet(window.location);
+function get_onglet(url) {
+ tab = url.search.match(/[?&]onglet=([0-9,]*)/) || url.hash.match(/#onglet([0-9,]*)/);
+ if(tab==null) return onglet_actif;
+ return tab[1];
+}
