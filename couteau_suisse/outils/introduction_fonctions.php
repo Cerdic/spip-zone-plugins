@@ -98,7 +98,9 @@ if (!function_exists('balise_INTRODUCTION')) {
 			case 'articles':
 				$_chapo = champ_sql('chapo', $p);
 				$_descriptif =  champ_sql('descriptif', $p);
-				$_texte = "(strlen($_descriptif) OR chapo_redirigetil($_chapo)) ? '' : $_chapo . \"\\n\\n\" . $_texte";
+				$_texte = defined('_SPIP30000')
+					?"strlen($_descriptif) ? '' : $_chapo . \"\\n\\n\" . $_texte"
+					:"(strlen($_descriptif) OR chapo_redirigetil($_chapo)) ? '' : $_chapo . \"\\n\\n\" . $_texte";
 				$_lgr = "500";
 				break;
 			case 'rubriques':

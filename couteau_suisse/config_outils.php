@@ -1375,8 +1375,7 @@ add_outil( array(
 	'id' => 'spip_ecran',
 	'categorie' => 'interface',
 	'code:spip_options' => '%%spip_ecran%%',
-	'pipelinecode:header_prive' => '
-$e = _request(\'exec\');
+	'pipelinecode:header_prive' => '$e = _request(\'exec\');
 if(( $e==\'configurer_preferences\' ||  $e==\'config_preferences\' /* SPIP < 3 */) && "%%spip_ecran%%"!="defaut") {
 	$flux.=\'<script type="text/javascript"><!--
 function disable_spip_ecran(){ jQuery("[name=\\"spip_ecran\\"]").attr("disabled", "disabled"); }
