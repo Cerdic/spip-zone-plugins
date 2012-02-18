@@ -9,6 +9,12 @@
 	[(#SAISIE{selecteur_langue,lang,
 		label=<:plugin:info_langue:>})] 
 ]
+[(#SET{valeur,[(#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,''}}})]})]
+[(#SET{langues,[(#VAL{changer_lang}|liste_options_langues{#GET{valeur}})]})]
 <select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"]>
-[(#VAL{changer_lang}|liste_options_langues{[(#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,''}}})]})]
+<BOUCLE_si_spip2(CONDITION){si (#GET{langues}|is_array|non)}>
+#GET{langues}
+</BOUCLE_si_spip2>
+[(#INCLURE{fond=prive/formulaires/inc-options-langues,name=changer_lang,default=#GET{valeur,#LANG}})]
+<//B_si_spip2>
 </select>
