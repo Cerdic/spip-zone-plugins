@@ -61,8 +61,8 @@ big, .big { font-size: 130%; }
 abbr[title], acronym[title] { border-bottom: .1em dotted; cursor: help; }
 @media print { abbr[title]:after { content: " (" attr(title) ")"; } }
 dfn { font-weight: bold; font-style: italic; }
-del, .del { text-decoration: line-through; }
-ins, .ins { text-decoration: none; background-color: #fbe3e4; }
+del, .del { background-color: #FFDDDD; border-color: #CC0000; color: #CC0000; text-decoration: line-through; }
+ins, .ins { background-color: #DDFFDD; border-color: #00AA00; color: #00AA00; text-decoration: none; }
 sup, sub { font-size: .8em; font-variant: normal; line-height: 0; }
 sup { vertical-align: super; }
 .ie sup { vertical-align: text-top; }
@@ -96,7 +96,7 @@ cite { font-style: italic; }
 
 address { font-style: italic; }
 
-pre,code,kbd,samp,var,tt { font-family: 'andale mono','lucida console',monospace; font-size: 1em; }
+pre, code, kbd, samp, var, tt { font-family: 'andale mono', 'lucida console', monospace; font-size: 1em; }
 pre { margin:[ (#GET{margin-bottom}) ]0;
 	/* Cf.: http://perishablepress.com/press/2010/06/01/wrapping-content/ */
 	white-space: pre;           /* CSS 2.0 */

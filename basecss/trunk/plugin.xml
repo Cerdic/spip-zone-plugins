@@ -3,13 +3,12 @@
 	<prefix>basecss</prefix>
 	<icon>prive/img/basecss.png</icon>
 	
-	<version>3.0.1</version>
+	<version>3.0.2</version>
 	<etat>dev</etat>
 	<categorie>outil</categorie>
 	
 	<slogan>Framework CSS pour SPIP</slogan>
-	<description>Ce framework CSS pour SPIP fournit une base de travail pour l'int&eacute;gration, sous la forme d'un jeu de feuilles
-	de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;glages fondamentaux.
+	<description>Ce framework CSS pour SPIP fournit une base de travail pour l'int&eacute;gration, sous la forme d'un jeu de feuilles de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;glages fondamentaux.
 	</description>
 	<lien>http://www.spip-contrib.net/?rubrique214</lien>
 	<auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
