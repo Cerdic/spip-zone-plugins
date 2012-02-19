@@ -103,6 +103,10 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 	return $page;
 }
 
+// en SPIP 3 le test de doublon sur f_jQuery a ete supprime,
+// plus la peine de surcharger
+if (intval($GLOBALS['spip_version_branche'])<3){
+
 $GLOBALS['spip_pipeline']['insert_head'] = str_replace('|f_jQuery','|cache_cool_f_jQuery',$GLOBALS['spip_pipeline']['insert_head']);
 
 // Inserer jQuery sans test de doublon
@@ -121,6 +125,7 @@ function cache_cool_f_jQuery ($texte) {
 	$texte = $x.$texte;
 	
 	return $texte;
+}
 }
 
 /**
