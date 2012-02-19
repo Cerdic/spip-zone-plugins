@@ -31,22 +31,22 @@ function abomailmans_upgrade($nom_meta_base_version,$version_cible){
 		}
 		if (version_compare($current_version,'0.30','<')){
 			sql_alter("TABLE spip_abomailmans ADD `lang` varchar(10) DEFAULT ' ' NOT NULL AFTER `email_sympa`");
-			ecrire_meta('agenda_base_version',$current_version=0.30,'non');
+			ecrire_meta($nom_meta_base_version,$current_version=0.30,'non');
 		}
 		if (version_compare($current_version,'0.31','<')){
 			sql_alter("TABLE spip_abomailmans ADD `email_unsubscribe` varchar(255) DEFAULT ' ' NOT NULL AFTER `email`");
 			sql_alter("TABLE spip_abomailmans ADD `email_subscribe` varchar(255) DEFAULT ' ' NOT NULL AFTER `email`");
-			ecrire_meta('agenda_base_version',$current_version=0.31,'non');
+			ecrire_meta($nom_meta_base_version,$current_version=0.31,'non');
 		}
 		if (version_compare($current_version,'0.32','<')){
 			sql_alter("TABLE spip_abomailmans ADD `date_envoi` TIMESTAMP AFTER `maj`");
 			sql_alter("TABLE spip_abomailmans ADD `modele_defaut` varchar(255) DEFAULT ' ' NOT NULL AFTER `email_unsubscribe`");
 			sql_alter("TABLE spip_abomailmans ADD `periodicite` varchar(255) DEFAULT ' ' NOT NULL AFTER `email_unsubscribe`");
-			ecrire_meta('agenda_base_version',$current_version=0.32,'non');
+			ecrire_meta($nom_meta_base_version,$current_version=0.32,'non');
 		}
 		if (version_compare($current_version,'0.33','<')){
 			maj_tables('spip_abomailmans');
-			ecrire_meta('agenda_base_version',$current_version=0.33,'non');
+			ecrire_meta($nom_meta_base_version,$current_version=0.33,'non');
 		}
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 }
