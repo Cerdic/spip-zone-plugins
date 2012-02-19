@@ -68,10 +68,12 @@ function tickets_statut_config(){
  * @param object $row[optional]
  */
 function formulaires_statut_ticket_traiter($id_ticket='',$retour='', $config_fonc='tickets_statut_config', $row=array(), $hidden=''){
+	// pas d'ajax
+	refuser_traiter_formulaire_ajax();
 	$message = "";
 	include_spip('action/editer_ticket');
 	$c = array('statut'=>_request('statut'));
-	instituer_ticket($id_ticket, $c);
+	ticket_instituer($id_ticket, $c);
 	$message['message_ok'] = _T('tickets:statut_mis_a_jour');
 	if($retour){
 		$message['redirect'] = $retour;
