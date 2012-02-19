@@ -27,12 +27,12 @@ function tickets_affiche_gauche ($flux) {
 		
 		$contexte = array('titre'=>_T('tickets:vos_tickets_en_cours'), 'id_auteur'=>$connect_id_auteur, "statut"=>"redac", 'bloc'=>'_bloc1');
 		$options = array("ajax"=>true);
-		$page = recuperer_fond('prive/contenu/inc_liste_simple', $contexte, $options);
+		$page = recuperer_fond('prive/squelettes/inclure/inc_liste_simple', $contexte, $options);
 		$ret .= $page;
 	
 		$contexte = array('titre'=>_T('tickets:tous_tickets_ouverts'), 'statut'=>'ouvert', 'bloc'=>'_bloc2');
 		$options = array('ajax'=>true);
-		$page = recuperer_fond('prive/contenu/inc_liste_simple', $contexte, $options);
+		$page = recuperer_fond('prive/squelettes/inclure/inc_liste_simple', $contexte, $options);
 		$ret .= $page;
 		
 		$flux["data"] = $data.$ret;
@@ -95,7 +95,7 @@ function tickets_affiche_milieu($flux){
 	$exec = $flux["args"]["exec"];
 	if ($exec == "accueil") {
 		$flux['data'] .= '<br class="nettoyeur" />';
-		$flux['data'] .= recuperer_fond('prive/contenu/inc_classement_accueil', array());
+		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/inc_classement_accueil', array());
 	}
 
 	return $flux;

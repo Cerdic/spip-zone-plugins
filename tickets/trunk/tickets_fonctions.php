@@ -101,7 +101,7 @@ function tickets_classer_par_jalon($bidon) {
 		$i = 0;
 		foreach($liste as $_jalon) {
 			$i += 1;
-			$page .= recuperer_fond('prive/contenu/inc_liste_detaillee',
+			$page .= recuperer_fond('prive/squelettes/inclure/inc_liste_detaillee',
 				array_merge($_GET, array('titre' => _T('tickets:champ_jalon').' '.$_jalon, 'statut' => 'ouvert', 'jalon' => $_jalon, 'bloc' => "_bloc$i")),
 				array('ajax'=>true));
 		}

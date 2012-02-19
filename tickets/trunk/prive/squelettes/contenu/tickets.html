@@ -21,7 +21,7 @@
 
 <h1>[(#VAL{tickets:classement_#ENV{classement,asuivre}}|_T)]</h1>
 
-<INCLURE{fond=prive/contenu/inc_classement_#ENV{classement,asuivre}}{env}>
+<INCLURE{fond=prive/squelettes/inclure/inc_classement_#ENV{classement,asuivre}}{env}>
 
 [(#AUTORISER{ecrire, ticket}|oui)
 	[(#URL_ECRIRE{ticket_edit,id_ticket=new}|parametre_url{redirect,#SELF}

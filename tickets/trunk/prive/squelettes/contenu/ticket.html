@@ -64,6 +64,10 @@
 [<div><:tickets:champ_exemple:> : <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
 #BOITE_FERMER
 
+
+[(#INCLURE{fond=prive/squelettes/inclure/ticket_commenter,env})]
+
+
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation');/*\]\]>*/</script>
 ]
