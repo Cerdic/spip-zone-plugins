@@ -81,6 +81,16 @@
 				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statut,#ARRAY{0,resolu,1,ferme}})]"><:tickets:suivre_tickets_rss:></a>
 			</div>
 		</div>]
+
+		[(#SESSION{id_auteur}|oui)
+		[<div class="ajax">
+		(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",id_auteur=#SESSION{id_auteur},
+			titre=<:tickets:tous_vos_tickets:>}|trim)
+			<div class="actions rss">
+				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statut,#ARRAY{0,resolu,1,ferme}})]"><:tickets:suivre_tickets_rss:></a>
+			</div>
+		</div>]
+		]
 		
 		[<div class="ajax">
 			(#INCLURE{fond=inclure/liste_commentaires_tickets,env,ajax,tracker="",
