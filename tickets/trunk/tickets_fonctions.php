@@ -8,15 +8,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function boucle_TICKETS_dist($id_boucle, &$boucles) {
 	if(!function_exists('lire_config'))
 		include_spip('inc/config');
-	
-	$boucle = &$boucles[$id_boucle];
-	$id_table = $boucle->id_table;
-	$mstatut = $id_table .'.statut';
 
 	if(function_exists('lire_config')){
 		$desactiver_public = lire_config('tickets/general/desactiver_public','off');
-		if(($desactiver_public == 'on') && !test_espace_prive()){
-			array_unshift($boucle->where,array("'='", "'$mstatut'", "'(\\'none\\')'"));
+		if (($desactiver_public == 'on') && !test_espace_prive()){
+			array_unshift($boucle->where,array("'='", "'0'", "'1'"));
 		}
 	}
 
