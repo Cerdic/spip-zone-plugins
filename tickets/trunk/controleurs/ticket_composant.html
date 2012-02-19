@@ -4,7 +4,7 @@
 	
 ]
 #CACHE{0}
-<BOUCLE_t(TICKETS){id_ticket}{statut==.}>
+<BOUCLE_t(TICKETS){id_ticket}{statut==.*}>
 [(#SET{valeurs,[(#VAL{composants}|tickets_champ_optionnel_actif|array_combine{[(#VAL{composants}|tickets_champ_optionnel_actif)]})]})]
 <B_composants>
 <select class="crayon-active" name="#ENV{name_composant}"

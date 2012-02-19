@@ -4,7 +4,7 @@
 	
 ]
 #CACHE{0}
-<BOUCLE_t(TICKETS){id_ticket}{statut==.}>
+<BOUCLE_t(TICKETS){id_ticket}{statut==.*}>
 [(#SET{valeurs,[(#REM|tickets_liste_navigateur)]})]
 <B_versions>
 <select class="crayon-active" name="#ENV{name_navigateur}"

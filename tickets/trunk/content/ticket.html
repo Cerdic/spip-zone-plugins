@@ -1,4 +1,4 @@
-<BOUCLE_ticket_contenu(TICKETS){id_ticket}>
+<BOUCLE_ticket_contenu(TICKETS){id_ticket}{tout}>
 <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><a href="#URL_PAGE{tickets}"><:tickets:tickets:></a>[<span class="sep"> &gt; </span><strong class="on">(#TITRE|couper{80})</strong>]</div>
 [(#AUTORISER{commenter, ticket, #ID_TICKET}|oui)
 [(#SET{autoriser_commenter,oui})]]
@@ -42,7 +42,7 @@
 
 	[(#REM) - Texte du ticket et url d'exemple]
 	[<div class="#EDIT{texte} texte">(#TEXTE|propre)</div>]
-	[<div><:tickets:champ_exemple:> <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
+	[<div class='exemple'><:tickets:champ_exemple:> <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
 	[(#REM) - Extensions, Extras 2 entre autre]
 	[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,ticket,id_objet,#ID_TICKET,contexte,[(#ENV**|unserialize)]})],data,''})]})]
 	<INCLURE{fond=inclure/documents_tickets,id_ticket=#ID_TICKET}>
@@ -51,7 +51,8 @@
 [(#PARAMETRES_FORUM|?{''})]
 #SET{config_thread,#CONFIG{comments/comments_fil,list}}
 <div class="ticket_commentaires comments comments-#GET{config_thread}">
-	<BOUCLE_decompte(FORUMS){id_ticket} {plat} />[<h2 class="h2">(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})
+	<BOUCLE_decompte(FORUMS){id_ticket} {plat}> </BOUCLE_decompte>
+	[<h2 class="h2">(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})
 	[(#GRAND_TOTAL|singulier_ou_pluriel{tickets:commentaire,tickets:commentaires})]</h2>]
 	</B_decompte>
 	<h2><:tickets:commentaire_aucun:></h2>
