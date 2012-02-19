@@ -1,0 +1,17 @@
+#SET{id_parent,#ENV{id_rubrique,0}}
+#SET{niveau,#ENV{niveau,1}}
+[(#GET{niveau}|>={2}|oui)
+	[(#SET{marge,#ENV{marge}|concat{----}})]
+	
+]
+<BOUCLE_rubriques(RUBRIQUES){id_parent=#GET{id_parent}}{par id_rubrique}>
+[(#GET{niveau}|=={1}|oui)
+	[(#SET{marge,&bull;})]
+]
+[(#GET{niveau}|=={2}|oui)
+	[(#SET{marge,'&nbsp;&nbsp;&nbsp;|----'})]
+]
+
+<option value="#ID_RUBRIQUE"[(#ENV{id_rubrique_env}|=={#ID_RUBRIQUE}|oui) selected="selected"]>#GET{marge}&nbsp;[(#TITRE|supprimer_numero)]</option>
+[(#INCLURE{fond=prive/listes/abomailman_rubriques}{niveau=[(#GET{niveau}|plus{1})]}{id_rubrique=#ID_RUBRIQUE}{id_rubrique_env}{marge=#GET{marge}})]
+</BOUCLE_rubriques>

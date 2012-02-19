@@ -1,0 +1,15 @@
+#SET{arraytemplate,#EVAL{find_all_in_path("templates/","[.]html$")}}
+
+<BOUCLE_abomailman(ABOMAILMANS){id_abomailman}>
+[(#SET{select,[(#MODELE_DEFAUT|nettoie_chemin)]})]
+</BOUCLE_abomailman>
+[(#ENV{template}|oui)
+[(#SET{select,[(#ENV{template})]})]
+]
+
+
+<BOUCLE_template(POUR){tableau #GET{arraytemplate}}{par valeur}>
+<option value="[(#VALEUR|nettoie_chemin)]" 
+[(#GET{select}|=={[(#VALEUR|nettoie_chemin)]}|oui) selected="selected" ]>
+[(#VALEUR|nettoie_chemin)]</option>
+</BOUCLE_template>

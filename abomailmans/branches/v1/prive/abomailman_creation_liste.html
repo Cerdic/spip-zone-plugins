@@ -1,0 +1,34 @@
+<div class='cadre-formulaire-editer'>
+	<BOUCLE_liste(ABOMAILMANS){id_abomailman}>
+	<div class="entete-formulaire">
+		#ENV**{icone_retour}
+		<h1>[(#TITRE|supprimer_numero)]</h1>
+		<br class="nettoyeur" />
+		<div class="explications">
+			[<p><strong><:abomailmans:texte_descriptif:></strong></p>
+			<p>(#DESCRIPTIF)</p>
+			]
+			[<p><strong><:abomailmans:emailliste_abomailman:></strong></p>
+			<p>(#EMAIL)</p>
+			]
+			
+			[<p><strong><:abomailmans:emailliste_abosympa:></strong></p>
+			<p>(#EMAIL_SYMPA)</p>
+			]
+			[<p><strong><:abomailmans:envoi_regulier:></strong></p>
+			<p><:abomailmans:envoi_regulier_tous_les:> (#PERIODICITE) <:abomailmans:periodicite:></p>
+			]
+			
+			<p><strong><:abomailmans:langue_liste:></strong>[ (#LANG|traduire_nom_langue|sinon{<:abomailmans:aucune_langue:>})]</p>
+			
+		</div>
+	</div>
+	</BOUCLE_liste>
+	<div class="entete-formulaire">
+		#ENV**{icone_retour}
+		<h1><:abomailmans:icone_ajouter_liste:></h1>
+	</div>
+	<//B_liste>
+	
+	#FORMULAIRE_ABOMAILMAN_CREATION_LISTE{#ENV{id_abomailman}}
+</div>

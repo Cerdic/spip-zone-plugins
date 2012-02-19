@@ -1,0 +1,32 @@
+<div class="formulaire_spip ajax" id="formulaire_abomailman">
+	[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable}|oui)
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data' id='abomailmansListes'>
+		<div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:abomailmans:inscription_lettres_legende:></legend>
+				<ul>
+					<li class="abomailman_nom[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
+						<label for="nom"><:abomailmans:nom:></label>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>]
+						<input name="nom" id="nom" type="text" class="text" value="#ENV{nom}" />
+					</li>
+					<li class="obligatoire abomailman_email[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
+						<label for="email_listes"><:abomailmans:email_abonnement:></label>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>]
+						<input name="email" id="email_listes" type="text" class="text" value="#ENV{email}" />
+					</li>
+					<INCLURE{fond=prive/listes/listes_des_listes}{id_abomailman}{erreurs}>
+				</ul>
+				<p class="boutons">
+                	<input name="abonnement" type="submit" value="<:abomailmans:btn_abonnement:>" class="submit" />
+					<input name="desabonnement" type="submit" value="<:abomailmans:btn_desabonnement:>" class="submit" />
+                </p>
+		</fieldset>
+		</div>
+	</form>]
+</div>
