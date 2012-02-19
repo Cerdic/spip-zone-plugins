@@ -13,12 +13,6 @@ function boucle_TICKETS_dist($id_boucle, &$boucles) {
 	$id_table = $boucle->id_table;
 	$mstatut = $id_table .'.statut';
 
-	// Restreindre aux elements considérés comme publiés soit pas en :
-	// -* poubelle (poubelle)
-	// -* en cours de rédac (redac)
-	if (!isset($boucle->modificateur['criteres']['statut']) OR !isset($boucle->modificateur['criteres']['tout'])) {
-		array_unshift($boucle->where,array("'IN'", "'$mstatut'", "'(\\'ouvert\\',\\'resolu\\',\\'ferme\\',\\'redac\\')'"));
-	}
 	if(function_exists('lire_config')){
 		$desactiver_public = lire_config('tickets/general/desactiver_public','off');
 		if(($desactiver_public == 'on') && !test_espace_prive()){

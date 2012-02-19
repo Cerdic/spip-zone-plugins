@@ -1,0 +1,11 @@
+<div class='infos'>
+#SET{texte_objet,#ENV{type}|objet_info{texte_objet}|_T}
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>[(#ENV{id}|generer_info_entite{#ENV{type},[(#ENV{type}|id_table_objet)],'**'})]</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{ticket,#ID})]
+
+[(#VAL{redirect}
+	|generer_url_action{type=ticket&id=#ID}
+	|parametre_url{var_mode,calcul}
+	|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</div>
