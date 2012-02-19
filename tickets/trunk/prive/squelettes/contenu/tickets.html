@@ -22,12 +22,12 @@
 <h1>[(#VAL{tickets:classement_#ENV{classement,asuivre}}|_T)]</h1>
 
 <INCLURE{fond=prive/squelettes/inclure/inc_classement_#ENV{classement,asuivre}}{env}>
-	
-<h2><:tickets:tous_vos_tickets:></h2>
 
-<INCLURE{fond=prive/squelettes/inclure/inc_liste_detaillee}{ajax}{env}
-	{titre=<:tickets:tous_vos_tickets:>}{id_auteur=#SESSION{id_auteur}}{bloc=_bloc5}>
-
+<BOUCLE_un_ticket(TICKETS){id_auteur=#SESSION{id_auteur}}{tout}{0,1}>
+	<h2><:tickets:tous_vos_tickets:></h2>
+	<INCLURE{fond=prive/squelettes/inclure/inc_liste_detaillee}{ajax}{env}
+		{titre=<:tickets:tous_vos_tickets:>}{id_auteur=#SESSION{id_auteur}}{bloc=_bloc5}>
+</BOUCLE_un_ticket>
 
 [(#AUTORISER{ecrire, ticket}|oui)
 	[(#URL_ECRIRE{ticket_edit,id_ticket=new}|parametre_url{redirect,#SELF}
