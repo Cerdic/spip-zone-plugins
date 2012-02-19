@@ -65,8 +65,10 @@
 			</div>[(#SET{affiche,oui})]]
 		]
 
+		[(#GET{affiche}|=={oui}|?{
+			[(#SET{titre,<:tickets:autres_tickets_ouverts:>})],
+			[(#SET{titre,<:tickets:tous_tickets_ouverts:>})]})]
 		[<div class="ajax">
-		[(#GET{affiche}|=={oui}|?{[(#SET{titre,<:tickets:autres_tickets_ouverts:>})],[(#SET{titre,<:tickets:tous_tickets_ouverts:>})]})]
 		(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#ARRAY{0,ouvert},id_auteur_non=#SESSION{id_auteur},id_assigne_non=#SESSION{id_auteur},
 			titre=#GET{titre}}|trim)
 			<div class="actions rss">
