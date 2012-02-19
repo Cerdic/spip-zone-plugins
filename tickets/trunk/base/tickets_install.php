@@ -70,7 +70,7 @@ function tickets_declarer_tables_objets_sql($tables){
 			'auteur' => array('nom' => 10),
 		),
 		'statut' => array(
-			 array('champ'=>'statut','publie'=>'ouvert,resolu,ferme','previsu'=>'redac,ouvert,resolu,ferme','exception'=>'statut')
+			 array('champ'=>'statut','publie'=>'ouvert,resolu,ferme','previsu'=>'redac,ouvert,resolu,ferme','exception'=>array('statut','tout'))
 		),
 		'statut_images' => array(
 			'redac' => 'puce-blanche.gif',
