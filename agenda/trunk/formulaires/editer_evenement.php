@@ -62,6 +62,15 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_arti
 	return $valeurs;
 }
 
+/**
+ * Identifier le formulaire en faisant abstraction des parametres qui
+ * ne representent pas l'objet edite
+ */
+function formulaires_editer_evenement_identifier_dist($id_evenement='new', $id_article=0, $retour='', $lier_trad = 0, $config_fonc='evenements_edit_config', $row=array(), $hidden=''){
+	return serialize(array(intval($id_evenement),$lier_trad));
+}
+
+
 function evenements_edit_config(){
 	return array();
 }
