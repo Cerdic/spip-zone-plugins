@@ -19,7 +19,7 @@ function geoportail_affichage_final($page)
 	
 	$engine=
 '<script>jQuery.geoportail.hash = "'.$action.'";</script>
-<script language=javascript>jQuery(document).ready(	function() { jQuery.geoportail.initMap("'._DIR_PLUGIN_GEOPORTAIL.'"); });</script>
+<script language=javascript>jQuery(document).ready(	function() { loadAPI(); });</script>
 
 <!-- API Geoportail -->
 <script type="text/javascript" src="'.$api.'">// <![CDATA[
@@ -33,9 +33,6 @@ function geoportail_affichage_final($page)
 <script type="text/javascript" src="'._DIR_PLUGIN_GEOPORTAIL.'js/Popup/SpipPopup.js">// <![CDATA[
     // ]]></script>
     
-<script src="http://api.ign.fr/geoportail/api?v=1.2-e&key='.$GLOBALS['meta']['geoportail_key'].'&includeEngine=false"></script>
-
-
 <!-- OpenLayers styles : -->
 <link id="__OpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/1.2/theme/default/style.css"/>
 <link id="__FramedCloudOpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/1.2/theme/default/framedCloud.css"/>
