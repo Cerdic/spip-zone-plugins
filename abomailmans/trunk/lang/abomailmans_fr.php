@@ -102,7 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'template' => 'Choisissez le mod&egrave;le et son contenu',
-	'template_defaut' => 'Mod&egrave;le par defaut',
+	'template_defaut' => 'Mod&egrave;le par défaut',
 	'texte_descriptif' =>'Descriptif',
 	'titre_abomailman' => 'Titre de la liste',
 	'titre_liste_obligatoire' => 'Le titre de la liste est obligatoire',
@@ -110,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// V
 	'veut_s_abonner' => 'veut s\'abonner',
-	'veut_se_desabonner' => 'veut se desabonner',
+	'veut_se_desabonner' => 'veut se désabonner',
 	'verifier_formulaire' => 'V&eacute;rifiez le remplissage du formulaire.',
 	'voir_modele_depuis' =>'Voir un exemple du mod&eacute;le avec',
 	'votre_email' => 'Votre email',

@@ -4,7 +4,7 @@
  * Abomailmans
  * MaZiaR - NetAktiv
  * tech@netaktiv.com
- * Printemps 2007 - 2009
+ * Printemps 2007 - 2012
  * Inspire de Spip-Listes
  * $Id$
 */

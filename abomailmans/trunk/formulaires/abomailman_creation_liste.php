@@ -46,7 +46,6 @@ function formulaires_abomailman_creation_liste_verifier_dist($id_abomailman = ""
 	$email_sympa = _request('email_sympa');
 	$valeurs['template'] = str_replace('\'','',_request('template'));
 	$valeurs['envoi_liste_parametres'] = _request('envoi_liste_parametres');
-	//if($valeurs['template']) $valeurs['template'];
 	$valeurs['periodicite'] = _request('periodicite');
 	$desactive = _request('desactive');
 	$lang = _request('lang');

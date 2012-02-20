@@ -1,0 +1,26 @@
+<paquet
+	prefix="abomailmans"
+	categorie="communication"
+	version="0.7.0"
+	etat="dev"
+	compatibilite="[3.0.0-dev;3.0.99]"
+	logo="img_pack/mailman.gif"
+	schema="0.33"
+	documentation="http://www.spip-contrib.net/Abomailmans-pour-s-abonner-a-des-listes-de-diffusion"
+>	
+
+	<nom>Abonnement &#224; des listes de diffusion</nom>
+	<!-- Interfacer vos listes de diffusions mailman, ezmlm ou sympa avec votre SPIP -->
+
+	<auteur lien="http://www.netaktiv.com">NetAktiv</auteur>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/abomailmans_install.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/abomailmans_install.php" />
+	<pipeline nom="taches_generales_cron" inclure="abomailmans_pipelines.php" />
+	<pipeline nom="abomailmans" action="go" inclure="abomailmans_pipelines.php" />
+	<pipeline nom="autoriser" inclure="abomailmans_autoriser.php" />
+
+	<necessite nom="facteur" compatibilite="[2.0.0;[" />
+	
+	<menu nom="abomailmans" titre="abomailmans:bouton_listes_diffusion" parent="bando_edition" icone="images/abomailmans-16.png" />
+</paquet>

@@ -1,0 +1,61 @@
+<?php
+/*
+ * Abomailmans
+ * MaZiaR - NetAktiv
+ * tech@netaktiv.com
+ * © 2007 - 2012
+ * $Id$
+*/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function abomailmans_declarer_tables_interfaces($interface){
+	$interface['table_des_tables']['abomailmans'] = 'abomailmans';
+	return $interface;
+}
+
+function abomailmans_declarer_tables_objets_sql($tables){
+	$tables['spip_abomailmans'] = array(
+		'page' => 'abomailmans',
+		'url_edit' => 'abomailmans_edit',
+		'editable' => 'oui',
+		'texte_retour' => 'abomailmans:icone_retour_ticket',
+		'texte_objet' => 'abomailmans:ticket',
+		'texte_objets' => 'abomailmans:tickets',
+		'texte_modifier' => 'abomailmans:icone_modifier_ticket',
+		'texte_creer' => 'abomailmans:nouveau_ticket',
+		'icone_objet' => 'abomailmans',
+		'info_aucun_objet'=> 'abomailmans:info_ticket_aucun',
+		'info_1_objet' => 'abomailmans:info_abomailmans_1',
+		'info_nb_objets' => 'abomailmans:info_abomailmans_nb',
+		'titre' => "titre, '' AS lang",
+		'principale' => 'oui',
+		'champs_editables' => array('titre', 'descriptif', 'email', 'email_sympa', 'email_subscribe', 'email_unsubscribe', 'modele_defaut','periodicite','lang','desactive'),
+		'field'=> array(
+			"id_abomailman" => "bigint(21) NOT NULL",
+			"titre" 	=> "varchar(255) NOT NULL",
+			"descriptif" 	=> "text",
+			"email"		=> "varchar(255)",
+			"email_sympa"   => "varchar(255) DEFAULT '' NOT NULL",
+			"email_subscribe"   => "varchar(255)",
+			"email_unsubscribe" => "varchar(255)",
+			"modele_defaut" => "varchar(255) DEFAULT '' NOT NULL",
+			"periodicite" => "varchar(255) DEFAULT '' NOT NULL",
+			"maj" 		=> "TIMESTAMP",
+			"date_envoi" 	=> "TIMESTAMP",
+			"lang"		=> "VARCHAR(10) DEFAULT '' NOT NULL",
+			"desactive"     => "tinyint(4) NOT NULL default '0'"
+		),
+		'key' => array(
+			"PRIMARY KEY"	=> "id_abomailman"
+		),
+		'rechercher_champs' => array(
+			'titre' => 8,
+			'descriptif' => 8
+		),
+		'champs_versionnes' => array('titre', 'descriptif', 'email', 'email_sympa', 'email_subscribe', 'email_unsubscribe', 'modele_defaut','periodicite','lang','desactive')
+	);
+	return $tables;
+}
+
+?>

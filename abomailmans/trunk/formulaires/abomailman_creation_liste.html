@@ -6,128 +6,116 @@
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			<li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur] editer_type_input">
+			<li class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur] editer_type_input">
 				<label for="titre" class="obligatoire"><:texte_titre_obligatoire:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
 				<input type="text" id="titre" name="titre" value="[(#ENV**{titre})]" class="multilang" size="50" />
 			</li>
-			 <li class='editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur] editer_type_textarea'>
+			<li class='editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur] editer_type_textarea'>
 				<label for='descriptif'><:abomailmans:texte_descriptif:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
 				]<textarea name='descriptif' id='descriptif' class='multilang' cols='40' rows='2'>[(#ENV**{descriptif})]</textarea>
 			</li>
-	<li class="fieldset">
-	      <fieldset><h3 class="legend"><:abomailmans:emails_a_renseigner:></h3>
-	      <ul>
-			<li class="editer_email[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
-				<label for="email" class="obligatoire"><:abomailmans:destinataire:></label>
-				<p class="explication"><:abomailmans:emailliste_abomailman:></p>
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>]
-				<input type="text"  id="email" name="email" value="[(#ENV**{email})]" size="50" />
-			</li>
-			<li class="editer_email_subscribe[ (#ENV**{erreurs}|table_valeur{email_subscribe}|oui)erreur]">
-				<label for="email_subscribe"><:abomailmans:emailliste_subscribe:></label>
-				<p class="explication"><:abomailmans:explication_email_subscribe:></p>
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email_subscribe})</span>]
-				<input type="text"  id="email_subscribe" name="email_subscribe" value="[(#ENV**{email_subscribe})]" size="50" />
-			</li>
-			<li class="editer_email_unsubscribe[ (#ENV**{erreurs}|table_valeur{email_unsubscribe}|oui)erreur]">
-				<label for="email_unsubscribe"><:abomailmans:emailliste_unsubscribe:></label>
-				<p class="explication"><:abomailmans:explication_email_unsubscribe:></p>
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email_unsubscribe})</span>]
-				<input type="text"  id="email_unsubscribe" name="email_unsubscribe" value="[(#ENV**{email_unsubscribe})]" size="50" />
-			</li>
-			<li class="editer_email_sympa[ (#ENV**{erreurs}|table_valeur{email_sympa}|oui)erreur]">
-				<label for="email_sympa"><:abomailmans:emailliste_abosympa:></label>
-				<p class="explication"><:abomailmans:explication_email_sympa:></p>
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email_sympa})</span>]
-				<input type="text"  id="email_sympa" name="email_sympa" value="[(#ENV**{email_sympa})]" size="50" />
-			</li>
-			[<li class="editer_langue[ (#ENV**{erreurs}|table_valeur{langue}|oui)erreur]">
-				<label for="langue"><:abomailmans:langue_liste:></label>
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{langue})</span>]
-				<select name="langue" id="langue">
-					<option value=""><:abomailmans:aucune_langue:></option>
-					(#VAL{changer_lang}|liste_options_langues{#ENV*{langue}})
-				</select>
-			</li>]
-			 </ul>
-	     </fieldset>
-	 </li>
-			
-    	<li class="fieldset">
-	      <fieldset><h3 class="legend"><:abomailmans:envoi_regulier:></h3>
-	      <ul>
-	      
-	      <li class="periodicite">
-		<label for='periodicite'><:abomailmans:envoi_regulier:></label>
-			<p class="explication"><:abomailmans:envoi_regulier_info:></p>
-
-		<div class='choix'>
-		<label for="periodicite">
-		<:abomailmans:envoi_regulier_tous_les:></label>
-		<input type="text" size="4" value="[(#ENV{periodicite})]" id="periodicite" name="periodicite">
-		<label for="periodicite"><:abomailmans:periodicite:></label>
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:abomailmans:emails_a_renseigner:></h3>
+	      				<ul>
+							<li class="editer editer_email[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
+								<label for="email" class="obligatoire"><:abomailmans:destinataire:></label>
+								<p class="explication"><:abomailmans:emailliste_abomailman:></p>
+								[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>]
+								<input type="text"  id="email" name="email" value="[(#ENV**{email})]" size="50" />
+							</li>
+							<li class="editer editer_email_subscribe[ (#ENV**{erreurs}|table_valeur{email_subscribe}|oui)erreur]">
+								<label for="email_subscribe"><:abomailmans:emailliste_subscribe:></label>
+								<p class="explication"><:abomailmans:explication_email_subscribe:></p>
+								[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email_subscribe})</span>]
+								<input type="text"  id="email_subscribe" name="email_subscribe" value="[(#ENV**{email_subscribe})]" size="50" />
+							</li>
+							<li class="editer editer_email_unsubscribe[ (#ENV**{erreurs}|table_valeur{email_unsubscribe}|oui)erreur]">
+								<label for="email_unsubscribe"><:abomailmans:emailliste_unsubscribe:></label>
+								<p class="explication"><:abomailmans:explication_email_unsubscribe:></p>
+								[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email_unsubscribe})</span>]
+								<input type="text"  id="email_unsubscribe" name="email_unsubscribe" value="[(#ENV**{email_unsubscribe})]" size="50" />
+							</li>
+							<li class="editer editer_email_sympa[ (#ENV**{erreurs}|table_valeur{email_sympa}|oui)erreur]">
+								<label for="email_sympa"><:abomailmans:emailliste_abosympa:></label>
+								<p class="explication"><:abomailmans:explication_email_sympa:></p>
+								[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email_sympa})</span>]
+								<input type="text"  id="email_sympa" name="email_sympa" value="[(#ENV**{email_sympa})]" size="50" />
+							</li>
+							[<li class="editer editer_langue[ (#ENV**{erreurs}|table_valeur{langue}|oui)erreur]">
+								<label for="langue"><:abomailmans:langue_liste:></label>
+								[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{langue})</span>]
+								<select name="langue" id="langue">
+									<option value=""><:abomailmans:aucune_langue:></option>
+									(#VAL{changer_lang}|liste_options_langues{#ENV*{langue}})
+								</select>
+							</li>]
+			 			</ul>
+	     			</fieldset>
+	 			</li>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:abomailmans:envoi_regulier:></h3>
+						<ul>
+							<li class="editer editer_periodicite">
+								<label for='periodicite'><:abomailmans:envoi_regulier:></label>
+								<p class="explication"><:abomailmans:envoi_regulier_info:></p>
+								<div class='choix'>
+									<label for="periodicite"><:abomailmans:envoi_regulier_tous_les:></label>
+									<input type="text" size="4" value="[(#ENV{periodicite})]" id="periodicite" name="periodicite">
+									<label for="periodicite"><:abomailmans:periodicite:></label>
+								</div>
+							</li>
+							<li class="editer choisir_template[ (#ENV**{erreurs}|table_valeur{template}|oui)erreur]">
+								<label for="template"><:abomailmans:template_defaut:></label>
+								[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{template})</span>]
+								<select name="template">
+									<INCLURE{fond=prive/listes/abomailman_templates}{id_abomailman}{erreurs}>
+								</select>
+							</li>
+							<li class="editer editer_envoi_liste_parametres">
+								<label for="envoi_liste_parametres"><:abomailmans:envoi_parametres:></label>
+								<p class="explication"><:abomailmans:envoi_liste_parametres:></p>
+								<input type="text" id="envoi_liste_parametres" name="envoi_liste_parametres" value="[(#ENV**{envoi_liste_parametres})]" size="50" />
+								[(#ENV{modele_defaut}|oui)
+								<a href="[(#URL_PAGE{abomailman_template}|parametre_url{template,[(#ENV{template})]}|parametre_url{date,[(#DATE|moins30|affdate{annee})-][(#DATE|moins30|affdate{mois})]})][(#ENV**{envoi_liste_parametres})]">
+								<:abomailmans:voir_modele_depuis:>[ (#DATE|moins30|affdate{nom_mois})][ (#DATE|moins30|affdate{annee})]</a>]
+							</li>
+						</ul>
+					</fieldset>
+				</li>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:abomailmans:label_etat_liste:></h3>
+						<ul>
+							<li class="editer editer_desactive">
+								<label for="desactive_active"><:abomailmans:activation:></label>
+								<div class="choix">
+									<input type="radio" value="0" id="desactive_active" name="desactive"[(#ENV{desactive}|=={0}|oui) checked="checked"] />
+									<label for="desactive_active"><:abomailmans:active:></label>
+								</div>
+								<div class="choix">
+									<input type="radio" value="1" id="desactive_desactive" name="desactive"[(#ENV{desactive}|=={1}|oui) checked="checked"] />
+									<label for="desactive_desactive"><:abomailmans:desactive:></label>
+								</div>
+							</li>
+							[(#ENV{id_abomailman}|oui)
+							<li class="editer editer_desactive_supprime">
+								<label for="desactive_supprime"><:abomailmans:supprimer:></label>
+								<div class="choix">
+									<input type="checkbox" value="2" id="desactive_supprime" name="desactive"[(#ENV{desactive}|=={2}|oui) checked="checked"] />
+									<label for="desactive_supprime"><:abomailmans:suppression_definitive:></label>
+								</div>
+							</li>]
+						</ul>
+					</fieldset>
+				</li>
+			</ul>
+			<p class="boutons">
+				<input type="submit" class="submit" name="valider" value="[(#ENV{id_abomailman}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]" />
+			</p>
 		</div>
-    		</li>
-    		
-    			<li class="choisir_template[ (#ENV**{erreurs}|table_valeur{template}|oui)erreur]">
-    			
-				<label for="template"><:abomailmans:template_defaut:></label>
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{template})</span>]
-				<select name="template">
-					<INCLURE{fond=prive/listes/abomailman_templates}{id_abomailman}{erreurs}>
-				</select>
-			</li>
-			
-			<li class="editer_envoi_liste_parametres">
-				<label for="envoi_liste_parametres"><:abomailmans:envoi_parametres:></label>
-				<p class="explication"><:abomailmans:envoi_liste_parametres:></p>
-				<input type="text"  id="envoi_liste_parametres" name="envoi_liste_parametres" value="[(#ENV**{envoi_liste_parametres})]" size="50" />
-			 
-				[(#ENV{modele_defaut}|oui)
-				<a href="[(#URL_PAGE{abomailman_template}|parametre_url{template,[(#ENV{template})]}|parametre_url{date,[(#DATE|moins30|affdate{annee})-][(#DATE|moins30|affdate{mois})]})][(#ENV**{envoi_liste_parametres})]">
-				<:abomailmans:voir_modele_depuis:>[ (#DATE|moins30|affdate{nom_mois})][ (#DATE|moins30|affdate{annee})]</a>
-				]
-
-			</li>
-	      </ul>
-	     </fieldset>
-	 </li>
-	     
-    		
-	<li class="fieldset">
-	      <fieldset><h3 class="legend"><:abomailmans:label_etat_liste:></h3>
-	      <ul>		
-			
-			<li class="editer_desactive">
-				<label for="desactive_active"><:abomailmans:activation:></label>
-				<div class="choix">
-					<input type="radio" value="0" id="desactive_active" name="desactive"[(#ENV{desactive}|=={0}|oui) checked="checked"] />
-					<label for="desactive_active"><:abomailmans:active:></label>
-				</div>
-				<div class="choix">
-					<input type="radio" value="1" id="desactive_desactive" name="desactive"[(#ENV{desactive}|=={1}|oui) checked="checked"] />
-					<label for="desactive_desactive"><:abomailmans:desactive:></label>
-				</div>
-			</li>
-			
-    		
-    		
-			[(#ENV{id_abomailman}|oui)
-			<li>
-				<label for="desactive_supprime"><:abomailmans:supprimer:></label>
-				<div class="choix">
-				<input type="checkbox" value="2" id="desactive_supprime" name="desactive"[(#ENV{desactive}|=={2}|oui) checked="checked"] />
-				<label for="desactive_supprime"><:abomailmans:suppression_definitive:></label>
-				</div>
-			</li>]
-			 </ul>
-	     </fieldset>
-	 </li>
-		</ul>
-		<p class="boutons">
-			<input type="submit" class="submit" name="valider" value="[(#ENV{id_abomailman}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]" />
-		</p>
-	</div></form>]
+	</form>]
 </div>
