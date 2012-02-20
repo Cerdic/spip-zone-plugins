@@ -22,5 +22,6 @@
 
 	<necessite nom="facteur" compatibilite="[2.0.0;[" />
 	
-	<menu nom="abomailmans" titre="abomailmans:bouton_listes_diffusion" parent="bando_edition" icone="images/abomailmans-16.png" />
+	<menu nom="abomailmans" titre="abomailmans:bouton_listes_diffusion" parent="bando_edition" icone="images/abomailman-16.png" />
+	<menu nom="abomailman_edit" parametres="new=oui" titre="abomailmans:icone_ajouter_liste" parent="outils_rapides" icone="images/abomailman-16-new.png" />
 </paquet>
