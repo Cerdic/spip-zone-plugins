@@ -1,0 +1,8 @@
+[(#ID_ABOMAILMAN|generer_info_entite{abomailman,[(#VAL{abomailman}|id_table_objet)],'**'}|intval|=={#ID_ABOMAILMAN}|sinon_interdire_acces)]
+<BOUCLE_nav(ABOMAILMANS){id_abomailman}{si #ENV{exec}|=={abomailman}}>
+#BOITE_OUVRIR{'','info'}
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','abomailman','id',#ID_ABOMAILMAN}}}
+#BOITE_FERMER
+</BOUCLE_nav>
+[(#ENV{exec}|=={abomailman_edit}|oui)<INCLURE{fond=prive/squelettes/navigation/abomailman_edit,env}>]
+<//B_nav>

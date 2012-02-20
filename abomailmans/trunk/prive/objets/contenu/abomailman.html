@@ -1,0 +1,30 @@
+<BOUCLE_afficher_contenu(ABOMAILMANS){id_abomailman=#ENV{id,#ENV{id_abomailman}}}>
+<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<div class='label'><:info_titre:></div>
+	<div dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</div>
+</div>
+<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<div class='label'><:info_descriptif:></div>
+	[(#DESCRIPTIF|image_reduire{500,0})]</div>
+</div>
+<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
+	<div class='label'><:abomailmans:emailliste_abomailman:></div>
+	<div dir='#LANG_DIR' class='#EDIT{email} email'>[(#EMAIL)]</div>
+</div>
+[<div class="champ contenu_email_sympa[ (#EMAIL_SYMPA*|strlen|?{'',vide})]">
+	<div class='label'><:abomailmans:emailliste_abosympa:></div>
+	<div dir='#LANG_DIR' class='#EDIT{email_sympa} email_sympa'>(#EMAIL_SYMPA)</div>
+</div>]
+[<div class="champ contenu_periodicite[ (#PERIODICITE*|strlen|?{'',vide})]">
+	<div class='label'><:abomailmans:envoi_regulier:></div>
+	<div dir='#LANG_DIR' class='#EDIT{periodicite} descriptif'>(#PERIODICITE)</div>
+</div>]
+[<div class="champ contenu_lang[ (#LANG*|strlen|?{'',vide})]">
+	<div class='label'><:abomailmans:langue_liste:></div>
+	<div dir='#LANG_DIR' class='#EDIT{lang} lang'>(#LANG|traduire_nom_langue|sinon{<:abomailmans:aucune_langue:>})</div>
+</div>]			
+[<div class="champ contenu_notes">
+	<div class='label'><:info_notes:></div>
+	<div dir='#LANG_DIR' class='#EDIT{notes} notes'>(#NOTES)</div>
+</div>
+]</BOUCLE_afficher_contenu>

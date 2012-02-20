@@ -6,6 +6,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
+	'abomailman' => 'Liste de diffusion ou discussion',
 	'abomailmans' => 'Listes de diffusion ou discussion',
 	'abonne' => 'Je m\'abonne',
 	'activation' => 'Activation',
@@ -55,6 +56,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_ajouter_liste' => 'Ajouter une nouvelle liste',
 	'icone_envoyer_mail_liste' => 'Envoyer un e-mail aux lettres &agrave; partir du contenu de ce site',
+	'icone_modifier_abomailman' => 'Modifier la liste',
+	'icone_retour_abomailman' => 'Retour à la liste',
+	'info_abomailman_aucun' => 'Aucune liste',
+	'info_abomailmans_1' => 'Une liste',
+	'info_abomailmans_nb' => '@nb@ listes',
 	'info_sisympa' => '[Obligatoire si liste Sympa]',
 	'insciption_listes_legende' => 'Abonnement au listes de diffusion',
 	'inscription_lettres_legende' => 'Abonnement aux listes de <br />diffusion et de discussions',
@@ -84,6 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nom' => 'Nom et pr&eacute;nom (facultatif)',
+	'nouveau_abomailman' => 'Nouvelle liste de diffusion',
 
 	// P
 	'periodicite' => ' jours.',

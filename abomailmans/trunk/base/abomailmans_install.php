@@ -16,7 +16,7 @@ function abomailmans_declarer_tables_interfaces($interface){
 
 function abomailmans_declarer_tables_objets_sql($tables){
 	$tables['spip_abomailmans'] = array(
-		'page' => 'abomailmans',
+		'page' => 'abomailman',
 		'url_edit' => 'abomailman_edit',
 		'editable' => 'oui',
 		'texte_retour' => 'abomailmans:icone_retour_abomailman',
@@ -24,10 +24,10 @@ function abomailmans_declarer_tables_objets_sql($tables){
 		'texte_objets' => 'abomailmans:abomailmans',
 		'texte_modifier' => 'abomailmans:icone_modifier_abomailman',
 		'texte_creer' => 'abomailmans:nouveau_abomailman',
-		'icone_objet' => 'abomailmans',
 		'info_aucun_objet'=> 'abomailmans:info_abomailman_aucun',
 		'info_1_objet' => 'abomailmans:info_abomailmans_1',
 		'info_nb_objets' => 'abomailmans:info_abomailmans_nb',
+		'icone_objet' => 'abomailman',
 		'titre' => "titre, '' AS lang",
 		'principale' => 'oui',
 		'champs_editables' => array('titre','descriptif','email','email_sympa','email_subscribe','email_unsubscribe','modele_defaut','periodicite','lang','desactive'),

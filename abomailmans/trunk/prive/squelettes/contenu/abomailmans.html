@@ -1,4 +1,7 @@
 #CACHE{0}
+
+<h1><:abomailmans:les_listes_mailmans:></h1>
+
 <B_listes>
 #BOITE_OUVRIR
 	#ANCRE_PAGINATION
@@ -19,7 +22,7 @@
 				[(#DESACTIVE|=={1}|?{<:abomailmans:desactive:>,<:abomailmans:active:>})]
 			</td>
 			<td class='id'>[(#AUTORISER{modifier,abomailman,#ID_ABOMAILMAN}|?{
-				<a href="[(#URL_ECRIRE{abomailman_edit,id_abomailman=#ID_ABOMAILMAN})]">#ID_ABOMAILMAN</a>,
+				<a href="[(#URL_ECRIRE{abomailman,id_abomailman=#ID_ABOMAILMAN})]">#ID_ABOMAILMAN</a>,
 				#ID_ABOMAILMAN
 			})]</td>
 		</tr>
