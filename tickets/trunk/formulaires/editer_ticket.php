@@ -15,6 +15,14 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 /**
+ * Identification unique d'un formulaire poste 
+ *
+**/
+function formulaires_editer_ticket_identifier($id_ticket='new', $retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
+	return serialize(array(intval($id_ticket)));
+}
+
+/**
  * Fonction de chargement des valeurs
  */
 function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
