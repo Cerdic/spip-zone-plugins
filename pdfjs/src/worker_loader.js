@@ -11,24 +11,23 @@ var files = [
   'obj.js',
   'function.js',
   'charsets.js',
-  'cidmaps.js', 
+  'cidmaps.js',
   'colorspace.js',
   'crypto.js',
   'evaluator.js',
   'fonts.js',
   'glyphlist.js',
-  'image.js', 
+  'image.js',
   'metrics.js',
   'parser.js',
   'pattern.js',
-  'stream.js', 
+  'stream.js',
   'worker.js',
-  //'../external/jpgjs/jpg.js',
-  'jpx.js'  
+  // '../external/jpgjs/jpg.js',
+  'jpx.js'
 ];
 
 // Load all the files.
 for (var i = 0; i < files.length; i++) {
   importScripts(files[i]);
 }
-
