@@ -2,18 +2,19 @@
 	[(#CHEMIN{images/article-24.gif}|balise_img{'',cadre-icone})]
    <div class="titrem"><b><:bilancontrib:titre_contrib_objets:>[ (Secteur (#ENV{id_secteur}))]</b>&nbsp;
    <a href="#URL_PAGE{bilancontrib_objets_csv}" title="<:bilancontrib:exporter_csv:>">		
-   	[(#CHEMIN{images/exportcsv-40.png}|balise_img{'',exportcsv}|inserer_attribut{alt,<:bilancontrib:exporter_csv:>})]
+   	[(#CHEMIN{images/exportcsv-40.png}|balise_img{'',bc_exportcsv}|inserer_attribut{alt,<:bilancontrib:exporter_csv:>})]
    </a></div>
-   <div class="objets">
+   <div class="bc_objets bc_grapher">
 
-   <table width="100%" cellspacing="0" cellpadding="2" border="0">
+   <table class="spip">
       <thead>
          <tr class="row_first tr_liste tr_liste_objets">
-            <th class="objet"><:bilancontrib:objet:></th>
+            <td class="bc_objet"><:bilancontrib:objet:></td>
             <BOUCLE_annees_head_articles(POUR){tableau #ENV{annees}}{par cle}>
-            <th class="annee">#VALEUR</th>
+            	<th class="bc_annee bc_col_#VALEUR">#VALEUR</th>
             </BOUCLE_annees_head_articles>
-            <th class="total"><:bilancontrib:total:></th>
+            <th class="bc_total bc_col_total"><:bilancontrib:total:></th>
+            <th class="bc_graph"><:bilancontrib:graph:></th>
          </tr>
       </thead>
       <tbody>
@@ -21,93 +22,108 @@
          
          [(#REM) Articles ]
          <tr class="tr_liste">
-            <td class="objet"><:articles:></td>
+            <th class="bc_objet"><:articles:></th>
             #SET{total,0}
             <BOUCLE_annees_articles(POUR){tableau #ENV{annees}}{par cle}>
                <BOUCLE_articles(ARTICLES){id_secteur?}{annee=#VALEUR}> </BOUCLE_articles>
                   #SET{total,#GET{total}|plus{#TOTAL_BOUCLE}}
                   #SET{total_annee,#GET{total_annuel}|table_valeur{annee#VALEUR}|plus{#TOTAL_BOUCLE}}
                   #SET{total_annuel,#GET{total_annuel}|array_merge{#ARRAY{annee#VALEUR,#GET{total_annee}}}}
-                  <td class="nb">#TOTAL_BOUCLE</td>
+                  <td class="bc_nb bc_col_#VALEUR">#TOTAL_BOUCLE</td>
                </B_articles>
-                  <td class="nb">0</td>
+                  <td class="bc_nb bc_col_#VALEUR">0</td>
                <//B_articles>
             </BOUCLE_annees_articles>
 
          	[(#REM) Total lignes ]
-            <td class="nb">#GET{total}</td>
+            <td class="bc_nb bc_col_total">#GET{total}</td>
+            <td class="bc_graph bc_graph_row"><input name="bc_graph_articles" type="checkbox" value="bc_graph_articles" checked="checked" /></td>
             #SET{total_annee,#GET{total_annuel}|table_valeur{total}|plus{#GET{total}}}
             #SET{total_annuel,#GET{total_annuel}|array_merge{#ARRAY{total,#GET{total_annee}}}}
          </tr>
 
          [(#REM) Articles par secteur ou branche ]
-         <BOUCLE_articles_branches(RUBRIQUES){id_parent=#ENV{id_secteur,0}}>
-         <tr class="tr_liste sousrub">
-         	<td class="objet">#TITRE</td>
+         <BOUCLE_articles_branches(RUBRIQUES){id_parent=#ENV{id_secteur,0}}{!par date}{0,10}>
+         <tr class="tr_liste bc_sousrub bc_row_cacher">
+         	<th class="bc_objet bc_row_cacher">#TITRE</th>
             #SET{total,0}
             <BOUCLE_annees_articles_branche(POUR){tableau #ENV{annees}}{par cle}>
                <BOUCLE_articles_branche(ARTICLES){branche}{annee=#VALEUR}> </BOUCLE_articles_branche>
                   #SET{total,#GET{total}|plus{#TOTAL_BOUCLE}}
-                  <td class="nb">#TOTAL_BOUCLE</td>
+                  <td class="bc_nb bc_row_cacher bc_col_#VALEUR">#TOTAL_BOUCLE</td>
                </B_articles_branche>
-                  <td class="nb">0</td>
+                  <td class="bc_nb bc_row_cacher bc_col_#VALEUR">0</td>
                <//B_articles_branche>
             </BOUCLE_annees_articles_branche>
 
          	[(#REM) Total lignes ]
-            <td class="nb">#GET{total}</td>
+            <td class="bc_nb bc_row_cacher bc_col_total">#GET{total}</td>
+            <td class="bc_graph bc_graph_row"><input name="bc_graph_#COMPTEUR_BOUCLE" type="checkbox" value="bc_graph_#COMPTEUR_BOUCLE" /></td>
 			</tr>
          </BOUCLE_articles_branches>
 
          [(#REM) Breves ]
          <tr class="tr_liste">
-            <td class="objet"><:breves:></td>
+            <th class="bc_objet"><:breves:></th>
             #SET{total,0}
             <BOUCLE_annees_breves(POUR){tableau #ENV{annees}}{par cle}>
                <BOUCLE_breves(BREVES){id_secteur?}{annee=#VALEUR}> </BOUCLE_breves>
                   #SET{total,#GET{total}|plus{#TOTAL_BOUCLE}}
                   #SET{total_annee,#GET{total_annuel}|table_valeur{annee#VALEUR}|plus{#TOTAL_BOUCLE}}
                   #SET{total_annuel,#GET{total_annuel}|array_merge{#ARRAY{annee#VALEUR,#GET{total_annee}}}}
-                  <td class="nb">#TOTAL_BOUCLE</td>
+                  <td class="bc_nb bc_col_#VALEUR">#TOTAL_BOUCLE</td>
                </B_breves>
-                  <td class="nb">0</td>
+                  <td class="bc_nb bc_col_#VALEUR">0</td>
                <//B_breves>
             </BOUCLE_annees_breves>
 
          	[(#REM) Total lignes ]
-            <td class="nb">#GET{total}</td>
+            <td class="bc_nb bc_col_total">#GET{total}</td>
+            <td class="bc_graph bc_graph_row"><input name="bc_graph_breves" type="checkbox" value="bc_graph_breves" checked="checked" /></td>
             #SET{total_annee,#GET{total_annuel}|table_valeur{total}|plus{#GET{total}}}
             #SET{total_annuel,#GET{total_annuel}|array_merge{#ARRAY{total,#GET{total_annee}}}}
          </tr>
 
          [(#REM) Forums ]
          <tr class="tr_liste">
-            <td class="objet"><:messages_forum:></td>
+            <th class="bc_objet"><:messages_forum:></th>
             #SET{total,0}
             <BOUCLE_annees_forums(POUR){tableau #ENV{annees}}{par cle}>
                <BOUCLE_forums(FORUMS){id_secteur?}{annee=#VALEUR}> </BOUCLE_forums>
                   #SET{total,#GET{total}|plus{#TOTAL_BOUCLE}}
                   #SET{total_annee,#GET{total_annuel}|table_valeur{annee#VALEUR}|plus{#TOTAL_BOUCLE}}
                   #SET{total_annuel,#GET{total_annuel}|array_merge{#ARRAY{annee#VALEUR,#GET{total_annee}}}}
-                  <td class="nb">#TOTAL_BOUCLE</td>
+                  <td class="bc_nb bc_col_#VALEUR">#TOTAL_BOUCLE</td>
                </B_forums>
-                  <td class="nb">0</td>
+                  <td class="bc_nb bc_col_#VALEUR">0</td>
                <//B_forums>
             </BOUCLE_annees_forums>
 
          	[(#REM) Total lignes ]
-            <td class="nb">#GET{total}</td>
+            <td class="bc_nb bc_col_total">#GET{total}</td>
+            <td class="bc_graph bc_graph_row"><input name="bc_graph_forum" type="checkbox" value="bc_graph_forum" checked="checked" /></td>
             #SET{total_annee,#GET{total_annuel}|table_valeur{total}|plus{#GET{total}}}
             #SET{total_annuel,#GET{total_annuel}|array_merge{#ARRAY{total,#GET{total_annee}}}}
          </tr>
 
       	[(#REM) Total colonnes ]
          <tr class="tr_liste tr_foot">
-            <td>&nbsp;</td>
+            <th class="bc_objet"><:bilancontrib:total:></th>
             <BOUCLE_annees_objets_total(POUR){tableau #ENV{annees}}{par cle}>
-            <td class="nb">[(#GET{total_annuel}|table_valeur{annee#VALEUR})]</td>
+            	<td class="bc_nb bc_col_#VALEUR">[(#GET{total_annuel}|table_valeur{annee#VALEUR,0})]</td>
             </BOUCLE_annees_objets_total>
-            <td class="nb">[(#GET{total_annuel}|table_valeur{total})]</td>
+            <td class="bc_nb bc_col_total">[(#GET{total_annuel}|table_valeur{total})]</td>
+            <td class="bc_graph bc_graph_row"><input name="bc_graph_total" type="checkbox" value="bc_graph_total" checked="checked" /></td>
+         </tr>
+
+      	[(#REM) Filtre colonnes ]
+         <tr class="tr_liste bc_graph bc_graph_col">
+            <th class="bc_graph"><:bilancontrib:graph:></th>
+            <BOUCLE_annees_objets_total2(POUR){tableau #ENV{annees}}{par cle}>
+            	<td class="bc_graph bc_graph_col"><input name="bc_col_#VALEUR" type="checkbox" value="bc_col_#VALEUR"  checked="checked" /></td>
+            </BOUCLE_annees_objets_total2>
+            <td class="bc_graph bc_graph_col"><input name="bc_col_total" type="checkbox" value="bc_col_total" checked="checked" /></td>
+            <td class="bc_graph">&nbsp;</td>
          </tr>
       </tbody>
    </table>

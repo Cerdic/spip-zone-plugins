@@ -2,83 +2,147 @@
 	[(#CHEMIN{images/doc-24.gif}|balise_img{'',cadre-icone})]
    <div class="titrem impliable"><b><:bilancontrib:documents_publies:>[ (Secteur (#ENV{id_secteur}))]</b>&nbsp;
    <a href="#URL_PAGE{bilancontrib_documents_csv}" title="<:bilancontrib:exporter_csv:>">
-   	[(#CHEMIN{images/exportcsv-40.png}|balise_img{'',exportcsv}|inserer_attribut{alt,<:bilancontrib:exporter_csv:>})]
+   	[(#CHEMIN{images/exportcsv-40.png}|balise_img{'',bc_exportcsv}|inserer_attribut{alt,<:bilancontrib:exporter_csv:>})]
    </a></div>
-	<div class="documents">
+	<div class="bc_documents bc_grapher">
 
    [(#REM) Chercher les extensions utilisees ]
    #SET{extensions,#ARRAY}
-   <BOUCLE_extensions(TYPES_DOCUMENTS documents){compteur documents}{! par compteur_documents}{statut=publie}>
+   <BOUCLE_extensions(TYPES_DOCUMENTS documents){compteur documents}{! par compteur_documents}{statut=publie}{0,10}>
    	#SET{extensions, #GET{extensions}|push{#EXTENSION}
    </BOUCLE_extensions>
 
-   <table width="100%" cellspacing="0" cellpadding="2" border="0">
+   <table class="spip">
       <thead>
          <tr class="row_first tr_liste tr_liste_documents">
-            <th class="extension"><:plugins_liste_extensions:></th>
-            <BOUCLE_annees_head_documents(POUR){tableau #ENV{annees}}{par cle}>
-            <th class="annee" colspan="2">#VALEUR</th>
-            </BOUCLE_annees_head_documents>
-            <th class="total" colspan="2"><:bilancontrib:total:></th>
+            <td class="bc_extension"><:bilancontrib:nombre:> <:bilancontrib:nb_max:></td>
+            <BOUCLE_annees_head_nb_documents(POUR){tableau #ENV{annees}}{par cle}>
+            <th class="bc_annee bc_col_nb_#VALEUR">#VALEUR</th>
+            </BOUCLE_annees_head_nb_documents>
+            <th class="bc_total bc_col_nb_total"><:bilancontrib:total:></th>
+            <th class="bc_graph"><:bilancontrib:graph:></th>
          </tr>
       </thead>
       <tbody>
          #SET{total_annuel,#ARRAY}
-         #SET{taille_annuel,#ARRAY}
-         <BOUCLE_types_documents(POUR){tableau #GET{extensions}}{par cle}>
+         <BOUCLE_types_nb_documents(POUR){tableau #GET{extensions}}{par cle}>
          <tr class="tr_liste">
-            <td class="extension">#VALEUR</td>
+            <th class="bc_extension">#VALEUR</th>
             #SET{extension,#VALEUR}
             #SET{total,0}
-            #SET{taille_totale,0}
-            <BOUCLE_annees_documents(POUR){tableau #ENV{annees}}{par cle}>
+            <BOUCLE_annees_nb_documents(POUR){tableau #ENV{annees}}{par cle}>
 					[(#REM) Documents des articles ]
-               #SET{taille,0}
-               <BOUCLE_documents_a(DOCUMENTS){documents_liens.objet = article}{articles.id_secteur?}{extension=#GET{extension}}{annee=#VALEUR}>
-                  #SET{taille,#GET{taille}|plus{#TAILLE}}
-               </BOUCLE_documents_a>
+               <BOUCLE_nb_documents_a(DOCUMENTS){documents_liens.objet = article}{articles.id_secteur?}{extension=#GET{extension}}{annee=#VALEUR}> </BOUCLE_nb_documents_a>
                   #SET{total,#GET{total}|plus{#TOTAL_BOUCLE}}
                   #SET{total_annee,#GET{total_annuel}|table_valeur{annee#VALEUR}|plus{#TOTAL_BOUCLE}}
                   #SET{total_annuel,#GET{total_annuel}|array_merge{#ARRAY{annee#VALEUR,#GET{total_annee}}}}
-                  #SET{taille_totale,#GET{taille_totale}|plus{#GET{taille}}}
-                  #SET{taille_annee,#GET{taille_annuel}|table_valeur{annee#VALEUR}|plus{#GET{taille}}}
-                  #SET{taille_annuel,#GET{taille_annuel}|array_merge{#ARRAY{annee#VALEUR,#GET{taille_annee}}}}
-               </B_documents_a>
+               </B_nb_documents_a>
 
 					[(#REM) Documents des rubriques ]
-               <BOUCLE_documents_r(DOCUMENTS){documents_liens.objet = rubrique}{rubriques.id_secteur?}{extension=#GET{extension}}{annee=#VALEUR}>
-                  #SET{taille,#GET{taille}|plus{#TAILLE}}
-               </BOUCLE_documents_r>
+               <BOUCLE_nb_documents_r(DOCUMENTS){documents_liens.objet = rubrique}{rubriques.id_secteur?}{extension=#GET{extension}}{annee=#VALEUR}> </BOUCLE_nb_documents_r>
                   #SET{total,#GET{total}|plus{#TOTAL_BOUCLE}}
                   #SET{total_annee,#GET{total_annuel}|table_valeur{annee#VALEUR}|plus{#TOTAL_BOUCLE}}
                   #SET{total_annuel,#GET{total_annuel}|array_merge{#ARRAY{annee#VALEUR,#GET{total_annee}}}}
-                  #SET{taille_totale,#GET{taille_totale}|plus{#GET{taille}}}
-                  #SET{taille_annee,#GET{taille_annuel}|table_valeur{annee#VALEUR}|plus{#GET{taille}}}
-                  #SET{taille_annuel,#GET{taille_annuel}|array_merge{#ARRAY{annee#VALEUR,#GET{taille_annee}}}}
-               </B_documents_r>
-               <td class="nb">[(#_documents_a:TOTAL_BOUCLE|plus{#_documents_r:TOTAL_BOUCLE})]</td>
-               <td class="taille">[(#GET{taille}|>{0}|oui)[((#GET{taille}|div{1024}|ceil)&nbsp;ko)]]</td>
-            </BOUCLE_annees_documents>
+               </B_nb_documents_r>
+               <td class="bc_nb bc_col_nb_#VALEUR">[(#_nb_documents_a:TOTAL_BOUCLE|plus{#_nb_documents_r:TOTAL_BOUCLE})]</td>
+            </BOUCLE_annees_nb_documents>
 
          	[(#REM) Total lignes ]
-            <td class="nb">#GET{total}</td>
+            <td class="bc_nb bc_col_nb_total">#GET{total}</td>
+            <td class="bc_graph bc_graph_row"><input name="bc_graph_nb_#VALEUR" type="checkbox" value="bc_graph_nb_#VALEUR" checked="checked" /></td>
             #SET{total_annee,#GET{total_annuel}|table_valeur{total}|plus{#GET{total}}}
             #SET{total_annuel,#GET{total_annuel}|array_merge{#ARRAY{total,#GET{total_annee}}}}
-            <td class="taille">[((#GET{taille_totale}|div{1024}|ceil)&nbsp;ko)]</td>
-            #SET{taille_annee,#GET{taille_annuel}|table_valeur{total}|plus{#GET{taille_totale}}}
-            #SET{taille_annuel,#GET{taille_annuel}|array_merge{#ARRAY{total,#GET{taille_annee}}}}
          </tr>
-         </BOUCLE_types_documents>
+         </BOUCLE_types_nb_documents>
 
       	[(#REM) Total colonnes ]
          <tr class="tr_liste tr_foot">
-            <td>&nbsp;</td>
-            <BOUCLE_annees_articles_total(POUR){tableau #ENV{annees}}{par cle}>
-            <td class="nb">[(#GET{total_annuel}|table_valeur{annee#VALEUR})]</td>
-            <td class="taille">[((#GET{taille_annuel}|table_valeur{annee#VALEUR}|div{1024}|div{1024}|ceil)&nbsp;Mo)]</td>
-            </BOUCLE_annees_articles_total>
-            <td class="nb">[(#GET{total_annuel}|table_valeur{total})]</td>
-            <td class="taille">[((#GET{taille_annuel}|table_valeur{total}|div{1024}|div{1024}|ceil)&nbsp;Mo)]</td>
+            <th class="bc_total"><:bilancontrib:total:></th>
+            <BOUCLE_annees_nb_documents_total(POUR){tableau #ENV{annees}}{par cle}>
+            <td class="bc_nb bc_col_nb_#VALEUR">[(#GET{total_annuel}|table_valeur{annee#VALEUR,0})]</td>
+            </BOUCLE_annees_nb_documents_total>
+            <td class="bc_nb bc_col_nb_total">[(#GET{total_annuel}|table_valeur{total})]</td>
+            <td class="bc_graph bc_graph_row"><input name="bc_graph_nb_total" type="checkbox" value="bc_graph_nb_total" checked="checked" /></td>
+         </tr>
+
+      	[(#REM) Filtre colonnes ]
+         <tr class="tr_liste bc_graph bc_graph_col">
+            <th class="bc_graph"><:bilancontrib:graph:></th>
+            <BOUCLE_annees_nb_documents_total2(POUR){tableau #ENV{annees}}{par cle}>
+            	<td class="bc_graph bc_graph_col"><input name="bc_col_nb_#VALEUR" type="checkbox" value="bc_col_nb_#VALEUR"  checked="checked" /></td>
+            </BOUCLE_annees_nb_documents_total2>
+            <td class="bc_graph bc_graph_col"><input name="bc_col_nb_total" type="checkbox" value="bc_col_nb_total" checked="checked" /></td>
+            <td class="bc_graph">&nbsp;</td>
+         </tr>
+      </tbody>
+   </table>
+
+   <table class="spip">
+      <thead>
+         <tr class="row_first tr_liste tr_liste_documents">
+            <td class="bc_extension"><:bilancontrib:taille:> <:bilancontrib:nb_max:></td>
+            <BOUCLE_annees_head_pds_documents(POUR){tableau #ENV{annees}}{par cle}>
+            <th class="bc_annee bc_col_pds_#VALEUR">#VALEUR</th>
+            </BOUCLE_annees_head_pds_documents>
+            <th class="bc_total bc_col_pds_total"><:bilancontrib:total:></th>
+            <th class="bc_graph"><:bilancontrib:graph:></th>
+         </tr>
+      </thead>
+      <tbody>
+         #SET{taille_annuel,#ARRAY}
+         <BOUCLE_types_pds_documents(POUR){tableau #GET{extensions}}{par cle}>
+         <tr class="tr_liste">
+            <th class="bc_extension">#VALEUR</th>
+            #SET{extension,#VALEUR}
+            #SET{taille_totale,0}
+            <BOUCLE_annees_pds_documents(POUR){tableau #ENV{annees}}{par cle}>
+					[(#REM) Documents des articles ]
+               #SET{taille,0}
+               <BOUCLE_pds_documents_a(DOCUMENTS){documents_liens.objet = article}{articles.id_secteur?}{extension=#GET{extension}}{annee=#VALEUR}>
+                  #SET{taille,#GET{taille}|plus{#TAILLE}}
+               </BOUCLE_pds_documents_a>
+                  #SET{taille_totale,#GET{taille_totale}|plus{#GET{taille}}}
+                  #SET{taille_annee,#GET{taille_annuel}|table_valeur{annee#VALEUR}|plus{#GET{taille}}}
+                  #SET{taille_annuel,#GET{taille_annuel}|array_merge{#ARRAY{annee#VALEUR,#GET{taille_annee}}}}
+               </B_pds_documents_a>
+
+					[(#REM) Documents des rubriques ]
+               <BOUCLE_pds_documents_r(DOCUMENTS){documents_liens.objet = rubrique}{rubriques.id_secteur?}{extension=#GET{extension}}{annee=#VALEUR}>
+                  #SET{taille,#GET{taille}|plus{#TAILLE}}
+               </BOUCLE_pds_documents_r>
+                  #SET{taille_totale,#GET{taille_totale}|plus{#GET{taille}}}
+                  #SET{taille_annee,#GET{taille_annuel}|table_valeur{annee#VALEUR}|plus{#GET{taille}}}
+                  #SET{taille_annuel,#GET{taille_annuel}|array_merge{#ARRAY{annee#VALEUR,#GET{taille_annee}}}}
+               </B_pds_documents_r>
+               <td class="bc_taille bc_col_pds_#VALEUR">[(#GET{taille}|>{0}|oui)[(#GET{taille}|div{1024}|div{1024}|ceil)]]</td>
+            </BOUCLE_annees_pds_documents>
+
+         	[(#REM) Total lignes ]
+            <td class="bc_taille bc_col_pds_total">[(#GET{taille_totale}|div{1024}|div{1024}|ceil)]</td>
+            <td class="bc_graph bc_graph_row"><input name="bc_graph_pds_#VALEUR" type="checkbox" value="bc_graph_pds_#VALEUR" checked="checked" /></td>
+            #SET{taille_annee,#GET{taille_annuel}|table_valeur{total}|plus{#GET{taille_totale}}}
+            #SET{taille_annuel,#GET{taille_annuel}|array_merge{#ARRAY{total,#GET{taille_annee}}}}
+         </tr>
+         </BOUCLE_types_pds_documents>
+
+      	[(#REM) Total colonnes ]
+         <tr class="tr_liste tr_foot">
+            <th class="bc_total"><:bilancontrib:total:></th>
+            <BOUCLE_annees_pds_documents_total(POUR){tableau #ENV{annees}}{par cle}>
+            <td class="bc_taille bc_col_pds_#VALEUR">[(#GET{taille_annuel}|table_valeur{annee#VALEUR}|div{1024}|div{1024}|ceil)]</td>
+            </BOUCLE_annees_pds_documents_total>
+            <td class="bc_taille bc_col_pds_total">[(#GET{taille_annuel}|table_valeur{total}|div{1024}|div{1024}|ceil)]</td>
+            <td class="bc_graph bc_graph_row"><input name="bc_graph_pds_total" type="checkbox" value="bc_graph_pds_total" checked="checked" /></td>
+         </tr>
+
+      	[(#REM) Filtre colonnes ]
+         <tr class="tr_liste bc_graph bc_graph_col">
+            <th class="bc_graph"><:bilancontrib:graph:></th>
+            <BOUCLE_annees_pds_documents_total2(POUR){tableau #ENV{annees}}{par cle}>
+            	<td class="bc_graph bc_graph_col"><input name="bc_col_pds_#VALEUR" type="checkbox" value="bc_col_pds_#VALEUR"  checked="checked" /></td>
+            </BOUCLE_annees_pds_documents_total2>
+            <td class="bc_graph bc_graph_col"><input name="bc_col_pds_total" type="checkbox" value="bc_col_pds_total" checked="checked" /></td>
+            <td class="bc_graph">&nbsp;</td>
          </tr>
       </tbody>
    </table>

@@ -16,6 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_id_secteur' => 'Choisir éventuellement le secteur sur lequel effectuer le bilan',
 	'exporter_csv' => 'Exporter au format csv',
 	
+	// G
+	'graph' => 'Filtre',
+	
 	// J
 	'jamais_connecte' => 'Jamais connecté',
 	
@@ -23,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_id_secteur' => 'Secteur',
 	
 	// N
+	'nb_max' => '(10 max)',
 	'nombre' => 'Nombre',
 	'nom_plugin' => 'Bilan annuel des contributions',
 	
@@ -33,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'slogan' => 'En même temps, les chiffres, on peut leur faire dire ce qu\'on veut !',
 	
 	// T
-	'taille' => 'Taille (ko)',
+	'taille' => 'Taille (Mo)',
 	'titre_contrib_auteurs' => 'Contributions des auteurs - Articles publiés',
 	'titre_contrib_objets' => 'Objets éditoriaux publiés',
 	'total' => 'Total',

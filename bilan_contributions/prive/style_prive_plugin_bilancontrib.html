@@ -13,46 +13,74 @@ body.bilancontrib #navigation {
 .cadre-bilancontrib {
 	margin-top: 40px;
 }
-.cadre-bilancontrib .objets, .cadre-bilancontrib .auteurs, .cadre-bilancontrib .documents {
+.cadre-bilancontrib .bc_objets,
+.cadre-bilancontrib .bc_auteurs,
+.cadre-bilancontrib .bc_documents {
 	overflow:auto;
 }
-.cadre-bilancontrib th.annee, .bilancontrib th.total, .bilancontrib th.extension, .bilancontrib th.objet {
+.cadre-bilancontrib table {
+	width:100%;
+   margin-top: 10px ;
+   border:thin #000 solid;
+}
+.cadre-bilancontrib .visualize {
+   margin-left:auto;
+   margin-right:auto;
+   margin-top:0;
+   margin-bottom:30px;
+}
+
+.cadre-bilancontrib .visualize .visualize-labels-y,
+.cadre-bilancontrib .visualize .visualize-labels-x {
+	font-size:0.8em;
+}
+
+.cadre-bilancontrib th.bc_annee,
+.cadre-bilancontrib th.bc_total,
+.cadre-bilancontrib th.bc_extension,
+.cadre-bilancontrib th.bc_objet,
+.cadre-bilancontrib th.bc_graph {
 	text-align:center;
 }
 
-.cadre-bilancontrib .objets td.nb, .bilancontrib .auteurs td.nb{
+.cadre-bilancontrib td.bc_graph,
+.cadre-bilancontrib td.bc_nb{
 	text-align:center;
 }
 
-.cadre-bilancontrib .documents td.extension, .bilancontrib .objets td.objet{
+.cadre-bilancontrib td.bc_auteur,
+.cadre-bilancontrib td.bc_extension,
+.cadre-bilancontrib td.bc_objet{
 	text-align:center;
 }
-.cadre-bilancontrib .documents td.nb{
+.cadre-bilancontrib .bc_documents td.bc_nb{
 	text-align:right;
 }
-.cadre-bilancontrib .documents td.taille{
+.cadre-bilancontrib .bc_documents td.bc_taille{
 	text-align:right;
 }
 
-.cadre-bilancontrib td.nb, .bilancontrib th.annee, .bilancontrib th.total {
-   border-left: 1px solid #999;
-}
 .cadre-bilancontrib .tr_foot td {
-   border-top: 1px solid #333;
    font-weight:bold;
 }
-.cadre-bilancontrib thead th {
-   border-bottom: 1px solid #333;
-}
-.cadre-bilancontrib .exportcsv{
+.cadre-bilancontrib .bc_exportcsv{
    position: absolute;
    right: -15px;
    top: -13px;
 }
-.cadre-bilancontrib .sousrub{
+.cadre-bilancontrib .bc_sousrub{
 	font-size:0.9em;
    color:#999;
 }
-.cadre-bilancontrib .sousrub td.objet {
+.cadre-bilancontrib .bc_sousrub .bc_objet {
 	text-align:right;
+}
+.cadre-bilancontrib .bc_graph {
+	background-color:#FFF;
+}
+.cadre-bilancontrib .tr_liste {
+    background-color: #EAFFF1;
+}
+.cadre-bilancontrib tr.row_first {
+    background: none repeat scroll 0 0 #FFFFCC;
 }

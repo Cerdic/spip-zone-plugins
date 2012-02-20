@@ -1,5 +1,10 @@
 <BOUCLE_condition(CONDITION){si #AUTORISER{afficher,bilancontrib}}>
-   [(#CHEMIN{images/bilancontrib-64.png}|balise_img{'','logo_titre'})]
+	<script type="text/javascript" src="#CHEMIN{javascript/excanvas.js}"></script>
+	<script type="text/javascript" src="#CHEMIN{javascript/visualize.jQuery.js}"></script>
+	<script type="text/javascript" src="#CHEMIN{javascript/bilancontrib.js}"></script>
+   <link rel="stylesheet" type="text/css" href="#CHEMIN{css/visualize.css}" />
+   <link rel="stylesheet" type="text/css" href="#CHEMIN{css/visualize-light.css}" />
+	[(#CHEMIN{images/bilancontrib-64.png}|balise_img{'','logo_titre'})]
    <h1><:bilancontrib:nom_plugin:></h1>
    <h4><:bilancontrib:slogan:></h4>
 
@@ -7,10 +12,9 @@
     
    [(#REM) Chercher les annees utilisees ]
    #SET{annees,#ARRAY}
-   <BOUCLE_articles_annees(ARTICLES){tout}>
-      [(#DATE|annee|unique|oui)
-       #SET{annees, #GET{annees}|push{#DATE|annee}}]
-   </BOUCLE_articles_annees>
+   <BOUCLE_articles_annees(ARTICLES){tout}>[
+   	(#DATE|annee|unique|oui) #SET{annees, #GET{annees}|push{#DATE|annee}}
+   ]</BOUCLE_articles_annees>
    
    <INCLURE{fond=prive/liste/bilancontrib_objets,annees=#GET{annees},id_secteur=#ENV{secteur}} />
    <INCLURE{fond=prive/liste/bilancontrib_auteurs,annees=#GET{annees},id_secteur=#ENV{secteur}} />
