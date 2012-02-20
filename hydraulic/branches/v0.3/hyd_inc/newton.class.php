@@ -41,36 +41,61 @@ Returns the x closest to c such that f(x) = 0.
             return None
 */
 abstract class acNewton {
-   protected $rTol;
-   protected $rDx;
-   private $iCpt=0;
-   private $iCptMax=50;
+    protected $rTol;
+    protected $rDx;
+    private $iCpt=0;
+    private $iCptMax=50;
 
-   abstract public function CalcFn($rX);
+    /**
+     * Calcul de la fonction f(x) dont on cherche le zéro.
+     * @param $rX x
+     * @return Calcul de la fonction
+     */
+    abstract protected function CalcFn($rX);
 
-   private function CalcDer($x) {
-      return ($this->CalcFn($x+$this->rDx)-$this->CalcFn($x-$this->rDx))/(2*$this->rDx);
-   }
+    /**
+     * Calcul de la dérivée f'(x) (peut être redéfini pour calcul analytique)
+     * @param $rX x
+     * @return Calcul de la fonction
+     */
+    protected function CalcDer($x) {
+        spip_log('Newton:CalcDer $rX='.$x,'hydraulic');
+        return ($this->CalcFn($x+$this->rDx)-$this->CalcFn($x-$this->rDx))/(2*$this->rDx);
+    }
 
-   private function FuzzyEqual($rFn) {
-      return (abs($rFn) < $this->rTol);
-   }
+    /**
+     * Test d'égalité à une tolérance près
+     * @param $rFn x
+     * @return True si égal, False sinon
+     */
+    private function FuzzyEqual($rFn) {
+        return (abs($rFn) < $this->rTol);
+    }
 
-   public function Newton($rX) {
-      $this->iCpt++;
-      $rFn=$this->CalcFn($rX);
-      //echo $this->iCpt.' - f('.$rX.') = '.$rFn;
-      if($this->FuzzyEqual($rFn) || $this->iCpt >= $this->iCptMax) {
-         return $rX;
-      }
-      else {
-         $rDer=$this->CalcDer($rX);
-         //echo ' - f\\\' = '.$rDer.'<br/>';
-         if($rDer!=0) {
-            return $this->Newton($rX-$rFn/$rDer);
-         }
-      }
-   }
+    /**
+     * Fonction récursive de calcul de la suite du Newton
+     * @param $rX x
+     * @return Solution du zéro de la fonction
+     */
+    public function Newton($rX) {
+        $this->iCpt++;
+        $rFn=$this->CalcFn($rX);
+        //echo $this->iCpt.' - f('.$rX.') = '.$rFn;
+        if($this->FuzzyEqual($rFn) || $this->iCpt >= $this->iCptMax) {
+            return $rX;
+        }
+        else {
+            $rDer=$this->CalcDer($rX);
+            //echo ' - f\\\' = '.$rDer.'<br/>';
+            if($rDer!=0) {
+                return $this->Newton($rX-$rFn/$rDer);
+            }
+            else {
+                // Echec de la résolution
+                return false;
+            }
+        }
+    }
 }
 
 ?>

@@ -249,14 +249,14 @@ $fdbg = fopen('debug.log','w');
         $echo.='"><td>'.format_nombre($rX,$iPrec).'</td>';
         if(isset($tr['X1']) && !(($cle = array_search($rX,$tr['X1'])) === false)) {
             $echo .= '<td>'.format_nombre($tr['Y1'][$cle],$iPrec).'</td>';
-            $echo .= '<td>'.format_nombre($oSection->ReCalcFr($oParam, $tr['Y1'][$cle]),$iPrec).'</td>';
+            $echo .= '<td>'.format_nombre($oSection->Calc('Fr', $tr['Y1'][$cle]),$iPrec).'</td>';
         }
         else {
             $echo .= '<td></td><td></td>';
         }
         if(isset($tr['X2']) && !(($cle = array_search($rX,$tr['X2'])) === false)) {
             $echo .= '<td>'.format_nombre($tr['Y2'][$cle],$iPrec).'</td>';
-            $echo .= '<td>'.format_nombre($oSection->ReCalcFr($oParam, $tr['Y2'][$cle]),$iPrec).'</td>';
+            $echo .= '<td>'.format_nombre($oSection->Calc('Fr', $tr['Y2'][$cle]),$iPrec).'</td>';
         }
         else {
             $echo .= '<td></td><td></td>';
