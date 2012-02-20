@@ -98,14 +98,10 @@
             <BOUCLE_annees_pds_documents(POUR){tableau #ENV{annees}}{par cle}>
 					[(#REM) Documents des articles ]
                #SET{taille,0}
-               <BOUCLE_pds_documents_a(DOCUMENTS){documents_liens.objet = article}{articles.id_secteur?}{extension=#GET{extension}}{annee=#VALEUR}>
-                  #SET{taille,#GET{taille}|plus{#TAILLE}}
-               </BOUCLE_pds_documents_a>
+               <BOUCLE_pds_documents_a(DOCUMENTS){documents_liens.objet = article}{articles.id_secteur?}{extension=#GET{extension}}{annee=#VALEUR}> #SET{taille,#GET{taille}|plus{#TAILLE}}</BOUCLE_pds_documents_a>
 
 					[(#REM) Documents des rubriques ]
-               <BOUCLE_pds_documents_r(DOCUMENTS){documents_liens.objet = rubrique}{rubriques.id_secteur?}{extension=#GET{extension}}{annee=#VALEUR}>
-                  #SET{taille,#GET{taille}|plus{#TAILLE}}
-               </BOUCLE_pds_documents_r>
+               <BOUCLE_pds_documents_r(DOCUMENTS){documents_liens.objet = rubrique}{rubriques.id_secteur?}{extension=#GET{extension}}{annee=#VALEUR}> #SET{taille,#GET{taille}|plus{#TAILLE}}</BOUCLE_pds_documents_r>
                #SET{taille_totale,#GET{taille_totale}|plus{#GET{taille}}}
                #SET{taille_annee,#GET{taille_annuel}|table_valeur{annee#VALEUR}|plus{#GET{taille}}}
                #SET{taille_annuel,#GET{taille_annuel}|array_merge{#ARRAY{annee#VALEUR,#GET{taille_annee}}}}
