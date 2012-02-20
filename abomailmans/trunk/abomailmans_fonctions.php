@@ -3,20 +3,11 @@
  * Abomailmans
  * MaZiaR - NetAktiv
  * tech@netaktiv.com
- * Printemps 2007 - 2009
+ * Printemps 2007 - 2012
  * $Id$
 */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
-function abomailman_inputhidden ($texte) {
-	$liste = explode ("@", $texte);
-	$nom_liste_join = $liste[0] ."-join";
-	$domaine = $liste[1];
-	$abonnement = $nom_liste_join . "@" . $domaine;
-
-	return $texte = "<input name=\"listes[]\" value=\"" . $abonnement . "\" type=\"hidden\" />";	
-}
 
 function nettoie_chemin($chemin){
 	$liste = explode ("/", $chemin);
