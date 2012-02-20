@@ -6,8 +6,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
-	'abomailman' => 'Liste de diffusion ou discussion',
-	'abomailmans' => 'Listes de diffusion ou discussion',
+	'abomailman' => 'Liste de diffusion ou discussions',
+	'abomailmans' => 'Listes de diffusion ou discussions',
 	'abonne' => 'Je m\'abonne',
 	'activation' => 'Activation',
 	'active' => 'Active',
@@ -63,7 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_abomailmans_nb' => '@nb@ listes',
 	'info_sisympa' => '[Obligatoire si liste Sympa]',
 	'insciption_listes_legende' => 'Abonnement au listes de diffusion',
-	'inscription_lettres_legende' => 'Abonnement aux listes de <br />diffusion et de discussions',
+	'inscription_lettres_legende' => 'Abonnement aux listes de diffusion et de discussions',
 
 	// J
 	'je_m_abonne' => 'Cochez pour valider l\'abonnement ou le d&eacute;sabonnement.',
