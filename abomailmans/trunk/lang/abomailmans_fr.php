@@ -6,7 +6,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
-	'abomailmans' => 'Mailmans',
+	'abomailmans' => 'Listes de diffusion ou discussion',
 	'abonne' => 'Je m\'abonne',
 	'activation' => 'Activation',
 	'active' => 'Active',

@@ -9,18 +9,18 @@
 			<li class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur] editer_type_input">
 				<label for="titre" class="obligatoire"><:texte_titre_obligatoire:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
-				<input type="text" id="titre" name="titre" value="[(#ENV**{titre})]" class="multilang" size="50" />
+				<input type="text" id="titre" name="titre" value="[(#ENV**{titre})]" class="text multilang" size="50" />
 			</li>
 			<li class='editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur] editer_type_textarea'>
 				<label for='descriptif'><:abomailmans:texte_descriptif:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
-				]<textarea name='descriptif' id='descriptif' class='multilang' cols='40' rows='2'>[(#ENV**{descriptif})]</textarea>
+				]<textarea name='descriptif' id='descriptif' class='text multilang' cols='40' rows='2'>[(#ENV**{descriptif})]</textarea>
 			</li>
 			<li class="fieldset">
 				<fieldset>
 					<h3 class="legend"><:abomailmans:emails_a_renseigner:></h3>
 	      				<ul>
-							<li class="editer editer_email[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
+							<li class="editer obligatoire editer_email[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
 								<label for="email" class="obligatoire"><:abomailmans:destinataire:></label>
 								<p class="explication"><:abomailmans:emailliste_abomailman:></p>
 								[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>]
@@ -90,7 +90,7 @@
 					<fieldset>
 						<h3 class="legend"><:abomailmans:label_etat_liste:></h3>
 						<ul>
-							<li class="editer editer_desactive">
+							<li class="editer editer_desactive obligatoire">
 								<label for="desactive_active"><:abomailmans:activation:></label>
 								<div class="choix">
 									<input type="radio" value="0" id="desactive_active" name="desactive"[(#ENV{desactive}|=={0}|oui) checked="checked"] />
@@ -101,7 +101,7 @@
 									<label for="desactive_desactive"><:abomailmans:desactive:></label>
 								</div>
 							</li>
-							[(#ENV{id_abomailman}|oui)
+							[(#ENV{id_abomailman}|intval|oui)
 							<li class="editer editer_desactive_supprime">
 								<label for="desactive_supprime"><:abomailmans:supprimer:></label>
 								<div class="choix">

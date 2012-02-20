@@ -36,6 +36,14 @@
 		<h1><:abomailmans:icone_ajouter_liste:></h1>
 	</div>
 	<//B_liste>
-	
-	#FORMULAIRE_ABOMAILMAN_CREATION_LISTE{#ENV{id_abomailman}}
+	#SET{redirect,#ENV{redirect,#ID_ABOMAILMAN|generer_url_entite{abomailman}}}
+	[(#ENV{retourajax,''}|oui)
+		#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+		<div class="ajax">
+	]
+	#FORMULAIRE_ABOMAILMAN_CREATION_LISTE{#ENV{id_abomailman,oui},#GET{redirect}}
+	[(#ENV{retourajax,''}|oui)
+		</div>
+		<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#extra');/*\]\]>*/</script>
+	]
 </div>
