@@ -92,21 +92,26 @@ var map[(#GET{id})];
 		catch(err) {
 			;
 		}
-
-		[(#ENV{no_control,#ENV{aucun_controle}}|!={oui}|oui)
-		map[(#GET{id})].addControls({zoom: '[(#ENV{control_zoom,large})]'});]
-	
-		[(#ENV{overview}|oui)
-		map[(#GET{id})].addControls({overview: true});]
-	
-		[(#ENV{scale}|oui)
-		map[(#GET{id})].addControls({scale: true});]
-	
-		[(#ENV{control_type,#ENV{controle_type}}|!={non}|oui)
-		map[(#GET{id})].addControls({map_type: true});]
 		
+		#SET{map_controls,#ARRAY}
+		
+		[(#ENV{no_control,#ENV{aucun_controle}}|!={oui}|oui)
+			[(#SET{map_controls,#GET{map_controls}|array_merge{#ARRAY{zoom,#ENV{control_zoom,large}}}})]
+		]
+		[(#ENV{overview}|oui)
+			[(#SET{map_controls,#GET{map_controls}|array_merge{#ARRAY{overview,true}}})]
+		]
+		[(#ENV{scale}|oui)
+			[(#SET{map_controls,#GET{map_controls}|array_merge{#ARRAY{scale,true}}})]
+		]
+			[(#ENV{control_type,#ENV{controle_type}}|!={non}|oui)
+		[(#SET{map_controls,#GET{map_controls}|array_merge{#ARRAY{map_type,true}}})]
+		]
 		[(#ENV{control_pan,#ENV{contole_pan}}|!={non}|oui)
-		map[(#GET{id})].addControls({pan: true});]
+			[(#SET{map_controls,#GET{map_controls}|array_merge{#ARRAY{pan,true}}})]
+		]
+		
+		map[(#GET{id})].addControls([(#GET{map_controls}|json_encode)]);
 
 		[(#ENV{point}|!={non}|oui)
 		jQuery.getJSON("[(#URL_PAGE{gis_json}|url_absolue)]",
