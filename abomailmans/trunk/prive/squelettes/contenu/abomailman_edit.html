@@ -22,7 +22,7 @@
 		#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
 		<div class="ajax">
 	]
-	#FORMULAIRE_ABOMAILMAN_CREATION_LISTE{#ENV{id_abomailman,oui},#GET{redirect}}
+	#FORMULAIRE_EDITER_ABOMAILMAN{#ENV{id_abomailman,oui},#GET{redirect}}
 	[(#ENV{retourajax,''}|oui)
 		</div>
 		<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#extra');/*\]\]>*/</script>

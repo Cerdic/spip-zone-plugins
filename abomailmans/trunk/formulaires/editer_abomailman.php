@@ -6,17 +6,14 @@ include_spip('inc/autoriser');
 include_spip('inc/actions');
 include_spip('inc/editer');
 
-function abomailmans_edit_config(){
-	return array();
-}
-
 // chargement des valeurs par defaut des champs du formulaire
-function formulaires_abomailman_creation_liste_charger_dist($id_abomailman='new',$retour='', $config_fonc='abomailmans_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_abomailman_liste_charger_dist($id_abomailman='new',$retour='', $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = array();
-	if (!intval($id_abomailman)) $id_abomailman='oui'; // oui pour le traitement de l'action (new, c'est pas suffisant)
+
 	//initialise les variables d'environnement pas défaut
-	if (!autoriser('ecrire', 'abomailman', $id_abomailman)) {
+	if (!autoriser('creer', 'abomailman', 'oui')) {
 		$editable = false;
+		spip_log('false','test');
 	}else{
 		$valeurs = formulaires_editer_objet_charger('abomailman',$id_abomailman,0,0,$retour,$config_fonc,$row,$hidden);
 		$editable = true;
@@ -27,14 +24,22 @@ function formulaires_abomailman_creation_liste_charger_dist($id_abomailman='new'
 	}
 	unset($valeurs['lang']);
 
-	$recuptemplate = explode('&',$valeurs['modele_defaut']);
+	$recuptemplate = explode('&',_request('modele_defaut'));
 	$valeurs['template'] = $recuptemplate[0];
-	$valeurs['envoi_liste_parametres']=recup_param($valeurs['modele_defaut']);
+	$valeurs['envoi_liste_parametres']=recup_param(_request('modele_defaut'));
 	$valeurs['editable'] = $editable;
 	return $valeurs;
 }
 
-function formulaires_abomailman_creation_liste_verifier_dist($id_abomailman='oui',$retour='', $config_fonc='abomailmans_edit_config', $row=array(), $hidden=''){
+/**
+ * Identifier le formulaire en faisant abstraction des parametres qui
+ * ne representent pas l'objet edite
+ */
+function formulaires_editer_abomailman_identifier_dist($id_abomailman='new', $retour='', $associer_objet='', $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
+	return serialize(array(intval($id_abomailman),$associer_objet));
+}
+
+function formulaires_editer_abomailman_verifier_dist($id_abomailman='new',$retour='', $config_fonc='', $row=array(), $hidden=''){
 
 	//initialise le tableau des erreurs
 	$erreurs = formulaires_editer_objet_verifier('abomailman',$id_abomailman,array('titre','email'));
@@ -60,7 +65,7 @@ function formulaires_abomailman_creation_liste_verifier_dist($id_abomailman='oui
     return $erreurs; // si c'est vide, traiter sera appele, sinon le formulaire sera resoumis
 }
 
-function formulaires_abomailman_creation_liste_traiter_dist($id_abomailman='oui',$retour='', $config_fonc='abomailmans_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_abomailman_traiter_dist($id_abomailman='new',$retour='', $config_fonc='', $row=array(), $hidden=''){
 	$res = formulaires_editer_objet_traiter('abomailman',$id_abomailman,0,0,$retour,$config_fonc,$row,$hidden);
    
    	$message = array();
