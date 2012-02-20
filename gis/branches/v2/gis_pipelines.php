@@ -79,6 +79,10 @@ function gis_affiche_milieu($flux){
 				$objet = 'document';
 				$id_objet = $flux['args']['id_document'];
 				break;
+			case 'evenements_edit':
+				$objet = 'evenement';
+				$id_objet = $flux['args']['id_evenement'];
+				break;
 			default:
 				$objet = $id_objet = '';
 				break;
