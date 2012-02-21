@@ -23,8 +23,8 @@ function formulaires_configurer_produits_saisies_dist(){
 			'saisie' => 'oui_non',
 			'options' => array(
 				'nom' => 'editer_ttc',
-				'label' => _T('produits:editer_ttc_label'),
-				'explication' => _T('produits:editer_ttc_explication'),
+				'label' => _T('produits:configurer_editer_ttc_label'),
+				'explication' => _T('produits:configurer_editer_ttc_explication'),
 				'defaut' => $config['editer_ttc'],
 			)
 		),

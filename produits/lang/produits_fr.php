@@ -6,13 +6,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
+    'configurer_editer_ttc_label' => 'Editer les produits en TTC',
+    'configurer_editer_ttc_explication' => 'Les prix des produits sont éditables en TTC et non plus en HT',
 	'configurer_taxe_defaut_explication' => 'Saisir la taxe par défaut applicable aux produits sous la forme 0.196 pour une TVA à 19,6% par exemple (cette valeur peut être surchargée ensuite pour chaque produit).',
 	'configurer_taxe_defaut_label' => 'Taxe par défaut',
 	'configurer_titre' => 'Configuration des produits',
-
-    // E
-    'editer_ttc_label' => 'Editer les produits en TTC',
-    'editer_ttc_explication' => 'Les prix des produits sont éditables en TTC et non plus en HT',
 
 	// I
 	'info_1_produit' => 'Un produit',
