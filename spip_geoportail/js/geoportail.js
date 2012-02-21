@@ -916,8 +916,9 @@ jQuery.geoportail =
 			// Afficher la vue globale
 			if (box.overview=="1") jQuery.geoportail.setOverview(map);
 			// Limiter le zoom
-			if (visu.minZ) map.getMap().minZoomLevel = visu.minZ;
-			if (visu.maxZ) map.getMap().maxZoomLevel = visu.maxZ;
+			if (visu.minZ) map.getMap().minZoomLevel = parseInt(visu.minZ);
+			if (visu.maxZ) map.getMap().maxZoomLevel = parseInt(visu.maxZ);
+			alert (visu.minZ + '-' +visu.maxZ);
 
 			// Style d'affichage par defaut
 			OpenLayers.Feature.Vector.style['default'].fillOpacity = 0.8;
@@ -1213,10 +1214,11 @@ jQuery.geoportail =
 		jQuery.geoportail.fsMap = map;
 		
 		function delayResizeMap()
-		{	if ((--jQuery.geoportail.fsCompteur) > 0) return;
+		{	jQuery.geoportail.fsCompteur--;
+			if (jQuery.geoportail.fsCompteur > 0) return;
+			jQuery.geoportail.fsCompteur = 0;
 			if (!jQuery.geoportail.fsMap) return;
 			var i;
-			jQuery.geoportail.fsCompteur = 0;
 			// Calcul hauteur et largeur
 			var de = document.documentElement;
 			var w = window.innerWidth || (de&&de.clientWidth) || document.body.clientWidth; // jQuery(window).width();
@@ -1264,14 +1266,16 @@ jQuery.geoportail =
 if (!$.fn.outerHeight)
 {	jQuery.fn.extend ({
 		outerHeight:function(b) 
-		{	var totalHeight = this.height();
+		{	if (!this.length) return 0;
+			var totalHeight = this.height();
 			totalHeight += parseInt(this.css("padding-top")) + parseInt(this.css("padding-bottom"));			//Total Padding Height
 			totalHeight += parseInt(this.css("borderTopWidth")) + parseInt(this.css("borderBottomWidth"));		//Total Border Height
 			if (b) totalHeight += parseInt(this.css("margin-top")) + parseInt(this.css("margin-bottom"));		//Total Margin Height
 			return totalHeight;
 		},
 		outerWidth:function(b) 
-		{	var totalWidth = this.width();
+		{	if (!this.length) return 0;
+			var totalWidth = this.width();
 			totalWidth += parseInt(this.css("padding-left")) + parseInt(this.css("padding-right"));				//Total Padding Width
 			totalWidth += parseInt(this.css("borderLeftWidth")) + parseInt(this.css("borderRightWidth"));		//Total Border Width
 			if (b) totalWidth += parseInt(this.css("margin-left")) + parseInt(this.css("margin-right"));		//Total Margin Width

@@ -189,16 +189,16 @@ OpenLayers.Popup.SpipPopup =
 
 /** Autres definition
 */
-OpenLayers.Popup.SpipPopupjqBubble = OpenLayers.Class(OpenLayers.Popup.SpipPopup, { 'displayClass':OpenLayers.Popup.SpipPopupjqBubble, 'dOverlap':5 });
+OpenLayers.Popup.SpipPopupjqBubble = OpenLayers.Class(OpenLayers.Popup.SpipPopup, { displayClass:'SpipPopupjqBubble', dOverlap:5 });
 
-OpenLayers.Popup.SpipPopupqTip = OpenLayers.Class(OpenLayers.Popup.SpipPopup, { 'displayClass':OpenLayers.Popup.SpipPopupqTip, 'dOverlap':5, dRound:-8 });
+OpenLayers.Popup.SpipPopupqTip = OpenLayers.Class(OpenLayers.Popup.SpipPopup, { displayClass:'SpipPopupqTip', dOverlap:5, dRound:-8 });
 
-OpenLayers.Popup.SpipPopupClassic = OpenLayers.Class(OpenLayers.Popup.SpipPopup, { 'displayClass':OpenLayers.Popup.SpipPopupClassic, 'dOverlap':8 });
+OpenLayers.Popup.SpipPopupClassic = OpenLayers.Class(OpenLayers.Popup.SpipPopup, { displayClass:'SpipPopupClassic', dOverlap:8 });
 
-OpenLayers.Popup.SpipPopupShadow = OpenLayers.Class(OpenLayers.Popup.SpipPopup, { 'displayClass':OpenLayers.Popup.SpipPopupShadow, 'dOverlap':11 });
+OpenLayers.Popup.SpipPopupShadow = OpenLayers.Class(OpenLayers.Popup.SpipPopup, { displayClass:'SpipPopupShadow', dOverlap:11 });
 
-OpenLayers.Popup.SpipPopupThink = OpenLayers.Class(OpenLayers.Popup.SpipPopup, { 'displayClass':OpenLayers.Popup.SpipPopupThink, 'dOverlap':18, dRound:15 });
+OpenLayers.Popup.SpipPopupThink = OpenLayers.Class(OpenLayers.Popup.SpipPopup, { displayClass:'SpipPopupThink', dOverlap:18, dRound:15 });
 
-OpenLayers.Popup.SpipPopupBlack = OpenLayers.Class(OpenLayers.Popup.SpipPopup, { 'displayClass':OpenLayers.Popup.SpipPopupBlack, 'dOverlap':0 });
+OpenLayers.Popup.SpipPopupBlack = OpenLayers.Class(OpenLayers.Popup.SpipPopup, { displayClass:'SpipPopupBlack', dOverlap:0 });
 
 }

@@ -12,6 +12,7 @@
 *
 **/
 
+include_spip ('public/assembler');
 
 function geoportail_insert_head($flux)
 {	// Logo des couches SPIP
@@ -24,7 +25,7 @@ function geoportail_insert_head($flux)
 	$popup = "jQuery.geoportail.spip_popup = '".($popup?$popup:"Anchored")."';"
 		." jQuery.geoportail.hover = ".($GLOBALS['meta']['geoportail_hover'] ?"true;":"false;");
 	// Repertoire du popup
-	$repop = dirname(chemin('img/cloud-popup-relative.png'));
+	$repop = dirname(find_in_path('img/cloud-popup-relative.png'));
 	$repop = "jQuery.geoportail.imgPath = '$repop/';";
 
 	$flux .=
