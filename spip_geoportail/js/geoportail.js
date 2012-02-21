@@ -918,7 +918,6 @@ jQuery.geoportail =
 			// Limiter le zoom
 			if (visu.minZ) map.getMap().minZoomLevel = parseInt(visu.minZ);
 			if (visu.maxZ) map.getMap().maxZoomLevel = parseInt(visu.maxZ);
-			alert (visu.minZ + '-' +visu.maxZ);
 
 			// Style d'affichage par defaut
 			OpenLayers.Feature.Vector.style['default'].fillOpacity = 0.8;
