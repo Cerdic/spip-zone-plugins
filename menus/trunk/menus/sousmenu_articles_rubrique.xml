@@ -1,0 +1,11 @@
+<entree>
+	<nom><:menus:nom_sousmenu_articles_rubrique:></nom>
+	<rang>04</rang>
+	<description><:menus:description_sousmenu_articles_rubrique:></description>
+	<icone>images/menus_articles_rubrique.png</icone>
+	<parametre nom="id_rubrique" label="menus:entree_id_rubrique" />
+	<parametre nom="nombre" label="menus:entree_nombre_articles" />
+	<parametre nom="tri_num" label="menus:entree_tri_num_articles" />
+	<parametre nom="tri_alpha" label="menus:entree_tri_alpha_articles" />
+	<refuser_sous_menu/>
+</entree>
