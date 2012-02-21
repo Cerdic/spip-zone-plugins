@@ -6,7 +6,7 @@ include_spip('inc/config');
 include_spip('inc/editer');
 
 function formulaires_editer_produit_saisies($id_produit='new', $id_rubrique=0, $retour=''){
-	return array(
+	$saisies = array(
 		array(
 			'saisie' => 'input',
 			'options' => array(
@@ -79,6 +79,25 @@ function formulaires_editer_produit_saisies($id_produit='new', $id_rubrique=0, $
 			)
 		),
 	);
+
+    if (lire_config('produits/editer_ttc')) {
+        $saisie_prix_ttc = array(
+		    'saisie' => 'input',
+		    'options' => array(
+			    'nom' => 'prix_ttc',
+			    'obligatoire' => 'oui',
+			    'label' => _T('produits:produit_champ_prix_ttc_label'),
+			    'defaut' => 0,
+		    ),
+		    'verifier' => array(
+			    'type' => 'decimal'
+		    )
+	    );
+        $saisies = saisies_inserer($saisies,$saisie_prix_ttc,'prix_ht');
+        $saisies = saisies_supprimer($saisies,'prix_ht');
+    }
+
+    return $saisies;
 }
 
 function formulaires_editer_produit_charger($id_produit='new', $id_rubrique=0, $retour=''){
@@ -89,6 +108,9 @@ function formulaires_editer_produit_charger($id_produit='new', $id_rubrique=0, $
 	}
 	$contexte = formulaires_editer_objet_charger('produit', $id_produit, $id_rubrique, 0, $retour, '');
 	$contexte['id_parent'] = 'rubrique|'.($contexte['id_rubrique']?$contexte['id_rubrique']:$id_rubrique);
+    //Calculer le prix TTC selon le contexte
+    $taxe = $contexte['taxe'] ? $contexte['taxe'] : lire_config('produits/taxe', 0);
+    $contexte['prix_ttc'] = $contexte['prix_ht'] * (1+$taxe);
 	unset($contexte['id_produit']);
 	unset($contexte['id_rubrique']);
 	return $contexte;
@@ -116,6 +138,10 @@ function formulaires_editer_produit_verifier($id_produit='new', $id_rubrique=0, 
 
 function formulaires_editer_produit_traiter($id_produit='new', $id_rubrique=0, $retour=''){
 	set_request('id_parent', produits_id_parent());
+    if (lire_config('produits/editer_ttc')) {
+        $prix_ht = _request('prix_ttc') / (1+_request('taxe',lire_config('taxe',0)));
+        set_request('prix_ht',$prix_ht);
+    }
 	$retours = formulaires_editer_objet_traiter('produit',$id_produit,$id_rubrique,0,$retour);
 	return $retours;
 }
