@@ -94,7 +94,7 @@ function formulaires_editer_produit_saisies($id_produit='new', $id_rubrique=0, $
 		    )
 	    );
         $saisies = saisies_inserer($saisies,$saisie_prix_ttc,'prix_ht');
-        $saisies = saisies_supprimer($saisies,'prix_ht');
+        $saisies = saisies_modifier($saisies,'prix_ht',array('options' => array('nouveau_type_saisie' => 'hidden')));
     }
 
     return $saisies;
