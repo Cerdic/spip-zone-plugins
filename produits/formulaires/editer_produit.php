@@ -139,7 +139,7 @@ function formulaires_editer_produit_verifier($id_produit='new', $id_rubrique=0, 
 function formulaires_editer_produit_traiter($id_produit='new', $id_rubrique=0, $retour=''){
 	set_request('id_parent', produits_id_parent());
     if (lire_config('produits/editer_ttc')) {
-        $prix_ht = _request('prix_ttc') / (1+_request('taxe',lire_config('taxe',0)));
+        $prix_ht = _request('prix_ttc') / (1+_request('taxe',lire_config('produits/taxe',0)));
         set_request('prix_ht',$prix_ht);
     }
 	$retours = formulaires_editer_objet_traiter('produit',$id_produit,$id_rubrique,0,$retour);
