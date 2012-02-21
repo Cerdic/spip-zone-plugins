@@ -110,7 +110,7 @@ function formulaires_editer_produit_charger($id_produit='new', $id_rubrique=0, $
 	$contexte['id_parent'] = 'rubrique|'.($contexte['id_rubrique']?$contexte['id_rubrique']:$id_rubrique);
     //Calculer le prix TTC selon le contexte
     $taxe = $contexte['taxe'] ? $contexte['taxe'] : lire_config('produits/taxe', 0);
-    $contexte['prix_ttc'] = $contexte['prix_ht'] * (1+$taxe);
+    $contexte['prix_ttc'] = round($contexte['prix_ht'] * (1+$taxe),lire_config('produits/precision_ttc',2));
 	unset($contexte['id_produit']);
 	unset($contexte['id_rubrique']);
 	return $contexte;

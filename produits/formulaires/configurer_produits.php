@@ -29,6 +29,20 @@ function formulaires_configurer_produits_saisies_dist(){
 			)
 		),
 		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'precision_ttc',
+				'label' => _T('produits:configurer_precision_ttc_label'),
+				'explication' => _T('produits:configurer_precision_ttc_explication'),
+				'defaut' => $config['precision_ttc'],
+                'afficher_si' => '@editer_ttc@ == "on"' 
+			),
+			'verifier' => array(
+				'type' => 'decimal'
+			)
+		),
+
+		array(
 			'saisie' => 'oui_non',
 			'options' => array(
 				'nom' => 'limiter_ajout',
