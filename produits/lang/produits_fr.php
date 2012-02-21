@@ -10,6 +10,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_taxe_defaut_label' => 'Taxe par défaut',
 	'configurer_titre' => 'Configuration des produits',
 
+    // E
+    'editer_ttc_label' => 'Editer les produits en TTC',
+    'editer_ttc_explication' => 'Les prix des produits sont éditables en TTC et non plus en HT',
+
 	// I
 	'info_1_produit' => 'Un produit',
 	'info_aucun_produit' => 'Aucun produit',
@@ -25,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'produit_bouton_ajouter' => 'Ajouter un produit',
 	'produit_champ_descriptif_label' => 'Court descriptif',
 	'produit_champ_prix_ht_label' => 'Prix HT',
+    'produit_champ_prix_ttc_label' => 'Prix TTC',
 	'produit_champ_reference_label' => 'Référence',
 	'produit_champ_rubrique_label' => 'Rubrique',
 	'produit_champ_taxe_explication' => 'Valeur par défaut sur le site : @taxe@. Ce champ peut être laissé vide.',
