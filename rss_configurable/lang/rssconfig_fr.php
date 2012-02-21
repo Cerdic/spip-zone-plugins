@@ -5,8 +5,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// C
 	'configurer_rssconfig' => 'Configurer le flux RSS',
+	
+	// E
 	'explication_age_art' => 'Indiquez un nombre de jours. Les articles ayant un âge inférieur à ce critère seront inclus dans le flux. Mettez 0 pour ne pas utiliser ce critère.',
+	'explication_age_modif' => 'Inclure également les articles plus anciens mais modifiés récemment ? Indiquez l\'âge de la modification en jours, 0 si vous ne souhaitez pas inclure les articles modifiés récemment.',
 	'explication_articles_a_inclure' => 'Par défaut, SPIP inclut dans le flux les 10 derniers articles publiés ainsi que les articles publiés il y a moins de trois jours. Vous pouvez modifier ci-dessous ces deux critères.',
 	'explication_rubriques' => 'Par défaut, SPIP inclut dans le flux les articles publiés de toutes les rubriques du site. Vous pouvez modifier ci-dessous le choix des rubriques à traiter. L\'appel au fichier backend avec un id_rubrique spécifique reste inchangé si le paramétrage ci-dessous est renseigné.',
 	'explication_rubriques_a_inclure' => 'Saisir les numéros des rubriques à inclure séparés par une virgule (les sous-rubriques seront automatiquement rajoutées). Ne rien saisir pour que toutes les rubriques soient traitées.',
@@ -17,7 +21,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_diffuser_rubrique' => 'Diffuser la rubrique dans le flux comme catégorie de l\'article ?',
 	'explication_nb_art' => 'Nombre d\'articles à afficher parmi les plus récents. Mettez 0 pour ne pas utiliser ce critère.',
 	'explication_syndication_integrale' => 'Diffuser les articles dans leur intégralité ? (Si non, seul un résumé sera diffusé.)',
+	
+	// L
 	'label_age_art' => 'Critère d\'âge',
+	'label_age_modif' => 'Modifiés récemment',
 	'label_articles_a_inclure' => 'Articles à inclure',
 	'label_choix_creator_aucun' => 'Aucun',
 	'label_choix_creator_auteurs' => 'Auteurs de l\'article dans SPIP',
@@ -31,6 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_rubriques' => 'Rubriques',
 	'label_rubriques_a_inclure' => 'Rubriques à inclure',
 	'label_syndication_integrale' => 'Syndication intégrale',
+	
+	// R
 	'rssconfig' => 'Flux RSS',
 
 );

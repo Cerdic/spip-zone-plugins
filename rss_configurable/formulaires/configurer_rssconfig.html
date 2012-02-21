@@ -22,6 +22,11 @@
 						<p class="explication"><:rssconfig:explication_age_art:></p>
 						<input type="text" name="age_art" class="text" id="age_art" value="#ENV*{age_art,3}" />
 					</li>
+               <li class="editer_age_modif[ (#ENV**{erreurs}|table_valeur{age_modif}|oui)erreur]">
+                  <label for='age_modif'><:rssconfig:label_age_modif:></label>
+                  <p class="explication"><:rssconfig:explication_age_modif:></p>
+                  <input type="text" name="age_modif" class="text" id="age_modif" value="#ENV*{age_modif,0}" />
+               </li>
 				</ul>
          </fieldset>
       </li>
