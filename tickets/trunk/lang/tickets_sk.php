@@ -14,14 +14,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'assignation_modifiee' => 'Priradenie bolo aktualizované',
 	'assignation_non_modifiee' => 'Priradenie nebolo aktualizované',
 	'assignation_supprimee' => 'Priradenie tohto lístka bolo odstránené.',
-	'assigne_a' => 'Priradené k:',
-	'assignes_a' => 'Priradené k',
+	'assigne_a' => 'Priradené komu:',
+	'assignes_a' => 'Priradené komu',
 	'autres_tickets_ouverts' => 'Ďalšie otvorené lístky',
 
 	// C
 	'cfg_bouton_radio_desactiver_forum_public' => 'Deaktivovať používanie verejných diskusných fór.',
 	'cfg_descr_tickets' => 'Nastavenia zásuvného modulu lístky pre SPIP',
-	'cfg_explication_cacher_moteurs' => 'Cache les tickets des moteurs de recherche en leur demandant de ne pas indexer leur contenus lorsqu\'ils sont affichés dans l\'espace public.', # NEW
+	'cfg_explication_cacher_moteurs' => 'Kešovať lístky vyhľadávačov s požiadavkou, aby neidexovali text lístkov, keď nie sú zobrazené na verejne prístupnej stránke',
 	'cfg_explication_composants' => 'Súčasti oddeľte znakom ":".',
 	'cfg_explication_jalons' => 'Míľniky oddeľte znamkom ":".',
 	'cfg_explication_projets' => 'Projekty oddeľte znakom ":".',
@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_projets' => 'Projekty',
 	'cfg_lbl_selecteur_navigateur' => 'Vybrať prehliadač',
 	'cfg_lbl_statuts_auteurs' => 'Možné funkcie',
-	'cfg_lbl_type_autorisation' => 'Méthode d\'autorisation', # NEW
+	'cfg_lbl_type_autorisation' => 'Spôsob overenia totožnosti',
 	'cfg_lbl_versions' => 'Verzie',
 	'cfg_lgd_autorisation_assigner' => 'Priradiť lístky',
 	'cfg_lgd_autorisation_commenter' => 'Okomentovať lístky',
@@ -57,7 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lgd_champs_options_autres' => 'Ďalšie možnosti',
 	'cfg_lgd_notifs_forums' => 'Diskusné fóra a oznamy',
 	'cfg_titre_tickets' => 'Lístky',
-	'champ_assigner' => 'Priradiť k:',
+	'champ_assigner' => 'Priradiť komu:',
 	'champ_composant' => 'Súčasť:',
 	'champ_createur' => 'Vytvoril(a):',
 	'champ_date' => 'Dátum:',
@@ -89,7 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_version' => 'Verzia:',
 	'changement_statut_mail' => 'Stav tohto lístka sa zmenil z(o) "@ancien@" na "@nouveau@".',
 	'classement_assigne' => 'Lístky podľa priradenia',
-	'classement_asuivre' => 'Vaše lístky na sledovanie',
+	'classement_asuivre' => 'Lístky na sledovanie',
 	'classement_jalon' => 'Lístky podľa míľnika',
 	'classement_termine' => 'Ukončené lístky',
 	'classement_type' => 'Lístky podľa typu',
@@ -108,14 +108,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_texte_longueur_mini' => 'Minimálna dĺžka textu je @nb@ znakov.',
 	'erreur_verifier_formulaire' => 'Skontrolujte si svoj formulár',
 	'explication_champ_sticked' => 'Lístky budú vždy zobrazené najprv ako prilepené, a to bez ohľadu na ich stav.',
-	'explication_description_ticket' => 'Décrivez aussi précisément que possible le besoin ou le problème rencontré.
-	Indiquez en particulier s’il se produit systématiquement ou occasionnellement.
-	S’il s’agit d’un problème d\'affichage, précisez avec quel navigateur vous le rencontrez.', # NEW
-	'explication_description_ticket_ss_nav' => 'Décrivez aussi précisément que possible le besoin ou le problème rencontré.
-	Indiquez en particulier s’il se produit systématiquement ou occasionnellement.', # NEW
+	'explication_description_ticket' => 'Problém alebo potrebu opíšte tak presne, ako sa len dá.
+	Uveďte najmä to, či sa problém vyskytuje pravidelne alebo iba príležitostne.
+	Ak ide o problém so zobrazením, uveďte, s ktorým prehliadačom ste mali problém.',
+	'explication_description_ticket_ss_nav' => 'Problém alebo potrebu opíšte tak presne, ako sa len dá.
+	Uveďte najmä to, či sa problém vyskytuje pravidelne alebo iba príležitostne.',
 	'explication_fichier' => 'Pridajte súbor k svojmu lístku.',
-	'explication_redaction' => 'Quand vous avez terminé la rédaction de votre ticket, sélectionnez le statut «ouvert et discuté».', # NEW
-	'explication_url_exemple' => 'Tu uveďte internetovú adresu stránky priradenú tomuto lístku.',
+	'explication_redaction' => 'Keď dopíšete lístok, vyberte stav "otvorený a diskutovaný".',
+	'explication_url_exemple' => 'Sem uveďte internetovú adresu stránky, ktorá sa týka tohto lístka.',
 
 	// I
 	'icone_modifier_ticket' => 'Upraviť tento lístok',
@@ -158,10 +158,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'revenir_gestion' => 'Späť na riadenie lístkov',
 
 	// S
-	'severite_bloquant' => 'Bloquant', # NEW
-	'severite_important' => 'Important', # NEW
-	'severite_normal' => 'Normal', # NEW
-	'severite_peu_important' => 'Peu important', # NEW
+	'severite_bloquant' => 'Zablokovaný',
+	'severite_important' => 'Dôležitý',
+	'severite_normal' => 'Bežný',
+	'severite_peu_important' => 'Menej dôležitý',
 	'sinscrire' => 'Zaregistrovať sa',
 	'statut_ferme' => 'Uzavretý',
 	'statut_ferme_long' => 'Všetky uzavreté lístky',
@@ -199,10 +199,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tickets_traites' => 'Všetky spracované lístky',
 	'tickets_tries' => 'Lístky, ktoré vyhovujú vašim kriktériám',
 	'titre' => 'Lístky, sledovanie chýb',
-	'titre_identification' => 'Identification', # NEW
+	'titre_identification' => 'Prihlásenie',
 	'titre_liste' => 'Zoznam lístkov',
-	'tous_tickets_en_redaction' => 'Tous les tickets en rédaction', # NEW
+	'tous_tickets_en_redaction' => 'Všetky lístky, ktoré sa upravujú',
 	'tous_tickets_ouverts' => 'Všetky otvorené lístky',
+	'tous_vos_tickets' => 'Všetky vaše lístky',
 	'type_amelioration' => 'Vylepšenie',
 	'type_amelioration_long' => 'Lístky žiadajú vylepšenie',
 	'type_probleme' => 'Problém',
