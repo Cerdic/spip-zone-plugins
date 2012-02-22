@@ -8,6 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
+	'configurer_editer_ttc_explication' => 'Les prix des produits sont éditables en TTC et non plus en HT', # NEW
+	'configurer_editer_ttc_label' => 'Editer les produits en TTC', # NEW
+	'configurer_precision_ttc_explication' => 'Indiquer la précision d\'arrondi après la virgule pour les prix TTC (par défaut 2)', # NEW
+	'configurer_precision_ttc_label' => 'Précision sur les prix TTC', # NEW
 	'configurer_taxe_defaut_explication' => 'Zadajte predvolenú daň na výrobky vo forme 0.196 napríklad pre DPH 19,6 % (túto hodnotu potom môžete pri každom výrobku prepísať).',
 	'configurer_taxe_defaut_label' => 'Predvolená daň',
 	'configurer_titre' => 'Nastavenia výrobkov',
@@ -18,15 +22,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_produits' => '@nb@ výrobkov',
 
 	// L
-	'limiter_ajout_explication' => 'Restreindre l\'ajout de produits à un ou plusieurs secteurs', # NEW
-	'limiter_ajout_label' => 'Limiter', # NEW
-	'limiter_ident_secteur_explication' => 'Choisir le ou les secteurs concernés', # NEW
-	'limiter_ident_secteur_label' => 'Choix', # NEW
+	'limiter_ajout_explication' => 'Obmedziť pridávanie výrobkov do jedného sektora alebo viacerých sektorov',
+	'limiter_ajout_label' => 'Obmedziť',
+	'limiter_ident_secteur_explication' => 'Vyberte príslušné sektory',
+	'limiter_ident_secteur_label' => 'Výber',
 
 	// P
 	'produit_bouton_ajouter' => 'Pridať výrobok',
 	'produit_champ_descriptif_label' => 'Krátky popis',
 	'produit_champ_prix_ht_label' => 'Cena bez dane',
+	'produit_champ_prix_ttc_label' => 'Prix TTC', # NEW
 	'produit_champ_reference_label' => 'Referencie',
 	'produit_champ_rubrique_label' => 'Rubrika',
 	'produit_champ_taxe_explication' => 'Predvolená hodnota na tejto stránke: @taxe@. Toto pole môžete nechať prázdne.',
@@ -42,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'produits_titre' => 'Výrobky',
 
 	// S
-	'secteurs_autorises' => 'Choisir une rubrique dans un des secteurs autorisés : @secteurs@' # NEW
+	'secteurs_autorises' => 'Vyberte rubriku v povolených sektoroch: @secteurs@'
 );
 
 ?>

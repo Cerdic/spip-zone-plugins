@@ -6,10 +6,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-    'configurer_editer_ttc_label' => 'Editer les produits en TTC',
-    'configurer_editer_ttc_explication' => 'Les prix des produits sont éditables en TTC et non plus en HT',
-    'configurer_precision_ttc_label' => 'Précision sur les prix TTC',
-    'configurer_precision_ttc_explication' => 'Indiquer la précision d\'arrondi après la virgule pour les prix TTC (par défaut 2)',
+	'configurer_editer_ttc_explication' => 'Les prix des produits sont éditables en TTC et non plus en HT',
+	'configurer_editer_ttc_label' => 'Editer les produits en TTC',
+	'configurer_precision_ttc_explication' => 'Indiquer la précision d\'arrondi après la virgule pour les prix TTC (par défaut 2)',
+	'configurer_precision_ttc_label' => 'Précision sur les prix TTC',
 	'configurer_taxe_defaut_explication' => 'Saisir la taxe par défaut applicable aux produits sous la forme 0.196 pour une TVA à 19,6% par exemple (cette valeur peut être surchargée ensuite pour chaque produit).',
 	'configurer_taxe_defaut_label' => 'Taxe par défaut',
 	'configurer_titre' => 'Configuration des produits',
@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'produit_bouton_ajouter' => 'Ajouter un produit',
 	'produit_champ_descriptif_label' => 'Court descriptif',
 	'produit_champ_prix_ht_label' => 'Prix HT',
-    'produit_champ_prix_ttc_label' => 'Prix TTC',
+	'produit_champ_prix_ttc_label' => 'Prix TTC',
 	'produit_champ_reference_label' => 'Référence',
 	'produit_champ_rubrique_label' => 'Rubrique',
 	'produit_champ_taxe_explication' => 'Valeur par défaut sur le site : @taxe@. Ce champ peut être laissé vide.',
