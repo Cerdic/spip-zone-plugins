@@ -44,10 +44,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_site_spip_video' => 'Popis stránky Videá',
 	'descriptif_site_spip_zine' => 'Popis stránky SPIPZine',
 	'descriptif_site_spip_zone' => 'Espace de développement régi par une charte, ZONE.SPIP.org donne accès au versioning de toutes les contributions complémentaires à SPIP (plugins, squelettes, thèmes, modèles, outils,...).', # NEW
-	'description_noisette_boussole' => 'Affichage standard d\'une boussole. Vous pouvez choisir le modèle d\'affichage (liens textuels, logos...) ainsi que sa configuration précise', # NEW
-	'description_noisette_boussole_actualite' => 'Affichage des articles syndiqués des sites d\'une boussole selon le modèle d\'affichage <code>boussole_liste_actualite</code>.', # NEW
-	'description_noisette_boussole_contenu_z' => 'Affichage de toutes les informations d\'une boussole comme contenu principal d\'une page Z et selon le modèle d\'affichage <code>boussole_contenu_z</code>.', # NEW
-	'description_noisette_boussole_fil_ariane' => 'Affichage du fil d\'ariane d\'une boussole.', # NEW
+	'description_noisette_boussole' => 'Štandardné zobrazenie buzoly. Môžete si vybrať spôsob zobrazenia (textové odkazy, logá, atď.) a jej presné nastavenia',
+	'description_noisette_boussole_actualite' => 'Zobrazenie syndikovaných článkov zo stránok buzoly podľa modelu zobrazenia <code>boussole_liste_actualite.</code>',
+	'description_noisette_boussole_contenu_z' => 'Zobrazenie všetkých informácií o buzole ako hlavný obsah stránky Z a o modele zobrazenia <code>boussole_contenu_z.</code>',
+	'description_noisette_boussole_fil_ariane' => 'Zobrazenie mikronavigácie buzoly.',
 	'description_page_boussole' => 'Stránka s podrobnými údajmi o buzole',
 
 	// I
@@ -126,7 +126,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_noisette_boussole' => 'Buzola',
 	'nom_noisette_boussole_actualite' => 'Buzola – novinky',
 	'nom_noisette_boussole_contenu_z' => 'Buzola – hlavný obsah stránky',
-	'nom_noisette_boussole_fil_ariane' => 'Boussole - Fil d\'ariane de la page', # NEW
+	'nom_noisette_boussole_fil_ariane' => 'Buzola – mikronavigácia stránky',
 	'nom_page_boussole' => 'Buzola',
 	'nom_site_spip_blog' => 'SPIP Blog',
 	'nom_site_spip_contrib' => 'SPIP-Contrib',
