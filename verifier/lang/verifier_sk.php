@@ -43,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'normaliser_option_date' => 'Štandardizovať dátum?',
 	'normaliser_option_date_aucune' => 'Nie',
-	'normaliser_option_date_en_datetime' => 'Vo formáte "Dátum-čas" (pre SQL)',
+	'normaliser_option_date_en_datetime' => 'Vo formáte "Dátum a čas" (pre SQL)',
 
 	// O
 	'option_decimal_nb_decimales_label' => 'Počet desatinných miest',
