@@ -24,7 +24,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_rubriques_articles' => 'Affiche une liste de rubriques et, si on veut, les sous-rubriques et les articles sur plusieurs niveaux. Par défaut, affiche toutes les rubriques depuis la racine, triées par titre (numériquement puis alphabétiquement). Les articles sont placés systématiquement après les rubriques.',
 	'description_menu_secteurlangue' => 'Cette entrée est spécifique aux sites utilisant un secteur par langue. Elle affiche automatiquement un menu listant les rubriques du secteur correspondant à la langue de la page et, si on veut, les sous-rubriques sur plusieurs niveaux. Par défaut, affiche toutes les rubriques depuis la racine, triées par titre (numériquement puis alphabétiquement).',
 	'description_menu_texte_libre' => 'Simplement le texte que vous souhaitez, ou un code de langue SPIP (<:...:>)',
-	'description_sousmenu_articles_rubrique' => 'Affiche le titre d\'une rubrique et la liste de ses articles dans un sous-menu.',
 
 	// E
 	'editer_menus_editer' => 'Modifier ce menu',
@@ -161,7 +160,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_rubriques_evenements' => 'Événements de rubriques',
 	'nom_menu_secteurlangue' => 'Secteurs de langue',
 	'nom_menu_texte_libre' => 'Texte libre',
-	'nom_sousmenu_articles_rubrique' => 'Articles d\'une rubrique (sous-menu)',
 
 	// T
 	'tous_les_articles' => '... Tous les articles',
