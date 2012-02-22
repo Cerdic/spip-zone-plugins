@@ -23,13 +23,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_activer_squelettes_publics_zpip1' => 'Verejné šablóny ZPIPu v1',
 	'cfg_activer_squelettes_publics_zpip1_explication' => 'Aktivovať verejné šablóny pre ZPIP vo verzii 1,
 		ktoré umožňujú prehliadať kontakty na ľudí a spoločnosti na verejne prístupnej stránke?',
-	'cfg_afficher_infos_sur_auteurs' => 'Affichage détaillé des auteurs ?', # NEW
-	'cfg_afficher_infos_sur_auteurs_explication' => 'Afficher les infos de contact ou d\'organisation
-		également sur les pages auteurs dans l\'espace privé ?', # NEW
-	'cfg_associer_aux_auteurs' => 'Associer aux auteurs ?', # NEW
-	'cfg_associer_aux_auteurs_explication' => 'Permettre d\'associer des contacts ou organisations
-		aux auteurs. Cela ajoute un formulaire pour associer un auteur sur les pages contact ou organisation,
-		et inversement cela ajoute un formulaire pour lier un contact ou une organisation sur les pages des auteurs.', # NEW
+	'cfg_afficher_infos_sur_auteurs' => 'Podrobné zobrazenie autorov?',
+	'cfg_afficher_infos_sur_auteurs_explication' => 'Zobraziť kontaktné údaje spoločnosti
+		alebo aj na autorov v súkromnej zóne?',
+	'cfg_associer_aux_auteurs' => 'Prepojiť s autormi?',
+	'cfg_associer_aux_auteurs_explication' => 'Umožňuje prepájať kontakty na ľudí a spoločnosti 
+		s autormi. Pridá formulár na prepojenie autora na stránky s kontaktmi na ľudí alebo spoločnosti,
+		a aj opačne pridá formulár na prepojenie kontaktov na ľudí alebo spoločnosti so stránku s autormi.',
 	'cfg_lier_organisations_rubriques' => 'Prepojiť s rubrikami',
 	'cfg_lier_organisations_rubriques_explication' => 'Umožniť prepájať spoločnosti s rubrikami?
 		Táto funkcia zobrazí oddeľovač spoločností podľa rubrík a oddeľovač rubrík podľa spoločností.',
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_supprimer_organisation' => 'Určite chcete zmazať všetky údaje o tejto organizácii?',
 	'contact' => 'Kontakt',
 	'contact_ajouter' => 'Pridať kontakt',
-	'contact_ajouter_lien' => 'Ajouter ce contact', # NEW
+	'contact_ajouter_lien' => 'Pridať tento kontakt',
 	'contact_associe_a_auteur_numero' => 'Prepojiť s autorom číslo',
 	'contact_associer_a_auteur' => 'Prepojiť s autorom',
 	'contact_aucun' => 'Žiaden kontakt',
@@ -134,7 +134,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'organisation' => 'Spoločnosť',
 	'organisation_ajouter' => 'Pridať spoločnosť',
-	'organisation_ajouter_lien' => 'Ajouter cette organisation', # NEW
+	'organisation_ajouter_lien' => 'Pridať túto spoločnosť',
 	'organisation_associe_a_auteur_numero' => 'Prepojené s autorom číslo',
 	'organisation_associer_a_auteur' => 'Prepojiť s autorom',
 	'organisation_aucun' => 'Žiadna spoločnosť',
