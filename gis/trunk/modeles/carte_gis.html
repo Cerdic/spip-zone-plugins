@@ -26,6 +26,7 @@
 	- limit|limite = 500					nombre max de marqueurs à afficher, 500 par defaut
 	- objets = gis					type d'objets à afficher (fichier json/gis_xx qui génère la source de donnees)
 	- autocenterandzoom|centrer_auto = oui		centrer et zoomer la carte automatiquement pour afficher tous les marqueurs
+    - autofocus_marker = oui                                                permet de forcer l'affichage d'une seule infobulle à la fois 
 	- kml = 12						kml à superposer à la carte (id_document ou url)
 	- localize_visitor|localiser_visiteur = oui		centrer la carte sur la position du visiteur (API geolocation HTML5)
 	- point = non					si elle vaut "non" cette option n'affichera pas de points du tout (utile pour n'afficher qu'un kml par exemple)
@@ -155,6 +156,9 @@ var map[(#GET{id})];
 					} else {
 						map[(#GET{id})].autoCenterAndZoom();
 					}]
+					[(#ENV{autofocus_marker}|oui) 
+					 	gis_autofocus_marker('[(#GET{id})]');
+					]
 				}
 			}
 		);]

@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="3.2.2"
+	version="3.2.3"
 	schema="2.0.2"
 	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*["
@@ -24,7 +24,7 @@
 
 	<utilise nom="selecteur_generique" compatibilite="[1.12;]" />
 	<necessite nom="saisies" compatibilite="[1.19.0;]" />
-	<lib nom="mxn-gis-2.0.9" lien="http://www.mediaspip.net/sites/www.mediaspip.net/squelettes/paquets/mxn-gis/mxn-gis-2.0.9.zip" />
+	<lib nom="mxn-gis-2.2.2" lien="https://github.com/downloads/brunob/mxn/mxn-gis-2.2.2.zip" />
 
 	<pipeline
 		nom="declarer_tables_interfaces"
