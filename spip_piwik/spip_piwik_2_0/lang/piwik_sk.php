@@ -23,10 +23,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_exclure_ips' => 'Ak vymenujete niekoľko adries, ktoré majú byť vylúčené, oddeľte ich bodkočiarkami',
 	'explication_identifiant_site' => 'The list of sites available on the Piwik server has been automatically retrieved using the submitted details. Select the one you wish to use from the list below', # NEW
 	'explication_mode_insertion' => 'There are two methods for inserting the code pages required to make the plugin work correctly: either with the "insert_head" pipeline (an automatic method with only minor configurations possible), or by inserting a tag (a manual method of including the #PIWIK tag at the bottom of your pages), which is fully configurable.', # NEW
-	'explication_recuperer_liste' => 'The link below is used to retrieve the lists of sites that your account can manage on the Piwik server.', # NEW
-	'explication_restreindre_statut_prive' => 'Select the user statuses which will not be taken into account in the private zone statistics', # NEW
-	'explication_restreindre_statut_public' => 'Select the user statuses which will not be taken into account in the public zone statistics', # NEW
-	'explication_token' => 'The identification token is available in your personal preferences or in the API section on your Piwik server', # NEW
+	'explication_recuperer_liste' => 'Tento odkaz sa používa na získavanie zoznamu stránok, ktoré môže váš účet riadiť na vašom serveri s Piwikom.',
+	'explication_restreindre_statut_prive' => 'Vyberte funkcie používateľov, ktorí nebudú zarátaní do štatistík pre súkromnú zónu',
+	'explication_restreindre_statut_public' => 'Vyberte funkcie používateľov, ktorí sa nebudú brať do úvahy pri štatistikách pre verejne prístupnú stránku',
+	'explication_token' => 'Identifikačný token je dostupný vo vašich osobných predvoľbách alebo v časti aplikácie na vašom serveri s Piwikom',
 
 	// I
 	'info_aucun_site_compte' => 'K vášmu účtu na Piwiku nie sú priradené žiadne stránky.',
