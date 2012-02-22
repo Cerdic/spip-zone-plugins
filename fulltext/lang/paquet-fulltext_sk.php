@@ -8,30 +8,29 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
-	'fulltext_description' => 'Ce plugin permet d\'une part d\'exploiter le mode de recherche FULLTEXT de MySQL et d\'améliorer ainsi énormément les recherches par rapport au fonctionnement natif de SPIP, et d\'autre part d\'indexer le contenu de certains documents. 
-  -* exploite le mode FULLTEXT SEARCH IN BOOLEAN MODE de MySQL, cf. [->http://dev.mysql.com/doc/refman/5.0/fr/fulltext-boolean.html]
-Pour un fonctionnement optimal, il faut installer des programmes complémentaires et paramétrer leur utilisation dans <code>mes_options.php</code> ou via le panneau de configuration :
--* exploite le mode FULLTEXT SEARCH IN BOOLEAN MODE de MySQL, cf. [->http://dev.mysql.com/doc/refman/5.0/fr/fulltext-boolean.html]
-Pour un fonctionnement optimal, il faut installer des programmes complémentaires et paramétrer leur utilisation dans <code>mes_options.php</code> ou via le panneau de configuration :
--** Tous les types de documents doivent avoir une constante de type <code>_FULLTEXT_EXT_EXE</code> de définie (ou EXT est l\'extension du document) ou l\'équivalent dans le panneau de configuration.
--** L\'indexation de document est inactive par défaut (aucune constantes de définies).
--* Pour les {{PDF}} :
--** Installer [Xpdf->http://www.foolabs.com/xpdf/]
--*** Sur [Ubuntu->http://packages.ubuntu.com/fr/hardy/xpdf-utils],
--*** Sur Mac OS X via [MacPorts->http://xpdf.darwinports.com/] ou avec cette [version compilée->http://users.phg-online.de/tk/MOSXS/xpdf-tools-3.dmg],
--*** Sur d\'[autres OS->http://www.foolabs.com/xpdf/download.html]
--** Définir ces constantes (ou utiliser le panneau de configuration):
--*** <code>_FULLTEXT_PDF_EXE</code> (par exemple <code>/usr/bin/pdftotext</code>) : Chemin vers l\'exécutable <code>pdftotext</code> de [Xdpf->http://www.foolabs.com/xpdf/] afin de transformer les fichiers PDF en texte brut
--*** <code>_FULLTEXT_PDF_CMD_OPTIONS</code> (par exemple <code>-enc UTF-8</code>) : Options d\'appel de l\'exécutable
--*<code>_FULLTEXT_TAILLE</code> : Taille maximum conservée pour la version texte des fichiers (50000 par défaut)
--* Pour les {{DOC, PPT, XLS}} :
--** Installer [Catdoc->http://www.wagner.pp.ru/~vitus/software/catdoc/]
--*** Sur [Ubuntu/Linux->http://www.wagner.pp.ru/~vitus/software/catdoc/],
--*** Sur [Windows->http://blog.brush.co.nz/2009/09/catdoc-windows/]
--** Définir les constantes correspondantes (ou utiliser le panneau de configuration) de la meme maniêre que pour les PDF.
--* Pour les {{ODT, DOCX, PPTX, XLSX}} :
--** Utilise des fonctions et des classes PHP (nécessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip).
-  ', # NEW
+	'fulltext_description' => 'Tento poskytuje pomoc pri  FULLTEXTOVOM vyhľadávaní  MySQL a veľmi vylepšuje vyhľadávanie vo vzťahu k fungovaniu SPIPu ako takého a po druhé pri indexovaní obsahu niektorých súborov. 
+  -* využíva režim FULLTEXTOVÉ VYHĽADÁVANIE V BOOLEANOVSKOM REŽIME  MySQL, prečítajte si [->http://dev.mysql.com/doc/refman/5.0/fr/fulltext-boolean.html]
+Kvôli optimálnemu výkonu si nainštalujte doplnkové programy a ich parametre nastavte v súbore  <code>mes_options.php</code> alebo cez ovládací panel:
+-* využíva režim FULLTEXTOVÉ VYHĽADÁVANIE V BOOLEANOVSKOM REŽIME MySQL, prečítajte si [->http://dev.mysql.com/doc/refman/5.0/fr/fulltext-boolean.html]
+Kvôli optimálnemu výkonu si nainštalujte doplnkové programy a ich parametre nastavte v súbore  <code>mes_options.php</code> alebo cez ovládací panel:
+-** Všetky dokumenty musia byť rovnakého typu <code>_FULLTEXT_EXT_EXE</code> tak ako je to definované (alebo EXT je prípona súboru) alebo jeho ekvivalent v ovládacom paneli.
+-** Indexovanie súborov je v predvolených nastaveniach deaktivované (žiadna hodnota nie je definovaná).
+-* Pre {{PDF:}}
+-** nainštalujte [Xpdf,->http://www.foolabs.com/xpdf/]
+-*** na [Ubuntu,->http://packages.ubuntu.com/fr/hardy/xpdf-utils]
+-*** na Mac OS X cez [MacPorts->http://xpdf.darwinports.com/] alebo s touto [skompilovanou verziou,->http://users.phg-online.de/tk/MOSXS/xpdf-tools-3.dmg]
+-*** na [ostatné OS,->http://www.foolabs.com/xpdf/download.html]
+-** definujte tieto hodnoty (alebo použite ovládací panel):
+-*** <code>_FULLTEXT_PDF_EXE</code> (napríklad <code>/usr/bin/pdftotext:</code>) umiestnenie spúšťacieho súboru <code>pdftotext</code> z [Xdpf->http://www.foolabs.com/xpdf/] na konvertovanie súborov PDF na neformátovaný text
+-*** <code>_FULLTEXT_PDF_CMD_OPTIONS</code> (napríklad <code>-enc UTF-8:</code>) Možnosti na volanie spúšťacieho súboru:
+-*<code>_FULLTEXT_TAILLE:</code> maximálna veľkosť uloženej textovej verzie súborov (predvolená 50 000)
+-* Pre {{DOC, PPT, XLS:}}
+-** nainštalujte [Catdoc->http://www.wagner.pp.ru/~vitus/software/catdoc/]
+-*** na [Ubuntu/Linux,->http://www.wagner.pp.ru/~vitus/software/catdoc/]
+-*** na [Windows,->http://blog.brush.co.nz/2009/09/catdoc-windows/]
+-** definujte príslušné hodnoty (alebo použite ovládací panel) rovnako ako pri PDF,
+-* Pre {{ODT, DOCX, PPTX, XLSX:}}
+-** Využíva funkcie a triedy PHP (vyžaduje si minimálne PHP 5.2 a možnosť -enable-zip).',
 	'fulltext_slogan' => 'Indexovanie CELÉHO TEXTU na zrýchlenie vyhľadávaní'
 );
 
