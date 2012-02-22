@@ -93,15 +93,17 @@
 		if (!repetitions_done){
 			repetitions_done = true;
 			jQuery.getScript('#CHEMIN{javascript/jquery-ui.multidatespicker.js}',function(){
-				var repetitions = jQuery('#repetitions').html();
-				repetitions = repetitions.split(',');
+				var multidate_picker_options = {altField: '#repetitions'};
+				/**
+				 * Multidatepicker n'aime pas un array vide apparemment
+				 */
+				if(jQuery('#repetitions').html() != ""){
+					multidate_picker_options.addDates = jQuery('#repetitions').html().split(',');
+				}
 				jQuery('#repetitions_picker')
 					.multiDatesPicker(jQuery.extend(
 								date_picker_options(),
-								{
-									altField: '#repetitions',
-									addDates: repetitions
-								}
+								multidate_picker_options
 					))
 					.addClass('.pickable'); // une seule fois;
 			});
