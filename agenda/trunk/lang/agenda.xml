@@ -1,6 +1,8 @@
 <traduction module="agenda" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/agenda/trunk/lang/" reference="fr">
 	<langue code="de" />
-	<langue code="en" />
+	<langue code="en" url="http://trad.spip.org/tradlang_module/agenda?lang_cible=en">
+		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
+	</langue>
 	<langue code="es" />
 	<langue code="fr" />
 </traduction>
