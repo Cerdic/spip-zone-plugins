@@ -13,8 +13,23 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 	
 function action_visit_url() {
-	$id_banniere=$_GET['banniere'];
-	$url=$_GET['url'];
+	$id_banniere= (int) $_GET['banniere'];
+ 
+  // on chercher url    
+  $url = sql_getfetsel ('site', 'spip_bannieres', 'id_banniere='.$id_banniere);
+  if ($url=="") {   // banniere inconnue
+         header("location:".$GLOBALS['meta']["adresse_site"]);
+         exit();          
+  }
+  
+  // experimental: tracking google
+  // http://support.google.com/analytics/bin/answer.py?hl=en&answer=1033863
+  if (defined("_BANNIERE_TRACKING_GOOGLE")) {
+        $nom = sql_getfetsel ('nom', 'spip_bannieres', 'id_banniere='.$id_banniere);
+        $url = parametre_url($url, 'utm_medium', "banner", '&');
+        $url = parametre_url($url, 'utm_source', $GLOBALS['meta']["nom_site"], '&');
+        $url = parametre_url($url, 'utm_campaign', $nom, '&');        
+  }
 	
 	// compteur de clics > +1clic à chaque fois
 	$query = sql_update ("spip_bannieres", array('clics' => "clics+1"), "id_banniere=$id_banniere") ;
@@ -45,7 +60,6 @@ function action_visit_url() {
 				);
 			
 header("location:".$url);
-
 exit();
 }
 ?>

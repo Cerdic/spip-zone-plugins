@@ -162,8 +162,6 @@ function afficher_banniere($id_objet='',$id='',$alt='') {
 	$order = "0+D.titre, D.date";
 
 	$document = sql_fetsel($select, $from, $where, '','RAND()', $limit = '1');
-	$url = sql_getfetsel ('site', 'spip_bannieres', 'id_banniere='.$id);
-
   if ($document){  
    
     
@@ -201,9 +199,9 @@ function afficher_banniere($id_objet='',$id='',$alt='') {
   	$logo_banniere = '<img src="'.$logo['0'].'" alt="'.$document['titre'].'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'" border="0" />';
   }
 
-	// rechercher l'url de destination
-	if($url && $document['extension'] != 'swf') {
-		$lien = '<a href="'.generer_url_action('visit_url','banniere='.$id.'&url='.rawurlencode($url)).'" title="'.$document['titre'].'" class="banniere">';
+
+  if($document['extension'] != 'swf') { 
+		$lien = '<a href="'.generer_url_action('visit_url','banniere='.$id).'" title="'.$document['titre'].'" class="banniere">';
 		$lien .= $logo_banniere.$document['descriptif'].'</a>';
 	} else {
 		$lien = $logo_banniere;

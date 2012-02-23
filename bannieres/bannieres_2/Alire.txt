@@ -1,6 +1,11 @@
 Bannieres pour SPIP 2.0
 ------------------------
 
++ version 0.29
+----------------
+suppresion du parametre url 
+ajout l'option de tracking google _BANNIERE_TRACKING_GOOGLE
+
 + version 0.28
 ----------------
 calages
