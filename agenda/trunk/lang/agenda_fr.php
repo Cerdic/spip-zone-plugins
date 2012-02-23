@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_mots_cles' => 'Ajouter des mots-clés',
 	'ajouter_repetition' => 'Ajouter des répétitions',
 	'ajouter_un_evenement' => 'ajouter un événement à cet article',
-	'annee_precedente' => 'anée précédente',
+	'annee_precedente' => 'année précédente',
 	'annee_suivante' => 'année suivante',
 	'aucun_evenement' => 'aucun événement',
 	'aucune_rubrique_mode_agenda' => 'Par défaut, toutes les rubriques permettent d\'utiliser les événements. Si vous activez le mode agenda sur une ou plusieurs rubriques, la gestion des événements sera limitée a sa branche.',
@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'confirm_suppression_inscription' => 'Voulez-vous vraiment supprimer cette inscription ?',
-	'connexion_necessaire_pour_inscription' => 'Merci de <a href=\'#LOGIN_PUBLIC\'>vous connecter</a> pour pouvoir vous inscrire à cet événement.',
+	'connexion_necessaire_pour_inscription' => 'Merci de vous connecter pour pouvoir vous inscrire à cet événement.',
 	'creer_evenement' => 'Créer un événement',
 
 	// E
