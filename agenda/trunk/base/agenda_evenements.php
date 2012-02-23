@@ -18,7 +18,8 @@ function agenda_declarer_tables_interfaces($interface){
 	// 'spip_' dans l'index de $tables_principales
 	$interface['table_des_tables']['evenements']='evenements';
 	
-	$interface['table_des_traitements']['LIEU'][]= _TRAITEMENT_TYPO;
+	$interface['table_des_traitements']['LIEU'][]= 'expanser_liens('._TRAITEMENT_TYPO.')';
+	$interface['table_des_traitements']['ADRESSE'][]= _TRAITEMENT_RACCOURCIS;
 	
 	// permet d'utiliser les criteres racine, meme_parent, id_parent
 	$interface['exceptions_des_tables']['evenements']['id_parent']='id_evenement_source';
