@@ -16,14 +16,16 @@ if (!defined('_ECRIRE_INC_VERSION'))
 // le parametre correspond a l'id_compte de l'operation dans spip_asso_compte (et spip_asso_destination)
 function association_liste_destinations_associees($id_compte)
 {
-    if (!$id_compte) return '';
+    if (!$id_compte)
+	return '';
     if ($destination_query = sql_select('spip_asso_destination_op.id_destination, spip_asso_destination_op.recette, spip_asso_destination_op.depense, spip_asso_destination.intitule', 'spip_asso_destination_op RIGHT JOIN spip_asso_destination ON spip_asso_destination.id_destination=spip_asso_destination_op.id_destination', "id_compte=$id_compte", '', 'spip_asso_destination.intitule')) {
 	$destination = array();
 	while ($destination_op = sql_fetch($destination_query))	{
 	    /* soit recette soit depense est egal a 0, donc pour l'affichage du montant on se contente les additionner */
 	    $destination[$destination_op[id_destination]] = $destination_op[recette]+$destination_op[depense];
 	}
-	if (count($destination)==0) $destination = '';
+	if (count($destination)==0)
+	    $destination = '';
     } else {
 	$destination = '';
     }
@@ -36,8 +38,7 @@ function association_toutes_destination_option_list()
     $liste_destination = '';
     $sql = sql_select('id_destination,intitule', 'spip_asso_destination', '', '', 'intitule');
     while ($destination_info = sql_fetch($sql)) {
-	$id_destination = $destination_info['id_destination'];
-	$liste_destination .= "<option value='$id_destination'>".$destination_info['intitule'].'</option>';
+	$liste_destination .= '<option value="'. $destination_info['id_destination'] .'">'.$destination_info['intitule'].'</option>';
     }
     return $liste_destination;
 }
@@ -53,14 +54,15 @@ function association_editeur_destinations($destination, $unique='', $defaut='')
     $liste_destination = association_toutes_destination_option_list();
     $res = '';
     if ($liste_destination) {
-	$res = "<script type='text/javascript' src='".find_in_path("javascript/jquery.destinations_form.js")."'></script>";
-	$res .= '<label for="destination"><strong>'
-	    . _T('asso:destination') .'</strong></label>'
+	$res = '<script type="text/javascript" src="'.find_in_path('javascript/jquery.destinations_form.js').'"></script>';
+	$res .= '<label for="destination">'
+	    . _T('asso:destination') .'</label>'
 	    . '<div id="divTxtDestination" class="formulaire_edition_destinations">';
 	$idIndex = 1;
+//	spip_log("liste de destinations : \n".print_r($destination,true)."\n---------",'associaspip');
 	if ($destination!='') { /* si on a une liste de destinations (on edite une operation) */
 	    foreach ($destination as $destId => $destMontant) {
-		$liste_destination_selected = preg_replace('/(value=\''.$destId.'\')/', '$1 selected="selected"', $liste_destination);
+		$liste_destination_selected = preg_replace('/(value="'.$destId.'")/', '$1 selected="selected"', $liste_destination);
 		$res .= '<div class="formo" id="row'.$idIndex.'"><ul>';
 		$res .= '<li class="editer_id_dest['.$idIndex.']">'
 		    . '<select name="id_dest['.$idIndex.']" id="id_dest['.$idIndex.']" >'
@@ -70,9 +72,9 @@ function association_editeur_destinations($destination, $unique='', $defaut='')
 		    $res .= '<li class="editer_montant_dest['.$idIndex.']"><input name="montant_dest['.$idIndex.']" value="'
 			. association_nbrefr(association_recupere_montant($destMontant))
 			. '" type="text" id="montant_dest['.$idIndex.']" /></li>'
-			. "<button class='destButton' type='button' onClick='addFormField(); return false;'>+</button>";
+			. '<button class="destButton" type="button" onClick="addFormField(); return false;">+</button>';
 		    if ($idIndex>1) {
-			$res .= "<button class='destButton' type='button' onClick='removeFormField(\"#row".$idIndex."\"); return false;'>-</button>";
+			$res .= '<button class="destButton" type="button" onClick="removeFormField(\'#row'.$idIndex.'\'); return false;">-</button>';
 		    }
 		}
 		$res .= '<ul></div>';
@@ -80,14 +82,14 @@ function association_editeur_destinations($destination, $unique='', $defaut='')
 	    }
 	} else {/* pas de destination deja definies pour cette operation */
 	    if ($defaut!='') {
-		$liste_destination = preg_replace('/(value=\''.$defaut.'\')/', '$1 selected="selected"', $liste_destination);
+		$liste_destination = preg_replace('/(value="'.$defaut.'")/', '$1 selected="selected"', $liste_destination);
 	    }
 	    $res .= '<div id="row1" class="formo"><ul><li class="editer_id_dest[1]"><select name="id_dest[1]" id="id_dest[1]" >'
 		. $liste_destination . '</select></li>';
 	    if (!$unique) {
 		$res .= '<li class="editer_montant_dest[1]"><input name="montant_dest[1]" value="'
-		    . '' . '" type="text" id="montant_dest[1]"/></li>'
-		    . "</ul><button class='destButton' type='button' onClick='addFormField(); return false;'>+</button>";
+		    .'" type="text" id="montant_dest[1]"/></li>'
+		    . '</ul><button class="destButton" type="button" onClick="addFormField(); return false;">+</button>';
 	    }
 	    $res .= '</div>';
 	}
@@ -119,7 +121,7 @@ function association_ajouter_operation_comptable($date, $recette, $depense, $jus
     // Mais ce serait bien d'envoyer un message d'erreur au navigateur
     // plutot que de le signaler seulement dans les log
     if (!$imputation) {
-	spip_log("imputation manquante dans $id_compte, $date, $recette, $depense, $justification, $journal, $id_journal");
+	spip_log("imputation manquante : id_compte=$id_compte, date=$date, recette=$recette, depense=$depense, journal=$journal, id_journal=$id_journal, justification=$justification",'associaspip');
     }
     /* Si on doit gerer les destinations */
     if ($GLOBALS['association_metas']['destinations']=='on') {
@@ -167,6 +169,36 @@ function association_modifier_operation_comptable($date, $recette, $depense, $ju
     return $err;
 }
 
+/* Supprimer une operation dans spip_asso_comptes ainsi que si necessaire dans spip_asso_destination_op */
+function association_supprimer_operation_comptable($id_compte)
+{
+    include_spip('base/association');
+    /* on efface de la table destination_op toutes les entrees correspondant a cette operation  si on en trouve */
+    sql_delete('spip_asso_destination_op', "id_compte=$id_compte");
+    /* on logue quand meme */
+    list($date, $recette, $depense, $imputation, $journal, $id_journal) = sql_fetsel('date, recette, depense, imputation, journal, id_journal', 'spip_asso_comptes', "id_compte=$id_compte");
+    spip_log("suppression d'operation comptable : id_compte=$id_compte, date=$date, recette=$recette, depense=$depense, imputation=$imputation, journal=$journal, id_journal=$id_journal, justification=...",'associaspip');
+    /* on efface enfin de la table comptes l'entree correspondant a cette operation */
+    sql_delete('spip_asso_comptes', "id_compte=$id_compte");
+}
+
+/* Supprimer en masse des operations dans spip_asso_comptes ainsi que si necessaire dans spip_asso_destination_op */
+function association_supprimer_operations_comptables($critere)
+{
+    include_spip('base/association');
+    /* on recupere les id_comptes a supprimer */
+    $where = sql_in_select('id_compte', 'id_compte', 'spip_asso_comptes', $critere);
+    /* on efface de la table destination_op toutes les entrees correspondant a ces operations  si on en trouve */
+    sql_delete('spip_asso_destination_op', $where);
+    /* on logue quand meme */
+    $query_log = sql_select('id_compte, date, recette, depense, imputation, journal, id_journal', 'spip_asso_comptes', $where);
+    while ( list($id_compte, $date, $recette, $depense, $imputation, $journal, $id_journal) = fetch($query_log) ) {
+	spip_log("suppression d'operation comptable : id_compte=$id_compte, date=$date, recette=$recette, depense=$depense, imputation=$imputation, journal=$journal, id_journal=$id_journal ",'associaspip');
+    }
+    /* on efface enfin de la table comptes les entrees correspondant a ces operations */
+    sql_delete('spip_asso_comptes', $where); // $where ou $critere
+}
+
 /* fonction de verification des montants de destinations entres */
 /* le parametre d'entree est le montant total attendu, les montants des destinations sont recuperes */
 /* directement dans $_POST */
@@ -211,6 +243,7 @@ function association_ajouter_destinations_comptables($id_compte, $recette, $depe
     include_spip('base/association');
     /* on efface de la table destination_op toutes les entrees correspondant a cette operation  si on en trouve*/
     sql_delete('spip_asso_destination_op', "id_compte=$id_compte");
+//    spip_log("DEL spip_asso_destination_op.id_compte=$id_compte",'associaspip');
     if ($recette>0) {
 	$attribution_montant = 'recette';
     } else {
@@ -218,21 +251,25 @@ function association_ajouter_destinations_comptables($id_compte, $recette, $depe
     }
     $toutesDestinations = _request('id_dest');
     $toutesDestinationsMontants = _request('montant_dest');
+//    spip_log("id_dest : \n".print_r($toutesDestinations, true), 'associaspip');
+//    spip_log("id_dest : \n".print_r($toutesDestinationsMontants, true), 'associaspip');
     if (count($toutesDestinations)>1) {
 	foreach ($toutesDestinations as $id => $id_destination)	{
 	    $montant = association_recupere_montant($toutesDestinationsMontants[$id]);	/* le tableau des montants a des cles indentique a celui des id */
-	    sql_insertq('spip_asso_destination_op', array(
+	    $id_dest_op = sql_insertq('spip_asso_destination_op', array(
 		'id_compte' => $id_compte,
 		'id_destination' => $id_destination,
 		$attribution_montant => $montant
 	    ));
+//	    spip_log("spip_asso_destination_op(id_dest_op,id_compte,id_destination,montant,attribution)=($id_dest_op,$id_compte,$id_destination,$montant,$attribution_montant)",'associaspip');
 	}
     } else { /* une seule destination, le montant peut ne pas avoir ete precise, on entre directement le total recette+depense */
-	sql_insertq('spip_asso_destination_op', array(
+	$id_dest_op = sql_insertq('spip_asso_destination_op', array(
 	    'id_compte' => $id_compte,
 	    'id_destination' => $toutesDestinations[1],
 	    $attribution_montant => $depense+$recette
 	));
+//	spip_log("spip_asso_destination_op(id_dest_op,id_compte,id_destination,recette,depense,attribution)=($id_dest_op,$id_compte,1,$recette,$depense,$attribution_montant)",'associaspip');
     }
 }
 

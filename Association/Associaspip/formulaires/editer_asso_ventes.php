@@ -19,8 +19,7 @@ include_spip('inc/editer');
 function formulaires_editer_asso_ventes_charger_dist($id_vente='') {
 	/* cet appel va charger dans $contexte tous les champs de la table spip_asso_ventes associes a l'id_vente passe en param */
 	$contexte = formulaires_editer_objet_charger('asso_ventes', $id_vente, '', '',  generer_url_ecrire('ventes'), '');
-	/* si c'est une nouvelle operation, on charge la date d'aujourd'hui et charge un id_compte et journal null */
-	if (!$id_vente) {
+	if (!$id_vente) { /* si c'est une nouvelle operation, on charge la date d'aujourd'hui et charge un id_compte et journal null */
 		$contexte['date_vente'] = $contexte['date_envoi'] = date('Y-m-d');
 		$id_compte = '';
 		$journal = '';
@@ -64,22 +63,15 @@ function formulaires_editer_asso_ventes_charger_dist($id_vente='') {
 function formulaires_editer_asso_ventes_verifier_dist($id_vente) {
 	$erreurs = array();
 	/* on verifie que quantite, prix_vente et frais_envoi ne soient pas negatifs */
-	$prix_vente = association_recupere_montant(_request('prix_vente'));
-	$frais_envoi = association_recupere_montant(_request('frais_envoi'));
-	$quantite = association_recupere_montant(_request('quantite'));
-	if ($prix_vente<0)
-		$erreurs['prix_vente'] = _T('asso:erreur_montant');
-	if ($frais_envoi<0)
-		$erreurs['frais_envoi'] = _T('asso:erreur_montant');
-	if ($quantite<0) $erreurs['quantite'] = _T('asso:erreur_montant');
+	if ($erreur = association_verifier_montant(_request('prix_vente')) )
+		$erreurs['prix_vente'] = $erreur;
+	if ($erreur = association_verifier_montant(_request('frais_envoi')) )
+		$erreurs['frais_envoi'] = $erreur;
+	if ($erreur = association_verifier_montant(_request('quantite')) )
+		$erreurs['quantite'] = $erreur;
 	/* verifier si on a un numero d'adherent qu'il existe dans la base */
-	$id_acheteur = _request('id_acheteur');
-	if ($id_acheteur!='') {
-		$id_acheteur = intval($id_acheteur);
-		if (sql_countsel('spip_asso_membres', "id_auteur=$id_acheteur")==0) {
-			$erreurs['id_acheteur'] = _T('asso:erreur_id_adherent');
-		}
-	}
+	if ($erreur = association_verifier_membre(_request('id_acheteur')) )
+		$erreurs['id_acheteur'] = $erreur;
 	/* verifier si besoin que le montant des destinations correspond bien au montant de l'opération */
 	if ($GLOBALS['association_metas']['destinations']) {
 		include_spip('inc/association_comptabilite');
@@ -88,14 +80,12 @@ function formulaires_editer_asso_ventes_verifier_dist($id_vente) {
 		}
 	}
 	/* verifier les dates */
-	if ($erreur_date = association_verifier_date(_request('date_vente'))) {
-		$erreurs['date_vente'] = _request('date_vente').'&nbsp;:&nbsp;'.$erreur_date; /* on ajoute la date eronee entree au debut du message d'erreur car le filtre affdate corrige de lui meme et ne reaffiche plus les valeurs eronees */
-	}
-	if ($erreur_date = association_verifier_date(_request('date_envoi'))) {
-		$erreurs['date_envoi'] = _request('date_envoi').'&nbsp;:&nbsp;'.$erreur_date; /* on ajoute la date eronee entree au debut du message d'erreur car le filtre affdate corrige de lui meme et ne reaffiche plus les valeurs eronees */
-	}
+	if ($erreur = association_verifier_date(_request('date_vente')) )
+		$erreurs['date_vente'] = $erreur;
+	if ($erreur = association_verifier_date(_request('date_envoi')) )
+		$erreurs['date_envoi'] = $erreur;
 	if (count($erreurs)) {
-	$erreurs['message_erreur'] = _T('asso:erreur_titre');
+		$erreurs['message_erreur'] = _T('asso:erreur_titre');
 	}
 	return $erreurs;
 }

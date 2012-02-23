@@ -101,7 +101,7 @@ function compte_resultat_charges_produits($var, $class) {
 	echo '<th width="10">&nbsp;</td>';
 	echo '<th width="30">&nbsp;</td>';
 	echo '<th>'. (($class==$GLOBALS['association_metas']['classe_charges']) ? _T('asso:cpte_resultat_titre_charges') : _T('asso:cpte_resultat_titre_produits')) .'</th>';
-	echo '<th width="80">&nbsp;</td>';
+	echo '<th width="80">&nbsp;</th>';
 	echo "</tr>\n</thead><tbody>";
 	$quoi = (($class==$GLOBALS['association_metas']['classe_charges']) ? 'SUM(depense) AS valeurs' : 'SUM(recette) AS valeurs');
 	$query = sql_select(
@@ -129,7 +129,7 @@ function compte_resultat_charges_produits($var, $class) {
 		$total += $valeurs;
 	}
 	echo "</tbody><tfoot>\n<tr>";
-	echo '<td>&nbsp;</td><td>&nbsp;</td>';
+	echo '<th colspan="2">&nbsp;</th>';
 	echo '<th class="text">'. (($class==$GLOBALS['association_metas']['classe_charges']) ? _T('asso:cpte_resultat_total_charges') : _T('asso:cpte_resultat_total_produits')) .'</th>';
 	echo '<th class="decimal">'. association_nbrefr($total) . '</th>';
 	echo "</tr>\n</tfoot>\n</table>\n";
@@ -138,11 +138,17 @@ function compte_resultat_charges_produits($var, $class) {
 
 function compte_resultat_benefice_perte($recettes, $depenses) {
 	echo "<table width='100%' class='asso_tablo' id='asso_tablo_bilan_solde'>\n";
-	echo "<tfoot>\n<tr>";
+	echo "<thead>\n<tr>";
+	echo '<th width="10">&nbsp;</td>';
 	echo '<th width="30">&nbsp;</td>';
+	echo '<th>'. _T('asso:cpte_resultat_titre_restultat') .'</th>';
+	echo '<th width="80">&nbsp;</th>';
+	echo "</tr>\n</thead>";
+	echo "<tfoot>\n<tr>";
+	echo '<th colspan="2">&nbsp;</th>';
 	$res = $recettes-$depenses;
 	echo '<th class="text">'. (($res<0) ? _T('asso:cpte_resultat_perte') : _T('asso:cpte_resultat_benefice')) .'</th>';
-	echo '<th width="80" class="decimal">'. association_nbrefr($res) .'</th>';
+	echo '<th class="decimal">'. association_nbrefr($res) .'</th>';
 	echo "</tr></tfoot></table>";
 }
 

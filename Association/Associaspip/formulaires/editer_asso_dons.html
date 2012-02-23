@@ -11,21 +11,13 @@
 				<label for="date_don"><:asso:date_aaaa_mm_jj:></label>
 				<input type="[(#HTML5|?{number,text})]" name="date_don" [value="(#ENV{date_don}|affdate{Y-m-d})"] id="date_don"  class="date" />
 			</li>
-			<li class="editer_bienfaiteur">
-				<label for="bienfaiteur"><:asso:nom_du_bienfaiteur:></label>
-				<input type="text" name="bienfaiteur" [value="(#ENV{bienfaiteur})"] id="bienfaiteur"  class="text" />
-			</li>
-			<li class="editer_id_adherent">
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{id_adherent})</span>]
-				<label for="id_adherent"><:asso:nd_de_membre:></label>
-				<input type="[(#HTML5|?{number,text})]" name="id_adherent" [value="(#ENV{id_adherent})"] id="id_adherent"  class="number integer" />
-			</li>
+			<INCLURE{fond=inc/choisir_mbr_nom, champ_nom=bienfaiteur, valeur_nom=#ENV{bienfaiteur}, champ_id=id_adherent, valeur_id=#ENV{id_adherent} }>
 			<li class="editer_argent">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{argent})</span>]
 				<label for="argent"><:asso:don_financier_en_e__:></label>
 				<input type="[(#HTML5|?{number,text})]" name="argent" [value="(#ENV{argent})"] id="argent"  class="number float price" />
 			</li>
-			<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}}>
+			<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, env}>
 			<li class="editer_colis">
 				<label for="colis"><:asso:colis:></label>
 				<input type="text" name="colis" [value="(#ENV{colis})"] id="colis"  class="text" />
@@ -38,6 +30,7 @@
 			<li class="editer_contrepartie">
 				<label for="contrepartie"><:asso:geste_association:></label>
 				<input type="text" name="contrepartie" [value="(#ENV{contrepartie})"] id="contrepartie"  class="text" />
+				[(#META{/association/recufiscal}|et{#PLUGIN{fpdf}}|oui)<em class="explication"><:asso:dons_aide_contrepartie:></em>]
 			</li>
 			<li class="editer_commentaire">
 				<label for="commentaire"><:asso:remarques:></label>

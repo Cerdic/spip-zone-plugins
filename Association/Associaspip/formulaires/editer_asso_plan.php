@@ -61,11 +61,8 @@ function formulaires_editer_asso_plan_verifier_dist($id_plan='') {
 	}
 
 	/* verifier la date */
-	if ($erreur_date = association_verifier_date(_request('date_anterieure'))) {
-		$erreurs['date_anterieure'] = _request('date_anterieure') . "&nbsp;:&nbsp;" . $erreur_date; /* on ajoute la date eronee entree au debut du message d'erreur car le filtre affdate corrige de lui meme et ne reaffiche plus les valeurs eronees */
-	}
-
-
+	if ($erreur = association_verifier_date(_request('date_anterieure')) )
+		$erreurs['date_anterieure'] = $erreur;
 	if (!array_key_exists("code", $erreurs)) { /* si le code est valide */
 		$code_initial = _request('code_initial'); /* on recupere le code initial pour verifier si on l'a modifie ou pas  */
 		/* verifier que le code n'est pas deja attribue a une autre ligne du plan */

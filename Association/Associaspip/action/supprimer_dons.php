@@ -10,20 +10,26 @@
 \***************************************************************************/
 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
 
-function action_supprimer_dons() {
-		
+function action_supprimer_dons()
+{
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$id_don= $securiser_action();
+	$id_don = $securiser_action();
 
-	// on recupere l'id_compte correspondant au don
 	$critere = $association_imputation('pc_dons');
-	if ($critere) $critere .= ' AND ';
-	$id_compte = sql_getfetsel("id_compte", "spip_asso_comptes", $critere . "id_journal=$id_don");
+	if ($critere)
+		$critere .= ' AND ';
+	$id_compte = sql_getfetsel('id_compte', 'spip_asso_comptes', "$critere id_journal=$id_don");
+	association_supprimer_operation_comptable($id_compte);
 
-	sql_delete('spip_asso_destination_op', "id_compte=$id_compte");
-	sql_delete('spip_asso_comptes', "id_compte=$id_compte");  
+	$critere = $association_imputation('pc_colis');
+	if ($critere)
+		$critere .= ' AND ';
+	$id_compte = sql_getfetsel('id_compte', 'spip_asso_comptes', "$critere id_journal=$id_don");
+	association_supprimer_operation_comptable($id_compte);
+
 	sql_delete('spip_asso_dons', "id_don=$id_don");
 }
 

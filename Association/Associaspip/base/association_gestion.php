@@ -41,9 +41,9 @@ function association_vider_tables($nom_meta_base_version=0) // parametre non uti
 	// On efface les tables du plugin en consignant le resultat dans /tmp/spip_prive.log
 	foreach($tables_a_supprimer as $table ) {
 		if (sql_drop_table($table))
-			spip_log("Associaspip : echec de la desinstallation de la table '$table' ");
+			spip_log("Associaspip : echec de la desinstallation de la table '$table' ",'associaspip');
 		else {
-			spip_log("Associaspip : echec de la desinstallation de la table '$table' ");
+			spip_log("Associaspip : echec de la desinstallation de la table '$table' ",'associaspip');
 			$ok = FALSE;
 		}
 	}
@@ -52,8 +52,13 @@ function association_vider_tables($nom_meta_base_version=0) // parametre non uti
 	// On efface la version entregistrée
 	effacer_meta('association');
 	effacer_meta($nom_meta_base_version);
-	spip_log("Plugin Associaspip (vb:$nom_meta_base_version) dereference");
+	spip_log("Plugin Associaspip (vb:$nom_meta_base_version) dereference",'associaspip');
 */
+
+	// des soucis apparents de cache : on force donc pour finir
+	//@ http://doc.spip.org/@spip_unlink
+	spip_unlink(cache_meta('association_metas'));
+
 }
 
 // MAJ des tables de la base SQL
@@ -68,11 +73,13 @@ function association_upgrade($meta, $courante, $table='meta')
 			$n = $GLOBALS['asso_metas']['base_version'];
 		} elseif (isset($GLOBALS['meta']['association_base_version'])) {
 			$n = $GLOBALS['meta']['association_base_version'];
-		} else $n = 0;
+		} else
+			$n = 0;
 		$GLOBALS['association_metas']['base_version'] = $n;
-	} else $n = $GLOBALS['association_metas']['base_version'];
+	} else
+		$n = $GLOBALS['association_metas']['base_version'];
 	effacer_meta('association_base_version');
-	spip_log("association upgrade: $table $meta = $n =>> $courante");
+	spip_log("association upgrade: $table $meta = $n =>> $courante",'associaspip');
 	if (!$n) {
 		include_spip('base/create');
 		alterer_base($GLOBALS['tables_principales'],
@@ -140,7 +147,8 @@ function association_maj_64()
 		sql_alter("TABLE spip_auteurs_elargis ADD date date NOT NULL default '0000-00-00' ");
 	} else {
 		if (_ASSOCIATION_INSCRIPTION2) {
-			if (!$GLOBALS['association_maj_erreur']) $GLOBALS['association_maj_erreur'] = 64;
+			if (!$GLOBALS['association_maj_erreur'])
+				$GLOBALS['association_maj_erreur'] = 64;
 			return;
 		}
 		// Simulation provisoire
@@ -171,7 +179,8 @@ function association_maj_38192()
 			effacer_meta('asso_base_version');
 			effacer_meta('association_base_version');
 		}
-	} else spip_log("maj_38190: echec de  la creation de spip_asso_metas");
+	} else
+		spip_log("maj_38190: echec de  la creation de spip_asso_metas",'associaspip');
 }
 $GLOBALS['association_maj'][38192] = array(
 	array('association_maj_38192')
@@ -418,7 +427,8 @@ function association_maj_48001()
 		sql_alter("TABLE spip_asso_membres DROP ville");
 		sql_alter("TABLE spip_asso_membres DROP email");
 	} else { /* la mise a jour n'est pas effectuee : on le signale dans les maj_erreur pour y revenir au prochain chargement de la page de gestion des plugins */
-		if (!$GLOBALS['association_maj_erreur']) $GLOBALS['association_maj_erreur'] = 48001;
+		if (!$GLOBALS['association_maj_erreur'])
+			$GLOBALS['association_maj_erreur'] = 48001;
 	}
 }
 $GLOBALS['association_maj'][48001] = array(
@@ -538,6 +548,12 @@ $GLOBALS['association_maj'][57429] = array(
 	array ('sql_alter', "TABLE spip_asso_activites CHANGE montant montant DECIMAL(19,4) NOT NULL"),
 );
 
+// En liant le nom du bienfaiteur avec l'ID membre avant d'enregistrer, il faut penser a defaire cela a chaque edition pour eviter de se retrouver avec [un nom->membreXX] qui devient [[un nom->mebreXX]->membreXX] au moment de reediter. Il semble plus simple de ne pas transformer la saisie a stocker mais seulement l'affichage avec la nouvelle fonction association_calculer_lien_nomid($nom,$id)
+// Du coup il faut quand meme retablir les champs pour ne pas reproduire a l'affichage le souci qu'on avait a l'edition...
+$GLOBALS['association_maj'][57780] = array(
+	array('sql_update', 'spip_asso_dons', array('donateur' => "SUBSTR(donateur,1, INSTR(donateur,'->membre')-1)"), "donateur LIKE '[%->membre%]'"), // INSTR ou POSITION ou PARTINDEX ou CHARINDEX ou LOCATE ou REPLACE ... pfff. peut-etre vaut-il mieux le faire en PHP pour etre certain d'etre independant de l'implementation SQL ?!?
+);
+
 // correction d'une etourderie, et rajout de deux champs confirmes
 $GLOBALS['association_maj'][57896] = array(
 	array ('sql_alter', "TABLE spip_asso_categories CHANGE cotisation cotisation DECIMAL(19,2) NOT NULL"),
@@ -548,10 +564,25 @@ $GLOBALS['association_maj'][57896] = array(
 	array ('sql_alter', "TABLE spip_asso_plan CHANGE solde_anterieur solde_anterieur DECIMAL(19,2) NOT NULL"),
 	array ('sql_alter', "TABLE spip_asso_destination_op CHANGE recette recette DECIMAL(19,2) NOT NULL"),
 	array ('sql_alter', "TABLE spip_asso_destination_op CHANGE depense depense DECIMAL(19,2) NOT NULL"),
-	array ('sql_alter', "TABLE spip_asso_ressources CHANGE pu pu DECIMAL(19,4) NOT NULL"),
+	array ('sql_alter', "TABLE spip_asso_ressources CHANGE pu pu DECIMAL(19,2) NOT NULL"),
 	array ('sql_alter', "TABLE spip_asso_activites CHANGE montant montant DECIMAL(19,2) NOT NULL"),
 	array ('sql_alter', "TABLE spip_asso_prets CHANGE argent argent DECIMAL(19,2) NOT NULL"),
 	array ('sql_alter', "TABLE spip_asso_prets CHANGE valeur valeur DECIMAL(19,2) NOT NULL"),
+);
+
+// Revue de la gestion des ressources et prets
+$GLOBALS['association_maj'][58798] = array(
+	array ('sql_alter', "TABLE spip_asso_prets DROP statut"), // ce champ ne sert pas, donc...
+	array ('sql_alter', "TABLE spip_asso_prets CHANGE date_sortie date_sortie DATETIME NOT NULL"), // permettre une gestion plus fine (duree inferieure a la journee)
+	array ('sql_alter', "TABLE spip_asso_prets CHANGE date_retour date_retour DATETIME NOT NULL"), // permettre une gestion plus fine (duree inferieure a la journee)
+	array ('sql_alter', "TABLE spip_asso_ressoures ADD ud CHAR(1) NOT NULL DEFAULT 'D' "), // unite des durees de location
+	array('sql_update', 'spip_asso_ressources', array('statut' => 1), "statut='ok'"), // nouveau statut numerique gerant simultanement les quantites
+	array('sql_update', 'spip_asso_ressources', array('statut' => 0), "statut='reserve'"), // nouveau statut numerique gerant simultanement les quantites
+	array('sql_update', 'spip_asso_ressources', array('statut' => -1), "statut='suspendu'"), // nouveau statut numerique gerant simultanement les quantites
+/* Ne pas convertir le champ si on a des statuts personnalises... le code prevoit la compatibilite ascendante (sauf ajout de fonctionnalite incompatible) */
+	array ('sql_alter', "TABLE spip_asso_ressources CHANGE statut statut TINYTEXT NULL"), // changement temporaire pour rendre le champ nullable
+	array('sql_update', 'spip_asso_ressources', array('statut' => NULL), "statut='sorti'"), // nouveau statut numerique gerant simultanement les quantites
+	array ('sql_alter', "TABLE spip_asso_ressources CHANGE statut statut TINYINT NULL DEFAULT 1"), // nouvelle gestion numerique
 );
 
 ?>

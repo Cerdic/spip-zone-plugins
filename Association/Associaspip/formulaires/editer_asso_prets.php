@@ -71,17 +71,13 @@ function formulaires_editer_asso_prets_verifier_dist($id_pret)
 {
 	$erreurs = array();
 	/* on verifie que montant et duree ne soient pas negatifs */
-	if (association_recupere_montant(_request('montant'))<0)
-		$erreurs['montant'] = _T('asso:erreur_montant');
-	if (association_recupere_montant(_request('duree'))<0)
-		$erreurs['duree'] = _T('asso:erreur_montant');
+	if ($erreur = association_verifier_montant(_request('montant')) )
+		$erreurs['montant'] = $erreur;
+	if ($erreur = association_verifier_montant(_request('duree')) )
+		$erreurs['duree'] = $erreur;
 	/* verifier si on a un numero d'adherent qu'il existe dans la base */
-	$id_emprunteur = intval(_request('id_emprunteur'));
-	if ($id_emprunteur!=0) {
-		if (sql_countsel('spip_asso_membres', "id_auteur=$id_emprunteur")==0) {
-			$erreurs['id_emprunteur'] = _T('asso:erreur_id_adherent');
-		}
-	}
+	if ($erreur = association_verifier_membre(_request('id_emprunteur')) )
+		$erreurs['id_emprunteur'] = $erreur;
 	/* verifier si besoin que le montant des destinations correspond bien au montant de l'opération */
 	if (($GLOBALS['association_metas']['destinations']) && !array_key_exists('montant', $erreurs)) {
 		include_spip('inc/association_comptabilite');
@@ -90,12 +86,10 @@ function formulaires_editer_asso_prets_verifier_dist($id_pret)
 		}
 	}
 	/* verifier les dates */
-	if ($erreur_date = association_verifier_date(_request('date_sortie'))) {
-		$erreurs['date_sortie'] = _request('date_sortie').'&nbsp;:&nbsp;'.$erreur_date; /* on ajoute la date eronee entree au debut du message d'erreur car le filtre affdate corrige de lui meme et ne reaffiche plus les valeurs eronees */
-	}
-	if ($erreur_date = association_verifier_date(_request('date_retour'))) {
-		$erreurs['date_retour'] = _request('date_retour').'&nbsp;:&nbsp;'.$erreur_date; /* on ajoute la date eronee entree au debut du message d'erreur car le filtre affdate corrige de lui meme et ne reaffiche plus les valeurs eronees */
-	}
+	if ($erreur = association_verifier_date(_request('date_sortie')) )
+		$erreurs['date_sortie'] = $erreur;
+	if ($erreur = association_verifier_date(_request('date_retour')) )
+		$erreurs['date_retour'] = $erreur;
 	if (count($erreurs)) {
 		$erreurs['message_erreur'] = _T('asso:erreur_titre');
 	}

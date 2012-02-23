@@ -34,15 +34,14 @@ function formulaires_editer_asso_categories_verifier_dist($id_categorie)
 	$erreurs = array();
 
 	/* on verifie que cotisation et duree ne sont pas negatifs */
-	if (association_recupere_montant(_request('cotisation'))<0)
-		$erreurs['cotisation'] = _T('asso:erreur_montant');
-	if (association_recupere_montant(_request('duree'))<0)
-		$erreurs['duree'] = _T('asso:erreur_montant');
+	if ($erreur = association_verifier_montant(_request('cotisation')) )
+		$erreurs['cotisation'] = $erreur;
+	if ($erreur = association_verifier_montant(_request('duree')) )
+		$erreurs['duree'] = $erreur;
 
 	if (count($erreurs)) {
 		$erreurs['message_erreur'] = _T('asso:erreur_titre');
 	}
-
 	return $erreurs;
 }
 

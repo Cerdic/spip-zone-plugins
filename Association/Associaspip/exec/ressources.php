@@ -28,11 +28,21 @@ function exec_ressources()
 		association_onglets(_T('asso:titre_onglet_prets'));
 		echo debut_gauche('',true);
 		echo debut_boite_info(true);
+		// EXPLICATION
 		echo '<p>'._T('asso:ressources_info').'</p>';
-		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-verte.gif" alt="', _T('asso:Libre'), '" /> ', _T('asso:Libre'), '<br />';
-		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-orange.gif" alt="', _T('asso:En_suspend'), '" /> ', _T('asso:En_suspend'), '<br />';
-		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-rouge.gif" alt="', _T('asso:reserve'), '" /> ', _T('asso:reserve'), '<br />';
-		echo '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-poubelle.gif" alt="', _T('asso:supprime'), '" /> ', _T('asso:supprime');
+		// TOTAUX : nombre de ressources par statut
+		$liste_libelles['valide'] = '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-verte.gif" alt="" /> '. _T('asso:ressources_libelle_statut_ok') ;
+		$liste_effectifs['valide'] = sql_countsel('spip_asso_ressources', "(statut='ok') OR (ISNUMERIC(statut) AND statut>0)");
+		$liste_libelles['prospect'] = '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-orange.gif" alt="" /> '. _T('asso:ressources_libelle_statut_suspendu') ;
+		$liste_effectifs['prospect'] = sql_countsel('spip_asso_ressources', "(statut='suspendu') OR (ISNUMERIC(statut) AND statut<0)");
+		$liste_libelles['cv'] = '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-rouge.gif" alt="" /> '. _T('asso:ressources_libelle_statut_reserve') ;
+		$liste_effectifs['cv'] = sql_countsel('spip_asso_ressources', "(statut='reserve') OR (ISNUMERIC(statut) AND statut=0)");
+		$liste_libelles['sorti'] = '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-poubelle.gif" alt="" /> '. _T('asso:ressources_libelle_statut_sorti') ;
+		$liste_effectifs['sorti'] = sql_countsel('spip_asso_ressources', "statut IN ('sorti','',NULL)");
+		echo totauxinfos_effectifs('ressources', $liste_libelles, $liste_effectifs);
+		// TOTAUX : montants des locations sur l'annee en cours
+		$data = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT('date', '%Y')=DATE_FORMAT(NOW(), '%Y') AND imputation=".sql_quote($GLOBALS['association_metas']['pc_prets']) );
+		echo totauxinfos_sommes(_T('asso:ressources'), $data['somme_recettes'], $data['somme_depenses']);
 		echo fin_boite_info(true);
 		echo bloc_des_raccourcis(association_icone(_T('asso:ressources_nav_ajouter'),  generer_url_ecrire('edit_ressource'), 'ajout_don.png'));
 		echo debut_droite('',true);
@@ -42,25 +52,46 @@ function exec_ressources()
 		echo '<th>'._T('asso:entete_id').'</th>';
 		echo '<th>&nbsp;</th>';
 		echo '<th>'._T('asso:entete_intitule').'</th>';
-		echo '<th>'._T('asso:ressources_entete_code').'</th>';
+		echo '<th>'._T('asso:entete_code').'</th>';
 		echo '<th>'._T('asso:entete_montant').'</th>';
 		echo '<th colspan="3" class="actions">'._T('asso:entete_action').'</th>';
 		echo "</tr>\n</thead><tbody>";
 		$query = sql_select('*', 'spip_asso_ressources', '','',  'id_ressource') ;
 		while ($data = sql_fetch($query)) {
-			echo '<tr>';
-			echo '<td class="integer">'.$data['id_ressource'].'</td>';
-			switch($data['statut']){
+			if (is_numeric($data['statut'])) { /* utilisation des 3 nouveaux statuts numeriques (gestion de quantites/exemplaires) */
+				if ($data['statut']>0) { // ex: 'ok' (disponible ou libre)
+					$puce = 'verte';
+					$css = 'valide';
+				} elseif ($data['statut']<0) { // ex: 'suspendu' (plus en pret)
+					$puce = 'orange';
+					$css = 'prospect';
+				} else { // ex: 'reserve' (temporairement indisponible)
+					$puce = 'rouge';
+					$css = 'cv';
+				}
+			} else switch($data['statut']){ /* utilisation des anciens 4+ statuts textuels (etat de reservation) */
 				case 'ok':
-					$puce = 'verte'; break;
+					$puce = 'verte';
+					$css = 'valide';
+					break;
 				case 'reserve':
-					$puce = 'rouge'; break;
+					$puce = 'rouge';
+					$css = 'cv';
+					break;
 				case 'suspendu':
-					$puce = 'orange'; break;
+					$puce = 'orange';
+					$css = 'prospect';
+					break;
 				case 'sorti':
-					$puce = 'poubelle'; break;
+				case '':
+				case NULL:
+					$puce = 'poubelle';
+					$css = 'sorti';
+					break;
 			}
-			echo '<td class="actions">'.association_bouton('','puce-'.$puce.'.gif','').'</td>';
+			echo "<tr class='$css'>";
+			echo '<td class="integer">'.$data['id_ressource'].'</td>';
+			echo '<td class="actions">'. association_bouton('','puce-'.$puce.'.gif', '', '', 'title="'.$data['statut'].'"') .'</td>';
 			echo '<td class="text">'.$data['intitule'].'</td>';
 			echo '<td class="text">'.$data['code'].'</td>';
 			echo '<td class="decimal">'.association_prixfr($data['pu']).'</td>';

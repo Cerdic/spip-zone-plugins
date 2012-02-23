@@ -24,32 +24,26 @@ function exec_ventes()
 		echo minipres();
 	} else {
 		$annee = intval(_request('annee'));
-		if(!$annee) $annee = date('Y');
+		if(!$annee)
+			$annee = date('Y');
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets(_T('asso:titre_onglet_ventes'));
 		echo debut_gauche('',true);
 		echo debut_boite_info(true);
-		echo '<p>', _T('asso:en_rose_vente_enregistree_en_bleu_vente_expediee') .'</p>';
-		// TOTAUX
-		$association_imputation = charger_fonction('association_imputation', 'inc');
-		$critere = $association_imputation('pc_ventes');
-		if ($critere) $critere .= ' AND ';
-		$query = sql_select('imputation, sum(recette) AS somme_recettes, sum(depense) AS somme_depenses', 'spip_asso_comptes', $critere . "DATE_FORMAT(date, '%Y')=$annee", "imputation");
-		while ($data = sql_fetch($query)) {
-			$solde = $data['somme_depenses']+$data['somme_recettes'];
-			$imputation = $data['imputation'];
-			echo '<table width="100%">' .'<caption>'.
-	  _T('asso:totaux_titre', array('titre'=>$annee)) .'</caption><tbody>';
-			echo '<tr class="'.($solde>0?'impair':'pair').'">';
-			echo '<th class="solde">'.  _T('asso:entete_solde') . '</th>';
-			echo '<td class="decimal">'.association_prixfr($solde).'</td>';
-			echo '</tr>';
-			echo '</tbody></table>';
-		}
+		// TOTAUX : nombre de ventes selon etat de livraison
+		$liste_libelles = array('pair'=>'ventes_enregistrees', 'impair'=>'ventes_expediees', );
+		$liste_effectifs['pair'] = sql_countsel('spip_asso_ventes', "date_envoi<date_vente AND  DATE_FORMAT(date_vente, '%Y')=$annee ");
+		$liste_effectifs['impair'] = sql_countsel('spip_asso_ventes', "date_envoi>=date_vente AND  DATE_FORMAT(date_vente, '%Y')=$annee ");
+		echo totauxinfos_effectifs('ventes', $liste_libelles, $liste_effectifs);
+		// TOTAUX : montants des ventes et des frais de port
+		$data1 = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT(date, '%Y')=$annee AND imputation=".sql_quote($GLOBALS['association_metas']['pc_ventes']) );
+		$data2 = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT(date, '%Y')=$annee AND imputation=".sql_quote($GLOBALS['association_metas']['pc_frais_envoi']) );
+		echo totauxinfos_sommes($annee, $data1['somme_recettes']-$data1['somme_depenses'], $data2['somme_depenses']-$data2['somme_recettes']);
+		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
-		$res=association_icone(_T('asso:ajouter_une_vente'),  generer_url_ecrire('edit_vente'), 'ajout_don.png');
+		$res = association_icone(_T('asso:ajouter_une_vente'),  generer_url_ecrire('edit_vente'), 'ajout_don.png');
 		echo bloc_des_raccourcis($res);
 		echo debut_droite('',true);
 		debut_cadre_relief('', false, '', $titre = _T('asso:toutes_les_ventes'));
@@ -67,21 +61,21 @@ function exec_ventes()
 		echo "<thead>\n<tr>";
 		echo '<th>'. _T('asso:entete_id') .'</th>';
 		echo '<th>'. _T('asso:entete_date') .'</th>';
-		echo '<th>'. _T('asso:vente_entete_article') .'</th>';
+		echo '<th>'. _T('asso:entete_intitule') .'</th>';
 		echo '<th>'. _T('asso:entete_code') .'</th>';
-		echo '<th>'. _T('asso:vente_entete_acheteur') .'</th>';
+		echo '<th>'. _T('asso:entete_nom') .'</th>';
 		echo '<th>'. _T('asso:vente_entete_quantite') . '</th>';
 		echo '<th>'. _T('asso:entete_montant') .'</th>';
-		echo '<th colspan="2" class="actions">&nbsp;</th>';
+		echo '<th colspan="2" class="actions">'._T('asso:entete_action').'</th>';
 		echo "</tr>\n</thead><tbody>";
 		$query = sql_select('*', 'spip_asso_ventes', "DATE_FORMAT(date_vente, '%Y')=$annee", '',  'id_vente DESC') ;
 		while ($data = sql_fetch($query)) {
-			$class = ' class="'. ($data['date_envoi']=='0000-00-00' ?'pair':'impair') . '"';
+			$class = ' class="'. ($data['date_envoi']<$data['date_vente'] ?'pair':'impair') . '"';
 			$id = $data['id_vente'];
-			echo "<tr$class'>";
+			echo "<tr$class>";
 			echo '<td class="integer">'.$id.'</td>';
 			echo '<td class="date">'. association_datefr($data['date_vente'],'dtstart') .'</td>';
-			echo '<td class="text">'.propre($data['article']).'</td>';
+			echo '<td class="text">'. (test_plugin_actif('CATALOGUE') && (intval($data['article'])==$data['article']) ? association_calculer_lien_nomid('',$data['article'],'article') : propre($data['article']) ) .'</td>';
 			echo '<td class="texte">'.$data['code'].'</td>';
 			echo '<td class="text">'. association_calculer_lien_nomid($data['acheteur'],$data['id_acheteur']) .'</td>';
 			echo '<td class="decimal">'.$data['quantite'].'</td>';

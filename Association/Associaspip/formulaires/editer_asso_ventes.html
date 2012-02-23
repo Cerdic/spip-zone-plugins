@@ -10,7 +10,7 @@
 		<B_catalogue_produits>
 				<li class="editer_code">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{code})</span>]
-					<label for="catalogue"></label>
+					<label for="catalogue"><:asso:article:></label>
 					<select name="code" id="catalogue">
 						<option value="#ENV{code}"></option>
 						[(#REM)<!-- Nota : on recupere le code pour ne pas le perdre s'il s'agit d'une valeur non-entier ou d'un entier inexistant dans la table spip_variantes (cas de code renseigne avant l'activation du plugin)... autrement l'intitule correspondant est selectionne sans souci si la valeur reapparait dans les options ;-) -->]
@@ -19,7 +19,7 @@
 				[(#REM)<!-- On ne fait pas de jointure mais des sous-requetes parce-que ca ne fonctionne pas bien quand une table est absente (plugin jamais installe) :-/ -->]
 						<optgroup label="<BOUCLE_produit_intitule(ARTICLES){id_article}{statut IN prop,prepa,publie}>#TITRE</BOUCLE_produit_intitule>">
 				<BOUCLE_produit_variantes(CAT_VARIANTES?){id_article}{par num titre}>
-							<option value="#ID_VARIANTE"[ (#ENV{code}|=={#ID_VARIANTE}|oui)selected="selected"]>#TITRE</option>
+							<option value="#ID_CAT_VARIANTE"[ (#ENV{code}|=={#ID_CAT_VARIANTE}|oui)selected="selected"]>#TITRE</option>
 				</BOUCLE_produit_variantes>
 						</optgroup>
 			</B_produit_intitule>
@@ -46,21 +46,7 @@
 				</li>
 			</ul>
 		</fieldset>
-		<fieldset>
-			<legend>Acheteur</legend>
-			<ul>
-				<li class="editer_acheteur">
-					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{acheteur})</span>]
-					<label for="acheteur"><:asso:nom_de_l_acheteur:></label>
-					<input type="text" name="acheteur" [value="(#ENV{acheteur})"] id="acheteur"  class="text" />
-				</li>
-				<li class="editer_id_acheteur">
-					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{id_acheteur})</span>]
-					<label for="id_acheteur"><:asso:nd_de_membre:></label>
-					<input type="[(#HTML5|?{number,text})]" name="id_acheteur" [value="(#ENV{id_acheteur})"] id="id_acheteur" class="number integer" />
-				</li>
-			</ul>
-		</fieldset>
+		<INCLURE{fond=inc/choisir_mbr_nom, champ_nom=acheteur, valeur_nom=#ENV{acheteur}, champ_id=id_acheteur, valeur_id=#ENV{id_acheteur}, champs_legende=Acheteur }>
 		<fieldset>
 			<legend>Transaction</legend>
 			<ul>
@@ -74,7 +60,7 @@
 					<label for="quantite"><:asso:quantite_achetee:></label>
 					<input type="[(#HTML5|?{number,text})]" name="quantite" [value="(#ENV{quantite})"] id="text number float" class="number float" />
 				</li>
-				<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}}>
+				<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, env}>
 				<li class="editer_date_envoi">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_envoi})</span>]
 					<label for="date_envoi"><:asso:envoye_le_aaaa_mm_jj:></label>

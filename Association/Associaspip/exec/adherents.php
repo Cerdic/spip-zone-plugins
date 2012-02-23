@@ -22,48 +22,29 @@ function exec_adherents() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
-		association_onglets(_T('asso:titre_onglet_membres'));
-		echo debut_gauche('',true);
 		/* recuperation des variables */
 		$critere = request_statut_interne(); // peut appeler set_request
 		$statut_interne = _request('statut_interne');
 		$lettre = _request('lettre');
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
+		association_onglets(_T('asso:titre_onglet_membres'));
+		echo debut_gauche('',true);
 		echo debut_boite_info(true);
-		// TOTAUX : personnes
-		echo '<table width="100%" class="asso_stats"><caption>'._T('asso:adherent_liste_nombres').'</caption><tbody>';
-		$nombre = $nombre_total = 0;
+		// TOTAUX : effectifs par statuts
 		$membres = $GLOBALS['association_liste_des_statuts'];
-		array_shift($membres); // anciens membres
+		array_shift($membres); // on sort les anciens membres
+		$liste_libelles = $liste_effectifs = array();
 		foreach ($membres as $statut) {
-			$nombre = sql_countsel('spip_asso_membres', "statut_interne='$statut'");
-			echo '<tr class="'. $GLOBALS['association_styles_des_statuts'][$statut] .'">';
-			echo '<td class="text">'._T('asso:adherent_liste_nombre_'.$statut).'</td>';
-			echo '<td class="integer">'. association_nbrefr($nombre,0) .'</td>';
-			$nombre_total += $nombre;
-			echo '</tr>';
+			$classe_css = $GLOBALS['association_styles_des_statuts'][$statut];
+			$liste_libelles[$classe_css] = _T('asso:adherent_liste_nombre_'.$statut);
+			$liste_effectifs[$classe_css] = sql_countsel('spip_asso_membres', "statut_interne='$statut'");
 		}
-		echo '</tbody><tfoot>';
-		echo '<tr><th class="text">'._T('asso:liste_nombre_total').'</th>';
-		echo '<th class="integer">'. association_nbrefr($nombre_total,0) .'</th></tr>';
-		echo '</tfoot></table>';
-		// TOTAUX : montants de l'annee courante (TODO: faire plutot l'exercice courant non?)
-		$data = sql_fetsel( 'SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses',
-		'spip_asso_comptes', "DATE_FORMAT('date', '%Y')=DATE_FORMAT(NOW(), '%Y') AND imputation=".sql_quote($GLOBALS['association_metas']['pc_cotisations']) );
-		$solde = $data['somme_recettes']-$data['somme_depenses'];
-		echo '<table width="100%" class="asso_stats">' .'<caption>'. date('Y').': ' . _T('asso:totaux_titre', array('titre'=>'cotisations') ) .'</caption><tbody>' ;
-		echo '<tr class="impair">';
-		echo '<th class="entree">'. _T('asso:bilan_recettes') .'</th>';
-		echo '<td class="decimal">' .association_prixfr($data['somme_recettes']). ' </td>';
-		echo '</tr>'.'<tr class="pair">';
-		echo '<th class="sortie">'. _T('asso:bilan_depenses') .'</th>';
-		echo '<td class="decimal">'.association_prixfr($data['somme_depenses']) .'</td>';
-		echo '</tr>'. '<tr class="'.($solde>0?'impair':'pair').'">';
-		echo '<th class="solde">'. _T('asso:bilan_solde') .'</th>';
-		echo '<td class="decimal">'.association_prixfr($solde).'</td>';
-		echo '</tr>'.'</tbody></table>';
-		// fin
+		echo totauxinfos_effectifs('adherents', $liste_libelles, $liste_effectifs);
+		// TOTAUX : montants des cotisations durant l'annee en cours
+		$data = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT('date', '%Y')=DATE_FORMAT(NOW(), '%Y') AND imputation=".sql_quote($GLOBALS['association_metas']['pc_cotisations']) );
+		echo totauxinfos_sommes(_T('asso:cotisations'), $data['somme_recettes'], $data['somme_depenses']);
+		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
 		$res .= association_icone(_T('asso:gerer_les_groupes'),  generer_url_ecrire('groupes'), 'annonce.gif',  '');
@@ -123,7 +104,8 @@ function exec_adherents() {
 #		if ($GLOBALS['association_metas']['aff_groupes']=='on') {
 			echo '</td><td width="25%" class="formulaire">';
 			echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
-			echo '<select class="fondl" name="id_groupe" onchange="form.submit()">';
+			echo '<input type="hidden" name="exec" value="adherents" />';
+			echo '<select name="id_groupe" onchange="form.submit()">';
 			$qGroupes = sql_select('nom, id_groupe', 'spip_asso_groupes', '', 'nom');
 			echo '<option value="">'._T('asso:tous_les_groupes').'</option>';
 			while ($groupe = sql_fetch($qGroupes)) {
@@ -137,14 +119,14 @@ function exec_adherents() {
 		//Filtre ID
 		echo '</td><td width="20%" class="formulaire">';
 		echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
-		echo '<input type="text" name="id"  class="fondl" onfocus=\'this.value=""\' size="5"  value="'. $id .'" onchange="form.submit()" />';
+		echo '<input type="text" name="id" onfocus=\'this.value=""\' size="5"  value="'. $id .'" onchange="form.submit()" />';
 		echo '<noscript><input type="submit" value="'._T('lister').'" /></noscript></div></form>';
 		echo '</td><td width="25%" class="formulaire">';
 		//Filtre statut
 		echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
 		echo '<input type="hidden" name="lettre" value="'.$lettre.'" />';
-		echo '<select name="statut_interne" class="fondl" onchange="form.submit()">';
-		echo '<option value="defaut">'._T('asso:adherent_entete_statut_defaut').'</option>';
+		echo '<select name="statut_interne" onchange="form.submit()">';
+		echo '<option value="defaut">'._T('asso:entete_tous').'</option>';
 		foreach ($GLOBALS['association_liste_des_statuts'] as $statut) {
 			echo '<option value="'.$statut.'"';
 			if ($statut_interne==$statut) {
@@ -285,7 +267,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe,
 	. $auteurs
 	. "</tbody>\n</table>\n";
 	//SOUS-PAGINATION
-	$res .= "<table clall='asso_tablo_filtres'><tr>\n<td class='pagination0'>";
+	$res .= "<table class='asso_tablo_filtres'><tr>\n<td width='40%'><p class='pagination'>";
 	$nombre_selection = sql_countsel('spip_asso_membres', $critere);
 	$pages = intval($nombre_selection/$max_par_page)+1;
 	if ($pages!=1)	{
@@ -299,10 +281,10 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe,
 			}
 		}
 	}
-	$res .= "</td><td class='formulaire'>\n"
-	.  (!$auteurs ? '' : ('<select name="action_adherents"><option value="" selected="">'._T('asso:choisir_action').'</option><option value="desactive">'.($statut_interne=='sorti'?_T('asso:reactiver_adherent'):_T('asso:desactiver_adherent')).'</option><option value="delete">'._T('asso:supprimer_adherent').'</option><option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_un_groupe').'</option></select><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" />'))
+	$res .= "</p></td><td width='60%' class='formulaire'><form>\n"
+	.  (!$auteurs ? '' : ('<select name="action_adherents"><option value="" selected="">'._T('asso:choisir_action').'</option><option value="desactive">'.($statut_interne=='sorti'?_T('asso:reactiver_adherent'):_T('asso:desactiver_adherent')).'</option><option value="delete">'._T('asso:supprimer_adherent').'</option><option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_un_groupe').'</option></select><input type="submit" value="'._T('asso:bouton_confirmer').'" />'))
 	. '<input type="hidden" name="statut_courant" value="'.$statut_interne.'" />'
-	.  '</td></tr></table>';
+	.  '</form></td></tr></table>';
 	return 	array($liste_id_auteurs, generer_form_ecrire('action_adherents', $res));
 }
 

@@ -10,21 +10,32 @@
 \***************************************************************************/
 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
 
-function action_supprimer_prets() {
-		
+function action_supprimer_prets()
+{
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	if (!preg_match('/^(\d+)\D(\d+)/', $arg, $r))
-		spip_log("action_supprimer_prets: $arg incompris");
+		spip_log("action_supprimer_prets: $arg incompris",'associaspip');
 	else {
-		list(,$id_pret,$id_ressource) = $r;
+		list($id_pret,$id_ressource) = $r;
+		$critere = $association_imputation('pc_dons');
+		if ($critere)
+			$critere .= ' AND ';
+		$id_compte = sql_getfetsel('id_compte', 'spip_asso_comptes', "$critere id_journal=$id_pret");
+		association_supprimer_operation_comptable($id_compte);
 		sql_delete('spip_asso_prets', "id_pret=$id_pret" );
-		sql_delete('spip_asso_comptes', "id_journal=$id_pret" );
 		sql_updateq('spip_asso_ressources',
-			array('statut'=>'ok'),
-			"id_ressource=" . $id_ressource );
+			array('statut'=>'ok',
+		), "statut='reserve' AND id_ressource=$id_ressource" );
+		sql_updateq('spip_asso_ressources',
+			array('statut'=>'statut+1',
+		), "statut>=0 AND id_ressource=$id_ressource" );
+		sql_updateq('spip_asso_ressources',
+			array('statut'=>'statut-1',
+		), "statut<0 AND id_ressource=$id_ressource" );
 	}
 }
 

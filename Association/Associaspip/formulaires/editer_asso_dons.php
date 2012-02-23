@@ -25,14 +25,15 @@ function formulaires_editer_asso_dons_charger_dist($id_don='') {
 		$id_compte = '';
 		$journal = '';
 	} else { /* sinon on recupere l'id_compte correspondant et le journal dans la table des comptes */
-		$comptes = sql_fetsel('id_compte,journal', 'spip_asso_comptes', "imputation='".$GLOBALS['association_metas']['pc_dons']."' AND id_journal=$id_don");
-		$id_compte = $comptes['id_compte'];
-		$journal = $comptes['journal'];
+		$compte = sql_fetsel('id_compte,journal', 'spip_asso_comptes', "imputation='".$GLOBALS['association_metas']['pc_dons']."' AND id_journal=$id_don");
+		$journal = $compte['journal'];
+		$id_compte = $compte['id_compte'];
 	}
 	/* ajout du journal qui ne se trouve pas dans la table asso_dons mais asso_comptes et n'est donc pas charge par editer_objet_charger */
 	$contexte['journal'] = $journal;
-	/* on concatene au _hidden inserer dans $contexte par l'appel a formulaire_editer_objet l'id_compte qui sera utilise dans l'action editer_asso_dons */
-	$contexte['_hidden'] .= "<input type='hidden' name='id_compte' value='$id_compte' />";
+	/* on concatene au _hidden inserer dans $contexte par l'appel a formulaire_editer_objet les id_compte qui seront utilises dans l'action editer_asso_dons */
+	$contexte['_hidden'] .= "<input type='hidden' name='id_compte1' value='$id_compte1' />";
+	$contexte['_hidden'] .= "<input type='hidden' name='id_compte2' value='$id_compte2' />";
 	/* si id_adherent est egal a 0, c'est que le champ est vide, on ne prerempli rien */
 	if (!$contexte['id_adherent']) $contexte['id_adherent']='';
 	/* paufiner la presentation des valeurs  */
@@ -59,20 +60,13 @@ function formulaires_editer_asso_dons_charger_dist($id_don='') {
 function formulaires_editer_asso_dons_verifier_dist($id_don) {
 	$erreurs = array();
 	/* on verifie que argent et valeur ne soient pas negatifs */
-	$argent = association_recupere_montant(_request('argent'));
-	$valeur = association_recupere_montant(_request('valeur'));
-	if ($argent<0)
-		$erreurs['argent'] = _T('asso:erreur_montant');
-	if ($valeur<0)
-		$erreurs['valeur'] = _T('asso:erreur_montant');
+	if ($erreur = association_verifier_montant(_request('argent')) )
+		$erreurs['argent'] = $erreur;
+	if ($erreur = association_verifier_montant(_request('valeur')) )
+		$erreurs['valeur'] = $erreur;
 	/* verifier si on a un numero d'adherent qu'il existe dans la base */
-	$id_adherent = intval(_request('id_adherent'));
-	if ($id_adherent!='') {
-		$id_adherent = intval($id_adherent);
-		if (sql_countsel('spip_asso_membres', "id_auteur=$id_adherent")==0) {
-			$erreurs['id_adherent'] = _T('asso:erreur_id_adherent');
-		}
-	}
+	if ($erreur = association_verifier_membre(_request('id_adherent')) )
+		$erreurs['id_adherent'] = $erreur;
 	/* verifier si besoin que le montant des destinations correspond bien au montant de l'opération */
 	if (($GLOBALS['association_metas']['destinations']) && !array_key_exists('argent', $erreurs)) {
 		include_spip('inc/association_comptabilite');
@@ -81,9 +75,8 @@ function formulaires_editer_asso_dons_verifier_dist($id_don) {
 		}
 	}
 	/* verifier la date */
-	if ($erreur_date = association_verifier_date(_request('date_don'))) {
-		$erreurs['date_don'] = _request('date_don').'&nbsp;:&nbsp;'.$erreur_date; /* on ajoute la date eronee entree au debut du message d'erreur car le filtre affdate corrige de lui meme et ne reaffiche plus les valeurs eronees */
-	}
+	if ($erreur = association_verifier_date(_request('date_don')) )
+		$erreurs['date_don'] = $erreur;
 	if (count($erreurs)) {
 		$erreurs['message_erreur'] = _T('asso:erreur_titre');
 	}

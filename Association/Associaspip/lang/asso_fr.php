@@ -43,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	# Entetes communes
 	'entete_action' => 'Action',
 	'entete_actions' => 'Actions',
+	'entete_code' => 'R&eacute;f./Code',
 	'entete_commentaire' => 'Commentaire',
 	'entete_date' => 'Date',
 	'entete_duree' => 'Dur&eacute;e',
@@ -51,17 +52,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entete_montant' => 'Montant',
 	'entete_nom' => 'Nom',
 	'entete_num' => 'N<sup>o</sup>',
+	'entete_quantite' => 'Q<sup>t&eacute;</sup>',
 	'entete_statut' => 'Statut',
 	'entete_solde' => 'Solde',
 	'entete_tous' => 'Tous',
 	# Libelles communes
 	'libelle_commentaire' => 'Commentaire',
+	'libelle_duree' => 'Dur&eacute;e',
 	'libelle_date' => 'Date (AAAA-MM-JJ)',
 	'libelle_intitule' => 'Intitul&eacute; complet',
 	'libelle_montant' => 'Montant (Euros)',
 	'libelle_nd_mbr' => 'N<sup>o</sup> de membre',
 	'libelle_nom' => 'Nom',
 	'libelle_num' => 'N<sup>o</sup>',
+	'libelle_quantite' => 'Quantit&eacute;',
 	'libelle_statut' => 'Statut',
 	# Listes communs
 	'liste_nombre_total' => 'Total&nbsp;:',
@@ -94,8 +98,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'devise_symbole' => '&euro;', // pour les entites (X)HTML cf. <http://webdesign.about.com/od/localization/l/blhtmlcodes-cur.htm> & <http://fr.wikipedia.org/wiki/Symbole_mon%C3%A9taire> &  <http://fr.wikipedia.org/wiki/Aide:Liste_de_caract%C3%A8res_sp%C3%A9ciaux#Symboles_mon.C3.A9taires>
 	'devise_nom' => 'Euro', // les noms des monnaies ne dependent pas de la langue mais du pays et sont communs a beaucoup : cf <http://www.baudelet.net/monnaies/> ; utiliser le symbole pour indiquer le nom generique (cf. ) ou le code ISO pour preciser la devise exacte d'un pays : cf <http://fr.wikipedia.org/wiki/Liste_des_monnaies_en_circulation>
 	'devise_montant' => '@montant@&nbsp;@devise@', // pays francophones/luxophone/etc. : '@nombre@&nbsp;@devise@' ; pays anglophones/germanophones/etc. : '@devise@&nbsp;@nombre@' ; pour l'usage, cf. <http://programmer.spip.org/Syntaxe-complete-des-codes-de> & <http://programmer.spip.org/Codes-de-langue-en-PHP>
-	'duree_temps' => '@nombre@ @unite@',
+	'duree_temps' => '@nombre@&nbsp;@unite@',
 	'nombre_fois' => '@nombre@ fois',
+	'objet_num' => '@objet@ n<sup>o</sup>&nbsp;:&nbsp;@num@',
+	'titre_num' => '@titre@&nbsp;@num@',
 	'totaux_titre' => 'Totaux @titre@',
 	'date_du_jour' => 'Nous sommes le @date@',
 	'date_du_jour_heure' => 'Nous sommes le @date@ et il est @time@',
@@ -468,7 +474,6 @@ Date: @date@
 Lieu: @lieu@
 
 De: @nom@
-N&deg; d\'adh&eacute;rent: @id_adherent@
 Accompagn&eacute; de
 	Membres: @membres@
 	Non-membres: @non_membres@
@@ -639,6 +644,7 @@ Commentaire: @commentaire@
 	'cpte_resultat_titre_charges' => 'CHARGES',
 	'cpte_resultat_titre_produits' => 'PRODUITS',
 	'cpte_resultat_titre_benevolat' => 'CONTRIBUTIONS VOLONTAIRES',
+	'cpte_resultat_titre_resultat' => 'R&Eacute;SULTAT',
 	'cpte_resultat_total_charges' => 'Total des Charges',
 	'cpte_resultat_total_produits' => 'Total des Produits',
 	'cpte_resultat_perte' => 'Perte',
@@ -673,8 +679,8 @@ Commentaire: @commentaire@
 	'erreur_plan_code_duplique' => 'Ce code est d&eacute;j&agrave; utilis&eacute; pour une autre r&eacute;f&eacute;rence comptable(peut-&ecirc;tre d&eacute;sactiv&eacute;e)',
 	'erreur_plan_code_modifie_utilise_classe_financiere' => 'Cette r&eacute;f&eacute;rence comptable est utilis&eacute;e par un module de gestion (ventes/dons/prets/activit&eacute;s) activ&eacute; ou pour la gestion des cotisations. Vous ne pouvez donc pas modifier le code/la classe pour lui attribuer la classe des comptes financiers.',
 	'erreur_plan_changement_classe_impossible' => 'Vous ne pouvez pas modifier la classe de ce compte pour la changer vers ou depuis la classe d&eacute;finie comme &eacute;tant celle des comptes financiers car des op&eacute;rations sur ce compte existent dans le livre de comptes.',
-	'erreur_format_date' => 'La date doit &ecirc;tre au format AAAA-MM-JJ',
-	'erreur_date' =>  'Cette date n\'existe pas',
+	'erreur_format_date' => 'La date doit &ecirc;tre au format AAAA-MM-JJ ; ce qui n\'est pas le cas de&nbsp;: @date@',
+	'erreur_valeur_date' =>  'Cette date n\'existe pas&nbsp;: @date@',
 	'erreur_operation_non_permise_sur_ce_compte' => 'Ce compte n\'accepte qu\'un seul type d\'op&eacute;rations (recette ou d&eacute;pense) et ne correspond pas a celle que vous avez rentr&eacute;',
 	'erreur_montant' => 'Les valeurs n&eacute;gatives ne sont pas autoris&eacute;es',
 	'erreur_configurer_association_plan_comptable_non_valide' => 'Vous ne pouvez pas activer le module de gestion comptable car votre plan comptable n\'est pas valide.<br/>Pour &ecirc;tre valide, un plan comptable doit suivre les r&egrave;gles suivantes :<ul><li>Contenir des comptes d\'au moins deux classes diff&eacute;rentes.<li><li>Les classes sont un chiffre entre 0 et 9.</li><li>Les codes des comptes doivent &ecirc;tre unique.</li><li>Les codes doivent commencer par un chiffre &eacute;gal &agrave; la classe du compte.</li><li>Les codes sont au format : 2 chiffres suivis de caract&egrave;res alphanum&eacute;riques</li></ul>',

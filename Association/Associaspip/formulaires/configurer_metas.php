@@ -10,7 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
 
 function formulaires_configurer_metas_charger_dist($form)
 {
@@ -19,10 +20,11 @@ function formulaires_configurer_metas_charger_dist($form)
 		return $f($form);
 	else {
 		$infos = formulaires_configurer_metas_infos($form);
-		if (!is_array($infos)) return $infos;
-		if (isset($infos['meta']) AND isset($GLOBALS[$infos['meta']])) 
+		if (!is_array($infos))
+			return $infos;
+		if (isset($infos['meta']) AND isset($GLOBALS[$infos['meta']]))
 		    return $GLOBALS[$infos['meta']];
-		spip_log("configurer_meta, charger: table des meta pour $form inconnue" . $infos['meta']);
+		spip_log("configurer_meta, charger: table des meta pour $form inconnue ".$infos['meta'],'associaspip');
 		return array();
 	}
 }
@@ -40,7 +42,8 @@ function formulaires_configurer_metas_traiter_dist($form)
 		return $f($form);
 	else {
 		$infos = formulaires_configurer_metas_infos($form);
-		if (!is_array($infos)) return $infos; // fait ci-dessus en fait
+		if (!is_array($infos))
+			return $infos; // fait ci-dessus en fait
 		$vars = formulaires_configurer_metas_recense($infos['path'], PREG_PATTERN_ORDER);
 		$meta = $infos['meta'];
 		foreach (array_unique($vars[2]) as $k) {
@@ -53,7 +56,7 @@ function formulaires_configurer_metas_traiter_dist($form)
 }
 
 // version amelioree de la RegExp de cfg_formulaire.
-define('_EXTRAIRE_SAISIES', 
+define('_EXTRAIRE_SAISIES',
 	'#<(select|textarea|input)[^>]*\sname=["\'](\w+)(\[\w*\])?["\'](?: class=["\']([^\'"]*)["\'])?( multiple=)?[^>]*?>#ims');
 
 // determiner la liste des noms des saisies d'un formulaire
@@ -64,7 +67,8 @@ function formulaires_configurer_metas_recense($form, $opt='')
 	$f = file_get_contents($form);
 	if ($f AND preg_match_all(_EXTRAIRE_SAISIES, $f, $r, $opt))
 		return $r;
-	else return array();
+	else
+		return array();
 }
 
 // Repertoires potentiels des plugins, ce serait bien d'avoir ça ailleurs
@@ -79,7 +83,8 @@ define('_EXTRAIRE_PLUGIN', '@(' .  _DIR_PLUGINS_AUTO . '|' . _DIR_PLUGINS . '|' 
 function formulaires_configurer_metas_infos($form){
 
 	$path = find_in_path($form.'.' . _EXTENSION_SQUELETTES, 'formulaires/');
-	if (!$path) return ''; // cas traite en amont normalement.
+	if (!$path)
+		return ''; // cas traite en amont normalement.
 	if (!preg_match(_EXTRAIRE_PLUGIN, $path, $m))
 		return array('path' => $path, 'meta' => 'meta');
 	$plugin = $m[2];
@@ -90,7 +95,9 @@ function formulaires_configurer_metas_infos($form){
 	if (isset($infos['erreur'])) return $infos['erreur'][0];
 	$prefix = $infos['prefix'];
 	$infos['path'] = $path;
-	if (!isset($infos['meta'])) $infos['meta'] = ($prefix . '_metas');
+	if (!isset($infos['meta']))
+		$infos['meta'] = ($prefix . '_metas');
 	return $infos;
 }
+
 ?>

@@ -34,8 +34,8 @@ function formulaires_editer_asso_membres_verifier_dist($id_auteur) {
 	$erreurs = array();
 
 	/* verifier la validite de la date de validite */
-	if ($erreur_validite = association_verifier_date(_request('validite'))) {
-		$erreurs['validite'] = _request('validite').'&nbsp;:&nbsp;'.$erreur_validite;
+	if ($erreur = association_verifier_date(_request('validite'))) {
+		$erreurs['validite'] = $erreur;
 	}
 	if (count($erreurs)) {
 	$erreurs['message_erreur'] = _T('asso:erreur_titre');

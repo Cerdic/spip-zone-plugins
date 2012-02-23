@@ -98,31 +98,31 @@ td.solde, th.solde
 
 /* couleurs de fond specifiques */
 tr.pair, td.pair
-{ /* membres : relances ; mini-bilan : entrees/recettes */
+{ /* membres : relances (relance | >0) ; mini-bilan : sorties/depenses (solde<0) ; pret : restitue */
 	background-color: #dcf3f4 !important;
 }
 tr.impair, td.impair
-{ /* membres : echus ; mini-bilan : entrees/recettes */
+{ /* membres : echus (echu | >0) ; mini-bilan : entrees/recettes (solde>0) ; pret : du ; activite : impayee */
 	background-color: #f0dcf4 !important;
 }
 tr.valide, td.valide
-{ /* membres : a jour (ok) */
+{ /* membres : a jour (ok | >0) ; ressources : libres/disponibles (ok | >0) ; activite : payee */
 	background-color: #a0ffa0 !important;
 }
 tr.sortie, td.sortie
-{ /* membres : desactives */
+{ /* membres : desactives ; ressources : indisponibles car supprimees ? (sorti | NULL) */
 	background-color: #e6eac9 !important;
 }
 tr.prospect, td.prospect
-{ /* membres : prospects */
+{ /* membres : prospects (prospect | =0) ; ressources : indisponibles car suspendues (suspendu | <0) */
 	background-color: #fff8dc !important;
 }
 tr.vi, td.vi
-{ /* comptes : virement interne */
+{ /* comptes : virement interne (classe 5) ; ressources : indisponibles car suspendues (suspendu | <0) */
 	background-color: #b4ffb4;
 }
 tr.cv, td.cv
-{ /* comptes : contribution volontaire */
+{ /* comptes : contribution volontaire (classe 8) ; ressources : indisponibles car reservees (reserve | =0) */
 	background-color: #ffbc61;
 }
 
@@ -151,15 +151,15 @@ th.time, th.datetime
 	text-align: "h"; /* HTML: TD align=char char="h" */
 	/* On pourrait utiliser ":" mais je ne suis pas certain du resultat si on a des HH:MM:SS... */
 } /* @: http://stackoverflow.com/q/1363239 */
-td.formulaire
+table.asso_tablo_filtres td.formulaire,
 table.asso_tablo_filtres td form
 {
-	text-align: right; /* HTML: TD align=right */
+	text-align: right; !important /* HTML: TD align=right */
 }
-td.pagination
+table.asso_tablo_filtres td.pagination,
+table.asso_tablo_filtres td .pagination
 {
-	text-align: left; /* HTML: TD align=right */
-	width: 30%;
+	text-align: left; !important /* HTML: TD align=right */
 }
 
 td.taux:after, td.pourcentage:after, td.pourcent:after,

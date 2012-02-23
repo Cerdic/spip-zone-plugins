@@ -64,7 +64,7 @@ function formulaires_editer_asso_comptes_verifier_dist($id_compte) {
 	$erreurs['montant'] = _T('asso:erreur_recette_depense');
     }
     /* on verifie que le type d'operation est bien permise sur ce compte */
-    $code=_request('imputation');
+    $code = _request('imputation');
     if (!array_key_exists('montant',$erreurs)) {
 	$type_op = sql_getfetsel('type_op', 'spip_asso_plan', 'code='.sql_quote($code));
 	if ((($type_op=='credit') && ($depense>0)) || (($type_op=='debit') && ($recette>0))) {
@@ -79,9 +79,8 @@ function formulaires_editer_asso_comptes_verifier_dist($id_compte) {
 	}
     }
     /* verifier la validite de la date */
-    if ($erreur_date = association_verifier_date(_request('date'))) {
-	$erreurs['date'] = _request('date').'&nbsp;:&nbsp;'.$erreur_date;
-    }
+    if ($erreur = association_verifier_date(_request('date')) )
+	$erreurs['date'] = $erreur;
     if (count($erreurs)) {
 	$erreurs['message_erreur'] = _T('asso:erreur_titre');
     }

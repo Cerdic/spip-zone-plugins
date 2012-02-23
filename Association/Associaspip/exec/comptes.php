@@ -42,39 +42,34 @@ function exec_comptes() {
 		if (!$id_compte)
 			$id_compte = '';
 		$debut = intval(_request('debut'));
+		$exercice_data = sql_asso1ligne('exercice', $exercice);
 // traitements
 		$where = 'imputation LIKE '. sql_quote($imputation);
 		$where .= (!is_numeric($vu) ? '' : (" AND vu=$vu"));
-		$where .= " AND date>='".exercice_date_debut($exercice)."' AND date<='".exercice_date_fin($exercice)."'";
+		$where .= " AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]'";
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets(_T('asso:titre_onglet_comptes'));
 		echo debut_gauche('',true);
 		echo debut_boite_info(true);
 		// TOTAUX : operations de l'exercice
-		echo '<table width="100%" class="asso_stats"><caption>'._T('asso:compte_liste_nombres').'</caption><tbody>';
-		$nombre = $nombre_total = 0;
-		$classes = array('produits'=>'pair', 'charges'=>'impair', 'contributions_volontaires'=>'cv', 'banques'=>'vi');
-		foreach ($classes as $classe_cpt=>$classe_css) {
-			$nombre = sql_countsel('spip_asso_membres', "LEFT(imputation,1)='".$GLOBALS['association_metas']["classe_$classe_cpt"]."' AND date >='".exercice_date_debut($exercice)."' AND date <='".exercice_date_fin($exercice)."' ");
-			echo '<tr class="'.$classe_css.'">';
-			echo '<td class"text">'._T('asso:adherent_liste_nombre_'.$classe_css).'</td>';
-			echo '<td class="integer">'. association_nbrefr($nombre,0) .'</td>';
-			$nombre_total += $nombre;
-			echo '</tr>';
+		$classes = array('pair'=>'produits', 'impair'=>'charges', 'cv'=>'contributions_volontaires', 'vi'=>'banques');
+		$liste_libelles = $liste_effectifs = array();
+		foreach ($classes as $classe_css=>$classe_cpt) {
+			$liste_effectifs[$classe_css] = sql_countsel('spip_asso_comptes', "LEFT(imputation,1)='".$GLOBALS['association_metas']["classe_$classe_cpt"]."' AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' ");
+			$liste_libelles[$classe_css] = 'compte_liste_nombre_'.$classe_css;
 		}
-		echo '</tbody><tfoot>';
-		echo '<tr><th class="text">'._T('asso:liste_nombre_total').'</th>';
-		echo '<th class="integer">'. association_nbrefr($nombre_total,0) .'</th></tr>';
-		echo '</tfoot></table>';
+		echo totauxinfos_effectifs('comptes', $liste_libelles, $liste_effectifs);
 		// TOTAUX : montants de l'exercice
-		echo comptes_totaux($where, $imputation);
+		$data = sql_fetsel( 'SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses, code, classe',  'spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code', "$where AND classe<>".sql_quote($GLOBALS['association_metas']['classe_banques']). " AND classe<>".sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']) ); // une contribution benevole ne doit pas etre comptabilisee en charge/produit
+		echo totauxinfos_sommes(($imputation=='%' ? _T('asso:tous') : $imputation), $data['somme_recettes'], $data['somme_depenses']);
+		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
 		$url_bilan = generer_url_ecrire('bilan', "exercice=$exercice");
 		$url_compte_resultat = generer_url_ecrire('compte_resultat', "exercice=$exercice");
 		$url_annexe = generer_url_ecrire('annexe', "exercice=$exercice");
-		$res = '<p><strong>Exercice : '.exercice_intitule($exercice).'</strong><p>'
+		$res = '<p><strong>Exercice : '.$exercice_data['intitule'].'</strong><p>'
 		. association_icone(_T('asso:cpte_resultat_titre_general'),  $url_compte_resultat, 'finances.jpg')
 		. association_icone(_T('asso:bilan'),  $url_bilan, 'finances.jpg')
 		. association_icone(_T('asso:annexe_titre_general'),  $url_annexe, 'finances.jpg')
@@ -109,7 +104,7 @@ function exec_comptes() {
 			'imputation , code, intitule, classe',
 			'spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code',
 			/* ne pas afficher les codes de la classe financiere : ce n'est pas une imputation et les inactifs  */
-			"classe <> '".$GLOBALS['association_metas']['classe_banques']."' AND active AND date >='".exercice_date_debut($exercice)."' AND date <='".exercice_date_fin($exercice).'\'',
+			"classe<>'".$GLOBALS['association_metas']['classe_banques']."' AND active AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' ",
 			'code', 'code ASC');
 		while ($plan = sql_fetch($sql)) {
 			echo '<option value="'.$plan['code'].'" ';
@@ -136,8 +131,8 @@ function exec_comptes() {
 		$table = comptes_while($where, "$debut,$max_par_page", $id_compte);
 		if ($table) {
 			//SOUS-PAGINATION
-			$nombre_selection=sql_countsel('spip_asso_comptes', $where);
-			$pages=intval($nombre_selection/$max_par_page)+1;
+			$nombre_selection = sql_countsel('spip_asso_comptes', $where);
+			$pages = intval($nombre_selection/$max_par_page)+1;
 			$args = 'exercice='.$exercice.'&imputation='.$imputation. (is_numeric($vu) ? "&vu=$vu" : '');
 			$nav = '';
 			if ($pages!=1)
@@ -159,7 +154,7 @@ function exec_comptes() {
 			. '<th>'. _T('asso:compte_entete_justification') .'</th>'
 			. '<th>'. _T('asso:entete_montant') .'</th>'
 			. '<th>'. _T('asso:compte_entete_financier') .'</th>'
-			. '<th colspan="3" class="actions">&nbsp;</th>'
+			. '<th colspan="3" class="actions">'._T('asso:entete_action').</th>'
 			. "</tr>\n</thead><tbody>"
 			. $table
 			. "</tbody>\n</table>\n"
@@ -197,7 +192,7 @@ function comptes_while($where, $limit, $id_compte)
 		} else {
 			$onload_option = '';
 		}
-		$comptes .= "\n<tr id='id_compte$id'>"
+		$comptes .= "\n<tr id='id_compte$id' class='$class'>"
 		. '<td class="integer">'.$id.'</td>'
 		. '<td class="date">'. association_datefr($data['date']) .'</td>'
 		. '<td class="text">'. $data['imputation'].'</td>'
@@ -219,27 +214,6 @@ function comptes_while($where, $limit, $id_compte)
 		. '</tr>';
 	}
 	return $comptes;
-}
-
-function comptes_totaux($where, $imputation)
-{
-	$where .= " AND classe <> " . sql_quote($GLOBALS['association_metas']['classe_banques']). " AND classe <> " .sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']); // une contribution benevole ne doit pas etre comptabilisee en charge/produit
-	$data = sql_fetsel( 'SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses, code, classe',
-		'spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code', $where);
-	$solde = $data['somme_recettes']-$data['somme_depenses'];
-	return '<table width="100%">' .'<caption>'.
-	  _T('asso:totaux_titre', array('titre'=>($imputation=='%' ? '' : ' '.$imputation)) ).
-	 '</caption><tbody>' .
-	 '<tr class="impair">' .
-	 '<th class="entree">'. _T('asso:bilan_recettes') .'</th>' .
-	 '<td class="decimal">' .association_prixfr($data['somme_recettes']). ' </td>' .
-	 '</tr>'.'<tr class="pair">' .
-	 '<th class="sortie">'. _T('asso:bilan_depenses') .'</th>' .
-	 '<td class="decimal">'.association_prixfr($data['somme_depenses']) .'</td>' .
-	 '</tr>'. '<tr class="'.($solde>0?'impair':'pair').'">' .
-	 '<th class="solde">'. _T('asso:bilan_solde') .'</th>' .
-	 '<td class="decimal">'.association_prixfr($solde).'</td>' .
-	 '</tr>'.'</tbody></table>';
 }
 
 ?>

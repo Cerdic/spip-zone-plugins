@@ -10,30 +10,25 @@
 \***************************************************************************/
 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
 
-function action_ajouter_activites() {
-		
+function action_ajouter_activites()
+{
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$securiser_action();
-	activites_insert($_REQUEST['date'], $_REQUEST['id_evenement'], $_REQUEST['non_membres'], $_REQUEST['inscrits'], $_REQUEST['email'], $_REQUEST['telephone'], $_REQUEST['adresse'], $_REQUEST['montant'], $_REQUEST['commentaire']);
+	$n = sql_insertq('spip_asso_activites', array(
+		'date' => _request('date'),
+		'id_evenement' => intval(_request('id_evenement')),
+		'nom' => _request('nom'),
+		'id_adherent' => intval(_request('id_menbre')),
+		'membres' => _request('membres'),
+		'non_membres' => _request('non_membres'),
+		'inscrits' => intval(_request('inscrits')),
+		'montant' => association_recupere_montant(_request('montant')),
+		'commentaire' => _request('commentaire'),
+	));
+	spip_log("insertion activite numero: $n",'associaspip');
 }
 
-function activites_insert($date, $id_evenement, $non_membres, $inscrits, $email, $telephone, $adresse, $montant, $commentaire)
-{
-	$n = sql_insertq('spip_asso_activites', array(
-		'date' => $date,
-		'id_evenement' => $id_evenement,
-		'nom' => $nom,
-		'id_adherent' => $id_membre,
-		'membres' => $membres,
-		'non_membres' => $non_membres,
-		'inscrits' => $inscrits,
-		'email' => $email,
-		'telephone' => $telephone,
-		'adresse' => $adresse,
-		'montant' => $montant,
-		'commentaire' => $commentaire));
-	spip_log("insertion activite numero: $n");
-}
 ?>

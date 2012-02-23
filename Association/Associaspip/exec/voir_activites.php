@@ -25,104 +25,88 @@ function exec_voir_activites()
 		include_spip('inc/plugin');
 		$liste = liste_plugin_actifs();
 		$agenda = isset($liste['agenda']);
-		$id_evenement= intval(_request('id'));
+		$id_evenement = intval(_request('id'));
 		if ( isset ($_POST['statut'] )) {
 			$statut =  $_POST['statut'];
 		} else {
-			$statut= "%";
+			$statut = "%";
 		}
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets(_T('asso:titre_onglet_activite'));
 		echo debut_gauche('',true);
 		echo debut_boite_info(true);
+		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement") ;
+		// Rappel Infos Evenement
+		$infos['date_debut'] = association_datefr($evenement['date_debut'],'dtstart').' '.substr($data['date_debut'],10,6);
+		$infos['date_fin'] = association_datefr($evenement['date_fin'],'dtend').' '.substr($data['date_debut'],10,6);
+		$infos['lieu'] = $evenement['lieu'];
+		$stats = sql_fetsel('AVG(inscrits) AS moy_i, STDDEV(inscrits) AS var_i, AVG(montant) AS moy_m, STDDEV(montant) AS var_m ', 'spip_asso_activites', "id_evenement=$id_evenement");
+		$infos['inscrits_par_personne_moyenne'] = _T('asso:duree_temps', array('nombre'=>association_nbrefr($stats['moy_i'],1), 'unite'=>_T('personnes')) );
+		$infos['inscrits_par_personne_ecart_type'] = _T('asso:duree_temps', array('nombre'=>association_nbrefr(sqrt($stats['var_i']),1), 'unite'=>_T('personnes')) );
+		$infos['montant_par_personne_moyenne'] = association_prixfr($stats['moy_m']);
+		$infos['montant_par_personne_ecart_type'] = association_prixfr(sqrt($stats['var_i']));
+		echo totauxinfos_intro($evenement['titre'] , 'evenement', $id_evenement, $infos );
+		// TOTAUX : nombres d'inscrits par etat de paiement
+		$liste_libelles = $liste_effectifs = array();
+		$liste_libelles['valide'] = _T('asso:activite_entete_validees');
+		$liste_libelles['pair'] = _T('asso:activite_entete_impayees');
+		$liste_effectifs['valide'] = sql_countsel('spip_asso_activites', "id_evenement=$id_evenement AND statut='ok'");
+		$liste_effectifs['impair'] = sql_countsel('spip_asso_activites', "id_evenement=$id_evenement AND statut<>'ok'");
+		echo totauxinfos_effectifs('activites', $liste_libelles, $liste_effectifs);
+		// TOTAUX : montants des participations validees
+		$montant = sql_fetsel('SUM(montant) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement AND statut='ok' " );
+		echo totauxinfos_sommes(_T('asso:participations'), $montant['encaisse'], NULL);
+		// datation
 		echo association_date_du_jour();
-		if ($agenda) {
-			$query = sql_select('*', 'spip_evenements', "id_evenement=$id_evenement") ;
-		 	while ($data = sql_fetch($query)) {
-				echo '<p><strong>'.$data['date_debut'].'<br />'.$data['titre'].'</strong></p>';
-				echo '<p>'._T('asso:activite_liste_legende').'</p>';
-			}
-		}
-		// TOTAUX
-		$query = sql_select('SUM(inscrits) AS inscrits, SUM(montant) AS encaisse', 'spip_asso_activites', "id_evenement='$id_evenement' AND statut ='ok' " );
-		while ($data = sql_fetch($query)) {
-			echo '<p><strong style="color:blue;">';
-			echo _T('asso:activite_liste_nombre_inscrits',array('total' => $data['inscrits'])).'</strong><br />';
-			echo '<strong style="color: #9F1C30;">';
-			echo _T('asso:activite_liste_total_participations',array('total' => association_prixfr($data['encaisse'])));
-			echo '</strong><br/></p>';
-		}
 		echo fin_boite_info(true);
-		$res=association_icone(_T('asso:activite_bouton_ajouter_inscription'),  generer_url_ecrire('edit_activite', 'id_evenement='.$id_evenement), 'panier_in.gif');
-		$res.=association_icone(_T('asso:activite_bouton_voir_liste_inscriptions'),  generer_url_ecrire('pdf_activite','id='.$id_evenement), 'print-24.png');
-
+		$res = association_icone(_T('asso:activite_bouton_ajouter_inscription'),  generer_url_ecrire('edit_activite', 'id_evenement='.$id_evenement), 'panier_in.gif');
+		if (test_plugin_actif('FPDF')) {
+			$res .= association_icone(_T('asso:activite_bouton_voir_liste_inscriptions'),  generer_url_ecrire('pdf_activite','id='.$id_evenement), 'print-24.png');
+		}
+		$res .= association_icone(_T('asso:bouton_retour'), generer_url_ecrire('activites','annee='.substr($evenement['date_debut'],0,4)), 'retour-24.png');
 		echo bloc_des_raccourcis($res);
 		echo debut_droite('',true);
 		echo debut_cadre_relief('', false, '', $titre = _T('asso:activite_titre_inscriptions_activites'));
 	// PAGINATION ET FILTRES
-		echo '<table width="100%">';
-		echo '<tr>';
-		if ($agenda) {
-			$data = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement") ;
-			$date = substr($data['date_debut'],0,10);
-			$date = association_datefr($date); // ne sert pas ????
-			$titre = $data['titre']; // non plus
-		}
-		echo "<td style='text-align:right;'>\n";
+		echo "<table class='asso_tablo_filtres'><tr>\n<td width='70%'></td><td width='30%' class='formulaire'>";
 		echo '<form method="post" action="'.$url_voir_activites.'"><div>';
 		echo '<input type="hidden" name="id" value="'.$id_evenement.'" />';
-		echo "<select name='statut' class='fondl' onchange='form.submit()'>\n";
-		echo '<option value="%"';
-		if ($statut=="%") {echo ' selected="selected"';}
-		echo '>'._T('asso:activite_entete_toutes').'</option>';
-		echo '<option value="ok"';
-		if ($statut=="ok") { echo ' selected="selected"'; }
-		echo '>'._T('asso:activite_entete_validees').'</option>';
+		echo '<select name="statut" onchange="form.submit()">';
+		echo '<option value="%"'. (($statut=='%')?' selected="selected"':'') .'>'._T('asso:activite_entete_toutes').'</option>';
+		echo '<option value="ok"'. (($statut=='ok')?' selected="selected"':'') .'>'._T('asso:activite_entete_validees').'</option>';
+		echo '<option value="ok"'. (($statut=='')?' selected="selected"':'') .'>'._T('asso:activite_entete_impayees').'</option>';
 		echo "</select></div></form></td></tr></table>\n";
 	//TABLEAU
 		echo '<form action="'.generer_url_ecrire('action_activites').'" method="post">';
-		echo "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-		echo "<tr style='background-color: #DBE1C5;'>\n";
-		echo '<th style="text-align: center;">'._T('asso:activite_entete_id').'</th>';
-		echo '<th style="text-align: center;">'._T('asso:activite_entete_date').'</th>';
-		echo '<th style="text-align: center;">'._T('asso:activite_entete_nom').'</th>';
-		echo '<th style="text-align: center;">'._T('asso:activite_entete_adherent').'</th>';
-		echo '<th style="text-align: center;">'._T('asso:activite_entete_inscrits').'</th>';
-		echo '<th style="text-align: center;">'._T('asso:activite_entete_montant').'</th>';
-		echo '<th colspan="3" style="text-align: center;">'._T('asso:activite_entete_action').'</th>';
-		echo '</tr>';
+		echo "<table width='100%' class='asso_tablo' id='asso_tablo_activite'>\n";
+		echo "<thead>\n<tr>";
+		echo '<th>'. _T('asso:entete_id') .'</th>';
+		echo '<th>'. _T('asso:entete_date') .'</th>';
+		echo '<th>'. _T('asso:entete_nom') .'</th>';
+		echo '<th>'. _T('asso:activite_entete_inscrits') .'</th>';
+		echo '<th>'. _T('asso:entete_montant') .'</th>';
+		echo '<th colspan="3">'. _T('asso:entete_action') .'</th>';
+		echo "</tr>\n</thead><tbody>";
 		$query = sql_select('*', 'spip_asso_activites', "id_evenement=$id_evenement AND statut LIKE '$statut' ", '', 'id_activite') ;
 		while ($data = sql_fetch($query)) {
-			$id = $data['id_adherent'];
-			$adh = !$id ? 'X' :
-			  ("<a href='" .generer_url_ecrire('voir_adherent', "id=$id") . "'>$id</a>");
-			if($data['statut']=='ok') {
-				$class= "valide";
-			} else {
-				$class="pair";
-			}
-			echo "\n<tr>";
-			echo '<td style="text-align:right;" class="'.$class. ' border1">'.$data['id_activite'].'</td>';
-			echo '<td style="text-align: center;;" class="'.$class. ' border1">'.association_datefr($data['date']).'</td>';
-			echo '<td class="'.$class. ' border1">';
-			if(empty($data['email'])) { echo $data['nom']; }
-			else { echo '<a href="mailto:'.$data['email'].'">'.$data['nom'].'</a>'; }
-			echo '</td>';
-			echo '<td style="text-align: right;" class="'.$class. ' border1">'.$adh.'</td>';
-			echo '<td style="text-align: right;" class="'.$class. ' border1">'.$data['inscrits'].'</td>';
-			echo '<td style="text-align: right;" class="'.$class. ' border1">'.association_prixfr($data['montant']).'</td>';
-			echo '<td style="text-align: center;" class="'.$class. ' border1">', association_bouton('activite_bouton_maj_inscription', 'edit-12.gif', 'edit_activite','id='.$data['id_activite']), '</td>';
-			echo '<td style="text-align: center;" class="'.$class. ' border1">', association_bouton('activite_bouton_ajouter_inscription', 'cotis-12.gif', 'ajout_participation', 'id='.$data['id_activite']), '</td>';
-			echo '<td style="text-align: center;" class="'.$class. ' border1"><input name="delete[]" type="checkbox" value="'.$data['id_activite'].'" /></td>';
-			echo '</tr>';
+			echo '<tr class="'.(($data['statut']=='ok')?'valide':'pair').'">';
+			echo '<td class="integer">'.$data['id_activite'].'</td>';
+			echo '<td class="date">'.association_datefr($data['date']).'</td>';
+			echo '<td class="text">'.  association_calculer_lien_nomid($data['nom'],$data['id_adherent']) .'</td>';
+			echo '<td class="integer">'.$data['inscrits'].'</td>';
+			echo '<td class="decimal">'. association_prixfr($data['montant']) .'</td>';
+			echo '<td class="action">', association_bouton('activite_bouton_maj_inscription', 'edit-12.gif', 'edit_activite','id='.$data['id_activite']), '</td>';
+			echo '<td class="action">'. association_bouton('activite_bouton_ajouter_inscription', 'cotis-12.gif', 'ajout_participation', 'id='.$data['id_activite']) .'</td>';
+			echo '<td class="action"><input name="delete[]" type="checkbox" value="'.$data['id_activite'].'" /></td>';
 			if ($data['commentaire']) {
-				echo '<tr><td colspan="10" style="text-align: justify;" class ='.$class.'>'.$data['commentaire']."</td></tr>\n";
+				echo '</tr><tr class="'.(($data['statut']=='ok')?'valide':'pair').'"><td colspan="8" class="text">'.$data['commentaire'].'</td>';
 			}
+			echo "</tr>\n";
 		}
-		echo '</table>';
-		echo "\n<table width='100%'><tr><td style='text-align: right;'>";
-		echo '<input type="submit" value="'._T('asso:bouton_supprimer').'" class="fondo" />';
+		echo "</tbody>\n</table>\n";
+		echo "<table class='asso_tablo_filtres'><tr>\n<td width='90%'></td><td width='10%' class='formulaire'>";
+		echo '<input type="submit" value="'._T('asso:bouton_supprimer').'" />';
 		echo "</td></tr></table>\n";
 		echo '</form>';
 		fin_cadre_relief();

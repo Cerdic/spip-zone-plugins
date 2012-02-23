@@ -21,9 +21,10 @@ function formulaires_editer_asso_ressources_charger_dist($id_ressource='') {
 	if (!$id_ressource) {
 		$contexte['date_acquisition'] = date('Y-m-d');
 	}
-	
+
 	/* paufiner la presentation des valeurs  */
-	if ($contexte['pu']) $contexte['pu'] = association_nbrefr($contexte['pu']);
+	if ($contexte['pu'])
+		$contexte['pu'] = association_nbrefr($contexte['pu']);
 
 	return $contexte;
 }
@@ -31,19 +32,15 @@ function formulaires_editer_asso_ressources_charger_dist($id_ressource='') {
 function formulaires_editer_asso_ressources_verifier_dist($id_ressource='') {
 	$erreurs = array();
 	/* on verifie que prix de location ne soit pas negatifs */
-	$pu = association_recupere_montant(_request('pu'));
-
-	if ($pu<0) $erreurs['pu'] = _T('asso:erreur_montant');
-
+	if ($erreur = association_verifier_montant(_request('pu')) )
+		$erreurs['pu'] = $erreur;
 	/* verifier la date */
-	if ($erreur_date = association_verifier_date(_request('date_acquisition'))) {
-		$erreurs['date_acquisition'] = _request('date_acquisition')."&nbsp;:&nbsp;".$erreur_date; /* on ajoute la date eronee entree au debut du message d'erreur car le filtre affdate corrige de lui meme et ne reaffiche plus les valeurs eronees */
-	}
+	if ($erreur = association_verifier_date(_request('date_acquisition')) )
+		$erreurs['date_acquisition'] = $erreur;
 
 	if (count($erreurs)) {
-	$erreurs['message_erreur'] = _T('asso:erreur_titre');
+		$erreurs['message_erreur'] = _T('asso:erreur_titre');
 	}
-	
 	return $erreurs;
 }
 

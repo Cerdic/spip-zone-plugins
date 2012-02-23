@@ -64,7 +64,8 @@ function request_statut_interne()
 	}
 }
 
-function association_ajouterBoutons($boutons_admin) {
+function association_ajouterBoutons($boutons_admin)
+{
 	// si on est admin
 	if ($GLOBALS['connect_statut']=='0minirezo' && $GLOBALS['connect_toutes_rubriques']) {
 		$menu = 'naviguer';
@@ -82,13 +83,15 @@ function association_ajouterBoutons($boutons_admin) {
 }
 
 // recupere dans une chaine un champ d'une table spip_asso_XX pour un enregistrement identifie par son id_XX
-function sql_asso1champ($table, $id, $champ) {
+function sql_asso1champ($table, $id, $champ)
+{
 	$data = sql_fetsel($champ, "spip_asso_{$table}s", "id_$table=".intval($id));
 	return $data[$champ];
 }
 
 // recupere dans un tableau associatif un enregistrement d'une table spip_asso_XX identifie par son id_XX
-function sql_asso1ligne($table, $id) {
+function sql_asso1ligne($table, $id)
+{
 	$data = sql_fetsel('*', "spip_asso_{$table}s", "id_$table=".intval($id));
 	return $data;
 }
@@ -105,7 +108,8 @@ function exercice_date_fin($exercice) {
 }
 
 // Affichage micro-formate d'un nom complet (de membre) suivant la configuration du plugin (i.e. champs geres ou non)
-function association_calculer_nom_membre($civilite, $prenom, $nom, $html_tag='') {
+function association_calculer_nom_membre($civilite, $prenom, $nom, $html_tag='')
+{
 	$res = '';
 	if ($html_tag) {
 		$res = '<'.$html_tag.' class="'. (($civilite || $prenonm)?'n':'fn') .'">';
@@ -129,7 +133,8 @@ function association_calculer_nom_membre($civilite, $prenom, $nom, $html_tag='')
 // En fait c'est pour les modules dons/ventes/activites/prets ou l'acteur (donateur/acheteur/inscrit/emprunteur)
 // peut etre un membre/auteur (son id_acteur est alors renseigne) mais pas forcement son nom (qui peut etre different)
 // ou peut etre une personne exterieure a l'association (on a juste le nom obligatoire alors)
-function association_calculer_lien_nomid($nom, $id, $type='membre', $html_tag='') {
+function association_calculer_lien_nomid($nom, $id, $type='membre', $html_tag='')
+{
 	$res = '';
 	if ($html_tag) {
 		$res = '<'.$html_tag.' class="fn">';
@@ -159,11 +164,11 @@ function association_datefr($iso_date, $css_class='', $htm_abbr='abbr')
 function association_verifier_date($date)
 {
 	if (!preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $date))
-		return _T('asso:erreur_format_date');
+		return _T('asso:erreur_format_date', array('date'=>$date) );
 	list($annee, $mois, $jour) = explode('-',$date);
 	if (!checkdate($mois, $jour, $annee))
-		return _T('asso:erreur_date');
-	return;
+		return _T('asso:erreur_valeur_date', array('date'=>$date) );
+	return FALSE;
 }
 
 // Affichage de duree localisee et micro-formatee
@@ -178,7 +183,7 @@ function association_dureefr($nombre, $unite='', $htm_abbr='abbr')
 			$nombre = intval($nombre);
 			$frmt_m .= $nombre.'Y';
 			$valeur = association_nbrefr($nombre,0);
-			$unite = ($nombre<=1) ? _T('spip:date_une_annee') : _T('spip:date_annees');
+			$unite = ($nombre<=1) ? _T('local:an') : _T('local:ans');
 			break;
 		case 'M' : // month/mois
 			$nombre = intval($nombre);
@@ -198,7 +203,7 @@ function association_dureefr($nombre, $unite='', $htm_abbr='abbr')
 			$nombre = intval($nombre);
 			$frmt_m .= $nombre.'D';
 			$valeur = association_nbrefr($nombre,0);
-			$unite = ($nombre<=1) ? _T('spip:date_un_jour') : _T('spip:date_jours');
+			$unite = ($nombre<=1) ? _T('local:jour') : _T('spip:date_jours');
 			break;
 		case 'H' : // hour/heure
 			$frmt_m .= 'T'.str_replace('00M', '',  str_replace(':','H',$nombre.':00').'M' );
@@ -227,10 +232,10 @@ function association_dureefr($nombre, $unite='', $htm_abbr='abbr')
 					$frmt_h = '';
 					break;
 				case 1:
-					$frmt_h = _T('duree_temps', array('nombre'=>1,'unite'=>$_T('spip:date_un_jour')));
+					$frmt_h = _T('duree_temps', array('nombre'=>1,'unite'=>_T('local:jour')));
 					break;
 				default:
-					$frmt_h =  _T('duree_temps', array('nombre'=>association_nbrefr($nommbre['-1'],0),'unite'=>$_T('spip:date_jours')));
+					$frmt_h =  _T('duree_temps', array('nombre'=>association_nbrefr($nommbre['-1'],0),'unite'=>_T('spip:date_jours')));
 					break;
 			}
 			if ($nombre[0])
@@ -240,10 +245,10 @@ function association_dureefr($nombre, $unite='', $htm_abbr='abbr')
 					$frmt_h .= '';
 					break;
 				case 1:
-					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>$_T('spip:date_une_heure')));
+					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>_T('spip:date_une_heure')));
 					break;
 				default:
-					$frmt_h .= _T('duree_temps', array('nombre'=>association_nbrefr($nombre[0],0),'unite'=>$_T('spip:date_heures')));
+					$frmt_h .= _T('duree_temps', array('nombre'=>association_nbrefr($nombre[0],0),'unite'=>_T('spip:date_heures')));
 					break;
 			}
 			if ($nombre[1])
@@ -253,10 +258,10 @@ function association_dureefr($nombre, $unite='', $htm_abbr='abbr')
 					$frmt_h .= '';
 					break;
 				case 1:
-					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>$_T('spip:date_une_minute')));
+					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>_T('spip:date_une_minute')));
 					break;
 				default:
-					$frmt_h .= _T('duree_temps', array('nombre'=>association_nbrefr($nombre[1],0),'unite'=>$_T('spip:date_minutes')));
+					$frmt_h .= _T('duree_temps', array('nombre'=>association_nbrefr($nombre[1],0),'unite'=>_T('spip:date_minutes')));
 					break;
 			}
 			if ($nombre[2])
@@ -266,15 +271,16 @@ function association_dureefr($nombre, $unite='', $htm_abbr='abbr')
 					$frmt_h .= '';
 					break;
 				case 1:
-					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>$_T('spip:date_une_seconde')));
+					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>_T('spip:date_une_seconde')));
 					break;
 				default:
-					$frmt_h .= _T('duree_temps', array('nombre'=>association_nbrefr($nombre[2],0),'unite'=>$_T('spip:date_secondes')));
+					$frmt_h .= _T('duree_temps', array('nombre'=>association_nbrefr($nombre[2],0),'unite'=>_T('spip:date_secondes')));
 					break;
 			}
 			$frmt_h .= '. ';
 			break;
-		default : // (full) ISO DateTime or Date : no check !!!
+		case 'I' : // (full) ISO DateTime or Date : no check !!!
+		default :
 			$frmt_m .= $nombre;
 			$nombre = explode('T',$nombre,2);
 			$ladate = explode(':',$nombre[0]);
@@ -284,10 +290,10 @@ function association_dureefr($nombre, $unite='', $htm_abbr='abbr')
 					$frmt_h = '';
 					break;
 				case 1:
-					$frmt_h = _T('duree_temps', array('nombre'=>1,'unite'=>$_T('spip:date_une_annee')));
+					$frmt_h = _T('duree_temps', array('nombre'=>1,'unite'=>_T('local:an')));
 					break;
 				default:
-					$frmt_h =  _T('duree_temps', array('nombre'=>association_nbrefr($ladate[0],0),'unite'=>$_T('spip:date_annees')));
+					$frmt_h =  _T('duree_temps', array('nombre'=>association_nbrefr($ladate[0],0),'unite'=>_T('local:ans')));
 					break;
 			}
 			if ($ladate[1])
@@ -297,10 +303,10 @@ function association_dureefr($nombre, $unite='', $htm_abbr='abbr')
 					$frmt_h .= '';
 					break;
 				case 1:
-					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>$_T('spip:date_un_mois')));
+					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>_T('spip:date_un_mois')));
 					break;
 				default:
-					$frmt_h .= _T('duree_temps', array('nombre'=>association_nbrefr($ladate[1],0),'unite'=>$_T('spip:date_mois')));
+					$frmt_h .= _T('duree_temps', array('nombre'=>association_nbrefr($ladate[1],0),'unite'=>_T('spip:date_mois')));
 					break;
 			}
 			if ($ladate[2])
@@ -310,10 +316,10 @@ function association_dureefr($nombre, $unite='', $htm_abbr='abbr')
 					$frmt_h .= '';
 					break;
 				case 1:
-					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>$_T('spip:date_un_jour')));
+					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>_T('local:jour')));
 					break;
 				default:
-					$frmt_h .= _T('duree_temps', array('nombre'=>association_nbrefr($ladate[2],0),'unite'=>$_T('spip:date_jours')));
+					$frmt_h .= _T('duree_temps', array('nombre'=>association_nbrefr($ladate[2],0),'unite'=>_T('spip:date_jours')));
 					break;
 			}
 			if (count($lheure))
@@ -324,10 +330,10 @@ function association_dureefr($nombre, $unite='', $htm_abbr='abbr')
 					$frmt_h .= '';
 					break;
 				case 1:
-					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>$_T('spip:date_une_heure')));
+					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>_T('spip:date_une_heure')));
 					break;
 				default:
-					$frmt_h .=  _T('duree_temps', array('nombre'=>association_nbrefr($lheure[0],0),'unite'=>$_T('spip:date_heures')));
+					$frmt_h .=  _T('duree_temps', array('nombre'=>association_nbrefr($lheure[0],0),'unite'=>_T('spip:date_heures')));
 					break;
 			}
 			if ($lheure[1])
@@ -337,10 +343,10 @@ function association_dureefr($nombre, $unite='', $htm_abbr='abbr')
 					$frmt_h .= '';
 					break;
 				case 1:
-					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>$_T('spip:date_une_minute')));
+					$frmt_h .= _T('duree_temps', array('nombre'=>1,'unite'=>_T('spip:date_une_minute')));
 					break;
 				default:
-					$frmt_h .=  _T('duree_temps', array('nombre'=>association_nbrefr($lheure[1],0),'unite'=>$_T('spip:date_minutes')));
+					$frmt_h .=  _T('duree_temps', array('nombre'=>association_nbrefr($lheure[1],0),'unite'=>_T('spip:date_minutes')));
 					break;
 			}
 			if ($lheure[2])
@@ -350,10 +356,10 @@ function association_dureefr($nombre, $unite='', $htm_abbr='abbr')
 					$frmt_h = '';
 					break;
 				case 1:
-					$frmt_h = _T('duree_temps', array('nombre'=>1,'unite'=>$_T('spip:date_une_seconde')));
+					$frmt_h = _T('duree_temps', array('nombre'=>1,'unite'=>_T('spip:date_une_seconde')));
 					break;
 				default:
-					$frmt_h =  _T('duree_temps', array('nombre'=>association_nbrefr($lheure[2],0),'unite'=>$_T('spip:date_secondes')));
+					$frmt_h =  _T('duree_temps', array('nombre'=>association_nbrefr($lheure[2],0),'unite'=>_T('spip:date_secondes')));
 					break;
 			}
 			$frmt_h .= '. ';
@@ -366,7 +372,8 @@ function association_dureefr($nombre, $unite='', $htm_abbr='abbr')
 
 // micro-Formatage des montants avec devise
 // on n'utilise pas la fontcion PHP money_format() --qui ne fonctionne pas sous Windows-- car on veut micro-formater avec une devise fixee par la configuration (en fait les chaines de langue) du plugin
-function association_prixfr($montant, $unite_code='', $unite_nom='', $htm_span='span', $htm_abbr='abbr') {
+function association_prixfr($montant, $unite_code='', $unite_nom='', $htm_span='span', $htm_abbr='abbr')
+{
 	$res = "<$htm_span class='money price'>"; // pour la reference est "price" <http://microformats.org/wiki/hproduct> (reconnu par les moteurs de recherche), mais "money" <http://microformats.org/wiki/currency-brainstorming> est d'usage courant aussi
 	$montant = "<$htm_abbr class='amount' title='$montant'>". association_nbrefr($montant) ."</$htm_abbr>";
 	$devise = "<$htm_abbr class='currency' title='". _T('asso:devise_code_iso') .'\'>'. _T('asso:devise_symbole') ."</$htm_abbr>";
@@ -410,7 +417,8 @@ function association_nbrefr($montant, $decimales=2, $l10n='')
 }
 
 /* prend en parametre le nom de l'argument a chercher dans _request et retourne un float */
-function association_recupere_montant ($valeur) {
+function association_recupere_montant($valeur)
+{
 	if ($valeur!='') {
 		$valeur = str_replace(' ', '', $valeur); /* suppprime les espaces separateurs de milliers */
 		$valeur = str_replace(',', '.', $valeur); /* convertit les , en . */
@@ -420,7 +428,28 @@ function association_recupere_montant ($valeur) {
 	return $valeur;
 }
 
-	//Affichage du message indiquant la date
+/* s'assurer que la valeur saisie est un float positif */
+function association_verifier_montant($valeur)
+{
+	if (association_recupere_montant($valeur)<0)
+		return _T('asso:erreur_montant');
+	else
+		return FALSE;
+}
+
+/* s'assurer que l'entier saisie correspond bien a un id_auteur de la table spip_asso_membres (par defaut) ou spip_auteurs (si on elargi a tous les autteurs --ceci permet d'editer des membres effaces tant qu'ils sont references par SPIP) */
+function association_verifier_membre($id_auteur, $touslesauteurs=false)
+{
+	if ($id_auteur) {
+		$id_auteur = intval($id_auteur);
+		if (sql_countsel('spip_'.($touslesauteurs?'auteurs':'asso_membres'), "id_auteur=$id_auteur")==0) {
+			return _T('asso:erreur_id_adherent');
+		}
+	} else
+		return FALSE;
+}
+
+// Affichage du message indiquant la date
 function association_date_du_jour($heure=false)
 {
 	$ladate = affdate_jourcourt(date('d/m/Y'));
@@ -433,18 +462,16 @@ function association_date_du_jour($heure=false)
 	return $res;
 }
 
-function association_header_prive($flux){
+function association_header_prive($flux)
+{
 	$c = direction_css(find_in_path('association.css'));
 	return "$flux\n<link rel='stylesheet' type='text/css' href='$c' />";
 }
 
-function association_delete_tables($flux){
-  spip_unlink(cache_meta('association_metas'));
-}
-
 // Filtre pour "afficher" ou "cacher" un bloc div
 // Utilise dans le formulaire cvt "editer_asso_comptes.html"
-function affichage_div($type_operation,$list_operation) {
+function affichage_div($type_operation,$list_operation)
+{
 	if(strpos($list_operation, '-')) {
 		$operations = explode('-', $list_operation);
 		$res = 'cachediv';
@@ -461,7 +488,8 @@ function affichage_div($type_operation,$list_operation) {
 	return $res;
 }
 
-function encadre($texte,$avant='[',$apres=']') {
+function encadre($texte,$avant='[',$apres=']')
+{
     return ($texte=='')?'':$avant.$texte.$apres;
 }
 
@@ -500,6 +528,88 @@ function instituer_statut_interne_ici($auteur=array()){
 }
 
 
+function bloc_infos($TitreObjet,$NumObjet,$DesLignes=array(),$PrefixeLangue='asso')
+{
+	$res = debut_boite_info(true);
+	$res .= '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'. _T("$PrefixeLangue:$NumObjet") .'<br /><span class="spip_xx-large">'.$NumObjet.'</span></div>';
+	if (count($DesLignes))
+		foreach ($DesLignes as $dt=>$dd) {
+			$res .= '<p>'. _T("$PrefixeLangue:$dt") .'&nbsp;: '. propre($dd) .'</p>';
+		}
+	$res .= fin_boite_info(true);
+	return $res;
+}
+
+// Rappels sur l'objet dans le bloc infos
+// C'est un resume ou une petite presentation de l'objet en cours d'edition/lecture : ces informations permettent de situer le contexte de la page et n'apparaissent pas dans le bloc central !
+function totauxinfos_intro($titre,$type='',$id=0,$DesLignes=array(),$PrefixeLangue='asso')
+{
+	$res = '';
+	if ($type) {
+		$res .= '<div style="text-align: center" class="verdana1 spip_x-small">'. _T('asso:titre_num', array('titre'=>$type, 'num'=>$id) ) .'</div>';
+	}
+	$res .= '<div style="text-align: center" class="verdana1 spip_medium">'.$titre.'</div>';
+	if (count($DesLignes)) {
+		$res .= '<div class="verdana1 spip_xx-small">';
+		foreach ($DesLignes as $dt=>$dd) {
+			$res .= '<p>'. _T("$PrefixeLangue:$dt") .'&nbsp;: '. propre($dd) .'</p>';
+		}
+		$res .= '</div>';
+	}
+	return $res;
+}
+
+// Tableau des decomptes statistiques dans le bloc infos
+// On prend en entree deux tableaux de taille egale (non controlee) --respectivement pour les intitules/libelles et les effectifs/occurences-- qui sont indexes par la classe CSS associee (parce-qu'elle doit etre unique pour chaque ligne)
+function totauxinfos_effectifs($module='',$table_textes,$table_nombres,$decimales_significatives=0)
+{
+	$nombre = $nombre_total = 0;
+	$res = '<table width="100%">';
+	$res .= '<caption>'. _T('asso:'.$module.'_nombre_titre') .'</caption><tbody>';
+	foreach ($table_textes as $classe_css=>$libelle) {
+		$res .= '<tr class="'.$classe_css.'">';
+		$res .= '<td class"text">'._T('asso:'.$libelle).'</td>';
+		$res .= '<td class="integer">'. association_nbrefr($table_nombres[$classe_css],$decimales_significatives) .'</td>';
+		$nombre_total += $table_nombres[$classe_css];
+		$res .= '</tr>';
+	}
+	$res .= '</tbody>';
+	if (count($table_nombres)>1) {
+		$res .= '<tfoot>';
+		$res .= '<tr><th class="text">'._T('asso:liste_nombre_total').'</th>';
+		$res .= '<th class="integer">'. association_nbrefr($nombre_total,$decimales_significatives) .'</th></tr>';
+		$res .= '</tfoot>';
+	}
+	return $res.'</table>';
+}
+
+// Tableau des totaux comptables dans le bloc infos
+// On prend en entree : le complement de titre du tableau puis les sommes cumulees des recettes et des depenses. (tous ces parametres sont facultatifs, mais attention qu'un tableau est quand meme genere dans tous les cas)
+function totauxinfos_sommes($legende='',$somme_recettes=0,$somme_depenses=0)
+{
+	$res = '<table width="100%">';
+	$res .= '<caption>'. _T('asso:totaux_titre', array('titre'=>$legende)) .'</caption><tbody>';
+	if ($somme_recettes) {
+		$res .= '<tr class="impair">'
+		. '<th class="entree">'. _T('asso:bilan_recettes') .'</th>'
+		. '<td class="decimal">' .association_prixfr($somme_recettes). ' </td>'
+		. '</tr>';
+	}
+	if ($somme_depenses) {
+		$res .= '<tr class="pair">'
+		. '<th class="sortie">'. _T('asso:bilan_depenses') .'</th>'
+		. '<td class="decimal">'.association_prixfr($somme_depenses) .'</td>'
+		. '</tr>';
+	}
+	if ($somme_recettes && $somme_depenses) {
+		$solde = $somme_recettes-$somme_depenses;
+		$res .= '<tr class="'.($solde>0?'impair':'pair').'">'
+		. '<th class="solde">'. _T('asso:bilan_solde') .'</th>'
+		. '<td class="decimal">'.association_prixfr($solde).'</td>'
+		. '</tr>';
+	}
+	return $res.'</tbody></table>';
+}
 // pour executer les squelettes comportant la balise Meta
 include_spip('balise/meta');
 // charger les metas donnees
