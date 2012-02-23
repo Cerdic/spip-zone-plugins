@@ -1,17 +1,11 @@
 <?php
-
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-// Produit automatiquement par le plugin LangOnet a partir de la langue source fr
-// Module: agenda
-// Langue: fr
-// Date: 27-05-2011 12:07:19
-// Items: 84
-
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/agenda/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// A
+	// A
 	'absence_prise_en_compte' => 'Votre absence est enregistrée',
 	'activite_editoriale' => 'Activité Éditoriale',
 	'afficher_calendrier' => 'Afficher le calendrier',
@@ -23,14 +17,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_suivante' => 'année suivante',
 	'aucun_evenement' => 'aucun événement',
 	'aucune_rubrique_mode_agenda' => 'Par défaut, toutes les rubriques permettent d\'utiliser les événements. Si vous activez le mode agenda sur une ou plusieurs rubriques, la gestion des événements sera limitée a sa branche.',
-// B
+
+	// B
 	'bouton_annuler' => 'Annuler',
 	'bouton_supprimer' => 'Supprimer',
-// C
+
+	// C
 	'confirm_suppression_inscription' => 'Voulez-vous vraiment supprimer cette inscription ?',
+	'connexion_necessaire_pour_inscription' => 'Merci de <a href=\'#LOGIN_PUBLIC\'>vous connecter</a> pour pouvoir vous inscrire à cet événement.',
 	'creer_evenement' => 'Créer un événement',
-	'connexion_necessaire_pour_inscription' => "Merci de <a href='#LOGIN_PUBLIC'>vous connecter</a> pour pouvoir vous inscrire &agrave; cet &eacute;v&eacute;nement.",
-// E
+
+	// E
 	'erreur_article_interdit' => 'Vous n\'avez pas le droit d\'associer cet événement à cet article',
 	'erreur_article_manquant' => 'Vous devez indiquer un article',
 	'erreur_date' => 'Cette date est incorrecte',
@@ -57,34 +54,38 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenements' => 'Événements',
 	'evenements_a_venir' => 'À venir',
 	'evenements_depuis_debut' => 'Depuis le début',
-// F
+
+	// F
 	'fermer' => 'fermer',
-// G
+
+	// G
 	'groupes_mots' => 'Groupes de mots-clé',
-// I
+
+	// I
 	'icone_creer_evenement' => 'Créer un nouvel événement',
 	'icone_modifier_evenement' => 'Modifier l\'événement',
 	'indiquez_votre_choix' => 'Indiquez votre choix',
+	'info_1_place' => '1 place',
 	'info_aucun_evenement' => 'Aucun événement',
 	'info_evenement' => 'Événement',
+	'info_evenement_poubelle' => 'Événement supprimé',
 	'info_evenement_propose' => 'Événement proposé',
 	'info_evenement_publie' => 'Événement publié',
-	'info_evenement_poubelle' => 'Événement supprimé',
 	'info_evenements' => 'Événements',
-	'info_inscription' => 'Inscription en ligne&nbsp;:',
-	'info_lieu' => 'Lieu&nbsp;:',
+	'info_inscription' => 'Inscription en ligne :',
+	'info_lieu' => 'Lieu :',
+	'info_nb_places' => '@nb@ places',
 	'info_nombre_evenements' => '@nb@ événements',
 	'info_nouvel_evenement' => 'Nouvel événement',
-	'info_un_evenement' => '1 événement',
-	'info_1_place' => '1 place',
-	'info_nb_places' => '@nb@ places',
-	'info_reponses_inscriptions' => 'Réponses&nbsp;:',
-	'info_reponse_inscription_oui' => 'oui',
 	'info_reponse_inscription_non' => 'non',
 	'info_reponse_inscription_nsp' => '?',
+	'info_reponse_inscription_oui' => 'oui',
+	'info_reponses_inscriptions' => 'Réponses :',
+	'info_un_evenement' => '1 événement',
 	'inscrits' => 'Inscriptions',
 	'item_mots_cles_association_evenements' => 'aux événements',
-// L
+
+	// L
 	'label_inscription' => 'Inscription en ligne',
 	'label_places' => 'Limiter le nombre de places',
 	'label_reponse_jyparticipe' => 'J\'y serai',
@@ -94,19 +95,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_desinscrire' => 'Supprimer',
 	'lien_retirer_evenement' => 'Supprimer',
 	'liste_inscrits' => 'Liste des inscriptions',
-// M
+
+	// M
 	'mois_precedent' => 'mois précédent',
 	'mois_suivant' => 'mois suivant',
-// N
+
+	// N
 	'nb_mots_clefs' => '@nb@ mots-clés',
 	'nb_repetitions' => '@nb@ répétitions',
-// P
+
+	// P
 	'participation_incertaine_prise_en_compte' => 'Votre participation éventuelle est enregistrée',
 	'participation_prise_en_compte' => 'Votre participation est enregistrée',
 	'probleme_technique' => 'Un problème technique est survenu. Reessayez plus tard.',
-// R
-	'repetition_de' => 'Répétition de',
+
+	// R
 	'repetition' => 'Répétition',
+	'repetition_de' => 'Répétition de',
 	'rubrique_activer_agenda' => 'Activer le mode agenda',
 	'rubrique_dans_une_rubrique_mode_agenda' => 'Cette rubrique permet d\'utiliser les événements car elle est dans une rubrique dont le mode agenda a été activé',
 	'rubrique_desactiver_agenda' => 'Désactiver le mode agenda',
@@ -114,9 +119,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rubrique_mode_agenda' => 'Le mode agenda est activé pour cette rubrique et sa branche',
 	'rubrique_sans_gestion_evenement' => 'Le mode agenda n\'est pas activé pour cette rubrique',
 	'rubriques' => 'Rubriques Agenda',
-// S
+
+	// S
 	'sans_titre' => '(sans titre)',
-// T
+
+	// T
 	'telecharger' => 'Télécharger',
 	'texte_agenda' => 'AGENDA',
 	'texte_evenement_statut' => 'Cet événement est :',
@@ -124,10 +131,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_cadre_modifier_evenement' => 'Modifier un événement',
 	'titre_sur_l_agenda' => 'Sur l\'agenda',
 	'toutes_rubriques' => 'Toutes',
-// U
+
+	// U
 	'un_mot_clef' => '1 mot-clé',
 	'une_repetition' => '1 répétition',
-// V
-	'voir_evenements_rubrique' => 'Voir les événements de la rubrique',
+
+	// V
+	'voir_evenements_rubrique' => 'Voir les événements de la rubrique'
 );
+
 ?>
