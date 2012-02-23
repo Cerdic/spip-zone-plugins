@@ -113,13 +113,21 @@ function projection_representation($obj, $type) {
 
 	## le texte, c'est l'essentiel mais il ne figure pas dans l'entete
 	unset($data['texte']);
+	## le chapo et le PS sont du texte,
+	## ils peuvent contenir des raccourcis <docX>
+	foreach(explode(' ', 'chapo ps') as $i)
+		if (isset($data[$i]))
+			$data[$i] = projection_texte($data[$i], $data);
 
+	#
+	# Envoyer la representation YAML + content
+	#
 	$rep = "##### projection de l'article $obj[id_article]\n"
 		. "--- # metadata\n"
 		. yaml_encode(array_filter($data))
 		. "--- # content\n";
 
-	$rep .= $obj['texte'];
+	$rep .= projection_texte($obj['texte'], $data);
 
 	return $rep;
 }
@@ -141,11 +149,15 @@ function projection_mot($mot) {
 }
 function projection_doc($doc) {
 	$doc = array_filter($doc);
+	$conf['url_de_base'] = 'http://rezo.pagekite.net/spip2.1/';
+
+	#'<doc http://…………… copy|nocopy>
+	# conf : copy / nocopy / default: copy|nocopy
 
 	// URL absolue de maniere a pouvoir exporter
 	if (isset($doc['fichier'])
 	AND !preg_match(',://,', $fichier))
-		$doc['fichier'] = url_absolue(_DIR_IMG.$doc['fichier']);
+		$doc['fichier'] = url_absolue(_DIR_IMG.$doc['fichier'], $conf['url_de_base']);
 
 	if ($doc['vu'] == 'non') {
 		unset($doc['id_document']);
@@ -167,4 +179,253 @@ function projection_rubrique($rub) {
 		$rub = $rub['titre'];
 	return $rub;
 }
+
+# on va nettoyer un peu le texte notamment les liens !
+# mais c'est très difficile car dn SPIP tout est fait
+# pour exporter du HTML
+## le code ci-dessous casse pas mal de choses dans le texte
+function projection_texte($txt, &$data) {
+	include_spip('inc/texte');
+	$txt = echappe_html($txt, 'P', true);
+	#$txt = expanser_liens($txt /*,$connect */);
+
+	$txt = projection_dereferencer($txt, &$data);
+
+#	$txt = iconv_wordwrap($txt, 80);
+	$txt = echappe_retour($txt, 'P');
+	return $txt;
+}
+
+## dereferencer les liens et modeles
+function projection_dereferencer($texte, $data) {
+	$texte = projection_dereferencer_liens($texte, $data);
+	$texte = projection_dereferencer_modeles($texte, $data);
+	return $texte;
+}
+
+// cf. http://doc.spip.org/@traiter_modeles
+function projection_dereferencer_modeles($texte, &$data, $liens=null) {
+
+	// detecter les modeles (rapide)
+	if (strpos($texte,"<")!==false AND
+	  preg_match_all('/<[a-z_-]{3,}\s*[0-9|]+/iS', $texte, $matches, PREG_SET_ORDER)) {
+		foreach ($matches as $match) {
+			// Recuperer l'appel complet (y compris un eventuel lien)
+			$a = strpos($texte,$match[0]);
+			preg_match(_RACCOURCI_MODELE_DEBUT,
+			substr($texte, $a), $regs);
+			$regs[]=""; // s'assurer qu'il y a toujours un 5e arg, eventuellement vide
+			list(,$mod, $type, $id, $params, $fin) = $regs;
+			if ($fin AND
+			preg_match('/<a\s[^<>]*>\s*$/i',
+					substr($texte, 0, $a), $r)) {
+				$lien = array(
+					'href' => extraire_attribut($r[0],'href'),
+					'class' => extraire_attribut($r[0],'class'),
+					'mime' => extraire_attribut($r[0],'type')
+				);
+				$n = strlen($r[0]);
+				$a -= $n;
+				$cherche = $n + strlen($regs[0]);
+			} else {
+				$lien = false;
+				$cherche = strlen($mod);
+			}
+
+/*
+				// si un tableau de liens a ete passe, reinjecter le contenu d'origine
+				// dans les parametres, plutot que les liens echappes
+				if (!is_null($liens))
+					$params = str_replace($liens[0], $liens[1], $params);
+*/
+
+			  $modele = projection_dereferencer_modele($regs[0], $type, $id, $params, $lien, $connect);
+
+/*
+				// en cas d'echec, 
+				// si l'objet demande a une url, 
+				// creer un petit encadre vers elle
+				if ($modele === false) {
+					if (!$lien)
+						$lien = traiter_lien_implicite("$type$id", '', 'tout', $connect);
+					if ($lien)
+						$modele = '<a href="'
+						  .$lien['url']
+						  .'" class="spip_modele'
+						  . '">'
+						  .sinon($lien['titre'], _T('ecrire:info_sans_titre'))
+						  ."</a>";
+					else {
+						$modele = "";
+						if (test_espace_prive()) {
+							$modele = entites_html(substr($texte,$a,$cherche));
+							if (!is_null($liens))
+								$modele = "<pre>".str_replace($liens[0], $liens[1], $modele)."</pre>";
+						}
+					}
+				}
+*/
+
+				// le remplacer dans le texte
+				if ($modele !== false) {
+					#$modele = protege_js_modeles($modele);
+					$rempl = code_echappement($modele, 'P');
+					$texte = substr($texte, 0, $a)
+						. $rempl
+						. substr($texte, $a+$cherche);
+				}
+			}
+		}
+
+	return $texte;
+}
+
+function projection_dereferencer_modele($appel, $type, $id, $params, $lien, $connect) {
+#	$a = func_get_args();
+#	return var_export($a, true);
+	switch($type) {
+		case 'img':
+		case 'doc':
+		case 'emb':
+			if (is_numeric($id) AND $id>0) {
+				$url = projection_doc($doc = sql_fetsel('fichier', 'spip_documents', 'id_document='.$id));
+				$appel = preg_replace("/$id/", "| href=".$url." ", $appel, 1);
+				# <media|href=xxxxxx|small> ?
+			}
+			break;
+	}
+
+	return $appel;
+}
+
+// cf. http://doc.spip.org/@expanser_liens
+define('_RACCOURCI_LIEN', "/\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*)\]/msS");
+function projection_dereferencer_liens($texte, &$data) {
+	$sources = $inserts = $regs = array();
+	if (preg_match_all(_RACCOURCI_LIEN, $texte, $regs, PREG_SET_ORDER)) {
+		$lien = 'projection_lien'; #charger_fonction('lien', 'inc');
+		foreach ($regs as $k => $reg) {
+
+			$inserts[$k] = '@@SPIP_ECHAPPE_LIEN_' . $k . '@@';
+			$sources[$k] = $reg[0];
+			$texte = str_replace($sources[$k], $inserts[$k], $texte);
+
+			list($titre, $bulle, $hlang) = traiter_raccourci_lien_atts($reg[1]);
+			$r = $reg[count($reg)-1];
+			// la mise en lien automatique est passee par la a tort !
+			// corrigeons pour eviter d'avoir un <a...> dans un href...
+			if (strncmp($r,'<a',2)==0){
+				$href = extraire_attribut($r, 'href');
+				// remplacons dans la source qui peut etre reinjectee dans les arguments
+				// d'un modele
+				$sources[$k] = str_replace($r,$href,$sources[$k]);
+				// et prenons le href comme la vraie url a linker
+				$r = $href;
+			}
+			$regs[$k] = $lien($reg, $r, $titre, '', $bulle, $hlang, '', $connect);
+		}
+	}
+
+	// on passe a traiter_modeles la liste des liens reperes pour lui permettre
+	// de remettre le texte d'origine dans les parametres du modele
+#	$texte = traiter_modeles($texte, false, false, $connect, array($inserts, $sources));
+# 	$texte = corriger_typo($texte);
+	$texte = str_replace($inserts, $regs, $texte);
+	return $texte;
+}
+
+function projection_lien($reg, $lien, $texte='', $class='', $title='', $hlang='', $rel='', $connect='') {
+	if ($match = typer_raccourci($lien)) { 
+		@list($type,,$id,,$args,,$ancre) = $match;
+
+		// Si une langue est demandee sur un raccourci d'article, chercher
+		// la traduction ;
+		// - [{en}->art2] => traduction anglaise de l'article 2, sinon art 2
+		// - [{}->art2] => traduction en langue courante de l'art 2, sinon art 2
+		if ($hlang
+		AND $type == 'article'
+		AND $id_trad = sql_getfetsel('id_trad', 'spip_articles', "id_article=$id")
+		AND $id_dest = sql_getfetsel('id_article', 'spip_articles',
+			"id_trad=$id_trad  AND statut<>'refuse' AND lang=" . sql_quote($hlang))
+		)
+			$id = $id_dest;
+
+		# (article, 2) => URL publique de l'article 2
+		$url = generer_url_entite_absolue($id, $type, $args, $ancre, $connect);
+
+		# si le texte est vide aller chercher le titre
+		$lien = calculer_url("$type$id", $texte, 'tout', $connect);
+
+		$titre = strlen($reg[1]) ? $reg[1] : $lien['titre'];
+
+		return "[$titre->$url]";
+	}
+
+	return $reg[0];
+}
+
+## optionnellement, wordwrap (ne vaut pas un sentencewrap)
+## http://fr2.php.net/manual/fr/function.wordwrap.php#106088
+/**
+ * Word wrap
+ *
+ * @param  string  $string
+ * @param  integer $width
+ * @param  string  $break
+ * @param  boolean $cut
+ * @param  string  $charset
+ * @return string
+ */
+function iconv_wordwrap($string, $width = 75, $break = "\n", $cut = false, $charset = 'utf-8')
+{
+    $stringWidth = iconv_strlen($string, $charset);
+    $breakWidth  = iconv_strlen($break, $charset);
+
+    if (strlen($string) === 0) {
+        return '';
+    } elseif ($breakWidth === null) {
+        throw new Zend_Text_Exception('Break string cannot be empty');
+    } elseif ($width === 0 && $cut) {
+        throw new Zend_Text_Exception('Can\'t force cut when width is zero');
+    }
+
+    $result    = '';
+    $lastStart = $lastSpace = 0;
+
+    for ($current = 0; $current < $stringWidth; $current++) {
+        $char = iconv_substr($string, $current, 1, $charset);
+
+        if ($breakWidth === 1) {
+            $possibleBreak = $char;
+        } else {
+            $possibleBreak = iconv_substr($string, $current, $breakWidth, $charset);
+        }
+
+        if ($possibleBreak === $break) {
+            $result    .= iconv_substr($string, $lastStart, $current - $lastStart + $breakWidth, $charset);
+            $current   += $breakWidth - 1;
+            $lastStart  = $lastSpace = $current + 1;
+        } elseif ($char === ' ') {
+            if ($current - $lastStart >= $width) {
+                $result    .= iconv_substr($string, $lastStart, $current - $lastStart, $charset) . $break;
+                $lastStart  = $current + 1;
+            }
+
+            $lastSpace = $current;
+        } elseif ($current - $lastStart >= $width && $cut && $lastStart >= $lastSpace) {
+            $result    .= iconv_substr($string, $lastStart, $current - $lastStart, $charset) . $break;
+            $lastStart  = $lastSpace = $current;
+        } elseif ($current - $lastStart >= $width && $lastStart < $lastSpace) {
+            $result    .= iconv_substr($string, $lastStart, $lastSpace - $lastStart, $charset) . $break;
+            $lastStart  = $lastSpace = $lastSpace + 1;
+        }
+    }
+
+    if ($lastStart !== $current) {
+        $result .= iconv_substr($string, $lastStart, $current - $lastStart, $charset);
+    }
+
+    return $result;
+}
+
 
