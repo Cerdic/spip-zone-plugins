@@ -1,8 +1,8 @@
 /*jshint asi: true, bitwise: true, boss:true, curl: true, debug:false, eqeqeq:true,
   eqnull: false, evil: false, forin: true, immed: false, laxbreak: false, newcap: true,
   noarg:true, noempty: true, nonew: true, onevar: true, passfail: false, plusplus: true,
-  regexp: false, undef: true, strict: true, white: false, smarttabs: true */
-/*global document:true, window:true, jQuery:true, $:true, History:true, prepareForAjax:true */
+  regexp: true, undef: true, strict: true, white: false, smarttabs: true */
+/*global document:true, window:true, jQuery:true, $:true, History:true */
 
 function AjaxNav() {
     "use strict";
@@ -135,6 +135,7 @@ function AjaxNav() {
 	    $(this).click(function (event) {
 		// on ne change rien pour les ctr-click etc.
 		if ( event.which === 2 || event.metaKey ) { return true; }
+		if ($(this).hasClass('thickbox')) { return true; }
 		History.pushState(null, null, $(this).attr('href'));
 		event.preventDefault();
 		return false;
