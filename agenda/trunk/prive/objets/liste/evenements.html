@@ -20,7 +20,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_evt(EVENEMENTS){id_evenement?}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{where?}{statut?}{!evenement_passe #ENV{date_debut,#ENV{date}}}{!evenement_a_venir #ENV{date_debut,#ENV{date}}}{recherche?}{tri #ENV{par,date_debut},#GET{defaut_tri}}{pagination #ENV{nb,15}}>
+	<BOUCLE_liste_evt(EVENEMENTS){id_evenement?}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{where?}{statut?}{!evenement_passe #ENV{date_debut,#ENV{date}}}{!evenement_a_venir #ENV{date_fin,#ENV{date_debut,#ENV{date}}|agenda_moisdecal{1,'Y-m-d H:i:00'}}}{recherche?}{tri #ENV{par,date_debut},#GET{defaut_tri}}{pagination #ENV{nb,15}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE)][(#ID_EVENEMENT_SOURCE|oui)repetition]">
 			<td class='statut'>[(#STATUT|puce_statut{evenement,#ID_EVENEMENT})]</td>
 			<td class='date'>[(#DATE_DEBUT|affdate_jourcourt|unique{liste_evt})]</td>
