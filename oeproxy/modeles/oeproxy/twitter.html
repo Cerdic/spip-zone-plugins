@@ -1,11 +1,11 @@
-<div class="oe-tweet-block">
-	<div class="oe-tweet-user-block">
+<blockquote class="oe-tweet-block">
+	<p class="oe-tweet-text">#ENV*{text}</p>
+	<div class="oe-tweet-user-block">&mdash;
 		<a href="http://twitter.com/#ENV*{screen_name}"><img src="#ENV*{profile_image}">
 			<span class="oe-tweet-user-screen_name">@#ENV*{screen_name}</span></a>
 			<span class="oe-tweet-user-name">#ENV*{name}</span>
 	</div>
-	<div class="oe-tweet-text">#ENV*{text}</div>
-	<div class="oe-tweet-meta">[<a href='#URL'>(#ENV*{created_at}|affdate_heure)</a>][
-		via (#ENV*{source})][
+	<div class="oe-tweet-meta">[<a href='#URL'>(#ENV*{created_at}|affdate_heure)</a>][<span class='via'>
+		via (#ENV*{source})</span>][
 		in reply to <a href='http://twitter.com/#ENV*{in_reply_to_screen_name}/status/#ENV*{in_reply_to_status_id}'>@(#ENV*{in_reply_to_screen_name})</a>]</div>
-</div>
+</blockquote>
