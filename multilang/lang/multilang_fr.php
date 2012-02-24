@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_siteconfig' => 'de la configuration du site',
 	'cfg_titre_multilang' => 'Multilang',
 	'champ_numero' => 'Numéro',
+	'configuration_multilang' => 'Multilang',
 
 	// L
 	'lien_desactiver' => 'Tout',
