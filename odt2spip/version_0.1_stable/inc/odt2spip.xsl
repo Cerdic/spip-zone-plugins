@@ -249,7 +249,7 @@ ModeImages= <xsl:value-of select="$ModeImages" />
 		<statut>prop</statut>
 		<id_secteur></id_secteur>
 		<date_redac><xsl:text >0000-00-00 00:00:00</xsl:text></date_redac>
-		<accepter_forum></accepter_forum>
+		<accepter_forum>non</accepter_forum>
 		<date_modif><xsl:value-of select="$DateJour" /></date_modif>
 		<lang><xsl:value-of select="$LanguePublication" /></lang>
 		<langue_choisie></langue_choisie>
@@ -272,14 +272,14 @@ ModeImages= <xsl:value-of select="$ModeImages" />
 <xsl:template match="table:table-cell//text:p">
 	<xsl:apply-templates/>
     <xsl:if test="count(node())=0">
-		<xsl:text> >&#xA;&#xA;</xsl:text>
+		<xsl:text>&#xA;&#xA;</xsl:text>
 	</xsl:if>
 </xsl:template>
 <xsl:template match="text:p">
 	<xsl:apply-templates/>
 	<xsl:text >&#xA;&#xA;</xsl:text>
     <xsl:if test="count(node())=0">
-		<xsl:text> >&#xA;&#xA;</xsl:text>
+		<xsl:text>&#xA;&#xA;</xsl:text>
 	</xsl:if>
 </xsl:template>
 
