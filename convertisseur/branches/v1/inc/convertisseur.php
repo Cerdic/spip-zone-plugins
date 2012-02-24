@@ -337,6 +337,7 @@ function nettoyer_format($t) {
   );
   
   // Conversion SPIP -> mediawiki
+  // http://www.mediawiki.org/wiki/Help:Formatting
   $conv_formats['SPIP_mediawiki'] = array(
       "pattern" => array(
         'h'     => "%{{{([^}]*)}}}%",
@@ -344,12 +345,15 @@ function nettoyer_format($t) {
         'i'     => "%{([^}]*)}%",
         'ul'    => "%\n-\*%",
         'ol'    => "%\n-\\#%",
+        'ul2'    => "%\n-%",       // liste "sale"  de spip
         'br'    => "%\n_ %",
         'poesie' => "%<poesie>%",
         'poesie2' => "%</poesie>%",
         'cadre' => "%<cadre>%",
         'cadre2' => "%</cadre>%",
         'pipe_tag_exception' => '%<([^\\|]*)\\|([^>]*)>%', // sortir les pipelines modele <xxx|www> et lien  avt traitemnt table
+        'url_email1' =>  "%\\[([^\\[]*)->mailto:([^(\\[| )]*)@([^(\\[| )]*)\\]%", 
+        'url_email2' =>  "%\\[([^\\[]*)->([^(\\[| )]*)@([^(\\[| )]*)\\]%",                                 // lien email
         'url_externe'   => "%\\[([^\\[]*)->http([^(\\[| )]*)\\]%",  // tant pis on gere pas autres protocoloe irc, ftp, mailto        
         'url_interne_anchor'   => "%\\[([^\\[]*)->\\#([^(\\[| )]*)\\]%",
         'url_interne'   => "%\\[([^\\[]*)->([^(\\[| )]*)\\]%",
@@ -368,12 +372,15 @@ function nettoyer_format($t) {
         'i'   => "''\\1''",
         'ul'  => "*\\1",
         'ol'  => "#\\1",
+        'ul2'  => "*\\1",
         'br'  => "<br />",
         'poesie' => "<pre>",
         'poesie2' => "</pre>",
         'cadre' => "<pre>",
         'cadre2' => "</pre>",
         'pipe_tag_exception' => "<\\1_______\\2>",
+        'url_email1' => "[mailto:\\2@\\3 \\1]",
+        'url_email2' => "[mailto:\\2@\\3 \\1]",
         'url_externe' => "[http\\2 \\1]",
         'url_interne_anchor' => "[[#\\2]]", 
         'url_interne' => "[[\\2 \\1]]", 
