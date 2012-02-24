@@ -138,16 +138,23 @@ function multilang_inserer_head($config=array()){
 			var fields_selector_opt = ".multilang";
 			multilang_init_lang({fields:fields_selector,fields_opt:fields_selector_opt,root:root,root_opt:root_opt,forms:forms_selector});
 			
-			if($(".menu_multilang").length > 0){ 
-				var limite_multilang = $(".menu_multilang").offset().top ;
-				$(window).scroll(function() {
-					if(parseFloat($(this).scrollTop()) > parseFloat(limite_multilang)){
-						var menu_lang_width = $(".menu_multilang").width();
-						$(".menu_multilang").addClass("menu_lang_flottant").css({"position": "fixed", "top": 0, "width": menu_lang_width+"px","z-index":"999"});
-					}
-					else if(parseFloat($(this).scrollTop()) <= parseFloat(limite_multilang)){
-						$(".menu_multilang").removeClass("menu_lang_flottant").css({"position": "static", "width": "auto"});
-					}	
+			if($(".menu_multilang").length > 0){
+				$(".menu_multilang").each(function(){
+					var menu_lang = $(this);
+					var menu_lang_width = menu_lang.width();
+					$(window).scroll(function() {
+						var offset = menu_lang.parents("form").offset();
+						var limite_multilang = offset.top;
+						var limite_bas = limite_multilang+menu_lang.parents("form").height()-menu_lang.parents("form").find(".boutons").height();
+						var pos_bas = menu_lang.offset().top+menu_lang.height();
+						if(($(window).scrollTop() >= limite_multilang) && (pos_bas <= limite_bas) && ($(window).scrollTop() < limite_bas)){
+							if(!menu_lang.hasClass("menu_lang_flottant"))
+								menu_lang.addClass("menu_lang_flottant")
+							menu_lang.css({"position": "fixed", "top": 0, "width": menu_lang_width+"px","z-index":"999"});
+						}
+						if(($(window).scrollTop() < limite_multilang)||(pos_bas > limite_bas) )
+							menu_lang.removeClass("menu_lang_flottant").css({"position": "static", "width": "auto"});
+					});
 				});
 			}
 		}
