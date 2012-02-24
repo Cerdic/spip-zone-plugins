@@ -8,7 +8,8 @@ function AjaxNav() {
     "use strict";
     var onAjaxNavReq		= $.Event("onAjaxNavReq"),
     onAjaxNavLoad		= $.Event("onAjaxNavLoad"),
-    onAjaxNavLocalisedLoad	= $.Event("onAjaxNavLocalisedLoad");
+    onAjaxNavLocalisedLoad	= $.Event("onAjaxNavLocalisedLoad"),
+    HOST			= History.getState().url.replace(/^https?:\/\/([^\/]+).*$/, '$1');
 
     function addUrlParam(url, param, value) {
 	var re;
@@ -135,17 +136,33 @@ function AjaxNav() {
 	    $(this).click(function (event) {
 		// on ne change rien pour les ctr-click etc.
 		if ( event.which === 2 || event.metaKey ) { return true; }
-		// TODO faire mieux que ce bricolage, genre comparer avec 
-		// un liste d'extensions, comme jpg, mp3, etc.
-		// Ou alors marquer les liens ajax_nav cote serveur...
-		if ($(this).hasClass('thickbox')) { return true; }
+		// on ne fait rien pour les liens sans cible (pur javascript)
+		if (this.href === '') { return true };
+		// on ignore aussi les liens qui ne sont que des ancres
+		if ($(this).attr('href').match(/^#/)) { return true; }
+		// on ne fait rien pour les liens externes
+		if ( $(this).attr('href').match(/^https?:\/\/([^\/]+).*$/) &&
+		     (HOST !== $(this).attr('href').replace(/^https?:\/\/([^\/]+).*$/, '$1'))) {
+		    return true;
+		}
 		// ignore les liens ajax cree par spip
 		if ($(this).hasClass('noajax')) { return true; }
+		// on ignore les liens qui ont un extension qui n'est pas susceptible de cibler
+		// une page a charger en ajax.
+		if ( ( $(this).attr('href').match(/^.*\.([a-zA-Z0-9]{1,4})$/) ) &&
+		     ( $.inArray($(this).attr('href').replace(/^.*\.([a-zA-Z0-9]{1,4})$/, '$1'),
+				 ['html', 'htm', 'php', 'php3']) === -1 )) {
+		    return true;
+		}
 		History.pushState(null, null, $(this).attr('href'));
 		event.preventDefault();
 		return false;
 	    });
 	    return;
+	});
+	// A chaque fois qu'un bloc ajax spip est charge, il faut a nouveau preparer son contenu.
+	$(selector + ' .ajaxbloc').bind('ajaxComplete', function () {
+	    prepareForAjax('.ajaxbloc');
 	});
 	// on attribue la classe ajax_nav aux elements a charger en ajax.
 	for (i = 0; i < AjaxNav.options.ajaxDivs.length; i += 1) {
