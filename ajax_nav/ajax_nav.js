@@ -135,7 +135,12 @@ function AjaxNav() {
 	    $(this).click(function (event) {
 		// on ne change rien pour les ctr-click etc.
 		if ( event.which === 2 || event.metaKey ) { return true; }
+		// TODO faire mieux que ce bricolage, genre comparer avec 
+		// un liste d'extensions, comme jpg, mp3, etc.
+		// Ou alors marquer les liens ajax_nav cote serveur...
 		if ($(this).hasClass('thickbox')) { return true; }
+		// ignore les liens ajax cree par spip
+		if ($(this).hasClass('noajax')) { return true; }
 		History.pushState(null, null, $(this).attr('href'));
 		event.preventDefault();
 		return false;
