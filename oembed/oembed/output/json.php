@@ -13,7 +13,9 @@
  */
 function oembed_output_json_dist($res, $output=true){
 
-	$out = json_encode($res,JSON_HEX_TAG);
+	$out = json_encode($res);
+	$out = str_replace(array("<",">"),array("\u003C","\u003E"),$out);
+
 	if (!$output)
 		return $out;
 

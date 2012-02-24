@@ -1,8 +1,9 @@
 /* Oembed twitter */
-.oe-tweet-block {}
-.oe-tweet-user-screen_name,.oe-tweet-user-name {display: block;}
-.oe-tweet-user-block img {float:left;margin-right: 10px;margin-bottom:10px;}
-.oe-tweet-text {clear:left; font-size: 1.3em;margin: 10px 0;}
+.oe-tweet-block {padding-left: 60px;position: relative;margin:0;}
+.oe-tweet-text {}
+.oe-tweet-user-block img {position: absolute;top:0;left:0;}
+.oe-tweet-meta,.oe-tweet-user-block {display: inline;}
+.oe-tweet-meta .via {display: none;}
 
 .oe-fb-user-block img {float:left;margin-right: 10px;margin-bottom:10px;}
 .oe-imdb-title img {float:left;margin-right: 10px;margin-bottom:10px;}
