@@ -102,7 +102,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nombre_fois' => '@nombre@ fois',
 	'objet_num' => '@objet@ n<sup>o</sup>&nbsp;:&nbsp;@num@',
 	'titre_num' => '@titre@&nbsp;@num@',
-	'totaux_titre' => 'Totaux @titre@',
+	'totaux_montants' => 'Montants Totaux @de_par@',
+	'totaux_montants' => 'Bilan financier @de_par@',
+	'totaux_nombres' => 'Nombres Totaux @de_par@',
+	'totaux_nombres' => 'Effectif @de_par@',
+	'totaux_moyens' => 'Statistiques @de_par@',
 	'date_du_jour' => 'Nous sommes le @date@',
 	'date_du_jour_heure' => 'Nous sommes le @date@ et il est @time@',
 

@@ -63,19 +63,19 @@ function exec_prets()
 			$type = $data['statut'];
 		}
 		$infos['statut'] =  '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-'.$puce.'.gif" title="'.$data['statut'].'" alt="" /> '. _T("asso:ressources_libelle_statut_$type");
-		$stats = sql_fetsel('AVG(duree) AS moyenne, STDDEV(duree) AS variance', 'spip_asso_prets', "id_ressource=$id_ressource");
-		$infos['duree_emprunt_moyenne'] = association_dureefr($stats['moyenne'],$unite);
-		$infos['duree_emprunt_ecart_type'] = association_dureefr(sqrt($stats['variance']),$data['unite']);
-		echo totauxinfos_intro($data['intitule'] , 'ressource', $id_ressource, $infos );
+		echo totauxinfos_intro($data['intitule'], 'ressource', $id_ressource, $infos );
 		// TOTAUX : nombres d'emprunts de la ressource depuis le debut
 		$liste_libelles = $liste_effectifs = array();
 		$liste_libelles['pair'] = _T('asso:prets_restitues'); // restitues, termines, anciens, ...
 		$liste_libelles['impair'] = _T('asso:prets_en_cours'); // dus, en attente, en cours, nouveaux, ...
 		$liste_effectifs['pair'] = sql_countsel('spip_asso_prets', "id_ressource=$id_ressource AND date_retour>=date_sortie");
 		$liste_effectifs['impair'] = sql_countsel('spip_asso_prets', "id_ressource=$id_ressource AND date_retour<date_sortie");
+		echo totauxinfos_effectifs('prets', $liste_libelles, $liste_effectifs);
+		// STATS sur la duree et le montant des emprunts
+		echo totauxinfos_stats('prets', 'prets', array('entete_duree'=>'duree','entete_montant'=>'duree*prix_unitaire',), "id_ressource=$id_ressource");
 		// TOTAUX : montants generes par les umprunts de la ressources
-		$quantiteFacturee = sql_fetsel('SUM(duree) AS totale', 'spip_asso_prets', "id_ressource=$id_ressource");
-		echo totauxinfos_sommes(_T('asso:emprunts'), $data['pu']*$quantiteFacturee['totale'], NULL);
+		$recettes = sql_getfetsel('SUM(duree*prix_unitaire) AS totale', 'spip_asso_prets', "id_ressource=$id_ressource");
+		echo totauxinfos_montants('asso:emprunts', $recettes, $data['prix_acquisition']); // /!\ les recettes sont calculees simplement (s'il y a un systeme de penalite pour retard, il faut s'adapter a la saisie pour que le module soit utile) ; les depenses ne prennent pas en compte les eventuels frais d'entretien ou de reparation de la ressource...
 		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);

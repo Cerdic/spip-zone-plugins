@@ -51,7 +51,7 @@ function exec_adherents() {
 		$res .= association_icone(_T('asso:menu2_titre_relances_cotisations'),  generer_url_ecrire('edit_relances'), 'ico_panier.png');
 		$res .= association_icone(_T('asso:synchronise_asso_membre_lien'),  generer_url_ecrire('synchroniser_asso_membres'), 'reload.png');
 		echo bloc_des_raccourcis($res);
-		if (test_plugin_actif('FPDF')) {
+		if ( test_plugin_actif('FPDF') && test_plugin_actif('COORDONEES') ) {
 			echo debut_cadre_enfonce('',true);
 			echo recuperer_fond('prive/inc_cadre_etiquette');
 			echo fin_cadre_enfonce(true);

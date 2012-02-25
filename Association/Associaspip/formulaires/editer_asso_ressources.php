@@ -13,7 +13,8 @@ include_spip('inc/editer');
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
-function formulaires_editer_asso_ressources_charger_dist($id_ressource='') {
+function formulaires_editer_asso_ressources_charger_dist($id_ressource='')
+{
 	/* cet appel va charger dans $contexte tous les champs de la table spip_asso_dons associes a l'id_don passe en param */
 	$contexte = formulaires_editer_objet_charger('asso_ressources', $id_ressource, '', '',  generer_url_ecrire('ressources'), '');
 
@@ -22,18 +23,27 @@ function formulaires_editer_asso_ressources_charger_dist($id_ressource='') {
 		$contexte['date_acquisition'] = date('Y-m-d');
 	}
 
+	// par defaut utiliser les nouveaux statuts numeriques (onne garde la compatibilite qu'en edition ...si ln'entree n'est pas convertie)
+	if (!$contexte['statut'])
+		$contexte['statut'] = 0;
+
 	/* paufiner la presentation des valeurs  */
 	if ($contexte['pu'])
 		$contexte['pu'] = association_nbrefr($contexte['pu']);
+	if ($contexte['prix_acquisition'])
+		$contexte['prix_acquisition'] = association_nbrefr($contexte['prix_acquisition']);
 
 	return $contexte;
 }
 
-function formulaires_editer_asso_ressources_verifier_dist($id_ressource='') {
+function formulaires_editer_asso_ressources_verifier_dist($id_ressource='')
+{
 	$erreurs = array();
 	/* on verifie que prix de location ne soit pas negatifs */
 	if ($erreur = association_verifier_montant(_request('pu')) )
 		$erreurs['pu'] = $erreur;
+	if ($erreur = association_verifier_montant(_request('prix_acquisition')) )
+		$erreurs['prix_acquisition'] = $erreur;
 	/* verifier la date */
 	if ($erreur = association_verifier_date(_request('date_acquisition')) )
 		$erreurs['date_acquisition'] = $erreur;
@@ -44,7 +54,9 @@ function formulaires_editer_asso_ressources_verifier_dist($id_ressource='') {
 	return $erreurs;
 }
 
-function formulaires_editer_asso_ressources_traiter($id_ressource='') {
+function formulaires_editer_asso_ressources_traiter($id_ressource='')
+{
 	return formulaires_editer_objet_traiter('asso_ressources', $id_ressource, '', '',  generer_url_ecrire('ressources'), '');
 }
+
 ?>

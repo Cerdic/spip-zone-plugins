@@ -559,17 +559,51 @@ function totauxinfos_intro($titre,$type='',$id=0,$DesLignes=array(),$PrefixeLang
 	return $res;
 }
 
+// Tableau presentant les chiffres de synthese de la statistique descriptive dans le bloc infos
+// On prend en entree : la table du plugin sur laquelle va porter les statistique, un tableau de item de langue decrivant la ligne et liste des champs sur lesquels calcuer les statistiques, le critere de selection SQL des lignes
+// On renvoie pour chaque ligne : la moyenne arithmetique <http://fr.wikipedia.org/wiki/Moyenne#Moyenne_arithm.C3.A9tique> et  l'ecart-type <http://fr.wikipedia.org/wiki/Dispersion_statistique#.C3.89cart_type> ainsi que les extrema <http://fr.wikipedia.org/wiki/Crit%C3%A8res_de_position#Valeur_maximum_et_valeur_minimum> si on le desire (par defaut non car tableau debordant dans ce petit cadre)
+function totauxinfos_stats($legende='',$sql_table_asso,$sql_champs,$sql_criteres,$decimales_significatives=1,$avec_extrema=false)
+{
+	$res = '<table width="100%" class="asso_infos">';
+	$res .= '<caption>'. _T('asso:totaux_stats', array('de_par'=>$legende)) .'</caption><thead>';
+	$res .= '<tr class="row_first"> <th>&nbsp;</th>';
+	$res .= '<th title="'. _T('moyenne') .'">x&#772</th>'; // X <span style="font-size:75%;">X</span>&#772 <span style="text-decoration:overline;">X</span> X<span style="position:relative; bottom:1.0ex; letter-spacing:-1.2ex; right:1.0ex">&ndash;</span> x<span style="position:relative; bottom:1.0ex; letter-spacing:-1.2ex; right:1.0ex">&macr;</span>
+	$res .= '<th title="'. _T('ecart_type') .'">&sigma;</th>'; // σ &sigma; &#963; &#x3C3;
+	if ($avec_extrema) {
+		$res .= '<th title="'. _T('minimum') .'">'. _T('min') .'</th>';
+		$res .= '<th title="'. _T('maximum') .'">'. _T('max') .'</th>';
+	}
+	$res .= '</tr>';
+	$res .= '</thead><tbody>';
+	$compteur = 0;
+	foreach ($sql_champs as $libelle=>$champs) {
+		$stats = sql_fetsel("AVG($champs) AS valMoy, STDDEV($champs) AS ekrTyp, MIN($champs) AS valMin, MAX($champs) AS valMax ", "spip_asso_$sql_table_asso", $sql_criteres);
+		$res .= '<tr class="'. ($compteur%2?'row_odd':'row_even') .'">';
+		$res .= '<td class"text">'. _T('asso:'.(is_numeric($libelle)?$champs:$libelle)) .'</td>';
+		$res .= '<td class="'.($decimales_significatives?'decimal':'integer').'">'. association_nbrefr($stats['valMoy'],$decimales_significatives) .'</td>';
+		$res .= '<td class="'.($decimales_significatives?'decimal':'integer').'">'. association_nbrefr($stats['ekrTyp'],$decimales_significatives) .'</td>';
+		if ($avec_extrema) {
+			$res .= '<td class="'.($decimales_significatives?'decimal':'integer').'">'. association_nbrefr($stats['valMin'],$decimales_significatives) .'</td>';
+			$res .= '<td class="'.($decimales_significatives?'decimal':'integer').'">'. association_nbrefr($stats['valMax'],$decimales_significatives) .'</td>';
+		}
+		$res .= '</tr>';
+		$compteur++;
+	}
+	$res .= '</tbody></table>';
+	return $res;
+}
+
 // Tableau des decomptes statistiques dans le bloc infos
 // On prend en entree deux tableaux de taille egale (non controlee) --respectivement pour les intitules/libelles et les effectifs/occurences-- qui sont indexes par la classe CSS associee (parce-qu'elle doit etre unique pour chaque ligne)
-function totauxinfos_effectifs($module='',$table_textes,$table_nombres,$decimales_significatives=0)
+function totauxinfos_effectifs($legende='',$table_textes,$table_nombres,$decimales_significatives=0)
 {
 	$nombre = $nombre_total = 0;
-	$res = '<table width="100%">';
-	$res .= '<caption>'. _T('asso:'.$module.'_nombre_titre') .'</caption><tbody>';
+	$res = '<table width="100%" class="asso_infos">';
+	$res .= '<caption>'. _T('asso:totaux_nombres', array('de_par'=>$legende)) .'</caption><tbody>';
 	foreach ($table_textes as $classe_css=>$libelle) {
 		$res .= '<tr class="'.$classe_css.'">';
 		$res .= '<td class"text">'._T('asso:'.$libelle).'</td>';
-		$res .= '<td class="integer">'. association_nbrefr($table_nombres[$classe_css],$decimales_significatives) .'</td>';
+		$res .= '<td class="' .($decimales_significatives?'decimal':'integer') .'">'. association_nbrefr($table_nombres[$classe_css],$decimales_significatives) .'</td>';
 		$nombre_total += $table_nombres[$classe_css];
 		$res .= '</tr>';
 	}
@@ -577,7 +611,7 @@ function totauxinfos_effectifs($module='',$table_textes,$table_nombres,$decimale
 	if (count($table_nombres)>1) {
 		$res .= '<tfoot>';
 		$res .= '<tr><th class="text">'._T('asso:liste_nombre_total').'</th>';
-		$res .= '<th class="integer">'. association_nbrefr($nombre_total,$decimales_significatives) .'</th></tr>';
+		$res .= '<th class="' .($decimales_significatives?'decimal':'integer') .'">'. association_nbrefr($nombre_total,$decimales_significatives) .'</th></tr>';
 		$res .= '</tfoot>';
 	}
 	return $res.'</table>';
@@ -585,10 +619,10 @@ function totauxinfos_effectifs($module='',$table_textes,$table_nombres,$decimale
 
 // Tableau des totaux comptables dans le bloc infos
 // On prend en entree : le complement de titre du tableau puis les sommes cumulees des recettes et des depenses. (tous ces parametres sont facultatifs, mais attention qu'un tableau est quand meme genere dans tous les cas)
-function totauxinfos_sommes($legende='',$somme_recettes=0,$somme_depenses=0)
+function totauxinfos_montants($legende='',$somme_recettes=0,$somme_depenses=0)
 {
-	$res = '<table width="100%">';
-	$res .= '<caption>'. _T('asso:totaux_titre', array('titre'=>$legende)) .'</caption><tbody>';
+	$res = '<table width="100%" class="asso_infos">';
+	$res .= '<caption>'. _T('asso:totaux_montants', array('de_par'=>$legende)) .'</caption><tbody>';
 	if ($somme_recettes) {
 		$res .= '<tr class="impair">'
 		. '<th class="entree">'. _T('asso:bilan_recettes') .'</th>'

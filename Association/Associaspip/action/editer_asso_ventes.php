@@ -25,8 +25,12 @@ function action_editer_asso_ventes(){
 	$date_vente = _request('date_vente');
 	$article = _request('article');
 	$code = _request('code');
-	$acheteur = _request('acheteur');
 	$id_acheteur = intval(_request('id_acheteur'));
+	$acheteur = _request('acheteur');
+	if (!$acheteur AND $id_acheteur) {
+		$data =  sql_fetsel('sexe, nom_famille, prenom', 'spip_asso_membres', "id_auteur=$id_acheteur");
+		$acheteur = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
+	}
 	$quantite = association_recupere_montant(_request('quantite'));
 	$date_envoi = _request('date_envoi');
 	$frais_envoi = association_recupere_montant(_request('frais_envoi'));
@@ -48,7 +52,6 @@ function action_editer_asso_ventes(){
 				$prix_unite = $option['prix']*(1+$option['tva']);
 		}
 	}
-	$justification = "[vente$id_vente->vente$id_vente]";
 	$prix_total = $quantite*$prix_unite;
 
 	if ($id_vente) { /* modification */
@@ -57,6 +60,7 @@ function action_editer_asso_ventes(){
 			'article' => $article,
 			'code' => $code,
 			'acheteur' => $acheteur,
+			'id_acheteur' => $id_acheteur,
 			'quantite' => $quantite,
 			'date_envoi' => $date_envoi,
 			'frais_envoi' => $frais_envoi,
@@ -64,13 +68,13 @@ function action_editer_asso_ventes(){
 			'commentaire' => $commentaire,
 		), "id_vente=$id_vente" );
 		if ($GLOBALS['association_metas']['pc_ventes']==$GLOBALS['association_metas']['pc_frais_envoi']) { /* si ventes et frais d'envoi sont associes a la meme reference, on modifie une seule operation */
-			association_modifier_operation_comptable($date_vente, $prix_total+$frais_envoi, 0, "$justification - $article", $GLOBALS['association_metas']['pc_ventes'], $journal, $id_vente, $id_compte);
+			association_modifier_operation_comptable($date_vente, $prix_total+$frais_envoi, 0, "[vente$id_vente->vente$id_vente] : $quantite &times; '$code' -- ". ($id_acheteur?"[$acheteur->membre$id_acheteur]":$acheteur), $GLOBALS['association_metas']['pc_ventes'], $journal, $id_vente, $id_compte);
 		} else { /* sinon on en modifie deux */
-			association_modifier_operation_comptable($date_vente, $prix_total, 0, "$justification - $article", $GLOBALS['association_metas']['pc_ventes'], $journal, $id_vente, $id_compte);
+			association_modifier_operation_comptable($date_vente, $prix_total, 0, "[vente$id_vente->vente$id_vente] : $quantite &times; '$code' -- ". ($id_acheteur?"[$acheteur->membre$id_acheteur]":$acheteur), $GLOBALS['association_metas']['pc_ventes'], $journal, $id_vente, $id_compte);
 			$association_imputation = charger_fonction('association_imputation', 'inc');
 			$critere = $association_imputation('pc_frais_envoi');
 			$critere .= ($critere?' AND ':'') ."id_journal=$id_vente";
-			association_modifier_operation_comptable($date_vente, $frais_envoi, 0, "$justification - frais d'envoi", $GLOBALS['association_metas']['pc_frais_envoi'], $journal, $id_vente, sql_getfetsel('id_compte', 'spip_asso_comptes', $critere));
+			association_modifier_operation_comptable($date_vente, $frais_envoi, 0, "[vente$id_vente->vente$id_vente] : frais d'envoi -- ". ($id_acheteur?"[$acheteur->membre$id_acheteur]":$acheteur), $GLOBALS['association_metas']['pc_frais_envoi'], $journal, $id_vente, sql_getfetsel('id_compte', 'spip_asso_comptes', $critere));
 		}
 	} else { /* ajout */
 		$id_vente = sql_insertq('spip_asso_ventes', array(
@@ -78,6 +82,7 @@ function action_editer_asso_ventes(){
 			'article' => $article,
 			'code' => $code,
 			'acheteur' => $acheteur,
+			'id_acheteur' => $id_acheteur,
 			'quantite' => $quantite,
 			'date_envoi' => $date_envoi,
 			'frais_envoi' => $frais_envoi,
@@ -88,10 +93,10 @@ function action_editer_asso_ventes(){
 			$erreur = _T('Erreur_BdD_ou_SQL');
 		} else { // on ajoute les operations comptables associees a la vente
 			if ($GLOBALS['association_metas']['pc_ventes']==$GLOBALS['association_metas']['pc_frais_envoi']) { /* si ventes et frais d'envoi sont associes a la meme reference, on ajoute une seule operation */
-				association_ajouter_operation_comptable($date_vente, $prix_total+$frais_envoi, 0, "$justification - $article", $GLOBALS['association_metas']['pc_ventes'], $journal, $id_vente);
+				association_ajouter_operation_comptable($date_vente, $prix_total+$frais_envoi, 0, "[vente$id_vente->vente$id_vente] : $quantite &times; '$code' -- ". ($id_acheteur?"[$acheteur->membre$id_acheteur]":$acheteur), $GLOBALS['association_metas']['pc_ventes'], $journal, $id_vente);
 			} else { /* sinon on en insere deux */
-				association_ajouter_operation_comptable($date_vente, $prix_total, 0, "$justification - $article", $GLOBALS['association_metas']['pc_ventes'], $journal, $id_vente);
-				association_ajouter_operation_comptable($date_vente, $frais_envoi, 0, "$justification - frais d'envoi", $GLOBALS['association_metas']['pc_frais_envoi'], $journal, $id_vente);
+				association_ajouter_operation_comptable($date_vente, $prix_total, 0, "[vente$id_vente->vente$id_vente] : $quantite &times; '$code' -- ". ($id_acheteur?"[$acheteur->membre$id_acheteur]":$acheteur), $GLOBALS['association_metas']['pc_ventes'], $journal, $id_vente);
+				association_ajouter_operation_comptable($date_vente, $frais_envoi, 0, "[vente$id_vente->vente$id_vente] : frais d'envoi -- ". ($id_acheteur?"[$acheteur->membre$id_acheteur]":$acheteur), $GLOBALS['association_metas']['pc_frais_envoi'], $journal, $id_vente);
 			}
 		}
 	}

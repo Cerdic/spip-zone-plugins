@@ -4,8 +4,9 @@
     <form name="formulaire_#FORM" method="post" action="#ENV{action}">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<h3 class="legend"><:asso:ressources_titre_mise_a_jour:></h3>
+		<INCLURE{fond=inc/choisir_mbr_nom, champ_nom=acheteur, valeur_nom=#ENV{acheteur}, champ_id=id_acheteur, valeur_id=#ENV{id_acheteur}, champs_legende=Acheteur }>
 		<fieldset>
-			<legend>Produit</legend>
+			<legend>Facturation</legend>
 			<ul>
 		<B_catalogue_produits>
 				<li class="editer_code">
@@ -44,12 +45,6 @@
 					<label for="prix_vente"><:asso:prix_de_vente_en_e__:></label>
 					<input type="[(#HTML5|?{number,text})]" name="prix_vente" [value="(#ENV{prix_vente})"] id="prix_vente"  class="number float price" />
 				</li>
-			</ul>
-		</fieldset>
-		<INCLURE{fond=inc/choisir_mbr_nom, champ_nom=acheteur, valeur_nom=#ENV{acheteur}, champ_id=id_acheteur, valeur_id=#ENV{id_acheteur}, champs_legende=Acheteur }>
-		<fieldset>
-			<legend>Transaction</legend>
-			<ul>
 				<li class="editer_date_vente">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_vente})</span>]
 					<label for="date_vente"><:asso:date_aaaa_mm_jj:></label>
@@ -60,7 +55,6 @@
 					<label for="quantite"><:asso:quantite_achetee:></label>
 					<input type="[(#HTML5|?{number,text})]" name="quantite" [value="(#ENV{quantite})"] id="text number float" class="number float" />
 				</li>
-				<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, env}>
 				<li class="editer_date_envoi">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_envoi})</span>]
 					<label for="date_envoi"><:asso:envoye_le_aaaa_mm_jj:></label>
@@ -77,6 +71,7 @@
 				</li>
 			</ul>
 		</fieldset>
+		<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, champs_legende=Paiement, env}>
 		<p class="boutons">
 			<input type="submit" value="<:pass_ok:>" class="submit" />
 		</p>

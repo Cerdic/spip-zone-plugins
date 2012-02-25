@@ -24,18 +24,7 @@ function exec_action_prets()
 			echo minipres();
 	} else {
 		$id_pret = intval(_request('id_pret'));
-
-		$id_ressource=$_REQUEST['id_ressource']; // text !
-		$id_emprunteur=$_POST['id_emprunteur']; // text !
-		$date_sortie=$_POST['date_sortie'];
-		$duree=$_POST['duree'];
-		$date_retour=$_POST['date_retour'];
-		$commentaire_sortie=$_POST['commentaire_sortie'];
-		$commentaire_retour=$_POST['commentaire_retour'];
-		$statut=$_POST['statut'];
-		$montant=$_POST['montant'];
-		$journal=$_POST['journal'];
-
+		$id_ressource = intval(_request('id_ressource'));
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:prets_titre_suppression_prets')) ;
 		association_onglets();
@@ -75,7 +64,7 @@ function exec_action_prets()
 		}
 		$infos['statut'] =  '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-'.$puce.'.gif" title="'.$data['statut'].'" alt="" /> '. _T("asso:ressource_statut_$type");
 		$infos['nombre_prets'] = sql_countsel('spip_asso_prets', "id_ressource=$id_ressource");
-		echo totauxinfos_intro($data['intitule'] , 'ressource', $id_ressource, $infos );
+		echo totauxinfos_intro($data['intitule'], 'ressource', $id_ressource, $infos );
 		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
@@ -89,4 +78,5 @@ function exec_action_prets()
 		echo fin_page_association();
 	}
 }
+
 ?>

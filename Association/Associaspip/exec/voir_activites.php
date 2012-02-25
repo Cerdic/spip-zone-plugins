@@ -37,16 +37,13 @@ function exec_voir_activites()
 		echo debut_gauche('',true);
 		echo debut_boite_info(true);
 		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement") ;
-		// Rappel Infos Evenement
+		// INTRO : Rappel Infos Evenement
 		$infos['date_debut'] = association_datefr($evenement['date_debut'],'dtstart').' '.substr($data['date_debut'],10,6);
 		$infos['date_fin'] = association_datefr($evenement['date_fin'],'dtend').' '.substr($data['date_debut'],10,6);
 		$infos['lieu'] = $evenement['lieu'];
-		$stats = sql_fetsel('AVG(inscrits) AS moy_i, STDDEV(inscrits) AS var_i, AVG(montant) AS moy_m, STDDEV(montant) AS var_m ', 'spip_asso_activites', "id_evenement=$id_evenement");
-		$infos['inscrits_par_personne_moyenne'] = _T('asso:duree_temps', array('nombre'=>association_nbrefr($stats['moy_i'],1), 'unite'=>_T('personnes')) );
-		$infos['inscrits_par_personne_ecart_type'] = _T('asso:duree_temps', array('nombre'=>association_nbrefr(sqrt($stats['var_i']),1), 'unite'=>_T('personnes')) );
-		$infos['montant_par_personne_moyenne'] = association_prixfr($stats['moy_m']);
-		$infos['montant_par_personne_ecart_type'] = association_prixfr(sqrt($stats['var_i']));
-		echo totauxinfos_intro($evenement['titre'] , 'evenement', $id_evenement, $infos );
+		echo totauxinfos_intro($evenement['titre'], 'evenement', $id_evenement, $infos );
+		// STATS sur les participations (nombre de personnes inscrites et montant paye)
+		echo totauxinfos_stats('participations', 'activites', array('entete_quantite'=>'inscrits','entete_montant'=>'montant',), "id_evenement=$id_evenement");
 		// TOTAUX : nombres d'inscrits par etat de paiement
 		$liste_libelles = $liste_effectifs = array();
 		$liste_libelles['valide'] = _T('asso:activite_entete_validees');
@@ -56,7 +53,7 @@ function exec_voir_activites()
 		echo totauxinfos_effectifs('activites', $liste_libelles, $liste_effectifs);
 		// TOTAUX : montants des participations validees
 		$montant = sql_fetsel('SUM(montant) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement AND statut='ok' " );
-		echo totauxinfos_sommes(_T('asso:participations'), $montant['encaisse'], NULL);
+		echo totauxinfos_montants(_T('asso:participations'), $montant['encaisse'], NULL);
 		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);

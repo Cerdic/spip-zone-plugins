@@ -570,7 +570,7 @@ $GLOBALS['association_maj'][57896] = array(
 	array ('sql_alter', "TABLE spip_asso_prets CHANGE valeur valeur DECIMAL(19,2) NOT NULL"),
 );
 
-// Revue de la gestion des ressources et prets
+// Revue de la gestion des ressources et prets (debut)
 $GLOBALS['association_maj'][58798] = array(
 	array ('sql_alter', "TABLE spip_asso_prets DROP statut"), // ce champ ne sert pas, donc...
 	array ('sql_alter', "TABLE spip_asso_prets CHANGE date_sortie date_sortie DATETIME NOT NULL"), // permettre une gestion plus fine (duree inferieure a la journee)
@@ -584,5 +584,13 @@ $GLOBALS['association_maj'][58798] = array(
 	array('sql_update', 'spip_asso_ressources', array('statut' => NULL), "statut='sorti'"), // nouveau statut numerique gerant simultanement les quantites
 	array ('sql_alter', "TABLE spip_asso_ressources CHANGE statut statut TINYINT NULL DEFAULT 1"), // nouvelle gestion numerique
 );
+
+// Revue de la gestion des ressources et prets (suite)
+$GLOBALS['association_maj'][58824] = array(
+	array ('sql_alter', "TABLE spip_asso_ressoures ADD prix_acquisition DECIMAL(19,2) NOT NULL DEFAULT 0 "), // garder trace du cout d'acquisition pour mieux evaluer l'amortissement et la rentabilite (c'est vite dit mais ce n'est pas encore integre a la compta)
+	array ('sql_alter', "TABLE spip_asso_prets ADD prix_unitaire DECIMAL(19,2) NOT NULL DEFAULT 0 "), // comme pour les ventes (asso_ventes.prix_vente) et les activites (asso_activites.montant) on garde le cout de base facture car celui-ci (asso_ressources.pu) peut changer par la suite
+	array('sql_update', 'spip_asso_prets', array('prix_unitaire' => "(SELECT pu FROM spip_asso_ressources WHERE spip_asso_ressources.id_ressource=spip_asso_prets.id_ressource)" ), "EXISTS (SELECT pu FROM spip_asso_ressources WHERE spip_asso_ressources.id_ressource=spip_asso_prets.id_ressource)"), // mettre a jour avec les tarifs actuels... PROBLEME : comment exprimer cela avec l'API SPIP ? ou passer par du PHP ?
+);
+
 
 ?>

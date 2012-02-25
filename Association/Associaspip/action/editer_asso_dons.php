@@ -34,11 +34,11 @@ function action_editer_asso_dons() {
 	$commentaire = _request('commentaire');
 	if ($id_don) { /* c'est une modification */
 		// on modifie les operations comptables associees au don
-		association_modifier_operation_comptable($date_don, $argent, 0, "[don$id_don->don$id_don] - ". ($id_adherent?"[$bienfaiteur->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_dons'], $journal, $id_don, $id_compte);
+		association_modifier_operation_comptable($date_don, $argent, 0, "[don$id_don->don$id_don] -- ". ($id_adherent?"[$bienfaiteur->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_dons'], $journal, $id_don, $id_compte);
 		$association_imputation = charger_fonction('association_imputation', 'inc');
 		$critere = $association_imputation('pc_colis');
 		$critere .= ($critere?' AND ':'') ."id_journal=$id_don";
-		association_modifier_operation_comptable($date_don, $valeur, 0, "[colis$id_don->don$id_don] - ". ($id_adherent?"[$bienfaiteur->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_colis'], $journal, $id_don, sql_getfetsel('id_compte', 'spip_asso_comptes', $critere) );
+		association_modifier_operation_comptable($date_don, $valeur, 0, "[colis$id_don->don$id_don] -- ". ($id_adherent?"[$bienfaiteur->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_colis'], $journal, $id_don, sql_getfetsel('id_compte', 'spip_asso_comptes', $critere) );
 		// on modifie les informations relatives au don
 		sql_updateq('spip_asso_dons', array(
 			'date_don' => $date_don,
@@ -65,8 +65,8 @@ function action_editer_asso_dons() {
 		if (!$id_don) { // la suite serait aleatoire sans cette cle...
 			$erreur = _T('Erreur_BdD_ou_SQL');
 		} else { // on ajoute les operations comptables associees au don
-			association_ajouter_operation_comptable($date_don, $argent, 0, "[don$id_don->don$id_don] - ". ($id_adherent?"[$bienfaiteur->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_dons'], $journal, $id_don);
-			association_ajouter_operation_comptable($date_don, $valeur, 0, "[colis$id_don->don$id_don] - ". ($id_adherent?"[$bienfaiteur->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_colis'], $journal, $id_don);
+			association_ajouter_operation_comptable($date_don, $argent, 0, "[don$id_don->don$id_don] -- ". ($id_adherent?"[$bienfaiteur->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_dons'], $journal, $id_don);
+			association_ajouter_operation_comptable($date_don, $valeur, 0, "[colis$id_don->don$id_don] -- ". ($id_adherent?"[$bienfaiteur->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_colis'], $journal, $id_don);
 		}
 	}
 	return array($id_don, $erreur);

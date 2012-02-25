@@ -63,7 +63,9 @@ function exec_action_ressources()
 		}
 		$infos['statut'] =  '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-'.$puce.'.gif" title="'.$data['statut'].'" alt="" /> '. _T("asso:ressource_statut_$type");
 		$infos['nombre_prets'] = sql_countsel('spip_asso_prets', "id_ressource=$id_ressource");
-		echo totauxinfos_intro($data['intitule'] , 'ressource', $id_ressource, $infos );
+		echo totauxinfos_intro($data['intitule'], 'ressource', $id_ressource, $infos ); // indice de popularite
+		// STATS sur la duree et le montant des emprunts
+		echo totauxinfos_stats('prets', 'prets', array('entete_duree'=>'duree','entete_montant'=>'duree*prix_unitaire',), "id_ressource=$id_ressource");
 		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);

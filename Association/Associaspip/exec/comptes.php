@@ -45,14 +45,34 @@ function exec_comptes() {
 		$exercice_data = sql_asso1ligne('exercice', $exercice);
 // traitements
 		$where = 'imputation LIKE '. sql_quote($imputation);
-		$where .= (!is_numeric($vu) ? '' : (" AND vu=$vu"));
+		$where .= (!is_numeric($vu) ? '' : " AND vu=$vu");
 		$where .= " AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]'";
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets(_T('asso:titre_onglet_comptes'));
 		echo debut_gauche('',true);
 		echo debut_boite_info(true);
-		// TOTAUX : operations de l'exercice
+		// INTRO : nom du module et annee affichee
+		echo totauxinfos_intro($exercice_data['intitule'],'exercice',$exercice);
+		$journaux = sql_allfetsel('journal, intitule', 'spip_asso_comptes RIGHT JOIN spip_asso_plan ON journal=code',"classe='".$GLOBALS['association_metas']['classe_banques']."' AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]'", "intitule DESC"); // on se permet sql_allfetsel car il s'agit d'une association (mois d'une demie dizaine de comptes) et non d'un etablissement financier (des milliers de comptes clients)
+/* bof *
+		// STATS recettes et depenses par comptes financiers (indique rapidement les comptes financiers avec les mouvements les plus importants --en montant !)
+		foreach ($journaux as $financier) {
+			echo totauxinfos_stats($financier['intitule'], 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), "journal='".$financier['journal']."' AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]'");
+		}
+* fob */
+		// TOTAUX : operations de l'exercice par compte financier (indique rapidement les comptes financiers les plus utilises ou les modes de paiement preferes...)
+		foreach (array('recette','depense') as $direction) {
+			foreach ($journaux as $financier) {
+				$nombre_direction = sql_countsel('spip_asso_comptes', "journal='".$financier['journal']."' AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' AND $direction<>0 ");
+				if ($nombre_direction) { // on ne s'embarasse pas avec ceux a zero
+					$direction_libelles[$financier['journal']] = $financier['intitule'];
+					$direction_effectifs[$financier['journal']] = $nombre_direction;
+				}
+			}
+			echo totauxinfos_effectifs(_T('asso:compte_entete_financier') .': '. _T('asso:'.$direction.'s'), $direction_libelles, $direction_effectifs); // ToDo: tri par ordre decroissant (sorte de "top")
+		}
+		// TOTAUX : operations de l'exercice par type d'operation
 		$classes = array('pair'=>'produits', 'impair'=>'charges', 'cv'=>'contributions_volontaires', 'vi'=>'banques');
 		$liste_libelles = $liste_effectifs = array();
 		foreach ($classes as $classe_css=>$classe_cpt) {
@@ -60,19 +80,18 @@ function exec_comptes() {
 			$liste_libelles[$classe_css] = 'compte_liste_nombre_'.$classe_css;
 		}
 		echo totauxinfos_effectifs('comptes', $liste_libelles, $liste_effectifs);
-		// TOTAUX : montants de l'exercice
+		// STATS : montants de l'exercice pour l'imputation choisie (toutes si aucune)
+		echo totauxinfos_stats('mouvements', 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), $where, 2);
+		// TOTAUX : montants de l'exercice pour l'imputation choisie (toutes si aucune)
 		$data = sql_fetsel( 'SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses, code, classe',  'spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code', "$where AND classe<>".sql_quote($GLOBALS['association_metas']['classe_banques']). " AND classe<>".sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']) ); // une contribution benevole ne doit pas etre comptabilisee en charge/produit
-		echo totauxinfos_sommes(($imputation=='%' ? _T('asso:tous') : $imputation), $data['somme_recettes'], $data['somme_depenses']);
+		echo totauxinfos_montants(($imputation=='%' ? _T('asso:tous') : $imputation), $data['somme_recettes'], $data['somme_depenses']);
 		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
-		$url_bilan = generer_url_ecrire('bilan', "exercice=$exercice");
-		$url_compte_resultat = generer_url_ecrire('compte_resultat', "exercice=$exercice");
-		$url_annexe = generer_url_ecrire('annexe', "exercice=$exercice");
-		$res = '<p><strong>Exercice : '.$exercice_data['intitule'].'</strong><p>'
-		. association_icone(_T('asso:cpte_resultat_titre_general'),  $url_compte_resultat, 'finances.jpg')
-		. association_icone(_T('asso:bilan'),  $url_bilan, 'finances.jpg')
-		. association_icone(_T('asso:annexe_titre_general'),  $url_annexe, 'finances.jpg')
+		$res = '<p><b>'.$exercice_data['intitule'].'</b><p>'
+		. association_icone(_T('asso:cpte_resultat_titre_general'),  generer_url_ecrire('compte_resultat', "exercice=$exercice"), 'finances.jpg')
+		. association_icone(_T('asso:bilan'), generer_url_ecrire('bilan', "exercice=$exercice"), 'finances.jpg')
+		. association_icone(_T('asso:annexe_titre_general'), generer_url_ecrire('annexe', "exercice=$exercice"), 'finances.jpg')
 		. association_icone(_T('asso:ajouter_une_operation'),  generer_url_ecrire('edit_compte'), 'ajout_don.png');
 		echo bloc_des_raccourcis($res);
 		echo debut_droite('',true);
@@ -103,7 +122,7 @@ function exec_comptes() {
 		$sql = sql_select(
 			'imputation , code, intitule, classe',
 			'spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code',
-			/* ne pas afficher les codes de la classe financiere : ce n'est pas une imputation et les inactifs  */
+			/* n'afficher ni les comptes de la classe financiere --ce ne sont pas des imputations-- ni les inactifs */
 			"classe<>'".$GLOBALS['association_metas']['classe_banques']."' AND active AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' ",
 			'code', 'code ASC');
 		while ($plan = sql_fetch($sql)) {
@@ -154,18 +173,17 @@ function exec_comptes() {
 			. '<th>'. _T('asso:compte_entete_justification') .'</th>'
 			. '<th>'. _T('asso:entete_montant') .'</th>'
 			. '<th>'. _T('asso:compte_entete_financier') .'</th>'
-			. '<th colspan="3" class="actions">'._T('asso:entete_action').</th>'
+			. '<th colspan="3" class="actions">'. _T('asso:entete_action') .'</th>'
 			. "</tr>\n</thead><tbody>"
 			. $table
 			. "</tbody>\n</table>\n"
-			. "<table width='100%'><tr>\n<td>" . $nav . '</td><td style="text-align:right;"><input type="submit" value="' . _T('asso:valider') . '" class="fondo" /></td></tr></table>';
+			. "<table width='100%'><tr>\n<td>" . $nav . '</td><td style="text-align:right;"><input type="submit" value="'. _T('asso:valider') . '" class="fondo" /></td></tr></table>';
 			echo generer_form_ecrire('action_comptes', $table);
 		} else {
 			echo '<table width="100%"><tbody><tr><td class="actions erreur">' .( $exercice ? _T('asso:aucune_operation') : '<a href="'.generer_url_ecrire('exercices').'">'._T('asso:definir_exercice').'</a>' ). '</td></tr></tbody></table>';
 		}
 		fin_cadre_relief();
 		echo fin_page_association();
-
 	}
 }
 

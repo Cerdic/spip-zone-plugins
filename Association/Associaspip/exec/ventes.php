@@ -31,15 +31,23 @@ function exec_ventes()
 		association_onglets(_T('asso:titre_onglet_ventes'));
 		echo debut_gauche('',true);
 		echo debut_boite_info(true);
+		// INTRO : nom du module et annee affichee
+		echo totauxinfos_intro('','ventes',$annee);
+		// STATS sur les paniers/achats/commandes
+		echo totauxinfos_stats('paniers/commandes', 'ventes', array('entete_quantite'=>'quantite','entete_montant'=>'prix_vente*quantite',), "DATE_FORMAT(date_vente, '%Y')=$annee");
 		// TOTAUX : nombre de ventes selon etat de livraison
 		$liste_libelles = array('pair'=>'ventes_enregistrees', 'impair'=>'ventes_expediees', );
 		$liste_effectifs['pair'] = sql_countsel('spip_asso_ventes', "date_envoi<date_vente AND  DATE_FORMAT(date_vente, '%Y')=$annee ");
 		$liste_effectifs['impair'] = sql_countsel('spip_asso_ventes', "date_envoi>=date_vente AND  DATE_FORMAT(date_vente, '%Y')=$annee ");
 		echo totauxinfos_effectifs('ventes', $liste_libelles, $liste_effectifs);
 		// TOTAUX : montants des ventes et des frais de port
+/* Il est interessant d'interroger le livre comptable pour des cas complexes et si on sait recuperer les achats-depenses liees aux ventes(c'est faisable s'ils ne concerne qu'un ou deux comptes) ; mais ici, les montant etant dupliques dans la table des ventes autant faire simple...
 		$data1 = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT(date, '%Y')=$annee AND imputation=".sql_quote($GLOBALS['association_metas']['pc_ventes']) );
 		$data2 = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT(date, '%Y')=$annee AND imputation=".sql_quote($GLOBALS['association_metas']['pc_frais_envoi']) );
-		echo totauxinfos_sommes($annee, $data1['somme_recettes']-$data1['somme_depenses'], $data2['somme_depenses']-$data2['somme_recettes']);
+		echo totauxinfos_montants($annee, $data1['somme_recettes']-$data1['somme_depenses']+$data2['somme_recettes']-$data2['somme_depenses']);
+*/
+		$data = sql_fetsel('SUM(prix_vente*quantite) AS somme_ventes, SUM(frais_envoi) AS somme_frais', 'spip_asso_ventes', "DATE_FORMAT(date_vente, '%Y')=$annee" );
+		echo totauxinfos_montants($annee, $data['somme_ventes']+$data['somme_frais'], $data['somme_frais']); // les frais de port etant facturees a l'acheteur, ce sont bien des recettes... mais ces frais n'etant (normalement) pas refacturees (et devant meme etre transparents) ils n'entrent pas dans la marge (enfin, facon de dire car les couts d'acquisition ne sont pas pris en compte... le "solde" ici est le montant effectif des ventes.)
 		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
@@ -64,7 +72,7 @@ function exec_ventes()
 		echo '<th>'. _T('asso:entete_intitule') .'</th>';
 		echo '<th>'. _T('asso:entete_code') .'</th>';
 		echo '<th>'. _T('asso:entete_nom') .'</th>';
-		echo '<th>'. _T('asso:vente_entete_quantite') . '</th>';
+		echo '<th>'. _T('asso:entete_quantite') . '</th>';
 		echo '<th>'. _T('asso:entete_montant') .'</th>';
 		echo '<th colspan="2" class="actions">'._T('asso:entete_action').'</th>';
 		echo "</tr>\n</thead><tbody>";

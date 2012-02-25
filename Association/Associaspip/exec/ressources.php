@@ -28,7 +28,7 @@ function exec_ressources()
 		association_onglets(_T('asso:titre_onglet_prets'));
 		echo debut_gauche('',true);
 		echo debut_boite_info(true);
-		// EXPLICATION
+		// INTRO : presentation du module
 		echo '<p>'._T('asso:ressources_info').'</p>';
 		// TOTAUX : nombre de ressources par statut
 		$liste_libelles['valide'] = '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-verte.gif" alt="" /> '. _T('asso:ressources_libelle_statut_ok') ;
@@ -40,9 +40,16 @@ function exec_ressources()
 		$liste_libelles['sorti'] = '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-poubelle.gif" alt="" /> '. _T('asso:ressources_libelle_statut_sorti') ;
 		$liste_effectifs['sorti'] = sql_countsel('spip_asso_ressources', "statut IN ('sorti','',NULL)");
 		echo totauxinfos_effectifs('ressources', $liste_libelles, $liste_effectifs);
+/* mdr : cela n'a de sens que si les ressources se pretent toutes sur la meme unite...
+		// STATS sur tous les prets
+		echo totauxinfos_stats('prets', 'prets', array('entete_duree'=>'duree',), "DATE_FORMAT(date_sortie, '%Y')=DATE_FORMAT(NOW(), '%Y')");
+rdm */
 		// TOTAUX : montants des locations sur l'annee en cours
-		$data = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT('date', '%Y')=DATE_FORMAT(NOW(), '%Y') AND imputation=".sql_quote($GLOBALS['association_metas']['pc_prets']) );
-		echo totauxinfos_sommes(_T('asso:ressources'), $data['somme_recettes'], $data['somme_depenses']);
+		$recettes = sql_getfetsel('SUM(duree*prix_unitaire) AS somme_recettes', 'spip_asso_prets', "DATE_FORMAT('date_sortie', '%Y')=DATE_FORMAT(NOW(), '%Y') ");
+		$depences = sql_getfetsel('SUM(prix_acquisition) AS somme_depences', 'spip_asso_ressources', "DATE_FORMAT('date_acquisition', '%Y')=DATE_FORMAT(NOW(), '%Y') ");
+		echo totauxinfos_montants('ressources', $recettes, $depenses);
+		// datation
+		echo association_date_du_jour();
 		echo fin_boite_info(true);
 		echo bloc_des_raccourcis(association_icone(_T('asso:ressources_nav_ajouter'),  generer_url_ecrire('edit_ressource'), 'ajout_don.png'));
 		echo debut_droite('',true);

@@ -41,7 +41,7 @@ function action_editer_asso_prets_dist()
     $journal = _request('journal');
     if ($id_pret) { /* modification */
 	// on modifie l'operation comptable associe au don
-	association_modifier_operation_comptable($date_retour, $montant, 0, "[pret$id_pret->pret$id_pret] - ". ($id_emprunteur?"[$emprunteur->membre$id_emprunteur]":$emprunteur), $GLOBALS['association_metas']['pc_prets'], $journal, '', $id_compte);
+	association_modifier_operation_comptable($date_retour, $montant*($duree?$duree:1), 0, "[pret$id_pret->pret$id_pret] - ". ($id_emprunteur?"[$emprunteur->membre$id_emprunteur]":$emprunteur), $GLOBALS['association_metas']['pc_prets'], $journal, '', $id_compte);
 	// on modifie les informations relatives au pret
 	sql_updateq('spip_asso_prets', array(
 	    'duree' => $duree,
@@ -50,6 +50,7 @@ function action_editer_asso_prets_dist()
 	    'id_emprunteur' => $id_emprunteur,
 	    'commentaire_sortie' => $commentaire_sortie,
 	    'statut' => $statut,
+	    'prix_unitaire' => $montant,
 	), "id_pret=$id_pret" );
 	// on met a jour le statut de la ressource
 	sql_updateq('spip_asso_ressources',
@@ -65,7 +66,8 @@ function action_editer_asso_prets_dist()
 	    'date_retour' => $date_retour,
 	    'id_emprunteur' => $id_emprunteur,
 	    'commentaire_sortie' => $commentaire_sortie,
-	    'commentaire_retour' => $commentaire_retour
+	    'commentaire_retour' => $commentaire_retour,
+	    'prix_unitaire' => $montant,
 	));
 	if ($id_pret) {
 	// on met a jour le statut de la ressource
@@ -76,8 +78,7 @@ function action_editer_asso_prets_dist()
 	} else
 	    $erreur = _T('Erreur_BdD_ou_SQL');
 	// on ajoute l'operation comptable associe au pret
-	association_ajouter_operation_comptable($date_sortie, $montant, 0, "[pret$id_pret->pret$id_pret] - ". ($id_emprunteur?"[$emprunteur->membre$id_emprunteur]":$emprunteur), $GLOBALS['association_metas']['pc_prets'], $journal, $id_pret);
-	$id_pret = prets_ajouter($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $commentaire_sortie,$commentaire_retour);
+	association_ajouter_operation_comptable($date_sortie, $montant*($duree?$duree:1), 0, "[pret$id_pret->pret$id_pret] - ". ($id_emprunteur?"[$emprunteur->membre$id_emprunteur]":$emprunteur), $GLOBALS['association_metas']['pc_prets'], $journal, $id_pret);
     }
     return array($id_pret, $erreur);
 }
