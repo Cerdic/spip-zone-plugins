@@ -10,4 +10,15 @@ function objets_config($flux){
 	
 	return $objets;
 	}
+
+// Construction de la chaine de langue pour spip 2
+
+function recuperer_chaine($prefixe='',$chaine){
+	
+	if($prefixe)$prefixe=$prefixe.':';	
+	$texte=_T($prefixe.$chaine);	
+	
+	return $texte;
+	}	
+	
 ?>
