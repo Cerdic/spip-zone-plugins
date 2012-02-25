@@ -27,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_reference' => 'Référence',
 	'commande_reference_numero' => 'Référence n° ', # MODIF
 	'commande_statut' => 'Statut',
+	'commandes_titre'=>'Commandes',
 	'configurer_titre' => 'Configurer le plugin Commande',
 	'confirmer_supprimer_commande' => 'Confirmez-vous la suppression de la commande ?',
 	'contact_label' => 'Contact :',
