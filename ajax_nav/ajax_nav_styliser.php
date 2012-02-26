@@ -6,7 +6,11 @@ function ajax_nav_styliser($flux) {
   // qui affiche le bloc demande
   $id = $flux['args']['contexte']['getbyid'];
   if ($id != '') {
-    $flux['data'] = preg_replace('/.html$/', '', find_in_path('getbyid.html'));
+		if ($id == 'spip-admin') {
+			$flux['data'] = preg_replace('/.html$/', '', find_in_path('spip-admin.html'));
+		} else {
+			$flux['data'] = preg_replace('/.html$/', '', find_in_path('getbyid.html'));
+		}
   }
 
   // si l'url contient un parametre 'getinfos' non-vide, on redirige vers le squelette getinfos
