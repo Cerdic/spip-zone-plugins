@@ -1,6 +1,7 @@
 <?php
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
+
 include_spip('inc/texte');
 
 /*
@@ -30,7 +31,6 @@ function replace_puce(){
  * on refait le preg, a la main
  */
 function fermer_para_mano(&$t) {
-	defined('_AUTOBR')||define('_AUTOBR', "<span class='autobr'><br /></span>");
 
 	# match: ",<p (.*)<(/?)(STOP P|div|pre|ul|ol|li|blockquote|h[1-6r]|t(able|[rdh]|body|foot|extarea)|form|object|center|marquee|address|d[ltd]|script|noscript|map|button|fieldset|style)\b,UimsS"
 	# replace: "\n<p "+trim($1)+"</p>\n<$2$3"

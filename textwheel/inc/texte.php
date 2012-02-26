@@ -18,6 +18,9 @@ include_spip('inc/lien');
 
 include_spip('inc/textwheel');
 
+
+defined('_AUTOBR')||define('_AUTOBR', "<span class='autobr'><br /></span>");
+
 // Avec cette surcharge, cette globale n'est plus définie, et du coup ça plante dans les plugins qui font un foreach dessus comme ZPIP
 $GLOBALS['spip_raccourcis_typo'] = array();
 
@@ -595,11 +598,18 @@ function traiter_tableau($bloc) {
 			if (strpos($ligne,"\n-*")!==false OR strpos($ligne,"\n-#")!==false)
 				$ligne = traiter_listes($ligne);
 
-			// Pas de paragraphes dans les cellules
-			$ligne = preg_replace("/\n{2,}/", "<br /><br />\n", $ligne);
-
 			// tout mettre dans un tableau 2d
 			preg_match_all('/\|([^|]*)/S', $ligne, $cols);
+
+			// Pas de paragraphes dans les cellules
+			foreach ($cols[1] as &$col) {
+				if (strlen($col = trim($col))) {
+					$col = preg_replace("/\n{2,}/S", "<br /> <br />", $col);
+					$col = str_replace("\n", _AUTOBR."\n", $col);
+				}
+			}
+
+			// assembler le tableau
 			$lignes[]= $cols[1];
 		}
 	}
@@ -665,6 +675,7 @@ function traiter_tableau($bloc) {
 		$class = alterner($l+1, 'even', 'odd');
 		$html = "<tr class='row_$class'>$ligne</tr>\n$html";
 	}
+
 	return "\n\n<table".$GLOBALS['class_spip_plus'].$summary.">\n"
 		. $debut_table
 		. "<tbody>\n"
