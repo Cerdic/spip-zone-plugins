@@ -3,8 +3,8 @@
 	<auteur>Fil &amp; Cerdic</auteur>
 	<icon>textwheel-64.png</icon>
 	<licence>GNU/GPL</licence>
-	<version>0.3.1</version>
-	<etat>test</etat>
+	<version>0.3.2</version>
+	<etat>stable</etat>
 	<description>Integrer TextWheel dans SPIP</description>
 	<prefix>tw</prefix>
 	<categorie>outil</categorie>
