@@ -21,7 +21,7 @@
 
 			<BOUCLE_listes(POUR){tableau #GET{liste_donnes}}>
 				<div class="choix">
-				<input type="checkbox" class="checkbox" name="mailinglists[[(#VALEUR|table_valeur{id})]]" id="mailinglists_[(#VALEUR|table_valeur{id})]" value='on' [(#ENV{mailinglists}|table_valeur{[(#VALEUR|table_valeur{id})]}|=={on}) checked="ckecked"] />
+				<input type="checkbox" class="checkbox" name="mailinglists[[(#VALEUR|table_valeur{id})]]" id="mailinglists_[(#VALEUR|table_valeur{id})]" value='on' [(#ENV{mailinglists}|table_valeur{[(#VALEUR|table_valeur{id})]}|=={on}|oui) checked="checked"] />
 				<label for="mailinglists_[(#VALEUR|table_valeur{id})]">[(#VALEUR|table_valeur{name})]</label>
 				</div>
 			</BOUCLE_listes>

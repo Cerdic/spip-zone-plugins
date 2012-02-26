@@ -52,7 +52,7 @@ function array_filtre_lists($mailinglists){
 function champs_spip($tables){
 	
 	$champs_refuses=array(
-		"id_auteur","email","nom_site","nom_site","url_site","login","pass","low_sec","statut","maj","pgp","htpass","en_ligne","imessage","messagerie","alea_actuel","alea_futur","prefs","cookie_oubli","source","extra","webmestre"
+		"id_auteur","email","nom_site","nom_site","url_site","login","pass","low_sec","statut","maj","pgp","htpass","en_ligne","imessage","messagerie","alea_actuel","alea_futur","prefs","cookie_oubli","source","extra","webmestre","date_syncro","id_mailchimp","format"
 		);
 	
 	$trouver_table = charger_fonction('trouver_table','base');
