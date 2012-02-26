@@ -127,7 +127,7 @@ tr.cv, td.cv
 }
 
 /* alignements specifiques de cellules */
-td.boutons, td.icones
+td.boutons, td.icones, td.action,
 td.buttons, td.icons, td.actions
 {
 	text-align: center; /* HTML : align=center */
@@ -168,6 +168,10 @@ td.rate:after, td.percent:after, th.percent:after
 	content: "%"; /* &#37; = per cent ; &#137; = per million */
 }
 
+td.action
+{ /* ce champ contient un/une bouton/image de 12px de cote qui doit etre centre dans une cellule avec 2px de marge */
+	width: 15px;
+}
 
 /** Formulaires
  ******************************/

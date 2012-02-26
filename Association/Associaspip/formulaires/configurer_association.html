@@ -117,10 +117,10 @@
 								<label for="aff_id_asso"><:asso:config_libelle_utiliser_champ_id_asso:></label>
 								<br />
 						]
-								<input type="checkbox" name="aff_groupes" [(#ENV{aff_groupes}|=={on}|?{checked="checked"})] id="aff_groupes" />
+								<input type="checkbox" name="aff_groupes" [(#ENV{aff_groupes}|=={on}|?{checked="checked"})] <BOUCLE_okGrp(ASSO_GROUPES)></BOUCLE_okGrp>disabled="disabled"<//B_okGrp> id="aff_groupes" />
 								<label for="aff_groupes"><:asso:adherent_libelle_groupes:></label>
 								<br />
-								<input type="checkbox" name="aff_categorie" [(#ENV{aff_categorie}|=={on}|?{checked="checked"})] id="aff_categorie" />
+								<input type="checkbox" name="aff_categorie" [(#ENV{aff_categorie}|=={on}|?{checked="checked"})] <BOUCLE_okCat(ASSO_CATEGORIES)></BOUCLE_okCat>disabled="disabled"<//B_okCat> id="aff_categorie" />
 								<label for="aff_categorie"><:asso:adherent_libelle_categorie:></label>
 								<br />
 								<input type="checkbox" name="aff_validite" [(#ENV{aff_validite}|=={on}|?{checked="checked"})] id="aff_validite" />

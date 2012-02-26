@@ -27,16 +27,20 @@ function exec_association() {
 		association_onglets();
 		echo debut_gauche('',true);
 		echo debut_boite_info(true);
+		// INTRO : presentation du plugin
 		echo propre(_T('asso:association_info_doc'));
+		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
-		$res = association_icone(_T('asso:profil_de_lassociation'),  '?exec=configurer_association', 'assoc_qui.png');
-		$res .= association_icone(_T('asso:editer_asso_metas_utilisateur_lien'),  '?exec=editer_asso_metas_utilisateur', 'assoc_qui.png');
-		$res .= association_icone(_T('asso:categories_de_cotisations'),  generer_url_ecrire('categories'), 'cotisation.png',  '');
-		$res .= association_icone(_T('asso:plan_comptable'),  generer_url_ecrire('plan'), 'plan_compte.png',  '');
-		if ($GLOBALS['association_metas']['destinations']=='on')
-			$res .= association_icone(_T('asso:destination_comptable'),  generer_url_ecrire('destination'), 'plan_compte.png',  '');
-		$res.=association_icone(_T('asso:exercices_budgetaires_titre'),  generer_url_ecrire('exercices'), 'plan_compte.png',  '');
+		$res = association_icone(_T('asso:profil_de_lassociation'), generer_url_ecrire('configurer_association'), 'assoc_qui.png');
+		$res .= association_icone(_T('asso:editer_asso_metas_utilisateur_lien'), generer_url_ecrire('editer_asso_metas_utilisateur'), 'assoc_qui.png');
+		$res .= association_icone(_T('asso:categories_de_cotisations'), generer_url_ecrire('categories'), 'cotisation.png', '');
+		if ( test_plugin_actif('ASSOCIATION') ) {
+			$res .= association_icone(_T('asso:plan_comptable'), generer_url_ecrire('plan'), 'plan_compte.png', '');
+			if ($GLOBALS['association_metas']['destinations']=='on')
+			$res .= association_icone(_T('asso:destination_comptable'), generer_url_ecrire('destination'), 'plan_compte.png', '');
+			$res.=association_icone(_T('asso:exercices_budgetaires_titre'), generer_url_ecrire('exercices'), 'plan_compte.png', '');
+		}
 		echo bloc_des_raccourcis($res);
 		echo debut_droite('',true);
 		debut_cadre_relief('', false, '', $titre = _T('asso:association_infos_contacts'));
@@ -61,8 +65,10 @@ function exec_association() {
 		echo '<p class="tel">'.$GLOBALS['association_metas']['telephone']."</p>\n";
 		echo '<p class="email">'.$GLOBALS['association_metas']['email']."</p>\n";
 		echo '<ul class="note">';
-		echo '<li>'.$GLOBALS['association_metas']['declaration']."</li>\n";
-		echo '<li>'.$GLOBALS['association_metas']['prefet']."</li>\n";
+		if ($GLOBALS['association_metas']['declaration'])
+			echo '<li>'.$GLOBALS['association_metas']['declaration']."</li>\n";
+		if ($GLOBALS['association_metas']['prefet'])
+			echo '<li>'.$GLOBALS['association_metas']['prefet']."</li>\n";
 		/* afficher les metas definies par l'utilisateur si il y en a */
 		$query = sql_select('nom,valeur', 'spip_association_metas', "nom LIKE 'meta_utilisateur_%'");
 		while ($row = sql_fetch($query)) {
@@ -87,7 +93,7 @@ function exec_association() {
 		//Petite routine pour mettre a jour les statuts de cotisation "echu"
 		sql_updateq('spip_asso_membres',
 			array('statut_interne' => 'echu'),
-			"statut_interne = 'ok' AND validite < CURRENT_DATE() ");
+			"statut_interne='ok' AND validite<CURRENT_DATE() ");
 	}
 }
 

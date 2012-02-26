@@ -34,7 +34,7 @@ function exec_categories(){
 		$res.= association_icone(_T('asso:bouton_retour'), generer_url_ecrire('association'), 'retour-24.png');
 		echo bloc_des_raccourcis($res);
 		echo debut_droite('',true);
-		echo debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION_ICONES.'calculatrice.gif', false, '', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' ._T('asso:toutes_categories_de_cotisations'));
+		echo debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION_ICONES.'calculatrice.gif', false, '', _T('asso:toutes_categories_de_cotisations'));
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_categories'>\n";
 		echo "<thead>\n<tr>";
 		echo '<th>'. _T('asso:entete_id') .'</th>';
@@ -54,8 +54,8 @@ function exec_categories(){
 			echo '<td class="decimal">'. association_dureefr($data['duree'],'m') .'</td>';
 			echo '<td class="decimal">'. association_prixfr($data['cotisation']) .'</td>';
 			echo '<td class="text">'. propre($data['commentaires']) .'</td>';
-			echo '<td class="actions">' . association_bouton('bouton_supprimer', 'poubelle-12.gif', 'action_categorie','id='.$data['id_categorie']). '</td>';
-			echo '<td class="actions">' . association_bouton('bouton_modifier', 'edit-12.gif', 'edit_categorie','id='.$data['id_categorie']). '</td>';
+			echo '<td class="action">' . association_bouton('bouton_supprimer', 'poubelle-12.gif', 'action_categorie','id='.$data['id_categorie']). '</td>';
+			echo '<td class="action">' . association_bouton('bouton_modifier', 'edit-12.gif', 'edit_categorie','id='.$data['id_categorie']). '</td>';
 			echo "</tr>\n";
 		}
 		echo "</tbody>\n</table>\n";

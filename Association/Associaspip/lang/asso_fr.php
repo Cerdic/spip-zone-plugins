@@ -221,7 +221,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_asso_metas_utilisateur_lien' => 'G&eacute;rer les champs suppl&eacute;mentaires du profil de l\'association',
 	'ajouter_meta_utilisateur' => 'Cr&eacute;er un nouveau champs',
 	'editer_asso_metas_utilisateur' => '&Eacute;dition des champs utilisateurs',
-	'meta_utilisateur_note' => '<p>Note :</p><p>Cette page permet de cr&eacute;er ou d\'&eacute;diter(renommer/supprimer) des champs suppl&eacute;mentaires qui apparaissent dans le profil de votre association.</p><p>Une fois cr&eacute;&eacute;s les champs suppl&eacute;mentaires apparaissent dans la page de profil de l\'association o&ugrave; vous pourrez leur associer une valeur.</p>',
+	'meta_utilisateur_note' => '<p>Note :</p><p>Cette page permet de cr&eacute;er ou d\'&eacute;diter (renommer/supprimer) des champs suppl&eacute;mentaires qui apparaissent dans le profil de votre association.</p><p>Une fois cr&eacute;&eacute;s les champs suppl&eacute;mentaires apparaissent dans la page de profil de l\'association o&ugrave; vous pourrez leur associer une valeur.</p>',
 	'meta_utilisateur_limitation_note' => '<p>Notes :</p><p>Le nom d\'un champs est limit&eacute; aux caract&egrave;res alphanum&eacute;riques: A-Z a-z 0-9 et espaces, pas de caract&egrave;res accentu&eacute;s ni ponctuation.</p><p>Bien que conservant la casse dans leur affichage, la gestion du nom des champs y est insensible, vous ne pouvez donc pas cr&eacute;er deux champs identiques différenci&eacute;s par leur casse. Ex : "Nouveau Champs" et "nouveau champs" ne peuvent pas cohabiter.</p><p>Le nom de champ peut &ecirc;tre renseign&eacute; dans le fichier de langues <tt>local</tt> pour indiquer le texte accentu&eacute; ou traduit associ&eacute;.</p>',
 	'erreur_nom_meta_utilisateur_incorrect' => 'Le nom d\'un champs est limit&eacute; aux caract&egrave;res alphanum&eacute;riques: A-Z a-z 0-9 et espaces, pas de caract&egrave;res accentu&eacute;s ni ponctuation.',
 	'erreur_nom_meta_utilisateur_trop_long' => 'Le nom d\'un champs est limit&eacute; &agrave; 237 caract&egrave;res',
@@ -259,7 +259,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adherent_message_degrouper' => '<p>S&eacute;lectionner les groupes dont les adh&eacute;rents seront exclus.</p>',
 	'titre_voir_groupe' => 'Voir le groupe',
 # Association (accueil)
-	'association_infos_contacts' => '  ', // information sur l'association (objet, declaration, etc.), ses coordonnees (adresse, numero et email principaux) et les contacts (nom, fonction, numero, email)
+	'association_infos_contacts' => 'Profil de l\'association', // information sur l'association (objet, declaration, etc.), ses coordonnees (adresse, numero et email principaux) et les contacts (nom, fonction, numero, email)
 	'categories_de_cotisations' => 'Cat&eacute;gories de cotisations',
 	'toutes_categories_de_cotisations' => 'Toutes les cat&eacute;gories de cotisations',
 	'configuration' => 'Configuration',
@@ -283,7 +283,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'message_adhesion_webmaster' =>'
 
 	',
-	'profil_de_lassociation' => 'Profil de l\'association',
+	'profil_de_lassociation' => 'Param&egrave;tres de l\'association',
 
 # Adherents
  # Actions

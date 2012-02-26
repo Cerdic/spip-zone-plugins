@@ -43,7 +43,7 @@ function exec_adherents() {
 		echo totauxinfos_effectifs('adherents', $liste_libelles, $liste_effectifs);
 		// TOTAUX : montants des cotisations durant l'annee en cours
 		$data = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT('date', '%Y')=DATE_FORMAT(NOW(), '%Y') AND imputation=".sql_quote($GLOBALS['association_metas']['pc_cotisations']) );
-		echo totauxinfos_sommes(_T('asso:cotisations'), $data['somme_recettes'], $data['somme_depenses']);
+		echo totauxinfos_montants(_T('asso:cotisations'), $data['somme_recettes'], $data['somme_depenses']);
 		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
@@ -75,7 +75,7 @@ function exec_adherents() {
 			echo fin_cadre_enfonce(true);
 		}
 		echo debut_droite('',true);
-		echo debut_cadre_relief('', true, '', $titre = _T('asso:adherent_titre_liste_actifs'));
+		echo debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif', false, '', _T('asso:adherent_titre_liste_actifs'));
 		echo "<table width='100%' class='asso_tablo_filtres'>\n";
 		echo '<tr>';
 		// PAGINATION ALPHABETIQUE
@@ -101,6 +101,7 @@ function exec_adherents() {
 		}
 		// FILTRES
 		//Filtre groupes
+		if ( sql_countsel('spip_asso_groupes', '') ) {
 #		if ($GLOBALS['association_metas']['aff_groupes']=='on') {
 			echo '</td><td width="25%" class="formulaire">';
 			echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
@@ -116,13 +117,14 @@ function exec_adherents() {
 			}
 			echo '</select><noscript><input type="submit" value="'._T('lister').'" /></noscript></div></form>';
 #		}
+		}
 		//Filtre ID
-		echo '</td><td width="20%" class="formulaire">';
+		echo '</td><td width="16%" class="formulaire">';
 		echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
 		echo '<input type="text" name="id" onfocus=\'this.value=""\' size="5"  value="'. $id .'" onchange="form.submit()" />';
 		echo '<noscript><input type="submit" value="'._T('lister').'" /></noscript></div></form>';
-		echo '</td><td width="25%" class="formulaire">';
 		//Filtre statut
+		echo '</td><td width="23%" class="formulaire">';
 		echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
 		echo '<input type="hidden" name="lettre" value="'.$lettre.'" />';
 		echo '<select name="statut_interne" onchange="form.submit()">';
@@ -176,18 +178,22 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe,
 			$mail = '<a href="mailto:'.$data['email'].'">'.$data['nom_famille'].'</a>';
 		}
 		$statut = $data['statut'];
-		if (!$statut OR $statut=='nouveau') $statut = $data['bio'];
+		if (!$statut OR $statut=='nouveau')
+			$statut = $data['bio'];
 		switch($statut)	{
 			case '0minirezo':
-				$icone = 'admin-12.gif'; break;
+				$icone = 'admin-12.gif';
+				break;
 			case '1comite':
-				$icone = 'redac-12.gif'; break;
+				$icone = 'redac-12.gif';
+				break;
 			case '5poubelle':
-				$icone = 'poubelle.gif'; break;
+				$icone = 'poubelle.gif';
+				break;
 			case '6forum':
-				$icone = 'visit-12.gif'; break;
 			default :
-				$icone = 'adher-12.gif'; break;
+				$icone = 'visit-12.gif';
+				break;
 		}
 		$icone = !$icone ? strlen($statut) :  http_img_pack($icone,'','', _T('asso:adherent_label_modifier_visiteur'));
 		$auteurs .= "<tr class='$class'>\n";
@@ -229,12 +235,12 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe,
 			}
 			$auteurs .= '</td>';
 		}
-		$auteurs .= '<td class="actions">'
+		$auteurs .= '<td class="action">'
 		. '<a href="'. generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur) .'">'.$icone.'</a></td>'
-		. '<td class="actions">'. association_bouton('adherent_label_ajouter_cotisation', 'cotis-12.gif', 'ajout_cotisation','id='.$id_auteur) .'</td>'
-		. '<td class="actions">'. association_bouton('adherent_label_modifier_membre', 'edit-12.gif', 'edit_adherent','id='.$id_auteur) .'</td>'
-		. '<td class="actions">'. association_bouton('adherent_label_voir_membre', 'voir-12.png', 'voir_adherent','id='.$id_auteur) .'</td>'
-		. '<td class="actions"><input name="id_auteurs[]" type="checkbox" value="'.$id_auteur.'" /></td>'
+		. '<td class="action">'. association_bouton('adherent_label_ajouter_cotisation', 'cotis-12.gif', 'ajout_cotisation','id='.$id_auteur) .'</td>'
+		. '<td class="action">'. association_bouton('adherent_label_modifier_membre', 'edit-12.gif', 'edit_adherent','id='.$id_auteur) .'</td>'
+		. '<td class="action">'. association_bouton('adherent_label_voir_membre', 'voir-12.png', 'voir_adherent','id='.$id_auteur) .'</td>'
+		. '<td class="action"><input name="id_auteurs[]" type="checkbox" value="'.$id_auteur.'" /></td>'
 		. "</tr>\n";
 	}
 
@@ -267,7 +273,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe,
 	. $auteurs
 	. "</tbody>\n</table>\n";
 	//SOUS-PAGINATION
-	$res .= "<table class='asso_tablo_filtres'><tr>\n<td width='40%'><p class='pagination'>";
+	$res .= "<table class='asso_tablo_filtres'><tr>\n<td width='52%'><p class='pagination'>";
 	$nombre_selection = sql_countsel('spip_asso_membres', $critere);
 	$pages = intval($nombre_selection/$max_par_page)+1;
 	if ($pages!=1)	{
@@ -281,8 +287,12 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe,
 			}
 		}
 	}
-	$res .= "</p></td><td width='60%' class='formulaire'><form>\n"
-	.  (!$auteurs ? '' : ('<select name="action_adherents"><option value="" selected="">'._T('asso:choisir_action').'</option><option value="desactive">'.($statut_interne=='sorti'?_T('asso:reactiver_adherent'):_T('asso:desactiver_adherent')).'</option><option value="delete">'._T('asso:supprimer_adherent').'</option><option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_un_groupe').'</option></select><input type="submit" value="'._T('asso:bouton_confirmer').'" />'))
+	$res .= "</p></td><td width='48%' class='formulaire'><form>\n"
+	.  (!$auteurs ? '' : ('<select name="action_adherents"><option value="" selected="">'._T('asso:choisir_action').'</option><option value="desactive">'
+		.($statut_interne=='sorti' ? _T('asso:reactiver_adherent') : _T('asso:desactiver_adherent'))
+		.'</option><option value="delete">'._T('asso:supprimer_adherent').'</option>'
+		.(sql_countsel('spip_asso_groupes', '') ? '<option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_un_groupe').'</option>' : '')
+		.'</select><input type="submit" value="'._T('asso:bouton_confirmer').'" />'))
 	. '<input type="hidden" name="statut_courant" value="'.$statut_interne.'" />'
 	.  '</form></td></tr></table>';
 	return 	array($liste_id_auteurs, generer_form_ecrire('action_adherents', $res));

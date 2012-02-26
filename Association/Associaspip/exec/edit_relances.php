@@ -28,7 +28,7 @@ function exec_edit_relances()
 	$res = association_icone(_T('asso:bouton_retour'),  generer_url_ecrire('adherents'), 'retour-24.png');
 	echo bloc_des_raccourcis($res);
 	echo debut_droite('',true);
-	debut_cadre_relief('', false, '', $titre = _T('asso:tous_les_membres_a_relancer'));
+	echo debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.'ico_panier.png', false, '', $titre = _T('asso:tous_les_membres_a_relancer'));
 	$statut_interne = _request('statut_interne');
 	if (!$statut_interne)
 		$statut_interne = 'echu';
