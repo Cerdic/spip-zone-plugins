@@ -26,6 +26,10 @@ function replace_puce(){
 	return $puce;
 }
 
+function replace_br(){
+	return "<span class='manualbr'><br /></span>";
+}
+
 /**
  * callback fermer-para-mano
  * on refait le preg, a la main
@@ -51,7 +55,7 @@ function fermer_para_mano(&$t) {
 		}
 	}
 
-	$t = str_replace(_AUTOBR."\n<br />", '<br />', $t);
+	$t = str_replace(_AUTOBR."\n".replace_br(), replace_br(), $t);
 
 	return $t;
 }
