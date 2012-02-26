@@ -1,0 +1,39 @@
+<input type="text" class="text" name="recherche" value="[(#ENV*{recherche})]" />
+<input type="submit" class="submit" name="rechercheb" value="<:info_rechercher:>" />
+<input type="hidden" name="debutchanta" value='#ENV{debutchanta,#VAL{debutchantachanta}|_request}' />
+#SET{recherche,#ENV*{recherche}}
+[(#GET{recherche}|non|et{#ENV*{rechercheb}})
+        #SET{recherche,'/./'}
+        <input type="hidden" name="rechercheb" value='x' />
+]
+<B_liste_chant>
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-associer chants">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{chant:info_1_chant,chant:info_nb_chants}})</strong></caption>]
+        <thead>
+                <tr class='first_row'>
+                        <th class='picto' scope='col'></th>
+                        <th class='titre' scope='col'>[(#TRI{titre,<:chant:label_titre:>,ajax})]</th>
+                        <th class='date' scope='col'>[(#TRI{date_annee,<:chant:label_date_annee:>,ajax})]</th>
+                        <th class='action' scope='col'>&nbsp;</th>
+                </tr>
+        </thead>
+        <tbody>
+        <BOUCLE_liste_chant(CHANTS){doublons 2}{recherche #GET{recherche}}{tri #ENV{par,titre},#GET{defaut_tri}}{par num titre}{pagination 10 chanta}>
+                <tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+                        <td class='picto'>[(#CHEMIN_IMAGE{chant-16.png}|balise_img)]</td>
+                        <td class='titre principale'>[(#LOGO_CHANT|image_reduire{20,20})]<a href="[(#ID_CHANT|generer_url_entite{chant})]" title="<:info_numero_abbreviation|attribut_html:> #ID_CHANT">[(#RANG). ]#TITRE</a></td>
+                        <td class='date'>#DATE_ANNEE</td>
+                        <td class='action'><button class="button link" name="ajouter_lien[chant-#ID_CHANT-#OBJET-#ID_OBJET]" value="+"><:chant:lien_ajouter_chant:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>
+                </tr>
+        </BOUCLE_liste_chant>
+        </tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_chant>[(#ENV*{recherche}|oui)
+<div class="liste-objets liste-objets-associer chants caption-wrap">
+<strong class="caption">[(#ENV*{titre,<:chant:info_aucun_chant:>}) ]</strong>
+</div>]
+<//B_liste_chant>

@@ -1,0 +1,18 @@
+<BOUCLE_nav(CHANTS){id_chant}{statut==.*}>
+[(#BOITE_OUVRIR{'','info'})]
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','chant','id',#ENV{id_chant}}}}
+[(#BOITE_OUVRIR{<:chant:infos_complementaires:>,'raccourcis'})]
+[(#SAISIE{input, date_annee, label=<:chant:label_date_annee:>})]
+[(#SAISIE{input, numero, label=<:chant:label_numero:>})]
+[(#SAISIE{input, presentation, label=<:chant:label_presentation:>})]
+[(#SAISIE{input, ccli, label=<:chant:label_ccli:>})]
+[(#SAISIE{input, capo, label=<:chant:label_capo:>})]
+[(#SAISIE{input, tempo, label=<:chant:label_tempo:>})]
+[(#SAISIE{input, signature, label=<:chant:label_signature:>})]
+[(#SAISIE{input, tonalite, label=<:chant:label_tonalite:>})]
+
+#BOITE_FERMER
+
+#BOITE_FERMER
+
+</BOUCLE_nav>
