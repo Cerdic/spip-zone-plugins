@@ -6,7 +6,7 @@ function chats_upgrade($nom_meta_base_version, $version_cible){
 
 	$maj = array();
 	$maj['create'] = array(
-		array('maj_tables', array('spip_chats')),
+		array('maj_tables', array('spip_chats', 'spip_chats_liens')),
 	);
 	// id_rubrique
 	$maj['1.2.0'] = array(
@@ -31,6 +31,7 @@ function chats_upgrade($nom_meta_base_version, $version_cible){
 
 function chats_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_chats");
+	sql_drop_table("spip_chats_liens");
 	effacer_meta($nom_meta_base_version);
 }
 

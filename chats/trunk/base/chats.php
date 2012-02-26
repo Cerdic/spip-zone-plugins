@@ -7,23 +7,23 @@ function chats_declarer_tables_objets_sql($tables){
 	
 		'principale' => "oui",
 		'field'=> array(
-			"id_chat"	=> "bigint(21) NOT NULL",
-			"id_rubrique" => "bigint(21) NOT NULL DEFAULT 0",
-			"nom"	=> "tinytext DEFAULT '' NOT NULL",
-			"race"	=> "tinytext DEFAULT '' NOT NULL",
-			"date"  => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+			"id_chat"        => "bigint(21) NOT NULL",
+			"id_rubrique"    => "bigint(21) NOT NULL DEFAULT 0",
+			"nom"            => "tinytext DEFAULT '' NOT NULL",
+			"race"           => "tinytext DEFAULT '' NOT NULL",
+			"date"           => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 			"date_naissance" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-			"robe"	=> "tinytext DEFAULT '' NOT NULL",
-			"infos"	=> "text DEFAULT '' NOT NULL",
-			"statut" => "varchar(255) DEFAULT '0' NOT NULL",
-			"lang"  => "VARCHAR(10) DEFAULT '' NOT NULL",
-			"langue_choisie"	=> "VARCHAR(3) DEFAULT 'non'",
-			"id_trad" => "bigint(21) DEFAULT '0' NOT NULL",
-			"maj"	=> "TIMESTAMP"
+			"robe"           => "tinytext DEFAULT '' NOT NULL",
+			"infos"          => "text DEFAULT '' NOT NULL",
+			"statut"         => "varchar(255) DEFAULT '0' NOT NULL",
+			"lang"           => "VARCHAR(10) DEFAULT '' NOT NULL",
+			"langue_choisie" => "VARCHAR(3) DEFAULT 'non'",
+			"id_trad"        => "bigint(21) DEFAULT '0' NOT NULL",
+			"maj"            => "TIMESTAMP"
 		),
 		'key' => array(
-			"PRIMARY KEY"	=> "id_chat",
-			"KEY id_rubrique" => "id_rubrique",
+			"PRIMARY KEY"      => "id_chat",
+			"KEY id_rubrique"  => "id_rubrique",
 		),
 		'titre' => "nom AS titre, '' AS lang",
 		'date' => "date",
@@ -69,14 +69,14 @@ function chats_declarer_tables_objets_sql($tables){
 function chats_declarer_tables_auxiliaires($tables) {
 	$tables['spip_chats_liens'] = array(
 		'field' => array(
-			"id_chat"	=> "bigint(21) DEFAULT '0' NOT NULL",
-			"id_objet"	=> "bigint(21) DEFAULT '0' NOT NULL",
-			"objet"	=> "VARCHAR (25) DEFAULT '' NOT NULL",
-			"vu"	=> "VARCHAR(6) DEFAULT 'non' NOT NULL"
+			"id_chat"  => "bigint(21) DEFAULT '0' NOT NULL",
+			"id_objet" => "bigint(21) DEFAULT '0' NOT NULL",
+			"objet"    => "VARCHAR(25) DEFAULT '' NOT NULL",
+			"vu"       => "VARCHAR(6) DEFAULT 'non' NOT NULL"
 		),
 		'key' => array(
-			"PRIMARY KEY"	=> "id_chat,id_objet,objet",
-			"KEY id_chat"	=> "id_chat"
+			"PRIMARY KEY" => "id_chat,id_objet,objet",
+			"KEY id_chat" => "id_chat"
 		)
 	);
 	return $tables;
