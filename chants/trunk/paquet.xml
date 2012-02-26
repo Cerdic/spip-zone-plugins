@@ -5,7 +5,7 @@
         etat="dev"
         compatibilite="[3.0.0-alpha2;["
         logo="prive/themes/spip/images/chant-128.png"
-        schema="0.6.3"
+        schema="0.6.4"
         documentation="http://www.teddypayet.com/?article77"
     >      
         <nom>Chants</nom>

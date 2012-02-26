@@ -6,8 +6,7 @@ function chants_upgrade($nom_meta_base_version, $version_cible){
 
 	$maj = array();
 	$maj['create'] = array(
-		array('maj_tables', array('spip_chants')),
-		array('maj_tables', array('spip_chants_liens')),
+		array('maj_tables', array('spip_chants', 'spip_chants_liens'))
 	);
 	// champ : statut, lang, id_trad, langue_choisie
 	$maj['0.1.0'] = array(

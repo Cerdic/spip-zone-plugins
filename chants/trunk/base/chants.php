@@ -2,7 +2,7 @@
 function chants_declarer_tables_interfaces($interfaces) {
     $interfaces['table_des_tables']['chants'] ='chants';
     $interfaces['table_des_tables']['chants_liens'] ='chants_liens';
-    $interfaces['table_des_traitements']['paroles'][] = _TRAITEMENT_RACCOURCIS;
+    $interfaces['table_des_traitements']['PAROLES']['chants'] = _TRAITEMENT_RACCOURCIS;
     return $interfaces;
 }
 
