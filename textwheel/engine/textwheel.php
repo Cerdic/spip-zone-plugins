@@ -374,7 +374,7 @@ class TextWheel {
 	 * @param int $count
 	 */
 	protected static function replace_split(&$match,&$replace,&$t,&$count){
-		throw new InvalidArgumentException('split rule allways needs a callback function as replace');
+		throw new InvalidArgumentException('split rule always needs a callback function as replace');
 	}
 
 	/**

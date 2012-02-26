@@ -9,7 +9,7 @@ paragrapher-init-trim:
 
 toujours-paragrapher:
     # Ajouter un <p> au debut pour assurer d'avoir toujours un paragraphe
-    # anuler cette regle pour revenir a l'ancien comportement de SPIP
+    # annuler cette regle pour revenir a l'ancien comportement de SPIP
     type: all
     replace: "<p>$0"
 
