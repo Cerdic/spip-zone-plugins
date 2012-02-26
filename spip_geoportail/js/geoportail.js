@@ -194,7 +194,7 @@ jQuery.geoportail =
 			if (!div) return;
 			ovDiv = document.createElement('div');
 			ovDiv.id = OpenLayers.Util.createUniqueID('overviewMap');
-			ovDiv.className = 'overviewMap';
+			ovDiv.className = 'overviewSpipMap';
 			ovDiv.style.width = w + "px";
 			ovDiv.style.margin = "auto";
 			div.appendChild(ovDiv);
@@ -590,6 +590,7 @@ jQuery.geoportail =
 	setBaseLayer: function (map, l)
 	{	// Creer un base layer
 		var g = l.clone();
+		l.isBaseLayer = false;
 		map.getMap().addLayer(g);
 		var c = map.getMap().resolution;
 		// Changer de layer de reference + mettre le bon niveau de zoom (pour éviter un basculement auto hors echelle)
@@ -615,18 +616,21 @@ jQuery.geoportail =
     		{	projection: new OpenLayers.Projection("EPSG:900913"),
 				units: "m",
 				numZoomLevels: (options.numZoom ? options.numZoom : 19),
-				minZoomLevel: (options.minZoom ? options.minZoom : 1),
-				maxZoomLevel: (options.maxZoom ? options.maxZoom : 19),
+				minZoomLevel: (options.minZoom ? options.minZoom : 0),
+				//maxZoomLevel: (options.maxZoom ? options.maxZoom : null),
 				maxResolution: 156543.0339,
 				maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508),
 				visibility: (typeof(options.visibility)=='undefined' ? false : options.visibility),
 				opacity: ((!options.opacity) ? 1 : options.opacity),
 				description: info.descriptif,
 				metadataURL: info.url,
-				isBaseLayer: false,
+				isBaseLayer: true,
 				originators: [{ logo: "osm", pictureUrl: "http://wiki.openstreetmap.org/Wiki.png", url: "http://wiki.openstreetmap.org/wiki/WikiProject_France"}]
 			});
 		map.getMap().addLayer(l);
+		l.isBaseLayer = false;
+		l.visibility = (typeof(options.visibility)=='undefined' ? false : options.visibility);
+		l.maxZoomLevel = l.minZoomLevel + l.numZoomLevels;
 		return l;
 	},
 
@@ -644,19 +648,22 @@ jQuery.geoportail =
     		{	projection: new OpenLayers.Projection("EPSG:900913"),
 				units: "m",
 				numZoomLevels: (options.numZoom ? options.numZoom : 19),
-				minZoomLevel: (options.minZoom ? options.minZoom : 1),
-				maxZoomLevel: (options.maxZoom ? options.maxZoom : 19),
+				minZoomLevel: (options.minZoom ? options.minZoom : 0),
+				//maxZoomLevel: (options.maxZoom ? options.maxZoom : null),
 				maxResolution: 156543.0339,
 				maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508),
 				visibility: (typeof(options.visibility)=='undefined' ? false : options.visibility),
 				opacity: ((!options.opacity) ? 1 : options.opacity),
 				description: info.descriptif,
 				metadataURL: info.url,
-				isBaseLayer: false,
+				isBaseLayer: true,
 				originators: [{ logo: "osm", pictureUrl: "http://wiki.openstreetmap.org/Wiki.png", url: "http://wiki.openstreetmap.org/wiki/WikiProject_France"},
 					{ logo: "mquest", pictureUrl: "http://www.mapquestapi.com/cdn/common/images/large-logo.png", url: "http://www.mapquest.com/"}]
 			});
 		map.getMap().addLayer(l);
+		l.isBaseLayer = false;
+		l.visibility = (typeof(options.visibility)=='undefined' ? false : options.visibility);
+		l.maxZoomLevel = l.minZoomLevel + l.numZoomLevels;
 		return l;
 	},
 		

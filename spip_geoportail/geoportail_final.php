@@ -9,16 +9,21 @@ function geoportail_affichage_final($page)
 	// Inclure le hash code de maniere dynamique
 	charger_fonction('securiser_action','inc');
 	$action = calculer_action_auteur('geoportail');
+	
+	// Version de l'API
+	$version = '1.2';
 
 	// Version debug de l'API
-	if ($GLOBALS['geoportail_debug']) $api = "http://depot.ign.fr/geoportail/api/js/1.2/lib/geoportal/lib/Geoportal.js";
+	if ($GLOBALS['geoportail_debug']) $api = "http://depot.ign.fr/geoportail/api/js/$version/lib/geoportal/lib/Geoportal.js";
 	// Version locale de l'API
 	else if ($GLOBALS['meta']['geoportail_js']) $api = find_in_path ("js/GeoportalExtended.js");
 	// ...ou sur le site de l'API
-	else $api = "http://api.ign.fr/geoportail/api/js/1.2/GeoportalExtended.js";
+	else $api = "http://api.ign.fr/geoportail/api/js/$version/GeoportalExtended.js";
 	
 	$engine=
-'<script>jQuery.geoportail.hash = "'.$action.'";</script>
+'<script>
+jQuery.geoportail.hash = "'.$action.'";
+jQuery.geoportail.versionAPI = "'.$version.'";</script>
 <script language=javascript>jQuery(document).ready(	function() { loadAPI(); });</script>
 
 <!-- API Geoportail -->
@@ -34,9 +39,9 @@ function geoportail_affichage_final($page)
     // ]]></script>
     
 <!-- OpenLayers styles : -->
-<link id="__OpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/1.2/theme/default/style.css"/>
-<link id="__FramedCloudOpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/1.2/theme/default/framedCloud.css"/>
-<link id="__GeoportalCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/1.2/theme/geoportal/style.css"/>
+<link id="__OpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/'.$version.'/theme/default/style.css"/>
+<link id="__FramedCloudOpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/'.$version.'/theme/default/framedCloud.css"/>
+<link id="__GeoportalCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/'.$version.'/theme/geoportal/style.css"/>
 ';
 	if (strpos($page, '<!--_SPIP_GEOPORTAIL_YHOO-->'))
 	{	$ykey = $GLOBALS['meta']['geoportail_yahoo_key'];
@@ -50,8 +55,8 @@ function geoportail_affichage_final($page)
 	}
 	*/
 	if (strpos($page, '<!--_SPIP_GEOPORTAIL_GMAP-->'))
-	{	$engine .= '<script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>'
-				.'<link id="__GoogleOpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/1.2/theme/default/google.css"/>';
+	{	$engine .= '<script src="http://maps.google.com/maps/api/js?v=3.6&sensor=false"></script>'
+				.'<link id="__GoogleOpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/'.$version.'/theme/default/google.css"/>';
 	}
 		
 	// Inclure l'API dans le Header

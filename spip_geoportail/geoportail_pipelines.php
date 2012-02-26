@@ -45,7 +45,7 @@ function geoportail_insert_head($flux)
 ."\n".$repop
 .'
 </script>';
-$flux .= recuperer_fond('geoportail_insert_head');
+$flux .= recuperer_fond('geoportail_insert_head', array('key'=>$GLOBALS['meta']['geoportail_key']) );
 return $flux;
 }
 

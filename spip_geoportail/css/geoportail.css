@@ -139,7 +139,7 @@ div.gpLUSResult:hover, div.gpLUSResultAlternate:hover
 	text-decoration:none;
 }
 
-/* Fromulaire */
+/* Formulaire */
 .geoportail_formulaire .fondo
 {	background-color:#336699;
 	border-color:#336699;
@@ -176,7 +176,7 @@ div.gpLUSResult:hover, div.gpLUSResultAlternate:hover
 
 /** Decaler le logo Google */
 .GMAP .olLayerGooglePoweredBy {
-	bottom:8px !important;
+//	bottom:8px !important;
 }
 /** Decaler le logo GeoPortail */
 .GMAP .gpControlPermanentLogo 
@@ -189,4 +189,12 @@ div.gpLUSResult:hover, div.gpLUSResultAlternate:hover
 /** Bug d'affichage intempestif du popup */
 .GMAP .olLayerGoogleCopyright 
 {	display: none;
+}
+
+
+/** Affichage overview */
+.overviewSpipMap .olControlOverviewMapElement
+{	border:1px solid #369;
+	border-radius: 0;
+	padding:0;
 }
