@@ -1,5 +1,5 @@
 nom: '<:contact:titre:>'
-icon: 'images/contact-24.png'
+icon: 'prive/themes/spip/images/contact-24.png'
 parametres:
   -
     saisie: 'oui_non'
