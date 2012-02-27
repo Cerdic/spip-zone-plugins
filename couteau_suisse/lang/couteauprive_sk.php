@@ -183,15 +183,15 @@ Pozn.: zmenou  druhého parametra stratíte štandardné štýly priradené k t
 	'corbeille_objets_vider' => 'Delete the selected objects',
 	'corbeille_vider' => 'Empty the wastebin:',
 	'couleurs:aide' => 'Farba textu: <b>[coul]text[/coul]</b>@fond@ with <b>coul</b> = @liste@',
-	'couleurs:description' => 'Provide shortcuts to add colours in any text of the site (articles, news items, titles, forums, ...)
+	'couleurs:description' => 'Umožňuje vám ľahko použiť farbu na celý text na stránke (články, novinky, nadpisy, diskusné fórum, a i.) pomocou tagov na typografické skratky v zátvorkách: <code>[couleur]text.[/couleur]</code>
 
-Here are two identical examples to change the colour of text:@_CS_EXEMPLE_COULEURS2@
+Dva rovnaké príklady na zmenu farby textu:@_CS_EXEMPLE_COULEURS2@
 
-In the same way, to change the font if the following option allows:@_CS_EXEMPLE_COULEURS3@
+Rovnako na zmenu písma, ak je povolená táto možnosť:@_CS_EXEMPLE_COULEURS3@
 
 [[%couleurs_fonds%]]
-[[%set_couleurs%]][[->%couleurs_perso%]]
-@_CS_ASTER@The format of this personalised tags have to be of existing colours or define pairs «tag=colour», separated by comas. Examples : «grey, red», «smooth=yellow, strong=red», «low=#99CC11, high=brown» but also «grey=#DDDDCC, red=#EE3300». For the first and last example, the allowed tags are: <code>[grey]</code> et <code>[red]</code> (<code>[fond grey]</code> et <code>[fond red]</code> if the backgrounds are allowed).', # MODIF
+[[%set_couleurs%]][[-><set_couleurs valeur="1">%couleurs_perso%</set_couleurs>]]
+@_CS_ASTER@Formát týchto používateľských tagov by mal obsahovať existujúce farby alebo definovať dvojice "tag=farba", oddelené čiarkami. Príklady: "sivá, červená", "slabá=žltá, silná=červená", "dole=#99CC11, hore=brown" alebo ešte "sivá=#DDDDCC, červená=#EE3300". Pre prvý a posledný príklad sú povolené tagy: <code>[gris]</code> a <code>[rouge]</code> (<code>[fond gris]</code> a <code>[fond rouge],</code> ak sú písma povolené).',
 	'couleurs:nom' => 'Zafarbený text',
 	'couleurs_fonds' => ', <b>[fond coul]text[/coul]</b>, <b>[bg coul]text[/coul]</b>',
 	'cs_comportement:description' => '@puce@ {{Logs.}} Record a lot of information about the working of the Penknife in the {spip.log} files which can be found in this directory: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
@@ -673,7 +673,7 @@ _ • Only for articles containing the <code>@_CS_AVEC_SOMMAIRE@</code> tag.
 
 The summary can be used in conjunction with : {[.->decoupe]}.', # MODIF
 	'sommaire:nom' => 'Automatické zhrnutie',
-	'sommaire_ancres' => 'Vybrané kotvy: <b><html>{{{My Názov<my_anchor>}}}</html></b>', # MODIF
+	'sommaire_ancres' => 'Vybrané kotvy: <b><html>{{{Môj nadpis&lt;moja_kotva>}}}</html></b>',
 	'sommaire_avec' => 'An article with summary: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'An article without summary: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'sommaire_titres' => 'Štruktúrované podnadpisy: <b><html>{{{*Nadpis}}}</html></b>, <b><html>{{{**Podnadpis}}}</html></b>, atď.',
