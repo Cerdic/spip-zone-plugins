@@ -1,5 +1,5 @@
 [(#REM)
-	Ce squelette doit renvoyer l'identifiant de l'article vers lequel la rubrique doit être redirigée .
+	Ce squelette doit renvoyer l'identifiant de l'article vers lequel la rubrique doit etre redirigee.
 	La configuration de court-circuit lui est transmise en tant que variables d'environnement.
 ]
 <BOUCLE_un_article(ARTICLES){id_rubrique}{lang}>[(#ENV{un_article,oui}|=={oui}|et{#TOTAL_BOUCLE|=={1}}|?{#ID_ARTICLE,''})]</BOUCLE_un_article>

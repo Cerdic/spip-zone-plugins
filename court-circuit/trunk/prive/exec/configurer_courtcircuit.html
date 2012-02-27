@@ -1,6 +1,3 @@
-<!-- titre=<:courtcircuit:configurer_courtcircuit:> -->
-<!-- icone=icon/courtcircuit-24.png -->
-
 #CACHE{0}
 
 <h1 class="grostitre"><:courtcircuit:configurer_courtcircuit:></h1>
@@ -12,7 +9,7 @@
 <div class='cadre cadre-info verdana1'>
 <div class="cadre-padding">
 <div class="infos">
-	[<p>(#PLUGIN{courtcircuit, icon}|chemin|image_reduire{48})</p>]
+	[<p>(#PLUGIN{courtcircuit, icon}|find_in_path|image_reduire{48})</p>]
 	[<p><strong>(#PLUGIN{courtcircuit, nom}|typo)</strong></p>]
 	[<p>(#PLUGIN{courtcircuit, description}|typo)</p>]
 	[<p><a href="(#PLUGIN{courtcircuit, lien})"><:courtcircuit:aide_en_ligne:>

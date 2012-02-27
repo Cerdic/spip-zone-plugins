@@ -134,17 +134,17 @@
 				<label><:courtcircuit:label_liens_rubriques:></label>
 				<p class="explication"><:courtcircuit:explication_liens_rubriques:></p>
 				<div class="choix">
-					<input type="radio" name="liens_rubriques" class="radio" id="liens_rubriques_oui" value="oui" [(#ENV{liens_rubriques,oui}|=={oui}|non) checked="checked"] />
+					<input type="radio" name="liens_rubriques" class="radio" id="liens_rubriques_oui" value="oui" [(#ENV{liens_rubriques,oui}|=={oui}|oui) checked="checked"] />
 					<label for='liens_rubriques_oui'><:item_oui:></label>
 				</div>
 				<div class="choix">
-					<input type="radio" name="liens_rubriques" class="radio" id="liens_rubriques_non" value="non" [(#ENV{liens_rubriques,oui}|=={non}|non) checked="checked"] />
+					<input type="radio" name="liens_rubriques" class="radio" id="liens_rubriques_non" value="non" [(#ENV{liens_rubriques,oui}|=={non}|oui) checked="checked"] />
 					<label for='liens_rubriques_non'><:item_non:></label>
 				</div>
 			</li>
 		</ul>
 		<p class="boutons">
-			<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
 		</p>
 	</div></form>
 </div>

@@ -2,6 +2,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function courtcircuit_url_redirection($id_rubrique) {
+	spip_log('redirection','test');
 	$url = '';
 	include_spip('inc/utils');
 	include_spip('inc/headers');
@@ -19,7 +20,11 @@ function courtcircuit_url_redirection($id_rubrique) {
 			)
 		);
 		include_spip('public/styliser');
-		$flux = styliser_par_rubrique($flux);
+		if(function_exists('squelettes_par_rubrique_styliser_par_rubrique'))
+			$flux = squelettes_par_rubrique_styliser_par_rubrique($flux);
+		else {
+			$flux = styliser_par_rubrique($flux);
+		}
 		if ($flux['data'] != $squelette_rubrique)
 			return '';
 	}
@@ -31,8 +36,10 @@ function courtcircuit_url_redirection($id_rubrique) {
 	// On teste si on doit rediriger
 	$redirect_article = recuperer_fond(
 		'courtcircuit_selection_article', 
-		array_merge(array('id_rubrique' => $id_rubrique),$config)
+			array_merge(array('id_rubrique' => $id_rubrique),$config)
 		);
+	spip_log(array_merge(array('id_rubrique' => $id_rubrique),$config),'test');
+	spip_log($redirect_article,'test');
 	if (intval($redirect_article))
 		$url = generer_url_entite(intval($redirect_article), 'article', '', '', true);
 	else {
@@ -41,7 +48,7 @@ function courtcircuit_url_redirection($id_rubrique) {
 			array_merge(array('id_rubrique' => $id_rubrique),$config)
 			);
 		if (intval($redirect_rubrique)) {
-			// On applique à nouveau les règles de sélection à la sous-rubrique
+			// On applique a nouveau les regles de selection a la sous-rubrique
 			// Si pas de redirectio on pointe sur la sous-rubrique
 			$redirection_sous_rubrique = courtcircuit_url_redirection(intval($redirect_rubrique));
 			if ($redirection_sous_rubrique != '')
