@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_ip' => 'jedno hodnotenie na IP',
 
 	// J
-	'jaidonnemonavis' => 'J\'ai donné mon avis !', # NEW
+	'jaidonnemonavis' => 'Svoj názor som povedal(a)!',
 	'jaime' => 'Páči sa mi',
 	'jaimepas' => 'Nepáči sa mi',
 	'jaimeplus' => 'Už sa mi viac nepáči',
