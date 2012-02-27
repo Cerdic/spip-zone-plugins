@@ -56,6 +56,10 @@ function fermer_para_mano(&$t) {
 	}
 
 	$t = str_replace(_AUTOBR."\n".replace_br(), replace_br(), $t);
+	$t = str_replace(_AUTOBR."\n"."<br", "<br", $t);
+	$reg = ',(<br\b[^>]*>\s*)'.preg_quote(_AUTOBR."\n", ',').",S";
+
+	$t = preg_replace($reg, "\1", $t);
 
 	return $t;
 }
