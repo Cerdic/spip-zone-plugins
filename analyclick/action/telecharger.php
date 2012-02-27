@@ -32,8 +32,15 @@ function action_telecharger()
 	$doc = sql_fetsel("id_document, fichier, distant", "spip_documents", "id_document='$id'");
 	if ($doc)
 	{	// Adresse du document
+		/*
 		if($doc['distant'] == 'oui') $url = $doc['fichier'];
 		else $url = _DIR_IMG ."/". $doc['fichier'];
+		*/
+		/*	Utiliser la procedure standard de SPIP 
+			au cas ou elle soit surchargee par un plugin (acces_restreint)
+		*/
+		include_spip('inc/documents');
+		$url = generer_url_document_dist($id, 'document');
 
 		// ip du visiteur 
 		$ip = $_SERVER["REMOTE_ADDR"];
@@ -57,6 +64,7 @@ function action_telecharger()
 			}
 		}
 
+		$url = str_replace ('&amp;', '&', $url);
 		@header ("Location: $url"); 
 
 		echo "<a href='$url'>$url</a>";
