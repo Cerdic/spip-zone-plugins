@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_supprimer_boussole' => 'Odstrániť buzolu z databázy',
 
 	// D
-	'descriptif_boussole_spip' => 'La boussole SPIP regroupe l\'ensemble des sites « officiels » de la galaxie SPIP. Elle définit pour chaque site, son logo, son nom, son slogan et sa description. N\'hésitez donc pas à l\'utiliser dans vos propres sites pour aiguiller vos visiteurs dans la galaxie SPIP.', # NEW
+	'descriptif_boussole_spip' => 'Buzola SPIPu zoskupuje všetky "oficiálne" stránky galaxie SPIPu. Pri každej stránke uvádza jej logo, názov, slogan a jej popis. Pokojne ju môžete použiť na vlastných stránkach na nasmerovanie svojich návštevníkov do galaxie SPIPu.',
 	'descriptif_site_spip_blog' => 'Par ce que SPIP est un projet collaboratif, SPIP-BLOG.net  rassemble billets techniques, auto-dérision, humeurs, trolls, annonces diverses,... En cela il est bien le reflet de la communauté SPIP : d\'abord et avant tout, énormément de tendresse.', # NEW
 	'descriptif_site_spip_contrib' => 'Site collaboratif, SPIP-CONTRIB.net met à disposition l\'ensemble des contributions externes : plugins, scripts, filtres, squelettes, documentations, trucs et astuces,... versées à la communauté (liens de téléchargement) par les utilisateurs de SPIP. Ses forums assurent le lien entre développeurs et utilisateurs.', # NEW
 	'descriptif_site_spip_core' => 'Le site CORE.SPIP.org rassemble l\'historique des modifications du code de SPIP, une gestion de tickets permettant de signaler des bugs et de proposer des suggestions d\'amélioration et un espace de téléchargement des versions de SPIP.', # NEW
@@ -122,7 +122,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_groupe_spip_aide' => 'Pomoc a výmena skúseností so SPIPom',
 	'nom_groupe_spip_decouverte' => 'Objavovanie SPIPu',
 	'nom_groupe_spip_extension' => 'Rožírenia a príspevky k SPIPu',
-	'nom_groupe_spip_reference' => 'Références SPIP', # NEW
+	'nom_groupe_spip_reference' => 'Stránky, na ktoré SPIP odkazuje',
 	'nom_noisette_boussole' => 'Buzola',
 	'nom_noisette_boussole_actualite' => 'Buzola – novinky',
 	'nom_noisette_boussole_contenu_z' => 'Buzola – hlavný obsah stránky',
@@ -164,12 +164,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'slogan_boussole_spip' => 'Obľúbené adresy galaxie SPIP!',
-	'slogan_site_spip_blog' => 'Du logiciel libre et de la tendresse', # NEW
+	'slogan_site_spip_blog' => 'O slobodnom softvére a jednoduchosti ',
 	'slogan_site_spip_contrib' => 'Rozhranie príspevkov k SPIP',
 	'slogan_site_spip_core' => 'Rozhranie vývoja verzií SPIPu',
 	'slogan_site_spip_demo' => 'Vyskúšať najnovšiu stabilnú verziu SPIPu',
 	'slogan_site_spip_doc' => 'Technická referencia kódu SPIPu',
-	'slogan_site_spip_edgard' => 'Un coup de bot et ça repart !', # NEW
+	'slogan_site_spip_edgard' => 'Pomoc od robota znova a znova!',
 	'slogan_site_spip_forum' => 'Diskusné fórum používateľov SPIPu',
 	'slogan_site_spip_herbier' => 'Výber významných stránok v SPIPe',
 	'slogan_site_spip_info' => 'Na objavenie SPIPu a komunity okolo neho',
