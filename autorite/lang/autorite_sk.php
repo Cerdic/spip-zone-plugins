@@ -23,9 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur_modifie_article' => '<strong>Článok upravuje autor:</strong> každý redaktor môže upravovať články, ktoré napísal  (a kvôli tomu moderuje diskusné fórum a pripojenú petíciu).
 	<br />
 	<i>Pozn.: táto možnosť sa bude vzťahovať aj na zaregistrovaných návštevníkov, ak budú uvedení autori a ak sa použije špeciálne rozhranie.</i>',
-	'auteur_modifie_email' => '<strong>Rédacteur modifie email</strong> : chaque rédacteur peut modifier son email sur sa fiche d\'informations personnelles.', # NEW
-	'auteur_modifie_forum' => '<strong>Auteur modère forum</strong> : chaque rédacteur peut modérer le forum des articles dont il est l\'auteur.', # NEW
-	'auteur_modifie_petition' => '<strong>Auteur modère pétition</strong> : chaque rédacteur peut modérer la pétition des articles dont il est l\'auteur.', # NEW
+	'auteur_modifie_email' => '<strong>E-mailovú adresu upravuje redaktor:</strong> v zázname o svojich osobných údajoch si každý redaktor môže zmeniť e-mailovú adresu.',
+	'auteur_modifie_forum' => '<strong>Diskusné fórum moderuje autor:</strong> každý redaktor môže moderovať diskusné fórum k článkom, ktoré napísal.',
+	'auteur_modifie_petition' => '<strong>Petíciu moderuje autor:</strong> každý redaktor môže moderovať petíciu, ktorú sám vytvoril.',
 
 	// C
 	'config_auteurs' => 'Nastavenia autorov',
@@ -41,18 +41,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'deja_defini_suite' => 'Le plugin « Autorité » ne peut pas les modifier certains des réglages ci-dessous risquent par conséquent de ne pas fonctionner.
 	<br />Pour régler ce problème, vous devrez vérifier si votre fichier <tt>mes_options.php</tt> (ou un autre plugin actif) a défini ces fonctions.', # NEW
 	'descriptif_1' => 'Táto stránka s nastaveniami je vyhradená pre webmasterov stránky:',
-	'descriptif_2' => '
-<p>Si vous souhaitez modifier cette liste, veuillez éditer le fichier <tt>config/mes_options.php</tt> (le créer le cas échéant) et y indiquer la liste des identifiants des auteurs webmestres, sous la forme suivante :</p>
+	'descriptif_2' => '<p>Ak chcete upraviť tento zoznam, upravte, prosím, súbor <tt>config/mes_options.php</tt> (ak treba, vytvorte ho) a zadajte zoznam prihlasovacích údajov webmasterov v tejto podobe:</p>
 <pre>&lt;?php
   define (
   \'_ID_WEBMESTRES\',
   \'1:5:8\');
 ?&gt;</pre>
-<p>A partir de SPIP 2.1, il est aussi possible de donner les droits de webmestre à un administrateur via la page d\'édition de l\'auteur.</p>
-<p>A noter : les webmestres définis de cette manière n\'ont plus besoin de procéder à l\'authentification par FTP pour les opérations délicates (mise à niveau de la base de données, par exemple).</p>
+<p>Počnúc verziou 2.1 sa práva webmastera dajú administrátorovi prideliť na stránke na úpravu údajov o autorovi.</p>
+<p>Poznámka: webmasteri definovaní týmto spôsobom už viac nemusia overovať svoju totožnosť cez FTP pri vykonávaní zásadných operácií (napríklad pri aktualizácii databázy na novú verziu).</p>
 
-<a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>Cf. documentation</a>
-', # NEW
+<a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>Prečítajte si dokumentáciu</a>
+',
 	'details_option_auteur' => '<small><br />Pour le moment, l\'option « auteur » ne fonctionne que pour les auteurs enregistrés (forums sur abonnement, par exemple). Et, si elle est activée, les administrateurs du site ont aussi la capacité d\'éditer les forums.
 	</small>', # NEW
 	'droits_des_auteurs' => 'Práva autorov',
