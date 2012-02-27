@@ -46,7 +46,7 @@ function multilang_insert_head_prive($flux){
  * @param $flux
  */
 function multilang_insert_head($flux){
-
+	include_spip('inc/config');
 	$config = lire_config('multilang',array());
 
 	if($config['multilang_public'] == 'on'){
@@ -170,6 +170,7 @@ function multilang_inserer_head($config=array()){
 function multilang_affichage_final($flux){
 	if($_REQUEST['page'] == 'crayons.js'){
 		$root = '' ;
+		include_spip('inc/config');
 		$config = lire_config('multilang',array());
 		if(($config['multilang_public'] == 'on') && ($config['multilang_crayons'] == 'on')){
 			if($config['siteconfig']){
