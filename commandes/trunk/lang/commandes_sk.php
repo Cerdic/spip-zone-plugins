@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_reference' => 'Číslo',
 	'commande_reference_numero' => 'Č. objednávky ',
 	'commande_statut' => 'Stav',
+	'commandes_titre' => 'Commandes', # NEW
 	'configurer_titre' => 'Nastaviť zásuvný modul Commande',
 	'confirmer_supprimer_commande' => 'Môžete potvrdiť odstránenie tejto objednávky?',
 	'contact_label' => 'Kontakt:',
