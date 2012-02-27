@@ -79,10 +79,10 @@ Internetovú stránku {{[@nom_site@->@url_site@]}} vytvoril jej vlastník.
 
 {{@proprietaire_nom@}} assumes no liability for any interruptions for {{[@nom_site@->@url_site@]}} and its services.
 ', # NEW
-	'hebergeur_mentions_legales_idem' => '[hebergeur<-]{{{Hosting}}}
+	'hebergeur_mentions_legales_idem' => '[poskytovateľ webhostingu<-]{{{Poskytovateľ webhostingu}}}
 
-Website {{[@nom_site@->@url_site@]}} is hosted by its owner.
-', # NEW
+Webovú stránku {{[@nom_site@->@url_site@]}} prevádzkuje jej vlastník.
+',
 
 	// M
 	'mention_cnil' => 'As such, {{[@nom_site@->@url_site@]}} was the subject of a statement from the {{<abbr title="National French Commission for informatical freedom - Commission Nationale de l\'informatique et des Libertés - www.cnil.fr">CNIL</abbr>}} on @date_cnil@, registered under reference {{@numero_cnil@.}}', # NEW
