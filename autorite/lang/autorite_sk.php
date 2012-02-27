@@ -16,13 +16,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admins' => 'Administrátori',
 	'admins_redacs' => 'Administrátori a redaktori',
 	'admins_rubriques' => 'administrátori prepojení s rubrikami majú:',
-	'attention_crayons' => '<small><strong>Attention.</strong> Les réglages ci-dessous ne peuvent fonctionner que si vous utilisez un plugin proposant une interface d\'édition (comme par exemple <a href="http://www.spip-contrib.net/Les-Crayons">les Crayons</a>).</small>', # NEW
+	'attention_crayons' => '<small><strong>Pozor.</strong> Tieto nastavenia môžu fungovať iba ak použijete zásuvný modul, ktorý ponúka rozhranie na úpravu (ako napríklad <a href="http://www.spip-contrib.net/Les-Crayons">Farbičky.</a>)</small>',
 	'attention_version' => 'Majte na pamäti, že tieto nastavenia nemusia vo vašej verzii SPIPu fungovať:',
 	'auteur_message_advitam' => 'Autor správy natrvalo',
 	'auteur_message_heure' => 'Autor správy na hodinu',
-	'auteur_modifie_article' => '<strong>Auteur modifie article</strong> : chaque rédacteur peut modifier les articles publiés dont il est l\'auteur (et, par conséquent, modérer le forum et la pétition associés).
+	'auteur_modifie_article' => '<strong>Článok upravuje autor:</strong> každý redaktor môže upravovať články, ktoré napísal  (a kvôli tomu moderuje diskusné fórum a pripojenú petíciu).
 	<br />
-	<i>N.B. : cette option s\'applique aussi aux visiteurs enregistrés, s\'ils sont auteurs et si une interface spécifique est prévue.</i>', # NEW
+	<i>Pozn.: táto možnosť sa bude vzťahovať aj na zaregistrovaných návštevníkov, ak budú uvedení autori a ak sa použije špeciálne rozhranie.</i>',
 	'auteur_modifie_email' => '<strong>Rédacteur modifie email</strong> : chaque rédacteur peut modifier son email sur sa fiche d\'informations personnelles.', # NEW
 	'auteur_modifie_forum' => '<strong>Auteur modère forum</strong> : chaque rédacteur peut modérer le forum des articles dont il est l\'auteur.', # NEW
 	'auteur_modifie_petition' => '<strong>Auteur modère pétition</strong> : chaque rédacteur peut modérer la pétition des articles dont il est l\'auteur.', # NEW
