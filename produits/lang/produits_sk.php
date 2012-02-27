@@ -8,10 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'configurer_editer_ttc_explication' => 'Les prix des produits sont éditables en TTC et non plus en HT', # NEW
-	'configurer_editer_ttc_label' => 'Editer les produits en TTC', # NEW
-	'configurer_precision_ttc_explication' => 'Indiquer la précision d\'arrondi après la virgule pour les prix TTC (par défaut 2)', # NEW
-	'configurer_precision_ttc_label' => 'Précision sur les prix TTC', # NEW
+	'configurer_editer_ttc_explication' => 'U výrobkov sa upravuje sadzba DPH a nie celková suma',
+	'configurer_editer_ttc_label' => 'Upraviť sadzbu výrobkov DPH',
+	'configurer_precision_ttc_explication' => 'Upresniť zaokrúhlenie po desatinnej čiarke pre sadzbu DPH (predvolené 2)',
+	'configurer_precision_ttc_label' => 'Upresnenie sadzby DPH',
 	'configurer_taxe_defaut_explication' => 'Zadajte predvolenú daň na výrobky vo forme 0.196 napríklad pre DPH 19,6 % (túto hodnotu potom môžete pri každom výrobku prepísať).',
 	'configurer_taxe_defaut_label' => 'Predvolená daň',
 	'configurer_titre' => 'Nastavenia výrobkov',
@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'produit_bouton_ajouter' => 'Pridať výrobok',
 	'produit_champ_descriptif_label' => 'Krátky popis',
 	'produit_champ_prix_ht_label' => 'Cena bez dane',
-	'produit_champ_prix_ttc_label' => 'Prix TTC', # NEW
+	'produit_champ_prix_ttc_label' => 'Cena s DPH',
 	'produit_champ_reference_label' => 'Referencie',
 	'produit_champ_rubrique_label' => 'Rubrika',
 	'produit_champ_taxe_explication' => 'Predvolená hodnota na tejto stránke: @taxe@. Toto pole môžete nechať prázdne.',
