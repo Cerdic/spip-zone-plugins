@@ -54,10 +54,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auto_mode_none' => 'Žiadna automatizácia',
 	'auto_mode_week' => 'Zásielok týždenne',
 	'auto_month_day' => 'Deň v mesiaci',
-	'auto_month_day_explication' => 'Les jours proposés ne vont que de 1 à 28 pour éviter tout problème lors des mois de moins de 31 jours.', # NEW
+	'auto_month_day_explication' => 'V ponuke sú iba dni od 1 do 28, aby sa predišlo problémom pri mesiacoch, ktoré majú menej ako 31 dní.',
 	'auto_subscribers' => 'Automatické pridávanie abonentov',
-	'auto_subscribers_explication' => 'Les adresses contenus dans ce fichier distant seront automatiquement abonnées une fois par jour à cette lettre.', # NEW
-	'auto_subscribers_mode' => 'Mode d\'abonnement', # NEW
+	'auto_subscribers_explication' => 'Tento materiál bude automaticky raz denne odoslaný na adresy, ktoré sa nachádzajú v tomto vzdialenom súbore.',
+	'auto_subscribers_mode' => 'Režim prihlásenia na odber',
 	'auto_subscribers_url' => 'URL súboru s adresami',
 	'auto_week_day_friday' => 'Piatok',
 	'auto_week_day_monday' => 'Pondelok',
@@ -86,15 +86,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmation_inscription' => 'Potvrdenie prihlásenia odoslané e-mailom',
 	'confirmation_inscription_multiple' => 'Potvrdenie prihlásenia na odoberanie viacerých materiálov odoslané e-mailom',
 	'confirmation_votre_desinscription' => 'Potvrdenie vášho odhlásenia',
-	'confirmation_votre_desinscription_text' => '
-Bonjour,
+	'confirmation_votre_desinscription_text' => 'Dobrý deň,
 
-Veuillez confirmer votre désinscription en cliquant sur ce lien :
+Svoje odhlásenie, prosím, potvrďte kliknutím 
+na tento odkaz:
 
  @@URL_CONFIRMATION@@
 
-Merci
-', # NEW
+Ďakujeme
+',
 	'confirmation_votre_inscription' => 'Potvrdenie registrácie',
 	'confirmation_votre_inscription_multiple' => 'Potvrdenie registrácie',
 	'confirmation_votre_inscription_text' => '
@@ -140,17 +140,17 @@ Merci', # NEW
 	'deja_inscrit' => 'Vous étiez déjà inscrit à la lettre « @lst_name@ ». Votre mode d\'inscription a été mis à jour.', # NEW
 	'deja_validee' => 'Táto operácia už bola potvrdená. Je mi to ľúto.',
 	'demande_transmise' => 'Votre demande d\'inscription à la lettre « @lst_name@ » va être examinée dans les plus brefs délais.', # NEW
-	'desabonner' => 'Désabonner', # NEW
-	'desabonner2' => 'désabonner', # NEW
-	'desabonner_abonnes' => 'Désabonner les abonnés selectionnés', # NEW
+	'desabonner' => 'Odhlásiť z odoberania',
+	'desabonner2' => 'odhlásiť z odoberania',
+	'desabonner_abonnes' => 'Odhlásiť vybraných abonentov z odoberania',
 	'desabonner_confirmer' => 'Êtes-vous certain de vouloir désabonner cette personne ?', # NEW
 	'description' => 'Popis',
-	'desinscription_confirmation_debut' => 'Désinscription de la lettre d\'information', # NEW
+	'desinscription_confirmation_debut' => 'Odhlásiť sa z odoberania materiálu',
 	'desinscription_confirmation_fin' => 'demandée. Vous allez recevoir un message demandant confirmation.', # NEW
-	'desinscription_validee' => 'Votre désinscription de la lettre « @lst_name@ » est validée. A bientôt.', # NEW
+	'desinscription_validee' => 'Vaše odhlásenie z odoberania materiálu "@lst_name@" bolo potvrdené. Do skorého videnia.',
 
 	// E
-	'editer_lettre' => 'Editer la lettre d\'information', # NEW
+	'editer_lettre' => 'Upraviť materiál',
 	'email_administrateur' => 'E-mail administrateur', # NEW
 	'email_expediteur' => 'E-mail expéditeur (from et reply-to)', # NEW
 	'email_moderateur' => 'E-mail od moderátora',
@@ -159,14 +159,14 @@ Merci', # NEW
 	'emails' => 'E-maily',
 	'envoye' => 'Odoslané',
 	'envoyer' => 'Poslať',
-	'envoyer_non_aucun_abonne' => 'Envoi impossible, aucun abonné', # NEW
+	'envoyer_non_aucun_abonne' => 'Nedá sa odoslať, žiaden abonent',
 	'erreur' => 'Chyba',
-	'erreur_contenu_vide' => 'Un nouveau message n\'a pas pu être créé faute de contenu.', # NEW
-	'et_ou_saisir_des_adresses' => '...et/ou saisir des adresses.', # NEW
+	'erreur_contenu_vide' => 'Novú správu nemožno vytvoriť kvôli nedostatku obsahu.',
+	'et_ou_saisir_des_adresses' => '...a/lebo zadať adresy.',
 
 	// F
 	'front_clevermail_action_validation' => 'Potvrdenie operácie',
-	'front_clevermail_unsubscription_query' => 'Demande de désinscription', # NEW
+	'front_clevermail_unsubscription_query' => 'Žiadosť o odhlásenie z odoberania',
 
 	// I
 	'importer' => 'Nahrať',
@@ -177,26 +177,26 @@ Merci', # NEW
 	'inscription_deja_abonne_meme_mode' => 'Vous étiez déjà inscrit à la lettre « @lst_name@ » dans ce même mode.', # NEW
 	'inscription_encours' => 'Votre demande d\'inscription à la lettre @nom_lettre@ est en cours d\'examen. Merci de patienter.', # NEW
 	'inscription_mok' => 'Votre demande d\'inscription à la lettre « @lst_name@ » a été soumise au modérateur. Vous serez informé de sa décision.', # NEW
-	'inscription_nok' => 'Inscription non authorisée pour cette lettre d\'information', # NEW
+	'inscription_nok' => 'Na odoberanie tohto informačného materiálu nie je povolená registrácia',
 	'inscription_ok' => 'Vous allez recevoir un message de demande de confirmation de votre inscription à la lettre « @lst_name@ ».', # NEW
 	'inscription_ok_multiple' => 'Vous allez recevoir un message de demande de confirmation de votre inscription aux lettre « @lst_name@ ».', # NEW
-	'inscription_validee' => 'Votre inscription à la lettre « @lst_name@ » est validée. Merci.', # NEW
+	'inscription_validee' => 'Vaša registrácia na odoberanie materiálu "@lst_name@" bola potvrdená. Ďakujeme.',
 
 	// L
 	'label_contenu_html' => 'Text v HTML',
 	'label_contenu_text' => 'Obyčajný text',
 	'label_inscription_email' => 'Vaša e-mailová adresa:',
-	'label_inscription_lettres' => 'Choisissez parmi ces lettres d\'information :', # NEW
+	'label_inscription_lettres' => 'Vyberte si z týchto informačných materiálov:',
 	'label_inscription_version' => 'Typ správy:',
-	'le_format_des_adresses_email_ne_semble_pas_bon' => 'Le format des adresses e-mail ne semble pas bon.', # NEW
-	'lettre_meme_nom' => 'Une lettre d\'information porte déjà ce nom', # NEW
-	'lettre_sans_nom' => 'Une lettre d\'information doit avoir un nom', # NEW
-	'lettres_information' => 'Newslettery',
-	'lettres_non_classees' => 'Lettres non classées', # NEW
+	'le_format_des_adresses_email_ne_semble_pas_bon' => 'Zdá sa, že formát e-mailových adries nie je správny.',
+	'lettre_meme_nom' => 'Materiál s takým názvom už existuje',
+	'lettre_sans_nom' => 'Materiál musí mať názov',
+	'lettres_information' => 'Informačné materiály',
+	'lettres_non_classees' => 'Nezotriedené materiály',
 	'lire_en_ligne' => 'Prečítať si správu na stránke.',
 	'liste_abonnes' => 'Zoznam abonentov',
 	'liste_lettres' => 'Zoznam materiálov',
-	'liste_lettres_aucune' => 'Vous n\'avez pas encore créé de lettre d\'information.', # NEW
+	'liste_lettres_aucune' => 'Ešte ste nevytvorili informačný materiál.',
 	'liste_messages' => 'Správy',
 
 	// M
@@ -206,7 +206,7 @@ Désinscription de @sub_email@ de la lettre « @lst_name@ »', # NEW
 	'mail_info_inscription_corps' => 'Alerte envoyée par le plugin CleverMail du site @nom_site@ ( @url_site@ ) :
 
 Inscription de @sub_email@ à la lettre « @lst_name@ »', # NEW
-	'mail_info_inscription_sujet' => 'Inscription de @sub_email@', # NEW
+	'mail_info_inscription_sujet' => 'Registrácia @sub_email@',
 	'mail_inscription_multiple' => 'Bonjour,
 
 Pour confirmer votre inscription aux lettres d\'information suivantes :
@@ -218,10 +218,10 @@ veuillez cliquer sur ce lien :
  @@URL_CONFIRMATION@@
 
 Merci', # NEW
-	'maj_inscription' => 'inscription mise à jour', # NEW
-	'maj_inscriptions' => 'inscriptions mise à jour', # NEW
-	'mauvais_affichage' => 'Si vous ne visualisez pas cet email, lisez-le sur le site', # NEW
-	'mauvais_identifiant_lettre' => 'Mauvais identifiant de lettre d\'information', # NEW
+	'maj_inscription' => 'údaje o registrácii boli aktualizované',
+	'maj_inscriptions' => 'údaje o registráciách boli aktualizované',
+	'mauvais_affichage' => 'Ak sa vám tento e-mail nezobrazil správne, prečítajte si ho na stránke',
+	'mauvais_identifiant_lettre' => 'Nesprávny identifikátor informačného materiálu',
 	'message' => 'správa',
 	'message_queue_attente' => 'čakajúca správa',
 	'message_queue_envoye' => '@nb@ odoslaná správa',
@@ -258,7 +258,7 @@ Merci', # NEW
 	'news_depuis' => 'Novinky od',
 	'nom' => 'Meno',
 	'nom_formulaire_clevermail' => 'Formulaire d\'abonnement aux listes de diffusion', # NEW
-	'nombre_messages' => 'Nombre de messages par envoi', # NEW
+	'nombre_messages' => 'Počet správ na odoslanie',
 	'nouveau_message' => 'nová správa',
 	'nouveaux_abonnes_et' => ' a ',
 	'nouveaux_messages' => 'Nové správy',
@@ -269,9 +269,9 @@ Merci', # NEW
 	'plusieurs_messages_en_attente' => 'čaká: @nb@',
 	'plusieurs_messages_en_cours_envoi' => 'posiela sa: @nb@',
 	'plusieurs_messages_envoyes' => 'odoslaných: @nb@',
-	'prefixer_messages' => 'Préfixe', # NEW
+	'prefixer_messages' => 'Prefix',
 	'prefixer_messages_explication' => 'Préfixer les sujets des messages avec le nom de la lettre d\'information', # NEW
-	'procedure_termine' => 'Cliquez ici pour terminer', # NEW
+	'procedure_termine' => 'Na ukončenie operácie kliknite sem',
 	'proprietes' => 'Vlastnosti',
 
 	// R
@@ -283,7 +283,7 @@ Merci', # NEW
 	'source_des_abonnes' => 'Vytvoriť zoznam abonentov',
 	'statistiques' => 'Štatistiky',
 	'sujet' => 'Predmet',
-	'sujet_mail_inscription_multiple' => 'Confirmation de votre inscription', # NEW
+	'sujet_mail_inscription_multiple' => 'Potvrdenie vašej registrácie',
 	'sujet_mail_mod' => 'Modération de la lettre @nom_lettre@', # NEW
 	'sujet_message' => 'Predmet správy',
 	'sujet_vide' => 'Predmet nemôže byť prázdny',
