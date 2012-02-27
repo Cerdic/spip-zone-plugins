@@ -1,6 +1,6 @@
 <?php
 
-// Sécurité
+// SÃ©curitÃ©
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Cette balise renvoie le tableau de la liste des pages
