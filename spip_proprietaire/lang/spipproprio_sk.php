@@ -228,11 +228,11 @@ Depuis sa version 1.1, le plugin propose une adaptation Z-compatible des squelet
 	'proprietaire' => 'vlastník',
 	'proprietaire_export_import' => 'Mentions Légales : maintenance', # NEW
 	'proprietaire_export_import_texte_supp' => 'Vous pouvez ici sauvegarder votre configuration courante et vos chaînes personnelles de langues, ou les restaurer depuis une précédente sauvegarde (<i>y compris depuis un autre site</i>) ...<br /><br />', # NEW
-	'proprietaire_retour_plateforme' => 'Retour à la plateforme', # NEW
+	'proprietaire_retour_plateforme' => 'Späť na platformu',
 	'proprietaire_texte' => 'Vous pouvez ici définir les options générales du site utilisées par le plugin <b>Mentions Légales</b>.<br /><br />Vous pouvez également définir des chaînes de langues particulières dont l\'utilisation est rappelée sur la page concernée.<br />', # NEW
 	'proprietaire_texte_supp' => 'Ce plugin vous propose de centraliser et automatiser la gestion d\'un site \'institutionnel\' ou \'professionnel\' fonctionnant sous SPIP.<br /><br />Il vous permet notamment de saisir un ensemble d\'informations sur le <b>propriétaire</b> du site, organisme, société, institution ou particulier, afin de les présenter de divers manières et, éventuellement, de générer automatiquement des informations de Copyright, des \'Mentions légales\' et des \'Conditions d\'utilisation\' propres au site.', # NEW
-	'proprietaire_titre_page' => 'Plateforme Mentions Légales', # NEW
-	'proprietaire_titre_page_short' => 'Plateforme', # NEW
+	'proprietaire_titre_page' => 'Platforma Informácie právneho charakteru',
+	'proprietaire_titre_page_short' => 'Platforma',
 	'pskels_info_mentions_legales' => 'Les blocs ci-dessous permettent de définir les informations concernant les <b>Créateur</b> et <b>Hébergeur</b> du site afin de mettre en place automatiquement des <b>Mentions Légales</b> et <b >Conditions d\'Utilisation</b>.<br /><br />Ces textes représentent <u>le minimum légal pour tout site web</u> et sont très génériques ... Ils doivent être considérés comme une base de travail pour créer vos propres textes.<br /><br />Vous pouvez les modifier sur la page \'Textes de langue propriétaire\' si vous activez l\'option ci-dessous.', # NEW
 	'pskels_legal_legend_createur' => 'Údaje o tvorcovi stránky',
 	'pskels_legal_legend_hebergeur' => 'Údaje o poskytovateľovi webhostingu',
