@@ -39,8 +39,8 @@ function action_telecharger()
 		/*	Utiliser la procedure standard de SPIP 
 			au cas ou elle soit surchargee par un plugin (acces_restreint)
 		*/
-		include_spip('inc/documents');
-		$url = generer_url_document_dist($id, 'document');
+		include_spip('urls/standard');
+		$url = generer_url_document($id, 'document');
 
 		// ip du visiteur 
 		$ip = $_SERVER["REMOTE_ADDR"];
