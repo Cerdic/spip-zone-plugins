@@ -103,7 +103,7 @@ function gestionml_auteurs_listes($config) {
 	$listes = array_combine($nom_listes,$nom_listes) ;
 
 	if($config['cacher_admin_restreints']) {
-		$auteurs = sql_allfetsel("auteurs.id_auteur,auteurs.nom", "spip_auteurs AS auteurs LEFT JOIN spip_auteurs_rubriques AS restreints ON auteurs.id_auteur=restreints.id_auteur", "restreints.id_auteur IS NULL AND auteurs.statut='0minirezo'");
+		$auteurs = sql_allfetsel("auteurs.id_auteur,auteurs.nom", "spip_auteurs AS auteurs LEFT JOIN spip_auteurs_rubriques AS restreints ON auteurs.id_auteur=restreints.id_auteur", "restreints.id_auteur IS NULL AND auteurs.statut='0minirezo'", "nom");
 	} else {
 		$auteurs = sql_allfetsel("id_auteur, nom", "spip_auteurs", "statut='0minirezo'", "", "nom");
 	}
