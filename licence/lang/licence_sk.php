@@ -8,14 +8,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_boite_licence' => 'Nastavenia zásuvného modulu License',
+	'cfg_boite_licence' => 'Nastavenia zásuvného modulu Licencia',
 	'cfg_descr_licence' => 'Licencie pre vaše články',
 	'cfg_lbl_licence_defaut' => 'Predvolená licencia',
 	'cfg_titre_licence' => 'Licencia',
 
 	// D
 	'description_art_libre' => 'Licencia Free Art',
-	'description_cc0' => 'Creative Common - Contenu libre de tout droit', # NEW
+	'description_cc0' => 'Creative Common – obsah oslobodený od všetkých práv',
 	'description_cc_by' => 'Licencia Creative Commons - Attribution',
 	'description_cc_by_nc' => 'Licencia Creative Commons - Attribution Non-Commercial',
 	'description_cc_by_nc_nd' => 'Licencia Creative Commons - Attribution Non-Commercial No Derivatives',
@@ -24,12 +24,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_cc_by_sa' => 'Licencia Creative Commons - Attribution Share Alike',
 	'description_copyright' => '© copyright autor článku',
 	'description_gpl' => 'Licencia GNU/GPL',
-	'description_wtfpl' => 'Licence Publique Rien À Branler', # NEW
+	'description_wtfpl' => 'Verejná licencia žiadne porušenie',
 
 	// L
 	'label_select_licence' => 'Vyberte licenciu',
 	'lien_art_libre' => 'http://artlibre.org/licence/lal/en',
-	'lien_cc0' => 'http://vvlibri.org/fr/licence/cc0/10/fr/legalcode', # NEW
+	'lien_cc0' => 'http://vvlibri.org/en/licence/cc0/10/en/legalcode',
 	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/legalcode',
 	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/legalcode',
 	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/legalcode',
@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/legalcode',
 	'lien_gfdl' => 'http://www.gnu.org/licenses/fdl.html',
 	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
-	'lien_whfpl' => 'http://sam.zoy.org/lprab/', # NEW
+	'lien_whfpl' => 'http://sam.zoy.org/lprab/',
 
 	// N
 	'noisette_cacher_defaut' => 'Skryť, keď nie je vybratá licencia?',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_art_libre' => 'FAL',
-	'titre_cc0' => 'CC0', # NEW
+	'titre_cc0' => 'CC0',
 	'titre_cc_by' => 'Licencia CC by',
 	'titre_cc_by_nc' => 'Licencia CC by-nc',
 	'titre_cc_by_nc_nd' => 'Licencia CC by-nc-nd',
@@ -63,7 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_copyright' => 'Autorské práva',
 	'titre_gfdl' => 'Licencia GNU FDL',
 	'titre_gpl' => 'Licencia GNU GPL',
-	'titre_wtfpl' => 'LPRAB' # NEW
+	'titre_wtfpl' => 'LPRAB'
 );
 
 ?>
