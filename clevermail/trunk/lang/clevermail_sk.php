@@ -9,35 +9,35 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'a_partir_csv' => 'Zo súboru CSV:',
-	'abonne' => 'abonné', # NEW
-	'abonne_ajoute' => 'abonné ajouté', # NEW
-	'abonne_aucune_lettre' => 'Abonné à aucune newsletter', # NEW
-	'abonne_inconnu' => 'Abonné inconnu', # NEW
-	'abonne_lettres' => 'Abonner aux lettres d\'information', # NEW
-	'abonne_maj' => 'abonné mis à jour', # NEW
-	'abonnes' => 'abonnés', # NEW
-	'abonnes_ajoutes' => 'abonnés ajoutés', # NEW
-	'abonnes_maj' => 'abonnés mis à jour', # NEW
-	'abonnes_majuscule' => 'Abonnés', # NEW
+	'abonne' => 'abonent',
+	'abonne_ajoute' => 'Abonent pridaný',
+	'abonne_aucune_lettre' => 'Neodoberať žiaden newsletter',
+	'abonne_inconnu' => 'Neznámy abonent',
+	'abonne_lettres' => 'Prihlásiť sa na odber newsletterov',
+	'abonne_maj' => 'údaje o abonentovi boli aktualizované',
+	'abonnes' => 'abonenti',
+	'abonnes_ajoutes' => 'abonenti pridaní',
+	'abonnes_maj' => 'údaje o abonentoch boli aktualizované',
+	'abonnes_majuscule' => 'Abonenti',
 	'actions' => 'Akcie',
 	'actualiser' => 'Aktualizovať',
 	'administration' => 'CleverMail',
-	'ajouter_abonnes' => 'Ajouter des abonnés', # NEW
+	'ajouter_abonnes' => 'Pridať abonentov',
 	'annuler' => 'Zrušiť',
 	'apercu' => 'Ukážka',
 	'apercu_html' => 'Ukážka HTML',
 	'apercu_texte' => 'Textová ukážka',
-	'aucun_abonne' => 'aucun abonné', # NEW
-	'aucun_abonne_ajoute' => 'aucun abonné ajouté', # NEW
+	'aucun_abonne' => 'žiaden abonent',
+	'aucun_abonne_ajoute' => 'žiaden abonent nebol pridaný',
 	'aucun_message' => 'žiadna správa',
 	'aucun_message_en_attente' => 'žiadna správa nečaká',
 	'aucun_message_en_cours_envoi' => 'žiadna správa sa neposiela',
 	'aucun_message_envoye' => 'žiadna odoslaná správa',
-	'aucun_message_queue_envoye' => 'aucun message envoyé', # NEW
-	'aucun_nouvel_abonne' => 'aucun nouvel abonné', # NEW
+	'aucun_message_queue_envoye' => 'žiadna správa nebola odoslaná',
+	'aucun_nouvel_abonne' => 'žiaden nový abonent',
 	'aucun_resultat' => 'Žiaden výsledok',
-	'aucune_inscription' => 'Aucune inscription ne correspond à ce paramètre.', # NEW
-	'aucune_liste' => 'Veuillez choisir un moins une lettre d\'information', # NEW
+	'aucune_inscription' => 'Tieto údaje neobsahuje žiadne prihlásenie.',
+	'aucune_liste' => 'Vyberte si, prosím, aspoň jeden newsletter',
 	'auto_erreur_ce_jour_mois_existe_pas' => 'Tento deň v tomto mesiaci neexistuje.',
 	'auto_erreur_ce_jour_mois_pas_possible' => 'Výber tohto dňa nie je možný.',
 	'auto_erreur_ce_jour_semaine_existe_pas' => 'Tento deň neexistuje v tomto týždni.',
@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auto_mode_week' => 'Zásielok týždenne',
 	'auto_month_day' => 'Deň v mesiaci',
 	'auto_month_day_explication' => 'Les jours proposés ne vont que de 1 à 28 pour éviter tout problème lors des mois de moins de 31 jours.', # NEW
-	'auto_subscribers' => 'Ajout automatique d\'abonnés', # NEW
+	'auto_subscribers' => 'Automatické pridávanie abonentov',
 	'auto_subscribers_explication' => 'Les adresses contenus dans ce fichier distant seront automatiquement abonnées une fois par jour à cette lettre.', # NEW
 	'auto_subscribers_mode' => 'Mode d\'abonnement', # NEW
 	'auto_subscribers_url' => 'URL súboru s adresami',
@@ -75,17 +75,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'ce_champ_est_obligatoire' => 'Toto pole je povinné.',
 	'cette_adresse_email_n_est_pas_valide' => 'Táto e-mailová adresa nie je platná.',
-	'changements_mode_abonnement' => ' changements de mode d\'abonnement', # NEW
+	'changements_mode_abonnement' => 'zmeny v odoberaní materiálov',
 	'changer_mode' => 'Zmeniť režim',
 	'choix_toutes_les_listes' => 'Všetky zoznamy',
 	'choix_version_html' => 'HTML',
 	'choix_version_texte' => 'iba text',
 	'clevermail' => 'CleverMail',
 	'configuration_generale' => 'Všeobecné nastavenia',
-	'confirmation_desinscription' => 'Confirmation d\'une désinscription envoyé par e-mail', # NEW
-	'confirmation_inscription' => 'Confirmation d\'une inscription envoyé par e-mail', # NEW
-	'confirmation_inscription_multiple' => 'Confirmation d\'une inscription multiple envoyé par e-mail', # NEW
-	'confirmation_votre_desinscription' => 'Confirmation de votre désinscription', # NEW
+	'confirmation_desinscription' => 'Potvrdenie odhlásenia odoslané e-mailom',
+	'confirmation_inscription' => 'Potvrdenie prihlásenia odoslané e-mailom',
+	'confirmation_inscription_multiple' => 'Potvrdenie prihlásenia na odoberanie viacerých materiálov odoslané e-mailom',
+	'confirmation_votre_desinscription' => 'Potvrdenie vášho odhlásenia',
 	'confirmation_votre_desinscription_text' => '
 Bonjour,
 
@@ -119,8 +119,8 @@ veuillez cliquer sur ce lien :
 
 Merci
 ', # NEW
-	'confirme_desabonnement_multiple_lettre' => 'Vous êtes sur le point de désabonner plusieurs abonnés de cette lettre. Étes vous sur ?', # NEW
-	'confirme_suppression_multiple_base' => 'Vous êtes sur le point de supprimer des abonnés de la base. Étes vous sur ?', # NEW
+	'confirme_desabonnement_multiple_lettre' => 'Chystáte sa odhlásiť niekoľkých používateľov z odoberania tohto materiálu. Určite to chcete urobiť?',
+	'confirme_suppression_multiple_base' => 'Chystáte sa vymazať databázu odberateľov. Určite to chcete urobiť?',
 	'corps_mail_mod' => 'Bonjour,
 
 Vous recevez ce message en tant que modérateur de la lettre @@NOM_LETTRE@@.
@@ -132,13 +132,13 @@ Pour valider l\'inscription de @mail@ à cette lettre, veuillez cliquer sur ce l
 Merci', # NEW
 	'cree' => 'Vytvorený',
 	'creer' => 'Vytvoriť',
-	'creer_lettre' => 'Créer une lettre d\'information', # NEW
+	'creer_lettre' => 'Vytvoriť newsletter',
 	'creer_message' => 'Vytvoriť správu',
 	'creer_nouveau_message' => 'Vytvoriť novú správu',
 
 	// D
 	'deja_inscrit' => 'Vous étiez déjà inscrit à la lettre « @lst_name@ ». Votre mode d\'inscription a été mis à jour.', # NEW
-	'deja_validee' => 'Cette opération a déjà été validée. Désolé.', # NEW
+	'deja_validee' => 'Táto operácia už bola potvrdená. Je mi to ľúto.',
 	'demande_transmise' => 'Votre demande d\'inscription à la lettre « @lst_name@ » va être examinée dans les plus brefs délais.', # NEW
 	'desabonner' => 'Désabonner', # NEW
 	'desabonner2' => 'désabonner', # NEW
@@ -165,13 +165,13 @@ Merci', # NEW
 	'et_ou_saisir_des_adresses' => '...et/ou saisir des adresses.', # NEW
 
 	// F
-	'front_clevermail_action_validation' => 'Validation d\'une opération', # NEW
+	'front_clevermail_action_validation' => 'Potvrdenie operácie',
 	'front_clevermail_unsubscription_query' => 'Demande de désinscription', # NEW
 
 	// I
 	'importer' => 'Nahrať',
 	'info_parametres' => 'L\'e-mail de l\'administrateur est utilisé par défaut comme l\'e-mail du modérateur lors de la création d\'une newsletter', # NEW
-	'infolettres' => 'Infolettres', # NEW
+	'infolettres' => 'Newslettery',
 	'informations' => 'Informácie',
 	'inscription_deja_abonne_autre_mode' => 'Vous étiez déjà inscrit à la lettre « @lst_name@ » dans un autre mode, changement opéré.', # NEW
 	'inscription_deja_abonne_meme_mode' => 'Vous étiez déjà inscrit à la lettre « @lst_name@ » dans ce même mode.', # NEW
@@ -191,11 +191,11 @@ Merci', # NEW
 	'le_format_des_adresses_email_ne_semble_pas_bon' => 'Le format des adresses e-mail ne semble pas bon.', # NEW
 	'lettre_meme_nom' => 'Une lettre d\'information porte déjà ce nom', # NEW
 	'lettre_sans_nom' => 'Une lettre d\'information doit avoir un nom', # NEW
-	'lettres_information' => 'Lettres d\'information', # NEW
+	'lettres_information' => 'Newslettery',
 	'lettres_non_classees' => 'Lettres non classées', # NEW
-	'lire_en_ligne' => 'Lire le message sur le site.', # NEW
-	'liste_abonnes' => 'Liste des abonnés', # NEW
-	'liste_lettres' => 'Liste des lettres d\'information', # NEW
+	'lire_en_ligne' => 'Prečítať si správu na stránke.',
+	'liste_abonnes' => 'Zoznam abonentov',
+	'liste_lettres' => 'Zoznam materiálov',
 	'liste_lettres_aucune' => 'Vous n\'avez pas encore créé de lettre d\'information.', # NEW
 	'liste_messages' => 'Správy',
 
@@ -247,12 +247,12 @@ Merci', # NEW
 	'moderation' => 'Správa registrácií',
 	'modifie' => 'Zmenené',
 	'modifier' => 'Zmeniť',
-	'modifier_abonne' => 'Modifier un abonné', # NEW
+	'modifier_abonne' => 'Upraviť údaje o abonentovi',
 	'modifier_message' => 'Upraviť správu',
 	'modifier_submit' => 'Upraviť',
 
 	// N
-	'n_nouveaux_abonnes' => ' nouveaux abonnés', # NEW
+	'n_nouveaux_abonnes' => 'noví abonenti',
 	'nettoyer_abonnement' => 'Vider les abonnements en attente depuis plus d\'un mois', # NEW
 	'news1' => 'Novinky č. 1',
 	'news_depuis' => 'Novinky od',
@@ -280,17 +280,17 @@ Merci', # NEW
 	// S
 	'selection_des_listes' => 'Výber zoznamov',
 	'send_error' => 'Erreur lors de l\'envoi du message de demande de confirmation, veuillez réessayer.', # NEW
-	'source_des_abonnes' => 'Lister les abonnées', # NEW
+	'source_des_abonnes' => 'Vytvoriť zoznam abonentov',
 	'statistiques' => 'Štatistiky',
 	'sujet' => 'Predmet',
 	'sujet_mail_inscription_multiple' => 'Confirmation de votre inscription', # NEW
 	'sujet_mail_mod' => 'Modération de la lettre @nom_lettre@', # NEW
 	'sujet_message' => 'Predmet správy',
-	'sujet_vide' => 'Le sujet ne doit pas être vide', # NEW
+	'sujet_vide' => 'Predmet nemôže byť prázdny',
 	'supprimer' => 'Odstrániť',
 	'supprimer_abonne_base' => 'Supprimer définitivement cet abonné de la base', # NEW
-	'supprimer_abonnes' => 'Supprimer les abonnés selectionnés', # NEW
-	'supprimer_confirmer' => 'Êtes-vous certain de vouloir supprimer ?', # NEW
+	'supprimer_abonnes' => 'Odstrániť vybraných abonentov',
+	'supprimer_confirmer' => 'Určite chcete odstrániť?',
 
 	// T
 	'tags_specifiques' => 'Tags spécifiques', # NEW
