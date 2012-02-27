@@ -1,0 +1,20 @@
+<paquet
+	prefix="dump_xml"
+	categorie="outil"
+	version="1.0.1"
+	etat="experimental"
+	compatibilite="[3.0.0-dev;3.0.99]"
+	logo="prive/themes/spip/images/dump-32.png"
+	documentation=""
+>	
+
+	<nom>Dump XML</nom>
+	<!-- Export et Import de la base en XML -->
+
+	<auteur>Collectif SPIP</auteur>
+  <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<menu nom="admin_backup" titre="dump:texte_sauvegarde_base" parent="bando_administration" icone="images/base-backup-16.png" />
+	<menu nom="admin_restore" titre="dump:bouton_restaurer_base" parent="bando_administration" icone="images/base-restore-16.png" />
+
+</paquet>
