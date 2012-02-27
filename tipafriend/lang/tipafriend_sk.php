@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_texte_descr' => 'Tento zásuvný modul SPIPu pridáva modul na poslanie stránky (<i>jej obsahu, adresy a správy</i>) jednému príjemcovi alebo viacerým.',
 	'cfg_titre_descr' => 'Nastavenie zásuvného modulu <i>Odporučiť priateľovi</i>',
 	'cfgform_comment_close_button' => 'active par défaut, cette option vous permet de choisir de montrer ou non le bouton \'Fermer\' en bas de la fenêtre ; <strong>cette option est automatiquement désactivée si les en-têtes sont eux-mêmes désactivés ci-dessus</strong>.', # NEW
-	'cfgform_comment_contenu' => 'sélectionnez ici le type de contenu de l\'objet SPIP (<i>article, brève, auteur ...</i>) qui sera inclus dans le mail transmis.', # NEW
+	'cfgform_comment_contenu' => 'Tu si vyberte typ objektu SPIPu (<i>článok, novinka, autor, a i.</i>) ktorý bude pripojený do e-mailu.',
 	'cfgform_comment_header' => 'cette option vous permet de choisir si les informations de la balise &lt;head&gt; de la page doivent être présentes ou non (<i>il peut être utile de les désactiver si vous utilisez une fenêtre javascript type \'thickbox\', ou au contraire de forcer leur affichage dans le même contexte avec un contenu en frame</i>).', # NEW
 	'cfgform_comment_javascript' => 'vous pouvez désactiver la fonction d\'ouverture de la popup (<i>dans le cas de l\'utilisation de fenêtres javascript type \'thickbox\' ou \'fancybox\' par exemple</i>).', # NEW
 	'cfgform_comment_options' => 'vous devez indiquer des attributs complets, par exemple : "class=\'thickbox\'", ils seront automatiquement ajoutés au lien inclus dans vos squelettes ; <b>utilisez seulement des guillemets simples</b>.', # NEW
@@ -160,7 +160,7 @@ Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubr
 	'page_test_fin_simulation' => '-- Koniec pridávania na simuláciu',
 	'page_test_in_new_window' => 'Testovacia stránka v novom okne',
 	'page_test_menu_inclure' => 'Vložiť model "tipafriend_mail_default.html"',
-	'page_test_models_comment' => 'Les liens ci-dessous vous permettent de tester les modèles utilisés en page web (<i>avec des valeurs fictives</i>).', # NEW
+	'page_test_models_comment' => 'Tieto odkazy vám umožňujú vyskúšať si modely, ktoré sa používajú na webovej stránke (<i>s fiktívnymi hodnotami</i>).',
 	'page_test_test_model_brut' => 'Zobraziť textový model s fiktívnymi dátami',
 	'page_test_test_model_html' => 'Zobraziť model HTML s fiktívnymi dátami',
 	'page_test_title' => 'Test zásuvného modulu Tip A Friend',
