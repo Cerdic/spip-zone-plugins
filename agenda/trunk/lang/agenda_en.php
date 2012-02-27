@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'confirm_suppression_inscription' => 'Are you sure you want to delete this registration?',
-	'connexion_necessaire_pour_inscription' => 'Merci de <a href=\'#LOGIN_PUBLIC\'>vous connecter</a> pour pouvoir vous inscrire à cet événement.', # NEW
+	'connexion_necessaire_pour_inscription' => 'Please log in to register to this event.',
 	'creer_evenement' => 'Create an event',
 
 	// E
