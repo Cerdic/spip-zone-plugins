@@ -15,11 +15,13 @@ if (!defined('_ECRIRE_INC_VERSION'))
 include_spip('base/association');
 include_spip('base/abstract_sql');
 
-// desinstatllation
-#function association_vider_tables($nom_meta, $table) // appel avec deux parametes ???
-function association_vider_tables($nom_meta_base_version=0) // parametre non utilise... mis a zero au cas ou la fonction serait appelee sans parametre...
+// desinstallation
+function association_vider_tables($nom_meta, $table)
 {
-	$ok = TRUE;
+	// on efface la meta [association_meta][base_version] pour que la fonction qui gere la desinstallation ne voie plus le plugin et confirme sa desinstallation
+	effacer_meta($nom_meta, $table);
+	spip_log("Plugin Associaspip (vb:$nom_meta_base_version) dereference",'associaspip');
+
 	// On liste les tables du plugin
 	$tables_a_supprimer = array(
 		'spip_asso_activites',
@@ -44,20 +46,8 @@ function association_vider_tables($nom_meta_base_version=0) // parametre non uti
 			spip_log("Associaspip : echec de la desinstallation de la table '$table' ",'associaspip');
 		else {
 			spip_log("Associaspip : echec de la desinstallation de la table '$table' ",'associaspip');
-			$ok = FALSE;
 		}
 	}
-
-/* Euh... Ceci ne sert plus (et devrait planter silencieusement) car Associaspip utilise sa propre table de metas (la derniere effacee)
-	// On efface la version entregistrée
-	effacer_meta('association');
-	effacer_meta($nom_meta_base_version);
-	spip_log("Plugin Associaspip (vb:$nom_meta_base_version) dereference",'associaspip');
-*/
-
-	// des soucis apparents de cache : on force donc pour finir
-	//@ http://doc.spip.org/@spip_unlink
-	spip_unlink(cache_meta('association_metas'));
 
 }
 
