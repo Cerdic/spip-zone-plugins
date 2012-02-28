@@ -2,7 +2,10 @@
 
 function statsjs_affichage_final($page) {
 
-	if (!$GLOBALS['html']) return $page;
+#if ($_GET['aa']) {var_dump($GLOBALS['contexte']['page']);exit;}
+
+	if (!$GLOBALS['html']
+	) return $page;
 
 	// Identification automagique de l'element
 	// sauf si le squelette s'en est deja occupe
@@ -45,6 +48,7 @@ function statsjs_mouchard() {
 	$mouchard = "
 <!-- MOUCHARD STATS SPIP -->
 <script type='text/javascript'>
+if (typeof $ == 'function')
 $(function(){setTimeout(function(){
   $.ajax({url: '${urljs}', dataType: 'script', cache: true,
     success: function() {
