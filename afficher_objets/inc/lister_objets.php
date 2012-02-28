@@ -31,7 +31,7 @@ function inc_lister_objets_dist($vue, $contexte=array(), $force=false){
 	
 	$contexte['sinon']=($force ? $contexte['titre']:'');
 
-	$res = recuperer_fond($fond,$contexte,array('ajax'=>true));
+	$res = recuperer_fond($fond,$contexte,array('ajax'=>false));
 	if (_request('var_liste'))
 		var_dump($contexte);
 		
