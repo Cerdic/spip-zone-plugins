@@ -107,17 +107,21 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
 	else{
 	   $having = ' HAVING SUM(1) >= '. $score;
 	   }
-	
-	$wh = "$_table.$_id_table IN (
-		SELECT $_id_table FROM spip_mots_$_table WHERE "
+
+        $in = array();
+        $s = sql_query("SELECT $_id_table as i FROM spip_mots_$_table WHERE "
 		. join(' OR ', $where)
 		. ' GROUP BY '.$_id_table
-		. $having
-		. "\n\t)";
+		. $having);
+        while($t = sql_fetch($s))
+         $in[] = $t['i'];
+        if ($in)
+	 $wh = sql_in("$_table.$_id_table", $in);
+        else
+         $wh = '1=0';
 
 	return $wh;
 }
-
 
 function critere_mots_enleve_mot_de_liste($listemots, $id_mot) {
 	$listemots = array_unique($listemots);
