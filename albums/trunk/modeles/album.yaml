@@ -1,0 +1,13 @@
+nom: 'album'
+logo: 'images/album-24.png'
+icone_barre: 'album.png'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'album'
+  -
+    saisie: 'selecteur_album'
+    options:
+      nom: 'id_modele'

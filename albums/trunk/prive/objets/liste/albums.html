@@ -1,0 +1,73 @@
+[(#SET{defaut_tri,#ARRAY{
+	statut,1,
+	multi titre,1,
+}})
+]
+
+#SET{debut,#ENV{debutalbuml,#EVAL{_request("debutalbuml");}}}
+<input type="hidden" name="debutalbuml" value="#GET{debut}" />
+<B_liste_album>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutalbuml,#EVAL{_request("debutalbuml");}}}
+
+#ANCRE_PAGINATION
+
+[<!--(#REM) TITRE BLOC ALBUMS -->]
+[<h3>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{album:info_1_album,album:info_nb_albums}})</h3>]
+
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+
+<ul class='liste_albums'>
+
+	<BOUCLE_liste_album(ALBUMS){tout}{where?}{recherche?}{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} albuml}>
+	<li>
+		
+		[<!--(#REM) HEADER -->]
+		<table class="album_header"><tr>
+			
+			[<!--(#REM) statut -->]
+			<td class='statut' scope='col'>
+			[(#STATUT|puce_statut{album})]
+			</td>
+			
+			[<!--(#REM) logo -->]
+			<td class='logo' scope='col'><div class='conteneur_logo'>
+			<B_logo>
+			<span class='decoration_logo'></span>
+			<BOUCLE_logo(DOCUMENTS liens album){id_album}{tout}{0,1}>
+			[(#FICHIER|image_passe_partout{52,52}|image_recadre{50,50,center}|image_masque{#CHEMIN_IMAGE{album_masque-50.png}}|inserer_attribut{class,spip_logos})]
+			</BOUCLE_logo>
+			[(#CHEMIN_IMAGE{album_vide-50.png}|balise_img{album:texte_album_vide}|inserer_attribut{class,spip_logos})]
+			<//B_logo>
+			</div></td>
+			
+			[<!--(#REM) informations (titre, nb documents etc.) -->]
+			<td class='infos' scope='col'>
+			<h3>
+			<BOUCLE_vu(albums_liens){id_album}{0,1}>
+			[<span class='vu'>(#CHEMIN_IMAGE{vu-16-10.png}|balise_img|inserer_attribut{title,<:album:info_album_associe:>}|inserer_attribut{alt,<:medias:document_vu:>})</span>]
+			</BOUCLE_vu>
+			<a href="#URL_ECRIRE{album,id_album=#ID_ALBUM}">
+			[(#RANG). ][(#TITRE|sinon{<em><:album:texte_sans_titre:></em>})]
+			</a>
+			</h3>
+			[<h4>N°(#ID_ALBUM)</h4>]
+			<B_nb_documents>[(#GRAND_TOTAL|singulier_ou_pluriel{album:info_1_document,album:info_nb_documents})]
+			<BOUCLE_nb_documents(DOCUMENTS liens album){id_album}{tout}> </BOUCLE_nb_documents><em><:album:info_album_vide:></em><//B_nb_documents>
+			</B_liste_album>
+			</td>
+			
+			[<!--(#REM) descriptif -->]
+			<td class='descriptif scope='col'>
+			[(#DESCRIPTIF|couper{200})]
+			</td>
+			
+		</tr></table>
+	
+	</li>
+	</BOUCLE_liste_album>
+<div class="nettoyeur"></div>
+</ul>
+
+</B_liste_album>
