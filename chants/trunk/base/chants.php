@@ -11,7 +11,7 @@ function chants_declarer_tables_objets_sql($tables){
 
                     'principale' => "oui",
 		    'titre' => 'titre, lang',
-		    'date' => 'date_annee',
+		    'date' => 'date',
                     'field'=> array(
                             "id_chant" => "bigint(21) NOT NULL",
                             "id_rubrique" => "bigint(21) DEFAULT '0' NOT NULL",
@@ -19,6 +19,7 @@ function chants_declarer_tables_objets_sql($tables){
                             "alias" => "tinytext DEFAULT '' NOT NULL",
                             "copyright" => "tinytext DEFAULT '' NOT NULL",
                             "date_annee" => "year DEFAULT '0000' NOT NULL",
+			    "date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
                             "paroles" => "text DEFAULT '' NOT NULL",
                             "numero" => "tinytext DEFAULT '' NOT NULL",
                             "presentation" => "tinytext DEFAULT '' NOT NULL",
@@ -31,6 +32,7 @@ function chants_declarer_tables_objets_sql($tables){
 			    "statut" => "VARCHAR(255) DEFAULT 'prepa' NOT NULL",
 			    "lang" => "VARCHAR(10) DEFAULT '' NOT NULL",
 			    "langue_choisie" => "VARCHAR(3) DEFAULT 'non'",
+			    "id_trad" => "bigint(21) DEFAULT '0' NOT NULL",
                             "maj"   => "TIMESTAMP"
                     ),
                     'key' => array(
@@ -84,12 +86,12 @@ function chants_declarer_tables_auxiliaires($tables_auxiliaires) {
     );
     
     $spip_chants_liens_key = array(
-	    "PRIMARY_KEY" => "id_chant,id_objet,objet",
+	    "PRIMARY KEY" => "id_chant,id_objet,objet",
 	    "KEY id_chant" => "id_chant"
     );
-    $tables_auxiliaires['spip_chants'] = array(
-	'field' => &$spip_chants,
-	'key' => &$spip_chants_liens
+    $tables_auxiliaires['spip_chants_liens'] = array(
+	'field' => &$spip_chants_liens,
+	'key' => &$spip_chants_liens_key
     );
     return $tables_auxiliaires;
 }

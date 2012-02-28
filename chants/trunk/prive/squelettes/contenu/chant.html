@@ -13,9 +13,13 @@
 	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{chant-24.png}|balise_img{chant,cadre-icone})]</h1>
 ],simple fiche_objet})]
 
-<div class="ajax">
-	#FORMULAIRE_EDITER_LIENS{auteurs,chant,#ID_CHANT}
-</div>
+[<div class="ajax">
+	(#FORMULAIRE_DATER{chant,#ID_CHANT})
+</div>]
+
+[<div class="ajax">
+	(#FORMULAIRE_EDITER_LIENS{auteurs,chant,#ID_CHANT})
+</div>]
 
 <!--affiche_milieu-->
 <BOUCLE_proposer(CHANTS)
@@ -36,7 +40,7 @@
 ]
 
 <div id="wysiwyg">
-<INCLURE{fond=prive/objets/contenu/chant,id=#ID_CHANT,id_chant=#ID_CHANT,virtuel=oui,ajax=wysiwyg}>
+<INCLURE{fond=prive/objets/contenu/chant,id=#ID_CHANT,id_chant=#ID_CHANT,ajax=wysiwyg}>
 </div>
 
 <div class="nettoyeur"></div>
@@ -44,17 +48,14 @@
 [(#AUTORISER{modifier,chant,#ID_CHANT})
 
 	[(#ID_CHANT|afficher_qui_edite{chant}|non)
-		[(#URL_ECRIRE{chant_edit,id_chant=#ID_CHANT}|icone_verticale{<:chant:icone_modifier_chant:>,chant,edit,right ajax preload})]
+		[(#URL_ECRIRE{chant_edit,id_chant=#ID_CHANT}|icone_verticale{<:chant:icone_modifier_chant:>,chant,edit,right})]
 	]
 	[(#ID_CHANT|afficher_qui_edite{chant}|oui)
-		[(#URL_ECRIRE{chant_edit,id_chant=#ID_CHANT}|icone_verticale{#ID_CHANT|afficher_qui_edite{chant},warning-24,'',right ajax preload})]
+		[(#URL_ECRIRE{chant_edit,id_chant=#ID_CHANT}|icone_verticale{#ID_CHANT|afficher_qui_edite{chant},warning-24,'',right})]
 	]
 ]
 
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,chant,id,#ID_CHANT},data,'<div class="nettoyeur"></div>'}}
 
 #BOITE_FERMER
-[(#EVAL{_AJAX}|oui)
-	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
-]
 </BOUCLE_chant>

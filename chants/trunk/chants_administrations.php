@@ -17,10 +17,6 @@ function chants_upgrade($nom_meta_base_version, $version_cible){
 	$maj['0.2.0'] = array(
 		array('maj_tables', array('spip_chants')),
 	);
-	// correction du bug de tables_auxiliaires de spip_chants_liens
-	$maj['0.5.0'] = array(
-		array('maj_tables', array('spip_chants_liens')),
-	);
 	// ajout de la tonalité, alias (autre titre), ligne principale.
 	// renommage de nombre_hymne en numéro : cela correspond au numéro d'apparition du chant.
 	$maj['0.6.1'] = array(
@@ -29,6 +25,12 @@ function chants_upgrade($nom_meta_base_version, $version_cible){
 	);
 	$maj['0.6.3'] = array(
 		array('maj_tables', array('spip_chants_liens'))
+	);
+	$maj['0.6.6'] = array(
+		array('maj_tables', array('spip_chants'))
+	);
+	$maj['0.7.1'] = array(
+		array('maj_tables', array('spip_chants'))
 	);
 	
 
@@ -39,6 +41,10 @@ function chants_upgrade($nom_meta_base_version, $version_cible){
 function chants_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_chants");
 	sql_drop_table("spip_chants_liens");
+	sql_delete('spip_auteurs_liens',"spip_auteurs_liens.objet='chant'");
+	sql_delete('spip_mots_liens',"spip_mots_liens.objet='chant'");
+	sql_delete('spip_versions',"spip_versions.objet='chant'");
+	sql_delete('spip_versions_fragments',"spip_versions_fragments.objet='chant'");
 	effacer_meta($nom_meta_base_version);
 }
 

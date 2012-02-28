@@ -18,7 +18,7 @@
                 </tr>
         </thead>
         <tbody>
-        <BOUCLE_liste_chants(CHANTS){id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+        <BOUCLE_liste_chants(CHANTS){id_objet?}{objet}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
                 <tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
                         <td class='picto'>[(#CHEMIN_IMAGE{chant-16.png}|balise_img)]</td>
                         <td class='titre principale'>[(#LOGO_CHANT|image_reduire{20,26})]<a href="[(#ID_CHANT|generer_url_entite{chant})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RUBRIQUE">[(#RANG). ]#TITRE</a></td>

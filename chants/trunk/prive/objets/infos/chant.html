@@ -1,0 +1,28 @@
+<BOUCLE_art(CHANTS){id_chant=#ENV{id}}{statut?}{!lang_select}>
+<div class='infos'>
+<div class='numero'><:chant:info_numero_chant:><p>#ID_CHANT</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{chant,#ID_CHANT})]
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(CHANTS){id_chant}>
+	[(#VAL{redirect}
+		|generer_url_action{type=chant&id=#ID_CHANT}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,chant,#ID_CHANT,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=chant&id=#ID_CHANT}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
+
+
+</div>
+</BOUCLE_art>

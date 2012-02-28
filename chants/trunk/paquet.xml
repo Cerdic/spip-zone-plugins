@@ -1,13 +1,13 @@
     <paquet
         prefix="chants"
         categorie="edition"
-        version="0.6.0"
+        version="0.7.5"
         etat="dev"
-        compatibilite="[3.0.0-alpha2;["
+		compatibilite="[3.0.0-dev;["
         logo="prive/themes/spip/images/chant-128.png"
-        schema="0.6.4"
-        documentation="http://www.teddypayet.com/?article77"
+        schema="0.7.1"
     >      
+<!--        documentation="http://www.teddypayet.com/?article77" -->
         <nom>Chants</nom>
         <!-- Gestion des chants dans SPIP sur la base d'OpenSong -->
         <auteur lien="http://www.teddypayet.com/">Teddy Payet</auteur>
@@ -19,6 +19,7 @@
         <pipeline nom="declarer_tables_objets_sql" inclure="base/chants.php" />
         <pipeline nom="declarer_tables_auxiliaires" inclure="base/chants.php" />
         <pipeline nom="affiche_enfants" inclure="chants_pipelines.php" />
+	<pipeline nom="autoriser" inclure="chants_autoriser.php" />
 
         <!-- facilitons les champs de formulaires -->
         <necessite nom="saisies" compatibilite="[1.14.0;]" />
