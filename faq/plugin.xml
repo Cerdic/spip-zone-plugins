@@ -3,22 +3,18 @@
 	<icon>icon/faq-32.png</icon>
 	<prefix>faq</prefix>
 	
-	<version>2.0.0</version>
+	<version>2.1.0</version>
 	<etat>dev</etat>
 	<categorie>navigation</categorie>
 	
 	<slogan>FAQ d&#233;pliable</slogan>
-	<description>Transformez les listes de d&#233;finitions marqu&#233;es &#171;<code>faq</code>&#187; en <abbr title="Foire Aux Questions">FAQ</abbr> d&#233;pliable.</description>
+	<description>Transformez les listes de d&#233;finitions marqu&#233;es du s&eacute;lecteur &#171;<code>faq</code>&#187; en <abbr title="Foire Aux Questions">FAQ</abbr> d&#233;pliable.</description>
 	<lien>http://www.spip-contrib.net/?rubrique891</lien>
 	<auteur>[romy.tetue.net->http://romy.tetue.net]</auteur>
 	<licence>GPL 2009</licence>
 	
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>faq_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>insert_head_css</nom>
 		<inclure>faq_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.0;3.0.0]" />
