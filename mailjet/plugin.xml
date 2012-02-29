@@ -10,6 +10,7 @@
 	<install>mailjet_administrations.php</install>
 	<options>mailjet_options.php</options>
 	<pipeline><nom>facteur_pre_envoi</nom></pipeline>
+	<pipeline><nom>formulaire_charger</nom></pipeline>
 	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<categorie>communication</categorie>
 </plugin>

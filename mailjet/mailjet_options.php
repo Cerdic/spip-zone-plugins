@@ -44,3 +44,14 @@ function mailjet_facteur_pre_envoi($facteur){
 	}
 	return $facteur;
 }
+
+function mailjet_formulaire_charger($flux){
+	if ($GLOBALS['meta']['mailjet_enabled']){
+		if ($flux['args']['form']=='configurer_facteur'){
+			$flux['data']['_hidden'].='<script type="text/javascript">
+			jQuery(function(){jQuery(".editer_facteur_smtp_param").remove();jQuery(".editer_facteur_smtp ").html("'.texte_script(_T('mailjet:info_mailjet_enabled')).'");});
+			</script>';
+		}
+	}
+	return $flux;
+}
