@@ -160,20 +160,10 @@ function pages_pre_edition_ajouter_page($flux){
 function pages_boite_infos($flux){
 	if ($flux['args']['type'] == 'article' and autoriser('modifier', 'article', $flux['args']['id'])){
 		if (sql_getfetsel('page', 'spip_articles', 'id_article='. $flux['args']['id']) == ''){
-			$flux['data'] .= '<div>
-				<a href="'.parametre_url(parametre_url(generer_url_ecrire('article_edit'), 'id_article', $flux['args']['id']), 'modele', 'page').'" class="cellule-h">
-					<img src="'.find_in_path('images/page-24.png').'" style="vertical-align:middle;" alt="" />
-					<span style="vertical-align:middle;">'._T('pages:convertir_page').'</span>
-				</a>
-			</div>';
+			$flux['data'] .= icone_horizontale(_T('pages:convertir_page'), parametre_url(parametre_url(generer_url_ecrire('article_edit'), 'id_article', $flux['args']['id']), 'modele', 'page'), 'page', $fonction="", $dummy="", $javascript="");
 		}
 		else{
-			$flux['data'] .= '<div>
-				<a href="'.parametre_url(parametre_url(generer_url_ecrire('article_edit'), 'id_article', $flux['args']['id']), 'modele', 'article').'" class="cellule-h">
-					<img src="'.find_in_path('images/article-24.gif').'" style="vertical-align:middle;" alt="" />
-					<span style="vertical-align:middle;">'._T('pages:convertir_article').'</span>
-				</a>
-			</div>';
+			$flux['data'] .= icone_horizontale(_T('pages:convertir_article'), parametre_url(parametre_url(generer_url_ecrire('article_edit'), 'id_article', $flux['args']['id']), 'modele', 'article'), 'article', $fonction="", $dummy="", $javascript="");
 		}
 	}
 	return $flux;
