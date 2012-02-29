@@ -164,10 +164,10 @@ function facteur_envoyer_mail_test($destinataire,$titre){
 	$message_html	= recuperer_fond('emails/test_email_html', array());
 	$message_texte	= recuperer_fond('emails/test_email_texte', array());
 
-	$facteur = new Facteur($destinataire, $titre, $message_html, $message_texte);
-	if (!$facteur->Send())
-		return $test->ErrorInfo;
-	else
-		return true;
+	// passer par envoyer_mail pour bien passer par les pipeline et avoir tous les logs
+	$envoyer_mail = charger_fonction('envoyer_mail','inc');
+	$retour = $envoyer_mail($destinataire, $titre, array('html'=>$message_html,'texte'=>$message_texte));
+
+	return $retour?true:false;
 }
 ?>
