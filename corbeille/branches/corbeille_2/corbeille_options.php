@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return unknown
  */
 function genie_optimiser($t){
-	include_spip('optimiser','genie');
+	include_spip('genie/optimiser');
 
 	optimiser_base_une_table();
 
