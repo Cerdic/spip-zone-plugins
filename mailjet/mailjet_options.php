@@ -19,3 +19,28 @@ if (!test_plugin_actif('facteur')){
 		}
 	}
 }
+
+/**
+ * Forcer les reglages SMTP de facteur si utilise
+ * pour utiliser mailjet
+ * @param $facteur
+ */
+function mailjet_facteur_pre_envoi($facteur){
+	if ($GLOBALS['meta']['mailjet_enabled']){
+		$facteur->Mailer	= 'smtp';
+		$host = explode('://',$GLOBALS['meta']['mailjet_host']);
+		$facteur->Host 	= end($host);
+		$facteur->Port 	= $GLOBALS['meta']['mailjet_port'];
+		$facteur->SMTPAuth = true;
+		$facteur->Username = $GLOBALS['meta']['mailjet_username'];
+		$facteur->Password = $GLOBALS['meta']['mailjet_password'];
+		if (intval(phpversion()) >= 5) {
+			if (reset($host)=="ssl")
+				$facteur->SMTPSecure = 'ssl';
+			elseif (reset($host)=="tls")
+				$facteur->SMTPSecure = 'tls';
+		}
+		$facteur->AddCustomHeader('X-Mailer: Mailjet-for-Spip/2.0');
+	}
+	return $facteur;
+}

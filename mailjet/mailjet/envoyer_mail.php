@@ -83,7 +83,7 @@ function mailjet_envoyer_mail($destinataire, $sujet, $corps, $from = "", $header
 
 	$charset = $GLOBALS['meta']['charset'];
 
-	$mailer->AddCustomHeader('X-Mailer: Mailjet-for-Spip/1.0');
+	$mailer->AddCustomHeader('X-Mailer: Mailjet-for-Spip/2.0');
 	if (count($headers)){
 		foreach ($headers as $h){
 			if ($h){
