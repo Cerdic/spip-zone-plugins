@@ -2,16 +2,17 @@
 	<nom>Mailjet</nom>
 	<slogan>Publipostage via Mailjet</slogan>
 	<auteur>Mailjet SAS</auteur>
-	<version>1.0.1</version>
-	<etat>stable</etat>
+	<icon>images/mailjet-32.png</icon>
+	<version>2.0.0</version>
+	<etat>dev</etat>
 	<description>Envoyez vos emails via l'API [Mailjet->http://www.mailjet.com]</description>
-	<prefix>mj_customsmtp</prefix>
+	<prefix>mailjet</prefix>
 	<pipeline>
 		<nom>affiche_milieu</nom>
-		<inclure>mj_customsmtp_config_fonctions.php</inclure>
+		<inclure>mailjet_config_fonctions.php</inclure>
 	</pipeline>
 
-	<install>base/mj_customsmtp_installer.php</install>
+	<install>base/mailjet_installer.php</install>
 	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<categorie>communication</categorie>
 </plugin>

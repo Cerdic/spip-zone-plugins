@@ -13,7 +13,7 @@ include_once _DIR_RESTREINT."inc/envoyer_mail.php";
 // http://doc.spip.org/@envoyer_mail
 function inc_envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 
-  if (! $GLOBALS['meta'] ['mj_customsmtp_enabled']){
+  if (! $GLOBALS['meta'] ['mailjet_enabled']){
 		return inc_envoyer_mail_dist($email, $sujet, $texte, $from, $headers);
 	}
 
@@ -21,11 +21,11 @@ function inc_envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	include_spip('inc/class.phpmailer');
 	$mailer = new PHPMailer();
 	$mailer->IsSMTP();
-	$mailer->Host = $GLOBALS['meta']['mj_customsmtp_host'];
-	$mailer->Port = $GLOBALS['meta']['mj_customsmtp_port'];
+	$mailer->Host = $GLOBALS['meta']['mailjet_host'];
+	$mailer->Port = $GLOBALS['meta']['mailjet_port'];
 	$mailer->SMTPAuth = TRUE;
-	$mailer->Username = $GLOBALS['meta']['mj_customsmtp_username'];
-	$mailer->Password = $GLOBALS['meta']['mj_customsmtp_password'];
+	$mailer->Username = $GLOBALS['meta']['mailjet_username'];
+	$mailer->Password = $GLOBALS['meta']['mailjet_password'];
 	$mailer->WordWrap=70;
 
 
