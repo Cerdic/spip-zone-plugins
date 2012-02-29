@@ -7,7 +7,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS ['mailjet_installed'] = TRUE;
-
+/*
 function mailjet_install($action)
 {
     switch ($action){
@@ -27,5 +27,6 @@ function mailjet_install($action)
             $GLOBALS ['mailjet_installed'] = FALSE;
     }
 }
+*/
 
 ?>

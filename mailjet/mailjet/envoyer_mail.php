@@ -55,7 +55,7 @@ function mailjet_envoyer_mail($destinataire, $sujet, $corps, $from = "", $header
 		$adresse_erreur = $corps['adresse_erreur'];
 		$headers = (isset($corps['headers'])?$corps['headers']:$headers);
 		if (is_string($headers))
-			$headers = array_map('trim',explode("\n",$headers));
+			$headers = array_map('trim',explode("\n",trim($headers)));
 	}
 	// si $corps est une chaine -> compat avec la fonction native SPIP
 	// gerer le cas ou le corps est du html avec un Content-Type: text/html dans les headers
@@ -66,7 +66,7 @@ function mailjet_envoyer_mail($destinataire, $sujet, $corps, $from = "", $header
 		else {
 			$message_texte	= nettoyer_caracteres_mail($corps);
 		}
-		$headers = array_map('trim',explode("\n",$headers));
+		$headers = array_map('trim',explode("\n",trim($headers)));
 	}
 	$sujet = nettoyer_titre_email($sujet);
 
@@ -81,12 +81,22 @@ function mailjet_envoyer_mail($destinataire, $sujet, $corps, $from = "", $header
 	$mailer->Password = $GLOBALS['meta']['mailjet_password'];
 	$mailer->WordWrap=70;
 
-	if (strlen($headers)){
-		if ($headers = trim($headers)) $headers .= "\n";
-		$mailer->AddCustomHeader($headers);
+	$charset = $GLOBALS['meta']['charset'];
+
+	$mailer->AddCustomHeader('X-Mailer: Mailjet-for-Spip/1.0');
+	if (count($headers)){
+		foreach ($headers as $h){
+			if ($h){
+				$mailer->AddCustomHeader($h);
+				if (preg_match(",Content-Type: ([^;]*); charset=(.*),i",$h,$regs)){
+					$charset = $regs[2];
+					$content_type = $regs[1];
+				}
+			}
+		}
 	}
 
-  $mailer->AddCustomHeader('X-Mailer: Mailjet-for-Spip/1.0');
+	$mailer->CharSet = $charset;
 
 	// On ajoute le courriel de l'envoyeur s'il est fournit par la fonction
 	if (empty($from)) {
@@ -143,21 +153,8 @@ function mailjet_envoyer_mail($destinataire, $sujet, $corps, $from = "", $header
 		$destinataire = implode(", ",$destinataire);
 
 	$destinataire = array_map('trim',explode(",",$destinataire));
-	$mailer->AddAddress($destinataire);
-
-	$charset = $GLOBALS['meta']['charset'];
-	$content_type = "text/plain";
-
-  if (preg_match(",Content-Type: ([^;]*); charset=(.*),i",$headers,$regs)){
-		$charset = $regs[2];
-		$content_type = $regs[1];
-	}
-
-  $mailer->CharSet = $charset;
-	$mailer->ContentType = $content_type;
-
-	// On génère les headers
-	$head = $mailer->CreateHeader();
+	foreach($destinataire as $d)
+		$mailer->AddAddress($d);
 
 	if (init_mb_string()){
 		mb_internal_encoding($charset);
@@ -173,7 +170,7 @@ function mailjet_envoyer_mail($destinataire, $sujet, $corps, $from = "", $header
 	}
 	if (!empty($message_texte)) {
 		$message_texte = unicode_to_utf_8(charset2unicode($message_texte,$GLOBALS['meta']['charset']));
-		if (!$this->Body) {
+		if (!$mailer->Body) {
 			$mailer->IsHTML(false);
 			$mailer->Body = $message_texte;
 		}
@@ -182,6 +179,8 @@ function mailjet_envoyer_mail($destinataire, $sujet, $corps, $from = "", $header
 		}
 	}
 
+	// On génère les headers
+	$head = $mailer->CreateHeader();
 	// Et c'est parti on envoie enfin
 	spip_log("mail via mailjet\n$head"."Destinataire:".print_r($destinataire,true),'mail');
 	spip_log("mail\n$head"."Destinataire:".print_r($destinataire,true),'mailjet');
