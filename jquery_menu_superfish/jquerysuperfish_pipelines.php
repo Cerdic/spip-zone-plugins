@@ -1,6 +1,8 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/config');
+
 function jquerysuperfish_insert_head_css($flux){
 	static $done = false;
 	if (!$done) {
@@ -39,7 +41,7 @@ function jquerysuperfish_insert_head($flux){
 		$flux .= "\n".'var params_n = {pathClass:"on"};' ;
 		if($conf_jquerysuperfish["animation_navbar"]) $flux .= "\n".'params_n.animation = {'.$conf_jquerysuperfish["animation_navbar"].'};' ;
 		if($conf_jquerysuperfish["delai_navbar"]) $flux .= "\n".'params_n.delay = '.$conf_jquerysuperfish["delai_navbar"].';' ;
-		$flux .= "\n".'$(".'.$conf_jquerysuperfish["classe_navbar"].'").addClass("sf-menu sf-navbar sf-shadow").superfish(params_n,pathClass:\'current\');';
+		$flux .= "\n".'$(".'.$conf_jquerysuperfish["classe_navbar"].'").addClass("sf-menu sf-navbar sf-shadow").superfish(params_n);';
 	}
 	$flux .= "});\n/* ]]> */</script>";
 	$flux .= jquerysuperfish_insert_head_css(''); // compat pour les vieux spip
