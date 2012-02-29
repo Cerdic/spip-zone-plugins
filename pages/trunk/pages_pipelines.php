@@ -159,6 +159,7 @@ function pages_pre_edition_ajouter_page($flux){
  */
 function pages_boite_infos($flux){
 	if ($flux['args']['type'] == 'article' and autoriser('modifier', 'article', $flux['args']['id'])){
+		include_spip('inc/presentation');
 		if (sql_getfetsel('page', 'spip_articles', 'id_article='. $flux['args']['id']) == ''){
 			$flux['data'] .= icone_horizontale(_T('pages:convertir_page'), parametre_url(parametre_url(generer_url_ecrire('article_edit'), 'id_article', $flux['args']['id']), 'modele', 'page'), 'page', $fonction="", $dummy="", $javascript="");
 		}
