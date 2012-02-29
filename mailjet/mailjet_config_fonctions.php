@@ -1,4 +1,10 @@
 <?php
+/*
+ * Plugin Mailjet
+ *
+ */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function mailjet_affiche_milieu($flux){
 	$exec = $flux['args']['exec'];

@@ -1,4 +1,10 @@
 <?php
+/*
+ * Plugin Mailjet
+ *
+ */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS ['mailjet_installed'] = TRUE;
 
