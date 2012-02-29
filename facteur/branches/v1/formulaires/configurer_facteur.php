@@ -166,7 +166,7 @@ function facteur_envoyer_mail_test($destinataire,$titre){
 
 	$facteur = new Facteur($destinataire, $titre, $message_html, $message_texte);
 	if (!$facteur->Send())
-		return $test->ErrorInfo;
+		return $facteur->ErrorInfo;
 	else
 		return true;
 }
