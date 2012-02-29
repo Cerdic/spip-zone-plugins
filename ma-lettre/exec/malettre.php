@@ -235,7 +235,9 @@ function exec_malettre(){
 		        //
 	          // envoi de la lettre
 	          //
-	          include(dirname(__FILE__)."/../class.phpmailer.php");
+						if (!defined('_DIR_PLUGIN_FACTEUR')){
+	            include(dirname(__FILE__)."/../class.phpmailer.php");
+						}
 		        
 		        // titre 
 		        $lettre_title = trim(strip_tags(_request('lettre_title'))); 
@@ -312,23 +314,37 @@ function exec_malettre(){
             $j = 0;          
             if (is_array($desti)) {
               foreach ($desti as $k=>$adresse) { // envoi a tous les destinataires
-                $mail = new PHPMailer();
-                         
-                $mail->From     = "$exp_email";
-                $mail->FromName = "$exp_name";
-                $mail->AddReplyTo("$exp_email");
-                $mail->AddAddress($adresse,$adresse);
-                $i++;
-                                
-                $mail->WordWrap = 50;           // set word wrap
-                $mail->IsHTML(true);            // send as HTML
-                $mail->CharSet = "utf-8"; 
-                
-                $mail->Subject  =  "$lettre_title";
-                $mail->Body     =  $recup;
-                $mail->AltBody  =  $recup_txt;
-                             
-                if(!$mail->Send()) {
+	              if (!defined('_DIR_PLUGIN_FACTEUR')){
+		              $mail = new PHPMailer();
+
+	                $mail->From     = "$exp_email";
+	                $mail->FromName = "$exp_name";
+	                $mail->AddReplyTo("$exp_email");
+	                $mail->AddAddress($adresse,$adresse);
+	                $i++;
+
+	                $mail->WordWrap = 50;           // set word wrap
+	                $mail->IsHTML(true);            // send as HTML
+	                $mail->CharSet = "utf-8";
+
+	                $mail->Subject  =  "$lettre_title";
+	                $mail->Body     =  $recup;
+	                $mail->AltBody  =  $recup_txt;
+		              $res = $mail->Send();
+	              }
+	              else {
+		              $envoyer_mail = charger_fonction('envoyer_mail','inc');
+		              $corps = array(
+			              "html" => $recup,
+			              "texte" => $recup_txt,
+			              "nom_envoyeur" => $exp_name,
+			              "from" => $exp_email,
+			              "renvoyer_a" => $exp_email
+		              );
+		              $envoyer_mail($adresse,$lettre_title,$corps);
+	              }
+
+                if(!$res) {
                     $msg = "<div style='color:red'><strong>$adresse</strong> - "._T('malettre:erreur_envoi')."</div>";  
                     //$msg .="Mailer Error: " . $mail->ErrorInfo; 
                     $success_flag = false;
