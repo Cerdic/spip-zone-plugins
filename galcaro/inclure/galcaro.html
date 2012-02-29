@@ -4,7 +4,7 @@
 	
 	ENV{pas} = pagination
 	ENV{taille} = taille du carre
-    ENV{last} = nombre de vignette par ligne
+    ENV{last} = nombre de vignettes par ligne
 	ENV{id_article} = limiter a un article (passer aussi ENV{vu}=non)
 
 ]
@@ -14,8 +14,8 @@
 [(#SET{vu,[(#GET{id_article}|?{non,.})]})]
 
 <B_galcaro>
-<div class="galcaro">
-	[(#TOTAL_BOUCLE|>{10}|?{' ',''})<p class="gentil_message"><:cliquer_pour_agrandir:></p>]
+<div class="galcaro clearfix">
+	[(#TOTAL_BOUCLE|>{10}|oui)<p class="gentil_message"><:galcaro:cliquer_pour_agrandir:></p>]
 	<ul>
 		<BOUCLE_galcaro(DOCUMENTS)
 		{id_article?}
@@ -27,7 +27,7 @@
 		{par #ENV{tri}}{inverse #ENV{inverse}}
 		{par num titre,date,id_document}
 		>
-		<li>
+		<li[ class="first(#COMPTEUR_BOUCLE|modulo{#GET{last}}|=={1}|oui)"][ class="last(#COMPTEUR_BOUCLE|modulo{#GET{last}}|=={0}|oui)"]>
 			[(#SET{desc,[(#TITRE*|sinon{#DESCRIPTIF*}|?{' '})]})]
 			<BOUCLE_lien_article(ARTICLES)
 			{id_document}
@@ -35,7 +35,7 @@
 			{0,1}
 			>#SET{tof_titre,#TITRE}</BOUCLE_lien_article>
 			[(#COMPTEUR_BOUCLE|moins{#GET{pas}}|<={#ENV{debut_photos,0}}|?{#COMPTEUR_BOUCLE}|>{#ENV{debut_photos,0}}|?{
-				[(#SET{vignette,[(#FICHIER|copie_locale|image_passe_partout{#GET{taille},#GET{taille}}|image_recadre{#GET{taille},#GET{taille},center}|image_aplatir{jpg,ffffff}|inserer_attribut{class,spip_logos[ first(#COMPTEUR_BOUCLE|modulo{#GET{last}}|=={1}|oui)][ last(#COMPTEUR_BOUCLE|modulo{#GET{last}}|=={0}|oui)]})]})]
+				[(#SET{vignette,[(#FICHIER|copie_locale|image_passe_partout{#GET{taille},#GET{taille}}|image_recadre{#GET{taille},#GET{taille},center}|image_aplatir{jpg,ffffff}|inserer_attribut{class,spip_logos})]})]
 			,
 				[(#SET{vignette,''})]
 			})]
@@ -71,14 +71,13 @@
 	{pagination #GET{pas}}
 	></BOUCLE_photos>
 	[(#ENV{pagination}|=={non}|?{' '})
-		<p class="plus"><a href="[(#URL_PAGE{page_photos})]"><:images_tout:></a></p>
+		<p class="plus"><a href="[(#URL_PAGE{galcaro})]"><:galcaro:images_tout:></a></p>
 	]
 	[(#ENV{pagination}|=={non}|?{'',' '})
 		[<p class="pagination">(#PAGINATION)[
-		((#_galcaro:TOTAL_BOUCLE)&nbsp;<:images:>)]</p>]
+		((#_galcaro:TOTAL_BOUCLE)&nbsp;<:galcaro:images:>)]</p>]
 	]
 	<//B_photos>
 	</ul>
-	<br class="clear" />
 </div><!--.galcaro-->
 </B_galcaro>

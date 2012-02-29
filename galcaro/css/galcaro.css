@@ -1,13 +1,22 @@
-/* CSS */
+/* --------------------------------------------------------------
+
+   galcaro.css
+   Style minimal de la galerie Caro
+
+-------------------------------------------------------------- */
+
 .galcaro { clear: both; }
 .galcaro h2 { display: none; }
-.galcaro a { float: left; display: block; text-decoration: none; border: 0; }
-.galcaro a img { background: #fff; margin: 0 1em 2em 1em; padding: 0; border: 4px solid #dfdfdf; }
-.galcaro .first { margin-left: 0; }
-.galcaro .last { margin-right: 0; }
-.galcaro a:focus img,
-.galcaro a:hover img,
-.galcaro a:active img { border-color: #ccc; }
+.galcaro li { float: left; margin: 0 1.5em 1.5em 0; }
+.galcaro li.first { margin-left: 0; }
+.galcaro li.last { margin-right: 0; }
+.galcaro li a { display: block; border: 0; text-decoration: none; }
+.galcaro li a img { background: #fff; margin: 0; padding: 0; border: 4px solid #ddd; }
+.galcaro li a:focus img,
+.galcaro li a:hover img,
+.galcaro li a:active img { border-color: #ccc; }
 
 /* pagination */
 .galcaro .pagination a { float: none; display: inline; }
+
+/* end */
