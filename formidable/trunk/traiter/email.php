@@ -114,13 +114,18 @@ function traiter_email_dist($args, $retours){
 			'texte' => $texte,
 			'nom_envoyeur' => $nom_envoyeur
 		);
+		// on mets le couriel de l'envoyeur dans Reply-To et on laisse
+		// le from par defaut de Facteur car sinon ca bloque sur les SMTP un peu restrictifs
+		if ($courriel_envoyeur){
+			$corps['repondre_a'] = $courriel_envoyeur;
+		}
 		
 		// On envoie enfin le message
 		$envoyer_mail = charger_fonction('envoyer_mail','inc');
 		
 		// On envoie aux destinataires
 		if ($destinataires)
-			$ok = $envoyer_mail($destinataires, $sujet, $corps, $courriel_envoyeur, "X-Originating-IP: ".$GLOBALS['ip']);
+			$ok = $envoyer_mail($destinataires, $sujet, $corps, "", "X-Originating-IP: ".$GLOBALS['ip']);
 		
 		// Si c'est bon, on envoie l'accusé de réception
 		if ($ok and $courriel_envoyeur and $options['activer_accuse']){
@@ -166,8 +171,10 @@ function traiter_email_dist($args, $retours){
 				'texte' => $texte,
 				'nom_envoyeur' => $nom_site_spip
 			);
-			
-			$ok = $envoyer_mail($courriel_envoyeur, $sujet_accuse, $corps, $courriel_envoyeur, "X-Originating-IP: ".$GLOBALS['ip']);
+
+			// Ne pas mettre from=$courriel_envoyeur car ça declenche facilement les antispams
+			// garder le from par defaut de facteur (ou celui du site)
+			$ok = $envoyer_mail($courriel_envoyeur, $sujet_accuse, $corps, "", "X-Originating-IP: ".$GLOBALS['ip']);
 		}
 		
 		if ($ok){
