@@ -7,10 +7,6 @@
 	<etat>dev</etat>
 	<description>Envoyez vos emails via l'API [Mailjet->http://www.mailjet.com]</description>
 	<prefix>mailjet</prefix>
-	<pipeline>
-		<nom>affiche_milieu</nom>
-		<inclure>mailjet_config_fonctions.php</inclure>
-	</pipeline>
 	<install>mailjet_administrations.php</install>
 	<options>mailjet_options.php</options>
 	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
