@@ -13,10 +13,6 @@ include_once _DIR_RESTREINT."inc/envoyer_mail.php";
 // http://doc.spip.org/@envoyer_mail
 function mailjet_envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 
-  if (! $GLOBALS['meta'] ['mailjet_enabled']){
-		return inc_envoyer_mail_dist($email, $sujet, $texte, $from, $headers);
-	}
-
 	include_spip('inc/charsets');
 	include_spip('mailjet/class.phpmailer');
 	$mailer = new PHPMailer();
