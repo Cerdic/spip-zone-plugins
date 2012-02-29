@@ -6,7 +6,7 @@
 <B_docs>
 <div class="albums album_contenu clearfix p #ENV{align}">
 	[<h2>(#_album:TITRE)
-	[<!--(#REM) notice uniquement pour diaporama dans l'espace privé -->]
+	[<!--(#REM) notice uniquement pour l'espace privé -->]
 	[(#STATUT|!={publie}|et{#GET{environnement}|=={'prive'}}|oui) <span class='notice statut'><:album:info_statut_modele:></span>]
 	</h2>]
 	<ul>
