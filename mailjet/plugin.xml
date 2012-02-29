@@ -4,7 +4,7 @@
 	<auteur>Mailjet SAS</auteur>
 	<icon>images/mailjet-32.png</icon>
 	<version>2.0.0</version>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<description>Envoyez vos emails via l'API [Mailjet->http://www.mailjet.com]</description>
 	<prefix>mailjet</prefix>
 	<install>mailjet_administrations.php</install>
