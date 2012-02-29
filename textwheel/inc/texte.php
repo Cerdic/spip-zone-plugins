@@ -19,7 +19,7 @@ include_spip('inc/lien');
 include_spip('inc/textwheel');
 
 
-defined('_AUTOBR')||define('_AUTOBR', "<span class='autobr'><br /></span>");
+defined('_AUTOBR')||define('_AUTOBR', "<br class='autobr' />");
 
 // Avec cette surcharge, cette globale n'est plus définie, et du coup ça plante dans les plugins qui font un foreach dessus comme ZPIP
 $GLOBALS['spip_raccourcis_typo'] = array();
@@ -932,6 +932,20 @@ function traiter_raccourcis($t) {
 
 	if ($mes_notes)
 		$notes($mes_notes);
+
+	// hack: wrap des autobr dans l'espace prive, pour affichage css
+	// car en css on ne sait pas styler l'element BR
+	if (_DIR_RACINE) {
+		$manual = "<span style='color:green;'>&#x21B5;";
+		$auto = "<span style='color:orange;'>&para;";
+		foreach (array('t', 'mes_notes') as $k) {
+			if (false !== strpos(strtolower($$k), '<br')) {
+				$$k = preg_replace("/<br\b.*>/UiS", "$manual\\0</span>", $$k);
+				if (_AUTOBR)
+					$$k = str_replace($manual._AUTOBR, $auto._AUTOBR, $$k);
+			}
+		}
+	}
 
 	return $t;
 }

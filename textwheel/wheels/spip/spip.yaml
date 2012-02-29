@@ -87,9 +87,8 @@ puce:
 
 br:
   match: "/\n_ +/S"
-  replace: replace_br
+  replace: "<br class='manualbr' />"
   if_str: "\n_"
-  is_callback: Y
   priority: -20 # avant !paragraphes
 
 intertitres-compliques:
