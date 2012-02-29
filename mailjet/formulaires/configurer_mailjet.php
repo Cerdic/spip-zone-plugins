@@ -59,6 +59,7 @@ function formulaires_configurer_mailjet_traiter_dist(){
 		$host = 'in.mailjet.com';
 		$connected = FALSE;
 
+		$errno = $errstr = "";
 		for ($i = 0; $i < count ($configs); ++$i){
 			$soc = @fSockOpen ($configs[$i][0].$host, $configs[$i][1], $errno, $errstr, 5);
 			if ($soc){
