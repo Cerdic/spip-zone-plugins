@@ -1,7 +1,7 @@
 <paquet
 	prefix="jquerymasonry"
 	categorie="multimedia"
-	version="0.3.1"
+	version="0.3.2"
 	etat="test"
 	compatibilite="[2.1.0;3.0.99]"
 	logo="prive/themes/spip/images/jquerymasonry-32.png"

@@ -4,6 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function jquerymasonry_insert_head($flux){
 	$executer="";
 	$styles="";
+	include_spip('inc/config');
 	$conf_jquerymasonry = lire_config('jquerymasonry');
 
 	for($i=0;$i<=$conf_jquerymasonry["nombre"];$i++){
