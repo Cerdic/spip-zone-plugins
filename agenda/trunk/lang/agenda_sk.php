@@ -11,14 +11,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'absence_prise_en_compte' => 'Vaša neúčasť bola zaznamenaná',
 	'activite_editoriale' => 'Redakčná činnosť',
 	'afficher_calendrier' => 'Zobraziť kalendár',
-	'agenda' => 'Program',
+	'agenda' => 'Kalendár udalostí',
 	'ajouter_mots_cles' => 'Pridať kľúčové slová',
 	'ajouter_repetition' => 'Pridať opakovania',
 	'ajouter_un_evenement' => 'pridať udalosť k tomuto článku',
 	'annee_precedente' => 'predchádzajúci rok',
 	'annee_suivante' => 'ďalší rok',
 	'aucun_evenement' => 'žiadna udalosť',
-	'aucune_rubrique_mode_agenda' => 'Podľa predvolených nastavení vám všetky rubriky umožňujú umožňujú využívať udalosti. Ak program aktivujete pre jednu rubriku alebo viacero rubrík, riadenie udalostí bude obmedzené na vetvy týchto rubrík.',
+	'aucune_rubrique_mode_agenda' => 'Podľa predvolených nastavení vám všetky rubriky umožňujú umožňujú využívať udalosti. Ak kalendár udalostí aktivujete pre jednu rubriku alebo viacero rubrík, riadenie udalostí bude obmedzené na vetvy týchto rubrík.',
 
 	// B
 	'bouton_annuler' => 'Zrušiť',
@@ -114,24 +114,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'repetition' => 'Opakovanie',
 	'repetition_de' => 'Opakovanie',
-	'rubrique_activer_agenda' => 'Aktivovať Program pre túto rubriku',
-	'rubrique_dans_une_rubrique_mode_agenda' => 'Táto rubrika vám umožňuje využívať udalosti, keďže sa nachádza v rubrike, pre ktorú bol program aktivovaný',
-	'rubrique_desactiver_agenda' => 'Deaktivovať Program pre túto rubriku',
+	'rubrique_activer_agenda' => 'Aktivovať Kalendár udalostí pre túto rubriku',
+	'rubrique_dans_une_rubrique_mode_agenda' => 'Táto rubrika vám umožňuje využívať udalosti, keďže sa nachádza v rubrike, pre ktorú bol Kalendár udalostí aktivovaný',
+	'rubrique_desactiver_agenda' => 'Deaktivovať Kalendár udalostí pre túto rubriku',
 	'rubrique_liste_evenements_de' => 'Udalosti rubriky',
-	'rubrique_mode_agenda' => 'Režim Program bol aktivovaný pre túto rubriku a jej vetvu',
-	'rubrique_sans_gestion_evenement' => 'Režim Program nie je pre túto rubriku aktivovaný',
-	'rubriques' => 'Rubriky s programom',
+	'rubrique_mode_agenda' => 'Režim Kalendár udalostí  bol aktivovaný pre túto rubriku a jej vetvu',
+	'rubrique_sans_gestion_evenement' => 'Režim Kalendár udalostí  nie je pre túto rubriku aktivovaný',
+	'rubriques' => 'Rubriky s kalendárom udalostí',
 
 	// S
 	'sans_titre' => '(bez nadpisu)',
 
 	// T
 	'telecharger' => 'Stiahnuť',
-	'texte_agenda' => 'PROGRAM',
+	'texte_agenda' => 'KALENDÁR UDALOSTÍ',
 	'texte_evenement_statut' => 'Táto udalosť je:',
 	'titre_cadre_ajouter_evenement' => 'Pridať udalosť',
 	'titre_cadre_modifier_evenement' => 'Upraviť udalosť',
-	'titre_sur_l_agenda' => 'Na programe',
+	'titre_sur_l_agenda' => 'V Kalendári udalostí ',
 	'toutes_rubriques' => 'Všetky',
 
 	// U
