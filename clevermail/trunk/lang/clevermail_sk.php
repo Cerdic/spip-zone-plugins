@@ -11,9 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'a_partir_csv' => 'Zo súboru CSV:',
 	'abonne' => 'abonent',
 	'abonne_ajoute' => 'Abonent pridaný',
-	'abonne_aucune_lettre' => 'Neodoberať žiaden newsletter',
+	'abonne_aucune_lettre' => 'Neodoberať žiaden informačný materiál',
 	'abonne_inconnu' => 'Neznámy abonent',
-	'abonne_lettres' => 'Prihlásiť sa na odber newsletterov',
+	'abonne_lettres' => 'Prihlásiť sa na odber informačných materiálov',
 	'abonne_maj' => 'údaje o abonentovi boli aktualizované',
 	'abonnes' => 'abonenti',
 	'abonnes_ajoutes' => 'abonenti pridaní',
@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_nouvel_abonne' => 'žiaden nový abonent',
 	'aucun_resultat' => 'Žiaden výsledok',
 	'aucune_inscription' => 'Tieto údaje neobsahuje žiadne prihlásenie.',
-	'aucune_liste' => 'Vyberte si, prosím, aspoň jeden newsletter',
+	'aucune_liste' => 'Prosím, vyberte si aspoň jeden informačný materiál',
 	'auto_erreur_ce_jour_mois_existe_pas' => 'Tento deň v tomto mesiaci neexistuje.',
 	'auto_erreur_ce_jour_mois_pas_possible' => 'Výber tohto dňa nie je možný.',
 	'auto_erreur_ce_jour_semaine_existe_pas' => 'Tento deň neexistuje v tomto týždni.',
@@ -132,30 +132,30 @@ Pour valider l\'inscription de @mail@ à cette lettre, veuillez cliquer sur ce l
 Merci', # NEW
 	'cree' => 'Vytvorený',
 	'creer' => 'Vytvoriť',
-	'creer_lettre' => 'Vytvoriť newsletter',
+	'creer_lettre' => 'Vytvoriť informačný materiál',
 	'creer_message' => 'Vytvoriť správu',
 	'creer_nouveau_message' => 'Vytvoriť novú správu',
 
 	// D
-	'deja_inscrit' => 'Vous étiez déjà inscrit à la lettre « @lst_name@ ». Votre mode d\'inscription a été mis à jour.', # NEW
+	'deja_inscrit' => 'Ak ste sa zaregistrovali na odoberanie informačného materiálu "@lst_name@". Váš spôsob registrácie bol aktualizovaný.',
 	'deja_validee' => 'Táto operácia už bola potvrdená. Je mi to ľúto.',
-	'demande_transmise' => 'Votre demande d\'inscription à la lettre « @lst_name@ » va être examinée dans les plus brefs délais.', # NEW
+	'demande_transmise' => 'Vaša žiadosť o registráciu na odoberanie materiálu "@lst_name@" bude skontrolovaná tak skoro, ako to bude možné.',
 	'desabonner' => 'Odhlásiť z odoberania',
 	'desabonner2' => 'odhlásiť z odoberania',
 	'desabonner_abonnes' => 'Odhlásiť vybraných abonentov z odoberania',
-	'desabonner_confirmer' => 'Êtes-vous certain de vouloir désabonner cette personne ?', # NEW
+	'desabonner_confirmer' => 'Určite chcete odhlásiť tohto človeka z odoberania materiálov?',
 	'description' => 'Popis',
 	'desinscription_confirmation_debut' => 'Odhlásiť sa z odoberania materiálu',
-	'desinscription_confirmation_fin' => 'demandée. Vous allez recevoir un message demandant confirmation.', # NEW
+	'desinscription_confirmation_fin' => 'sa vyžaduje. Dostanete správu so žiadosťou o potvrdenie.',
 	'desinscription_validee' => 'Vaše odhlásenie z odoberania materiálu "@lst_name@" bolo potvrdené. Do skorého videnia.',
 
 	// E
-	'editer_lettre' => 'Upraviť materiál',
-	'email_administrateur' => 'E-mail administrateur', # NEW
-	'email_expediteur' => 'E-mail expéditeur (from et reply-to)', # NEW
+	'editer_lettre' => 'Upraviť informačný materiál',
+	'email_administrateur' => 'E-mail administrátora',
+	'email_expediteur' => 'E-mail odosielateľa (from a reply-to)',
 	'email_moderateur' => 'E-mail od moderátora',
 	'email_non_valide' => 'Adresa neplatná.',
-	'email_return_path' => 'E-mail des retours d\'erreurs (return-path)', # NEW
+	'email_return_path' => 'E-mail návratu pri chybách (return-path)',
 	'emails' => 'E-maily',
 	'envoye' => 'Odoslané',
 	'envoyer' => 'Poslať',
@@ -170,16 +170,16 @@ Merci', # NEW
 
 	// I
 	'importer' => 'Nahrať',
-	'info_parametres' => 'L\'e-mail de l\'administrateur est utilisé par défaut comme l\'e-mail du modérateur lors de la création d\'une newsletter', # NEW
-	'infolettres' => 'Newslettery',
+	'info_parametres' => 'E-mail administrátora sa používa ako predvolený e-mail moderátora pri vytváraní informačného materiálu',
+	'infolettres' => 'Informačné materiály',
 	'informations' => 'Informácie',
-	'inscription_deja_abonne_autre_mode' => 'Vous étiez déjà inscrit à la lettre « @lst_name@ » dans un autre mode, changement opéré.', # NEW
-	'inscription_deja_abonne_meme_mode' => 'Vous étiez déjà inscrit à la lettre « @lst_name@ » dans ce même mode.', # NEW
-	'inscription_encours' => 'Votre demande d\'inscription à la lettre @nom_lettre@ est en cours d\'examen. Merci de patienter.', # NEW
-	'inscription_mok' => 'Votre demande d\'inscription à la lettre « @lst_name@ » a été soumise au modérateur. Vous serez informé de sa décision.', # NEW
+	'inscription_deja_abonne_autre_mode' => 'Ak ste sa na odoberanie materiálu "@lst_name@" zaregistrovali iným spôsobom, nastala zmena.',
+	'inscription_deja_abonne_meme_mode' => 'Ak ste sa na odoberanie materiálu "@lst_name@" zaregistrovali rovnakým spôsobom.',
+	'inscription_encours' => 'Vaša žiadosť o registráciu na odoberanie materiálu @nom_lettre@ sa kontroluje. Ďakujeme vám za trpezlivosť.',
+	'inscription_mok' => 'Vaša žiadosť o registráciu na odoberanie materiálu "@lst_name@" bola odoslaná moderátorovi. O jeho rozhodnutí vás budeme informovať.',
 	'inscription_nok' => 'Na odoberanie tohto informačného materiálu nie je povolená registrácia',
-	'inscription_ok' => 'Vous allez recevoir un message de demande de confirmation de votre inscription à la lettre « @lst_name@ ».', # NEW
-	'inscription_ok_multiple' => 'Vous allez recevoir un message de demande de confirmation de votre inscription aux lettre « @lst_name@ ».', # NEW
+	'inscription_ok' => 'Dostanete správu so žiadosťou o potvrdenie svojej registrácie na odoberanie materiálu "@lst_name@".',
+	'inscription_ok_multiple' => 'Dostanete správu so žiadosťou o potvrdenie svojej registrácie na odoberanie materiálu "@lst_name@".',
 	'inscription_validee' => 'Vaša registrácia na odoberanie materiálu "@lst_name@" bola potvrdená. Ďakujeme.',
 
 	// L
@@ -195,17 +195,17 @@ Merci', # NEW
 	'lettres_non_classees' => 'Nezotriedené materiály',
 	'lire_en_ligne' => 'Prečítať si správu na stránke.',
 	'liste_abonnes' => 'Zoznam abonentov',
-	'liste_lettres' => 'Zoznam materiálov',
+	'liste_lettres' => 'Zoznam informačných materiálov',
 	'liste_lettres_aucune' => 'Ešte ste nevytvorili informačný materiál.',
 	'liste_messages' => 'Správy',
 
 	// M
-	'mail_info_desinscription_corps' => 'Alerte envoyée par le plugin CleverMail du site @nom_site@ ( @url_site@ ) :
+	'mail_info_desinscription_corps' => 'Varovanie odoslané cez zásuvný modul CleverMail zo stránky @nom_site@ (@url_site@):
 
-Désinscription de @sub_email@ de la lettre « @lst_name@ »', # NEW
-	'mail_info_inscription_corps' => 'Alerte envoyée par le plugin CleverMail du site @nom_site@ ( @url_site@ ) :
+Odhlásenie @sub_email@ z odoberania materiálu "@lst_name@"',
+	'mail_info_inscription_corps' => 'Varovanie odoslané cez zásuvný modul CleverMail zo stránky @nom_site@ (@url_site@):
 
-Inscription de @sub_email@ à la lettre « @lst_name@ »', # NEW
+Registrácia @sub_email@ na odoberanie materiálu "@lst_name@"',
 	'mail_info_inscription_sujet' => 'Registrácia @sub_email@',
 	'mail_inscription_multiple' => 'Bonjour,
 
@@ -227,18 +227,18 @@ Merci', # NEW
 	'message_queue_envoye' => '@nb@ odoslaná správa',
 	'messages' => 'správy',
 	'messages_attentes' => 'Čakajúce správy',
-	'messages_attentes_text' => 'Ici sont listés les messages qui sont en file d\'attente pour être envoyés', # NEW
+	'messages_attentes_text' => 'Tu je zoznam správ, ktoré zaradené na odoslanie',
 	'messages_cours_envoi' => 'Správy, ktoré sa posielajú',
-	'messages_cours_envoi_text' => 'Ici sont listés les messages qui sont en cours d\'envoi par le facteur, lot par lot', # NEW
+	'messages_cours_envoi_text' => 'Tu je zoznam správ, ktoré sú pripravené na odoslanie,  podľa príjemcu jedna za druhou',
 	'messages_envoyes' => 'Odoslané správy',
-	'messages_envoyes_text' => 'Ici sont listés les messages qui ont été envoyés avec succès', # NEW
+	'messages_envoyes_text' => 'Tu je zoznam správ, ktoré boli úspešne odoslané',
 	'messages_queue_attente' => 'Čakajúce správy',
 	'messages_queue_envoye' => 'odoslaných správ: @nb@',
 	'mod_closed' => 'Uzavretý',
 	'mod_email' => 'E-mail',
 	'mod_explication' => 'Nižšie sú popísané rôzne režimy spravovania.',
 	'mod_explication_closed' => 'Uzavretý: nikto sa nemôže zaregistrovať',
-	'mod_explication_email' => 'E-mail : tout le monde peut s\'inscrire après confirmation par e-mail', # NEW
+	'mod_explication_email' => 'E-mail: po overení e-mailu sa môže zaregistrovať každý',
 	'mod_explication_mod' => 'Moderovaný: registráciu musí potvrdiť moderátor',
 	'mod_explication_open' => 'Otvorený: každý sa môže zaregistrovať  bez potvrdzovania',
 	'mod_mod' => 'Moderovaný',
@@ -253,16 +253,16 @@ Merci', # NEW
 
 	// N
 	'n_nouveaux_abonnes' => 'noví abonenti',
-	'nettoyer_abonnement' => 'Vider les abonnements en attente depuis plus d\'un mois', # NEW
+	'nettoyer_abonnement' => 'Vyprázdniť abonentov, ktorí čakajú viac ako mesiac',
 	'news1' => 'Novinky č. 1',
 	'news_depuis' => 'Novinky od',
 	'nom' => 'Meno',
-	'nom_formulaire_clevermail' => 'Formulaire d\'abonnement aux listes de diffusion', # NEW
+	'nom_formulaire_clevermail' => 'Registračný formulár do mailing listu',
 	'nombre_messages' => 'Počet správ na odoslanie',
 	'nouveau_message' => 'nová správa',
 	'nouveaux_abonnes_et' => ' a ',
 	'nouveaux_messages' => 'Nové správy',
-	'nouveaux_messages_text' => 'Ici sont listés les messages qui ne sont pas encore envoyés', # NEW
+	'nouveaux_messages_text' => 'Tu je zoznam správ, ktoré ešte neboli odoslané',
 
 	// P
 	'parametres' => 'Vlastnosti',
@@ -270,7 +270,7 @@ Merci', # NEW
 	'plusieurs_messages_en_cours_envoi' => 'posiela sa: @nb@',
 	'plusieurs_messages_envoyes' => 'odoslaných: @nb@',
 	'prefixer_messages' => 'Prefix',
-	'prefixer_messages_explication' => 'Préfixer les sujets des messages avec le nom de la lettre d\'information', # NEW
+	'prefixer_messages_explication' => 'Použiť názov informačného materiálu ako prvú časť predmetu správ',
 	'procedure_termine' => 'Na ukončenie operácie kliknite sem',
 	'proprietes' => 'Vlastnosti',
 
@@ -279,33 +279,33 @@ Merci', # NEW
 
 	// S
 	'selection_des_listes' => 'Výber zoznamov',
-	'send_error' => 'Erreur lors de l\'envoi du message de demande de confirmation, veuillez réessayer.', # NEW
+	'send_error' => 'Chyba pri odosielaní správy so žiadosťou o potvrdenie registrácie, prosím, skúste to znova.',
 	'source_des_abonnes' => 'Vytvoriť zoznam abonentov',
 	'statistiques' => 'Štatistiky',
 	'sujet' => 'Predmet',
 	'sujet_mail_inscription_multiple' => 'Potvrdenie vašej registrácie',
-	'sujet_mail_mod' => 'Modération de la lettre @nom_lettre@', # NEW
+	'sujet_mail_mod' => 'Moderovanie materiálu @nom_lettre@',
 	'sujet_message' => 'Predmet správy',
 	'sujet_vide' => 'Predmet nemôže byť prázdny',
 	'supprimer' => 'Odstrániť',
-	'supprimer_abonne_base' => 'Supprimer définitivement cet abonné de la base', # NEW
+	'supprimer_abonne_base' => 'Natrvalo vymazať tohto abonenta z databázy',
 	'supprimer_abonnes' => 'Odstrániť vybraných abonentov',
 	'supprimer_confirmer' => 'Určite chcete odstrániť?',
 
 	// T
-	'tags_specifiques' => 'Tags spécifiques', # NEW
+	'tags_specifiques' => 'Špecifické tagy',
 
 	// U
 	'un_message_en_attente' => '1 čaká',
 	'un_message_en_cours_envoi' => '1 sa posiela',
 	'un_message_envoye' => '1 odoslaná',
 	'url_templates' => 'URL vygenerovaných šablón',
-	'url_templates_explication' => 'Précisez l\'URL d\'une page distante, ou le nom d\'un squelette SPIP local, sans l\'extension .html. CleverMail propose le squelette par défaut <code>clevermail_nouveautes_html</code>.', # NEW
+	'url_templates_explication' => 'Uveďte internetovú adresu vzdialenej stránky, alebo názov lokálnej šablóny SPIPu bez prípony .html. CleverMail ponúka predvolenú šablónu <code>clevermail_nouveautes_html.</code>',
 
 	// V
 	'version_html' => 'HTML verzia',
 	'version_txt' => 'Textová verzia',
-	'version_txt_explication' => 'Si vous ne remplissez pas ce paramètre, la version texte sera obtenue automatiquement à partir de la version HTML. CleverMail propose le squelette par défaut <code>clevermail_nouveautes_text</code>.', # NEW
+	'version_txt_explication' => 'Ak necháte tento parameter, textová verzia sa vytvorí automaticky z verzie HTML. CleverMail ponúka predvolenú šablónu <code>clevermail_nouveautes_text.</code>',
 	'veuillez_corriger_votre_saisie' => 'Prosím, opravte to, čo ste zadali.',
 	'vous_devez_choisir_au_moins_une_liste' => 'Musíte si vybrať aspoň jedno písmeno.',
 	'vous_devez_choisir_un_fichier' => 'Musíte vytrať súbor...'
