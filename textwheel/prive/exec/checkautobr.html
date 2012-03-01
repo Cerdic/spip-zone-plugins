@@ -20,15 +20,16 @@
 	{pagination 200}
 	{!doublons a}
 >
+[(#SET{t,#TEXTE*|autobr_marquer|autobr_simplifier})]
+[(#GET{t}
+	|match{CHECKAUTOBR_}|et{#SET{tt,#TEXTE}|ou{#GET{tt}|match{autobr}}}|oui)
 
-[(#SET{t,#TEXTE})][(#GET{t}|match{autobr}|oui)
 
 <li>
-#ID_ARTICLE - 
-
-[(#GET{t}|explode{autobr}|count|moins{1}) autobr] dans <a href="./?exec=articles&amp;id_article=#ID_ARTICLE">#TITRE</a>
+[(#GET{tt}|explode{autobr}|count|moins{1}) autobr] dans <a href="./?exec=articles&amp;id_article=#ID_ARTICLE">#TITRE</a>
 
 &lt;<a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]">corriger</a>&gt;
+([(#ID_ARTICLE)])
 </li>
 
 ]</BOUCLE_a>
@@ -38,7 +39,7 @@
 
 <BOUCLE_check(ARTICLES){id_article}{statut==.*}>
 
-[<textarea style='width:100%;height:300px;'>(#TEXTE*|autobr_reperage)
+[<textarea style='width:100%;height:300px;'>(#TEXTE*|autobr_correction)
 </textarea>]
 
 
