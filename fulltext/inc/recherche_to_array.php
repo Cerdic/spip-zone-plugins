@@ -138,19 +138,27 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 			$i++;
 			spip_log($pe,'recherche');
 			if ($mkeys = fulltext_keys($jtable, 'obj'.$i, $serveur)) {
-				$score[] = "SUM(MATCH(".implode($mkeys,',').") AGAINST ($p".($boolean ?' IN BOOLEAN MODE':'')."))";
+				$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
 				$_id_join = id_table_objet($jtable);
 				$table_join = table_objet($jtable);
 				$lesliens = recherche_tables_liens();
+
+				$subscore = "MATCH(".implode($mkeys,',').") AGAINST ($p".($boolean ?' IN BOOLEAN MODE':'').")";
 				if (in_array($jtable, $lesliens))
 					$from .= "
-					LEFT JOIN spip_${jtable}s_liens as lien$i ON lien$i.id_objet=t.$_id_table AND lien$i.objet='${table}'
-					INNER JOIN spip_${jtable}s as obj$i ON obj$i.$_id_join=lien$i.$_id_join
+					LEFT JOIN (
+					 SELECT lien$i.id_objet,$subscore AS score
+					 FROM spip_${jtable}s_liens as lien$i
+					 JOIN spip_${jtable}s as obj$i ON obj$i.$_id_join=lien$i.$_id_join
+					 WHERE lien$i.objet='${table}' ) AS o$i ON o$i.id_objet=t.$_id_table
 					";
 				else
 					$from .= "
-					LEFT JOIN spip_${jtable}s_${table}s as lien$i ON lien$i.$_id_table=t.$_id_table
-					INNER JOIN spip_${table_join} AS obj$i ON lien$i.$_id_join=obj$i.$_id_join
+					LEFT JOIN (
+					 SELECT lien$i.$_id_table,$subscore AS score
+					 FROM spip_${jtable}s_${table}s as lien$i
+					 JOIN spip_${table_join} AS obj$i ON lien$i.$_id_join=obj$i.$_id_join
+					 ) AS o$i ON o$i.$_id_table=t.$_id_table
 					";
 			}
 		}
@@ -194,7 +202,7 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 
 		#var_dump($requete);
 		#spip_log($requete,'recherche');
-#			exit;
+		#exit;
 	}
 
 	$r = array();
