@@ -1,0 +1,106 @@
+[(#REM) modèle Nivoslider pour Albums : 
+ - Depuis un article : < album|nivoslider >
+ - Selon le modele CROCHET(# MODELE{album_nivoslider,id_album=X})CROCHET
+]
+
+[(#SET{width,[(#ENV{width, #CONFIG{nivoslider/width, 500} })]} )]
+[(#SET{height,[(#ENV{height, #CONFIG{nivoslider/height, 240} })]} )]
+[(#SET{effect,[(#ENV{effect, #CONFIG{nivoslider/effect, random} })]} )]
+[(#SET{slices,[(#ENV{slices, #CONFIG{nivoslider/slices,15} })]} )]
+[(#SET{animSpeed,[(#ENV{animSpeed, #CONFIG{nivoslider/animSpeed,500} })]} )]
+[(#SET{pauseTime,[(#ENV{pauseTime, #CONFIG{nivoslider/pauseTime,3000} })]} )]
+[(#SET{directionNav,[(#ENV{directionNav, #CONFIG{nivoslider/directionNav,true} })]} )]
+[(#SET{directionNavHide,[(#ENV{directionNavHide, #CONFIG{nivoslider/directionNavHide,true} })]} )]
+[(#SET{controlNav,[(#ENV{controlNav, #CONFIG{nivoslider/controlNav,true} })]} )]
+[(#SET{keyboardNav,[(#ENV{keyboardNav, #CONFIG{nivoslider/keyboardNav,false} })]} )]
+[(#SET{pauseOnHover,[(#ENV{pauseOnHover, #CONFIG{nivoslider/pauseOnHover,true} })]} )]
+[(#SET{captionOpacity,[(#ENV{captionOpacity, #CONFIG{nivoslider/captionOpacity,0.8} })]} )]
+[(#SET{imageAlign,[(#ENV{imageAlign, #CONFIG{nivoslider/imageAlign,'center center'} })]} )]
+[(#SET{imageBackcolor,[(#ENV{imageBackcolor, #CONFIG{nivoslider/imageBackcolor,'transparent'} })]} )]
+[(#SET{controlNavThumbs,[(#ENV{controlNavThumbs, #CONFIG{nivoslider/controlNavThumbs,false} })]} )]
+[(#SET{controlNavThumbsWidth,[(#ENV{controlNavThumbsWidth, #CONFIG{nivoslider/controlNavThumbsWidth,50} })]} )]
+[(#SET{controlNavThumbsHeight,[(#ENV{controlNavThumbsHeight, #CONFIG{nivoslider/controlNavThumbsHeight,50} })]} )]
+
+#SET{environnement, (#EVAL{_request('exec');}|?{prive,publique})} [<!--(#REM) partie publique ou espace prive ? -->]
+[(#SET{id_rand,	#VAL{1}|rand{1000}})]
+
+<BOUCLE_album(ALBUMS){id_album}{tout}>
+<B_doc>
+
+[<h2>(#_album:TITRE)
+[<!--(#REM) notice uniquement pour indiquer le diaporama dans l'espace privé -->]
+[(#GET{environnement}|=={'prive'}|oui) <span class='notice_album diaporama'><:nivoslider:info_modele_album_espace_prive:></span>]
+[(#STATUT|!={publie}|et{#GET{environnement}|=={'prive'}}|oui) <span class='notice_album statut'><:album:info_statut_modele:></span>]
+</h2>]
+
+[<!--(#REM) boucle préliminaire : on trouve la hauteur à utiliser en fonction de la largeur -->]
+[<!--(#REM) pas utilisé pour l'instant, le div #slider_xx se voit attribué la mauvaise hauteur  -->]
+#SET{hauteur, '10000'}
+<BOUCLE_hauteur(DOCUMENTS){extension IN png,jpg,gif}{id_album}{par num titre, date}{doublons A}>
+	[(#FICHIER|image_reduire{#GET{width},0}|hauteur|<{#GET{height}}|oui)
+		#SET{hauteur, #FICHIER|image_reduire{#GET{width},0}|hauteur}
+	]
+</BOUCLE_hauteur>
+	
+<div id='slider' style="[width:(#GET{width})px;][height:(#GET{height})px]">
+	<div id="slider_#GET{id_rand}" class="nivoSlider">
+	<BOUCLE_doc(DOCUMENTS){extension IN png,jpg,gif}{id_album}{par num titre, date}{doublons}>
+	
+		[(#DESCRIPTIF|?{'',' '})
+			[(#FICHIER|image_passe_partout{#GET{width},#GET{height}}|image_recadre{#GET{width},#GET{height},#GET{imageAlign},#GET{imageBackcolor}}|inserer_attribut{title,[(#TITRE|supprimer_numero)]}|inserer_attribut{rel,#FICHIER|image_reduire{#GET{controlNavThumbsWidth},#GET{controlNavThumbsHeight}}|extraire_attribut{src}})]
+		]
+		[(#DESCRIPTIF|?{' ',''})
+			[(#SET{lien,#VAL{'spip.php?'#DESCRIPTIF}|attribut_html|replace{' ',''}})]
+			[(#SET{fancyornot,''})]
+			[(#DESCRIPTIF|match{doc}|=={doc}|?{
+				[(#PLUGIN{FANCYBOX}|oui)
+					[(#SET{fancyornot, [(#CONFIG{fancybox/selecteur_commun,'.fancybox'}|replace{'\.',''})]})]
+				]
+				[(#SET{lien, #URL_DOCUMENT})]
+			})]
+			[(#DESCRIPTIF|match{http}|=={http}|?{
+				[(#SET{lien, [(#DESCRIPTIF|textebrut)]})]
+			})]
+			<a href="#GET{lien}" [class="(#GET{fancyornot})"]>
+			[(#FICHIER|image_passe_partout{#GET{width},#GET{height}}|image_recadre{#GET{width},#GET{height}}|inserer_attribut{title,[(#TITRE|supprimer_numero)]}|inserer_attribut{rel,#FICHIER|image_reduire{#GET{controlNavThumbsWidth},#GET{controlNavThumbsHeight}}|extraire_attribut{src}})]
+			</a>
+		]
+		
+	</BOUCLE_doc>
+	</div>
+</div>
+<br style="clear:both"/>
+	
+	<script type="text/javascript">/*<![CDATA[*/
+	[//(#REM) ne pas charger le script dans l espace prive ]
+	[(#GET{environnement}|=={'publique'}|oui)
+	
+		jQuery(function() {
+		$('#slider_#GET{id_rand}').nivoSlider({
+			[effect:'(#GET{effect})',]
+			[slices:(#GET{slices}),]
+			[animSpeed:(#GET{animSpeed}),]
+			[pauseTime:(#GET{pauseTime}),]
+			[directionNav:(#GET{directionNav}),]
+			[directionNavHide:(#GET{directionNavHide}),]
+			[(#CONFIG{nivoslider/controlNavThumbs}|=={'false'}|?{' ',''})
+				[controlNav:(#GET{controlNav}),]
+			]
+			[keyboardNav:(#GET{keyboardNav}),]
+			[pauseOnHover:(#GET{pauseOnHover}),]
+			[(#CONFIG{nivoslider/controlNavThumbs}|=={'true'}|?{' ',''})
+				[controlNavThumbs:(#GET{controlNavThumbs}),]
+				[controlNavThumbsFromRel:(#GET{controlNavThumbs}),]
+			]
+			[captionOpacity:(#GET{captionOpacity})]
+		});
+		[(#ENV{manuel}|=={oui}|oui)
+		$('#slider_#GET{id_rand}').data('nivoslider').stop();
+		]
+	});
+	
+	]
+/*]]>*/</script>
+	
+</B_doc>
+</BOUCLE_album>
