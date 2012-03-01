@@ -10,9 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_cache_taille_mini' => 'Cache nemôže byť menšia ako 10 MB',
 	'erreur_dossier_squelette_invalide' => 'Priečinok šablóny nemôže byť  absolútne umiestnenie ani nemôže obsahovať odkaz <tt>../</tt>',
-	'explication_dossier_squelettes' => 'Vous pouvez indiquer plusieurs répertoires séparés par \':\', qui seront pris dans l\'ordre. Le répertoire intitulé "<tt>squelettes</tt>" est toujours pris en dernier si il existe.', # NEW
-	'explication_image_seuil_document' => 'Les images téléchargées peuvent être automatiquement passées en mode document au dela d\'une largeur prédéfinie', # NEW
-	'explication_introduction_suite' => 'Les points de suite sont ajoutés par la balise <tt>#INTRODUCTION</tt> lorsqu\'elle coupe un texte. Par défaut <tt> (...)</tt>', # NEW
+	'explication_dossier_squelettes' => 'Môžete zadať viacero priečinkov a oddeliť ich ":", ktoré sa budú brať do úvahy po poradí. Priečinok s názvom "<tt>squelettes</tt>" sa vždy berie do úvahy ako posledný, ak existuje.',
+	'explication_image_seuil_document' => 'Stiahnuté obrázky môžu byť automaticky presunuté do režimu dokumentu mimo predvolenej šírky',
+	'explication_introduction_suite' => 'Nasledujúce body boli pridané cez tag <tt>#INTRODUCTION</tt> pri vystrihnutí textu. Podľa predvolených nastavení <tt> (...)</tt>',
 
 	// L
 	'label_cache_duree' => 'Trvanie cache (v s)',
@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_image_seuil_document' => 'Šírka obrázkov v režime dokumentu',
 	'label_imgs_seuils' => 'Obmedziť veľkosť obrázkov pri sťahovaní',
 	'label_inhiber_javascript_ecrire' => 'Deaktivovať javascript v článkoch',
-	'label_introduction_suite' => 'Points de suite', # NEW
+	'label_introduction_suite' => 'Nasledujúce body',
 	'label_logo_seuils' => 'Obmedziť veľkosť log pri sťahovaní',
 	'label_longueur_login_mini' => 'Minimálna dĺžka prihlasovacích mien',
 	'label_max_height' => 'Maximálna výška (v pixeloch)',
@@ -43,21 +43,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_options_skel' => 'Počítanie stránok',
 	'label_options_typo' => 'Spracovanie textov',
 	'label_supprimer_numero' => 'Automaticky odstrániť čísla názvov',
-	'label_toujours_paragrapher' => 'Encapsuler tous les paragraphes dans un <tt>&lt;p&gt;</tt> (même les texte constitués d\'un seul paragraphe)', # NEW
+	'label_toujours_paragrapher' => 'Všetky odseky dajte do <tt>&lt;p&gt;</tt> (dokonca aj text má jeden odsek)',
 	'legend_cache_controle' => 'Ovládanie cache',
 	'legend_espace_prive' => 'Súkromná stránka',
 	'legend_image_documents' => 'Obrázky a dokumenty',
 	'legend_site_public' => 'Verejne prístupná stránka',
 
 	// M
-	'message_ok' => 'Vos réglages ont été pris en compte et enregistrés dans le fichier <tt>@file@</tt>. Ils sont maintenant appliqués.', # NEW
+	'message_ok' => 'Vaše nastavenia boli zohľadnené a uložené do súboru <tt>@file@</tt>. Teraz sa aplikujú.',
 
 	// T
-	'texte_boite_info' => 'Cette page vous permet de configurer facilement les réglages cachés de SPIP.
+	'texte_boite_info' => 'Táto stránka vám umožňuje ľahko upraviť skryté nastavenia SPIPu.
 
-Si vous forcez certains réglages dans votre fichier <tt>config/mes_options.php</tt>, ce formulaire sera sans effet sur ceux-ci.
+Ak si niektoré nastavenia vynútite vo svojom súbore <tt>config/mes_options.php</tt>, tento formulár ich neovplyvní.
 
-Quand vous aurez terminé la configuration de votre site, vous pourrez, si vous le souhaitez, copier-coller le contenu du fichier <tt>tmp/ck_options</tt> dans <tt>config/mes_options.php</tt> avant de désinstaller ce plugin qui ne sera plus utile.', # NEW
+Keď skončíte s nastavovaním svojej stránky, môžete, ak chcete, skopírovať a prilepiť obsah súboru <tt>tmp/ck_options</tt> do <tt>config/mes_options.php</tt> pred odinštalovaním tohto zásuvného modulu, ktorý už nebudete potrebovať.',
 	'titre_page_couteau' => 'Couteau KISS'
 );
 
