@@ -38,8 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'deja_defini' => 'Inde už boli definované tieto povolenia:',
-	'deja_defini_suite' => 'Le plugin « Autorité » ne peut pas les modifier certains des réglages ci-dessous risquent par conséquent de ne pas fonctionner.
-	<br />Pour régler ce problème, vous devrez vérifier si votre fichier <tt>mes_options.php</tt> (ou un autre plugin actif) a défini ces fonctions.', # NEW
+	'deja_defini_suite' => 'Zásuvný modul "Autorita" nedokáže zmeniť niektoré z týchto nastavení, a preto nebudú fungovať.
+	<br />Ak chcete vyriešiť tento problém, mali by ste skontrolovať, či sú v súbore  <tt>mes_options.php</tt> (alebo v inom aktívnom zásuvnom module) definované tieto funkcie.',
 	'descriptif_1' => 'Táto stránka s nastaveniami je vyhradená pre webmasterov stránky:',
 	'descriptif_2' => '<p>Ak chcete upraviť tento zoznam, upravte, prosím, súbor <tt>config/mes_options.php</tt> (ak treba, vytvorte ho) a zadajte zoznam prihlasovacích údajov webmasterov v tejto podobe:</p>
 <pre>&lt;?php
@@ -52,23 +52,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 <a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>Prečítajte si dokumentáciu</a>
 ',
-	'details_option_auteur' => '<small><br />Pour le moment, l\'option « auteur » ne fonctionne que pour les auteurs enregistrés (forums sur abonnement, par exemple). Et, si elle est activée, les administrateurs du site ont aussi la capacité d\'éditer les forums.
-	</small>', # NEW
+	'details_option_auteur' => '<small><br />Nateraz možnosť "autor" funguje iba pre zaregistrovaných autorov (napríklad diskusné fóra, na ktoré sa treba prihlásiť). A ak je táto možnosť aktivovaná, možnosť upravovať diskusné fóra majú aj administrátori stránky.
+	</small>',
 	'droits_des_auteurs' => 'Práva autorov',
 	'droits_des_redacteurs' => 'Práva redaktorov',
 	'droits_idem_admins' => 'rovnaké práva pre všetkých administrátorov',
 	'droits_limites' => 'obmedzené práva na tieto rubriky',
 
 	// E
-	'effacer_base_option' => '<small><br />L\'option recommandée est « personne », l\'option standard de SPIP est « les administrateurs » (mais toujours avec une vérification par FTP).</small>', # NEW
+	'effacer_base_option' => '<small><br />Odporúčaná možnosť je "človek", štandardná možnosť v SPIPe je "administrátori" (ale vždy s kontrolou cez FTP).</small>',
 	'effacer_base_qui' => 'Kto môže <strong>mazať</strong> databázu stránky?',
 	'espace_publieur' => 'Otvoriť zónu publikovania',
-	'espace_publieur_detail' => 'Choisissez ci-dessous un secteur à traiter comme un espace de publication ouverte pour les rédacteurs et / ou visiteurs enregistrés (à condition d\'avoir une interface, par exemple les crayons et un formulaire pour soumettre l\'article) :', # NEW
+	'espace_publieur_detail' => 'Nižšie vyberte oblasť, z ktorej má vzniknúť otvorená zóna na publikovanie pre redaktorov a zaregistrovaných návštevníkov (pod podmienkou, že máte rozhranie ako napr. Farbičky a formulár na odoslanie článku):',
 	'espace_publieur_qui' => 'Chcete otvoriť publikovanie — za administrátormi:',
 	'espace_wiki' => 'Zóna wiki',
-	'espace_wiki_detail' => 'Choisissez ci-dessous un secteur à traiter comme un wiki, c\'est-à-dire éditable par tous depuis l\'espace public (à condition d\'avoir une interface, par exemple les crayons) :', # NEW
+	'espace_wiki_detail' => 'Nižšie vyberte oblasť, ktorá bude slúžiť ako wiki, čiže budú ju môcť upravovať všetci z verejne prístupnej stránky (pod podmeinkou, že máte rozhranie, ako napr. Farbičky):',
 	'espace_wiki_mots_cles' => 'Zóna wiki podľa kľúčových slov',
-	'espace_wiki_mots_cles_detail' => 'Choisissez ci-dessous les mots clef qui activeront le mode wiki, c\'est-à-dire éditable par tous depuis l\'espace public (à condition d\'avoir une interface, par exemple les crayons)', # NEW
+	'espace_wiki_mots_cles_detail' => 'Vyberte si kľúčové slová, ktoré aktivujú režim wiki, teda taký, ktorý budú môcť upravovať všetci z verejne prístupnej stránky (pod podmienkou, že máte rozhranie, ako napr. Farbičky)',
 	'espace_wiki_mots_cles_qui' => 'Chcete otvoriť túto stránku wiki za administrátormi:',
 	'espace_wiki_qui' => 'Chcete otvoriť túto stránku wiki — za administrátormi:',
 
@@ -85,7 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'non_webmestres' => 'Toto nastavenie neplatí pre webmasterov.',
-	'note_rubriques' => '(Notez que seuls les administrateurs peuvent créer des rubriques, et, pour les administrateurs restreints, cela ne peut se faire que dans leurs rubriques.)', # NEW
+	'note_rubriques' => '(Majte na pamäti, že  vytvárať rubriky môžu len administrátori a administrátori s obmedzeniami to môžu robiť len vo svojich rubrikách.)',
 	'nouvelles_rubriques' => 'z nových rubrík do koreňového adresára stránky',
 	'nouvelles_sous_rubriques' => 'z nových podrubrík v stromovej štruktúre.',
 
@@ -108,8 +108,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redacteur_lire_stats' => '<strong>Redaktori môžu vidieť štatistiky:</strong> redaktori môžu vidieť štatistiky.',
 	'redacteur_modifie_article' => '<strong>Redactor upravuje odoslané články:</strong> každý redaktor môže upravovať články odoslaný na publikovanie aj ak je bez autora.',
 	'refus_1' => '<p>Iba webmasteri stránky',
-	'refus_2' => 'sont autorisés à modifier ces paramètres.</p>
-<p>Pour en savoir plus, voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>.</p>', # NEW
+	'refus_2' => 'majú povolené meniť tieto parametre.</p>
+<p>Ak chcete zistiť viac informácií, prečítajte si <a href="http://www.spip-contrib.net/-Autorite-">dokumentáciu.</a></p>',
 	'reglage_autorisations' => 'Nastavenie povolení',
 
 	// S
