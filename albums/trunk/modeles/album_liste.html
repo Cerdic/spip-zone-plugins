@@ -1,39 +1,27 @@
 #SET{environnement, (#EVAL{_request('exec');}|?{prive,publique})} [<!--(#REM) partie publique ou espace prive ? -->]
 
-<BOUCLE_album(ALBUMS){id_album}{tout}>
-
 [<!--(#REM) Liste de documents -->]
+<BOUCLE_album(ALBUMS){id_album}{tout}>
+[<!--(#REM) notice uniquement pour l'espace privé -->]
+[(#STATUT|!={publie}|et{#GET{environnement}|=={'prive'}}|oui) <span class='notice_album statut'><:album:info_statut_modele:></span>]
 <B_documents_joints>
-	<div class="albums album album_list clearfix p #ENV{align}">
-	[<h2>(#_album:TITRE)
-	[<!--(#REM) notice uniquement pour l'espace privé -->]
-	[(#STATUT|!={publie}|et{#GET{environnement}|=={'prive'}}|oui) <span class='notice statut'><:album:info_statut_modele:></span>]
-	</h2>]
+<div class="albums album album_list clearfix p #ENV{align}">
+	[<h2>(#_album:TITRE)</h2>]
 	<ul class="spip">
 		<BOUCLE_documents_joints(DOCUMENTS) {id_album}{tout}>[
 		<li>
-			<a href="(#URL_DOCUMENT)" type="#MIME_TYPE" class="spip_doc[ (#EXTENSION|attribut_html)]">[<strong class="#EDIT{titre} titre">(#TITRE|sinon{[(#FICHIER|basename)]})</strong> ]<small>([<abbr[ title="<:info_document:> (#TYPE_DOCUMENT)"] class="ext">(#EXTENSION|strtoupper)</abbr>][ &ndash; (#TAILLE|taille_en_octets)])</small></a>
-			[<div class="#EDIT{descriptif} descriptif">(#DESCRIPTIF)</div>]
+		<a href="(#URL_DOCUMENT)" type="#MIME_TYPE" class="spip_doc[ (#EXTENSION|attribut_html)]">
+		[<strong class="#EDIT{titre} titre">(#TITRE|sinon{[(#FICHIER|basename)]})</strong> ]<small>([<abbr[ title="<:info_document:> (#TYPE_DOCUMENT)"] class="ext">(#EXTENSION|strtoupper)</abbr>][ &ndash; (#TAILLE|taille_en_octets)])</small>
+		</a>
+		[<div class="#EDIT{descriptif} descriptif">(#DESCRIPTIF)</div>]
 		</li>]
 		</BOUCLE_documents_joints>
 	</ul>
-	</div>
-</B_documents_joints>
-
-[<!--(#REM) Liste des documents joints a l'objet -->]
-<B_article>
-<div class="albums album album_list clearfix p #ENV{align}">
-	[<h2>(#ENV{titre})</h2>]
-	<ul class="spip">
-		<BOUCLE_article(DOCUMENTS) {id_objet=#ENV{id_objet}} {extension !IN gif,jpg,png} {vu=non}{par num titre, date}>[
-		<li>
-			<a href="(#URL_DOCUMENT)" type="#MIME_TYPE" class="spip_doc[ (#EXTENSION|attribut_html)]">[<strong class="#EDIT{titre} titre">(#TITRE|sinon{[(#FICHIER|basename)]})</strong> ]<small>([<abbr[ title="<:info_document:> (#TYPE_DOCUMENT)"] class="ext">(#EXTENSION|strtoupper)</abbr>][ &ndash; (#TAILLE|taille_en_octets)])</small></a>
-			[<div class="#EDIT{descriptif} descriptif">(#DESCRIPTIF)</div>]
-		</li>]</BOUCLE_article>
-	</ul>
 </div>
-</B_article>
-
-<//B_documents_joints>
-
+</B_documents_joints>
 </BOUCLE_album>
+
+[<!--(#REM) Portfolio -->]
+[(#INCLURE{fond=inclure/documents,id_article=#ENV{id_article}})]
+
+<//B_album>

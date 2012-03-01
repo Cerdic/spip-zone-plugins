@@ -1,42 +1,25 @@
 #SET{environnement, (#EVAL{_request('exec');}|?{prive,publique})} [<!--(#REM) partie publique ou espace prive ? -->]
 
-<BOUCLE_album(ALBUMS){id_album}{tout}>
-
 [<!--(#REM) Album -->]
-<B_docs>
+<BOUCLE_album(ALBUMS){id_album}{tout}>
+[<!--(#REM) notice dans l'espace privé si album non-publié -->]
+[(#STATUT|!={publie}|et{#GET{environnement}|=={'prive'}}|oui) <span class='notice_album statut'><:album:info_statut_modele:></span>]
+<B_documents_joints>
 <div class="albums album_contenu clearfix p #ENV{align}">
-	[<h2>(#_album:TITRE)
-	[<!--(#REM) notice uniquement pour l'espace privé -->]
-	[(#STATUT|!={publie}|et{#GET{environnement}|=={'prive'}}|oui) <span class='notice statut'><:album:info_statut_modele:></span>]
-	</h2>]
+	[<h2>(#_album:TITRE)</h2>]
 	<ul>
-		<BOUCLE_docs(DOCUMENTS) {id_album}{tout}>[
+		<BOUCLE_documents_joints(DOCUMENTS) {id_album}>[
 		<li><a href="(#URL_DOCUMENT)" type="#MIME_TYPE" rel="album"[ class="(#EXPOSER)"][ title="(#TITRE|attribut_html|couper{80})"]>[(#LOGO_DOCUMENT
 		|image_reduire{0,100}
 		|inserer_attribut{class,spip_logos}
 		|inserer_attribut{alt,[(#TITRE|attribut_html|couper{60})]})]</a></li>
-		]</BOUCLE_docs>
+		]</BOUCLE_documents_joints>
 	</ul>
 </div>
-</B_docs>
+</B_documents_joints>
+</BOUCLE_album>
 
 [<!--(#REM) Portfolio -->]
-<B_article>
-<div class="albums album_contenu clearfix p #ENV{align}">
-	[<h2>(#_album:TITRE)</h2>]
-	<ul>
-		<BOUCLE_article(DOCUMENTS) {id_objet=#ENV{id_objet}} {mode=document}{extension IN png,jpg,gif} {par num titre, date}{doublons}{vu=non}>[
-		<li><a href="(#URL_DOCUMENT)" type="#MIME_TYPE" rel="album#ID_ARTICLE" onclick="location.href='[(#URL_ARTICLE
-		|parametre_url{id_document,#ID_DOCUMENT}
-		)]';return false;"[ class="(#EXPOSER)"][ title="(#TITRE|attribut_html|couper{80})"]>[(#FICHIER
-		|image_reduire{0,100}
-		|inserer_attribut{class,spip_logos}
-		|inserer_attribut{alt,[(#TITRE|attribut_html|couper{60})]})]</a></li>
-		]</BOUCLE_article>
-	</ul>
-</div>
-</B_article>
+[(#INCLURE{fond=inclure/documents,id_article=#ENV{id_article}})]
 
-<//B_docs>
-
-</BOUCLE_album>
+<//B_album>
