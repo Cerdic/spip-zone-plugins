@@ -587,7 +587,7 @@ Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère
 
 	// P
 	'pack_actuel' => 'Balík @date@',
-	'pack_actuel_avert' => 'Warning: the overrides of globals and of "define()" are not specified here', # MODIF
+	'pack_actuel_avert' => 'Varovanie: prepísané hodnoty globálnych hodnôt a funkcie "define()" sa tu nenachádzajú',
 	'pack_actuel_titre' => 'AKTUÁLNY BALÍK S NASTAVENIAMI MODULU VRECKOVÝ NOŽÍK',
 	'pack_alt' => 'See the current configuration parameters',
 	'pack_delete' => 'Vymazanie balíka s nastaveniami',
