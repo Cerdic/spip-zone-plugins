@@ -129,7 +129,7 @@
                                          style="display:block;padding:0px;margin:0px;">
             #SET{fermer_a,oui}]
          [(#GET{img_background}|=={'transparent'}|oui)
-            [(#FICHIER|image_reduire{ #GET{img_width},
+            [(#FICHIER|image_passe_partout{ #GET{img_width},
                                       #GET{img_height}}
                       |image_alpha{0}
                       |image_recadre{ #GET{img_width},
@@ -140,7 +140,7 @@
                       |inserer_attribut{style,"display:block;"})]
          ]
          [(#GET{img_background}|=={'transparent'}|non)
-            [(#FICHIER|image_reduire{ #GET{img_width},
+            [(#FICHIER|image_passe_partout{ #GET{img_width},
                                       #GET{img_height}}
                       |image_recadre{ #GET{img_width},
                                       #GET{img_height},
