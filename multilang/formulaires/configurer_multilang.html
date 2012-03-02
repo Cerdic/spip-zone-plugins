@@ -72,6 +72,18 @@
                </ul>
             </fieldset>
          </li>
+         <li class="fieldset">
+			<fieldset>
+				<h3 class="legend"><:multilang:cfg_langues:></h3>
+				[(#SET{langues,[(#CONFIG{langues_multilingue}|explode{','}|multilang_nommer_langues)]})]
+				[(#SAISIE{selection_multiple,langues_utilisees,
+					label=<:multilang:label_langues_utilisees:>,
+					explication=<:multilang:explication_langues_utilisees:>,
+					cacher_option_intro=oui,
+					datas=#GET{langues},
+					size=[(#GET{langues}|count|>{10}|?{10,#GET{langues}|count})]})]
+			</fieldset>
+		</li>
       </ul>
 
       <p class="boutons">

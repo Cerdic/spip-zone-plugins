@@ -64,7 +64,7 @@ function multilang_insert_head($flux){
  * @param array $config La configuration du plugin
  */
 function multilang_inserer_head($config=array()){
-	if(count(explode(',',$GLOBALS["meta"]["langues_multilingue"])) > 1){
+	if(count($langues = explode(',',$GLOBALS["meta"]["langues_multilingue"])) > 1){
 
 		$root = '' ;
 
@@ -106,12 +106,14 @@ function multilang_inserer_head($config=array()){
 		// Appel de multilang_init_lang si
 		// - document.ready
 		// - onAjaxLoad (cas des docs et de la configuration du site)
-
+		if(is_array($langues_config = lire_config('multilang/langues_utilisees'))){
+			$langues = implode(',',array_intersect($langues,$langues_config));
+		}
 		$data = '
 <script type="text/javascript" src="'.generer_url_public("multilang_lang.js","lang=".$GLOBALS["spip_lang"]).'"></script>
 <script type="text/javascript" src="'.find_in_path("javascript/multilang.js").'"></script>
 <script type="text/javascript">/* <![CDATA[ */
-	var multilang_avail_langs = "'.$GLOBALS["meta"]["langues_multilingue"].'".split(\',\'),
+	var multilang_avail_langs = "'.$langues.'".split(\',\'),
 	multilang_def_lang = "'.$GLOBALS["meta"]["langue_site"].'",
 	multilang_lang_courante = "'.$GLOBALS["spip_lang"].'",
 	multilang_dir_plugin = "'._DIR_PLUGIN_MULTILANG.'";
