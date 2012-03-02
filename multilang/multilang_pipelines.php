@@ -195,7 +195,7 @@ function multilang_affichage_final($flux){
 				$root .= ',input[type=hidden][name*=name_][value|=site]';
 			}
 			if($config['evenement']) { // Evenements
-				$root .= ',input[type=hidden][name*=name_][value|=evenement]';
+				$root .= ',input[type=hidden][name*=name_][value|=evenement]:not(input[value|=evenement-logo])';
 			}
 			if($config['motcle']) { // Mots
 				$root .= ',input[type=hidden][name*=name_][value|=mot]:not(input[value|=mot-logo])';
