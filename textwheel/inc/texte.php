@@ -20,6 +20,7 @@ include_spip('inc/textwheel');
 
 
 defined('_AUTOBR')||define('_AUTOBR', "<br class='autobr' />");
+define('_AUTOBR_IGNORER', "<!-- ig br -->");
 
 // Avec cette surcharge, cette globale n'est plus définie, et du coup ça plante dans les plugins qui font un foreach dessus comme ZPIP
 $GLOBALS['spip_raccourcis_typo'] = array();
@@ -904,6 +905,13 @@ function personnaliser_raccourcis(&$ruleset){
 // http://doc.spip.org/@traiter_raccourcis
 function traiter_raccourcis($t) {
 	static $wheel;
+
+	// hack1: respecter le tag ignore br
+	if (substr($t, 0, strlen(_AUTOBR_IGNORER)) == _AUTOBR_IGNORER) {
+		$ignorer_autobr = true;
+		$t = substr($t, strlen(_AUTOBR_IGNORER));
+	}
+
 	// Appeler les fonctions de pre_traitement
 	$t = pipeline('pre_propre', $t);
 
@@ -933,8 +941,14 @@ function traiter_raccourcis($t) {
 	if ($mes_notes)
 		$notes($mes_notes);
 
-	// hack: wrap des autobr dans l'espace prive, pour affichage css
+	// hack2: wrap des autobr dans l'espace prive, pour affichage css
 	// car en css on ne sait pas styler l'element BR
+	if ($ignorer_autobr) {
+		foreach (array('t', 'mes_notes') as $k) {
+			$rep = _DIR_RACINE ? '<span style="color:gray">&para;</span>' : '';
+			$$k = str_replace(_AUTOBR, $rep, $$k);
+		}
+	}
 	if (_DIR_RACINE) {
 		$manual = "<span style='color:green;'>&#x21B5;";
 		$auto = "<span style='color:orange;'>&para;";
