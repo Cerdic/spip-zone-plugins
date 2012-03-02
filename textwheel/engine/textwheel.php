@@ -18,6 +18,8 @@
  *
  */
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 require_once dirname(__FILE__)."/textwheelruleset.php";
 
 class TextWheel {
@@ -153,8 +155,9 @@ class TextWheel {
 	 */
 	protected function initRule(&$rule){
 		# language specific
-		if ($rule->require)
+		if ($rule->require){
 			require_once $rule->require;
+		}
 
 		# optimization: strpos or stripos?
 		if (isset($rule->strpos)) {
@@ -484,6 +487,7 @@ class TextWheelDebug extends TextWheel {
 			<table class='sortable'>
 			<caption>Temps par rule</caption>
 			<thead><tr><th>temps&nbsp;(ms)</th><th>rule</th><th>application</th><th>t/u&nbsp;(ms)</th><th>t/n-u&nbsp;(ms)</th></tr></thead>\n";
+			$total = 0;
 			foreach($time as $t => $r) {
 				$applications = intval(TextWheelDebug::$u[$r]);
 				$total += $t;

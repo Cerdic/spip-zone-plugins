@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2010                                                *
+ *  Copyright (c) 2001-2011                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -385,6 +385,7 @@ function protege_js_modeles($t) {
 // aussi les balises des squelettes qui ne passent pas forcement par propre ou typo apres
 // http://doc.spip.org/@interdire_scripts
 function interdire_scripts($arg) {
+	// on memorise le resultat sur les arguments non triviaux
 	static $dejavu = array();
 	static $wheel = null;
 
@@ -440,7 +441,7 @@ function safehtml($t) {
 // avec protection prealable des balises HTML et SPIP
 
 // http://doc.spip.org/@typo
-function typo($letexte, $echapper=true, $connect=null) {
+function typo($letexte, $echapper=true, $connect=null, $env=array()) {
 	// Plus vite !
 	if (!$letexte) return $letexte;
 
@@ -465,7 +466,8 @@ function typo($letexte, $echapper=true, $connect=null) {
 	//
 	// NOTE : propre() ne passe pas par ici mais directement par corriger_typo
 	// cf. inc/lien
-	$letexte = traiter_modeles($mem = $letexte, false, $echapper ? 'TYPO' : '', $connect);
+
+	$letexte = traiter_modeles($mem = $letexte, false, $echapper ? 'TYPO' : '', $connect, null, $env);
 	if ($letexte != $mem) $echapper = true;
 	unset($mem);
 
@@ -491,6 +493,7 @@ define('_TYPO_BALISE', ",</?[a-z!][^<>]*[".preg_quote(_TYPO_PROTEGER)."][^<>]*>,
 
 // http://doc.spip.org/@corriger_typo
 function corriger_typo($t, $lang='') {
+	static $typographie = array();
 	// Plus vite !
 	if (!$t) return $t;
 
@@ -515,8 +518,10 @@ function corriger_typo($t, $lang='') {
 	$e = ($e === $t);
 
 	// Charger & appliquer les fonctions de typographie
-	$typographie = charger_fonction(lang_typo($lang), 'typographie');
-	$t = $typographie($t);
+	$idxl = "$lang:" . (isset($GLOBALS['lang_objet'])? $GLOBALS['lang_objet']: $GLOBALS['spip_lang']);
+	if (!isset($typographie[$idxl]))
+		$typographie[$idxl] = charger_fonction(lang_typo($lang), 'typographie');
+	$t = $typographie[$idxl]($t);
 
 	// Les citations en une autre langue, s'il y a lieu
 	if (!$e) $t = echappe_retour($t, 'multi');
@@ -538,10 +543,12 @@ function corriger_typo($t, $lang='') {
 // Tableaux
 //
 
-define('_RACCOURCI_TH_SPAN', '\s*(?:{{[^{}]+}}\s*)?|<');
+define('_RACCOURCI_TH_SPAN', '\s*(:?{{[^{}]+}}\s*)?|<');
 
 // http://doc.spip.org/@traiter_tableau
 function traiter_tableau($bloc) {
+	// id "unique" pour les id du tableau
+	$tabid = substr(md5($bloc),0,4);
 
 	// Decouper le tableau en lignes
 	preg_match_all(',([|].*)[|]\n,UmsS', $bloc, $regs, PREG_PATTERN_ORDER);
@@ -552,7 +559,8 @@ function traiter_tableau($bloc) {
 
 	// Traiter chaque ligne
 	$reg_line1 = ',^(\|(' . _RACCOURCI_TH_SPAN . '))+$,sS';
-	$reg_line_all = ',^'  . _RACCOURCI_TH_SPAN . '$,sS';
+	$reg_line_all = ',^('  . _RACCOURCI_TH_SPAN . ')$,sS';
+	$hc = $hl = array();
 	foreach ($regs[1] as $ligne) {
 		$l ++;
 
@@ -568,7 +576,7 @@ function traiter_tableau($bloc) {
 			}
 		// - <thead> sous la forme |{{titre}}|{{titre}}|
 		//   Attention thead oblige a avoir tbody
-			else if (preg_match($reg_line1,	$ligne)) {
+			else if (preg_match($reg_line1,	$ligne, $thead)) {
 			  	preg_match_all('/\|([^|]*)/S', $ligne, $cols);
 				$ligne='';$cols= $cols[1];
 				$colspan=1;
@@ -583,7 +591,8 @@ function traiter_tableau($bloc) {
 					  }
 					  // inutile de garder le strong qui n'a servi que de marqueur 
 					  $cols[$c] = str_replace(array('{','}'), '', $cols[$c]);
-					  $ligne= "<th scope='col'$attr>$cols[$c]</th>$ligne";
+					  $ligne= "<th id='id{$tabid}_c$c'$attr>$cols[$c]</th>$ligne";
+						$hc[$c] = "id{$tabid}_c$c"; // pour mettre dans les headers des td
 					}
 				}
 
@@ -622,25 +631,31 @@ function traiter_tableau($bloc) {
 	$rowspans = $numeric = array();
 	$n = count($lignes[0]);
 	$k = count($lignes);
+	// distinguer les colonnes numeriques a point ou a virgule,
+	// pour les alignements eventuels sur "," ou "."
+	$numeric_class = array('.'=>'point',','=>'virgule');
 	for($i=0;$i<$n;$i++) {
 	  $align = true;
-	  for ($j=0;$j<$k;$j++) $rowspans[$j][$i] = 1;
 	  for ($j=0;$j<$k;$j++) {
-	    $cell = trim($lignes[$j][$i]);
-	    if (preg_match($reg_line_all, $cell)) {
-		if (!preg_match('/^\d+([.,]?)\d*$/', $cell, $r))
-		  { $align = ''; break;}
-		else if ($r[1]) $align = $r[1];
-	      }
+		  $rowspans[$j][$i] = 1;
+			if ($align AND preg_match('/^\d+([.,]?)\d*$/', trim($lignes[$j][$i]), $r)){
+				if ($r[1])
+					$align = $r[1];
+			}
+			else
+				$align = '';
 	  }
-	  $numeric[$i] = !$align ? '' :
-	    (" style='text-align: " .
-	     // http://www.w3.org/TR/REC-CSS2/tables.html#column-alignment
-	     // specifie text-align: "," pour cadrer le long de la virgule
-	     // mais les navigateurs ne l'implementent pas ou mal
-	     (/* $align !== true ?"\"$align\"" : */ 'right') .
-	     "'");
+	  $numeric[$i] = $align ? (" class='numeric ".$numeric_class[$align]."'") : '';
 	}
+	for ($j=0;$j<$k;$j++) {
+		if (preg_match($reg_line_all, $lignes[$j][0])) {
+			$hl[$j] = "id{$tabid}_l$j"; // pour mettre dans les headers des td
+		}
+		else
+			unset($hl[0]);
+	}
+	if (!isset($hl[0]))
+		$hl = array(); // toute la colonne ou rien
 
 	// et on parcourt le tableau a l'envers pour ramasser les
 	// colspan et rowspan en passant
@@ -668,15 +683,23 @@ function traiter_tableau($bloc) {
 			  if(($x=$rowspans[$l][$c])>1) {
 				$attr.= " rowspan='$x'";
 			  }
-			  $ligne= "\n<td".$attr.'>'.$cols[$c].'</td>'.$ligne;
+			  $b = ($c==0 AND isset($hl[$l]))?'th':'td';
+				$h = (isset($hc[$c])?$hc[$c]:'').' '.(($b=='td' AND isset($hl[$l]))?$hl[$l]:'');
+				if ($h=trim($h))
+					$attr.=" headers='$h'";
+				// inutile de garder le strong qui n'a servi que de marqueur
+				if ($b=='th') {
+					$attr.=" id='".$hl[$l]."'";
+					$cols[$c] = str_replace(array('{','}'), '', $cols[$c]);
+				}
+			  $ligne= "\n<$b".$attr.'>'.$cols[$c]."</$b>".$ligne;
 			}
 		}
 
 		// ligne complete
-		$class = alterner($l+1, 'even', 'odd');
-		$html = "<tr class='row_$class'>$ligne</tr>\n$html";
+		$class = alterner($l+1, 'odd', 'even');
+		$html = "<tr class='row_$class $class'>$ligne</tr>\n$html";
 	}
-
 	return "\n\n<table".$GLOBALS['class_spip_plus'].$summary.">\n"
 		. $debut_table
 		. "<tbody>\n"
@@ -904,7 +927,7 @@ function personnaliser_raccourcis(&$ruleset){
 
 // http://doc.spip.org/@traiter_raccourcis
 function traiter_raccourcis($t) {
-	static $wheel;
+	static $wheel, $notes;
 
 	// hack1: respecter le tag ignore br
 	if (substr($t, 0, strlen(_AUTOBR_IGNORER)) == _AUTOBR_IGNORER) {
@@ -927,10 +950,10 @@ function traiter_raccourcis($t) {
 			echo "<pre>\n".htmlspecialchars($f)."</pre>\n";
 			exit;
 		}
+		$notes = charger_fonction('notes', 'inc');
 	}
 
 	// Gerer les notes (ne passe pas dans le pipeline)
-	$notes = charger_fonction('notes', 'inc');
 	list($t, $mes_notes) = $notes($t);
 
 	$t = $wheel->text($t);
@@ -967,7 +990,7 @@ function traiter_raccourcis($t) {
 
 // Filtre a appliquer aux champs du type #TEXTE*
 // http://doc.spip.org/@propre
-function propre($t, $connect=null) {
+function propre($t, $connect=null, $env=array()) {
 	// les appels directs a cette fonction depuis le php de l'espace
 	// prive etant historiquement ecrits sans argment $connect
 	// on utilise la presence de celui-ci pour distinguer les cas
@@ -983,7 +1006,8 @@ function propre($t, $connect=null) {
 	if (!$t) return strval($t);
 
 	$t = echappe_html($t);
-	$t = expanser_liens($t,$connect);
+	$t = expanser_liens($t,$connect, $env);
+	
 	$t = traiter_raccourcis($t);
 	$t = echappe_retour_modeles($t, $interdire_script);
 

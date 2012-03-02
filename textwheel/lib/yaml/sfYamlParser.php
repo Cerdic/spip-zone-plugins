@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 require_once(dirname(__FILE__).'/sfYamlInline.php');
 
 /**

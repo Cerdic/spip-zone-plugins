@@ -40,3 +40,39 @@
               type: all
               replace: tw_liste_close
               is_callback: Y
+
+-
+  if_match: "/\n-(&nbsp;)?[\?!]\s/S"
+  type: all
+  is_wheel: Y
+  replace:
+    listes-decoupe-para2:
+      match: "\n\n"
+      type: split
+      is_wheel: Y
+      replace:
+        def-check:
+          if_str: "-"
+          if_match: "/-(&nbsp;)?[!\?]\s/S"
+          is_wheel: Y
+          type: all
+          replace:
+            def-wrap:
+              type: all
+              is_callback: Y
+              replace: tw_def_wrap
+            def-p-titre:
+              # premiere parenthese ne compte pas dans la profondeur
+              # capture deuxieme parenthese : ul
+              # capture troisime parenthese : ol
+              # nombre de car dans la 2eme ou 3eme parenthese = profondeur
+              match: ",(\n-(&nbsp;)?\?\s+)(.*)(?=(\z|\n-)),UsS"
+              replace: "<dt>$3</dt>"
+            def-p-desc:
+              # premiere parenthese ne compte pas dans la profondeur
+              # capture deuxieme parenthese : ul
+              # capture troisime parenthese : ol
+              # nombre de car dans la 2eme ou 3eme parenthese = profondeur
+              match: ",(\n-(&nbsp;)?!\s+)(.*)(?=(\z|\n-)),UsS"
+              replace: "<dd>$3</dd>"
+

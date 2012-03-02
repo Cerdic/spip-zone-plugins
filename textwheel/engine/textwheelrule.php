@@ -18,6 +18,8 @@
  *
  */
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 class TextWheelRule {
 
 	## rule description

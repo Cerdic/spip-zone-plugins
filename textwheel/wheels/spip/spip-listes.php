@@ -96,3 +96,8 @@ function tw_liste_item($t,$quoi='item'){
 
 	return $t;
 }
+
+function tw_def_wrap($t){
+	global $class_spip_plus;
+	return "<dl$class_spip_plus>\n$t</dl>\n";
+}

@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 /**
  * sfYaml offers convenience methods to load and dump YAML.
  *

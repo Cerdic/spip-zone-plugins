@@ -44,6 +44,10 @@ $GLOBALS['spip_wheels']['echappe_js'] = array(
 	'spip/echappe-js.yaml'
 );
 
+$GLOBALS['spip_wheels']['paragrapher'] = array(
+	'spip/spip-paragrapher.yaml'
+);
+
 //
 // Methode de chargement d'une wheel SPIP
 //
@@ -66,7 +70,9 @@ class SPIPTextWheelRuleset extends TextWheelRuleSet {
 	public static function &loader($ruleset, $callback = '', $class = 'SPIPTextWheelRuleset') {
 
 		# memoization
-		$key = 'tw-'.md5(serialize($ruleset).$callback.$class);
+		# attention : le ruleset peut contenir apres loading des chemins relatifs
+		# il faut donc que le cache depende du chemin courant vers la racine de SPIP
+		$key = 'tw-'.md5(serialize($ruleset).$callback.$class._DIR_RACINE);
 
 		# lecture du cache
 		include_spip('inc/memoization');
@@ -85,5 +91,11 @@ class SPIPTextWheelRuleset extends TextWheelRuleSet {
 	}
 }
 
+
+function tw_trig_purger($quoi){
+	if ($quoi=='cache')
+		purger_repertoire(_DIR_CACHE."wheels");
+	return $quoi;
+}
 
 ?>

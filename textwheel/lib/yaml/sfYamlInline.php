@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 /**
  * sfYamlInline implements a YAML parser/dumper for the YAML inline syntax.
  *
