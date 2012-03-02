@@ -1,0 +1,64 @@
+#CACHE{0}
+
+<h1>Check autobr</h1>
+
+<BOUCLE_chapo(ARTICLES){statut==.*}
+{chapo LIKE "<!-- ig br -->%"}{doublons a} />
+<BOUCLE_ps(ARTICLES){statut==.*}
+{ps LIKE "<!-- ig br -->%"}{doublons a} />
+<BOUCLE_texte(ARTICLES){statut==.*}
+{texte LIKE "<!-- ig br -->%"}{doublons a} />
+
+<BOUCLE_b(ARTICLES){statut==.*}
+{pagination 1000}
+{!doublons a}
+> </BOUCLE_b>
+[<p class="pagination">(#PAGINATION|replace{debut_a=\d+})</p>]
+</B_b>
+
+
+<B_a>
+
+[<p class="pagination">(#PAGINATION|replace{id_article=\d+})</p>]
+
+
+<ul>
+<BOUCLE_a(ARTICLES){statut==.*}
+	{pagination 200}
+	{!doublons a}
+>
+[(#SET{t,#TEXTE*|replace{<!-- ig br -->}|autobr_marquer|autobr_simplifier})]
+[(#GET{t}
+	|match{CHECKAUTOBR_}|et{#SET{tt,#GET{t}|propre}|ou{#GET{tt}|match{autobr}}}|oui)
+
+
+<li>
+[(#GET{tt}|explode{autobr}|count|moins{1}) autobr] dans <a href="./?exec=articles&amp;id_article=#ID_ARTICLE">#TITRE</a>
+([(#ID_ARTICLE)])
+</li>
+
+]</BOUCLE_a>
+</ul>
+
+</B_a>
+
+
+
+[(#AUTORISER{webmestre}|oui)
+
+<small>Cette page permet de d&#xE9;sactiver la prise en compte des sauts de ligne dans le stock d'articles du site&#xA0;; il sera possible de les valider, ou de les ignorer d&#xE9;finitivement, au cas par cas.</small>
+
+<form action="#SELF" method="POST">
+[(#SELF|form_hidden)]
+[<input type="hidden" name="securite" value="(#VAL{autobr}|calculer_cle_action)" />]
+<input type="hidden" name="ignorer_autobr" value="oui" />
+<input type="submit" name="" value="d&#xE9;sactiver les sauts de ligne sur les articles existants" />
+</form>
+
+
+]
+[(#AUTORISER{webmestre}|non)
+
+Le webmestre peut désactiver la gestion des sauts de ligne dans ces articles.
+
+]

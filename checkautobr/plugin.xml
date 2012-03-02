@@ -1,0 +1,18 @@
+<plugin>
+	<nom>CheckAutoBR: outil de conversion des sauts de ligne &para;</nom>
+	<auteur>Fil</auteur>
+	<licence>GNU/GPL</licence>
+	<version>0.1.0</version>
+	<etat>test</etat>
+	<description>Convertir les sauts de ligne dans les vieux articles
+	<a href="?exec=checkautobr">checkautobr &para;</a>
+	</description>
+	<prefix>checkautobr</prefix>
+	<categorie>outil</categorie>
+	<necessite id="tw" version="[0.3.3;]" />
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<action>ajoute_bouton_autobr</action>
+		<inclure>bouton_autobr.php</inclure>
+	</pipeline>
+</plugin>
