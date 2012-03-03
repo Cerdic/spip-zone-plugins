@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_descr_multilang' => 'Multilang: zásuvný modul na správu multitagov',
 	'cfg_effacer' => 'Znova spustiť',
 	'cfg_explication_crayons' => 'Treba aktivovať multilang na používanie na verejne prístupnej stránke.',
+	'cfg_langues' => 'Langues utilisées', # NEW
 	'cfg_lbl_article' => 'článkov',
 	'cfg_lbl_auteur' => 'autorov',
 	'cfg_lbl_breve' => 'noviniek',
@@ -30,7 +31,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_numero' => 'Číslo',
 	'configuration_multilang' => 'Multilang',
 
+	// E
+	'explication_langues_utilisees' => 'Sélectionnez les langues à utiliser pour le menu de multilang. N\'en sélectionnez aucune pour toutes les utiliser.', # NEW
+
 	// L
+	'label_langues_utilisees' => 'Langues utilisées par multilang', # NEW
 	'lien_desactiver' => 'Všetky',
 	'lien_multi_title' => 'Upraviť viacjazyčné polia v jazyku "@lang@"',
 	'lien_multi_title_sans' => 'Verzia v jazyku "@lang@" je neúplná. Kliknite, ak ju chcete upraviť.',

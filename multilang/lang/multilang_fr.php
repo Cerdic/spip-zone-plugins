@@ -28,10 +28,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_multilang' => 'Multilang',
 	'champ_numero' => 'Numéro',
 	'configuration_multilang' => 'Multilang',
-	
+
 	// E
 	'explication_langues_utilisees' => 'Sélectionnez les langues à utiliser pour le menu de multilang. N\'en sélectionnez aucune pour toutes les utiliser.',
-	
+
 	// L
 	'label_langues_utilisees' => 'Langues utilisées par multilang',
 	'lien_desactiver' => 'Tout',
