@@ -19,10 +19,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_adresse_serveur' => 'Zadajte adresu stránky bez "http://" alebo "https://" a bez lomky na konci',
-	'explication_creer_site' => 'The link below enables you to create a site on the Piwik server which will then be available from the list.Check that you have correctly entered the address and name of your SPIP site before clicking, as these are the details will be used later.', # NEW
+	'explication_creer_site' => 'Odkaz vám umožňuje vytvoriť stránku na serveri s Piwikom, ktorá bude potom dostupná na zozname. Pred kliknutím skontrolujte, či ste správne zadali adresu a názov svojej stránky v SPIPe, lebo tieto údaje sa budú neskôr používať.',
 	'explication_exclure_ips' => 'Ak vymenujete niekoľko adries, ktoré majú byť vylúčené, oddeľte ich bodkočiarkami',
-	'explication_identifiant_site' => 'The list of sites available on the Piwik server has been automatically retrieved using the submitted details. Select the one you wish to use from the list below', # NEW
-	'explication_mode_insertion' => 'There are two methods for inserting the code pages required to make the plugin work correctly: either with the "insert_head" pipeline (an automatic method with only minor configurations possible), or by inserting a tag (a manual method of including the #PIWIK tag at the bottom of your pages), which is fully configurable.', # NEW
+	'explication_identifiant_site' => 'Zoznam dostupných stránok na serveri s Piwikom bol automaticky získaný pomocou odoslaných údajov. Zo zoznamu si vyberte tú, ktorú chcete použiť.',
+	'explication_mode_insertion' => 'Na vloženie kódu potrebného na správne fungovanie zásuvného modulu sú dva spôsoby. Cez "insert_head" (automatický spôsob, čo sa však nedá upraviť) alebo vložením tagu (manuálne, vložením tagu #PIWIK do päty vašich stránok), čo sa dá upraviť celkom podľa vašich želaní.',
 	'explication_recuperer_liste' => 'Tento odkaz sa používa na získavanie zoznamu stránok, ktoré môže váš účet riadiť na vašom serveri s Piwikom.',
 	'explication_restreindre_statut_prive' => 'Vyberte funkcie používateľov, ktorí nebudú zarátaní do štatistík pre súkromnú zónu',
 	'explication_restreindre_statut_public' => 'Vyberte funkcie používateľov, ktorí sa nebudú brať do úvahy pri štatistikách pre verejne prístupnú stránku',
