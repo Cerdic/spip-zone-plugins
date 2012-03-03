@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'editer_composition' => 'Modifier cette composition', # NEW
-	'editer_composition_heritages' => 'Définir les héritages', # NEW
+	'editer_composition_heritages' => 'Definovať dedičnosť',
 	'editer_compositions' => 'Gérer les compositions du noiZetier', # NEW
 	'editer_configurer_page' => 'Nastaviť oriešky tejto stránky',
 	'editer_exporter_configuration' => 'Exportovať konfiguráciu',
@@ -30,9 +30,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_noizetier_titre' => 'Riadiť oriešky',
 	'editer_nouvelle_composition' => 'Créer une nouvelle composition', # NEW
 	'erreur_doit_choisir_noisette' => 'Musíte si vybrať oriešok.',
-	'erreur_mise_a_jour' => 'Une erreur s\'est produite pendant la mise à jour de la base de donnée.', # NEW
+	'erreur_mise_a_jour' => 'Pri aktualizovaní databázy sa vyskytla chyba.',
 	'explication_heritages_composition' => 'Vous pouvez définir ici les compositions qui seront héritées par les objets de la branche.', # NEW
-	'explication_noizetier_css' => 'Vous pouvez ajouter à la noisette d\'éventuelles classes CSS supplémentaires.', # NEW
+	'explication_noizetier_css' => 'Oriešku môžete pridať hocijaké ďalšie triedy CSS',
 	'explication_raccourcis_typo' => 'Môžete používať klávesové skratky SPIPu.',
 
 	// F
@@ -46,9 +46,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_deplacer_haut' => 'Posunúť nahor',
 	'formulaire_description' => 'Popis',
 	'formulaire_description_explication' => 'Môžete využívať zvyčajné skrtky SPIPu, najmä tag &lt;multi&gt;.',
-	'formulaire_erreur_format_identifiant' => 'L\'identifiant ne peut contenir que des minuscules sans accent, des chiffres et le caractère _ (underscore).', # NEW
+	'formulaire_erreur_format_identifiant' => 'V identifikátore môžu byť len malé písmená bez diakritiky, čísla a znak _ (podčiarkovník).',
 	'formulaire_icon' => 'Ikona',
-	'formulaire_icon_explication' => 'Vous pouvez saisir le chemin relatif vers une icône (par exemple : <i>images/objet-liste-contenus.png</i>). Pour voir une liste d\'images installèes dans les répertoires les plus courants, vous pouvez <a href="../spip.php?page=icones_preview">consulter cette page</a>.', # NEW
+	'formulaire_icon_explication' => 'Môžete zadať relatívnu adresu umiestnenia ikony (napríklad: <i>images/objet-liste-contenus.png</i>). Ak si chcete pozrieť zoznam obrázkov nainštalovaných v najbežnejších priečinkoch, môžete <a href="../spip.php?page=icones_preview">navštíviť túto stránku.</a>',
 	'formulaire_identifiant_deja_pris' => 'Tento identifikátor sa už používa!',
 	'formulaire_import_compos' => 'Importer les compositions du noizetier', # NEW
 	'formulaire_import_fusion' => 'Zlúčiť s aktuálnymi nastaveniami',
@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_modifier_composition' => 'Modifier cette composition :', # NEW
 	'formulaire_modifier_composition_heritages' => 'Modifier les héritages de cette composition :', # NEW
 	'formulaire_modifier_noisette' => 'Upraviť tento oriešok',
-	'formulaire_noisette_sans_parametre' => 'Cette noisette ne propose pas de paramètre.', # NEW
+	'formulaire_noisette_sans_parametre' => 'Tento oriešok neponúka nastavenie.',
 	'formulaire_nom' => 'Názov',
 	'formulaire_nom_explication' => 'Môžete používať tag  &lt;multi&gt;.',
 	'formulaire_nouvelle_composition' => 'Nouvelle composition', # NEW
@@ -69,14 +69,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_type' => 'Type de composition', # NEW
 	'formulaire_type_explication' => 'Indiquez sur quel objet / quelle page porte cette composition.', # NEW
 	'formulaire_type_import' => 'Typ nahrávania',
-	'formulaire_type_import_explication' => 'Vous pouvez fusionner le fichier de configuration avec votre configuration actuelle (les noisettes de chaque page seront ajoutées à vos noisettes déjà définies) ou bien remplacer votre configuration par celle-ci.', # NEW
+	'formulaire_type_import_explication' => 'Súbor s nastaveniami môžete zlúčiť so svojimi aktuálnymi nastaveniami (oriešky každej stránky budú pridané k orieškom, ktoré sú už definované) alebo ním môžete svoje nastavenia nahradiť.',
 
 	// I
 	'ieconfig_ne_pas_importer' => 'Nenahrávať',
 	'ieconfig_noizetier_export_explication' => 'Exportera la configuration des noisettes et les compositions du noiZetier.', # NEW
 	'ieconfig_noizetier_export_option' => 'Zaradené do exportu?',
-	'ieconfig_non_installe' => '<b>Plugin Importeur/Exporteur de configurations :</b> ce plugin n\'est pas installés sur votre site. Il n\'est pas nécessaire au fonctionnement du noizetier. Cependant, s\'il est activé, vous pourrez exportez et importers des configurations de noisettes dans le noizetier.', # NEW
-	'ieconfig_probleme_import_config' => 'Un problème a été rencontré lors de l\'importation de la configuration du noiZetier.', # NEW
+	'ieconfig_non_installe' => '<b>Zásuvný modul Importeur/Exporteur de configurations (Nahrávanie a export nastavení):</b> tento zásuvný modul ešte nie je nainštalovaný na vašej stránke. Na spúšťanie Noizetiera nie je potrebný. Keď si ho však aktivujete, budete môcť exportovať a náhravať nastavenia orieškov modulu Noizetier.',
+	'ieconfig_probleme_import_config' => 'Pri nahrávaní nastavení modulu noiZetier sa vyskytol problém.',
 	'info_composition' => 'COMPOSITION :', # NEW
 	'info_page' => 'STRÁNKA:',
 	'installation_tables' => 'Tabuľky zásuvného modulu noiZetier boli nainštalované.<br />',
@@ -95,15 +95,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'ne_pas_definir_d_heritage' => 'Nedefinovať dedičnosť',
 	'noisettes_composition' => 'Noisettes spécifiques à la composition <i>@composition@</i> :', # NEW
-	'noisettes_page' => 'Noisettes spécifiques à la page <i>@type@</i> :', # NEW
+	'noisettes_page' => 'Špeciálne oriešky pre stránku <i>@type@</i>:',
 	'noisettes_toutes_pages' => 'Oriešky spoločné pre všetky stránky:',
-	'noizetier' => 'noiZetier', # NEW
+	'noizetier' => 'noiZetier',
 	'nom_bloc_contenu' => 'Obsah',
-	'nom_bloc_extra' => 'Extra', # NEW
+	'nom_bloc_extra' => 'Extra',
 	'nom_bloc_navigation' => 'Navigácia',
 	'nom_bloctexte' => 'Blok voľného textu',
 	'non' => 'Nie',
-	'notice_enregistrer_rang' => 'Cliquez sur Enregistrer pour sauvegarder l\'ordre des noisettes.', # NEW
+	'notice_enregistrer_rang' => 'Ak chcete uložiť poradie orieškov, kliknite na tlačidlo Uložiť.',
 
 	// O
 	'oui' => 'Áno',
@@ -113,7 +113,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// W
 	'warning_noisette_plus_disponible' => 'POZOR: tento oriešok nie je dostupný.',
-	'warning_noisette_plus_disponible_details' => 'Le squelette de cette noisette (<i>@squelette@</i>) n\'est plus accessible. Il se peut qu\'il s\'agisse d\'une noisette nécessitant un plugin que vous avez désactivé ou désinstallé.' # NEW
+	'warning_noisette_plus_disponible_details' => 'Šablóna tohto orieška (<i>@squelette@</i>) je nedostupná. Možno oriešok potrebuje zásuvný modul, ktorý ste deaktivovali alebo odinštalovali.'
 );
 
 ?>
