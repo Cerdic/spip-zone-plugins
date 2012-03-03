@@ -34,41 +34,47 @@ function action_purger_dist($arg=null)
 	spip_log("purger $arg");
 
 	switch ($arg) {
+		case 'inhibe_cache':
+			// inhiber le cache pendant 24h
+			ecrire_meta('cache_inhib',$_SERVER['REQUEST_TIME']+24*3600);
+			break;
+		case 'reactive_cache':
+			effacer_meta('cache_inhib');
+			break;
 
-	case 'cache': 
-		supprime_invalideurs();
-		@spip_unlink(_CACHE_RUBRIQUES);
-		@spip_unlink(_CACHE_PIPELINES);
-		@spip_unlink(_CACHE_PLUGINS_PATH);
-		@spip_unlink(_CACHE_PLUGINS_OPT);
-		@spip_unlink(_CACHE_PLUGINS_FCT);
-		@spip_unlink(_CACHE_PLUGINS_VERIF);
-		@spip_unlink(_CACHE_CHEMIN);
-		purger_repertoire(_DIR_AIDE);
-		purger_repertoire(_DIR_VAR.'cache-css');
-		purger_repertoire(_DIR_VAR.'cache-js');
+		case 'cache':
+			supprime_invalideurs();
+			@spip_unlink(_CACHE_RUBRIQUES);
+			@spip_unlink(_CACHE_PIPELINES);
+			@spip_unlink(_CACHE_PLUGINS_PATH);
+			@spip_unlink(_CACHE_PLUGINS_OPT);
+			@spip_unlink(_CACHE_PLUGINS_FCT);
+			@spip_unlink(_CACHE_PLUGINS_VERIF);
+			@spip_unlink(_CACHE_CHEMIN);
+			@spip_unlink(_DIR_TMP."plugin_xml_cache.gz");
+			# purge a l'ancienne des fichiers de tmp/cache/
+			purger_repertoire(_DIR_CACHE,array('subdir'=>true));
+			purger_repertoire(_DIR_AIDE);
+			purger_repertoire(_DIR_VAR.'cache-css');
+			purger_repertoire(_DIR_VAR.'cache-js');
 
-		# purge a l'ancienne des fichiers de tmp/cache/
-		purger_repertoire(_DIR_CACHE,array('subdir'=>true));
+			# ajouter une mark pour les autres methodes de memoization
+			ecrire_meta('cache_mark', time());
+			/* compat SPIP 1.9 */
+			if (function_exists('ecrire_metas')) ecrire_metas();
 
-		# ajouter une mark pour les autres methodes de memoization
-		ecrire_meta('cache_mark', time());
-		/* compat SPIP 1.9 */
-		if (function_exists('ecrire_metas')) ecrire_metas();
+			break;
 
-		break;
+		case 'squelettes':
+			purger_repertoire(_DIR_SKELS);
+			break;
 
-	case 'squelettes':
-		purger_repertoire(_DIR_SKELS);
-		break;
-
-	case 'vignettes':
-		purger_repertoire(_DIR_VAR,array('subdir'=>true));
-		supprime_invalideurs();
-		purger_repertoire(_DIR_CACHE);
-		break;
+		case 'vignettes':
+			purger_repertoire(_DIR_VAR,array('subdir'=>true));
+			supprime_invalideurs();
+			purger_repertoire(_DIR_CACHE);
+			break;
 	}
-
 
 	/* compat SPIP 1.9 */
 	if (isset($redirect)) {
