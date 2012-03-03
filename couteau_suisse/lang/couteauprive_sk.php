@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// 2
-	'2pts_non' => ' : č.',
+	'2pts_non' => ' : nie',
 	'2pts_oui' => ' : áno',
 
 	// S
@@ -127,14 +127,14 @@ Príklady: <code>#SET{x,1}#SET_PLUS{x,2}</code> alebo <code>#SET{x,avions}#SET_R
 	'categ:spip' => '50. Tags, filters, criteria',
 	'categ:typo-corr' => '20. Text improvements',
 	'categ:typo-racc' => '30. Klávesové skratky',
-	'certaines_couleurs' => 'Only the tags defined below @_CS_ASTER@:',
+	'certaines_couleurs' => 'Len tagy definované nižšie @_CS_ASTER@:',
 	'chatons:aide' => 'Smajlíky: @liste@',
 	'chatons:description' => 'Nahradiť <code>názov</code> obrázkami smajlíkov.
 _ Tento nástroj nahradí skratky obrázkami s rovnakým názvom, ktoré sa našli v priečinku <code>mon_squelette_toto/img/chatons/</code>, alebo podľa predvolených nastavení v priečinku <code>couteau_suisse/img/chatons/</code>.',
 	'chatons:nom' => 'Smajlíky',
 	'citations_bb:description' => 'Na dodržanie HTML v spipovskom obsahu vašej stránky (články, rubriky, atď.) tento nástroj nahradí označenie <quote> označením <q> tam, kde je prázdny riadok. ',
-	'citations_bb:nom' => 'Well delimited citations',
-	'class_spip:description1' => 'Here you can define some SPIP shortcuts. An empty value is equivalent to using the default.[[%racc_hr%]]',
+	'citations_bb:nom' => 'Dobre označené citácie',
+	'class_spip:description1' => 'Tu môžete definovať niektoré skratky SPIPu. Prázdna hodnota znamená používanie predvolenej.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{skratky SPIPU}}.
 
 Tu môžete definovať skratky SPIPU. Prázdna hodnota je ekvivalentom k použitiu predvolenej. [[%racc_hr%]][[%puce%]]',
@@ -264,7 +264,7 @@ This tool may be combined with "[.->sommaire]".', # MODIF
 	'devdebug:item_espace_public' => 'Verejná zóna',
 	'devdebug:item_tout' => 'Celý SPIP',
 	'devdebug:nom' => 'Vývojový ladič',
-	'distant_aide' => 'This tool requires remote files which must all be correctly installed in the library. Before activating this tool or updating this frame, make sure that the required files really are available on the remote server.', # NEW
+	'distant_aide' => 'Tento nástroj si vyžaduje vzdialené súbory, ktoré musia byť správne nainštalované do knižnice. Pred aktivovaním tohto nástroja alebo aktualizovaním tohto rámu sa uistite, že sa požadované súbory naozaj nachádzajú na vzdialenom serveri.',
 	'distant_charge' => 'Súbor sa správne stiahol a nainštaloval do knižnice.',
 	'distant_charger' => 'Začať sťahovanie',
 	'distant_echoue' => 'Chyba pri nahrávaní, tento nástroj možno nefunguje!',
@@ -299,7 +299,7 @@ When making an official update, update the associated remote file (click above o
 	'en_travaux:description' => 'Makes it possible to display a customised message on the public site and also in the editing area during maintenance work.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]', # MODIF
 	'en_travaux:nom' => 'Stránka v režime údržby',
-	'erreur:bt' => '<span style=\\"color:red;\\">Warning:</span> the typographical bar appears to be an old version (@version@).<br />The Penknife is compatible only with version @mini@ or newer.', # MODIF
+	'erreur:bt' => '<span style=\\"color:red;\\">Pozor:</span> zdá sa, že verzia typografického panela je stará(@version@).<br />Modul Vreckový nožík je kompatibilný iba s verziou @mini@ alebo s novšou.',
 	'erreur:description' => 'missing id in the tool\'s definition!',
 	'erreur:distant' => 'Vzdialený server',
 	'erreur:jquery' => '{{N.B.}} : {jQuery} does not appear to be active for this page. Please consult the paragraph about the plugin\'s required libraries [in this article->http://www.spip-contrib.net/?article2166] or reload this page.',
@@ -371,9 +371,9 @@ _ • [Celý zásuvný modul|Nastaviť na pôvodné nastavenia zásuvného modul
 	'horloge:nom' => 'Hodiny',
 
 	// I
-	'icone_visiter:description' => 'Replaces the standard "Visit" button (top right on this page) by the site logo, if it exists.
+	'icone_visiter:description' => 'Nahradí štandardné tlačidlo  "Navštíviť" (vpravo hore na tejto stránke) logom stránky, ak existuje.
 
-To set this logo, go to the page "Site configuration" by clicking the "Configuration" button.', # MODIF
+Ak chcete toto logo nastaviť, choďte na "Konfiguráciu stránky" kliknutím na tlačidlo "Konfigurácia".',
 	'icone_visiter:nom' => 'Tlačidlo "Navštíviť"',
 	'insert_head:description' => 'Activate the tag [#INSERT_HEAD->http://www.spip.net/en_article2421.html] in all templates, whether or not this tag is present between <head> et </head>. This option can be used to allow plugins to insert javascript code (.js) or stylesheets (.css).',
 	'insert_head:nom' => 'Tag #INSERT_HEAD',
@@ -539,7 +539,7 @@ Note : les paquets <code>.zip</code> n\'étant pas reconstruits instantanément,
 
 Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère <code>{tout_voir}</code> aux boucles de votre squelette.', # NEW
 	'masquer:nom' => 'Šifrovanie odkazu',
-	'meme_rubrique:description' => 'Define here the number of objects listed in the panel labelled "<:info_meme_rubrique:>" available on some of the private zone pages.[[%meme_rubrique%]]', # NEW
+	'meme_rubrique:description' => 'Určte počet objektov vypísaných na paneli s názvom "<:info_meme_rubrique:>", ktorý sa nachádza na niektorých stránkach súkromnej zóny.[[%meme_rubrique%]]',
 	'message_perso' => 'Veľká vďaka prekladateľom, ktorí sa dostali až sem. Pat ;-)',
 	'moderation_admins' => 'authenticated administrators',
 	'moderation_message' => 'This forum is pre-moderated: your contribution will only appear once it has been validated by one of the site administrators (unless you are logged in and authorised to post directly).',
@@ -649,9 +649,9 @@ If you reset the plugin by clicking on a pack, the Penknife will reconfigure its
 	'simpl_interface:description' => 'Deactivates the pop-up menu for changing article status which shows onmouseover on the coloured status bullets. This can be useful if you wish to have an editing interface which is as simple as possible for the users.',
 	'simpl_interface:nom' => 'Simplification of the editing interface',
 	'smileys:aide' => 'Smajlíky: @liste@',
-	'smileys:description' => 'Inserts smileys in texts containing a shortcut in this form <acronym>:-)</acronym>. Ideal for forums.
-_ A tag is available for displaying a table of smileys in templates: #SMILEYS.
-_ Images : [Sylvain Michel->http://www.guaph.net/]', # MODIF
+	'smileys:description' => 'Vloží smajlíkov do textu, v ktorom sú skratky v podobe <acronym>:-)</acronym>. Ideálne pre diskusné fóra.
+_ Tag je k dispozícii na zobrazenie tabuľky smajlíkov v šablónach: #SMILEYS.
+_ Obrázky: [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'Smajlíky',
 	'soft_scroller:description' => 'Gives a slow scroll effect when a visitor clicks on a link with an anchor tag. This helps the visitor to know where they are in a long text.
 
@@ -693,7 +693,7 @@ _ Example:~{<html>\\"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/\\"</html>}.</q1>
 	'spam_ip' => 'Zablokovanie IP adresy @ip@:',
 	'spam_test_ko' => 'This message would be blocked by the anti-SPAM filter!',
 	'spam_test_ok' => 'This message would be accepted by the anti-SPAM filter!',
-	'spam_tester_bd' => 'Also test your database and list the messages which have been blocked by the tool\'s current configuration settings.', # NEW
+	'spam_tester_bd' => 'Tiež otestuje vašu databázu a vypíše správy, ktoré zablokovali aktuálne nastavenia tohto nástroja.',
 	'spam_tester_label' => 'Tu otestujte svoj zoznam zakázaných slov:',
 	'spip_cache:description' => '@puce@ The cache occupies disk space and SPIP can limit the amount of space taken up. Leaving empty or putting 0 means that no limit will be applied.[[%quota_cache% Mo]]
 
