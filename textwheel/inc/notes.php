@@ -24,7 +24,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // en particulier, envoyer un tableau vide permet de tout recuperer
 // C'est stocke dans la globale $les_notes, mais pas besoin de le savoir
 
-function inc_notes_dist($arg,$operation='traiter')
+function inc_notes_dist($arg,$operation='traiter', $ignorer_autobr=false)
 {
 	static $pile = array();
 	static $next_marqueur = 1;
@@ -32,7 +32,7 @@ function inc_notes_dist($arg,$operation='traiter')
 	global $les_notes, $compt_note, $notes_vues;
 	switch ($operation){
 		case 'traiter':
-			if (is_array($arg)) return traiter_les_notes($arg);
+			if (is_array($arg)) return traiter_les_notes($arg,$ignorer_autobr);
 			else
 				return traiter_raccourci_notes($arg, $marqueur>1?$marqueur:'');
 			break;
@@ -152,7 +152,7 @@ function traiter_raccourci_notes($letexte, $marqueur_notes)
 
 
 // http://doc.spip.org/@traiter_les_notes
-function traiter_les_notes($notes) {
+function traiter_les_notes($notes,$ignorer_autobr) {
 	global $ouvre_note, $ferme_note;
 
 	$mes_notes = '';
@@ -169,6 +169,8 @@ function traiter_les_notes($notes) {
 			. $texte
 			.'</div>';
 		}
+		if ($ignorer_autobr)
+			$mes_notes = _AUTOBR_IGNORER.$mes_notes;
 		$mes_notes = propre($mes_notes);
 	}
 	return ($GLOBALS['les_notes'] .= $mes_notes);

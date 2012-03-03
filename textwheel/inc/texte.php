@@ -933,7 +933,8 @@ function traiter_raccourcis($t) {
 	if (substr($t, 0, strlen(_AUTOBR_IGNORER)) == _AUTOBR_IGNORER) {
 		$ignorer_autobr = true;
 		$t = substr($t, strlen(_AUTOBR_IGNORER));
-	}
+	} else
+		$ignorer_autobr = false;
 
 	// Appeler les fonctions de pre_traitement
 	$t = pipeline('pre_propre', $t);
@@ -962,25 +963,21 @@ function traiter_raccourcis($t) {
 	$t = pipeline('post_propre', $t);
 
 	if ($mes_notes)
-		$notes($mes_notes);
+		$notes($mes_notes,'traiter',$ignorer_autobr);
 
 	// hack2: wrap des autobr dans l'espace prive, pour affichage css
 	// car en css on ne sait pas styler l'element BR
 	if ($ignorer_autobr) {
-		foreach (array('t', 'mes_notes') as $k) {
-			$rep = _DIR_RACINE ? '<span style="color:gray">&para;</span>' : '';
-			$$k = str_replace(_AUTOBR, $rep, $$k);
-		}
+		$rep = _DIR_RACINE ? '<span style="color:gray">&para;</span>' : '';
+		$t = str_replace(_AUTOBR, $rep, $t);
 	}
 	if (_DIR_RACINE) {
 		$manual = "<span style='color:green;'>&#x21B5;";
 		$auto = "<span style='color:orange;'>&para;";
-		foreach (array('t', 'mes_notes') as $k) {
-			if (false !== strpos(strtolower($$k), '<br')) {
-				$$k = preg_replace("/<br\b.*>/UiS", "$manual\\0</span>", $$k);
-				if (_AUTOBR)
-					$$k = str_replace($manual._AUTOBR, $auto._AUTOBR, $$k);
-			}
+		if (false !== strpos(strtolower($t), '<br')) {
+			$t = preg_replace("/<br\b.*>/UiS", "$manual\\0</span>", $t);
+			if (_AUTOBR)
+				$t = str_replace($manual._AUTOBR, $auto._AUTOBR, $t);
 		}
 	}
 
