@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'acces' => 'Prístup',
+	'acces' => 'Prístupnosť',
 	'afficher_tables' => 'Zobraziť hodnotenia',
 	'aide' => 'Pomocník',
 	'articles' => 'Články',
@@ -43,15 +43,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_acces' => 'Otvoriť hodnotenie: ',
-	'info_etoiles' => 'Ce paramètre vous permet de modifier la valeure maximale de la note (le nombre d\'étoiles, entre 1 et 10, et 5 par défaut).<br />
-                    <strong style="color:red">/!\\ Attention</strong> : vous ne devez pas toucher à ce paramètre une fois la notation engagée car les notes ne seront pas recalculées et cela peut provoquer des incohérences dans la notation...<br />
-                    Ce paramètres doit être fixé une fois pour toute à la création des notes.', # NEW
+	'info_etoiles' => 'Tento parameter vám umožňuje zmeniť maximálnu hodnotu hodnotenia (počet hviezdičiek od 1 do 10, a 5 podľa predvolených nastavení).<br />
+                    <strong style="color:red">/!\\ Pozor:</strong> toto nastavenie nesmiete meniť po uložení hodnotenia, lebo hodnotenia sa neprepočítajú, čo môže spôsobiť nepresnosť vo vyhodnotení.<br />
+                    Tieto parametre musia byť pri vytváraní hodnotení rovnaké.',
 	'info_fonctionnement_note' => 'Ako hodnotenie funguje',
-	'info_ip' => 'Pour être le plus facile possible d\'utilisation, la note est fixée sur l\'adresse IP du votant, ce qui évite deux votes successifs dans la base, avec quelques inconvénients... en particulier si vous gérez des votes d\'auteurs.<br />
-                Dans ce cas, on fixe la note sur l\'identifiant de l\'utilisateur (quand celui-ci est enregistré, bien sûr).<br />
-                Si vous voulez garantir l\'unicité de la note, limitez le vote aux <b>seules</b> personnes enregistrées (ci-dessus).', # NEW
+	'info_ip' => 'Na čo najľahšie používanie sa hodnotenie priraďuje IP adrese hodnotiteľa, čo s určitými nevýhodami bráni následným duplicitným hodnoteniam. Najmä ak riadite hlasovanie autorov.<br />
+                V tomto prípade sa hodnotenie priraďuje k prihlasovaciemu údaju používateľa (samozrejme, keď sa zaregistroval).<br />
+                Ak chcete zaistiť jedinečnosť hodnotenia, vyhraďte hodnotenie <b>iba</b> pre zaregistrovaných používateľov (vyššie).',
 	'info_modifications' => 'Zmeny známok',
-	'info_ponderation' => 'Le facteur de pondération permet d\'accorder plus de valeur aux articles ayant reçu suffisament de votes. <br /> Entrez ci-dessous la nombre de votes au delà duquel vous pensez que la note est fiable.', # NEW
+	'info_ponderation' => 'Váha umožňuje prirátať hodnotu článkom, ktoré dostali dosť hlasov. <br /> Zadajte počet hlasov, nad ktorý je podľa vás hodnotenie spoľahlivé.',
 	'ip' => 'IP',
 	'item_adm' => 'administrátorom ',
 	'item_all' => 'všetkým',
