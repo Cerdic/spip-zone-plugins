@@ -198,6 +198,6 @@ function oembed_pre_propre($texte) {
 }
 
 include_spip('inc/config');
-if (!function_exists('lire_config')) { function lire_config() {} }
+if (!function_exists('lire_config')) { function lire_config($a=null,$b=null) { return $b; } }
 
 ?>
