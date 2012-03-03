@@ -135,7 +135,7 @@ Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubr
 	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] distribuovaný pod licenciou [GNU GPL v3.->http://www.opensource.org/licenses/gpl-3.0.html]',
 
 	// M
-	'mail_body_01' => '@nom_exped@ (contact : @mail_exped@) vous invite à consulter le document ci-dessous, tiré du site @nom_site@, susceptible de vous intéresser.', # NEW
+	'mail_body_01' => '@nom_exped@ (kontakt: @mail_exped@) vás pozýva, aby ste si pozreli tento dokument zo stránky @nom_site@, možno vás bude zaujímať.',
 	'mail_body_01_html' => '<strong>@nom_exped@</strong> (contact : <a href="mailto:@mail_exped@">@mail_exped@</a>) vous invite à consulter le document ci-dessous, tiré du site <strong>@nom_site@</strong>, susceptible de vous intéresser.', # NEW
 	'mail_body_02' => '@nom_exped@ vložili ste túto správu:',
 	'mail_body_02_html' => '@nom_exped@ vložili ste túto správu:',
@@ -148,7 +148,7 @@ Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubr
 	'mail_body_extrait' => '(úryvok) ',
 	'mail_titre_default' => 'Údaje o stránke @nom_site@',
 	'message_envoye' => 'OK – Vaša správa bola odoslaná',
-	'message_pas_envoye' => '!! - Votre message n\'a pas pu être envoyé pour une raison inconnue ... Veuillez nous en excuser et <a href="@self@" title="Recharger la page">réessayer</a>.', # NEW
+	'message_pas_envoye' => '!! – Vašu správu sa z neznámeho dôvodu nepodarilo odoslať. Prijmite naše ospravedlnenie a <a href="@self@" title="Recharger la page">skúste to znova.</a>',
 
 	// N
 	'new_window' => 'Nové okno',
