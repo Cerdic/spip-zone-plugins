@@ -226,7 +226,7 @@ Pour finir, des modèles de squelettes d’en-tête et de pieds de page sont pro
 Depuis sa version 1.1, le plugin propose une adaptation Z-compatible des squelettes cités plus haut. Pour les visualiser, ajoutez simplement "_zpip" aux noms de squelettes ci-dessus. Le contenu de ces squelettes est disponible dans le répertoire "public/contenu/".
 ', # NEW
 	'proprietaire' => 'vlastník',
-	'proprietaire_export_import' => 'Mentions Légales : maintenance', # NEW
+	'proprietaire_export_import' => 'Informácie právneho charakteru: technická údržba',
 	'proprietaire_export_import_texte_supp' => 'Vous pouvez ici sauvegarder votre configuration courante et vos chaînes personnelles de langues, ou les restaurer depuis une précédente sauvegarde (<i>y compris depuis un autre site</i>) ...<br /><br />', # NEW
 	'proprietaire_retour_plateforme' => 'Späť na platformu',
 	'proprietaire_texte' => 'Vous pouvez ici définir les options générales du site utilisées par le plugin <b>Mentions Légales</b>.<br /><br />Vous pouvez également définir des chaînes de langues particulières dont l\'utilisation est rappelée sur la page concernée.<br />', # NEW
