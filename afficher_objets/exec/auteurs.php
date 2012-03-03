@@ -25,6 +25,8 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_auteurs_dist
 function exec_auteurs_dist(){
 
+	global $connect_id_auteur;
+	
 	$statut =  _request('statut');
 	if (!$statut)  $statut = AUTEURS_DEFAUT . AUTEURS_MIN_REDAC;
 	
