@@ -17,6 +17,7 @@
 
 	<traduire module="couteau" reference="fr" gestionnaire="salvatore" />
 	<traduire module="couteauprive" reference="fr" gestionnaire="salvatore" />
+	<traduire module="paquet-couteau_suisse" reference="fr" gestionnaire="salvatore" />
 	<chemin path='' />
 
 	<pipeline nom="affichage_final" inclure="cout_pipelines.php" />
