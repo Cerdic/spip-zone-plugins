@@ -27,16 +27,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfgform_comment_close_button' => 'active par défaut, cette option vous permet de choisir de montrer ou non le bouton \'Fermer\' en bas de la fenêtre ; <strong>cette option est automatiquement désactivée si les en-têtes sont eux-mêmes désactivés ci-dessus</strong>.', # NEW
 	'cfgform_comment_contenu' => 'Tu si vyberte typ objektu SPIPu (<i>článok, novinka, autor, a i.</i>) ktorý bude pripojený do e-mailu.',
 	'cfgform_comment_header' => 'cette option vous permet de choisir si les informations de la balise &lt;head&gt; de la page doivent être présentes ou non (<i>il peut être utile de les désactiver si vous utilisez une fenêtre javascript type \'thickbox\', ou au contraire de forcer leur affichage dans le même contexte avec un contenu en frame</i>).', # NEW
-	'cfgform_comment_javascript' => 'vous pouvez désactiver la fonction d\'ouverture de la popup (<i>dans le cas de l\'utilisation de fenêtres javascript type \'thickbox\' ou \'fancybox\' par exemple</i>).', # NEW
-	'cfgform_comment_options' => 'vous devez indiquer des attributs complets, par exemple : "class=\'thickbox\'", ils seront automatiquement ajoutés au lien inclus dans vos squelettes ; <b>utilisez seulement des guillemets simples</b>.', # NEW
-	'cfgform_comment_options_url' => 'vous pouvez ici indiquer une liste d\'arguments, par exemple : "arg=valeur&arg2=nouvelle_valeur", ils seront automatiquement ajoutés à l\'URL générée par la balise.', # NEW
+	'cfgform_comment_javascript' => 'funkciu otvárania vyskakovacieho okna môžete deaktivovať (<i>napríklad v prípade použitia javascriptových okien typu "thickbox" alebo "fancybox"</i>).',
+	'cfgform_comment_options' => 'musíte zadať úplné parametre, napríklad: "class=\'thickbox\'", budú automaticky pridané k odkazom na vaše šablóny; <b>používajte len jednoduché úvodzovky (\'...\').</b>',
+	'cfgform_comment_options_url' => 'tu môžete zadať parametre, napríklad: "arg=valeur&arg2=nouvelle_valeur"; budú automaticky pridané k internetovej adrese, ktorú vytvorí tag.',
 	'cfgform_comment_patron' => 'predvolený e-mail vlastníka v klasickej verzii (<i>neformátovaný text</i>).',
-	'cfgform_comment_patron_html' => 'si vous utilisez cette option, le mail envoyé comportera tout de même le premier squelette en version texte brut ; laissez le champ vide pour annuler cette option.', # NEW
-	'cfgform_comment_reset' => 'vous pouvez ici définir l\'action du bouton "Annuler" du formulaire (<i>redéfinir cette action peut vous permettre de fermer la thickbox plutôt que la fenêtre par exemple</i>).', # NEW
+	'cfgform_comment_patron_html' => 'ak si vyberiete túto možnosť, odoslaný e-mail bude mať úplne rovnakú prvú šablónu v textovej verzii; ak chcete túto možnosť zrušiť, nechajte toto pole prázdne.',
+	'cfgform_comment_reset' => 'tu môžete definovať, čo sa stane vo formulári po stlačení tlačidla "Zrušiť" (<i>túto akciu môžete napríklad zmeniť tak, aby vám mohla pomôcť zatvoriť okno "thickbox" namiesto bežného okna</i>).',
 	'cfgform_comment_squelette' => 'si vous avez créé un squelette personnel pour la boîte de dialogue du plugin (<i>sur le modèle du fichier "tip_a_friend.html"</i>) indiquez-le ici ; votre squelette devra obligatoirement inclure le formulaire "<b>tipafriend_form</b>".', # NEW
-	'cfgform_comment_taf_css' => 'le plugin définit des styles CSS sur le modèle des styles de la distribution de SPIP ; ces styles sont inclus au formulaire par défaut mais vous pouvez ici choisir de ne pas les inclure.', # NEW
-	'cfgform_info_balise' => 'La balise renvoie le lien ouvrant la page du formulaire d\'envoi. Vous pouvez changer l\'image affichée en éditant directement le squelette "<strong>modeles/tipafriend.html</strong>" du plugin.', # NEW
-	'cfgform_info_patron_html' => '<strong>Si le plugin <a href="http://www.spip-contrib.net/?article3371"><strong>Facteur</strong></a> est installé et actif sur votre site</strong>, il est possible de construire une version HTML du mail envoyé.', # NEW
+	'cfgform_comment_taf_css' => 'zásuvný modul definuje štýly CSS na modely štýlov distribúcie SPIPu; tieto štýly sa podľa predvolených nastavení vkladajú do formulára, ale môžete sa rozhodnúť, že ich tam nevložíte.',
+	'cfgform_info_balise' => 'Tag vypíše odkaz na otvorenie stránky s formulárom na odoslanie. Obrazok, ktorý sa zobrazuje, môžete zmeniť priamo úpravou šablóny  <strong>"modeles/tipafriend.html"</strong> zásuvného modulu.',
+	'cfgform_info_patron_html' => '<strong>Ak je na vašej stránke nainštalovaný a aktivovaný zásuvný modul <a href="http://www.spip-contrib.net/?article3371"><strong>Faktor,</strong></a> dá sa vytvoriť HTML verzia odoslaného e-mailu.',
 	'cfgform_info_patrons' => 'Vaše vlastné vzory sa umiestňujú do podpriečinka  <strong>patrons/</strong> vášho priečinka so šablónami.',
 	'cfgform_info_squelettes' => 'Vaše vlastné šablóny sa priamo umiestňujú do priečinka so šablónami.',
 	'cfgform_option_contenu_introduction' => 'Názov a úvod',
@@ -136,7 +136,7 @@ Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubr
 
 	// M
 	'mail_body_01' => '@nom_exped@ (kontakt: @mail_exped@) vás pozýva, aby ste si pozreli tento dokument zo stránky @nom_site@, možno vás bude zaujímať.',
-	'mail_body_01_html' => '<strong>@nom_exped@</strong> (contact : <a href="mailto:@mail_exped@">@mail_exped@</a>) vous invite à consulter le document ci-dessous, tiré du site <strong>@nom_site@</strong>, susceptible de vous intéresser.', # NEW
+	'mail_body_01_html' => '<strong>@nom_exped@</strong> (kontakt: <a href="mailto:@mail_exped@">@mail_exped@</a>) vás pozýva, aby ste si pozreli tento dokument zo stránky <strong>@nom_site@</strong>; možno vás bude zaujímať.',
 	'mail_body_02' => '@nom_exped@ vložili ste túto správu:',
 	'mail_body_02_html' => '@nom_exped@ vložili ste túto správu:',
 	'mail_body_03' => 'Názov dokumentu: "@titre_document@"',
