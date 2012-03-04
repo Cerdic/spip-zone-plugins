@@ -11,8 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activer_message' => 'Aktivovať údržbu',
 
 	// E
-	'en_travaux' => 'V práci',
-	'erreur_droit' => 'Na to, aby ste mohli používať zásuvný modul "V práci", musíte byť webmaster!',
+	'en_travaux' => 'Rekonštruuje sa',
+	'erreur_droit' => 'Na to, aby ste mohli používať zásuvný modul "Rekonšruuje sa", musíte byť webmaster!',
 
 	// I
 	'info_disallow_robot' => 'Počas rekonštrukcie je vaša stránka chránená pred spamovacími robotmi a vyhľadávačmi.',
