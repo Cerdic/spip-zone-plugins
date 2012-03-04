@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_descr_multilang' => 'Multilang: plugin to manage multi tags',
 	'cfg_effacer' => 'Re-init',
 	'cfg_explication_crayons' => 'Requires multilang to be activated in the public space of the site.',
-	'cfg_langues' => 'Langues utilisées', # NEW
+	'cfg_langues' => 'Used languages',
 	'cfg_lbl_article' => 'of the articles',
 	'cfg_lbl_auteur' => 'of the authors',
 	'cfg_lbl_breve' => 'of the news items',
@@ -29,13 +29,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_siteconfig' => 'of the website configuration',
 	'cfg_titre_multilang' => 'Multilang',
 	'champ_numero' => 'Number',
-	'configuration_multilang' => 'Multilang', # NEW
+	'configuration_multilang' => 'Multilang',
 
 	// E
-	'explication_langues_utilisees' => 'Sélectionnez les langues à utiliser pour le menu de multilang. N\'en sélectionnez aucune pour toutes les utiliser.', # NEW
+	'explication_langues_utilisees' => 'Select the languages to use in the multilang menu. Select none to use them all.',
 
 	// L
-	'label_langues_utilisees' => 'Langues utilisées par multilang', # NEW
+	'label_langues_utilisees' => 'Used languages by multilang',
 	'lien_desactiver' => 'All',
 	'lien_multi_title' => 'Edit multilingual fields in «@lang@»',
 	'lien_multi_title_sans' => 'Version "@lang@" is incomplete. Click to edit.',
