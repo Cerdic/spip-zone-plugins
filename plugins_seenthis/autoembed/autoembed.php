@@ -18,16 +18,16 @@ function embed_url($url) {
 	$dossier = substr(md5($url), 0, 3);
 	
 	// Si l'embed a deja été sauvegardé
-	if (file_exists("cache/$host/$dossier/$fichier")) {
-		$html = implode("", file("cache/$host/$dossier/$fichier"));
-		if (strlen($html) > 0) echo "$html";
+	if (file_exists(_DIR_CACHE."$host/$dossier/$fichier")) {
+		$html = implode("", file(_DIR_CACHE."$host/$dossier/$fichier"));
+		if (strlen($html) > 0) return $html;
 	} else { // Si pas sauvegardé
 	
 		// Créer dossier si nécessaire
-		if (!is_dir("cache/$host")) mkdir("cache/$host");
-		if (!is_dir("cache/$host/$dossier")) mkdir("cache/$host/$dossier");
+		if (!is_dir(_DIR_CACHE."$host")) mkdir(_DIR_CACHE."$host");
+		if (!is_dir(_DIR_CACHE."$host/$dossier")) mkdir(_DIR_CACHE."$host/$dossier");
 	
-		$f = fopen("cache/$host/$dossier/$fichier", "w");
+		$f = fopen(_DIR_CACHE."$host/$dossier/$fichier", "w");
 		
 		// Gérer les images Flickr à part
 		// car autoembed ne gère que les vidéos de Flickr
@@ -132,18 +132,12 @@ function embed_url($url) {
 				
 			}
 		}
-		echo $code_ae;
 		
 		fwrite($f, $code_ae);
 		fclose($f);
+
+		return $code_ae;
 	}
 }
-
-//header('Content-Type: text/xml');
-
-
-$url = $_GET["url"];
-embed_url($url);
-
 
 ?>
