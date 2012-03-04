@@ -1,13 +1,17 @@
 <plugin>
-	<nom>TextWheel pour SPIP</nom>
-	<auteur>Fil &amp; Cerdic</auteur>
+	<nom>TextWheel</nom>
+	<prefix>tw</prefix>
 	<icon>textwheel-64.png</icon>
-	<licence>GNU/LGPL</licence>
+	
 	<version>0.8.0</version>
 	<etat>stable</etat>
-	<description>Integrer TextWheel dans SPIP</description>
-	<prefix>tw</prefix>
 	<categorie>outil</categorie>
+	
+	<slogan>Moteur de raccourcis d'édition</slogan>
+	<description>Moteur de raccourcis d'édition, TextWheel simplifie l'&eacute;criture de r&egrave;gles de transformation d’un texte d’un format vers un autre, en séparant la création des &laquo;&nbsp;raccourcis d’édition&nbsp;&raquo; de leur implémentation technique.</description>
+	<auteur>Fil &amp; Cerdic</auteur>
+	<licence>GNU/LGPL</licence>
+	
 	<necessite id="SPIP" version="[2.1.0;]" />
 	<utilise id="yaml" version="[1.3;]" />
 	<utilise id="memoization" version="[0.9;]" />
