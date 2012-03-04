@@ -34,6 +34,12 @@ function chants_affiche_milieu($flux) {
 		));
 	}
 
+// Je désactive pour le moment. Car si la table chants_liens n'existe pas, les chants sont listés automatiquement grâce au <div id="wysiwyg"><INCLURE{fond=prive/objets/contenu/auteur,id=#ID_AUTEUR,id_auteur=#ID_AUTEUR}></div> de la page auteur.html (ce dernier code liste tous les objets auxquels sont liés les auteurs. cf. auteurs_liens.objet)
+	// chants sur les auteurs
+//	if ($flux["args"]["exec"] == "auteur") {
+//               $texte =  recuperer_fond('chemin/vers/squelette',array('id_auteur' => $flux['args']['id_auteur']));
+//       }
+
 	if ($texte) {
 		if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
 			$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
@@ -44,4 +50,25 @@ function chants_affiche_milieu($flux) {
 	return $flux;
 }
 
+/**
+ * Afficher les interventions et objets en lien
+ * avec un auteur (sur sa page)
+ *
+ * @param array $flux
+ * @return array
+ */
+function chants_affiche_auteurs_interventions($flux){
+
+	if ($id_auteur = intval($flux['args']['id_auteur'])){
+		include_spip('inc/message_select');
+		// Chants écrits par l'auteur
+		if ($GLOBALS['meta']['messagerie_agenda'] != 'non'
+		AND $id_auteur != $GLOBALS['visiteur_session']['id_auteur']
+		AND autoriser('ecrire', '', '', $flux['args']['auteur'])
+		) {
+		  $flux['data'] .= recuperer_fond('prive/squelettes/inclure/organiseur-interventions',array('id_auteur'=>$id_auteur));
+		}
+	}
+  return $flux;
+}
 ?>

@@ -32,6 +32,12 @@ function chants_upgrade($nom_meta_base_version, $version_cible){
 	$maj['0.7.1'] = array(
 		array('maj_tables', array('spip_chants'))
 	);
+	$maj['0.7.3'] = array(
+		array('maj_tables', array('spip_chants_liens'))
+	);
+	$maj['0.7.5'] = array(
+		array('sql_drop_table', 'spip_chants_liens')
+	);
 	
 
 	include_spip('base/upgrade');

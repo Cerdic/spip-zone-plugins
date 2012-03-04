@@ -4,7 +4,8 @@
 	id_chant,1,
 	points,-1
 }})
-]<B_liste_art>
+]<B_liste_chants>
+[(#BOITE_OUVRIR{'','info'})]
 #ANCRE_PAGINATION
 <div class="liste-objets chants">
 <table class='spip liste'>
@@ -19,7 +20,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_art(CHANTS){id_chant?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,date_annee},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
+	<BOUCLE_liste_chants(CHANTS){id_chant?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,date_annee},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#STATUT|puce_statut{chant,#ID_CHANT,#ID_RUBRIQUE})]</td>
 			<td class='titre principale'>[(#LOGO_CHANT|image_reduire{20,26})]<a href="[(#ID_CHANT|generer_url_entite{chant})]"
@@ -31,11 +32,12 @@
 				#ID_CHANT
 			})]</td>
 		</tr>
-	</BOUCLE_liste_art>
+	</BOUCLE_liste_chants>
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
-</B_liste_art>[
+#BOITE_FERMER
+</B_liste_chants>[
 <div class="liste-objets chants caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
-]<//B_liste_art>
+]<//B_liste_chants>

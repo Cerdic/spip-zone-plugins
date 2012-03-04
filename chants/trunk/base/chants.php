@@ -1,7 +1,6 @@
 <?php
 function chants_declarer_tables_interfaces($interfaces) {
     $interfaces['table_des_tables']['chants'] ='chants';
-    $interfaces['table_des_tables']['chants_liens'] ='chants_liens';
     $interfaces['table_des_traitements']['PAROLES']['chants'] = _TRAITEMENT_RACCOURCIS;
     return $interfaces;
 }
@@ -52,9 +51,6 @@ function chants_declarer_tables_objets_sql($tables){
 		    'rechercher_champs' => array(
 			"titre" => 7,"copyright" => 2,"date_annee" => 3,"ccli" => 6,"tempo" => 1,"signature" => 1,"paroles" => 8, "alia" => 6, "tonalite" => 1
 		    ),
-		    'tables_jointures' => array(
-			'chants_liens'
-		    ),
 		    'statut'=> array(
 			array(
 			    'champ' => 'statut',
@@ -76,24 +72,4 @@ function chants_declarer_tables_objets_sql($tables){
             return $tables;
     }
     
-function chants_declarer_tables_auxiliaires($tables_auxiliaires) {
-    
-    $spip_chants_liens = array(
-	    "id_chant" => "bigint(21) DEFAULT '0' NOT NULL",
-	    "id_objet" => "bigint(21) DEFAULT '0' NOT NULL",
-	    "objet" => "VARCHAR(25) DEFAULT '' NOT NULL",
-	    "vu" => "VARCHAR(6) DEFAULT 'non' NOT NULL",
-    );
-    
-    $spip_chants_liens_key = array(
-	    "PRIMARY KEY" => "id_chant,id_objet,objet",
-	    "KEY id_chant" => "id_chant"
-    );
-    $tables_auxiliaires['spip_chants_liens'] = array(
-	'field' => &$spip_chants_liens,
-	'key' => &$spip_chants_liens_key
-    );
-    return $tables_auxiliaires;
-}
-
 ?>

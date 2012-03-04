@@ -1,11 +1,11 @@
     <paquet
         prefix="chants"
         categorie="edition"
-        version="0.7.5"
+        version="0.7.6"
         etat="dev"
 		compatibilite="[3.0.0-dev;["
         logo="prive/themes/spip/images/chant-128.png"
-        schema="0.7.1"
+        schema="0.7.5"
     >      
 <!--        documentation="http://www.teddypayet.com/?article77" -->
         <nom>Chants</nom>
