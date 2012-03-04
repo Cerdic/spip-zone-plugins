@@ -7,6 +7,6 @@ define(_DIR_CACHE, 'cache/');
 require_once 'autoembed.php';
 
 $url = $_GET["url"];
-embed_url($url);
+echo embed_url($url);
 
 
