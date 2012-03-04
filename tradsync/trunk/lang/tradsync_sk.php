@@ -27,30 +27,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	',
 	'explication_espace_traducteurs' => '		Prekladateľské rozhranie slúži na pomoc s vykonávaním prekladov, ich schvaľovaním a vyhľadávaním.
 	',
-	'explication_groupe_mots_multi' => '
-		Choisir les groupes de mots qui reçoivent des mots traduits en utilisant
-		des balises &lt;multi&gt; sur les titres. De la sorte, il sera possible de
-		verifier qu\'une traduction est réalisée pour les mots de ces groupes.
-	', # NEW
+	'explication_groupe_mots_multi' => '		Vyberte kľúčové slová, ktoré budú preložené pomocou tagov &lt;multi&gt; v názve. Tak bude možné skontrolovať, že boli preložené aj tieto skupiny kľúčových slov.',
 	'explication_langue' => 'Vyberte jazyk, pri ktorom sa musí overiť
 		stav prekladov.',
 	'explication_traductions_a_realiser' => '		V tomto rozhraní sa nachádza zoznam článkov, rubrík a kľúčových slov, ktoré sa nezdajú byť preložené.',
-	'explication_traductions_a_verifier' => '
-		Cet espace liste l\'ensemble des articles et rubriques dont
-		l\'article d\'origine a été modifié
-		ultérieurement à la traduction.
-	', # NEW
+	'explication_traductions_a_verifier' => '		V tejto časti nájdete zoznam článkov a rubrík, ktorých originály boli v preklade zmenené neskôr.',
 	'explication_traductions_de_mots' => '		Urobiť zoznam kľúčových slov, ktoré sa nezdajú byť preložené.
 	',
-	'explication_traductions_mots_differents' => '
-		Lister les objets traduits qui n\'ont pas exactement
-		les mêmes mots clés attribués par rapport à l\'objet d\'origine.
-	', # NEW
-	'explication_traductions_mots_synchroniser' => '
-		L\'action «synchroniser» copie l\'ensemble des mots de l\'élément
-		d\'origine dans l\'élément traduit. Cependant, il ne supprime pas les
+	'explication_traductions_mots_differents' => '		Vypíše preložené objekty, ku ktorým v porovnaní s originálom nie sú priradené rovnaké kľúčové slová.',
+	'explication_traductions_mots_synchroniser' => '		Akcia "Synchronizovať" skopíruje všetky kľúčové slová objektu
+		originálu do preloženého objektu. Neodstráni však kľúčové slová, ktoré by mohli byť v preklade naviac.
 		mots-clés qui seraient présents en plus dans la traduction.
-	', # NEW
+	',
 
 	// I
 	'info_actions' => 'Akcie',
@@ -62,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_type' => 'Skupina',
 
 	// L
-	'label_groupe_mots_multi' => 'Groupes de mots multis', # NEW
+	'label_groupe_mots_multi' => 'Skupiny kľúčových slov s tagmi "multi"',
 	'label_langue' => 'Cieľový jazyk',
 	'langue' => 'Jazyk',
 	'langue_court' => 'J',
