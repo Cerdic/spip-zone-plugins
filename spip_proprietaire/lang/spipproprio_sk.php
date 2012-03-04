@@ -142,68 +142,67 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pconfig_titre_page' => 'Nastavenia',
 	'pconfig_titre_page_short' => 'Nastavenia',
 	'pourquoi_ce_plugin' => 'Prečo tento zásuvný modul ? (<i>upozornenia právneho charakteru</i>)',
-	'presentation' => '{{{Obligations légales françaises concernant tout site internet}}}
+	'presentation' => '{{{French legal obligations on any website}}}
 
-Tout site Internet, qu’il soit professionnel ou "de loisirs", doit respecter un ensemble d’obligations légales dictées par la [LCEN|Voir le texte sur legifrance.fr->http://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000801164] ({Loi pour la confiance dans l’économie numérique}) de juin 2004. Ces informations doivent être clairement accessibles à tout internaute utilisant le site et l’éditeur du site, son propriétaire, a le devoir de contrôler son contenu, autant en terme rédactionnel que concernant les commentaires laissés par les internautes.
+Any website, whether professional or "recreation", must meet a set of legal obligations dictated by the [LCEN | View text-legifrance.fr> http://www.legifrance.gouv.fr/ affichTexte.do? cidTexte JORFTEXT000000801164 =] ({Act on Confidence in the Digital Economy}) in June 2004. This information should be clearly accessible to any internet using the site and the site editor, owner, has a duty to control its content, in terms that editorial regarding the comments left by users.
 
-Dans la suite de cette documentation, nous utiliserons les termes suivants :
-- l’{{éditeur du site}} est son "propriétaire", l’organisme ou la personne qui en est responsable, qui en édite le contenu ;
-- le {{créateur du site}} est l’organisme, la personne ou l’agence qui l’a créé, fabriqué, à la demande de l’éditeur ({il est parfois nécessaire de différencier le créateur graphique du créateur technique}) ;
-- l’{{hébergeur du site}} est l’organisme ou la personne qui possède le serveur sur lequel le site est hébergé physiquement.
+In the remainder of this documentation, we use the following terms:
+- The site editor {{}} is its "owner" means the organization or person who is responsible, who publishes content;
+- The creator of the site {{}} is the body, the person or agency that created, produced, at the request of the editor ({it is sometimes necessary to differentiate the technical creator of the graphic designer} );
+- The {{}} site host is the person or body that owns the server where the site is physically hosted.
 
-Ces trois entités doivent être clairement définies dans les mentions légales de tout site web. Le créateur du site ne fait l’objet d’aucune obligation légale mais il est préférable de suivre la même procédure que pour l’hébergeur.
+These three entities must be clearly defined in the imprint of any website. The creator of this site is subject to no legal obligation but it is best to follow the same procedure as for the host.
 
-{{Concernant les sites édités par une personne morale ({entreprise, association ...})}}
+{{For the sites published by a corporation ({company, association ...})}}
 
-Une page "mentions légales" doit apparaître clairement sur le site, listant l’ensemble des informations ci-dessous.
-- la raison sociale de l’éditeur ;
-- son siège social ;
-- un numéro de téléphone ;
-- l’identité du directeur de publication et, s’il y a lieu, du directeur de rédaction ;
-- le nom de l’organisme et le numéro d’enregistrement auprès duquel l’activité de la personne morale a été déclarée ({RCS, Maison des Artistes ...}) ;
-- le capital social de la personne morale s’il y a lieu ;
-- un contact du responsable administratif du site ({adresse courriel des directeurs cités plus haut ou du webmestre}).
+A page "legal" should appear on the site, listing all the information below.
+- The name of the publisher;
+- Its registered office;
+- A phone number;
+- The identity of the editor and, if applicable, the managing editor;
+- The organization name and registration number from which the activity of the corporation has been declared ({SCR, House of Artists ...});
+- The capital of the corporation if applicable;
+- A contact of the Administrative Site ({email address of directors mentioned above or the Webmaster}).
 
-{{Concernant les sites édités par une personne physique ({un particulier})}}
+{{For the sites published by an individual (an individual {})}}
 
-Une page "mentions légales" doit apparaître clairement sur le site, indiquant les {{nom}}, {{prénom}}, {{adresse de domicile}} et {{contact téléphonique}} du propriétaire.
-<br />Il est cependant possibe de conserver son anonymat et de se dispenser de mentionner ces informations à partir du moment où elles ont été transmises, complètes et correctes, à l’hébergeur du site, qui peut conserver ces informations secrètes, sauf dans le cadre d’une procédure judiciaire. Les mentions légales devront dans ce cas mentionner ce choix.
+A page "legal" should appear on the site, indicating the name {{}}, {{name}}, {{}} home address and contact telephone {{}} Owner.
+<br /> However, it is possibe to remain anonymous and be dispensed to mention this information from the time they were transmitted, complete and correct to the web host that can keep this information secret, except in part of legal proceedings. The disclaimer must mention this case in that choice.
 
-{{Informations sur les conditions d’hébergement du site}}
+{{Information about the housing conditions of the site}}
 
-Pour les personnes morales {{et}} physiques ({dans tout les cas pour résumer}), il est obligatoire de préciser les conditions d’hébergement du site, même si ce dernier est hébergé à titre gratuit.
-<br />Les informations suivantes doivent être mentionnées :
-- nom de l’hébergeur ;
-- sa raison sociale ;
-- son siège social ;
-- un numéro de téléphone.
+For corporations and {{}} physical ({in all cases to sum}), it is mandatory to specify the conditions for hosting the site, even if it is hosted free of charge.
+<br /> The following information should be disclosed:
+- Name of the host;
+- Its name;
+- Its registered office;
+- A phone number.
 
-Dans le cas d’un site hébergé sur un serveur personnel ou propriété de l’éditeur, ces informations sont caduques mais cela devra être précisé.
+In the case of a site hosted on a server or personal property of the editor, this information is outdated but this should be clarified.
 
-{{Informations personnelles des internautes}}
+{{Personal information of users}}
 
-Dans le cas où des informations personnelles des internautes sont enregistrées par le site, comme par exemple une adresse courriel pour l’inscription à une newsletter, les conditions d’utilisation de ces informations par l’éditeur du site devront être clairement énumérées, notamment leur divulgation à des tiers. 
+In the event that personal information of Internet users are registered with the site, such as an email address for subscription to a newsletter, the terms of use of such information by the site editor will be clearly listed, including their disclosure to third parties.
 
-Dans le cas d’une newsletter, il y a {{obligation de proposer un moyen de désinscription à volonté}} à l’internaute ({un lien présent dans chaque mail est la procédure courante}).
+In the case of a newsletter, there {{obligation to offer a way to unsubscribe at will to the user}} ({a link in each email is the current procedure}).
 
-{{Mention concernant la CNIL}}
+{{Note regarding the CNIL}}
 
-La [CNIL->http://www.cnil.fr/] ({Commission Nationale de l’Informatique et des Libertés}) est un organisme ayant pour mission la protection de la vie privée et des libertés individuelles.
-<br />Dès lors qu’une information est enregistrée par votre site, qu’elle soit directement ou indirectement nominative, une déclaration doit être faite à la CNIL, qui vous transmet en retour un numéro de récépissé, que vous avez obligation de mentionner.
-<br />Pour rappel, la CNIL propose une procédure de déclaration en ligne ({cf. site ci-dessous}).
+The [CNIL-> http://www.cnil.fr/] ({Commission Nationale Informatique et Libertés}) is an organization whose mission is the protection of privacy and individual liberties.
+<br /> Once that information is recorded by your site, whether directly or indirectly nominative, a declaration must be made to the CNIL, which in turn sends you a receipt number, you have an obligation to mention .
+<br /> As a reminder, the CNIL has an online declaration procedure (see {.} website below).
 
-De plus, l’internaute doit pouvoir obtenir un accès, une rectification s’il y a lieu et même un effacement de toutes les informations le concernant personnellement stockées par le site. Les mentions légales devront donc préciser clairement le moyen mis à disposition de l’internaute pour effectuer une telle demande.
+In addition, the user must be able to obtain access, rectify if necessary and even a deletion of all information regarding himself stored by the site. The disclaimer must therefore clearly specify the means made available to the user to make such a request.
 
-Site de la CNIL : [->http://www.cnil.fr/]
+CNIL website: [-> http://www.cnil.fr/]
 
-A noter que des modifications récentes dispensent certains sites ({personnels, blogs ou associatifs}) de cette déclaration. Reportez-vous au site de la CNIL pour plus d’informations.
+Note that the recent amendments exempt certain sites ({personal blogs or associative}) of this statement. Refer to the CNIL website for more information.
 
-{{Mentions complémentaires conseillées}}
+{{}} Additional comments recommended
 
-Afin de vous protéger au mieux, il est très fortement conseillé d’inclure dans vos mentions légales des informations sur la protection dont les contenus et médias présents sur le site font l’objet, l’étendue de votre responsabilité quant à ces contenus ({communément "Limitation de responsabilité"}), une information concernant les cookies éventuellement déposés par le site ({conseil CNIL}).
+To best protect you, it is strongly advised to include in your imprint information on the protection and the media content on the site are subject, the extent of your liability for that content ({ commonly "Disclaimer"}), information on cookies may be deposited by the site (CNIL {council}).
 
-Plus généralement, il y a lieu d’adapter vos mentions légales à votre activité ({professions réglementées, site de commerce ...}).
-', # NEW
+More generally, it is necessary to adjust your imprint your business ({regulated professions, commerce site ...}).', # MODIF
 	'presentation_outils_de_communication' => '{{{Valoriser son site web}}}
 
 Le plugin {{Mentions Légales}} propose également un ensemble d’outils de présentation d’informations pour valoriser et mettre en avant vos atouts.
@@ -227,9 +226,9 @@ Depuis sa version 1.1, le plugin propose une adaptation Z-compatible des squelet
 ', # NEW
 	'proprietaire' => 'vlastník',
 	'proprietaire_export_import' => 'Informácie právneho charakteru: technická údržba',
-	'proprietaire_export_import_texte_supp' => 'Vous pouvez ici sauvegarder votre configuration courante et vos chaînes personnelles de langues, ou les restaurer depuis une précédente sauvegarde (<i>y compris depuis un autre site</i>) ...<br /><br />', # NEW
+	'proprietaire_export_import_texte_supp' => 'Tu môžete zálohovať svoje súčasné nastavenia a svoje vlastné jazykové reťazce alebo ich obnoviť z predtým vytvorenej zálohy (<i>vrátane tých z inej stránky...</i>)<br /><br />',
 	'proprietaire_retour_plateforme' => 'Späť na platformu',
-	'proprietaire_texte' => 'Vous pouvez ici définir les options générales du site utilisées par le plugin <b>Mentions Légales</b>.<br /><br />Vous pouvez également définir des chaînes de langues particulières dont l\'utilisation est rappelée sur la page concernée.<br />', # NEW
+	'proprietaire_texte' => 'Tu môžete definovať všeobecné možnosti stránky, ktoré využíva zásuvný modul s názvom <b>Informácie právneho charakteru.</b><br /><br />Môžete definovať aj jazykové reťazce, ktorých použitie je vymedzené na príslušnej stránke.<br />',
 	'proprietaire_texte_supp' => 'Ce plugin vous propose de centraliser et automatiser la gestion d\'un site \'institutionnel\' ou \'professionnel\' fonctionnant sous SPIP.<br /><br />Il vous permet notamment de saisir un ensemble d\'informations sur le <b>propriétaire</b> du site, organisme, société, institution ou particulier, afin de les présenter de divers manières et, éventuellement, de générer automatiquement des informations de Copyright, des \'Mentions légales\' et des \'Conditions d\'utilisation\' propres au site.', # NEW
 	'proprietaire_titre_page' => 'Platforma Informácie právneho charakteru',
 	'proprietaire_titre_page_short' => 'Platforma',
@@ -242,10 +241,10 @@ Depuis sa version 1.1, le plugin propose une adaptation Z-compatible des squelet
 	'ptexte_form_titre' => 'Úpravy dokončené/Nový zápis',
 	'ptexte_info_supp' => '<br /><b>Utilisation des chaînes de cette page</b><br /><br />Les chaînes de cette page sont enregistrées dans un fichier de langue nommé \'<b>proprietaire</b>\', vous pourrez donc les appeler dans vos squelettes en utilisant la formulation :<br /><br /><center><code>&lt;:proprietaire:raccourci:&gt;</code></center><br />A noter que, si vous utilisez des raccourcis typographiques dans vos textes, il vous faut ajouter dans l\'appel ci-dessus le filtre \'<b>|propre</b>\'. Cela donnerait un appel, pour l\'exemple ci-dessus, de la forme :<br /><br /><center><code>&lt;:proprietaire:raccourci|propre:&gt;</code></center><br />Vous pouvez, plus simplement, utiliser la balise <b>TEXTES_PROPRIETAIRE</b> de cette façon :<br /><br /><center><code>#TEXTES_PROPRIETAIRE{<br />raccourci,<br />arguments,<br />traitement}</code></center><br />où "arguments" correspond à un array des arguments à passer à la chaîne et "traitement" au nom de la fonction de traitement du texte (<i>"propre" par défaut</i>).', # NEW
 	'ptexte_info_tags' => '<br /><b>Vous pouvez utiliser les tags ci-dessous dans vos textes (<i>ils doivent être indiqués comme écrit ici : ’@texte@’</i>) :</b><ul><li>@nom_site@</li><li>@url_site@</li><li>@descriptif_site@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom _responsable@</li><li>@proprietaire_fonction_ responsable_texte@</li><li>@proprietaire_ mail_administratif@</li></ul>Cette liste est <b>non-exhaustive</b>, si des tags présents dans les textes ne sont pas listés ici, conservez-les ...', # NEW
-	'ptexte_info_texte' => '<ul><li><b>Les fichiers de langue</b><br />Les entrées des fichiers de langue se définissent en indiquant une chaîne d\'appel (<i>les entrées \'raccourci\' du tableau</i>) à laquelle correspond un texte complet (<i>les entrées \'texte affiché\' du tableau</i>), qui peut contenir une mise en forme et être aussi long que souhaité.<br /></li><li><b>Nomenclature des raccourcis</b><br />Les raccourcis doivent être des chaînes de texte <u>sans espace et sans caractères spéciaux</u> (<i>vous pouvez ici saisir vos raccourcis avec des espaces, qui seront remplacés par des underscore</i>).</li><li><b>Mise en forme des textes</b><br />Vous pouvez rédiger vos textes de la même manière que vos articles SPIP ...</li></ul>', # NEW
+	'ptexte_info_texte' => '<li> <b> Language files </ b> <br /> The language file entries are defined by specifying a call chain (<i> entries \'shortcut\' in the table </ i >) which corresponds to a complete text (<i> entries \'display text\' table </ i>), which may contain formatting and be as long as desired. <br /> </ li> <li > <b> Nomenclature shortcuts </ b> <br /> shortcuts must be text strings <u> without spaces or special characters </ u> (<i> here you can enter your shortcuts with spaces, which will be replaced with underscore </ i>). </ li> <b> Formatting text </ b> <br /> You can write your text in the same way that your articles SPIP .. . </ li> </ ul>', # MODIF
 	'ptexte_info_titre' => 'Pomoc/pripomienky...',
 	'ptexte_supprimer' => 'Vymazať vstup',
-	'ptexte_texte' => 'Cette page vous permet de gérer certains textes nécessaires au site sans passer par le mode d\'édition habituel (<i>modification du fichier de langue sur le serveur</i>).<br /><br />Les entrées \'Texte affiché\' du tableau sont éditables par un simple clic sur la ligne \'raccourci\' correspondante. Vous pouvez également ajouter des entrées en utilisant le formulaire \'Édition complète\'.', # NEW
+	'ptexte_texte' => 'Táto stránka vám umožňuje upravovať niektoré texty potrebné pre stránku bez toho, aby ste museli prejsť na bežnú stránku s úpravami (<i>zmena jazykového súbora na serveri.</i>)<br /><br />Záznamy označené v tabuľke ako "Zobrazovaný text" môžete upraviť jedným kliknutím na riadok príslušnej "skratky". Záznamy môžete pridávať aj pomocou formulára "Úplné úpravy".',
 	'ptexte_titre_page' => 'Texty v jazyku majiteľa',
 	'ptexte_titre_page_short' => 'Texty jazyka',
 
