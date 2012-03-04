@@ -87,7 +87,7 @@ function embed_url($url) {
 			}
 		} 
 		else {
-			include "AutoEmbed.class.php";
+			require_once "AutoEmbed.class.php";
 			$AE = new AutoEmbed();
 	
 	
