@@ -64,6 +64,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_etat_liste' => 'Status of the list',
+	'label_type_abo' => 'Type',
+	'label_type_ml' => 'Mailing-list',
+	'label_type_news' => 'Newsletter',
+	'legende_inscription_ml' => 'Subscription to the mailing list',
+	'legende_inscription_news' => 'Subscription to the newsletter',
+	'legende_inscriptions_ml' => 'Subscription to the mailing lists',
+	'legende_inscriptions_news' => 'Subscription to the newsletters',
 	'langue_liste' => 'Language of the list',
 	'les_listes_mailmans' => 'The Mailman\'s or Sympa\'s lists filled',
 	'lire_article' => 'Read the article',

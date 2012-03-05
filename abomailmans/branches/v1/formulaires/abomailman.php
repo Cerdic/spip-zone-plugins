@@ -23,11 +23,8 @@ function formulaires_abomailman_charger_dist($id_abomailman = ""){
 	}
 	else {
 		$valeurs['listes'] = _request('listes');
-		// on verifie s'il existe des listes disponibles
-		$ok=sql_count(sql_select('id_abomailman','spip_abomailmans'));
 	}
 
-	if ($ok)
 	return $valeurs;
 }
 

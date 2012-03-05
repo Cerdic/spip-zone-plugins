@@ -3,7 +3,7 @@
  * Abomailmans
  * MaZiaR - NetAktiv
  * tech@netaktiv.com
- * Printemps 2007 - 2009
+ * Printemps 2007 - 2012
  * $Id$
 */
 
@@ -48,6 +48,10 @@ function abomailmans_upgrade($nom_meta_base_version,$version_cible){
 			maj_tables('spip_abomailmans');
 			ecrire_meta($nom_meta_base_version,$current_version=0.33,'non');
 		}
+		if (version_compare($current_version,'0.34','<')){
+			maj_tables('spip_abomailmans');
+			ecrire_meta($nom_meta_base_version,$current_version=0.34,'non');
+		}
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 }
 
@@ -71,6 +75,7 @@ function abomailmans_declarer_tables_principales($tables_principales){
 		"id_abomailman" => "bigint(21) NOT NULL",
 		"titre" 	=> "varchar(255) NOT NULL",
 		"descriptif" 	=> "text",
+		"abo_type" => "varchar(255) NOT NULL DEFAULT 'news'",
 		"email"		=> "varchar(255)",
 		"email_sympa"   => "varchar(255) DEFAULT ' ' NOT NULL",
 		"email_subscribe"   => "varchar(255)",
