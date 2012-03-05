@@ -508,6 +508,17 @@ var Zepto = (function() {
     $.isFunction(callback) && this.one('webkitTransitionEnd', callback);
 
     return this.css({
+    	/*
+
+        ATTENTION
+        L'usage de proprietes -webkit-* sans leurs contreparties
+        (-o-*, -moz-*, etc.) est fortement deconseille !
+        cf. http://www.webstandards.org/2012/02/09/call-for-action-on-vendor-prefixes/
+
+        Prenez le temps de corriger s'il vous plait : les proprietes CSS prefixees ne sont en theorie
+        destinees qu'a des fins de test.
+
+    */
       '-webkit-transition': 'all ' + (duration !== undefined ? duration : 0.5) + 's ' + (ease || ''),
       '-webkit-transform': transforms.join(' '),
       opacity: opacity
