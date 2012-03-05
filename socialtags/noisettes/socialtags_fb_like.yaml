@@ -22,7 +22,7 @@ parametres:
     options:
       nom: 'show_faces'
       label: '<:socialtags:noisette_label_show_faces:>'
-      defaut: 'on'
+      defaut: 'false'
   -
     saisie: 'input'
     options:
