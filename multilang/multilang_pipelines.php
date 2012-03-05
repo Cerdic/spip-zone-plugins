@@ -106,8 +106,10 @@ function multilang_inserer_head($config=array()){
 		// Appel de multilang_init_lang si
 		// - document.ready
 		// - onAjaxLoad (cas des docs et de la configuration du site)
-		if(is_array($langues_config = lire_config('multilang/langues_utilisees'))){
+		if(is_array($langues_config = lire_config('multilang/langues_utilisees','aucune')) && count($langues_config) > 0){
 			$langues = implode(',',array_intersect($langues,$langues_config));
+		}else{
+			$langues = implode(',',$langues);
 		}
 		$data = '
 <script type="text/javascript" src="'.generer_url_public("multilang_lang.js","lang=".$GLOBALS["spip_lang"]).'"></script>
