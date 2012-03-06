@@ -18,8 +18,12 @@
 	<etat>test</etat>
 	<description>
 		<multi>
-			[fr]Remplace le menu d&#233;roulant de langues par un menu cliquable. Ce menu n'est affich&#233; que s'il y a au moins 2 langues vraiment utilis&#233;es dans le site.
-			[en]Replace the original language menu by a clickable menu. This menu is displayed only if at least two languages are ​​actually used on the site.
+[fr]Remplace le menu d&#233;roulant de langues par un menu cliquable. Ce menu n'est affich&#233; que s'il y a au moins 2 langues vraiment utilis&#233;es dans le site.
+
+Icone par [FatCow->http://www.fatcow.com/free-icons]
+[en]Replace the original language menu by a clickable menu. This menu is displayed only if at least two languages are ​​actually used on the site.
+	
+Icon by [FatCow->http://www.fatcow.com/free-icons]
 		</multi>
 	</description>
 	<prefix>mll</prefix>
