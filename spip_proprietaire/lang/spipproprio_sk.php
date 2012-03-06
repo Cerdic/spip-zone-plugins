@@ -142,33 +142,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pconfig_titre_page' => 'Nastavenia',
 	'pconfig_titre_page_short' => 'Nastavenia',
 	'pourquoi_ce_plugin' => 'Prečo tento zásuvný modul ? (<i>upozornenia právneho charakteru</i>)',
-	'presentation' => '{{{French legal obligations on any website}}}
+	'presentation' => '{{{Právne požiadavky pre akúkoľvek internetovú stránku podľa francúzskeho právneho poriadku}}}
 
-Any website, whether professional or "recreation", must meet a set of legal obligations dictated by the [LCEN | View text-legifrance.fr> http://www.legifrance.gouv.fr/ affichTexte.do? cidTexte JORFTEXT000000801164 =] ({Act on Confidence in the Digital Economy}) in June 2004. This information should be clearly accessible to any internet using the site and the site editor, owner, has a duty to control its content, in terms that editorial regarding the comments left by users.
+Akákoľvek internetová stránka, či už slúži na pracovné alebo súkromné účely, musí spĺňať niekoľko právnych požiadaviek, ktoré uvádza [LCEN | Zobraziť text-legifrance.fr> http://www.legifrance.gouv.fr/ affichTexte.do? cidTexte JORFTEXT000000801164 =] ({Zákon o dôvere v digitálnej ekonomike}) z júna 2004. Táto informácia musí byť úplne prístupná na každej internetovej stránke, ktorá využíva stránku a redaktor stránok, vlastník, má povinnosť kontrolovať jej obsah v zmysle zohľadnenia komentárov od používateľov.
 
-In the remainder of this documentation, we use the following terms:
-- The site editor {{}} is its "owner" means the organization or person who is responsible, who publishes content;
-- The creator of the site {{}} is the body, the person or agency that created, produced, at the request of the editor ({it is sometimes necessary to differentiate the technical creator of the graphic designer} );
-- The {{}} site host is the person or body that owns the server where the site is physically hosted.
+Vo zvyšku tejto dokumentácie používame tieto termíny:
+- {{Redaktor stránky}} je jej "vlastník", spoločnosť (organizácia) alebo jednotlivec, ktorý je za ňu zodpovedný, ktorý publikuje jej obsah;
+- {{Tvorca stránky}} je spoločnosť (organizácia), jednotlivec alebo agentúra, ktorá obsah vytvorila, resp. vyrobila, na žiadosť redaktora ({niekedy je potrebné rozlišovať technického tvorcu od grafického dizajnéra});
+- {{Poskytovateľ webhostingu stránky}} je spoločnosť (resp. organizácia) alebo jednotlivec, ktorý vlastní server, ktorý stránku fyzicky prevádzkuje.
 
-These three entities must be clearly defined in the imprint of any website. The creator of this site is subject to no legal obligation but it is best to follow the same procedure as for the host.
+Tieto tri termíny musia byť jednoznačne definované v tiráži každej internetovej stránky. Tvorca tejto stránky nemá žiadnu právnu povinnosť, ale je najlepšie uplatniť postup opísaný pre poskytovateľa webhostingu stránky.
 
-{{For the sites published by a corporation ({company, association ...})}}
+{{Pre internetové stránky publikované obchodnou spoločnosťou ({akciová spoločnosť, s. r. o. a. pod.})}}
 
-A page "legal" should appear on the site, listing all the information below.
-- The name of the publisher;
-- Its registered office;
-- A phone number;
-- The identity of the editor and, if applicable, the managing editor;
-- The organization name and registration number from which the activity of the corporation has been declared ({SCR, House of Artists ...});
-- The capital of the corporation if applicable;
-- A contact of the Administrative Site ({email address of directors mentioned above or the Webmaster}).
+Stránka s názvom "Informácie právneho charakteru" by sa mala zobraziť na internetovej stránke a mala by obsahovať tieto údaje:
+- meno alebo názov vydavateľa,
+- jeho sídlo,
+- telefónne číslo,
+- totožnosť redaktora a šéfredaktora, ak existuje,
+- obchodné meno spoločnosti, príp. IČO či ISSN/ISBN,
+- hlavné sídlo spoločnosti, ak je to vhodné,
+- kontakt na ústredie ({e-mailovú  adresu riadiacich vyššie spomenutých pracovníkov alebo webmastera}).
 
-{{For the sites published by an individual (an individual {})}}
+{{Pre stránky, ktoré publikujú fyzické osoby (jednotlivci)}}
 
-A page "legal" should appear on the site, indicating the name {{}}, {{name}}, {{}} home address and contact telephone {{}} Owner.
-<br /> However, it is possibe to remain anonymous and be dispensed to mention this information from the time they were transmitted, complete and correct to the web host that can keep this information secret, except in part of legal proceedings. The disclaimer must mention this case in that choice.
-
+Stránka s názvom "Informácie právneho charakteru" by sa mala zobraziť na internetovej stránke, s uvedením {{krstného mena,}} {{priezviska,}} {{adresy domov}} a  {{telefónneho čísla}} vlastníka.
+<br /> Je však možné zostať aj v anonymite a udeliť právo na tieto údaje poskytovateľovi webhostingu od chvíle, keď boli odoslané úplné a správne na adresu poskytovateľa webhostingu, ktorý môže nechať tieto údaje utajené až na prípad, keby prebiehalo súdne konanie.  V podmienkach musí byť uvedená táto možnosť.
 {{Information about the housing conditions of the site}}
 
 For corporations and {{}} physical ({in all cases to sum}), it is mandatory to specify the conditions for hosting the site, even if it is hosted free of charge.
@@ -203,13 +202,13 @@ Note that the recent amendments exempt certain sites ({personal blogs or associa
 To best protect you, it is strongly advised to include in your imprint information on the protection and the media content on the site are subject, the extent of your liability for that content ({ commonly "Disclaimer"}), information on cookies may be deposited by the site (CNIL {council}).
 
 More generally, it is necessary to adjust your imprint your business ({regulated professions, commerce site ...}).', # MODIF
-	'presentation_outils_de_communication' => '{{{Valoriser son site web}}}
+	'presentation_outils_de_communication' => '{{{Propagácia vašej internetovej stránky}}}
 
-Le plugin {{Mentions Légales}} propose également un ensemble d’outils de présentation d’informations pour valoriser et mettre en avant vos atouts.
+Zásuvný modul {{Informácie právneho charakteru}} ponúka aj sadu nástrojov na prezentovanie informácií na vylepšenie a zdôraznenie vašich silných stránok.
 
-Il propose par exemple un modèle de "carte de visite" du site ainsi qu’une "v-Card" ({Virtual Card permettant de charger automatiquement vos informations de contact dans un gestionnaire de mails ou un carnet d’adresse}).
+Napríklad ponúka model "vizitka" stránky, ako aj "v-Card" ({Virtual Card = Virtuálna vizitka umožňuje automaticky nahrať vaše kontaktné údaje do manažéra kontaktov alebo do e-mailového adresára.})
 
-Nous vous renvoyons à la page d’exemples ci-dessous pour plus d’information ({cette page prend en compte les informations saisies dans les différents formulaires du plugin, il est donc nécessaire d’en remplir au minimum quelques uns pour visualisation ...}).', # NEW
+Viac informácií nájdete na stránke s príkladmi ({táto stránka berie do úvahy údaje v rôznych formulároch zásuvného modulu; na to, aby sa niečo zobrazilo, treba vyplniť aspoň niektoré}).',
 	'presentation_plugin' => '{{{Fonctionnalités du plugin Mentions Légales}}}
 
 Ce plugin vous propose un ensemble de formulaires et de modèles pour faciliter la mise en place des informations précitées. Il vous permet notamment de définir les informations concernant l’éditeur, le créateur et l’hébergeur du site et propose des modèles d’affichages de celles-ci.
@@ -229,19 +228,19 @@ Depuis sa version 1.1, le plugin propose une adaptation Z-compatible des squelet
 	'proprietaire_export_import_texte_supp' => 'Tu môžete zálohovať svoje súčasné nastavenia a svoje vlastné jazykové reťazce alebo ich obnoviť z predtým vytvorenej zálohy (<i>vrátane tých z inej stránky...</i>)<br /><br />',
 	'proprietaire_retour_plateforme' => 'Späť na platformu',
 	'proprietaire_texte' => 'Tu môžete definovať všeobecné možnosti stránky, ktoré využíva zásuvný modul s názvom <b>Informácie právneho charakteru.</b><br /><br />Môžete definovať aj jazykové reťazce, ktorých použitie je vymedzené na príslušnej stránke.<br />',
-	'proprietaire_texte_supp' => 'Ce plugin vous propose de centraliser et automatiser la gestion d\'un site \'institutionnel\' ou \'professionnel\' fonctionnant sous SPIP.<br /><br />Il vous permet notamment de saisir un ensemble d\'informations sur le <b>propriétaire</b> du site, organisme, société, institution ou particulier, afin de les présenter de divers manières et, éventuellement, de générer automatiquement des informations de Copyright, des \'Mentions légales\' et des \'Conditions d\'utilisation\' propres au site.', # NEW
+	'proprietaire_texte_supp' => 'Tento zásuvný modul vám ponúka možnosť centralizovať a zautomatizovať riadenie stránky pri "inštitucionálnej" alebo "profesionálnej" prevádzke SPIPu.<br /><br />Umožňuje vám zadať konkrétne údaje o <b>vlastníkovi</b> stránky, organizácii, spoločnosti, inštitúcii alebo jednotlivcovi na to, aby ste sa mohli prezentovať rôznymi spôsobmi a do istej miery automaticky vytvoriť informácie o autorských právach, informácie právneho charakteru a podmienky používania pre konkrétnu stránku.',
 	'proprietaire_titre_page' => 'Platforma Informácie právneho charakteru',
 	'proprietaire_titre_page_short' => 'Platforma',
-	'pskels_info_mentions_legales' => 'Les blocs ci-dessous permettent de définir les informations concernant les <b>Créateur</b> et <b>Hébergeur</b> du site afin de mettre en place automatiquement des <b>Mentions Légales</b> et <b >Conditions d\'Utilisation</b>.<br /><br />Ces textes représentent <u>le minimum légal pour tout site web</u> et sont très génériques ... Ils doivent être considérés comme une base de travail pour créer vos propres textes.<br /><br />Vous pouvez les modifier sur la page \'Textes de langue propriétaire\' si vous activez l\'option ci-dessous.', # NEW
+	'pskels_info_mentions_legales' => 'Tieto bloky umožňujú uviesť údaje o <b>autorovi</b> a <b>webhostingu</b> stránky, aby sa automaticky nastavili  <b>Informácie právneho charakteru</b> a <b >Podmienky používania.</b><br /><br />Tieto texty tvoria <u>právne minimum pre každú internetovú stránku</u> a sú veľmi všeobecné. Treba ich považovať za základ pre prácu na tvorbe vlastných textov.<br /><br />Ak si zvolíte túto možnosť, môžete ich upraviť na stránke "Texty v jazyku vlastníka".',
 	'pskels_legal_legend_createur' => 'Údaje o tvorcovi stránky',
 	'pskels_legal_legend_hebergeur' => 'Údaje o poskytovateľovi webhostingu',
 	'pskels_titre_page' => 'Nastavenie šablón',
 	'ptexte_cliquez_pour_editer' => 'Na upravenie zápisu klávesovými skratkami kliknite sem',
 	'ptexte_editable_ttl' => 'Ak to chcete zmeniť, kliknite na daný riadok.',
 	'ptexte_form_titre' => 'Úpravy dokončené/Nový zápis',
-	'ptexte_info_supp' => '<br /><b>Utilisation des chaînes de cette page</b><br /><br />Les chaînes de cette page sont enregistrées dans un fichier de langue nommé \'<b>proprietaire</b>\', vous pourrez donc les appeler dans vos squelettes en utilisant la formulation :<br /><br /><center><code>&lt;:proprietaire:raccourci:&gt;</code></center><br />A noter que, si vous utilisez des raccourcis typographiques dans vos textes, il vous faut ajouter dans l\'appel ci-dessus le filtre \'<b>|propre</b>\'. Cela donnerait un appel, pour l\'exemple ci-dessus, de la forme :<br /><br /><center><code>&lt;:proprietaire:raccourci|propre:&gt;</code></center><br />Vous pouvez, plus simplement, utiliser la balise <b>TEXTES_PROPRIETAIRE</b> de cette façon :<br /><br /><center><code>#TEXTES_PROPRIETAIRE{<br />raccourci,<br />arguments,<br />traitement}</code></center><br />où "arguments" correspond à un array des arguments à passer à la chaîne et "traitement" au nom de la fonction de traitement du texte (<i>"propre" par défaut</i>).', # NEW
-	'ptexte_info_tags' => '<br /><b>Vous pouvez utiliser les tags ci-dessous dans vos textes (<i>ils doivent être indiqués comme écrit ici : ’@texte@’</i>) :</b><ul><li>@nom_site@</li><li>@url_site@</li><li>@descriptif_site@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom _responsable@</li><li>@proprietaire_fonction_ responsable_texte@</li><li>@proprietaire_ mail_administratif@</li></ul>Cette liste est <b>non-exhaustive</b>, si des tags présents dans les textes ne sont pas listés ici, conservez-les ...', # NEW
-	'ptexte_info_texte' => '<li> <b> Language files </ b> <br /> The language file entries are defined by specifying a call chain (<i> entries \'shortcut\' in the table </ i >) which corresponds to a complete text (<i> entries \'display text\' table </ i>), which may contain formatting and be as long as desired. <br /> </ li> <li > <b> Nomenclature shortcuts </ b> <br /> shortcuts must be text strings <u> without spaces or special characters </ u> (<i> here you can enter your shortcuts with spaces, which will be replaced with underscore </ i>). </ li> <b> Formatting text </ b> <br /> You can write your text in the same way that your articles SPIP .. . </ li> </ ul>', # MODIF
+	'ptexte_info_supp' => '<br /><b>Používanie reťazcov tejto stránky</b><br /><br />Reťazce tejto stránky sú uložené v jazykovom súbore s názvom <b>"vlastník",</b> takže ich môžete používať vo svojich šablónach pomocou schémy:<br /><br /><center><code>&lt;:vlastník:skratka:&gt;</code></center><br />Majte na pamäti, že ak vo svojich textoch použijete klávesové skratky, musíte pridať volanie filtra <b>"|propre".</b> Tak napríklad vyvoláte formulár:<br /><br /><center><code>&lt;:vlastník:skratka|propre:&gt;</code></center><br />Na zjednodušenie môžete použiť tag <b>TEXTES_PROPRIETAIRE</b> takto:<br /><br /><center><code>#TEXTES_PROPRIETAIRE{<br />skratka,<br />parametre,<br />spôsob_spracovania},</code></center><br />kde "parametre" predstavujú rad parametrov, ktoré sa majú preniesť s reťazcom a "spôsob spracovania" názov  funkcie spracovania textu (<i>predvolené je "vlastné"</i>).',
+	'ptexte_info_tags' => '<br /><b>Vo svojich textoch môžete používať tagy uvedené nižšie (<i>musia byť zadané tak, ako tu: ’@texte@’</i>):</b><ul><li>@nom_site@</li><li>@url_site@</li><li>@descriptif_site@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom _responsable@</li><li>@proprietaire_fonction_ responsable_texte@</li><li>@proprietaire_ mail_administratif@</li></ul>Tento zoznam je <b>neúplný,</b> ak sa v textoch nachádzajú tagy, ktoré v tomto zozname nie sú uvedené, nechajte ich v týchto textoch.',
+	'ptexte_info_texte' => '<li> <b> Jazykové súbory </ b> <br /> Záznamy v jazykových súboroch sa definujú tak, že sa zadá vyvolávací reťazec  (<i>  "skratka" záznamu v tabuľke,</ i >) ktorá je priradená celému textu (<i> záznamy tabuľky "zobraziť text",</ i>) ktorý môže byť formátovaný tak, ako si to želáte. <br /> </ li> <li > <b> Skratky názvov </ b> <br /> skratkami musia byť textové reťazce <u> bez medzier a špeciálnych znakov </ u> (<i> tu môžete svoje skratky zadať s medzerami, ktoré budú nahradené podčiarkovníkmi </ i>). </ li> <b> Formátovanie textu </ b> <br /> Text môžete písať rovnakým spôsobom ako články v SPIPe. </ li> </ ul>',
 	'ptexte_info_titre' => 'Pomoc/pripomienky...',
 	'ptexte_supprimer' => 'Vymazať vstup',
 	'ptexte_texte' => 'Táto stránka vám umožňuje upravovať niektoré texty potrebné pre stránku bez toho, aby ste museli prejsť na bežnú stránku s úpravami (<i>zmena jazykového súbora na serveri.</i>)<br /><br />Záznamy označené v tabuľke ako "Zobrazovaný text" môžete upraviť jedným kliknutím na riadok príslušnej "skratky". Záznamy môžete pridávať aj pomocou formulára "Úplné úpravy".',
