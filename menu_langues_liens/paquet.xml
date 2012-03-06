@@ -4,7 +4,7 @@
 	version="1.1.1"
 	etat="test"
 	compatibilite="[2.0.10;3.0.*]"
-	logo="img_pack/menu_langues_liens.png"
+	logo="img_pack/world_link-32.png"
 	documentation="http://www.spip-contrib.net/Menu-de-langues-sous-forme-de-liens"
 >	
 
@@ -14,6 +14,7 @@
 	<auteur lien="http://www.spip-contrib.net/_Jacques-PYRAT_">Jacques</auteur>
 	<auteur>Jean-Baptiste Pressac</auteur>
 	<auteur>kent1</auteur>
+	<auteur>Cedric Morin</auteur>
 
 	<copyright>2009</copyright>
 
