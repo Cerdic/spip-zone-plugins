@@ -34,7 +34,7 @@ _ Utilisation de [jquery.tooltips de Bassistance.de->http://bassistance.de/jquer
 	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
 	<necessite id='cfg' version='[1.10.0;]' />
 	<necessite id='palette' version='[1.1;]' />
-	<necessite id="lib:jquery-tooltip" src="http://plugins.jquery.com/files/jquery.tooltip_1.zip" />
+	<necessite id="lib:jquery-tooltip" src="http://jquery.bassistance.de/tooltip/jquery.tooltip.zip" />
 	<necessite id="lib:swfobject" src="http://swfobject.googlecode.com/files/swfobject_2_1.zip" />
 	<pipeline>
 		<nom>affichage_final</nom>
