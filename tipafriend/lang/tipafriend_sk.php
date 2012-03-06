@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfgform_comment_patron' => 'predvolený e-mail vlastníka v klasickej verzii (<i>neformátovaný text</i>).',
 	'cfgform_comment_patron_html' => 'ak si vyberiete túto možnosť, odoslaný e-mail bude mať úplne rovnakú prvú šablónu v textovej verzii; ak chcete túto možnosť zrušiť, nechajte toto pole prázdne.',
 	'cfgform_comment_reset' => 'tu môžete definovať, čo sa stane vo formulári po stlačení tlačidla "Zrušiť" (<i>túto akciu môžete napríklad zmeniť tak, aby vám mohla pomôcť zatvoriť okno "thickbox" namiesto bežného okna</i>).',
-	'cfgform_comment_squelette' => 'si vous avez créé un squelette personnel pour la boîte de dialogue du plugin (<i>sur le modèle du fichier "tip_a_friend.html"</i>) indiquez-le ici ; votre squelette devra obligatoirement inclure le formulaire "<b>tipafriend_form</b>".', # NEW
+	'cfgform_comment_squelette' => 'ak ste vytvorili vlastnú šablónu pre dialógové okno zásuvného modulu  (<i>vytvorenú podľa súboru "tip_a_friend.html"</i>) zadajte ju tu; vaša šablóna bude musieť mať vyplnený formulár <b>"tipafriend_form".</b>',
 	'cfgform_comment_taf_css' => 'zásuvný modul definuje štýly CSS na modely štýlov distribúcie SPIPu; tieto štýly sa podľa predvolených nastavení vkladajú do formulára, ale môžete sa rozhodnúť, že ich tam nevložíte.',
 	'cfgform_info_balise' => 'Tag vypíše odkaz na otvorenie stránky s formulárom na odoslanie. Obrazok, ktorý sa zobrazuje, môžete zmeniť priamo úpravou šablóny  <strong>"modeles/tipafriend.html"</strong> zásuvného modulu.',
 	'cfgform_info_patron_html' => '<strong>Ak je na vašej stránke nainštalovaný a aktivovaný zásuvný modul <a href="http://www.spip-contrib.net/?article3371"><strong>Faktor,</strong></a> dá sa vytvoriť HTML verzia odoslaného e-mailu.',
