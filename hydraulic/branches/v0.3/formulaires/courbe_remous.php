@@ -38,18 +38,103 @@
  *
  */
 
-function formulaires_courbe_remous_charger_dist() {
-    $valeurs = array(
-        'rLarg'=>2.5,
-        'rFruit'=>0.56,
-        'rYaval'=>0.6,
-        'rYamont'=>0.15,
-        'rKs'=>50,
-        'rQ'=>2,
-        'rLong'=>50,
-        'rIf'=>0.005,
-        'rDx'=>5,
-        'rPrec'=>0.001);
+function mes_saisies_section() {
+
+	$fieldset_champs = array(
+	
+				'FT'          => array(
+									   'Définition de la section trapézoïdale',
+									   array(
+											 'rLarg'  =>array('largeur_fond',2.5),
+											 'rFruit' =>array('fruit', 0.56, false)
+											)
+				),
+				
+				'FR'          => array(
+									   'Définition de la section rectangulaire',
+									   array(
+											 'rLarg'  =>array('largeur_fond',2.5),
+											)
+				),
+					
+				'FC'          => array(
+									   'Définition de la section circulaire',
+									   array(
+											 'circ1'  =>array('champ_circulaire1',3),
+											 'circ2'  =>array('champ_circulaire2', 0.6)
+											)
+				),
+				
+				'FP'          => array(
+									   'Définition de la section puissance',
+									   array(
+											 'puiss1' =>array('champs_puissance1',10),
+											 'puiss2' =>array('champs_puissance2', 0.7)
+											)
+				),
+				
+				'Caract_bief' => array(				
+									   'Caractéristiques du bief',					
+									   array(
+											 'rKs'	  =>array('coef_strickler',50),
+											 'rLong'  =>array('longueur_bief', 50),
+											 'rIf'    =>array('pente_fond', 0.005)
+											)
+				),
+															
+				'Cond_lim'    => array(											
+									   'Conditions aux limites',	 		
+									   array(
+											 'rQ'     =>array('debit_amont', 2),
+											 'rYaval' =>array('h_aval_imposee', 0.6),
+											 'rYamont'=>array('h_amont_imposee', 0.15)
+											)
+				),
+								
+				'Param_calc'  => array(									
+									   'Paramètres de calcul',		
+									   array(						
+											 'rDx'    =>array('pas_discret', 5),
+											 'rPrec'  =>array('precision_calc', 0.001)
+											)
+				)
+	);
+		
+  return $fieldset_champs;
+  
+}
+
+function champs_obligatoires() {
+	
+	$tSaisie = mes_saisies_section();
+    $tChOblig = array();
+    $sTypeSection = _request('lTypeSection');
+    
+    foreach($tSaisie as $IdFS=>$FieldSet) {
+		if((substr($IdFS,0,1) != 'F') || ($IdFS == $sTypeSection)){
+			foreach($FieldSet[1] as $Cle=>$Champ) {
+				if((!isset($Champ[2])) || (isset($Champ[2]) && $Champ[2])) {
+					$tChOblig[] = $IdFS.'_'.$Cle;
+				}
+			}
+		}
+	}
+	return $tChOblig;
+}
+
+function formulaires_courbe_remous_charger_dist() { 
+    // On charge les saisies et les champs qui nécessitent un accès par les fonctions
+	$tSaisie_section = mes_saisies_section();
+	$valeurs = array(
+		'lTypeSection' => 'FT',
+		'mes_saisies' => $tSaisie_section	
+	);
+    
+    foreach($tSaisie_section as $CleFD=>$FieldSet) {
+		foreach($FieldSet[1] as $Cle=>$Champ) {
+				$valeurs[$CleFD.'_'.$Cle] = $Champ[1];
+		}
+	}
 
     return $valeurs;
 }
@@ -57,8 +142,10 @@ function formulaires_courbe_remous_charger_dist() {
 function formulaires_courbe_remous_verifier_dist(){
     $erreurs = array();
     $datas = array();
+    
+    $tChOblig= champs_obligatoires();
     // verifier que les champs obligatoires sont bien là :
-    foreach(array('rLarg','rYaval','rYamont','rKs','rQ','rLong','rIf','rDx','rPrec') as $obligatoire) {
+    foreach($tChOblig as $obligatoire) {
         if (!_request($obligatoire)) {
             $erreurs[$obligatoire] = _T('hydraulic:champ_obligatoire');}
         else {
@@ -73,6 +160,7 @@ function formulaires_courbe_remous_verifier_dist(){
     if (count($erreurs)) {
         $erreurs['message_erreur'] = _T('hydraulic:saisie_erreur');
     }
+	
     return $erreurs;
 }
 
@@ -89,10 +177,25 @@ $fdbg = fopen('debug.log','w');
 
     $datas = array();
     $echo = '';
-    // On récupère les données
-    foreach(array('rLarg','rFruit','rYaval','rYamont','rKs','rQ','rLong','rIf','rDx','rPrec') as $champ) {
-        if (_request($champ)) $datas[$champ] = _request($champ);
-        $datas[$champ] = str_replace(',','.',$datas[$champ]); // Bug #574
+    $tSaisie = mes_saisies_section();
+    $tChUtil = array();
+    $lTypeSection = _request('lTypeSection');
+
+    foreach($tSaisie as $IdFS=>$FieldSet) {
+		if((substr($IdFS,0,1) != 'F') || ($IdFS == $lTypeSection)){
+			foreach($FieldSet[1] as $Cle=>$Champ) {
+					$tChUtil[] = $IdFS.'_'.$Cle;
+			}
+		}
+	}
+	
+    //On récupère les données
+    foreach($tChUtil as $champ) {
+        if (_request($champ)){
+			$datas[$champ] = _request($champ);
+		}
+		
+		$datas[$champ] = str_replace(',','.',$datas[$champ]); // Bug #574
     }
 
     // On ajoute la langue en cours pour différencier le fichier de cache par langue
@@ -108,20 +211,40 @@ $fdbg = fopen('debug.log','w');
     foreach($datas as $champ=>$data) {
         ${$champ}=$data;
     }
-
-    // Initialisation du format d'affichage des réels
-    $iPrec=(int)-log10($rPrec);
-
+    
+	// Initialisation du format d'affichage des réels
+    $iPrec=(int)-log10($Param_calc_rPrec);
+	
     // Contrôle du nombre de pas d'espace maximum
     $iPasMax = 1000;
-    if($rLong / $rDx > $iPasMax) {
-        $rDx = $rLong / $iPasMax;
-        $oLog->Add(_T('hydraulic:pas_nombre').' > '.$iPasMax.' => '._T('hydraulic:pas_ajustement').$rDx.' m');
+    if($Caract_bief_rLong / $Param_calc_rDx > $iPasMax) {
+        $Param_calc_rDx = $Caract_bief_rLong / $iPasMax;
+        $oLog->Add(_T('hydraulic:pas_nombre').' > '.$iPasMax.' => '._T('hydraulic:pas_ajustement').$Param_calc_rDx.' m');
     }
-
+	spip_log(array($Cond_lim_rYaval,$Caract_bief_rKs,$Cond_lim_rQ,$Caract_bief_rLong,$Caract_bief_rIf,$Param_calc_rDx,$Param_calc_rPrec),'hydraulic');
     // Enregistrement des paramètres dans les classes qui vont bien
-    $oParam= new cParam($rYaval,$rKs,$rQ,$rLong,$rIf,$rDx,$rPrec);
-    $oSection=new cSnTrapeze($oParam,$rLarg,$rFruit);
+    $oParam= new cParam($Cond_lim_rYaval,$Caract_bief_rKs,$Cond_lim_rQ,$Caract_bief_rLong,$Caract_bief_rIf,$Param_calc_rDx,$Param_calc_rPrec);
+	
+    switch($lTypeSection) {
+		case 'FT': 
+			$oSection=new cSnTrapeze($oParam,$FT_rLarg,$FT_rFruit);
+		break;	
+		
+		case 'FR': 
+			$oSection=new cSnRectangulaire($oParam,$FR_rLarg);
+		break;
+		
+		case 'FC':
+			echo 'circulaire';
+		break;
+		
+		case 'FP':
+			echo 'puissance';
+			
+		default: 
+			$oSection=new cSnTrapeze($oParam,$FT_rLarg,$FT_rFruit);
+	}
+    
 
 
     /***************************************************************************
@@ -137,7 +260,7 @@ $fdbg = fopen('debug.log','w');
         $oLog->Add(_T('hydraulic:h_normale').' = '.format_nombre($oSection->rHautNormale,$iPrec).' m');
 
         // Calcul depuis l'aval
-        if($oSection->rHautCritique <= $rYaval) {
+        if($oSection->rHautCritique <= $Cond_lim_rYaval) {
             $oLog->Add(_T('hydraulic:calcul_fluvial'));
             list($tr['X1'],$tr['Y1']) = calcul_courbe_remous($oParam,$oSection,$oLog,$iPrec);
         }
@@ -146,9 +269,9 @@ $fdbg = fopen('debug.log','w');
         }
 
         // Calcul depuis l'amont
-        if($oSection->rHautCritique >= $rYamont) {
+        if($oSection->rHautCritique >= $Cond_lim_rYamont) {
             $oLog->Add(_T('hydraulic:calcul_torrentiel'));
-            $oParam->rYCL = $rYamont; // Condition limite amont
+            $oParam->rYCL = $Cond_lim_rYamont; // Condition limite amont
             $oParam->rDx = -$oParam->rDx; // un pas négatif force le calcul à partir de l'amont
             list($tr['X2'],$tr['Y2']) = calcul_courbe_remous($oParam,$oSection,$oLog,$iPrec);
         }
@@ -215,7 +338,7 @@ $fdbg = fopen('debug.log','w');
         'lineWidth:1');
 
     // Décalage des données par rapport au fond
-    $oGraph->Decal(0, $rIf, $rLong);
+    $oGraph->Decal(0, $Caract_bief_rIf, $Caract_bief_rLong);
 
     // Récupération du graphique
     $echo .= $oGraph->GetGraph('courbe_remous',400,600);

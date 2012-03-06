@@ -1,0 +1,280 @@
+[<div class='hyd_formulaire_erreur '><span>(#ENV*{message_erreur})</span></div>]
+
+<script>	
+// Variables globales contenant le choix fait pour chaque ligne	 
+var glob = {
+	'Q':'#ENV{choix_champs_Q}',
+	'D':'#ENV{choix_champs_D}',
+	'J':'#ENV{choix_champs_J}'
+}
+
+// Mise a jour des variables globales
+function setVarGlob(){
+	glob['Q'] = getRadioValue('choix_champs_Q');
+	glob['D'] = getRadioValue('choix_champs_D');	
+	glob['J'] = getRadioValue('choix_champs_J');	
+}
+
+// Permet de switcher les valeur de L, M et N en fonction du matériau choisie
+function change_valeur() {
+	var choix_mat = getSelectValue('choix_materiau')-1;
+	var materiau = new Array();
+
+    <BOUCLE_mat1(POUR){tableau #ENV{mes_saisies_materiaux}}>
+		<BOUCLE_mat2(POUR){tableau #VALEUR}>
+			materiau.push('#VALEUR');
+        </BOUCLE_mat2>
+    </BOUCLE_mat1>
+    
+   document.getElementById('champs_L').value=materiau[choix_mat*3];
+   document.getElementById('champs_M').value=materiau[(choix_mat*3)+1];
+   document.getElementById('champs_N').value=materiau[(choix_mat*3)+2];
+
+}	
+
+// Gére le comportement des boutons radios
+function gestion_radios(nom,valeur){
+	
+	// Tableau contenant tous les champs moins ceux passés en paramètre
+	var tabPartiel = {'Q': glob['Q'],'D': glob['D'],'J': glob['J']};
+	delete(tabPartiel[nom]);
+	
+	// Tableau des indices
+	var tabIndice = ['Q', 'D', 'J'];
+	
+	// Si on appuis sur un bouton de type "calcul_val"
+	if(valeur.substr(0,3) == 'cal'){
+		/*
+		 * Pour toutes les lignes autres que celle passée en paramètre,
+		 * on contrôle  si il y a déjà une valeur à calculer.
+		 * Si oui, alors on fais les modifications adéquates sur les champs: 
+		 * sélection, visibilité	
+		 */
+		for(var cle in tabPartiel){
+			if(document.getElementById('calcul_val_'+cle).checked){
+				document.getElementById('val_fixe_'+cle).checked=true;
+				document.getElementById('caract_'+cle).disabled=false;	
+				document.getElementById('caract_'+nom).disabled=true;
+				setVarGlob();
+			}	
+		}
+	}
+
+	// Si on appuis sur un bouton de type "varier_val" ou "val_fixe" 
+	else if(valeur.substr(0,3) == 'var' || valeur.substr(0,3)=='val'){
+		for(var cle in tabPartiel){
+			if(document.getElementById('varier_val_'+cle).checked && (glob[nom] != "calcul_val_"+nom)){
+				document.getElementById('val_fixe_'+cle).checked=true;
+				setVarGlob();
+			}
+			else if(document.getElementById('varier_val_'+cle).checked && (glob[nom] == "calcul_val_"+nom) && valeur.substr(0,3) == 'var'){
+			
+				document.getElementById('calcul_val_'+cle).checked=true;
+				document.getElementById('caract_'+cle).disabled=true;
+				document.getElementById('caract_'+nom).disabled=false;
+				setVarGlob();
+			}
+		}
+		
+		// Compte le nombre de calcul_val NON checké
+		var cptValCal = 0;
+		for(var cle in glob){
+			if(document.getElementById('calcul_val_'+cle).checked){
+				cptValCal++;
+			}
+		}
+		// Si aucune calcul_val n'est checké
+		if(cptValCal == 0){
+			
+			indice = '';
+			for(var i = 0; i < tabIndice.length; i++){
+				if(tabIndice[i] == nom){
+					// Si on est pas arrivé au dernier élément
+					if(i+1 <= 2){
+						indice = tabIndice[i+1];
+					}
+					else{
+						indice = tabIndice[0];
+					}
+				}
+				
+			}
+			document.getElementById('calcul_val_'+indice).checked=true;
+			document.getElementById('caract_'+nom).disabled=false;
+			document.getElementById('caract_'+indice).disabled=true;
+			setVarGlob();
+		}
+	}
+
+	if(valeur.substr(0,3) == 'var'){
+		setVarGlob();
+		document.getElementById('caract_'+nom).disabled=true;
+		for(var cle in glob){
+			if(glob[cle].substr(0,3) == 'val'){
+				document.getElementById('caract_'+cle).disabled=false;
+			}	
+		}
+		
+		var afficher = document.getElementsByClassName('champs_var_'+nom);
+		for(var i in afficher){
+			afficher[i].style.display='table-row';
+		}
+		
+		for(var cle in tabPartiel){	
+			var cacher = document.getElementsByClassName('champs_var_'+cle);
+			for(var i in cacher){
+				cacher[i].style.display='none';
+			}
+		}
+		
+		setVarGlob();
+	}
+
+	// Compte le nombre de varier_val checké
+	var cptVarVal = 0;
+	for(var cle in glob){
+		if(document.getElementById('varier_val_'+cle).checked){
+			cptVarVal++;
+		}
+	}
+	
+	if(cptVarVal == 0){
+		for(var cle in glob){
+			if(glob[cle].substr(0,3) != 'cal'){
+				document.getElementById('caract_'+cle).disabled=false;
+			}	
+		}
+		var cacher = document.getElementsByClassName('champs_var_'+nom);
+		for(var i in cacher){
+			cacher[i].style.display='none';
+		}
+	}
+	
+	setVarGlob();
+}
+</script>
+<form method="post" action="#ENV{action}" id="form_lechapt_calmon">
+   #ACTION_FORMULAIRE{#ENV{action}}
+   <table class="hyd_formulaire">
+      <tbody>
+		  	<tr id="type_materiau_field">
+				<td colspan="8"><div class="hyd_formulaire_chapitre">Type du matériau</div></td>
+			</tr>
+
+			<tr id="type_materiau_choix">
+				<td align="right">
+					Choix du matériau : 
+				</td>
+						
+				<td width="1px">
+					<select name="typeMateriau" id="choix_materiau" onChange="change_valeur();">
+						<option value="1" [(#ENV{typeMateriau}|=={'1'}|?{'selected',''})]>Fonte ou acier non revêtus - Béton grossier (eau corrosive)</option>
+						<option value="2" [(#ENV{typeMateriau}|=={'2'}|?{'selected',''})]>Fonte ou acier non revêtus - Béton grossier (eau peu corrosive)</option>
+						<option value="3" [(#ENV{typeMateriau}|=={'3'}|?{'selected',''})]>Fonte ou acier revêtement ciment</option>
+						<option value="4" [(#ENV{typeMateriau}|=={'4'}|?{'selected',''})]>Fonte ou acier revêtement bitume - Béton centrifugé</option>
+						<option value="5" [(#ENV{typeMateriau}|=={'5'}|?{'selected',''})]>Acier laminé - Béton lisse</option>
+						<option value="6" [(#ENV{typeMateriau}|=={'6'}|?{'selected',''})]>Fonte ou acier revêtement centrifugé</option>
+						<option value="7" [(#ENV{typeMateriau}|=={'7'}|?{'selected',''})]>PVC - Polyéthylène</option>
+						<option value="8" [(#ENV{typeMateriau}|=={'8'}|?{'selected',''})]>Tuyau hydrauliquement lisse - 0.05 ≤ D ≤ 0.2</option>
+						<option value="9" [(#ENV{typeMateriau}|=={'9'}|?{'selected',''})]>Tuyau hydrauliquement lisse - 0.25 ≤ D ≤ 1</option>
+					</select>
+					
+					[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{[(#VALEUR|table_valeur{0})]})</div>]
+
+				</td>
+			</tr>
+			
+		    #SET{tableau_coeff,#ARRAY{1,L,2,M,3,N}}
+			
+			<BOUCLE_coeff(POUR) {tableau #GET{tableau_coeff}}>
+				<tr id="materiau_coeff_#VALEUR">
+					<td align="right"> 
+						#VALEUR :			
+					</td>
+								
+					<td>
+						<input id="champs_#VALEUR" type="text" value="#ENV{#VALEUR}" maxlength="30" name="#VALEUR"/>
+						[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{#VALEUR})</div>]
+					</td>	
+				</tr>
+			</BOUCLE_coeff>
+			
+
+			<tr id="caract_lechapt_calmon">
+				<td colspan="8"><div class="hyd_formulaire_chapitre">Caractéristiques</div></td>
+			</tr>
+
+			<tr>
+				<td colspan="2"></td>
+				<td width="75px" colspan="2" align="center">Calculer valeur</td>
+				<td width="75px" colspan="2" align="center">Varier valeur</td>
+				<td width="75px" colspan="2" align="center">Fixer valeur</td>
+			</tr>
+			
+			#SET{tableau_caract,#ARRAY{1,Q,2,D,3,J}}	
+			<BOUCLE_caract(POUR) {tableau #GET{tableau_caract}}>
+		
+				<tr id="type_materiau_caract_#VALEUR">
+					<td align="right" width="120px"> 
+						#VALEUR :	
+					</td>
+					
+					<td>
+						<input id="caract_#VALEUR" type="text" value="[(#ENV{choix_champs}|=={#VALEUR}|?{'',#ENV{#VALEUR}})]" maxlength="30" name="#VALEUR" [(#ENV{choix_champs_#VALEUR}|match{^((calcul_val_#VALEUR)|(varier_val_#VALEUR))$}|?{'disabled="true"',''})]/>
+						[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{#VALEUR})</div>]
+					</td>	
+
+					<td colspan="2" align="center">
+						<input type="radio" id="calcul_val_#VALEUR" name="choix_champs_#VALEUR" value="calcul_val_#VALEUR" onclick="gestion_radios('#VALEUR', 'calcul_val_#VALEUR')" [(#ENV{choix_champs_#VALEUR}|=={calcul_val_#VALEUR}?{'checked',''})]/>
+					</td>	
+					
+					<td colspan="2" align="center">
+						<input type="radio" id="varier_val_#VALEUR" name="choix_champs_#VALEUR" value="varier_val_#VALEUR" onclick="gestion_radios('#VALEUR', 'varier_val_#VALEUR')" [(#ENV{choix_champs_#VALEUR}|=={varier_val_#VALEUR}?{'checked',''})]/>
+					</td>
+										
+					<td colspan="2" align="center">
+						<input type="radio" id="val_fixe_#VALEUR" name="choix_champs_#VALEUR" value="val_fixe_#VALEUR" onclick="gestion_radios('#VALEUR', 'val_fixe_#VALEUR')" [(#ENV{choix_champs_#VALEUR}|=={val_fixe_#VALEUR}?{'checked',''})]/>
+					</td>
+				</tr>
+
+
+				<tr class="champs_var_#VALEUR" style="display:[(#ENV{choix_champs_#VALEUR}|=={varier_val_#VALEUR}|?{'table-row','none'})];">
+					<td></td>
+					<td align="right">Valeur minimum de #VALEUR :
+						<input name="val_min_#VALEUR" type="text" value="#ENV{val_min_#VALEUR}"/>
+						[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{val_min_#VALEUR})</div>]
+					</td>
+					<td colspan="6"></td>
+				</tr>
+					
+				<tr class="champs_var_#VALEUR" style="display:[(#ENV{choix_champs_#VALEUR}|=={varier_val_#VALEUR}|?{'table-row','none'})];">
+					<td></td>
+					<td align="right">Valeur maximum de #VALEUR :
+						<input name="val_max_#VALEUR" type="text" value="#ENV{val_max_#VALEUR}"/>
+						[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{val_max_#VALEUR})</div>]
+					</td>
+					<td colspan="6"></td>
+				</tr>
+					
+				<tr class="champs_var_#VALEUR" style="display:[(#ENV{choix_champs_#VALEUR}|=={varier_val_#VALEUR}|?{'table-row','none'})];">
+					<td></td>
+					<td align="right">Pas de variation de #VALEUR :
+						<input name="pas_var_#VALEUR" type="text" value="#ENV{pas_var_#VALEUR}"/>
+						[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{pas_var_#VALEUR})</div>]
+					</td>
+					<td colspan="6"></td>
+				</tr>
+				
+			</BOUCLE_caract>		
+			
+			<tr>		
+				<td colspan="8" class="hyd_bouton_submit">
+				   <input type="submit" value="Calcul Lechapt et Calmon">
+				</td>
+			</tr>
+			
+      </tbody>
+   </table>
+</form>
+
+[<div class='hydraulic_resultat'>(#ENV*{message_ok})</div>]

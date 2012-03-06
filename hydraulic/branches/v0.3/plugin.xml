@@ -30,6 +30,7 @@ Calculation modules available:
 	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
 	<etat>dev</etat>
 	<prefix>hydraulic</prefix>
+	<fonctions>hydraulic_traductions.php</fonctions>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>hydraulic_pipelines.php</inclure>

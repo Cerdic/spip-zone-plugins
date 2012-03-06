@@ -292,7 +292,7 @@ class cSnTrapeze extends acSection {
 class cSnRectangulaire extends acSection {
    public $rLargeurFond; /// largeur au fond
 
-    function __construct($oP,$rLargeurFond, $rFruit) {
+    function __construct($oP,$rLargeurFond) {
         $this->rLargeurFond=(real) $rLargeurFond;
         parent::__construct($oP);
     }
