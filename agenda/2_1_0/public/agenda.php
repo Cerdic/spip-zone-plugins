@@ -33,7 +33,7 @@ function boucle_EVENEMENTS_dist($id_boucle, &$boucles) {
 
 
 /**
- * {agendafull ..} variante etendue du crietre agenda du core
+ * {agendafull ..} variante etendue du critere agenda du core
  * qui accepte une date de debut et une date de fin
  *
  * {agendafull date_debut, date_fin, jour, #ENV{annee}, #ENV{mois}, #ENV{jour}}
