@@ -29,8 +29,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fichier_a_importer' => 'Fichier CSV &agrave; importer',
 	
 	// I
-	'i2_import_titre' => 'Import pour Inscription2',
-	'i2_import_gros_titre' => 'Import d\'utilisateurs par CSV',
+	'inscription_import_titre' => 'Import pour Inscription2',
+	'inscription_import_gros_titre' => 'Import d\'utilisateurs par CSV',
 	'importer_utilisateurs_csv' => 'Importer des utilisateurs par CSV',
 	'import_fichier' => 'Import du fichier',
 	

@@ -1,13 +1,15 @@
 <?php
 /*
- * i2_import
- * plug-in d'import csv des utilisateurs dans les tables spip_auteurs et spip_auteurs_elargis
+ * inscription_import
+ * plug-in d'import / export csv des utilisateurs dans les tables spip_auteurs
  *
  * Auteur :
- * Quentin Drouet (vilement pompé de Cedric MORIN)
- * © 2009 - Distribue sous licence GNU/GPL
+ * kent1 (vilement pompé de Cedric MORIN)
+ * © 2009-2012 - Distribue sous licence GNU/GPL
  *
  */
+
+ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip("base/abstract_sql");
 include_spip("inc/charsets");
@@ -16,76 +18,71 @@ include_spip("inc/charsets");
  * 
  * Liste de l'ensemble des champs possibles
  * 
- * @return si $type='unique' retourne un array des deux tables, sinon retourne un array contenant deux
+ * @return un array des champs à importer/exporter
  * arrays distincts
- * @param array $tables un array des tables (spip_auteurs et spip_auteurs_elargis)
- * @param string $type[optional] détermine la forme du retour
  */
-function i2_import_table_fields($tables,$type='unique'){
+function inscription_import_table_fields(){
 	$trouver_table = charger_fonction('trouver_table','base');
-	$table_fields_final = array();
-	if(is_array($tables)){
-		foreach($tables as $table){
-			if($table == 'spip_auteurs'){
-				// Tous les champs de spip_auteurs ne sont pas à prendre en compte
-				
-				$spip_auteurs['nom'] = 'nom';
-				$spip_auteurs['bio'] = 'bio';
-				$spip_auteurs['email'] = 'email';
-				$spip_auteurs['nom_site'] = 'nom_site';
-				$spip_auteurs['url_site'] = 'url_site';
-				$spip_auteurs['login'] = 'login';
-				$spip_auteurs['statut'] = 'statut';
-			}else{
-				$table_desc = $trouver_table($table);
-				$spip_auteurs_elargis=array_keys(is_array($table_desc['field']) ? $table_desc['field'] : array());
-				$spip_auteurs_elargis=array_flip($spip_auteurs_elargis);
-				foreach ($spip_auteurs_elargis as $key=>$value) {
-					/**
-					 * On ne garde que les champs activés
-					 */
-					if(lire_config('inscription2/'.$key) == 'on'){
-						$spip_auteurs_elargis[$key] = $key;
-					}else{
-						unset($spip_auteurs_elargis[$key]);
-					}
-				}
-				// On ne met pas à disposition le champs id_auteur
-				unset($spip_auteurs_elargis['id_auteur']);
+	$table_desc = $trouver_table('spip_auteurs');
+	$spip_auteurs=array_keys(is_array($table_desc['field']) ? $table_desc['field'] : array());
+	$spip_auteurs=array_flip($spip_auteurs);
+
+	/**
+	 *  Tous les champs de spip_auteurs ne sont pas à prendre en compte
+	 */
+	$spip_auteurs_orig['nom'] = 'nom';
+	$spip_auteurs_orig['bio'] = 'bio';
+	$spip_auteurs_orig['email'] = 'email';
+	$spip_auteurs_orig['nom_site'] = 'nom_site';
+	$spip_auteurs_orig['url_site'] = 'url_site';
+	$spip_auteurs_orig['login'] = 'login';
+	$spip_auteurs_orig['statut'] = 'statut';
+	
+	/**
+	 * On ne garde que les champs activés
+	 */
+	$exceptions_des_champs_auteurs_elargis = pipeline('i3_exceptions_des_champs_auteurs_elargis',array());
+	$config = lire_config('inscription3');
+	if(($config == '') OR !is_array($config)){
+		return $spip_auteurs_orig;
+	}
+
+	$champ_presents = array();
+
+	foreach($config as $clef => $val) {
+		$cle = preg_replace("/_(obligatoire|fiche|table).*/", "", $clef);
+		if(!in_array($cle,$champ_presents) && ($val == 'on')){
+			if(!in_array($cle,$exceptions_des_champs_auteurs_elargis) && in_array($cle,$spip_auteurs)  && !preg_match(",(categories|zone|newsletter).*$,", $cle)){
+				$champ_presents[] = $cle;
 			}
 		}
-		if($type == 'unique'){
-			$table_fields_final = array_merge($spip_auteurs,$spip_auteurs_elargis);
-			return $table_fields_final;
-		}
-		else{
-			return array($spip_auteurs,$spip_auteurs_elargis);
-		}
 	}
-	return;
+	
+	$spip_auteurs = array_merge($spip_auteurs_orig,$champ_presents);
+	return $spip_auteurs;
 }
 
-function i2_import_csv_champ($champ) {
+function inscription_import_csv_champ($champ) {
 	$champ = preg_replace(',[\s]+,', ' ', $champ);
 	$champ = str_replace(',",', '""', $champ);
 	return '"'.$champ.'"';
 }
 
-function i2_import_csv_ligne($ligne, $delim = ',') {
-	return join($delim, array_map('i2_import_csv_champ', $ligne))."\r\n";
+function inscription_import_csv_ligne($ligne, $delim = ',') {
+	return join($delim, array_map('inscription_import_csv_champ', $ligne))."\r\n";
 }
 
-function i2_import_show_erreurs($erreur){
+function inscription_import_show_erreurs($erreur){
 	$output = "";
 	if (count($erreur)>0){
-		$bouton = bouton_block_depliable(_T('i2_import:csv_erreurs'), false,"csv_erreurs");
+		$bouton = bouton_block_depliable(_T('inscription_import:csv_erreurs'), false,"csv_erreurs");
 		$output .= debut_cadre_enfonce("mot-cle-24.gif", true, "", $bouton);
 		$output .= debut_block_depliable(false,"csv_erreurs");
 		foreach($erreur as $steper=>$desc){
 			$output .= "<dl>";
-			$output .= "<dt>"._T('i2_import:nb_ligne',array('nb'=>$steper));
+			$output .= "<dt>"._T('inscription_import:nb_ligne',array('nb'=>$steper));
 			foreach($desc as $key=>$val)
-				$output .=  "<dd>"._T('inscription2:'.$key)." : $val<dd>";
+				$output .=  "<dd>"._T('inscription3:'.$key)." : $val<dd>";
 			$output .= "</dl>";
 		}
 		$output .= fin_block();
@@ -94,17 +91,17 @@ function i2_import_show_erreurs($erreur){
 	return $output;
 }
 
-function i2_import_show_imports($imports){
+function inscription_import_show_imports($imports){
 	$output = "";
 	if (count($imports)>0){
-		$bouton = bouton_block_depliable(_T('i2_import:csv_ajouts'), false,"csv_ajouts");
+		$bouton = bouton_block_depliable(_T('inscription_import:csv_ajouts'), false,"csv_ajouts");
 		$output .= debut_cadre_enfonce("mot-cle-24.gif", true, "", $bouton);
 		$output .= debut_block_depliable(false,"csv_ajouts");
 		foreach($imports as $steper=>$desc){
 			$output .= "<dl>";
-			$output .= "<dt>"._T('i2_import:nb_ligne',array('nb'=>$steper));
+			$output .= "<dt>"._T('inscription_import:nb_ligne',array('nb'=>$steper));
 			foreach($desc as $key=>$val)
-				$output .=  "<dd>"._T('inscription2:'.$key)." : $val<dd>";
+				$output .=  "<dd>"._T('inscription3:'.$key)." : $val<dd>";
 			$output .= "</dl>";
 		}
 		$output .= fin_block();
@@ -113,17 +110,17 @@ function i2_import_show_imports($imports){
 	return $output;
 }
 
-function i2_import_table_visu_extrait($tables,$nombre_lignes = 0){
+function inscription_import_table_visu_extrait($tables,$nombre_lignes = 0){
 	$maj_exist = true;
 	$limit = "";
 	
-	$champs = i2_import_table_fields($tables);
+	$champs = inscription_import_table_fields();
 	
 	if ($nombre_lignes > 0)
 		$limit = ($nombre_lignes+1);
-		$result = sql_select($champs,"spip_auteurs LEFT JOIN spip_auteurs_elargis USING(id_auteur)",'','','maj DESC',$limit);
+		$result = sql_select($champs,"spip_auteurs",'','','maj DESC',$limit);
 	if (!$result) {
- 		$result = sql_select($champs,"spip_auteurs LEFT JOIN spip_auteurs_elargis USING(id_auteur)",'','','',$limit);
+ 		$result = sql_select($champs,"spip_auteurs",'','','',$limit);
  		$maj_exist = false;
 	}
 
@@ -154,14 +151,14 @@ function i2_import_table_visu_extrait($tables,$nombre_lignes = 0){
 	if ($nb_data>$nombre_lignes){
 		$query = sql_select("id_auteur","spip_auteurs");
 		$num_rows = sql_count($query);
-		echo "<tr><td colspan='$nb_col' style='border-top:1px dotted;'>"._T('i2_import:total_auteur',array('nb'=>$num_rows))."</td></tr>\n";
+		echo "<tr><td colspan='$nb_col' style='border-top:1px dotted;'>"._T('inscription_import:total_auteur',array('nb'=>$num_rows))."</td></tr>\n";
 	}
 	echo "</table>\n";
 	if ($data_count==0)
 	  echo _L("Table vide");
 }
 
-function i2_import_array_visu_assoc($data, $table_fields, $assoc_field, $nombre_lignes = 0){
+function inscription_import_array_visu_assoc($data, $table_fields, $assoc_field, $nombre_lignes = 0){
 	$assoc=array_flip($assoc_field);
 
 	$output = "";
@@ -181,7 +178,7 @@ function i2_import_array_visu_assoc($data, $table_fields, $assoc_field, $nombre_
 			$ligne_nb++;
 			$output .= "<tr class='".alterner($ligne_nb,'row_odd','row_even')."'>";
 			foreach($table_fields as $key=>$value){
-				$kc = i2_import_nettoie_key($key);
+				$kc = inscription_import_nettoie_key($key);
 				if(isset($assoc[$kc])){
 			  		$output .= "<td>";
 			  		if(isset($ligne[$assoc[$kc]]))
@@ -199,21 +196,21 @@ function i2_import_array_visu_assoc($data, $table_fields, $assoc_field, $nombre_
 	$output .= "</table>";
 
 	if ($data_count>0)
-	  $output .= "<p class='explication'>". _T('i2_import:total_lignes',array('nb'=>count($data)))."</p>";;
+	  $output .= "<p class='explication'>". _T('inscription_import:total_lignes',array('nb'=>count($data)))."</p>";;
 	return $output;
 }
 
-function i2_import_nettoie_key($key){
+function inscription_import_nettoie_key($key){
 	return translitteration($key);
 }
 
-function i2_import_field_associate($data, $table_fields, $assoc_field){
+function inscription_import_field_associate($data, $table_fields, $assoc_field){
 	global $tables_principales;
 	$assoc=$assoc_field;
 	if (!is_array($assoc)) $assoc = array();
 	$csvfield=array_keys($data{1});
 	foreach($csvfield as $k=>$v){
-		$csvfield[$k] = i2_import_nettoie_key($v);
+		$csvfield[$k] = inscription_import_nettoie_key($v);
 	}
 	$csvfield=array_flip($csvfield);
 
@@ -256,7 +253,7 @@ function i2_import_field_associate($data, $table_fields, $assoc_field){
 	return $assoc;
 }
 
-function i2_import_field_configure($data, $table_fields, $assoc){
+function inscription_import_field_configure($data, $table_fields, $assoc){
 	$output = "";
 	$csvfield=array_keys($data{1});
 	
@@ -264,11 +261,11 @@ function i2_import_field_configure($data, $table_fields, $assoc){
 	$nb_champs = 0;
 	foreach($csvfield as $csvkey){
 		$nb_champs++;
-		$csvkey = i2_import_nettoie_key($csvkey);
+		$csvkey = inscription_import_nettoie_key($csvkey);
 		$output .=  "<li>";
 		$output .=  "<label for='champs$nb_champs'>$csvkey</label>";
 		$output .= "<select name='assoc_field[$csvkey]' id='champs$nb_champs'>\n";
-		$output .= "<option value='-1'>"._T("i2_import:pas_importer")."</option>\n";
+		$output .= "<option value='-1'>"._T("inscription_import:pas_importer")."</option>\n";
 		foreach($table_fields as $tablekey => $libelle){
 			$output .= "<option value='$tablekey'";
 			if ($assoc[$csvkey]==$tablekey)
@@ -280,45 +277,39 @@ function i2_import_field_configure($data, $table_fields, $assoc){
 	return $output;
 }
 
-function i2_import_ajoute_table_csv($data, $table, $assoc_field, &$erreur){
+function inscription_import_ajoute_table_csv($data, $table, $assoc_field, &$erreur){
 	$erreur = array();
 	$assoc = array_flip($assoc_field);
 
-	$table_fields = i2_import_table_fields($table);
-	list($auteurs,$auteurs_elargis) = i2_import_table_fields($table,'separe');
+	$table_fields = inscription_import_table_fields();
 
 	$auteurs_obligatoires = array('nom','login','email','statut');
 
 	if ($data!=false){
 		$count_lignes = 0;
-		$verif_champs = pipeline('i2_verifications_specifiques');
+		$verif_champs = pipeline('i3_verifications_specifiques');
 		foreach($data as $key=>$ligne) {
 			$count_lignes ++;
 			$auteurs_insert = array();
-			$auteurs_elargis_insert = array();
 			$check = array_flip($table_fields);
 			foreach($check as $key=>$value){
-				$kc = i2_import_nettoie_key($key);
+				$kc = inscription_import_nettoie_key($key);
 				$ligne[$assoc[$kc]] = trim($ligne[$assoc[$kc]]);
 				if ((isset($assoc[$kc]))&&(isset($ligne[$assoc[$kc]]))){
 					// On vérifie tout d'abord si le champs dispose d'une fonction de vaidation
 					if(array_key_exists($key,$verif_champs)){
-						$fonction_verif_{$key} = charger_fonction('inscription2_'.$verif_champs[$key],'inc');
+						$fonction_verif_{$key} = charger_fonction('inscription3_'.$verif_champs[$key],'inc');
 						if($val = $fonction_verif_{$key}($ligne[$assoc[$kc]],'')){
 							$erreurs[$count_lignes][$key] = $val;
 						}
 					}
 					// Si pas d'erreur sur ce champs on vérifie qu'il soit obligatoire
 					if(!isset($erreurs[$count_lignes][$key])){
-						if(in_array($key,$auteurs)){
+						if(in_array($key,$table_fields)){
 							if(in_array($key,$auteurs_obligatoires) && (strlen($ligne[$assoc[$kc]])==0)){
-								$erreurs[$count_lignes][$key] = _T("i2_import:champs_oblig",array('champs'=>$key));
+								$erreurs[$count_lignes][$key] = _T("inscription_import:champs_oblig",array('champs'=>$key));
 							}
 							$auteurs_insert[$key] = $ligne[$assoc[$kc]];
-							$auteur[$count_lignes][$key] = $ligne[$assoc[$kc]];
-						}
-						else{
-							$auteurs_elargis_insert[$key] = $ligne[$assoc[$kc]];
 							$auteur[$count_lignes][$key] = $ligne[$assoc[$kc]];
 						}
 					}
@@ -332,22 +323,14 @@ function i2_import_ajoute_table_csv($data, $table, $assoc_field, &$erreur){
 					$auteurs_insert['maj'] = date('Y-m-d H:i:s');
 					// Le statut est obligatoire ... donc on le rajoute s'il n'est pas dans le fichier
 					if(!isset($auteurs_insert['statut'])){
-						$auteurs_insert['statut'] = lire_config('inscription2/statut_nouveau')?lire_config('inscription2/statut_nouveau'):'6forum';
+						$auteurs_insert['statut'] = lire_config('inscription3/statut_nouveau')?lire_config('inscription3/statut_nouveau'):'6forum';
 					}
 					// Le login est obligatoire ... S'il n'est pas présent, on le génère à partir du nom et de l'email
 					if(!isset($auteurs_insert['login'])){
-						$definir_login = charger_fonction('inscription2_definir_login','inc');
+						$definir_login = charger_fonction('inscription3_definir_login','inc');
 						$auteurs_insert['login'] = $definir_login($auteurs_insert['nom'],$auteurs_insert['email']);
 					}
 					$auteur[$count_lignes]['id_auteur'] = sql_insertq('spip_auteurs',$auteurs_insert);
-				}
-				if(count($auteurs_elargis_insert) && ($auteur[$count_lignes]['id_auteur']>0)){
-					// Vérifier les données
-					$auteurs_elargis_insert['id_auteur'] = $auteur[$count_lignes]['id_auteur'];
-					if(isset($auteurs_elargis['creation']) && !isset($auteurs_elargis_insert['creation'])){
-						$auteurs_elargis_insert['creation'] = date('Y-m-d H:i:s');
-					}
-					sql_insertq('spip_auteurs_elargis',$auteurs_elargis_insert);
 				}
 			}else{
 				unset($auteur[$count_lignes]);

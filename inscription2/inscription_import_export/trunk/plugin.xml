@@ -1,22 +1,22 @@
 <plugin>
-	<nom>Inscription 2 import / export</nom>
-	<auteur>Quentin Drouet (kent1@arscenic.info)
+	<nom>Inscription import / export</nom>
+	<auteur>[kent1->http://www.kent1.info]
 _ Vilement inspir&eacute; du plugin CSVimport de C&eacute;dric Morin (2006)
-_ &#169; 2009 - Licence GPL
+_ &#169; 2009-2012 - Licence GPL
 	</auteur>
-	<version>0.1</version>
+	<version>0.2.0</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
-	<prefix>i2_import</prefix>
+	<prefix>inscription_import_export</prefix>
 	<description>
-<multi>[fr]Importer et exporter des utilisateurs dans et depuis inscription2
-[en]Import and export users in and from the inscription2 plugin</multi>
+<multi>[fr]Importer et exporter des utilisateurs dans et depuis inscription3
+[en]Import and export users in and from the inscription3 plugin</multi>
 	</description>
 	<pipeline>
 		<nom>affiche_droite</nom>
-		<inclure>i2_import_pipelines.php</inclure>
+		<inclure>inscription_import_export_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version='[2.0.0;]' />
-	<necessite id='inscription2' version='[0.71;]' />
+	<necessite id="SPIP" version='[2.1.12;]' />
+	<necessite id='inscription3' version='[3.0.15;]' />
 	<categorie>auteur</categorie>
 </plugin>

@@ -3,30 +3,31 @@
 /**
  * Action d'export CSV des auteurs
  * 
- * Plugin Inscription 2 Import / Export
+ * Plugin Inscription Import / Export
  * 
  */
-function action_i2_export_dist(){
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function action_inscription_export_dist(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	
 	include_spip('inc/autoriser');
 	if(autoriser('webmestre')){
-		include_spip('inc/i2_import');
+		include_spip('inc/inscription_import');
 		$delim = $arg ? $arg : (_request('delim') ? _request('delim') : ',');
 		
 		/**
 		 * Récupération des champs à exporter
 		 */
-		$tables = array('spip_auteurs','spip_auteurs_elargis');
-		$tablefield=i2_import_table_fields($tables);
+		$tablefield=inscription_import_table_fields();
 		
 		/**
 		 * Export des tables mergées
 		 */
-		$output = i2_import_csv_ligne($tablefield,$delim);
-	
-		$result = sql_select($tablefield,'spip_auteurs AS A LEFT JOIN spip_auteurs_elargis AS B USING(id_auteur)','','','','','',false);
+		$output = inscription_import_csv_ligne($tablefield,$delim);
+		spip_log($output,'test');
+		$result = sql_select($tablefield,'spip_auteurs','','','','','',false);
 		while ($row=sql_fetch($result)){
 			$ligne=array();
 			foreach($tablefield as $key)
@@ -34,13 +35,13 @@ function action_i2_export_dist(){
 			    $ligne[]=$row[$key];
 				else
 				  $ligne[]="";
-			$output .= i2_import_csv_ligne($ligne,$delim);
+			$output .= inscription_import_csv_ligne($ligne,$delim);
 		}
 	
 		$charset = $GLOBALS['meta']['charset'];
 	
 		include_spip('inc/texte');
-		$filename = preg_replace(',[^-_\w]+,', '_', translitteration(textebrut(typo(_T('i2_import:export_users_sites',array('date' => date('Y-m-d'),'site'=>$GLOBALS['meta']['nom_site']))))));
+		$filename = preg_replace(',[^-_\w]+,', '_', translitteration(textebrut(typo(_T('inscription_import:export_users_sites',array('date' => date('Y-m-d'),'site'=>$GLOBALS['meta']['nom_site']))))));
 	
 		// Excel ?
 		if ($delim == ',')
