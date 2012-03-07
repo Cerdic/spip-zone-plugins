@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_creer_evenement' => 'Generate a new event',
-	'item_mots_cles_association_evenements' => 'to those events',
+	'item_mots_cles_association_evenements' => 'events',
 	'indiquez_votre_choix' => 'Indicate your choice',
 	'info_aucun_evenement' => 'No event',
 	'info_evenements' => 'Events',
