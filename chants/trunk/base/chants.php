@@ -9,6 +9,17 @@ function chants_declarer_tables_objets_sql($tables){
             $tables['spip_chants'] = array(
 
                     'page' => "chant",
+                    'texte_retour' => 'chant:icone_retour_chant',
+                    'texte_modifier' => 'chant:icone_modifier_chant',
+                    'texte_creer' => 'chant:icone_ecrire_chant',
+                    'texte_objets' => 'chant:chants',
+                    'texte_objet' => 'chant:chant',
+                    'texte_signale_edition' => 'chant:texte_travail_chant',
+                    'info_aucun_objet'=> 'chant:info_aucun_chant',
+                    'info_1_objet' => 'chant:info_1_chant',
+                    'info_nb_objets' => 'chant:info_nb_chants',
+                    'texte_logo_objet' => 'chant:logo_chant',
+                    'texte_langue_objet' => 'chant:titre_langue_chant',
                     'principale' => "oui",
 		    'titre' => 'titre, lang',
 		    'date' => 'date',

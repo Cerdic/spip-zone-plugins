@@ -1,6 +1,6 @@
-#CACHE{6*3600}[(#HTTP_HEADER{Content-type:text/xml; charset="#CHARSET"})][(#SET{fichier,#ENV{filename, 'chant_export'}})][(#HTTP_HEADER{Pragma: no-cache})][(#HTTP_HEADER{Content-Disposition: attachment[; filename="(#GET{fichier}|concat{.xml})"]})]<?xml version="1.0" encoding="#CHARSET"?><BOUCLE_contenu_chant(CHANTS) {id_chant}>
+#CACHE{6*3600}[(#HTTP_HEADER{Content-type:text/xml; charset="#CHARSET"})][(#SET{fichier,#ENV{filename, 'chant_export'}})][(#HTTP_HEADER{Pragma: no-cache})][(#HTTP_HEADER{Content-Disposition: attachment[; filename="(#GET{fichier}|concat{.xml})"]})]<?xml version="1.0" encoding="[(#CHARSET|strtoupper)]"?><BOUCLE_contenu_chant(CHANTS) {id_chant}>
 <song>
-  <title>[(#CCLI) ]#TITRE</title>
+  <title>[(#CCLI|replace{' ',''}) ]#TITRE</title>
   <author><BOUCLE_auteur(AUTEURS){id_chant} {par nom} {', '}>#NOM</BOUCLE_auteur></author>
   <copyright>[(#COPYRIGHT)]</copyright>
   <hymn_number>[(#NUMERO)]</hymn_number>
@@ -16,5 +16,5 @@
   <theme><BOUCLE_mots(MOTS) {id_chant} {par titre}>[(#TITRE|texte_backend)]</BOUCLE_mots></theme>
   <tempo>[(#TEMPO)]</tempo>
   <time_sig>[(#SIGNATURE)]</time_sig>
-  <lyrics>[(#PAROLES|replace{'<br />',''}|replace{'<p>',''}|replace{'</p>',''})]</lyrics>
+  <lyrics>[(#PAROLES|textebrut)]</lyrics>
 </song></BOUCLE_contenu_chant>
