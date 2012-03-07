@@ -11,7 +11,6 @@ function multilang_nommer_langues($langues=array()){
 		$langues[$langue] = traduire_nom_langue($langue);
 		unset($langues[$l]);
 	}
-	spip_log($langues,'test');
 	return $langues;
 }
 ?>
