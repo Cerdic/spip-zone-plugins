@@ -33,9 +33,9 @@ function embed_url($url) {
 		// car autoembed ne gère que les vidéos de Flickr
 		if (preg_match("/^http\:\/\/(www\.)?flickr\.com/i", $url)) {
 			$oembed = "http://www.flickr.com/services/oembed/?format=json&url=".$url;
-			$json = join("",file($oembed));
+			$json = @join("",file($oembed));
 			
-			$json = json_decode($json);
+			$json = @json_decode($json);
 			$img = $json->{'url'};
 			if ($img) $code_ae = "<div class='oembed-container oembed-img'><a href='$url'><img src='$img' alt='Flickr' style='max-width: ".$max_i."px; max-height: ".$max_i."px;'/></a></div>";	
 		}
