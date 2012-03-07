@@ -63,9 +63,7 @@ function agenda_affiche_milieu($flux) {
 	elseif ($e['type']=='article'
 	  AND $e['edition']==false){
 		$id_article = $flux['args']['id_article'];
-		if (autoriser('creerevenementdans','article',$id_article)) {
-			$out .= recuperer_fond('prive/objets/contenu/article-evenements',$flux['args']);
-		}
+		$out .= recuperer_fond('prive/objets/contenu/article-evenements',$flux['args']);
 	}
 
 	if ($out){
