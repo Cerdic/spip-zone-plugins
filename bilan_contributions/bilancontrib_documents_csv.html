@@ -1,4 +1,4 @@
-#CACHE{6*3600}#HTTP_HEADER{Content-type:text/csv; charset=#CHARSET}[(#SET{fichier,#VAL{bilan_contributions_documents_}|concat{#NOM_SITE_SPIP}})][(#HTTP_HEADER{Content-type: text/csv[; charset=(#CHARSET)]})][(#HTTP_HEADER{Pragma: no-cache})][(#HTTP_HEADER{Content-Disposition: attachment[; filename="(#GET{fichier}|concat{.csv})"]})][
+#CACHE{6*3600}[(#SET{fichier,#VAL{bilan_contributions_documents_}|concat{#NOM_SITE_SPIP}})][(#HTTP_HEADER{Content-type: text/csv[; charset=(#CHARSET)]})][(#HTTP_HEADER{Pragma: no-cache})][(#HTTP_HEADER{Content-Disposition: attachment[; filename="(#GET{fichier}|concat{.csv})"]})][
 (#REM) Chercher les annees utilisees ][
 (#SET{annees,#ARRAY})]<BOUCLE_articles_annees(ARTICLES){tout}>[(#DATE|annee|unique|oui)#SET{annees, #GET{annees}|push{#DATE|annee}}]</BOUCLE_articles_annees>[
 (#REM) Chercher les extensions utilisees ][
