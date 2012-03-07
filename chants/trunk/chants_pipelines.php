@@ -34,11 +34,10 @@ function chants_affiche_milieu($flux) {
 		));
 	}
 
-// Je désactive pour le moment. Car si la table chants_liens n'existe pas, les chants sont listés automatiquement grâce au <div id="wysiwyg"><INCLURE{fond=prive/objets/contenu/auteur,id=#ID_AUTEUR,id_auteur=#ID_AUTEUR}></div> de la page auteur.html (ce dernier code liste tous les objets auxquels sont liés les auteurs. cf. auteurs_liens.objet)
-	// chants sur les auteurs
-//	if ($flux["args"]["exec"] == "auteur") {
-//               $texte =  recuperer_fond('chemin/vers/squelette',array('id_auteur' => $flux['args']['id_auteur']));
-//       }
+//	 chants sur les auteurs
+	if ($flux['args']['exec'] == 'auteur') {
+		$texte = recuperer_fond('prive/objets/liste/chants', array('id_auteur' => $flux['args']['id']));
+	}
 
 	if ($texte) {
 		if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))

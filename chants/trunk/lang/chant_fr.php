@@ -4,6 +4,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // D
     'date_annee' => 'Année de sortie',
     
+    // E
+    'exporter' => 'Exporter le chant',
+    
     // I
     'icone_creer_chant' => "Ajouter un chant",
     'icone_modifier_chant' => "Modifier ce chant",

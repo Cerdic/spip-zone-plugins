@@ -38,7 +38,11 @@ function chants_upgrade($nom_meta_base_version, $version_cible){
 	$maj['0.7.5'] = array(
 		array('sql_drop_table', 'spip_chants_liens')
 	);
-	
+	// ajout de l'id_secteur
+	$maj['0.7.6'] = array(
+		array('maj_tables', array('spip_chants'))
+	);
+
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

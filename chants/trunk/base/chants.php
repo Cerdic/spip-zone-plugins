@@ -8,12 +8,14 @@ function chants_declarer_tables_interfaces($interfaces) {
 function chants_declarer_tables_objets_sql($tables){
             $tables['spip_chants'] = array(
 
+                    'page' => "chant",
                     'principale' => "oui",
 		    'titre' => 'titre, lang',
 		    'date' => 'date',
                     'field'=> array(
                             "id_chant" => "bigint(21) NOT NULL",
                             "id_rubrique" => "bigint(21) DEFAULT '0' NOT NULL",
+			    "id_secteur" => "bigint(21) DEFAULT '0' NOT NULL",
                             "titre" => "tinytext DEFAULT '' NOT NULL",
                             "alias" => "tinytext DEFAULT '' NOT NULL",
                             "copyright" => "tinytext DEFAULT '' NOT NULL",
@@ -37,6 +39,10 @@ function chants_declarer_tables_objets_sql($tables){
                     'key' => array(
                             "PRIMARY KEY"   => "id_chant",
 			    "KEY id_rubrique" => "id_rubrique",
+			    "KEY id_secteur" => "id_secteur",
+			    "KEY id_trad" => "id_trad",
+			    "KEY lang" => "lang",
+			    "KEY statut" => "statut, date",
                     ),
 		    'join' => array(
 			"id_chant" => "id_chant",
@@ -67,6 +73,9 @@ function chants_declarer_tables_objets_sql($tables){
                         'poubelle' => 'texte_statut_poubelle',
 		    ),
 		    'texte_changer_statut' => 'chant:texte_changer_statut',
+		    'tables_jointures' => array(
+                        'profondeur' => 'rubriques'
+		    ),
             );
            
             return $tables;

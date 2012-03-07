@@ -22,7 +22,8 @@
 			|icone_horizontale{<:previsualiser:>,preview})]
 	]
 <//B_publie>
-
+[(#SET{filename, [(#CCLI|replace{' ',''}) ][(#TITRE)]})] #GET{filename}
+[(#URL_PAGE{chant_export.xml}|parametre_url{'id_chant',#ID_CHANT}|parametre_url{'filename',#GET{filename}}|icone_horizontale{<:chant:exporter:>,chant,chant-exporter-24,center})]
 
 </div>
 </BOUCLE_art>
