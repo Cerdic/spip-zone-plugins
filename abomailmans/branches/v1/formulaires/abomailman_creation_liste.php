@@ -88,7 +88,7 @@ function formulaires_abomailman_creation_liste_traiter_dist($id_abomailman = "")
 	$datas['titre'] = _request('titre');
 	$datas['descriptif'] = _request('descriptif');
 	if(_request('abotype') && in_array(_request('abotype'), array('news','ml'))){
-		$datas['abo_type'] = _request('abotype')
+		$datas['abo_type'] = _request('abotype');
 	}
 	$datas['email'] = _request('email');
 	$datas['email_subscribe'] = _request('email_subscribe');
