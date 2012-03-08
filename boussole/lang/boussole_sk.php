@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'descriptif_boussole_spip' => 'Buzola SPIPu zoskupuje všetky "oficiálne" stránky galaxie SPIPu. Pri každej stránke uvádza jej logo, názov, slogan a jej popis. Pokojne ju môžete použiť na vlastných stránkach na nasmerovanie svojich návštevníkov do galaxie SPIPu.',
-	'descriptif_site_spip_blog' => 'Par ce que SPIP est un projet collaboratif, SPIP-BLOG.net  rassemble billets techniques, auto-dérision, humeurs, trolls, annonces diverses,... En cela il est bien le reflet de la communauté SPIP : d\'abord et avant tout, énormément de tendresse.', # NEW
+	'descriptif_site_spip_blog' => 'Keďže SPIP je kolektívny projekt, SPIP-BLOG.net  sústreďuje technické poznámky, staršie verzie, nálady, chyby, rôzne oznamy, atď. Takto odráža komunitu okolo SPIPu: na prvom mieste a predovšetkým ľahkosťou. énormément de tendresse.',
 	'descriptif_site_spip_contrib' => 'Site collaboratif, SPIP-CONTRIB.net met à disposition l\'ensemble des contributions externes : plugins, scripts, filtres, squelettes, documentations, trucs et astuces,... versées à la communauté (liens de téléchargement) par les utilisateurs de SPIP. Ses forums assurent le lien entre développeurs et utilisateurs.', # NEW
 	'descriptif_site_spip_core' => 'Le site CORE.SPIP.org rassemble l\'historique des modifications du code de SPIP, une gestion de tickets permettant de signaler des bugs et de proposer des suggestions d\'amélioration et un espace de téléchargement des versions de SPIP.', # NEW
 	'descriptif_site_spip_demo' => 'Site de test réinitialisé chaque nuit, DEMO.SPIP.org permet à tout un chacun de tester SPIP dans sa dernière version stable (avec, au choix, le statut de rédacteur ou d\'administrateur), en un clic et sans avoir à l\'installer.', # NEW
@@ -54,7 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_ajouter_boussole' => 'En ajoutant des boussoles à votre base de données, vous aurez la possiblité d\'utiliser les modèles fournis pour les afficher dans vos pages publiques.<br />Une boussole est décrite par un fichier XML contenant les informations sur la boussole et ses sites.<br /><br />Si la boussole existe déjà ce formulaire permettra de la mettre à jour en conservant la configuration d\'affichage.', # NEW
 	'info_aucun_logo_boussole' => 'Buzola nemá žiadne logo',
 	'info_boite_boussoles_gerer' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet l’ajout, la mise à jour et la suppression des boussoles. Il est aussi possible de se rendre sur la page de configuration de l\'affichage de chaque boussole.</p>', # NEW
-	'info_configurer_boussole' => 'Ce formulaire vous permez de configurer l\'affichage de la boussole en choisissant les sites à afficher ou pas et l\'ordre d\'affichage dans un groupe. Les sites non affichés sont repérés par un fond hachuré et une police grise.', # NEW
+	'info_configurer_boussole' => 'Tento formulár vám umožňuje nastaviť zobrazenie buzoly zvolením, v akom poradí a v akej skupine sa stránky majú alebo nemajú zobraziť. Stránky, ktoré sa nezobrazia, budú označené tieňovaným pozadím a sivým písmom.',
 	'info_fichier_boussole' => 'Zadajte adresu súboru s popisom svojej buzoly',
 	'info_liste_aucune_boussole' => 'Do vašej databázy ešte nebola pridaná žiadna buzola. Na jej pridanie použite formulár nižšie.',
 	'info_liste_boussoles' => 'Na tejto stránke nájdete zoznam buzol pridaných do vašej databázy.',
