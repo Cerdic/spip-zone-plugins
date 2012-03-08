@@ -38,7 +38,7 @@
 [(#REM) permettre de donner un identifiant de list specifique en option de la saisie
 ]#SET{list_id,#ENV{list}}
 <B_selection>
-[(#SET{list_id,[(#GET{list,[champ_(#ENV{nom})_datas]})]})]
+[(#SET{list_id,[(#GET{list_id,[champ_(#ENV{nom})_datas]})]})]
 <datalist id="#GET{list_id}">
 <BOUCLE_selection(POUR){tableau #GET{datas}}
 >[	<option value="(#VALEUR|attribut_html)"></option>
