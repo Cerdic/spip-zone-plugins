@@ -97,39 +97,41 @@ na tento odkaz:
 ',
 	'confirmation_votre_inscription' => 'Potvrdenie registrácie',
 	'confirmation_votre_inscription_multiple' => 'Potvrdenie registrácie',
-	'confirmation_votre_inscription_text' => '
-Bonjour,
+	'confirmation_votre_inscription_text' => 'Dobrý deň,
 
-Pour confirmer votre inscription à la lettre d\'information @@NOM_COMPLET@@ au format @@FORMAT_INSCRIPTION@@, veuillez cliquer sur ce lien :
+na potvrdenie svojej registrácie na odoberanie informačného materiálu @@NOM_COMPLET@@ au format @@FORMAT_INSCRIPTION@@, veuillez cliquer sur ce lien :
 
  @@URL_CONFIRMATION@@
+(=vo formáte... ,prosím kliknite na tento odkaz)
 
-Merci
-', # NEW
-	'confirmation_votre_inscription_text_multiple' => '
-Bonjour,
+Ďakujeme
+',
+	'confirmation_votre_inscription_text_multiple' => 'Dobrý deň,
 
-Pour confirmer votre inscription aux lettres d\'information suivantes :
+na potvrdenie svojej registrácie na odoberanie týchto informačných materiálov:
 
  @@NOM_COMPLET@@ 
 
 veuillez cliquer sur ce lien :
 
  @@URL_CONFIRMATION@@
+(= prosím, kliknite na tento odkaz)
 
-Merci
-', # NEW
+Ďakujeme
+',
 	'confirme_desabonnement_multiple_lettre' => 'Chystáte sa odhlásiť niekoľkých používateľov z odoberania tohto materiálu. Určite to chcete urobiť?',
 	'confirme_suppression_multiple_base' => 'Chystáte sa vymazať databázu odberateľov. Určite to chcete urobiť?',
-	'corps_mail_mod' => 'Bonjour,
+	'corps_mail_mod' => 'Dobrý deň,
 
-Vous recevez ce message en tant que modérateur de la lettre @@NOM_LETTRE@@.
+túto správu ste dostali ako moderátor materiálu @@NOM_LETTRE@@.
 
 Pour valider l\'inscription de @mail@ à cette lettre, veuillez cliquer sur ce lien :
 
  @@URL_CONFIRMATION@@
 
-Merci', # NEW
+= (Na potvrdenie registrácie na odoberanie tohto materiálu, prosím kliknite na uvedený odkaz.)
+
+Ďakujeme',
 	'cree' => 'Vytvorený',
 	'creer' => 'Vytvoriť',
 	'creer_lettre' => 'Vytvoriť informačný materiál',
@@ -207,9 +209,9 @@ Odhlásenie @sub_email@ z odoberania materiálu "@lst_name@"',
 
 Registrácia @sub_email@ na odoberanie materiálu "@lst_name@"',
 	'mail_info_inscription_sujet' => 'Registrácia @sub_email@',
-	'mail_inscription_multiple' => 'Bonjour,
+	'mail_inscription_multiple' => 'Dobrý deň,
 
-Pour confirmer votre inscription aux lettres d\'information suivantes :
+na potvrdenie svojej registrácie na odoberanie týchto informačných materiálov:
 
  @@NOM_COMPLET@@
 
@@ -217,7 +219,9 @@ veuillez cliquer sur ce lien :
 
  @@URL_CONFIRMATION@@
 
-Merci', # NEW
+(= prosím, kliknite na tento odkaz.)
+
+Ďakujeme',
 	'maj_inscription' => 'údaje o registrácii boli aktualizované',
 	'maj_inscriptions' => 'údaje o registráciách boli aktualizované',
 	'mauvais_affichage' => 'Ak sa vám tento e-mail nezobrazil správne, prečítajte si ho na stránke',
