@@ -52,10 +52,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_module_inconnu' => 'This module is not available',
 	'erreur_pas_langue_cible' => 'Select a language',
 	'erreur_repertoire_local_inexistant' => 'Warning: the directory used to save files localy does not exist: "squelettes/lang"',
-	'erreur_statut_js' => 'La chaîne de langue a été modifiée mais son statut ne l\'est pas', # NEW
-	'erreur_variable_manquante' => 'La partie de la chaîne suivante ne doit pas être modifiée :', # NEW
-	'erreur_variable_manquante_js' => 'Une ou plusieurs variables obligatoires ont été modifiées', # NEW
-	'erreur_variable_manquantes' => 'Les @nb@ parties de la chaîne suivantes ne doivent pas être modifiées :', # NEW
+	'erreur_statut_js' => 'The language string has been changed but not its status',
+	'erreur_variable_manquante' => 'The following part of the string should not be changed:',
+	'erreur_variable_manquante_js' => 'One or more required variables were changed',
+	'erreur_variable_manquantes' => 'The @nb@ parts of the following string should not be changed:',
 	'explication_comm' => 'The comment is an added information in the language file in order to explain for example a particular choice of translation.',
 	'explication_langue_cible' => 'The language into which you translate.',
 	'explication_langue_origine' => 'The language from which you translate (Only 100% complete languages ​​are available).',
@@ -182,8 +182,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_aucun_resultat_chaine' => 'No results matching your criteria in the language strings.',
 	'message_aucun_resultat_statut' => 'No string matches the requested status.',
 	'message_aucune_nouvelle_langue_dispo' => 'This module is available in all languages',
-	'message_changement_lang_orig' => 'La langue d\'origine de traduction choisie ("@lang_orig@") n\'est pas assez traduite, elle est remplacée par la langue "@lang_nouvelle@".', # NEW
-	'message_changement_lang_orig_inexistante' => 'La langue d\'origine de traduction choisie ("@lang_orig@") est inexistante, elle est remplacée par la langue "@lang_nouvelle@".', # NEW
+	'message_changement_lang_orig' => 'The original language of translation selected ("@lang_orig@") is not sufficiently translated, it is replaced by the language "@lang_nouvelle@".',
+	'message_changement_lang_orig_inexistante' => 'The original language of translation selected ("@lang_orig@") does not exist, it is replaced by the language "@lang_nouvelle@".',
 	'message_confirm_redirection' => 'You will be redirected to the modification of the module',
 	'message_demande_update_langues_cible_mere' => 'You can ask an administrator to resynchronize this language with the primary language.
 	',
@@ -210,7 +210,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_items_langue_en_trop' => '@nb@ items are too much in the language "@langue_longue@" (@langue@).',
 	'nb_items_langue_inexistants' => '@nb@ items does not exists in the language "@langue_longue@" (@langue@).',
 	'nb_items_langue_mere' => 'The main language of this module includes @nb@ items.',
-	'notice_affichage_limite' => 'L\'affichage est limité à @nb@ chaînes de langue non traduites.', # NEW
+	'notice_affichage_limite' => 'Only @nb@ untranslated strings are displayed.',
 
 	// R
 	'readme' => 'This plugin allows you to manage the language files',
