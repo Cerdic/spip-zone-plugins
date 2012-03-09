@@ -10,8 +10,6 @@
 <script>
   Galleria.loadTheme('[(#CHEMIN{galleria/themes/[(#ENV{theme, "classic"})]/galleria.[(#ENV{theme, "classic"})].min.js})]');
   $("#galleria[(#ENV{id})]").galleria({[
-    width: [(#ENV{width, "750"})],
-    height: [(#ENV{height, "500"})]
     autoplay: (#ENV{autoplay}),][
     carousel: (#ENV{carousel}),][
     carouselFollow: (#ENV{carouselFollow}),][
@@ -58,6 +56,8 @@
     thumbnails: '(#ENV{thumbnails})',][
     transition: '(#ENV{transition})',][
     transitionSpeed: (#ENV{transitionSpeed}),]
+    width: [(#ENV{width, "750"})],
+    height: [(#ENV{height, "500"})]
   });
 </script>
 </B_galleria>
