@@ -1,10 +1,7 @@
 Les tâches à réaliser :
-- ajouter un squelette d'affichage de la page contenu/chant.html ;
 - ajouter un squelette par défaut si pas de présence du plugin Z ;
-- créer une page d'export du chant en fichier xml compatible OpenSong ;
 - créer une page d'export des chants d'une rubrique/répertoire compatible Opensong
 (utilisation du plugin projection ? http://zone.spip.org/trac/spip-zone/browser/_plugins_/projection/projection_pipelines.php
 du plugin Zippeur pour créaton d'un zip ?
 http://zone.spip.org/trac/spip-zone/browser/_plugins_/zippeur/zippeur_fonctions.php) ;
 - créer une page de création de "Sets" (Plugin Grappes ?) ;
-- ajouter des boutons d'export dans la zone "extra".

@@ -70,4 +70,5 @@ function chants_affiche_auteurs_interventions($flux){
 	}
   return $flux;
 }
+
 ?>
