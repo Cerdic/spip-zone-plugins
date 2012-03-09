@@ -61,7 +61,7 @@
 	</pipeline>
 -->
 <!-- manque aussi le menu -->
-
+	<necessite id='tw' version='[0.8.0;]' />
 	<necessite id="SPIP" version="[2.1.0;]" />
 	<categorie>multimedia</categorie>
 </plugin>
