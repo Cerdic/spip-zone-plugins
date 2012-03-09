@@ -690,7 +690,7 @@
 					  . _q($url).", '$confirmation', '$statut',"._q($cookie).","
 					  . implode(',',array_map('_q',$rang)) .")");*/
 					//$id_donnee = spip_insert_id();
-					$id_donnee = sql_insertq( 'spip_forms_donnees',array('id_form'=>_q($id_form),'id_auteur'=>_q($id_auteur),'date'=>'NOW()','ip'=>_q($GLOBALS['ip']),'url'=>_q($url),'confirmation'=>$confirmation,'statut'=>$statut,'cookie'=>_q($cookie),implode(',',array_keys($rang))=>implode(',',array_map('_q',$rang))));
+					$id_donnee = sql_insertq( 'spip_forms_donnees',array('id_form'=>$id_form,'id_auteur'=>$id_auteur,'date'=>'NOW()','ip'=>$GLOBALS['ip'],'url'=>$url,'confirmation'=>$confirmation,'statut'=>$statut,'cookie'=>$cookie, implode(',',array_keys($rang))=>implode(',',$rang)));
 					# cf. GROS HACK inc/forms_tables_affichage
 					# rattrapper les documents associes a cette nouvelle donnee
 					# ils ont un id = 0-id_auteur
