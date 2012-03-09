@@ -23,6 +23,7 @@
 
         <!-- facilitons les champs de formulaires -->
         <necessite nom="saisies" compatibilite="[1.14.0;]" />
+        <necessite nom="zippeur" compatibilite="[1.5.0;]" />
 
         <!-- Les menus -->
         <menu nom="chants" titre="chant:titre_chants" parent="menu_edition" icone="images/chant-16.png" />
