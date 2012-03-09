@@ -95,6 +95,11 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 			$from = $destinataire;
 		}
 	}
+	// "Marie Toto <Marie@toto.com>"
+	if (preg_match(",^([^<>\"]*)<([^<>\"]+)>$,i",$from,$m)){
+		$nom_envoyeur = trim($m[1]);
+		$from = trim($m[2]);
+	}
 	if (!empty($from)){
 		$facteur->From = $from;
 		// la valeur par défaut de la config n'est probablement pas valable pour ce mail,
