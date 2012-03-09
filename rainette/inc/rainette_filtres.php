@@ -97,6 +97,7 @@ function rainette_croaaaaa_previsions($code_meteo, $type='x_jours', $jour=0, $mo
 		$nom_fichier = charger_meteo($code_meteo, 'previsions');
 		lire_fichier($nom_fichier,$tableau);
 		$tableau = unserialize($tableau);
+		$tableau['code'] = $code_meteo;
 		// Si jour=0 (aujourd'hui), on complete par le tableau du lendemain matin
 		if ($jour == 0) {
 			$tableau[$jour]['lever_soleil_demain'] = $tableau[$jour+1]['lever_soleil'];
@@ -120,6 +121,7 @@ function rainette_croaaaaa_previsions($code_meteo, $type='x_jours', $jour=0, $mo
 		$nom_fichier = charger_meteo($code_meteo, 'previsions');
 		lire_fichier($nom_fichier,$tableau);
 		$tableau = unserialize($tableau);
+		$tableau['code'] = $code_meteo;
 		$texte = "";
 		while (count($tableau) && $jour--){
 			$page = recuperer_fond("modeles/$modele", array_shift($tableau));			
@@ -135,6 +137,7 @@ function rainette_croaaaaa_conditions($code_meteo, $modele='conditions_tempsreel
 	$nom_fichier = charger_meteo($code_meteo, 'conditions');
 	lire_fichier($nom_fichier,$tableau);
 	$tableau = unserialize($tableau);
+	$tableau['code'] = $code_meteo;
 	$texte = recuperer_fond("modeles/$modele", $tableau);			
 	return $texte;
 }
@@ -145,6 +148,7 @@ function rainette_croaaaaa_infos($code_meteo, $modele='infos_ville'){
 	$nom_fichier = charger_meteo($code_meteo, 'infos');
 	lire_fichier($nom_fichier,$tableau);
 	$tableau = unserialize($tableau);
+	$tableau['code'] = $code_meteo;
 	$texte = recuperer_fond("modeles/$modele", $tableau);			
 	return $texte;
 }
