@@ -48,7 +48,7 @@ class Facteur extends PHPMailer {
 		}
 		else
 			if (!$this->AddAddress($email))
-				spip_log("Erreur AddAddress $adresseMail : ".print_r($this->ErrorInfo,true),'facteur');
+				spip_log("Erreur AddAddress $email : ".print_r($this->ErrorInfo,true),'facteur');
 
 		if (!empty($GLOBALS['meta']['facteur_smtp_sender'])) {
 			$this->Sender = $GLOBALS['meta']['facteur_smtp_sender'];
