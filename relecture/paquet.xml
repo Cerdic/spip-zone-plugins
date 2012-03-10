@@ -1,0 +1,25 @@
+<paquet
+	prefix="relecture"
+	categorie="edition"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.0.0-beta2;3.0.*]"
+	logo="relecture-64.png"
+	schema="1"
+	documentation="http://blog.smellup.net/spip.php?article53"
+>	
+
+	<nom>Relecture</nom>
+	<!-- Organiser la relecture de vos articles -->
+
+	<auteur lien="http://blog.smellup.net/">Eric Lupinacci</auteur>
+
+	<traduire module="relecture" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/relecture_declarations.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/relecture_declarations.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/relecture_declarations.php" />
+	<pipeline nom="affiche_gauche" inclure="relecture_pipelines.php" />
+	<pipeline nom="afficher_contenu_objet" inclure="relecture_pipelines.php" />
+
+</paquet>
