@@ -104,6 +104,14 @@ $AutoEmbed_stubs = array(
     'iframe-player' => 'http://player.vimeo.com/video/$2',
   ),
   array(
+    'title' => 'Official.fm',
+    'website' => 'official.fm',
+    'url-match' => 'http://(www\.)?official\.fm/tracks/([0-9]+)',
+    'embed-width' => '100%',
+    'embed-height' => '40',
+    'iframe-player' => '$1?fairplayer=small',
+  ),
+  array(
     'title' => '123video',
     'website' => 'http://www.123video.nl',
     'url-match' => 'http://(?:www\.)?123video\.nl/(?:playvideos\.asp\?(?:[^"]*?)?MovieID=|123video_share\.swf\?mediaSrc=)([0-9]{1,8})',
