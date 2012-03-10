@@ -927,8 +927,8 @@ jQuery.geoportail =
 			if (visu.maxZ) map.getMap().maxZoomLevel = parseInt(visu.maxZ);
 
 			// Style d'affichage par defaut
-			OpenLayers.Feature.Vector.style['default'].fillOpacity = 0.8;
-			OpenLayers.Feature.Vector.style['select'].fillOpacity = 0.8;
+			OpenLayers.Feature.Vector.style['default'].fillOpacity = 1;
+			OpenLayers.Feature.Vector.style['select'].fillOpacity = 1;
 		}
 	},
 
