@@ -1,0 +1,87 @@
+<BOUCLE_principale(CHANTS) {id_chant}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#TITRE|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#PAROLES{150}|attribut_html)" />]
+[<link rel="canonical" href="(#URL_CHANT|url_absolue)" />]
+<INCLURE{fond=inclure/head} />
+</head>
+
+<body class="pas_surlignable page_chant">
+<div class="page">
+
+	<INCLURE{fond=inclure/header} />
+	<INCLURE{fond=inclure/nav,env} />
+	
+	<div class="main">
+		[(#REM) Contenu principal : contenu du chant ]
+		<div class="wrapper hfeed">
+		<div class="content hentry" id="content">
+			<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_chant}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+	
+			<div class="cartouche">
+				[(#LOGO_CHANT||image_reduire{200,200})]
+				[<p class="#EDIT{copyright} copyright">(#COPYRIGHT)</p>]
+				<h1 class="h1 #EDIT{titre}">#TITRE</h1>
+				[<p class="#EDIT{alias} alias">(#ALIAS)</p>]
+            
+				<p class="info-publi"><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr><B_auteur>, <span class="auteurs"><:par_auteur:> <BOUCLE_auteur(AUTEURS) {id_chant}{par nom}{', '}><a href="#URL_AUTEUR">#NOM</a></BOUCLE_auteur></span></B_auteur></p>
+				[(#REM) Inclure le modele des liens de traductions ]
+				#MODELE{chant_traductions}
+			</div>
+			
+            <ul class="liste-item">
+                [<li class="item"><strong><:chant:label_date_annee:></strong> <span class="#EDIT{date_annee}">(#DATE_ANNEE|=={'0000'}|oui|?{<:chant:texte_non_renseignee:>,#DATE_ANNEE})</span></li>]
+                [<li class="item #EDIT{numero}"><strong><:chant:label_numero:></strong> (#NUMERO)</li>]
+                [<li class="item #EDIT{presentation}"><strong><:chant:label_presentation:></strong> (#PRESENTATION)</li>]
+                [<li class="item #EDIT{ccli}"><strong><:chant:label_ccli:></strong> (#CCLI)</li>]
+                [<li class="item #EDIT{capo}"><strong><:chant:label_capo:></strong> (#CAPO)</li>]
+                [<li class="item #EDIT{tempo}"><strong><:chant:label_tempo:></strong> (#TEMPO)</li>]
+                [<li class="item #EDIT{signature}"><strong><:chant:label_signature:></strong> (#SIGNATURE)</li>]
+                [<li class="item #EDIT{tonalite}"><strong><:chant:label_tonalite:></strong> (#TONALITE)</li>]
+            </ul>
+            [<div class="#EDIT{ligne_principale} ligne_principale">(#LIGNE_PRINCIPALE|image_reduire{500,0})</div>]
+            [<div class="#EDIT{paroles} texte">(#PAROLES|image_reduire{500,0})</div>]
+	
+			[<div class="notes surlignable"><h2 class="h2 pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
+
+		</div><!--.content-->
+		</div><!--.wrapper-->
+	
+	
+		<div class="aside">
+		
+			<INCLURE{fond=inclure/navsub, id_rubrique} />
+	
+			[(#REM) Articles dans la meme rubrique ]
+			<B_chants_rubrique>
+			<div class="menu">
+				<h2><:meme_rubrique:></h2>
+				<ul>
+					<BOUCLE_chants_rubrique(CHANTS) {id_rubrique} {!par date} {0,10}>
+					<li><a href="#URL_CHANT"[ class="(#EXPOSE)"]>#TITRE</a></li>
+					</BOUCLE_chants_rubrique>
+				</ul>
+			</div>
+			</B_chants_rubrique>
+	
+			[(#REM) Menu de navigation mots-cles ]
+			#MODELE{chant_mots}
+			
+		</div><!--.aside-->
+	</div><!--.main-->
+
+	<INCLURE{fond=inclure/footer,self=#SELF} />
+
+</div><!--.page-->
+</body>
+</html>
+</BOUCLE_principale>[(#INCLURE{fond=404, erreur=<:aucun_chant:>})]
+<//B_principale>
