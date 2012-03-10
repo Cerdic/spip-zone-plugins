@@ -1,18 +1,20 @@
-<div class='ajax'>
+<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_rubrique}" id="formulaire_#FORM-#ENV{id_rubrique}">
 	<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
 	<div class="info_article_accueil">
-	<B_article>
 	<BOUCLE_article(ARTICLES){id_article=#ID_ARTICLE_ACCUEIL}>
 		<:article_accueil:rubrique_article_en_accueil:> <a href="#URL_ARTICLE">#TITRE</a>
 	</BOUCLE_article>
 	</B_article>
 	<:article_accueil:aucun_article_accueil:>
 	<//B_article>
+	[(#ENV{editable})
+	<span class="toggle_box_link" style="display:none;">&#91;<a href="#"
+			onclick="var f=jQuery(this).parents('.formulaire_spip').eq(0);f.find('form').show('fast');f.find('p').show('fast');f.find('.toggle_box_link').hide('fast');return false;"
+			><:bouton_changer:></a>&#93;</span>
+	]
 	</div>
 	</BOUCLE_rubrique>
-
-[<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_rubrique}" id="formulaire_#FORM-#ENV{id_rubrique}"[(#ENV{_hide})style="display:none;"]>
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	(#ENV{editable})
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
@@ -30,6 +32,11 @@
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
-	</div></form>
-</div>]
+	</div></form>]
 </div>
+<script type="text/javascript">// <![CDATA[
+	$(document).ready(function(){
+		$(".formulaire_editer_article_accueil .toggle_box_link").show(0);
+		$(".formulaire_editer_article_accueil form").hide(0);
+	});
+ //]]></script>
