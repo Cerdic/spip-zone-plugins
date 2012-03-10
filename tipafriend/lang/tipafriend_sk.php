@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_descr' => 'Nastavenie zásuvného modulu <i>Odporučiť priateľovi</i>',
 	'cfgform_comment_close_button' => 'podľa predvolených nastavení aktivované, táto možnosť vám umožňuje rozhodnúť, či sa v spodnej časti okna zobrazí tlačidlo "Zatvoriť"; <strong>táto možnosť je automaticky deaktivovaná ak sú deaktivované hlavičky, ktoré sú vymenované vyššie.</strong>',
 	'cfgform_comment_contenu' => 'Tu si vyberte typ objektu SPIPu (<i>článok, novinka, autor, a i.</i>) ktorý bude pripojený do e-mailu.',
-	'cfgform_comment_header' => 'cette option vous permet de choisir si les informations de la balise &lt;head&gt; de la page doivent être présentes ou non (<i>il peut être utile de les désactiver si vous utilisez une fenêtre javascript type \'thickbox\', ou au contraire de forcer leur affichage dans le même contexte avec un contenu en frame</i>).', # NEW
+	'cfgform_comment_header' => 'táto možnosť vám umožňuje rozhodnúť sa, či stránka musí mať tag  &lt;head&gt; ("hlavička") alebo nie (<i>môže byť užitočné deaktivovať túto možnosť, ak používate javascriptové okno typu "thickbox" alebo ich chcete zobraziť iným spôsobom v rovnakom kontexte s rámom</i>).',
 	'cfgform_comment_javascript' => 'funkciu otvárania vyskakovacieho okna môžete deaktivovať (<i>napríklad v prípade použitia javascriptových okien typu "thickbox" alebo "fancybox"</i>).',
 	'cfgform_comment_options' => 'musíte zadať úplné parametre, napríklad: "class=\'thickbox\'", budú automaticky pridané k odkazom na vaše šablóny; <b>používajte len jednoduché úvodzovky (\'...\').</b>',
 	'cfgform_comment_options_url' => 'tu môžete zadať parametre, napríklad: "arg=valeur&arg2=nouvelle_valeur"; budú automaticky pridané k internetovej adrese, ktorú vytvorí tag.',
@@ -117,7 +117,7 @@ Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubr
 	'form_exp_label' => 'Vaša e-mailová adresa',
 	'form_exp_nom_label' => 'Vaše meno',
 	'form_exp_send_label' => '<em>Pripojíte kópiu e-mailu (pole "Cc")</em>',
-	'form_intro' => 'Pour transmettre l\'adresse de cette page, indiquez les adresses e-mail de vos contacts, votre propre adresse e-mail ainsi que vote nom. Vous pouvez également si vous le souhaitez ajouter un commentaire qui sera inclus dans le corps du message.<br /><small>{{*}} {Aucune de ces informations ne sera conservée.}</small>', # NEW
+	'form_intro' => 'Ak chcete poslať adresu tejto stránky, zadajte e-mailové adresy svojich kontaktov, svoju vlastnú e-mailovú adresu a hodnotenie. Ak chcete, môžete prípadne aj pridať komentár, ktorý bude pridaný do hlavného textu správy. <br /><small>{{*}} {Žiaden z týchto údajov nebude uložený.}</small>',
 	'form_message_label' => 'Môžete pridať text',
 	'form_separe_virgule' => '<em>Môžete uviesť viac adries oddelených bodkočiarkou.</em>',
 	'form_title' => 'Poslať stránku e-mailom',
@@ -125,11 +125,11 @@ Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubr
 	// I
 	'info_doc' => 'Ak máte problémy so zobrazením tejto stránky, [kliknite sem.->@link@]',
 	'info_doc_titre' => 'Poznámka o zobrazení tejto stránky',
-	'info_skel_doc' => 'Cette page de documentation est conçue sous forme de squelette SPIP fonctionnant avec la distribution standard ({fichiers du répertoire "squelettes-dist/"}). Si vous ne parvenez pas à visualiser la page, ou que votre site utilise ses propres squelettes, les liens ci-dessous vous permettent de gérer son affichage :
+	'info_skel_doc' => 'Táto stránka dokumentácie je vytvorená ako šablóna SPIPu, ktorá funguje s bežnou distribúciou  ({súbory v priečinku "squelettes-dist/"}). Ak sa vám stránka nezobrazuje správne alebo ak vaša stránka využíva vlastné šablóny, odkazy uvedené nižšie vám pomôžu upraviť jej zobrazenie:
 
--* [Mode "texte simple"->@mode_brut@] ({html simple + balise INSERT_HEAD})
--* [Mode "squelette Zpip"->@mode_zpip@] ({squelette Z compatible})
--* [Mode "squelette SPIP"->@mode_spip@] ({compatible distribution})', # NEW
+-* [Režim "nenáformátovaný text"->@mode_brut@] ({jednoduché html + tag INSERT_HEAD})
+-* [Režim "šablóna Zpip"->@mode_zpip@] ({kompatibilné so šablónou Z})
+-* [Režim "šablóna SPIP"->@mode_spip@] ({kompatibilné s distribúciou})',
 
 	// L
 	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] distribuovaný pod licenciou [GNU GPL v3.->http://www.opensource.org/licenses/gpl-3.0.html]',
