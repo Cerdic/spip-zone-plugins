@@ -4,6 +4,7 @@
 // définir le squelette a utiliser si on est dans le cas
 // d'une rubrique de spipClear
 
+include_spip("inc/config");
 function spipclear_styliser($flux){
 	// si article, rubrique ou sommaire,
 	// on cherche si spip clear doit s'activer
