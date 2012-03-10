@@ -11,14 +11,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_boussole' => 'Buzola',
 	'bouton_configurer' => 'Nastaviť',
 	'bouton_supprimer' => 'Odstrániť',
-	'bulle_afficher' => 'Zobraziť v šablónach',
+	'bulle_afficher' => 'Zobraziť v šablónach',
 	'bulle_aller_boussole' => 'Prejsť na stránku buzoly',
 	'bulle_aller_site' => 'Prejsť na odkazovanú stránku',
-	'bulle_cacher' => 'Nezobrazovať v šablónach',
+	'bulle_cacher' => 'Nezobrazovať v šablónach',
 	'bulle_configurer_boussole' => 'Nastaviť zobrazenie buzoly',
 	'bulle_deplacer_bas' => 'Posunúť nadol',
 	'bulle_deplacer_haut' => 'Posunúť nahor',
-	'bulle_supprimer_boussole' => 'Odstrániť buzolu z databázy',
+	'bulle_supprimer_boussole' => 'Odstrániť buzolu z databázy',
 
 	// D
 	'descriptif_boussole_spip' => 'Buzola SPIPu zoskupuje všetky "oficiálne" stránky galaxie SPIPu. Pri každej stránke uvádza jej logo, názov, slogan a jej popis. Pokojne ju môžete použiť na vlastných stránkach na nasmerovanie svojich návštevníkov do galaxie SPIPu.',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_ajouter_boussole' => 'En ajoutant des boussoles à votre base de données, vous aurez la possiblité d\'utiliser les modèles fournis pour les afficher dans vos pages publiques.<br />Une boussole est décrite par un fichier XML contenant les informations sur la boussole et ses sites.<br /><br />Si la boussole existe déjà ce formulaire permettra de la mettre à jour en conservant la configuration d\'affichage.', # NEW
 	'info_aucun_logo_boussole' => 'Buzola nemá žiadne logo',
-	'info_boite_boussoles_gerer' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet l’ajout, la mise à jour et la suppression des boussoles. Il est aussi possible de se rendre sur la page de configuration de l\'affichage de chaque boussole.</p>', # NEW
+	'info_boite_boussoles_gerer' => '<strong>Táto stránka je prístupná iba pre manažérov webu.</strong><p>Umožňuje pridávať, aktualizovať a mazať buzoly. Môžete navštíviť aj stránku s nastaveniami zobrazenia každej buzoly.</p>',
 	'info_configurer_boussole' => 'Tento formulár vám umožňuje nastaviť zobrazenie buzoly zvolením, v akom poradí a v akej skupine sa stránky majú alebo nemajú zobraziť. Stránky, ktoré sa nezobrazia, budú označené tieňovaným pozadím a sivým písmom.',
 	'info_fichier_boussole' => 'Zadajte adresu súboru s popisom svojej buzoly',
 	'info_liste_aucune_boussole' => 'Do vašej databázy ešte nebola pridaná žiadna buzola. Na jej pridanie použite formulár nižšie.',
