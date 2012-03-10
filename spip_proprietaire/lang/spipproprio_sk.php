@@ -153,7 +153,7 @@ Vo zvyšku tejto dokumentácie používame tieto termíny:
 
 Tieto tri termíny musia byť jednoznačne definované v tiráži každej internetovej stránky. Tvorca tejto stránky nemá žiadnu právnu povinnosť, ale je najlepšie uplatniť postup opísaný pre poskytovateľa webhostingu stránky.
 
-{{Pre internetové stránky publikované obchodnou spoločnosťou ({akciová spoločnosť, s. r. o. a. pod.})}}
+{{Pre internetové stránky, ktoré publikujú publikované právnické osoby ({obchodné spoločnosti, združenia, a pod.})}}
 
 Stránka s názvom "Informácie právneho charakteru" by sa mala zobraziť na internetovej stránke a mala by obsahovať tieto údaje:
 - meno alebo názov vydavateľa,
@@ -168,22 +168,23 @@ Stránka s názvom "Informácie právneho charakteru" by sa mala zobraziť na in
 
 Stránka s názvom "Informácie právneho charakteru" by sa mala zobraziť na internetovej stránke, s uvedením {{krstného mena,}} {{priezviska,}} {{adresy domov}} a  {{telefónneho čísla}} vlastníka.
 <br /> Je však možné zostať aj v anonymite a udeliť právo na tieto údaje poskytovateľovi webhostingu od chvíle, keď boli odoslané úplné a správne na adresu poskytovateľa webhostingu, ktorý môže nechať tieto údaje utajené až na prípad, keby prebiehalo súdne konanie.  V podmienkach musí byť uvedená táto možnosť.
-{{Information about the housing conditions of the site}}
 
-For corporations and {{}} physical ({in all cases to sum}), it is mandatory to specify the conditions for hosting the site, even if it is hosted free of charge.
-<br /> The following information should be disclosed:
-- Name of the host;
-- Its name;
-- Its registered office;
-- A phone number.
+{{Informácie o podmienkach poskytovania webhostingu pre stránku}}
 
-In the case of a site hosted on a server or personal property of the editor, this information is outdated but this should be clarified.
+Pre právnické {{a}} fyzické osoby ({súhrne pre všetkých,}) je povinné uviesť podmienky pre poskytovanie webhostingu pre stránku aj v prípade, ak je webhosting poskytovaný bezplatne.
+<br /> Treba uviesť tieto údaje:
+- názov poskytovateľa webhostingu,
+- jeho obchodné meno,
+- jeho sídlo,
+- telefónne číslo.
 
-{{Personal information of users}}
+V prípade, že sa stránka nachádza na vlastnom serveri alebo na serveri, ktorý je súkromným majetkom jedného z redaktorov, by sa tieto údaje nehodili, ale táto skutočnosť by mala byť uvedená.
 
-In the event that personal information of Internet users are registered with the site, such as an email address for subscription to a newsletter, the terms of use of such information by the site editor will be clearly listed, including their disclosure to third parties.
+{{Osobné údaje používateľov}}
 
-In the case of a newsletter, there {{obligation to offer a way to unsubscribe at will to the user}} ({a link in each email is the current procedure}).
+V prípade, že stránka zhromažďuje osobné údaje internetových používateľov, ako e-mailová adresa na prihlásenie sa na odoberanie informačného materiálu, podmienky využívania takýchto údajov redaktormi stránky, vrátane ich poskytnutia tretím stranám musia byť jednoznačne uvedené.
+
+Pokiaľ ide o informačné materiály (tzv. newslettery), je tu   {{povinnosť ponúkať možnosť spôsob odhlásiť sa z odoberania materiálov, ak sa tak rozhodne}} používateľ ({v každom e-maile je odkaz na aktuálny postup}).
 
 {{Note regarding the CNIL}}
 
