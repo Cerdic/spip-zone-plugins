@@ -40,7 +40,7 @@
 					</div>
 				</div>
 
-				[(#SET{url,[(#ENV{id_secteur}|generer_url_rubrique)]})]
+				[(#SET{url,#URL_RUBRIQUE{#ENV{id_secteur}}})]
 				<INCLURE{fond=noisettes/sidebar}{env}{self=#GET{url}}{date=#ENV{archives,#ENV{date}}}{archives=#ENV{archives,#ENV{date}}}>
 			</div>
 			
