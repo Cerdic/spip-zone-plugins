@@ -7,6 +7,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'chant' => 'Chant :',
 	'chants' => 'Chants :',
+	'chants_rubrique' => 'Chants de cette rubrique',
+	
 	// D
 	'date_annee' => 'Année de sortie',
 	

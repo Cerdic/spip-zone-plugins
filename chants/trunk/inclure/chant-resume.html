@@ -1,0 +1,19 @@
+[(#REM)
+
+  Squelette Presentation d'un chant dans une liste
+  (c) 2012
+  Distribue sous licence GPL
+
+]
+<BOUCLE_chants(CHANTS) {id_chant}{!par #ENV{tri, date}} {statut?}>
+<li class="item hentry">
+	<h3 class="h3 entry-title"><a href="#URL_CHANT" rel="bookmark">[(#LOGO_CHANT||image_reduire{150,100})]#TITRE</a></h3>
+	<div class="info-publi"><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr><B_auteur>, <span class="auteurs"><:par_auteur:> <BOUCLE_auteur(AUTEURS) {id_chant}{par nom}{', '}><a href="#URL_AUTEUR">#NOM</a></BOUCLE_auteur></span></B_auteur>
+        [<span class="#EDIT{copyright} copyright"><br />(#COPYRIGHT)</span>]
+</div>
+	[<div class="paroles entry-content">(#PAROLES|couper{150})</div>]
+	<div class="meta-publi">
+	<a class="lire-la-suite" href="#URL_CHANT"><:zpip:lire_la_suite:><span class="lire-la-suite-titre"><:zpip:lire_la_suite_de:> <em>#TITRE</em></span></a>
+	</div>
+</li>
+</BOUCLE_chants>
