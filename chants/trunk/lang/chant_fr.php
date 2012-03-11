@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// I
 	'icone_creer_chant' => "Ajouter un chant",
+	'icone_ecrire_chant' => 'Écrire un nouveau chant',
 	'icone_modifier_chant' => "Modifier ce chant",
 	'icone_retour_chant' => 'Retour au chant',
 	'info_aucun_chant' => "Aucun chant",

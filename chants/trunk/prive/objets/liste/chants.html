@@ -15,16 +15,15 @@
 			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
 			<th class='titre principale' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
 			<th class='auteur' scope='col'><:auteur:></th>
-			<th class='date secondaire' scope='col'>[(#TRI{date_annee,<:chant:date_annee:>,ajax})]</th>
+			<th class='date_annee secondaire' scope='col'>[(#TRI{date_annee,<:chant:date_annee:>,ajax})]</th>
 			<th class='id' scope='col'>[(#TRI{id_chant,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_chants(CHANTS){id_chant?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,date_annee},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
+	<BOUCLE_liste_chants(CHANTS){id_chant?}{id_rubrique?}{date_annee?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,date_annee},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#STATUT|puce_statut{chant,#ID_CHANT,#ID_RUBRIQUE})]</td>
-			<td class='titre principale'>[(#LOGO_CHANT|image_reduire{20,26})]<a href="[(#ID_CHANT|generer_url_entite{chant})]"
-																																						title="<:info_numero_abbreviation|attribut_html:> #ID_CHANT">[(#RANG). ]#TITRE</a></td>
+			<td class='titre principale'>[(#LOGO_CHANT|image_reduire{20,26})]<a href="[(#ID_CHANT|generer_url_entite{chant})]" title="<:info_numero_abbreviation|attribut_html:> #ID_CHANT">[(#RANG). ]#TITRE</a></td>
 			<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_chant}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
 			<td class='date secondaire'>[(#DATE_ANNEE|replace{'0000','-'})]</td>
 			<td class='id'>[(#AUTORISER{modifier,chant,#ID_CHANT}|?{
