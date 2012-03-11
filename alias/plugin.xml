@@ -14,7 +14,7 @@
 		</multi>
 	</slogan>
 	<auteur>cedric.morin@yterium.com</auteur>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<etat>stable</etat>
 	<description>
 		<multi>
@@ -31,5 +31,5 @@
 		<inclure>alias_pipeline.php</inclure>
 	</pipeline>
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
 </plugin>
