@@ -13,6 +13,7 @@
                     ]
                     (#VAL|chercher_rubrique{#ENV{id_chant},#ENV{id_parent},'chant',#ENV{id_secteur},'',0,form_simple})
                     </li>]
+                        [(#SAISIE{input, alias, label=<:chant:label_alias:>})]
                         [(#SAISIE{input, copyright, label=<:chant:label_copyright:>})]
                         [(#SAISIE{textarea, paroles, label=<:chant:label_paroles:>, inserer_barre=edition})]
 
@@ -20,6 +21,7 @@
 [(#SAISIE{input, ccli, label=<:chant:label_ccli:>})]
 [(#SAISIE{input, presentation, label=<:chant:label_presentation:>})]
 [(#SAISIE{input, numero, label=<:chant:label_numero:>})]
+[(#SAISIE{input, ligne_principale, label=<:chant:label_ligne_principale:>})]
 [(#SAISIE{input, capo, label=<:chant:label_capo:>})]
 [(#SAISIE{input, tempo, label=<:chant:label_tempo:>})]
 [(#SAISIE{input, signature, label=<:chant:label_signature:>})]

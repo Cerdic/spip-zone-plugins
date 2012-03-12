@@ -4,12 +4,13 @@
 [(#BOITE_OUVRIR{<:chant:infos_complementaires:>,'raccourcis'})]
 <ul class="liste-item">
     [<li class="item"><strong><:chant:label_date_annee:></strong> <span class="#EDIT{date_annee}">(#DATE_ANNEE|=={'0000'}|oui|?{<:chant:texte_non_renseignee:>,#DATE_ANNEE})</span></li>]
+    [<li class="item #EDIT{ligne_principale}"><strong><:chant:label_ligne_principale:></strong> (#LIGNE_PRINCIPALE)</li>]
     [<li class="item #EDIT{numero}"><strong><:chant:label_numero:></strong> (#NUMERO)</li>]
-    [<li class="item #EDIT{presentation}"><strong><:chant:label_presentation:></strong> (#PRESENTATION)</li>]
     [<li class="item #EDIT{ccli}"><strong><:chant:label_ccli:></strong> (#CCLI)</li>]
     [<li class="item #EDIT{capo}"><strong><:chant:label_capo:></strong> (#CAPO)</li>]
-    [<li class="item #EDIT{tempo}"><strong><:chant:label_tempo:></strong> (#TEMPO)</li>]
+    [<li class="item #EDIT{presentation}"><strong><:chant:label_presentation:></strong> (#PRESENTATION)</li>]
     [<li class="item #EDIT{signature}"><strong><:chant:label_signature:></strong> (#SIGNATURE)</li>]
+    [<li class="item #EDIT{tempo}"><strong><:chant:label_tempo:></strong> (#TEMPO)</li>]
     [<li class="item #EDIT{tonalite}"><strong><:chant:label_tonalite:></strong> (#TONALITE)</li>]
 </ul>
 #BOITE_FERMER
