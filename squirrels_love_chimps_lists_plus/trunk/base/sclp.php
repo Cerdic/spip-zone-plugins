@@ -69,7 +69,7 @@ function sclp_declarer_tables_principales($tables_principales){
 		"format"					=> "enum('html','texte') NOT NULL default 'html'"		
 		);*/
 
-        $tables_principales['spip_auteurs']['field']['id_mailchimp'] = "bigint(21) NOT NULL default '0'";
+        $tables_principales['spip_auteurs']['field']['id_mailchimp'] = "varchar(50) NOT NULL";
         $tables_principales['spip_auteurs']['field']['date_syncro'] = "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL";
         $tables_principales['spip_auteurs']['field']['format'] = "enum('html','texte') NOT NULL default 'html'";
         

@@ -72,8 +72,8 @@ function action_gestion_listes_dist(){
 				
 				spip_log($listes_accordes, 'slcp');
 				
-				$resultat = syncroniser_listes('',$id_liste,$listes_accordes[$id_liste]);
-				
+				$syncroniser=charger_fonction('syncroniser_listes','inc');
+				$resultat = $syncroniser('',$id_liste,$listes_accordes[$id_liste],$status,$start,$limit,true);
 				break;
 			}
 		

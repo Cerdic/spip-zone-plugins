@@ -6,7 +6,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	//A
+	'abonnement_inscrit' => 'Inscrits aux listes d\'envois',
 	'activer_liste' => 'Activer cette liste',
+	'aucun_abonnement' => 'Pas d\'abonnments',
 	
 	//C
 	'choix_mailinglists' => 'Sélectionnez les liste MailChimp à synchroniser avec les listes Spip',
@@ -22,8 +24,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//E
 	'eliminer_liste' => 'Éliminer définitivement cette liste',
 	
+	//F
+	'fermer' => 'Fermer',
+	
 	//G
-	'gerer_abonnements_listes' => 'Gerer les liste d\'envois',
+	'gerer_abonnements_listes' => 'Gerer les listes d\'envois',
 	'gestion_listes' => 'Gestion listes',
 	
 	//L	
@@ -36,6 +41,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'listes_prive' => 'Les listes privées',
 	'listes_public' => 'Les listes publiques',
 	
+	
+	//M
+	'modifier_abonnments' => 'Modifier les abonnements',
+	
+	//N
+	'newsletters_dispos' => 'Les abonnements disponibles',
 	
 	//P
 	'poubelle' => 'Poubelle',

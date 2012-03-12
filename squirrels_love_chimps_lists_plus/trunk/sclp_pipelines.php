@@ -5,13 +5,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Ajoute le foormulaire abonnement à la ficher auteurs
 function sclp_affiche_milieu($flux){
+			
 	switch($flux['args']['exec']) {
-		
 		case 'auteur_infos':
+			$flux['args']['editer_abonnements']=_request('editer_abonnements');
 			include_spip('inc/filtres_images');	
+			$deplier=_request('editer_abonnements')?true:false;
 			$image=extraire_attribut(image_reduire(find_in_path('images/letter_64.png'),24),'src');		
-			$contenu= recuperer_fond('prive/squelettes/affiche_milieu/auteur_listes',$flux['args']);
-			$flux["data"] .= cadre_depliable($image,strtoupper(_T('sclp:gerer_abonnements_listes')),'auto',$contenu,'gerer_abonnements_listes','e');    
+			$contenu= recuperer_fond('prive/squelettes/affiche_milieu/auteur_listes',$flux['args'],array('ajax'=>true));
+			$flux["data"] .= cadre_depliable($image,strtoupper(_T('sclp:gerer_abonnements_listes')),$deplier,$contenu,'gerer_abonnements_listes','e');    
 			break;
 	}
 	return $flux;

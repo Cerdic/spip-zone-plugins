@@ -20,9 +20,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	 // On synchronise les données avec mailchimp
 	 $listes_accordes=lire_config('squirrel_chimp/mailinglists');
 	 
-	 $autuer=sql_fetsel('email,format','spip_auteurs','id_auteur='.$id_auteur);
-	 
+	 $auteur=sql_fetsel('email,format','spip_auteurs','id_auteur='.$id_auteur);
+	 $email= $auteur['email'];	
+	 $format= $auteur['format'];	
+	  
 	 $listes=sql_select('*','spip_auteurs_listes','id_auteur='.$id_auteur);
+
 	 
 	 $info_liste_spip=array();
 	 
@@ -32,56 +35,99 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	 
 	  $info_liste_mc=array();
 	 
+	 $status_equivalence=array(
+		'valide'=>array('subscribed'),
+		'a_valider'=>array('unsubscribed','cleaned'),
+		);
 		
+	 $status=array();
 	 
+
 	 foreach($listes_accordes AS $id_liste_spip=>$id_liste_mc){
 		 
-		 $member_info=membres_liste_info_mc($api,$id_liste_mc,$email);
-		 echo $member_info['data'][0]['error'];
-		 //Info mailchimp plus récente que celle de spip
-		 
-		 if($timestamp=$member_info['data'][0]['timestamp']>$info_liste_spip[$id_liste_spip]['maj']){
-		echo '1';			 
-			 if($status_mc=$member_info['data'][0]['status']=='subscribed'){
-				 echo '1.1';	
-				 sql_updateq('spip_auteurs_listes',array('statut'=>'valide','maj'=>$timestamp),'id_auteur='.$id_auteur.' AND id_liste='.$id_liste_spip);
-				 }
-			else{
-				 echo '1.2';	
-				 sql_updateq('spip_auteurs_listes',array('statut'=>'a_valider','maj'=>$timestamp),'id_auteur='.$id_auteur.' AND id_liste='.$id_liste_spip);				
-				}
-			 
-			 }
-		elseif($timestamp=$member_info['data'][0]['timestamp']<$info_liste_spip[$id_liste_spip]['maj']){
-			echo '2';	
-			echo serialize($info_liste_spip[$id_liste_spip]);	
-				// compilation des informations à envoyer à MailChimp
-				$auteur=donnees_sync_simple($id_liste_spip,$info_liste_spip[$id_liste_spip]);
-				
-				echo serialize($auteur);
 
-				$auteur=$auteur[1];
-
-				$vals=inscription_liste_mc($valeurs,$api,$id_liste_mc,$email,$auteur,$format,$optin,true);
-				$vals=inscription_liste_mc($flux='',$api,$listId,$email,$donnees_auteur,$email_type='',$optin,$update_existing=true,$replace_interests=false,$send_welcome=false);
-							
+		 //echo $id_liste_mc."\n\n";
+		 //echo date('i:s')."\n\n";
+		$timestamp=''; 
+		 /*Faire d'abord un seul appel à Mc pour afficher plus raidement le formulaire
+		  * On en retire les informations sur les statut des listes
+		  */
+		 if(!$member_info){
+			 $member_info=membres_liste_info_mc($api,$id_liste_mc,$email);
+			 $status[$id_liste_mc]=$member_info['data'][0]['status'];
+			 $timestamp=$member_info['data'][0]['timestamp'];
+			 if(is_array($member_info['data'][0]['lists']))$lists_members=array_merge($status,$member_info['data'][0]['lists']);
+			 else $lists_members=$status;
+			//echo serialize($lists_members);
 			}
-		elseif($member_info['data'][0]['error']=='The email address passed does not exist on this list'){
-			echo '3';
-			if($info_liste_spip[$id_liste_spip]['statut']=='valide'){
-				 echo '3.1';	
-				// compilation des informations à envoyer à MailChimp
+		 //echo date('i:s')."\n\n";			 
+		 //echo 'actualiser'; 
+		 // Si le statut mc ne correpond pas au statut spip on syncronise
+		$statut_spip=$info_liste_spip[$id_liste_spip]['statut']?$info_liste_spip[$id_liste_spip]['statut']:'a_valider';
+		//echo $lists_members[$id_liste_mc];
+		if($lists_members[$id_liste_mc]){
 			
-				$auteur=donnees_sync_simple($id_liste_spip,$info_liste_spip[$id_liste_spip]);
-				
-				echo serialize($auteur);
+			 if	 (!in_array($lists_members[$id_liste_mc],$status_equivalence[$statut_spip])){
 
-				$auteur=$auteur[1];
+				if(!$timestamp){
+					$member_info=membres_liste_info_mc($api,$id_liste_mc,$email);
+					$timestamp=$member_info['data'][0]['timestamp'];
+					}
+			 //Info mailchimp plus récente que celle de spip
+	
+					 if($timestamp=$member_info['data'][0]['timestamp']>$info_liste_spip[$id_liste_spip]['maj']){
+					//echo '1';			 
+						 if($status_mc=$member_info['data'][0]['status']=='subscribed'){
+							 //echo '1.1';
+							 //echo '"'.$id_liste_spip.'-'.$id_liste_mc.'"';
+								$test=sql_updateq('spip_auteurs_listes',array('statut'=>'valide','maj'=>$timestamp),'id_auteur='.$id_auteur.' AND id_liste='.$id_liste_spip);
+								if (!$teste) sql_insertq('spip_auteurs_listes',array('statut'=>'valide','maj'=>$timestamp,'id_auteur'=>$id_auteur,'id_liste'=>$id_liste_spip));
+							 }
+						else{
+							// echo '1.2';	
+							 sql_updateq('spip_auteurs_listes',array('statut'=>'a_valider','maj'=>$timestamp),'id_auteur='.$id_auteur.' AND id_liste='.$id_liste_spip);				
+							}
+						 
+						 }
+					elseif($timestamp=$member_info['data'][0]['timestamp']<$info_liste_spip[$id_liste_spip]['maj']){
+						//echo '2';	
+						//echo serialize($info_liste_spip[$id_liste_spip]);	
+							// compilation des informations à envoyer à MailChimp
+							$auteur=donnees_sync_simple($id_liste_spip,$info_liste_spip[$id_liste_spip]);
 
-				$vals=inscription_liste_mc($valeurs,$api,$id_liste_mc,$email,$auteur,$format,$optin,true);	
+			
+							$auteur=$auteur[1];
+			
+							$vals=inscription_liste_mc($valeurs,$api,$id_liste_mc,$email,$auteur,$format,$optin,true);
+										
+						}
+					elseif($member_info['data'][0]['error']=='The email address passed does not exist on this list'){
+						//echo '3';
+						if($info_liste_spip[$id_liste_spip]['statut']=='valide'){
+							// echo '3.1';	
+							// compilation des informations à envoyer à MailChimp
+						
+							$auteur=donnees_sync_simple($id_liste_spip,$info_liste_spip[$id_liste_spip]);
+										
+							$auteur=$auteur[1];
+			
+							$vals=inscription_liste_mc($valeurs,$api,$id_liste_mc,$email,$auteur,$format,$optin,true);	
+							
+							 }
+							
+						}				
+					
 				 }
-				
-			}
+				 spip_log($vals, 'slcp');	
+		 }
+			 // l'abonnée spip n'existe pas sur mc on désincrit
+			 elseif(!$lists_members[$id_liste_mc]){
+				 //echo '4';
+				 sql_delete('spip_auteurs_listes','id_auteur='.$id_auteur.' AND id_liste='.$id_liste_spip);				
+				}	
+				 
+		
+
 		 }	 
 	 
 	 
@@ -193,7 +239,7 @@ function formulaires_auteur_listes_traiter_dist($id_auteur){
 	if(is_array($listes_abos)){
 		foreach($listes_abos AS $id_liste){
 			
-				if(!in_array($id_liste,$listes_abos_prev)){
+			if(!in_array($id_liste,$listes_abos_prev)){
 				$l=sql_getfetsel('id_liste','spip_auteurs_listes','id_auteur='.$id_auteur.' AND id_liste='.$id_liste);
 								
 				// compilation des informations à envoyer à MailChimp
@@ -207,29 +253,33 @@ function formulaires_auteur_listes_traiter_dist($id_auteur){
 				$statut=$auteur['statut'];
 				$vals=inscription_liste_mc($valeurs,$api,$liste,$email,$auteur,$format,$optin,true);
 				
-				$infos=membres_liste_info_mc($api,$liste,$email);
-				$infos=$infos['data'][0];
-
-				$id_mailchimp=$infos['id'];
-				$date_syncro=$infos['info_changed'];
-				if(!intval($l)){
-					sql_insertq('spip_auteurs_listes',array('statut'=>'valide','id_auteur'=>$id_auteur,'id_liste'=>$id_liste,'id_mailchimp'=>$id_mailchimp,'date_inscription'=>$date,'maj'=>$date_syncro));
-
+				if($vals['data']['message_erreur']){
+					$message_erreur.='<li>'._T('sclp:liste').' - '.$id_liste.': '. $vals['data']['message_erreur'].'</li>';
 					}
-				else {
-					sql_updateq('spip_auteurs_listes',array('statut'=>'valide','id_mailchimp'=>$id_mailchimp,'date_inscription'=>$date,'maj'=>$date_syncro),'id_auteur='.$id_auteur.' AND id_liste='.$id_liste);
+				else{
+					$infos=membres_liste_info_mc($api,$liste,$email);
+					$infos=$infos['data'][0];
+	
+					$id_mailchimp=$infos['id'];
+					$date_syncro=$infos['info_changed'];
+					if(!intval($l)){
+						sql_insertq('spip_auteurs_listes',array('statut'=>'valide','id_auteur'=>$id_auteur,'id_liste'=>$id_liste,'id_mailchimp'=>$id_mailchimp,'date_inscription'=>$date,'maj'=>$date_syncro));
+	
+						}
+					else {
+						sql_updateq('spip_auteurs_listes',array('statut'=>'valide','id_mailchimp'=>$id_mailchimp,'date_inscription'=>$date,'maj'=>$date_syncro),'id_auteur='.$id_auteur.' AND id_liste='.$id_liste);
+						}
+					$message_ok.='<li>'._T('sclp:liste').' - '.$id_liste.': '. $vals['data']['message_ok'].'</li>';		
 					}
-
-				
-				
-				$message_ok.='<li>'._T('sclp:liste').' - '.$id_liste.': '. $vals['data']['message_ok'].'</li>';
-			}
 				$liste='';
-
+				spip_log($vals, 'slcp');	
+				}
 			}	
 
 		}
-		if($message_ok) $valeurs .= '<ul>'.$message_ok.'</ul>';
+		
+		if($message_ok) $valeurs['message_ok'] = '<ul>'.$message_ok.'</ul>';
+		if($message_erreur) $valeurs['message_erreur'] = '<ul>'.$message_erreur.'</ul>';		
 	return $valeurs;
 }
 

@@ -4,7 +4,7 @@
 <div>	
 <fieldset>
 	<legend>
-        <:sclp:newsletter:>
+        <:sclp:newsletters_dispos:>
     </legend>
 
 	<ul class="donnees_lists">
@@ -16,9 +16,8 @@
 
 	
     <B_listes>
-    [<p class="explications">(#TOTAL_BOUCLE|singulier_ou_pluriel{<:sclp:exp_newsletter:>,<:sclp:exp_newsletters:>})</p>]
-
-	<BOUCLE_listes(LISTES){statut IN public,prive}>
+	<ul>
+	<BOUCLE_listes(LISTES){statut IN public,prive}{par titre}>
 	    <li class="squirrel_chimp_mailinglists">
 			<label for="listes_abos-#ID_LISTE"> #TITRE </label>
 			<div class="choix liste">
@@ -41,5 +40,5 @@
 
 	</form>
 	[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
-	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</div>]
 </div>
