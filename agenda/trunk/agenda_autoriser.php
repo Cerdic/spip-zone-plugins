@@ -47,6 +47,17 @@ function autoriser_article_creerevenementdans_dist($faire,$quoi,$id,$qui,$option
 	return $afficher;
 }
 
+// Autorisation pour créer un événement n'importe où (article ou autre ou rien)
+// Par défaut : comme pour créer dans un article si on l'a dans les options, sinon être admin complet
+function autoriser_evenement_creer_dist($faire,$quoi,$id,$qui,$options){
+	if (isset($options['id_article']) and $options['id_article'] > 0){
+		return autoriser('creerevenementdans', 'article', $options['id_article'], $qui, $options);
+	}
+	else{
+		return ($qui['statut'] == '0minirezo' and !$qui['restreint']);
+	}
+}
+
 /**
  * Autorisation de modifier un evenement : autorisations de l'article parent
  *
