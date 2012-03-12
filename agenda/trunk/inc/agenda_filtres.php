@@ -430,4 +430,69 @@ function http_calendrier_mini($annee, $mois, $jour, $echelle, $partie_cal, $scri
 
 	return $total . ($ligne ? "\n<tr>$ligne\n</tr>" : '');
 }
+
+if(!function_exists('http_calendrier_init')){
+	///
+	/// init: calcul generique des evenements a partir des tables SQL
+	/// Fonction récupérée des anciens SPIP
+	///
+	
+	// http://doc.spip.org/@http_calendrier_init
+	function http_calendrier_init($time='', $type='mois', $echelle='', $partie_cal='', $script='', $evt=null){
+		if (is_array($time)) {
+			list($j,$m,$a) = $time;
+			if ($j+$m+$a) $time = @mktime(0,0,0, $m, $j, $a);
+		}
+	
+		if (!is_numeric($time)) $time = time();
+	
+		$jour = date("d",$time);
+		$mois = date("m",$time);
+		$annee = date("Y",$time);
+			if (!$echelle = intval($echelle)) $echelle = DEFAUT_D_ECHELLE;
+			if (!is_string($type) OR !preg_match('/^\w+$/', $type)) $type ='mois';
+			if (!is_string($partie_cal) OR !preg_match('/^\w+$/', $partie_cal)) 
+				$partie_cal =  DEFAUT_PARTIE;
+		list($script, $ancre) = 
+		  calendrier_retire_args_ancre($script); 
+		if (is_null($evt)) {
+			$g = 'quete_calendrier_' . $type;
+			$evt = quete_calendrier_interval($g($annee,$mois, $jour));
+			quete_calendrier_interval_articles("'$annee-$mois-00'", "'$annee-$mois-1'", $evt[0]);
+		}
+	
+		$f = 'http_calendrier_' . $type;
+		if (!function_exists($f)) $f = 'http_calendrier_mois';
+		return $f($annee, $mois, $jour, $echelle, $partie_cal, $script, $ancre, $evt);
+	}
+}
+if(!function_exists('calendrier_retire_args_ancre')){
+	///
+	///Utilitaires sans html ni sql
+	///Fonction récupérée des anciens SPIP
+	///
+	
+	/// Utilitaire de separation script / ancre
+	/// et de retrait des arguments a remplacer
+	/// (a mon avis cette fonction ne sert a rien, puisque parametre_url()
+	/// sait remplacer les arguments au bon endroit -- Fil)
+	/// Pas si simple: certains param ne sont pas remplaces 
+	/// et doivent reprendre leur valeur par defaut -- esj.
+	/// http://doc.spip.org/@calendrier_retire_args_ancre
+	function calendrier_retire_args_ancre($script){
+	
+		if (preg_match(',^(.*)#([\w-]+)$,',$script, $m)) {
+			$script = $m[1];
+			$ancre = $m[2];
+		} else { $ancre = ''; }
+	
+		foreach(array('echelle','jour','mois','annee', 'type', 'partie_cal', 'bonjour') as $arg) {
+			$script = preg_replace("/([?&])$arg=[^&]*&/",'\1', $script);
+			$script = preg_replace("/([?&])$arg=[^&]*$/",'\1', $script);
+		}
+		if (in_array(substr($script,-1),array('&','?'))) $script =   substr($script,0,-1);
+		return array(quote_amp($script), $ancre);
+	}
+}
+
 ?>
