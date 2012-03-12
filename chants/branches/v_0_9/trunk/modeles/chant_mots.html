@@ -1,0 +1,19 @@
+[(#REM)
+	Liste des mots-cles d'un chant
+	<template><chant1|mots></template>
+][(#REM)
+	Modele <chant1|mots> : liste des mots-cles d'un chant
+	#MODELE{chant_mots}
+
+	Pour la notation rel="tag" voir
+	<http://microformats.org/wiki/rel-tag-fr>
+]<B_mots>
+<div class="menu"[ style='float:(#ENV{align}|match{left|right});']>
+	<h2><:mots_clefs:></h2>
+	<ul>
+		<BOUCLE_mots(MOTS) {id_chant} {par titre}>
+		<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
+		</BOUCLE_mots>
+	</ul>
+</div>
+</B_mots>

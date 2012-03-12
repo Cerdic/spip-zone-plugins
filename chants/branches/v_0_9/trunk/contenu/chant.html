@@ -1,0 +1,36 @@
+<BOUCLE_contenu_chant(CHANTS){id_chant}>
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_chant}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+
+<div class="contenu-principal">
+	<div class="cartouche">
+		[(#LOGO_CHANT||image_reduire{200,200})]
+		[<p class="#EDIT{copyright} copyright">(#COPYRIGHT)</p>]
+		<h1 class="h1 #EDIT{titre}">#TITRE</h1>
+		[<p class="#EDIT{alias} alias">(#ALIAS)</p>]
+
+		<p class="info-publi"><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr><B_auteur>, <span class="auteurs"><:par_auteur:> <BOUCLE_auteur(AUTEURS) {id_chant}{par nom}{', '}><a href="#URL_AUTEUR">#NOM</a></BOUCLE_auteur></span></B_auteur></p>
+		[(#REM) Inclure le modele des liens de traductions ]
+		#MODELE{chant_traductions}
+	</div>
+
+	<div class="surlignable">
+            <ul class="liste-item">
+                [<li class="item"><strong><:chant:label_date_annee:></strong> <span class="#EDIT{date_annee}">(#DATE_ANNEE|=={'0000'}|oui|?{<:chant:texte_non_renseignee:>,#DATE_ANNEE})</span></li>]
+                [<li class="item #EDIT{numero}"><strong><:chant:label_numero:></strong> (#NUMERO)</li>]
+                [<li class="item #EDIT{presentation}"><strong><:chant:label_presentation:></strong> (#PRESENTATION)</li>]
+                [<li class="item #EDIT{ccli}"><strong><:chant:label_ccli:></strong> (#CCLI)</li>]
+                [<li class="item #EDIT{capo}"><strong><:chant:label_capo:></strong> (#CAPO)</li>]
+                [<li class="item #EDIT{tempo}"><strong><:chant:label_tempo:></strong> (#TEMPO)</li>]
+                [<li class="item #EDIT{signature}"><strong><:chant:label_signature:></strong> (#SIGNATURE)</li>]
+                [<li class="item #EDIT{tonalite}"><strong><:chant:label_tonalite:></strong> (#TONALITE)</li>]
+            </ul>
+            [<div class="#EDIT{ligne_principale} ligne_principale">(#LIGNE_PRINCIPALE|image_reduire{500,0})</div>]
+            [<div class="#EDIT{paroles} texte">(#PAROLES|image_reduire{500,0})</div>]
+	</div>
+
+</div>
+
+[<div class="notes surlignable"><h2 class="h2 pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
+
+</BOUCLE_contenu_chant>

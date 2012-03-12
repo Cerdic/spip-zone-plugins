@@ -1,0 +1,39 @@
+[(#SET{defaut_tri,#ARRAY{
+        titre,1,
+        date,#ENV{date_sens,-1},
+        id_chant,1
+}})
+]<B_liste_chants>
+#ANCRE_PAGINATION
+<div class="liste-objets chants">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{chant:info_1_chant,chant:info_nb_chants}})</strong></caption>]
+        <thead>
+                <tr class='first_row'>
+                        <th class='picto' scope='col'></th>
+                        <th class='titre' scope='col'>[(#TRI{titre,<:chant:label_titre:>,ajax})]</th>
+                        <th class='langue' scope='col'></th>
+                        <th class='date' scope='col'>[(#TRI{date_annee,<:chant:date_annee:>,ajax})]</th>
+                        <th class='id' scope='col'>[(#TRI{id_chant,<:info_numero_abbreviation:>,ajax})]</th>
+                </tr>
+        </thead>
+        <tbody>
+        <BOUCLE_liste_chants(CHANTS){id_objet?}{objet}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+                <tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+                        <td class='picto'>[(#CHEMIN_IMAGE{chant-16.png}|balise_img)]</td>
+                        <td class='titre principale'>[(#LOGO_CHANT|image_reduire{20,26})]<a href="[(#ID_CHANT|generer_url_entite{chant})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RUBRIQUE">[(#RANG). ]#TITRE</a></td>
+                        <td class='langue'></td>
+                        <td class='date secondaire'>[(#DATE_ANNEE|replace{'0000','-'})]</td>
+                        <td class='id'>[(#AUTORISER{modifier,chant,#ID_CHANT}|?{
+                                <a href="[(#URL_ECRIRE{chants_edit,id_chant=#ID_CHANT})]">#ID_CHANT</a>,
+                                #ID_CHANT
+                        })]</td>
+                </tr>
+        </BOUCLE_liste_chants>
+        </tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_chants>[
+<div class="liste-objets chants caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_chants>

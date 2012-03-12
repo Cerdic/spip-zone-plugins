@@ -1,0 +1,41 @@
+[(#SET{defaut_tri,#ARRAY{
+        statut,1,
+        multi titre,1,
+}})]
+[(#SET{_MAX_CHANTS_LISTE,[(#VAL{_MAX_CHANTS_LISTE}|defined|?{[(#VAL{_MAX_CHANTS_LISTE}|constant)],50})]})]
+<BOUCLE_exclus(CHANTS){tout}{id_objet}{objet}{doublons 1}{doublons 2} />
+<BOUCLE_nb_chants(CHANTS){tout}{doublons 1} />#SET{total,#TOTAL_BOUCLE}<//B_nb_chants>
+<BOUCLE_titrebreux(CONDITION){si #GET{total}|>{#GET{_MAX_CHANTS_LISTE}}}>
+        [(#INCLURE{fond=prive/objets/liste/chants_associer-recherche,env,doublons})]
+</BOUCLE_titrebreux>
+[(#REM) Pas beaucoup de chants ]
+<B_chants>
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-associer chants">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{chant:info_1_chant,chant:info_nb_chants}})</strong></caption>]
+        <thead>
+                <tr class='first_row'>
+                        <th class='picto' scope='col'></th>
+                        <th class='titre' scope='col'>[(#TRI{titre,<:chant:label_titre:>,ajax})]</th>
+                        <th class='action' scope='col'>&nbsp;</th>
+                </tr>
+        </thead>
+        <tbody>
+        <BOUCLE_chants(CHANTS){doublons 2}{tri #ENV{par,titre},#GET{defaut_tri}}{par num titre, titre}{pagination 10}>
+                <tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+                        <td class='picto'>[(#CHEMIN_IMAGE{chant-16.png}|balise_img)]</td>
+                        <td class='titre principale'>[(#LOGO_CHANT|image_reduire{20,20})]<a href="[(#ID_CHANT|generer_url_entite{chant})]" title="<:info_numero_abbreviation|attribut_html:> #ID_CHANT">[(#RANG). ]#TITRE</a></td>
+                        <td class='action'><button class="button link" name="ajouter_lien[chant-#ID_CHANT-#OBJET-#ID_OBJET]" value="+"><:chant:lien_ajouter_chant:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>
+                </tr>
+        </BOUCLE_chants>
+        </tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_chants>
+<div class="liste-objets liste-objets-associer chants caption-wrap">
+<strong class="caption">[(#ENV*{titre,<:chant:info_aucun_chant:>}) ]</strong>
+</div>
+<//B_chants>
+<//B_titrebreux>
