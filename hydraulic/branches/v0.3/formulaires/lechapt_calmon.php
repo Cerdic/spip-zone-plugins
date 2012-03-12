@@ -269,7 +269,7 @@ function formulaires_lechapt_calmon_traiter_dist(){
 	
 	switch($ValCal){
 		case 'Q':
-			if($L != 0 && $Lg != 0 && $M != 0){
+			if($L != 0 && $M != 0 && ($Lg != 0 || $min != 0)){			
 				for($i = $min; $i <= $max; $i+= $pas){
 					$result[] = pow(((($J*pow($D, $N))/$L)*(1000/$Lg)), 1/$M);
 				}
@@ -281,7 +281,7 @@ function formulaires_lechapt_calmon_traiter_dist(){
 		break;
 		
 		case 'D': 
-			if($J != 0 && $N != 0){
+			if(($J != 0 || $min != 0) && $N != 0){
 				for($i = $min; $i <= $max; $i+= $pas){
 					$result[] = pow(((($L*pow($Q, $M))/$J)*($Lg/1000)), 1/$N);
 				}
@@ -293,7 +293,7 @@ function formulaires_lechapt_calmon_traiter_dist(){
 		break;
 		
 		case 'J':
-			if($D != 0){
+			if($D != 0 || $min != 0){
 				for($i = $min; $i <= $max; $i+= $pas){
 					$result[] = (($L*pow($Q, $M))/pow($D, $N))*($Lg/1000) ;
 				}
@@ -305,7 +305,7 @@ function formulaires_lechapt_calmon_traiter_dist(){
 		break;
 		
 		case 'Lg':
-			if($L*pow($Q,$M) != 0){
+			if($L != 0 && ($Q != 0 || $min != 0)){
 				for($i = $min; $i <= $max; $i+= $pas){
 					$result[] = (($J*pow($D, $N))/($L*pow($Q,$M)))*1000 ;
 				}
