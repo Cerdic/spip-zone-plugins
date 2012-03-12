@@ -2,8 +2,8 @@
 	<nom>Ma lettre</nom>
 	<slogan>Composer sur mesure une lettre d'information (newsletter)</slogan>
 	<auteur>[erational->http://www.erational.org]</auteur>
-	<licence>GNU/GPL - (c) 2006-2010</licence>
-	<version>2.3.1</version>
+	<licence>GNU/GPL - (c) 2006-2012</licence>
+	<version>2.3.2</version>
 	<etat>stable</etat>
 	<description>
 		Permet de composer une lettre en s&#233;lectionnant manuellement les articles que l'on d&#233;sire ajouter  pour l'envoyer 

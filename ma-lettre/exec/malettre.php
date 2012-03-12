@@ -2,7 +2,7 @@
 // ---------------------------------------------------------
 //  Ma lettre
 // ---------------------------------------------------------
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include(dirname(__FILE__).'/../inc_malettre.php');
 
@@ -164,7 +164,8 @@ function exec_malettre(){
         						}
       					}	
                 
-                // calcul du patron				
+                // calcul du patron	
+                $flag_preserver = true; // empecher ajout feuille spip_admin.css			
     						$sourceHTML .= malettre_get_contents("malettre",$id_article_edito,$selection,$selection_eve,$lang);                 
     						$sourceTXT  .= malettre_get_contents("malettre_txt",$id_article_edito,$selection,$selection_eve,$lang); 
       							
