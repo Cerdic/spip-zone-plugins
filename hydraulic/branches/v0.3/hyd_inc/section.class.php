@@ -107,47 +107,70 @@ abstract class acSection {
      * @return la donnée calculée
      */
     public function Calc($sDonnee, $rY = false) {
-        if($rY!==false) {
+        if($rY!==false && $rY!=$this->rY) {
             //~ spip_log('Calc('.$sDonnee.') rY='.$rY,'hydraulic');
             $this->rY = $rY;
-            if(isset($this->arCalc[$sDonnee])) {
-                // On efface toutes les données calculées pour forcer le calcul
-                $this->Reset();
-            }
+            // On efface toutes les données calculées pour forcer le calcul
+            $this->Reset();
         }
 
         if(!isset($this->arCalc[$sDonnee])) {
             // La donnée a besoin d'être calculée
             switch($sDonnee) {
-                case 'S' :
+                case 'S' : // Surface mouillée
                     $this->arCalc[$sDonnee] = $this->CalcS();
                     break;
-                case 'P' :
+                case 'P' : // Périmètre mouillé
                     $this->arCalc[$sDonnee] = $this->CalcP();
                     break;
-                case 'R' :
+                case 'R' : // Rayon hydraulique
                     $this->arCalc[$sDonnee] = $this->CalcR();
                     break;
-                case 'B' :
+                case 'B' : // Largeur au miroir
                     $this->arCalc[$sDonnee] = $this->CalcB();
                     break;
-                case 'J' :
+                case 'J' : // Perte de charge linéaire
                     $this->arCalc[$sDonnee] = $this->CalcJ();
                     break;
-                case 'Fr' :
+                case 'Fr' : // Froude
                     $this->arCalc[$sDonnee] = $this->CalcFr();
                     break;
-                case 'dS' :
+                case 'dS' : // dS/dY
                     $this->arCalc[$sDonnee] = $this->CalcSder();
                     break;
-                case 'dP' :
+                case 'dP' : // dP/dY
                     $this->arCalc[$sDonnee] = $this->CalcPder();
                     break;
-                case 'dR' :
+                case 'dR' : // dR/dY
                     $this->arCalc[$sDonnee] = $this->CalcRder();
                     break;
-                case 'dB' :
+                case 'dB' : // dB/dY
                     $this->arCalc[$sDonnee] = $this->CalcBder();
+                    break;
+                case 'V' : // Vitesse moyenne
+                    $this->arCalc[$sDonnee] = $this->CalcV();
+                    break;
+                case 'Hs' : // Charge spécifique
+                    $this->arCalc[$sDonnee] = $this->CalcHs();
+                    break;
+                case 'Yc' : // Tirant d'eau critique
+                    $this->arCalc[$sDonnee] = $this->CalcYc();
+                    break;
+                case 'Yn' : // Tirant d'eau normal
+                    $this->arCalc[$sDonnee] = $this->CalcYn();
+                    break;
+                case 'Yf' : // Tirant d'eau fluvial
+                    $this->arCalc[$sDonnee] = $this->CalcYf();
+                    break;
+                case 'Yt' : // Tirant d'eau torrentiel
+                    $this->arCalc[$sDonnee] = $this->CalcYt();
+                    break;
+                case 'Yco' : // Tirant d'eau conjugué
+                    $this->arCalc[$sDonnee] = $this->CalcYco();
+                    break;
+                case 'Tau0' : // Force tractrice ou contrainte de cisaillement
+                    $this->arCalc[$sDonnee] = $this->CalcTau0();
+                    break;
             }
         }
         //~ spip_log('Calc('.$sDonnee.')='.$this->arCalc[$sDonnee],'hydraulic');
@@ -221,7 +244,7 @@ abstract class acSection {
     */
     private function CalcFr() {
         return $this->oP->rQ/$this->Calc('S')*sqrt($this->Calc('B')/$this->Calc('S')/$this->oP->rG);
-   }
+    }
 
    /**
     * Calcul du point suivant de la courbe de remous par la méthode Euler explicite.
@@ -231,7 +254,85 @@ abstract class acSection {
         $this->Reset(); // On réinitialise toutes les données dépendant de la ligne d'eau
         $this->rY = $Y; // Tirant d'eau initial pour le calcul du point suivant
         return $Y-($this->oP->rDx*($this->oP->rIf-$this->Calc('J'))/(1-pow($this->Calc('Fr'),2)));
-   }
+    }
+
+   /**
+    * Calcul de la vitesse moyenne.
+    * @return Vitesse moyenne
+    */
+    private function CalcV() {
+        return $this->oP->rQ/$this->Calc('S');
+    }
+
+   /**
+    * Calcul de la charge spécifique.
+    * @return Charge spécifique
+    */
+    private function CalcHs() {
+        return $this->rY+pow($this->Calc('V'),2)/(2*$this->oP->rG);
+    }
+
+   /**
+    * Calcul du tirant d'eau critique.
+    * @return tirant d'eau critique
+    */
+    private function CalcYc() {
+        $oHautCritique = new cHautCritique($this, $oP);
+        return $oHautCritique->Newton($oP->rPrec);
+    }
+
+   /**
+    * Calcul du tirant d'eau normal.
+    * @return tirant d'eau normal
+    */
+    private function CalcYn() {
+        $oHautNormale= new cHautNormale($this, $oP);
+        return $oHautNormale->Newton($this->Calc('Yc'));
+    }
+
+   /**
+    * Calcul du tirant d'eau fluvial.
+    * @return tirant d'eau fluvial
+    */
+    private function CalcYf() {
+        if($this->rY > $this->Calc('Yc')) {
+            return $this->rY;
+        }
+        else {
+            $oHautCorrespondante= new cHautCorrespondante($this, $oP);
+            return $oHautCorrespondante->Newton($this->Calc('Yc'));
+        }
+    }
+
+   /**
+    * Calcul du tirant d'eau torrentiel.
+    * @return tirant d'eau torrentiel
+    */
+    private function CalcYt() {
+        if($this->rY < $this->Calc('Yc')) {
+            return $this->rY;
+        }
+        else {
+            $oHautCorrespondante= new cHautCorrespondante($this, $oP);
+            return $oHautCorrespondante->Newton($this->Calc('Yc'));
+        }
+    }
+
+   /**
+    * Calcul du tirant d'eau conjugué.
+    * @return tirant d'eau conjugué
+    */
+    private function CalcYco() {
+        return (sqrt(1 + 8 * pow($this->Calc('Fr'),2)) - 1) / 2;
+    }
+
+   /**
+    * Calcul de la contrainte de cisaillement.
+    * @return contrainte de cisaillement
+    */
+    private function CalcTau0() {
+        return 1000 * $oP->rG * $this->Calc('R') * $oP->rIf;
+    }
 }
 
 
@@ -428,6 +529,55 @@ class cHautNormale extends acNewton {
         $rDer += pow($this->oSn->Calc('R'),2/3)*$this->oSn->Calc('dS');
         $rDer *= -$this->rKs * sqrt($this->rIf);
         spip_log('cHautNormale:CalcDer('.$rX.')='.$rDer,'hydraulic');
+        return $rDer;
+    }
+}
+
+
+/**
+ * Calcul de la hauteur correspondante (charge égale)
+ */
+class cHautCorrespondante extends acNewton {
+    private $rY; // Tirant d'eau connu
+    private $rV2; // Vitesse moyenne au carré associée au tirant d'eau connu
+    private $oSnCal; // Section contenant les données de la section avec la hauteur à calculer
+    private $rG; // Constante de gravité
+
+    /**
+     * Constructeur de la classe
+     * @param $oSn Section sur laquelle on fait le calcul
+     * @param $oP Paramètres supplémentaires (Débit, précision...)
+     */
+    function __construct(acSection $oSn, cParam $oP) {
+        $this->rY = $oSn->rY;
+        $this->rV2 = pow($oSn->Calc('V'),2);
+        $this->oSnCal = clone $oSn;
+        $this->rQ = $oP->rQ;
+        $this->rG = $oP->rG;
+    }
+
+    /**
+     * Calcul de la fonction dont on cherche le zéro
+     * @param $rX Variable dont dépend la fonction
+     */
+    protected function CalcFn($rX) {
+        // Initialisation des données de la section
+        $this->oSnCal->Reset();
+        $this->oSnCal->rY = $rX;
+        // Calcul de la fonction
+        $rFn = $this->rY - $rX + ($this->rV2+pow($this->oSnCal->Calc('V'),2))/(2*$this->rG);
+        spip_log('cHautCorrespondante:CalcFn('.$rX.')='.$rFn,'hydraulic');
+        return $rFn;
+    }
+
+    /**
+     * Calcul analytique de la dérivée de la fonction dont on cherche le zéro
+     * @param $rX Variable dont dépend la fonction
+     */
+    protected function CalcDer($rX) {
+        // L'initialisation a été faite lors de l'appel à CalcFn
+        $rDer = - $this->rQ/ $this->rG * $this->oSnCal->Calc('dS') / pow($this->oSnCal->Calc('S'),3);
+        spip_log('cHautCorrespondante:CalcDer('.$rX.')='.$rDer,'hydraulic');
         return $rDer;
     }
 }
