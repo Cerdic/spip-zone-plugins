@@ -49,6 +49,8 @@ function browserid_welcome(e) {
     if (url) {
       if (e.autoriser_ecrire) {
         window.location = url;
+      } else if (e.autoriser_url) {
+        window.location = url;
       } else {
         e.message = "Vous êtes identifié comme " + e.email + " mais cet email n'a pas d'accès à l'espace privé du site.";
       }

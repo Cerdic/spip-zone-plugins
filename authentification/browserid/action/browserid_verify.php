@@ -17,6 +17,7 @@ function browserid_auth_loger($auteur, &$a) {
 	$a['session_nom'] = typo($auteur['nom']);
 	$a['session_statut'] = $auteur['statut'];
 	$a['autoriser_ecrire'] = autoriser('ecrire');
+	$a['autoriser_url'] = true;
 
 }
 
@@ -78,13 +79,20 @@ function action_browserid_verify() {
 							$statut_inscription = '1comite';
 						else if ($GLOBALS['meta']["forums_publics"] == 'abo')
 							$statut_inscription = '6forum';
+						else if ($GLOBALS['meta']["accepter_visiteurs"] == 'oui')
+							$statut_inscription = '6forum';
 
 						if ($statut_inscription) {
+							include_spip('formulaires/inscription');
+							$login = test_login(
+									preg_replace(',@.*,', '', $a['email']), $a['email']
+								); # unicite a la rache.
+
 							sql_insertq('spip_auteurs', array(
 								'email' => $a['email'],
 								'statut' => $statut_inscription,
 								'nom' => preg_replace('/@.*/', '', $a['email']),
-								'login' => md5($a['email']), # unicite a la rache.
+								'login' => $login
 							));
 							$auteur = sql_fetsel('*', 'spip_auteurs', 'email='.sql_quote($a['email']));
 							browserid_auth_loger($auteur, $a);
