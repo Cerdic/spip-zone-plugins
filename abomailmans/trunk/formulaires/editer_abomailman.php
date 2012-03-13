@@ -13,7 +13,6 @@ function formulaires_editer_abomailman_liste_charger_dist($id_abomailman='new',$
 	//initialise les variables d'environnement pas défaut
 	if (!autoriser('creer', 'abomailman', 'oui')) {
 		$editable = false;
-		spip_log('false','test');
 	}else{
 		$valeurs = formulaires_editer_objet_charger('abomailman',$id_abomailman,0,0,$retour,$config_fonc,$row,$hidden);
 		$editable = true;
@@ -76,6 +75,9 @@ function formulaires_editer_abomailman_traiter_dist($id_abomailman='new',$retour
     // Récupération des données
 	$datas['titre'] = _request('titre');
 	$datas['descriptif'] = _request('descriptif');
+	if(_request('abotype') && in_array(_request('abotype'), array('news','ml'))){
+		$datas['abo_type'] = _request('abotype');
+ 	}
 	$datas['email'] = _request('email');
 	$datas['email_subscribe'] = _request('email_subscribe');
 	$datas['email_unsubscribe'] = _request('email_unsubscribe');

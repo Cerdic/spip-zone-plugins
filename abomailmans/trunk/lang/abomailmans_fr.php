@@ -70,7 +70,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_etat_liste' => '&Eacute;tat de la liste',
+	'label_type_abo' => 'Type',
+	'label_type_ml' => 'Liste de discussion',
+	'label_type_news' => 'Liste de diffusion',
 	'langue_liste' => 'Langue de la liste',
+	'legende_inscription_ml' => 'Inscription à la liste de discussion',
+	'legende_inscription_news' => 'Inscription à la liste de diffusion',
+	'legende_inscriptions_ml' => 'Inscription aux listes de discussion',
+	'legende_inscriptions_news' => 'Inscription aux listes de diffusion',
 	'les_listes_mailmans' => 'Les listes mailmans, sympa ou ezmlm renseign&eacute;es',
 	'lire_article' => 'Lire l\'article',
 	'liste_creee' => 'La liste num&eacute;ro @id@ (@titre@) a &eacute;t&eacute; cr&eacute;&eacute;e.',

@@ -1,11 +1,11 @@
 <paquet
 	prefix="abomailmans"
 	categorie="communication"
-	version="0.7.0"
+	version="0.7.1"
 	etat="dev"
 	compatibilite="[3.0.0-dev;3.0.99]"
 	logo="img_pack/mailman.gif"
-	schema="0.33"
+	schema="0.34"
 	documentation="http://www.spip-contrib.net/Abomailmans-pour-s-abonner-a-des-listes-de-diffusion"
 >	
 
