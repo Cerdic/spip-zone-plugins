@@ -11,8 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucune_page' => 'لا توجد صفحات في هذه اللحظة.',
 
 	// C
-	'convertir_article' => 'Convertir en article', # NEW
-	'convertir_page' => 'Convertir en page', # NEW
+	'convertir_article' => 'تحويل الى مقال',
+	'convertir_page' => 'تحويل الى صفحة',
 	'creer_page' => 'إنشاء صفحة جديدة',
 
 	// I
@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modifier_page' => 'تغيير الصفحة :',
 
 	// P
-	'pages_uniques' => 'Pages uniques', # NEW
+	'pages_uniques' => 'صفحات فريدة',
 
 	// T
 	'titre_page' => 'صفحة',
