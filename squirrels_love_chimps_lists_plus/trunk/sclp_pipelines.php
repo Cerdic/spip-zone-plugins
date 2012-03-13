@@ -67,6 +67,13 @@ function sclp_squirrel_chimp_lists_config_traiter($flux){
 	}
 	
 	return $flux;
-	
 	}
+// Les tâches cron
+
+function sclp_taches_generales_cron($taches){
+    $taches['syncro_listes'] = 60*10; // toutes les minutes
+    
+    return $taches;
+}
+	
 ?>

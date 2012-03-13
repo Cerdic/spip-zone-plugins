@@ -118,7 +118,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 						}				
 					
 				 }
-				 spip_log($vals, 'slcp');	
+				 spip_log($vals, 'sclp');	
 		 }
 			 // l'abonnée spip n'existe pas sur mc on désincrit
 			 elseif(!$lists_members[$id_liste_mc]){
@@ -272,7 +272,7 @@ function formulaires_auteur_listes_traiter_dist($id_auteur){
 					$message_ok.='<li>'._T('sclp:liste').' - '.$id_liste.': '. $vals['data']['message_ok'].'</li>';		
 					}
 				$liste='';
-				spip_log($vals, 'slcp');	
+				spip_log($vals, 'sclp');	
 				}
 			}	
 

@@ -70,8 +70,6 @@ function action_gestion_listes_dist(){
 				
 				$listes_accordes=lire_config('squirrel_chimp/mailinglists');
 				
-				spip_log($listes_accordes, 'slcp');
-				
 				$syncroniser=charger_fonction('syncroniser_listes','inc');
 				$resultat = $syncroniser('',$id_liste,$listes_accordes[$id_liste],$status,$start,$limit,true);
 				break;

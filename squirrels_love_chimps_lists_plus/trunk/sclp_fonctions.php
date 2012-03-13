@@ -2,7 +2,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function syncro_spip_mc($liste_spip,$liste_mc,$derniere_syncro){
-	spip_log('syncro_spip_mc','slcp');
+	spip_log('syncro_spip_mc','sclp');
 		$donnes_liste_spip=array();
 
 	while($data=sql_fetch($liste_spip)){
@@ -10,7 +10,7 @@ function syncro_spip_mc($liste_spip,$liste_mc,$derniere_syncro){
 		$donnes_liste_spip[$data['email']]=$data;
 
 		}
-	spip_log($donnes_liste_spip,'slcp');
+	spip_log($donnes_liste_spip,'sclp');
 	}
 
 
@@ -23,7 +23,7 @@ function syncro_mc_spip($liste_spip,$liste_mc,$derniere_syncro){
 
 		}
 
-	//spip_log($donnes_liste_spip,'slcp');
+	//spip_log($donnes_liste_spip,'sclp');
 	foreach($liste_mc['data'] AS $membre){
 
 
@@ -39,13 +39,13 @@ function donnees_sync_simple($id_liste,$donnees,$base='spip'){
 
 	if($base!='spip')$champs_sync=array_flip($champs_sync[0]);
 
-	//spip_log($donnees ,'slcp');
+	//spip_log($donnees ,'sclp');
 	// Préparation de l'array a envoyer à mailchimp
 	$batch=array();
 	$i=0;
 	foreach($donnees AS $key=>$data){
-		//spip_log($key ,'slcp');	
-		//spip_log($data ,'slcp');			
+		//spip_log($key ,'sclp');	
+		//spip_log($data ,'sclp');			
 		if(!is_array($data))$data =$donnees;
 		if($base!='spip')$data=$data['merges'];
 		$i++;
@@ -86,20 +86,20 @@ function inscription_batch_spip($id_liste_spip,$abonnements){
 			}
 		else{
 			$id_auteur=sql_getfetsel('id_auteur','spip_auteurs','email='.sql_quote($donnees['email']));
-			spip_log($id_auteur, 'slcp');
+			spip_log($id_auteur, 'sclp');
 			// l'auteur existe
 			if($id_auteur){
-				spip_log('update 1', 'slcp');
+				spip_log('update 1', 'sclp');
 				//On actualise si il a déjà été insscrit à la mailinglist
 				$test=sql_getfetsel('maj','spip_auteurs_listes','id_liste='.$id_liste_spip.' AND id_auteur='.$id_auteur);
-				spip_log($test, 'slcp');
+				spip_log($test, 'sclp');
 				$val=array('statut'=>'valide','maj'=>$donnees['timestamp'],'date_syncro'=>$donnees['timestamp']);
 				if($test){
 					sql_updateq('spip_auteurs_listes',$val,'id_liste='.$id_liste_spip.' AND id_auteur='.$id_auteur);
 					}
 				//Sinon on le rajoute dans les listes
 				else{
-					spip_log($id_liste_spip, 'slcp');
+					spip_log($id_liste_spip, 'sclp');
 					$val['id_liste']=$id_liste_spip;
 					$val['id_auteur']=$id_auteur;
 					$val['date_inscription']=$donnees['timestamp'];
@@ -107,7 +107,7 @@ function inscription_batch_spip($id_liste_spip,$abonnements){
 					}
 				}
 			else{
-				spip_log('2', 'slcp');
+				spip_log('2', 'sclp');
 				// On cherche les infos du membre mailchimp
 				$member_info=membres_liste_info_mc($api,$id_liste_mc,$donnees['email']);
 				
@@ -237,7 +237,7 @@ function desinscription_batch_mc($api='',$id_liste,$email,$delete_member=false,$
 
 	$retval = $api->listBatchUnsubscribe($api,$id_liste,$email,$delete_member,$send_goodby,$send_notify);
 
-//spip_log($retval, 'slcp');
+//spip_log($retval, 'sclp');
 
 	return $retval;
 	
@@ -261,7 +261,7 @@ function inscription_batch_mc($api,$id_liste,$batch,$optin,$update=true,$replace
 		}
 	
 	$retval = $api->listBatchSubscribe($id_liste,$batch,$optin,$update,$replace_interests);
-	spip_log($retval, 'slcp');
+	spip_log($retval, 'sclp');
 
 	return $retval;
 	

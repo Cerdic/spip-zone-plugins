@@ -1,11 +1,14 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // Syncroniser des listes
 function inc_syncroniser_listes_dist($api='',$id_liste_spip,$id_liste_mailchimp,$status='',$start='',$limit='',$forcer=false){
 
 	include_spip('squirrel_chimp_lists_fonctions');
 	include_spip('sclp_fonctions');
 	
-	// Définit le fuseau horaire par défaut à utiliser.
+	// Définit le fuseau horaire par défaut à utiliser, GMT est le fuseau utilisé par mailchimp.
 	date_default_timezone_set('GMT');
 	
 	//pour ecrire_config 
@@ -34,10 +37,11 @@ function inc_syncroniser_listes_dist($api='',$id_liste_spip,$id_liste_mailchimp,
 		
 	$c=implode(',',$champs_spip_auteurs).',spip_auteurs_listes.maj,spip_auteurs_listes.date_syncro,spip_auteurs_listes.statut,spip_auteurs.email,spip_auteurs.id_auteur,spip_auteurs.id_mailchimp';	
 	
-	// si on recalcule tout seulment depuis la dernière actualisationsa
-	if(!$forcer)$where_date =' AND spip_auteurs_listes.date_syncro >'.sql_quote($since);
+	// syncroniser tout, n'importe la date de la dernière mise à jour
+	if(!$forcer)$since='0000-00-00 00:00:00';
+		
 	
-	$liste_spip=sql_select($c,'spip_auteurs_listes,spip_auteurs','spip_auteurs_listes.id_liste='.$id_liste_spip.' AND spip_auteurs_listes.id_auteur=spip_auteurs.id_auteur'.$where_date);
+	$liste_spip=sql_select($c,'spip_auteurs_listes,spip_auteurs','spip_auteurs_listes.id_liste='.$id_liste_spip.' AND spip_auteurs_listes.id_auteur=spip_auteurs.id_auteur AND spip_auteurs_listes.date_syncro >'.sql_quote($since));
 	
 	// Composer le tableau distinguant entre abonnées et désabonnées
 	$listes_spip=array();
@@ -99,7 +103,7 @@ function inc_syncroniser_listes_dist($api='',$id_liste_spip,$id_liste_mailchimp,
 					$liste_desabonnement['vers_mc'][$info_m_mc_2['email']]=$info_m_mc_2['timestamp'] ;
 					}
 				}
-			//spip_log($info_m_mc_2['timestamp'], 'slcp');						
+			//spip_log($info_m_mc_2['timestamp'], 'sclp');						
 		//L'inscrit mc est active en spip mais date d'actualisation plus anciennes que celle de mc				
 		elseif($syncro_spip_2=$listes_spip['valide'][$info_m_mc_2['email']]['maj']){
 
@@ -142,11 +146,11 @@ function inc_syncroniser_listes_dist($api='',$id_liste_spip,$id_liste_mailchimp,
 	$up_exist = true; // yes, update currently subscribed users
 	$replace_int = false; // no, add interest, don't replace
 	
-	spip_log('abonnements id_liste:'.$id_liste_spip, 'slcp');
-	spip_log($liste_abonnement, 'slcp');
+	spip_log('abonnements id_liste:'.$id_liste_spip, 'sclp');
+	spip_log($liste_abonnement, 'sclp');
 	
-	spip_log('desabonnements id_liste:'.$id_liste_spip, 'slcp');	
-	spip_log($liste_desabonnement, 'slcp');
+	spip_log('desabonnements id_liste:'.$id_liste_spip, 'sclp');	
+	spip_log($liste_desabonnement, 'sclp');
 	$resultat=array();
 	// Désabonnement
 	
@@ -170,7 +174,7 @@ function inc_syncroniser_listes_dist($api='',$id_liste_spip,$id_liste_mailchimp,
 			
 			}
 		elseif($liste_abonnement['vers_spip']){
-			//spip_log($liste_abonnement['vers_spip'], 'slcp');
+			//spip_log($liste_abonnement['vers_spip'], 'sclp');
 			$resultat['abonnement']['vers_spip']=inscription_batch_spip($id_liste_spip,$liste_abonnement['vers_spip']);
 			}
 		}
@@ -191,28 +195,28 @@ function inc_syncroniser_listes_dist($api='',$id_liste_spip,$id_liste_mailchimp,
 	$v=array('objet'=>'listes','type_syncro'=>'liste','id_objet'=>$id_liste_spip,'date_syncro'=>$date);
 	sql_insertq('spip_listes_syncro',$v);
 		
-	spip_log('résultats pour la liste : '.$id_liste_spip.' depuis la dernière actualisation : '.$since.' date syncro:'.$date, 'slcp');	
-	spip_log($resultat, 'slcp');		
+	spip_log('résultats pour la liste : '.$id_liste_spip.' depuis la dernière actualisation : '.$since.' date syncro:'.$date, 'sclp');	
+	spip_log($resultat, 'sclp');		
 
 	//$nombre_liste_spip=sql_count($liste_spip);
 	//$nombre_liste_mc=count($liste_mc);
 	
 	/*if($nombre_liste_spip>=$nombre_liste_mc)$sync=syncro_spip_mc($liste_spip,$liste_mc,$derniere_syncro);
 	else $sync=syncro_mc_spip($liste_spip,$liste_mc,$derniere_syncro);*/
-	//spip_log('a traiter'.serialize($a_traiter), 'slcp');	
-	//spip_log($listes_spip['valide'], 'slcp');
-	//spip_log($listes_spip['a_valider'], 'slcp');
+	//spip_log('a traiter'.serialize($a_traiter), 'sclp');	
+	//spip_log($listes_spip['valide'], 'sclp');
+	//spip_log($listes_spip['a_valider'], 'sclp');
 
 	
-	//spip_log($listes_mc, 'slcp');
+	//spip_log($listes_mc, 'sclp');
 
-	//spip_log($listes_spip, 'slcp');
-	//spip_log($desabonner_mc, 'slcp');
+	//spip_log($listes_spip, 'sclp');
+	//spip_log($desabonner_mc, 'sclp');
 	
-	//spip_log($liste_traites_mc, 'slcp');	
+	//spip_log($liste_traites_mc, 'sclp');	
 
 	
-	//spip_log($data, 'slcp');
+	//spip_log($data, 'sclp');
 	//spip_log("Admin $messageErreur",'squirrel_chimp');
 	return;
 	
