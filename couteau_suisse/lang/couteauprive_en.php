@@ -235,17 +235,17 @@ In the same way, to change the background colour if the following option allows:
 @_CS_ASTER@The format of these personalised tags have to be of existing colours or defined pairs "tag=colour", separated by commas. Examples: "grey, red", "smooth=yellow, strong=red", "low=#99CC11, high=brown" but also "grey=#DDDDCC, red=#EE3300". For the first and last examples, the allowed tags are: <code>[grey]</code> and <code>[red]</code> (<code>[fond grey]</code> and <code>[fond red]</code> if background colours are allowed).', # MODIF
 	'couleurs:nom' => 'Coloured text',
 	'couleurs_fonds' => ', <b>[fond coul]text[/coul]</b>, <b>[bg coul]text[/coul]</b>',
-	'cs_comportement:description' => '@puce@ {{Logs.}} Record a lot of information about the functions executed by the Swiss Knife plugin in the {spip.log} files which can be found in this directory: {<html>@_CS_DIR_TMP@</html>}[[%log_couteau_suisse%]]
+	'cs_comportement:description' => '@puce@ {{Logs.}} Record a lot of information about the functions executed by the Swiss Army Knife plugin in the {spip.log} files which can be found in this directory: {<html>@_CS_DIR_TMP@</html>}[[%log_couteau_suisse%]]
 
 
 
-@puce@ {{SPIP options.}} SPIP sorts and applies the plugins in a particular order. To be sure that the Swiss Knife is at the top and is thereby able to have priority control over  certain SPIP options, tick the following checkbox option. If the permissions on your server allow it, the file {<html>@_CS_FILE_OPTIONS@</html>} will be modified to include {/html>@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php</html>}.
+@puce@ {{SPIP options.}} SPIP sorts and applies the plugins in a particular order. To be sure that the Swiss Army Knife is at the top and is thereby able to have priority control over  certain SPIP options, tick the following checkbox option. If the permissions on your server allow it, the file {<html>@_CS_FILE_OPTIONS@</html>} will be modified to include {/html>@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php</html>}.
 
 [[%spip_options_on%]]@_CS_FILE_OPTIONS_ERR@
 
 
 
-@puce@ {{External requests.}} The Swiss Knife regularly checks for new versions of itself and shows any available updates on its configuration page.  In addition, this plugin contains certain tools which may be required for importing remote libraries.
+@puce@ {{External requests.}} The Swiss Army Knife regularly checks for new versions of itself and shows any available updates on its configuration page.  In addition, this plugin contains certain tools which may be required for importing remote libraries.
 
 
 
@@ -293,7 +293,7 @@ The parameter {type} above can be one of three values:
 
 
 
-By default, the Swiss Knife plugin inserts the pagination links at the top and bottom of the page. But you can place the links elsewhere in your template by using the #CS_DECOUPE tag, which you can activate here:
+By default, the Swiss Army Knife plugin inserts the pagination links at the top and bottom of the page. But you can place the links elsewhere in your template by using the #CS_DECOUPE tag, which you can activate here:
 
 [[%balise_decoupe%]]
 
@@ -913,7 +913,7 @@ _ • {Cache checking}: similar to the preceding option. However, all results ar
 	'supprimer_numero:nom' => 'Delete the number',
 
 	// T
-	'titre' => 'The Penknife',
+	'titre' => 'The Swiss Army Knife',
 	'titre_parent:description' => 'Within a loop, it is common to want to show the title of the parent of the current object. You normally need to use a second loop to do this, but a new tag #TITRE_PARENT makes the syntax easier. In the case of a MOTS loop, the tag gives the title of the keyword group. For other objects (articles, sections, news items, etc.) it gives the title of the parent section (if one such exists).
 
 
@@ -932,7 +932,7 @@ For example, in an (ARTICLES) loop, #TITRE_SECTEUR will give the title of the se
 
 The code <html>#TITRE_XXX{yy}</html> is also available to be used. Example: <html>#TITRE_ARTICLE{10}</html> will return the title of article #10.[[%titres_etendus%]]', # MODIF
 	'titre_parent:nom' => '#TITRE_PARENT/OBJECT tags',
-	'titre_tests' => 'The Penknife - Test page',
+	'titre_tests' => 'The Swiis Army Knife - Test page',
 	'titres_typo:description' => 'Transform all of the intermediary headings <html>"{{{My sub-heading}}}"</html> into configurable typographical images.[[%i_taille% pt]][[%i_couleur%]][[%i_police%
 
 
