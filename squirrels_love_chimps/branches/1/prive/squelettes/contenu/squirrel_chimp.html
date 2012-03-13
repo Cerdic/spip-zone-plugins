@@ -2,6 +2,8 @@
 
 <h1><:squirrelchimp:titre_plugin:></h1>
 
+<BOUCLE_autoriser(CONDITION){si #AUTORISER{defaut}}>
+
 [(#REM)On y affiche toute noisette "prive/squelettes/contenu/NOM_OBJET_DECLARE_accueil.html" des objets déclarés (voir "inc/squirrel_chimp_definitions.php" pour la déclaration des objets)]
 
 #SET{chemin,prive/squelettes/contenu/}
@@ -15,7 +17,9 @@
 	]
 </BOUCLE_objets>
 
-
+</BOUCLE_autoriser>
+<:squirrelchimp:acces_non_autorise:>
+<//B_autoriser>
 
 
 
