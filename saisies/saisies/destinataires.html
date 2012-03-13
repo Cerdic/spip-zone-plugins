@@ -17,7 +17,7 @@
 	<div class="choix">
 		<input type="checkbox" name="#ENV{nom}&#91;&#93;" class="checkbox"
 			readonly="readonly" checked="checked"
-			id="champ_#ENV{nom}_destinataire#ID_AUTEUR"
+			id="champ_[(#ENV{nom}|saisie_nom2classe)]_destinataire#ID_AUTEUR"
 			value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV{valeur_forcee,#ENV*{valeur,#ENV*{defaut,#ARRAY}}}}|oui)checked="checked"]
 		/>
 		<label for="champ_#ENV{nom}_destinataire#ID_AUTEUR">#NOM</label>
@@ -38,16 +38,16 @@
 	[(#REM) Sinon on propose le choix, en select ou en checkbox suivant l'option "type_choix" ]
 	<B_destinataires>
 		[(#GET{type_choix}|=={un}|oui)
-			<select name="#ENV{nom}&#91;&#93;" id="champ_#ENV{nom}">
+			<select name="#ENV{nom}&#91;&#93;" id="champ_[(#ENV{nom}|saisie_nom2classe)]">
 		]
 		<BOUCLE_destinataires(AUTEURS){tous}{id_auteur IN #GET*{choix_destinataires}}{par num nom,nom}>
 			[(#GET{type_choix}|=={plusieurs}|oui)
 				<div class="choix">
 					<input type="checkbox" name="#ENV{nom}&#91;&#93;" class="checkbox"
-						id="champ_#ENV{nom}_destinataire#ID_AUTEUR"
+						id="champ_[(#ENV{nom}|saisie_nom2classe)]_destinataire#ID_AUTEUR"
 						value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV*{valeur_forcee,#ENV*{valeur,#ENV*{defaut,#ARRAY}}}}|oui)checked="checked"]
 					/>
-					<label for="champ_#ENV{nom}_destinataire#ID_AUTEUR">#NOM</label>
+					<label for="champ_[(#ENV{nom}|saisie_nom2classe)]_destinataire#ID_AUTEUR">#NOM</label>
 				</div>
 			]
 			[(#GET{type_choix}|=={un}|oui)
