@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_legend_patron' => 'O typoch e-mailových adries',
 	'cfg_legend_squelette' => 'O odosielacom formulári',
 	'cfg_texte_descr' => 'Tento zásuvný modul SPIPu pridáva modul na poslanie stránky (<i>jej obsahu, adresy a správy</i>) jednému príjemcovi alebo viacerým.',
-	'cfg_titre_descr' => 'Nastavenie zásuvného modulu <i>Odporučiť priateľovi</i>',
+	'cfg_titre_descr' => 'Nastavenie zásuvného modulu <i>Odporučiť priateľom</i>',
 	'cfgform_comment_close_button' => 'podľa predvolených nastavení aktivované, táto možnosť vám umožňuje rozhodnúť, či sa v spodnej časti okna zobrazí tlačidlo "Zatvoriť"; <strong>táto možnosť je automaticky deaktivovaná ak sú deaktivované hlavičky, ktoré sú vymenované vyššie.</strong>',
 	'cfgform_comment_contenu' => 'Tu si vyberte typ objektu SPIPu (<i>článok, novinka, autor, a i.</i>) ktorý bude pripojený do e-mailu.',
 	'cfgform_comment_header' => 'táto možnosť vám umožňuje rozhodnúť sa, či stránka musí mať tag  &lt;head&gt; ("hlavička") alebo nie (<i>môže byť užitočné deaktivovať túto možnosť, ak používate javascriptové okno typu "thickbox" alebo ich chcete zobraziť iným spôsobom v rovnakom kontexte s rámom</i>).',
@@ -51,59 +51,58 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfgform_titre_patron' => 'Šablóna odoslaného e-mailu',
 	'cfgform_titre_patron_html' => 'Šablóna e-mailu vo formáte HTML',
 	'cfgform_titre_reset' => 'Akcia tlačidla na zrušenie',
-	'cfgform_titre_squelette' => 'Šablóna, ktorá sa použije na formulár tipafriendu',
+	'cfgform_titre_squelette' => 'Šablóna, ktorá sa použije na formulár zásuvného modulu Odporučiť priateľom',
 	'cfgform_titre_taf_css' => 'Predvoliť pridávanie definícií CSS',
 
 	// D
-	'doc_chapo' => 'Zásuvný modul "Tip A Friend" ponúka kompletný formulár na odoslanie ({hocijakej}) stránky v SPIPe na viacero e-mailových adries.',
-	'doc_en_ligne' => 'Dokumentácia zásuvného modulu na Spip-Contribe',
-	'doc_titre_court' => 'Dokumentácia TipAFriendu',
-	'doc_titre_page' => 'Dokumentácia zásuvného modulu "Tip A Friend"',
+	'doc_chapo' => 'Zásuvný modul "Odporučiť priateľom" ponúka kompletný formulár na odoslanie ({hocijakej}) stránky v SPIPe na viacero e-mailových adries.',
+	'doc_en_ligne' => 'Dokumentácia zásuvného modulu na stránke Spip-Contrib',
+	'doc_titre_court' => 'Dokumentácia zásuvného modulu Odporučiť priateľom',
+	'doc_titre_page' => 'Dokumentácia zásuvného modulu "Odporučiť priateľom"',
 	'docskel_sep' => '----',
-	'documentation' => '
-Cette page vous permet de tester l\'utilisation du plugin en fonction de votre site, de votre configuration et de vos personnalisations. Les différents liens proposés ajoutent un objet SPIP ou incluent un modèle dans le corps de la page. Vous pouvez modifier ces inclusions en éditant le paramètre correspondant de l\'URL courante.
+	'documentation' => 'Táto stránka vám umožňuje otestovať, či sa zásuvný modul hodí na vašu stránku, vašu konfiguráciu a vaše prispôsobenia. Rôzne odkazy, ktoré SPIP ponúka, pridajú do jadra stránky objekt SPIPu alebo šablónu. Tieto doplnky môžete zmeniť úpravou príslušného parametra internetovej adresy.
 
-{{{La balise TIPAFRIEND}}}
+{{{Tag TIPAFRIEND}}}
 
-{{Utilisation}}
+{{Využitie}}
 
-Le plugin propose une balise qui construit un lien ouvrant la page d\'envoi du mail d\'information en fonction de l\'objet SPIP courant. Cette balise accepte un unique argument, optionnel, permettant de définir :
--* soit {{le squelette utilisé pour générer ce lien}}, il faut alors indiquer le nom du squelette en question ({sans l\'extension ".html"}) ; le squelette doit être présent dans votre répertoire de modèles ;
--* soit {{le type de lien présenté}} ; si vous indiquez l\'argument "{{mini}}", la balise renverra uniquement l\'image du lien, sans le texte "Envoyer cette page ...".
+Zásuvný modul ponúka tag na vytvorenie odkazu, ktorý otvorí stránku na odoslanie e-mailu s informáciami o fungovaní daného objektu SPIPu. K tomuto tagu môžete pridať jedinečný parameter, prípadne môžete definovať aj:
+-* buď sa {{na vytvorenie tohto odkazu využije šablóna,}} potom treba zadať názov tejto šablóny ({bez prípony ".html"}) ; šablóna musí byť nahratá vo vašom priečinku šablón,
+-* alebo je to {{typ uvedeného odkazu;}} ak zadáte parameter "{{mini}}", tag nakreslí iba obrázok odkazu bez textu "Odoslať túto správu".
 
-{{Exemple}}
+{{Príklad}}
 
 <cadre class="spip">
-// balise seule
+// tu je len tag
 #TIPAFRIEND
-// pour ne voir que l\'image
+// aby sa zobrazil iba obrázok
 #TIPAFRIEND{mini}
-// ou avec un modele personnel
+// alebo s vlastnou šablónou
 #TIPAFRIEND{mon_modele}
 </cadre>
 
-{{Tests}}
+{{Testy}}
 
-Les liens ci-dessous ajoutent un objet SPIP à la page courante, laissant apparaître le rendu de la balise TIPAFRIEND.
-- [Ajouter l\'article 1->@url_article@] <small>(id_article=...)</small>
-- [Ajouter la brève 2->@url_breve@] <small>(id_breve=...)</small>
-- [Recalculer la page->@url_recalcul@]
-- [Retour à la page vierge->@url_vierge@]
+Tieto odkazy pridajú objekt SPIPu na aktuálnu stránku so zmenami v zobrazení tagu TIPAFRIEND.
+- [Pridať článok 1,->@url_article@] <small>(id_article=...)</small>
+- [Pridať novinku 2,->@url_breve@] <small>(id_breve=...)</small>
+- [Obnoviť stránku,->@url_recalcul@]
+- [Späť na čistú stránku.->@url_vierge@]
 
-Pour modifier l\'argument de la balise dans cette page de tests, ajoutez l\'argument "{{arg=...}}" à l\'URL courante ({par exemple pour utiliser l\'argument "mini", cliquez dans la barre d\'adresse de votre navigateur et ajoutez à la fin de l\'adresse courante "&arg=mini"}).
+Ak chcete zmeniť parameter tagu na tejto testovacej stránke, k aktuálnej adrese stránky pridajte parameter "{{arg=...}}" ({ak napríklad chcete použiť parameter "mini", kliknite na panel s adresou vášho prehliadača a na koniec aktuálnej adresy pridajte "&arg=mini"}).
 
-{{{Les modèles}}}
+{{{Šablóny}}}
 
-Les liens ci-dessous vous permettent de tester les modèles utilisés en page web ({avec des valeurs fictives}) ou de les inclure à la page courante.
-- [Inclure le modèle \'tipafriend_mail_default.html\'->@url_model@] <small>(model=...)</small>
-- [Voir le modèle brut avec des données fictives->@url_model_brut@]
-- [Voir le modèle HTML avec des données fictives->@url_model_html@] <small>(nécessite le plugin {{[Facteur->http://www.spip-contrib.net/?article3371]}})</small>
+Tieto odkazy vám umožňujú otestovať šablóny využívané na vašej webovej stránke ({s fiktívnymi hodnotami}) alebo ich pridať na aktuálnu stránku.
+- [Vložiť šablónu "tipafriend_mail_default.html"->@url_model@] <small>(model=...)</small>
+- [Zobraziť šablónu ako nenaformátovaný text s fiktívnymi hodnotami->@url_model_brut@]
+- [Zobraziť šablónu ako HTML s fiktívnymi hodnotami->@url_model_html@] <small>(vyžaduje si zásuvný modul {{[Facteur->http://www.spip-contrib.net/?article3371]}})</small>
 
-{{{Paramètres de CFG pour TIPAFRIEND}}}
+{{{Parametre CFG pre TIPAFRIEND}}}
 
-Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubrique575]}} est actif sur votre site, le lien ci-dessous vous présente les valeurs de configuration enregistrées pour le plugin "Tip A Friend".
+Ak je zásuvný modul {{[CFG: nástroj na nastavenie->http://www.spip-contrib.net/?rubrique575]}} aktivovaný na vašej stránky, po kliknutí na tento odkaz sa zobrazia hodnoty na nastavení uložené pre zásuvný modul "Odporučiť priateľom".
 
-@cfg_param@', # NEW
+@cfg_param@',
 
 	// E
 	'error_dest' => 'Neuviedli ste žiadneho príjemcu',
@@ -143,7 +142,7 @@ Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubr
 	'mail_body_03_html' => 'Názov dokumentu: "@titre_document@"',
 	'mail_body_04' => 'Adresa tejto stránky na internete: @url_document@',
 	'mail_body_04_html' => 'Adresa tejto stránky na internete: <a href="@url_document@">@url_document@</a>',
-	'mail_body_05' => 'Obsah stránky (ako text):',
+	'mail_body_05' => 'Obsah stránky (ako nenaformátovaný text):',
 	'mail_body_05_html' => 'Obsah stránky:',
 	'mail_body_extrait' => '(úryvok) ',
 	'mail_titre_default' => 'Údaje o stránke @nom_site@',
@@ -159,19 +158,19 @@ Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubr
 	'page_test_cfg_pas_installe' => 'Zdá sa, že zásuvný modul [CFG->http://www.spip-contrib.net/?rubrique575] nie je nainštalovaný.',
 	'page_test_fin_simulation' => '-- Koniec pridávania na simuláciu',
 	'page_test_in_new_window' => 'Testovacia stránka v novom okne',
-	'page_test_menu_inclure' => 'Vložiť model "tipafriend_mail_default.html"',
+	'page_test_menu_inclure' => 'Vložiť šablónu "tipafriend_mail_default.html"',
 	'page_test_models_comment' => 'Tieto odkazy vám umožňujú vyskúšať si modely, ktoré sa používajú na webovej stránke (<i>s fiktívnymi hodnotami</i>).',
-	'page_test_test_model_brut' => 'Zobraziť textový model s fiktívnymi dátami',
-	'page_test_test_model_html' => 'Zobraziť model HTML s fiktívnymi dátami',
-	'page_test_title' => 'Test zásuvného modulu Tip A Friend',
-	'page_test_titre_inclusion_model' => '-- Vloženie modelu "@model@" (<i>fiktívne hodnoty</i>)',
+	'page_test_test_model_brut' => 'Zobraziť šablónu ako nenaformátovaný text s fiktívnymi hodnotami',
+	'page_test_test_model_html' => 'Zobraziť model HTML s fiktívnymi hodnotami',
+	'page_test_title' => 'Test zásuvného modulu "Odporučiť priateľom"',
+	'page_test_titre_inclusion_model' => '-- Vloženie šablóny "@model@" (<i>fiktívne hodnoty</i>)',
 	'page_test_titre_inclusion_objet' => '-- Simulácia stránky @objet@ č. @id_objet@ (<i>nadpis + úvod</i>)',
 	'popup_name' => 'Poslať informáciu e-mailom',
 
 	// T
 	'taftest_arguments_balise_dyn' => 'Parametre prijaté v dymanickom tagu',
-	'taftest_arguments_balise_stat' => 'Argumenty získané v statickom tagu ',
-	'taftest_chargement_patron' => 'nahrávanie vzoru "@patron@"',
+	'taftest_arguments_balise_stat' => 'Argumenty prijaté v statickom tagu ',
+	'taftest_chargement_patron' => 'nahrávanie šablóny "@patron@"',
 	'taftest_content' => '<b><u>Podrobnosti odoslaného e-mailu</u></b>',
 	'taftest_contexte_modele' => 'Kontext odoslaný do šablóny',
 	'taftest_creation_objet_champs' => 'Vytvorenie objektu "Polia" pre objekt ID',
@@ -184,7 +183,7 @@ Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubr
 	'taftest_mail_title' => '<b><i>Názov pošty</i></b>',
 	'taftest_modele_demande' => 'Formát požadovaný od používateľa',
 	'taftest_param_form' => 'Parametre, ktoré prešli do formulára',
-	'taftest_patron_pas_trouve' => 'Vzor "@patron@" sa nenašiel!<br />Nahráva sa predvolený vzor.',
+	'taftest_patron_pas_trouve' => 'Šablóna "@patron@" sa nenašla!<br />Nahráva sa predvolená šablóna.',
 	'taftest_skel_pas_trouve' => 'Šablóna \'@skel@\' sa nenašla.<br />Použije sa predvolená šablóna.',
 	'taftest_title' => 'OdporučiťPriateľovi LADENIE',
 	'taftest_to' => '<b><i>Príjemcovia</i></b>',
