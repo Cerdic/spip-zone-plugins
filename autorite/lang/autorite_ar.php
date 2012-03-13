@@ -31,10 +31,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_auteurs' => 'إعداد المؤلفين',
 	'config_auteurs_rubriques' => 'أي نوع من المؤلفين يمكن <b>ربطه بالأقسام</b>.',
 	'config_auteurs_statut' => 'لدى إنشاء مؤلف، ما هو <b>وضعه الافتراضي</b>؟',
-	'config_plugin_qui' => 'Qui peut <strong>modifier la configuration</strong> des plugins (activation...) ?', # NEW
+	'config_plugin_qui' => 'من يمكنه <strong>تعديل إعداد</strong> الملحقات (تفعيل...)؟',
 	'config_site' => 'إعداد الموقع',
 	'config_site_qui' => 'من يمكنه <strong>تغيير إعداد</strong> الموقع؟',
-	'crayons' => 'Crayons', # NEW
+	'crayons' => 'القلم',
 
 	// D
 	'deja_defini' => 'الأذونات التالية سبق تحديدها في مكان آخر:',
@@ -94,7 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ouvrir_visiteurs_tous' => 'لجميع زوار الموقع:',
 
 	// P
-	'pas_acces_espace_prive' => '<strong>Pas d\'accès à l\'espace privé :</strong> les rédacteurs n\'ont pas accès à l\'espace privé.', # MODIF
+	'pas_acces_espace_prive' => '<strong>منع الدخول الى المجال الخاص:</strong> ممنوع على المحررين الدخول الى المجال الخاص.',
 	'personne' => 'لا أحد',
 	'petitions_qui' => '<strong>التوقيعات:</strong> من يمكنه تعديل توقيعات العرائض:',
 	'publication' => 'النشر',
