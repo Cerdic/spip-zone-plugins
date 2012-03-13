@@ -1,92 +1,118 @@
 /**
  * Uncompressed source can be found at https://browserid.org/include.orig.js
  *
- * ***** BEGIN LICENSE BLOCK *****
- * Version: MPL 1.1/GPL 2.0/LGPL 2.1
- *
- * The contents of this file are subject to the Mozilla Public License Version
- * 1.1 (the "License"); you may not use this file except in compliance with
- * the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
- *
- * Software distributed under the License is distributed on an "AS IS" basis,
- * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
- * for the specific language governing rights and limitations under the
- * License.
- *
- * The Original Code is Mozilla BrowserID.
- *
- * The Initial Developer of the Original Code is Mozilla.
- * Portions created by the Initial Developer are Copyright (C) 2011
- * the Initial Developer. All Rights Reserved.
- *
- * Contributor(s):
- *
- * Alternatively, the contents of this file may be used under the terms of
- * either the GNU General Public License Version 2 or later (the "GPL"), or
- * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
- * in which case the provisions of the GPL or the LGPL are applicable instead
- * of those above. If you wish to allow use of your version of this file only
- * under the terms of either the GPL or the LGPL, and not to allow others to
- * use your version of this file under the terms of the MPL, indicate your
- * decision by deleting the provisions above and replace them with the notice
- * and other provisions required by the GPL or the LGPL. If you do not delete
- * the provisions above, a recipient may use your version of this file under
- * the terms of any one of the MPL, the GPL or the LGPL.
- *
- * ***** END LICENSE BLOCK ***** */
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 (function() {
   // this is the file that the RP includes to shim in the
   // navigator.id.getVerifiedEmail() function
-  "use strict";
+  //  "use strict";
 
   // local embedded copy of jschannel: http://github.com/mozilla/jschannel
+  /**
+   * js_channel is a very lightweight abstraction on top of
+   * postMessage which defines message formats and semantics
+   * to support interactions more rich than just message passing
+   * js_channel supports:
+   *  + query/response - traditional rpc
+   *  + query/update/response - incremental async return of results
+   *    to a query
+   *  + notifications - fire and forget
+   *  + error handling
+   *
+   * js_channel is based heavily on json-rpc, but is focused at the
+   * problem of inter-iframe RPC.
+   *
+   * Message types:
+   *  There are 5 types of messages that can flow over this channel,
+   *  and you may determine what type of message an object is by
+   *  examining its parameters:
+   *  1. Requests
+   *    + integer id
+   *    + string method
+   *    + (optional) any params
+   *  2. Callback Invocations (or just "Callbacks")
+   *    + integer id
+   *    + string callback
+   *    + (optional) params
+   *  3. Error Responses (or just "Errors)
+   *    + integer id
+   *    + string error
+   *    + (optional) string message
+   *  4. Responses
+   *    + integer id
+   *    + (optional) any result
+   *  5. Notifications
+   *    + string method
+   *    + (optional) any params
+   */
   var Channel = (function() {
+    "use strict";
+
     // current transaction id, start out at a random *odd* number between 1 and a million
     // There is one current transaction counter id per page, and it's shared between
     // channel instances.  That means of all messages posted from a single javascript
     // evaluation context, we'll never have two with the same id.
     var s_curTranId = Math.floor(Math.random()*1000001);
 
-    // no two bound channels in the same javascript evaluation context may have the same origin & scope.
-    // futher if two bound channels have the same scope, they may not have *overlapping* origins
-    // (either one or both support '*').  This restriction allows a single onMessage handler to efficient
+    // no two bound channels in the same javascript evaluation context may have the same origin, scope, and window.
+    // futher if two bound channels have the same window and scope, they may not have *overlapping* origins
+    // (either one or both support '*').  This restriction allows a single onMessage handler to efficiently
     // route messages based on origin and scope.  The s_boundChans maps origins to scopes, to message
     // handlers.  Request and Notification messages are routed using this table.
     // Finally, channels are inserted into this table when built, and removed when destroyed.
     var s_boundChans = { };
 
     // add a channel to s_boundChans, throwing if a dup exists
-    function s_addBoundChan(origin, scope, handler) {
+    function s_addBoundChan(win, origin, scope, handler) {
+      function hasWin(arr) {
+        for (var i = 0; i < arr.length; i++) if (arr[i].win === win) return true;
+        return false;
+      }
+
       // does she exist?
       var exists = false;
+
+
       if (origin === '*') {
         // we must check all other origins, sadly.
         for (var k in s_boundChans) {
           if (!s_boundChans.hasOwnProperty(k)) continue;
           if (k === '*') continue;
           if (typeof s_boundChans[k][scope] === 'object') {
-            exists = true;
+            exists = hasWin(s_boundChans[k][scope]);
+            if (exists) break;
           }
         }
       } else {
         // we must check only '*'
-        if ((s_boundChans['*'] && s_boundChans['*'][scope]) ||
-            (s_boundChans[origin] && s_boundChans[origin][scope]))
+        if ((s_boundChans['*'] && s_boundChans['*'][scope])) {
+          exists = hasWin(s_boundChans['*'][scope]);
+        }
+        if (!exists && s_boundChans[origin] && s_boundChans[origin][scope])
         {
-          exists = true;
+          exists = hasWin(s_boundChans[origin][scope]);
         }
       }
-      if (exists) throw "A channel already exists which overlaps with origin '"+ origin +"' and has scope '"+scope+"'";
+      if (exists) throw "A channel is already bound to the same window which overlaps with origin '"+ origin +"' and has scope '"+scope+"'";
 
       if (typeof s_boundChans[origin] != 'object') s_boundChans[origin] = { };
-      s_boundChans[origin][scope] = handler;
+      if (typeof s_boundChans[origin][scope] != 'object') s_boundChans[origin][scope] = [ ];
+      s_boundChans[origin][scope].push({win: win, handler: handler});
     }
 
-    function s_removeBoundChan(origin, scope) {
-      delete s_boundChans[origin][scope];
-      // possibly leave a empty object around.  whatevs.
+    function s_removeBoundChan(win, origin, scope) {
+      var arr = s_boundChans[origin][scope];
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i].win === win) {
+          arr.splice(i,1);
+        }
+      }
+      if (s_boundChans[origin][scope].length === 0) {
+        delete s_boundChans[origin][scope]
+      }
     }
 
     function s_isArray(obj) {
@@ -107,13 +133,17 @@
     // arrangement allows certain efficiencies, message data is only parsed once and dispatch
     // is more efficient, especially for large numbers of simultaneous channels.
     var s_onMessage = function(e) {
-      var m = JSON.parse(e.data);
-      if (typeof m !== 'object') return;
+      try {
+        var m = JSON.parse(e.data);
+        if (typeof m !== 'object' || m === null) throw "malformed";
+      } catch(e) {
+        // just ignore any posted messages that do not consist of valid JSON
+        return;
+      }
 
+      var w = e.source;
       var o = e.origin;
-      var s = null;
-      var i = null;
-      var meth = null;
+      var s, i, meth;
 
       if (typeof m.method === 'string') {
         var ar = m.method.split('::');
@@ -127,20 +157,35 @@
 
       if (typeof m.id !== 'undefined') i = m.id;
 
+      // w is message source window
       // o is message origin
       // m is parsed message
       // s is message scope
-      // i is message id (or null)
+      // i is message id (or undefined)
       // meth is unscoped method name
       // ^^ based on these factors we can route the message
 
       // if it has a method it's either a notification or a request,
       // route using s_boundChans
       if (typeof meth === 'string') {
+        var delivered = false;
         if (s_boundChans[o] && s_boundChans[o][s]) {
-          s_boundChans[o][s](o, meth, m);
-        } else if (s_boundChans['*'] && s_boundChans['*'][s]) {
-          s_boundChans['*'][s](o, meth, m);
+          for (var i = 0; i < s_boundChans[o][s].length; i++) {
+            if (s_boundChans[o][s][i].win === w) {
+              s_boundChans[o][s][i].handler(o, meth, m);
+              delivered = true;
+              break;
+            }
+          }
+        }
+
+        if (!delivered && s_boundChans['*'] && s_boundChans['*'][s]) {
+          for (var i = 0; i < s_boundChans['*'][s].length; i++) {
+            if (s_boundChans['*'][s][i].win === w) {
+              s_boundChans['*'][s][i].handler(o, meth, m);
+              break;
+            }
+          }
         }
       }
       // otherwise it must have an id (or be poorly formed
@@ -159,7 +204,7 @@
      *
      * Arguments to Channel.build(cfg):
      *
-     *   cfg.window - the remote window with which we'll communication
+     *   cfg.window - the remote window with which we'll communicate
      *   cfg.origin - the expected origin of the remote window, may be '*'
      *                which matches any origin
      *   cfg.scope  - the 'scope' of messages.  a scope string that is
@@ -217,8 +262,8 @@
           var oMatch;
           if (cfg.origin === "*") validOrigin = true;
           // allow valid domains under http and https.  Also, trim paths off otherwise valid origins.
-          else if (null !== (oMatch = cfg.origin.match(/^https?:\/\/(?:[-a-zA-Z0-9\.])+(?::\d+)?/))) {
-            cfg.origin = oMatch[0];
+          else if (null !== (oMatch = cfg.origin.match(/^https?:\/\/(?:[-a-zA-Z0-9_\.])+(?::\d+)?/))) {
+            cfg.origin = oMatch[0].toLowerCase();
             validOrigin = true;
           }
         }
@@ -257,7 +302,7 @@
             origin: origin,
             invoke: function(cbName, v) {
               // verify in table
-              if (!inTbl[id]) throw "attempting to invoke a callback of a non-existant transaction: " + id;
+              if (!inTbl[id]) throw "attempting to invoke a callback of a nonexistent transaction: " + id;
               // verify that the callback name is valid
               var valid = false;
               for (var i = 0; i < callbacks.length; i++) if (cbName === callbacks[i]) { valid = true; break; }
@@ -269,7 +314,7 @@
             error: function(error, message) {
               completed = true;
               // verify in table
-              if (!inTbl[id]) throw "error called for non-existant message: " + id;
+              if (!inTbl[id]) throw "error called for nonexistent message: " + id;
 
               // remove transaction from table
               delete inTbl[id];
@@ -280,7 +325,7 @@
             complete: function(v) {
               completed = true;
               // verify in table
-              if (!inTbl[id]) throw "complete called for non-existant message: " + id;
+              if (!inTbl[id]) throw "complete called for nonexistent message: " + id;
               // remove transaction from table
               delete inTbl[id];
               // send complete
@@ -298,6 +343,18 @@
           };
         }
 
+        var setTransactionTimeout = function(transId, timeout, method) {
+          return window.setTimeout(function() {
+            if (outTbl[transId]) {
+              // XXX: what if client code raises an exception here?
+              var msg = "timeout (" + timeout + "ms) exceeded on method '" + method + "'";
+              (1,outTbl[transId].error)("timeout_error", msg);
+              delete outTbl[transId];
+              delete s_transIds[transId];
+            }
+          }, timeout);
+        }
+        
         var onMessage = function(origin, method, m) {
           // if an observer was specified at allocation time, invoke it
           if (typeof cfg.gotMessageObserver === 'function') {
@@ -345,17 +402,17 @@
                 // automagic handling of exceptions:
                 var error = "runtime_error";
                 var message = null;
-                // * if its a string then it gets an error code of 'runtime_error' and string is the message
+                // * if it's a string then it gets an error code of 'runtime_error' and string is the message
                 if (typeof e === 'string') {
                   message = e;
                 } else if (typeof e === 'object') {
                   // either an array or an object
-                  // * if its an array of length two, then  array[0] is the code, array[1] is the error message
+                  // * if it's an array of length two, then  array[0] is the code, array[1] is the error message
                   if (e && s_isArray(e) && e.length == 2) {
                     error = e[0];
                     message = e[1];
                   }
-                  // * if its an object then we'll look form error and message parameters
+                  // * if it's an object then we'll look form error and message parameters
                   else if (typeof e.error === 'string') {
                     error = e.error;
                     if (!e.message) message = "";
@@ -368,6 +425,10 @@
                 if (message === null) {
                   try {
                     message = JSON.stringify(e);
+                    /* On MSIE8, this can result in 'out of memory', which
+                     * leaves message undefined. */
+                    if (typeof(message) == 'undefined')
+                      message = e.toString();
                   } catch (e2) {
                     message = e.toString();
                   }
@@ -408,16 +469,16 @@
               // what can we do?  Also, here we'll ignore return values
             }
           }
-        };
+        }
 
         // now register our bound channel for msg routing
-        s_addBoundChan(cfg.origin, ((typeof cfg.scope === 'string') ? cfg.scope : ''), onMessage);
+        s_addBoundChan(cfg.window, cfg.origin, ((typeof cfg.scope === 'string') ? cfg.scope : ''), onMessage);
 
         // scope method names based on cfg.scope specified when the Channel was instantiated
         var scopeMethod = function(m) {
           if (typeof cfg.scope === 'string' && cfg.scope.length) m = [cfg.scope, m].join("::");
           return m;
-        };
+        }
 
         // a small wrapper around postmessage whose primary function is to handle the
         // case that clients start sending messages before the other end is "ready"
@@ -440,7 +501,7 @@
 
             cfg.window.postMessage(JSON.stringify(msg), cfg.origin);
           }
-        };
+        }
 
         var onReady = function(trans, type) {
           debug('ready msg received');
@@ -484,6 +545,7 @@
 
             if (regTbl[method]) throw "method '"+method+"' is already bound!";
             regTbl[method] = cb;
+            return this;
           },
           call: function(m) {
             if (!m) throw 'missing arguments to call function';
@@ -516,6 +578,12 @@
             var msg = { id: s_curTranId, method: scopeMethod(m.method), params: m.params };
             if (callbackNames.length) msg.callbacks = callbackNames;
 
+            if (m.timeout)
+              // XXX: This function returns a timeout ID, but we don't do anything with it.
+              // We might want to keep track of it so we can cancel it using clearTimeout()
+              // when the transaction completes.
+              setTransactionTimeout(s_curTranId, m.timeout, scopeMethod(m.method));
+
             // insert into the transaction table
             outTbl[s_curTranId] = { callbacks: callbacks, error: m.error, success: m.success };
             s_transIds[s_curTranId] = onMessage;
@@ -533,7 +601,7 @@
             postMessage({ method: scopeMethod(m.method), params: m.params });
           },
           destroy: function () {
-            s_removeBoundChan(cfg.origin, ((typeof cfg.scope === 'string') ? cfg.scope : ''));
+            s_removeBoundChan(cfg.window, cfg.origin, ((typeof cfg.scope === 'string') ? cfg.scope : ''));
             if (window.removeEventListener) window.removeEventListener('message', onMessage, false);
             else if(window.detachEvent) window.detachEvent('onmessage', onMessage);
             ready = false;
@@ -549,12 +617,190 @@
 
         obj.bind('__ready', onReady);
         setTimeout(function() {
-          postMessage({ method: scopeMethod('__ready'), params: "ping" }, true);
+//          postMessage({ method: scopeMethod('__ready'), params: "ping" }, true);
         }, 0);
 
         return obj;
       }
     };
+  })();
+
+  // local embedded copy of winchan: http://github.com/lloyd/winchan
+  ;WinChan = (function() {
+    var RELAY_FRAME_NAME = "__winchan_relay_frame";
+
+    // a portable addListener implementation
+    function addListener(w, event, cb) {
+      if(w.attachEvent) w.attachEvent('on' + event, cb);
+      else if (w.addEventListener) w.addEventListener(event, cb, false);
+    }
+
+    // a portable removeListener implementation
+    function removeListener(w, event, cb) {
+      if(w.detachEvent) w.detachEvent('on' + event, cb);
+      else if (w.removeEventListener) w.removeEventListener(event, cb, false);
+    }
+
+    // checking for IE8 or above
+    function isInternetExplorer() {
+      var rv = -1; // Return value assumes failure.
+      if (navigator.appName == 'Microsoft Internet Explorer') {
+        var ua = navigator.userAgent;
+        var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+        if (re.exec(ua) != null)
+          rv = parseFloat(RegExp.$1);
+      }
+      return rv >= 8;
+    }
+
+    // checking Mobile Firefox (Fennec)
+    function isFennec() {
+      try {
+        return (navigator.userAgent.indexOf('Fennec/') != -1);
+      } catch(e) {};
+      return false;
+    }
+
+    // feature checking to see if this platform is supported at all
+    function isSupported() {
+      return (window.JSON && window.JSON.stringify &&
+              window.JSON.parse && window.postMessage);
+    }
+
+    // given a URL, extract the origin
+    function extractOrigin(url) {
+      if (!/^https?:\/\//.test(url)) url = window.location.href;
+      var m = /^(https?:\/\/[-_a-zA-Z\.0-9:]+)/.exec(url);
+      if (m) return m[1];
+      return url;
+    }
+
+    // find the relay iframe in the opener
+    function findRelay() {
+      var loc = window.location;
+      var frames = window.opener.frames;
+      var origin = loc.protocol + '//' + loc.host;
+      for (i = frames.length - 1; i >= 0; i++) {
+        try {
+          if (frames[i].location.href.indexOf(origin) === 0 &&
+              frames[i].name === RELAY_FRAME_NAME)
+          {
+            return frames[i];
+          }
+        } catch(e) { }
+      }
+      return;
+    }
+
+    var isIE = isInternetExplorer();
+
+    if (isSupported()) {
+      /*  General flow:
+       *                  0. user clicks
+       *  (IE SPECIFIC)   1. caller adds relay iframe (served from trusted domain) to DOM
+       *                  2. caller opens window (with content from trusted domain)
+       *                  3. window on opening adds a listener to 'message'
+       *  (IE SPECIFIC)   4. window on opening finds iframe
+       *                  5. window checks if iframe is "loaded" - has a 'doPost' function yet
+       *  (IE SPECIFIC5)  5a. if iframe.doPost exists, window uses it to send ready event to caller
+       *  (IE SPECIFIC5)  5b. if iframe.doPost doesn't exist, window waits for frame ready
+       *  (IE SPECIFIC5)  5bi. once ready, window calls iframe.doPost to send ready event
+       *                  6. caller upon reciept of 'ready', sends args
+       */
+      return {
+        open: function(opts, cb) {
+          if (!cb) throw "missing required callback argument";
+
+          // test required options
+          var err;
+          if (!opts.url) err = "missing required 'url' parameter";
+          if (!opts.relay_url) err = "missing required 'relay_url' parameter";
+          if (err) setTimeout(function() { cb(err); }, 0);
+
+          // supply default options
+          if (!opts.window_features || isFennec()) opts.window_features = undefined;
+
+          // opts.params may be undefined
+
+          var iframe;
+
+          // sanity check, are url and relay_url the same origin?
+          var origin = extractOrigin(opts.url);
+          if (origin !== extractOrigin(opts.relay_url)) {
+            return setTimeout(function() {
+              cb('invalid arguments: origin of url and relay_url must match');
+            }, 0);
+          }
+
+          var messageTarget;
+
+          if (isIE) {
+            // first we need to add a "relay" iframe to the document that's served
+            // from the target domain.  We can postmessage into a iframe, but not a
+            // window
+            iframe = document.createElement("iframe");
+            // iframe.setAttribute('name', framename);
+            iframe.setAttribute('src', opts.relay_url);
+            iframe.style.display = "none";
+            iframe.setAttribute('name', RELAY_FRAME_NAME);
+            document.body.appendChild(iframe)
+            messageTarget = iframe.contentWindow;
+          }
+
+          var w = window.open(opts.url, null, opts.window_features);
+
+          if (!messageTarget) messageTarget = w;
+
+          var req = JSON.stringify({a: 'request', d: opts.params});
+
+          // cleanup on unload
+          function cleanup() {
+            if (iframe) document.body.removeChild(iframe);
+            iframe = undefined;
+            if (w) w.close();
+            w = undefined;
+          }
+
+          addListener(window, 'unload', cleanup);
+
+          function onMessage(e) {
+            try {
+              var d = JSON.parse(e.data);
+              if (d.a === 'ready') messageTarget.postMessage(req, origin);
+              else if (d.a === 'error') cb(d.d);
+              else if (d.a === 'response') {
+                removeListener(window, 'message', onMessage);
+                removeListener(window, 'unload', cleanup);
+                cleanup();
+                cb(null, d.d);
+              }
+            } catch(e) { }
+          };
+
+          addListener(window, 'message', onMessage);
+
+          return {
+            close: cleanup,
+            focus: function() {
+              if (w) {
+                try {
+                  w.focus();
+                }
+                catch(e) {
+                  /* IE7 blows up here, do nothing */
+                }
+              }
+            }
+          };
+        }
+      }
+    } else {
+      return {
+        open: function(url, winopts, arg, cb) {
+          setTimeout(function() { cb("unsupported browser"); }, 0);
+        }
+      };
+    }
   })();
 
   var BrowserSupport = (function() {
@@ -582,7 +828,7 @@
 
     function checkIE() {
       var ieVersion = getInternetExplorerVersion(),
-          ieNosupport = ieVersion > -1 && ieVersion < 9;
+          ieNosupport = ieVersion > -1 && ieVersion < 8;
 
       if(ieNosupport) {
         return "IE_VERSION";
@@ -606,8 +852,14 @@
       }
     }
 
+    function checkJSON() {
+      if(!(window.JSON && window.JSON.stringify && window.JSON.parse)) {
+        return "JSON";
+      }
+    }
+
     function isSupported() {
-      reason = checkLocalStorage() || checkPostMessage() || explicitNosupport();
+      reason = checkLocalStorage() || checkPostMessage() || checkJSON() || explicitNosupport();
 
       return !reason;
     }
@@ -629,79 +881,23 @@
        */
       isSupported: isSupported,
       /**
-       * Called after isSupported, if isSupported returns false.  Gets the reason 
+       * Called after isSupported, if isSupported returns false.  Gets the reason
        * why browser is not supported.
        * @method getNoSupportReason
        * @returns {string}
        */
       getNoSupportReason: getNoSupportReason
     };
-    
   }());
 
 
   // this is for calls that are non-interactive
   function _open_hidden_iframe(doc) {
     var iframe = doc.createElement("iframe");
-    // iframe.style.display = "none";
-    doc.body.appendChild(iframe);
-    iframe.src = ipServer + "/register_iframe";
-    return iframe;
-  }
-
-  function _get_relayframe_id() {
-    var randomString = '';
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (var i=0; i < 4; i++) {
-      randomString += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return randomString;
-  }
-
-  function _open_relayframe(framename) {
-    var doc = window.document;
-    var iframe = doc.createElement("iframe");
-    iframe.setAttribute('name', framename);
-    iframe.setAttribute('src', ipServer + "/relay");
     iframe.style.display = "none";
     doc.body.appendChild(iframe);
-
+    iframe.src = ipServer + "/communication_iframe";
     return iframe;
-  }
-  
-  function _open_window(url) {
-    url = url || "about:blank";
-    // we open the window initially blank, and only after our relay frame has
-    // been constructed do we update the location.  This is done because we
-    // must launch the window inside a click handler, but we should wait to
-    // start loading it until our relay iframe is instantiated and ready.
-    // see issue #287 & #286
-    var dialog = window.open(
-      url,
-      "_mozid_signin",
-      isFennec ? undefined : "menubar=0,location=0,resizable=0,scrollbars=0,status=0,dialog=1,width=700,height=375");
-
-    dialog.focus();
-    return dialog;
-  }
-
-  function _attach_event(element, name, listener) {
-    if (element.addEventListener) {
-      element.addEventListener(name, listener, false);
-    }
-    else if(element.attachEvent) {
-      // IE < 9
-      element.attachEvent(name, listener);
-    }
-  }
-
-  function _detatch_event(element, name, listener) {
-    if (element.removeEventListener) {
-      element.removeEventListener(name, listener, false);
-    }
-    else if(element.detachEvent) {
-      element.detachEvent(name, listener);
-    }
   }
 
   /**
@@ -716,173 +912,87 @@
   if (!navigator.id.getVerifiedEmail || navigator.id._getVerifiedEmailIsShimmed) {
     var ipServer = "https://browserid.org";
     var isFennec = navigator.userAgent.indexOf('Fennec/') != -1;
+    var windowOpenOpts =
+      (isFennec ? undefined :
+       "menubar=0,location=1,resizable=0,scrollbars=0,status=0,dialog=1,width=700,height=375");
 
-    var chan, w, iframe;
+    var w;
 
-    // keep track of these so that we can re-use/re-focus an already open window.
-    navigator.id.getVerifiedEmail = function(callback) {
-      if (w) {
-        // if there is already a window open, just focus the old window.
-        w.focus();
-        return;
+    navigator.id.get = function(callback, options) {
+      if (typeof callback !== 'function') {
+        throw "navigator.id.get() requires a callback argument";
       }
 
-      if (!BrowserSupport.isSupported()) {
-        w = _open_window(ipServer + "/unsupported_dialog");
-        return;
-      }
-
-      var frameid = _get_relayframe_id();
-      var iframe = _open_relayframe("browserid_relay_" + frameid);
-      w = _open_window();
-
-      // if the RP window closes, close the dialog as well.
-      _attach_event(window, 'unload', cleanup);
-
-      // clean up a previous channel that never was reaped
-      if (chan) chan.destroy();
-      chan = Channel.build({
-        window: iframe.contentWindow,
-        origin: ipServer,
-        scope: "mozid",
-        onReady: function() {
-          // We have to change the name of the relay frame every time or else Firefox
-          // has a problem re-attaching new iframes with the same name.  Code inside
-          // of frames with the same name sometimes does not get run.
-          // See https://bugzilla.mozilla.org/show_bug.cgi?id=350023
-          w = _open_window(ipServer + "/sign_in#" + frameid);
-        }
-      });
-
-      function cleanup() {
-        chan.destroy();
-        chan = null;
-
-        if (w) {
-          w.close();
-          w = null;
-        }
-
-        iframe.parentNode.removeChild(iframe);
-        iframe = null;
-
-        _detatch_event(window, 'unload', cleanup);
-      }
-
-      chan.call({
-        method: "getVerifiedEmail",
-        success: function(rv) {
-          if (callback) {
-            // return the string representation of the JWT, the client is responsible for unpacking it.
-            callback(rv);
-          }
-          cleanup();
-        },
-        error: function(code, msg) {
-          // XXX: we don't make the code and msg available to the user.
-          if (callback) callback(null);
-          cleanup();
-        }
-      });
-    };
-
-  /*
-    // preauthorize a particular email
-    // FIXME: lots of cut-and-paste code here, need to refactor
-    // not refactoring now because experimenting and don't want to break existing code
-    navigator.id.preauthEmail = function(email, onsuccess, onerror) {
-      var doc = window.document;
-      var iframe = _create_iframe(doc);
-
-      // clean up a previous channel that never was reaped
-      if (chan) chan.destroy();
-      chan = Channel.build({window: iframe.contentWindow, origin: ipServer, scope: "mozid"});
-
-      function cleanup() {
-        chan.destroy();
-        chan = undefined;
-        doc.body.removeChild(iframe);
-      }
-
-      chan.call({
-        method: "preauthEmail",
-        params: email,
-        success: function(rv) {
-          onsuccess(rv);
-          cleanup();
-        },
-        error: function(code, msg) {
-          if (onerror) onerror(code, msg);
-          cleanup();
-        }
-      });
-    };
-    */
-
-    // get a particular verified email
-    // FIXME: needs to ditched for now until fixed
-    /*
-    navigator.id.getSpecificVerifiedEmail = function(email, token, onsuccess, onerror) {
-      var doc = window.document;
-
-      // if we have a token, we should not be opening a window, rather we should be
-      // able to do this entirely through IFRAMEs
-      var w;
-      if (token) {
-          var iframe = _create_iframe(doc);
-          w = iframe.contentWindow;
+      if (options && options.silent) {
+        _noninteractiveCall('getPersistentAssertion', { }, function(rv) {
+          callback(rv);
+        }, function(e, msg) {
+          callback(null);
+        });
       } else {
-          _open_window();
-          _open_relay_frame(doc);
-      }
-
-      // clean up a previous channel that never was reaped
-      if (chan) chan.destroy();
-      chan = Channel.build({window: w, origin: ipServer, scope: "mozid"});
-
-      function cleanup() {
-        chan.destroy();
-        chan = undefined;
-        if (token) {
-            // just remove the IFRAME
-            doc.body.removeChild(iframe);
-        } else {
-            w.close();
-        }
-      }
-
-      chan.call({
-        method: "getSpecificVerifiedEmail",
-        params: [email, token],
-        success: function(rv) {
-          if (onsuccess) {
-            // return the string representation of the JWT, the client is responsible for unpacking it.
-            onsuccess(rv);
+        // focus an existing window
+        if (w) {
+          try {
+            w.focus();
           }
-          cleanup();
-        },
-        error: function(code, msg) {
-          if (onerror) onerror(code, msg);
-          cleanup();
+          catch(e) {
+            /* IE7 blows up here, do nothing */
+          }
+          return;
         }
+
+        if (!BrowserSupport.isSupported()) {
+          w = window.open(
+            ipServer + "/unsupported_dialog",
+            null,
+            windowOpenOpts);
+          return;
+        }
+
+        w = WinChan.open({
+          url: ipServer + '/sign_in',
+          relay_url: ipServer + '/relay',
+          window_features: windowOpenOpts,
+          params: {
+            method: "get",
+            params: options
+          }
+        }, function(err, r) {
+          // clear the window handle
+          w = undefined;
+          // ignore err!
+          callback(err ? null : (r ? r : null));
+        });
+      }
+    };
+
+    navigator.id.getVerifiedEmail = function (callback, options) {
+      if (options) {
+        throw "getVerifiedEmail doesn't accept options.  use navigator.id.get() instead.";
+      }
+      navigator.id.get(callback);
+    };
+
+    navigator.id.logout = function(callback) {
+      _noninteractiveCall('logout', { }, function(rv) {
+        callback(rv);
+      }, function() {
+        callback(null);
       });
     };
-    */
 
     var _noninteractiveCall = function(method, args, onsuccess, onerror) {
       var doc = window.document;
-      iframe = _open_hidden_iframe(doc);
+      var ni_iframe = _open_hidden_iframe(doc);
 
-      // clean up channel
-      if (chan) chan.destroy();
-      chan = Channel.build({window: iframe.contentWindow, origin: ipServer, scope: "mozid"});
-      
+      var chan = Channel.build({window: ni_iframe.contentWindow, origin: ipServer, scope: "mozid_ni"});
+
       function cleanup() {
         chan.destroy();
         chan = undefined;
-        doc.body.removeChild(iframe);
+        doc.body.removeChild(ni_iframe);
       }
-      
+
       chan.call({
         method: method,
         params: args,
@@ -896,35 +1006,9 @@
           if (onerror) onerror(code, msg);
           cleanup();
         }
-      });    
-    }
-
-    //
-    // for now, disabling primary support.
-    //
-
-    /*
-    // check if a valid cert exists for this verified email
-    // calls back with true or false
-    // FIXME: implement it for real, but
-    // be careful here because this needs to be limited
-    navigator.id.checkVerifiedEmail = function(email, onsuccess, onerror) {
-      onsuccess(false);
+      });
     };
 
-    // generate a keypair
-    navigator.id.generateKey = function(onsuccess, onerror) {
-      _noninteractiveCall("generateKey", {},
-                          onsuccess, onerror);
-    };
-    
-    navigator.id.registerVerifiedEmailCertificate = function(certificate, updateURL, onsuccess, onerror) {
-      _noninteractiveCall("registerVerifiedEmailCertificate",
-                          {cert:certificate, updateURL: updateURL},
-                          onsuccess, onerror);
-    };
-    */
-    
     navigator.id._getVerifiedEmailIsShimmed = true;
   }
 }());
