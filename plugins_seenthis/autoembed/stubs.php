@@ -342,9 +342,9 @@ $AutoEmbed_stubs = array(
   array(
     'title' => 'TheDailyShow',
     'website' => 'http://www.thedailyshow.com',
-    'url-match' => 'http://(?:www\.)?thedailyshow\.com/(?:watch|full\-episodes)',
-    'fetch-match' => 'swfo.embedSWF\(.*(http://media.mtvnservices.com/mgid:cms:(video|fullepisode):thedailyshow\.com:[0-9]{1,10})',
-    'embed-src' => '$2',
+    'url-match' => 'http://(?:www\.)?thedailyshow\.com/(?:watch|full\-episodes)',    
+    'fetch-match' => '<meta property="og:video" content="([^\"]*)"/>',
+    'iframe-player' => '$2',
     'embed-width' => '360',
     'embed-height' => '205',
   ),
