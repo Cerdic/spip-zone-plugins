@@ -186,19 +186,19 @@ V prípade, že stránka zhromažďuje osobné údaje internetových používate
 
 Pokiaľ ide o informačné materiály (tzv. newslettery), je tu   {{povinnosť ponúkať možnosť spôsob odhlásiť sa z odoberania materiálov, ak sa tak rozhodne}} používateľ ({v každom e-maile je odkaz na aktuálny postup}).
 
-{{Note regarding the CNIL}}
+{{Poznámka o CNIL}}
 
-The [CNIL-> http://www.cnil.fr/] ({Commission Nationale Informatique et Libertés}) is an organization whose mission is the protection of privacy and individual liberties.
-<br /> Once that information is recorded by your site, whether directly or indirectly nominative, a declaration must be made to the CNIL, which in turn sends you a receipt number, you have an obligation to mention .
-<br /> As a reminder, the CNIL has an online declaration procedure (see {.} website below).
+[CNIL-> http://www.cnil.fr/] ({Commission Nationale Informatique et Libertés = Národná komisia pre informatiku a slobody}) je organizácia, ktorej poslaním je ochrana súkromia a osobných slobôd. 
+<br /> Ak je na stránke uložený údaj, ktorý priamo alebo nepriamo odhaľuje identitu používateľa, treba do kódu tejto stránky vložiť deklaráciu CNIL, ktorá vám za to pošle číslo potvrdenia, ktoré máte povinnosť zadať.
+<br /> Na pripomenutie CNIL zaviedla na elektronickú deklaráciu postup (pozri {.} internetovú stránku nižšie).
 
-In addition, the user must be able to obtain access, rectify if necessary and even a deletion of all information regarding himself stored by the site. The disclaimer must therefore clearly specify the means made available to the user to make such a request.
+Okrem toho používateľ musí mať možnosť získať prístup, upravovať, ak je to potrebné a dokonca aj vymazať všetky svoje údaje uložené na stránke. V podmienkach musí byť preto jednoznačne uvedený nástroj, ktorý má používateľ k dispozícii na to, aby mohol vyššie spomenuté úkony vykonať.
 
-CNIL website: [-> http://www.cnil.fr/]
+Internetová stránka CNIL: [-> http://www.cnil.fr/]
 
-Note that the recent amendments exempt certain sites ({personal blogs or associative}) of this statement. Refer to the CNIL website for more information.
+Majte na pamäti, že najnovšie dodatky vy z poslednej podmienky niektoré stránky vylučujú ({súkromné blogy alebo blogy združení}). Viac informácií nájdete na internetovej stránke CNILu.
 
-{{}} Additional comments recommended
+{{Ďalšie odporúčané komentáre}}
 
 To best protect you, it is strongly advised to include in your imprint information on the protection and the media content on the site are subject, the extent of your liability for that content ({ commonly "Disclaimer"}), information on cookies may be deposited by the site (CNIL {council}).
 
