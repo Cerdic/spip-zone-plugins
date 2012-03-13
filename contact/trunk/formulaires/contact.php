@@ -374,7 +374,7 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 			);
 		}
 
-		$memoire = generer_url_ecrire('contact_un_message', 'id_message='.$id_message);
+		$memoire = generer_url_ecrire('message', 'id_message='.$id_message);
 		if ($pj_enregistrees_nom != null) {
 			$texte_final['texte'] .= "\n\n"._T('contact:consulter_memoire')."\n".$memoire;
 		}
