@@ -55,9 +55,13 @@ function formulaires_editer_microblog_traiter_dist($objet,$id_objet){
 	if (_request('annuler_microblog'))
 		$microblog = " ";// ruse pour ne rien envoyer
 	if (!is_null($microblog)){
-		include_spip('inc/modifier');
-		if (function_exists($f="revision_$objet"))
-			$f($id_objet, array('microblog'=>$microblog));
+		$set = array('microblog'=>$microblog);
+		if (include_spip('action/editer_objet')
+		  AND function_exists('objet_modifier'))
+			objet_modifier($objet, $id_objet, $set);
+		elseif(include_spip('inc/modifier')
+		  AND function_exists($f="revision_$objet"))
+			$f($id_objet, $set);
 	}
 	if (!strlen(trim($microblog)))
 		set_request('microblog');
