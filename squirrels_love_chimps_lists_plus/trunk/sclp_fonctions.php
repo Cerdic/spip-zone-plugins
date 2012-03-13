@@ -85,11 +85,10 @@ function inscription_batch_spip($id_liste_spip,$abonnements){
 			$update=sql_updateq('spip_auteurs_listes',$val,'id_liste='.$id_liste_spip.' AND id_auteur='.$id_auteur);
 			}
 		else{
-			$id_auteur=sql_getfetsel('id_auteur','spip_auteurs','email='.sql_quote($donnees['email']));
-			spip_log($id_auteur, 'sclp');
+
 			// l'auteur existe
 			if($id_auteur){
-				spip_log('update 1', 'sclp');
+
 				//On actualise si il a déjà été insscrit à la mailinglist
 				$test=sql_getfetsel('maj','spip_auteurs_listes','id_liste='.$id_liste_spip.' AND id_auteur='.$id_auteur);
 				spip_log($test, 'sclp');
@@ -107,14 +106,13 @@ function inscription_batch_spip($id_liste_spip,$abonnements){
 					}
 				}
 			else{
-				spip_log('2', 'sclp');
+
 				// On cherche les infos du membre mailchimp
 				$member_info=membres_liste_info_mc($api,$id_liste_mc,$donnees['email']);
 				
 				// On cherche la correpsondance des champs
 				$champs=donnees_sync_simple($id_liste,$member_info['data'],'mc');
 
-				$champs=donnees_sync_simple($id_liste,$member_info['data'],'mc');
 				
 				$lang=$member_info['data'][0]['language']?$member_info['data'][0]['language']:lire_config('langue_site');
 				$champs_additionnels=array(

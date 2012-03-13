@@ -79,7 +79,7 @@ function formulaires_editer_liste_traiter_dist($id_liste='',$listes_mailchimp=''
 	$date=date('y-m-d G:i:s');
 	$statut=_request('statut');
 	
-	if($statut)$statut='prive';
+	if(!$statut)$statut='prive';
 	
 	$valeurs = array(
 		'titre'=>_request('titre'),

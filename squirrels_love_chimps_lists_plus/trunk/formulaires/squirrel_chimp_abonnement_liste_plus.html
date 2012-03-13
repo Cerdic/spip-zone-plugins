@@ -2,8 +2,6 @@
 
 #SET{listes,#CONFIG{squirrel_chimp/mailinglists}}
 
-
-[(#GET{listes}|array_keys|serialize)]
 <div class="formulaire_spip formulaire_#FORM">
 	<BOUCLE_valide(CONDITION){si #GET{listes}}>	
 	<h2>[(#GET{liste_donnes}|count|>{1}|?{<:scl:abonnement_mailinglists:>,<:scl:abonnement_mailinglist:>})]</h2>
@@ -58,7 +56,7 @@
 							]
 					<ul>				
 		
-					<BOUCLE_listes(LISTES){id_liste IN (#GET{listes}|array_keys)}>	
+					<BOUCLE_listes(LISTES){id_liste IN (#GET{listes}|array_keys)} {statut=public}>	
 					<li><div class="choix">
 							<input type="checkbox" class="checkbox" name="mailinglists[#ID_LISTE]" id="mailinglists_[(#GET{listes}|table_valeur{#ID_LISTE})]" value="[(#GET{listes}|table_valeur{#ID_LISTE})]"[(#GET{listes}|table_valeur{#ID_LISTE}|=={#ENV{mailinglists}|table_valeur{#ID_LISTE}})oui) checked="checked"]/>
 							<label for="ml_act_ajout">[(#TITRE)]</label>

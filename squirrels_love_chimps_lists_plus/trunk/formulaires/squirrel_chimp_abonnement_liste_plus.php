@@ -11,6 +11,9 @@ include_spip('inc/config');
 
 include_spip('squirrel_chimp_lists_fonctions');
 
+// Définit le fuseau horaire par défaut à utiliser, GMT est le fuseau utilisé par mailchimp.
+date_default_timezone_set('GMT');
+
 
  function formulaires_squirrel_chimp_abonnement_liste_plus_charger_dist($listes=''){
 
@@ -48,6 +51,7 @@ include_spip('squirrel_chimp_lists_fonctions');
 		
 			
 	if(is_array($champs))$valeurs['_hidden'].='<input type="hidden" name="champs" value="'.implode(',',array_flip($champs)).'">';
+	$valeurs['_hidden'].='<input type="hidden" name="email_type" value="html">';	
 	return $valeurs;
 }
  
@@ -58,6 +62,9 @@ function formulaires_squirrel_chimp_abonnement_liste_plus_verifier_dist($listes=
 	$email=_request('email');
 	$email2=_request('email2');
 	$listes=_request('mailinglists');
+	$email_type=_request('email_type');
+	$date=date('Y-m-d');
+	$lang=_request('lang');
 	
 	// teste basique sur le mail, le reste c'est mailchimp qui s'en charge
 	foreach(array('email','email2','mailinglists') as $obligatoire)
@@ -67,26 +74,26 @@ function formulaires_squirrel_chimp_abonnement_liste_plus_verifier_dist($listes=
 			
 
 	// Les configurations
-	$donnees_personnelles=explode(',',_request('champs'));
+	$donnees_personnelles=lire_config('squirrel_chimp/mapping');
 	$apiKey = lire_config("squirrel_chimp/apiKey");
 	$optin = lire_config('squirrel_chimp/ml_opt_in')?false:true; //yes, send optin emails
 	
 	// Composer l'array des donnes pour mailchimp
 	$donnees_auteur=array();
-	foreach($donnees_personnelles AS $value){
-		$donnees_auteur[$value]=_request($value);
+		
+	$valeurs_mc=array();
+	
+	foreach($donnees_personnelles as $id_liste=>$donnees){
+		foreach($donnees as $champs_spip=>$champ_mc){
+			$valeurs_mc[$champ_mc]=_request($champs_spip);
+			$valeurs_spip[$champs_spip]=$valeurs_mc[$champ_mc];
+			}
 		}
+	
 		
 	if ($apiKey){
 		# API mailchimp
 		include_spip('inc/1.3/MCAPI.class');
-		
-		// Les Fonctions
-		include_spip('squirrel_chimp_lists_fonctions');
-		
-		
-		spip_log(__LINE__,'squirrel_chimp');
-		spip_log($apiKey,'squirrel_chimp');
 
 		// initialisation d'un objet mailchimp
 		$api = new MCAPI($apiKey);
@@ -95,18 +102,78 @@ function formulaires_squirrel_chimp_abonnement_liste_plus_verifier_dist($listes=
 		$valeurs['message_erreur'] = _T('spip:avis_erreur');
 	    }	
 
-		
-
 		// Inscription dans mailchimp
-		if ($email AND $listes){
-			spip_log(__LINE__,'squirrel_chimp');
+		if ($email AND is_array($listes)){
+			
+			$id_auteur=sql_getfetsel('id_auteur','spip_auteurs','email='.sql_quote($email));
+
 			// By default this sends a confirmation email - you will not see new members
 			// until the link contained in it is clicked!
 			// listSubscribe(string apikey, string id, string email_address, array merge_vars, string email_type, bool double_optin, bool update_existing, bool replace_interests, bool send_welcome)
 			
-			foreach($listes AS $listId){
-				$valeurs=inscription_liste_mc($valeurs,$api,$listId,$email,$donnees_auteur,$email_type,$optin,true);
+			foreach($listes AS $id_spip => $id_mailchimp){
+				$valeurs=inscription_liste_mc($valeurs,$api,$id_mailchimp,$email,$valeurs_mc,$email_type,$optin,true);
 				$valeurs=$valeurs['data'];
+				
+				if(!$valeurs['message_erreur']){
+						$statut=sql_getfetsel('statut','spip_auteurs_listes','id_liste='.sql_quote($id_spip).' AND id_auteur='.$id_auteur);
+					if($id_auteur){
+						if($statut=="a_valider")sql_updateq('spip_auteurs_listes',array('statut'=>'valide','maj'=>$date),'id_liste='.$id_spip.' AND id_auteur='.$id_auteur);
+						elseif(!$statut){
+													
+						$valeurs=array(
+								'id_auteur'=>$id_auteur,
+								'id_liste'=>$id_spip,					
+								'statut'=>'valide',
+								'maj'=>$date,
+								'date_inscription'=>$date,
+								'date_syncro'=>$date,
+								'format'=>$email_type,												
+								);	
+							
+							
+							sql_insertq('spip_auteurs_listes',$valeurs);
+						}
+						}
+					else{
+						$champs=donnees_sync_simple($id_liste,$valeurs_mc,'mc');
+						
+						$lang=$lang?$lang:lire_config('langue_site');
+						
+						$champs_additionnels=array(
+							'email'=>$email,
+							'statut'=>'6forum',
+							'maj'=>$date,
+							'date_syncro'=>$date,
+							'format'=>$email_type,
+							'lang'=>$lang,
+							);
+		
+						$champs_sync=$champs[1];
+						if(!$champs_sync['nom']){
+							$explode=explode('@',$email);
+							$champs_sync['nom']=$explode[0];
+							}
+															
+						//On actualise la bd
+						$champs=array_merge($champs_sync,$champs_additionnels);	
+						$id_auteur=sql_insertq('spip_auteurs',$champs);
+						
+						$valeurs=array(
+								'id_auteur'=>$id_auteur,
+								'id_liste'=>$id_spip,					
+								'statut'=>'valide',
+								'maj'=>$date,
+								'date_inscription'=>$date,
+								'date_syncro'=>$date,
+								'format'=>$email_type,												
+								);						
+						sql_insertq('spip_auteurs_listes',$valeurs);
+						$id_auteur='';							
+						}
+					}
+				
+				
 			}
 
 		} // $statut=='subscribe'
@@ -118,13 +185,13 @@ function formulaires_squirrel_chimp_abonnement_liste_plus_verifier_dist($listes=
 			spip_log(__LINE__);
 			//erreur il faut configurer le plugin mailchimp
 			$valeurs = array('message_erreur' => _T('mailchimp:config_erreur'));
-			spip_log("Admin"._T('scl:config_erreur'));
+			spip_log("Admin"._T('sclp:config_erreur'));
 			return $valeurs;
 		}
 		else {
 			spip_log(__LINE__);
 			// que le spiplog si on est juste un user
-			spip_log(_T('scl:config_erreur'));
+			spip_log(_T('sclp:config_erreur'));
 			return $valeurs;
 		} // autoriser
 
