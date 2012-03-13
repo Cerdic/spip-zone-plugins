@@ -11,7 +11,7 @@ function genie_syncro_listes_dist ($t) {
 
 	$listes=array_keys($listes_accordes);
 	
-	$frequence_actualisation=60;
+	$frequence_actualisation=1;
 	
 
 	
@@ -31,9 +31,10 @@ function genie_syncro_listes_dist ($t) {
 			$d2 = new DateTime($derniere_syncro); 
 			$diff = $d1->diff($d2); 
 
-			$intervale = $diff->i;
+			$intervale = $diff->h;
 			
-			spip_log($intervale,'sclp');
+			$difference= $diff->h.':'.$diff->i.':'.$diff->s; 
+			
 			//actualisation chaque heure			
 			if($intervale>=$frequence_actualisation){
 				$syncroniser=charger_fonction('syncroniser_listes','inc');
@@ -49,7 +50,7 @@ function genie_syncro_listes_dist ($t) {
 			}
 		}
 	
-	spip_log('action cron syncro date: '.$today. ' dernière syncro de la liste '.$id_liste.' : '.$derniere_syncro.' différence : ' .$intervale.' mn','sclp');
+	spip_log('action cron syncro date: '.$today. ' dernière syncro de la liste '.$id_liste.' : '.$derniere_syncro.' différence : ' .$difference.' h','sclp');
     return $return;
 }
 ?>
