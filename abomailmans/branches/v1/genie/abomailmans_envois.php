@@ -51,7 +51,7 @@ function liste_a_jour($id_liste) {
 		spip_log("requete null ...","abomailmans");
 		return;
 	} else spip_log("envoi teste avec cron abomailmans","abomailmans");
-		
+
 	$datas = array();
 	$nom_site = lire_meta("nom_site");
 	$email_webmaster = lire_meta("email_webmaster");
@@ -61,9 +61,9 @@ function liste_a_jour($id_liste) {
 	$date_envoi=$t['date_envoi']; 
 	$email_receipt=$t['email'];
 	$modele_defaut=$t['modele_defaut'];
-	
+
 	$recuptemplate = explode('&',$modele_defaut);
-		
+
 	include_spip('abomailmans_fonctions');
 	$paramplus = recup_param($modele_defaut); //pour url
 	$periodicite=intval($t['periodicite']);
@@ -90,7 +90,10 @@ function liste_a_jour($id_liste) {
 	$body = array(
 		'html'=>$fond,
 	); 
-	
+	/* Format Texte */
+	$query['envoi_txt'] = "oui";
+	$body['texte'] = recuperer_fond('abomailman_template',$query);
+
 	//Si la page renvoie un contenu
 	if (strlen($fond) > 10) {
 				

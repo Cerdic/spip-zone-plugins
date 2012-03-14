@@ -1,10 +1,14 @@
 <ul>
 	<li class="fieldset">
 		<fieldset class="previsu">
-		<h3 class="legend"><:previsualisation:></h3>
-		<div class="message">
-			#ENV*{texte_template}
+		<h3 class="legend"><:previsualisation:> <:abomailmans:previsu_html:></h3>
+		<div class="abo_message">
+			#ENV*{template_html}
 		</div>
+		<h3 class="legend"><:previsualisation:> <:abomailmans:previsu_txt:></h3>
+      <div class="abo_message">
+         <pre width="80">#ENV*{template_txt, #VAL{abomailmans:pas_template_txt}|_T}</pre>
+      </div>
 		<ul>
 		<li>
 			<label><:abomailmans:envoyer_courier_liste:></label>

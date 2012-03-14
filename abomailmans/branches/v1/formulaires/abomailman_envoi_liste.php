@@ -58,7 +58,9 @@ function formulaires_abomailman_envoi_liste_verifier_dist(){
 
 function abomailmain_inclure_previsu($datas){
 	$datas['bouton'] = _T('abomailmans:envoi_confirmer');
-	$datas['texte_template'] = recuperer_fond('abomailman_template',$datas);
+	$datas['template_html'] = recuperer_fond('abomailman_template',$datas);
+	$datas['envoi_txt'] = "oui";
+	$datas['template_txt'] = recuperer_fond('abomailman_template',$datas);
 	return recuperer_fond('formulaires/inc-previsu_mail',$datas);
 }
 

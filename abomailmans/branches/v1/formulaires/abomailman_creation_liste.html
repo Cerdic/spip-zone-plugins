@@ -81,6 +81,7 @@
 						</li>
 						<li class="choisir_template[ (#ENV**{erreurs}|table_valeur{template}|oui)erreur]">
 							<label for="template"><:abomailmans:template_defaut:></label>
+							<p class="explication"><:abomailmans:template_defaut_info:></p>
 							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{template})</span>]
 							<select name="template">
 								<INCLURE{fond=prive/listes/abomailman_templates}{id_abomailman}{erreurs}>
@@ -92,8 +93,8 @@
 								<:abomailmans:envoi_liste_parametres:>
 								[(#ENV{modele_defaut}|oui)
 									<br />
-									<a href="[(#URL_PAGE{abomailman_template}|parametre_url{template,[(#ENV{template})]}|parametre_url{date,[(#DATE|moins30|affdate{annee})-][(#DATE|moins30|affdate{mois})]})][(#ENV**{envoi_liste_parametres})]">
-									<:abomailmans:voir_modele_depuis:>[ (#DATE|moins30|affdate{nom_mois})][ (#DATE|moins30|affdate{annee})]</a>
+                           [(#SET{date_ref,[(#DATE|moins30|affdate{annee})-][(#DATE|moins30|affdate{mois})]})]
+									<:abomailmans:voir_modele_depuis:>[ (#DATE|moins30|affdate{nom_mois})][ (#DATE|moins30|affdate{annee})]&nbsp;: <a href="[(#URL_PAGE{abomailman_template}|parametre_url{template,[(#ENV{template})]}|parametre_url{date,#GET{date_ref}})][(#ENV**{envoi_liste_parametres})]"><:abomailmans:previsu_html:></a> | <a href="[(#URL_PAGE{abomailman_template}|parametre_url{template,[(#ENV{template})]}|parametre_url{date,#GET{date_ref}}|parametre_url{envoi_txt,oui})][(#ENV**{envoi_liste_parametres})]"><:abomailmans:previsu_txt:></a>.
 								]
 							</p>
 							<input type="text" id="envoi_liste_parametres" name="envoi_liste_parametres" value="[(#ENV**{envoi_liste_parametres})]" size="50" class="text" />
