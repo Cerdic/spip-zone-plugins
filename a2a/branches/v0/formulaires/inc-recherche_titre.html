@@ -1,0 +1,16 @@
+<B_Recherche>
+	<ul class="resultats">
+<BOUCLE_Recherche(ARTICLES){statut IN prop,prepa,publie}{titre LIKE %(#ENV{recherche})%}{!id_article IN #ENV{exclure}}{!lang_select}>
+	<li>
+		[<span class="titre">(#TITRE)</span>]
+		<span class="actions">
+			<a href="[(#URL_ARTICLE|url_absolue)]"><:a2a:voir:></a> - 
+                        <a href="[(#URL_ACTION_AUTEUR{a2a,lier_article/#ID_ARTICLE/#ID_ARTICLE_ORIG/uni/[(#ENV{type_liaison})],#SELF})]" class="ajax"><:a2a:lier_cet_article:>[ ((#ENV{type_liaison}))]</a> -
+                        <a href="[(#URL_ACTION_AUTEUR{a2a,lier_article/#ID_ARTICLE/#ID_ARTICLE_ORIG/both/[(#ENV{type_liaison})],#SELF})]" class="ajax"><:a2a:lier_cet_article_deux_cotes:>[ ((#ENV{type_liaison}))]</a>
+		</span>
+	</li>
+</BOUCLE_Recherche>
+	</ul>
+</B_Recherche>
+	[(#ENV*{message_erreur})]
+<//B_Recherche>
