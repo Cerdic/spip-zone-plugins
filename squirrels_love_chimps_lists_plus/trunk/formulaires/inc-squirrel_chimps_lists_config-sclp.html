@@ -35,12 +35,8 @@
 			</BOUCLE_listes>
 			</select>
 			</B_listes>
-			[(#ENV{editer_champs}|=={#ID_LISTE}|non)
-				<a class="ajax" href="[(#SELF|parametre_url{editer_champs,#ID_LISTE})]"><:sclp:editer_champs_accordance:></a>
-				]
-
-			[(#ENV{editer_champs}|=={#ID_LISTE}|oui)
-				<a class="ajax" href="[(#SELF|parametre_url{editer_champs,''})]"><:sclp:fermer:></a>		
+			<a class="ouvrir" href="##GET{id_liste_mc}"><:sclp:editer_champs_accordance:></a>
+		
 				[(#SET{id_liste_mc,#CONFIG{squirrel_chimp/mailinglists}|table_valeur{#ID_LISTE}})]
 				
 				[(#SET{liste,
@@ -53,7 +49,7 @@
 				[(#SET{champs,#INCLURE{fond=inclure/appels_mc}{appel=champs_listes}{apikey=#GET{apikey}} {liste=#GET{liste}}{base=spip_auteurs}{multi=true}})]
 			
 				<INCLURE{fond=formulaires/inc-squirrel_chimps_lists_config-sclp_accordance_champs}{champs=#GET{champs}}{id_liste}{nom_liste=#TITRE}{id_liste_mc=#GET{id_liste_mc}}{env} />
-				]
+				
 			
 			</div>
 			</BOUCLE_listes_spip>
@@ -89,5 +85,13 @@
 	</ul>
 </fieldset>
 
-
+<script>
+$(document).ready(function(){
+$(".accordance").hide();
+$(".ouvrir").click(function(){
+$(this).next(".accordance").slideToggle("fast");
+return true;
+});
+});
+</script>
 

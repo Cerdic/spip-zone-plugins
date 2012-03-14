@@ -3,7 +3,7 @@
 #SET{champs_mailchimp,#ENV**{champs}|table_valeur{mailchimp}}
 
 <BOUCLE_test(CONDITION){si #ID_LISTE|oui}>
-<div class="choix">	
+<div class="accordance" id=#ENV{id_liste_mc}">	
 
 [<h3>(#TITRE)</h3>]
 <BOUCLE_listes2(POUR){tableau #ENV**{champs}|table_valeur{spip}}>

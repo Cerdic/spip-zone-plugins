@@ -51,6 +51,10 @@
 		<nom>squirrel_chimp_lists_config_traiter</nom>		
 		<inclure>sclp_pipelines.php</inclure>
 	</pipeline> 	
+ 	<pipeline>
+		<nom>header_prive</nom>		
+		<inclure>sclp_pipelines.php</inclure>
+	</pipeline> 	
 	<fonctions>sclp_fonctions.php</fonctions>
 	<categorie>communication</categorie>
 </plugin>

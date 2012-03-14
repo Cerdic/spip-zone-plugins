@@ -75,5 +75,13 @@ function sclp_taches_generales_cron($taches){
     
     return $taches;
 }
+
+// Insertion de la feuille de style dans l'espace privé
+function sclp_header_prive($flux){
+
+	$flux .= '<link rel="stylesheet" href="'.find_in_path('css/sclp.css').'" type="text/css" media="all" />';
+	
+	return $flux;
+}
 	
 ?>
