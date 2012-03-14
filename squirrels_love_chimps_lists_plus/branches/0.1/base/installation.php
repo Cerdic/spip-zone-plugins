@@ -17,6 +17,7 @@ function sclp_upgrade($nom_meta_base_version, $version_cible){
             maj_tables('spip_auteurs_listes');	              
             sql_updateq('spip_listes',array('statut'=>'prive'),"statut=''");	
 			sql_updateq('spip_listes',array('statut'=>'poubelle'),"statut='inact'");
+			sql_updateq('spip_listes',array('statut'=>'prive'),"statut='liste'");
 			ecrire_meta($nom_meta_base_version, $current_version=$version_cible);	
             }
 		
