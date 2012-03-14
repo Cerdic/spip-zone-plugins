@@ -146,7 +146,6 @@ function inscription_liste_mc($flux='',$api,$listId,$email,$donnees_auteur,$emai
 	
 	$retval = $api->listSubscribe($listId, $email,$donnees_auteur,$email_type,$optin,$update_existing,$replace_interests,$send_welcome);
 
-	include_spip('inc/autoriser');
 	
 	if ($api->errorCode){
 		spip_log(__LINE__,'squirrel_chimp');
