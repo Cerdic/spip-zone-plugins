@@ -13,7 +13,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'explication_navigateur' => 'Cliquez sur [Ajouter] pour naviguer dans l\'arborescence du site afin de sélectionner les articles à lier.',
 
+	// I
+	'info_un_article_lie' => '1 article lié',
+	'info_nombre_articles_lies' => '@nb@ articles liés',
+	
 	// L
+	'lien_lier_article' => 'Lier à un ou des articles',
 	'lier_cet_article' => 'Lier',
 	'lier_cet_article_deux_cotes' => 'Lier des deux cotés',
 
@@ -22,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_resultat' => 'Pas de résultats',
 
 	// R
+	'rang' => 'Rang',
 	'rang_moins' => 'Monter',
 	'rang_plus' => 'Descendre',
 	'recherche_arbo' => 'Recherche arborescente',
