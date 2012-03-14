@@ -107,7 +107,7 @@ function critere_datapath($idb, &$boucles, $crit) {
 /* le critere {si ...} applicable a toutes les boucles */
 function critere_si($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
-	$boucle->hash .= '$command[\'si\'] = array();'."\n";
+	$boucle->hash .= 'if (!isset($command[\'si\'])) $command[\'si\'] = array();'."\n";
 	if ($crit->param) {
 		foreach($crit->param as $param) {
 			$boucle->hash .= '
