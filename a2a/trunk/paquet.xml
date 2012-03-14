@@ -1,0 +1,20 @@
+<paquet
+	prefix="a2a"
+	categorie="navigation"
+	version="0.5.0"
+	etat="stable"
+	compatibilite="[3.0.0-dev;3.0.99]"
+	logo="images/a2a-64.png"
+	schema="0.4"
+	documentation="http://www.spip-contrib.net/a2a"
+>	
+
+	<nom>A2A</nom>
+	<!-- Pour lier des articles -->
+
+	<auteur>Collectif SPIP</auteur>
+
+	<pipeline nom="affiche_milieu" action="affiche_milieu" inclure="a2a_pipelines.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/a2a.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/a2a.php" />
+</paquet>
