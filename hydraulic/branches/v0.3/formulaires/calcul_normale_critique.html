@@ -1,0 +1,228 @@
+[<div class='hyd_formulaire_erreur '><span>(#ENV*{message_erreur})</span></div>]
+<script language="javascript" type="text/javascript" src="#CHEMIN{js/hyd_fonctions.js}"></script>
+<script> 
+
+
+//Permet d'afficher ou cacher les champs correspondant à une section.
+function afficher_cacher() {
+	var section = getSelectValue('choix_section_nc');
+    var f = document.getElementById("form_normale_critique");
+    if(f) {
+		var champs = f.getElementsByTagName("tr");
+		for(var i=0, n=champs.length; i<n; i++) {    
+			if((champs[i].getAttribute("id") != null) &&((champs[i].getAttribute("id")).substr(0,2) == section)){
+				document.getElementById((champs[i].getAttribute("id"))).style.display='table-row';
+			}
+			else if((champs[i].getAttribute("id") != null) &&((champs[i].getAttribute("id")).substr(0,1) == 'F')) {
+				document.getElementById((champs[i].getAttribute("id"))).style.display='none';
+			}		
+		}
+    }  	
+}
+
+var glob = [];
+// Variables globales contenant le choix fait pour chaque ligne	 
+<BOUCLE_sans_coeff(POUR){tableau #ENV{tableau_caract}}>
+	glob['#CLE'] = '#ENV{choix_champs_#CLE}';
+</BOUCLE_sans_coeff>
+
+// Mise a jour des variables globales
+function setVarGlob(){
+	<BOUCLE_sans_coeff2(POUR){tableau #ENV{tableau_caract}}>
+		glob['#CLE'] = getRadioValue('choix_champs_#CLE');
+	</BOUCLE_sans_coeff2>
+}
+
+// Gére le comportement des boutons radios
+function gestion_radios(nom,valeur){
+	
+	var tabPartiel = {
+		<BOUCLE_sans_coeff3(POUR){tableau #ENV{tableau_caract}}>
+			'#CLE' : glob['#CLE'],
+		</BOUCLE_sans_coeff3>
+	};
+	
+	delete(tabPartiel[nom]);
+	
+	// Tableau des indices
+
+	var tabIndice = [
+		<BOUCLE_sans_coeff4(POUR){tableau #ENV{tableau_caract}}>
+			'#CLE',
+		</BOUCLE_sans_coeff4>
+	];
+	
+	// Si on appuis sur un bouton de type "varier_val" ou "val_fixe" 
+	if(valeur.substr(0,3) == 'var' || valeur.substr(0,3)=='val'){
+		for(var cle in tabPartiel){
+			if(document.getElementById('varier_val_'+cle).checked && (glob[nom] != "calcul_val_"+nom)){
+				document.getElementById('val_fixe_'+cle).checked=true;
+				setVarGlob();
+			}
+			else if(document.getElementById('varier_val_'+cle).checked && (glob[nom] == "calcul_val_"+nom) && valeur.substr(0,3) == 'var'){
+			
+				document.getElementById('calcul_val_'+cle).checked=true;
+				document.getElementById('caract_'+cle).disabled=true;
+				document.getElementById('caract_'+nom).disabled=false;
+				setVarGlob();
+			}
+		}
+		
+	if(valeur.substr(0,3) == 'var'){
+		setVarGlob();
+		document.getElementById('caract_'+nom).disabled=true;
+		for(var cle in glob){
+			if(glob[cle].substr(0,3) == 'val'){
+				document.getElementById('caract_'+cle).disabled=false;
+			}	
+		}
+		
+		var afficher = document.getElementsByClassName('champs_var_'+nom);
+		for(var i in afficher){
+			afficher[i].style.display='table-row';
+		}
+		
+		for(var cle in tabPartiel){	
+			var cacher = document.getElementsByClassName('champs_var_'+cle);
+			for(var i in cacher){
+				cacher[i].style.display='none';
+			}
+		}
+		
+		setVarGlob();
+	}
+
+	// Compte le nombre de varier_val checké
+	var cptVarVal = 0;
+	for(var cle in glob){
+		if(document.getElementById('varier_val_'+cle).checked){
+			cptVarVal++;
+		}
+	}
+	
+	if(cptVarVal == 0){
+		for(var cle in glob){
+			if(glob[cle].substr(0,3) != 'cal'){
+				document.getElementById('caract_'+cle).disabled=false;
+			}	
+		}
+		var cacher = document.getElementsByClassName('champs_var_'+nom);
+		for(var i in cacher){
+			cacher[i].style.display='none';
+		}
+	}
+	
+	setVarGlob();
+}
+</script>
+
+<form method="post" action="#ENV{action}" id="form_normale_critique">
+   #ACTION_FORMULAIRE{#ENV{action}}
+   <table class="hyd_formulaire">
+      <tbody>
+		  	<tr id="type_section_field_nc">
+				<td colspan="6"><div class="hyd_formulaire_chapitre"><:hydraulic:type_section:></div></td>
+			</tr>
+
+			<tr id="type_section_nc">
+				<td align="right">
+					<:hydraulic:choix_section:>
+				</td>
+						
+				<td>
+					<select name="ncTypeSection" id="choix_section_nc" onChange="afficher_cacher();">
+						<option value="FT" [(#ENV{ncTypeSection}|=={'FT'}|?{'selected',''})]><:hydraulic:section_trap:></option>
+						<option value="FR" [(#ENV{ncTypeSection}|=={'FR'}|?{'selected',''})]><:hydraulic:section_rect:></option>
+						<option value="FC" [(#ENV{ncTypeSection}|=={'FC'}|?{'selected',''})]><:hydraulic:section_circ:></option>
+						<option value="FP" [(#ENV{ncTypeSection}|=={'FP'}|?{'selected',''})]><:hydraulic:section_puiss:></option>
+					</select>
+		  
+					[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{[(#VALEUR|table_valeur{0})]})</div>]
+				</td>
+						
+			</tr>
+			
+			<BOUCLE_fieldChamps(POUR){tableau #ENV{mes_saisies}}>
+				
+				 #SET{id_fieldset, #CLE}
+					
+				 <tr id="#GET{id_fieldset}_field_nc" style="display:[(#CLE|match{^([(#ENV{ncTypeSection})]|Caract)$}|?{'table-row','none'})];">				
+					 <td colspan="6"><div class="hyd_formulaire_chapitre">[(#VALEUR|table_valeur{0})]</div></td>
+				</tr>
+				
+				[(#GET{id_fieldset}|=={'Caract'}|?{
+				<tr>
+					<td colspan="2"></td>
+					<td width="75px" colspan="2" align="center"><:hydraulic:varier_val:></td>
+					<td width="75px" colspan="2" align="center"><:hydraulic:fixer_val:></td>
+				</tr>
+				,''})]
+				
+				<BOUCLE_champsLib(POUR){tableau (#VALEUR|table_valeur{1})}>
+
+					<tr id="#GET{id_fieldset}_[(#CLE)]_nc" style="display:[(#GET{id_fieldset}|match{^([(#ENV{ncTypeSection})]|Caract)$}|?{'table-row','none'})];">
+						<td align="right" width="150px"> 
+							[(#VALEUR|table_valeur{0}|traduction_libelle)] :		
+						</td>
+					
+						<td>
+						   <input type="text" value="[(#ENV{#GET{id_fieldset}_[(#CLE)]_nc})]" maxlength="30" name="#GET{id_fieldset}_[(#CLE)]_nc">
+						   [<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{#GET{id_fieldset}_[(#CLE)]_nc})</div>]
+						</td>
+						
+					[(#GET{id_fieldset}|=={'Caract'}|?{
+							
+						<td colspan="2" align="center">
+							<input type="radio" id="varier_val_#CLE" name="choix_champs_#CLE" value="varier_val_#CLE" onclick="" [(#ENV{choix_champs_#CLE}|=={varier_val_#CLE}?{'checked',''})]/>
+						</td>
+											
+						<td colspan="2" align="center">
+							<input type="radio" id="val_fixe_#CLE" name="choix_champs_#CLE" value="val_fixe_#CLE" onclick="" [(#ENV{choix_champs_#CLE}|=={val_fixe_#CLE}?{'checked',''})]/>
+						</td>
+					</tr>
+					
+					<tr class="champs_var_#CLE" style="display:[(#ENV{choix_champs_#CLE}|=={varier_val_#CLE}|?{'table-row','none'})];">
+						<td></td>
+						<td align="right"><:hydraulic:val_min:> #CLE :
+							<input name="val_min_#CLE" type="text" value=""/>
+							[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{val_min_#CLE})</div>]
+						</td>
+						<td colspan="6"></td>
+					</tr>
+					
+					<tr class="champs_var_#CLE" style="display:[(#ENV{choix_champs_#CLE}|=={varier_val_#CLE}|?{'table-row','none'})];">
+						<td></td>
+						<td align="right"><:hydraulic:val_max:> #CLE :
+							<input name="val_max_#CLE" type="text" value=""/>
+							[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{val_max_#CLE})</div>]
+						</td>
+						<td colspan="6"></td>
+					</tr>
+					
+					<tr class="champs_var_#CLE" style="display:[(#ENV{choix_champs_#CLE}|=={varier_val_#CLE}|?{'table-row','none'})];">
+						<td></td>
+						<td align="right"><:hydraulic:pas_var:> #CLE :
+							<input name="pas_var_#CLE" type="text" value=""/>
+							[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{pas_var_#CLE})</div>]
+						</td>
+						<td colspan="6"></td>
+					</tr>	
+						,
+					</tr>})]
+				
+				</BOUCLE_champsLib>
+
+			</BOUCLE_fieldChamps>
+
+
+			<tr>
+				<td colspan="6" class="hyd_bouton_submit">
+				   <input type="submit" value="<:hydraulic:calculer:>">
+				</td>
+			</tr>
+			
+      </tbody>
+   </table>
+</form>
+
+[<div class='hydraulic_resultat'>(#ENV*{message_ok})</div>]

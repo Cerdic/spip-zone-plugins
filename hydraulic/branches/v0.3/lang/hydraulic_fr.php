@@ -23,6 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // D
     'debit_amont'     => "Débit amont (m3/s)",
     'def_section_trap'=> "Définition de la section trapézoïdale",
+    'def_section_rect'=> "Définition de la section rectangulaire",
+    'def_section_circ'=> "Définition de la section circulaire",
+    'def_section_puis'=> "Définition de la section puissance",
     // F
     'fond'            => "Fond",
     'fruit'           => "Fruit (m/m)",
@@ -58,7 +61,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'param_D'         => "D: Diamètre du tuyau (m)",
     'param_J'         => "J: Perte de charge (m)",
     'param_Lg'        => "Lg: Longueur du tuyau (m)",
-    'param_calc_lechapt_calmon' => "Paramètres de calcul",
     'precision_lechapt_calmon'  => "Précision de calcul(m)",
     //S
     'saisie_erreur'   => "Votre saisie contient des erreurs !",

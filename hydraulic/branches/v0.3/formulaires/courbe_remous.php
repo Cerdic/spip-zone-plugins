@@ -1,6 +1,6 @@
 <?php
 /*
- * formulaire/courbe_remous.php
+ * formulaires/courbe_remous.php
  *
  *
  *
@@ -43,7 +43,7 @@ function mes_saisies_section() {
 	$fieldset_champs = array(
 	
 				'FT'          => array(
-									   'Définition de la section trapézoïdale',
+									   'def_section_trap',
 									   array(
 											 'rLarg'  =>array('largeur_fond',2.5),
 											 'rFruit' =>array('fruit', 0.56, false)
@@ -51,14 +51,14 @@ function mes_saisies_section() {
 				),
 				
 				'FR'          => array(
-									   'Définition de la section rectangulaire',
+									   'def_section_rect',
 									   array(
 											 'rLarg'  =>array('largeur_fond',2.5),
 											)
 				),
 					
 				'FC'          => array(
-									   'Définition de la section circulaire',
+									   'def_section_circ',
 									   array(
 											 'circ1'  =>array('champ_circulaire1',3),
 											 'circ2'  =>array('champ_circulaire2', 0.6)
@@ -66,7 +66,7 @@ function mes_saisies_section() {
 				),
 				
 				'FP'          => array(
-									   'Définition de la section puissance',
+									   'def_section_puis',
 									   array(
 											 'puiss1' =>array('champs_puissance1',10),
 											 'puiss2' =>array('champs_puissance2', 0.7)
@@ -74,7 +74,7 @@ function mes_saisies_section() {
 				),
 				
 				'Caract_bief' => array(				
-									   'Caractéristiques du bief',					
+									   'caract_bief',					
 									   array(
 											 'rKs'	  =>array('coef_strickler',50),
 											 'rLong'  =>array('longueur_bief', 50),
@@ -83,7 +83,7 @@ function mes_saisies_section() {
 				),
 															
 				'Cond_lim'    => array(											
-									   'Conditions aux limites',	 		
+									   'condition_limite',	 		
 									   array(
 											 'rQ'     =>array('debit_amont', 2),
 											 'rYaval' =>array('h_aval_imposee', 0.6),
@@ -92,7 +92,7 @@ function mes_saisies_section() {
 				),
 								
 				'Param_calc'  => array(									
-									   'Paramètres de calcul',		
+									   'param_calcul',		
 									   array(						
 											 'rDx'    =>array('pas_discret', 5),
 											 'rPrec'  =>array('precision_calc', 0.001)

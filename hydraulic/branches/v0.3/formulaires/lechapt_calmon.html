@@ -170,7 +170,7 @@ function gestion_radios(nom,valeur){
    <table class="hyd_formulaire">
       <tbody>
 		  	<tr id="type_materiau_field">
-				<td colspan="8"><div class="hyd_formulaire_chapitre"><:hydraulic:type_materiau:></div></td>
+				<td colspan="5"><div class="hyd_formulaire_chapitre"><:hydraulic:type_materiau:></div></td>
 			</tr>
 
 			<tr id="type_materiau_choix">
@@ -178,7 +178,7 @@ function gestion_radios(nom,valeur){
 					<:hydraulic:choix_materiau:> :
 				</td>
 						
-				<td width="1px">
+				<td colspan="4">
 					<select name="typeMateriau" id="choix_materiau" onChange="change_valeur();">
 						<option value="1" [(#ENV{typeMateriau}|=={'1'}|?{'selected',''})]><:hydraulic:fonte_beton_corrosive:></option>
 						<option value="2" [(#ENV{typeMateriau}|=={'2'}|?{'selected',''})]><:hydraulic:fonte_beton_ncorrosive:></option>
@@ -213,21 +213,21 @@ function gestion_radios(nom,valeur){
 			
 
 			<tr id="caract_lechapt_calmon">
-				<td colspan="8"><div class="hyd_formulaire_chapitre"><:hydraulic:caract_lechapt_calmon:></div></td>
+				<td colspan="5"><div class="hyd_formulaire_chapitre"><:hydraulic:caract_lechapt_calmon:></div></td>
 			</tr>
 
 			<tr>
 				<td colspan="2"></td>
-				<td width="75px" colspan="2" align="center"><:hydraulic:calcul_val:></td>
-				<td width="75px" colspan="2" align="center"><:hydraulic:varier_val:></td>
-				<td width="75px" colspan="2" align="center"><:hydraulic:fixer_val:></td>
+				<td align="center"><:hydraulic:calcul_val:></td>
+				<td align="center"><:hydraulic:varier_val:></td>
+				<td align="center"><:hydraulic:fixer_val:></td>
 			</tr>
 			
 			
 			<BOUCLE_caract(POUR) {tableau #ENV{tableau_caract}}>
 		
 				<tr id="type_materiau_caract_#VALEUR">
-					<td align="right" width="150px"> 
+					<td align="right"> 
 						#VALEUR :
 					</td>
 					
@@ -236,51 +236,48 @@ function gestion_radios(nom,valeur){
 						[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{#CLE})</div>]
 					</td>	
 
-					<td colspan="2" align="center">
+					<td align="center">
 						<input type="radio" id="calcul_val_#CLE" name="choix_champs_#CLE" value="calcul_val_#CLE" onclick="gestion_radios('#CLE', 'calcul_val_#CLE')" [(#ENV{choix_champs_#CLE}|=={calcul_val_#CLE}?{'checked',''})]/>
 					</td>	
 					
-					<td colspan="2" align="center">
+					<td align="center">
 						<input type="radio" id="varier_val_#CLE" name="choix_champs_#CLE" value="varier_val_#CLE" onclick="gestion_radios('#CLE', 'varier_val_#CLE')" [(#ENV{choix_champs_#CLE}|=={varier_val_#CLE}?{'checked',''})]/>
 					</td>
 										
-					<td colspan="2" align="center">
+					<td align="center">
 						<input type="radio" id="val_fixe_#CLE" name="choix_champs_#CLE" value="val_fixe_#CLE" onclick="gestion_radios('#CLE', 'val_fixe_#CLE')" [(#ENV{choix_champs_#CLE}|=={val_fixe_#CLE}?{'checked',''})]/>
 					</td>
 				</tr>
 
 
 				<tr class="champs_var_#CLE" style="display:[(#ENV{choix_champs_#CLE}|=={varier_val_#CLE}|?{'table-row','none'})];">
-					<td></td>
-					<td align="right"><:hydraulic:val_min:> #CLE :
+					<td colspan="3" align="right"><:hydraulic:val_min:> #CLE : </td>
+					<td colspan="2">
 						<input name="val_min_#CLE" type="text" value="#ENV{val_min_#CLE}"/>
 						[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{val_min_#CLE})</div>]
 					</td>
-					<td colspan="6"></td>
 				</tr>
 					
 				<tr class="champs_var_#CLE" style="display:[(#ENV{choix_champs_#CLE}|=={varier_val_#CLE}|?{'table-row','none'})];">
-					<td></td>
-					<td align="right"><:hydraulic:val_max:> #CLE :
+					<td colspan="3" align="right"><:hydraulic:val_max:> #CLE :</td>
+					<td colspan="2">
 						<input name="val_max_#CLE" type="text" value="#ENV{val_max_#CLE}"/>
 						[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{val_max_#CLE})</div>]
 					</td>
-					<td colspan="6"></td>
 				</tr>
 					
 				<tr class="champs_var_#CLE" style="display:[(#ENV{choix_champs_#CLE}|=={varier_val_#CLE}|?{'table-row','none'})];">
-					<td></td>
-					<td align="right"><:hydraulic:pas_var:> #CLE :
+					<td colspan="3" align="right"><:hydraulic:pas_var:> #CLE :</td>
+					<td colspan="2">
 						<input name="pas_var_#CLE" type="text" value="#ENV{pas_var_#CLE}"/>
 						[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{pas_var_#CLE})</div>]
 					</td>
-					<td colspan="6"></td>
 				</tr>
 				
 			</BOUCLE_caract>		
 			
 			<tr id="param_calc_lechapt_calmon">
-				<td colspan="8"><div class="hyd_formulaire_chapitre"><:hydraulic:param_calc_lechapt_calmon:></div></td>
+				<td colspan="5"><div class="hyd_formulaire_chapitre"><:hydraulic:param_calcul:></div></td>
 			</tr>
 			
 			<tr id="precision_lechapt_calmon">
@@ -295,7 +292,7 @@ function gestion_radios(nom,valeur){
 			</tr>
 				
 			<tr>		
-				<td colspan="8" class="hyd_bouton_submit">
+				<td colspan="5" class="hyd_bouton_submit">
 				   <input type="submit" value="<:hydraulic:calculer_lechapt_calmon:>">
 				</td>
 			</tr>
