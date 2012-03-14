@@ -60,13 +60,6 @@
 		</li>
 		<li class="squirrel_chimp_mailinglists[ (#ENV**{erreurs}|table_valeur{mailinglist_actualiser}|oui)erreur]">
 			<label><:scl:quand_actualiser_mailinglists:></label>
-			<div class="choix">
-				[
-				<span class='erreur'>(#ENV**{erreurs}|table_valeur{ml_act_ajout})</span>
-				]
-				<input type="checkbox" class="checkbox" name="ml_act_ajout" id="ml_act_ajout" value='on' [(#ENV{ml_act_ajout}|=={on}) checked="ckecked"] />
-				<label for="ml_act_ajout"><:scl:actualiser_mailinglists_ajout:></label>
-			</div>
 		
 			<div class="choix optin">
 				[
