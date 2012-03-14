@@ -1,61 +1,61 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// $Id$
-if (!defined("_ECRIRE_INC_VERSION")) return;
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/abomailmans/trunk/lang/
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
 	// A
 	'abomailman' => 'Liste de diffusion ou discussions',
 	'abomailmans' => 'Listes de diffusion ou discussions',
 	'abonne' => 'Je m\'abonne',
 	'activation' => 'Activation',
 	'active' => 'Active',
-	'aucune_langue' => 'Aucune sp&eacute;cifique',
+	'aucune_langue' => 'Aucune spécifique',
 
 	// B
 	'bouton_listes_diffusion' => 'Les listes de diffusion',
 	'btn_abonnement' => 'S\'abonner',
-	'btn_desabonnement' => 'Se d&eacute;sabonner',
+	'btn_desabonnement' => 'Se désabonner',
 
-	//C
+	// C
 	'choisir_liste' => 'Vous devez choisir une liste.',
 	'contenu_date' => 'Contenu a partir de cette date',
 	'creation_droits_insuffisants' => 'Vos droits sont insuffisants...',
 
 	// D
-	'desactive' => 'D&eacute;sactiv&eacute;e',
+	'desactive' => 'Désactivée',
 	'destinataire' => 'Destinataire',
 
 	// E
 	'email' => 'E-mail',
+	'email_abonnement' => 'Votre adresse e-mail',
+	'email_envoye' => 'L\'e-mail a été envoyé à la liste de diffusion : @liste@.',
+	'email_oublie' => 'Vous avez oublié votre adresse e-mail',
 	'emailliste_abomailman' => 'L\'adresse e-mail de la liste',
 	'emailliste_abosympa' => 'L\'adresse e-mail de l\'administrateur Sympa',
 	'emailliste_subscribe' => 'Abonnement',
 	'emailliste_unsubscribe' => 'Desabonnement',
-	'emails_a_renseigner' => 'Emails &agrave; renseigner',                                          
-	'email_abonnement' => 'Votre adresse e-mail',
-	'email_envoye' => 'L\'e-mail a &eacute;t&eacute; envoy&eacute; &agrave; la liste de diffusion : @liste@.',
-	'email_oublie' => 'Vous avez oubli&eacute; votre adresse e-mail',
-	'envoi_apercu' => 'Aper&ccedil;u',
+	'emails_a_renseigner' => 'Emails à renseigner',
+	'envoi_apercu' => 'Aperçu',
 	'envoi_confirmer' => 'Confirmer et envoyer',
-	'envoi_liste_parametres' =>'Liste des param&egrave;tres [Facultatif]',
-	'envoi_parametres' => 'Param&eacute;tres',
+	'envoi_liste_parametres' => 'Liste des paramètres [Facultatif]',
+	'envoi_parametres' => 'Paramétres',
 	'envoi_regulier' => 'Envois automatiques',
 	'envoi_regulier_info' => 'Laisser vide pour ne pas avoir d\'envois automatiques',
 	'envoi_regulier_tous_les' => 'Envoi tous les',
-	'envoi_vers'=> 'envoi vers',
+	'envoi_vers' => 'envoi vers',
 	'envoyer_courier' => 'Envoyer un courrier',
-	'envoyer_courier_liste' => 'Envoyer ce courrier &agrave; cette liste de diffusion :',
-	'envoyer_mailmans' => 'S&eacute;l&eacute;ctionner le mod&egrave;le et son contenu',
+	'envoyer_courier_liste' => 'Envoyer ce courrier à cette liste de diffusion :',
+	'envoyer_mailmans' => 'Séléctionner le modèle et son contenu',
 	'erreur_email_liste_oublie' => 'L\'adresse email de la liste est obligatoire',
-	'explication_email_sympa' => 'Si ce champ est renseign&eacute;, la liste est consid&eacute;r&eacute;e comme une liste de serveur "Sympa", dans le cas contraire comme une liste "Mailman" ou "ezmlm".',
 	'explication_email_subscribe' => 'Email d\'abonnement, de style <code>suffixe+subscribe@exemple.org</code>',
-	'explication_email_unsubscribe' => 'Email de d&eacute;sabonnement',
-	
+	'explication_email_sympa' => 'Si ce champ est renseigné, la liste est considérée comme une liste de serveur "Sympa", dans le cas contraire comme une liste "Mailman" ou "ezmlm".',
+	'explication_email_unsubscribe' => 'Email de désabonnement',
+
 	// I
 	'icone_ajouter_liste' => 'Ajouter une nouvelle liste',
-	'icone_envoyer_mail_liste' => 'Envoyer un e-mail aux lettres &agrave; partir du contenu de ce site',
+	'icone_envoyer_mail_liste' => 'Envoyer un e-mail aux lettres à partir du contenu de ce site',
 	'icone_modifier_abomailman' => 'Modifier la liste',
 	'icone_retour_abomailman' => 'Retour à la liste',
 	'info_abomailman_aucun' => 'Aucune liste',
@@ -66,10 +66,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inscription_lettres_legende' => 'Abonnement aux listes de diffusion et de discussions',
 
 	// J
-	'je_m_abonne' => 'Cochez pour valider l\'abonnement ou le d&eacute;sabonnement.',
+	'je_m_abonne' => 'Cochez pour valider l\'abonnement ou le désabonnement.',
 
 	// L
-	'label_etat_liste' => '&Eacute;tat de la liste',
+	'label_etat_liste' => 'État de la liste',
 	'label_type_abo' => 'Type',
 	'label_type_ml' => 'Liste de discussion',
 	'label_type_news' => 'Liste de diffusion',
@@ -78,55 +78,56 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende_inscription_news' => 'Inscription à la liste de diffusion',
 	'legende_inscriptions_ml' => 'Inscription aux listes de discussion',
 	'legende_inscriptions_news' => 'Inscription aux listes de diffusion',
-	'les_listes_mailmans' => 'Les listes mailmans, sympa ou ezmlm renseign&eacute;es',
+	'les_listes_mailmans' => 'Les listes mailmans, sympa ou ezmlm renseignées',
 	'lire_article' => 'Lire l\'article',
-	'liste_creee' => 'La liste num&eacute;ro @id@ (@titre@) a &eacute;t&eacute; cr&eacute;&eacute;e.',
-	'liste_non_existante' => 'La liste demand&eacute;e n\'existe pas ou a &eacute;t&eacute; supprim&eacute;e',
-	'liste_oublie' => 'Vous avez oubli&eacute; de cocher une liste !',
-	'liste_supprimee' => 'La liste num&eacute;ro @id@ (@titre@) a &eacute;t&eacute; supprim&eacute;e.',
-	'liste_updatee' => 'La liste num&eacute;ro @id@ (@titre@) a &eacute;t&eacute; mise &agrave; jour.',
+	'liste_creee' => 'La liste numéro @id@ (@titre@) a été créée.',
+	'liste_non_existante' => 'La liste demandée n\'existe pas ou a été supprimée',
+	'liste_oublie' => 'Vous avez oublié de cocher une liste !',
+	'liste_supprimee' => 'La liste numéro @id@ (@titre@) a été supprimée.',
+	'liste_updatee' => 'La liste numéro @id@ (@titre@) a été mise à jour.',
 
 	// M
-	'message' => 'Introduction &agrave; votre courrier, avant le contenu issu du site',
-	'message_confirmation_a' => 'Une demande d\'abonnement aux listes suivantes vient d\'&ecirc;tre envoy&eacute;e :',
-	'message_confirmation_unique_a' => 'Une demande d\'abonnement &agrave; la liste suivante vient d\'&ecirc;tre envoy&eacute;e :',
-	'message_confirmation_d' => 'Une demande de d&eacute;sabonnement aux listes suivantes vient d\'&ecirc;tre envoy&eacute;e. ',
-	'message_confirmation_unique_d' => 'Une demande de d&eacute;sabonnement &agrave; la liste suivante vient d\'&ecirc;tre envoy&eacute;e. ',
-	'message_confirm_suite' => 'Pour valider votre demande, r&eacute;pondez &agrave; la demande de confirmation que vous allez recevoir par mail.',
-	'mot' => 'Et lister les articles du mot cl&eacute;',
+	'message' => 'Introduction à votre courrier, avant le contenu issu du site',
+	'message_confirm_suite' => 'Pour valider votre demande, répondez à la demande de confirmation que vous allez recevoir par mail.',
+	'message_confirmation_a' => 'Une demande d\'abonnement aux listes suivantes vient d\'être envoyée :',
+	'message_confirmation_d' => 'Une demande de désabonnement aux listes suivantes vient d\'être envoyée. ',
+	'message_confirmation_unique_a' => 'Une demande d\'abonnement à la liste suivante vient d\'être envoyée :',
+	'message_confirmation_unique_d' => 'Une demande de désabonnement à la liste suivante vient d\'être envoyée. ',
+	'mot' => 'Et lister les articles du mot clé',
 
 	// N
-	'nom' => 'Nom et pr&eacute;nom (facultatif)',
+	'nom' => 'Nom et prénom (facultatif)',
 	'nouveau_abomailman' => 'Nouvelle liste de diffusion',
 
 	// P
 	'periodicite' => ' jours.',
-	'prenom' => 'Pr&eacute;nom',
+	'prenom' => 'Prénom',
 
 	// R
 	'rubrique' => 'Et lister les articles de la rubrique',
 
 	// S
-	'souhaite_rester' => 'Je souhaite rester inform&eacute;-e',
+	'souhaite_rester' => 'Je souhaite rester informé-e',
 	'sujet' => 'Sujet du courrier',
 	'sujet_obligatoire' => 'Le sujet est obligatoire.',
+	'suppression_definitive' => 'Suppression définitive !',
 	'supprimer' => 'Supprimer',
-	'suppression_definitive' => 'Suppression d&eacute;finitive !',
-	'sympa_message_confirmation' => 'Un email de validation a &eacute;t&eacute; envoy&eacute; &agrave l\'adresse : ',
+	'sympa_message_confirmation' => 'Un email de validation a été envoyé &agrave l\'adresse : ',
 
 	// T
-	'template' => 'Choisissez le mod&egrave;le et son contenu',
-	'template_defaut' => 'Mod&egrave;le par défaut',
-	'texte_descriptif' =>'Descriptif',
+	'template' => 'Choisissez le modèle et son contenu',
+	'template_defaut' => 'Modèle par défaut',
+	'texte_descriptif' => 'Descriptif',
 	'titre_abomailman' => 'Titre de la liste',
 	'titre_liste_obligatoire' => 'Le titre de la liste est obligatoire',
 	'toute_liste' => 'Toutes les listes de diffusions',
 
 	// V
+	'verifier_formulaire' => 'Vérifiez le remplissage du formulaire.',
 	'veut_s_abonner' => 'veut s\'abonner',
 	'veut_se_desabonner' => 'veut se désabonner',
-	'verifier_formulaire' => 'V&eacute;rifiez le remplissage du formulaire.',
-	'voir_modele_depuis' =>'Voir un exemple du mod&eacute;le avec',
-	'votre_email' => 'Votre email',
+	'voir_modele_depuis' => 'Voir un exemple du modéle avec',
+	'votre_email' => 'Votre email'
 );
+
 ?>
