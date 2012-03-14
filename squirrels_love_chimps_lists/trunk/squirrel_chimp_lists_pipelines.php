@@ -29,7 +29,7 @@ function squirrel_chimp_lists_squirrel_chimp_definitions($flux){
 
 	}
 
-// Actualisation des listes à partir du formulaire editer_auter
+// Actualisation des listes à partir du formulaire editer_auteur
 function squirrel_chimp_lists_formulaire_traiter($flux)
 {
 
@@ -80,7 +80,7 @@ function squirrel_chimp_lists_formulaire_traiter($flux)
 			$message_ok = $flux['data']['message_ok'];
 
 			// compilation des informations à envoyer à MailChimp
-			$donnees_auteur=donnees_sync('spip_auteurs','id_auteur='.$id_auteur);
+			$donnees_auteur=donnees_sync('','spip_auteurs','id_auteur='.$id_auteur);
 			$donnees_auteur=$donnees_auteur[1];
 			$email=$donnees_auteur['EMAIL'];
 			
