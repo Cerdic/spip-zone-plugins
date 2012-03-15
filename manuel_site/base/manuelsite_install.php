@@ -1,6 +1,6 @@
 <?php
 /**
- * Fichier d'installation / upgrade et désinstallation du plugin sjcycle
+ * Fichier d'installation / upgrade et désinstallation du plugin Manuel site
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;

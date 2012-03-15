@@ -1,0 +1,32 @@
+<paquet
+	prefix="manuelsite"
+	categorie="edition"
+	version="0.7.1"
+	etat="stable"
+	compatibilite="[2.1.0;3.0.99]"
+	logo="images/manuelsite-32.png"
+	schema="0.2"
+	documentation="http://www.spip-contrib.net/Manuel-de-redaction-du-site"
+>	
+
+	<nom>Manuel de r&#233;daction du site</nom>
+	<!-- Un manuel spécifique à votre site pour vos rédacteurs -->
+
+	<auteur>Yffic</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="pre_boucle" inclure="manuelsite_pipelines.php" />
+	<pipeline nom="body_prive" inclure="manuelsite_prive_pipelines.php" />
+	<pipeline nom="header_prive" inclure="manuelsite_prive_pipelines.php" />
+	<pipeline nom="affiche_droite" inclure="manuelsite_prive_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="manuelsite_prive_pipelines.php" />
+
+	<necessite nom="saisies" compatibilite="[1.9.0;[" />
+	<necessite nom="yaml" compatibilite="[1.1;[" />
+
+	<utilise nom="palette" compatibilite="[1.2.2;[" />
+	<utilise nom="pages" compatibilite="[0.3.5;[" />
+
+	<menu nom="manuelsite" titre="manuelsite:titre_menu" parent="configuration" icone="images/manuelsite-16.png" action="configurer_manuelsite" />
+</paquet>
