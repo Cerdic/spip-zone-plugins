@@ -13,7 +13,7 @@ function daterubriques_upgrade($nom_meta_base_version,$version_cible){
 			$config = array();
 		}
 		$config = array_merge(array(
-				'secteurs' => 'array(0)',
+				'secteurs' => array(0),
 		), $config);
 		ecrire_meta('daterubriques', serialize($config));
 
