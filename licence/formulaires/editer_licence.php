@@ -2,17 +2,15 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/autoriser');
-include_spip('inc/licence');
-
 function formulaires_editer_licence_charger_dist($id_article='new', $retour=''){
+	include_spip('inc/autoriser');
+	include_spip('inc/licence');
 	
 	$id_licence = sql_getfetsel('id_licence','spip_articles','id_article='.intval($id_article));
 	
 	$valeurs['_licences'] = $GLOBALS['licence_licences'];
 	$valeurs['id_licence'] = $id_licence;
 	$valeurs['id_article'] = $id_article;
-	$valeurs['editable'] = true;
 	
 	if (!autoriser('modifier', 'article', $id_article))
 		$valeurs['editable'] = false;

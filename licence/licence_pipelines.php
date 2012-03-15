@@ -1,7 +1,7 @@
 <?php
-/*
+/**
  * Plugin Licence
- * (c) 2007-2010 fanouch
+ * (c) 2007-2012 fanouch
  * Distribue sous licence GPL
  *
  */
@@ -19,9 +19,7 @@ function licence_affiche_milieu($flux) {
 	if ($flux['args']['exec'] == 'articles'){
 		$contexte['id_article'] = $flux["args"]["id_article"];
 		$flux['data'] .= debut_cadre_relief(_DIR_PLUGIN_LICENCE."/img_pack/licence_logo24.png", true, "");
-		$flux['data'] .= "<div id='bloc_licence' class='ajax'>";
 		$flux['data'] .= recuperer_fond('prive/contenu/licence_article',$contexte,array('ajax'=>true));
-		$flux['data'] .= "</div>";
 		$flux['data'] .= fin_cadre_relief(true);
 	}
 	return $flux;
@@ -46,10 +44,6 @@ function licence_pre_insertion($flux){
 
 /**
  * Insertion dans le pipeline editer_contenu_objet
- *
- * Affiche les boutons supplémentaires de :
- * - changement de la valeur de podcast
- * - changement de la valeur de explicit
  *
  * @param array $flux Le contexte du pipeline
  * @return $flux Le contexte du pipeline complété

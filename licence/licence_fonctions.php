@@ -1,7 +1,7 @@
 <?php
-/*
+/**
  * Plugin Licence
- * (c) 2007-2009 fanouch
+ * (c) 2007-2012 fanouch
  * Distribue sous licence GPL
  *
  */

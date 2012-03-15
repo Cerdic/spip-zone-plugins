@@ -1,0 +1,28 @@
+<paquet
+	prefix="licence"
+	categorie="divers"
+	version="0.4.0"
+	etat="stable"
+	compatibilite="[2.0.10;3.0.99]"
+	logo="img_pack/licence_logo.png"
+	schema="0.2.0"
+	documentation="http://www.spip-contrib.net/spip.php?article2147"
+>	
+
+	<nom>Licence</nom>
+	<!-- Une Licence pour articles et documents -->
+
+	<auteur mail="lesguppies@free.fr">fanouch</auteur>
+	<auteur>erational</auteur>
+
+	<traduire module="licence" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="declarer_tables_principales" inclure="base/licence.php" />
+	<pipeline nom="ieconfig_metas" inclure="licence_ieconfig_metas.php" />
+	<pipeline nom="affiche_milieu" inclure="licence_pipelines3.php" />
+	<pipeline nom="pre_insertion" inclure="licence_pipelines3.php" />
+	<pipeline nom="pre_edition" inclure="licence_pipelines3.php" />
+	<pipeline nom="editer_contenu_objet" inclure="licence_pipelines3.php" />
+	<pipeline nom="xmlrpc_methodes" inclure="licence_pipelines3.php" />
+	<pipeline nom="xmlrpc_server_class" inclure="licence_pipelines3.php" />
+</paquet>
