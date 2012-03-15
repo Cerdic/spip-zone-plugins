@@ -28,5 +28,5 @@
 	<utilise nom="palette" compatibilite="[1.2.2;[" />
 	<utilise nom="pages" compatibilite="[0.3.5;[" />
 
-	<menu nom="manuelsite" titre="manuelsite:titre_menu" parent="configuration" icone="images/manuelsite-16.png" action="configurer_manuelsite" />
+	<menu nom="configurer_manuelsite" titre="manuelsite:titre_menu" parent="menu_configuration" icone="images/manuelsite-16.png" />
 </paquet>
