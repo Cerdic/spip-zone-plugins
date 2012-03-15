@@ -15,7 +15,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'explication_navigateur' => 'Clicca su [Aggiungi] per navigare nella gerarchia del sito per selezionare gli articoli da collegare.',
 
+	// I
+	'info_nombre_articles_lies' => '@nb@ articles liés', # NEW
+	'info_un_article_lie' => '1 article lié', # NEW
+
 	// L
+	'lien_lier_article' => 'Lier à un ou des articles', # NEW
 	'lier_cet_article' => 'Collega',
 	'lier_cet_article_deux_cotes' => 'Lier des deux cotés', # NEW
 
@@ -24,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_resultat' => 'Nessun risultato',
 
 	// R
+	'rang' => 'Rang', # NEW
 	'rang_moins' => 'Sopra',
 	'rang_plus' => 'Sotto',
 	'recherche_arbo' => 'Ricerca per rubrica',

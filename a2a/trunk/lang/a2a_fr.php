@@ -14,9 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_navigateur' => 'Cliquez sur [Ajouter] pour naviguer dans l\'arborescence du site afin de sélectionner les articles à lier.',
 
 	// I
-	'info_un_article_lie' => '1 article lié',
 	'info_nombre_articles_lies' => '@nb@ articles liés',
-	
+	'info_un_article_lie' => '1 article lié',
+
 	// L
 	'lien_lier_article' => 'Lier à un ou des articles',
 	'lier_cet_article' => 'Lier',

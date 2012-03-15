@@ -15,7 +15,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'explication_navigateur' => 'Click on [Add] to navigate through the site and select the article(s) to link.',
 
+	// I
+	'info_nombre_articles_lies' => '@nb@ articles liés', # NEW
+	'info_un_article_lie' => '1 article lié', # NEW
+
 	// L
+	'lien_lier_article' => 'Lier à un ou des articles', # NEW
 	'lier_cet_article' => 'Link',
 	'lier_cet_article_deux_cotes' => 'Link both sides',
 
@@ -24,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_resultat' => 'No article found',
 
 	// R
+	'rang' => 'Rang', # NEW
 	'rang_moins' => 'Up',
 	'rang_plus' => 'Down',
 	'recherche_arbo' => 'Tree navigation',
