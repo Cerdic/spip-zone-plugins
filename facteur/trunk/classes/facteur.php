@@ -453,7 +453,7 @@ class Facteur extends PHPMailer {
 
 	function ConvertirUtf8VersIso8859() {
 		$this->CharSet	= 'iso-8859-1';
-		$this->Body		= str_replace('charset=utf-8', 'charset=iso-8859-1', $this->Body);
+		$this->Body		= str_ireplace('charset=utf-8', 'charset=iso-8859-1', $this->Body);
 		$this->Body		= $this->safe_utf8_decode($this->Body,'html');
 		$this->AltBody	= $this->safe_utf8_decode($this->AltBody);
 		$this->Subject	= $this->safe_utf8_decode($this->Subject);
