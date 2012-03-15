@@ -6,7 +6,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	//A
-	'abonnes' => 'Abonnées',
+	'abonnes' => 'Abonnés',
 	'abonnement_inscrit' => 'Inscrits aux listes d\'envois',
 	'activer_liste' => 'Activer cette liste',
 	'aucun_abonnement' => 'Pas d\'abonnments',
@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	//D
 	'desactiver_liste' => 'Mettre cette liste à la poubelle',
-	'derniere_syncro' => 'Dernière syncronisation',
+	'derniere_syncro' => 'Dernière synchronisation',
 	
 	//E
 	'editer' => 'Editer',
@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fermer' => 'Fermer',
 	
 	//G
-	'gerer_abonnements_listes' => 'Gerer les listes d\'envois',
+	'gerer_abonnements_listes' => 'Gérer les listes d\'envois',
 	'gestion_listes' => 'Gestion des listes',
 	
 	//L	
@@ -60,8 +60,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'retour' => 'Retour',
 	
 	//S
-	'syncroniser_maintenant' => 'Syncroniser maintenant',
-	'syncroniser_liste' => 'Syncroniser avec la liste',
+	'syncroniser_maintenant' => 'Synchroniser maintenant',
+	'syncroniser_liste' => 'Synchroniser avec la liste',
 	'statut' => 'Statut',	
 	'statut_poubelle' => 'Poubelle',	
 	'statut_prive' => 'Privé',	
