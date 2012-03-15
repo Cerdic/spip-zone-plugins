@@ -1,0 +1,23 @@
+<plugin>
+	<nom>SASSpip</nom>
+	<slogan>Int&#233;gration SPIP de l'impl&#233;mentation PHP, SASS</slogan>
+	<auteur>Alexandre Broudin @abroudin (Int&#233;gration SPIP), Code original : Richard Lyon - @richthegeek, Sebastian Siemssen - @thefuhby, Sam Richard - @snugug</auteur>
+	<licence>http://www.opensource.org/licenses/bsd-license.php</licence>
+	<version>3.2</version>
+	<description>
+SASS est une extension de CSS ajoutant les variables, les classes, les op&#233;rations, les imbrications au langage. Facilitant ainsi
+l'&#233;criture de feuilles de style complexes. [->https://github.com/richthegeek/phpsass/]
+
+Ce plugin cr&#233;&#233; les fichiers css correspondant &#224; vos fichiers less dans le r&#233;pertoire o&#249; ces derniers ont &#233;t&#233; cr&#233;&#233;s.
+
+Editeur online : http://phpsass.fubhy.com/
+
+	</description>
+	<etat>stable</etat>
+	<prefix>sasspip</prefix>
+	<icon>img/sass.gif</icon>
+	<lien></lien>
+	<fonctions>sassphp/generer.php</fonctions>
+	<necessite id="SPIP" version="[2.0.10;3.0.99]" />
+	<categorie>outil</categorie>
+</plugin>
