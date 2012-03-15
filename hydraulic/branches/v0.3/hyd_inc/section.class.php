@@ -108,7 +108,7 @@ abstract class acSection {
      */
     public function Calc($sDonnee, $rY = false) {
         if($rY!==false && $rY!=$this->rY) {
-            //~ spip_log('Calc('.$sDonnee.') rY='.$rY,'hydraulic');
+            spip_log('Calc('.$sDonnee.') rY='.$rY,'hydraulic');
             $this->rY = $rY;
             // On efface toutes les données calculées pour forcer le calcul
             $this->Reset();
@@ -171,15 +171,26 @@ abstract class acSection {
                 case 'Tau0' : // Force tractrice ou contrainte de cisaillement
                     $this->arCalc[$sDonnee] = $this->CalcTau0();
                     break;
+                case 'Yg' : // Distance du centre de gravité de la section à la surface libre
+                    $this->arCalc[$sDonnee] = $this->CalcYg();
+                    break;
+                case 'Imp' : // Impulsion hydraulique
+                    $this->arCalc[$sDonnee] = $this->CalcImp();
+                    break;
+                case 'Alpha' : // Angle Alpha de la surface libre par rapport au fond pour les sections circulaires
+                    $this->arCalc[$sDonnee] = $this->CalcAlpha();
+                    break;
+                case 'dAlpha' : // Dérivée de l'angle Alpha de la surface libre par rapport au fond pour les sections circulaires
+                    $this->arCalc[$sDonnee] = $this->CalcAlphaDer();
+                    break;
             }
         }
-        //~ spip_log('Calc('.$sDonnee.')='.$this->arCalc[$sDonnee],'hydraulic');
+        spip_log('Calc('.$sDonnee.')='.$this->arCalc[$sDonnee],'hydraulic');
         return $this->arCalc[$sDonnee];
     }
 
     /**
      * Calcul de la surface hydraulique.
-     * Le résultat doit être stocké dans $this->rS
      * @return La surface hydraulique
      */
     abstract protected function CalcS();
@@ -207,7 +218,12 @@ abstract class acSection {
     * @return Le rayon hydraulique
     */
     protected function CalcR() {
-        return $this->Calc('S')/$this->Calc('P');
+        if($this->Calc('P')!=0) {
+            return $this->Calc('S')/$this->Calc('P');
+        }
+        else {
+            return INF;
+        }
     }
 
     /**
@@ -215,7 +231,12 @@ abstract class acSection {
      * @return dR
      */
     protected function CalcRder() {
-        return ($this->Calc('dS')*$this->Calc('P')-$this->Calc('S')*$this->Calc('dP'))/pow($this->Calc('P'),2);
+        if($this->Calc('P')!=0) {
+            return ($this->Calc('dS')*$this->Calc('P')-$this->Calc('S')*$this->Calc('dP'))/pow($this->Calc('P'),2);
+        }
+        else {
+            return 0;
+        }
     }
 
    /**
@@ -333,107 +354,39 @@ abstract class acSection {
     private function CalcTau0() {
         return 1000 * $oP->rG * $this->Calc('R') * $oP->rIf;
     }
-}
 
+    /**
+     * Calcul de la distance du centre de gravité de la section à la surface libre.
+     * @return Distance du centre de gravité de la section à la surface libre
+     */
+    abstract protected function CalcYg();
 
-/**
- * Calculs de la section trapézoïdale
- */
-class cSnTrapeze extends acSection {
-   public $rLargeurFond;    /// Largeur au fond
-   public $rFruit;          /// Fruit des berges
-
-
-    function __construct($oP,$rLargeurFond, $rFruit) {
-        $this->rLargeurFond=(real) $rLargeurFond;
-        $this->rFruit=(real) $rFruit;
-        parent::__construct($oP);
-    }
-
-    protected function CalcB() {
-        return $this->rLargeurFond+2*$this->rFruit*$this->rY;
-    }
-
-    protected function CalcP() {
-        return $this->rLargeurFond+2*sqrt(1+pow($this->rFruit,2))*$this->rY;
-    }
-
-    protected function CalcS() {
-        return $this->rY*($this->rLargeurFond+$this->rFruit*$this->rY);
+    /**
+     * Calcul de l'impulsion hydraulique.
+     * @return Impulsion hydraulique
+     */
+    protected function CalcImp() {
+        return 1000 * ($oP->rQ * $this->Calc('V') + $oP->rG * $this->Calc('S') * $this->Calc('Yg'));
     }
 
     /**
-     * Calcul de dérivée de la surface hydraulique par rapport au tirant d'eau.
-     * @return dS
+     * Calcul de l'angle Alpha entre la surface libre et le fond pour les sections circulaires.
+     * @return Angle Alpha pour une section circulaire, 0 sinon.
      */
-    protected function CalcSder() {
-        return $this->rLargeurFond + 2*$this->rFruit*$this->rY;
-    }
-
-    /**
-     * Calcul de dérivée du périmètre hydraulique par rapport au tirant d'eau.
-     * @return dP
-     */
-    protected function CalcPder() {
-        return 2*sqrt(1+$this->rFruit*$this->rFruit);
-    }
-
-    /**
-     * Calcul de dérivée de la largeur au miroir par rapport au tirant d'eau.
-     * @return dB
-     */
-    protected function CalcBder() {
-        return 2*$this->rLargeurFond*$this->rFruit;
-    }
-}
-
-/**
- * Calculs de la section rectangulaire
- */
-class cSnRectangulaire extends acSection {
-   public $rLargeurFond; /// largeur au fond
-
-    function __construct($oP,$rLargeurFond) {
-        $this->rLargeurFond=(real) $rLargeurFond;
-        parent::__construct($oP);
-    }
-
-    protected function CalcB() {
-        return $this->rLargeurFond;
-    }
-
-    protected function CalcP() {
-        return $this->rLargeurFond+2*$this->rY;
-    }
-
-    protected function CalcS() {
-        return $this->rY*$this->rLargeurFond;
-    }
-
-    /**
-     * Calcul de dérivée de la surface hydraulique par rapport au tirant d'eau.
-     * @return dS
-     */
-    protected function CalcSder() {
-        return $this->rLargeurFond;
-    }
-
-    /**
-     * Calcul de dérivée du périmètre hydraulique par rapport au tirant d'eau.
-     * @return dP
-     */
-    protected function CalcPder() {
-        return 2;
-    }
-
-    /**
-     * Calcul de dérivée de la largeur au miroir par rapport au tirant d'eau.
-     * @return dB
-     */
-    protected function CalcBder() {
+    protected function CalcAlpha(){
         return 0;
     }
+
+    /**
+     * Calcul de la dérivée de l'angle Alpha entre la surface libre et le fond pour les sections circulaires.
+     * @return Dérivée de l'angle Alpha pour une section circulaire, 0 sinon.
+     */
+    protected function CalcAlphaDer(){
+        return 0;
+    }
+
 }
+
 
 /**
  * Calcul de la hauteur critique

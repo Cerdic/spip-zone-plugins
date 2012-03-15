@@ -40,101 +40,100 @@
 
 function mes_saisies_section() {
 
-	$fieldset_champs = array(
-	
-				'FT'          => array(
-									   'def_section_trap',
-									   array(
-											 'rLarg'  =>array('largeur_fond',2.5),
-											 'rFruit' =>array('fruit', 0.56, false)
-											)
-				),
-				
-				'FR'          => array(
-									   'def_section_rect',
-									   array(
-											 'rLarg'  =>array('largeur_fond',2.5),
-											)
-				),
-					
-				'FC'          => array(
-									   'def_section_circ',
-									   array(
-											 'circ1'  =>array('champ_circulaire1',3),
-											 'circ2'  =>array('champ_circulaire2', 0.6)
-											)
-				),
-				
-				'FP'          => array(
-									   'def_section_puis',
-									   array(
-											 'puiss1' =>array('champs_puissance1',10),
-											 'puiss2' =>array('champs_puissance2', 0.7)
-											)
-				),
-				
-				'Caract_bief' => array(				
-									   'caract_bief',					
-									   array(
-											 'rKs'	  =>array('coef_strickler',50),
-											 'rLong'  =>array('longueur_bief', 50),
-											 'rIf'    =>array('pente_fond', 0.005)
-											)
-				),
-															
-				'Cond_lim'    => array(											
-									   'condition_limite',	 		
-									   array(
-											 'rQ'     =>array('debit_amont', 2),
-											 'rYaval' =>array('h_aval_imposee', 0.6),
-											 'rYamont'=>array('h_amont_imposee', 0.15)
-											)
-				),
-								
-				'Param_calc'  => array(									
-									   'param_calcul',		
-									   array(						
-											 'rDx'    =>array('pas_discret', 5),
-											 'rPrec'  =>array('precision_calc', 0.001)
-											)
-				)
-	);
-		
+    $fieldset_champs = array(
+
+                'FT'          => array(
+                                       'def_section_trap',
+                                       array(
+                                             'rLarg'  =>array('largeur_fond',2.5),
+                                             'rFruit' =>array('fruit', 0.56, false)
+                                            )
+                ),
+
+                'FR'          => array(
+                                       'def_section_rect',
+                                       array(
+                                             'rLarg'  =>array('largeur_fond',2.5),
+                                            )
+                ),
+
+                'FC'          => array(
+                                       'def_section_circ',
+                                       array(
+                                             'rDiam'  =>array('diametre',2)
+                                            )
+                ),
+
+                'FP'          => array(
+                                       'def_section_puis',
+                                       array(
+                                             'puiss1' =>array('champs_puissance1',10),
+                                             'puiss2' =>array('champs_puissance2', 0.7)
+                                            )
+                ),
+
+                'Caract_bief' => array(
+                                       'caract_bief',
+                                       array(
+                                             'rKs'    =>array('coef_strickler',50),
+                                             'rLong'  =>array('longueur_bief', 50),
+                                             'rIf'    =>array('pente_fond', 0.005)
+                                            )
+                ),
+
+                'Cond_lim'    => array(
+                                       'condition_limite',
+                                       array(
+                                             'rQ'     =>array('debit_amont', 2),
+                                             'rYaval' =>array('h_aval_imposee', 0.6),
+                                             'rYamont'=>array('h_amont_imposee', 0.15)
+                                            )
+                ),
+
+                'Param_calc'  => array(
+                                       'param_calcul',
+                                       array(
+                                             'rDx'    =>array('pas_discret', 5),
+                                             'rPrec'  =>array('precision_calc', 0.001)
+                                            )
+                )
+    );
+
   return $fieldset_champs;
-  
+
 }
 
 function champs_obligatoires() {
-	
-	$tSaisie = mes_saisies_section();
+
+    $tSaisie = mes_saisies_section();
     $tChOblig = array();
     $sTypeSection = _request('lTypeSection');
-    
+
     foreach($tSaisie as $IdFS=>$FieldSet) {
-		if((substr($IdFS,0,1) != 'F') || ($IdFS == $sTypeSection)){
-			foreach($FieldSet[1] as $Cle=>$Champ) {
-				if((!isset($Champ[2])) || (isset($Champ[2]) && $Champ[2])) {
-					$tChOblig[] = $IdFS.'_'.$Cle;
-				}
-			}
-		}
-	}
-	return $tChOblig;
+        if((substr($IdFS,0,1) != 'F') || ($IdFS == $sTypeSection)){
+            foreach($FieldSet[1] as $Cle=>$Champ) {
+                if((!isset($Champ[2])) || (isset($Champ[2]) && $Champ[2])) {
+                    $tChOblig[] = $IdFS.'_'.$Cle;
+                }
+            }
+        }
+    }
+    return $tChOblig;
 }
 
-function formulaires_courbe_remous_charger_dist() { 
+function formulaires_courbe_remous_charger_dist() {
     // On charge les saisies et les champs qui nécessitent un accès par les fonctions
-	$tSaisie_section = mes_saisies_section();
-	$valeurs = array(
-		'lTypeSection' => 'FT',
-		'mes_saisies' => $tSaisie_section	
-	);
-    
+    $tSaisie_section = mes_saisies_section();
+    $valeurs = array(
+        'lTypeSection' => 'FT',
+        'mes_saisies' => $tSaisie_section
+    );
+
     foreach($tSaisie_section as $CleFD=>$FieldSet) {
-		foreach($FieldSet[1] as $Cle=>$Champ) {
-				$valeurs[$CleFD.'_'.$Cle] = $Champ[1];
-		}
-	}
+        foreach($FieldSet[1] as $Cle=>$Champ) {
+                $valeurs[$CleFD.'_'.$Cle] = $Champ[1];
+        }
+    }
 
     return $valeurs;
 }
@@ -142,7 +141,7 @@ function formulaires_courbe_remous_charger_dist() {
 function formulaires_courbe_remous_verifier_dist(){
     $erreurs = array();
     $datas = array();
-    
+
     $tChOblig= champs_obligatoires();
     // verifier que les champs obligatoires sont bien là :
     foreach($tChOblig as $obligatoire) {
@@ -160,7 +159,7 @@ function formulaires_courbe_remous_verifier_dist(){
     if (count($erreurs)) {
         $erreurs['message_erreur'] = _T('hydraulic:saisie_erreur');
     }
-	
+
     return $erreurs;
 }
 
@@ -182,20 +181,20 @@ $fdbg = fopen('debug.log','w');
     $lTypeSection = _request('lTypeSection');
 
     foreach($tSaisie as $IdFS=>$FieldSet) {
-		if((substr($IdFS,0,1) != 'F') || ($IdFS == $lTypeSection)){
-			foreach($FieldSet[1] as $Cle=>$Champ) {
-					$tChUtil[] = $IdFS.'_'.$Cle;
-			}
-		}
-	}
-	
+        if((substr($IdFS,0,1) != 'F') || ($IdFS == $lTypeSection)){
+            foreach($FieldSet[1] as $Cle=>$Champ) {
+                    $tChUtil[] = $IdFS.'_'.$Cle;
+            }
+        }
+    }
+
     //On récupère les données
     foreach($tChUtil as $champ) {
         if (_request($champ)){
-			$datas[$champ] = _request($champ);
-		}
-		
-		$datas[$champ] = str_replace(',','.',$datas[$champ]); // Bug #574
+            $datas[$champ] = _request($champ);
+        }
+
+        $datas[$champ] = str_replace(',','.',$datas[$champ]); // Bug #574
     }
 
     // On ajoute la langue en cours pour différencier le fichier de cache par langue
@@ -211,46 +210,52 @@ $fdbg = fopen('debug.log','w');
     foreach($datas as $champ=>$data) {
         ${$champ}=$data;
     }
-    
-	// Initialisation du format d'affichage des réels
+
+    // Initialisation du format d'affichage des réels
     $iPrec=(int)-log10($Param_calc_rPrec);
-	
+
     // Contrôle du nombre de pas d'espace maximum
     $iPasMax = 1000;
     if($Caract_bief_rLong / $Param_calc_rDx > $iPasMax) {
         $Param_calc_rDx = $Caract_bief_rLong / $iPasMax;
         $oLog->Add(_T('hydraulic:pas_nombre').' > '.$iPasMax.' => '._T('hydraulic:pas_ajustement').$Param_calc_rDx.' m');
     }
-	spip_log(array($Cond_lim_rYaval,$Caract_bief_rKs,$Cond_lim_rQ,$Caract_bief_rLong,$Caract_bief_rIf,$Param_calc_rDx,$Param_calc_rPrec),'hydraulic');
+    //spip_log(array($Cond_lim_rYaval,$Caract_bief_rKs,$Cond_lim_rQ,$Caract_bief_rLong,$Caract_bief_rIf,$Param_calc_rDx,$Param_calc_rPrec),'hydraulic');
+
     // Enregistrement des paramètres dans les classes qui vont bien
     $oParam= new cParam($Cond_lim_rYaval,$Caract_bief_rKs,$Cond_lim_rQ,$Caract_bief_rLong,$Caract_bief_rIf,$Param_calc_rDx,$Param_calc_rPrec);
-	
+
     switch($lTypeSection) {
-		case 'FT': 
-			$oSection=new cSnTrapeze($oParam,$FT_rLarg,$FT_rFruit);
-		break;	
-		
-		case 'FR': 
-			$oSection=new cSnRectangulaire($oParam,$FR_rLarg);
-		break;
-		
-		case 'FC':
-			echo 'circulaire';
-		break;
-		
-		case 'FP':
-			echo 'puissance';
-			
-		default: 
-			$oSection=new cSnTrapeze($oParam,$FT_rLarg,$FT_rFruit);
-	}
-    
+        case 'FT':
+            include_spip('hyd_inc/sectionTrapez.class');
+            $oSection=new cSnTrapez($oParam,$FT_rLarg,$FT_rFruit);
+            break;
+
+        case 'FR':
+            include_spip('hyd_inc/sectionRectang.class');
+            $oSection=new cSnRectang($oParam,$FR_rLarg);
+            break;
+
+        case 'FC':
+            include_spip('hyd_inc/sectionCirc.class');
+            $oSection=new cSnCirc($oParam,$FC_rDiam);
+            break;
+
+        case 'FP':
+            echo 'puissance';
+
+        default:
+            include_spip('hyd_inc/sectionTrapez.class.php');
+            $oSection=new cSnTrapeze($oParam,$FT_rLarg,$FT_rFruit);
+    }
+
 
 
     /***************************************************************************
     *                        Calcul de la ligne d'eau
     ****************************************************************************/
-    if(is_file(HYD_CACHE_DIRECTORY.$CacheFileName)) {
+    $bNoCache = false; // true pour débugage
+    if(!$bNoCache && is_file(HYD_CACHE_DIRECTORY.$CacheFileName)) {
         // On récupère toutes les données dans un cache déjà créé
         list($tr,$sLog) = ReadCacheFile($CacheFileName);
     }

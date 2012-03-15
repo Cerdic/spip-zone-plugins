@@ -1,10 +1,10 @@
-<?php
+﻿<?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 $GLOBALS[$GLOBALS['idx_lang']] = array(
     // A
     'abscisse'        => "Abscissa",
     'arret_calcul'    => "Calculation stopped: Critical elevation reached at abscissa",
-	'acier_lamine'    => "Acier laminé - Béton lisse",
+    'acier_lamine'    => "Rolled steel - Smooth concrete",
     // C
     'calcul_caract'   => "The calculation has the following characteristics:",
     'calcul_remous'   => "Calculation of backwater curve",
@@ -14,27 +14,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'condition_limite'=> "Boundary conditions",
     'calcul_fluvial'  => "Downstream boundary condition >= Critical elevation : calculation of subcritical part from downstream",
     'calcul_torrentiel'=> "Uptream boundary condition <= Critical elevation : calculation of supercritical part from upstream",
-    'champ_obligatoire'=> "This field is required",
+    'champ_obligatoire'=> 'This field is required',
     'choix_materiau'  => "Choice of material",
-    'caract_lechapt_calmon' => "Attributes",
-    'calculer_lechapt_calmon' => "Calculate Lechapt and Calmon",
-    'calcul_val'      => "Calculate value",
-    'choix_section'   => "Choice of the section",
+    'caract_lechapt_calmon' => "Characteristics",
+    'calculer_lechapt_calmon' => "Calculation with Lechapt and Calmon formula",
+    'calcul_val'      => "Value to calculate",
+    'choix_section'   => "Choice of section",
     // D
     'debit_amont'     => "Upstream flow (m3/s)",
     'def_section_trap'=> "Definition of trapezoidal section",
-    'def_section_rect'=> "Definition of rectangular section",
-    'def_section_circ'=> "Definition of circular section",
-    'def_section_puis'=> "Definition of power section",
-    // F
+	'diametre'		  => "Diameter (m)",
+     // F
     'fond'            => "Bottom",
     'fruit'           => "Slope (m/m)",
-	'fixer_val'       => "Fixer valeur",
-    'fonte_beton_corrosive' =>"Fonte ou acier non revêtus - Béton grossier (eau corrosive)",
-    'fonte_beton_ncorrosive' =>"Fonte ou acier non revêtus - Béton grossier (eau peu corrosive)",
-    'fonte_revt_ciment' => "Fonte ou acier revêtement ciment",
-    'fonte_revt_bitume' => "Fonte ou acier revêtement bitume - Béton centrifugé",
-    'fonte_revt_centrifuge' => "Fonte ou acier revêtement centrifugé",
+    'fixer_val'       => "Fixed parameter",
+    'fonte_beton_corrosive' =>"Unlined cast iron - Coarse concrete (corrosive water)",
+'fonte_beton_ncorrosive' => "Cast steel or uncoated - Concrete coarse (somewhat corrosive water)",
+    'fonte_revt_ciment' => "Cast steel or cement coating",
+    'fonte_revt_bitume' => "Cast iron or steel coating bitumen - Concrete centrifuged",
+    'fonte_revt_centrifuge' => "Cast iron or steel coating centrifuged",
     // H
     'h_amont_imposee' => "Water level imposed at the upstream (m)",
     'h_aval_imposee'  => "Downstream water level imposed (m)",
@@ -53,32 +51,33 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'pas_nombre'      => "Number of space step",
     'pente_fond'      => "Bottom slope (m/m)",
     'precision_calc'  => "Accuracy of calculation and display of dimensions (m)",
-    'pas_calcul_depuis_aval' => "Downstream boundary condition < Critical elevation : no possible calculation from downstream",
-    'pas_calcul_depuis_amont' => "Upstream boundary condition < Critical elevation : no possible calculation from upstream",
- 	'pas_var'         => "Pas de variation de",
-    'pvc'             => "PVC - Polyéthylène",
-    'param_Q'         => "Q: Débit (m³/s)",
-    'param_D'         => "D: Diamètre du tuyau (m)",
-    'param_J'         => "J: Perte de charge (m)",
-    'param_Lg'        => "Lg: Longueur du tuyau (m)",
-    'precision_lechapt_calmon'  => "Précision de calcul(m)",    
-	//S
-    'saisie_erreur'   => "Your entry contains errors!",
+    'pas_calcul_depuis_aval' => 'Downstream boundary condition < Critical elevation : no possible calculation from downstream',
+    'pas_calcul_depuis_amont' => 'Upstream boundary condition < Critical elevation : no possible calculation from upstream',
+	'pas_var' => "With a variation step of",
+    'pvc' => "PVC - Polyethylene",
+    'param_Q' => "Q: Flow (m³ / s)",
+    'param_D' => "D: Pipe diameter (m)",
+    'param_J' => "J: Head drop (m)",
+    'param_Lg' => "Lg: Pipe length (m)",
+    'param_calc_lechapt_calmon' => "Calculation parameters",
+    'precision_lechapt_calmon' => "Display accuracy (m)",
+    //S
+    'saisie_erreur'   => 'Your entry contains errors!',
     'section_trap'    => "Trapezoidal Section",
     'section_rect'    => "Rectangular Section",
     'section_circ'    => "Circular Section",
     'section_puiss'   => "Power Section",
     //T
-    'tirant_eau'      => "Draft (m)",
-    'type_materiau'   => "Material type",
-    'tuyau_lisse1'    => "Tuyau hydrauliquement lisse - 0.05 ≤ D ≤ 0.2",
-    'tuyau_lisse2'    => "Tuyau hydrauliquement lisse - 0.25 ≤ D ≤ 1",
-    'type_section'    => "Section type",
+    'tirant_eau'         => 'Draft (m)',
+    'type_materiau' => "Type of material",
+    'tuyau_lisse1' => "hydraulically smooth pipe - 0.05 ≤ D ≤ 0.2 ",
+    'tuyau_lisse2' => "hydraulically smooth pipe - 0.25 ≤ D ≤ 1 ",
+    'type_section' => "Type of section",
     //V
     'valeur_positive' => "This value must be strictly positive",
-    'val_min'         => "Minimum value of",
-    'val_max'         => "Maximum value of",
-    'varier_val'      => "Varier valeur"
+    'val_min' => "From minimum value",
+    'val_max' => "To maximum value",
+    'varier_val' => "Parameter to vary "
 );
 
 ?>

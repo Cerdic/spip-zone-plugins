@@ -17,8 +17,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'champ_obligatoire'=> "Ce champ est obligatoire",
     'choix_materiau'  => "Choix du matériau",
     'caract_lechapt_calmon' => "Caractéristiques",
-    'calculer_lechapt_calmon' => "Calcul de Lechapt et Calmon",
-    'calcul_val'      => "Calculer valeur",
+    'calculer_lechapt_calmon' => "Calcul avec la formule de Lechapt et Calmon",
+    'calcul_val'      => "Paramètre à calculer",
     'choix_section'   => "Choix de la section",
     // D
     'debit_amont'     => "Débit amont (m3/s)",
@@ -26,10 +26,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'def_section_rect'=> "Définition de la section rectangulaire",
     'def_section_circ'=> "Définition de la section circulaire",
     'def_section_puis'=> "Définition de la section puissance",
+	'diametre'		  => "Diamètre (m)",
     // F
     'fond'            => "Fond",
     'fruit'           => "Fruit (m/m)",
-    'fixer_val'       => "Fixer valeur",
+    'fixer_val'       => "Paramètre fixé",
     'fonte_beton_corrosive' =>"Fonte ou acier non revêtus - Béton grossier (eau corrosive)",
     'fonte_beton_ncorrosive' =>"Fonte ou acier non revêtus - Béton grossier (eau peu corrosive)",
     'fonte_revt_ciment' => "Fonte ou acier revêtement ciment",
@@ -55,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'precision_calc'  => "Précision de calcul et d'affichage des cotes (m)",
     'pas_calcul_depuis_aval' => "Condition limite aval < Hauteur critique : pas de calcul possible depuis l'aval",
     'pas_calcul_depuis_amont' => "Condition limite amont > Hauteur critique : pas de calcul possible depuis l'amont",
-    'pas_var'         => "Pas de variation de",
+    'pas_var'         => "Avec un pas de variation de",
     'pvc'             => "PVC - Polyéthylène",
     'param_Q'         => "Q: Débit (m³/s)",
     'param_D'         => "D: Diamètre du tuyau (m)",
@@ -68,7 +69,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'section_rect'    => "Section Rectangulaire",
     'section_circ'    => "Section Circulaire",
     'section_puiss'   => "Section Puissance",
-
     //T
     'tirant_eau'      => "Tirant d'eau (m)",
     'type_materiau'   => "Type du matériau",
@@ -77,9 +77,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'type_section'    => "Type de section",
     //V
     'valeur_positive' => "Cette valeur doit être strictement positive",
-    'val_min'         => "Valeur minimum de",
-    'val_max'         => "Valeur maximum de",
-    'varier_val'      => "Varier valeur"
+    'val_min'         => "De la Valeur minimum",
+    'val_max'         => "A la Valeur maximum",
+    'varier_val'      => "Paramètre à varier"
 );
 
 ?>
