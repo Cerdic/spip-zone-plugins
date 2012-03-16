@@ -1,8 +1,16 @@
 <?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.org/tradlang_module/paquet-cextras?lang_cible=de
+// ** ne pas modifier le fichier **
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	'cextras_titre' => 'Zusatzfelder',
-	'cextras_slogan' => 'Zus&#228;tzliche Felder f&#252;r die Standardobjekte von SPIP anlegen',
+	// C
 	'cextras_description' => ' ',
+	'cextras_slogan' => 'Zusätzliche Felder für die Standardobjekte von SPIP anlegen',
+	'cextras_titre' => 'Zusatzfelder'
 );
+
 ?>
