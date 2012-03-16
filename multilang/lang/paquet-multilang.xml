@@ -2,6 +2,9 @@
 	<langue code="en" />
 	<langue code="fr" />
 	<langue code="it" />
+	<langue code="ru" url="http://trad.spip.org/tradlang_module/paquet-multilang?lang_cible=ru">
+		<traducteur nom="nazar" lien="http://trad.spip.org/auteur/nazar" />
+	</langue>
 	<langue code="sk" url="http://trad.spip.org/tradlang_module/paquet-multilang?lang_cible=sk">
 		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
