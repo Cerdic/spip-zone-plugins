@@ -9,11 +9,12 @@
          <div class="abo_message">
             <pre width="80">#ENV*{template_txt, #VAL{abomailmans:pas_template_txt}|_T}</pre>
          </div>
+         <h3 class="legend"><:abomailmans:destinataire:></h3>
          <ul>
             <li>
                <label><:abomailmans:envoyer_courier_liste:></label>
                <B_listes>
-               <select name="email_liste" class="text">
+               <select name="email_liste" id="email_liste" >
                <BOUCLE_listes(ABOMAILMANS){par titre}>
                <option value="#EMAIL">#TITRE -> #EMAIL</option>
                </BOUCLE_listes>
