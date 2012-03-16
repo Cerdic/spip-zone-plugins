@@ -215,10 +215,10 @@ function multilang_affichage_final($flux){
 					var fields_selector_opt = ".multilang";
 					multilang_init_lang({fields:fields_selector,fields_opt:fields_selector_opt,root:crayons_root,root_opt:root_opt,forms:forms_selector,init_done:false});
 				}
-				jQuery(document).ready(function(){
-				crayons_multilang_init();
 				if(typeof onAjaxLoad == "function") onAjaxLoad(crayons_multilang_init);
-				});';
+				crayons_multilang_init();
+				';
+				
 			$flux .= $texte;
 		}
 	}
