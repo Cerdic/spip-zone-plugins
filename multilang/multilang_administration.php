@@ -50,6 +50,7 @@ function multilang_creer_config(){
  * @param float $nom_meta_base_version
  */
 function multilang_vider_tables($nom_meta_base_version) {
+	effacer_meta('multilang');
 	effacer_meta($nom_meta_base_version);
 }
 
