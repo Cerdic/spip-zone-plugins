@@ -9,7 +9,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
 
 include_spip('inc/navigation_modules');
 
@@ -20,7 +21,9 @@ function balise_ONGLETS_ASSOCIATION_dist ($p) {
 function balise_ONGLETS_ASSOCIATION_stat ($args) {
 	return $args; /* on se contente de faire suivre l'argument statique de la balise */
 }
-function balise_ONGLETS_ASSOCIATION_dyn ($titre) {
-	return association_onglets($titre);
+
+function balise_ONGLETS_ASSOCIATION_dyn ($titre='') {
+	return association_onglets($titre, FALSE);
 }
+
 ?>

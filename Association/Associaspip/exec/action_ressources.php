@@ -13,22 +13,17 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
 
 function exec_action_ressources()
 {
-	$id_ressource=intval(_request('id'));
-	include_spip('inc/autoriser');
+	$id_ressource = intval(_request('id'));
 	if (!autoriser('associer', 'ressources') OR !$id_ressource) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:ressources_titre_suppression_ressources')) ;
-		association_onglets();
-		echo debut_gauche('',true);
-		echo debut_boite_info(true);
+		association_onglets(_T('asso:titre_onglet_prets'));
+		// INTRO : resume ressource
 		$data = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
 		$infos['ressources_libelle_code'] = $data['code'];
 		if (is_numeric($data['statut'])) { /* utilisation des 3 nouveaux statuts numeriques (gestion de quantites/exemplaires) */
@@ -62,7 +57,7 @@ function exec_action_ressources()
 			$type = $data['statut'];
 		}
 		$infos['statut'] =  '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-'.$puce.'.gif" title="'.$data['statut'].'" alt="" /> '. _T("asso:ressource_statut_$type");
-		$infos['nombre_prets'] = sql_countsel('spip_asso_prets', "id_ressource=$id_ressource");
+		$infos['ressource_pretee'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_prets', "id_ressource=$id_ressource"), ));
 		echo totauxinfos_intro($data['intitule'], 'ressource', $id_ressource, $infos ); // indice de popularite
 		// STATS sur la duree et le montant des emprunts
 		echo totauxinfos_stats('prets', 'prets', array('entete_duree'=>'duree','entete_montant'=>'duree*prix_unitaire',), "id_ressource=$id_ressource");
@@ -70,13 +65,9 @@ function exec_action_ressources()
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
 		echo association_retour();
-		echo debut_droite('',true);
-		echo debut_cadre_relief('', false, '', $titre = _T('asso:ressources_titre_suppression_ressources'));
-		echo '<p><strong>'._T('asso:ressources_danger_suppression', array('id_ressource' => $id_ressource)).'</strong></p>';
-		$res = '<div class="formulaire"><form><p class="boutons"><input type="submit" value="'. _T('asso:bouton_confirmer') .'" /></p></form></div>';
-		echo redirige_action_post('supprimer_ressources', $id_ressource, 'ressources', '', $res);
-		echo fin_cadre_relief(true);
-		echo fin_page_association();
+		debut_cadre_association('pret1.gif', 'ressources_titre_suppression_ressources');
+		echo bloc_confirmer_suppression('ressource', $id_ressource );
+		fin_page_association();
 	}
 }
 

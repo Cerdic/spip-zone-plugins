@@ -4,7 +4,6 @@
 [(#ENV{editable})
 	<form method="post" action="#ENV{action}">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
-		<h3 class="legend"><:asso:relance_de_cotisations:></h3>
 		<p><em class="explication"><:asso:vous_vous_appretez_a_envoyer:> [(#ENV{_nb_messages})] [(#ENV{_nb_messages}|>{1}|?{<:asso:relances:>,<:asso:relance:>})]</em></p>
 		<div class="fieldset previsu">
 			<p class="titre">

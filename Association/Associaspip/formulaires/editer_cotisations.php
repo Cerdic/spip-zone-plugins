@@ -17,10 +17,11 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/autoriser');
 
-function formulaires_editer_cotisations_charger_dist($id_auteur, $nom_prenom, $categorie, $validite) {
+function formulaires_editer_cotisations_charger_dist($id_auteur, $nom_prenom, $id_categorie, $validite)
+{
 	/* la validite et le montant de la cotisation */
-	if ($categorie) { /* si le membre a une categorie */
-		$categorie = sql_fetsel('duree, cotisation', 'spip_asso_categories', "id_categorie=". intval($categorie));
+	if ($id_categorie) { /* si le membre a une categorie */
+		$categorie = sql_fetsel('duree, cotisation', 'spip_asso_categories', "id_categorie=". intval($id_categorie));
 		list($annee, $mois, $jour) = explode('-', $validite);
 		if ($jour==0 OR $mois==0 OR $annee==0)
 			list($annee, $mois, $jour) = explode('-',date('Y-m-d'));
@@ -28,11 +29,11 @@ function formulaires_editer_cotisations_charger_dist($id_auteur, $nom_prenom, $c
 		$contexte['validite'] = date('Y-m-d', mktime(0, 0, 0, $mois, $jour, $annee));
 		$contexte['montant'] = $categorie['cotisation'];
 	} else {
-		$contexte['validite'] = date("Y-m-d");
+		$contexte['validite'] = date('Y-m-d');
 		$contexte['montant'] = 0;
 	}
 	/* la justification */
-	$contexte['justification'] = _T('asso:nouvelle_cotisation') ." [$nom_prenom->membre$id_auteur]";
+	$contexte['justification'] = _T('asso:nouvelle_cotisation') ." [$nom_prenom"."->membre$id_auteur]";
 	/* pour passer securiser action */
 	$contexte['_action'] = array('editer_cotisations',$id_auteur);
 	/* on passe aussi les destinations si besoin */
@@ -57,7 +58,7 @@ function formulaires_editer_cotisations_verifier_dist($id_auteur, $nom_prenom, $
 		/* verifier si besoin que le montant des destinations correspond bien au montant de l'opération, sauf si on a deja une erreur de montant */
 		if (($GLOBALS['association_metas']['destinations']) && !array_key_exists('montant', $erreurs)) {
 			include_spip('inc/association_comptabilite');
-			if ($err_dest = association_verifier_montant_destinations($montant)) {
+			if ($err_dest = association_verifier_montant_destinations(_request('montant'))) {
 				$erreurs['destinations'] = $err_dest;
 			}
 		}

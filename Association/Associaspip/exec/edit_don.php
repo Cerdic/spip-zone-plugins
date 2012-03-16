@@ -10,43 +10,31 @@
 \***************************************************************************/
 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
 
-include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
 include_spip ('inc/association_comptabilite');
 
-function exec_edit_don(){
-
-	include_spip('inc/autoriser');
+function exec_edit_don()
+{
 	if (!autoriser('associer', 'dons')) {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
-		$id_don= intval(_request('id'));
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:dons_titre_mise_a_jour'));
+		$id_don = intval(_request('id'));
 		association_onglets(_T('asso:titre_onglet_dons'));
-
-		echo debut_gauche('',true);
-
-		echo debut_boite_info(true);
-		if ($id_don) {
-		  echo '<div style="font-weight: bold; text-align: center;" class="verdana1 spip_xx-small">DON<br><span class="spip_xx-large">'.$id_don.'</span></div>';
-		}
+		// INTRO : resume don
+		echo totauxinfos_intro('', 'don', $id_don, $infos );
+		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
-
 		echo association_retour();
-
-		echo debut_droite('', true);
-
-
+		debut_cadre_association(($id_don?'dons.gif':'ajout_don.png'), 'dons_titre_mise_a_jour');
 		echo recuperer_fond('prive/editer/editer_asso_dons', array (
 			'id_don' => $id_don
 		));
-
-		echo fin_page_association();
+		fin_page_association();
 	}
 }
 

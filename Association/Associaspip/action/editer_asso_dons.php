@@ -13,13 +13,11 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function action_editer_asso_dons() {
+function action_editer_asso_dons()
+{
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_don = $securiser_action();
 	$erreur = '';
-	include_spip('inc/association_comptabilite');
-	$id_compte = intval(_request('id_compte'));
-	$journal = _request('journal');
 	$date_don = _request('date_don');
 	$bienfaiteur = _request('bienfaiteur');
 	$id_adherent = intval(_request('id_adherent'));
@@ -28,45 +26,46 @@ function action_editer_asso_dons() {
 		$bienfaiteur = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
 	}
 	$argent = association_recupere_montant(_request('argent'));
-	$colis = _request('colis');
 	$valeur = association_recupere_montant(_request('valeur'));
-	$contrepartie = _request('contrepartie');
-	$commentaire = _request('commentaire');
+	$modifs = array(
+		'date_don' => $date_don,
+		'bienfaiteur' => _request('bienfaiteur'),
+		'id_adherent' => $id_adherent,
+		'argent' => $argent,
+		'colis' => _request('colis'),
+		'valeur' => $valeur,
+		'contrepartie' => _request('contrepartie'),
+		'commentaire' => _request('commentaire'),
+	);
+    include_spip('base/association');
+	$id_compte = intval(_request('id_compte'));
+	$journal = _request('journal');
+	include_spip('inc/association_comptabilite');
 	if ($id_don) { /* c'est une modification */
 		// on modifie les operations comptables associees au don
-		association_modifier_operation_comptable($date_don, $argent, 0, "[don$id_don->don$id_don] -- ". ($id_adherent?"[$bienfaiteur->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_dons'], $journal, $id_don, $id_compte);
-		$association_imputation = charger_fonction('association_imputation', 'inc');
-		$critere = $association_imputation('pc_colis');
-		$critere .= ($critere?' AND ':'') ."id_journal=$id_don";
-		association_modifier_operation_comptable($date_don, $valeur, 0, "[colis$id_don->don$id_don] -- ". ($id_adherent?"[$bienfaiteur->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_colis'], $journal, $id_don, sql_getfetsel('id_compte', 'spip_asso_comptes', $critere) );
+		if ($GLOBALS['association_metas']['pc_dons']==$GLOBALS['association_metas']['pc_colis']) { /* si dons et colis sont associes a la meme reference, on modifie une seule operation */
+			association_modifier_operation_comptable($date_don, $argent+$valeur, 0, '['._T('don').$id_don."->don$id_don] &mdash ". ($id_adherent?"[$bienfaiteur"."->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_dons'], $journal, $id_don, $id_compte);
+		} else { /* sinon on en modifie deux */
+			association_modifier_operation_comptable($date_don, $argent, 0, '['._T('don').$id_don."->don$id_don] &mdash ". ($id_adherent?"[$bienfaiteur"."->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_dons'], $journal, $id_don, $id_compte);
+			$association_imputation = charger_fonction('association_imputation', 'inc');
+			$critere = $association_imputation('pc_colis');
+			$critere .= ($critere?' AND ':'') ."id_journal=$id_don";
+			association_modifier_operation_comptable($date_don, $valeur, 0, '['._T('colis').$id_don."->don$id_don] &mdash ". ($id_adherent?"[$bienfaiteur"."->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_colis'], $journal, $id_don, sql_getfetsel('id_compte', 'spip_asso_comptes', $critere) );
+		}
 		// on modifie les informations relatives au don
-		sql_updateq('spip_asso_dons', array(
-			'date_don' => $date_don,
-			'bienfaiteur' => $bienfaiteur,
-			'id_adherent' => $id_adherent,
-			'argent' => $argent,
-			'colis' => $colis,
-			'valeur' => $valeur,
-			'contrepartie' => $contrepartie,
-			'commentaire' => $commentaire,
-		), "id_don=$id_don");
+		sql_updateq('spip_asso_dons', $modifs, "id_don=$id_don");
 	} else { /* c'est un ajout */
 		// on ajoute les informations relatives au don
-		$id_don = sql_insertq('spip_asso_dons', array(
-			'date_don' => $date_don,
-			'bienfaiteur' => $bienfaiteur,
-			'id_adherent' => $id_adherent,
-			'argent' => $argent,
-			'colis' => $colis,
-			'valeur' => $valeur,
-			'contrepartie' => $contrepartie,
-		 	'commentaire' => $commentaire,
-		));
+		$id_don = sql_insertq('spip_asso_dons', $modifs);
 		if (!$id_don) { // la suite serait aleatoire sans cette cle...
 			$erreur = _T('Erreur_BdD_ou_SQL');
 		} else { // on ajoute les operations comptables associees au don
-			association_ajouter_operation_comptable($date_don, $argent, 0, "[don$id_don->don$id_don] -- ". ($id_adherent?"[$bienfaiteur->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_dons'], $journal, $id_don);
-			association_ajouter_operation_comptable($date_don, $valeur, 0, "[colis$id_don->don$id_don] -- ". ($id_adherent?"[$bienfaiteur->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_colis'], $journal, $id_don);
+			if ($GLOBALS['association_metas']['pc_dons']==$GLOBALS['association_metas']['pc_colis']) { /* si dos et colis sont associes a la meme reference, on ajoute une seule operation */
+				association_ajouter_operation_comptable($date_don, $argent+$valeur, 0, '['._T('don').$id_don."->don$id_don] &mdash ". ($id_adherent?"[$bienfaiteur"."->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_dons'], $journal, $id_don);
+			} else { /* sinon on en insere deux */
+				association_ajouter_operation_comptable($date_don, $argent, 0, '['._T('don').$id_don."->don$id_don] &mdash ". ($id_adherent?"[$bienfaiteur"."->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_dons'], $journal, $id_don);
+				association_ajouter_operation_comptable($date_don, $valeur, 0, '['._T('colis').$id_don."->don$id_don] &mdash ". ($id_adherent?"[$bienfaiteur"."->membre$id_adherent]":$bienfaiteur), $GLOBALS['association_metas']['pc_colis'], $journal, $id_don);
+			}
 		}
 	}
 	return array($id_don, $erreur);

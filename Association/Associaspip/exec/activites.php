@@ -13,12 +13,10 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
 
-function exec_activites(){
-
-	include_spip('inc/autoriser');
+function exec_activites()
+{
 	if (!autoriser('associer', 'activites')) {
 		include_spip('inc/minipres');
 		echo minipres();
@@ -28,27 +26,28 @@ function exec_activites(){
 		if(!$annee){
 			$annee = date('Y');
 		}
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets(_T('asso:titre_onglet_activite'));
-		echo debut_gauche('',true);
-		echo debut_boite_info(true);
 		// TOTAUX : nombre d'activites de l'annee en cours repartis par mots-clefs
 		// TOTAUX : nombre d'activites de l'annee en cours repartis par iscriptions
 		$liste_libelles = $liste_effectifs = array();
 		$liste_libelles['pair'] = _T('asso:activites_avec_inscrits');
-		$liste_effectifs['pair'] = sql_countsel('spip_asso_activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement ', "DATE_FORMAT(e.date_debut, '%Y')=$annee AND a.inscrits<>0)");
+		$liste_effectifs['pair'] = sql_count( sql_select('*, SUM(a.inscrits)', 'spip_asso_activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement ', "DATE_FORMAT(e.date_debut, '%Y')=$annee",'a.id_evenement', '', '', "SUM(a.inscrits)>0") );
 		$liste_libelles['impair'] = _T('asso:activites_sans_inscrits');
-		$liste_effectifs['impair'] = sql_countsel('spip_asso_activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement ', "DATE_FORMAT(e.date_debut, '%Y')=$annee AND a.inscrits=0)");
+		$liste_effectifs['impair'] = sql_countsel('spip_asso_activites AS a LEFT JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', "DATE_FORMAT(e.date_debut, '%Y')=$annee",'a.id_evenement', "SUM(a.inscrits)=0");
+		$liste_effectifs['impair'] = sql_countsel('spip_evenements', "DATE_FORMAT(date_debut, '%Y')=$annee")-$liste_effectifs['pair']; // le monde a l'envers... mais ca fonctionne
 		echo totauxinfos_effectifs('activites', $liste_libelles, $liste_effectifs);
+/*
+		// STATS sur toutes les participations
+		echo totauxinfos_stats('participations_par_personne_par_activite', 'activites', array('activite_entete_inscrits'=>'inscrits','entete_montant'=>'montant',), "DATE_FORMAT(date, '%Y')=$annee");
 		// TOTAUX : montants des participations durant l'annee en cours
 		$data = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT('date', '%Y')=$annee AND imputation=".sql_quote($GLOBALS['association_metas']['pc_activites']) );
-		echo totauxinfos_sommes(_T('asso:activites'), $data['somme_recettes'], $data['somme_depenses']);
+		echo totauxinfos_montants('activites', $data['somme_recettes'], $data['somme_depenses']);
+*/
 		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
-		echo debut_droite('',true);
-		echo debut_cadre_relief('', false, '', $titre = _T('asso:activite_titre_toutes_activites'));
+		//!\ il manque le blo des raccourcis !
+		debut_cadre_association('activites.gif','activite_titre_toutes_activites');
 		// FILTRES
 		echo "<table class='asso_tablo_filtres'><tr>\n<td width='40%'><p class='pagination'>";
 		$query = sql_select("DATE_FORMAT(date_debut, '%Y') AS annee", 'spip_evenements', '', 'annee', 'annee');
@@ -119,7 +118,7 @@ function exec_activites(){
 			echo '<td class="text">'.$data['lieu'].'</td>';
 			echo '<td class="integer">'.$inscrits['total'].'</td>';
 			echo '<td class="actions">'. association_bouton('activite_bouton_modifier_article', 'edit-12.gif', 'articles', 'id_article='.$data['id_article']) . '</td>';
-			echo '<td class="actions">'. association_bouton('activite_bouton_ajouter_inscription', 'creer-12.gif', 'edit_activite', 'id_evenement='.$data['id_evenement']) . '</td>';
+			echo '<td class="actions">'. association_bouton('activite_bouton_ajouter_inscription', 'creer-12.gif', 'ajout_inscription', 'id_evenement='.$data['id_evenement']) . '</td>';
 			echo '<td class="actions">'. association_bouton('activite_bouton_voir_liste_inscriptions', 'voir-12.png', 'voir_activites', 'id='.$data['id_evenement']) . '</td>';
 			echo "</tr>\n";
 		}
@@ -142,8 +141,7 @@ function exec_activites(){
 			}
 		}
 		echo '</p></td></tr></table>';
-		echo fin_cadre_relief();
-		echo fin_page_association();
+		fin_page_association();
 	}
 }
 

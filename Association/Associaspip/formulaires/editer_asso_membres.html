@@ -3,7 +3,6 @@
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
     <form name="formulaire_#FORM" method="post" action="#ENV{action}">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
-		<h3 class="legend"><h3 class="legend"><:asso:adherent_titre_modifier_membre:></h3>
 		<ul>
 		[(#META{/association/civilite}|oui)
 			<li class="editer_sexe">

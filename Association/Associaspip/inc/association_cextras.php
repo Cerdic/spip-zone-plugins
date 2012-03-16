@@ -16,8 +16,9 @@
 **/
 function association_objets_extensibles($objets){
 	return array_merge($objets, array(
-		'asso_membre' => _T('asso:membres'),
-		'asso_compte' => _T('asso:comptes'),
+		'asso_membre' => _T('asso:membres'), // Adherent(e)s/Membres
+		'asso_compte' => _T('asso:comptes'), // Grand Livre/Journal Comptable
+		'asso_activite' => _T('asso:activites'), // Inscriptions et Participations financiere des membres aux activites
 	));
 }
 ?>

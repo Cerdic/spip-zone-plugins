@@ -156,9 +156,9 @@ $spip_asso_ressources = array(
 	"code" => "TINYTEXT NOT NULL",
 	"intitule" => "TINYTEXT NOT NULL",
 	"date_acquisition" => "DATE NOT NULL DEFAULT '0000-00-00'",
-	"prix_acquisition" => "DECIMAL(19,2) NOT NULL DEFAULT '0'", // Il s'agit du cout total d'acquisition (pour toutes les quantites acquises, avec les frais afferants)
+	"prix_acquisition" => "DECIMAL(19,2) NOT NULL DEFAULT '0'", // Il s'agit du cout total d'acquisition (pour toutes les quantites acquises, avec --pour simplifier-- les frais accessoires --transports et renumeration d'intermediaires-- et taxes --de valeur ajourtee ou assimilables--)
 	"pu" => "DECIMAL(19,2) NOT NULL DEFAULT '0'", // prix unitaire (par tranche de temps) de la location
-	"ud" => "CHAR(1) NULL DEFAULT 'D'", // unite des durees (de tranches) de location/pret : ce champ pourrait etre un ENUM('Y','M','W','D','T','H','S') mais un CHAR(1) est plus portable, d'autant que les caracteres geres le sont par la fonction association_dureefr(); ce qui est ca de moins a gerer en base.
+	"ud" => "CHAR(1) NULL DEFAULT 'D'", // unite des durees (de tranches) de location/pret : ce champ pourrait etre un ENUM('Y','M','W','D','H','S') mais un CHAR(1) est plus portable, d'autant que les caracteres geres le sont par la fonction association_dureefr(); ce qui est ca de moins a gerer en base.
 	"statut" => "TINYINT NULL", // utiliser un entier permet de pouvoir associer la quantite acquise ...assez reduite (d'ou du TinyInt et non autre : il ne s'agit pas non plus de gerer un entrepot de grossiste... mais 2-3 unites sans devoir forcement creer des codes distincts --ce qui est recommande meme si on reste flexible)
 	"commentaire" => "TEXT NOT NULL",
 	"maj" => "TIMESTAMP NOT NULL"
@@ -198,17 +198,11 @@ $spip_asso_activites = array(
 	"id_evenement" => "BIGINT UNSIGNED NOT NULL",
 	"nom" => "TEXT NOT NULL",
 	"id_adherent" => "BIGINT UNSIGNED NOT NULL",
-	"membres" => "TEXT NOT NULL",
-	"non_membres" => "TEXT NOT NULL",
-  	"inscrits" => "INT NOT NULL DEFAULT '0'",
-	"date" => "DATE NOT NULL DEFAULT '0000-00-00'",
-#	"telephone" => "TEXT NOT NULL",
-#	"adresse" => "TEXT NOT NULL",
-#	"email" => "TEXT NOT NULL",
+  	"inscrits" => "INT NOT NULL DEFAULT '0'", // Ce pourrait etre un FLOAT si c'est utilise comme "quantite" appliquee a un montant unique (equivaut alors au "nombre de tarifs"...) ici il s'agit bien du nombre d'invites (ce champ aurait du s'appeler ainsi d'ailleurs), l'adherent(e) exclu(e) (donc peut valeur 0 tandis que "id_adherent" ou "nom" aura toujours une valeur)
+	"date_inscription" => "DATE NOT NULL DEFAULT '0000-00-00'",
 	"commentaire" => "TEXT NOT NULL",
 	"montant" => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
 	"date_paiement" => "DATE NOT NULL DEFAULT '0000-00-00'",
-	"statut" => "TINYTEXT NOT NULL",
 	"maj" => "TIMESTAMP NOT NULL"
 );
 $spip_asso_activites_key = array(
@@ -257,10 +251,11 @@ $spip_asso_membres= array(
   "nom_famille" => "TEXT NOT NULL",
   "prenom" => "TEXT NOT NULL",
   "sexe" => "TINYTEXT NOT NULL",
-  "categorie" => "TEXT NOT NULL",
+  "categorie" => "INT", // ce champ contient la cle spip_asso_categories.id_categorie
   "statut_interne" => "TINYTEXT NOT NULL",
   "commentaire" => "TEXT NOT NULL",
-  "validite" => "DATE NOT NULL DEFAULT '0000-00-00'"
+  "validite" => "DATE NOT NULL DEFAULT '0000-00-00'",
+  "date_adhesion" => "DATE NOT NULL", // r51602
 );
 $spip_asso_membres_key= array(
 	"PRIMARY KEY" => "id_auteur"
@@ -295,7 +290,7 @@ function association_declarer_tables_auxiliaires($tables_auxiliaires)
 
 	$spip_asso_metas = array(
 		"nom" => "VARCHAR(255) NOT NULL",
-		"valeur" => "TEXT DEFAULT ''",
+		"valeur" => "TEXT NOT NULL DEFAULT ''",
 		"impt" => "ENUM('non', 'oui') DEFAULT 'oui' NOT NULL",
 		"maj" => "TIMESTAMP"
 	);

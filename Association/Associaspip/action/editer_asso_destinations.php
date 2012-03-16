@@ -11,24 +11,27 @@
 
 
 if (!defined('_ECRIRE_INC_VERSION'))
-	return;
+    return;
 
-function action_ajouter_activites()
+function action_editer_asso_destinations_dist()
 {
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-	$n = sql_insertq('spip_asso_activites', array(
-		'date' => _request('date'),
-		'id_evenement' => intval(_request('id_evenement')),
-		'nom' => _request('nom'),
-		'id_adherent' => intval(_request('id_menbre')),
-		'membres' => _request('membres'),
-		'non_membres' => _request('non_membres'),
-		'inscrits' => intval(_request('inscrits')),
-		'montant' => association_recupere_montant(_request('montant')),
-		'commentaire' => _request('commentaire'),
-	));
-	spip_log("insertion activite numero: $n",'associaspip');
+    $securiser_action = charger_fonction('securiser_action', 'inc');
+    $id_destination = $securiser_action();
+    $erreur = '';
+    $champs = array(
+	'intitule' => _request('intitule'),
+	'commentaire' => _request('commentaire'),
+    );
+    include_spip('base/association');
+    if ($id_destination) { /* modification */
+	sql_updateq('spip_asso_destination', $champs "id_destination=$id_destination");
+    } else { /* ajout */
+	$id_destination = sql_insertq('spip_asso_destination', $champs);
+	if (!$id_destination)
+	    $erreur = _T('Erreur_BdD_ou_SQL');
+    }
+
+    return array($id_destination, $erreur);
 }
 
 ?>

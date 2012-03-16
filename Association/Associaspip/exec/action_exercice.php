@@ -11,45 +11,31 @@
   \************************************************************************** */
 
 
-if (!defined("_ECRIRE_INC_VERSION"))
+if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('inc/presentation');
 include_spip('inc/navigation_modules');
 
-function exec_action_exercice() {
-
-	include_spip('inc/autoriser');
-	if (!autoriser('associer', 'comptes')) {
+function exec_action_exercice()
+{
+	if (!autoriser('associer', 'exercices')) {
 		include_spip('inc/minipres');
 		echo minipres();
-	}
-	else {
-
+	} else {
 		$id_exercice = intval(_request('id'));
-
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:exercice_budgetaire_supprime'));
-		echo debut_gauche('', true);
-
-		echo debut_boite_info(true);
+		association_onglets(_T('asso:exercices_budgetaires_titre'));
+		// info
+		$exercice = sql_fetsel('*', 'spip_asso_exercices', "id_exercice=$id_exercice" );
+		$infos['exercice_entete_debut'] = association_datefr($exercice['debut'], 'dtstart');
+		$infos['exercice_entete_fin'] = association_datefr($exercice['fin'], 'dtend');
+		echo totauxinfos_intro(sql_getfetsel('intitule', 'spip_asso_exercices', "id_exercice=$id_exercice" ), 'exercice', $id_exercice, $infos );
+		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
-
-		echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'), generer_url_ecrire('exercices'), 'retour-24.png'));
-
-		echo debut_droite('', true);
-
-		echo debut_cadre_relief('', false, '', _T('asso:exercice_budgetaire_titre'));
-
-		$intitule_exercice = sql_getfetsel('intitule', 'spip_asso_exercices', "id_exercice=$id_exercice");
-
-		echo '<p><strong>' . _T('asso:vous_vous_appretez_a_effacer_exercice_budgetaire') . ' : ' . $intitule_exercice . '</strong></p>';
-		$res = '<p class="boutons"><input type="submit" value="' . _T('asso:bouton_confirmer') . '" class="fondo" /></p>';
-		echo redirige_action_post('supprimer_exercice', $id_exercice, 'exercices', '', $res);
-
-		fin_cadre_relief();
-		echo fin_page_association();
+		echo bloc_des_raccourcis(association_icone('bouton_retour', generer_url_ecrire('exercices'), 'retour-24.png'));
+		debut_cadre_association('calculatrice.gif', 'exercice_budgetaire_titre');
+		echo bloc_confirmer_suppression('exercice', $id_exercice);
+		fin_page_association();
 	}
 }
 

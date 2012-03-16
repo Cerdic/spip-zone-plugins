@@ -13,35 +13,29 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
 
 function exec_bilan()
 {
-	include_spip('inc/autoriser');
 	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
 		$plan = sql_countsel('spip_asso_plan');
-
-		$exercice= intval(_request('exercice'));
+		$exercice = intval(_request('exercice'));
 		if(!$exercice){
 			/* on recupere l'id_exercice dont la date "fin" est "la plus grande" */
 			$exercice = sql_getfetsel('id_exercice','spip_asso_exercices','','','fin DESC');
 			if(!$exercice)
 				$exercice=0;
 		}
-		$url_bilan = generer_url_ecrire('bilan', "exercice=$exercice");
-
+		$exercice_data = sql_asso1ligne('exercice', $exercice);
 		// recupere l'id_destination de la ou des destinations dans POST ou cree une entree a 0 dans le tableau
 		if (!($ids_destination_bilan = _request('destination')))
 			$ids_destination_bilan = array(0);
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(propre(_T('asso:titre_gestion_pour_association')), '', _DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg','rien.gif');
 		association_onglets(_T('asso:titre_onglet_comptes'));
-		echo debut_gauche('',true);
-		echo debut_boite_info(true);
+		// INTRO : rappel de l'exercicee affichee
+		echo totauxinfos_intro($exercice_data['intitule'],'exercice',$exercice);
 		if ($GLOBALS['association_metas']['destinations']=='on') {
 			// cree un menu a choix multiple des destinations a inserer dans la boite info et recupere les intitule de toutes les destinations dans un tableau
 			$select_destination = '';
@@ -54,7 +48,7 @@ function exec_bilan()
 				$select_destination .= '>'.$data['intitule'].'</option>';
 				$intitule_destinations[$data['id_destination']] = $data['intitule'];
 			}
-			echo '<form method="post" action="'.$url_bilan.'"><div>';
+			echo '<form method="post" action="'.generer_url_ecrire('bilan', "exercice=$exercice").'"><div>';
 			echo '<select name ="destination[]" class="fondl" multiple>';
 			echo '<option value="0"';
 			if (!(array_search(0, $ids_destination_bilan)===FALSE))
@@ -64,14 +58,14 @@ function exec_bilan()
 			echo '<p class="boutons"><input type="submit" value="Bilan" /></p>';
 			echo '</div></form>';
 		}
+		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
-		$res = association_icone(_T('asso:cpte_resultat_titre_general'),  generer_url_ecrire('compte_resultat', "exercice=$exercice"), 'finances.jpg')
-		. association_icone(_T('asso:annexe_titre_general'),  generer_url_ecrire('annexe', "exercice=$exercice"), 'finances.jpg')
-		. association_icone(_T('asso:bouton_retour'),  generer_url_ecrire('comptes', "exercice=$exercice"), 'retour-24.png');
+		$res = association_icone('cpte_resultat_titre_general',  generer_url_ecrire('compte_resultat', "exercice=$exercice"), 'finances.jpg')
+		. association_icone('annexe_titre_general',  generer_url_ecrire('annexe', "exercice=$exercice"), 'finances.jpg')
+		. association_icone('bouton_retour',  generer_url_ecrire('comptes', "exercice=$exercice"), 'retour-24.png');
 		echo bloc_des_raccourcis($res);
-		echo debut_droite('',true);
-		debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg', false, '', '&nbsp;'.propre( _T('asso:bilans_comptables').' : '.exercice_intitule($exercice)));
+		debut_cadre_association('finances.jpg', 'bilans_comptables', $exercice_data['intitule']);
 		$clas_banque = $GLOBALS['association_metas']['classe_banques'];
 		$clas_contrib_volontaire = $GLOBALS['association_metas']['classe_contributions_volontaires']; // une contribution benevole ne doit pas etre comptabilisee en charge/produit
 		if ($plan) {
@@ -85,7 +79,7 @@ function exec_bilan()
 		}
 		// on boucle sur le tableau des destinations en refaisant le fetch a chaque iteration
 		foreach ($ids_destination_bilan as $id_destination) {
-			$total_recettes=$total_depenses=$total_soldes=0;
+			$total_recettes = $total_depenses = $total_soldes = 0;
 			//TABLEAU EXPLOITATION
 			if ($id_destination!=0) {
 				$intitule_destination_bilan = $intitule_destinations[$id_destination];
@@ -157,8 +151,7 @@ function exec_bilan()
 		}
 		if ($plan)
 			bilan_encaisse();
-		fin_cadre_relief();
-		echo fin_page_association();
+		fin_page_association();
 	}
 }
 

@@ -10,41 +10,32 @@
 \***************************************************************************/
 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
-	
-include_spip('inc/presentation');
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
+
 include_spip ('inc/navigation_modules');
-	
-function exec_edit_ressource(){
-		
-	include_spip('inc/autoriser');
+
+function exec_edit_ressource()
+{
 	if (!autoriser('associer', 'ressources')) {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
 		$id_ressource = intval(_request('id'));
-
-		$url_action_ressources=generer_url_ecrire('action_ressources');
-		
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:ressources_titre_edition_ressources')) ;
 		association_onglets(_T('asso:titre_onglet_prets'));
-		
-		echo debut_gauche("",true);
-		
-		echo debut_boite_info(true);
-		echo '<p>', _T('asso:gestion_des_emprunts_et_des_prets') . '</p>';
+		// INTRO : resume ressource
+		$infos['ressource_pretee'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_prets', "id_ressource=$id_ressource"), ));
+		echo totauxinfos_intro(sql_getfetsel('intitule', 'spip_asso_ressources', "id_ressource=$id_ressource" ), 'ressource', $id_ressource, $infos );
+		// datation
+		echo association_date_du_jour();
 		echo fin_boite_info(true);
-	
 		echo association_retour();
-		
-		echo debut_droite("",true);
-	
-		echo recuperer_fond("prive/editer/editer_asso_ressources", array (
+		debut_cadre_association(($id_ressource?'pret1.gif':'ajout_don.png'), 'ressources_titre_edition_ressources');
+		echo recuperer_fond('prive/editer/editer_asso_ressources', array (
 			'id_ressource' => $id_ressource
 		));
-
-		echo fin_page_association();
+		fin_page_association();
 	}
 }
+
 ?>

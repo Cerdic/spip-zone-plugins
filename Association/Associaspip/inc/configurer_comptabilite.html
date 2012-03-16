@@ -1,4 +1,4 @@
-[(#REM)<!-- Ces fonctionnalites ne sont possibles que si le plugin "ComptaSPIP" est active... -->]
+[(#REM)<!-- Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" est active... -->]
 			<li class="fieldset">
 				<!-- Options du plugin: gestion comptable -->
 				<fieldset>
@@ -7,20 +7,20 @@
 					<ul>
 						<li>
 							<div class="choix">
-								<input type="checkbox" name="plan_comptable_prerenseigne" [(#ENV{plan_comptable_prerenseigne}|=={on}|?{checked="checked"})] id="plan_comptable_prerenseigne" />
+								<input type="checkbox" name="plan_comptable_prerenseigne" [(#ENV{plan_comptable_prerenseigne}|oui) checked="checked"] id="plan_comptable_prerenseigne" />
 								<label for="plan_comptable_prerenseigne"><:asso:config_plan_comptable_prerenseigne:></label>
 							</div>
 						</li>
 					<B_classe_banques>
 						<li class="editer_comptes">
 							<div class="choix">
-								<input name= "comptes" [(#ENV{comptes}|=={on}|?{checked="checked"})] id="comptes" type="checkbox"/>
+								<input name= "comptes" [(#ENV{comptes}|oui) checked="checked"] id="comptes" type="checkbox"/>
 								<label for="comptes"><:asso:config_libelle_activer_comptes:></label>
 							</div>
 						</li>
 						<li class="editer_destinations">
 							<div class="choix">
-								<input type="checkbox" name="destinations" [(#ENV{destinations}|=={on}|?{checked="checked"})] id="destinations" />
+								<input type="checkbox" name="destinations" [(#ENV{destinations}|oui) checked="checked"] id="destinations" />
 								<label for="destinations"><:asso:config_libelle_destinations:></label>
 							</div>
 						</li>
@@ -29,7 +29,7 @@
 							<select name="classe_banques" id="classe_banques">
 								<option value=""><:asso:choisir_classe_compte:></option>
 					<BOUCLE_classe_banques(ASSO_PLAN){fusion classe}{par classe}>
-								<option value="#CLASSE" [(#ENV{classe_banques}|=={#CLASSE}|?{selected="selected"})]>#CLASSE [: (#VAL{classe_#CLASSE}|_T)]</option>
+								<option value="#CLASSE" [(#ENV{classe_banques}|=={#CLASSE}|oui) selected="selected"]>#CLASSE [: (#VAL{classe_#CLASSE}|_T)]</option>
 					</BOUCLE_classe_banques>
 							</select>
 						</li>
@@ -41,7 +41,7 @@
 								<option value="[(#ENV{classe_banques}|sinon{5})81]"><:asso:choisir_ref_compte:></option>
 								<optgroup label="#ENV{classe_banques} [: (#VAL{classe_#ENV{classe_banques}}|_T)]">
 						<BOUCLE_pc_virements(ASSO_PLAN){classe=#ENV{classe_banques}}{par code}>
-									<option value="#CODE" [(#ENV{pc_intravirements}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE</option>
+									<option value="#CODE" [(#ENV{pc_intravirements}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
 						</BOUCLE_pc_virements>
 								</optgroup>
 							</select>
@@ -55,7 +55,7 @@
 							<select name="classe_charges" id="classe_charges">
 								<option value=""><:asso:choisir_classe_compte:></option>
 						<BOUCLE_classe_charges(ASSO_PLAN){fusion classe}{par classe}>
-								<option value="#CLASSE" [(#ENV{classe_charges}|=={#CLASSE}|?{selected="selected"})]>#CLASSE [: (#VAL{classe_#CLASSE}|_T)]</option>
+								<option value="#CLASSE" [(#ENV{classe_charges}|=={#CLASSE}|oui) selected="selected"]>#CLASSE [: (#VAL{classe_#CLASSE}|_T)]</option>
 						</BOUCLE_classe_charges>
 							</select>
 						</li>
@@ -65,7 +65,7 @@
 							<select name="classe_produits" id="classe_produits">
 								<option value=""><:asso:choisir_classe_compte:></option>
 						<BOUCLE_classe_produits(ASSO_PLAN){fusion classe}{par classe}>
-								<option value="#CLASSE" [(#ENV{classe_produits}|=={#CLASSE}|?{selected="selected"})]>#CLASSE [: (#VAL{classe_#CLASSE}|_T)]</option>
+								<option value="#CLASSE" [(#ENV{classe_produits}|=={#CLASSE}|oui) selected="selected"]>#CLASSE [: (#VAL{classe_#CLASSE}|_T)]</option>
 						</BOUCLE_classe_produits>
 							</select>
 						</li>
@@ -75,7 +75,7 @@
 							<select name="classe_contributions_volontaires" id="classe_contributions_volontaires">
 								<option value=""><:asso:choisir_classe_compte:></option>
 						<BOUCLE_classe_contributions_volontaires(ASSO_PLAN){fusion classe}{par classe}>
-								<option value="#CLASSE" [(#ENV{classe_contributions_volontaires}|=={#CLASSE}|?{selected="selected"})]>#CLASSE [: (#VAL{classe_#CLASSE}|_T)]</option>
+								<option value="#CLASSE" [(#ENV{classe_contributions_volontaires}|=={#CLASSE}|oui) selected="selected"]>#CLASSE [: (#VAL{classe_#CLASSE}|_T)]</option>
 						</BOUCLE_classe_contributions_volontaires>
 							</select>
 						</li>
@@ -114,7 +114,7 @@
 							<select name="dc_cotisations" id="dc_cotisations">
 								<option value=""><:asso:choisir_dest_compte:></option>
 						<BOUCLE_dc_cotisations(ASSO_DESTINATION){par intitule}>
-								<option value="#ID_DESTINATION" [(#ENV{dc_cotisations}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
+								<option value="#ID_DESTINATION" [(#ENV{dc_cotisations}|=={#ID_DESTINATION}|oui) selected="selected"]>#INTITULE</option>
 						</BOUCLE_dc_cotisations>
 							</select>
 						</B_dc_cotisations>
@@ -134,15 +134,22 @@
 				<fieldset>
 					<h3 class="legend"><:asso:config_libelle_dons:></h3>
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{dons})</span>]
+				<B_module_dons>
 					<ul>
-					<B_classeSelect_dons>
 						<li class="editer_dons">
 							<div class="choix">
-								[<span class="erreur_message">(#ENV{comptes}|!={on}|oui)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
-								<input type="checkbox" name="dons" [(#ENV{dons}|=={on}|?{checked="checked"})] id="dons" />
+								[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
+								<input type="checkbox" name="dons" [(#ENV{dons}|oui) checked="checked"] id="dons" />
 								<label for="dons"><:asso:config_libelle_activer_dons:></label>
 							</div>
 						</li>
+					</ul>
+				<BOUCLE_module_dons(ASSO_PLAN){active=1}>
+				</BOUCLE_module_dons>
+					<fieldset>
+						<legend>Don financiers</legend>
+					<ul>
+					<B_classeSelect_dons>
 						<li class="editer_pc_dons">
 							<label for="pc_dons"><:asso:config_libelle_num_pc:></label>
 							<select name="pc_dons" id="pc_dons">
@@ -162,35 +169,64 @@
 							<select name="dc_dons" id="dc_dons">
 								<option value=""><:asso:choisir_dest_compte:></option>
 						<BOUCLE_dc_dons(ASSO_DESTINATION){par intitule}>
-								<option value="#ID_DESTINATION" [(#ENV{dc_dons}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
+								<option value="#ID_DESTINATION" [(#ENV{dc_dons}|=={#ID_DESTINATION}|oui) selected="selected"]>#INTITULE</option>
 						</BOUCLE_dc_dons>
 							</select>
 						</B_dc_dons>
 							<span class="spip_form_erreur"><:asso:erreur_pas_de_destination:></span>
 						<//B_dc_dons>
 						</li>
-					</B_classeSelect_dons>
+					</B_classeSelect_ventes>
+					</ul>
+					</fieldset>
+					<fieldset>
+						<legend>Dons en nature</legend>
+					<ul>
+					<B_classeSelect_colis>
+						<li class="editer_pc_colis">
+							<label for="pc_colis"><:asso:config_libelle_num_pc:></label>
+							<select name="pc_colis" id="pc_colis">
+								<option value=""><:asso:choisir_ref_compte:></option>
+					<BOUCLE_classeSelect_colis(ASSO_PLAN){active=1}{fusion classe}{par classe}>
+								<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
+						<BOUCLE_pc_colis(ASSO_PLAN){classe}{active}{par code}>
+									<option value="#CODE" [(#ENV{pc_colis}|=={#CODE}|oui)selected="selected"]>#CODE - #INTITULE</option>
+						</BOUCLE_pc_colis>
+								</optgroup>
+					</BOUCLE_classeSelect_colis>
+							</select>
+						</li>
+					</ul>
+					</fieldset>
+				</B_module_dons>
+					<ul>
 						<li class="erreur">
 							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
 						</li>
-					<//B_classeSelect_dons>
 					</ul>
-				</fieldset>
+				<//B_module_dons>
 			</li>
 			<li class="fieldset">
 				<!-- Options du plugin: gestion des ventes -->
 				<fieldset>
 					<h3 class="legend"><:asso:config_libelle_ventes:></h3>
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{ventes})</span>]
+				<B_module_ventes>
 					<ul>
-					<B_classeSelect_ventes>
 						<li class="editer_ventes">
 							<div class="choix">
-								[<span class="erreur_message">(#ENV{comptes}|!={on}|oui)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
-								<input type="checkbox" name="ventes" [(#ENV{ventes}|=={on}|?{checked="checked"})] id="ventes" />
+								[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
+								<input type="checkbox" name="ventes" [(#ENV{ventes}|oui) checked="checked"] id="ventes" />
 								<label for="ventes"><:asso:config_libelle_activer_ventes:></label>
 							</div>
 						</li>
+					</ul>
+				<BOUCLE_module_ventes(ASSO_PLAN){active=1}>
+				</BOUCLE_module_ventes>
+					<fieldset>
+						<legend>Produits</legend>
+					<ul>
+					<B_classeSelect_ventes>
 						<li class="editer_pc_ventes">
 							<label for="pc_ventes"><:asso:config_libelle_num_pc:></label>
 							<select name="pc_ventes" id="pc_ventes">
@@ -198,24 +234,10 @@
 					<BOUCLE_classeSelect_ventes(ASSO_PLAN){active=1}{fusion classe}{par classe}>
 								<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
 						<BOUCLE_pc_ventes(ASSO_PLAN){classe}{active}{par code}>
-								<option value="#CODE" [(#ENV{pc_ventes}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE</option>
+								<option value="#CODE" [(#ENV{pc_ventes}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
 						</BOUCLE_pc_ventes>
 								</optgroup>
 					</BOUCLE_classeSelect_ventes>
-							</select>
-						</li>
-						<li class="editer_pc_frais_envoi">
-							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{frais_envoi})</span>]
-							<label for="pc_frais_envoi"><!--<:asso:config_libelle_num_pc:>&nbsp;--><:asso:config_libelle_frais_envoi:></label>
-							<select name="pc_frais_envoi" id="pc_frais_envoi">
-								<option value=""><:asso:choisir_ref_compte:></option>
-						<BOUCLE_classeSelect_frais(ASSO_PLAN){active=1}{fusion classe}{par classe}>
-								<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
-							<BOUCLE_pc_frais_envoi(ASSO_PLAN){classe}{active}{par code}>
-									<option value="#CODE" [(#ENV{pc_frais_envoi}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE</option>
-							</BOUCLE_pc_frais_envoi>
-								</optgroup>
-						</BOUCLE_classeSelect_frais>
 							</select>
 						</li>
 						<li class="editer_dc_ventes">
@@ -224,7 +246,7 @@
 							<select name="dc_ventes" id="dc_ventes">
 								<option value=""><:asso:choisir_dest_compte:></option>
 						<BOUCLE_dc_ventes(ASSO_DESTINATION){par intitule}>
-								<option value="#ID_DESTINATION" [(#ENV{dc_ventes}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
+								<option value="#ID_DESTINATION" [(#ENV{dc_ventes}|=={#ID_DESTINATION}|oui) selected="selected"]>#INTITULE</option>
 						</BOUCLE_dc_ventes>
 							</select>
 						</B_dc_ventes>
@@ -232,11 +254,36 @@
 						<//B_dc_ventes>
 						</li>
 					</B_classeSelect_ventes>
+					</ul>
+					</fieldset>
+					<fieldset>
+						<legend><:asso:config_libelle_frais_envoi:></legend>
+					<ul>
+					<B_classeSelect_frais>
+						<li class="editer_pc_frais_envoi">
+							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{frais_envoi})</span>]
+							<label for="pc_frais_envoi"><:asso:config_libelle_num_pc:>&nbsp;</label>
+							<select name="pc_frais_envoi" id="pc_frais_envoi">
+								<option value=""><:asso:choisir_ref_compte:></option>
+						<BOUCLE_classeSelect_frais(ASSO_PLAN){active=1}{fusion classe}{par classe}>
+								<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
+							<BOUCLE_pc_frais_envoi(ASSO_PLAN){classe}{active}{par code}>
+									<option value="#CODE" [(#ENV{pc_frais_envoi}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
+							</BOUCLE_pc_frais_envoi>
+								</optgroup>
+						</BOUCLE_classeSelect_frais>
+							</select>
+						</li>
+					</B_classeSelect_ventes>
+					</ul>
+					</fieldset>
+				</B_module_ventes>
+					<ul>
 						<li class="erreur">
 							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
 						</li>
-					<//B_classeSelect_ventes>
 					</ul>
+				<//B_module_ventes>
 				</fieldset>
 			</li>
 			<li class="fieldset">
@@ -249,8 +296,8 @@
 						<li class="editer_activites">
 						[(#PLUGIN{agenda}|?{
 							<div class="choix">
-								[<span class="erreur_message">(#ENV{comptes}|!={on}|oui)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
-								<input type="checkbox" name="activites" [(#ENV{activites}|=={on}|?{checked="checked"})] id="activites" />
+								[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
+								<input type="checkbox" name="activites" [(#ENV{activites}|oui) checked="checked"] id="activites" />
 								<label for="activites"><:asso:config_libelle_activer_activites:></label>
 							</div>
 						,
@@ -265,27 +312,25 @@
 					<BOUCLE_classeSelect_activites(ASSO_PLAN){active=1}{fusion classe}{par classe}>
 								<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
 						<BOUCLE_pc_activites(ASSO_PLAN){classe}{active}{par code}>
-								<option value="#CODE" [(#ENV{pc_activites}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE</option>
+								<option value="#CODE" [(#ENV{pc_activites}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
 						</BOUCLE_pc_activites>
 								</optgroup>
 					</BOUCLE_classeSelect_activites>
 							</select>
 						</li>
-						<!--
 						<li class="editer_dc_activites">
 							<label for="dc_activites"><:asso:config_libelle_num_dc:></label>
 						<B_dc_activites>
 							<select name="dc_activites" id="dc_activites">
 								<option value=""><:asso:choisir_dest_compte:></option>
 						<BOUCLE_dc_activites(ASSO_DESTINATION){par intitule}>
-								<option value="#ID_DESTINATION" [(#ENV{dc_activites}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
+								<option value="#ID_DESTINATION" [(#ENV{dc_activites}|=={#ID_DESTINATION}|oui) selected="selected"]>#INTITULE</option>
 						</BOUCLE_dc_activites>
 							</select>
 						</B_dc_activites>
 							<span class="spip_form_erreur"><:asso:erreur_pas_de_destination:></span>
 						<//B_dc_activites>
 						</li>
-						-->
 					</B_classeSelect_activites>
 						<li class="erreur">
 							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
@@ -299,15 +344,55 @@
 				<fieldset>
 					<h3 class="legend"><:asso:config_libelle_prets:></h3>
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{prets})</span>]
+				<B_module_prets>
 					<ul>
-					<B_classeSelect_prets>
 						<li class="editer_prets">
 							<div class="choix">
-								[<span class="erreur_message">(#ENV{comptes}|!={on}|oui)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
-								<input type="checkbox" name="prets" [(#ENV{prets}|=={on}|?{checked="checked"})] id="prets" />
+								[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
+								<input type="checkbox" name="prets" [(#ENV{prets}|oui) checked="checked"] id="prets" />
 								<label for="prets"><:asso:config_libelle_activer_prets:></label><br />
 							</div>
 						</li>
+					</ul>
+				<BOUCLE_module_prets(ASSO_PLAN){active=1}>
+				</BOUCLE_module_prets>
+					<fieldset>
+						<legend>Acquisition</legend>
+					<ul>
+					<B_classeSelect_ressources>
+						<li class="editer_pc_ressources">
+							<label for="pc_ressources"><:asso:config_libelle_num_pc:></label>
+							<select name="pc_ressources" id="pc_ressources">
+								<option value=""><:asso:choisir_ref_compte:></option>
+					<BOUCLE_classeSelect_ressources(ASSO_PLAN){active=1}{fusion classe}{par classe}>
+								<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
+						<BOUCLE_pc_ressources(ASSO_PLAN){classe}{active}{par code}>
+								<option value="#CODE" [(#ENV{pc_ressources}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
+						</BOUCLE_pc_ressources>
+								</optgroup>
+					</BOUCLE_classeSelect_ressources>
+							</select>
+						</li>
+						<li class="editer_dc_ressources">
+							<label for="dc_prets"><:asso:config_libelle_num_dc:></label>
+						<B_dc_ressources>
+							<select name="dc_ressources" id="dc_ressources">
+								<option value=""><:asso:choisir_dest_compte:></option>
+						<BOUCLE_dc_ressources(ASSO_DESTINATION){par intitule}>
+								<option value="#ID_DESTINATION" [(#ENV{dc_ressources}|=={#ID_DESTINATION}|oui) selected="selected"]>#INTITULE</option>
+						</BOUCLE_dc_ressources>
+							</select>
+						</B_dc_ressources>
+							<span class="spip_form_erreur"><:asso:erreur_pas_de_destination:></span>
+						<//B_dc_ressources>
+						</li>
+					</B_classeSelect_ressources>
+					</ul>
+					</fieldset>
+					<fieldset>
+						<legend>Location</legend>
+					<ul>
+					<B_classeSelect_prets>
 						<li class="editer_pc_prets">
 							<label for="pc_prets"><:asso:config_libelle_num_pc:></label>
 							<select name="pc_prets" id="pc_prets">
@@ -315,7 +400,7 @@
 					<BOUCLE_classeSelect_prets(ASSO_PLAN){active=1}{fusion classe}{par classe}>
 								<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
 						<BOUCLE_pc_prets(ASSO_PLAN){classe}{active}{par code}>
-								<option value="#CODE" [(#ENV{pc_prets}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE</option>
+								<option value="#CODE" [(#ENV{pc_prets}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
 						</BOUCLE_pc_prets>
 								</optgroup>
 					</BOUCLE_classeSelect_prets>
@@ -327,18 +412,26 @@
 							<select name="dc_prets" id="dc_prets">
 								<option value=""><:asso:choisir_dest_compte:></option>
 						<BOUCLE_dc_prets(ASSO_DESTINATION){par intitule}>
-								<option value="#ID_DESTINATION" [(#ENV{dc_prets}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
+								<option value="#ID_DESTINATION" [(#ENV{dc_prets}|=={#ID_DESTINATION}|oui) selected="selected"]>#INTITULE</option>
 						</BOUCLE_dc_prets>
 							</select>
 						</B_dc_prets>
 							<span class="spip_form_erreur"><:asso:erreur_pas_de_destination:></span>
 						<//B_dc_prets>
 						</li>
+						<li class="prets_courtes_durees">
+							<label for="prets_courtes_durees"><:asso:config_libelle_prets_courts:></label>
+							<input name="prets_courtes_durees" id="prets_courtes_durees" type="checkbox" [(#ENV{prets_longues_durees}|oui) checked="checked"] />
+						</li>
 					</B_classeSelect_prets>
+					</ul>
+					</fieldset>
+				</B_module_prets>
+					<ul>
 						<li class="erreur">
 							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
 						</li>
-					<//B_classeSelect_prets>
 					</ul>
+				<//B_module_prets>
 				</fieldset>
 			</li>

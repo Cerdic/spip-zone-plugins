@@ -10,42 +10,28 @@
 \***************************************************************************/
 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
 
-	include_spip('inc/presentation');
-	include_spip ('inc/navigation_modules');
+include_spip ('inc/navigation_modules');
 
-function exec_action_destination(){
-
-	include_spip('inc/autoriser');
+function exec_action_destination()
+{
 	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-
-		$id_destination=intval(_request('id'));
-		$intitule=$_POST['intitule'];
-		$commentaire=$_POST['commentaire'];
-
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
-		association_onglets();
-
-		echo debut_gauche('',true);
-
-		echo debut_boite_info(true);
+		$id_destination = intval(_request('id'));
+		association_onglets(_T('asso:plan_comptable'));
+		// INTRO :
+		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_destination_op',"id_destination=$id_destination")) );
+		echo totauxinfos_intro(sql_getfetsel('intitule','spip_asso_destination',"id_destination=$id_destination"), 'destination', $id_destination, $infos );
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
 		echo association_retour();
-		echo debut_droite('',true);
-
-		debut_cadre_relief('', false, '', $titre = _T('asso:suppression_de_destination'));
-		echo '<p><strong>' . _T('asso:vous_vous_appretez_a_effacer_la_destination').$id_destination.'</strong></p>';
-
-		$res .= '<p style="float:right;"><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" /></p>';
-		echo redirige_action_post('supprimer_destinations', $id_destination, 'destination', '', $res);
-		fin_cadre_relief();
-		echo fin_page_association();
+		debut_cadre_association('EuroOff.gif', 'suppression_de_destination');
+		bloc_confirmer_suppression('destination',$id_destination);
+		fin_page_association();
 	}
 }
 

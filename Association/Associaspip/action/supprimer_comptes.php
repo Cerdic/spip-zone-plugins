@@ -17,7 +17,8 @@ function action_supprimer_comptes()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_compte = $securiser_action();
-	association_supprimer_operation_comptable($id_compte);
+	include_spip ('inc/association_comptabilite');
+	association_supprimer_operation_comptable1($id_compte);
 }
 
 ?>

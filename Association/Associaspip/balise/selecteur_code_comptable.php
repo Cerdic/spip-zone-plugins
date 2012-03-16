@@ -9,26 +9,29 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
+
 /* Cette balise affiche un selecteur de code de reference comptable utilisant le plan comptable francais */
 /* Le selecteur n'est affiche que si la meta plan_comptable_prerenseigne est activee dans la configuration du pluging */
 /* Lorsque la valeur du selecteur change, on va remplir(jQuery) les champs code et intitule qui sont presents sur la page */
-/* ou est insere la balise */
-if (!defined("_ECRIRE_INC_VERSION")) return;
+/* ou est inseree la balise */
 
-function balise_SELECTEUR_CODE_COMPTABLE_dist ($p) {
+function balise_SELECTEUR_CODE_COMPTABLE_dist ($p)
+{
 	/* on recupere dans l'environement le code qui doit donc etre assignees par la fonction charger du formulaire contenant la balise */
 	  return calculer_balise_dynamique($p, 'SELECTEUR_CODE_COMPTABLE', array('code'));
 }
 
-function balise_SELECTEUR_CODE_COMPTABLE_dyn($code) {
-		
+function balise_SELECTEUR_CODE_COMPTABLE_dyn($code)
+{
 	/* si la meta est activee on renvoit le selecteur */
 	if ($GLOBALS['association_metas']['plan_comptable_prerenseigne']) {
 	include_spip('inc/association_plan_comptable');
 		$pcc = association_plan_comptable_complet(); /* on recupere tout le plan comptable dans un tableau */
 		/* pour afficher le code commencant comme celui existant si ce dernier n'est pas dans le plan comptable */
 		if ($code != '') $code = association_plan_comptable_complet($code, true); /* avec un second parametre a true, la fonction renvoie le code lui meme si il est present dans le tableau ou le premier code hierarchiquement superieur present */
-		
+
 		/* code javascript en dur qui recopie l'intitule et le code dans les champs d'editions sur la page d'edition de la reference */
 		$res = '<select id="selecteur_code_comptable" class="formo" onchange="var currentVal=String(document.getElementById(\'selecteur_code_comptable\').value).split(\'-\'); document.getElementById(\'code\').value=currentVal[0]; document.getElementById(\'intitule\').value=currentVal[1];">';
 		$firstOptgroup = true;
@@ -49,4 +52,5 @@ function balise_SELECTEUR_CODE_COMPTABLE_dyn($code) {
 	}
 
 }
+
 ?>

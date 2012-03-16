@@ -13,23 +13,17 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
 
 function exec_action_prets()
 {
-	include_spip('inc/autoriser');
 	if (!autoriser('associer', 'activites')) {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
 		$id_pret = intval(_request('id_pret'));
 		$id_ressource = intval(_request('id_ressource'));
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:prets_titre_suppression_prets')) ;
-		association_onglets();
-		echo debut_gauche('',true);
-		echo debut_boite_info(true);
+		association_onglets(_T('asso:titre_onglet_prets'));
 		$data = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
 		$infos['ressources_libelle_code'] = $data['code'];
 		if (is_numeric($data['statut'])) { /* utilisation des 3 nouveaux statuts numeriques (gestion de quantites/exemplaires) */
@@ -69,13 +63,9 @@ function exec_action_prets()
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
 		echo association_retour();
-		echo debut_droite('',true);
-		echo debut_cadre_relief('', true, '', $titre = _T('asso:prets_titre_suppression_prets'));
-		echo '<p><strong>'._T('asso:prets_danger_suppression',array('id_pret' => $id_pret)).'</strong></p>';
-		$res = '<p class="boutons"><input type="submit" value="'._T('asso:bouton_confirmer').'" /></p>';
-		echo redirige_action_post('supprimer_prets', "$id_pret-$id_ressource", 'prets', '', $res);
-		echo fin_cadre_relief(true);
-		echo fin_page_association();
+		debut_cadre_association('pret1.gif', 'prets_titre_suppression_prets');
+		echo bloc_confirmer_suppression('pret', "$id_pret-$id_ressource");
+		fin_page_association();
 	}
 }
 

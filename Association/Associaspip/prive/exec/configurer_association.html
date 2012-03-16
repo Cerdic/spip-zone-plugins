@@ -1,16 +1,17 @@
 [(#AUTORISER{configurer})
 
 <!--#hierarchie-->
-#SET{titre, asso:titre_page_config}
-#ONGLETS_ASSOCIATION{#GET{titre}|_T}
+#ONGLETS_ASSOCIATION{}
 <!--/#hierarchie-->
 
 <!--#navigation-->
 <div class="cadre cadre-info">
     <div class="cadre_padding">
         <div><:asso:association_info_doc:></div>
-        [(#SET{aujourdhui,[(#DATE|affdate)] })]
-        <:asso:date_du_jour{date=#GET{aujourdhui}}:>
+        <p class="date" title="[(#DATE)]">
+            [(#SET{aujourdhui,[(#DATE|affdate_jourcourt)] })]
+            <:asso:date_du_jour{date=#GET{aujourdhui}}:>
+        </p>
     </div>
 </div>
 <!--/#navigation-->
@@ -48,7 +49,7 @@
     <img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/assoc_qui.png}" />
     <div class="titrem impliable" id="dhtns">
         <a class="titremancre" href="#"></a>
-        &nbsp;
+        <:asso:titre_page_config:>
     </div>
     <div class="cadre-padding">
         #CONFIGURER_METAS{configurer_association}

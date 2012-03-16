@@ -29,7 +29,7 @@ define('_DIR_PLUGIN_ASSOCIATION_ICONES', _DIR_PLUGIN_ASSOCIATION.'img_pack/');
 // gros lien=bouton+texte de raccourci dans la colonne gauche/droite
 function association_icone($texte, $lien, $image, $sup='rien.gif')
 {
-	return icone_horizontale($texte, $lien, _DIR_PLUGIN_ASSOCIATION_ICONES. $image, $sup, false);
+	return icone_horizontale(_T("asso:$texte"), $lien, _DIR_PLUGIN_ASSOCIATION_ICONES. $image, $sup, false);
 }
 
 // boutons d'action (si page de script indiquee) dans les listing
@@ -43,10 +43,38 @@ function association_bouton($texte, $image, $script='', $args='', $img_attribute
 	return $res;
 }
 
+// cas des boutons de vue non modifiable ou apercu dans les listing
+function association_bouton_afficher($objet, $args='', $tag='td')
+{
+	$res = ($tag?"<$tag class='action'>":'');
+	$res .= association_bouton('bouton_voir', 'voir-12.png', "voir_$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#x2380;"');
+	$res .= ($tag?"</$tag>":'');
+	return $res;
+}
+
+// cas des boutons d'edition (modification) dans les listing
+function association_bouton_modifier($objet, $args='', $tag='td')
+{
+	$res = ($tag?"<$tag class='action'>":'');
+	$res .= association_bouton('bouton_modifier', 'edit-12.gif', "edit_$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#x2380;"');
+	$res .= ($tag?"</$tag>":'');
+	return $res;
+}
+
+// cas des boutons d'effacement (suppression) dans les listing
+// ToDo: voir s'il est possible d'utiliser plutot la fonction bouton_action($libelle, $url, $class="", $confirm="", $title="") definie dans /ecrire/inc/filtres.php
+function association_bouton_supprimer($objet, $args='', $tag='td')
+{
+	$res = ($tag?"<$tag class='action'>":'');
+	$res .= association_bouton('bouton_supprimer', 'poubelle-12.gif', "action_$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#x2327;"'); // 8 pluriel contre 3 singulier
+	$res .= ($tag?"</$tag>":'');
+	return $res;
+}
+
 // bloc de raccourci constitue uniquement du bouton retour
 function association_retour($adresse_retour='')
 {
-	return bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  ($adresse_retour=='')?str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']):$adresse_retour, 'retour-24.png'));
+	return bloc_des_raccourcis(association_icone('bouton_retour',  ($adresse_retour=='')?str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']):$adresse_retour, 'retour-24.png'));
 }
 
 function request_statut_interne()
@@ -74,26 +102,33 @@ function association_ajouterBoutons($boutons_admin)
 			$menu = 'bando_reactions';
 			$icone = 'annonce.gif';
 		}
-		$boutons_admin[$menu]->sousmenu['association']= new Bouton(
+		$boutons_admin[$menu]->sousmenu['association'] = new Bouton(
 			_DIR_PLUGIN_ASSOCIATION_ICONES.$icone,  // icone
 			_T('asso:titre_menu_gestion_association') //titre
-			);
+		);
 	}
 	return $boutons_admin;
 }
 
-// recupere dans une chaine un champ d'une table spip_asso_XX pour un enregistrement identifie par son id_XX
+// demande de confirmation dans
+function bloc_confirmer_suppression($type,$id,$retour='')
+{
+	$res = '<p><strong>'. _T('asso:vous_aller_effacer', array('quoi'=>'<i>'._T('asso:objet_num',array('objet'=>$type,'num'=>$id)).'</i>') ) .'</strong></p>';
+	$res .= '<p class="boutons"><input type="submit" value="'._T('asso:bouton_confirmer').'" /></p>';
+	echo redirige_action_post("supprimer_{$type}s", $id, ($retour?$retour:$type.'s'), '', $res);
+
+}
+
+// recupere dans une chaine un champ d'une table spip_asso_XXs pour un enregistrement identifie par son id_XX
 function sql_asso1champ($table, $id, $champ)
 {
-	$data = sql_fetsel($champ, "spip_asso_{$table}s", "id_$table=".intval($id));
-	return $data[$champ];
+	return sql_getfetsel($champ, "spip_asso_{$table}s", "id_$table=".intval($id));
 }
 
 // recupere dans un tableau associatif un enregistrement d'une table spip_asso_XX identifie par son id_XX
 function sql_asso1ligne($table, $id)
 {
-	$data = sql_fetsel('*', "spip_asso_{$table}s", "id_$table=".intval($id));
-	return $data;
+	return sql_fetsel('*', "spip_asso_{$table}s", "id_$table=".intval($id));
 }
 
 # ensemble de fonctions pour recuperer les donnees de l'exercice en cours
@@ -168,7 +203,7 @@ function association_verifier_date($date)
 	list($annee, $mois, $jour) = explode('-',$date);
 	if (!checkdate($mois, $jour, $annee))
 		return _T('asso:erreur_valeur_date', array('date'=>$date) );
-	return FALSE;
+//	return FALSE;
 }
 
 // Affichage de duree localisee et micro-formatee
@@ -433,8 +468,8 @@ function association_verifier_montant($valeur)
 {
 	if (association_recupere_montant($valeur)<0)
 		return _T('asso:erreur_montant');
-	else
-		return FALSE;
+//	else
+//		return FALSE;
 }
 
 /* s'assurer que l'entier saisie correspond bien a un id_auteur de la table spip_asso_membres (par defaut) ou spip_auteurs (si on elargi a tous les autteurs --ceci permet d'editer des membres effaces tant qu'ils sont references par SPIP) */
@@ -518,6 +553,20 @@ function generer_url_vente($id, $param='', $ancre='') {
 	return  array('asso_vente', $id);
 }
 
+function generer_url_asso_ressource($id, $param='', $ancre='') {
+	return  generer_url_ecrire('edit_ressource', 'id='.intval($id));
+}
+function generer_url_ressource($id, $param='', $ancre='') {
+	return  array('asso_ressource', $id);
+}
+
+function generer_url_asso_activite($id, $param='', $ancre='') {
+	return  generer_url_ecrire('voir_activite', 'id='.intval($id));
+}
+function generer_url_activite($id, $param='', $ancre='') {
+	return  array('asso_activite', $id);
+}
+
 function instituer_adherent_ici($auteur=array()){
 	$instituer_adherent = charger_fonction('instituer_adherent', 'inc');
 	return $instituer_adherent($auteur);
@@ -527,15 +576,20 @@ function instituer_statut_interne_ici($auteur=array()){
 	return $instituer_statut_interne($auteur);
 }
 
-
+// bloc infos integral (colonne gauche)
+// Rem: une certaine similitude avec http://programmer.spip.org/boite_infos :)
 function bloc_infos($TitreObjet,$NumObjet,$DesLignes=array(),$PrefixeLangue='asso')
 {
 	$res = debut_boite_info(true);
-	$res .= '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'. _T("$PrefixeLangue:$NumObjet") .'<br /><span class="spip_xx-large">'.$NumObjet.'</span></div>';
-	if (count($DesLignes))
-		foreach ($DesLignes as $dt=>$dd) {
-			$res .= '<p>'. _T("$PrefixeLangue:$dt") .'&nbsp;: '. propre($dd) .'</p>';
+	$res .= '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'. _T("$PrefixeLangue:$TitreObjet") .'<br /><span class="spip_xx-large">'.$NumObjet.'</span></div>';
+	if (count($DesLignes)) {
+		$res .= '<div class="verdana1 spip_xx-small">';
+		foreach ($DesLignes as $p) {
+			$res .= propre($p); // propre() encadre dans P...
 		}
+		$res .= '</div>';
+	}
+	$res .= association_date_du_jour();
 	$res .= fin_boite_info(true);
 	return $res;
 }
@@ -550,20 +604,22 @@ function totauxinfos_intro($titre,$type='',$id=0,$DesLignes=array(),$PrefixeLang
 	}
 	$res .= '<div style="text-align: center" class="verdana1 spip_medium">'.$titre.'</div>';
 	if (count($DesLignes)) {
-		$res .= '<div class="verdana1 spip_xx-small">';
+		$res .= '<dl class="verdana1 spip_xx-small">';
 		foreach ($DesLignes as $dt=>$dd) {
-			$res .= '<p>'. _T("$PrefixeLangue:$dt") .'&nbsp;: '. propre($dd) .'</p>';
+			$res .= '<dt>'. _T("$PrefixeLangue:$dt") .'</dt><dd>'. propre($dd) .'</dd>'; // propre() encadre dans P...
 		}
-		$res .= '</div>';
+		$res .= '</dl>';
 	}
 	return $res;
 }
 
 // Tableau presentant les chiffres de synthese de la statistique descriptive dans le bloc infos
-// On prend en entree : la table du plugin sur laquelle va porter les statistique, un tableau de item de langue decrivant la ligne et liste des champs sur lesquels calcuer les statistiques, le critere de selection SQL des lignes
+// On prend en entree : la table du plugin sur laquelle va porter les statistique, un tableau de item de langue decrivant la ligne et liste des champs sur lesquels calcuer les statistiques, le critere de selection SQL des lignes (sinon toutes)
 // On renvoie pour chaque ligne : la moyenne arithmetique <http://fr.wikipedia.org/wiki/Moyenne#Moyenne_arithm.C3.A9tique> et  l'ecart-type <http://fr.wikipedia.org/wiki/Dispersion_statistique#.C3.89cart_type> ainsi que les extrema <http://fr.wikipedia.org/wiki/Crit%C3%A8res_de_position#Valeur_maximum_et_valeur_minimum> si on le desire (par defaut non car tableau debordant dans ce petit cadre)
-function totauxinfos_stats($legende='',$sql_table_asso,$sql_champs,$sql_criteres,$decimales_significatives=1,$avec_extrema=false)
+function totauxinfos_stats($legende='',$sql_table_asso,$sql_champs,$sql_criteres='1=1',$decimales_significatives=1,$avec_extrema=false)
 {
+	if (!is_array($sql_champ) || !$sql_table_asso)
+		return FALSE;
 	$res = '<table width="100%" class="asso_infos">';
 	$res .= '<caption>'. _T('asso:totaux_stats', array('de_par'=>$legende)) .'</caption><thead>';
 	$res .= '<tr class="row_first"> <th>&nbsp;</th>';
@@ -597,6 +653,8 @@ function totauxinfos_stats($legende='',$sql_table_asso,$sql_champs,$sql_criteres
 // On prend en entree deux tableaux de taille egale (non controlee) --respectivement pour les intitules/libelles et les effectifs/occurences-- qui sont indexes par la classe CSS associee (parce-qu'elle doit etre unique pour chaque ligne)
 function totauxinfos_effectifs($legende='',$table_textes,$table_nombres,$decimales_significatives=0)
 {
+	if (!is_array($table_textes) || !is_array($table_nombres) )
+		return FALSE;
 	$nombre = $nombre_total = 0;
 	$res = '<table width="100%" class="asso_infos">';
 	$res .= '<caption>'. _T('asso:totaux_nombres', array('de_par'=>$legende)) .'</caption><tbody>';

@@ -17,39 +17,36 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
 
 function exec_annexe()
 {
-	include_spip('inc/autoriser');
 	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
 		$plan = sql_countsel('spip_asso_plan');
-		$exercice= intval(_request('exercice'));
+		$exercice = intval(_request('exercice'));
 		if(!$exercice){
 			/* on recupere l'id_exercice dont la date "fin" est "la plus grande" */
 			$exercice = sql_getfetsel('id_exercice','spip_asso_exercices', '', '', 'fin DESC');
-			if(!$exercice) $exercice=0;
+			if(!$exercice)
+				$exercice = 0;
 		}
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(propre(_T('asso:titre_gestion_pour_association')), "", _DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg','rien.gif');
+		$exercice_data = sql_asso1ligne('exercice', $exercice);
 		association_onglets(_T('asso:titre_onglet_comptes'));
-		echo debut_gauche('',true);
-		echo debut_boite_info(true);
+		// INTRO : rappel de l'exercicee affichee
+		echo totauxinfos_intro($exercice_data['intitule'],'exercice',$exercice);
+		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
-		$res = association_icone(_T('asso:cpte_resultat_titre_general'),  generer_url_ecrire('compte_resultat', "exercice=$exercice"), 'finances.jpg')
-		. association_icone(_T('asso:bilan'), generer_url_ecrire('bilan', "exercice=$exercice"), 'finances.jpg');
-		$res .= association_icone(_T('asso:bouton_retour'),  generer_url_ecrire('comptes', "exercice=$exercice"), 'retour-24.png');
+		$res = association_icone('cpte_resultat_titre_general',  generer_url_ecrire('compte_resultat', "exercice=$exercice"), 'finances.jpg')
+		. association_icone('bilan', generer_url_ecrire('bilan', "exercice=$exercice"), 'finances.jpg');
+		$res .= association_icone('bouton_retour',  generer_url_ecrire('comptes', "exercice=$exercice"), 'retour-24.png');
 		echo bloc_des_raccourcis($res);
-		echo debut_droite('',true);
-		debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg', false, '', '&nbsp;' .propre( _T('asso:annexe_titre_general').' : '.exercice_intitule($exercice)));
+		debut_cadre_association('finances.jpg', 'annexe_titre_general', $exercice_data['intitule']);
 		echo _T('asso:non_implemente');
-		fin_cadre_relief();
-		echo fin_page_association();
+		fin_page_association();
 	}
 }
 

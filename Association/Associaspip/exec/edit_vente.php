@@ -9,49 +9,32 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
 
-include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
 include_spip ('inc/association_comptabilite');
 
-function exec_edit_vente() {
-
-	include_spip('inc/autoriser');
+function exec_edit_vente()
+{
 	if (!autoriser('associer', 'ventes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_vente= intval(_request('id'));
-
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page() ;
+		$id_vente = intval(_request('id'));
 		association_onglets(_T('asso:titre_onglet_ventes'));
-
-		echo debut_gauche('',true);
-
-		echo debut_boite_info(true);
-		if ($id_vente) {
-			echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:vente_entete_id').'<br />';
-			echo '<span class="spip_xx-large">';
-			echo $id_vente;
-			echo '</span></div>';
-		}
+		// info
+		echo totauxinfos_intro('', 'vente', $id_vente);
+		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
-
 		echo association_retour();
-
-		echo debut_droite('',true);
-
+		debut_cadre_association('ventes.gif', 'ressources_titre_mise_a_jour');
 		echo recuperer_fond('prive/editer/editer_asso_ventes', array (
 			'id_vente' => $id_vente
 		));
-
-		echo fin_page_association();
-
-
-
+		fin_page_association();
 	}
 }
+
 ?>

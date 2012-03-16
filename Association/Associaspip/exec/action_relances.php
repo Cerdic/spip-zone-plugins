@@ -13,29 +13,26 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-include_spip ('inc/presentation');
 include_spip ('inc/navigation_modules');
 include_spip ('inc/mail');
 //include_spip ('inc/charsets');
 
-function exec_action_relances(){
-
-	include_spip('inc/autoriser');
+function exec_action_relances()
+{
 	if (!autoriser('associer', 'comptes')) {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
-		association_onglets();
-		echo debut_gauche('',true);
-		echo debut_boite_info(true);
+		association_onglets(_T('asso:titre_onglet_membres'));
+		// notice ?
+		echo _T('asso:aide_relances'); //!\ il faut en rajouter
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
 		echo association_retour();
-		echo debut_droite('',true);
-		echo recuperer_fond("prive/editer/relance_adherents");
-		echo fin_page_association();
+		debut_cadre_association('ico_panier.png', 'relance_de_cotisations');
+		echo recuperer_fond('prive/editer/relance_adherents');
+		fin_page_association();
 	}
 }
+
 ?>

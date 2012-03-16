@@ -9,8 +9,10 @@
 <div class="cadre cadre-info">
     <div class="cadre_padding">
         <div><:asso:synchroniser_note:></div>
-        [(#SET{aujourdhui,[(#DATE|affdate)] })]
-        <:asso:date_du_jour{date=#GET{aujourdhui}}:>
+        <p class="date" title="[(#DATE)]">
+            [(#SET{aujourdhui,[(#DATE|affdate_jourcourt)] })]
+            <:asso:date_du_jour{date=#GET{aujourdhui}}:>
+        </p>
     </div>
 </div>
 <!--/#navigation-->

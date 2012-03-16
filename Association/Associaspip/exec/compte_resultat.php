@@ -15,59 +15,49 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('inc/presentation');
 include_spip('inc/navigation_modules');
 
 function exec_compte_resultat()
 {
-	include_spip('inc/autoriser');
 	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
 		$plan = sql_countsel('spip_asso_plan','active=1');
-		$exercice= intval(_request('exercice'));
+		$exercice = intval(_request('exercice'));
 		if(!$exercice){
 			/* on recupere l'id_exercice dont la date "fin" est "la plus grande" */
-			$exercice = sql_getfetsel("id_exercice","spip_asso_exercices", '', '',"fin DESC");
-			if(!$exercice) $exercice=0;
+			$exercice = sql_getfetsel('id_exercice', 'spip_asso_exercices', '', '', 'fin DESC');
+			if(!$exercice)
+				$exercice = 0;
 		}
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association'), "", _DIR_PLUGIN_ASSOCIATION_ICONES . 'finances.jpg', 'rien.gif');
+		$exercice_data = sql_asso1ligne('exercice', $exercice);
 		association_onglets(_T('asso:titre_onglet_comptes'));
-		echo debut_gauche('', true);
-		echo debut_boite_info(true);
+		// INTRO : rappel de l'exercicee affichee
+		echo totauxinfos_intro($exercice_data['intitule'],'exercice',$exercice);
+		// pas de sommes de synthes puisque tous les totaux sont dans la zone centrale ;-
+		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
-		$res = association_icone(_T('asso:bilan'), generer_url_ecrire('bilan', "exercice=$exercice"), 'finances.jpg');
-		$res .= association_icone(_T('asso:annexe_titre_general'), generer_url_ecrire('annexe', "exercice=$exercice"), 'finances.jpg');
-		$res .= association_icone(_T('asso:bouton_retour'),  generer_url_ecrire('comptes', "exercice=$exercice"), 'retour-24.png');
+		$res = association_icone('bilan', generer_url_ecrire('bilan', "exercice=$exercice"), 'finances.jpg');
+		$res .= association_icone('annexe_titre_general', generer_url_ecrire('annexe', "exercice=$exercice"), 'finances.jpg');
+		$res .= association_icone('bouton_retour'),  generer_url_ecrire('comptes', "exercice=$exercice"), 'retour-24.png');
 		echo bloc_des_raccourcis($res);
-		echo debut_droite('', true);
-		debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES . 'finances.jpg', false, '', '&nbsp;'.propre( _T('asso:cpte_resultat_titre_general').' : '.exercice_intitule($exercice)));
+		debut_cadre_association('finances.jpg', 'cpte_resultat_titre_general'), $exercice_data['intitule']);
 		if ($plan) {
 			$join = ' RIGHT JOIN spip_asso_plan ON imputation=code';
 			$sel = ', code, intitule, classe';
-			$where = ' date >= \''.exercice_date_debut($exercice).'\' AND date <= \''.exercice_date_fin($exercice).'\'';
+			$where = ' date >= \''.$exercice_data['debut'].'\' AND date <= \''.$exercice_data['fin'].'\'';
 			$having = 'classe = ';
 			$order = 'code';
 		} else {
 			$join = $sel = $where = $having = $order = '';
 		}
 		$var = @serialize(array($exercice, $join, $sel, $where, $having, $order));
-#		echo "<table width='100%' class='asso_tablo' id='asso_tablo_compte_resultat'>\n";
-#		echo '<tr><td>';
 		$depenses = compte_resultat_charges_produits($var, intval($GLOBALS['association_metas']['classe_charges']));
-#		echo '</td></tr>';
-#		echo '<tr><td>';
 		$recettes = compte_resultat_charges_produits($var, intval($GLOBALS['association_metas']['classe_produits']));
-#		echo '</td></tr>';
-#		echo '<tr><td>';
 		compte_resultat_benefice_perte($recettes, $depenses);
-#		echo '</td></tr>';
-#		echo '<tr><td>';
 		compte_resultat_benevolat($var, intval($GLOBALS['association_metas']['classe_contributions_volontaires']));
-#		echo '</td></tr></table>';
 		/* si plan on peut exporter en pdf, cs, xml, ..... */
 		if($plan){
 			echo "<br /><table width='100%' class='asso_tablo' cellspacing='6' id='asso_tablo_exports'>\n";
@@ -81,8 +71,7 @@ function exec_compte_resultat()
 			}
 			echo '</tr></tbody></table>';
 		}
-		fin_cadre_relief();
-		echo fin_page_association();
+		fin_page_association();
 	}
 }
 

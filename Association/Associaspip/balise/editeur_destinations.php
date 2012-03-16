@@ -17,9 +17,9 @@ include_spip('inc/association_comptabilite');
 function balise_EDITEUR_DESTINATIONS_dist ($p) {
 	/* on recupere dans l'environement id_dest,montant_dest, unique_dest et defaut_dest qui doivent donc etre assignees par la fonction charger du formulaire contenant la balise */
 	if ($GLOBALS['association_metas']['destinations'])
-		return calculer_balise_dynamique($p, 'EDITEUR_DESTINATIONS', array('id_dest', 'montant_dest', 'unique_dest', 'defaut_dest'));
+		return calculer_balise_dynamique($p, 'EDITEUR_DESTINATIONS', array('id_dest', 'montant_dest', 'unique_dest', 'defaut_dest') );
 	else
-		return false;
+		return '';
 }
 
 function balise_EDITEUR_DESTINATIONS_dyn($id_dest, $montant_dest, $unique_dest, $defaut_dest) {

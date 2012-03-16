@@ -55,7 +55,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entete_quantite' => 'Q<sup>t&eacute;</sup>',
 	'entete_statut' => 'Statut',
 	'entete_solde' => 'Solde',
-	'entete_tous' => 'Tous',
+	'entete_tous' => 'Tou(te)s',
+	'entete_utilise' => 'Utilis&eacute;(e)',
 	# Libelles communes
 	'libelle_commentaire' => 'Commentaire',
 	'libelle_duree' => 'Dur&eacute;e',
@@ -80,6 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_retour' => 'Retour',
 	'bouton_supprimer' => 'Supprimer',
 	'bouton_valider' => 'Valider',
+	'bouton_voir' => 'Voir',
 	# Mois (definis dans SPIP  sous leur nom complet) abregees  <http://fr.wikipedia.org/wiki/Mois#Abr.C3.A9viations>
 	'date_mois_1' => 'jan.',
 	'date_mois_2' => 'f&eacute;v.',
@@ -107,6 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'totaux_nombres' => 'Nombres Totaux @de_par@',
 	'totaux_nombres' => 'Effectif @de_par@',
 	'totaux_moyens' => 'Statistiques @de_par@',
+	'vous_aller_effacer' => 'Vous vous appretez &agrave; effacer : @quoi@',
 	'date_du_jour' => 'Nous sommes le @date@',
 	'date_du_jour_heure' => 'Nous sommes le @date@ et il est @time@',
 
@@ -561,22 +564,22 @@ Commentaire: @commentaire@
 	'prets_libelle_num_emprunteur' => 'N&deg; de l\'emprunteur',
 	'prets_libelle_commentaires' => 'Commentaires',
 	'prets_libelle_date_retour' => 'Date de retour',
-	'prets_libelle_mode_paiement' => 'Mode de paiement',
 
 # Exercices Budgetaires
+	# Titres
 	'exercices_budgetaires_titre' => 'Exercices Budg&eacute;taires',
 	'exercice_budgetaire_titre' => 'Exercice Budg&eacute;taire',
-	'ajouter_un_exercice' => 'Ajouter un exercice',
 	'tous_les_exercices' => 'Tous les exercices',
-	'exercice_intitule' => 'Intitul&eacute;',
-	'exercice_commentaire' => 'Commentaire',
-	'exercice_debut' => 'Date d&eacute;but',
-	'exercice_fin' => 'Date fin',
-	'exercice_debut_aaaa' => 'Date d&eacute;but (AAAA-MM-JJ)',
-	'exercice_fin_aaaa' => 'Date fin (AAAA-MM-JJ)',
-	'exercice_budgetaire_edition_titre' => 'Edition exercice budg&eacute;taire',
 	'exercice_budgetaire_supprime' => 'Suppression exercice budg&eacute;taire',
-	'vous_vous_appretez_a_effacer_exercice_budgetaire' => 'Vous vous appr&ecirc;tez &agrave; effacer l\'exercice budg&eacute;taire',
+	# Navigation
+	'ajouter_un_exercice' => 'Ajouter un exercice',
+	# En-tete
+	'exercice_entete_debut' => 'Date d&eacute;but',
+	'exercice_entete_fin' => 'Date fin',
+	# Libelle
+	'exercice_libelle_debut' => 'Date d&eacute;but (AAAA-MM-JJ)',
+	'exercice_libelle_fin' => 'Date fin (AAAA-MM-JJ)',
+	'exercice_budgetaire_edition_titre' => 'Edition exercice budg&eacute;taire',
 
 # Plan comptable
 	#Message
@@ -601,7 +604,6 @@ Commentaire: @commentaire@
 # Destination comptable
 	'ajouter_destination' => 'ajouter une destination',
 	'supprimer_destination' => 'supprimer',
-	'destination_entete_utilise' => 'Utilis&eacute;',
 	# Titres
 	'destination_comptable' => 'Destination comptable',
 # Bilan
@@ -732,8 +734,6 @@ Commentaire: @commentaire@
 	'marges_des_etiquettes' => 'Marge des &eacute;tiquettes',
 # Categories
 	# Categories : entetes
-	'categorie_entete_valeur' => 'Cat&eacute;gorie',
-	'categorie_entete_libelle' => 'Liblell&eacute; complet',
 	# Categories : liblelles
 	# Categories : messages
 	# Categories : titres

@@ -10,39 +10,31 @@
 \***************************************************************************/
 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
 
-function action_editer_asso_membres() {
-		
+function action_editer_asso_membres()
+{
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_auteur = $securiser_action();
-
-	include_spip('base/association');
-	include_spip('inc/modifier');
-
-	$categorie = _request('categorie');
-	$validite = _request('validite');
-	$commentaire = _request('commentaire');
-	$statut_interne = _request('statut_interne');
-	$sexe = _request('sexe');
-	$nom_famille = _request('nom_famille');
-	$prenom = _request('prenom');
-	$fonction = _request('fonction');
-	$id_asso = _request('id_asso');
-
-	$modifs = array("commentaire"=> $commentaire,
-					 "validite"=> $validite,
-					 "categorie"=> $categorie,
-					 "statut_interne"=> $statut_interne,
-					 "nom_famille" => $nom_famille,
-					 "fonction" => $fonction);
-
+	$modifs = array(
+		'commentaire' => _request('commentaire'),
+		'validite' => _request('validite'),
+		'categorie' => _request('categorie'),
+		'statut_interne' => _request('statut_interne'),
+		'nom_famille' => _request('nom_famille'),
+#		'fonction' => _request('fonction'),
+	);
 	/* pour ne pas ecraser les champs quand ils sont desactives */
-	if ($GLOBALS['association_metas']['civilite']=="on") $modifs["sexe"] = $sexe;
-	if ($GLOBALS['association_metas']['prenom']=="on") $modifs["prenom"] = $prenom;
-	if ($GLOBALS['association_metas']['id_asso']=="on") $modifs["id_asso"] = $id_asso;
-
+	if ($GLOBALS['association_metas']['civilite']=='on')
+		$modifs['sexe'] = _request('sexe');
+	if ($GLOBALS['association_metas']['prenom']=='on')
+		$modifs['prenom'] = _request('prenom');
+	if ($GLOBALS['association_metas']['id_asso']=='on')
+		$modifs['id_asso'] = _request('id_asso');
+	include_spip('base/association');
 	/* on passe par modifier_contenu pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere */
+	include_spip('inc/modifier');
 	modifier_contenu('asso_membre', $id_auteur, '', $modifs);
 
 	return (array($id_auteur,''));

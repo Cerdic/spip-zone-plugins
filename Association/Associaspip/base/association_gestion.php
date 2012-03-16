@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 include_spip('base/association');
 include_spip('base/abstract_sql');
 
-// desinstallation
+// desinstatllation
 function association_vider_tables($nom_meta, $table)
 {
 	// on efface la meta [association_meta][base_version] pour que la fonction qui gere la desinstallation ne voie plus le plugin et confirme sa desinstallation
@@ -97,44 +97,46 @@ function association_upgrade($meta, $courante, $table='meta')
 // Ce numero est fourni automatiquement par la fonction spip_plugin_install
 // lors de l'appel des fonctions de ce fichier.
 
-$GLOBALS['association_maj'][21] = array(array('sql_alter',"TABLE spip_asso_membres ADD publication text NOT NULL AFTER secteur"));
+$GLOBALS['association_maj'][21] = array(
+	array('sql_alter',"TABLE spip_asso_membres ADD publication TEXT NOT NULL "),
+);
 
 $GLOBALS['association_maj'][30] = array(
 	array('sql_drop_table', "spip_asso_bienfaiteurs"),
-	array('sql_drop_table', "spip_asso_financiers")
+	array('sql_drop_table', "spip_asso_financiers"),
 );
 
 $GLOBALS['association_maj'][40] = array(
-	array('sql_alter',"TABLE `spip_asso_comptes` ADD `valide` TEXT NOT NULL AFTER `id_journal` ")
+	array('sql_alter',"TABLE spip_asso_comptes ADD valide TEXT NOT NULL "),
 );
 
 $GLOBALS['association_maj'][50] = array(
-	array('sql_alter',"TABLE spip_asso_activites ADD membres TEXT NOT NULL AFTER accompagne, ADD non_membres TEXT NOT NULL AFTER membres ")
+	array('sql_alter',"TABLE spip_asso_activites ADD membres TEXT NOT NULL, ADD non_membres TEXT NOT NULL "),
 );
 
 $GLOBALS['association_maj'][60] = array(
-	array('sql_drop_table', "spip_asso_profil")
+	array('sql_drop_table', "spip_asso_profil"),
 );
 
 $GLOBALS['association_maj'][61] = array(
 	array('spip_query',"RENAME TABLE spip_asso_banques TO spip_asso_plan"),
-	array('sql_drop_table',"spip_asso_livres")
+	array('sql_drop_table',"spip_asso_livres"),
 );
 
 $GLOBALS['association_maj'][62] = array(
-	array('sql_alter',"TABLE spip_asso_plan ADD actif TEXT NOT NULL AFTER commentaires")
+	array('sql_alter',"TABLE spip_asso_plan ADD actif TEXT NOT NULL "),
 );
 
 $GLOBALS['association_maj'][63] = array(
-	array('sql_alter',"TABLE spip_asso_ventes ADD id_acheteur BIGINT(20) NOT NULL AFTER acheteur")
+	array('sql_alter',"TABLE spip_asso_ventes ADD id_acheteur BIGINT NOT NULL "),
 );
 
 function association_maj_64()
 {
 	if (_ASSOCIATION_AUTEURS_ELARGIS=='spip_auteurs_elargis') {
-		sql_alter("TABLE spip_auteurs_elargis ADD validite date NOT NULL default '0000-00-00'");
-		sql_alter("TABLE spip_auteurs_elargis ADD montant float NOT NULL default '0'");
-		sql_alter("TABLE spip_auteurs_elargis ADD date date NOT NULL default '0000-00-00' ");
+		sql_alter("TABLE spip_auteurs_elargis ADD validite DATE NOT NULL default '0000-00-00'");
+		sql_alter("TABLE spip_auteurs_elargis ADD montant FLOAT NOT NULL default '0'");
+		sql_alter("TABLE spip_auteurs_elargis ADD date DATE NOT NULL default '0000-00-00' ");
 	} else {
 		if (_ASSOCIATION_INSCRIPTION2) {
 			if (!$GLOBALS['association_maj_erreur'])
@@ -142,9 +144,11 @@ function association_maj_64()
 			return;
 		}
 		// Simulation provisoire
-		@sql_alter("TABLE spip_asso_membres ADD commentaire text NOT NULL default ''");
-		@sql_alter("TABLE spip_asso_membres ADD statut_interne text NOT NULL default '' ");
-		@sql_alter("TABLE spip_asso_membres CHANGE COLUMN nom nom_famille text DEFAULT '' NOT NULL");
+		sql_alter("TABLE spip_asso_membres ADD commentaire TEXT NOT NULL default ''");
+		sql_alter("TABLE spip_asso_membres ADD statut_interne TEXT NOT NULL default '' ");
+		sql_alter("TABLE spip_asso_membres ADD nom_famille TEXT DEFAULT '' NOT NULL ");
+		sql_update('spip_asso_membres', array('nom'=>'nom_famille'), "nom<>''" );
+		sql_alter("TABLE spip_asso_membres DROP nom");
 	}
 }
 $GLOBALS['association_maj'][64] = array(
@@ -152,13 +156,11 @@ $GLOBALS['association_maj'][64] = array(
 );
 
 // Recopie des metas geree par CFG dans la table asso_meta
-// Il faut charger a la main ses fichiers puisque plugin.xml ne le demande plus
 function association_maj_38192()
 {
 	if (sql_create('spip_asso_metas',
-		$GLOBALS['tables_auxiliaires']['spip_asso_metas']['field'],
-		$GLOBALS['tables_auxiliaires']['spip_asso_metas']['key'],
-		false, false)) {
+		$GLOBALS['tables_auxiliaires']['spip_asso_metas']['field'], $GLOBALS['tables_auxiliaires']['spip_asso_metas']['key'], false, false)) {
+		// Il faut charger a la main ses fichiers puisque plugin.xml ne le demande plus
 		include _DIR_PLUGINS . 'cfg/inc/cfg.php';
 		if (is_array($c = lire_config('association'))) {
 			foreach($c as $k => $v) {
@@ -184,51 +186,35 @@ $GLOBALS['association_maj'][38258] = array(
 );
 
 $GLOBALS['association_maj'][38578] = array(
-	array('spip_query', 'rename table spip_asso_metas TO spip_association_metas')
+/* eviter les syntaxes proprietaires
+#	array('spip_query', "RENAME table spip_asso_metas TO spip_association_metas"), // syntaxe DB2 et MySQL
+#	array('spip_query', "SP_RENAME table spip_asso_metas , spip_association_metas"), // syntaxe SQL-Server / Transact-SQL
+* au profit de la syntaxe commune, gage de portabilite */
+	array('sql_alter', "TABLE spip_asso_metas RENAME TO spip_association_metas"), // syntaxe ANSI-SQL92 reconnue par MySQL Oracle PosgreSQL SQLite etc
 );
 
-function association_maj_42024()
-{
-	sql_alter("TABLE spip_asso_comptes ADD vu BOOLEAN default 0");
-	sql_update('spip_asso_comptes', array('vu' => 1), "valide='oui'");
-	sql_alter("TABLE spip_asso_comptes DROP valide");
-}
 $GLOBALS['association_maj'][42024] = array(
-	array('association_maj_42024')
+	array('sql_alter', "TABLE spip_asso_comptes ADD vu BOOLEAN default 0"),
+	array('sql_update', 'spip_asso_comptes', array('vu' => 1), "valide='oui'"),
+	array('sql_alter', "TABLE spip_asso_comptes DROP valide"),
 );
 
 /* cette mise a jour comporte une erreur: sql_alter("TABLE spip_asso_plan ADD destination ENUM('credit','debit') NOT NULL default 'credit'"); le champ doit etre nomme direction et non destination */
-function association_maj_43909()
-{
-	sql_alter("TABLE spip_asso_plan ADD destination ENUM('credit','debit') NOT NULL default 'credit'");
-	sql_create('spip_asso_destination',
-		$GLOBALS['tables_principales']['spip_asso_destination']['field'],
-		$GLOBALS['tables_principales']['spip_asso_destination']['key']);
-	sql_create('spip_asso_destination_op',
-		$GLOBALS['tables_principales']['spip_asso_destination_op']['field'],
-		$GLOBALS['tables_principales']['spip_asso_destination_op']['key']);
-}
 $GLOBALS['association_maj'][43909] = array(
-	array('association_maj_43909')
+	array('sql_alter', "TABLE spip_asso_plan ADD destination ENUM('credit','debit') NOT NULL default 'credit'"),
+	array('sql_create', 'spip_asso_destination', $GLOBALS['tables_principales']['spip_asso_destination']['field'], $GLOBALS['tables_principales']['spip_asso_destination']['key']),
+	array('sql_create', 'spip_asso_destination_op', $GLOBALS['tables_principales']['spip_asso_destination_op']['field'], $GLOBALS['tables_principales']['spip_asso_destination_op']['key']),
 );
 unset($GLOBALS['association_maj'][43909]); /* pour empecher l'execution de code fautif tout en gardant trace */
 
 /* repare l'erreur commise sur la maj 43909 */
-function association_maj_46392()
-{
-	/* on elimine le champ mal nomme */
-	sql_alter("TABLE spip_asso_plan DROP destination");
-	/* et on refait la modif correctement: ca risque d'entrainer des erreurs SQL mais c'est pas grave */
-	sql_alter("TABLE spip_asso_plan ADD direction ENUM('credit','debit') NOT NULL default 'credit'");
-	sql_create('spip_asso_destination',
-		$GLOBALS['tables_principales']['spip_asso_destination']['field'],
-		$GLOBALS['tables_principales']['spip_asso_destination']['key']);
-	sql_create('spip_asso_destination_op',
-		$GLOBALS['tables_principales']['spip_asso_destination_op']['field'],
-		$GLOBALS['tables_principales']['spip_asso_destination_op']['key']);
-}
 $GLOBALS['association_maj'][46392] = array(
-	array('association_maj_46392')
+	/* on elimine le champ mal nomme */
+	array('sql_alter', "TABLE spip_asso_plan DROP destination"),
+	/* et on refait la modif correctement: ca risque d'entrainer des erreurs SQL mais c'est pas grave */
+	array('sql_alter', "TABLE spip_asso_plan ADD direction ENUM('credit','debit') NOT NULL default 'credit'"),
+	array('sql_create', 'spip_asso_destination', $GLOBALS['tables_principales']['spip_asso_destination']['field'], $GLOBALS['tables_principales']['spip_asso_destination']['key']),
+	array('sql_create', 'spip_asso_destination_op', $GLOBALS['tables_principales']['spip_asso_destination_op']['field'], $GLOBALS['tables_principales']['spip_asso_destination_op']['key']),
 );
 
 function association_maj_46779()
@@ -293,7 +279,7 @@ function association_maj_47501()
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$table_membres = $trouver_table('spip_asso_membres');
 	if (!$table_membres['field']['id_asso']) { /* pas de champ id_asso, il faut le restaurer */
-		sql_alter("TABLE spip_asso_membres ADD id_asso TEXT NOT NULL AFTER id_auteur");
+		sql_alter("TABLE spip_asso_membres ADD id_asso TEXT NOT NULL ");
 
 		/* on va voir dans commentaire si on trouve un champ qui ressemble a ce que la 47144 a sauvegarde */
 		$rows = sql_select("id_auteur, commentaire", 'spip_asso_membres', "commentaire LIKE '% - Ref. Int. %' OR commentaire LIKE 'Ref. Int. %'");
@@ -308,15 +294,13 @@ function association_maj_47501()
 		}
 	}
 }
-$GLOBALS['association_maj'][47501] = array(array('association_maj_47501'));
+$GLOBALS['association_maj'][47501] = array(
+	array('association_maj_47501')
+);
 
 /* eliminer le champ id_achat de la table ressources car il est inutile et non utilise, rien a sauvegarder */
-function association_maj_47731()
-{
-	sql_alter("TABLE spip_asso_ressources DROP id_achat");
-}
 $GLOBALS['association_maj'][47731] = array(
-	array('association_maj_47731')
+	array('sql_alter', "TABLE spip_asso_ressources DROP id_achat"),
 );
 
 /* mise a jour integrant l'utilisation du plugin Coordonnees */
@@ -425,6 +409,7 @@ $GLOBALS['association_maj'][48001] = array(
 	array('association_maj_48001')
 );
 
+// passer l'horodatage des modifications de ligne en TIMESTAMP automatique
 $GLOBALS['association_maj'][48225] = array(
 	array ('sql_alter', "TABLE spip_asso_categories CHANGE maj maj TIMESTAMP"),
 	array ('sql_alter', "TABLE spip_asso_dons CHANGE maj maj TIMESTAMP"),
@@ -437,7 +422,7 @@ $GLOBALS['association_maj'][48225] = array(
 );
 
 /* cette mise a jour introduit un controle sur l'activation des modules de gestions des dons, */
-/* ventes, prets, activit�s subordonnes a l'activation de la gestion comptable.               */
+/* ventes, prets, activites subordonnes a l'activation de la gestion comptable.               */
 /* la fonction de mise a jour desactive donc d'eventuels modules actives si la gestion        */
 /* comptable n'est pas activee                                                               */
 function association_maj_48466()
@@ -468,12 +453,8 @@ $GLOBALS['association_maj'][48466] = array(
 	array('association_maj_48466')
 );
 
-function association_maj_51602()
-{
-	sql_alter("TABLE spip_asso_membres ADD date_adhesion DATE AFTER id_asso");
-}
 $GLOBALS['association_maj'][51602] = array(
-	array('association_maj_51602')
+	array('sql_alter', "TABLE spip_asso_membres ADD date_adhesion DATE "),
 );
 
 /* Ces champs de configuration n'etant plus geres par defaut, les passer en personalises pour ceux qui les utilisent */
@@ -502,10 +483,11 @@ function association_maj_53901()
 		$id_groupe = sql_insertq("spip_asso_groupes", array('nom' => 'Bureau', 'affichage' => '1'));
 		/* et on y insere tous les membres qui avaient une fonction */
 		while ($membre_bureau = sql_fetch($liste_membres_bureau)) {
-			sql_insertq("spip_asso_groupes_liaisons", array(	'id_groupe' => $id_groupe,
-															'id_auteur' => $membre_bureau['id_auteur'],
-															'fonction'  => $membre_bureau['fonction'],
-													));
+			sql_insertq("spip_asso_groupes_liaisons", array(
+				'id_groupe' => $id_groupe,
+				'id_auteur' => $membre_bureau['id_auteur'],
+				'fonction'  => $membre_bureau['fonction'],
+			));
 		}
 	}
 
@@ -517,34 +499,15 @@ $GLOBALS['association_maj'][53901] = array(
 );
 
 /* Creation de la table 'exercices' permettant de gerer la comptabilite en exercice comptable */
-/* sur une annee civile, une annee'scolaire' ou sur des periodes donnees */
+/* sur une 'annee civile', une 'annee scolaire', ou sur des periodes donnees */
 $GLOBALS['association_maj'][55177] = array(
 	array('sql_create','spip_asso_exercices',
 	$GLOBALS['tables_principales']['spip_asso_exercices']['field'],
-	$GLOBALS['tables_principales']['spip_asso_exercices']['key'])
+	$GLOBALS['tables_principales']['spip_asso_exercices']['key']),
 );
 
-/* Changer les champs FLOAT en DECIMAL */
-$GLOBALS['association_maj'][57429] = array(
-	array ('sql_alter', "TABLE spip_asso_categories CHANGE cotisation cotisation DECIMAL(19,4) NOT NULL"),
-	array ('sql_alter', "TABLE spip_asso_ventes CHANGE prix_vente prix_vente DECIMAL(19,4) NOT NULL"),
-	array ('sql_alter', "TABLE spip_asso_ventes CHANGE frais_envoi frais_envoi DECIMAL(19,4) NOT NULL"),
-	array ('sql_alter', "TABLE spip_asso_comptes CHANGE recette recette DECIMAL(19,4) NOT NULL"),
-	array ('sql_alter', "TABLE spip_asso_comptes CHANGE depense depense DECIMAL(19,4) NOT NULL"),
-	array ('sql_alter', "TABLE spip_asso_plan CHANGE solde_anterieur solde_anterieur DECIMAL(19,4) NOT NULL"),
-	array ('sql_alter', "TABLE spip_asso_destination_op CHANGE recette recette DECIMAL(19,4) NOT NULL"),
-	array ('sql_alter', "TABLE spip_asso_destination_op CHANGE depense depense DECIMAL(19,4) NOT NULL"),
-	array ('sql_alter', "TABLE spip_asso_ressources CHANGE pu pu DECIMAL(19,4) NOT NULL"),
-	array ('sql_alter', "TABLE spip_asso_activites CHANGE montant montant DECIMAL(19,4) NOT NULL"),
-);
-
-// En liant le nom du bienfaiteur avec l'ID membre avant d'enregistrer, il faut penser a defaire cela a chaque edition pour eviter de se retrouver avec [un nom->membreXX] qui devient [[un nom->mebreXX]->membreXX] au moment de reediter. Il semble plus simple de ne pas transformer la saisie a stocker mais seulement l'affichage avec la nouvelle fonction association_calculer_lien_nomid($nom,$id)
-// Du coup il faut quand meme retablir les champs pour ne pas reproduire a l'affichage le souci qu'on avait a l'edition...
-$GLOBALS['association_maj'][57780] = array(
-	array('sql_update', 'spip_asso_dons', array('donateur' => "SUBSTR(donateur,1, INSTR(donateur,'->membre')-1)"), "donateur LIKE '[%->membre%]'"), // INSTR ou POSITION ou PARTINDEX ou CHARINDEX ou LOCATE ou REPLACE ... pfff. peut-etre vaut-il mieux le faire en PHP pour etre certain d'etre independant de l'implementation SQL ?!?
-);
-
-// correction d'une etourderie, et rajout de deux champs confirmes
+/* Changer les champs FLOAT (ou parfois TEXT...) en DECIMAL */
+// correction de r57429 (etourderie: 2 decimales et non 4), et rajout de deux champs confirmes (spip_asso_dons)
 $GLOBALS['association_maj'][57896] = array(
 	array ('sql_alter', "TABLE spip_asso_categories CHANGE cotisation cotisation DECIMAL(19,2) NOT NULL"),
 	array ('sql_alter', "TABLE spip_asso_ventes CHANGE prix_vente prix_vente DECIMAL(19,2) NOT NULL"),
@@ -556,16 +519,15 @@ $GLOBALS['association_maj'][57896] = array(
 	array ('sql_alter', "TABLE spip_asso_destination_op CHANGE depense depense DECIMAL(19,2) NOT NULL"),
 	array ('sql_alter', "TABLE spip_asso_ressources CHANGE pu pu DECIMAL(19,2) NOT NULL"),
 	array ('sql_alter', "TABLE spip_asso_activites CHANGE montant montant DECIMAL(19,2) NOT NULL"),
-	array ('sql_alter', "TABLE spip_asso_prets CHANGE argent argent DECIMAL(19,2) NOT NULL"),
-	array ('sql_alter', "TABLE spip_asso_prets CHANGE valeur valeur DECIMAL(19,2) NOT NULL"),
+	array ('sql_alter', "TABLE spip_asso_dons CHANGE argent argent DECIMAL(19,2) NOT NULL"),
+	array ('sql_alter', "TABLE spip_asso_dons CHANGE valeur valeur DECIMAL(19,2) NOT NULL"),
 );
 
 // Revue de la gestion des ressources et prets (debut)
-$GLOBALS['association_maj'][58798] = array(
+$GLOBALS['association_maj'][58825] = array(
 	array ('sql_alter', "TABLE spip_asso_prets DROP statut"), // ce champ ne sert pas, donc...
 	array ('sql_alter', "TABLE spip_asso_prets CHANGE date_sortie date_sortie DATETIME NOT NULL"), // permettre une gestion plus fine (duree inferieure a la journee)
 	array ('sql_alter', "TABLE spip_asso_prets CHANGE date_retour date_retour DATETIME NOT NULL"), // permettre une gestion plus fine (duree inferieure a la journee)
-	array ('sql_alter', "TABLE spip_asso_ressoures ADD ud CHAR(1) NOT NULL DEFAULT 'D' "), // unite des durees de location
 	array('sql_update', 'spip_asso_ressources', array('statut' => 1), "statut='ok'"), // nouveau statut numerique gerant simultanement les quantites
 	array('sql_update', 'spip_asso_ressources', array('statut' => 0), "statut='reserve'"), // nouveau statut numerique gerant simultanement les quantites
 	array('sql_update', 'spip_asso_ressources', array('statut' => -1), "statut='suspendu'"), // nouveau statut numerique gerant simultanement les quantites
@@ -577,10 +539,28 @@ $GLOBALS['association_maj'][58798] = array(
 
 // Revue de la gestion des ressources et prets (suite)
 $GLOBALS['association_maj'][58824] = array(
-	array ('sql_alter', "TABLE spip_asso_ressoures ADD prix_acquisition DECIMAL(19,2) NOT NULL DEFAULT 0 "), // garder trace du cout d'acquisition pour mieux evaluer l'amortissement et la rentabilite (c'est vite dit mais ce n'est pas encore integre a la compta)
 	array ('sql_alter', "TABLE spip_asso_prets ADD prix_unitaire DECIMAL(19,2) NOT NULL DEFAULT 0 "), // comme pour les ventes (asso_ventes.prix_vente) et les activites (asso_activites.montant) on garde le cout de base facture car celui-ci (asso_ressources.pu) peut changer par la suite
-	array('sql_update', 'spip_asso_prets', array('prix_unitaire' => "(SELECT pu FROM spip_asso_ressources WHERE spip_asso_ressources.id_ressource=spip_asso_prets.id_ressource)" ), "EXISTS (SELECT pu FROM spip_asso_ressources WHERE spip_asso_ressources.id_ressource=spip_asso_prets.id_ressource)"), // mettre a jour avec les tarifs actuels... PROBLEME : comment exprimer cela avec l'API SPIP ? ou passer par du PHP ?
 );
+
+// Revue de la gestion des ressources et prets (fin)
+$GLOBALS['association_maj'][58825] = array(
+// on reprend ici les requetes erronnees de maj-57780 ("bienfaiteur" y est malencontreusement+logiquement nomme "donateur")
+	/* En liant le nom du bienfaiteur avec l'ID membre avant d'enregistrer, il faut penser a defaire cela a chaque edition pour eviter de se retrouver avec [un nom->membreXX] qui devient [[un nom->mebreXX]->membreXX] au moment de reediter. Il semble plus simple de ne pas transformer la saisie a stocker mais seulement l'affichage avec la nouvelle fonction association_calculer_lien_nomid($nom,$id) Du coup il faut quand meme retablir les champs pour ne pas reproduire a l'affichage le souci qu'on avait a l'edition... */
+	array('sql_update', 'spip_asso_dons', array('bienfaiteur' => "SUBSTR(bienfaiteur,2, INSTR(bienfaiteur,'->membre')-1)"), "bienfaiteur LIKE '[%->membre%]'"), // SUBSTR est compris par la plupart meme s'il y a d'autres appelations comme SUBSTRING (SQL Server et mySQL). INSTR (pour lequel Oracle accepte deux parametres optionnels de plsu que mySQL) ou POSITION ou PARTINDEX ou CHARINDEX ou LOCATE ... pfff. peut-etre vaut-il mieux le faire en PHP pour etre certain d'etre independant de l'implementation SQL ?!? ou tenter l'approche par REPLACE("dans quelle chaine","sous-chaine a trouver","sous-chaine de remplacement") qui est commun a beaucoup de SGBD_SQL (mais pas dans la norme de 92 non plus si j'ai bonne memoire) ? faut voir...
+// on reprend ici les requetes erronnees de maj-58798
+	array ('sql_alter', "TABLE spip_asso_ressources ADD ud CHAR(1) NOT NULL DEFAULT 'D' "), // unite des durees de location
+// on reprend ici les requetes erronnees de maj-58824
+	array ('sql_alter', "TABLE spip_asso_ressources ADD prix_acquisition DECIMAL(19,2) NOT NULL DEFAULT 0 "), // garder trace du cout d'acquisition pour mieux evaluer l'amortissement et la rentabilite
+	array('sql_update', 'spip_asso_prets AS a_p INNER JOIN spip_asso_ressources AS a_r ON a_p.id_ressource=a_r.id_ressource', array('prix_unitaire'=>'pu' ), "prix_unitaire=0"), // mettre a jour avec les tarifs actuels...
+);
+
+$GLOBALS['association_maj'][58894] = array(
+// renommer le champ "date" en "date_inscription" qui est plus parlant et n'est pas un mot reserve
+	array('sql_alter', "TABLE spip_asso_activites ADD date_inscription DATE NOT NULL DEFAULT '0000-00-00' "),
+	array('sql_update', 'spip_asso_activites', array('date'=>'date_inscription') ),
+	array('sql_alter', "TABLE spip_asso_activites DROP \"date\" "),
+);
+
 
 
 ?>

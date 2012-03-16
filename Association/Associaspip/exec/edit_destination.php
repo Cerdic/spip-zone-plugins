@@ -10,57 +10,31 @@
 \***************************************************************************/
 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
-include_spip('inc/presentation');
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
+
 include_spip ('inc/navigation_modules');
 
-function exec_edit_destination(){
-
-	include_spip('inc/autoriser');
+function exec_edit_destination()
+{
 	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_destination= intval(_request('id'));
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
-		association_onglets();
-		echo debut_gauche('',true);
-		echo debut_boite_info(true);
+		$id_destination = intval(_request('id'));
+		association_onglets(_T('asso:plan_comptable'));
+		// INTRO :
+		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_destination_op',"id_destination=$id_destination")) );
+		echo totauxinfos_intro(sql_getfetsel('intitule','spip_asso_destination',"id_destination=$id_destination"), 'destination', $id_destination, $infos );
+		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
 		echo association_retour();
-		echo debut_droite('',true);
-
-		debut_cadre_relief('', false, '', $titre = _T('asso:destination_nav_ajouter'));
-
-		$data = !$id_destination ? '' : sql_fetsel('*', 'spip_asso_destination', "id_destination=$id_destination");
-		if ($data) {
-			$intitule=$data['intitule'];
-			$commentaire=$data['commentaire'];
-			$action = 'modifier';
-		} else {
-			$intitule=$commentaire='';
-			$action = 'ajouter';
-		}
-
-		$res = '<label for="intitule"><strong>' . _T('asso:intitule') . '&nbsp;</strong></label>'
-		. '<input name="intitule" type="text" value="'
-		. $intitule
-		. '" id="intitule" class="formo" />'
-		. '<label for="commentaire"><strong>' . _T('asso:commentaires') . '&nbsp;:</strong></label>'
-		. '<textarea name="commentaire" id="commentaire" class="formo" rows="4" cols="80">'
-		. $commentaire
-		. "</textarea>\n"
-		. '<p class="boutons">'
-		. '<input type="submit" value="'
-		. _T('asso:bouton_envoyer')
-		. '" class="fondo" /></p>';
-
-		echo redirige_action_post($action . '_destinations' , $id_destination, 'destination', "", "<div>$res</div>");
-
-		fin_cadre_relief();
-		echo fin_gauche(), fin_page();
+		debut_cadre_association(($id_destination?'EuroOff.gif':'EuroOff.gif'), 'destination_nav_ajouter');
+		echo recuperer_fond('prive/editer/editer_asso_destinations', array (
+			'id_destination' => $id_destination,
+		));
+		fin_page_association();
 	}
 }
 

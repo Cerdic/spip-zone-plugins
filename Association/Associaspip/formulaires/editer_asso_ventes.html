@@ -3,7 +3,6 @@
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
     <form name="formulaire_#FORM" method="post" action="#ENV{action}">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
-		<h3 class="legend"><:asso:ressources_titre_mise_a_jour:></h3>
 		<INCLURE{fond=inc/choisir_mbr_nom, champ_nom=acheteur, valeur_nom=#ENV{acheteur}, champ_id=id_acheteur, valeur_id=#ENV{id_acheteur}, champs_legende=Acheteur }>
 		<fieldset>
 			<legend>Facturation</legend>

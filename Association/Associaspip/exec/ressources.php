@@ -13,30 +13,24 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('inc/presentation');
 include_spip('inc/navigation_modules');
 
 function exec_ressources()
 {
-	include_spip('inc/autoriser');
 	if (!autoriser('associer', 'ressources')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:ressources_titre_liste_ressources')) ;
 		association_onglets(_T('asso:titre_onglet_prets'));
-		echo debut_gauche('',true);
-		echo debut_boite_info(true);
 		// INTRO : presentation du module
 		echo '<p>'._T('asso:ressources_info').'</p>';
 		// TOTAUX : nombre de ressources par statut
 		$liste_libelles['valide'] = '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-verte.gif" alt="" /> '. _T('asso:ressources_libelle_statut_ok') ;
-		$liste_effectifs['valide'] = sql_countsel('spip_asso_ressources', "(statut='ok') OR (ISNUMERIC(statut) AND statut>0)");
+		$liste_effectifs['valide'] = sql_countsel('spip_asso_ressources', "statut='ok' OR ROUND(statut,0)>0");
 		$liste_libelles['prospect'] = '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-orange.gif" alt="" /> '. _T('asso:ressources_libelle_statut_suspendu') ;
-		$liste_effectifs['prospect'] = sql_countsel('spip_asso_ressources', "(statut='suspendu') OR (ISNUMERIC(statut) AND statut<0)");
+		$liste_effectifs['prospect'] = sql_countsel('spip_asso_ressources', "statut='suspendu' OR ROUND(statut,0)<0");
 		$liste_libelles['cv'] = '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-rouge.gif" alt="" /> '. _T('asso:ressources_libelle_statut_reserve') ;
-		$liste_effectifs['cv'] = sql_countsel('spip_asso_ressources', "(statut='reserve') OR (ISNUMERIC(statut) AND statut=0)");
+		$liste_effectifs['cv'] = sql_countsel('spip_asso_ressources', "statut IN ('reserve',0)");
 		$liste_libelles['sorti'] = '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-poubelle.gif" alt="" /> '. _T('asso:ressources_libelle_statut_sorti') ;
 		$liste_effectifs['sorti'] = sql_countsel('spip_asso_ressources', "statut IN ('sorti','',NULL)");
 		echo totauxinfos_effectifs('ressources', $liste_libelles, $liste_effectifs);
@@ -51,9 +45,8 @@ rdm */
 		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
-		echo bloc_des_raccourcis(association_icone(_T('asso:ressources_nav_ajouter'),  generer_url_ecrire('edit_ressource'), 'ajout_don.png'));
-		echo debut_droite('',true);
-		echo debut_cadre_relief('', false, '', $titre = _T('asso:ressources_titre_liste_ressources'));
+		echo bloc_des_raccourcis(association_icone('ressources_nav_ajouter',  generer_url_ecrire('edit_ressource'), 'ajout_don.png'));
+		debut_cadre_association('pret1.gif', 'ressources_titre_liste_ressources');
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_ressources'>\n";
 		echo "<thead>\n<tr>";
 		echo '<th>'._T('asso:entete_id').'</th>';
@@ -102,14 +95,13 @@ rdm */
 			echo '<td class="text">'.$data['intitule'].'</td>';
 			echo '<td class="text">'.$data['code'].'</td>';
 			echo '<td class="decimal">'.association_prixfr($data['pu']).'</td>';
-			echo '<td class="actions">', association_bouton('prets_nav_gerer', 'voir-12.png', 'prets', 'id='.$data['id_ressource']), '</td>';
-			echo '<td class="actions">', association_bouton('ressources_nav_supprimer', 'poubelle-12.gif', 'action_ressources', 'id='.$data['id_ressource']), '</td>';
-			echo '<td class="arial11 border1" style="text-align:center;">', association_bouton('ressources_nav_editer', 'edit-12.gif', 'edit_ressource', 'id='.$data['id_ressource']), '</td>';
+			echo '<td class="action">', association_bouton('ressources_nav_supprimer', 'poubelle-12.gif', 'action_ressources', 'id='.$data['id_ressource']), '</td>';
+			echo '<td class="action">', association_bouton('ressources_nav_editer', 'edit-12.gif', 'edit_ressource', 'id='.$data['id_ressource']), '</td>';
+			echo '<td class="action">', association_bouton('prets_nav_gerer', 'voir-12.png', 'prets', 'id='.$data['id_ressource']), '</td>';
 			echo "</tr>\n";
 		}
 		echo "</tbody>\n</table>\n";
-		fin_cadre_relief();
-		echo fin_page_association();
+		fin_page_association();
 	}
 }
 

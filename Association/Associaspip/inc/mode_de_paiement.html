@@ -20,9 +20,9 @@ remarques:
 maj:2012-02-15; version:0.2.0; licence:GPL; copyleft:Jeannot Lapin, Marcel Bolla; -->]
 
 #CACHE{0}
-[(#ENV{champs_legende}|oui)
+[
 <fieldset>
-    <legend>#ENV{champs_legende}</legend>
+    <legend>(#ENV{champs_legende})</legend>
     <ul>
 ]
 		<li id="saisie_mode_paiement" class="editer_journal [(#ENV{type_operation}|affichage_div{charges-produits-banques})]">
@@ -36,20 +36,22 @@ maj:2012-02-15; version:0.2.0; licence:GPL; copyleft:Jeannot Lapin, Marcel Bolla
 			</label>
 <B_mode_paiement>
 			<select name="journal" id="journal" class="formo">
-<BOUCLE_mode_paiement(ASSO_PLAN){par code}{active=1}{classe=#META{/association/classe_banques}}{code!=#META{/association/pc_intravirements}}>
-				<option value="#CODE" [(#ENV{journal}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE</option>
-</BOUCLE_mode_paiement>
+	<BOUCLE_mode_paiement(ASSO_PLAN) {par code} {active=1}{classe=#META{/association/classe_banques}}{code!=#META{/association/pc_intravirements}}>
+				<option value="#CODE"[(#ENV{journal}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
+	</BOUCLE_mode_paiement>
 			</select>
-[
+	[
 		</li>
 		<li id="saisie_destination" class="editer_destinations[ (#ENV{type_operation}|affichage_div{charges-produits-contributions_volontaires})]">
 			[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{destinations})</span>]
-	(#EDITEUR_DESTINATIONS)
-]
+			(#EDITEUR_DESTINATIONS)
+	]
 </B_mode_paiement>
 			<span class="erreur_message"><:asso:erreur_pas_de_classe_financiere:></span>
 <//B_mode_paiement>
 		</li>
+[(#REM)<!-- insertion des champs extras ou autres -->]
+[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{ contexte, [(#ENV**|unserialize)]})],data,''})]})]
 [(#ENV{champs_legende}|oui)
     </ul>
 </fieldset>

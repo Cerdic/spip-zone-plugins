@@ -12,40 +12,31 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
 
-function exec_action_categorie(){
-
-	include_spip('inc/autoriser');
+function exec_action_categorie()
+{
 	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
 		$id_categorie=intval(_request('id'));
-
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:categories_de_cotisations')) ;
-		echo debut_gauche('',true);
-
-		echo debut_boite_info(true);
+		association_onglets(_T('asso:categories_de_cotisations'));
+		// INTRO : resume ressource
+		$categorie = sql_fetsel('*', 'spip_asso_categories', "id_categorie=$id_categorie" );
+		$infos['entete_code'] = $categorie['valeur'];
+		$infos['entete_duree'] = association_dureefr($categorie['duree'], 'M');
+		$infos['entete_montant'] = association_prixfr($categorie['cotisation']);
+		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_membres', "categorie=$id_categorie"), ));
+		echo totauxinfos_intro($categorie['libelle'], 'categorie', $id_categorie, $infos );
+		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
-
-		echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'), generer_url_ecrire('categories'), 'retour-24.png'));
-
-		echo debut_droite('',true);
-
-		echo debut_cadre_relief('', false, '',  _T('asso:categories_de_cotisations'));
-
-                $nom_categorie = sql_getfetsel('valeur', 'spip_asso_categories', "id_categorie=$id_categorie");
-
-                echo '<p><strong>' . _T('asso:vous_vous_appretez_a_effacer_la_categorie') .' '.$nom_categorie.'</strong></p>';
-		$res = '<p class="boutons"><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" /></p>';
-		echo redirige_action_post('supprimer_categories', $id_categorie, 'categories', '', $res);
-
-		fin_cadre_relief();
-		echo fin_page_association();
+		echo bloc_des_raccourcis(association_icone('bouton_retour', generer_url_ecrire('categories'), 'retour-24.png'));
+		debut_cadre_association('calculatrice.gif', 'categories_de_cotisations');
+		echo bloc_confirmer_suppression('categorie', $id_categorie);
+		fin_page_association();
 	}
 }
+
 ?>

@@ -12,11 +12,10 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
 
-function exec_comptes() {
-	include_spip('inc/autoriser');
+function exec_comptes()
+{
 	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
@@ -47,12 +46,8 @@ function exec_comptes() {
 		$where = 'imputation LIKE '. sql_quote($imputation);
 		$where .= (!is_numeric($vu) ? '' : " AND vu=$vu");
 		$where .= " AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]'";
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets(_T('asso:titre_onglet_comptes'));
-		echo debut_gauche('',true);
-		echo debut_boite_info(true);
-		// INTRO : nom du module et annee affichee
+		// INTRO : rappel de l'exercicee affichee
 		echo totauxinfos_intro($exercice_data['intitule'],'exercice',$exercice);
 		$journaux = sql_allfetsel('journal, intitule', 'spip_asso_comptes RIGHT JOIN spip_asso_plan ON journal=code',"classe='".$GLOBALS['association_metas']['classe_banques']."' AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]'", "intitule DESC"); // on se permet sql_allfetsel car il s'agit d'une association (mois d'une demie dizaine de comptes) et non d'un etablissement financier (des milliers de comptes clients)
 /* bof *
@@ -70,7 +65,8 @@ function exec_comptes() {
 					$direction_effectifs[$financier['journal']] = $nombre_direction;
 				}
 			}
-			echo totauxinfos_effectifs(_T('asso:compte_entete_financier') .': '. _T('asso:'.$direction.'s'), $direction_libelles, $direction_effectifs); // ToDo: tri par ordre decroissant (sorte de "top")
+			if (count($direction_libelles))
+				echo totauxinfos_effectifs(_T('asso:compte_entete_financier') .': '. _T('asso:'.$direction.'s'), $direction_libelles, $direction_effectifs); // ToDo: tri par ordre decroissant (sorte de "top")
 		}
 		// TOTAUX : operations de l'exercice par type d'operation
 		$classes = array('pair'=>'produits', 'impair'=>'charges', 'cv'=>'contributions_volontaires', 'vi'=>'banques');
@@ -89,17 +85,16 @@ function exec_comptes() {
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
 		$res = '<p><b>'.$exercice_data['intitule'].'</b><p>'
-		. association_icone(_T('asso:cpte_resultat_titre_general'),  generer_url_ecrire('compte_resultat', "exercice=$exercice"), 'finances.jpg')
-		. association_icone(_T('asso:bilan'), generer_url_ecrire('bilan', "exercice=$exercice"), 'finances.jpg')
-		. association_icone(_T('asso:annexe_titre_general'), generer_url_ecrire('annexe', "exercice=$exercice"), 'finances.jpg')
-		. association_icone(_T('asso:ajouter_une_operation'),  generer_url_ecrire('edit_compte'), 'ajout_don.png');
+		. association_icone('cpte_resultat_titre_general',  generer_url_ecrire('compte_resultat', "exercice=$exercice"), 'finances.jpg')
+		. association_icone('bilan', generer_url_ecrire('bilan', "exercice=$exercice"), 'finances.jpg')
+		. association_icone('annexe_titre_general', generer_url_ecrire('annexe', "exercice=$exercice"), 'finances.jpg')
+		. association_icone('ajouter_une_operation',  generer_url_ecrire('edit_compte'), 'ajout_don.png');
 		echo bloc_des_raccourcis($res);
-		echo debut_droite('',true);
-		debut_cadre_relief('', false, '',  _T('asso:informations_comptables'));
+		debut_cadre_association('comptes.gif', 'informations_comptables');
 		echo "\n<table width='100%'>";
 		echo '<tr><td>';
 		echo '<form method="post" action="'.generer_url_ecrire('comptes',"imputation=$imputation").'"><div>';
-		echo '<select name ="exercice" class="fondl" onchange="form.submit()">';
+		echo '<select name ="exercice" onchange="form.submit()">';
 		echo '<option value="0" ';
 		if (!$exercice) {
 			echo ' selected="selected"';
@@ -182,8 +177,7 @@ function exec_comptes() {
 		} else {
 			echo '<table width="100%"><tbody><tr><td class="actions erreur">' .( $exercice ? _T('asso:aucune_operation') : '<a href="'.generer_url_ecrire('exercices').'">'._T('asso:definir_exercice').'</a>' ). '</td></tr></tbody></table>';
 		}
-		fin_cadre_relief();
-		echo fin_page_association();
+		fin_page_association();
 	}
 }
 
@@ -203,32 +197,36 @@ function comptes_while($where, $limit, $id_compte)
 		if (substr($data['imputation'],0,1)==$GLOBALS['association_metas']['classe_contributions_volontaires']) {
 			$class = 'cv';
 		}
-		$id = $data['id_compte'];
-		/* pour voir au chargement l'id_compte recherche */
-		if($id_compte==$id) {
+		if($id_compte==$data['id_compte']) { /* pour voir au chargement l'id_compte recherche */
 			$onload_option .= 'onLoad="document.getElementById(\'id_compte'.$id_compte.'\').scrollIntoView(true);"';
 		} else {
 			$onload_option = '';
 		}
 		$comptes .= "\n<tr id='id_compte$id' class='$class'>"
-		. '<td class="integer">'.$id.'</td>'
+		. '<td class="integer">'.$data['id_compte'].'</td>'
 		. '<td class="date">'. association_datefr($data['date']) .'</td>'
 		. '<td class="text">'. $data['imputation'].'</td>'
 		. '<td class="text">&nbsp;'. propre($data['justification']) .'</td>'
-		. '<td class="decimal">'. association_nbrefr($data['recette']-$data['depense']) .'</td>'
+		. '<td class="decimal">'. association_prixfr($data['recette']-$data['depense']) .'</td>'
 		. '<td class="text">&nbsp;'.$data['journal'].'</td>'
-		. ($data['vu']
-			? ('<td class="actions" colspan="3"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-verte.gif" '.$onload_option.' /></td>')
-			/* si c'est un virement interne : imputation du type 58xx ne pas permettre la modification !!!
-			 * TODO : coder la modification d'un virement interne c'est a dire la modification de 2 operations comptables
-			 */
-		   : (
-		       ((substr($data['imputation'],0,1)==$GLOBALS['association_metas']['classe_banques'])
-		       ? '<td class="actions">&nbsp;</td>'
-		       : '<td class="actions">' . association_bouton('mettre_a_jour', 'edit-12.gif', 'edit_compte', 'id='.$id, $onload_option) . '</td>' )
-			 . '<td class="actions">' . association_bouton('supprimer', 'poubelle.gif', 'action_comptes', 'id='.$id) . '</td>'
-		     . '<td class="actions"><input name="valide[]" type="checkbox" value="'.$data['id_compte']. '" /></td>')
-		  )
+		. ( $data['vu']
+			/* pas d'action sur les operations validees */
+			? ('<td class="action" colspan="2"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-verte.gif" '.$onload_option.' /></td>'.'<td class="action"><input disabled="disabled" type="checkbox" /></td>')
+			: ( $data['id_journal']
+				/* pas d'edition/suppression des operations gerees par un module externe (souci de coherence avec des donnees d'autres tables) */
+				? ('<td class="action" colspan="2"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-rouge.gif" '.$onload_option.' /></td>')
+				: ( (substr($data['imputation'],0,1)==$GLOBALS['association_metas']['classe_banques'])
+					/* pas d'edition des virements internes (souci de coherence car il faut modifier deux operations concordament : ToDo...) */
+					? '<td class="action">&nbsp;</td>'
+					/* le reste est editable */
+					: '<td class="action">'. association_bouton('mettre_a_jour', 'edit-12.gif', 'edit_compte', 'id='.$data['id_compte'], $onload_option) . '</td>'
+					)
+				/* operation supprimable */
+				. '<td class="action">'. association_bouton_supprimer('compte', 'id='.$data['id_compte']) .'</td>'
+				)
+			/* operation non validee (donc validable et editable ...ici ou via le module dedie...) */
+			. '<td class="action"><input name="valide[]" type="checkbox" value="'.$data['id_compte']. '" /></td>'
+		)
 		. '</tr>';
 	}
 	return $comptes;

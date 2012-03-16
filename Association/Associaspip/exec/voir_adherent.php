@@ -12,9 +12,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('inc/presentation');
-include_spip('inc/autoriser');
-include_spip ('inc/navigation_modules');
+include_spip('inc/navigation_modules');
 include_spip('inc/association_comptabilite');
 
 function exec_voir_adherent(){
@@ -41,45 +39,39 @@ function exec_voir_adherent(){
 			default :
 				$statut='visiteur'; break;
 		}
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets(_T('asso:titre_onglet_membres'));
-		echo debut_gauche('',true);
-		echo debut_boite_info(true);
-		echo '<div class="infos"><div class="numero"><a href="'.generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur).'" title="'._T('asso:adherent_label_modifier_'.$statut).'">'._T('asso:adherent_libelle_numero_'.$statut);
-		echo '<p>';
-		echo $id_auteur;
-		echo '</p></a></div></div>';
-		$nom = htmlspecialchars($nom_membre);
+		// INFOs
+		if ($adresses[$id_auteur])
+			$infos['adresses'] = $adresses[$id_auteur];
+		if ($emails[$id_auteur])
+			$infos['emails'] = $emails[$id_auteur];
+		if ($telephones[$id_auteur])
+			$infos['numeros'] =  $telephones[$id_auteur];
+		echo '<div class="vcard">'. totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos, 'coordonnees') .'</div>';
 		$coord = '';
 		if ($full) {
-			$adh = generer_url_ecrire('edit_adherent',"id=$id_auteur");
-			$nom = "<a class='fn' href='$adh' title='" .
-			  _T('asso:adherent_label_modifier_membre') .
-			  "'>$nom</a>";
-			$coord = '';
-			if ($adresses[$id_auteur]) $coord .= '<br />'. $adresses[$id_auteur];
-			if ($emails[$id_auteur]) $coord .= '<br/>'. $emails[$id_auteur];
-			if ($telephones[$id_auteur]) $coord .=  '<br/>'.$telephones[$id_auteur];
 			$coord .= '<p>'.$categorie.'</p>';
+			$infos['adherent_libelle_categorie'] = $categorie;
 		}
-		$coord .= '<p>'._T('asso:adherent_libelle_date_validite').'<br/>'.association_datefr($validite).'</p>';
+		$coord .= '<p>'._T('asso:adherent_libelle_date_validite').'<br/>'.association_datefr($data['validite']).'</p>';
+		$infos['adherent_libelle_validite'] = association_datefr($data['validite']);
 		if ($GLOBALS['association_metas']['id_asso']=='on') {
-			$id_asso = ($data['id_asso'])?_T('asso:adherent_libelle_reference_interne').'<br/>'.$data['id_asso']:_T('asso:pas_de_reference_interne_attribuee');
-			$coord .= '<p>'.$id_asso.'</p>';
+			$coord .= '<p>'. ($data['id_asso']?_T('asso:adherent_libelle_reference_interne').'<br/>'.$data['id_asso']:_T('asso:pas_de_reference_interne_attribuee')) .'</p>';
+			$infos['adherent_libelle_reference_interne'] = $data['id_asso'];
 		}
-		echo '<div class="vcard" style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.$nom.$coord.'</div>';
+		echo '<div class="vcard" style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.$coord.'</div>';
+//		echo '<div class="vcard">'. totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos ) .'</div>';
 		// Afficher les champs extras
-		echo '<div style="text-align: center" class="verdana1 spip_xx-small">'.pipeline('afficher_contenu_objet', array ('args'=>array('type'=>'asso_membre', 'id_objet'=>$id_auteur, 'contexte'=>array()), 'data'=>'')).'</div>';
+		echo '<div style="text-align: center" class="verdana1 spip_xx-small">'. pipeline('afficher_contenu_objet', array ('args'=>array('type'=>'asso_membre', 'id_objet'=>$id_auteur, 'contexte'=>array()), 'data'=>'')) .'</div>';
+		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
 
-		$res = association_icone(_T('asso:adherent_label_modifier_membre'),  generer_url_ecrire('edit_adherent', 'id='.$id_auteur), 'edit.gif');
-		$res .= association_icone(_T('asso:bouton_retour'), str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']), 'retour-24.png');
+		$res = $full ? association_icone('adherent_label_modifier_membre',  generer_url_ecrire('edit_adherent', 'id='.$id_auteur), 'edit.gif') : '';
+		$res .= association_icone('adherent_label_modifier_'.$statut,  generer_url_ecrire('auteur_infos', 'id_auteur='.$id_auteur), 'edit.gif' ); // pas modifier mais voir page...
+		$res .= association_icone('bouton_retour', str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']), 'retour-24.png');
 		echo bloc_des_raccourcis($res);
-
-		echo debut_droite('',true);
-		debut_cadre_relief('', false, '', $titre = $nom_membre);
+		debut_cadre_association('annonce.gif', 'membre', $nom_membre);
 		// Liste des groupes
 		$query = sql_select('g.id_groupe as id_groupe, g.nom as nom', 'spip_asso_groupes g LEFT JOIN spip_asso_groupes_liaisons l ON g.id_groupe=l.id_groupe', 'l.id_auteur='.$id_auteur, '', 'g.nom');
 		if (sql_count($query)) {
@@ -150,7 +142,7 @@ function exec_voir_adherent(){
 				}
 				echo '<td class="integer">'.$data['inscrits'].'</td>';
 				echo '<td class="text">'.$data['statut'].'</td>';
-				echo '<td class="actions">', association_bouton('adherent_bouton_maj_inscription', 'edit-12.gif', 'edit_activite', 'id='.$data['id_activite']), '</td>';
+				echo '<td class="action">', association_bouton('adherent_bouton_maj_inscription', 'edit-12.gif', 'edit_activite', 'id='.$data['id_activite']), '</td>';
 				echo "</tr>\n";
 			}
 			echo "</tbody>\n</table>\n";
@@ -176,7 +168,7 @@ function exec_voir_adherent(){
 				echo '<td class="text">'.$data['article'].'</td>';
 				echo '<td class="decimal">'.$data['quantite'].'</td>';
 				echo '<td class="date">'.association_datefr($data['date_envoi']).'</td>';
-				echo '<td class="actions">'. association_bouton('adherent_bouton_maj_vente', 'edit-12.gif', 'edit_vente','id='.$data['id_vente']) .'</td>';
+				echo '<td class="action">'. association_bouton('adherent_bouton_maj_vente', 'edit-12.gif', 'edit_vente','id='.$data['id_vente']) .'</td>';
 				echo "</tr>\n";
 			}
 			echo "</tbody>\n</table>\n";
@@ -217,7 +209,14 @@ function exec_voir_adherent(){
 			echo "</tr>\n</thead><tbody>";
 			$query = sql_select('*', 'spip_asso_prets AS P LEFT JOIN spip_asso_ressources AS R ON P.id_ressource=R.id_ressource', 'id_emprunteur='._q($id_auteur), '', 'id_pret DESC' );
 			while ($data = sql_fetch($query)) {
-				switch($data['statut']){
+				if (is_numeric($data['statut'])) { // nouveuaux statuts entiers
+					if (($data['statut'])>0)
+						$puce = 'verte';
+					elseif (($data['statut'])<0)
+						$puce = 'rouge';
+					else
+						$puce = 'orange';
+				} else switch($data['statut']){ // anciens statuts texte
 					case 'ok':
 						$puce = 'verte'; break;
 					case 'reserve':
@@ -228,26 +227,25 @@ function exec_voir_adherent(){
 						$puce = 'poubelle'; break;
 				}
 				echo '<tr>';
-				echo '<td class="actions">';
+				echo '<td class="action">';
 				echo '<img src="' . _DIR_PLUGIN_ASSOCIATION_ICONES . 'puce-'.$puce. '.gif" /></td>';
 				echo '<td class="integer">'.$data['id_pret'].'</td>';
 				echo '<td class="text">'.$data['intitule'].'</td>';
 				echo '<td class="date">'.association_datefr($data['date_sortie'],'dtstart').'</td>';
 				echo '<td class="date">';
-				if($data['date_retour']=='0000-00-00'){
+				if($data['date_retour']<=$data['date_sortie']){
 					echo '&nbsp;';
 				} else {
 					echo association_datefr($data['date_retour'], 'dtend');
 				}
 				echo '</td>';
-				echo '<td class="actions">' . association_bouton('adherent_bouton_maj_operation', 'edit-12.gif', 'edit_pret', 'agir=modifie&id_pret='.$data['id_pret']) . '</td>';
+				echo '<td class="action">' . association_bouton('adherent_bouton_maj_operation', 'edit-12.gif', 'edit_pret', 'agir=modifie&id_pret='.$data['id_pret']) . '</td>';
 				echo "</tr>\n";
 			}
 			echo "</tbody>\n</table>\n";
 			echo '</fieldset>';
 		}
-		echo fin_cadre_relief(true);
-		echo fin_page_association();
+		fin_page_association();
 	}
 }
 
@@ -265,7 +263,7 @@ function voir_adherent_paiements($data, $lien, $type)
 		. '<td class="date">'. association_datefr($row['date']). '</td>'
 		. '<td class="text">'. propre($j) .'</td>'
 		. '<td class="decimal">'. association_prixfr($row['montant']) .'</td>'
-		. '<td class="actions">'. association_bouton('adherent_label_voir_operation', 'voir-12.png', 'comptes','id_compte='.$id_compte) .'</td>' // pas plutot edit_compte ? (a propos, il faudrait carrement un voir_compte pour ne pas risquer de modifier ainsi une operation marquee "vu" et donc archivee/verouillee)
+		. '<td class="action">'. association_bouton('adherent_label_voir_operation', 'voir-12.png', 'comptes','id_compte='.$id_compte) .'</td>' // pas plutot edit_compte ? (a propos, il faudrait carrement un voir_compte pour ne pas risquer de modifier ainsi une operation marquee "vu" et donc archivee/verouillee)
 		. '</tr>';
 	}
 	return $data;

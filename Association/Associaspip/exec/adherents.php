@@ -15,9 +15,8 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip('inc/navigation_modules');
 
-function exec_adherents() {
-
-	include_spip('inc/autoriser');
+function exec_adherents()
+{
 	if (!autoriser('associer', 'adherents')) {
 		include_spip('inc/minipres');
 		echo minipres();
@@ -26,11 +25,7 @@ function exec_adherents() {
 		$critere = request_statut_interne(); // peut appeler set_request
 		$statut_interne = _request('statut_interne');
 		$lettre = _request('lettre');
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets(_T('asso:titre_onglet_membres'));
-		echo debut_gauche('',true);
-		echo debut_boite_info(true);
 		// TOTAUX : effectifs par statuts
 		$membres = $GLOBALS['association_liste_des_statuts'];
 		array_shift($membres); // on sort les anciens membres
@@ -47,14 +42,14 @@ function exec_adherents() {
 		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
-		$res .= association_icone(_T('asso:gerer_les_groupes'),  generer_url_ecrire('groupes'), 'annonce.gif',  '');
-		$res .= association_icone(_T('asso:menu2_titre_relances_cotisations'),  generer_url_ecrire('edit_relances'), 'ico_panier.png');
-		$res .= association_icone(_T('asso:synchronise_asso_membre_lien'),  generer_url_ecrire('synchroniser_asso_membres'), 'reload.png');
+		$res .= association_icone('gerer_les_groupes',  generer_url_ecrire('groupes'), 'annonce.gif',  '');
+		$res .= association_icone('menu2_titre_relances_cotisations',  generer_url_ecrire('edit_relances'), 'ico_panier.png');
+		$res .= association_icone('synchronise_asso_membre_lien',  generer_url_ecrire('synchroniser_asso_membres'), 'reload.png');
 		echo bloc_des_raccourcis($res);
-		if ( test_plugin_actif('FPDF') && test_plugin_actif('COORDONEES') ) {
+		if ( test_plugin_actif('FPDF') && test_plugin_actif('COORDONNEES') ) { // etiquettes
 			echo debut_cadre_enfonce('',true);
 			echo recuperer_fond('prive/inc_cadre_etiquette');
-			echo fin_cadre_enfonce(true);
+			echo fin_cadre_enfonce();
 		}
 		//Filtre ID et groupe : si le filtre id est actif, on ignore le filtre groupe
 		$id = intval(_request('id'));
@@ -70,12 +65,11 @@ function exec_adherents() {
 		list($liste_id_auteurs, $code_liste_membres) = adherents_liste(intval(_request('debut')), $lettre, $critere, $statut_interne, $id_groupe);
 		if (test_plugin_actif('FPDF')) {
 			echo debut_cadre_enfonce('',true);
-			echo '<h3 style="text-align:center;">'. _T('plugins_vue_liste') .'</h3>';
+			echo '<h3>'. _T('plugins_vue_liste') .'</h3>';
 			echo adherents_table($liste_id_auteurs);
-			echo fin_cadre_enfonce(true);
+			echo fin_cadre_enfonce();
 		}
-		echo debut_droite('',true);
-		echo debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif', false, '', _T('asso:adherent_titre_liste_actifs'));
+		debut_cadre_association('annonce.gif', 'adherent_titre_liste_actifs');
 		echo "<table width='100%' class='asso_tablo_filtres'>\n";
 		echo '<tr>';
 		// PAGINATION ALPHABETIQUE
@@ -142,8 +136,7 @@ function exec_adherents() {
 		echo '</table>';
 		//Affichage de la liste
 		echo $code_liste_membres;
-		echo fin_cadre_relief(true);
-		echo fin_page_association();
+		fin_page_association();
 	}
 }
 

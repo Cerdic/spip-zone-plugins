@@ -13,41 +13,35 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
 
-function exec_action_dons() {
-
-	include_spip('inc/autoriser');
+function exec_action_dons()
+{
 	if (!autoriser('associer', 'dons')) {
 		include_spip('inc/minipres');
 		echo minipres();
-	} else
-		exec_action_dons_args(intval(_request('id')));
-}
-
-function exec_action_dons_args($id_don) {
-	// A ameliorer: redecrire le don
-	$data = !$id_don ? '' : sql_fetsel('*', 'spip_asso_dons', "id_don=$id_don");
-	if (!$data) {
-		include_spip('inc/minipres');
-		echo minipres(_T('zxml_inconnu_id') . $id_don);
 	} else {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
-		association_onglets();
-		echo debut_gauche('',true);
-		echo debut_boite_info(true);
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		echo association_retour();
-		echo debut_droite('', true);
-		echo debut_cadre_relief('', false, '', $titre = _T('asso:action_sur_les_dons'));
-		$res = '<p><strong>' . _T('asso:vous_vous_appretez_a_effacer_le_don') . $id_don . '</strong></p>';
-		$res .= '<p class="boutons"><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" /></p>';
-		echo redirige_action_post('supprimer_dons', $id_don, 'dons', '', "<div>$res</div>");
-		fin_cadre_relief();
-		echo fin_page_association();
+		$id_don = intval(_request('id'));
+		$data = sql_fetsel('*', 'spip_asso_dons', "id_don=$id_don");
+		if (!$data) {
+			include_spip('inc/minipres');
+			echo minipres(_T('zxml_inconnu_id') . $id_don);
+		} else {
+			association_onglets(_T('asso:titre_onglet_dons'));
+			// info
+			$don = sql_fetsel('*', 'spip_asso_dons', "id_don=$id_don");
+			$infos['argent'] = association_prixfr($don['argent']);
+			$infos['colis'] = ($don['valeur'] ? '('.association_prixfr($don['valeur'])')<br />' : '') .$don['colis'];
+			$onfos['contrepartie'] = $don['contrepartie'];
+			totauxinfos_intro(association_calculer_lien_nomid($don['bienfaiteur'],$don['id_adherent']), 'don', $id_don, $infos );
+			// datation
+			echo association_date_du_jour();
+			echo fin_boite_info(true);
+			echo association_retour();
+			debut_cadre_association('dons.gif', 'action_sur_les_dons');
+			echo bloc_confirmer_suppression('don', $id_don);
+			fin_page_association();
+		}
 	}
 }
 

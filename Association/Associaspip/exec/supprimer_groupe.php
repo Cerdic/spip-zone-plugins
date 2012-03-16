@@ -10,44 +10,33 @@
 \***************************************************************************/
 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
 
-	include_spip('inc/presentation');
-	include_spip ('inc/navigation_modules');
+include_spip ('inc/navigation_modules');
 
-function exec_supprimer_groupe(){
-
-	include_spip('inc/autoriser');
+function exec_supprimer_groupe()
+{
 	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-
-		$id_groupe=intval(_request('id'));
-
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
-
-		association_onglets();
-
-		echo debut_gauche('',true);
-
-		echo debut_boite_info(true);
+		$id_groupe = intval(_request('id'));
+		association_onglets(_T('asso:gestion_groupes'));
+		// INFO
+		$groupe = sql_fetsel('*', 'spip_asso_groupes', "id_groupe=$id_groupe" );
+		$infos['ordre_affichage_groupe'] = $groupe['affichage'];
+		$infos['commentaires'] = $groupe['commentaires'];
+		$infos['destination_entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe")) );
+		echo totauxinfos_intro($groupe['nom'], 'groupe', $id_groupe, $infos );
+		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
 		echo association_retour();
-		echo debut_droite('',true);
-
-		$nom_groupe = sql_getfetsel('nom', 'spip_asso_groupes', 'id_groupe='.$id_groupe);
-
-		debut_cadre_relief('', false, '', $titre = _T('asso:suppression_de_groupe'));
-		echo '<p><strong>' . _T('asso:vous_vous_appretez_a_supprimer_le_groupe').$nom_groupe.'</strong></p>';
-
-		$res .= '<p style="float:right;"><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" /></p>';
-		echo redirige_action_post('supprimer_groupes', $id_groupe, 'groupes', '', $res);
-		fin_cadre_relief();
-
-		echo fin_page_association();
+		debut_cadre_association('annonce.gif', 'suppression_de_groupe');
+		bloc_confirmer_suppression('groupe',$id_groupe);
+		fin_page_association();
 	}
 }
+
 ?>

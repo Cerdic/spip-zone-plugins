@@ -135,16 +135,19 @@ function association_ajouter_operation_comptable($date, $recette, $depense, $jus
 function association_modifier_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal, $id_compte)
 {
     include_spip('base/association');
-    /* on passe par modifier_contenu (et non sql_updateq) pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere */
-    include_spip('inc/modifier');
+    if ( sql_countsel('spip_asso_comptes', "id_compte=$id_compte AND vu ") ) { // il ne faut pas modifier une operation verouillee !!!
+	spip_log("modification d'operation comptable : id_compte=$id_compte, date=$date, recette=$recette, depense=$depense, imputation=$imputation, journal=$journal, id_journal=$id_journal, justification=$justification",'associaspip');
+	return $err = _T('asso:operation_non_modifiable');
+    }
     /* Si on doit gerer les destinations */
     if ($GLOBALS['association_metas']['destinations']=='on') {
 	$err = association_ajouter_destinations_comptables($id_compte, $recette, $depense);
     }
+    /* on passe par modifier_contenu (et non sql_updateq) pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere */
+    include_spip('inc/modifier');
     // tester $id_journal, si il est null, ne pas le modifier afin de ne pas endommager l'entree dans la base en editant directement depuis le libre de comptes
     if ($id_journal) {
 	modifier_contenu('asso_compte', $id_compte, '', array(
-//	sql_updateq('spip_asso_comptes', array(
 	    'date' => $date,
 	    'imputation' => $imputation,
 	    'recette' => $recette,
@@ -152,34 +155,61 @@ function association_modifier_operation_comptable($date, $recette, $depense, $ju
 	    'journal' => $journal,
 	    'id_journal' => $id_journal,
 	    'justification' => $justification)//,
-//	"id_compte=$id_compte");
 	);
     } else {
 	modifier_contenu('asso_compte', $id_compte, '', array(
-//	sql_updateq('spip_asso_comptes', array(
 	    'date' => $date,
 	    'imputation' => $imputation,
 	    'recette' => $recette,
 	    'depense' => $depense,
 	    'journal' => $journal,
 	    'justification' => $justification)//,
-//	"id_compte=$id_compte");
 	);
     }
     return $err;
 }
 
-/* Supprimer une operation dans spip_asso_comptes ainsi que si necessaire dans spip_asso_destination_op */
-function association_supprimer_operation_comptable($id_compte)
+/* Supprimer une operation dans spip_asso_comptes ainsi que si necessaire dans spip_asso_destination_op ; cas 1 : usage direct de id_compte */
+function association_supprimer_operation_comptable1($id_compte, $securite=FALSE)
 {
     include_spip('base/association');
-    /* on efface de la table destination_op toutes les entrees correspondant a cette operation  si on en trouve */
-    sql_delete('spip_asso_destination_op', "id_compte=$id_compte");
-    /* on logue quand meme */
-    list($date, $recette, $depense, $imputation, $journal, $id_journal) = sql_fetsel('date, recette, depense, imputation, journal, id_journal', 'spip_asso_comptes', "id_compte=$id_compte");
-    spip_log("suppression d'operation comptable : id_compte=$id_compte, date=$date, recette=$recette, depense=$depense, imputation=$imputation, journal=$journal, id_journal=$id_journal, justification=...",'associaspip');
+    /* recuperer les informations sur l'operation pour le fichier de log */
+    list($date, $recette, $depense, $imputation, $journal, $id_journal, $verrou) = sql_fetsel('date, recette, depense, imputation, journal, id_journal, vu', 'spip_asso_comptes', "id_compte=$id_compte");
+    if ( ($securite AND !$verrou) || !$securite ) { // operation non verouillee ou controle explicitement desactive...
+	/* on efface de la table destination_op toutes les entrees correspondant a cette operation  si on en trouve */
+	sql_delete('spip_asso_destination_op', "id_compte=$id_compte");
+	/* on logue quand meme */
+	spip_log("suppression d'operation comptable : id_compte=$id_compte, date=$date, recette=$recette, depense=$depense, imputation=$imputation, journal=$journal, id_journal=$id_journal, justification=...",'associaspip');
+    } else { // on ne supprime pas les ecritures validees/verouillees ; il faut annuler l'operation par une operation comptable inverse...
+	/*on cree l'operation opposee a celle a annuler ; mais ce n'est pas une annulation correcte au regard des numeros de comptes (imputation/journal)... */
+	$annulation = sql_insertq('spip_asso_comptes', arra(
+	    'date' => date('Y-m-d'),
+	    'depense' => $recette,
+	    'recette' => $depense,
+	    'imputation' => _T('annulation_operation', array('numero'=>$id_compte,'date'=>$date) ),
+	    'imputation' => $imputation, // pas forcement vrai, mais on fait au plus simples...
+	    'journal' => $journal, // pas forcement vrai, mais on fait au plus simples...
+	    'id_journal' => -$id_journal, // on garde la trace par rapport au module ayant cree l'operation
+	    'vu' => 1, // cette operation n'est pas moifiable non plus...
+	) );
+	/* on logue quand meme */
+	spip_log("annulation d'operation comptable : id_compte=$id_compte, date=$date, recette=$recette, depense=$depense, imputation=$imputation, journal=$journal, id_journal=$id_journal, justification=annule_par_op$annulation",'associaspip');
+    }
     /* on efface enfin de la table comptes l'entree correspondant a cette operation */
     sql_delete('spip_asso_comptes', "id_compte=$id_compte");
+}
+
+/* Supprimer une operation dans spip_asso_comptes ainsi que si necessaire dans spip_asso_destination_op ; cas 2 : usage par les modules du couple imputation&id_journal */
+function association_supprimer_operation_comptable2($id_journal,$imputation)
+{
+    /* old-way: avant, on pouvait ne pas avoir d'imputation... du coup on prend le premier id_journal correspondant a n'importe quelle imputation!!! (avec cette methode il n'est pas surprenant de perdre des enregistrements...) */
+#    $association_imputation = charger_fonction('association_imputation', 'inc');
+#    $critere = (($critere_imputation = $association_imputation($pc_imputation))?' AND ':'') ."id_journal='$id_journal'";
+    /* new-way: maintenant on exige l'imputation ; et s'il n'y en a pas on prend le premier id_journal sans imputation ! c'est deja beaucoup moins problematique... */
+    $critere = "imputation='$imputation' AND id_journal='$id_journal'";
+    $id_compte = sql_getfetsel('id_compte', 'spip_asso_comptes', $critere);
+    association_supprimer_operation_comptable1($id_compte);
+    return $id_compte; // indique quelle operation a ete supprimee (0 si aucune --donc erreur dans les parametres ?)
 }
 
 /* Supprimer en masse des operations dans spip_asso_comptes ainsi que si necessaire dans spip_asso_destination_op */

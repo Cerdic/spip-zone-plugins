@@ -13,22 +13,19 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
 
 function exec_edit_relances()
 {
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 	association_onglets(_T('asso:titre_onglet_membres'));
-	echo debut_gauche('',true);
-	echo debut_boite_info(true);
+	// notice
+	echo _T('asso:aide_relances'); //!\ il faut en rajouter
+	// datation
 	echo association_date_du_jour();
 	echo fin_boite_info(true);
-	$res = association_icone(_T('asso:bouton_retour'),  generer_url_ecrire('adherents'), 'retour-24.png');
+	$res = association_icone('bouton_retour',  generer_url_ecrire('adherents'), 'retour-24.png');
 	echo bloc_des_raccourcis($res);
-	echo debut_droite('',true);
-	echo debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.'ico_panier.png', false, '', $titre = _T('asso:tous_les_membres_a_relancer'));
+	debut_cadre_association('ico_panier.png', 'tous_les_membres_a_relancer');
 	$statut_interne = _request('statut_interne');
 	if (!$statut_interne)
 		$statut_interne = 'echu';
@@ -69,8 +66,7 @@ function exec_edit_relances()
 		$bouton = '<p class="boutons">'. isset($action) ? _T('asso:bouton_'.$action) : _T('asso:bouton_envoyer') .'</p>';
 		echo generer_form_ecrire('action_relances', $res, '', $bouton);
 	}
-	fin_cadre_relief();
-	echo fin_page_association();
+	fin_page_association();
 }
 
 function relances_while($statut_interne)

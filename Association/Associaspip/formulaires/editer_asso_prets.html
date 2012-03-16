@@ -3,7 +3,6 @@
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
     <form name="formulaire_#FORM" method="post" action="#ENV{action}">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
-		<h3 class="legend"><:asso:prets_titre_edition_prets:></h3>
 		<fieldset>
 			<legend><:asso:prets_entete_reservation:></legend>
 			<ul>
@@ -11,6 +10,9 @@
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_sortie})</span>]
 					<label for="date_sortie"><:asso:prets_libelle_date_sortie:></label>
 					<input name="date_sortie" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_sortie})"] id="date_sortie" class="date" />
+				[(#ENV{ud}|=={H}|ou{#ENV{ud}|=={T}})
+					<input name="heure_sortie" type="[(#HTML5|?{time,text})]" [value="(#ENV{heure_sortie})"] id="heure_sortie" class="time" />
+				]
 				</li>
 				<li class="editer_duree">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{duree})</span>]
@@ -34,7 +36,7 @@
 				</li>
 				<li class="editer_montant">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{montant})</span>]
-					<label for="montant"><:asso:prets_libelle_montant:></label>
+					<label for="montant"><:asso:libelle_montant:></label>
 					<input name="montant" type="[(#HTML5|?{number,text})]" [value="(#ENV{montant})"] id="montant" class="number float price" />
 				</li>
 				<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, env}>

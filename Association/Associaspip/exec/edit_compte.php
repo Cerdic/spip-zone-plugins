@@ -13,9 +13,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
-include_spip('inc/autoriser');
 
 function prefixPlugin_insert_head($flux){
           $flux .= "<!-- un commentaire pour rien ! -->\n";
@@ -23,27 +21,25 @@ function prefixPlugin_insert_head($flux){
 }
 
 
-function exec_edit_compte() {
-
-	$id_compte= intval(_request('id'));
-
+function exec_edit_compte()
+{
 	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
+		$id_compte = intval(_request('id'));
 		association_onglets(_T('asso:titre_onglet_comptes'));
-		echo debut_gauche('', true);
-		echo debut_boite_info(true);
+		// INTRO : resume compte
+		echo totauxinfos_intro('', 'compte', $id_compte, $infos );
+		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
 		echo association_retour();
-		echo debut_droite('',true);
+		debut_cadre_association(($id_compte?'compts.gif':'ajout_don.png'), 'modification_des_comptes');
 		echo recuperer_fond('prive/editer/editer_asso_comptes', array (
 			'id_compte' => $id_compte
 		));
-		echo fin_page_association();
+		fin_page_association();
 	}
 }
 

@@ -10,38 +10,31 @@
 \***************************************************************************/
 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
 
-include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
 
-function exec_edit_categorie(){
-
-	include_spip('inc/autoriser');
+function exec_edit_categorie()
+{
 	if (!autoriser('associer', 'comptes')) {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
-
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:categories_de_cotisations')) ;
-		association_onglets();
-
-		echo debut_gauche('',true);
-
-		echo debut_boite_info(true);
+		$id_categorie = intval(_request('id'));
+		association_onglets(_T('asso:categories_de_cotisations'));
+		// INTRO : resume ressource
+		$infos['entete_utilisee'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_membres', "categorie=$id_categorie"), ));
+		echo totauxinfos_intro(sql_getfetsel('libelle', 'spip_asso_categories', "id_categorie=$id_categorie" ), 'categorie', $id_categorie, $infos );
+		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
-
 		echo association_retour();
-
-		echo debut_droite('',true);
-
+		debut_cadre_association('calculatrice.gif', 'categories_de_cotisations');
 		echo recuperer_fond('prive/editer/editer_asso_categories', array (
 			'id_categorie' => $id_categorie
 		));
-
-		echo fin_page_association();
+		fin_page_association();
 	}
 }
 

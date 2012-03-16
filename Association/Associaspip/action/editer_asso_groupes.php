@@ -10,30 +10,29 @@
 \***************************************************************************/
 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+    return;
 
-function action_editer_asso_groupes() {
-		
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$id_groupe = $securiser_action();
+function action_editer_asso_groupes_dist()
+{
+    $securiser_action = charger_fonction('securiser_action', 'inc');
+    $id_groupe = $securiser_action();
+    $erreur = '';
+    $champs = array(
+	'nom' => _request('nom'),
+	'commentaires' => _request('commentaires'),
+	'affichage' => intval(_request('affichage')),
+    );
+    include_spip('base/association');
+    if ($id_groupe) { /* modification */
+	sql_updateq('spip_asso_groupes', $champs "id_groupe=$id_groupe");
+    } else { /* ajout */
+	$id_groupe = sql_insertq('spip_asso_groupes', $champs);
+	if (!$id_groupe)
+	    $erreur = _T('Erreur_BdD_ou_SQL');
+    }
 
-	$nom = _request('nom');
-	$commentaires = _request('commentaires');
-	$affichage = intval(_request('affichage'));
-
-	if ($id_groupe) {/* c'est une modification */
-		sql_updateq('spip_asso_groupes', array(
-			'nom' => $nom,
-			'affichage' => $affichage,
-			'commentaires' => $commentaires),
-		    "id_groupe=$id_groupe");
-	} else { /* c'est un ajout */
-		$id_groupe = sql_insertq('spip_asso_groupes', array(
-			'nom' => $nom,
-			'affichage' => $affichage,
-			'commentaires' => $commentaires));
-	}
-
-	return array($id_groupe, '');
+    return array($id_groupe, $erreur);
 }
+
 ?>

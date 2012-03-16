@@ -21,6 +21,7 @@ function formulaires_editer_asso_ventes_charger_dist($id_vente='') {
 	$contexte = formulaires_editer_objet_charger('asso_ventes', $id_vente, '', '',  generer_url_ecrire('ventes'), '');
 	if (!$id_vente) { /* si c'est une nouvelle operation, on charge la date d'aujourd'hui et charge un id_compte et journal null */
 		$contexte['date_vente'] = $contexte['date_envoi'] = date('Y-m-d');
+		$contexte['quantite'] = 1;
 		$id_compte = '';
 		$journal = '';
 	} else { /* sinon on recupere l'id_compte correspondant et le journal dans la table des comptes */
@@ -40,6 +41,8 @@ function formulaires_editer_asso_ventes_charger_dist($id_vente='') {
 		$contexte['prix_vente'] = association_nbrefr($contexte['prix_vente']);
 	if ($contexte['frais_envoi'])
 		$contexte['frais_envoi'] = association_nbrefr($contexte['frais_envoi']);
+	if ($contexte['quantite'])
+		$contexte['quantite'] = association_nbrefr($contexte['quantite']);
 	// on ajoute les metas de classe_banques et destinations
 	$contexte['classe_banques'] = $GLOBALS['association_metas']['classe_banques'];
 	if ($GLOBALS['association_metas']['destinations']) {
@@ -73,9 +76,9 @@ function formulaires_editer_asso_ventes_verifier_dist($id_vente) {
 	if ($erreur = association_verifier_membre(_request('id_acheteur')) )
 		$erreurs['id_acheteur'] = $erreur;
 	/* verifier si besoin que le montant des destinations correspond bien au montant de l'opération */
-	if ($GLOBALS['association_metas']['destinations']) {
+	if ($GLOBALS['association_metas']['destinations'] && !array_key_exists('prix_vente', $erreurs)) {
 		include_spip('inc/association_comptabilite');
-		if ($err_dest = association_verifier_montant_destinations($prix_vente)) {
+		if ($err_dest = association_verifier_montant_destinations(_request('prix_vente'))) {
 			$erreurs['destinations'] = $err_dest;
 		}
 	}

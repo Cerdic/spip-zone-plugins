@@ -19,7 +19,7 @@ include_spip('inc/editer');
 function formulaires_editer_asso_dons_charger_dist($id_don='') {
 	/* cet appel va charger dans $contexte tous les champs de la table spip_asso_dons associes a l'id_don passe en param */
 	$contexte = formulaires_editer_objet_charger('asso_dons', $id_don, '', '',  generer_url_ecrire('dons'), '');
-	/* si c'est une nouvelle operation, on charge la date d'aujourd'hui et charge un id_compte et journal null */
+	/* si c'est une nouvelle operation, on charge la date d'aujourd'hui ainsi que un id_compte et journal nuls */
 	if (!$id_don) {
 		$contexte['date_don'] = date('Y-m-d');
 		$id_compte = '';
@@ -31,14 +31,16 @@ function formulaires_editer_asso_dons_charger_dist($id_don='') {
 	}
 	/* ajout du journal qui ne se trouve pas dans la table asso_dons mais asso_comptes et n'est donc pas charge par editer_objet_charger */
 	$contexte['journal'] = $journal;
-	/* on concatene au _hidden inserer dans $contexte par l'appel a formulaire_editer_objet les id_compte qui seront utilises dans l'action editer_asso_dons */
-	$contexte['_hidden'] .= "<input type='hidden' name='id_compte1' value='$id_compte1' />";
-	$contexte['_hidden'] .= "<input type='hidden' name='id_compte2' value='$id_compte2' />";
+	/* on concatene au _hidden inserer dans $contexte par l'appel a formulaire_editer_objet l'id_compte qui serat utilise dans l'action editer_asso_dons */
+	$contexte['_hidden'] .= "<input type='hidden' name='id_compte' value='$id_compte' />";
 	/* si id_adherent est egal a 0, c'est que le champ est vide, on ne prerempli rien */
-	if (!$contexte['id_adherent']) $contexte['id_adherent']='';
+	if (!$contexte['id_adherent'])
+		$contexte['id_adherent']='';
 	/* paufiner la presentation des valeurs  */
-	if ($contexte['argent']) $contexte['argent'] = association_nbrefr($contexte['argent']);
-	if ($contexte['valeur']) $contexte['valeur'] = association_nbrefr($contexte['valeur']);
+	if ($contexte['argent'])
+		$contexte['argent'] = association_nbrefr($contexte['argent']);
+	if ($contexte['valeur'])
+		$contexte['valeur'] = association_nbrefr($contexte['valeur']);
 	// on ajoute les metas de destinations
 	if ($GLOBALS['association_metas']['destinations']) {
 		include_spip('inc/association_comptabilite');
@@ -54,6 +56,7 @@ function formulaires_editer_asso_dons_charger_dist($id_don='') {
 		$contexte['unique_dest'] = '';
 		$contexte['defaut_dest'] = $GLOBALS['association_metas']['dc_dons'];; /* ces variables sont recuperees par la balise dynamique directement dans l'environnement */
 	}
+
 	return $contexte;
 }
 
@@ -70,7 +73,7 @@ function formulaires_editer_asso_dons_verifier_dist($id_don) {
 	/* verifier si besoin que le montant des destinations correspond bien au montant de l'opération */
 	if (($GLOBALS['association_metas']['destinations']) && !array_key_exists('argent', $erreurs)) {
 		include_spip('inc/association_comptabilite');
-		if ($err_dest = association_verifier_montant_destinations($argent)) {
+		if ($err_dest = association_verifier_montant_destinations(_request('argent'))) {
 			$erreurs['destinations'] = $err_dest;
 		}
 	}

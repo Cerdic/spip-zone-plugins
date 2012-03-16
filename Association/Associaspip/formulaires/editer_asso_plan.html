@@ -4,7 +4,6 @@
     <form name="formulaire_#FORM" method="post" action="#ENV{action}">
     <div>
 	#ACTION_FORMULAIRE{#ENV{action}}
-	<h3 class="legend"><:asso:edition_plan_comptable:></h3>
 	<ul>
 	    #SELECTEUR_CLASSE_COMPTABLE
 	    <li class="editer_code">
@@ -21,7 +20,7 @@
 	    <li class="editer_solde_anterieur">
 		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{solde_anterieur})</span>]
 		<label for="solde_anterieur"><:asso:solde_reporte_en_euros:></label>
-		<input type="text" name="solde_anterieur" [value="(#ENV{solde_anterieur})"] id="solde_anterieur" class="text" />
+		<input type="[(#HTML5|?{number,text})]" name="solde_anterieur" [value="(#ENV{solde_anterieur})"] id="solde_anterieur" class="number float price" />
 	    </li>
 	    <li class="editer_date_anterieure">
 		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_anterieure})</span>]
