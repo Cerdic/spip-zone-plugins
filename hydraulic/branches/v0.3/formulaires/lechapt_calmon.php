@@ -194,15 +194,18 @@ function formulaires_lechapt_calmon_charger_dist() {
     return $valeurs;
 }
 
-function formulaires_lechapt_calmon_verifier_dist(){
+function formulaires_lechapt_calmon_verifier_dist(){	
     $erreurs = array();
     $datas = array();
     $tChOblig= champs_obligatoires_lcalmon();
     // Vérifier que les champs obligatoires sont bien là :
     foreach($tChOblig as $obligatoire) {
-        if (!_request($obligatoire) && id_decoupe($obligatoire) != 'Q' && id_decoupe($obligatoire) != 'J') {
+		if (_request($obligatoire) == NULL) {
 			$erreurs[$obligatoire] = _T('hydraulic:champ_obligatoire');
         }
+        else if(_request($obligatoire) == 0 && id_decoupe($obligatoire) != 'Q' && id_decoupe($obligatoire) != 'J'){
+			$erreurs[$obligatoire] = _T('hydraulic:valeur_positive');
+		}
         else {
             $datas[$obligatoire] = _request($obligatoire);
         }
@@ -210,7 +213,7 @@ function formulaires_lechapt_calmon_verifier_dist(){
 
 	// Gestion des valeurs négatives
     foreach($datas as $champ=>$data) {
-        if ($data < 0) $erreurs[$champ] = _T('hydraulic:valeur_positive');
+        if ($data < 0) $erreurs[$champ] = _T('hydraulic:valeur_positive_nulle');
     }
     
     if (count($erreurs)) {
@@ -257,7 +260,6 @@ function formulaires_lechapt_calmon_traiter_dist(){
 		if(substr($ind, 0, 3) == 'cal'){
 			$ValCal = id_decoupe($ind);
 		}
-		
 		else if(substr($ind, 0, 3) == 'var'){
 			$min = _request('val_min_'.id_decoupe($ind));
 			$max = _request('val_max_'.id_decoupe($ind));
@@ -265,55 +267,55 @@ function formulaires_lechapt_calmon_traiter_dist(){
 			${id_decoupe($ind)} = &$i;
 		}
 	}
+	
 	$max += $pas/2;
 	
 	switch($ValCal){
-		case 'Q':
-			if($Lg != 0 || $min != 0){			
-				for($i = $min; $i <= $max; $i+= $pas){
-					$result[] = pow(((($J*pow($D, $N))/$L)*(1000/$Lg)), 1/$M);
-				}
+		case 'Q':			
+			for($i = $min; $i <= $max; $i+= $pas){
+				$result[] = pow(((($J*pow($D, $N))/$L)*(1000/$Lg)), 1/$M);
 			}
-			else{
-				$result[] = 0;
-			}
-			
 		break;
 		
 		case 'D': 
-			if($J != 0 || $min != 0){
-				for($i = $min; $i <= $max; $i+= $pas){
-					$result[] = pow(((($L*pow($Q, $M))/$J)*($Lg/1000)), 1/$N);
-				}
-			}
-			else{
+			if($J == 0 && _request('choix_champs_J') != 'varier_val_J'){
 				$result[] = 0;
 			}
-			
+			else{
+				for($i = $min; $i <= $max; $i+= $pas){
+					if($i == 0 && _request('choix_champs_J') == 'varier_val_J'){
+						$result[] = INF;
+					}
+					else{
+						$result[] = pow(((($L*pow($Q, $M))/$J)*($Lg/1000)), 1/$N);
+					}
+				}
+			}
+		
 		break;
 		
 		case 'J':
-			if($D != 0 || $min != 0){
-				for($i = $min; $i <= $max; $i+= $pas){
-					$result[] = (($L*pow($Q, $M))/pow($D, $N))*($Lg/1000) ;
-				}
-			}
-			else{
-				$result[] = 0;
+			for($i = $min; $i <= $max; $i+= $pas){
+				$result[] = (($L*pow($Q, $M))/pow($D, $N))*($Lg/1000) ;
 			}
 			
 		break;
 		
 		case 'Lg':
-			if($Q != 0 || $min != 0){
-				for($i = $min; $i <= $max; $i+= $pas){
-					$result[] = (($J*pow($D, $N))/($L*pow($Q,$M)))*1000 ;
-				}
-			}
-			else{
+			if($Q == 0 && _request('choix_champs_Q') != 'varier_val_Q'){
 				$result[] = 0;
 			}
-			
+			else{
+				for($i = $min; $i <= $max; $i+= $pas){
+					if($i == 0 && _request('choix_champs_Q') == 'varier_val_Q'){
+						$result[] = INF;
+					}
+					else{
+						$result[] = (($J*pow($D, $N))/($L*pow($Q,$M)))*1000 ;
+					}
+				}
+			}
+
 		break;
 	}
 
@@ -373,7 +375,7 @@ function formulaires_lechapt_calmon_traiter_dist(){
 		$ValeurVarie = _request(substr($tabClass['var'],0,1));
 	}
 	
-	foreach($result as $valCal){
+	foreach($result as $indice){
 		$i++;
 		$echo.= '<tr class="';
 		$echo.=($i%2==0)?'row_even':'row_odd';
@@ -387,8 +389,8 @@ function formulaires_lechapt_calmon_traiter_dist(){
 					}
 				}	
 				
-		$echo.= '<td>'.$ValeurVarie.'</td><td>'.format_nombre($valCal, $iPrec).'</td>';		
-		$echo.= '</tr>';		
+		$echo.= '<td>'.$ValeurVarie.'</td><td>'.format_nombre($indice, $iPrec).'</td>';		
+		$echo.= '</tr>';	
 		$tabAbs[] = $ValeurVarie;
 		$ValeurVarie+= $pas;
 	}	
@@ -396,12 +398,18 @@ function formulaires_lechapt_calmon_traiter_dist(){
     $echo.=	'</tbody>
         </table>';
 
-
+	if($min == 0 && ($ValCal == 'D' || $ValCal == 'Lg')){
+		unset($result[0]);
+		$result = array_values($result);
+		
+		unset($tabAbs[0]);
+		$tabAbs = array_values($tabAbs);
+	}
 
     /***************************************************************************
     *                        Affichage du graphique
     ****************************************************************************/
-  
+
 	// Si notre tableau de résultats contient plus d'une ligne alors on l'affiche.
 	if(count($result) > 1){
 		$oGraph = new cGraph();

@@ -42,22 +42,22 @@ function mes_saisies_normale_critique(){
 	$fieldset_champs_nc = array(
 	
 				'FT'          => array(
-									   'Définition de la section trapézoïdale',
+									   'def_section_trap',
 									   array(
 											 'rLarg'  =>array('largeur_fond',2.5),
-											 'rFruit' =>array('fruit', 0.56, false)
-											)
+											 'rFruit' =>array('fruit', 0.56)
+											 )
 				),
 				
 				'FR'          => array(
-									   'Définition de la section rectangulaire',
+									   'def_section_rect',
 									   array(
-											 'rLarg'  =>array('largeur_fond',2.5),
+											 'rLarg'  =>array('largeur_fond',2.5)
 											)
 				),
 					
 				'FC'          => array(
-									   'Définition de la section circulaire',
+									   'def_section_circ',
 									   array(
 											 'circ1'  =>array('champ_circulaire1',3),
 											 'circ2'  =>array('champ_circulaire2', 0.6)
@@ -65,7 +65,7 @@ function mes_saisies_normale_critique(){
 				),
 				
 				'FP'          => array(
-									   'Définition de la section puissance',
+									   'def_section_puis',
 									   array(
 											 'puiss1' =>array('champs_puissance1',10),
 											 'puiss2' =>array('champs_puissance2', 0.7)
@@ -73,7 +73,7 @@ function mes_saisies_normale_critique(){
 				),
 				
 				'Caract' => array(				
-									   'Caractéristiques',					
+									   'caract_globale',					
 									   array(
 											 'rug'	    =>array('rugosite_nc',50),
 											 'pente'    =>array('pente_nc', 50),
@@ -101,7 +101,7 @@ function champs_obligatoires_nc() {
 			}
 		}
 	}
-
+	
 	return $tChOblig;
 }
 
@@ -111,31 +111,38 @@ function formulaires_calcul_normale_critique_charger_dist() {
 	
 	$valeurs = array(
 		'ncTypeSection' => 'FT',
-		'mes_saisies' => $tSaisie_nc,
-		'choix_champs_rug'      => 'varier_val_rug',
-		'choix_champs_pente'    => 'val_fixe_pente',
-		'choix_champs_cote_eau' => 'val_fixe_cote_eau',
-		'choix_champs_debit'    => 'val_fixe_debit',
+		'mes_saisies'   => $tSaisie_nc,
+		'val_a_cal_nc'  => 1,
+		'prec_nc'       => 0.001
 	);
     
     foreach($tSaisie_nc as $CleFD=>$FieldSet) {
 		foreach($FieldSet[1] as $Cle=>$Champ) {
 			$valeurs[$CleFD.'_'.$Cle.'_nc'] = $Champ[1];
+			if($CleFD == 'Caract'){
+				$valeurs['choix_champs_'.$Cle] = 'val_fixe_'.$Cle;		
+				$valeurs['val_min_'.$Cle] = 1;
+				$valeurs['val_max_'.$Cle] = 2;
+				$valeurs['pas_var_'.$Cle] = 0.1;
+			}
 		}
 	}
-
+	
     return $valeurs;
 }
 
-function formulaires_calcul_normale_critique_verifier_dist(){
+function formulaires_calcul_normale_critique_verifier_dist(){	
     $erreurs = array();
     $datas = array();
     $tChOblig= champs_obligatoires_nc();
     // Vérifier que les champs obligatoires sont bien là :
     foreach($tChOblig as $obligatoire) {
-        if (!_request($obligatoire)) {
+		if (_request($obligatoire) == NULL) {
 			$erreurs[$obligatoire] = _T('hydraulic:champ_obligatoire');
         }
+        else if(_request($obligatoire) == 0){
+			$erreurs[$obligatoire] = _T('hydraulic:valeur_positive');
+		}
         else {
             $datas[$obligatoire] = _request($obligatoire);
         }
@@ -143,7 +150,7 @@ function formulaires_calcul_normale_critique_verifier_dist(){
 
 	// Gestion des valeurs négatives
     foreach($datas as $champ=>$data) {
-        if ($data < 0) $erreurs[$champ] = _T('hydraulic:valeur_positive');
+        if ($data < 0) $erreurs[$champ] = _T('hydraulic:valeur_positive_nulle');
     }
     
     if (count($erreurs)) {
@@ -153,20 +160,23 @@ function formulaires_calcul_normale_critique_verifier_dist(){
     return $erreurs;
 }
 
+
 function formulaires_normale_critique_traiter_dist(){
 
 	 /***************************************************************************
-    *                        Calcul de Lechapt et calmon
-    ****************************************************************************/
+    *                        Calcul normale critique
+    ***************************************************************************/
 
+	
 	/***************************************************************************
     *                   Affichage du tableau de données
     ****************************************************************************/
-
+	
     /***************************************************************************
     *                        Affichage du graphique
     ****************************************************************************/
 
+	
 }
 ?>
 
