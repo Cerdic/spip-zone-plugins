@@ -2,13 +2,13 @@
 [(#BOITE_OUVRIR{[
 	[(#AUTORISER{modifier,abomailman,#ID_ABOMAILMAN})
 		[(#ID_ABOMAILMAN|afficher_qui_edite{abomailman}|non)
-			[(#URL_ECRIRE{abomailman_edit,id_abomailman=#ID_ABOMAILMAN}|icone_verticale{<:abomailmans:icone_modifier_abomailman:>,abomailman,edit,right ajax preload})]
+			[(#URL_ECRIRE{abomailman_edit,id_abomailman=#ID_ABOMAILMAN}|icone_verticale{<:abomailmans:icone_modifier_abomailman:>,abomailmans-24,edit,right ajax preload})]
 		]
 		[(#ID_ABOMAILMAN|afficher_qui_edite{abomailman}|oui)
-			[(#URL_ECRIRE{abomailman_edit,id_abomailman=#ID_ABOMAILMAN}|icone_verticale{#ID_ABOMAILMAN|afficher_qui_edite{abomailman},warning-24,'',right ajax preload})]
+			[(#URL_ECRIRE{abomailman_edit,id_abomailman=#ID_ABOMAILMAN}|icone_verticale{#ID_ABOMAILMAN|afficher_qui_edite{abomailmans-24},warning-24,'',right ajax preload})]
 		]
 	]
-	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{abomailman-24.png}|balise_img{article,cadre-icone})]</h1>
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{abomailmans-24.png}|balise_img{article,cadre-icone})]</h1>
 ],simple fiche_objet})]
 <div>
 <div id="wysiwyg">

@@ -4,7 +4,7 @@
 	version="1.0.0"
 	etat="dev"
 	compatibilite="[3.0.0-dev;3.0.99]"
-	logo="img_pack/mailman.gif"
+	logo="prive/themes/spip/images/abomailmans-32.png"
 	schema="0.34"
 	documentation="http://www.spip-contrib.net/Abomailmans-pour-s-abonner-a-des-listes-de-diffusion"
 >	
@@ -22,6 +22,6 @@
 
 	<necessite nom="facteur" compatibilite="[2.0.0;[" />
 	
-	<menu nom="abomailmans" titre="abomailmans:bouton_listes_diffusion" parent="bando_edition" icone="images/abomailman-16.png" />
-	<menu nom="abomailman_edit" parametres="new=oui" titre="abomailmans:icone_ajouter_liste" parent="outils_rapides" icone="images/abomailman-16-new.png" />
+	<menu nom="abomailmans" titre="abomailmans:bouton_listes_diffusion" parent="bando_edition" icone="images/abomailmans-16.png" />
+	<menu nom="abomailman_edit" parametres="new=oui" titre="abomailmans:icone_ajouter_liste" parent="outils_rapides" icone="images/abomailmans-new-16.png" />
 </paquet>

@@ -27,7 +27,7 @@ function abomailmans_declarer_tables_objets_sql($tables){
 		'info_aucun_objet'=> 'abomailmans:info_abomailman_aucun',
 		'info_1_objet' => 'abomailmans:info_abomailmans_1',
 		'info_nb_objets' => 'abomailmans:info_abomailmans_nb',
-		'icone_objet' => 'abomailman',
+		'icone_objet' => 'abomailmans-24',
 		'titre' => "titre, '' AS lang",
 		'principale' => 'oui',
 		'champs_editables' => array('titre','descriptif','email','email_sympa','email_subscribe','email_unsubscribe','modele_defaut','periodicite','lang','desactive'),
