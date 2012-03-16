@@ -30,9 +30,11 @@ function action_api_oeproxy_dist($args = null){
 		',\w+://([\w]+).wikipedia.org/wiki/([^/]+).*,i' => 'wikipedia',
 		',^https?://.*facebook.com/(people/[^/]+/(\d+).*|([^/]+$)),i' => 'facebook',
 		',^http://(?:www.)?imdb.com/title/([^/]+),i' => 'imdb',
+		',^http://(?:www.)?storify.com/([^/]+)/([^/]+),i' => 'storify',
 #		',^http://(www.)?amazon.fr/[^/]+/[^/]+/([^/]+)/,i' => 'amazon',
 
 	);
+
 	static $support_formats = array(
 		'xml',
 		'json',

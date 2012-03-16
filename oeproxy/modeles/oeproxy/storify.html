@@ -1,0 +1,18 @@
+<div class="storify">
+<h3>[(#ENV*{content/title})]</h3>
+<BOUCLE_pour(POUR){tableau #ENV*{content/elements}}>
+[(#VALEUR{type}|=={text}|oui)[(#VALEUR{data/text}|paragrapher)]]
+[(#VALEUR{type}|=={quote}|oui)
+<blockquote class="oe-quote-block">
+	<p class="oe-quote-text">#VALEUR{data/quote/text}</p>
+	<div class="oe-quote-user-block">&mdash;
+		<a href="#VALEUR{attribution/href}"><img src="#VALEUR{attribution/thumbnail}" />
+			<span class="oe-quote-user-screen_name">@#VALEUR{attribution/username}</span></a>
+			<span class="oe-quote-user-name">#VALEUR{attribution/name}</span>
+	</div>
+	<div class="oe-quote-meta">[<a href='#VALEUR{permalink}'>(#VALEUR{posted_at}|affdate_heure)</a>][<span class='via'>
+		via (#VALEUR{source/name})</span>]</div>
+</blockquote>
+]
+</BOUCLE_pour>
+</div>
