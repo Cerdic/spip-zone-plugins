@@ -41,7 +41,7 @@ function multilang_creer_config(){
 			'site' => '',
 			'evenement' => ''
 	), $config);
-	ecrire_meta('multilang', serialize($config));
+	ecrire_meta('multilang', serialize($config_defaut));
 }
 /**
  * Fonction de desinstallation
