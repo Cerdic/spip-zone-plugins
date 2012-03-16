@@ -18,8 +18,8 @@ function facteur_upgrade($nom_meta_base_version, $version_cible){
 		array('ecrire_meta','facteur_smtp_secure', 'non'),
 		array('ecrire_meta','facteur_smtp_sender', ''),
 		array('ecrire_meta','facteur_filtre_images', 1),
-		array('ecrire_meta','facteur_filtre_css', 1),
-		array('ecrire_meta','facteur_filtre_iso_8859', 1),
+		array('ecrire_meta','facteur_filtre_css', 0),
+		array('ecrire_meta','facteur_filtre_iso_8859', 0),
 		array('ecrire_meta','facteur_adresse_envoi', 'non'),
 		array('facteur_vieil_upgrade'),
 	);
