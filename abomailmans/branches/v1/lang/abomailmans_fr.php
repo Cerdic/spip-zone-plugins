@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	//C
 	'choisir_liste' => 'Vous devez choisir une liste.',
-	'contenu_date' => 'Contenu a partir de cette date',
+	'contenu_date' => 'Contenu à partir de cette date',
 	'creation_droits_insuffisants' => 'Vos droits sont insuffisants...',
 
 	// D
@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'emailliste_abomailman' => 'L\'adresse e-mail de la liste',
 	'emailliste_abosympa' => 'L\'adresse e-mail de l\'administrateur Sympa',
 	'emailliste_subscribe' => 'Abonnement',
-	'emailliste_unsubscribe' => 'Desabonnement',
+	'emailliste_unsubscribe' => 'Désabonnement',
 	'emails_a_renseigner' => 'Emails à renseigner',                                          
 	'email_abonnement' => 'Votre adresse e-mail',
 	'email_envoye' => 'L\'e-mail a été envoyé à la liste de diffusion : @liste@.',
@@ -39,14 +39,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_apercu' => 'Aperçu',
 	'envoi_confirmer' => 'Confirmer et envoyer',
 	'envoi_liste_parametres' =>'Liste des paramètres [Facultatif]',
-	'envoi_parametres' => 'Paramétres',
+	'envoi_parametres' => 'Paramètres',
 	'envoi_regulier' => 'Envois automatiques',
 	'envoi_regulier_info' => 'Laisser vide pour ne pas avoir d\'envois automatiques',
 	'envoi_regulier_tous_les' => 'Envoi tous les',
 	'envoi_vers'=> 'envoi vers',
 	'envoyer_courier' => 'Envoyer un courrier',
 	'envoyer_courier_liste' => 'Envoyer ce courrier à cette liste de diffusion :',
-	'envoyer_mailmans' => 'Séléctionner le modèle et son contenu',
+	'envoyer_mailmans' => 'Sélectionner le modèle et son contenu',
 	'erreur_email_liste_oublie' => 'L\'adresse email de la liste est obligatoire',
 	'explication_email_sympa' => 'Si ce champ est renseigné, la liste est considérée comme une liste de serveur "Sympa", dans le cas contraire comme une liste "Mailman" ou "ezmlm".',
 	'explication_email_subscribe' => 'Email d\'abonnement, de style <code>suffixe+subscribe@exemple.org</code>',
@@ -56,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_ajouter_liste' => 'Ajouter une nouvelle liste',
 	'icone_envoyer_mail_liste' => 'Envoyer un e-mail aux lettres à partir du contenu de ce site',
 	'info_sisympa' => '[Obligatoire si liste Sympa]',
-	'insciption_listes_legende' => 'Abonnement au listes de diffusion',
+	'insciption_listes_legende' => 'Abonnement aux listes de diffusion',
 	'inscription_lettres_legende' => 'Abonnement aux listes de <br />diffusion et de discussions',
 
 	// J
@@ -117,7 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_descriptif' =>'Descriptif',
 	'titre_abomailman' => 'Titre de la liste',
 	'titre_liste_obligatoire' => 'Le titre de la liste est obligatoire',
-	'toute_liste' => 'Toutes les listes de diffusions',
+	'toute_liste' => 'Toutes les listes de diffusion',
 
 	// V
 	'veut_s_abonner' => 'veut s\'abonner',
