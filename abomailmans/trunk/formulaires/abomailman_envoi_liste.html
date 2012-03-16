@@ -27,7 +27,7 @@
 			<li class="choisir_template[ (#ENV**{erreurs}|table_valeur{template}|oui)erreur]">
 				<label for="template"><:abomailmans:template:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{template})</span>]
-				<select name="template">
+				<select name="template" id="template">
 					<INCLURE{fond=prive/listes/abomailman_templates}{id_abomailman}{erreurs}{env}>
 				</select>
 			</li>
