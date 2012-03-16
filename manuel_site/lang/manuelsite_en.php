@@ -1,11 +1,15 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-if (!defined("_ECRIRE_INC_VERSION")) return;
+// extrait automatiquement de http://trad.spip.org/tradlang_module/manuelsite?lang_cible=en
+// ** ne pas modifier le fichier **
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
 	// C
 	'configurer_explication' => 'This plugin displays an help icon on every page of the private space showing the Website Editor Manual. This manual is @texte@ Its purpose is to explain the architecture of the site to the editors, in which section to store what, how to encode and install a video… So, all that you want and which is specific to your website.',
-	'configurer_explication_l_article' => '<a href="?exec=articles&amp;id_article=@idart@" title="Website Editor Manual">the article #@idart@</a> of your website.',
+	'configurer_explication_l_article' => '<a href="?exec=articles&id_article=@idart@" title="Website Editor Manual">the article #@idart@</a> of your website.',
 	'configurer_explication_un_article' => 'an article of the website.',
 	'configurer_titre' => 'Configure the Website Editor Manual',
 
@@ -23,12 +27,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'fermer_le_manuel' => 'Close the manual',
-	
+
 	// H
-	'help' => 'Help : ' ,
-	
+	'help' => 'Help : ',
+
 	// I
 	'intro' => 'The purpose of this document is to help the editors with the use of the site. It comes in complement from the headed document “[How to use SPIP 2 as an author->http://www.spip-contrib.net/How-to-use-SPIP-as-an-author,3399]” which is a total help with the use of SPIP. You will find there a description of the architecture of the site, of the technical assistance on particular points…',
+
 	// L
 	'label_afficher_bord_gauche' => 'Display',
 	'label_background_color' => 'Background color',
@@ -37,12 +42,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_id_article' => 'Article number',
 	'label_intro' => 'Introduction',
 	'label_largeur' => 'Width',
-	'legende_apparence' => 'Appearance' ,
-	'legende_contenu' => 'Contents' ,
+	'legende_apparence' => 'Appearance',
+	'legende_contenu' => 'Contents',
 
 	// T
 	'titre_faq' => 'FAQ of the Website Editor Manual',
 	'titre_manuel' => 'Website Editor Manual',
-	'titre_menu' => 'Website Editor Manual',
+	'titre_menu' => 'Website Editor Manual'
 );
+
 ?>

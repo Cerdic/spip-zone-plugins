@@ -1,12 +1,13 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/manuel_site/lang/
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
 	// C
 	'configurer_explication' => 'Ce plugin installe une icône d’aide permettant d’afficher depuis n’importe quelle page de l’espace privé le manuel de rédaction du site. Ce manuel est @texte@ Il a pour but d’expliquer aux rédacteurs l’architecture du site, dans quelle rubrique ranger quoi, comment encoder et installer une vidéo... Bref tout ce que vous voulez et qui est spécifique à votre site.',
-	'configurer_explication_l_article' => '<a href="?exec=articles&amp;id_article=@idart@" title="Manuel de redaction">l’article @idart@</a> de votre site.',
+	'configurer_explication_l_article' => '<a href="?exec=articles&id_article=@idart@" title="Manuel de redaction">l’article @idart@</a> de votre site.',
 	'configurer_explication_un_article' => 'un article du site.',
 	'configurer_titre' => 'Configurer le manuel de rédaction du site',
 
@@ -24,12 +25,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'fermer_le_manuel' => 'Fermer le manuel',
-	
+
 	// H
-	'help' => 'Au secours : ' ,
-	
+	'help' => 'Au secours : ',
+
 	// I
-	'intro' => "Ce document a pour but d’aider les rédacteurs à l’utilisation du site. Il vient en complément du document intitulé « [Cours SPIP 2.0 pour rédacteurs->http://www.spip-contrib.net/Mode-d-emploi-SPIP-2-pour] » qui est une aide globale à l’utilisation de SPIP. Vous y trouverez une description de l’architecture du site, de l’aide technique sur des points particuliers...",
+	'intro' => 'Ce document a pour but d’aider les rédacteurs à l’utilisation du site. Il vient en complément du document intitulé « [Cours SPIP 2.0 pour rédacteurs->http://www.spip-contrib.net/Mode-d-emploi-SPIP-2-pour] » qui est une aide globale à l’utilisation de SPIP. Vous y trouverez une description de l’architecture du site, de l’aide technique sur des points particuliers...',
 
 	// L
 	'label_afficher_bord_gauche' => 'Affichage',
@@ -39,12 +40,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_id_article' => 'N° de l’article',
 	'label_intro' => 'Introduction',
 	'label_largeur' => 'Largeur',
-	'legende_apparence' => 'Apparence' ,
-	'legende_contenu' => 'Contenu' ,
-	
+	'legende_apparence' => 'Apparence',
+	'legende_contenu' => 'Contenu',
+
 	// T
 	'titre_faq' => 'FAQ du Manuel de rédaction',
 	'titre_manuel' => 'Manuel de rédaction du site',
-	'titre_menu' => 'Manuel de rédaction du site',
+	'titre_menu' => 'Manuel de rédaction du site'
 );
+
 ?>
