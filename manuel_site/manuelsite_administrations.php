@@ -39,7 +39,7 @@ function manuelsite_creer_config(){
 			'background_color' => '#D6DDE5'
 	), $config);
 	
-	ecrire_meta('manuelsite', serialize($config));
+	ecrire_meta('manuelsite', serialize($config_defaut));
 }
 
 /**
