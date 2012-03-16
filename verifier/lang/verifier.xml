@@ -23,6 +23,9 @@
 	<langue code="pt_br" url="http://trad.spip.org/tradlang_module/verifier?lang_cible=pt_br">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.org/auteur/ricardo-porto" />
 	</langue>
+	<langue code="ru" url="http://trad.spip.org/tradlang_module/verifier?lang_cible=ru">
+		<traducteur nom="nazar" lien="http://trad.spip.org/auteur/nazar" />
+	</langue>
 	<langue code="sk" url="http://trad.spip.org/tradlang_module/verifier?lang_cible=sk">
 		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
