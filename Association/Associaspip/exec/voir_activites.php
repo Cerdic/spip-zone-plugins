@@ -35,8 +35,8 @@ function exec_voir_activites()
 		$liste_libelles = $liste_effectifs = array();
 		$liste_libelles['valide'] = _T('asso:activite_entete_validees');
 		$liste_libelles['pair'] = _T('asso:activite_entete_impayees');
-		$liste_effectifs['valide'] = sql_getfetsel('COUNT(*)+SUM(inscrits) AS valide', 'spip_asso_activites', "id_evenement=$id_evenement AND date_paiment<>'0000-00-00' ");
-		$liste_effectifs['impair'] = sql_getfetsel('COUNT(*)+SUM(inscrits) AS impair', 'spip_asso_activites', "id_evenement=$id_evenement AND NOT date_paiment='0000-00-00' ");
+		$liste_effectifs['valide'] = sql_getfetsel('COUNT(*)+SUM(inscrits) AS valide', 'spip_asso_activites', "id_evenement=$id_evenement AND date_paiement<>'0000-00-00' ");
+		$liste_effectifs['impair'] = sql_getfetsel('COUNT(*)+SUM(inscrits) AS impair', 'spip_asso_activites', "id_evenement=$id_evenement AND NOT date_paiement='0000-00-00' ");
 		echo totauxinfos_effectifs('activites', $liste_libelles, $liste_effectifs);
 		// TOTAUX : montants des participations validees
 		$montant = sql_fetsel('SUM(montant) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement AND statut " );
@@ -44,7 +44,7 @@ function exec_voir_activites()
 		// datation
 		echo association_date_du_jour();
 		echo fin_boite_info(true);
-		$res = association_icone('activite_bouton_ajouter_inscription',  generer_url_ecrire('edit_activite', 'id_evenement='.$id_evenement), 'panier_in.gif');
+		$res = association_icone('activite_bouton_ajouter_inscription',  generer_url_ecrire('ajout_inscription', 'id_evenement='.$id_evenement), 'panier_in.gif');
 		if (test_plugin_actif('FPDF')) {
 			$res .= association_icone('activite_bouton_voir_liste_inscriptions',  generer_url_ecrire('pdf_activite','id='.$id_evenement), 'print-24.png');
 		}
@@ -72,7 +72,7 @@ function exec_voir_activites()
 		echo '<th colspan="3" class="actions">'. _T('asso:entete_action') .'</th>';
 		echo "</tr>\n</thead><tbody>";
 		if ($statut) { // restriction de la selection
-			$critereSupplementaire = ' AND '. ($statut>0?"date_paiment='0000-00-00'":"date_paiment<>'0000-00-00'")
+			$critereSupplementaire = ' AND '. ($statut>0?"date_paiement='0000-00-00'":"date_paiement<>'0000-00-00'");
 		}
 		$query = sql_select('*', 'spip_asso_activites', "id_evenement=$id_evenement $critereSupplementaire ", '', 'id_activite') ;
 		while ($data = sql_fetch($query)) {

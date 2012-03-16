@@ -41,9 +41,9 @@ function exec_compte_resultat()
 		echo fin_boite_info(true);
 		$res = association_icone('bilan', generer_url_ecrire('bilan', "exercice=$exercice"), 'finances.jpg');
 		$res .= association_icone('annexe_titre_general', generer_url_ecrire('annexe', "exercice=$exercice"), 'finances.jpg');
-		$res .= association_icone('bouton_retour'),  generer_url_ecrire('comptes', "exercice=$exercice"), 'retour-24.png');
+		$res .= association_icone('bouton_retour',  generer_url_ecrire('comptes', "exercice=$exercice"), 'retour-24.png');
 		echo bloc_des_raccourcis($res);
-		debut_cadre_association('finances.jpg', 'cpte_resultat_titre_general'), $exercice_data['intitule']);
+		debut_cadre_association('finances.jpg', 'cpte_resultat_titre_general', $exercice_data['intitule']);
 		if ($plan) {
 			$join = ' RIGHT JOIN spip_asso_plan ON imputation=code';
 			$sel = ', code, intitule, classe';

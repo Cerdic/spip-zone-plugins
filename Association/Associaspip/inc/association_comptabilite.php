@@ -182,7 +182,7 @@ function association_supprimer_operation_comptable1($id_compte, $securite=FALSE)
 	spip_log("suppression d'operation comptable : id_compte=$id_compte, date=$date, recette=$recette, depense=$depense, imputation=$imputation, journal=$journal, id_journal=$id_journal, justification=...",'associaspip');
     } else { // on ne supprime pas les ecritures validees/verouillees ; il faut annuler l'operation par une operation comptable inverse...
 	/*on cree l'operation opposee a celle a annuler ; mais ce n'est pas une annulation correcte au regard des numeros de comptes (imputation/journal)... */
-	$annulation = sql_insertq('spip_asso_comptes', arra(
+	$annulation = sql_insertq('spip_asso_comptes', array(
 	    'date' => date('Y-m-d'),
 	    'depense' => $recette,
 	    'recette' => $depense,

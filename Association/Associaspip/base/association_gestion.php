@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 include_spip('base/association');
 include_spip('base/abstract_sql');
 
-// desinstatllation
+// desinstallation
 function association_vider_tables($nom_meta, $table)
 {
 	// on efface la meta [association_meta][base_version] pour que la fonction qui gere la desinstallation ne voie plus le plugin et confirme sa desinstallation
@@ -558,7 +558,7 @@ $GLOBALS['association_maj'][58894] = array(
 // renommer le champ "date" en "date_inscription" qui est plus parlant et n'est pas un mot reserve
 	array('sql_alter', "TABLE spip_asso_activites ADD date_inscription DATE NOT NULL DEFAULT '0000-00-00' "),
 	array('sql_update', 'spip_asso_activites', array('date'=>'date_inscription') ),
-	array('sql_alter', "TABLE spip_asso_activites DROP \"date\" "),
+	array('sql_alter', "TABLE spip_asso_activites DROP date "),
 );
 
 

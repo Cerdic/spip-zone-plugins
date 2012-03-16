@@ -31,7 +31,7 @@ function exec_action_dons()
 			// info
 			$don = sql_fetsel('*', 'spip_asso_dons', "id_don=$id_don");
 			$infos['argent'] = association_prixfr($don['argent']);
-			$infos['colis'] = ($don['valeur'] ? '('.association_prixfr($don['valeur'])')<br />' : '') .$don['colis'];
+			$infos['colis'] = ($don['valeur'] ? '('.association_prixfr($don['valeur']).')<br />' : '') .$don['colis'];
 			$onfos['contrepartie'] = $don['contrepartie'];
 			totauxinfos_intro(association_calculer_lien_nomid($don['bienfaiteur'],$don['id_adherent']), 'don', $id_don, $infos );
 			// datation

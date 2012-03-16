@@ -222,7 +222,7 @@ function comptes_while($where, $limit, $id_compte)
 					: '<td class="action">'. association_bouton('mettre_a_jour', 'edit-12.gif', 'edit_compte', 'id='.$data['id_compte'], $onload_option) . '</td>'
 					)
 				/* operation supprimable */
-				. '<td class="action">'. association_bouton_supprimer('compte', 'id='.$data['id_compte']) .'</td>'
+				. association_bouton_supprimer('compte', 'id='.$data['id_compte'], 'td')
 				)
 			/* operation non validee (donc validable et editable ...ici ou via le module dedie...) */
 			. '<td class="action"><input name="valide[]" type="checkbox" value="'.$data['id_compte']. '" /></td>'
