@@ -38,4 +38,15 @@ function json_encode_html($texte){
 	$texte = str_replace(array("<",">"),array("\u003C","\u003E"),$texte);
 	return $texte;
 }
+
+function oembed($url){
+	if (oembed_verifier_provider($url)) {
+		$fond = recuperer_fond('modeles/oembed',array('url'=>$url,'lien'=>''));
+		if ($fond = trim($fond))
+			return $fond;
+	}
+
+	return $url;
+}
+
 ?>

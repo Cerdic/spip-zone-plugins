@@ -18,3 +18,9 @@
 
 .oe-reference {}
 .oe-cite {}
+
+figure.oe-image-block {border: 1px solid #eee;background: #fff;text-align: center;width:80%;margin: 3em auto;overflow:hidden;padding:4px;}
+figure.oe-image-block img {background: #fff;padding-bottom:4px;}
+figure.oe-image-block figcaption {background:#eee;padding: 10px;text-align: left;}
+
+.oe-video-block {margin:3em auto;}
