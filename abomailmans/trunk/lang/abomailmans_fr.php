@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'choisir_liste' => 'Vous devez choisir une liste.',
-	'contenu_date' => 'Contenu a partir de cette date',
+	'contenu_date' => 'Contenu à partir de cette date',
 	'creation_droits_insuffisants' => 'Vos droits sont insuffisants...',
 
 	// D
@@ -35,19 +35,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'emailliste_abomailman' => 'L\'adresse e-mail de la liste',
 	'emailliste_abosympa' => 'L\'adresse e-mail de l\'administrateur Sympa',
 	'emailliste_subscribe' => 'Abonnement',
-	'emailliste_unsubscribe' => 'Desabonnement',
+	'emailliste_unsubscribe' => 'Désabonnement',
 	'emails_a_renseigner' => 'Emails à renseigner',
 	'envoi_apercu' => 'Aperçu',
 	'envoi_confirmer' => 'Confirmer et envoyer',
 	'envoi_liste_parametres' => 'Liste des paramètres [Facultatif]',
-	'envoi_parametres' => 'Paramétres',
+	'envoi_parametres' => 'Paramètres',
 	'envoi_regulier' => 'Envois automatiques',
 	'envoi_regulier_info' => 'Laisser vide pour ne pas avoir d\'envois automatiques',
 	'envoi_regulier_tous_les' => 'Envoi tous les',
 	'envoi_vers' => 'envoi vers',
 	'envoyer_courier' => 'Envoyer un courrier',
 	'envoyer_courier_liste' => 'Envoyer ce courrier à cette liste de diffusion :',
-	'envoyer_mailmans' => 'Séléctionner le modèle et son contenu',
+	'envoyer_mailmans' => 'Sélectionner le modèle et son contenu',
 	'erreur_email_liste_oublie' => 'L\'adresse email de la liste est obligatoire',
 	'explication_email_subscribe' => 'Email d\'abonnement, de style <code>suffixe+subscribe@exemple.org</code>',
 	'explication_email_sympa' => 'Si ce champ est renseigné, la liste est considérée comme une liste de serveur "Sympa", dans le cas contraire comme une liste "Mailman" ou "ezmlm".',
@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_abomailmans_1' => 'Une liste',
 	'info_abomailmans_nb' => '@nb@ listes',
 	'info_sisympa' => '[Obligatoire si liste Sympa]',
-	'insciption_listes_legende' => 'Abonnement au listes de diffusion',
+	'insciption_listes_legende' => 'Abonnement aux listes de diffusion',
 	'inscription_lettres_legende' => 'Abonnement aux listes de diffusion et de discussions',
 
 	// J
@@ -100,8 +100,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouveau_abomailman' => 'Nouvelle liste de diffusion',
 
 	// P
+	'pas_template_txt' => 'Il n\'y a pas de version texte pour ce modèle',
 	'periodicite' => ' jours.',
 	'prenom' => 'Prénom',
+	'previsu_html' => 'html',
+	'previsu_txt' => 'texte',
 
 	// R
 	'rubrique' => 'Et lister les articles de la rubrique',
@@ -112,21 +115,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sujet_obligatoire' => 'Le sujet est obligatoire.',
 	'suppression_definitive' => 'Suppression définitive !',
 	'supprimer' => 'Supprimer',
-	'sympa_message_confirmation' => 'Un email de validation a été envoyé &agrave l\'adresse : ',
+	'sympa_message_confirmation' => 'Un email de validation a été envoyé à l\'adresse : ',
 
 	// T
 	'template' => 'Choisissez le modèle et son contenu',
 	'template_defaut' => 'Modèle par défaut',
+	'template_defaut_info' => 'Si le fichier modele_choisi.txt.html existe, la newsletter sera envoyée en mode html + texte. Sinon seule la version html sera expédiée.',
 	'texte_descriptif' => 'Descriptif',
 	'titre_abomailman' => 'Titre de la liste',
 	'titre_liste_obligatoire' => 'Le titre de la liste est obligatoire',
-	'toute_liste' => 'Toutes les listes de diffusions',
+	'toute_liste' => 'Toutes les listes de diffusion',
 
 	// V
 	'verifier_formulaire' => 'Vérifiez le remplissage du formulaire.',
 	'veut_s_abonner' => 'veut s\'abonner',
 	'veut_se_desabonner' => 'veut se désabonner',
-	'voir_modele_depuis' => 'Voir un exemple du modéle avec',
+	'voir_modele_depuis' => 'Voir un exemple du modèle avec',
 	'votre_email' => 'Votre email'
 );
 

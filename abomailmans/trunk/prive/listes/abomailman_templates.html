@@ -1,4 +1,5 @@
-#SET{arraytemplate,#EVAL{find_all_in_path("templates/","[.]html$")}}
+[(#REM) Tous les fichiers *.html, mais pas les .txt.html ]
+#SET{arraytemplate,#EVAL{find_all_in_path("templates/",".*(?<!txt)\.html$")}}
 
 <BOUCLE_abomailman(ABOMAILMANS){id_abomailman}>
 [(#SET{select,[(#MODELE_DEFAUT|nettoie_chemin)]})]

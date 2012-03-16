@@ -23,7 +23,7 @@ function genie_abomailmans_envois_dist($time) {
 	 * pour tester on peut mettre a MINUTE penser a remettre a DAY !!
 	 */
 	$where = "periodicite!='' AND desactive='0' AND email!=''
-	AND date_envoi < DATE_SUB(NOW(), INTERVAL periodicite DAY)"; 
+		AND date_envoi < DATE_SUB(NOW(), INTERVAL periodicite DAY)"; 
 	$id_liste = sql_getfetsel("id_abomailman", "spip_abomailmans", $where, '', "date_envoi", "1");
 	 
 	if ($id_liste) {
@@ -91,7 +91,10 @@ function liste_a_jour($id_liste) {
 	$body = array(
 		'html'=>$fond,
 	); 
-	
+	/* Format Texte */
+	$query['envoi_txt'] = "oui";
+	$body['texte'] = recuperer_fond('abomailman_template',$query);
+
 	//Si la page renvoie un contenu
 	if (strlen($fond) > 10) {
 				
