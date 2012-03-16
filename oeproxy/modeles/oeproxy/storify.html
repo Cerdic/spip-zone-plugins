@@ -15,6 +15,27 @@
 		via (#VALEUR{source/name})</span>]</div>
 </blockquote>
 ]
+[(#VALEUR{type}|=={image}|oui)
+	<figure class="oe-image-block">
+		<a href="#VALEUR{permalink}">[(#VALEUR{data/image/src}|image_reduire{550,400})]</a>
+		<figcaption>[(#VALEUR{data/image/caption}) ]by <a href="[(#VALEUR{attribution/href})]">[(#VALEUR{attribution/name})]</a></figcaption>
+	</figure>
+]
+[(#VALEUR{type}|=={video}|oui)
+	[<div class="oe-video-block">
+	(#VALEUR{permalink}|oembed)
+	</div>]
+]
+[(#VALEUR{type}|=={link}|oui)
+	<blockquote class="oe-link-block">
+		[(#VALEUR{data/link/thumbnail}|image_reduire{150,150}|inserer_attribut{class,spip_logos})]
+		<strong><a href="#VALEUR{permalink}">#VALEUR{data/link/title}</a></strong>
+		<p class="oe-quote-text">#VALEUR{data/link/description}</p>
+	</blockquote>
+]
+[(#VALEUR{type}|=={other}|oui)
+	[(#VALEUR|var_export{1})]
+]
 </BOUCLE_pour>
 <span class="oe-author">&mdash;
 	<a href="[(#ENV*{content/author/website}|sinon{#ENV*{content/author/permalink}})]">[(#ENV*{content/author/name})]</a>
