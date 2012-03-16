@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'choisir_liste' => 'Sie müssen eine Liste wählen.',
-	'contenu_date' => 'Inhalt ab diesem Datum',
+	'contenu_date' => 'Inhalt ab diesem Datum', # MODIF
 	'creation_droits_insuffisants' => 'Sie haben kein Recht dazu ...',
 
 	// D
@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'emailliste_abomailman' => 'E-Mail Adresse der Liste',
 	'emailliste_abosympa' => 'E-Mail Adresse des Sympa-Administrators',
 	'emailliste_subscribe' => 'Subscribe',
-	'emailliste_unsubscribe' => 'Unsubscribe',
+	'emailliste_unsubscribe' => 'Unsubscribe', # MODIF
 	'emails_a_renseigner' => 'Emails à renseigner', # NEW
 	'envoi_apercu' => 'Vorschau',
 	'envoi_confirmer' => 'Bestätigen und absenden',
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_vers' => 'send to',
 	'envoyer_courier' => 'Mail senden',
 	'envoyer_courier_liste' => 'Mail an diese Mailingliste senden:',
-	'envoyer_mailmans' => 'Modell und Inhalt auswählen',
+	'envoyer_mailmans' => 'Modell und Inhalt auswählen', # MODIF
 	'erreur_email_liste_oublie' => 'Die E-Mail Adresse ist obligatorisch.',
 	'explication_email_subscribe' => 'Email for subscribe, something like <code>suffix+subscribe@exemple.org</code>',
 	'explication_email_sympa' => 'Wenn dieses Feld ausgefüllt ist, wird von einer Sympa-Liste ausgegangen,
@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_abomailmans_1' => 'Une liste', # NEW
 	'info_abomailmans_nb' => '@nb@ listes', # NEW
 	'info_sisympa' => '[Obligatorisch bei Sympa-Listen]',
-	'insciption_listes_legende' => 'Mailing-Listen Abonnements',
+	'insciption_listes_legende' => 'Mailing-Listen Abonnements', # MODIF
 	'inscription_lettres_legende' => 'Abonnement bei Newslettern<br />und Diskussionslisten',
 
 	// J
@@ -103,8 +103,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouveau_abomailman' => 'Nouvelle liste de diffusion', # NEW
 
 	// P
+	'pas_template_txt' => 'Il n\'y a pas de version texte pour ce modèle', # NEW
 	'periodicite' => ' days.',
 	'prenom' => 'Vorname',
+	'previsu_html' => 'html', # NEW
+	'previsu_txt' => 'texte', # NEW
 
 	// R
 	'rubrique' => 'Artikel der Rubrik auflisten',
@@ -115,15 +118,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sujet_obligatoire' => 'Es muss ein Thema angegeben werden.',
 	'suppression_definitive' => 'Suppression définitive !', # NEW
 	'supprimer' => 'Löschen',
-	'sympa_message_confirmation' => 'Eine Bestätigungsmail wurde an folgende Adresse gesendet: ',
+	'sympa_message_confirmation' => 'Eine Bestätigungsmail wurde an folgende Adresse gesendet: ', # MODIF
 
 	// T
 	'template' => 'Modell und Inhalte auswählen',
 	'template_defaut' => 'Default template',
+	'template_defaut_info' => 'Si le fichier modele_choisi.txt.html existe, la newsletter sera envoyée en mode html + texte. Sinon seule la version html sera expédiée.', # NEW
 	'texte_descriptif' => 'Descriptif', # NEW
 	'titre_abomailman' => 'Bezeichnung der Liste',
 	'titre_liste_obligatoire' => 'Die Liste muss eine Bezeichnung erhalten',
-	'toute_liste' => 'ALle Mailinglisten',
+	'toute_liste' => 'ALle Mailinglisten', # MODIF
 
 	// V
 	'verifier_formulaire' => 'Überprüfen sie den Inhalt des Formulars.',

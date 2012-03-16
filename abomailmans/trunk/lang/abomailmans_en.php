@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'choisir_liste' => 'You should choose a list.',
-	'contenu_date' => 'Content since this date',
+	'contenu_date' => 'Content since this date', # MODIF
 	'creation_droits_insuffisants' => 'Your rights are insufficients',
 
 	// D
@@ -37,19 +37,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'emailliste_abomailman' => 'The email address of the list',
 	'emailliste_abosympa' => 'The email address of the Sympa admin',
 	'emailliste_subscribe' => 'Subscribe',
-	'emailliste_unsubscribe' => 'Unsubscribe',
+	'emailliste_unsubscribe' => 'Unsubscribe', # MODIF
 	'emails_a_renseigner' => 'Email addresses to provide',
 	'envoi_apercu' => 'Previsualization',
 	'envoi_confirmer' => 'Confirm and send',
 	'envoi_liste_parametres' => 'List of parameters [Facultatif]',
-	'envoi_parametres' => 'Settings',
+	'envoi_parametres' => 'Settings', # MODIF
 	'envoi_regulier' => 'Automatics mail',
 	'envoi_regulier_info' => 'Leave empty if you do not want to send automatically',
 	'envoi_regulier_tous_les' => 'Send each',
 	'envoi_vers' => 'send to',
 	'envoyer_courier' => 'Send an email',
 	'envoyer_courier_liste' => 'Send this content to this list :',
-	'envoyer_mailmans' => 'Select the template and his content',
+	'envoyer_mailmans' => 'Select the template and his content', # MODIF
 	'erreur_email_liste_oublie' => 'The email address of the list is mandatory',
 	'explication_email_subscribe' => 'Email for subscribe, something like <code>suffix+subscribe@exemple.org</code>',
 	'explication_email_sympa' => 'If this field is filled in, the list is considered as a "Sympa" list, if not, as a "Mailman" list.',
@@ -64,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_abomailmans_1' => 'Une liste', # NEW
 	'info_abomailmans_nb' => '@nb@ listes', # NEW
 	'info_sisympa' => '[Mandatory for a Sympa list]',
-	'insciption_listes_legende' => 'Subscription to the mailing lists',
+	'insciption_listes_legende' => 'Subscription to the mailing lists', # MODIF
 	'inscription_lettres_legende' => 'Subscription to the newsletters<br />and mailing lists',
 
 	// J
@@ -102,8 +102,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouveau_abomailman' => 'Nouvelle liste de diffusion', # NEW
 
 	// P
+	'pas_template_txt' => 'Il n\'y a pas de version texte pour ce modèle', # NEW
 	'periodicite' => ' days.',
 	'prenom' => 'First name',
+	'previsu_html' => 'html', # NEW
+	'previsu_txt' => 'texte', # NEW
 
 	// R
 	'rubrique' => 'And list the articles of the section',
@@ -114,21 +117,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sujet_obligatoire' => 'The subject is mandatory.',
 	'suppression_definitive' => 'Permanent removal !',
 	'supprimer' => 'Delete',
-	'sympa_message_confirmation' => 'A validation email has been sent to the address : ',
+	'sympa_message_confirmation' => 'A validation email has been sent to the address : ', # MODIF
 
 	// T
 	'template' => 'Choose a template and his content',
 	'template_defaut' => 'Default template',
+	'template_defaut_info' => 'Si le fichier modele_choisi.txt.html existe, la newsletter sera envoyée en mode html + texte. Sinon seule la version html sera expédiée.', # NEW
 	'texte_descriptif' => 'Description',
 	'titre_abomailman' => 'Title of the list',
 	'titre_liste_obligatoire' => 'The title of the list is mandatory',
-	'toute_liste' => 'All mailing lists',
+	'toute_liste' => 'All mailing lists', # MODIF
 
 	// V
 	'verifier_formulaire' => 'Please verify the filling of the form.',
 	'veut_s_abonner' => 'want to subscribe',
 	'veut_se_desabonner' => 'want to unsubscribe',
-	'voir_modele_depuis' => 'See an example of the template with',
+	'voir_modele_depuis' => 'See an example of the template with', # MODIF
 	'votre_email' => 'Your email'
 );
 
