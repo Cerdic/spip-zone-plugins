@@ -1,5 +1,6 @@
 <div class="storify">
-<h3>[(#ENV*{content/title})]</h3>
+<h3 class="oe-title"><a href="#ENV*{content/permalink}">[(#ENV*{content/title})]</a></h3>
+<p class='oe-descriptif'>[(#ENV*{content/description})]</p>
 <BOUCLE_pour(POUR){tableau #ENV*{content/elements}}>
 [(#VALEUR{type}|=={text}|oui)[(#VALEUR{data/text}|paragrapher)]]
 [(#VALEUR{type}|=={quote}|oui)
@@ -15,4 +16,8 @@
 </blockquote>
 ]
 </BOUCLE_pour>
+<span class="oe-author">&mdash;
+	<a href="[(#ENV*{content/author/website}|sinon{#ENV*{content/author/permalink}})]">[(#ENV*{content/author/name})]</a>
+	- [(#ENV*{content/date/published}|affdate_heure)]
+</span>
 </div>
