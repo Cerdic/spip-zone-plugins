@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_modifier_champ_extra' => 'Modify an extra field',
 	'info_nouveau_champ_extra' => 'New extra field',
 	'info_description_champ_extra' => "This page is used to manage the extra fields, 
-						these being supplementary fields added to SPIP\'s default database tables,
+						these being supplementary fields added to SPIP's default database tables,
 						taken into account in the object entry and modification forms.",
 	'info_description_champ_extra_creer' => "You can create new fields which will then be displayed on this page
 						under the heading of «List of extra fields», as well as in the forms.",		
