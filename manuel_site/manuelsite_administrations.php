@@ -19,7 +19,7 @@ function manuelsite_upgrade($nom_meta_base_version,$version_cible){
 	$maj['create'] = array(
 		array('manuelsite_creer_config'),
 	);
-	
+	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
