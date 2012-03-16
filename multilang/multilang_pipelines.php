@@ -16,7 +16,6 @@ function multilang_insert_head_css($flux){
 		static $done = false;
 
 		if (!$done) {
-
 			$done = true;
 			$flux .= '<link rel="stylesheet" href="'.url_absolue(generer_url_public('multilang.css')).'" type="text/css" media="all" />';
 		}
@@ -207,20 +206,20 @@ function multilang_affichage_final($flux){
 			if($config['gis']) { // GIS
 				$root .= ',input[type=hidden][name*=name_][value|=gis]:not(input[value|=gis-logo])';
 			}
-			$flux .= '
-		var crayons_multilang_init = function(){
-			var crayons_root = ".formulaire_spip:has('.$root.')";
-			var fields_selector = "textarea,input:text:not(input.date,input.heure,*.nomulti)";
-			var forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']";
-			var root_opt = "form:has(.multilang)";
-			var fields_selector_opt = ".multilang";
-			multilang_init_lang({fields:fields_selector,fields_opt:fields_selector_opt,root:crayons_root,root_opt:root_opt,forms:forms_selector,init_done:false});
-		}
-		jQuery(document).ready(function(){
-			crayons_multilang_init();
-			if(typeof onAjaxLoad == "function") onAjaxLoad(crayons_multilang_init);
-		});';
-		$flux = str_replace('jQuery', 'cQuery',$flux);
+			$texte = '
+				var crayons_multilang_init = function(){
+					var crayons_root = ".formulaire_spip:has('.$root.')";
+					var fields_selector = "textarea,input:text:not(input.date,input.heure,*.nomulti)";
+					var forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']";
+					var root_opt = "form:has(.multilang)";
+					var fields_selector_opt = ".multilang";
+					multilang_init_lang({fields:fields_selector,fields_opt:fields_selector_opt,root:crayons_root,root_opt:root_opt,forms:forms_selector,init_done:false});
+				}
+				jQuery(document).ready(function(){
+				crayons_multilang_init();
+				if(typeof onAjaxLoad == "function") onAjaxLoad(crayons_multilang_init);
+				});';
+			$flux .= $texte;
 		}
 	}
 	return $flux;
