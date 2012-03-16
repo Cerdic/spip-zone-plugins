@@ -188,16 +188,9 @@ function oembed_pre_propre($texte) {
 			# seuls les autoliens beneficient de la detection oembed
 			AND preg_match(',\bauto\b,', extraire_attribut($lien, 'class'))
 			AND (oembed_verifier_provider($url) OR (lire_config('oembed/detecter_lien','non')=='oui'))) {
-				$fond = recuperer_fond('modeles/oembed',array('url'=>$url));
-				if ($fond = trim($fond)) {
-					// ajouter la class oembed-link au lien
-					// pour pouvoir le masquer en css
-					$lienclass = inserer_attribut($lien,
-						'class',
-						trim(extraire_attribut($lien,'class').' oembed-link')
-					);
-					$texte = str_replace($lien, $lienclass . echappe_html("<html>$fond</html>"), $texte);
-				}
+				$fond = recuperer_fond('modeles/oembed',array('url'=>$url,'lien'=>$lien));
+				if ($fond = trim($fond))
+					$texte = str_replace($lien, echappe_html("<html>$fond</html>"), $texte);
 			}
 		}
 	}
