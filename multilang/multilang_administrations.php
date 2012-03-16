@@ -30,7 +30,7 @@ function multilang_creer_config(){
 	if (!is_array($config)) {
 		$config = array();
 	}
-	$config = array_merge(array(
+	$config_defaut = array_merge(array(
 			'siteconfig' => 'on',
 			'article' => '',
 			'breve' => '',
