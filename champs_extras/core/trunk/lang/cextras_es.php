@@ -1,23 +1,23 @@
 <?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.org/tradlang_module/cextras?lang_cible=es
+// ** ne pas modifier le fichier **
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cextra_par_defaut' => 'Valor por omisi&oacute;n',
+	'cextra_par_defaut' => 'Valor por omisión',
 
-	//P
+	// P
 	'pas_auteur' => 'sin autor',
-	
-	//T
-	'table_article' => 'Art&iacute;culos',
-	'table_auteur' => 'Autores',
-	'table_breve' => 'Breves',
-	'table_groupes_mot' => 'Grupos de palabras',
-	'table_mot' => 'Palabras',
-	'table_rubrique' => 'Secciones',
-	'table_site' => 'Sitios',
-	
+
+	// T
 	'type' => '@type@',
-#	'type_input'=>'Afficher une saisie input de type texte',
-#	'type_textarea'=>'Afficher une saisie textarea',
+
+	// Z
+	'zbug_balise_argument_non_texte' => 'L\'argument @nb@ dans la balise @balise@ doit être de type texte' # NEW
 );
+
 ?>
