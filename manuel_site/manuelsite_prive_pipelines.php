@@ -11,10 +11,10 @@ function manuelsite_insert_head($flux){
 	return $flux;
 }
 
-function manuelsite_body_prive(&$flux){
+function manuelsite_body_prive($flux){
 	$conf_manuelsite = lire_config('manuelsite');
 	if($conf_manuelsite["id_article"] && (!isset($conf_manuelsite["afficher_bord_gauche"]) || $conf_manuelsite["afficher_bord_gauche"])) {
-		$flux .= recuperer_fond('prive/manuelsite',array('id_article'=>$conf_manuelsite["id_article"])); 
+		$flux .= recuperer_fond('prive/manuelsite',array('id_article'=>$conf_manuelsite["id_article"]));
 	}
    return $flux;
 }

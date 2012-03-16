@@ -7,21 +7,8 @@ include_spip('inc/config');
 
 function formulaires_configurer_manuelsite_saisies_dist(){
 	$config = lire_config('manuelsite');
-
-	if ($config['id_article'] > 0) {
-		$texte_explication = _T('manuelsite:configurer_explication_l_article',array('idart'=>$config['id_article'])) ;
-	} else {
-		$texte_explication = _T('manuelsite:configurer_explication_un_article') ;
-	}
 	
 	return array(
-		array(
-			'saisie' => 'explication',
-			'options' => array(
-				'nom' => 'explication',
-				'texte' => _T('manuelsite:configurer_explication',array('texte'=>$texte_explication))
-			)
-		),
 		array(
 			'saisie' => 'fieldset',
 			'options' => array(
