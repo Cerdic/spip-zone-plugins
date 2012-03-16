@@ -58,37 +58,37 @@ function liste_a_jour($id_liste) {
 	$charset = lire_meta('charset');
 
 
-		$sujet=$t['titre']; 
-		$date_envoi=$t['date_envoi']; 
-		$email_receipt=$t['email'];
-		$modele_defaut=$t['modele_defaut'];
-		
-		$recuptemplate = explode('&',$modele_defaut);
-			
-		include_spip('abomailmans_fonctions');
-		$paramplus = recup_param($modele_defaut); //pour url
-		$periodicite=intval($t['periodicite']);
-
-		/**
-		 * la page a envoyer doit etre testee a maintenant moins periodicite
-		 */
-		$time = time() - (3600 * 24 * $periodicite);
-
-		/**
-		 * construction du query
-		 */
- 	 	parse_str($paramplus,$query);
- 	 	$query['id_abomailman'] = $t['id_abomailman'];
-		$query['template'] = $recuptemplate[0];
-		$query['date'] = date('Y-m-d H:i:s', $time);
-
-		/**
-		 * on peut verifier le fond grace à l'url
-		 */
-		$url_genere = generer_url_public('abomailman_template',$query,'&'); 
-		$fond = recuperer_fond('abomailman_template',$query);
+	$sujet=$t['titre']; 
+	$date_envoi=$t['date_envoi']; 
+	$email_receipt=$t['email'];
+	$modele_defaut=$t['modele_defaut'];
 	
-		$body = array(
+	$recuptemplate = explode('&',$modele_defaut);
+		
+	include_spip('abomailmans_fonctions');
+	$paramplus = recup_param($modele_defaut); //pour url
+	$periodicite=intval($t['periodicite']);
+
+	/**
+	 * la page a envoyer doit etre testee a maintenant moins periodicite
+	 */
+	$time = time() - (3600 * 24 * $periodicite);
+
+	/**
+	 * construction du query
+	 */
+	parse_str($paramplus,$query);
+	$query['id_abomailman'] = $t['id_abomailman'];
+	$query['template'] = $recuptemplate[0];
+	$query['date'] = date('Y-m-d H:i:s', $time);
+
+	/**
+	 * on peut verifier le fond grace à l'url
+	 */
+	$url_genere = generer_url_public('abomailman_template',$query,'&'); 
+	$fond = recuperer_fond('abomailman_template',$query);
+
+	$body = array(
 		'html'=>$fond,
 	); 
 	
@@ -98,19 +98,19 @@ function liste_a_jour($id_liste) {
 		// email denvoi depuis config facteur
 		if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui'
 			  AND $GLOBALS['meta']['facteur_adresse_envoi_email'])
-				$from_email = $GLOBALS['meta']['facteur_adresse_envoi_email'];
-			else
-				$from_email = $email_webmaster;
+			$from_email = $GLOBALS['meta']['facteur_adresse_envoi_email'];
+		else
+			$from_email = $email_webmaster;
 		// nom denvoi depuis config facteur
 		if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui'
 			  AND $GLOBALS['meta']['facteur_adresse_envoi_nom'])
-				$from_nom = $GLOBALS['meta']['facteur_adresse_envoi_nom'];
-			else
-				$from_nom = $nom_site;
+			$from_nom = $GLOBALS['meta']['facteur_adresse_envoi_nom'];
+		else
+			$from_nom = $nom_site;
 				
 		if (abomailman_mail($from_nom, $from_email, "", $email_receipt, $sujet,$body, true, $charset)) {
 			spip_log("envoi ok = $url_genere tous les $periodicite jours sujet =".$sujet,"abomailmans");
-			}
+		}
 	}
 	else spip_log("maintenant=".date('Y-m-d H:i:s', time())." date demande = ".$query['date']." non envoye =$url_genere : rien de neuf depuis $periodicite jours","abomailmans"); 
 	
