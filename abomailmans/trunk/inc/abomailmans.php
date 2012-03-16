@@ -56,6 +56,20 @@ function abomailman_mail($nom, $email, $to_email,$liste_email, $sujet="", $body=
 	// si $to_mail est plein, c'est Sympa, s'il est vide c'est Mailman et il faut alors utiliser $liste_email
 	if (!$to_email)
 		$to_email = $liste_email;
+	
+	// Pas beau mais faudrait reprendre le code plus en profondeur
+	// et rajouter une liste de choix du robot en page de config
+	// Modifier le destinataire d’envoi dans le cas ezmlm pour que 
+	// les inscriptions fonctionnent si facteur utilise l’envoi via
+	// la fonction mail() de php. En effet dans ce cas, le header return-path
+	// n’est pas renseigné. Or c’est ce header qui est utilisé par le robot
+	// pour répondre et non le champ from... Il faut modifier le destinataire
+	// comme ceci maliste-subscribe-lemail=ledomaine.tld@monsite.tld
+	if (defined('_ABOMAILMAN_ROBOT_EZMLM')) {
+		$souscripteur = str_replace("@" , "=" , $email ) ;
+		$to_email = str_replace("@" , "-".$souscripteur."@" , $to_email ) ;
+	}
+
 	$envoyer_mail = charger_fonction('envoyer_mail','inc/');
 	if($envoyer_mail($to_email, $sujet, $body, $email, $headers))
 		$retour=true;
