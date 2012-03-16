@@ -216,9 +216,9 @@ function multilang_affichage_final($flux){
 					multilang_init_lang({fields:fields_selector,fields_opt:fields_selector_opt,root:crayons_root,root_opt:root_opt,forms:forms_selector,init_done:false});
 				}
 				if(typeof onAjaxLoad == "function") onAjaxLoad(crayons_multilang_init);
-				crayons_multilang_init();
-				';
-				
+				cQuery(document).ready(function(){
+					crayons_multilang_init();
+				});';
 			$flux .= $texte;
 		}
 	}
