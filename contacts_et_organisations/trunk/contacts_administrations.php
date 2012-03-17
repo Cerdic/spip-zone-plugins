@@ -104,7 +104,6 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 	);
 	
 	// On crée la table spip_organisations_liens
-	// Le champ type_liaison sur spip_organisations_contacts pour définir des types de liaisons donc.
 	$maj['1.3.7'] = array(
 		array('maj_tables', 'spip_organisations_liens'),
 	);
