@@ -26,7 +26,7 @@ function medias_raccourcis_doc($id_document,$titre,$descriptif,$inclus,$largeur,
 			. affiche_raccourci_doc($doc, $id_document, 'center')
 			. affiche_raccourci_doc($doc, $id_document, 'right');
 		if ($mode=='document'
-			AND ($type_inclus == "embed" OR $type_inclus == "image")
+			AND ($inclus == "embed" OR $inclus == "image")
 			AND $largeur > 0 AND $hauteur > 0) {
 			$raccourci =
 			  "<span>"._T('info_inclusion_vignette')."</span>"
