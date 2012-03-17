@@ -6,7 +6,6 @@ function sjcycle_affiche_gauche($flux){
 	include_spip('inc/meta');
 
 	if ($flux['args']['exec'] == 'article_edit') {
-	spip_log("sjcycle_affiche_gauche 2",'sjcycle.'. _LOG_INFO);
 		$conf_jcycle = lire_config('sjcycle');
 		if($conf_jcycle["afficher_aide"]) {
 			$document='';
