@@ -34,7 +34,7 @@ function cfg_config_gis_post_traiter(&$cfg){
 		/**
 		 * On redirige le formulaire pour rafraichir la page
 		 */
-		$cfg->messages['redirect'] = self();
+		$cfg->messages['redirect'] = parametre_url(self(),'api',$cfg->val['api']);
 	}
 }
 
