@@ -3,4 +3,7 @@
 	<langue code="en" />
 	<langue code="fr" />
 	<langue code="it" />
+	<langue code="sk" url="http://trad.spip.org/tradlang_module/paquet-menus?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	</langue>
 </traduction>
