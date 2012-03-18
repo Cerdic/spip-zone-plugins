@@ -8,19 +8,19 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'appliquer_type_liaison' => 'Type de liaison :', # NEW
-	'appliquer_type_liaison_explication' => 'Décrivez le type de lien à appliquer lors de la liaison. Utilisez de préférence un code ou un mot court.', # NEW
-	'articles_lies' => 'Link to an article',
+	'appliquer_type_liaison' => 'Type ok link:',
+	'appliquer_type_liaison_explication' => 'Describe the type of link to be applied when linking. Preferably use a code or a short word.',
+	'articles_lies' => 'LINKED ARTICLES',
 
 	// E
 	'explication_navigateur' => 'Click on [Add] to navigate through the site and select the article(s) to link.',
 
 	// I
-	'info_nombre_articles_lies' => '@nb@ articles liés', # NEW
-	'info_un_article_lie' => '1 article lié', # NEW
+	'info_nombre_articles_lies' => '@nb@ linked articles',
+	'info_un_article_lie' => '1 linked article',
 
 	// L
-	'lien_lier_article' => 'Lier à un ou des articles', # NEW
+	'lien_lier_article' => 'Link to one or more articles',
 	'lier_cet_article' => 'Link',
 	'lier_cet_article_deux_cotes' => 'Link both sides',
 
@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_resultat' => 'No article found',
 
 	// R
-	'rang' => 'Rang', # NEW
+	'rang' => 'Rank',
 	'rang_moins' => 'Up',
 	'rang_plus' => 'Down',
 	'recherche_arbo' => 'Tree navigation',
