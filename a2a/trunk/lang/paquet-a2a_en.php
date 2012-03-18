@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'a2a_description' => 'This plugin allows you to link items in a timely manner without having to use keywords of SPIP. It can be used to set up links such as "See also".',
-	'a2a_slogan' => 'Pour lier des articles' # NEW
+	'a2a_slogan' => 'Link articles together'
 );
 
 ?>
