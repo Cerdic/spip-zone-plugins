@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'notifications_description' => 'Sends mail notifications for certain actions : forums posts and answers notified to users, private messages notified to redactors or articles publication notified to their authors.',
-	'notifications_slogan' => 'Advanced notifications' # MODIF
+	'notifications_slogan' => 'Report changes by mail '
 );
 
 ?>
