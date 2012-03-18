@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_desassocier_title' => 'Don\'t manage the display of this extra field',
 	'action_descendre' => 'down',
 	'action_descendre_title' => 'Move the field down one position lower',
-	'action_modifier' => 'modify',
+	'action_modifier' => 'edit',
 	'action_modifier_title' => 'Modify the parameters of the extra field',
 	'action_monter' => 'up',
 	'action_monter_title' => 'Move the field up one position higher',
@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_deja_existant' => 'A field with the same name already exists for this table.',
 	'champ_sauvegarde' => 'Extra field saved!',
 	'champs_extras' => 'Extra Fields',
-	'champs_extras_de' => 'Champs Extras de : @objet@', # NEW
+	'champs_extras_de' => 'Extras fields of : @objet@',
 
 	// E
 	'erreur_action' => 'Action @action@ unknown.',
@@ -46,40 +46,40 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 						will appear under the heading of "List of existing fields not managed".',
 	'info_modifier_champ_extra' => 'Modify an extra field',
 	'info_nouveau_champ_extra' => 'New extra field',
-	'info_saisie' => 'Saisie :', # NEW
+	'info_saisie' => 'Form entry:',
 
 	// L
 	'label_attention' => 'Very important help',
 	'label_champ' => 'Field name',
 	'label_class' => 'CSS classes',
-	'label_datas' => 'Liste de valeurs', # NEW
+	'label_datas' => 'Value list',
 	'label_explication' => 'Data entry help',
 	'label_label' => 'Data entry label',
 	'label_li_class' => 'CSS classes of the &lt;li&gt; parent',
 	'label_obligatoire' => 'Compulsory field?',
 	'label_rechercher' => 'Search',
-	'label_rechercher_ponderation' => 'Pondération de la recherche', # NEW
-	'label_restrictions_auteur' => 'Par auteur', # NEW
-	'label_restrictions_branches' => 'Par branche', # NEW
-	'label_restrictions_groupes' => 'Par groupe', # NEW
-	'label_restrictions_secteurs' => 'Par secteur', # NEW
-	'label_saisie' => 'Type de saisie', # NEW
+	'label_rechercher_ponderation' => 'Weight of search',
+	'label_restrictions_auteur' => 'Per author',
+	'label_restrictions_branches' => 'By branch',
+	'label_restrictions_groupes' => 'Per group',
+	'label_restrictions_secteurs' => 'Per section',
+	'label_saisie' => 'Type of form entry',
 	'label_sql' => 'SQL definition',
 	'label_table' => 'Object',
 	'label_traitements' => 'Automatic processes',
 	'legend_declaration' => 'Declaration',
 	'legend_options_saisies' => 'Data entry options',
 	'legend_options_techniques' => 'Technical options',
-	'legend_restriction' => 'Restriction', # NEW
-	'legend_restrictions_modifier' => 'Modifier la saisie', # NEW
-	'legend_restrictions_voir' => 'Voir la saisie', # NEW
+	'legend_restriction' => 'Restriction',
+	'legend_restrictions_modifier' => 'Edit the entry',
+	'legend_restrictions_voir' => 'See the form entry',
 	'liste_des_extras' => 'List of extra fields',
 	'liste_des_extras_possibles' => 'List of existing fields not managed',
-	'liste_objets_applicables' => 'Liste des objets éditoriaux', # NEW
+	'liste_objets_applicables' => 'List of editorial objects',
 
 	// N
-	'nb_element' => '1 élément', # NEW
-	'nb_elements' => '@nb@ éléments', # NEW
+	'nb_element' => '1 element',
+	'nb_elements' => '@nb@ elements',
 
 	// P
 	'precisions_pour_attention' => 'To be used for VERY important details.
@@ -88,30 +88,30 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'precisions_pour_class' => 'Add CSS classes for the element,
 		separated by a space. Example: "inserer_barre_edition" for a block
 		with the Porte Plume plugin',
-	'precisions_pour_datas' => 'Certains types de champ demandent une liste des valeurs acceptées : indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par défaut. La description peut être une chaîne de langue.', # NEW
+	'precisions_pour_datas' => 'Some field types require a list of accepted values​​: please indicate one per line, followed by a comma and a description. A blank line to the default value. The description may be a language string.', # MODIF
 	'precisions_pour_explication' => 'You can provide more information about the data field. 
 		May be a "plugin:stringname" idiom..',
 	'precisions_pour_label' => 'May be a "plugin:stringname" idiom.',
 	'precisions_pour_li_class' => 'Add CSS classes for the &lt;li&gt; parent,
 		separated by a space. Example: "haut" to use the whole width
 		of the form',
-	'precisions_pour_nouvelle_saisie' => 'Permet de changer le type de saisie utilisée pour ce champ', # NEW
-	'precisions_pour_nouvelle_saisie_attention' => 'Attention cependant, un changement de type de saisie perd les options de configuration de la saisie actuelle qui ne sont pas communes avec la nouvelle saisie sélectionnée !', # NEW
+	'precisions_pour_nouvelle_saisie' => 'Allow to change the form entry type used for that field',
+	'precisions_pour_nouvelle_saisie_attention' => 'Be careful, a change in input type loses the configuration options of the input which are not common with the new selected entry!',
 	'precisions_pour_rechercher' => 'Include this field in the search engine?',
-	'precisions_pour_rechercher_ponderation' => 'SPIP pondère une recherche dans une colonne par un coefficient de ponderation.
-		Celui-ci permet de mettre en avant les colonnes les plus pertinentes (titre par exemple) par rapport à d\'autres qui le sont moins.
-		Le coefficient appliqué sur les champs extras est par défaut 2. Pour vous donner un ordre d\'idée, notez que SPIP utilise 8 pour le titre, 1 pour le texte.', # NEW
-	'precisions_pour_restrictions_branches' => 'Identifiants de branches à restreindre (séparateur «:»)', # NEW
-	'precisions_pour_restrictions_groupes' => 'Identifiants de groupes à restreindre (séparateur «:»)', # NEW
-	'precisions_pour_restrictions_secteurs' => 'Identifiants de secteurs à restreindre (séparateur «:»)', # NEW
-	'precisions_pour_saisie' => 'Afficher une saisie de type :', # NEW
+	'precisions_pour_rechercher_ponderation' => 'SPIP weights a search in a column per a weighting coefficient.
+It allows to highlight the most relevant columns (title for example) compared to others which are less.
+The default coefficient applied to the extras fields is 2. To give you an idea, note that SPIP uses 8 for the title, one for text.',
+	'precisions_pour_restrictions_branches' => 'Ids of branches to restrict (separator «:»)',
+	'precisions_pour_restrictions_groupes' => 'Ids of groups to restrict (separator «:»)',
+	'precisions_pour_restrictions_secteurs' => 'Ids of sectors to restrict (separator «:»)',
+	'precisions_pour_saisie' => 'Disply a form entry of type:',
 	'precisions_pour_traitements' => 'Automatically apply a process
 		for the resulting #FIELD_NAME field:',
 
 	// R
-	'radio_restrictions_auteur_admin' => 'Seulement les administrateurs', # NEW
-	'radio_restrictions_auteur_aucune' => 'Tout le monde peut', # NEW
-	'radio_restrictions_auteur_webmestre' => 'Seulement les webmestres', # NEW
+	'radio_restrictions_auteur_admin' => 'Only the administrators',
+	'radio_restrictions_auteur_aucune' => 'Everyone can',
+	'radio_restrictions_auteur_webmestre' => 'Only the webmasters',
 	'radio_traitements_aucun' => 'None',
 	'radio_traitements_raccourcis' => 'SPIP shortcut processes (clean)',
 	'radio_traitements_typo' => 'Only typographical processes (typo)',
