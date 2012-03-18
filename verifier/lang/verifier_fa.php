@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_entier_max' => 'مقدار بايد كم‌تر از @max@ باشد.',
 	'erreur_entier_min' => 'مقدار بايد بيشتر از @min@ باشد.',
 	'erreur_id_document' => 'اين شناسه‌ي سند معتبر نيست.',
-	'erreur_inconnue_generique' => 'Le format n\'est pas correct.', # NEW
+	'erreur_inconnue_generique' => 'فرمت صحيح نيست',
 	'erreur_numerique' => 'فرمت عدد معتبر نيست.',
 	'erreur_regex' => 'فرمت رشته معتبر نيست.',
 	'erreur_siren' => 'فرمت SIREN معتبر نيست.',
@@ -41,9 +41,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url_protocole_exact' => 'نشاني وارد شده <em>(@url@)</em> با يك پروتكل معتبر (http:// مانند)شروع نمي‌شود',
 
 	// N
-	'normaliser_option_date' => 'Normaliser la date ?', # NEW
-	'normaliser_option_date_aucune' => 'Non', # NEW
-	'normaliser_option_date_en_datetime' => 'Au format «Datetime» (pour SQL)', # NEW
+	'normaliser_option_date' => 'عادي‌سازي داده‌؟',
+	'normaliser_option_date_aucune' => 'خير',
+	'normaliser_option_date_en_datetime' => 'با فرمت «تاريخ‌زمان» (براي اس‌كيو‌ال)',
 
 	// O
 	'option_decimal_nb_decimales_label' => 'تعداد اعشارها بعد از مميز',
