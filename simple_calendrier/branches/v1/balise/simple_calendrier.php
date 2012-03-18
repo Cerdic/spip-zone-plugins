@@ -53,8 +53,15 @@ function simplecal_generer_calendrier($mois, $annee, $tab_dates){
     if (strlen(smois)<2){
         $smois = "0".$smois;
     }
-    //$date_1er_du_mois = date('Y-m-d-N', mktime(0, 0, 0, $mois , 1, $annee)); // Ne gère pas les années <= 1900...
-    $date_1er_du_mois = date_format(date_create("".$sannee."-".$smois."-1"), 'Y-m-d-N');
+    
+    // PHP 5.2 seulement
+    if (function_exists("date_format")){
+        $date_1er_du_mois = date_format(date_create("".$sannee."-".$smois."-1"), 'Y-m-d-N');
+    } 
+    // PHP 4
+    else {
+        $date_1er_du_mois = date('Y-m-d-N', mktime(0, 0, 0, $mois , 1, $annee)); // Ne gère pas les années <= 1900...
+    }
     
     
     if (preg_match("#([1-2][0-9]{3})\-([0-9]{2})\-([0-9]{2})\-([0-9]{1})#i", $date_1er_du_mois, $matches)){
