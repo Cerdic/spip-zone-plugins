@@ -56,11 +56,11 @@ function simplecal_generer_calendrier($mois, $annee, $tab_dates){
     
     // PHP 5.2 seulement
     if (function_exists("date_format")){
-        $date_1er_du_mois = date_format(date_create("".$sannee."-".$smois."-1"), 'Y-m-d-N');
+        $date_1er_du_mois = date_format(date_create("".$sannee."-".$smois."-1"), 'Y-m-d-w');
     } 
     // PHP 4
     else {
-        $date_1er_du_mois = date('Y-m-d-N', mktime(0, 0, 0, $mois , 1, $annee)); // Ne gère pas les années <= 1900...
+        $date_1er_du_mois = date('Y-m-d-w', mktime(0, 0, 0, $mois , 1, $annee)); // Ne gère pas les années <= 1900...
     }
     
     
@@ -68,7 +68,11 @@ function simplecal_generer_calendrier($mois, $annee, $tab_dates){
 		$annee = intval($matches[1]);
         $mois = intval($matches[2]);
         $jour = intval($matches[3]);
-        $num_jour = intval($matches[4]);
+        $num_jour = intval($matches[4]); // intervalle [0..6] - Dimanche - Samedi
+        // conversion [1..7] - Lundi - Dimanche
+        if ($num_jour == 0){
+            $num_jour = 7;
+        }
     } 
     
     
