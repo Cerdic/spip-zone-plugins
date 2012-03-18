@@ -1,7 +1,9 @@
 <traduction module="csvimport" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/csv_import/lang/" reference="fr">
 	<langue code="ca" />
 	<langue code="de" />
-	<langue code="en" />
+	<langue code="en" url="http://trad.spip.org/tradlang_module/csvimport?lang_cible=en">
+		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
+	</langue>
 	<langue code="fa" />
 	<langue code="fr" />
 	<langue code="fr_tu" />
