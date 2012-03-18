@@ -2,6 +2,9 @@
 	<langue code="de" />
 	<langue code="en" />
 	<langue code="es" />
+	<langue code="fa" url="http://trad.spip.org/tradlang_module/zengarden?lang_cible=fa">
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
+	</langue>
 	<langue code="fr" />
 	<langue code="sk" url="http://trad.spip.org/tradlang_module/zengarden?lang_cible=sk">
 		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
