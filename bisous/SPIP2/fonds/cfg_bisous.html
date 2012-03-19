@@ -1,0 +1,27 @@
+<div class="formulaire_spip">
+
+<!-- titre=<:bisous:cfg_bisous:> -->
+<!-- icone=images/bisous.jpg -->
+
+			<form action="#SELF" method="post">
+
+[<div>(#ENV{_cfg_}|form_hidden)</div>]
+<fieldset>	
+	
+	<ul>
+	<li>
+	<label for="multiple"><:bisous:multiple:></label><input type="checkbox" name="multiple"[(#ENV{multiple}|oui) checked="checked"]/>
+	</li>
+	<li>
+	<label for="self"><:bisous:self:></label><input type="checkbox" name="self"[(#ENV{self}|oui) checked="checked"]/>
+	</li>
+	</ul>
+				
+
+<p class="boutons"><input type="submit" name="_cfg_ok" value="<:OK:>" />
+	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" /></p>
+</fieldset>
+</form>
+</div>
+			
+			
