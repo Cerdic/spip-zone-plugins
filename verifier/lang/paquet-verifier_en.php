@@ -14,5 +14,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // V
 	'verifier_description' => 'Provides a unique function <code>verifier($value, $type, $options)</code> to test the validity of a value.',
 	'verifier_nom' => 'Control API',
+	'verifier_slogan' => 'A generic API to control a value',
 );
 ?>
