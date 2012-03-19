@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_cache_taille_mini' => 'Cache nemôže byť menšia ako 10 MB',
+	'erreur_cache_taille_mini' => 'Cache nemôže byť menšia ako 10 MB', # MODIF
 	'erreur_dossier_squelette_invalide' => 'Priečinok šablóny nemôže byť  absolútne umiestnenie ani nemôže obsahovať odkaz <tt>../</tt>',
 	'explication_dossier_squelettes' => 'Môžete zadať viacero priečinkov a oddeliť ich ":", ktoré sa budú brať do úvahy po poradí. Priečinok s názvom "<tt>squelettes</tt>" sa vždy berie do úvahy ako posledný, ak existuje.',
 	'explication_image_seuil_document' => 'Stiahnuté obrázky môžu byť automaticky presunuté do režimu dokumentu mimo predvolenej šírky',
