@@ -22,7 +22,7 @@
 		[en]This plugin installs an help icon making it possible to post since any page of private space the Website Editor Manual. This manual is an article of the website. The plugin also provides a set of Frequently Asked Questions that can be easily inserted in your manual.
 	</multi>
 	</description>
-	<icon>images/manuelsite-32.png</icon>
+	<icon>prive/themes/spip/images/manuelsite-32.png</icon>
 	<lien>http://www.spip-contrib.net/Manuel-de-redaction-du-site</lien>
 	<prefix>manuelsite</prefix>
 	<install>base/manuelsite_install.php</install>
@@ -47,12 +47,12 @@
 		<inclure>manuelsite_prive_pipelines.php</inclure>
 	</pipeline>
 	<bouton id='manuelsite' parent='configuration'>
-		<icone>images/manuelsite-24.png</icone>
+		<icone>prive/themes/spip/images/manuelsite-24.png</icone>
 		<titre>manuelsite:titre_menu</titre>
 		<url>configurer_manuelsite</url>
 	</bouton>
 	<bouton id='manuelsite2' parent='bando_configuration'>
-		<icone>images/manuelsite-16.png</icone>
+		<icone>prive/themes/spip/images/manuelsite-16.png</icone>
 		<titre>manuelsite:titre_menu</titre>
 		<url>configurer_manuelsite</url>
 	</bouton>

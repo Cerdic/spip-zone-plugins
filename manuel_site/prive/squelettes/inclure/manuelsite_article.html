@@ -6,9 +6,8 @@
 [(#ENV{bouton_fermer}|oui)
 	<a id="manuelsite_bouton_fermer" href="#" title="<:manuelsite:fermer_le_manuel:>">X</a>
 ]
-
 <BOUCLE_contenu_article(ARTICLES){id_article}>
-	<div class="contenu-principal">
+	<div class="contenu-principal contenu-manuelsite">
 		<div class="cartouche">
 		[(#LOGO_ARTICLE||image_reduire{200,200})]
 		[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
@@ -35,7 +34,7 @@
 	<:manuelsite:erreur_article{idart=#ID_ARTICLE}:>
 <//B_contenu_article>
 
-<script type="text/javascript">
+<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 	$(function() {
 		// Traiter les h3 et h4
 		$.each( ['h2','h3','h4'], function(i,hi){
@@ -64,4 +63,4 @@
 			});
 		]
 	});
-</script>
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>

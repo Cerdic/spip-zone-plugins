@@ -2,10 +2,6 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-#tablematiere {
-	display:none;
-}
-
 #manuelsite_divbouton{
 	position:absolute;
    top:12px;
@@ -30,13 +26,31 @@
    padding:1em;
 }
 
-#manuelsite_contenu .intro, #manuelsite_contenu .email{
+#manuelsite_bouton_fermer{
+	display:block;
+   width:1em;
+   height:1em;
+   line-height:1em;
+   float:right;
+   background:#fff;
+   font-weight:700;
+   padding:0.3em;
+   text-align:center;
+}
+
+.contenu-manuelsite #tablematiere {
+	display:none;
+}
+
+.contenu-manuelsite .intro, .contenu-manuelsite .email{
 	font-size:1.1em;
    font-weight:bold;
    margin-bottom:10px;
 }
 
-#manuelsite_contenu h2, #manuelsite_contenu h3, #manuelsite_contenu h4{
+.contenu-manuelsite h2,
+.contenu-manuelsite h3,
+.contenu-manuelsite h4{
 	clear:both;
 	text-align:left;
 	cursor: pointer;
@@ -45,18 +59,34 @@
 	background:url(#CHEMIN{images/plus.png}) left 2px no-repeat transparent;
 }
 
-#manuelsite_contenu h2.open, #manuelsite_contenu h3.open, #manuelsite_contenu h4.open{
+.contenu-manuelsite h2.open,
+.contenu-manuelsite h3.open,
+.contenu-manuelsite h4.open{
 	background:url(#CHEMIN{images/moins.png}) left 2px no-repeat transparent;
 }
 
-#manuelsite_contenu h4, #manuelsite_contenu .bloc_sous_h{
-	margin-left:5px;
+.contenu-manuelsite h2{
+	margin-left:0px;
 }
-
-#manuelsite_contenu h4{
-	margin:0;
+.contenu-manuelsite h3{
+	margin-left:3px;
+}
+.contenu-manuelsite h4,
+.contenu-manuelsite .bloc_sous_h{
+	margin:0 0 0 6px;
+}
+.contenu-manuelsite h4{
    font-size: 1em;
    font-style: normal;
 }
-
-#manuelsite_bouton_fermer { display:block; width:1em; height:1em; line-height: 1em; float:right; background:#fff; font-weight: 700; padding: 0.3em; text-align: center; }
+.contenu-manuelsite .bloc_sous_h ul{
+	margin:0;
+	padding:0;
+   list-style: disc outside none;
+}
+.contenu-manuelsite .bloc_sous_h li{
+	margin-left:13px;
+}
+.contenu-manuelsite p{
+	margin-bottom:5px;
+}

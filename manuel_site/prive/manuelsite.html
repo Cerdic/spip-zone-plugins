@@ -1,6 +1,6 @@
 <div id="manuelsite_divbouton" >
    <a id="manuelsite_bouton" [href="?exec=manuelsite_affiche&amp;id_article=(#ID_ARTICLE)&amp;bouton_fermer=1"] title="<:manuelsite:titre_manuel:>">
-      [(#CHEMIN{images/manuelsite-32.png}|balise_img{<:manuelsite:titre_manuel:>})] 
+      [(#CHEMIN{prive/themes/spip/images/manuelsite-32.png}|balise_img{<:manuelsite:titre_manuel:>})] 
    </a>
 </div>
 <div id="manuelsite_contenu" class="manuelsite_contenu_bord_gauche" style="background-color:#CONFIG{manuelsite/background_color};width:#CONFIG{manuelsite/largeur}px;">
@@ -9,15 +9,8 @@
 
 </div>
 
-<script type="text/javascript">
+<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 	$(function() {
-		
-		// Ouvrir le Manuel
-// 		$( "#manuelsite_bouton" ).click(function() {
-// 			$( "#manuelsite_contenu" ).toggle( 'Blind' );
-// 			return false;
-// 		});
-		
 		// Ouvrir le Manuel
 		$( "#manuelsite_bouton" ).click(function() {
 			// recupere url a charger
@@ -28,12 +21,8 @@
 			});
 			return false;
 		});
-		// retrouver dans le fichier manuelsite_article.html la fonction qui decharge le contenu
-		
-		
 		// Cacher le contenu
 		$( "#manuelsite_contenu" ).hide();
 
 	});
-</script>
-
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>

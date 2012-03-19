@@ -2,12 +2,12 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/manuel_site/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
-
+$manuelsite_exec_article = spip_version_compare($GLOBALS["spip_version_branche"],"2.1.99",">")?"article":"articles" ;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configurer_explication' => 'Ce plugin installe une icône d’aide permettant d’afficher depuis n’importe quelle page de l’espace privé le manuel de rédaction du site. Ce manuel est @texte@ Il a pour but d’expliquer aux rédacteurs l’architecture du site, dans quelle rubrique ranger quoi, comment encoder et installer une vidéo... Bref tout ce que vous voulez et qui est spécifique à votre site.',
-	'configurer_explication_l_article' => '<a href="?exec=articles&id_article=@idart@" title="Manuel de redaction">l’article @idart@</a> de votre site.',
+	'configurer_explication_l_article' => '<a href="?exec='.$manuelsite_exec_article.'&id_article=@idart@" title="Manuel de redaction">l’article @idart@</a> de votre site.',
 	'configurer_explication_un_article' => 'un article du site.',
 	'configurer_titre' => 'Configurer le manuel de rédaction du site',
 
@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_background_color' => 'Entrez la couleur de fond de la zone d’affichage du manuel',
 	'explication_cacher_public' => 'Cacher cet article dans l’espace public, flux rss compris',
 	'explication_email' => 'Email de contact pour les rédacteurs',
-	'explication_faq' => 'Vous trouverez ci-dessous les blocs génériques utilisables pour rédiger votre manuel (le texte s’affiche sans mise en forme au survol du code). Il suffit de copier/coller le code correspondant dans la zone de texte de votre article.<br />Pour ne pas afficher la question, rajouter <i>|q=non</i>.<br />Pour ajouter des paramètres, rajouter <i>|params=p1:v1;p2:v2</i>.',
+	'explication_faq' => 'Vous trouverez ci-dessous les codes des blocs génériques utilisables pour rédiger votre manuel. Le texte correpondant à chaque code s’affiche (sans mise en forme) au survol de celui-ci. Il suffit de copier/coller le code désiré dans la zone de texte de votre article.<br />Pour ne pas afficher la question, rajouter <i>|q=non</i>.<br />Pour ajouter des paramètres, rajouter <i>|params=p1:v1;p2:v2</i>.',
 	'explication_id_article' => 'Entrez le numéro de l’article qui contient le manuel',
 	'explication_intro' => 'Texte d’introduction au manuel (sera placé avant le chapo)',
 	'explication_largeur' => 'Entrez la largeur de la zone d’affichage du manuel',
