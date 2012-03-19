@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_cache_taille_mini' => 'Le cache ne peut avoir une taille inférieure &agrave 10Mo',
+	'erreur_cache_taille_mini' => 'Le cache ne peut avoir une taille inférieure à 10Mo',
 	'erreur_dossier_squelette_invalide' => 'Le dossier squelette ne peut pas être un chemin absolu ni contenir de référence <tt>../</tt>',
 	'explication_dossier_squelettes' => 'Vous pouvez indiquer plusieurs répertoires séparés par \':\', qui seront pris dans l\'ordre. Le répertoire intitulé "<tt>squelettes</tt>" est toujours pris en dernier si il existe.',
 	'explication_image_seuil_document' => 'Les images téléchargées peuvent être automatiquement passées en mode document au dela d\'une largeur prédéfinie',
