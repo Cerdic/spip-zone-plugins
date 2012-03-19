@@ -30,15 +30,15 @@ function formulaires_editer_asso_prets_charger_dist($id_pret='')
 		$contexte['ud'] = $ressource['ud'];
 		$montant = $contexte['prix_unitaire'] = $ressource['pu'];
 	} else { /* sinon on recupere l'id_compte correspondant et le journal dans la table des comptes */
-		$comptes = sql_fetsel('id_compte,journal,recette', 'spip_asso_comptes', "imputation='".$GLOBALS['association_metas']['pc_prets']."' AND id_journal=$id_pret");
+		$comptes = sql_fetsel('id_compte,journal,recette', 'spip_asso_comptes', "imputation='".$GLOBALS['association_metas']['pc_prets']."' AND id_journal='$id_pret'");
 		$id_compte = $comptes['id_compte'];
 		$journal = $comptes['journal'];
 		$montant = $comptes['recette'];
-		$contexte['ud'] =  sql_asso1champ('ressources', $contexte['id_ressource']);
+		$contexte['ud'] =  sql_asso1champ('ressource', $contexte['id_ressource'], 'ud');
 		$contexte['heure_sortie'] = substr($contexte['date_sortie'],12,5);
-		$contexte['heure_sortie'] = substr($contexte['date_sortie'],1,10);
+		$contexte['date_sortie'] = substr($contexte['date_sortie'],0,10);
 		$contexte['heure_retour'] = substr($contexte['date_retour'],12,5);
-		$contexte['heure_retour'] = substr($contexte['date_retour'],1,10);
+		$contexte['date_retour'] = substr($contexte['date_retour'],0,10);
 	}
 	/* ajout du journal et du montant qui ne se trouvent pas dans la table asso_prets et ne sont donc pas charges par editer_objet_charger */
 	$contexte['journal'] = $journal;

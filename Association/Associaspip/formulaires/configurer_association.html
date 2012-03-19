@@ -113,7 +113,7 @@
 						</li>
 						<li class="editer_tauxfiscal">
 							<label for="tauxfiscal"><:asso:config_libelle_tauxfiscal:></label>
-							<input type="[(HTML5|?{number,text})]" name="tauxfiscal" [value="(#ENV{tauxfiscal}|sinon{100})"] id="tauxfiscal" class="number float rate" />
+							<input type="[(HTML5|?{number,text})]" name="tauxfiscal" value="[(#ENV{tauxfiscal,100})]" id="tauxfiscal" class="number float rate" />
 						</li>
 						<li class="editer_codefiscal">
 							<label><:asso:config_libelle_codefiscal:></label>
@@ -223,7 +223,6 @@
 				</fieldset>
 			</li>
 [(#REM)<!-- DEB-conf :: gros morceau lie a la compta -->]
-	[(#REM)<!-- Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" est active... -->]
 			<li class="fieldset">
 				<!-- Options du plugin: gestion comptable -->
 				<fieldset>
@@ -313,6 +312,11 @@
 					</ul>
 				</fieldset>
 			</li>
+	[(#REM)<!-- Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" est active... -->]
+		<B_plan_comptable>
+		[(#REM)<!-- S'il n'y a pas des comptes actifs, on peut configurer les modules lies a la compta (mais il faut activer la compta pour activer ces modules) ... -->]
+		<BOUCLE_plan_comptable(ASSO_PLAN){active=1}>
+		</BOUCLE_plan_comptable>
 			<li class="fieldset">
 				<!-- Options comptables du module: gestion des cotisations -->
 				<fieldset>
@@ -359,7 +363,6 @@
 				<fieldset>
 					<h3 class="legend"><:asso:config_libelle_dons:></h3>
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{dons})</span>]
-				<B_module_dons>
 					<ul>
 						<li class="editer_dons">
 							<div class="choix">
@@ -369,8 +372,6 @@
 							</div>
 						</li>
 					</ul>
-				<BOUCLE_module_dons(ASSO_PLAN){active=1}>
-				</BOUCLE_module_dons>
 					<fieldset>
 						<legend>Don financiers</legend>
 					<ul>
@@ -423,20 +424,12 @@
 						</li>
 					</ul>
 					</fieldset>
-				</B_module_dons>
-					<ul>
-						<li class="erreur">
-							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
-						</li>
-					</ul>
-				<//B_module_dons>
 			</li>
 			<li class="fieldset">
 				<!-- Options du plugin: gestion des ventes -->
 				<fieldset>
 					<h3 class="legend"><:asso:config_libelle_ventes:></h3>
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{ventes})</span>]
-				<B_module_ventes>
 					<ul>
 						<li class="editer_ventes">
 							<div class="choix">
@@ -446,8 +439,6 @@
 							</div>
 						</li>
 					</ul>
-				<BOUCLE_module_ventes(ASSO_PLAN){active=1}>
-				</BOUCLE_module_ventes>
 					<fieldset>
 						<legend>Produits</legend>
 					<ul>
@@ -502,13 +493,6 @@
 					</B_classeSelect_ventes>
 					</ul>
 					</fieldset>
-				</B_module_ventes>
-					<ul>
-						<li class="erreur">
-							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
-						</li>
-					</ul>
-				<//B_module_ventes>
 				</fieldset>
 			</li>
 			<li class="fieldset">
@@ -569,7 +553,6 @@
 				<fieldset>
 					<h3 class="legend"><:asso:config_libelle_prets:></h3>
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{prets})</span>]
-				<B_module_prets>
 					<ul>
 						<li class="editer_prets">
 							<div class="choix">
@@ -579,8 +562,6 @@
 							</div>
 						</li>
 					</ul>
-				<BOUCLE_module_prets(ASSO_PLAN){active=1}>
-				</BOUCLE_module_prets>
 					<fieldset>
 						<legend>Acquisition</legend>
 					<ul>
@@ -651,15 +632,20 @@
 					</B_classeSelect_prets>
 					</ul>
 					</fieldset>
-				</B_module_prets>
+				</fieldset>
+			</li>
+		</B_plan_comptable>
+		[(#REM)<!-- S'il n'y a pas de compte actif (ou carrement pas de compte du tout), on ne peut ni activer la compta ni configurer les modules lies !! -->]
+			<li class="fieldset">
+				<fieldset>
 					<ul>
 						<li class="erreur">
 							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
 						</li>
 					</ul>
-				<//B_module_prets>
 				</fieldset>
 			</li>
+		<//B_plan_comptable>
 [(#REM)<!-- FIN-conf :: gros morceau lie a la compta -->]
 		</ul>
 		<p class="boutons">

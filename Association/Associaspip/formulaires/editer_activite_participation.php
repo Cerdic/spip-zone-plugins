@@ -23,7 +23,7 @@ function formulaires_editer_activite_participation_charger_dist($id_activite='')
 		$contexte['date_paiement'] = date('Y-m-d');
 		$id_compte = $journal = '';
 	} else { /* sinon on recupere l'id_compte correspondant et le journal dans la table des comptes */
-		$compte = sql_fetsel('id_compte,journal', 'spip_asso_comptes', "imputation='".$GLOBALS['association_metas']['pc_activites']."' AND id_journal=$id_don");
+		$compte = sql_fetsel('id_compte,journal', 'spip_asso_comptes', "imputation='".$GLOBALS['association_metas']['pc_activites']."' AND id_journal='$id_activite'");
 		$journal = $compte['journal'];
 		$id_compte = $compte['id_compte'];
 	}

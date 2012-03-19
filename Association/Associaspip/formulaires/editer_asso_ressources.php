@@ -27,7 +27,7 @@ function formulaires_editer_asso_ressources_charger_dist($id_ressource='')
 		$id_compte = '';
 		$journal = '';
 	} else { /* sinon on recupere l'id_compte correspondant et le journal dans la table des comptes */
-		$compte = sql_fetsel('id_compte,journal', 'spip_asso_comptes', "imputation='".$GLOBALS['association_metas']['pc_ressources']."' AND id_journal=$id_ressource");
+		$compte = sql_fetsel('id_compte,journal', 'spip_asso_comptes', "imputation='".$GLOBALS['association_metas']['pc_ressources']."' AND id_journal='$id_ressource'");
 		$journal = $compte['journal'];
 		$id_compte = $compte['id_compte'];
 	}

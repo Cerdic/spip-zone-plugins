@@ -10,13 +10,13 @@
 				<li class="editer_date">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date})</span>]
 					<label for="date_inscription"><:asso:libelle_date:></label>
-					<input name="date_inscription" type="[(#HTML5|?{date,text})]" [value="(#ENV{date})"] id="date_inscription" class="date" readonly="readonly" disabled="disabled" />
+					<input name="date_inscription" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_inscription})"] id="date_inscription" class="date" readonly="readonly" disabled="disabled" />
 				</li>
 				<INCLURE{fond=inc/choisir_mbr_nom, champ_id=id_adherent, valeur_id=#ENV{id_adherent}, champ_nom=nom, valeur_nom=#ENV{nom} }>
 				<li class="editer_inscrits">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{inscrits})</span>]
 					<label for="nombre_inscrits"><:asso:activite_libelle_nombre_inscrit:></label>
-					<input name="inscrits" type="[(#HTML5|?{number,text})]" [value="(#ENV{inscrits})"] id="nombre_inscrits" class="number integer" [(#ENV{date_paiement}|!={0000-00-00}|oui) readonly="readonly" disabled="disabled"]/>
+					<input name="inscrits" type="[(#HTML5|?{number,text})]" [value="(#ENV{inscrits})"] id="nombre_inscrits" class="number integer" [(#ENV{date_paiement}|=={0000-00-00}|oui) readonly="readonly" disabled="disabled"]/>
 				</li>
 				<li class="editer_commentaire">
 					<label for="commentaire"><:asso:libelle_commentaire:></label>
@@ -39,7 +39,7 @@
 					<label for="date_paiement"><:asso:libelle_date:></label>
 					<input name="date_paiement" type="[(#HTML5|?{date,text})]" [value="(#ENV{date})"] id="date_paiement" class="date" />
 				</li>
-				<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, env>
+				<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, env}>
 			</ul>
 		</fieldset>
 		<p class="boutons">

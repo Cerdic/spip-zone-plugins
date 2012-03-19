@@ -40,6 +40,7 @@ function exec_ajout_inscription()
 		debut_cadre_association(($id_activite?'activites.gif':'panier_in.gif'), 'activite_titre_ajouter_inscriptions');
 		echo recuperer_fond('prive/editer/ajouter_inscription', array (
 			'id_activite' => $id_activite,
+			'id_evenement' => $id_evenement,
 		));
 	}
 }

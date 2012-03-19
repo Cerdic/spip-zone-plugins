@@ -25,7 +25,7 @@ function formulaires_editer_asso_ventes_charger_dist($id_vente='') {
 		$id_compte = '';
 		$journal = '';
 	} else { /* sinon on recupere l'id_compte correspondant et le journal dans la table des comptes */
-		$comptes = sql_fetsel('id_compte,journal', 'spip_asso_comptes', "imputation='".$GLOBALS['association_metas']['pc_ventes']."' AND id_journal=$id_vente");
+		$comptes = sql_fetsel('id_compte,journal', 'spip_asso_comptes', "imputation='".$GLOBALS['association_metas']['pc_ventes']."' AND id_journal='$id_vente'");
 		$id_compte = $comptes['id_compte'];
 		$journal = $comptes['journal'];
 	}

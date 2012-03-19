@@ -21,7 +21,7 @@ function formulaires_editer_activite_inscription_charger_dist($id_activite='')
 	$contexte = formulaires_editer_objet_charger('asso_activites', $id_activite, '', '',  generer_url_ecrire('voir_activites','id='.intval(_request('id_evenement'))), '');
 	if (!$id_activite) { /* si c'est un ajout */
 		$contexte['id_evenement'] = intval(_request('id_evenement'));
-		if ( !sql_countsel('spip_evenements', 'id_evenemnt='. $contexte['id_evenement']) )
+		if ( !sql_countsel('spip_evenements', 'id_evenement='. $contexte['id_evenement']) )
 			exit; // sortir sans proces si evenement inexistant
 		$contexte['date_inscription'] = date('Y-m-d');
 		$contexte['date_paiement'] = '0000-00-00';

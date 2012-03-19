@@ -106,8 +106,8 @@ function exec_voir_adherent(){
 		echo '<th>'._T('asso:adherent_entete_journal').'</th>';
 		echo '<th>'._T('asso:entete_date').'</th>';
 		echo '<th>'._T('asso:adherent_entete_justification').'</th>';
-		echo '<th>'._T('asso:montant').'</th>';
-		echo '<th>'._T('asso:action').'</th>';
+		echo '<th>'._T('asso:entete_montant').'</th>';
+		echo '<th>'._T('asso:entete_action').'</th>';
 		echo "</tr>\n</thead><tbody>";
 		$association_imputation = charger_fonction('association_imputation', 'inc');
 		$critere = $association_imputation('pc_cotisations');
@@ -126,10 +126,10 @@ function exec_voir_adherent(){
 			echo '<th>'._T('asso:entete_date').'</th>';
 			echo '<th>'._T('asso:adherent_entete_activite').'</th>';
 			echo '<th>'._T('asso:adherent_entete_inscrits').'</th>';
-			echo '<th>'._T('asso:adherent_entete_statut').'</th>';
+			echo '<th>'._T('asso:entete_montant').'</th>';
 			echo '<th>&nbsp;</th>';
 			echo "</tr>\n</thead><tbody>";
-			$query = sql_select('*', 'spip_asso_activites', "id_adherent=$id_auteur", '', 'date DESC');
+			$query = sql_select('*', 'spip_asso_activites', "id_adherent=$id_auteur", '', 'date_inscription DESC');
 			while ($data = sql_fetch($query)) {
 				$id_evenement = $data['id_evenement'];
 				echo '<tr>';
@@ -141,7 +141,7 @@ function exec_voir_adherent(){
 					echo '<td class="text">'.$evenement['titre'].'</td>';
 				}
 				echo '<td class="integer">'.$data['inscrits'].'</td>';
-				echo '<td class="text">'.$data['statut'].'</td>';
+				echo '<td class="decimal">'. association_prixfr($data['montant']) .'</td>';
 				echo '<td class="action">', association_bouton('adherent_bouton_maj_inscription', 'edit-12.gif', 'edit_activite', 'id='.$data['id_activite']), '</td>';
 				echo "</tr>\n";
 			}
@@ -183,8 +183,8 @@ function exec_voir_adherent(){
 			echo '<th>'._T('asso:adherent_entete_journal').'</th>';
 			echo '<th>'._T('asso:entete_date').'</th>';
 			echo '<th>'._T('asso:adherent_entete_justification').'</th>';
-			echo '<th>'._T('asso:montant').'</th>';
-			echo '<th>'._T('asso:action').'</th>';
+			echo '<th>'._T('asso:entete_montant').'</th>';
+			echo '<th>'._T('asso:entete_action').'</th>';
 			echo "</tr>\n</thead><tbody>";
 			$association_imputation = charger_fonction('association_imputation', 'inc');
 			$critere = $association_imputation('pc_dons');

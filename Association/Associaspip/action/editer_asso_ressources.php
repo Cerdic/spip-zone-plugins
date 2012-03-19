@@ -20,8 +20,9 @@ function action_editer_asso_ressources()
     $erreur = '';
     $code= _request('code');
     $date_achat = _request('date_acquisition');
-    $prix_achat => association_recupere_montant(_request('prix_acquisition'))
-    $statut = _request('statut');
+    $prix_achat = association_recupere_montant(_request('prix_acquisition'));
+    $quantite = floatval(_request('quantite'));
+    $statut = $quantite ? (_request('suspendu')?"-$quantite":$quantite) : _request('statut');
     $champs = array(
 	'date_acquisition' => $date_achat,
 	'code' => $code,

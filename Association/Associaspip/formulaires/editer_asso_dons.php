@@ -25,7 +25,7 @@ function formulaires_editer_asso_dons_charger_dist($id_don='') {
 		$id_compte = '';
 		$journal = '';
 	} else { /* sinon on recupere l'id_compte correspondant et le journal dans la table des comptes */
-		$compte = sql_fetsel('id_compte,journal', 'spip_asso_comptes', "imputation='".$GLOBALS['association_metas']['pc_dons']."' AND id_journal=$id_don");
+		$compte = sql_fetsel('id_compte,journal', 'spip_asso_comptes', "imputation='".$GLOBALS['association_metas']['pc_dons']."' AND id_journal='$id_don'");
 		$journal = $compte['journal'];
 		$id_compte = $compte['id_compte'];
 	}

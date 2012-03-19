@@ -676,7 +676,7 @@ Commentaire: @commentaire@
 	'erreur_id_adherent' => 'Ce num&eacute;ro de membre ne correspond &agrave; aucun membre de l\'association',
 	'erreur_pas_de_classe_financiere' => 'Aucune classe de comptes financiers d&eacute;finie au plan comptable !',
 	'erreur_creer_un_plan_pour_activer_ce_module' => 'Vous devez d&eacute;finir un plan comptable pour pouvoir activer ce module.',
-	'erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module' => 'Vous devez d&eacute;finir un plan comptable et activer le module de gestion comptable pour pouvoir activer ce module.',
+	'erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module' => 'Vous devez d&eacute;finir un plan comptable et activer le module de gestion comptable pour pouvoir configurer et activer les modules utilisant la comptabilit&eacute;.',
 	'erreur_pas_de_compte' => 'Pas de r&eacute;f&eacute;rence comptable active d&eacute;finie !',
 	'erreur_pas_de_destination' => 'Pas de destination comptable d&eacute;finie !',
 	'erreur_gestion_comptable_inactive' => 'Afin de pouvoir g&eacute;rer les cotisations, dons et ventes, la gestion comptable doit &ecirc;tre activ&eacute;e',
