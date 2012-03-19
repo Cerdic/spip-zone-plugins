@@ -114,10 +114,10 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 	
 	$data_url = parametre_url(url_absolue($provider['endpoint'],url_de_base()),'url',$url,'&');
 	include_spip('inc/config');
-	if (is_null($maxwidth)){
+	if (!$maxwidth){
 		$maxwidth = lire_config('oembed/maxwidth','600');
 	}
-	if (is_null($maxheight)){
+	if (!$maxheight){
 		$maxheight = lire_config('oembed/maxheight','400');
 	}
 

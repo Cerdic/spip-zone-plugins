@@ -39,9 +39,21 @@ function json_encode_html($texte){
 	return $texte;
 }
 
-function oembed($url){
+/**
+ * Filtre utilisable dans un squelette
+ * |oembed{550,300}
+ *
+ * @param string $url
+ * @param int $maxwidth
+ * @param int $maxheight
+ * @return string
+ */
+function oembed($url, $maxwidth=0, $maxheight=0){
 	if (oembed_verifier_provider($url)) {
-		$fond = recuperer_fond('modeles/oembed',array('url'=>$url,'lien'=>''));
+		$fond = recuperer_fond(
+			'modeles/oembed',
+			array('url'=>$url,'lien'=>'','maxwidth'=>$maxwidth,'maxheight'=>$maxheight)
+		);
 		if ($fond = trim($fond))
 			return $fond;
 	}
