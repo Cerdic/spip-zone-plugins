@@ -33,22 +33,37 @@ class cSnTrapez extends acSection {
    public $rFruit;          /// Fruit des berges
 
 
-    function __construct($oP,$rLargeurFond, $rFruit) {
+    function __construct(&$oLog,&$oP,$rLargeurFond, $rFruit) {
         $this->rLargeurFond=(real) $rLargeurFond;
         $this->rFruit=(real) $rFruit;
-        parent::__construct($oP);
+        parent::__construct($oLog,$oP);
     }
 
-    protected function CalcB() {
-        return $this->rLargeurFond+2*$this->rFruit*$this->rY;
+    protected function CalcB($bBerge=false) {
+		if(!$bBerge && $this->rY > $this->oP->rYB) {
+			return $this->rLargeurBerge;
+		}
+		else {
+			return $this->rLargeurFond+2*$this->rFruit*$this->rY;
+		}
     }
 
     protected function CalcP() {
-        return $this->rLargeurFond+2*sqrt(1+pow($this->rFruit,2))*$this->rY;
+        if($this->rY > $this->oP->rYB) {
+			return $this->CalcGeo('P') + parent::CalcP($this->rY-$this->oP->rYB);
+		}
+		else {
+			return $this->rLargeurFond+2*sqrt(1+pow($this->rFruit,2))*$this->rY;
+		}
     }
 
     protected function CalcS() {
-        return $this->rY*($this->rLargeurFond+$this->rFruit*$this->rY);
+ 		if($this->rY > $this->oP->rYB) {
+			return $this->CalcGeo('S') + parent::CalcS($this->rY-$this->oP->rYB);
+		}
+		else {
+			return $this->rY*($this->rLargeurFond+$this->rFruit*$this->rY);
+		}
     }
 
     /**
@@ -56,7 +71,12 @@ class cSnTrapez extends acSection {
      * @return dS
      */
     protected function CalcSder() {
-        return $this->rLargeurFond + 2*$this->rFruit*$this->rY;
+		if($this->rY > $this->oP->rYB) {
+			return parent::CalcSder();
+		}
+		else {
+			return $this->rLargeurFond + 2*$this->rFruit*$this->rY;
+		}
     }
 
     /**
@@ -64,7 +84,12 @@ class cSnTrapez extends acSection {
      * @return dP
      */
     protected function CalcPder() {
-        return 2*sqrt(1+$this->rFruit*$this->rFruit);
+		if($this->rY > $this->oP->rYB) {
+			return parent::CalcPder();
+		}
+		else {
+			return 2*sqrt(1+$this->rFruit*$this->rFruit);
+		}
     }
 
     /**
@@ -72,7 +97,12 @@ class cSnTrapez extends acSection {
      * @return dB
      */
     protected function CalcBder() {
-        return 2*$this->rLargeurFond*$this->rFruit;
+		if($this->rY > $this->oP->rYB) {
+			return parent::CalcBder();
+		}
+		else {
+			return 2*$this->rLargeurFond*$this->rFruit;
+		}
     }
 
     /**

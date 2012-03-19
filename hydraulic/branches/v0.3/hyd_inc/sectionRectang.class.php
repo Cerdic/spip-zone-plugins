@@ -29,47 +29,18 @@ include_spip('hyd_inc/section.class');
  * Calculs de la section rectangulaire
  */
 class cSnRectang extends acSection {
-   public $rLargeurFond; /// largeur au fond
 
-    function __construct($oP,$rLargeurFond) {
-        $this->rLargeurFond=(real) $rLargeurFond;
-        parent::__construct($oP);
-    }
-
-    protected function CalcB() {
-        return $this->rLargeurFond;
+    function __construct(&$oLog,&$oP,$rLargeurFond) {
+		$this->rLargeurBerge = $rLargeurFond;
+        parent::__construct($oLog,$oP);
     }
 
     protected function CalcP() {
-        return $this->rLargeurFond+2*$this->rY;
+        return $this->rLargeurBerge+parent::CalcP($this->rY);
     }
 
     protected function CalcS() {
-        return $this->rY*$this->rLargeurFond;
-    }
-
-    /**
-     * Calcul de dérivée de la surface hydraulique par rapport au tirant d'eau.
-     * @return dS
-     */
-    protected function CalcSder() {
-        return $this->rLargeurFond;
-    }
-
-    /**
-     * Calcul de dérivée du périmètre hydraulique par rapport au tirant d'eau.
-     * @return dP
-     */
-    protected function CalcPder() {
-        return 2;
-    }
-
-    /**
-     * Calcul de dérivée de la largeur au miroir par rapport au tirant d'eau.
-     * @return dB
-     */
-    protected function CalcBder() {
-        return 0;
+        return parent::CalcS($this->rY);
     }
 
     /**
@@ -77,7 +48,7 @@ class cSnRectang extends acSection {
      * @return Distance du centre de gravité de la section à la surface libre
      */
     protected function CalcYg() {
-        return $this->rY / 2;
+        return parent::CalcYg($this->rY);
     }
 
 }

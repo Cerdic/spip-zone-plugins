@@ -32,9 +32,10 @@ class cSnCirc extends acSection {
     protected $rD;      /// Diamètre du cercle
     private $rAlpha;    /// Angle de la surface libre par rapport au fond
 
-    function __construct($oP,$rD) {
+    function __construct(&$oLog,&$oP,$rD) {
         $this->rD=(real) $rD;
-        parent::__construct($oP);
+        if($oP->rYB > $rD) {$oP->rYB = $rD;} // On place la berge au sommet du cercle
+        parent::__construct($oLog,$oP);
     }
 
     /**
@@ -42,22 +43,24 @@ class cSnCirc extends acSection {
      * @return Alpha
      */
     protected function CalcAlpha() {
-        if($this->rY <= 0) {
-            spip_log('CalcAlpha('.$this->rY.')=0','hydraulic');
+		if($this->rY > $this->oP->rYB) {
+			$rY = $this->oP->rYB;
+		}
+		else {
+			$rY = $this->rY;
+		}
+        if($rY <= 0) {
             return 0;
         }
-        elseif($this->rY > $this->rD) {
-            spip_log('CalcAlpha('.$this->rY.')='.pi(),'hydraulic');
+        elseif($rY > $this->rD) {
             return pi();
         }
         else {
-            $alpha = acos(1.-$this->rY/($this->rD/2.));
+            $alpha = acos(1.-$rY/($this->rD/2.));
             if($alpha > pi()) {
-                spip_log('CalcAlpha('.$this->rY.')='.pi(),'hydraulic');
                 return pi();
             }
             else {
-                spip_log('CalcAlpha('.$this->rY.')='.$alpha,'hydraulic');
                 return $alpha;
             }
         }
@@ -68,12 +71,10 @@ class cSnCirc extends acSection {
      * @return dAlpha
      */
     protected function CalcAlphaDer() {
-        if($this->rY <= 0 or $this->rY > $this->rD) {
-            spip_log('CalcAlphaDer('.$this->rY.')=0','hydraulic');
+        if($this->rY <= 0 or $this->rY > $this->rD or $this->rY > $this->oP->rYB) {
             return 0;
         }
         else {
-            spip_log('CalcAlphaDer('.$this->rY.')='.(2. / $this->rD / sqrt(1 - pow(1 - 2 * $this->rY / $this->rD,2))),'hydraulic');
             return 2. / $this->rD / sqrt(1. - pow(1. - 2. * $this->rY / $this->rD,2));
         }
     }
@@ -83,7 +84,12 @@ class cSnCirc extends acSection {
      * @return B
      */
     protected function CalcB() {
-        return $this->rD * sin($this->Calc('Alpha'));
+		if($this->rY > $this->oP->rYB) {
+			return parent::CalcB();
+		}
+		else {
+			return $this->rD * sin($this->Calc('Alpha'));
+		}
     }
 
     /**
@@ -91,7 +97,13 @@ class cSnCirc extends acSection {
      * @return B
      */
      protected function CalcP() {
-        return $this->rD * $this->Calc('Alpha');
+		if($this->rY > $this->oP->rYB and !$this->bSnFermee) {
+			// On n'ajoute pas le périmètre dans le cas d'une fente de Preissmann
+			return $this->CalcGeo('P') + parent::CalcP($this->rY-$this->oP->rYB);
+		}
+		else {
+			return $this->rD * $this->Calc('Alpha');
+		}
     }
 
     /**
@@ -99,7 +111,12 @@ class cSnCirc extends acSection {
      * @return S
      */
     protected function CalcS() {
-        return pow($this->rD,2) / 4 * ($this->Calc('Alpha') - sin($this->Calc('Alpha')) * cos($this->Calc('Alpha')));
+ 		if($this->rY > $this->oP->rYB) {
+			return $this->CalcGeo('S') + parent::CalcS($this->rY-$this->oP->rYB);
+		}
+		else {
+			return pow($this->rD,2) / 4 * ($this->Calc('Alpha') - sin($this->Calc('Alpha')) * cos($this->Calc('Alpha')));
+		}
     }
 
     /**
@@ -107,7 +124,12 @@ class cSnCirc extends acSection {
      * @return dS
      */
     protected function CalcSder() {
-        return $this->Calc('dAlpha') * $this->rD / 4 * cos(2 * $this->Calc('Alpha'));
+ 		if($this->rY > $this->oP->rYB) {
+			return parent::CalcSder();
+		}
+		else {
+			return pow($this->rD,2) / 4 * $this->Calc('dAlpha') * (1 - cos(2 * $this->Calc('Alpha')));
+		}
     }
 
     /**
@@ -115,7 +137,12 @@ class cSnCirc extends acSection {
      * @return dP
      */
     protected function CalcPder() {
-        return $this->rD * $this->Calc('dAlpha');
+		if($this->rY > $this->oP->rYB && !$this->bSnFermee) {
+			return parent::CalcPder();
+		}
+		else {
+			return $this->rD * $this->Calc('dAlpha');
+		}
     }
 
     /**
@@ -123,7 +150,12 @@ class cSnCirc extends acSection {
      * @return dB
      */
     protected function CalcBder() {
-        return $this->rD * $this->Calc('dAlpha') * cos($this->Calc('Alpha'));
+		if($this->rY > $this->oP->rYB) {
+			return parent::CalcBder();
+		}
+		else {
+			return $this->rD * $this->Calc('dAlpha') * cos($this->Calc('Alpha'));
+		}
     }
 
     /**

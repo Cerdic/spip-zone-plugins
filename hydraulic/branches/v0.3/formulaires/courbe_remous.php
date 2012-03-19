@@ -77,7 +77,8 @@ function mes_saisies_section() {
                                        array(
                                              'rKs'    =>array('coef_strickler',50),
                                              'rLong'  =>array('longueur_bief', 50),
-                                             'rIf'    =>array('pente_fond', 0.005)
+                                             'rIf'    =>array('pente_fond', 0.005),
+                                             'rYBerge'     =>array('haut_berge',1)
                                             )
                 ),
 
@@ -139,6 +140,8 @@ function formulaires_courbe_remous_charger_dist() {
 }
 
 function formulaires_courbe_remous_verifier_dist(){
+
+
     $erreurs = array();
     $datas = array();
 
@@ -165,13 +168,10 @@ function formulaires_courbe_remous_verifier_dist(){
 
 function formulaires_courbe_remous_traiter_dist(){
     global $spip_lang;
-/*
-$fdbg = fopen('debug.log','w');
-*/
     include_spip('hyd_inc/section.class');
     include_spip('hyd_inc/cache');
     include_spip('hyd_inc/log.class');
-    include_spip('hyd_inc/calcul');
+    include_spip('hyd_inc/courbe_remous');
     include_spip('hyd_inc/graph.class');
 
     $datas = array();
@@ -211,9 +211,6 @@ $fdbg = fopen('debug.log','w');
         ${$champ}=$data;
     }
 
-    // Initialisation du format d'affichage des réels
-    $iPrec=(int)-log10($Param_calc_rPrec);
-
     // Contrôle du nombre de pas d'espace maximum
     $iPasMax = 1000;
     if($Caract_bief_rLong / $Param_calc_rDx > $iPasMax) {
@@ -223,22 +220,22 @@ $fdbg = fopen('debug.log','w');
     //spip_log(array($Cond_lim_rYaval,$Caract_bief_rKs,$Cond_lim_rQ,$Caract_bief_rLong,$Caract_bief_rIf,$Param_calc_rDx,$Param_calc_rPrec),'hydraulic');
 
     // Enregistrement des paramètres dans les classes qui vont bien
-    $oParam= new cParam($Cond_lim_rYaval,$Caract_bief_rKs,$Cond_lim_rQ,$Caract_bief_rLong,$Caract_bief_rIf,$Param_calc_rDx,$Param_calc_rPrec);
+    $oParam= new cParam($Cond_lim_rYaval,$Caract_bief_rKs,$Cond_lim_rQ,$Caract_bief_rLong,$Caract_bief_rIf,$Param_calc_rDx,$Param_calc_rPrec,$Caract_bief_rYBerge);
 
     switch($lTypeSection) {
         case 'FT':
             include_spip('hyd_inc/sectionTrapez.class');
-            $oSection=new cSnTrapez($oParam,$FT_rLarg,$FT_rFruit);
+            $oSection=new cSnTrapez($oLog,$oParam,$FT_rLarg,$FT_rFruit);
             break;
 
         case 'FR':
             include_spip('hyd_inc/sectionRectang.class');
-            $oSection=new cSnRectang($oParam,$FR_rLarg);
+            $oSection=new cSnRectang($oLog,$oParam,$FR_rLarg);
             break;
 
         case 'FC':
             include_spip('hyd_inc/sectionCirc.class');
-            $oSection=new cSnCirc($oParam,$FC_rDiam);
+            $oSection=new cSnCirc($oLog,$oParam,$FC_rDiam);
             break;
 
         case 'FP':
@@ -246,10 +243,8 @@ $fdbg = fopen('debug.log','w');
 
         default:
             include_spip('hyd_inc/sectionTrapez.class.php');
-            $oSection=new cSnTrapeze($oParam,$FT_rLarg,$FT_rFruit);
+            $oSection=new cSnTrapeze($oLog,$oParam,$FT_rLarg,$FT_rFruit);
     }
-
-
 
     /***************************************************************************
     *                        Calcul de la ligne d'eau
@@ -257,17 +252,18 @@ $fdbg = fopen('debug.log','w');
     $bNoCache = false; // true pour débugage
     if(!$bNoCache && is_file(HYD_CACHE_DIRECTORY.$CacheFileName)) {
         // On récupère toutes les données dans un cache déjà créé
-        list($tr,$sLog) = ReadCacheFile($CacheFileName);
+        list($tr,$sLog,$oSection->rHautCritique,$oSection->rHautNormale) = ReadCacheFile($CacheFileName);
     }
     else {
         // On calcule les données pour créer un cache et afficher le résultat
-        $oLog->Add(_T('hydraulic:h_critique').' = '.format_nombre($oSection->rHautCritique,$iPrec).' m');
-        $oLog->Add(_T('hydraulic:h_normale').' = '.format_nombre($oSection->rHautNormale,$iPrec).' m');
+        $oLog->Add(_T('hydraulic:largeur_berge').' = '.format_nombre($oSection->rLargeurBerge,$oParam->iPrec).' m');
+        $oLog->Add(_T('hydraulic:h_critique').' = '.format_nombre($oSection->CalcGeo('Yc'),$oParam->iPrec).' m');
+        $oLog->Add(_T('hydraulic:h_normale').' = '.format_nombre($oSection->CalcGeo('Yn'),$oParam->iPrec).' m');
 
         // Calcul depuis l'aval
         if($oSection->rHautCritique <= $Cond_lim_rYaval) {
             $oLog->Add(_T('hydraulic:calcul_fluvial'));
-            list($tr['X1'],$tr['Y1']) = calcul_courbe_remous($oParam,$oSection,$oLog,$iPrec);
+            list($tr['X1'],$tr['Y1']) = calcul_courbe_remous($oParam,$oSection,$oLog,$oParam->iPrec);
         }
         else {
             $oLog->Add(_T('hydraulic:pas_calcul_depuis_aval'));
@@ -278,7 +274,7 @@ $fdbg = fopen('debug.log','w');
             $oLog->Add(_T('hydraulic:calcul_torrentiel'));
             $oParam->rYCL = $Cond_lim_rYamont; // Condition limite amont
             $oParam->rDx = -$oParam->rDx; // un pas négatif force le calcul à partir de l'amont
-            list($tr['X2'],$tr['Y2']) = calcul_courbe_remous($oParam,$oSection,$oLog,$iPrec);
+            list($tr['X2'],$tr['Y2']) = calcul_courbe_remous($oParam,$oSection,$oLog,$oParam->iPrec);
         }
         else {
             $oLog->Add(_T('hydraulic:pas_calcul_depuis_amont'));
@@ -287,7 +283,7 @@ $fdbg = fopen('debug.log','w');
         //Production du journal de calcul
         $sLog = $oLog->Result();
         //Enregistrement des données dans fichier cache
-        WriteCacheFile($CacheFileName,array($tr,$sLog));
+        WriteCacheFile($CacheFileName,array($tr,$sLog,$oSection->rHautCritique,$oSection->rHautNormale));
     }
     //Construction d'un tableau des indices x combinant les abscisses des 2 lignes d'eau
     $trX = array();
@@ -302,13 +298,27 @@ $fdbg = fopen('debug.log','w');
     *                        Affichage du graphique
     ****************************************************************************/
     $oGraph = new cGraph();
-    // Ligne d'eau fluviale
+    // Cote des berges
+    $oGraph->AddSerie(
+        'berge',
+        $trX,
+        $oParam->rYB,  // La cote des berges sera calculée à partir de la pente fournie dans GetGraph
+        '#C58f50',
+        'lineWidth:1');
+    // Cote du fond
+    $oGraph->AddSerie(
+        'fond',
+        $trX,
+        0,  // La cote du fond sera calculée à partir de la pente fournie dans GetGraph
+        '#753f00',
+        'lineWidth:1, fill:true');
+   // Ligne d'eau fluviale
     if(isset($tr['Y1'])) {
         $oGraph->AddSerie(
             'ligne_eau_fluviale',
             $tr['X1'],
             $tr['Y1'],
-            '#00a3cd',
+            '#0093bd',
             'lineWidth:3, showMarker:true, markerOptions:{style:\'filledCircle\', size:8}');
     }
     // Ligne d'eau torrentielle
@@ -320,27 +330,20 @@ $fdbg = fopen('debug.log','w');
             '#77a3cd',
             'lineWidth:3, showMarker:true, markerOptions:{style:\'filledCircle\', size:8}');
     }
-    // Cote du fond
-    $oGraph->AddSerie(
-        'fond',
-        $trX,
-        0,  // La cote du fond sera calculée à partir de la pente fournie dans GetGraph
-        '#753f00',
-        'lineWidth:1, fill:true');
     // Hauteur critique
     $oGraph->AddSerie(
         'h_critique',
         $trX,
         $oSection->rHautCritique,  // La cote du fond sera calculée à partir de la pente fournie dans GetGraph
         '#ff0000',
-        'lineWidth:1');
+        'lineWidth:2');
     // Hauteur normale
     $oGraph->AddSerie(
         'h_normale',
         $trX,
         $oSection->rHautNormale,  // La cote du fond sera calculée à partir de la pente fournie dans GetGraph
         '#a4c537',
-        'lineWidth:1');
+        'lineWidth:2');
 
     // Décalage des données par rapport au fond
     $oGraph->Decal(0, $Caract_bief_rIf, $Caract_bief_rLong);
@@ -374,17 +377,17 @@ $fdbg = fopen('debug.log','w');
         $i+=1;
         $echo.='<tr class="';
         $echo.=($i%2==0)?'row_even':'row_odd';
-        $echo.='"><td>'.format_nombre($rX,$iPrec).'</td>';
+        $echo.='"><td>'.format_nombre($rX,$oParam->iPrec).'</td>';
         if(isset($tr['X1']) && !(($cle = array_search($rX,$tr['X1'])) === false)) {
-            $echo .= '<td>'.format_nombre($tr['Y1'][$cle],$iPrec).'</td>';
-            $echo .= '<td>'.format_nombre($oSection->Calc('Fr', $tr['Y1'][$cle]),$iPrec).'</td>';
+            $echo .= '<td>'.format_nombre($tr['Y1'][$cle],$oParam->iPrec).'</td>';
+            $echo .= '<td>'.format_nombre($oSection->Calc('Fr', $tr['Y1'][$cle]),$oParam->iPrec).'</td>';
         }
         else {
             $echo .= '<td></td><td></td>';
         }
         if(isset($tr['X2']) && !(($cle = array_search($rX,$tr['X2'])) === false)) {
-            $echo .= '<td>'.format_nombre($tr['Y2'][$cle],$iPrec).'</td>';
-            $echo .= '<td>'.format_nombre($oSection->Calc('Fr', $tr['Y2'][$cle]),$iPrec).'</td>';
+            $echo .= '<td>'.format_nombre($tr['Y2'][$cle],$oParam->iPrec).'</td>';
+            $echo .= '<td>'.format_nombre($oSection->Calc('Fr', $tr['Y2'][$cle]),$oParam->iPrec).'</td>';
         }
         else {
             $echo .= '<td></td><td></td>';

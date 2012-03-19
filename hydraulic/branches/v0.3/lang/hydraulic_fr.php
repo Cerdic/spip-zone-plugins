@@ -5,6 +5,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'abscisse'        => "Abscisse",
     'arret_calcul'    => "Arrêt du calcul : Hauteur critique atteinte à l'abscisse",
     'acier_lamine'    => "Acier laminé - Béton lisse",
+    // B
+    'berge'           => "Berge",
     // C
     'calcul_caract'   => "Le calcul a les caractéristiques suivantes :",
     'calcul_remous'   => "Calcul d'une courbe de remous",
@@ -26,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'def_section_rect'=> "Définition de la section rectangulaire",
     'def_section_circ'=> "Définition de la section circulaire",
     'def_section_puis'=> "Définition de la section puissance",
-	'diametre'		  => "Diamètre (m)",
+   'diametre'       => "Diamètre (m)",
     // F
     'fond'            => "Fond",
     'fruit'           => "Fruit (m/m)",
@@ -39,14 +41,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // H
     'h_amont_imposee' => "Hauteur d'eau imposée à l'amont (m)",
     'h_aval_imposee'  => "Hauteur d'eau aval imposée (m)",
+    'h_berge'         => "Hauteur de berge (m)",
     'h_critique'      => "Hauteur critique",
     'h_normale'       => "Hauteur normale",
     // L
     'largeur_fond'    => "Largeur au fond (m)",
+    'largeur_berge'   => "Largeur au niveau des berges",
     'ligne_eau_fluviale'  => "Ligne d'eau fluviale",
     'ligne_eau_torrentielle'  => "Ligne d'eau torrentielle",
     'log_titre'       => "Journal des calculs",
     'longueur_bief'   => "Longueur du bief (m)",
+    //N
+    'newton_non_convergence' => "Non convergence du calcul (Méthode de Newton)",
     // P
     'param_calcul'    => "Paramètres de calcul",
     'pas_ajustement'  => "ajustement du pas d'espace à ",

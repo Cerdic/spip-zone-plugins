@@ -18,7 +18,6 @@ function calcul_courbe_remous($oParam,$oSection,$oLog,$iPrec) {
 
    $trX[] = (real)round($xDeb,$iPrec);
    $trY[] = (real)$oParam->rYCL;
-   $oSection->rY = (real)$oParam->rYCL;
 
    // Boucle de calcul de la courbe de remous
    for($x = $xDeb + $dx; ($dx > 0 && $x <= $xFin) || ($dx < 0 && $x >= $xFin); $x += $dx) {

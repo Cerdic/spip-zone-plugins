@@ -5,6 +5,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'abscisse'        => "Abscissa",
     'arret_calcul'    => "Calculation stopped: Critical elevation reached at abscissa",
     'acier_lamine'    => "Rolled steel - Smooth concrete",
+    // B
+    'berge'           => "Embankment",
     // C
     'calcul_caract'   => "The calculation has the following characteristics:",
     'calcul_remous'   => "Calculation of backwater curve",
@@ -23,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // D
     'debit_amont'     => "Upstream flow (m3/s)",
     'def_section_trap'=> "Definition of trapezoidal section",
-	'diametre'		  => "Diameter (m)",
+   'diametre'       => "Diameter (m)",
      // F
     'fond'            => "Bottom",
     'fruit'           => "Slope (m/m)",
@@ -36,14 +38,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // H
     'h_amont_imposee' => "Water level imposed at the upstream (m)",
     'h_aval_imposee'  => "Downstream water level imposed (m)",
+    'h_berge'         => "Embankment elevation (m)",
     'h_critique'      => "Critical elevation",
     'h_normale'       => "Normal elevation",
     // L
     'largeur_fond'    => "Width at bottom (m)",
+    'largeur_berge'   => "Width at embankment level",
     'ligne_eau_fluviale'  => "Subcritical water profile",
     'ligne_eau_torrentielle'  => "Supercritical water profile",
     'log_titre'       => "Calculation's log",
     'longueur_bief'   => "Length of reach (m)",
+    //N
+    'newton_non_convergence' => "Non-convergence of the calculation (Newton's method)",
     // P
     'param_calcul'    => "Calculation parameters",
     'pas_ajustement'  => "adjustement of space step to ",
@@ -53,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'precision_calc'  => "Accuracy of calculation and display of dimensions (m)",
     'pas_calcul_depuis_aval' => 'Downstream boundary condition < Critical elevation : no possible calculation from downstream',
     'pas_calcul_depuis_amont' => 'Upstream boundary condition < Critical elevation : no possible calculation from upstream',
-	'pas_var' => "With a variation step of",
+   'pas_var' => "With a variation step of",
     'pvc' => "PVC - Polyethylene",
     'param_Q' => "Q: Flow (m³ / s)",
     'param_D' => "D: Pipe diameter (m)",

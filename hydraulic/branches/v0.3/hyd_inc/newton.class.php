@@ -48,6 +48,7 @@ abstract class acNewton {
     private $rRelax=1; /// Coefficient de relaxation
     private $rFnPrec=0; /// Mémorisation du Fn précédent pour détecter le changement de signe
     private $iOscil=0; /// Nombre de changement de signe de Delta
+    private $oLog;
 
     /**
      * Calcul de la fonction f(x) dont on cherche le zéro.
@@ -83,25 +84,27 @@ abstract class acNewton {
     public function Newton($rX) {
         $this->iCpt++;
         $rFn=$this->CalcFn($rX);
-        //~ echo('</br>Newton '.$this->iCpt.' Relax='.$this->rRelax.'- f('.$rX.') = '.$rFn);
+        //echo('</br>Newton '.$this->iCpt.' Relax='.$this->rRelax.'- f('.$rX.') = '.$rFn);
         if($this->FuzzyEqual($rFn) || $this->iCpt >= $this->iCptMax) {
             return $rX;
         }
         else {
             $rDer=$this->CalcDer($rX);
-            //~ echo(' - f\' = '.$rDer);
+            //echo(' - f\' = '.$rDer);
             if($rDer!=0) {
+/*
                 if($this->rRelax > 1) {
                     // On réduit progressivement le coef de relaxation
-                    $this->rRelax *= 0.25;
+                    $this->rRelax *= 1;
                 }
+*/
                 if($rFn < 0 xor $this->rFnPrec < 0) {
                     $this->nOscil++;
                     if($this->rRelax > 1) {
                         // Sur une forte relaxation, au changement de signe on réinitialise
                         $this->rRelax = 1;
                     }
-                    else {
+                    elseif($this->nOscil>2) {
                         // On est dans le cas d'une oscillation autour de la solution
                         // On réduit le coefficient de relaxation
                         //~ echo '</br> ******  Delta='.$Delta.' DeltaPrec='.$this->rDelta;
@@ -110,15 +113,16 @@ abstract class acNewton {
                 }
                 $this->rFnPrec = $rFn;
                 $Delta = $rFn / $rDer;
-                while($rX - $Delta*$this->rRelax <= 0 && $this->rRelax > 1E-5) {
-                    // On diminue le coeficient de relaxation si on passe en négatif
-                    $this->rRelax *= 0.1;
-                }
-                while(abs($Delta*$this->rRelax) < $this->rTol && $this->rRelax < 2^20) {
+                while(abs($Delta*$this->rRelax) < $this->rTol && $rFn > 10*$this->rTol && $this->rRelax < 2^8) {
                     // On augmente le coefficicient de relaxation s'il est trop petit
-                    $this->rRelax *= 2; // Mais on ne le mémorise pas pour les itérations suivantes
+                    $this->rRelax *= 2;
                 }
-                $rX = $rX - $Delta*$this->rRelax;
+                $rRelax = $this->rRelax;
+                while($rX - $Delta*$rRelax <= 0 && $rRelax > 1E-4) {
+                    // On diminue le coeficient de relaxation si on passe en négatif
+                    $rRelax *= 0.5; // Mais on ne le mémorise pas pour les itérations suivantes
+                }
+                $rX = $rX - $Delta*$rRelax;
                 $this->rDelta = $Delta;
                 if($rX<0) {$rX = $this->rTol;} // Aucune valeur recherchée ne peut être négative ou nulle
                 return $this->Newton($rX);
@@ -129,6 +133,18 @@ abstract class acNewton {
             }
         }
     }
+
+    /**
+     * Pour savoir si le Newton a convergé
+     * @return true si oui, false sinon
+     */    public function HasConverged() {
+		if($this->iCpt >= $this->iCptMax) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
 }
 
 ?>

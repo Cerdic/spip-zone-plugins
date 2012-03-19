@@ -37,8 +37,9 @@ class cParam {
     public $rDx;    /// Pas d'espace (positif en partant de l'aval, négatif en partant de l'amont)
     public $rPrec;  /// Précision de calcul et d'affichage
     public $rG=9.81;/// Constante de gravité
+    public $iPrec;  /// Précision en nombre de décimales
 
-    function __construct($rYCL,$rKs, $rQ, $rLong, $rIf, $rDx, $rPrec) {
+    function __construct($rYCL,$rKs, $rQ, $rLong, $rIf, $rDx, $rPrec, $rYB) {
         $this->rYCL=(real) $rYCL;
         $this->rKs=(real) $rKs;
         $this->rQ=(real) $rQ;
@@ -46,11 +47,14 @@ class cParam {
         $this->rIf=(real) $rIf;
         $this->rDx=(real) $rDx;
         $this->rPrec=(real) $rPrec;
+        $this->rYB=(real) $rYB;
+        $this->iPrec=(int)-log10($rPrec);
     }
 }
 
 /**
- * Gestion commune pour les différents types de section
+ * Gestion commune pour les différents types de section.
+ * Comprend les formules pour la section rectangulaire pour gérer les débordements
  */
 abstract class acSection {
     //~ public $rS;             /// Surface hydraulique
@@ -59,10 +63,13 @@ abstract class acSection {
     //~ public $rB;             /// Largeur au miroir
     //~ public $rJ;             /// Perte de charge
     //~ public $rFr;                /// Froude
-    public $rY;          /// Tirant d'eau
+    protected $rY=0;          /// Tirant d'eau
     public $rHautCritique;  /// Tirant d'eau critique
     public $rHautNormale;   /// Tirant d'eau normal
     protected $oP;   /// Paramètres du système canal (classe oParam)
+    protected $oLog; /// Pour l'affichage du journal de calcul
+    public $rLargeurBerge; /// largeur au débordement
+    protected $bSnFermee = false; /// true si la section est fermée (fente de Preissmann)
     /**
      * Tableau contenant les données dépendantes du tirant d'eau $this->rY.
      *
@@ -79,25 +86,26 @@ abstract class acSection {
      * - dB : la dérivée de B par rapport Y
      */
     private $arCalc = array();
+    protected $arCalcGeo = array(); /// Données ne dépendant pas de la cote de l'eau
 
     /**
      * Construction de la classe.
      * Calcul des hauteurs normale et critique
      */
-    public function __construct($oP) {
+    public function __construct(&$oLog,&$oP) {
+      $this->oP = &$oP;
+      $this->CalcGeo('B');
       //spip_log($this,'hydraulic');
-      $this->oP = $oP;
-      $oHautCritique = new cHautCritique($this, $oP);
-      $this->rHautCritique = $oHautCritique->Newton($oP->rPrec);
-      $oHautNormale= new cHautNormale($this, $oP);
-      $this->rHautNormale = $oHautNormale->Newton($this->rHautCritique);
     }
 
     /**
      * Efface toutes les données calculées pour forcer le recalcul
      */
-    public function Reset() {
+    public function Reset($bGeo=true) {
         $this->arCalc = array();
+        if($bGeo) {
+         $this->arCalcGeo = array();
+      }
     }
 
     /**
@@ -108,10 +116,10 @@ abstract class acSection {
      */
     public function Calc($sDonnee, $rY = false) {
         if($rY!==false && $rY!=$this->rY) {
-            spip_log('Calc('.$sDonnee.') rY='.$rY,'hydraulic');
+            //spip_log('Calc('.$sDonnee.') rY='.$rY,'hydraulic');
             $this->rY = $rY;
-            // On efface toutes les données calculées pour forcer le calcul
-            $this->Reset();
+            // On efface toutes les données dépendantes de Y pour forcer le calcul
+            $this->Reset(false);
         }
 
         if(!isset($this->arCalc[$sDonnee])) {
@@ -153,12 +161,6 @@ abstract class acSection {
                 case 'Hs' : // Charge spécifique
                     $this->arCalc[$sDonnee] = $this->CalcHs();
                     break;
-                case 'Yc' : // Tirant d'eau critique
-                    $this->arCalc[$sDonnee] = $this->CalcYc();
-                    break;
-                case 'Yn' : // Tirant d'eau normal
-                    $this->arCalc[$sDonnee] = $this->CalcYn();
-                    break;
                 case 'Yf' : // Tirant d'eau fluvial
                     $this->arCalc[$sDonnee] = $this->CalcYf();
                     break;
@@ -185,33 +187,88 @@ abstract class acSection {
                     break;
             }
         }
-        spip_log('Calc('.$sDonnee.')='.$this->arCalc[$sDonnee],'hydraulic');
+        //spip_log('Calc('.$sDonnee.')='.$this->arCalc[$sDonnee],'hydraulic');
         return $this->arCalc[$sDonnee];
+    }
+
+    /**
+     * Calcul des données uniquement dépendantes de la géométrie de la section
+     * @param $sDonnee Clé de la donnée à calculer (voir $this->$arCalcGeo)
+     * @param $rY Hauteur d'eau
+     * @return la donnée calculée
+     */
+    public function CalcGeo($sDonnee) {
+      if($sDonnee != 'B' && !isset($this->arCalcGeo['B'])) {
+         // Si la largeur aux berges n'a pas encore été calculée, on commence par ça
+         $this->CalcGeo('B');
+      }
+        if(!isset($this->arCalcGeo[$sDonnee])) {
+            // La donnée a besoin d'être calculée
+         //spip_log('CalcGeo('.$sDonnee.') rY='.$this->oP->rYB,'hydraulic');
+         $this->Reset(false);
+         $this->rY = $this->oP->rYB;
+            switch($sDonnee) {
+            case 'B' : // Largeur aux berges
+               $this->arCalcGeo[$sDonnee] = $this->CalcB();
+               if($this->arCalcGeo[$sDonnee] < $this->oP->rYB / 100) {
+                  // Section fermée
+                  $this->bSnFermee = true;
+                  // On propose une fente de Preissmann égale à 1/100 de la hauteur des berges
+                  $this->arCalcGeo[$sDonnee] = $this->oP->rYB / 100;
+               }
+               $this->rLargeurBerge = $this->arCalcGeo[$sDonnee];
+                    break;
+                case 'S' : // Surface mouillée
+                    $this->arCalcGeo[$sDonnee] = $this->CalcS();
+                    break;
+                case 'P' : // Périmètre mouillé
+                    $this->arCalcGeo[$sDonnee] = $this->CalcP();
+                    break;
+                case 'Yc' : // Tirant d'eau critique
+                    $this->arCalcGeo[$sDonnee] = $this->CalcYc();
+                    break;
+                case 'Yn' : // Tirant d'eau normal
+                    $this->arCalcGeo[$sDonnee] = $this->CalcYn();
+                    break;
+                case 'Yg' : // Distance du centre de gravité de la section à la surface libre
+                    $this->arCalcGeo[$sDonnee] = $this->CalcYg();
+                    break;
+            }
+        }
+        //spip_log('CalcGeo('.$sDonnee.')='.$this->arCalcGeo[$sDonnee],'hydraulic');
+        return $this->arCalcGeo[$sDonnee];
     }
 
     /**
      * Calcul de la surface hydraulique.
      * @return La surface hydraulique
      */
-    abstract protected function CalcS();
+    protected function CalcS($rY) {
+        return $rY*$this->rLargeurBerge;
+    }
 
     /**
      * Calcul de dérivée de la surface hydraulique par rapport au tirant d'eau.
      * @return dS
      */
-    abstract protected function CalcSder();
+    protected function CalcSder() {
+        return $this->rLargeurBerge;
+    }
 
    /**
     * Calcul du périmètre hydraulique.
     * @return Le périmètre hydraulique
     */
-    abstract protected function CalcP();
-
+    protected function CalcP($rY) {
+        return 2*$rY;
+    }
     /**
      * Calcul de dérivée du périmètre hydraulique par rapport au tirant d'eau.
      * @return dP
      */
-    abstract protected function CalcPder();
+    protected function CalcPder() {
+        return 2;
+    }
 
    /**
     * Calcul du rayon hydraulique.
@@ -243,13 +300,16 @@ abstract class acSection {
     * Calcul de la largeur au miroir.
     * @return La largeur au miroir
     */
-    abstract protected function CalcB();
-
+    protected function CalcB() {
+        return $this->rLargeurBerge;
+    }
     /**
      * Calcul de dérivée de la largeur au miroir par rapport au tirant d'eau.
      * @return dB
      */
-    abstract protected function CalcBder();
+    protected function CalcBder() {
+        return 0;
+    }
 
    /**
     * Calcul de la perte de charge par la formule de Manning-Strickler.
@@ -272,9 +332,8 @@ abstract class acSection {
     * @return Tirant d'eau
     */
     public function CalcY_M1($Y) {
-        $this->Reset(); // On réinitialise toutes les données dépendant de la ligne d'eau
-        $this->rY = $Y; // Tirant d'eau initial pour le calcul du point suivant
-        return $Y-($this->oP->rDx*($this->oP->rIf-$this->Calc('J'))/(1-pow($this->Calc('Fr'),2)));
+        // L'appel à Calc('J') avec Y en paramètre réinitialise toutes les données dépendantes de la ligne d'eau
+        return $Y-($this->oP->rDx*($this->oP->rIf-$this->Calc('J',$Y))/(1-pow($this->Calc('Fr',$Y),2)));
     }
 
    /**
@@ -298,8 +357,11 @@ abstract class acSection {
     * @return tirant d'eau critique
     */
     private function CalcYc() {
-        $oHautCritique = new cHautCritique($this, $oP);
-        return $oHautCritique->Newton($oP->rPrec);
+        $oHautCritique = new cHautCritique($this, $this->oP);
+        if(!$this->rHautCritique = $oHautCritique->Newton($this->oP->rPrec) or !$oHautCritique->HasConverged()) {
+         $this->oLog(_T('hydraulic:h_critique').' : '._T('hydraulic:newton_non_convergence'));
+      }
+      return $this->rHautCritique;
     }
 
    /**
@@ -307,8 +369,11 @@ abstract class acSection {
     * @return tirant d'eau normal
     */
     private function CalcYn() {
-        $oHautNormale= new cHautNormale($this, $oP);
-        return $oHautNormale->Newton($this->Calc('Yc'));
+        $oHautNormale= new cHautNormale($this, $this->oP);
+        if(!$this->rHautNormale = $oHautNormale->Newton($this->CalcGeo('Yc')) or !$oHautNormale->HasConverged()) {
+         $this->oLog(_T('hydraulic:h_normale').' : '._T('hydraulic:newton_non_convergence'));
+      }
+        return $this->rHautNormale;
     }
 
    /**
@@ -359,8 +424,9 @@ abstract class acSection {
      * Calcul de la distance du centre de gravité de la section à la surface libre.
      * @return Distance du centre de gravité de la section à la surface libre
      */
-    abstract protected function CalcYg();
-
+    protected function CalcYg($rY) {
+        return $rY / 2;
+    }
     /**
      * Calcul de l'impulsion hydraulique.
      * @return Impulsion hydraulique
@@ -412,11 +478,8 @@ class cHautCritique extends acNewton {
      * @param $rX Variable dont dépend la fonction
      */
     protected function CalcFn($rX) {
-        // Initialisation des données de la section
-        $this->oSn->Reset();
-        $this->oSn->rY = $rX;
         // Calcul de la fonction
-        $rFn = (pow($this->oP->rQ,2)/pow($this->oSn->Calc('S'),2)*($this->oSn->Calc('B')/$this->oSn->Calc('S')/$this->oP->rG)-1);
+        $rFn = (pow($this->oP->rQ,2)/pow($this->oSn->Calc('S',$rX),2)*($this->oSn->Calc('B',$rX)/$this->oSn->Calc('S',$rX)/$this->oP->rG)-1);
         spip_log('cHautCritique:CalcFn('.$rX.')='.$rFn,'hydraulic');
         return $rFn;
     }
@@ -448,7 +511,7 @@ class cHautNormale extends acNewton {
      * @param $oSn Section sur laquelle on fait le calcul
      * @param $oP Paramètres supplémentaires (Débit, précision...)
      */
-    function __construct(acSection $oSn, cParam $oP) {
+    function __construct($oSn, cParam $oP) {
         $this->oSn=$oSn;
         $this->rQ=$oP->rQ;
         $this->rKs=$oP->rKs;
@@ -463,11 +526,8 @@ class cHautNormale extends acNewton {
      * @param $rX Variable dont dépend la fonction
      */
     protected function CalcFn($rX) {
-        // Initialisation des données de la section
-        $this->oSn->Reset();
-        $this->oSn->rY = $rX;
         // Calcul de la fonction
-        $rFn = ($this->rQ-$this->rKs*pow($this->oSn->Calc('R'),2/3)*$this->oSn->Calc('S')*sqrt($this->rIf));
+        $rFn = ($this->rQ-$this->rKs*pow($this->oSn->Calc('R',$rX),2/3)*$this->oSn->Calc('S',$rX)*sqrt($this->rIf));
         spip_log('cHautNormale:CalcFn('.$rX.')='.$rFn,'hydraulic');
         return $rFn;
     }
@@ -514,11 +574,8 @@ class cHautCorrespondante extends acNewton {
      * @param $rX Variable dont dépend la fonction
      */
     protected function CalcFn($rX) {
-        // Initialisation des données de la section
-        $this->oSnCal->Reset();
-        $this->oSnCal->rY = $rX;
         // Calcul de la fonction
-        $rFn = $this->rY - $rX + ($this->rV2+pow($this->oSnCal->Calc('V'),2))/(2*$this->rG);
+        $rFn = $this->rY - $rX + ($this->rV2+pow($this->oSnCal->Calc('V',$rX),2))/(2*$this->rG);
         spip_log('cHautCorrespondante:CalcFn('.$rX.')='.$rFn,'hydraulic');
         return $rFn;
     }
