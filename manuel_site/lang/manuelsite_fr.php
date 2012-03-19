@@ -3,6 +3,7 @@
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/manuel_site/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 $manuelsite_exec_article = spip_version_compare($GLOBALS["spip_version_branche"],"2.1.99",">")?"article":"articles" ;
+$manuelsite_num_art_contrib = spip_version_compare($GLOBALS["spip_version_branche"],"2.1.99",">")?"4076":"2986" ;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
@@ -30,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'help' => 'Au secours : ',
 
 	// I
-	'intro' => 'Ce document a pour but d’aider les rédacteurs à l’utilisation du site. Il vient en complément du document intitulé « [Cours SPIP 2.0 pour rédacteurs->http://www.spip-contrib.net/Mode-d-emploi-SPIP-2-pour] » qui est une aide globale à l’utilisation de SPIP. Vous y trouverez une description de l’architecture du site, de l’aide technique sur des points particuliers...',
+	'intro' => 'Ce document a pour but d’aider les rédacteurs à l’utilisation du site. Il vient en complément du document intitulé « [Cours SPIP pour rédacteurs->http://www.spip-contrib.net/?article'.$manuelsite_num_art_contrib.'] » qui est une aide globale à l’utilisation de SPIP. Vous y trouverez une description de l’architecture du site, de l’aide technique sur des points particuliers...',
 
 	// L
 	'label_afficher_bord_gauche' => 'Affichage',
