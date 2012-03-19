@@ -66,6 +66,16 @@ function insert_document() {
 		)
 	);
 	$id_document = sql_insertq("spip_documents", $champs);
+
+	pipeline('post_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_documents',
+				'id_objet' => $id_document
+			),
+			'data' => $champs
+		)
+	);
 	
 	return $id_document;
 }
