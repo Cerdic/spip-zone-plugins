@@ -81,77 +81,80 @@ function nospam_formulaire_verifier($flux){
 				unset($flux['data']['previsu']);
 		}
 	}
-	if ($form=='forum'){
-		if (!isset($flux['data']['texte'])
-			AND $GLOBALS['meta']['forums_texte'] == 'oui'){
-			include_spip("inc/nospam");
-			// regarder si il y a du contenu en dehors des liens !
-			$caracteres = compter_caracteres_utiles(_request('texte'));
-			if ($caracteres < 10){
-				$flux['data']['texte'] = _T('forum_attention_dix_caracteres');
-				unset($flux['data']['previsu']);
+	// pas la peine de filtrer les contenus postés par un admin
+	if ($GLOBALS['visiteur_session']['statut'] != '0minirezo'){
+		if ($form=='forum'){
+			if (!isset($flux['data']['texte'])
+				AND $GLOBALS['meta']['forums_texte'] == 'oui'){
+				include_spip("inc/nospam");
+				// regarder si il y a du contenu en dehors des liens !
+				$caracteres = compter_caracteres_utiles(_request('texte'));
+				if ($caracteres < 10){
+					$flux['data']['texte'] = _T('forum_attention_dix_caracteres');
+					unset($flux['data']['previsu']);
+				}
 			}
 		}
-	}
-	if ($form=='ecrire_auteur'){
-		if (!isset($flux['data']['texte_message_auteur'])){
-			include_spip("inc/nospam");
-			include_spip("inc/texte");
-			// regarder si il y a du contenu en dehors des liens !
-			$texte_message_auteur = _request('texte_message_auteur');
-			$caracteres = compter_caracteres_utiles($texte_message_auteur);
-			if ($caracteres < 10){
-				$flux['data']['texte_message_auteur'] = _T('forum_attention_dix_caracteres');
-				unset($flux['data']['previsu']);
-			}
-			// on analyse le sujet
-			$infos_sujet = analyser_spams(_request('sujet_message_auteur'));
-			// si un lien dans le sujet = spam !
-			if ($infos_sujet['nombre_liens'] > 0){
-				$flux['data']['sujet_message_auteur'] = _T('nospam:erreur_spam');
-				unset($flux['data']['previsu']);
-			}
+		if ($form=='ecrire_auteur'){
+			if (!isset($flux['data']['texte_message_auteur'])){
+				include_spip("inc/nospam");
+				include_spip("inc/texte");
+				// regarder si il y a du contenu en dehors des liens !
+				$texte_message_auteur = _request('texte_message_auteur');
+				$caracteres = compter_caracteres_utiles($texte_message_auteur);
+				if ($caracteres < 10){
+					$flux['data']['texte_message_auteur'] = _T('forum_attention_dix_caracteres');
+					unset($flux['data']['previsu']);
+				}
+				// on analyse le sujet
+				$infos_sujet = analyser_spams(_request('sujet_message_auteur'));
+				// si un lien dans le sujet = spam !
+				if ($infos_sujet['nombre_liens'] > 0){
+					$flux['data']['sujet_message_auteur'] = _T('nospam:erreur_spam');
+					unset($flux['data']['previsu']);
+				}
 
-			// on analyse le texte
-			$infos_texte = analyser_spams($texte_message_auteur);
-			if ($infos_texte['nombre_liens'] > 0) {
-				// si un lien a un titre de moins de 3 caracteres = spam !
-				if ($infos_texte['caracteres_texte_lien_min'] < 3) {
-					$flux['data']['texte_message_auteur'] = _T('nospam:erreur_spam');
+				// on analyse le texte
+				$infos_texte = analyser_spams($texte_message_auteur);
+				if ($infos_texte['nombre_liens'] > 0) {
+					// si un lien a un titre de moins de 3 caracteres = spam !
+					if ($infos_texte['caracteres_texte_lien_min'] < 3) {
+						$flux['data']['texte_message_auteur'] = _T('nospam:erreur_spam');
+					}
+					// si le texte contient plus de trois liens = spam !
+					if ($infos_texte['nombre_liens'] >= 3)
+						$flux['data']['texte_message_auteur'] = _T('nospam:erreur_spam');
 				}
-				// si le texte contient plus de trois liens = spam !
-				if ($infos_texte['nombre_liens'] >= 3)
-					$flux['data']['texte_message_auteur'] = _T('nospam:erreur_spam');
 			}
 		}
-	}
-	if ($form=='signature'){
-		$id_article = $flux['args']['args'][0];
-		$row = sql_fetsel('*', 'spip_petitions', "id_article=".intval($id_article));
-		if ((!isset($flux['data']['message'])) && ($row['message']  == "oui")){
-			include_spip("inc/nospam");
-			include_spip("inc/texte");
-			// regarder si il y a du contenu en dehors des liens !
-			$message = _request('message');
-			// on analyse le texte
-			$infos_texte = analyser_spams($message);
-			if ($infos_texte['nombre_liens'] > 0) {
-				// si un lien a un titre de moins de 3 caracteres = spam !
-				if ($infos_texte['caracteres_texte_lien_min'] < 3) {
-					$flux['data']['message_erreur'] = _T('nospam:erreur_spam');
+		if ($form=='signature'){
+			$id_article = $flux['args']['args'][0];
+			$row = sql_fetsel('*', 'spip_petitions', "id_article=".intval($id_article));
+			if ((!isset($flux['data']['message'])) && ($row['message']  == "oui")){
+				include_spip("inc/nospam");
+				include_spip("inc/texte");
+				// regarder si il y a du contenu en dehors des liens !
+				$message = _request('message');
+				// on analyse le texte
+				$infos_texte = analyser_spams($message);
+				if ($infos_texte['nombre_liens'] > 0) {
+					// si un lien a un titre de moins de 3 caracteres = spam !
+					if ($infos_texte['caracteres_texte_lien_min'] < 3) {
+						$flux['data']['message_erreur'] = _T('nospam:erreur_spam');
+					}
+					// si le texte contient plus de trois liens = spam !
+					if ($infos_texte['nombre_liens'] >= 2)
+						$flux['data']['message_erreur'] = _T('nospam:erreur_spam');
 				}
-				// si le texte contient plus de trois liens = spam !
-				if ($infos_texte['nombre_liens'] >= 2)
-					$flux['data']['message_erreur'] = _T('nospam:erreur_spam');
 			}
-		}
-		// S'il y a un lien dans le champ session_nom => spam
-		if (!isset($flux['data']['session_nom'])){
-			include_spip("inc/nospam");
-			$infos_texte = analyser_spams(_request('session_nom'));
-			if ($infos_texte['nombre_liens'] > 0) {
-				$flux['data']['message_erreur'] = _T('nospam:erreur_spam');
-				spip_log("Lien dans le champ session_nom ".$flux['data']['message_erreur'],'nospam');
+			// S'il y a un lien dans le champ session_nom => spam
+			if (!isset($flux['data']['session_nom'])){
+				include_spip("inc/nospam");
+				$infos_texte = analyser_spams(_request('session_nom'));
+				if ($infos_texte['nombre_liens'] > 0) {
+					$flux['data']['message_erreur'] = _T('nospam:erreur_spam');
+					spip_log("Lien dans le champ session_nom ".$flux['data']['message_erreur'],'nospam');
+				}
 			}
 		}
 	}
