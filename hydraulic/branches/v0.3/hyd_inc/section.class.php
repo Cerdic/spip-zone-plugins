@@ -230,9 +230,6 @@ abstract class acSection {
                 case 'Yn' : // Tirant d'eau normal
                     $this->arCalcGeo[$sDonnee] = $this->CalcYn();
                     break;
-                case 'Yg' : // Distance du centre de gravité de la section à la surface libre
-                    $this->arCalcGeo[$sDonnee] = $this->CalcYg();
-                    break;
             }
         }
         //spip_log('CalcGeo('.$sDonnee.')='.$this->arCalcGeo[$sDonnee],'hydraulic');

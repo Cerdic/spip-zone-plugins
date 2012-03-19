@@ -38,6 +38,11 @@
  *
  */
 
+function id_decoupe($champs,$nb){
+	$decoup = explode('_', $champs, 3);
+	return $decoup[$nb];
+}	
+	
 function mes_saisies_normale_critique(){
 	$fieldset_champs_nc = array(
 	
@@ -77,7 +82,7 @@ function mes_saisies_normale_critique(){
 									   array(
 											 'rug'	    =>array('rugosite_nc',50),
 											 'pente'    =>array('pente_nc', 50),
-											 'cote_eau' =>array('cote_eau_nc', 0.005),
+											 'coteEau' =>array('cote_eau_nc', 0.005),
 											 'debit'    =>array('debit_nc', 1.2)
 											)
 				)
@@ -91,13 +96,29 @@ function champs_obligatoires_nc() {
 	$tSaisie = mes_saisies_normale_critique();
     $tChOblig = array();
     $sTypeSection = _request('ncTypeSection');
-    
+    $ValVar = '';
+    $tChOblig[] = 'prec_nc';
     foreach($tSaisie as $IdFS=>$FieldSet) {
 		if((substr($IdFS,0,1) != 'F') || ($IdFS == $sTypeSection)){
 			foreach($FieldSet[1] as $Cle=>$Champ) {
+				if(substr(_request('choix_champs_'.$Cle), 0, 3) == 'var'){
+					$ValVar = $IdFS.'_'.$Cle.'_nc';
+				}
 				if((!isset($Champ[2])) || (isset($Champ[2]) && $Champ[2])) {
 					$tChOblig[] = $IdFS.'_'.$Cle.'_nc';
 				}
+			}
+		}
+	}
+	
+	if($ValVar != ''){
+		foreach($tChOblig as $cle=>$valeur){
+			if($valeur == $ValVar){
+				unset($tChOblig[$cle]);
+				$tChOblig = array_values($tChOblig);
+				$tChOblig [] = 'val_min_'.id_decoupe($valeur, 1);
+				$tChOblig [] = 'val_max_'.id_decoupe($valeur, 1);
+				$tChOblig [] = 'pas_var_'.id_decoupe($valeur, 1);
 			}
 		}
 	}
@@ -127,7 +148,7 @@ function formulaires_calcul_normale_critique_charger_dist() {
 			}
 		}
 	}
-	
+
     return $valeurs;
 }
 

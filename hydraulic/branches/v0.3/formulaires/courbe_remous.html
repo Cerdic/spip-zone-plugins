@@ -35,50 +35,51 @@ function afficher_cacher() {
             <td colspan="2"><div class="hyd_formulaire_chapitre"><:hydraulic:type_section:></div></td>
          </tr>
 
-         <tr id="type_section_choix">
-            <td align="right">
-               <:hydraulic:choix_section:> :
-            </td>
+			<tr id="type_section_choix">
+				<td align="right">
+					<:hydraulic:choix_section:> :
+				</td>					
 
-            <td>
-               <select name="lTypeSection" id="choix_section" onChange="afficher_cacher();">
-                  <option value="FT" [(#ENV{lTypeSection}|=={'FT'}|?{'selected',''})]><:hydraulic:section_trap:></option>
-                  <option value="FR" [(#ENV{lTypeSection}|=={'FR'}|?{'selected',''})]><:hydraulic:section_rect:></option>
-                  <option value="FC" [(#ENV{lTypeSection}|=={'FC'}|?{'selected',''})]><:hydraulic:section_circ:></option>
-                  <option value="FP" [(#ENV{lTypeSection}|=={'FP'}|?{'selected',''})]><:hydraulic:section_puiss:></option>
-               </select>
-
-               [<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{[(#VALEUR|table_valeur{0})]})</div>]
-            </td>
-
-         </tr>
-
+				<td>
+					<select name="lTypeSection" id="choix_section" onChange="afficher_cacher();">
+					<BOUCLE_selectOptions(POUR){tableau #ENV{mes_saisies}}>	
+						#SET{test, #VALEUR|table_valeur{0}|decoupeIdSection}
+						<BOUCLE_choixSection(CONDITION){si #CLE|substr{0,1}|== {'F'}}>
+							<option value="#CLE" [(#ENV{lTypeSection}|=={#CLE}|?{'selected',''})]>#GET{test}</option>
+						</BOUCLE_choixSection>
+					</BOUCLE_selectOptions>
+					</select>
+		  
+					[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{[(#VALEUR|table_valeur{0})]})</div>]
+				</td>
+						
+			</tr>
 
             <BOUCLE_fieldChamps(POUR){tableau #ENV{mes_saisies}}>
 
-             #SET{id_fieldset, #CLE}
+				 #SET{id_fieldset, #CLE}
+				
+				 <tr id="#GET{id_fieldset}_field" style="display:[(#CLE|match{^([(#ENV{lTypeSection})]|Caract_bief|Cond_lim|Param_calc)$}|?{'table-row','none'})];">	
+					 <td colspan="2"><div class="hyd_formulaire_chapitre">[(#VALEUR|table_valeur{0}|traduction_hydraulic)]</div></td>
+				</tr>
+				
+				<BOUCLE_champsLib(POUR){tableau (#VALEUR|table_valeur{1})}>
+										
+					<tr id="#GET{id_fieldset}_#CLE" style="display:[(#GET{id_fieldset}|match{^([(#ENV{lTypeSection})]|Caract_bief|Cond_lim|Param_calc)$}|?{'table-row','none'})];">
+						<td align="right" width="65%"> 
+							[(#VALEUR|table_valeur{0}|traduction_hydraulic)] :	
+						</td>
+						
+						<td width="35%">
+						   <input type="text" value="[(#ENV{#GET{id_fieldset}_#CLE})]" maxlength="30" name="#GET{id_fieldset}_#CLE">
+						   [<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{#GET{id_fieldset}_#CLE})</div>]
+						</td>
+						
+					</tr>
+					
+				</BOUCLE_champsLib>
 
-             <tr id="#GET{id_fieldset}_field" style="display:[(#CLE|match{^([(#ENV{lTypeSection})]|Caract_bief|Cond_lim|Param_calc)$}|?{'table-row','none'})];">
-                <td colspan="2"><div class="hyd_formulaire_chapitre">[(#VALEUR|table_valeur{0}|traduction_hydraulic)]</div></td>
-            </tr>
-
-            <BOUCLE_champsLib(POUR){tableau (#VALEUR|table_valeur{1})}>
-
-               <tr id="#GET{id_fieldset}_#CLE" style="display:[(#GET{id_fieldset}|match{^([(#ENV{lTypeSection})]|Caract_bief|Cond_lim|Param_calc)$}|?{'table-row','none'})];">
-                  <td align="right" width="65%">
-                     [(#VALEUR|table_valeur{0}|traduction_hydraulic)] :
-                  </td>
-
-                  <td width="35%">
-                     <input type="text" value="[(#ENV{#GET{id_fieldset}_#CLE})]" maxlength="30" name="#GET{id_fieldset}_#CLE">
-                     [<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{#GET{id_fieldset}_#CLE})</div>]
-                  </td>
-
-               </tr>
-
-            </BOUCLE_champsLib>
-
-         </BOUCLE_fieldChamps>
+			</BOUCLE_fieldChamps>
 
          <tr>
             <td colspan="2" class="hyd_bouton_submit">

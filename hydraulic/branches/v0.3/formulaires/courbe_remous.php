@@ -38,68 +38,39 @@
  *
  */
 
+include_spip('hyd_inc/section');
+
 function mes_saisies_section() {
 
-    $fieldset_champs = array(
+    $fieldset_champs = caract_communes();
 
-                'FT'          => array(
-                                       'def_section_trap',
-                                       array(
-                                             'rLarg'  =>array('largeur_fond',2.5),
-                                             'rFruit' =>array('fruit', 0.56, false)
-                                            )
-                ),
+    $fieldset_champs['Caract_bief'] = array(
+										   'caract_bief',
+										   array(
+												 'rKs'    =>array('coef_strickler',50),
+												 'rLong'  =>array('longueur_bief', 50),
+												 'rIf'    =>array('pente_fond', 0.005),
+												 'rYBerge'=>array('h_berge',1)
+												)
+									   );
 
-                'FR'          => array(
-                                       'def_section_rect',
-                                       array(
-                                             'rLarg'  =>array('largeur_fond',2.5),
-                                            )
-                ),
+	$fieldset_champs['Cond_lim']    = array(
+										   'condition_limite',
+										   array(
+												 'rQ'     =>array('debit_amont', 2),
+												 'rYaval' =>array('h_aval_imposee', 0.6),
+												 'rYamont'=>array('h_amont_imposee', 0.15)
+												)
+									   );
 
-                'FC'          => array(
-                                       'def_section_circ',
-                                       array(
-                                             'rDiam'  =>array('diametre',2)
-                                            )
-                ),
-
-                'FP'          => array(
-                                       'def_section_puis',
-                                       array(
-                                             'puiss1' =>array('champs_puissance1',10),
-                                             'puiss2' =>array('champs_puissance2', 0.7)
-                                            )
-                ),
-
-                'Caract_bief' => array(
-                                       'caract_bief',
-                                       array(
-                                             'rKs'    =>array('coef_strickler',50),
-                                             'rLong'  =>array('longueur_bief', 50),
-                                             'rIf'    =>array('pente_fond', 0.005),
-                                             'rYBerge'     =>array('haut_berge',1)
-                                            )
-                ),
-
-                'Cond_lim'    => array(
-                                       'condition_limite',
-                                       array(
-                                             'rQ'     =>array('debit_amont', 2),
-                                             'rYaval' =>array('h_aval_imposee', 0.6),
-                                             'rYamont'=>array('h_amont_imposee', 0.15)
-                                            )
-                ),
-
-                'Param_calc'  => array(
-                                       'param_calcul',
-                                       array(
-                                             'rDx'    =>array('pas_discret', 5),
-                                             'rPrec'  =>array('precision_calc', 0.001)
-                                            )
-                )
-    );
-
+	$fieldset_champs['Param_calc']  = array(
+										   'param_calcul',
+										   array(
+												 'rDx'    =>array('pas_discret', 5),
+												 'rPrec'  =>array('precision_calc', 0.001)
+												)
+									   );	
+		
   return $fieldset_champs;
 
 }
@@ -375,7 +346,7 @@ function formulaires_courbe_remous_traiter_dist(){
     $i=0;
     foreach($trX as $rX) {
         $i+=1;
-        $echo.='<tr class="';
+        $echo.='<tr class="align_right ';
         $echo.=($i%2==0)?'row_even':'row_odd';
         $echo.='"><td>'.format_nombre($rX,$oParam->iPrec).'</td>';
         if(isset($tr['X1']) && !(($cle = array_search($rX,$tr['X1'])) === false)) {

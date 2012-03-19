@@ -22,13 +22,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'calculer_lechapt_calmon' => "Calcul avec la formule de Lechapt et Calmon",
     'calcul_val'      => "Paramètre à calculer",
     'choix_section'   => "Choix de la section",
+    'caract_globale'  => "Caractéristiques globales",
+    'charge_spe'      => "La charge spécifique (m)",
+    'choix_donnee_calc' => "Choix de la donnée à calculer",
+    'charge_critique' => "La charge critique (m)",
+    'larg_miroir'     => "La largeur au miroir (m)",
     // D
     'debit_amont'     => "Débit amont (m3/s)",
     'def_section_trap'=> "Définition de la section trapézoïdale",
     'def_section_rect'=> "Définition de la section rectangulaire",
     'def_section_circ'=> "Définition de la section circulaire",
     'def_section_puis'=> "Définition de la section puissance",
-   'diametre'       => "Diamètre (m)",
+	'diametre'       => "Diamètre (m)",
+	'donnee_calc'     => "Donnée à calculer",
     // F
     'fond'            => "Fond",
     'fruit'           => "Fruit (m/m)",
@@ -38,12 +44,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'fonte_revt_ciment' => "Fonte ou acier revêtement ciment",
     'fonte_revt_bitume' => "Fonte ou acier revêtement bitume - Béton centrifugé",
     'fonte_revt_centrifuge' => "Fonte ou acier revêtement centrifugé",
+    'froud'           => "Le Froude",
+    'force_tract'     => "La force tractrice (Pa)",
     // H
     'h_amont_imposee' => "Hauteur d'eau imposée à l'amont (m)",
     'h_aval_imposee'  => "Hauteur d'eau aval imposée (m)",
     'h_berge'         => "Hauteur de berge (m)",
     'h_critique'      => "Hauteur critique",
     'h_normale'       => "Hauteur normale",
+    //I
+    'impulsion'       => "Impulsion",
     // L
     'largeur_fond'    => "Largeur au fond (m)",
     'largeur_berge'   => "Largeur au niveau des berges",
@@ -69,23 +79,40 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'param_J'         => "J: Perte de charge (m)",
     'param_Lg'        => "Lg: Longueur du tuyau (m)",
     'precision_lechapt_calmon'  => "Précision de calcul(m)",
+    'perim_mouille'   => "Le périmètre mouillé (m)",
+    'perte_charge'    => "La perte de charge (m/m)",
+    //R
+    'rayon_hyd'       => "Le rayon hydraulique (m)",
     //S
     'saisie_erreur'   => "Votre saisie contient des erreurs !",
     'section_trap'    => "Section Trapézoïdale",
     'section_rect'    => "Section Rectangulaire",
     'section_circ'    => "Section Circulaire",
     'section_puiss'   => "Section Puissance",
+    'surf_mouille'    => "La surface mouillée (m²)",
     //T
     'tirant_eau'      => "Tirant d'eau (m)",
     'type_materiau'   => "Type du matériau",
     'tuyau_lisse1'    => "Tuyau hydrauliquement lisse - 0.05 ≤ D ≤ 0.2",
     'tuyau_lisse2'    => "Tuyau hydrauliquement lisse - 0.25 ≤ D ≤ 1",
     'type_section'    => "Type de section",
+    'tirant_eau_crit' => "Le tirant d'eau critique (m)",
+    'tirant_eau_norm' => "Le tirant d'eau normal (m)",
+    'tirant_eau_fluv' => "Le tirant d'eau fluvial (m)",
+    'tirant_eau_torr' => "Le tirant d'eau torrentiel (m)",
+    'tirant_eau_conj' => "Le tirant d'eau conjugué (m)",
     //V
     'valeur_positive' => "Cette valeur doit être strictement positive",
+    'valeur_positive_nulle' => "Cette valeur doit être positive ou nulle",
+    'val_min'         => "De la valeur minimum",
+    'val_max'         => "A la valeur maximum",
+    'varier_val'      => "Paramètre à varier",
     'val_min'         => "De la Valeur minimum",
     'val_max'         => "A la Valeur maximum",
-    'varier_val'      => "Paramètre à varier"
+    'varier_val'      => "Paramètre à varier",
+    'vit_moy'         => "La vitesse moyenne (m/s)",
+    'var_lin'         => "Variation linéaire de l'énergie spécifique (m/m)",
+
 );
 
 ?>

@@ -25,13 +25,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // D
     'debit_amont'     => "Upstream flow (m3/s)",
     'def_section_trap'=> "Definition of trapezoidal section",
-   'diametre'       => "Diameter (m)",
+    'def_section_rect'=> "Definition of rectangular section",
+    'def_section_circ'=> "Definition of circular section",
+    'def_section_puis'=> "Definition of power section",
+	'diametre'		  => "Diameter (m)",
      // F
     'fond'            => "Bottom",
     'fruit'           => "Slope (m/m)",
     'fixer_val'       => "Fixed parameter",
     'fonte_beton_corrosive' =>"Unlined cast iron - Coarse concrete (corrosive water)",
-'fonte_beton_ncorrosive' => "Cast steel or uncoated - Concrete coarse (somewhat corrosive water)",
+	'fonte_beton_ncorrosive' => "Cast steel or uncoated - Concrete coarse (somewhat corrosive water)",
     'fonte_revt_ciment' => "Cast steel or cement coating",
     'fonte_revt_bitume' => "Cast iron or steel coating bitumen - Concrete centrifuged",
     'fonte_revt_centrifuge' => "Cast iron or steel coating centrifuged",
@@ -61,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'pas_calcul_depuis_amont' => 'Upstream boundary condition < Critical elevation : no possible calculation from upstream',
    'pas_var' => "With a variation step of",
     'pvc' => "PVC - Polyethylene",
-    'param_Q' => "Q: Flow (m³ / s)",
+    'param_Q' => "Q: Flow (m&#179; / s)",
     'param_D' => "D: Pipe diameter (m)",
     'param_J' => "J: Head drop (m)",
     'param_Lg' => "Lg: Pipe length (m)",
@@ -76,8 +79,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     //T
     'tirant_eau'         => 'Draft (m)',
     'type_materiau' => "Type of material",
-    'tuyau_lisse1' => "hydraulically smooth pipe - 0.05 ≤ D ≤ 0.2 ",
-    'tuyau_lisse2' => "hydraulically smooth pipe - 0.25 ≤ D ≤ 1 ",
+    'tuyau_lisse1' => "Hydraulically smooth pipe - 0.05 &#8804; D &#8804; 0.2 ",
+    'tuyau_lisse2' => "Hydraulically smooth pipe - 0.25	&#8804; D &#8804; 1 ",
     'type_section' => "Type of section",
     //V
     'valeur_positive' => "This value must be strictly positive",

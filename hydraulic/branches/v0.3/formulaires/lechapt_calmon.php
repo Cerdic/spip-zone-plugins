@@ -203,8 +203,8 @@ function formulaires_lechapt_calmon_verifier_dist(){
 		if (_request($obligatoire) == NULL) {
 			$erreurs[$obligatoire] = _T('hydraulic:champ_obligatoire');
         }
-        else if(_request($obligatoire) == 0 && id_decoupe($obligatoire) != 'Q' && id_decoupe($obligatoire) != 'J'){
-			$erreurs[$obligatoire] = _T('hydraulic:valeur_positive');
+        else if(($obligatoire == 'L' || $obligatoire == 'M' || $obligatoire == 'N') && _request($obligatoire) == 0){
+			$erreurs[$obligatoire] = _T('hydraulic:valeur_positive');			
 		}
         else {
             $datas[$obligatoire] = _request($obligatoire);
@@ -224,7 +224,7 @@ function formulaires_lechapt_calmon_verifier_dist(){
 }
 
 function formulaires_lechapt_calmon_traiter_dist(){
-
+    global $spip_lang;
 	include_spip('hyd_inc/cache');
     include_spip('hyd_inc/log.class');
     include_spip('hyd_inc/graph.class');
@@ -239,8 +239,23 @@ function formulaires_lechapt_calmon_traiter_dist(){
 	$tabLibelle = array();
 	$champs_materiau_coeff = mes_champs_coeff_materiau();
 	$champs_materiau_sans_coeff = mes_champs_sans_coeff_materiau();
+	$tChOblig = champs_obligatoires_lcalmon();
     $iPrec=(int)-log10(_request('prec_lc'));
 
+    //On récupère les données
+    foreach($tChOblig as $champ) {
+        if (_request($champ)){
+            $datas[$champ] = _request($champ);
+        }
+
+        $datas[$champ] = str_replace(',','.',$datas[$champ]); // Bug #574
+    }
+
+    // On ajoute la langue en cours pour différencier le fichier de cache par langue
+    $datas['sLang'] = $spip_lang;
+
+    // Nom du fichier en cache pour calcul déjà fait
+    $CacheFileName=md5(serialize($datas));
 
 	foreach($champs_materiau_coeff as $champs){
 		${$champs} = _request($champs);
@@ -267,58 +282,84 @@ function formulaires_lechapt_calmon_traiter_dist(){
 			${id_decoupe($ind)} = &$i;
 		}
 	}
-	
 	$max += $pas/2;
 	
-	switch($ValCal){
-		case 'Q':			
-			for($i = $min; $i <= $max; $i+= $pas){
-				$result[] = pow(((($J*pow($D, $N))/$L)*(1000/$Lg)), 1/$M);
-			}
-		break;
-		
-		case 'D': 
-			if($J == 0 && _request('choix_champs_J') != 'varier_val_J'){
-				$result[] = 0;
-			}
-			else{
-				for($i = $min; $i <= $max; $i+= $pas){
-					if($i == 0 && _request('choix_champs_J') == 'varier_val_J'){
-						$result[] = INF;
-					}
-					else{
-						$result[] = pow(((($L*pow($Q, $M))/$J)*($Lg/1000)), 1/$N);
+	$bNoCache = false; // true pour débugage
+    if(!$bNoCache && is_file(HYD_CACHE_DIRECTORY.$CacheFileName)) {
+        // On récupère toutes les données dans un cache déjà créé
+        $result = ReadCacheFile($CacheFileName);
+    }
+    else {
+		switch($ValCal){
+			case 'Q':
+				if($Lg == 0 && _request('choix_champs_Lg') != 'varier_val_Lg'){
+					$result[] = 0;
+				}
+				else{			
+					for($i = $min; $i <= $max; $i+= $pas){
+						if($i == 0 && _request('choix_champs_Lg') == 'varier_val_Lg'){
+							$result[] = INF;
+						}
+						else{
+							$result[] = pow(((($J*pow($D, $N))/$L)*(1000/$Lg)), 1/$M);
+						}
 					}
 				}
-			}
-		
-		break;
-		
-		case 'J':
-			for($i = $min; $i <= $max; $i+= $pas){
-				$result[] = (($L*pow($Q, $M))/pow($D, $N))*($Lg/1000) ;
-			}
+			break;
 			
-		break;
-		
-		case 'Lg':
-			if($Q == 0 && _request('choix_champs_Q') != 'varier_val_Q'){
-				$result[] = 0;
-			}
-			else{
-				for($i = $min; $i <= $max; $i+= $pas){
-					if($i == 0 && _request('choix_champs_Q') == 'varier_val_Q'){
-						$result[] = INF;
-					}
-					else{
-						$result[] = (($J*pow($D, $N))/($L*pow($Q,$M)))*1000 ;
+			case 'D': 
+				if($J == 0 && _request('choix_champs_J') != 'varier_val_J'){
+					$result[] = 0;
+				}
+				else{
+					for($i = $min; $i <= $max; $i+= $pas){
+						if($i == 0 && _request('choix_champs_J') == 'varier_val_J'){
+							$result[] = INF;
+						}
+						else{
+							$result[] = pow(((($L*pow($Q, $M))/$J)*($Lg/1000)), 1/$N);
+						}
 					}
 				}
-			}
+			break;
+			
+			case 'J':
+				if($D == 0 && _request('choix_champs_D') != 'varier_val_D'){
+					$result[] = 0;
+				}
+				else{
+					for($i = $min; $i <= $max; $i+= $pas){
+						if($i == 0 && _request('choix_champs_D') == 'varier_val_D'){
+							$result[] = INF;
+						}
+						else{
+							$result[] = (($L*pow($Q, $M))/pow($D, $N))*($Lg/1000) ;
+						}
+					}
+				}
+			break;
+			
+			case 'Lg':
+				if($Q == 0 && _request('choix_champs_Q') != 'varier_val_Q'){
+					$result[] = 0;
+				}
+				else{
+					for($i = $min; $i <= $max; $i+= $pas){
+						if($i == 0 && _request('choix_champs_Q') == 'varier_val_Q'){
+							$result[] = INF;
+						}
+						else{
+							$result[] = (($J*pow($D, $N))/($L*pow($Q,$M)))*1000 ;
+						}
+					}
+				}
 
-		break;
+			break;
+		}
+		
+		//Enregistrement des données dans fichier cache
+        WriteCacheFile($CacheFileName,$result);
 	}
-
 	/***************************************************************************
     *                   Affichage du tableau de données
     ****************************************************************************/
@@ -377,7 +418,7 @@ function formulaires_lechapt_calmon_traiter_dist(){
 	
 	foreach($result as $indice){
 		$i++;
-		$echo.= '<tr class="';
+		$echo.= '<tr class="align_right ';
 		$echo.=($i%2==0)?'row_even':'row_odd';
 		$echo.='">';
 		
@@ -398,10 +439,9 @@ function formulaires_lechapt_calmon_traiter_dist(){
     $echo.=	'</tbody>
         </table>';
 
-	if($min == 0 && ($ValCal == 'D' || $ValCal == 'Lg')){
+	if(is_infinite($result[0])){
 		unset($result[0]);
 		$result = array_values($result);
-		
 		unset($tabAbs[0]);
 		$tabAbs = array_values($tabAbs);
 	}

@@ -20,7 +20,7 @@ function afficher_cacher() {
 }
 
 function gestion_radios(nom, valeur){
-	var tabPartiel = ['rug', 'pente', 'cote_eau', 'debit'];
+	var tabPartiel = ['rug', 'pente', 'coteEau', 'debit'];
 	
 	for(var i in tabPartiel){
 		if(tabPartiel[i] == nom){
@@ -109,7 +109,7 @@ function gestion_radios(nom, valeur){
 					<td align="center"><:hydraulic:varier_val:></td>
 					<td align="center"><:hydraulic:fixer_val:></td>
 				</tr>
-				,''})]
+				})]
 				
 				<BOUCLE_champsLib(POUR){tableau (#VALEUR|table_valeur{1})}>
 
@@ -119,7 +119,7 @@ function gestion_radios(nom, valeur){
 						</td>
 					
 						<td>
-						   <input id="caract_#CLE" type="text" value="[(#ENV{#GET{id_fieldset}_[(#CLE)]_nc})]" maxlength="30" name="#GET{id_fieldset}_[(#CLE)]_nc">
+						   <input id="caract_#CLE" type="text" value="[(#ENV{#GET{id_fieldset}_[(#CLE)]_nc})]" maxlength="30" name="#GET{id_fieldset}_[(#CLE)]_nc" [(#ENV{choix_champs_#CLE}|=={varier_val_#CLE}|?{'disabled="true"',''})]/>
 						   [<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{#GET{id_fieldset}_[(#CLE)]_nc})</div>]
 						</td>
 					
@@ -130,11 +130,11 @@ function gestion_radios(nom, valeur){
 						</BOUCLE_val_var_existe>
 
 						<td align="center">
-							<input type="radio" id="varier_val_#CLE" name="choix_champs_#CLE" value="varier_val_#CLE" onclick="gestion_radios('#CLE', 'varier_val_#CLE')" [(#ENV{choix_champs_#CLE}|=={varier_val_#CLE}?{'checked',''})]/>
+							<input type="radio" id="varier_val_#CLE" name="choix_champs_#CLE" value="varier_val_#CLE" onclick="gestion_radios('#CLE', 'varier_val_#CLE')" [(#ENV{choix_champs_#CLE}|=={varier_val_#CLE}|?{'checked',''})]/>
 						</td>	
 					
 						<td align="center">
-							<input type="radio" id="val_fixe_#CLE" name="choix_champs_#CLE" value="val_fixe_#CLE" onclick="gestion_radios('#CLE', 'val_fixe_#CLE')" [(#ENV{choix_champs_#CLE}|=={val_fixe_#CLE}?{'checked',''})]/>
+							<input type="radio" id="val_fixe_#CLE" name="choix_champs_#CLE" value="val_fixe_#CLE" onclick="gestion_radios('#CLE', 'val_fixe_#CLE')" [(#ENV{choix_champs_#CLE}|=={val_fixe_#CLE}|?{'checked',''})]/>
 						</td>
 					</tr>
 					
@@ -178,7 +178,7 @@ function gestion_radios(nom, valeur){
 					<:hydraulic:precision_lechapt_calmon:> :			
 				</td>			
 				<td>
-					<input id="champs_prec_nc" type="text" value="#ENV{prec_nc}" maxlength="30" name="prec_lc"/>
+					<input id="champs_prec_nc" type="text" value="#ENV{prec_nc}" maxlength="30" name="prec_nc"/>
 					[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{prec_nc})</div>]
 				</td>	
 			</tr>
