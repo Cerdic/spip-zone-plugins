@@ -23,15 +23,19 @@
 ]
 [(#VALEUR{type}|=={video}|oui)
 	[<div class="oe-video-block">
-	(#VALEUR{permalink}|oembed)
+	(#VALEUR{permalink}|oembed{550})
 	</div>]
 ]
 [(#VALEUR{type}|=={link}|oui)
+	[(#VALEUR{data/oembed}|oui)
+		[(#INCLURE{fond=modeles/oembed_[(#VALEUR{data/oembed/type})],data=#VALEUR{data/oembed},url=#VALEUR{permalink}})]
+	][(#VALEUR{data/oembed}|non)
 	<blockquote class="oe-link-block">
-		[(#VALEUR{data/link/thumbnail}|image_reduire{150,150}|inserer_attribut{class,spip_logos})]
+		[(#VALEUR{data/link/thumbnail}|image_reduire{150,150}|inserer_attribut{class,link_logo})]
 		<strong><a href="#VALEUR{permalink}">#VALEUR{data/link/title}</a></strong>
 		<p class="oe-quote-text">#VALEUR{data/link/description}</p>
 	</blockquote>
+	]
 ]
 [(#VALEUR{type}|=={other}|oui)
 	[(#VALEUR|var_export{1})]

@@ -38,6 +38,7 @@ function oeproxy_storify_dist($url,$options,$html=null){
 
 	$nbs = array_sum($json_story['content']['stats']['elements']);
 	$total_page = intval(ceil($nbs/50));
+
 	// et les pages suivantes jusqu'a un max raisonable
 	$page=2;
 	do {
@@ -45,7 +46,7 @@ function oeproxy_storify_dist($url,$options,$html=null){
 			AND $sub_story = json_decode($sub_story,true)){
 			$json_story['content']['elements'] = array_merge($json_story['content']['elements'],$sub_story['content']['elements']);
 		}
-	} while ($sub_story AND count($sub_story['content']['elements']) AND $page<$total_page);
+	} while ($sub_story AND count($sub_story['content']['elements']) AND $page<=$total_page);
 
 	$title = $json_story['content']['title'];
 
