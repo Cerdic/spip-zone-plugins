@@ -25,7 +25,8 @@ class MCache {
 	function MCache($methode=null, $params=array()) {
 		// autodetect
 		$this->methode = $methode ? $methode : $this->methode();
-		require_once dirname(dirname(__FILE__)).'/memo/'.$this->methode.'.inc';
+		$f = find_in_path($this->methode.'.inc',"memo/");
+		require_once $f;
 		$obj = 'MCacheBackend_'.$this->methode;
 		$this->backend = new $obj;
 		$this->backend->init($params);
@@ -107,7 +108,7 @@ class MCache {
 global $Memoization;
 
 $cfg = @unserialize($GLOBALS['meta']['memoization']);
-$Memoization = new MCache($cfg['methode']);
+$Memoization = new MCache(preg_replace(",\W,","",$cfg['methode']));
 
 
 
