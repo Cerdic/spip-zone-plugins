@@ -1,19 +1,16 @@
 <?php
-
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-// Fichier produit par PlugOnet
-// Module: paquet-verifier
-// Langue: en
-// Date: 15-11-2011 17:28:12
-// Items: 2
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.org/tradlang_module/paquet-verifier?lang_cible=en
+// ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// V
+	// V
 	'verifier_description' => 'Provides a unique function <code>verifier($value, $type, $options)</code> to test the validity of a value.',
 	'verifier_nom' => 'Control API',
-	'verifier_slogan' => 'A generic API to control a value',
+	'verifier_slogan' => 'A generic API to control a value'
 );
+
 ?>
