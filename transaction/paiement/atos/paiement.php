@@ -1,6 +1,7 @@
 <?php
 	//Charger SPIP
 	if (!defined('_ECRIRE_INC_VERSION')) {
+		$currentdir = getcwd();
 		// recherche du loader SPIP.
 		$deep = 2;
 		$lanceur ='ecrire/inc_version.php';
@@ -60,13 +61,13 @@
 	//		les réserves émises sur cette fonctionnalité
 	//
 	
-	$parm="$parm transaction_id=" . urlencode($_SESSION['ref']);
+	#$parm="$parm transaction_id=" . urlencode($_SESSION['ref']);
 	
 	$path_bin = "bin/request";
 
 
 	//	Appel du binaire request
-
+	chdir($currentdir); // Il faut revenir dans le dossier du script de paiement pour trouver les binaires !!!!
 	$result=exec("$path_bin $parm");
 
 	//	sortie de la fonction : $result=!code!error!buffer!
