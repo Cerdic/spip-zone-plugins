@@ -20,7 +20,7 @@ define ("CMCIC_URLOK", $GLOBALS['meta']['adresse_site']."/?page=transaction_merc
 
 
 //url de retour ko
-define ("CMCIC_URLKO", $GLOBALS['meta']['adresse_site']."/?transaction_regret");
+define ("CMCIC_URLKO", $GLOBALS['meta']['adresse_site']."/?page=transaction_regret");
 
 
 
