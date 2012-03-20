@@ -22,10 +22,12 @@ function manuelsite_upgrade($nom_meta_base_version,$version_cible){
 		if (!is_array($config)) {
 			$config = array();
 		}
+		
+		$url_contrib = "http://www.spip-contrib.net/?article2986";
 		$config = array_merge(array(
 				'id_article' => '0',
 				'cacher_public' => '',
-				'intro' => _T('manuelsite:intro'),
+				'intro' => _T('manuelsite:intro',array('url'=>$url_contrib)),
 				'email' => '',
 				'afficher_bord_gauche' => 'on',
 				'largeur' => '300',

@@ -29,10 +29,12 @@ function manuelsite_creer_config(){
 	if (!is_array($config)) {
 		$config = array();
 	}
+
+	$url_contrib = "http://www.spip-contrib.net/?article4076";
 	$config_defaut = array_merge(array(
 			'id_article' => '0',
 			'cacher_public' => '',
-			'intro' => _T('manuelsite:intro'),
+			'intro' => _T('manuelsite:intro',array('url'=>$url_contrib)),
 			'email' => '',
 			'afficher_bord_gauche' => 'on',
 			'largeur' => '300',
