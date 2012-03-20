@@ -107,11 +107,14 @@ function critere_datapath($idb, &$boucles, $crit) {
 /* le critere {si ...} applicable a toutes les boucles */
 function critere_si($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
-	$boucle->hash .= 'if (!isset($command[\'si\'])) $command[\'si\'] = array();'."\n";
+	// il faut initialiser 1 fois le tableau a chaque appel de la boucle
+	// (par exemple lorsque notre boucle est appelee dans une autre boucle)
+	// mais ne pas l'initialiser n fois si il y a n criteres {si } dans la boucle !
+	$boucle->hash .= "\n\tif (!isset(\$si_init)) { \$command['si'] = array(); \$si_init = true; }\n";
 	if ($crit->param) {
 		foreach($crit->param as $param) {
-			$boucle->hash .= '
-				$command[\'si\'][] = '.calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent).';';
+			$boucle->hash .= "\t\$command['si'][] = "
+					. calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent) . ";\n";
 		}
 	// interdire {si 0} aussi !
 	} else {
