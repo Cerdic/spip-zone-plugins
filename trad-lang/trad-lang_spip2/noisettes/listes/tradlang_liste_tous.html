@@ -66,21 +66,21 @@
 			</div>
 		</li>
 	</ul>]
+	[(#SET{texte_bouton_upload,<:tradlang:bouton_upload_langue_module:>}|attribut_html)]
 	[(#GET{total_ok}|=={0}|et{#GET{total_cible}|>{0}}|et{#AUTORISER{modifier,tradlang}}|oui)
 	[(#SET{texte_bouton_delete,<:tradlang:bouton_supprimer_langue_module:>}|attribut_html)]
 	<div class="actions">
 		[(#BOUTON_ACTION{#GET{texte_bouton_delete},[(#URL_ACTION_AUTEUR{tradlang_supprimer_langue_cible,[(#ID_TRADLANG_MODULE|concat{/#ENV{lang_cible}})],#SELF})]})]
+		[<span class="sep"> | </span>(#BOUTON_ACTION{#GET{texte_bouton_upload},[(#SELF|parametre_url{vue,upload})]})]
 	</div>]
 	[(#GET{total_ok}|>{0}|et{#GET{total_cible}|>{0}}|et{#AUTORISER{modifier,tradlang}}|oui)
 	<div class="actions">
 		[(#BOUTON_ACTION{[(#VAL{tradlang:bouton_exporter_fichier_langue}|_T{#ARRAY{lang,#ENV{lang_cible}}})],[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#ENV{lang_cible}})],#SELF})]})]
 		[(#GET{lang_orig}|et{#GET{lang_orig}|!={#LANG_MERE}}|oui)
-		<span class="sep">
-			[(#BOUTON_ACTION{[(#VAL{tradlang:bouton_exporter_fichier_langue}|_T{#ARRAY{lang,#GET{lang_orig}}})],[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#GET{lang_orig}})],#SELF})]})]
-		</span>
-		]<span class="sep">
-			[(#BOUTON_ACTION{<:tradlang:bouton_exporter_fichier_langue_original{lang_mere=#LANG_MERE}|attribut_html:>,[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#LANG_MERE})],#SELF})]})]
-		</span>
+		[<span class="sep"> | </span>(#BOUTON_ACTION{[(#VAL{tradlang:bouton_exporter_fichier_langue}|_T{#ARRAY{lang,#GET{lang_orig}}})],[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#GET{lang_orig}})],#SELF})]})]
+		]
+		[<span class="sep"> | </span>(#BOUTON_ACTION{<:tradlang:bouton_exporter_fichier_langue_original{lang_mere=#LANG_MERE}|attribut_html:>,[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#LANG_MERE})],#SELF})]})]
+		[<span class="sep"> | </span>(#BOUTON_ACTION{#GET{texte_bouton_upload},[(#SELF|parametre_url{vue,upload})]})]
 	</div>]
 </div>
 [(#REM)	
