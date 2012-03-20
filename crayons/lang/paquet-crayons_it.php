@@ -1,20 +1,16 @@
 <?php
-
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-
-///  Fichier produit par PlugOnet
-// Module: paquet-crayons
-// Langue: it
-// Date: 19-03-2012 15:16:20
-// Items: 3
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.org/tradlang_module/paquet-crayons?lang_cible=it
+// ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// C
+	// C
 	'crayons_description' => 'Modifica rapida dalle pagine pubbliche del sito.',
 	'crayons_nom' => 'Pennarelli',
-	'crayons_slogan' => 'Modifica rapida dalle pagine pubbliche del sito',
+	'crayons_slogan' => 'Modifica rapida dalle pagine pubbliche del sito'
 );
+
 ?>
