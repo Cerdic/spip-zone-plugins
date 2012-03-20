@@ -4,7 +4,7 @@
 	<slogan>Afficher des objets SPIP sur une carte</slogan>
 	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<licence>GNU/GPL, BSD pour l'API Geoportail/OpenLayers</licence>
-	<version>1.02.2</version>
+	<version>1.03</version>
 	<icon>img/geoportail.gif</icon>
 	<etat>test</etat>
 	<description>

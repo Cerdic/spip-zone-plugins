@@ -11,7 +11,7 @@ function geoportail_affichage_final($page)
 	$action = calculer_action_auteur('geoportail');
 	
 	// Version de l'API
-	$version = '1.2';
+	$version = '1.3';
 
 	// Version debug de l'API
 	if ($GLOBALS['geoportail_debug']) $api = "http://depot.ign.fr/geoportail/api/js/$version/lib/geoportal/lib/Geoportal.js";
@@ -20,12 +20,8 @@ function geoportail_affichage_final($page)
 	// ...ou sur le site de l'API
 	else $api = "http://api.ign.fr/geoportail/api/js/$version/GeoportalExtended.js";
 	
-	$engine=
-'<script>
-jQuery.geoportail.hash = "'.$action.'";
-jQuery.geoportail.versionAPI = "'.$version.'";</script>
-<script language=javascript>jQuery(document).ready(	function() { loadAPI(); });</script>
-
+	$api =
+'	
 <!-- API Geoportail -->
 <script type="text/javascript" src="'.$api.'">// <![CDATA[
     // ]]></script>
@@ -37,7 +33,14 @@ jQuery.geoportail.versionAPI = "'.$version.'";</script>
     // ]]></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GEOPORTAIL.'js/Popup/SpipPopup.js">// <![CDATA[
     // ]]></script>
-    
+';
+	
+	$header =
+'<script>
+jQuery.geoportail.hash = "'.$action.'";
+jQuery.geoportail.versionAPI = "'.$version.'";</script>
+<script language=javascript>jQuery(document).ready(	function() { loadAPI(); });</script>
+
 <!-- OpenLayers styles : -->
 <link id="__OpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/'.$version.'/theme/default/style.css"/>
 <link id="__FramedCloudOpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/'.$version.'/theme/default/framedCloud.css"/>
@@ -46,21 +49,22 @@ jQuery.geoportail.versionAPI = "'.$version.'";</script>
 	if (strpos($page, '<!--_SPIP_GEOPORTAIL_YHOO-->'))
 	{	$ykey = $GLOBALS['meta']['geoportail_yahoo_key'];
 		if ($ykey) 
-			$engine .= '<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid='.($ykey?$ykey:'TEST').'"></script>';
-		else $engine .= '<script type="text/javascript">alert ("NO Yahoo Map key defined")</script>';
+			$header .= '<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid='.($ykey?$ykey:'TEST').'"></script>';
+		else $header .= '<script type="text/javascript">alert ("NO Yahoo Map key defined")</script>';
 	}
 	/*
 	if (strpos($page, '<!--_SPIP_GEOPORTAIL_BING-->'))
-	{	// $engine .= '<script src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&mkt=en-us"></script>';
+	{	// $header .= '<script src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&mkt=en-us"></script>';
 	}
 	*/
 	if (strpos($page, '<!--_SPIP_GEOPORTAIL_GMAP-->'))
-	{	$engine .= '<script src="http://maps.google.com/maps/api/js?v=3.6&sensor=false"></script>'
+	{	$header .= '<script src="http://maps.google.com/maps/api/js?v=3.6&sensor=false"></script>'
 				.'<link id="__GoogleOpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/'.$version.'/theme/default/google.css"/>';
 	}
 		
 	// Inclure l'API dans le Header
-	return preg_replace('/<!--_GEOPORTAIL_HEADER_-->/', $engine, $page, 1);
+	$page = preg_replace('/<!--_GEOPORTAIL_HEADER_-->/', $header, $page, 1);
+	return str_replace ('</body>',$api.'</body>',$page);
 }
 
 ?>

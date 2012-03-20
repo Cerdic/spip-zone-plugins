@@ -186,10 +186,11 @@ div.gpLUSResult:hover, div.gpLUSResultAlternate:hover
 .GMAP .gpControlLogo 
 {	bottom:12px !important; 
 }
-/** Bug d'affichage intempestif du popup */
+/** Bug d'affichage intempestif du popup * /
 .GMAP .olLayerGoogleCopyright 
 {	display: none;
 }
+*/
 
 
 /** Affichage overview */
