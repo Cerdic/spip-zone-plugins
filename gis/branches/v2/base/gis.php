@@ -20,6 +20,11 @@ function gis_declarer_tables_interfaces($interface){
 	// Titre pour url
 	$interface['table_titre']['gis'] = "titre, '' AS lang";
 	
+	// Traitements typo et raccourcis
+	$interface['table_des_traitements']['DESCRIPTIF_GIS'][]= _TRAITEMENT_RACCOURCIS;
+	$interface['table_des_traitements']['VILLE'][]= 'typo(extraire_multi(%s))';
+	$interface['table_des_traitements']['PAYS'][]= 'typo(extraire_multi(%s))';
+	
 	return $interface;
 }
 
