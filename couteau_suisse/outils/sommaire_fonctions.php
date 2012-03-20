@@ -27,7 +27,6 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 	$nbh3 += count($regs[0]);
 	$pos = 0; $sommaire = '';
 	// calcul de la page
-	$suffixe = $page?_T('couteau:sommaire_page', array('page'=>$page)):'';
 	$fct_lien_retour = function_exists('sommaire_lien_retour')?'sommaire_lien_retour':'sommaire_lien_retour_dist';
 	$fct_id_ancre = defined('_sommaire_JOLIES_ANCRES')?'sommaire_id_ancre_ex'
 		:(function_exists('sommaire_id_ancre')?'sommaire_id_ancre':'sommaire_id_ancre_dist');
@@ -57,7 +56,9 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 			// si la decoupe en page est active...
 			$artpage = (function_exists('decoupe_url') && (strlen(_request('artpage')) || $page>1) )
 				?decoupe_url($self, $page, $num_pages):$self;
-			$artpage = "\n<li><a $st title=\"$titre\" href=\"{$artpage}#$ancre\">$lien</a>$suffixe";
+			$artpage = "<a $st title=\"$titre\" href=\"{$artpage}#$ancre\">$lien</a>";
+			$artpage = "\n<li>" . ( function_exists('sommaire_id_page')
+				?sommaire_id_page($artpage, $page):sommaire_id_page_dist($artpage, $page) );
 			if($niveau==$n) $sommaire .= ($sommaire?'</li>':'').$artpage;
 			elseif($niveau<$n) $sommaire .= "\n<ul>".$artpage;
 			else $sommaire .= '</li></ul></li>'.$artpage;
@@ -92,6 +93,17 @@ function sommaire_lien_retour_dist($self, $titre) {
 	if(!isset($haut)) 
 		$haut = '<a title="'._T('couteau:sommaire_titre').'" href="'.$self.'#outil_sommaire" class="sommaire_ancre">&nbsp;</a>';
 	return $haut . $titre;
+}
+
+/*
+ Fonction surchargeable qui ajoute au sommaire l'information d'une page en cas de decoupe
+ Exemple : "<a ...>Mon titre</a>, page 4"
+ La fonction de surcharge a placer dans config/mes_options.php est : 
+   sommaire_id_page($element, $page)
+ $element est le lien cliquable du sommaire
+*/
+function sommaire_id_page_dist($element, $page) {
+	return $page ? $element . _T('couteau:sommaire_page', array('page'=>$page)) : $element;
 }
 
 /*
