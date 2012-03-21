@@ -1,0 +1,32 @@
+
+<BOUCLE_joint_cat( wp_term_taxonomy ){taxonomy = category}>
+
+    <BOUCLE_cat( wp_terms ){term_id}>
+
+<spip_rubriques>
+<id_rubrique>#TERM_ID</id_rubrique>
+<id_parent>#PARENT</id_parent>
+<titre>[(#NAME|texte_backend)]</titre>
+<descriptif></descriptif>
+<texte>[(#DESCRIPTION|texte_backend)]</texte>
+[(#PARENT|=={0}|oui)<id_secteur>#TERM_ID</id_secteur>]
+[(#PARENT|=={0}|non)<id_secteur>#PARENT</id_secteur>]
+<maj>2010-01-01 00:00:00</maj>
+<export>oui</export>
+<id_import>0</id_import>
+<statut>publie</statut>
+<date>2010-01-01 00:00:00</date>
+<lang>fr</lang>
+<langue_choisie>non</langue_choisie>
+<extra></extra>
+<statut_tmp>publie</statut_tmp>
+<date_tmp>2010-01-01 00:00:00</date_tmp>
+</spip_rubriques>
+
+
+</BOUCLE_cat>
+</BOUCLE_joint_cat>
+<!--
+#GET{count_cat} rubriques-->
+
+</B_joint_cat>

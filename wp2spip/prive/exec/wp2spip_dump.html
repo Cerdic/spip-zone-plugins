@@ -1,0 +1,19 @@
+[(#REM) Balise qui lance le squelette wp2spip et déplace  wp2spip.xml vers /tmp/dump ]
+<!--#hierarchie-->
+
+<ul id="chemin">
+	<li><a href="/">Accueil</a> &gt; </li>
+	<li>Migration Wordpress 2 SPIP</li>
+</ul>
+
+<!--/#hierarchie-->
+
+<h1>Migration Wordpress 2 SPIP</h1>
+<h2>Création du xml au format spip et déplacement vers /tmp/dump</h2>
+[(#SESSION{webmestre}|=={oui}|oui)
+#WP2SPIP_DUMP
+]
+[(#SESSION{webmestre}|=={oui}|non)
+Vous devez avoir les pouvoir de webmestre
+]
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

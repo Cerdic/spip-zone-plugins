@@ -1,0 +1,138 @@
+
+
+
+[(#REM)
+ARTICLES publié 
+]
+#SET{arts_liens,#ARRAY}
+<BOUCLE_post_publish( wp_posts ){post_status=publish}{post_parent=0}{post_type=post}>
+#SET{arts_liens,#GET{arts_liens}|push{#ID}}
+</BOUCLE_post_publish>
+#TOTAL_BOUCLE ARTICLES publiés<br />
+</B_post_publish>
+
+[(#REM)
+document et orfelins
+]
+#SET{count_doc_seu,0}
+<BOUCLE_post_documents( wp_posts ){post_type=attachment}>
+[(#POST_PARENT|=={0}|oui)
+#SET{count_doc_seul,#GET{count_doc_seul}|plus{1}}
+]
+</BOUCLE_post_documents>
+#TOTAL_BOUCLE DOCS<br />
+#GET{count_doc_seul} orfelins<br />
+
+</B_post_documents>
+
+
+
+
+[(#REM)
+mots clef en tout  inclues les caegories
+WP: cat 1 par défaut por les posts non classés
+]
+    <BOUCLE_tags( wp_terms ){tout}>
+
+
+    </BOUCLE_tags>
+
+#TOTAL_BOUCLE tous les tags<br />
+
+</B_tags>
+  pas de mots clefs  <br />
+<//B_tags>
+
+
+
+[(#REM) Liste les rubriques des mots clef en WP tout est tag (
+
+
+#S ET{rubs, #ARRAY}
+#S ET{#GET{rubs}|push{#TERM_ID}}
+
+
+]
+
+ <BOUCLE_mots( wp_term_taxonomy ){taxonomy!=category}>
+
+ </BOUCLE_mots>
+#TOTAL_BOUCLE Mots<br />
+ </B_mots>
+
+
+
+
+
+
+
+
+[(#REM)
+Les RUBRIQUES 
+]
+#SET{count_cat,0}
+<BOUCLE_joint_cat( wp_term_taxonomy ){taxonomy=category}>
+
+    <BOUCLE_cat( wp_terms ){term_id}>
+#SET{count_cat,#GET{count_cat}|plus{1}}
+
+ 
+
+    </BOUCLE_cat>
+</BOUCLE_joint_cat>
+#GET{count_cat} rubriques<br/>
+
+</B_joint_cat>
+
+
+
+
+
+
+#SET{fils_valide,0}
+#SET{fils_attente,0}
+#SET{fils_spam,0}
+ <BOUCLE_fils( wp_comments ){tout}>
+[(#COMMENT_APPROVED|=={1}|oui)
+#SET{fils_valide,#GET{fils_valide}|plus{1}}
+]
+[(#COMMENT_APPROVED|=={0}|oui)
+#SET{fils_attente,#GET{fils_attente}|plus{1}}
+]
+[(#COMMENT_APPROVED|=={spam}|oui)
+#SET{fils_spam,#GET{fils_spam}|plus{1}}
+]
+ </BOUCLE_fils>
+#TOTAL_BOUCLE fils<br />
+#GET{fils_valide} validés<br />
+#GET{fils_attente} attente<br/>
+#GET{fils_spam} spams<br/>
+ </B_fils>
+
+
+
+
+
+
+
+
+<h2>SPIP stats</h2>
+<p>a venir</p>
+<a href="spip.php?page=wp2spip_xml_new&amp;var_mode=recalcul">importer WP</a>
+
+
+		[(#REM) Derniers articles ]
+		<B_articles_recents>
+		<div class="menu articles">
+		
+
+
+
+
+
+
+
+
+
+
+

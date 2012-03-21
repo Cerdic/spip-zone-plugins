@@ -1,0 +1,34 @@
+
+<!--#hierarchie-->
+
+<ul id="chemin">
+	<li><a href="/">Accueil</a> &gt; </li>
+	<li>Migration Wordpress 2 SPIP</li>
+</ul>
+
+<!--/#hierarchie-->
+
+<h1>Migration Wordpress 2 SPIP</h1>
+<h2>Statisques de la base des donn&egrave;rs Wordpress</h2>
+
+
+[(#REM) on affiche les stats de la bdd wp]
+[(#SESSION{webmestre}|=={oui}|non)
+Vous devez avoir les pouvoir de webmestre!
+]
+<INCLURE{fond=inc/inc-stats-wp}>
+
+
+<BOUCLE_test(ARTICLES){tout}>
+</BOUCLE_test>
+<p>Votre site SPIP ne semble pas vide, tout son contenu sera écrasé si vous restaurez la base avec  le fichier créé depuis Wordpress.</p>
+</B_test>
+
+[(#SESSION{webmestre}|=={oui}|oui)
+<div style="border:solid 1px red">
+#BOUTON_ACTION{G&eacute;n&eacute;rer le fichier au format SPIP, #URL_SITE_SPIP/ecrire/?exec=wp2spip_dump, ajax, Le fichier de r&eacute;stauration sera plac&eacute; sous /tmp/dump}
+</div>
+
+
+]
+

@@ -1,0 +1,107 @@
+[(#REM) stats de la bss word press, prefix assumé des tables Wordpress wp_
+ARTICLES publiés
+]
+
+<BOUCLE_post_publish( wp_posts ){post_status=publish}{post_parent=0}{post_type=post}>
+</BOUCLE_post_publish>
+<p>#TOTAL_BOUCLE posts publiés</p>
+</B_post_publish>
+
+[(#REM)
+document et orfelins
+]
+#SET{count_doc_seu,0}
+<BOUCLE_post_documents( wp_posts ){post_type=attachment}>
+[(#POST_PARENT|=={0}|oui)
+#SET{count_doc_seul,#GET{count_doc_seul}|plus{1}}
+]
+</BOUCLE_post_documents>
+<p>#TOTAL_BOUCLE DOCS<br />
+#GET{count_doc_seul} &nbsp; orfelins non importés</p>
+
+</B_post_documents>
+
+
+
+
+[(#REM)
+mots clef en tout  inclues les caegories
+WP: cat 1 par défaut por les posts non classés
+]
+    <BOUCLE_tags( wp_terms ){tout}>
+
+
+    </BOUCLE_tags>
+
+<p>#TOTAL_BOUCLE Tous les tags</p>
+
+</B_tags>
+<p>Pas de tags trouvé!</p>
+<//B_tags>
+
+
+[(#REM) Liste les rubriques des mots clef en WP tout est tag (
+
+
+
+
+]
+
+ <BOUCLE_mots( wp_term_taxonomy ){taxonomy!=category}>
+ </BOUCLE_mots>
+<p>#TOTAL_BOUCLE Mots</p>
+ </B_mots>
+<p>Pas de mots clefs  trouvé!</p>
+<//B_mots>
+
+
+
+
+
+
+
+[(#REM)
+Les RUBRIQUES 
+]
+#SET{count_cat,0}
+<BOUCLE_joint_cat( wp_term_taxonomy ){taxonomy=category}>
+
+    <BOUCLE_cat( wp_terms ){term_id}>
+#SET{count_cat,#GET{count_cat}|plus{1}}
+
+ 
+
+    </BOUCLE_cat>
+</BOUCLE_joint_cat>
+[(#GET{count_cat}|=={0}|oui)<p> Veuillez créer au moins une catégorie dans Wordpress!!!</p>
+]
+<p>#GET{count_cat}&nbsp;Rubriques</p>
+</B_joint_cat>
+ Veuillez créer au moins une catégorie dans Wordpress!!!
+<//B_joint_cat>
+
+
+
+
+
+
+#SET{fils_valide,0}
+#SET{fils_attente,0}
+#SET{fils_spam,0}
+ <BOUCLE_fils( wp_comments ){tout}>
+[(#COMMENT_APPROVED|=={1}|oui)
+#SET{fils_valide,#GET{fils_valide}|plus{1}}
+]
+[(#COMMENT_APPROVED|=={0}|oui)
+#SET{fils_attente,#GET{fils_attente}|plus{1}}
+]
+[(#COMMENT_APPROVED|=={spam}|oui)
+#SET{fils_spam,#GET{fils_spam}|plus{1}}
+]
+ </BOUCLE_fils>
+<p>#TOTAL_BOUCLE forums<br />
+#GET{fils_valide}&nbsp;validés<br />
+#GET{fils_attente}&nbsp; attente<br/>
+#GET{fils_spam}&nbsp;spams non importés<br/>
+</p>
+ </B_fils>
