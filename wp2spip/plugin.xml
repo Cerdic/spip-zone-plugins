@@ -24,7 +24,7 @@
       -Les liens entre ces objets
       -garde les mêmes id
       
-      il n'importe pas les sites dans cette version.
+      il n'importe pas les sites dans cette version 0,1.
       {{{Réglages serveur}}}
       Pour mes besoins, la b.d.d. wp avait 3000 articles publiés sur 13000, 4800 mots clef, 3000 documents, et les paramétrés {memory_limit} et {max_execution_time} ont du être augmentés dans le php.ini. 
       
