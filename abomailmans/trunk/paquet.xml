@@ -1,8 +1,8 @@
 <paquet
 	prefix="abomailmans"
 	categorie="communication"
-	version="1.0.0"
-	etat="dev"
+	version="1.0.1"
+	etat="test"
 	compatibilite="[3.0.0-dev;3.0.99]"
 	logo="prive/themes/spip/images/abomailmans-32.png"
 	schema="0.34"
@@ -13,6 +13,9 @@
 	<!-- Interfacer vos listes de diffusions mailman, ezmlm ou sympa avec votre SPIP -->
 
 	<auteur lien="http://www.netaktiv.com">NetAktiv</auteur>
+	<auteur lien="http://www.elastick.net">Anne-lise Martenot</auteur>
+	<auteur>Yffic</auteur>
+	<auteur lien="http://www.kent1.info">kent1</auteur>
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/abomailmans_install.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/abomailmans_install.php" />
