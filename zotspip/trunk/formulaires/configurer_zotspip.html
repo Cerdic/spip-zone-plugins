@@ -1,0 +1,73 @@
+<!-- presentation=non -->
+<!-- nom=zotspip -->
+
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#REM) Tester si open_ssl et simpleXML sont disponibles ]
+	[(#VAL{'openssl_open'}|function_exists|non)<p class="reponse_formulaire reponse_formulaire_erreur"><:zotspip:erreur_openssl:></p>]
+	[(#VAL{'simplexml_load_string'}|function_exists|non)<p class="reponse_formulaire reponse_formulaire_erreur"><:zotspip:erreur_simplexml:></p>]
+	
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+		<li class="fieldset"><fieldset><legend><:zotspip:label_identifiants_zotero:></legend>
+		[(#REM) Tester la connexion à l'API Zotéro ]
+		[(#TESTER_CONNEXION_ZOTERO|?{<p class="reponse_formulaire reponse_formulaire_ok"><:zotspip:connexion_ok:></p>,<p class="reponse_formulaire reponse_formulaire_erreur"><:zotspip:erreur_connexion:></p>})]<ul>
+			<li class="editer_type_librairie[ (#ENV**{erreurs}|table_valeur{type_librairie}|oui)erreur]">
+				<label><:zotspip:label_type_librairie:></label>
+				<div class="choix">
+					<input type="radio" name="type_librairie" class="radio" id="type_librairie_user" value="user" [(#ENV{type_librairie}|=={user}|oui) checked="checked"] />
+					<label for='type_librairie_user'><:zotspip:item_type_librairie_user:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="type_librairie" class="radio" id="type_librairie_group" value="group" [(#ENV{type_librairie}|=={group}|oui) checked="checked"] />
+					<label for='type_librairie_group'><:zotspip:item_type_librairie_group:></label>
+				</div>
+			</li>
+			<li class="editer_id_librairie[ (#ENV**{erreurs}|table_valeur{id_librairie}|oui)erreur]">
+				<label><:zotspip:label_id_librairie:></label>
+				<p class="explication"><:zotspip:explication_id_librairie:></p>
+				<input type="text" name="id_librairie" class="text" value="#ENV*{id_librairie}" id="id_librairie" [(#HTML5|oui)required='required']/>
+			</li>
+			<li class="editer_username[ (#ENV**{erreurs}|table_valeur{username}|oui)erreur]">
+				<label><:zotspip:label_username:></label>
+				<p class="explication"><:zotspip:explication_username:></p>
+				<input type="text" name="username" class="text" value="#ENV*{username}" id="username" [(#HTML5|oui)required='required']/>
+			</li>
+			<li class="editer_api_key[ (#ENV**{erreurs}|table_valeur{api_key}|oui)erreur]">
+				<label><:zotspip:label_api_key:></label>
+				<p class="explication"><:zotspip:explication_api_key:></p>
+				<input type="text" name="api_key" class="text" value="#ENV*{api_key}" id="api_key" [(#HTML5|oui)required='required']/>
+			</li>
+		</ul></fieldset></li>
+		<li class="fieldset"><fieldset><legend><:zotspip:label_options:></legend><ul>
+			<B_csl_defaut>
+			<li class="editer_csl_defaut[ (#ENV**{erreurs}|table_valeur{csl_defaut}|oui)erreur]">
+				<label for='csl_defaut'><:zotspip:label_csl_defaut:></label>
+				<select name="csl_defaut" id="csl_defaut">
+					<BOUCLE_csl_defaut(POUR){tableau #LISTER_CSL}>
+					<option value="#CLE"[(#ENV{csl_defaut}|=={#CLE}|oui)selected="selected"]>#VALEUR</option>
+					</BOUCLE_csl_defaut>
+				</select>
+			</li>
+			</B_csl_defaut>
+			<li class="editer_corriger_date[ (#ENV**{erreurs}|table_valeur{corriger_date}|oui)erreur]">
+				<label><:zotspip:label_corriger_date:></label>
+				<p class="explication"><:zotspip:explication_corriger_date:></p>
+				<div class="choix">
+					<input type="radio" name="corriger_date" class="radio" id="corriger_date_non" value="" [(#ENV{corriger_date}|non) checked="checked"] />
+					<label for='type_librairie_user'><:item_non:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="corriger_date" class="radio" id="corriger_date_oui" value="on" [(#ENV{corriger_date}|oui) checked="checked"] />
+					<label for='type_librairie_group'><:item_oui:></label>
+				</div>
+			</li>
+		</ul></fieldset></li>
+		</ul>
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	</div></form>
+</div>

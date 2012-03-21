@@ -1,0 +1,298 @@
+<?php
+
+// Sécurité
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+// Cette balise teste si la connexion à Zotero fonctionne
+function balise_TESTER_CONNEXION_ZOTERO_dist($p) {
+		$p->code = "zotspip_tester_connexion_zotero()";
+	return $p;
+}
+
+function zotspip_tester_connexion_zotero() {
+	include_spip('inc/zotspip');
+	$feed = zotero_get('items/?format=atom&limit=1');
+	return $feed ? ' ' : '';
+}
+
+// Mets en forme une référence bibliographique
+// On peut passer le nom d'un style CSL en argument (optionel).
+// Le second argument (optionel) peut être une liste d'auteurs, tableau ou string séparée par des points-virgules, à souligner.
+function balise_REFERENCE_dist($p) {
+	$csljson = champ_sql('csljson', $p);
+	$annee = champ_sql('annee', $p);
+	$_lang = champ_sql('lang', $p);
+	$style = interprete_argument_balise(1,$p);
+	$souligne = interprete_argument_balise(2,$p);
+	if (!$style) $style='""';
+	if (!$souligne) $souligne='array()';
+	
+	$p->code = "zotspip_calculer_reference($csljson,$annee,$style,$souligne,htmlentities($_lang ? $_lang : \$GLOBALS['spip_lang']))";
+	return $p;
+}
+
+function zotspip_calculer_reference($csljson,$annee,$style,$souligne,$lang) {
+	include_spip('lib/citeproc-php/CiteProc');
+	include_spip('inc/config');
+	static $citeproc = array();
+	if (!$style) {
+		include_spip('inc/config');
+		$style = lire_config('zotspip/csl_defaut') ? lire_config('zotspip/csl_defaut') : 'apa';
+	}
+	$data = json_decode($csljson);
+	
+	if (isset($data->issued->raw) && lire_config('zotspip/corriger_date')) { // Correction de la date de publication (si fournie brute et si option activée)
+		unset($data->issued->raw);
+		$data->issued->{'date-parts'} = array(array($annee));
+	}
+	
+	if (!is_array($souligne)) $souligne = explode(';',$souligne);
+	
+	if (count($souligne)){
+		foreach ($souligne as $aut_souligne) {
+			if(!strpos($aut_souligne,',')) $aut_souligne .= ', ';
+			$aut_souligne = explode(',',$aut_souligne);
+			if (is_array($data->author))
+				foreach ($data->author as $cle => $author)
+					if ($author->family == trim($aut_souligne[0]) && $author->given == trim($aut_souligne[1]))
+						$data->author[$cle]->family = '§§'.$data->author[$cle]->family.'§§';
+		}
+	}
+	
+	if (!isset($citeproc[$style])) {
+		include_spip('inc/distant');
+		$csl = spip_file_get_contents(find_in_path("csl/$style.csl"));
+		$citeproc[$style] = new citeproc($csl,$lang);
+	}
+	
+	$ret = $citeproc[$style]->render($data, 'bibliography');
+	if (count($souligne))
+		$ret = preg_replace(',§§(.+)§§,U','<span style="text-decoration:underline;">$1</span>',$ret);
+	
+	return $ret;
+}
+
+// Lister les styles CSL disponibles
+function balise_LISTER_CSL_dist($p) {
+	$p->code = "zotspip_lister_csl()";
+	return $p;
+}
+
+function zotspip_lister_csl(){
+	static $liste_csl = null;
+	if (is_null($liste_csl)){
+		$liste_csl = array();
+		$match = ".+[.]csl$";
+		$liste = find_all_in_path('csl/', $match);
+		if (count($liste)){
+			foreach($liste as $fichier=>$chemin) {
+				$style = spip_file_get_contents($chemin);
+				$csl = substr($fichier,0,-4);
+				if (preg_match('#\<title\>(.*)\</title\>#',$style,$matches))
+					$liste_csl[$csl] = $matches[1];
+				else
+					$liste_csl[$csl] = $csl;
+			}
+		}
+	}
+	return $liste_csl;
+}
+
+// Traduire le type de document
+function zotspip_traduire_type($type) {
+	return _T('zotero:itemtypes_'.strtolower($type));
+}
+
+// Traduire le champ Zotero
+function zotspip_traduire_champ($champ) {
+	return _T('zotero:itemfields_'.strtolower($champ));
+}
+
+// Traduire le type d'auteur
+function zotspip_traduire_createur($type) {
+	return _T('zotero:creatortypes_'.strtolower($type));
+}
+
+// Afficher l'icône du document
+// On peut optionnellement ajouter mimetype et fichier pour distinguer les icônes dans le cadre des pièces jointes
+function zotspip_icone_type($type, $mimetype=NULL, $fichier=NULL) {
+	$alt = zotspip_traduire_type($type);
+	if ($type=='attachment' && !is_null($fichier) && !$fichier) $type = 'attachment-web-link'; // Si fichier n'est pas renseigné, c'est un lien sur le web
+	if ($type=='attachment' && $fichier && $mimetype=='text/html') $type = 'attachment-snapshot';
+	if ($type=='attachment' && $fichier && $mimetype=='application/pdf') $type = 'attachment-pdf';
+	$chemin = find_in_path("images/zotero/$type.png");
+	if (!$chemin) $chemin = find_in_path("images/zotero/item.png");
+	return "<img src=\"$chemin\" height=\"16\" width=\"16\" alt=\"$alt\"/>";
+}
+
+// Renvoie un tableau HTML avec le détail de l'item
+function balise_ZITEM_DETAILS_dist($p) {
+	$json = champ_sql('json', $p);
+	$p->code = "zotspip_calculer_zitem_details($json)";
+	return $p;
+}
+
+function zotspip_calculer_zitem_details($json) {
+	$ret = '<table class="zitem_details spip">';
+	$data = json_decode($json,true);
+	foreach ($data as $champ => $valeur) {
+		if ($champ=='itemType')
+			$ret .= "<tr><td class=\"champ\"><strong>".zotspip_traduire_champ($champ)."</strong></td><td class=\"valeur\">".zotspip_traduire_type($valeur)."</td></tr>";
+		elseif ($champ=='creators')
+			foreach ($valeur as $creator)
+				$ret .= "<tr><td class=\"champ\"><strong>".zotspip_traduire_createur($creator['creatorType'])."</strong></td><td class=\"valeur\">".(isset($creator['name'])?$creator['name']:($creator['lastName'].(isset($creator['firstName'])?', '.$creator['firstName']:'')))."</td></tr>";
+		elseif ($champ=='tags' && count($valeur)>0) {
+			$tags = array();
+			foreach ($valeur as $tag)
+				$tags[] = $tag['tag'];
+			$tags = implode(' &middot; ',$tags);
+			$ret .= "<tr><td class=\"champ\"><strong>"._T('zotero:itemfields_tags')."</strong></td><td class=\"valeur\">$tags</td></tr>";
+		}
+		elseif ($champ=='mimeType')
+			$ret .= "<tr><td class=\"champ\"><strong>MIME</strong></td><td class=\"valeur\">$valeur</td></tr>";
+		elseif ($champ=='url')
+			$ret .= "<tr><td class=\"champ\"><strong>".zotspip_traduire_champ($champ)."</strong></td><td class=\"valeur\"><a href=\"$valeur\">$valeur</a></td></tr>";
+		elseif ($valeur)
+			$ret .= "<tr><td class=\"champ\"><strong>".zotspip_traduire_champ($champ)."</strong></td><td class=\"valeur\">$valeur</td></tr>";
+	}
+	$ret .= '</table>';
+	return $ret;
+}
+
+// Exporte les items dans le format demandé
+function zotspip_export ($id, $format) {
+	if (is_array($id)) $id = implode(',',$id);
+	include_spip('inc/zotspip');
+	return zotero_get("items/?itemKey=$id&format=$format");
+}
+
+// Renvoie le content-type correspondant à un format d'export
+function zotspip_content_type ($format) {
+	switch ($format) {
+		case 'bibtex':
+			$ctype = "application/x-bibtex";
+			break;
+		case 'mods':
+			$ctype = "application/mods+xml";
+			break;
+		case 'refer':
+			$ctype = "application/x-research-info-systems" ;
+			break;
+		case 'rdf_bibliontology':
+		case 'rdf_dc':
+		case 'rdf_zotero':
+			$ctype = "application/rdf+xml";
+			break;
+		case 'ris':
+			$ctype = "application/x-research-info-systems";
+			break;
+		case 'wikipedia':
+			$ctype = "text/x-wiki";
+			break;
+		default:
+			$ctype = '';
+			break;
+	}
+	return ($ctype) ? 'Content-Type: '.$ctype : '';
+}
+
+// Indique le nom du fichier à télécharger
+function zotspip_content_disposition ($format) {
+	switch ($format) {
+		case 'bibtex':
+			$ext = 'bib';
+			break;
+		case 'mods':
+			$ext = 'xml';
+			break;
+		case 'refer':
+		case 'wikipedia':
+			$ext = 'txt';
+			break;
+		case 'rdf_bibliontology':
+		case 'rdf_dc':
+		case 'rdf_zotero':
+			$ext = 'rdf';
+			break;
+		case 'ris':
+			$ext = 'ris';
+			break;
+		default:
+			$ext = '';
+			break;
+	}
+	return ($ext) ? 'Content-Disposition: attachment; filename=export.'.$ext : '';
+}
+
+// Récupère un fichier distant
+function zotspip_recuperer_fichier($fichier) {
+	include_spip('inc/distant');
+	include_spip('inc/config');
+	return spip_file_get_contents(copie_locale($fichier.'?key='.lire_config('zotspip/api_key')));
+}
+
+// Récupérer les références les plus récentes
+// La variable d'environnement depuis peut être de la forme depuis=2008, depuis=2ans ou depuis=1an
+function critere_zotsip_depuis($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$table = $boucle->id_table;
+	$boucle->where[] = "zotspip_calcul_depuis(\$Pile[0]['depuis'],$table)";
+}
+function zotspip_calcul_depuis($depuis,$table) {
+	$annee = false;
+	if (is_numeric($depuis)) $annee = intval($depuis);
+	elseif (substr($depuis,-2)=='an' && is_numeric(substr($depuis,0,-2))) $annee = 1 + intval(date('Y')) - intval(substr($depuis,0,-2)); // L'année en cours ocmpte pour un
+	elseif (substr($depuis,-3)=='ans' && is_numeric(substr($depuis,0,-3))) $annee = 1 + intval(date('Y')) - intval(substr($depuis,0,-3));
+	if ($annee) return array('>=',"$table.annee",$annee);
+	else return array();
+}
+
+// Renvoie le schéma de données Zotero
+function schema_zotero($entree = '') {
+	static $schema = NULL;
+	if (is_null($chema)) {
+		lire_fichier_securise(_DIR_TMP . 'schema_zotero.php', $schema);
+		$schema = @unserialize($schema);
+	}
+	if (!$entree)
+		return $schema;
+	else
+		return $schema[$entree];
+}
+
+function balise_SCHEMA_ZOTERO_dist($p) {
+	$entree = interprete_argument_balise(1,$p);
+	if (!$entree) $entree='""';
+	$p->code = "schema_zotero($entree)";
+	return $p;
+}
+
+// Permet de trier la liste des types de références à partir de leur traduction
+// Utilisation : [(#SCHEMA_ZOTERO{itemTypes}|zotspip_trier_itemTypes})]
+function zotspip_trier_itemTypes($itemTypes,$inclure_note=false) {
+	$l = array();
+	foreach ($itemTypes as $itemType)
+		if($inclure_note || $itemType != 'note')
+			$l[$itemType] = zotspip_traduire_type($itemType);
+	asort($l);
+	return array_keys($l);
+}
+
+// Fournit une liste complète de l'ensemble des types d'auteurs (en fusionnant les listes de chaque itemType)
+// Utilisation : [(#SCHEMA_ZOTERO{creatorTypes}|zotspip_liste_creatorTypes_complete)]
+function zotspip_liste_creatorTypes_complete($creatorTypes) {
+	$retour = array();
+	foreach ($creatorTypes as $creatorType)
+		$retour = array_merge($retour,array_diff($creatorType,$retour));
+	return $retour;
+}
+
+// Renvoie l'URL de modification d'un item sur zotero.org
+function modifier_sur_zotero($id_zitem){
+	if(lire_config('zotspip/type_librairie')=='user')
+		return "https://www.zotero.org/".lire_config('zotspip/username')."/items/itemKey/$id_zitem/mode/edit";
+	else
+		return "https://www.zotero.org/groups/".lire_config('zotspip/id_librairie')."/items/itemKey/$id_zitem/mode/edit";
+}
+
+?>

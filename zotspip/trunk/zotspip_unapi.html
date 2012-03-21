@@ -1,0 +1,12 @@
+[(#REM) Le pamamètre source est une astuce pour les services comme Zotero qui ajoute directement ?id= à l'URL de l'unapi sans vérifier si un paramètre a déjà été transmis
+][(#SET{id,[(#ENV{id,[(#ENV{source}|substr{11})]})]})][(#ENV{format}|et{#GET{id}}|oui)[[(#HTTP_HEADER{#ENV{format}|zotspip_content_type})][(#HTTP_HEADER{#ENV{format}|zotspip_content_disposition})](#GET{id}|zotspip_export{#ENV{format}})]][#HTTP_HEADER{Content-Type: application/xml}<?xml version="1.0" encoding="UTF-8" ?>(#ENV{format}|non)
+<formats [id="(#GET{id})"]>
+	<format name="bibtex" type="application/x-bibtex" docs="http://en.wikipedia.org/wiki/BibTeX" />
+	<format name="mods" type="application/mods+xml" docs="http://www.loc.gov/standards/mods/" />
+	<format name="refer" type="application/x-research-info-systems" />
+	<format name="rdf_bibliontology" type="application/rdf+xml" docs="http://purl.org/ontology/bibo/" />
+	<format name="rdf_dc" type="application/rdf+xml" docs="http://purl.org/dc/elements/1.1/" />
+	<format name="rdf_zotero" type="application/rdf+xml" docs="http://www.zotero.org" />
+	<format name="ris" type="application/x-research-info-systems" docs="http://www.refman.com/support/risformat_intro.asp" />
+	<format name="wikipedia" type="text/x-wiki" docs="http://en.wikipedia.org/wiki/Wikipedia:Citation_templates" />
+</formats>]
