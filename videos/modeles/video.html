@@ -33,9 +33,9 @@
 	sinon une valeur en dur
 ]
 [(#LARGEUR|>{0}|oui) #SET{larg,#LARGEUR} ]
-#SET{largeur,#ENV{largeur,#GET{larg,#CONFIG{videos/largeur,'560'}}}}
+#SET{largeur,#ENV{largeur,#ENV{width,#GET{larg,#CONFIG{videos/largeur,'560'}}}}}
 [(#HAUTEUR|>{0}|oui) #SET{haut,#HAUTEUR} ]
-#SET{hauteur,#ENV{hauteur,#GET{haut,#CONFIG{videos/hauteur,'315'}}}}
+#SET{hauteur,#ENV{hauteur,#ENV{height,#GET{haut,#CONFIG{videos/hauteur,'315'}}}}}
 
 [(#SET{fichier,#FICHIER*})]
 [(#GET{liste_definition}|=={oui}|oui)
