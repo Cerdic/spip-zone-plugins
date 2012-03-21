@@ -30,6 +30,9 @@ function exec_ticket_editer() {
 	echo debut_gauche("",true);
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'ticket_afficher'),'data'=>''));
 
+	echo creer_colonne_droite('', true);
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'ticket_afficher'),'data'=>''));
+
 	echo debut_droite("",true);
 
 	$page = recuperer_fond("prive/editer/ticket", $contexte);

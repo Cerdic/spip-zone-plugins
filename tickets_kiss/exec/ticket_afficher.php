@@ -24,7 +24,11 @@ function exec_ticket_afficher () {
 	echo debut_gauche("",true);
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'ticket_afficher'),'data'=>''));
 	
+	echo creer_colonne_droite('', true);
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'ticket_afficher'),'data'=>''));
+	
 	echo debut_droite("",true);
+	
 	
 	$contexte = array("id_ticket"=>$id_ticket);
 	$page = recuperer_fond("prive/contenu/ticket_afficher", $contexte);

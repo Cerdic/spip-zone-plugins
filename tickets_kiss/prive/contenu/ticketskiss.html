@@ -31,6 +31,9 @@
 </ul>
 [(#VAL{true}|fin_cadre_enfonce)]
 
+[(#VAL|creer_colonne_droite{true})]
+[(#PIPELINE{affiche_droite,#ARRAY{args,#ARRAY{exec,ticketskiss},data,''}})]
+
 [(#VAL|debut_droite{true})]
 
 <INCLURE{fond=prive/contenu/inc_classement_#ENV{classement}}{env}>
