@@ -24,7 +24,7 @@ function formulaires_fusionner_zcreators_traiter_dist($auteur){
 		foreach($zitems as $zitem)
 			$itemKey[] = $zitem['id_zitem'];
 		$itemKey = implode(',',$itemKey);
-		$actuel = zotero_get("items/?content=json&itemKey=$itemKey");
+		$actuel = zotero_get("items/?format=atom&content=json&itemKey=$itemKey");
 		if (!$actuel)
 			return array('message_erreur' => _T('zotspip:erreur_connexion'));
 		if (preg_match_all('#<zapi:key>(.*)</zapi:key>(.*)<content zapi:type="json" zapi:etag="(.*)">(.*)</content>#Uis',$actuel,$matches,PREG_SET_ORDER)) {
