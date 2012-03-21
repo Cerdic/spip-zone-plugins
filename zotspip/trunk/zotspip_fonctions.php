@@ -292,7 +292,7 @@ function modifier_sur_zotero($id_zitem){
 	if(lire_config('zotspip/type_librairie')=='user')
 		return "https://www.zotero.org/".lire_config('zotspip/username')."/items/itemKey/$id_zitem/mode/edit";
 	else
-		return "https://www.zotero.org/groups/".lire_config('zotspip/id_librairie')."/items/itemKey/$id_zitem/mode/edit";
+		return "https://www.zotero.org/groups/".lire_config('zotspip/username')."/items/itemKey/$id_zitem/mode/edit";
 }
 
 ?>
