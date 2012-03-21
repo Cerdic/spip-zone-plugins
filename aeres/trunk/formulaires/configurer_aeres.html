@@ -1,0 +1,58 @@
+<!-- presentation=non -->
+<!-- nom=aeres -->
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+		<li class="editer_debut[(#ENV**{erreurs}|table_valeur{debut}|oui)erreur]">
+			<label>Année de début</label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{debut})</span>]
+			<input type="text" name="debut" class="text" value="#ENV*{debut}" id="debut" [(#HTML5|oui)required='required']/>
+		</li>
+		<li class="editer_fin[(#ENV**{erreurs}|table_valeur{fin}|oui)erreur]">
+			<label>Année de fin</label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fin})</span>]
+			<input type="text" name="fin" class="text" value="#ENV*{fin}" id="fin" [(#HTML5|oui)required='required']/>
+		</li>
+		<B_csl>
+		<li class="editer_csl[ (#ENV**{erreurs}|table_valeur{csl}|oui)erreur]">
+			<label for='csl'>Style CSL à utiliser</label>
+			<select name="csl" id="csl">
+				<BOUCLE_csl(POUR){tableau #LISTER_CSL}>
+				<option value="#CLE"[(#ENV{csl}|=={#CLE}|oui)selected="selected"]>#VALEUR</option>
+				</BOUCLE_csl>
+			</select>
+		</li>
+		</B_csl>
+		<li class="editer_contact[(#ENV**{erreurs}|table_valeur{debut}|oui)erreur]">
+			<label>Email de contact</label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{contact})</span>]
+			<input type="text" name="contact" class="text" value="#ENV*{contact}" id="contact" />
+		</li>
+		<li class="editer_conference_actes[(#ENV**{erreurs}|table_valeur{conference_actes}|oui)erreur]">
+			<label>Articles de colloque avec publication dans des actes</label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{conference_actes})</span>]
+			<div class="choix">
+				<input type="radio" name="conference_actes" class="radio" id="conference_actes_cact" value="cact" [(#ENV{conference_actes}|=={cact}|oui) checked="checked"] />
+				<label for='conference_actes_cact'>Catégorie AERES autonome (C-ACT)</label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="conference_actes" class="radio" id="conference_actes_ch" value="ch" [(#ENV{conference_actes}|=={ch}|oui) checked="checked"] />
+				<label for='conference_actes_ch'>Présentés avec les chapitres d'ouvrage (CH)</label>
+			</div>
+		</li>
+		<li class="editer_format_docs[(#ENV**{erreurs}|table_valeur{format_docs}|oui)erreur]">
+			<label>Format des documents joints</label>
+			<p class="explication">Formats acceptés pour les documents joints à une demande de correction / d'ajout, séparés par une virgule et un espace. Laissez vide pour ne pas accepter l'ajout de document. Exemple : <em>txt, ris, bib, rdf, xml, doc, docx, odt, ppt, pptx, odp, pdf, html, jpg, png, gif</em></p>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{format_docs})</span>]
+			<input type="text" name="format_docs" class="text" value="#ENV*{format_docs}" id="format_docs"/>
+		</li>
+		</ul>
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	</div></form>
+</div>
