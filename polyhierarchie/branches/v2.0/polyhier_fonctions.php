@@ -220,4 +220,19 @@ function critere_branche_complete_dist($idb, &$boucles, $crit) {
 	critere_branche($idb, $boucles, $crit, true);
 }
 
+/*
+ * Déclarer un fonction générique pour pouvoir chercher dans les champs des rubriques liées
+ *
+ */
+function inc_rechercher_joints_objet_rubrique_dist($table, $table_liee, $ids_trouves, $serveur){
+	$cle_depart = id_table_objet($table);
+	$s = sql_select(
+		"id_objet as $cle_depart, id_parent as id_rubrique",
+		'spip_rubriques_liens',
+		array("objet='$table'", sql_in('id_parent', $ids_trouves)),
+		'','','','',$serveur
+	);
+	return array($cle_depart, 'id_rubrique', $s);
+}
+
 ?>
