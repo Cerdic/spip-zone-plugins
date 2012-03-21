@@ -9,12 +9,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configurer_explication' => 'Ce plugin installe une icône d’aide permettant d’afficher depuis n’importe quelle page de l’espace privé le manuel de rédaction du site. Ce manuel est @texte@ Il a pour but d’expliquer aux rédacteurs l’architecture du site, dans quelle rubrique ranger quoi, comment encoder et installer une vidéo... Bref tout ce que vous voulez et qui est spécifique à votre site.', # NEW
-	'configurer_explication_l_article' => '<a href="?exec=articles&id_article=@idart@" title="Manuál na publikovanie">článok @idart@</a> z vašej stránky.',
+	'configurer_explication_l_article' => '<a href="@url@" title="Manuál na publikovanie">článok @idart@</a> z vašej stránky.', # MODIF
 	'configurer_explication_un_article' => 'článok stránky.',
 	'configurer_titre' => 'Nastaviť manuál na publikovanie stránky',
 
 	// E
-	'erreur_article' => 'Článok manuálu definovaný v nastaveniach zásuvného modulu sa nenašiel: @idart@',
+	'erreur_article' => 'Článok manuálu definovaný v nastaveniach zásuvného modulu sa nenašiel: @idart@', # MODIF
 	'erreur_pas_darticle' => 'Článok manuálu nie je definovaný v nastaveniach zásuvného modulu',
 	'explication_afficher_bord_gauche' => 'Ikonu manuálu zobraziť vľavo hore (ak sa manuál zobrazí v stĺpci)',
 	'explication_background_color' => 'Uveďte farbu pozadia oblasti, v ktorej sa zobrazí manuál',
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'help' => 'Pomoc: ',
 
 	// I
-	'intro' => 'Ce document a pour but d’aider les rédacteurs à l’utilisation du site. Il vient en complément du document intitulé « [Cours SPIP 2.0 pour rédacteurs->http://www.spip-contrib.net/Mode-d-emploi-SPIP-2-pour] » qui est une aide globale à l’utilisation de SPIP. Vous y trouverez une description de l’architecture du site, de l’aide technique sur des points particuliers...', # NEW
+	'intro' => 'Ce document a pour but d’aider les rédacteurs à l’utilisation du site. Il vient en complément du document intitulé « [Cours SPIP pour rédacteurs->@url@] » qui est une aide globale à l’utilisation de SPIP. Vous y trouverez une description de l’architecture du site, de l’aide technique sur des points particuliers...', # NEW
 
 	// L
 	'label_afficher_bord_gauche' => 'Zobrazenie',
