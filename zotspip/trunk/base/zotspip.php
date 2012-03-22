@@ -50,6 +50,7 @@ function zotspip_declarer_tables_principales($tables_principales){
 		"fichier" => "text DEFAULT '' NOT NULL",
 		"json" => "mediumtext DEFAULT '' NOT NULL",
 		"csljson" => "mediumtext DEFAULT '' NOT NULL",
+		"updated" => "varchar(50) DEFAULT '' NOT NULL",
 		"maj" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"
 	);
 	
@@ -68,6 +69,7 @@ function zotspip_declarer_tables_principales($tables_principales){
 		"id_zcollection" => "varchar(16) DEFAULT '' NOT NULL",
 		"id_parent" => "varchar(16) DEFAULT '' NOT NULL",
 		"zcollection" => "text DEFAULT '' NOT NULL",
+		"updated" => "varchar(50) DEFAULT '' NOT NULL",
 		"maj" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"
 	);
 	
@@ -83,13 +85,13 @@ function zotspip_declarer_tables_principales($tables_principales){
 	
 		//-- Table zcreators -----------------------------------------------------------
 	$zcreators = array(
-		"auteur" => "varchar(255) DEFAULT '' NOT NULL",
+		"auteur" => "varchar(150) DEFAULT '' NOT NULL",
 		"id_zitem" => "varchar(16) DEFAULT '' NOT NULL",
-		"role" => "varchar(255) DEFAULT '' NOT NULL"
+		"role" => "varchar(30) DEFAULT '' NOT NULL"
 	);
 	
 	$zcreators_cles = array(
-		"PRIMARY KEY" => "auteur, id_zitem",
+		"PRIMARY KEY" => "auteur, id_zitem, role",
 		"KEY auteur" => "auteur"
 	);
 	

@@ -62,7 +62,7 @@ function zotspip_maj_items($forcer=false, $n=50) {
 			
 			// Faire une vérification sur la date de maj (seulement si on ne force pas)
 			if (!$zotspip_maj_items['forcer']) {
-				if (strtotime($updated)==strtotime(sql_getfetsel('maj','spip_zitems','id_zitem='.sql_quote($id_zitem)))) {
+				if ($updated==sql_getfetsel('updated','spip_zitems','id_zitem='.sql_quote($id_zitem))) {
 					effacer_meta('zotspip_maj_items');
 					return 1;
 				}
@@ -93,7 +93,7 @@ function zotspip_maj_items($forcer=false, $n=50) {
 				'fichier' => '',
 				'json' => '',
 				'csljson' => '',
-				'maj' => $updated
+				'updated' => $updated
 			);
 			
 			// On récupère le parent et/ou le lien du fichier
@@ -429,7 +429,7 @@ function zotero_poster($params_url,$datas,$methode='POST') {
 	$headers = recuperer_entetes($f, '');
 	fclose($f);
 	$result = @file_get_contents($url);
-	spip_log("$methode sur $url => HTTP $headers",'zotspip');
+	spip_log("$methode sur $url - HTTP ".implode(',',$headers),'zotspip');
 	
 	return array(
 		'headers' => $headers,

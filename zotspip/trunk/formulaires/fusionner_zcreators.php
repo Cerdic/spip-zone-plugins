@@ -46,7 +46,7 @@ function formulaires_fusionner_zcreators_traiter_dist($auteur){
 				$datas .= $json;
 				$ret = zotero_poster("items/$key",$datas,'PUT');
 				if (!is_array($ret['headers'])) // Note : si tout vas bien, ça renvoie l'item et les headers ne sont pas égals à un nombre
-					return array('message_erreur' => _T('zotspip:probleme_survenu_lors_du_remplacement'));
+					return array('message_erreur' => _T('zotspip:probleme_survenu_lors_du_remplacement',array('code'=>$ret['headers'])));
 			}
 		}
 		// Si arrivé jusque là, pas de problème
