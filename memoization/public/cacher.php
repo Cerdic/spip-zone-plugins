@@ -37,7 +37,12 @@ function generer_nom_fichier_cache($contexte, $page) {
 // Parano : on signe le cache, afin d'interdire un hack d'injection
 // dans notre memcache
 function cache_signature(&$page) {
-	return crc32($GLOBALS['meta']['secret_du_site'].$page['texte']);
+	if (!isset($GLOBALS['meta']['cache_signature'])){
+		include_spip('inc/acces');
+		include_spip('auth/sha256.inc');
+		ecrire_meta('cache_signature', _nano_sha256($_SERVER["DOCUMENT_ROOT"] . $_SERVER["SERVER_SIGNATURE"] . creer_uniqid()), 'non');
+	}
+	return crc32($GLOBALS['meta']['cache_signature'].$page['texte']);
 }
 
 /**
