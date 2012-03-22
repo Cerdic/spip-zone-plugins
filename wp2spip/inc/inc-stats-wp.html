@@ -82,10 +82,25 @@ Les RUBRIQUES
 <//B_joint_cat>
 
 
+[(#REM) on liste les auteurs wp]
 
+#SET{pas_admin,0}
+<BOUCLE_users( wp_users ){tout}>
+[(#REM) wp status 0 = admin
+on liste les autres statuts qui seront visiteurs SPIP sinon définir lignes 63 dans inc/inc-auteurs.html
+]
+[(#USER_STATUS|=={0}|non)
+#SET{pas_admin,#GET{pas_admin}|plus{1}}
+]
+</BOUCLE_users>
+<p>[(#TOTAL_BOUCLE|moins{#GET{pas_admin}})] Users admin
+[(#GET{pas_admin}|=={0}|non)
+[<br />(#GET{pas_admin}) avec le statut visiteur ou à redéfinir!!]
+]
+</p>
+</B_users>
 
-
-
+[(#REM) les posts]
 #SET{fils_valide,0}
 #SET{fils_attente,0}
 #SET{fils_spam,0}
