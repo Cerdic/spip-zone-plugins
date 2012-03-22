@@ -7,9 +7,9 @@ function datetime_mysql2unix($str) {
 	list($date, $time) = explode(' ', $str);
 	list($year, $month, $day) = explode('-', $date);
 	list($hour, $minute, $second) = explode(':', $time);
-	
-	$timestamp = mktime($hour, $minute, $second, $month, $day, $year);
-	
+
+	$timestamp = mktime((int)$hour, (int)$minute, (int)$second, (int)$month, (int)$day, (int)$year);
+
 	return $timestamp;
 }
 

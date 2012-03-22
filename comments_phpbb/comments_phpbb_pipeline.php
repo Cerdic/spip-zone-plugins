@@ -8,7 +8,7 @@ function comments_phpbb_new($flux)
 	{
 		$col_id = id_table_objet('article');
 		
-	      $result = sql_select(array('titre','chapo','statut','id_secteur'),$flux['args']['table'],$col_id."='".$flux['args']['id_objet']."'");
+	      $result = sql_select(array('titre','chapo','statut','id_secteur','date'),$flux['args']['table'],$col_id."='".$flux['args']['id_objet']."'");
 
 		// l'article existe
 		if ($article = sql_fetch($result))
