@@ -116,22 +116,22 @@ var map[(#GET{id})];
 		[(#ENV{point}|!={non}|oui)
 		jQuery.getJSON("[(#URL_PAGE{gis_json}|url_absolue)]",
 			{[
-				objets : "(#ENV{objets})",][
-				id_rubrique : (#ENV{id_rubrique}),][
-				id_secteur : (#ENV{id_secteur}),][
-				id_parent : (#ENV{id_parent}),][
-				id_article : (#ENV{id_article}),][
-				id_breve : (#ENV{id_breve}),][
-				id_document : (#ENV{id_document}),][
-				id_mot : (#ENV{id_mot}),][
-				id_groupe : (#ENV{id_groupe}),][
-				id_auteur : (#ENV{id_auteur}),][
-				id_syndic : (#ENV{id_syndic}),][
-				id_forum : (#ENV{id_forum}),][
-				id_gis : (#ENV{id_gis}),][
+				objets : "(#ENV{objets}|trim)",][
+				id_rubrique : (#ENV{id_rubrique}|trim),][
+				id_secteur : (#ENV{id_secteur}|trim),][
+				id_parent : (#ENV{id_parent}|trim),][
+				id_article : (#ENV{id_article}|trim),][
+				id_breve : (#ENV{id_breve}|trim),][
+				id_document : (#ENV{id_document}|trim),][
+				id_mot : (#ENV{id_mot}|trim),][
+				id_groupe : (#ENV{id_groupe}|trim),][
+				id_auteur : (#ENV{id_auteur}|trim),][
+				id_syndic : (#ENV{id_syndic}|trim),][
+				id_forum : (#ENV{id_forum}|trim),][
+				id_gis : (#ENV{id_gis}|trim),][
 				recherche : "(#ENV{recherche})",][
-				mots : (#ENV{mots}|?{[(#ENV{mots}|json_encode)],''}),][
-				limit : (#ENV{limit,#ENV{limite,500}})]
+				mots : (#ENV{mots}|?{[(#ENV{mots}|trim|json_encode)],''}),][
+				limit : (#ENV{limit,#ENV{limite,500}}|trim)]
 			},
 			function(data) {
 				if (data){
