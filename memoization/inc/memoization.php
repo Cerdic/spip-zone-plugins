@@ -105,11 +105,17 @@ class MCache {
 }
 
 
+if (!isset($GLOBALS['meta']['cache_namespace'])){
+	include_spip('inc/acces');
+	ecrire_meta('cache_namespace', dechex(crc32($_SERVER["DOCUMENT_ROOT"] . $_SERVER["SERVER_SIGNATURE"] . creer_uniqid())), 'non');
+}
+if (!defined('_CACHE_NAMESPACE'))
+	define('_CACHE_NAMESPACE', $_SERVER['HTTP_HOST'].':'.$GLOBALS['meta']['cache_namespace'].':');
+
 global $Memoization;
 
 $cfg = @unserialize($GLOBALS['meta']['memoization']);
 $Memoization = new MCache(preg_replace(",\W,","",$cfg['methode']));
-
 
 
 /* mode procedural */

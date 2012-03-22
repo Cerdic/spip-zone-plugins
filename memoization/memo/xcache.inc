@@ -1,8 +1,10 @@
 <?php
 
 # http://xcache.lighttpd.net/wiki/XcacheApi
-@define('_CACHE_NAMESPACE', $_SERVER['HTTP_HOST'].':');
-@define('_LOCK_MAX', 30); # max lock time (seconds)
+if (!defined('_CACHE_NAMESPACE'))
+	define('_CACHE_NAMESPACE', $_SERVER['HTTP_HOST'].':');
+if (!defined('_LOCK_MAX'))
+	define('_LOCK_MAX', 30); # max lock time (seconds)
 
 
 class MCacheBackend_xcache extends MCacheBackend {

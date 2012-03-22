@@ -1,6 +1,6 @@
 <?php
-
-@define('_CACHE_NAMESPACE', $_SERVER['HTTP_HOST'].':');
+if (!defined('_CACHE_NAMESPACE'))
+	define('_CACHE_NAMESPACE', $_SERVER['HTTP_HOST'].':');
 
 class MCacheBackend_apc extends MCacheBackend {
 
