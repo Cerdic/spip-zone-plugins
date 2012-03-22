@@ -84,21 +84,48 @@ Les RUBRIQUES
 
 [(#REM) on liste les auteurs wp]
 
-#SET{pas_admin,0}
-<BOUCLE_users( wp_users ){tout}>
-[(#REM) wp status 0 = admin
-on liste les autres statuts qui seront visiteurs SPIP sinon définir lignes 63 dans inc/inc-auteurs.html
-]
-[(#USER_STATUS|=={0}|non)
-#SET{pas_admin,#GET{pas_admin}|plus{1}}
-]
-</BOUCLE_users>
-<p>[(#TOTAL_BOUCLE|moins{#GET{pas_admin}})] Users admin
-[(#GET{pas_admin}|=={0}|non)
-[<br />(#GET{pas_admin}) avec le statut visiteur ou à redéfinir!!]
-]
+
+
+#SET{liste_restreint_radac,#ARRAY}
+<BOUCLE_users_wp( wp_users ){tout}>
+
+  <BOUCLE_cherche_statut(wp_usermeta){user_id=#ID}{meta_key=wp_capabilities}>
+
+  #SET{tab_wp,#META_VALUE|explode{'"'}}
+  
+  </BOUCLE_cherche_statut>
+  			[(#REM) liste les admins restreint, il seront des redacteur pour le moment je trouve pas leur rubrique wp]
+	
+  [(#GET{tab_wp}|table_valeur{1}|=={author}|oui)
+  
+
+  			#SET{liste_restreint_radac,#GET{liste_restreint_radac}|push{#ID}}
+
+  ]
+
+</BOUCLE_users_wp>
+
+<p>[(#TOTAL_BOUCLE)] Users 
+
 </p>
-</B_users>
+</B_users_wp>
+pas d'users pas normal
+<//B_users_wp>
+
+
+
+<B_new_redac>
+<p>
+<BOUCLE_new_redac( wp_users ){id IN #GET{liste_restreint_radac}}>
+[id:#ID user login: #USER_LOGIN]
+</BOUCLE_new_redac>
+-admin wp restreint = rédacteurs SPIP, précisez leur statut après l'import
+</p>
+</B_new_redac>
+
+
+
+
 
 [(#REM) les posts]
 #SET{fils_valide,0}

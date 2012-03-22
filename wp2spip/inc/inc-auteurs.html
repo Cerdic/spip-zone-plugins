@@ -1,50 +1,8 @@
 [(#REM)
-on va chercher les users wp, ceux avec un statut 0 sont admins, les autres deviendrons visiteurs
-c.à.d que ceux different de 0 sront 'à définir, donc vu comm visiteurs dans spip
-cette partie est à completer à ce stade je n'ai pas d'exemples de statut wp, voir ligne 60
-
-
-puis on prend l'auteur de la session en cours et on l'ajoute à la suite des auteurs importés et avec le statut webmestre
-ensuite on liste les liens posts auteurs vers 
-]
-
-#ID 	
-#USER_LOGIN 	
-#USER_PASS 	
-#USER_NICENAME 	
-#USER_EMAIL 	
-#USER_URL 	
-#USER_REGISTERED 	
-#USER_ACTIVATION_KEY 
-#USER_STATUS 	
-#DISPLAY_NAME
-
-
-ID_AUTEUR 	
-NOM 	
-BIO 	
-EMAIL 	
-NOM_SITE 	
-URL_SITE 	
-LOGIN 	
-PASS 	
-LOW_SEC 	
-STATUT 	
-WEBMESTRE 	
-MAJ 	
-PGP 
-HTPASS 	
-EN_LIGNE 	
-IMESSAGE 	
-MESSAGERIE 	
-ALEA_ACTUEL 	
-ALEA_FUTUR 	
-PREFS 	
-COOKIE_OUBLI 	
-SOURCE 	LANG 	
-EXTRA	
-on liste les users wp meme id puis on ajopute auteur 1 spip
-]
+voir
+http://www.garyc40.com/2010/04/ultimate-guide-to-roles-and-capabilities/
+ ]
+  
 
 
 
@@ -60,9 +18,39 @@ on liste les users wp meme id puis on ajopute auteur 1 spip
 <login>#USER_LOGIN</login>
 <pass></pass>
 <low_sec></low_sec>
-[(#USER_STATUS|=={0}|oui)<statut>0minirezo</statut>]
-[(#USER_STATUS|=={0}|non)<statut>A définir</statut>]
-<webmestre>non</webmestre>
+
+
+  <BOUCLE_cherche_statut(wp_usermeta){user_id=#ID}{meta_key=wp_capabilities}>
+
+  #SET{tab_wp,#META_VALUE|explode{'"'}}
+  </BOUCLE_cherche_statut>
+
+  [(#GET{tab_wp}|table_valeur{1}|=={administrator}|oui)
+  <statut>0minirezo</statut>
+  ]
+  
+
+  [(#GET{tab_wp}|table_valeur{1}|=={editor}|oui)
+  <statut>0minirezo</statut>
+  ]
+  
+  [(#REM)    administrateur restein, passe redacteur pour l'instant ]
+  
+  [(#GET{tab_wp}|table_valeur{1}|=={author}|oui)
+  <statut>1comite</statut>
+  ]
+  
+
+  [(#GET{tab_wp}|table_valeur{1}|=={contributor}|oui)
+  <statut>1comite</statut>
+  ]
+
+   [(#GET{tab_wp}|table_valeur{1}|=={subscriber}|oui)
+   <statut>6forum</statut>
+   ]
+
+[(#GET{tab_wp}|table_valeur{1}|=={administrator}|oui)<webmestre>oui</webmestre>]
+[(#GET{tab_wp}|table_valeur{1}|=={administrator}|non)<webmestre>non</webmestre>]
 <maj>#USER_REGISTERED</maj>
 <pgp></pgp>
 <htpass></htpass>
@@ -94,6 +82,7 @@ on liste les users wp meme id puis on ajopute auteur 1 spip
 <pass>#PASS</pass>
 <low_sec>#LOW_SEC</low_sec>
 <statut>#STATUT</statut>
+
 <webmestre>oui</webmestre>
 <maj>#MAJ</maj>
 <pgp>#PGP</pgp>
