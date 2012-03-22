@@ -56,12 +56,12 @@
 			<li class="obligatoire choisir_sujet [ (#ENV**{erreurs}|table_valeur{sujet}|oui)erreur]">
 				<label for='sujet'><:abomailmans:sujet:> <:info_obligatoire_02:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{sujet})</span>]
-				<input type='text' name='sujet' id='sujet' class="text" value="#ENV*{sujet}" size='40' />
+				<input type='text' name='sujet' id='sujet' class="text multilang" value="#ENV*{sujet}" size='40' />
 			</li>
 			<li class="choisir_message[ (#ENV**{erreurs}|table_valeur{message}|oui)erreur]">
 				<label for="message"><:abomailmans:message:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{message})</span>]
-				<textarea id="message" name="message" class="text" rows="5" cols="40">#ENV*{message}</textarea>
+				<textarea id="message" name="message" class="text porte_plume_partout multilang" rows="5" cols="40">#ENV*{message}</textarea>
 			</li>
 		</ul>
 		<p class="boutons">
