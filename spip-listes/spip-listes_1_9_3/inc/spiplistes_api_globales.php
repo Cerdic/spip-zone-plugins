@@ -364,27 +364,33 @@ function spiplistes_log_api ($msg) {
 	return(true);
 }
 
-// CP-20090111: adresse mail de l'expediteur par defaut
+/**
+ * adresse mail de l'expediteur par defaut
+ * @version CP-20120322
+ * @return string|boolean
+ */
 function spiplistes_email_from_default () {
-	static $default;
-	if(!$default) {
+	static $from;
+    
+	if (!$from) {
 		if(
 			// prendre d'abord celui par defaut de SPIP-Listes
-			($result = email_valide($ii = trim($GLOBALS['meta']['email_defaut'])))
+			( $from = email_valide ($ii = trim($GLOBALS['meta']['email_defaut']) ) )
 			// sinon celui du webmaster
-			|| ($result = email_valide($ii = trim($GLOBALS['meta']['email_webmaster'])))
+			|| ( $from = email_valide ($ii = trim($GLOBALS['meta']['email_webmaster']) ) )
 		) {
-			if($result == $ii) {
+			//if($from == $ii) {
 				//$nom = extraire_multi($GLOBALS['meta']['nom_site']);
 				//$nom = unicode2charset(charset2unicode($nom),$GLOBALS['meta']['spiplistes_charset_envoi']);
 				//$result = "\"$nom\" <$ii>";
-			}
+			//}
 		}
 		else {
 			spiplistes_log('ERROR: sender email address missing');
 		}
+        error_log ('FROM: '.$from);
 	}
-	return($result);
+	return ( $from );
 }
 
 // PHP 4 ?
