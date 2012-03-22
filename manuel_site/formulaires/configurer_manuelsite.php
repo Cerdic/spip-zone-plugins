@@ -99,4 +99,28 @@ function formulaires_configurer_manuelsite_saisies_dist(){
 	);
 
 }
+
+function formulaires_configurer_manuelsite_verifier(){
+	// On la garde en mémoire dans le hit pour une utilisation dans le pipeline de traitement
+	set_request('ancien_cacher_public', lire_config('manuelsite/cacher_public'));
+	return array();
+}
+
+/**
+ * Pipeline
+ * Invalider le cache si l'option de config "cacher_public" a ete modifee
+ * Puis poursuivre le traitement normal de sauvegarde des paramètres
+ *
+ * @param array $flux
+ * @return array
+ */
+function manuelsite_formulaire_traiter($flux){
+	if ( $flux['args']['form'] == "configurer_manuelsite" &&
+		  _request('cacher_public') != _request('ancien_cacher_public')) {
+		include_spip('inc/invalideur');
+		suivre_invalideur('1');
+	}
+	return $flux;
+}
+
 ?>
