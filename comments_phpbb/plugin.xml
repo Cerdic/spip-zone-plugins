@@ -30,6 +30,6 @@
 		<inclure>comments_phpbb_pipeline.php</inclure>
 	</pipeline>
 	<categorie>communication</categorie>
-	<necessite id='spip' version='[2.0.0;2.0.99]' />
+	<necessite id='spip' version='[2.0.0;2.1.99]' />
 	<necessite id='CFG' version='[1.10.5;]' />
 </plugin>
