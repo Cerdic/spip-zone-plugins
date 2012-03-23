@@ -16,7 +16,11 @@
 	<auteur lien="http://www.elastick.net">Anne-lise Martenot</auteur>
 	<auteur>Yffic</auteur>
 	<auteur lien="http://www.kent1.info">kent1</auteur>
-
+	<licence>GPL v3</licence>
+	
+	<traduire module="abomailmans" reference="fr" gestionnaire="salvatore" />
+	<traduire module="paquet-abomailmans" reference="fr" gestionnaire="salvatore" />
+	
 	<pipeline nom="declarer_tables_interfaces" inclure="base/abomailmans_install.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/abomailmans_install.php" />
 	<pipeline nom="taches_generales_cron" inclure="abomailmans_pipelines.php" />
