@@ -10,8 +10,12 @@
 * $Id: nouveautes.html 44651 2011-02-14 10:33:12Z yffic@lefourneau.com $
 ***********************************************************/]
 <B_articlesDate>
-[(#ENV{sujet}|sinon{<:bonjour:>})]
-[(#ENV{message|sinon{<:nouveaux_articles:>}})]
+
+<BOUCLE_abomailman(spip_abomailmans){id_abomailman}>[(#DESCRIPTIF)]</BOUCLE_abomailman>
+</B_abomailman>
+[(#ENV{sujet})]
+[(#ENV{message})]
+<//B_abomailman>
 
 ------------------------------------------------------------------------------
 <BOUCLE_articlesDate(ARTICLES){age_relatif< 0}{id_rubrique ?}{id_mot ?}{par date}{inverse}>

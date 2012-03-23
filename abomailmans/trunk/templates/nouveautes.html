@@ -29,8 +29,11 @@
       	<h1><a href="#URL_SITE_SPIP">
          	[(#LOGO_SITE_SPIP||image_reduire{100,100}|inserer_attribut{style,'border:0;'}|sinon{#NOM_SITE_SPIP})]
          </a></h1>
-         [<h2>(#ENV{sujet}|sinon{<:bonjour:>})</h2>]
-			[<p><b>(#ENV{message}|sinon{<:nouveaux_articles:>})</b></p>]
+         <BOUCLE_abomailman(spip_abomailmans){id_abomailman}>#DESCRIPTIF</BOUCLE_abomailman>
+         </B_abomailman>
+            [<h2>(#ENV{sujet})</h2>]
+            [<p><b>(#ENV{message})</b></p>]
+         <//B_abomailman>
 			<div style="border-bottom:1px solid #E00000;margin-bottom:1em;">&nbsp;</div>
       </td>
    </tr>
