@@ -11,7 +11,7 @@
 ***********************************************************/]
 <B_articlesDateFr>
 
-<BOUCLE_abomailman_fr(spip_abomailmans){id_abomailman}>[(#DESCRIPTIF*|extraire_multi{fr}|propre)]</BOUCLE_abomailman_fr>
+<BOUCLE_abomailman_fr(ABOMAILMANS){id_abomailman}>[(#DESCRIPTIF*|extraire_multi{fr}|propre)]</BOUCLE_abomailman_fr>
 </B_abomailman_fr>
 [(#ENV*{sujet}|extraire_multi{fr})]
 [(#ENV*{message}|extraire_multi{fr})]
@@ -35,7 +35,7 @@ Lire l'article : [(#URL_ARTICLE|url_absolue)]
 ##############################################################################
 <B_articlesDateEn>
 
-<BOUCLE_abomailman_en(spip_abomailmans){id_abomailman}>[(#DESCRIPTIF*|extraire_multi{en}|propre)]</BOUCLE_abomailman_en>
+<BOUCLE_abomailman_en(ABOMAILMANS){id_abomailman}>[(#DESCRIPTIF*|extraire_multi{en}|propre)]</BOUCLE_abomailman_en>
 </B_abomailman_en>
 [(#ENV*{sujet}|extraire_multi{en})]
 [(#ENV*{message}|extraire_multi{en})]
