@@ -84,15 +84,15 @@ function action_browserid_verify() {
 
 						if ($statut_inscription) {
 							include_spip('formulaires/inscription');
-							$login = test_login(
-									preg_replace(',@.*,', '', $a['email']), $a['email']
-								); # unicite a la rache.
+							#$login = test_login(
+							#		preg_replace(',@.*,', '', $a['email']), $a['email']
+							#	); # unicite a la rache.
 
 							sql_insertq('spip_auteurs', array(
 								'email' => $a['email'],
 								'statut' => $statut_inscription,
 								'nom' => preg_replace('/@.*/', '', $a['email']),
-								'login' => $login
+								'login' => $a['email']
 							));
 							$auteur = sql_fetsel('*', 'spip_auteurs', 'email='.sql_quote($a['email']));
 							browserid_auth_loger($auteur, $a);
