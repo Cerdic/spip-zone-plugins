@@ -68,7 +68,7 @@ WP: cat 1 par défaut por les posts non classés
 Les RUBRIQUES 
 ]
 #SET{count_cat,0}
-<BOUCLE_joint_cat( wp_term_taxonomy ){taxonomy=category}>
+<BOUCLE_joint_cat( wp_term_taxonomy ){taxonomy IN category,link_category}>
 
     <BOUCLE_cat( wp_terms ){term_id}>
 #SET{count_cat,#GET{count_cat}|plus{1}}
@@ -151,3 +151,9 @@ pas d'users pas normal
 #GET{fils_spam}&nbsp;spams non importés<br/>
 </p>
  </B_fils>
+
+[(#REM) les sites]
+<BOUCLE_sites(wp_links){tout}>
+</BOUCLE_sites>
+<p>#TOTAL_BOUCLE  sites</p>
+</B_sites>
