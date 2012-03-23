@@ -2,12 +2,15 @@
 
 ARTICLES publiés
 ]
-
+<p>
 <BOUCLE_post_publish( wp_posts ){post_status=publish}{post_parent=0}{post_type=post}>
 </BOUCLE_post_publish>
-<p>#TOTAL_BOUCLE posts publiés</p>
+#TOTAL_BOUCLE posts ou articles publiés<br/>
 </B_post_publish>
-
+<BOUCLE_pages( wp_posts ){post_status=publish}{post_type=page}>
+</BOUCLE_pages>
+#TOTAL_BOUCLE pages wp sans catégories, articles en attente de publication et rangement</p>
+</B_pages>
 [(#REM)
 document et orfelins
 ]
