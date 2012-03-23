@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0-beta;3.0.*]"
 	logo="images/basicone.png"
-	documentation="#"
+	documentation="http://www.spip-contrib.net/basicone-icones-du-theme-prive"
 >	
 
 	<nom>Basicône</nom>
