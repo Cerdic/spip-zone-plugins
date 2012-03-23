@@ -34,17 +34,17 @@ function exec_annexe()
 				$exercice = 0;
 		}
 		$exercice_data = sql_asso1ligne('exercice', $exercice);
-		association_onglets(_T('asso:titre_onglet_comptes'));
+		onglets_association('titre_onglet_comptes');
 		// INTRO : rappel de l'exercicee affichee
-		echo totauxinfos_intro($exercice_data['intitule'],'exercice',$exercice);
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		$res = association_icone('cpte_resultat_titre_general',  generer_url_ecrire('compte_resultat', "exercice=$exercice"), 'finances.jpg')
-		. association_icone('bilan', generer_url_ecrire('bilan', "exercice=$exercice"), 'finances.jpg');
-		$res .= association_icone('bouton_retour',  generer_url_ecrire('comptes', "exercice=$exercice"), 'retour-24.png');
-		echo bloc_des_raccourcis($res);
-		debut_cadre_association('finances.jpg', 'annexe_titre_general', $exercice_data['intitule']);
+		$infos['exercice_entete_debut'] = association_datefr($exercice_data['debut'], 'dtstart');
+		$infos['exercice_entete_fin'] = association_datefr($exercice_data['fin'], 'dtend');
+		echo totauxinfos_intro($exercice_data['intitule'], 'exercice', $exercice, $infos);
+		// datation et raccourcis
+		icones_association(array('comptes', "exercice=$exercice"), array(
+			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$exercice"),
+			'bilan' => array('finances-24.png', 'bilan', "exercice=$exercice"),
+		));
+		debut_cadre_association('finances-32.jpg', 'annexe_titre_general', $exercice_data['intitule']);
 		echo _T('asso:non_implemente');
 		fin_page_association();
 	}

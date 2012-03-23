@@ -57,6 +57,8 @@ function formulaires_editer_asso_prets_charger_dist($id_pret='')
 		$contexte['montant'] = association_nbrefr($contexte['montant']);
 	if ($contexte['prix_unitaire'])
 		$contexte['prix_unitaire'] = association_nbrefr($contexte['prix_unitaire']);
+	if ($contexte['duree'])
+		$contexte['duree'] = association_nbrefr($contexte['duree']);
 
 	// on ajoute les metas destinations
 	if ($GLOBALS['association_metas']['destinations']) {

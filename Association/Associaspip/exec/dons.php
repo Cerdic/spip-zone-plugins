@@ -26,7 +26,7 @@ function exec_dons()
 		if(!$annee){
 			$annee = date('Y');
 		}
-		association_onglets(_T('asso:titre_onglet_dons'));
+		onglets_association('titre_onglet_dons');
 		// INTRO : nom du module et annee affichee
 		echo totauxinfos_intro('','dons',$annee);
 		// TOTAUX : nombre de dons selon leur nature
@@ -41,11 +41,11 @@ function exec_dons()
 		$dons_financiers = sql_getfetsel('SUM(argent) AS somme_recettes', 'spip_asso_dons', "argent AND DATE_FORMAT(date_don, '%Y')=$annee" );
 		$remboursements = sql_getfetsel('SUM(argent) AS somme_reversees', 'spip_asso_dons', "argent AND contrepartie AND DATE_FORMAT(date_don, '%Y')=$annee" );
 		echo totauxinfos_montants($annee, $dons_financiers, $remboursements);
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		echo bloc_des_raccourcis(association_icone('ajouter_un_don', generer_url_ecrire('edit_don'), 'ajout_don.png'));
-		debut_cadre_association('dons.gif', 'tous_les_dons');
+		// datation et raccourcis
+		icones_association(array(), array(
+			'ajouter_un_don' => array('ajout-24.png', 'edit_don'),
+		));
+		debut_cadre_association('dons-24.gif', 'tous_les_dons');
 		// PAGINATION ET FILTRES
 		echo '<table width="100%" class="asso_tablo_filtre">';
 		echo '<tr>';
@@ -93,7 +93,7 @@ function exec_dons()
 				? ('<td class="text">&nbsp;</td>')
 			    : ('<td class="text">'. propre($data['contrepartie']) .'</td>')
 				);
-			echo '<td  class="action">'. association_bouton('supprimer_le_don', 'poubelle-12.gif', 'action_dons', "id=$id_don") .'</td>';
+			echo '<td  class="action">'. association_bouton('supprimer_le_don', 'suppr-12.gif', 'action_dons', "id=$id_don") .'</td>';
 			echo '<td class="action">' . association_bouton('mettre_a_jour_le_don', 'edit-12.gif', 'edit_don', "id=$id_don") .'</td>';;
 			echo "</tr>\n";
 		}

@@ -26,12 +26,6 @@ $GLOBALS['association_styles_des_statuts'] = array(
 
 define('_DIR_PLUGIN_ASSOCIATION_ICONES', _DIR_PLUGIN_ASSOCIATION.'img_pack/');
 
-// gros lien=bouton+texte de raccourci dans la colonne gauche/droite
-function association_icone($texte, $lien, $image, $sup='rien.gif')
-{
-	return icone_horizontale(_T("asso:$texte"), $lien, _DIR_PLUGIN_ASSOCIATION_ICONES. $image, $sup, false);
-}
-
 // boutons d'action (si page de script indiquee) dans les listing
 function association_bouton($texte, $image, $script='', $args='', $img_attributes='')
 {
@@ -66,15 +60,9 @@ function association_bouton_modifier($objet, $args='', $tag='td')
 function association_bouton_supprimer($objet, $args='', $tag='td')
 {
 	$res = ($tag?"<$tag class='action'>":'');
-	$res .= association_bouton('bouton_supprimer', 'poubelle-12.gif', "action_$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#x2327;"'); // 8 pluriel contre 3 singulier
+	$res .= association_bouton('bouton_supprimer', 'suppr-12.gif', "action_$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12" alt="&#x2327;"'); // 8 pluriel contre 3 singulier
 	$res .= ($tag?"</$tag>":'');
 	return $res;
-}
-
-// bloc de raccourci constitue uniquement du bouton retour
-function association_retour($adresse_retour='')
-{
-	return bloc_des_raccourcis(association_icone('bouton_retour',  ($adresse_retour=='')?str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']):$adresse_retour, 'retour-24.png'));
 }
 
 function request_statut_interne()
@@ -120,26 +108,22 @@ function bloc_confirmer_suppression($type,$id,$retour='')
 }
 
 // recupere dans une chaine un champ d'une table spip_asso_XXs pour un enregistrement identifie par son id_XX
-function sql_asso1champ($table, $id, $champ)
+// un dernier drapeau mis a FALSE permet de traiter le cas des tables _plan|destination|destination_op qui n'ont pas de "s" final...
+/* conversion d'anciennes fonctions :
+ * exercice_intitule($exo) <=> sql_asso1champ('exercice', $exo, 'intitule')
+ * exercice_date_debut($exercice) <=> sql_asso1champ('exercice', $exercice, 'debut')
+ * exercice_date_fin($exercice) <=> sql_asso1champ('exercice', $exercice, 'fin')
+ */
+function sql_asso1champ($table, $id, $champ, $pluriel=TRUE)
 {
-	return sql_getfetsel($champ, "spip_asso_{$table}s", "id_$table=".intval($id));
+	return sql_getfetsel($champ, "spip_asso_$table".($pluriel?'s':''), "id_$table=".intval($id));
 }
 
 // recupere dans un tableau associatif un enregistrement d'une table spip_asso_XX identifie par son id_XX
-function sql_asso1ligne($table, $id)
+// un dernier drapeau mis a FALSE permet de traiter le cas des tables _plan|destination|destination_op qui n'ont pas de "s" final...
+function sql_asso1ligne($table, $id, $pluriel=TRUE)
 {
-	return sql_fetsel('*', "spip_asso_{$table}s", "id_$table=".intval($id));
-}
-
-# ensemble de fonctions pour recuperer les donnees de l'exercice en cours
-function exercice_intitule($exercice) {
-	return sql_asso1champ('exercice', $exercice, 'intitule');
-}
-function exercice_date_debut($exercice) {
-	return sql_asso1champ('exercice', $exercice, 'debut');
-}
-function exercice_date_fin($exercice) {
-	return sql_asso1champ('exercice', $exercice, 'fin');
+	return sql_fetsel('*', "spip_asso_$table".($pluriel?'s':''), "id_$table=".intval($id));
 }
 
 // Affichage micro-formate d'un nom complet (de membre) suivant la configuration du plugin (i.e. champs geres ou non)
@@ -618,7 +602,7 @@ function totauxinfos_intro($titre,$type='',$id=0,$DesLignes=array(),$PrefixeLang
 // On renvoie pour chaque ligne : la moyenne arithmetique <http://fr.wikipedia.org/wiki/Moyenne#Moyenne_arithm.C3.A9tique> et  l'ecart-type <http://fr.wikipedia.org/wiki/Dispersion_statistique#.C3.89cart_type> ainsi que les extrema <http://fr.wikipedia.org/wiki/Crit%C3%A8res_de_position#Valeur_maximum_et_valeur_minimum> si on le desire (par defaut non car tableau debordant dans ce petit cadre)
 function totauxinfos_stats($legende='',$sql_table_asso,$sql_champs,$sql_criteres='1=1',$decimales_significatives=1,$avec_extrema=false)
 {
-	if (!is_array($sql_champ) || !$sql_table_asso)
+	if (!is_array($sql_champs) || !$sql_table_asso)
 		return FALSE;
 	$res = '<table width="100%" class="asso_infos">';
 	$res .= '<caption>'. _T('asso:totaux_stats', array('de_par'=>$legende)) .'</caption><thead>';

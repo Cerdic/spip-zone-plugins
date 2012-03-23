@@ -20,13 +20,11 @@ function exec_action_activites()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		association_onglets(_T('asso:titre_onglet_activite'));
+		onglets_association('titre_onglet_activite');
 		// infos
 		echo totauxinfos_intro('confirmation');
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		echo association_retour();
+		// datation et raccourcis
+		icones_association('');
 		debut_cadre_association('activites.gif', 'activite_titre_inscriptions_activites');
 		if (is_array($_REQUEST['delete'])) {
 			$count = count($_REQUEST['delete']);

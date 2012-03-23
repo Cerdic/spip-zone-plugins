@@ -23,13 +23,12 @@ function exec_action_relances()
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
-		association_onglets(_T('asso:titre_onglet_membres'));
+		onglets_association('titre_onglet_membres'));
 		// notice ?
 		echo _T('asso:aide_relances'); //!\ il faut en rajouter
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		echo association_retour();
-		debut_cadre_association('ico_panier.png', 'relance_de_cotisations');
+		// datation et raccourcis
+		icones_association('');
+		debut_cadre_association('relance-24.png', 'relance_de_cotisations');
 		echo recuperer_fond('prive/editer/relance_adherents');
 		fin_page_association();
 	}

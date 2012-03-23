@@ -23,14 +23,12 @@ function exec_edit_don()
 			echo minipres();
 	} else {
 		$id_don = intval(_request('id'));
-		association_onglets(_T('asso:titre_onglet_dons'));
+		onglets_association('titre_onglet_dons');
 		// INTRO : resume don
 		echo totauxinfos_intro('', 'don', $id_don, $infos );
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		echo association_retour();
-		debut_cadre_association(($id_don?'dons.gif':'ajout_don.png'), 'dons_titre_mise_a_jour');
+		// datation et raccourcis
+		icones_association('');
+		debut_cadre_association('dons-24.gif', 'dons_titre_mise_a_jour');
 		echo recuperer_fond('prive/editer/editer_asso_dons', array (
 			'id_don' => $id_don
 		));

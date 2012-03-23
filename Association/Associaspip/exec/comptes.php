@@ -46,7 +46,7 @@ function exec_comptes()
 		$where = 'imputation LIKE '. sql_quote($imputation);
 		$where .= (!is_numeric($vu) ? '' : " AND vu=$vu");
 		$where .= " AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]'";
-		association_onglets(_T('asso:titre_onglet_comptes'));
+		onglets_association('titre_onglet_comptes');
 		// INTRO : rappel de l'exercicee affichee
 		echo totauxinfos_intro($exercice_data['intitule'],'exercice',$exercice);
 		$journaux = sql_allfetsel('journal, intitule', 'spip_asso_comptes RIGHT JOIN spip_asso_plan ON journal=code',"classe='".$GLOBALS['association_metas']['classe_banques']."' AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]'", "intitule DESC"); // on se permet sql_allfetsel car il s'agit d'une association (mois d'une demie dizaine de comptes) et non d'un etablissement financier (des milliers de comptes clients)
@@ -81,16 +81,14 @@ function exec_comptes()
 		// TOTAUX : montants de l'exercice pour l'imputation choisie (toutes si aucune)
 		$data = sql_fetsel( 'SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses, code, classe',  'spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code', "$where AND classe<>".sql_quote($GLOBALS['association_metas']['classe_banques']). " AND classe<>".sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']) ); // une contribution benevole ne doit pas etre comptabilisee en charge/produit
 		echo totauxinfos_montants(($imputation=='%' ? _T('asso:tous') : $imputation), $data['somme_recettes'], $data['somme_depenses']);
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		$res = '<p><b>'.$exercice_data['intitule'].'</b><p>'
-		. association_icone('cpte_resultat_titre_general',  generer_url_ecrire('compte_resultat', "exercice=$exercice"), 'finances.jpg')
-		. association_icone('bilan', generer_url_ecrire('bilan', "exercice=$exercice"), 'finances.jpg')
-		. association_icone('annexe_titre_general', generer_url_ecrire('annexe', "exercice=$exercice"), 'finances.jpg')
-		. association_icone('ajouter_une_operation',  generer_url_ecrire('edit_compte'), 'ajout_don.png');
-		echo bloc_des_raccourcis($res);
-		debut_cadre_association('comptes.gif', 'informations_comptables');
+		// datation et raccourcis
+		icones_association(array(), array(
+			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$exercice"),
+			'bilan' => array('finances-24.png', 'bilan', "exercice=$exercice"),
+			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$exercice"),
+			'ajouter_une_operation' => array('ajout-24.png', 'edit_compte'),
+		) );
+		debut_cadre_association('finances-32.jpg', 'informations_comptables');
 		echo "\n<table width='100%'>";
 		echo '<tr><td>';
 		echo '<form method="post" action="'.generer_url_ecrire('comptes',"imputation=$imputation").'"><div>';

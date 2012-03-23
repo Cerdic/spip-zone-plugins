@@ -21,17 +21,15 @@ function exec_categories()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		association_onglets(_T('asso:categories_de_cotisations'));
+		onglets_association('categories_de_cotisations');
 		// notice
 		echo '';
 		// quelques stats sur les categories
 		echo totauxinfos_stats('tous', 'categories', array('entete_duree'=>'duree', 'entete_montant'=>'cotisation') );
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		$res = association_icone('ajouter_une_categorie_de_cotisation',  generer_url_ecrire('edit_categorie'), 'calculatrice.gif');
-		$res.= association_icone('bouton_retour', generer_url_ecrire('association'), 'retour-24.png');
-		echo bloc_des_raccourcis($res);
+		// datation et raccourcis
+		icones_association(array('association'), array(
+			'ajouter_une_categorie_de_cotisation' => array('calculatrice.gif', 'edit_categorie'),
+		));
 		debut_cadre_association('calculatrice.gif','toutes_categories_de_cotisations');
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_categories'>\n";
 		echo "<thead>\n<tr>";

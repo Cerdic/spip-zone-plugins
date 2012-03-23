@@ -33,9 +33,11 @@ function exec_bilan()
 		// recupere l'id_destination de la ou des destinations dans POST ou cree une entree a 0 dans le tableau
 		if (!($ids_destination_bilan = _request('destination')))
 			$ids_destination_bilan = array(0);
-		association_onglets(_T('asso:titre_onglet_comptes'));
+		onglets_association('titre_onglet_comptes');
 		// INTRO : rappel de l'exercicee affichee
-		echo totauxinfos_intro($exercice_data['intitule'],'exercice',$exercice);
+		$infos['exercice_entete_debut'] = association_datefr($exercice_data['debut'], 'dtstart');
+		$infos['exercice_entete_fin'] = association_datefr($exercice_data['fin'], 'dtend');
+		echo totauxinfos_intro($exercice_data['intitule'], 'exercice', $exercice, $infos);
 		if ($GLOBALS['association_metas']['destinations']=='on') {
 			// cree un menu a choix multiple des destinations a inserer dans la boite info et recupere les intitule de toutes les destinations dans un tableau
 			$select_destination = '';
@@ -58,21 +60,19 @@ function exec_bilan()
 			echo '<p class="boutons"><input type="submit" value="Bilan" /></p>';
 			echo '</div></form>';
 		}
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		$res = association_icone('cpte_resultat_titre_general',  generer_url_ecrire('compte_resultat', "exercice=$exercice"), 'finances.jpg')
-		. association_icone('annexe_titre_general',  generer_url_ecrire('annexe', "exercice=$exercice"), 'finances.jpg')
-		. association_icone('bouton_retour',  generer_url_ecrire('comptes', "exercice=$exercice"), 'retour-24.png');
-		echo bloc_des_raccourcis($res);
-		debut_cadre_association('finances.jpg', 'bilans_comptables', $exercice_data['intitule']);
+		// datation et raccourcis
+		icones_association(array('comptes', "exercice=$exercice"), array(
+			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$exercice"),
+			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$exercice"),
+		));
+		debut_cadre_association('finances-32.jpg', 'bilans_comptables', $exercice_data['intitule']);
 		$clas_banque = $GLOBALS['association_metas']['classe_banques'];
 		$clas_contrib_volontaire = $GLOBALS['association_metas']['classe_contributions_volontaires']; // une contribution benevole ne doit pas etre comptabilisee en charge/produit
 		if ($plan) {
 			$join = ' RIGHT JOIN spip_asso_plan ON imputation=code';
 			$sel = ', code, intitule, classe';
-			$where = ' date >= \''.exercice_date_debut($exercice).'\' AND date <= \''.exercice_date_fin($exercice).'\'';
-			$having =  'classe <> \'' . sql_quote($clas_banque). '\' AND classe <> \'' .sql_quote($clas_contrib_volontaire) .'\'';
+			$where = " date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' ";
+			$having =  "classe<>'". sql_quote($clas_banque). "' AND classe<>'" .sql_quote($clas_contrib_volontaire) .'\'';
 			$order = 'code';
 		} else {
 			$join = $sel = $where = $having = $order = '';

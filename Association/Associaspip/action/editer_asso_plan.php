@@ -26,7 +26,7 @@ function action_editer_asso_plan()
 		'code' => $code,
 		'intitule' => _request('intitule'),
 		'classe' => _request('classe'),
-		'solde_anterieur' => association_recupere_montant(_request('solde_anterieure')),
+		'solde_anterieur' => association_recupere_montant(_request('solde_anterieur')),
 		'commentaire' => _request('commentaire'),
 		'type_op' => _request('type_op'),
 	);

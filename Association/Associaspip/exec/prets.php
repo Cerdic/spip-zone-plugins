@@ -22,9 +22,9 @@ function exec_prets()
 		echo minipres();
 	} else {
 		$id_ressource = intval(_request('id'));
-		association_onglets(_T('asso:titre_onglet_prets'));
+		onglets_association('titre_onglet_prets');
 		$ressource = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
-		$unite = $ressource['ud'];
+		$unite = $ressource['ud']?$ressource['ud']:'D';
 		$infos['ressources_libelle_code'] = $ressource['code'];
 		if (is_numeric($ressource['statut'])) { /* utilisation des 3 nouveaux statuts numeriques (gestion de quantites/exemplaires) */
 			if ($ressource['statut']>0) {
@@ -62,21 +62,19 @@ function exec_prets()
 		$liste_libelles = $liste_effectifs = array();
 		$liste_libelles['pair'] = _T('asso:prets_restitues'); // restitues, termines, anciens, ...
 		$liste_libelles['impair'] = _T('asso:prets_encours'); // dus, en attente, en cours, nouveaux, ...
-		$liste_effectifs['pair'] = sql_countsel('spip_asso_prets', "id_ressource=$id_ressource AND date_retour>=date_sortie");
-		$liste_effectifs['impair'] = sql_countsel('spip_asso_prets', "id_ressource=$id_ressource AND date_retour<date_sortie");
+		$liste_effectifs['pair'] = sql_countsel('spip_asso_prets', "id_ressource=$id_ressource AND date_retour>date_sortie");
+		$liste_effectifs['impair'] = sql_countsel('spip_asso_prets', "id_ressource=$id_ressource AND date_retour<=date_sortie");
 		echo totauxinfos_effectifs('prets', $liste_libelles, $liste_effectifs);
 		// STATS sur la duree et le montant des emprunts
 		echo totauxinfos_stats('prets', 'prets', array('entete_duree'=>'duree','entete_montant'=>'duree*prix_unitaire',), "id_ressource=$id_ressource");
 		// TOTAUX : montants generes par les umprunts de la ressources
 		$recettes = sql_getfetsel('SUM(duree*prix_unitaire) AS totale', 'spip_asso_prets', "id_ressource=$id_ressource");
 		echo totauxinfos_montants('emprunts', $recettes, $ressource['prix_acquisition']); // /!\ les recettes sont calculees simplement (s'il y a un systeme de penalite pour retard, il faut s'adapter a la saisie pour que le module soit utile) ; les depenses ne prennent pas en compte les eventuels frais d'entretien ou de reparation de la ressource...
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		$res = ( is_numeric($ressource['statut'])? $ressource['statut']>0 : $ressource['statut']=='ok' ) ? association_icone('prets_nav_ajouter', generer_url_ecrire('edit_pret','id_ressource='.$id_ressource.'&id_pret='), 'creer-12.gif') : '';
-		$res .= association_icone('bouton_retour', generer_url_ecrire('ressources'), 'retour-24.png');
-		echo bloc_des_raccourcis($res);
-		debut_cadre_association('pret1.gif', 'prets_titre_liste_reservations');
+		// datation et raccourcis
+		if ( (is_numeric($ressource['statut']) && $ressource['statut']>0) || $ressource['statut']=='ok' )
+			$res['prets_nav_ajouter'] = array('creer-12.gif', 'edit_pret', "id_ressource=$id_ressource&id_pret=");
+		icones_association(array('ressources'), $res);
+		debut_cadre_association('pret-24.gif', 'prets_titre_liste_reservations');
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_prets'>\n";
 		echo "<thead>\n<tr>";
 		echo '<th>'._T('asso:entete_id').'</th>';
@@ -88,15 +86,15 @@ function exec_prets()
 		echo "</tr>\n</thead><tbody>";
 		$query = sql_select('*', 'spip_asso_prets', "id_ressource=$id_ressource", '', 'date_sortie DESC' );
 		while ($data = sql_fetch($query)) {
-			echo '<tr class="'.($data['date_retour']<$data['date_sortie']?'pair':'impair').'" id="'.$data['id_pret'].'">';
+			echo '<tr class="'.($data['date_retour']>$data['date_sortie']?'pair':'impair').'" id="'.$data['id_pret'].'">';
 			echo '<td class="integer">'.$data['id_pret'].'</td>';
 			echo '<td class="date">'. association_datefr($data['date_sortie'], 'dtstart') .'</td>';
 			$id_emprunteur = intval($data['id_emprunteur']);
 			$auteur = sql_fetsel('*', 'spip_asso_membres', "id_auteur=$id_emprunteur");
 			echo '<td class="n">'.association_calculer_nom_membre($auteur['sexe'], $auteur['prenom'], $auteur['nom_famille'],'span');
-			echo '</td><td class="date">' .association_dureefr($data['duree'],$unite) .'</td>';
+			echo '</td><td class="date">'.association_dureefr($data['duree'],$unite) .'</td>';
 			echo '<td class="date">'. ($data['date_retour']<$data['date_sortie'] ? '&nbsp' : association_datefr($data['date_retour'],'dtend') ) .'</td>';
-			echo '<td class="action">'. association_bouton('prets_nav_annuler', 'poubelle-12.gif', 'action_prets', 'id_pret='.$data['id_pret'].'&id_ressource='.$id_ressource) .'</td>';
+			echo '<td class="action">'. association_bouton('prets_nav_annuler', 'suppr-12.gif', 'action_prets', 'id_pret='.$data['id_pret'].'&id_ressource='.$id_ressource) .'</td>';
 			echo '<td class="action">' . association_bouton('prets_nav_editer', 'edit-12.gif', 'edit_pret', 'id_pret='.$data['id_pret']) . '</td>';
 			echo "</tr>\n";
 		}

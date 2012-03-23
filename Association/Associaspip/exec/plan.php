@@ -21,15 +21,14 @@ function exec_plan()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		association_onglets(_T('asso:plan_comptable'));
+		onglets_association('plan_comptable');
 		// notice
 		echo propre(_T('asso:plan_info'));
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		$res = association_icone('plan_nav_ajouter', generer_url_ecrire('edit_plan'), 'EuroOff.gif', 'creer.gif');
-		$res .= association_icone('bouton_retour', generer_url_ecrire('association'), 'retour-24.png');echo bloc_des_raccourcis($res);
-		debut_cadre_association('EuroOff.gif',  'plan_comptable');
+		// datation et raccourcis
+		icones_association(array('association'), array(
+			'plan_nav_ajouter' => array('euro-39.gif', 'edit_plan'),
+		));
+		debut_cadre_association('euro-39.gif',  'plan_comptable');
 		$classe = _request('classe');
 		if (!$classe)
 			$classe = '%';

@@ -21,17 +21,11 @@ function formulaires_editer_asso_plan_charger_dist($id_plan='')
 	/* le nom de la table ne se termine pas par un s, on ne peut donc pas utiliser formulaires_editer_objet_charger */
 	/* on charge donc dans $contexte tous les champs necessaires */
 	if ($id_plan) { /* edition, il faut recuperer les valeurs dans la table */
-		$plans = sql_fetsel('*', 'spip_asso_plan', "id_plan=$id_plan");
-		$contexte['classe'] = $plans['classe'];
-		$contexte['code'] = $plans['code'];
+		$contexte = sql_fetsel('*', 'spip_asso_plan', "id_plan=$id_plan");
+//		$contexte['classe'] = $plans['classe'];
+//		$contexte['code'] = $plans['code'];
 		/* on passe aussi le code originellement present pour detecter sans avoir a refaire de requete un changement de code qu'il faut repercuter dans la table des comptes */
-		$contexte['_hidden'] = "<input type='hidden' name='code_initial' value='$plans[code]' />";
-		$contexte['intitule'] = $plans['intitule'];
-		$contexte['solde_anterieur'] = $plans['solde_anterieur'];
-		$contexte['date_anterieure'] = $plans['date_anterieure'];
-		$contexte['type_op'] = $plans['type_op'];
-		$contexte['active'] = $plans['active'];
-		$contexte['commentaire'] = $plans['commentaire'];
+		$contexte['_hidden'] = "<input type='hidden' name='code_initial' value='$contexte[code]' />";
 	} else { /* c'est une creation */
 		$contexte['classe'] = $contexte['code'] = $contexte['intitule'] = '';
 		$contexte['solde_anterieur'] = 0;

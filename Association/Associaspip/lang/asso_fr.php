@@ -58,15 +58,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entete_tous' => 'Tou(te)s',
 	'entete_utilise' => 'Utilis&eacute;(e)',
 	# Libelles communes
+	'libelle_article' => 'Article',
 	'libelle_commentaire' => 'Commentaire',
-	'libelle_duree' => 'Dur&eacute;e',
 	'libelle_date' => 'Date (AAAA-MM-JJ)',
+	'libelle_duree' => 'Dur&eacute;e',
 	'libelle_intitule' => 'Intitul&eacute; complet',
 	'libelle_montant' => 'Montant (Euros)',
 	'libelle_nd_mbr' => 'N<sup>o</sup> de membre',
 	'libelle_nom' => 'Nom',
 	'libelle_num' => 'N<sup>o</sup>',
-	'libelle_quantite' => 'Quantit&eacute;',
+	'libelle_prix_total' => 'Prix totale (Euros)',
+	'libelle_prix_unite' => 'Prix unitaire (Euros)',
+	'libelle_quantite' => 'Quantit&eacute; (Euros)',
 	'libelle_statut' => 'Statut',
 	# Listes communs
 	'liste_nombre_total' => 'Total&nbsp;:',
@@ -510,7 +513,6 @@ Commentaire: @commentaire@
 # RESSOURCES
 	#Messages
 	'ressources_info' => 'Vous pouvez g&eacute;rer ici les diff&eacute;rentes ressources pr&ecirc;t&eacute;es aux membres (livres, mat&eacute;riels, ...)<br />La puce indique la disponibilit&eacute; des diff&eacute;rentes ressources',
-	'ressources_danger_suppression' => 'Vous vous appr&ecirc;tez &agrave; effacer l\'article n&deg; @id_ressource@ !',
 	# Titres
 	'ressources_titre_gestion_ressources' => 'Gestion des ressources',
 	'ressources_titre_edition_ressources' => 'Edition de ressource',
@@ -537,6 +539,7 @@ Commentaire: @commentaire@
 	'ressources_libelle_statut_suspendu' => 'En suspend',
 	'ressources_libelle_statut_sorti' => 'D&eacute;saffect&eacute;',
 	'ressources_libelle_commentaires' => 'Commentaires',
+	'ressources_libelle_prix_acquisition' => 'Co&ucirc;t total d\'acquisition (en euros)',
 
 # Prêts
 	#Messages

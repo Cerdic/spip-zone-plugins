@@ -39,7 +39,7 @@ function exec_voir_adherent(){
 			default :
 				$statut='visiteur'; break;
 		}
-		association_onglets(_T('asso:titre_onglet_membres'));
+		onglets_association('titre_onglet_membres');
 		// INFOs
 		if ($adresses[$id_auteur])
 			$infos['adresses'] = $adresses[$id_auteur];
@@ -63,14 +63,11 @@ function exec_voir_adherent(){
 //		echo '<div class="vcard">'. totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos ) .'</div>';
 		// Afficher les champs extras
 		echo '<div style="text-align: center" class="verdana1 spip_xx-small">'. pipeline('afficher_contenu_objet', array ('args'=>array('type'=>'asso_membre', 'id_objet'=>$id_auteur, 'contexte'=>array()), 'data'=>'')) .'</div>';
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-
-		$res = $full ? association_icone('adherent_label_modifier_membre',  generer_url_ecrire('edit_adherent', 'id='.$id_auteur), 'edit.gif') : '';
-		$res .= association_icone('adherent_label_modifier_'.$statut,  generer_url_ecrire('auteur_infos', 'id_auteur='.$id_auteur), 'edit.gif' ); // pas modifier mais voir page...
-		$res .= association_icone('bouton_retour', str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']), 'retour-24.png');
-		echo bloc_des_raccourcis($res);
+		// datation et raccourcis
+		if ($full)
+			$res['adherent_label_modifier_membre'] = array('edit-24.gif', 'edit_adherent', "id=$id_auteur");
+		$res["adherent_label_modifier_$statut"] = array('membre_infos.png', 'auteur_infos', "id_auteur=$id_auteur"); // pas modifier mais voir page...
+		icones_association('', $res);
 		debut_cadre_association('annonce.gif', 'membre', $nom_membre);
 		// Liste des groupes
 		$query = sql_select('g.id_groupe as id_groupe, g.nom as nom', 'spip_asso_groupes g LEFT JOIN spip_asso_groupes_liaisons l ON g.id_groupe=l.id_groupe', 'l.id_auteur='.$id_auteur, '', 'g.nom');

@@ -22,15 +22,13 @@ function exec_edit_destination()
 		echo minipres();
 	} else {
 		$id_destination = intval(_request('id'));
-		association_onglets(_T('asso:plan_comptable'));
+		onglets_association('plan_comptable');
 		// INTRO :
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_destination_op',"id_destination=$id_destination")) );
 		echo totauxinfos_intro(sql_getfetsel('intitule','spip_asso_destination',"id_destination=$id_destination"), 'destination', $id_destination, $infos );
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		echo association_retour();
-		debut_cadre_association(($id_destination?'EuroOff.gif':'EuroOff.gif'), 'destination_nav_ajouter');
+		// datation et raccourcis
+		icones_association('');
+		debut_cadre_association('euro-39.gif', 'destination_nav_ajouter');
 		echo recuperer_fond('prive/editer/editer_asso_destinations', array (
 			'id_destination' => $id_destination,
 		));

@@ -42,14 +42,14 @@
 				<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, env}>
 			[(#ENV{id_pret}|oui)
 				<li class="editer_commentaire_retour">
-					<label for="commentaire_retour"><:asso:prets_libelle_commentaires:></label>
+					<label for="commentaire_retour"><:asso:libelle_commentaire:></label>
 					<textarea name="commentaire_retour" id="commentaire_retour" rows="3">[(#ENV{commentaire_retour})]</textarea>
 				</li>
 			]
 			</ul>
 		</fieldset>
 		<p class="boutons">
-			<input type="submit" value="[(#ENV{id_pret}|?{<:asso:bouton_modifier:>,<:asso:bouton_ajoute:>})]" class="submit" />
+			<input type="submit" value="[(#ENV{id_pret}|?{<:asso:bouton_modifier:>,<:asso:bouton_ajouter:>})]" class="submit" />
 		</p>
 	</form>
 </div>

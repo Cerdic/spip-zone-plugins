@@ -26,7 +26,7 @@ function exec_activites()
 		if(!$annee){
 			$annee = date('Y');
 		}
-		association_onglets(_T('asso:titre_onglet_activite'));
+		onglets_association('titre_onglet_activite');
 		// TOTAUX : nombre d'activites de l'annee en cours repartis par mots-clefs
 		// TOTAUX : nombre d'activites de l'annee en cours repartis par iscriptions
 		$liste_libelles = $liste_effectifs = array();

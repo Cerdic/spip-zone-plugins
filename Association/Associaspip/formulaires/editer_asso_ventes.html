@@ -10,7 +10,7 @@
 		<B_catalogue_produits>
 				<li class="editer_code">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{code})</span>]
-					<label for="catalogue"><:asso:article:></label>
+					<label for="catalogue"><:asso:libelle_article:></label>
 					<select name="code" id="catalogue">
 						<option value="#ENV{code}"></option>
 						[(#REM)<!-- Nota : on recupere le code pour ne pas le perdre s'il s'agit d'une valeur non-entier ou d'un entier inexistant dans la table spip_variantes (cas de code renseigne avant l'activation du plugin)... autrement l'intitule correspondant est selectionne sans souci si la valeur reapparait dans les options ;-) -->]
@@ -30,23 +30,23 @@
 				[(#REM)<!-- Cette table est fournie par le plugin "Catalogue" S'il est installe, on utilise l'ID variante comme code de l'article, et on recupere directement l'intitule (pour le prix on laisse la possibilite d'en saisir un different)... Si non alternative classique... -->]
 				<li class="editer_article">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{article})</span>]
-					<label for="article"><:asso:article:></label>
+					<label for="article"><:asso:libelle_article:></label>
 					<input type="text" name="article" [value="(#ENV{article})"] id="article" class="text" />
 				</li>
 				<li class="editer_code">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{code})</span>]
-					<label for="code"><:asso:code_de_l_article:></label>
+					<label for="code"><:asso:libelle_code:></label>
 					<input type="text" name="code" [value="(#ENV{code})"] id="code"  class="text" />
 				</li>
 		<//B_catalogue_produits>
 				<li class="editer_prix_vente">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{prix_vente})</span>]
-					<label for="prix_vente"><:asso:prix_de_vente_en_e__:></label>
+					<label for="prix_vente"><:asso:libelle_prix_unite:></label>
 					<input type="[(#HTML5|?{number,text})]" name="prix_vente" [value="(#ENV{prix_vente})"] id="prix_vente"  class="number float price" />
 				</li>
 				<li class="editer_date_vente">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_vente})</span>]
-					<label for="date_vente"><:asso:date_aaaa_mm_jj:></label>
+					<label for="date_vente"><:asso:libelle_date:></label>
 					<input type="[(#HTML5|?{date,text})]" name="date_vente" [value="(#ENV{date_vente}|affdate{Y-m-d})"] id="date_vente"  class="date" />
 				</li>
 				<li class="editer_quantite">
@@ -65,14 +65,14 @@
 					<input type="[(#HTML5|?{number,text})]" name="frais_envoi" [value="(#ENV{frais_envoi})"] id="frais_envoi"  class="number float price" />
 				</li>
 				<li class="editer_commentaire">
-					<label for="commentaire"><:asso:commentaires:></label>
+					<label for="commentaire"><:asso:libelle_commentaire:></label>
 					<textarea name="commentaire" id="commentaire"  rows="3">[(#ENV{commentaire})]</textarea>
 				</li>
 			</ul>
 		</fieldset>
 		<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, champs_legende=Paiement, env}>
 		<p class="boutons">
-			<input type="submit" value="<:pass_ok:>" class="submit" />
+			<input type="submit" value="[(#ENV{id_vente}|?{<:asso:bouton_modifier:>,<:asso:bouton_ajouter:>})]" class="submit" />
 		</p>
 	</form>
 </div>

@@ -22,17 +22,24 @@ function exec_exercices()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		association_onglets(_T('asso:exercices_budgetaires_titre'));
+		onglets_association('exercices_budgetaires_titre');
 		// notice
 		echo '';
 		// quelques stats sur les categories
-		echo totauxinfos_stats('tous', 'exercices', array('entete_duree'=>"DATEDIFF(week,debut,fin)", 'mois'=>"MONTH(debut)") );
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		$res = association_icone('ajouter_un_exercice',  generer_url_ecrire('edit_exercice'), 'calculatrice.gif');
-		$res .= association_icone('bouton_retour', generer_url_ecrire('association'), 'retour-24.png');
-		echo bloc_des_raccourcis($res);
+		echo totauxinfos_stats('tous', 'exercices', array('semaines'=>"TIMESTAMPDIFF(week,debut,fin)", 'mois'=>"TIMESTAMPDIFF(month,debut,fin)") );
+		/* portability issue on "DATEDIFF(week,debut,fin)"
+		 * MS SQL Server : "DATEDIFF(day,debut,fin)" & "DATEDIFF(week,debut,fin)" & "DATEDIFF(month,debut,fin)"
+		 * MySQL : "DATEDIFF(debut,fin)" & "TIMESTAMPDIFF(week,debut,fin)" & "TIMESTAMPDIFF(month,debut,fin)"
+		 * Oracle : "fin-debut" & & "MONTHS_BETWEEN(debut,fin)"
+		 *
+		 * converting to epoch <http://www.epochconverter.com/> doesn't help either
+		 * ...or maybe something like "CAST(fin AS TIMESTAMP)-CAST(debut AS TIMETAMP)" ?
+		 * finaly I use ODBC "TIMESTAMPDIFF()" that should be known by latest major rdbms...
+		 * */
+		// datation et raccourcis
+		icones_association(array('association'), array(
+			'ajouter_un_exercice' => array('calculatrice.gif', 'edit_exercice'),
+		) );
 		debut_cadre_association('calculatrice.gif', 'tous_les_exercices');
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_exercices'>\n";
 		echo "<thead>\n<tr>";

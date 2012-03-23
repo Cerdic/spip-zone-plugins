@@ -24,14 +24,13 @@ function exec_edit_exercice()
 		echo minipres();
 	} else {
 		$id_exercice = intval(_request('id'));
-		association_onglets(_T('asso:exercices_budgetaires_titre'));
+		onglets_association('exercices_budgetaires_titre');
 		// INTRO : resume ressource
-//		$infos['categorie_utilisee'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_comptes', ""), )); // bof, le nombre d'operations est deja indique sur la page de comptes por l'exercice selectionne
-		echo totauxinfos_intro(sql_getfetsel('intitule', 'spip_asso_exercices', "id_exercice=$id_exercice" ), 'exercice', $id_exercice, $infos );
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		echo association_retour();
+		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_comptes', ""), )); // bof, le nombre d'operations est deja indique sur la page de comptes por l'exercice selectionne
+		$infos['entete_duree'] = association_dureefr(sql_getfetsel("TIMESTAMPDIFF(day,debut,fin) AS duree_jours", 'spip_asso_exercices', "id_exercice=$id_exercice"), 'D'); // voir note dans "/exec/exercices.php" au sujet de TIMESTAMPDIFF sachant que la simple diffrence "fin-debut" peut donner des resultats surprenants...
+		echo totauxinfos_intro(sql_getfetsel('intitule', 'spip_asso_exercices', "id_exercice=$id_exercice" ), 'exercice', $id_exercice, $infos);
+		// datation et raccourcis
+		icones_association('');
 		debut_cadre_association('calculatrice.gif', 'exercice_budgetaire_titre');
 		echo recuperer_fond('prive/editer/editer_asso_exercices', array (
 			'id_exercice' => $id_exercice

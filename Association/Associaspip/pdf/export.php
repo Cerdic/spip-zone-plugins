@@ -45,7 +45,7 @@ class EXPORT_PDF extends FPDF {
 	var $total_produits;
 
 	function init($var) {
-		$tableau = @unserialize($var);
+		$tableau = unserialize(rawurldecode($var));
 		$this->exercice = $tableau[0];
 		$this->join = $tableau[1];
 		$this->sel = $tableau[2];
@@ -65,7 +65,7 @@ class EXPORT_PDF extends FPDF {
 		$this->SetAuthor('Marcel BOLLA');
 		$this->SetCreator('Associaspip & Fpdf');
 		$this->SetTitle('Module Comptabilite de Associaspip');
-		$this->SetSubject('Compte de Resultat');
+		$this->SetSubject(_T('asso:cpte_resultat_titre_general'));
 	}
 
 	function Footer() {
@@ -76,7 +76,7 @@ class EXPORT_PDF extends FPDF {
 		//Couleur du texte en gris
 		$this->SetTextColor(128);
 		//Date et Numéro de page
-		$this->Cell(0, 10, html_entity_decode(_T('asso:cpte_resultat_pied_page_export_pdf')) . ' - ' . date('d-m-Y') . ' - Page ' . $this->PageNo(), 0, 0, 'C');
+		$this->Cell(0, 10, html_entity_decode(_T('asso:cpte_resultat_pied_page_export_pdf') .' -- '. affdate(date('Y-m-d')) .' -- '. _T('Page') .' '. $this->PageNo()), 0, 0, 'C');
 	}
 
 	function enTete() {
@@ -86,9 +86,14 @@ class EXPORT_PDF extends FPDF {
 		$this->SetDrawColor(128);
 
 		// le logo du site
-		// TODO : traiter le cas ou le site n'a pas de Logo
-		$this->Image(find_in_path('IMG/siteon0.jpg'), $xc, $yc+4, $this->icone_h);
-		$xc += $this->icone_h;
+		$logo = find_in_path('IMG/siteon0.jpg');
+//		$chercher_logo = charger_fonction('chercher_logo', 'inc');
+//		$logo = $chercher_logo(0, 'id_site');
+		if ($logo) {
+			include_spip('inc/filtres_images_mini');
+			$this->Image(image_reduire($logo, $this->icone_h), $xc, $yc+4, $this->icone_h);
+//			$this->Image(image_reduire($logo[0], 60), $xc, $yc+4, $this->icone_h); // attention : que JPeG <http://forum.virtuemart.net/index.php?topic=75616.0>
+		}
 		//Arial gras 22
 		$this->SetFont('Arial', 'B', 22);
 		//Couleurs du cadre, du fond et du texte
@@ -97,7 +102,7 @@ class EXPORT_PDF extends FPDF {
 		//Titre centre
 		$xc += $this->space_h;
 		$this->SetXY($xc, $yc);
-		$this->Cell($this->largeur_pour_titre, 12, html_entity_decode(_T('asso:cpte_resultat_titre_general')), 0, 0, 'C', true);
+		$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 12, html_entity_decode(_T('asso:cpte_resultat_titre_general')), 0, 0, 'C', true);
 		$yc += 12;
 		//Saut de ligne
 		$this->Ln($this->space_v);
@@ -109,7 +114,7 @@ class EXPORT_PDF extends FPDF {
 		$this->SetFillColor(235);
 		//Sous titre Nom de l'association
 		$this->SetXY($xc, $yc);
-		$this->Cell($this->largeur_pour_titre, 6, utf8_decode('Association - '. $GLOBALS['association_metas']['nom']), 0, 0, 'C', true);
+		$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 6, utf8_decode(_T('Association').' : '. $GLOBALS['association_metas']['nom']), 0, 0, 'C', true);
 		$yc += 6;
 		//Saut de ligne
 		$this->Ln($this->space_v/2);
@@ -121,7 +126,7 @@ class EXPORT_PDF extends FPDF {
 		$this->SetFillColor(235);
 		//Sous titre Date début et fin de l'exercice
 		$this->SetXY($xc, $yc);
-		$this->Cell($this->largeur_pour_titre, 6, utf8_decode('Exercice : ' . exercice_intitule($this->exercice)), 0, 0, 'C', true);
+		$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 6, utf8_decode(_T('Exercice').' : ' . sql_getfetsel('intitule','spip_asso_exercices', 'id_exercice='.$this->exercice) ), 0, 0, 'C', true);
 		$yc += 6;
 		//Saut de ligne
 		$this->Ln($this->space_v);
@@ -157,14 +162,14 @@ class EXPORT_PDF extends FPDF {
 		$yc += $this->space_v;
 
 		$query = sql_select(
-			"imputation, SUM(depense) AS valeurs, date_format(date, '%Y') AS annee".$this->sel,
-			'spip_asso_comptes'.$this->join,
-			$this->where,
-			$this->order,
-			'code ASC',
-			'',
-			$this->having.$classe);
-
+			"imputation, SUM(depense) AS valeurs, date_format(date, '%Y') AS annee".$this->sel, // select
+			'spip_asso_comptes '.$this->join, // from
+			$this->where, // where
+			$this->order, // group by
+			$this->order, // order by
+			'', // limit
+			$this->having.$classe // having
+		);
 		$chapitre = '';
 		$i = 0;
 
@@ -175,16 +180,14 @@ class EXPORT_PDF extends FPDF {
 			// positionne le curseur
 			$this->SetXY($xc, $yc);
 
-			$valeurs = $data['valeurs'];
 			$new_chapitre = substr($data['code'], 0, 2);
-
 			if ($chapitre!=$new_chapitre) {
 				//Couleur de fond
 				$this->SetFillColor(225);
 
 				$this->Cell(20, 6, utf8_decode($new_chapitre), 0, 0, 'L', true);
 
-				$this->Cell(($this->largeur_utile)-(2*$this->space_h+20), 6, utf8_decode(association_plan_comptable_complet($new_chapitre)), 0, 0, 'L', true);
+				$this->Cell(($this->largeur_utile)-(2*$this->space_h+20), 6, utf8_decode(($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))), 0, 0, 'L', true);
 
 				$chapitre = $new_chapitre;
 
@@ -201,10 +204,9 @@ class EXPORT_PDF extends FPDF {
 			$this->Cell(20, 6, utf8_decode($data['code']), 0, 0, 'R', true);
 
 			$this->Cell(($this->largeur_utile)-(2*$this->space_h+50), 6, utf8_decode($data['intitule']), 0, 0, 'L', true);
+			$this->Cell(30, 6, association_nbrefr($data['valeurs']), 0, 0, 'R', true);
 
-			$this->Cell(30, 6, number_format($valeurs, 2, ',', ' '), 0, 0, 'R', true);
-
-			$this->total_charges += $valeurs;
+			$this->total_charges += $data['valeurs'];
 
 			//Saut de ligne
 			$this->Ln();
@@ -217,9 +219,7 @@ class EXPORT_PDF extends FPDF {
 		$this->SetFillColor(215);
 
 		$this->Cell(($this->largeur_utile)-(2*$this->space_h+30), 6, html_entity_decode(_T('asso:cpte_resultat_total_charges')), 1, 0, 'R', true);
-
-		$this->Cell(30, 6, number_format($this->total_charges, 2, ',', ' '), 1, 0, 'R', true);
-
+		$this->Cell(30, 6, association_nbrefr($this->total_charges), 1, 0, 'R', true);
 		$yc += 6;
 
 		//Saut de ligne
@@ -248,7 +248,6 @@ class EXPORT_PDF extends FPDF {
 
 		//Titre centre
 		$this->SetXY($xc, $yc);
-
 		$this->Cell($this->largeur_utile, 10, html_entity_decode(_T('asso:cpte_resultat_titre_produits')), 0, 0, 'C');
 		$yc += 10;
 
@@ -257,14 +256,14 @@ class EXPORT_PDF extends FPDF {
 		$yc += $this->space_v;
 
 		$query = sql_select(
-			"imputation, SUM(recette) AS valeurs, date_format(date, '%Y') AS annee".$this->sel,
-			'spip_asso_comptes'.$this->join,
-			$this->where,
-			$this->order,
-			'code ASC',
-			'',
-			$this->having.$classe);
-
+			"imputation, SUM(recette) AS valeurs, date_format(date, '%Y') AS annee".$this->sel, // select
+			'spip_asso_comptes '.$this->join, // from
+			$this->where, // where
+			$this->order, // group by
+			$this->order, // order by
+			'', // limit
+			$this->having.$classe // having
+		);
 		$chapitre = '';
 		$i = 0;
 
@@ -275,16 +274,14 @@ class EXPORT_PDF extends FPDF {
 			// positionne le curseur
 			$this->SetXY($xc, $yc);
 
-			$valeurs = $data['valeurs'];
 			$new_chapitre = substr($data['code'], 0, 2);
-
 			if ($chapitre!=$new_chapitre) {
 				//Couleur de fond
 				$this->SetFillColor(225);
 
 				$this->Cell(20, 6, utf8_decode($new_chapitre), 0, 0, 'L', true);
 
-				$this->Cell(($this->largeur_utile)-(2*$this->space_h+20), 6, utf8_decode(association_plan_comptable_complet($new_chapitre)), 0, 0, 'L', true);
+				$this->Cell(($this->largeur_utile)-(2*$this->space_h+20), 6, utf8_decode(($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))), 0, 0, 'L', true);
 
 				$chapitre = $new_chapitre;
 
@@ -301,10 +298,9 @@ class EXPORT_PDF extends FPDF {
 			$this->Cell(20, 6, utf8_decode($data['code']), 0, 0, 'R', true);
 
 			$this->Cell(($this->largeur_utile)-(2*$this->space_h+50), 6, utf8_decode($data['intitule']), 0, 0, 'L', true);
+			$this->Cell(30, 6, association_nbrefr($data['valeurs']), 0, 0, 'R', true);
 
-			$this->Cell(30, 6, number_format($valeurs, 2, ',', ' '), 0, 0, 'R', true);
-
-			$this->total_produits += $valeurs;
+			$this->total_produits += $data['valeurs'];
 
 			//Saut de ligne
 			$this->Ln();
@@ -317,10 +313,9 @@ class EXPORT_PDF extends FPDF {
 		$this->SetFillColor(215);
 
 		$this->Cell(($this->largeur_utile)-(2*$this->space_h+30), 6, html_entity_decode(_T('asso:cpte_resultat_total_produits')), 1, 0, 'R', true);
-
-		$this->Cell(30, 6, number_format($this->total_produits, 2, ',', ' '), 1, 0, 'R', true);
-
+		$this->Cell(30, 6, association_nbrefr($this->total_produits), 1, 0, 'R', true);
 		$yc += 6;
+
 		//Saut de ligne
 		$this->Ln($this->space_v);
 		$yc += $this->space_v;
@@ -338,22 +333,34 @@ class EXPORT_PDF extends FPDF {
 		$y_orig = $this->yy+$this->space_v;
 		$yc = $y_orig+$this->space_v;
 
+		//Arial gras 14
+		$this->SetFont('Arial', 'B', 14);
+
+		//Couleurs du cadre, du fond et du texte
+		$this->SetFillColor(235);
+		$this->SetTextColor(0);
+
+		//Titre centre
+		$this->SetXY($xc, $yc);
+
+		$this->Cell($this->largeur_utile, 10, html_entity_decode(_T('asso:cpte_resultat_titre_resultat')), 0, 0, 'C');
+		$yc += 10;
+
+		//Saut de ligne
+		$this->Ln($this->space_v);
+		$yc += $this->space_v;
+
 		//Couleur de fond
 		$this->SetFillColor(215);
 
 		$res = $this->total_produits-$this->total_charges;
-
 		$this->SetXY($xc, $yc);
-
 		if ($res<0) {
 			$this->Cell(($this->largeur_utile)-(2*$this->space_h+30), 6, html_entity_decode(_T('asso:cpte_resultat_perte')), 1, 0, 'R', true);
-		}
-		else {
+		} else {
 			$this->Cell(($this->largeur_utile)-(2*$this->space_h+30), 6, html_entity_decode(_T('asso:cpte_resultat_benefice')), 1, 0, 'R', true);
 		}
-
-		$this->Cell(30, 6, number_format($res, 2, ',', ' '), 1, 0, 'R', true);
-
+		$this->Cell(30, 6, association_nbrefr($res), 1, 0, 'R', true);
 		$yc += 6;
 
 		//Saut de ligne
@@ -391,16 +398,15 @@ class EXPORT_PDF extends FPDF {
 		$yc += $this->space_v;
 
 		$charges_evaluees = $produits_evalues = 0;
-
 		$query = sql_select(
-			"imputation, SUM(depense) AS charge_evaluee, SUM(recette) AS produit_evalue, date_format(date, '%Y') AS annee".$this->sel,
-			'spip_asso_comptes'.$this->join,
-				$this->where,
-				$this->order,
-				"code ASC",
-				"",
-				$this->having.$classe);
-
+			"imputation, SUM(depense) AS charge_evaluee, SUM(recette) AS produit_evalue, date_format(date, '%Y') AS annee".$this->sel, // select
+			'spip_asso_comptes '.$this->join, // from
+			$this->where, // where
+			$this->order, // group by
+			$this->order, // order by
+			'', // limit
+			$this->having.$classe // having
+		);
 		$chapitre = '';
 		$i = 0;
 
@@ -411,15 +417,12 @@ class EXPORT_PDF extends FPDF {
 			// positionne le curseur
 			$this->SetXY($xc, $yc);
 
-			$charge_evaluee = $data['charge_evaluee'];
-			$produit_evalue = $data['produit_evalue'];
 			$new_chapitre = substr($data['code'], 0, 2);
-
 			if ($chapitre!=$new_chapitre) {
 				//Couleur de fond
 				$this->SetFillColor(225);
 				$this->Cell(20, 6, utf8_decode($new_chapitre), 0, 0, 'L', true);
-				$this->Cell(($this->largeur_utile)-(2*$this->space_h+20), 6, utf8_decode(association_plan_comptable_complet($new_chapitre)), 0, 0, 'L', true);
+				$this->Cell(($this->largeur_utile)-(2*$this->space_h+20), 6, utf8_decode(($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))), 0, 0, 'L', true);
 				$chapitre = $new_chapitre;
 				//Saut de ligne
 				$this->Ln();
@@ -433,13 +436,12 @@ class EXPORT_PDF extends FPDF {
 			$this->SetXY($xc, $yc);
 			$this->Cell(20, 6, utf8_decode($data['code']), 0, 0, 'R', true);
 			$this->Cell(($this->largeur_utile)-(2*$this->space_h+50), 6, utf8_decode($data['intitule']), 0, 0, 'L', true);
-			if ($charge_evaluee>0) {
-				$this->Cell(30, 6, number_format($charge_evaluee, 2, ',', ' '), 0, 0, 'R', true);
-				$charges_evaluees += $charge_evaluee;
-			}
-			else {
-				$this->Cell(30, 6, number_format($produit_evalue, 2, ',', ' '), 0, 0, 'R', true);
-				$produits_evalues += $produit_evalue;
+			if ($data['charge_evaluee']>0) {
+				$this->Cell(30, 6, association_nbrefr($data['charge_evaluee']), 0, 0, 'R', true);
+				$charges_evaluees += $data['charge_evaluee'];
+			} else {
+				$this->Cell(30, 6, association_nbrefr($data['produit_evalue']), 0, 0, 'R', true);
+				$produits_evalues += $data['produit_evalue'];
 			}
 			//Saut de ligne
 			$this->Ln();
@@ -453,13 +455,13 @@ class EXPORT_PDF extends FPDF {
 		$this->SetXY($xc, $yc);
 
 		$this->Cell(($this->largeur_utile)/2-(2*$this->space_h+30), 6, html_entity_decode(_T('asso:cpte_resultat_total_charges_evaluees')), 1, 0, 'R', true);
-		$this->Cell(30, 6, number_format($charges_evaluees, 2, ',', ' '), 1, 0, 'R', true);
+		$this->Cell(30, 6, association_nbrefr($charges_evaluees), 1, 0, 'R', true);
 
 		// positionne le curseur sur l'autre demi page
 		$xc += ( $this->largeur_utile)/2;
 		$this->SetXY($xc, $yc);
 		$this->Cell(($this->largeur_utile)/2-(2*$this->space_h+30), 6, html_entity_decode(_T('asso:cpte_resultat_total_produits_evalues')), 1, 0, 'R', true);
-		$this->Cell(30, 6, number_format($produits_evalues, 2, ',', ' '), 1, 0, 'R', true);
+		$this->Cell(30, 6, association_nbrefr($produits_evalues), 1, 0, 'R', true);
 
 		$yc += 6;
 		//Saut de ligne
@@ -471,6 +473,10 @@ class EXPORT_PDF extends FPDF {
 
 		// on sauve la position du curseur dans la page
 		$this->yy = $yc;
+	}
+
+	function leFichier() {
+		$this->Output('compte_resultats_'.$this->exercice.'.pdf', 'I');
 	}
 
 }

@@ -23,7 +23,7 @@ function exec_action_prets()
 	} else {
 		$id_pret = intval(_request('id_pret'));
 		$id_ressource = intval(_request('id_ressource'));
-		association_onglets(_T('asso:titre_onglet_prets'));
+		onglets_association('titre_onglet_prets');
 		$data = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
 		$infos['ressources_libelle_code'] = $data['code'];
 		if (is_numeric($data['statut'])) { /* utilisation des 3 nouveaux statuts numeriques (gestion de quantites/exemplaires) */
@@ -59,11 +59,9 @@ function exec_action_prets()
 		$infos['statut'] =  '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-'.$puce.'.gif" title="'.$data['statut'].'" alt="" /> '. _T("asso:ressource_statut_$type");
 		$infos['nombre_prets'] = sql_countsel('spip_asso_prets', "id_ressource=$id_ressource");
 		echo totauxinfos_intro($data['intitule'], 'ressource', $id_ressource, $infos );
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		echo association_retour();
-		debut_cadre_association('pret1.gif', 'prets_titre_suppression_prets');
+		// datation et raccourcis
+		icones_association('');
+		debut_cadre_association('pret-24.gif', 'prets_titre_suppression_prets');
 		echo bloc_confirmer_suppression('pret', "$id_pret-$id_ressource");
 		fin_page_association();
 	}

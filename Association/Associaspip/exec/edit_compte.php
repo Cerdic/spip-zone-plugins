@@ -28,14 +28,12 @@ function exec_edit_compte()
 		echo minipres();
 	} else {
 		$id_compte = intval(_request('id'));
-		association_onglets(_T('asso:titre_onglet_comptes'));
+		onglets_association('titre_onglet_comptes');
 		// INTRO : resume compte
 		echo totauxinfos_intro('', 'compte', $id_compte, $infos );
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		echo association_retour();
-		debut_cadre_association(($id_compte?'compts.gif':'ajout_don.png'), 'modification_des_comptes');
+		// datation et raccourcis
+		icones_association('');
+		debut_cadre_association('compts.gif', 'modification_des_comptes');
 		echo recuperer_fond('prive/editer/editer_asso_comptes', array (
 			'id_compte' => $id_compte
 		));

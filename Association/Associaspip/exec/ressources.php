@@ -21,7 +21,7 @@ function exec_ressources()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		association_onglets(_T('asso:titre_onglet_prets'));
+		onglets_association('titre_onglet_prets');
 		// INTRO : presentation du module
 		echo '<p>'._T('asso:ressources_info').'</p>';
 		// TOTAUX : nombre de ressources par statut
@@ -42,11 +42,11 @@ rdm */
 		$recettes = sql_getfetsel('SUM(duree*prix_unitaire) AS somme_recettes', 'spip_asso_prets', "DATE_FORMAT('date_sortie', '%Y')=DATE_FORMAT(NOW(), '%Y') ");
 		$depences = sql_getfetsel('SUM(prix_acquisition) AS somme_depences', 'spip_asso_ressources', "DATE_FORMAT('date_acquisition', '%Y')=DATE_FORMAT(NOW(), '%Y') ");
 		echo totauxinfos_montants('ressources', $recettes, $depenses);
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		echo bloc_des_raccourcis(association_icone('ressources_nav_ajouter',  generer_url_ecrire('edit_ressource'), 'ajout_don.png'));
-		debut_cadre_association('pret1.gif', 'ressources_titre_liste_ressources');
+		// datation et raccourcis
+		icones_association(array(), array(
+			'ressources_nav_ajouter' => array('ajout-24.png', 'edit_ressource'),
+		) );
+		debut_cadre_association('pret-24.gif', 'ressources_titre_liste_ressources');
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_ressources'>\n";
 		echo "<thead>\n<tr>";
 		echo '<th>'._T('asso:entete_id').'</th>';
@@ -95,7 +95,7 @@ rdm */
 			echo '<td class="text">'.$data['intitule'].'</td>';
 			echo '<td class="text">'.$data['code'].'</td>';
 			echo '<td class="decimal">'.association_prixfr($data['pu']).'</td>';
-			echo '<td class="action">', association_bouton('ressources_nav_supprimer', 'poubelle-12.gif', 'action_ressources', 'id='.$data['id_ressource']), '</td>';
+			echo '<td class="action">', association_bouton('ressources_nav_supprimer', 'suppr-12.gif', 'action_ressources', 'id='.$data['id_ressource']), '</td>';
 			echo '<td class="action">', association_bouton('ressources_nav_editer', 'edit-12.gif', 'edit_ressource', 'id='.$data['id_ressource']), '</td>';
 			echo '<td class="action">', association_bouton('prets_nav_gerer', 'voir-12.png', 'prets', 'id='.$data['id_ressource']), '</td>';
 			echo "</tr>\n";

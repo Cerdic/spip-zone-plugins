@@ -1,5 +1,5 @@
 <!--#hierarchie-->
-#ONGLETS_ASSOCIATION{#VAL{asso:editer_asso_metas_utilisateur}|_T}
+#ONGLETS_ASSOCIATION{editer_asso_metas_utilisateur}
 <!--/#hierarchie-->
 
 <!--#navigation-->
@@ -54,7 +54,7 @@
 <BOUCLE_metas(ASSOCIATION_METAS){nom LIKE meta_utilisateur_%}{par nom}>
 	    <tr>
 		<td class="text">[(#NOM|replace{^meta_utilisateur_}|replace{_,&nbsp;})]</td>
-		<td class="action"><a title="<:asso:supprimer_meta_utilisateur:>" href="#URL_ECRIRE{supprimer_asso_meta_utilisateur,nom_meta_ut=#NOM}"><img src="#CHEMIN{img_pack/poubelle-12.gif}"/></a></td>
+		<td class="action"><a title="<:asso:supprimer_meta_utilisateur:>" href="#URL_ECRIRE{supprimer_asso_meta_utilisateur,nom_meta_ut=#NOM}"><img src="#CHEMIN{img_pack/suppr-12.gif}"/></a></td>
 		<td class="action"><a title="<:asso:editer_meta_utilisateur:>" href="#URL_ECRIRE{editer_asso_meta_utilisateur,nom_meta_ut=#NOM}"><img src="#CHEMIN{img_pack/edit-12.gif}"/></a></td>
 	    </tr>
 </BOUCLE_metas>

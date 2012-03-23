@@ -27,18 +27,16 @@ function exec_action_dons()
 			include_spip('inc/minipres');
 			echo minipres(_T('zxml_inconnu_id') . $id_don);
 		} else {
-			association_onglets(_T('asso:titre_onglet_dons'));
+			onglets_association('titre_onglet_dons');
 			// info
 			$don = sql_fetsel('*', 'spip_asso_dons', "id_don=$id_don");
 			$infos['argent'] = association_prixfr($don['argent']);
 			$infos['colis'] = ($don['valeur'] ? '('.association_prixfr($don['valeur']).')<br />' : '') .$don['colis'];
 			$onfos['contrepartie'] = $don['contrepartie'];
 			totauxinfos_intro(association_calculer_lien_nomid($don['bienfaiteur'],$don['id_adherent']), 'don', $id_don, $infos );
-			// datation
-			echo association_date_du_jour();
-			echo fin_boite_info(true);
-			echo association_retour();
-			debut_cadre_association('dons.gif', 'action_sur_les_dons');
+			// datation et raccourcis
+			icones_association('');
+			debut_cadre_association('dons-24.gif', 'action_sur_les_dons');
 			echo bloc_confirmer_suppression('don', $id_don);
 			fin_page_association();
 		}

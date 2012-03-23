@@ -17,15 +17,12 @@ include_spip ('inc/navigation_modules');
 
 function exec_edit_relances()
 {
-	association_onglets(_T('asso:titre_onglet_membres'));
+	onglets_association('titre_onglet_membres');
 	// notice
 	echo _T('asso:aide_relances'); //!\ il faut en rajouter
-	// datation
-	echo association_date_du_jour();
-	echo fin_boite_info(true);
-	$res = association_icone('bouton_retour',  generer_url_ecrire('adherents'), 'retour-24.png');
-	echo bloc_des_raccourcis($res);
-	debut_cadre_association('ico_panier.png', 'tous_les_membres_a_relancer');
+	// datation et raccourcis
+	icones_association(array('adherents'));
+	debut_cadre_association('relance-24.png', 'tous_les_membres_a_relancer');
 	$statut_interne = _request('statut_interne');
 	if (!$statut_interne)
 		$statut_interne = 'echu';

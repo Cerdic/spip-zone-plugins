@@ -25,7 +25,7 @@ function exec_adherents()
 		$critere = request_statut_interne(); // peut appeler set_request
 		$statut_interne = _request('statut_interne');
 		$lettre = _request('lettre');
-		association_onglets(_T('asso:titre_onglet_membres'));
+		onglets_association('titre_onglet_membres');
 		// TOTAUX : effectifs par statuts
 		$membres = $GLOBALS['association_liste_des_statuts'];
 		array_shift($membres); // on sort les anciens membres
@@ -39,17 +39,15 @@ function exec_adherents()
 		// TOTAUX : montants des cotisations durant l'annee en cours
 		$data = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT('date', '%Y')=DATE_FORMAT(NOW(), '%Y') AND imputation=".sql_quote($GLOBALS['association_metas']['pc_cotisations']) );
 		echo totauxinfos_montants(_T('asso:cotisations'), $data['somme_recettes'], $data['somme_depenses']);
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		$res .= association_icone('gerer_les_groupes',  generer_url_ecrire('groupes'), 'annonce.gif',  '');
-		$res .= association_icone('menu2_titre_relances_cotisations',  generer_url_ecrire('edit_relances'), 'ico_panier.png');
-		$res .= association_icone('synchronise_asso_membre_lien',  generer_url_ecrire('synchroniser_asso_membres'), 'reload.png');
-		echo bloc_des_raccourcis($res);
+		// datation et raccourcis
+		$res['gerer_les_groupes'] = array('annonce.gif', 'groupes');
+		$res['menu2_titre_relances_cotisations'] = array('relance-24.png', 'edit_relances');
+		$res['synchronise_asso_membre_lien'] = array('reload-32.png', 'synchroniser_asso_membres');
+		icones_association(array(), $res);
 		if ( test_plugin_actif('FPDF') && test_plugin_actif('COORDONNEES') ) { // etiquettes
 			echo debut_cadre_enfonce('',true);
 			echo recuperer_fond('prive/inc_cadre_etiquette');
-			echo fin_cadre_enfonce();
+			fin_cadre_enfonce();
 		}
 		//Filtre ID et groupe : si le filtre id est actif, on ignore le filtre groupe
 		$id = intval(_request('id'));
@@ -67,7 +65,7 @@ function exec_adherents()
 			echo debut_cadre_enfonce('',true);
 			echo '<h3>'. _T('plugins_vue_liste') .'</h3>';
 			echo adherents_table($liste_id_auteurs);
-			echo fin_cadre_enfonce();
+			fin_cadre_enfonce();
 		}
 		debut_cadre_association('annonce.gif', 'adherent_titre_liste_actifs');
 		echo "<table width='100%' class='asso_tablo_filtres'>\n";
@@ -95,8 +93,8 @@ function exec_adherents()
 		}
 		// FILTRES
 		//Filtre groupes
-		if ( sql_countsel('spip_asso_groupes', '') ) {
-#		if ($GLOBALS['association_metas']['aff_groupes']=='on') {
+		if ( sql_countsel('spip_asso_groupes', '') ) { // ne proposer que s'il y a des groupes definis
+#		if ($GLOBALS['association_metas']['aff_groupes']) { // ne proposer que si on affiche les groupes ?? (on peut vouloir filtrer par groupe sans pour autant les afficher donc desactive)
 			echo '</td><td width="25%" class="formulaire">';
 			echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
 			echo '<input type="hidden" name="exec" value="adherents" />';
@@ -163,7 +161,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe,
 		if ($logo) {
 			$logo = image_reduire($logo[0], 60);
 		}else{
-			$logo = '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'ajout.gif"  width="10"/>' ;
+			$logo = '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'membre-60.gif"  width="10"/>' ;
 		}
 		if (empty($data['email'])) {
 			$mail = $data['nom_famille'];

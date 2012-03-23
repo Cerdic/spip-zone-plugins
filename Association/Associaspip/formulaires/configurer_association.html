@@ -71,8 +71,8 @@
 					</ul>
 				</fieldset>
 			</li>
-[(#REM)<!-- DEB-conf :: petit morceau lie au CERFA_11580*3 -->]
-	[(#REM)<!-- Cette fonctionnalite n'est possible que si le plugin "FPDF" est active... -->]
+[(#REM)<!-- DEB-conf :: petit morceau lie au CERFA_11580*3
+Cette fonctionnalite n'est possible que si le plugin "FPDF" est active... -->]
 		[(#PLUGIN{fpdf}|oui)
 			<li class="fieldset">
 				<!-- Options de recus fiscaux globaux -->
@@ -222,7 +222,9 @@
 					</ul>
 				</fieldset>
 			</li>
-[(#REM)<!-- DEB-conf :: gros morceau lie a la compta -->]
+[(#REM)<!-- DEB-conf :: gros morceau lie a la compta
+Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" est active... -->]
+		<B_plan_comptable>
 			<li class="fieldset">
 				<!-- Options du plugin: gestion comptable -->
 				<fieldset>
@@ -235,7 +237,6 @@
 								<label for="plan_comptable_prerenseigne"><:asso:config_plan_comptable_prerenseigne:></label>
 							</div>
 						</li>
-					<B_classe_banques>
 						<li class="editer_comptes">
 							<div class="choix">
 								<input name= "comptes" [(#ENV{comptes}|oui) checked="checked"] id="comptes" type="checkbox"/>
@@ -303,18 +304,10 @@
 						</BOUCLE_classe_contributions_volontaires>
 							</select>
 						</li>
-					</B_classe_banques>
-						<li class="editer_comptes">
-							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_pour_activer_ce_module:></a>
-							<input type="hidden" name="comptes" id="comptes" value="" /> [(#REM)<!-- pour etre bien sur de desactiver la gestion comptable -->]
-						</li>
-					<//B_classe_banques>
 					</ul>
 				</fieldset>
 			</li>
-	[(#REM)<!-- Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" est active... -->]
-		<B_plan_comptable>
-		[(#REM)<!-- S'il n'y a pas des comptes actifs, on peut configurer les modules lies a la compta (mais il faut activer la compta pour activer ces modules) ... -->]
+		[(#REM)<!-- S'il y a des comptes actifs, on peut configurer la compta et les les modules lies a la compta (mais il faut activer la compta pour activer ces modules) ... -->]
 		<BOUCLE_plan_comptable(ASSO_PLAN){active=1}>
 		</BOUCLE_plan_comptable>
 			<li class="fieldset">
@@ -366,9 +359,10 @@
 					<ul>
 						<li class="editer_dons">
 							<div class="choix">
-								[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
+								[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>][(#ENV{comptes}|oui)
 								<input type="checkbox" name="dons" [(#ENV{dons}|oui) checked="checked"] id="dons" />
 								<label for="dons"><:asso:config_libelle_activer_dons:></label>
+								]
 							</div>
 						</li>
 					</ul>
@@ -433,9 +427,10 @@
 					<ul>
 						<li class="editer_ventes">
 							<div class="choix">
-								[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
+								[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>][(#ENV{comptes}|oui)
 								<input type="checkbox" name="ventes" [(#ENV{ventes}|oui) checked="checked"] id="ventes" />
 								<label for="ventes"><:asso:config_libelle_activer_ventes:></label>
+								]
 							</div>
 						</li>
 					</ul>
@@ -505,9 +500,10 @@
 						<li class="editer_activites">
 						[(#PLUGIN{agenda}|?{
 							<div class="choix">
-								[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
+								[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>][(#ENV{comptes}|oui)
 								<input type="checkbox" name="activites" [(#ENV{activites}|oui) checked="checked"] id="activites" />
 								<label for="activites"><:asso:config_libelle_activer_activites:></label>
+								]
 							</div>
 						,
 							<span class="erreur_message"><:asso:installer_et_activer_le_plugin_Agenda2_pour_activer_ce_module:></span>
@@ -556,9 +552,10 @@
 					<ul>
 						<li class="editer_prets">
 							<div class="choix">
-								[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
+								[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>][(#ENV{comptes}|oui)
 								<input type="checkbox" name="prets" [(#ENV{prets}|oui) checked="checked"] id="prets" />
-								<label for="prets"><:asso:config_libelle_activer_prets:></label><br />
+								<label for="prets"><:asso:config_libelle_activer_prets:></label>
+								]
 							</div>
 						</li>
 					</ul>
@@ -639,8 +636,9 @@
 			<li class="fieldset">
 				<fieldset>
 					<ul>
-						<li class="erreur">
-							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
+						<li class="editer_comptes">
+							<a class="spip_form_erreur" href="#URL_ECRIRE{plan}"><:asso:erreur_creer_un_plan_pour_activer_ce_module:></a>
+							<input type="hidden" name="comptes" id="comptes" value="" /> [(#REM)<!-- pour etre bien sur de desactiver la gestion comptable -->]
 						</li>
 					</ul>
 				</fieldset>

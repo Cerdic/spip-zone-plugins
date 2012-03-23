@@ -22,20 +22,18 @@ function exec_action_plan()
 		echo minipres();
 	} else {
 		$id_plan = intval(_request('id'));
-		association_onglets(_T('asso:plan_comptable'));
+		onglets_association('plan_comptable');
 		// info
 		$plan = sql_fetsel('*', 'spip_asso_plan', "id_plan=$id_plan");
 		$infos['entete_code'] = $plan['code'];
 		$infos['solde_initial'] = association_prixfr($plan['solde_anterieur']);
 		$infos['entete_date'] = association_datefr($plan['date_anterieure']);
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_comptes',"imputation='$plan[code]' OR journal='$plan[code]'")) );
-		totauxinfos_intro($plan['intitule'], 'plan', $id_plan, $infos );
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		echo association_retour();
-		debut_cadre_association('EuroOff.gif', 'suppression_de_compte');
-		echo bloc_confirmer_suppression('plan', $id_plan);
+		echo totauxinfos_intro($plan['intitule'], 'plan', $id_plan, $infos );
+		// datation et raccourcis
+		icones_association('');
+		debut_cadre_association('euro-39.gif', 'suppression_de_compte');
+		echo bloc_confirmer_suppression('plan', $id_plan,'plan');
 		fin_page_association();
 	}
 }

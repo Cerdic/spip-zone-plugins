@@ -22,13 +22,11 @@ function exec_edit_vente()
 		echo minipres();
 	} else {
 		$id_vente = intval(_request('id'));
-		association_onglets(_T('asso:titre_onglet_ventes'));
+		onglets_association('titre_onglet_ventes');
 		// info
 		echo totauxinfos_intro('', 'vente', $id_vente);
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		echo association_retour();
+		// datation et raccourcis
+		icones_association('');
 		debut_cadre_association('ventes.gif', 'ressources_titre_mise_a_jour');
 		echo recuperer_fond('prive/editer/editer_asso_ventes', array (
 			'id_vente' => $id_vente

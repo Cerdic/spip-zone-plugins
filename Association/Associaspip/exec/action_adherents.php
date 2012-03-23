@@ -24,13 +24,11 @@ function exec_action_adherents()
 		$id_auteurs = _request('id_auteurs');
 		$action_adherents = _request('action_adherents');
 		if ($action_adherents && $id_auteurs && is_array($id_auteurs)) {
-			association_onglets(_T('asso:titre_onglet_membres'));
+			onglets_association('titre_onglet_membres');
 			// info
 			echo totauxinfos_intro(_L('confirmation'));
-			// datation
-			echo association_date_du_jour();
-			echo fin_boite_info(true);
-			echo bloc_des_raccourcis(association_icone('bouton_retour',  generer_url_ecrire('adherents'), 'retour-24.png'));
+			// datation et raccourcis
+			icones_association(array('adherents'));
 			if ($action_adherents=='desactive') {
 				$statut_courant = _request('statut_courant');
 				if($statut_courant==='sorti'){

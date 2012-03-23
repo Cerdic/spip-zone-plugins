@@ -24,20 +24,17 @@ function exec_ajout_cotisation()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		association_onglets(_T('asso:titre_onglet_membres'));
+		onglets_association('titre_onglet_membres');
 		// info : membre et categorie par defaut
 		$categorie = sql_fetsel('*', 'spip_asso_categories', 'id_categorie='. intval($row['categorie']));
 		$infos['adherent_libelle_categorie'] = $categorie['libelle'];
 		$infos['entete_montant'] = association_prixfr($categorie['cotisation']);
 		$infos['adherent_libelle_validite'] = association_datefr($row['validite']);
 		echo totauxinfos_intro(htmlspecialchars(association_calculer_nom_membre($row['sexe'], $row['prenom'], $row['nom_famille'])), 'membre', $id_auteur, $infos );
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		$res = association_icone('voir_adherent',  generer_url_ecrire('voir_adherent', 'id='.$id_auteur), 'edit.gif' ); // item de langue...
-		$res .= association_icone('bouton_retour', str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']), 'retour-24.png');
-//		echo bloc_des_raccourcis($res);
-		echo association_retour();
+		// datation et raccourcis
+		icones_association('', array(
+			'voir_adherent' => array('edit-24.gif', 'voir_adherent', "id=$id_auteur"), // item de langue...
+		));
 		debut_cadre_association('annonce.gif', 'nouvelle_cotisation');
 		echo recuperer_fond('prive/editer/editer_cotisations', array (
 			'id_auteur' => $id_auteur,

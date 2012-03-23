@@ -22,14 +22,12 @@ function exec_edit_categorie()
 			echo minipres();
 	} else {
 		$id_categorie = intval(_request('id'));
-		association_onglets(_T('asso:categories_de_cotisations'));
+		onglets_association('categories_de_cotisations');
 		// INTRO : resume ressource
 		$infos['entete_utilisee'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_membres', "categorie=$id_categorie"), ));
 		echo totauxinfos_intro(sql_getfetsel('libelle', 'spip_asso_categories', "id_categorie=$id_categorie" ), 'categorie', $id_categorie, $infos );
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		echo association_retour();
+		// datation et raccourcis
+		icones_association('');
 		debut_cadre_association('calculatrice.gif', 'categories_de_cotisations');
 		echo recuperer_fond('prive/editer/editer_asso_categories', array (
 			'id_categorie' => $id_categorie

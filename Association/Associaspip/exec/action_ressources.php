@@ -22,7 +22,7 @@ function exec_action_ressources()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		association_onglets(_T('asso:titre_onglet_prets'));
+		onglets_association('titre_onglet_prets');
 		// INTRO : resume ressource
 		$data = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource" ) ;
 		$infos['ressources_libelle_code'] = $data['code'];
@@ -61,11 +61,9 @@ function exec_action_ressources()
 		echo totauxinfos_intro($data['intitule'], 'ressource', $id_ressource, $infos ); // indice de popularite
 		// STATS sur la duree et le montant des emprunts
 		echo totauxinfos_stats('prets', 'prets', array('entete_duree'=>'duree','entete_montant'=>'duree*prix_unitaire',), "id_ressource=$id_ressource");
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		echo association_retour();
-		debut_cadre_association('pret1.gif', 'ressources_titre_suppression_ressources');
+		// datation et raccourcis
+		icones_association('');
+		debut_cadre_association('pret-24.gif', 'ressources_titre_suppression_ressources');
 		echo bloc_confirmer_suppression('ressource', $id_ressource );
 		fin_page_association();
 	}

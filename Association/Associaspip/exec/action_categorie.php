@@ -21,7 +21,7 @@ function exec_action_categorie()
 		echo minipres();
 	} else {
 		$id_categorie=intval(_request('id'));
-		association_onglets(_T('asso:categories_de_cotisations'));
+		onglets_association('categories_de_cotisations');
 		// INTRO : resume ressource
 		$categorie = sql_fetsel('*', 'spip_asso_categories', "id_categorie=$id_categorie" );
 		$infos['entete_code'] = $categorie['valeur'];
@@ -29,10 +29,8 @@ function exec_action_categorie()
 		$infos['entete_montant'] = association_prixfr($categorie['cotisation']);
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_membres', "categorie=$id_categorie"), ));
 		echo totauxinfos_intro($categorie['libelle'], 'categorie', $id_categorie, $infos );
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		echo bloc_des_raccourcis(association_icone('bouton_retour', generer_url_ecrire('categories'), 'retour-24.png'));
+		// datation et raccourcis
+		icones_association(array('categories'));
 		debut_cadre_association('calculatrice.gif', 'categories_de_cotisations');
 		echo bloc_confirmer_suppression('categorie', $id_categorie);
 		fin_page_association();

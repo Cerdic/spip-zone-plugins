@@ -28,7 +28,7 @@ function exec_edit_adherent()
 			echo minipres(_T('zxml_inconnu_id') . $id_auteur);
 		} else {
 //			include_spip ('inc/navigation');
-			association_onglets(_T('asso:titre_onglet_membres'));
+			onglets_association('titre_onglet_membres');
 			include_spip('inc/association_coordonnees');
 			$nom_membre = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
 			$adresses = association_formater_adresses(array($id_auteur));
@@ -51,10 +51,8 @@ function exec_edit_adherent()
 			if ($telephones[$id_auteur])
 				$infos['numeros'] =  $telephones[$id_auteur];
 			echo '<div class="vcard">'. totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos, 'coordonnees') .'</div>';
-			// datation
-			echo association_date_du_jour();
-			echo fin_boite_info(true);
-			echo association_retour();
+			// datation et raccourcis
+			icones_association('');
 			debut_cadre_association('annonce.gif', 'adherent_titre_modifier_membre');
 			echo recuperer_fond('prive/editer/editer_asso_membres', array (
 				'id_auteur' => $id_auteur,

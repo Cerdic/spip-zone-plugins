@@ -21,16 +21,14 @@ function exec_destination()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		association_onglets(_T('asso:plan_comptable'));
+		onglets_association('plan_comptable');
 		// notice
 		echo propre(_T('asso:destination_info')); //!\ il en faut une specifique pour cette partie
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		$res = association_icone('destination_nav_ajouter',  generer_url_ecrire('edit_destination'), 'EuroOff.gif',  'creer.gif');
-		$res .= association_icone('bouton_retour', generer_url_ecrire('association'), 'retour-24.png');
-		echo bloc_des_raccourcis($res);
-		debut_cadre_association('EuroOff.gif', 'destination_comptable');
+		// datation et raccourcis
+		icones_association(array('association'), array(
+			'destination_nav_ajouter' => array('euro-39.gif', 'edit_destination'),
+		));
+		debut_cadre_association('euro-39.gif', 'destination_comptable');
 		//Affichage de la table
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_destinations'>\n";
 		echo "<thead>\n<tr>";

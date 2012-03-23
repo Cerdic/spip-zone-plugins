@@ -38,7 +38,7 @@ function action_editer_asso_ressources()
     include_spip('inc/association_comptabilite');
     if ($id_ressource) {/* c'est une modification */
 	// on modifie les operations comptables associees a l'acquisition
-	association_modifier_operation_comptable($date_achat, $prix_achat, 0, "[ref&nbsp;'$code' &times;&nbsp;$statut"."->ressource$id_ressource] ", $GLOBALS['association_metas']['pc_ressources'], $journal, $id_ressource, $id_compte);
+	association_modifier_operation_comptable($date_achat, 0, $prix_achat, "[ref&nbsp;'$code' &times;&nbsp;$statut"."->ressource$id_ressource] ", $GLOBALS['association_metas']['pc_ressources'], $journal, $id_ressource, $id_compte);
 	// on modifie les informations relatives a la ressource
 	sql_updateq('spip_asso_ressources', $champs, "id_ressource=$id_ressource");
     } else { /* c'est un ajout */
@@ -46,7 +46,7 @@ function action_editer_asso_ressources()
 	if (!$id_ressource) { // la suite serait aleatoire sans cette cle...
 	    $erreur = _T('Erreur_BdD_ou_SQL');
 	} else { // on ajoute les operations comptables associees a l'acquisition
-	    association_ajouter_operation_comptable($date_achat, $prix_achat, 0, "[ref&nbsp;'$code' &times;&nbsp;$statut"."->ressource$id_ressource] ", $GLOBALS['association_metas']['pc_ressources'], $journal, $id_ressource);
+	    association_ajouter_operation_comptable($date_achat, 0, $prix_achat, "[ref&nbsp;'$code' &times;&nbsp;$statut"."->ressource$id_ressource] ", $GLOBALS['association_metas']['pc_ressources'], $journal, $id_ressource);
 	}
     }
 

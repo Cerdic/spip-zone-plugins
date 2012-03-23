@@ -23,16 +23,14 @@ function exec_action_exercice()
 		echo minipres();
 	} else {
 		$id_exercice = intval(_request('id'));
-		association_onglets(_T('asso:exercices_budgetaires_titre'));
+		onglets_association('exercices_budgetaires_titre');
 		// info
 		$exercice = sql_fetsel('*', 'spip_asso_exercices', "id_exercice=$id_exercice" );
 		$infos['exercice_entete_debut'] = association_datefr($exercice['debut'], 'dtstart');
 		$infos['exercice_entete_fin'] = association_datefr($exercice['fin'], 'dtend');
-		echo totauxinfos_intro(sql_getfetsel('intitule', 'spip_asso_exercices', "id_exercice=$id_exercice" ), 'exercice', $id_exercice, $infos );
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		echo bloc_des_raccourcis(association_icone('bouton_retour', generer_url_ecrire('exercices'), 'retour-24.png'));
+		echo totauxinfos_intro(sql_getfetsel('intitule', 'spip_asso_exercices', "id_exercice=$id_exercice" ), 'exercice', $id_exercice, $infos);
+		// datation et raccourcis
+		icones_association(array('exercices'));
 		debut_cadre_association('calculatrice.gif', 'exercice_budgetaire_titre');
 		echo bloc_confirmer_suppression('exercice', $id_exercice);
 		fin_page_association();

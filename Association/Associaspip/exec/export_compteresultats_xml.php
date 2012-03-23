@@ -15,14 +15,11 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 // Export du Compte de Resultat au format Xml
-
-function exec_export_compte_resultat_xml() {
-	if (!autoriser('associer', 'export_compte_resultat_xml')) {
+function exec_export_compteresultats_xml() {
+	if (!autoriser('associer', 'export_compteresultats_xml')) {
 		include_spip('inc/minipres');
 		echo minipres();
-	}
-	else {
-
+	} else {
 		include_spip('inc/charsets');
 		include_spip('inc/association_plan_comptable');
 		$var = _request('var');
@@ -32,7 +29,7 @@ function exec_export_compte_resultat_xml() {
 			$xml->LesEcritures($key);
 		}
 		$xml->Pied();
-		$xml->Enregistre('cpte_resultat.xml');
+		$xml->Enregistre();
 	}
 }
 
@@ -50,20 +47,24 @@ class XML {
 	var $out;
 
 	function __construct($var) {
-		$tableau = @unserialize($var);
-		$this->exercice = $tableau[0]; $this->join = $tableau[1]; $this->sel = $tableau[2];
-		$this->where = $tableau[3]; $this->having = $tableau[4]; $this->order = $tableau[5];
+		$tableau = unserialize(rawurldecode($var));
+		$this->exercice = $tableau[0];
+		$this->join = $tableau[1];
+		$this->sel = $tableau[2];
+		$this->where = $tableau[3];
+		$this->having = $tableau[4];
+		$this->order = $tableau[5];
 		$this->out = '';
 	}
 
 	function EnTete() {
-		$this->out .= '<?xml version="1.0" encoding="iso-8859-1"?>'."\n";
-		$this->out .= '<CompteDeResultat>'."\n";
-		$this->out .= '<Entete>'."\n";
-		$this->out .= '<Titre>'. html_entity_decode(_T('asso:cpte_resultat_titre_general')) .'</Titre>'."\n";
-		$this->out .= '<Nom>Association - '. utf8_decode($GLOBALS['association_metas']['nom']) .'</Nom>'."\n";
-		$this->out .= '<Exercice>Exercice : '. utf8_decode(exercice_intitule($this->exercice)) .'</Exercice>'."\n";
-		$this->out .= '</Entete>'."\n";
+		$this->out .= '<?xml version="1.0" encoding="'.$GLOBALS['meta']['charset'].'"?>'."\n";
+		$this->out .= "<CompteDeResultat>\n";
+		$this->out .= "<Entete>\n";
+		$this->out .= '<Titre>'. utf8_decode(html_entity_decode(_T('asso:cpte_resultat_titre_general'))) ."</Titre>\n";
+		$this->out .= '<Nom>'. $GLOBALS['association_metas']['nom'] ."</Nom>\n";
+		$this->out .= '<Exercice>'. sql_asso1champ('exercice', $this->exercice, 'intitule') ."</Exercice>\n";
+		$this->out .= "</Entete>\n";
 	}
 
 	function LesEcritures($key) {
@@ -78,51 +79,46 @@ class XML {
 				$quoi = "SUM(depense) AS charge_evaluee, SUM(recette) AS produit_evalue";
 				break;
 		}
-
-		$this->out .= '<'. ucfirst($key) .'>'."\n";
+		$this->out .= '<'. ucfirst($key) .">\n";
 		$query = sql_select(
-				"imputation, $quoi, date_format(date, '%Y') AS annee" . $this->sel,
-				'spip_asso_comptes' . $this->join,
-				$this->where, $this->order, 'code ASC', '',
-				$this->having . $GLOBALS['association_metas']['classe_' . $key]);
+			"imputation, $quoi, DATE_FORMAT(date, '%Y') AS annee ".$this->sel, // select
+			'spip_asso_comptes'.$this->join, // from
+			$this->where, // where
+			$this->order, // group by
+			$this->order, // order by
+			'', // limit
+			$this->having .$GLOBALS['association_metas']['classe_'.$key] // having
+		);
 		$chapitre = '';
 		$i = 0;
 		while ($data = sql_fetch($query)) {
 			if ($key==='contributions_volontaires') {
-				$charge_evaluee = $data['charge_evaluee'];
-				$produit_evalue = $data['produit_evalue'];
-			}
-			else {
+				if ($data['charge_evaluee']>0) {
+					$valeurs = $data['charge_evaluee'];
+				} else {
+					$valeurs = $data['produit_evalue'];
+				}
+			} else {
 				$valeurs = $data['valeurs'];
 			}
 			$new_chapitre = substr($data['code'], 0, 2);
 			if ($chapitre!=$new_chapitre) {
 				if ($chapitre!='') {
-					$this->out .= '</Chapitre>'."\n";
+					$this->out .= "</Chapitre>\n";
 				}
-				$this->out .= '<Chapitre>'."\n";
-				$this->out .= '<Code>'. utf8_decode($new_chapitre) .'</Code>'."\n";
-				$this->out .= '<Libelle>'. utf8_decode(association_plan_comptable_complet($new_chapitre)) .'</Libelle>'."\n";
+				$this->out .= "<Chapitre>\n";
+				$this->out .= '<Code>'. str_replace(array('<','>'), array('&lt;','&gt;'), $new_chapitre) ."</Code>\n";
+				$this->out .= '<Libelle>'. str_replace(array('<','>'), array('&lt;','&gt;'), ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))) ."</Libelle>\n";
 				$chapitre = $new_chapitre;
 			}
-			$this->out .= '<Categorie>'."\n";
-			$this->out .= '<Code>'. utf8_decode($data['code']) .'</Code>'."\n";
-			$this->out .= '<Intitule>'. utf8_decode($data['intitule']) .'</Intitule>'."\n";
-			if ($key==='contributions_volontaires') {
-				if ($charge_evaluee>0) {
-					$this->out .= '<Montant>'. number_format($charge_evaluee, 2, ',', ' ') .'</Montant>'."\n";
-				}
-				else {
-					$this->out .= '<Montant>'. number_format($produit_evalue, 2, ',', ' ') .'</Montant>'."\n";
-				}
-			}
-			else {
-				$this->out .= '<Montant>'. number_format($valeurs, 2, ',', ' ') .'</Montant>'."\n";
-			}
-			$this->out .= '</Categorie>'."\n";
+			$this->out .= "<Categorie>\n";
+			$this->out .= '<Code>'. str_replace(array('<','>'), array('&lt;','&gt;'), $data['code']) ."</Code>\n";
+			$this->out .= '<Intitule>'. str_replace(array('<','>'), array('&lt;','&gt;'), $data['intitule']) ."</Intitule>\n";
+			$this->out .= "<Montant>$valeurs</Montant>\n";
+			$this->out .= "</Categorie>\n";
 		}
 		if ($chapitre!='') {
-			$this->out .= '</Chapitre>'."\n";
+			$this->out .= "</Chapitre>\n";
 		}
 		$this->out .= '</'. ucfirst($key) .'>'."\n";
 	}
@@ -131,13 +127,14 @@ class XML {
 		$this->out .= '</CompteDeResultat>'."\n";
 	}
 
-	function Enregistre($fichier) {
+	function Enregistre() {
+		$fichier =_DIR_RACINE.'/'._NOM_TEMPORAIRES_ACCESSIBLES.'compte_resultats_'.$this->exercice.'.xml';
 		$f = fopen($fichier, 'w');
 		fputs($f, $this->out);
 		fclose($f);
 		header('Content-Type: text/xml');
 		header('Content-Type: application/xml');
-		header('Content-Disposition: attachment; filename="' . $fichier . '"');
+		header('Content-Disposition: attachment; filename="'.$fichier.'"');
 		readfile($fichier);
 	}
 }

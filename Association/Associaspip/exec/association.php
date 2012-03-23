@@ -21,22 +21,20 @@ function exec_association()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		association_onglets();
+		onglets_association();
 		// Ipresentation du plugin
 		echo propre(_T('asso:association_info_doc'));
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		$res = association_icone('profil_de_lassociation', generer_url_ecrire('configurer_association'), 'assoc_qui.png');
-		$res .= association_icone('editer_asso_metas_utilisateur_lien', generer_url_ecrire('editer_asso_metas_utilisateur'), 'assoc_qui.png');
-		$res .= association_icone('categories_de_cotisations', generer_url_ecrire('categories'), 'cotisation.png', '');
+		// datation et raccourcis
+		$res['profil_de_lassociation'] = array('assoc_qui.png', 'configurer_association');
+		$res['editer_asso_metas_utilisateur_lien'] = array('assoc_qui.png', 'editer_asso_metas_utilisateur');
+		$res['categories_de_cotisations'] = array('cotisation.png', 'categories');
 		if ( test_plugin_actif('ASSOCIATION') ) {
-			$res .= association_icone('plan_comptable', generer_url_ecrire('plan'), 'plan_compte.png', '');
-			if ($GLOBALS['association_metas']['destinations']=='on')
-				$res .= association_icone('destination_comptable', generer_url_ecrire('destination'), 'plan_compte.png', '');
-			$res.=association_icone('exercices_budgetaires_titre', generer_url_ecrire('exercices'), 'plan_compte.png', '');
+			$res['plan_comptable'] = array('plan_compte.png', 'plan');
+			if ($GLOBALS['association_metas']['destinations'])
+				$res['destination_comptable'] = array('plan_compte.png', 'destination');
+			$res['exercices_budgetaires_titre'] = array('plan_compte.png', 'exercices');
 		}
-		echo bloc_des_raccourcis($res);
+		icones_association(array(), $res);
 		debut_cadre_association('annonce.gif', 'association_infos_contacts');
 		echo '<div class="vcard" id="vcard-asso">';
 		// Profil de l'association

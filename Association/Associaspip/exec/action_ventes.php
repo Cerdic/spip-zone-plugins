@@ -22,13 +22,11 @@ function exec_action_ventes()
 		echo minipres();
 	} else {
 		$id_vente = intval(_request('id'));
-		association_onglets(_T('asso:titre_onglet_ventes'));
+		onglets_association('titre_onglet_ventes');
 		// info
 		echo totauxinfos_intro(sql_getfetsel("CONCAT(article,' -- ',acheteur) AS intitule", 'spip_asso_ventes', "id_vente=$id_vente" ), 'vente', $id_vente, $infos );
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		echo association_retour();
+		// datation et raccourcis
+		icones_association('');
 		debut_cadre_association('ventes.gif', 'action_sur_les_ventes_associatives');
 		echo bloc_confirmer_suppression('vente', $id_vente);
 		fin_page_association();

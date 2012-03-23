@@ -22,14 +22,12 @@ function exec_action_comptes()
 		echo minipres();
 	} else {
 		$id_compte= intval(_request('id'));
-		association_onglets(_T('asso:titre_onglet_comptes'));
+		onglets_association('titre_onglet_comptes');
 		// info
 		echo _L('Confirmation');
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		echo association_retour();
-		debut_cadre_association('finances.jpg', 'operations_comptables');
+		// datation et raccourcis
+		icones_association('');
+		debut_cadre_association('finances-32.jpg', 'operations_comptables');
 		//SUPPRESSION PROVISOIRE OPERATION
 		if ($id_compte) {
 			echo '<p><strong>' . _T('asso:vous_vous_appretez_a_effacer_la_ligne_de_compte'). ' ' . $id_compte . '</strong></p>';

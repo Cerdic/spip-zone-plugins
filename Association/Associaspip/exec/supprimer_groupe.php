@@ -22,17 +22,15 @@ function exec_supprimer_groupe()
 		echo minipres();
 	} else {
 		$id_groupe = intval(_request('id'));
-		association_onglets(_T('asso:gestion_groupes'));
+		onglets_association('gestion_groupes');
 		// INFO
 		$groupe = sql_fetsel('*', 'spip_asso_groupes', "id_groupe=$id_groupe" );
 		$infos['ordre_affichage_groupe'] = $groupe['affichage'];
 		$infos['commentaires'] = $groupe['commentaires'];
 		$infos['destination_entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe")) );
 		echo totauxinfos_intro($groupe['nom'], 'groupe', $id_groupe, $infos );
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		echo association_retour();
+		// datation et raccourcis
+		icones_association('');
 		debut_cadre_association('annonce.gif', 'suppression_de_groupe');
 		bloc_confirmer_suppression('groupe',$id_groupe);
 		fin_page_association();

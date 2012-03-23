@@ -11,35 +11,28 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
   \************************************************************************** */
 
-if (!defined("_ECRIRE_INC_VERSION"))
+if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 // Export du Compte de Resultat au format Pdf
-
-function exec_export_compte_resultat_pdf() {
+function exec_export_compteresultats_pdf()
+{
 	if (!autoriser('associer', 'export_compte_resultat_pdf')) {
 		include_spip('inc/minipres');
 		echo minipres();
-	}
-	else {
-
+	} else {
 		$var = _request('var');
-
 		include_spip('pdf/export');
-
 		$pdf = new EXPORT_PDF();
 		$pdf->SetFont('Arial', '', 12);
-
 		$pdf->AddPage();
-
 		$pdf->init($var);
 		$pdf->enTete();
 		$pdf->lesCharges($GLOBALS['association_metas']['classe_charges']);
 		$pdf->lesProduits($GLOBALS['association_metas']['classe_produits']);
 		$pdf->leResultat();
 		$pdf->lesContributionsVolontaires($GLOBALS['association_metas']['classe_contributions_volontaires']);
-
-		$pdf->Output('cpte_resultat.pdf', 'I');
+		$pdf->leFichier();
 	}
 }
 
