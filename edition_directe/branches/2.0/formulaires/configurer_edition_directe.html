@@ -17,6 +17,8 @@
 		}		
 	})]
 
+[(#CONFIG{edition_directe}|non)#SET{article,on})]
+
 <div class="formulaire_spip formulaire_#FORM">
 
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -32,7 +34,7 @@
 				#SAISIE{case,
 						article,
 						label=#EVAL{_T('edir:article');},
-						valeur=#ENV{article,on},
+						valeur=#ENV{article,#GET{article}},
 						}
 				<BOUCLE_objets(POUR) {tableau #GET{objets}}>
 					#SAISIE{case,
