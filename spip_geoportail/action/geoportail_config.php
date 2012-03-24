@@ -39,6 +39,7 @@ function action_geoportail_config_dist()
  		if (isset($_POST['modifier']))
 		{	// Cles d'utilisation
 			ecrire_meta('geoportail_key',$_POST['geoportail_key']);
+			ecrire_meta('geoportail_bing_key',$_POST['bing_key']);
 			ecrire_meta('geoportail_yahoo_key',$_POST['yahoo_key']);
 			if (isset($_POST['js'])) ecrire_meta('geoportail_js', true);
 			else effacer_meta ('geoportail_js');

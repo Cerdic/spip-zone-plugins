@@ -35,6 +35,7 @@ function geoportail_insert_head($flux)
 <script type="text/javascript" src="'._DIR_PLUGIN_GEOPORTAIL.'js/jquery.cookie.js"></script>
 <script language="javascript" type="text/javascript">
 '
+.($GLOBALS['meta']['geoportail_bing_key'] ? "\njQuery.geoportail.bingKey='".$GLOBALS['meta']['geoportail_bing_key']."';" : "")
 .($GLOBALS['meta']['geoportail_osm_tah'] ? "jQuery.geoportail.osm_tah=true;" : "jQuery.geoportail.osm_tah=false;")
 ."\n"
 .($GLOBALS['meta']['geoportail_osm_mquest'] ? "jQuery.geoportail.osm_mquest=true;" : "jQuery.geoportail.osm_mquest=false;")

@@ -51,6 +51,7 @@ function exec_geoportail_config()
 	 	
 		$geoportail_key = $GLOBALS['meta']['geoportail_key'];
  		$yahoo_key = $GLOBALS['meta']['geoportail_yahoo_key'];
+ 		$bing_key = $GLOBALS['meta']['geoportail_bing_key'];
 
 		/* Recherche si GeoportalExtended utilisateur */
 		if (find_in_path ("js/GeoportalExtended.js"))
@@ -78,8 +79,19 @@ function exec_geoportail_config()
 			. ($geoportail_js ? $geoportail_js : "")
 			. fin_cadre_trait_couleur(true);
 			
+		/* Cle Bing */
+		$form .= debut_cadre_trait_couleur(_DIR_PLUGIN_GEOPORTAIL."img/powered_by_bing.png", true, "", _T('geoportail:cle_bing'))
+			.'<p>'._T('geoportail:geoportail_bing_key').'</p>'
+
+			._T('geoportail:cle').' : '
+			."&nbsp;<input type='text' name='bing_key' class='fondl' value=\"$bing_key\" size=30>"
+
+			."<input type='submit' name='modifier' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />"
+
+			.fin_cadre_trait_couleur(true);
+		
 		/* Cle Yahoo */
-		$form .= debut_cadre_trait_couleur("groupe-mot-24.gif", true, "", _T('geoportail:cle_yahoo'))
+		$form .= debut_cadre_trait_couleur(_DIR_PLUGIN_GEOPORTAIL."img/powered_by_yahoo.png", true, "", _T('geoportail:cle_yahoo'))
 			.'<p>'._T('geoportail:geoportail_yahoo_key').'</p>'
 
 			._T('geoportail:cle').' : '
@@ -90,7 +102,7 @@ function exec_geoportail_config()
 			.fin_cadre_trait_couleur(true);
 		
 		/* Cle Google (info) */
-		$form .= debut_cadre_trait_couleur("fiche-perso-24.gif", true, "", _T('geoportail:cle_google'))
+		$form .= debut_cadre_trait_couleur(_DIR_PLUGIN_GEOPORTAIL."img/powered_by_gmap.png", true, "", _T('geoportail:cle_google'))
 			.'<p>'._T('geoportail:geoportail_google_key').'</p>'
 			.fin_cadre_trait_couleur(true);
 		
@@ -99,7 +111,7 @@ function exec_geoportail_config()
 		$gmquest = ($GLOBALS['meta']['geoportail_osm_mquest'])?"CHECKED":"";
 		$osmlayer = $GLOBALS['meta']['geoportail_osm_layer'];
 		
-		$form .= debut_cadre_trait_couleur("petition-24.gif", true, "", _T('geoportail:cle_osm'))
+		$form .= debut_cadre_trait_couleur(_DIR_PLUGIN_GEOPORTAIL."img/powered_by_osm.png", true, "", _T('geoportail:cle_osm'))
 			.'<p>'._T('geoportail:geoportail_osm_key').'</p>'
 			.debut_cadre_relief("",true,"",_T('geoportail:osm_layers'))
 			."<div style='width:12em; display:block; text-align:center'>"._T('geoportail:osm_affiche')."</div>"

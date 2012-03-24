@@ -71,6 +71,7 @@ jQuery.geoportail.addMap(
 		formulaire : #ENV{formulaire,false},
 		zone: "[(#GET{zone})]",
 		type: "[(#ENV{type,Default})]",
+		mode:"[(#MODE|geoportail_defaut)]",
 		map : null,
 		geoportalLoadmap : function () 
 		{	// Definir la carte

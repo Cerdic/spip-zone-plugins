@@ -48,9 +48,8 @@ jQuery.geoportail.versionAPI = "'.$version.'";</script>
 ';
 	if (strpos($page, '<!--_SPIP_GEOPORTAIL_YHOO-->'))
 	{	$ykey = $GLOBALS['meta']['geoportail_yahoo_key'];
-		if ($ykey) 
-			$header .= '<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid='.($ykey?$ykey:'TEST').'"></script>';
-		else $header .= '<script type="text/javascript">alert ("NO Yahoo Map key defined")</script>';
+		if ($ykey) $api .= '<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid='.($ykey?$ykey:'TEST').'"></script>';
+		else $api .= '<script type="text/javascript">alert ("NO Yahoo Map key defined")</script>';
 	}
 	/*
 	if (strpos($page, '<!--_SPIP_GEOPORTAIL_BING-->'))
@@ -58,8 +57,8 @@ jQuery.geoportail.versionAPI = "'.$version.'";</script>
 	}
 	*/
 	if (strpos($page, '<!--_SPIP_GEOPORTAIL_GMAP-->'))
-	{	$header .= '<script src="http://maps.google.com/maps/api/js?v=3.6&sensor=false"></script>'
-				.'<link id="__GoogleOpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/'.$version.'/theme/default/google.css"/>';
+	{	$api .= '<script src="http://maps.google.com/maps/api/js?v=3.6&sensor=false"></script>';
+		$header .= '<link id="__GoogleOpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/'.$version.'/theme/default/google.css"/>';
 	}
 		
 	// Inclure l'API dans le Header

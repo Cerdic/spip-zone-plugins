@@ -60,6 +60,8 @@ jQuery.geoportail =
 		{	var carte = this.cartes[i];
 			
 			var fview;
+			var proj;
+			// Type du viewer
 			switch (carte.type)
 			{	case 'Standard' : 
 					fview = Geoportal.Viewer[carte.type];
@@ -68,12 +70,22 @@ jQuery.geoportail =
 					fview = Geoportal.Viewer.Default;
 					break;
 			}
+			// Mode d'affichage
+			switch (carte.mode)
+			{	case 'OSM','YHOO','GMAP','BING' : 
+					proj = 'EPSG:3857';
+					break;
+				default : 
+					proj=null;
+					break;
+			}
 			// Declarer une nouvelle carte
 			carte.map = new fview
 			(	"GeoportalMapDiv"+carte.id,
 				OpenLayers.Util.extend({
 					mode:'normal',
-                    territory:carte.zone,
+                    territory: carte.zone,
+                    projection: proj,
 					nameInstance: "map"+carte.id
 					},
 					gGEOPORTALRIGHTSMANAGEMENT
@@ -312,16 +324,19 @@ jQuery.geoportail =
 					}
 					case "Google Map":
 					case "Yahoo Map":
+					case "Bing Road":
 					{	carto = 1;
 						break;
 					}
 					case "Google Satellite":
 					case "Yahoo Satelitte":
+					case "Bing Aerial":
 					{	ortho = 1;
 						break;
 					}
 					case "Google Hybrid":
 					case "Yahoo Hybrid":
+					case "Bing Hybrid":
 					{	ortho=1;
 						carto=1;
 						break;
@@ -600,6 +615,8 @@ jQuery.geoportail =
 		// Ne pas afficher...
 		g.displayInLayerSwitcher= false;
 		g.setVisibility(false);
+		g.setOpacity(0);
+		//l.setOpacity(1);
 		//l.setVisibility(true);
 	},
 
@@ -721,23 +738,25 @@ jQuery.geoportail =
 	{	if (!info) info={};
 		if (!options) options={};
 		var l ;
-		l = new OpenLayers.Layer.VirtualEarth(
-			titre,
-			{	type: VEMapStyle[type],
-    			projection: new OpenLayers.Projection("EPSG:900913"),
-				units: "m",
-				numZoomLevels: (options.numZoom ? options.numZoom : 18),
-				//minZoomLevel: (options.minZoom ? options.minZoom : 1),
-				//maxZoomLevel: (options.maxZoom ? options.maxZoom : 18),
-				maxResolution: 156543.0339,
-				maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508),
+		l = new OpenLayers.Layer.Bing(
+			{	name:titre,
+				type: type,
+				key: this.bingKey,
+				isBaseLayer: false,
 				visibility: (typeof(options.visibility)=='undefined' ? false : options.visibility),
-				// opacity: (typeof(options.opacity)=='undefined' ? 1 : options.opacity),
+				opacity: (typeof(options.opacity)=='undefined' ? 1 : options.opacity),
+				numZoomLevels: (options.numZoom ? options.numZoom : 19),
+				minZoomLevel: (options.minZoom ? options.minZoom : 0),
 				description: info.descriptif,
 				metadataURL: info.url,
-				isBaseLayer: false,
-				sphericalMercator: true
+				originators:[{
+					logo:'bing',
+					pictureUrl:'http://dev.virtualearth.net/Branding/logo_powered_by.png',
+					url:'http://www.microsoft.com/maps/product/terms.html'
+				}]
+
 		});
+//		l.isBaseLayer = false;
 		map.getMap().addLayer(l);
 		return l;
 	},
@@ -838,6 +857,27 @@ jQuery.geoportail =
 					// Pas d'info (masque le copyright)
 					box.info = 0;
 				break;
+				// Bing Map
+				case 'BING':
+					var l;
+					l = this.addBINGLayer ( map, "Bing Aerial", 'Aerial', {}, { visibility : (!mixte && ortho>0) });
+					l = this.addBINGLayer ( map, "Bing Road", 'Road', {}, { visibility : (!mixte && carto>0) });
+					l = this.addBINGLayer ( map, "Bing Hybrid", 'AerialWithLabels', {}, { visibility : mixte });
+					/*
+					l = this.addOSMLayer ( map, "OSM (Mapnik)", 
+						"tile.openstreetmap.org",
+						{	url: "http://wiki.openstreetmap.org/wiki/Mapnik",
+							descriptif: "<p style='margin:0 1em'>Mapnik is the software we use to render the main Slippy Map layer for OSM, along with other layers such as the 'cycle map' layer and 'noname' layer. It is also the name given to the main layer, so things get a bit confusing sometimes.<br/>Map data (c) OpenStreetMap (and) contributors, CC-BY-SA</p>"
+						},
+						{	visibility : (this.osm_layer=='mapnik' && carto>0),
+							opacity: carto
+						}
+					);
+					*/
+					jQuery.geoportail.setBaseLayer(map,l);
+					// Pas d'info (masque le copyright)
+					box.info = 0;
+				break;
 				// Yahoo! Map
 				case 'YHOO':
 					var l;
@@ -848,16 +888,7 @@ jQuery.geoportail =
 					// Pas d'info (masque le copyright)
 					box.info = 0;
 				break;
-				// Bing Map
-				/* marche po => attendre prochaine version d'OL et layers.Bing * /
-				case 'BING':
-					var l;
-					l = this.addBINGLayer ( map, "Bing Satelitte", 'Aerial');
-					jQuery.geoportail.setBaseLayer(map,l);
-					// Pas d'info (masque le copyright)
-					box.info = 0;
-				break;
-				/* */
+				// Mini
 				case 'mini': box.info = box.tools = box.layer = '0';				
 				default: 
 					map.addGeoportalLayers(); 
