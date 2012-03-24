@@ -4,7 +4,7 @@
 	<icon>wp2spip.png</icon>
     <categorie>divers</categorie>
     <auteur>[Daniel Anic->http://www.anic.fr]</auteur>
-    <version>0.1</version>
+    <version>0.2</version>
  
   
     <etat>test</etat>
@@ -40,8 +40,8 @@
  <lien>http://www.spip-contrib.net/Wordpress-2-SPIP</lien>
  
  <necessite id="SPIP" version="[2.1.0;2.1.99]" />
-
-
+ <utilise id="pages" version="[0.3.7;]" />
+ <utilise id="polyhier" version="[1.0.0;]" />
 	<bouton id="wp2spip" parent="bando_administration">
 		<icone>wp2spip.png</icone>
 		<url>wp2spip</url>
