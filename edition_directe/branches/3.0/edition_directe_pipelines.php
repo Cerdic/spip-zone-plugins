@@ -1,6 +1,8 @@
 <?php
 
 function edition_directe_header_prive($flux){
+	
+	include_spip('inc/config');
 	$config=lire_config('edition_directe');
 	
 	$objet=$_REQUEST['exec'];
