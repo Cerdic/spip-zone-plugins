@@ -6,6 +6,12 @@ function formulaires_ajax_nav_config_charger_dist() {
   if (sql_count($res) == 1) {
     $options = sql_fetch($res);
     $options = unserialize($options['valeur']);
+
+    /* evite les problemes lors de mises a jour du plugin */
+    if ( ! $options['autoReplaceDivs'] ) {
+      $options['autoReplaceDivs'] = 'on';
+    }
+
     return $options;
   }
 
@@ -22,7 +28,9 @@ function formulaires_ajax_nav_config_charger_dist() {
 		   /* Utilise la lib modernizr fournie avec le plug */
 		   "useModernLib"	=> "on",
 		   /* Utilise la lib history.js fournie avec le plug */
-		   "useHistoryLib"	=> "on",		   
+		   "useHistoryLib"	=> "on",
+		   /* Remplace les divs automatiquement */
+		   "autoReplaceDivs"	=> "on",
 		   );
   return $options;
 }
@@ -55,6 +63,7 @@ function formulaires_ajax_nav_config_traiter_dist() {
 	  'html4Fallback'	=> _request('html4Fallback'),
 	  'useModernLib'	=> _request('useModernLib'),
 	  'useHistoryLib'	=> _request('useHistoryLib'),
+	  'autoReplaceDivs'	=> _request('autoReplaceDivs'),
 	  );
 
   $options = array(

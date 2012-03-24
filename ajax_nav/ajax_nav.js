@@ -6,10 +6,8 @@
 
 function AjaxNav() {
     "use strict";
-    var onAjaxNavReq		= $.Event("onAjaxNavReq"),
-    onAjaxNavLoad		= $.Event("onAjaxNavLoad"),
-    onAjaxNavLocalisedLoad	= $.Event("onAjaxNavLocalisedLoad"),
-    HOST			= History.getState().url.replace(/^https?:\/\/([^\/]+).*$/, '$1');
+
+    var HOST = History.getState().url.replace(/^https?:\/\/([^\/]+).*$/, '$1');
 
     function addUrlParam(url, param, value) {
 	var re;
@@ -74,6 +72,33 @@ function AjaxNav() {
     // onStateChange //////
     ///////////////////////
 
+    /* met a jour un element, l'evenement onDone sera declanche une fois le travail fini */
+    function updateElement (element, onDone) {
+	$(element).data('ready', false)
+	    .bind('ajaxNavReady', function () {
+		$(element).data('ready', true);
+	    });
+	$(element).trigger('onAjaxNavReq');
+	$.get(addUrlParam(History.getState().url, 'getbyid', element.id),
+	      function (data) {
+		  var self	= this,
+		  id		= this.url.replace(/.*getbyid=/, ''),
+		  updateElFunc	= function () {
+		      $('#' + id)
+			  .empty()
+			  .html(data)
+			  .trigger(onDone);
+		      prepareForAjax('#' + id);
+		      $(self).unbind('ajaxNavReady');
+		  };
+		  if (AjaxNav.options.autoReplaceDivs || $('#' + id).data('ready')) {
+		      updateElFunc.call();
+		  } else {
+		      $('#' + id).bind('ajaxNavReady', updateElFunc);
+		  }
+	      });
+    }
+
     // charge la page en ajax a chaque evenement statechange
     $(window).bind('statechange', function() {
 	// si on est pas sur une page ajax, on oublie.
@@ -93,24 +118,12 @@ function AjaxNav() {
 		if (data.lang !== $('html').attr('lang')) {
 		    $('html').attr('lang', data.lang);
 		    $('.loc_div').each(function (i) {
-			$(this).trigger(onAjaxNavReq);
-			$.get(addUrlParam(History.getState().url, 'getbyid', this.id),
-			      function (data) {
-			    var id = this.url.replace(/.*getbyid=/, '');
-			    $('#' + id).empty().html(data).trigger(onAjaxNavLocalisedLoad);
-			    prepareForAjax('#' + id);
-			});
+			updateElement(this, 'onAjaxNavLocalisedLoad');
 		    });
 		}
 		// on recharge ensuite les elements 'ajax_nav'.
-		$('.ajax_nav').trigger(onAjaxNavReq);
 		$('.ajax_nav').each(function (i) {
-		    $.get(addUrlParam(History.getState().url, 'getbyid', this.id),
-			  function (data) {
-			var id	= this.url.replace(/.*getbyid=/, '');
-			$('#' + id).empty().html(data).trigger(onAjaxNavLoad);
-			prepareForAjax('#' + id);
-		    });
+		    updateElement(this, 'onAjaxNavLoad');
 		});
 		// comme spip utilise les class sur le body par defaut, il vaut mieux les mettre
 		// a jour.

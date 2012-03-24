@@ -1,13 +1,23 @@
 <?php
 function ajax_nav_insert_head($flux) {
 
-  $options = unserialize($GLOBALS['meta']['ajax_nav_config']);
+  $res = sql_select('valeur', 'spip_meta', 'nom="ajax_nav_config"');
+  $options = array();
+  if (sql_count($res) == 1) {
+    $options = sql_fetch($res);
+    $options = unserialize($options['valeur']);
 
-  function prepare($options) {
-    $options = preg_replace("/[^a-zA-Z0-9\-\_]+/", "', ", $options);
-    $options = preg_replace("/([a-zA-Z0-9\-\_]+)/", "'$1", $options);
-    $options = preg_replace("/([^'])$/", "$1'", $options);
-    return $options;
+    /* evite les problemes lors de mises a jour du plugin */
+    if ( ! $options['autoReplaceDivs'] ) {
+      $options['autoReplaceDivs'] = 'on';
+    }
+  }
+
+  function prepare($option) {
+    $option = preg_replace("/[^a-zA-Z0-9\-\_]+/", "', ", $option);
+    $option = preg_replace("/([a-zA-Z0-9\-\_]+)/", "'$1", $option);
+    $option = preg_replace("/([^'])$/", "$1'", $option);
+    return $option;
   }
 
   $ajaxNavFile = ($options['html4Fallback'] == 'on') ?
@@ -19,6 +29,8 @@ function ajax_nav_insert_head($flux) {
   if ($options['useModernLib'] == "on") {
     $flux .= "<script type='text/javascript' src='" . find_in_path("lib/modernizr.js") . "'></script>";
   }
+
+  $auto_replace_divs = ($options["autoReplaceDivs"] == "on") ? 'true' : 'false';
 
   $flux .= "<script type='text/javascript'>
 Modernizr.load([";
@@ -41,7 +53,8 @@ Modernizr.load([";
 		AjaxNav.options = {
 		    pagesToAjaxify: ["	. prepare($options["pagesToAjaxify"]) . "],
 		    ajaxDivs: ["	. prepare($options["ajaxDivs"]) . "],
-		    localizedDivs: ["	. prepare($options["localizedDivs"]) . "]
+		    localizedDivs: ["	. prepare($options["localizedDivs"]) . "],
+                    autoReplaceDivs: "  . $auto_replace_divs . "
 		};
 		AjaxNav();
 	    }

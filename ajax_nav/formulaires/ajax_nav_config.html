@@ -32,6 +32,12 @@
       <input id="champ_useHistoryLib" class="checkbox" type="checkbox" name="useHistoryLib"
              label="cocher pour activer"[(#ENV{useHistoryLib}|=={on}|?{ checked="checked",})] />
     </li>
+
+    <li>
+      <strong><:ajax_nav:auto_replace_divs:></strong>
+      <input id="champ_autoReplaceDivs" class="checkbox" type="checkbox" name="autoReplaceDivs"
+             label="cocher pour activer"[(#ENV{autoReplaceDivs}|=={on}|?{ checked="checked",})] />
+    </li>
     
       </ul>
       <p class="boutons"><input type="submit" value='<:bouton_enregistrer:>' /></p>

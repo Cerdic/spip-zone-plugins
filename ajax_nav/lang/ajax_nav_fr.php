@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'html4' => 'Activer les urls hash pour les vieux navigateurs (exp&eacute;rimental) :',
 'use_modern_lib' => 'Utiliser la librairie Modernizr fournie avec le plugin : ',
 'use_history_lib' => 'Utiliser la libraire History.js fournie avec le plugin : ',
+'auto_replace_divs' => 'Remplacer les divs automatiquement : ',
 );
 
 ?>

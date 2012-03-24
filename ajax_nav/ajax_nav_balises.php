@@ -89,9 +89,13 @@ function calculer_balise_EXTRAIRE_INFOS_PAGE($objet, $id_objet) {
   $title = pq('title');
   $title = $title->html();
 
+  $lang = pq('html');
+	$lang = $lang->attr('lang');
+
   $tableau_resultat = serialize(array('body_classes'	=> $bodyClass,
-				      'title'		=> $title,
-				      ));
+																			'title'		=> $title,
+																			'lang'    => $lang,
+																			));
 
   return "$tableau_resultat";
 }

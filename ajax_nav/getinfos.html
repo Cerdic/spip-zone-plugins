@@ -8,7 +8,7 @@
 {
     "page":"#GET{objet}",
     ["id_#GET{objet}":"(#GET{id_objet})",]
-    "lang":"#LANG",
+    "lang":"[(#GET{infos_page}|table_valeur{lang})]",
     "body_classes":"[(#GET{infos_page}|table_valeur{body_classes})]",
     "title":"[(#GET{infos_page}|table_valeur{title})]"
 }
