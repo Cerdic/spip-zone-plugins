@@ -9,72 +9,35 @@
   
     <etat>test</etat>
 
-    <description> Importer un blog Wordpress 3.3.1  dans un site SPIP local vide.
+    <description>Importer un blog Wordpress 3.3.1  dans un site SPIP local vide.
       
-      {{{Que fait Wordpress2SPIP}}}
-      Importe un site Wordpress 3.3.1 dans un site SPIP 2.1.12 vierge. Les deux sites doivent être sur la même base de donnée, Et les tables Worfpress doivent commences par wp_.
+      {{{Mode d'emploi}}}
+      -installer un spip à côté de wordpress sur le serveur.
+      -configurer selon vos besoins, L'utilisation des mots clefs des documents joints aux articles, les forums.
+      -installer le plugin comme d'habitude.
+      -installer les plugins optionnels [voir doc->http://www.spip-contrib.net/Wordpress-2-SPIP]
+      -menu 'configuration / migration depuis wordpress' lancer la conversion.
+      -depuis le menu 'configuration / maintenance du site' restaurer le fichier
+      wp2spip.xml ({{Si l'import se fige}} actualisez simplement la page ou avec la touche F5 du clavier)
+      -si vous refaites la manip repartez toujours depuis un site spip vierge et avec
+      le cache vide.
       
-      Le plugin importe:
-      -Les tags catégories comme rubriques
-      -Les posts publié en articles
-      -Les comments comme forums
-      -Les posts attachement comme documents distants
-      -Les auteurs
-      -Les mots clefs
-      -Les liens entre ces objets
-      -garde les mêmes id
+      -une fois importé, se reconnecter avec son compte webmestre SPIP, Et pour les auteurs wordpress, ils doivent simplement recréer leur mot de passe via
+      la page de login avec 'mot de passe perdu'
       
-      il n'importe pas les sites dans cette version 0,1.
-      {{{Réglages serveur}}}
-      Pour mes besoins, la b.d.d. wp avait 3000 articles publiés sur 13000, 4800 mots clef, 3000 documents, et les paramétrés {memory_limit} et {max_execution_time} ont du être augmentés dans le php.ini. 
+      -Choisisez les rubriquest des articles proposés à la publication (les pages importées) et publiez les.
+      -Choisisez les rubriques (depuis edition auteurs) des admins restreints signalés et devenus rédacteurs.
       
-	Le plugin génère via des squelettes un fichier de restauration SPIP et le place sous <code>/tmp/dump/wp2spip.xml</code>. La procèdure normale de restauration depuis <code>/ecrire/?exec=impot_all </code>permet d'installer le site importé comme d'habitude. Le plugin est gourmand en ressource et il vaut mieux l'utiliser en local. Aussi utilisez le sur un site vierge.
-	
-	La restauration de ce fichier provoque un écrasement des données spip.
-	l'auteur webmestre qui utilise le plugin est ajouté aux auteurs importés.
-	
-	
-	Une fois wodpress2spip installé, rendez vous /ecrire/?exec=wp2spip ou depuis configuration / migration depuis wordpress
-	
-	Une page récapitulative compte les objets Wordpress.
-	Et le script crée le fichier /tmp/dump/wp2spip.xml  au format SPIP.
-	
-	{{{Les cas non gérés par ce script}}}
-	-les doublons sur les noms des mots clef (importés à l'identique)
-	-le cas sans catégorie wordpress, il faut préalablement avoir aumoins une catégorie.(tag category).
-	-Les statuts autres que administrateurs wordpress, seront des visiteurs dans SPIP.
-	
-	{{{Mode d'emploi rapide}}}
-	-installer un spip à côté de wordpress sur le serveur.
-	-installer le plugin comme d'habitude
-	-menu 'configuration / migration depuis wordpress' lancer la conversion.
-	-depuis le menu 'configuration / maintenance du site' restaurer le fichier
-	wp2spip.xml
-	-si vous refaites la manip repartez toujours depuis un site spip vierge et avec
-	le cache vide.
-	
-	{{{En squelette et oui}}}
-	Le répertoire inc du plugin contiens les fichiers squelettes qui génèrent
-	le xml du dump spip.
-	Selon vos besoins il est aisé de surcharger ces squelettes.
-	Notamment pour transformer éventuellement le contenu texte des articles par exemple.
-	Actuellement pour les documents on gère les type mimes uniquement pour les images et pdf, ajouter vos mimes éventuellement dans inc/inc-docs.html
-	  <code>#POST_MIME_TYPE|replace{'image/jpeg' , 'jpg'}|</code> 
-	  
-	  {{{Reste à faire}}}
-	  -Mettre des chaines de langues et traduire le plugin.
-	  -faire correspondre tous les statuts Wordpress vers SPIP.
-	  -ajouter tous les types de documents selon la table spip_types_documents
-	  -ajouter aussi les sites
-	  -réécrire proprement wp2spip_options.php
-	  -Mettre le plugin sur la zone
+      
+      
+      http://www.spip-contrib.net/Wordpress-2-SPIP
 	  
       </description>
       <prefix>wp2spip</prefix>
 
  
  <options>wp2spip_options.php</options>
- <lien>http://www.spip-contrib.net/ecrire/?exec=article&id_article=4104</lien>
+ <lien>http://www.spip-contrib.net/Wordpress-2-SPIP</lien>
  
  <necessite id="SPIP" version="[2.1.0;2.1.99]" />
 
