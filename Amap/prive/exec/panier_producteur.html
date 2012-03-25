@@ -1,0 +1,16 @@
+<!--#navigation-->
+<div class="cadre-r amap-nav">
+<ul>
+	<li class="subMenu">
+		<BOUCLE_retour(AUTEURS){tous}{id_auteur=#ID_PRODUCTEUR}>
+			<a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur,#ID_PRODUCTEUR})]" title="<:amap:retour_auteur:>"><:amap:retour_auteur{nom=#NOM}:></a>
+		</BOUCLE_retour>
+	</li>
+</ul>
+</div>
+<!--/#navigation-->
+<BOUCLE_prod(AUTEURS){id_auteur=#ID_PRODUCTEUR}{tous}><h1><:amap:liste_paniers_vendu_par{nom=#NOM}:></h1></BOUCLE_prod>
+
+<div class="cadre cadre-r">
+	<INCLURE{fond=prive/inclure/liste_panier_producteur,env}>
+</div>

@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'date_distribution' => 'Date de la distribution',
 	'date_livraison' => 'Date de la livraison',
+	'depuis_le' => 'depuis le',
 	'distribution_paniers' => 'Distribution des paniers du @nb@',
 
 	// E
@@ -53,12 +54,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'les_livraisons' => 'Les livraisons',
 	'les_livraisons_effectuees' => 'Les livraisons déjà effectuées',
-	'les_paniers' => 'Les paniers de',
+	'les_paniers' => 'Les paniers de @nom@',
 	'liste_amapiens' => 'Liste des amapiens',
 	'liste_amapiens_enregistres'  => 'Liste des amapiens enregistrés',
 	'liste_livraisons' => 'Liste des livraisons',
 	'liste_paniers' => 'Liste des paniers',
 	'liste_paniers_distribuer_le' => 'Liste des paniers à distribuer le',
+	'liste_paniers_vendu_par' => 'Liste des paniers produit par @nom@',
 	'livraison' => 'Livraison',
 
 	// M
@@ -71,6 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'panier' => 'Panier',
+	'panier_deja_vendu' => 'Vous avez déjà vendu 1 panier',
 	'panier_dispo' => 'Panier disponible',
 	'panier_dispo_auteur' => 'Bonjour,
 		<br />Je mets à disposition le panier du @date_distribution@
@@ -81,9 +84,10 @@ Je mets à disposition le panier du @date_distribution@, pour le récupérer sui
 @nom@',
 	'panier_dispo_plus' => 'Des infos à donner en plus (elle seront rajouter dans le mail envoyer avant votre nom)',
 	'panier_distribuer' => 'panier à distribuer',
-	'paniers_distribuer' => 'paniers à distribuer',
 	'panier_liste' => 'Liste des paniers',
 	'panier_livraison' => 'Contenu d\'un panier',
+	'paniers_deja_vendu' => 'Vous avez déjà vendu @nb@ panier',
+	'paniers_distribuer' => 'paniers à distribuer',
 	'pas_connecte_ou_reconnu' => 'Vous n\'êtes pas connecté ou on ne vous a pas reconnu.',
 	'pas_date_distributions' => 'Pas de date de distribution renseigné.',
 	'pas_paniers' => 'Vous ne disposez d\'aucun panier durant cette saison, en effet aucun contrat vous concernant n\'est actuellement en cours',
@@ -97,7 +101,7 @@ Je mets à disposition le panier du @date_distribution@, pour le récupérer sui
 	'reste_panier_recuperer' => 'Il vous reste encore 1 panier à recupérer',
 	'reste_paniers_distribuer' => 'Il nous reste encore @nb@ paniers à distribuer',
 	'reste_paniers_recuperer' => 'Il vous reste encore @nb@ paniers à recupérer',
-	'retour_auteur' => 'Retour sur la page auteur',
+	'retour_auteur' => 'Retour sur la page auteur de @nom@',
 
 	//S
 	'signature' => 'Signature',

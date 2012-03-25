@@ -44,7 +44,7 @@ function insert_amap_panier() {
 			),
 			'data' => $data_insert
 		));
-		sql_insertq("spip_amap_paniers", $champs);
+		sql_replace("spip_amap_paniers", $champs);
 	}
 	return $id_amap_panier;
 }
