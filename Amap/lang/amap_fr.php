@@ -62,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'livraison' => 'Livraison',
 
 	// M
+	'manque_fpdf_imprimer' => 'Il vous manque le plugins "fpdf" pour pouvoir imprimer vos listes de paniers.',
 	'mettre_disposition' => 'Mettre à disposition',
 	'mini_doc' => 'Mini documentation',
 

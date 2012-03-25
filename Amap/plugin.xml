@@ -9,7 +9,7 @@
 	</description>
 
 	<auteur>St&#233;phane Moulinet, E-cosystems, [Pierre KUHN->http://www.pierre-kuhn.org] </auteur>
-	<version>2.2.0</version>
+	<version>2.2.1</version>
 	<version_base>1.0</version_base>
 
 	<licence>GNU/GPL - (c) 2010-2011</licence>
@@ -60,11 +60,11 @@
 	<necessite id="agenda" version="[2.2.1;]" />
 	<necessite id="cextras" version="[1.9;]" />
 	<necessite id="facteur" version="[1.6.2;]" />
-	<necessite id="fpdf" version="[0.0.1;]" />
 	<necessite id="Iterateurs" version="[0.4.0;]" />
 	<necessite id="saisies" version="[1.7.7;]" />
 	<necessite id="spip_bonux" version="[2.2.21;]" />
 	<necessite id="verifier" version="[0.1;]" />
+	<utilise id="fpdf" version="[0.0.1;]" />
 	<utilise id="z" version="[1.5.1;]" />
 	<categorie>divers</categorie>
 </plugin>
