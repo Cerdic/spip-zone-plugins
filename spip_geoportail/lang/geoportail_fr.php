@@ -6,24 +6,31 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'geoportail'	=> 'G&eacute;oportail',
 
-'cle'					=> 'Cl&eacute; d\'utilisation',
 'cles'					=> 'Cl&eacute;s d\'utilisation',
-'geoportail_key'		=> 'Pour pouvoir utiliser l\'API G&eacute;oportail, vous devez d\'abord vous inscrire et avoir une cl&eacute; d\'utilisation sur le site <a href="http://api.ign.fr/geoportail/" title="API Geoportail">http://api.ign.fr/geoportail/</a>.',
+'cle_info'				=> '<b>L\'utilisation des services cartographiques n&eacute;cessitent une cl&eacute; qui g&egrave;re les droits d\'acc&egrave;s aux donn&eacute;es au travers d\'un contrat et l\'acceptation des r&egrave;gles d\'utilisation du service.</b>
+							<br/><br/><i>Veuillez vous reporter aux sites des diff&eacute;rents fournisseur pour les modalit&eacute;s d\'acc&egrave;s &agrave; leurs services.</i>',
+'cle_geoportail'		=> 'Cl&eacute; d\'utilisation G&eacute;oportail',
+'geoportail_key'		=> 'Consultez le site du G&eacute;oportail pour obtenir une cl&eacute; : <a href="http://api.ign.fr/geoportail/" title="API Geoportail">http://api.ign.fr/geoportail/</a>.',
 'local_js'				=> 'Utiliser le code javascript local.',
 'cle_bing'				=> 'Cl&eacute; d\'utilisation BING',
-'geoportail_bing_key'	=> 'Pour pouvoir utiliser les service BING Map, vous devez d\'abord vous inscrire et avoir une cl&eacute; d\'utilisation sur le site <a href="http://bingmapsportal.com/" title="API BING Map">http://bingmapsportal.com/</a>.',
+'geoportail_bing_key'	=> 'Consultez le site de Bing Map pour obtenir une cl&eacute; : <a href="http://bingmapsportal.com/" title="API BING Map">http://bingmapsportal.com/</a>.',
 'cle_yahoo'				=> 'Cl&eacute; d\'utilisation YAHOO',
-'geoportail_yahoo_key'	=> 'Pour pouvoir utiliser les service Yahoo! Map, vous devez d\'abord vous inscrire et avoir une cl&eacute; d\'utilisation sur le site <a href="http://developer.yahoo.com/maps/" title="API Yahoo! Map">http://developer.yahoo.com/maps/</a>.',
+'geoportail_yahoo_key'	=> 'Consultez le site Yahoo! pour obtenir une cl&eacute; : <a href="http://developer.yahoo.com/maps/" title="API Yahoo! Map">http://developer.yahoo.com/maps/</a>.',
 'cle_google'			=> 'Google Maps',
 'geoportail_google_key'	=> 'Le plugin utilise l\'API Google Maps v.3. Celle-ci ne n&eacute;cessite aucune cl&eacute; d\'utilisation. Si vous affichez des cartes Google, vous devez cependant adh&eacute;rer aux conditions g&eacute;n&eacute;rales d\'utilisation de Google Maps : <a href="http://code.google.com/intl/fr/apis/maps/terms.html" title="API Google Maps">http://code.google.com/intl/fr/apis/maps/terms.html</a>.',
 'cle_osm'				=> 'OpenStreetMap',
 'geoportail_osm_key'	=> 'Le plugin vous permet d\'afficher les cartes du projet OpenStreetMap. OpenStreetMap est un ensemble de donn&eacute;es ouvertes, disponibles sous la licence <a href="http://www.openstreetmap.org/copyright" title="OpenStreetMap">Creative Commons paternit&eacute; – partage à l\'identique 2.0</a> (CC BY-SA).',
 'osm_layers'			=> 'Serveurs disponibles :',
 'osm_affiche'			=> 'Afficher / Charger',
-'osm_osm'				=> 'Mapnik',
-'osm_tah'				=> 'Tiles&#064;Home (<a href=\'http://tah.openstreetmap.org\'>http://tah.openstreetmap.org</a>)',
+'osm_osm'				=> 'Mapnik (<a href=\'http://mapnik.org/\'>http://mapnik.org/</a>)',
+'osm_tah'				=> 'Tiles&#064;Home (<a href=\'http://wiki.openstreetmap.org/wiki/Tiles@home\'>http://wiki.openstreetmap.org/wiki/Tiles@home</a>)',
 'osm_mquest'			=> 'MapQuest (<a href=\'http://www.mapquest.com/\'>http://www.mapquest.com/</a>)',
 'geoportail_print'		=> '<b>Attention :</b> vous devez adh&eacute;rer aux conditions g&eacute;n&eacute;rales d\'utilisation (CGU) de l\'API. En particulier, l\'impression des cartes g&eacute;oportail n\'est autoris&eacute;e que dans le cadre d\'un <i>usage documentaire</i>.<br/>Le plugin active par d&eacute;faut l\'impression des cartes g&eacute;oportail. Vous devez le d&eacute;sactiver dans le fichier /css/geoportail.css dans le cas contraire...', 
+'geoportail_api'		=> 'API G&eacuteoportail',
+'geoportail_api_info'	=> 'Par d&eacute;faut, le plugin utilise le code javascript de l\'API sur le site du G&eacute;oportail sous licence BSD.
+						Dans certains cas, pour s\'affranchir d\'effets de bords ou lors de d&eacute;boguage, il peut &ecirc;tre pr&eacute;f&eacute;rable d\'utiliser une version de l\'API en local. 
+						<br/>Pour cela, placez les ressources de l\'API (<i>GeoportalExtended.js, etc.</i>) dans le dossier /js de votre squelette.',
+
 'geoportail_services'	=> 'Ajouter un menu G&eacute;oservices.',
 'geoportail_defaut'		=> 'Affichage par d&eacute;faut',
 'geoportail_provider'	=> 'Fournisseur par d&eacute;faut',

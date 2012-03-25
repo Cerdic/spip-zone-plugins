@@ -49,9 +49,15 @@ function exec_geoportail_config()
 
 		echo debut_droite('',true);
 	 	
+		/* Clé d'utilisation */
 		$geoportail_key = $GLOBALS['meta']['geoportail_key'];
  		$yahoo_key = $GLOBALS['meta']['geoportail_yahoo_key'];
  		$bing_key = $GLOBALS['meta']['geoportail_bing_key'];
+
+		/* Layers OSM */
+		$gtah = ($GLOBALS['meta']['geoportail_osm_tah'])?"CHECKED":"";
+		$gmquest = ($GLOBALS['meta']['geoportail_osm_mquest'])?"CHECKED":"";
+		$osmlayer = $GLOBALS['meta']['geoportail_osm_layer'];
 
 		/* Recherche si GeoportalExtended utilisateur */
 		if (find_in_path ("js/GeoportalExtended.js"))
@@ -62,56 +68,49 @@ function exec_geoportail_config()
 			ecrire_metas();
 		}
 		
-		/* Cle Geoportail */
-		$form = debut_cadre_trait_couleur(_DIR_PLUGIN_GEOPORTAIL."img/geo.png", true, "", _T('geoportail:cle'))
-			.debut_cadre_relief("",true)
-			._T('geoportail:geoportail_key')
+		$form = debut_cadre_trait_couleur("groupe-mot-24.gif", true, "", _T('geoportail:cles'))
+			
+			.debut_cadre_trait_couleur("",true)
+			._T('geoportail:cle_info')
+			.fin_cadre_couleur(true)
+
+			/* Cle Geoportail */
+			.debut_cadre_relief(_DIR_PLUGIN_GEOPORTAIL."img/geo.png",true)
+			.'<p>'._T('geoportail:geoportail_key')
+			."<br/>"
+			._T('geoportail:cle_geoportail').' : '
+			."&nbsp;<input type='text' name='geoportail_key' class='fondl' value=\"$geoportail_key\" size=30>"
+			."<input type='submit' name='modifier' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />"
+			."</p>"
 			.fin_cadre_relief(true)
 
-			._T('geoportail:cle').' : '
-			."&nbsp;<input type='text' name='geoportail_key' class='fondl' value=\"$geoportail_key\" size=30>"
-
-			."<input type='submit' name='modifier' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />"
-
-			.debut_cadre_trait_couleur("warning-24.gif", true, "", "")
-			._T('geoportail:geoportail_print')
-			. fin_cadre_trait_couleur(true)
-			. ($geoportail_js ? $geoportail_js : "")
-			. fin_cadre_trait_couleur(true);
-			
-		/* Cle Bing */
-		$form .= debut_cadre_trait_couleur(_DIR_PLUGIN_GEOPORTAIL."img/powered_by_bing.png", true, "", _T('geoportail:cle_bing'))
-			.'<p>'._T('geoportail:geoportail_bing_key').'</p>'
-
-			._T('geoportail:cle').' : '
+			/* Cle Bing */
+			.debut_cadre_relief(_DIR_PLUGIN_GEOPORTAIL."img/powered_by_bing.png", true)
+			.'<p>'._T('geoportail:geoportail_bing_key')
+			."<br/>"
+			._T('geoportail:cle_bing').' : '
 			."&nbsp;<input type='text' name='bing_key' class='fondl' value=\"$bing_key\" size=30>"
-
 			."<input type='submit' name='modifier' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />"
-
-			.fin_cadre_trait_couleur(true);
+			."</p>"
+			.fin_cadre_relief(true)
 		
-		/* Cle Yahoo */
-		$form .= debut_cadre_trait_couleur(_DIR_PLUGIN_GEOPORTAIL."img/powered_by_yahoo.png", true, "", _T('geoportail:cle_yahoo'))
-			.'<p>'._T('geoportail:geoportail_yahoo_key').'</p>'
-
-			._T('geoportail:cle').' : '
+			/* Cle Yahoo */
+			.debut_cadre_relief(_DIR_PLUGIN_GEOPORTAIL."img/powered_by_yahoo.png", true)
+			.'<p>'._T('geoportail:geoportail_yahoo_key')
+			."<br/>"
+			._T('geoportail:cle_yahoo').' : '
 			."&nbsp;<input type='text' name='yahoo_key' class='fondl' value=\"$yahoo_key\" size=30>"
-
 			."<input type='submit' name='modifier' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />"
+			."</p>"
+			.fin_cadre_relief(true)
 
-			.fin_cadre_trait_couleur(true);
-		
-		/* Cle Google (info) */
-		$form .= debut_cadre_trait_couleur(_DIR_PLUGIN_GEOPORTAIL."img/powered_by_gmap.png", true, "", _T('geoportail:cle_google'))
+			/* Info Google */
+			.debut_cadre_relief(_DIR_PLUGIN_GEOPORTAIL."img/powered_by_gmap.png", true)
 			.'<p>'._T('geoportail:geoportail_google_key').'</p>'
-			.fin_cadre_trait_couleur(true);
-		
-		/* Layers OSM */
-		$gtah = ($GLOBALS['meta']['geoportail_osm_tah'])?"CHECKED":"";
-		$gmquest = ($GLOBALS['meta']['geoportail_osm_mquest'])?"CHECKED":"";
-		$osmlayer = $GLOBALS['meta']['geoportail_osm_layer'];
-		
-		$form .= debut_cadre_trait_couleur(_DIR_PLUGIN_GEOPORTAIL."img/powered_by_osm.png", true, "", _T('geoportail:cle_osm'))
+			.fin_cadre_relief(true)
+
+			/* Layers OSM */
+			.debut_cadre_relief(_DIR_PLUGIN_GEOPORTAIL."img/powered_by_osm.png", true, "", " ")
 			.'<p>'._T('geoportail:geoportail_osm_key').'</p>'
 			.debut_cadre_relief("",true,"",_T('geoportail:osm_layers'))
 			."<div style='width:12em; display:block; text-align:center'>"._T('geoportail:osm_affiche')."</div>"
@@ -127,9 +126,17 @@ function exec_geoportail_config()
 			."<input type='submit' name='osmtile' class='fondo' style='margin-left:5em;' value='"._T('bouton_valider')."' />"
 			."</div>"
 			.fin_cadre_relief(true)
-			.fin_cadre_trait_couleur(true);
+			.fin_cadre_relief(true)
+
+			. fin_cadre_trait_couleur(true);
 		
-		// Formulaire
+		/* Mode debug */
+		$form .= debut_cadre_trait_couleur("administration-24.gif", true, "", _T('geoportail:geoportail_api'))
+			. '<p>'._T('geoportail:geoportail_api_info').'</p>'
+			. ($geoportail_js ? $geoportail_js : "")
+			. fin_cadre_trait_couleur(true);	
+					
+		/* Formulaire */
 		echo generer_action_auteur('geoportail_config',
 			'geoportail_config',
 			'./?exec=geoportail_config',
