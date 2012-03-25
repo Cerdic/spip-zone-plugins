@@ -88,7 +88,7 @@ function exec_comptes()
 			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$exercice"),
 			'ajouter_une_operation' => array('ajout-24.png', 'edit_compte'),
 		) );
-		debut_cadre_association('finances-32.jpg', 'informations_comptables');
+		debut_cadre_association('finances-24.png', 'informations_comptables');
 		echo "\n<table width='100%'>";
 		echo '<tr><td>';
 		echo '<form method="post" action="'.generer_url_ecrire('comptes',"imputation=$imputation").'"><div>';

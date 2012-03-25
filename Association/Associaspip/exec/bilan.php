@@ -65,7 +65,7 @@ function exec_bilan()
 			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$exercice"),
 			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$exercice"),
 		));
-		debut_cadre_association('finances-32.jpg', 'bilans_comptables', $exercice_data['intitule']);
+		debut_cadre_association('finances-24.png', 'bilans_comptables', $exercice_data['intitule']);
 		$clas_banque = $GLOBALS['association_metas']['classe_banques'];
 		$clas_contrib_volontaire = $GLOBALS['association_metas']['classe_contributions_volontaires']; // une contribution benevole ne doit pas etre comptabilisee en charge/produit
 		if ($plan) {

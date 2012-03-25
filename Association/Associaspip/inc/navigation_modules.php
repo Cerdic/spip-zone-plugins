@@ -45,7 +45,7 @@ function onglets_association($titre='', $INSERT_HEAD=TRUE)
 
 	/* onglet de gestion comptable */
 	if ($GLOBALS['association_metas']['comptes']) {
-		$res .= onglet1_association('livres_comptes', 'comptes', 'Comptes', 'finances-32.jpg');
+		$res .= onglet1_association('livres_comptes', 'comptes', 'Comptes', 'finances-24.png');
 	}
 
 	/* Affichage */

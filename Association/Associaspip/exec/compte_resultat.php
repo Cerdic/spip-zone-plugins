@@ -62,11 +62,11 @@ function exec_compte_resultat()
 				echo icone1_association('PDF', generer_url_ecrire('export_compteresultats_pdf').'&var='.rawurlencode($var), 'print-24.png', 'print-24.png'); //!\ generer_url_ecrire() utilise url_enconde() or il est preferable avec les grosses variables serialisees d'utiliser rawurlencode()
 			}
 			foreach(array('csv','ctx','tex','tsv','xml','yaml') as $type) { // autres exports (donnees brutes) possibles
-				echo icone1_association(strtoupper($type), generer_url_ecrire("export_compteresultats_$type").'&var='.rawurlencode($var), "export-$type.png", 'export-24.png'); //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
+				echo icone1_association(strtoupper($type), generer_url_ecrire("export_compteresultats_$type").'&var='.rawurlencode($var), "export-$type.png"); //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
 			}
-			fin_cadre_enfonce();
+			echo fin_cadre_enfonce(true);
 		}
-		debut_cadre_association('finances-32.jpg', 'cpte_resultat_titre_general', $exercice_data['intitule']);
+		debut_cadre_association('finances-24.png', 'cpte_resultat_titre_general', $exercice_data['intitule']);
 		$depenses = compte_resultat_charges_produits($var, intval($GLOBALS['association_metas']['classe_charges']));
 		$recettes = compte_resultat_charges_produits($var, intval($GLOBALS['association_metas']['classe_produits']));
 		compte_resultat_benefice_perte($recettes, $depenses);

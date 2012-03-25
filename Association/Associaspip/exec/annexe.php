@@ -44,7 +44,7 @@ function exec_annexe()
 			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$exercice"),
 			'bilan' => array('finances-24.png', 'bilan', "exercice=$exercice"),
 		));
-		debut_cadre_association('finances-32.jpg', 'annexe_titre_general', $exercice_data['intitule']);
+		debut_cadre_association('finances-24.png', 'annexe_titre_general', $exercice_data['intitule']);
 		echo _T('asso:non_implemente');
 		fin_page_association();
 	}
