@@ -12,7 +12,7 @@
 	- align : top, left, bottom, right ou combinaison : top-left...
 ]
 <BOUCLE_doc(DOCUMENTS){geoposition}{id_document}>
-<script language=javascript>
+<script type="text/javascript">
     var att = { classe:'document', id_document:#ID_DOCUMENT, name:"[(#TITRE|attribut_html)]", extension:"#EXTENSION", taille:"[(#TAILLE|taille_en_octets)]", width:"#LARGEUR", height:"#HAUTEUR", img:"[(#LOGO_DOCUMENT||extraire_attribut{src})]", url:"#URL_DOCUMENT", description:"[(#DESCRIPTIF|addslashes|replace{\n,''}|replace{\r,''})]" };
 	// Afficher
 	[(#SET{largeur,[(#LOGO_DOCUMENT||image_reduire{40}|largeur|plus{[(#ENV{bord,4})]})]})]

@@ -7,7 +7,7 @@
 exemple :<artxx|geoportail>
 ]
 <BOUCLE_geo_article(ARTICLES){geoposition}{id_article=#ID}>
-<script language=javascript>
+<script type="text/javascript">
 	// Ajouter l'article
     var att = { id_article:#ID_ARTICLE, name:"[(#TITRE|attribut_html)]", logo:"[(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{60}|addslashes)]", url:"#URL_ARTICLE", description:"[(#INTRODUCTION{100}|addslashes|replace{'\n',''}|replace{'\r',''})]" };
 	// Afficher

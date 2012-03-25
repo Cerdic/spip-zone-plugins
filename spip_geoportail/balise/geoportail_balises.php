@@ -52,6 +52,20 @@ function balise_YAHOO_KEY($p)
 	return $p;
 }
 
+/** Cle Yahoo */
+// Cle geoportail
+function geoportail_bing_key()
+{	return $GLOBALS['meta']['geoportail_bing_key'];
+}
+
+// La Cle
+function balise_BING_KEY($p)
+{	// Code...
+	$p->code = "geoportail_bing_key()";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
 /** Affichage du systeme pour la saisie des coordonnees */
 function geoportail_syscoord()
 {	return $GLOBALS['meta']['geoportail_sysref'];

@@ -76,6 +76,7 @@ function exec_geoportail_config_options()
 				."<option value='GEOP'".($geoportail_provider=='GEOP'?" selected":"").">G&eacute;oportail</option>"
 				."<option value='OSM'".($geoportail_provider=='OSM'?" selected":"").">OpenStreetMap</option>"
 				."<option value='GMAP'".($geoportail_provider=='GMAP'?" selected":"").">Google Maps</option>"
+				."<option value='BING'".($geoportail_provider=='BING'?" selected":"").">Bing Maps</option>"
 				."<option value='YHOO'".($geoportail_provider=='YHOO'?" selected":"").">Yahoo !</option>"
 				."</select>"
 				."<br/>"

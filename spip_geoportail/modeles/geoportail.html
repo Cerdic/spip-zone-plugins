@@ -62,7 +62,7 @@ if (_DIR_RESTREINT!="" || $geoportail_force)
 [(#REM) Balise d'inclusion du geoportail ]
 <!--_SPIP_GEOPORTAIL_[(#MODE|geoportail_defaut)]-->
 
-<script language=javascript>
+<script type="text/javascript">
 // Ajouter une nouvelle carte
 var map#ENV{id_geoportail,0} = null;
 
@@ -114,7 +114,7 @@ jQuery.geoportail.addMap(
 			<B_services>
 			// Ajouter les services disponibles dans les geoservices en fonction de son niveau d'affichage
 			<BOUCLE_services(GEOSERVICES){id_rubrique IN #GET{rubriques}}{statut=publie}{par niveau}>
-				jQuery.geoportail.addGeoservice ( map, "#TYPE", "#TITRE", '[(#DESCRIPTIF|texte_script|replace{\r,<br/>}|replace{\n,<br/>})]',
+				jQuery.geoportail.addGeoservice ( map, "#TYPE", "#TITRE", '[(#DESCRIPTIF|texte_script|replace{\r,<br\/>}|replace{\n,<br\/>}|replace{</,<\/})]',
 					{	id: #ID_GEOSERVICE,
 						url: "#URL_GEOSERVICE",
 						map: "#MAP",

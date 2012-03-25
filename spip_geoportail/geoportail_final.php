@@ -36,10 +36,10 @@ function geoportail_affichage_final($page)
 ';
 	
 	$header =
-'<script>
+'<script type="text/javascript">
 jQuery.geoportail.hash = "'.$action.'";
 jQuery.geoportail.versionAPI = "'.$version.'";</script>
-<script language=javascript>jQuery(document).ready(	function() { loadAPI(); });</script>
+<script type="text/javascript">jQuery(document).ready(	function() { loadAPI(); });</script>
 
 <!-- OpenLayers styles : -->
 <link id="__OpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/'.$version.'/theme/default/style.css"/>

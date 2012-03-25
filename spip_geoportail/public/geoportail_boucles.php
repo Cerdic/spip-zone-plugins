@@ -20,7 +20,7 @@ function geoportail_popup_zone ($name, $selected=null, $class='', $options="")
 	eval ('$p = array('._T("geoportail:tzone").');');
 	$i=0;
 	foreach ($p as $v)
-	{	$s .= "<option value='$v'".($v==$selected ? ' SELECTED':'').">"._T("geoportail:".strtolower($v))."</option>";
+	{	$s .= "<option value='$v'".($v==$selected ? ' selected="selected"':'').">"._T("geoportail:".strtolower($v))."</option>";
 	}
 	$s.= "</select>\n";
 	return $s;

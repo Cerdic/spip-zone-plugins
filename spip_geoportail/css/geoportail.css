@@ -198,4 +198,5 @@ div.gpLUSResult:hover, div.gpLUSResultAlternate:hover
 {	border:1px solid #369;
 	border-radius: 0;
 	padding:0;
+	background:none;
 }

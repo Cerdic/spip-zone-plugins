@@ -15,8 +15,9 @@
 		 * Il se peut que l'init soit execute avant que l'API ne soit chargee
 		 * Ajout d'un code temporisateur qui attend 300 ms avant de relancer l'init
 		 */
-		var f;
-		for (var i=0, l= clss.length; i<l; i++) 
+		var f, i;
+		var l=clss.length;
+		for (i=0; i<l; i++) 
 		{	try {
 				f= eval(clss[i]);
 			} catch (e) {
