@@ -47,7 +47,7 @@ function exec_adherents()
 		if ( test_plugin_actif('FPDF') && test_plugin_actif('COORDONNEES') ) { // etiquettes
 			echo debut_cadre_enfonce('',true);
 			echo recuperer_fond('prive/inc_cadre_etiquette');
-			fin_cadre_enfonce();
+			echo fin_cadre_enfonce(true);
 		}
 		//Filtre ID et groupe : si le filtre id est actif, on ignore le filtre groupe
 		$id = intval(_request('id'));
@@ -65,7 +65,7 @@ function exec_adherents()
 			echo debut_cadre_enfonce('',true);
 			echo '<h3>'. _T('plugins_vue_liste') .'</h3>';
 			echo adherents_table($liste_id_auteurs);
-			fin_cadre_enfonce();
+			echo fin_cadre_enfonce(true);
 		}
 		debut_cadre_association('annonce.gif', 'adherent_titre_liste_actifs');
 		echo "<table width='100%' class='asso_tablo_filtres'>\n";
