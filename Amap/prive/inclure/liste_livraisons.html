@@ -5,6 +5,7 @@
 	<tr>
 		<th><:amap:date_livraison:></th>
 		<th><:amap:contenu_panier:></th>
+		<th><:amap:action:></th>
 	</tr>
 	</thead>
 	<tbody>
@@ -12,6 +13,7 @@
 	<tr>
 		<td>[(#DATE_LIVRAISON|affdate{'d/m/Y'})]</td>
 		<td>[(#CONTENU_PANIER|PtoBR)]</td>
+		<td><a href='[(#URL_ECRIRE{livraison_enregistre}|parametre_url{id_amap_livraison,#ID_AMAP_LIVRAISON})]'><:amap:action_modifier:></a></td>
 	</tr>
 	</BOUCLE_livraisons>
 	</tbody>
