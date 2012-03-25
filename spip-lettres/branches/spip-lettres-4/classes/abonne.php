@@ -250,6 +250,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				$chaine_format = '&format='.$this->format;
 			}
 			$parametres = 'lang='.$arguments['lang'].$chaine_rubriques.'&code='.$this->code.'&email='.$this->email.$chaine_format;
+			if (isset($arguments['id_theme']))
+				$parametres .= '&id_theme='.$arguments['id_theme'];
 
 			$objet			= recuperer_fond("emails/lettres_".$action."_titre", $arguments);
 			$message_html	= recuperer_fond("emails/lettres_".$action."_html", $arguments);

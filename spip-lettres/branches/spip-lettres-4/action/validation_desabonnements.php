@@ -46,6 +46,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			$redirection = generer_url_public($GLOBALS['meta']['spip_lettres_fond_formulaire_lettres'], "lang=$lang&message=validation_desabonnements_erreur", true);
 		}
 
+		if ($id_theme = intval($_REQUEST['id_theme']) AND sql_countsel ("spip_themes", "id_theme=$id_theme") == 1)
+			$redirection .= "&id_theme=$id_theme";
+
 		header('Location: ' . $redirection);
 		exit();
 

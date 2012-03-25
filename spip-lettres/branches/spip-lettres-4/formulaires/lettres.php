@@ -49,6 +49,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 						'format'			=> 'mixte',
 						'choix'				=> 'abonnements'
 						);
+		if ($id_theme = intval(_request('id_theme')) AND sql_countsel ("spip_themes", "id_theme=$id_theme") == 1)
+			$valeurs['id_theme'] = $id_theme;
+		
 		return $valeurs;
 	}
 
@@ -59,7 +62,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$rubriques	= _request('rubriques');
 		$format		= _request('format');
 		$choix		= _request('choix');
-
+		if (intval(_request('id_theme')) == _request('id_theme')
+			AND sql_countsel ("spip_themes", "id_theme="._request(id_theme)) == 1)
+			$id_theme = _request('id_theme');
+		
 		$erreurs = array();
 
 		if (!lettres_verifier_validite_email($email))
@@ -103,6 +109,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$format		= _request('format');
 		$choix		= _request('choix');
 		$lang		= $GLOBALS['spip_lang'];
+		if (intval(_request('id_theme')) == _request('id_theme')
+			AND sql_countsel ("spip_themes", "id_theme="._request(id_theme)) == 1)
+			$id_theme = _request('id_theme');
+		else $id_theme = null;
 
 		switch($choix) {
 			case 'abonnements':
@@ -117,7 +127,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 															array(
 																'lang'		=> $lang,
 																'rubriques'	=> $rubriques,
-																'themes'	=> $themes
+																'themes'	=> $themes,
+																'id_theme'	=> $id_theme
 																)
 															);
 				if ($resultat)
@@ -131,7 +142,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 															array(
 																'lang'		=> $lang,
 																'rubriques'	=> $rubriques,
-																'themes'	=> $themes
+																'themes'	=> $themes,
+																'id_theme'	=> $id_theme
 																)
 															);
 				if ($resultat)
@@ -143,7 +155,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				$resultat = $abonne->envoyer_notification('changement_format', 
 															array(
 																'lang'		=> $lang,
-																'format'	=> $format
+																'format'	=> $format,
+																'id_theme'	=> $id_theme
 																)
 															);
 				if ($resultat)

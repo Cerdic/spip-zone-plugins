@@ -4,29 +4,39 @@
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
+<BOUCLE_rt(THEMES){id_theme = #ENV{id_theme}}>#SET{titre_theme, #TITRE} #SET{rubrique_theme,  #ID_RUBRIQUE}</BOUCLE_rt>
+
 [(#ENV{editable})
 <form method="post" action="#ENV{action}#formulaire_lettres">
 
 #ACTION_FORMULAIRE{#ENV{action}}
 
+[(#GET{titre_theme}|oui)[<input type="hidden" name="id_theme" value="(#ENV{id_theme})"/>]]
+
 <fieldset>
 
-[<legend>
-(#NOOP|lettres_un_seul_theme|?{
-	<:lettres:lettre_information:> : [(#NOOP|lettres_titre_theme_par_defaut)],
-	<:lettres:lettres_information:>})
+<legend>
+[(#GET{titre_theme}|?{
+	[<:lettres:lettre_information:> : (#GET{titre_theme})]
+	[<input type="hidden" name="rubriques&#91;&#93;" value="(#GET{rubrique_theme})"/>]
+	,
+	[(#NOOP|lettres_un_seul_theme|?{
+		<:lettres:lettre_information:> : [(#NOOP|lettres_titre_theme_par_defaut)]
+		<input type="hidden" name="rubriques&#91;&#93;" value="[(#NOOP|lettres_rubrique_theme_par_defaut)]"/>
+		,
+		<:lettres:lettres_information:>})
+	]
+})]
 </legend>
-]
 
 <ul>
-[(#NOOP|lettres_un_seul_theme|oui)<li><input type="hidden" name="rubriques&#91;&#93;" value="[(#NOOP|lettres_rubrique_theme_par_defaut)]"/></li>]
-[(#NOOP|lettres_un_seul_theme|non)
+[(#GET{titre_theme}|non) [(#NOOP|lettres_un_seul_theme|non)
 	<li class="editer_themes obligatoire[ (#ENV*{erreurs}|table_valeur{rubriques}|oui)erreur]">
 	<label><:lettres:themes:></label>
 	<INCLURE {fond=formulaires/inc_themes} {env}>
 	[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{rubriques})</span>]
 </li>
-]
+]]
 <li class="editer_nom">
 <label for="nom"><:lettres:nom:></label>
 <input type="text" class="text" name="nom" id="nom" value="#ENV{nom}" size="30" />
