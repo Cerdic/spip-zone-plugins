@@ -50,8 +50,6 @@ maj:2012-02-15; version:0.2.0; licence:GPL; copyleft:Jeannot Lapin, Marcel Bolla
 			<span class="erreur_message"><:asso:erreur_pas_de_classe_financiere:></span>
 <//B_mode_paiement>
 		</li>
-[(#REM)<!-- insertion des champs extras ou autres -->]
-[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{ contexte, [(#ENV**|unserialize)]})],data,''})]})]
 [(#ENV{champs_legende}|oui)
     </ul>
 </fieldset>
