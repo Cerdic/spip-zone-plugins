@@ -6,17 +6,13 @@
 		compatibilite="[3.0.0-beta;["
 		logo=""
 		schema="0.0.1"
-		documentation=""
 >
-
 	<nom>Titre Court pour Rubriques</nom>
 
 	<auteur>Matthieu Marcillaud [->magraine.net]</auteur>
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="cextras" compatibilite="[2.1.0;[" />
+	<necessite nom="cextras" compatibilite="[3.0.5;[" />
 
 	<pipeline nom="declarer_champs_extras" inclure="base/titrecourt.php" />
-
-
 </paquet>
