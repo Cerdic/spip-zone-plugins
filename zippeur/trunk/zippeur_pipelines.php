@@ -1,5 +1,5 @@
 <?php
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
 function zippeur_declarer_tables_principales($table){
 	$table['spip_zippeur'] = array(
 		'field'=>array(
