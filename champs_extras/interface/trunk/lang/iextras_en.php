@@ -88,7 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'precisions_pour_class' => 'Add CSS classes for the element,
 		separated by a space. Example: "inserer_barre_edition" for a block
 		with the Porte Plume plugin',
-	'precisions_pour_datas' => 'Some field types require a list of accepted values​​: please indicate one per line, followed by a comma and a description. A blank line to the default value. The description may be a language string.', # MODIF
+	'precisions_pour_datas' => 'Some field types require a list of accepted values​​: please indicate one per line, followed by a comma and a description. A blank line for the default value. The description may be a language string.',
 	'precisions_pour_explication' => 'You can provide more information about the data field. 
 		May be a "plugin:stringname" idiom..',
 	'precisions_pour_label' => 'May be a "plugin:stringname" idiom.',
