@@ -22,8 +22,8 @@ function zippeur_creer_fichier($squel,$chemin,$options=array()){
 }
 
 function zippeur_copier_fichier($orig,$dest){
-	zippeur_creer_arbo($chemin);
-	defined('_DIR_SITE') ? $chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES.$chemin : $chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES.$chemin;
+	zippeur_creer_arbo($dest);
+	defined('_DIR_SITE') ? $chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES : $chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES ;
 	copy(find_in_path($orig),$chemin.$dest);
 }
 ?>
