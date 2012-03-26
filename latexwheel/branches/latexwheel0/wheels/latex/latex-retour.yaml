@@ -1,0 +1,13 @@
+commande:
+  # on passe en dernière, on supprime les tags
+  match: "#\\(.*)/debut(.*)/fin#"
+  replace: supprimer_verb
+  is_callback: Y
+  priority: -10
+#  if_str: "\subsection"
+
+fin:
+  match: ['/debut', '/fin','/sepcel']
+  replace: ['{', '}','&']
+  type: str
+  priority: 0
