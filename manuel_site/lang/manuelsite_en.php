@@ -9,18 +9,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configurer_explication' => 'This plugin displays an help icon on every page of the private space showing the Website Editor Manual. This manual is @texte@ Its purpose is to explain the architecture of the site to the editors, in which section to store what, how to encode and install a video… So, all that you want and which is specific to your website.',
-	'configurer_explication_l_article' => '<a href="@url@" title="Website Editor Manual">the article #@idart@</a> of your website.', # MODIF
+	'configurer_explication_l_article' => '<a href="@url@" title="Website Editor Manual">the article #@idart@</a> of your website.',
 	'configurer_explication_un_article' => 'an article of the website.',
 	'configurer_titre' => 'Configure the Website Editor Manual',
 
 	// E
-	'erreur_article' => 'The article of the manuel defined in the plugin\'s configuration is untraceable : @idart@', # MODIF
+	'erreur_article' => 'The article of the manual defined in the plugin\'s configuration is not found: #@idart@',
 	'erreur_pas_darticle' => 'The article of the manuel is not defined in the plugin\'s configuration',
 	'explication_afficher_bord_gauche' => 'Display the manual\'s icon in the top left corner (if not, the manual will be displayed in a column)',
 	'explication_background_color' => 'Type in the background color of the manual display area',
 	'explication_cacher_public' => 'Hide this article in the public space, even in rss flow',
 	'explication_email' => 'Contact email for editors',
-	'explication_faq' => 'Listed below are the generic blocks used to write your manual (the text is displayed, not formatted, when then mouse is over the code). Just copy / paste the code in the textarea of your article.<br />To hide the question, add <i>|q=no</i>.<br />To add parameters, add <i>|params=p1:v1;p2:v2</i>.', # MODIF
+	'explication_faq' => 'Listed below are generic blocks codes which can be used to write your manual. The text for each code is displayed (without formatting) when rolling over it. Just copy / paste the code in the textarea of your article.<br />To hide the question, add the parameter <i>|q=no</i>.<br />To add other parameters, add <i>|params=p1:v1;p2:v2</i>.',
 	'explication_id_article' => 'Type in the number of the article which contains the manual',
 	'explication_intro' => 'Introduction text of the manual (will be placed before the introduction of the article)',
 	'explication_largeur' => 'Type in the manual display area width (in px)',
