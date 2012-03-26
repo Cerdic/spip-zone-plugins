@@ -12,26 +12,19 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-//charger cfg
-include_spip('cfg_options');   
 include_spip('base/abstract_sql');
 
 // chargement des valeurs par defaut des champs du formulaire
 function formulaires_abomailman_mini_une_liste_charger_dist($id_abomailman = ""){
 
-	//initialise les variables d'environnement pas d√©faut
+	//initialise les variables d'environnement pas defaut
 	$valeurs = array('email');
 
 	// On verifie que la liste est bien accessible
-	if (sql_getfetsel('id_abomailman','spip_abomailmans','id_abomailman ='.intval($id_abomailman).' AND desactive = 0')) {
-		$ok = true;
-		spip_log("La liste existe, on peut charger le formulaire","abomailmans");
+	if (! sql_getfetsel('id_abomailman','spip_abomailmans','id_abomailman ='.intval($id_abomailman).' AND desactive = 0')) {
+		spip_log("Le numero de liste n'est pas valable : $id_abomailman","abomailmans");
+		$valeurs['message_erreur'] = _T("abomailmans:liste_non_existante");
 	}
-	else{
-		$ok = false;
-		spip_log("Le numero de liste n'est pas valable","abomailmans");
-	}
-	if ($ok)
 	return $valeurs;
 }
 
@@ -42,7 +35,6 @@ function formulaires_abomailman_mini_une_liste_verifier_dist($id_abomailman = ""
 	$erreurs = array();
 
 	// Faire une fonction de verif sur le mail pour validite
-
 	$email = _request('email');
 	
 	if($email == ''){
@@ -60,25 +52,24 @@ function formulaires_abomailman_mini_une_liste_verifier_dist($id_abomailman = ""
 		}
 	}
 
-   
-    //message d'erreur gen√©ralis√©
-    if (count($erreurs)) {
-        $erreurs['message_erreur'] .= _T('abomailmans:verifier_formulaire');
-    }
+   //message d'erreur
+   if (count($erreurs)) {
+      $erreurs['message_erreur'] .= _T('abomailmans:verifier_formulaire');
+   }
 
-    return $erreurs; // si c'est vide, traiter sera appele, sinon le formulaire sera resoumis
+   return $erreurs; // si c'est vide, traiter sera appele, sinon le formulaire sera resoumis
 }
 
 function formulaires_abomailman_mini_une_liste_traiter_dist($id_abomailman = ""){
-	 include_spip('inc/abomailmans');
-   	$nom = _request('nom');
+	include_spip('inc/abomailmans');
+   $nom = _request('nom');
 	$email = _request('email');
 
 	$message = null;
 
-    	//on initialise l'envoi
+   // on initialise l'envoi
 	// on traite chaque liste via une fonction reutilisable ailleurs
-	//on passe abonnement à true d'office
+	// on passe abonnement à true d'office
 	$traiter=abomailman_traiter_abonnement($id_abomailman,true);
 	$titre = $traiter[0];
 	$proprio_email=$traiter[1];
@@ -87,28 +78,20 @@ function formulaires_abomailman_mini_une_liste_traiter_dist($id_abomailman = "")
 	$body="$nom - $email ".$traiter[4];
 	$headers=$traiter[5];
 	
-  // si on veut ajouter un mail de notification ou de test
-/*
-$liste_email = array(
-	$liste_email,"verif@exemple.com"
-);
-*/
-		if (abomailman_mail($nom, $email, $proprio_email,$liste_email, $sujet, $body,$headers)){
+	if (abomailman_mail($nom, $email, $proprio_email,$liste_email, $sujet, $body,$headers)){
 		$message_listes  .= "<p><strong>$titre</strong><p>";
-		}else{
+	}else{
 		$message_listes .= "<p><strong>". _T('pass_erreur_probleme_technique')."</strong></p>";
 		$probleme=true;
-		} 
+	} 
 		
  	$message .= $body."". _T("abomailmans:message_confirmation_unique_a");
-
 	$message .= $message_listes;
 	$message .= "<p>" . _T("abomailmans:message_confirm_suite") . "</p>";
 
 	if ($probleme==false)
-	return $message;
-	else return $message_listes;
+		return $message;
+	else
+		return $message_listes;
 }
-
-
 ?>
