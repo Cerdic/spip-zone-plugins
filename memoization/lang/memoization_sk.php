@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_memcache_servers' => 'uviesť server podľa riadka vo forme <kbd>host:port</kbd>',
 
 	// I
-	'info_taille_cache_inconnue' => 'La méthode @methode@ ne permet pas de connaître la taille du cache.', # NEW
+	'info_taille_cache_inconnue' => 'Metóda @methode@ nepozná veľkosť cache.',
 
 	// L
 	'label_cache_pages' => 'Riadiť cache stránok',
