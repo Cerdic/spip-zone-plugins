@@ -68,6 +68,7 @@ function agenda_declarer_tables_objets_sql($tables){
 		'texte_objet' => 'agenda:info_evenement',
 		'texte_modifier' => 'agenda:icone_modifier_evenement',
 		'texte_creer' => 'agenda:titre_cadre_ajouter_evenement',
+		'texte_logo_objet' => 'agenda:texte_logo_objet',
 		'info_aucun_objet'=> 'agenda:info_aucun_evenement',
 		'info_1_objet' => 'agenda:info_un_evenement',
 		'info_nb_objets' => 'agenda:info_nombre_evenements',
