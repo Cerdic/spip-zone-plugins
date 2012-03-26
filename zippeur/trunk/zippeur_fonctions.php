@@ -1,5 +1,24 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/zippeur_dynamique');
+function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=array()){
+	if ($date == '') {
+		$date = date("Y-m-d H:i:s",time());
+	}
+	defined('_DIR_SITE') ? $chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES.$dossier : $chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES.$dossier;
+	sous_repertoire($chemin);
+	
+	// création des fichiers dynamiques	
+	foreach ($dynamiques as $dyn){
+		zippeur_creer_fichier($dyn[0],$dossier.'/'.$dyn[1],$dyn[2]);	
+	}
+	foreach ($statiques as $stat){
+		zippeur_copier_fichier($stat[0],$dossier.'/'.$stat[1]);
+	}
+	return zippeur(array($chemin),$date,$cmd,$dossier,$chemin);
+}
+
 function zippeur($array,$date,$cmd,$nom='',$plat='oui'){
 	$nom == '' ? $nom = md5(serialize($array)) : $nom = $nom;
 	$cmd =='' ? $cmd = lire_config('zippeur/zippeur_cmd'):$cmd=$cmd;
