@@ -55,24 +55,24 @@ function exec_compte_resultat()
 		}
 		$var = serialize(array($id_exercice, $join, $sel, $where, $having, $order)); //!\ les cles numeriques peuvent poser probleme... <http://www.mail-archive.com/php-bugs@lists.php.net/msg100262.html> mais il semble qu'ici le souci vient de l'absence d'encodage lorsqu'on passe $var par URL...
 //		$var = serialize(array('id'=>$id_exercice, '1'=>$join, '2'=>$sel, '3'=>$where, '4'=>$having, '5'=>$order));
-		if($plan){ // on peut exporter : pdf, csv, xml, ...
+		if(autoriser('associer', 'export_compte_resultats') && $plan){ // on peut exporter : pdf, csv, xml, ...
 			echo debut_cadre_enfonce('',true);
 			echo '<h3>'. _T('asso:cpte_resultat_mode_exportation') .'</h3>';
 			if (test_plugin_actif('FPDF')) { // impression en PDF : _T('asso:bouton_impression')
-				echo icone1_association('PDF', generer_url_ecrire('export_compteresultats_pdf').'&var='.rawurlencode($var), 'print-24.png', 'print-24.png'); //!\ generer_url_ecrire() utilise url_enconde() or il est preferable avec les grosses variables serialisees d'utiliser rawurlencode()
+				echo icone1_association('PDF', generer_url_ecrire('export_compteresultats_pdf').'&var='.rawurlencode($var), 'print-24.png'); //!\ generer_url_ecrire() utilise url_enconde() or il est preferable avec les grosses variables serialisees d'utiliser rawurlencode()
 			}
 			foreach(array('csv','ctx','tex','tsv','xml','yaml') as $type) { // autres exports (donnees brutes) possibles
-				echo icone1_association(strtoupper($type), generer_url_ecrire("export_compteresultats_$type").'&var='.rawurlencode($var), "export-$type.png"); //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
+				echo icone1_association(strtoupper($type), generer_url_ecrire("export_compteresultats_$type").'&var='.rawurlencode($var), 'export-24.png'); //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
 			}
 			echo fin_cadre_enfonce(true);
 		}
-		debut_cadre_association('finances-24.png', 'cpte_resultat_titre_general', $exercice_data['intitule']);
+		debut_cadre_association('finances-24.jpg', 'cpte_resultat_titre_general', $exercice_data['intitule']);
 		$depenses = compte_resultat_charges_produits($var, intval($GLOBALS['association_metas']['classe_charges']));
 		$recettes = compte_resultat_charges_produits($var, intval($GLOBALS['association_metas']['classe_produits']));
 		compte_resultat_benefice_perte($recettes, $depenses);
 		compte_resultat_benevolat($var, intval($GLOBALS['association_metas']['classe_contributions_volontaires']));
 /*
-		if($plan){ // on peut exporter : pdf, csv, xml, ...
+		if(autoriser('associer', 'export_compte_resultats') && $plan){ // on peut exporter : pdf, csv, xml, ...
 			echo "<br /><table width='100%' class='asso_tablo' cellspacing='6' id='asso_tablo_exports'>\n";
 			echo '<tbody><tr>';
 			echo '<td>'. _T('asso:cpte_resultat_mode_exportation') .'</td>';
@@ -199,6 +199,98 @@ function compte_resultat_benevolat($var, $class) {
 	echo '<th class="decimal">'. association_nbrefr($total_recettes) .'</th>';
 	echo '<th class="decimal">'. association_nbrefr($total_depenses) .'</th>';
 	echo "</tr>\n</tfoot>\n</table>\n";
+}
+
+	include_spip('inc/charsets');
+	include_spip('inc/association_plan_comptable');
+
+// Brique commune aux classes d'exportation des donnees du compte de resultat
+class ExportCompteResultats {
+
+	var $exercice;
+	var $join;
+	var $sel;
+	var $where;
+	var $having;
+	var $order;
+	var $out;
+
+	function  __construct($var) {
+		$tableau = unserialize(rawurldecode($var));
+		$this->exercice = $tableau[0];
+		$this->join = $tableau[1];
+		$this->sel = $tableau[2];
+		$this->where = $tableau[3];
+		$this->having = $tableau[4];
+		$this->order = $tableau[5];
+		$this->out = '';
+	}
+
+	// de type CSV,INI,TSV, etc.
+	function LignesSimplesEntete($champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='') {
+		$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('asso:entete_code')))) .$champFin.$champsSeparateur;
+		$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('asso:entete_intitule')))) .$champFin.$champsSeparateur;
+		$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('asso:entete_montant')))) .$champFin.$lignesSeparateur;
+	}
+
+	// de type CSV,INI,TSV, etc.
+	function LignesSimplesCorps($key, $champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='') {
+		switch ($key) {
+			case 'charges' :
+				$quoi = "SUM(depense) AS valeurs";
+				break;
+			case 'produits' :
+				$quoi = "SUM(recette) AS valeurs";
+				break;
+			case 'contributions_volontaires' :
+				$quoi = "SUM(depense) AS charge_evaluee, SUM(recette) AS produit_evalue";
+				break;
+		}
+		$query = sql_select(
+			"imputation, $quoi, DATE_FORMAT(date, '%Y') AS annee".$this->sel, // select
+			'spip_asso_comptes '.$this->join, // from
+			$this->where, // where
+			$this->order, // group by
+			$this->order, // order by
+			'', // limit
+			$this->having .$GLOBALS['association_metas']['classe_'.$key] // having
+		);
+		$chapitre = '';
+		$i = 0;
+		while ($data = sql_fetch($query)) {
+			if ($key==='contributions_volontaires') {
+				if ($data['charge_evaluee']>0) {
+					$valeurs = $data['charge_evaluee'];
+				} else {
+					$valeurs = $data['produit_evalue'];
+				}
+			} else {
+				$valeurs = $data['valeurs'];
+			}
+			$new_chapitre = substr($data['code'], 0, 2);
+			if ($chapitre!=$new_chapitre) {
+				$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), $new_chapitre) .$champFin.$champsSeparateur;
+				$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))) .$champFin.$champsSeparateur;
+				$this->out .= $champsSeparateur.' '.$champsSeparateur;
+				$this->out .= $lignesSeparateur;
+				$chapitre = $new_chapitre;
+			}
+			$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), $data['code']) .$champFin.$champsSeparateur;
+			$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), $data['intitule']) .$champFin.$champsSeparateur;
+			$this->out .= $champDebut.$valeurs.$champFin.$lignesSeparateur;
+		}
+	}
+
+	function leFichier($ext) {
+		$fichier = _DIR_RACINE.'/'._NOM_TEMPORAIRES_ACCESSIBLES.'compte_resultats_'.$this->exercice.".$ext";
+		$f = fopen($fichier, 'w');
+		fputs($f, $this->out);
+		fclose($f);
+		header('Content-type: application/'.$ext);
+		header('Content-Disposition: attachment; filename="'.$fichier.'"');
+		readfile($fichier);
+	}
+
 }
 
 ?>

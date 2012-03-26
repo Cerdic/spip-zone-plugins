@@ -14,46 +14,28 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-// Export du Compte de Resultat en .tsv ou .tab
+include_spip('exec/compte_resultat'); // c'est pour la definition de classe ExportCompteResultats
+
+// Export du Compte de Resultat au format TSV
+// http://fr.wikipedia.org/wiki/Format_TSV
 function exec_export_compteresultats_tsv() {
 	if (!autoriser('associer', 'export_compteresultats')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		include_spip('inc/charsets');
-		include_spip('inc/association_plan_comptable');
-		$tsv = new TSV(_request('var'));
-		$tsv->EnTete();
+		$tsv = new ExportCompteResultats(_request('var'));
+		$tsv->LignesSimplesEntete("\t", "\n", array("\t"=>'\t',"\n"=>'\n'), '"', '"');
 		foreach (array('charges', 'produits', 'contributions_volontaires') as $key) {
-			$tsv->LesEcritures($key);
+			$tsv->LignesSimplesCorps($key, ',', "\n", array("\t"=>'\t',"\n"=>'\n'), '"', '"');
 		}
-		$tsv->Enregistre();
+		$tsv->leFichier('tab');
 	}
 }
 
 /**
  *  Utilisation d'une classe tres tres tres simple !!!
  */
-class TSV {
-
-	var $exercice;
-	var $join;
-	var $sel;
-	var $where;
-	var $having;
-	var $order;
-	var $out;
-
-	function  __construct($var) {
-		$tableau = unserialize(rawurldecode($var));
-		$this->exercice = $tableau[0];
-		$this->join = $tableau[1];
-		$this->sel = $tableau[2];
-		$this->where = $tableau[3];
-		$this->having = $tableau[4];
-		$this->order = $tableau[5];
-		$this->out = '';
-	}
+class TSV extends ExportCompteResultats {
 
 	function EnTete() {
 		$this->out .= str_replace(array("\t","\n"), array('\t','\n'), utf8_decode(html_entity_decode(_T('asso:entete_code')))) ."\t";
@@ -104,16 +86,6 @@ class TSV {
 			$this->out .= str_replace(array("\t","\n"), array('\t','\n'), $data['intitule']) ."\t";
 			$this->out .= $valeurs."\n";
 		}
-	}
-
-	function Enregistre() {
-		$fichier = _DIR_RACINE.'/'._NOM_TEMPORAIRES_ACCESSIBLES.'compte_resultats_'.$this->exercice.'.tab';
-		$f = fopen($fichier, 'w');
-		fputs($f, $this->out);
-		fclose($f);
-		header('Content-type: application/tsv');
-		header('Content-Disposition: attachment; filename="'.$fichier.'"');
-		readfile($fichier);
 	}
 
 }

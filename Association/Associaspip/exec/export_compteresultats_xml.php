@@ -14,9 +14,12 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-// Export du Compte de Resultat au format Xml
+include_spip('exec/compte_resultat'); // c'est pour la definition de classe ExportCompteResultats
+
+// Export du Compte de Resultat au format XML
+// http://fr.wikipedia.org/wiki/Extensible_Markup_Language
 function exec_export_compteresultats_xml() {
-	if (!autoriser('associer', 'export_compteresultats_xml')) {
+	if (!autoriser('associer', 'export_compteresultats')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -29,33 +32,14 @@ function exec_export_compteresultats_xml() {
 			$xml->LesEcritures($key);
 		}
 		$xml->Pied();
-		$xml->Enregistre();
+		$xml->leFichier('xml');
 	}
 }
 
 /**
  *  Utilisation d'une classe tres tres tres simple !!!
  */
-class XML {
-
-	var $exercice;
-	var $join;
-	var $sel;
-	var $where;
-	var $having;
-	var $order;
-	var $out;
-
-	function __construct($var) {
-		$tableau = unserialize(rawurldecode($var));
-		$this->exercice = $tableau[0];
-		$this->join = $tableau[1];
-		$this->sel = $tableau[2];
-		$this->where = $tableau[3];
-		$this->having = $tableau[4];
-		$this->order = $tableau[5];
-		$this->out = '';
-	}
+class XML extends ExportCompteResultats {
 
 	function EnTete() {
 		$this->out .= '<?xml version="1.0" encoding="'.$GLOBALS['meta']['charset'].'"?>'."\n";
@@ -127,16 +111,6 @@ class XML {
 		$this->out .= '</CompteDeResultat>'."\n";
 	}
 
-	function Enregistre() {
-		$fichier =_DIR_RACINE.'/'._NOM_TEMPORAIRES_ACCESSIBLES.'compte_resultats_'.$this->exercice.'.xml';
-		$f = fopen($fichier, 'w');
-		fputs($f, $this->out);
-		fclose($f);
-		header('Content-Type: text/xml');
-		header('Content-Type: application/xml');
-		header('Content-Disposition: attachment; filename="'.$fichier.'"');
-		readfile($fichier);
-	}
 }
 
 ?>

@@ -16,40 +16,38 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip('exec/compte_resultat'); // c'est pour la definition de classe ExportCompteResultats
 
-// Export du Compte de Resultat au format LaTeX
-// http://fr.wikipedia.org/wiki/LaTeX
-function exec_export_compteresultats_tex() {
+// Export du Compte de Resultat au format JSON
+// http://fr.wikipedia.org/wiki/Json
+function exec_export_compteresultats_json() {
 	if (!autoriser('associer', 'export_compteresultats')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
+		include_spip('inc/charsets');
+		include_spip('inc/association_plan_comptable');
 		$var = _request('var');
-		$latex = new LaTeX(_request('var'));
-		$latex->EnTete();
+		$json = new JSON($var);
+		$json->EnTete();
 		foreach (array('charges', 'produits', 'contributions_volontaires') as $key) {
-			$latex->LesEcritures($key);
+			$json->LesEcritures($key);
 		}
-		$latex->Pied();
-		$latex->leFichier('tex');
+		$json->Pied();
+		$json->leFichier('json');
 	}
 }
 
 /**
  *  Utilisation d'une classe tres tres tres simple !!!
  */
-class LaTeX extends ExportCompteResultats {
+class JSON extends ExportCompteResultats {
 
 	function EnTete() {
-		$this->out .= '\\documentclass[a4paper]{article}'."\n";
-		$this->out .= '\\usepackage['.$GLOBALS['meta']['charset'].']{inputenc}'."\n";
-		$this->out .= '\\usepackage[french]{babel}'."\n";
-		$this->out .= '\\usepackage[table]{xcolor}'."\n";
-		$this->out .= '%generator: Associaspip'."\n";
-		$this->out .= '\\title{'. html_entity_decode(_T('asso:cpte_resultat_titre_general')) .'\\\\ '. _T('Exercice') .' : '. sql_asso1champ('exercice', $this->exercice, 'intitule') .'}'."\n";
-		$this->out .= '\\author{'. $GLOBALS['association_metas']['nom'] .'}'."\n";
-		$this->out .= '\\date{\\today}'."\n";
-		$this->out .= '\\begin{document}'."\n";
-		$this->out .= '\\maketitle{}'."\n";
+		$this->out .= "{\n\t'CompteDeResultat': \n";
+		$this->out .= "\t\t{\n\t\t\t'Entete': \n\t\t\t{\n\t\t\t\n";
+		$this->out .= "\t\t\t\t{'Titre': '". utf8_decode(html_entity_decode(_T('asso:cpte_resultat_titre_general'))) ."' }\n";
+		$this->out .= "\t\t\t\t{'Nom': '". $GLOBALS['association_metas']['nom'] ."' }\n";
+		$this->out .= "\t\t\t\t{'Exercice': '". sql_asso1champ('exercice', $this->exercice, 'intitule') ."' }\n";
+		$this->out .= "\t\t\t}\n\t\t}\n"; // /Entete
 	}
 
 	function LesEcritures($key) {
@@ -64,8 +62,7 @@ class LaTeX extends ExportCompteResultats {
 				$quoi = "SUM(depense) AS charge_evaluee, SUM(recette) AS produit_evalue";
 				break;
 		}
-		$this->out .= '\\section*{'. ucfirst($key) .'}'."\n";
-		$this->out .= '\\begin{tabular}{|l p{.7562\\textwidth} r|}'."\n"; // 20/210=9.52381/100 30/210=14.8571/100 (210-20-30)/100=75.61909
+		$this->out .= $this->out .= "\t\t{\n\t\t\t". ucfirst($key) ."': \n\t\t\t{\n\t\t\t\n";
 		$query = sql_select(
 			"imputation, $quoi, DATE_FORMAT(date, '%Y') AS annee ".$this->sel, // select
 			'spip_asso_comptes'.$this->join, // from
@@ -89,19 +86,28 @@ class LaTeX extends ExportCompteResultats {
 			}
 			$new_chapitre = substr($data['code'], 0, 2);
 			if ($chapitre!=$new_chapitre) {
-				$this->out .= str_replace(array('\\','&'), array('\\backslash{}','\\&'), $new_chapitre) .' & ';
-				$this->out .= '\multicolumn{2}{l|}{'. str_replace(array('\\','&'), array('\\backslash{}','\\&'), ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))) .'}\\\\'."\n";
+				if ($chapitre!='') {
+					$this->out .= "\t\t\t}\n"; // /Chapitre
+				}
+				$this->out .= "\t\t\t'Chapitre': \n\t\t\t{\n";
+				$this->out .= "\t\t\t\t{'Code': '". str_replace(array("'",'<','>'), array('&quot;','&lt;','&gt;'), $new_chapitre) ."' }\n";
+				$this->out .= "\t\t\t\t{'Libelle': '". str_replace(array("'",'<','>'), array('&quot;','&lt;','&gt;'), ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))) ."' }\n";
 				$chapitre = $new_chapitre;
 			}
-			$this->out .= str_replace(array('\\','&'), array('\\backslash{}','\\&'), $data['code']) .' & ';
-			$this->out .= str_replace(array('\\','&'), array('\\backslash{}','\\&'), $data['intitule']) .' & ';
-			$this->out .= $valeurs.'\\\\'."\n";
+			$this->out .= "\t\t\t\t'Categorie': \n\t\t\t\t\t{\n";
+			$this->out .= "\t\t\t\t\t\t{'Code': '". str_replace(array("'",'<','>'), array('&quot;','&lt;','&gt;'), $data['code']) ."' }\n";
+			$this->out .= "\t\t\t\t\t\t{'Intitule': '". str_replace(array("'",'<','>'), array('&quot;','&lt;','&gt;'), $data['intitule']) ."' }\n";
+			$this->out .= "\t\t\t\t\t\t{'Montant': '$valeurs' }\n";
+			$this->out .= "\t\t\t\t\t}\n"; // /Categorie
 		}
-		$this->out .= '\\end{tabular}'."\n";
+		if ($chapitre!='') {
+			$this->out .= "\t\t\t}\n"; // /Chapitre
+		}
+		$this->out .= "\n\t\t\t}\n"; // /Classe
 	}
 
 	function Pied() {
-		$this->out .= '\end{document}'."\n";
+		$this->out .= "\n}\n";
 	}
 
 }

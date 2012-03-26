@@ -14,9 +14,12 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
+include_spip('exec/compte_resultat'); // c'est pour la definition de classe ExportCompteResultats
+
 // Export du Compte de Resultat au format YAML
+// http://fr.wikipedia.org/wiki/Yaml
 function exec_export_compteresultats_yaml() {
-	if (!autoriser('associer', 'export_compteresultats_xml')) {
+	if (!autoriser('associer', 'export_compteresultats')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -28,33 +31,14 @@ function exec_export_compteresultats_yaml() {
 		foreach (array('charges', 'produits', 'contributions_volontaires') as $key) {
 			$yaml->LesEcritures($key);
 		}
-		$yaml->Enregistre();
+		$yaml->leFichier('yaml');
 	}
 }
 
 /**
  *  Utilisation d'une classe tres tres tres simple !!!
  */
-class YAML {
-
-	var $exercice;
-	var $join;
-	var $sel;
-	var $where;
-	var $having;
-	var $order;
-	var $out;
-
-	function __construct($var) {
-		$tableau = unserialize(rawurldecode($var));
-		$this->exercice = $tableau[0];
-		$this->join = $tableau[1];
-		$this->sel = $tableau[2];
-		$this->where = $tableau[3];
-		$this->having = $tableau[4];
-		$this->order = $tableau[5];
-		$this->out = '';
-	}
+class YAML extends ExportCompteResultats {
 
 	function EnTete() {
 		$this->out .= 'Encodage: '.$GLOBALS['meta']['charset'].'"?>'."\n";
@@ -111,16 +95,6 @@ class YAML {
 		}
 	}
 
-	function Enregistre() {
-		$fichier =_DIR_RACINE.'/'._NOM_TEMPORAIRES_ACCESSIBLES.'compte_resultats_'.$this->exercice.'.yaml';
-		$f = fopen($fichier, 'w');
-		fputs($f, $this->out);
-		fclose($f);
-		header('Content-Type: text/yaml');
-		header('Content-Type: application/yaml');
-		header('Content-Disposition: attachment; filename="'.$fichier.'"');
-		readfile($fichier);
-	}
 }
 
 ?>
