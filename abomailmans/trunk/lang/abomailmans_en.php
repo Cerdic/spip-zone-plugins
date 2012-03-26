@@ -98,7 +98,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mot' => 'And list the articles linked to the keyword',
 
 	// N
-	'nom' => 'Name and first name (optional)',
+	'nom' => 'Name and surname (optional)',
 	'nouveau_abomailman' => 'New mailing list',
 
 	// P
