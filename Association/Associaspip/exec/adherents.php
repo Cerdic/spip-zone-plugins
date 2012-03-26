@@ -93,13 +93,13 @@ function exec_adherents()
 		}
 		// FILTRES
 		//Filtre groupes
-		if ( sql_countsel('spip_asso_groupes', '') ) { // ne proposer que s'il y a des groupes definis
+		$qGroupes = sql_select('nom, id_groupe', 'spip_asso_groupes', 'id_groupe>=100', '', 'nom');  // on ne prend en consideration que les groupe d'id >= 100, les autres sont reserves a la gestion des autorisations
+		if ( $qGroupes && sql_count($qGroupes) ) { // ne proposer que s'il y a des groupes definis
 #		if ($GLOBALS['association_metas']['aff_groupes']) { // ne proposer que si on affiche les groupes ?? (on peut vouloir filtrer par groupe sans pour autant les afficher donc desactive)
 			echo '</td><td width="25%" class="formulaire">';
 			echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
 			echo '<input type="hidden" name="exec" value="adherents" />';
 			echo '<select name="id_groupe" onchange="form.submit()">';
-			$qGroupes = sql_select('nom, id_groupe', 'spip_asso_groupes', '', 'nom');
 			echo '<option value="">'._T('asso:tous_les_groupes').'</option>';
 			while ($groupe = sql_fetch($qGroupes)) {
 				echo '<option value="'.$groupe['id_groupe'].'"';

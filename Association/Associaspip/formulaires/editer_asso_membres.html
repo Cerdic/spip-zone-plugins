@@ -63,7 +63,7 @@
 				<th><:asso:fonction:></th>
 				<th><:asso:action:><th>
 			</tr>
-	<BOUCLE_groupes_membre(ASSO_GROUPES_LIAISONS asso_groupes){id_auteur=#ENV{id_auteur}}{par nom}{pagination}>
+	<BOUCLE_groupes_membre(ASSO_GROUPES_LIAISONS asso_groupes){id_auteur=#ENV{id_auteur}}{id_groupe>=100}{par nom}{pagination}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{'pair','impair'})]">
 				<td class="fn n"><a title="<:asso:adherent_label_voir_membre:>" href="#URL_ECRIRE{edit_groupe, id=#ID_GROUPE}">#NOM</a></td>
 				<td><input type="text" value="[(#FONCTION)]" name="fonctions[#ID_GROUPE]"></td>
@@ -77,7 +77,7 @@
 			<h3 class="legend"><:asso:rejoindre_un_groupe:></h3>
 			<p class="pagination">#PAGINATION</p>
 			<ul>
-	<BOUCLE_groupes_non_membre(ASSO_GROUPES asso_groupes_liaisons){!id_auteur=#ENV{id_auteur}}{par nom}{pagination 40}>
+	<BOUCLE_groupes_non_membre(ASSO_GROUPES asso_groupes_liaisons){!id_auteur=#ENV{id_auteur}}{id_groupe>=100}{par nom}{pagination 40}>
 				<li class="liste_auteurs">
 					<div class="choix">
 						<input type="checkbox" name="id_groupes[]" value="#ID_GROUPE" />

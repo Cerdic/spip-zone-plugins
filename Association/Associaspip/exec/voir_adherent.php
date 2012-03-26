@@ -69,8 +69,8 @@ function exec_voir_adherent(){
 		$res["adherent_label_modifier_$statut"] = array('membre_infos.png', 'auteur_infos', "id_auteur=$id_auteur"); // pas modifier mais voir page...
 		icones_association('', $res);
 		debut_cadre_association('annonce.gif', 'membre', $nom_membre);
-		// Liste des groupes
-		$query = sql_select('g.id_groupe as id_groupe, g.nom as nom', 'spip_asso_groupes g LEFT JOIN spip_asso_groupes_liaisons l ON g.id_groupe=l.id_groupe', 'l.id_auteur='.$id_auteur, '', 'g.nom');
+		// Liste des groupes (on ignore les groupes d'id <100 qui sont dedies a la gestion des autorisations)
+		$query = sql_select('g.id_groupe as id_groupe, g.nom as nom', 'spip_asso_groupes g LEFT JOIN spip_asso_groupes_liaisons l ON g.id_groupe=l.id_groupe', 'g.id_groupe>=100 AND l.id_auteur='.$id_auteur, '', 'g.nom');
 		if (sql_count($query)) {
 			echo '<div class="cadre_padding">'._T('asso:groupes_dp');
 			if ($row=sql_fetch($query)) {
