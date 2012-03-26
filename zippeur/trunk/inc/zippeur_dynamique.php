@@ -6,5 +6,9 @@ function zippeur_creer_fichier($squel,$chemin,$options=array()){
 	$contenu = recuperer_fond($squel,$options);
 	ecrire_fichier($chemin,$contenu);
 }
-	
+
+function zippeur_copier_fichier($orig,$dest){
+	defined('_DIR_SITE') ? $chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES.$chemin : $chemin = _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES.$chemin;
+	copy(find_in_path($orig),$chemin.$dest);
+}
 ?>
