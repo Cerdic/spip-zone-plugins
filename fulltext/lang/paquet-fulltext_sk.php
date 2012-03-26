@@ -30,7 +30,7 @@ Kvôli optimálnemu výkonu si nainštalujte doplnkové programy a ich parametr
 -*** na [Windows,->http://blog.brush.co.nz/2009/09/catdoc-windows/]
 -** definujte príslušné hodnoty (alebo použite ovládací panel) rovnako ako pri PDF,
 -* Pre {{ODT, DOCX, PPTX, XLSX:}}
--** Využíva funkcie a triedy PHP (vyžaduje si minimálne PHP 5.2 a možnosť -enable-zip).',
+-** Využíva funkcie a triedy PHP (vyžaduje si minimálne PHP 5.2 a možnosť -enable-zip).', # MODIF
 	'fulltext_slogan' => 'Indexovanie CELÉHO TEXTU na zrýchlenie vyhľadávaní'
 );
 

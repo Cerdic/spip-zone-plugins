@@ -8,29 +8,28 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
-	'fulltext_description' => 'Ce plugin permet d\'une part d\'exploiter le mode de recherche FULLTEXT de MySQL et d\'améliorer ainsi énormément les recherches par rapport au fonctionnement natif de SPIP, et d\'autre part d\'indexer le contenu de certains documents. 
-  -* exploite le mode FULLTEXT SEARCH IN BOOLEAN MODE de MySQL, cf. [->http://dev.mysql.com/doc/refman/5.0/fr/fulltext-boolean.html]
-Pour un fonctionnement optimal, il faut installer des programmes complémentaires et paramétrer leur utilisation dans <code>mes_options.php</code> ou via le panneau de configuration :
--* exploite le mode FULLTEXT SEARCH IN BOOLEAN MODE de MySQL, cf. [->http://dev.mysql.com/doc/refman/5.0/fr/fulltext-boolean.html]
-Pour un fonctionnement optimal, il faut installer des programmes complémentaires et paramétrer leur utilisation dans <code>mes_options.php</code> ou via le panneau de configuration :
--** Tous les types de documents doivent avoir une constante de type <code>_FULLTEXT_EXT_EXE</code> de définie (ou EXT est l\'extension du document) ou l\'équivalent dans le panneau de configuration.
--** L\'indexation de document est inactive par défaut (aucune constantes de définies).
--* Pour les {{PDF}} :
--** Installer [Xpdf->http://www.foolabs.com/xpdf/]
--*** Sur [Ubuntu->http://packages.ubuntu.com/fr/hardy/xpdf-utils],
--*** Sur Mac OS X via [MacPorts->http://xpdf.darwinports.com/] ou avec cette [version compilée->http://users.phg-online.de/tk/MOSXS/xpdf-tools-3.dmg],
--*** Sur d\'[autres OS->http://www.foolabs.com/xpdf/download.html]
--** Définir ces constantes (ou utiliser le panneau de configuration):
--*** <code>_FULLTEXT_PDF_EXE</code> (par exemple <code>/usr/bin/pdftotext</code>) : Chemin vers l\'exécutable <code>pdftotext</code> de [Xdpf->http://www.foolabs.com/xpdf/] afin de transformer les fichiers PDF en texte brut
+	'fulltext_description' => 'This plugin allows on one hand to use the FULLTEXT search mode  of MySQL and thereby improve greatly the search engine compared to the native search engine of SPIP, and on the other hand to index the contents of some documents.
+-* exploit the FULLTEXT SEARCH IN BOOLEAN MODE of MySQL, cf. [->http://dev.mysql.com/doc/refman/5.0/en/fulltext-boolean.html]
+
+For an optimum use, you need to install additional programs and setting up  their use in <code> mes_options.php</code> or via the plugin control panel:
+-** All types of documents must have a defined constant as <code>_FULLTEXT_EXT_EXE</code> (where EXT is the document extension) or equivalent in the plugin control panel.
+-** Document indexing is disabled by default (no constant defined).
+-* For {{PDF}} documents:
+-** Install [Xpdf->http://www.foolabs.com/xpdf/]
+-*** On [Ubuntu->http://packages.ubuntu.com/fr/hardy/xpdf-utils],
+-*** On Mac OS X via [MacPorts->http://xpdf.darwinports.com/] or with this [compiled version->http://users.phg-online.de/tk/MOSXS/xpdf-tools-3.dmg],
+-*** On [other OS->http://www.foolabs.com/xpdf/download.html]
+-** Define these constants (or use the control panel):
+-*** <code>_FULLTEXT_PDF_EXE</code> (for example <code>/usr/bin/pdftotext</code>) : path to the binary <code>pdftotext</code> of [Xdpf->http://www.foolabs.com/xpdf/] to transform PDF files in raw text
 -*** <code>_FULLTEXT_PDF_CMD_OPTIONS</code> (par exemple <code>-enc UTF-8</code>) : Options d\'appel de l\'exécutable
 -*<code>_FULLTEXT_TAILLE</code> : Taille maximum conservée pour la version texte des fichiers (50000 par défaut)
--* Pour les {{DOC, PPT, XLS}} :
--** Installer [Catdoc->http://www.wagner.pp.ru/~vitus/software/catdoc/]
--*** Sur [Ubuntu/Linux->http://www.wagner.pp.ru/~vitus/software/catdoc/],
--*** Sur [Windows->http://blog.brush.co.nz/2009/09/catdoc-windows/]
--** Définir les constantes correspondantes (ou utiliser le panneau de configuration) de la meme maniêre que pour les PDF.
--* Pour les {{ODT, DOCX, PPTX, XLSX}} :
--** Utilise des fonctions et des classes PHP (nécessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip).
+-* For the {{DOC, PPT, XLS}} documents:
+-** Install [Catdoc->http://www.wagner.pp.ru/~vitus/software/catdoc/]
+-*** on [Ubuntu/Linux->http://www.wagner.pp.ru/~vitus/software/catdoc/],
+-*** on [Windows->http://blog.brush.co.nz/2009/09/catdoc-windows/]
+-** Define the corresponding constants (or use the control panel) the same way as for the PDF.
+-* For {{ODT, DOCX, PPTX, XLSX}} documents:
+-** Use PHP functions and classes (requires PHP 5.2 and the -enable-zip option).
   ', # NEW
 	'fulltext_slogan' => 'FULLTEXT indexation to speed up searches'
 );
