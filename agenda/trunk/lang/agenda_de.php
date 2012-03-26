@@ -129,6 +129,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'telecharger' => 'Télécharger', # NEW
 	'texte_agenda' => 'KALENDER',
 	'texte_evenement_statut' => 'Cet événement est :', # NEW
+	'texte_logo_objet' => 'LOGO DE L\'EVENEMENT', # NEW
 	'titre_cadre_ajouter_evenement' => 'Event hinzufügen',
 	'titre_cadre_modifier_evenement' => 'Event umändern',
 	'titre_sur_l_agenda' => 'Im Kalender',
