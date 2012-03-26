@@ -2,41 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-/* filtre pour l'intégration Api Mailchimp
- * lists(string apikey, array filters, int start, int limit)
- * http://apidocs.mailchimp.com/api/1.3/lists.func.php
- */
-function recuperer_listes($apiKey,$filters='',$start='',$limit='100'){
-	
-	# API mailchimp
-	include_spip('inc/1.3/MCAPI.class');
 
-	//on verifie que les parametres du plugin mailchimp sont initialisées
-	if ($apiKey){
-		spip_log(__LINE__,'squirrel_chimp');
-		spip_log($apiKey);
-
-		// initialisation d'un objet mailchimp
-		$api = new MCAPI($apiKey);
-		
-		//récuperation des listes
-		
-		$retval = $api->lists($filters,$start,$limit);
-		
-		$return=array();
-
-		if ($api->errorCode){
-			$return['error'] .= "Unable to load lists()!";
-			$return['error'] .= "\n\tCode=".$api->errorCode;
-			$return['error'] .=  "\n\tMsg=".$api->errorMessage."\n";
-		} else {
-			$return['data'] = $retval['data'];
-			}
-		}
-		 
-		
-	return $return;		
-}
 
 //Retourne un array  pour filtrer les lists spip et utilisé par lists() de MailChimp
 function array_filtre_lists($mailinglists){
@@ -48,37 +14,59 @@ function array_filtre_lists($mailinglists){
 	return array('list_id'=>$lists);
 	}
 
+function tables_dispos($tables=''){
+	include_spip('inc/config');
+	
+	if($tables AND !is_array($tables))$tables=explode(',',$tables);
+	// On cherche les tables à prendre en compte
+	$tables_extras=explode(',',lire_config('squirrel_chimp/tables'));
+			
+	if($tables)$tables=array_merge($tables,$tables_extras);
+	else $tables=$tables_extras;
+	
+	
+	if(!$tables)$tables=array('spip_auteurs');	
+
+	return $tables;
+	}	
+
 // filtre pour obtenir les champs spip à disposition 
-function champs_spip($tables='spip_auteurs'){
-	
-	$champs_refuses=array(
-		"id_auteur","email","nom_site","nom_site","url_site","login","pass","low_sec","statut","maj","pgp","htpass","en_ligne","imessage","messagerie","alea_actuel","alea_futur","prefs","cookie_oubli","source","extra","webmestre","date_syncro","id_mailchimp","format"
-		);
-	
+function champs_spip($tables=''){
+	include_spip('inc/config');	
+	$tables=tables_dispos($tables);
+	$champs_extras=lire_config('squirrel_chimp/champs');
 	$trouver_table = charger_fonction('trouver_table','base');
 	$champs=array();
-	if(!is_array($tables)){
-		$c=$trouver_table($tables);
-		$champs= array_keys($c['field']);
-	}
-	else{
-		foreach($tables AS $table){
-			$c=$trouver_table($table);	
-			$champs=array_merge($champs,array_keys($c['field']));
+
+	foreach($tables AS $key=>$table){
+		if($table){
+			$c=$trouver_table($table);
+			if(is_array($c['field']))$champs['tout'][$table]=array_keys($c['field']);
+			if($extras=$champs_extras[$table]){
+				$champs[$table]=$extras;
+				}
+			else{	
+				$table=$table?$table:0;
+				if(is_array($c['field']) AND count($c['field'])>0){
+					$c=array_keys($c['field']);
+					$champs[$table]=$c;	
+					}	
+				}
+			$c='';
 			}
 		}
-	
-	return array_diff($champs,$champs_refuses);
+	//echo serialize($champs);
+	return $champs;
 	}
 
 // filtre pour obtenir un array de corresponance entre champs spip ,et champs MailChimp
-function champs_listes($apiKey,$listId,$tables='spip_auteurs',$multi=''){
+function champs_listes($apiKey,$listId,$tables='',$multi=''){
 	
 	$mapping= array();
 
 	// initialisation d'un objet mailchimp
 	$api = new MCAPI($apiKey);
- 
+
 	if(is_array($listId)){
 		foreach($listId AS $id){
 			$champs=$api->listMergeVars($id);
@@ -89,14 +77,34 @@ function champs_listes($apiKey,$listId,$tables='spip_auteurs',$multi=''){
 		}
 		else {
 			if($multi) $mapping['mailchimp'][$listId]  = $api->listMergeVars($listId);
-			else $mapping['mailchimp']  = $api->listMergeVars($listId);		
+			else $mapping['mailchimp']  = $api->listMergeVars($listId);	
 			}
 	
-	if($tables)$mapping['spip'] = champs_spip($tables);
+	$mapping['spip'] = champs_spip($tables);
 	
 	return $mapping;
 	
 }
+
+// cherche les champs d'une table
+/*
+function champs_table($tables=''){
+
+
+	$tables=tables_dispos($tables);
+
+	$champs_dispos=lire_config('squirrel_chimp/champs');
+	echo serialize($champs);
+	$champs=array();	
+	if(is_array($tables)){
+			foreach($tables AS $table){
+			if($table)$champs[$table]=$champs_dispos[$table];
+			}
+		}
+	echo serialize($champs);
+	return $champs;
+	
+	}*/
 
 
 // Prépare les données pour la synchronisation
@@ -134,6 +142,42 @@ function champs_pour_concordance($id_liste=''){
 	$champs_sync=array_merge($concordances_fixes,$concordances);
 
 	return $champs_sync;
+}
+
+/* filtre pour l'intégration Api Mailchimp
+ * lists(string apikey, array filters, int start, int limit)
+ * http://apidocs.mailchimp.com/api/1.3/lists.func.php
+ */
+function recuperer_listes($apiKey,$filters='',$start='',$limit='100'){
+	
+	# API mailchimp
+	include_spip('inc/1.3/MCAPI.class');
+
+	//on verifie que les parametres du plugin mailchimp sont initialisées
+	if ($apiKey){
+		spip_log(__LINE__,'squirrel_chimp');
+		spip_log($apiKey);
+
+		// initialisation d'un objet mailchimp
+		$api = new MCAPI($apiKey);
+		
+		//récuperation des listes
+		
+		$retval = $api->lists($filters,$start,$limit);
+		
+		$return=array();
+
+		if ($api->errorCode){
+			$return['error'] .= "Unable to load lists()!";
+			$return['error'] .= "\n\tCode=".$api->errorCode;
+			$return['error'] .=  "\n\tMsg=".$api->errorMessage."\n";
+		} else {
+			$return['data'] = $retval['data'];
+			}
+		}
+		 
+		
+	return $return;		
 }
 
 

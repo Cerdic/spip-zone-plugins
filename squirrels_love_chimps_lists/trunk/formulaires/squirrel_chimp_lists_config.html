@@ -1,3 +1,4 @@
+
 <fieldset class="donnees_lists">
 	<legend><:scl:gestion_listes:></legend>
 	#SET{apikey,#CONFIG{squirrel_chimp/apiKey}}
@@ -60,22 +61,22 @@
 				<input type="checkbox" class="checkbox" name="ml_act_actualise" id="ml_act_actualise" value='on' [(#ENV{ml_act_actualise}|=={on}) checked="ckecked"] />
 				<label for="ml_act_actualise"><:scl:actualiser_mailinglists_actualise:></label>
 			</div>			
-			
-
 		</li>	
 	</ul>
 </fieldset>
 <fieldset class="donnees_lists_supp">
 	<legend><:scl:champs_supp:></legend>
-
 	<ul>
 		<li class="squirrel_chimp_mailinglists[ (#ENV**{erreurs}|table_valeur{mailinglist_actualiser}|oui)erreur]">
 			<label><:scl:champs_supp_mapping:></label>
 
-			[(#CONFIG{squirrel_chimp/mailinglists}|oui)#SET{champs,#GET{apikey}|champs_listes{#CONFIG{squirrel_chimp/mailinglists}|array_keys}}]
+
+			[(#CONFIG{squirrel_chimp/mailinglists}|oui)#SET{champs,#GET{apikey}|champs_listes{#CONFIG{squirrel_chimp/mailinglists}|array_keys}]
 			#SET{champs_mailchimp,#GET{champs}|table_valeur{mailchimp}}
+
+			<BOUCLE_champs_actifs(POUR){tableau #ENV{champs}}>
 			
-			<BOUCLE_listes2(POUR){tableau #GET{champs}|table_valeur{spip}}>
+			<BOUCLE_listes2(POUR){tableau #VALEUR}>
 				<div class="choix">
 					<b>[(#VALEUR)] (<:scl:champ_spip:>)</b>  #SET{name,#VALEUR}
 
@@ -89,26 +90,66 @@
 				</B_champs_mc>
 				</div>
 				</BOUCLE_champs>
-				
+			
 			</BOUCLE_listes2>
+			</BOUCLE_champs_actifs>				
 		</li>	
 	</ul>
-	<div class="submit"><input name="sync_auteurs" value="<:scl:sync_auteurs:>" type="submit"></div>
 </fieldset>
-
+<fieldset class="champs_extras">
+	<legend><:scl:declarer_champs_extras:></legend>
+	<ul>
+		<li class="squirrel_chimp_mailinglists[ (#ENV**{erreurs}|table_valeur{tables}|oui)erreur]">
+			<label for="tables"><:scl:tables_extras:></label>
+			<p class="explication"><:scl:tables_extras_explication:></p>
+			<div class="choix">
+				[
+				<span class='erreur'>(#ENV**{erreurs}|table_valeur{tables})</span>
+				]
+				<input type="text" class="texte" name="tables" id="tables" value='#ENV{tables,spip_auteurs}'/>
+			</div>
+		</li>
+		
+		#SET{tables,#ENV{tables}|explode{','}}		
+		<B_tables>				
+		<li class="squirrel_chimp_mailinglists[ (#ENV**{erreurs}|table_valeur{champs}|oui)erreur]">
+			<label for="champs"><:scl:champs_extras:></label>
+			<p class="explication"><:scl:champs_extras_explication:></p>
+			<div class="choix">
+			<dl>
+				
+			<BOUCLE_tables(POUR){tableau #GET{tables}}>
+				#SET{table,#VALEUR}
+				<B_champs>
+				<dt id="#VALEUR"><a href="##VALEUR" id="table_#VALEUR"class="champs">#VALEUR</a>[ (<:scl:champs_utilises:>: (#ENV{champs}|table_valeur{#GET{table}}|implode{','}))]</dt>
+				<div class="champs_details table_#VALEUR" >
+				<BOUCLE_champs(POUR){tableau #GET{champs}|table_valeur{spip}|table_valeur{tout}|table_valeur{#VALEUR}}>
+					<dd><input type="checkbox" class="checkbox" name="champs[#GET{table}][#VALEUR]" id="champs_#VALEUR" value='#VALEUR' [(#ENV{champs}|table_valeur{#GET{table}}|table_valeur{#VALEUR}|=={#VALEUR}) checked="ckecked"] />
+				<label for="champs_#VALEUR">#VALEUR</label></dd>
+				</BOUCLE_champs>
+				</div>	
+				</B_champs>					
+			</BOUCLE_tables>
+				[
+				<span class='erreur'>(#ENV**{erreurs}|table_valeur{champs})</span>
+				]
+			</div>
+		</B_tables>		
+	</ul>
+</fieldset>
+	<div class="submit"><input name="sync_auteurs" value="<:scl:sync_auteurs:>" type="submit"></div>
 	
-[(#REM)<script type="text/javascript">
+<script type="text/javascript">
  $(document).ready(function(){
-	$('.optin').hide();
+	 
+	$('.champs_details').hide();		 
+		 
+	$('a.champs').click(function() {
+		var cible = this.id;   	
+		$('.' + cible).toggle();
+	});	
 	
-	if($('#ml_act_ajout').is(':checked')){
-		$('.optin').show();
-	};
-	
-	$('#ml_act_ajout').click(function() {
-	 $('.optin').toggle();
-	});	 
  });
-</script>		]
+</script>		
 
 

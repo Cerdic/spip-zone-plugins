@@ -2,6 +2,8 @@
 
 function formulaires_squirrel_chimp_lists_config_traiter_dist($valeurs){
 	include_spip('squirrel_chimp_lists_fonctions');
+	include_spip('inc/config');
+	
 	
 	$valeurs['message_ok'] = _T('scl:enregistrement_ok');
 	if(_request('sync_auteurs')){
@@ -47,22 +49,20 @@ function formulaires_squirrel_chimp_lists_config_traiter_dist($valeurs){
 					$log .= $val['email_address']._T('scl:sync_echec')."<br/>\n";
 					$log .= _T('scl:sync_code').$val['code']." <br/>\n";
 					$log .= _T('scl:sync_message').$val['message']." \n";
+					}
 				}
-				}
-				
 			$valeurs['message_ok'] = $log;	
-			
 			}
-
-		}
-	
+		}		
 		// Pipeline pour intervenir dans le traitement de ce formulaire	
 		$pipeline= pipeline('squirrel_chimp_lists_config_traiter',array(
 			'data'=>$valeurs)
 			);
 	
 	
-		if($pipeline)$objets=$pipeline['data'];		
+		if($pipeline)$objets=$pipeline['data'];	
+		
+
 	
 return $valeurs;
 }
