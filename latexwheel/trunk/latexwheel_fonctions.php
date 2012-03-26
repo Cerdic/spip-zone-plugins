@@ -1,5 +1,14 @@
 <?php
 
+function lang_polyglossia($lang){
+	// function permettant de convertir une #LANG en nom du package polyglossia
+	$tableau = array(
+		'en' => 'english',
+		'es' => 'spanish',
+		'fr' => 'french');
+	return $tableau[$lang];		
+}
+
 function propre_latex($t) {
 	
 	$t = latex_echappe_coloration($t);
