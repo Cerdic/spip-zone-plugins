@@ -136,8 +136,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'test' => 'TEST : Táto položka jazyka slúži na vyhľadávanie skratky a test zhodnosti.',
-	'test_item_1_variable' => 'TEST : Cet item de langue est bien défini dans le fichier de langue, mais est utilisé sous forme "complexe" dans les fichiers du répertoire scanné.', # NEW
-	'test_item_2_variable' => 'TEST : Cet item de langue est bien défini dans le fichier de langue, mais est utilisé sous forme "complexe" dans les fichiers du répertoire scanné.', # NEW
+	'test_item_1_variable' => 'TEST: Táto jazyková položka je v jazykovom súbore správne definovaná, ale v súboroch skenovaného priečinka sa používa v zloženej forme.',
+	'test_item_2_variable' => 'TEST: Táto jazyková položka je v jazykovom súbore správne definovaná, ale v súboroch skenovaného priečinka sa používa v zloženej forme.',
 	'test_item_non_utilise_1' => 'TEST: Táto jazyková položka je v jazykovom súbore správne definovaná (), ale nepoužíva sa v zoskenovaných súboroch v tomto priečinku ().',
 	'test_item_non_utilise_2' => 'TEST: Táto jazyková položka je dobre definovaná v jazykovom súbore (), ale nepoužíva sa v súboroch naskenovaného priečinka ().',
 	'texte_item_defini_ou' => '<em>definované v:</em>',
