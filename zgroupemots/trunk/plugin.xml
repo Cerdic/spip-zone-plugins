@@ -10,6 +10,6 @@
 	<lien>http://www.spip-contrib.net/?article3341</lien>
 	<prefix>zgroupemots</prefix>
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[3.0-beta;]" />
+	<necessite id="SPIP" version="[3.0.0-beta2;]" />
 	<necessite id="Zcore" version="[2.0.0-dev;]" />
 </plugin>
