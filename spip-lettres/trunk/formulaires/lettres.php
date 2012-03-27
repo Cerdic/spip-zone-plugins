@@ -39,6 +39,10 @@
 				$message_erreur = _T('lettres:validation_changement_format_erreur');
 				break;
 		}
+		$choix		= _request('choix');
+		if (!$choix) {
+			$choix = 'abonnements';
+		}
 		$valeurs = array(
 						'message_ok'		=> $message_ok,
 						'message_erreur'	=> $message_erreur,
@@ -46,7 +50,7 @@
 						'nom'				=> '',
 						'rubriques'			=> '',
 						'format'			=> 'mixte',
-						'choix'				=> 'abonnements'
+						'choix'				=> $choix
 						);
 		return $valeurs;
 	}
