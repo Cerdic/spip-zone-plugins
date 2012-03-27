@@ -210,7 +210,7 @@ function comptes_while($where, $limit, $id_compte)
 		. ( $data['vu']
 			/* pas d'action sur les operations validees */
 			? ('<td class="action" colspan="2"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-verte.gif" '.$onload_option.' /></td>'.'<td class="action"><input disabled="disabled" type="checkbox" /></td>')
-			: ( $data['id_journal']
+			: ( ($data['id_journal'] && $data['imputation']!=$GLOBALS['association_metas']['pc_cotisations'])
 				/* pas d'edition/suppression des operations gerees par un module externe (souci de coherence avec des donnees d'autres tables) */
 				? ('<td class="action" colspan="2"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'puce-rouge.gif" '.$onload_option.' /></td>')
 				: ( (substr($data['imputation'],0,1)==$GLOBALS['association_metas']['classe_banques'])
