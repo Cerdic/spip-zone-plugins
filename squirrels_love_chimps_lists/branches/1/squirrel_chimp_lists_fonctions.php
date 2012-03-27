@@ -2,6 +2,182 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
+
+//Retourne un array  pour filtrer les lists spip et utilisé par lists() de MailChimp
+function array_filtre_lists($mailinglists){
+
+	if(is_array($mailinglists)){
+		if(count($mailinglists)>0)$lists=implode(array_keys($mailinglists),',');
+	}
+	else $lists=$mailinglists;
+	return array('list_id'=>$lists);
+	}
+
+function tables_dispos(){
+	include_spip('inc/config');
+	
+	// On cherche les tables à prendre en compte
+
+	$tables=explode(',',lire_config('squirrel_chimp/tables'));
+	if(!$tables)$tables=array('spip_auteurs');	
+		
+	return $tables;
+	}	
+
+// filtre pour obtenir les champs spip à disposition 
+function champs_spip(){
+	include_spip('inc/config');	
+	$tables=tables_dispos();
+	$champs_extras=lire_config('squirrel_chimp/champs');
+	$trouver_table = charger_fonction('trouver_table','base');
+	$champs=array();
+
+	foreach($tables AS $key=>$table){
+		if($table){
+			$c=$trouver_table($table);
+			if(is_array($c['field']))$champs['tout'][$table]=array_keys($c['field']);
+			if($extras=$champs_extras[$table]){
+				$champs[$table]=$extras;
+				}
+			else{	
+				$table=$table?$table:0;
+				if(is_array($c['field']) AND count($c['field'])>0){
+					$c=array_keys($c['field']);
+					$champs[$table]=$c;	
+					}	
+				}
+			$c='';
+			}
+		}
+	//echo serialize($champs);
+	return $champs;
+	}
+
+// filtre pour obtenir un array de corresponance entre champs spip ,et champs MailChimp
+function champs_listes($apiKey,$listId,$multi=''){
+	
+	$mapping= array();
+
+	// initialisation d'un objet mailchimp
+	$api = new MCAPI($apiKey);
+
+	if(is_array($listId)){
+		foreach($listId AS $id){
+			$champs=$api->listMergeVars($id);
+
+			if($multi) $mapping['mailchimp'][$id] = $champs;
+			else $mapping['mailchimp'] = $champs;
+			}
+		}
+		else {
+			if($multi) $mapping['mailchimp'][$listId]  = $api->listMergeVars($listId);
+			else $mapping['mailchimp']  = $api->listMergeVars($listId);	
+			}
+	
+	$mapping['spip'] = champs_spip();
+	
+	return $mapping;
+	
+}
+
+// cherche les champs d'une table
+/*
+function champs_table($tables=''){
+
+
+	$tables=tables_dispos($tables);
+
+	$champs_dispos=lire_config('squirrel_chimp/champs');
+	echo serialize($champs);
+	$champs=array();	
+	if(is_array($tables)){
+			foreach($tables AS $table){
+			if($table)$champs[$table]=$champs_dispos[$table];
+			}
+		}
+	echo serialize($champs);
+	return $champs;
+	
+	}*/
+
+
+// Prépare les données pour la synchronisation
+function donnees_sync($id_liste_spip='',$table='',$identifiant='',$where_add=''){
+	
+	//Les données de la configuration
+	include_spip('inc/config');
+
+	$tables=tables_dispos();
+	$champs_extras=lire_config('squirrel_chimp/champs');
+
+
+	//Préparation de la requette
+	$identifiant_defaut='id_auteur';
+	
+	$from=implode(',',$tables);	
+
+	$where_principal=$identifiant_principal.'='.$identifiant;
+	$where_secondaire=array();	
+	$champs=array();
+	$i=0;
+	foreach($tables AS $table){
+		$i++;
+		if($i==1)$table_principale=$table;
+		else $where_secondaire[$i]=$table_principale.'.'.$identifiant_defaut.'='.$table.'.'.$identifiant_defaut;
+		foreach($champs_extras[$table] as $champ){
+			$champs[$champ]=$table.'.'.$champ;
+			}
+		}
+		
+	if(!$champs)$champs='*';		
+	else $champs['email']='spip_auteurs.email';	
+	$identifiant_joints=implode(' AND ',$where_secondaire);	
+	if($identifiant)$identifiant_principal=' AND '.$table_principale.'.'.$identifiant_defaut.'='.$identifiant;
+	if($where_add)$identifiant_additionnel=' AND '.$where_add;
+	
+	$where=$identifiant_joints.$identifiant_principal.$identifiant_additionnel;
+	
+	spip_log($where,'squirrel_chimp_lists');	
+	
+	$champs=implode(',',$champs);
+
+
+	// La concordance entre les champs
+	$champs_sync=champs_pour_concordance($id_liste_spip);
+
+	
+	// les utilisateurs spip
+	$sql=sql_select($champs,$from,$where,$groupby,$orderby,$limit,$having,$serveur,$option);
+	
+	// Préparation de l'array a envoyer à mailchimp
+	$batch=array();
+	$i=0;
+	while($data=sql_fetch($sql)){
+		$i++;
+		foreach($data AS $key=>$value){
+			if(!is_array($champs_sync[$key])){
+				if(array_key_exists($key,$champs_sync))$batch[$i][$champs_sync[$key]]=$value;
+				}
+			}
+		}
+
+	return $batch;
+}
+
+// Détermine les champs Spip à prendre en compte pour la concordance 
+function champs_pour_concordance($id_liste=''){
+	$concordances=lire_config('squirrel_chimp/mapping');
+	
+	if($id_liste)$concordances=$concordances[$id_liste];
+	if(!$concordances)$concordances=array();
+
+	$concordances_fixes=array('email'=>'EMAIL');
+	$champs_sync=array_merge($concordances_fixes,$concordances);
+
+	return $champs_sync;
+}
+
 /* filtre pour l'intégration Api Mailchimp
  * lists(string apikey, array filters, int start, int limit)
  * http://apidocs.mailchimp.com/api/1.3/lists.func.php
@@ -38,104 +214,6 @@ function recuperer_listes($apiKey,$filters='',$start='',$limit='100'){
 	return $return;		
 }
 
-//Retourne un array  pour filtrer les lists spip et utilisé par lists() de MailChimp
-function array_filtre_lists($mailinglists){
-
-	if(is_array($mailinglists)){
-		if(count($mailinglists)>0)$lists=implode(array_keys($mailinglists),',');
-	}
-	else $lists=$mailinglists;
-	return array('list_id'=>$lists);
-	}
-
-// filtre pour obtenir les champs spip à disposition 
-function champs_spip($tables='spip_auteurs'){
-	
-	$champs_refuses=array(
-		"id_auteur","email","nom_site","nom_site","url_site","login","pass","low_sec","statut","maj","pgp","htpass","en_ligne","imessage","messagerie","alea_actuel","alea_futur","prefs","cookie_oubli","source","extra","webmestre","date_syncro","id_mailchimp","format"
-		);
-	
-	$trouver_table = charger_fonction('trouver_table','base');
-	$champs=array();
-	if(!is_array($tables)){
-		$c=$trouver_table($tables);
-		$champs= array_keys($c['field']);
-	}
-	else{
-		foreach($tables AS $table){
-			$c=$trouver_table($table);	
-			$champs=array_merge($champs,array_keys($c['field']));
-			}
-		}
-	
-	return array_diff($champs,$champs_refuses);
-	}
-
-// filtre pour obtenir un array de corresponance entre champs spip ,et champs MailChimp
-function champs_listes($apiKey,$listId,$tables='spip_auteurs',$multi=''){
-	
-	$mapping= array();
-
-	// initialisation d'un objet mailchimp
-	$api = new MCAPI($apiKey);
- 
-	if(is_array($listId)){
-		foreach($listId AS $id){
-			$champs=$api->listMergeVars($id);
-
-			if($multi) $mapping['mailchimp'][$id] = $champs;
-			else $mapping['mailchimp'] = $champs;
-			}
-		}
-		else {
-			if($multi) $mapping['mailchimp'][$listId]  = $api->listMergeVars($listId);
-			else $mapping['mailchimp']  = $api->listMergeVars($listId);		
-			}
-	
-	if($tables)$mapping['spip'] = champs_spip($tables);
-	
-	return $mapping;
-	
-}
-
-
-// Prépare les données pour la synchronisation
-function donnees_sync($id_liste='',$from='spip_auteurs',$where='',$groupby='',$orderby='',$limit='',$having='',$serveur='',$option=true){
-	
-	// Les champs spip à traiter
-	$champs_sync=champs_pour_concordance($id_liste);
-	
-	// les utilisateurs spip
-	$sql=sql_select(array_keys($champs_sync),$from,$where,$groupby,$orderby,$limit,$having,$serveur,$option);
-	
-	// Préparation de l'array a envoyer à mailchimp
-	$batch=array();
-	$i=0;
-	while($data=sql_fetch($sql)){
-		$i++;
-		foreach($data AS $key=>$value){
-			if(!is_array($champs_sync[$key])){
-				if(array_key_exists($key,$champs_sync))$batch[$i][$champs_sync[$key]]=$value;
-				}
-			}
-		}
-
-	return $batch;
-}
-
-// Détermine les champs Spip à prendre en compte pour la concordance 
-function champs_pour_concordance($id_liste=''){
-	$concordances=lire_config('squirrel_chimp/mapping');
-	
-	if($id_liste)$concordances=$concordances[$id_liste];
-	if(!$concordances)$concordances=array();
-
-	$concordances_fixes=array('email'=>'EMAIL');
-	$champs_sync=array_merge($concordances_fixes,$concordances);
-
-	return $champs_sync;
-}
-
 
 /*Inscription de la liste 
  * listSubscribe(string apikey, string id, string email_address, array merge_vars, string email_type, bool double_optin, bool update_existing, bool replace_interests, bool send_welcome)
@@ -148,18 +226,18 @@ function inscription_liste_mc($flux='',$api,$listId,$email,$donnees_auteur,$emai
 
 	
 	if ($api->errorCode){
-		spip_log(__LINE__,'squirrel_chimp');
+		spip_log('inscription_liste','squirrel_chimp_lists');
 		$messageErreur = _T('scl:api_errorcode')."<br/><b>".$api->errorCode."</b><br/>".$api->errorMessage;
 		if (autoriser('defaut')){
-			spip_log(__LINE__,'squirrel_chimp');
+
 			$flux['data'] = array('message_erreur' => "Plugin Squirrels Love Chimps $messageErreur");
-			spip_log("Admin $messageErreur",'squirrel_chimp');
+			spip_log("Admin $messageErreur",'squirrel_chimp_lists');
 			return $flux;
 		} // fin message pour admin
 		else {
-			spip_log(__LINE__,'squirrel_chimp');
+			spip_log(__LINE__,'squirrel_chimp_lists');
 			// que le spiplog si on est juste un user
-			spip_log("$messageErreur",'squirrel_chimp');
+			spip_log("$messageErreur",'squirrel_chimp_lists');
 			return $flux;
 		} // autoriser
 	} else {
@@ -187,22 +265,21 @@ function desinscription_liste_mc($flux='',$api,$listId,$email,$delete_member=fal
 	$retval = $api->listUnSubscribe($listId, $email,$delete_member,$send_goodbye,$send_notify);
 
 	if ($api->errorCode){
-		spip_log(__LINE__,'squirrel_chimp');
+
 		$messageErreur = _T('scl:api_errorcode')."<br/><b>".$api->errorCode."</b><br/>".$api->errorMessage;
 		if (autoriser('defaut')){
-			spip_log(__LINE__,'squirrel_chimp');
+
 			$flux['data'] = array('message_erreur' => "Plugin mes_abonnes : $message_ok <br/> Plugin Mailchimp: $messageErreur");
-			spip_log("Admin $messageErreur",'squirrel_chimp');
+			spip_log("Admin $messageErreur",'squirrel_chimp_lists');
 			return $flux;
 		} // fin message pour admin
 		else {
-			spip_log(__LINE__,'squirrel_chimp');
+
 			// que le spiplog si on est juste un user
-			spip_log(" $messageErreur",'squirrel_chimp');
+			spip_log(" $messageErreur",'squirrel_chimp_lists');
 			return $flux;
 		} // autoriser
 	} else {
-		spip_log(__LINE__,'squirrel_chimp');
 		$message_ok .="<br>"._T('mailchimp:demande_desincription_ok', array('email' => "$email"));
 		$flux['data']['message_ok']=$message_ok ;
 		return $flux;

@@ -15,6 +15,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	
 	//C
+	'champs_extras' => 'Déclarez les champs à utiliser',
+	'champs_extras_explication' => 'indiquez pour chaque table les champs à utliser',
+	'champs_utilises' => 'Champs utilisés',
+	'declarer_champs_extras' => 'Déclarer des champs SPIP supplémentaires',
+	'declarer_champs_extras' => 'Déclarer des champs SPIP supplémentaires',
 	'champ_spip' => 'Champ SPIP',
 	'champs_supp' => 'Quels informations additionnelles de SPIP voulez-vous utiliser pour la synchronisation avec MailChimp (l\'email est toujours synchronisé)',
 	'champs_supp_mapping' => 'Utilisez le tableau suivant pour accorder les champs SPIP aux champs MailChimp',
@@ -78,6 +83,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sync_ok' => 'Synchronisation réussie :',
 	
 	// T
+	'tables_extras' => 'Declarer les tables à utiliser',
+	'tables_extras_explication' => 'Indiquez le(s)table(s) séparée(s) par virgule, chaque table declarée doit obligatoirement contenir un champ "id_auteur"',
 	'tout' => 'Toutes les listes',
 
 	//U

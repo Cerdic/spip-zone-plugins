@@ -25,8 +25,8 @@ function inc_editer_auteur_traiter_listes_dist($flux){
 
 		//on verifie que les parametres du plugin mailchimp sont initialisées
 		if ($apiKey){
-			spip_log(__LINE__,'squirrel_chimp');
-			spip_log($apiKey,'squirrel_chimp');
+
+			spip_log('actualisation_auteur','squirrel_chimp_lists');
 
 			// initialisation d'un objet mailchimp
 			$api = new MCAPI($apiKey);
@@ -41,14 +41,16 @@ function inc_editer_auteur_traiter_listes_dist($flux){
 			$message_ok = $flux['data']['message_ok'];
 
 			// compilation des informations à envoyer à MailChimp
-			$donnees_auteur=donnees_sync('','spip_auteurs','id_auteur='.$id_auteur);
+			$donnees_auteur=donnees_sync('','',$id_auteur);
+			
+			spip_log($donnees_auteur,'squirrel_chimp_lists');	
 			$donnees_auteur=$donnees_auteur[1];
 			$email=$donnees_auteur['EMAIL'];
 			
 	
 			// Actualisation de la liste avec un nouvel auteur ou si activé actualisation des données si modification du profil
 			if (($new AND $ajouter) OR (!$new AND $actualiser AND $statut!='5poubelle')){
-				spip_log('ajouter ou actualiser','squirrel_chimp');
+				spip_log('ajouter ou actualiser','squirrel_chimp_lists');
 				
 				// By default this sends a confirmation email - you will not see new members
 				// until the link contained in it is clicked!

@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	//C
 	'champs_extras' => 'Déclarez les champs à utiliser',
-	'champs_extras_explication' => 'indiquez pour chaque table le(s) champs extras de cette table, séparée(s) par virgule',
+	'champs_extras_explication' => 'indiquez pour chaque table les champs à utliser',
 	'champs_utilises' => 'Champs utilisés',
 	'declarer_champs_extras' => 'Déclarer des champs SPIP supplémentaires',
 	'declarer_champs_extras' => 'Déclarer des champs SPIP supplémentaires',
@@ -84,7 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// T
 	'tables_extras' => 'Declarer les tables à utiliser',
-	'tables_extras_explication' => 'La table spip_auteurs est déjà déclaré- indiquez le(s) autres table(s), séparée(s) par virgule',
+	'tables_extras_explication' => 'Indiquez le(s)table(s) séparée(s) par virgule, chaque table declarée doit obligatoirement contenir un champ "id_auteur"',
 	'tout' => 'Toutes les listes',
 
 	//U

@@ -16,8 +16,8 @@ function formulaires_squirrel_chimp_lists_config_traiter_dist($valeurs){
 		
 		// Composition du batch
 		
-		$batch=donnees_sync('','spip_auteurs','statut!="5poubelle"');
-	
+		$batch=donnees_sync('','','','spip_auteurs.statut!="5poubelle"');
+		
 		// initialisation d'un objet mailchimp
 		$apiKey=lire_config('squirrel_chimp/apiKey');	
 		

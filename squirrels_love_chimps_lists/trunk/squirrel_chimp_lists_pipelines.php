@@ -16,7 +16,8 @@ function squirrel_chimp_lists_squirrel_chimp_definitions($flux){
 			4=>'ml_act_enleve',
 			6=>'mapping',		
 			7=>'ml_act_actualise',
-			8=>'champs'),
+			8=>'champs',
+			9=>'sync_auteurs'),
 			'fichier_langue'=>'scl'
 			);
 		

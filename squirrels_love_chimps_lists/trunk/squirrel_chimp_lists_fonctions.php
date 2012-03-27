@@ -14,26 +14,21 @@ function array_filtre_lists($mailinglists){
 	return array('list_id'=>$lists);
 	}
 
-function tables_dispos($tables=''){
+function tables_dispos(){
 	include_spip('inc/config');
 	
-	if($tables AND !is_array($tables))$tables=explode(',',$tables);
 	// On cherche les tables à prendre en compte
-	$tables_extras=explode(',',lire_config('squirrel_chimp/tables'));
-			
-	if($tables)$tables=array_merge($tables,$tables_extras);
-	else $tables=$tables_extras;
-	
-	
-	if(!$tables)$tables=array('spip_auteurs');	
 
+	$tables=explode(',',lire_config('squirrel_chimp/tables'));
+	if(!$tables)$tables=array('spip_auteurs');	
+		
 	return $tables;
 	}	
 
 // filtre pour obtenir les champs spip à disposition 
-function champs_spip($tables=''){
+function champs_spip(){
 	include_spip('inc/config');	
-	$tables=tables_dispos($tables);
+	$tables=tables_dispos();
 	$champs_extras=lire_config('squirrel_chimp/champs');
 	$trouver_table = charger_fonction('trouver_table','base');
 	$champs=array();
@@ -60,7 +55,7 @@ function champs_spip($tables=''){
 	}
 
 // filtre pour obtenir un array de corresponance entre champs spip ,et champs MailChimp
-function champs_listes($apiKey,$listId,$tables='',$multi=''){
+function champs_listes($apiKey,$listId,$multi=''){
 	
 	$mapping= array();
 
@@ -80,7 +75,7 @@ function champs_listes($apiKey,$listId,$tables='',$multi=''){
 			else $mapping['mailchimp']  = $api->listMergeVars($listId);	
 			}
 	
-	$mapping['spip'] = champs_spip($tables);
+	$mapping['spip'] = champs_spip();
 	
 	return $mapping;
 	
@@ -108,13 +103,52 @@ function champs_table($tables=''){
 
 
 // Prépare les données pour la synchronisation
-function donnees_sync($id_liste='',$from='spip_auteurs',$where='',$groupby='',$orderby='',$limit='',$having='',$serveur='',$option=true){
+function donnees_sync($id_liste_spip='',$table='',$identifiant='',$where_add=''){
 	
-	// Les champs spip à traiter
-	$champs_sync=champs_pour_concordance($id_liste);
+	//Les données de la configuration
+	include_spip('inc/config');
+
+	$tables=tables_dispos();
+	$champs_extras=lire_config('squirrel_chimp/champs');
+
+
+	//Préparation de la requette
+	$identifiant_defaut='id_auteur';
+	
+	$from=implode(',',$tables);	
+
+	$where_principal=$identifiant_principal.'='.$identifiant;
+	$where_secondaire=array();	
+	$champs=array();
+	$i=0;
+	foreach($tables AS $table){
+		$i++;
+		if($i==1)$table_principale=$table;
+		else $where_secondaire[$i]=$table_principale.'.'.$identifiant_defaut.'='.$table.'.'.$identifiant_defaut;
+		foreach($champs_extras[$table] as $champ){
+			$champs[$champ]=$table.'.'.$champ;
+			}
+		}
+		
+	if(!$champs)$champs='*';		
+	else $champs['email']='spip_auteurs.email';	
+	$identifiant_joints=implode(' AND ',$where_secondaire);	
+	if($identifiant)$identifiant_principal=' AND '.$table_principale.'.'.$identifiant_defaut.'='.$identifiant;
+	if($where_add)$identifiant_additionnel=' AND '.$where_add;
+	
+	$where=$identifiant_joints.$identifiant_principal.$identifiant_additionnel;
+	
+	spip_log($where,'squirrel_chimp_lists');	
+	
+	$champs=implode(',',$champs);
+
+
+	// La concordance entre les champs
+	$champs_sync=champs_pour_concordance($id_liste_spip);
+
 	
 	// les utilisateurs spip
-	$sql=sql_select(array_keys($champs_sync),$from,$where,$groupby,$orderby,$limit,$having,$serveur,$option);
+	$sql=sql_select($champs,$from,$where,$groupby,$orderby,$limit,$having,$serveur,$option);
 	
 	// Préparation de l'array a envoyer à mailchimp
 	$batch=array();
@@ -192,18 +226,18 @@ function inscription_liste_mc($flux='',$api,$listId,$email,$donnees_auteur,$emai
 
 	
 	if ($api->errorCode){
-		spip_log(__LINE__,'squirrel_chimp');
+		spip_log('inscription_liste','squirrel_chimp_lists');
 		$messageErreur = _T('scl:api_errorcode')."<br/><b>".$api->errorCode."</b><br/>".$api->errorMessage;
 		if (autoriser('defaut')){
-			spip_log(__LINE__,'squirrel_chimp');
+
 			$flux['data'] = array('message_erreur' => "Plugin Squirrels Love Chimps $messageErreur");
-			spip_log("Admin $messageErreur",'squirrel_chimp');
+			spip_log("Admin $messageErreur",'squirrel_chimp_lists');
 			return $flux;
 		} // fin message pour admin
 		else {
-			spip_log(__LINE__,'squirrel_chimp');
+			spip_log(__LINE__,'squirrel_chimp_lists');
 			// que le spiplog si on est juste un user
-			spip_log("$messageErreur",'squirrel_chimp');
+			spip_log("$messageErreur",'squirrel_chimp_lists');
 			return $flux;
 		} // autoriser
 	} else {
@@ -231,22 +265,21 @@ function desinscription_liste_mc($flux='',$api,$listId,$email,$delete_member=fal
 	$retval = $api->listUnSubscribe($listId, $email,$delete_member,$send_goodbye,$send_notify);
 
 	if ($api->errorCode){
-		spip_log(__LINE__,'squirrel_chimp');
+
 		$messageErreur = _T('scl:api_errorcode')."<br/><b>".$api->errorCode."</b><br/>".$api->errorMessage;
 		if (autoriser('defaut')){
-			spip_log(__LINE__,'squirrel_chimp');
+
 			$flux['data'] = array('message_erreur' => "Plugin mes_abonnes : $message_ok <br/> Plugin Mailchimp: $messageErreur");
-			spip_log("Admin $messageErreur",'squirrel_chimp');
+			spip_log("Admin $messageErreur",'squirrel_chimp_lists');
 			return $flux;
 		} // fin message pour admin
 		else {
-			spip_log(__LINE__,'squirrel_chimp');
+
 			// que le spiplog si on est juste un user
-			spip_log(" $messageErreur",'squirrel_chimp');
+			spip_log(" $messageErreur",'squirrel_chimp_lists');
 			return $flux;
 		} // autoriser
 	} else {
-		spip_log(__LINE__,'squirrel_chimp');
 		$message_ok .="<br>"._T('mailchimp:demande_desincription_ok', array('email' => "$email"));
 		$flux['data']['message_ok']=$message_ok ;
 		return $flux;

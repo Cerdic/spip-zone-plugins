@@ -9,21 +9,21 @@ function squirrel_chimp_lists_squirrel_chimp_definitions($flux){
 	
 	$valeurs=array(
 			'config'=>array(
-				0=>'mailinglists',
-				1=>'ml_act_ajout',
-				2=>'ml_opt_in',
-				3=>'ml_act_enleve',
-				4=>'ml_act_actualise',
-				5=>'mapping',
-				
-				),
+			0=>'mailinglists',
+			1=>'tables',
+			2=>'ml_act_ajout',
+			3=>'ml_opt_in',
+			4=>'ml_act_enleve',
+			6=>'mapping',		
+			7=>'ml_act_actualise',
+			8=>'champs',
+			9=>'sync_auteurs'),
 			'fichier_langue'=>'scl'
 			);
 		
 	$flux['data']['squirrel_chimp_lists']=$valeurs;
 	
 
-	$flux['data']['squirrel_chimp_lists']['config'][6]='sync_auteurs';
 	
 	return $flux;
 
