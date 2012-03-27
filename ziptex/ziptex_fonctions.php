@@ -9,7 +9,7 @@ function ziptex_polyglossia($lang){
 	return $tableau[$lang];		
 }
 function ziptex_dir($array){
-	sous_repertoire(_DIR_ZIPTEX);
+	sous_repertoire(_DIR_RACINE_DIR_ZIPTEX);
 	foreach ($array as $dir){
 		sous_repertoire(_DIR_ZIPTEX.$dir);	
 	}
@@ -37,7 +37,7 @@ function ziptex_zipper($array){
 }
 
 function ziptex_creer_tex($squel,$nom,$options=array()){
-
+	
 	$contenu = recuperer_fond($squel,$options);
 	ecrire_fichier(_DIR_ZIPTEX.$nom,$contenu);
 	
@@ -56,7 +56,8 @@ function ziptex_copier_img($orig){
 	/* Cas particulier des .gif qui seront converti en .png*/
 	if ($ext == 'gif'){
 		include_spip('filtres/images_transforme');
-		$orig = image_format($orig);	
+		$orig = image_format($orig);
+		$ext  = 'png';
 	}
 	
 	/* Copie */
