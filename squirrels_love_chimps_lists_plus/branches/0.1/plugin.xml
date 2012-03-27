@@ -2,8 +2,8 @@
 	<nom>Squirrels Love Chimps Lists Plus</nom>
 	<auteur>[Spade->http://blog.spade.be/] et [Rainer M&#252;ller->http://www.mychacra.net]</auteur>
 	<licence>GNU/GLP</licence>
-	<version>0.2.1</version>
-	<version_base>0.2.0</version_base>	
+	<version>0.3.1</version>
+	<version_base>0.2.13</version_base>	
 	<licence>MIT</licence>
 	<etat>test</etat>
 	<slogan>Gestion avancé de mailing listes de Spip et de Mailchimp</slogan>
