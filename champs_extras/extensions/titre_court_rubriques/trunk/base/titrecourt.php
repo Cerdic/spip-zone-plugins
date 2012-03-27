@@ -9,7 +9,7 @@ function titrecourt_declarer_champs_extras($champs = array()){
 			'label' => _T('titrecourt:titre_court'), 
 			'sql' => "varchar(30) NOT NULL DEFAULT ''",
 			'defaut' => '',// Valeur par défaut
-			'restriction'=>array(	'voir' 		=> array('auteur'=>''),//Tout le monde peut voir
+			'restrictions'=>array(	'voir' 		=> array('auteur'=>'admin'),//Tout le monde peut voir
 									'modifier'	=> array('auteur'=>'webmestre'))),//Seul les webmestre peuvent modifier
         'verifier' => array());
 
