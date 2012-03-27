@@ -1,0 +1,13 @@
+<paquet
+	prefix="googleajaxsearch"
+	categorie="multimedia"
+	version="0.1.2"
+	etat="stable"
+	compatibilite="[3.0.0-dev;["
+	logo="img_pack/google_but.png"
+	documentation="http://www.spip-contrib.net/Plugin-Google-Ajax-Search"
+>	
+	<nom>Google Ajax Search</nom>
+	<auteur lien="http://www.erational.org">erational</auteur>
+  <pipeline nom="insert_head" inclure="googleajaxsearch_pipeline.php" />
+</paquet>
