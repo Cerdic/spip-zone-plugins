@@ -10,5 +10,5 @@
 	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
 	<necessite nom="tw" />
-	<utilise nom="zippeur" version="[2.0.0;[" />
+	<utilise nom="zippeur" compatibilite="[2.0.0;[" />
 </paquet>
