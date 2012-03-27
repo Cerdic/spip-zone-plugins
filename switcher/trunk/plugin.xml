@@ -23,7 +23,7 @@
 	</description>
 	<lien>http://zine.spip.org/spip.php?article8</lien>
 	<prefix>switcher</prefix>	
-	<options>switcher.php</options>
+	<options>switcher_options.php</options>
 	<pipeline>
 		<nom>affichage_final</nom>
 		<action>affichage_final</action>

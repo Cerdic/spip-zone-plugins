@@ -1,6 +1,8 @@
 <?php
 // Affectation de la liste des squelettes disponibles
 // --------------------------------------------------
+    //global
+    global $squelettes_alternatifs;
 
 	// Inclusion du fichier de configuration
 	include_spip('inc/switcher_config');
@@ -39,6 +41,8 @@
 		else
 			spip_setcookie('spip_skel', $_COOKIE['spip_skel'] = '', -24*3600, '/');
 	}
+    
+    global $dossier_squelettes;
 
 	// Porte-t-on un cookie de squelette ?
 	if (isset($_COOKIE['spip_skel'])

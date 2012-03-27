@@ -23,7 +23,8 @@ function switcher_affichage_final($texte){
 			$code.='<fieldset style="margin:0;padding:0;border:0">';
 			$code.='<select name="selecteurSkel" style="'.$styleListeSwitcher.'" onchange="gotof(this.options[this.selectedIndex].value)">';
 			$code.='<option selected="selected" value="">Squelettes</option>';
-			foreach( $squelettes_alternatifs as $key => $value)	$code.='<option value="'.parametre_url(self(),'var_skel',$key).'">&nbsp;-> '.$key.'</option>';
+            if (is_array($squelettes_alternatifs))
+    			foreach( $squelettes_alternatifs as $key => $value)	$code.='<option value="'.parametre_url(self(),'var_skel',$key).'">&nbsp;-> '.$key.'</option>';
 			$code.='</select>';
 			$code.='</fieldset>';
 			$code.='</form>';
