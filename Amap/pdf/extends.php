@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 define('FPDF_FONTPATH','font/');
-include_spip('pdf_table');
+include_spip('pdf/pdf_table');
 include_spip('inc/charsets');
 
 class PDF extends PDF_Table {
