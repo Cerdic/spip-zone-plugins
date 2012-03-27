@@ -313,18 +313,18 @@
 		$url_action_document=generer_url_ecrire('fiche_document');
 		$affiche .= "toto";
 		if (isset($id_article)==NULL){
-			$affiche .= icone_horizontale(_T('&rsaquo;&rsaquo;&nbsp;<:genespip:retour_sur_fiche_sans_enregistrer:>&nbsp;&rsaquo;&rsaquo;'), $url_action_document."&id_individu=".sql_quote($id_individu), 'rien.gif', '');
+			$affiche .= icone_horizontale(_L('<:genespip:retour_sur_fiche_sans_enregistrer:>'), $url_action_document."&id_individu=".sql_quote($id_individu), 'rien.gif', '');
 		}else{
 			$result = sql_select("*", "spip_genespip_documents", "id_individu = ".sql_quote($id_individu)." and id_article = ".sql_quote($id_article));
 			$compte = mysql_num_rows($result);
 			if ($compte==0){
-				$affiche .= icone_horizontale(_T('&rsaquo;&rsaquo;&nbsp;<:genespip:cliquer_ici_pour_lier_article_avec_fiche:>&nbsp;&rsaquo;&rsaquo;'), $url_action_document."&id_individu=".sql_quote($id_individu)."&id_article=".sql_quote($id_article)."&action=Valider", 'rien.gif', 'creer.gif');
+				$affiche .= icone_horizontale(_L('<:genespip:cliquer_ici_pour_lier_article_avec_fiche:>'), $url_action_document."&id_individu=".sql_quote($id_individu)."&id_article=".sql_quote($id_article)."&action=Valider", 'rien.gif', 'creer.gif');
 			}else{
 				if ($page=="articles"){
-					$affiche .= icone_horizontale(_T('&rsaquo;&rsaquo;&nbsp;<:genespip:retour_sur_fiche:>&nbsp;&rsaquo;&rsaquo;'), $url_action_document."&id_individu=".sql_quote($id_individu), 'rien.gif', '');
+					$affiche .= icone_horizontale(_L('<:genespip:retour_sur_fiche:>'), $url_action_document."&id_individu=".sql_quote($id_individu), 'rien.gif', '');
 				}
 				if ($page=="articles_edit"){
-					$affiche .= icone_horizontale(_T('&rsaquo;&rsaquo;&nbsp;<:genespip:retour_sur_fiche_sans_enregistrer:>&nbsp;&rsaquo;&rsaquo;'), $url_action_document."&id_individu=".sql_quote($id_individu), 'rien.gif', '');
+					$affiche .= icone_horizontale(_L('<:genespip:retour_sur_fiche_sans_enregistrer:>'), $url_action_document."&id_individu=".sql_quote($id_individu), 'rien.gif', '');
 				}
 			}
 		}

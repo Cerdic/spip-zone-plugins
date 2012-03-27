@@ -48,11 +48,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'deces' => 'Décès',
 	'dep' => 'Dep.',
 	'departement' => 'Département',
+	'depose_par' => 'Déposé par',
 	'derniere_modif_le' => 'Derniére moodif le',
 	'derniere_modification' => 'Dernière mise à jour de la fiche',
 	'descriptif_cfg' => '<p>Cette zone permet de configurer les variables de base du plugin.</p><p> Pour fonctionner correctement ce plugin doit être installé en parallèle avec le plugin cfg</p>',
 	'detail_fiche' => 'Détail fiche',
-	'document' => 'Documents',
+	'document' => 'Document',
+	'documents' => 'Documents',
 
 	// E
 	'enfant' => 'enfant',
