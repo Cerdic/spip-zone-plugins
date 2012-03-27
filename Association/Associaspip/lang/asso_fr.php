@@ -264,6 +264,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'quitter_un_groupe' => 'Quitter un groupe',
 	'adherent_message_degrouper' => '<p>S&eacute;lectionner les groupes dont les adh&eacute;rents seront exclus.</p>',
 	'titre_voir_groupe' => 'Voir le groupe',
+
+# Gestion des autorisations 
+	'gerer_les_autorisations' => 'G&eacute;rer les droits d\'acc&egrave;s',
+	'les_groupes_dacces' => 'Groupes de droits d\'acc&egrave;s',	
+	'aide_gerer_autorisations' => 'Pour donner des autorisations, ajouter simplement la personne au groupe ad&eacute;quat. Voir la <a href="http://www.spip-contrib.net/Associaspip#restriction_access">documentation online</a> pour plus de d&eacute;tails.',
+	# nom des groupes d'autorisations (par ordre croissant d'id_groupe)
+	'groupe_1' => 'Edition des droits acc&egrave;s',
+	'groupe_2' => 'Edition des groupes',
 # Association (accueil)
 	'association_infos_contacts' => 'Profil de l\'association', // information sur l'association (objet, declaration, etc.), ses coordonnees (adresse, numero et email principaux) et les contacts (nom, fonction, numero, email)
 	'categories_de_cotisations' => 'Cat&eacute;gories de cotisations',

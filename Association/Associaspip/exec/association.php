@@ -28,13 +28,17 @@ function exec_association()
 		$res['profil_de_lassociation'] = array('assoc_qui.png', 'configurer_association');
 		$res['editer_asso_metas_utilisateur_lien'] = array('assoc_qui.png', 'editer_asso_metas_utilisateur');
 		$res['categories_de_cotisations'] = array('cotisation.png', 'categories');
-		if ( test_plugin_actif('ASSOCIATION') ) {
-			$res['plan_comptable'] = array('plan_compte.png', 'plan');
-			if ($GLOBALS['association_metas']['destinations'])
-				$res['destination_comptable'] = array('plan_compte.png', 'destination');
-			$res['exercices_budgetaires_titre'] = array('plan_compte.png', 'exercices');
+		if (autoriser('gerer_autorisations', 'association')) {
+			$res['gerer_les_autorisations'] = array('droit_acces.png', 'association_autorisations');
 		}
+		$res['plan_comptable'] = array('plan_compte.png', 'plan');
+		if ($GLOBALS['association_metas']['destinations']) {
+				$res['destination_comptable'] = array('plan_compte.png', 'destination');
+		}
+		$res['exercices_budgetaires_titre'] = array('plan_compte.png', 'exercices');
+		
 		icones_association(array(), $res);
+
 		debut_cadre_association('annonce.gif', 'association_infos_contacts');
 		echo '<div class="vcard" id="vcard-asso">';
 		// Profil de l'association

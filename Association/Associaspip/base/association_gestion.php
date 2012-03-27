@@ -51,6 +51,31 @@ function association_vider_tables($nom_meta, $table)
 
 }
 
+// fonction qui va remplir ou mettre a jour la table spip_asso_groupes
+// pour y a definir les groupes gerant les autorisations (id<100)
+function association_gestion_autorisations_upgrade()
+{
+	spip_log("UPGRADE DEBUG");
+	// definir tous les groupes qui doivent exister
+	$groupes_autorisations = array(1,2);
+
+	// recuperer tous ceux existants
+	$groupes_existants = array();
+	$query = sql_select('id_groupe', 'spip_asso_groupes', 'id_groupe<100');
+	while ($data = sql_fetch($query)) {
+		$groupes_existants[$data['id_groupe']] = true;
+	}
+
+	// inserer toutes les entrees necessitant une mise à jour
+	$groupes_a_inserer = array();
+	foreach ($groupes_autorisations as $id_groupe) {
+		if (!$groupes_existants[$id_groupe]) { // il manque un entree
+			$groupes_a_inserer[]=array('id_groupe'=>$id_groupe);
+		}
+	}
+	sql_insertq_multi('spip_asso_groupes', $groupes_a_inserer);
+}
+
 // MAJ des tables de la base SQL
 // Retourne 0 si ok, le dernier numero de MAJ ok sinon
 function association_upgrade($meta, $courante, $table='meta')
@@ -74,6 +99,7 @@ function association_upgrade($meta, $courante, $table='meta')
 		include_spip('base/create');
 		alterer_base($GLOBALS['tables_principales'],
 			     $GLOBALS['tables_auxiliaires']);
+		association_gestion_autorisations_upgrade();
 		ecrire_meta($meta, $courante, NULL, $table);
 		return 0; // Reussite (supposee !)
 	} else {
@@ -561,6 +587,9 @@ $GLOBALS['association_maj'][58894] = array(
 	array('sql_alter', "TABLE spip_asso_activites DROP date "),
 );
 
-
-
+// introduction des groupes 1 et 2 dans la table spip_asso_groupes
+$GLOBALS['association_maj'][59811] = array(
+	array('association_gestion_autorisations_upgrade')
+);
+3
 ?>
