@@ -12,7 +12,9 @@ if(defined('_SPIP20100')) {
 }
 
 function type_urls_action_rapide() {
-	include_spip('inc/actions');
+//	include_spip('inc/actions');
+	include_spip('inc/actions_compat');
+
 //cs_log($_POST, '==== type_urls_action_rapide :'); cs_log($_GET);
 	include_spip('public/assembler'); // pour recuperer_fond()
 	$fd = recuperer_fond(defined('_SPIP19300')?'fonds/type_urls':'fonds/type_urls_191', array(

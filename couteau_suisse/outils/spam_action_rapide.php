@@ -2,7 +2,8 @@
 
 // module inclu dans la description de l'outil en page de configuration
 
-include_spip('inc/actions');
+//include_spip('inc/actions');
+include_spip('inc/actions_compat');
 
 function spam_filtre_de_test($texte) {
 	if (!strlen($texte)) return '';

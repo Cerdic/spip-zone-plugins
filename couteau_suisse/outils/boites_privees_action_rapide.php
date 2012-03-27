@@ -27,10 +27,12 @@ spip_log("action_rapide_tri_auteurs : $id_article, $id_auteur, $monter");
 	include_spip('public/assembler'); // pour recuperer_fond(), SPIP 1.92
 	$texte = trim(recuperer_fond('fonds/tri_auteurs', array('id_article'=>$id)));
 	// syntaxe : ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
-	if(strlen($texte))
+	if(strlen($texte)) {
+		include_spip('inc/actions_compat');
 		// un clic sur 'monter' ou 'descendre' va permettre une redirection vers
 		// les fonctions : boites_privees_URL_objet_exec(), puis action_rapide_tri_auteurs()
 		$texte = ajax_action_auteur('action_rapide', 'tri_auteurs', 'articles', "arg=boites_privees|URL_objet&fct=tri_auteurs&id_article=$id#bp_tri_auteurs_corps", $texte);
+	}
 	// si appel exec, l'id article est nul...
 	if(!$id_article) return $texte;
 	// ici, 1er affichage !

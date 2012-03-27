@@ -3,7 +3,8 @@
 // module inclu dans la description de l'outil en page de configuration
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
-include_spip('inc/actions');
+//include_spip('inc/actions');
+include_spip('inc/actions_compat');
 include_spip('inc/distant');
 include_spip('inc/presentation');
 if(version_compare(PHP_VERSION, '5.0.0', '>='))	

@@ -7,20 +7,15 @@
 #-----------------------------------------------------#
 if(!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/actions');
+//include_spip('inc/actions');
+include_spip('inc/actions_compat');
+
 include_spip('inc/texte');
 include_spip('inc/layer');
 include_spip('inc/presentation');
 include_spip('inc/message_select');
 
 define('_VAR_OUTIL', '@@CS_VAR_OUTIL@@');
-
-function cs_ajax_outil_greffe($idom, $corps)	{
-	// en fait, ajax uniquement si une modif est demandee...
-	return _request('modif')=='oui'
-		?'<div class="cs_modif_ok">&gt;&nbsp;'._T('couteauprive:vars_modifiees')."&nbsp;&lt;</div>$corps"
-		:"\n<div id='$idom'>$corps\n</div>\n";
-}
 
 // initialise une variable et ne retourne rien si !$modif
 // sinon, cette fonction retourne le code html qu'il faut pour fabriquer le formulaire de l'outil proprietaire
