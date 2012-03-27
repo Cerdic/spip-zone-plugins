@@ -1,0 +1,48 @@
+<!-- autoriser=publierdans_rubrique -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- presentation=non -->
+<!-- nom=propevent -->
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+	    <li class="editer_etat_contribution [ (#ENV**{erreurs}|table_valeur{etat_contribution}|oui)erreur]">
+				<label for="etat_contribution"><:propevent:label_etat_contribution:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{etat_contribution})</span>]
+				<select name="etat_contribution" class="select" id="etat_contribution">
+					<option value=""[(#ENV{etat_contribution,""}|=={""}|oui)selected="selected"]><:propevent:desactiver_contributions:></option>
+					<option value="prepa"[(#ENV{etat_contribution}|=={prepa}|oui)selected="selected"]><:texte_statut_en_cours_redaction:></option>
+					<option value="prop"[(#ENV{etat_contribution}|=={prop}|oui)selected="selected"]><:texte_statut_propose_evaluation:></option>
+					<option value="publie"[(#ENV{etat_contribution}|=={publie}|oui)selected="selected"]><:texte_statut_publie:></option>
+				</select>
+	    </li>
+	    <li class="editer_rubrique [ (#ENV**{erreurs}|table_valeur{rubrique}|oui)erreur]">
+				<label><:propevent:label_rubrique:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{rubrique})</span>]
+				<input type="hidden" name="rubrique[]" value="rien|0" />
+				[(#INCLURE{fond=formulaires/selecteur/rubriques}{selected=#ENV{rubrique}}{name=rubrique}{select=1})]
+				<div class="choix" style="clear:both;"><input type="checkbox" name="proposer_thematique" class="checkbox" value="oui" id="proposer_thematique"[ (#ENV{proposer_thematique,''}|=={oui}|oui)checked="checked"]/><label for="proposer_thematique"><:propevent:label_proposer_thematique:></label></div>
+	    </li>
+	    <li class="editer_groupes [ (#ENV**{erreurs}|table_valeur{groupes}|oui)erreur]">
+				<label><:propevent:label_groupes:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{groupes})</span>]
+				<BOUCLE_groupes(GROUPES_MOTS){tables_liees==evenements}{par num titre,titre}>
+				<div class="choix"><input type="checkbox" name="groupes[]" class="checkbox" value="#ID_GROUPE" id="groupe_#ID_GROUPE"[ (#ID_GROUPE|in_any{#ENV{groupes}})checked="checked"]/><label for="groupe_#ID_GROUPE">[(#TITRE|supprimer_numero)]</label></div>
+				</BOUCLE_groupes>
+				<:propevent:message_aucun_groupe_mot_evenement:>
+				<//B_groupes>
+	    </li>
+	    <li class="editer_email_moderateur [ (#ENV**{erreurs}|table_valeur{email_moderateur}|oui)erreur]">
+				<label for="email_moderateur"><:propevent:label_email_moderateur:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email_moderateur})</span>]
+				<input type="text" name="email_moderateur" class="text" value="#ENV**{email_moderateur}" id="email_moderateur" />
+	    </li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
+		</p>
+	</div></form>
+</div>

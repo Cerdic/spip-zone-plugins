@@ -1,0 +1,10 @@
+[(#REM)
+
+	Vue pour le crayon 'id_licence' sur un article ou un document
+
+]
+[(#ENV{id_article}|oui)
+#MODELE{licence,id_article=#ENV{id_article},nom_licence=oui,lien=non}]
+[(#ENV{id_document}|oui)
+#MODELE{licence,id_document=#ENV{id_document},nom_licence=oui,lien=non}
+]

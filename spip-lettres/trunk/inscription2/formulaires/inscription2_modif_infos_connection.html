@@ -1,0 +1,45 @@
+[(#REM) Charge les informations minimale d'un auteur
+On teste la présence d'au moins un des champs pour l'afficher]
+
+[(#CONFIG{inscription2/nom_fiche_mod}|=={on}|ou{
+	[(#CONFIG{inscription2/login_fiche_mod}|=={on})]}|ou{
+		[(#CONFIG{inscription2/email_fiche_mod}|=={on})]}|ou{
+			[(#CONFIG{inscription2/pass_fiche_mod}|=={on})]}|oui)
+			<fieldset class="info_connection">
+				<legend>
+				    <:inscription2:info_connection:>
+				</legend>
+			
+				<ul>
+				    [(#CONFIG{inscription2/nom_fiche_mod}|=={on}|oui)
+				    <li class="editer_nom[ (#CONFIG{inscription2/nom_obligatoire}|=={on}|?{obligatoire})][ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
+				        <label for="nom"><:inscription2:nom:> (<:inscription2:nom_explication:>)</label>
+				        <input type="text" class="text" name="nom" id="nom" value="#ENV{nom}" />
+				        [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</p>]
+				    </li>]
+				    
+				    [(#CONFIG{inscription2/login_fiche_mod}|=={on}|oui)	
+				    <li class="editer_login[ (#CONFIG{inscription2/login_obligatoire}|=={on}|?{obligatoire})][ (#ENV**{erreurs}|table_valeur{login}|oui)erreur]">
+				        <label for="login"><:inscription2:login:></label>
+				        <input type="text" class="text" name="login" id="login" value="#ENV{login}" />
+				        [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{login})</p>]
+				    </li>]
+				
+				    [(#CONFIG{inscription2/email_fiche_mod}|=={on}|oui)	
+				    <li class="editer_email[ (#CONFIG{inscription2/email_obligatoire}|=={on}|?{obligatoire})][ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
+				        <label for="email"><:inscription2:email:></label>
+				        <input type="text" class="text" name="email" id="email" value="#ENV{email}" />
+				        [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</p>]
+				    </li>]
+					
+					[(#CONFIG{inscription2/pass_fiche_mod}|=={on}|oui)	
+					<li class="editer_password[ (#CONFIG{inscription2/pass_obligatoire}|=={on}|?{obligatoire})][ (#ENV**{erreurs}|table_valeur{pass}|oui)erreur]">
+					    <label for="password"><:inscription2:pass:></label>
+					    <input type="password" class="text" autocomplete="off" name="password" id="password" value="#ENV{password}" />
+					    <span id="info" style="display:block">&nbsp;</span>
+						<label for="password1"><:inscription2:password_retaper:></label>
+					    <input type="password" class="text" autocomplete="off" name="password1" id="password1" value="#ENV{password1}" />
+					    [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{pass})</p>]
+					</li>]
+				</ul>
+			</fieldset>]

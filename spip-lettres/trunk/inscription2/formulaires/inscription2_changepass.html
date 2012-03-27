@@ -1,0 +1,47 @@
+<div style="text-align:#LANG_RIGHT">
+<script type="text/javascript"><!--
+document.write("<a style='color: #e86519' href='")
+document.write((window.opener) ? "javascript:close()" : "./")
+document.write("'><img src='#CHEMIN{images/picto_close.gif}' alt='<:pass_quitter_fenetre:>' /><\/a>");
+//--></script>
+<noscript>
+	<div><a style="color: #e86519" href='./'><:pass_retour_public:></a></div>
+</noscript>
+</div>
+<h1><:inscription2:modif_pass_titre|utf8_encode|image_typo{police=century.TTF,taille=16,couleur=44AEE8,align=left}:></h1>
+<div class="formulaire_spip formulaire_oubli">
+[<p>(#ENV*{message})</p>]
+[(#ENV*{message}|?{'',' '})
+
+<form id="modif_pass_form" action="[(#ENV{action})]" method="post">
+	<fieldset style="border:none;">
+	<strong><:pass_nouveau_pass:></strong>[
+	<div id="modif_pass_formulaire">
+	<input type="hidden" name="p" value="(#ENV{p})" />
+	<label for="change_pass"><:pass_choix_pass:> </label>
+	<input type="password" name="change_pass" id="change_pass" />
+	<span id="info" style="display:block">&nbsp;</span>
+	][
+	(#ENV{p}|?{'',' '})
+	<p><:inscription2:pass_indiquez_cidessous:></p>
+	<div id="modif_pass_formulaire">
+	<label for="change_pass"><:form_pet_votre_email:> </label>
+	<input type="text" name="change_pass" id="change_pass" />
+	]
+	<p class="spip_bouton"><input type="submit" value="<:pass_ok:>" /></p>
+	<br class="nettoyeur" />
+	</div>
+	</fieldset>
+</form>
+]
+</div>
+<script src="[(#URL_PAGE{jquery.pwdstr-1.0.js}|parametre_url{lang,#ENV{lang}})]" type='text/javascript'></script>
+<script type='text/javascript'><!--
+$(document).ready(function($){				
+$('#password').pwdstr('#info');
+});
+//--></script>
+[<script type="text/javascript"><!--
+(#ENV*{message}|?{'',' '})
+document.getElementById('change_pass').focus()
+//--></script>]

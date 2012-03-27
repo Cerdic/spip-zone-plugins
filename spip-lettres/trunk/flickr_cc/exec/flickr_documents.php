@@ -1,0 +1,1 @@
+<?phpfunction exec_flickr_documents() {	include_spip("inc/documents");	echo afficher_documents_colonne($_GET["id_article"], "article");}?>

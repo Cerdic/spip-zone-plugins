@@ -1,0 +1,58 @@
+[(#REM)
+
+	Controleur pour le crayon 'pays', uniquement html
+	Validation JS pour les champs specifies obligatoires
+	Si les champs ne sont pas actifs dans le CFG, ils n'apparaissent pas...
+
+]
+#CACHE{0}
+<BOUCLE_a(AUTEURS_ELARGIS){id_auteur=#ENV{id_auteurs_elargi}}{tout}>
+
+[(#CONFIG{inscription2/pays_obligatoire}|=={on}|oui)#SET{pays_obl,true}]
+
+[(#GET{pays_obl}|oui)
+[<script type="text/javascript" src="(#URL_PAGE{crayons_validation.js}|parametre_url{lang,#ENV{lang}})"></script>]
+
+<script type="text/javascript">
+	if (typeof cQuery.fn.validate == "function") {
+		var me = cQuery(".auteurs_elargi-pays-#ID_AUTEUR");
+		var id = me.crayon().find('form');
+
+		function validation(){
+			var validator = cQuery(id).validate({
+				onkeyup: function(){
+					validation();
+				},
+				showErrors: function(errors, errorList){
+					validator.defaultShowErrors();
+					crayon_affiche_submit(me, id);
+				},
+				success: function(label){
+					label.parents('li.erreur').removeClass('erreur');
+					label.remove();
+					crayon_affiche_submit(me, id)
+				}
+			});
+			//On test le formulaire pour chercher les potentielles erreurs
+			validator.form();
+			crayon_affiche_submit(me, id);
+		}
+		//On ajoute l'asterisque qui signale qu'un champ est obligatoire
+		id.find('.obligatoire label').append('*');
+		setTimeout('validation()', 500);
+	}
+</script>]
+<fieldset[ style="(#ENV{style})"]>
+	<ul>
+		[(#CONFIG{inscription2/pays_fiche_mod}|=={on}|oui)
+		[(#GET{pays_obl}|?{<li class="obligatoire">,<li>})]
+			<label><:inscription2:pays:></label>
+			#SET{id,#PAYS}
+			<select class="crayon-active text[(#GET{pays_obl}|oui) obligatoire]" name="#ENV{name_pays}" style="width:#ENV{largeur}px;"[(#GET{pays_obl}|oui) onchange="validation()"]>
+				<INCLURE{fond=prive/listes/select_pays}{id=#GET{id}}>
+			</select>
+		</li>]
+	</ul>
+</fieldset>
+</BOUCLE_a>
+<//B_a>

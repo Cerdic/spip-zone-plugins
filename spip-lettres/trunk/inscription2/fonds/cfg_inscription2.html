@@ -1,0 +1,10 @@
+<!-- titre=Inscription 2.0 -->
+<!-- icone=images/inscription2_icone.png-->
+[(#SET{logo, <img src='[(#CHEMIN{images/inscription2.png})]' width='64' height='64' alt='Hand writing' style="float:#LANG_RIGHT;" /> })]
+
+<!-- descriptif= [(#GET{logo})] <:inscription2:description_cfg:> -->
+
+#CACHE{0}
+<div class="formulaire_spip formulaire_editer ajax">
+#FORMULAIRE_CONFIG_INSCRIPTION2
+</div>

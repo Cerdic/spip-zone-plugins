@@ -1,0 +1,38 @@
+<fieldset class="info_reglement">
+<BOUCLE_article(ARTICLES){id_article=#CONFIG{inscription2/reglement_article}}>
+<BOUCLE_trad(ARTICLES){traduction}{lang}{0,1}>
+[(#REM) Si on a une traduction du reglement dans notre langue, on l'utilise]
+<ul>
+	<li class="editer_reglement obligatoire[ (#ENV**{erreurs}|table_valeur{reglement}|oui)erreur]">
+		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{reglement})</span>]
+		<div class="choix">
+			<input name="reglement" id="reglement" type="checkbox" class="checkbox" />
+			<label for="reglement"><:inscription2:label_public_reglement_url{url=#URL_ARTICLE}:></label>
+		</div>
+	</li>
+</ul>
+</BOUCLE_trad>
+[(#REM) On prend l'article original si pas de traduction]
+<ul>
+	<li class="editer_reglement obligatoire[ (#ENV**{erreurs}|table_valeur{reglement}|oui)erreur]">
+		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{reglement})</span>]
+		<div class="choix">
+			<input name="reglement" id="reglement" type="checkbox" class="checkbox" />
+			<label for="reglement"><:inscription2:label_public_reglement_url{url=#URL_ARTICLE}:></label>
+		</div>
+	</li>
+</ul>
+<//B_trad>
+</BOUCLE_article>
+[(#REM) Si pas d'article, le label n'a pas de lien]
+<ul>
+	<li class="editer_reglement obligatoire[ (#ENV**{erreurs}|table_valeur{reglement}|oui)erreur]">
+		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{reglement})</span>]
+		<div class="choix">
+			<input name="reglement" id="reglement" type="checkbox" class="checkbox" />
+			<label for="reglement"><:inscription2:label_public_reglement:></label>
+		</div>
+	</li>
+</ul>
+<//B_article>
+</fieldset>
