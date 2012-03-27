@@ -16,6 +16,10 @@
 */
 $GLOBALS['logo_libelles']['id_geoservice'] = _T('geoportail:logo_service');
 
+/** Pipeline autoriser pour geoportail
+*/
+function geoportail_autoriser($flux) { return $flux; }
+
 /** Autorisation de modifier le logo d'un geoservice.
 */
 function autoriser_geoservice_iconifier ($faire, $type, $id, $qui, $opt)

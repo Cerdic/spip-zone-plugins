@@ -221,11 +221,12 @@ function geoportail_afficher_contenu_objet($flux)
 			else if ($GLOBALS['meta']['geoportail_geodocument_auto'])
 			{	include_spip('inc/geoupload');
 				if ($distant != 'oui' && geoportail_get_coord(_DIR_IMG.$fichier,$extension,$lon,$lat))
-					$info = "(".geoportail_longitude($lon,true).", ".geoportail_latitude($lat,true).")";
-				$id_position = sql_insert("spip_geopositions",
-						"(id_objet, objet, lon, lat, zoom, zone)",
-						"($id_document, 'document', $lon, $lat, 10, 'FXX')"
-					);
+				{	$info = "(".geoportail_longitude($lon,true).", ".geoportail_latitude($lat,true).")";
+					$id_position = sql_insert("spip_geopositions",
+							"(id_objet, objet, lon, lat, zoom, zone)",
+							"($id_document, 'document', $lon, $lat, 10, 'FXX')"
+						);
+				}
 			}
 
 			$flux['data'] .= '<a style="display:block; text-align:center;" href="'
