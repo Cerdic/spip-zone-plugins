@@ -1,5 +1,0 @@
-TYPAGE DES CHAMPS A LA CREATION
-
-il faudrait pouvoir typer un champ du cfg de config d'inscription2 avec autre chose que le "text" par deafut.
-ex : la date de creation doit etre de type date
-on pourrait analyser une classe "date" sur l'input du cfg pour determiner le type du champ a creer dans la base.

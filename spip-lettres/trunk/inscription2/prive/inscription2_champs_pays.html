@@ -1,6 +1,0 @@
-[(#ENV{val}|ou{[(#CONFIG{inscription2/pays_defaut}|non)]}|oui)
-[(#SAISIE{pays,pays,valeur=#ENV{val},label=<:inscription2:pays:>})]
-]
-[(#CONFIG{inscription2/pays_defaut}|et{[(#ENV{val}|non)]}|oui)
-[(#SAISIE{pays,pays,valeur=#CONFIG{inscription2/pays_defaut},label=<:inscription2:pays:>})]
-]
