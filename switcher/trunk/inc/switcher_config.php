@@ -2,11 +2,18 @@
 global $repertoire_squelettes_alternatifs;
 global $styleListeSwitcher;
 
+include_spip('inc/config');
 // Repertoire contenant les repertoires squelettes a tester
-if (defined('SWITCHER_REPERTOIRE_SQUELETTES_ALTERNATIFS')) {
-	$repertoire_squelettes_alternatifs = SWITCHER_REPERTOIRE_SQUELETTES_ALTERNATIFS;
-} else {
-	$repertoire_squelettes_alternatifs ='squelettes-test';
+if (! $repertoire_squelettes_alternatifs= lire_config('switcher/repertoire') ) {
+    if (defined('SWITCHER_REPERTOIRE_SQUELETTES_ALTERNATIFS')) {
+	    $repertoire_squelettes_alternatifs = SWITCHER_REPERTOIRE_SQUELETTES_ALTERNATIFS;
+    } else {
+	    $repertoire_squelettes_alternatifs ='squelettes-test';
+    }
+}
+
+if ( ! defined('SWITCHER_DOSSIERS_SQUELETTES')) {
+    define('SWITCHER_DOSSIERS_SQUELETTES', 'squelettes,squelettes-dist,'.lire_config('switcher/dossiers_squelettes'));
 }
 
 // Style css associe a la liste deroulante
