@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'abonnes' => 'Abonnés',
 	'abonnement_inscrit' => 'Inscrits aux listes d\'envois',
 	'activer_liste' => 'Activer cette liste',
+	'actualisation_spip_ok_probleme_actualisation_mailchimp' => 'Actualisation spip ok, mais il y a un problème avec l\'actualisation vers Mailchimp. si vous utilisez plusieurs tables pour la syncro, cet auteur ne figure probablement pas dans toutes les tables',
 	'aucun_abonnement' => 'Pas d\'abonnments',
 	
 	//C

@@ -27,21 +27,47 @@ function inc_syncroniser_listes_dist($api='',$id_liste_spip,$id_liste_mailchimp,
 	// la date de la dernière syncro générale
 	$since=sql_getfetsel('date_syncro','spip_listes_syncro','objet="listes" AND type_syncro="liste" AND id_objet='.$id_liste_spip,'','date_syncro DESC');
 
-
+	
 	// les données spip
-	$champs=champs_spip();
-	$champs_spip_auteurs=array();
-	foreach($champs AS $champ){
-		$champs_spip_auteurs[]='spip_auteurs.'.$champ;
+
+	$tables=tables_dispos();
+	$champs_extras=lire_config('squirrel_chimp/champs');
+
+
+	//Préparation de la requette
+	$identifiant_defaut='id_auteur';
+	
+	$from=implode(',',$tables);	
+
+	$where_principal=$identifiant_principal.'='.$identifiant;
+	$where_secondaire=array();	
+	$champs=array();
+	$i=0;
+	foreach($tables AS $table){
+		$i++;
+		if($i==1)$table_principale=$table;
+		else $where_secondaire[$i]=$table_principale.'.'.$identifiant_defaut.'='.$table.'.'.$identifiant_defaut;
+		if($champs_extras[$table]){
+			foreach($champs_extras[$table] as $champ){
+				$champs[$champ]=$table.'.'.$champ;
+				}
+			}
 		}
+			
+	if(!$champs)$champs='*';		
+	else $champs['email']='spip_auteurs.email';	
+	
+	$identifiant_joints=implode(' AND ',$where_secondaire);
+	if($identifiant_joints)$where=' AND '.$identifiant_joints;
 		
-	$c=implode(',',$champs_spip_auteurs).',spip_auteurs_listes.maj,spip_auteurs_listes.date_syncro,spip_auteurs_listes.statut,spip_auteurs.email,spip_auteurs.id_auteur,spip_auteurs.id_mailchimp';	
+
+	$champs=implode(',',$champs).',spip_auteurs_listes.maj,spip_auteurs_listes.date_syncro,spip_auteurs_listes.statut,spip_auteurs.id_auteur,spip_auteurs.id_mailchimp';	
 	
 	// syncroniser tout, n'importe la date de la dernière mise à jour
 	if(!$forcer)$since='0000-00-00 00:00:00';
 		
 	
-	$liste_spip=sql_select($c,'spip_auteurs_listes,spip_auteurs','spip_auteurs_listes.id_liste='.$id_liste_spip.' AND spip_auteurs_listes.id_auteur=spip_auteurs.id_auteur AND spip_auteurs_listes.date_syncro >'.sql_quote($since));
+	$liste_spip=sql_select($champs,'spip_auteurs_listes,'.$from,'spip_auteurs_listes.id_liste='.$id_liste_spip.' AND spip_auteurs_listes.id_auteur=spip_auteurs.id_auteur AND spip_auteurs_listes.date_syncro >'.sql_quote($since).$where);
 	
 	// Composer le tableau distinguant entre abonnées et désabonnées
 	$listes_spip=array();
@@ -54,13 +80,14 @@ function inc_syncroniser_listes_dist($api='',$id_liste_spip,$id_liste_mailchimp,
 		$statuts=array('subscribed','unsubscribed');
 		$listes_mc=array();
 		foreach($statuts AS $status){
-			$listes_mc[$status]=membres_liste_mc($api,$id_liste_mailchimp,$status,$since,$limit);
+			$listes_mc[$status]=membres_liste_mc($api,$id_liste_mailchimp,$status,'',$limit);
 			}	
 		}
 	else {
 		$liste_mc=membres_liste_mc($api,$id_liste_mailchimp,$status,$since,$limit);
 		}
-	
+		spip_log($listes_mc, 'sclp');	
+		spip_log($listes_spip, 'sclp');	
 	//Etablir les candiats à la syncro.
 
 	//D'abord les désinscriptions

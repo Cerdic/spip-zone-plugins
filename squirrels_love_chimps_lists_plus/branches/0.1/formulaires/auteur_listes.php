@@ -20,12 +20,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	 // On synchronise les données avec mailchimp
 	 $listes_accordes=lire_config('squirrel_chimp/mailinglists');
 	 
+
+
 	 $auteur=sql_fetsel('email,format','spip_auteurs','id_auteur='.$id_auteur);
 	 $email= $auteur['email'];	
 	 $format= $auteur['format'];	
 	  
 	 $listes=sql_select('*','spip_auteurs_listes','id_auteur='.$id_auteur);
 
+	$editable=donnees_sync('','',$id_auteur)?true:false;		
 	 
 	 $info_liste_spip=array();
 	 
@@ -42,7 +45,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		
 	 $status=array();
 	
-
+	if($editable){
 	 foreach($listes_accordes AS $id_liste_spip=>$id_liste_mc){
 
 		$timestamp=''; 
@@ -65,7 +68,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			 if	 (!in_array($lists_members[$id_liste_mc],$status_equivalence[$statut_spip])){
 
 				if(!$timestamp){
-					$member_info=membres_liste_info_mc($api,$id_liste_mc,$email);
+					if($email)$member_info=membres_liste_info_mc($api,$id_liste_mc,$email);
 					$timestamp=$member_info['data'][0]['timestamp'];
 					}
 			 //Info mailchimp plus récente que celle de spip
@@ -123,7 +126,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 		 }	 
 	 
-	 
+ }
 	 
 	 $liste=sql_select('id_liste','spip_auteurs_listes','statut="valide" AND id_auteur='.$id_auteur);
 	 
@@ -142,7 +145,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	$valeurs = array(
 		'listes_abos'=> $listes_abos,
 		'format'=>$format,	
-		'listes_abos_prev'=>'',				
+		'listes_abos_prev'=>'',	
+		'editable'=>$editable,		
 		);
 	$valeurs['_hidden']	.='<input type="hidden" name="listes_abos_prev" value="'.implode(',',$listes_abos_prev).'"/>';
 				
@@ -183,6 +187,7 @@ function formulaires_auteur_listes_traiter_dist($id_auteur){
 	$apikey=lire_config('squirrel_chimp/apiKey');
 	$api = new MCAPI($apikey);
 	$listes_accordes=lire_config('squirrel_chimp/mailinglists');
+
 	$date=date('Y-m-d G:i:s');
 	//les fonctions
 		
@@ -236,21 +241,25 @@ function formulaires_auteur_listes_traiter_dist($id_auteur){
 				$l=sql_getfetsel('id_liste','spip_auteurs_listes','id_auteur='.$id_auteur.' AND id_liste='.$id_liste);
 								
 				// compilation des informations à envoyer à MailChimp
-				$auteur=donnees_sync($id_liste,'spip_auteurs','id_auteur='.$id_auteur);
+				$auteur=donnees_sync($id_liste,'',$id_auteur);
+				
 
-				$auteur=$auteur[1];
 
-				$email=$auteur['EMAIL'];
+				//$auteur=$auteur[1];
+
+				$email=$auteur[1]['EMAIL'];
 				$liste=$listes_accordes[$id_liste];
 
 				$statut=$auteur['statut'];
+				if($email){
 				if($liste)$vals=inscription_liste_mc($valeurs,$api,$liste,$email,$auteur,$format,$optin,true);
+				
 				
 				if($vals['data']['message_erreur']){
 					$message_erreur.='<li>'._T('sclp:liste').' - '.$id_liste.': '. $vals['data']['message_erreur'].'</li>';
 					}
 				else{
-					$infos=membres_liste_info_mc($api,$liste,$email);
+					if($email)$infos=membres_liste_info_mc($api,$liste,$email);
 					$infos=$infos['data'][0];
 	
 					$id_mailchimp=$infos['id'];
@@ -267,7 +276,9 @@ function formulaires_auteur_listes_traiter_dist($id_auteur){
 				$liste='';
 				spip_log($vals, 'sclp');	
 				}
+				else $message_ok.='<li>'._T('sclp:actualisation_spip_ok_probleme_actualisation_mailchimp').'</li>';	
 			}	
+		}
 
 		}
 		

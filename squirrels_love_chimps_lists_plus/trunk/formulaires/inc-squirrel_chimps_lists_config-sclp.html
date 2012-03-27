@@ -23,7 +23,8 @@
 
 			#SET{nom_liste,#ARRAY}						
 			<BOUCLE_listes_spip(LISTES){statut IN public,prive}>
-			<div class="choix">	#SET{nom_liste,#GET{nom_liste}|array_merge{#ARRAY{id_#ID_LISTE,#TITRE}}}
+			<div class="choix">
+					#SET{nom_liste,#GET{nom_liste}|array_merge{#ARRAY{id_#ID_LISTE,#TITRE}}}
 				<span class="titre">#TITRE	</span>	
 				<B_listes>
 			<select name="mailinglists[[(#ID_LISTE)]]">
@@ -31,14 +32,13 @@
 			<BOUCLE_listes(POUR){tableau #GET{liste_donnes}}>
 				<option value="[(#VALEUR|table_valeur{id})]" [(#ENV{mailinglists}|table_valeur{#ID_LISTE}|=={[(#VALEUR|table_valeur{id})]}|oui) selected="selected"]>[(#VALEUR|table_valeur{name})]
 				</option>
-				</div>
 			</BOUCLE_listes>
 			</select>
 			</B_listes>
 			<a class="ouvrir" href="##GET{id_liste_mc}"><:sclp:editer_champs_accordance:></a>
 		
 				[(#SET{id_liste_mc,#CONFIG{squirrel_chimp/mailinglists}|table_valeur{#ID_LISTE}})]
-				
+
 				[(#SET{liste,
 					#ARRAY{
 						#ID_LISTE,
@@ -46,9 +46,9 @@
 						}
 					})]				
 				
-				[(#SET{champs,#INCLURE{fond=inclure/appels_mc}{appel=champs_listes}{apikey=#GET{apikey}} {liste=#GET{liste}}{base=spip_auteurs}{multi=true}})]
-			
-				<INCLURE{fond=formulaires/inc-squirrel_chimps_lists_config-sclp_accordance_champs}{champs=#GET{champs}}{id_liste}{nom_liste=#TITRE}{id_liste_mc=#GET{id_liste_mc}}{env} />
+				[(#SET{champs,#INCLURE{fond=inclure/appels_mc}{appel=champs_listes}{apikey=#GET{apikey}} {liste=#GET{liste}}{multi=true}|unserialize})]
+
+				<INCLURE{fond=formulaires/inc-squirrel_chimps_lists_config-sclp_accordance_champs}{champs=#GET{champs}}{id_liste}{nom_liste=#TITRE}{id_liste_mc=#GET{id_liste_mc}}{env}{apikey=#GET{apikey}} />
 				
 			
 			</div>
@@ -84,7 +84,7 @@
 		</li>	
 	</ul>
 </fieldset>
-
+	<INCLURE{fond=formulaires/inc-squirrel_chimp_lists_config_champs_extras}{env}{c=#GET{champs}}/>
 <script>
 $(document).ready(function(){
 $(".accordance").hide();
