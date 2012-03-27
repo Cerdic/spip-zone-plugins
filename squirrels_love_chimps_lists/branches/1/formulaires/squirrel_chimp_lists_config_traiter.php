@@ -12,7 +12,7 @@ function formulaires_squirrel_chimp_lists_config_traiter_dist($valeurs){
 		$apiKey = _request("apiKey");
 	
 	
-		spip_log("Plugin mailchimp form vérifier : $apiKey ",'squirrel_chimp') ;
+		spip_log("Plugin mailchimp form vérifier : $apiKey ",'squirrel_chimp_lists') ;
 		
 		// Composition du batch
 		
@@ -45,10 +45,12 @@ function formulaires_squirrel_chimp_lists_config_traiter_dist($valeurs){
 				$log .= _T('scl:sync_ajoute').$vals['add_count']."<br/>\n";
 				$log .= _T('scl:sync_actualise').$vals['update_count']."<br/>\n";
 				$log .= _T('scl:sync_erreurs').$vals['error_count']."<br/>\n";
-				foreach($vals['errors'] as $val){
-					$log .= $val['email_address']._T('scl:sync_echec')."<br/>\n";
-					$log .= _T('scl:sync_code').$val['code']." <br/>\n";
-					$log .= _T('scl:sync_message').$val['message']." \n";
+				if(is_array($vals['errors'])){
+					foreach($vals['errors'] as $val){
+						$log .= $val['email_address']._T('scl:sync_echec')."<br/>\n";
+						$log .= _T('scl:sync_code').$val['code']." <br/>\n";
+						$log .= _T('scl:sync_message').$val['message']." \n";
+					}
 					}
 				}
 			$valeurs['message_ok'] = $log;	
@@ -59,7 +61,7 @@ function formulaires_squirrel_chimp_lists_config_traiter_dist($valeurs){
 			'data'=>$valeurs)
 			);
 	
-	
+		spip_log($vals,'squirrel_chimp_lists') ;
 		if($pipeline)$objets=$pipeline['data'];	
 		
 

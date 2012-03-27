@@ -19,23 +19,32 @@ function tables_dispos(){
 	
 	// On cherche les tables à prendre en compte
 
-	$tables=explode(',',lire_config('squirrel_chimp/tables'));
+	$t=explode(',',lire_config('squirrel_chimp/tables'));
+	
+	$tables=array();
+	if($t){
+		foreach($t as $table){
+			if($table)$tables[]=$table;
+			}
+		}
 	if(!$tables)$tables=array('spip_auteurs');	
-		
+	
 	return $tables;
 	}	
 
 // filtre pour obtenir les champs spip à disposition 
 function champs_spip(){
+	
 	include_spip('inc/config');	
 	$tables=tables_dispos();
 	$champs_extras=lire_config('squirrel_chimp/champs');
 	$trouver_table = charger_fonction('trouver_table','base');
 	$champs=array();
-
+	spip_log($tables,'squirrel_chimp_lists');
 	foreach($tables AS $key=>$table){
-		if($table){
+		if($table){spip_log(1,'squirrel_chimp_lists');
 			$c=$trouver_table($table);
+		spip_log($c,'squirrel_chimp_lists');
 			if(is_array($c['field']))$champs['tout'][$table]=array_keys($c['field']);
 			if($extras=$champs_extras[$table]){
 				$champs[$table]=$extras;
@@ -50,7 +59,6 @@ function champs_spip(){
 			$c='';
 			}
 		}
-	//echo serialize($champs);
 	return $champs;
 	}
 
@@ -78,6 +86,24 @@ function champs_listes($apiKey,$listId,$multi=''){
 	$mapping['spip'] = champs_spip();
 	
 	return $mapping;
+	
+}
+
+// filtre pour obtenir le champs MailChimp
+function champs_liste($apiKey='',$listId,$multi=''){
+	
+	// initialisation d'un objet mailchimp	
+	if(!$api){
+		$apikey=lire_config('squirrel_chimp/apiKey');
+		$api = new MCAPI($apikey);
+		}
+
+	if(!is_array($listId)){
+		  $champs= $api->listMergeVars($listId);
+		}
+
+	
+	return$champs;
 	
 }
 
@@ -125,20 +151,26 @@ function donnees_sync($id_liste_spip='',$table='',$identifiant='',$where_add='')
 		$i++;
 		if($i==1)$table_principale=$table;
 		else $where_secondaire[$i]=$table_principale.'.'.$identifiant_defaut.'='.$table.'.'.$identifiant_defaut;
-		foreach($champs_extras[$table] as $champ){
-			$champs[$champ]=$table.'.'.$champ;
+		if($champs_extras[$table]){
+			foreach($champs_extras[$table] as $champ){
+				$champs[$champ]=$table.'.'.$champ;
+				}
 			}
 		}
-		
+			
 	if(!$champs)$champs='*';		
 	else $champs['email']='spip_auteurs.email';	
-	$identifiant_joints=implode(' AND ',$where_secondaire);	
-	if($identifiant)$identifiant_principal=' AND '.$table_principale.'.'.$identifiant_defaut.'='.$identifiant;
-	if($where_add)$identifiant_additionnel=' AND '.$where_add;
 	
-	$where=$identifiant_joints.$identifiant_principal.$identifiant_additionnel;
+	$identifiant_joints=implode(' AND ',$where_secondaire);
+	if($identifiant)$identifiant_principal=$table_principale.'.'.$identifiant_defaut.'='.$identifiant;
+	$w=array($identifiant_joints,$identifiant_principal,$where_add);
+	$where_1=array();
+	foreach($w AS $data)	{
+		if($data)$where_1[]=$data;
+		}
 	
-	spip_log($where,'squirrel_chimp_lists');	
+	$where=implode(' AND ',$where_1);
+	
 	
 	$champs=implode(',',$champs);
 

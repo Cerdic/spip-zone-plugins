@@ -1,6 +1,6 @@
 <?php
 
-function inc_editer_auteur_traiter_listes_dist($flux){		
+function inc_editer_auteur_traiter_listes_dist($flux=''){		
 		// necessaire pour utiliser les autorisations
 		include_spip('inc/autoriser');
 
@@ -46,8 +46,8 @@ function inc_editer_auteur_traiter_listes_dist($flux){
 			spip_log($donnees_auteur,'squirrel_chimp_lists');	
 			$donnees_auteur=$donnees_auteur[1];
 			$email=$donnees_auteur['EMAIL'];
+
 			
-	
 			// Actualisation de la liste avec un nouvel auteur ou si activé actualisation des données si modification du profil
 			if (($new AND $ajouter) OR (!$new AND $actualiser AND $statut!='5poubelle')){
 				spip_log('ajouter ou actualiser','squirrel_chimp_lists');
