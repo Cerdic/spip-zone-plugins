@@ -1,29 +1,27 @@
 <?php
 /*******************GEDCOM*******************************/
-function genespip_TraitementDate2($mois)
-{
- $split = split(' ',$mois);
+function genespip_TraitementDate2($mois){
+	$split = split(' ',$mois);
 
- $mois_eng = Array('JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC');
- $mois_fr = Array('01','02','03','04','05','06','07','08','09','10','11','12');
+	$mois_eng = Array('JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC');
+	$mois_fr = Array('01','02','03','04','05','06','07','08','09','10','11','12');
 
- /* Remplacement */
- $mois = str_replace($mois_fr, $mois_eng, $mois);
+	/* Remplacement */
+	$mois = str_replace($mois_fr, $mois_eng, $mois);
 
- return ($mois);
+return ($mois);
 }
 
-function genespip_Traitementmot2($mot)
-{
- $split = split(' ',$mot);
+function genespip_Traitementmot2($mot){
+	$split = split(' ',$mot);
 
- $mots_eng = Array('BEF','AFT','ABT','EST',NULL);
- $mots_fr = Array('<','>','~','~','=');
+	$mots_eng = Array('BEF','AFT','ABT','EST',NULL);
+	$mots_fr = Array('<','>','~','~','=');
 
- /* Remplacement */
- $mot = str_replace($mots_fr, $mots_eng, $mot);
+	/* Remplacement */
+	$mot = str_replace($mots_fr, $mots_eng, $mot);
 
- return ($mot);
+return ($mot);
 }
 
 //Conversion de date français Gedcom
@@ -37,35 +35,20 @@ return $precision.$jour.genespip_TraitementDate2($mois).$annee;
 }
 
 function genespip_evt($type_evt,$id_individu) {
-  $result_evt = sql_select('*', 'spip_genespip_evenements,spip_genespip_type_evenements', 'id_individu=$id_individu and spip_genespip_evenements.id_type_evenement=spip_genespip_type_evenements.id_type_evenement and spip_genespip_evenements.id_type_evenement=$type_evt');
-  while ($evt = spip_fetch_array($result_evt)) {
-$indi .= "1 ".$evt['type_evenement']."\r\n";
-$indi .= "2 DATE ".genespip_dategedfr($evt['precision_date'],$evt['date_evenement'])."\r\n";
-   if ($evt['id_lieu']!=1){
-    $result_lieu = sql_select('*', 'spip_genespip_lieux', 'id_lieu='.$evt['id_lieu']);
-    while ($lieu = spip_fetch_array($result_lieu)) {
-$indi .= "2 PLAC ".utf8_decode($lieu['ville']).",".$lieu['code_departement'].",".utf8_decode($lieu['departement']).",".utf8_decode($lieu['region']).",".$lieu['pays']."\r\n";
-    }
-   }
-  }
-return $indi;
+	$result_evt = sql_select('*', 'spip_genespip_evenements,spip_genespip_type_evenements', 'id_individu=$id_individu and spip_genespip_evenements.id_type_evenement=spip_genespip_type_evenements.id_type_evenement and spip_genespip_evenements.id_type_evenement=$type_evt');
+	while ($evt = spip_fetch_array($result_evt)) {
+	$indi .= "1 ".$evt['type_evenement']."\r\n";
+	$indi .= "2 DATE ".genespip_dategedfr($evt['precision_date'],$evt['date_evenement'])."\r\n";
+	if ($evt['id_lieu']!=1){
+		$result_lieu = sql_select('*', 'spip_genespip_lieux', 'id_lieu='.$evt['id_lieu']);
+		while ($lieu = spip_fetch_array($result_lieu)) {
+			$indi .= "2 PLAC ".utf8_decode($lieu['ville']).",".$lieu['code_departement'].",".utf8_decode($lieu['departement']).",".utf8_decode($lieu['region']).",".$lieu['pays']."\r\n";
+		}
+	}
+	}
+	return $indi;
 }
-//creation table famille temp
-function genespip_famille() {
-	$sql = sql_create("spip_genespip_famtempo", 
-			array(
-			"id_fam" => "INT NOT NULL AUTO_INCREMENT PRIMARY KEY",
-			"fam" => "TEXT NOT NULL",
-			"type" => "TEXT NOT NULL",
-			"id_individu" => "INT NOT NULL",
-			"date_evt" => "TEXT NOT NULL",
-			"place_evt" => "TEXT NOT NULL",
-			)
-			array(
-			"PRIMARY KEY" => "id_fam",
-			)
-		);
-}
+
 function genespip_famille_remplir() {
 //entrees HUSB et WIFE
   //selection des hommes dans la bd
@@ -183,7 +166,5 @@ $note = str_replace("\n", "1 CONT ", $I['note']);
 fwrite($handle, "0 TRLR");
 fclose($handle);
 echo _T('genespip:export_termine')."<br />";
-//Suppression table famtempo
-$supptempo=sql_drop_table("spip_genespip_famtempo");
 }
 ?>

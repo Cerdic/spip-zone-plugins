@@ -29,6 +29,22 @@ function genespip_config_site() {
 
 function genespip_declarer_tables_principales($tables_principales){
 
+	$spip_genespip_famtempo = array(
+		"id_fam" => "int(11) NOT NULL auto_increment",
+		"fam" => "TEXT NOT NULL",
+		"type" => "TEXT NOT NULL",
+		"id_individu" => "INT NOT NULL",
+		"date_evt" => "TEXT NOT NULL",
+		"place_evt" => "TEXT NOT NULL",
+		);
+	$spip_genespip_famtempo_key = array(
+		"PRIMARY KEY" => "id_fam",
+		);
+	$tables_principales['spip_genespip_famtempo'] = array(
+		'field' => &$spip_genespip_famtempo,
+		'key' => &$spip_genespip_famtempo_key
+		);
+
 	$spip_genespip_individu = array(
 		"id_individu" => "int(11) NOT NULL auto_increment",
 		"nom" => "text NOT NULL",

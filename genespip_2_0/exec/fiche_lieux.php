@@ -49,8 +49,8 @@ function exec_fiche_lieux(){
 		  "<td><input size='2' type='text' name='code_departement' value='' /></td>",
 		  "<td><input size='8' type='text' name='region' value='' /></td></tr>",
 		  "<tr><td colspan='3'>"._T('genespip:pays').":";
-	include('pays_fr.php');
-	  echo "<select tabindex='5' size='1' name='pays' onchange='update_flag1(this)'>";
+			include('pays_fr.php');
+	echo "<select tabindex='5' size='1' name='pays' onchange='update_flag1(this)'>";
 
 	foreach ($FLAGS_LANG as $flag => $clair_pays) {
 	   echo "<option value='".$flag."'>".$clair_pays."</option>\n";

@@ -2,7 +2,7 @@
     <nom>GeneSPIP</nom>
     <slogan>Gestion de la g&#233;n&#233;alogie.</slogan>
     <auteur>Christophe RENOU</auteur>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
     <version_base>0.2</version_base>
     <etat>test</etat>
     <description>Permet de faire ça g&#233;n&#233;alogie sur un site, gestion des individu, lieu, ...</description>
