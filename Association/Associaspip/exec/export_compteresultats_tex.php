@@ -23,8 +23,8 @@ function exec_export_compteresultats_tex() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$var = _request('var');
 		$latex = new LaTeX(_request('var'));
+		$balises = array();
 		$latex->EnTete();
 		foreach (array('charges', 'produits', 'contributions_volontaires') as $key) {
 			$latex->LesEcritures($key);
@@ -41,7 +41,7 @@ class LaTeX extends ExportCompteResultats {
 
 	function EnTete() {
 		$this->out .= '\\documentclass[a4paper]{article}'."\n";
-		$this->out .= '\\usepackage['.$GLOBALS['meta']['charset'].']{inputenc}'."\n";
+		$this->out .= '\\usepackage['. str_replace('-', '', strtolower($GLOBALS['meta']['charset']) ).']{inputenc}'."\n";
 		$this->out .= '\\usepackage[french]{babel}'."\n";
 		$this->out .= '\\usepackage[table]{xcolor}'."\n";
 		$this->out .= '%generator: Associaspip'."\n";
@@ -64,7 +64,7 @@ class LaTeX extends ExportCompteResultats {
 				$quoi = "SUM(depense) AS charge_evaluee, SUM(recette) AS produit_evalue";
 				break;
 		}
-		$this->out .= '\\section*{'. ucfirst($key) .'}'."\n";
+		$this->out .= '\\section*{'. ucfirst(_T("asso:$key")) .'}'."\n";
 		$this->out .= '\\begin{tabular}{|l p{.7562\\textwidth} r|}'."\n"; // 20/210=9.52381/100 30/210=14.8571/100 (210-20-30)/100=75.61909
 		$query = sql_select(
 			"imputation, $quoi, DATE_FORMAT(date, '%Y') AS annee ".$this->sel, // select
@@ -90,7 +90,7 @@ class LaTeX extends ExportCompteResultats {
 			$new_chapitre = substr($data['code'], 0, 2);
 			if ($chapitre!=$new_chapitre) {
 				$this->out .= str_replace(array('\\','&'), array('\\backslash{}','\\&'), $new_chapitre) .' & ';
-				$this->out .= '\multicolumn{2}{l|}{'. str_replace(array('\\','&'), array('\\backslash{}','\\&'), ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))) .'}\\\\'."\n";
+				$this->out .= '\multicolumn{2}{p{.86\\textwidth}|}{'. str_replace(array('\\','&'), array('\\backslash{}','\\&'), ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))) .'}\\\\'."\n";
 				$chapitre = $new_chapitre;
 			}
 			$this->out .= str_replace(array('\\','&'), array('\\backslash{}','\\&'), $data['code']) .' & ';

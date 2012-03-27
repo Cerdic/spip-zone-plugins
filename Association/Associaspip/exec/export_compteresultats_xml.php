@@ -18,99 +18,23 @@ include_spip('exec/compte_resultat'); // c'est pour la definition de classe Expo
 
 // Export du Compte de Resultat au format XML
 // http://fr.wikipedia.org/wiki/Extensible_Markup_Language
+// jeu de balisage propre a Associaspip ; pas de DTD ni de Schema
 function exec_export_compteresultats_xml() {
 	if (!autoriser('associer', 'export_compteresultats')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		include_spip('inc/charsets');
-		include_spip('inc/association_plan_comptable');
-		$var = _request('var');
-		$xml = new XML($var);
-		$xml->EnTete();
-		foreach (array('charges', 'produits', 'contributions_volontaires') as $key) {
-			$xml->LesEcritures($key);
+		$xml = new ExportCompteResultats(_request('var'));
+		$balises = array();
+		foreach (array('entete', 'titre', 'nom', 'exercice', 'charges', 'produits', 'contributions_volontaires', 'chapitre', 'code', 'libelle', 'categorie', 'intitule', 'montant') as $key) {
+			$balises[$key.'1'] = '<'.ucfirst($key).'>';
+			$balises[$key.'0'] = '</'.ucfirst($key).'>';
 		}
-		$xml->Pied();
+		$balises['compteresultat1'] = '<?xml version="1.0" encoding="'.$GLOBALS['meta']['charset'].'"?>'."\n<CompteDeResultat>";
+		$balises['compteresultat0'] = '</CompteDeResultat>';
+		$xml->exportLignesMultiples($balises, array('<'=>'&lt;','>'=>'&gt;'), '', '');
 		$xml->leFichier('xml');
 	}
-}
-
-/**
- *  Utilisation d'une classe tres tres tres simple !!!
- */
-class XML extends ExportCompteResultats {
-
-	function EnTete() {
-		$this->out .= '<?xml version="1.0" encoding="'.$GLOBALS['meta']['charset'].'"?>'."\n";
-		$this->out .= "<CompteDeResultat>\n";
-		$this->out .= "<Entete>\n";
-		$this->out .= '<Titre>'. utf8_decode(html_entity_decode(_T('asso:cpte_resultat_titre_general'))) ."</Titre>\n";
-		$this->out .= '<Nom>'. $GLOBALS['association_metas']['nom'] ."</Nom>\n";
-		$this->out .= '<Exercice>'. sql_asso1champ('exercice', $this->exercice, 'intitule') ."</Exercice>\n";
-		$this->out .= "</Entete>\n";
-	}
-
-	function LesEcritures($key) {
-		switch ($key) {
-			case 'charges' :
-				$quoi = "SUM(depense) AS valeurs";
-				break;
-			case 'produits' :
-				$quoi = "SUM(recette) AS valeurs";
-				break;
-			case 'contributions_volontaires' :
-				$quoi = "SUM(depense) AS charge_evaluee, SUM(recette) AS produit_evalue";
-				break;
-		}
-		$this->out .= '<'. ucfirst($key) .">\n";
-		$query = sql_select(
-			"imputation, $quoi, DATE_FORMAT(date, '%Y') AS annee ".$this->sel, // select
-			'spip_asso_comptes'.$this->join, // from
-			$this->where, // where
-			$this->order, // group by
-			$this->order, // order by
-			'', // limit
-			$this->having .$GLOBALS['association_metas']['classe_'.$key] // having
-		);
-		$chapitre = '';
-		$i = 0;
-		while ($data = sql_fetch($query)) {
-			if ($key==='contributions_volontaires') {
-				if ($data['charge_evaluee']>0) {
-					$valeurs = $data['charge_evaluee'];
-				} else {
-					$valeurs = $data['produit_evalue'];
-				}
-			} else {
-				$valeurs = $data['valeurs'];
-			}
-			$new_chapitre = substr($data['code'], 0, 2);
-			if ($chapitre!=$new_chapitre) {
-				if ($chapitre!='') {
-					$this->out .= "</Chapitre>\n";
-				}
-				$this->out .= "<Chapitre>\n";
-				$this->out .= '<Code>'. str_replace(array('<','>'), array('&lt;','&gt;'), $new_chapitre) ."</Code>\n";
-				$this->out .= '<Libelle>'. str_replace(array('<','>'), array('&lt;','&gt;'), ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))) ."</Libelle>\n";
-				$chapitre = $new_chapitre;
-			}
-			$this->out .= "<Categorie>\n";
-			$this->out .= '<Code>'. str_replace(array('<','>'), array('&lt;','&gt;'), $data['code']) ."</Code>\n";
-			$this->out .= '<Intitule>'. str_replace(array('<','>'), array('&lt;','&gt;'), $data['intitule']) ."</Intitule>\n";
-			$this->out .= "<Montant>$valeurs</Montant>\n";
-			$this->out .= "</Categorie>\n";
-		}
-		if ($chapitre!='') {
-			$this->out .= "</Chapitre>\n";
-		}
-		$this->out .= '</'. ucfirst($key) .'>'."\n";
-	}
-
-	function Pied() {
-		$this->out .= '</CompteDeResultat>'."\n";
-	}
-
 }
 
 ?>

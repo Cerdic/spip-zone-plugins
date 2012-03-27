@@ -25,10 +25,7 @@ function exec_export_compteresultats_csv() {
 		echo minipres();
 	} else {
 		$csv = new ExportCompteResultats(_request('var'));
-		$csv->LignesSimplesEntete(',', "\n", array('"'=>'""'), '"', '"');
-		foreach (array('charges', 'produits', 'contributions_volontaires') as $key) {
-			$csv->LignesSimplesCorps($key, ',', "\n", array('"'=>'""'), '"', '"');
-		}
+		$csv->exportLignesUniques(',', "\n", array('"'=>'""'), '"', '"');
 		$csv->leFichier('csv');
 	}
 }

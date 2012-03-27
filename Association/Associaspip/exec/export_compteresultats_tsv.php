@@ -24,10 +24,7 @@ function exec_export_compteresultats_tsv() {
 		echo minipres();
 	} else {
 		$tsv = new ExportCompteResultats(_request('var'));
-		$tsv->LignesSimplesEntete("\t", "\n", array("\t"=>'\t',"\n"=>'\n'), '"', '"');
-		foreach (array('charges', 'produits', 'contributions_volontaires') as $key) {
-			$tsv->LignesSimplesCorps($key, ',', "\n", array("\t"=>'\t',"\n"=>'\n'), '"', '"');
-		}
+		$tsv->exportLignesUniques("\t", "\n", array("\t"=>'\t',"\n"=>'\n'), '"', '"');
 		$tsv->leFichier('tab');
 	}
 }

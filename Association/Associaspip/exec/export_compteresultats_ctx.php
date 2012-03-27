@@ -24,10 +24,7 @@ function exec_export_compteresultats_ctx() {
 		echo minipres();
 	} else {
 		$ctx = new ExportCompteResultats(_request('var'));
-		$ctx->LignesSimplesEntete('|', "\n", array("\r"=>'\r', "\n"=>'\n', "\\"=>'\i', '|'=>'\p'), '', '');
-		foreach (array('charges', 'produits', 'contributions_volontaires') as $key) {
-			$ctx->LignesSimplesCorps($key, '|', "\n", array("\r"=>'\r', "\n"=>'\n', "\\"=>'\i', '|'=>'\p'), '', '')
-		}
+		$ctx->exportLignesUniques('|', "\n", array("\r"=>'\r', "\n"=>'\n', "\\"=>'\i', '|'=>'\p'), '', '');
 		$ctx->leFichier('ctx');
 	}
 }
