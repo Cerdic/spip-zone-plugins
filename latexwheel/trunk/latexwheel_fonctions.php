@@ -1,5 +1,32 @@
 <?php
 
+function latex_copier_img($img,$dossier,$chemin=''){
+	// Convertir puis copier une image, en retournant le chemin à partir du fichier .tex principal
+	
+	/* Récupération de l'ext*/
+	
+	$match = array();
+	if (preg_match(",\.([^.]+)$,", $img, $match)){
+		$ext = $match[1];
+	}
+	
+	/* Cas particulier des .gif qui seront converti en .png*/
+	if ($ext == 'gif'){
+		include_spip('filtres/images_transforme');
+		$img = image_format($img);	
+		$ext = 'png';
+	}
+	/*Préparation de l'adresse final*/
+	if ($chemin ==''){
+		$final = md5($img).'.'.$ext;
+	}
+	else{
+		$final = $chemin.'/'.md5($img).'.'.$ext;
+	}
+	zippeur_copier_fichier($img,$dossier.'/'.$final);
+	return $final;
+
+}
 function lang_polyglossia($lang){
 	// function permettant de convertir une #LANG en nom du package polyglossia
 	$tableau = array(
