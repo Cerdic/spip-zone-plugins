@@ -7,4 +7,5 @@
 	<parametre nom="nom" label="menus:entree_page" obligatoire="oui" />
 	<parametre nom="parametres" label="menus:entree_parametres" />
 	<parametre nom="css" label="menus:entree_css" />
+	<parametre nom="suivant_connexion" label="menus:entree_suivant_connexion" />
 </entree>
