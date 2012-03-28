@@ -82,4 +82,77 @@ function balise_CIVILITE_AUTEUR($p) {
 
 
 
+// --------------
+
+/**
+ *
+ * Cette balise retourne un tableau listant toutes les id_rubrique d'une branche.
+ * L'identifiant de la branche (id_rubrique) est pris dans la boucle
+ * la plus proche sinon dans l'environnement.
+ * 
+ * On ne peut pas l'utiliser dans un {critere IN #IDS_BRANCHE} en 1.8.3 :(
+ *
+ */
+function balise_IDS_ORGANISATION_BRANCHE_dist($p) {
+
+	// parcours de tous les identifiants recus en parametre
+	$n = 0;
+	$ids = array();
+	while ($id_org = interprete_argument_balise(++$n,$p)) {
+		if ($id_org = trim(trim($id_org), "'")) { // vire les guillements pour accepter soit un terme soit un nombre
+			$ids = array_merge($ids, array($id_org)); // ... les merge avec id
+		}
+	}
+	
+	// pas d'identifiant, on prend la boucle la plus proche
+	if (!$ids) {
+		$ids = champ_sql('id_organisation', $p);
+		$p->code = "explode(',', calcul_organisation_branche_in($ids))"; // 200
+	} else {
+		$p->code = "explode(',', calcul_organisation_branche_in(" . var_export($ids, true) . "))"; // 200
+	}
+
+	return $p;
+}
+
+
+
+/**
+ * Calcul d'une branche
+ * (liste des id_organisation contenues dans une organisation donnee)
+ * 
+ * @param string|int|array $id
+ * @return string
+ */
+function calcul_organisation_branche_in($id) {
+	static $b = array();
+
+	// normaliser $id qui a pu arriver comme un array, comme un entier, ou comme une chaine NN,NN,NN
+	if (!is_array($id)) $id = explode(',',$id);
+	$id = join(',', array_map('intval', $id));
+	if (isset($b[$id]))
+		return $b[$id];
+
+	// Notre branche commence par l'organisation de depart
+	$branche = $r = $id;
+
+	// On ajoute une generation (les filles de la generation precedente)
+	// jusqu'a epuisement
+	while ($filles = sql_allfetsel(
+					'id_organisation',
+					'spip_organisations',
+					sql_in('id_parent', $r)." AND ". sql_in('id_organisation', $r, 'NOT')
+					)) {
+		$r = join(',', array_map('array_shift', $filles));
+		$branche .= ',' . $r;
+	}
+
+	# securite pour ne pas plomber la conso memoire sur les sites prolifiques
+	if (strlen($branche)<10000)
+		$b[$id] = $branche;
+	return $branche;
+}
+
+
+
 ?>
