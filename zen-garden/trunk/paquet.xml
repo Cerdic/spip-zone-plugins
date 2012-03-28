@@ -12,6 +12,7 @@
 
 	<pipeline nom="affichage_final" />
 	<pipeline nom="filtrer_liste_plugins" inclure="zengarden_fonctions.php" />
+	<pipeline nom="header_prive" inclure="zengarden_pipelines.php" />
 
 	<menu nom='zengarden' parent='menu_squelette' titre="zengarden:themes" icone="images/themes-16.png" />
 
