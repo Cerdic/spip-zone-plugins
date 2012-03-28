@@ -50,11 +50,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'deces' => 'Smrť',
 	'dep' => 'Okr.',
 	'departement' => 'Okres',
+	'depose_par' => 'Déposé par', # NEW
 	'derniere_modif_le' => 'Naposledy zmenené',
 	'derniere_modification' => 'Posledná zmena súboru',
 	'descriptif_cfg' => '<p>Táto zóna sa používa na nastavenie základných premenných zásuvného modulu.</p><p> Na to, aby tento modul správne fungoval, musí byť nainštalovaný spolu so zásuvným modulom cfg</p>',
 	'detail_fiche' => 'Podrobnosti o súbore',
-	'document' => 'Dokumenty',
+	'document' => 'Dokumenty', # MODIF
+	'documents' => 'Documents', # NEW
 
 	// E
 	'enfant' => 'dieťa',
