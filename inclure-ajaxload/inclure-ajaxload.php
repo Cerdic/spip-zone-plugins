@@ -50,9 +50,10 @@ function recuperer_fond_ajax() {
 	
 
 	$alt = entites_html(sinon($args[1]['ajaxloadalt'],$args[1]['fond']));
-	$message = $args[1]['ajaxload'];
+	$message = $args[1]['ajaxload_message'];
 	$searching = sinon($args[1]['ajaxsearching'],
-		"<img src='".find_in_path('images/searching.gif')."' alt='$alt' />");
+		"<img src='".find_in_path('images/searching.gif')."' alt='$alt' />")
+		 . ($message ? " <span class='ajaxload_message'>$message</span>" : "");
 	// Le lien mène à l'action de pose du cookie no_js
 	$url = "spip.php?action=ia_nojs&amp;retour=".urlencode(parametre_url(self(),'no_js','oui'));
 
