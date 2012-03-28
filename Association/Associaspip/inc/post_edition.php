@@ -15,7 +15,9 @@ function association_post_edition($flux){
 	$id = $flux['args']['id_objet'];
 	if ($id
 	AND $flux['args']['table']=='spip_auteurs') {
-		update_spip_asso_membre($id);
+		if ($GLOBALS['association_metas']['import_auteur_auto']=='on') {
+			update_spip_asso_membre($id);
+		}
 	}
 }
 

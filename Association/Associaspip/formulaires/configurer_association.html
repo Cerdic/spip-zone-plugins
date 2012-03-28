@@ -198,6 +198,13 @@ Cette fonctionnalite n'est possible que si le plugin "FPDF" est active... -->]
 								<label for="aff_validite"><:asso:adherent_libelle_validite:></label>
 							</div>
 						</li>
+						<li>
+							<label for="import_auteur_auto"><:asso:config_import_auteur_auto_part1:></label>
+							<div class="choix">
+								<input type="checkbox" name="import_auteur_auto" [(#ENV{import_auteur_auto}|oui) checked="checked"] id="import_auteur_auto" />
+								<label for="import_auteur_auto"><:asso:config_import_auteur_auto_part2:></label>
+							</div>
+						</li>
 						<li class="editer_import_nom_auteur">
 							<label for="import_nom_auteur"><:asso:config_libelle_import_nom_auteur:></label>
 							<select name="import_nom_auteur" id="import_nom_auteur">

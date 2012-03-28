@@ -180,7 +180,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_indexation'=> 'Num&eacute;rotation des membres',
 	'config_libelle_num_pc'=>'R&eacute;f. comptable',
 	'config_libelle_num_dc'=>'Dest. comptable',
-	'config_libelle_import_nom_auteur' => 'Lors de l\'import/cr&eacute;ation d\'un membre depuis la liste des auteurs SPIP, le nom de l\'auteur a le format suivant:',
+	'config_libelle_import_nom_auteur' => 'Lors de l\'import/cr&eacute;ation d\'un membre depuis la liste des auteurs SPIP, le nom de l\'auteur a le format suivant :',
 	'config_libelle_utiliser_champ_id_asso' => 'R&eacute;f&eacute;rence interne <abbr title="Attention, ce champ est purement informatif les membres sont toujours d&eacute;sign&eacute;s et organis&eacute;s par leur id auteur SPIP mais il permet aux associations qui le d&eacute;sirent d\'avoir une r&eacute;f&eacute;rence membre de leur choix et de conserver cette information dans les tables du plugin">(&agrave; caract&egrave;re informatif)</abbr>',
 	'config_libelle_gerer_champs_membres' => 'La fiche des membres contient les champs :',
 	'config_plan_comptable_prerenseigne' => 'Activer l\'aide &agrave; la d&eacute;claration du plan comptable (fran&ccedil;ais uniquement)',
@@ -188,6 +188,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_affichage_champs_page_membres' => 'S&eacute;lectionner les champs &agrave; afficher sur la page des membres',
 	'config_libelle_virements_internes' => 'R&eacute;f. virements internes',
 	# Configuration : Options
+	'config_import_auteur_auto_part1' => 'A la cr&eacute;ation ou modification d\'un auteur :',
+	'config_import_auteur_auto_part2' => 'l\'importer automatiquement comme membre',
 	'import_nom_auteur_nom_prenom' => 'Nom Pr&eacute;nom',
 	'import_nom_auteur_prenom_nom' => 'Pr&eacute;nom Nom',
 	'import_nom_auteur_nom' => 'Nom',
