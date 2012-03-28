@@ -3,7 +3,7 @@
 <script>
 // activer l'uploader
 (function($) {
-	var url = '[(#VAL{crayons_upload}|generer_url_action{type=article&id=#ID_ARTICLE})]';
+	var url = '[(#VAL{crayons_upload}|generer_url_action{type=article&id=#ENV{id_article}})]';
 
 	$('textarea.crayon-active,#uploader#ID_ARTICLE')
 	.html5Uploader({
