@@ -3,9 +3,9 @@
 <script>
 // activer l'uploader
 (function($) {
-	var url = '[(#VAL{crayons_upload}|generer_url_action{type=article&id=#ENV{id_article}})]';
+	var url = '[(#VAL{crayons_upload}|generer_url_action{id=#ENV{id_article}&type=article})]';
 
-	$('textarea.crayon-active,#uploader#ID_ARTICLE')
+	$('textarea.crayon-active,#uploader#ENV{id_article}')
 	.html5Uploader({
 		name: 'upss',
 		postUrl: url,
@@ -18,7 +18,7 @@
 			;
 		},
 		onClientLoad: function(e, file) {
-			$('#uploader#ID_ARTICLE')
+			$('#uploader#ENV{id_article}')
 			.removeClass('hover');
 		},
 		onServerProgress: function(e,file) {
@@ -44,23 +44,23 @@
 	})
 	.bind("dragenter dragover", function() {
 		$(this).addClass('hover');
-		$('#uploader#ID_ARTICLE')
+		$('#uploader#ENV{id_article}')
 		.removeClass('ferme');
 	})
 	.bind("dragleave", function() {
 		$(this).removeClass('hover');
-		$('#uploader#ID_ARTICLE')
+		$('#uploader#ENV{id_article}')
 		.addClass('ferme');
 	})
 	.bind("drop", function(e) {
 		$(this)
 		.removeClass('hover');
-		$('#uploader#ID_ARTICLE')
+		$('#uploader#ENV{id_article}')
 		.removeClass('ferme');
 	})
 	.addClass('uploader')
 	;
-	$('#uploader#ID_ARTICLE')
+	$('#uploader#ENV{id_article}')
 	.hover(function() {
 		$(this).removeClass('ferme');
 	}, function() {
