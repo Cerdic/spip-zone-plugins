@@ -41,36 +41,110 @@ Returns the x closest to c such that f(x) = 0.
             return None
 */
 abstract class acNewton {
-   protected $rTol;
-   protected $rDx;
-   private $iCpt=0;
-   private $iCptMax=50;
+    protected $rTol;
+    protected $rDx;
+    private $iCpt=0;
+    private $iCptMax=100;
+    private $rRelax=1; /// Coefficient de relaxation
+    private $rFnPrec=0; /// Mémorisation du Fn précédent pour détecter le changement de signe
+    private $iOscil=0; /// Nombre de changement de signe de Delta
+    private $oLog;
 
-   abstract public function CalcFn($rX);
+    /**
+     * Calcul de la fonction f(x) dont on cherche le zéro.
+     * @param $rX x
+     * @return Calcul de la fonction
+     */
+    abstract protected function CalcFn($rX);
 
-   private function CalcDer($x) {
-      return ($this->CalcFn($x+$this->rDx)-$this->CalcFn($x-$this->rDx))/(2*$this->rDx);
-   }
+    /**
+     * Calcul de la dérivée f'(x) (peut être redéfini pour calcul analytique)
+     * @param $rX x
+     * @return Calcul de la fonction
+     */
+    protected function CalcDer($x) {
+        spip_log('Newton:CalcDer $rX='.$x,'hydraulic');
+        return ($this->CalcFn($x+$this->rDx)-$this->CalcFn($x-$this->rDx))/(2*$this->rDx);
+    }
 
-   private function FuzzyEqual($rFn) {
-      return (abs($rFn) < $this->rTol);
-   }
+    /**
+     * Test d'égalité à une tolérance près
+     * @param $rFn x
+     * @return True si égal, False sinon
+     */
+    private function FuzzyEqual($rFn) {
+        return (abs($rFn) < $this->rTol);
+    }
 
-   public function Newton($rX) {
-      $this->iCpt++;
-      $rFn=$this->CalcFn($rX);
-      //echo $this->iCpt.' - f('.$rX.') = '.$rFn;
-      if($this->FuzzyEqual($rFn) || $this->iCpt >= $this->iCptMax) {
-         return $rX;
-      }
-      else {
-         $rDer=$this->CalcDer($rX);
-         //echo ' - f\\\' = '.$rDer.'<br/>';
-         if($rDer!=0) {
-            return $this->Newton($rX-$rFn/$rDer);
-         }
-      }
-   }
+    /**
+     * Fonction récursive de calcul de la suite du Newton
+     * @param $rX x
+     * @return Solution du zéro de la fonction
+     */
+    public function Newton($rX) {
+        $this->iCpt++;
+        $rFn=$this->CalcFn($rX);
+        //echo('</br>Newton '.$this->iCpt.' Relax='.$this->rRelax.'- f('.$rX.') = '.$rFn);
+        if($this->FuzzyEqual($rFn) || $this->iCpt >= $this->iCptMax) {
+            return $rX;
+        }
+        else {
+            $rDer=$this->CalcDer($rX);
+            //echo(' - f\' = '.$rDer);
+            if($rDer!=0) {
+/*
+                if($this->rRelax > 1) {
+                    // On réduit progressivement le coef de relaxation
+                    $this->rRelax *= 1;
+                }
+*/
+                if($rFn < 0 xor $this->rFnPrec < 0) {
+                    $this->nOscil++;
+                    if($this->rRelax > 1) {
+                        // Sur une forte relaxation, au changement de signe on réinitialise
+                        $this->rRelax = 1;
+                    }
+                    elseif($this->nOscil>2) {
+                        // On est dans le cas d'une oscillation autour de la solution
+                        // On réduit le coefficient de relaxation
+                        //~ echo '</br> ******  Delta='.$Delta.' DeltaPrec='.$this->rDelta;
+                        $this->rRelax *= 0.5;
+                    }
+                }
+                $this->rFnPrec = $rFn;
+                $Delta = $rFn / $rDer;
+                while(abs($Delta*$this->rRelax) < $this->rTol && $rFn > 10*$this->rTol && $this->rRelax < 2^8) {
+                    // On augmente le coefficicient de relaxation s'il est trop petit
+                    $this->rRelax *= 2;
+                }
+                $rRelax = $this->rRelax;
+                while($rX - $Delta*$rRelax <= 0 && $rRelax > 1E-4) {
+                    // On diminue le coeficient de relaxation si on passe en négatif
+                    $rRelax *= 0.5; // Mais on ne le mémorise pas pour les itérations suivantes
+                }
+                $rX = $rX - $Delta*$rRelax;
+                $this->rDelta = $Delta;
+                if($rX<0) {$rX = $this->rTol;} // Aucune valeur recherchée ne peut être négative ou nulle
+                return $this->Newton($rX);
+            }
+            else {
+                // Echec de la résolution
+                return false;
+            }
+        }
+    }
+
+    /**
+     * Pour savoir si le Newton a convergé
+     * @return true si oui, false sinon
+     */    public function HasConverged() {
+		if($this->iCpt >= $this->iCptMax) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
 }
 
 ?>
