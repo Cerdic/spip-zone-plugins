@@ -18,24 +18,14 @@
 			<li class="editer_montant">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{montant})</span>]
 				<label for="montant_inscriptions"><:asso:activite_libelle_montant_inscription:></label>
-				<input name="montant" type="[(#HTML5|?{number,text})]" [value="(#ENV{cotisation})"] id="montant_inscriptions" class="number float price" />
+				<input name="montant" type="[(#HTML5|?{number,text})]" [value="(#ENV{montant})"] id="montant_inscriptions" class="number float price" />
 			</li>
 			<li class="editer_date">
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date})</span>]
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_paiment})</span>]
 				<label for="date_paiement"><:asso:libelle_date:></label>
-				<input name="date_paiement" type="[(#HTML5|?{date,text})]" [value="(#ENV{date})"] id="date_paiement" class="date" />
-			</li>
-			<li class="editer_date">
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date})</span>]
-				<label for="date_paiement"><:asso:libelle_date:></label>
-				<input name="date_paiement" type="[(#HTML5|?{date,text})]" [value="(#ENV{date})"] id="date_paiement" class="date" />
+				<input name="date_paiement" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_paiement})"] id="date_paiement" class="date" />
 			</li>
 			<INCLURE{fond=inc/mode_de_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, unique_dest, defaut_dest, env>
-			<li class="editer_statut">
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{statut})</span>]
-				<label for="statut_inscription"><:asso:activite_libelle_statut_ok:></label>
-				<input name="statut" type="checkbox" [(#ENV{statut}|oui) checked="checked"] id="statut_inscription" />
-			</li>
 		</ul>
 		<p class="boutons">
 			<input type="submit" value="<:asso:bouton_envoyer:>" class="submit" />

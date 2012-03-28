@@ -118,7 +118,7 @@ function exec_activites()
 			echo '<td class="text">'.$data['lieu'].'</td>';
 			echo '<td class="integer">'.$inscrits['total'].'</td>';
 			echo '<td class="actions">'. association_bouton('activite_bouton_modifier_article', 'edit-12.gif', 'articles', 'id_article='.$data['id_article']) . '</td>';
-			echo '<td class="actions">'. association_bouton('activite_bouton_ajouter_inscription', 'creer-12.gif', 'ajout_inscription', 'id_evenement='.$data['id_evenement']) . '</td>';
+			echo '<td class="actions">'. association_bouton('activite_bouton_ajouter_inscription', 'creer-12.gif', 'edit_activite', 'id_evenement='.$data['id_evenement']) . '</td>';
 			echo '<td class="actions">'. association_bouton('activite_bouton_voir_liste_inscriptions', 'voir-12.png', 'voir_activites', 'id='.$data['id_evenement']) . '</td>';
 			echo "</tr>\n";
 		}

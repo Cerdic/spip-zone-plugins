@@ -19,18 +19,21 @@ function formulaires_editer_activite_participation_charger_dist($id_activite='')
 {
 	/* charger dans $contexte tous les champs de la table spip_asso_activites associes a l'id_activite passe en param */
 	$contexte = formulaires_editer_objet_charger('asso_activites', $id_activite, '', '',  generer_url_ecrire('voir_activites','id='.intval(_request('id_evenement'))), '');
-	if (!$id_activite) { /* si c'est un ajout */
-		$contexte['date_paiement'] = date('Y-m-d');
-		$id_compte = $journal = '';
-	} else { /* sinon on recupere l'id_compte correspondant et le journal dans la table des comptes */
-		$compte = sql_fetsel('id_compte,journal', 'spip_asso_comptes', "imputation='".$GLOBALS['association_metas']['pc_activites']."' AND id_journal='$id_activite'");
-		$journal = $compte['journal'];
-		$id_compte = $compte['id_compte'];
+	if (!$id_activite) { /* ce n'est pas une inscription existante... */
+		exit; // sortir sans proces
 	}
+	/* on recupere l'id_compte correspondant et le journal dans la table des comptes */
+	$compte = sql_fetsel('id_compte, journal', 'spip_asso_comptes', "imputation='".$GLOBALS['association_metas']['pc_activites']."' AND id_journal='$id_activite'");
 	/* ajout du journal qui ne se trouve pas dans la table asso_dons mais asso_comptes et n'est donc pas charge par editer_objet_charger */
-	$contexte['journal'] = $journal;
-	/* on concatene au _hidden inserer dans $contexte par l'appel a formulaire_editer_objet l'id_compte qui seront utilises dans l'action editer_asso_activites */
-	$contexte['_hidden'] .= "<input type='hidden' name='id_compte' value='$id_compte' />";
+	$contexte['journal'] = $compte['journal'];
+	/* on concatene au _hidden inserer dans $contexte par l'appel a formulaire_editer_objet l'id_compte qui sera utilise dans l'action editer_asso_activites */
+	$contexte['_hidden'] .= "<input type='hidden' name='id_compte' value='$compte[id_compte]' />";
+	/* transmettre des parametres (verification et traitement) via champs caches */
+	$contexte['_hidden'] .= "<input type='hidden' name='id_evenement' value='$contexte[id_evenement]' />";
+	$contexte['_hidden'] .= "<input type='hidden' name='date_inscription' value='$contexte[date_inscription]' />";
+	/* si date_paiement est indeterminee, c'est que le champ est vide : on ne preremplit rien  */
+	if ($contexte['date_paiement']=='0000-00-00')
+		$contexte['date_paiement'] = '';
 	/* si id_adherent est egal a 0, c'est que le champ est vide, on ne prerempli rien */
 	if (!$contexte['id_adherent'])
 		$contexte['id_adherent']='';
@@ -52,6 +55,8 @@ function formulaires_editer_activite_participation_charger_dist($id_activite='')
 		$contexte['unique_dest'] = '';
 		$contexte['defaut_dest'] = $GLOBALS['association_metas']['dc_activites'];; /* ces variables sont recuperees par la balise dynamique directement dans l'environnement */
 	}
+	/* pour passer securiser action */
+	$contexte['_action'] = array('editer_activite_participation',$id_activite);
 
 	/* renvoyer le contexte pour (p)re-remplir le formulaire  */
 	return $contexte;

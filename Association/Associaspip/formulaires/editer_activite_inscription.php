@@ -26,12 +26,21 @@ function formulaires_editer_activite_inscription_charger_dist($id_activite='')
 		$contexte['date_inscription'] = date('Y-m-d');
 		$contexte['date_paiement'] = '0000-00-00';
 	}
+	/* transmettre des parametres (verification et traitement) via champs caches */
+	$contexte['_hidden'] .= "<input type='hidden' name='id_evenement' value='$contexte[id_evenement]' />";
+	$contexte['_hidden'] .= "<input type='hidden' name='date_inscription' value='$contexte[date_inscription]' />";
+	$contexte['_hidden'] .= "<input type='hidden' name='date_paiement' value='$contexte[date_paiement]' />";
+	/* si date_paiement est indeterminee, c'est que le champ est vide : on ne preremplit rien  */
+	if ($contexte['date_paiement']=='0000-00-00')
+		$contexte['date_paiement'] = '';
 	/* si id_adherent est egal a 0, c'est que le champ est vide, on ne prerempli rien */
 	if (!$contexte['id_adherent'])
 		$contexte['id_adherent']='';
 	/* paufiner la presentation des valeurs  */
 	if ($contexte['inscrits'])
 		$contexte['inscrits'] = association_nbrefr($contexte['inscrits']);
+	/* pour passer securiser action */
+	$contexte['_action'] = array('editer_activite_inscription',$id_activite);
 
 	/* renvoyer le contexte pour (p)re-remplir le formulaire  */
 	return $contexte;

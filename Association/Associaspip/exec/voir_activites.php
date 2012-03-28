@@ -35,28 +35,18 @@ function exec_voir_activites()
 		$liste_libelles = $liste_effectifs = array();
 		$liste_libelles['valide'] = _T('asso:activite_entete_validees');
 		$liste_libelles['pair'] = _T('asso:activite_entete_impayees');
-		$liste_effectifs['valide'] = sql_getfetsel('COUNT(*)+SUM(inscrits) AS valide', 'spip_asso_activites', "id_evenement=$id_evenement AND date_paiement<>'0000-00-00' ");
-		$liste_effectifs['impair'] = sql_getfetsel('COUNT(*)+SUM(inscrits) AS impair', 'spip_asso_activites', "id_evenement=$id_evenement AND NOT date_paiement='0000-00-00' ");
+		$liste_effectifs['valide'] = sql_getfetsel('COUNT(*)+SUM(inscrits) AS valide', 'spip_asso_activites', "id_evenement=$id_evenement AND date_paiement<date_inscription ");
+		$liste_effectifs['impair'] = sql_getfetsel('COUNT(*)+SUM(inscrits) AS impair', 'spip_asso_activites', "id_evenement=$id_evenement AND NOT date_paiement<date_inscription ");
 		echo totauxinfos_effectifs('activites', $liste_libelles, $liste_effectifs);
 		// TOTAUX : montants des participations
 		$montant = sql_fetsel('SUM(montant) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement " );
 		echo totauxinfos_montants(_T('asso:participations'), $montant['encaisse'], NULL);
 		// datation et raccourcis
-		$res['activite_bouton_ajouter_inscription'] = array('panier_in.gif', 'ajout_inscription', "id_evenement=$id_evenement");
+		$res['activite_bouton_ajouter_inscription'] = array('panier_in.gif', 'edit_activite', "id_evenement=$id_evenement");
 		if (test_plugin_actif('FPDF')) {
 			$res['activite_bouton_voir_liste_inscriptions'] = array('print-24.png', 'pdf_activite', "id=$id_evenement");
 		}
 		icones_association(array('activites','annee='.substr($evenement['date_debut'],0,4)), $res);
-/*
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		$res = association_icone('activite_bouton_ajouter_inscription',  generer_url_ecrire('ajout_inscription', 'id_evenement='.$id_evenement), 'panier_in.gif');
-		if (test_plugin_actif('FPDF')) {
-			$res .= association_icone('activite_bouton_voir_liste_inscriptions',  generer_url_ecrire('pdf_activite','id='.$id_evenement), 'print-24.png');
-		}
-		$res .= association_icone('bouton_retour', generer_url_ecrire('activites','annee='.substr($evenement['date_debut'],0,4)), 'retour-24.png');
-		echo bloc_des_raccourcis($res);
-*/
 		debut_cadre_association('activites.gif', 'activite_titre_inscriptions_activites');
 	// PAGINATION ET FILTRES
 		echo "<table class='asso_tablo_filtres'><tr>\n<td width='70%'></td><td width='30%' class='formulaire'>";
@@ -68,7 +58,6 @@ function exec_voir_activites()
 		echo '<option value="-1"'. (($statut<0)?' selected="selected"':'') .'>'._T('asso:activite_entete_impayees').'</option>';
 		echo "</select></div></form></td></tr></table>\n";
 	//TABLEAU
-		echo '<form action="'. generer_url_ecrire('action_activites') .'" method="post">';
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_activite'>\n";
 		echo "<thead>\n<tr>";
 		echo '<th>'. _T('asso:entete_id') .'</th>';
@@ -79,7 +68,7 @@ function exec_voir_activites()
 		echo '<th colspan="3" class="actions">'. _T('asso:entete_action') .'</th>';
 		echo "</tr>\n</thead><tbody>";
 		if ($statut) { // restriction de la selection
-			$critereSupplementaire = ' AND '. ($statut>0?"date_paiement='0000-00-00'":"date_paiement<>'0000-00-00'");
+			$critereSupplementaire = ' AND '. ($statut>0?"date_paiement<date_inscription ":"date_paiement>=date_inscription ");
 		}
 		$query = sql_select('*', 'spip_asso_activites', "id_evenement=$id_evenement $critereSupplementaire ", '', 'id_activite') ;
 		while ($data = sql_fetch($query)) {
@@ -89,19 +78,14 @@ function exec_voir_activites()
 			echo '<td class="text">'.  association_calculer_lien_nomid($data['nom'],$data['id_adherent']) .'</td>';
 			echo '<td class="integer">'.$data['inscrits'].'</td>';
 			echo '<td class="decimal">'. association_prixfr($data['montant']) .'</td>';
-			echo '<td class="action">', association_bouton('activite_bouton_maj_inscription', 'edit-12.gif', 'ajout_inscription','id='.$data['id_activite']), '</td>';
-			echo '<td class="action">'. association_bouton('activite_bouton_ajouter_inscription', 'cotis-12.gif', 'ajout_participation', 'id='.$data['id_activite']) .'</td>';
+			echo '<td class="action">', association_bouton('activite_bouton_maj_inscription', 'cotis-12.gif', 'edit_activite','id='.$data['id_activite']), '</td>';
 			echo '<td class="action"><input name="delete[]" type="checkbox" value="'.$data['id_activite'].'" /></td>';
 			if ($data['commentaire']) {
-				echo '</tr><tr class="'.(($data['date_paiement']=='0000-00-00')?'pair':'valide').'"><td colspan="8" class="text">&nbsp;'.$data['commentaire'].'</td>';
+				echo '</tr><tr class="'.(($data['date_paiement']<$data['date_inscription'])?'pair':'valide').'"><td colspan="8" class="text">&nbsp;'.$data['commentaire'].'</td>';
 			}
 			echo "</tr>\n";
 		}
 		echo "</tbody>\n</table>\n";
-		echo "<table class='asso_tablo_filtres'><tr>\n<td width='90%'></td><td width='10%' class='formulaire'>";
-		echo '<input type="submit" value="'._T('asso:bouton_supprimer').'" />';
-		echo "</td></tr></table>\n";
-		echo '</form>';
 		fin_page_association();
 	}
 }

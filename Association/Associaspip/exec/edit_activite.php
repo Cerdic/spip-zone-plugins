@@ -22,10 +22,7 @@ function exec_edit_activite()
 		echo minipres();
 	} else {
 		$id_activite = intval(_request('id'));
-		if ($id_activite)
-			$id_evenement = sql_getfetsel('id_evenement', 'spip_asso_activites', "id_activite=$id_activite");
-		else
-			$id_evenement = intval(_request('id_evenement'));
+		$id_evenement = $id_activite ? sql_getfetsel('id_evenement', 'spip_asso_activites', "id_activite=$id_activite") : intval(_request('id_evenement'));
 		onglets_association('titre_onglet_activite');
 		// INTRO : Rappel Infos Evenement
 		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement");
