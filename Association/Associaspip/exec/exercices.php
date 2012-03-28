@@ -58,8 +58,8 @@ function exec_exercices()
 			echo '<td class="date">'. association_datefr($data['debut'],'dtstart') .'</td>';
 			echo '<td class="date">'. association_datefr($data['fin'],'dtend') .'</td>';
 			echo '<td class="text">'. propre($data['commentaire']) .'</td>';
-			echo association_bouton_supprimer('exercice', 'id='.$data['id_exercice']);
-			echo association_bouton_modifier('exercice', 'id='.$data['id_exercice']);
+			echo association_bouton_supprimer('exercice', 'id='.$data['id_exercice'], 'td');
+			echo association_bouton_modifier('exercice', 'id='.$data['id_exercice'], 'td');
 			echo "</tr>\n";
 		}
 		echo "</tbody>\n</table>\n";

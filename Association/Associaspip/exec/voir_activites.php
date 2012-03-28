@@ -65,7 +65,7 @@ function exec_voir_activites()
 		echo '<th>'. _T('asso:entete_nom') .'</th>';
 		echo '<th>'. _T('asso:activite_entete_inscrits') .'</th>';
 		echo '<th>'. _T('asso:entete_montant') .'</th>';
-		echo '<th colspan="3" class="actions">'. _T('asso:entete_action') .'</th>';
+		echo '<th colspan="2" class="actions">'. _T('asso:entete_action') .'</th>';
 		echo "</tr>\n</thead><tbody>";
 		if ($statut) { // restriction de la selection
 			$critereSupplementaire = ' AND '. ($statut>0?"date_paiement<date_inscription ":"date_paiement>=date_inscription ");
@@ -78,10 +78,10 @@ function exec_voir_activites()
 			echo '<td class="text">'.  association_calculer_lien_nomid($data['nom'],$data['id_adherent']) .'</td>';
 			echo '<td class="integer">'.$data['inscrits'].'</td>';
 			echo '<td class="decimal">'. association_prixfr($data['montant']) .'</td>';
+			echo association_bouton_supprimer('activite', $data['id_activite'], 'td');
 			echo '<td class="action">', association_bouton('activite_bouton_maj_inscription', 'cotis-12.gif', 'edit_activite','id='.$data['id_activite']), '</td>';
-			echo '<td class="action"><input name="delete[]" type="checkbox" value="'.$data['id_activite'].'" /></td>';
 			if ($data['commentaire']) {
-				echo '</tr><tr class="'.(($data['date_paiement']<$data['date_inscription'])?'pair':'valide').'"><td colspan="8" class="text">&nbsp;'.$data['commentaire'].'</td>';
+				echo '</tr><tr class="'.(($data['date_paiement']<$data['date_inscription'])?'pair':'valide').'"><td colspan="7" class="text">&nbsp;'.$data['commentaire'].'</td>';
 			}
 			echo "</tr>\n";
 		}

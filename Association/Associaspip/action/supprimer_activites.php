@@ -16,13 +16,10 @@ if (!defined('_ECRIRE_INC_VERSION'))
 function action_supprimer_activites()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-	$association_imputation = charger_fonction('association_imputation', 'inc');
-	$critere = $association_imputation('pc_activites');
-	$w = sql_in('id_activite', $_REQUEST['drop']);
-	sql_delete('spip_asso_activites', $w);
-	$w = sql_in('id_journal', $_REQUEST['drop']);
-	sql_delete('spip_asso_comptes', $w. ($critere ? " AND $critere" : ''));
+	$id_activite = $securiser_action();
+	include_spip ('inc/association_comptabilite');
+	association_supprimer_operation_comptable2($id_activite,$GLOBALS['association_metas']['pc_activites']);
+	sql_delete('spip_asso_activites', "id_activite=$id_activite");
 }
 
 ?>

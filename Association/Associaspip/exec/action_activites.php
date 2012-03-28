@@ -20,25 +20,26 @@ function exec_action_activites()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		onglets_association('titre_onglet_activite');
-		// infos
-		echo totauxinfos_intro('confirmation');
-		// datation et raccourcis
-		icones_association('');
-		debut_cadre_association('activites.gif', 'activite_titre_inscriptions_activites');
-		if (is_array($_REQUEST['delete'])) {
-			$count = count($_REQUEST['delete']);
-			echo '<p><strong>'._T('asso:activite_message_confirmation_supprimer',array('nombre' => $count, 'pluriel' => $count>1 ? 's' : '')).'</strong></<p>';
-			$res = '';
-			for ( $i=0 ; $i<$count ; $i++ ) {
-				$id = $_REQUEST['delete'][$i];
-				$res .= "<input type='hidden' name='drop[]' value='$id' checked='checked' />\n";
-			}
-			$res .= '<p class="boutons"><input type="submit" value="' . _T('asso:activite_bouton_confirmer') . '" class="fondo" /></p>';
-			// count est du bruit de fond pour la secu
-			echo generer_action_auteur('supprimer_activites', $count, $_REQUEST['url_retour'] ? $_REQUEST['url_retour'] : $_SERVER['HTTP_REFERER'], $res, " method='post'");
+		$id_activite = intval(_request('id'));
+		$activite = sql_fetsel('*', 'spip_asso_dons', "id_don=$id_don");
+		if (!$activite) {
+			include_spip('inc/minipres');
+			echo minipres(_T('zxml_inconnu_id') . $id_don);
+		} else {
+			onglets_association('titre_onglet_activite');
+			// info
+			$infos['evenement'] = sql_getfetsel('titre', 'spip_evenements', 'id_evenement='.intval($activite['id_evenement']) );
+			$infos['date'] = association_datefr($activite['date_inscription']);
+			$infos['activite_entete_inscrits'] = association_prixfr($activite['inscrits']);
+			$infos['entete_montant'] = association_prixfr($activite['montant']);
+			totauxinfos_intro(association_calculer_lien_nomid($activite['nom'],$activite['id_adherent']), 'activite', $id_activite, $infos );
+			// datation et raccourcis
+			icones_association('');
+			debut_cadre_association('activites.gif', 'activite_titre_inscriptions_activites');
+			echo bloc_confirmer_suppression('activite', $id_activite);
+			fin_page_association();
 		}
-		fin_page_association();
 	}
 }
+
 ?>

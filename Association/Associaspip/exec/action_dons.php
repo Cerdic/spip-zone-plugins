@@ -22,17 +22,16 @@ function exec_action_dons()
 		echo minipres();
 	} else {
 		$id_don = intval(_request('id'));
-		$data = sql_fetsel('*', 'spip_asso_dons', "id_don=$id_don");
-		if (!$data) {
+		$don = sql_fetsel('*', 'spip_asso_dons', "id_don=$id_don");
+		if (!$don) {
 			include_spip('inc/minipres');
 			echo minipres(_T('zxml_inconnu_id') . $id_don);
 		} else {
 			onglets_association('titre_onglet_dons');
 			// info
-			$don = sql_fetsel('*', 'spip_asso_dons', "id_don=$id_don");
 			$infos['argent'] = association_prixfr($don['argent']);
 			$infos['colis'] = ($don['valeur'] ? '('.association_prixfr($don['valeur']).')<br />' : '') .$don['colis'];
-			$onfos['contrepartie'] = $don['contrepartie'];
+			$infos['contrepartie'] = $don['contrepartie'];
 			totauxinfos_intro(association_calculer_lien_nomid($don['bienfaiteur'],$don['id_adherent']), 'don', $id_don, $infos );
 			// datation et raccourcis
 			icones_association('');

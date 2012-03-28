@@ -50,8 +50,8 @@ function exec_categories()
 			echo '<td class="decimal">'. association_dureefr($data['duree'],'m') .'</td>';
 			echo '<td class="decimal">'. association_prixfr($data['cotisation']) .'</td>';
 			echo '<td class="text">'. propre($data['commentaires']) .'</td>';
-			echo association_bouton_supprimer('categorie', $data['id_categorie']);
-			echo association_bouton_modifier('categorie', $data['id_categorie']);
+			echo association_bouton_supprimer('categorie', $data['id_categorie'], 'td');
+			echo association_bouton_modifier('categorie', $data['id_categorie'], 'td');
 			echo "</tr>\n";
 		}
 		echo "</tbody>\n</table>\n";
