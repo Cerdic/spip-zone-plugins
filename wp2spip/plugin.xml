@@ -12,20 +12,20 @@
     <description>Importer un blog Wordpress 3.3.1  dans un site SPIP local vide.
       
       {{{Mode d'emploi}}}
-      -installer un spip à côté de wordpress sur le serveur.
+      -installer un SPIP à côté de Wordpress sur le serveur.
       -configurer selon vos besoins, L'utilisation des mots clefs des documents joints aux articles, les forums.
       -installer le plugin comme d'habitude.
       -installer les plugins optionnels [voir doc->http://www.spip-contrib.net/Wordpress-2-SPIP]
       -menu 'configuration / migration depuis wordpress' lancer la conversion.
       -depuis le menu 'configuration / maintenance du site' restaurer le fichier
-      wp2spip.xml ({{Si l'import se fige}} actualisez simplement la page ou avec la touche F5 du clavier)
+      wp2spip.xml ({{Si l'import se fige}}rafraîchissez la page)
       -si vous refaites la manip repartez toujours depuis un site spip vierge et avec
       le cache vide.
       
       -une fois importé, se reconnecter avec son compte webmestre SPIP, Et pour les auteurs wordpress, ils doivent simplement recréer leur mot de passe via
       la page de login avec 'mot de passe perdu'
       
-      -Choisisez les rubriquest des articles proposés à la publication (les pages importées) et publiez les.
+      -Choisisez les rubriques des articles proposés à la publication (les pages importées) et publiez les.
       -Choisisez les rubriques (depuis edition auteurs) des admins restreints signalés et devenus rédacteurs.
       
       
