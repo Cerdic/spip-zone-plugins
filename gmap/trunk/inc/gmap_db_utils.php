@@ -366,7 +366,7 @@ function _gmap_recurs_tree_points(&$points, $objet, $id_objet, $niveau_fils, $ni
 	if ($niveau_fils > 0)
 	{
 		$IDs = array();
-		_gmap_recurse_fils($objet, $id_objet, &$IDs, FALSE);
+		_gmap_recurse_fils($objet, $id_objet, $IDs, FALSE);
 		foreach ($IDs as $objetFils => $idListe)
 		{
 			$objIds = explode(",", $idListe);
@@ -407,41 +407,41 @@ function _gmap_recurse_fils($objet, $id_objet, &$IDs, $recursive = TRUE)
 {
 	// Rechercher les documents (tous objets)
 	if ($objet != 'document')
-		_gmap_fill_ID_tab(&$IDs, 'spip_documents_liens', 'id_document', "objet='".$objet."' AND id_objet=".$id_objet, 'document', $recursive);
+		_gmap_fill_ID_tab($IDs, 'spip_documents_liens', 'id_document', "objet='".$objet."' AND id_objet=".$id_objet, 'document', $recursive);
 	
 	// Le reste est selon les objets
 	// Rubrique :
 	if ($objet == 'rubrique')
 	{
 		// Sous-rubriques
-		_gmap_fill_ID_tab(&$IDs, 'spip_rubriques', 'id_rubrique', "id_parent=".$id_objet, 'rubrique', $recursive);
+		_gmap_fill_ID_tab($IDs, 'spip_rubriques', 'id_rubrique', "id_parent=".$id_objet, 'rubrique', $recursive);
 		
 		// Articles
-		_gmap_fill_ID_tab(&$IDs, 'spip_articles', 'id_article', "id_rubrique=".$id_objet, 'article', $recursive);
+		_gmap_fill_ID_tab($IDs, 'spip_articles', 'id_article', "id_rubrique=".$id_objet, 'article', $recursive);
 		
 		// Mots-clefs
-		_gmap_fill_ID_tab(&$IDs, 'spip_mots_rubriques', 'id_mot', "id_rubrique=".$id_objet, 'mot', $recursive);
+		_gmap_fill_ID_tab($IDs, 'spip_mots_rubriques', 'id_mot', "id_rubrique=".$id_objet, 'mot', $recursive);
 	}
 
 	// Article :
 	else if ($objet == 'article')
 	{
 		// Mots-clefs
-		_gmap_fill_ID_tab(&$IDs, 'spip_mots_articles', 'id_mot', "id_article=".$id_objet, 'mot', $recursive);
+		_gmap_fill_ID_tab($IDs, 'spip_mots_articles', 'id_mot', "id_article=".$id_objet, 'mot', $recursive);
 	}
 
 	// Document :
 	else if ($objet == 'document')
 	{
 		// Mots-clefs
-		_gmap_fill_ID_tab(&$IDs, 'spip_mots_documents', 'id_mot', "id_document=".$id_objet, 'mot', $recursive);
+		_gmap_fill_ID_tab($IDs, 'spip_mots_documents', 'id_mot', "id_document=".$id_objet, 'mot', $recursive);
 	}
 
 	// Breve :
 	else if ($objet == 'breve')
 	{
 		// Mots-clefs
-		_gmap_fill_ID_tab(&$IDs, 'spip_mots_breves', 'id_mot', "id_breve=".$id_objet, 'mot', $recursive);
+		_gmap_fill_ID_tab($IDs, 'spip_mots_breves', 'id_mot', "id_breve=".$id_objet, 'mot', $recursive);
 	}
 }
 
@@ -464,7 +464,7 @@ function gmap_compteur($objet = '', $id_objet = 0, $visible = false, $recursive 
 			// Construire un tableau contenant tous les IDs
 			$IDs = array();
 			$IDs[$objet] = "".$id_objet;
-			_gmap_recurse_fils($objet, $id_objet, &$IDs, TRUE);
+			_gmap_recurse_fils($objet, $id_objet, $IDs, TRUE);
 			
 			// Reconstruire la requête
 			foreach ($IDs as $idObj => $idListe)

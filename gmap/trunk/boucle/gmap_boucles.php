@@ -321,7 +321,7 @@ function _gmap_find_boucle_param_objet($params, $idb, &$boucles)
 			$objetDef['id_objet'] = NULL;
 			
 		// Rechercher cet objet dans la pile
-		$objetDef = _gmap_find_boucle_object($objetDef, &$boucles, $idb);
+		$objetDef = _gmap_find_boucle_object($objetDef, $boucles, $idb);
 		
 		return $objetDef;
 	}
@@ -337,7 +337,7 @@ function _gmap_find_boucle_param_objet($params, $idb, &$boucles)
 			continue;
 		$objetDef['objet'] = substr($idName, strlen("id_"));
 		$objetDef['id_objet'] = NULL;
-		$objetDef = _gmap_find_boucle_object($objetDef, &$boucles, $idb, '', FALSE);
+		$objetDef = _gmap_find_boucle_object($objetDef, $boucles, $idb, '', FALSE);
 		if (strlen($objetDef['id_objet']))
 			return $objetDef;
 	}
@@ -399,8 +399,8 @@ function boucle_GEOTEST_dist($id_boucle, &$boucles)
 	if (gmap_est_actif())
 	{
 		// Récupérer les paramètres et l'objet sur lequel on fait la requête
-		$params = _gmap_boucle_params(&$boucle);
-		$objetDef = _gmap_find_boucle_param_objet($params, $id_boucle, &$boucles); // id_article, id_rubrique...
+		$params = _gmap_boucle_params($boucle);
+		$objetDef = _gmap_find_boucle_param_objet($params, $id_boucle, $boucles); // id_article, id_rubrique...
 		
 		// Récupérer les autres paramètres
 		$recursive = ($params['recursif'] ? true : false);
