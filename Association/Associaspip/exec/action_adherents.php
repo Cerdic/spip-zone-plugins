@@ -17,12 +17,14 @@ include_spip ('inc/navigation_modules');
 
 function exec_action_adherents()
 {
-	if (!autoriser('associer', 'adherents')) {
+	$action_adherents = _request('action_adherents');
+	// pour agir sur les adherents il faut avoir le droit d'edition sur les adherents ainsi que le droit de gestion des groupes si c'est ca qu'on modifie.
+	if (!autoriser('editer_membres', 'association') || 
+		(($action_adherents=='grouper' || $action_adherents=='degrouper' ) && !autoriser('editer_groupes', 'association', 100)) ) {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
 		$id_auteurs = _request('id_auteurs');
-		$action_adherents = _request('action_adherents');
 		if ($action_adherents && $id_auteurs && is_array($id_auteurs)) {
 			onglets_association('titre_onglet_membres');
 			// info

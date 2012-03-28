@@ -80,24 +80,6 @@ function request_statut_interne()
 	}
 }
 
-function association_ajouterBoutons($boutons_admin)
-{
-	// si on est admin
-	if ($GLOBALS['connect_statut']=='0minirezo' && $GLOBALS['connect_toutes_rubriques']) {
-		$menu = 'naviguer';
-		$icone = 'annonce.gif';
-		if (isset($boutons_admin['bando_reactions'])){
-			$menu = 'bando_reactions';
-			$icone = 'annonce.gif';
-		}
-		$boutons_admin[$menu]->sousmenu['association'] = new Bouton(
-			_DIR_PLUGIN_ASSOCIATION_ICONES.$icone,  // icone
-			_T('asso:titre_menu_gestion_association') //titre
-		);
-	}
-	return $boutons_admin;
-}
-
 // demande de confirmation dans
 function bloc_confirmer_suppression($type,$id,$retour='')
 {

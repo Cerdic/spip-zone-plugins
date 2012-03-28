@@ -24,14 +24,16 @@ function exec_edit_groupe()
 	} else {
 		onglets_association('gestion_groupes');
 		// INFO
-		$groupe = sql_fetsel('*', 'spip_asso_groupes', "id_groupe=$id_groupe" );
-		$infos['ordre_affichage_groupe'] = $groupe['affichage'];
-		$infos['commentaires'] = $groupe['commentaires'];
-		$infos['destination_entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe")) );
-		echo totauxinfos_intro($groupe['nom'], 'groupe', $id_groupe, $infos );
+		if ($id_groupe>0) {
+			$groupe = sql_fetsel('*', 'spip_asso_groupes', "id_groupe=$id_groupe" );
+			$infos['ordre_affichage_groupe'] = $groupe['affichage'];
+			$infos['commentaires'] = $groupe['commentaires'];
+			$infos['destination_entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe")) );
+			echo totauxinfos_intro($groupe['nom'], 'groupe', $id_groupe, $infos );
+		}
 		// datation et raccourcis
 		icones_association(array('groupes'));
-		debut_cadre_association('annonce.gif', 'titre_editer_groupe');
+		debut_cadre_association('annonce.gif', ($id_groupe)?'titre_editer_groupe':'titre_creer_groupe');
 		echo recuperer_fond('prive/editer/editer_asso_groupes', array (
 			'id' => $id_groupe
 		));

@@ -248,6 +248,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer_groupe' => 'Supprimer le groupe',
 	'ajouter_membres_au_groupe' => 'Ajouter ces membres au groupe',
 	'titre_editer_groupe' => 'Editer le groupe',
+	'titre_creer_groupe' => 'Cr&eacute;er un groupe',
 	'ajouter' => 'Ajouter',
 	'exclure' => 'Exclure',
 	'exclure_du_groupe' => 'Exclure du groupe',
@@ -270,8 +271,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'les_groupes_dacces' => 'Groupes de droits d\'acc&egrave;s',	
 	'aide_gerer_autorisations' => 'Pour donner des autorisations, ajouter simplement la personne au groupe ad&eacute;quat. Voir la <a href="http://www.spip-contrib.net/Associaspip#restriction_access">documentation online</a> pour plus de d&eacute;tails.',
 	# nom des groupes d'autorisations (par ordre croissant d'id_groupe)
-	'groupe_1' => 'Edition des droits acc&egrave;s',
-	'groupe_2' => 'Edition des groupes',
+	'groupe_1' => 'Editer les droits acc&egrave;s',
+	'groupe_2' => 'Editer les groupes',
+	'groupe_3' => 'Voir les groupes',
+	'groupe_20' => 'Editer le profil de l\'association',
+	'groupe_21' => 'Voir le profil de l\'association',
+	'groupe_30' => 'Editer le profil des membres',
+	'groupe_31' => 'Voir le profil des membres',
 # Association (accueil)
 	'association_infos_contacts' => 'Profil de l\'association', // information sur l'association (objet, declaration, etc.), ses coordonnees (adresse, numero et email principaux) et les contacts (nom, fonction, numero, email)
 	'categories_de_cotisations' => 'Cat&eacute;gories de cotisations',

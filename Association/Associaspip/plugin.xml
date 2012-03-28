@@ -5,7 +5,7 @@
 	Emmanuel Saint-James - Jeannolapin
 	</auteur>
 	<version>2.1.0</version>
-	<version_base>59811</version_base>
+	<version_base>59886</version_base>
 	<meta>association_metas</meta>
 	<etat>dev</etat>
 	<slogan>Gestion d'associations</slogan>
@@ -33,13 +33,6 @@
         	<inclure>base/association.php</inclure>
 	</pipeline>
 
-
-
-	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouterBoutons</action>
-	</pipeline>
-
 	<!-- Ajout automatique de l'auteur edité comme membre -->
 	<pipeline>
 		<nom>post_edition</nom>
@@ -63,6 +56,12 @@
 		<nom>autoriser</nom>
 		<inclure>association_autorisations.php</inclure>
 	</pipeline>
+
+	<bouton id="association" parent="naviguer">
+		<icone>img_pack/annonce.gif</icone>
+		<titre>Associaspip</titre>	
+	</bouton>
+
 
 	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[2.1.8;2.1.99]" />

@@ -17,7 +17,7 @@ include_spip ('inc/navigation_modules');
 
 function exec_association()
 {
-	if (!autoriser('associer')) {
+	if (!autoriser('voir_profil', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -25,8 +25,10 @@ function exec_association()
 		// Ipresentation du plugin
 		echo propre(_T('asso:association_info_doc'));
 		// datation et raccourcis
-		$res['profil_de_lassociation'] = array('assoc_qui.png', 'configurer_association');
-		$res['editer_asso_metas_utilisateur_lien'] = array('assoc_qui.png', 'editer_asso_metas_utilisateur');
+		if (autoriser('editer_profil', 'association')) {
+			$res['profil_de_lassociation'] = array('assoc_qui.png', 'configurer_association');
+			$res['editer_asso_metas_utilisateur_lien'] = array('assoc_qui.png', 'editer_asso_metas_utilisateur');
+		}
 		$res['categories_de_cotisations'] = array('cotisation.png', 'categories');
 		if (autoriser('gerer_autorisations', 'association')) {
 			$res['gerer_les_autorisations'] = array('droit_acces.png', 'association_autorisations');

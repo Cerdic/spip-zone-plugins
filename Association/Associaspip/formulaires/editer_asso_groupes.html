@@ -8,13 +8,13 @@
 			<li class="editer_nom">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{nom_groupe})</span>]
 				<label for="nom"><:asso:nom_groupe:></label>
-				<input [(#ENV{id_groupe}|<{100}|oui) disabled="disabled" [value="(#VAL{asso:groupe_#ENV{id_groupe}}|_T)"]] type="text" name="nom" [(#ENV{id_groupe}|>={100}|oui) [value="(#ENV{nom})"]] id="nom" class="text" />
+				<input [(#ENV{_autorisation}|oui) disabled="disabled" [value="(#VAL{asso:groupe_#ENV{id_groupe}}|_T)"]] type="text" name="nom" [(#ENV{_autorisation}|non) [value="(#ENV{nom})"]] id="nom" class="text" />
 			</li>
 			<li class="editer_commentaires">
 				<label for="commentaires"><:asso:commentaires:></label>
 				<textarea name="commentaires" id="commentaires" rows="3">[(#ENV{commentaires})]</textarea>
 			</li>
-		 [(#ENV{id_groupe}|>={100}|oui)
+		 [(#ENV{_autorisation}|non)
 			<li class="editer_affichage">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{affichage})</span>]
 				<label for="affichage"><:asso:ordre_affichage:></label>

@@ -15,10 +15,14 @@ include_spip('inc/autoriser');
 \***************************************************************************/
 function formulaires_editer_asso_groupes_charger_dist($id_groupe='') {
 	/* cet appel va charger dans $contexte tous les champs de la table spip_asso_dons associes a l'id_don passe en param */
-	return formulaires_editer_objet_charger('asso_groupes', $id_groupe, '', '',  generer_url_ecrire('groupes'), '');	
+	$contexte = formulaires_editer_objet_charger('asso_groupes', $id_groupe, '', '',  generer_url_ecrire('groupes'), '');	
+	if ($id_groupe>0 && $id_groupe<100) {
+		$contexte['_autorisation'] = true;
+	}
+	return $contexte;
 }
 
 function formulaires_editer_asso_groupes_traiter($id_groupe='') {
-	return formulaires_editer_objet_traiter('asso_groupes', $id_groupe, '', '',  generer_url_ecrire('groupes'), '');
+	return formulaires_editer_objet_traiter('asso_groupes', $id_groupe, '', '',  ($id_groupe>0 && $id_groupe<100)?generer_url_ecrire('association_autorisations'):generer_url_ecrire('groupes'), '');
 }
 ?>

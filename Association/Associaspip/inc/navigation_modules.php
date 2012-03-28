@@ -16,12 +16,17 @@ include_spip('inc/autoriser'); // utilise par "onglet1_association" (pour le tes
 // Afficher le titre de la/le page/module courante puis (en dessous) les onglets des differents modules actives dans la configuration
 function onglets_association($titre='', $INSERT_HEAD=TRUE)
 {
+	$res = '';
 
 	/* onglet de retour a la page d'accueil */
-	$res = onglet1_association('association', 'association', 'Association', 'annonce.gif');
+	if (autoriser('voir_profil', 'association')) {
+		$res .= onglet1_association('association', 'association', 'Association', 'annonce.gif');
+	}
 
 	/* onglet de gestion des membres */
-	$res .= onglet1_association('gestion_membres', 'adherents', 'Membres', 'annonce.gif');
+	if (autoriser('voir_membres', 'association')) {
+		$res .= onglet1_association('gestion_membres', 'adherents', 'Membres', 'annonce.gif');
+	}
 
 	/* onglet de gestion des dons */
 	if ($GLOBALS['association_metas']['dons']) {
@@ -73,10 +78,7 @@ function association_onglets($titre='', $INSERT_HEAD=TRUE)
 // dessin d'un onglet seul
 function onglet1_association($texte, $objet, $libelle, $image)
 {
-	if (autoriser('associer', $objet)) {
-		return onglet(_T("asso:menu2_titre_$texte"), generer_url_ecrire($objet), '', $libelle, _DIR_PLUGIN_ASSOCIATION_ICONES . $image, 'rien.gif');
-	} else
-		return '';
+	return onglet(_T("asso:menu2_titre_$texte"), generer_url_ecrire($objet), '', $libelle, _DIR_PLUGIN_ASSOCIATION_ICONES . $image, 'rien.gif');
 }
 
 // cette fonction remplace et personnalise le couplet final <http://programmer.spip.org/Contenu-d-un-fichier-exec> : echo fin_gauche(), fin_page();

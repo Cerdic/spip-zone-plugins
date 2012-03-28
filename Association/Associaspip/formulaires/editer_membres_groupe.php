@@ -34,7 +34,12 @@ function formulaires_editer_membres_groupe_traiter($id_groupe='') {
 		$action_supprimer_membres($id_groupe);
 	}
 	$res['message_ok'] = '';
-	$res['redirect'] = generer_url_ecrire('edit_groupe', 'id='.$id_groupe);
+	$id_groupe = intval($id_groupe);
+	if ($id_groupe>0 && $id_groupe<100) {
+		$res['redirect'] = generer_url_ecrire('edit_groupe_autorisations', 'id='.$id_groupe);
+	} else {
+		$res['redirect'] = generer_url_ecrire('edit_groupe', 'id='.$id_groupe);
+	}
 	return $res;
 }
 

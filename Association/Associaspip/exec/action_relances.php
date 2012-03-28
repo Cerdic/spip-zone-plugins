@@ -19,11 +19,11 @@ include_spip ('inc/mail');
 
 function exec_action_relances()
 {
-	if (!autoriser('associer', 'comptes')) {
+	if (!autoriser('editer_membres', 'association')) {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
-		onglets_association('titre_onglet_membres'));
+		onglets_association('titre_onglet_membres');
 		// notice ?
 		echo _T('asso:aide_relances'); //!\ il faut en rajouter
 		// datation et raccourcis

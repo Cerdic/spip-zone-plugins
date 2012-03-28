@@ -55,9 +55,8 @@ function association_vider_tables($nom_meta, $table)
 // pour y a definir les groupes gerant les autorisations (id<100)
 function association_gestion_autorisations_upgrade()
 {
-	spip_log("UPGRADE DEBUG");
 	// definir tous les groupes qui doivent exister
-	$groupes_autorisations = array(1,2);
+	$groupes_autorisations = array(1,2,3,20,21,30,31);
 
 	// recuperer tous ceux existants
 	$groupes_existants = array();
@@ -73,7 +72,10 @@ function association_gestion_autorisations_upgrade()
 			$groupes_a_inserer[]=array('id_groupe'=>$id_groupe);
 		}
 	}
-	sql_insertq_multi('spip_asso_groupes', $groupes_a_inserer);
+
+	if (count($groupes_a_inserer)) {
+		sql_insertq_multi('spip_asso_groupes', $groupes_a_inserer);
+	}
 }
 
 // MAJ des tables de la base SQL
@@ -587,8 +589,8 @@ $GLOBALS['association_maj'][58894] = array(
 	array('sql_alter', "TABLE spip_asso_activites DROP date "),
 );
 
-// introduction des groupes 1 et 2 dans la table spip_asso_groupes
-$GLOBALS['association_maj'][59811] = array(
+// introduction des groupes dans la table spip_asso_groupes
+$GLOBALS['association_maj'][59886] = array(
 	array('association_gestion_autorisations_upgrade')
 );
 3

@@ -27,8 +27,13 @@ function formulaires_ajouter_membres_groupe_traiter($id_groupe='') {
 	set_request('redirect');
 	$action_ajouter_membres = charger_fonction('ajouter_membres_groupe','action');
 	$action_ajouter_membres($id_groupe);
-	$res['message_ok'] = ''; 
-	$res['redirect'] = generer_url_ecrire('edit_groupe', 'id='.$id_groupe);
+	$res['message_ok'] = '';
+	$id_groupe = intval($id_groupe);
+	if ($id_groupe>0 && $id_groupe<100) {
+		$res['redirect'] = generer_url_ecrire('edit_groupe_autorisations', 'id='.$id_groupe);
+	} else {
+		$res['redirect'] = generer_url_ecrire('edit_groupe', 'id='.$id_groupe);
+	}
 	return $res;
 	
 }

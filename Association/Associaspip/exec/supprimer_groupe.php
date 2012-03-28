@@ -17,7 +17,7 @@ include_spip ('inc/navigation_modules');
 
 function exec_supprimer_groupe()
 {
-	if (!autoriser('associer', 'comptes')) {
+	if (!autoriser('editer_groupes', 'association', $id_groupe)) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

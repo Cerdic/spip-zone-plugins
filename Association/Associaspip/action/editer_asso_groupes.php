@@ -25,7 +25,7 @@ function action_editer_asso_groupes_dist()
     );
     include_spip('base/association');
     if ($id_groupe) { /* modification */
-	sql_updateq('spip_asso_groupes', $champs "id_groupe=$id_groupe");
+	sql_updateq('spip_asso_groupes', $champs, "id_groupe=$id_groupe");
     } else { /* ajout */
 	$id_groupe = sql_insertq('spip_asso_groupes', $champs);
 	if (!$id_groupe)

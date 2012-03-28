@@ -15,7 +15,9 @@
 function association_affiche_gauche($flux) {
 	if ($flux['args']['exec']=='auteur_infos') {
 		$id_auteur = $flux['args']['id_auteur'];
-		$flux['data'] .= recuperer_fond('prive/boite/lien_page_auteur', array ('id_auteur' => $id_auteur));
+		if (autoriser('voir_membres', 'association', $id_auteur)) {
+			$flux['data'] .= recuperer_fond('prive/boite/lien_page_auteur', array ('id_auteur' => $id_auteur));
+		}
 	}
 	return $flux;
 }

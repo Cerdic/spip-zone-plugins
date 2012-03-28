@@ -17,7 +17,7 @@ include_spip('inc/navigation_modules');
 
 function exec_adherents()
 {
-	if (!autoriser('associer', 'adherents')) {
+	if (!autoriser('voir_membres', 'association', 0)) { /* on s'assure qu'il n'y ai pas d'id associe a la demande d'autorisation sur voir_membres car on les consulte tous */
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -40,7 +40,9 @@ function exec_adherents()
 		$data = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT('date', '%Y')=DATE_FORMAT(NOW(), '%Y') AND imputation=".sql_quote($GLOBALS['association_metas']['pc_cotisations']) );
 		echo totauxinfos_montants(_T('asso:cotisations'), $data['somme_recettes'], $data['somme_depenses']);
 		// datation et raccourcis
-		$res['gerer_les_groupes'] = array('annonce.gif', 'groupes');
+		if (autoriser('voir_groupes', 'association', 100)) { // l'id groupe passe en parametre est a 100 car ce sont les groupes definis par l'utilisateur et non ceux des autorisation qu'on liste dans cette page.
+			$res['gerer_les_groupes'] = array('annonce.gif', 'groupes');
+		}
 		$res['menu2_titre_relances_cotisations'] = array('relance-24.png', 'edit_relances');
 		$res['synchronise_asso_membre_lien'] = array('reload-32.png', 'synchroniser_asso_membres');
 		icones_association(array(), $res);
@@ -278,14 +280,22 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe,
 			}
 		}
 	}
-	$res .= "</p></td><td width='48%' class='formulaire'><form>\n"
-	.  (!$auteurs ? '' : ('<select name="action_adherents"><option value="" selected="">'._T('asso:choisir_action').'</option><option value="desactive">'
-		.($statut_interne=='sorti' ? _T('asso:reactiver_adherent') : _T('asso:desactiver_adherent'))
-		.'</option><option value="delete">'._T('asso:supprimer_adherent').'</option>'
-		.(sql_countsel('spip_asso_groupes', '') ? '<option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_un_groupe').'</option>' : '')
-		.'</select><input type="submit" value="'._T('asso:bouton_confirmer').'" />'))
-	. '<input type="hidden" name="statut_courant" value="'.$statut_interne.'" />'
-	.  '</form></td></tr></table>';
+	if (autoriser('editer_membres', 'association', 100)) {
+		$res .= "</p></td><td width='48%' class='formulaire'><form>\n";
+		if ($auteurs) {
+			$res .=  '<select name="action_adherents"><option value="" selected="">'._T('asso:choisir_action').'</option><option value="desactive">'
+			.($statut_interne=='sorti' ? _T('asso:reactiver_adherent') : _T('asso:desactiver_adherent'))
+			.'</option><option value="delete">'._T('asso:supprimer_adherent').'</option>';
+			if (autoriser('editer_groupes', 'association', 100)) {
+				$res .=sql_countsel('spip_asso_groupes', '') ? '<option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_un_groupe').'</option>' : '';
+			}
+			$res .='</select><input type="submit" value="'._T('asso:bouton_confirmer').'" />';
+		}
+		$res .= '<input type="hidden" name="statut_courant" value="'.$statut_interne.'" />'
+		.  '</form></td>';
+	}
+	$res .= '</tr></table>';
+
 	return 	array($liste_id_auteurs, generer_form_ecrire('action_adherents', $res));
 }
 

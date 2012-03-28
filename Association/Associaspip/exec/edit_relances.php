@@ -17,53 +17,58 @@ include_spip ('inc/navigation_modules');
 
 function exec_edit_relances()
 {
-	onglets_association('titre_onglet_membres');
-	// notice
-	echo _T('asso:aide_relances'); //!\ il faut en rajouter
-	// datation et raccourcis
-	icones_association(array('adherents'));
-	debut_cadre_association('relance-24.png', 'tous_les_membres_a_relancer');
-	$statut_interne = _request('statut_interne');
-	if (!$statut_interne)
-		$statut_interne = 'echu';
-	$corps = '';
-	foreach ($GLOBALS['association_liste_des_statuts'] as $var) {
-		$corps .= '<option value="'.$var.'"';
-		if ($statut_interne==$var) {
-			$corps .= ' selected="selected"';
+	if (!autoriser('editer_membres', 'association')) {
+			include_spip('inc/minipres');
+			echo minipres();
+	} else {
+		onglets_association('titre_onglet_membres');
+		// notice
+		echo _T('asso:aide_relances'); //!\ il faut en rajouter
+		// datation et raccourcis
+		icones_association(array('adherents'));
+		debut_cadre_association('relance-24.png', 'tous_les_membres_a_relancer');
+		$statut_interne = _request('statut_interne');
+		if (!$statut_interne)
+			$statut_interne = 'echu';
+		$corps = '';
+		foreach ($GLOBALS['association_liste_des_statuts'] as $var) {
+			$corps .= '<option value="'.$var.'"';
+			if ($statut_interne==$var) {
+				$corps .= ' selected="selected"';
+			}
+			$corps .= '> '. _T('asso:adherent_entete_statut_'.$var) .'</option>';
 		}
-		$corps .= '> '. _T('asso:adherent_entete_statut_'.$var) .'</option>';
+		if ($corps) {
+			$corps = '<div><select name ="statut_interne" onchange="form.submit()">' . $corps . '</select></div>';
+			echo generer_form_ecrire('edit_relances', $corps, 'method="get"', '');
+		}
+		$corps = relances_while($statut_interne);
+		if ($corps) {
+			$res = '<div class="formulaire_spip formulaire_edit_relance"><form>'
+				. '<ul>'
+				. '<li class="editer_sujet">'
+				. '<label for="sujet">'. _T('asso:sujet') . '</label>'
+				. '<input name="sujet" type="text" value="'.stripslashes(_T('asso:titre_relance')).'" id="sujet" class="text" />'
+				. "</li>\n"
+				. '<li class="editer_message">'
+				. '<label for="message">'. _T('asso:message') . '</label>'
+				. '<textarea name="message" rows="15" id="message">'.stripslashes(_T('asso:message_relance')).'</textarea>'
+				. "</li>\n"
+				. "</ul>\n"
+				. "<table width='100%' class='asso_tablo' id='asso_tablo_ressources'>\n"
+				. "<thead>\n<tr>"
+				. '<th>'. _T('asso:entete_id') .'</th>'
+				. '<th>' . _T('asso:entete_nom') .'</th>'
+				. '<th>' . _T('asso:adherent_libelle_validite') .'</th>'
+				. '<th>' . _T('asso:envoi') .'</th>'
+				. "</tr>\n</thead><tbody>"
+				.  $corps
+				. "</tbody>\n</table>\n";
+			$bouton = '<p class="boutons">'. isset($action) ? _T('asso:bouton_'.$action) : _T('asso:bouton_envoyer') .'</p>';
+			echo generer_form_ecrire('action_relances', $res, '', $bouton);
+		}
+		fin_page_association();
 	}
-	if ($corps) {
-		$corps = '<div><select name ="statut_interne" onchange="form.submit()">' . $corps . '</select></div>';
-		echo generer_form_ecrire('edit_relances', $corps, 'method="get"', '');
-	}
-	$corps = relances_while($statut_interne);
-	if ($corps) {
-		$res = '<div class="formulaire_spip formulaire_edit_relance"><form>'
-			. '<ul>'
-			. '<li class="editer_sujet">'
-			. '<label for="sujet">'. _T('asso:sujet') . '</label>'
-			. '<input name="sujet" type="text" value="'.stripslashes(_T('asso:titre_relance')).'" id="sujet" class="text" />'
-			. "</li>\n"
-			. '<li class="editer_message">'
-			. '<label for="message">'. _T('asso:message') . '</label>'
-			. '<textarea name="message" rows="15" id="message">'.stripslashes(_T('asso:message_relance')).'</textarea>'
-			. "</li>\n"
-			. "</ul>\n"
-			. "<table width='100%' class='asso_tablo' id='asso_tablo_ressources'>\n"
-			. "<thead>\n<tr>"
-			. '<th>'. _T('asso:entete_id') .'</th>'
-			. '<th>' . _T('asso:entete_nom') .'</th>'
-			. '<th>' . _T('asso:adherent_libelle_validite') .'</th>'
-			. '<th>' . _T('asso:envoi') .'</th>'
-			. "</tr>\n</thead><tbody>"
-			.  $corps
-			. "</tbody>\n</table>\n";
-		$bouton = '<p class="boutons">'. isset($action) ? _T('asso:bouton_'.$action) : _T('asso:bouton_envoyer') .'</p>';
-		echo generer_form_ecrire('action_relances', $res, '', $bouton);
-	}
-	fin_page_association();
 }
 
 function relances_while($statut_interne)

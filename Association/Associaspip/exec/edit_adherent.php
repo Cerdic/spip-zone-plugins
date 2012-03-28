@@ -17,7 +17,7 @@ include_spip ('inc/navigation_modules');
 
 function exec_edit_adherent()
 {
-	if (!autoriser('associer', 'adherents')) {
+	if (!autoriser('editer_membres', 'association')) {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
