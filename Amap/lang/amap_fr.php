@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									4. Mettre à jour les <b>type d\'adhérent</b>, <b>adhésion</b> et <b>type de panier</b> sur la page de chaque auteur sinon aucun panier ne pourra lui être attribué.<br />
 									<p><strong>LE NON RESPECT DE CES QUELQUES PRINCIPES ENTRAINERA UN DYSFONCTIONNEMENT DU PLUGIN AMAP</strong></p>',
 	'aucun_panier_pour_nom' => 'Nous n\'avons aucun panier pour @nom@.',
+	'aucun_panier_produit_par_nom' => 'Nous n\'avons aucun panier produit par @nom@.',
 	'avant_le' => 'avant le',
 
 	// C
