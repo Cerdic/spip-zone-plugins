@@ -41,7 +41,7 @@ function exec_association()
 
 		icones_association(array(), $res);
 
-		debut_cadre_association('asscoc_qui.png', 'association_infos_contacts');
+		debut_cadre_association('assoc_qui.png', 'association_infos_contacts');
 		echo '<div class="vcard" id="vcard-asso">';
 		// Profil de l'association
 		echo debut_cadre_formulaire('',true);
