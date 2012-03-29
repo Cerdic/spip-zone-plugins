@@ -65,7 +65,7 @@ function abomailman_mail($nom, $email, $to_email,$liste_email, $sujet="", $body=
 	// n’est pas renseigné. Or c’est ce header qui est utilisé par le robot
 	// pour répondre et non le champ from... Il faut modifier le destinataire
 	// comme ceci maliste-subscribe-lemail=ledomaine.tld@monsite.tld
-	if (defined('_ABOMAILMAN_ROBOT_EZMLM')) {
+	if (defined('_ABOMAILMAN_ROBOT_EZMLM') && preg_match("/subscribe/",$to_email)) {
 		$souscripteur = str_replace("@" , "=" , $email ) ;
 		$to_email = str_replace("@" , "-".$souscripteur."@" , $to_email ) ;
 	}
