@@ -1,8 +1,8 @@
 <script>
 // activer l'uploader
 (function($) {
-//	var url = '[(#VAL{crayons_upload}|generer_url_action{id=#ENV{id_article}&type=article})]';
-	var url = '#URL_SITE_SPIP/spip.php?action=crayons_upload&type=article&id=#ENV{id_article}';
+	var url = '[(#VAL{crayons_upload}|generer_url_action{id=#ENV{id_article}&type=article, true, true})]';
+
 	$('textarea.crayon-active,#uploader#ENV{id_article}')
 	.html5Uploader({
 		name: 'upss',
