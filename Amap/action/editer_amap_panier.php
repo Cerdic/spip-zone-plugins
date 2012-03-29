@@ -14,8 +14,6 @@ function action_editer_amap_panier_dist() {
 		}
 	$id_amap_panier = insert_amap_panier();
 	}
-
-	if ($id_amap_panier) $err = revision_amap_panier($id_amap_panier);
 	return array($id_amap_panier,$err);
 }
 
@@ -49,19 +47,4 @@ function insert_amap_panier() {
 	return $id_amap_panier;
 }
 
-
-// Enregistrer certaines modifications d'un amap_panier
-function revision_amap_panier($id_amap_panier, $c=false) {
-	
-	include_spip('inc/modifier');
-	$err = '';
-	// l'auteur
-	$id_auteur = _request('id_auteur');
-	// le producteur
-	$id_producteur = _request('id_producteur');
-	sql_updateq("spip_amap_paniers", array("id_auteur" => $id_auteur, "id_producteur" => $id_producteur), "id_amap_panier=$id_amap_panier") ;
-	spip_log("Le panier $id_amap_panier à l'auteur $id_producteur", "amap_installation");
-
-	return $err;
-}
 ?>

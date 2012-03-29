@@ -97,6 +97,9 @@ Je mets à disposition le panier du @date_distribution@, pour le récupérer sui
 	'producteur' => 'Producteur',
 	'producteurs' => 'Producteurs',
 
+	// Q
+	'qui_recupere_panier_disponible' => 'Qui récupère le panier disponible ?',
+
 	// R
 	'reste_panier_distribuer' => 'Il nous reste encore 1 panier à distribuer',
 	'reste_panier_recuperer' => 'Il vous reste encore 1 panier à recupérer',
