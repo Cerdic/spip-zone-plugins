@@ -22,7 +22,7 @@ function exec_association()
 		echo minipres();
 	} else {
 		onglets_association();
-		// Ipresentation du plugin
+		// presentation du plugin
 		echo propre(_T('asso:association_info_doc'));
 		// datation et raccourcis
 		if (autoriser('editer_profil', 'association')) {
@@ -38,14 +38,17 @@ function exec_association()
 				$res['destination_comptable'] = array('plan_compte.png', 'destination');
 		}
 		$res['exercices_budgetaires_titre'] = array('plan_compte.png', 'exercices');
-		
+
 		icones_association(array(), $res);
 
-		debut_cadre_association('annonce.gif', 'association_infos_contacts');
+		debut_cadre_association('asscoc_qui.png', 'association_infos_contacts');
 		echo '<div class="vcard" id="vcard-asso">';
 		// Profil de l'association
 		echo debut_cadre_formulaire('',true);
-		echo '<p class="fn org"><strong class="organization-name">'.$GLOBALS['association_metas']['nom']."</strong></p>\n";
+		if (!$GLOBALS['association_metas']['nom'] && autoriser('editer_profil', 'association')) { // c'est surement une nouvelle installation (vu que le nom est obligatoire)
+			echo '<a href="'.generer_url_ecrire('configurer_association').'">'. gros_titre(_T('asso:profil_de_lassociation'),'',false).'</a>';
+		}
+		echo '<h3 class="fn org"><strong class="organization-name">'.$GLOBALS['association_metas']['nom']."</strong></h3>\n";
 		echo '<p class="adr">';
 		echo '<span class="street-address">'.$GLOBALS['association_metas']['rue']."</span><br />\n";
 		echo '<span class="postal-code">'.$GLOBALS['association_metas']['cp'].'</span>&nbsp;';
@@ -78,13 +81,13 @@ function exec_association()
 		/* affiche tous les groupes devant l'etre */
 		$queryGroupesAffiches = sql_select('id_groupe, nom', 'spip_asso_groupes', 'affichage>0', '', 'affichage');
 		while ($row = sql_fetch($queryGroupesAffiches)) {
-			echo debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.'asscoc_qui.png', true);
 			echo '<div class="vcard" id="vcard-group'.$row['id_groupe'].'"><a class="include" href="#vcard-asso"></a>',
-			'<span class="fn org"><abbr class="organization-name" title="'.$GLOBALS['association_metas']['nom'].'"></abbr>'; // attention : l'inclusion de fragments (class=include cf. http://microformats.org/wiki/include-pattern) est la bonne methode, mais n'est pas encore prise en compte partout, donc on dupliqu quand meme le nom
-			echo '<a class="org organization-unit" title="'._T('asso:editer_groupe').'" href="'.generer_url_ecrire('edit_groupe', 'id='.$row['id_groupe']).'">'.gros_titre($row['nom'], '', false).'</a>';
-			echo '</span></div>';
+			'<span class="fn org"><abbr class="organization-name" title="'.$GLOBALS['association_metas']['nom'].'"></abbr>'; //!\ l'inclusion de fragments (class=include cf. http://microformats.org/wiki/include-pattern) est la bonne methode, mais n'est pas encore prise en compte partout, donc on duplique quand meme le nom
+			echo debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif', true, '', '<a class="org organization-unit" title="'._T('asso:editer_groupe').'" href="'.generer_url_ecrire('edit_groupe', 'id='.$row['id_groupe']).'">'.$row['nom'].'</a>');
+//			echo '<a class="org organization-unit" title="'._T('asso:editer_groupe').'" href="'.generer_url_ecrire('edit_groupe', 'id='.$row['id_groupe']).'">'.gros_titre($row['nom'], _DIR_PLUGIN_ASSOCIATION_ICONES.'annonce.gif', false).'</a>';
 			echo recuperer_fond('prive/contenu/voir_membres_groupe', array('id_groupe' => $row['id_groupe']));
 			echo fin_cadre_relief(true);
+			echo '</span></div>';
 		}
 		fin_page_association();
 		//Petite routine pour mettre a jour les statuts de cotisation "echu"

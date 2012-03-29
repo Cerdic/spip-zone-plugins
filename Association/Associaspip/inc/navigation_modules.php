@@ -20,7 +20,7 @@ function onglets_association($titre='', $INSERT_HEAD=TRUE)
 
 	/* onglet de retour a la page d'accueil */
 	if (autoriser('voir_profil', 'association')) {
-		$res .= onglet1_association('association', 'association', 'Association', 'annonce.gif');
+		$res .= onglet1_association('association', 'association', 'Association', 'asscoc_qui.png');
 	}
 
 	/* onglet de gestion des membres */
