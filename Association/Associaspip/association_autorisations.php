@@ -101,8 +101,11 @@ function autoriser_association_voir_profil_dist($faire, $type, $id, $qui, $opt) 
 	return is_in_groups($qui['id_auteur'], array(21,20)); // c'est le groupe 21 qui a le pouvoir de voir les informations de l'association, le 20 celui de les editer aussi
 }
 
-/* ceux qui peuvent voir les infos de l'association doivent avoir le bouton dans l'espace privé */
+/* ceux qui peuvent voir les infos de l'association doivent avoir le bouton dans l'espace privé avec l'interface normale ou plugin navigation prive(bando) */
 function autoriser_association_bouton_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser_association_voir_profil_dist($faire, $type, $id, $qui, $opt);
+}
+function autoriser_association_bando_bouton_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser_association_voir_profil_dist($faire, $type, $id, $qui, $opt);
 }
 

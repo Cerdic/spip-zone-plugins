@@ -57,6 +57,12 @@
 		<inclure>association_autorisations.php</inclure>
 	</pipeline>
 
+	<bouton id="association_bando" parent="bando_reactions">
+		<icone>img_pack/annonce.gif</icone>
+		<titre>Associaspip</titre>
+		<url>association</url>
+	</bouton>
+
 	<bouton id="association" parent="naviguer">
 		<icone>img_pack/annonce.gif</icone>
 		<titre>Associaspip</titre>	
