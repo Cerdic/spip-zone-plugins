@@ -1,0 +1,23 @@
+<plugin>
+	<nom>Squelette Californiumite</nom>
+	<slogan>Pour les sites de type blog</slogan>
+	<version>0.1</version>
+	<etat>test</etat>
+  	<auteur>[Sophie Legay (OpenStudio)->http://www.openstudio.fr/]), [d'apr&#233;s le th&#232;me Californiumite->http://www.paddsolutions.com/wpmag/californiumite/], [chez Padd Solutions->http://www.paddsolutions.com/]</auteur>
+  	<licence>GNU/GPL</licence>
+  	<description>
+	Un squelette 2 colonnes, gris. Con&#231;u pour fonctionner avec le th&#232;me du m&#234;me nom.
+  	</description>
+	<lien></lien>
+  	<icon>vignette.jpg</icon>
+	<prefix>squelette_californiumite</prefix>
+	<categorie>squelette</categorie>
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id="Z" version="[1.2.0;]" />
+	<utilise id="menus" />
+	<pipeline>
+  		<nom>insert_head</nom>
+  		<action>insertion_in_head</action>
+  		<inclure>squelette_californiumite_pipelines.php</inclure>
+ 	</pipeline>
+</plugin>

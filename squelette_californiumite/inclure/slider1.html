@@ -1,0 +1,37 @@
+<div id="slideshow-box">
+	<div class="list">
+		<BOUCLE_items(ARTICLES){titre_mot=slider1}>
+		<div class="item">
+			<div class="image">
+				<a href="#URL_ARTICLE" title="#TITRE>">
+					<BOUCLE_image(DOCUMENTS){id_article=#ID_ARTICLE}{mode=image}{doublons}>
+					[(#FICHIER|image_reduire{727,389})]
+					</BOUCLE_image>
+				</a>	
+			</div>
+			<div class="meta">
+				<h3><a href="#URL_ARTICLE" title="#TITRE>">#TITRE</a></h3>
+				<p>#INTRODUCTION{60}</p>
+			</div>
+			<div class="clear"></div>
+		</div>
+		</BOUCLE_items>
+		<BOUCLE_allitems(ARTICLES)>
+		<div class="item">
+			<div class="image">
+				<a href="#URL_ARTICLE" title="#TITRE>">
+					<BOUCLE_imagebis(DOCUMENTS){id_article=#ID_ARTICLE}{mode=image}{doublons}>
+					[(#FICHIER|image_reduire{727,389})]
+					</BOUCLE_imagebis>
+				</a>	
+			</div>
+			<div class="meta">
+				<h3><a href="#URL_ARTICLE" title="#TITRE>">#TITRE</a></h3>
+				<p>#INTRODUCTION{60}</p>
+			</div>
+			<div class="clear"></div>
+		</div>
+		</BOUCLE_allitems>
+		<//B_items>
+	</div>
+</div>

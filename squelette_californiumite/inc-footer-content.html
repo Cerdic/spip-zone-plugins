@@ -1,0 +1,21 @@
+[(#REM)	Liste les plus populaires ]
+<B_hitparade>
+<div class="padd-box padd-footer-popular-posts">
+	<h2><:californiumite:articles_populaires:></h2>
+	<div class="padd-interior">
+		<ul>
+			<BOUCLE_hitparade(ARTICLES){id_rubrique?}{!par popularite}{0,3}>
+				<li><span class="padd-wrap"><a href="#URL_ARTICLE">[(#TITRE)]</a>
+					<B_auteurhitparade>
+					<:californiumite:par:> 
+					<BOUCLE_auteurhitparade(AUTEURS){id_article}{', '}>#NOM</BOUCLE_auteurhitparade>
+					</B_auteurhitparade>
+					[(#POPULARITE|>{0}|oui) &#40;#POPULARITE %&#41;]
+				</span>
+				<div><p>#INTRODUCTION{130}</p>
+				</div></li>
+			</BOUCLE_hitparade>
+		</ul>
+	</div>
+</div>
+</B_hitparade>

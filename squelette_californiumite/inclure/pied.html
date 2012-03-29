@@ -1,0 +1,28 @@
+
+
+<div id="foot-wrap">
+	<INCLURE{fond=inc-footer-content,id_rubrique}>
+	<div class="form-wrap">
+		<h2><:californiumite:contact:></h2>
+		<div class="contact-form">
+		<BOUCLE_contact(AUTEURS){id_auteur=1}>
+        	#FORMULAIRE_ECRIRE_AUTEUR
+		</BOUCLE_contact>
+		</div>
+	</div>
+</div>
+
+<div class="clear"></div>
+<div id="copyright-wrap">
+	<div id="copyright">
+		
+		<p class="copyright">Habillage visuel © <a href="http://www.paddsolutions.com/wpmag/californiumite/">Californiumite</a> / <a href="http://www.paddsolutions.com">Padd Solutions</a> sous Licence <a href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a></p>
+		<p class="infos_spip"><a href="http://www.spip.net/" title="<:site_realise_avec_spip:>"><img src="#CHEMIN{spip.png}" alt="SPIP" width="48" height="16" /></a>[
+(#SESSION{id_auteur}|oui)| <a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a>
+][(#SESSION{id_auteur}|non)| <a href="[(#URL_PAGE{login}|parametre_url{url,#SELF|parametre_url{url,''}})]" rel="nofollow" class='login_modal'><:lien_connecter:></a>][
+(#AUTORISER{ecrire})| <a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a>] |
+<a rel="contents" href="#URL_PAGE{plan}"><:plan_site:></a> |
+<a href="#URL_PAGE{backend}" rel="alternate" title="<:syndiquer_site:>"><img src="#CHEMIN{feed.png}" alt="<:icone_suivi_activite:>" width="16" height="16" />&nbsp;RSS&nbsp;2.0</a></p>
+<div class="clear"></div>
+	</div>
+</div>

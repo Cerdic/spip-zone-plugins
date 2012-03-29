@@ -1,0 +1,91 @@
+<div class="contenu-principal">
+	<div class="cartouche invisible">
+		<h1 class="h1 invisible">#NOM_SITE_SPIP</h1>
+	</div>
+
+	[<div id="descriptif_site_spip">(#DESCRIPTIF_SITE_SPIP)</div>]
+</div>
+
+[(#REM)Liste les 4 dernier articles qui ont le mot-clé icone ]
+<B_items>
+<div id="home-top-wrap">
+<div id="home-top">
+	<ul class="box-icone">
+		<BOUCLE_items(ARTICLES){titre_mot=icone}{0,4}>
+		<li class="entry-icone entry-icone-#COMPTEUR_BOUCLE">
+			<div>
+				#LOGO_ARTICLE
+				<h3><a href="#URL_ARTICLE">#TITRE</a></h3>
+				<p>#INTRODUCTION{120}</p>
+			</div>
+		</li>	 		
+		</BOUCLE_items>
+	</ul>
+</div>
+</div>
+<div class="clear"></div>
+</B_items>
+
+[(#REM) Liste les 10 derniers articles ayant pour mot-clé slider2 et ayant une image,
+	Si aucun article est dans ce cas, alors
+	Liste les 10 derniers articles ayant une image 
+	Si aucun article n'a d'image alors rien ]
+<B_articles1>
+<div id="main-wrap">
+<div id="main">
+<div id="primary-full">
+<div id="content">
+	<button class="prev carousel-button">«</button>
+	<button class="next carousel-button">»</button>
+	<div id="carousel-wrap">
+		<div id="carousel">
+			<ul class="box-category">
+				<BOUCLE_articles1(ARTICLES documents_liens documents){titre_mot=slider2}{par date}{0,10}{extension IN png,jpg,jpeg,gif}>
+				<li class="entry">
+					<div class="entry-thumbnail">					
+						<a href="#URL_ARTICLE" title="#TITRE>">
+							<BOUCLE_image(DOCUMENTS){id_article=#ID_ARTICLE}{mode=image}>
+							[(#FICHIER|image_recadre{225,245,center})]
+							</BOUCLE_image>
+						</a>		
+					</div>
+				</li>
+				</BOUCLE_articles1>
+			</ul>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</div>
+</B_articles1>
+<B_articles2>
+<div id="main-wrap">
+<div id="main">
+<div id="primary-full">
+<div id="content">
+	<button class="prev carousel-button">«</button>
+	<button class="next carousel-button">»</button>
+	<div id="carousel-wrap">
+		<div id="carousel">
+			<ul class="box-category">	
+				<BOUCLE_articles2(ARTICLES documents_liens documents){par date}{0,10}{extension IN png,jpg,jpeg,gif}>
+				<li class="entry">
+					<div class="entry-thumbnail">					
+						<a href="#URL_ARTICLE" title="#TITRE>">
+							<BOUCLE_image2(DOCUMENTS){id_article=#ID_ARTICLE}{mode=image}>
+							[(#FICHIER|image_recadre{225,245,center})]
+							</BOUCLE_image2>
+						</a>		
+					</div>
+				</li>
+				</BOUCLE_articles2>
+			</ul>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</div>
+</B_articles2>
+<//B_articles1>

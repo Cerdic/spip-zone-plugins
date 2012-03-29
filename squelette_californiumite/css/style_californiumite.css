@@ -1,0 +1,343 @@
+.sommaire .menu-conteneur {
+	display: block;
+	float: left;
+	width: 226px;
+	margin: 30px 0 0;
+}
+.sommaire .menu-conteneur ul li {
+	float: none;
+	margin: 0 0 0 1px;
+	height: 45px;
+	padding: 0
+}
+.sommaire .menu-conteneur ul ul li {
+	height: auto;
+}
+.sommaire .menu-conteneur ul li a {
+	padding: 0 32px 0 10px;
+	text-align: right;
+	border-radius: 3px 0 0 3px;
+	font-size: 30px;
+	line-height: 45px;
+}
+.sommaire .menu-conteneur ul li:hover ul{
+	margin: -45px 0 0 0;
+	left: 220px;
+	box-shadow: 7px 7px 0 rgba(0,0,0,0.35);
+}
+.sommaire .menu-conteneur ul li:hover ul li a {
+	font-size: 20px;
+}
+.sommaire .menu-conteneur ul li:hover ul li:hover ul {
+	margin-left: -45px;
+}
+
+
+
+
+/* slider 1 */
+
+.sommaire #slideshow-box {
+	display: block;
+	position: relative;
+	width: 727px;
+	height: 389px;
+	padding: 0;
+	background: black none;
+	border-radius: 3px;
+	overflow: hidden;
+	box-shadow: 7px 7px 0 rgba(0,0,0,0.35);
+}
+.sommaire #slideshow-box .item {
+	width: 727px;
+	height: 389px;
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+.sommaire #slideshow-box .item .image {
+	float: left;
+}
+.sommaire #slideshow-box .item .image a {
+	display: block;
+}
+.sommaire #slideshow-box .item img {
+	border: 0 none;
+	-webkit-border-radius: 3px;
+}
+.sommaire #slideshow-box .item .meta {
+	background: transparent url('img/bg-slideshow-meta.png');
+	width: 687px;
+	position: absolute;
+	bottom: 0;
+	color: white;
+	padding: 10px 20px 20px;
+	-webkit-border-radius: 0 0 3px 3px;
+}
+.sommaire #slideshow-box .item .meta h3 {
+	font: normal 20px/49px 'Nixie One', serif;
+	margin: 0;
+}
+.sommaire #slideshow-box .item .meta a {
+	text-decoration: none;
+	color: white;
+}
+.sommaire #slideshow-box .item .meta a:hover {
+	text-decoration: underline;
+}
+.sommaire #slideshow-box .item .meta p {
+	margin: 0;
+	font-size: 13px;
+}
+.sommaire #slideshow-controller {
+	position: absolute;
+	bottom: 33px;
+	right: 17px;
+	z-index: 999;
+	padding: 0;
+}
+.sommaire #slideshow-controller button {
+	background: url('img/button-transition.png') no-repeat -12px 0;
+	width: 10px;
+	height: 10px;
+	margin: 0 1px;
+	padding: 0;
+	overflow: hidden;
+	border: 0;
+}
+.sommaire #slideshow-controller button.jqc-active {
+	background-position: 0 0;
+}
+.sommaire #slideshow-controller button span {
+	display: none;
+}
+/* fin slider 1 */
+
+
+
+/* contenu de la page d'accueil */
+#home-top-wrap {
+	padding-top: 15px;
+}
+#home-top {
+	width: 960px;
+	margin: 0 auto;
+	padding: 0;
+}
+.box-icone {
+	list-style: none;
+	margin: 0;
+	padding:0;
+} 
+.entry-icone {
+	padding: 0;
+	float: left;
+	width: 240px;
+	background: transparent url('img/bg-home-cols.png') 0 71px no-repeat;
+	text-align: center
+}
+.entry-icone div {
+	padding: 0 20px;
+}
+.entry-icone-1 div {
+	padding-left: 0;
+}
+.entry-icone-4 {
+	background: none;
+}
+.entry-icone h3 {
+	font: normal 22px/30px 'Kaushan Script', cursive;
+	margin: 0 0 10px 0;
+	padding-top: 5px;
+	background-repeat: no-repeat;
+	background-position: 50% 0;
+}
+.entry-icone p {
+	margin: 0 0 1em;
+	font-size: 13px;
+	line-height: 20px;
+	color: #4B4B4B;
+}
+#main-wrap {
+	background: transparent url('img/bd-top.jpg') 0 12px repeat-x;
+}
+#main-wrap {
+	margin: 0 0 2px;
+	padding: 15px 0 0;
+}
+#main {
+	width: auto;
+	padding: 0;
+	background: transparent url('img/bg-dark.jpg');
+}
+#primary-full {
+	width: 960px;
+	margin: 0 auto;
+	position: relative;
+}
+#primary-full #content {
+	width: 100%;
+}
+.carousel-button {
+	position: absolute;
+	top: 150px;
+	width: 17px;
+	height: 30px;
+	text-indent: -99999px;
+	border: 0 none;
+	cursor: pointer;
+}
+.carousel-button.prev {
+	left: -30px;
+	background: transparent url('img/button-carousel-prev.png') 0 0 no-repeat;
+}
+.carousel-button.next {
+	right: -30px;
+	background: transparent url('img/button-carousel-next.png') 0 0 no-repeat;
+}
+
+#carousel-wrap {
+	overflow: hidden;
+}
+#carousel {
+	margin-left: -10px;
+}
+#carousel .box-category {
+	list-style: none;
+	margin: 0;
+	padding:0;
+}
+#carousel .box-category .entry {
+	margin: 39px 10px 37px;
+}
+#carousel .entry {
+	padding: 0;
+	margin: 0 0 3em 0;
+	float: left;
+}
+#carousel .entry-thumbnail  {
+	padding: 0;
+	margin:0;
+}
+#carousel .entry .entry-thumbnail a {
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+#carousel .entry .entry-thumbnail img {
+	display: block;
+	margin: 0;
+	padding: 0;
+	border-radius: 3px;
+	box-shadow:none;
+}
+
+#carousel .box-category .entry .entry-thumbnail img {
+	padding: 0;
+	border: 0 none;
+}
+/* fin contenu de la page d'accueil */
+
+
+.sommaire div#sidebar-wrap {
+	display: none;
+}
+
+
+/** Contact Form **/
+#footer .form-wrap{
+	float: right;
+	width: 541px;
+}
+#footer .form-wrap form {
+	padding: 20px 20px 15px;
+	background: #737373 none;
+	border-radius: 3px;
+}
+.contact-form legend {
+	display: none;
+}
+.contact-form label {
+	width: 130px;
+	float: left;
+	text-align: right;
+	margin: 0;
+	padding: 0 40px 0 0;
+	font-size: 12px;
+	line-height: 30px;
+	color: #fafafa;
+	font-weight: normal;
+}
+.contact-form .field {
+	display: block;
+	float: left;
+}
+.contact-form input,
+.contact-form textarea {
+	background: #fff none;
+	border: 0 none;
+	padding: 7px 5px;
+	width: 302px;
+	max-width: 302px;
+	font-size: 11px;
+	margin: 0;
+	border-radius: 3px;
+}
+.contact-form input {
+	height: 16px;
+	font-size: 12px;
+}
+.contact-form .form-submit {
+	margin: 0 0 0 150px;
+	padding: 0;
+}
+.contact-form .contact-form-contact {
+	height: auto;
+}
+.contact-form input[type="submit"] {
+	height: 30px;
+	margin: 0;
+	padding: 0;
+	display: block;
+	width: 302px;
+	border: 0 none;
+	margin-left: 170px;
+}
+.contact-form button span {
+	display: none;
+}
+
+#copyright-wrap {
+	padding: 0 0 27px;
+	font-size: 10px;
+}
+#copyright {
+	width: 900px;
+	margin: 0 auto;
+	padding: 10px 30px;
+	background: #373737 none;
+	border-radius: 3px;
+}
+
+#footer #copyright p {
+	display: block;
+	line-height: 18px;
+}
+#footer #copyright .infos_spip {
+	float: left;
+}
+#footer #copyright .infos_spip,
+#footer #copyright .infos_spip a {
+	color: #B2B1B1;
+}
+#footer #copyright .copyright {
+	float: right;
+}
+#footer #copyright .copyright, 
+#footer #copyright .copyright a{
+	color: #606060;
+}
+/* Fin Footer */
+
+
