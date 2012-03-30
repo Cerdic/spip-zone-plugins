@@ -1,7 +1,7 @@
 <paquet
 	prefix="mll"
 	categorie="navigation"
-	version="1.1.5"
+	version="1.1.6"
 	etat="test"
 	compatibilite="[2.0.10;3.0.*]"
 	logo="prive/themes/spip/images/world_link-32.png"
@@ -11,10 +11,10 @@
 	<!-- Afficher les langues sous forme de liens cliquables -->
 	<auteur lien="http://www.spip-contrib.net/_Jacques-PYRAT_">Jacques</auteur>
 	<auteur>Jean-Baptiste Pressac</auteur>
-	<auteur>kent1</auteur>
+	<auteur lien="http://www.kent1.info">kent1</auteur>
 	<auteur>Cédric Morin</auteur>
 	<credit lien="http://www.fatcow.com/free-icons">icône par FatCow</credit>
-	<copyright>2009</copyright>
+	<copyright>2009-2012</copyright>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 	<pipeline nom="insert_head_css" inclure="mll_pipelines.php" />
 	<necessite nom="spip_bonux" compatibilite="[3.0.0-dev;[" />
