@@ -152,7 +152,7 @@ function multilang_inserer_head($config=array()){
 						var pos_bas = menu_lang.offset().top+menu_lang.height();
 						if(($(window).scrollTop() >= limite_multilang) && (pos_bas <= limite_bas) && ($(window).scrollTop() < limite_bas)){
 							if(!menu_lang.hasClass("menu_lang_flottant"))
-								menu_lang.addClass("menu_lang_flottant")
+								menu_lang.addClass("menu_lang_flottant");
 							menu_lang.css({"position": "fixed", "top": 0, "width": menu_lang_width+"px","z-index":"999"});
 						}
 						if(($(window).scrollTop() < limite_multilang)||(pos_bas > limite_bas) )
