@@ -240,15 +240,15 @@ foreach($langues as $langue){
 			$capacites = array();
 			foreach ($oi -> Capacites -> CapacitesPrestations as $presta_capacite){
 				foreach($presta_capacite -> DetailCapacitePrestation as $val){
-					if ($val['utilise'] == 'O'){
+					// if ($val['utilise'] == 'O'){
 						$details = '';
 						foreach($val -> Capacite as $capa){
 							if ($capa > 0)
-								$details .= $capa.' '.strtolower(substr($capa['libelle'],0,1)).'. ';
+								$details .= $capa.strtolower(substr($capa['libelle'],0,1)).'. ';
 						}
 						if ($details)
-							ajoute_si_present($capacites, $val['libelle'].': '.$details);
-					}
+							ajoute_si_present($capacites, $val['libelle'].':&nbsp;'.$details);
+					// }
 				}
 			}
 			$objet_details['capacites'] = serialize_non_vide($capacites);
