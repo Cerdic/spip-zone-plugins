@@ -25,6 +25,9 @@
 	<li><:sitra:obj_reservation_url:> : [(#RESERVATION_URL|sitra_expand_liste)]</li>
 </ul>
 </dd>
+<B_a><dd><strong><:sitra:langues_disponibles:></strong><ul>
+<BOUCLE_a (SITRA_OBJETS_DETAILS){id_sitra}>[<li>(#LANG)[ - (#TITRE_LANG)]</li>]</BOUCLE_a>
+</ul></dd></B_a>
 <B_b><dd style="overflow: hidden"><strong><:sitra:images_principales_ou_secondaires:></strong><br />
 <BOUCLE_b (SITRA_DOCS){id_sitra}{type_doc IN principale,secondaire,logo}>
 	[<dl class="spip_documents spip_documents_left" style="float: left; width: 120px;">
