@@ -140,7 +140,7 @@ function SelecteurGenerique_inserer_mot() {
 								.attr('name', 'old_value')
 								.parents('form')
 								.append(
-									$("<input type='hidden' name='nouv_mot' value='"+ui.item.result[2]+"' />")
+									$("<input type='hidden' name='nouv_mot' value='"+ui.item.result+"' />")
 								).find('input[type=submit]')
 								.click()
 								.end();
