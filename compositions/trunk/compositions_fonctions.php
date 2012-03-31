@@ -251,6 +251,8 @@ function compositions_determiner($type, $id, $serveur='', $etoile = false){
 		$select = "composition";
 		if (isset($desc['field']['id_rubrique']))
 			$select .= "," . (($type == 'rubrique') ? 'id_parent' : 'id_rubrique as id_parent');
+		if (isset($desc['field']['id_groupe']))
+			$select .= "," . 'id_groupe as id_parent';
 		$row = sql_fetsel($select, $table_sql, "$_id_table=".intval($id), '', '', '', '', $serveur);
 		if ($row['composition'] != '')
 			$retour = $row['composition'];
@@ -264,6 +266,7 @@ function compositions_determiner($type, $id, $serveur='', $etoile = false){
 
 /**
  * Renvoie la composition heritee par un objet selon sa rubrique
+ * ou son groupe de mot-cles
  *
  * @param string $type
  * @param integer $id_rubrique
@@ -276,22 +279,35 @@ function compositions_heriter($type, $id_rubrique, $serveur=''){
 	static $infos = null;
 	$id_parent = $id_rubrique;
 	$compo_rubrique = '';
-	do {
-		$row = sql_fetsel(array('id_parent','composition'),'spip_rubriques','id_rubrique='.intval($id_parent),'','','','',$serveur);
-		if (strlen($row['composition']) AND $row['composition']!='-')
-			$compo_rubrique = $row['composition'];
-		elseif (strlen($row['composition'])==0) // il faut aussi verifier que la rub parente n'herite pas elle-meme d'une composition
-			$compo_rubrique = compositions_determiner('rubrique', $id_parent, $serveur='');
-		
-		if (strlen($compo_rubrique) AND is_null($infos))
-			$infos = compositions_lister_disponibles('rubrique');
-	}
-	while ($id_parent = $row['id_parent']
-		AND
-		(!strlen($compo_rubrique) OR !isset($infos['rubrique'][$compo_rubrique]['branche'][$type])));
+	if (in_array($type, array('article', 'rubrique', 'site'))) {
+		do {
+			$row = sql_fetsel(array('id_parent','composition'),'spip_rubriques','id_rubrique='.intval($id_parent),'','','','',$serveur);
+			if (strlen($row['composition']) AND $row['composition']!='-')
+				$compo_rubrique = $row['composition'];
+			elseif (strlen($row['composition'])==0) // il faut aussi verifier que la rub parente n'herite pas elle-meme d'une composition
+				$compo_rubrique = compositions_determiner('rubrique', $id_parent, $serveur='');
+			
+			if (strlen($compo_rubrique) AND is_null($infos))
+				$infos = compositions_lister_disponibles('rubrique');
+		}
+		while ($id_parent = $row['id_parent']
+			AND
+			(!strlen($compo_rubrique) OR !isset($infos['rubrique'][$compo_rubrique]['branche'][$type])));
 
-	if (strlen($compo_rubrique) AND isset($infos['rubrique'][$compo_rubrique]['branche'][$type]))
-		return $infos['rubrique'][$compo_rubrique]['branche'][$type];
+		if (strlen($compo_rubrique) AND isset($infos['rubrique'][$compo_rubrique]['branche'][$type]))
+			return $infos['rubrique'][$compo_rubrique]['branche'][$type];
+	}
+	elseif ($type == 'mot') {
+		$row = sql_fetsel(array('composition'),'spip_groupes_mots','id_groupe='.intval($id_parent),'','','','',$serveur);
+		if (strlen($row['composition']) AND $row['composition']!='-')
+			$compo_groupe = $row['composition'];
+			
+		if (strlen($compo_groupe) AND is_null($infos))
+			$infos = compositions_lister_disponibles('groupe_mots');
+
+		if (strlen($compo_groupe) AND isset($infos['groupe_mots'][$compo_groupe]['branche'][$type])) {
+			return $infos['groupe_mots'][$compo_groupe]['branche'][$type];	}	
+	}
 
 	return '';
 }
