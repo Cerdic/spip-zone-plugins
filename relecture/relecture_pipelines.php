@@ -13,17 +13,23 @@ function relecture_ajouter_onglets($flux) {
 
 
 /**
- * Affichage des blocs lies aux relectures
+ * Affichage du bloc lie aux relectures de l'article en cours d'affichage
+ *
+ * @param array $flux
+ * @return array
  *
 **/
-function relecture_affiche_gauche($flux) {
+function relecture_affiche_droite($flux) {
 
-	if ($flux['args']['exec'] == 'article'){
-		$flux['data'] .= recuperer_fond('prive/squelettes/extra/relectures', array(
-				'id_article' => $flux['args']['id_article']
-			));
+	if (($type = $flux['args']['exec'])=='article'){
+		$id = $flux['args']['id_article'];
+		$table = table_objet($type);
+		$id_table_objet = id_table_objet($type);
+
+		$flux['data'] .= recuperer_fond('prive/squelettes/extra/article_relectures', array($id_table_objet => $id));
 	}
 
 	return $flux;
 }
+
 ?>

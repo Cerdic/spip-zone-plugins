@@ -18,11 +18,11 @@ function relecture_declarer_tables_objets_sql($tables) {
 			"relecteurs"	=> "text DEFAULT '' NOT NULL", //tableau serialise des id d'auteurs
 			"description"	=> "text DEFAULT '' NOT NULL",
 			"id_article"	=> "bigint(21) NOT NULL",
+			"rev_ouverture" => "bigint(21) NOT NULL",
 			"article_descr"	=> "text DEFAULT '' NOT NULL",
 			"article_chapo"	=> "mediumtext DEFAULT '' NOT NULL",
 			"article_texte"	=> "longtext DEFAULT '' NOT NULL",
 			"article_ps"	=> "mediumtext DEFAULT '' NOT NULL",
-			"rev_ouverture" => "bigint(21) NOT NULL",
 			"etat"			=> "varchar(10) DEFAULT '' NOT NULL",
 			"date_cloture"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 			"rev_cloture"	=> "bigint(21) NOT NULL",

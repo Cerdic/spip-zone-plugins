@@ -20,7 +20,6 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/relecture_declarations.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/relecture_declarations.php" />
 	<pipeline nom="autoriser" inclure="relecture_autorisations.php" />
-	<pipeline nom="affiche_gauche" inclure="relecture_pipelines.php" />
-	<pipeline nom="afficher_contenu_objet" inclure="relecture_pipelines.php" />
+	<pipeline nom="affiche_droite" inclure="relecture_pipelines.php" />
 
 </paquet>

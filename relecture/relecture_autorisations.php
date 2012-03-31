@@ -29,7 +29,23 @@ function autoriser_article_ouvrirrelecture_dist($faire, $type, $id, $qui, $opt) 
 	$where = array("id_article=$id", "etat=" . sql_quote('ouverte'));
 	$nb_relecture_ouverte = sql_countsel($from, $where);
 
-	return (in_array($qui, $les_auteurs) AND ($nb_relecture_ouverte==0));
+	return (in_array($qui['id_auteur'], $les_auteurs) AND ($nb_relecture_ouverte==0));
+}
+
+
+/**
+ * Autorisation d'affichage d'une fiche relecture
+ *
+ * @param object $faire
+ * @param object $type
+ * @param object $id
+ * @param object $qui
+ * @param object $opt
+ * @return
+ */
+function autoriser_relecture_voir_dist($faire, $type, $id, $qui, $opt) {
+
+	return true;
 }
 
 
