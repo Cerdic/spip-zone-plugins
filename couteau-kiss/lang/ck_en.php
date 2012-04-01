@@ -8,56 +8,56 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_cache_taille_mini' => 'Le cache ne peut avoir une taille inférieure &agrave 10Mo', # NEW
-	'erreur_dossier_squelette_invalide' => 'Le dossier squelette ne peut pas être un chemin absolu ni contenir de référence <tt>../</tt>', # NEW
-	'explication_dossier_squelettes' => 'Vous pouvez indiquer plusieurs répertoires séparés par \':\', qui seront pris dans l\'ordre. Le répertoire intitulé "<tt>squelettes</tt>" est toujours pris en dernier si il existe.', # NEW
-	'explication_image_seuil_document' => 'Les images téléchargées peuvent être automatiquement passées en mode document au dela d\'une largeur prédéfinie', # NEW
-	'explication_introduction_suite' => 'Les points de suite sont ajoutés par la balise <tt>#INTRODUCTION</tt> lorsqu\'elle coupe un texte. Par défaut <tt> (...)</tt>', # NEW
+	'erreur_cache_taille_mini' => 'The cache can\'t be smaller than 10MB',
+	'erreur_dossier_squelette_invalide' => 'The skeleton folder can\'t be an absolute path or contain reference <tt>../</tt>',
+	'explication_dossier_squelettes' => 'You can specify multiple directories separated by \':\', they will be taken in order. The directory named"<tt>squelettes</tt>" is always taken in the last position if it exists.',
+	'explication_image_seuil_document' => 'Uploaded images can be automatically placed in the document mode beyond a predefined width',
+	'explication_introduction_suite' => 'Dot leaders are added by the tag <tt>#INTRODUCTION</tt> when cutting a text. Default <tt> (...)</tt>',
 
 	// L
 	'label_cache_duree' => 'Cache duraction (s)',
 	'label_cache_duree_recherche' => 'Search cache duration (s)',
 	'label_cache_strategie' => 'Cache strategy',
 	'label_cache_strategie_jamais' => 'No cache (this option will be canceled after 24 h)',
-	'label_cache_strategie_normale' => 'Cache a durée limitée', # NEW
-	'label_cache_strategie_permanent' => 'Cache a durée illimitée', # NEW
+	'label_cache_strategie_normale' => 'Limited duration cache',
+	'label_cache_strategie_permanent' => 'Unlimited duration cache',
 	'label_cache_taille' => 'Cache size (Mb)',
 	'label_compacte_head_ecrire' => 'Always compress CSS and javascript',
-	'label_derniere_modif_invalide' => 'Mettre à jour le cache à chaque nouvelle publication', # NEW
-	'label_docs_seuils' => 'Limiter la taille des documents lors du téléchargement', # NEW
+	'label_derniere_modif_invalide' => 'Update the cache for each new publication',
+	'label_docs_seuils' => 'Limit the documents size when uploading',
 	'label_dossier_squelettes' => '<tt>squelettes</tt> directory',
-	'label_forcer_lang' => 'Forcer la langue de l\'url ou du visiteur (<tt>$forcer_lang</tt>)', # NEW
+	'label_forcer_lang' => 'Force the language of the url or the visitor (<tt>$forcer_lang</tt>)',
 	'label_image_seuil_document' => 'Images width in document mode',
 	'label_imgs_seuils' => 'Limit the size of images during the upload',
-	'label_inhiber_javascript_ecrire' => 'Désactiver le javascript dans les articles', # NEW
-	'label_introduction_suite' => 'Points de suite', # NEW
-	'label_logo_seuils' => 'Limiter la taille des logos lors du téléchargement', # NEW
+	'label_inhiber_javascript_ecrire' => 'Disable javascript in articles',
+	'label_introduction_suite' => 'Dot leaders',
+	'label_logo_seuils' => 'Limit the logos size when uploading',
 	'label_longueur_login_mini' => 'Minimal length of logins',
 	'label_max_height' => 'Maximal height (pixel)',
 	'label_max_size' => 'Maximal size (kb)',
 	'label_max_width' => 'Maximale width (pixel)',
 	'label_nb_objets_tranches' => 'Number of objects in the lists',
-	'label_no_set_html_base' => 'Pas d\'ajout automatique de <tt>&lt;base href="..."&gt;</tt>', # NEW
+	'label_no_set_html_base' => 'No automatic addition of <tt>&lt;base href="..."&gt;</tt>',
 	'label_options_ecrire_perfo' => 'Performance',
 	'label_options_ecrire_secu' => 'Security',
 	'label_options_skel' => 'Pages processing',
-	'label_options_typo' => 'Traitements des textes', # NEW
-	'label_supprimer_numero' => 'Supprimer automatiquement les numéros des titres', # NEW
-	'label_toujours_paragrapher' => 'Encapsuler tous les paragraphes dans un <tt>&lt;p&gt;</tt> (même les texte constitués d\'un seul paragraphe)', # NEW
+	'label_options_typo' => 'Texts processing',
+	'label_supprimer_numero' => 'Automatically delete the numbers of titles',
+	'label_toujours_paragrapher' => 'Wrap all paragraphs in a <tt><p></tt> (even the texts consisting of a single paragraph)',
 	'legend_cache_controle' => 'Cache control',
 	'legend_espace_prive' => 'Private space',
 	'legend_image_documents' => 'Images and documents',
 	'legend_site_public' => 'Public site ',
 
 	// M
-	'message_ok' => 'Vos réglages ont été pris en compte et enregistrés dans le fichier <tt>@file@</tt>. Ils sont maintenant appliqués.', # NEW
+	'message_ok' => 'Your settings have been taken into account and stored in the <tt>@file@</tt> file. They are now applied.',
 
 	// T
-	'texte_boite_info' => 'Cette page vous permet de configurer facilement les réglages cachés de SPIP.
+	'texte_boite_info' => 'This page allows you to easily configure the hidden settings of SPIP.
 
-Si vous forcez certains réglages dans votre fichier <tt>config/mes_options.php</tt>, ce formulaire sera sans effet sur ceux-ci.
+If you force some settings in your <tt>config/mes_options.php</tt> file, this form won\'t affect them.
 
-Quand vous aurez terminé la configuration de votre site, vous pourrez, si vous le souhaitez, copier-coller le contenu du fichier <tt>tmp/ck_options</tt> dans <tt>config/mes_options.php</tt> avant de désinstaller ce plugin qui ne sera plus utile.', # NEW
+When you finish configuring your website, you can, if you wish, copy and paste the content of <tt>tmp/ck_options</tt> in <tt>config/mes_options.php</tt> before uninstalling this plugin which will no longer be useful.',
 	'titre_page_couteau' => 'KISS knife'
 );
 
