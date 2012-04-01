@@ -11,6 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 	'bouton_ouvrir_relecture' => 'Ouvrir un cycle de relecture',
+	'bouton_historique_relectures' => 'Afficher les relectures clôturées',
+
+// T
+	'titre_info_relecture_article' => 'Relecture en cours',
 
 );
 ?>

@@ -9,5 +9,15 @@
 ]
 
 [(#REM) <!-- Information sur la relecture en cours --> ]
+<BOUCLE_relecture_en_cours(RELECTURES){id_article}{etat=ouverte}>
+[(#AUTORISER{voir, relecture, #ID_RELECTURE})
+	#BOITE_OUVRIR{'', info}
+	<div class="infos">
+		<div class="numero"><:relecture:titre_info_relecture_article:></div>
+		[(#PERIODE_FIN|affdate_court)], #REV_OUVERTURE
+	</div>
+	#BOITE_FERMER
+]
+</BOUCLE_relecture_en_cours>
 
 [(#REM) <!-- Liste des relectures closes --> ]
