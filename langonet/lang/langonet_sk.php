@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_rechercher_item' => 'Táto možnosť vám umožňuje vyhľadať jazykové položky vo všetkých  jazykových súboroch na stránke. Kvôli výkonu boli zoskenované len francúzske jazykové súbory.',
 	'info_rechercher_texte' => 'Táto možnosť vám umožňuje vyhľadať jazykové položky pomocou ich francúzskeho prekladu v jazykových súboroch  SPIPu <em>ecrire_fr,</em> <em>public_fr</em> a <em>spip_fr.</em> Cieľom vyhľadávanie je pred vytvorením textu skontrolovať, či rovnaký text už v SPIPe neexistuje.',
 	'info_table' => 'Nižšie môžete vidieť abecedný zoznam jazykových položiek súboru <em>"@langue@"</em> (@total@). V každom bloku sú zobrazené položky, ktoré sa začínajú na rovnaké písmeno, skratka tučným písmom a za ňou text. Ak nad začiatočným písmenom prejdete myšou, zobrazí sa príslušný zoznam.',
-	'info_verifier' => 'Cette option vous permet, d\'une part,  de vérifier les fichiers de langue d\'un module donné sous deux angles complémentaires. Il est possible, soit de vérifier si des items de langue utilisés dans un groupe de fichiers (un plugin, par exemple) ne sont pas définis dans le fichier de langue idoine, soit que certains items de langue définis ne sont plus utilisés. <br />D\'autre part, il est possible de lister et de corriger toutes les utilisations de la fonction _L() dans les fichiers PHP d\'une arborescence donnée.', # NEW
+	'info_verifier' => 'Táto možnosť vám na jednej strane umožňuje porovnať dve alternatívy v jazykových súboroch modulu. Môžete buď skontrolovať, či jazykové položky, ktoré sa používajú v niekoľkých jazykových súboroch (napríklad v zásuvnom module), sú definované v správnom jazykovom súbore, alebo či sa všetky definované položky stále používajú.<br />Okrem toho si môžete nechať vypísať a opraviť všetky prípady použitia funkcie _L() v súboroch PHP danej stromovej štruktúry.',
 
 	// L
 	'label_arborescence_scannee' => 'Stromová štruktúra, ktorú treba naskenovať',
@@ -91,7 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ',
 	'message_ok_fichier_genere' => 'Jazykový súbor "<em>@langue@</em>" modulu "<em>@module@</em>" bol vytvorený správne.<br />Súbor môžete získať "<em>@fichier@</em>".',
 	'message_ok_fichier_log' => 'Kontrola bola úspešne ukončená. Výsledky si môžete pozrieť vo formulári, ktorý sa nachádza nižšie.<br />Na uloženie týchto výsledkov bol vytvorený súbor <em>"@log_fichier@".</em>',
-	'message_ok_fichier_log_script' => 'La vérification s\'est correctement déroulée. Vous pouvez consultez les résultats plus bas dans le formulaire.<br />Le fichier «<em>@log_fichier@</em>» a été créé pour sauvegarder ces résultats ainsi que le fichier des commandes de remplacement _L en _T, «<em>@script@</em>».', # NEW
+	'message_ok_fichier_log_script' => 'Kontrola bola úspešne dokončená. Jej výsledky môžete vidieť vo formulári, ktorý sa nachádza nižšie. <br />Na uloženie týchto výsledkov bol vytvorený súbor <em>"@log_fichier@",</em> ako aj súbor <em>"@script@"</em> s príkazmi na nahradenie _L za _T. ',
 	'message_ok_fonction_l_0' => 'V priečinku <em>@ou_fichier@</em> nebol zistený žiaden prípad použitia funkcie _L() v súboroch PHP.',
 	'message_ok_fonction_l_1' => 'Keď sa v súboroch PHP priečinka <em>"@ou_fichier@"</em> zistí jedno použitie funkcie _L():',
 	'message_ok_fonction_l_n' => 'V súboroch PHP v priečinku <em>@ou_fichier@</em> bol nájdený @nberr@ prípad použitia funkcie _L():',
@@ -102,22 +102,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_item_trouve_contient_n' => 'Les @sous_total@ položiek obsahuje celý hľadaný reťazec:',
 	'message_ok_item_trouve_egal_1' => 'Jazyková položka presne zodpovedá vyhľadávanému reťazcu:',
 	'message_ok_item_trouve_egal_n' => 'Hľadanému reťazcu zodpovedá @sous_total@ položiek:',
-	'message_ok_non_definis_0' => 'Tous les items de langue du module «<em>@module@</em>» utilisés dans les fichiers du répertoire «<em>@ou_fichier@</em>» sont bien définis dans le fichier de langue «<em>@langue@</em>».', # NEW
-	'message_ok_non_definis_1' => 'L\'item de langue du module «<em>@module@</em>» affiché ci-dessous est utilisé dans des fichiers du répertoire «<em>@ou_fichier@</em>» mais n\'est pas défini dans le fichier de langue «<em>@langue@</em>» :', # NEW
-	'message_ok_non_definis_n' => 'Les @nberr@ items de langue du module «<em>@module@</em>» affichés ci-dessous sont utilisés dans des fichiers du répertoire «<em>@ou_fichier@</em>» mais ne sont pas définis dans le fichier de langue «<em>@langue@</em>» :', # NEW
+	'message_ok_non_definis_0' => 'Všetky jazykové položky modulu <em>"@module@",</em> ktoré sa používajú v súboroch priečinka <em>"@ou_fichier@",</em> sú správne definované v jazykovom súbore <em>"@langue@".</em>',
+	'message_ok_non_definis_1' => 'Táto jazyková položka modulu <em>"@module@"</em> sa používa v súboroch priečinka <em>"@ou_fichier@",</em> ale nie je definovaná v jazykovom súbore <em>"@langue@":</em>',
+	'message_ok_non_definis_n' => '@nberr@ jazykových položiek modulu <em>"@module@"</em> uvedených nižšie sa používa v súboroch <em>"@ou_fichier@",</em> nie sú však definované v jazykovom súbore <em>"@langue@":</em>',
 	'message_ok_non_utilises_0' => 'Všetky jazykové položky definované v jazykovom súbore <em>"@langue@"</em> sa správne používajú v súboroch priečinka <em>"@ou_fichier@".</em>',
-	'message_ok_non_utilises_1' => 'L\'item de langue ci-dessous est bien défini dans le fichier de langue «<em>@langue@</em>», mais n\'est pas utilisé dans les fichiers du répertoire «<em>@ou_fichier@</em>» :', # NEW
-	'message_ok_non_utilises_n' => 'Les @nberr@ items de langue ci-dessous sont bien définis dans le fichier de langue «<em>@langue@</em>», mais ne sont pas utilisés dans les fichiers du répertoire «<em>@ou_fichier@</em>» :', # NEW
+	'message_ok_non_utilises_1' => 'Táto jazyková položka je správne definovaná v jazykovom súbore <em>"@langue@",</em> ale nepoužíva sa v súboroch priečinka <em>"@ou_fichier@":</em> ',
+	'message_ok_non_utilises_n' => 'Týchto @nberr@ jazykových položiek je správne definovaných v jazykovom súbore  <em>"@langue@",</em> ale nepoužíva sa v súboroch priečinka <em>"@ou_fichier@":</em>',
 	'message_ok_nonmais_definis_0' => 'Súbory priečinka "<em>@ou_fichier@</em>" nepoužívajú žiadnu jazykovú položku, ktorá je správne definovaná v inom module ako "<em>@module@</em>".',
 	'message_ok_nonmais_definis_1' => 'Táto jazyková položka sa správne používa v súboroch priečinka <em>"@ou_fichier@",</em> ale je definovaná v inom module ako <em>"@module@".</em> Môžete to skontrolovať:',
-	'message_ok_nonmais_definis_n' => 'Les @nberr@ items de langue ci-dessous sont utilisés correctement dans des fichiers du répertoire «<em>@ou_fichier@</em>» mais sont définis dans un autre module que «<em>@module@</em>». Nous vous invitons à les vérifier un par un :', # NEW
+	'message_ok_nonmais_definis_n' => 'Týchto @nberr@ jazykových položiek sa správne používa v súboroch priečinka <em>"@ou_fichier@",</em> ale tieto položky sú definované v inom module ako <em>"@module@".</em> Môžete to skontrolovať:',
 	'message_ok_nonmaisnok_definis_0' => 'Súbory priečinka "<em>@ou_fichier@</em>" nepoužívajú nesprávne žiadnu jazykovú položku definované v inom module ako "<em>@module@</em>".',
-	'message_ok_nonmaisnok_definis_1' => 'L\'item de langue ci-dessous est utilisé dans des fichiers du répertoire «<em>@ou_fichier@</em>» mais pas comme un item du module «<em>@module@</em>». Etant donné qu\'il n\'est pas défini dans son module de rattachement, nous vous invitons à le vérifier :', # NEW
-	'message_ok_nonmaisnok_definis_n' => 'Les @nberr@ items de langue ci-dessous sont utilisés dans des fichiers du répertoire «<em>@ou_fichier@</em>» mais pas comme des items du module «<em>@module@</em>». Etant donné qu\'ils ne sont pas définis dans leur module de rattachement, nous vous invitons à les vérifier un par un :', # NEW
+	'message_ok_nonmaisnok_definis_1' => 'Táto jazyková položka sa používa v súboroch priečinka <em>"@ou_fichier@",</em> ale nie ako položka modulu <em>"@module@".</em> Keďže táto položka nie je definovaná v prílohe k svojmu modulu, skontrolujte ju, prosím:',
+	'message_ok_nonmaisnok_definis_n' => 'Týchto @nberr@ jazykových položiek sa používa v súboroch priečinka <em>"@ou_fichier@",</em> ale tieto položky sa nepoužívajú ako položky modulu <em>"@module@".</em> Keďže nie sú definované v prílohe k svojmu modulu, každú z nich, prosím, skontrolujte:',
 	'message_ok_table_creee' => 'Tabuľka položiek jazykového súboru @langue@ bola úspešne vytvorená.',
 	'message_ok_utilises_incertains_0' => 'V celom kontexte sa nepoužíva žiadna jazyková položka (napríklad:  _T(\'@module@:item_\'.$variable)).',
 	'message_ok_utilises_incertains_1' => 'Jazyková položka sa možno používa v celom kontexte. Pozývame vás, aby ste to skontrolovali:',
-	'message_ok_utilises_incertains_n' => 'Les @nberr@ items de langue ci-dessous sont peut-être utilisés dans un contexte complexe. Nous vous invitons à les vérifier un par un :', # NEW
+	'message_ok_utilises_incertains_n' => '@nberr@ týchto jazykových položiek sa možno používa v ucelenom kontexte. Môžete to skontrolovať:',
 
 	// O
 	'onglet_generer' => 'Vytvoriť jazyk',
