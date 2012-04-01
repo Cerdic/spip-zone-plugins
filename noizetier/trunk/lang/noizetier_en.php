@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_bloc_contenu' => 'Main content of each page.',
-	'description_bloc_extra' => 'Informations extra contextuelles pour chaque page.', # NEW
+	'description_bloc_extra' => 'Contextual extra information for each page.',
 	'description_bloc_navigation' => 'Navigation information specific to each page.',
 	'description_bloctexte' => 'The title is optional. For the text, you can use SPIP typographical shortcuts.',
 
@@ -46,7 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_deplacer_haut' => 'Move up',
 	'formulaire_description' => 'Description',
 	'formulaire_description_explication' => 'You can use SPIP usual shortcuts, especially the &lt;multi&gt; tag.',
-	'formulaire_erreur_format_identifiant' => 'L\'identifiant ne peut contenir que des minuscules sans accent, des chiffres et le caractère _ (underscore).', # NEW
+	'formulaire_erreur_format_identifiant' => 'The identifier can only contain lowercase letters without accents, numbers and the "_" (underscore) character.',
 	'formulaire_icon' => 'Icon',
 	'formulaire_icon_explication' => 'Vous pouvez saisir le chemin relatif vers une icône (par exemple : <i>images/objet-liste-contenus.png</i>). Pour voir une liste d\'images installèes dans les répertoires les plus courants, vous pouvez <a href="../spip.php?page=icones_preview">consulter cette page</a>.', # NEW
 	'formulaire_identifiant_deja_pris' => 'This identifier already exists!',
