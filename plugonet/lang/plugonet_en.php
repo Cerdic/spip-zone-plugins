@@ -16,16 +16,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'details_generation_paquetxml_erreur' => 'The paquet.xml of the plugin listed below has not been generated because of errors occurred during generation. Please see the information below to make the necessary corrections.',
 	'details_generation_paquetxml_erreur_pluriel' => 'The paquet.xml of the @nb@ plugins listed below were not generated because of errors occurred during generation. Please see the information below to make the necessary corrections.',
-	'details_generation_paquetxml_notice' => 'Le paquet.xml du plugin listé ci-après a été correctement généré mais son plugin.xml source contient des erreurs. Veuillez donc vérifier le plugin.xml et les fichiers résultant (paquet.xml, fichiers de langue) pour déterminer si des corrections doivent être apportées.', # NEW
-	'details_generation_paquetxml_notice_pluriel' => 'Les paquet.xml des @nb@ plugins listés ci-après ont été correctement générés mais leurs plugin.xml source contiennent des erreurs. Veuillez donc vérifier les plugin.xml et les fichiers résultant (paquet.xml, fichiers de langue) pour déterminer si des corrections doivent être apportées.', # NEW
+	'details_generation_paquetxml_notice' => 'The paquet.xml of the plugin listed below has been successfully created but its source plugin.xml contains errors. Please check the plugin.xml and the resulting files (paquet.xml, language files) to determine if corrections are necessary.',
+	'details_generation_paquetxml_notice_pluriel' => 'The paquet.xml of the @nb@ plugins listed below were successfully created but their plugin.xml source contain errors. Please check the plugin.xml and the resulting files (paquet.xml, language files) to determine if corrections are necessary.',
 	'details_generation_paquetxml_succes' => 'The paquet.xml of the plugin listed below has been generated correctly.',
-	'details_generation_paquetxml_succes_pluriel' => 'Les paquet.xml des @nb@ plugins listés ci-après ont été correctement générés.', # NEW
-	'details_validation_paquetxml_erreur' => 'La validation formelle du plugin.xml listé ci-dessous a révélé des erreurs. Veuillez consulter les informations ci-dessous pour apporter les corrections.', # NEW
-	'details_validation_paquetxml_erreur_pluriel' => 'La validation formelle des @nb@ plugin.xml listés ci-dessous a révélé des erreurs. Veuillez consulter les informations ci-dessous pour apporter des corrections.', # NEW
-	'details_validation_paquetxml_succes' => 'La validation formelle du plugin.xml listé ci-après n\'a révélé aucune erreur.', # NEW
-	'details_validation_paquetxml_succes_pluriel' => 'La validation formelle des @nb@ plugin.xml listés ci-après n\'a révélé aucune erreur.', # NEW
-	'details_verification_pluginxml_erreur' => 'La vérification du plugin.xml listé ci-dessous a révélé des erreurs. Veuillez consulter les informations ci-dessous pour apporter des corrections si besoin (toutes les erreurs liées à l\'utilisation de balise a, code, br... dans la description ne sont pas à considérer).', # NEW
-	'details_verification_pluginxml_erreur_pluriel' => 'La vérification des @nb@ plugin.xml listés ci-dessous a révélé des erreurs. Veuillez consulter les informations ci-dessous pour apporter des corrections si besoin (toutes les erreurs liées à l\'utilisation de balise a, code, br... dans la description ne sont pas à considérer).', # NEW
+	'details_generation_paquetxml_succes_pluriel' => 'The paquet.xml of the @nb@ plugins listed below were successfully created.',
+	'details_validation_paquetxml_erreur' => 'The formal validation of the plugin.xml listed below revealed errors. Please see the information below to make corrections.',
+	'details_validation_paquetxml_erreur_pluriel' => 'The formal validation of the @nb@ plugin.xml listed below revealed errors. Please see the information below to make corrections.',
+	'details_validation_paquetxml_succes' => 'The formal validation of the plugin.xml listed below showed no error.',
+	'details_validation_paquetxml_succes_pluriel' => 'The formal validation of the @nb@ plugin.xml listed below showed no error.',
+	'details_verification_pluginxml_erreur' => 'The verification of the plugin.xml listed below revealed errors. Please see the information below to make corrections if necessary (all errors related to the use of a, code, br tags... in the description are not to be considered).',
+	'details_verification_pluginxml_erreur_pluriel' => 'The verification of the @nb@ plugin.xml listed below revealed errors. Please see the information below to make corrections if necessary (all errors related to the use of a, code, br tags... in the description are not to be considered).',
 	'details_verification_pluginxml_succes' => 'The verification of the plugin.xml listed below revealed no mistake.',
 	'details_verification_pluginxml_succes_pluriel' => 'The verification of the @nb@ plugin.xml listed below revealed no mistake.',
 
@@ -48,14 +48,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'index_aide_paqxmlproc' => 'The <code>procure</code> tag',
 	'index_aide_paqxmlspip' => 'The <code>spip</code> tag',
 	'index_aide_paqxmltrad' => 'The <code>traduire</code> tag',
-	'info_choisir_paquetxml_valider' => 'Choisissez les fichiers paquet.xml que vous souhaitez valider. Vous pouvez aussi cliquer sur le nom d\'un paquet.xml pour lancer directement sa validation formelle.', # NEW
-	'info_choisir_pluginxml_generer' => 'Choisissez les fichiers que vous souhaitez convertir parmi ceux présents dans le dossier <code>plugins/</code> de ce site. Vous pouvez aussi cliquer sur le nom d\'un plugin.xml pour lancer directement la génération forcée de son paquet.xml dans le dossier temporaire du site.', # NEW
-	'info_choisir_pluginxml_verifier' => 'Choisissez les fichiers plugin.xml que vous souhaitez vérifier. Vous pouvez aussi cliquer sur le nom d\'un plugin.xml pour lancer directement sa vérification.', # NEW
-	'info_forcer_paquetxml' => 'Par défaut, le fichier paquet.xml n\'est écrit que si son contenu est valide selon la nouvelle DTD. Vous pouvez cependant forcer son écriture quel que soit le résultat de la validation.', # NEW
-	'info_generer' => 'Cette option vous permet de générer le nouveau fichier paquet.xml de description d\'un plugin à partir du fichier plugin.xml existant.<br />Outre le fichier paquet.xml, les fichiers de langue des items slogan et description du plugin ainsi qu\'un fichier de commandes Unix sont créés dans des dossiers propres à chaque plugin.', # NEW
-	'info_simuler_paquetxml' => 'Par défaut, les fichiers résultat sont créés dans le dossier d\'installation de chaque plugin. Vous pouvez cependant choisir de les créer dans un dossier temporaire du site.', # NEW
-	'info_valider' => 'Cette option vous permet de valider formellement le fichier paquet.xml de description d\'un plugin selon sa DTD. Ce formulaire propose la liste des fichiers paquet.xml présents dans tous les dossiers de ce site.', # NEW
-	'info_verifier' => 'Cette option vous permet de vérifier le fichier plugin.xml de description d\'un plugin afin d\'anticiper des problèmes lors de génération du fichier paquet.xml. Ce formulaire propose la liste des fichiers plugin.xml présents dans tous les dossiers de ce site.', # NEW
+	'info_choisir_paquetxml_valider' => 'Choose the paquet.xml files you want to validate. You can also click on the name of a paquet.xml to directly launch its formal validation.',
+	'info_choisir_pluginxml_generer' => 'Choose the files you want to convert from those present in the <code>plugins/</code> directory of this site. You can also click on the name of a plugin.xml to launch directly the forced generation of its paquet.xml in the temporary directory of the site.',
+	'info_choisir_pluginxml_verifier' => 'Choose the plugin.xml files you want to check. You can also click on the name of a plugin.xml to launch directly its verification.',
+	'info_forcer_paquetxml' => 'By default, the paquet.xml file is only written if its content is valid according to the new DTD. You can force its writing whatever the result of the validation.',
+	'info_generer' => 'This option allows you to generate the new paquet.xml description file of a plugin from an existing plugin.xml.<br />In addition of the paquet.xml file, the language files of slogan and description items from the plugin and a file of Unix commands are created in the specific folders of each plugin.',
+	'info_simuler_paquetxml' => 'By default, the result files are created in the installation folder of each plugin. You can however choose to create them in a temporary folder of the site.',
+	'info_valider' => 'This option allows you to formally validate the paquet.xml file  description of a plugin according to its DTD. This form provides a list of paquet.xml files present in all files directories of this site.',
+	'info_verifier' => 'This option allows you to check the plugin.xml description file of a plugin to anticipate problems during the file generation of the paquet.xml. This form provides a list of the plugin.xml files present in all directories of this site.',
 
 	// L
 	'label_choisir_xml' => '@dtd@.xml available',
@@ -76,8 +76,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_validation_paquetxml_pluriel' => '@nb@ paquet.xml not conforming to the DTD',
 	'message_nok_validation_pluginxml' => '@nb@ plugin.xml not conforming to the DTD',
 	'message_nok_validation_pluginxml_pluriel' => '@nb@ plugin.xml not conforming to the DTD',
-	'message_notice_validation_pluginxml' => 'dont @nb@ est issu d\'un plugin.xml non conforme', # NEW
-	'message_notice_validation_pluginxml_pluriel' => 'dont @nb@ sont issus de plugin.xml non conformes', # NEW
+	'message_notice_validation_pluginxml' => 'which @nb@ come from not compliant plugin.xml',
+	'message_notice_validation_pluginxml_pluriel' => 'which @nb@ come from not compliant plugin.xml',
 	'message_ok_generation_paquetxml' => '@nb@ paquet.xml generated correctly',
 	'message_ok_generation_paquetxml_pluriel' => '@nb@ paquet.xml generated correctly',
 	'message_ok_validation_paquetxml' => '@nb@ valid paquet.xml',
@@ -91,17 +91,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'onglet_verifier' => 'Check plugin.xml',
 
 	// R
-	'resume_generation_paquetxml' => '@nb@ plugin.xml traité (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.', # NEW
-	'resume_generation_paquetxml_pluriel' => '@nb@ plugin.xml traités (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.', # NEW
-	'resume_validation_paquetxml' => '@nb@ paquet.xml validé (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.', # NEW
-	'resume_validation_paquetxml_pluriel' => '@nb@ paquet.xml validés (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.', # NEW
-	'resume_verification_pluginxml' => '@nb@ plugin.xml vérifié (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.', # NEW
-	'resume_verification_pluginxml_pluriel' => '@nb@ plugin.xml vérifiés (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.', # NEW
+	'resume_generation_paquetxml' => '@nb@ plugin.xml processed (@duree@s): @details@.<br />Please refer to detailed results below.',
+	'resume_generation_paquetxml_pluriel' => '@nb@ plugin.xml processed (@duree@s): @details@.<br />Please refer to detailed results below.',
+	'resume_validation_paquetxml' => '@nb@ paquet.xml validated (@duree@s): @details@.<br />Please refer to detailed results below.',
+	'resume_validation_paquetxml_pluriel' => '@nb@ validated paquet.xml (@duree@s): @details@.<br />Please refer to detailed results below.',
+	'resume_verification_pluginxml' => '@nb@ plugin.xml verified (@duree@s): @details@.<br />Please refer to detailed results below.',
+	'resume_verification_pluginxml_pluriel' => '@nb@ plugin.xml verified (@duree@s): @details@.<br />Please refer to detailed results below.',
 
 	// T
 	'titre_boite_aide_paquetxml' => 'Help on paquet.xml',
-	'titre_form_generer' => 'Génération des fichiers paquet.xml', # NEW
-	'titre_form_valider' => 'Validation formelle des fichiers paquet.xml', # NEW
+	'titre_form_generer' => 'Creation of paquet.xml files',
+	'titre_form_valider' => 'Formal validation of paquet.xml files',
 	'titre_form_verifier' => 'Verification of plugin.xml files',
 	'titre_page' => 'PlugOnet',
 	'titre_page_navigateur' => 'PlugOnet'

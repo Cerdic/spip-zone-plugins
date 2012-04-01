@@ -22,8 +22,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'details_generation_paquetxml_succes_pluriel' => 'Súbory paquet.xml @nb@ zásuvných modulov uvedených nižšie boli úspešne vytvorené.',
 	'details_validation_paquetxml_erreur' => 'La validation formelle du plugin.xml listé ci-dessous a révélé des erreurs. Veuillez consulter les informations ci-dessous pour apporter les corrections.', # NEW
 	'details_validation_paquetxml_erreur_pluriel' => 'La validation formelle des @nb@ plugin.xml listés ci-dessous a révélé des erreurs. Veuillez consulter les informations ci-dessous pour apporter des corrections.', # NEW
-	'details_validation_paquetxml_succes' => 'Pri formálnom schvaľovaní súboru plugin.xml uvedeného nižšie sa nenašla žiadna chyba.',
-	'details_validation_paquetxml_succes_pluriel' => 'Pri formálnom schvaľovaní @nb@ súborov plugin.xml uvedených nižšie sa nenašla žiadna chyba.',
+	'details_validation_paquetxml_succes' => 'Pri formálnom potvrdení súboru plugin.xml uvedeného nižšie sa nenašla žiadna chyba.',
+	'details_validation_paquetxml_succes_pluriel' => 'Pri formálnom potvrdení @nb@ súborov plugin.xml uvedených nižšie sa nenašla žiadna chyba.',
 	'details_verification_pluginxml_erreur' => 'La vérification du plugin.xml listé ci-dessous a révélé des erreurs. Veuillez consulter les informations ci-dessous pour apporter des corrections si besoin (toutes les erreurs liées à l\'utilisation de balise a, code, br... dans la description ne sont pas à considérer).', # NEW
 	'details_verification_pluginxml_erreur_pluriel' => 'La vérification des @nb@ plugin.xml listés ci-dessous a révélé des erreurs. Veuillez consulter les informations ci-dessous pour apporter des corrections si besoin (toutes les erreurs liées à l\'utilisation de balise a, code, br... dans la description ne sont pas à considérer).', # NEW
 	'details_verification_pluginxml_succes' => 'Kontrola súboru plugin.xml uvedeného nižšie nenašla žiadnu chybu.',
@@ -59,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_choisir_xml' => 'dostupných: @dtd@.xml',
-	'label_forcer_non' => 'Nie, rešpektovať výsledky schvaľovania',
+	'label_forcer_non' => 'Nie, rešpektovať výsledky kontroly',
 	'label_forcer_oui' => 'Áno, vynútiť si zápis',
 	'label_generer_paquetxml' => 'Výsledné súbory',
 	'label_simuler_non' => 'Nie, zapisovať do priečinka plugins/',
@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende_resultats' => 'Podrobné výsledky podľa zásuvných modulov',
 
 	// M
-	'message_nok_aucun_xml' => 'Aucun @dtd@.xml trouvé dans les dossiers des plugins de ce site.', # NEW
+	'message_nok_aucun_xml' => 'V priečinkoch so zásuvnými modulmi pre túto stránku sa nenašiel žiaden súbor @dtd@.xml.',
 	'message_nok_information_pluginxml' => '@nb@ nečítateľný súbor plugin.xml',
 	'message_nok_information_pluginxml_pluriel' => 'nečítateľných súborov plugin.xml: @nb@ ',
 	'message_nok_lecture_pluginxml' => '@nb@ súbor plugin.xml neprístupný na čítanie',
@@ -88,21 +88,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'onglet_generer' => 'Vytvoriť paquet.xml',
 	'onglet_valider' => 'Potvrdiť paquet.xml',
-	'onglet_verifier' => 'Overiť plugin.xml',
+	'onglet_verifier' => 'Skontrolovať plugin.xml',
 
 	// R
 	'resume_generation_paquetxml' => '@nb@ plugin.xml traité (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.', # NEW
 	'resume_generation_paquetxml_pluriel' => '@nb@ plugin.xml traités (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.', # NEW
-	'resume_validation_paquetxml' => '@nb@ paquet.xml validé (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.', # NEW
-	'resume_validation_paquetxml_pluriel' => '@nb@ paquet.xml validés (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.', # NEW
-	'resume_verification_pluginxml' => '@nb@ plugin.xml vérifié (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.', # NEW
-	'resume_verification_pluginxml_pluriel' => '@nb@ plugin.xml vérifiés (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.', # NEW
+	'resume_validation_paquetxml' => '@nb@ potvrdený súbor paquet.xml (@duree@s): @details@.<br />Podrobné výsledky si prečítajte nižšie, prosím.',
+	'resume_validation_paquetxml_pluriel' => '@nb@ potvrdených súborov paquet.xml (@duree@s): @details@.<br />Podrobné výsledky si prečítajte nižšie, prosím.',
+	'resume_verification_pluginxml' => '@nb@ skontrolovaný súbor plugin.xml (@duree@s): @details@.<br />Podrobné výsledky si prečítajte nižšie, prosím.',
+	'resume_verification_pluginxml_pluriel' => '@nb@ skontrolovaných súborov plugin.xml (@duree@s): @details@.<br />Podrobné výsledky si prečítajte nižšie, prosím.',
 
 	// T
 	'titre_boite_aide_paquetxml' => 'Pomocník k súboru paquet.xml',
 	'titre_form_generer' => 'Vytvorenie súborov paquet.xml',
 	'titre_form_valider' => 'Formálne potvrdenie súborov paquet.xml',
-	'titre_form_verifier' => 'Overenie súborov plugin.xml',
+	'titre_form_verifier' => 'Kontrola súborov plugin.xml',
 	'titre_page' => 'PlugOnet',
 	'titre_page_navigateur' => 'PlugOnet'
 );
