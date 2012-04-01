@@ -118,5 +118,17 @@ function compositions_affiche_milieu($flux){
 	return $flux;
 }
 
-
+/**
+ * pipeline pour ajout d'heritages de composition pour les objets non lies aux rubriques
+ * 2 possibilites pour les donnees du pipeline qui permet a l'objet machin d'heriter de son parent truc:
+ *		$flux['machin'] = array('type_parent'=>'truc', 'table_parent'=>'spip_trucs', 'nom_id_parent'=>'id_truc');
+ *		$flux['machin'] = 'truc';
+ * 
+ * ajouter l'heritage pour les mots-cles (mieux ici que dans le plugin mots?)
+ *
+ */
+function compositions_declarer_heritage($arr){
+	$arr['mot'] = array('type_parent'=>'groupe_mots', 'table_parent'=>'spip_groupes_mots', 'nom_id_parent'=>'id_groupe');
+	return $arr;
+}
 ?>

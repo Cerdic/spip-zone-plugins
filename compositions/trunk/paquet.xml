@@ -23,6 +23,8 @@
 	<pipeline nom="autoriser" inclure="compositions_pipeline.php" />
 	<pipeline nom="styliser" inclure="compositions_pipeline.php" />
 	<pipeline nom="compositions_lister_disponibles" action="" />
+	<pipeline nom="compositions_declarer_heritage" inclure="compositions_pipeline.php" />
+	
 
 	<utilise nom="Z" compatibilite="[1.7.10;[" />
 	<utilise nom="Zcore" compatibilite="[2.0.0-dev;[" />

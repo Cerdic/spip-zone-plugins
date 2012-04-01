@@ -222,6 +222,64 @@ function compositions_types(){
 }
 
 /**
+ * Renvoie les parametres necessaires pour utiliser l'heritage de composition de façon generique
+ * pour les objets n'utilisant pas les rubriques comme source d'heritage
+ * exploite le pipeline compositions_declarer_heritage 
+ * 2 possibilites pour les donnees du pipeline:
+ *		$flux['machin'] = array('type_parent'=>'truc', 'table_parent'=>'spip_trucs', 'nom_id_parent'=>'id_truc');
+ *		$flux['machin'] = 'truc';
+ * 
+ * @param string $type
+ * @return array
+ */
+function compositions_recuperer_heritage($type){
+	// recuperer les heritages declares par le pipeline
+	$Theritages = array();
+	$Theritages = pipeline('compositions_declarer_heritage', $Theritages);
+
+	// recuperer les infos pour les types ajoutes par le pipeline
+	// et eventuellement faire une approximation spipienne des parametres manquants
+	if (array_key_exists($type, $Theritages)) {
+		$Ttype = $Theritages[$type];
+		$type_parent = ((is_array($Ttype) AND array_key_exists('type_parent', $Ttype)) ?
+			$Ttype['type_parent'] : (strval($Ttype) == $Ttype ? $Ttype : false));
+		$table_parents = ((is_array($Ttype) AND array_key_exists('table_parent', $Ttype)) ?
+			$Ttype['table_parent'] : 'spip_'.$type_parent.'s');
+		$nom_id_parent = ((is_array($Ttype) AND array_key_exists('nom_id_parent', $Ttype)) ?
+			$Ttype['nom_id_parent'] : 'id_'.$type_parent);
+
+		// verifier que table et champs existent...
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		if (!$type_parent OR $type_parent == ''
+			OR!$desc = $trouver_table($table_parents,$serveur)
+			OR !isset($desc['field']['composition'])
+			OR !isset($desc['field'][$nom_id_parent]))
+			return '';
+
+		// KISS: heritage a un seul niveau (pas de recursivite comme avec les rubriques)
+		$ancetres = false;
+		$arr_sql = array('composition');
+	}
+	else {
+		$type_parent = 'rubrique';
+		$table_parents = 'spip_rubriques';
+		$nom_id_parent = 'id_rubrique';
+		$ancetres = true;
+		$nom_id_ancetre = 'id_parent';
+		$arr_sql = array($nom_id_ancetre,'composition');
+	}
+
+	return array(
+		'type_parent' 		=> $type_parent,
+		'table_parents'		=> $table_parents,
+		'nom_id_parent'		=> $nom_id_parent,
+		'ancetres'			=> $ancetres,
+		'nom_id_ancetre'	=> $nom_id_ancetre,
+		'arr_sql'			=> $arr_sql
+	);
+}
+
+/**
  * Renvoie la composition qui s'applique a un objet
  * en tenant compte, le cas echeant, de la composition heritee
  * si etoile=true on renvoi dire le champ sql
@@ -249,10 +307,11 @@ function compositions_determiner($type, $id, $serveur='', $etoile = false){
 	$desc = $trouver_table($table,$serveur);
 	if (isset($desc['field']['composition']) AND $id){
 		$select = "composition";
-		if (isset($desc['field']['id_rubrique']))
-			$select .= "," . (($type == 'rubrique') ? 'id_parent' : 'id_rubrique as id_parent');
-		if (isset($desc['field']['id_groupe']))
-			$select .= "," . 'id_groupe as id_parent';
+
+	$Tparam_heritage = compositions_recuperer_heritage($type);
+	if (isset($desc['field'][$Tparam_heritage['nom_id_parent']]))
+		$select .= "," . (($type == 'rubrique') ? 'id_parent' : $Tparam_heritage['nom_id_parent'].' as id_parent');
+
 		$row = sql_fetsel($select, $table_sql, "$_id_table=".intval($id), '', '', '', '', $serveur);
 		if ($row['composition'] != '')
 			$retour = $row['composition'];
@@ -279,35 +338,70 @@ function compositions_heriter($type, $id_rubrique, $serveur=''){
 	static $infos = null;
 	$id_parent = $id_rubrique;
 	$compo_rubrique = '';
-	if (in_array($type, array('article', 'rubrique', 'site'))) {
-		do {
-			$row = sql_fetsel(array('id_parent','composition'),'spip_rubriques','id_rubrique='.intval($id_parent),'','','','',$serveur);
-			if (strlen($row['composition']) AND $row['composition']!='-')
-				$compo_rubrique = $row['composition'];
-			elseif (strlen($row['composition'])==0) // il faut aussi verifier que la rub parente n'herite pas elle-meme d'une composition
-				$compo_rubrique = compositions_determiner('rubrique', $id_parent, $serveur='');
-			
-			if (strlen($compo_rubrique) AND is_null($infos))
-				$infos = compositions_lister_disponibles('rubrique');
-		}
-		while ($id_parent = $row['id_parent']
-			AND
-			(!strlen($compo_rubrique) OR !isset($infos['rubrique'][$compo_rubrique]['branche'][$type])));
+/*
+	// pipeline compositions_declarer_heritage pour les objets n'utilisant pas les rubriques comme source d'heritage
+	// 2 possibilites pour les donnees du pipeline:
+	// 		$flux['machin'] = array('type_parent'=>'truc', 'table_parent'=>'spip_trucs', 'nom_id_parent'=>'id_truc');
+	// 		$flux['machin'] = 'truc';
+	$Theritages = array();
+	$Theritages = pipeline('compositions_declarer_heritage', $Theritages);
 
-		if (strlen($compo_rubrique) AND isset($infos['rubrique'][$compo_rubrique]['branche'][$type]))
-			return $infos['rubrique'][$compo_rubrique]['branche'][$type];
+	// recuperer les infos pour les types ajoutes par le pipeline
+	// et eventuellement faire une approximation spipienne des parametres manquants
+	if (array_key_exists($type, $Theritages)) {
+		$Ttype = $Theritages[$type];
+		$type_parent = ((is_array($Ttype) AND array_key_exists('type_parent', $Ttype)) ?
+			$Ttype['type_parent'] : (strval($Ttype) == $Ttype ? $Ttype : false));
+		$table_parents = ((is_array($Ttype) AND array_key_exists('table_parent', $Ttype)) ?
+			$Ttype['table_parent'] : 'spip_'.$type_parent.'s');
+		$nom_id_parent = ((is_array($Ttype) AND array_key_exists('nom_id_parent', $Ttype)) ?
+			$Ttype['nom_id_parent'] : 'id_'.$type_parent);
+
+		// verifier que table et champs existent...
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		if (!$type_parent OR $type_parent == ''
+			OR!$desc = $trouver_table($table_parents,$serveur)
+			OR !isset($desc['field']['composition'])
+			OR !isset($desc['field'][$nom_id_parent]))
+			return '';
+
+		// KISS: heritage a un seul niveau (pas de recursivite comme avec les rubriques)
+		$ancetres = false;
+		$arr_sql = array('composition');
 	}
-	elseif ($type == 'mot') {
-		$row = sql_fetsel(array('composition'),'spip_groupes_mots','id_groupe='.intval($id_parent),'','','','',$serveur);
+	else {
+		$type_parent = 'rubrique';
+		$table_parents = 'spip_rubriques';
+		$nom_id_parent = 'id_rubrique';
+		$ancetres = true;
+		$nom_id_ancetre = 'id_parent';
+		$arr_sql = array($nom_id_ancetre,'composition');
+	}
+*/
+	$Theritage = compositions_recuperer_heritage($type);
+	$type_parent = $Theritage['type_parent'];		//'rubrique';
+	$table_parents = $Theritage['table_parents'];	//'spip_rubriques';
+	$nom_id_parent = $Theritage['nom_id_parent'];	//'id_rubrique';
+	$ancetres = $Theritage['ancetres'];				//true;
+	$nom_id_ancetre = $Theritage['nom_id_ancetre'];	//'id_parent';
+	$arr_sql = $Theritage['arr_sql'];				// array($nom_id_ancetre,'composition');
+
+	do {
+		$row = sql_fetsel($arr_sql, $table_parents, $nom_id_parent.'='.intval($id_parent),'','','','',$serveur);
 		if (strlen($row['composition']) AND $row['composition']!='-')
-			$compo_groupe = $row['composition'];
-			
-		if (strlen($compo_groupe) AND is_null($infos))
-			$infos = compositions_lister_disponibles('groupe_mots');
-
-		if (strlen($compo_groupe) AND isset($infos['groupe_mots'][$compo_groupe]['branche'][$type])) {
-			return $infos['groupe_mots'][$compo_groupe]['branche'][$type];	}	
+			$compo_rubrique = $row['composition'];
+		elseif (strlen($row['composition'])==0 AND $ancetres) // il faut aussi verifier que la rub parente n'herite pas elle-meme d'une composition
+			$compo_rubrique = compositions_determiner($type_parent, $id_parent, $serveur='');
+		
+		if (strlen($compo_rubrique) AND is_null($infos))
+			$infos = compositions_lister_disponibles($type_parent);
 	}
+	while ($id_parent = $row[$nom_id_parent]
+		AND
+		(!strlen($compo_rubrique) OR !isset($infos[$type_parent][$compo_rubrique]['branche'][$type])));
+
+	if (strlen($compo_rubrique) AND isset($infos[$type_parent][$compo_rubrique]['branche'][$type]))
+		return $infos[$type_parent][$compo_rubrique]['branche'][$type];
 
 	return '';
 }
