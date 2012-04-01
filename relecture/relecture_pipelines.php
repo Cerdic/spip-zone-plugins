@@ -28,7 +28,8 @@ function relecture_affiche_gauche($flux) {
 			$table = table_objet($type);
 			$id_table_objet = id_table_objet($type);
 
-			$flux['data'] .= recuperer_fond('prive/squelettes/navigation/article_relecture', array($id_table_objet => $id));
+			$flux['data'] .= recuperer_fond('prive/squelettes/navigation/article_relecture',
+								array($id_table_objet => $id));
 		}
 	}
 
@@ -47,18 +48,12 @@ function relecture_affiche_gauche($flux) {
 function relecture_boite_infos($flux){
 
 	if (($type = $flux['args']['type'])=='article') {
-		if ($id = intval($flux['args']['id']) AND autoriser('voirrelectures', $type, $id)) {
-			$from = 'spip_relectures';
-			$where = array("id_article=$id", "etat=" . sql_quote('fermee'));
-			$nb_relectures_fermees = sql_countsel($from, $where);
+		if ($id = intval($flux['args']['id'])) {
+			$table = table_objet($type);
+			$id_table_objet = id_table_objet($type);
 
-			if ($nb_relectures_fermees > 0) {
-				include_spip('inc/presentation');
-				$flux['data'] .= icone_horizontale(
-									_T('relecture:bouton_historique_relectures'),
-									generer_url_ecrire('relectures',"id_article=$id"),
-									"relecture-ok-24.png");
-			}
+			$flux['data'] .= recuperer_fond('prive/squelettes/inclure/voir_article_relectures',
+								array($id_table_objet => $id));
 		}
 	}
 

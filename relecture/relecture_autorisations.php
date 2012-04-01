@@ -42,7 +42,7 @@ function autoriser_article_ouvrirrelecture_dist($faire, $type, $id, $qui, $opt) 
 
 
 /**
- * Autorisation d'ouverture d'une relecture
+ * Autorisation de consultations des relectures cloturees d'un article
  *
  * @param object $faire
  * @param object $type
