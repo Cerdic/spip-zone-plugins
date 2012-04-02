@@ -1,55 +1,16 @@
 /* CSS Document */
-.calendriermini{
-	margin-bottom:1em;
-}
+.calendriermini{margin-bottom:1em;}
 .calendriermini .calendar-container {height: 16em;}
 
-.calendriermini table{
-	width: 100%;
-	font-size: 0.8em;
-	text-align: center;
-	margin: 0 auto;
-	border-collapse: collapse;
-}
-
-.calendriermini table caption{
-	margin: 0 auto;
-	padding:0;
-}
-
-.calendriermini table th{
-	padding:0;
-}
-
-.calendriermini table td{
-	width: 14%;
-	line-height: 2em;
-	border: 1px solid #EEE;
-	padding:0;
-}
-
-.calendriermini table td a{
-	display: block;
-	background: #fff;
-	font-weight: bold;
-	text-decoration: none;
-}
-
-.calendriermini table td.today a{
-	border: 1px solid #493;
-}
-
-.calendriermini table td a:hover{
-	background: #DBB8DC;
-	color: #636;
-}
-
-.calendriermini table td.today a:hover{
-	border: 1px solid #636;
-}
-
-.calendriermini span{
-}
+.calendriermini table{width: 100%;font-size: 0.8em;text-align: center;margin: 0 auto;border-collapse: collapse;}
+.calendriermini table caption{margin: 0 auto;	padding:0;}
+.calendriermini table th{padding:0;}
+.calendriermini table td{width: 14%;line-height: 2em;border: 1px solid #EEE;padding:0;}
+.calendriermini table td a{display: block;background: #fff;font-weight: bold;text-decoration: none;}
+.calendriermini table td.today a{border: 1px solid #493;}
+.calendriermini table td a:hover{background: #DBB8DC;color: #636;}
+.calendriermini table td.today a:hover{border: 1px solid #636;}
+.calendriermini span{}
 
 .calendriermini .ui-icon { display: block; text-indent: -99999px; overflow: hidden; background-repeat: no-repeat; }
 .calendriermini .ui-icon { width: 16px; height: 16px; background-repeat:no-repeat;background-position: center; }
