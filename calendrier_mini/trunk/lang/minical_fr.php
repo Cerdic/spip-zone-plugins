@@ -5,6 +5,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	'mois_suivant' => 'Mois suivant',
+	'mois_precedent' => 'Mois précédent',
 	// D
 	'date_jour_abbr_1' => 'dim.',
 	'date_jour_abbr_2' => 'lun.',
