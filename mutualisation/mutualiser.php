@@ -97,7 +97,7 @@ function demarrer_site($site = '', $options = array()) {
 				$result=@sql_query("SELECT "
 							. _INSTALL_PANEL_FIELD_CODE . " AS code,"
 							. _INSTALL_PANEL_FIELD_PASS . " AS pass,"
-							. _INSTALL_PANEL_FIELD_SITE . " AS site,"
+							. _INSTALL_PANEL_FIELD_SITE . " AS site"
 							. " FROM " . _INSTALL_PANEL_NAME_TABLE
 							. " WHERE "._INSTALL_PANEL_FIELD_SITE . " = '$site'"
 							, _INSTALL_SERVER_DB);
