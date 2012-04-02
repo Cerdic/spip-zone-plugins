@@ -9,12 +9,12 @@ function abomailmans_upgrade($nom_meta_base_version,$version_cible){
 	$maj['create'] = array(
 		array('creer_base'),
 	);
-	$maj['0.30'] = array('maj_tables',array('spip_abomailmans'));
-	$maj['0.31'] = array('maj_tables',array('spip_abomailmans'));
-	$maj['0.32'] = array('maj_tables',array('spip_abomailmans'));
-	$maj['0.33'] = array('maj_tables',array('spip_abomailmans'));
-	$maj['0.34'] = array('maj_tables',array('spip_abomailmans'));
-
+	
+	$maj['0.30'] = array(array('maj_tables',array('spip_abomailmans')));
+	$maj['0.31'] = array(array('maj_tables',array('spip_abomailmans')));
+	$maj['0.32'] = array(array('maj_tables',array('spip_abomailmans')));
+	$maj['0.33'] = array(array('maj_tables',array('spip_abomailmans')));
+	$maj['0.34'] = array(array('maj_tables',array('spip_abomailmans')));
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
