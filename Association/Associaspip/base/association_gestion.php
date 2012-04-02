@@ -594,5 +594,32 @@ $GLOBALS['association_maj'][58894] = array(
 $GLOBALS['association_maj'][59886] = array(
 	array('association_gestion_autorisations_upgrade')
 );
-3
+
+// Correction de l'erreur aux niveau de l'auto-increment des id_groupe presente pour les nouvelles installations effectuees entre la r53901  et r60035
+function association_maj_60038()
+{
+	// reset de l'autoincrement, meme si il y a deja des groupes d'id>100 ca ne pose pas de probleme.
+	sql_alter("TABLE spip_asso_groupes AUTO_INCREMENT = 100");
+
+	// on verifie qu'on a des groupes d'id<100 avec un nom non vide
+	$query = sql_select('id_groupe', 'spip_asso_groupes', "id_groupe<100 AND nom<>''", '', 'id_groupe');
+	if (sql_count($query)) {
+		// on recupere l'id du dernier groupe cree
+		$max_id = sql_getfetsel('MAX(id_groupe)', 'spip_asso_groupes');
+		$max_id = ($max_id<100)?100:$max_id;
+		while ($data=sql_fetch($query)) {
+			// on ajoute max_id a l'id des groupes selectionnés
+			sql_updateq('spip_asso_groupes', array('id_groupe'=>($data['id_groupe']+$max_id)), 'id_groupe='.$data['id_groupe']);
+			// on fait pareil dans la table de liaisons
+			sql_updateq('spip_asso_groupes_liaisons', array('id_groupe'=>($data['id_groupe']+$max_id)), 'id_groupe='.$data['id_groupe']);
+		}
+	}
+
+	// on verifie qu'il ne faille pas creer des groupes pour les autorisations apres avoir bouge ceux existants
+	association_gestion_autorisations_upgrade();
+}
+
+$GLOBALS['association_maj'][60038] = array(
+	array('association_maj_60038')
+);
 ?>
