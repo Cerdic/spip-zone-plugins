@@ -19,7 +19,7 @@ function balise_EDITEUR_DESTINATIONS_dist ($p) {
 	if ($GLOBALS['association_metas']['destinations'])
 		return calculer_balise_dynamique($p, 'EDITEUR_DESTINATIONS', array('id_dest', 'montant_dest', 'unique_dest', 'defaut_dest') );
 	else
-		return '';
+		return;
 }
 
 function balise_EDITEUR_DESTINATIONS_dyn($id_dest, $montant_dest, $unique_dest, $defaut_dest) {
