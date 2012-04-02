@@ -1,0 +1,21 @@
+[(#REM)
+Afficher la note des auteurs sous forme de tableau
+exemple : afficher la note des auteurs 10,2,5 pour l'article 33, sur 2 colonnes
+<notation33|tableau|id_auteur=10,2,5|left|col=2>
+]
+
+<B_not>
+<span class="notation"[ style="float:(#ENV{align}|match{left|right});"]>
+<table class="auteurs"[ (#ENV{align}|=={center}|?{'style="margin: 0 auto;"'})]><tr>
+<BOUCLE_not(NOTATIONS){id_article=#ENV{id,0}}{id_auteur IN (#ENV{id_auteur}|notation_tab)}>
+  <BOUCLE_aut(AUTEURS){id_auteur}{tout}>
+  <td class="nom">#NOM</td>
+  <td class="note">
+    #NOTATION_ETOILE{#NOTE,auteur#ID_AUTEUR-article#ID_ARTICLE}
+  </td>
+  </BOUCLE_aut>
+  [(#COMPTEUR_BOUCLE|modulo{[(#ENV{col,3})]}|=={0}|?{'</tr><tr>',''})]
+</BOUCLE_not>
+</tr></table>
+</span>
+</B_not>

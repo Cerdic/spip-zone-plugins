@@ -1,0 +1,13 @@
+[(#REM)
+Afficher la note d'un auteur
+exemple : afficher la note de l'auteur 33 pour l'article 10
+<aut33|notation|id_article=10|left>
+]
+
+<B_not>
+<span class="notation"[ style="float:(#ENV{align}|match{left|right});"]>
+<BOUCLE_not(NOTATIONS){id_article=#ENV{id_article,0}}{id_auteur=#ENV{id,-1}}{0,1}>
+  [(#NOTATION_ETOILE{#NOTE,aut_notation#ID_AUTEUR})]
+</BOUCLE_not>
+</span>
+</B_not>

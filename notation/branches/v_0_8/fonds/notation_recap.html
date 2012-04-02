@@ -1,0 +1,98 @@
+#CACHE{0}
+<B_notes_aut>
+#SET{limit,0}
+<div class="cadre cadre-trait-couleur" style="padding: 5px; margin-top: 20px;">
+	<div class="titrem"><:notation:vos_notes:></div>
+	<table>
+		<tr>
+			<td><:notation:objets:></td>
+			<td style='width:10%;'><:notation:votre_note:></td>
+			<td style='width:10%;'><:notation:moyennep:></td>
+			<td style='width:10%;'><:notation:moyenne:></td>
+			<td style='width:10%'><:notation:nbvotes:></td>
+		</tr>
+		<BOUCLE_notes_aut(NOTATIONS){!par note}{id_auteur=#SESSION{id_auteur}}{0,10}>
+		<tr[ style="background:(#COMPTEUR_BOUCLE|alterner{#eee,#fff});"]>
+			[(#INCLURE{fond=modeles/inc-notation-preferee-#OBJET}{id_objet})]
+			<td>#NOTE</td>
+			<BOUCLE_note_obj(NOTATIONS_OBJETS){objet}{id_objet}>
+				<td>#NOTE_PONDEREE</td><td>#NOTE</td><td>#NOMBRE_VOTES</td>
+			</BOUCLE_note_obj>
+		</tr>		
+		</BOUCLE_notes_aut>
+	</table>
+</div>
+</B_notes_aut>
+
+<div class="cadre cadre-trait-couleur" style="padding: 5px;">
+	<BOUCLE_nbobjets(NOTATIONS){fusion objet}{fusion id_objet}></BOUCLE_nbobjets>
+	[<:notation:nbobjets_note:> (#TOTAL_BOUCLE)]
+	<//B_nbobjets>
+	<hr />
+
+	<BOUCLE_nbvotes(NOTATIONS)></BOUCLE_nbvotes>
+	[<:notation:nbvotes_total:> (#TOTAL_BOUCLE)]
+	<//B_nbvotes>
+</div>
+
+<B_notes_pond>
+<div class="cadre cadre-trait-couleur" style="padding: 5px;">
+	<div class="titrem"><:notation:toptenp:></div>
+	<table>
+		<tr>
+			<td><:notation:objets:></td>
+			<td style='width:10%;'><:notation:moyennep:></td>
+			<td style='width:10%;'><:notation:moyenne:></td>
+			<td style='width:10%'><:notation:nbvotes:></td>
+		</tr>
+		<BOUCLE_notes_pond(NOTATIONS_OBJETS){0,10}{!par note_ponderee}>
+		<tr[ style="background:(#COMPTEUR_BOUCLE|alterner{#eee,#fff});"]>
+			[(#INCLURE{fond=modeles/inc-notation-preferee-#OBJET}{id_objet})]
+			<td>#NOTE_PONDEREE</td><td>#NOTE</td><td>#NOMBRE_VOTES</td>
+		</tr>
+		</BOUCLE_notes_pond>
+	</table>
+</div>
+</B_notes_pond>
+
+<B_nombre_votes>
+<div class="cadre cadre-trait-couleur" style="padding: 5px;">
+	<div class="titrem"><:notation:topnb:></div>
+	<table>
+		<tr>
+			<td><:notation:objets:></td>
+			<td style='width:10%;'><:notation:moyennep:></td>
+			<td style='width:10%;'><:notation:moyenne:></td>
+			<td style='width:10%'><:notation:nbvotes:></td>
+		</tr>
+	<BOUCLE_nombre_votes(NOTATIONS_OBJETS){0,10}{!par nombre_votes}>
+	<tr[ style="background:(#COMPTEUR_BOUCLE|alterner{#eee,#fff});"]>
+		[(#INCLURE{fond=modeles/inc-notation-preferee-#OBJET}{id_objet})]
+		<td>#NOTE_PONDEREE</td><td>#NOTE</td><td>#NOMBRE_VOTES</td>
+	</tr>
+	</BOUCLE_nombre_votes>
+	</table>
+</div>
+</B_nombre_votes>
+
+
+
+<B_derniers_votes>
+<div class="cadre cadre-trait-couleur" style="padding: 5px;">
+	<div class="titrem"><:notation:derniers_votes:></div>
+	<table>
+		<tr>
+			<td><:notation:objets:></td>
+			<td><:notation:date:></td>
+			<td style='width:10%;'><:notation:vote:></td>
+		</tr>
+	<BOUCLE_derniers_votes(NOTATIONS){0,10}{!par maj}>
+	<tr[ style="background:(#COMPTEUR_BOUCLE|alterner{#eee,#fff});"]>
+		[(#INCLURE{fond=modeles/inc-notation-preferee-#OBJET}{id_objet})]
+		<td>[(#MAJ|affdate_court)]</td>
+		<td>#NOTE</td>
+	</tr>
+	</BOUCLE_derniers_votes>
+	</table>
+</div>
+</B_derniers_votes>
