@@ -7,7 +7,7 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 // chargement des valeurs par defaut des champs du formulaire
-function formulaires_editer_abomailman_liste_charger_dist($id_abomailman='new',$retour='', $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_abomailman_charger_dist($id_abomailman='new',$retour='', $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = array();
 
 	//initialise les variables d'environnement pas défaut
