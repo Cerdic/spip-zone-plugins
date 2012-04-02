@@ -338,46 +338,7 @@ function compositions_heriter($type, $id_rubrique, $serveur=''){
 	static $infos = null;
 	$id_parent = $id_rubrique;
 	$compo_rubrique = '';
-/*
-	// pipeline compositions_declarer_heritage pour les objets n'utilisant pas les rubriques comme source d'heritage
-	// 2 possibilites pour les donnees du pipeline:
-	// 		$flux['machin'] = array('type_parent'=>'truc', 'table_parent'=>'spip_trucs', 'nom_id_parent'=>'id_truc');
-	// 		$flux['machin'] = 'truc';
-	$Theritages = array();
-	$Theritages = pipeline('compositions_declarer_heritage', $Theritages);
 
-	// recuperer les infos pour les types ajoutes par le pipeline
-	// et eventuellement faire une approximation spipienne des parametres manquants
-	if (array_key_exists($type, $Theritages)) {
-		$Ttype = $Theritages[$type];
-		$type_parent = ((is_array($Ttype) AND array_key_exists('type_parent', $Ttype)) ?
-			$Ttype['type_parent'] : (strval($Ttype) == $Ttype ? $Ttype : false));
-		$table_parents = ((is_array($Ttype) AND array_key_exists('table_parent', $Ttype)) ?
-			$Ttype['table_parent'] : 'spip_'.$type_parent.'s');
-		$nom_id_parent = ((is_array($Ttype) AND array_key_exists('nom_id_parent', $Ttype)) ?
-			$Ttype['nom_id_parent'] : 'id_'.$type_parent);
-
-		// verifier que table et champs existent...
-		$trouver_table = charger_fonction('trouver_table', 'base');
-		if (!$type_parent OR $type_parent == ''
-			OR!$desc = $trouver_table($table_parents,$serveur)
-			OR !isset($desc['field']['composition'])
-			OR !isset($desc['field'][$nom_id_parent]))
-			return '';
-
-		// KISS: heritage a un seul niveau (pas de recursivite comme avec les rubriques)
-		$ancetres = false;
-		$arr_sql = array('composition');
-	}
-	else {
-		$type_parent = 'rubrique';
-		$table_parents = 'spip_rubriques';
-		$nom_id_parent = 'id_rubrique';
-		$ancetres = true;
-		$nom_id_ancetre = 'id_parent';
-		$arr_sql = array($nom_id_ancetre,'composition');
-	}
-*/
 	$Theritage = compositions_recuperer_heritage($type);
 	$type_parent = $Theritage['type_parent'];		//'rubrique';
 	$table_parents = $Theritage['table_parents'];	//'spip_rubriques';
