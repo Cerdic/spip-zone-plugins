@@ -101,6 +101,7 @@ function association_upgrade($meta, $courante, $table='meta')
 		include_spip('base/create');
 		alterer_base($GLOBALS['tables_principales'],
 			     $GLOBALS['tables_auxiliaires']);
+		sql_alter("TABLE spip_asso_groupes AUTO_INCREMENT = 100"); /* l'index de depart de l'autoincrement de la table doit etre a 100 car les premiers groupes sont reserves aux autorisations */
 		association_gestion_autorisations_upgrade();
 		ecrire_meta($meta, $courante, NULL, $table);
 		return 0; // Reussite (supposee !)
