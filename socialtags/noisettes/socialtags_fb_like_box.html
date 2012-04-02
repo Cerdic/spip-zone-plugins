@@ -1,8 +1,11 @@
-#SET{width,#ENV{width,490}}
-#SET{bouton_action,#ENV{bouton_action,like}}
-#SET{show_faces,#ENV{show_faces,true}}
-#SET{layout,#ENV{layout,standard}}
+#SET{href,#ENV{href}}
+#SET{width,#ENV{width,300}}
+#SET{height,#ENV{height,}}
 #SET{colorscheme,#ENV{colorscheme,light}}
+#SET{show_faces,#ENV{show_faces,true}}
+#SET{stream,#ENV{stream,true}}
+#SET{header,#ENV{header,true}}
+#SET{border_color,#ENV{border_color,}}
 [(#SET{code,#LANG|concat{_}|concat{#LANG|strtoupper}})]
 
 <div id="fb-root"></div>
@@ -16,4 +19,4 @@
 }(document, 'script', 'facebook-jssdk'));
 /*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
 
-<div class="fb-like" [(#ENV{afficher_send}|oui)data-send="true"] data-width="#GET{width}" data-show-faces="#GET{show_faces}" data-action="#GET{bouton_action}" data-font="arial" data-layout="#GET{layout}" data-colorscheme="#GET{colorscheme}"></div>
+<div class="fb-like-box" data-href="#GET{href}" data-width="#GET{width}" [data-height="(#GET{height})"] data-show-faces="#GET{show_faces}" data-stream="#GET{stream}" data-header="#GET{header}" [data-border-color="(#GET{border_color})"] ></div>

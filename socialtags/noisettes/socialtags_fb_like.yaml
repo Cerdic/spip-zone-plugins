@@ -12,6 +12,26 @@ parametres:
         like: '<:socialtags:noisette_action_like:>'
         recommend: '<:socialtags:noisette_action_recommand:>'
   -
+    saisie: 'selection'
+    options:
+      nom: 'layout'
+      label: '<:socialtags:noisette_label_layout:>'
+      defaut: 'standard'
+      cacher_option_intro: 'true'
+      datas:
+        standard: '<:socialtags:noisette_layout_standard:>'
+        button_count: '<:socialtags:noisette_layout_button_count:>'
+        box_count: '<:socialtags:noisette_layout_box_count:>'
+  -
+    saisie: 'radio'
+    options:
+      nom: 'colorscheme'
+      label: '<:socialtags:noisette_label_colorscheme:>'
+      defaut: 'light'
+      datas:
+        light: '<:socialtags:noisette_colorscheme_light:>'
+        dark: '<:socialtags:noisette_colorscheme_dark:>'
+  -
     saisie: 'oui_non'
     options:
       nom: 'afficher_send'
