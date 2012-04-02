@@ -1,7 +1,7 @@
 <paquet
 	prefix="notation"
 	categorie="communication"
-	version="2.0.0"
+	version="2.0.1"
 	etat="test"
 	compatibilite="[3.0.0-beta;3.0.*]"
 	logo="prive/themes/spip/images/notation-32.png"
@@ -16,7 +16,7 @@
 	<auteur>b_b</auteur>
 	<auteur>Matthieu Marcillaud</auteur>
 
-	<copyright>2008-2011</copyright>
+	<copyright>2008-2012</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
