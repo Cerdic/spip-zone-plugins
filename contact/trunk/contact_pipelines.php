@@ -9,10 +9,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return array
  */
 function contact_jqueryui_plugins($plugins){
-	$plugins[] = "jquery.ui.core";
-	$plugins[] = "jquery.ui.widget";
-	$plugins[] = "jquery.ui.mouse";
-	$plugins[] = "jquery.ui.sortable";
+	if(test_espace_prive()){
+		$plugins[] = "jquery.ui.core";
+		$plugins[] = "jquery.ui.widget";
+		$plugins[] = "jquery.ui.mouse";
+		$plugins[] = "jquery.ui.sortable";
+	}
 	return $plugins;
 }
 
