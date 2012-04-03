@@ -1,7 +1,7 @@
 <div id="calendar" class="calendriermini minicalendar">
 	<h2 class="menu-titre"><:icone_calendrier:></h2>
 	<div class="calendar-container"
-					data-url="[(#ENV{urljson}
+					data-json="[(#ENV{urljson}
 						|parametre_url{id_rubrique,#ENV{id_rubrique,''}}
 						|parametre_url{id_article,#ENV{id_article,''}}
 						|parametre_url{id_mot,#ENV{id_mot,''}}
@@ -9,6 +9,8 @@
 						)]"
 					data-year="[(#ENV{date}|affdate{Y})]"
 					data-month="[(#ENV{date}|affdate{n})]"
+					data-url="#ENV{self}"
+					data-vardate="#ENV{var_date}"
 					></div>
 </div>
 <script type='text/javascript'>/*<![CDATA[*/
@@ -59,7 +61,7 @@ var minical = {
 		var start = t-7*24*3600;
 		var end = t+38*24*3600;
 		jQuery.ajax({
-			url:jQuery(me).attr("data-url"),
+			url:jQuery(me).attr("data-json"),
 			data:{start:start,end:end},
 			success:function(data, textStatus, jqXHR){
 				data = eval(data);
