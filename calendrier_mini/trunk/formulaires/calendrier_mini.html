@@ -1,10 +1,20 @@
 <div id="calendar" class="calendriermini minicalendar">
 	<h2 class="menu-titre"><:icone_calendrier:></h2>
-	<div class="calendar-container"></div>
+	<div class="calendar-container"
+					data-url="[(#ENV{urljson}
+						|parametre_url{id_rubrique,#ENV{id_rubrique,''}}
+						|parametre_url{id_article,#ENV{id_article,''}}
+						|parametre_url{id_mot,#ENV{id_mot,''}}
+						|parametre_url{lang,#ENV{lang,''}}
+						)]"
+					data-year="[(#ENV{date}|affdate{Y})]"
+					data-month="[(#ENV{date}|affdate{n})]"
+					></div>
 </div>
 <script type='text/javascript'>/*<![CDATA[*/
-function minical_options(){
-	return {
+
+var minical = {
+	options: {
 		buttonText: '<:afficher_calendrier|texte_script:>',
 		buttonImage: '#CHEMIN_IMAGE{calendrier-16.png}',
 		buttonImageOnly: true,
@@ -34,45 +44,61 @@ function minical_options(){
 		changeYear: true,
 		showOtherMonths: true,
 		selectOtherMonths: true
-	};
-}
-
-function minical_set_events(data, textStatus, jqXHR){
-
-}
-
-function minical_load_events(){
-	jQuery.ajax({
-		url:"#ENV{urljson}",
-		id_rubrique:"#ENV{id_rubrique}",
-		id_article:"#ENV{id_article}",
-		id_mot:"#ENV{id_mot}",
-		lang:"#ENV{lang}",
-		success:minical_set_events
-	});
-}
-var scripts_loaded = {widget:false,datepicker:false};
-function minical_init(){
-	if (!scripts_loaded.widget || !scripts_loaded.datepicker)
-		return;
-	jQuery(function(){
-		jQuery('.minicalendar .calendar-container').not('.loaded')
-			.addClass('loaded')
-			.datepicker(jQuery.extend(minical_options(),
-				{
-					showButtonPanel: true,
-					prevText: '<:minical:mois_precedent|texte_script:>',
-					nextText: '<:minical:mois_suivant|texte_script:>'
+	},
+	set_events: function(me,start,end,data){
+		console.log(data);
+	},
+	change_month_year: function(year, month, inst){
+		var me = inst;
+		//console.log("change_month_year:"+year+"/"+month);
+		if (typeof inst.input != "undefined")
+			me = inst.input;
+		//console.log(me);
+		var t = new Date(year,month-1,1);
+		t = parseInt(t.getTime()/1000);
+		var start = t-7*24*3600;
+		var end = t+38*24*3600;
+		jQuery.ajax({
+			url:jQuery(me).attr("data-url"),
+			data:{start:start,end:end},
+			success:function(data, textStatus, jqXHR){
+				data = eval(data);
+				minical.set_events(me,start,end,data);
+			}
+		});
+	},
+	scripts_loaded: {widget:false,datepicker:false,multidatepicker:false},
+	init : function(){
+		if (!minical.scripts_loaded.widget || !minical.scripts_loaded.datepicker || !minical.scripts_loaded.multidatepicker)
+			return;
+		jQuery(function(){
+			jQuery('.minicalendar .calendar-container').not('.loaded')
+				.addClass('loaded')
+				.multiDatesPicker(jQuery.extend(minical.options,
+					{
+						showButtonPanel: true,
+						prevText: '<:minical:mois_precedent|texte_script:>',
+						nextText: '<:minical:mois_suivant|texte_script:>',
+						create: minical.create,
+						beforeShow: minical.before_show,
+						onChangeMonthYear: minical.change_month_year
+					})
+				)
+				.each(function(){
+					var me=jQuery(this);
+					me.datepicker("setDate" , "1/"+me.attr('data-month')+"/"+me.attr('data-year'));
+					minical.change_month_year(me.attr('data-year'),me.attr('data-month'),me);
 				})
-			)
-			.trigger('miniCalendarLoaded');
-	});
+				.trigger('miniCalendarLoaded');
+		});
+	}
 }
 
 if (window.jQuery){
 	jQuery(function(){
-		jQuery.getScript('#CHEMIN{prive/javascript/ui/jquery.ui.widget.js}',function(){scripts_loaded.widget = true;minical_init();});
-		jQuery.getScript('#CHEMIN{prive/javascript/ui/jquery.ui.datepicker.js}',function(){scripts_loaded.datepicker = true;minical_init();});
+		jQuery.getScript('#CHEMIN{javascript/ui/jquery.ui.widget.js}',function(){minical.scripts_loaded.widget = true;minical.init();});
+		jQuery.getScript('#CHEMIN{javascript/ui/jquery.ui.datepicker.js}',function(){minical.scripts_loaded.datepicker = true;minical.init();});
+		jQuery.getScript('#CHEMIN{javascript/jquery-ui.multidatespicker.js}',function(){minical.scripts_loaded.multidatepicker = true;minical.init();});
 	});
 }
 /*]]>*/</script>
