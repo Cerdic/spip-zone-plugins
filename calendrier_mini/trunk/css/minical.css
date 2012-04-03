@@ -6,12 +6,14 @@
 .calendriermini table caption{margin: 0 auto;	padding:0;}
 .calendriermini table th{padding:0;}
 .calendriermini table td {width: 14%;line-height: 2em;padding:0;}
-.calendriermini table td a{display: block;background: #fff;border: 1px solid #EEE;font-weight: bold;text-decoration: none;}
-.calendriermini .ui-datepicker-today a {border-color:#bbbb99;}
+.calendriermini table td a{display: block;background: #fff;border: 1px solid #EEE;font-weight: bold;text-decoration: none;color:inherit;}
 .calendriermini .ui-datepicker-other-month {opacity: .5; filter:Alpha(Opacity=50);}
 .calendriermini .ui-datepicker-other-month a {font-weight: normal;background:#eee;}
-.calendriermini table td a:hover{background: #DBB8DC;color: #636;border-color:#DBB8DC;}
-.calendriermini table td.ui-datepicker-today a:hover{border-color:#636;}
+.calendriermini .ui-state-highlight a {background: #EAEA98;border-color: #EAEA98;}
+.calendriermini .ui-datepicker-today a {border-color:#bbbb99;}
+
+.calendriermini table .ui-state-highlight a:hover{background: #DBB8DC;color: #636;border-color:#DBB8DC;}
+.calendriermini table .ui-state-highlight.ui-datepicker-today a:hover{border-color:#636;}
 .calendriermini span{}
 
 .calendriermini .ui-icon { display: block; text-indent: -99999px; overflow: hidden; background-repeat: no-repeat; }

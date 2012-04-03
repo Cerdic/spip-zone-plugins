@@ -47,9 +47,22 @@ var minical = {
 		showOtherMonths: true,
 		selectOtherMonths: true
 	},
+
 	set_events: function(me,start,end,data){
-		console.log(data);
+		var dates = [];
+		if (data.length){
+			var d;
+			for(var j in data){
+				d = data[j].start.split(" ");
+				d = d[0].split("-");
+				d = new Date(d[0],d[1]-1,d[2]);
+				dates.push(d);
+			}
+			console.log(dates);
+			me.multiDatesPicker('addDates', dates);
+		}
 	},
+
 	change_month_year: function(year, month, inst){
 		var me = inst;
 		//console.log("change_month_year:"+year+"/"+month);
@@ -60,15 +73,24 @@ var minical = {
 		t = parseInt(t.getTime()/1000);
 		var start = t-7*24*3600;
 		var end = t+38*24*3600;
-		jQuery.ajax({
-			url:jQuery(me).attr("data-json"),
-			data:{start:start,end:end},
-			success:function(data, textStatus, jqXHR){
-				data = eval(data);
-				minical.set_events(me,start,end,data);
-			}
-		});
+		// stocker les year/month deja vus pour ne pas les recharger 2 fois quand on va et vient
+		var o = me.get(0);
+		if (typeof o.dateseen == "undefined")
+			o.dateseen = {};
+		if (!o.dateseen[year+"/"+month]){
+			console.log(o.dateseen);
+			jQuery.ajax({
+				url:jQuery(me).attr("data-json"),
+				data:{start:start,end:end},
+				success:function(data, textStatus, jqXHR){
+					o.dateseen[year+"/"+month] = true;
+					data = eval(data);
+					minical.set_events(me,start,end,data);
+				}
+			});
+		}
 	},
+
 	scripts_loaded: {widget:false,datepicker:false,multidatepicker:false},
 	init : function(){
 		if (!minical.scripts_loaded.widget || !minical.scripts_loaded.datepicker || !minical.scripts_loaded.multidatepicker)
