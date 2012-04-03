@@ -1,7 +1,7 @@
 <paquet
 	prefix="agenda"
 	categorie="date"
-	version="3.5.5"
+	version="3.6.0"
 	etat="test"
 	compatibilite="[3.0.0-dev;["
 	logo="prive/themes/spip/images/evenement-32.png"
@@ -35,6 +35,7 @@
 
 	<utilise nom="Fulltext" compatibilite="[0.2;[" />
 	<utilise nom="mots" compatibilite="[2.0.0;[" />
+	<necessite nom="calendriermini" compatibilite="[2.0.0;[" />
 
 	<menu nom="evenements" titre="agenda:evenements" parent="menu_edition" icone="images/evenement-16.png" />
 	<menu nom="evenement_edit" titre="agenda:creer_evenement" parent="outils_rapides" icone="images/evenement-new-16.png" />
