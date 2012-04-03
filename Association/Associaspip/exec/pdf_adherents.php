@@ -15,7 +15,7 @@ include_spip('pdf/extends');
 
 function exec_pdf_adherents()
 {
-	if (!autoriser('associer', 'adherents')) {
+	if (!autoriser('voir_membres', 'association', 0)) { /* on s'assure qu'il n'y ai pas d'id associe a la demande d'autorisation sur voir_membres car on les consulte tous */
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
