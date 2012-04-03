@@ -38,22 +38,36 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_noisette_badge_facebook' => 'Zobrazí odznak Facebooku definovaný na stránke s nastaveniami',
-	'description_noisette_facebook_like' => 'Zobrazí tlačidlo <b>Páči sa mi to</b> alebo <b>Odporučiť,</b> prípadne <b>Poslať</b>',
+	'description_noisette_facebook_like' => 'Zobrazí tlačidlo <b>Páči sa mi to</b> alebo <b>Odporučiť,</b> prípadne <b>Poslať</b>', # MODIF
+	'description_noisette_facebook_like_box' => 'Affiche la boîte Facebook <b>J\'aime</b>. Elle affiche notamment le nombre de fans aimant la page Facebook référencée', # NEW
 
 	// N
 	'noisette_action_like' => 'Páči sa mi to',
 	'noisette_action_recommand' => 'Odporučiť',
+	'noisette_colorscheme_dark' => 'Fond sombre', # NEW
+	'noisette_colorscheme_light' => 'Fond clair', # NEW
 	'noisette_label_action' => 'Akcia',
-	'noisette_label_afficher_send' => 'Tlačidlo Poslať?',
+	'noisette_label_afficher_send' => 'Tlačidlo Poslať?', # MODIF
 	'noisette_label_afficher_titre_noisette' => 'Zobraziť názov?',
+	'noisette_label_border_color' => 'Saisir le code couleur de la bordure de la boîte (au format #123ABC)', # NEW
+	'noisette_label_colorscheme' => 'Apparence', # NEW
+	'noisette_label_header' => 'Afficher l\'entête de la boîte « Retrouvez-nous sur Facebook » ?', # NEW
+	'noisette_label_height' => 'Hauteur', # NEW
+	'noisette_label_href' => 'Url de la page Facebook', # NEW
+	'noisette_label_layout' => 'Texte', # NEW
 	'noisette_label_niveau_titre' => 'Vybrať úroveň nadpisu',
-	'noisette_label_show_faces' => 'Zobraziť pod tlačidlo fotografiu z profilu?',
+	'noisette_label_show_faces' => 'Zobraziť pod tlačidlo fotografiu z profilu?', # MODIF
+	'noisette_label_stream' => 'Afficher le flux d\'articles de la page Facebook ?', # NEW
 	'noisette_label_titre_noisette' => 'Názov:',
 	'noisette_label_titre_noisette_perso' => 'Ak je názov vlastný:',
 	'noisette_label_width' => 'Šírka',
+	'noisette_layout_box_count' => 'Total uniquement au-dessus', # NEW
+	'noisette_layout_button_count' => 'Total uniquement à droite', # NEW
+	'noisette_layout_standard' => 'Texte entier à droite', # NEW
 	'noisette_titre_perso' => 'Vlastný názov',
 	'nom_noisette_badge_facebook' => 'Odznak pre Facebook',
 	'nom_noisette_facebook_like' => 'Tlačidlo Páči sami pre Facebook',
+	'nom_noisette_facebook_like_box' => 'Boîte Facebook-like', # NEW
 
 	// T
 	'titre_mon_badge_facebook' => 'Môj odznak pre facebook',
