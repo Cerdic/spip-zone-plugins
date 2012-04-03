@@ -5,9 +5,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	'mois_suivant' => 'Mois suivant',
-	'mois_precedent' => 'Mois précédent',
+	// A
 	'aucune_date' => 'Rien pour ce mois',
+
 	// D
 	'date_jour_abbr_1' => 'dim.',
 	'date_jour_abbr_2' => 'lun.',
@@ -15,7 +15,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_jour_abbr_4' => 'mer.',
 	'date_jour_abbr_5' => 'jeu.',
 	'date_jour_abbr_6' => 'ven.',
-	'date_jour_abbr_7' => 'sam.'
+	'date_jour_abbr_7' => 'sam.',
+
+	// M
+	'mois_precedent' => 'Mois précédent',
+	'mois_suivant' => 'Mois suivant'
 );
 
 ?>
