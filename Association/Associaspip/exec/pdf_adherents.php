@@ -49,7 +49,7 @@ function exec_pdf_adherents()
 
 	if ($sent['adresse']=='on') {
 		$pdf->AddCol('adresse',45 ,_T('asso:adherent_libelle_adresse'), 'L');
-		$adresses =  association_recuperer_adresses($liste_id_auteurs,"\n"," ");
+		$adresses =  association_recuperer_adresses($liste_id_auteurs, '', "\n"," ");
 	}
 	if ($sent['telephone']=='on') {
 		$pdf->AddCol('telephone',30 ,_T('asso:adherent_libelle_telephone'), 'C');
@@ -76,7 +76,7 @@ function exec_pdf_adherents()
 			$telephones_string = '';
 			foreach ($telephones[$id_auteur] as $telephone) {
 				if (!$first_tel) {$telephones_string .= "\n";} else $first_tel = false;
-				$telephones_string .=  recuperer_fond("modeles/coordonnees_telephoniques", array ('telephone' => $telephone));
+				$telephones_string .=  recuperer_fond("modeles/coordonnees_telephone", array ('telephone' => $telephone));
 			}
 			$adresses_tels[$id_auteur]['telephone'] = $telephones_string;
 		}
