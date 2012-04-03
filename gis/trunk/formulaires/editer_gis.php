@@ -23,11 +23,11 @@ function formulaires_editer_gis_charger_dist($id_gis='new', $objet='', $id_objet
     /* Traitement des options */
 	/* peut etre a envoyer dans une fonction generique de verification des options */
 	if (is_array($options)) {
-    	if (is_numeric($options['lat']))
+    	if (!$valeurs['lat'] and is_numeric($options['lat']))
 	        $valeurs['lat']=$options['lat'];
-	    if (is_numeric($options['lon']))
+	    if (!$valeurs['lon'] and is_numeric($options['lon']))
         	$valeurs['lon']=$options['lon'];
-    	if (is_numeric($options['zoom']) && intval($options['zoom'])==$options['zoom'])
+    	if (!$valeurs['zoom'] and is_numeric($options['zoom']) && intval($options['zoom'])==$options['zoom'])
 	        $valeurs['zoom']=$options['zoom'];
 		/* Bounding Box */
 	    if (is_numeric($options['sw_lat']))
