@@ -13,7 +13,7 @@ class PDF extends PDF_Table {
 var $ajoute_titre;
 var $titre;
 
-	function PDF($orientation='L',$unite='mm',$format='A4',$ajoute_titre=true){
+	function PDF($orientation='P',$unite='mm',$format='A4',$ajoute_titre=true){
 		$this->ajoute_titre=$ajoute_titre;
 		$this->FPDF($orientation, $unite, $format);
 	}
