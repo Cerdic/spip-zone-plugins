@@ -53,6 +53,9 @@ function twidget_get_cached_url($url,$force=true) {
 }
 
 function twidget_get_cached_avatar($img_url){
+
+	$img_url = str_replace('\/','/',$img_url);
+	
 	@define('_TWIDGET_CACHE_AVATAR',24*3600);
 	$parts = parse_url($img_url);
 
