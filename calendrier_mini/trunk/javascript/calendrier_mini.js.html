@@ -111,7 +111,8 @@ var minical = {
 					me.datepicker("setDate" , me.attr('data-year')+"-"+me.attr('data-month')+"-1");
 					minical.change_month_year(me.attr('data-year'),me.attr('data-month'),me);
 				})
-				.trigger('miniCalendarLoaded');
+				.trigger('miniCalendarLoaded')
+				.find(".alt").remove();
 		});
 	},
 	on_select : function(dateText, inst){

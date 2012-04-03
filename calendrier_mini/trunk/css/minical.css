@@ -3,6 +3,8 @@
 .calendriermini .calendar-container {height: 16em;position: relative;}
 .calendriermini .calendar-container .image_loading {position: absolute;top:0;right:0;}
 
+.js .calendriermini .calendar-container .alt {display: none;}
+
 .calendriermini table{width: 100%;font-size: 0.8em;text-align: center;margin: 0 auto;border-collapse: collapse;}
 .calendriermini table caption{margin: 0 auto;	padding:0;}
 .calendriermini table th{padding:0;}

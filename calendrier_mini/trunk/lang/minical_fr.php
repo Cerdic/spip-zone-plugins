@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'mois_suivant' => 'Mois suivant',
 	'mois_precedent' => 'Mois précédent',
+	'aucune_date' => 'Rien pour ce mois',
 	// D
 	'date_jour_abbr_1' => 'dim.',
 	'date_jour_abbr_2' => 'lun.',
