@@ -83,7 +83,10 @@ function notifications_notifications_destinataires($flux){
 		spip_log("Prop article > admin restreint de " . join(',', $hierarchie), 'notifications');
 
 		//les admins de la rub et de ses parents 
-		$result_email = sql_select("auteurs.email,auteurs.id_auteur,lien.id_rubrique", "spip_auteurs AS auteurs, spip_auteurs_rubriques AS lien", "lien.id_rubrique IN (" . join(',', $hierarchie) . ") AND auteurs.id_auteur=lien.id_auteur AND auteurs.statut='0minirezo'");
+		$result_email = sql_select(
+			"auteurs.email,auteurs.id_auteur,lien.id_objet as id_rubrique",
+			"spip_auteurs AS auteurs JOIN spip_auteurs_liens AS lien ON auteurs.id_auteur=lien.id_auteur ",
+			"lien.objet='rubrique' AND ".sql_in('lien.id_objet',sql_quote($hierarchie))." AND auteurs.statut='0minirezo'");
 
 		while ($qui = sql_fetch($result_email)){
 			spip_log($options['statut'] . " article > admin restreint " . $qui['id_auteur'] . " de la rubrique" . $qui['id_rubrique'] . " prevenu", 'notifications');
@@ -102,7 +105,10 @@ function notifications_notifications_destinataires($flux){
 		include_spip('base/abstract_sql');
 
 		// Qui va-t-on prevenir en plus ?
-		$result_email = sql_select("auteurs.email", "spip_auteurs AS auteurs, spip_auteurs_articles AS lien", "lien.id_article=" . intval($id_article) . " AND auteurs.id_auteur=lien.id_auteur");
+		$result_email = sql_select(
+			"auteurs.email",
+			"spip_auteurs AS auteurs JOIN spip_auteurs_liens AS lien ON auteurs.id_auteur=lien.id_auteur",
+			"lien.id_objet=".intval($id_article)." AND lien.objet='article'");
 
 		while ($qui = sql_fetch($result_email)){
 			$flux['data'][] = $qui['email'];
