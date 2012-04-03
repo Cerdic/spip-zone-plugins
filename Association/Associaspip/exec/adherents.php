@@ -327,7 +327,7 @@ function adherents_table($liste_id_auteurs)
 		$res .= '<input type="checkbox" name="champs[telephone]" />'._T('asso:telephone').'<br />';
 	}
 	/* on fait suivre la liste des auteurs a afficher */
-	$res .= '<input type="hidden" name="liste_id_auteurs" value="'.serialize($liste_id_auteurs).'" />';
+	$res .= "<input type='hidden' name='liste_id_auteurs' value='".serialize($liste_id_auteurs)."' />";
 	return  generer_form_ecrire('pdf_adherents', $res, '', _T('asso:bouton_impression'));
 }
 
