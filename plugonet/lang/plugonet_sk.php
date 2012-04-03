@@ -76,8 +76,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_validation_paquetxml_pluriel' => '@nb@ súborov paquet.xml nevyhovuje DTD',
 	'message_nok_validation_pluginxml' => '@nb@ súbor plugin.xml nevyhovuje DTD',
 	'message_nok_validation_pluginxml_pluriel' => '@nb@ súborov plugin.xml nevyhovuje DTD',
-	'message_notice_validation_pluginxml' => 'dont @nb@ est issu d\'un plugin.xml non conforme', # NEW
-	'message_notice_validation_pluginxml_pluriel' => 'dont @nb@ sont issus de plugin.xml non conformes', # NEW
+	'message_notice_validation_pluginxml' => 'z ktorých @nb@ nie je konzistentný v súbore plugin.xml',
+	'message_notice_validation_pluginxml_pluriel' => 'z ktorých @nb@ nie je konzistentných v súbore plugin.xml',
 	'message_ok_generation_paquetxml' => '@nb@ úspešne vytvorený súbor paquet.xml',
 	'message_ok_generation_paquetxml_pluriel' => 'úspešne vytvorených súborov paquet.xml: @nb@',
 	'message_ok_validation_paquetxml' => '@nb@ správny súbor paquet.xml',
@@ -91,8 +91,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'onglet_verifier' => 'Skontrolovať plugin.xml',
 
 	// R
-	'resume_generation_paquetxml' => '@nb@ plugin.xml traité (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.', # NEW
-	'resume_generation_paquetxml_pluriel' => '@nb@ plugin.xml traités (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.', # NEW
+	'resume_generation_paquetxml' => '@nb@ spracovaný súbor plugin.xml (@duree@s): @details@.<br />Podrobné výsledky si prečítajte nižšie, prosím.',
+	'resume_generation_paquetxml_pluriel' => '@nb@ spracovaných súborov plugin.xml (@duree@s): @details@.<br />Podrobné výsledky si prečítajte nižšie, prosím.',
 	'resume_validation_paquetxml' => '@nb@ potvrdený súbor paquet.xml (@duree@s): @details@.<br />Podrobné výsledky si prečítajte nižšie, prosím.',
 	'resume_validation_paquetxml_pluriel' => '@nb@ potvrdených súborov paquet.xml (@duree@s): @details@.<br />Podrobné výsledky si prečítajte nižšie, prosím.',
 	'resume_verification_pluginxml' => '@nb@ skontrolovaný súbor plugin.xml (@duree@s): @details@.<br />Podrobné výsledky si prečítajte nižšie, prosím.',
