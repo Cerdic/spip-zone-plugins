@@ -39,7 +39,7 @@ var minical = {
 		dayNamesMin: [
 			'<:date_jour_1_initiale|texte_script:>','<:date_jour_2_initiale|texte_script:>','<:date_jour_3_initiale|texte_script:>','<:date_jour_4_initiale|texte_script:>',
 			'<:date_jour_5_initiale|texte_script:>','<:date_jour_6_initiale|texte_script:>','<:date_jour_7_initiale|texte_script:>'],
-		dateFormat: 'dd/mm/yy',
+		dateFormat: 'yy-mm-dd',
 		firstDay: 1,
 		isRTL: [(#ENV{lang}|lang_dir|=={rtl}|?{true,false})],
 		changeMonth: true,
@@ -58,7 +58,7 @@ var minical = {
 				d = new Date(d[0],d[1]-1,d[2]);
 				dates.push(d);
 			}
-			console.log(dates);
+			//console.log(dates);
 			me.multiDatesPicker('addDates', dates);
 		}
 	},
@@ -78,12 +78,12 @@ var minical = {
 		if (typeof o.dateseen == "undefined")
 			o.dateseen = {};
 		if (!o.dateseen[year+"/"+month]){
-			console.log(o.dateseen);
+			//console.log(o.dateseen);
+			o.dateseen[year+"/"+month] = true;
 			jQuery.ajax({
 				url:jQuery(me).attr("data-json"),
 				data:{start:start,end:end},
 				success:function(data, textStatus, jqXHR){
-					o.dateseen[year+"/"+month] = true;
 					data = eval(data);
 					minical.set_events(me,start,end,data);
 				}
@@ -105,16 +105,31 @@ var minical = {
 						nextText: '<:minical:mois_suivant|texte_script:>',
 						create: minical.create,
 						beforeShow: minical.before_show,
-						onChangeMonthYear: minical.change_month_year
+						onChangeMonthYear: minical.change_month_year,
+						onSelect: minical.on_select
 					})
 				)
 				.each(function(){
 					var me=jQuery(this);
-					me.datepicker("setDate" , "1/"+me.attr('data-month')+"/"+me.attr('data-year'));
+					me.datepicker("setDate" , me.attr('data-year')+"-"+me.attr('data-month')+"-1");
 					minical.change_month_year(me.attr('data-year'),me.attr('data-month'),me);
 				})
 				.trigger('miniCalendarLoaded');
 		});
+	},
+	on_select : function(dateText, inst){
+		var me = inst.input;
+		if (dateText) {
+			// annuler la selection !
+			me.multiDatesPicker('toggleDate', dateText);
+			var actif = (me.multiDatesPicker('gotDate', dateText) !==false);
+			if (actif){
+				var url = me.attr('data-url');
+				url = parametre_url(url,me.attr('data-vardate'),dateText);
+				//console.log(url);
+				window.location = url;
+			}
+		}
 	}
 }
 

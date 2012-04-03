@@ -9,7 +9,7 @@
 <head>
 <script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
 	<title>Exemple #[(#REM)]CALENDRIER_MINI</title>
-	<INCLURE{fond=#EVAL{_DIR_PLUGIN_DIST}inclure/head} />
+	<INCLURE{fond=squelettes-dist/inclure/head} />
 	<link rel="stylesheet" href="[(#CHEMIN{minical.css}|direction_css)]" type="text/css" media="projection, screen, tv" />
 </head>
 
@@ -54,7 +54,7 @@
 
 		[(#REM) Menu de navigation laterale ]
 		<div class="aside">
-			[(#MODELE{rubrique_calendrier,self=#SELF,var_date=archives,date=#ENV{archives,#DATE},lang,id_rubrique})]
+			#CALENDRIER_MINI
 			<B_categories>
 			<div id='categories' class="rubriques">
 				<h2 class="menu-titre"><:categories|ucfirst:></h2>
