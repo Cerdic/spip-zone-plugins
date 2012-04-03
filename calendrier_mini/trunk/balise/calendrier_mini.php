@@ -24,13 +24,13 @@ function balise_CALENDRIER_MINI_stat($args, $filtres) {
  * Syntaxe raccourcie du plugin
  * #CALENDRIER_MINI
  * #CALENDRIER_MINI{#SELF}
- * #CALENDRIER_MINI{#SELF,#URL_PAGE{json_calendrier_mini}}
+ * #CALENDRIER_MINI{#SELF,#URL_PAGE{calendrier_mini.json}}
  *
  * Syntaxe ancienne (ou plugin agenda)
  * #CALENDRIER_MINI{#ENV{date}}
  * #CALENDRIER_MINI{#ENV{date},date}
  * #CALENDRIER_MINI{#ENV{date},date,#SELF}
- * #CALENDRIER_MINI{#ENV{date},date,#SELF,#URL_PAGE{json_calendrier_mini}}
+ * #CALENDRIER_MINI{#ENV{date},date,#SELF,#URL_PAGE{calendrier_mini.json}}
  *
  * @param string $date
  *   date automatique collectee par VAR_DATE
