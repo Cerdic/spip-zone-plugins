@@ -14,7 +14,7 @@
 					></div>
 </div>
 <script type='text/javascript'>/*<![CDATA[*/
-
+var ajax_image_searching = "<img src='#CHEMIN{images/searching.gif}' width='16' height='16' />";
 var minical = {
 	options: {
 		buttonText: '<:afficher_calendrier|texte_script:>',
@@ -80,15 +80,23 @@ var minical = {
 		if (!o.dateseen[year+"/"+month]){
 			//console.log(o.dateseen);
 			o.dateseen[year+"/"+month] = true;
+			minical.show_loading(me);
 			jQuery.ajax({
 				url:jQuery(me).attr("data-json"),
 				data:{start:start,end:end},
 				success:function(data, textStatus, jqXHR){
 					data = eval(data);
 					minical.set_events(me,start,end,data);
+					minical.hide_loading(me);
 				}
 			});
 		}
+	},
+	show_loading : function(me){
+		me.animateLoading();
+	},
+	hide_loading : function(me) {
+		me.endLoading(true);
 	},
 
 	scripts_loaded: {widget:false,datepicker:false,multidatepicker:false},
