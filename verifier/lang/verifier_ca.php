@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_comparaison_grand_egal' => 'La valeur doit être supérieure ou égale au champ "@nom_champ@"', # NEW
 	'erreur_comparaison_petit' => 'La valeur doit être inférieure au champ "@nom_champ@"', # NEW
 	'erreur_comparaison_petit_egal' => 'La valeur doit être inférieure ou égale au champ "@nom_champ@"', # NEW
+	'erreur_couleur' => 'Le code couleur n\'est pas valide.', # NEW
 	'erreur_date' => 'El format de la data no és correcte.',
 	'erreur_date_format' => 'Le format de la date n\'est pas accepté.', # NEW
 	'erreur_decimal' => 'La valeur doit être un nombre décimal.', # NEW
@@ -46,6 +47,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'normaliser_option_date_en_datetime' => 'Au format «Datetime» (pour SQL)', # NEW
 
 	// O
+	'option_couleur_normaliser_label' => 'Normaliser le code couleur ?', # NEW
+	'option_couleur_type_hexa' => 'Code couleur au format héxadécimal', # NEW
+	'option_couleur_type_label' => 'Type de vérification à effectuer', # NEW
 	'option_decimal_nb_decimales_label' => 'Nombre de décimales après la virgule', # NEW
 	'option_email_disponible_label' => 'Adreça disponible',
 	'option_email_disponible_label_case' => 'Verificar que l\'adreça no l\'utilitzi ja un altre usuari',
@@ -74,6 +78,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_type_protocole_web' => 'Protocoles web : http ou https', # NEW
 
 	// T
+	'type_couleur' => 'Couleur', # NEW
+	'type_couleur_description' => 'Vérifie que la valeur est un code couleur.', # NEW
 	'type_date' => 'Data',
 	'type_date_description' => 'Verifica que el valor és una data en format JJ/MM/AAAA. El separador és lliure (".", "/", etc.).',
 	'type_decimal' => 'Nombre décimal', # NEW

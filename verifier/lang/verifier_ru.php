@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_comparaison_grand_egal' => 'Значение должно быть больше или соответствовать полю "@nom_champ@"',
 	'erreur_comparaison_petit' => 'Значаение должно быть меньше чем поле "@nom_champ@"',
 	'erreur_comparaison_petit_egal' => 'Значение должно быть меньшим или равным полю "@nom_champ@"',
+	'erreur_couleur' => 'Le code couleur n\'est pas valide.', # NEW
 	'erreur_date' => 'Неправильный формат даты.',
 	'erreur_date_format' => 'Неправильный формат даты.',
 	'erreur_decimal' => 'Число должно быть десятичным.',
@@ -46,6 +47,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'normaliser_option_date_en_datetime' => 'Формат даты и времени (для SQL)',
 
 	// O
+	'option_couleur_normaliser_label' => 'Normaliser le code couleur ?', # NEW
+	'option_couleur_type_hexa' => 'Code couleur au format héxadécimal', # NEW
+	'option_couleur_type_label' => 'Type de vérification à effectuer', # NEW
 	'option_decimal_nb_decimales_label' => 'Количество символов после запятой.',
 	'option_email_disponible_label' => 'Доступный адрес',
 	'option_email_disponible_label_case' => 'Проверить использовался ли адрес другим пользователем.',
@@ -74,6 +78,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_type_protocole_web' => 'Интернет протоколы : http или https',
 
 	// T
+	'type_couleur' => 'Couleur', # NEW
+	'type_couleur_description' => 'Vérifie que la valeur est un code couleur.', # NEW
 	'type_date' => 'Дата',
 	'type_date_description' => 'Проверить является ли формат даты ДД/ММ/ГГГГ. Разделитель может быть произвольным (".", "/", и т.д.).',
 	'type_decimal' => 'Десятичное число',

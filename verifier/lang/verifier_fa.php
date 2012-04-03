@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_comparaison_grand_egal' => 'اين مقدار بايد از مقدار ميدانِ "@nom_champ@"بالاتر يا مساوي باشد',
 	'erreur_comparaison_petit' => 'اين مقدار بايد از مقدار ميدان"@nom_champ@"  پائين‌تر باشد',
 	'erreur_comparaison_petit_egal' => 'اين مقدار بايد از مقدار ميدان "@nom_champ@"پائين‌تر يا با آن مساوي باشد',
+	'erreur_couleur' => 'Le code couleur n\'est pas valide.', # NEW
 	'erreur_date' => 'تاريخ معتبر نيست.',
 	'erreur_date_format' => 'فرمت تاريخ قبول نيست.',
 	'erreur_decimal' => 'مقدار بايد يك عدد اعشاري باشد.',
@@ -46,6 +47,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'normaliser_option_date_en_datetime' => 'با فرمت «تاريخ‌زمان» (براي اس‌كيو‌ال)',
 
 	// O
+	'option_couleur_normaliser_label' => 'Normaliser le code couleur ?', # NEW
+	'option_couleur_type_hexa' => 'Code couleur au format héxadécimal', # NEW
+	'option_couleur_type_label' => 'Type de vérification à effectuer', # NEW
 	'option_decimal_nb_decimales_label' => 'تعداد اعشارها بعد از مميز',
 	'option_email_disponible_label' => 'نشاني در دسترس',
 	'option_email_disponible_label_case' => 'چك كنيد كه كاربر ديگر اين نشاني را استفاده نكرده باشد',
@@ -74,6 +78,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_type_protocole_web' => 'پروتكل‌هاي وب: http يا https',
 
 	// T
+	'type_couleur' => 'Couleur', # NEW
+	'type_couleur_description' => 'Vérifie que la valeur est un code couleur.', # NEW
 	'type_date' => 'تاريخ',
 	'type_date_description' => 'چك كنيد كه فرمت تاريخ اين باشد: س‌س‌س‌س/م‌م/رر. مميز آزاد است («.»، «/»، و غيره).',
 	'type_decimal' => 'شماره‌ي اعشاري',
