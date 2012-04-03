@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'calendriermini_description' => 'Allow to use a #CALENDRIER_MINI tag.
 _ This tag displays a calendar designed as dotclear\'s one and therefore compatible with the styles from this blog system.
 _ Other tools are added, such as tags, criteria, models...
-_ Icon from [Tempest->http://tempest.deviantart.com/] under CC BY-NC-ND license.',
+_ Icon from [Tempest->http://tempest.deviantart.com/] under CC BY-NC-ND license.', # MODIF
 	'calendriermini_slogan' => 'Allow to use a #CALENDRIER_MINI tag'
 );
 

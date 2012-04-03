@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'calendriermini_description' => 'Umožňuje používať tag #CALENDRIER_MINI.
 _ Tento tag zobrazí vzhľad kalendára bez bodiek, a preto je kompatibilný so štýlmi z tohto blogovacieho systému.
 _ Pomáha ďalším prvkom, ako sú tagy, kritériá, šablóny a i.
-_ Ikona [Tempest->http://tempest.deviantart.com/] pod licenciou CC BY-NC-ND.',
+_ Ikona [Tempest->http://tempest.deviantart.com/] pod licenciou CC BY-NC-ND.', # MODIF
 	'calendriermini_slogan' => 'Umožňuje používať tag #CALENDRIER_MINI'
 );
 
