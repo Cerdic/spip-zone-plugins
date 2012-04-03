@@ -26,15 +26,14 @@ function verifier_couleur_dist($valeur, $options=array(), &$valeur_normalisee=nu
 		case 'hexa':
 		default:
 			if (!preg_match(",^#[a-f0-9]{6}$,i", $valeur))
-				if ($options['normaliser'] and preg_match(",^[a-f0-9]{6}$,i", $valeur))
+				if (isset($options['normaliser']) and preg_match(",^[a-f0-9]{6}$,i", $valeur))
 					$valeur_normalisee = "#".$valeur ;
 				else
 					return $erreur;
 			break;
 	}
-			spip_log("valeur $valeur valeur_normalisee $valeur_normalisee options ".print_r($options,true),"couleur");
 
 	return $ok;
 }
 
-?> 
+?>
