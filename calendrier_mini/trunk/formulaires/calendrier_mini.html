@@ -12,145 +12,21 @@
 					data-url="#ENV{self}"
 					data-vardate="#ENV{var_date}"
 					></div>
-</div>
-<script type='text/javascript'>/*<![CDATA[*/
-var ajax_image_searching = "<img src='#CHEMIN{images/searching.gif}' width='16' height='16' />";
-var minical = {
-	options: {
-		buttonText: '<:afficher_calendrier|texte_script:>',
-		buttonImage: '#CHEMIN_IMAGE{calendrier-16.png}',
-		buttonImageOnly: true,
-		prevText: '<:precedent|texte_script:>',
-		nextText: '<:suivant|texte_script:>',
-		currentText: '<:date_aujourdhui|texte_script:>',
-		closeText: '<:bouton_fermer|texte_script:>',
-		monthNames: [
-			'<:date_mois_1|texte_script:>','<:date_mois_2|texte_script:>','<:date_mois_3|texte_script:>','<:date_mois_4|texte_script:>','<:date_mois_5|texte_script:>','<:date_mois_6|texte_script:>',
-			'<:date_mois_7|texte_script:>','<:date_mois_8|texte_script:>','<:date_mois_9|texte_script:>','<:date_mois_10|texte_script:>','<:date_mois_11|texte_script:>','<:date_mois_12|texte_script:>'],
-		monthNamesShort: [
-			'<:date_mois_1_abbr|texte_script:>','<:date_mois_2_abbr|texte_script:>','<:date_mois_3_abbr|texte_script:>','<:date_mois_4_abbr|texte_script:>','<:date_mois_5_abbr|texte_script:>','<:date_mois_6_abbr|texte_script:>',
-			'<:date_mois_7_abbr|texte_script:>','<:date_mois_8_abbr|texte_script:>','<:date_mois_9_abbr|texte_script:>','<:date_mois_10_abbr|texte_script:>','<:date_mois_11_abbr|texte_script:>','<:date_mois_12_abbr|texte_script:>'],
-		dayNames: [
-			'<:date_jour_1|texte_script:>','<:date_jour_2|texte_script:>','<:date_jour_3|texte_script:>','<:date_jour_4:|texte_script>',
-			'<:date_jour_5|texte_script:>','<:date_jour_6|texte_script:>','<:date_jour_7|texte_script:>'],
-		dayNamesShort: [
-			'<:date_jour_1_abbr|texte_script:>','<:date_jour_2_abbr|texte_script:>','<:date_jour_3_abbr|texte_script:>','<:date_jour_4_abbr|texte_script:>',
-			'<:date_jour_5_abbr|texte_script:>','<:date_jour_6_abbr|texte_script:>','<:date_jour_7_abbr|texte_script:>'],
-		dayNamesMin: [
-			'<:date_jour_1_initiale|texte_script:>','<:date_jour_2_initiale|texte_script:>','<:date_jour_3_initiale|texte_script:>','<:date_jour_4_initiale|texte_script:>',
-			'<:date_jour_5_initiale|texte_script:>','<:date_jour_6_initiale|texte_script:>','<:date_jour_7_initiale|texte_script:>'],
-		dateFormat: 'yy-mm-dd',
-		firstDay: 1,
-		isRTL: [(#ENV{lang}|lang_dir|=={rtl}|?{true,false})],
-		changeMonth: true,
-		changeYear: true,
-		showOtherMonths: true,
-		selectOtherMonths: true
-	},
+</div>[
+(#REM) --------------------------------------------------------------------------------------------------
 
-	set_events: function(me,start,end,data){
-		var dates = [];
-		if (data.length){
-			var d;
-			for(var j in data){
-				d = data[j].start.split(" ");
-				d = d[0].split("-");
-				d = new Date(d[0],d[1]-1,d[2]);
-				dates.push(d);
-			}
-			//console.log(dates);
-			me.multiDatesPicker('addDates', dates);
-		}
-	},
+Chargement du javascript du mini-calendrier
 
-	change_month_year: function(year, month, inst){
-		var me = inst;
-		//console.log("change_month_year:"+year+"/"+month);
-		if (typeof inst.input != "undefined")
-			me = inst.input;
-		//console.log(me);
-		var t = new Date(year,month-1,1);
-		t = parseInt(t.getTime()/1000);
-		var start = t-7*24*3600;
-		var end = t+38*24*3600;
-		// stocker les year/month deja vus pour ne pas les recharger 2 fois quand on va et vient
-		var o = me.get(0);
-		if (typeof o.dateseen == "undefined")
-			o.dateseen = {};
-		if (!o.dateseen[year+"/"+month]){
-			//console.log(o.dateseen);
-			o.dateseen[year+"/"+month] = true;
-			minical.show_loading(me);
-			jQuery.ajax({
-				url:jQuery(me).attr("data-json"),
-				data:{start:start,end:end},
-				success:function(data, textStatus, jqXHR){
-					data = eval(data);
-					minical.set_events(me,start,end,data);
-					minical.hide_loading(me);
-				}
-			});
-		}
-	},
-	show_loading : function(me){
-		me.animateLoading();
-	},
-	hide_loading : function(me) {
-		me.endLoading(true);
-	},
+]<script type='text/javascript'>/*<![CDATA[*/
+if (window.jQuery){jQuery(function(){
+		jQuery.getScript('[(#PRODUIRE{fond=javascript/calendrier_mini.js,lang=#ENV{lang}}|compacte)]',function(){minical.init('.minicalendar .calendar-container');});
+});}/*]]>*/</script>[
+(#REM) --------------------------------------------------------------------------------------------------
 
-	scripts_loaded: {widget:false,datepicker:false,multidatepicker:false},
-	init : function(){
-		if (!minical.scripts_loaded.widget || !minical.scripts_loaded.datepicker || !minical.scripts_loaded.multidatepicker)
-			return;
-		jQuery(function(){
-			jQuery('.minicalendar .calendar-container').not('.loaded')
-				.addClass('loaded')
-				.multiDatesPicker(jQuery.extend(minical.options,
-					{
-						showButtonPanel: true,
-						prevText: '<:minical:mois_precedent|texte_script:>',
-						nextText: '<:minical:mois_suivant|texte_script:>',
-						create: minical.create,
-						beforeShow: minical.before_show,
-						onChangeMonthYear: minical.change_month_year,
-						onSelect: minical.on_select
-					})
-				)
-				.each(function(){
-					var me=jQuery(this);
-					me.datepicker("setDate" , me.attr('data-year')+"-"+me.attr('data-month')+"-1");
-					minical.change_month_year(me.attr('data-year'),me.attr('data-month'),me);
-				})
-				.trigger('miniCalendarLoaded');
-		});
-	},
-	on_select : function(dateText, inst){
-		var me = inst.input;
-		if (dateText) {
-			// annuler la selection !
-			me.multiDatesPicker('toggleDate', dateText);
-			var actif = (me.multiDatesPicker('gotDate', dateText) !==false);
-			if (actif){
-				var url = me.attr('data-url');
-				url = parametre_url(url,me.attr('data-vardate'),dateText);
-				//console.log(url);
-				window.location = url;
-			}
-		}
-	}
-}
+Chargement de la css que l'on importe inline pour eviter un hit (performance)
++ fixer la css de background pour les boutons precedent/suivant
 
-if (window.jQuery){
-	jQuery(function(){
-		jQuery.getScript('#CHEMIN{javascript/ui/jquery.ui.widget.js}',function(){minical.scripts_loaded.widget = true;minical.init();});
-		jQuery.getScript('#CHEMIN{javascript/ui/jquery.ui.datepicker.js}',function(){minical.scripts_loaded.datepicker = true;minical.init();});
-		jQuery.getScript('#CHEMIN{javascript/jquery-ui.multidatespicker.js}',function(){minical.scripts_loaded.multidatepicker = true;minical.init();});
-	});
-}
-/*]]>*/</script>
-<style type="text/css">
-#INCLURE{css/minical.css}
-#calendar .ui-datepicker-prev .ui-icon {background-image: url("#CHEMIN{css/img/month_prev.png}");}
-#calendar .ui-datepicker-next .ui-icon {background-image: url("#CHEMIN{css/img/month_next.png}");}
+]<style type="text/css">
+[(#INCLURE{css/minical.css}|compacte{css})]
+.calendriermini .ui-datepicker-header .ui-icon {background-image: url("#CHEMIN{css/img/month_prev_next-32x16.png}");}
 </style>
