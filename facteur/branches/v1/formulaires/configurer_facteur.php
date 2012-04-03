@@ -146,13 +146,13 @@ function formulaires_configurer_facteur_traiter_dist(){
 		else
 			$destinataire = $GLOBALS['meta']['email_webmaster'];
 
-		if (($e=facteur_envoyer_mail_test($destinataire,_T('facteur:corps_email_de_test')))===true){
+		if ((facteur_envoyer_mail_test($destinataire,_T('facteur:corps_email_de_test')))===true){
 			// OK
 			$res = array('message_ok'=>_T('facteur:email_test_envoye'));
 		}
 		else {
 			// erreur
-			$res = array('message_erreur'=>_T('facteur:erreur')." $e");
+			$res = array('message_erreur'=>_T('facteur:erreur')._T('facteur:erreur_dans_log'));
 		}
 	}
 	
