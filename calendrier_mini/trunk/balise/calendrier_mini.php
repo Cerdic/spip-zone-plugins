@@ -51,6 +51,8 @@ function balise_CALENDRIER_MINI_dyn($date, $id_rubrique = 0, $id_article = 0, $i
 
 	if($self_or_date_or_nothing){
 		// est-ce une date ou une url ?
+		if (!function_exists('recup_date'))
+			include_spip('inc/filtres');
 		if (preg_match(",^[\d\s:-]+$,",$self_or_date_or_nothing)
 		  AND list($annee, $mois, $jour, $heures, $minutes, $secondes) = recup_date($self_or_date_or_nothing)
 		  AND $annee){

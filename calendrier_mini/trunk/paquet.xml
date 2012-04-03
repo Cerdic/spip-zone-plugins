@@ -2,7 +2,7 @@
 	prefix="calendriermini"
 	categorie="date"
 	version="2.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0-beta;3.0.99]"
 	logo="minical-32.png"
 >	
