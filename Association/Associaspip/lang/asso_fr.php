@@ -359,6 +359,9 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_libelle_femme' => 'F',
 	'adherent_libelle_masculin' => 'Monsieur',
 	'adherent_libelle_feminin' => 'Madame',
+	'adherent_libelle_adresse' => 'Adresse',
+	'adherent_libelle_telephone' => 'T&eacute;l&eacute;phone',
+	'adherent_libelle_email' => 'Email',
 	# En-tetes
 	'adherent_entete_livre' => 'Livre',
 	'adherent_entete_paiement' => 'Paiement',

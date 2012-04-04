@@ -62,11 +62,11 @@ function exec_adherents()
 			$id_groupe = 0;
 		}
 		/* on appelle ici la fonction qui calcule le code du formulaire/tableau de membres pour pouvoir recuperer la liste des membres affiches a transmettre a adherents_table pour la generation du pdf */
-		list($liste_id_auteurs, $code_liste_membres) = adherents_liste(intval(_request('debut')), $lettre, $critere, $statut_interne, $id_groupe);
+		list($where_adherents, $jointure_adherents, $code_liste_membres) = adherents_liste(intval(_request('debut')), $lettre, $critere, $statut_interne, $id_groupe);
 		if (test_plugin_actif('FPDF')) {
 			echo debut_cadre_enfonce('',true);
 			echo '<h3>'. _T('plugins_vue_liste') .'</h3>';
-			echo adherents_table($liste_id_auteurs);
+			echo adherents_table($where_adherents, $jointure_adherents);
 			echo fin_cadre_enfonce(true);
 		}
 		debut_cadre_association('annonce.gif', 'adherent_titre_liste_actifs');
@@ -140,7 +140,7 @@ function exec_adherents()
 	}
 }
 
-/* adherent liste renvoie un tableau des id des auteurs affiches et le code html */
+/* adherent liste renvoie le code html et tout ce qu'il faut pour effectuer la requete avec les meme filtres (where et la possible jonction sur la table des groupes) */
 function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe, $max_par_page=30)
 {
 	if ($lettre)
@@ -148,16 +148,14 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe,
 	$jointure_groupe = '';
 	if ($id_groupe) {
 		$critere .= " AND c.id_groupe=$id_groupe ";
-		$jointure_groupe = ' LEFT JOIN spip_asso_groupes_liaisons c ON b.id_auteur=c.id_auteur ';
+		$jointure_groupe = ' LEFT JOIN spip_asso_groupes_liaisons c ON a.id_auteur=c.id_auteur ';
 	}
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	include_spip('inc/filtres_images_mini');
 	$query = sql_select('a.id_auteur AS id_auteur, b.email AS email, a.sexe, a.nom_famille, a.prenom, a.id_asso, b.statut AS statut, a.validite, a.statut_interne, a.categorie, b.bio AS bio','spip_asso_membres' .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur $jointure_groupe", $critere, '', 'nom_famille ', "$debut,$max_par_page" );
 	$auteurs = '';
-	$liste_id_auteurs = array();
 	while ($data = sql_fetch($query)) {
 		$id_auteur = $data['id_auteur'];
-		$liste_id_auteurs[] = $id_auteur;
 		$class = $GLOBALS['association_styles_des_statuts'][$data['statut_interne']];
 		$logo = $chercher_logo($id_auteur, 'id_auteur');
 		if ($logo) {
@@ -296,7 +294,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe,
 	}
 	$res .= '</tr></table>';
 
-	return 	array($liste_id_auteurs, generer_form_ecrire('action_adherents', $res));
+	return 	array($critere, $jointure_groupe, generer_form_ecrire('action_adherents', $res));
 }
 
 function affiche_categorie($c)
@@ -306,7 +304,7 @@ function affiche_categorie($c)
     : $c;
 }
 
-function adherents_table($liste_id_auteurs)
+function adherents_table($where_adherents, $jointure_adherents)
 {
 	$champs = description_table('spip_asso_membres');
 	$res = '';
@@ -320,14 +318,15 @@ function adherents_table($liste_id_auteurs)
 		}
 	}
 	/* on ajoute aussi le mail */
-	$res .= '<input type="checkbox" name="champs[email]" />'._T('asso:email').'<br />';
+	$res .= '<input type="checkbox" name="champs[email]" />'._T('asso:adherent_libelle_email').'<br />';
 	/* si le plugin coordonnees est actif, on ajoute l'adresse et le telephone */
 	if (test_plugin_actif('COORDONNEES')) {
-		$res .= '<input type="checkbox" name="champs[adresse]" />'._T('asso:adresse').'<br />';
-		$res .= '<input type="checkbox" name="champs[telephone]" />'._T('asso:telephone').'<br />';
+		$res .= '<input type="checkbox" name="champs[adresse]" />'._T('asso:adherent_libelle_adresse').'<br />';
+		$res .= '<input type="checkbox" name="champs[telephone]" />'._T('asso:adherent_libelle_telephone').'<br />';
 	}
 	/* on fait suivre la liste des auteurs a afficher */
-	$res .= "<input type='hidden' name='liste_id_auteurs' value='".serialize($liste_id_auteurs)."' />";
+	$res .= '<input type="hidden" name="where_adherents" value="'.$where_adherents.'" />';
+	$res .= '<input type="hidden" name="jointure_adherents" value="'.$jointure_adherents.'" />';
 	return  generer_form_ecrire('pdf_adherents', $res, '', _T('asso:bouton_impression'));
 }
 

@@ -20,6 +20,16 @@ function exec_pdf_adherents()
 		echo minipres();
 	} else {
 
+	// on recupere ce qu'il faut pour faire la requete SQL pour generer la liste d'id_auteurs dont on a besoin pour recuperer les adresses et telephones
+	$where = _request('where_adherents');
+	$jointure = _request('jointure_adherents');
+
+	$query = sql_select('a.id_auteur AS id_auteur','spip_asso_membres' .  " a $jointure", $where, '', 'nom_famille ');
+	$liste_id_auteurs = array();
+	while ($data = sql_fetch($query)) {
+		$liste_id_auteurs[] = $data['id_auteur'];
+	}
+
 	$pdf=new PDF();	
 
 	$pdf->titre = _T('asso:adherent_titre_liste_actifs');
@@ -41,7 +51,7 @@ function exec_pdf_adherents()
 	}
 	// ainsi que les colonnes pour les champs hors table spip_asso_membres
 	include_spip('inc/association_coordonnees');
-	$liste_id_auteurs = unserialize(_request('liste_id_auteurs'));
+	
 	if ($sent['email']=='on') {
 		$pdf->AddCol('email',45 ,_T('asso:adherent_libelle_email'), 'C');
 		$emails =  association_recuperer_emails($liste_id_auteurs);
@@ -82,7 +92,7 @@ function exec_pdf_adherents()
 		}
 	}
 
-	$pdf->Query_extended(sql_select('*','spip_asso_membres', sql_in('id_auteur', $liste_id_auteurs), '', $order), $prop, $adresses_tels, 'id_auteur');
+	$pdf->Query_extended(sql_select('*, c.libelle as categorie','spip_asso_membres m LEFT JOIN spip_asso_categories c ON m.categorie = c.id_categorie', sql_in('id_auteur', $liste_id_auteurs), '', $order), $prop, $adresses_tels, 'id_auteur');
 	$pdf->Output();
 	}
 }
