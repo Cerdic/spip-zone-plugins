@@ -167,7 +167,7 @@ function glossaire_gogogo($texte, $mots, $limit, &$unicode) {
 	return trim(preg_replace_callback(",(?<=\W)(?:$mots)(?=\W),i", "glossaire_echappe_mot_callback", " $texte ", $limit));
 }
 
-// cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite|a
+// cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite|abbr|a
 // si $liste=true alors la fonction renvoie la liste des mots trouves
 // chaque element du tableau renvoye est array('mot trouve', id_mot, 'lien mot', 'titre mot');
 function cs_rempl_glossaire($texte, $liste=false) {
@@ -254,7 +254,7 @@ function cs_rempl_glossaire($texte, $liste=false) {
 
 // filtre appliquant l'insertion du glossaire
 function cs_glossaire($texte) {
-	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|a', 'cs_rempl_glossaire', $texte);
+	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|abbr|a', 'cs_rempl_glossaire', $texte);
 }
 
 // filtre renvoyant la liste des mots trouves dans le texte
@@ -262,7 +262,7 @@ function cs_mots_glossaire($texte, $type='', $sep='') {
 	if(strpos($texte, "<span class='gl_mot'>")!==false && preg_match_all(",'gl_mot'>(.*?)</span>,", $texte, $reg))
 		// glossaire deja present, on simplifie donc le texte
 		$texte = join('  ', $reg[1]);
-	$mots = cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|a', 'cs_rempl_glossaire', $texte, true);
+	$mots = cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|abbr|a', 'cs_rempl_glossaire', $texte, true);
 	if(!count($mots)) return strlen($sep)?'':$mots;
 	$lien = '$v="<a href=\"$v[2]\"';
 	$titre = strpos($type,'_unique')===false?'str_replace("<br />"," / ", $v[3])':'array_shift(explode(_GLOSSAIRE_TITRE_SEP, $v[3]))';
