@@ -19,10 +19,12 @@ function tb_dirs($dir=""){
 			OR substr($dir,0,1)=="/"
 			OR substr($dir,strlen(_DIR_RACINE),2)==".."
 			OR !@is_dir($dir) OR !is_readable($dir) OR !$d = @opendir($dir))
+
+		$plugins_dist = defined('_DIR_PLUGINS_DIST')?_DIR_PLUGINS_DIST:_DIR_EXTENSIONS;
 		return array(
 			basename(_DIR_RESTREINT_ABS)=>_DIR_RESTREINT?_DIR_RESTREINT:"./",
 			basename(_DIR_PLUGINS)=>_DIR_PLUGINS,
-			basename(_DIR_EXTENSIONS)=>_DIR_EXTENSIONS,
+			basename($plugins_dist)=>$plugins_dist,
 			"prive"=>_DIR_RACINE."prive/",
 		);
 

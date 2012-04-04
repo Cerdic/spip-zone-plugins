@@ -216,8 +216,9 @@ function tb_generate_new_blank_test($filename,$funcname){
 					$template
 					);
 	$d="";
-	if (strncmp($filename,_DIR_PLUGINS,strlen(_DIR_PLUGINS))==0
-		OR strncmp($filename,_DIR_EXTENSIONS,strlen(_DIR_EXTENSIONS))==0){
+	$plugins_dist = defined('_DIR_PLUGINS_DIST')?_DIR_PLUGINS_DIST:_DIR_EXTENSIONS;
+	if (strcmp($filename,_DIR_PLUGINS)==0
+		OR strcmp($filename,$plugins_dist)==0){
 		// trouver le repertoire du plugin en remontant jusqu'a retrouver plugin.xml
 		$d = dirname($filename);
 		while(!file_exists("$d/plugin.xml") AND strlen($d)>strlen(_DIR_PLUGINS))
