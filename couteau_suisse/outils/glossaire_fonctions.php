@@ -47,6 +47,18 @@ function glossaire_generer_mot_dist($id_mot, $mot) {
 	return $mot;
 }
 
+/* surcharge possible de cette fonction glossaire_attributs_lien_dist par : glossaire_attributs_lien($lien, $titre, $gloss_id)
+ si elle existe, elle sera utilisee pour les attributs (sauf class et name) du <a> place autour du mot detecte.
+ $lien : lien du mot - $titre : titre brut du mot - $les_titres : array() des differents titres possibles du mot
+ Exemple :
+	function glossaire_attributs_lien($id_mot, $lien, $titre, $les_titres) {
+		return "href='$lien' title=\"" . attribut_html($les_titres[0]). '"';
+	} */
+function glossaire_attributs_lien_dist($id_mot, $lien, $titre, $les_titres) {
+	return "href='$lien'";
+}
+
+
 // traitement pour #TITRE/mots : retrait des expressions regulieres
 function cs_glossaire_titres($titre) {
 	if(strpos($titre, ',')===false) return $titre;
@@ -179,14 +191,14 @@ function cs_rempl_glossaire($texte, $liste=false) {
 	$gloss_ech = $gloss_mots = array();
 	$gloss_ech_id = $gloss_mots_id = 0;
 	// prudence 1 : protection des liens SPIP
-	if (strpos($texte, '[')!==false) 
+	if(strpos($texte, '[') !== false) 
 		$texte = preg_replace_callback(',\[[^][]*->>?[^]]*\],msS', 'glossaire_echappe_balises_callback', $texte);
 	// parcours de tous les mots, sauf celui qui peut faire partie du contexte (par ex : /spip.php?mot5)
 	$mot_contexte=$GLOBALS['contexte']['id_mot']?$GLOBALS['contexte']['id_mot']:_request('id_mot');
 	foreach ($glossaire_array as $mot) if (($gloss_id = $mot['id_mot']) <> $mot_contexte) {
 		// parser le mot-cle du glossaire
 		// contexte de langue a prendre en compte ici
-		list($les_mots, $les_regexp, $les_titres) = glossaire_parse($titre=extraire_multi($mot['titre']));
+		list($les_mots, $les_regexp, $les_titres) = glossaire_parse($titre = extraire_multi($mot['titre']));
 		$mot_present = false;
 		if(count($les_regexp)) {
 			// a chaque expression reconnue, on pose une balise temporaire cryptee
@@ -209,9 +221,13 @@ function cs_rempl_glossaire($texte, $liste=false) {
 			$lien = $glossaire_generer_url($gloss_id, $titre);
 			// $definition =strlen($mot['descriptif'])?$mot['descriptif']:$mot['texte'];
 			if($liste)
+				// on ne renvoie que la liste des mots trouves
 				$table1[$gloss_id] = array($gloss_id, $lien, $les_titres);
 			else {
-				$table1[$gloss_id] = "href='$lien' name='mot$gloss_id"; // name est complete plus tard pour eviter les doublons
+				// l'attribut 'name' en fin de chaine est complete plus tard pour eviter les doublons :
+				$table1[$gloss_id] = (function_exists('glossaire_attributs_lien')
+					?glossaire_attributs_lien($gloss_id, $lien, $titre, explode(_GLOSSAIRE_TITRE_SEP, $les_titres))
+					:"href='$lien'") . " name='mot$gloss_id";
 				$table2[$gloss_id] = defined('_CS_PRINT')?'':recuperer_fond(
 					defined('_GLOSSAIRE_JS')?'fonds/glossaire_js':'fonds/glossaire_css', 
 					array('id_mot' => $gloss_id, 'titre' => $les_titres, 
