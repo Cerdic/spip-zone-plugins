@@ -70,7 +70,8 @@ function saisies_lister_par_nom($contenu, $avec_conteneur=true){
 function saisies_lister_avec_option($option, $saisies, $tri = 'nom') {
 	$saisies_option = array();
 	// tri par nom si ce n'est pas le cas
-	if (is_int(array_shift(array_keys($saisies)))) {
+	$s = array_keys($saisies);
+	if (is_int(array_shift($s))) {
 		$trier = 'saisies_lister_par_' . $tri;
 		$saisies = $trier($saisies);
 	}
