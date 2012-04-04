@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'choisir_noisette' => 'Choisissez la noisette que vous voulez ajouter :',
-	'compositions_non_installe' => '<b>Plugin compositions :</b> ce plugin n\'est pas installés sur votre site. Il n\'est pas nécessaire au fonctionnement du noizetier. Cependant, s\'il est activé, vous pourrez déclarer des compositions directement dans le noizetier.',
+	'compositions_non_installe' => '<b>Plugin compositions :</b> ce plugin n\'est pas installé sur votre site. Il n\'est pas nécessaire au fonctionnement du noizetier. Cependant, s\'il est activé, vous pourrez déclarer des compositions directement dans le noizetier.',
 
 	// D
 	'description_bloc_contenu' => 'Contenu principal de chaque page.',
@@ -73,7 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ieconfig_ne_pas_importer' => 'Ne pas importer',
 	'ieconfig_noizetier_export_explication' => 'Exportera la configuration des noisettes et les compositions du noiZetier.',
 	'ieconfig_noizetier_export_option' => 'Inclure dans l\'export ?',
-	'ieconfig_non_installe' => '<b>Plugin Importeur/Exporteur de configurations :</b> ce plugin n\'est pas installés sur votre site. Il n\'est pas nécessaire au fonctionnement du noizetier. Cependant, s\'il est activé, vous pourrez exportez et importers des configurations de noisettes dans le noizetier.',
+	'ieconfig_non_installe' => '<b>Plugin Importeur/Exporteur de configurations :</b> ce plugin n\'est pas installé sur votre site. Il n\'est pas nécessaire au fonctionnement du noizetier. Cependant, s\'il est activé, vous pourrez exporter et importer des configurations de noisettes dans le noizetier.',
 	'ieconfig_probleme_import_config' => 'Un problème a été rencontré lors de l\'importation de la configuration du noiZetier.',
 	'info_composition' => 'COMPOSITION :',
 	'info_page' => 'PAGE :',
