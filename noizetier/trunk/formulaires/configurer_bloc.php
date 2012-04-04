@@ -131,9 +131,12 @@ function formulaires_configurer_bloc_verifier($bloc,$page){
 				if (isset($parametre['verifier'])){
 					if (!isset($parametre['verifier']['options']))
 						$parametre['verifier']['options']=array();
-					if (($erreur = $verifier(_request($nom),$parametre['verifier']['type'],$parametre['verifier']['options'])) != '')
+					$normaliser = null;
+					if (($erreur = $verifier(_request($nom),$parametre['verifier']['type'],$parametre['verifier']['options'],$normaliser)) != ''){
 						$erreurs[$nom] = $erreur;
-				}
+					} elseif (!is_null($normaliser)) {
+						set_request($nom, $normaliser);
+					}
 			}
 		}
 		// On teste que chaque paramètre obligatoire est bien renseigné
