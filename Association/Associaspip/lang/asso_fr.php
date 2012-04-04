@@ -69,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'libelle_num' => 'N<sup>o</sup>',
 	'libelle_prix_total' => 'Prix totale (Euros)',
 	'libelle_prix_unite' => 'Prix unitaire (Euros)',
-	'libelle_quantite' => 'Quantit&eacute; (Euros)',
+	'libelle_quantite' => 'Quantit&eacute;',
 	'libelle_statut' => 'Statut',
 	# Listes communs
 	'liste_nombre_total' => 'Total&nbsp;:',
@@ -261,16 +261,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vous_vous_appretez_a_supprimer_le_groupe' => 'Vous vous appretez &agrave; supprimer le groupe ',
 	'adherent_message_grouper' => '<p>S&eacute;lectionner les groupes que les adh&eacute;rents suivants vont rejoindre.</p>',
 	'adherents_dp' => 'Adh&eacute;rents :',
-	'groupes_dp' => 'Groupes :',
-	'groupe_dp' => 'Groupe :',
+	'groupes_membre' => 'Groupes :',
+	'groupe_membres' => 'Membres du groupe',
 	'rejoindre_un_groupe' => 'Rejoindre un ou plusieurs groupes',
 	'quitter_un_groupe' => 'Quitter un groupe',
 	'adherent_message_degrouper' => '<p>S&eacute;lectionner les groupes dont les adh&eacute;rents seront exclus.</p>',
 	'titre_voir_groupe' => 'Voir le groupe',
 
-# Gestion des autorisations 
+# Gestion des autorisations
 	'gerer_les_autorisations' => 'G&eacute;rer les droits d\'acc&egrave;s',
-	'les_groupes_dacces' => 'Groupes de droits d\'acc&egrave;s',	
+	'les_groupes_dacces' => 'Groupes de droits d\'acc&egrave;s',
 	'aide_gerer_autorisations' => 'Pour donner des autorisations, ajouter simplement la personne au groupe ad&eacute;quat. Voir la <a href="http://www.spip-contrib.net/Associaspip#restriction_access">documentation online</a> pour plus de d&eacute;tails.',
 	# nom des groupes d'autorisations (par ordre croissant d'id_groupe)
 	'groupe_1' => 'Editer les droits acc&egrave;s',
@@ -371,6 +371,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_entete_supprimer_abrev' => 'Sup.<br /><abbr title="Pour supprimer plusieurs adh&eacute;rents. Si des adh&eacute;rents sont coch&eacute;s pour &ecirc;tre d&eacute;sactiv&eacute;s, ils seront seulement d&eacute;sactiv&eacute;s !">???</abbr>',
 	'adherent_entete_desactiver_abrev' => 'D&eacute;s.<br /><abbr title="Pour d&eacute;sactiver plusieurs adh&eacute;rents sans passer par leur &eacute;dition">???</abbr> ',
 
+	'adherent_entete_statut_tous' => 'Tou(te)s',
 	'adherent_entete_statut_defaut' => 'Actifs',
 	'adherent_entete_statut_ok' => '&Agrave; jour',
 	'adherent_entete_statut_echu' => '&Eacute;chu',
@@ -538,13 +539,16 @@ Commentaire: @commentaire@
 	# En-tete
 	'ressources_entete_intitule' => 'Article',
 	'ressources_entete_code' => 'Code',
+	'ressource_pretee' => 'Pr&ecirc;t&eacute;e',
 	# Navigation
 	'ressources_nav_gestion_' => 'Gestion des ressources',
 	'ressources_nav_ajouter' => 'Ajouter une ressource',
 	'ressources_nav_supprimer' => 'Supprimer la ressource',
 	'ressources_nav_editer' => 'Editer la ressource',
 	# Libelle
-	'ressources_num' => 'RESSOURCE N&deg;',
+	'ressources_libelle_acquisition' => 'Acquisition',
+	'ressources_libelle_location' => 'Location',
+	'ressources_libelle_unite' => 'Unit&eacute;te de temps',
 	'ressources_libelle_code' => 'Code',
 	'ressources_libelle_intitule' => 'Article',
 	'ressources_libelle_date_acquisition' => 'Date d\'acquisition (AAAA-MM-JJ)',
@@ -554,7 +558,6 @@ Commentaire: @commentaire@
 	'ressources_libelle_statut_reserve' => 'R&eacute;serv&eacute;',
 	'ressources_libelle_statut_suspendu' => 'En suspend',
 	'ressources_libelle_statut_sorti' => 'D&eacute;saffect&eacute;',
-	'ressources_libelle_commentaires' => 'Commentaires',
 	'ressources_libelle_prix_acquisition' => 'Co&ucirc;t total d\'acquisition (en euros)',
 
 # Prêts

@@ -14,7 +14,6 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip('inc/actions');
 include_spip('inc/editer');
-include_spip('inc/association_comptabilite');
 
 function formulaires_editer_asso_prets_charger_dist($id_pret='')
 {
@@ -22,6 +21,7 @@ function formulaires_editer_asso_prets_charger_dist($id_pret='')
 	$contexte = formulaires_editer_objet_charger('asso_prets', $id_pret, '', '',  generer_url_ecrire('prets'), '');
 	if (!$id_pret) { /* si c'est une nouvelle operation, on charge la date d'aujourd'hui, charge un id_compte et journal null, le statut et le prix de location de base */
 		$contexte['date_sortie'] = $contexte['date_retour'] = date('Y-m-d');
+		$contexte['date_retour'] = '';
 		$contexte['heure_sortie'] = $contexte['heure_retour'] = date('H:i');
 		$contexte['commentaire_sortie'] = $contexte['commentaire_retour'] = '';
 		$id_compte = $journal = '';
@@ -49,6 +49,9 @@ function formulaires_editer_asso_prets_charger_dist($id_pret='')
 	$contexte['_hidden'] .= "<input type='hidden' name='id_ressource' value='$contexte[id_ressource]' />";
 	$contexte['_hidden'] .= "<input type='hidden' name='ud' value='$contexte[ud]' />";
 
+	/* si date_retour est indeterminee, c'est que le champ est vide : on ne preremplit rien  */
+	if ($contexte['date_retour']=='0000-00-00')
+		$contexte['date_retour'] = '';
 	/* si id_emprunteur est egal a 0, c'est que le champ est vide, on ne prerempli rien */
 	if (!$contexte['id_emprunteur'])
 		$contexte['id_emprunteur']='';
@@ -102,8 +105,9 @@ function formulaires_editer_asso_prets_verifier_dist($id_pret)
 	/* verifier les dates */
 	if ($erreur = association_verifier_date(_request('date_sortie')) )
 		$erreurs['date_sortie'] = $erreur;
-	if ($erreur = association_verifier_date(_request('date_retour')) )
+	if ($erreur = association_verifier_date(_request('date_retour'), true) )
 		$erreurs['date_retour'] = $erreur;
+
 	if (count($erreurs)) {
 		$erreurs['message_erreur'] = _T('asso:erreur_titre');
 	}

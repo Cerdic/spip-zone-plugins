@@ -33,10 +33,12 @@ function formulaires_editer_asso_activites_charger_dist($id_activite='')
 	}
 	/* ajout du journal qui ne se trouve pas dans la table asso_dons mais asso_comptes et n'est donc pas charge par editer_objet_charger */
 	$contexte['journal'] = $journal;
+
 	/* on concatene au _hidden inserer dans $contexte par l'appel a formulaire_editer_objet l'id_compte qui sera utilise dans l'action editer_asso_activites */
 	$contexte['_hidden'] .= "<input type='hidden' name='id_compte' value='$id_compte' />";
 	/* transmettre l'id_evenement via un champ cache */
 	$contexte['_hidden'] .= "<input type='hidden' name='id_evenement' value='$contexte[id_evenement]' />";
+
 	/* si date_paiement est indeterminee, c'est que le champ est vide : on ne preremplit rien  */
 	if ($contexte['date_paiement']=='0000-00-00')
 		$contexte['date_paiement'] = '';
@@ -46,6 +48,7 @@ function formulaires_editer_asso_activites_charger_dist($id_activite='')
 	/* paufiner la presentation des valeurs  */
 	if ($contexte['inscrits'])
 		$contexte['inscrits'] = association_nbrefr($contexte['inscrits']);
+
 	// on ajoute les metas de destinations
 	if ($GLOBALS['association_metas']['destinations']) {
 		include_spip('inc/association_comptabilite');
@@ -73,7 +76,7 @@ function formulaires_editer_asso_activites_verifier_dist($id_activite='')
 	/* on verifie la validite des dates */
 	if ($erreur = association_verifier_date(_request('date_inscription')) )
 		$erreurs['date_inscription'] = $erreur;
-	if (_request('date_paiement') && $erreur = association_verifier_date(_request('date_paiement')) )
+	if ($erreur = association_verifier_date(_request('date_paiement'), true) )
 		$erreurs['date_paiement'] = $erreur;
 	/* on verifie la validite des nombres */
 	if ($erreur = association_verifier_montant(_request('inscrits')) )

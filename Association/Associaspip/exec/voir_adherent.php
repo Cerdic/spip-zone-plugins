@@ -72,7 +72,7 @@ function exec_voir_adherent(){
 		// Liste des groupes (on ignore les groupes d'id <100 qui sont dedies a la gestion des autorisations)
 		$query = sql_select('g.id_groupe as id_groupe, g.nom as nom', 'spip_asso_groupes g LEFT JOIN spip_asso_groupes_liaisons l ON g.id_groupe=l.id_groupe', 'g.id_groupe>=100 AND l.id_auteur='.$id_auteur, '', 'g.nom');
 		if (sql_count($query)) {
-			echo '<div class="cadre_padding">'._T('asso:groupes_dp');
+			echo '<div class="cadre_padding">'._T('asso:groupes_membre');
 			if ($row=sql_fetch($query)) {
 				echo ' <a href="'.generer_url_ecrire('voir_groupe', 'id='.$row['id_groupe']).'">'.$row['nom'].'</a>';
 			}

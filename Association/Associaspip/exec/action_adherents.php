@@ -19,7 +19,7 @@ function exec_action_adherents()
 {
 	$action_adherents = _request('action_adherents');
 	// pour agir sur les adherents il faut avoir le droit d'edition sur les adherents ainsi que le droit de gestion des groupes si c'est ca qu'on modifie.
-	if (!autoriser('editer_membres', 'association') || 
+	if (!autoriser('editer_membres', 'association') ||
 		(($action_adherents=='grouper' || $action_adherents=='degrouper' ) && !autoriser('editer_groupes', 'association', 100)) ) {
 			include_spip('inc/minipres');
 			echo minipres();
@@ -73,7 +73,7 @@ function modifier_adherents($tab, $action, $statut='')
 	$res ='';
 	/* on ajoute une table des groupes si il y en a */
 	if ($action=='grouper' || $action=='degrouper') {
-		$res .='<p class="titrem">'._T('asso:groupes_dp').'</p>';
+		$res .='<p class="titrem">'._T('asso:groupes_membre').'</p>';
 		$query = sql_select('id_groupe, nom','spip_asso_groupes', 'id_groupe>=100', '', 'nom'); /* on ne considere que les groupes d'id >=100, les autres c'est pour la gestion des autorisations */
 		if (sql_count($query)) {
 			$res .='<table>';

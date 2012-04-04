@@ -49,7 +49,7 @@ class LaTeX extends ExportCompteResultats {
 		$this->out .= '\\author{'. $GLOBALS['association_metas']['nom'] .'}'."\n";
 		$this->out .= '\\date{\\today}'."\n";
 		$this->out .= '\\begin{document}'."\n";
-		$this->out .= '\\maketitle{}'."\n";
+		$this->out .= '\\maketitle'."\n";
 	}
 
 	function LesEcritures($key) {

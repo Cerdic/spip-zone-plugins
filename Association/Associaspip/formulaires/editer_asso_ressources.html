@@ -5,7 +5,7 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<fieldset>
-			<legend>Acquisition</legend>
+			<legend><:asso:ressources_libelle_acquisition:></legend>
 			<ul>
 				<li class="editer_intitule">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{intitule})</span>]
@@ -26,7 +26,7 @@
 			</ul>
 		</fieldset>
 		<fieldset>
-			<legend>Location</legend>
+			<legend><:asso:ressources_libelle_location:></legend>
 				<li class="editer_code">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{code})</span>]
 					<label for="code"><:asso:ressources_libelle_code:></label>
@@ -39,7 +39,7 @@
 				</li>
 				<li class="editer_unite">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{unite})</span>]
-					<label for="unite"><:asso:ressources_libelle_unite_location:></label>
+					<label for="unite"><:asso:ressources_libelle_unite:></label>
 					<select name="ud" id="unite">
 						<option value="#ENV{ud}"> </option>
 					[(#REM)<!-- trop grand l'annee (deja limite le mois)

@@ -162,11 +162,13 @@ function association_datefr($iso_date, $css_class='', $htm_abbr='abbr')
 	return $res;
 }
 
-function association_verifier_date($date)
+function association_verifier_date($date, $nullable=FALSE)
 {
+	if ( ($date='0000-00-00' || !$date) && $nullable )
+		return FALSE;
 	if (!preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $date))
 		return _T('asso:erreur_format_date', array('date'=>$date) );
-	list($annee, $mois, $jour) = explode('-',$date);
+	list($annee, $mois, $jour) = preg_split('\D', $date);
 	if (!checkdate($mois, $jour, $annee))
 		return _T('asso:erreur_valeur_date', array('date'=>$date) );
 //	return FALSE;
