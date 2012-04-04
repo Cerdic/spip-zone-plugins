@@ -43,7 +43,8 @@ function formulaires_definir_traduction_traiter_dist($objet, $id_objet=0) {
 	$table = table_objet_sql($objet);
 	$_id_objet = id_table_objet($objet);
 	include_spip('spip_bonux_fonctions');
-	$id_trad = array_shift(picker_selected(_request('ids_trad_selecteur'), $objet));
+	$id_trad = picker_selected(_request('ids_trad_selecteur'), $objet);
+	$id_trad = array_shift($id_trad);
 	include_spip('inc/modifier');
 	// deux cas deja ici :
 	// id_trad > 0, on lie une rubrique
