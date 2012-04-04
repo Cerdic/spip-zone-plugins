@@ -44,7 +44,7 @@ function creer_selects($sel_l='0',$sel_d='0') {
 	// Recuperation des repertoires des plugins
 	$rep_plugins = lister_dossiers_plugins();
 	// Recuperation des repertoires des extensions
-	$rep_extensions = lister_dossiers_plugins(_DIR_EXTENSIONS);
+	$rep_extensions = lister_dossiers_plugins(defined('_DIR_PLUGINS_DIST')?_DIR_PLUGINS_DIST:_DIR_EXTENSIONS);
 	// Recuperation des repertoires SPIP et squelettes
 	if (strlen($GLOBALS['dossier_squelettes'])) {
 		$rep_perso = explode(':', $GLOBALS['dossier_squelettes']);
@@ -81,7 +81,7 @@ function creer_selects($sel_l='0',$sel_d='0') {
 			$ou_fichier = str_replace('../', '', $reel_dir) . '/';
 		}
 		else if (in_array($rep, $rep_extensions)) {
-			$reel_dir = _DIR_EXTENSIONS . $rep;
+			$reel_dir = (defined('_DIR_PLUGINS_DIST')?_DIR_PLUGINS_DIST:_DIR_EXTENSIONS) . $rep;
 			$ou_fichier = str_replace('../', '', $reel_dir) . '/';
 		}
 		else {
