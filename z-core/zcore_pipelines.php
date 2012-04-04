@@ -104,7 +104,8 @@ function zcore_insert_head($flux){
  */
 function zcore_insert_head_css($flux){
 	include_spip('public/styliser_par_z');
-	$contenu = reset(z_blocs(false));
+	$contenu = z_blocs(false);
+	$contenu = reset($contenu);
 	$flux = "<script type='text/javascript'>var var_zajax_content='$contenu';</script>" . $flux;
 	return $flux;
 }
