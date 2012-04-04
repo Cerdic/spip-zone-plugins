@@ -1,6 +1,6 @@
 /* CSS Document */
 .calendriermini{margin-bottom:1em;}
-.calendriermini .calendar-container {height: 16em;position: relative;}
+.calendriermini .calendar-container {height: 17em;position: relative;}
 .calendriermini .calendar-container .image_loading {position: absolute;top:0;right:0;}
 
 .js .calendriermini .calendar-container .alt {display: none;}

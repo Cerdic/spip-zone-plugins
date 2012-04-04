@@ -69,6 +69,9 @@ function balise_CALENDRIER_MINI_dyn($date, $id_rubrique = 0, $id_article = 0, $i
 		}
 	}
 
+	$url_json = ($url_json?$url_json:generer_url_public("calendrier_mini.json"));
+	if (_VAR_MODE=="recalcul")
+		$url_json = parametre_url($url_json,'var_mode','recalcul');
 
 	/* tenir compte de la langue, c'est pas de la tarte */
 	return array('formulaires/calendrier_mini', 3600, 
@@ -76,7 +79,7 @@ function balise_CALENDRIER_MINI_dyn($date, $id_rubrique = 0, $id_article = 0, $i
 			'date' => $date?$date:date('Y-m'),
 			'var_date' => $var_date,
 			'self' => $url?$url:self(),
-			'urljson' => $url_json?$url_json:generer_url_public("calendrier_mini.json"),
+			'urljson' => $url_json,
 			'id_rubrique' => $id_rubrique,
 			'id_article' => $id_article,
 			'id_mot' => $id_mot
