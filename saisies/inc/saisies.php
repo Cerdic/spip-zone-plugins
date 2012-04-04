@@ -215,9 +215,13 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles=true){
 		
 		// On continue seulement si ya pas d'erreur d'obligation et qu'il y a une demande de verif
 		if (!$erreurs[$champ] and is_array($verifier) and $verif_fonction){
+			$normaliser = null;
 			// Si le champ n'est pas valide par rapport au test demandé, on ajoute l'erreur
-			if ($erreur_eventuelle = $verif_fonction($valeur, $verifier['type'], $verifier['options']))
+			if ($erreur_eventuelle = $verif_fonction($valeur, $verifier['type'], $verifier['options'], $normaliser)) {
 				$erreurs[$champ] = $erreur_eventuelle;
+			} elseif (!is_null($normaliser)) {
+				set_request($champ, $normaliser);
+			}
 		}
 	}
 	
