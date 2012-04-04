@@ -25,7 +25,7 @@
 		<td><BOUCLE_adherent(AUTEURS){tous}{id_auteur=#ID_PRODUCTEUR}>#NOM</BOUCLE_adherent></td>
 		<td>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
 		[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
-			<td><a href='[(#URL_PAGE{panier_dispo}|parametre_url{nom,#NOM}|parametre_url{date_distribution,[(#DATE_DISTRIBUTION|affdate{"d/m/Y"})]}|parametre_url{id_amap_panier,#ID_AMAP_PANIER})]'><:amap:mettre_disposition:></a></td>
+			<td><a href='[(#URL_PAGE{panier_dispo}|parametre_url{nom_adherent,#NOM}|parametre_url{date_distribution,[(#DATE_DISTRIBUTION|affdate{"d/m/Y"})]}|parametre_url{id_amap_panier,#ID_AMAP_PANIER})]'><:amap:mettre_disposition:></a></td>
 		]
 	</tr>
 	</BOUCLE_paniers>

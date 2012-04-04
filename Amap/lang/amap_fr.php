@@ -75,18 +75,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'panier' => 'Panier',
 	'panier_deja_vendu' => 'Vous avez déjà vendu 1 panier',
-	'panier_dispo' => 'Panier disponible',
+	'panier_dispo' => 'Panier disponible le @date_distribution@',
 	'panier_dispo_auteur' => 'Bonjour,
 		<br />Je mets à disposition le panier du @date_distribution@
-		<br />@nom@',
+		<br />@nom_adherent@',
 	'panier_dispo_auteur_mail' => 'Bonjour,
 Je mets à disposition le panier du @date_distribution@, pour le récupérer suiver le lien suivant @lien@
 @panier_dispo_plus@
-@nom@',
+@nom_adherent@',
 	'panier_dispo_plus' => 'Des infos à donner en plus (elle seront rajouter dans le mail envoyer avant votre nom)',
 	'panier_distribuer' => 'panier à distribuer',
 	'panier_liste' => 'Liste des paniers',
 	'panier_livraison' => 'Contenu d\'un panier',
+	'panier_recupere' => 'Panier du @date_distribution@ récupéré',
+	'panier_recupere_auteur_mail' => 'Bonjour,
+Je récupère le panier du @date_distribution@ produit par @nom_producteur@
+@nom_adherent@',
 	'paniers_deja_vendu' => 'Vous avez déjà vendu @nb@ panier',
 	'paniers_distribuer' => 'paniers à distribuer',
 	'pas_connecte_ou_reconnu' => 'Vous n\'êtes pas connecté ou on ne vous a pas reconnu.',
