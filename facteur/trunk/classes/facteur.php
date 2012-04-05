@@ -27,7 +27,9 @@ class Facteur extends PHPMailer {
 		  AND $GLOBALS['meta']['facteur_adresse_envoi_email'])
 			$this->From = $GLOBALS['meta']['facteur_adresse_envoi_email'];
 		else
-			$this->From = $GLOBALS['meta']['email_webmaster'];
+			$this->From = (isset($GLOBALS['meta']["email_envoi"]) AND $GLOBALS['meta']["email_envoi"])?
+				$GLOBALS['meta']["email_envoi"]
+				:$GLOBALS['meta']['email_webmaster'];
 
 		// Si plusieurs emails dans le from, pas de Name !
 		if (strpos($this->From,",")===false){
