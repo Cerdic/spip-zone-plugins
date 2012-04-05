@@ -568,7 +568,7 @@ function totauxinfos_intro($titre,$type='',$id=0,$DesLignes=array(),$PrefixeLang
 {
 	$res = '';
 	if ($type) {
-		$res .= '<div style="text-align: center" class="verdana1 spip_x-small">'. _T('asso:titre_num', array('titre'=>_T("local:$type", 'num'=>$id) ) .'</div>';
+		$res .= '<div style="text-align: center" class="verdana1 spip_x-small">'. _T('asso:titre_num', array('titre'=>_T("local:$type"), 'num'=>$id) ) .'</div>';
 	}
 	$res .= '<div style="text-align: center" class="verdana1 spip_medium">'.$titre.'</div>';
 	if (count($DesLignes)) {
