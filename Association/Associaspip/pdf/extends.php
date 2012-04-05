@@ -25,7 +25,7 @@ var $titre;
 			$this->SetFont('Arial','',10);
 			$this->Cell(0,6,$GLOBALS['association_metas']['nom'],0,1,'L');
 			$this->SetFont('Arial','B',14);
-			$this->Cell(0,6,unicode2charset(html2unicode($this->titre)),0,1,'C');
+			$this->Cell(0,6,(html_entity_decode($this->titre)),0,1,'C');
 			$this->Ln(10);
 		//Imprime l'en-t�te du tableau si n�cessaire
 		}
@@ -90,7 +90,7 @@ var $titre;
 			$lignes = explode("\n",$data[$col['f']]);
 			$nb_lignes[$col['f']] = count($lignes);
 			foreach ($lignes as $ligne) {
-				$nb_lignes[$col['f']] += floor(($this->GetStringWidth($ligne)+4)/$col['w']); /* le +4 c'est le padding a 2 dans pdf_adherents */
+				$nb_lignes[$col['f']] += floor(($this->GetStringWidth($ligne))/($col['w']-4)); /* le -4 c'est le padding a 2 dans pdf_adherents */
 			}
 			$max_nb_lignes = ($nb_lignes[$col['f']]>$max_nb_lignes)?$nb_lignes[$col['f']]:$max_nb_lignes;
 		}

@@ -23,6 +23,7 @@ function exec_pdf_adherents()
 	// on recupere ce qu'il faut pour faire la requete SQL pour generer la liste d'id_auteurs dont on a besoin pour recuperer les adresses et telephones
 	$where = _request('where_adherents');
 	$jointure = _request('jointure_adherents');
+	$statut = _request('statut_interne');
 
 	$query = sql_select('a.id_auteur AS id_auteur','spip_asso_membres' .  " a $jointure", $where, '', 'nom_famille ');
 	$liste_id_auteurs = array();
@@ -32,7 +33,11 @@ function exec_pdf_adherents()
 
 	$pdf=new PDF();	
 
-	$pdf->titre = _T('asso:adherent_titre_liste_actifs');
+	if ($statut) {
+		$pdf->titre = _T('asso:adherent_titre_liste_'.$statut);
+	} else {
+		$pdf->titre = _T('asso:adherent_titre_liste_actifs');
+	}
 	$pdf->Open();
 	$pdf->AddPage();
 

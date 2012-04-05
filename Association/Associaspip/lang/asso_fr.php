@@ -329,6 +329,12 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_titre_historique_dons' => 'Historique des dons',
 	'adherent_titre_historique_prets' => 'Historique des pr&ecirc;ts',
 	'adherent_titre_liste_actifs' => 'Tous les membres actifs',
+	'adherent_titre_liste_defaut' => 'Tous les membres actifs',
+	'adherent_titre_liste_ok' => 'Tous les membres &agrave; jour',
+	'adherent_titre_liste_echu' => 'Tous les membres &eacute;chus',
+	'adherent_titre_liste_relance' => 'Tous les membres r&eacute;lanc&eacute;s',
+	'adherent_titre_liste_sorti' => 'Tous les membres d&eacute;sactiv&eacute;s',
+	'adherent_titre_liste_prospect' => 'Tous les membres prospects',
 	# Libelle
 	'adherent_libelle_donnees_adherent' => 'Donn&eacute;es Adh&eacute;rent',
 	'adherent_libelle_id_asso' => 'R&eacute;f. int.',

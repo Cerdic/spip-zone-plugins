@@ -66,7 +66,7 @@ function exec_adherents()
 		if (test_plugin_actif('FPDF')) {
 			echo debut_cadre_enfonce('',true);
 			echo '<h3>'. _T('plugins_vue_liste') .'</h3>';
-			echo adherents_table($where_adherents, $jointure_adherents);
+			echo adherents_table($where_adherents, $jointure_adherents, $statut_interne);
 			echo fin_cadre_enfonce(true);
 		}
 		debut_cadre_association('annonce.gif', 'adherent_titre_liste_actifs');
@@ -304,7 +304,7 @@ function affiche_categorie($c)
     : $c;
 }
 
-function adherents_table($where_adherents, $jointure_adherents)
+function adherents_table($where_adherents, $jointure_adherents, $statut_interne)
 {
 	$champs = description_table('spip_asso_membres');
 	$res = '';
@@ -327,6 +327,7 @@ function adherents_table($where_adherents, $jointure_adherents)
 	/* on fait suivre la liste des auteurs a afficher */
 	$res .= '<input type="hidden" name="where_adherents" value="'.$where_adherents.'" />';
 	$res .= '<input type="hidden" name="jointure_adherents" value="'.$jointure_adherents.'" />';
+	$res .= '<input type="hidden" name="statut_interne" value="'.$statut_interne.'" />';
 	return  generer_form_ecrire('pdf_adherents', $res, '', _T('asso:bouton_impression'));
 }
 
