@@ -29,11 +29,14 @@ class Facteur extends PHPMailer {
 		else
 			$this->From = $GLOBALS['meta']['email_webmaster'];
 
-		if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui'
-		  AND $GLOBALS['meta']['facteur_adresse_envoi_nom'])
-			$this->FromName = $GLOBALS['meta']['facteur_adresse_envoi_nom'];
-		else
-			$this->FromName = strip_tags(extraire_multi($GLOBALS['meta']['nom_site']));
+		// Si plusieurs emails dans le from, pas de Name !
+		if (strpos($this->From,",")===false){
+			if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui'
+			  AND $GLOBALS['meta']['facteur_adresse_envoi_nom'])
+				$this->FromName = $GLOBALS['meta']['facteur_adresse_envoi_nom'];
+			else
+				$this->FromName = strip_tags(extraire_multi($GLOBALS['meta']['nom_site']));
+		}
 
 		$this->CharSet = "utf-8";
 		$this->Mailer = 'mail';

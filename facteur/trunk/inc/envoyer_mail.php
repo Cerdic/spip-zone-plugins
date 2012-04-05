@@ -103,6 +103,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 			$from = $destinataire;
 		}
 	}
+
 	// "Marie Toto <Marie@toto.com>"
 	if (preg_match(",^([^<>\"]*)<([^<>\"]+)>$,i",$from,$m)){
 		$nom_envoyeur = trim($m[1]);
@@ -118,7 +119,12 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	// On ajoute le nom de l'envoyeur s'il fait partie des options
 	if ($nom_envoyeur)
 		$facteur->FromName = $nom_envoyeur;
-	
+
+	// Si plusieurs emails dans le from, pas de Name !
+	if (strpos($facteur->From,",")!==false){
+		$facteur->FromName = "";
+	}
+
 	// S'il y a des copies à envoyer
 	if ($cc){
 		if (is_array($cc))
