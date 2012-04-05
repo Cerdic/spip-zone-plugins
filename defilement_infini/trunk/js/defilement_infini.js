@@ -12,13 +12,16 @@
 function infiniscroll_init(){jQuery(function(){
 
     var load = false; // aucun chargement de commentaire n'est en cours
- 	$('.loadmore').hide();
+ 	$('.loadmore, .nb_com').hide();
 	/* la fonction offset permet de récupérer la valeur X et Y d'un élément
 	dans une page. Ici on récupère la position du dernier élément qui
 	a pour classe : ".item" dans les listes d'articles*/
 	var element = '#contenu .articles';
 	var offset = $(element +' .liste-items .item:last').offset();
-
+	
+	// RAZ du compteur
+	$(element +' .liste-items .item').each(function (i) { i = i+1; $(this).attr("id","num-"+ i); });
+		
 	$(window).scroll(function(){ // On surveille l'évènement scroll
 		/* Si l'élément offset est en bas de scroll, si aucun chargement
 		n'est en cours, si le nombre d'articles affichés est supérieur
