@@ -25,17 +25,21 @@ function infiniscroll_init(){jQuery(function(){
 		à 5 et si tout les articles ne sont pas affichés, alors on
 		lance la fonction. */
 
-		if((offset.top-$(window).height() <= $(window).scrollTop())
-		&& load==false && ($(element +' .liste-items .item').size()>=5) &&
-		($(element +' .liste-items .item').size()!=$(element +' .nb_com').text())){
-
+		if(
+			(offset.top-$(window).height() <= $(window).scrollTop())
+			&& load==false 
+			&& ($(element +' .liste-items .item').size()>=5) 
+			&& ($(element +' .liste-items .item').size()<$(element +' .nb_com').text())
+		){
+	
 			// la valeur passe à vrai, on va charger
 			load = true;
 
 			//On récupère le numéro (dans la boucle) du dernier item affiché
-			var last_id = $(element +' .liste-items .item:last').attr('id').substr(4);
+			var last_id = $(element + ' .liste-items .item').size();	
+			
 			// Il nous faut récupérer l'id_rubrique des articles
-			id_rubrique   = $(element).attr('id').substr(4);
+			var id_rubrique   = $(element).attr('id').substr(4);
 
 			//On affiche un loader
 			$('.loadmore').delay(5000).fadeIn('slow');
@@ -57,6 +61,10 @@ function infiniscroll_init(){jQuery(function(){
 					/* On actualise la valeur offset
 					du dernier commentaire */
 					offset = $(element +' .liste-items .item:last').offset();
+					
+					// RAZ du compteur
+					$(element +' .liste-items .item').each(function (i) { i = i+1; $(this).attr("id","num-"+ i); });
+
 					//On remet la valeur à faux car c'est fini
 					load = false;
 				}
@@ -66,4 +74,4 @@ function infiniscroll_init(){jQuery(function(){
 
 	});
 });}
-jQuery(function(){infiniscroll_init.apply(document); onAjaxLoad(infiniscroll_init);});
+jQuery(function(){ infiniscroll_init.apply(document);});
