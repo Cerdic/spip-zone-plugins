@@ -104,7 +104,7 @@ function exec_comptes()
 			if ($exercice==$val['id_exercice']) { echo ' selected="selected"'; }
 			echo '>'.$val['intitule'].'</option>';
 		}
-		echo '</select><noscript><input type="submit" value="'._T('lister').'" /></noscript></div></form></td>';
+		echo '</select><noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></div></form></td>';
 		echo '<td>';
 		echo '<form method="post" action="'.generer_url_ecrire('comptes', "exercice=$exercice").'"><div>';
 		echo '<select name ="imputation" class="fondl" onchange="form.submit()">';
@@ -123,7 +123,7 @@ function exec_comptes()
 			if ($imputation==$plan['code']) { echo ' selected="selected"'; }
 			echo '>'.$plan['code'].' - '.$plan['intitule'].'</option>';
 		}
-		echo '</select><noscript><input type="submit" value="'._T('filtrer').'" /></noscript></div></form></td>';
+		echo '</select><noscript><input type="submit" value="'._T('asso:bouton_filtrer').'" /></noscript></div></form></td>';
 		echo '</tr></table>';
 		/* (re)calculer la pagination en fonction de id_compte */
 		if ($id_compte) {
@@ -170,10 +170,10 @@ function exec_comptes()
 			. "</tr>\n</thead><tbody>"
 			. $table
 			. "</tbody>\n</table>\n"
-			. "<table width='100%'><tr>\n<td>" . $nav . '</td><td style="text-align:right;"><input type="submit" value="'. _T('asso:valider') . '" class="fondo" /></td></tr></table>';
+			. "<table width='100%'><tr>\n<td>" . $nav . '</td><td style="text-align:right;"><input type="submit" value="'. _T('asso:bouton_valider') . '" class="fondo" /></td></tr></table>';
 			echo generer_form_ecrire('action_comptes', $table);
 		} else {
-			echo '<table width="100%"><tbody><tr><td class="actions erreur">' .( $exercice ? _T('asso:aucune_operation') : '<a href="'.generer_url_ecrire('exercices').'">'._T('asso:definir_exercice').'</a>' ). '</td></tr></tbody></table>';
+			echo '<table width="100%"><tbody><tr><td class="actions erreur">' .( $exercice ? _T('asso:exercice_sans_operation') : '<a href="'.generer_url_ecrire('exercices').'">'._T('asso:definir_exercice').'</a>' ). '</td></tr></tbody></table>';
 		}
 		fin_page_association();
 	}

@@ -80,7 +80,7 @@ function formulaires_editer_cotisations_traiter($id_auteur, $nom_prenom, $catego
 	$action_cotisation = charger_fonction('cotisation','action');
 	list($id_auteur,$err) = $action_cotisation($id_auteur);
 	if ($err OR !$id_auteur) {
-		$res['message_erreur'] = ($err?$err:_T('erreur'));
+		$res['message_erreur'] = ($err?$err:_T('erreur_traite'));
 	} else {
 		$res['message_ok'] = '';
 		$res['redirect'] = generer_url_ecrire('adherents'); /* on renvoit sur la page adherents mais on perd a l'occasion d'eventuel filtres inseres avant d'arriver au formulaire de cotisation... */

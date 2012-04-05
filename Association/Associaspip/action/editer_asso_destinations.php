@@ -28,7 +28,7 @@ function action_editer_asso_destinations_dist()
     } else { /* ajout */
 	$id_destination = sql_insertq('spip_asso_destination', $champs);
 	if (!$id_destination)
-	    $erreur = _T('Erreur_BdD_ou_SQL');
+	    $erreur = _T('asso:erreur_sgbdr');
     }
 
     return array($id_destination, $erreur);

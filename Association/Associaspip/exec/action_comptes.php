@@ -24,7 +24,7 @@ function exec_action_comptes()
 		$id_compte= intval(_request('id'));
 		onglets_association('titre_onglet_comptes');
 		// info
-		echo _L('Confirmation');
+		echo _T('asso:confirmation');
 		// datation et raccourcis
 		icones_association('');
 		debut_cadre_association('finances-32.jpg', 'operations_comptables');

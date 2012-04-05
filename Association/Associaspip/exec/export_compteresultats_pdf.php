@@ -97,7 +97,7 @@ class EXPORT_PDF extends FPDF {
 		//Couleur du texte en gris
 		$this->SetTextColor(128);
 		//Date et Numéro de page
-		$this->Cell(0, 10, html_entity_decode(_T('asso:cpte_resultat_pied_page_export_pdf') .' -- '. affdate(date('Y-m-d')) .' -- '. _T('Page') .' '. $this->PageNo()), 0, 0, 'C');
+		$this->Cell(0, 10, html_entity_decode(_T('asso:cpte_resultat_pied_page_export_pdf') .' -- '. affdate(date('Y-m-d')) .' -- '. _T('asso:cpte_res_export_page', array('numero'=>$this->PageNo()) ), 0, 0, 'C');
 	}
 
 	function enTete() {
@@ -135,7 +135,7 @@ class EXPORT_PDF extends FPDF {
 		$this->SetFillColor(235);
 		//Sous titre Nom de l'association
 		$this->SetXY($xc, $yc);
-		$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 6, utf8_decode(_T('Association').' : '. $GLOBALS['association_metas']['nom']), 0, 0, 'C', true);
+		$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 6, utf8_decode(_T('cpte_res_export_association', array('nom'=>$GLOBALS['association_metas']['nom']) )), 0, 0, 'C', true);
 		$yc += 6;
 		//Saut de ligne
 		$this->Ln($this->space_v/2);
@@ -147,7 +147,7 @@ class EXPORT_PDF extends FPDF {
 		$this->SetFillColor(235);
 		//Sous titre Date début et fin de l'exercice
 		$this->SetXY($xc, $yc);
-		$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 6, utf8_decode(_T('Exercice').' : ' . sql_getfetsel('intitule','spip_asso_exercices', 'id_exercice='.$this->exercice) ), 0, 0, 'C', true);
+		$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 6, utf8_decode(_T('asso:cpte_res_export_exercice', array('titre'=>sql_getfetsel('intitule','spip_asso_exercices', 'id_exercice='.$this->exercice) ) )), 0, 0, 'C', true);
 		$yc += 6;
 		//Saut de ligne
 		$this->Ln($this->space_v);

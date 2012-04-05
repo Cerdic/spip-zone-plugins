@@ -45,7 +45,7 @@ class LaTeX extends ExportCompteResultats {
 		$this->out .= '\\usepackage[french]{babel}'."\n";
 		$this->out .= '\\usepackage[table]{xcolor}'."\n";
 		$this->out .= '%generator: Associaspip'."\n";
-		$this->out .= '\\title{'. html_entity_decode(_T('asso:cpte_resultat_titre_general')) .'\\\\ '. _T('Exercice') .' : '. sql_asso1champ('exercice', $this->exercice, 'intitule') .'}'."\n";
+		$this->out .= '\\title{'. html_entity_decode(_T('asso:cpte_resultat_titre_general')) .'\\\\ '. _T('asso:cpte_res_export_exercice', array('titre'=>sql_getfetsel('intitule','spip_asso_exercices', 'id_exercice='.$this->exercice) ) ) .'}'."\n";
 		$this->out .= '\\author{'. $GLOBALS['association_metas']['nom'] .'}'."\n";
 		$this->out .= '\\date{\\today}'."\n";
 		$this->out .= '\\begin{document}'."\n";

@@ -568,7 +568,7 @@ function totauxinfos_intro($titre,$type='',$id=0,$DesLignes=array(),$PrefixeLang
 {
 	$res = '';
 	if ($type) {
-		$res .= '<div style="text-align: center" class="verdana1 spip_x-small">'. _T('asso:titre_num', array('titre'=>$type, 'num'=>$id) ) .'</div>';
+		$res .= '<div style="text-align: center" class="verdana1 spip_x-small">'. _T('asso:titre_num', array('titre'=>_T("local:$type", 'num'=>$id) ) .'</div>';
 	}
 	$res .= '<div style="text-align: center" class="verdana1 spip_medium">'.$titre.'</div>';
 	if (count($DesLignes)) {
@@ -589,13 +589,13 @@ function totauxinfos_stats($legende='',$sql_table_asso,$sql_champs,$sql_criteres
 	if (!is_array($sql_champs) || !$sql_table_asso)
 		return FALSE;
 	$res = '<table width="100%" class="asso_infos">';
-	$res .= '<caption>'. _T('asso:totaux_stats', array('de_par'=>$legende)) .'</caption><thead>';
+	$res .= '<caption>'. _T('asso:totaux_moyens', array('de_par'=>_T("local:$legende"))) .'</caption><thead>';
 	$res .= '<tr class="row_first"> <th>&nbsp;</th>';
-	$res .= '<th title="'. _T('moyenne') .'">x&#772</th>'; // X <span style="font-size:75%;">X</span>&#772 <span style="text-decoration:overline;">X</span> X<span style="position:relative; bottom:1.0ex; letter-spacing:-1.2ex; right:1.0ex">&ndash;</span> x<span style="position:relative; bottom:1.0ex; letter-spacing:-1.2ex; right:1.0ex">&macr;</span>
-	$res .= '<th title="'. _T('ecart_type') .'">&sigma;</th>'; // σ &sigma; &#963; &#x3C3;
+	$res .= '<th title="'. _T('entete_stats_moy') .'">x&#772</th>'; // X <span style="font-size:75%;">X</span>&#772 <span style="text-decoration:overline;">X</span> X<span style="position:relative; bottom:1.0ex; letter-spacing:-1.2ex; right:1.0ex">&ndash;</span> x<span style="position:relative; bottom:1.0ex; letter-spacing:-1.2ex; right:1.0ex">&macr;</span>
+	$res .= '<th title="'. _T('entete_stats_mea') .'">&sigma;</th>'; // σ &sigma; &#963; &#x3C3;
 	if ($avec_extrema) {
-		$res .= '<th title="'. _T('minimum') .'">'. _T('min') .'</th>';
-		$res .= '<th title="'. _T('maximum') .'">'. _T('max') .'</th>';
+		$res .= '<th title="'. _T('entete_stats_min') .'">[&lt;</th>';
+		$res .= '<th title="'. _T('entete_stats_max') .'">&gt;]</th>';
 	}
 	$res .= '</tr>';
 	$res .= '</thead><tbody>';
@@ -625,7 +625,7 @@ function totauxinfos_effectifs($legende='',$table_textes,$table_nombres,$decimal
 		return FALSE;
 	$nombre = $nombre_total = 0;
 	$res = '<table width="100%" class="asso_infos">';
-	$res .= '<caption>'. _T('asso:totaux_nombres', array('de_par'=>$legende)) .'</caption><tbody>';
+	$res .= '<caption>'. _T('asso:totaux_nombres', array('de_par'=>_T("local:$legende"))) .'</caption><tbody>';
 	foreach ($table_textes as $classe_css=>$libelle) {
 		$res .= '<tr class="'.$classe_css.'">';
 		$res .= '<td class"text">'._T('asso:'.$libelle).'</td>';
@@ -648,7 +648,7 @@ function totauxinfos_effectifs($legende='',$table_textes,$table_nombres,$decimal
 function totauxinfos_montants($legende='',$somme_recettes=0,$somme_depenses=0)
 {
 	$res = '<table width="100%" class="asso_infos">';
-	$res .= '<caption>'. _T('asso:totaux_montants', array('de_par'=>$legende)) .'</caption><tbody>';
+	$res .= '<caption>'. _T('asso:totaux_montants', array('de_par'=>_T("local:$legende"))) .'</caption><tbody>';
 	if ($somme_recettes) {
 		$res .= '<tr class="impair">'
 		. '<th class="entree">'. _T('asso:bilan_recettes') .'</th>'

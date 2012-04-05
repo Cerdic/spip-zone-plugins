@@ -47,12 +47,8 @@
     <div class="cadre-padding">
         <p><:asso:avertissement_suppression_meta_utilisateur:> <strong>[(#ENV{nom_meta_ut}|replace{meta_utilisateur_}|replace{_,&nbsp;})]</strong></p>
         <p class="boutons">
-            <a class="spip_in" href="[(#URL_ACTION_AUTEUR{supprimer_meta_utilisateur, [(#ENV{nom_meta_ut})], ./?exec=editer_asso_metas_utilisateur})]"><:asso:supprimer:></a>
-            &nbsp;&nbsp;-&nbsp;&nbsp;
-            <a class="spip_in" href="#URL_ECRIRE{editer_asso_metas_utilisateur}"><:asso:annuler:></a>
-            <br class="clear nettoyeur" />
+            <a class="spip_in" href="[(#URL_ACTION_AUTEUR{supprimer_meta_utilisateur, [(#ENV{nom_meta_ut})], ./?exec=editer_asso_metas_utilisateur})]"><:asso:bouton_supprimer:></a>
         </p>
-
     </div>
 </div>
 <!--/#contenu-->

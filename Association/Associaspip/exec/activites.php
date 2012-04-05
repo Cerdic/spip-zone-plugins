@@ -86,7 +86,7 @@ function exec_activites()
 				}
 				echo '</optgroup>';
 			}
-			echo '</select><noscript><input type="submit" value="'._T('lister').'" /></noscript></div></form></td>';
+			echo '</select><noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></div></form></td>';
 		} else { /* le plugin "Agenda Simple" par contre n'associee pas directement les mots-cles aux evenements */
 			echo '</p></td>';
 		}

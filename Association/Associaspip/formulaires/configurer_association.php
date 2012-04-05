@@ -11,7 +11,7 @@
 
 function formulaires_configurer_association_verifier_dist() {
 	$erreurs = array();
-	$erreurs['message_erreur'] = _T('asso:erreur_configurer_association_titre'); /* on insere directement un titre de message d'erreurs, si on n'a que lui a la fin on renvoie un tableau vide */
+	$erreurs['message_erreur'] = _T('asso:erreur_titre'); /* on insere directement un titre de message d'erreurs, si on n'a que lui a la fin on renvoie un tableau vide */
 	$dons = _request('dons');
 	$ventes = _request('ventes');
 	$prets = _request('prets');

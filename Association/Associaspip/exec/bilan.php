@@ -55,7 +55,7 @@ function exec_bilan()
 			echo '<option value="0"';
 			if (!(array_search(0, $ids_destination_bilan)===FALSE))
 				echo ' selected="selected"';
-			echo '>'._T('asso:bilan_total').'</option><option disabled="disabled">--------</option>'.$select_destination;
+			echo '>'._T('asso:toutes_destinations').'</option><option disabled="disabled">--------</option>'.$select_destination;
 			echo '</select>';
 			echo '<p class="boutons"><input type="submit" value="Bilan" /></p>';
 			echo '</div></form>';
@@ -171,9 +171,7 @@ function bilan_encaisse()
 {
 	$lesEcritures = array();
 	$laDateDuJour = date('Y-m-d'); # pour ne pas comptabiliser les opérations au delà d'aujourd'hui !!!!
-	$laClasseBanque = $GLOBALS['association_metas']['classe_banques'];
-	$laClasseContributionVolontaire = $GLOBALS['association_metas']['classe_contributions_volontaires'];
-	$query = sql_select('*', 'spip_asso_plan', '(classe='.sql_quote($laClasseBanque).' OR classe='.sql_quote($laClasseContributionVolontaire).') AND active=1', '',  'code' );
+	$query = sql_select('*', 'spip_asso_plan', '(classe='.sql_quote($GLOBALS['association_metas']['classe_banques']).' OR classe='.sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']).') AND active=1', '',  'code' );
 	while ($val = sql_fetch($query)) {
 		$code = $val['code'];
 		/* on declare un tableau et on le rempli avec les donnees du compte */
@@ -185,7 +183,7 @@ function bilan_encaisse()
 		/* ne pas comptabiliser les opérations au delà d'aujourd'hui meme si il y a des echeances futures !!!! */
 		$compte = sql_fetsel('SUM(recette) AS recettes, SUM(depense) AS depenses, date, imputation',
 			'spip_asso_comptes',
-			'date >= '.sql_quote($lesEcritures[$code]['date_solde']).' AND date <= '.sql_quote($laDateDuJour).' AND (journal = '.sql_quote($code).' OR imputation = '.sql_quote($code).')',
+			'date>= '.sql_quote($lesEcritures[$code]['date_solde']).' AND date<= '.sql_quote($laDateDuJour).' AND (journal= '.sql_quote($code).' OR imputation= '.sql_quote($code).')',
 			'journal');
 		if ($compte) {
 			if(substr($compte['imputation'],0,1)===$GLOBALS['association_metas']['classe_contributions_volontaires']) {
@@ -228,11 +226,9 @@ function bilan_encaisse()
 		} else {
 			if($compteFinancier['58xx']['solde']!=0) {
 				$erreur58=TRUE;
-				$messageErreur58 = _L("Attention : Virement interne non &eacute;quilibr&eacute; !");
 			}
 			if($compteFinancier['86xx']['solde']!=$compteFinancier['87xx']['solde']) {
 				$erreur8687=TRUE;
-				$messageErreur8687 = _L("Attention : Comptes 86xx et 87xx ne sont pas &eacute;quilibr&eacute;s !");
 			}
 		}
 	}
@@ -242,10 +238,10 @@ function bilan_encaisse()
 	echo '<th class="decimal">'. association_prixfr($total_actuel) .'</th>';
 	echo "</tr>\n</tfoot>\n</table>\n";
 	if($erreur58){
-		echo $messageErreur58;
+		echo _T('asso:erreur_equilibre_comptes58');
 	}
 	if($erreur8687){
-		echo $messageErreur8687;
+		echo _T('asso:erreur_equilibre_comptes8687');
 	}
 	echo '</fieldset>';
 }

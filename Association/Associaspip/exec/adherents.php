@@ -109,14 +109,14 @@ function exec_adherents()
 					echo ' selected="selected"';
 				echo '>'.$groupe['nom'].'</option>';
 			}
-			echo '</select><noscript><input type="submit" value="'._T('lister').'" /></noscript></div></form>';
+			echo '</select><noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></div></form>';
 #		}
 		}
 		//Filtre ID
 		echo '</td><td width="16%" class="formulaire">';
 		echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
 		echo '<input type="text" name="id" onfocus=\'this.value=""\' size="5"  value="'. $id .'" onchange="form.submit()" />';
-		echo '<noscript><input type="submit" value="'._T('lister').'" /></noscript></div></form>';
+		echo '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></div></form>';
 		//Filtre statut
 		echo '</td><td width="23%" class="formulaire">';
 		echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
@@ -130,7 +130,7 @@ function exec_adherents()
 			}
 			echo '> '._T('asso:adherent_entete_statut_'.$statut).'</option>';
 		}
-		echo '</select><noscript><input type="submit" value="'._T('lister').'" /></noscript></div></form>';
+		echo '</select><noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></div></form>';
 		echo '</td>';
 		echo '</tr>';
 		echo '</table>';

@@ -186,7 +186,7 @@ function association_supprimer_operation_comptable1($id_compte, $securite=FALSE)
 	    'date' => date('Y-m-d'),
 	    'depense' => $recette,
 	    'recette' => $depense,
-	    'imputation' => _T('annulation_operation', array('numero'=>$id_compte,'date'=>$date) ),
+	    'imputation' => _T('asso:compte_annulation_operation', array('numero'=>$id_compte,'date'=>$date) ),
 	    'imputation' => $imputation, // pas forcement vrai, mais on fait au plus simples...
 	    'journal' => $journal, // pas forcement vrai, mais on fait au plus simples...
 	    'id_journal' => -$id_journal, // on garde la trace par rapport au module ayant cree l'operation

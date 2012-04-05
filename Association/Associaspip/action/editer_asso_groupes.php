@@ -29,7 +29,7 @@ function action_editer_asso_groupes_dist()
     } else { /* ajout */
 	$id_groupe = sql_insertq('spip_asso_groupes', $champs);
 	if (!$id_groupe)
-	    $erreur = _T('Erreur_BdD_ou_SQL');
+	    $erreur = _T('asso:erreur_sgbdr');
     }
 
     return array($id_groupe, $erreur);

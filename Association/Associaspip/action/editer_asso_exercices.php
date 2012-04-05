@@ -30,7 +30,7 @@ function action_editer_asso_exercices_dist()
     } else { /* ajout */
 	$id_exercice = sql_insertq('spip_asso_exercices', $champs);
 	if (!$id_exercice)
-	    $erreur = _T('Erreur_BdD_ou_SQL');
+	    $erreur = _T('asso:erreur_sgbdr');
     }
 
     return array($id_exercice, $erreur);

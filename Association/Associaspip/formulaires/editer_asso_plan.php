@@ -109,7 +109,7 @@ function formulaires_editer_asso_plan_traiter_dist($id_plan='')
 	$action_cotisation = charger_fonction('editer_asso_plan', 'action');
 	list($id_plan, $err) = $action_cotisation($id_plan);
 	if ($err OR !$id_plan) {
-		$res['message_erreur'] = ($err ? $err : _T('erreur'));
+		$res['message_erreur'] = ($err ? $err : _T('erreur_traite'));
 	} else {
 		$res['message_ok'] = '';
 		$res['redirect'] = generer_url_ecrire('plan'); /* on renvoit sur la page adherents mais on perd a l'occasion d'eventuel filtres inseres avant d'arriver au formulaire de cotisation... */

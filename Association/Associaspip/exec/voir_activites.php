@@ -40,7 +40,7 @@ function exec_voir_activites()
 		echo totauxinfos_effectifs('activites', $liste_libelles, $liste_effectifs);
 		// TOTAUX : montants des participations
 		$montant = sql_fetsel('SUM(montant) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement " );
-		echo totauxinfos_montants(_T('asso:participations'), $montant['encaisse'], NULL);
+		echo totauxinfos_montants('participations', $montant['encaisse'], NULL);
 		// datation et raccourcis
 		$res['activite_bouton_ajouter_inscription'] = array('panier_in.gif', 'edit_activite', "id_evenement=$id_evenement");
 		if (test_plugin_actif('FPDF')) {

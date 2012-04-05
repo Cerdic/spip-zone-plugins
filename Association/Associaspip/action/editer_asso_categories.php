@@ -32,7 +32,7 @@ function action_editer_asso_categories_dist()
     } else { /* ajout */
 	$id_categorie = sql_insertq('spip_asso_categories', $champs);
 	if (!$id_categorie)
-	    $erreur = _T('Erreur_BdD_ou_SQL');
+	    $erreur = _T('asso:erreur_sgbdr');
     }
 
     return array($id_categorie, $erreur);

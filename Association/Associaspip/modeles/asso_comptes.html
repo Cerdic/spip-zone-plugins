@@ -35,18 +35,18 @@ maj:2011-10-05; version:0.7.1; licence:GPL; copyleft:gilcot; -->]
 	[<caption>(#ENV{titre}|replace{'@#@',#TOTAL_BOUCLE})</caption>]
 <thead>
 	<tr class="row_first">
-		<th><:asso:adherent_entete_date:></th>
+		<th><:asso:entete_date:></th>
 		[(#AUTORISER{associer_adherents,asso_comptes,#ID_COMPTE}|oui)
 		<th><:asso:adherent_entete_justification:></th>
 		]
-		<th><:asso:montant:></th>
+		<th><:asso:entete_montant:></th>
 		<th><:asso:prets_libelle_mode_paiement:></th>
 		[(#SESSION{statut}|=={0minirezo}|oui)
 		<th><:asso:adherent_entete_journal:></th>
 		<th><:asso:imputation:></th>
 		]
 		[(#AUTORISER{associer_adherents,asso_comptes,#ID_COMPTE}|oui)
-		<th><:asso:action:></th>
+		<th><:asso:entete_action:></th>
 		]
 	</tr>
 </thead>
@@ -78,7 +78,7 @@ maj:2011-10-05; version:0.7.1; licence:GPL; copyleft:gilcot; -->]
 			})]
 			[(#BOUTON_ACTION{
 				[(#CHEMIN{img_pack/poubelle.gif}
-					|balise_img{<:asso:supprimer:>})],
+					|balise_img{<:asso:bouton_supprimer:>})],
 				[(#URL_ECRIRE{action_compte}
 					|parametre_url{id,#ID_COMPTE}
 					|parametre_url{retour,[(#ENV{retour,#SELF})]})],

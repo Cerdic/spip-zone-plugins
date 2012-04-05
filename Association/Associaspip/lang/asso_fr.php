@@ -48,11 +48,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entete_date' => 'Date',
 	'entete_duree' => 'Dur&eacute;e',
 	'entete_intitule' => 'Intitul&eacute;',
+	'entete_fonction' => 'Fonction',
 	'entete_id' => 'ID',
 	'entete_montant' => 'Montant',
 	'entete_nom' => 'Nom',
 	'entete_num' => 'N<sup>o</sup>',
 	'entete_quantite' => 'Q<sup>t&eacute;</sup>',
+	'entete_stats_max' => 'Maximum',
+	'entete_stats_mea' => '&Eacute;cart-type', // Moyenne des Ecarts en valeur Absolue
+	'entete_stats_min' => 'Minimum',
+	'entete_stats_moy' => 'Moyenne',
 	'entete_statut' => 'Statut',
 	'entete_solde' => 'Solde',
 	'entete_tous' => 'Tou(te)s',
@@ -63,9 +68,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'libelle_date' => 'Date (AAAA-MM-JJ)',
 	'libelle_duree' => 'Dur&eacute;e',
 	'libelle_intitule' => 'Intitul&eacute; complet',
+	'libelle_membre' => 'Membre',
+	'libelle_membres' => 'Membres',
 	'libelle_montant' => 'Montant (Euros)',
 	'libelle_nd_mbr' => 'N<sup>o</sup> de membre',
 	'libelle_nom' => 'Nom',
+	'libelle_noms' => 'Noms',
 	'libelle_num' => 'N<sup>o</sup>',
 	'libelle_prix_total' => 'Prix totale (Euros)',
 	'libelle_prix_unite' => 'Prix unitaire (Euros)',
@@ -78,13 +86,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_confirmer' => 'Confirmer',
 	'bouton_desactiver' => 'D&eacute;sactiver',
 	'bouton_envoyer' => 'Envoyer',
+	'bouton_filtrer' => 'Filtrer',
 	'bouton_impression' => 'Impression',
+	'bouton_lister' => 'Lister',
 	'bouton_modifier' => 'Modifier',
-	'bouton_soumettre' => 'Soumettre',
 	'bouton_retour' => 'Retour',
+	'bouton_soumettre' => 'Soumettre',
 	'bouton_supprimer' => 'Supprimer',
 	'bouton_valider' => 'Valider',
 	'bouton_voir' => 'Voir',
+	# Messages Erreur commus
+	'erreur_titre' => 'Votre saisie contient une ou plusieurs erreurs !',
+	'erreur_sgbdr' => 'Echec de l\'enregistrement : la base de donn&eacute;es a renvoy&eacute; une rreur', // probleme de connexion ou erreur SQL non interceptee
+	'erreur_traite' => 'Echec du traitement : un probl&egrave;me est intervenu.',
 	# Mois (definis dans SPIP  sous leur nom complet) abregees  <http://fr.wikipedia.org/wiki/Mois#Abr.C3.A9viations>
 	'date_mois_1' => 'jan.',
 	'date_mois_2' => 'f&eacute;v.',
@@ -108,13 +122,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'objet_num' => '@objet@ n<sup>o</sup>&nbsp;:&nbsp;@num@',
 	'titre_num' => '@titre@&nbsp;@num@',
 	'totaux_montants' => 'Montants Totaux @de_par@',
-	'totaux_montants' => 'Bilan financier @de_par@',
-	'totaux_nombres' => 'Nombres Totaux @de_par@',
 	'totaux_nombres' => 'Effectif @de_par@',
 	'totaux_moyens' => 'Statistiques @de_par@',
 	'vous_aller_effacer' => 'Vous vous appretez &agrave; effacer : @quoi@',
 	'date_du_jour' => 'Nous sommes le @date@',
 	'date_du_jour_heure' => 'Nous sommes le @date@ et il est @time@',
+	'confirmation' => 'Confirmation',
 
 # Configuration du plugin
 	# Configuration : Libelles
@@ -187,6 +200,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_categorie_par_defaut' => 'Cat&eacute;gorie de cotisation des nouveaux membres',
 	'config_libelle_affichage_champs_page_membres' => 'S&eacute;lectionner les champs &agrave; afficher sur la page des membres',
 	'config_libelle_virements_internes' => 'R&eacute;f. virements internes',
+	'config_libelle_prets_courts' => 'Utiliser des dur&eacute;es inf&eacute;rieures &agrave; la journ&eacute;e',
 	# Configuration : Options
 	'config_import_auteur_auto_part1' => 'A la cr&eacute;ation ou modification d\'un auteur :',
 	'config_import_auteur_auto_part2' => 'l\'importer automatiquement comme membre',
@@ -219,6 +233,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choisir_ref_compte' => '-- Choisir une r&eacute;f&eacute;rence comptable',
 	'choisir_dest_compte' => '-- Choisir une destination par d&eacute;faut',
 	'choisir_classe_compte' => '-- Classe comptable ind&eacute;termin&eacute;e',
+	'activer_gestion_comptable_pour_activer_ce_module' => 'Il faut activer la gestion comptable pour pouvoir activer ce module',
 
 # Meta utilisateurs
 	'editer_meta_utilisateur' => '&Eacute;diter le champs utilisateur',
@@ -365,9 +380,6 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_libelle_femme' => 'F',
 	'adherent_libelle_masculin' => 'Monsieur',
 	'adherent_libelle_feminin' => 'Madame',
-	'adherent_libelle_adresse' => 'Adresse',
-	'adherent_libelle_telephone' => 'T&eacute;l&eacute;phone',
-	'adherent_libelle_email' => 'Email',
 	# En-tetes
 	'adherent_entete_livre' => 'Livre',
 	'adherent_entete_paiement' => 'Paiement',
@@ -484,13 +496,16 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'activite_entete_validees' => 'Valid&eacute;es',
 	'activite_entete_adherent' => 'Adh&eacute;rent',
 	'activite_entete_inscrits' => 'Nbre',
+	'activite_entete_impayees' => 'Sans paiement',
+	'activite_entete_validees' => 'Avec paiement',
+	'activite_avec_inscrits' => 'Inscriptions avec invit&eacute;(s)',
+	'activite_sans_inscrits' => 'Inscriptions sans invit&eacute;(e)',
 	# Bouton
 	'activite_bouton_modifier_article' => 'Modifier l\'article',
 	'activite_bouton_ajouter_inscription' => 'Ajouter une inscription',
 	'activite_bouton_voir_liste_inscriptions' => 'Voir la liste des inscriptions',
 	'activite_bouton_maj_inscription' => 'Mettre &agrave; jour l\'inscription',
 	# Liste
-	'activite_liste_legende' => 'En bleu : Inscription non valid&eacute;e <br /> En vert : Inscription valid&eacute;e',
 	'activite_liste_nombre_inscrits' => 'Nombre d\'inscrits : @total@',
 	'activite_liste_total_participations' => 'Total des participations : @total@ &euro;',
 	# Message
@@ -571,7 +586,6 @@ Commentaire: @commentaire@
 
 # Prêts
 	#Messages
-	'prets_danger_suppression' => 'Vous vous appr&ecirc;tez &agrave; effacer la r&eacute;servation n&deg; @id_pret@ !',
 	# Titres
 	'prets_titre_gestion_prets' => 'Gestion des r&eacute;servations',
 	'prets_titre_edition_prets' => 'Edition de r&eacute;servation',
@@ -584,6 +598,8 @@ Commentaire: @commentaire@
 	'prets_entete_date_retour' => 'Date retour',
 	'prets_entete_reservation' => 'R&eacute;servation',
 	'prets_entete_retour' => 'Restitution',
+	'prets_restitues' => 'Restitu&eacute;s',
+	'prets_encours' => 'En cours',
 	# Navigation
 	'prets_nav_gerer' => 'G&eacute;rer les r&eacute;servations',
 	'prets_nav_ajouter' => 'Ajouter une r&eacute;servation',
@@ -638,7 +654,7 @@ Commentaire: @commentaire@
 	# Titres
 	'destination_comptable' => 'Destination comptable',
 # Bilan
-	'toutes_destination' => 'toutes destinations',
+	'toutes_destinations' => 'Toutes les destinations',
 	'bilan_depenses' => 'D&eacute;penses',
 	'bilan_recettes' => 'Recettes',
 	'bilan_solde' => 'Solde',
@@ -665,6 +681,8 @@ Commentaire: @commentaire@
 	'aucune_activite_payante_pour_l_instant' => 'Aucun activit&eacute; payante pour l\'instant',
 	'aucune_cotisation_pour_l_instant' => 'Aucune cotisation pour l\'instant',
 	'totaux' => 'Totaux',
+	'compte_annulation_operation' => "Annulation de l'operation @numero@ du @date@",
+	'exercice_sans_operation' => 'Aucune op&eacute;ration enregistr&eacute;e dans cet exercice',
 	# Entetes
 	'compte_entete_imputation' => 'Cpte. Imputation',
 	'compte_entete_financier' => 'Cpte. Financier',
@@ -675,7 +693,7 @@ Commentaire: @commentaire@
 	'compte_liste_nombre_impair' => 'Charges : ',
 	'compte_liste_nombre_cv' => 'Contrib. volontaires : ',
 	'compte_liste_nombre_vi' => 'Virements internes : ',
-# Compte de Resultat
+	# Compte de Resultat
 	'cpte_resultat_titre_general' => 'Compte de R&eacute;sultat',
 	'cpte_resultat_bouton_voir' => 'Voir',
 	'cpte_resultat_titre_charges' => 'CHARGES',
@@ -692,14 +710,15 @@ Commentaire: @commentaire@
 	'cpte_resultat_pied_page_export_pdf' => 'Associaspip - Gestion d\'une association sous licence GPL',
 	'cpte_resultat_total_produits_evalues' => 'Total des Produits &Eacute;valu&eacute;s',
 	'cpte_resultat_total_charges_evaluees' => 'Total des Charges &Eacute;valu&eacute;es',
+	'cpte_res_export_association' => 'Association : @nom@',
+	'cpte_res_export_exercice' => 'Exercice : @titre@',
+	'cpte_res_export_page' => 'Page : @numero@',
 	# annexe
 	'annexe_titre_general' => 'Annexe',
 	# Verifications
-	'erreur_titre' => 'Une erreur est pr&eacute;sente dans votre saisie',
 	'erreur_recette_depense' => 'Une op&eacute;ration ne peut contenir simultan&eacute;ment des d&eacute;penses et recettes. Par ailleurs les d&eacute;penses ou recettes ne peuvent pas &ecirc;tre n&eacute;gatives ou toutes les deux nulles',
 	'erreur_montant_destination' => 'La somme des montants affect&eacute;s aux diff&eacute;rentes destinations ne correspond pas au montant global de l\'op&eacute;ration',
 	'erreur_destination_dupliquee' => 'Une m&ecirc;me destination a &eacute;t&eacute; s&eacute;lectionn&eacute;e plusieurs fois',
-	'erreur_configurer_association_titre' => 'Votre saisie contient des erreurs !',
 	'erreur_configurer_association_reference_multiple' => 'Une m&ecirc;me r&eacute;f&eacute;rence comptable ne doit pas &ecirc;tre utilis&eacute;e pour plusieurs fonctions activ&eacute;es(ventes, dons, prets, activit&eacute;s) ou cotisations',
 	'erreur_configurer_association_classe_identique' => 'Une m&ecirc;me classe ne doit pas &ecirc;tre utilis&eacute;e pour plusieurs fonctions !',
 	'erreur_configurer_association_gestion_comptable_non_activee' => 'Il n\'est pas possible d\'activer un module(gestion des prets, ventes, dons ou activit&eacute;s) si la gestion comptable n\'est pas activ&eacute;e.',
@@ -722,6 +741,9 @@ Commentaire: @commentaire@
 	'erreur_montant' => 'Les valeurs n&eacute;gatives ne sont pas autoris&eacute;es',
 	'erreur_configurer_association_plan_comptable_non_valide' => 'Vous ne pouvez pas activer le module de gestion comptable car votre plan comptable n\'est pas valide.<br/>Pour &ecirc;tre valide, un plan comptable doit suivre les r&egrave;gles suivantes :<ul><li>Contenir des comptes d\'au moins deux classes diff&eacute;rentes.<li><li>Les classes sont un chiffre entre 0 et 9.</li><li>Les codes des comptes doivent &ecirc;tre unique.</li><li>Les codes doivent commencer par un chiffre &eacute;gal &agrave; la classe du compte.</li><li>Les codes sont au format : 2 chiffres suivis de caract&egrave;res alphanum&eacute;riques</li></ul>',
 	'erreur_configurer_association_reference_financier' => 'La r&eacute;f&eacute;rence comptable associ&eacute;e a un type d\'op&eacute;ration ne peut pas &ecirc;tre de la classe des comptes financiers',
+	'erreur_equilibre_comptes58' => "Attention : Virement interne non &eacute;quilibr&eacute; !",
+	'erreur_equilibre_comptes8687' => "Attention : Comptes 86xx et 87xx ne sont pas &eacute;quilibr&eacute;s !",
+	'erreur_equilibre_comptes8x' => "Attention : Contributions volontaires non &eacute;quilibr&eacute;s !",
 # MaJ
 	# MaJ integration de coodonnees
 	'effectuer_la_maj' => 'Effectuer la mise &agrave; jour maintenant',
