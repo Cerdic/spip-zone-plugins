@@ -77,6 +77,7 @@ function formulaires_abomailman_envoi_liste_traiter_dist(){
 	// Recuperation des donnees
 	//$query['id_abomailman'] = _request('id_abomailman'); 
 	$query['template'] = _request('template');
+	$query['sujet'] = _request('sujet');
 	$query['message'] = _request('message');
 	$query['date'] = _request('date');
 	$query['id_rubrique'] = _request('id_rubrique');
@@ -86,7 +87,10 @@ function formulaires_abomailman_envoi_liste_traiter_dist(){
 	$body = array(
 		'html'=>$fond,
 	);
-	
+	/* Format Texte */
+	$query['envoi_txt'] = "oui";
+	$body['texte'] = recuperer_fond('abomailman_template',$query);
+
 	if (strlen($fond) > 10) {
 		// email denvoi depuis config facteur
 		if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui'
