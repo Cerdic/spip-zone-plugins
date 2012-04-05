@@ -45,8 +45,12 @@ function embed_url($url) {
 			
 			$html = substr($html, strpos($html, '<div id="code_frame">'), strlen($html));
 			$html = substr($html, 0, strpos($html, '<div class="content_title">'));
-			$html = trim($html);
 			
+			$html = preg_replace(',<div id\=\"code_buttons\">(.*)<\/div>,sU', '', $html);
+			if (preg_match(",<ol>(.*)<\/ol>,s", $html, $regs))
+					$html = $regs[0];
+			
+			$html = trim($html);
 			$code_ae = "<div class='oembed-container oembed-code'>$html</div>";
 			
 		}
