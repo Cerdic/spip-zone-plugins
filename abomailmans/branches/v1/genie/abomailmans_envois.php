@@ -46,6 +46,7 @@ function genie_abomailmans_envois_dist($time) {
 	
 
 function liste_a_jour($id_liste) {
+	envoi_ok=true;
 	$t = sql_fetsel("*", "spip_abomailmans", "id_abomailman=$id_liste");
 	if(!$t) { 
 		spip_log("requete null ...","abomailmans");
@@ -113,13 +114,17 @@ function liste_a_jour($id_liste) {
 				
 		if (abomailman_mail($from_nom, $from_email, "", $email_receipt, $sujet,$body, true, $charset)) {
 			spip_log("envoi ok = $url_genere tous les $periodicite jours sujet =".$sujet,"abomailmans");
+		} else {
+			spip_log("!! envoi nok = $url_genere tous les $periodicite jours sujet =".$sujet,"abomailmans");
+			envoi_ok=false;
 		}
 	} else {
 		spip_log("maintenant=".date('Y-m-d H:i:s', time())." date demande = ".$query['date']." non envoye =$url_genere : rien de neuf depuis $periodicite jours","abomailmans"); 
 	}
-	// Noter que l'envoi est OK meme si envoi echoue faute de contenu, on reessaiera dans /periodicite/ jours
-	sql_updateq("spip_abomailmans", array("date_envoi" => date('Y-m-d H:i:s', time())), "id_abomailman=".$t['id_abomailman']);
-	
+	if(envoi_ok) {
+		// Noter que l'envoi est OK meme si envoi echoue faute de contenu, on reessaiera dans /periodicite/ jours
+		sql_updateq("spip_abomailmans", array("date_envoi" => date('Y-m-d H:i:s', time())), "id_abomailman=".$t['id_abomailman']);
+	}
 	return false; # c'est bon
 }
 
