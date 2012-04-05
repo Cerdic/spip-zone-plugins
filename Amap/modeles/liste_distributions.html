@@ -1,0 +1,20 @@
+<B_evenements>
+<table class="amap spip">
+	<thead>
+	<tr>
+		<th><:amap:date_distribution:></th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_evenements(EVENEMENTS) {par date_debut}{age<0}>
+	<tr>
+		<td>[(#DATE_DEBUT|affdate{'d/m/Y'})]</td>
+	</tr>
+	</BOUCLE_evenements>
+	</tbody>
+</table>
+</B_evenements>
+	<p style="text-align: justify;">
+		<:amap:table_vide_aucun_enregistrement:>
+	</p>
+<//B_evenements>
