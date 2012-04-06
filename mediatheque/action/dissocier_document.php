@@ -19,18 +19,29 @@ function action_dissocier_document_dist($arg=null){
 		$arg = $securiser_action();
 	}
 
-	$arg = explode('-',$arg);
+	// attention au cas ou id_objet est negatif !
+	if (strncmp($arg,'-',1)==0){
+		$arg = explode('-',substr($arg,1));
+		list($id_objet, $objet, $document) = $arg;
+		$id_objet = -$id_objet;
+	}
+	else {
+		$arg = explode('-',$arg);
+		list($id_objet, $objet, $document) = $arg;
+	}
 
-	list($id_objet, $objet, $document) = $arg;
 	$suppr=false;
 	if (count($arg)>3 AND $arg[3]=='suppr')
 		$suppr = true;
 	if (count($arg)>4 AND $arg[4]=='safe')
 		$check = true;
-	if ($id_objet=intval($id_objet)	AND autoriser('modifier',$objet,$id_objet))
+	if ($id_objet=intval($id_objet)	AND (
+			($id_objet<0 AND $id_objet==-$GLOBALS['visiteur_session']['id_auteur'])
+			OR autoriser('modifier',$objet,$id_objet)
+		))
 		dissocier_document($document, $objet, $id_objet, $suppr, $check);
 	else
-		spip_log("Interdit de modifier $objet $id_objet","spip");
+		spip_log("Interdit de modifier $objet $id_objet $document","spip");
 }
 
 // http://doc.spip.org/@supprimer_lien_document
