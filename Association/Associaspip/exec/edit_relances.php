@@ -23,7 +23,7 @@ function exec_edit_relances()
 	} else {
 		onglets_association('titre_onglet_membres');
 		// notice
-		echo _T('asso:aide_relances'); //!\ il faut en rajouter
+		echo _T('asso:aide_relances');
 		// datation et raccourcis
 		icones_association(array('adherents'));
 		debut_cadre_association('relance-24.png', 'tous_les_membres_a_relancer');

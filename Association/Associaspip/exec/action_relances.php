@@ -25,7 +25,7 @@ function exec_action_relances()
 	} else {
 		onglets_association('titre_onglet_membres');
 		// notice ?
-		echo _T('asso:aide_relances'); //!\ il faut en rajouter
+		echo _T('asso:aide_relances');
 		// datation et raccourcis
 		icones_association('');
 		debut_cadre_association('relance-24.png', 'relance_de_cotisations');

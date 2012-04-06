@@ -31,7 +31,7 @@ function exec_pdf_adherents()
 		$liste_id_auteurs[] = $data['id_auteur'];
 	}
 
-	$pdf=new PDF();	
+	$pdf=new PDF();
 
 	if ($statut) {
 		$pdf->titre = _T('asso:adherent_titre_liste_'.$statut);
@@ -56,18 +56,18 @@ function exec_pdf_adherents()
 	}
 	// ainsi que les colonnes pour les champs hors table spip_asso_membres
 	include_spip('inc/association_coordonnees');
-	
+
 	if ($sent['email']=='on') {
 		$pdf->AddCol('email',45 ,_T('asso:adherent_libelle_email'), 'C');
 		$emails =  association_recuperer_emails($liste_id_auteurs);
 	}
 
 	if ($sent['adresse']=='on') {
-		$pdf->AddCol('adresse',45 ,_T('asso:adherent_libelle_adresse'), 'L');
+		$pdf->AddCol('adresse',45 ,_T('coordonnees:label_adresse'), 'L');
 		$adresses =  association_recuperer_adresses($liste_id_auteurs, '', "\n"," ");
 	}
 	if ($sent['telephone']=='on') {
-		$pdf->AddCol('telephone',30 ,_T('asso:adherent_libelle_telephone'), 'C');
+		$pdf->AddCol('telephone',30 ,_T('coordonnees:label_numero'), 'C');
 		$telephones = association_recuperer_telephones($liste_id_auteurs);
 	}
 
@@ -79,7 +79,7 @@ function exec_pdf_adherents()
 	);
 	$order = 'id_auteur';
 	if ($sent['nom_famille']=='on')
-	  $order = 'nom_famille' . ",$order"; 
+	  $order = 'nom_famille' . ",$order";
 
 	$adresses_tels = array();
 	foreach($liste_id_auteurs as $id_auteur) {

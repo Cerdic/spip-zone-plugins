@@ -38,7 +38,7 @@ function exec_adherents()
 		echo totauxinfos_effectifs('adherents', $liste_libelles, $liste_effectifs);
 		// TOTAUX : montants des cotisations durant l'annee en cours
 		$data = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT('date', '%Y')=DATE_FORMAT(NOW(), '%Y') AND imputation=".sql_quote($GLOBALS['association_metas']['pc_cotisations']) );
-		echo totauxinfos_montants(_T('asso:cotisations'), $data['somme_recettes'], $data['somme_depenses']);
+		echo totauxinfos_montants('cotisations', $data['somme_recettes'], $data['somme_depenses']);
 		// datation et raccourcis
 		if (autoriser('voir_groupes', 'association', 100)) { // l'id groupe passe en parametre est a 100 car ce sont les groupes definis par l'utilisateur et non ceux des autorisation qu'on liste dans cette page.
 			$res['gerer_les_groupes'] = array('annonce.gif', 'groupes');
@@ -321,8 +321,8 @@ function adherents_table($where_adherents, $jointure_adherents, $statut_interne)
 	$res .= '<input type="checkbox" name="champs[email]" />'._T('asso:adherent_libelle_email').'<br />';
 	/* si le plugin coordonnees est actif, on ajoute l'adresse et le telephone */
 	if (test_plugin_actif('COORDONNEES')) {
-		$res .= '<input type="checkbox" name="champs[adresse]" />'._T('asso:adherent_libelle_adresse').'<br />';
-		$res .= '<input type="checkbox" name="champs[telephone]" />'._T('asso:adherent_libelle_telephone').'<br />';
+		$res .= '<input type="checkbox" name="champs[adresse]" />'._T('coordonnees:label_adresse').'<br />';
+		$res .= '<input type="checkbox" name="champs[telephone]" />'._T('coordonnees:label_numero').'<br />';
 	}
 	/* on fait suivre la liste des auteurs a afficher */
 	$res .= '<input type="hidden" name="where_adherents" value="'.$where_adherents.'" />';

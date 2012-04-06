@@ -23,7 +23,7 @@ function exec_destination()
 	} else {
 		onglets_association('plan_comptable');
 		// notice
-		echo propre(_T('asso:destination_info')); //!\ il en faut une specifique pour cette partie
+		echo propre(_T('asso:destination_info'));
 		// datation et raccourcis
 		icones_association(array('association'), array(
 			'destination_nav_ajouter' => array('euro-39.gif', 'edit_destination'),

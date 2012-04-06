@@ -70,7 +70,7 @@
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{imputation})</span>]
 				<label for="imputation">
 					<div id="saisie_label_imputation" name="saisie_label_imputation" class="[(#ENV{type_operation}|affichage_div{charges-produits-contributions_volontaires})]">
-							<:asso:imputation:>
+							<:asso:compte_libelle_imputation:>
 					</div>
 					<div id="saisie_label_destination" name="saisie_label_destination" class="[(#ENV{type_operation}|affichage_div{banques})]">
 							<:asso:compte_credite:>
@@ -109,7 +109,7 @@
 			</li>
 			<INCLURE{fond=inc/mode_de_paiement, journal, type_operation, id_dest, montant_dest, unique_dest, defaut_dest, env}>
 			<li id="saisie_justification" class="editer_justification [(#ENV{type_operation}|affichage_div{charges-produits-banques-contributions_volontaires})]">
-				<label for="justification"><:asso:justification:></label>
+				<label for="justification"><:asso:libelle_justification:></label>
 				<input type="text" name="justification" [value="(#ENV{justification})"] id="justification"  class="text" />
 			</li>
 		</ul>

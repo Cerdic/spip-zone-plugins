@@ -40,10 +40,10 @@ maj:2011-10-05; version:0.7.1; licence:GPL; copyleft:gilcot; -->]
 		<th><:asso:adherent_entete_justification:></th>
 		]
 		<th><:asso:entete_montant:></th>
-		<th><:asso:prets_libelle_mode_paiement:></th>
+		<th><:asso:compte_entete_financier:></th>
 		[(#SESSION{statut}|=={0minirezo}|oui)
 		<th><:asso:adherent_entete_journal:></th>
-		<th><:asso:imputation:></th>
+		<th><:asso:compte_entete_imputation:></th>
 		]
 		[(#AUTORISER{associer_adherents,asso_comptes,#ID_COMPTE}|oui)
 		<th><:asso:entete_action:></th>

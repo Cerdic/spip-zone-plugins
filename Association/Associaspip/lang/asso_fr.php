@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_menu_gestion_association' => 'Gestion Association',
 	'titre_page_config' => 'Configuration du plugin',
 	# Navigation : Nom des onglets
-	'menu2_titre_association' => 'L\'association',
+	'menu2_titre_association' => "L'association",
 	'menu2_titre_gestion_membres' => 'Membres',
 	'menu2_titre_relances_cotisations' => 'Relances des cotisations',
 	'menu2_titre_gestion_dons' => 'Dons',
@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'menu2_titre_livres_comptes' => 'Comptes',
 	'menu2_titre_gestion_prets' => 'Pr&ecirc;ts',
 	# Navigation : Nom des modules
-	'titre_onglet_defaut' => 'Gestion de l\'association @nom@',
+	'titre_onglet_defaut' => "Gestion de l'association @nom@",
 	'titre_onglet_activite' => 'Gestion des activit&eacute;s',
 	'titre onglet association' => 'Param&eacute;trage de la gestion associative',
 	'titre_onglet_membres' => 'Gestion des membres',
@@ -64,10 +64,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entete_utilise' => 'Utilis&eacute;(e)',
 	# Libelles communes
 	'libelle_article' => 'Article',
+	'libelle_code' => 'Code/R&eacute;f.',
 	'libelle_commentaire' => 'Commentaire',
 	'libelle_date' => 'Date (AAAA-MM-JJ)',
 	'libelle_duree' => 'Dur&eacute;e',
 	'libelle_intitule' => 'Intitul&eacute; complet',
+	'libelle_jusfification' => 'Justification comptable',
 	'libelle_membre' => 'Membre',
 	'libelle_membres' => 'Membres',
 	'libelle_montant' => 'Montant (Euros)',
@@ -97,7 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_voir' => 'Voir',
 	# Messages Erreur commus
 	'erreur_titre' => 'Votre saisie contient une ou plusieurs erreurs !',
-	'erreur_sgbdr' => 'Echec de l\'enregistrement : la base de donn&eacute;es a renvoy&eacute; une rreur', // probleme de connexion ou erreur SQL non interceptee
+	'erreur_sgbdr' => "&Eacute;chec de l'enregistrement : la base de donn&eacute;es a renvoy&eacute; une rreur", // probleme de connexion ou erreur SQL non interceptee
 	'erreur_traite' => 'Echec du traitement : un probl&egrave;me est intervenu.',
 	# Mois (definis dans SPIP  sous leur nom complet) abregees  <http://fr.wikipedia.org/wiki/Mois#Abr.C3.A9viations>
 	'date_mois_1' => 'jan.',
@@ -144,7 +146,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_prefet' => 'Pr&eacute;fecture ou Sous-pr&eacute;fecture',
 	'config_libelle_objet' => 'Objet',
 	'config_info_recufiscal' => 'Re&ccedil;u fiscal fran&ccedil;ais',
-	'config_libelle_codefiscal' => 'R&eacute;ductions d\'imp&ocirc;ts applicable selon :',
+	'config_libelle_codefiscal' => "R&eacute;ductions d'imp&ocirc;ts applicable selon :",
 	'config_libelle_cgi200' => 'Art. 200 du CGI',
 	'config_libelle_cgi238' => 'Art. 238 bis du CGI',
 	'config_libelle_cgi885' => 'Art. 885-0 V bis A du CGI',
@@ -155,19 +157,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_recufisc1' => 'Asso./fond. reconnue d-u-p (pr&eacute;ciser dates)',
 	'config_libelle_recufisc2' => 'Asso. du 57/67/68 dont la mission est reconnue d-u-p (pr&eacute;ciser date)',
 	'config_libelle_recufisc3' => 'Fondation universitaire/partenariale',
-	'config_libelle_recufisc4' => 'Fondation d\'entreprise',
+	'config_libelle_recufisc4' => "Fondation d'entreprise",
 	'config_libelle_recufisc5' => '&OElig;uvre/org. d-i-g',
 	'config_libelle_recufisc6' => 'Mus&eacute;e de France',
-	'config_libelle_recufisc7' => 'Ets. d\'enseignement sup./artistique pub./priv&eacute;, d-i-g, s-b-l',
-	'config_libelle_recufisc8' => 'Org. dont l\'objet exclusif est la participation financi&egrave;re &agrave; la cr&eacute;ation d\'ent.',
-	'config_libelle_recufisc9' => 'Asso. culturelle ou de bienfaisance et ets. pub. des cultes reconnus d\'Alsace-Moselle',
-	'config_libelle_recufisc10' => 'Org. ayant pour activit&eacute; principale l\'organisation de festivals',
+	'config_libelle_recufisc7' => "Ets. d'enseignement sup./artistique pub./priv&eacute;, d-i-g, s-b-l",
+	'config_libelle_recufisc8' => "Org. dont l'objet exclusif est la participation financi&egrave;re &agrave; la cr&eacute;ation d'ent.",
+	'config_libelle_recufisc9' => "Asso. culturelle ou de bienfaisance et ets. pub. des cultes reconnus d'Alsace-Moselle",
+	'config_libelle_recufisc10' => "Org. ayant pour activit&eacute; principale l'organisation de festivals",
 	'config_libelle_recufisc11' => 'Asso. fournissant gratuitement aide/soins &agrave; pers. en difficult&eacute;...',
 	'config_libelle_recufisc12' => 'Fond. du patrimoine ou fond./asso. lui affectant ses dons',
 	'config_libelle_recufisc13' => 'Ets. de recherche public/priv&eacute;, d-i-g, s-b-l',
-	'config_libelle_recufisc14' => 'Ent. d\'insertion ou ent. de travail temporaire d\'insertion',
+	'config_libelle_recufisc14' => "Ent. d'insertion ou ent. de travail temporaire d'insertion",
 	'config_libelle_recufisc15' => 'Asso. interm&eacute;diaires',
-	'config_libelle_recufisc16' => 'Ateliers/chantiers d\'insertion',
+	'config_libelle_recufisc16' => "Ateliers/chantiers d'insertion",
 	'config_libelle_recufisc17' => 'Ent. adapt&eacute;es',
 	'config_libelle_recufisc18' => 'Agence Nationale de la Recherche',
 	'config_libelle_recufisc19' => 'St&eacute;./org. agr&eacute;&eacute; de recherche scientifique/technique',
@@ -182,7 +184,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'config_libelle_activer_cotisations' => 'Activer la gestion des cotisations',
 	'config_libelle_ventes'=> 'Gestion des ventes associatives',
 	'config_libelle_activer_ventes'=> 'Activer la gestion des ventes associatives',
-	'config_libelle_frais_envoi'=> 'frais d\'envoi',
+	'config_libelle_frais_envoi'=> "frais d'envoi",
 	'config_libelle_comptes'=> 'Gestion comptable',
 	'config_libelle_activer_comptes'=> 'Activer la gestion comptable',
 	'config_libelle_destinations'=> 'Activer la gestion des destinations comptables',
@@ -193,30 +195,30 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_indexation'=> 'Num&eacute;rotation des membres',
 	'config_libelle_num_pc'=>'R&eacute;f. comptable',
 	'config_libelle_num_dc'=>'Dest. comptable',
-	'config_libelle_import_nom_auteur' => 'Lors de l\'import/cr&eacute;ation d\'un membre depuis la liste des auteurs SPIP, le nom de l\'auteur a le format suivant :',
-	'config_libelle_utiliser_champ_id_asso' => 'R&eacute;f&eacute;rence interne <abbr title="Attention, ce champ est purement informatif les membres sont toujours d&eacute;sign&eacute;s et organis&eacute;s par leur id auteur SPIP mais il permet aux associations qui le d&eacute;sirent d\'avoir une r&eacute;f&eacute;rence membre de leur choix et de conserver cette information dans les tables du plugin">(&agrave; caract&egrave;re informatif)</abbr>',
+	'config_libelle_import_nom_auteur' => "Lors de l'import/cr&eacute;ation d'un membre depuis la liste des auteurs SPIP, le nom de l'auteur a le format suivant :",
+	'config_libelle_utiliser_champ_id_asso' => "R&eacute;f&eacute;rence interne <abbr title='Attention, ce champ est purement informatif les membres sont toujours d&eacute;sign&eacute;s et organis&eacute;s par leur id auteur SPIP mais il permet aux associations qui le d&eacute;sirent d&quot;avoir une r&eacute;f&eacute;rence membre de leur choix et de conserver cette information dans les tables du plugin'>(&agrave; caract&egrave;re informatif)</abbr>",
 	'config_libelle_gerer_champs_membres' => 'La fiche des membres contient les champs :',
-	'config_plan_comptable_prerenseigne' => 'Activer l\'aide &agrave; la d&eacute;claration du plan comptable (fran&ccedil;ais uniquement)',
+	'config_plan_comptable_prerenseigne' => "Activer l'aide &agrave; la d&eacute;claration du plan comptable (fran&ccedil;ais uniquement)",
 	'config_libelle_categorie_par_defaut' => 'Cat&eacute;gorie de cotisation des nouveaux membres',
 	'config_libelle_affichage_champs_page_membres' => 'S&eacute;lectionner les champs &agrave; afficher sur la page des membres',
 	'config_libelle_virements_internes' => 'R&eacute;f. virements internes',
 	'config_libelle_prets_courts' => 'Utiliser des dur&eacute;es inf&eacute;rieures &agrave; la journ&eacute;e',
 	# Configuration : Options
-	'config_import_auteur_auto_part1' => 'A la cr&eacute;ation ou modification d\'un auteur :',
-	'config_import_auteur_auto_part2' => 'l\'importer automatiquement comme membre',
+	'config_import_auteur_auto_part1' => "&Agrave; la cr&eacute;ation ou modification d'un auteur :",
+	'config_import_auteur_auto_part2' => "l'importer automatiquement comme membre",
 	'import_nom_auteur_nom_prenom' => 'Nom Pr&eacute;nom',
 	'import_nom_auteur_prenom_nom' => 'Pr&eacute;nom Nom',
 	'import_nom_auteur_nom' => 'Nom',
-	'config_info_asso' => 'Donn&eacute;es de l\'association',
+	'config_info_asso' => "Donn&eacute;es de l'association",
 	'config_info_plugin' => 'Options du plugin',
 	'config_info_membres' => 'Options de gestion des membres',
 	# Configuration : Infos, Aides et Messages
 	'config_erreur_pas_de_destination_definie' => 'Pas de destination comptable d&eacute;finie',
 	'config_aide_infofiscal' => 'Dates au format jj/mm/aaaa s&eacute;par&eacute;es par un espace.',
-	'config_aide_recufiscal' => 'sigles :
+	'config_aide_recufiscal' => "sigles :
 		s-b-l = &agrave; but non lucratif ;
-		d-i-g = d\'int&eacute;r&egrave;t g&eacute;n&eacute;ral ;
-		d-u-p = d\'utilit&eacute; publique ;
+		d-i-g = d'int&eacute;r&egrave;t g&eacute;n&eacute;ral ;
+		d-u-p = d'utilit&eacute; publique ;
 		<br />abbr&eacute;viations :
 		asso. = association(s) ;
 		fond. = fondation(s) ;
@@ -227,13 +229,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		pub. = public(s)/publique(s) ;
 		st&eacute;. = soci&eacute;t&eacute;(s) ;
 		sup. = sup&eacute;rieur(e)(s) ;
-	...',
+	...",
 	'config_aide_pays' => 'code alpha-2 ISO 3166-1',
 	'choisir_cat_defaut' => 'Aucune cat&eacute;gorie par d&eacute;faut',
 	'choisir_ref_compte' => '-- Choisir une r&eacute;f&eacute;rence comptable',
 	'choisir_dest_compte' => '-- Choisir une destination par d&eacute;faut',
 	'choisir_classe_compte' => '-- Classe comptable ind&eacute;termin&eacute;e',
 	'activer_gestion_comptable_pour_activer_ce_module' => 'Il faut activer la gestion comptable pour pouvoir activer ce module',
+	'enregistrer_classe_banque_virement' => "Il faut d'abord enregistrer une class banque pour pouvoir choisir un compte de cette classe",
+	'activer_agenda_pour_activer_module' => "Il faut installer et activer <a href=''>Agenda 2</a> ou <a href=''>Simple Agenda</a> pour pouvoir activer ce module.",
 
 # Meta utilisateurs
 	'editer_meta_utilisateur' => '&Eacute;diter le champs utilisateur',
@@ -241,23 +245,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_meta_utilisateur' => 'Nom',
 	'action_meta_utilisateur' => 'Action',
 	'avertissement_suppression_meta_utilisateur' => 'Vous vous appr&ecirc;tez &agrave; supprimer le champs utilisateur',
-	'editer_asso_metas_utilisateur_lien' => 'G&eacute;rer les champs suppl&eacute;mentaires du profil de l\'association',
+	'editer_asso_metas_utilisateur_lien' => "G&eacute;rer les champs suppl&eacute;mentaires du profil de l'association",
 	'ajouter_meta_utilisateur' => 'Cr&eacute;er un nouveau champs',
 	'editer_asso_metas_utilisateur' => '&Eacute;dition des champs utilisateurs',
-	'meta_utilisateur_note' => '<p>Note :</p><p>Cette page permet de cr&eacute;er ou d\'&eacute;diter (renommer/supprimer) des champs suppl&eacute;mentaires qui apparaissent dans le profil de votre association.</p><p>Une fois cr&eacute;&eacute;s les champs suppl&eacute;mentaires apparaissent dans la page de profil de l\'association o&ugrave; vous pourrez leur associer une valeur.</p>',
-	'meta_utilisateur_limitation_note' => '<p>Notes :</p><p>Le nom d\'un champs est limit&eacute; aux caract&egrave;res alphanum&eacute;riques: A-Z a-z 0-9 et espaces, pas de caract&egrave;res accentu&eacute;s ni ponctuation.</p><p>Bien que conservant la casse dans leur affichage, la gestion du nom des champs y est insensible, vous ne pouvez donc pas cr&eacute;er deux champs identiques différenci&eacute;s par leur casse. Ex : "Nouveau Champs" et "nouveau champs" ne peuvent pas cohabiter.</p><p>Le nom de champ peut &ecirc;tre renseign&eacute; dans le fichier de langues <tt>local</tt> pour indiquer le texte accentu&eacute; ou traduit associ&eacute;.</p>',
-	'erreur_nom_meta_utilisateur_incorrect' => 'Le nom d\'un champs est limit&eacute; aux caract&egrave;res alphanum&eacute;riques: A-Z a-z 0-9 et espaces, pas de caract&egrave;res accentu&eacute;s ni ponctuation.',
-	'erreur_nom_meta_utilisateur_trop_long' => 'Le nom d\'un champs est limit&eacute; &agrave; 237 caract&egrave;res',
-	'erreur_pas_de_nom_meta_utilisateur' => 'Le nom d\'un champs ne peut pas &ecirc;tre vide, si vous voulez supprimer un champs, utilisez le bouton supprimer sur la page listant tous les champs utilisateur.',
+	'meta_utilisateur_note' => "<p>Note :</p><p>Cette page permet de cr&eacute;er ou d'&eacute;diter (renommer/supprimer) des champs suppl&eacute;mentaires qui apparaissent dans le profil de votre association.</p><p>Une fois cr&eacute;&eacute;s les champs suppl&eacute;mentaires apparaissent dans la page de profil de l'association o&ugrave; vous pourrez leur associer une valeur.</p>",
+	'meta_utilisateur_limitation_note' => "<p>Notes :</p><p>Le nom d'un champs est limit&eacute; aux caract&egrave;res alphanum&eacute;riques: A-Z a-z 0-9 et espaces, pas de caract&egrave;res accentu&eacute;s ni ponctuation.</p><p>Bien que conservant la casse dans leur affichage, la gestion du nom des champs y est insensible, vous ne pouvez donc pas cr&eacute;er deux champs identiques différenci&eacute;s par leur casse. Ex : &laquo;&nbsp;Nouveau Champs&nbsp;&raquo; et &laquo;&nbsp;nouveau champs&nbsp;&raquo; ne peuvent pas cohabiter.</p><p>Le nom de champ peut &ecirc;tre renseign&eacute; dans le fichier de langues <tt>local</tt> pour indiquer le texte accentu&eacute; ou traduit associ&eacute;.</p>",
+	'erreur_nom_meta_utilisateur_incorrect' => "Le nom d'un champs est limit&eacute; aux caract&egrave;res alphanum&eacute;riques: A-Z a-z 0-9 et espaces, pas de caract&egrave;res accentu&eacute;s ni ponctuation.",
+	'erreur_nom_meta_utilisateur_trop_long' => "Le nom d'un champs est limit&eacute; &agrave; 237 caract&egrave;res",
+	'erreur_pas_de_nom_meta_utilisateur' => "Le nom d'un champs ne peut pas &ecirc;tre vide, si vous voulez supprimer un champs, utilisez le bouton supprimer sur la page listant tous les champs utilisateur.",
 	'erreur_meta_utilisateur_deja_definie' => 'Ce champs utilisateur est d&eacute;j&agrave; d&eacute;fini.',
 
 # Groupes
 	'gerer_les_groupes' => 'G&eacute;rer les groupes',
 	'gestion_groupes' => 'Gestion des groupes',
 	'nom_groupe' => 'Nom du groupe',
-	'ordre_affichage' => 'Ordre d\'affichage sur la page d\'accueil',
+	'ordre_affichage' => "Ordre d'affichage sur la page d'accueil",
 	'ajouter_un_groupe' => 'Ajouter un groupe',
-	'suppression_de_groupe' => 'Suppression d\'un groupe',
+	'suppression_de_groupe' => "Suppression d'un groupe",
 	'tous_les_groupes' => 'Tous les groupes',
 	'aucun_membre_dans_ce_groupe' => 'Aucun membre dans ce groupe',
 	'editer_groupe' => 'Editer le groupe',
@@ -271,8 +275,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exclure_du_groupe' => 'Exclure du groupe',
 	'supprimer_selectionnes' => 'Exclure les membres selectionn&eacute;s',
 	'ok_edition_groupe' => 'Sauvegarder les modifications du champs Fonction',
-	'ordre_affichage_groupe' => 'Ordre d\'affichage',
-	'aide_groupes' => '<p><strong>Affichage d\'un groupe sur la page d\'accueil</strong></p><p>Pour afficher un groupe sur la page d\'accueil du plugin, par exemple le groupe "Bureau", il suffit de mettre un nombre entier diff&eacute;rent de z&eacute;ro dans le champs "Ordre d\'affichage".</p><p>Les groupes affich&eacute;s le sont par ordre croissant de cet index.</p>',
+	'ordre_affichage_groupe' => "Ordre d'affichage",
+	'aide_groupes' => "<p><strong>Affichage d'un groupe sur la page d'accueil</strong></p><p>Pour afficher un groupe sur la page d'accueil du plugin, par exemple le groupe &laquo;&nbsp;Bureau&nbsp;&raquo;, il suffit de mettre un nombre entier diff&eacute;rent de z&eacute;ro dans le champs &laquo;&nbsp;Ordre d'affichage&nbsp;&raquo;.</p><p>Les groupes affich&eacute;s le sont par ordre croissant de cet index.</p>",
 	'vous_vous_appretez_a_supprimer_le_groupe' => 'Vous vous appretez &agrave; supprimer le groupe ',
 	'adherent_message_grouper' => '<p>S&eacute;lectionner les groupes que les adh&eacute;rents suivants vont rejoindre.</p>',
 	'adherents_dp' => 'Adh&eacute;rents :',
@@ -284,43 +288,42 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_voir_groupe' => 'Voir le groupe',
 
 # Gestion des autorisations
-	'gerer_les_autorisations' => 'G&eacute;rer les droits d\'acc&egrave;s',
-	'les_groupes_dacces' => 'Groupes de droits d\'acc&egrave;s',
+	'gerer_les_autorisations' => "G&eacute;rer les droits d'acc&egrave;s",
+	'les_groupes_dacces' => "Groupes de droits d'acc&egrave;s",
 	'aide_gerer_autorisations' => 'Pour donner des autorisations, ajouter simplement la personne au groupe ad&eacute;quat. Voir la <a href="http://www.spip-contrib.net/Associaspip#restriction_access">documentation online</a> pour plus de d&eacute;tails.',
 	# nom des groupes d'autorisations (par ordre croissant d'id_groupe)
 	'groupe_1' => 'Editer les droits acc&egrave;s',
 	'groupe_2' => 'Editer les groupes',
 	'groupe_3' => 'Voir les groupes',
-	'groupe_20' => 'Editer le profil de l\'association',
-	'groupe_21' => 'Voir le profil de l\'association',
+	'groupe_20' => "Editer le profil de l'association",
+	'groupe_21' => "Voir le profil de l'association",
 	'groupe_30' => 'Editer le profil des membres',
 	'groupe_31' => 'Voir le profil des membres',
 # Association (accueil)
-	'association_infos_contacts' => 'Profil de l\'association', // information sur l'association (objet, declaration, etc.), ses coordonnees (adresse, numero et email principaux) et les contacts (nom, fonction, numero, email)
+	'association_infos_contacts' => "Profil de l'association", // information sur l'association (objet, declaration, etc.), ses coordonnees (adresse, numero et email principaux) et les contacts (nom, fonction, numero, email)
 	'categories_de_cotisations' => 'Cat&eacute;gories de cotisations',
 	'toutes_categories_de_cotisations' => 'Toutes les cat&eacute;gories de cotisations',
 	'configuration' => 'Configuration',
-	'gestion_association' => 'Gestion d\'une Association',
+	'gestion_association' => "Gestion d'une Association",
 	'gestion_des_banques' => 'Gestion des banques',
-	'gestion_de_lassoc' => 'Gestion de l\'association @nom@',
+	'gestion_de_lassoc' => "Gestion de l'association @nom@",
 	'association_info_doc' => '<p>Ce plugin vous permet de g&eacute;rer une petite association en ligne.</p> <p>Vous pouvez ainsi  visualiser, ajouter et modifier des membres actifs, lancer des mails de masse pour les relances de cotisations, g&eacute;rer des dons, des ventes associatives, des inscriptions aux activit&eacute;s, des pr&ecirc;ts de mat&eacute;riels et autres ressources, et tenir un livre de comptes.</p>',
 	'message' => 'Message',
 	'sujet' => 'Sujet',
-	'message_relance' => '
+	'message_relance' => "
 Bonjour,
 
 Votre adh&eacute;sion est arriv&eacute;e &agrave; &eacute;ch&eacute;ance.
-Si vous souhaitez continuer l\'aventure en notre compagnie, n\'oubliez pas de reconduire celle-ci.
+Si vous souhaitez continuer l'aventure en notre compagnie, n\'oubliez pas de reconduire celle-ci.
 Vous pouvez nous faire parvenir votre r&egrave;glement &agrave; votre convenance (ch&egrave;que, mandat  ou virement ).
 
-Le bureau de l\'association.
+Le bureau de l'association.
 
-Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
-	',
+Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique",
 	'message_adhesion_webmaster' =>'
 
 	',
-	'profil_de_lassociation' => 'Param&egrave;tres de l\'association',
+	'profil_de_lassociation' => "Param&egrave;trage du plugin",
 
 # Adherents
  # Actions
@@ -333,7 +336,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
  # Titres
 	'adherent_titre_action_membres_actifs' => 'Action sur les membres actifs',
 	'adherent_titre_modifier_membre' => 'Modifier un membre actif',
-	'adherent_titre_ajout_adherent' => 'Ajout d\'adh&eacute;rent',
+	'adherent_titre_ajout_adherent' => "Ajout d'adh&eacute;rent",
 	'adherent_titre_ajouter_membre_actif' => 'Ajouter des membres actifs',
 	'adherent_titre_ajouter_membre' => 'Ajouter un membre',
 	'adherent_titre_historique_membre' => 'Historique membre',
@@ -407,26 +410,26 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'pas_de_reference_interne_attribuee' => 'Pas de r&eacute;f&eacute;rence interne attribu&eacute;e',
 	# Bouton
 	'adherent_bouton_modifier_membre' => 'Modifier le membre',
-	'adherent_bouton_maj_operation' => 'Mettre &agrave; jour l\'op&eacute;ration',
-	'adherent_bouton_maj_inscription' => 'Mettre &agrave; jour l\'inscription',
+	'adherent_bouton_maj_operation' => "Mettre &agrave; jour l'op&eacute;ration",
+	'adherent_bouton_maj_inscription' => "Mettre &agrave; jour l'inscription",
 	'parametres' => 'Param&egrave;tres',
 	# Label
 	'adherent_label_modifier_visiteur' => 'Modifier le visiteur',
-	'adherent_label_modifier_auteur' => 'Modifier l\'auteur',
-	'adherent_label_envoyer_courrier' => 'Envoyer un courrier',
+	'adherent_label_modifier_auteur' => "Modifier l'auteur",
+	'adherent_label_envoyer_courrier' => "Envoyer un courriel",
 	'adherent_label_ajouter_cotisation' => 'Ajouter une cotisation',
 	'adherent_label_modifier_membre' => 'Modifier membre',
 	'adherent_label_voir_membre' => 'Voir le membre',
 	'adherent_label_page_du_membre' => 'Page du membre',
-	'adherent_label_voir_operation' => 'Voir l\'op&eacute;ration comptable',
-	'adherent_label_rejoindre_association' => 'Devenir membre de l\'association',
+	'adherent_label_voir_operation' => "Voir l'op&eacute;ration comptable",
+	'adherent_label_rejoindre_association' => "Devenir membre de l'association",
 	# Message
 	'suppression_des_adherents' => 'Suppression des adh&eacute;rents',
 	'desactivation_des_adherents' => 'D&eacute;sactivation des adh&eacute;rents',
 	'activation_des_adherents' => 'Activation des adh&eacute;rents',
 	'adherent_message_ajout_adherent' => '@prenom@ @nom@ a &eacute;t&eacute; ajout&eacute; dans le fichier',
 	'adherent_message_ajout_adherent_suite' => 'et enregistr&eacute; comme visiteur',
-	'adherent_message_email_invalide' => 'L\'email n\'est pas valide !',
+	'adherent_message_email_invalide' => "L'email n'est pas valide !",
 	'adherent_message_maj_adherent' => 'Les donn&eacute;es de @prenom@ @nom@ ont &eacute;t&eacute; mises &agrave; jour !',
 	'adherent_message_confirmer_suppression' => 'Vous vous appr&ecirc;tez &agrave; effacer les membres',
 	'adherent_message_confirmer_desactivation' => 'Vous vous appr&ecirc;tez &agrave; d&eacute;sactiver les membres',
@@ -434,9 +437,9 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_message_suppression_faite' => 'Suppression effectu&eacute;e !',
 	'adherent_message_desactivation_faite' => 'D&eacute;sactivation effectu&eacute;e !',
 	'adherent_message_activation_faite' => 'R&eacute;activation effectu&eacute;e !',
-	'adherent_message_detail_suppression' => 'Les adh&eacute;rents supprim&eacute;s le sont uniquement de la liste des membres de l\'association. Si vous souhaitez supprimer aussi l\'auteur spip, il faut passer par la page de gestion des auteurs.',
+	'adherent_message_detail_suppression' => "Les adh&eacute;rents supprim&eacute;s le sont uniquement de la liste des membres de l'association. Si vous souhaitez supprimer aussi l'auteur SPIP, il faut passer par la page de gestion des auteurs.",
 	'adherent_message_detail_desactivation' => 'Les adh&eacute;rents d&eacute;sactiv&eacute;s ne sont pas supprim&eacute;s. Il suffit de faire afficher les adh&eacute;rents désactiv&eacute;s pour les r&eacute;-activ&eacute;s &agrave; nouveau.',
-	'adherent_message_detail_activation' => 'Les adh&eacute;rents seront r&eacute;activ&eacute;s avec le statut \'prospect\'',
+	'adherent_message_detail_activation' => "Les adh&eacute;rents seront r&eacute;activ&eacute;s avec le statut &laquo;&nbsp;prospect&nbsp;&raquo;",
 	# Liste
 	'adherent_liste_nombres' => 'Nombre de membres',
 	'adherent_liste_nombre_ok' => 'A jour : ',
@@ -446,12 +449,12 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	# synchro adherents/auteurs
 	'synchroniser_asso_membres' => 'Synchroniser la listes des membres avec les auteurs SPIP',
 	'synchroniser_choix' => 'Cocher le statut des auteurs SPIP a importer dans la liste des membres, vous pouvez cocher plusieurs cases.',
-	'synchroniser_note' => 'Notes:<p> Les auteurs jamais connect&eacute;s seront aussi import&eacute;s dans la liste des membres de l\'association(en fonction de la s&eacute;l&eacute;ction que vous faites).</p><p>Si trop d\'auteurs sont import&eacute;s, vous pourrez toujours les supprimer de la liste des membres, cela n\'a aucune incidence sur leur statut d\'auteur SPIP.</p><p>m&ecirc;me si vous cochez "Tous les auteurs", les auteurs &agrave; la poubelle ne seront pas import&eacute;s comme membres.</p>Par d&eacute;faut, seul les auteurs non pr&eacute;sents dans la liste des membres sont import&eacute;s. La derni&egrave;re case vous permet de forcer l\'insertion de tous les auteurs dans la liste des membres. Cela ne modifiera toutefois pas le statut des membres d&eacute;j&agrave; pr&eacute;sents mais permet de repartir du bon pied quand on activ&eacute;/desactiv&eacute; le plugin tout en modifiant les auteurs SPIP.',
+	'synchroniser_note' => "Notes:<p> Les auteurs jamais connect&eacute;s seront aussi import&eacute;s dans la liste des membres de l'association(en fonction de la s&eacute;l&eacute;ction que vous faites).</p><p>Si trop d'auteurs sont import&eacute;s, vous pourrez toujours les supprimer de la liste des membres, cela n'a aucune incidence sur leur statut d'auteur SPIP.</p><p>m&ecirc;me si vous cochez &laquo;&nbsp;Tous les auteurs&nbsp;&raquo;, les auteurs &agrave; la poubelle ne seront pas import&eacute;s comme membres.</p>Par d&eacute;faut, seul les auteurs non pr&eacute;sents dans la liste des membres sont import&eacute;s. La derni&egrave;re case vous permet de forcer l'insertion de tous les auteurs dans la liste des membres. Cela ne modifiera toutefois pas le statut des membres d&eacute;j&agrave; pr&eacute;sents mais permet de repartir du bon pied quand on activ&eacute;/desactiv&eacute; le plugin tout en modifiant les auteurs SPIP.",
 	'synchroniser_tous' => 'Tous les auteurs',
 	'synchroniser_visiteurs' => 'Les visiteurs',
 	'synchroniser_redacteurs' => 'Les r&eacute;dacteurs',
 	'synchroniser_administrateurs' => 'Les administrateurs',
-	'synchroniser_forcer' => 'Forcer l\'insertion des auteurs d&eacute;j&agrave; pr&eacute;sents comme membres',
+	'synchroniser_forcer' => "Forcer l'insertion des auteurs d&eacute;j&agrave; pr&eacute;sents comme membres",
 	'pas_de_categorie' => 'Ne pas renseigner ce champ',
 	'synchronise_asso_membre_lien' => 'Synchroniser la liste des membres depuis la liste des auteurs',
 	'membres_ajoutes' => ' membres ins&eacute;r&eacute;s dans la liste des membres',
@@ -464,6 +467,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'aucune_adresse_trouvee_pour_les_membres' => 'Aucune adresse trouv&eacute;e pour les membres : ',
 	'ecrire_a' => '&Eacute;crire &agrave;',
 	'a' => '&agrave',
+	'aide_relance' => '...', //!\ a rajouter
 	# cotisation
 	'gestion_cotisations_limitee' => 'La gestion comptable &eacute;tant desactiv&eacute;e, seule la date de validit&eacute; est prise en charge par la gestion des cotisations.',
 
@@ -484,10 +488,9 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'activite_libelle_accompagne_de' => 'Je serai accompagn&eacute; de',
 	'activite_libelle_membres' => 'Noms des participants membres',
 	'activite_libelle_non_membres' => 'Noms des participants non membres',
-	'activite_libelle_nombre_inscrit' => 'Nombre total d\'inscrits',
-	'activite_libelle_montant_inscription' => 'Montant de l\'inscription (en &euro;)',
+	'activite_libelle_nombre_inscrit' => "Nombre total d'invit&eacute;s",
+	'activite_libelle_montant_inscription' => "Montant de l'inscription (en &euro;)",
 	'activite_libelle_date_paiement' => 'Date de paiement (AAAA-MM-JJ)',
-	'activite_libelle_mode_paiement' => 'Mode de paiement',
 	# En-tete
 	'activite_entete_heure' => 'Heure',
 	'activite_entete_intitule' => 'Intitul&eacute;',
@@ -498,27 +501,27 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'activite_entete_inscrits' => 'Nbre',
 	'activite_entete_impayees' => 'Sans paiement',
 	'activite_entete_validees' => 'Avec paiement',
-	'activite_avec_inscrits' => 'Inscriptions avec invit&eacute;(s)',
-	'activite_sans_inscrits' => 'Inscriptions sans invit&eacute;(e)',
+	'activites_avec_inscrits' => 'Inscriptions avec invit&eacute;(s)',
+	'activites_sans_inscrits' => 'Inscriptions sans invit&eacute;(e)',
 	# Bouton
-	'activite_bouton_modifier_article' => 'Modifier l\'article',
+	'activite_bouton_modifier_article' => "Modifier l'article",
 	'activite_bouton_ajouter_inscription' => 'Ajouter une inscription',
 	'activite_bouton_voir_liste_inscriptions' => 'Voir la liste des inscriptions',
-	'activite_bouton_maj_inscription' => 'Mettre &agrave; jour l\'inscription',
+	'activite_bouton_maj_inscription' => "Mettre &agrave; jour l'inscription",
 	# Liste
-	'activite_liste_nombre_inscrits' => 'Nombre d\'inscrits : @total@',
+	'activite_liste_nombre_inscrits' => "Nombre d'inscrits : @total@",
 	'activite_liste_total_participations' => 'Total des participations : @total@ &euro;',
 	# Message
 	'activite_justification_compte_inscription' => 'Inscription n&deg; @id_activite@ - @nom@',
-	'activite_message_ajout_inscription' => 'L\'inscription de @nom@ a &eacute;t&eacute; enregistr&eacute;e pour un montant de @montant@ &euro;',
-	'activite_message_maj_inscription' => 'L\'inscription de @nom@ a &eacute;t&eacute; mise &agrave; jour',
+	'activite_message_ajout_inscription' => "L'inscription de @nom@ a &eacute;t&eacute; enregistr&eacute;e pour un montant de @montant@ &euro;",
+	'activite_message_maj_inscription' => "L'inscription de @nom@ a &eacute;t&eacute; mise &agrave; jour",
 	'activite_message_confirmation_supprimer' => 'Vous vous appr&ecirc;tez &agrave; effacer @nombre@ inscription@pluriel@ !',
 	'activite_message_suppression' => 'Suppression effectu&eacute;e !',
 	'activite_message_sujet' => 'Inscription activit&eacute;',
-	'activite_message_confirmation_inscription'=>'
+	'activite_message_confirmation_inscription'=>"
 Bonjour,
 
-Nous venons d\'enregistrer pour vous l\'inscription suivante:
+Nous venons d'enregistrer pour vous l'inscription suivante:
 
 Activit&eacute;: @activite@
 Date: @date@
@@ -528,14 +531,13 @@ De: @nom@
 Accompagn&eacute; de
 	Membres: @membres@
 	Non-membres: @non_membres@
-Nombre total d\'inscrits: @inscrits@
+Nombre total d'inscrits: @inscrits@
 
-Cette inscription ne sera d&eacute;finitive qu\'apr&egrave;s v&eacute;rification et dans la mesure o&ugrave;, sauf stipulation contraire, le montant de @montant@ euros nous est parvenu.
+Cette inscription ne sera d&eacute;finitive qu'apr&egrave;s v&eacute;rification et dans la mesure o&ugrave;, sauf stipulation contraire, le montant de @montant@ euros nous est parvenu.
 
-Dans cette attente et dans l\'attente de vous retrouver, nous vous adressons nos salutations les meilleures.
+Dans cette attente et dans l'attente de vous retrouver, nous vous adressons nos salutations les meilleures.
 
-L\'&eacute;quipe @nomasso@
-	',
+L'&eacute;quipe @nomasso@",
 	'activite_message_webmaster'=>'
 De: @nom@
 Activit&eacute;: @activite@
@@ -545,9 +547,7 @@ Commentaire: @commentaire@
 
 # VENTES
 	#Entetes
-	'vente_entete_article' => 'Article',
-	'vente_entete_quantites' => 'Quantit&eacute;',
-	'vente_entete_date_envoi' => 'Date d\'envoi',
+	'vente_entete_date_envoi' => "Date d'envoi",
 	'dons_titre_mise_a_jour' => 'Mise &agrave; jour des dons',
 	'adherent_bouton_maj_vente' => 'Editer la vente',
 
@@ -575,14 +575,14 @@ Commentaire: @commentaire@
 	'ressources_libelle_unite' => 'Unit&eacute;te de temps',
 	'ressources_libelle_code' => 'Code',
 	'ressources_libelle_intitule' => 'Article',
-	'ressources_libelle_date_acquisition' => 'Date d\'acquisition (AAAA-MM-JJ)',
+	'ressources_libelle_date_acquisition' => "Date d'acquisition (AAAA-MM-JJ)",
 	'ressources_libelle_prix_location' => 'Prix de la location (en euros)',
 	'ressources_libelle_statut' => 'Statut',
 	'ressources_libelle_statut_ok' => 'Libre',
 	'ressources_libelle_statut_reserve' => 'R&eacute;serv&eacute;',
 	'ressources_libelle_statut_suspendu' => 'En suspend',
 	'ressources_libelle_statut_sorti' => 'D&eacute;saffect&eacute;',
-	'ressources_libelle_prix_acquisition' => 'Co&ucirc;t total d\'acquisition (en euros)',
+	'ressources_libelle_prix_acquisition' => "Co&ucirc;t total d'acquisition (en euros)",
 
 # Prêts
 	#Messages
@@ -608,8 +608,7 @@ Commentaire: @commentaire@
 	# Libelle
 	'prets_libelle_date_sortie' => 'Date de sortie',
 	'prets_libelle_duree' => 'Dur&eacute;e',
-	'prets_libelle_num_emprunteur' => 'N&deg; de l\'emprunteur',
-	'prets_libelle_commentaires' => 'Commentaires',
+	'prets_libelle_num_emprunteur' => "N&deg; de l'emprunteur",
 	'prets_libelle_date_retour' => 'Date de retour',
 
 # Exercices Budgetaires
@@ -631,7 +630,7 @@ Commentaire: @commentaire@
 # Plan comptable
 	#Message
 	'plan_info' => 'Vous pouvez d&eacute;finir ici les comptes de votre plan comptable.<br />Vous devez au minimum d&eacute;finir les comptes de produits n&eacute;cessaires &agrave; la configuration du plugin et les comptes financiers relatifs aux diff&eacute;rentes modes de paiement.',
-    'edit_plan' => '<p>Vous devez choisir d\'abord une "CLASSE" puis un "CODE" dont le 1er chiffre doit correspondre &agrave; la "classe". Par exemple : classe 5 et code 5171</p>Si vous avez activ&eacute; l\'aide &agrave; la d&eacute;claration du plan comptable fran&ccedil;ais, un s&eacute;lecteur de code listant tous les codes et intitul&eacute;s correspondant vous permettra de remplir directement les cases code et intitul&eacute; que vous pourrez modifier ensuite, ce sont elles qui seront consid&eacute;r&eacute;es et non le s&eacute;lecteur.',
+    'edit_plan' => "<p>Vous devez choisir d'abord une &laquo;&nbsp;CLASSE&nbsp;&raquo; puis un &laquo;&nbsp;CODE&nbsp;&raquo; dont le 1er chiffre doit correspondre &agrave; la &laquo;&nbsp;classe&nbsp;&raquo;. Par exemple : classe <samp>5</samp> et code <samp>5171</samp></p>Si vous avez activ&eacute; l'aide &agrave; la d&eacute;claration du plan comptable fran&ccedil;ais, un s&eacute;lecteur de code listant tous les codes et intitul&eacute;s correspondant vous permettra de remplir directement les cases code et intitul&eacute; que vous pourrez modifier ensuite, ce sont elles qui seront consid&eacute;r&eacute;es et non le s&eacute;lecteur.",
 	'non_implemente' => 'Fonctionnalit&eacute; non encore impl&eacute;ment&eacute;e !',
 	# Titres
 	'plan_comptable' => 'Plan comptable',
@@ -647,10 +646,11 @@ Commentaire: @commentaire@
 	'plan_libelle_comptes_desactives' => 'Comptes d&eacute;sactiv&eacute;s',
 	'plan_libelle_oui' => 'oui',
 	'plan_libelle_non' => 'non',
-	'direction_plan' => 'Type d\'op&eacute;rations',
+	'direction_plan' => "Type d'op&eacute;rations",
 # Destination comptable
 	'ajouter_destination' => 'ajouter une destination',
 	'supprimer_destination' => 'supprimer',
+	'destination_info' => '...',  //!\ a ajouter
 	# Titres
 	'destination_comptable' => 'Destination comptable',
 # Bilan
@@ -664,7 +664,7 @@ Commentaire: @commentaire@
 	'bilan' => 'Bilan',
 	'compte_cree_automatiquement' => 'Compte cr&eacute;&eacute; automatiquement par Associaspip',
 	'virement_interne' => 'Virement interne',
-	'bouton_radio_type_operation_titre' => 'Type d\'op&eacute;ration',
+	'bouton_radio_type_operation_titre' => "Type d'op&eacute;ration",
 	'compte_origine' => 'Compte Origine',
 	'compte_destination' => 'Compte Destination',
 	'depense' => 'D&eacute;pense',
@@ -675,11 +675,11 @@ Commentaire: @commentaire@
 	'compte_credite' => 'Compte cr&eacute;dit&eacute;',
 	'aucun' => 'aucun',
 	'tous' => 'tous',
-	'aucun_achat_pour_l_instant' => 'Aucun achat pour l\'instant',
-	'aucun_don_pour_l_instant' => 'Aucun achat don l\'instant',
-	'aucun_pret_payant_pour_l_instant' => 'Aucun pr&ecirc;t payant pour l\'instant',
-	'aucune_activite_payante_pour_l_instant' => 'Aucun activit&eacute; payante pour l\'instant',
-	'aucune_cotisation_pour_l_instant' => 'Aucune cotisation pour l\'instant',
+	'aucun_achat_pour_l_instant' => "Aucun achat pour l'instant",
+	'aucun_don_pour_l_instant' => "Aucun achat don l'instant",
+	'aucun_pret_payant_pour_l_instant' => "Aucun pr&ecirc;t payant pour l'instant",
+	'aucune_activite_payante_pour_l_instant' => "Aucun activit&eacute; payante pour l'instant",
+	'aucune_cotisation_pour_l_instant' => "Aucune cotisation pour l'instant",
 	'totaux' => 'Totaux',
 	'compte_annulation_operation' => "Annulation de l'operation @numero@ du @date@",
 	'exercice_sans_operation' => 'Aucune op&eacute;ration enregistr&eacute;e dans cet exercice',
@@ -687,8 +687,10 @@ Commentaire: @commentaire@
 	'compte_entete_imputation' => 'Cpte. Imputation',
 	'compte_entete_financier' => 'Cpte. Financier',
 	'compte_entete_justification' => 'Justification',
+	# Libelles
+	'compte_libelle_imputation' => "Compte d'imputation",
 	# Listes
-	'compte_liste_nombres' => 'Nombre d\'op&eacute;rations',
+	'compte_liste_nombres' => "Nombre d'op&eacute;rations",
 	'compte_liste_nombre_pair' => 'Produits : ',
 	'compte_liste_nombre_impair' => 'Charges : ',
 	'compte_liste_nombre_cv' => 'Contrib. volontaires : ',
@@ -707,7 +709,7 @@ Commentaire: @commentaire@
 	'cpte_resultat_recette_evaluee' => 'Recette<br />&eacute;valu&eacute;e',
 	'cpte_resultat_depense_evaluee' => 'D&eacute;pense<br />&eacute;valu&eacute;e',
 	'cpte_resultat_mode_exportation' => 'Exporter le Compte de R&eacute;sultat en ',
-	'cpte_resultat_pied_page_export_pdf' => 'Associaspip - Gestion d\'une association sous licence GPL',
+	'cpte_resultat_pied_page_export_pdf' => "Associaspip - Gestion d'une association sous licence GPL",
 	'cpte_resultat_total_produits_evalues' => 'Total des Produits &Eacute;valu&eacute;s',
 	'cpte_resultat_total_charges_evaluees' => 'Total des Charges &Eacute;valu&eacute;es',
 	'cpte_res_export_association' => 'Association : @nom@',
@@ -717,30 +719,30 @@ Commentaire: @commentaire@
 	'annexe_titre_general' => 'Annexe',
 	# Verifications
 	'erreur_recette_depense' => 'Une op&eacute;ration ne peut contenir simultan&eacute;ment des d&eacute;penses et recettes. Par ailleurs les d&eacute;penses ou recettes ne peuvent pas &ecirc;tre n&eacute;gatives ou toutes les deux nulles',
-	'erreur_montant_destination' => 'La somme des montants affect&eacute;s aux diff&eacute;rentes destinations ne correspond pas au montant global de l\'op&eacute;ration',
+	'erreur_montant_destination' => "La somme des montants affect&eacute;s aux diff&eacute;rentes destinations ne correspond pas au montant global de l'op&eacute;ration",
 	'erreur_destination_dupliquee' => 'Une m&ecirc;me destination a &eacute;t&eacute; s&eacute;lectionn&eacute;e plusieurs fois',
 	'erreur_configurer_association_reference_multiple' => 'Une m&ecirc;me r&eacute;f&eacute;rence comptable ne doit pas &ecirc;tre utilis&eacute;e pour plusieurs fonctions activ&eacute;es(ventes, dons, prets, activit&eacute;s) ou cotisations',
 	'erreur_configurer_association_classe_identique' => 'Une m&ecirc;me classe ne doit pas &ecirc;tre utilis&eacute;e pour plusieurs fonctions !',
-	'erreur_configurer_association_gestion_comptable_non_activee' => 'Il n\'est pas possible d\'activer un module(gestion des prets, ventes, dons ou activit&eacute;s) si la gestion comptable n\'est pas activ&eacute;e.',
-	'erreur_configurer_association_nom_association_vide' => 'Le nom de l\'association ne doit pas &ecirc;tre vide !',
-	'erreur_id_adherent' => 'Ce num&eacute;ro de membre ne correspond &agrave; aucun membre de l\'association',
+	'erreur_configurer_association_gestion_comptable_non_activee' => "Il n'est pas possible d'activer un module (gestion des prets, ventes, dons ou activit&eacute;s) si la gestion comptable n'est pas activ&eacute;e.",
+	'erreur_configurer_association_nom_association_vide' => "Le nom de l'association ne doit pas &ecirc;tre vide !",
+	'erreur_id_adherent' => "Ce num&eacute;ro de membre ne correspond &agrave; aucun membre de l'association",
 	'erreur_pas_de_classe_financiere' => 'Aucune classe de comptes financiers d&eacute;finie au plan comptable !',
 	'erreur_creer_un_plan_pour_activer_ce_module' => 'Vous devez d&eacute;finir un plan comptable pour pouvoir activer ce module.',
 	'erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module' => 'Vous devez d&eacute;finir un plan comptable et activer le module de gestion comptable pour pouvoir configurer et activer les modules utilisant la comptabilit&eacute;.',
 	'erreur_pas_de_compte' => 'Pas de r&eacute;f&eacute;rence comptable active d&eacute;finie !',
 	'erreur_pas_de_destination' => 'Pas de destination comptable d&eacute;finie !',
 	'erreur_gestion_comptable_inactive' => 'Afin de pouvoir g&eacute;rer les cotisations, dons et ventes, la gestion comptable doit &ecirc;tre activ&eacute;e',
-	'erreur_plan_classe' => 'La classe d\'un compte doit &ecirc;tre un entier entre 0 et 9',
-	'erreur_plan_code' => 'Le code d\'un compte est compos&eacute; de caract&egrave;res alphanum&eacute;riques uniquement et doit commencer par 2 chiffres. Le premier chiffre doit &ecirc;tre &eacute;gal &agrave; la classe du compte',
+	'erreur_plan_classe' => "La classe d'un compte doit &ecirc;tre un entier entre 0 et 9",
+	'erreur_plan_code' => "Le code d'un compte est compos&eacute; de caract&egrave;res alphanum&eacute;riques uniquement et doit commencer par 2 chiffres. Le premier chiffre doit &ecirc;tre &eacute;gal &agrave; la classe du compte",
 	'erreur_plan_code_duplique' => 'Ce code est d&eacute;j&agrave; utilis&eacute; pour une autre r&eacute;f&eacute;rence comptable(peut-&ecirc;tre d&eacute;sactiv&eacute;e)',
 	'erreur_plan_code_modifie_utilise_classe_financiere' => 'Cette r&eacute;f&eacute;rence comptable est utilis&eacute;e par un module de gestion (ventes/dons/prets/activit&eacute;s) activ&eacute; ou pour la gestion des cotisations. Vous ne pouvez donc pas modifier le code/la classe pour lui attribuer la classe des comptes financiers.',
 	'erreur_plan_changement_classe_impossible' => 'Vous ne pouvez pas modifier la classe de ce compte pour la changer vers ou depuis la classe d&eacute;finie comme &eacute;tant celle des comptes financiers car des op&eacute;rations sur ce compte existent dans le livre de comptes.',
-	'erreur_format_date' => 'La date doit &ecirc;tre au format AAAA-MM-JJ ; ce qui n\'est pas le cas de&nbsp;: @date@',
-	'erreur_valeur_date' =>  'Cette date n\'existe pas&nbsp;: @date@',
-	'erreur_operation_non_permise_sur_ce_compte' => 'Ce compte n\'accepte qu\'un seul type d\'op&eacute;rations (recette ou d&eacute;pense) et ne correspond pas a celle que vous avez rentr&eacute;',
+	'erreur_format_date' => "La date doit &ecirc;tre au format AAAA-MM-JJ ; ce qui n'est pas le cas de&nbsp;: @date@",
+	'erreur_valeur_date' =>  "Cette date n'existe pas&nbsp;: @date@",
+	'erreur_operation_non_permise_sur_ce_compte' => "Ce compte n'accepte qu'un seul type d'op&eacute;rations (recette ou d&eacute;pense) et ne correspond pas a celle que vous avez rentr&eacute;",
 	'erreur_montant' => 'Les valeurs n&eacute;gatives ne sont pas autoris&eacute;es',
-	'erreur_configurer_association_plan_comptable_non_valide' => 'Vous ne pouvez pas activer le module de gestion comptable car votre plan comptable n\'est pas valide.<br/>Pour &ecirc;tre valide, un plan comptable doit suivre les r&egrave;gles suivantes :<ul><li>Contenir des comptes d\'au moins deux classes diff&eacute;rentes.<li><li>Les classes sont un chiffre entre 0 et 9.</li><li>Les codes des comptes doivent &ecirc;tre unique.</li><li>Les codes doivent commencer par un chiffre &eacute;gal &agrave; la classe du compte.</li><li>Les codes sont au format : 2 chiffres suivis de caract&egrave;res alphanum&eacute;riques</li></ul>',
-	'erreur_configurer_association_reference_financier' => 'La r&eacute;f&eacute;rence comptable associ&eacute;e a un type d\'op&eacute;ration ne peut pas &ecirc;tre de la classe des comptes financiers',
+	'erreur_configurer_association_plan_comptable_non_valide' => "Vous ne pouvez pas activer le module de gestion comptable car votre plan comptable n'est pas valide.<br/>Pour &ecirc;tre valide, un plan comptable doit suivre les r&egrave;gles suivantes :<ul><li>Contenir des comptes d'au moins deux classes diff&eacute;rentes.<li><li>Les classes sont un chiffre entre 0 et 9.</li><li>Les codes des comptes doivent &ecirc;tre unique.</li><li>Les codes doivent commencer par un chiffre &eacute;gal &agrave; la classe du compte.</li><li>Les codes sont au format : 2 chiffres suivis de caract&egrave;res alphanum&eacute;riques</li></ul>",
+	'erreur_configurer_association_reference_financier' => "La r&eacute;f&eacute;rence comptable associ&eacute;e a un type d'op&eacute;ration ne peut pas &ecirc;tre de la classe des comptes financiers",
 	'erreur_equilibre_comptes58' => "Attention : Virement interne non &eacute;quilibr&eacute; !",
 	'erreur_equilibre_comptes8687' => "Attention : Comptes 86xx et 87xx ne sont pas &eacute;quilibr&eacute;s !",
 	'erreur_equilibre_comptes8x' => "Attention : Contributions volontaires non &eacute;quilibr&eacute;s !",
@@ -748,15 +750,15 @@ Commentaire: @commentaire@
 	# MaJ integration de coodonnees
 	'effectuer_la_maj' => 'Effectuer la mise &agrave; jour maintenant',
 	'maj_coordonnees_notes' => 'Notes&nbsp;:<ul><li>Si vous choissisez de ne pas effectuer la mise &agrave; jour, ce choix vous sera propos&eacute; &agrave; chaque chargement de la page de gestion des plugins.</li><li>Ne pas tenir compte du message Echec au bas de ce cadre.</li><li>Vous pouvez ignorer ce message et g&eacute;rer les autres plugins normalement, la mise &agrave; jour ne sera alors pas effectu&eacute;e(et ce message continuera donc &agrave; apparaitre).</li><li>Le champ email de la table spip_asso_membres est normalement vide - cette information &eacute;tant contenue dans la table spip_auteurs - il sera &eacute;limin&eacute; sans sauvegarde.</li>',
-	'maj_coordonnees_intro' => 'Vous vous appretez &agrave; effectuer une mise &agrave; jour du plugin Association basculant la gestion des adresses et t&eacute;l&eacute;phones vers le plugin Coordonn&eacute;es. A l\'issu de cette M&agrave;j, les champs correspondants &agrave; ces donn&eacute;es seront supprim&eacute;s des tables du plugin Association.<br/><strong>Ca pourrait &ecirc;tre une bonne id&eacute;e de faire une sauvegarde de votre base de donn&eacute;es avant de continuer (au minimum des tables spip_asso_membres ainsi que spip_adresses, spip_adresses_liens, spip_numeros et spip_numeros_liens si elles sont pr&eacute;sentes)</strong>',
-	'maj_coordonnees_plugin_inactif' => 'Le plugin Coordonn&eacute;es n\'est pas actif sur votre installation, les donn&eacute;es d\'adresses et t&eacute;l&eacute;phones pr&eacute;sentes dans les tables du plugin Association seront perdues si vous effectuez la mise &agrave; jour maintenant. Pour les conserver, veuillez installer et activer le plugin Coordonn&eacute;es, en version 1.4.5 au minimum.',
+	'maj_coordonnees_intro' => "Vous vous appretez &agrave; effectuer une mise &agrave; jour du plugin Association basculant la gestion des adresses et t&eacute;l&eacute;phones vers le plugin Coordonn&eacute;es. &Agrave; l'issu de cette M-&agrave;-j, les champs correspondants &agrave; ces donn&eacute;es seront supprim&eacute;s des tables du plugin Association.<br/><strong>Ca pourrait &ecirc;tre une bonne id&eacute;e de faire une sauvegarde de votre base de donn&eacute;es avant de continuer (au minimum des tables spip_asso_membres ainsi que spip_adresses, spip_adresses_liens, spip_numeros et spip_numeros_liens si elles sont pr&eacute;sentes)</strong>",
+	'maj_coordonnees_plugin_inactif' => "Le plugin Coordonn&eacute;es n'est pas actif sur votre installation, les donn&eacute;es d'adresses et t&eacute;l&eacute;phones pr&eacute;sentes dans les tables du plugin Association seront perdues si vous effectuez la mise &agrave; jour maintenant. Pour les conserver, veuillez installer et activer le plugin Coordonn&eacute;es, en version 1.4.5 au minimum.", // ou ajouter les donnees en commentaire ? ou garder les anciens champs meme si on les gere plus (aisi, ceux qui le desirent peuvent continuer avec les champs extras)
 	'maj_coordonnees_ignorer' => 'Ignorer les donn&eacute;es contenues dans les tables du plugin Association',
-	'maj_coordonnees_merge' => 'Combiner les donn&eacute;es d\'Association et Coordonn&eacute;es. Les donn&eacute;es pr&eacute;sentes dans Association sont ajout&eacute;es aux tables de Coordonn&eacute;es(ce qui peut provoquer des doublons ! )',
+	'maj_coordonnees_merge' => "Combiner les donn&eacute;es d'Association et Coordonn&eacute;es. Les donn&eacute;es pr&eacute;sentes dans Association sont ajout&eacute;es aux tables de Coordonn&eacute;es(ce qui peut provoquer des doublons ! )",
 	'maj_coordonnees_adresses_inserees' => ' adresse(s) ins&eacute;r&eacute;e(s) dans la base de Coordonn&eacute;es.',
 	'maj_coordonnees_numeros_inseres' => ' num&eacute;ro(s) ins&eacute;r&eacute;(s) dans la base de Coordonn&eacute;es.',
 	# MaJ activation des modules seulement si la gestion comptable est active
-	'maj_desactive_gestion_comptable' => 'Gestion d\'association: &agrave; partir de cette mise &agrave; jour, il n\'est plus possible d\'activer la gestion comptable si le plan comptable n\'est pas valide. Votre plan comptable n\'est pas valide, la gestion comptable a donc &eacute;t&eacute; desactiv&eacute;e. Pour la reactiver, rendez vous sur la d\'&eacute;dition du plan comptable puis celle de configuration du plugin',
-	'maj_desactive_modules' => 'Gestion d\'association : &agrave; partir de cette mise &agrave; jour, il n\'est plus possible d\'activer les modules de gestion de dons, ventes, prets ou activit&eacute;s si la gestion comptable n\'est pas activ&eacute;e. Votre configuration actuelle du plugin n\'&eacute;tant plus autoris&eacute;e, les modules de gestions activ&eacute;s ont &eacute;t&eacute; d&eacute;sactiv&eacute;s(aucune donn&eacute; n\'a  &eacute;t&eacute; &eacute;ffac&eacute;e). Rendez vous sur la page de configuration du plugin pour les r&eacute;activer.',
+	'maj_desactive_gestion_comptable' => "Gestion d'association&nbsp;: &agrave; partir de cette mise &agrave; jour, il n'est plus possible d'activer la gestion comptable si le plan comptable n'est pas valide. Votre plan comptable n'est pas valide, la gestion comptable a donc &eacute;t&eacute; desactiv&eacute;e. Pour la reactiver, rendez vous sur la page d'&eacute;dition du plan comptable puis celle de configuration du plugin",
+	'maj_desactive_modules' => "Gestion d'association&nbsp;: &agrave; partir de cette mise &agrave; jour, il n'est plus possible d'activer les modules de gestion de dons, ventes, prets ou activit&eacute;s si la gestion comptable n'est pas activ&eacute;e. Votre configuration actuelle du plugin n'&eacute;tant plus autoris&eacute;e, les modules de gestions activ&eacute;s ont &eacute;t&eacute; d&eacute;sactiv&eacute;s (aucune donn&eacute; n'a &eacute;t&eacute; &eacute;ffac&eacute;e). Rendez vous sur la page de configuration du plugin pour les r&eacute;activer.",
 	# MaJ Generation des etiquette
 	'eti_avec_civilite' => 'Avec la civilit&eacute;',
 	'eti_nb_colonne' => 'Nb &eacute;tiquettes en largeur',
@@ -773,7 +775,7 @@ Commentaire: @commentaire@
 	'eti_espace_etiquettesl' => 'Espace entre &eacute;tiquettes largeur',
 	'eti_espace_etiquettesh' => 'Espace entre &eacute;tiquettes hauteur',
 	'etiquette_aucun_choix' => 'Aucun statut interne s&eacute;lectionn&eacute;',
-	'info_doc_etiquette'=>'Cette page permet le param&eacute;trage du g&eacute;n&eacute;rateur d\'&eacute;tiquettes, il permet ainsi de renseigner le g&eacute;n&eacute;rateur sur le format du papier sur lequel seront imprim&eacute;es les &eacute;tiquettes, la taille des &eacute;tiquettes ...',
+	'info_doc_etiquette'=> "Cette page permet le param&eacute;trage du g&eacute;n&eacute;rateur d'&eacute;tiquettes, il permet ainsi de renseigner le g&eacute;n&eacute;rateur sur le format du papier sur lequel seront imprim&eacute;es les &eacute;tiquettes, la taille des &eacute;tiquettes ...",
 	'disposition_des_etiquettes' => 'Espace entre &eacute;tiquettes hauteur',
 	'contenu_des_etiquettes' => 'Contenu des &eacute;tiquettes',
 	'parametrage_des_etiquettes' => 'Param&eacute;trage des &eacute;tiquettes',
@@ -785,6 +787,7 @@ Commentaire: @commentaire@
 	'membre_sans_email'=>'Uniquement les menbres sans email',
 	'format_des_pages' => 'Format des pages',
 	'marges_des_etiquettes' => 'Marge des &eacute;tiquettes',
+
 # Categories
 	# Categories : entetes
 	# Categories : liblelles
@@ -792,14 +795,15 @@ Commentaire: @commentaire@
 	# Categories : titres
 	'ajouter_une_categorie_de_cotisation' => 'Ajouter une cat&eacute;gorie de cotisation',
 
+# Dons
+	# Dons : messages
+	'dons_aide_contrepartie' => "Les dons avec contrepartie ne donnent pas lieu &agrave; de r&eacute;duction fiscale..."
 
 // chaines collectee automatiquement
 
 'a_developper' => 'A d&eacute;velopper',
 'acheteur' => 'Acheteur',
 'action_sur_les_dons' => 'Action sur les dons',
-'action' => 'Action',
-'activite_nd' => 'Activit&eacute; n&deg;',
 'adresse' => 'Adresse',
 'ajouter_une_operation' => 'Ajouter une op&eacute;ration',
 'apres_confirmation_vous_ne_pourrez_plus_modifier_ces_operations' => 'Apr&egrave;s confirmation vous ne pourrez plus modifier ces op&eacute;rations.',
@@ -850,7 +854,6 @@ Commentaire: @commentaire@
 'nd_de_membre' => 'N&deg; de membre',
 'pret_nd' => 'Pr&ecirc;t n&deg;',
 'prix_de_vente_en_e__' => 'Prix de vente(en &euro;)',
-'qte' => 'Qt&eacute;',
 'quantite_achetee' => 'Quantit&eacute; achet&eacute;e',
 'reference' => 'R&eacute;f&eacute;rence',
 'reserve' => 'R&eacute;s&eacute;rv&eacute;',
