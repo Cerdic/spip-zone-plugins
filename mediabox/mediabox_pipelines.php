@@ -77,7 +77,7 @@ function mediabox_insert_head($flux){
 	 * Initialiser la mediabox si jQuery est deja charge, ie on arrive apres
 	 */
 	$flux .='<script type="text/javascript">/* <![CDATA[ */
-var box_settings = {tt_img:'.($config['traiter_toutes_images'] == 'oui'?'true':'false')
+var  box_settings= window.box_settings || {}; box_settings = {tt_img:'.($config['traiter_toutes_images'] == 'oui'?'true':'false')
 .',sel_g:"'.$config['selecteur_galerie']
 .'",sel_c:"'.$config['selecteur_commun']
 .'",trans:"'.$config['transition']
