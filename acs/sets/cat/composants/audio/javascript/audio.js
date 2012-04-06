@@ -4,7 +4,7 @@
  *
  * Fonctionne avec jQuery.
  *
- * Copyright Daniel FAIVRE 2007-2011
+ * Copyright Daniel FAIVRE 2007-2012
  */
 
 soundManager.onerror = function() {

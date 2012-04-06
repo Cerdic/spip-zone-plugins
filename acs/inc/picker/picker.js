@@ -1,4 +1,4 @@
-// Filepicker : by Daniel FAIVRE - 2008-2011 */
+// Filepicker : by Daniel FAIVRE - 2008-2012 */
 
 var TFP = new TFilePicker();
 

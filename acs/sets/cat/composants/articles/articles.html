@@ -17,6 +17,7 @@ page: détermine la boucle SPIP à charger si les variables précédentes sont v
 (#ENV{page}|=={resume}|?{' '})[(#INCLURE{fond=composants/articles/boucle-resume}{env}{self}{debut_articles})#SET{ok,oui}]][
 (#ENV{page}|=={recherche}|?{' '})[(#INCLURE{fond=composants/articles/boucle-articles_recherche}{env}{self})#SET{ok,oui}]][
 (#ENV{page}|=={plan}|?{' '})[(#INCLURE{fond=composants/plan/plan}{env}{self})#SET{ok,oui}]][
+(#ENV{page}|=={auteur}|?{' '})[(#INCLURE{fond=composants/auteur/auteur}{env}{self})#SET{ok,oui}]][
 (#ENV{page}|=={forums}|?{' '})[(#INCLURE{fond=composants/articles/boucle-plan}{env}{self}{mode=forums})#SET{ok,oui}]][
 (#GET{ok}|!={oui}|?{' '})???][(#REM) PROVISOIRE : affiche ??? si aucune boucle ne convient - TODO : renvoyer vers 404 ?]
 </div>

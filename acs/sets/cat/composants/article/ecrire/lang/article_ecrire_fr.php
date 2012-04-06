@@ -22,6 +22,7 @@ Pour que ce groupe de mots-clefs techniques n\'apparraisse pas sur le site publi
 'ChapoGras' => 'Mettre le chapeau de l\'article en gras',
 'Sommaire' => 'Sommaire',
 'Stats' => 'Statistiques de visites',
+'LogoTailleMaxHelp' => 'Taille maxi du logo. Si la valeur n\'est pas numérique, le logo n\'est pas affiché',
 'Lock' => 'Contrôle d\'accès',
 'LockHelp' => 'Limite l\'accès aux articles avec le mot-clé _ide, _aut, _adm ou _acs, respectivement, aux visiteurs enregistrés, aux rédacteurs, aux administrateurs, ou aux administrateurs ACS.',
 'Added' => 'Ajouté à la dernière révision',

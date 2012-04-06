@@ -2,14 +2,25 @@
   <!-- Nom du composant -->
   <nom>Audio</nom>
   <!-- Auteur du composant -->
-  <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
-  <version>0.8.6</version>
+  <auteur>Daniel FAIVRE &copy; 2008-2012 - licence GPL</auteur>
+  <version>0.8.7</version>
 	<necessite id='acs' version='[0.7.1;]' />
 
   <param>
     <nom>preview</nom>
     <valeur>200</valeur>
   </param>
+
+  <variable>
+    <nom>lmin</nom>
+    <type>text</type>
+    <valeur>120px</valeur>
+  </variable>
+  <variable>
+    <nom>lmax</nom>
+    <type>text</type>
+    <valeur>350px</valeur>
+  </variable>
 
   <variable>
     <nom>Btn</nom>

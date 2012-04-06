@@ -4,7 +4,7 @@
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2011
+Copyright Daniel FAIVRE, 2007-2012
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Insere une carte interactive utilisant JSON. Requiert les plugins gis_escoitar et openlayers.
@@ -94,7 +94,6 @@ Paramètres:
     var lonlat = new OpenLayers.LonLat(lon, lat);
     var lyrs = new Array;
     [(#VAR{#EVAL{'acsCarte'.'#NIC'.'OpenStreetmap'}}|!={non}|?{" "})lyrs.push(new OpenLayers.Layer.OSM());]
-    [(#VAR{#EVAL{'acsCarte'.'#NIC'.'Osmarender'}}|!={non}|?{" "})lyrs.push(new OpenLayers.Layer.OSM.Osmarender("Osmarender"));]
     if (typeof G_PHYSICAL_MAP != "undefined") {
       [(#VAR{#EVAL{'acsCarte'.'#NIC'.'gPhy'}}|!={non}|?{" "})lyrs.push(new OpenLayers.Layer.Google("<:acs:carte_rues_google:>",{type: G_PHYSICAL_MAP}));]
       [(#VAR{#EVAL{'acsCarte'.'#NIC'.'gMap'}}|!={non}|?{" "})lyrs.push(new OpenLayers.Layer.Google("<:acs:carte_google:>"));]

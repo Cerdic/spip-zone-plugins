@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'Aut' => 'Authors',
 'ChapoGras' => 'Set the header\'s font weight to bold',
 'Stats' => 'Visits',
+'LogoTailleMaxHelp' => 'Logo max size. Logo is not displayed if the value is not numeric.',
 'Lock' => 'Access control',
 'LockHelp' => 'Limit access to articles with keyword _ide, _aut, _adm ou _acs, to logged visitors, authors, administrators, or to ACS administrators.',
 'Added' => 'Added since last revision',

@@ -14,9 +14,9 @@ id_article: id de l'article
     [<div class="cArticle">(#INCLURE{fond=composants/article/inc-article_diff}{id_version=#ENV{id_version}}{objet=article}{id_article=#ENV{id_article}})</div>]
   ]
 <BOUCLE_article(ARTICLES){id_article}{statut==[publie|propose|refuse]}>
-  <div class="cArticle">
-  [(#LOGO_ARTICLE|right|image_reduire{#VAR{acsArticleLogoTailleMax,100},#VAR{acsArticleLogoTailleMax,100}})]
-  [(#ENV{id_version}|?{""," "})
+  <div class="cArticle">[(#VAR{acsArticleLogoTailleMax}|is_numeric|?{" "})
+    [(#LOGO_ARTICLE|right|image_reduire{#VAR{acsArticleLogoTailleMax,100}})]
+  ][(#ENV{id_version}|?{""," "})
   <div class="entete">
     [(#MODELE{article_traductions})]
     #DEBUT_SURLIGNE

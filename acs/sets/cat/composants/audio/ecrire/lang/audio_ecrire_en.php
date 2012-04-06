@@ -23,6 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'Sep' => 'Separator',
 'Mp3on' => 'Active track background',
 'Mp3hover' => 'over',
+'lmin' => 'Min width',
+'lmax' => 'Max width',
 
 'Download' => 'Download link',
 

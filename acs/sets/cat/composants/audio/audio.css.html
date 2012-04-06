@@ -1,12 +1,14 @@
 [(#CACHE{0})]
 .doc_mp3player {
-  min-width: 120px;
-  max-width: 350px;
+  min-width: #VAR{acsAudiolmin,120px};
+  max-width: #VAR{acsAudiolmax,350px};
   margin: 0 5px 5px;
   padding: 0 5px 5px;
 }
 
 .mp3player {
+  min-width: #VAR{acsAudiolmin,120px};
+  max-width: #VAR{acsAudiolmax,350px};
   opacity: 0.6;
 }
 
