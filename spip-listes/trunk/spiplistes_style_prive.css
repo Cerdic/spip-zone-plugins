@@ -1,0 +1,73 @@
+/* spiplistes (espace prive'/private part) CSS Document 
+// $LastChangedRevision: 21062 $
+// $LastChangedBy: paladin@quesaco.org $
+// $LastChangedDate: 2008-06-21 13:45:14 +0200 (sam., 21 juin 2008) $
+*/
+br.debut-page {margin-top:2em}
+.spiplistes fieldset { border:1px solid black; }
+.spiplistes .message-alerte { color:red; font-weight:bold; }
+.spiplistes .spip-alert {}
+.spiplistes .spip-alert .cadre-titre, .spiplistes .spip-alert .impliable {background-color:red !important; color:white}
+.spiplistes .texte-alerte { background-color:red; font-weight:bold; color:white;padding:0 1ex }
+.spiplistes .liste-moderateurs
+, .spiplistes .liste-listes { list-style: none;margin:0;padding:0;width:100%;height:auto;display:table;background:#ddd }
+.spiplistes .liste-moderateurs li 
+, .spiplistes .liste-moderateurs li .statut-nom
+, .spiplistes .liste-moderateurs li .supprim { margin:0;padding:0 0 0 0.5ex;display:table-cell;line-height:1.6em;width:50%; }
+.spiplistes .liste-moderateurs li  { display:table-row;width:100% }
+.spiplistes .liste-moderateurs li .nom { padding-left:2ex }
+.spiplistes .liste-moderateurs li .supprim { font-weight:bold;text-align:right;padding:0 1ex }
+.spiplistes .triangle_label { font-weight: bold; text-decoration: underline; cursor: pointer }
+.spiplistes .titre-petite-boite { font-size:80%;text-transform: uppercase;font-weight:bold }
+.spiplistes .table-agenda { position:absolute;left:0;top:0; border:1px solid #000; border-top:0 }
+.spiplistes .table-agenda caption { text-align:left;border-bottom:1px solid #ccc;height:16px;overflow: hidden }
+.spiplistes .table-agenda .bas { vertical-align: bottom; overflow:hidden }
+.spiplistes .table-agenda table, .spiplistes .table-agenda tr, .spiplistes .table-agenda tr { padding:0;margin:0 }
+.spiplistes .table-agenda .tr-legend { border:0;vertical-align:top;font-size:60%;font-weight:700 }
+.spiplistes .table-agenda .left-legend { text-align:left;width:40%;float:left }
+.spiplistes .table-agenda .right-legend { text-align:right }
+.spiplistes .agenda-loupe { display:block;width:26px;height:24px;background: url() no-repeat left top }
+.spiplistes .centrer { text-align:center }
+.spiplistes .panier { list-style:none;padding:1ex;margin:0 }
+.spiplistes .a-fond-0, .spiplistes .a-fond-1 { display:block; margin:0;padding:0;border-top:1px solid #fff }
+.spiplistes .gray { color:#ccc }
+.spiplistes .bold { font-weight:bold }
+.spiplistes .titre-boite-date { font-weight:700 }
+.spiplistes .titre-boite-date .titre { text-transform: uppercase }
+.spiplistes .titre-boite-date .date {}
+.spiplistes .boite-generer-option {margin:0.5em 0}
+.spiplistes .boite-generer-option .option {margin:0.5em 0 0 5ex; display:none}
+.spiplistes .supprimer_cet_abo {background: url() no-repeat center;}
+.spiplistes .supprimer_cet_abo a {display:block;}
+.spiplistes .supprimer_cet_abo span {display:none}
+.spiplistes .previsu-content {background-color:#fff;border:1px solid #000;overflow:auto;width:500px;height:40em;}
+.spiplistes .previsu-edit {background-color:#fff;border:1px solid #000;}
+#spiplistes_l_recherche img {margin:0;border:0;float:left;width:26px;height:20px;display:block}
+table.spiplistes-abos {	border:1px solid gray }
+table.spiplistes-abos tr.onglets { border-bottom: 10px solid #ccc;line-height:1.8em;margin-bottom:1em;padding:1em }
+table.spiplistes-abos td { line-height:1.25em; border-bottom: 1px solid #ccc }
+table.spiplistes-tab { margin-top:5px; font-size:90% }
+table.spiplistes-tab tr { text-align:center; padding:5px }
+table.spiplistes-tab th { font-weight:bold; background-color:#eec }
+table.spiplistes-tab td { text-align:center; padding:3px; width:33% }
+.spiplistes .row-even { background-color:#fff }
+.spiplistes-legend-titre { font-weight:bold; font-size:110% }
+.spiplistes-legend-stitre { font-weight:bold; font-size:90%; color:gray }
+#boite-result-chercher-auteur { text-align:left; margin-bottom:1.5em }
+#boite-result-chercher-auteur ul { padding-left:3ex }
+#boite-result-chercher-auteur  .nom_auteur { font-weight:bold;font-size:130%;line-height:1.4em }
+ul.liste-listes { padding-left:0;margin:0;list-style:none }
+ul.liste-listes li { margin:0 0 0.25em }
+ul.liste-listes li img { margin: 0 0.5ex }
+ul.liste-listes li .titre { font-size:110% }
+ul.liste-listes li .description { font-size:90%;color:gray }
+ul.liste-listes li .periodicite { font-size:90% }
+ul.liste-format, ul.liste-format-desabo { padding-left:0;margin:0;list-style:none }
+ul.liste-format li, ul.liste-format-desabo li { display:block }
+/* supprimes les <p> ajout�s aux infos par 193 */
+ul.meta-info-liste p { display:inline }
+/* maintenance */
+#sl-modif-fmt {
+	padding-left:2ex;
+}
+hr.spiplistes { border:1px solid #ccc; }

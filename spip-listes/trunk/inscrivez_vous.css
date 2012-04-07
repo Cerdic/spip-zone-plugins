@@ -1,0 +1,61 @@
+#spiplistes-inscrivez-vous {
+	font-weight:500;
+	width:140px;
+	background-color:#fff;
+	color:#000;
+	margin:0;
+	padding:0.25em 0;
+	overflow:hidden;
+	text-align:left;
+	font-size:90%;
+}
+#spiplistes-inscrivez-vous h3 {
+	margin:0 0 0.25em;
+	padding:0 0.75ex;
+	font-size:0.9em;
+	color:#444;
+	line-height:1.5em;
+	text-align:left;
+}
+#spiplistes-inscrivez-vous span.erreur_message {
+	font-size:80%;
+}
+#spiplistes-inscrivez-vous input.text {
+	-moz-border-radius:7px;
+	-webkit-border-radius:7px;
+	border-radius:7px;
+	border-color:#1ED7FF;
+	border-style:ridge;
+	border-width:2px;
+	padding:10px;
+	width:126px;
+	height:1.0em;
+	padding:4px;
+	overflow:hidden;
+	background-color:#fff;
+	text-align:left;
+}
+#spiplistes-inscrivez-vous input.bg-yes {
+	background: #fff url() no-repeat center;
+}
+#spiplistes-inscrivez-vous input.text:active,
+#spiplistes-inscrivez-vous input.text:focus {
+	background-image: url();
+}
+#spiplistes-inscrivez-vous input.submit {
+	position:relative;
+	top:16px;
+	right:0;
+}
+#spiplistes-inscrivez-vous .invisible {
+	position: absolute;
+	top: -1000em;
+	height:1px;
+	overflow:hidden;
+}
+#spiplistes-inscrivez-vous p.reponse_formulaire {
+	color: #000;
+	font-size:80%;
+	padding:0 0.75ex;
+	margin:0;
+}

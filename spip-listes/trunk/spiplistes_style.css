@@ -1,0 +1,63 @@
+/* spiplistes (public part) CSS Document (pour page abonnement) */
+
+#spiplistes-pageabo {
+	color:#000;background-color:#fff;font-family:sans-serif;
+	/* font-size:90%; /* */
+}
+#spiplistes-formabo {
+	background-color:#fff;
+	text-align: justify;
+	width:50%;
+	padding: 2em;
+	margin: 2em auto;
+	font-size:100%;
+}
+#spiplistes-formabo.cadre {
+	padding:1em;
+	border:1px solid #ccc;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	padding:0; 
+}
+
+#spiplistes-formabo form {
+	padding: 0 2em;
+}
+
+#spiplistes-formabo form fieldset {
+	/*
+	padding:2em 4ex 1em;
+	font-size:90%;
+	*/
+}
+
+#spiplistes-formabo form fieldset legend {
+	/*
+	margin:0 auto 1em;
+	width:auto;
+	display:block;
+	text-align: center;
+	padding:0 1em;
+	background-color: #ccc;
+	font-size:90%;
+	color:#fff;
+	*/
+}
+#spiplistes-formabo .message-formulaire {
+	color:black;
+	padding: 0 2em;
+	/* font-size:90%; /*  */
+}
+#spiplistes-formabo form .spip_bouton {
+	color:red;
+	text-align: center;
+	font-size:100%;
+}
+.center {
+	text-align:center;
+}
+.spiplistes-cdt {
+ /*  font-size:70%; /* */
+  text-align:center;
+  margin-top:10px
+}

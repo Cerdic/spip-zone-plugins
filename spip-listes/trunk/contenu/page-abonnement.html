@@ -1,0 +1,25 @@
+[(#PLUGIN{zvide}|non)
+	<div class='bloc'>
+		
+		<h1>#NOM_SITE_SPIP</h1>	
+		<div id='spiplistes-formabo' class='formulaire_spip cadre'>
+		
+		[<!--(#REM) si un cookie est passé OU si un auteur est connecté
+				on affiche le formulaire de gestion d'abonnement -->]
+		
+		[(#ENV{d}|oui|ou{#SESSION{id_auteur}|oui})
+			#FORMULAIRE_GESTION_ABONNEMENT]
+		
+		[<!--(#REM) sinon formulaire d'inscription -->]
+		
+		[(#ENV{d}|non|et{#SESSION{id_auteur}|non})
+			<div class="message-formulaire">
+				<p><:spiplistes:abonnement_explication:></p>
+			</div>
+			#FORMULAIRE_SPIP_LISTES_INSCRIPTION]
+		
+		</div>
+		<p class="center"><a href="#URL_SITE_SPIP" title="[(#NOM_SITE_SPIP|attribut_html)]"><:pass_retour_public:></a></p>
+		<div class='spiplistes-cdt'><:spiplistes:abonnement_cdt:></div>
+	</div>
+]

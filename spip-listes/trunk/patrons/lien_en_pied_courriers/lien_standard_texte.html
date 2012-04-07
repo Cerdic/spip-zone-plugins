@@ -1,0 +1,35 @@
+#CACHE{1}
+#HTTP_HEADER{Content-Type: text/html}
+[<!--(#REM)
+
+CP-20110326
+Squelette pour spip-listes    
+Construction du lien de gestion d'abonnement
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+*
+* Precautions:                             
+* - ne pas envoyer des gabarits de plus de 10Ko
+* - ne pas placer de balises html <html><body> ni de fermeture </body></html>
+* ils seront ajoutes automatiquement a l'envoi du mail 
+* - mettre les style  CSS directement dans les balises pour etre sur qu'ils seront interpretes (meme par les webmails)
+* - les urls et liens images seront automatiquement converties en absolues
+*  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
+*
+
+Le trim doit etre applique afin d'eviter un new line
+(coupe URL)
+
+-->
+][(#SET{texte_lien,
+	[(#ENV{lien_desabo}|?{<:spiplistes:stop_abonnement_text:>,<:spiplistes:modif_abonnement_text:>})]
+	})]
+[(#SET{stop,
+	[(#ENV{lien_desabo}|?{[&stop=(#ENV{id_liste})],''})]
+	})]
+	[
+	[(#GET{texte_lien}|trim)]
+(#ENV{_url})?page=abonnement[(#GET{stop}|trim)]&d=#ENV{d}
+	]

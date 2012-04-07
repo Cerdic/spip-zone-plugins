@@ -1,0 +1,29 @@
+#CACHE{1} 
+[<!--(#REM) 
+
+* Squelette pour spip-listes    
+* details_auteur.html (CP-20080608 paladin@quesaco.org)
+
+Exemple pour envoyer à un abonné les données le concernant.
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+*
+* Precautions:                             
+* - ne pas envoyer des gabarits de plus de 10Ko
+* - ne pas placer de balises html <html><body> ni de fermeture </body></html>
+* ils seront ajoutes automatiquement a l'envoi du mail 
+* - mettre les style  CSS directement dans les balises pour etre sur qu'ils seront interpretes (meme par les webmails)
+* - les urls et liens images seront automatiquement converties en absolues
+*  ex. rubrique5.html ->
+   http://www.monsite.org/rubrique5.html * 
+--> 
+] 
+<h1>Vos donn&eacute;es sur <strong>#NOM_SITE_SPIP</strong></h1>
+<p>Nom : _AUTEUR_NOM_</p>
+<p>Bio : _AUTEUR_BIO_</p>
+<p>Site : <a _HREF_AUTEUR_URL_SITE_>_AUTEUR_NOM_SITE_</a></p>
+<p>url du site: _AUTEUR_URL_SITE_</p>
+<p>Login : _AUTEUR_LOGIN_</p>
+<p>e-mail : _AUTEUR_EMAIL_</p>

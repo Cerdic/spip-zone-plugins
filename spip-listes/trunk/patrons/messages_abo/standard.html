@@ -1,0 +1,98 @@
+#CACHE{1}
+[<!--(#REM)
+
+	Squelette pour spip-listes    
+	patrons/messages_abos/standard.html
+	
+	$LastChangedRevision$
+	$LastChangedBy$
+	$LastChangedDate$
+	
+*
+* Precautions:                             
+* - ne pas envoyer des gabarits de plus de 10Ko
+* - ne pas placer de balises html <html><body> ni de fermeture </body></html>
+* ils seront ajoutes automatiquement a l'envoi du mail 
+* - mettre les style  CSS directement dans les balises pour etre sur qu'ils seront interpretes (meme par les webmails)
+* - les urls et liens images seront automatiquement converties en absolues
+*  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
+*
+-->
+]<div style="background:#fff;color:#ccc;font-family:Tahoma,Arial,Verdana,sans-serif;font-size:100%;text-align:center;">
+<div style="width: 500px;background:#fff;color:#000;text-align:left;margin:0 auto;padding:15px;">
+<div><:form_forum_message_auto:></div><br />
+
+[<h1 style="font-size:80%;border-bottom:1px solid #666;">(#ENV*{titre})</h1>]
+
+<:bonjour:>[ (#ENV{nom})],
+
+<p>[(#ENV{nouvel_inscription}|=={oui}|?{' ',''})<:spiplistes:bienvenue_sur_la_liste_:>][(#ENV{nouvel_inscription}|=={oui}|?{'',' '})<:spiplistes:vos_abos_sur_le_site_:>]<strong><a href="#URL_SITE_SPIP"/>#NOM_SITE_SPIP</a></strong></p>
+
+<p>
+[(#ENV{format}|=={non}|?{' ',''})
+<:spiplistes:vous_abonne_aucune_liste:>
+]
+[(#ENV{format}|=={non}|?{'',' '})
+<:spiplistes:votre_format_de_reception_:> : [(#ENV{format}|=={html}|?{' ',''})<:spiplistes:html_description:>][(#ENV{format}|=={texte}|?{' ',''})<:spiplistes:texte_brut:>]
+]
+</p>
+
+<B_listes>
+	<p>[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:vous_etes_abonne_a_la_liste_:>,<:spiplistes:vous_etes_abonne_aux_listes_:>})]</p>
+	<ul>
+	<BOUCLE_listes(LISTES){statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}{id_liste IN #ENV**{ids_abos}}>
+	<li style="margin-bottom:3px">
+		<strong>#TITRE</strong>[ - <em>(#TEXTE)</em>]
+	</li>
+	</BOUCLE_listes>
+	</ul>
+	[<p><:spiplistes:pour_modifier_votre_abo_:>
+	<a href="#URL_SITE_SPIP/spip.php?page=abonnement&d=(#ENV{cookie_oubli})"><:spiplistes:_cliquez_lien_formulaire:></a>.</p>]
+
+</B_listes>
+
+<p><:spiplistes:vous_abonne_aucune_liste:>.</p>
+	<B_dispos>
+	<p>[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:liste_dispo_site_:>,<:spiplistes:listes_dispos_site_:>})]</p>
+	<ul>
+	<BOUCLE_dispos(LISTES){statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}>
+	<li style="margin-bottom:3px">
+		<strong>#TITRE</strong>[ - <em>(#TEXTE)</em>]
+	</li>
+	</BOUCLE_dispos>
+	</ul>
+	
+	[<p><:spiplistes:pour_vous_abonner:>, 
+	<a href="#URL_SITE_SPIP/spip.php?page=abonnement&d=(#ENV{cookie_oubli})"><:spiplistes:_cliquez_lien_formulaire:></a>.</p>]
+	
+	</B_dispos>
+	<p><:spiplistes:desole_pas_de_liste:></p>
+	<//B_dispos>
+<//B_listes>
+
+[(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
+[(#ENV{statut}|=={nouveau}|?{' ',''})
+<p><:spiplistes:vous_etes_redact:></p>
+]
+]
+[(#ENV{inscription_redacteur}|=={oui}|?{'',' '})
+[(#ENV{inscription_visiteur}|=={oui}|?{' ',''})
+<p><:spiplistes:vous_etes_membre:></p>
+]
+]
+[(#ENV{zepass}|?{' ',''})
+<p><:login_login:>#ENV{login}<br />
+<:login_pass2:>#ENV{zepass}
+</p>
+]
+
+[(#ENV{statut}|=={aconfirmer}|?{' ',''})
+[<p><:spiplistes:definir_votre_pass:>, 
+	<a href="#URL_SITE_SPIP/spip.php?page=spip_pass&p=(#ENV{cookie_oubli})"><:spiplistes:_cliquez_lien_formulaire:></a>.</p>]
+]
+
+[<p>(#ENV*{texte})</p>]
+
+
+</div>
+</div>

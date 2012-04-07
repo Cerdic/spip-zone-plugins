@@ -1,0 +1,178 @@
+
+/* divers css pour les formulaires et pages spiplistes publiques */
+
+/* css de formulaires/formulaire_abonnement.html */
+ 
+form.formulaire-spiplistes-abo {
+/*	margin:0;
+	padding:1em !important; /* */
+}
+form.formulaire-spiplistes-abo legend { 
+	font-family: Georgia, Times, serif;
+	font-size:1.4em;
+	color:black;
+	text-align:left !important;
+	font-weight:700; 
+	background-color:transparent;
+	width:auto;
+}
+form.formulaire-spiplistes-abo div.coord {
+}
+form.formulaire-spiplistes-abo div.coord label {
+	display:block;
+/*	font-size:90%; /* */
+	font-weight:500;
+}
+form.formulaire-spiplistes-abo div.coord input {
+	margin:0 1em;
+}
+form.formulaire-spiplistes-abo ul, .formulaire-spiplistes-abo li {
+	margin:0;
+	padding:0;
+	border:0;
+	list-style: none;
+}
+form.formulaire-spiplistes-abo li {
+	line-height:1.2em;
+}
+form.formulaire-spiplistes-abo fieldset {
+	margin:0 0 0.75em !important;
+	padding-top:1em !important;
+	border:0;
+}
+form.formulaire-spiplistes-abo fieldset p {
+	margin:0.75em 0;
+}
+form.formulaire-spiplistes-abo fieldset label.block {
+	display:block;
+	margin-bottom:0.25em;
+	clear:left;
+}
+form.formulaire-spiplistes-abo fieldset label.block input {
+	display:block;
+	margin-right:0.5ex;
+	float:left;
+}
+form.formulaire-spiplistes-abo fieldset label.block span {
+/*	float:none; /* */
+}
+form.formulaire-spiplistes-abo p.message-formulaire {
+	color:red; 
+	font-size: 110%
+}
+div.formulaire_spip p.desabo_liste {
+	text-align: center;
+}
+div.formulaire_spip p.desabo_liste span.titre {
+	font-weight:700;
+	font-size:1.2em;
+}
+div.formulaire_spip p.desabo_liste span.descriptif {
+	display:block;
+	text-align:center;
+	font-weight:500;
+	font-size:1em;
+}
+form.formulaire-spiplistes-abo p.spip_bouton {
+	background-color:transparent !important;
+	text-align:right !important;
+	margin:0;
+}
+div.formulaire_spip p.errormsg {
+	text-align:center;
+}
+
+/* css de abonnement.html */
+
+#spiplistes-pageabo {text-align:center;padding:1em;}
+#spiplistes-pageabo div.bloc {text-align:left;margin:1em auto}
+#spiplistes-pageabo h1, #spiplistes-pageabo div.spiplistes-cdt, .center {text-align:center}
+
+#spiplistes-formabo form
+, #spiplistes-formabo .message-formulaire {margin:0 auto; width:auto}
+#spiplistes-formabo .souhait
+, #spiplistes-formabo .message-formulaire {display:block;font-size:100%;text-align:center}
+#spiplistes-formabo .nom {display:block;font-size:1.2em;text-align:left}
+#spiplistes-formabo p.spip_bouton {font-size:100%;text-align:right}
+#spiplistes-formabo li.editer_email {margin:0 auto}
+#spiplistes-formabo li.editer_email label {float:left;margin-right:1ex}
+
+/* css de formulaires/modif_abonnement2.html */
+
+div.formulaire_modif_abonnement, div.formulaire_modif_abonnement2 {
+	border:1px solid gray;width:75%;
+	margin:0 auto 2em;
+	padding:0;
+	}
+div.bloc-formats {text-align: left;}
+
+/* css partagés */
+
+ul.liste-des-listes {}
+ul.liste-des-listes li { margin-bottom:3px }
+ul.liste-des-listes span.text-list { font-style:italic }
+
+ul.liste-formats {}
+ul.liste-formats input {display:block; width:2ex; float:left }
+ul.liste-formats label {display:block; font-weight:500 }
+
+span.liste-titre {
+	display:inline;
+	font-size:100%;
+	font-weight:700;
+	line-height:1.4em;
+	color:#099;
+	margin:0;
+	padding:0;
+	border-bottom:1px solid #0f0;
+	cursor:pointer;
+}
+span.liste-descriptif {
+	display:block;
+	font-size:90%;
+	font-weight:300;
+	color:#333;
+	margin:0.75em 0;
+	padding:0 0 0 5ex;
+}
+div.formulaire_modif_abonnement div.spip_bouton, div.formulaire_modif_abonnement2 div.spip_bouton {
+	background-color:transparent !important;
+	margin:0.5em 0;
+	}
+div.formulaire_modif_abonnement input.submit, div.formulaire_modif_abonnement2 input.submit {
+	display:block;
+	margin:0 0 0 auto;
+	}
+p.reponse_formulaire_ok {background-color:green;}
+p.reponse_formulaire_erreur {background-color:red;}
+p.reponse_formulaire_ok, p.reponse_formulaire_erreur {text-align:center;color:white}
+
+/**
+ * abonnement-defaut.html
+ */
+html {
+	padding:0;
+}
+#spiplistes-pageabo {
+	background-color:#fff;
+	margin:0;
+	padding:0;
+}
+#spiplistes-pageabo div.bloc {
+	background-color:#fff;
+	width:75%;
+	margin:0 auto;
+}
+#spiplistes-formabo form
+, #spiplistes-formabo .message-formulaire {
+	margin:0 auto;
+	background-color:#fff
+}
+#spiplistes-formabo .souhait
+, #spiplistes-formabo .message-formulaire {display:block;font-size:100%;text-align:center}
+#spiplistes-formabo p.nom {display:block;text-align:center}
+#spiplistes-formabo p.email {display:block;text-align:center}
+#spiplistes-formabo p.email span {color:#cfc}
+#spiplistes-formabo p.spip_bouton {font-size:100%;text-align:right}
+#spiplistes-formabo ul {list-style:none}
+#spiplistes-formabo input.submit { font-size: 1.2em; }

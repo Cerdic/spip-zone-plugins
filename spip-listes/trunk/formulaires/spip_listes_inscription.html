@@ -1,0 +1,59 @@
+[<!--(#REM)
+
+	Formulaire construit par la balise
+		FORMULAIRE_SPIP_LISTES_INSCRIPTION
+	
+	@since SPIP 2.0
+	@see formulaires/spip_listes_inscription.php
+	@see http://www.spip.net/fr_article3796.html
+
+-->]<div class="formulaire_spip formulaire_spip_listes_inscription" id="sl-inscription">
+<!-- <br class='bugajaxie' /> -->
+[<p class="formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+[<!--(#REM)
+	Si erreur rencontree sur le champ mail,
+	presente un message avec class CSS 'erreur'.
+	
+	Vous pouvez faire ressortir l'erreur
+	a l'ecran via les styles CSS,
+	par exemple :
+	
+	#sl-inscription p span.erreur { background-color: #fcc; }
+   
+   -->]
+[<p><span class="erreur">(#ENV**{erreurs}|table_valeur{email})</span></p>]
+
+[(#ENV{editable}|oui)
+<form action="#ENV{action}" method="post">
+	#ACTION_FORMULAIRE{#ENV{action}}
+	[<input type="hidden" name="listes&#91;&#93;" value="(#ENV{id_liste})" />]
+	<input type="hidden" name="format_abo" checked="checked" value="html" />
+	<ul>
+		<li class="editer_email">
+			<label for="email"><:spiplistes:votre_email_:></label>
+			<input type="text" name="email" id="email" value="#ENV{email}"
+				   [<!--(#REM)
+				   
+					Si erreur rencontree sur le champ mail,
+					ajoute la classe 'erreur' a input.
+					
+					Vous pouvez faire ressortir l'erreur
+					a l'ecran via les styles CSS,
+					par exemple :
+					
+					#sl-inscription input.erreur { background-color: #fcc; }
+				   
+				   -->]
+				   class="text[(#ENV**{erreurs}|table_valeur{email}|?{' erreur',''})]" />
+		</li>
+		[(#ENV{id_liste}|non)
+		[(#INCLURE{fond=formulaires/inc-liste_des_listes}{env})]
+		]
+	</ul>
+	<p class="boutons spip_bouton">
+		<input type="submit" class="submit" name="ok" value="ok" />
+	</p>
+</form>]
+</div>

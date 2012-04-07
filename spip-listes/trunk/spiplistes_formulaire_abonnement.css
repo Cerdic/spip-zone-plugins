@@ -1,0 +1,99 @@
+/**
+ * spiplistes_formulaire_abonnement.css
+ * @see formulaire_abonnement.html
+ */
+
+#sl-for-abo-inscript, #sl-for-abo-inscript * {
+	background: transparent;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+#sl-for-abo-inscript {
+	font-family: "Trebuchet MS","Myriad Web Pro","Myriad Web", Verdana, Tahoma, Arial, sans-serif;
+	font-size:0.9em;
+	text-align:center;
+	background-color:#3465A4;
+	width:160px;
+	margin:0 auto;
+	padding:3px;
+}
+#sl-for-abo-inscript form {
+	display:block;
+	text-align:left;
+	background-color:#B5DABA;
+	overflow:hidden; /* */
+}
+#sl-for-abo-inscript h3 {
+	font-size:1.2em;
+	color:#030;
+	text-align:center;
+	line-height:1.5em;
+	margin:0.25em 0;
+	padding:0;
+}
+#sl-for-abo-inscript form span.nom {
+	display:block;
+	padding:0.5em 0;
+}
+#sl-for-abo-inscript form fieldset {
+	border:0;
+}
+#sl-for-abo-inscript form legend {
+	line-height:1.2em;
+	padding:0 0.5ex 0.5em;
+	margin:0;
+	word-wrap:break-word;
+}
+#sl-for-abo-inscript form legend span {
+	display:block;
+	white-space:normal;
+}
+#sl-for-abo-inscript form legend.titre-bloc {
+	display:none;
+}
+#sl-for-abo-inscript form p
+, #sl-for-abo-inscript form div.coord {
+	padding:0 1ex;
+	margin:0 0 0.5em;
+}
+#sl-for-abo-inscript form ul {
+	list-style:square;
+	list-style-position:inside;
+}
+#sl-for-abo-inscript form ul.liste-formats
+, #sl-for-abo-inscript form ul.suspend-abo {
+	list-style:none;
+}
+#sl-for-abo-inscript form li {
+	padding:1ex;
+}
+#sl-for-abo-inscript form li span.liste-titre {
+	color:#333;
+	font-weight:700;
+}
+#sl-for-abo-inscript form li span.liste-descriptif {
+	display:block;
+	margin:0 0 0.5em 2.5ex;
+	font-size:90%;
+}
+#sl-for-abo-inscript form input {
+	background-color: #fff;
+	line-height: 1.2em;
+	color:red;
+	height:1.4em;
+	width:146px;
+	margin:0.5em 0;
+	border:1px solid blue;
+}
+#sl-for-abo-inscript form label.block input {
+	width:2ex;
+	margin:0.25ex 0.75ex 0 0;
+	float:left;
+}
+#sl-for-abo-inscript form p.spip_bouton input {
+	border: inset 2px white;
+	background-color:#0c0;
+	height:auto;
+	padding:0.25em;
+}

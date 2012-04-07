@@ -1,0 +1,105 @@
+#CACHE{1}
+#HTTP_HEADER{Content-Type: text/html}
+[<!--(#REM)
+
+	* Squelette pour spip-listes    
+	* patrons/pieds_courriers/jeans.html
+	
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	* Le pied de courrier est applique a l'envoi de votre courrier.
+	
+	* - ne pas envoyer des gabarits de plus de 10Ko
+	* - ne pas placer de balises html <html><body> ni de fermeture </body></html>
+	*     ils seront ajoutes automatiquement a l'envoi du mail 
+	* - mettre les style  CSS directement dans les balises pour etre sur
+	      qu'ils seront interpretes (meme par les webmails)
+	* - les urls et liens images seront automatiquement converties en absolues
+
+	Pour personnaliser votre pied de courrier, 2 solutions :
+	- soit creer un squelette et le placer dans le repertoire
+	    'patrons/pieds_courriers/' puis le selectionner dans la page
+		de configuration de SPIP-Listes
+	- soit le placer dans vos squelettes. Dans ce cas, creez un repertoire
+	    'patrons/pieds_courriers/ et ajoutez-y votre squelette de pied
+	
+	Le pied de mail est calcule' a la creation de la liste.
+	Il est enregistre' dans le champ 'pied_page' de la table 'spip_listes'.
+	
+	Si vous voulez changer le pied de courrier d'une liste existante
+	, soit il faut remplacer la valeur de ce champ (c'est du code HTML)
+	, soit vous recreez une liste en reprenant les elements de la precedente. 
+
+	Illustration d'insertion d'une image dans un squelette.
+	Pour l'instant limitee au format PNG
+	@see: http://actuel.fr.selfhtml.org/articles/graphisme/inline-images/index.htm
+	
+	A noter: les images incrustées (in-line) sont souvent ignorées
+	(src supprimé) des webmail (gmail, yahoo, ...)
+
+-->]<table cellspacing="0"
+		border="0"
+		cellpadding="0"
+		bgcolor="#070BFF"
+		[style="background-image:url(#URL_SITE_SPIP/(#CHEMIN{patrons/images/jeans_pattern_bg.png}|ltrim{./}))"
+		]width="100%">
+	<tr>
+		<td>
+		[<!-- (#REM)
+		
+			Bandeau de pied
+		
+		-->]<table cellspacing="0"
+			   border="0"
+			   cellpadding="0"
+			   width="80%"
+			   style="height:2em;
+						font-family: Arial, Helvetica, sans-serif;
+						font-size: 0.9em;
+						font-weight: 500;
+						color:#FFFFCC;
+						">
+			<tr>
+			[<!-- (#REM)
+			
+				Petit logo en in-line
+			
+			-->]<td align="right"
+					style="padding:0 1ex;">
+					<a href="http://www.spip.net/">
+<img
+	src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABUElEQVR42u1W7Y3D
+IAztCBkhI2SEjJARMkJHYANGYISMwAKVGCHdAKkL5IgOVB8xhQdtf5xi6eVHZOPn
+T7icckost/ujc5gdBMG0/688byDnTi+VvbMtAesgUSJOXzsYb2tfRW2owwyRgZij
+Qc2ckgwKAImukEC/60f2628QT4WtAqqQgIrs5J8g3GesJGBLGjpzxtxCYOM63uHq
+o9aZvlKtJdgix7rQbjk08Z4KRtFksrMQ5xZo3j74zZEQoYlS9cs7P9qUjIwio9Il
+srN6fQM4N8j26v24iAQBSf+/LQPAeh5D01VgQgksXPeDTg0pl0YJaO4uAJwLGsw7
+CGhgea3MpMnWEligBNYTFi0PlCtzcBfmH8BQS6BPLCEFEhhbsqCZ+3z6JgEu5Qrb
+Bc87oLoU0Oo9ZkyFm7CVyBwT+dRzLlsW3wciLJhSNGfhlH8lP2G1kTW3BUTiAAAA
+AElFTkSuQmCC"
+	width="32"
+	height="32"
+	alt="SPIP"
+	border="0"
+	/>
+</a>
+				</td>
+				[<!-- (#REM)
+			
+				Petite signature
+			
+			-->]<td align="left"
+					style="padding:0 1ex;">
+					<a href="http://www.spip-contrib.net/SPIP-Listes"
+						style="color:#FFFFCC;[
+							background-image:url(#URL_SITE_SPIP/(#CHEMIN{patrons/images/jeans_pattern_bg_sig.png}|ltrim{./}))]">
+					<:spiplistes:courrier_realise_avec_spiplistes:></a>
+				</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+</table>

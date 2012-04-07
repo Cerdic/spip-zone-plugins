@@ -1,0 +1,12 @@
+CP-20081205
+CP-20080605
+En cas d'upgrade, conserver ce dossier (voir base/spiplistes_upgrade.php)
+
+CP-20080504
+
+Dans la version 192 de SPIP-Listes, le pied de mail etait ici.
+
+Les patrons pieds_courriers sont maintenant à placer dans 
+patrons/pieds_courriers/
+
+

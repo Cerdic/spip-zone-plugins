@@ -1,0 +1,213 @@
+[<!-- (#REM)
+*
+* Squelette pour spip-listes
+*
+* CP-20110606
+
+Nota: le contenu des articles virtuels n'est pas exploitable.
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+Precautions:
+- ne pas envoyer des gabarits de plus de 10Ko
+- ne pas placer de balises html <html><body> ni de fermeture </body></html>
+    ils seront ajoutes automatiquement a l'envoi du mail 
+- mettre les style  CSS directement dans les balises pour etre sur qu'ils
+    seront interpretes (meme par les webmails).
+	A noter (03/05/2011) :
+	- gmail n'affiche pas background-image 
+	- gmail n'affiche pas les images incrustees (in-line, style data:image/png)
+	- blackberry accepte data:image/png 
+	- yahoo mail surprime src de img si data:image/png 
+	- Thunderbird: OK
+	- Mail.app (mac): Ok
+	- E-mail (android 2.3): Ok
+	A noter (07/06/2011) :
+	- <style> dans le head est ignoré par gMail, android gmail, blackberry 5
+	- <link> dans le head est ignoré par gMail, android gmail, blackberry 5
+	- CSS *-radius est ignoré par blackberry 5
+	- text-shadow est reconnu par Mail.app, Entourage, mais souvent ignoré par les autres.
+
+Pour la composition d'un mail au format HTML, consulter :
+- http://www.email-standards.org/
+
+  Exemple de composition pour un article (ici, le #2)
+
+Pour personnaliser cette page, recopiez le fichier
+dans votre répertoire de squelettes et adaptez-le à vos besoins.
+
+-->]<BOUCLE_article(ARTICLES){id_article=2}{0,1}>
+<div class="body"
+	  style="margin:0;
+		padding:0;
+		background-color:#593325;
+		text-align:center;">
+
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:0;">
+		<tr>
+			<td bgcolor="#593325"
+				style="background-color:#593325;border:0;" >
+				
+                
+				[<!--
+				
+				(#REM) corps du courrier 
+				
+				-->]<table class="corps"
+						width="100%" bgcolor="#606363" border="0"
+						align="center" cellpadding="0" cellspacing="0" style="border:0;">
+					<tr>
+                    <td style="text-align:center;
+						width:100%;
+						background-color:#606363;
+						color:#F2E6CE;">
+						[<!--
+						
+						(#REM) titre du courrier 
+						
+						-->]
+						<table width="576" bgcolor="#F2E6CE" border="0"
+							   align="center" cellpadding="0" cellspacing="0"
+							   style="border:0;
+									background-color:#F2E6CE;
+									margin:1em auto;
+									-webkit-border-radius:8px;
+									-khtml-border-radius:8px;
+									-moz-border-radius:8px;
+									border-radius:8px;
+									text-align:center;">
+							<tr>
+								<td width="384" valign="top">
+									<h1 class="titre"
+										style="font-family:Helvetica, Arial, sans-serif;
+										font-size:160%;
+										font-weight:500;
+										margin:1em auto;
+										padding:0;
+										text-shadow:2px 2px #FFFFFF;
+										color:#1C1C1F;">
+										#TITRE
+									</h1>
+								</td>
+								<td width="192" valign="top"
+									style="vertical-align:middle;">
+									<p style="font-family:Helvetica, Arial, sans-serif;
+										font-weight:bold;
+										font-size:90%;
+										margin0;padding:0;
+										text-shadow:2px 2px #FFFFFF;
+										color:#1C1C1F;" >
+										[(#DATE*|nom_mois|ucfirst)] [(#DATE*|annee)]
+									</p>
+								</td>
+							</tr>
+						</table>
+						
+						[<!--
+						
+						(#REM) texte du courrier 
+						
+						-->]
+						<table width="576" bgcolor="#F2E6CE" border="0"
+							   align="center" cellpadding="0" cellspacing="0"
+							   style="border:0;
+									background-color:#F2E6CE;
+									margin:1em auto;
+									-webkit-border-radius:8px;
+									-khtml-border-radius:8px;
+									-moz-border-radius:8px;
+									border-radius:8px;
+									text-align:center;
+									color:#1C1C1F;">
+							<tr>
+								<td valign="top"
+									style="padding:1em;">
+									[<div class="chapo"
+										style="margin:0;
+											padding:0;
+											font-size:120%;
+											text-align:center">(#CHAPO|image_reduire{500,0})</div>]
+									[(#LOGO_ARTICLE_RUBRIQUE||image_reduire{500,0}
+										||inserer_attribut{alt, #TITRE|attribut_html})]
+									[<div class="texte"
+										style="text-align:left">
+										(#TEXTE|image_reduire{500,0})</div>]
+									[<div class="notes"
+										style="text-align:left;
+										font-size:80%;">(#NOTES)</div>]
+								</td>
+							</tr>
+						</table>
+						</td>
+					</tr>
+				</table>
+
+				[<!--
+				
+				(#REM) bas du courrier
+				Lien de désabonnement
+				
+				Placer une classe dans votre .css
+				ou courrier.html
+				.not-for-web {
+					display:none;
+				}
+				pour tous ces éléments qui ne doivent pas apparaître
+				dans la version web du courrier.
+				
+				-->]
+				<table class="lien-desabo not-for-web"
+						width="100%" bgcolor="#593325" border="0"
+						align="center" cellpadding="0" cellspacing="0" style="border:0;">
+					<tr>
+                    <td style="font-family:Arial, Helvetica, sans-serif;
+						font-size:80%;
+						text-align:center;
+						background-color:#593325;
+						color:#F2E6CE;
+						margin:0;
+						padding:1ex;">
+					<p style="margin:0">
+                        <a href="#URL_SITE_SPIP/spip.php?page=abonnement&stop=1&d=_COOKIE_ABONNE_"
+						   style="color:#F2E6CE;">Pour vous d&#233;sabonner, cliquez ici.</a>
+					</p>
+					</td>
+					</tr>
+				</table>
+				
+				[<!--
+				
+				(#REM) pied du courrier 
+				
+				-->]
+				<table class="pied"
+						width="100%" bgcolor="#593325" border="0"
+						align="center" cellpadding="0" cellspacing="0" style="border:0;">
+					<tr>
+                    <td style="font-family:Arial, Helvetica, sans-serif;
+						font-size:80%;
+						font-weight:700;
+						font-size:110%;
+						text-align:center;
+						background-color:#593325;
+						color:#F2E6CE;
+						margin:0;
+						padding:1ex;">
+					<p style="margin:0">
+                        <a href="#URL_SITE_SPIP/"
+						   title="Aller sur le site de l'éditeur"
+						   style="color:#F2E6CE;
+						   text-shadow:2px 2px #000000;
+						   text-decoration:none;
+						   margin:0 auto">#NOM_SITE_SPIP</a></p>
+					</td>
+					</tr>
+				</table>
+		   
+	        </td>
+	    </tr>
+	</table>
+</div>
+</BOUCLE_article>

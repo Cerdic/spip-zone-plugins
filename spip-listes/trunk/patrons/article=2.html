@@ -1,0 +1,27 @@
+#CACHE{1}
+[<!--(#REM)
+* Squelette pour spip-listes    
+* article=2.html (CP-20080502 paladin@quesaco.org)
+
+Exemple pour envoyer un article précis. Ici, id_article 2
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+*
+* Precautions:                             
+* - ne pas envoyer des gabarits de plus de 10Ko
+* - ne pas placer de balises html <html><body> ni de fermeture </body></html>
+* ils seront ajoutes automatiquement a l'envoi du mail 
+* - mettre les style  CSS directement dans les balises pour etre sur qu'ils seront interpretes (meme par les webmails)
+* - les urls et liens images seront automatiquement converties en absolues
+*  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
+*
+-->]
+<BOUCLE_article_principal(ARTICLES) {id_article=2}>
+<div id="page">
+	[<div style="font-size:140%">(#TITRE)</div>]
+	[<div style="text-align:center">(#LOGO_ARTICLE)</div>]
+	[<div style="font-size:100%">(#TEXTE|liens_publics)</div>]
+</div>
+</BOUCLE_article_principal>

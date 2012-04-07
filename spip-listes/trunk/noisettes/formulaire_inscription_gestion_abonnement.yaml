@@ -1,0 +1,40 @@
+nom: '<:spiplistes:noisette_formulaire_inscription_gestion_abonnement:>'
+description: '<:spiplistes:description_noisette_formulaire_inscription_gestion_abonnement:>'
+icon: 'img_pack/abonner-24.png'
+parametres:
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'afficher_titre_noisette'
+      label: '<:noizetier:label_afficher_titre_noisette:>'
+      defaut: ''
+  -
+    saisie: 'selection'
+    options:
+      nom: 'titre_noisette'
+      label: '<:noizetier:label_titre_noisette:>'
+      defaut: 'spiplistes:lettres_information'
+      cacher_option_intro: 'oui'
+      datas:
+        'spiplistes:lettres_information': '<:spiplistes:lettres_information:>'
+        titre_perso: '<:noizetier:item_titre_perso:>'
+      afficher_si: '@afficher_titre_noisette@ == "on"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'titre_noisette_perso'
+      label: '<:noizetier:label_titre_noisette_perso:>'
+      explication: '<:noizetier:explication_raccourcis_typo:>'
+      afficher_si: '@afficher_titre_noisette@ == "on" && @titre_noisette@ == "titre_perso"'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'niveau_titre'
+      label: '<:noizetier:label_niveau_titre:>'
+      defaut: 'h2'
+      cacher_option_intro: 'oui'
+      afficher_si: '@afficher_titre_noisette@ == "on"'
+      datas:
+        h1: 'h1'
+        h2: 'h2'
+        h3: 'h3'
