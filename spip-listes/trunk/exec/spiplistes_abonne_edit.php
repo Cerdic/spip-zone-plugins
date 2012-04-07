@@ -105,7 +105,7 @@ function exec_spiplistes_abonne_edit () {
 		// Propose de supprimer l'auteur invite 
 	$gros_bouton_modifier = 
 		($flag_editable)
-		? icone (
+		? icone_verticale (
 				_T('admin_modifier_auteur')
 				, generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur&edit=oui")
 				, 'redacteurs-24.gif'
@@ -118,7 +118,7 @@ function exec_spiplistes_abonne_edit () {
 		// Propose de supprimer l'auteur invite 
 	$gros_bouton_supprimer = 
 		($id_auteur && $flag_editable && ($statut=='6forum'))
-		? icone (
+		? icone_verticale (
 				_T('spiplistes:supprimer_ce_contact')
 				, generer_action_auteur(_SPIPLISTES_ACTION_SUPPRIMER_ABONNER, $id_auteur, generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE))
 				, 'redacteurs-24.gif'
@@ -197,7 +197,7 @@ function exec_spiplistes_abonne_edit () {
 			. "</td>\n"
 			. "</tr></table>\n"
 			. "<br />\n"
-			. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png', true, '', _T('spiplistes:format_de_reception').":")
+			. debut_cadre_relief('courriers_listes-24.png', true, '', _T('spiplistes:format_de_reception').":")
 			. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT), true)
 			. spiplistes_form_description(_T('spiplistes:format_de_reception_desc'), true)
 			. $message_alert_abo
@@ -237,7 +237,7 @@ function exec_spiplistes_abonne_edit () {
 				._T('spiplistes:editer_fiche_abonne')."</a></p>\n"
 			;
 	}
-	
+
 	$page_result .=
 		fin_cadre_relief(true)
 		//
@@ -245,7 +245,7 @@ function exec_spiplistes_abonne_edit () {
 		// Liste des abonnements
 		. spiplistes_lister_courriers_listes(
 			_T('spiplistes:abonne_listes')
-			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png'
+			, chemin_image('courriers_listes-24.png')
 			, 'abonnements'
 			, ''
 			, false

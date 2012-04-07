@@ -83,7 +83,7 @@ function spiplistes_dater_envoi (
 				)
 			.  "</span>\n"
 			;
-		
+	/* TODO : A RECTIFIER
 		$masque = 
 			afficher_jour($jour, "name='jour' $js", true)
 			. afficher_mois($mois, "name='mois' $js", true)
@@ -93,7 +93,7 @@ function spiplistes_dater_envoi (
 			. afficher_minute($minute, "name='minute' $js")
 			. "&nbsp;\n"
 			;
-
+*/
 		if($enveloppe_formulaire) {
 			$masque = ""
 				. "<!-- dater_envoi form -->\n"

@@ -382,10 +382,10 @@ function exec_spiplistes_liste_gerer () {
 	if($flag_editable) {
 		// Propose de modifier la liste 
 		$gros_bouton_modifier = 
-			icone (
+			icone_verticale (
 				_T('spiplistes:modifier_cette_liste') // legende bouton
 				, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_EDIT,'id_liste='.$id_liste) // lien
-				, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply-to-all-24.gif" // image du fond
+				, "reply-to-all-24.gif" // image du fond
 				, "edit.gif" // image de la fonction. Ici, le crayon
 				, '' // alignement
 				, false // pas echo, demande retour
@@ -393,10 +393,10 @@ function exec_spiplistes_liste_gerer () {
 			;
 		// Propose de supprimer la liste 
 		$gros_bouton_supprimer = 
-			icone (
+			icone_verticale (
 					_T('spiplistes:supprimer_cette_liste')
 					, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "btn_supprimer_liste=$id_liste&id_liste=$id_liste")
-					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'poubelle_msg.gif'
+					, 'poubelle_msg.gif'
 					, ""
 					, "right"
 					, false
@@ -435,7 +435,6 @@ function exec_spiplistes_liste_gerer () {
 			. debut_cadre_enfonce('auteur-24.gif', true, '', $titre_boite)
 			. spiplistes_bouton_block_depliable($legend
 				, false, md5('abonnes_liste'))
-			. (spiplistes_spip_est_inferieur_193() ? $legend : '')
 			. spiplistes_debut_block_invisible(md5('abonnes_liste'))
 			. debut_cadre_relief('', true)
 			. $boite_liste_abonnes
@@ -460,7 +459,6 @@ function exec_spiplistes_liste_gerer () {
 			. debut_cadre_enfonce('redacteurs-24.gif', true, '', $titre_boite)
 			. spiplistes_bouton_block_depliable($legend
 				, false, md5('mods_liste'))
-			. (spiplistes_spip_est_inferieur_193() ? $legend : '')
 			. spiplistes_debut_block_invisible(md5('mods_liste'))
 			. debut_cadre_relief('', true)
 			. '<div id="mods-conteneur">'.PHP_EOL
@@ -673,7 +671,7 @@ function exec_spiplistes_liste_gerer () {
 		////////////////////////////
 		// Formulaire adresse email pour le reply-to
 	$page_result .= ''
-		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply_to-24.png"
+		. debut_cadre_relief("reply_to-24.png"
 							, true
 							, ''
 							, _T('spiplistes:adresse_de_reponse').spiplistes_plugin_aide(_SPIPLISTES_EXEC_AIDE
@@ -698,7 +696,7 @@ function exec_spiplistes_liste_gerer () {
 		// Formulaire planifier un courrier automatique
 	$page_result .= ""
 		. "<a name='form-programmer' id='form-programmer'></a>\n"
-		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_timer.png", true, '', _T('spiplistes:messages_auto')
+		. debut_cadre_relief("stock_timer.png", true, '', _T('spiplistes:messages_auto')
 			. spiplistes_plugin_aide(_SPIPLISTES_EXEC_AIDE, "temporiser"))
 		;
 	$page_result .= ""
@@ -910,7 +908,7 @@ function exec_spiplistes_liste_gerer () {
 	if($connect_toutes_rubriques) {
 		$page_result .= ""
 			. "\n<!-- forcer abo -->\n"
-			. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."abonner-24.png", true, '', _T('spiplistes:forcer_les_abonnement_liste').spiplistes_plugin_aide("forcerliste"))."\n"
+			. debut_cadre_enfonce("abonner-24.png", true, '', _T('spiplistes:forcer_les_abonnement_liste').spiplistes_plugin_aide("forcerliste"))."\n"
 			. "<p class='verdana2'>\n"
 			. _T('spiplistes:forcer_abonnement_desc')
 			. "</p>\n"
@@ -1035,7 +1033,7 @@ function spiplistes_boite_patron ($flag_editable, $id_liste
 	, $msg_patron = false, $patron = "") {
 	// bloc selection patron
 	$result = ""
-		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."patron-24.png", true)
+		. debut_cadre_relief("patron-24.png", true)
 		. "<div class='verdana1' style='text-align: center;'>\n"
 		;
 	$titre_boite = "<strong>$titre_boite</strong>\n";
@@ -1045,14 +1043,12 @@ function spiplistes_boite_patron ($flag_editable, $id_liste
 		if(($patron === true) || (is_string($patron) && empty($patron))) {
 			$result  .= ""
 				. spiplistes_bouton_block_depliable ($titre_boite, true, md5($nom_bouton_valider))
-				. (spiplistes_spip_est_inferieur_193() ? $titre_boite : "")
 				. spiplistes_debut_block_visible(md5($nom_bouton_valider))
 				;
 		}
 		else {
 			$result  .= ""
 				. spiplistes_bouton_block_depliable ($titre_boite, false, md5($nom_bouton_valider))
-				. (spiplistes_spip_est_inferieur_193() ? $titre_boite : "")
 				. spiplistes_debut_block_invisible(md5($nom_bouton_valider))
 				;
 		}

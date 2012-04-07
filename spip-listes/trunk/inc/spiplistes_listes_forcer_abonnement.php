@@ -55,11 +55,8 @@ function spiplistes_listes_forcer_abonnement ($id_liste, $statut, $forcer_format
 		 * "SELECT id_auteur FROM spip_auteurs WHERE $sql_where AND LENGTH(email) AND id_auteur NOT IN ($selection)"
 		 */
 		$selection =
-			(spiplistes_spip_est_inferieur_193())
-			? "SELECT id_auteur FROM spip_auteurs_listes WHERE id_liste=".sql_quote($id_liste)
-			: sql_select("id_auteur", "spip_auteurs_listes", "id_liste=".sql_quote($id_liste),'','','','','',false)
-			;
-		$sql_result = sql_select(
+			sql_select("id_auteur", "spip_auteurs_listes", "id_liste=".sql_quote($id_liste),'','','','','',false);
+			$sql_result = sql_select(
 			  'id_auteur'
 			, 'spip_auteurs'
 			, array(

@@ -1,78 +1,32 @@
-<plugin>
-	<nom><multi>[fr]SPIP-Listes[en]SPIP-Lists[ar]&#1604;&#1608;&#1575;&#1574;&#1581; SPIP[es]SPIP-Listes</multi></nom>
-	<auteur>[BoOz->BoOz@rezo.net]</auteur>
-	<version>2.234.3</version>
-	<version_base>1.98</version_base>
-	<etat>test</etat>
-	<icon>spip-listes.png</icon>
-	<slogan>
-		<multi>
-			[fr]Listes d'informations par email
-			[en]Newsletter by e-mail
-			[ar]&#1606;&#1588;&#1585;&#1577; &#1576;&#1585;&#1610;&#1583;&#1610;&#1577;
-			[es]Listas para informar por email (emails y boletines informativos)
-		</multi>
-	</slogan>
-	<description>
-		<multi>
-			[fr]SPIP-listes permet la gestion et l'envoi de lettres d'information (newsletters) au moyen d'un courriel au format html ou texte. Il est possible d'envoyer des messages aux abonn&#233;s qui se sont formellement inscrits &#224; une ou plusieurs lettres d'information via un formulaire d'inscription.
-			[en]Newsletter by e-mail
-			[ar]&#1606;&#1588;&#1585;&#1577; &#1576;&#1585;&#1610;&#1583;&#1610;&#1577;
-			[es]Listas para informar por email (emails y boletines informativos)
-		</multi>
-	</description>
-	<options>spiplistes_mes_options.php</options>
-	<fonctions>spiplistes_mes_fonctions.php</fonctions>
-	<prefix>spiplistes</prefix>
-	<install>base/spiplistes_init.php</install>
-	<lien>http://www.spip-contrib.net/SPIP-Listes</lien>
+<paquet 
+	prefix="spiplistes" 
+	categorie="communication" 
+	version="1.2.0" 
+	etat="test" 
+	compatibilite="[3.0.0-alpha2;[" 
+	logo="prive/themes/spip/images/spip-listes.png" 
+	schema="1.9923" 
+	documentation="http://www.spip-contrib.net/SPIP-Listes">
+	<nom>Spip-Listes</nom>
 
-	<pipeline>
-		<nom>affiche_milieu</nom>
-		<inclure>inc/spiplistes_pipeline_affiche_milieu.php</inclure>
-	</pipeline>
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/spiplistes.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/spiplistes.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/spiplistes.php" />
+	<pipeline nom="affiche_milieu" inclure="inc/spiplistes_pipeline_affiche_milieu.php" />
+	<pipeline nom="insert_head" inclure="inc/spiplistes_pipeline_insert_head.php" />
+	<pipeline nom="header_prive" inclure="inc/spiplistes_pipeline_header_prive.php" />
+	<pipeline nom="taches_generales_cron" inclure="genie/spiplistes_cron.php" />
+	<pipeline nom="ajouter_boutons" inclure="inc/spiplistes_pipeline_ajouter_boutons.php" />
+	<pipeline nom="ajouter_onglets" inclure="inc/spiplistes_pipeline_ajouter_onglets.php" />
 
-	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouterBoutons</action>
-		<inclure>inc/spiplistes_pipeline_ajouter_boutons.php</inclure>
-	</pipeline>
-	
-	<pipeline>
-		<nom>ajouter_onglets</nom>
-		<inclure>inc/spiplistes_pipeline_ajouter_onglets.php</inclure>
-	</pipeline>
+	<menu nom="spip-listes" titre="spiplistes:listes_de_diffusion_" parent="bando_edition" icone="prive/themes/spip/images/spip-listes-16.png" action="spiplistes_courriers_casier" />
+	<menu nom="spip-listes_conf" titre="spiplistes:listes_de_diffusion_" parent="bando_configuration" icone="prive/themes/spip/images/spip-listes-16.png" action="spiplistes_config" />
+	<menu nom="lettre_creer" titre="spiplistes:icone_creation_courrier" parent="outils_rapides" icone="prive/themes/spip/images/courriers_redac-16.png"  action="spiplistes_courrier_edit" parametres='new=oui&amp;type=nl' />
 
-	<pipeline>
-		<nom>insert_head</nom>
-		<inclure>inc/spiplistes_pipeline_insert_head.php</inclure>
-	</pipeline>
-	
-	<pipeline>
-		<nom>header_prive</nom>
-		<inclure>inc/spiplistes_pipeline_header_prive.php</inclure>
-	</pipeline>
-	
-	<pipeline>
-		<nom>taches_generales_cron</nom>
-		<inclure>genie/spiplistes_cron.php</inclure>
-	</pipeline>
-	
-	<bouton id='lettre_creer' parent="outils_rapides">
-		<icone>img_pack/courriers_redac-16.png</icone>
-		<titre>spiplistes:icone_creation_courrier</titre>
-		<url>spiplistes_courrier_edit</url>
-		<args>new=oui</args>
-		<args>type=nl</args>
-	</bouton>
-	<bouton id='spip-listes' parent='bando_configuration'>
-		<titre>spiplistes:listes_de_diffusion_</titre>
-		<icone>img_pack/spip-listes-16.png</icone>
-		<url>spiplistes_config</url>
-		<!--<args>statut=publie</args>-->
-	</bouton>
+	<onglet nom="spiplistes_courriers_casier" titre="spiplistes:icone_courriers_casier" parent="spip-listes" icone="prive/themes/spip/images/stock_hyperlink-mail-and-news-24.gif" action="spiplistes_courriers_casier" />
+	<onglet nom="spiplistes_listes_toutes" titre="spiplistes:icone_listes_toutes" parent="spip-listes" icone="prive/themes/spip/images/reply-to-all-24.gif" action="spiplistes_listes_toutes" />
+	<onglet nom="spiplistes_abonnes_tous" titre="spiplistes:icone__abonnes_tous" parent="spip-listes" icone="prive/themes/spip/images/addressbook-24.gif" action="spiplistes_abonnes_tous" />
 
-	<chemin dir='' />
-	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
-	<categorie>communication</categorie>
-</plugin>
+
+
+</paquet>

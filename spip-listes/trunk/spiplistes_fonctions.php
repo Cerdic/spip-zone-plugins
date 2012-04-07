@@ -33,39 +33,13 @@ function boucle_LISTES($id_boucle, &$boucles) {
 	return (calculer_boucle($id_boucle, $boucles));
 }
 
-//
-// <BOUCLE(AUTEURS_LISTES)>
-//
-if(function_exists('spiplistes_spip_est_inferieur_193') AND spiplistes_spip_est_inferieur_193()) {
-	function boucle_AUTEURS_LISTES($id_boucle, &$boucles) {
-		global $table_des_tables;
-		$boucle = &$boucles[$id_boucle];
-		$type = $boucle->type_requete; 
-		$id_table = $table_des_tables[$type];
-		if (!$id_table)
-		//      table hors SPIP
-			$boucle->from[$type] =  $type;
-		else {
-		// les tables declarees par spip ont un prefixe et un surnom
-			$boucle->from[$id_table] =  'spip_' . $type ;
-		}
-		return (calculer_boucle($id_boucle, $boucles));
-	}
-}
+
 
 //
 // <BOUCLE(COURRIERS)>
 //
 function boucle_COURRIERS ($id_boucle, &$boucles) {
-	/*
-	$boucle = &$boucles[$id_boucle];
-	if(spiplistes_spip_est_inferieur_193()) {
-		$id_table = $boucle->id_table;
-		$boucle->from[] =  "spip_courriers AS $id_table";
-	}
-	$boucle->where[] = array("'='","'type'","'\"nl\"'"); 
-	return (calculer_boucle($id_boucle, $boucles));
-	/**/
+
 	global $table_des_tables;
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
@@ -133,17 +107,7 @@ function date_depuis($date) {
  	    return $retour;
 }
 
-/* CP-20090109
- * Deux filtres SPIP2 bien sympathiques pour le formulaire.
- * */
-if (function_exists('spiplistes_spip_est_inferieur_193') AND spiplistes_spip_est_inferieur_193()) {
-	if(!function_exists('oui')) {
-		function oui($c) { return($c ? ' ' : ''); }
-	}
-	if(!function_exists('non')) {
-		function non($c) { return($c ? '' : ' '); }
-	}
-}
+
 
 /**
  * Un filtre pour transformer les URLs relatives

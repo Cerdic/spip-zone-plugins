@@ -57,13 +57,6 @@ function spiplistes_header_prive ($flux) {
 			case _SPIPLISTES_EXEC_COURRIER_GERER:
 				$flux .= ""
 					. "<script type=\"text/javascript\" src=\"" . $js_dir . "spiplistes_courrier_edit.js\"></script>\n"
-/*
- le datepicker ne sert plus dans cette version.					
-					. "<link rel='stylesheet' href='".url_absolue(find_in_path('img_pack/date_picker.css'))."' type='text/css' media='all' />\n"
-					. "<script src='".url_absolue(find_in_path('javascript/datepicker.js'))."' type='text/javascript'></script>\n"
- A priori, ce bout de code ne sert plus
-					. "<script src='".url_absolue(find_in_path('javascript/jquery-dom.js'))."' type='text/javascript'></script>\n"
-*/					
 					. "<meta http-equiv='expires' content='0' />\n"
 					. "<meta http-equiv='pragma' content='no-cache' />\n"
 					. "<meta http-equiv='cache-control' content='no-cache' />\n"
@@ -83,14 +76,14 @@ function spiplistes_header_prive ($flux) {
 					. "<meta id='x-spiplistes-tra' name='" . _SPIPLISTES_TRASH_LIST . "' content='" . spiplistes_items_get_item("puce", _SPIPLISTES_TRASH_LIST) . "' />\n"
 					. "<script type=\"text/javascript\" src=\"" . $js_dir . "spiplistes_liste_gerer.js\"></script>\n"
 					. "<style type='text/css'>
-.spiplistes .supprimer_cet_abo {background-image:url(".find_in_path("images/croix-rouge.gif").")}
+.spiplistes .supprimer_cet_abo {background-image:url(".chemin_image("croix-rouge.gif").")}
 </style>"
 					;
 				break;
 			case _SPIPLISTES_EXEC_ABONNES_LISTE:
 				$flux .= "<script type=\"text/javascript\" src=\"" . $js_dir . "spiplistes_abonnes_tous.js\"></script>\n
 <style type='text/css'>
-.spiplistes .supprimer_cet_abo {background-image:url(".find_in_path("images/croix-rouge.gif").")}
+.spiplistes .supprimer_cet_abo {background-image:url(".chemin_image("croix-rouge.gif").")}
 </style>
 ";			
 				break;

@@ -270,7 +270,7 @@ function exec_spiplistes_courriers_casier () {
 		. debut_droite($rubrique, true)
 		;
 			
-	$icone = _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png';
+	$icone = chemin_image('courriers_listes-24.png');
 	
 	$_skip_statut = "Sauter une table pour afficher chronos";
 

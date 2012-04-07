@@ -21,8 +21,8 @@ include_spip('inc/layer');
  */
 function spiplistes_affiche_milieu ($flux) {
 	switch($flux['args']['exec']) {
-		case 'auteurs_edit':
-		case 'auteur_infos':
+		case 'auteur_edit':
+		case 'auteur':
 			$flux['data'] .= spiplistes_auteur_abonnement();
 			break;
 		default:
@@ -62,9 +62,9 @@ function spiplistes_auteur_abonnement () {
 				if(strlen($auteur_email = $row['email']) > 3) {
 					$result = spiplistes_auteur_abonnement_details($id_auteur, $row['statut'], $auteur_email);
 				}
-				else {
+			/*	else {
 					$result =	''
-						. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png'
+						. debut_cadre('r','courriers_listes-24.png'
 											 , true
 											 , ''
 											 , _T('spiplistes:abonnements_aux_courriers')
@@ -72,9 +72,9 @@ function spiplistes_auteur_abonnement () {
 						. '<p class="verdana2">'
 						. _T('spiplistes:adresse_email_obligatoire')
 						. '</p>'
-						. fin_cadre_relief(true)
+						. finc_cadre(true)
 						;
-				}
+				}*/
 			}
 		}
 	}
@@ -204,7 +204,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 			$result .= ""
 				. "<!-- formulaire abonnement spiplistes -->\n" 
 				. "<a name='abonnement'></a>\n"
-				. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_listes-24.png"
+				. debut_cadre_enfonce("courriers_listes-24.png"
 					, true, '', _T('spiplistes:listes_de_diffusion_'))
 				. spiplistes_bouton_block_depliable(
 					_T('spiplistes:abonnements_aux_courriers')

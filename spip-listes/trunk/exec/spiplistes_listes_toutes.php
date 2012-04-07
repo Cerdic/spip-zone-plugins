@@ -104,18 +104,19 @@ function exec_spiplistes_listes_toutes(){
 		. pipeline('affiche_gauche', array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
 		//. creer_colonne_droite($rubrique, true)  // spiplistes_boite_raccourcis() s'en occupe
 		. spiplistes_boite_raccourcis(true)
-		. spiplistes_boite_autocron() 
-		. spiplistes_boite_info_spiplistes(true)
+		. spiplistes_boite_autocron()
+                . spiplistes_boite_info_spiplistes(true)
 		. pipeline('affiche_droite', array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
 		. debut_droite($rubrique, true)
-		;
-	
+                ;
 	// MODE LISTES: afficher les listes --------------------------------------------
 	
+
 	$page_result .= "";
 	
 	foreach(explode(";", _SPIPLISTES_LISTES_STATUTS_TOUS) as $statut) {
-		$page_result .= ""
+
+		$page_result .= ''
 			. spiplistes_lister_courriers_listes(
 				spiplistes_items_get_item("tab_t", $statut)
 					.	(
@@ -123,14 +124,13 @@ function exec_spiplistes_listes_toutes(){
 						? "<br /><span style='font-weight:normal;'>$desc</span>"
 						: ""
 						)
-				, spiplistes_items_get_item("icon", $statut)
+				, chemin_image('courriers_listes-24.png')
 				, 'listes'
 				, $statut
 				, false
 				, 'position'
 				, _SPIPLISTES_EXEC_LISTE_GERER
-			)
-			;
+			);
 	}
 	
 	echo($page_result);

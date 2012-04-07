@@ -33,104 +33,41 @@
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('inc/spiplistes_api_globales');
-include_spip('inc/spiplistes_api');
-include_spip('inc/spiplistes_api_abstract_sql');
 
-/**
- * Pour mise à jour de PSIP-Listes
- *
- * @return string
- */
-function spiplistes_upgrade () {
+function spiplistes_upgrade($nom_meta_base_version, $version_cible){
 
-	$spiplistes_name = _SPIPLISTES_PREFIX;
-	$spiplistes_current_version =  spiplistes_current_version_get(_SPIPLISTES_PREFIX);
-	$spiplistes_real_version = spiplistes_real_version_get(_SPIPLISTES_PREFIX);
-	$spiplistes_current_version_base = spiplistes_current_version_base_get(_SPIPLISTES_PREFIX);
-	$spiplistes_real_version_base = spiplistes_real_version_base_get(_SPIPLISTES_PREFIX);
-
-	spiplistes_log("VERSIONS MOD DETECTED [$spiplistes_current_version::$spiplistes_real_version][$spiplistes_current_version_base::$spiplistes_real_version_base]");
-
-	if(!$spiplistes_current_version) {
-	// SPIP-Listes n'a jamais ete installe ? 
-		include_spip('base/spiplistes_init');
-		$spiplistes_current_version_base = spiplistes_base_creer();
-	}
-
-	if($spiplistes_current_version_base < $spiplistes_real_version_base) {
-	// upgrade de la base ?
-		$spiplistes_current_version_base = spiplistes_upgrade_base(
-			$spiplistes_name
-			, $spiplistes_current_version
-			, $spiplistes_current_version_base
-			, $spiplistes_real_version_base
+	$maj = array();
+	$maj['create'] = array(
+			array('maj_tables', array('spip_courriers','spip_listes','spip_auteurs_listes','spip_auteurs_courriers','spip_auteurs_mod_listes')),
 			);
-	}
-	
-	if($spiplistes_current_version < $spiplistes_real_version) {
+	$maj['1.98']=array(
+			array('upgrade_base',array())
+			);
+	$maj['1.9923']=array(
+			array('sql_alter',"TABLE spip_listes COMMENT ".sql_quote("Listes de diffusion")),
+			array('sql_alter',"TABLE spip_courriers COMMENT ".sql_quote("Panier des courriers (casiers)")),
+			array('sql_alter',"TABLE spip_auteurs_courriers COMMENT ".sql_quote("Queue des envois de courriers")),
+			array('sql_alter',"TABLE spip_auteurs_listes COMMENT ".sql_quote("Listes de abonnements aux listes")),
+			array('sql_alter',"TABLE spip_auteurs_mod_listes COMMENT ".sql_quote("Moderateurs des listes de diffusion")),
+			array('sql_alter',"TABLE spip_auteurs_elargis COMMENT ".sql_quote("Preferences des auteurs/abonnes (formats recept.)")),
+			);
 
-		spiplistes_log("UPGRADING $spiplistes_name $spiplistes_current_version TO $spiplistes_real_version");
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 
-		if($spiplistes_current_version < 1.9982) {
-			// Ne modifie pas le schema. Ajoute juste une legende sur les tables
-			sql_alter("TABLE spip_listes COMMENT ".sql_quote("Listes de diffusion"));
-			sql_alter("TABLE spip_courriers COMMENT ".sql_quote("Panier des courriers (casiers)"));
-			sql_alter("TABLE spip_auteurs_courriers COMMENT ".sql_quote("Queue des envois de courriers"));
-			sql_alter("TABLE spip_auteurs_listes COMMENT ".sql_quote("Listes de abonnements aux listes"));
-			sql_alter("TABLE spip_auteurs_mod_listes COMMENT ".sql_quote("Moderateurs des listes de diffusion"));
-			sql_alter("TABLE spip_auteurs_elargis COMMENT ".sql_quote("Preferences des auteurs/abonnes (formats recept.)"));
-			$spiplistes_current_version = 1.9923;
-		}
-
-/* ... */
-
-
-	// Ajouter au dessus de cette ligne les patches si besoin pour nouvelle version de SPIP-Listes
-	// qui ne concerne pas la base (changement de nom de script, de patron, etc.)
-
-	// fin des ajouts de patches
-		ecrire_meta('spiplistes_version', $spiplistes_real_version);
-		spiplistes_ecrire_metas();
-	}
-	
-	return($spiplistes_current_version);
 }
+
 
 /**
  * Mise à jour de la base de données (tables SPIP-Listes uniquement)
  *
  * @return string
  */
-function spiplistes_upgrade_base (
-	$spiplistes_name
-	, $spiplistes_current_version
-	, $spiplistes_current_version_base
-	, $spiplistes_real_version_base
-) {
-//spiplistes_debug_log("spiplistes_upgrade_base(),);
-	
-	if($spiplistes_current_version_base && ($spiplistes_current_version_base >= $spiplistes_real_version_base)) {
-	// La base est a jour
-		return($spiplistes_current_version_base);
-	}
-	
-	// faire la mise a jour
-	spiplistes_debug_log("UPGRADING DATABASE $spiplistes_name $spiplistes_current_version_base TO $spiplistes_real_version_base");
-	
+function spiplistes_upgrade_base(){
 
-	// 'version_base' n'apparait que dans SPIP-Listes 1.98001
-	// Cherche sur $spiplistes_version pour les versions precedentes 
-
-	//install
-	$version_base = 1.91; // ou inferieur ?
-	
-	if (   
-		(!$spiplistes_current_version)
-		|| ($spiplistes_current_version < 1.98001)
-		) {
 		
 		// si etait deja installe mais dans une vieille version, on reprend a zero
 		include_spip('base/abstract_sql');
@@ -268,7 +205,7 @@ function spiplistes_upgrade_base (
 				} 
 			} // end if(@sql_count($resultat_aff) > 0)
 			
-			ecrire_meta('spiplistes_version',$current_version=$version_base,'non');
+			return true; 
 		}
 		
 		if ($current_version<1.92){
@@ -276,7 +213,7 @@ function spiplistes_upgrade_base (
 			echo "SpipListes Maj 1.92<br />";
 			sql_alter("TABLE spip_listes ADD titre_message varchar(255) NOT NULL default ''");
 			sql_alter("TABLE spip_listes ADD pied_page longblob NOT NULL");
-			ecrire_meta('spiplistes_version', $current_version=1.92);
+
 		}
 		if ($current_version<1.94){
 //spiplistes_debug_log("UPGRADE: current_version: $current_version");
@@ -293,14 +230,14 @@ function spiplistes_upgrade_base (
 			sql_alter("TABLE spip_auteurs_listes RENAME spip_auteurs_mod_listes");
 			sql_alter("TABLE spip_abonnes_listes RENAME spip_auteurs_listes");
 			sql_alter("TABLE spip_abonnes_courriers RENAME spip_auteurs_courriers");
-			ecrire_meta('spiplistes_version', $current_version=1.94);
+
 		}
 		if ($current_version<1.95){
 //spiplistes_debug_log("UPGRADE: current_version: $current_version");
 			echo "SpipListes Maj 1.95<br />";
 			include_spip('base/abstract_sql');
 			sql_alter("TABLE spip_auteurs_courriers ADD etat varchar(5) NOT NULL default '' AFTER statut");
-			ecrire_meta('spiplistes_version', $current_version=1.95);
+
 		}
 		
 		if ($current_version<1.96){
@@ -349,7 +286,7 @@ function spiplistes_upgrade_base (
 			
 			echo "<br />html : ".$cmpt['html']." <br />texte : ".$cmpt['texte']."<br />non : ".$cmpt['non']."<br />somme :".$nb_inscrits  ;
 
-			ecrire_meta('spiplistes_version', $current_version=1.96);
+
 		}
 		
 		if ($current_version<1.97) {
@@ -377,7 +314,7 @@ function spiplistes_upgrade_base (
 			while($res = sql_fetch($result)) {
 				sql_delete("spip_auteurs_listes", "id_auteur =".sql_quote($res['id_auteur'])) ;			
 			} 
-			ecrire_meta('spiplistes_version', $current_version=1.97);
+
 		} // end if ($current_version<1.97)
 		
 		
@@ -406,29 +343,77 @@ function spiplistes_upgrade_base (
 				sql_alter("TABLE ".$table_nom." ADD INDEX id_auteur (id_auteur)");
 			}
 			
-			ecrire_meta('spiplistes_version', $current_version=1.98);
+
 		}
-		
-		spiplistes_ecrire_metas();
-	}
 
-	// A partir de SPIP-Listes 1.98001, on se base sur le vrai numero de version de
-	// la base, (plugin.xml: <version_base>)
-	if($spiplistes_current_version_base < $spiplistes_real_version_base) {
-
-spiplistes_debug_log("UPGRADING DATABASE version_base: $spiplistes_current_version_base TO $spiplistes_real_version_base");
-
-
-
-/* ... */
-
-
-	// ajouter au dessus de cette ligne les patches si besoin pour nouvelle version de la base
-	// fin des ajouts de patches
-		ecrire_meta('spiplistes_base_version', $spiplistes_current_version_base);
-		spiplistes_ecrire_metas();
-	}
-
-	return($spiplistes_current_version_base);
 }
 
+
+
+function spiplistes_vider_tables () {
+
+	include_spip('base/abstract_sql');
+	
+	// ne supprime pas la table spip_auteurs_elargis (utilisee par inscription2, echoppe, ... ? )
+	foreach(array('spip_listes'
+				  , 'spip_courriers'
+				  , 'spip_auteurs_courriers'
+				  , 'spip_auteurs_listes'
+				  , 'spip_auteurs_mod_listes'
+				 ) as $table) {
+		spiplistes_log('DROP TABLE '.$table);
+		sql_drop_table($table, true);
+	}
+		
+	// effacer les metas (prefs, etc.)
+	$sql_spiplistes_metas = array(
+		'spiplistes_version'
+		, 'spiplistes_base_version'
+		, 'spiplistes_charset_envoi'
+		, 'spiplistes_lots'
+		, 'abonnement_config'
+		, _SPIPLISTES_META_PREFERENCES
+		);
+	spiplistes_log("DELETE meta: " . implode(", ", $sql_spiplistes_metas));
+	sql_delete('spip_meta', "nom=".implode(" OR nom=", array_map("sql_quote", $sql_spiplistes_metas)));
+
+	// recharge les metas en cache 
+	spiplistes_ecrire_metas();
+	
+	return(true);
+} // spiplistes_vider_tables ()
+
+
+
+
+function spiplistes_base_creer() {
+
+	//spiplistes_debug_log("spiplistes_base_creer()");
+	global $tables_principales;
+	
+	// demande a SPIP de creer les tables (base/create.php)
+	include_spip('base/create');
+	include_spip('base/abstract_sql');
+	include_spip('base/db_mysql');
+	include_spip('base/spiplistes_tables');
+	creer_base();
+	$descauteurs = sql_showtable('spip_auteurs_elargis',true);
+	if(!isset($descauteurs['field']['spip_listes_format'])){
+		// si la table spip_auteurs_elargis existe déjà
+		sql_alter("TABLE spip_auteurs_elargis ADD `spip_listes_format` VARCHAR(8) DEFAULT 'non' NOT NULL");
+	}
+	spiplistes_log("INSTALL: database creation");
+
+	$spiplistes_base_version = spiplistes_real_version_base_get(_SPIPLISTES_PREFIX);
+	ecrire_meta('spiplistes_base_version', $spiplistes_base_version);
+	spiplistes_ecrire_metas();
+	
+	$spiplistes_base_version = $GLOBALS['meta']['spiplistes_base_version'];
+
+	return($spiplistes_base_version);
+}
+
+
+
+
+?>

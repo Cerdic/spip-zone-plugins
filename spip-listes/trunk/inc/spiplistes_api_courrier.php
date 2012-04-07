@@ -415,17 +415,11 @@ function spiplistes_courrier_supprimer_queue_envois ($sql_where_key, $sql_where_
 			$result = sql_delete("spip_auteurs_courriers", $sql_where);
 			break;
 		case 'statut':
-			if(spiplistes_spip_est_inferieur_193()) { 
-				$result = sql_delete("spip_auteurs_courriers"
-					, "id_courrier IN (SELECT id_courrier FROM spip_courriers WHERE $sql_where)");	
-			} else {
 				// Sur les precieux conseils de MM :
 				// passer la requete en 2 etapes pour assurer portabilite sql
 				$selection =
 					sql_select("id_courrier", "spip_courriers", $sql_where,'','','','','',false);
 				$result = sql_delete("spip_auteurs_courriers", "id_courrier IN ($selection)");
-			}
-			break;
 	}
 	return($result);
 }

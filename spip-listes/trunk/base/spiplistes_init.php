@@ -30,6 +30,19 @@ function spiplistes_install ($action) {
 	include_spip('inc/spipliste_api_globales');
 	spiplistes_debug_log('spiplistes_install()');
 
+	$maj['create'] = array(
+		array('maj_tables', array('spip_courriers','spip_listes','spip_auteurs_listes','spip_auteurs_courriers','spip_auteurs_mod_listes')),
+		);
+	$maj[''] = array(
+		array('maj_tables', array('spip_courriers','spip_listes','spip_auteurs_listes','spip_auteurs_courriers','spip_auteurs_mod_listes')),
+		);
+
+
+
+
+
+
+
 	switch($action) {
 		case 'test':
 			// si renvoie true, c'est que la base est a jour, inutile de re-installer
@@ -86,35 +99,7 @@ function spiplistes_install ($action) {
 	return (FALSE);
 }
 
-/**
- * @return string
- */
-function spiplistes_base_creer () {
 
-	//spiplistes_debug_log("spiplistes_base_creer()");
-	global $tables_principales;
-	
-	// demande a SPIP de creer les tables (base/create.php)
-	include_spip('base/create');
-	include_spip('base/abstract_sql');
-	include_spip('base/db_mysql');
-	include_spip('base/spiplistes_tables');
-	creer_base();
-	$descauteurs = sql_showtable('spip_auteurs_elargis',true);
-	if(!isset($descauteurs['field']['spip_listes_format'])){
-		// si la table spip_auteurs_elargis existe déjà
-		sql_alter("TABLE spip_auteurs_elargis ADD `spip_listes_format` VARCHAR(8) DEFAULT 'non' NOT NULL");
-	}
-	spiplistes_log("INSTALL: database creation");
-
-	$spiplistes_base_version = spiplistes_real_version_base_get(_SPIPLISTES_PREFIX);
-	ecrire_meta('spiplistes_base_version', $spiplistes_base_version);
-	spiplistes_ecrire_metas();
-	
-	$spiplistes_base_version = $GLOBALS['meta']['spiplistes_base_version'];
-
-	return($spiplistes_base_version);
-}
 
 /**
  * @global string $GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES]
@@ -175,8 +160,8 @@ function spiplistes_activer_inscription_visiteurs () {
 function spiplistes_vider_tables () {
 
 	include_spip('base/abstract_sql');
-	
-	// ne supprime pas la table spip_auteurs_elargis (utilisee par inscription2, echoppe, ... ? )
+
+
 	foreach(array('spip_listes'
 				  , 'spip_courriers'
 				  , 'spip_auteurs_courriers'
@@ -204,5 +189,4 @@ function spiplistes_vider_tables () {
 	
 	return(true);
 } // spiplistes_vider_tables ()
-
-
+?>

@@ -69,7 +69,7 @@ function spiplistes_raccourci_journal ($envelopper = true) {
 		. icone_horizontale(
 			_T('spiplistes:log_voir_le_journal')
 			, generer_url_ecrire('spiplistes_voir_journal')
-			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'log-24.png'
+			, 'log-24.png'
 			, ''
 			,false
 			)
@@ -321,14 +321,10 @@ function spiplistes_journal_lire ($logname = NULL, $logdir = NULL, $logsuf = NUL
 	
 	$logname = ($logname === NULL ? _FILE_LOG : $logname);
 	
-	$logfile = 
-		(spiplistes_spip_est_inferieur_193())
-		? _DIR_TMP . $logname . '.log' 
-		: ($logdir===NULL ? _DIR_LOG : $logdir)
+	$logfile = ($logdir===NULL ? _DIR_LOG : $logdir)
 			. (test_espace_prive()?'prive_':'') //distinguer les logs prives et publics
 	  		. $logname
-			. ($logsuf === NULL ? _FILE_LOG_SUFFIX : $logsuf)
-		;
+			. ($logsuf === NULL ? _FILE_LOG_SUFFIX : $logsuf);
 
 	$result =
 		(file_exists($logfile))

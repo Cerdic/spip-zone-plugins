@@ -300,7 +300,7 @@ function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut
 	$colspan = 0;
 	
 	// titres du tableau (a-la-SPIP, en haut)
-	$icon_auteur = spiplistes_corrige_img_pack("<img src='"._DIR_IMG_PACK."/admin-12.gif' alt='' border='0' />");
+	$icon_auteur = spiplistes_corrige_img_pack("<img src='".chemin_image('admin-12.gif')."' alt='' border='0' />");
 	$id_liste_url = ($id_liste ? "&id_liste=$id_liste" : "");
 	$result .= ""
 		. "<tr bgcolor='#DBE1C5'>"
@@ -505,7 +505,7 @@ function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut
 			.	(
 				(strlen($row['email'])>3)
 				? "<a href='mailto:".$row['email']."'>"
-					. spiplistes_corrige_img_pack("<img src='"._DIR_IMG_PACK."m_envoi_rtl.gif' alt='' /></a>")
+					. spiplistes_corrige_img_pack("<img src='".chemin_image('m_envoi_rtl.gif')."' alt='' /></a>")
 				: "<span title='"._T('spiplistes:pas_adresse_email')."'>&bull;</span>"
 				)
 			. "</td>\n"
@@ -682,7 +682,7 @@ function spiplistes_listes_selectionner_elligibles (
 		// En ajax, find_in_path() ne trouve pas le chemin correct.
 		// Oblige' de le noter au premier appel
 		// et le transmettre dans le form.
-		$icone_loupe = find_in_path('images/loupe.png');
+		$icone_loupe = chemin_image('loupe.png');
 	}
 	foreach(array('id_grosse_boite', 'script_exec', 'script_action') as $key) {
 		if(empty($$key)) {
@@ -962,6 +962,13 @@ function spiplistes_listes_boite_moderateurs ($id_liste, $script_retour, $id_con
 		;
 	return($boite_moderateurs);
 } //
+
+
+// http://doc.spip.org/@bonhomme_statut
+function bonhomme_statut($row) {
+	$puce_statut = charger_fonction('puce_statut', 'inc');
+	return $puce_statut(0, $row['statut'], 0, 'auteur');
+}
 
 /**
  * {@link spiplistes_corrige_img_pack}

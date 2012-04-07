@@ -27,7 +27,6 @@ header('Location: '.$url);
 ?>
 <p class="text">La page de configuration via CFG n&#39;est pas disponible.</p>
 <p class="text">Vous allez &#234;tre redirig&#233; sur
-	<a
-	href="<?php echo($url); ?>">
-	la page de configuration de SPIP-Listes.</p>
+	<a href="<?php echo($url); ?>">
+	la page de configuration de SPIP-Listes.</a></p>
 

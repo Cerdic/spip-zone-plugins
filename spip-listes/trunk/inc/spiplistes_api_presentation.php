@@ -61,8 +61,8 @@ function spiplistes_bullet_titre_liste ($type, $statut, $id=false, $return=false
  * @return string|null
  */
 function spiplistes_items_get_item($item, $statut) {
-	global $spiplistes_items;
-
+	$spiplistes_items=get_spiplistes_items();
+	
 	if(isset($spiplistes_items[$statut]) 
 		&& isset($spiplistes_items[$statut][$item])
 	) {
@@ -76,12 +76,15 @@ function spiplistes_items_get_item($item, $statut) {
 /**
  * @return string
  */
-function spiplistes_gros_titre ($titre, $ze_logo='', $return = false) {
-	if(!spiplistes_spip_est_inferieur_193()) {
-		$ze_logo = ""; // semble ne plus etre utilise dans exec/
-	}
+function spiplistes_gros_titre ($titre, $logo='', $return = false) {
+
 	$aff = ($return === false);
-	$r = gros_titre($titre, $ze_logo, $aff);
+	$size = 24;
+	if (preg_match("/-([0-9]{1,3})[.](gif|png)$/i",$logo,$match))
+		$size = $match[1];
+	$icone = http_img_pack($logo, $alt, "width='$size' height='$size'");
+	
+	$r = gros_titre($titre, $icone, $aff);
 	if($return) return($r);
 }
 
@@ -293,143 +296,39 @@ function spiplistes_form_input_radio ($name, $value, $label, $checked, $return =
 	if($return) return($result);
 }
 
-/**
- * @version CP-20070923
- * @param string $titre
- * @param bool $raccourcis
- * @param bool $return Retourne value si FALSE, sinon echo ()
- * @return string|null
- */
-function spiplistes_debut_raccourcis ($titre = '', $raccourcis = true, $return = false) {
-  
-  $result = ''
-		. ($raccourcis ? creer_colonne_droite('', true) : '')
-		. debut_cadre_enfonce('', true)
-		. "<span class='verdana2' style='font-size:80%;text-transform: uppercase;font-weight:bold;'>$titre</span>"
-		. "<br />"
-		;
-	if($return) return($result);
-	else echo($result);
-}
-
-
-// From SPIP-Listes-V: CP:20070923
-function spiplistes_fin_raccourcis ($return = false) {
-	$result = ""
-		. fin_cadre_enfonce(true)
-		;
-	if($return) return($result);
-	else echo($result);
-}
 
 /**
  * @version SPIP-Listes-V: CP:20070923
  */
 function spiplistes_boite_raccourcis ($return = false) {
-	
-	$connect_id_auteur = intval($GLOBALS['connect_id_auteur']);
-	$connect_statut = intval($GLOBALS['connect_statut']);
-	
-	$flag_webmestre = autoriser('webmestre','','',$connect_id_auteur);
-	$flag_administrateur = ($connect_statut == "0minirezo");
-	
-	$id_liste = intval(_request('id_liste'));
-	$flag_moderateur =
-		($id_liste > 0)
-		? autoriser('moderer', 'liste', $id_liste, $connect_id_auteur)
-		: FALSE
-		;
-	
-	$result = ""
-		. (($flag_webmestre) ? spiplistes_raccourci_journal_jquery() : "")
-		// Les raccourcis
-		. spiplistes_debut_raccourcis(_T('titre_cadre_raccourcis'), true, true)
-	;
-	$result .= ""
-		. "<ul class='verdana2' style='list-style: none;padding:1ex;margin:0;'>\n"
-		. "<li>"
-		. icone_horizontale(
-			_T('spiplistes:nouveau_courrier')
-			, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_EDIT,'new=oui&type=nl')
-			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_brouillon-24.png"
-			,"creer.gif"
-			,false
-			)
-		. "</li>\n"
-		. "<li>"
-		. icone_horizontale(
-			_T('spiplistes:nouvelle_liste_de_diffusion')
-			, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_EDIT,'new=oui')
-			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply-to-all-24.gif"
-			,"creer.gif"
-			,false
-			)
-		. "</li>\n"
-		;
-		
-	if($flag_webmestre
-	   || $flag_administrateur ) {
-		$result .= ""
-			. "<li>"
-			. icone_horizontale(
-				_T('spiplistes:import_export')
-				, generer_url_ecrire(_SPIPLISTES_EXEC_IMPORT_EXPORT)
-				, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."listes_inout.png"
-				,""
-				,false
-				)
-			. "</li>\n"
-			;
-	}
-	if(autoriser('webmestre','','',$connect_id_auteur)) {
-		$result .= ""
-			. "<li>"
-			. icone_horizontale(
-				_T('titre_admin_tech')
-				, generer_url_ecrire(_SPIPLISTES_EXEC_MAINTENANCE)
-				, "administration-24.gif"
-				,""
-				,false
-				)
-			. "</li>\n"
-			// lecture du journal (log)
-			. spiplistes_raccourci_journal(false)
-			//
-			;
-	}
-	$result .= ""
-		. "<!-- aide en ligne -->\n"
-		. "<li>"
-		. icone_horizontale(
-			_T('spiplistes:aide_en_ligne')
-			, generer_url_ecrire(_SPIPLISTES_EXEC_AIDE)
-			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."aide-24.png"
-			, ""
-			, false
-			, " onclick=\"javascript:window.open(this.href,'spip_aide', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;\" "
-			)
-		. "</li>\n"
-		;
-	$result .= ""
-		. "</ul>\n"
-		. spiplistes_fin_raccourcis(true)
-		;
-	
-	if($return) return($result);
-	else echo($result);
+
+    return recuperer_fond("prive/inclure/boite_raccourcis");
+
 }
+
 
 function spiplistes_boite_info_spiplistes($return=false) {
 	$result = ""
 		// colonne gauche boite info
 		. "<br />"
-		. debut_boite_info(true)
+		. boite_ouvrir("",'info')
 		. _T('spiplistes:_aide')
-		. fin_boite_info(true)
+		. boite_fermer()
 		;
 	if($return) return($result);
 	else echo($result);
 }
+
+// Pour construire des menu avec SELECTED
+// http://doc.spip.org/@mySel
+function mySel($varaut,$variable, $option = NULL) {
+	$res = ' value="'.$varaut.'"' . (($variable==$varaut) ? ' selected="selected"' : '');
+
+	return  (!isset($option) ? $res : "<option$res>$option</option>\n");
+}
+
+
+
 
 //CP-20080508 
 function spiplistes_bouton_block_depliable ($titre = "", $deplie = true, $nom_block = "", $icone = "") {
@@ -437,12 +336,7 @@ function spiplistes_bouton_block_depliable ($titre = "", $deplie = true, $nom_bl
 		$titre = _T("info_sans_titre");
 	}
 	include_spip('inc/layer');
-	if(spiplistes_spip_est_inferieur_193()) {
-		$f = ($deplie ? "bouton_block_visible" : "bouton_block_invisible");
-		$result = $f($nom_block, $icone);
-	} else {
-		$result = bouton_block_depliable($titre, $deplie, $nom_block);
-	}
+	$result = bouton_block_depliable($titre, $deplie, $nom_block);
 	return($result);
 }
 
@@ -612,12 +506,12 @@ function spiplistes_boite_autocron () {
 		if(_request('opt_suspendre_trieuse')=='non') {
 			if(autoriser('webmestre','','',$connect_id_auteur)) {
 				spiplistes_ecrire_key_in_serialized_meta ('opt_suspendre_trieuse', $opt_suspendre_trieuse = 'non', _SPIPLISTES_META_PREFERENCES);
-				spiplistes_ecrire_metas();
+				//spiplistes_ecrire_metas();
 				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:trieuse_reactivee')."</p>\n";
 			}
 		}
 		else {
-			$result .= spiplistes_boite_autocron_info(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_timer.gif", true
+			$result .= spiplistes_boite_autocron_info("stock_timer.gif", true
 				, _T('spiplistes:trieuse_suspendue'), _T('bouton_annuler')
 				, _T('spiplistes:trieuse_suspendue_info'), 'opt_suspendre_trieuse', _DIR_IMG_PACK."warning-24.gif"
 				);
@@ -629,12 +523,12 @@ function spiplistes_boite_autocron () {
 		if(_request('opt_suspendre_meleuse')=='non') {
 			if(autoriser('webmestre','','',$connect_id_auteur)) {
 				spiplistes_ecrire_key_in_serialized_meta ('opt_suspendre_meleuse', $opt_suspendre_meleuse = 'non', _SPIPLISTES_META_PREFERENCES);
-				spiplistes_ecrire_metas();
+				//spiplistes_ecrire_metas();
 				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:meleuse_reactivee')."</p>\n";
 			}
 		}
 		else {
-			$result .= spiplistes_boite_autocron_info(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_envoyer-24.png", true
+			$result .= spiplistes_boite_autocron_info("courriers_envoyer-24.png", true
 				, _T('spiplistes:meleuse_suspendue'), _T('bouton_annuler')
 				, _T('spiplistes:meleuse_suspendue_info'), 'opt_suspendre_meleuse', _DIR_IMG_PACK."warning-24.gif"
 				);
@@ -646,12 +540,12 @@ function spiplistes_boite_autocron () {
 		if(_request('opt_simuler_envoi')=='non') {
 			if(autoriser('webmestre','','',$connect_id_auteur)) {
 				spiplistes_ecrire_key_in_serialized_meta ('opt_simuler_envoi', $opt_simuler_envoi = 'non', _SPIPLISTES_META_PREFERENCES);
-				spiplistes_ecrire_metas();
+				//spiplistes_ecrire_metas();
 				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:simulation_desactive')."</p>\n";
 			}
 		}
 		else {
-			$result .= spiplistes_boite_autocron_info(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_envoyer-24.png", true
+			$result .= spiplistes_boite_autocron_info("courriers_envoyer-24.png", true
 				, _T('spiplistes:mode_simulation'), _T('bouton_annuler')
 				, _T('spiplistes:mode_simulation_info'), 'opt_simuler_envoi', _DIR_IMG_PACK."warning-24.gif"
 				);
@@ -675,7 +569,7 @@ function spiplistes_boite_autocron () {
 			. "<br />"
 			. debut_boite_info(true)
 			. "<div style='font-weight:bold;text-align:center'>"._T('spiplistes:envoi_en_cours')."</div>"
-			. "<div style='padding : 10px;text-align:center'><img alt='' src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_distribution-48.gif' /></div>"
+			. "<div style='padding : 10px;text-align:center'><img alt='' src='"."courriers_distribution-48.gif' /></div>"
 			. "<div id='meleuse'>"
 			.	(
 					($nb_total_abonnes)
@@ -1083,7 +977,7 @@ function spiplistes_current_svnrevision_get ($prefix, $verifier_svn) {
 		if(!$result = version_svn_courante($dir_plugin)) {
 			// mefiance: il faut que svn/entries soit a jour (svn update sur le poste de travail/serveur !)
 			// si pas de svn/entries, lire l'attribut dans plugin.xml
-			$file = $dir_plugin."/"._FILE_PLUGIN_CONFIG;
+			$file = $dir_plugin."/paquet.xml";
 			$result = spiplistes_svn_revision_read($file);
 		}
 		if($verifier_svn && !$svn_revision) {
@@ -1309,28 +1203,4 @@ function spiplistes_affdate ($date) {
 			;
 	}
 	return($result);
-}
-
-/**
- * icone()
- * @todo icone() devient quoi en SPIP 3 ?
- *  A corriger/adapter.
- */
-function spiplistes_icone ($texte, $lien, $fond, $fonction='', $align='', $echo=false)
-{
-	$result = '';
-	
-	if (spiplistes_spip_est_inferieur_193())
-	{
-		include_spip('inc/presentation');
-		$result = icone (
-			$texte
-			, $lien
-			, $fond
-			, $fonction
-			, $align
-			, $echo
-		);
-	}
-	return ($result);
 }

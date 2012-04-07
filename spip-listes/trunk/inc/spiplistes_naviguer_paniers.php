@@ -57,11 +57,11 @@ function spiplistes_naviguer_paniers ($titre, $sql_from, $les_statuts, $script_e
 			$titre .= ":";
 		}
 		$result = ""
-			. spiplistes_debut_raccourcis($titre, false, true)
+//			. spiplistes_debut_raccourcis($titre, false, true)
 			. "<ul class='verdana2 panier'>"
 			. $result
 			. "</ul>\n"
-			. spiplistes_fin_raccourcis(true)
+//			. spiplistes_fin_raccourcis(true)
 			;
 	}
 

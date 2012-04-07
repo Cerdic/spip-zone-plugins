@@ -110,7 +110,7 @@ function spiplistes_lister_courriers_listes (
 		
 		// titre du tableau
 		$en_liste = ""
-			. "<div class='liste'>\n"
+			. "<div class='liste-objets'>\n"
 			. "<div style='position: relative;'>\n"
 			. "<div style='position: absolute; top: -12px; left: 3px;'>\n"
 			. "<img src='$image' alt='' width='24' height='24' />\n"
@@ -162,8 +162,7 @@ function spiplistes_lister_courriers_listes (
 			$en_liste.= ""
 				. "<tr class='tr_liste'>\n"
 				. "<td width='11' style='vertical-align:top;'>"
-				. "<img src='".spiplistes_items_get_item("puce", $statut)."' alt=\""
-					. spiplistes_items_get_item("alt", $statut)."\" border='0' style='margin: 3px 1px 1px;' />"
+				. http_img_pack(spiplistes_items_get_item("puce", $statut), spiplistes_items_get_item("alt", $statut), "width=\"$size\" height=\"$size\" style=\"margin: 3px 1px 1px;\"")
 				. "</td>"
 				. "<td class='arial2'>\n"
 				. "<div>\n"

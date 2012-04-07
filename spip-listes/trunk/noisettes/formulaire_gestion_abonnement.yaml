@@ -1,5 +1,5 @@
 nom: '<:spiplistes:noisette_formulaire_gestion_abonnement:>'
-icon: 'img_pack/abonner-24.png'
+icon: 'abonner-24.png'
 parametres:
   -
     saisie: 'oui_non'

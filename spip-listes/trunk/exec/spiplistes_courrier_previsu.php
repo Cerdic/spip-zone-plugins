@@ -248,11 +248,7 @@ function exec_spiplistes_courrier_previsu () {
 					, $sql_where
 					)) {
 					while($row = sql_fetch($sql_result)) {
-						$url = 
-							(spiplistes_spip_est_inferieur_193())
-							? generer_url_article($row['id_article'])
-							: generer_url_entite($row['id_article'], 'article')
-							;
+						$url =generer_url_entite($row['id_article'], 'article');
 						$ii = typo($row['titre']);
 						$sommaire_html .= "<li> <a href='" . $url . "'>" . $ii . '</a></li>'.$eol;
 						$sommaire_texte .= " - " . textebrut($ii) . "\n   " . $url . $eol;
@@ -271,11 +267,7 @@ function exec_spiplistes_courrier_previsu () {
 					)) {
 					while($row = sql_fetch($sql_result)) {
 						$ii = typo($row['titre']);
-						$url = 
-							(spiplistes_spip_est_inferieur_193())
-							? generer_url_article($row['id_article'])
-							: generer_url_entite($row['id_article'], 'article')
-							;
+						$url = generer_url_entite($row['id_article'], 'article');
 						$sommaire_html .= "<li> <a href='" . $url . "'> " . $ii . "</a></li>\n";
 						$sommaire_texte .= " - " . textebrut($ii) . "\n   " . $url . $eol;
 					}
@@ -362,6 +354,20 @@ function exec_spiplistes_courrier_previsu () {
 	}
 	exit(0);
 }	
+
+// http://doc.spip.org/@format_mysql_date
+function format_mysql_date($annee=0, $mois=0, $jour=0, $h=0, $m=0, $s=0) {
+	$annee = sprintf("%04s",$annee);
+	$mois = sprintf("%02s",$mois);
+
+	if ($annee == "0000") $mois = 0;
+	if ($mois == "00") $jour = 0;
+
+	return sprintf("%04u",$annee) . '-' . sprintf("%02u",$mois) . '-'
+		. sprintf("%02u",$jour) . ' ' . sprintf("%02u",$h) . ':'
+		. sprintf("%02u",$m) . ':' . sprintf("%02u",$s);
+}
+
 
 /******************************************************************************************/
 /* SPIP-listes est un systeme de gestion de listes d'information par email pour SPIP      */

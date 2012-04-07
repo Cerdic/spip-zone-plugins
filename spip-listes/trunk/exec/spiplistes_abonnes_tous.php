@@ -110,7 +110,7 @@ function exec_spiplistes_abonnes_tous () {
 	// formulaire de recherche 
 	if ($total_auteurs_elligibles > 1) {
 		$page_result .= ""
-			. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."contact_loupe-24.png", true, "", _T('spiplistes:chercher_un_auteur'))
+			. debut_cadre_relief("contact_loupe-24.png", true, "", _T('spiplistes:chercher_un_auteur'))
 			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE)."' method='post' class='verdana2'>"
 			. "<div style='text-align:center'>\n"
 			. "<input type='text' name='cherche_auteur' class='fondl' value='' size='20' />"

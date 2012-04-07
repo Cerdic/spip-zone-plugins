@@ -349,7 +349,7 @@ function exec_spiplistes_courrier_gerer () {
 		if(($statut == _SPIPLISTES_COURRIER_STATUT_REDAC) || ($statut == _SPIPLISTES_COURRIER_STATUT_READY)) {
 		// Le courrier peut-etre modifie si en preparation 
 			$gros_bouton_modifier = "<!-- bouton modifier -->\n" .
-				icone (
+				icone_verticale (
 					_T('spiplistes:modifier_ce_courrier') // legende bouton
 					, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_EDIT,'id_courrier='.$id_courrier) // lien
 					, spiplistes_items_get_item('icon', $statut) // image du fond
@@ -373,10 +373,10 @@ function exec_spiplistes_courrier_gerer () {
 					) {
 			$gros_bouton_supprimer = 
 				'<div style="margin-top:1ex">'
-				. icone (
+				. icone_verticale (
 					_T('spiplistes:supprimer_ce_courrier')
 					, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE, 'btn_supprimer_courrier='.$id_courrier)
-					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'poubelle_msg.gif'
+					, 'poubelle_msg.gif'
 					, ''
 					, 'right'
 					, false
@@ -392,10 +392,10 @@ function exec_spiplistes_courrier_gerer () {
 					) {
 			$gros_bouton_dupliquer = 
 				"<div style='margin-top:1ex;'>"
-				. icone (
+				. icone_verticale (
 					_T('spiplistes:dupliquer_ce_courrier')
 					, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER, "btn_dupliquer_courrier=$id_courrier")
-					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_mail.gif'
+					, 'stock_mail.gif'
 					, _DIR_IMG_PACK."creer.gif"
 					, "right"
 					, false
@@ -407,12 +407,12 @@ function exec_spiplistes_courrier_gerer () {
 		if($statut == _SPIPLISTES_COURRIER_STATUT_ENCOURS) {
 		// L'envoi d'un courrier en cours peut etre stoppe
 			$gros_bouton_arreter_envoi = 
-				icone (
+				icone_verticale (
 					_T('spiplistes:arreter_envoi')
 					// si arreter envoi, passe la main a exec/spiplistes_courriers_casier
 					, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE, 'btn_arreter_envoi='.$id_courrier)
-					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_redac-24.png"
-					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."stop-top-right-24.png"
+					, "courriers_redac-24.png"
+					, "stop-top-right-24.png"
 					, "right"
 					, false
 					)
@@ -663,7 +663,7 @@ function exec_spiplistes_courrier_gerer () {
 } // end function exec_spiplistes_courrier_gerer ()
 
 function spiplistes_icone_oeil () {
-	return("<img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."oeil-16.png' alt='' width='16' height='16' border='0' />");
+	return("<img src='"."oeil-16.png' alt='' width='16' height='16' border='0' />");
 }
 
 /* retourne l'id auteur depuis l'email */

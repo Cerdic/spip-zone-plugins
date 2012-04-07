@@ -384,7 +384,7 @@ function exec_spiplistes_config () {
 		$$key = spiplistes_pref_lire($key);
 	}
 	$page_result .= ''
-		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_complement-24.png", true, '', _T('spiplistes:complement_des_courriers'))
+		. debut_cadre_trait_couleur("courriers_complement-24.png", true, '', _T('spiplistes:complement_des_courriers'))
 		. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE), true)
 		//
 		// personnaliser le courrier (reprend les données de *_auteur)
@@ -488,7 +488,7 @@ function exec_spiplistes_config () {
 	if ($opt_smtp_use_ssl != 'oui') { $opt_smtp_use_ssl = 'non'; }
 	
 	$page_result .= ''
-		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_envoyer-24.png', true, '', _T('spiplistes:envoi_des_courriers'))
+		. debut_cadre_trait_couleur('courriers_envoyer-24.png', true, '', _T('spiplistes:envoi_des_courriers'))
 		. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE), true)
 		//
 		// adresse email de retour (reply-to)
@@ -607,7 +607,7 @@ function exec_spiplistes_config () {
 	//////////////////////////////////////////////////////
 	// La console
 		$page_result .= '<a id="regler-console" name="regler-console"></a>'
-			. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'console-24.gif', true, '', _T('spiplistes:log_console'))
+			. debut_cadre_trait_couleur('console-24.gif', true, '', _T('spiplistes:log_console'))
 			. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE), true)
 			//
 			// la console en mode debug ?

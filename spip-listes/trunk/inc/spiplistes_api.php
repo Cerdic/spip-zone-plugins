@@ -277,10 +277,6 @@ function spiplistes_abonnements_desabonner_statut ($id_auteur, $listes_statuts) 
  */
 function spiplistes_abonnements_auteurs_supprimer ($auteur_statut) {
 	$auteur_statut = "statut=".sql_quote($auteur_statut);
-	if(spiplistes_spip_est_inferieur_193()) { 
-		$result = sql_delete("spip_auteurs_listes", 
-					"id_auteur IN (SELECT id_auteur FROM spip_auteurs WHERE $auteur_statut)");
-	} else {
 		// Sur les precieux conseils de MM :
 		// passer la requete en 2 etapes pour assurer portabilite sql
 		$selection =
@@ -289,7 +285,6 @@ function spiplistes_abonnements_auteurs_supprimer ($auteur_statut) {
 		if ($sql_result === false) {
 			spiplistes_sqlerror_log("abonnements_auteurs_supprimer");
 		}
-	}
 	return($result);
 }
 
@@ -599,12 +594,7 @@ function spiplistes_listes_nb_abonnes_compter ($id_liste = 0, $preciser = false)
 	
 	if($preciser)
 	{
-		$selection = 
-			(spiplistes_spip_est_inferieur_193())
-			? 'SELECT id_auteur FROM spip_auteurs_listes '
-				. (!empty($sql_whereq) ? 'WHERE '.$sql_whereq : '')
-			: sql_select('id_auteur', 'spip_auteurs_listes', $sql_whereq,'','','','','',false)
-			;
+		$selection = sql_select('id_auteur', 'spip_auteurs_listes', $sql_whereq,'','','','','',false);
 		$sql_result = sql_select(
 			"`spip_listes_format` AS f, COUNT(*) AS n"
 			, 'spip_auteurs_elargis'
@@ -1326,11 +1316,6 @@ function spiplistes_assembler_patron ($path_patron, $contexte) {
 
 	include_spip('inc/distant');
 	
-	// Pour recuperer_fond()
-	// qui est passé en inc/utils en SPIP 2
-	if (spiplistes_spip_est_inferieur_193()) {
-		include_spip('public/assembler');
-	}
 	
 	//spiplistes_debug_log('Chemin patrons : '.$path_patron);
 	
@@ -1578,11 +1563,7 @@ function spiplistes_auteurs_non_abonnes_compter ()
 	static $nb;
 	if($nb === null)
 	{
-		$selection =
-			(spiplistes_spip_est_inferieur_193())
-			? 'SELECT id_auteur FROM spip_auteurs_listes GROUP BY id_auteur'
-			: sql_select('id_auteur', 'spip_auteurs_listes', '','id_auteur','','','','',false)
-		;
+		$selection =sql_select('id_auteur', 'spip_auteurs_listes', '','id_auteur','','','','',false);
 		$sql_where = array(
 			  'statut!='.sql_quote('5poubelle')
 			, 'statut!='.sql_quote('nouveau')

@@ -92,12 +92,8 @@ function exec_spiplistes_import_export() {
 			else {
 			// autre type de liste
 				if($export_id == "sans_abonnement") {
-					if(spiplistes_spip_est_inferieur_193()) {
-						$sql_where[] = "a.id_auteur NOT IN (SELECT id_auteur FROM spip_auteurs_listes GROUP BY id_auteur)";
-					} else {
 						$selection = sql_select("id_auteur", "spip_auteurs_listes", '','id_auteur','','','','',false);
 						$sql_where[] = "a.id_auteur NOT IN ($selection)";
-					}
 				} 
 				else if($export_id == "desabo") {
 					$sql_from[] = "spip_auteurs_elargis AS f";
@@ -194,7 +190,7 @@ function exec_spiplistes_import_export() {
 		
 	// import form
 	$page_result .= ""
-		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'listes_in-24.png', true
+		. debut_cadre_trait_couleur('listes_in-24.png', true
 									, '', _T('spiplistes:importer_liste_abonnes'))
 		. "<p class='verdana2'>"._T('spiplistes:_aide_import')."</p>\n"
 		;
@@ -348,7 +344,7 @@ function exec_spiplistes_import_export() {
 
 	if ($nb_listes > 0) {
 		$page_result .= ""
-			. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'listes_out-24.png'
+			. debut_cadre_trait_couleur('listes_out-24.png'
 										, true, '', _T('spiplistes:exporter_liste_abonnes'))
 			// exportation par listes
 			. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_IMPORT_EXPORT), true)

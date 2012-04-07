@@ -95,7 +95,7 @@ function exec_spiplistes_liste_edit(){
 		$flag_editable = ($connect_statut == "0minirezo");
 	}
 
-	$gros_bouton_retour = spiplistes_icone (
+	$gros_bouton_retour = icone_verticale (
 		_T('spiplistes:retour_link')
 		, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=" . ($lier_trad ? $lier_trad : $id_liste) )
 		, "article-24.gif"
@@ -136,6 +136,7 @@ function exec_spiplistes_liste_edit(){
 		//. spiplistes_boite_autocron() // ne pas gener l'edition
 		. pipeline('affiche_droite', array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
 		. debut_droite($rubrique, true)
+		
 		;
 
 	$titre = entites_html($titre);
@@ -148,9 +149,9 @@ function exec_spiplistes_liste_edit(){
 		;
 
 	$page_result .= ""
-		. debut_cadre_formulaire("", true)
-		. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
-		. "<tr>"
+		. '<div class="cadre-formulaire-editer">'
+		. '<div class="entete-formulaire">'
+		. "<table><tr>"
 		. "<td>"
 		. $gros_bouton_retour
 		. "</td>"
@@ -162,9 +163,8 @@ function exec_spiplistes_liste_edit(){
 				: _T('spiplistes:modifier_liste')
 			) . ":"
 		. spiplistes_gros_titre($titre, '', true)
-		. "</td>"
-		. "</tr></table>"
-		. "<hr />"
+		. "</td></tr></table>"
+		. '</div><div class="formulaire_spip formulaire_editer formulaire_editer_liste">'
 		. "<form action='$formulaire_action' method='post' name='formulaire'>\n"
 		. (
 			($id_liste)
@@ -203,7 +203,7 @@ function exec_spiplistes_liste_edit(){
 		. "<input class='fondo' type='submit' name='btn_liste_edit' value='"._T('bouton_valider')."' />"
 		. "</p>"
 		. "</form>"
-		. fin_cadre_formulaire(true)
+		. '</div></div>'
 		;
 
 	echo($page_result);

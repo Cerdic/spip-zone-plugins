@@ -539,19 +539,9 @@ function spiplistes_abonnements_zombies () {
 	$sql_select = 'id_auteur';
 	$sql_from = 'spip_auteurs';
 	$sql_where = 'statut='.sql_quote('5poubelle');
-	$selection_poubelle = 
-		(spiplistes_spip_est_inferieur_193())
-		? 'SELECT '.$sql_select.' FROM '.$sql_from.' WHERE '.$sql_where
-		: sql_select($sql_select, $sql_from, $sql_where,
-					 '','','','','',false)
-		;
+	$selection_poubelle =  sql_select($sql_select, $sql_from, $sql_where,'','','','','',false);
 	$sql_where = '';
-	$selection_tous = 
-		(spiplistes_spip_est_inferieur_193())
-		? "SELECT $sql_select FROM $sql_from"
-		: sql_select($sql_select, $sql_from, $sql_where,
-					 '','','','','',false)
-		;
+	$selection_tous =sql_select($sql_select, $sql_from, $sql_where,'','','','','',false);
 	
 	$sql_from = 'spip_auteurs_listes';
 	$sql_result = sql_select(

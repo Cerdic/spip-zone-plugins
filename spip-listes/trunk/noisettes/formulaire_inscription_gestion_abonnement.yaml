@@ -1,6 +1,6 @@
 nom: '<:spiplistes:noisette_formulaire_inscription_gestion_abonnement:>'
 description: '<:spiplistes:description_noisette_formulaire_inscription_gestion_abonnement:>'
-icon: 'img_pack/abonner-24.png'
+icon: 'abonner-24.png'
 parametres:
   -
     saisie: 'oui_non'

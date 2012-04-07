@@ -96,7 +96,7 @@ function spiplistes_debug_log ($msg = '')
 {
 	static $debug;
 	static $passe = false;
-	
+		
 	if ($debug === null and !$passe)
 	{
 		$passe = true; // eviter une recursion si aucune meta n'est renseigne
@@ -145,69 +145,7 @@ function spiplistes_server_rezo_local () {
 	return ($islan);
 }
 
-/**
- * SPIP 1.9.2e: $spip_version_branche = null; $spip_version_affichee = '1.9.2e'; $spip_version_code = 1.9208;
- * SPIP 1.9.2f: $spip_version_branche = null; $spip_version_affichee = '1.9.2f'; $spip_version_code = 1.9208;
- * SPIP 1.9.2g: $spip_version_branche = null; $spip_version_affichee = '1.9.2g'; $spip_version_code = 1.9208;
- * SPIP 2.0.0: $spip_version_branche = "2.0.0"; $spip_version_affichee = "$spip_version_branche"; $spip_version_code = 12691;
- * SPIP 2.0.1: $spip_version_branche = "2.0.1"; $spip_version_affichee = "$spip_version_branche"; $spip_version_code = 12691;
- * SPIP 2.0.2: $spip_version_branche = "2.0.2"; $spip_version_affichee = "$spip_version_branche"; $spip_version_code = 12691;
- * @version CP-20080324
- * @staticvar $is_inf
- * @global $GLOBALS['spip_version_code']
- * @see http://www.spip.net/fr_article4449.html
- * @return bool
- */
-function spiplistes_spip_est_inferieur_193 () {
-	static $is_inf;
-	if($is_inf===NULL) {
-		$is_inf = version_compare($GLOBALS['spip_version_code'],'1.9300','<');
-	}
-	return($is_inf);
-}
 
-/**
- * La composition de la globale spip_version_code est
- *  différente en SPIP 3
- * La fonction spip_version_compare() apparaît en SPIP 2.
- * S'en servir pour détecter la version 3.
- * @version CP-20110515
- * @staticvar $is_inf
- * @global $GLOBALS['spip_version_branche']
- * @return bool
- */
-function spiplistes_spip_est_inferieur_3 ()
-{
-	static $is_inf;
-	if ($is_inf === NULL)
-	{
-		include_spip('inc/plugin');
-		$is_inf = (
-			function_exists('spip_version_compare')
-			&& isset($GLOBALS['spip_version_branche'])
-			&& spip_version_compare(
-				$GLOBALS['spip_version_branche']
-				, '3.0.0-dev'
-				, '<'
-				)
-		);
-	}
-	return ($is_inf);
-}
-
-
-/**
- * ecrire dans la table 'spip_meta' le champ...
- * en general pour les preferences
- * @return true
- */
-function spiplistes_ecrire_metas() {
-	if(spiplistes_spip_est_inferieur_193()) { 
-		include_spip('inc/meta');
-		ecrire_metas();
-	}
-	return (true);
-}
 
 /**
  * Lecture d'une pref (meta)
@@ -294,7 +232,7 @@ function spiplistes_current_version_get ($prefix) {
 function spiplistes_real_tag_get ($prefix, $s) {
 	include_spip('inc/plugin');
 	$dir = spiplistes_get_meta_dir($prefix);
-	$f = _DIR_PLUGINS.$dir.'/'._FILE_PLUGIN_CONFIG;
+	$f = _DIR_PLUGINS.$dir.'/paquet.xml';
 	if(is_readable($f) && ($c = file_get_contents($f))) {
 		$p = array("/<!--(.*?)-->/is","/<\/".$s.">.*/s","/.*<".$s.">/s");
 		$r = array("","","");
@@ -308,6 +246,7 @@ function spiplistes_real_tag_get ($prefix, $s) {
  * qui contient 'dir' et 'version'
  */
 function spiplistes_get_meta_infos ($prefix) {
+	
 	if(isset($GLOBALS['meta']['plugin'])) {
 		$result = unserialize($GLOBALS['meta']['plugin']);
 		$prefix = strtoupper($prefix);
