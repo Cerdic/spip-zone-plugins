@@ -1005,6 +1005,9 @@ jQuery.geoportail =
 					onSelectLocation: this.selectAdresse,
 					layerOptions: {
 						name: 'TOPONYMS.ALL:OPENLS',
+						requestOptions:
+						{	method:'GET'
+						},
 						formatOptions: {
 							version: '1.0'
 						}
@@ -1014,6 +1017,9 @@ jQuery.geoportail =
 					onSelectLocation: this.selectAdresse,
 					layerOptions: {
 						name: 'ADDRESSES.CROSSINGS:OPENLS',
+						requestOptions:
+						{	method:'GET'
+						},
 						formatOptions: {
 							version: '1.0'
 						}
