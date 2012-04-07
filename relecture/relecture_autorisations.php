@@ -61,6 +61,62 @@ function autoriser_article_voirrelectures_dist($faire, $type, $id, $qui, $opt) {
 
 
 /**
+ * Autorisation de modification d'une relecture
+ *
+ * @param object $faire
+ * @param object $type
+ * @param object $id
+ * @param object $qui
+ * @param object $opt
+ * @return
+ */
+function autoriser_relecture_modifier_dist($faire, $type, $id, $qui, $opt) {
+
+	// Conditions :
+	// - l'auteur connecte est un des auteurs de l'article
+	// - ou un admin complet ou restreint à la rubrique d'appartenance de l'article
+
+	$from = 'spip_relectures';
+	$where = array("id_relecture=$id");
+	$id_article = sql_getfetsel('id_article', $from, $where);
+	$les_auteurs = lister_objets_lies('auteur', 'article', $id_article, 'auteurs_liens');
+
+	return
+		(in_array($qui['id_auteur'], $les_auteurs)
+		OR ($qui['statut'] == '0minirezo'));
+}
+
+
+/**
+ * Autorisation de deposer des commentaires sur la relecture
+ *
+ * @param object $faire
+ * @param object $type
+ * @param object $id
+ * @param object $qui
+ * @param object $opt
+ * @return
+ */
+function autoriser_relecture_commenter_dist($faire, $type, $id, $qui, $opt) {
+
+	// Conditions :
+	// - l'auteur connecte est un des auteurs ou des relecteurs de l'article
+
+	$from = 'spip_relectures';
+	$where = array("id_relecture=$id");
+	$infos = sql_fetsel('id_article, relecteurs', $from, $where);
+	$les_relecteurs = unserialize($infos['relecteurs']);
+
+	$les_auteurs = lister_objets_lies('auteur', 'article', $infos['id_article'], 'auteurs_liens');
+
+	return
+		(in_array($qui['id_auteur'], $les_auteurs)
+		OR in_array($qui['id_auteur'], $les_relecteurs));
+
+}
+
+
+/**
  * Autorisation d'affichage d'une relecture en cours
  *
  * @param object $faire

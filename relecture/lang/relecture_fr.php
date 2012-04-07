@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 	'bouton_ouvrir_relecture' => 'Ouvrir un cycle de relecture',
+	'bouton_participer_relecture' => 'Participer',
 	'bouton_historique_relectures' => 'Afficher les relectures terminées',
 
 // I
