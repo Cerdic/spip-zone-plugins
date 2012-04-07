@@ -1,0 +1,41 @@
+
+#BOITE_OUVRIR{'','raccourcis'}
+
+  [(#URL_ECRIRE{spiplistes_courrier_edit}
+                |parametre_url{new,oui}
+                |icone_horizontale{<:spiplistes:nouveau_courrier:>, #CHEMIN_IMAGE{courriers_brouillon-24.png},'new'})]
+  [(#URL_ECRIRE{spiplistes_liste_edit}
+                |parametre_url{new,oui}
+                |icone_horizontale{<:spiplistes:nouvelle_liste_de_diffusion:>, #CHEMIN_IMAGE{reply-to-all-24.gif},'new'})]
+[(#SESSION{statut}|=={0minirezo}|oui)
+
+
+  [(#URL_ECRIRE{spiplistes_import_export}
+                |icone_horizontale{<:spiplistes:import_export:>, #CHEMIN_IMAGE{listes_inout.png}})]
+
+ ]
+
+[(#AUTORISER{administrer, spiplistes})
+
+
+  [(#URL_ECRIRE{spiplistes_maintenance}
+                |icone_horizontale{<:titre_admin_tech:>, #CHEMIN_IMAGE{administration-24.gif}})]
+
+ 			[(#REM)// lecture du journal log]
+                        [(#INCLURE{fond=prive/inclure/raccourcis_journal})]
+
+]
+
+  [(#URL_ECRIRE{spiplistes_aide}
+                |icone_horizontale{<:spiplistes:aide_en_ligne:>, #CHEMIN_IMAGE{aide-24.png},'','',onclick="javascript:window.open(this.href,'spip_aide', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;"})]
+
+
+
+#BOITE_FERMER
+
+
+
+
+
+
+
