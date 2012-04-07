@@ -21,3 +21,5 @@ h5.spip {
     border-left-width: 2px;
 	margin-left: 14px;
 }
+
+acronym, abbr { border-bottom: .1em dotted; cursor: help; }
