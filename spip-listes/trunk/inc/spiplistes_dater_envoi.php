@@ -83,17 +83,12 @@ function spiplistes_dater_envoi (
 				)
 			.  "</span>\n"
 			;
-	/* TODO : A RECTIFIER
-		$masque = 
-			afficher_jour($jour, "name='jour' $js", true)
-			. afficher_mois($mois, "name='mois' $js", true)
-			. afficher_annee($annee, "name='annee' $js")
-			. " - "
-			. afficher_heure($heure, "name='heure' $js")
-			. afficher_minute($minute, "name='minute' $js")
-			. "&nbsp;\n"
-			;
-*/
+
+		$masque = 	'<input type="text" class="date" name="jour" id="champ_jour" value="'.$jour.'/'.$mois.'/'.$annee.'" size="10"/>
+					<input type="text" class="heure time" name="heure" id="champ_heure" value="'.$heure.':'.$minute.'" size="5"/>';
+							
+		$masque.= recuperer_fond('formulaires/dateur/inc-dateur');				
+
 		if($enveloppe_formulaire) {
 			$masque = ""
 				. "<!-- dater_envoi form -->\n"

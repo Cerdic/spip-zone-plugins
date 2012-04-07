@@ -41,8 +41,12 @@ function spiplistes_upgrade($nom_meta_base_version, $version_cible){
 
 	$maj = array();
 	$maj['create'] = array(
-			array('maj_tables', array('spip_courriers','spip_listes','spip_auteurs_listes','spip_auteurs_courriers','spip_auteurs_mod_listes')),
-			);
+			array('maj_tables', array('spip_courriers')),
+			array('maj_tables', array('spip_listes')),
+			array('maj_tables', array('spip_auteurs_listes')),
+			array('maj_tables', array('spip_auteurs_courriers')),
+			array('maj_tables', array('spip_auteurs_mod_listes')),
+			array('maj_tables', array('spip_auteurs_elargis')));
 	$maj['1.98']=array(
 			array('upgrade_base',array())
 			);
@@ -349,71 +353,29 @@ function spiplistes_upgrade_base(){
 }
 
 
-
-function spiplistes_vider_tables () {
-
-	include_spip('base/abstract_sql');
-	
-	// ne supprime pas la table spip_auteurs_elargis (utilisee par inscription2, echoppe, ... ? )
-	foreach(array('spip_listes'
-				  , 'spip_courriers'
-				  , 'spip_auteurs_courriers'
-				  , 'spip_auteurs_listes'
-				  , 'spip_auteurs_mod_listes'
-				 ) as $table) {
-		spiplistes_log('DROP TABLE '.$table);
-		sql_drop_table($table, true);
-	}
-		
-	// effacer les metas (prefs, etc.)
-	$sql_spiplistes_metas = array(
-		'spiplistes_version'
-		, 'spiplistes_base_version'
-		, 'spiplistes_charset_envoi'
-		, 'spiplistes_lots'
-		, 'abonnement_config'
-		, _SPIPLISTES_META_PREFERENCES
-		);
-	spiplistes_log("DELETE meta: " . implode(", ", $sql_spiplistes_metas));
-	sql_delete('spip_meta', "nom=".implode(" OR nom=", array_map("sql_quote", $sql_spiplistes_metas)));
-
-	// recharge les metas en cache 
-	spiplistes_ecrire_metas();
-	
-	return(true);
-} // spiplistes_vider_tables ()
-
-
-
-
 function spiplistes_base_creer() {
 
-	//spiplistes_debug_log("spiplistes_base_creer()");
-	global $tables_principales;
-	
-	// demande a SPIP de creer les tables (base/create.php)
-	include_spip('base/create');
-	include_spip('base/abstract_sql');
-	include_spip('base/db_mysql');
-	include_spip('base/spiplistes_tables');
-	creer_base();
-	$descauteurs = sql_showtable('spip_auteurs_elargis',true);
+
 	if(!isset($descauteurs['field']['spip_listes_format'])){
 		// si la table spip_auteurs_elargis existe déjà
 		sql_alter("TABLE spip_auteurs_elargis ADD `spip_listes_format` VARCHAR(8) DEFAULT 'non' NOT NULL");
 	}
-	spiplistes_log("INSTALL: database creation");
-
-	$spiplistes_base_version = spiplistes_real_version_base_get(_SPIPLISTES_PREFIX);
-	ecrire_meta('spiplistes_base_version', $spiplistes_base_version);
-	spiplistes_ecrire_metas();
 	
-	$spiplistes_base_version = $GLOBALS['meta']['spiplistes_base_version'];
-
-	return($spiplistes_base_version);
 }
 
 
+function spiplistes_vider_tables($nom_meta_base_version) {
+
+foreach(array('spip_listes'
+	  , 'spip_courriers'
+	  , 'spip_auteurs_courriers'
+	  , 'spip_auteurs_listes'
+	  , 'spip_auteurs_mod_listes'
+	 ) as $table) {
+	sql_drop_table($table);
+	}
+	effacer_meta($nom_meta_base_version);
+}
 
 
 ?>

@@ -229,8 +229,9 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 			$result .= ""
 				. "</div>\n"
 				. $debut_block("abos_block")
-				. "<form action='".generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur")."' method='post' style='margin-bottom:0;' name='abos_formulaire'>\n"
-				. debut_cadre_formulaire("", true)
+				. "<form action='".generer_url_ecrire("auteur", "id_auteur=$id_auteur")."' method='post' style='margin-bottom:0;' name='abos_formulaire'>\n"
+				//. debut_cadre_formulaire("", true)
+				. boite_ouvrir("",'formulaire')
 				. "\n<p class='verdana2' style='margin-top:0;margin-bottom:0;'>"
 				.	(
 						($abo_format!='html' && $abo_format!='texte')
@@ -269,10 +270,11 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 			$result .= ""
 				. "</ul>\n"
 				. "<!-- fin liste des abonnements -->\n"
-				. fin_cadre_formulaire(true)
+				. boite_fermer()
 				//
 				// selection du format de reception
-				. debut_cadre_formulaire("margin-top:1ex", true)
+				. boite_ouvrir("","format_reception")
+	
 				. ((empty($abo_format) || ($abo_format=="non")) 
 					? "<p>"._T('spiplistes:format_obligatoire_pour_diffusion')."</p>" : "" )
 				. _T('spiplistes:format_de_reception')
@@ -290,18 +292,18 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 				. " <input type='radio' name='abo_format' value='texte' id='format_rcpt_texte' title='"._T('spiplistes:texte')."' $checked />"
 				. " <label for='format_rcpt_texte'>"._T('spiplistes:version_texte')."</label></li>\n"
 				. "</ul>\n"
-				. fin_cadre_formulaire(true)
+				. boite_fermer()
 				;
 			if(spiplistes_format_valide($abo_format) && ($abo_format!="non")) {
 				$result .= ""
-					. debut_cadre_formulaire("margin-top:1ex", true)
+					. boite_ouvrir("",'formulaire')
 					. "<ul class='liste-format-desabo'>\n"
 					. "<li>\n"
 					. spiplistes_form_input_radio('abo_format', 'non', _T('spiplistes:suspendre_abonnements')
 						, false, true, false)
 					. "</li>\n"
 					. "</ul>\n"
-					. fin_cadre_formulaire(true)
+					. boite_fermer()
 					;
 			}
 			$result .= ""

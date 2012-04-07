@@ -1,33 +1,10 @@
 <?php
-/**
- * Description et creation des tables.
- *
- * Appele
- * - pour l'init de la base
- * - par les exec en charge d'interpreter un patron (ex.: spiplistes_courrier_gerer)
- * - par l'espace public
- *
- * Ne pas oublier de faire l'include dans {PLUGIN}_mes_fonctions.php
- * 
- * @package spiplistes
- */
- // $LastChangedRevision$
- // $LastChangedBy$
- // $LastChangedDate$
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('inc/spiplistes_api_globales');
 
-//////////////////////////////////
-// Ici on declare la structure des tables au compilo
-// Inspire de spip-lettres, Pierre Basson
-
-
-function spiplistes_declarer_tables_objects_sql($tables)
+function spiplistes_declarer_tables_objets_sql($tables)
 {
-
-
 
 	$tables['spip_courriers'] = array(
 		'principale' => 'oui',
@@ -93,6 +70,24 @@ function spiplistes_declarer_tables_objects_sql($tables)
 		'date'=>array("date","maj")
 	);
 
+if(!isset($tables['spip_auteurs_elargis'] ))
+{
+$tables['spip_auteurs_elargis'] = array(
+		'principale' => 'non',
+		'field' => array(
+				"id"			=> "bigint(21) NOT NULL",
+				"id_auteur"		=> "bigint(21) NOT NULL"
+				),
+		'key' => array(
+				"PRIMARY KEY"	=> "id",
+				"KEY id_auteur"	=> "id_auteur"
+				),
+		'join' => array(
+				"id_auteur"=>"id_auteur"
+				)
+	);
+}
+$tables['spip_auteurs_elargis']['field']['`spip_listes_format`']="VARCHAR( 8 ) DEFAULT 'non' NOT NULL";
 
 return $tables;
 }
@@ -120,6 +115,9 @@ function spiplistes_declarer_tables_interfaces($interfaces) {
 	$interfaces['tables_jointures']['spip_auteurs'][] = 'courriers';
 	$interfaces['tables_jointures']['spip_auteurs'][] = 'listes';
 	$interfaces['tables_jointures']['spip_auteurs']['id_liste'] = 'auteurs_listes';
+
+
+
 	
 	return $interfaces;
 }

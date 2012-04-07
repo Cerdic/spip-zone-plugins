@@ -238,7 +238,7 @@ function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut
 		if ($row['statut'] == '0minirezo') {
 			$row['restreint'] = sql_count(sql_select(
 				"*"
-				, "spip_auteurs_rubriques"
+				, "spip_auteurs_liens"
 				, "id_auteur=".sql_quote($row['id_auteur'])
 				));
 		}

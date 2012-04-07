@@ -304,7 +304,7 @@ function get_spiplistes_items(){
 $spiplistes_items = array(
 	// les courriers
 	_SPIPLISTES_COURRIER_STATUT_REDAC => array(
-		'puce' => 'puce-blanche.gif'
+		'puce' => chemin_image('puce-blanche.gif')
 		, 'icon' => chemin_image('courriers_brouillon-24.png')
 		, 'icon_color' => '9dba00'
 		, 'alt' => _T('spiplistes:message_en_cours')
@@ -313,7 +313,7 @@ $spiplistes_items = array(
 		, 'desc' => null // description, sous-titre
 	)
 	, _SPIPLISTES_COURRIER_STATUT_READY => array(
-		'puce' => 'puce-orange.gif'
+		'puce' => chemin_image('puce-orange.gif')
 		, 'icon' => chemin_image('courriers_encour-24.png')
 		, 'icon_color' => '9dba00'
 		, 'alt' => _T('spiplistes:message_redac')
@@ -322,7 +322,7 @@ $spiplistes_items = array(
 		, 'desc' => null
 		)
 	, _SPIPLISTES_COURRIER_STATUT_ENCOURS => array(
-		'puce' => 'puce_verte_encour.gif'
+		'puce' => chemin_image('puce_verte_encour.gif')
 		, 'icon' => chemin_image('courriers_encour-24.png')
                 , 'icon_color' => '9dba00'
 		, 'alt' => _T('spiplistes:message_en_cours')
@@ -331,7 +331,7 @@ $spiplistes_items = array(
 		, 'desc' => null
 		)
 	, _SPIPLISTES_COURRIER_STATUT_AUTO => array(
-		'puce' => 'puce-grise.gif'
+		'puce' => chemin_image('puce-grise.gif')
 		, 'icon' => chemin_image('courriers_publie-24.png')
 		, 'icon_color' => '9dba00'
 		, 'alt' => _T('spiplistes:message_arch')
@@ -340,7 +340,7 @@ $spiplistes_items = array(
 		, 'desc' => null
 		)
 	, _SPIPLISTES_COURRIER_STATUT_PUBLIE => array(
-		'puce' => 'puce-grise.gif'
+		'puce' => chemin_image('puce-grise.gif')
 		, 'icon' => chemin_image('courriers_publie-24.png')
 		, 'icon_color' => '9dba00'
 		, 'alt' => _T('spiplistes:message_arch')
@@ -350,7 +350,7 @@ $spiplistes_items = array(
 		)
 	, _SPIPLISTES_COURRIER_STATUT_STOPE => array(
 		// courrier stope en cours d'envoi
-		'puce' => 'puce-stop.png'
+		'puce' => chemin_image('puce-stop.png')
 		, 'icon' => chemin_image('courriers_stop-24.png')
 		, 'icon_color' => 'f00'
 		, 'alt' => _T('spiplistes:envoi_abandonne')
@@ -360,7 +360,7 @@ $spiplistes_items = array(
 		)
 	, _SPIPLISTES_COURRIER_STATUT_VIDE => array(
 		// courrier sans contenu
-		'puce' => 'puce-rouge.gif'
+		'puce' => chemin_image('puce-rouge.gif')
 		, 'icon' => chemin_image('courriers_vide-24.png')
 		, 'icon_color' => '000'
 		, 'alt' => _T('spiplistes:envoi_abandonne')
@@ -370,7 +370,7 @@ $spiplistes_items = array(
 		)
 	, _SPIPLISTES_COURRIER_STATUT_IGNORE => array(
 		// courrier sans abonne
-		'puce' => 'puce-inconnu.gif'
+		'puce' => chemin_image('puce-inconnu.gif')
 		, 'icon' => chemin_image('courriers_ignore-24.png')
 		, 'icon_color' => '000'
 		, 'alt' => _T('spiplistes:envoi_abandonne')
@@ -390,7 +390,7 @@ $spiplistes_items = array(
 		)
 	// les listes
 	, _SPIPLISTES_LIST_PRIVATE  => array(
-		'puce' => 'puce-rouge.gif'
+		'puce' => chemin_image('puce-rouge.gif')
 		, 'icon' => chemin_image('courriers_listes-24.png')
 		, 'icon_color' => 'ff0'
 		, 'alt' => _T('spiplistes:liste_prive')
@@ -399,7 +399,7 @@ $spiplistes_items = array(
 		, 'desc' => _T('spiplistes:listes_diffusion_privees_desc')
 		)
 	, _SPIPLISTES_LIST_PUBLIC => array(
-		'puce' => 'puce-verte.gif'
+		'puce' => chemin_image('puce-verte.gif')
 		, 'icon' => chemin_image('courriers_listes-24.png')
 		, 'icon_color' => '9dba00'
 		, 'alt' => _T('spiplistes:liste_publique')
@@ -408,7 +408,7 @@ $spiplistes_items = array(
 		, 'desc' => _T('spiplistes:listes_diffusion_publiques_desc')
 		)
 	, _SPIPLISTES_LIST_PUB_WEEKLY => array(
-		'puce' => 'puce-bleue.gif'
+		'puce' => chemin_image('puce-bleue.gif')
 		, 'icon' => chemin_image('courriers_listes-24.png')
 		, 'icon_color' => '00f'
 		, 'alt' => _T('spiplistes:liste_hebdo')
@@ -417,7 +417,7 @@ $spiplistes_items = array(
 		, 'desc' => _T('spiplistes:listes_diffusion_publiques_desc')
 		)
 	, _SPIPLISTES_LIST_PUB_MONTHLY => array(
-		'puce' => 'puce-bleue.gif'
+		'puce' => chemin_image('puce-bleue.gif')
 		, 'icon' => chemin_image('courriers_listes-24.png')
 		, 'icon_color' => '00f'
 		, 'alt' => _T('spiplistes:liste_mensuelle')
@@ -426,7 +426,7 @@ $spiplistes_items = array(
 		, 'desc' => _T('spiplistes:listes_diffusion_publiques_desc')
 		)
 	, _SPIPLISTES_LIST_PRIV_YEARLY => array(
-		'puce' => 'puce-rouge.gif'
+		'puce' => chemin_image('puce-rouge.gif')
 		, 'icon' => chemin_image('courriers_listes-24.png')
 		, 'icon_color' => 'ff0'
 		, 'alt' => _T('spiplistes:liste_annuelle')
@@ -435,7 +435,7 @@ $spiplistes_items = array(
 		, 'desc' => _T('spiplistes:listes_diffusion_privees_desc')
 		)
 	, _SPIPLISTES_LIST_PUB_YEARLY => array(
-		'puce' => 'puce-bleue.gif'
+		'puce' => chemin_image('puce-bleue.gif')
 		, 'icon' => chemin_image('courriers_listes-24.png')
 		, 'icon_color' => '00f'
 		, 'alt' => _T('spiplistes:liste_annuelle')
@@ -444,7 +444,7 @@ $spiplistes_items = array(
 		, 'desc' => _T('spiplistes:listes_diffusion_publiques_desc')
 		)
 	, _SPIPLISTES_TRASH_LIST => array(
-		'puce' => 'puce-poubelle.gif'
+		'puce' => chemin_image('puce-poubelle.gif')
 		, 'icon' => chemin_image('courriers_listes-24.png')
 		, 'icon_color' => '000'
 		, 'alt' => _T('spiplistes:listes_suspendues')
@@ -454,7 +454,7 @@ $spiplistes_items = array(
 		)
 	// l'inconnu ???
 	, 'default' => array(
-		'puce' => 'puce-inconnu.gif'
+		'puce' => chemin_image('puce-inconnu.gif')
 		, 'icon' => chemin_image('courriers_ignore-24.png')
 		, 'icon_color' => '9cc'
 		, 'alt' => _T('spiplistes:inconnu')
