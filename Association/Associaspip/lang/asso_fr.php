@@ -797,7 +797,7 @@ Commentaire: @commentaire@
 
 # Dons
 	# Dons : messages
-	'dons_aide_contrepartie' => "Les dons avec contrepartie ne donnent pas lieu &agrave; de r&eacute;duction fiscale..."
+	'dons_aide_contrepartie' => "Les dons avec contrepartie ne donnent pas lieu &agrave; de r&eacute;duction fiscale...",
 
 // chaines collectee automatiquement
 
