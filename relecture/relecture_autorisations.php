@@ -31,7 +31,7 @@ function autoriser_article_ouvrirrelecture_dist($faire, $type, $id, $qui, $opt) 
 	$statut = sql_getfetsel('statut', $from, $where);
 
 	$from = 'spip_relectures';
-	$where = array("id_article=$id", "etat=" . sql_quote('ouverte'));
+	$where = array("id_article=$id", "statut=" . sql_quote('ouverte'));
 	$nb_relecture_ouverte = sql_countsel($from, $where);
 
 	return

@@ -1,5 +1,5 @@
 [(#REM) <!-- Bouton d'affichage de la page des relectures de l'article en cours --> ]
-<BOUCLE_relectures_fermees(RELECTURES){id_article}{etat=fermee}{0,1}>
+<BOUCLE_relectures_fermees(RELECTURES){id_article}{statut=fermee}{0,1}>
 [(#AUTORISER{voirrrelectures, article, #ID_ARTICLE})
 	[(#URL_ECRIRE{relectures}
 		|parametre_url{id_article, #ID_ARTICLE}

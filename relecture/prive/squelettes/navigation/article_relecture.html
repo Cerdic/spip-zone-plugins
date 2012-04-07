@@ -9,16 +9,22 @@
 ]
 
 [(#REM) <!-- Information sur la relecture ouverte --> ]
-<BOUCLE_relecture_ouverte(RELECTURES){id_article}{etat=ouverte}>
+<BOUCLE_relecture_ouverte(RELECTURES){id_article}{statut=ouverte}>
 [(#AUTORISER{voir, relecture, #ID_RELECTURE})
 	[(#SET{titre, <:relecture:titre_info_relecture_article:>})]
-	#BOITE_OUVRIR{#GET{titre}, note}
-		<div class="liste relecture">
-			<ul class="liste-items">
-				<li>[(#PERIODE_FIN|affdate_court)]</li>
-				<li>[(#REV_OUVERTURE)]</li>
-			</ul>
-		</div>
+	#BOITE_OUVRIR{#GET{titre}, simple, titrem}
+		[(#SET{date_ouverture, [(#PERIODE_DEBUT|affdate_court)]})]
+		[(#SET{rev_ouverture, #REV_OUVERTURE})]
+		[(#SET{date_fin_periode, [(#PERIODE_FIN|affdate_court)]})]
+		<p>
+			<:relecture:info_relecture_ouverture{date=#GET{date_ouverture}, revision=#GET{rev_ouverture}}:>
+		</p>
+		<p>
+			[(#PERIODE_FIN|<{#DATE}|non)<:relecture:info_relecture_periode_ouverte{date=#GET{date_fin_periode}}:>]
+			[(#PERIODE_FIN|<{#DATE}|oui)<:relecture:info_relecture_periode_fermee{date=#GET{date_fin_periode}}:>]
+		</p>
+		[<p>(#ID_RELECTURE|relecture_informer_commentaires)</p>]
+	#BOITE_PIED
 	#BOITE_FERMER
 ]
 </BOUCLE_relecture_ouverte>

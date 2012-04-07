@@ -11,10 +11,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 	'bouton_ouvrir_relecture' => 'Ouvrir un cycle de relecture',
-	'bouton_historique_relectures' => 'Afficher les relectures clôturées',
+	'bouton_historique_relectures' => 'Afficher les relectures terminées',
+
+// I
+	'info_relecture_ouverture' => 'Ouvert le @date@ sur la révision @revision@ de l\'article',
+	'info_relecture_periode_ouverte' => 'Commentaire autorisé jusqu\'au @date@',
+	'info_relecture_periode_fermee' => 'L\'ajout de commentaire n\'est plus possible depuis le @date@',
+	'info_aucun_commentaire' => 'Aucun commentaire déposé',
+	'info_1_commentaire' => '1 commentaire déposé',
+	'info_nb_commentaires' => '@nb@ commentaires déposés',
+	'info_aucun_commentaire_ferme' => 'Aucun commentaire fermé',
+	'info_1_commentaire_ferme' => '1 commentaire fermé',
+	'info_nb_commentaires_fermes' => '@nb@ commentaires fermés',
+	'info_1_relecture' => '1 relecture',
+	'info_nb_relectures' => '@nb@ relectures',
+	'info_aucun_relecture' => 'aucune relecture',
 
 // T
 	'titre_info_relecture_article' => 'Relecture en cours',
+	'titre_relecture' => 'Relecture',
+	'titre_relectures' => 'Relectures',
 
 );
 ?>

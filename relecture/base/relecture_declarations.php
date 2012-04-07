@@ -23,7 +23,7 @@ function relecture_declarer_tables_objets_sql($tables) {
 			"article_chapo"	=> "mediumtext DEFAULT '' NOT NULL",
 			"article_texte"	=> "longtext DEFAULT '' NOT NULL",
 			"article_ps"	=> "mediumtext DEFAULT '' NOT NULL",
-			"etat"			=> "varchar(10) DEFAULT '' NOT NULL",
+			"statut"		=> "varchar(10) DEFAULT '' NOT NULL",
 			"date_cloture"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 			"rev_cloture"	=> "bigint(21) NOT NULL",
 			"maj"			=> "timestamp"),
@@ -33,7 +33,7 @@ function relecture_declarer_tables_objets_sql($tables) {
 		'principale'			=> 'oui',
 
 		// Titre, date et gestion du statut
-		'titre'					=> "nom_archive AS titre, '' AS lang",
+		'titre'					=> "id_relecture AS titre, '' AS lang",
 		
 		// Edition, affichage et recherche
 		'page'					=> 'relecture',
@@ -55,6 +55,53 @@ function relecture_declarer_tables_objets_sql($tables) {
 		'info_aucun_objet'		=> 'relecture:info_aucun_relecture',
 		'info_1_objet' 			=> 'relecture:info_1_relecture',
 		'info_nb_objets' 		=> 'relecture:info_nb_relectures',
+		'texte_logo_objet' 		=> '',
+	);
+
+	$tables['spip_commentaires'] = array(
+		// Base de donnees
+		'table_objet'			=> 'commentaires',
+		'type'					=> 'commentaire',
+		'field'					=> array(
+			"id_commentaire"=> "bigint(21) NOT NULL",
+			"id_relecture"	=> "bigint(21) NOT NULL",
+			"id_emetteur"	=> "bigint(21) NOT NULL",
+			"repere"		=> "varchar(32) DEFAULT '' NOT NULL",
+			"texte"			=> "text DEFAULT '' NOT NULL",
+			"reponse"		=> "text DEFAULT '' NOT NULL",
+			"date_crea" 	=> "bigint(21) NOT NULL",
+			"date_modif" 	=> "bigint(21) NOT NULL",
+			"date_cloture"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+			"statut"		=> "varchar(10) DEFAULT '' NOT NULL",
+			"maj"			=> "timestamp"),
+		'key'					=> array(
+			"PRIMARY KEY"	=> "id_commentaire",
+			"KEY id_article"	=> "id_relecture"),
+		'principale'			=> 'oui',
+
+		// Titre, date et gestion du statut
+		'titre'					=> "id_commentaire AS titre, '' AS lang",
+
+		// Edition, affichage et recherche
+		'page'					=> '',
+		'url_voir'				=> '',
+		'editable'				=> 'non',
+		'champs_editables'		=> array(),
+		'rechercher_champs'		=> array(),
+		'rechercher_jointures'	=> array(),
+		'icone_objet'			=> '',
+
+		// Textes standard
+		'texte_retour' 			=> '',
+		'texte_modifier' 		=> '',
+		'texte_creer' 			=> '',
+		'texte_creer_associer' 	=> '',
+		'texte_signale_edition' => '',
+		'texte_objet' 			=> 'relecture:titre_commentaire',
+		'texte_objets' 			=> 'relecture:titre_commentaires',
+		'info_aucun_objet'		=> 'relecture:info_aucun_commentaire',
+		'info_1_objet' 			=> 'relecture:info_1_commentaire',
+		'info_nb_objets' 		=> 'relecture:info_nb_commentaires',
 		'texte_logo_objet' 		=> '',
 	);
 
