@@ -1,0 +1,20 @@
+<BOUCLE_infos_relecture(RELECTURES){id_relecture=#ENV{id}}{statut==.*}>
+<div class='infos'>
+	[(#REM) <!-- La reference de la relecture --> ]
+	<div class='numero'><:relecture:info_numero_relecture:><p>#ID_RELECTURE</p></div>
+
+	[(#REM) <!-- Formulaire de changement du statut --> ]
+	#FORMULAIRE_INSTITUER_OBJET{relecture, #ID_RELECTURE}
+
+	[(#REM) <!-- Statistiques sur les commentaires --> ]
+	#SET{compteurs, #ID_RELECTURE|relecture_compter_commentaires}
+	<div class="liste">
+		<p><strong><:relecture:titre_commentaires:> : </strong></p>
+		<ul>
+			[<li><:relecture:label_commentaires_ouverts:> : (#GET{compteurs}|table_valeur{ouvert})</li>]
+			[<li><:relecture:label_commentaires_acceptes:> : (#GET{compteurs}|table_valeur{accepte})</li>]
+			[<li><:relecture:label_commentaires_refuses:> : (#GET{compteurs}|table_valeur{refuse})</li>]
+		</ul>
+	</div>
+</div>
+</BOUCLE_infos_relecture>

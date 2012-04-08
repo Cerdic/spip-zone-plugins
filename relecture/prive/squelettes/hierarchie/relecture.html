@@ -1,0 +1,12 @@
+[(#REM) <!-- hierarchie specifique pour la relecture :
+	- Lien parent vers la page de l'article associe
+	- Titre de la relecture compose
+--> ]
+
+<BOUCLE_relecture(RELECTURES) {id_relecture}>
+	<a href="[(#URL_ECRIRE{article, id_article=#ID_ARTICLE})]">
+		#INFO_TITRE{article, #ID_ARTICLE}
+	</a>
+	&gt;
+	<strong class="on"><:relecture:titre_relecture:> ##ID_RELECTURE</strong>
+</BOUCLE_relecture>

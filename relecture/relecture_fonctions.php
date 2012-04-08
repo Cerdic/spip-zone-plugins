@@ -2,7 +2,7 @@
 
 /**
  * Formater le message informatif concernant les nombres de commentaires déposés et
- * pris en compte pour une relecture donnee
+ * pris en compte pour une relecture donnee.
  *
  * @param int $id
  * @return string
@@ -35,6 +35,32 @@ function relecture_informer_commentaires($id) {
 	}
 
     return $texte;
+}
+
+/**
+ * Renvoyer les compteurs de commentaires par statut pour une relecture donnee.
+ * Le tableau de sortie est indexe par les valeurs de statut ouvert, accepte, refuse
+ *
+ * @param int $id
+ * @return array
+ */
+function relecture_compter_commentaires($id) {
+	$compteurs = array('ouvert' => 0, 'accepte' => 0, 'refuse' => 0,);
+
+	if (intval($id)>0) {
+		$select = array('statut', 'count(*) AS compteur');
+		$from = 'spip_commentaires';
+		$where = array("id_relecture=$id");
+		$group_by = 'statut';
+		if ($lignes = sql_select($select, $from, $where, $group_by)) {
+		    // Classer et compter par statut
+		    while ($ligne = sql_fetch($lignes)) {
+				$compteurs[$ligne['statut']] = $ligne['compteur'];
+		    }
+		}
+	}
+
+    return $compteurs;
 }
 
 ?>
