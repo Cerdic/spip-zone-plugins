@@ -34,19 +34,34 @@ function relecture_declarer_tables_objets_sql($tables) {
 
 		// Titre, date et gestion du statut
 		'titre'					=> "id_relecture AS titre, '' AS lang",
-		
+		'texte_changer_statut' => 'relecture:texte_instituer_relecture',
+		'aide_changer_statut' => '',
+		'statut_titres' => array(
+			'ouverte' => 'relecture:titre_relecture_ouverte',
+			'fermee' => 'relecture:titre_relecture_fermee'
+		),
+		'statut_textes_instituer' => 	array(
+			'ouverte' => 'relecture:texte_relecture_ouverte',
+			'fermee' => 'relecture:texte_relecture_fermee'
+		),
+		'statut_images' => array(
+			'ouverte'=>'puce-preparer-8.png',
+			'fermee'=>'puce-publier-8.png',
+		),
+
 		// Edition, affichage et recherche
 		'page'					=> 'relecture',
-		'url_voir'				=> '',
-		'editable'				=> 'non',
-		'champs_editables'		=> array(),
+		'url_voir'				=> 'relecture',
+		'url_edit'				=> 'relecture_edit',
+		'editable'				=> 'oui',
+		'champs_editables'		=> array('description'),
 		'rechercher_champs'		=> array(),
 		'rechercher_jointures'	=> array(),
 		'icone_objet'			=> 'relecture',
 		
 		// Textes standard
-		'texte_retour' 			=> '',
-		'texte_modifier' 		=> '',
+		'texte_retour' 			=> 'icone_retour',
+		'texte_modifier' 		=> 'relecture:bouton_modifier_relecture',
 		'texte_creer' 			=> '',
 		'texte_creer_associer' 	=> '',
 		'texte_signale_edition' => '',

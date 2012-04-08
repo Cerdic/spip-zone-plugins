@@ -11,6 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 	'bouton_ouvrir_relecture' => 'Ouvrir un cycle de relecture',
+	'bouton_modifier_relecture' => 'Modifier les paramètres de la relecture',
+	'bouton_participer_relecture' => 'Participer',
 	'bouton_participer_relecture' => 'Participer',
 	'bouton_historique_relectures' => 'Afficher les relectures terminées',
 
@@ -29,6 +31,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_relecture' => 'aucune relecture',
 
 // T
+	'texte_instituer_relecture' => 'Statut :',
+	'texte_relecture_ouverte' => 'Ouverte',
+	'texte_relecture_fermee' => 'Fermée',
+	'titre_relecture_ouverte' => 'x',
+	'titre_relecture_fermee' => 'y',
 	'titre_info_relecture_article' => 'Relecture en cours',
 	'titre_relecture' => 'Relecture',
 	'titre_relectures' => 'Relectures',
