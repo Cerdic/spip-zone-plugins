@@ -42,7 +42,8 @@ function autoriser_article_ouvrirrelecture_dist($faire, $type, $id, $qui, $opt) 
 
 
 /**
- * Autorisation de consultations des relectures cloturees d'un article
+ * Autorisation de consultation des relectures cloturees d'un article ou les informations
+ * sur la relecture en cours
  *
  * @param object $faire
  * @param object $type
@@ -74,16 +75,21 @@ function autoriser_relecture_modifier_dist($faire, $type, $id, $qui, $opt) {
 
 	// Conditions :
 	// - l'auteur connecte est un des auteurs de l'article
-	// - ou un admin complet ou restreint à la rubrique d'appartenance de l'article
+	// - ou un admin complet ou restreint à la rubrique d'appartenance de l'article (besoin de maintenance)
 
 	$from = 'spip_relectures';
 	$where = array("id_relecture=$id");
 	$id_article = sql_getfetsel('id_article', $from, $where);
 	$les_auteurs = lister_objets_lies('auteur', 'article', $id_article, 'auteurs_liens');
 
+	$from = 'spip_articles';
+	$where = array("id_article=$id_article");
+	$id_rubrique = sql_getfetsel('id_rubrique', $from, $where);
+
 	return
 		(in_array($qui['id_auteur'], $les_auteurs)
-		OR ($qui['statut'] == '0minirezo'));
+		OR (($qui['statut'] == '0minirezo')
+			AND (!$qui['restreint'] OR !$id_rubrique OR in_array($id_rubrique, $qui['restreint']))));
 }
 
 
@@ -101,46 +107,19 @@ function autoriser_relecture_commenter_dist($faire, $type, $id, $qui, $opt) {
 
 	// Conditions :
 	// - l'auteur connecte est un des auteurs ou des relecteurs de l'article
+	// - la periode de relecture ne doit pas etre echue
 
 	$from = 'spip_relectures';
 	$where = array("id_relecture=$id");
-	$infos = sql_fetsel('id_article, relecteurs', $from, $where);
+	$infos = sql_fetsel('id_article, relecteurs, periode_fin', $from, $where);
 	$les_relecteurs = unserialize($infos['relecteurs']);
 
 	$les_auteurs = lister_objets_lies('auteur', 'article', $infos['id_article'], 'auteurs_liens');
 
 	return
-		(in_array($qui['id_auteur'], $les_auteurs)
-		OR in_array($qui['id_auteur'], $les_relecteurs));
-
-}
-
-
-/**
- * Autorisation d'affichage d'une relecture en cours
- *
- * @param object $faire
- * @param object $type
- * @param object $id
- * @param object $qui
- * @param object $opt
- * @return
- */
-function autoriser_relecture_voir_dist($faire, $type, $id, $qui, $opt) {
-
-	// Conditions :
-	// - l'auteur connecte est un des auteurs ou des relecteurs de l'article
-
-	$from = 'spip_relectures';
-	$where = array("id_relecture=$id");
-	$infos = sql_fetsel('id_article, relecteurs', $from, $where);
-	$les_relecteurs = unserialize($infos['relecteurs']);
-
-	$les_auteurs = lister_objets_lies('auteur', 'article', $infos['id_article'], 'auteurs_liens');
-
-	return
-		(in_array($qui['id_auteur'], $les_auteurs)
-		OR in_array($qui['id_auteur'], $les_relecteurs));
+		(strtotime($infos['periode_fin'])>time()
+		AND (in_array($qui['id_auteur'], $les_auteurs)
+			OR in_array($qui['id_auteur'], $les_relecteurs)));
 
 }
 

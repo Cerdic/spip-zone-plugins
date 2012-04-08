@@ -10,7 +10,7 @@
 
 [(#REM) <!-- Information sur la relecture ouverte --> ]
 <BOUCLE_relecture_ouverte(RELECTURES){id_article}{statut=ouverte}>
-[(#AUTORISER{voir, relecture, #ID_RELECTURE})
+[(#AUTORISER{voirrelectures, article, #ID_ARTICLE})
 	[(#SET{titre, <:relecture:titre_info_relecture_article:>})]
 	#BOITE_OUVRIR{#GET{titre}, simple, titrem}
 		[(#SET{date_ouverture, [(#PERIODE_DEBUT|affdate_court)]})]
@@ -24,11 +24,14 @@
 			[(#PERIODE_FIN|<{#DATE}|oui)<:relecture:info_relecture_periode_fermee{date=#GET{date_fin_periode}}:>]
 		</p>
 		[<p>(#ID_RELECTURE|relecture_informer_commentaires)</p>]
-	#BOITE_PIED
+
+	#SET{pied, #BOITE_PIED}
 	[(#AUTORISER{modifier, relecture, #ID_RELECTURE})
+		[(#GET{pied}|unique)]
 		[(#BOUTON_ACTION{<:bouton_modifier:>, #URL_ECRIRE{relecture_edit, id_relecture=#ID_RELECTURE}, '', '', ''})]
 	]
 	[(#AUTORISER{commenter, relecture, #ID_RELECTURE})
+		[(#GET{pied}|unique)]
 		[(#BOUTON_ACTION{<:relecture:bouton_participer_relecture:>, #URL_ECRIRE{relecture_comment, id_relecture=#ID_RELECTURE}, '', '', ''})]
 	]
 	#BOITE_FERMER
