@@ -71,7 +71,7 @@ function formulaires_aeres_ajouter_zitem_traiter_dist($auteur){
 			$ticket['zitem_json'] = $zitem_json;
 		}
 		
-		include_spip('inc/base');
+		include_spip('base/abstract_sql');
 		if ($id_ticket = sql_insertq('spip_tickets',$ticket))
 			$ret = array('message_ok'=>'Votre demande d\'ajout sera intégrée dans la base de données prochainement.');
 		else
@@ -97,7 +97,7 @@ function formulaires_aeres_ajouter_zitem_traiter_dist($auteur){
 			'date' => "NOW()"
 		);
 		
-		include_spip('inc/base');
+		include_spip('base/abstract_sql');
 		if ($id_ticket_forum = sql_insertq('spip_tickets_forum',$commentaire))
 			$ret = array('message_ok'=>'Votre commentaire a été ajouté.');
 		else

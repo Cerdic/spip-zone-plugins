@@ -1,7 +1,8 @@
 <BOUCLE_ajouts(TICKETS){auteur?}{statut=ouvert}{!auteur=''}>
 <div class="zotspip_item aeres_verifier_item">
-	[<div class="aeres_date">le (#DATE|affdate) à [(#DATE|heures)]h[(#DATE|minutes)]</div>]
+	[<div class="aeres_date">le (#DATE|affdate) à [(#DATE|heures)]h[(#DATE|minutes)] (ticket #ID_TICKET)</div>]
 	<div class="aeres_texte">#TEXTE</div>
+	[(#ZITEM_JSON|zotspip_calculer_zitem_details)]
 	[<div class="aeres_exemple"><strong>Voir :</strong> <a href="#EXEMPLE">(#EXEMPLE|couper{80})</a></div>]
 	<BOUCLE_doc_ticket(DOCUMENTS){id_ticket}{tout}><div class="aeres_doc"><strong>Document joint :</strong> <a href="#URL_DOCUMENT">[(#FICHIER|basename)]</a> (#TYPE_DOCUMENT [(#TAILLE|taille_en_octets)])</div></BOUCLE_doc_ticket>
 	

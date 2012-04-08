@@ -37,7 +37,7 @@ function formulaires_aeres_verifier_zitem_verifier_dist($id_zitem,$auteur){
 function formulaires_aeres_verifier_zitem_traiter_dist($id_zitem,$auteur){
 	if (_request('ajout')=='correction') {
 		$ticket = array(
-			'titre' => '[AERES] Corriger référence '.$id_zitem,
+			'titre' => '[AERES] Corriger référence '.$id_zitem.(($auteur!='') ? (' pour '.$auteur) : ''),
 			'statut' => 'ouvert',
 			'type' => 2,
 			'severite' => 3,
@@ -47,7 +47,7 @@ function formulaires_aeres_verifier_zitem_traiter_dist($id_zitem,$auteur){
 			'date' => "NOW()"
 		);
 		
-		include_spip('inc/base');
+		include_spip('base/abstract_sql');
 		if ($id_ticket = sql_insertq('spip_tickets',$ticket))
 			$ret = array('message_ok'=>'Votre demande de correction sera intégrée dans la base de données prochainement.');
 		else
@@ -72,7 +72,7 @@ function formulaires_aeres_verifier_zitem_traiter_dist($id_zitem,$auteur){
 			'date' => "NOW()"
 		);
 		
-		include_spip('inc/base');
+		include_spip('base/abstract_sql');
 		if ($id_ticket_forum = sql_insertq('spip_tickets_forum',$commentaire))
 			$ret = array('message_ok'=>'Votre commentaire a été ajouté.');
 		else

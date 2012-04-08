@@ -8,7 +8,7 @@
 
 <h2 class="h2">Bibliographie par auteur</h2>
 <div class="formulaire_spip">
-	<form method="gest" action="spip.php"><div>
+	<form method="get" action="spip.php"><div>
 	<ul>
 		<li>
 			<label>Action</label>
@@ -34,7 +34,24 @@
 		</li>
 	</ul>
 	<p class='boutons'>
-		<input type='submit' class='submit' value='Afficher' />
+		<input type='submit' class='submit' value='Vérifier / Afficher' />
+	</p>
+	</form></div>
+</div>
+
+<h2 class="h2">Nouvel auteur</h2>
+<div class="formulaire_spip">
+	<form method="get" action="spip.php"><div>
+	<input type="hidden" name="page" value="biblioaeres_verif" />
+	<div class="explication">Pour indiquer les références d'un auteur non encore présent dans la base de données, veuillez saisir son nom ci-dessous.</div>
+	<ul>
+		<li>
+			<label>Nom de l'auteur (sous la forme <em>Nom, Prénom</em>)</label>
+			<input type="text" name="auteur" class="text" value="" />
+		</li>
+	</ul>
+	<p class='boutons'>
+		<input type='submit' class='submit' value='Renseigner les publications de cet auteur' />
 	</p>
 	</form></div>
 </div>

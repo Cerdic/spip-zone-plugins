@@ -27,6 +27,9 @@
 		<div class="aeres_info_erreur">Le nom de la conférence n'est pas renseigné</div>]
 	[(#TYPE|=={report}|et{#TYPE_DOC|non}|oui)
 		<div class="aeres_info_erreur">Le type de rapport n'est pas renseigné.</div>]
+	<BOUCLE_test_chapitre(CONDITION){si #TYPE|=={bookSection}}>
+		<BOUCLE_nb_aut_livre(ZCREATORS){id_zitem}{role IN editor,bookAuthor} />[(#TOTAL_BOUCLE|non)<div class="aeres_info_erreur">Les auteurs/éditeurs de l'ouvrage ne sont pas renseignés.</div>]<//B_nb_aut_livre>
+	</BOUCLE_test_chapitre>
 	
 	<div class="afficher_details" id="afficher_details_#ID_ZITEM" style="display:none;"><a href="javascript:void(0);"  onClick="$('#details_#ID_ZITEM').toggle(400);"><:zotspip:afficher_masquer_details:></a></div>
 	<div class="details" id="details_#ID_ZITEM">
@@ -53,7 +56,7 @@
 	<div id="correction_#ID_ZITEM">
 	
 	<div class="aeres_comment">
-		[<div class="aeres_date">le (#DATE|affdate) à [(#DATE|heures)]h[(#DATE|minutes)]</div>]
+		[<div class="aeres_date">le (#DATE|affdate) à [(#DATE|heures)]h[(#DATE|minutes)]  (ticket #ID_TICKET)</div>]
 		<div class="aeres_texte">#TEXTE</div>
 		[<div class="aeres_exemple"><strong>Voir :</strong> <a href="#EXEMPLE">(#EXEMPLE|couper{80})</a></div>]
 		<BOUCLE_doc_ticket(DOCUMENTS){id_ticket}{tout}><div class="aeres_doc"><strong>Document joint :</strong> <a href="#URL_DOCUMENT">[(#FICHIER|basename)]</a> (#TYPE_DOCUMENT [(#TAILLE|taille_en_octets)])</div></BOUCLE_doc_ticket>
