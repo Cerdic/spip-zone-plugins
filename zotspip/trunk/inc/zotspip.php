@@ -429,7 +429,9 @@ function zotero_poster($params_url,$datas,$methode='POST') {
 	$headers = recuperer_entetes($f, '');
 	fclose($f);
 	$result = @file_get_contents($url);
-	spip_log("$methode sur $url - HTTP ".implode(',',$headers),'zotspip');
+	
+	$ret_http =  (is_array($headers)) ? implode(',',$headers) : $headers;
+	spip_log("$methode sur $url - HTTP $ret_http",'zotspip');
 	
 	return array(
 		'headers' => $headers,

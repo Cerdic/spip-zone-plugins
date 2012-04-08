@@ -135,6 +135,7 @@ function balise_ZITEM_DETAILS_dist($p) {
 function zotspip_calculer_zitem_details($json) {
 	$ret = '<table class="zitem_details spip">';
 	$data = json_decode($json,true);
+	if (!is_array($data)) return '';
 	foreach ($data as $champ => $valeur) {
 		if ($champ=='itemType')
 			$ret .= "<tr><td class=\"champ\"><strong>".zotspip_traduire_champ($champ)."</strong></td><td class=\"valeur\">".zotspip_traduire_type($valeur)."</td></tr>";

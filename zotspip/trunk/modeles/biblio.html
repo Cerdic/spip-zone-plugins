@@ -11,7 +11,7 @@
 }})]
 <B_biblio>
 <ul class="spip">
-<BOUCLE_biblio(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{editeur?}{collection?}{type_doc?}{tag?}{id_zcollection?}{zotsip_depuis}{0,#ENV{max,100000}}{tri #ENV{par,auteurs},#GET{defaut_tri}}>
+<BOUCLE_biblio(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{editeur?}{collection?}{type_doc?}{tag?}{id_zcollection?}{recherche?}{zotsip_depuis}{0,#ENV{max,100000}}{tri #ENV{par,auteurs},#GET{defaut_tri}}>
 #INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
 </BOUCLE_biblio>
 </ul>
