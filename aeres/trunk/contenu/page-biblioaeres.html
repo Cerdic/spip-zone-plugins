@@ -32,6 +32,11 @@
 			</select>
 			<div class="explication">Il est possible qu'un même auteur apparaisse deux ou plusieurs fois. Cela est généralement dû à des erreurs d'orthographe, d'accents ou encore de prénom incomplet. Si tel est le cas, veuillez le signaler comme correction à effectuer.[<br />Pour toute question, envoyez un email à <a href="mailto:#CONFIG{aeres/contact}">(#CONFIG{aeres/contact})</a>.]</div>
 		</li>
+		<li>
+			<label>Personnaliser la période</label>
+			<input type="text" name="debut" id="debut" class="text" value="#ENV{debut,#CONFIG{aeres/debut}}" style="width:45%;"/>
+			<input type="text" name="fin" id="fin" class="text" value="#ENV{fin,#CONFIG{aeres/fin}}" style="width:45%;"/>
+		</li>
 	</ul>
 	<p class='boutons'>
 		<input type='submit' class='submit' value='Vérifier / Afficher' />

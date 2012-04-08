@@ -52,7 +52,7 @@
 	<BOUCLE_ticket_ouvert(TICKETS){id_zitem}{statut=ouvert}>
 	<div class="formulaire_spip formulaire_#FORM">
 	[<div class="aeres_info_ok">(#ENV*{message_ok})</div>]
-	<div class="aeres_info"><h4 class="h4"><a href="javascript:void(0);" onClick="$('#correction_#ID_ZITEM').toggle(400);">Correction demandée</a></h4></div>
+	<div class="aeres_info"><h4 class="h4">Correction demandée</h4></div>
 	<div id="correction_#ID_ZITEM">
 	
 	<div class="aeres_comment">
@@ -71,12 +71,14 @@
 	</BOUCLE_commentaires>
 	
 	<form method="post" action="#ENV{action}">
+		<h4 class="h4"><a href="javascript:void(0);" onClick="$('#form_comment_#ID_ZITEM').toggle(400);">Ajouter un commentaire</a></h4>
+		<div id="form_comment_#ID_ZITEM">
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="hidden" name="ajout" value="commentaire" />
 		<input type="hidden" name="id_ticket" value="#ID_TICKET" />
 		<ul>
 			<li class="editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
-				<label for="texte">Ajouter un commentaire</label>
+				<label for="texte">Commentaire</label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
 				<textarea name='texte' id='texte' class='inserer_barre_forum'>[(#ENV*{message_ok}|non)[(#ENV**{texte})]]</textarea>
 			</li>
@@ -94,7 +96,7 @@
 		<p class='boutons'><span class='image_loading'>&nbsp;</span>
 			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
 		</p>
-	</form>
+	</div></form>
 	</div></div>
 	</BOUCLE_ticket_ouvert>
 	<div class="formulaire_spip formulaire_#FORM">
@@ -141,7 +143,7 @@
 		$('#afficher_details_#ID_ZITEM').show();
 		[(#ENV**{erreurs}|non)$('#ajout_correction_#ID_ZITEM').hide();]
 		$('#details_#ID_ZITEM').hide();
-		$('#correction_#ID_ZITEM').hide();
+		$('#form_comment_#ID_ZITEM').hide();
 	});
  //]]></script>
 </BOUCLE_zitem>
