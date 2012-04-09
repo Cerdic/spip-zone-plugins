@@ -75,6 +75,9 @@ function init_controleur_composant() {
       var new_nic = new_i[2];
       window.status = dropid + ' = ' + current_c + '-' + current_nic + ' => ' + new_c + '-' + new_nic + ' (' + from.attr("id") +')';
 		},
+    out: function() {
+      window.status = '';
+    },
     drop: function(e, cc) {
       jQuery(".cadre-composant").removeClass("ctlWidget_droppable_over");
       jQuery(this).addClass("ctlWidget_droppable_drop");

@@ -1,73 +1,55 @@
-function calculeOffsetLeft(r){
-  return calculeOffset(r,"offsetLeft")
+function init_agenda() {
+	var delai = "400";
+	var chrono;
+	function cacheBulles() {
+		jQuery(".bulle").hide().css("left", 0).css("top", 0);
+	}
+	function mouseOverBulle() {
+	  clearTimeout(chrono);
+	}
+	function mouseOutBulle() {
+	  chrono = setTimeout(cacheBulles, delai);
+	}
+  jQuery(".cAgenda .unjour").each(
+    function(i, obj) {
+    	mouseOverBulle();
+    	var date = obj.id.substring(4);
+      jQuery(obj).hover(function(e) {
+      	mouseOverBulle();
+      	cacheBulles();
+      	var pos = jQuery(obj).offset();
+      	var bulle = jQuery("#bulle"+date);
+      	var left = pos.left;
+      	var top = pos.top + jQuery(obj).outerHeight();
+      	var w = jQuery(window).width();
+      	var bw = bulle.outerWidth();
+        bulle.css("left", left).css("top", top);
+      	if (left + bw >= w)
+      		bulle.css("left", w - bw);
+      	bulle.show();
+      },function(e) {
+      	mouseOutBulle();
+      });
+    }
+  );
+  jQuery(".cAgenda .bulle").each(
+    function(i, obj) {
+      jQuery(obj).hover(mouseOverBulle, mouseOutBulle);
+    }
+  );
+
 }
 
-function calculeOffsetTop(r){
-  return calculeOffset(r,"offsetTop")
-}
-
-function calculeOffset(element,attr){
-  var offset=0;
-  while(element){
-    offset+=element[attr];
-    element=element.offsetParent
+jQuery(document).ready(
+  function() {
+    init_agenda();
+    onAjaxLoad(init_agenda);
   }
-  return offset
-}
+);
+jQuery(document).unload(function() {
+	jQuery(".cAgenda .unjour, .cAgenda .bulle").unbind('mouseenter mouseleave');
+});
 
-function afficheBulle(idBulle, parent)
-{
-  var bulle = document.getElementById(idBulle);
-  var offset;
-  var exp = new RegExp("^td_","gi");
-  var bl = 0;
-
-  if (chrono!=null) {
-     clearTimeout(chrono);
-     cacheBulleT();
-  }
-  bulle.style.display = "block";
-  bl = calculeOffsetLeft(bulle);
-  bt = calculeOffsetTop(bulle);
-
-  if (exp.test(idBulle)==false) {
-    if (bl + bulle.offsetWidth < x)
-       offsetx = 0;
-    else
-       offsetx = x - bl - bulle.offsetWidth;
-/*
-    if (bt + bulle.offsetHeight < y)
-       offsety = 0;
-    else
-       offsety = y - bt - bulle.offsetHeight;
-*/
-    bulle.style.left = bulle.offsetLeft + offsetx + shiftx + "px";
-//    bulle.style.top = bulle.offsetTop + offsety + "px";
-  }
-}
-
-function cacheBulleT()
-{
-  document.getElementById(idBulleT).style.display = "none";
-  chrono = null;
-}
-
-function cacheBulle(idBulle)
-{
-  idBulleT = idBulle;
-  chrono = setTimeout("cacheBulleT()",delai);
-}
-
-function mouseOverBulle()
-{
-  clearTimeout(chrono);
-  chrono = null;
-}
-
-function mouseOutBulle()
-{
-   chrono = setTimeout("cacheBulleT()",delai);
-}
 /*
 function init_agenda() {
   jQuery("#agenda_prev").each(
@@ -91,9 +73,4 @@ function init_agenda() {
     }
   );
 }
-
-jQuery(document).ready(
-  function() {
-    init_agenda()
-  }
-);*/
+*/

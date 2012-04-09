@@ -126,18 +126,10 @@ function balise_VAR($p) {
 function balise_HEADER_COMPOSANTS($p) {
   $typeh = interprete_argument_balise(1,$p);
   $typeh = substr($typeh, 1, strlen($typeh)-2);
-  $p->code = 'composants_head_cache("'.$typeh.'")';
+  $p->code = 'composants_head("'.$typeh.'")';
   $p->statut = 'php';
   $p->interdire_scripts = false;
   return $p; 
-}
-
-// "Cache" de la fonction composants_head. On force le recalcul car de toute façon SPIP met en cache
-// ça ferait donc double-emploi, avec de sérieux soucis de debug liés a un double cache css sinon.
-// TODO : garder la mise en cache pour les "vieux" Spip ?
-function composants_head_cache($type) {
-  $r = cache('composants_head', 'head_'.$GLOBALS['meta']['acsSet'].'_'.$type, array("$type"), true);
-  return $r[0];
 }
 
 // Retourne les css ou javascripts des composants, concaténés

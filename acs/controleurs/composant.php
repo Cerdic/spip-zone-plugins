@@ -68,7 +68,7 @@ function controleurs_composant_dist($regs) {
     ).
     '</div>'.
 	'</div>'.
-'<script language="javascript">$(document).ready(
+'<script language="javascript">jQuery(document).ready(
 	function() {
   	init_controleur_composant();
 	}

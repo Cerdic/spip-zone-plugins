@@ -1,5 +1,4 @@
-#CACHE{0}
-[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})][(#REM)
+[(#CACHE{0})][(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})][(#REM)
              ACS
          (Plugin Spip)
          Squelette Cat
@@ -40,7 +39,7 @@ if (find_in_path($fond.'.html')) {
 // Use preview if exist, or component itself if not.
 $p = find_in_path($_GET['c'].'_preview.html');
 if ($p) : ?><INCLURE{fond=#EVAL{$_GET['c'].'_preview'}}{c}{nic=#ENV{nic}}>
-<?php else : ?><INCLURE{fond=#ENV{c}}{self}{env} {nic=#ENV{nic}}>
+<?php else : ?><INCLURE{fond=#ENV{c}}{self}{env}{nic=#ENV{nic}}>
 <?php endif; ?>
 </body>
 </html>

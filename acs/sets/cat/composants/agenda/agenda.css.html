@@ -11,11 +11,8 @@ Feuille de style Agenda, par Daniel Faivre, 2007-2012
   font-style:normal;
   [(#MODELE{c_css_shadow}{c=Agenda})]
 }
-.cAgenda th {
-  font-size: #VAR{acsFondBlocSize,0.82em};
-}
+
 .cAgenda td {
-  font-size: #VAR{acsFondNavSize,0.65em};
   padding: 2px;
 }
 
@@ -54,13 +51,17 @@ Feuille de style Agenda, par Daniel Faivre, 2007-2012
   font-weight:bold;
   font-style: italic;
   border: 1px solid #VAR{acsFondLink};
-  -moz-border-radius: 5px;
   padding: 2px;
-  padding-bottom: 0;
+  padding-bottom: 0;[
+  (#MODELE{c_css_border-radius}{r=5px})]
+}
+.cAgenda a.unjour:hover {
+  [background: (#VAR{acsAgendaBulleFondColor,#ffffef});][
+  (#MODELE{c_css_border-radius}{r=5px})]
 }
 
 [(#REM) info-bulle ]
-* html div.bulle {
+* html .cAgenda div.bulle {
   width: 250px; [(#REM) Hack IE : IE exige une largeur définie ]
 }
 .cAgenda .bulle{
@@ -72,7 +73,8 @@ padding: 0;
 margin: 0;
 border: [(#VAR{acsAgendaBord/Width,1px})][ (#VAR{acsAgendaBord/Style,ridge})][ (#VAR{acsAgendaBord/Color})];
 line-height:normal;
-text-align: #LANG_LEFT;
+text-align: #LANG_LEFT;[
+(#MODELE{c_css_shadow}{c=Agenda})]
 }
 
 .cAgenda .bulle .publie:hover, .bulle .modifie:hover{

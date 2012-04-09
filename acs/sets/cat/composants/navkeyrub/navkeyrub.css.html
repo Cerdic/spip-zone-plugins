@@ -30,10 +30,15 @@
   position: absolute;
   #LANG_LEFT: 100%;
   width: 100%;
+  min-width: 150px;
 }
 .cNavKeyRub ul.hidden {
   display: none;
 }
 .cNavKeyRub .menu-item:hover>ul.hidden {
   display: block;
+}
+.cNavKeyRub#NIC li.menu-item  a.menu-item-haschilds, .cNavKeyRub#NIC li.menu-item  a.menu-item-haschilds:hover {
+  background-position: center[ (#LANG_RIGHT|=={left}|?{left,right})];
+  background-repeat: no-repeat;
 }

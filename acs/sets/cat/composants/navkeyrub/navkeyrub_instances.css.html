@@ -6,6 +6,7 @@
   [border-width: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Bord/Width'}});]
   [border-style: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Bord/Style'}});]
   [border-color: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Bord/Color'}});][
+  (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Titre'}}|=={oui}|?{"border-top: 0;"})][
   (#MODELE{c_css_border-radius}{c=Navkeyrub}{nic}{var=BordRond}{sauf=[(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Titre'}}|=={oui}|?{"top"})]})]
 }
 .cNavKeyRub#NIC ul.smenu {
@@ -13,7 +14,9 @@
   [border-style: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Bord2/Style'}});]
   [border-color: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Bord2/Color'}});][
   top: -(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Bord2/Width'}});]
-  min-width: 150px;
+  [padding: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Margin'}});]
+  padding-left: 0;
+  padding-right: 0;
 }
 .cNavKeyRub#NIC ul.smenu, .cNavKeyRub#NIC ul.titres-articles {[
   (#MODELE{c_css_border-radius}{c=Navkeyrub}{nic}{var=BordRond})]
@@ -37,26 +40,20 @@
 [.cNavKeyRub#NIC .menu-item a:hover { background: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'FondHover'}});[
   (#MODELE{c_css_border-radius}{c=Navkeyrub}{nic}{var=BordRond})]}]
 
-[.cNavKeyRub#NIC ul.menu {background: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Fond'}});[z-index: (#GET{z-index}|plus{1});]}]
-[.cNavKeyRub#NIC ul.menu ul.smenu {background: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Fond2'}});[z-index: (#GET{z-index}|plus{2});]}]
-[.cNavKeyRub#NIC ul.menu ul.smenu ul.smenu {background: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Fond3'}});[z-index: (#GET{z-index}|plus{3});]}]
-[.cNavKeyRub#NIC ul.menu ul.smenu ul.smenu ul.smenu {background: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Fond4'}});[z-index: (#GET{z-index}|plus{4});]}]
-[.cNavKeyRub#NIC ul.menu ul.smenu ul.smenu ul.smenu ul.smenu {background: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Fond5'}});[z-index: (#GET{z-index}|plus{5});]}]
-[.cNavKeyRub#NIC ul.menu ul.smenu ul.smenu ul.smenu ul.smenu ul.smenu {background: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Fond6'}});[z-index: (#GET{z-index}|plus{6});]}]
+[.cNavKeyRub#NIC ul.menu {background: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Fond'}});[z-index: (#GET{z-index}|plus{1});]}][
+.cNavKeyRub#NIC ul.menu ul.smenu {background: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Fond2'}});[z-index: (#GET{z-index}|plus{2});]}][
+.cNavKeyRub#NIC ul.menu ul.smenu ul.smenu {background: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Fond3'}});[z-index: (#GET{z-index}|plus{3});]}][
+.cNavKeyRub#NIC ul.menu ul.smenu ul.smenu ul.smenu {background: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Fond4'}});[z-index: (#GET{z-index}|plus{4});]}][
+.cNavKeyRub#NIC ul.menu ul.smenu ul.smenu ul.smenu ul.smenu {background: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Fond5'}});[z-index: (#GET{z-index}|plus{5});]}][
+.cNavKeyRub#NIC ul.menu ul.smenu ul.smenu ul.smenu ul.smenu ul.smenu {background: (#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Fond6'}});[z-index: (#GET{z-index}|plus{6});]}]
 
-[(#REM) indicateur de présence de sous-menus ]
-[(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Sub'}}|!={survol}|?{" "})
-.cNavKeyRub li.menu-item  a.menu-item-haschilds {
-  background-position: center[ (#LANG_RIGHT|=={left}|?{left,right})];
-  background-repeat: no-repeat;
-  [background-image: url("(#ACS_CHEMIN{triangles/deplierhaut[(#GET{sitelangdir})].gif})");]
+[(#REM) indicateur de présence de sous-menus ][(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Sub'}}|!={survol}|?{" "})[
+.cNavKeyRub#NIC li.menu-item  a.menu-item-haschilds {
+  background-image: url("(#ACS_CHEMIN{triangles/deplierhaut[(#GET{sitelangdir})].gif})");
+}]][
+.cNavKeyRub#NIC li.menu-item  a.menu-item-haschilds:hover {
+  background-image: url("(#ACS_CHEMIN{triangles/deplierbason.gif})");
 }]
-.cNavKeyRub li.menu-item  a.menu-item-haschilds:hover {
-  background-position: center[ (#LANG_RIGHT|=={left}|?{left,right})];  
-  background-repeat: no-repeat;
-  [background-image: url("(#ACS_CHEMIN{triangles/deplierbason.gif})");]
-}
-
 [(#REM) orientation horizontale ][(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Orientation'}}|=={horizontal}|?{" "})
 .cNavKeyRub#NIC li.mots {
   float : left;

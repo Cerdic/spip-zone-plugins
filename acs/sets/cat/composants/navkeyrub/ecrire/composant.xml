@@ -40,7 +40,11 @@
     <nom>BordRond</nom>
     <type>text</type>
   </variable>
-
+  <variable>
+    <nom>Margin</nom>
+    <type>text</type>
+  </variable>
+  
   <variable>
     <nom>Fond</nom>
     <type>color</type>
@@ -143,5 +147,10 @@
     <option>toujours</option>
     <option>survol</option>
     <valeur>toujours</valeur>
+  </variable>
+  <variable>
+    <nom>Timer</nom>
+    <type>text</type>
+    <valeur>400</valeur>
   </variable>
 </composant>

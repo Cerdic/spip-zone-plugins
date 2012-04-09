@@ -69,7 +69,7 @@ Forum de l'article
 ][(#STATUT|=={publie}|?{' ', ''})
   [(#PLUGIN{notation}|?{' '})<div class="notation nsize">#FORMULAIRE_NOTATION</div><br class="nettoyeur" />]
   [(#PLUGIN{recommander}|?{' '})#RECOMMANDER{#TITRE,#URL_ARTICLE,#INTRODUCTION}]
-  [<a id="forum_repondre" class="repondreaufil nsize" href="spip.php?page=forum&id_article=#ID_ARTICLE"><:form_pet_message_commentaire:></a><br/>(#FORMULAIRE_FORUM)]
+  [<a id="forum_repondre" class="repondreaufil nsize" href="spip.php?page=forum&amp;id_article=#ID_ARTICLE"><:form_pet_message_commentaire:></a><br/>(#FORMULAIRE_FORUM)]
   <INCLURE{fond=composants/forums/forum}{ajax}{id_article}{ouvrir=#OUVRIR}{debut_forums}>
 ]</div>
 </BOUCLE_article>
