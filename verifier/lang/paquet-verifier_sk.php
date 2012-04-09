@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// V
-	'verifier_description' => 'Poskytuje jedinečnú funkciu <code>verifier($valeur, $type, $options),</code> ktorá umožňuje otestovať platnosť hodnoty.', # MODIF
+	'verifier_description' => 'Poskytuje jedinečnú funkciu <code>verifier($hodnota, $typ, $podmienky),</code> ktorá umožňuje otestovať platnosť hodnoty.',
 	'verifier_nom' => 'Aplikácia na overenie',
 	'verifier_slogan' => 'Spoločná aplikácia na overenie hodnoty'
 );
