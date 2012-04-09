@@ -366,7 +366,7 @@ Les blocs multi s\'affichent alors toujours dans la langue demandée par le visi
 	'glossaire_erreur' => 'Le mot «@mot1@» rend indétectable le mot «@mot2@»',
 	'glossaire_inverser' => 'Correction proposée : inverser l\'ordre des mots en base.',
 	'glossaire_js' => 'Solution JavaScript',
-	'glossaire_ok' => 'La liste des @nb@ mot(s) étudié(s) en base semble correcte.',
+	'glossaire_ok' => '@nb@ mot(s) étudié(s). Tout semble correct.',
 	'guillemets:description' => 'Remplace automatiquement les guillemets droits (") par les guillemets typographiques de la langue de composition. Le remplacement, transparent pour l\'utilisateur, ne modifie pas le texte original mais seulement l\'affichage final.',
 	'guillemets:nom' => 'Guillemets typographiques',
 

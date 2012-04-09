@@ -24,6 +24,8 @@ function glossaire_groupes() {
 @define('_GLOSSAIRE_TITRE_BASE_SEP', '/');
 // Separateur utilise pour fabriquer le titre de la fenetre de glossaire (fichiers fonds/glossaire_xx.html).
 @define('_GLOSSAIRE_TITRE_SEP', '<br />');
+// Balises a echapper avant le traitement du glossaire
+@define('_GLOSSAIRE_ECHAPPER', 'html|code|cadre|frame|script|cite|acronym|abbr|a');
 // chaine pour interroger la base (SPIP <= 1.92)
 if(!defined('_SPIP19300'))
 	@define('_GLOSSAIRE_QUERY', 'SELECT id_mot, titre, texte, descriptif FROM spip_mots WHERE type=' . glossaire_groupes() . ' ORDER BY id_mot ASC');
@@ -254,7 +256,7 @@ function cs_rempl_glossaire($texte, $liste=false) {
 
 // filtre appliquant l'insertion du glossaire
 function cs_glossaire($texte) {
-	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|abbr|a', 'cs_rempl_glossaire', $texte);
+	return cs_echappe_balises(_GLOSSAIRE_ECHAPPER, 'cs_rempl_glossaire', $texte);
 }
 
 // filtre renvoyant la liste des mots trouves dans le texte
@@ -262,7 +264,7 @@ function cs_mots_glossaire($texte, $type='', $sep='') {
 	if(strpos($texte, "<span class='gl_mot'>")!==false && preg_match_all(",'gl_mot'>(.*?)</span>,", $texte, $reg))
 		// glossaire deja present, on simplifie donc le texte
 		$texte = join('  ', $reg[1]);
-	$mots = cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|abbr|a', 'cs_rempl_glossaire', $texte, true);
+	$mots = cs_echappe_balises(_GLOSSAIRE_ECHAPPER, 'cs_rempl_glossaire', $texte, true);
 	if(!count($mots)) return strlen($sep)?'':$mots;
 	$lien = '$v="<a href=\"$v[2]\"';
 	$titre = strpos($type,'_unique')===false?'str_replace("<br />"," / ", $v[3])':'array_shift(explode(_GLOSSAIRE_TITRE_SEP, $v[3]))';
