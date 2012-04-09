@@ -1,0 +1,14 @@
+<BOUCLE_relecture_navigation(RELECTURES) {id_relecture}{si #ENV{exec}|=={relecture}}>
+[(#REM) <!-- La boite d'infos de la relecture --> ]
+#BOITE_OUVRIR{'', info}
+	<INCLURE{fond=prive/objets/infos/relecture,
+		type=#ENV{type-page},
+		id=#ID_RELECTURE,
+		env} />
+#BOITE_FERMER
+
+[(#REM) <!-- Pas de logo pour une relecture --> ]
+
+[(#REM) <!-- Appel du pipeline "afficher_config_objet" pour ajouter de la config eventuelle --> ]
+#PIPELINE{afficher_config_objet, #ARRAY{args, #ARRAY{type, #ENV{type-page}, id, #ID_RELECTURE}, data,''}}
+</BOUCLE_relecture_navigation>
