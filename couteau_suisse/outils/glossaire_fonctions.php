@@ -21,11 +21,11 @@ function glossaire_groupes() {
 }
 
 // Separateur des titres de mots stockes en base
-@define('_GLOSSAIRE_TITRE_BASE_SEP', '/');
+if(!defined('_GLOSSAIRE_TITRE_BASE_SEP')) define('_GLOSSAIRE_TITRE_BASE_SEP', '/');
 // Separateur utilise pour fabriquer le titre de la fenetre de glossaire (fichiers fonds/glossaire_xx.html).
-@define('_GLOSSAIRE_TITRE_SEP', '<br />');
+if(!defined('_GLOSSAIRE_TITRE_SEP')) define('_GLOSSAIRE_TITRE_SEP', '<br />');
 // Balises a echapper avant le traitement du glossaire
-@define('_GLOSSAIRE_ECHAPPER', 'html|code|cadre|frame|script|cite|acronym|abbr|a');
+if(!defined('_GLOSSAIRE_ECHAPPER')) define('_GLOSSAIRE_ECHAPPER', 'html|code|cadre|frame|script|cite|acronym|abbr|a');
 // chaine pour interroger la base (SPIP <= 1.92)
 if(!defined('_SPIP19300'))
 	@define('_GLOSSAIRE_QUERY', 'SELECT id_mot, titre, texte, descriptif FROM spip_mots WHERE type=' . glossaire_groupes() . ' ORDER BY id_mot ASC');
@@ -209,7 +209,7 @@ function cs_rempl_glossaire($texte, $liste=false) {
 			// TODO 1 : sous PHP 5.0, un parametre &$count permet de savoir si un remplacement a eu lieu
 			// et s'il faut construire la fenetre de glossaire.
 			// TODO 2 : decrementer le parametre $limit pour $les_mots, si &$count est renseigne.
-			// en attendant, constuisons qd meme la fenetre...
+			// en attendant, construisons qd meme la fenetre...
 			$mot_present = true;
 		}
 		if($les_mots) {
@@ -251,6 +251,9 @@ function cs_rempl_glossaire($texte, $liste=false) {
 	}
 	// nettoyage
 	unset($gloss_id, $gloss_mots, $gloss_mots_id, $gloss_ech, $gloss_ech_id);
+	// ordre correct des balises en cas d'acronyme ou d'abreviation
+	if(strpos($texte, '</span></a></a')!==false)
+		$texte = preg_replace(',(<a(bbr|cronym) [^>]+>)(<a [^>]+class=\'cs_glossaire\'><span class=\'gl_mot\'>)(.*?)</span>(<span class="gl_.*?</span>)</a></a\\2>,smS', '$3$1$4</a$2></span>$5</a>', $texte);
 	return $texte;
 }
 

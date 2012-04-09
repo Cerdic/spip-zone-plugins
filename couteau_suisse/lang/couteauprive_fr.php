@@ -360,8 +360,9 @@ Les blocs multi s\'affichent alors toujours dans la langue demandée par le visi
 
 @puce@ Pour chaque mot, vous avez la possibilité de choisir le nombre maximal de liens créés dans vos textes. Toute valeur nulle ou négative implique que tous les mots reconnus seront traités. [[%glossaire_limite% par mot-clé]]
 
-@puce@ Deux solutions vous sont offertes pour générer la petite fenêtre automatique qui apparaît lors du survol de la souris. [[%glossaire_js%]]',
+@puce@ Deux solutions vous sont offertes pour générer la petite fenêtre automatique qui apparaît lors du survol de la souris. [[%glossaire_js%]][[->%glossaire_abbr%]]',
 	'glossaire:nom' => 'Glossaire interne',
+	'glossaire_abbr' => 'Ignorer les balises <code><abbr></code> et <code><acronym></code>',
 	'glossaire_css' => 'Solution CSS',
 	'glossaire_erreur' => 'Le mot «@mot1@» rend indétectable le mot «@mot2@»',
 	'glossaire_inverser' => 'Correction proposée : inverser l\'ordre des mots en base.',

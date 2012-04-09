@@ -1075,12 +1075,18 @@ function fct_glossaire_groupes($gr){
 	'format' => _format_NOMBRE,
 	'defaut' => 1,
 	'code:%s' => "define('_GLOSSAIRE_JS', %s);",
+), array(
+	'nom' => 'glossaire_abbr',
+	'check' => 'couteauprive:glossaire_abbr',
+	'defaut' => 1,
+	'format' => _format_NOMBRE,
+	'code:!%s' => "@define('_GLOSSAIRE_ECHAPPER', 'html|code|cadre|frame|script|cite|a');",
 ));
 add_outil( array(
 	'id' => 'glossaire',
 	'categorie'	=> 'typo-corr',
 	'contrib'	=> 2206,
-	'code:options' => "@define('_CS_SANS_GLOSSAIRE', '[!glossaire]');\n%%glossaire_limite%%%%glossaire_groupes%%%%glossaire_js%%",
+	'code:options' => "@define('_CS_SANS_GLOSSAIRE', '[!glossaire]');\n%%glossaire_limite%%%%glossaire_groupes%%%%glossaire_js%%%%glossaire_abbr%%",
 //	'traitement:LIEU:post_propre' => 'cs_glossaire',
 	// sans oublier les articles, les breves, les forums et les rubriques !
 	// SPIP ne considere pas que la premiere definition est un tronc commun...
