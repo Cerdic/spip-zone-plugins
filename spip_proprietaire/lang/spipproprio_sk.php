@@ -144,41 +144,41 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pourquoi_ce_plugin' => 'Prečo tento zásuvný modul ? (<i>upozornenia právneho charakteru</i>)',
 	'presentation' => '{{{Právne požiadavky pre akúkoľvek internetovú stránku podľa francúzskeho právneho poriadku}}}
 
-Akákoľvek internetová stránka, či už slúži na pracovné alebo súkromné účely, musí spĺňať niekoľko právnych požiadaviek, ktoré uvádza [LCEN | Zobraziť text-legifrance.fr> http://www.legifrance.gouv.fr/ affichTexte.do? cidTexte JORFTEXT000000801164 =] ({Zákon o dôvere v digitálnej ekonomike}) z júna 2004. Táto informácia musí byť úplne prístupná na každej internetovej stránke, ktorá využíva stránku a redaktor stránok, vlastník, má povinnosť kontrolovať jej obsah v zmysle zohľadnenia komentárov od používateľov.
+Akákoľvek internetová stránka, či už slúži na pracovné alebo súkromné účely, musí spĺňať niekoľko právnych požiadaviek, ktoré uvádza [LCEN | Zobraziť text-legifrance.fr> http://www.legifrance.gouv.fr/ affichTexte.do? cidTexte JORFTEXT000000801164 =] ({Zákon o dôvere v digitálnej ekonomike}) z júna 2004. Tieto informácie musia byť úplne prístupné na každej internetovej stránke, ktorá využíva stránku a redaktor stránok, príp. vlastník, má povinnosť kontrolovať jej obsah v zmysle zohľadnenia komentárov od používateľov.
 
-Vo zvyšku tejto dokumentácie používame tieto termíny:
+Vo zvyšku tejto dokumentácie používame tieto termíny:
 - {{Redaktor stránky}} je jej "vlastník", spoločnosť (organizácia) alebo jednotlivec, ktorý je za ňu zodpovedný, ktorý publikuje jej obsah;
 - {{Tvorca stránky}} je spoločnosť (organizácia), jednotlivec alebo agentúra, ktorá obsah vytvorila, resp. vyrobila, na žiadosť redaktora ({niekedy je potrebné rozlišovať technického tvorcu od grafického dizajnéra});
 - {{Poskytovateľ webhostingu stránky}} je spoločnosť (resp. organizácia) alebo jednotlivec, ktorý vlastní server, ktorý stránku fyzicky prevádzkuje.
 
-Tieto tri termíny musia byť jednoznačne definované v tiráži každej internetovej stránky. Tvorca tejto stránky nemá žiadnu právnu povinnosť, ale je najlepšie uplatniť postup opísaný pre poskytovateľa webhostingu stránky.
+Tieto tri termíny musia byť v informáciách právneho charakteru každej internetovej stránky jednoznačne definované. Tvorca tejto stránky nemá žiadnu právnu povinnosť, ale je najlepšie uplatniť postup opísaný pre poskytovateľa webhostingu stránky.
 
-{{Pre internetové stránky, ktoré publikujú publikované právnické osoby ({obchodné spoločnosti, združenia, a pod.})}}
+{{Pre internetové stránky, ktoré publikujú právnické osoby ({obchodné spoločnosti, združenia, a pod.})}}
 
-Stránka s názvom "Informácie právneho charakteru" by sa mala zobraziť na internetovej stránke a mala by obsahovať tieto údaje:
+Stránka s názvom "Informácie právneho charakteru" by sa mala zobraziť na internetovej stránke a mala by obsahovať tieto údaje:
 - meno alebo názov vydavateľa,
 - jeho sídlo,
 - telefónne číslo,
-- totožnosť redaktora a šéfredaktora, ak existuje,
+- totožnosť redaktora a šéfredaktora, ak existuje,
 - obchodné meno spoločnosti, príp. IČO či ISSN/ISBN,
 - hlavné sídlo spoločnosti, ak je to vhodné,
-- kontakt na ústredie ({e-mailovú  adresu riadiacich vyššie spomenutých pracovníkov alebo webmastera}).
+- kontakt na ústredie ({e-mailovú  adresu riadiacich pracovníkov uvedených vyššie alebo adresu webmastera}).
 
 {{Pre stránky, ktoré publikujú fyzické osoby (jednotlivci)}}
 
-Stránka s názvom "Informácie právneho charakteru" by sa mala zobraziť na internetovej stránke, s uvedením {{krstného mena,}} {{priezviska,}} {{adresy domov}} a  {{telefónneho čísla}} vlastníka.
-<br /> Je však možné zostať aj v anonymite a udeliť právo na tieto údaje poskytovateľovi webhostingu od chvíle, keď boli odoslané úplné a správne na adresu poskytovateľa webhostingu, ktorý môže nechať tieto údaje utajené až na prípad, keby prebiehalo súdne konanie.  V podmienkach musí byť uvedená táto možnosť.
+Stránka s názvom "Informácie právneho charakteru" by sa mala zobraziť na internetovej stránke s uvedením {{krstného mena,}} {{priezviska,}} {{adresy domov}} a {{telefónneho čísla}} vlastníka.
+<br /> Je však možné zostať aj v anonymite a udeliť právo na tieto údaje poskytovateľovi webhostingu pod podmienkou, že sú úplné a správne odoslané na adresu poskytovateľa webhostingu, ktorý môže nechať tieto údaje utajené až na prípad, keby prebiehalo súdne konanie.  V informáciách právneho charakteru musí byť táto možnosť uvedená.
 
-{{Informácie o podmienkach poskytovania webhostingu pre stránku}}
+{{Informácie o podmienkach poskytovania webhostingu pre stránku}}
 
-Pre právnické {{a}} fyzické osoby ({súhrne pre všetkých,}) je povinné uviesť podmienky pre poskytovanie webhostingu pre stránku aj v prípade, ak je webhosting poskytovaný bezplatne.
+Právnické {{a}} fyzické osoby ({súhrne pre všetkých,}) majú povinnosť uviesť podmienky pre poskytovanie webhostingu pre stránku aj v prípade, ak sa webhosting poskytuje bezplatne.
 <br /> Treba uviesť tieto údaje:
-- názov poskytovateľa webhostingu,
+- obchodné meno poskytovateľa webhostingu,
 - jeho obchodné meno,
 - jeho sídlo,
 - telefónne číslo.
 
-V prípade, že sa stránka nachádza na vlastnom serveri alebo na serveri, ktorý je súkromným majetkom jedného z redaktorov, by sa tieto údaje nehodili, ale táto skutočnosť by mala byť uvedená.
+V prípade, že má stránka svoj vlastný server alebo je prevádzkovaná na serveri, ktorý je súkromným majetkom jedného z redaktorov, sa tieto údaje nehodia, ale treba uviesť jeden z vyššie spomenutých dôvodov.
 
 {{Osobné údaje používateľov}}
 
@@ -188,21 +188,21 @@ Pokiaľ ide o informačné materiály (tzv. newslettery), je tu   {{povinnosť p
 
 {{Poznámka o CNIL}}
 
-[CNIL-> http://www.cnil.fr/] ({Commission Nationale Informatique et Libertés = Národná komisia pre informatiku a slobody}) je organizácia, ktorej poslaním je ochrana súkromia a osobných slobôd. 
-<br /> Ak je na stránke uložený údaj, ktorý priamo alebo nepriamo odhaľuje identitu používateľa, treba do kódu tejto stránky vložiť deklaráciu CNIL, ktorá vám za to pošle číslo potvrdenia, ktoré máte povinnosť zadať.
-<br /> Na pripomenutie CNIL zaviedla na elektronickú deklaráciu postup (pozri {.} internetovú stránku nižšie).
+[CNIL-> http://www.cnil.fr/] ({Commission Nationale Informatique et Libertés = Národná komisia pre informatiku a slobody}) je organizácia, ktorej poslaním je ochrana súkromia a osobných slobôd. 
+<br /> Ak je na stránke uložený údaj, ktorý priamo alebo nepriamo odhaľuje identitu používateľa, treba do kódu stránky vložiť deklaráciu CNIL, ktorá vám na oplátku pošle číslo potvrdenia, ktoré máte povinnosť zadať.
+<br /> Na pripomenutie CNIL zaviedla na elektronickú deklaráciu postup (pozri {.} internetovú stránku, ktorej adresa je uvedená nižšie).
 
-Okrem toho používateľ musí mať možnosť získať prístup, upravovať, ak je to potrebné a dokonca aj vymazať všetky svoje údaje uložené na stránke. V podmienkach musí byť preto jednoznačne uvedený nástroj, ktorý má používateľ k dispozícii na to, aby mohol vyššie spomenuté úkony vykonať.
+Okrem toho používateľ musí mať možnosť získať prístup ku všetkým svojim osobným údajom, musí mať možnosť upravovať ich, ak je to potrebné a dokonca aj vymazať všetky svoje údaje uložené na stránke. V informáciách právneho charakteru pre danú stránku musí byť preto jednoznačne uvedený nástroj, ktorý má používateľ k dispozícii na to, aby mohol vykonať vyššie uvedené úkony.
 
 Internetová stránka CNIL: [-> http://www.cnil.fr/]
 
-Majte na pamäti, že najnovšie dodatky vy z poslednej podmienky niektoré stránky vylučujú ({súkromné blogy alebo blogy združení}). Viac informácií nájdete na internetovej stránke CNILu.
+Majte na pamäti, že najnovšie dodatky z poslednej podmienky vylučujú niektoré stránky  ({súkromné blogy alebo blogy združení}). Viac informácií nájdete na internetovej stránke CNILu.
 
 {{Ďalšie odporúčané komentáre}}
 
-To best protect you, it is strongly advised to include in your imprint information on the protection and the media content on the site are subject, the extent of your liability for that content ({ commonly "Disclaimer"}), information on cookies may be deposited by the site (CNIL {council}).
+Na zabezpečenie maximálnej ochrany vašej osoby sa veľmi odporúča, aby ste v informáciách právneho charakteru pre vašu stránku uviedli údaje o ochrane autorských práv a multimediálnych súboroch na stránke, rozsah vašej zodpovednosti za tieto súbory  ({t. j. obmedzenie zodpovednosti}); stránka by mala poskytnúť aj informácie o používaní cookies ({Rada} CNIL).
 
-More generally, it is necessary to adjust your imprint your business ({regulated professions, commerce site ...}).', # MODIF
+Vo všeobecnejšej rovine treba informácie právneho charakteru pre vašu stránku prispôsobiť vašej činnosti ({viazaná živnosť, komerčná stránka, atď.}).',
 	'presentation_outils_de_communication' => '{{{Propagácia vašej internetovej stránky}}}
 
 Zásuvný modul {{Informácie právneho charakteru}} ponúka aj sadu nástrojov na prezentovanie informácií na vylepšenie a zdôraznenie vašich silných stránok.
