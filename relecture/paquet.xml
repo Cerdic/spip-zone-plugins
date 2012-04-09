@@ -23,4 +23,5 @@
 	<pipeline nom="affiche_gauche" inclure="relecture_pipelines.php" />
 	<pipeline nom="boite_infos" inclure="relecture_pipelines.php" />
 
+	<necessite nom="revisions" compatibilite="[1.6.5;[" />
 </paquet>

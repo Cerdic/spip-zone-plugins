@@ -18,19 +18,17 @@
 
 	[(#REM) <!-- Information sur l'ouverture de la relecture : date et revision de l'article --> ]
 	[(#BOITE_OUVRIR{<h5><:relecture:titre_boite_ouverture|strtoupper:></h5>, raccourcis})]
-		<ul class="liste-items">
-			<li>
-				<span><:relecture:label_relecture_date_ouverture:> : </span>
-				<span dir="#LANG_DIR">[(#PERIODE_DEBUT|affdate)]</span>
-			</li>
-			<li>
-				<span><:relecture:label_relecture_revision_ouverture:> : </span>
-				[(#SET{url_revision, [(#URL_ECRIRE{revision, objet=article}
-										|parametre_url{id_objet, #ID_ARTICLE}
-										|parametre_url{id_revision, #REV_OUVERTURE})]})]
-				<span dir="#LANG_DIR"><a[ href="(#GET{url_revision})"]>[(#REV_OUVERTURE)]</a></span>
-			</li>
-		</ul>
+		<div class="unit size2of3">
+			<span><strong><:relecture:label_relecture_date_ouverture:></strong> : </span>
+			<span dir="#LANG_DIR">[(#PERIODE_DEBUT|affdate)]</span>
+		</div>
+		<div class="unit size1of3 lastUnit">
+			<span><strong><:relecture:label_relecture_revision_ouverture:></strong> : </span>
+			[(#SET{url_revision, [(#URL_ECRIRE{revision, objet=article}
+									|parametre_url{id_objet, #ID_ARTICLE}
+									|parametre_url{id_version, #REV_OUVERTURE})]})]
+			<span dir="#LANG_DIR"><a[ href="(#GET{url_revision})"]>[(#REV_OUVERTURE)]</a></span>
+		</div>
 	#BOITE_FERMER
 
 
@@ -40,21 +38,19 @@
 	</div>
 
 	[(#REM) <!-- Information sur la cloture de la relecture : date et revision de l'article --> ]
-	[(#STATUT|=={fermee}|oui)
+	[(#STATUT|=={ouverte}|non)
 		[(#BOITE_OUVRIR{<h5><:relecture:titre_boite_cloture|strtoupper:></h5>, raccourcis})]
-			<ul class="liste-items">
-				<li>
-					<span><:relecture:label_relecture_date_cloture:> : </span>
-					<span dir="#LANG_DIR">[(#DATE_CLOTURE|affdate)]</span>
-				</li>
-				<li>
-					<span><:relecture:label_relecture_revision_cloture:> : </span>
-					[(#SET{url_revision, [(#URL_ECRIRE{revision, objet=article}
-											|parametre_url{id_objet, #ID_ARTICLE}
-											|parametre_url{id_revision, #REV_CLOTURE})]})]
-					<span dir="#LANG_DIR"><a[ href="(#GET{url_revision})"]>[(#REV_CLOTURE)]</a></span>
-				</li>
-			</ul>
+			<div class="unit size2of3">
+				<span><strong><:relecture:label_relecture_date_cloture:></strong> : </span>
+				<span dir="#LANG_DIR">[(#DATE_CLOTURE|affdate)]</span>
+			</div>
+			<div class="unit size1of3 lastUnit">
+				<span><strong><:relecture:label_relecture_revision_cloture:></strong> : </span>
+				[(#SET{url_revision, [(#URL_ECRIRE{revision, objet=article}
+										|parametre_url{id_objet, #ID_ARTICLE}
+										|parametre_url{id_version, #REV_CLOTURE})]})]
+				<span dir="#LANG_DIR"><a[ href="(#GET{url_revision})"]>[(#REV_CLOTURE)]</a></span>
+			</div>
 		#BOITE_FERMER
 	]
 
