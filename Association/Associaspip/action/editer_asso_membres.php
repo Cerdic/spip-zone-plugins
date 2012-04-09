@@ -19,7 +19,7 @@ function action_editer_asso_membres()
 	$id_auteur = $securiser_action();
 	$modifs = array(
 		'commentaire' => _request('commentaire'),
-		'validite' => _request('validite'),
+		'validite' => association_recupere_date(_request('validite')),
 		'categorie' => _request('categorie'),
 		'statut_interne' => _request('statut_interne'),
 		'nom_famille' => _request('nom_famille'),

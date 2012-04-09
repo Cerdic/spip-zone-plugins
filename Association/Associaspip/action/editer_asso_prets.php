@@ -25,12 +25,12 @@ function action_editer_asso_prets_dist()
 	$data =  sql_fetsel('sexe, nom_famille, prenom', 'spip_asso_membres', "id_auteur=$id_emprunteur");
 	$emprunteur = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
     }
-    $date_sortie = _request('date_sortie');
-    $date_retour = _request('date_retour');
+    $date_sortie = association_recupere_date(_request('date_sortie'));
+    $date_retour = association_recupere_date(_request('date_retour'));
     $duree = association_recupere_montant(_request('duree'));
     $montant = association_recupere_montant(_request('montant'));
-    $fiso_sortie = $date_sortie.'T'._request('heure_sortie').':00';
-    $fiso_retour = $date_retour.'T'._request('heure_retour').':00';
+    $fiso_sortie = $date_sortie.'T'._request('heure_sortie').':00'; // si on n'indique que l'heure, on s'assure que ce sera bien compris hh:00 et non 00:mm sinon c'est hh:mm:00 qui est transmis...
+    $fiso_retour = $date_retour.'T'._request('heure_retour').':00'; // idem...
     $modifs = array(
 	'duree' => $duree,
 	'date_sortie' => $fiso_sortie,
@@ -49,7 +49,7 @@ function action_editer_asso_prets_dist()
 	// on modifie les informations relatives au pret
 	sql_updateq('spip_asso_prets', $modifs, "id_pret=$id_pret" );
 	// on modifie l'operation comptable associe au don
-	association_modifier_operation_comptable(($fiso_retour>$fiso_sortie)?$date_retour:$date_sortie, $montant*($duree?$duree:1), 0, '['. _T('titre_num', array('titre'=>_T('local:pret'),'num'=>$id_pret) ."->pret$id_pret] - ". ($id_emprunteur?"[$emprunteur"."->membre$id_emprunteur]":$emprunteur), $GLOBALS['association_metas']['pc_prets'], $journal, '', $id_compte);
+	association_modifier_operation_comptable(($fiso_retour>$fiso_sortie)?$date_retour:$date_sortie, $montant*($duree?$duree:1), 0, '['. _T('titre_num', array('titre'=>_T('local:pret'),'num'=>$id_pret) ) ."->pret$id_pret] - ". ($id_emprunteur?"[$emprunteur"."->membre$id_emprunteur]":$emprunteur), $GLOBALS['association_metas']['pc_prets'], $journal, '', $id_compte);
 	// on met a jour le statut de la ressource
 	$statut_old = sql_getfetsel('statut', 'spip_asso_ressources', "id_ressource=$id_ressource");
 	if (is_numeric($statut_old)) { /* nouveaux statuts numeriques */
@@ -69,7 +69,7 @@ function action_editer_asso_prets_dist()
 	$id_pret = sql_insertq('spip_asso_prets', $modifs);
 	if ($id_pret) {
 	    // on ajoute l'operation comptable associe au pret
-	    association_ajouter_operation_comptable($date_sortie, $montant*($duree?$duree:1), 0, '['. _T('titre_num', array('titre'=>_T('local:pret'),'num'=>$id_pret) ."->pret$id_pret] - ". ($id_emprunteur?"[$emprunteur"."->membre$id_emprunteur]":$emprunteur), $GLOBALS['association_metas']['pc_prets'], $journal, $id_pret);
+	    association_ajouter_operation_comptable($date_sortie, $montant*($duree?$duree:1), 0, '['. _T('titre_num', array('titre'=>_T('local:pret'),'num'=>$id_pret) ) ."->pret$id_pret] - ". ($id_emprunteur?"[$emprunteur"."->membre$id_emprunteur]":$emprunteur), $GLOBALS['association_metas']['pc_prets'], $journal, $id_pret);
 	    // on met a jour le statut de la ressource
 	    $statut_old = sql_getfetsel('statut', 'spip_asso_ressources', "id_ressource=$id_ressource");
 	    if (is_numeric($statut_old)) { /* nouveaux statuts numeriques */

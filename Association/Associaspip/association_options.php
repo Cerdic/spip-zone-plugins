@@ -162,14 +162,23 @@ function association_datefr($iso_date, $css_class='', $htm_abbr='abbr')
 	return $res;
 }
 
+function association_recupere_date($valeur)
+{
+	if ($valeur!='') {
+		$valeur = preg_replace('/\D/', '-', $valeur, 2); // la limitation a 2 separateurs permet de ne transformer que la partie "date" s'il s'agit d'un "datetime" par exemple.
+	}
+	return $valeur;
+}
+
 function association_verifier_date($date, $nullable=FALSE)
 {
-	if ( ($date=='0000-00-00' || !$date) && $nullable )
+	if ( $nullable && ($date=='0000-00-00' || !$date) )
 		return FALSE;
-	if (!preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $date))
-		return _T('asso:erreur_format_date', array('date'=>$date) );
+	if (!preg_match('/^\d{4}\D\d{2}\D\d{2}$/', $date)) // annee sur 4 chiffres ; mois sur 2 chiffres ; jour sur 2 chiffres ; separateur est caractere non numerique quelconque...
+#	if (!preg_match('/^\d{4}\D(\d|1[0-2])\D([1-9]|0[1-9]|[12]\d|3[01])$/', $date)) // annee sur 4 chiffres ; mois sur 1 ou 2 chiffres entre 1 et 12 ; jour sur 1 ou 2 chiffres eentre 1 et 31 ; separateur est n'importe quel caractere ne representant pas un chiffre arabe de la notation decimale standard...
+		return _T('asso:erreur_format_date', array('date'=>$date) ); // ...c'est un petit plus non documente (la documentation et le message d'erreur stipulent AAAA-MM-JJ : mois et jours toujours sur deux chiffres avec donc zero avant si inferieur a 10, separateur est tiret)
 	list($annee, $mois, $jour) = preg_split('/\D/', $date);
-	if (!checkdate($mois, $jour, $annee))
+	if (!checkdate($mois, $jour, $annee)) // la date doit etre valide : pas de 30 fevrier ou de 31 novembre par exemple.
 		return _T('asso:erreur_valeur_date', array('date'=>$date) );
 //	return FALSE;
 }
