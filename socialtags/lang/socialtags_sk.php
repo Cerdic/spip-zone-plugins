@@ -38,36 +38,36 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_noisette_badge_facebook' => 'Zobrazí odznak Facebooku definovaný na stránke s nastaveniami',
-	'description_noisette_facebook_like' => 'Zobrazí tlačidlo <b>Páči sa mi to</b> alebo <b>Odporučiť,</b> prípadne <b>Poslať</b>', # MODIF
-	'description_noisette_facebook_like_box' => 'Affiche la boîte Facebook <b>J\'aime</b>. Elle affiche notamment le nombre de fans aimant la page Facebook référencée', # NEW
+	'description_noisette_facebook_like' => 'Zobrazí tlačidlo <b>Páči sa mi to</b> alebo <b>Odporučiť</b> a prípadne <b>Poslať</b>',
+	'description_noisette_facebook_like_box' => 'Zobrazí tlačidlo Facebooku <b>Páči sa mi to.</b> Zobrazí oznam o počte fanúšikov na stránke na Facebooku.',
 
 	// N
 	'noisette_action_like' => 'Páči sa mi to',
 	'noisette_action_recommand' => 'Odporučiť',
-	'noisette_colorscheme_dark' => 'Fond sombre', # NEW
-	'noisette_colorscheme_light' => 'Fond clair', # NEW
+	'noisette_colorscheme_dark' => 'Tmavé pozadie',
+	'noisette_colorscheme_light' => 'Svetlé pozadie',
 	'noisette_label_action' => 'Akcia',
-	'noisette_label_afficher_send' => 'Tlačidlo Poslať?', # MODIF
+	'noisette_label_afficher_send' => 'Tlačidlo Poslať?',
 	'noisette_label_afficher_titre_noisette' => 'Zobraziť názov?',
-	'noisette_label_border_color' => 'Saisir le code couleur de la bordure de la boîte (au format #123ABC)', # NEW
-	'noisette_label_colorscheme' => 'Apparence', # NEW
-	'noisette_label_header' => 'Afficher l\'entête de la boîte « Retrouvez-nous sur Facebook » ?', # NEW
-	'noisette_label_height' => 'Hauteur', # NEW
-	'noisette_label_href' => 'Url de la page Facebook', # NEW
-	'noisette_label_layout' => 'Texte', # NEW
+	'noisette_label_border_color' => 'Zadajte kód farby rámu tlačidla (vo formáte #123ABC)',
+	'noisette_label_colorscheme' => 'Vzhľad',
+	'noisette_label_header' => 'Zobraziť nadpis "Nájdite nás na Facebooku"?',
+	'noisette_label_height' => 'Výška',
+	'noisette_label_href' => 'Adresa stránky na Facebooku',
+	'noisette_label_layout' => 'Text',
 	'noisette_label_niveau_titre' => 'Vybrať úroveň nadpisu',
-	'noisette_label_show_faces' => 'Zobraziť pod tlačidlo fotografiu z profilu?', # MODIF
-	'noisette_label_stream' => 'Afficher le flux d\'articles de la page Facebook ?', # NEW
+	'noisette_label_show_faces' => 'Zobraziť pod tlačidlom fotky z profilu?',
+	'noisette_label_stream' => 'Zobraziť odkaz na kanál RSS článkov zo stránky na Facebooku?',
 	'noisette_label_titre_noisette' => 'Názov:',
 	'noisette_label_titre_noisette_perso' => 'Ak je názov vlastný:',
 	'noisette_label_width' => 'Šírka',
-	'noisette_layout_box_count' => 'Total uniquement au-dessus', # NEW
-	'noisette_layout_button_count' => 'Total uniquement à droite', # NEW
-	'noisette_layout_standard' => 'Texte entier à droite', # NEW
+	'noisette_layout_box_count' => 'Úplne nahor',
+	'noisette_layout_button_count' => 'Úplne doprava',
+	'noisette_layout_standard' => 'Všetok text doprava',
 	'noisette_titre_perso' => 'Vlastný názov',
 	'nom_noisette_badge_facebook' => 'Odznak pre Facebook',
 	'nom_noisette_facebook_like' => 'Tlačidlo Páči sami pre Facebook',
-	'nom_noisette_facebook_like_box' => 'Boîte Facebook-like', # NEW
+	'nom_noisette_facebook_like_box' => 'Tlačidlo "Páči sa mi to"',
 
 	// T
 	'titre_mon_badge_facebook' => 'Môj odznak pre facebook',
