@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'choisir_noisette' => 'Vyberte si oriešok, ktorý chcete pridať:',
-	'compositions_non_installe' => '<b>Plugin compositions :</b> ce plugin n\'est pas installés sur votre site. Il n\'est pas nécessaire au fonctionnement du noizetier. Cependant, s\'il est activé, vous pourrez déclarer des compositions directement dans le noizetier.', # NEW
+	'compositions_non_installe' => '<b>Zásuvný modul Rozmiestnenia:</b> tento zásuvný modul nie je na vašej stránke nainštalovaný. Netreba spustiť noiZetier. Keď je však aktivovaný, môžete definovať rozmiestnenia priamo do noiZetiera.', # MODIF
 
 	// D
 	'description_bloc_contenu' => 'Hlavný text stránky.',
@@ -18,28 +18,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_bloctexte' => 'Názov je nepovinný.Pri písaní textu môžete používať klávesové skratky SPIPu.',
 
 	// E
-	'editer_composition' => 'Modifier cette composition', # NEW
+	'editer_composition' => 'Upraviť toto rozloženie',
 	'editer_composition_heritages' => 'Definovať dedičnosť',
-	'editer_compositions' => 'Gérer les compositions du noiZetier', # NEW
+	'editer_compositions' => 'Riadiť rozmiestnenia modulu noiZetier',
 	'editer_configurer_page' => 'Nastaviť oriešky tejto stránky',
 	'editer_exporter_configuration' => 'Exportovať konfiguráciu',
 	'editer_importer_configuration' => 'Nahrať konfig.',
-	'editer_noizetier_compositions_explication' => 'Vous pouvez créer ici des compositions qui ne différeront que par les noisettes qui leurs seront ajoutés.', # NEW
-	'editer_noizetier_compositions_titre' => 'Compositions du noiZetier', # NEW
+	'editer_noizetier_compositions_explication' => 'Tu môžete vytvoriť rozmiestnenia, ktoré sa budú odlišovať len v tom, do ktorých orieškov budú pridané.',
+	'editer_noizetier_compositions_titre' => 'Rozloženia modulu noiZetier',
 	'editer_noizetier_explication' => 'Nastavte oriešky, aby ste ich mohli pridať na stránky svojho webu.',
 	'editer_noizetier_titre' => 'Riadiť oriešky',
-	'editer_nouvelle_composition' => 'Créer une nouvelle composition', # NEW
+	'editer_nouvelle_composition' => 'Vytvoriť nové rozloženie',
 	'erreur_doit_choisir_noisette' => 'Musíte si vybrať oriešok.',
 	'erreur_mise_a_jour' => 'Pri aktualizovaní databázy sa vyskytla chyba.',
-	'explication_heritages_composition' => 'Vous pouvez définir ici les compositions qui seront héritées par les objets de la branche.', # NEW
+	'explication_heritages_composition' => 'Tu môžete nastaviť rozmiestnenia, ktoré budú používať objekty danej vetvy.',
 	'explication_noizetier_css' => 'Oriešku môžete pridať hocijaké ďalšie triedy CSS',
 	'explication_raccourcis_typo' => 'Môžete používať klávesové skratky SPIPu.',
 
 	// F
 	'formulaire_ajouter_noisette' => 'Pridať oriešok',
-	'formulaire_composition' => 'Identifiant de composition', # NEW
-	'formulaire_composition_explication' => 'Indiquez un mot-clé unique (minuscules, sans espace, sans tiret (-) et sans accent) permettant d\'identifier cette composition.<br />Par exemple : <i>macompo</i>.', # NEW
-	'formulaire_composition_mise_a_jour' => 'Composition mise à jour', # NEW
+	'formulaire_composition' => 'Identifikátor rozloženia',
+	'formulaire_composition_explication' => 'Zadajte jedinečné kľúčové slovo (malými písmenami, bez medzier, bez pomlčiek (-) a diakritiky), ktoré umožní jednoznačne označiť toto rozmiestnenie.<br />Napríklad: <i>mojeroz.</i>',
+	'formulaire_composition_mise_a_jour' => 'Rozmiestnenie aktualizované',
 	'formulaire_configurer_bloc' => 'Nastaviť blok:',
 	'formulaire_configurer_page' => 'Nastaviť stránku:',
 	'formulaire_deplacer_bas' => 'Posunúť nadol',
@@ -50,34 +50,34 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_icon' => 'Ikona',
 	'formulaire_icon_explication' => 'Môžete zadať relatívnu adresu umiestnenia ikony (napríklad: <i>images/objet-liste-contenus.png</i>). Ak si chcete pozrieť zoznam obrázkov nainštalovaných v najbežnejších priečinkoch, môžete <a href="../spip.php?page=icones_preview">navštíviť túto stránku.</a>',
 	'formulaire_identifiant_deja_pris' => 'Tento identifikátor sa už používa!',
-	'formulaire_import_compos' => 'Importer les compositions du noizetier', # NEW
+	'formulaire_import_compos' => 'Nahrať rozloženia modulu noizetier',
 	'formulaire_import_fusion' => 'Zlúčiť s aktuálnymi nastaveniami',
 	'formulaire_import_remplacer' => 'Nahradiť aktuálne nastavenia',
-	'formulaire_liste_compos_config' => 'Ce fichier de configuration définis les compositions du noizetier suivantes :', # NEW
+	'formulaire_liste_compos_config' => 'Tento súbor s nastaveniami definuje tieto rozmiestnenia modulu noizetier:',
 	'formulaire_liste_pages_config' => 'Tento súbor s nastaveniami definuje oriešky na týchto stránkach:',
-	'formulaire_modifier_composition' => 'Modifier cette composition :', # NEW
-	'formulaire_modifier_composition_heritages' => 'Modifier les héritages de cette composition :', # NEW
+	'formulaire_modifier_composition' => 'Upraviť toto rozloženie:',
+	'formulaire_modifier_composition_heritages' => 'Upraviť závislosti tohto rozmiestnenia:',
 	'formulaire_modifier_noisette' => 'Upraviť tento oriešok',
 	'formulaire_noisette_sans_parametre' => 'Tento oriešok neponúka nastavenie.',
 	'formulaire_nom' => 'Názov',
 	'formulaire_nom_explication' => 'Môžete používať tag  &lt;multi&gt;.',
-	'formulaire_nouvelle_composition' => 'Nouvelle composition', # NEW
+	'formulaire_nouvelle_composition' => 'Nové rozloženie',
 	'formulaire_obligatoire' => 'Povinné polia',
-	'formulaire_supprimer_composition' => 'Supprimer cette composition', # NEW
+	'formulaire_supprimer_composition' => 'Odstrániť toto rozloženie',
 	'formulaire_supprimer_noisette' => 'Odstrániť tento oriešok',
 	'formulaire_supprimer_noisettes_page' => 'Odstrániť oriešky tejto stránky',
-	'formulaire_type' => 'Type de composition', # NEW
-	'formulaire_type_explication' => 'Indiquez sur quel objet / quelle page porte cette composition.', # NEW
+	'formulaire_type' => 'Typ rozloženia',
+	'formulaire_type_explication' => 'Uveďte, ktorý objekt/ktorá stránka používa toto rozmiestnenie.',
 	'formulaire_type_import' => 'Typ nahrávania',
 	'formulaire_type_import_explication' => 'Súbor s nastaveniami môžete zlúčiť so svojimi aktuálnymi nastaveniami (oriešky každej stránky budú pridané k orieškom, ktoré sú už definované) alebo ním môžete svoje nastavenia nahradiť.',
 
 	// I
 	'ieconfig_ne_pas_importer' => 'Nenahrávať',
-	'ieconfig_noizetier_export_explication' => 'Exportera la configuration des noisettes et les compositions du noiZetier.', # NEW
+	'ieconfig_noizetier_export_explication' => 'Exportuje nastavenia orieškov a rozmiestnenia modulu noiZetier.',
 	'ieconfig_noizetier_export_option' => 'Zaradené do exportu?',
-	'ieconfig_non_installe' => '<b>Zásuvný modul Importeur/Exporteur de configurations (Nahrávanie a export nastavení):</b> tento zásuvný modul ešte nie je nainštalovaný na vašej stránke. Na spúšťanie Noizetiera nie je potrebný. Keď si ho však aktivujete, budete môcť exportovať a náhravať nastavenia orieškov modulu Noizetier.',
+	'ieconfig_non_installe' => '<b>Zásuvný modul Importeur/Exporteur de configurations (Nahrávanie a export nastavení):</b> tento zásuvný modul ešte nie je nainštalovaný na vašej stránke. Na spúšťanie Noizetiera nie je potrebný. Keď si ho však aktivujete, budete môcť exportovať a náhravať nastavenia orieškov modulu Noizetier.', # MODIF
 	'ieconfig_probleme_import_config' => 'Pri nahrávaní nastavení modulu noiZetier sa vyskytol problém.',
-	'info_composition' => 'COMPOSITION :', # NEW
+	'info_composition' => 'ROZLOŽENIE:',
 	'info_page' => 'STRÁNKA:',
 	'installation_tables' => 'Tabuľky zásuvného modulu noiZetier boli nainštalované.<br />',
 	'item_titre_perso' => 'vlastný názov',
@@ -94,7 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'ne_pas_definir_d_heritage' => 'Nedefinovať dedičnosť',
-	'noisettes_composition' => 'Noisettes spécifiques à la composition <i>@composition@</i> :', # NEW
+	'noisettes_composition' => 'Oriešky, ktoré sa používa iba toto rozmiestnení <i>@composition@:</i>',
 	'noisettes_page' => 'Špeciálne oriešky pre stránku <i>@type@</i>:',
 	'noisettes_toutes_pages' => 'Oriešky spoločné pre všetky stránky:',
 	'noizetier' => 'noiZetier',

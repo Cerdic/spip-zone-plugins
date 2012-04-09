@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'choisir_noisette' => 'Wählen sie die Nuss, welche sie hinzufügen wollen:',
-	'compositions_non_installe' => 'Das Plugin <b>Kompositionen:</b> ist nicht installiert. Das Plugin Nussbaum funktioniert auch ohne, jedoch können sie ihre Kompositionen direkt im Nussbaum-Plugin deklarieren, wenn es aktiv ist.',
+	'compositions_non_installe' => 'Das Plugin <b>Kompositionen:</b> ist nicht installiert. Das Plugin Nussbaum funktioniert auch ohne, jedoch können sie ihre Kompositionen direkt im Nussbaum-Plugin deklarieren, wenn es aktiv ist.', # MODIF
 
 	// D
 	'description_bloc_contenu' => 'Haupt-Inhalt jeder Seite.',
@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ieconfig_ne_pas_importer' => 'Nicht importieren',
 	'ieconfig_noizetier_export_explication' => 'Exporiert die Konfiguration der Code-Nüsse und die Kompsitionen des Nussbaums.',
 	'ieconfig_noizetier_export_option' => 'In den Export einbeziehen?',
-	'ieconfig_non_installe' => 'Das Plugin <b>Import/Export von Konfigurationen</b> ist nicht installiert.  Das Plugin Nussbaum funktioniert auch ohne, jedoch können sie die Konfiguration der Code-Nüsse im Nussbaum im- und exportieren, wenn es aktiviert ist.',
+	'ieconfig_non_installe' => 'Das Plugin <b>Import/Export von Konfigurationen</b> ist nicht installiert.  Das Plugin Nussbaum funktioniert auch ohne, jedoch können sie die Konfiguration der Code-Nüsse im Nussbaum im- und exportieren, wenn es aktiviert ist.', # MODIF
 	'ieconfig_probleme_import_config' => 'Beim Import der Konfiguration des Nussbaums ist ein Problem aufgetreten.',
 	'info_composition' => 'KOMPOSITION :',
 	'info_page' => 'SEITE:',
