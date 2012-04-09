@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_comparaison_grand_egal' => 'Hodnota musí byť väčšia alebo rovná poľu "@nom_champ@"',
 	'erreur_comparaison_petit' => 'Hodnota musí byť menšia ako pole "@nom_champ@"',
 	'erreur_comparaison_petit_egal' => 'Hodnota musí byť menšia alebo rovná ako "@nom_champ@"',
-	'erreur_couleur' => 'Le code couleur n\'est pas valide.', # NEW
+	'erreur_couleur' => 'Kód farby nie je platný.',
 	'erreur_date' => 'Tento dátum je neplatný.',
 	'erreur_date_format' => 'Formát dátumu je neplatný.',
 	'erreur_decimal' => 'Hodnota musí byť desatinné číslo.',
@@ -47,9 +47,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'normaliser_option_date_en_datetime' => 'Vo formáte "Dátum a čas" (pre SQL)',
 
 	// O
-	'option_couleur_normaliser_label' => 'Normaliser le code couleur ?', # NEW
-	'option_couleur_type_hexa' => 'Code couleur au format héxadécimal', # NEW
-	'option_couleur_type_label' => 'Type de vérification à effectuer', # NEW
+	'option_couleur_normaliser_label' => 'Štandardizovať kód farby?',
+	'option_couleur_type_hexa' => 'Kód farby v hexadecimálnom (šetnástkovom) formáte',
+	'option_couleur_type_label' => 'Typ overenia, ktorý sa má použiť',
 	'option_decimal_nb_decimales_label' => 'Počet desatinných miest',
 	'option_email_disponible_label' => 'Dostupná adresa',
 	'option_email_disponible_label_case' => 'Skontrolujte, či túto adresu už nepoužíva iný používateľ',
@@ -78,8 +78,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_type_protocole_web' => 'Internetové protokoly: HTTP alebo HTTPS',
 
 	// T
-	'type_couleur' => 'Couleur', # NEW
-	'type_couleur_description' => 'Vérifie que la valeur est un code couleur.', # NEW
+	'type_couleur' => 'Farba',
+	'type_couleur_description' => 'Skontroluje, či je hodnota zadaný kód farby.',
 	'type_date' => 'Dátum',
 	'type_date_description' => 'Skontrolujte, či je dátum vo formáte DD/MM/RRRR. Oddeľovacím znakom môže byť čokoľvek (napr. ".", "/").',
 	'type_decimal' => 'Desatinné číslo',

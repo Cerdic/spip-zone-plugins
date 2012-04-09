@@ -78,7 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_type_protocole_web' => 'Web protocols: HTTP or HTTPS',
 
 	// T
-	'type_couleur' => 'Couleur', # NEW
+	'type_couleur' => 'Colour',
 	'type_couleur_description' => 'Vérifie que la valeur est un code couleur.', # NEW
 	'type_date' => 'Date',
 	'type_date_description' => 'Check that the value is date in the DD/MM/YYYY format. The separator character can be anything (".", "/", etc).',
