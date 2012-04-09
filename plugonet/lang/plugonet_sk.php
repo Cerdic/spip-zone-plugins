@@ -14,18 +14,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_tout_decocher' => 'Odznačiť všetko',
 
 	// D
-	'details_generation_paquetxml_erreur' => 'Le paquet.xml du plugin listé ci-dessous n\'a pas été généré car des erreurs se sont produites pendant la génération. Veuillez consulter les informations ci-dessous pour apporter les corrections nécessaires.', # NEW
-	'details_generation_paquetxml_erreur_pluriel' => 'Les paquet.xml des @nb@ plugins listés ci-dessous n\'ont pas été générés car des erreurs se sont produites pendant la génération. Veuillez consulter les informations ci-dessous pour apporter les corrections nécessaires.', # NEW
-	'details_generation_paquetxml_notice' => 'Le paquet.xml du plugin listé ci-après a été correctement généré mais son plugin.xml source contient des erreurs. Veuillez donc vérifier le plugin.xml et les fichiers résultant (paquet.xml, fichiers de langue) pour déterminer si des corrections doivent être apportées.', # NEW
-	'details_generation_paquetxml_notice_pluriel' => 'Les paquet.xml des @nb@ plugins listés ci-après ont été correctement générés mais leurs plugin.xml source contiennent des erreurs. Veuillez donc vérifier les plugin.xml et les fichiers résultant (paquet.xml, fichiers de langue) pour déterminer si des corrections doivent être apportées.', # NEW
+	'details_generation_paquetxml_erreur' => 'Súbor paquet.xml zásuvného modulu, ktorý je uvedený nižšie, nebol vytvorený kvôli chybám, ktoré sa vyskytli počas jeho vytvárania. Prosím, prečítajte si informácie, ktoré sú uvedené nižšie a podľa nich vykonajte potrebné úpravy.',
+	'details_generation_paquetxml_erreur_pluriel' => 'Súbory paquet.xml @nb@ zásuvných modulov, ktoré sú uvedené nižšie, neboli vytvorené kvôli chybám, ktoré sa vyskytli počas ich vytvárania. Prosím, prečítajte si informácie, ktoré sú uvedené nižšie a podľa nich vykonajte potrebné úpravy.',
+	'details_generation_paquetxml_notice' => 'Súbor paquet.xml zásuvného modulu, ktorý je uvedený nižšie, bol úspešne vytvorený, ale v jeho zdrojovom súbore plugin.xml sú chyby. Prosím skontrolujte súbor plugin.xml a súbory, ktoré z neho vznikli (paquet.xml, jazykové súbory) a zistite, či netreba vykonať nejaké úpravy.',
+	'details_generation_paquetxml_notice_pluriel' => 'Súbory paquet.xml @nb@ zásuvných modulov, ktoré sú uvedené nižšie, boli úspešne vytvorené, ale v ich zdrojových súboroch plugin.xml sú chyby. Prosím skontrolujte súbory plugin.xml a súbory, ktoré z týchto súborov vznikli (súbory paquet.xml, jazykové súbory) a zistite, či netreba vykonať nejaké úpravy.',
 	'details_generation_paquetxml_succes' => 'Súbor paquet.xml zásuvného modulu uvedeného nižšie bol úspešne vytvorený.',
 	'details_generation_paquetxml_succes_pluriel' => 'Súbory paquet.xml @nb@ zásuvných modulov uvedených nižšie boli úspešne vytvorené.',
-	'details_validation_paquetxml_erreur' => 'La validation formelle du plugin.xml listé ci-dessous a révélé des erreurs. Veuillez consulter les informations ci-dessous pour apporter les corrections.', # NEW
-	'details_validation_paquetxml_erreur_pluriel' => 'La validation formelle des @nb@ plugin.xml listés ci-dessous a révélé des erreurs. Veuillez consulter les informations ci-dessous pour apporter des corrections.', # NEW
-	'details_validation_paquetxml_succes' => 'Pri formálnom potvrdení súboru plugin.xml uvedeného nižšie sa nenašla žiadna chyba.',
-	'details_validation_paquetxml_succes_pluriel' => 'Pri formálnom potvrdení @nb@ súborov plugin.xml uvedených nižšie sa nenašla žiadna chyba.',
-	'details_verification_pluginxml_erreur' => 'La vérification du plugin.xml listé ci-dessous a révélé des erreurs. Veuillez consulter les informations ci-dessous pour apporter des corrections si besoin (toutes les erreurs liées à l\'utilisation de balise a, code, br... dans la description ne sont pas à considérer).', # NEW
-	'details_verification_pluginxml_erreur_pluriel' => 'La vérification des @nb@ plugin.xml listés ci-dessous a révélé des erreurs. Veuillez consulter les informations ci-dessous pour apporter des corrections si besoin (toutes les erreurs liées à l\'utilisation de balise a, code, br... dans la description ne sont pas à considérer).', # NEW
+	'details_validation_paquetxml_erreur' => 'Formálna kontrola súboru plugin.xml, ktorý je uvedený nižšie, odhalila chyby. Prosím, prečítajte si informácie, ktoré sú uvedené nižšie a podľa nich vykonajte potrebné úpravy.',
+	'details_validation_paquetxml_erreur_pluriel' => 'Formálna kontrola súborov @nb@ plugin.xml, ktoré sú uvedené nižšie, odhalila chyby. Prosím, prečítajte si informácie, ktoré sú uvedené nižšie a podľa nich vykonajte potrebné úpravy.',
+	'details_validation_paquetxml_succes' => 'Pri formálnej kontrole súboru plugin.xml uvedeného nižšie sa nenašla žiadna chyba.',
+	'details_validation_paquetxml_succes_pluriel' => 'Pri formálnej kontrole @nb@ súborov plugin.xml uvedených nižšie sa nenašla žiadna chyba.',
+	'details_verification_pluginxml_erreur' => 'Kontrola súboru plugin.xml, ktorý je uvedený nižšie, odhalila chyby. Prosím, prečítajte si informácie nižšie a ak je to potrebné vykonajte úpravy (neberú sa do úvahy žiadne chyby, ktoré sa týkajú použitia tagov a, code, br... v popise).',
+	'details_verification_pluginxml_erreur_pluriel' => 'Kontrola @nb@ súborov plugin.xml, ktoré sú uvedené nižšie, odhalila chyby. Prosím, prečítajte si informácie nižšie a ak je to potrebné vykonajte úpravy (neberú sa do úvahy žiadne chyby, ktoré sa týkajú použitia tagov a, code, br... v popise).',
 	'details_verification_pluginxml_succes' => 'Kontrola súboru plugin.xml uvedeného nižšie nenašla žiadnu chybu.',
 	'details_verification_pluginxml_succes_pluriel' => 'Kontrola @nb@ súborov plugin.xml uvedených nižšie nenašla žiadnu chybu.',
 
@@ -48,14 +48,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'index_aide_paqxmlproc' => 'Tag <code>procure</code>',
 	'index_aide_paqxmlspip' => 'Tag <code>spip</code>',
 	'index_aide_paqxmltrad' => 'Tag <code>traduire</code>',
-	'info_choisir_paquetxml_valider' => 'Choisissez les fichiers paquet.xml que vous souhaitez valider. Vous pouvez aussi cliquer sur le nom d\'un paquet.xml pour lancer directement sa validation formelle.', # NEW
-	'info_choisir_pluginxml_generer' => 'Choisissez les fichiers que vous souhaitez convertir parmi ceux présents dans le dossier <code>plugins/</code> de ce site. Vous pouvez aussi cliquer sur le nom d\'un plugin.xml pour lancer directement la génération forcée de son paquet.xml dans le dossier temporaire du site.', # NEW
-	'info_choisir_pluginxml_verifier' => 'Choisissez les fichiers plugin.xml que vous souhaitez vérifier. Vous pouvez aussi cliquer sur le nom d\'un plugin.xml pour lancer directement sa vérification.', # NEW
-	'info_forcer_paquetxml' => 'Par défaut, le fichier paquet.xml n\'est écrit que si son contenu est valide selon la nouvelle DTD. Vous pouvez cependant forcer son écriture quel que soit le résultat de la validation.', # NEW
-	'info_generer' => 'Cette option vous permet de générer le nouveau fichier paquet.xml de description d\'un plugin à partir du fichier plugin.xml existant.<br />Outre le fichier paquet.xml, les fichiers de langue des items slogan et description du plugin ainsi qu\'un fichier de commandes Unix sont créés dans des dossiers propres à chaque plugin.', # NEW
-	'info_simuler_paquetxml' => 'Par défaut, les fichiers résultat sont créés dans le dossier d\'installation de chaque plugin. Vous pouvez cependant choisir de les créer dans un dossier temporaire du site.', # NEW
-	'info_valider' => 'Cette option vous permet de valider formellement le fichier paquet.xml de description d\'un plugin selon sa DTD. Ce formulaire propose la liste des fichiers paquet.xml présents dans tous les dossiers de ce site.', # NEW
-	'info_verifier' => 'Cette option vous permet de vérifier le fichier plugin.xml de description d\'un plugin afin d\'anticiper des problèmes lors de génération du fichier paquet.xml. Ce formulaire propose la liste des fichiers plugin.xml présents dans tous les dossiers de ce site.', # NEW
+	'info_choisir_paquetxml_valider' => 'Vyberte si súbory paquet.xml, ktoré chcete skontrolovať. Môžete kliknúť aj na názov súboru paquet.xml a spustiť formálnu kontrolu priamo.',
+	'info_choisir_pluginxml_generer' => 'Zo súborov tejto stránky, ktoré sa nachádzajú v priečinku <code>plugins/,</code> si vyberte tie, ktoré chcete konvertovať. Môžete kliknúť aj na názov súboru plugin.xml a spustiť predvolené priame vytváranie zo súboru paquet.xml do dočasného priečinka stránky.',
+	'info_choisir_pluginxml_verifier' => 'Vyberte si súbory plugin.xml, ktoré chcete skontrolovať. Môžete kliknúť aj na názov súboru  plugin.xml a kontrolu spustiť priamo.',
+	'info_forcer_paquetxml' => 'Podľa predvolených nastavení sa súbor paquet.xml nezapisuje do nového DTD, ak je jeho obsah platný. Môžete nastaviť jeho zapisovanie bez ohľadu na výsledok kontroly.',
+	'info_generer' => 'Táto možnosť vám umožňuje vytvoriť nový súbor paquet.xml s popisom zásuvného modulu z existujúceho súboru plugin.xml.<br />Okrem toho bude do priečinka každého zásuvného modulu vytvorený súbor paquet.xml, jazykové súbory s položkami sloganu a popisu zásuvného modulu, ako aj jeden súbor s príkazmi pre Unix.',
+	'info_simuler_paquetxml' => 'Podľa predvolených nastavení sa výsledné súbory vytvárajú do inštalačného priečinka každého zásuvného modulu. Môžete sa však rozhodnúť, že pre stránku vytvoríte iný dočasný priečinok.',
+	'info_valider' => 'Táto možnosť vám umožňuje vykonať formálnu kontrolu súboru paquet.xml s popisom zásuvného modulu podľa jeho DTD. V tomto formulári nájdete zoznam súborov paquet.xml, ktoré sa nachádzajú vo všetkých priečinkoch tejto stránky.',
+	'info_verifier' => 'Táto možnosť vám umožňuje skontrolovať súbor plugin.xml s popisom zásuvného modulu, a tak predísť problémom pri vytváraní súboru paquet.xml. V tomto formulári nájdete zoznam súborov plugin.xml, ktoré sa nachádzajú vo všetkých priečinkoch tejto stránky.',
 
 	// L
 	'label_choisir_xml' => 'dostupných: @dtd@.xml',
@@ -101,7 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_boite_aide_paquetxml' => 'Pomocník k súboru paquet.xml',
 	'titre_form_generer' => 'Vytvorenie súborov paquet.xml',
-	'titre_form_valider' => 'Formálne potvrdenie súborov paquet.xml',
+	'titre_form_valider' => 'Formálna kontrola súborov paquet.xml',
 	'titre_form_verifier' => 'Kontrola súborov plugin.xml',
 	'titre_page' => 'PlugOnet',
 	'titre_page_navigateur' => 'PlugOnet'
