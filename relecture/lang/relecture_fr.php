@@ -11,8 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 	'bouton_ouvrir_relecture' => 'Ouvrir un cycle de relecture',
-	'bouton_modifier_relecture' => 'Paramétrer la relecture',
-	'bouton_participer_relecture' => 'Participer',
+	'bouton_modifier_relecture' => 'Modifier la description',
+	'bouton_configurer_relecture' => 'Configurer',
 	'bouton_participer_relecture' => 'Participer',
 	'bouton_historique_relectures' => 'Afficher les relectures terminées',
 
@@ -32,6 +32,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_numero_relecture' => 'relecture numéro',
 
 // L
+	'label_relecture_article' => 'Article en relecture',
+	'label_relecture_description' => 'Description',
+	'label_relecture_date_ouverture' => 'Date',
+	'label_relecture_revision_ouverture' => 'Révision',
+	'label_relecture_date_cloture' => 'Date',
+	'label_relecture_revision_cloture' => 'Révision',
 	'label_commentaires_ouverts' => 'Ouverts',
 	'label_commentaires_acceptes' => 'Acceptés',
 	'label_commentaires_refuses' => 'Refusés',
@@ -40,6 +46,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_instituer_relecture' => 'Cette relecture est :',
 	'texte_relecture_ouverte' => 'Ouverte',
 	'texte_relecture_fermee' => 'Fermée',
+	'titre_boite_ouverture' => 'Ouverture',
+	'titre_boite_cloture' => 'Clôture',
 	'titre_relecture_ouverte' => 'x',
 	'titre_relecture_fermee' => 'y',
 	'titre_info_relecture_article' => 'Relecture en cours',

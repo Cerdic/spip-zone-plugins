@@ -28,7 +28,7 @@
 	#SET{pied, #BOITE_PIED}
 	[(#AUTORISER{modifier, relecture, #ID_RELECTURE})
 		[(#GET{pied}|unique)]
-		[(#BOUTON_ACTION{<:bouton_modifier:>, #URL_ECRIRE{relecture_edit, id_relecture=#ID_RELECTURE}, '', '', ''})]
+		[(#BOUTON_ACTION{<:relecture:bouton_configurer_relecture:>, #URL_ECRIRE{relecture, id_relecture=#ID_RELECTURE}, '', '', ''})]
 	]
 	[(#AUTORISER{commenter, relecture, #ID_RELECTURE})
 		[(#GET{pied}|unique)]

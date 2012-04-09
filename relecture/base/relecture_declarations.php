@@ -33,7 +33,8 @@ function relecture_declarer_tables_objets_sql($tables) {
 		'principale'			=> 'oui',
 
 		// Titre, date et gestion du statut
-		'titre'					=> "id_relecture AS titre, '' AS lang",
+		'titre'				=> "concat('Relecture ', id_relecture) AS titre, '' AS lang",
+		'date' 				=> 'periode_fin',
 		'texte_changer_statut' => 'relecture:texte_instituer_relecture',
 		'aide_changer_statut' => '',
 		'statut_titres' => array(
