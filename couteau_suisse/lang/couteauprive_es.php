@@ -348,6 +348,7 @@ Los bloques multi se muestran siempre en el idioma solicitado por el visitante.'
 
 @puce@ Se ofrecerán dos soluciones para generar la pequeña ventana automática que aparece al pasar el ratón por encima. [[%glossaire_js%]]', # MODIF
 	'glossaire:nom' => 'Glosario interno',
+	'glossaire_abbr' => 'Ignorer les balises <code><abbr></code> et <code><acronym></code>', # NEW
 	'glossaire_css' => 'Solución CSS',
 	'glossaire_erreur' => 'Le mot «@mot1@» rend indétectable le mot «@mot2@»', # NEW
 	'glossaire_inverser' => 'Correction proposée : inverser l\'ordre des mots en base.', # NEW

@@ -327,6 +327,7 @@ Dikkat : forumlarda, dilekçelerde, paylaşılan akılarda ve benzerlerinde java
 
 @puce@ Deux solutions vous sont offertes pour générer la petite fenêtre automatique qui apparaît lors du survol de la souris. [[%glossaire_js%]]', # MODIF
 	'glossaire:nom' => 'İç endeks',
+	'glossaire_abbr' => 'Ignorer les balises <code><abbr></code> et <code><acronym></code>', # NEW
 	'glossaire_css' => 'CSS çözümü',
 	'glossaire_erreur' => 'Le mot «@mot1@» rend indétectable le mot «@mot2@»', # NEW
 	'glossaire_inverser' => 'Correction proposée : inverser l\'ordre des mots en base.', # NEW

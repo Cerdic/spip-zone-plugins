@@ -442,11 +442,12 @@ This means that multi blocks will always displayed in the language requested by 
 
 @puce@ There is a choice of two options for generating the small window which appears for the mouseover or hover event. [[%glossaire_js%]]', # MODIF
 	'glossaire:nom' => 'Internal glossary',
+	'glossaire_abbr' => 'Ignorer les balises <code><abbr></code> et <code><acronym></code>', # NEW
 	'glossaire_css' => 'CSS solution',
 	'glossaire_erreur' => 'The "@mot1@" keyword makes the "@mot2@" undetectable',
 	'glossaire_inverser' => 'Correction proposed: reverse the order of the keywords in the database.',
 	'glossaire_js' => 'JavaScript solution',
-	'glossaire_ok' => 'The list of @nb@ keyword(s) checked in the database appears to be correct.',
+	'glossaire_ok' => 'The list of @nb@ keyword(s) checked in the database appears to be correct.', # MODIF
 	'guillemets:description' => 'Automatically replaces straight inverted commas (") by curly ones, using the correct ones for the current language. The replacement does not change the text stored in the database, but only the display on the screen.',
 	'guillemets:nom' => 'Curly inverted commas',
 

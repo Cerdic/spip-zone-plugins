@@ -365,13 +365,14 @@ Aleshores, els blocs multi es mostren sempre en la llengua demanada pel visitant
 
 @puce@ Per cada paraula, teniu la possibilitat d\'escollir el número màxim d\'enllaços creats als vostres textos. Tot valor nul o negatiu implica que es tractaran totes les paraules reconegudes. [[%glossaire_limite% par mot-clé]]
 
-@puce@ S\'ofereixen dues solucions per gestionar la petita finestra automàtica que apareix quan hi passes per sobre el ratolí. [[%glossaire_js%]]',
+@puce@ S\'ofereixen dues solucions per gestionar la petita finestra automàtica que apareix quan hi passes per sobre el ratolí. [[%glossaire_js%]]', # MODIF
 	'glossaire:nom' => 'Glossari intern',
+	'glossaire_abbr' => 'Ignorer les balises <code><abbr></code> et <code><acronym></code>', # NEW
 	'glossaire_css' => 'Solució CSS',
 	'glossaire_erreur' => 'La paraula «@mot1@» fa que no es detecti la paraula «@mot2@»',
 	'glossaire_inverser' => 'Correcció que es proposa: invertir l\'ordre de paraules a la base.',
 	'glossaire_js' => 'Solució JavaScript',
-	'glossaire_ok' => 'La llista de @nb@ paraula(es) estudiada(es) a la base sembla correcta.',
+	'glossaire_ok' => 'La llista de @nb@ paraula(es) estudiada(es) a la base sembla correcta.', # MODIF
 	'guillemets:description' => 'Substitueix automàticament les cometes (") per les cometes tipogràfiques de la llengua de composició. La substitució, transparent per l\'usuari, no modifica el text original sinó només la seva publicació final. ',
 	'guillemets:nom' => 'Cometes tipogràfiques',
 

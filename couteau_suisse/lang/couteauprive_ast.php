@@ -352,6 +352,7 @@ Los bloques multi s\'amuesen siempre na llingua pidía pol visitante.', # MODIF
 
 @puce@ Ufrense dos soluciones pa xenerar el ventanucu automáticu que apaez cuando pases el mur enriba la pallabra. [[%glossaire_js%]]', # MODIF
 	'glossaire:nom' => 'Glosariu internu',
+	'glossaire_abbr' => 'Ignorer les balises <code><abbr></code> et <code><acronym></code>', # NEW
 	'glossaire_css' => 'Solución CSS',
 	'glossaire_erreur' => 'Le mot «@mot1@» rend indétectable le mot «@mot2@»', # NEW
 	'glossaire_inverser' => 'Correction proposée : inverser l\'ordre des mots en base.', # NEW

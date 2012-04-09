@@ -352,11 +352,12 @@ Thus multi blocks are always displayed in the language requested by the visitor.
 
 @puce@ There is a choice of two options for generating the small window which appears on the mouseover. [[%glossaire_js%]]', # MODIF
 	'glossaire:nom' => 'Interný slovník',
+	'glossaire_abbr' => 'Ignorer les balises <code><abbr></code> et <code><acronym></code>', # NEW
 	'glossaire_css' => 'Riešenie CSS',
 	'glossaire_erreur' => 'Kvôli kľúčovému slovu "@mot1@" sa kľúčové slovo "@mot2@" nedá zistiť',
 	'glossaire_inverser' => 'Navrhnutá oprava: prehoďte poradie kľúčových slov v databáze.',
 	'glossaire_js' => 'Riešenie JavaScriptom',
-	'glossaire_ok' => 'Zoznam @nb@ kľúčových slov v databáze sa zdá byť správny.',
+	'glossaire_ok' => 'Zoznam @nb@ kľúčových slov v databáze sa zdá byť správny.', # MODIF
 	'guillemets:description' => 'Automatically replaces straight inverted commas (") by curly ones, using the correct ones for the current language. The replacement does not change the text stored in the database, but only the display on the screen.', # MODIF
 	'guillemets:nom' => 'Okrúhle opačné bodky',
 

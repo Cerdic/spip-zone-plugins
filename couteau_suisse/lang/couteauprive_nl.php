@@ -340,6 +340,7 @@ Opgelet: in de forums, petities, georganiseerde stromen, enz., het beleid van ja
 	'glossaire:aide' => 'Een tekst zonder verklarende woordenlijst (glossarium) : <b>@_CS_SANS_GLOSSAIRE@</b>',
 	'glossaire:description' => '@puce@ Beleid van een intern glossarium in verband met één of meer groepen sleutelwoorden. Schrijft hier de naam van de groepen in door ze te scheiden door beide punten « : ». Door leegte te laten het hokje dat (of door "Glossarium" te typen) volgt, is het de groep "Glossarium" die zal gebruikt worden.[[%glossaire_groupes%]]@puce@ Voor elk woord, hebt u de mogelijkheid om het maximumaantal band te kiezen die in uw teksten wordt gecreëerd. Elke nul of negatieve waarde impliceert dat alle erkende woorden zullen behandeld worden. [[%glossaire_limite% per sleutelwoord]]@puce@ worden Twee oplossingen u aangeboden om het kleine automatische venster te creëren dat bij het overzicht van de muis blijkt.[[%glossaire_js%]]', # MODIF
 	'glossaire:nom' => 'Intern glossarium',
+	'glossaire_abbr' => 'Ignorer les balises <code><abbr></code> et <code><acronym></code>', # NEW
 	'glossaire_css' => 'Oplossing CSS',
 	'glossaire_erreur' => 'Le mot «@mot1@» rend indétectable le mot «@mot2@»', # NEW
 	'glossaire_inverser' => 'Correction proposée : inverser l\'ordre des mots en base.', # NEW

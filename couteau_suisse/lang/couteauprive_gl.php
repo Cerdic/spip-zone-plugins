@@ -354,6 +354,7 @@ Os bloques multi móstranse entón sempre na lingua demandada polo visitante.', 
 
 @puce@ Dúas solucións se ofrecen para xerar a pequena xanela automática que aparece cando se sobrevoa á ocorrencia. [[%glossaire_js%]]', # MODIF
 	'glossaire:nom' => 'Glosario interno',
+	'glossaire_abbr' => 'Ignorer les balises <code><abbr></code> et <code><acronym></code>', # NEW
 	'glossaire_css' => 'Solución CSS',
 	'glossaire_erreur' => 'Le mot «@mot1@» rend indétectable le mot «@mot2@»', # NEW
 	'glossaire_inverser' => 'Correction proposée : inverser l\'ordre des mots en base.', # NEW
