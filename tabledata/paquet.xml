@@ -1,0 +1,16 @@
+<paquet
+	prefix="tabledata"
+	categorie="outil"
+	version="2.2.2"
+	etat="dev"
+	compatibilite="[2.0.0;3.0.*]"
+	logo="img_pack/tabledata.gif"
+>	
+
+	<nom>TableDATA</nom>
+	<auteur lien="mailto:christophe (at) cboutin . net">Christophe Boutin</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	<copyright>2009</copyright>
+
+	<menu nom="tabledata" titre="tabledata:tabledata" parent="bando_configuration" icone="img_pack/tabledata.gif" action="tabledata" />
+</paquet>
