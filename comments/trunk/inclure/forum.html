@@ -4,7 +4,7 @@
 	<INCLURE{fond=comments-#CONFIG{comments/comments_fil,list},env,ajax} />
 	[(#ENV{repondre_url}|oui)
 	[<div class="comment-form">
-		[<h3>(#ENV{repondre_titre})</h3>]
+		[<h2 class="h2">(#ENV{repondre_titre})</h2>]
 		(#FORMULAIRE_FORUM{#SELF})
 	</div>]
 	[(#PARAMETRES_FORUM|oui)<INCLURE{fond=comments-feed}{env}>]
