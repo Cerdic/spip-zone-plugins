@@ -103,9 +103,9 @@ function tradlang_dir_lang(){
 		return false;
 	}
 	else{
-		$squelettes = $dossier_squelettes ? $dossier_squelettes : _DIR_RACINE.'squelettes/';
+		$squelettes = $dossier_squelettes ? $dossier_squelettes : _DIR_RACINE.'squelettes';
 	}
-	if(!is_dir($dir_lang=$squelettes.'lang')){
+	if(!is_dir($dir_lang=$squelettes.'/lang')){
 		return false;
 	}
 	return $dir_lang;

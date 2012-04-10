@@ -61,7 +61,7 @@ function tradlang_post_edition($flux){
 				$infos = sql_fetsel('*',$flux['args']['table'],'id_tradlang='.intval($flux['args']['id_objet']));
 				$module = sql_fetsel('*','spip_tradlang_modules','module='.sql_quote($infos['module']));
 				$sauvegarder_module = charger_fonction('tradlang_sauvegarde_module','inc');
-				$sauvegarder_module($module,$infos['lang'],$dir_lang);
+				$sauvegarder_module($module['module'],$infos['lang'],$dir_lang);
 			}
 		}
 	}

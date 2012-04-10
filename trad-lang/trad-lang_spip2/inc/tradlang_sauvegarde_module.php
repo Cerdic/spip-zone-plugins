@@ -16,13 +16,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param object $langue la langue cible
  * @return 
  */
-function inc_tradlang_sauvegarde_module_dist($module,$langue){
-
+function inc_tradlang_sauvegarde_module_dist($module,$langue,$dir_lang=false){
 	include_spip('inc/flock');
 	
-	$dir_lang = _DIR_VAR.'/cache-lang/'.$module;
-	if(!is_dir(_DIR_VAR.'/cache-lang/')){
-		sous_repertoire(_DIR_VAR,'cache-lang');
+	if(!$dir_lang){
+		$dir_lang = _DIR_VAR.'/cache-lang/'.$module;
+		if(!is_dir(_DIR_VAR.'/cache-lang/')){
+			sous_repertoire(_DIR_VAR,'cache-lang');
+		}
 	}
 	if(!is_dir($dir_lang)){
 		sous_repertoire($dir_lang);
