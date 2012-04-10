@@ -1,6 +1,6 @@
 <BOUCLE_afficher_contenu(RELECTURES){id_relecture=#ENV{id}}{statut?}>
 [<div class="champ contenu_texte[ (#DESCRIPTION*|strlen|?{'',vide})]">
 	<div class='label'><:relecture:label_relecture_description:></div>
-	<div dir='#LANG_DIR' class='#EDIT{texte} texte'>(#DESCRIPTION|image_reduire{500,0})</div>
+	<div dir='#LANG_DIR' class='#EDIT{description} texte'>(#DESCRIPTION|image_reduire{500,0})</div>
 </div>]
 </BOUCLE_afficher_contenu>

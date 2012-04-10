@@ -3,6 +3,7 @@
 // Declaration des tables pourles nouveaux objets de Relecture:
 // - relecture : table spip_relectures
 // - commentaire : table spip_commentaires
+// Les relecteurs sont inseres dans la table spip_auteurs_liens
 //
 function relecture_declarer_tables_objets_sql($tables) {
 	include_spip('inc/config');
@@ -12,21 +13,20 @@ function relecture_declarer_tables_objets_sql($tables) {
 		'table_objet'			=> 'relectures',
 		'type'					=> 'relecture',
 		'field'					=> array(
-			"id_relecture"	=> "bigint(21) NOT NULL",
-			"periode_debut"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-			"periode_fin"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-			"relecteurs"	=> "text DEFAULT '' NOT NULL", //tableau serialise des id d'auteurs
-			"description"	=> "text DEFAULT '' NOT NULL",
-			"id_article"	=> "bigint(21) NOT NULL",
-			"rev_ouverture" => "bigint(21) NOT NULL",
-			"article_descr"	=> "text DEFAULT '' NOT NULL",
-			"article_chapo"	=> "mediumtext DEFAULT '' NOT NULL",
-			"article_texte"	=> "longtext DEFAULT '' NOT NULL",
-			"article_ps"	=> "mediumtext DEFAULT '' NOT NULL",
-			"statut"		=> "varchar(10) DEFAULT '' NOT NULL",
-			"date_cloture"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-			"rev_cloture"	=> "bigint(21) NOT NULL",
-			"maj"			=> "timestamp"),
+			"id_relecture"		=> "bigint(21) NOT NULL",
+			"date_ouverture"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+			"date_fin_commentaire" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+			"description"		=> "text DEFAULT '' NOT NULL",
+			"id_article"		=> "bigint(21) NOT NULL",
+			"revision_ouverture"=> "bigint(21) NOT NULL",
+			"article_descr"		=> "text DEFAULT '' NOT NULL",
+			"article_chapo"		=> "mediumtext DEFAULT '' NOT NULL",
+			"article_texte"		=> "longtext DEFAULT '' NOT NULL",
+			"article_ps"		=> "mediumtext DEFAULT '' NOT NULL",
+			"statut"			=> "varchar(10) DEFAULT '' NOT NULL",
+			"date_cloture"		=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+			"revision_cloture"	=> "bigint(21) NOT NULL",
+			"maj"				=> "timestamp"),
 		'key'					=> array(
 			"PRIMARY KEY"	=> "id_relecture",
 			"KEY id_article"	=> "id_article"),
@@ -34,7 +34,7 @@ function relecture_declarer_tables_objets_sql($tables) {
 
 		// Titre, date et gestion du statut
 		'titre'				=> "concat('Relecture ', id_relecture) AS titre, '' AS lang",
-		'date' 				=> 'periode_fin',
+		'date' 				=> 'date_fin_commentaire',
 		'texte_changer_statut' => 'relecture:texte_instituer_relecture',
 		'aide_changer_statut' => '',
 		'statut_titres' => array(

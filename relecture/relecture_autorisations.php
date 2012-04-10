@@ -111,13 +111,13 @@ function autoriser_relecture_commenter_dist($faire, $type, $id, $qui, $opt) {
 
 	$from = 'spip_relectures';
 	$where = array("id_relecture=$id");
-	$infos = sql_fetsel('id_article, relecteurs, periode_fin', $from, $where);
-	$les_relecteurs = unserialize($infos['relecteurs']);
+	$infos = sql_fetsel('id_article, date_fin_commentaire', $from, $where);
 
+	$les_relecteurs = lister_objets_lies('auteur', 'relecture', $id, 'auteurs_liens');
 	$les_auteurs = lister_objets_lies('auteur', 'article', $infos['id_article'], 'auteurs_liens');
 
 	return
-		(strtotime($infos['periode_fin'])>time()
+		(strtotime($infos['date_fin_commentaire'])>time()
 		AND (in_array($qui['id_auteur'], $les_auteurs)
 			OR in_array($qui['id_auteur'], $les_relecteurs)));
 
