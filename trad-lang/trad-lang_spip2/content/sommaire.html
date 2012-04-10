@@ -24,5 +24,7 @@
 		<:tradlang:texte_voir_bilan{url=#URL_PAGE{tradlang_bilan}}:>
 	</p>
 </div>
+[(#CONFIG{objets_versions}|unserialize|is_array|?{#SET{objets_versions,#CONFIG{objets_versions}|unserialize},#SET{objets_versions,#ARRAY}})]
+[(#VAL{spip_tradlangs}|in_array{#GET{objets_versions}}|oui)
 <INCLURE{fond=noisettes/listes/tradlang_liste_revision,env,ajax} />
-</div>
+]</div>

@@ -32,8 +32,12 @@
 		<h3>
 			<:tradlang:titre_modifications_chaines:>
 		</h3>
-		#SET{url_modif,#URL_PAGE{traduction}|parametre_url{etape,revision}}
-		[(#INCLURE{fond=prive/objets/liste/versions,objet=tradlang,url_modif=#GET{url_modif},id_objet=#ID_TRADLANG,env,ajax}|sinon{<p><:tradlang:info_chaine_jamais_modifiee:></p>})]
+		
+		[(#CONFIG{objets_versions}|unserialize|is_array|?{#SET{objets_versions,#CONFIG{objets_versions}|unserialize},#SET{objets_versions,#ARRAY}})]
+		[(#VAL{spip_tradlangs}|in_array{#GET{objets_versions}}|oui)
+			#SET{url_modif,#URL_PAGE{traduction}|parametre_url{etape,revision}}
+			[(#INCLURE{fond=prive/objets/liste/versions,objet=tradlang,url_modif=#GET{url_modif},id_objet=#ID_TRADLANG,env,ajax}|sinon{<p><:tradlang:info_chaine_jamais_modifiee:></p>})]
+		]
 	</div>
 	
 	<div>
