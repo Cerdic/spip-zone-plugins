@@ -1,10 +1,10 @@
 <paquet
 	prefix="pays"
 	categorie="divers"
-	version="2.0.0"
+	version="2.1.0"
 	etat="stable"
 	compatibilite="[3.0.0-alpha2;3.0.*]"
-	logo="img/pays_32x32.png"
+	logo="prive/themes/spip/images/pays-32.png"
 	schema="1.2.1"
 	documentation="http://www.spip-contrib.net/Liste-des-pays-avec-codes-ISO-3166-1"
 >	

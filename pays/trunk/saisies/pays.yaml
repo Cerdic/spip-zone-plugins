@@ -1,7 +1,7 @@
 
 titre: '<:pays:titre_page_test:>'
 description: '<:pays:titre_page_test:>'
-icone: 'img/pays_32x32.png'
+icone: 'prive/themes/spip/images/pays-24.png'
 options:
   -
     saisie: 'fieldset'
@@ -99,4 +99,5 @@ defaut:
   options:
     label: '<:pays:pays:>'
     defaut: '70'
-
+    # champs extras (definition du champ sql)
+    sql: "smallint(6) DEFAULT '' NOT NULL"
