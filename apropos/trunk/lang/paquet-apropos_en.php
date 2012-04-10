@@ -23,15 +23,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	- if you wrote: <code>#APROPOS{liste}</code>, you get the list of the actives plugins,
 
-	- if you wrote: <code>#APROPOS{nombre}</code>, you get the number of all the actives plugins AND extensions.
+	- if you wrote: <code>#APROPOS{nombre}</code>, you get the number of all the actives plugins AND locked plugins.
 
 	- if you wrote: <code>#APROPOS{plugins}</code>, you get the number of the actives plugins.
 
-	- if you wrote: <code>#APROPOS{extensions}</code>, you get the number of the actives extensions.
+	- if you wrote: <code>#APROPOS{extensions}</code>, you get the number of the actives locked plugins.
 
 	- if you wrote: <code>#APROPOS{adisposition}</code>, you get the number of plugins in the folder plugins.
 
-	- if you wrote: <code>#APROPOS{disponible}</code>, you get the total number of extensions and plugins of your configuration.
+	- if you wrote: <code>#APROPOS{disponible}</code>, you get the total number of locked plugins and plugins of your configuration.
 
 	
 
@@ -39,15 +39,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	<br />To view the list in an article, you must write <code><apropos|liste></code>. 
 
-	To display the number of actives plugins AND extensions, write <code><apropos|nombre></code>.
+	To display the number of actives plugins AND locked plugins, write <code><apropos|nombre></code>.
 
     To display the number of actives plugins, write <code><apropos|plugins></code>.
 
-    To display the number of actives extensions, write <code><apropos|extensions></code>.<br />
+    To display the number of actives locked plugins, write <code><apropos|extensions></code>.<br />
 	
 	To display the number of plugins in the folder plugins, write <code><apropos|adisposition></code>.
 
-	To display the total number of extensions and plugins of your configuration, write <code><apropos|disponible></code>.
+	To display the total number of locked plugins and plugins of your configuration, write <code><apropos|disponible></code>.
 
 	If you want to display the full description of a specific plugin, use this: <code><apropos|prefixe=the prefixe of the plugin></code>. For example, to display the description of this plugin, write: <code><apropos|prefixe=apropos></code>.
 

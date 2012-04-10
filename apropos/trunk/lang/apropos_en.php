@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'la_demonstration' => 'The plugin in action:',
 	
 // E
-	'extensions_automatiquement' => 'extensions automaticly enabled',
+	'extensions_automatiquement' => 'locked plugins automaticly enabled',
 	'erreur_prefixe' => 'Vous avez entr&eacute; <b>@params@</b>',
 	
 // L

@@ -44,7 +44,7 @@ function calcul_info_apropos($params){
 //liste_prefix_plugin_actifs est la liste des prefixes des plugins actifs 
 $liste_prefix_plugin_actifs = liste_chemin_plugin_actifs();
 // $liste_prefix_extensions_actives est la liste des prefixes des extensions actives
-$liste_prefix_extensions_actives = liste_plugin_files(_DIR_EXTENSIONS);
+$liste_prefix_extensions_actives = liste_plugin_files(_DIR_PLUGINS_DIST);
 // liste la totalité des plugins di dosier plugin
 $liste_tous_les_plugins = liste_plugin_files(_ROOT_PLUGINS);
 //return "<b>".$params."</b>";
@@ -56,7 +56,7 @@ switch ($params) {
 	$liste_plugins_actifs = apropos_affiche_les_pluginsActifs($liste_prefix_plugin_actifs,$afficheQuoi="resume");
 
 	/* on s'occupe de la liste des extensions */
-	$liste_extensions_actives = apropos_affiche_les_extension(_DIR_EXTENSIONS,$afficheQuoi="resume");
+	$liste_extensions_actives = apropos_affiche_les_extension(_DIR_PLUGINS_DIST,$afficheQuoi="resume");
 
 	return $liste_plugins_actifs.$liste_extensions_actives;
 	break;
@@ -100,11 +100,11 @@ switch ($params) {
 
 function apropos_affiche_les_extension($liste_extensions_actives,$afficheQuoi){
 	$lesExtensions = "";
-	if ($liste_extensions = liste_plugin_files(_DIR_EXTENSIONS)) {
+	if ($liste_extensions = liste_plugin_files(_DIR_PLUGINS_DIST)) {
 		$format = 'liste'; 
 		$lesExtensions .= "<div class='apropos-liste'>";
 		$lesExtensions .= "<h3>".count($liste_extensions)." "._T('apropos:extensions_automatiquement').".</h3>";
-		$lesExtensions .= apropos_afficher_list(self(), $liste_extensions,$liste_extensions, _DIR_EXTENSIONS,$afficheQuoi);// surcharge de fonction
+		$lesExtensions .= apropos_afficher_list(self(), $liste_extensions,$liste_extensions, _DIR_PLUGINS_DIST,$afficheQuoi);// surcharge de fonction
 		$lesExtensions .= "</div>\n";
 	}
 	return $lesExtensions;
@@ -184,8 +184,8 @@ function apropos_afficher_info_du_plugins($url_page, $plug_file, $class_li="item
 			// de toute façon, a revoir car pas gégène
 			if ($prefix ==''){
 				// je check si par hasard ce ne serait pas un plugin place dans le dossier extension
-				$info = $get_infos($plug_file, $force_reload, _DIR_EXTENSIONS);
-				$dir = _DIR_EXTENSIONS.$plug_file;
+				$info = $get_infos($plug_file, $force_reload, _DIR_PLUGINS_DIST);
+				$dir = _DIR_PLUGINS_DIST.$plug_file;
 				$prefix = $info['prefix'];
 				if ($prefix !=''){
 				//return "<span class='apropos-erreur'>Le paramètre entré n'est pas valide. Consultez la documentation du plugin.</span>";
