@@ -65,24 +65,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_creer_evenement' => 'Neue Veranstaltung anlegen',
-	'icone_modifier_evenement' => 'Modifier l\'événement', # NEW
+	'icone_modifier_evenement' => 'Event Bearbeiten',
 	'indiquez_votre_choix' => 'Indiquez votre choix', # NEW
-	'info_1_place' => '1 place', # NEW
+	'info_1_place' => '1 Platz',
 	'info_aucun_evenement' => 'Kein Event',
-	'info_evenement' => 'Événement', # NEW
-	'info_evenement_poubelle' => 'Événement supprimé', # NEW
-	'info_evenement_propose' => 'Événement proposé', # NEW
-	'info_evenement_publie' => 'Événement publié', # NEW
+	'info_evenement' => 'Event',
+	'info_evenement_poubelle' => 'Event gelöscht',
+	'info_evenement_propose' => 'Event vorgeschlagen',
+	'info_evenement_publie' => 'Event veröffentlicht',
 	'info_evenements' => 'Event',
 	'info_inscription' => 'Inscription en ligne :', # NEW
-	'info_lieu' => 'Lieu :', # NEW
-	'info_nb_places' => '@nb@ places', # NEW
+	'info_lieu' => 'Ort:',
+	'info_nb_places' => '@nb@ Plätze',
 	'info_nombre_evenements' => '@nb@ Events',
-	'info_nouvel_evenement' => 'Nouvel événement', # NEW
-	'info_reponse_inscription_non' => 'non', # NEW
-	'info_reponse_inscription_nsp' => '?', # NEW
-	'info_reponse_inscription_oui' => 'oui', # NEW
-	'info_reponses_inscriptions' => 'Réponses :', # NEW
+	'info_nouvel_evenement' => 'Neues Event',
+	'info_reponse_inscription_non' => 'nein',
+	'info_reponse_inscription_nsp' => '?',
+	'info_reponse_inscription_oui' => 'ja',
+	'info_reponses_inscriptions' => 'Antworten',
 	'info_un_evenement' => 'ein Event',
 	'inscrits' => 'Anmeldungen',
 	'item_mots_cles_association_evenements' => 'zu den Events',
@@ -94,7 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_reponse_jyparticipe_pas' => 'Ich komme nicht',
 	'label_reponse_jyparticipe_peutetre' => 'Ich komem vielleicht',
 	'label_vous_inscrire' => 'Ihre Teilnahme',
-	'lien_desinscrire' => 'Supprimer', # NEW
+	'lien_desinscrire' => 'Entfernen',
 	'lien_retirer_evenement' => 'Löschen',
 	'liste_inscrits' => 'Liste der Anmeldungen',
 
@@ -112,12 +112,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'probleme_technique' => 'Ein technisches Problem ist aufgetreten. Bitte versuchen sie es später noch einmal.',
 
 	// R
-	'repetition' => 'Répétition', # NEW
+	'repetition' => 'Wiederholung',
 	'repetition_de' => 'Wiederholung von',
 	'rubrique_activer_agenda' => 'Kalender für diese Rubrik aktivieren',
 	'rubrique_dans_une_rubrique_mode_agenda' => 'Diese Rubrik kann den Kalender nutzen, denn sie befindet sich innerhalb einer Rubrik, für die den Kalende nutzen darf.',
 	'rubrique_desactiver_agenda' => 'Kalender in dieser Rubrik deaktivieren',
-	'rubrique_liste_evenements_de' => 'Événements de la rubrique', # NEW
+	'rubrique_liste_evenements_de' => 'Events der Rubrik',
 	'rubrique_mode_agenda' => 'Der Kalender wurde für diese Rubrik und ihre Artikel aktiviert. ',
 	'rubrique_sans_gestion_evenement' => 'Der Kalender ist für diese Rubrik noch nicht aktiviert. ',
 	'rubriques' => 'Kalender-Rubriken',
@@ -126,21 +126,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sans_titre' => '(ohne Titel)',
 
 	// T
-	'telecharger' => 'Télécharger', # NEW
+	'telecharger' => 'Herunterladen',
 	'texte_agenda' => 'KALENDER',
-	'texte_evenement_statut' => 'Cet événement est :', # NEW
-	'texte_logo_objet' => 'LOGO DE L\'EVENEMENT', # NEW
+	'texte_evenement_statut' => 'Dieses Event ist',
+	'texte_logo_objet' => 'EVENT-LOGO',
 	'titre_cadre_ajouter_evenement' => 'Event hinzufügen',
 	'titre_cadre_modifier_evenement' => 'Event umändern',
 	'titre_sur_l_agenda' => 'Im Kalender',
-	'toutes_rubriques' => 'Toutes', # NEW
+	'toutes_rubriques' => 'Alle',
 
 	// U
 	'un_mot_clef' => '1 Schlagwort',
 	'une_repetition' => '1 Wiederholung',
 
 	// V
-	'voir_evenements_rubrique' => 'Voir les événements de la rubrique' # NEW
+	'voir_evenements_rubrique' => 'Die Events der Rubrik einsehen'
 );
 
 ?>
