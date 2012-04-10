@@ -18,7 +18,7 @@ function tradlang_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
 	$maj = array();
 	$maj['create'] = array(
-		array('maj_tables',array('spip_tradlangs','spip_tradlang_modules')),
+		array('creer_base'),
 		array('tradlang_import_ancien_tradlang',true),
 		array('tradlang_maj_modules',true)
 	);
@@ -78,26 +78,32 @@ function tradlang_import_ancien_tradlang($affiche=false){
 	 */
 	$modules = sql_select('*','trad_lang','', array('module'));
 	while($module=sql_fetch($modules)){
-		sql_insertq('spip_tradlang_modules',array('module'=>$module['module'],'nom_mod' =>$module['module']));
-	}
-	/**
-	 * On insére les anciens tradlang
-	 */
-	$strings = sql_allfetsel('id,module,lang,str,comm,status,traducteur,ts,md5,orig,date_modif','trad_lang',"orig!='2'",'','',"0,100");
-	while (count($strings)){
-		foreach($strings as $id => $string){
-			$string['titre'] = $string['id'].' : '.$string['module'].' - '.$string['lang'];
-			$string['langue_choisie'] = 'non';
-			$string['id_tradlang_module'] = sql_getfetsel('id_tradlang_module','spip_tradlang_modules','module='.sql_quote($string['module']));
-			$string['statut'] = $string['status'] ? $string['status'] : 'OK';
-			$string['maj'] = $string['ts'];
-			unset($string['ts']);
-			unset($string['status']);
-			sql_insertq('spip_tradlangs',$string);
-			sql_updateq('trad_lang',array('orig' => 2),'md5='.sql_quote($string['md5']).' AND lang='.sql_quote($string['lang']));
+		$id_module = sql_insertq('spip_tradlang_modules',array('module'=>$module['module'],'nom_mod' =>$module['module']));
+		/**
+		 * On insére les anciens tradlang
+		 */
+		//$docs = array_map('reset',sql_allfetsel('id_document','spip_documents',"statut='0'",'','',"0,100"));
+		$strings = sql_allfetsel('id,module,lang,str,comm,status,traducteur,ts,md5,orig,date_modif','trad_lang',"module=".sql_quote($module['module']). " AND orig!='2'",'','',"0,100");
+		$count = 0;
+		while (count($strings)){
+			foreach($strings as $id => $string){
+				$string['titre'] = $string['id'].' : '.$string['module'].' - '.$string['lang'];
+				if(!$string['md5'])
+					$string['md5'] = md5($string['str']);
+				$string['langue_choisie'] = 'non';
+				$string['id_tradlang_module'] = $id_module;
+				$string['statut'] = $string['status'] ? $string['status'] : 'OK';
+				$string['maj'] = $string['ts'];
+				unset($string['ts']);
+				unset($string['status']);
+				sql_insertq('spip_tradlangs',$string);
+				sql_updateq('trad_lang',array('orig' => 2),'str='.sql_quote($string['str']).' AND lang='.sql_quote($string['lang']));
+			}
+			if ($affiche) echo " .";
+			$count = $count+count($strings);
+			spip_log($count,'tradlang');
+			$strings = sql_allfetsel('id,module,lang,str,comm,status,traducteur,ts,md5,orig,date_modif','trad_lang',"module=".sql_quote($module['module']). " AND orig!='2'",'','',"0,100");
 		}
-		if ($affiche) echo " .";
-		$strings = sql_allfetsel('id,module,lang,str,comm,status,ts,md5,orig,date_modif','trad_lang',"orig!='2'",'','',"0,100");
 	}
 }
 function tradlang_maj_id_tradlang_modules($affiche = false){
@@ -132,10 +138,10 @@ function tradlang_maj_modules($affiche=false){
 	/**
 	 * On update les modules
 	 */
-	$modules = sql_select('*','spip_tradlang_modules','module NOT LIKE "attic*%" AND module !='.sql_quote('attic'));
+	$modules = sql_select('*','spip_tradlang_modules','module NOT LIKE "attic%" AND module !='.sql_quote('attic'));
 	
 	while($module = sql_fetch($modules)){
-		spip_log($module['module']);
+		spip_log($module['module'],'tradlang');
 		if ($affiche) echo " .";
 		$langues = sql_select('lang','spip_tradlangs','id_tradlang_module='.intval($module['id_tradlang_module']).' AND lang!='.sql_quote($module['lang_mere']), array('lang'));
 		while($lang = sql_fetch($langues)){

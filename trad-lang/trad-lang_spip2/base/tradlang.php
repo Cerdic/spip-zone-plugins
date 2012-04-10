@@ -41,7 +41,6 @@ function tradlang_declarer_tables_objets_sql($tables){
 		),
 		'key' => array(
 			"PRIMARY KEY" => "id_tradlang_module",
-			"KEY" => "nom_mod (`nom_mod` ( 255 ))",
 			"UNIQUE" => "module"
 		),
 		'join' => array(
