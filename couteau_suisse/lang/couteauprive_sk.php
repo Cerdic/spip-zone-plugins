@@ -296,8 +296,7 @@ When making an official update, update the associated remote file (click above o
 - Local file version: ', # NEW
 	'ecran_securite:nom' => 'Bezpečnostná obrazovka',
 	'effaces' => 'Deleted',
-	'en_travaux:description' => 'Makes it possible to display a customised message on the public site and also in the editing area during maintenance work.
-[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]', # MODIF
+	'en_travaux:description' => 'Počas údržby umožňuje zobraziť vlastnú správu na každej verejne prístupnej stránke, prípadne v súkromnej zóne.',
 	'en_travaux:nom' => 'Stránka v režime údržby',
 	'erreur:bt' => '<span style=\\"color:red;\\">Pozor:</span> zdá sa, že verzia typografického panela je stará(@version@).<br />Modul Vreckový nožík je kompatibilný iba s verziou @mini@ alebo s novšou.',
 	'erreur:description' => 'missing id in the tool\'s definition!',
@@ -352,12 +351,12 @@ Thus multi blocks are always displayed in the language requested by the visitor.
 
 @puce@ There is a choice of two options for generating the small window which appears on the mouseover. [[%glossaire_js%]]', # MODIF
 	'glossaire:nom' => 'Interný slovník',
-	'glossaire_abbr' => 'Ignorer les balises <code><abbr></code> et <code><acronym></code>', # NEW
+	'glossaire_abbr' => 'Ignorovať tagy <code><abbr></code> a <code><acronym></code>',
 	'glossaire_css' => 'Riešenie CSS',
 	'glossaire_erreur' => 'Kvôli kľúčovému slovu "@mot1@" sa kľúčové slovo "@mot2@" nedá zistiť',
 	'glossaire_inverser' => 'Navrhnutá oprava: prehoďte poradie kľúčových slov v databáze.',
 	'glossaire_js' => 'Riešenie JavaScriptom',
-	'glossaire_ok' => 'Zoznam @nb@ kľúčových slov v databáze sa zdá byť správny.', # MODIF
+	'glossaire_ok' => '@nb@ skontrolovaných slov. Zdá sa, že všetky sú v poriadku.',
 	'guillemets:description' => 'Automatically replaces straight inverted commas (") by curly ones, using the correct ones for the current language. The replacement does not change the text stored in the database, but only the display on the screen.', # MODIF
 	'guillemets:nom' => 'Okrúhle opačné bodky',
 
@@ -466,7 +465,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:log_couteau_suisse' => 'Aktivovať:',
 	'label:logo_Hmax' => 'Maximálna výška loga:',
 	'label:long_url' => 'Dĺžka klikateľného popisu:',
-	'label:marqueurs_urls_propres' => 'Add markers to distinguish between objects (SPIP>=2.0) :<br/>(e.g.. : " - " for -My-section-, " @ " for @My-site@) ', # MODIF
+	'label:marqueurs_urls_propres' => 'Pridať znaky na odlíšenie objektov (SPIP>=2.0):<br />(napr. "-" pre nadpis -Moja-rubrika-, « @ » pour @Mon-site@)',
 	'label:max_auteurs_page' => 'Autorov na stránku:',
 	'label:message_travaux' => 'Vaša správa týkajúca sa údržby:',
 	'label:moderation_admin' => 'Automaticky schvaľovať príspevky od:',

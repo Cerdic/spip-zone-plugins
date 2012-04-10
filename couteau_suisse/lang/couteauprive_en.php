@@ -106,12 +106,12 @@ Examples: <code>#SET{x,1}#SET_PLUS{x,2}</code> or <code>#SET{x,avions}#SET_REPLA
 
 @puce@ If you tick "yes" below, the state of the numbered blocks will be kept in a session cookie, in order to maintain the page\'s appearance as long as the session lasts.[[%blocs_cookie%]]
 
-@puce@ By default, the Swiss Knife plugin uses the HTML tag <h4> for the titles of the collapsible blocks. You can specify another tag to use instead here <hN>:[[%bloc_h4%]]
+@puce@ By default, the Swiss Army Knife plugin uses the HTML tag <h4> for the titles of the collapsible blocks. You can specify another tag to use instead here <hN>:[[%bloc_h4%]]
 
 @puce@ In order to obtain a smoother transition when you click on the title, your collapsible blocks can be animated with a "sliding" effect".[[%blocs_slide%]][[->%blocs_millisec% milliseconds]]',
 	'blocs:nom' => 'Folding Blocks',
 	'boites_privees:description' => 'All of the boxes described below appear either here in the private zone.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
-- {{Updates to the Swiss Knife tool}}: a frame on this current configuration page indicating the most recent modifications made to the code of the ([Source->@_CS_RSS_SOURCE@]) plugin.
+- {{Updates to the Swiss Army Knife tool}}: a frame on this current configuration page indicating the most recent modifications made to the code of the ([Source->@_CS_RSS_SOURCE@]) plugin.
 - {{Articles in SPIP format}}: a collapsible frame for your articles allowing you to see the source code used by their authors.
 - {{Author updates}}: a collapsible frame on the [authors page->./?exec=auteurs] indicating the 10 most recently connected authors and any unconfirmed content they have written. Only site administrators can see these details.
 - {{The SPIP webmasters}}: a collapsible frame on the [author\'s page->./?exec=auteurs] listing the administrators that have been granted SPIP webmaster status. Only administrators can see these details. If you are one of the webmasters yourself, you can also see the " [.->webmestres] " tool.
@@ -250,11 +250,11 @@ In the same way, to change the background colour if the following option allows:
 
 
 If the external requests involved do not work from your server, or you wish to lock down a possible security weakness, check these boxes to turn them off.[[%distant_off%]][[->%distant_outils_off%]]', # MODIF
-	'cs_comportement:nom' => 'Behaviour of the Penknife',
+	'cs_comportement:nom' => 'Behaviour of the Swiss Army Knife',
 	'cs_distant_off' => 'Checks of remote versions',
 	'cs_distant_outils_off' => 'The Swiss Knife tools which have remote files',
-	'cs_log_couteau_suisse' => 'Detailed logs of the Penknife',
-	'cs_reset' => 'Are you sure you wish to completely reset the Penknife?',
+	'cs_log_couteau_suisse' => 'Detailed logs of the Swiss Army Knife',
+	'cs_reset' => 'Are you sure you wish to completely reset the Swiss Army Knife?',
 	'cs_reset2' => 'All activated tools will be deactivated and their options reset.',
 	'cs_spip_options_erreur' => 'Warning: modification of the "<html>@_CS_FILE_OPTIONS@</html>" file has failed!',
 	'cs_spip_options_on' => 'SPIP options in "<html@_CS_FILE_OPTIONS@</html"',
@@ -349,7 +349,7 @@ This tool may be combined with "[.->sommaire]".', # MODIF
 	// E
 	'ecran_activer' => 'Enable the security screen',
 	'ecran_conflit' => 'Warning: the "@file@" file is causing a conflict and should be deleted!', # MODIF
-	'ecran_conflit2' => 'Note: a static file named "@file@" has been detected and activated. The Swiss Knife could not update it or configure it.', # MODIF
+	'ecran_conflit2' => 'Note: a static file named "@file@" has been detected and activated. It is possible that the Swiss Army Knife could not update it or configure it.',
 	'ecran_ko' => 'Inactive screen!',
 	'ecran_maj_ko' => 'Version {{@n@}} of the security screen is available. Please update the remote file for this utility.',
 	'ecran_maj_ko2' => 'Version @n@ of the safetu screen is available. You can update the remote file " [.->ecran_securite] ".',
@@ -371,7 +371,7 @@ When making an official update, update the associated remote file (click above o
 
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1">%avertir_travaux%</admin_travaux>]][[%prive_travaux%]]', # MODIF
 	'en_travaux:nom' => 'Site in maintenance mode',
-	'erreur:bt' => '<span style=\\"color:red;\\">Warning:</span> the typographical bar appears to be an old version (@version@).<br />The Penknife is compatible only with version @mini@ or newer.', # MODIF
+	'erreur:bt' => '<span style=\\"color:red;\\">Warning:</span> the typographical toolbar (version @version@) appears to be an old version.<br />The Swiss Army Knife is compatible only with version @mini@ or newer.',
 	'erreur:description' => 'missing id in the tool\'s definition!',
 	'erreur:distant' => 'The distant server',
 	'erreur:jquery' => '{{N.B.}} : {jQuery} does not appear to be active for this page. Please consult the paragraph about the plugin\'s required libraries [in this article->http://www.spip-contrib.net/?article2166] or reload this page.',
@@ -379,7 +379,7 @@ When making an official update, update the associated remote file (click above o
 	'erreur:nojs' => 'Javascript has been deactivated on this page.',
 	'erreur:nom' => 'Error!',
 	'erreur:probleme' => 'Problem with: @pb@',
-	'erreur:traitements' => 'The Penknife - Compilation error: forbidden mixing of \'typo\' and \'propre\'!',
+	'erreur:traitements' => 'The The Swiss Army Knife - Compilation error: forbidden mixing of \'typo\' and \'propre\'!',
 	'erreur:version' => 'This tool is unavailable in this version of SPIP.',
 	'erreur_groupe' => 'Warning: the "@groupe@" group has not been defined!',
 	'erreur_mot' => 'Warning: the "@mot@" keyword has not been defined!',
@@ -452,15 +452,15 @@ This means that multi blocks will always displayed in the language requested by 
 	'guillemets:nom' => 'Curly inverted commas',
 
 	// H
-	'help' => '{{This page is only accessible to main site administrators.}} It gives access to the configuration of some additional functions of the {{Penknife}}.',
+	'help' => '{{This page is only accessible to main site administrators.}} It gives access to the configuration of some additional functions of the {{Swiss Army Knife}}.',
 	'help2' => 'Local version: @version@',
-	'help3' => '<p>Documentation links:<br/>• [{{The Swiss Knife}}->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Resets:
+	'help3' => '<p>Documentation links:@contribs@</p><p>Resets:
 
 _ • [Hidden tools|Return to the original appearance of this page->@hide@]
 
 _ • [Whole plugin|Reset to the original state of the plugin->@reset@]@install@
 
-</p>', # MODIF
+</p>',
 	'horloge:description' => 'Tool currently under development. It offers a JavaScript clock. Tag: <code>#HORLOGE</code>. Model: <code><horloge></code>
 
 
@@ -483,19 +483,19 @@ To define this logo, go to the "<:titre_configuration:>" page by clicking on the
 
 <p>{{Beware}}: If you have another plugin defining the function {balise_INTRODUCTION()} or if you have defined it in your templates, you will get a compilation error.</p>
 
-@puce@ You can specify (as a percentage of the default value) the length of the text generated by the tag #INTRODUCTION. A null value, or a value equal to 100 will not modify anything and use the following default values: 500 characters for the articles, 300 for the news items and 600 for forums and sections.
+@puce@ You can specify (as a percentage of the default value) the length of the text generated by the tag #INTRODUCTION. A null value, or a value equal to 100 will not modify anything and uses the following default values: 500 characters for the articles, 300 for the news items and 600 for forums or sections.
 
-[[%lgr_introduction%&nbsp;%]]
+[[%lgr_introduction% %]]
 
-@puce@ By default, if the text is too long, #INTRODUCTION will end with 3 dots (an ellipsis): <html>"&amp;nbsp;(…)"</html>. You can change this to a customised string which indicates that there is more text available.
+@puce@ By default, if the text is too long, #INTRODUCTION will end with 3 dots (an ellipsis): <html>"&nbsp;(…)"</html>. You can change this to a customised string which indicates that there is more text available.
 
 [[%suite_introduction%]]
 
-@puce@ If the #INTRODUCTION tag is used to give a summary of an article, the Swiss Knife can generate a link to the article for the 3 dots or string  that indicates that there is more text available. For example: "Read the rest of the article…"
+@puce@ If the #INTRODUCTION tag is used to give a summary of an article, the Swiss Army Knife can generate a link to the article for the 3 dots or string  that indicates that there is more text available. For example: "Read the rest of the article…"
 
 [[%lien_introduction%]]
 
-', # MODIF
+',
 	'introduction:nom' => '#INTRODUCTION tag',
 
 	// J
@@ -509,7 +509,7 @@ Make a list below of the elements in your templates which are to be rounded by u
 
 
 
-N.B. This tool requires the {Round Corners} jQuery plugin in order to function. The Swiss Knife plugin can install it for you automatically if you check this box. [[%jcorner_plugin%]]', # MODIF
+N.B. This tool requires the {Round Corners} jQuery plugin in order to function. The Swiss Army Knife plugin can install it for you automatically if you check this box. [[%jcorner_plugin%]]', # MODIF
 	'jcorner:nom' => 'Pretty Corners',
 	'jcorner_plugin' => '" Round Corners plugin "',
 	'jq_localScroll' => 'jQuery.LocalScroll ([demo->http://demos.flesler.com/jquery/localScroll/])',
@@ -699,7 +699,7 @@ To override and force the display of such hidden content, just add the <code>{to
 	'outil_desactiver' => 'Deactivate',
 	'outil_desactiver_le' => 'Deactivate this tool',
 	'outil_inactif' => 'Inactive tool',
-	'outil_intro' => 'This page lists the functionalities which the plugin makes available to you.<br /><br />By clicking on the names of the tools below, you choose the ones which you can then switch on/off using the central button: active tools will be disabled and <i>vice versa</i>. When you click, the tools description is shown above the list. The tool categories are collapsible to hide the tools they contain. A double-click allows you to directly switch a tool on/off.<br /><br />For first use, it is recommended to activate tools one by one, thus reavealing any incompatibilites with your templates, with SPIP or with other plugins.<br /><br />N.B.: simply loading this page recompiles all the Penknife tools.',
+	'outil_intro' => 'This page lists the functionalities provided by the plugin.<br /><br />By clicking on the names of the tools below, you choose the ones which you can then switch on/off using the central button: active tools will be disabled and <i>vice versa</i>. When you click, the tools description is shown above the list. The tool categories are collapsible to hide the tools they contain. A double-click allows you to directly switch a tool on/off.<br /><br />For first use, it is recommended to activate tools one by one, thus reavealing any incompatibilites with your templates, with SPIP or with other plugins.<br /><br />N.B.: simply loading this page recompiles all the Swiss Army Knife tools.',
 	'outil_intro_old' => 'This is the old interface.<br /><br />If you have difficulties in using <a href=\\\'./?exec=admin_couteau_suisse\\\'>the new interface</a>, please let us know in the forum of <a href=\\\'http://www.spip-contrib.net/?article2166\\\'>Spip-Contrib</a>.',
 	'outil_nb' => '@pipe@: @nb@ tool',
 	'outil_nbs' => '@pipe@: @nb@ tools',
@@ -710,7 +710,7 @@ To override and force the display of such hidden content, just add the <code>{to
 	'outils_concernes' => 'Affected: ',
 	'outils_desactives' => 'Deactivated: ',
 	'outils_inactifs' => 'Inactive tools:',
-	'outils_liste' => 'List of tools of the Penknife',
+	'outils_liste' => 'List of tools of the Swiss Army Knife',
 	'outils_non_parametrables' => 'Cannot be configured:',
 	'outils_permuter_gras1' => 'Switch the tools in bold type',
 	'outils_permuter_gras2' => 'Switch the @nb@ tools in bold type?',
@@ -721,10 +721,10 @@ To override and force the display of such hidden content, just add the <code>{to
 	// P
 	'pack_actuel' => 'Pack @date@',
 	'pack_actuel_avert' => 'Warning: the overrides of globals, special authorisations and "define()" functions are not specified here',
-	'pack_actuel_titre' => 'UP-TO-DATE CONFIGURATION PACK OF THE PENKNIFE',
+	'pack_actuel_titre' => 'UP-TO-DATE CONFIGURATION PACK OF THE SWISS ARMY KNIFE',
 	'pack_alt' => 'See the current configuration parameters',
 	'pack_delete' => 'Delete a configuration pack',
-	'pack_descrip' => 'Your "Current configuration pack" brings together all the parameters activated for the Swiss Knife plugin. It remembers both whether a tool is activated or not, and, if it is, what options have been chosen.
+	'pack_descrip' => 'Your "Current configuration pack" brings together all the parameters activated for the Swiss Army Knife plugin. It remembers both whether a tool is activated or not, and, if it is, what options have been chosen.
 
 
 
@@ -732,16 +732,16 @@ If write access privileges permit, this PHP code may be placed in the /config/me
 
 
 
-If you reset the plugin by clicking on a pack, the Swiss Knife plugin will automatically reconfigure itself according to the predefined values in that pack.', # MODIF
+If you reset the plugin by clicking on a pack, the Swiss Army Knife plugin will automatically reconfigure itself according to the predefined values in that pack.', # MODIF
 	'pack_du' => '• of the pack @pack@',
 	'pack_installe' => 'Installation of a configuration pack',
-	'pack_installer' => 'Are you sure you want to re-initialise the Penknife and install the « @pack@ » pack?',
+	'pack_installer' => 'Are you sure you want to re-initialise the Swiss Army Knife and install the « @pack@ » pack?',
 	'pack_nb_plrs' => 'There are @nb@ "configuration packs" currently available.',
 	'pack_nb_un' => 'One "configuration pack" is currently available:',
 	'pack_nb_zero' => 'No "configuration pack" is currently available.',
 	'pack_outils_defaut' => 'Installation of the default tools',
 	'pack_sauver' => 'Save the current configuration',
-	'pack_sauver_descrip' => 'The button below allows you to insert into your <b>@file@</b> file the parameters needed for an additional "configuration pack" in the the lefthand menu. This makes it possible to reconfigure the Penknife with a single click to the current state.',
+	'pack_sauver_descrip' => 'The button below allows you to insert into your <b>@file@</b> file the parameters needed for an additional "configuration pack" in the lefthand menu. This makes it possible to reconfigure the Swiss Army Knife with a single click to the current state.',
 	'pack_supprimer' => 'Are you sure you want to delete the " @pack@ " pack?',
 	'pack_titre' => 'Current configuration',
 	'pack_variables_defaut' => 'Installation of the default variables',
@@ -768,16 +768,16 @@ To retain access to SPIP\'s original bullet image (the little triangle), a new "
 	'qui_webmestres' => 'SPIP webmasters',
 
 	// R
-	'raccourcis' => 'Active Penknife typographical shortcuts:',
-	'raccourcis_barre' => 'The Penknife\'s typographical shorcuts',
+	'raccourcis' => 'Active Swiss Army Knife typographical shortcuts:',
+	'raccourcis_barre' => 'The Swiss Army Knife\'s typographical shorcuts',
 	'reserve_admin' => 'Access restricted to administrators',
 	'rss_actualiser' => 'Update',
 	'rss_attente' => 'Awaiting RSS...',
-	'rss_desactiver' => 'Deactivate «Penknife updates»',
+	'rss_desactiver' => 'Deactivate «Swiss Army Knife updates»',
 	'rss_edition' => 'RSS feed updated:',
 	'rss_source' => 'RSS source',
-	'rss_titre' => 'Development of the «The Penknife»:',
-	'rss_var' => 'Penknife updates',
+	'rss_titre' => 'Development of the «The Swiss Army Knife»:',
+	'rss_var' => 'Swiss Army Knife updates',
 
 	// S
 	'sauf_admin' => 'All, except administrators',
@@ -800,7 +800,7 @@ _ Images: [Sylvain Michel->http://www.guaph.net/]', # MODIF
 
 
 
-N.B. In order to work, this tool needs to be used in "DOCTYPE XHTML" pages (not HTML!). It also requires two {jQuery} plugins: {ScrollTo} et {LocalScroll}. The Swiss Knife can install them itself if you check the following two boxes. [[%scrollTo%]][[->%LocalScroll%]]
+N.B. In order to work, this tool needs to be used in "DOCTYPE XHTML" pages (not HTML!). It also requires two {jQuery} plugins: {ScrollTo} et {LocalScroll}. The Swiss Army Knife can install them itself if you check the following two boxes. [[%scrollTo%]][[->%LocalScroll%]]
 
 @_CS_PLUGIN_JQUERY192@', # MODIF
 	'soft_scroller:nom' => 'Soft anchors',
@@ -836,7 +836,7 @@ _ • Only for articles containing the <code>@_CS_AVEC_SOMMAIRE@</code> tag.
 
 
 
-@puce@ By default, the Swiss Knife automatically inserts the summary at the top of the article. But you can place it elsewhere, if you wish, by using the #CS_SOMMAIRE tag, which you can activate here:
+@puce@ By default, the Swiss Army Knife automatically inserts the summary at the top of the article. But you can place it elsewhere, if you wish, by using the #CS_SOMMAIRE tag, which you can activate here:
 
 [[%balise_sommaire%]]
 
@@ -1084,13 +1084,13 @@ _ Example: <code>article.php3?id_article=123</code>
 @puce@ If you are using the type  {page} described above or if the object requested is not recognised, you can choose the {{calling script}} for SPIP. By default, SPIP uses {spip.php}, but {index.php} (format: <code>/index.php?article123</code>) or an empty value (format: <code>/?article123</code>) are also possible. To use any other value, you must create the corresponding file at the root of your site with the same contents as in the file {index.php}.
 
 [[%spip_script%]]', # MODIF
-	'type_urls:description1' => '@puce@ If you are using a format based on "propres" (clean) URLs ({propres}, {propres2}, {libres}, {arborescentes} ou {propres_qs}), the Swiss Knife can:
+	'type_urls:description1' => '@puce@ If you are using a format based on clean URLs ({propres}, {propres2}, {libres}, {arborescentes} ou {propres_qs}), the Swiss Army Knife can:
 
 <q1>• make sure the URL is in {{lower case}}.</q1>[[%urls_minuscules%]]
 
-<q1>• systematically add the {{ID of the object}} to the URL (as a suffix, prefix, etc.).
+<q1>• systematically add the {{id of the object}} to the URL (as a suffix, prefix, etc.).
 
-_ (examples: <code>/My-article-title,457</code> or <code>/457-My-article-title</code>)</q1>', # MODIF
+_ (examples: <code>/My-article-title,457</code> or <code>/457-My-article-title</code>)</q1>',
 	'type_urls:nom' => 'Format of URLs',
 	'typo_exposants:description' => '{{Text in French}}: improves the typographical rendering of common abbreviations by adding superscript where necessary (thus, {<acronym>Mme</acronym>} becomes {M<sup>me</sup>}). Common errors corrected: ({<acronym>2ème</acronym>} and {<acronym>2me</acronym>}, for example, become {2<sup>e</sup>}, the only correct abbreviation).
 
