@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'choisir_noisette' => 'Vyberte si oriešok, ktorý chcete pridať:',
-	'compositions_non_installe' => '<b>Zásuvný modul Rozmiestnenia:</b> tento zásuvný modul nie je na vašej stránke nainštalovaný. Netreba spustiť noiZetier. Keď je však aktivovaný, môžete definovať rozmiestnenia priamo do noiZetiera.', # MODIF
+	'compositions_non_installe' => '<b>Zásuvný modul Rozmiestnenia:</b> tento zásuvný modul nie je na vašej stránke nainštalovaný. Na prevádzku noiZetiera nie je potrebný. Keď je však aktivovaný, môžete definovať rozmiestnenia priamo do noiZetiera.',
 
 	// D
 	'description_bloc_contenu' => 'Hlavný text stránky.',
@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ieconfig_ne_pas_importer' => 'Nenahrávať',
 	'ieconfig_noizetier_export_explication' => 'Exportuje nastavenia orieškov a rozmiestnenia modulu noiZetier.',
 	'ieconfig_noizetier_export_option' => 'Zaradené do exportu?',
-	'ieconfig_non_installe' => '<b>Zásuvný modul Importeur/Exporteur de configurations (Nahrávanie a export nastavení):</b> tento zásuvný modul ešte nie je nainštalovaný na vašej stránke. Na spúšťanie Noizetiera nie je potrebný. Keď si ho však aktivujete, budete môcť exportovať a náhravať nastavenia orieškov modulu Noizetier.', # MODIF
+	'ieconfig_non_installe' => '<b>Zásuvný modul Nahrávanie a export nastavení):</b> tento zásuvný modul nie je na vašej stránke nainštalovaný. Na spúšťanie noiZetiera nie je potrebný. Keď si ho však aktivujete, budete môcť exportovať a nahrávať nastavenia orieškov do noiZetiera.',
 	'ieconfig_probleme_import_config' => 'Pri nahrávaní nastavení modulu noiZetier sa vyskytol problém.',
 	'info_composition' => 'ROZLOŽENIE:',
 	'info_page' => 'STRÁNKA:',
