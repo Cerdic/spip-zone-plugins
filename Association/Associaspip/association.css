@@ -126,6 +126,11 @@ tr.cv, td.cv
 	background-color: #ffbc61;
 }
 
+tr.surligne, td.surligne
+{ /* comptes : operation mise en evidence */
+	background-color: #fee347 !important;
+}
+
 /* alignements specifiques de cellules */
 td.boutons, td.icones, td.action,
 td.buttons, td.icons, td.actions

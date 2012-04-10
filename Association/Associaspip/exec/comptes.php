@@ -38,8 +38,12 @@ function exec_comptes()
 		if (!$max_par_page)
 			$max_par_page = 30;
 		$id_compte = intval(_request('id_compte', $_GET));
-		if (!$id_compte)
+		if (!$id_compte) {
 			$id_compte = '';
+		} else { /* quand on a un id compte, on doit selectionner automatiquement l'exercice dans lequel il se trouve */
+			$date_operation = sql_getfetsel('date', 'spip_asso_comptes', 'id_compte='.$id_compte);
+			$exercice = sql_getfetsel('id_exercice','spip_asso_exercices', 'fin >= "'.$date_operation.'" AND debut <= "'.$date_operation.'"', '', 'debut DESC');
+		}
 		$debut = intval(_request('debut'));
 		$exercice_data = sql_asso1ligne('exercice', $exercice);
 // traitements
@@ -197,10 +201,11 @@ function comptes_while($where, $limit, $id_compte)
 		}
 		if($id_compte==$data['id_compte']) { /* pour voir au chargement l'id_compte recherche */
 			$onload_option .= 'onLoad="document.getElementById(\'id_compte'.$id_compte.'\').scrollIntoView(true);"';
+			$class = 'surligne';
 		} else {
 			$onload_option = '';
 		}
-		$comptes .= "\n<tr id='id_compte$id' class='$class'>"
+		$comptes .= "<tr id='id_compte".$data['id_compte']."' class='$class'>"
 		. '<td class="integer">'.$data['id_compte'].'</td>'
 		. '<td class="date">'. association_datefr($data['date']) .'</td>'
 		. '<td class="text">'. $data['imputation'].'</td>'
