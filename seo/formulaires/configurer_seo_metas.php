@@ -44,7 +44,7 @@ function formulaires_configurer_seo_metas_traiter_dist(){
 	$config['meta_tags']['tag']['keywords'] = _request('keywords');
 	$config['meta_tags']['tag']['copyright'] = _request('copyright');
 	$config['meta_tags']['tag']['author'] = _request('author');
-	$config['meta_tags']['tag']['robots'] = _request('copyright');
+	$config['meta_tags']['tag']['robots'] = _request('robots');
 	
 	$config['meta_tags']['default']['title'] = _request('default_title');
 	$config['meta_tags']['default']['description'] = _request('default_description');
