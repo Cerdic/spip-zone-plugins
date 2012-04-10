@@ -19,6 +19,7 @@ function tradlang_upgrade($nom_meta_base_version,$version_cible){
 	$maj = array();
 	$maj['create'] = array(
 		array('creer_base'),
+		array('maj_tables',array('spip_auteurs')),
 		array('tradlang_import_ancien_tradlang',true),
 		array('tradlang_maj_modules',true)
 	);
@@ -63,6 +64,9 @@ function tradlang_upgrade($nom_meta_base_version,$version_cible){
 	);
 	$maj['0.4.2'] = array(
 		array('sql_alter',"TABLE spip_tradlang RENAME spip_tradlangs")
+	);
+	$maj['0.4.3'] = array(
+		array('maj_tables',array('spip_auteurs'))
 	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
