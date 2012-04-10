@@ -41,8 +41,8 @@
 		var vars_#ID_TRADLANG = $('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})]').find('#str_orig_#ID_TRADLANG').val().match('@[^@]+@','gi');
 		if(vars_#ID_TRADLANG){
 			trad_#ID_TRADLANG = $('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})]').find('#str_#ID_TRADLANG').val();
-			for (i in vars_#ID_TRADLANG) {
-				if(!trad_#ID_TRADLANG.match(vars_[(#ID_TRADLANG)][i],'g')){
+			jQuery(vars_#ID_TRADLANG).each(function(i,elt){
+				if(!trad_#ID_TRADLANG.match(elt,'g')){
 					tradlang_errors_variables_[(#ID_TRADLANG_MODULE)].push('#ID_TRADLANG');
 					error_tradlang_variables_[(#ID_TRADLANG_MODULE)] = true;
 					break;

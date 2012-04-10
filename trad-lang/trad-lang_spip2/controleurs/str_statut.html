@@ -36,19 +36,21 @@
 	var contenu_orig = '[(#STR**|tradlang_utf8|entites_html|replace{"\n","_"}|replace{"\r",""}|replace{"\t",""})]';
 	var me = cQuery(".tradlang-str_statut-#_a:ID_TRADLANG");
 	var id = me.crayon().find('form');
+	var vars = cQuery('#str_orig_#ID_TRADLANG').val().match('@[^@]+@','gi');
 	cQuery(id).bind('form-submit-validate',function(truc,a, e, options, veto){
 		var vars = cQuery('#str_orig_#ID_TRADLANG').val().match('@[^@]+@','gi');
 		if(vars){
 			erreur_chaine = '<:tradlang:erreur_variable_manquante:>';
-			trad = cQuery('#str_#ID_TRADLANG').val();
-			for (i in vars) {
-				if(!trad.match(vars[i],'g')){
-					erreur_chaine += '\n'+vars[i];
+			var trad = cQuery('#str_#ID_TRADLANG').val();
+			jQuery(vars).each(function(i,elt){
+				var val = elt;
+				if(!trad.match(val,'g')){
+					erreur_chaine += '\n'+val;
 					alert(erreur_chaine);
 					veto.veto = true;
 					return;
 				}
-			}
+			});
 		}
 		var newstatut = cQuery(id).find('#statut_#ID_TRADLANG').val();
 		var new_contenu = cQuery(id).find('#str_#ID_TRADLANG').val().replace(/\n/g,'_').replace(/\r/g,'').replace(/\t/g,'');
