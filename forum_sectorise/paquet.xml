@@ -19,7 +19,6 @@
 	<pipeline nom="pre_insertion" inclure="forumsectorise_pipelines.php" />
 	<pipeline nom="autoriser" inclure="inc/forumsectorise_autoriser.php" />
 	<pipeline nom="formulaire_traiter" inclure="formulaires/configurer_forumsectorise.php" />
-	</pipeline>
 
 	<necessite nom="saisies" compatibilite="[1.9.0;[" />
 
