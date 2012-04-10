@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aucune_date' => 'Rien pour ce mois', # NEW
+	'aucune_date' => 'Nothing for this month',
 
 	// D
 	'date_jour_abbr_1' => 'Sun.',
@@ -20,8 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_jour_abbr_7' => 'Sat.',
 
 	// M
-	'mois_precedent' => 'Mois précédent', # NEW
-	'mois_suivant' => 'Mois suivant' # NEW
+	'mois_precedent' => 'Previous month',
+	'mois_suivant' => 'Next month'
 );
 
 ?>
