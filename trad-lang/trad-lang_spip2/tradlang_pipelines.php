@@ -164,7 +164,6 @@ function tradlang_formulaire_charger($flux){
  */
 function tradlang_pre_edition($flux){
 	if ($flux['args']['table']=='spip_auteurs') {
-		spip_log(_request('langues_preferees'),'test');
 		if (is_array($langues_preferees = _request('langues_preferees'))) {
 			$flux['data']['langues_preferees'] = serialize($langues_preferees);
 		}else{

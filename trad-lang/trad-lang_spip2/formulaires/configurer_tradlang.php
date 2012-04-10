@@ -9,6 +9,7 @@ function formulaires_configurer_tradlang_charger_dist(){
 		$valeurs = array();
 	
 	include_spip('inc/lang_liste');
+	include_spip('tradlang_fonctions');
 	$valeurs['_langues_possibles'] = $GLOBALS['codes_langues'];
 	return $valeurs;
 }

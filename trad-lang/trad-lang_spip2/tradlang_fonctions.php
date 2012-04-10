@@ -103,9 +103,11 @@ function tradlang_dir_lang(){
 		return false;
 	}
 	else{
-		$squelettes = $dossier_squelettes ? $dossier_squelettes : _DIR_RACINE.'squelettes';
+		$squelettes = $dossier_squelettes ? $dossier_squelettes : 'squelettes';
 	}
-	if(!is_dir($dir_lang=$squelettes.'/lang')){
+	if(!is_dir($dir_lang=_DIR_RACINE.$squelettes.'/lang')){
+		spip_log('pas de rep lang?','tradlang');
+		spip_log($squelettes.'/lang','tradlang');
 		return false;
 	}
 	return $dir_lang;
