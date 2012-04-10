@@ -61,29 +61,44 @@ function formulaires_configurer_forumsectorise_saisies_dist(){
 
 }
 
-function formulaires_configurer_forumsectorise_traiter(){
-	$tab_secteur = _request('ident_secteur');
-	$type = _request('type');
-	$option = _request('option');
-	$config = lire_config('forumsectorise');
-	
-	if ($tab_secteur != $config['ident_secteur']) {
-		include_spip('inc/invalideur');
-		purger_repertoire(_DIR_SKELS);
-	}
 
-	// Appliquer les changements de moderation forum
-	// option : futur, saufnon, tous
-	if (in_array($option,array('tous', 'saufnon')) && count($tab_secteur)) {
-		$where1 = ($option == 'saufnon') ? "accepter_forum != 'non'" : '';
-		$where2 = sql_in('id_secteur',$tab_secteur) ;
-		if(($where1!= '') && ($where2 != '')) {
-			$where = $where1 . ' AND ' . $where2 ;
-		} else {
-			$where = $where1 . $where2 ;
+/**
+ * Pipeline
+ * Invalider le cache si l'option de config "cacher_public" a ete modifee
+ * Puis poursuivre le traitement normal de sauvegarde des paramètres
+ *
+ * @param array $flux
+ * @return array
+ */
+
+function forumsectorise_formulaire_traiter($flux){
+	if( $flux['args']['form'] == "configurer_forumsectorise" ) {
+
+		$tab_secteur = _request('ident_secteur');
+		$type = _request('type');
+		$option = _request('option');
+		$config = lire_config('forumsectorise');
+		
+		if ($tab_secteur != $config['ident_secteur']) {
+			include_spip('inc/invalideur');
+			purger_repertoire(_DIR_SKELS);
 		}
-		sql_updateq('spip_articles', array('accepter_forum'=>$type), $where);
+	
+		// Appliquer les changements de moderation forum
+		// option : futur, saufnon, tous
+		if (in_array($option,array('tous', 'saufnon')) && count($tab_secteur)) {
+			$where1 = ($option == 'saufnon') ? "accepter_forum != 'non'" : '';
+			$where2 = sql_in('id_secteur',$tab_secteur) ;
+			if(($where1!= '') && ($where2 != '')) {
+				$where = $where1 . ' AND ' . $where2 ;
+			} else {
+				$where = $where1 . $where2 ;
+			}
+			sql_updateq('spip_articles', array('accepter_forum'=>$type), $where);
+		}
 	}
+	return $flux;
+
 }
 
 
