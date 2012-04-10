@@ -26,9 +26,9 @@ function action_tradlang_synchro_base_fichier_dist(){
 			return false;
 			
 		$module_nom = $r[1];
-		$module = sql_fetsel('*','spip_tradlang_modules','module='.sql_quote($module_nom));
+		$module = sql_getfetsel('*','spip_tradlang_modules','module='.sql_quote($module_nom));
 		if(is_array($module)){
-			$langues = sql_select("DISTINCT lang","spip_tradlangs","module='$module_nom'");
+			$langues = sql_select("DISTINCT lang","spip_tradlangs","module=".sql_quote($module_nom));
 			while($langue=sql_fetch($langues)){
 				$lg = $langue["lang"];
 				$fichiers[$lg] = $module_nom."_".$lg.".php";
@@ -45,7 +45,7 @@ function action_tradlang_synchro_base_fichier_dist(){
 						 * - La dernière synchro de tradlang correspond à la date de modif du fichier
 						 */
 						$sauvegarder_module = charger_fonction('tradlang_sauvegarde_module','inc');
-						$sauvegarder_module($module,$lg,$dir_lang);
+						$sauvegarder_module($module_nom,$lg,$dir_lang);
 					}
 					else{
 						$ts_base = sql_getfetsel('maj','spip_tradlangs','module='.sql_quote($module_nom).' AND lang='.sql_quote($lg),'','maj DESC','0,1');
@@ -66,7 +66,7 @@ function action_tradlang_synchro_base_fichier_dist(){
 							 * - La dernière synchro de tradlang correspond à la date de modif du fichier
 							 */
 							$sauvegarder_module = charger_fonction('tradlang_sauvegarde_module','inc');
-							$sauvegarder_module($module,$lg,$dir_lang);
+							$sauvegarder_module($module_nom,$lg,$dir_lang);
 						}
 					}
 				}
