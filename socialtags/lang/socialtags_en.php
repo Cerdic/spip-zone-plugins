@@ -38,25 +38,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_noisette_badge_facebook' => 'Display the Facebook badge defined in the configuration page',
-	'description_noisette_facebook_like' => 'Display the <b>Like</b> or <b>Recommand</b> and eventually <b>Send</b> button', # MODIF
+	'description_noisette_facebook_like' => 'Display the <b>Like</b> or <b>Recommand</b> and eventually <b>Send</b> button',
 	'description_noisette_facebook_like_box' => 'Affiche la boîte Facebook <b>J\'aime</b>. Elle affiche notamment le nombre de fans aimant la page Facebook référencée', # NEW
 
 	// N
 	'noisette_action_like' => 'Like',
 	'noisette_action_recommand' => 'Recommand',
-	'noisette_colorscheme_dark' => 'Fond sombre', # NEW
+	'noisette_colorscheme_dark' => 'Dark background',
 	'noisette_colorscheme_light' => 'Fond clair', # NEW
 	'noisette_label_action' => 'Action',
-	'noisette_label_afficher_send' => 'Send button?', # MODIF
+	'noisette_label_afficher_send' => 'Send button?',
 	'noisette_label_afficher_titre_noisette' => 'Display a title?',
 	'noisette_label_border_color' => 'Saisir le code couleur de la bordure de la boîte (au format #123ABC)', # NEW
 	'noisette_label_colorscheme' => 'Apparence', # NEW
 	'noisette_label_header' => 'Afficher l\'entête de la boîte « Retrouvez-nous sur Facebook » ?', # NEW
-	'noisette_label_height' => 'Hauteur', # NEW
-	'noisette_label_href' => 'Url de la page Facebook', # NEW
-	'noisette_label_layout' => 'Texte', # NEW
+	'noisette_label_height' => 'Height',
+	'noisette_label_href' => 'Facebook page URL',
+	'noisette_label_layout' => 'Text',
 	'noisette_label_niveau_titre' => 'Choose the title level',
-	'noisette_label_show_faces' => 'Display profile photos below the button?', # MODIF
+	'noisette_label_show_faces' => 'Display profile photos below the button?',
 	'noisette_label_stream' => 'Afficher le flux d\'articles de la page Facebook ?', # NEW
 	'noisette_label_titre_noisette' => 'Title:',
 	'noisette_label_titre_noisette_perso' => 'If custom title:',
@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_perso' => 'Custom title',
 	'nom_noisette_badge_facebook' => 'Facebook badge',
 	'nom_noisette_facebook_like' => 'Facebook-like button',
-	'nom_noisette_facebook_like_box' => 'Boîte Facebook-like', # NEW
+	'nom_noisette_facebook_like_box' => 'Facebook-like box',
 
 	// T
 	'titre_mon_badge_facebook' => 'My Facebook badge',
