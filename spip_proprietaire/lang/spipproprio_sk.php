@@ -210,20 +210,20 @@ Zásuvný modul {{Informácie právneho charakteru}} ponúka aj sadu nástrojov
 Napríklad ponúka model "vizitka" stránky, ako aj "v-Card" ({Virtual Card = Virtuálna vizitka umožňuje automaticky nahrať vaše kontaktné údaje do manažéra kontaktov alebo do e-mailového adresára.})
 
 Viac informácií nájdete na stránke s príkladmi ({táto stránka berie do úvahy údaje v rôznych formulároch zásuvného modulu; na to, aby sa niečo zobrazilo, treba vyplniť aspoň niektoré}).',
-	'presentation_plugin' => '{{{Fonctionnalités du plugin Mentions Légales}}}
+	'presentation_plugin' => '{{{Funkcie zásuvného modulu "Informácie právneho charakteru"}}}
 
-Ce plugin vous propose un ensemble de formulaires et de modèles pour faciliter la mise en place des informations précitées. Il vous permet notamment de définir les informations concernant l’éditeur, le créateur et l’hébergeur du site et propose des modèles d’affichages de celles-ci.
+Tento zásuvný modul ponúka sadu formulárov a šablón na uľahčenie sprístupnenia vyššie uvedených informácií. Umožňuje vám zadať konkrétne údaje o vydavateľovi, tvorcovi, poskytovateľovi webhostingu pre stránku a poskytuje šablóny na zobrazenie týchto údajov.
 
-Il est conseillé de prendre un moment pour personnaliser le modèle "mentions_legales.html" présent dans le répertoire "modeles/" du plugin. C’est ici que se construisent les textes légaux. Vous pouvez modifier ou ajouter des textes depuis le bouton "Textes de langue propriétaire" ci-dessous.
+Odporúča sa, aby si používateľ zásuvného modulu prispôsobil šablónu "mentions_legales.html" v priečinku "modeles/". Nachádzajú sa tam právne texty. Texty môžete upraviť alebo pridať kliknutím na tlačidlo "Texty v jazyku majiteľa".
 
-Vous pouvez également inclure ces modèles dans les objets éditoriaux de SPIP en utilisant les raccourcis typographiques "&lt;mentions_legales|&gt;" et "&lt;conditions_utilisation|&gt;".
+Tieto šablóny môžete pomocou klávesových skratiek "&lt;mentions_legales|&gt;" a "&lt;conditions_utilisation|&gt;"
+pridať aj do redakčných objektov SPIPu.
 
-Pour finir, des modèles de squelettes d’en-tête et de pieds de page sont proposés, construits à l’image de ceux de la distribution de SPIP, ajoutant les informations de copyright et un accès aux mentions légales du site. Vous pouvez bien entendu les personnaliser : il s’agit des fichiers "inc-head.html" et "inc-pied.html" présents dans le répertoire "public/inc/" du plugin. Pour les utiliser, placez les directement dans le répertoire "public/" ou à la racine de votre répertoire de squelettes.
+Napokon ponúka šablóny na vytvorenie hlavičky a päty stránky, ktoré vytvoríte rovnako ako tie v SPIPe, pridaním informácií o autorských právach a uvedením informácií právneho charakteru, ktoré sa vzťahujú na stránku. Môžete si ich, samozrejme, prispôsobiť: sú na to súbory "inc-head.html" a "inc-pied.html", ktoré sa nachádzajú v priečinku "public/inc/" zásuvného modulu. Ak chcete tieto súbory využívať, uložte ich priamo do priečinka  "public/" alebo do koreňového adresára svojho priečinka so šablónami.
 
-{{{Note pour les utilisateurs de squelettes Zpip}}}
+{{{Poznámka pre používateľov šablón Zpip}}}
 
-Depuis sa version 1.1, le plugin propose une adaptation Z-compatible des squelettes cités plus haut. Pour les visualiser, ajoutez simplement "_zpip" aux noms de squelettes ci-dessus. Le contenu de ces squelettes est disponible dans le répertoire "public/contenu/".
-', # NEW
+Od verzie 1.1 poskytuje zásuvný modul prispôsobenie pre šablóny, ktoré sú kompatibilné s týmito šablónami.  Ak ich chcete zobraziť, jednoducho pridajte do šablón, ktoré sú uvedené vyššie "_zpip". Obsah týchto šablón nájdete v priečinku "public/contenu/".',
 	'proprietaire' => 'vlastník',
 	'proprietaire_export_import' => 'Informácie právneho charakteru: technická údržba',
 	'proprietaire_export_import_texte_supp' => 'Tu môžete zálohovať svoje súčasné nastavenia a svoje vlastné jazykové reťazce alebo ich obnoviť z predtým vytvorenej zálohy (<i>vrátane tých z inej stránky...</i>)<br /><br />',
@@ -232,7 +232,7 @@ Depuis sa version 1.1, le plugin propose une adaptation Z-compatible des squelet
 	'proprietaire_texte_supp' => 'Tento zásuvný modul vám ponúka možnosť centralizovať a zautomatizovať riadenie stránky pri "inštitucionálnej" alebo "profesionálnej" prevádzke SPIPu.<br /><br />Umožňuje vám zadať konkrétne údaje o <b>vlastníkovi</b> stránky, organizácii, spoločnosti, inštitúcii alebo jednotlivcovi na to, aby ste sa mohli prezentovať rôznymi spôsobmi a do istej miery automaticky vytvoriť informácie o autorských právach, informácie právneho charakteru a podmienky používania pre konkrétnu stránku.',
 	'proprietaire_titre_page' => 'Platforma Informácie právneho charakteru',
 	'proprietaire_titre_page_short' => 'Platforma',
-	'pskels_info_mentions_legales' => 'Tieto bloky umožňujú uviesť údaje o <b>autorovi</b> a <b>webhostingu</b> stránky, aby sa automaticky nastavili  <b>Informácie právneho charakteru</b> a <b >Podmienky používania.</b><br /><br />Tieto texty tvoria <u>právne minimum pre každú internetovú stránku</u> a sú veľmi všeobecné. Treba ich považovať za základ pre prácu na tvorbe vlastných textov.<br /><br />Ak si zvolíte túto možnosť, môžete ich upraviť na stránke "Texty v jazyku vlastníka".',
+	'pskels_info_mentions_legales' => 'Tieto bloky umožňujú uviesť údaje o <b>autorovi</b> a <b>webhostingu</b> stránky, aby sa automaticky nastavili  <b>Informácie právneho charakteru</b> a <b >Podmienky používania.</b><br /><br />Tieto texty tvoria <u>právne minimum pre každú internetovú stránku</u> a sú veľmi všeobecné. Treba ich považovať za základ pre prácu na tvorbe vlastných textov.<br /><br />Ak si zvolíte túto možnosť, môžete ich upraviť na stránke "Texty v jazyku majiteľa".',
 	'pskels_legal_legend_createur' => 'Údaje o tvorcovi stránky',
 	'pskels_legal_legend_hebergeur' => 'Údaje o poskytovateľovi webhostingu',
 	'pskels_titre_page' => 'Nastavenie šablón',
