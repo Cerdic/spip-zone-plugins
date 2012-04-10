@@ -147,7 +147,7 @@ function autoriser_tradlang_modifier_dist($faire, $type, $id, $qui, $opt){
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
-				$autorise = tradlang_verifier_webmestre($qui);
+				$autorise = ($qui['webmestre']=='oui');
 				break;
 			case 'par_statut':
 				// Traitement spécifique pour la valeur 'tous'
@@ -216,7 +216,7 @@ function autoriser_tradlang_voir_dist($faire, $type, $id, $qui, $opt){
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
-				$autorise = tickets_verifier_webmestre($qui);
+				$autorise = ($qui['webmestre']=='oui');
 				break;
 			case 'par_statut':
 				// Traitement spécifique pour la valeur 'tous'
