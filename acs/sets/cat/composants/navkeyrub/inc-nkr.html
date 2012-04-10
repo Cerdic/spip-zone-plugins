@@ -2,15 +2,14 @@
 <div class="cNavKeyRub bsize[ cNavKeyRub(#NIC)][ cNKRtimer(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Timer'}})]">
   <BOUCLE_groupe(GROUPES_MOTS){id_groupe=#GET{idG}}>
     <B_mots>
-    [(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Titre'}}|!={non}|?{' '})<div class="bloc-title"><a href="[(#URL_PAGE{mots}|parametre_url{id_groupe,#ID_GROUPE})]" title="#TITRE">[(#TITRE|supprimer_numero|couper{80})]</a></div>]
-    <ul class="menu">
+    <ul class="menu">    [(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Titre'}}|!={non}|?{' '})<li class="bloc-title"><a href="[(#URL_PAGE{mots}|parametre_url{id_groupe,#ID_GROUPE})]" title="#TITRE">[(#TITRE|supprimer_numero|couper{80})]</a></li>]
     <BOUCLE_mots(MOTS){id_groupe}{par num titre,titre}>
-      <li class="menu-item mots">[(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'CouleurMot'}}|!={non}|?{" "})
+      <li class="menu-item mot">[(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'CouleurMot'}}|!={non}|?{" "})
           <style>[
-            a#nkr#ID_MOT:link, a#nkr#ID_MOT:visited {color:#(#LOGO_MOT|couleur_extraire|sinon{#VAR{acsFondLink}|substr{1}})}][
-            a#nkr#ID_MOT:hover {color:#(#LOGO_MOT_SURVOL|couleur_extraire|sinon{#VAR{acsFondLinkHover}|substr{1}})}]
+            div.cNavKeyRub[(#NIC)] a.nkr#ID_MOT:link, div.cNavKeyRub[(#NIC)] a.nkr#ID_MOT:visited {color:#(#LOGO_MOT|couleur_extraire|sinon{#VAR{acsFondLink}|substr{1}})}][
+            div.cNavKeyRub[(#NIC)] a.nkr#ID_MOT:hover {color:#(#LOGO_MOT_SURVOL|couleur_extraire|sinon{#VAR{acsFondLinkHover}|substr{1}})}]
           </style>
-        ][(#SET{AFILLES,""})]<BOUCLE_test_rub(RUBRIQUES){tout}{id_mot}{0,1}>[(#SET{AFILLES,menu-item-haschilds})]</BOUCLE_test_rub><a  href="#URL_MOT"[ title="(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)"][ class="(#GET{AFILLES})"]><span class="titre">[(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Affiche'}}|!={titre}|?{" "})[(#LOGO_MOT|image_reduire{#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'LogoMax'},20}})]][(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Affiche'}}|!={logo}|?{" "})[(#TITRE|supprimer_numero|couper{80})]]</span></a>
+        ][(#SET{AFILLES,""})]<BOUCLE_test_rub(RUBRIQUES){tout}{id_mot}{0,1}>[(#SET{AFILLES,menu-item-haschilds})]</BOUCLE_test_rub><a class="nkr#ID_MOT[ (#GET{AFILLES})]" href="#URL_MOT"[ title="(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)"]><span class="titre">[(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Affiche'}}|!={titre}|?{" "})[(#LOGO_MOT|image_reduire{#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'LogoMax'},20}})]][(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Affiche'}}|!={logo}|?{" "})[(#TITRE|supprimer_numero|couper{80})]]</span></a>
         <B_rubriques>
             <ul class="smenu sm1 hidden">
               <BOUCLE_rubriques(RUBRIQUES){tout}{id_mot}{par num titre,titre}>

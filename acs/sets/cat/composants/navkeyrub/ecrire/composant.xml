@@ -41,10 +41,10 @@
     <type>text</type>
   </variable>
   <variable>
-    <nom>Margin</nom>
-    <type>text</type>
+    <nom>Sep</nom>
+    <type>color</type>
   </variable>
-  
+
   <variable>
     <nom>Fond</nom>
     <type>color</type>
