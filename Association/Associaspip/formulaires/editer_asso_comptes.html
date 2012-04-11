@@ -9,7 +9,7 @@
 				<label><:asso:bouton_radio_type_operation_titre:></label>
 				<div class="choix">
 				<B_type_operation_depense>
-					<input type="radio" name="type_operation"
+					<input type="radio" name="type_operation" value="#META{/association/classe_charges}"
 						[(#ENV{type_operation}|=={#META{/association/classe_charges}}|?{
 							checked="checked"
 						,
@@ -22,7 +22,7 @@
 					#SET{pc_ok,' '}
 				</B_type_operation_depense>
 				<B_type_operation_recette>
-					<input type="radio" name="type_operation"
+					<input type="radio" name="type_operation"  value="#META{/association/classe_produits}"
 						[(#ENV{type_operation}|=={#META{/association/classe_produits}}|?{
 							checked="checked"
 						,
@@ -35,7 +35,7 @@
 					#SET{pc_ok,' '}
 				</B_type_operation_recette>
 				<B_type_operation_virement>
-					<input type="radio" name="type_operation"
+					<input type="radio" name="type_operation"  value="#META{/association/classe_banques}"
 						[(#ENV{type_operation}|=={#META{/association/classe_banques}}|?{
 							checked="checked"
 						,
@@ -49,7 +49,7 @@
 				</B_type_operation_virement>
 
 				<B_type_operation_contribution_volontaire>
-					<input type="radio" name="type_operation"
+					<input type="radio" name="type_operation"  value="#META{/association/classe_contributions_volontaires}"
 						[(#ENV{type_operation}|=={#META{/association/classe_contributions_volontaires}}|?{
 							checked="checked"
 							,
