@@ -269,7 +269,7 @@ class cSerie {
     function GetPush() {
         $ret = sprintf("\nvar tSerie%s=[];",$this->num);
         foreach($this->tXY as $rX=>$rY) {
-            $ret .= sprintf("\ntSerie%s.push([%s, %s]);", $this->num, $rX, ($rY + $rCoteFond));
+            $ret .= sprintf("\ntSerie%s.push([%s, %s]);", $this->num, $rX, $rY);
         }
         return $ret."\n";
     }

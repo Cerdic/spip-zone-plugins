@@ -5,8 +5,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'abscisse'        => "Abscisse",
     'arret_calcul'    => "Arrêt du calcul : Hauteur critique atteinte à l'abscisse",
     'acier_lamine'    => "Acier laminé - Béton lisse",
-	//B
-	'berge'           => "Berge",
+    //B
+    'berge'           => "Berge",
     // C
     'calcul_caract'   => "Le calcul a les caractéristiques suivantes :",
     'calcul_remous'   => "Calcul d'une courbe de remous",
@@ -33,9 +33,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'def_section_rect'=> "Définition de la section rectangulaire",
     'def_section_circ'=> "Définition de la section circulaire",
     'def_section_puis'=> "Définition de la section puissance",
-	'diametre'        => "Diamètre (m)",
-	'donnee_calc'     => "Donnée à calculer",
-	'debit'           => "Débit (m³/s)",
+    'diametre'        => "Diamètre (m)",
+    'donnee_calc'     => "Donnée à calculer",
+    'debit'           => "Débit (m³/s)",
     // F
     'fond'            => "Fond",
     'fruit'           => "Fruit (m/m)",
@@ -94,7 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'section_trap'    => "Section Trapézoïdale",
     'section_rect'    => "Section Rectangulaire",
     'section_circ'    => "Section Circulaire",
-    'section_puiss'   => "Section Puissance",
+    'section_parab'   => "Section Parabolique",
     'surf_mouille'    => "La surface mouillée (m²)",
     //T
     'tirant_eau'      => "Tirant d'eau (m)",

@@ -1,82 +1,66 @@
 <?php
-/*
- * formulaires/courbe_remous.php
+/**
+ *      @file formulaires/courbe_remous.php
+ *      Fonctions du formulaire CVT pour les courbes de remous
+ */
+
+/*      Copyright 2009-2012 Dorch <dorch@dorch.fr>, Médéric Dulondel
  *
+ *      This program is free software; you can redistribute it and/or modify
+ *      it under the terms of the GNU General Public License as published by
+ *      the Free Software Foundation; either version 2 of the License, or
+ *      (at your option) any later version.
  *
+ *      This program is distributed in the hope that it will be useful,
+ *      but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *      GNU General Public License for more details.
  *
- * Copyright 2012 David Dorchies <dorch@dorch.fr>
- *
- *
- *
- * This program is free software; you can redistribute it and/or modify
- *
- * it under the terms of the GNU General Public License as published by
- *
- * the Free Software Foundation; either version 2 of the License, or
- *
- * (at your option) any later version.
- *
- *
- *
- * This program is distributed in the hope that it will be useful,
- *
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- *
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *
- * GNU General Public License for more details.
- *
- *
- *
- * You should have received a copy of the GNU General Public License
- *
- * along with this program; if not, write to the Free Software
- *
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- *
- * MA 02110-1301, USA.
- *
+ *      You should have received a copy of the GNU General Public License
+ *      along with this program; if not, write to the Free Software
+ *      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ *      MA 02110-1301, USA.
  */
 
 include_spip('hyd_inc/section');
 
 /* Tableau des champs à afficher dans le formulaire.
- * On travaille avec les libelles non traduits pour pouvoir gérer 
+ * On travaille avec les libelles non traduits pour pouvoir gérer
  * le multilinguisme.
  */
 
 function mes_saisies_section() {
-	
-	// On récupère les champs communs à tous les formulaires à savoir les champs de section.
+
+    // On récupère les champs communs à tous les formulaires à savoir les champs de section.
     $fieldset_champs = caract_communes();
-    
+
     $fieldset_champs['Caract_bief'] = array(
-										   'caract_bief',
-										   array(
-												 'rKs'    =>array('coef_strickler',50),
-												 'rLong'  =>array('longueur_bief', 50),
-												 'rIf'    =>array('pente_fond', 0.005),
-												 'rYBerge'=>array('h_berge',1)
-												)
-									   );
+                                           'caract_bief',
+                                           array(
+                                                 'rKs'    =>array('coef_strickler',50),
+                                                 'rLong'  =>array('longueur_bief', 50),
+                                                 'rIf'    =>array('pente_fond', 0.005),
+                                                 'rYBerge'=>array('h_berge',1)
+                                                )
+                                       );
 
-	$fieldset_champs['Cond_lim']    = array(
-										   'condition_limite',
-										   array(
-												 'rQ'     =>array('debit_amont', 2),
-												 'rYaval' =>array('h_aval_imposee', 0.6),
-												 'rYamont'=>array('h_amont_imposee', 0.15)
-												)
-									   );
+    $fieldset_champs['Cond_lim']    = array(
+                                           'condition_limite',
+                                           array(
+                                                 'rQ'     =>array('debit_amont', 2),
+                                                 'rYaval' =>array('h_aval_imposee', 0.6),
+                                                 'rYamont'=>array('h_amont_imposee', 0.15)
+                                                )
+                                       );
 
-	$fieldset_champs['Param_calc']  = array(
-										   'param_calcul',
-										   array(
-												 'rDx'    =>array('pas_discret', 5),
-												 'rPrec'  =>array('precision_calc', 0.001)
-												)
-									   );	
-		
+    $fieldset_champs['Param_calc']  = array(
+                                           'param_calcul',
+                                           array(
+                                                 'rDx'    =>array('pas_discret', 5),
+                                                 'rPrec'  =>array('precision_calc', 0.001)
+                                                )
+                                       );
+
   return $fieldset_champs;
 
 }
@@ -89,9 +73,9 @@ function champs_obligatoires() {
     $tChOblig = array();
 
     foreach($tSaisie as $IdFS=>$FieldSet) {
-		// Si ce n'est pas une section ou la section définie...
+        // Si ce n'est pas une section ou la section définie...
         if((substr($IdFS,0,1) != 'F') || ($IdFS == $sTypeSection)){
-			// ... alors on parcourt notre deuxième tableau en ajoutant les champs nécessaires.
+            // ... alors on parcourt notre deuxième tableau en ajoutant les champs nécessaires.
             foreach($FieldSet[1] as $Cle=>$Champ) {
                 if((!isset($Champ[2])) || (isset($Champ[2]) && $Champ[2])) {
                     $tChOblig[] = $IdFS.'_'.$Cle.'_cr';
@@ -99,7 +83,7 @@ function champs_obligatoires() {
             }
         }
     }
-    
+
     return $tChOblig;
 }
 
@@ -121,7 +105,6 @@ function formulaires_courbe_remous_charger_dist() {
 }
 
 function formulaires_courbe_remous_verifier_dist(){
-
     $erreurs = array();
     $datas = array();
     $tChOblig= champs_obligatoires();
@@ -218,7 +201,9 @@ function formulaires_courbe_remous_traiter_dist(){
             break;
 
         case 'FP':
-            echo 'puissance';
+            include_spip('hyd_inc/sectionPuiss.class');
+            $oSection=new cSnPuiss($oLog,$oParam,$FP_rCoef,$FP_rLargBerge);
+            break;
 
         default:
             include_spip('hyd_inc/sectionTrapez.class');
@@ -228,7 +213,7 @@ function formulaires_courbe_remous_traiter_dist(){
     /***************************************************************************
     *                        Calcul de la ligne d'eau
     ****************************************************************************/
-    $bNoCache = false; // true pour débugage
+    $bNoCache = true; // true pour débugage
     if(!$bNoCache && is_file(HYD_CACHE_DIRECTORY.$CacheFileName)) {
         // On récupère toutes les données dans un cache déjà créé
         list($tr,$sLog,$oSection->rHautCritique,$oSection->rHautNormale) = ReadCacheFile($CacheFileName);

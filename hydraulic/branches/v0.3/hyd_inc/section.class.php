@@ -1,6 +1,6 @@
 <?php
 /**
- *      @file class.section.php
+ *      @file section.class.php
  *      Gestion des calculs au niveau des Sections
  */
 
@@ -93,9 +93,10 @@ abstract class acSection {
      * Calcul des hauteurs normale et critique
      */
     public function __construct(&$oLog,&$oP) {
-      $this->oP = &$oP;
-      $this->CalcGeo('B');
-      spip_log($this,'hydraulic');
+        $this->oP = &$oP;
+        $this->oLog = &$oLog;
+        $this->CalcGeo('B');
+        spip_log($this,'hydraulic');
     }
 
     /**
@@ -116,7 +117,7 @@ abstract class acSection {
      */
     public function Calc($sDonnee, $rY = false) {
         if($rY!==false && $rY!=$this->rY) {
-            //spip_log('Calc('.$sDonnee.') rY='.$rY,'hydraulic');
+            spip_log('Calc('.$sDonnee.') rY='.$rY,'hydraulic');
             $this->rY = $rY;
             // On efface toutes les données dépendantes de Y pour forcer le calcul
             $this->Reset(false);
@@ -173,8 +174,8 @@ abstract class acSection {
                 case 'Tau0' : // Force tractrice ou contrainte de cisaillement
                     $this->arCalc[$sDonnee] = $this->CalcTau0();
                     break;
-                case 'Yg' : // Distance du centre de gravité de la section à la surface libre
-                    $this->arCalc[$sDonnee] = $this->CalcYg();
+                case 'SYg' : // Distance du centre de gravité de la section à la surface libre
+                    $this->arCalc[$sDonnee] = $this->CalcSYg();
                     break;
                 case 'Imp' : // Impulsion hydraulique
                     $this->arCalc[$sDonnee] = $this->CalcImp();
@@ -187,7 +188,7 @@ abstract class acSection {
                     break;
             }
         }
-        //spip_log('Calc('.$sDonnee.')='.$this->arCalc[$sDonnee],'hydraulic');
+        spip_log('Calc('.$sDonnee.')='.$this->arCalc[$sDonnee],'hydraulic');
         return $this->arCalc[$sDonnee];
     }
 
@@ -198,25 +199,25 @@ abstract class acSection {
      * @return la donnée calculée
      */
     public function CalcGeo($sDonnee) {
-      if($sDonnee != 'B' && !isset($this->arCalcGeo['B'])) {
-         // Si la largeur aux berges n'a pas encore été calculée, on commence par ça
-         $this->CalcGeo('B');
-      }
+        if($sDonnee != 'B' && !isset($this->arCalcGeo['B'])) {
+            // Si la largeur aux berges n'a pas encore été calculée, on commence par ça
+            $this->CalcGeo('B');
+        }
         if(!isset($this->arCalcGeo[$sDonnee])) {
             // La donnée a besoin d'être calculée
-         //spip_log('CalcGeo('.$sDonnee.') rY='.$this->oP->rYB,'hydraulic');
-         $this->Reset(false);
-         $this->rY = $this->oP->rYB;
+            spip_log('CalcGeo('.$sDonnee.') rY='.$this->oP->rYB,'hydraulic');
+            $this->Reset(false);
+            $this->rY = $this->oP->rYB;
             switch($sDonnee) {
-            case 'B' : // Largeur aux berges
-               $this->arCalcGeo[$sDonnee] = $this->CalcB();
-               if($this->arCalcGeo[$sDonnee] < $this->oP->rYB / 100) {
-                  // Section fermée
-                  $this->bSnFermee = true;
-                  // On propose une fente de Preissmann égale à 1/100 de la hauteur des berges
-                  $this->arCalcGeo[$sDonnee] = $this->oP->rYB / 100;
-               }
-               $this->rLargeurBerge = $this->arCalcGeo[$sDonnee];
+                case 'B' : // Largeur aux berges
+                    $this->arCalcGeo[$sDonnee] = $this->CalcB();
+                    if($this->arCalcGeo[$sDonnee] < $this->oP->rYB / 100) {
+                        // Section fermée
+                        $this->bSnFermee = true;
+                        // On propose une fente de Preissmann égale à 1/100 de la hauteur des berges
+                        $this->arCalcGeo[$sDonnee] = $this->oP->rYB / 100;
+                    }
+                    $this->rLargeurBerge = $this->arCalcGeo[$sDonnee];
                     break;
                 case 'S' : // Surface mouillée
                     $this->arCalcGeo[$sDonnee] = $this->CalcS();
@@ -232,7 +233,7 @@ abstract class acSection {
                     break;
             }
         }
-        //spip_log('CalcGeo('.$sDonnee.')='.$this->arCalcGeo[$sDonnee],'hydraulic');
+        spip_log('CalcGeo('.$sDonnee.')='.$this->arCalcGeo[$sDonnee],'hydraulic');
         return $this->arCalcGeo[$sDonnee];
     }
 
@@ -338,7 +339,12 @@ abstract class acSection {
     * @return Vitesse moyenne
     */
     private function CalcV() {
-        return $this->oP->rQ/$this->Calc('S');
+        if($this->Calc('S')!=0) {
+            return $this->oP->rQ/$this->Calc('S');
+        }
+        else {
+            return INF;
+        }
     }
 
    /**
@@ -356,7 +362,7 @@ abstract class acSection {
     private function CalcYc() {
         $oHautCritique = new cHautCritique($this, $this->oP);
         if(!$this->rHautCritique = $oHautCritique->Newton($this->oP->rPrec) or !$oHautCritique->HasConverged()) {
-         $this->oLog(_T('hydraulic:h_critique').' : '._T('hydraulic:newton_non_convergence'));
+         $this->oLog->Add(_T('hydraulic:h_critique').' : '._T('hydraulic:newton_non_convergence'));
       }
       return $this->rHautCritique;
     }
@@ -368,7 +374,7 @@ abstract class acSection {
     private function CalcYn() {
         $oHautNormale= new cHautNormale($this, $this->oP);
         if(!$this->rHautNormale = $oHautNormale->Newton($this->CalcGeo('Yc')) or !$oHautNormale->HasConverged()) {
-         $this->oLog(_T('hydraulic:h_normale').' : '._T('hydraulic:newton_non_convergence'));
+         $this->oLog->Add(_T('hydraulic:h_normale').' : '._T('hydraulic:newton_non_convergence'));
       }
         return $this->rHautNormale;
     }
@@ -421,7 +427,7 @@ abstract class acSection {
      * Calcul de la distance du centre de gravité de la section à la surface libre.
      * @return Distance du centre de gravité de la section à la surface libre
      */
-    protected function CalcYg($rY) {
+    protected function CalcSYg($rY) {
         return $rY / 2;
     }
     /**
@@ -429,7 +435,7 @@ abstract class acSection {
      * @return Impulsion hydraulique
      */
     protected function CalcImp() {
-        return 1000 * ($this->oP->rQ * $this->Calc('V') + $this->oP->rG * $this->Calc('S') * $this->Calc('Yg'));
+        return 1000 * ($oP->rQ * $this->Calc('V') + $oP->rG * $this->Calc('SYg'));
     }
 
     /**
