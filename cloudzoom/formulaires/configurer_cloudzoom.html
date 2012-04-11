@@ -1,0 +1,92 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	
+<h3 class="titrem"><:cloudzoom:titre_menu_cloudzoom:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+
+<ul>
+	
+	<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	
+		<fieldset><:cloudzoom:parametre:></fieldset>
+
+		<label><:cloudzoom:zoomwidth:></label>
+		<p class="explication"><:cloudzoom:pixel:></p>
+		<input type="text" name="width" size="10" value="#ENV*{width}">
+	<br/> <br/>
+	
+		<label><:cloudzoom:zoomheight:></label>
+		<p class="explication"><:cloudzoom:pixel:></p>
+		<input type="text" name="height" size="10" value="#ENV*{height}">
+	<br/> <br/>
+	
+		
+		<label><:cloudzoom:position:></label>
+			<select name="position">
+			<option value="left"[(#ENV{position}|=={left}|oui)selected="selected"]><:cloudzoom:left:></option>
+			<option value="right"[(#ENV{position}|=={right}|oui)selected="selected"]><:cloudzoom:right:></option>
+			<option value="top"[(#ENV{position}|=={top}|oui)selected="selected"]><:cloudzoom:top:></option>
+			<option value="bottom"[(#ENV{position}|=={bottom}|oui)selected="selected"]><:cloudzoom:bottom:></option>
+			<option value="inside"[(#ENV{position}|=={inside}|oui)selected="selected"]><:cloudzoom:inside:></option>
+			</select>
+	<br/> <br/>
+	
+		<label><:cloudzoom:adjustx:></label>
+		<p class="explication"><:cloudzoom:pixel:></p>
+		<input type="text" name="adjustx" size="10" value="#ENV*{adjustx}">
+	<br/> <br/>
+	
+		<label><:cloudzoom:adjusty:></label>
+		<p class="explication"><:cloudzoom:pixel:></p>
+		<input type="text" name="adjusty" size="10" value="#ENV*{adjusty}">
+	<br/> <br/>
+	
+		<label><:cloudzoom:tint:></label>
+		<p class="explication"><:cloudzoom:tintexplain:></p>
+		<input type="text" name="tint" size="10" value="#ENV*{tint}">
+	<br/> <br/>
+	
+		<label><:cloudzoom:tintopacity:></label>
+		<p class="explication"><:cloudzoom:opacityexplain:></p>
+		<input type="text" name="tintopacity" size="10" value="#ENV*{tintopacity}">
+	<br/> <br/>
+	
+		<label><:cloudzoom:lensopacity:></label>
+		<p class="explication"><:cloudzoom:opacityexplain:></p>
+		<input type="text" name="lensopacity" size="10" value="#ENV*{lensopacity}">
+	<br/> <br/>
+	
+		<label><:cloudzoom:softfocus:></label>
+		<p class="explication"><:cloudzoom:softfocusexplain:></p>
+			<select name="softfocus">
+			<option value="false"[(#ENV{softfocus}|=={false}|oui)selected="selected"]><:cloudzoom:false:></option>
+			<option value="true"[(#ENV{softfocus}|=={true}|oui)selected="selected"]><:cloudzoom:true:></option>
+			</select>
+	<br/><br/>
+
+		<label><:cloudzoom:showtitle:></label>
+			<select name="showtitle">
+			<option value="false"[(#ENV{showtitle}|=={false}|oui)selected="selected"]><:cloudzoom:false:></option>
+			<option value="true"[((#ENV{showtitle}|=={true}|oui)selected="selected"]><:cloudzoom:true:></option>
+			</select>
+	<br/><br/>
+	
+		<label><:cloudzoom:titleopacity:></label>
+		<p class="explication"><:cloudzoom:opacityexplain:></p>
+		<input type="text" name="titleopacity" size="10" value="#ENV*{titleopacity}">
+	<br/> <br/>
+	
+	
+	</li>	
+</ul>
+
+
+<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+
+</div>
+</form>
+</div>
