@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'calculer_lechapt_calmon' => "Calculation with Lechapt and Calmon formula",
     'calcul_val'      => "Value to calculate",
     'choix_section'   => "Choice of section",
+	'caract_globale'  => "Overall characteristics",
     // D
     'debit_amont'     => "Upstream flow (m3/s)",
     'def_section_trap'=> "Definition of trapezoidal section",
@@ -53,6 +54,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'longueur_bief'   => "Length of reach (m)",
     //N
     'newton_non_convergence' => "Non-convergence of the calculation (Newton's method)",
+    // O
+    'ordonnee'        => "Ordinate",
     // P
     'param_calcul'    => "Calculation parameters",
     'pas_ajustement'  => "adjustement of space step to ",
@@ -62,14 +65,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'precision_calc'  => "Accuracy of calculation and display of dimensions (m)",
     'pas_calcul_depuis_aval' => 'Downstream boundary condition < Critical elevation : no possible calculation from downstream',
     'pas_calcul_depuis_amont' => 'Upstream boundary condition < Critical elevation : no possible calculation from upstream',
-   'pas_var' => "With a variation step of",
+    'pas_var' => "With a variation step of",
     'pvc' => "PVC - Polyethylene",
     'param_Q' => "Q: Flow (m&#179; / s)",
     'param_D' => "D: Pipe diameter (m)",
     'param_J' => "J: Head drop (m)",
     'param_Lg' => "Lg: Pipe length (m)",
-    'param_calc_lechapt_calmon' => "Calculation parameters",
-    'precision_lechapt_calmon' => "Display accuracy (m)",
+    'precision' => "Display accuracy (m)",
     //S
     'saisie_erreur'   => 'Your entry contains errors!',
     'section_trap'    => "Trapezoidal Section",

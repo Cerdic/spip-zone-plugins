@@ -39,7 +39,7 @@ class cParam {
     public $rG=9.81;/// Constante de gravité
     public $iPrec;  /// Précision en nombre de décimales
 
-    function __construct($rYCL,$rKs, $rQ, $rLong, $rIf, $rDx, $rPrec, $rYB) {
+    function __construct($rKs, $rQ, $rIf, $rPrec, $rYB, $rYCL = 0, $rDx = 0, $rLong = 0) {
         $this->rYCL=(real) $rYCL;
         $this->rKs=(real) $rKs;
         $this->rQ=(real) $rQ;
@@ -63,10 +63,10 @@ abstract class acSection {
     //~ public $rB;             /// Largeur au miroir
     //~ public $rJ;             /// Perte de charge
     //~ public $rFr;                /// Froude
-    protected $rY=0;          /// Tirant d'eau
+    public $rY=0;          /// Tirant d'eau
     public $rHautCritique;  /// Tirant d'eau critique
     public $rHautNormale;   /// Tirant d'eau normal
-    protected $oP;   /// Paramètres du système canal (classe oParam)
+    public $oP;   /// Paramètres du système canal (classe oParam)
     protected $oLog; /// Pour l'affichage du journal de calcul
     public $rLargeurBerge; /// largeur au débordement
     protected $bSnFermee = false; /// true si la section est fermée (fente de Preissmann)
@@ -95,7 +95,7 @@ abstract class acSection {
     public function __construct(&$oLog,&$oP) {
       $this->oP = &$oP;
       $this->CalcGeo('B');
-      //spip_log($this,'hydraulic');
+      spip_log($this,'hydraulic');
     }
 
     /**
@@ -382,7 +382,7 @@ abstract class acSection {
             return $this->rY;
         }
         else {
-            $oHautCorrespondante= new cHautCorrespondante($this, $oP);
+            $oHautCorrespondante= new cHautCorrespondante($this, $this->oP);
             return $oHautCorrespondante->Newton($this->Calc('Yc'));
         }
     }
@@ -396,7 +396,7 @@ abstract class acSection {
             return $this->rY;
         }
         else {
-            $oHautCorrespondante= new cHautCorrespondante($this, $oP);
+            $oHautCorrespondante= new cHautCorrespondante($this, $this->oP);
             return $oHautCorrespondante->Newton($this->Calc('Yc'));
         }
     }
@@ -414,7 +414,7 @@ abstract class acSection {
     * @return contrainte de cisaillement
     */
     private function CalcTau0() {
-        return 1000 * $oP->rG * $this->Calc('R') * $oP->rIf;
+        return 1000 * $this->oP->rG * $this->Calc('R') * $this->oP->rIf;
     }
 
     /**
@@ -429,7 +429,7 @@ abstract class acSection {
      * @return Impulsion hydraulique
      */
     protected function CalcImp() {
-        return 1000 * ($oP->rQ * $this->Calc('V') + $oP->rG * $this->Calc('S') * $this->Calc('Yg'));
+        return 1000 * ($this->oP->rQ * $this->Calc('V') + $this->oP->rG * $this->Calc('S') * $this->Calc('Yg'));
     }
 
     /**

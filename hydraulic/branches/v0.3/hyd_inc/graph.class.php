@@ -84,8 +84,20 @@ class cGraph {
     function Get1AxeOptions($tX, $Tmax) {
         $Xmin = min($tX);
         $Xmax = max($tX);
+        
+        if($Xmin == $Xmax){
+			$Xmin = $Xmin * 0.9;
+			$Xmax = $Xmax * 1.1;
+		}
+		
+		if($xMin == 0 && $Xmax == 0){
+			$Xmin = -1;
+			$Xmax = 1;
+		}
+		
         $r1 = ($Xmax - $Xmin) / floatval($Tmax);
         $r2 = floor($r1 * pow(10,(-floor(log10($r1))))*10)/10;
+
         if($r2 > 5) {
             $XTick = 10;
         }
@@ -101,6 +113,7 @@ class cGraph {
         else {
             $XTick = 1;
         }
+
         // Ecart entre chaque graduation
         $XTick = $XTick * pow(10, floor(log10($r1)));
 

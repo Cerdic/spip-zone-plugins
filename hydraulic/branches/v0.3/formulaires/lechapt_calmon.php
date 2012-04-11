@@ -400,8 +400,8 @@ function formulaires_lechapt_calmon_traiter_dist(){
 					}
 				}
 
-	$echo.= '		<th style="text-align:center;" scope="col" rowspan="2">(Abscisse)<br/>'.$tabClass['var'].'</th>
-					<th style="text-align:center;" scope="col" rowspan="2">(Ordonnée)<br/>'.$tabClass['cal'].'</th>
+	$echo.= '		<th style="text-align:center;" scope="col" rowspan="2">'._T('hydraulic:abscisse').'<br/>'.$tabClass['var'].'</th>
+					<th style="text-align:center;" scope="col" rowspan="2">'._T('hydraulic:ordonnee').'<br/>'.$tabClass['cal'].'</th>
 				</tr>	
 			</thead>
 			<tbody>';
@@ -464,6 +464,7 @@ function formulaires_lechapt_calmon_traiter_dist(){
 		}
 		// Récupération du graphique
 		$echo .= $oGraph->GetGraph('ligne_lechapt_calmon',400,600);
+		$echo .= $tabClass['var'];
 	}
 	$res['message_ok'] = $echo;
     return $res;

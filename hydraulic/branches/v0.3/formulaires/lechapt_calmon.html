@@ -3,6 +3,7 @@
 <script>
 	
 var glob = [];
+
 // Variables globales contenant le choix fait pour chaque ligne	 
 <BOUCLE_sans_coeff(POUR){tableau #ENV{tableau_caract}}>
 	glob['#CLE'] = '#ENV{choix_champs_#CLE}';
@@ -33,7 +34,6 @@ function change_valeur() {
 
 // Gére le comportement des boutons radios
 function gestion_radios(nom,valeur){
-	
 	var tabPartiel = {
 		<BOUCLE_sans_coeff3(POUR){tableau #ENV{tableau_caract}}>
 			'#CLE' : glob['#CLE'],
@@ -71,18 +71,20 @@ function gestion_radios(nom,valeur){
 	// Si on appuis sur un bouton de type "varier_val" ou "val_fixe" 
 	else if(valeur.substr(0,3) == 'var' || valeur.substr(0,3)=='val'){
 		for(var cle in tabPartiel){
+			var test = 0;
 			if(document.getElementById('varier_val_'+cle).checked && (glob[nom] != "calcul_val_"+nom)){
-				document.getElementById('val_fixe_'+cle).checked=true;
+				if(document.getElementById('varier_val_'+nom).checked){
+					document.getElementById('val_fixe_'+cle).checked=true;
+				}
 				setVarGlob();
 			}
 			else if(document.getElementById('varier_val_'+cle).checked && (glob[nom] == "calcul_val_"+nom) && valeur.substr(0,3) == 'var'){
-			
 				document.getElementById('calcul_val_'+cle).checked=true;
 				document.getElementById('caract_'+cle).disabled=true;
 				document.getElementById('caract_'+nom).disabled=false;
 				setVarGlob();
 			}
-		}
+		}	
 		
 		// Compte le nombre de calcul_val checké
 		var cptValCal = 0;
@@ -282,7 +284,7 @@ function gestion_radios(nom,valeur){
 			
 			<tr id="precision_lechapt_calmon">
 				<td align="right"> 
-					<:hydraulic:precision_lechapt_calmon:> :			
+					<:hydraulic:precision:> :			
 				</td>			
 				<td>
 					<input id="champs_prec_lc" type="text" value="#ENV{prec_lc}" maxlength="30" name="prec_lc"/>
@@ -300,4 +302,4 @@ function gestion_radios(nom,valeur){
    </table>
 </form>
 
-[<div class='hydraulic_resultat'>(#ENV*{message_ok})</div>]
+[<div class='hydraulic_resultat' id="resultat_lechapt_calmon">(#ENV*{message_ok})</div>]

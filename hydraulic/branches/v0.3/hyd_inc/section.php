@@ -6,8 +6,8 @@ function caract_communes() {
                 'FT'          => array(
                                        'def_section_trap',
                                        array(
-                                             'rLarg'  =>array('largeur_fond',2.5),
-                                             'rFruit' =>array('fruit', 0.56, false)
+                                             'rLargeurFond' =>array('largeur_fond',2.5),
+                                             'rFruit'       =>array('fruit', 0.56)
                                             )
                 ),
 
@@ -21,7 +21,7 @@ function caract_communes() {
                 'FC'          => array(
                                        'def_section_circ',
                                        array(
-                                             'rDiam'  =>array('diametre',2)
+                                             'rD'  =>array('diametre',2)
                                             )
                 )
 	);

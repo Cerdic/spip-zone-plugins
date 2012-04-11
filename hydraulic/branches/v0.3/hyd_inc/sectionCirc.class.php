@@ -29,7 +29,7 @@ include_spip('hyd_inc/section.class');
  * Calculs de la section circulaire
  */
 class cSnCirc extends acSection {
-    protected $rD;      /// Diamètre du cercle
+    public $rD;      /// Diamètre du cercle
     private $rAlpha;    /// Angle de la surface libre par rapport au fond
 
     function __construct(&$oLog,&$oP,$rD) {

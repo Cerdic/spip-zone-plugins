@@ -110,7 +110,12 @@ class cSnTrapez extends acSection {
      * @return Distance du centre de gravité de la section à la surface libre
      */
     protected function CalcYg() {
-        return ($this->rLargeurFond / 2 + $this->rFruit * $this->rY / 3) * pow($this->rY,2) / $this->Calc('S');
+		if(($this->rFruit * $this->rY != 0) && $this->Calc('S') != 0){
+			return ($this->rLargeurFond / 2 + $this->rFruit * $this->rY / 3) * pow($this->rY,2) / $this->Calc('S');
+		}
+		else{
+			return 0;
+		}
     }
 
 }
