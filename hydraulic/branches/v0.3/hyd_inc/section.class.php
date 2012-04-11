@@ -219,10 +219,10 @@ abstract class acSection {
                     }
                     $this->rLargeurBerge = $this->arCalcGeo[$sDonnee];
                     break;
-                case 'S' : // Surface mouillée
+                case 'S' : // Surface mouillée au niveau des berges
                     $this->arCalcGeo[$sDonnee] = $this->CalcS();
                     break;
-                case 'P' : // Périmètre mouillé
+                case 'P' : // Périmètre mouillé au niveau des berges
                     $this->arCalcGeo[$sDonnee] = $this->CalcP();
                     break;
                 case 'Yc' : // Tirant d'eau critique
@@ -231,6 +231,8 @@ abstract class acSection {
                 case 'Yn' : // Tirant d'eau normal
                     $this->arCalcGeo[$sDonnee] = $this->CalcYn();
                     break;
+                case 'Hsc' : // Charge spécifique critique
+                    $this->arCalcGeo[$sDonnee] = $this->CalcHsc();
             }
         }
         spip_log('CalcGeo('.$sDonnee.')='.$this->arCalcGeo[$sDonnee],'hydraulic');
@@ -314,7 +316,7 @@ abstract class acSection {
     * @return La perte de charge
     */
     private function CalcJ() {
-        return pow($this->oP->rQ/$this->Calc('S')/$this->oP->rKs,2)/pow($this->Calc('R'),4/3);
+        return pow($this->Calc('V')/$this->oP->rKs,2)/pow($this->Calc('R'),4/3);
     }
 
    /**
@@ -354,6 +356,24 @@ abstract class acSection {
     private function CalcHs() {
         return $this->rY+pow($this->Calc('V'),2)/(2*$this->oP->rG);
     }
+
+
+   /**
+    * Calcul de la charge spécifique critique.
+    * @return Charge spécifique critique
+    */
+    private function CalcHsc() {
+        // On mémorise les calculs hydrauliques en cours
+        $rY = $this->rY;
+        $arCalc = $this->arCalc;
+        // On calcule la charge avec la hauteur critique
+        $rHsc = $this->Calc('Hs',$this->CalcGeo('Yc'));
+        // On restitue les données initiales
+        $this->rY = $rY;
+        $this->arCalc = $arCalc;
+        return $rHsc;
+    }
+
 
    /**
     * Calcul du tirant d'eau critique.
@@ -412,7 +432,7 @@ abstract class acSection {
     * @return tirant d'eau conjugué
     */
     private function CalcYco() {
-        return (sqrt(1 + 8 * pow($this->Calc('Fr'),2)) - 1) / 2;
+        return $this->rY*(sqrt(1 + 8 * pow($this->Calc('Fr'),2)) - 1) / 2;
     }
 
    /**
@@ -435,7 +455,7 @@ abstract class acSection {
      * @return Impulsion hydraulique
      */
     protected function CalcImp() {
-        return 1000 * ($oP->rQ * $this->Calc('V') + $oP->rG * $this->Calc('SYg'));
+        return 1000 * ($this->oP->rQ * $this->Calc('V') + $this->oP->rG * $this->Calc('SYg'));
     }
 
     /**

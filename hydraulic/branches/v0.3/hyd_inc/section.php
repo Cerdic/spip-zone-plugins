@@ -43,7 +43,7 @@ function caract_communes() {
         'FC' => array(
             'def_section_circ',
             array(
-                'rDiam'  =>array('diametre',2)
+                'rD'  =>array('diametre',2)
             )
         ),
 
