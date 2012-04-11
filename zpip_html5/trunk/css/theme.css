@@ -1,0 +1,77 @@
+/* Titraille / Intertitres */
+h1,h2,h3,h4,h5,h6,
+.h1,.h2,.h3,.h4,.h5,.h6 { font-family: Georgia, Times, serif; }
+h1,.h1 { color: #000; }
+h2, h2 a, h2 a:focus, h2 a:hover, h2 a:active { color: #222; }
+.h2, .h2 a, .h2 a:focus, .h2 a:hover, .h2 a:active { color: #222; }
+
+/* Citations, code et poesie */
+.spip_code {color:#777;}
+.spip_cadre {color:#777; background-color: #fff; border: 1px solid #ddd; }
+
+/* Tableaux */
+thead th, tbody th { background: #666; color:white; }
+table.spip tr.row_even td,table.spip tr.row_even th {background: #eee;}
+/* ------------------------------------------
+/* Habillage des elements du contenu
+/* ------------------------------------------ */
+.page {-webkit-box-shadow: 0px 0px 30px #909090;-moz-box-shadow: 0px 0px 30px #909090;box-shadow: 0px 0px 30px #909090; border-width:2px;}
+
+.header { margin: 0; padding : /*@margin-bottom*/1.5em/*/@*/ 0;border-bottom: 2px solid #333;position: relative;}
+.header .accueil { display: block; width: 67%; }
+.header .accueil .spip_logos { vertical-align: bottom; line-height: 1em; margin-bottom: 0;}
+.header .accueil #nom_site_spip { vertical-align: bottom; font-size: 2.2em; font-family: Georgia, Times, serif; font-weight: normal; }
+.header .formulaire_menu_lang { position: absolute; right: 0; top: 0.90em; display: block; width: 30%; } /*Cf.: spip_formulaires.css*/
+.header .formulaire_menu_lang select {width: 100%;}
+
+.hornav {background-color: #ebeeee;}
+.hornav .item a:hover {background:#dadddd}
+.hornav .on {color:#000;}
+.hornav .on a {color:#000;}
+
+
+#hierarchie { clear: both; margin-bottom: /*@margin-bottom*/1.5em/*/@*/; font-size: 0.846em; }
+#hierarchie, #hierarchie a { color: #666; }
+
+.cartouche { margin-bottom: /*@margin-bottom*/1.5em/*/@*/; }
+.cartouche .spip_logos { float: right; margin-left: 16px; margin-bottom: 4px; }
+.cartouche .info-publi { margin: 0; padding: 0; clear: left; }
+
+.chapo { margin-bottom: /*@margin-bottom*/1.5em/*/@*/; font-weight:bold; color:#666;}
+.chapo .spip_cadre {color:#888;}
+.ps, .notes { margin-bottom: /*@margin-bottom*/1.5em/*/@*/;}
+.notes { clear: both; font-size: 0.846em; }
+
+
+/* ------------------------------------------
+/* Sous-navigation et autres menus
+/* ------------------------------------------ */
+
+/* Listes d'articles et extraits introductifs */
+.resume .liste-items .item { border-bottom: 0;}
+.resume .liste-items .item .h3 { border-bottom:1px solid #888;}
+.liste-items .item .info-publi {  display:block; float:right; margin-top:0.6em; margin-left:.3em; padding:.3em; background:#ddd;}
+.liste-items .item .introduction { font-size: 0.923em;}
+
+.liste.articles .spip_logos { float: right; clear: right; margin: .8em 0 4px 16px; }
+.liste .articles .item .introduction { margin-top: 0.30em; line-height: 1.40em; padding: 0.5em 0 1.5em 1em;}
+
+
+.extra1 .menu {background:#fcfcfc; padding:0 /*@demi-margin-bottom*/0.75em/*/@*/ /*@demi-margin-bottom*/0.75em/*/@*/; border: 1px solid #ddd;}
+.extra1 .menu a {/*color:#666;*/} /* ne pas utiliser de selecteur trop precis, et eviter de toucher aux liens */
+.extra1 .menu-items {border-bottom:0;}
+.extra1 .menu-items .item {list-style:square; margin-left:15px; padding:0; color:#333;}
+
+.formulaire_recherche input.text {width: 170px;}
+
+
+/* Couleurs des liens
+---------------------------------------------- */
+a { color: #3996BB; text-decoration: none; }
+a:focus,a:hover,a:active { color: #46839B; text-decoration: underline; }
+a.spip_out, a.spip_glossaire {
+	color: #46839B;
+	background:transparent url(img/spip_out.gif) no-repeat scroll right center;
+	padding-right:12px;
+}
+

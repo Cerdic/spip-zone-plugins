@@ -1,0 +1,18 @@
+[(#REM) Articles issus de la syndication ]
+<B_articles>
+<div class="liste resume articles syndic">
+		#ANCRE_PAGINATION
+		<h2 class="h2"><:articles:></h2>
+		<ul class="liste-items">
+				<BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {pagination 10}>
+				<li class="item">
+						<h3 class="h3"><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></h3>
+						[<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
+						<div class="small">[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr>][, <:par_auteur:> (#LESAUTEURS)][<span class="sep"> &mdash; </span><em>(#TAGS|afficher_tags)</em>]</div>
+						[<div class="introduction">(#DESCRIPTIF|image_reduire{300})</div>]
+				</li>
+				</BOUCLE_articles>
+		</ul>
+		[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_articles>
