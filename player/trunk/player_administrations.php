@@ -21,18 +21,24 @@ function player_upgrade($nom_meta_base_version,$version_cible){
 		'player_mp3' => 'eraplayer'
 	);
 	
-	$meta = isset($GLOBALS['meta']['player'])?$GLOBALS['meta']['player']:$default;
+	$meta = (isset($GLOBALS['meta']['player'])?$GLOBALS['meta']['player']:$default);
 	if (is_string($meta)){
-		$meta = array(
-			'player_mp3' => $meta,
-		);
+		if ($m = unserialize($meta))
+			$meta = $m;
+		else {
+			$meta = array(
+				'player_mp3' => $meta,
+			);
+		}
 	}
+	if (!isset($meta['insertion_auto']))
+		$meta['insertion_auto'] = array('inline_mini');
 
 	$maj['create'] = array(
 		array('ecrire_meta','player',serialize($meta)),
 	);
 
-	$maj[$nom_meta_base_version] = array(
+	$maj[$version_cible] = array(
 		array('ecrire_meta','player',serialize($meta)),
 	);
 

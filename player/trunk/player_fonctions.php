@@ -102,16 +102,40 @@ function player_post_propre($texte) {
 	// plus vite
 	if (stripos($texte,".$reg_formats")!==false
 	  AND stripos($texte,"<a")!==false){
-		$texte = preg_replace_callback(
-			",<a(\s[^>]*href=['\"]?(http://[a-zA-Z0-9\s()\/\:\._%\?+'=~-]*\.($reg_formats))['\"]?[^>]*)>,Uims",
-			'player_enclose_link',
-			$texte
-			);
+
+		$cfg = unserialize($GLOBALS['meta']['player']);
+		// insertion du mini-player inline
+		if (isset($cfg['insertion_auto'])
+			AND in_array('inline_mini',$cfg['insertion_auto'])){
+			$texte = preg_replace_callback(
+				",<a(\s[^>]*href=['\"]?(http://[a-zA-Z0-9\s()\/\:\._%\?+'=~-]*\.($reg_formats))['\"]?[^>]*)>,Uims",
+				'player_enclose_link',
+				$texte
+				);
+		}
+		if (isset($cfg['insertion_auto'])
+			AND in_array('player_end',$cfg['insertion_auto'])){
+
+			preg_match_all(",<a(\s[^>]*href=['\"]?(http://[a-zA-Z0-9\s()\/\:\._%\?+'=~-]*\.($reg_formats))['\"]?[^>]*)>,Uims",$texte,$matches,PREG_SET_ORDER);
+			if (count($matches)){
+				foreach ($matches as $m){
+					$url = $m[2];
+					$texte .= recuperer_fond("modeles/player",array('url_document'=>$url,'titre'=>player_joli_titre($url)));
+				}
+			}
+		}
+
 	}
 
 	return $texte;
 }
 
+/**
+ * Ajouter enclosure sur un lien mp3
+ *
+ * @param $regs
+ * @return mixed|string
+ */
 function player_enclose_link($regs){
 	$rel = extraire_attribut($regs[0],'rel');
 	$rel = ($rel?"$rel ":"")."enclosure";

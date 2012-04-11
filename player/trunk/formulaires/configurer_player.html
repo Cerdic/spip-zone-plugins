@@ -10,7 +10,7 @@
 		#SET{fl,player}
 		<ul>
 			#SET{name,player_mp3}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
@@ -32,6 +32,22 @@
 				#SET{val,eraplayer}
 				<div class="choix">
 					<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+			</li>
+			#SET{name,insertion_auto}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{val,inline_mini}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}#EVAL{chr(91)}#EVAL{chr(93)}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|in_any{#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+				#SET{val,player_end}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}#EVAL{chr(91)}#EVAL{chr(93)}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|in_any{#ENV{#GET{name}}}|oui)checked="checked"] />
 					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 				</div>
 			</li>
