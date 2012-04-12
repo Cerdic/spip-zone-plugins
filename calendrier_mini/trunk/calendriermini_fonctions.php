@@ -24,4 +24,28 @@ function critere_archives($idb, &$boucles, $crit) {
 	);
 }
 
+/**
+ * Crée un array d'un intervalle de jour entre la date de début $start et la date de fin $end
+ * 
+ * $start datetime SQL - La date de début
+ * $end datetime SQL La date de fin
+ */
+function calendriermini_intervalle($start,$end=false){
+	$jours = array();
+	$starttime = strtotime($start);
+	$startdate = date('Y-m-d',$starttime);
+	$jours[] = $startdate;
+	if(!$end){
+		return $jours;
+	}
+	$endtime = strtotime($end);
+	$enddate = date('Y-m-d',strtotime($end));
+	$starttime = $starttime + (3600*24);
+	while(($date_test = date('Y-m-d',$starttime)) < $enddate){
+		$jours[] = $date_test;
+		$starttime = $starttime + (3600*24);
+	}
+	$jours[] = $enddate;
+	return array_unique($jours);
+}
 ?>

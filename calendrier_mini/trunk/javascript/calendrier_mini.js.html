@@ -4,7 +4,6 @@
 #INCLURE{javascript/ui/jquery.ui.datepicker.js}
 #INCLURE{javascript/jquery-ui.multidatespicker.js}
 [(#REM)<script>]
-var ajax_image_searching = "<img src='#CHEMIN{images/searching.gif}' width='16' height='16' />";
 var minical = {
 	options: {
 		buttonText: '<:afficher_calendrier|texte_script:>',
@@ -47,6 +46,20 @@ var minical = {
 				d = d[0].split("-");
 				d = new Date(d[0],d[1]-1,d[2]);
 				dates.push(d);
+				if(data[j].end){
+					e = data[j].end.split(" ");
+					e = e[0].split("-");
+					e = new Date(e[0],e[1]-1,e[2]);
+					dates.push(e);
+					datebegin = d.getTime();
+					dateend = e.getTime();
+					datebegin = datebegin+(3600*24*1000);
+					while(datebegin < dateend){
+						newdate = new Date(datebegin);
+						dates.push(newdate);
+						datebegin = datebegin+(3600*24*1000);
+					}
+				}
 			}
 			//console.log(dates);
 			me.multiDatesPicker('addDates', dates);

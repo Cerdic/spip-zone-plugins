@@ -21,9 +21,9 @@
 			<strong>[(#ENV{date}|affdate_mois_annee)]&nbsp;:</strong>
 			<B_alt>
 			<ul class="liste-items">
-			<BOUCLE_alt(DATA){source json,#GET{url}}>[
-				<li class="item"><a href="[(#ENV{self}|parametre_url{#ENV{var_date},#VALEUR{start}|affdate{Y-m-d}})]">(#VALEUR{start}|affdate|unique)</a></li>
-				]</BOUCLE_alt>
+			<BOUCLE_alt(DATA){source json,#GET{url}}><BOUCLE_dates(DATA){source table,#VALEUR{start}|calendriermini_intervalle{#VALEUR{end}}}>[
+				<li class="item"><a href="[(#ENV{self}|parametre_url{#ENV{var_date},#VALEUR})]">(#VALEUR|affdate|unique)</a></li>
+				]</BOUCLE_dates></BOUCLE_alt>
 			</ul>
 			</B_alt>
 			<p><:minical:aucune_date:></p>
