@@ -8,6 +8,7 @@
 		Liez vos documents à des auteurs
 	</description>
 	<prefix>media_aut</prefix>
+	<icon>img/medias_aut-32.png</icon>
 	<pipeline>
 		<nom>affiche_gauche</nom>
 		<inclure>media_aut_pipelines.php</inclure>
