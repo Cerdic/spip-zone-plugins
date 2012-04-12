@@ -1,0 +1,14 @@
+<B_docaut>
+<h4><:media_aut:actuellement_lie_a:> :</h4>
+<table class="presentation_liaison_docaut">
+<BOUCLE_docaut(spip_documents_liens){id_document}{objet=auteur}>
+#SET{argtosend, #ID_OBJET|concat{'-'}|concat{#ENV{id_document}}}
+<tr>
+	<td>#INFO_NOM{auteur, #ID_OBJET}</td>
+	<td class="nom_auteur_docaut"><a class='ajax' href="[(#URL_ACTION_AUTEUR{'supprimer_liaison_docaut', #GET{argtosend}, #SELF})]"><img src="#CHEMIN{img/delete_liaison.png}" title="<:lien_supprimer:>" /></a></td>
+</tr>
+</BOUCLE_docaut>
+</table>
+</B_docaut>
+
+#FORMULAIRE_AJOUTER_DOCUMENT_A_AUTEUR

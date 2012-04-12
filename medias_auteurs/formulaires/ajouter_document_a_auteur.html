@@ -1,0 +1,20 @@
+<div class='formulaire_spip formulaire_editer formulaire_editer_document formulaire_editer_document-#ENV{id_document,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#SELF' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <input type='hidden' name='id_document' value='#ENV{id_document}' />
+	  <ul>
+
+[(#SAISIE{auteurs, sel_aut, label=<:media_aut:trouver_auteur:>, class="not"})]
+<li><em><:media_aut:ou_alors_chercher:></em></li>
+[(#SAISIE{input, inp_aut, label=<:media_aut:auteur_id:>})]
+
+	</ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>
