@@ -16,14 +16,16 @@
 include_spip('outils/migration_nom_pays');
 // pour une colonne 'pays' dans 'spip_mots'
 // migre et affiche un resultat des operations
-migrer_pays_table_et_bilan('spip_mots', 'pays');
+migrer_pays_table_et_bilan('spip_mots', 'pays'); // resume des erreurs uniquement
+// ou
+migrer_pays_table_et_bilan('spip_mots', 'pays', true); // bilan complet (erreurs + reussite)
 ?>
 
 */
 
 include_spip('base/abstract_sql');
 include_spip('inc/charsets'); // translitteration
-
+include_spip('inc/texte'); // typo
 
 
 /**
@@ -103,12 +105,12 @@ function migrer_pays_table($table_sql, $colonne) {
 		if (count($ids)) {
 			if (!isset($pays_fr[$nom_fr])) {
 				// erreur pays introuvable
-				$erreurs[] = "Pays '$nom_fr' introuvable dans spip_pays. Elements concernes : " . implode(',', $ids);
+				$erreurs[$nom_fr] = "Pays '$nom_fr' introuvable dans spip_pays. Elements concernes : " . implode(',', $ids);
 			} else {
 
 				$id_pays = $pays_fr[$nom_fr];
 				sql_updateq($table_sql, array($colonne => $id_pays), sql_in($_id_objet, $ids));
-				$oks[] = "Pays '$nom_fr' charge. Elements concernes : " . implode(',', $ids);
+				$oks[$nom_fr] = "Pays '$nom_fr' charge. Elements concernes : " . implode(',', $ids);
 			}
 		}
 	}
@@ -127,19 +129,25 @@ function migrer_pays_table($table_sql, $colonne) {
  * 		Nom de la colonne de la table qui contient des noms de pays
  * 
 **/
-function migrer_pays_table_et_bilan($table, $colonne) {
+function migrer_pays_table_et_bilan($table, $colonne, $locace = false) {
 	// lancer la migration
-	list($oks, $erreurs) = migrer_pays_table('spip_mots', 'pays');
+	list($oks, $erreurs) = migrer_pays_table($table, $colonne);
 
-
-	if ($erreurs) {
-		echo "<h2>Quelques erreurs sont survenues</h2>";
-		echo "<pre>\n" . print_r($erreurs, true) . "</pre>";
-		echo "<h2>Les oks</h2>";
-		echo "<pre>\n" . print_r($oks, true) . "</pre>";
+	if ($locace) {
+		if ($erreurs) {
+			echo "<h2>Quelques erreurs sont survenues</h2>";
+			echo "<pre>\n" . print_r($erreurs, true) . "</pre>";
+			echo "<h2>Les oks</h2>";
+			echo "<pre>\n" . print_r($oks, true) . "</pre>";
+		} else {
+			echo "<h2>Tout s'est bien passé</h2>";
+			echo "<pre>\n" . print_r($oks, true) . "</pre>";
+		}
 	} else {
-		echo "<h2>Tout s'est bien passé</h2>";
-		echo "<pre>\n" . print_r($oks, true) . "</pre>";
+		if ($erreurs) {
+			echo "<p><strong>Certains pays n'ont pas étés trouvés :</strong> "
+				. implode(', ', array_keys($erreurs)) . "</p>";
+		}
 	}
 }
 
