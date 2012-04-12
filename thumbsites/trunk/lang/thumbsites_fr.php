@@ -46,6 +46,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_taille_vignette' => 'Taille des vignettes',
 	'cfg_lgd_cache' => 'Cache',
 	'cfg_lgd_choix_serveur' => 'Serveur',
+	'cfg_titre_thumbsites' => 'Configurer Thumbsites',
+	'configuration_thumbsites' => 'Thumbsites',
 
 	// T
 	'titre_thumbshot_site' => 'VIGNETTE DU SITE'

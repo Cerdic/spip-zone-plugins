@@ -1,13 +1,21 @@
 <!-- autoriser=webmestre -->
 <!-- refus=Seuls les webmestres du site sont autoris&#233;s &#224; modifier ces param&#232;tres. -->
-<!-- icone=prive/themes/spip/images/thumbsites-24.png -->
 <!-- titre=Thumbsites -->
 <!-- descriptif=<:thumbsites:cfg_descriptif:> -->
-#CACHE{0}
 
-<form method="post">[(#ENV{_cfg_}|form_hidden)]
 
-	<fieldset>
+
+<!-- presentation=non -->
+<!-- nom=oembed -->
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{thumbsites-24.png}" class="cadre-icone" /><:thumbsites:cfg_titre_thumbsites:></h3>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method='post' action='#ENV{action}'><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+	<li>
 		<legend><:thumbsites:cfg_lgd_choix_serveur:></legend>
 		<label for="serveur"><:thumbsites:cfg_lbl_choix_serveur:></label>
 		<select name="serveur" id="serveur">
@@ -18,21 +26,21 @@
 			<option value="miwin"[ (#ENV{serveur}|=={miwin}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_miwin:></option>
 			<option value="apercite"[ (#ENV{serveur}|=={apercite}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_apercite:></option>
 		</select>
-	</fieldset>
+	</li>
 
-	<fieldset id="thumbshots" class="conf_serveur[ (#ENV{serveur}|=={thumbshots}|?{actif})]">
+	<li id="thumbshots" class="conf_serveur[ (#ENV{serveur}|=={thumbshots}|?{actif})]">
 		<legend><:thumbsites:cfg_itm_serveur_thumbshots:></legend>
 		<p><:thumbsites:cfg_inf_thumbshots_presentation:></p>
 		<p><:thumbsites:cfg_inf_thumbshots_description:></p>
-	</fieldset>
+	</li>
 
-	<fieldset id="thumbshots_de" class="conf_serveur[ (#ENV{serveur}|=={thumbshots_de}|?{actif})]">
+	<li id="thumbshots_de" class="conf_serveur[ (#ENV{serveur}|=={thumbshots_de}|?{actif})]">
 		<legend><:thumbsites:cfg_itm_serveur_thumbshots_de:></legend>
 		<p><:thumbsites:cfg_inf_thumbshots_de_presentation:></p>
 		<p><:thumbsites:cfg_inf_thumbshots_de_description:></p>
-	</fieldset>
+	</li>
 
-	<fieldset id="websnapr" class="conf_serveur [(#ENV{serveur}|=={'websnapr'}|?{'actif'})]">
+	<li id="websnapr" class="conf_serveur [(#ENV{serveur}|=={'websnapr'}|?{'actif'})]">
 		<legend><:thumbsites:cfg_itm_serveur_websnapr:></legend>
 		<p><:thumbsites:cfg_inf_websnapr_presentation:></p>
 		<p><:thumbsites:cfg_inf_websnapr_parametres:></p>
@@ -49,9 +57,9 @@
 				<option value="L" [(#ENV{websnapr_taille}|=={L}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=640x480}:></option>
 			</select>
 		</p>
-	</fieldset>
+	</li>
 
-	<fieldset id="robothumb" class="conf_serveur [(#ENV{serveur}|=={'robothumb'}|?{'actif'})]">
+	<li id="robothumb" class="conf_serveur [(#ENV{serveur}|=={'robothumb'}|?{'actif'})]">
 		<legend><:thumbsites:cfg_itm_serveur_robothumb:></legend>
 		<p><:thumbsites:cfg_inf_rotothumb_presentation:></p>
 		<p><:thumbsites:cfg_inf_rotothumb_parametres:></p>
@@ -69,9 +77,9 @@
 				<option value="800x600" [(#ENV{robothumb_taille}|=={800x600}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=800x600}:></option>									
 			</select>
 		</p>
-	</fieldset>
+	</li>
 
-	<fieldset id="miwin" class="conf_serveur [(#ENV{serveur}|=={'miwin'}|?{'actif'})]">
+	<li id="miwin" class="conf_serveur [(#ENV{serveur}|=={'miwin'}|?{'actif'})]">
 		<legend><:thumbsites:cfg_itm_serveur_miwin:></legend>
 		<p><:thumbsites:cfg_inf_miwin_presentation:></p>
 		<p><:thumbsites:cfg_inf_miwin_parametres:></p>
@@ -90,9 +98,9 @@
 				<option value="800x600" [(#ENV{miwin_taille}|=={800x600}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=800x600}:></option>									
 			</select>
 		</p>
-	</fieldset>
+	</li>
 
-	<fieldset id="apercite" class="conf_serveur [(#ENV{serveur}|=={'apercite'}|?{'actif'})]">
+	<li id="apercite" class="conf_serveur [(#ENV{serveur}|=={'apercite'}|?{'actif'})]">
 		<legend><:thumbsites:cfg_itm_serveur_apercite:></legend>
 		<p><:thumbsites:cfg_inf_apercite_presentation:></p>
 		<p><:thumbsites:cfg_inf_apercite_parametres:></p>
@@ -120,11 +128,20 @@
 				<option value="800x600" [(#ENV{apercite_taille}|=={800x600}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=800x600}:></option>
 			</select>
 		</p>
-	</fieldset>
+	</li>
 
+
+	<li>
+		<legend><:thumbsites:cfg_lgd_cache:></legend>
+		<label for="duree_cache"><:thumbsites:cfg_lbl_duree_cache:></label>
+			<input type="text" name="duree_cache" id="duree_cache" [value="(#ENV{duree_cache,30})"]>
+	</li>
+
+	</ul>
+	
 	[(#REM) Code jQuery de la gestion des configuration serveur ]
 	<script type="text/javascript"><!--
-		//on cache les configuration serveur except√© de celui actif
+		//on cache les configuration serveur excepte de celui actif
 		$('.conf_serveur:not(.actif)').hide();
 		[(#ENV{serveur}|non)
 			$('#thumbshots').show();
@@ -138,22 +155,16 @@
 			$("#"+this.value).show('slow');
 		})
 	// --></script>
-
-	<fieldset>
-		<legend><:thumbsites:cfg_lgd_cache:></legend>
-		<label for="duree_cache"><:thumbsites:cfg_lbl_duree_cache:></label>
-			<input type="text" name="duree_cache" id="duree_cache" [value="(#ENV{duree_cache,30})"]>
-	</fieldset>
-
-	<div style="text-align: right; margin-right:3px;">
-		<input type="reset" class="fondo" title="<:thumbsites:bulle_bouton_effacer:>" value="<:thumbsites:bouton_effacer:>" />
-		<input type="submit" name="_cfg_ok" class="fondo" title="<:thumbsites:bulle_bouton_valider:>" value="<:thumbsites:bouton_valider:>" />
-	</div>
-
+	
 	<div id="bloc_debug" style="display: none;">
 		<br />
 		>> Debug - Etat des variables du fond:<br />
 		#CFG_ARBO{thumbsites}
 	</div>
-</form>
+	
+  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+  <!--extra-->
+  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+</div></form>
+</div>
 
