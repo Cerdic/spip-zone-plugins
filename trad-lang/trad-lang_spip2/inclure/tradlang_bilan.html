@@ -21,6 +21,7 @@
 <//B_strings_ok>
 </BOUCLE_langues_sort>
 
+[(#ENV{afficher_form}|!={non}|oui)
 [(#ENV{langues_choisies}|is_array|oui)
 	[(#SET{langues_string,[(#VAL{traduire_nom_langue}|array_map{#ENV{langues_choisies}}|implode{', '})]})]
 	<div class="notice">
@@ -28,6 +29,7 @@
 		<:tradlang:message_langues_choisies_affichees{langues=#GET{langues_string}}:>
 	</div>
 ]
+
 [(#ENV{langues_choisies}|is_array|non)
 [(#GET{langues_preferees_auteur}|is_array|oui)
 [(#GET{langues_preferees_auteur}|count|>{0}|oui)
@@ -49,6 +51,7 @@
 		<br /><:tradlang:message_info_choisir_langues_profiles{url_profil=#GET{url_profil}}:>]
 	</div>
 ]]]
+]
 </B_langues_sort>
 #SET{langues,#GET{langues}|langues_sort}
 <BOUCLE_priorites(TRADLANG_MODULES){fusion priorite}>
