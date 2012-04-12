@@ -1,5 +1,8 @@
 <?php
 
+function lire_aussi_install($action,$prefix,$version_cible){
+	return true;
+}
 
 
 function lire_aussi_upgrade() {
