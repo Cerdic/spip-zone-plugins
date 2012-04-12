@@ -14,6 +14,7 @@
  * Return Array (
     [articles] => Array
         (
+            [group] => contenu
             [instances] => Array
                 (
                     [0] => Array
@@ -24,6 +25,7 @@
         )
     [cadre] => Array
         (
+            [group] => cadre
             [over] => squelettes_netoyens
             [instances] => Array
                 (
@@ -41,6 +43,9 @@
 )
 
  */
+
+include_spip('inc/xml');
+
 function composants_liste(){
   static $cl=array();
 
@@ -68,6 +73,7 @@ function lecture_composants_liste($set) {
     }
   }
   ksort($cl);
+	acs_log('lecture_composants_liste("'.$set.'")');
   return $cl;
 }
 
@@ -84,17 +90,19 @@ function lit_liste_composants($dirc, $tag=''){
     AND $f != 'remove.txt'
     AND @is_readable($p = $dirc."/$f/ecrire/composant.xml")) {
       if (is_file($p)) {
+				if ($tag)
+     			$lc[$f]['over'] = $tag;
+     		// Lit les paramètres de configuration du composant
+   			$config = spip_xml_load($p);
+   			$c = $config['composant'][0];
+   			$lc[$f]['group'] = $c['group'][0];
       	$instances = composant_instances($f);
       	if (count($instances)) {
-					if ($tag)
-       			$lc[$f]['over'] = $tag;
       		foreach($instances as $nic) {
       			$lc[$f]['instances'][$nic]['on'] = $GLOBALS['meta']['acs'.ucfirst($f).$nic.'Use'];
       		}
       	}
       	else {
-					if ($tag)
-						$lc[$f]['over'] = $tag;
       		$lc[$f]['instances'][0]['on'] = $GLOBALS['meta']['acs'.ucfirst($f).'Use'];
       	}
       }
@@ -131,7 +139,7 @@ function composant_instances($c) {
 function composant_actif($composant) {
 	$actif = false;
 
-	// Si on upgrade depuis une vieille version, il n'y a pas d'instances de composants. Ce test pourra être supprimé ulterieurement
+	// Si on upgrade depuis une vieille version, il n'y a pas d'instances de composants.
 	if (!is_array($composant['instances']))
 		return false;
 		

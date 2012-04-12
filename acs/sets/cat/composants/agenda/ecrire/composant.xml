@@ -3,14 +3,18 @@
   <nom>Agenda</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2012 - licence GPL</auteur>
-  <version>0.8.6</version>
+  <version>0.8.7</version>
 	<necessite id='acs' version='[0.7.1;]' />
+  <group>nav</group>
 
   <param>
     <nom>preview</nom>
     <valeur>180</valeur>
   </param>
-
+  <param>
+    <nom>instanciable</nom>
+  </param>
+ 
   <variable>
     <nom>TitreFond</nom>
     <type>color</type>
@@ -19,6 +23,7 @@
     <nom>TitreFondImage</nom>
     <type>img</type>
     <label>non</label>
+    <chemin>trame</chemin>
   </variable>
   <variable>
     <nom>HeadFondColor</nom>

@@ -1,4 +1,4 @@
-Suivi des principales révisions - Version ACS actuelle : 0.8.7
+Suivi des principales révisions - Version ACS actuelle : 0.8.8
 
 ACS version 0.8
 - nouvelle option de configuration d'ACS : Désactiver le cache de SPIP (lors du développement d'un site).
@@ -14,6 +14,7 @@ ACS version 0.8
 - le dossier "models" est renommé "sets" pour éviter toute confusion avec les modèles SPIP. La variable acsModel devient acsSet.
  
 Modele Cat pour ACS vesion 0.8 :
+- le composant Agenda devient instanciable, et contextuel.
 - nouveaux composants Carte, Diapo, NavGroup, NavKeys, Navkeygroup, Versions;
 - gestion amelioree des droits d'acces a un article par mot-cle;
 - suppression du modèle doc au profit de celui de la dist;

@@ -6,6 +6,7 @@
   <version>0.8.7</version>
   <necessite id='acs' version='[0.7.2;]' />
   <necessite id='spip' version='[1.9.2;]' />
+  <group>nav</group>
 
   <param>
     <nom>preview</nom>

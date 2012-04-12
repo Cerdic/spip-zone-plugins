@@ -134,7 +134,7 @@ function init_controleur_composant() {
       window.status = dropid + ' = ' + current_value + ' => ' + new_value + ' (' + from.attr("id") +')';
     }
 	});
-  draw_ctlWidgets();
+  initWidgets();
 }
 
 function ucfirst(txt) {
@@ -172,7 +172,7 @@ function setSelectValueDoThreads() {
       ]widget_cible.parent().parent().css('visibility', 'visible').css('opacity', '1');
       widget_cible.removeClass("ctlWidget_droppable_drop");
       delete todo[avar];
-      draw_ctlWidgets();
+      initWidgets();
       todo.length--;
     }
     else

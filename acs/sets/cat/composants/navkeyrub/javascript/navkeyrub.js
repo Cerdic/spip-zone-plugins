@@ -13,13 +13,15 @@ jQuery(document).ready(
 				  jQuery("ul.hidden", limi).hide().removeClass("hidden").addClass("hidden_by_js");
 				  jQuery(limi).hover(function(){
 				  	window.clearTimeout(shtimer);
-				  	jQuery("ul.to_close_by_js", limi).removeClass("to_close_by_js");
+				  	jQuery("ul.to_close_by_js", limi).removeClass("to_close_by_js").parents("ul.to_close_by_js").removeClass("to_close_by_js");
 				  	jQuery("ul.to_close_by_js").stop(true, true).hide().removeClass("to_close_by_js");
 					  jQuery("ul.hidden_by_js", limi).filter(":first").stop(true, true).show(d);
 					},function(){
 							jQuery("ul.hidden_by_js", limi).addClass("to_close_by_js");
 							shtimer = window.setTimeout( function() {
-								jQuery("ul.to_close_by_js").stop(true, true).hide(d).removeClass("to_close_by_js");
+								jQuery("ul.to_close_by_js").stop(true, true).hide(d, function() {
+									jQuery(this).removeClass("to_close_by_js");
+								});
 							}, d);
 					});
 				});

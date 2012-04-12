@@ -68,7 +68,8 @@ class AdminComposant {
 		$c = $config['composant'][0];
 		$this->nom = $c['nom'][0];
 		$this->version = $c['version'][0];
-		
+		$this->group = $c['group'][0];
+
 		// Les versions 1.9.2 de SPIP ne définissaient pas cette fonction introduite en 1.9.3dev puis en 2.0.0
 		if (!is_callable('spip_xml_match_nodes'))
 			include_spip('inc/backport_1.9.2');
@@ -406,9 +407,10 @@ class AdminComposant {
 					$mis_en_page[] = $nom;
 				$mep = str_replace($tag, $html, $mep);
 			}
-			// en mode controleur, on ajoute si besoin est la liste des widgets, invisible
+			// en mode controleur
 			if ($mode=='controleur') {
 				$mep = preg_replace('%<admin>(.*?)</admin>%s', '', $mep);
+				// on ajoute si besoin est la liste des widgets, invisible
 				if ($this->nb_widgets > 0)
 					$mep .= liste_widgets(false);
 			}

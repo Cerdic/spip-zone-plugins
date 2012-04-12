@@ -1,5 +1,9 @@
 [(#CACHE{0})][(#SET{z-index,2000})]
-.cNavKeyRub#NIC ul.menu, .cNavKeyRub#NIC ul.smenu {[
+[(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Bord/Color'}}|!={""}|?{" "})
+.cNavKeyRub#NIC ul.menu {[
+  (#MODELE{c_css_shadow}{c=Navkeyrub}{nic})]
+}]
+.cNavKeyRub#NIC ul.smenu {[
   (#MODELE{c_css_shadow}{c=Navkeyrub}{nic})]
 }
 .cNavKeyRub#NIC li.bloc-title {[
@@ -52,6 +56,9 @@ Horizontal
 }
 .cNavKeyRub#NIC ul.menu {
   height: [(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'LogoMax'},20}|plus{[(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Titre'}}|=={oui}|?{32,12})]})]px;
+}
+.cNavKeyRub#NIC ul.menu li.mot>a {
+  height: [(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'LogoMax'},20}|plus{12})]px;
 }
 ][(#REM)
 

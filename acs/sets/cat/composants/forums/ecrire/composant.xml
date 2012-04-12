@@ -2,9 +2,10 @@
   <!-- Nom du composant -->
   <nom>Forums</nom>
   <!-- Auteur du composant -->
-  <auteur>Daniel FAIVRE &copy; 2008-2009 - licence GPL</auteur>
-  <version>0.8.6</version>
-  <necessite id='acs' version='[0.7.1;]' />
+  <auteur>Daniel FAIVRE &copy; 2008-2012 - licence GPL</auteur>
+  <version>0.8.8</version>
+  <necessite id='acs' version='[0.8.8;]' />
+  <group>nav</group>
 
   <param>
     <nom>preview</nom>

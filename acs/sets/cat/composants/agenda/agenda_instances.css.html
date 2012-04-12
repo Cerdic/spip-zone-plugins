@@ -1,0 +1,52 @@
+[(#CACHE{0})][(#REM)
+Feuille de style d'instance d'Agenda, par Daniel Faivre, 2007-2012
+]
+.cAgenda_#NIC {[
+  background: (#VAR{#EVAL{'acsAgenda'.'#NIC'.'ThisMonth'}});][
+  border-width: (#VAR{#EVAL{'acsAgenda'.'#NIC'.'Bord/Width'}});][
+  border-style: (#VAR{#EVAL{'acsAgenda'.'#NIC'.'Bord/Style'}});][
+  border-color: (#VAR{#EVAL{'acsAgenda'.'#NIC'.'Bord/Color'}});][
+  (#MODELE{c_css_shadow}{c=Agenda}{nic})]
+}
+.cAgenda_#NIC .title {
+  [background: (#VAR{#EVAL{'acsAgenda'.'#NIC'.'TitreFond'}})[ url("(#ACS_CHEMIN{trame/#VAR{#EVAL{'acsAgenda'.'#NIC'.'TitreFondImage'}}})") repeat top left];][
+  border-bottom: 1px solid (#VAR{acsRubnavSep});]
+}
+.cAgenda_#NIC .calendar_head_mini {
+  background: #VAR{#EVAL{'acsAgenda'.'#NIC'.'HeadFondColor'},#VAR{acsRubnavFondColor}};
+}
+
+.cAgenda_#NIC .calendar_not_this_month {
+  [background: (#VAR{#EVAL{'acsAgenda'.'#NIC'.'NotThisMonth'},#VAR{acsRubnavFondColorHover}});]
+}
+
+.cAgenda_#NIC .calendar_this_month {
+  [background: (#VAR{#EVAL{'acsAgenda'.'#NIC'.'ThisMonth'},#VAR{acsFondColor}});]
+}
+.cAgenda_#NIC .calendar_this_day a {
+  [background: (#VAR{#EVAL{'acsAgenda'.'#NIC'.'ThisDay'}});][
+  border: 1px solid (#VAR{#EVAL{'acsAgenda'.'#NIC'.'NotThisMonth'}});]
+}
+.cAgenda_#NIC a.unjour:hover {
+  [background: (#VAR{#EVAL{'acsAgenda'.'#NIC'.'BulleFondColor'},#ffffef});]
+}
+.cAgenda_#NIC .bulle{
+border: [(#VAR{#EVAL{'acsAgenda'.'#NIC'.'Bord/Width'},1px})][ (#VAR{#EVAL{'acsAgenda'.'#NIC'.'Bord/Style'},ridge})][ (#VAR{#EVAL{'acsAgenda'.'#NIC'.'Bord/Color'}})];[
+(#MODELE{c_css_shadow}{c=Agenda})]
+}
+.cAgenda_#NIC .bulle .publie:hover, .bulle .modifie:hover{
+  [background: (#VAR{#EVAL{'acsAgenda'.'#NIC'.'BulleSurvol'}});]
+}
+.cAgenda_#NIC .bulle .publie a{
+  [background: (#VAR{#EVAL{'acsAgenda'.'#NIC'.'BulleFondColor'},#ffffef});]
+}
+.cAgenda_#NIC .bulle .modifie a {
+  [background: (#VAR{#EVAL{'acsAgenda'.'#NIC'.'BulleArticleModifieFondColor'},#dfffef});]
+}
+.cAgenda_#NIC .bulle .breve a{
+  [background: (#VAR{#EVAL{'acsAgenda'.'#NIC'.'BreveFondColor'},#dfefef});]
+}
+.cAgenda_#NIC .bulle .publie a:hover, .bulle .modifie a:hover, .bulle .breve a:hover {
+  color: #VAR{acsFondLinkHover, #df0000};
+  [background: (#VAR{#EVAL{'acsAgenda'.'#NIC'.'BulleSurvol'}});] display: block; width: 100%;
+}

@@ -3,22 +3,11 @@ Feuille de style Agenda, par Daniel Faivre, 2007-2012
 ]
 .cAgenda {
   color: #VAR{acsFondText,#000};
-  [background: (#VAR{acsAgendaThisMonth});]
-  [border-width: (#VAR{acsAgendaBord/Width});]
-  [border-style: (#VAR{acsAgendaBord/Style});]
-  [border-color: (#VAR{acsAgendaBord/Color});]
   text-align:center;
   font-style:normal;
-  [(#MODELE{c_css_shadow}{c=Agenda})]
 }
-
 .cAgenda td {
   padding: 2px;
-}
-
-.cAgenda .title {
-  [background: (#VAR{acsAgendaTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsAgendaTitreFondImage}})") repeat top left];]  
-  [border-bottom: 1px solid (#VAR{acsRubnavSep});]
 }
 .cAgenda .title .chelp {
   float: #LANG_RIGHT;
@@ -26,7 +15,6 @@ Feuille de style Agenda, par Daniel Faivre, 2007-2012
 }
 
 .cAgenda .calendar_head_mini {
-  background: #VAR{acsAgendaHeadFondColor,#VAR{acsRubnavFondColor}};
   text-align: center;
   font-size: #VAR{acsFondNavSize,0.65em};
   color: #VAR{acsFondText,000};
@@ -35,28 +23,23 @@ Feuille de style Agenda, par Daniel Faivre, 2007-2012
 }
 
 .cAgenda .calendar_not_this_month {
-  [background: (#VAR{acsAgendaNotThisMonth,#VAR{acsRubnavFondColorHover}});]
   color:#aaa;
 }
 
 .cAgenda .calendar_this_month {
   padding: 2px;
-  [background: (#VAR{acsAgendaThisMonth,#VAR{acsFondColor}});]
   color:#aaa;
 }
 
 .cAgenda .calendar_this_day a {
   text-align: center;
-  [background: (#VAR{acsAgendaThisDay});]
   font-weight:bold;
   font-style: italic;
-  border: 1px solid #VAR{acsFondLink};
   padding: 2px;
   padding-bottom: 0;[
   (#MODELE{c_css_border-radius}{r=5px})]
 }
-.cAgenda a.unjour:hover {
-  [background: (#VAR{acsAgendaBulleFondColor,#ffffef});][
+.cAgenda a.unjour:hover {[
   (#MODELE{c_css_border-radius}{r=5px})]
 }
 
@@ -71,16 +54,9 @@ display: none;
 z-index : 999;
 padding: 0;
 margin: 0;
-border: [(#VAR{acsAgendaBord/Width,1px})][ (#VAR{acsAgendaBord/Style,ridge})][ (#VAR{acsAgendaBord/Color})];
 line-height:normal;
-text-align: #LANG_LEFT;[
-(#MODELE{c_css_shadow}{c=Agenda})]
+text-align: #LANG_LEFT;
 }
-
-.cAgenda .bulle .publie:hover, .bulle .modifie:hover{
-  [background: (#VAR{acsAgendaBulleSurvol});]
-}
-
 .cAgenda .bulle .publie a, .bulle .modifie a, .bulle .breve a {
   color: #VAR{acsFondLink, #df0000};
 	font-weight: normal;
@@ -92,20 +68,6 @@ text-align: #LANG_LEFT;[
 	font-style: normal;
   -moz-border-radius: 0;
 }
-.cAgenda .bulle .publie a{
-  [background: (#VAR{acsAgendaBulleFondColor,#ffffef});]
-}
-.cAgenda .bulle .modifie a {
-  [background: (#VAR{acsAgendaBulleArticleModifieFondColor,#dfffef});]
-}
-.cAgenda .bulle .breve a{
-  [background: (#VAR{acsAgendaBulleBreveFondColor,#dfefef});]
-}
-.cAgenda .bulle .publie a:hover, .bulle .modifie a:hover, .bulle .breve a:hover {
-  color: #VAR{acsFondLinkHover, #df0000};
-  [background: (#VAR{acsAgendaBulleSurvol});] display: block; width: 100%;
-}
-
 [(#REM) overide du style spip standard car il impose une largeur fixe ]
 .calendrier-table-large {
   width: 100%;
