@@ -27,5 +27,5 @@ Cr&#233;dits:
 	<options>imapdepart_options.php</options><!-- gere l'appel de base/imapdepart_base.php -->
 	<fonctions>imapdepart_fonctions.php</fonctions>
 	<categorie>divers</categorie>
-	<necessite id="spip" version="[2.0.0;2.1.99]" />
+	<necessite id="spip" version="[2.0.0;3.0.99]" />
 </plugin>
