@@ -1,0 +1,18 @@
+<BOUCLE_site_thumbshot(SITES){id_syndic}>
+[<div class="thumbsites">
+	<a href="(#URL_SITE)" class="spip_out">[(#LOGO_SITE)]</a>
+	<p>
+		<strong class="#EDIT{nom_site}">#NOM_SITE</strong>
+		[ &mdash; <span class="#EDIT{descriptif}">(#DESCRIPTIF|PtoBR|couper{110})</span>]
+	</p>
+</div>]
+</BOUCLE_site_thumbshot>
+[(#ENV{url}|oui)
+<div class="thumbsites">
+	<a href="#ENV{url}" class="spip_out">#THUMBSHOT{#ENV{url}}</a>
+	[<p><strong>(#ENV{nom})</strong>]
+	[[(#ENV{nom}|oui) &mdash; ]<span>(#ENV{descriptif}|PtoBR|couper{110})</span>]
+	[(#ENV{nom}|oui)</p>]
+</div>
+]
+<//B_site_thumbshot>
