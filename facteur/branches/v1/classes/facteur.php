@@ -13,13 +13,8 @@ include_spip('inc/filtres');
 
 if (!class_exists('PHPMailer')) {
 if (intval(phpversion()) == 5) {
-	if (defined('_FACTEUR_TESTER_PHPMAILER521')){
-		include_spip('phpmailer-php5.2.1/class.phpmailer');
-		include_spip('phpmailer-php5.2.1/class.smtp');
-	} else {
-		include_spip('phpmailer-php5/class.phpmailer');
-		include_spip('phpmailer-php5/class.smtp');
-	}
+	include_spip('phpmailer-php5/class.phpmailer');
+	include_spip('phpmailer-php5/class.smtp');
 } else {
 	include_spip('phpmailer-php4/class.phpmailer');
 	include_spip('phpmailer-php4/class.smtp');
