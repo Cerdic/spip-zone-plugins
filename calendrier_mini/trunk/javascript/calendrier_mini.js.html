@@ -41,23 +41,23 @@ var minical = {
 	set_events: function(me,start,end,data){
 		var dates = [];
 		if (data.length){
-			var d;
+			var d,datebegin,dateend;
 			for(var j in data){
 				d = data[j].start.split(" ");
 				d = d[0].split("-");
 				d = new Date(d[0],d[1]-1,d[2]);
 				dates.push(d);
 				if(data[j].end){
-					e = data[j].end.split(" ");
-					e = e[0].split("-");
-					e = new Date(e[0],e[1]-1,e[2]);
-					dates.push(e);
 					datebegin = d.getTime();
-					dateend = e.getTime();
+					d = data[j].end.split(" ");
+					d = d[0].split("-");
+					d = new Date(d[0],d[1]-1,d[2]);
+					dates.push(d);
+					dateend = d.getTime();
 					datebegin = datebegin+(3600*24*1000);
 					while(datebegin < dateend){
-						newdate = new Date(datebegin);
-						dates.push(newdate);
+						d = new Date(datebegin);
+						dates.push(d);
 						datebegin = datebegin+(3600*24*1000);
 					}
 				}
