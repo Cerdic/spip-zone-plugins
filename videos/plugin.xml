@@ -14,7 +14,7 @@
 	<auteur>[XDjuj@apsulis.com->http://demo.apsulis.com]</auteur>
 	<licence>GPL &#169; 2010</licence>
 	
-	<version>0.9.2</version>
+	<version>0.9.3</version>
 	<version_base>0.3</version_base>
 	<!-- <version_html5media>1.1.4</version_html5media> -->
 	<!-- Le fichier semble trop lourd (env. 20mo car contient des médias de test) pour être téléchargé -->
@@ -43,6 +43,11 @@
 	
 	<pipeline>
 		<nom>insert_head</nom>
+		<inclure>videos_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
 		<inclure>videos_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
