@@ -24,10 +24,11 @@
 
 /* This is the zoom window. */
 .cloud-zoom-big {
-	border:1px solid #ccc;
+	border:1px solid #CCC;
 	overflow:hidden;
 	z-index: 3000;
-	
+	-moz-box-shadow: 5px 5px 5px #888;
+	-webkit-box-shadow: 5px 5px 5px #888;
 }
 
 /* This is the loading message. */
@@ -37,6 +38,16 @@
 	padding:3px;
 	border:1px solid #000;
 }
+
+/* zoompanel */
+
+.zoompanel {display:block; vertical-align:top;}
+.zoompanel dl.mainzoom {display:block; float:left; margin-right:20px;}
+.zoompanel dl.mainzoom img.smallpic {margin:2px;}
+.zoompanel dl.mainzoom dt.spip_doc_titre {text-align:center;}
+.zoompanel dl.thumbnailist {display: inline-block; vertical-align:top;}
+.zoompanel dl.thumbnailist img.thumbnail {margin-top: 2px;}
+.zoompanel dl.thumbnailist dt.thumbnailtitre {display:none;}
 
 
 
