@@ -3,7 +3,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function videos_insert_head($flux){
 	include_spip('inc/config');
-	$variables = generer_url_public('videos_variables.js');
 	$css = find_in_path('theme/css/videos.css');
 	$flux .="
 <!-- Variables de configuration pour le plugin Vidéo(s) -->
