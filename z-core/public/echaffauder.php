@@ -17,7 +17,7 @@
  * @param string $ext
  * @return string
  */
-function public_echaffauder_dist($type,$table,$table_sql,$desc,$ext){
+function public_echafauder_dist($type,$table,$table_sql,$desc,$ext){
 	include_spip('public/interfaces');
 	$primary = id_table_objet($type);
 	if (!$primary AND isset($desc['key']["PRIMARY KEY"])){

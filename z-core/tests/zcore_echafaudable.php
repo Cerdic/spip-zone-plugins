@@ -1,13 +1,13 @@
 <?php
 /**
- * Test unitaire de la fonction zcore_echaffaudable
+ * Test unitaire de la fonction zcore_echafaudable
  * du fichier public/styliser_par_z.php
  *
  * genere automatiquement par TestBuilder
  * le 2010-03-04 22:02
  */
 
-	$test = 'zcore_echaffaudable';
+	$test = 'zcore_echafaudable';
 	$remonte = "../";
 	while (!is_dir($remonte."ecrire"))
 		$remonte = "../$remonte";
@@ -17,7 +17,7 @@
 	//
 	// hop ! on y va
 	//
-	$err = tester_fun('test_zcore_echaffaudable', essais_zcore_echaffaudable());
+	$err = tester_fun('test_zcore_echafaudable', essais_zcore_echafaudable());
 	
 	// si le tableau $err est pas vide ca va pas
 	if ($err) {
@@ -26,13 +26,13 @@
 
 	echo "OK";
 
-	function test_zcore_echaffaudable(){
+	function test_zcore_echafaudable(){
 		$args = func_get_args();
-		$res = call_user_func_array('zcore_echaffaudable', $args);
+		$res = call_user_func_array('zcore_echafaudable', $args);
 		return is_array($res)?count($res):false;
 	}
 
-	function essais_zcore_echaffaudable(){
+	function essais_zcore_echafaudable(){
 		$essais = array (
   1 => 
   array (
