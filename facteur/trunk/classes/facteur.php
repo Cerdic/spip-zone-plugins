@@ -23,6 +23,9 @@ class Facteur extends PHPMailer {
 
 	function Facteur($email, $objet, $message_html, $message_texte) {
 
+		if (defined('_FACTEUR_DEBUG_SMTP')) {
+			$this->SMTPDebug = _FACTEUR_DEBUG_SMTP ;
+		}
 		if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui'
 		  AND $GLOBALS['meta']['facteur_adresse_envoi_email'])
 			$this->From = $GLOBALS['meta']['facteur_adresse_envoi_email'];
@@ -489,7 +492,56 @@ class Facteur extends PHPMailer {
 
 		$this->Body = strtr($this->Body, $cor);
 	}
-
+	public function Send() {
+		ob_start();
+		$retour = parent::Send();
+		$error = ob_get_contents();
+		ob_end_clean();
+		if( !empty($error) ) {
+			spip_log("Erreur Facteur->Send : $error",'facteur.err');
+		}
+		return $retour;
+	}
+	public function AddAttachment($path, $name = '', $encoding = 'base64', $type = 'application/octet-stream') {
+		ob_start();
+		$retour = parent::AddAttachment($path, $name, $encoding, $type);
+		$error = ob_get_contents();
+		ob_end_clean();
+		if( !empty($error) ) {
+			spip_log("Erreur Facteur->AddAttachment : $error",'facteur.err');
+		}
+		return $retour;
+	}
+	public function AddReplyTo($address, $name = '') {
+		ob_start();
+		$retour = parent::AddReplyTo($address, $name);
+		$error = ob_get_contents();
+		ob_end_clean();
+		if( !empty($error) ) {
+			spip_log("Erreur Facteur->AddReplyTo : $error",'facteur.err');
+		}
+		return $retour;
+	}
+	public function AddBCC($address, $name = '') {
+		ob_start();
+		$retour = parent::AddBCC($address, $name);
+		$error = ob_get_contents();
+		ob_end_clean();
+		if( !empty($error) ) {
+			spip_log("Erreur Facteur->AddBCC : $error",'facteur.err');
+		}
+		return $retour;
+	}
+	public function AddCC($address, $name = '') {
+		ob_start();
+		$retour = parent::AddCC($address, $name);
+		$error = ob_get_contents();
+		ob_end_clean();
+		if( !empty($error) ) {
+			spip_log("Erreur Facteur->AddCC : $error",'facteur.err');
+		}
+		return $retour;
+	}
 }
 
 ?>
