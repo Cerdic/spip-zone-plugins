@@ -33,12 +33,6 @@ function get_nom_serveur($p) {
 function balise_URL_ACTION_AUTEUR($p) {
 	$p->descr['session'] = true;
 
-	// si serveur externe, ce n'est pas possible
-	if (get_nom_serveur($p)) {
-		$p->code = 'generer_url_public("404")';
-		return $p;
-	}
-
 	$p->code = interprete_argument_balise(1,$p);
 	$args = interprete_argument_balise(2,$p);
 	if (!$args)
