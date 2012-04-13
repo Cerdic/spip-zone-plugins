@@ -1,6 +1,6 @@
 <div class="zoomdesk ajax" style="display:block; vertical-align:top;">
 
-<BOUCLE_zoompanelfirst (DOCUMENTS) {id_article} {extension==jpg|png|gif} {tout} {0,1}>
+<BOUCLE_zoompanelfirst (DOCUMENTS) {id_article} {id_document IN (#ENV{id}|explode{','})} {0,1}>
 
 
 [(#MODE|=={image}|oui)
@@ -34,7 +34,7 @@
 	
 </BOUCLE_zoompanelfirst>
 
-<BOUCLE_zoomdesk (DOCUMENTS) {id_article} {extension==jpg|png|gif}>
+<BOUCLE_zoomdesk (DOCUMENTS) {id_document IN (#ENV{id}|explode{','})}>
 [(#MODE|=={image}|oui)
 	#SET{fichier,#URL_DOCUMENT}
 	#SET{width,#LARGEUR}
