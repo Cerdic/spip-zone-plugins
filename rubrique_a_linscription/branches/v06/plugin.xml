@@ -39,7 +39,7 @@
 	</pipeline>
 
 	<install>base/rubrique_a_linscription.php</install>
-  	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+  	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
   	<lien>http://www.spip-contrib.net/Rubrique-a-l-inscription</lien>
 	<categorie>auteur</categorie>
 </plugin>
