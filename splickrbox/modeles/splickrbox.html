@@ -3,7 +3,7 @@
             - colonne : nombre de colonnes de la box, defaut 3
             - taille : nombre de vignettes de la box (un multiple de colonne, degaut 12)
             - masque : fichier .png definissant le masque de la grande vignette, defaut carre-100.png (2x la taille des petites vignettes). Ce parametre permet de jouer sur la taille de la box
-            - tri : critère de classement comme date, hasard..., defaut date
+            - tri : critere de classement comme date, hasard..., defaut date
             - senstri : 0 ou 1 pour inverser le sens de classement, defaut inverse
 ]
 #SET{reduire, #ENV{reduire, 100}}
@@ -12,7 +12,7 @@
     <div style="position:relative;[float:(#ENV{align}|match{left|right});]" class="splickrbox [splickrbox_(#ENV{align})]">
         <table cellpadding="0" cellspacing="0" ><tr>
 <BOUCLE_flickr(DOCUMENTS){par #ENV{tri, date}}{inverse #ENV{senstri, 1}}{extension==jpg|png|gif}{0,#ENV{taille,12}}{id_article?}{id_rubrique?}>
-            <td> <a href="#FICHIER" class="thickbox mediabox" [title="(#TITRE|supprimer_tags|attribut_html)"]>[(#FICHIER|copie_locale|image_masque{#GET{masque}}|image_aplatir{jpg}|inserer_attribut{alt,[(#TITRE|supprimer_tags|attribut_html)]})]</a></td>
+            <td> <a href="#FICHIER" class="thickbox mediabox" [title="(#TITRE|supprimer_tags|attribut_html)"] type="#MIME_TYPE">[(#FICHIER|copie_locale|image_masque{#GET{masque}}|image_aplatir{jpg}|inserer_attribut{alt,[(#TITRE|supprimer_tags|attribut_html)]})]</a></td>
             [(#COMPTEUR_BOUCLE|Splickr_juste_a_x{#ENV{colonnes,3},</tr><tr>})] 
 </BOUCLE_flickr>
             <td></td>
