@@ -1,0 +1,13 @@
+<BOUCLE_relecture_extra(RELECTURES) {id_relecture}{si #ENV{exec}|=={relecture}}>
+[(#REM) <!-- La liste des autres relectures de l'article --> ]
+#SET{exclusion, #VAL{id_relecture!=}|concat{#ID_RELECTURE}}
+<INCLURE{fond=prive/objets/liste/relectures,
+	titre=<:relecture:titre_liste_autres_relectures:>,
+	par=date_ouverture,
+	pas=10,
+	where=#GET{exclusion},
+	affichage=simplifie,
+	env, ajax}>
+</BOUCLE_relecture_extra>
+	[(#ENV{exec}|=={relecture_edit}|oui)<INCLURE{fond=prive/squelettes/extra/relecture_edit, env}>]
+<//B_relecture_extra>

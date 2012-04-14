@@ -1,0 +1,55 @@
+[(#REM) <!-- Liste des relectures :
+	- soit en cours pour un relecteue ou auteur donne
+	- soit du meme article en excluant la relecture en cours d'affichage
+	Dans ces differents cas les informations different car la taille des blocs influe sur l'affichage.
+
+	Les parametres d'environnement specifiques sont :
+	- titre     : le titre de la liste
+	- par       : le champ tri principal
+	- pas       : le pas de pagination
+	- recherche : critere de recherche
+	- where     : condition d'exclusion de certaines relectures
+	- affichage : complet, tous les champs, ou simplifie, le titre et l'id pour la liste en extra/navigation
+ -->]
+
+[(#SET{defaut_tri,#ARRAY{
+	revision_ouverture, 1,
+	id_relecture, -1,
+	points, -1
+}})]
+<B_liste_relectures>
+#ANCRE_PAGINATION
+<div class="liste-objets relectures">
+	<table class="spip liste" summary="<:relecture:resume_table_relectures">
+		[<caption><strong class="caption">(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{relecture:info_1_relecture, relecture:info_nb_relectures}})</strong></caption>]
+		<thead>
+			<tr class="first_row">
+				<th class="statut" scope="col">[(#TRI{statut, <span title="<:lien_trier_statut|attribut_html:>">#</span>, ajax})]</th>
+				<th class="titre principale" scope="col">[(#TRI{id_relecture, <:info_titre:>, ajax})]</th>
+				<th class="revision" scope="col">[(#TRI{revision_ouverture, <:relecture:label_relecture_revision_abregee:>, ajax})]</th>
+			</tr>
+		</thead>
+		<tbody>
+	<BOUCLE_liste_relectures(RELECTURES) {id_article?}{statut?}{where?}{recherche?}{tri #ENV{par, id_relecture}, #GET{defaut_tri}}{pagination #ENV{pas, 5}}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
+				<td class='statut'>[(#STATUT|puce_statut{relecture, #STATUT, 0, relecture, #EVAL{false}, #EVAL{false}})]</td>
+				<td class='titre principale'>
+					<a href="[(#ID_RELECTURE|generer_url_entite{relecture})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RELECTURE">
+						#INFO_TITRE{relecture, #ID_RELECTURE}
+					</a>
+				</td>
+				<td class='id'>
+					[(#SET{url_revision, [(#URL_ECRIRE{revision, objet=article}
+											|parametre_url{id_objet, #ID_ARTICLE}
+											|parametre_url{id_version, #REVISION_OUVERTURE})]})]
+					<a[ href="(#GET{url_revision})"]>[(#REVISION_OUVERTURE)]</a>
+				</td>
+			</tr>
+	</BOUCLE_liste_relectures>
+		</tbody>
+	</table>
+	[<p class='pagination'>(#PAGINATION{#ENV{pagination, prive}})</p>]
+</div>
+</B_liste_relectures>
+[<div class="liste-objets relectures caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>]
+<//B_liste_relectures>

@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // B
 	'bouton_ajouter_relecteur' => 'Ajouter un relecteur',
 	'bouton_ouvrir_relecture' => 'Ouvrir un cycle de relecture',
-	'bouton_modifier_relecture' => 'Modifier la description',
+	'bouton_modifier_relecture' => 'Modifier la relecture',
 	'bouton_configurer_relecture' => 'Configurer',
 	'bouton_participer_relecture' => 'Participer',
 	'bouton_historique_relectures' => 'Afficher les relectures terminées',
@@ -33,13 +33,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_numero_relecture' => 'relecture numéro',
 
 // L
-	'label_relecture_article' => 'Article en relecture',
+	'label_relecture_article' => 'Article concerné',
 	'label_relecture_description' => 'Description',
 	'label_relecture_date_ouverture' => 'Date',
 	'label_relecture_date_fin_commentaire' => 'Date de fin des commentaires',
 	'label_relecture_revision_ouverture' => 'Révision',
 	'label_relecture_date_cloture' => 'Date',
 	'label_relecture_revision_cloture' => 'Révision',
+	'label_relecture_revision_abregee' => 'Rév :',
 	'label_commentaires_ouverts' => 'Ouverts',
 	'label_commentaires_acceptes' => 'Acceptés',
 	'label_commentaires_refuses' => 'Refusés',
@@ -58,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_relectures' => 'Relectures',
 	'titre_commentaire' => 'Commentaire',
 	'titre_commentaires' => 'Commentaires',
+	'titre_liste_autres_relectures' => 'Autres relectures de l\'article',
 
 );
 ?>
