@@ -80,7 +80,7 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 			include_spip('inc/utils');
 			
 			if ($meta['mail_public']){
-				$corps 		.= 	"-".generer_url_public("rubrique","id_rubrique=$id_rubrique")."\n";
+				$corps 		.= 	"-".url_absolue(generer_url_public("rubrique","id_rubrique=$id_rubrique"))."\n";
 			}
 			
 			if ($meta['mail_prive']){
