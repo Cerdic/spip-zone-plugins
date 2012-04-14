@@ -37,9 +37,8 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 		$id_auteur = sql_getfetsel('id_auteur','spip_auteurs','email='.sql_quote($mail));
 		
 		
-		
 		//Modification du statut temporaire
-		sql_updateq('spip_auteurs',array('bio'=>$meta['statut']),'id_auteur='.$id_auteur); 
+		sql_updateq('spip_auteurs',array('prefs'=>$meta['statut']),'id_auteur='.$id_auteur); 
 
 		
 		// Création de la rubrique
@@ -52,9 +51,11 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 			$id_rubrique 	= sql_insertq("spip_rubriques", array('titre'=> _T('rubrique_a_linscription:titre_rubrique',array('nom'=>$nom_inscription)), 'id_secteur'=> $id_secteur,'id_parent'=>$meta['id_parent']));	
 		}
 		
-		sql_insertq('spip_auteurs_rubriques', array(
+		sql_insertq('spip_auteurs_liens', array(
 		'id_auteur' => $id_auteur,
-		'id_rubrique' => $id_rubrique));
+		'objet'		=>'rubrique',
+		'vu'		=>'non',
+		'id_objet' => $id_rubrique));
 		spip_log('Création de la rubrique '.$id_rubrique.' pour l\'auteur '.$nom_inscription.' ( '.$mail.' )','rubrique_a_linscription');
 		
 		//On ajoute la rubrique chez l'auteur
@@ -83,7 +84,7 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 			}
 			
 			if ($meta['mail_prive']){
-				$corps 		.= 	"-".generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")."\n";
+				$corps 		.= 	"-".generer_url_ecrire("rubrique","id_rubrique=$id_rubrique")."\n";
 			}
 			include_spip('inc/filtres');
 			
