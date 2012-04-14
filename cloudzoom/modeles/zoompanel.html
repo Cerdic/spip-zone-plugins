@@ -34,7 +34,7 @@
 	
 </BOUCLE_zoompanelfirst>
 
-<BOUCLE_zoomdesk (DOCUMENTS) {id_article} {id_document IN (#ENV{id}|explode{','})}>
+<BOUCLE_zoomdesk (DOCUMENTS) {id_document IN (#ENV{id}|explode{','})}>
 [(#MODE|=={image}|oui)
 	#SET{fichier,#URL_DOCUMENT}
 	#SET{width,#LARGEUR}
