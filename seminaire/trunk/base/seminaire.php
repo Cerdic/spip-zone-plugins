@@ -2,44 +2,48 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function seminaire_declarer_champs_extras($champs = array()){
-	$champs[] = new ChampExtra(array(
-		'table' => 'evenements', // sur quelle table ?
-		'champ' => 'name', // nom sql
-		'label' => 'seminaire:name', // chaine de langue 'prefix:cle'
-		'precisions' => 'seminaire:precisions_name', //precisions sur le champ name
-		'type' => 'ligne', // type de saisie
-		'sql' => "varchar(144) NOT NULL DEFAULT ''", // declaration sql
+	$champs['spip_evenements']['name'] = array(
+		'saisie' => 'input',// type de saisie
+		'options' => array(
+			'nom' => 'name',
+			'label' => _T('seminaire:name'), 
+			'sql' => "varchar(256) NOT NULL DEFAULT ''", // declaration sql
+			'rechercher'=>true,
+			'defaut' => '',	
 	));
-	$champs[] = new ChampExtra(array(
-		'table' => 'evenements', // sur quelle table ?
-		'champ' => 'origin', // nom sql
-		'label' => 'seminaire:origin', // chaine de langue 'prefix:cle'
-		'precisions' => 'seminaire:precisions_origin', //precisions sur le champ origin
-		'type' => 'ligne', // type de saisie
-		'sql' => "varchar(144) NOT NULL DEFAULT ''", // declaration sql
+	$champs['spip_evenements']['origin'] = array(
+		'saisie' => 'input',
+		'options' => array(
+			'nom' => 'origin', // nom sql
+			'label' => _T('seminaire:origin'), 
+			'sql' => "varchar(256) NOT NULL DEFAULT ''", // declaration sql
+			'rechercher'=>true,
+			'defaut' => '',	
 	));
-	$champs[] = new ChampExtra(array(
-		'table' => 'evenements', // sur quelle table ?
-		'champ' => 'abstract', // nom sql
-		'label' => 'seminaire:abstract', // chaine de langue 'prefix:cle'
-		'precisions' => 'seminaire:precisions_abstract', //precisions sur le champ abstract		
-		'type' => 'bloc', // type de saisie
-		'sql' => "text NOT NULL DEFAULT ''", // declaration sql
-		'saisie_parametres' => array(
-		'class' => 'inserer_barre_edition'
-		)
+	$champs['spip_evenements']['abstract'] = array(
+		'saisie' => 'textarea',
+		'options' => array(
+			'nom' => 'abstract', // nom sql
+			'label' => _T('seminaire:abstract'), 
+			'sql' => "text NOT NULL DEFAULT ''", // declaration sql
+			'rechercher'=>true,
+			'defaut' => '',	
+			'rows' => 4,
+			'traitements' => '_TRAITEMENT_RACCOURCIS',
+			'class'	=>'',
 	));	
-	$champs[] = new ChampExtra(array(
-		'table' => 'evenements', // sur quelle table ?
-		'champ' => 'notes', // nom sql
-		'label' => 'seminaire:notes', // chaine de langue 'prefix:cle'
-		'precisions' => 'seminaire:precisions_notes', //precisions sur le champ namenotes
-		'type' => 'bloc', // type de saisie
-		'sql' => "text NOT NULL DEFAULT ''", // declaration sql
-		'saisie_parametres' => array(
-		'class' => 'inserer_barre_edition'
-		),
+	$champs['spip_evenements']['notes'] = array(
+		'saisie' => 'textarea',
+		'options' => array(
+			'nom' => 'notes', // nom sql
+			'label' => _T('seminaire:notes'), 
+			'sql' => "text NOT NULL DEFAULT ''", // declaration sql
+			'rechercher'=>true,
+			'defaut' => '',	
+			'rows' => 4,
+			'traitements' => '_TRAITEMENT_RACCOURCIS',
 	));
+	
 	return $champs;
 }
 ?>

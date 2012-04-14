@@ -1,9 +1,14 @@
 <?php
+// Module: seminaire
+// Langue: fr
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 $GLOBALS[$GLOBALS['idx_lang']] = array(	
 	//pour le formulaire de s&eacute;minaires
 	'titre_evenement'			 =>		'Titre à préciser',
 	'evenement_titre'			 =>		'Titre de l&rsquo;expos&eacute;',
-	'name'						 => 	'Nom de l&rsquo;intervenant (Name)',
+	'name'						 => 	'Nom de l&rsquo;intervenant',
 	'attention_mot_cle'			 =>		'Il faut IMPERATIVEMENT mettre un mot cl&eacute; sur l&rsquo;&eacute;v&eacute;nement',
 	'origin'					 => 	'Institut d&rsquo;origine de l&rsquo;intervenant',
 	'abstract'					 => 	'R&eacute;sum&eacute;',
@@ -24,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_tout_replier'			 =>		'Sans r&eacute;sum&eacute;',
 	'lien_tout_deplier'			 =>		'Avec r&eacute;sum&eacute;',
 	'titre_agenda'				 =>		'Agenda Scientifique',
+	'nom_de_l_intervenant'		 =>		'Intervenant &agrave; pr&eacute;ciser',
 	//pour les groupes de mots cl&eacute;s
 	'mots_categorie_kitcnrs'	 => 	'Les mots cl&eacute;s à affecter aux articles pour que les &eacute;v&eacute;nements soient encore mieux tri&eacute;s',
 	'mots_cles_techniques_kitcnrs'=>	'Les mots cl&eacute;s pour rep&eacute;rer plus finement les diff&eacute;rents types d&rsquo;&eacute;v&eacute;nements',
