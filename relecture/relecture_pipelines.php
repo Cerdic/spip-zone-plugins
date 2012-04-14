@@ -72,28 +72,27 @@ function relecture_boite_infos($flux){
 **/
 function relecture_formulaire_charger($flux){
 
+	static $forms_concernes = array('dater', 'editer_liens');
+
 	$form = $flux['args']['form'];
 	$objet = $flux['data']['objet'];
 	$id_objet = intval($flux['data']['id_objet']);
 
-	if (($form =='dater') AND ($objet == 'relecture')) {
-		// Identifier le label comme la date de fin des commentaires
-		$flux['data']['_label_date'] = _T('relecture:label_relecture_date_fin_commentaire');
-		// Rendre editable la date si la relecture n'est pas cloturee
+	if ((in_array($form, $forms_concernes)) AND ($objet == 'relecture')) {
+		// Rendre editable le formulaire si la relecture n'est pas cloturee
 		$from = 'spip_relectures';
 		$where = array("id_relecture=$id_objet");
 		$statut = sql_getfetsel('statut', $from, $where);
 		$flux['data']['editable'] = ($statut !== 'fermee');
-	}
-	else if (($form =='editer_liens') AND ($objet == 'relecture')) {
-		// Changer le titre du formulaire pour désigner clairement les relecteurs
-		$flux['data']['titre'] = _T('relecture:titre_liste_relecteurs');
 
-		// Rendre editable la date si la relecture n'est pas cloturee
-		$from = 'spip_relectures';
-		$where = array("id_relecture=$id_objet");
-		$statut = sql_getfetsel('statut', $from, $where);
-		$flux['data']['editable'] = ($statut !== 'fermee');
+		if ($form =='dater') {
+			// Identifier le label comme la date de fin des commentaires
+			$flux['data']['_label_date'] = _T('relecture:label_relecture_date_fin_commentaire');
+		}
+		else if ($form =='editer_liens') {
+			// Changer le titre du formulaire pour désigner clairement les relecteurs
+			$flux['data']['titre'] = _T('relecture:titre_liste_relecteurs');
+		}
 	}
 
 	return $flux;
