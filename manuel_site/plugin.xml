@@ -13,7 +13,7 @@
 	</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.7.5</version>
+	<version>0.8.0</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<description>
@@ -49,6 +49,10 @@
 	<pipeline>
 		<nom>formulaire_traiter</nom>
 		<inclure>formulaires/configurer_manuelsite.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ieconfig_metas</nom>
+		<inclure>manuelsite_ieconfig_metas.php</inclure>
 	</pipeline>
 	<bouton id='manuelsite' parent='configuration'>
 		<icone>prive/themes/spip/images/manuelsite-24.png</icone>

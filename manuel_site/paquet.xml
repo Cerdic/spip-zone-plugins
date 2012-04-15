@@ -1,7 +1,7 @@
 <paquet
 	prefix="manuelsite"
 	categorie="edition"
-	version="0.7.5"
+	version="0.8.0"
 	etat="stable"
 	compatibilite="[2.1.0;3.0.99]"
 	logo="prive/themes/spip/images/manuelsite-32.png"
@@ -22,6 +22,7 @@
 	<pipeline nom="affiche_droite" inclure="manuelsite_prive_pipelines.php" />
 	<pipeline nom="affiche_gauche" inclure="manuelsite_prive_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="formulaires/configurer_manuelsite.php" />
+	<pipeline nom="ieconfig_metas" inclure="manuelsite_ieconfig_metas.php" />
 
 	<necessite nom="saisies" compatibilite="[1.9.0;[" />
 	<necessite nom="yaml" compatibilite="[1.1;[" />
