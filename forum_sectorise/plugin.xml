@@ -27,6 +27,10 @@
 		<nom>ieconfig_metas</nom>
 		<inclure>forumsectorise_ieconfig_metas.php</inclure>
 	</pipeline>
+	<pipeline>
+		 <nom>autoriser</nom>
+		 <inclure>inc/forumsectorise_autoriser.php</inclure>
+	</pipeline>
 	<bouton id='forumsectorise' parent='configuration'>
 		<icone>prive/themes/spip/images/forumsectorise-24.png</icone>
 		<titre>forumsectorise:titre_menu</titre>
