@@ -12,8 +12,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// A
-	'accordeon_description' => 'Un menu accordèon avec le plugin menu',
-	'accordeon_slogan' => 'Animer le menu de SPIP avec un effet d\'ouverture de tiroir',
+	// A
+	'accordeon_description' => 'Ce plugin permet d\'appliquer à une structure ul/li un effet accordéon (présentation « en tiroir »). Il utilise le script <a href="http://jqueryui.com/demos/accordion/">jQuery UI Accordeon</a>. Le travail de génération de la structure ul/li peut-être délégué au plugin Menus ou à une noisette Aveline par exemple ou même géré indépendamment en squelette. Il suffit de donner au ul principal la classe accordeon.',
+	'accordeon_slogan' => 'Animer un menu avec effet d\'accordéon',
 );
 ?>
