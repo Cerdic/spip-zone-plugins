@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_modifier_relecture' => 'Modifier la relecture',
 	'bouton_configurer_relecture' => 'Configurer',
 	'bouton_participer_relecture' => 'Participer',
-	'bouton_historique_relectures' => 'Afficher les relectures terminées',
+	'bouton_historique_relectures' => 'Afficher l\'historique des relectures',
 
 // I
 	'info_relecture_ouverture' => 'Ouvert le @date@ sur la révision @revision@ de l\'article',

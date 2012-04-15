@@ -74,12 +74,17 @@ function autoriser_article_voirrelectures_dist($faire, $type, $id, $qui, $opt) {
 function autoriser_relecture_modifier_dist($faire, $type, $id, $qui, $opt) {
 
 	// Conditions :
+	// - la relecture n'est pas fermee
 	// - l'auteur connecte est un des auteurs de l'article
 	// - ou un admin complet ou restreint à la rubrique d'appartenance de l'article (besoin de maintenance)
 
 	$from = 'spip_relectures';
 	$where = array("id_relecture=$id");
-	$id_article = sql_getfetsel('id_article', $from, $where);
+	$infos = sql_fetsel('id_article, statut', $from, $where);
+
+	$relecture_ouverte = $infos['statut'] == 'ouverte';
+
+	$id_article = $infos['id_article'];
 	$les_auteurs = lister_objets_lies('auteur', 'article', $id_article, 'auteurs_liens');
 
 	$from = 'spip_articles';
@@ -87,9 +92,11 @@ function autoriser_relecture_modifier_dist($faire, $type, $id, $qui, $opt) {
 	$id_rubrique = sql_getfetsel('id_rubrique', $from, $where);
 
 	return
-		(in_array($qui['id_auteur'], $les_auteurs)
-		OR (($qui['statut'] == '0minirezo')
-			AND (!$qui['restreint'] OR !$id_rubrique OR in_array($id_rubrique, $qui['restreint']))));
+		$relecture_ouverte
+		AND
+		((in_array($qui['id_auteur'], $les_auteurs)
+			OR (($qui['statut'] == '0minirezo')
+				AND (!$qui['restreint'] OR !$id_rubrique OR in_array($id_rubrique, $qui['restreint'])))));
 }
 
 

@@ -34,9 +34,12 @@
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
 				<td class='statut'>[(#STATUT|puce_statut{relecture, #STATUT, 0, relecture, #EVAL{false}, #EVAL{false}})]</td>
 				<td class='titre principale'>
-					<a href="[(#ID_RELECTURE|generer_url_entite{relecture})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RELECTURE">
-						#INFO_TITRE{relecture, #ID_RELECTURE}
-					</a>
+					[(#STATUT|=={ouverte}|et{[(#AUTORISER{modifier, relecture, #ID_RELECTURE}|non)]}|?{
+						[(#INFO_TITRE{relecture, #ID_RELECTURE})],
+						[<a href="[(#ID_RELECTURE|generer_url_entite{relecture})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RELECTURE">
+							(#INFO_TITRE{relecture, #ID_RELECTURE})
+						</a>]}
+					)]
 				</td>
 				<td class='id'>
 					[(#SET{url_revision, [(#URL_ECRIRE{revision, objet=article}

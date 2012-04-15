@@ -1,8 +1,8 @@
 [(#REM) <!-- Bouton d'affichage de la page des relectures de l'article en cours --> ]
-<BOUCLE_relectures_fermees(RELECTURES){id_article}{statut=fermee}{0,1}>
+<BOUCLE_relectures_fermees(RELECTURES){id_article}{statut=fermee}{0,1}{!par date_cloture}>
 [(#AUTORISER{voirrelectures, article, #ID_ARTICLE})
-	[(#URL_ECRIRE{relectures}
-		|parametre_url{id_article, #ID_ARTICLE}
+	[(#URL_ECRIRE{relecture}
+		|parametre_url{id_relecture, #ID_RELECTURE}
 		|icone_horizontale{<:relecture:bouton_historique_relectures:>,relecture-ok-24.png})]
 ]
 </BOUCLE_relectures_fermees>

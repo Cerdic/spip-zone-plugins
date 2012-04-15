@@ -52,7 +52,7 @@ function relecture_boite_infos($flux){
 			$table = table_objet($type);
 			$id_table_objet = id_table_objet($type);
 
-			$flux['data'] .= recuperer_fond('prive/squelettes/infos/article-voir_relectures_cloturees',
+			$flux['data'] .= recuperer_fond('prive/squelettes/infos/article-voir_relectures',
 								array($id_table_objet => $id));
 		}
 	}
