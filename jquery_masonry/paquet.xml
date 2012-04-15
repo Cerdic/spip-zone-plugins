@@ -1,7 +1,7 @@
 <paquet
 	prefix="jquerymasonry"
 	categorie="multimedia"
-	version="0.3.2"
+	version="0.4.0"
 	etat="test"
 	compatibilite="[2.1.0;3.0.99]"
 	logo="prive/themes/spip/images/jquerymasonry-32.png"
@@ -18,6 +18,7 @@
 
 	<pipeline nom="insert_head" inclure="jquerymasonry_pipelines.php" />
 	<pipeline nom="autoriser" inclure="inc/jquerymasonry_autoriser.php" />
+	<pipeline nom="ieconfig_metas" inclure="jquerymasonry_ieconfig_metas.php" />
 
 	<necessite nom="saisies" compatibilite="[1.9.0;[" />
 
