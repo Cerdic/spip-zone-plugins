@@ -3,7 +3,7 @@
 	<slogan>Autoriser les forums sur un secteur particulier</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.5.2</version>
+	<version>0.6.0</version>
 	<version_base>0.3</version_base>
 	<etat>stable</etat>
 	<description>
@@ -22,6 +22,10 @@
 	<pipeline>
 		<nom>formulaire_traiter</nom>
 		<inclure>formulaires/configurer_forumsectorise.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ieconfig_metas</nom>
+		<inclure>forumsectorise_ieconfig_metas.php</inclure>
 	</pipeline>
 	<bouton id='forumsectorise' parent='configuration'>
 		<icone>prive/themes/spip/images/forumsectorise-24.png</icone>
