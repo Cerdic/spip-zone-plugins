@@ -245,7 +245,7 @@ function exec_spiplistes_config () {
 		
 		if($doit_ecrire_metas) {
 			// recharge les metas en cache 
-			spiplistes_ecrire_metas();
+			ecrire_metas();
 		}
 		
 		if(!empty($str_log)) {
@@ -529,9 +529,9 @@ function exec_spiplistes_config () {
 		. debut_cadre_relief('', true, '', _T('spiplistes:methode_envoi'))
 		. '<div class="verdana2">' . $eol
 		. _T('spiplistes:pas_sur')
-		. bouton_radio("mailer_smtp", "non", _T('spiplistes:php_mail'), $mailer_smtp == "non", "changeVisible(this.checked, 'smtp', 'none', 'block');")
+		. spiplistes_bouton_radio("mailer_smtp", "non", _T('spiplistes:php_mail'), $mailer_smtp == "non", "changeVisible(this.checked, 'smtp', 'none', 'block');")
 		. "<br />" . $eol
-		. bouton_radio("mailer_smtp", "oui", _T('spiplistes:utiliser_smtp'), $mailer_smtp == "oui"
+		. spiplistes_bouton_radio("mailer_smtp", "oui", _T('spiplistes:utiliser_smtp'), $mailer_smtp == "oui"
 			, "changeVisible(this.checked, 'smtp', 'block', 'none');")
 		. '</div>' . $eol
 		/**
@@ -544,9 +544,9 @@ function exec_spiplistes_config () {
 		. '<li>'.spiplistes_bouton_checkbox ('opt_smtp_use_ssl', _T('spiplistes:opt_smtp_use_ssl'),  $opt_smtp_use_ssl).'</li>'.$eol
 		//
 		. '<li>'._T('spiplistes:requiert_identification')." : "
-		. bouton_radio("smtp_identification", "oui", _T('item_oui'), ($smtp_identification == "oui"), "changeVisible(this.checked, 'smtp-auth', 'block', 'none');")
+		. spiplistes_bouton_radio("smtp_identification", "oui", _T('item_oui'), ($smtp_identification == "oui"), "changeVisible(this.checked, 'smtp-auth', 'block', 'none');")
 		. "&nbsp;"
-		. bouton_radio("smtp_identification", "non", _T('item_non'), ($smtp_identification == "non"), "changeVisible(this.checked, 'smtp-auth', 'none', 'block');").'</li>' . $eol
+		. spiplistes_bouton_radio("smtp_identification", "non", _T('item_non'), ($smtp_identification == "non"), "changeVisible(this.checked, 'smtp-auth', 'none', 'block');").'</li>' . $eol
 		. "</ul>" . $eol
 		. "<ul id='smtp-auth' class='verdana2' style='list-style:none;display:".(($smtp_identification == "oui") ? "block" : "none" )."'>" . $eol
 		. '<li>'
@@ -750,5 +750,21 @@ function spiplistes_bouton_checkbox ($btn_name, $txt_label, $cur_val) {
 		. '<label for="'.$btn_name.'-'.$id.'">'.$txt_label.'</label>' . $eol
 		. '</p>' . $eol;
 	return ($texte);
+}
+
+
+// http://doc.spip.org/@bouton_radio
+function spiplistes_bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="") {
+	static $id_label = 0;
+
+	if (strlen($onClick) > 0) $onClick = " onclick=\"$onClick\"";
+	$texte = "<input type='radio' name='$nom' value='$valeur' id='label_${nom}_${id_label}'$onClick";
+	if ($actif) {
+		$texte .= ' checked="checked"';
+		$titre = '<b>'.$titre.'</b>';
+	}
+	$texte .= " /> <label for='label_${nom}_${id_label}'>$titre</label>\n";
+	$id_label++;
+	return $texte;
 }
 
