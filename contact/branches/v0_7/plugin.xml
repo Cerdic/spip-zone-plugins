@@ -50,6 +50,16 @@
 		<nom>ieconfig_metas</nom>
 		<inclure>contact_ieconfig_metas.php</inclure>
 	</pipeline>
+	<bouton id='contact' parent='configuration'>
+		<icone>images/contact-24.png</icone>
+		<titre>contact:titre</titre>
+		<url>configurer_contact</url>
+	</bouton>
+	<bouton id='contact2' parent='bando_configuration'>
+		<icone>images/contact-16.png</icone>
+		<titre>contact:titre</titre>
+		<url>configurer_contact</url>
+	</bouton>
 	<bouton id='contact_message' parent='auteurs'>
 		<icone>images/contact-24.png</icone>
 		<titre>contact:msg_messagerie</titre>
