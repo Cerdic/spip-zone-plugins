@@ -4,8 +4,33 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/editer');
 
-function formulaires_editer_relecture_charger_dist($id_relecture='new', $redirect='', $row=array(), $hidden='') {
+function formulaires_editer_relecture_charger_dist($id_relecture='oui', $redirect='', $row=array(), $hidden='') {
+	// Traitement standard de chargement
 	$valeurs = formulaires_editer_objet_charger('relecture', $id_relecture, 0, 0, $redirect, 'relectures_edit_config', $row, $hidden);
+
+	// Traitement particulier de l'objet relecture si l'appel correspond a une ouverture :
+	// - recuperation des informations de l'article concerne (id, chapo, texte, descriptif, ps et la revision courante)
+	// - mise a jour de la date d'ouverture
+	if ($id_relecture == 'oui') {
+		if ($id_article = intval(_request('id_article'))) {
+			$select = array('chapo AS article_chapo', 'descriptif AS article_descr', 'texte AS article_texte', 'ps AS article_ps');
+			$from = 'spip_articles';
+			$where = array("id_article=$id_article");
+			$article = sql_fetsel($select, $from, $where);
+
+			$from = 'spip_versions';
+			$where = array("objet=" . sql_quote('article'), "id_objet=$id_article");
+			$revision = sql_getfetsel('max(id_version) AS revision_ouverture', $from, $where);
+
+			$valeurs = array_merge($valeurs, $article);
+			$valeurs['id_article'] = $id_article;
+			$valeurs['revision_ouverture'] = $revision;
+			$valeurs['date_ouverture'] = time();
+			$valeurs['statut'] = 'ouverte';
+			$valeurs['titre'] = 'Nouvelle relecture';
+		}
+	}
+
 	return $valeurs;
 }
 

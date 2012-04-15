@@ -1,0 +1,10 @@
+[(#REM) <!-- hierarchie specifique pour la relecture :
+	- Lien parent vers la page de l'article associe
+	- Titre de la relecture compose ou sans titre sinon
+--> ]
+
+<a href="[(#URL_ECRIRE{article, id_article=#ENV{id_article}})]">
+	#INFO_TITRE{article, #ENV{id_article}}
+</a>
+[&gt;
+<strong class="on"> (#INFO_TITRE{relecture, #ID_RELECTURE}|sinon{<:info_sans_titre:>})</strong>]
