@@ -1,7 +1,7 @@
 <paquet
 	prefix="jquerycorner"
 	categorie="multimedia"
-	version="0.3.2"
+	version="0.4.0"
 	etat="test"
 	compatibilite="[2.1.0;3.0.99]"
 	logo="prive/themes/spip/images/jquerycorner-32.png"
@@ -18,6 +18,7 @@
 
 	<pipeline nom="insert_head" inclure="jquerycorner_pipelines.php" />
 	<pipeline nom="autoriser" inclure="inc/jquerycorner_autoriser.php" />
+	<pipeline nom="ieconfig_metas" inclure="jquerycorner_ieconfig_metas.php" />
 
 	<necessite nom="saisies" compatibilite="[1.9.0;[" />
 

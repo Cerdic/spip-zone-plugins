@@ -3,7 +3,7 @@
 	<slogan>Le plugin qui arrondit les angles</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.3.2</version>
+	<version>0.4.0</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<description>
@@ -22,6 +22,10 @@
 	<pipeline>
 		 <nom>autoriser</nom>
 		 <inclure>inc/jquerycorner_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ieconfig_metas</nom>
+		<inclure>jquerycorner_ieconfig_metas.php</inclure>
 	</pipeline>
 	<bouton id='jquerycorner' parent='configuration'>
 		<icone>prive/themes/spip/images/jquerycorner-24.png</icone>
