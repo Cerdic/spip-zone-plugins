@@ -3,7 +3,7 @@
 	<slogan>Affiche un menu d&#233;roulant</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.4.3</version>
+	<version>0.5.0</version>
 	<version_base>0.1</version_base>
 	<etat>stable</etat>
 	<icon>prive/themes/spip/images/jquerysuperfish-32.png</icon>
@@ -26,6 +26,10 @@
 	<pipeline>
 		 <nom>autoriser</nom>
 		 <inclure>inc/jquerysuperfish_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ieconfig_metas</nom>
+		<inclure>jquerysuperfish_ieconfig_metas.php</inclure>
 	</pipeline>
 	<bouton id='jquerysuperfish' parent='configuration'>
 		<icone>prive/themes/spip/images/jquerysuperfish-24.png</icone>

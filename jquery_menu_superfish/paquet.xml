@@ -1,7 +1,7 @@
 <paquet
 	prefix="jquerysuperfish"
 	categorie="navigation"
-	version="0.4.3"
+	version="0.5.0"
 	etat="stable"
 	compatibilite="[2.1.0;3.0.99]"
 	logo="prive/themes/spip/images/jquerysuperfish-32.png"
@@ -19,6 +19,7 @@
 	<pipeline nom="insert_head_css" inclure="jquerysuperfish_pipelines.php" />
 	<pipeline nom="insert_head" inclure="jquerysuperfish_pipelines.php" />
 	<pipeline nom="autoriser" inclure="inc/jquerysuperfish_autoriser.php" />
+	<pipeline nom="ieconfig_metas" inclure="jquerysuperfish_ieconfig_metas.php" />
 
 	<necessite nom="saisies" compatibilite="[1.9;[" />
 	<necessite nom="YAML" compatibilite="[1.5;[" />
