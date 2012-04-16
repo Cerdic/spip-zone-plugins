@@ -63,7 +63,7 @@ function 	zengarden_liste_themes($tous){
 	// si on utilise ZPIP-v2 ou ZPIP-v2 invalider les themes qui n'utilisent pas
 	// ce skel
 	$search = "";
-	if (defined('_DIR_PLUGIN_ZCORE')) $search="zpip";
+	if (defined('_DIR_PLUGIN_ZPIP')) $search="zpip";
 	if (defined('_DIR_PLUGIN_Z')) $search="z";
 	if ($search){
 		foreach ($themes as $k => $theme){
