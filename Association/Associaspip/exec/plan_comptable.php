@@ -43,18 +43,18 @@ function exec_plan()
 			if ($data['classe']==$classe) {
 				echo ' <strong>'.$data['classe'].' </strong>';
 			} else {
-				echo '<a href="'.generer_url_ecrire('plan', 'classe='.$data['classe']).'">'.$data['classe'].'</a> ';
+				echo '<a href="'.generer_url_ecrire('plan_comptable', 'classe='.$data['classe']).'">'.$data['classe'].'</a> ';
 			}
 		}
 		if ($classe=='%') {
 			echo ' <strong>'._T('asso:plan_entete_tous').'</strong>';
 		} else {
-			echo ' <a href="'.generer_url_ecrire('plan').'">'._T('asso:plan_entete_tous').'</a>';
+			echo ' <a href="'.generer_url_ecrire('plan_comptable').'">'._T('asso:plan_entete_tous').'</a>';
 		}
 		echo '</td>';
 		echo '<td style="text-align:right;">';
 		//Filtre active
-		echo '<form method="post" action="'.generer_url_ecrire('plan').'"><div>';
+		echo '<form method="post" action="'.generer_url_ecrire('plan_comptable').'"><div>';
 		echo '<input type="hidden" name="classe" value="'.$classe.'" />';
 		echo '<select name ="active" class="fondl" onchange="form.submit()">';
 		echo '<option value="1" ';

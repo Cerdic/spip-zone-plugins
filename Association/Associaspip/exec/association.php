@@ -33,7 +33,7 @@ function exec_association()
 		if (autoriser('gerer_autorisations', 'association')) {
 			$res['gerer_les_autorisations'] = array('droit_acces.png', 'association_autorisations');
 		}
-		$res['plan_comptable'] = array('plan_compte.png', 'plan');
+		$res['plan_comptable'] = array('plan_compte.png', 'plan_comptable');
 		if ($GLOBALS['association_metas']['destinations']) {
 				$res['destination_comptable'] = array('plan_compte.png', 'destination');
 		}

@@ -112,7 +112,7 @@ function formulaires_editer_asso_plan_traiter_dist($id_plan='')
 		$res['message_erreur'] = ($err ? $err : _T('erreur_traite'));
 	} else {
 		$res['message_ok'] = '';
-		$res['redirect'] = generer_url_ecrire('plan'); /* on renvoit sur la page adherents mais on perd a l'occasion d'eventuel filtres inseres avant d'arriver au formulaire de cotisation... */
+		$res['redirect'] = generer_url_ecrire('plan_comptable'); /* on renvoit sur la page adherents mais on perd a l'occasion d'eventuel filtres inseres avant d'arriver au formulaire de cotisation... */
 	}
 	return $res;
 }
