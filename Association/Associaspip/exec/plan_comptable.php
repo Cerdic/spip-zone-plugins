@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip ('inc/navigation_modules');
 
-function exec_plan()
+function exec_plan_comptable()
 {
 	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
