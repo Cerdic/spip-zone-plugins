@@ -351,17 +351,18 @@ function association_liste_plan_comptable($val,$actives='') {
 
 /* si il existe un compte 58x on le retourne sinon on cree le compte 581 et on le retourne */
 function association_creer_compte_virement_interne() {
+    if ($GLOBALS['association_metas']['pc_intravirements'])
+	return $GLOBALS['association_metas']['pc_intravirements'];
     /* on recupere tous les comptes de la classe "financier" (classe 5) */
     $res = association_liste_plan_comptable($GLOBALS['association_metas']['classe_banques']);
     /* existe-t-il le compte 58x */
     foreach($res as $code => $libelle) {
-	if (substr($code,0,2)==substr($GLOBALS['association_metas']['pc_intravirements'],0,2)) {
-	    /* j'ai trouve un code qui commence par 58 */
-	    $trouve = TRUE;
+	if (substr($code,1,1)=='8') {
+	    $trouve = TRUE; /* j'ai trouve un code qui commence par 58 */
+	    return $code;
 	}
     }
-    /* j'ai rien trouve, je cree le compte 581 et je retourne */
-    if (!$trouve) {
+    if (!$trouve) { /* j'ai rien trouve, je cree le compte 581 */
 	$code = $GLOBALS['association_metas']['classe_banques'].'81';
 	$id_plan = sql_insertq('spip_asso_plan', array(
 	    'code' => $code,
@@ -371,7 +372,7 @@ function association_creer_compte_virement_interne() {
 	    'solde_anterieur' => '0',
 	    'date_anterieure' => date('Y-m-d'),
 	    'commentaire' => _T('asso:compte_cree_automatiquement'),
-	    'active' => '1',
+	    'active' => '0',
 	    'maj' => date('Y-m-d')
 	));
     }

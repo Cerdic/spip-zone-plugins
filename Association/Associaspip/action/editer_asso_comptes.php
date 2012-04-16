@@ -17,6 +17,7 @@ function action_editer_asso_comptes()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_compte = $securiser_action();
+	$erreur = '';
 	include_spip('inc/association_comptabilite');
 	$date = association_recupere_date(_request('date'));
 	$imputation = _request('imputation');
@@ -48,15 +49,14 @@ function action_editer_asso_comptes()
 		/* TODO : decommenter les lignes si edition/modification d'un virement possible ! */
 		//if (!$id_compte) { /* pas d'id_compte, c'est un ajout */
 			// 1ere ecriture :
-			//
 			$old_imputation = $imputation;
-#			$imputation = $compte_virement;
 			$id_compte = association_ajouter_operation_comptable($date, $recette, $depense, $justification, $compte_virement, $journal, 0);
+			if (!$id_compte)
+				$erreur = _T('asso:erreur_sgbdr');
 			// 2eme ecriture
-			$recette = $depense;
-			$depense = 0;
-#			$journal = $old_imputation;
-			$id_compte = association_ajouter_operation_comptable($date, $recette, $depense, $justification, $compte_virement, $old_imputation, 0);
+			$id_compte = association_ajouter_operation_comptable($date, $depense, $recette, $justification, $compte_virement, $old_imputation, 0);
+			if (!$id_compte)
+				$erreur = _T('asso:erreur_sgbdr');
 		//} else {
 			/* c'est une modif, ........ */
 		//	association_modifier_compte_virement_interne($id_compte);
@@ -64,11 +64,13 @@ function action_editer_asso_comptes()
 	} else {
 		if (!$id_compte) { /* pas d'id_compte, c'est un ajout */
 			$id_compte = association_ajouter_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, 0);
+			if (!$id_compte)
+				$erreur = _T('asso:erreur_sgbdr');
 		} else { /* c'est une modif, la parametre id_journal de la fonction modifier operation comptable est mis a '' afin de ne pas le modifier dans la base */
 			association_modifier_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, '', $id_compte);
 		}
 	}
-	return array($id_compte, '');
+	return array($id_compte, $erreur);
 }
 
 ?>

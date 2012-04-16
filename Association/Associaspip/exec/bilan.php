@@ -63,7 +63,8 @@ function exec_bilan()
 		// datation et raccourcis
 		icones_association(array('comptes', "exercice=$exercice"), array(
 			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$exercice"),
-			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$exercice"),
+#			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$exercice"),
+			'encaisse' => array('finances-24.png', 'encaisse', "exercice=$exercice"),
 		));
 		debut_cadre_association('finances-24.png', 'bilans_comptables', $exercice_data['intitule']);
 		$clas_banque = $GLOBALS['association_metas']['classe_banques'];
@@ -149,8 +150,6 @@ function exec_bilan()
 			echo "</tr>\n</tfoot>\n</table>\n";
 			echo '</fieldset>';
 		}
-		if ($plan)
-			bilan_encaisse();
 		fin_page_association();
 	}
 }
@@ -170,20 +169,21 @@ function exec_bilan()
 function bilan_encaisse()
 {
 	$lesEcritures = array();
-	$laDateDuJour = date('Y-m-d'); # pour ne pas comptabiliser les opérations au delà d'aujourd'hui !!!!
+	$lesEcritures['_58xx']['solde'] = $lesEcritures['_86xx']['solde'] = $lesEcritures['_87xx']['solde'] = 0;
 	$query = sql_select('*', 'spip_asso_plan', '(classe='.sql_quote($GLOBALS['association_metas']['classe_banques']).' OR classe='.sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']).') AND active=1', '',  'code' );
 	while ($val = sql_fetch($query)) {
-		$code = $val['code'];
 		/* on declare un tableau et on le rempli avec les donnees du compte */
-		$lesEcritures[$code] = array();
-		$lesEcritures[$code]['code'] = $val['code'];
-		$lesEcritures[$code]['intitule'] = $val['intitule'];
-		$lesEcritures[$code]['date_solde'] = $val['date_anterieure'];
-		$lesEcritures[$code]['solde_anterieur'] = $val['solde_anterieur'];
+		$lesEcritures[$val['code']] = array(
+			'code' => $val['code'],
+			'intitule' => $val['intitule'],
+			'date_solde' => $val['date_anterieure'],
+			'solde_anterieur' => $val['solde_anterieur'],
+			'id_plan' => $val['id_plan'],
+		);
 		/* ne pas comptabiliser les opérations au delà d'aujourd'hui meme si il y a des echeances futures !!!! */
 		$compte = sql_fetsel('SUM(recette) AS recettes, SUM(depense) AS depenses, date, imputation',
 			'spip_asso_comptes',
-			'date>= '.sql_quote($lesEcritures[$code]['date_solde']).' AND date<= '.sql_quote($laDateDuJour).' AND (journal= '.sql_quote($code).' OR imputation= '.sql_quote($code).')',
+			'date>='. sql_quote($lesEcritures[$val['code']]['date_solde']).' AND date<=NOW() AND (journal='. sql_quote($val['code']) .' OR imputation='. sql_quote($val['code']) .')',
 			'journal');
 		if ($compte) {
 			if(substr($compte['imputation'],0,1)===$GLOBALS['association_metas']['classe_contributions_volontaires']) {
@@ -191,19 +191,20 @@ function bilan_encaisse()
 				 * c'est une dépense evaluee si 86xx ou recette évaluée si 87xx
 				 * qui doit apparaître dans le compte de resultat
 				 */
-				$lesEcritures['86xx']['solde'] = $compte['depenses'];
-				$lesEcritures['87xx']['solde'] = $compte['recettes'];
-			} elseif (substr($compte['imputation'],0,1)===$GLOBALS['association_metas']['classe_banques']) {
-				/* c'est un virement interne avec le code 58xx :
-				 * le solde du compte doit être à zero sinon il y a erreur !
-				 */
-				 $lesEcritures['58xx']['solde'] = $compte['recettes']-$compte['depenses'];
+				$lesEcritures['_86xx']['solde'] += $compte['depenses'];
+				$lesEcritures['_87xx']['solde'] += $compte['recettes'];
 			} else {
 				/* c'est une recette ou une depense */
 				$lesEcritures[$code]['solde'] = $compte['recettes']-$compte['depenses'];
+				if (substr($compte['imputation'],0,1)===$GLOBALS['association_metas']['classe_banques'])
+				/* c'est un virement interne avec le code 58xx :
+				 * le solde du compte doit être à zero sinon il y a erreur !
+				 */
+					$lesEcritures['_58xx']['solde'] += $compte['recettes']-$compte['depenses'];
 			}
 		}
 	}
+
 	echo "\n<fieldset>";
 	echo '<legend><strong>' . _T('asso:encaisse') . '</strong></legend>';
 	echo "<table width='100%' class='asso_tablo' id='asso_tablo_bilan_encaisse'>\n";
@@ -214,20 +215,16 @@ function bilan_encaisse()
 	echo "</tr>\n</thead><tbody>";
 	$total_actuel = $total_initial = 0;
 	foreach($lesEcritures as $compteFinancier) {
-		/* c'est un compte banque 53xx ou un compte caisse 51xx */
-		if(substr($compteFinancier['code'],0,2)==='51' OR substr($compteFinancier['code'],0,2)==='53') { //!! Parametrer !!! Pas de valeurs en dures sinon ca ne sera valable que pour la France
-			echo '<tr>';
+		if( substr($compteFinancier['code'],0,1)==$GLOBALS['association_metas']['classe_banques'] ) { //!\ Tous les comptes financiers ne sont normalement pas concernes : idealement il aurait fallu configurer un groupe "caisse" (51xx) et un groupe "banque" (53xx) mais d'une part nous ignorons si d'autres systemes comptables n'utilisent pas plus de groupes et d'autre part (meme une association francaise) peut bien ne pas avoir les deux types de comptes...
+			echo '<tr id="'.$compteFinancier['id_plan'].'">';
 			echo '<td class="text">'. $compteFinancier['code'] .' : '. $compteFinancier['intitule'] .'</td>';
-			echo '<td class="date">'. association_datefr($compteFinancier['date_solde'],'dtstart') .'</td>';
+			echo '<td class="date">'. association_datefr($compteFinancier['date_anterieure'],'dtstart') .'</td>';
 			echo '<td class="decimal">'. association_prixfr($compteFinancier['solde_anterieur']) .'</td>';
 			echo '<td class="decimal">'. association_prixfr($compteFinancier['solde_anterieur']+$compteFinancier['solde']) .'</td>';
 			$total_initial += $compteFinancier['solde_anterieur'];
 			$total_actuel += $compteFinancier['solde_anterieur']+$compteFinancier['solde'];
 		} else {
-			if($compteFinancier['58xx']['solde']!=0) {
-				$erreur58=TRUE;
-			}
-			if($compteFinancier['86xx']['solde']!=$compteFinancier['87xx']['solde']) {
+			if($compteFinancier['_86xx']['solde']!=$compteFinancier['_87xx']['solde']) {
 				$erreur8687=TRUE;
 			}
 		}
@@ -236,13 +233,13 @@ function bilan_encaisse()
 	echo '<th  colspan="2" class="text">'. _T('asso:encaisse') .'</th>';
 	echo '<th class="decimal">'. association_prixfr($total_initial) .'</th>';
 	echo '<th class="decimal">'. association_prixfr($total_actuel) .'</th>';
+	if( $compteFinancier['_58xx']['solde']!=0 ){
+		echo '<td  colspan="4" class="erreur">'. _T('asso:erreur_equilibre_comptes58') .'</td>';
+	}
+	if( $compteFinancier['_86xx']['solde']!=$compteFinancier['_87xx']['solde'] ){
+		echo '<td  colspan="4" class="erreur">'. _T('asso:erreur_equilibre_comptes8687') .'</td>';
+	}
 	echo "</tr>\n</tfoot>\n</table>\n";
-	if($erreur58){
-		echo _T('asso:erreur_equilibre_comptes58');
-	}
-	if($erreur8687){
-		echo _T('asso:erreur_equilibre_comptes8687');
-	}
 	echo '</fieldset>';
 }
 

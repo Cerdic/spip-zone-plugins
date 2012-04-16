@@ -17,7 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip('inc/navigation_modules');
 
-function exec_compte_resultat()
+function exec_compte_bilan()
 {
 	if (!autoriser('associer', 'comptes')) {
 		include_spip('inc/minipres');
@@ -40,7 +40,7 @@ function exec_compte_resultat()
 		// pas de sommes de synthes puisque tous les totaux sont dans la zone centrale ;-
 		// datation et raccourcis
 		icones_association(array('comptes', "exercice=$exercice"), array(
-			'cpte_bilan_titre_general' => array('finances-24.png', 'bilan', "exercice=$id_exercice"),
+			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$id_exercice"),
 #			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$id_exercice"),
 			'encaisse' => array('finances-24.png', 'encaisse', "exercice=$exercice"),
 		));
@@ -48,35 +48,36 @@ function exec_compte_resultat()
 		if ($plan) {
 			$join = ' RIGHT JOIN spip_asso_plan ON imputation=code';
 			$sel = ', code, intitule, classe';
-			$where = " date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' ";
-			$having = 'classe = ';
+			$where = " classe NOT IN (". sql_quote($GLOBALS['association_metas']['classe_charges']) .",". sql_quote($GLOBALS['association_metas']['classe_produits']) .",". sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']) .") AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' ";
+			$having = 'classe';
 			$order = 'code';
+			$union = ' RIGHT JOIN spip_asso_plan ON journal=code';
 		} else {
 			$join = $sel = $where = $having = $order = '';
 		}
 		$var = serialize(array($id_exercice, $join, $sel, $where, $having, $order)); //!\ les cles numeriques peuvent poser probleme... <http://www.mail-archive.com/php-bugs@lists.php.net/msg100262.html> mais il semble qu'ici le souci vient de l'absence d'encodage lorsqu'on passe $var par URL...
 //		$var = serialize(array('id'=>$id_exercice, '1'=>$join, '2'=>$sel, '3'=>$where, '4'=>$having, '5'=>$order));
-		if(autoriser('associer', 'export_compte_resultats') && $plan){ // on peut exporter : pdf, csv, xml, ...
+		if(autoriser('associer', 'export_compte_bilans') && $plan){ // on peut exporter : pdf, csv, xml, ...
 			echo debut_cadre_enfonce('',true);
-			echo '<h3>'. _T('asso:cpte_resultat_mode_exportation') .'</h3>';
+			echo '<h3>'. _T('asso:cpte_bilan_mode_exportation') .'</h3>';
 			if (test_plugin_actif('FPDF')) { // impression en PDF : _T('asso:bouton_impression')
-				echo icone1_association('PDF', generer_url_ecrire('export_compteresultats_pdf').'&var='.rawurlencode($var), 'print-24.png'); //!\ generer_url_ecrire() utilise url_enconde() or il est preferable avec les grosses variables serialisees d'utiliser rawurlencode()
+				echo icone1_association('PDF', generer_url_ecrire('export_comptebilans_pdf').'&var='.rawurlencode($var), 'print-24.png'); //!\ generer_url_ecrire() utilise url_enconde() or il est preferable avec les grosses variables serialisees d'utiliser rawurlencode()
 			}
 			foreach(array('csv','ctx','dbk','json','tex','tsv','xml','yaml') as $type) { // autres exports (donnees brutes) possibles
-				echo icone1_association(strtoupper($type), generer_url_ecrire("export_compteresultats_$type").'&var='.rawurlencode($var), 'export-24.png'); //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
+				echo icone1_association(strtoupper($type), generer_url_ecrire("export_comptebilans_$type").'&var='.rawurlencode($var), 'export-24.png'); //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
 			}
 			echo fin_cadre_enfonce(true);
 		}
-		debut_cadre_association('finances-24.jpg', 'cpte_resultat_titre_general', $exercice_data['intitule']);
-		$depenses = compte_resultat_charges_produits($var, intval($GLOBALS['association_metas']['classe_charges']));
-		$recettes = compte_resultat_charges_produits($var, intval($GLOBALS['association_metas']['classe_produits']));
-		compte_resultat_benefice_perte($recettes, $depenses);
-		compte_resultat_benevolat($var, intval($GLOBALS['association_metas']['classe_contributions_volontaires']));
+		debut_cadre_association('finances-24.jpg', 'cpte_bilan_titre_general', $exercice_data['intitule']);
+//////////////////////////////////////
+		$depenses = compte_bilan_actifs_passifs($var, TRUE);
+		$recettes = compte_bilan_actifs_passifs($var, FALSE);
+#		compte_resultat_benefice_perte($recettes, $depenses);
 /*
-		if(autoriser('associer', 'export_compte_resultats') && $plan){ // on peut exporter : pdf, csv, xml, ...
+		if(autoriser('associer', 'export_compte_bilans') && $plan){ // on peut exporter : pdf, csv, xml, ...
 			echo "<br /><table width='100%' class='asso_tablo' cellspacing='6' id='asso_tablo_exports'>\n";
 			echo '<tbody><tr>';
-			echo '<td>'. _T('asso:cpte_resultat_mode_exportation') .'</td>';
+			echo '<td>'. _T('asso:cpte_bilan_mode_exportation') .'</td>';
 			if (test_plugin_actif('FPDF')) { // impression en PDF
 				echo '<td class="action"><a href="'.generer_url_ecrire('export_compteresultats_pdf').'&var='.rawurlencode($var). '"><strong>PDF</strong></td>'; //!\ generer_url_ecrire() utilise url_enconde() or il est preferable avec les grosses variables serialisees d'utiliser rawurlencode()
 			}
@@ -90,7 +91,7 @@ function exec_compte_resultat()
 	}
 }
 
-function compte_resultat_charges_produits($var, $class) {
+function compte_bilan_actifs_passifs($var, $actifs) {
 	include_spip('inc/association_plan_comptable');
 	$tableau = @unserialize($var);
 	$id_tableau = (($class==$GLOBALS['association_metas']['classe_charges']) ? 'charges' : 'produits');
@@ -98,10 +99,10 @@ function compte_resultat_charges_produits($var, $class) {
 	echo "<thead>\n<tr>";
 	echo '<th width="10">&nbsp;</td>';
 	echo '<th width="30">&nbsp;</td>';
-	echo '<th>'. (($class==$GLOBALS['association_metas']['classe_charges']) ? _T('asso:cpte_resultat_titre_charges') : _T('asso:cpte_resultat_titre_produits')) .'</th>';
+	echo '<th>'. ($actifs ? _T('asso:cpte_bilan_titre_actifs') : _T('asso:cpte_bilan_titre_passifs')) .'</th>';
 	echo '<th width="80">&nbsp;</th>';
 	echo "</tr>\n</thead><tbody>";
-	$quoi = (($class==$GLOBALS['association_metas']['classe_charges']) ? 'SUM(depense) AS valeurs' : 'SUM(recette) AS valeurs');
+	$quoi = ($actifs ? 'SUM(depense) AS valeurs' : 'SUM(recette) AS valeurs');
 	$query = sql_select(
 		"imputation, $quoi, DATE_FORMAT(date, '%Y') AS annee $tableau[2]", // select
 		"spip_asso_comptes $tableau[1]", // from
@@ -109,7 +110,7 @@ function compte_resultat_charges_produits($var, $class) {
 		$tableau[5], // group by
 		$tableau[5], // order by
 		'', // limit
-		$tableau[4].$class // having
+		$tableau[4] // having
 	);
 	$total = 0;
 	$chapitre = '';
@@ -124,16 +125,18 @@ function compte_resultat_charges_produits($var, $class) {
 			$chapitre = $new_chapitre;
 			echo "</tr>\n<tr>";
 		}
-		echo "<td>&nbsp;</td>";
-		echo '<td class="text">'. $data['code'] .'</td>';
-		echo '<td class="text">'. $data['intitule'] .'</td>';
-		echo '<td class="decimal">'. association_nbrefr($valeurs) .'</td>';
-		echo "</tr>\n";
-		$total += $valeurs;
+		if ($valeurs) { // non-zero...
+			echo "<td>&nbsp;</td>";
+			echo '<td class="text">'. $data['code'] .'</td>';
+			echo '<td class="text">'. $data['intitule'] .'</td>';
+			echo '<td class="decimal">'. association_nbrefr($valeurs) .'</td>';
+			echo "</tr>\n";
+			$total += $valeurs;
+		}
 	}
 	echo "</tbody><tfoot>\n<tr>";
 	echo '<th colspan="2">&nbsp;</th>';
-	echo '<th class="text">'. (($class==$GLOBALS['association_metas']['classe_charges']) ? _T('asso:cpte_resultat_total_charges') : _T('asso:cpte_resultat_total_produits')) .'</th>';
+	echo '<th class="text">'. ($actifs ? _T('asso:cpte_bilan_total_actifs') : _T('asso:cpte_bilan_total_charges')) .'</th>';
 	echo '<th class="decimal">'. association_nbrefr($total) . '</th>';
 	echo "</tr>\n</tfoot>\n</table>\n";
 	return $total;
@@ -155,58 +158,12 @@ function compte_resultat_benefice_perte($recettes, $depenses) {
 	echo "</tr></tfoot></table>";
 }
 
-function compte_resultat_benevolat($var, $class) {
-	$tableau = @unserialize($var);
-	echo "<table width='100%' class='asso_tablo' id='asso_tablo_bilan_benevolat'>\n";
-	echo "<thead>\n<tr>";
-	echo '<th width="10">&nbsp;</th>';
-	echo '<th width="30">&nbsp;</th>';
-	echo '<th>'. _T('asso:cpte_resultat_titre_benevolat') . '</th>';
-	echo '<th width="80">'. _T('asso:cpte_resultat_recette_evaluee') .'</th>';
-	echo '<th width="80">'. _T('asso:cpte_resultat_depense_evaluee') .'</th>';
-	$query = sql_select(
-		"imputation, SUM(recette) AS recettes, SUM(depense) AS depenses, DATE_FORMAT(date, '%Y') AS annee $tableau[2]", // select
-		"spip_asso_comptes $tableau[1]", // from
-		$tableau[3], // where
-		$tableau[5], // group by
-		$tableau[5], // order by
-		'', // limit
-		$tableau[4].$class // having
-	);
-	$chapitre = '';
-	$total_recettes = $total_depenses = 0;
-	while ($data = sql_fetch($query)) {
-		echo '<tr>';
-		$new_chapitre = substr($data['code'], 0, 2);
-		if ($chapitre!=$new_chapitre) {
-			echo '<td class="text">' . $new_chapitre . '</td>';
-			echo '<td colspan="4" class="text">'. ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'")) . '</td>';
-			$chapitre = $new_chapitre;
-			echo "</tr>\n";
-		}
-		echo '<td>&nbsp;</td>';
-		echo '<td class="text">'. $data['code'] .'</td>';
-		echo '<td class="text">'. $data['intitule'] .'</td>';
-		echo '<td class="decimal">'. association_nbrefr($data['recettes']) .'</td>';
-		echo '<td class="decimal">'. association_nbrefr($data['depenses']) .'</td>';
-		echo '</tr>';
-		$total_recettes += $data['recettes'];
-		$total_depenses += $data['depenses'];
-	}
-	echo "</tbody><tfoot>\n<tr>";
-	echo '<th width="10">&nbsp;</td>';
-	echo '<th width="30">&nbsp;</td>';
-	echo '<th class="decimal">'. _T('asso:resultat_courant') .'</th>';
-	echo '<th class="decimal">'. association_nbrefr($total_recettes) .'</th>';
-	echo '<th class="decimal">'. association_nbrefr($total_depenses) .'</th>';
-	echo "</tr>\n</tfoot>\n</table>\n";
-}
 
 	include_spip('inc/charsets');
 	include_spip('inc/association_plan_comptable');
 
 // Brique commune aux classes d'exportation des donnees du compte de resultat
-class ExportCompteResultats {
+class ExportCompteBilans {
 
 	var $exercice;
 	var $join;
@@ -366,7 +323,7 @@ class ExportCompteResultats {
 
 	// fichier texte final a afficher/telecharger
 	function leFichier($ext) {
-		$fichier = _DIR_RACINE.'/'._NOM_TEMPORAIRES_ACCESSIBLES.'compte_resultats_'.$this->exercice.".$ext"; // on essaye de creer le fichier dans le cache local/ http://www.spip.net/fr_article4637.html
+		$fichier = _DIR_RACINE.'/'._NOM_TEMPORAIRES_ACCESSIBLES.'compte_bilans_'.$this->exercice.".$ext"; // on essaye de creer le fichier dans le cache local/ http://www.spip.net/fr_article4637.html
 		$f = fopen($fichier, 'w');
 		fputs($f, $this->out);
 		fclose($f);

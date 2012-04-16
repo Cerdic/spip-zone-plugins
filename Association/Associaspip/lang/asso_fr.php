@@ -178,12 +178,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_classe_charges' => 'Classe des comptes de charges',
 	'config_libelle_classe_produits' => 'Classe des comptes de produits',
 	'config_libelle_classe_contributions_volontaires' => 'Classe des comptes de contrib. volontaires',
-	'config_libelle_dons'=> 'Gestion des dons et colis',
-	'config_libelle_activer_dons'=> 'Activer la gestion des dons et colis',
+	'config_libelle_classe_immobilisations' => 'Classe des comptes de immobilisations',
+	'config_libelle_dons'=> 'Gestion des dons manuels',
+	'config_libelle_activer_dons'=> 'Activer la gestion des dons manuels',
+	'config_libelle_don2argent' => "Don financier (argent)",
+	'config_libelle_don2colis' => "Don en nature (colis)",
 	'config_libelle_cotisations'=> 'Gestion des cotisations',
     'config_libelle_activer_cotisations' => 'Activer la gestion des cotisations',
 	'config_libelle_ventes'=> 'Gestion des ventes associatives',
 	'config_libelle_activer_ventes'=> 'Activer la gestion des ventes associatives',
+	'config_libelle_article2vente' => 'Produit',
+	'config_libelle_frais2port' => "Frais d'exp&eacute;dition",
 	'config_libelle_frais_envoi'=> "frais d'envoi",
 	'config_libelle_comptes'=> 'Gestion comptable',
 	'config_libelle_activer_comptes'=> 'Activer la gestion comptable',
@@ -213,6 +218,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_info_plugin' => 'Options du plugin',
 	'config_info_membres' => 'Options de gestion des membres',
 	# Configuration : Infos, Aides et Messages
+	'config_aide_pc_cotisations' => "Classe des comptes de produits : FR=756",
+	'config_aide_pc_dons' => "Classe des comptes de produits : FR=754/771 (courants/exceptionnels)",
+	'config_aide_pc_colis' => "Classe des comptes de contributions volontaires : FR=875",
+	'config_aide_pc_ventes' => "Classe des comptes de produits : FR=701/707/706 (produits fabriqu&eacute;s &agrave; partir de mati&egrave;res premi&egrave;res --601-- / produits achet&eacute;s --607-- / services --et parainages...)",
+	'config_aide_pc_frais2port' => "Classe des comptes de produits : FR=7085 (si enregistr&eacute;s s&eacute;par&eacute;ment --frais accessoires-- car peuvent &ecirc;tre int&eacute;gr&eacute;...) ",
+	'config_aide_pc_activites' => "Classe des comptes de produits : FR=708",
+	'config_aide_pc_ressources' => "Classe des comptes d'immobilisations/charges : FR=210/600? (montant &gt;/&lt; 500&nbsp;&euro;&nsp;; avec/sans amortissement)",
+	'config_aide_pc_prets' => "Classe des comptes de produits : FR=708",
 	'config_erreur_pas_de_destination_definie' => 'Pas de destination comptable d&eacute;finie',
 	'config_aide_infofiscal' => 'Dates au format jj/mm/aaaa s&eacute;par&eacute;es par un espace.',
 	'config_aide_recufiscal' => "sigles :
@@ -695,7 +708,7 @@ Commentaire: @commentaire@
 	'compte_liste_nombre_impair' => 'Charges : ',
 	'compte_liste_nombre_cv' => 'Contrib. volontaires : ',
 	'compte_liste_nombre_vi' => 'Virements internes : ',
-	# Compte de Resultat
+	# Comptes de Resultat
 	'cpte_resultat_titre_general' => 'Compte de R&eacute;sultat',
 	'cpte_resultat_bouton_voir' => 'Voir',
 	'cpte_resultat_titre_charges' => 'CHARGES',
@@ -715,6 +728,14 @@ Commentaire: @commentaire@
 	'cpte_res_export_association' => 'Association : @nom@',
 	'cpte_res_export_exercice' => 'Exercice : @titre@',
 	'cpte_res_export_page' => 'Page : @numero@',
+	# Comptes de Bilan
+	'cpte_bilan_titre_general' => 'Compte de Bilan',
+	'cpte_bilan_bouton_voir' => 'Voir',
+	'cpte_bilan_titre_actifs' => 'ACTIFS',
+	'cpte_bilan_titre_passifs' => 'PASSIFS',
+	'cpte_bilan_total_actifs' => 'Total des Actifs',
+	'cpte_bilan_total_passifs' => 'Total des Passifs',
+	'cpte_bilan_mode_exportation' => 'Exporter le Compte de Bilan en ',
 	# annexe
 	'annexe_titre_general' => 'Annexe',
 	# Verifications

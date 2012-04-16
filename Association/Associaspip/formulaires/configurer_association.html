@@ -311,6 +311,16 @@ Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" es
 						</BOUCLE_classe_contributions_volontaires>
 							</select>
 						</li>
+						<li class="editer_classe_immobilisations">
+							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{classe_immobilisations})</span>]
+							<label for="classe_immobilisations"><:asso:config_libelle_classe_immobilisations:></label>
+							<select name="classe_immobilisations" id="classe_immobilisations">
+								<option value=""><:asso:choisir_classe_compte:></option>
+						<BOUCLE_classe_immobilisations(ASSO_PLAN){fusion classe}{par classe}>
+								<option value="#CLASSE" [(#ENV{classe_immobilisations}|=={#CLASSE}|oui) selected="selected"]>#CLASSE [: (#VAL{classe_#CLASSE}|_T)]</option>
+						</BOUCLE_classe_immobilisations>
+							</select>
+						</li>
 					</ul>
 				</fieldset>
 			</li>
@@ -326,6 +336,7 @@ Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" es
 						<li class="editer_pc_cotisations">
 							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{pc_cotisations})</span>]
 							<label for="pc_cotisations"><:asso:config_libelle_num_pc:></label>
+							<em class="explication"><:asso:config_aide_pc_cotisations:></em>
 							<select name="pc_cotisations" id="pc_cotisations">
 								<option value=""><:asso:choisir_ref_compte:></option>
 					<BOUCLE_classeSelect_cotisations(ASSO_PLAN){active=1}{fusion classe}{par classe}>
@@ -374,11 +385,12 @@ Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" es
 						</li>
 					</ul>
 					<fieldset>
-						<legend>Don financiers</legend>
+						<legend><:asso:config_libelle_don2argent:></legend>
 					<ul>
 					<B_classeSelect_dons>
 						<li class="editer_pc_dons">
 							<label for="pc_dons"><:asso:config_libelle_num_pc:></label>
+							<em class="explication"><:asso:config_aide_pc_dons:></em>
 							<select name="pc_dons" id="pc_dons">
 								<option value=""><:asso:choisir_ref_compte:></option>
 					<BOUCLE_classeSelect_dons(ASSO_PLAN){active=1}{fusion classe}{par classe}>
@@ -403,15 +415,16 @@ Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" es
 							<span class="spip_form_erreur"><:asso:erreur_pas_de_destination:></span>
 						<//B_dc_dons>
 						</li>
-					</B_classeSelect_ventes>
+					</B_classeSelect_dons>
 					</ul>
 					</fieldset>
 					<fieldset>
-						<legend>Dons en nature</legend>
+						<legend><:asso:config_libelle_don2colis:></legend>
 					<ul>
 					<B_classeSelect_colis>
 						<li class="editer_pc_colis">
 							<label for="pc_colis"><:asso:config_libelle_num_pc:></label>
+							<em class="explication"><:asso:config_aide_pc_colis:></em>
 							<select name="pc_colis" id="pc_colis">
 								<option value=""><:asso:choisir_ref_compte:></option>
 					<BOUCLE_classeSelect_colis(ASSO_PLAN){active=1}{fusion classe}{par classe}>
@@ -442,11 +455,12 @@ Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" es
 						</li>
 					</ul>
 					<fieldset>
-						<legend>Produits</legend>
+						<legend><:asso:config_libelle_article2vente:></legend>
 					<ul>
 					<B_classeSelect_ventes>
 						<li class="editer_pc_ventes">
 							<label for="pc_ventes"><:asso:config_libelle_num_pc:></label>
+							<em class="explication"><:asso:config_aide_pc_ventes:></em>
 							<select name="pc_ventes" id="pc_ventes">
 								<option value=""><:asso:choisir_ref_compte:></option>
 					<BOUCLE_classeSelect_ventes(ASSO_PLAN){active=1}{fusion classe}{par classe}>
@@ -475,12 +489,13 @@ Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" es
 					</ul>
 					</fieldset>
 					<fieldset>
-						<legend><:asso:config_libelle_frais_envoi:></legend>
+						<legend><:asso:config_libelle_frais2port:></legend>
 					<ul>
 					<B_classeSelect_frais>
 						<li class="editer_pc_frais_envoi">
 							[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{frais_envoi})</span>]
 							<label for="pc_frais_envoi"><:asso:config_libelle_num_pc:>&nbsp;</label>
+							<em class="explication"><:asso:config_aide_pc_frais2port:></em>
 							<select name="pc_frais_envoi" id="pc_frais_envoi">
 								<option value=""><:asso:choisir_ref_compte:></option>
 						<BOUCLE_classeSelect_frais(ASSO_PLAN){active=1}{fusion classe}{par classe}>
@@ -519,6 +534,7 @@ Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" es
 						</li>
 						<li class="editer_pc_activites">
 							<label for="pc_activites"><:asso:config_libelle_num_pc:></label>
+							<em class="explication"><:asso:config_aide_pc_activites:></em>
 							<select name="pc_activites" id="pc_activites">
 								<option value=""><:asso:choisir_ref_compte:></option>
 					<BOUCLE_classeSelect_activites(ASSO_PLAN){active=1}{fusion classe}{par classe}>
@@ -567,11 +583,12 @@ Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" es
 						</li>
 					</ul>
 					<fieldset>
-						<legend>Acquisition</legend>
+						<legend><:asso:ressources_libelle_acquisition:></legend>
 					<ul>
 					<B_classeSelect_ressources>
 						<li class="editer_pc_ressources">
 							<label for="pc_ressources"><:asso:config_libelle_num_pc:></label>
+							<em class="explication"><:asso:config_aide_pc_ressources:></em>
 							<select name="pc_ressources" id="pc_ressources">
 								<option value=""><:asso:choisir_ref_compte:></option>
 					<BOUCLE_classeSelect_ressources(ASSO_PLAN){active=1}{fusion classe}{par classe}>
@@ -600,11 +617,12 @@ Les fonctionnalites suivantes ne sont possibles que si le plugin "ComptaSPIP" es
 					</ul>
 					</fieldset>
 					<fieldset>
-						<legend>Location</legend>
+						<legend><:asso:ressources_libelle_location:></legend>
 					<ul>
 					<B_classeSelect_prets>
 						<li class="editer_pc_prets">
 							<label for="pc_prets"><:asso:config_libelle_num_pc:></label>
+							<em class="explication"><:asso:config_aide_pc_prets:></em>
 							<select name="pc_prets" id="pc_prets">
 								<option value=""><:asso:choisir_ref_compte:></option>
 					<BOUCLE_classeSelect_prets(ASSO_PLAN){active=1}{fusion classe}{par classe}>

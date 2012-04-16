@@ -53,13 +53,7 @@ function exec_comptes()
 		onglets_association('titre_onglet_comptes');
 		// INTRO : rappel de l'exercicee affichee
 		echo totauxinfos_intro($exercice_data['intitule'],'exercice',$exercice);
-		$journaux = sql_allfetsel('journal, intitule', 'spip_asso_comptes RIGHT JOIN spip_asso_plan ON journal=code',"classe='".$GLOBALS['association_metas']['classe_banques']."' AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]'", "intitule DESC"); // on se permet sql_allfetsel car il s'agit d'une association (mois d'une demie dizaine de comptes) et non d'un etablissement financier (des milliers de comptes clients)
-/* bof *
-		// STATS recettes et depenses par comptes financiers (indique rapidement les comptes financiers avec les mouvements les plus importants --en montant !)
-		foreach ($journaux as $financier) {
-			echo totauxinfos_stats($financier['intitule'], 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), "journal='".$financier['journal']."' AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]'");
-		}
-* fob */
+		$journaux = sql_allfetsel('journal, intitule', 'spip_asso_comptes RIGHT JOIN spip_asso_plan ON journal=code', "date>='$exercice_data[debut]' AND date<='$exercice_data[fin]'", "intitule DESC"); // on se permet sql_allfetsel car il s'agit d'une association (mois d'une demie dizaine de comptes) et non d'un etablissement financier (des milliers de comptes clients)
 		// TOTAUX : operations de l'exercice par compte financier (indique rapidement les comptes financiers les plus utilises ou les modes de paiement preferes...)
 		foreach (array('recette','depense') as $direction) {
 			foreach ($journaux as $financier) {
@@ -79,7 +73,7 @@ function exec_comptes()
 			$liste_effectifs[$classe_css] = sql_countsel('spip_asso_comptes', "LEFT(imputation,1)='".$GLOBALS['association_metas']["classe_$classe_cpt"]."' AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' ");
 			$liste_libelles[$classe_css] = 'compte_liste_nombre_'.$classe_css;
 		}
-		echo totauxinfos_effectifs('comptes', $liste_libelles, $liste_effectifs);
+		echo totauxinfos_effectifs('compte_entete_imputation', $liste_libelles, $liste_effectifs);
 		// STATS : montants de l'exercice pour l'imputation choisie (toutes si aucune)
 		echo totauxinfos_stats('mouvements', 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), $where, 2);
 		// TOTAUX : montants de l'exercice pour l'imputation choisie (toutes si aucune)
@@ -87,9 +81,10 @@ function exec_comptes()
 		echo totauxinfos_montants(($imputation=='%' ? _T('asso:tous') : $imputation), $data['somme_recettes'], $data['somme_depenses']);
 		// datation et raccourcis
 		icones_association(array(), array(
+			'encaisse_titre_general' => array('finances-24.png', 'encaisse', "exercice=$exercice"),
 			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$exercice"),
-			'bilan' => array('finances-24.png', 'bilan', "exercice=$exercice"),
-			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$exercice"),
+			'cpte_bilan_titre_general' => array('finances-24.png', 'compte_bilan', "exercice=$exercice"),
+#			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$exercice"),
 			'ajouter_une_operation' => array('ajout-24.png', 'edit_compte'),
 		) );
 		debut_cadre_association('finances-24.png', 'informations_comptables');

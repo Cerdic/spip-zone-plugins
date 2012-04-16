@@ -46,6 +46,8 @@ function exec_annexe()
 		));
 		debut_cadre_association('finances-24.png', 'annexe_titre_general', $exercice_data['intitule']);
 		echo _T('asso:non_implemente');
+		// http://www.aquadesign.be/actu/article-3678.php
+		// http://www.documentissime.fr/dossiers-droit-pratique/dossier-274-les-documents-comptables-obligatoires/les-comptes-annuels/l-annexe.html
 		fin_page_association();
 	}
 }
