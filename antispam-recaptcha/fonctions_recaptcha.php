@@ -8,7 +8,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://recaptcha.googlecode.com/files/recaptcha-php-1.8.zip
+// http://recaptcha.googlecode.com/files/recaptcha-php-1.11.zip
 function get_recaptcha_keys($force = false) {
 	if ($force
 	OR !isset($GLOBALS['meta']['recaptcha_keys'])
@@ -17,21 +17,23 @@ function get_recaptcha_keys($force = false) {
 		spip_log('chargement d\'une cle API recaptcha');
 		include_spip('inc/distant');
 		include_spip('inc/texte');
-		$u = textebrut(recuperer_page('http://mailhide.recaptcha.net/apikey'));
-		if(!preg_match(',Public Key:(.*),i', $u, $r1)
-		OR !preg_match(',Private Key:(.*),i', $u, $r2)) {
+		include_spip('inc/filtres');
+		$u = translitteration(textebrut(recuperer_page('http://www.google.com/recaptcha/mailhide/apikey')));
+		if(!preg_match(',Cl([^p]+)publique:(.*),i', $u, $r1) // La page retourne des accents qui (pour l'instant) sont errones, donc ne passent pas la translitteration
+		OR !preg_match(',Cl([^p]+)prive:(.*),i', $u, $r2)) {
 			spip_log('erreur recaptcha n\'a pas donne de cle : '.$u);
 			return false;
 		}
 
 		$keys = array(
-			'public' => trim($r1[1]),
-			'private' => trim($r2[1])
+			'public' => trim($r1[2]),
+			'private' => trim($r2[2])
 		);
+		
 		ecrire_meta('recaptcha_keys', serialize($keys));
 		ecrire_metas();
-	}
-
+	} 
+	
 	return $keys;
 }
 

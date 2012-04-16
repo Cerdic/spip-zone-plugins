@@ -1,13 +1,13 @@
 <plugin>
 	<nom>Antispam reCAPTCHA</nom>
 	<auteur>Fil</auteur>
-	<version>0.1.0</version>
+	<version>0.2.0</version>
 	<etat>dev</etat>
 	<slogan>Filtre antispam pour vos emails</slogan>
 	<description>
 Ce plugin fournit un filtre <code>|antispam</code> (fonction <code>filtre_antispam()</code>) pour prot&#233;ger les emails avec un test de reCAPTCHA. A sa premi&#232;re utilisation, le plugin va chercher tout seul une cl&#233; d'activation sur le site de reCAPTCHA.
 
-Le principal d&#233;faut de ce service est qu'il n'est disponible qu'en anglais seulement pour le moment.
+Le principal d&#233;faut de ce service est qu'on ne peut pas d&#233;finir la langue comme on le souhaite
 	</description>
 	<lien>http://www.spip-contrib.net/reCAPTCHA</lien>
 	<prefix>reCAPTCHA</prefix>
@@ -17,5 +17,5 @@ Le principal d&#233;faut de ce service est qu'il n'est disponible qu'en anglais 
 	<fonctions>fonctions_recaptcha.php</fonctions>
 	<chemin dir='' />
 	<categorie>performance</categorie>
-	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
+	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
 </plugin>
