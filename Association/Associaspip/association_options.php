@@ -657,7 +657,7 @@ function totauxinfos_effectifs($legende='',$table_textes,$table_nombres,$decimal
 function totauxinfos_montants($legende='',$somme_recettes=0,$somme_depenses=0)
 {
 	$res = '<table width="100%" class="asso_infos">';
-	$res .= '<caption>'. _T('asso:totaux_montants', array('de_par'=>_T("local:$legende"))) .'</caption><tbody>';Filtre
+	$res .= '<caption>'. _T('asso:totaux_montants', array('de_par'=>_T("local:$legende"))) .'</caption><tbody>';
 	if ($somme_recettes) {
 		$res .= '<tr class="impair">'
 		. '<th class="entree">'. _T('asso:bilan_recettes') .'</th>'
@@ -694,7 +694,7 @@ if (test_plugin_actif('COORDONNEES')) {
 // Pour construire des menu avec SELECTED
 function association_mySel($varaut,$variable, $option=NULL)
 {
-	if function_exists('mySel') //@ http://doc.spip.org/@mySel
+	if ( function_exists('mySel') ) //@ http://doc.spip.org/@mySel
 		return mySel($varaut, $variable, $option);
 	// la fonction mySel n'existe plus en SPIP 3 donc on la recree
 	$res = ' value="'.$varaut.'"'. (($variable==$varaut) ? ' selected="selected"' : '');
