@@ -137,6 +137,7 @@ function formulaires_configurer_bloc_verifier($bloc,$page){
 					} elseif (!is_null($normaliser)) {
 						set_request($nom, $normaliser);
 					}
+				}
 			}
 		}
 		// On teste que chaque paramètre obligatoire est bien renseigné
