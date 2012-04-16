@@ -1,5 +1,7 @@
 <?php
 
+$GLOBALS['dossier_squelettes'] = 'plugins/snb_v2/squelettes';
+
 
 // spip 2 $GLOBALS['meta'][version_installee] = 15828
 // spip 3 $GLOBALS['meta'][version_installee] >= 18407
