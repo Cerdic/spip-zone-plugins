@@ -46,34 +46,28 @@
  *
  */
 class dessinSection {
-    private $donnees = array();   // Tableau des données
 	private $hauteurDessin; // Hauteur du dessin en px
 	private $largeurDessin; // Largeur du dessin en px
-	private $precision; // Précision de calcul
 	private $mesCouleurs = array('red', 'blue', 'orange', 'green', 'grey', 'black');  // Couleur des différentes lignes
-	private $hautBerge;
-
-    function __construct($result, $hauteur, $largeur, $prec, $hautB) {
-		$this->donnees = $result;
+	private $tSection; // Choix de la section
+	private $sectionClass; 
+	private $donnees = array();
+	
+    function __construct($hauteur, $largeur, $typeSection, $section, $lib_data) {
         $this->hauteurDessin = $hauteur;
         $this->largeurDessin = $largeur;
-        $this->precision = (int)-log10($prec);
-        $this->hautBerge = $hautB;
-    }
+        $this->tSection = $typeSection;
+        $this->sectionClass = $section;
+		$this->donnees = $lib_data;
+    } 
 
 	/*
 	 * Rajoute une ligne à notre dessin. 
 	 * $color correspond à la couleur de la ligne
 	 * $val correspond à l'ordonnée exprimée en pixel de la ligne
 	 */
-	function AddRow($color, $val){
-		if($val > $this->hautBerge){
-			$ligneDessin = '$("#dessinSection").drawLine(0,'.$val.','.$this->largeurDessin.','.$val.', {color: "'.$color.'", stroke: 0.5});';
-		}
-		else{
-			$ligneDessin = '$("#dessinSection").drawLine(0,'.$val.','.$this->largeurDessin.','.$val.', {color: "'.$color.'", stroke: 2});';
-		}
-		
+	function AddRow($color, $val){		
+		$ligneDessin = '$("#dessinSection").drawLine(0,'.$val.','.$this->largeurDessin.','.$val.', {color: "'.$color.'"});';
 		return $ligneDessin;
 	}
 	
@@ -89,7 +83,6 @@ class dessinSection {
 			}
 		}
 		
-	
 		// La valeur maximum de l'échelle correspondant à 10% de la hauteur afin de faire plus propre
 		$valEchelle = $this->hauteurDessin - ($this->hauteurDessin * 0.1);
 		
@@ -101,13 +94,20 @@ class dessinSection {
 			$result[$cle][] = $this->mesCouleurs[$couleur];
 			$couleur++;
 		}
+
+		asort($result);
+
 		return $result;
 	}
 	
 	// Retourne le dessin de la section
 	function GetDessinSection(){
-		// On transforme nos valeur en pixels
+		// On transforme nos valeurs en pixels
 		$mesDonnees = $this->transformeValeur($this->donnees); 
+		
+		// Hauteur dessin - Hauteur de berge, en format pixels 
+		$diffHautBerge = $mesDonnees['rYB'][0];
+
 		// On définit le style de notre dessin 
 		$dessin = '<style type="text/css">
 					.canvas{
@@ -119,14 +119,43 @@ class dessinSection {
 		
 		// On créé la base de notre dessin de section
 		$dessin.= '<script type="text/javascript">
-					$(document).ready(function(){
-					$("#dessinSection").drawLine(0,'.$this->hauteurDessin.','.$this->largeurDessin.','.$this->hauteurDessin.');
-					$("#dessinSection").drawLine(0,0,0,'.$this->hauteurDessin.');
-					$("#dessinSection").drawLine('.$this->largeurDessin.',0,'.$this->largeurDessin.','.$this->hauteurDessin.');';
-		
+					$(document).ready(function(){';
+			
+		$dessin.= '$("#dessinSection").drawLine(0, 0, 0,'.$diffHautBerge.', {stroke: 1});
+				   $("#dessinSection").drawLine('.$this->largeurDessin.', 0,'.$this->largeurDessin.','.$diffHautBerge.', {stroke: 1});';
+			
+		switch($this->tSection){
+			case 'FT':
+				$dessin.= '$("#dessinSection").drawPolyline(
+							[0,'.($this->largeurDessin*0.25).','.($this->largeurDessin*0.75).','.$this->largeurDessin.'],
+							['.$diffHautBerge.','.$this->hauteurDessin.','.$this->hauteurDessin.','.$diffHautBerge.'], {stroke: 4});';
+                break;
+
+            case 'FR':
+				$dessin.= '$("#dessinSection").drawPolyline(
+							[0,0,'.$this->largeurDessin.','.$this->largeurDessin.'],
+							['.$diffHautBerge.','.$this->hauteurDessin.','. $this->hauteurDessin.','.$diffHautBerge.'], {stroke: 4});';
+	
+                break;
+
+            case 'FC':
+                
+                break;
+
+            case 'FP':
+				$dessin.= '$("#dessinSection").drawPolyline([0,0,'.$this->largeurDessin.','.$this->largeurDessin.'], [0,'.$this->hauteurDessin.','. $this->hauteurDessin.', 0]);';
+	
+				break;
+
+            default:
+                
+		}			
+
 		// On ajoute les différentes lignes avec couleur + valeur
 		foreach($mesDonnees as $cle=>$valeur){
-			$dessin.= $this->AddRow($valeur[1], $valeur[0]);
+			if($cle != 'rYB'){
+				$dessin.= $this->AddRow($valeur[1], $valeur[0]);
+			}
 		}
 		
 		$dessin.= '});
@@ -139,9 +168,11 @@ class dessinSection {
 		$droiteGauche = 0;
 		// On rajoute les différents libelles avec la couleur qui va bien
 		foreach($mesDonnees as $cle=>$valeur){
-			$placement = ($droiteGauche%2 == 0)?'left: 0px':'right: 0px;';
-			$dessin.= '<p style="position: absolute; top:'.($valeur[0]-8).'px;'.$placement.'; width: auto; display: inline-block; color:'.$valeur[1].'">'.$cle.' = '.round($this->donnees[$cle], $this->precision).'</p>';
-			$droiteGauche++;			
+			if($cle != 'rYB'){
+				$placement = ($droiteGauche%2==0)?'left: -80px':'right: -80px;';
+				$dessin.= '<p style="position: absolute; top:'.($valeur[0]-8).'px;'.$placement.'; width: auto; display: inline-block; color:'.$valeur[1].'">'.$cle.' = '.round($this->donnees[$cle], $this->sectionClass->oP->iPrec).'</p>';
+				$droiteGauche++;		
+			}	
 		}
 		
 		$dessin.= '</div>';

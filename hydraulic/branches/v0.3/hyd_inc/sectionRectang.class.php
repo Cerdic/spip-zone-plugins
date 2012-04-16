@@ -47,8 +47,8 @@ class cSnRectang extends acSection {
      * Calcul de la distance du centre de gravité de la section à la surface libre.
      * @return Distance du centre de gravité de la section à la surface libre
      */
-    protected function CalcYg() {
-        return parent::CalcYg($this->rY);
+    protected function CalcSYg() {
+        return parent::CalcSYg($this->rY);
     }
 
 }

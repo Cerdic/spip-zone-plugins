@@ -290,7 +290,7 @@ function formulaires_calcul_normale_critique_traiter_dist(){
         }
     }
     else {
-        $tVarCal = array('Hs', 'Hsc', 'B', 'P', 'S', 'R', 'V', 'Fr', 'Yc', 'Yn', 'Yf', 'Yt', 'Yco', 'J', /*'I-J',*/ 'Imp', 'Tau0');
+        $tVarCal = array('Hs', 'Hsc', 'B', 'P', 'S', 'R', 'V', 'Fr', 'Yc', 'Yn', 'Yf', /*'Yt',*/ 'Yco', 'J', /*'I-J',*/ 'Imp', 'Tau0');
     }
 
     $max += $pas/2;
@@ -369,11 +369,11 @@ function formulaires_calcul_normale_critique_traiter_dist(){
                     foreach($datas as $cle=>$valeur){
                         if((substr($cle, 0, 1) == 'F' || substr($cle, 0, 2) == 'Cr') && $valeur != 0){
                             $echo.= '<td>';
-                            $echo.= $valeur.'</td>';
+                            $echo.= format_nombre($valeur, $oSection->oP->iPrec).'</td>';
                         }
                     }
 
-            $echo.= '<td>'.$ValeurVarie.'</td><td>'.format_nombre($indice, $oSection->oP->iPrec).'</td>';
+            $echo.= '<td>'.format_nombre($ValeurVarie, $oSection->oP->iPrec).'</td><td>'.format_nombre($indice, $oSection->oP->iPrec).'</td>';
             $echo.= '</tr>';
             $tabAbs[] = $ValeurVarie;
             $ValeurVarie+= $pas;
@@ -385,12 +385,18 @@ function formulaires_calcul_normale_critique_traiter_dist(){
      /***************************************************************************
     *                        Affichage du graphique
     ****************************************************************************/
+		if(is_infinite($result[0])){
+			unset($result[0]);
+			$result = array_values($result);
+			unset($tabAbs[0]);
+			$tabAbs = array_values($tabAbs);
+		}
 
         $oGraph = new cGraph();
         // Ligne Courbe normale critique
         if(isset($result)) {
             $oGraph->AddSerie(
-                _T('hydraulic:param_Q'),
+                $var_a_cal,
                 $tabAbs,
                 $result,
                 '#00a3cd',
@@ -448,19 +454,19 @@ function formulaires_calcul_normale_critique_traiter_dist(){
         $par = 0;
 
         foreach($tVarCal as $champ){
-            if(substr($test[$champ], 0, 6) == 'tirant' || $champ == 'Hs'){
+            if(substr($test[$champ], 0, 6) == 'tirant' || $champ == 'Hs' || $champ == 'Hsc'){
                 $lib_datas[$champ] = $result[$par];
             }
             $par++;
         }
 
-        $dessinSection = new dessinSection($lib_datas, 250, 200, $Param_calc_rPrec, $Cr_rYB);
+		$lib_datas['rYB'] = $oSection->oP->rYB;
+        $dessinSection = new dessinSection(250, 200, $ncTypeSection, $oSection, $lib_datas);
         $echo.= $dessinSection->GetDessinSection();
     }
 
     $res['message_ok'] = $echo;
     return $res;
-
 }
 ?>
 

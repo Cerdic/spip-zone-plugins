@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'def_section_trap'=> "Definition of trapezoidal section",
     'def_section_rect'=> "Definition of rectangular section",
     'def_section_circ'=> "Definition of circular section",
-    'def_section_puis'=> "Definition of power section",
+    'def_section_parab'=> "Definition of parabolic section",
     'diametre'        => "Diameter (m)",
      // F
     'fond'            => "Bottom",
