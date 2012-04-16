@@ -92,8 +92,10 @@ function geoportail_lire_exif($img, $type) //, &$lon, &$lat)
 			// Coordonnees GPS
 			$value = $exif['GPS']['GPSLongitude'];
 			if ($value) eval("\$lon = ".$value[0]." + ".$value[1]."/60 + ".$value[2]."/3600;"); 
+			else return false;
 			$value = $exif['GPS']['GPSLatitude'];
 			if ($value) eval("\$lat = ".$value[0]." + ".$value[1]."/60 + ".$value[2]."/3600;"); 
+			else return false;
 			$flon = ($exif['GPS']['GPSLongitudeRef']=='E')? 1 : -1; 
 			$flat = ($exif['GPS']['GPSLatitudeRef']=='N')? 1 : -1;
 			// Nord - Sud - Est - Ouest
@@ -102,27 +104,6 @@ function geoportail_lire_exif($img, $type) //, &$lon, &$lat)
 			// Renvoyer
 			return array ( 'lon'=>$lon, 'lat'=>$lat, 'date'=>$exif['EXIF']['DateTimeDigitized'] );
 		} 
-/*****
-		// Lecture des info GPS
-		$exif = @exif_read_data($img, 'GPS', true);
-		if ($exif)
-		{	$flon = $flat = 1;
-			// On parcourt la première partie du tableau multidimensionnel
-			foreach ($exif as $key => $section) 
-			{	// On cherche des coordonnees
-				foreach ($section as $name => $value) 
-				{	if ($name == 'GPSLongitude') eval("\$lon = ".$value[0]." + ".$value[1]."/60 + ".$value[2]."/3600;"); 
-					if ($name == 'GPSLatitude') eval("\$lat = ".$value[0]." + ".$value[1]."/60 + ".$value[2]."/3600;"); 
-					if ($name == 'GPSLongitudeRef') $flon = ($value=='E')? 1 : -1; 
-					if ($name == 'GPSLatitudeRef') $flat = ($value=='N')? 1 : -1;
-				}
-			}
-			// Nord - Sud - Est - Ouest
-			$lon *= $flon;
-			$lat *= $flat;
-			return array ( 'lon'=>$lon, 'lat'=>$lat, 'date'=>$date );
-		}
-******/
 	}
 	return false;
 }
