@@ -44,7 +44,7 @@ function exec_association()
 		debut_cadre_association('assoc_qui.png', 'association_infos_contacts');
 		echo '<div class="vcard" id="vcard-asso">';
 		// Profil de l'association
-		echo debut_cadre('',true);
+		echo debut_cadre_enfonce('',true);
 		if (!$GLOBALS['association_metas']['nom'] && autoriser('editer_profil', 'association')) { // c'est surement une nouvelle installation (vu que le nom est obligatoire)
 			echo '<a href="'.generer_url_ecrire('configurer_association').'">'. gros_titre(_T('asso:profil_de_lassociation'),'',false).'</a>';
 		}
@@ -76,7 +76,7 @@ function exec_association()
 			echo '<li>'. ucfirst(_T(str_replace('meta_utilisateur_', '', $row['nom']))).'&nbsp;:&nbsp;'.$row['valeur']."</li>\n";
 		}
 		echo "</ul>";
-		echo fin_cadre(true);
+		echo fin_cadre_enfonce(true);
 		echo "</div>\n";
 		/* affiche tous les groupes devant l'etre */
 		$queryGroupesAffiches = sql_select('id_groupe, nom', 'spip_asso_groupes', 'affichage>0', '', 'affichage');
