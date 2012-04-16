@@ -40,9 +40,9 @@ function exec_compte_resultat()
 		// pas de sommes de synthes puisque tous les totaux sont dans la zone centrale ;-
 		// datation et raccourcis
 		icones_association(array('comptes', "exercice=$exercice"), array(
+			'encaisse_titre_general' => array('finances-24.png', 'encaisse', "exercice=$exercice"),
 			'cpte_bilan_titre_general' => array('finances-24.png', 'bilan', "exercice=$id_exercice"),
 #			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$id_exercice"),
-			'encaisse' => array('finances-24.png', 'encaisse', "exercice=$exercice"),
 		));
 		// elements communs aux requetes
 		if ($plan) {

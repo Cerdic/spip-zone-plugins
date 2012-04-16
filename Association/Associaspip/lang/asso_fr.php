@@ -729,13 +729,16 @@ Commentaire: @commentaire@
 	'cpte_res_export_exercice' => 'Exercice : @titre@',
 	'cpte_res_export_page' => 'Page : @numero@',
 	# Comptes de Bilan
-	'cpte_bilan_titre_general' => 'Compte de Bilan',
+	'cpte_bilan_titre_general' => 'Bilan',
 	'cpte_bilan_bouton_voir' => 'Voir',
 	'cpte_bilan_titre_actifs' => 'ACTIFS',
 	'cpte_bilan_titre_passifs' => 'PASSIFS',
 	'cpte_bilan_total_actifs' => 'Total des Actifs',
 	'cpte_bilan_total_passifs' => 'Total des Passifs',
 	'cpte_bilan_mode_exportation' => 'Exporter le Compte de Bilan en ',
+	# Encaisse
+	'encaisse_titre_general' => 'Encaisse',
+	'encaisse_total_general' => 'Total Encaisse',
 	# annexe
 	'annexe_titre_general' => 'Annexe',
 	# Verifications
