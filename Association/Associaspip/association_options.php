@@ -657,7 +657,7 @@ function totauxinfos_effectifs($legende='',$table_textes,$table_nombres,$decimal
 function totauxinfos_montants($legende='',$somme_recettes=0,$somme_depenses=0)
 {
 	$res = '<table width="100%" class="asso_infos">';
-	$res .= '<caption>'. _T('asso:totaux_montants', array('de_par'=>_T("local:$legende"))) .'</caption><tbody>';
+	$res .= '<caption>'. _T('asso:totaux_montants', array('de_par'=>_T("local:$legende"))) .'</caption><tbody>';Filtre
 	if ($somme_recettes) {
 		$res .= '<tr class="impair">'
 		. '<th class="entree">'. _T('asso:bilan_recettes') .'</th>'
@@ -679,6 +679,7 @@ function totauxinfos_montants($legende='',$somme_recettes=0,$somme_depenses=0)
 	}
 	return $res.'</tbody></table>';
 }
+
 // pour executer les squelettes comportant la balise Meta
 include_spip('balise/meta');
 // charger les metas donnees
@@ -688,6 +689,16 @@ $inc_meta('association_metas');
 // pouvoir utiliser les fonctions de coordonnees comme filtre
 if (test_plugin_actif('COORDONNEES')) {
 	include_spip('inc/association_coordonnees');
+}
+
+// Pour construire des menu avec SELECTED
+function association_mySel($varaut,$variable, $option=NULL)
+{
+	if function_exists('mySel') //@ http://doc.spip.org/@mySel
+		return mySel($varaut, $variable, $option);
+	// la fonction mySel n'existe plus en SPIP 3 donc on la recree
+	$res = ' value="'.$varaut.'"'. (($variable==$varaut) ? ' selected="selected"' : '');
+	return  (!isset($option) ? $res : "<option$res>$option</option>\n");
 }
 
 ?>
