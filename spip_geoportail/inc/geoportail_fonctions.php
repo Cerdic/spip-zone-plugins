@@ -141,8 +141,15 @@ function geoportail_affiche_milieu($flux)
 	}
 	// Documents (utile avec le plugin mediatheque)
 	else if ($exec == 'documents_edit' && $GLOBALS['meta']['geoportail_geodocument']) 
-	{	$contexte['id_objet'] = $flux['args']['id_document'];
+	{	$id_document = $contexte['id_objet'] = $flux['args']['id_document'];
 		$contexte['objet'] = 'document';
+		$contexte['deplier'] = _request('deplier')? " ":"";;
+		// Rechercher le georef dans le fichier (s'il existe)...
+		include_spip('inc/geoupload');
+		$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
+		if ($document['distant'] != 'oui' && geoportail_get_coord(_DIR_IMG.$document['fichier'],$document['extension'],$lon,$lat))
+		{	$contexte['pos_fichier'] = "$lon,$lat,12";
+		}
 	}
 	// Mots
 	else if ($exec == 'mots_edit' && $GLOBALS['meta']['geoportail_geomot']) 
@@ -172,7 +179,7 @@ function geoportail_affiche_milieu($flux)
 	if ($contexte['id_objet'])
 	{	$flux['data'] .= 
 		debut_cadre_enfonce(_DIR_PLUGIN_GEOPORTAIL."img/punaise.png", true, "", 
-			"<a id=carto href=\"javascript:geoportail_formulaire_show()\">"
+			"<a name='georef' id='carto' href=\"javascript:geoportail_formulaire_show()\">"
 			."<img class=carto_show src='".find_in_path('images/deplierhaut.gif')."' title='"._T('spip:info_deplier')."' />"
 			."<img class=carto_show style='display:none;' src='".find_in_path('images/deplierbas.gif')."' title='"._T('spip:info_deplier')."' />"
 			."</a>"
@@ -185,6 +192,43 @@ function geoportail_affiche_milieu($flux)
 	return $flux;
 }
 
+/** seulement en SPIP v.2 avec plugin mediatheque
+	idem pour les documents : afficher le lien 
+	Recherche automatique d'un georef dans le ficher (si cas geoportail_geodocument_auto)
+*/
+function geoportail_document_desc_actions($flux)
+{	if ($flux['args']['position']=='document_desc' && $GLOBALS['meta']['geoportail_geodocument'])
+	{	$id_document = $flux['args']['id_document'];
+		if (autoriser('modifier','document', $id_document))
+		{	// Georeferencement de l'objet
+			include_spip('public/geoportail_boucles');
+			$info =_T('geoportail:georef');
+			$result = spip_fetch_array(spip_query("SELECT * FROM spip_geopositions WHERE id_objet=$id_document AND objet='document'"));
+			if ($result)
+			{	$lon=$result['lon'];
+				$lat=$result['lat'];
+				$info = "(".geoportail_longitude($lon,true).", ".geoportail_latitude($lat,true).")";
+			}
+			// Rechercher le georeferencement sur le fichier
+			else if ($GLOBALS['meta']['geoportail_geodocument_auto'])
+			{	include_spip('inc/geoupload');
+				$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = ".$id_document));
+				if ($distant != 'oui' && geoportail_get_coord(_DIR_IMG.$document['fichier'],$document['extension'],$lon,$lat))
+				{	$info = "(".geoportail_longitude($lon,true).", ".geoportail_latitude($lat,true).")";
+					$id_position = sql_insert("spip_geopositions",
+							"(id_objet, objet, lon, lat, zoom, zone)",
+							"($id_document, 'document', $lon, $lat, 10, 'FXX')"
+						);
+				}
+			}
+
+			$flux['data'] .= '<br/><a style="opacity:1;" href="'
+			.generer_url_ecrire("documents_edit","id_document=$id_document&deplier=1#georef",true)
+			.'" title="'._T('geoportail:geo_document').'">'.$info.'</a>';
+		}
+	}
+	return geoportail_afficher_contenu_objet($flux);
+}
 /** seulement en SPIP v.2 
 	idem pour les documents : afficher le lien 
 	Recherche automatique d'un georef dans le ficher (si cas geoportail_geodocument_auto)

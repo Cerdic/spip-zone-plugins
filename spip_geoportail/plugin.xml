@@ -55,8 +55,14 @@ Pour visualiser des exemples d'affichage de carte Geoportail, OSM, Google Maps, 
 		<nom>affichage_final</nom>
 		<inclure>geoportail_final.php</inclure>
 	</pipeline>
-	<pipeline> <!-- seulement en SPIP v2 -->
+	<pipeline>
+		<!-- seulement en SPIP v2 -->
 		<nom>afficher_contenu_objet</nom>
+		<inclure>geoportail.php</inclure>
+	</pipeline>
+	<pipeline>
+		<!-- seulement en SPIP v2 -->
+		<nom>document_desc_actions</nom>
 		<inclure>geoportail.php</inclure>
 	</pipeline>
 	<pipeline> <!-- seulement en SPIP v2 -->
