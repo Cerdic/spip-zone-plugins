@@ -51,6 +51,10 @@
 		<inclure>formulaires/configurer_manuelsite.php</inclure>
 	</pipeline>
 	<pipeline>
+		 <nom>autoriser</nom>
+		 <inclure>inc/manuelsite_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>ieconfig_metas</nom>
 		<inclure>manuelsite_ieconfig_metas.php</inclure>
 	</pipeline>

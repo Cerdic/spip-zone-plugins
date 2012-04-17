@@ -22,6 +22,7 @@
 	<pipeline nom="affiche_droite" inclure="manuelsite_prive_pipelines.php" />
 	<pipeline nom="affiche_gauche" inclure="manuelsite_prive_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="formulaires/configurer_manuelsite.php" />
+	<pipeline nom="autoriser" inclure="inc/manuelsite_autoriser.php" />
 	<pipeline nom="ieconfig_metas" inclure="manuelsite_ieconfig_metas.php" />
 
 	<necessite nom="saisies" compatibilite="[1.9.0;[" />
@@ -30,5 +31,5 @@
 	<utilise nom="palette" compatibilite="[1.2.2;[" />
 	<utilise nom="pages" compatibilite="[0.3.5;[" />
 
-	<menu nom="configurer_manuelsite" titre="manuelsite:titre_menu" parent="menu_configuration" icone="images/manuelsite-16.png" />
+	<menu nom="manuelsite" titre="manuelsite:titre_menu" parent="menu_configuration" icone="images/manuelsite-16.png" action="configurer_manuelsite" />
 </paquet>

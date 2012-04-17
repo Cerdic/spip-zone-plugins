@@ -1,19 +1,14 @@
-[(#AUTORISER{configurer,manuelsite}|oui)
-
+#CACHE{0}
+[(#AUTORISER{configurer,manuelsite}|sinon_interdire_acces)]
 <h1 class="grostitre"><:manuelsite:titre_manuel:></h1>
-[(#SET{url,[(#URL_ECRIRE{articles,id_article=[(#CONFIG{manuelsite/id_article})]})]})]
-[(#SPIP_VERSION|>{3}|oui)
-[(#SET{url,[(#URL_ECRIRE{article,id_article=[(#CONFIG{manuelsite/id_article})]})]})]]
+[(#SET{url,[(#URL_ECRIRE{article,id_article=[(#CONFIG{manuelsite/id_article})]})]})]
 [(#CONFIG{manuelsite/id_article}|intval|>{0}|?{
 	[(#SET{texte_expl,[(#VAL{manuelsite:configurer_explication_l_article}|_T{#ARRAY{url,#GET{url},idart,#CONFIG{manuelsite/id_article}}})]})],
 	[(#SET{texte_expl,<:manuelsite:configurer_explication_un_article:>})]}
 )]
 
-<p>
-	<:manuelsite:configurer_explication{texte=#GET{texte_expl}}:>
-</p>
+<p><:manuelsite:configurer_explication{texte=#GET{texte_expl}}:></p>
 
 <div class="ajax">
 	#FORMULAIRE_CONFIGURER_MANUELSITE
 </div>
-]

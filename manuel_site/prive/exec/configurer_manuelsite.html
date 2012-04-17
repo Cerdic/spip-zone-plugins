@@ -1,1 +1,15 @@
-<INCLURE{fond=prive/squelettes/contenu/configurer_manuelsite, env} />
+#CACHE{0}
+[(#AUTORISER{configurer,manuelsite}|oui)
+<h1 class="grostitre"><:manuelsite:titre_manuel:></h1>
+[(#SET{url,[(#URL_ECRIRE{articles,id_article=[(#CONFIG{manuelsite/id_article})]})]})]
+[(#CONFIG{manuelsite/id_article}|intval|>{0}|?{
+	[(#SET{texte_expl,[(#VAL{manuelsite:configurer_explication_l_article}|_T{#ARRAY{url,#GET{url},idart,#CONFIG{manuelsite/id_article}}})]})],
+	[(#SET{texte_expl,<:manuelsite:configurer_explication_un_article:>})]}
+)]
+
+<p><:manuelsite:configurer_explication{texte=#GET{texte_expl}}:></p>
+
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_MANUELSITE
+</div>
+]
