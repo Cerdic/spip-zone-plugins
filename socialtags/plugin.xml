@@ -32,7 +32,7 @@ Le plugin Social Tags permet d'ajouter des ic&#244;nes de partage de liens vers 
 		<titre>socialtags:titre_menu</titre>
 		<url>configurer_socialtags</url>
 	</bouton>
-	<bouton id='socialtags2' parent='bando_configuration'>
+	<bouton id='socialtags2' parent='bando_squelette'>
 		<icone>prive/themes/spip/images/socialtags-16.png</icone>
 		<titre>socialtags:titre_menu</titre>
 		<url>configurer_socialtags</url>
