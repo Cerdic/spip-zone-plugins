@@ -1,0 +1,21 @@
+<paquet
+	prefix="socialtags"
+	categorie="communication"
+	version="0.9.15"
+	etat="stable"
+	compatibilite="[2.0.10;3.0.99]"
+	logo="prive/themes/spip/images/socialtags-32.png"
+	documentation="http://www.spip-contrib.net/Social-tags"
+>	
+
+	<nom>Social tags</nom>
+	<!-- Activer des boutons de partage de liens sur les réseaux sociaux. -->
+
+	<auteur>phil</auteur>
+
+	<pipeline nom="insert_head_css" action="insert_head_css" inclure="socialtags_fonctions.php" />
+	<pipeline nom="insert_head" action="insert_head" inclure="socialtags_fonctions.php" />
+	<pipeline nom="autoriser" inclure="inc/socialtags_autoriser.php" />
+
+	<menu nom="socialtags" titre="socialtags:titre_menu" parent="bando_configuration" icone="images/socialtags-16.png" action="configurer_socialtags" />
+</paquet>
