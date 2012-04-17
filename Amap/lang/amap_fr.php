@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avant_le' => 'avant le',
 
 	// C
-	'confirmation_envoi' => 'Votre mise a disposition du panier du @date_distribution@ est confimer, nous vous remercions.',
+	'confirmation_envoi' => 'Votre mise a disposition du panier du @date_distribution@ est confimée, nous vous remercions.',
 	'contenu_panier' => 'Contenu du panier',
 	'contenu_panier_explication' => 'Vous pouvez rédiger votre contenu de la même façon que dans SPIP.',
 	'creer_paniers_pour_nom' => 'Créer des paniers pour @nom@.',
