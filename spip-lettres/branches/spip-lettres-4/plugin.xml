@@ -1,7 +1,7 @@
 <plugin>
 	<nom>SPIP-Lettres</nom>
 	<auteur>[Art&#233;go->http://www.artego.fr], [C&#233;dric Morin->www.yterium.net]</auteur>
-	<version>4.7.1</version>
+	<version>4.7.8</version>
 	<version_base>4.4</version_base>
 	<etat>test</etat>
 	<licence>GPLv3</licence>
@@ -85,6 +85,10 @@
 	<pipeline>
 		<nom>styliser</nom>
 		<inclure>inc/lettres_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ieconfig_metas</nom>
+		<inclure>lettres_ieconfig_metas.php</inclure>
 	</pipeline>
 
 
