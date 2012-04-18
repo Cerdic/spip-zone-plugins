@@ -1,7 +1,7 @@
 <paquet
 	prefix="sjcycle"
 	categorie="multimedia"
-	version="2.1.0"
+	version="2.2.0"
 	etat="test"
 	compatibilite="[3.0.0-dev;3.1.99]"
 	logo="prive/themes/spip/images/sjcycle-32.png"
@@ -20,6 +20,7 @@
 	<pipeline nom="header_prive" action="insert_head" inclure="sjcycle_pipelines.php" />
 	<pipeline nom="affiche_gauche" inclure="sjcycle_prive_pipelines.php" />
 	<pipeline nom="ieconfig_metas" inclure="sjcycle_ieconfig_metas.php" />
+	<pipeline nom="autoriser" inclure="inc/sjcycle_autoriser.php" />
 
 	<necessite nom="saisies" compatibilite="[1.9.0;[" />
 	<necessite nom="YAML" compatibilite="[1.4.1;[" />
