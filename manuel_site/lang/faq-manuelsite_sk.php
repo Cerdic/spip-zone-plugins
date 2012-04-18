@@ -19,13 +19,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 -* Si l’image est prévue pour le porte-folio d’un article, ne pas dépasser 1000 pixels de large ou 600 pixels de haut.
 
 {Attention, le poids max à ne pas dépasser est de 150M sans quoi le téléchargement sera refusé}.', # NEW
-	'img_nombre' => 'Il est possible d’envoyer en un clic plusieurs photos dans un article :
--* Copier les photos choisies dans un dossier de votre disque dur
--* Les redimensionner à la bonne taille
--* Les insérer dans un fichier zip
--* Joindre ce fichier zip à l’article. A la fin du téléchargement, il vous est demandé ce que vous voulez faire du fichier, vous pouvez alors déposer par exemple toutes les photos dans le port-folio.', # NEW
+	'img_nombre' => 'Do článku sa dá do článku poslať viac fotiek jedným klikom:
+-* Vybrané fotky skopírujte do priečinka na svojom pevnom disku
+-* Upravte ich veľkosť
+-* Vytvorte z nich súbor zip
+-* Tento súbor zip pripojte k článku. Na konci sťahovania sa vás systém spýta, čo chcete so súborom urobiť, napríklad môžete všetky fotky vložiť do portfólia.',
 	'img_nombre_q' => 'Ako ľahko napĺňať portfólio?',
-	'img_ou_doc' => 'On utilise majoritairement le tag <code><imgXX|center></code> pour insérer une image dans un texte d’article. Mais si on veut aussi afficher le titre ou la description sous l’image, il faut utiliser <code><docXX|center></code>.', # NEW
+	'img_ou_doc' => 'Na vkladanie obrázkov do textu článku používa najmä tag <code><imgXX|center>.</code> Ak však chcete zobraziť pod obrázkom jeho nadpis alebo popis, použite tag <code><docXX|center>.</code>',
 	'img_ou_doc_q' => '<code><imgXX> alebo <docXX>?</code>',
 	'img_q' => 'Akú veľkosť by mala mať moja fotka?',
 
@@ -43,9 +43,9 @@ _ {Attention, la taille max d’un fichier est de 150M, soit environ une durée 
 	'son_q' => 'Ako pridať k článku súbor so zvukom?',
 
 	// T
-	'thumbsites' => 'Cliquer sur « Référencer un site » dans la rubrique {{@rubrique@}}. Renseigner l’url du site, et valider, le système va essayer de récupérer le titre, la description et une vignette du site en ligne.  Corriger le titre et la description si nécessaire. Si la vignette n’est pas générée automatiquement, faire une capture écran et l’insérer comme logo du site en 120x90 pixels.', # NEW
+	'thumbsites' => 'V rubrike {{@rubrique@}} kliknite na tlačidlo "Odkázať na stránku". Zadajte adresu stránky a potvrďte stránku; systém sa pokúsi získať názov, popis a obrázok stránky online.  Ak je to potrebné, upravte názov a popis. Ak obrázok nebol vytvorený automaticky, urobte snímku obrazovky a vložte ju ako logo stránky s rozmermi 120 x 90 pixelov.',
 	'thumbsites_q' => 'Ako vytvoriť odkaz na (inú) stránku na stránke s odkazmi?',
-	'trier' => 'Les numéros devant les titres des articles / rubriques / documents, permettent de gérer leur ordre d’affichage. La syntaxe est un nombre suivi d’un point et d’un espace', # NEW
+	'trier' => 'Čísla pred názvami článkov/rubrík/ dokumentov umožňujúce manipulovať s poradím, v akom sa zobrazí. Syntax tvorí číslo,  za ktorým nasleduje bodka a medzera',
 	'trier_q' => 'Ako nastaviť správne poradie zobrazenia článkov, rubrík alebo pripojených súborov?',
 
 	// V
@@ -54,7 +54,7 @@ _ {Attention, la taille max d’un fichier est de 150M, soit environ une durée 
 Associer le fichier créé à votre article comme un document joint, lui donner un titre, éventuellement une description et un crédit, et une taille (largeur 320, hauteur 240). Enfin placer dans le corps de votre article à l’endroit souhaité <code><docXX|center|video></code>. Un lecteur flash apparaîtra alors dans votre site public pour permettre au visiteur de lancer la vidéo.
 _ {Attention, la taille max d’un fichier est de 150M, soit environ une durée de 37.5 minutes}', # NEW
 	'video_320x240_q' => 'Ako pridať video k článku?',
-	'video_dist' => 'Si votre vidéo est hébergée sur DailyMotion, YouTube ou Viméo, dans un nouvel onglet de votre navigateur, aller sur la page de visionnage de la vidéo, et copier l’url. Dans la page d’édition de votre article cliquer sur "Ajouter une vidéo" et coller l’url. Insérer alors dans la zone texte de l’article <code><videoXX|center></code>', # NEW
+	'video_dist' => 'Ak sa vaše video nachádza na stránke DailyMotion, YouTube alebo Viméo  a máte ho na novej karte vášho prehliadača, prejdite na stránku, kde sa video nachádza a skopírujte internetovú adresu videa. Na stránke úprav svojho článku kliknite na tlačidlo "Pridať video" a prilepte jeho internetovú adresu. Potom vložte do textu článku <code><videoXX|center></code>',
 	'video_dist_q' => 'Ako k článku pridať video z dailymotion (youtube, atď.)?'
 );
 
