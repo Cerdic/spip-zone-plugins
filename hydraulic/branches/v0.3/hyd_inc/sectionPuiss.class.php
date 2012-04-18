@@ -39,37 +39,11 @@ class cSnPuiss extends acSection {
     }
 
     /**
-     * Calcul de de la variable intermédiaire u.
-     * On va le stocker dans le calcul d'alpha initialement prévu pour le circulaire
-     * @return u
+     * Calcul de Lambda (mais on garde la routine Alpha commune avec la section circulaire)
+     * @return Lambda
      */
     protected function CalcAlpha() {
-        if($this->rY > $this->oP->rYB) {
-            $rY = $this->oP->rYB;
-        }
-        else {
-            $rY = $this->rY;
-        }
-        return $rY/$this->CalcGeo('B');
-    }
-
-    /**
-     * Calcul de dérivée de l'angle Alpha de la surface libre par rapport au fond.
-     * @return du
-     */
-    protected function CalcAlphaDer() {
-        return 1./$this->CalcGeo('B');
-    }
-
-    /**
-     * Calcul de L* à partir de la largeur et de la hauteur des berges
-     * @return L*
-     */
-    private function CalcLstar() {
-        if(!isset($this->arCalcGeo['L*'])) {
-            $this->arCalcGeo['L*'] = $this->oP->rYB * pow($this->rLargeurBerge/$this->oP->rYB,1/(1-$this->rk));
-        }
-        return $this->arCalcGeo['L*'];
+        return $this->rLargeurBerge/pow($this->oP->rYB,$this->rk);
     }
 
     /**
@@ -81,7 +55,7 @@ class cSnPuiss extends acSection {
             return $this->rLargeurBerge;
         }
         else {
-            return $this->CalcLstar()*pow($this->Calc('Alpha'),$this->rk);
+            return $this->Calc('Alpha')*pow($this->rY,$this->rk);
         }
     }
 
@@ -90,12 +64,17 @@ class cSnPuiss extends acSection {
      * @return B
      */
      protected function CalcP() {
-        $n=20; /// Le nombre de partie pour le calcul de l'intégrale
-        $rP=0; /// Le périmètre à calculer
+        $n=100; /// Le nombre de partie pour le calcul de l'intégrale
+        $rLambda2 = pow($this->Calc('Alpha'),2);
+        $rP = 0; /// Le périmètre à calculer
+        $rPrevious = 0;
         for($i=1;$i<=$n;$i++) {
-            $rP += sqrt(1+pow($this->rk,2)/4*pow((2*$i-1)/(2*$n)*$this->Calc('Alpha'),2*($this->rk-1)));
+            $rCurrent = pow($this->rY*$i/$n,$this->rk)/2;
+            $rP += sqrt(pow($n,-2)+$rLambda2*pow($rCurrent-$rPrevious,2));
+            $rPrevious = $rCurrent;
         }
-        $rP *= 2 * $this->CalcLstar() / $n;
+        $rP *= 2 ;
+        return $rP;
     }
 
     /**
@@ -103,23 +82,16 @@ class cSnPuiss extends acSection {
      * @return S
      */
     protected function CalcS() {
-        return pow($this->CalcLstar(),2)*pow($this->Calc('Alpha'), $this->rk+1)/($this->rk+1);
+        return $this->Calc('Alpha')*pow($this->rY, $this->rk+1)/($this->rk+1);
     }
 
-    /**
-     * Calcul de dérivée de la surface hydraulique par rapport au tirant d'eau.
-     * @return dS
-     */
-    protected function CalcSder() {
-        return $this->CalcLstar()*$this->Calc('dAlpha')*pow($this->Calc('Alpha'),$this->rk);
-    }
 
     /**
      * Calcul de dérivée du périmètre hydraulique par rapport au tirant d'eau.
      * @return dP
      */
     protected function CalcPder() {
-        return $this->CalcLstar()*2*$this->Calc('dAlpha')*sqrt(1+pow($this->rk,2)/4*pow($this->Calc('Alpha'),2*($this->rk-1)));
+        return 2 * sqrt(1+pow($this->rk*$this->Calc('Alpha')/2,2)*pow($this->rY,2*($this->rk-1)));
     }
 
     /**
@@ -127,7 +99,7 @@ class cSnPuiss extends acSection {
      * @return dB
      */
     protected function CalcBder() {
-        return $this->CalcLstar()*$this->rk*$this->Calc('dAlpha')*pow($this->Calc('Alpha'),$this->rk-1);
+        return $this->Calc('Alpha')*$this->rk*pow($this->rY,$this->rk-1);
     }
 
     /**
@@ -135,7 +107,7 @@ class cSnPuiss extends acSection {
      * @return Distance du centre de gravité de la section à la surface libre
      */
     protected function CalcSYg() {
-        return $SYg;
+        return $this->Calc('Alpha')*pow($this->rY, $this->rk+2)/(($this->rk+1)*($this->rk+2));
     }
 
 }

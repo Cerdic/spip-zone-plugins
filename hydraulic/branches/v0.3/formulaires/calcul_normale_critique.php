@@ -251,7 +251,9 @@ function formulaires_calcul_normale_critique_traiter_dist(){
                 break;
 
             case 'FP':
-                echo 'puissance';
+                include_spip('hyd_inc/sectionPuiss.class');
+                $oSection=new cSnPuiss($oLog,$oParam,$FP_rCoef,$FP_rLargBerge);
+                break;
 
             default:
                 include_spip('hyd_inc/sectionTrapez.class');
@@ -290,7 +292,7 @@ function formulaires_calcul_normale_critique_traiter_dist(){
         }
     }
     else {
-        $tVarCal = array('Hs', 'Hsc', 'B', 'P', 'S', 'R', 'V', 'Fr', 'Yc', 'Yn', 'Yf', /*'Yt',*/ 'Yco', 'J', /*'I-J',*/ 'Imp', 'Tau0');
+        $tVarCal = array('Hs', 'Hsc', 'B', 'P', 'S', 'R', 'V', 'Fr', 'Yc', 'Yn', 'Yf', 'Yt', 'Yco', 'J', 'I-J', 'Imp', 'Tau0');
     }
 
     $max += $pas/2;
@@ -385,12 +387,12 @@ function formulaires_calcul_normale_critique_traiter_dist(){
      /***************************************************************************
     *                        Affichage du graphique
     ****************************************************************************/
-		if(is_infinite($result[0])){
-			unset($result[0]);
-			$result = array_values($result);
-			unset($tabAbs[0]);
-			$tabAbs = array_values($tabAbs);
-		}
+        if(is_infinite($result[0])){
+            unset($result[0]);
+            $result = array_values($result);
+            unset($tabAbs[0]);
+            $tabAbs = array_values($tabAbs);
+        }
 
         $oGraph = new cGraph();
         // Ligne Courbe normale critique
@@ -460,7 +462,7 @@ function formulaires_calcul_normale_critique_traiter_dist(){
             $par++;
         }
 
-		$lib_datas['rYB'] = $oSection->oP->rYB;
+        $lib_datas['rYB'] = $oSection->oP->rYB;
         $dessinSection = new dessinSection(250, 200, $ncTypeSection, $oSection, $lib_datas);
         $echo.= $dessinSection->GetDessinSection();
     }

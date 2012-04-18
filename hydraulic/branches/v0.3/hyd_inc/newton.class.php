@@ -27,11 +27,23 @@ abstract class acNewton {
     protected $rTol;
     protected $rDx;
     private $iCpt=0;
-    private $iCptMax=100;
+    private $iCptMax=50;
     private $rRelax=1; /// Coefficient de relaxation
     private $rFnPrec=0; /// Mémorisation du Fn précédent pour détecter le changement de signe
     private $iOscil=0; /// Nombre de changement de signe de Delta
     private $oLog;
+
+
+    /**
+     * Constructeur de la classe
+     * @param $oSn Section sur laquelle on fait le calcul
+     * @param $oP Paramètres supplémentaires (Débit, précision...)
+     */
+    function __construct(cParam $oP) {
+        $this->rTol=$oP->rPrec;
+        $this->rDx=$oP->rPrec/10;
+    }
+
 
     /**
      * Calcul de la fonction f(x) dont on cherche le zéro.
@@ -46,7 +58,7 @@ abstract class acNewton {
      * @return Calcul de la fonction
      */
     protected function CalcDer($x) {
-        spip_log('Newton:CalcDer $rX='.$x,'hydraulic');
+        //~ spip_log('Newton:CalcDer $rX='.$x,'hydraulic');
         return ($this->CalcFn($x+$this->rDx)-$this->CalcFn($x-$this->rDx))/(2*$this->rDx);
     }
 
@@ -67,13 +79,13 @@ abstract class acNewton {
     public function Newton($rX) {
         $this->iCpt++;
         $rFn=$this->CalcFn($rX);
-        //echo('</br>Newton '.$this->iCpt.' Relax='.$this->rRelax.'- f('.$rX.') = '.$rFn);
+        //~ echo('</br>Newton '.$this->iCpt.' Relax='.$this->rRelax.'- f('.$rX.') = '.$rFn);
         if($this->FuzzyEqual($rFn) || $this->iCpt >= $this->iCptMax) {
             return $rX;
         }
         else {
             $rDer=$this->CalcDer($rX);
-            //echo(' - f\' = '.$rDer);
+            //~ echo(' - f\' = '.$rDer);
             if($rDer!=0) {
 /*
                 if($this->rRelax > 1) {
@@ -90,7 +102,6 @@ abstract class acNewton {
                     elseif($this->nOscil>2) {
                         // On est dans le cas d'une oscillation autour de la solution
                         // On réduit le coefficient de relaxation
-                        //echo '</br> ******  Delta='.$Delta.' DeltaPrec='.$this->rDelta;
                         $this->rRelax *= 0.5;
                     }
                 }
