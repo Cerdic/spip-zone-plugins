@@ -35,15 +35,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_creer_champ_extra' => 'Vytvoriť nové doplnkové pole',
-	'info_description_champ_extra' => 'Cette page permet de gérer des champs extras, 
-						c\'est à dire des champs supplémentaires dans les tables de SPIP,
-						pris en compte dans les formulaires d\'édition.', # NEW
-	'info_description_champ_extra_creer' => 'Vous pouvez créer de nouveaux champs qui s\'afficheront alors
-						sur cette page, dans le cadre «Liste des champs extras», ainsi que dans les formulaires.', # NEW
-	'info_description_champ_extra_presents' => 'Enfin, si des champs existent déjà dans votre base de données,
-						mais ne sont pas déclarés (par un plugin ou un jeu de squelettes), vous
-						pouvez demander à ce plugin de les gérer. Ces champs, s\'il y en a,
-						apparaissent dans un cadre «Liste des champs présents non gérés».', # NEW
+	'info_description_champ_extra' => 'Táto stránka vám umožňuje riadiť doplnkové polia, 
+						čiže vlastné polia v tabuľkách v SPIPe,
+						ktoré sa nachádzajú v redakčných formulároch.',
+	'info_description_champ_extra_creer' => 'Môžete vytvoriť nové polia, ktoré sa zobrazia
+						 na tejto stránke v ráme s názvom "Zoznam doplnkových polí" a vo všetkých formulároch.',
+	'info_description_champ_extra_presents' => 'Napokon, ak už polia vo vašej databáze existujú,
+  ale nie sú nahlásené (zásuvným modulom alebo šablónami), môžete o ich riadenie
+  požiadať zásuvný modul. Tieto polia, ak existujú,
+  sa zobrazia v "Zozname polí, ktoré sú momentálne neriadené".',
 	'info_modifier_champ_extra' => 'Upraviť doplnkové pole',
 	'info_nouveau_champ_extra' => 'Nové doplnkové pole',
 	'info_saisie' => 'Vstup:',
@@ -82,25 +82,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_elements' => '@nb@ objektov',
 
 	// P
-	'precisions_pour_attention' => 'Pour quelque chose de très important à indiquer.
-		À utiliser avec beaucoup de modération !
-		Peut être une chaîne de langue «plugin:chaine».', # NEW
-	'precisions_pour_class' => 'Ajouter des classes CSS sur l\'élément,
-		séparées par un espace. Exemple : "inserer_barre_edition" pour un bloc
-		avec le plugin Porte Plume', # NEW
-	'precisions_pour_datas' => 'Certains types de champ demandent une liste des valeurs acceptées : indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par défaut. La description peut être une chaîne de langue.', # NEW
-	'precisions_pour_explication' => 'Vous pouvez donner plus d\'informations concernant la saisie. 
-		Peut être une chaîne de langue «plugin:chaine».', # NEW
+	'precisions_pour_attention' => 'Na označenie niečoho, čo je veľmi dôležité.
+		Používajte s mierou!
+		Môže byť jazykový reťazec "plugin:chaine".',
+	'precisions_pour_class' => 'Pridajte do objektu triedy CSS
+		a oddeľte ich medzerou. Napríklad: "inserer_barre_edition" pre blok
+		so zásuvným modulom Porte Plume',
+	'precisions_pour_datas' => 'Niektoré typy polí si vyžadujú zoznam akceptovaných hodnôt: každú zadajte na riadok, za ktorým dáte čiarku a popis.  Prázdny riadok znamená predvolenú hodnotu. Popis môže byť jazykový reťazec.',
+	'precisions_pour_explication' => 'Môžete zadať viac informácií o vstupe 
+		Môže byť jazykový reťazec "plugin:chaine".',
 	'precisions_pour_label' => 'Môže byť jazykový reťazec «plugin:chaine».',
-	'precisions_pour_li_class' => 'Ajouter des classes CSS sur le &lt;li&gt; parent,
-		séparées par un espace. Exemple : "haut" pour avoir toute la
-		largeur sur le formulaire', # NEW
+	'precisions_pour_li_class' => 'Pridajte triedy CSS k nadradenému &lt;li&gt;
+		a oddeľte ich medzerami. Napríklad: "zväčšenie" na zväčšenie
+		šírky celého formulára',
 	'precisions_pour_nouvelle_saisie' => 'Umožňuje zmeniť typ vstupu, ktorý sa použije pre toto pole',
-	'precisions_pour_nouvelle_saisie_attention' => 'Attention cependant, un changement de type de saisie perd les options de configuration de la saisie actuelle qui ne sont pas communes avec la nouvelle saisie sélectionnée !', # NEW
+	'precisions_pour_nouvelle_saisie_attention' => 'Pozor, ak zmeníte typ vstupu, možnosti nastavení aktuálneho vstupu, ktoré sa nepoužívajú pri vybranom vstupe, sa stratia!',
 	'precisions_pour_rechercher' => 'Zaradiť toto pole do vyhľadávača?',
-	'precisions_pour_rechercher_ponderation' => 'SPIP pondère une recherche dans une colonne par un coefficient de ponderation.
-		Celui-ci permet de mettre en avant les colonnes les plus pertinentes (titre par exemple) par rapport à d\'autres qui le sont moins.
-		Le coefficient appliqué sur les champs extras est par défaut 2. Pour vous donner un ordre d\'idée, notez que SPIP utilise 8 pour le titre, 1 pour le texte.', # NEW
+	'precisions_pour_rechercher_ponderation' => 'SPIP odváži vyhľadávanie v stĺpci príslušným koeficientom.
+		To umožňuje zohľadniť význam najdôležitejších stĺpcov (napríklad názvu) v porovnaní s ostatnými stĺpcami, ktoré nie sú také dôležité.
+		Predvolený koeficient, ktorý sa použije na doplnkové polia, je 2. Aby ste mali predstavu, všimnite si, že SPIP používa koeficient 8 pre názov, 1 pre text.',
 	'precisions_pour_restrictions_branches' => 'Identifikátory vetiev, ktoré sa majú obmedziť (oddeľovač ":")',
 	'precisions_pour_restrictions_groupes' => 'Identifikátory skupín, ktoré sa majú obmedziť (oddeľovač ":")',
 	'precisions_pour_restrictions_secteurs' => 'Identifikátory sektorov, ktoré sa majú obmedziť (oddeľovač ":")',
