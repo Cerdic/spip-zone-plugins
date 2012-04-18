@@ -20,8 +20,8 @@ function inc_tradlang_sauvegarde_module_dist($module,$langue,$dir_lang=false){
 	include_spip('inc/flock');
 
 	if(!$dir_lang){
-		$dir_lang = _DIR_VAR.'/cache-lang/'.$module;
-		if(!is_dir(_DIR_VAR.'/cache-lang/')){
+		$dir_lang = _DIR_VAR.'cache-lang/'.$module;
+		if(!is_dir(_DIR_VAR.'cache-lang/')){
 			sous_repertoire(_DIR_VAR,'cache-lang');
 		}
 	}

@@ -31,6 +31,7 @@ function action_tradlang_exporter_langue_dist(){
 			header("Cache-Control: no-cache, must-revalidate");
 			header("Pragma: no-cache"); 
 			readfile($fichier);
+			die();
 		}else{
 			include_spip('inc/minipres');
 			echo minipres();
