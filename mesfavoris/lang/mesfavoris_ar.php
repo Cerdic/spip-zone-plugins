@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajoute_le' => 'Ajouté le', # MODIF
 
 	// C
-	'configurer' => 'Configurer', # NEW
+	'configurer' => 'إعداد',
 
 	// L
 	'label_style_formulaire16' => 'Petit (16px)', # NEW
