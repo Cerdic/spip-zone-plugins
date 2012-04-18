@@ -53,7 +53,12 @@
 		<inclure>produits_ieconfig_metas.php</inclure>
 	</pipeline>
 
-	<bouton id='configurer_produits' parent="bando_configuration">
+	<bouton id='configurer_produits' parent="configuration">
+		<titre>produits:produits_titre</titre>
+		<icone>prive/themes/spip/images/produits-24.png</icone>
+		<url>configurer_produits</url>
+	</bouton>
+	<bouton id='configurer_produits2' parent="bando_configuration">
 		<titre>produits:produits_titre</titre>
 		<icone>prive/themes/spip/images/produits-16.png</icone>
 		<url>configurer_produits</url>
