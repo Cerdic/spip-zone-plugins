@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_comparaison_grand_egal' => 'The value must be greater than or equal to the field "@nom_champ@"',
 	'erreur_comparaison_petit' => 'The value must be lower than the field "@nom_champ@"',
 	'erreur_comparaison_petit_egal' => 'The value must be lower than or equal to the field "@nom_champ@"',
-	'erreur_couleur' => 'Le code couleur n\'est pas valide.', # NEW
+	'erreur_couleur' => 'The color code is invalid.',
 	'erreur_date' => 'The date is invalid.',
 	'erreur_date_format' => 'The date format is invalid.',
 	'erreur_decimal' => 'The value must be a decimal number.',
@@ -47,9 +47,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'normaliser_option_date_en_datetime' => '"Datetime" format (for SQL)',
 
 	// O
-	'option_couleur_normaliser_label' => 'Normaliser le code couleur ?', # NEW
-	'option_couleur_type_hexa' => 'Code couleur au format héxadécimal', # NEW
-	'option_couleur_type_label' => 'Type de vérification à effectuer', # NEW
+	'option_couleur_normaliser_label' => 'Normalize the color code?',
+	'option_couleur_type_hexa' => 'Color code in hexadecimal format',
+	'option_couleur_type_label' => 'Checking type to be made',
 	'option_decimal_nb_decimales_label' => 'Number of decimal places',
 	'option_email_disponible_label' => 'Available address',
 	'option_email_disponible_label_case' => 'Check that the address has not already be used by another user',
@@ -79,7 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'type_couleur' => 'Colour',
-	'type_couleur_description' => 'Vérifie que la valeur est un code couleur.', # NEW
+	'type_couleur_description' => 'Check if the value is a color code.',
 	'type_date' => 'Date',
 	'type_date_description' => 'Check that the value is date in the DD/MM/YYYY format. The separator character can be anything (".", "/", etc).',
 	'type_decimal' => 'Decimal number',
