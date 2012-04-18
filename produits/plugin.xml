@@ -2,12 +2,12 @@
 	<nom>Produits</nom>
 	<auteur>[Les D&#233;veloppements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.2.0</version>
+	<version>0.3.0</version>
 	<version_base>0.2</version_base>
 	<etat>dev</etat>
     <slogan>Creer des produits &#224; vendre</slogan>
 	<description>Ce plugin permet la cr&#233;ation de produits commerciaux dans l'arborescence du site, c'est-&#224;-dire rang&#233;s dans les rubriques comme les articles. Un produit est un objet mat&#233;riel ou un service ayant un prix. La vente en ligne n'est pas le but de ce plugin, il ne s'occupe que de l'ajout de ce nouvel objet &#233;ditorial.</description>
-	<icon>images/produits-128.png</icon>
+	<icon>prive/themes/spip/images/produits-32.png</icon>
 	<categorie>divers</categorie>
 	<traduire gestionnaire="salvatore" module="produits" reference="fr" />
 	
@@ -48,20 +48,23 @@
 		<nom>pre_boucle</nom>
 		<inclure>produits_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>ieconfig_metas</nom>
+		<inclure>produits_ieconfig_metas.php</inclure>
+	</pipeline>
 
 	<bouton id='configurer_produits' parent="bando_configuration">
 		<titre>produits:produits_titre</titre>
-		<icone>images/produits-16.png</icone>
+		<icone>prive/themes/spip/images/produits-16.png</icone>
 		<url>configurer_produits</url>
 	</bouton>
 	<bouton id='produit_creer' parent="outils_rapides">
 		<titre>produits:produit_bouton_ajouter</titre>
-		<icone>images/produits-16.png</icone>
+		<icone>prive/themes/spip/images/produits-16.png</icone>
 		<url>produit_edit</url>
 		<args>nouveau=oui&amp;id_rubrique=@id_rubrique@</args>
 	</bouton>
-	
-	
+
 	<necessite id="SPIP" version="[2.1.8;2.1.99]" />
 	<necessite id="spip_bonux" version="[2.2.17;]" />
 	<necessite id="saisies" version="[1.9.0;]" />

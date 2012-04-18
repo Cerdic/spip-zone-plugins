@@ -21,7 +21,7 @@ function produits_affiche_enfants($flux){
 		);
 	
 		if (autoriser('creerproduitdans', 'rubrique', $flux['args']['id_rubrique'])){
-			$flux['data'] .= icone_inline(_T('produits:produit_bouton_ajouter'), generer_url_ecrire('produit_edit', 'nouveau=oui&id_rubrique='.$flux['args']['id_rubrique']), find_in_path('images/produits-24.png'), 'creer.gif', 'right');
+			$flux['data'] .= icone_inline(_T('produits:produit_bouton_ajouter'), generer_url_ecrire('produit_edit', 'nouveau=oui&id_rubrique='.$flux['args']['id_rubrique']), find_in_path('prive/themes/spip/images/produits-24.png'), 'creer.gif', 'right');
 		}
 	}
 	
