@@ -8,9 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_1' => 'Nastavenie zásuvného modulu Social tags',
-	'cfg_2' => 'Tu si môžete vybrať, s ktorými stránkami budete zdieľať svoje články.',
-	'cfg_3' => 'Dokumentácia',
 	'cfg_activer_javascript' => 'SVP, prosím aktivovať Javascript.',
 	'cfg_badge_fb' => 'Odznak/Widget pre Facebook',
 	'cfg_badge_fb_existe' => 'Ak máte odznak Facebooku (<a href="http://www.facebook.com/facebook-widgets/" class="spip_out">pomoc na stránke FB</a>), uveďte jeho obsah v JS alebo v HTML.',
@@ -70,8 +67,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_noisette_facebook_like_box' => 'Tlačidlo "Páči sa mi to"',
 
 	// T
+	'titre_menu' => 'Social tags', # NEW
 	'titre_mon_badge_facebook' => 'Môj odznak pre facebook',
-	'titre_perso' => 'Vlastný názov',
 	'titre_sur_facebook' => 'Na Facebook'
 );
 

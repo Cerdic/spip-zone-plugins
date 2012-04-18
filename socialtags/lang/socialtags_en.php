@@ -8,9 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_1' => 'Social tags plugin configuration',
-	'cfg_2' => 'Ici vous pouvez choisir les sites de partages de vos articles.',
-	'cfg_3' => 'Documentation',
 	'cfg_activer_javascript' => 'Please activate Javascript.',
 	'cfg_badge_fb' => 'Facebook Badge/Widget',
 	'cfg_badge_fb_existe' => 'If you have a Facebook Badge (<a href="http://www.facebook.com/facebook-widgets/" class="spip_out">see help on the Facebook site</a>), specify its contents below, either as JS or as HTML.',
@@ -39,39 +36,39 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'description_noisette_badge_facebook' => 'Display the Facebook badge defined in the configuration page',
 	'description_noisette_facebook_like' => 'Display the <b>Like</b> or <b>Recommand</b> and eventually <b>Send</b> button',
-	'description_noisette_facebook_like_box' => 'Affiche la boîte Facebook <b>J\'aime</b>. Elle affiche notamment le nombre de fans aimant la page Facebook référencée', # NEW
+	'description_noisette_facebook_like_box' => 'Displays the Facebook <b>I like</b> box. It displays the number of fans of the Facebook referenced page',
 
 	// N
 	'noisette_action_like' => 'Like',
 	'noisette_action_recommand' => 'Recommand',
 	'noisette_colorscheme_dark' => 'Dark background',
-	'noisette_colorscheme_light' => 'Fond clair', # NEW
+	'noisette_colorscheme_light' => 'Light background',
 	'noisette_label_action' => 'Action',
 	'noisette_label_afficher_send' => 'Send button?',
 	'noisette_label_afficher_titre_noisette' => 'Display a title?',
-	'noisette_label_border_color' => 'Saisir le code couleur de la bordure de la boîte (au format #123ABC)', # NEW
-	'noisette_label_colorscheme' => 'Apparence', # NEW
-	'noisette_label_header' => 'Afficher l\'entête de la boîte « Retrouvez-nous sur Facebook » ?', # NEW
+	'noisette_label_border_color' => 'Enter the color code of the border of the box (format #123ABC)',
+	'noisette_label_colorscheme' => 'Appearance',
+	'noisette_label_header' => 'Display the header of the box "Join us on Facebook"?',
 	'noisette_label_height' => 'Height',
 	'noisette_label_href' => 'Facebook page URL',
 	'noisette_label_layout' => 'Text',
 	'noisette_label_niveau_titre' => 'Choose the title level',
 	'noisette_label_show_faces' => 'Display profile photos below the button?',
-	'noisette_label_stream' => 'Afficher le flux d\'articles de la page Facebook ?', # NEW
+	'noisette_label_stream' => 'Display the articles feed of the Facebook page?',
 	'noisette_label_titre_noisette' => 'Title:',
 	'noisette_label_titre_noisette_perso' => 'If custom title:',
 	'noisette_label_width' => 'Width',
-	'noisette_layout_box_count' => 'Total uniquement au-dessus', # NEW
-	'noisette_layout_button_count' => 'Total uniquement à droite', # NEW
-	'noisette_layout_standard' => 'Texte entier à droite', # NEW
+	'noisette_layout_box_count' => 'Total only on top',
+	'noisette_layout_button_count' => 'Total only on the right',
+	'noisette_layout_standard' => 'Full text on the right',
 	'noisette_titre_perso' => 'Custom title',
 	'nom_noisette_badge_facebook' => 'Facebook badge',
 	'nom_noisette_facebook_like' => 'Facebook-like button',
 	'nom_noisette_facebook_like_box' => 'Facebook-like box',
 
 	// T
+	'titre_menu' => 'Social tags', # NEW
 	'titre_mon_badge_facebook' => 'My Facebook badge',
-	'titre_perso' => 'Custom title',
 	'titre_sur_facebook' => 'On Facebook'
 );
 
