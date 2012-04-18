@@ -41,10 +41,10 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'action_rapide' => 'Acción rápida, unicamente se sabe do que fai!',
 	'action_rapide_non' => 'Acción rápida, dispoñible tras a activación desta utilidade :',
 	'admins_seuls' => 'Só para administradores/as',
-	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
+	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de ton site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
 
-Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.', # NEW
-	'aff_tout:nom' => 'Affiche tout', # NEW
+Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et t\'évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de tes squelettes.',
+	'aff_tout:nom' => 'Affiche tout',
 	'attente' => 'En espera...',
 	'auteur_forum:description' => 'Invite a todos os autores de mensaxes públicas a fornecer (cando menos cunha letra!) un nome e/ou un correo co fin de evitar as colaboracións totalmente anónimas. Esta utilidade procede a facer unha verificación JavaScript sobre a caixa de correo do visitante.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
 {Atención : Escoller a terceira opción anula as dúas primeiras. Cómpre verificar que os formularios do seu esqueleto sexan compatibles con esta ferramenta.}', # MODIF
@@ -59,7 +59,7 @@ Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [
 @puce@ Que estados de autores poden ser listados nesta páxina?
 [[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]', # MODIF
 	'auteurs:nom' => 'Páxina de autores',
-	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML <br />.[[%alinea%]][[->%alinea2%]]', # NEW
+	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML <br />.[[%alinea%]][[->%alinea2%]]',
 	'autobr:nom' => 'Retours de ligne automatiques', # NEW
 	'autobr_non' => 'À l\'intérieur des balises &lt;alinea>&lt;/alinea>', # NEW
 	'autobr_oui' => 'Articles et messages publics (balises @BALISES@)', # NEW

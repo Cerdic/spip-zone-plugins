@@ -218,36 +218,22 @@ N.B. by changing the second parameter you will lose any standard SPIP styles ass
 	'couleurs:aide' => 'Text colouring: <b>[coul]text[/coul]</b>@fond@ with <b>coul</b> = @liste@',
 	'couleurs:description' => 'Provides short-cuts to add colours to any text on the site (articles, news items, titles, forums, ...) by using bracket tags as short-cuts: <code>[colour]text[/colour]</code>.
 
-
-
 Here are two identical examples to change the colour of some text:@_CS_EXEMPLE_COULEURS2@
-
-
 
 In the same way, to change the background colour if the following option allows:@_CS_EXEMPLE_COULEURS3@
 
-
-
 [[%couleurs_fonds%]]
-
 [[%set_couleurs%]][[-><set_couleurs valeur="1">%couleurs_perso%</set_couleurs>]]
-
 @_CS_ASTER@The format of these personalised tags have to be of existing colours or defined pairs "tag=colour", separated by commas. Examples: "grey, red", "smooth=yellow, strong=red", "low=#99CC11, high=brown" but also "grey=#DDDDCC, red=#EE3300". For the first and last examples, the allowed tags are: <code>[grey]</code> and <code>[red]</code> (<code>[fond grey]</code> and <code>[fond red]</code> if background colours are allowed).', # MODIF
 	'couleurs:nom' => 'Coloured text',
 	'couleurs_fonds' => ', <b>[fond coul]text[/coul]</b>, <b>[bg coul]text[/coul]</b>',
 	'cs_comportement:description' => '@puce@ {{Logs.}} Record a lot of information about the functions executed by the Swiss Army Knife plugin in the {spip.log} files which can be found in this directory: {<html>@_CS_DIR_TMP@</html>}[[%log_couteau_suisse%]]
 
-
-
-@puce@ {{SPIP options.}} SPIP sorts and applies the plugins in a particular order. To be sure that the Swiss Army Knife is at the top and is thereby able to have priority control over  certain SPIP options, tick the following checkbox option. If the permissions on your server allow it, the file {<html>@_CS_FILE_OPTIONS@</html>} will be modified to include {/html>@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php</html>}.
+@puce@ {{SPIP options.}} SPIP sorts and applies the plugins in a particular order. To be sure that the Swiss Army Knife is at the top and is thereby able to have priority control over  certain SPIP options, tick the following checkbox option. If the permissions on your server allow it, the file {<html>@_CS_FILE_OPTIONS@</html>} will be modified to include {<html>@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php</html>}.
 
 [[%spip_options_on%]]@_CS_FILE_OPTIONS_ERR@
 
-
-
 @puce@ {{External requests.}} The Swiss Army Knife regularly checks for new versions of itself and shows any available updates on its configuration page.  In addition, this plugin contains certain tools which may be required for importing remote libraries.
-
-
 
 If the external requests involved do not work from your server, or you wish to lock down a possible security weakness, check these boxes to turn them off.[[%distant_off%]][[->%distant_outils_off%]]', # MODIF
 	'cs_comportement:nom' => 'Behaviour of the Swiss Army Knife',
@@ -262,28 +248,16 @@ If the external requests involved do not work from your server, or you wish to l
 	// D
 	'decoration:aide' => 'Décoration: <b>&lt;tag&gt;test&lt;/tag&gt;</b>, with<b>tag</b> = @liste@', # MODIF
 	'decoration:description' => 'New, configurable styles in your text using angle brackets and tags. Example: 
-
-<mytag>texte</mytag> or : <mytag/>.<br />Define below the CSS styles you need. Put each tag on a separate line, using the following syntaxes:
-
+&lt;mytag&gt;my text&lt;/mytag&gt; or : &lt;mytag/&gt;.<br />Define below the CSS styles you need. Put each tag on a separate line, using the following syntaxes:
 - {type.mytag = my CSS style}
-
 - {type.mytag.class = my CSS class}
-
 - {type.mytag.lang = my language (e.g. en)}
-
 - {unalias = mytag}
 
-
-
 The parameter {type} above can be one of three values:
-
 - {span}: inline tag 
-
 - {div}: block element tag
-
 - {auto}: tag chosen automatically by the plugin
-
-
 
 [[%decoration_styles%]]', # MODIF
 	'decoration:nom' => 'Decoration',
@@ -414,15 +388,9 @@ N.B. in forums, petitions, RSS feeds, etc., JavaScript is <b>always</b> made sec
 	'fonds' => 'Backgrounds:',
 	'forcer_langue:description' => 'Forces the language context for multilingual templates which have a form or language menu able to manage the language cookie.
 
-
-
 Technically, this tool does this:
-
 - deactivates the search for a template matching the object\'s language.
-
 - deactivates the automatic <code>{lang_select}</code> criterion on SPIP objects (articles, news items, sections, etc.).
-
-
 
 This means that multi blocks will always displayed in the language requested by the visitor.', # MODIF
 	'forcer_langue:nom' => 'Force language',
@@ -436,11 +404,11 @@ This means that multi blocks will always displayed in the language requested by 
 
 
 
-@puce@ You can indicate the maximum number of links to create in a text for each word. A null or negative value will mean that all instances of the words will be processed. [[%glossaire_limite% par mot-clé]]
+@puce@ You can indicate the maximum number of links to create in a text for each word. A null or negative value will mean that all instances of the words will be processed. [[%glossaire_limite% per keyword]]
 
 
 
-@puce@ There is a choice of two options for generating the small window which appears for the mouseover or hover event. [[%glossaire_js%]]', # MODIF
+@puce@ There is a choice of two options for generating the small window which appears for the mouseover or hover event. [[%glossaire_js%]][[->%glossaire_abbr%]]', # MODIF
 	'glossaire:nom' => 'Internal glossary',
 	'glossaire_abbr' => 'Ignorer les balises <code><abbr></code> et <code><acronym></code>', # NEW
 	'glossaire_css' => 'CSS solution',
@@ -500,14 +468,9 @@ To define this logo, go to the "<:titre_configuration:>" page by clicking on the
 
 	// J
 	'jcorner:description' => '"Pretty Corners" is a tool which makes it easy to change the appearance of the corners of {{coloured boxes}} on the public pages of your site. Almost anything is possible!
-
 _ See this page for examples: [->http://www.malsup.com/jquery/corner/].
 
-
-
-Make a list below of the elements in your templates which are to be rounded by using the CSS syntax (.class, #id, etc. ). Use the sign " = " to specify the jQuery command to apply, and a double slash (" // ") for any comments. If no equals sign is provided, rounded corners equivalent to <code>.ma_classe = .corner()</code> will be applied.[[%jcorner_classes%]]
-
-
+Make a list below of the elements in your templates which are to be rounded by using the CSS syntax (.class, #id, etc. ). Use the sign " = " to specify the jQuery command to apply, and a double slash (" // ") for any comments. If no equals sign is provided, rounded corners equivalent to <code>.my_class = .corner()</code> will be applied.[[%jcorner_classes%]]
 
 N.B. This tool requires the {Round Corners} jQuery plugin in order to function. The Swiss Army Knife plugin can install it for you automatically if you check this box. [[%jcorner_plugin%]]', # MODIF
 	'jcorner:nom' => 'Pretty Corners',
@@ -623,32 +586,18 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'liens_en_clair:nom' => 'Visible hyperlinks',
 	'liens_orphelins:description' => 'This tool has two functions:
 
-
-
 @puce@ {{Correct Links}}.
-
-
 
 In French texts, SPIP follows the rules of French typography and inserts a space before question and exclamation marks, and uses French-style quotation marks when appropriate. This tool prevents this from happening in URLs where such replacements are inappropriate.[[%liens_interrogation%]]
 
-
-
 @puce@ {{Orphan links}}.
-
-
 
 Systematically replaces all URLs which authors have placed in texts (especially often in forums), and which are thus not clickable, by links in the normal SPIP format. For example, {<html>www.spip.net</html>} will be replaced by: [->www.spip.net].
 
-
-
 You can choose the type of replacements used:
-
 _ • {Basic}: links such as {<html>http://spip.net</html>} (whatever protocol) and {<html>www.spip.net</html>} are replaced.
-
 _ • {Extended}: additionally links such as these are also replaced:  {<html>me@spip.net</html>}, {<html>mailto:myaddress</html>} or {<html>news:mynews</html>}.
-
 _ • {By default}: automatic replacement (from SPIP version 2.0).
-
 [[%liens_orphelins%]]', # MODIF
 	'liens_orphelins:description1' => '[[If the URL is more than %long_url% characters long, SPIP will reduce it to %coupe_url% characters]].',
 	'liens_orphelins:nom' => 'Fine URLs',

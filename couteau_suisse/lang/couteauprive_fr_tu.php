@@ -41,10 +41,10 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'action_rapide' => 'Action rapide, uniquement si tu sais ce que tu fais !',
 	'action_rapide_non' => 'Action rapide, disponible une fois cet outil activé :',
 	'admins_seuls' => 'Les administrateurs seulement',
-	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
+	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de ton site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
 
-Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.', # NEW
-	'aff_tout:nom' => 'Affiche tout', # NEW
+Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et t\'évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de tes squelettes.',
+	'aff_tout:nom' => 'Affiche tout',
 	'attente' => 'Attente...',
 	'auteur_forum:description' => 'Incite tous les auteurs de messages publics à fournir (d\'au moins d\'une lettre !) un nom et/ou un courriel afin d\'éviter les contributions totalement anonymes. Note que cet outil procède à une vérification JavaScript sur le poste du visiteur.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
 {Attention : Choisir la troisième option annule les 2 premières. Il est important de vérifier que les formulaires de ton squelette sont bien compatibles avec cet outil.}',
@@ -283,15 +283,15 @@ Cet outil peut être couplé avec « [.->sommaire] ».',
 	'distant_echoue' => 'Erreur sur le chargement distant, cet outil risque de ne pas fonctionner !',
 	'distant_inactif' => 'Fichier introuvable (outil inactif).',
 	'distant_present' => 'Fichier présent en librairie depuis le @date@.',
-	'docgen' => 'Documentation générale', # NEW
-	'docwiki' => 'Carnet d\'idées', # NEW
+	'docgen' => 'Documentation générale',
+	'docwiki' => 'Carnet d\'idées',
 	'dossier_squelettes:description' => 'Modifie le dossier du squelette utilisé. Par exemple : "squelettes/monsquelette". Tu peux inscrire plusieurs dossiers en les séparant par les deux points <html>« : »</html>. En laissant vide la case qui suit (ou en tapant "dist"), c\'est le squelette original "dist" fourni par SPIP qui sera utilisé.[[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'Dossier du squelette',
 
 	// E
 	'ecran_activer' => 'Activer l\'écran de sécurité',
 	'ecran_conflit' => 'Attention : le fichier statique «@file@» peut entrer en conflit. Choisis ta méthode de protection !',
-	'ecran_conflit2' => 'Note : un fichier statique «@file@» a été détecté et activé. Le Couteau Suisse ne pourra le mettre à jour ou le configurer.', # MODIF
+	'ecran_conflit2' => 'Note : un fichier statique «@file@» a été détecté et activé. Le Couteau Suisse ne pourra le mettre à jour ou le configurer.',
 	'ecran_ko' => 'Ecran inactif !',
 	'ecran_maj_ko' => 'La version {{@n@}} de l\'écran de sécurité est disponible. Actualise le fichier distant de cet outil.',
 	'ecran_maj_ko2' => 'La version @n@ de l\'écran de sécurité est disponible. Tu peux actualiser le fichier distant de l\'outil « [.->ecran_securite] ».',
@@ -309,8 +309,7 @@ En cas de mise à jour officielle, actualise le fichier distant associé (clique
 - Version du fichier local : ',
 	'ecran_securite:nom' => 'Ecran de sécurité',
 	'effaces' => 'Effacés',
-	'en_travaux:description' => 'Pendant une phase de maintenance, permet d\'afficher un message personalisable sur tout le site public, éventuellement la partie privée.
-[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1">%avertir_travaux%</admin_travaux>]][[%prive_travaux%]]', # MODIF
+	'en_travaux:description' => 'Pendant une phase de maintenance, permet d\'afficher un message personalisable sur tout le site public, éventuellement la partie privée.',
 	'en_travaux:nom' => 'Site en travaux',
 	'erreur:bt' => '<span style="color:red;">Attention :</span> la barre typographique (version @version@) semble ancienne.<br />Le Couteau Suisse est compatible avec une version supérieure ou égale à @mini@.',
 	'erreur:description' => 'id manquant dans la définition de l\'outil !',
@@ -359,18 +358,18 @@ Les blocs multi s\'affichent alors toujours dans la langue demandée par le visi
 
 	// G
 	'glossaire:aide' => 'Un texte sans glossaire : <b>@_CS_SANS_GLOSSAIRE@</b>',
-	'glossaire:description' => '@puce@ Gestion d’un glossaire interne lié à un ou plusieurs groupes de mots-clés. Inscrive ici le nom des groupes en  les séparant par les deux points « : ». En laissant vide la case qui  suit (ou en tapant "Glossaire"), c’est le groupe "Glossaire" qui sera utilisé.[[%glossaire_groupes%]]
+	'glossaire:description' => '@puce@ Gestion d’un glossaire interne lié à un ou plusieurs groupes de mots-clés. Inscrivez ici le nom des groupes en  les séparant par les deux points « : ». En laissant vide la case qui  suit (ou en tapant &quot;Glossaire&quot;), c’est le groupe &quot;Glossaire&quot; qui sera utilisé.[[%glossaire_groupes%]]
 
 @puce@ Pour chaque mot, tu as la possibilité de choisir le nombre maximal de liens créés dans tes textes. Toute valeur nulle ou négative implique que tous les mots reconnus seront traités. [[%glossaire_limite% par mot-clé]]
 
-@puce@ Deux solutions te sont offertes pour générer la petite fenêtre automatique qui apparaît lors du survol de la souris. [[%glossaire_js%]]', # MODIF
+@puce@ Deux solutions te sont offertes pour générer la petite fenêtre automatique qui apparaît lors du survol de la souris. [[%glossaire_js%]][[->%glossaire_abbr%]]',
 	'glossaire:nom' => 'Glossaire interne',
-	'glossaire_abbr' => 'Ignorer les balises <code><abbr></code> et <code><acronym></code>', # NEW
+	'glossaire_abbr' => 'Ignorer les balises <code><abbr></code> et <code><acronym></code>',
 	'glossaire_css' => 'Solution CSS',
 	'glossaire_erreur' => 'Le mot «@mot1@» rend indétectable le mot «@mot2@»',
 	'glossaire_inverser' => 'Correction proposée : inverser l\'ordre des mots en base.',
 	'glossaire_js' => 'Solution JavaScript',
-	'glossaire_ok' => 'La liste des @nb@ mot(s) étudié(s) en base semble correcte.', # MODIF
+	'glossaire_ok' => '@nb@ mot(s) étudié(s). Tout semble correct.',
 	'guillemets:description' => 'Remplace automatiquement les guillemets droits (") par les guillemets typographiques de la langue de composition. Le remplacement, transparent pour l\'utilisateur, ne modifie pas le texte original mais seulement l\'affichage final.',
 	'guillemets:nom' => 'Guillemets typographiques',
 
@@ -513,7 +512,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:terminaison_urls_page' => 'Terminaison des URLs (ex : « .html ») :',
 	'label:titre_travaux' => 'Titre du message :',
 	'label:titres_etendus' => 'Activer l\'utilisation étendue des balises #TITRE_XXX :',
-	'label:tout_rub' => 'Afficher en public tous les objets suivants :', # NEW
+	'label:tout_rub' => 'Afficher en public tous les objets suivants :',
 	'label:url_arbo_minuscules' => 'Conserver la casse des titres dans les URLs :',
 	'label:url_arbo_sep_id' => 'Caractère de séparation \'titre-id\' en cas de doublon :<br />(ne pas utiliser \'/\')',
 	'label:url_glossaire_externe2' => 'Lien vers le glossaire externe :',
@@ -694,7 +693,7 @@ _ • Uniquement pour les articles contenant la balise <code>@_CS_AVEC_SOMMAIRE@
 
 Ce sommaire est compatible avec « [.->decoupe] » et « [.->titres_typo] ».',
 	'sommaire:nom' => 'Sommaire automatique',
-	'sommaire_ancres' => 'Ancres choisies : <b><html>{{{Mon Titre<mon_ancre>}}}</html></b>', # MODIF
+	'sommaire_ancres' => 'Ancres choisies : <b><html>{{{Mon Titre<mon_ancre>}}}</html></b>',
 	'sommaire_avec' => 'Un texte avec sommaire : <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un texte sans sommaire : <b>@_CS_SANS_SOMMAIRE@</b>',
 	'sommaire_titres' => 'Intertitres hiérarchisés : <b><html>{{{*Titre}}}</html></b>, <b><html>{{{**Sous-titre}}}</html></b>, etc.',
@@ -775,7 +774,7 @@ La fonction SPIP utilisée en PHP est <code>_T(\'chaine\')</code> sans argument,
  N\'oublie donc pas de vérifier que la clef <code>\'chaine\'</code> est bien définie dans les fichiers de langues.',
 	'toutmulti:nom' => 'Blocs multilingues',
 	'travaux_masquer_avert' => 'Masquer le cadre indiquant sur le site public qu\'une maintenance est en cours',
-	'travaux_nocache' => 'Désactiver également le cache de SPIP', # NEW
+	'travaux_nocache' => 'Désactiver également le cache de SPIP',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Ce site sera rétabli très prochainement.
 _ Merci de ta compréhension.',
