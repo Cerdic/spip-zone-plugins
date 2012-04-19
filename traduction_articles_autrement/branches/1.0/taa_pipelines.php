@@ -45,6 +45,7 @@ function taa_recuperer_fond($flux){
 				
 		$barre=charger_fonction('barre_langues','inc');
 		$barre_langue=$barre($id_article);
+		
 
         $flux['data']['texte'] = str_replace('</h1>', '</h1>' . $barre_langue, $flux['data']['texte']);
     }
