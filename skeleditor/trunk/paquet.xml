@@ -1,7 +1,7 @@
 <paquet
 	prefix="skeleditor"
 	categorie="outil"
-	version="2.7.1"
+	version="2.7.2"
 	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="images/skeleditor-32.png"
@@ -15,7 +15,7 @@
 	<licence>GNU/GPL v3</licence>
 
 
-	<pipeline nom="autoriser" inclure="skeleditor_options.php" />
+	<pipeline nom="autoriser" inclure="inc/skeleditor_autoriser.php" />
 	<pipeline nom="affichage_final" inclure="skeleditor_options.php" />
 
 	<menu nom="skeleditor" titre="skeleditor:editer_skel" parent="menu_squelette" icone="images/skeleditor-16.png" />
