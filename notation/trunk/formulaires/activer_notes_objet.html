@@ -1,3 +1,5 @@
+<BOUCLE_formulaire_non_vide(CONDITION)
+	{si #ENV{editable,#ENV{_suivi_notes,#ENV{message_ok,#ENV{message_erreur}}}}}>
 <div class='formulaire_spip formulaire_#FORM' id='formulaire_#FORM-#ID'>
 [(#REM)
 [(#ENV{_suivi_notes}|oui)
@@ -23,3 +25,4 @@
 	</div></form>
 ]
 </div>
+</BOUCLE_formulaire_non_vide>
