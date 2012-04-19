@@ -1,0 +1,29 @@
+<traduction module="tra" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/traduction_rubriques_autrement/trunk/lang/" reference="fr">
+	<langue code="ast" url="http://trad.spip.org/tradlang_module/tra?lang_cible=ast">
+		<traducteur nom="Xuacu" lien="http://trad.spip.org/auteur/xuacu" />
+	</langue>
+	<langue code="ca" url="http://trad.spip.org/tradlang_module/tra?lang_cible=ca">
+		<traducteur nom="merce" lien="http://trad.spip.org/auteur/merce" />
+	</langue>
+	<langue code="de" />
+	<langue code="en" url="http://trad.spip.org/tradlang_module/tra?lang_cible=en">
+		<traducteur nom="Mark" lien="http://trad.spip.org/auteur/mark" />
+	</langue>
+	<langue code="es" />
+	<langue code="eu" url="http://trad.spip.org/tradlang_module/tra?lang_cible=eu">
+		<traducteur nom="otalazt" lien="http://trad.spip.org/auteur/otalazt" />
+	</langue>
+	<langue code="fa" url="http://trad.spip.org/tradlang_module/tra?lang_cible=fa">
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
+	</langue>
+	<langue code="fr" />
+	<langue code="fr_tu" url="http://trad.spip.org/tradlang_module/tra?lang_cible=fr_tu">
+		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
+	</langue>
+	<langue code="pt_br" url="http://trad.spip.org/tradlang_module/tra?lang_cible=pt_br">
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.org/auteur/ricardo-porto" />
+	</langue>
+	<langue code="sk" url="http://trad.spip.org/tradlang_module/tra?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	</langue>
+</traduction>
