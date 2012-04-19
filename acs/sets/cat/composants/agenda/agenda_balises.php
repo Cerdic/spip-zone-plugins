@@ -163,7 +163,7 @@ function calculer_balise_agenda($annee, $mois, $rubrique, $auteur) {
 		$tmp = '';
 		while(date('w', mkdate($M, $TempD, $Y)) != 1) {
 			$TempD--;
-			$case = '<td width="14%" valign="top" class="calendar_not_this_month">';
+			$case = '<td width="14%" valign="top" class="calendar_not_this_month nsize">';
 			$case .= date('j', mkdate($M, $TempD, $Y));
 			$date = date('Ymd', mkdate($M, $TempD, $Y));
 
