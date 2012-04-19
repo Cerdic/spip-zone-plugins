@@ -106,7 +106,7 @@ function inc_barre_langues_dist($id_article){
 		'voir'=>_request('voir'),									
 		);
 		
-		$retour=recuperer_fond('prive/editer/barre_traductions_article',$contexte,array('ajax'=>true));
+		//$retour=recuperer_fond('prive/editer/barre_traductions_article',$contexte,array('ajax'=>true));
 	return $retour;
 	
 }

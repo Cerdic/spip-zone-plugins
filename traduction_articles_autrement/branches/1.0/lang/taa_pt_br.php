@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org/tradlang_module/taa?lang_cible=pt_br
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -8,8 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'affichage_edition_seule' => 'Exibição das matérias apenas em modo de edição',
-	'affichage_liste_compacte' => 'Exibição compacta da lista de matérias',
+	'affichage_liste_compacte_desactive' => 'Désactivet l\'affichage compacte des liste des articles', # NEW
 
 	// C
 	'changer_langue' => 'Alterar o idioma da matéria',
@@ -34,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_plugin' => 'Tradução das matérias diferentemente',
-	'traductions' => 'Trad',
+	'traductions' => 'Traduções', # MODIF
 
 	// V
 	'voir_traductions' => 'Ver os detalhes das traduções'

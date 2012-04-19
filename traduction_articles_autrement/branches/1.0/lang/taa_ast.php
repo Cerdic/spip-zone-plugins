@@ -1,11 +1,14 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org/tradlang_module/taa?lang_cible=ast
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// A
+	'affichage_liste_compacte_desactive' => 'Désactivet l\'affichage compacte des liste des articles', # NEW
 
 	// C
 	'changer_langue' => 'Camudar la llingua del artículu',
@@ -30,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_plugin' => 'Traducción d\'artículos d\'otra miente',
-	'traductions' => 'Trad',
+	'traductions' => 'Traducciones', # MODIF
 
 	// V
 	'voir_traductions' => 'Ver el detalle de les traducciones'

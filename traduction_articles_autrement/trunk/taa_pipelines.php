@@ -49,9 +49,8 @@ function taa_recuperer_fond($flux){
         $flux['data']['texte'] = str_replace('</h1>', '</h1>' . $barre_langue, $flux['data']['texte']);
     }
     
-    //Liste compaacte des articles
-    if ($flux['args']['fond'] == 'prive/objets/liste/articles' AND !lire_config('taa/liste_compacte_desactive')){
-
+    //Liste compacte des articles
+    if ($flux['args']['fond'] == 'prive/objets/liste/articles' AND _request('exec')!='article' AND !lire_config('taa/liste_compacte_desactive')){
 
     $flux['texte'] = recuperer_fond('prive/objets/liste/articles_compacte',$flux['args']['contexte']);
 

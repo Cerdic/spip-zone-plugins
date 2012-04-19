@@ -9,7 +9,7 @@
 		<a href="[(#ENV{mode}|=={edition_seule}|?{[(#ID_ARTICLE|generer_url_entite{article})],[(#URL_ECRIRE{articles_edit,id_article=#ID_ARTICLE})]})]">#ID_ARTICLE</a>,
 		#ID_ARTICLE
 		})]</td>
-	[(#ENV{trads}|oui)<td>]	
+	[(#ENV{trads}|oui)<td class="trad">]	
 	
 	<BOUCLE_art_trads(ARTICLES){traduction}{id_mot?}{id_auteur?}{statut IN prepa,publie,prop}{id_article!=#ID_ARTICLE}>
 	[(#ENV{trads}|oui)	
