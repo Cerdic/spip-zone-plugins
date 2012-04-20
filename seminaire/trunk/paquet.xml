@@ -1,19 +1,23 @@
 <paquet
 	prefix="seminaire"
 	categorie="date"
-	logo="images/logo_seminaire.png"
 	version="2.0.0"
 	etat="dev"
-	compatibilite="[3.0.0-dev;3.0.*]"
+	compatibilite="[3.0.0-rc;3.0.*]"
+	logo="prive/themes/spip/images/seminaire-64.png"
 	documentation="http://www.spip-contrib.net/Seminaire-LATP"
+	schema="1.0.0" 
 >
 	<nom>Séminaire LATP</nom>
-	<auteur lien='http://www.spip-contrib.net/Amaury-Adon'>Amaury ADON</auteur>
-	<licence lien='http://www.gnu.org/licenses/gpl.html'>GNU/GPL</licence>	
-	<necessite nom="agenda" compatibilite="[3.5.1;]" />
-	<necessite nom="calendriermini" compatibilite="[2.0.4;[" />
-	<necessite nom="cextras" compatibilite="[3.0.5;[" />
-	<utilise nom="kitcnrs" compatibilite="[4.0.10;]" />
-	<utilise nom="Z" compatibilite="[1.7.17;]" />
-	<pipeline nom="declarer_champs_extras" inclure="base/seminaire.php" />
+
+	<auteur lien='http://www.spip-contrib.net/Amaury-Adon'>Amaury Adon</auteur>
+
+	<licence>GNU/GPL</licence>
+		<necessite nom="agenda" compatibilite="[3.5.1;]" />
+		<necessite nom="cextras" compatibilite="[3.0.5;[" />
+		<utilise nom="kitcnrs" compatibilite="[4.0.10;]" />
+		<utilise nom="Z" compatibilite="[1.7.17;]" />
+		<pipeline nom="declarer_champs_extras" inclure="base/seminaire.php" />
+
+
 </paquet>
