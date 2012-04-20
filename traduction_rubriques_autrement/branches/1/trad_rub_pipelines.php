@@ -6,7 +6,7 @@ function trad_rub_header_prive($flux){
 
  }
  
-/*Ajoute la langue de traduction dans le chargement du formulaire edition_article*/ 
+/*Ajoute la langue de traduction dans le chargement du formulaire edition_rubrique*/ 
  function trad_rub_formulaire_charger($flux){
    $form = $flux['args']['form'];
    if ($form=='editer_rubrique'){
