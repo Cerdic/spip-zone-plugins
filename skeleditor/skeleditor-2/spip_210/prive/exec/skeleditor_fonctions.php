@@ -249,6 +249,7 @@ function skeleditor_codemirror($filename,$editable=true){
 			$css = array("css/csscolors.css");
 			break;
 		case 'xml':
+		case 'yaml':
 		case 'svg':
 		case 'rdf':
 			$parsers = array("parsexml.js");

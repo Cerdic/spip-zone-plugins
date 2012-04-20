@@ -28,6 +28,7 @@ function skeleditor_inline_inc($extension){
 			$mode = array("css");
 			break;
 		case 'xml':
+		case 'yaml':
 		case 'svg':
 		case 'rdf':
 			$mode = array("xml");
