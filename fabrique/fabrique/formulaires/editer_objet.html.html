@@ -1,0 +1,41 @@
+<div class='formulaire_spip formulaire_editer formulaire_\#FORM formulaire_\#FORM-\#ENV{#ID_OBJET,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(\#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(\#ENV*{message_erreur})</p>]
+
+	[(\#ENV{editable})
+	<form method='post' action='\#ENV{action}'><div>
+		\#ACTION_FORMULAIRE{\#ENV{action}}
+		<input type='hidden' name='#ID_OBJET' value='\#ENV{#ID_OBJET}' />
+		<ul>[
+
+(#REM) On essaie de placer le formulaire de rubrique (s'il est demande)
+       apres le titre, s'il est saisissable, sinon en 2e position 
+
+][(#SET{titre,''})][(#SET{rub,[(#OBJET|champ_present{id_rubrique})]})
+]<BOUCLE_un_titre(DATA){source tableau,#ENV{objet/champs}}{saisie != ''}
+	{champ=#ENV{objet/champ_titre}}
+	{si #ENV{objet/champ_titre}}>#SET{titre,' '}</BOUCLE_un_titre>
+<BOUCLE_saisies(DATA){source tableau,#ENV{objet/champs}}{saisie != ''}>
+			[(\#SAISIE{#VALEUR{saisie}, #CHAMP,[(#VALEUR|champ_option_presente{obligatoire}|oui)obligatoire=oui,]
+				label=\<:#TYPE:label_#CHAMP:>[,
+				explication=\<:#TYPE:explication_#CHAMP:>(#EXPLICATION|oui)][,
+				(#SAISIE_OPTIONS|trim)]})][
+
+(#REM) On teste donc s'il faut placer le formulaire de rubrique ici
+
+]<BOUCLE_si_rub(CONDITION){si #GET{rub}}{si (#GET{titre}|et{#ENV{objet/champ_titre}|=={#CHAMP}}|ou{#GET{titre}|non|et{#_saisies:COMPTEUR_BOUCLE|=={1}}})}>
+
+			\[<li class="editer editer_rubrique\[ (\#ENV**{erreurs/id_parent}|oui)erreur\]">
+					<label for="id_parent">\<:titre_cadre_interieur_rubrique:></label>\[
+					<span class="erreur_message">(\#ENV**{erreurs/id_parent})</span>
+					\]
+					(\#VAL|chercher_rubrique{\#ENV{#ID_OBJET},\#ENV{id_parent},'#TYPE',\#ENV{id_secteur},'',0,form_simple})
+			</li>\]</BOUCLE_si_rub>
+</BOUCLE_saisies>
+		</ul>
+		[(\#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='\<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

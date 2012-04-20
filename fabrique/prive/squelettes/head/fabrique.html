@@ -1,0 +1,9 @@
+[(#INCLURE{fond=prive/squelettes/head/dist,env})]
+<BOUCLE_skeleditor_css(CONDITION){si #PLUGIN{skeleditor}}>
+<link rel='stylesheet' href='#CHEMIN{codemirror/lib/codemirror.css}' type='text/css' />
+<link rel='stylesheet' href='#CHEMIN{codemirror/theme/default.css}' type='text/css' />
+</BOUCLE_skeleditor_css>
+<link rel='stylesheet' href='#PRODUIRE{fond=css/formulaire_fabrique.css}' type='text/css' />
+<link rel='stylesheet' href='#CHEMIN{css/formulaire_fabrique.css}' type='text/css' />
+<script type='text/javascript' src="#CHEMIN{javascript/basket.min.js}"></script>
+<script type='text/javascript' src="#PRODUIRE{fond=javascript/formulaire_fabrique.js,sk=#PLUGIN{skeleditor}|oui}"></script>

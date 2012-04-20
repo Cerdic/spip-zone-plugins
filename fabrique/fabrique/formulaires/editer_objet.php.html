@@ -1,0 +1,76 @@
+#PHP
+[(#INCLURE{fond=fabrique/entetes/php,env})]
+
+include_spip('inc/actions');
+include_spip('inc/editer');
+[(#REM)
+
+	Y a t'il un champ de rubrique a prendre en compte ?
+
+][(#SET{id_rubrique,[(#OBJET|champ_present{id_rubrique})]})][    (#REM)
+][(#SET{id_rubrique_param,#GET{id_rubrique}|?{'$id_rubrique=0,'}})][     (#REM)
+][(#SET{id_rubrique_val,#GET{id_rubrique}|?{'$id_rubrique', "''"}})][    (#REM)
+
+	Y a t'il une association a prendre en compte ?
+
+][(#SET{associer,[(#OBJET|option_presente{vue_liens})]})][     (#REM)
+][(#SET{associer_param,#GET{associer}|?{"$associer_objet='',"}})][   (#REM)
+][(#SET{associer_val,#GET{associer}|?{'$associer_objet'}})][    (#REM)
+
+	Y a t'il des champs obligatoire a verifier ?
+	Il faut qu'il soit obligatoire et dispose d'une saisie
+
+][(#SET{obligatoires,[(#ENV{objet/champs}|champs_options_presentes{#LISTE{obligatoire,saisie},champ})]})][   (#REM)
+
+
+	Fonctions de chargement de l'objet
+
+
+]
+/**
+ * Identifier le formulaire en faisant abstraction des parametres qui ne representent pas l'objet edite
+ */
+function formulaires_editer_[(#TYPE)]_identifier_dist($#ID_OBJET='new',[ (#GET{id_rubrique_param})] $retour='',[ (#GET{associer_param})] $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	return serialize(array(intval($#ID_OBJET)[, (#GET{associer_val})]));
+}
+
+/**
+ * Declarer les champs postes et y integrer les valeurs par defaut
+ */
+function formulaires_editer_[(#TYPE)]_charger_dist($#ID_OBJET='new',[ (#GET{id_rubrique_param})] $retour='',[ (#GET{associer_param})] $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	$valeurs = formulaires_editer_objet_charger('#TYPE',$#ID_OBJET,#GET{id_rubrique_val},$lier_trad,$retour,$config_fonc,$row,$hidden);
+	return $valeurs;
+}
+
+/**
+ * Verifier les champs postes et signaler d'eventuelles erreurs
+ */
+function formulaires_editer_[(#TYPE)]_verifier_dist($#ID_OBJET='new',[ (#GET{id_rubrique_param})] $retour='',[ (#GET{associer_param})] $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	return formulaires_editer_objet_verifier('#TYPE',$#ID_OBJET[, (#GET{obligatoires}|ecrire_tableau_sinon_rien)]);
+}
+
+/**
+ * Traiter les champs postes
+ */
+function formulaires_editer_[(#TYPE)]_traiter_dist($#ID_OBJET='new',[ (#GET{id_rubrique_param})] $retour='',[ (#GET{associer_param})] $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	[(#GET{associer}|?{'$res =', 'return'})] formulaires_editer_objet_traiter('#TYPE',$#ID_OBJET,#GET{id_rubrique_val},$lier_trad,$retour,$config_fonc,$row,$hidden);[
+(#GET{associer}|oui)
+	// Un lien a prendre en compte ?
+	if ($associer_objet AND $#ID_OBJET = $res\['#ID_OBJET'\]) {
+		list($objet, $id_objet) = explode('|', $associer_objet);
+
+		if ($objet AND $id_objet AND autoriser('modifier', $objet, $id_objet)) {
+			include_spip('action/editer_liens');
+			objet_associer(array('#TYPE' => $#ID_OBJET), array($objet => $id_objet));
+			if (isset($res\['redirect'\])) {
+				$res\['redirect'\] = parametre_url ($res\['redirect'\], "id_lien_ajoute", $#ID_OBJET, '&');
+			}
+		}
+	}
+	return $res;
+]
+}
+
+
+?>
+

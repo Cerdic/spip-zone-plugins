@@ -1,0 +1,96 @@
+#PHP
+[(#INCLURE{fond=fabrique/entetes/php,env})]
+
+<BOUCLE_si_objets(CONDITION){si #OBJETS}>
+/**
+ * Déclaration des alias de tables et filtres automatiques de champs
+ */
+function [(#PREFIXE)]_declarer_tables_interfaces($interfaces) {
+<BOUCLE_interface(DATA) {source tableau, #OBJETS}>
+	$interfaces['table_des_tables']['#OBJET'] = '#OBJET';</BOUCLE_interface>
+
+	return $interfaces;
+}
+</BOUCLE_si_objets>
+
+/**
+ * Déclaration des objets éditoriaux
+ */
+function [(#PREFIXE)]_declarer_tables_objets_sql($tables) {
+<BOUCLE_objets_editoriaux(DATA) {source tableau, #OBJETS}>
+	$tables['#TABLE'] = array(
+		'type' => '#TYPE',
+		'principale' => "oui",[(#SURNOMS|oui)
+		'table_objet_surnoms' => array('#TYPE'), // table_objet('#TYPE') => '#LOBJET' ]
+		'field'=> array(
+			[(#VAL{["(#ID_OBJET)"]}   |espacer)] => "#CLE_PRIMAIRE_SQL",[
+			[(#VAL{'"id_rubrique"'}   |espacer)] => "bigint(21) NOT NULL DEFAULT 0",(#VALEUR|champ_present{id_rubrique})]<BOUCLE_def_champs(DATA) {source tableau,#CHAMPS}>
+			[(#VAL{["(#CHAMP)"]}      |espacer)] => "#SQL",</BOUCLE_def_champs>[
+			[(#VAL{["(#CHAMP_DATE)"]} |espacer)] => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",(#CHAMP_DATE|oui)][
+			[(#VAL{'"statut"'}        |espacer)] => "varchar(20)  DEFAULT '0' NOT NULL",(#STATUT|oui)][
+			[(#VAL{'"lang"'}          |espacer)] => "VARCHAR(10) NOT NULL DEFAULT ''",
+			[(#VAL{'"langue_choisie"'}|espacer)] => "VARCHAR(3) DEFAULT 'non'",(#VALEUR|champ_present{lang})][
+			[(#VAL{'"id_trad"'}       |espacer)] => "bigint(21) NOT NULL DEFAULT 0",(#VALEUR|champ_present{id_trad})]
+			[(#VAL{'"maj"'}           |espacer)] => "TIMESTAMP"
+		),
+		'key' => array(
+			[(#VAL{'"PRIMARY KEY"'}    |espacer)] => "#ID_OBJET",[
+			[(#VAL{'"KEY id_rubrique"'}|espacer)] => "id_rubrique",(#VALEUR|champ_present{id_rubrique})]
+		),
+		'titre' => "[(#CHAMP_TITRE|sinon{"''"})] AS titre, [(#VALEUR|champ_present{lang}|?{lang,"''"})] AS lang",
+		[(#CHAMP_DATE|non)#]'date' => "[(#CHAMP_DATE)]",
+		'champs_editables'  => [(#CHAMPS|champs_option_presente{editable,  champ}|ecrire_tableau)],
+		'champs_versionnes' => [(#CHAMPS|champs_option_presente{versionne, champ}|ecrire_tableau)],
+		'rechercher_champs' => array(<BOUCLE_recherches(DATA){source tableau,#CHAMPS}{recherche >=1 }{", "}>["(#VALEUR{champ})"] => #VALEUR{recherche}</BOUCLE_recherches>),
+		'tables_jointures'  => array(['(#NOM_TABLE_LIENS)']),
+		['statut_textes_instituer' => array(
+			'prepa'    => 'texte_statut_en_cours_redaction',
+			'prop'     => 'texte_statut_propose_evaluation',
+			'publie'   => 'texte_statut_publie',
+			'refuse'   => 'texte_statut_refuse',
+			'poubelle' => 'texte_statut_poubelle',
+		),
+		'statut'=> array(
+			array(
+				'champ'     => 'statut',
+				'publie'    => 'publie',
+				'previsu'   => 'publie,prop,prepa',
+				'post_date' => 'date', 
+				'exception' => array('statut','tout')
+			)
+		),
+		'texte_changer_statut' => '#TYPE:texte_changer_statut_#TYPE',(#STATUT|oui)]
+
+	);
+</BOUCLE_objets_editoriaux>
+	return $tables;
+}
+
+<B_objets_liens>
+/**
+ * Déclaration des tables secondaires (liaisons)
+ */
+function [(#PREFIXE)]_declarer_tables_auxiliaires($tables) {
+<BOUCLE_objets_liens(DATA) {source tableau, #OBJETS}{table_liens != ''}>
+	$tables['#NOM_TABLE_LIENS'] = array(
+		'field' => array(
+			[(#VAL{["(#ID_OBJET)"]} |espacer)] => "bigint(21) DEFAULT '0' NOT NULL",
+			[(#VAL{'"id_objet"'}    |espacer)] => "bigint(21) DEFAULT '0' NOT NULL",
+			[(#VAL{'"objet"'}       |espacer)] => "VARCHAR(25) DEFAULT '' NOT NULL",
+			[(#VAL{'"vu"'}          |espacer)] => "VARCHAR(6) DEFAULT 'non' NOT NULL"
+		),
+		'key' => array(
+			[(#VAL{'"PRIMARY KEY"'}     |espacer)] => "#ID_OBJET,id_objet,objet",
+			[(#VAL{["KEY (#ID_OBJET)"]} |espacer)] => "#ID_OBJET"
+		)
+	);</BOUCLE_objets_liens>
+
+	return $tables;
+}
+</B_objets_liens>
+[
+
+
+(#ENV*{paquet/inserer/base/tables/fin})
+]
+?>

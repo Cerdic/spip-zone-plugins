@@ -1,0 +1,7 @@
+<select name="#ENV{nom}" id="etat">
+	<option value="tout_etat"[ (#ENV{valeur,#ENV{defaut}}|=={tout_etat}|oui)selected="selected"]><:svp:option_etat_tout:></option>
+	<option value="stable"[ (#ENV{valeur,#ENV{defaut}}|=={stable}|oui)selected="selected"]><:plugin_etat_stable|ucfirst:></option>
+	<option value="test"[ (#ENV{valeur,#ENV{defaut}}|=={test}|oui)selected="selected"]><:plugin_etat_test|ucfirst:></option>
+	<option value="dev"[ (#ENV{valeur,#ENV{defaut}}|=={dev}|oui)selected="selected"]><:plugin_etat_developpement|ucfirst:></option>
+	<option value="experimental"[ (#ENV{valeur,#ENV{defaut}}|=={experimental}|oui)selected="selected"]><:plugin_etat_experimental|ucfirst:></option>
+</select>

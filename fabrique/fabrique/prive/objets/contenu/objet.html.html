@@ -1,0 +1,9 @@
+\<BOUCLE_#TYPE\(#MOBJET){#ID_OBJET}[(#OBJET|champ_present{statut}|?{'{statut?}'})]>
+<BOUCLE_champs(DATA){source tableau, #ENV{objet/champs}}>
+\[<div class="champ contenu_#CHAMP\[ (#[(#MCHAMP)]*|strlen|?{'',vide})\]">
+	<label>\<:#TYPE:label_#CHAMP:> : </label>
+	<span dir='\#LANG_DIR' class='\#EDIT{#CHAMP} #CHAMP'>(##MCHAMP)</span>
+</div>\]
+</BOUCLE_champs>
+\</BOUCLE_#TYPE>
+

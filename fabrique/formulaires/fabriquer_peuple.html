@@ -1,0 +1,41 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM'>
+	<h3 class="titrem"><:fabrique:aide_creation_peupler_table:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<ul>
+			[(#SAISIE{tables_sql, table,
+				label=<:fabrique:label_table_a_exporter:>})]
+
+			[(#SAISIE{oui_non, compression,
+				label=<:fabrique:label_table_compresser_donnees:>,
+				explication=<:fabrique:label_table_compresser_donnees_explication:>})]
+
+			[(#SAISIE{input, table_destination,
+				label=<:fabrique:label_table_destination:>,
+				explication=<:fabrique:label_table_destination_explication:>})]
+		</ul>
+
+		<p class="boutons">
+			<input type='submit' name='reset' class='submit' value='<:fabrique:bouton_exporter:>' />
+		</p>
+
+	</div></form>
+	]
+
+<script type="text/javascript">
+(function($){
+	// reseter la destination si on change de table
+	$(document).ready(function(){
+		$(".formulaire_#FORM .saisie_tables_sql select").change(function(){
+			$(".formulaire_#FORM .editer_table_destination input").attr("value", "");
+		});
+	});
+})(jQuery);
+</script>
+</div>

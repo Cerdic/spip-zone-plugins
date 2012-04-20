@@ -1,0 +1,78 @@
+[(#REM)
+  Si pas de titre, on prend le premier champ,
+  sinon titre (mais bon, faut pas exagerer !)
+][(#SET{titre,#ENV{objet/champ_titre,#ENV{objet/champs/0/champ, titre}}})][
+(#SET{mtitre,#GET{titre}|strtoupper})][
+(#SET{date,#ENV{objet/champ_date}})][
+(#SET{mdate,#GET{date}|strtoupper})][
+(#SET{pagination,[(#LOBJET|substr{0,3})l]})][
+(#SET{debut_pagination,[debut(#GET{pagination})]})][
+(#REM)
+
+
+Squelette de liste d'une liaision d'objet
+
+
+]\[(\#SET{defaut_tri,\#ARRAY{
+	multi #GET{titre},1,[
+	#ENV{objet/champ_date},-1,(#ENV{objet/champ_date}|oui)]
+	#ID_OBJET,1
+}})
+\]
+\#SET{selection,\#ENV**{selection,\#ENV{objet_source}|lister_objets_lies{\#ENV{objet},\#ENV{id_objet},\#ENV{_objet_lien}}}}
+\#SET{debut,\#ENV{#GET{debut_pagination},\#EVAL{_request("#GET{debut_pagination}");}}}
+\<B_liste_#LOBJET>
+\[(\#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle\]
+\#SET{debut,\#ENV{#GET{debut_pagination},\#EVAL{_request("#GET{debut_pagination}");}}}
+\#SET{afficher_lettres,\#TRI|=={'multi #GET{titre}'}|oui}
+\#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies #LOBJET">
+<table class='spip liste'>
+\[<caption><strong class="caption">(\#ENV*{titre,\#GRAND_TOTAL|singulier_ou_pluriel{#TYPE:info_1_#TYPE,#TYPE:info_nb_#LOBJET}})</strong></caption>\]
+	<thead>
+		\#SET{p,''}
+		\<BOUCLE_lettre\(#MOBJET){tout}{#ID_OBJET IN \#GET{selection}}{where?}[(#OBJET|champ_present{statut}|?{'{statut?}'})]
+			{tri \#ENV{par,multi #GET{titre}},\#GET{defaut_tri}}{#ID_OBJET==\#GET{afficher_lettres}|?{'.*','A'}}>\[
+		(\##GET{mtitre}**|extraire_multi|initiale|unique|oui)
+		\[(\#SET{p,\#GET{p}|concat{
+		\#SELF|parametre_url{#GET{debut_pagination},@\##MID_OBJET}|ancre_url{pagination#GET{pagination}}|afficher_initiale{\##GET{mtitre}**|extraire_multi|initiale{},\#COMPTEUR_BOUCLE,\#GET{debut},\#ENV{nb,10}}
+		}})\]
+		\]\#SAUTER{\#ENV{nb,10}|moins{\#COMPTEUR_BOUCLE|=={1}|?{2,1}}}\</BOUCLE_lettre>\[
+		(\#SET{p,
+			\#GET{p}|concat{
+				\#REM|afficher_initiale{\#REM,\#TOTAL_BOUCLE,\#GET{debut},\#ENV{nb,10}}
+			}
+		})\]\</B_lettre>
+		\[<tr><td colspan="4"><p class='pagination'>(\#GET{p})</p></td></tr>\]
+
+		<tr class='first_row'>[
+			<th class='statut' scope='col'>\[(\#TRI{statut,<span title="\<:lien_trier_statut|attribut_html:>">#</span>,ajax\})\]</th>(#OBJET|champ_present{statut})]
+			<th class='#GET{titre}' scope='col'>\[(\#TRI{multi #GET{titre},\<:#TYPE:label_#GET{titre}:>,ajax})\]</th>
+			<th class='action' scope='col'></th>
+		</tr>
+	</thead>
+	<tbody>
+	\<BOUCLE_liste_#LOBJET\(#MOBJET){#ID_OBJET IN \#GET{selection}}[(#OBJET|champ_present{statut}|?{'{statut?}'})]
+		{tri \#ENV{par,multi #GET{titre}},\#GET{defaut_tri}}{pagination \#ENV{nb,10} #GET{pagination}}>
+		<tr class="\[(\#COMPTEUR_BOUCLE|alterner{row_odd,row_even})\]\[ (\#EXPOSE|unique)\]\[ (\##GET{mtitre}**|extraire_multi|initiale|=={\#ENV{i}}|?{on}|unique)\]\[(\##MID_OBJET|=={\#ENV{id_lien_ajoute}}|oui)append\]">[
+			<td class='statut'>\[(\#STATUT|puce_statut\{#TYPE\})\]</td>(#OBJET|champ_present{statut})]
+			<td class='#GET{titre}'>\[(\#LOGO_#MTYPE|image_reduire{20,20})\]<a href="\[(\##MID_OBJET|generer_url_entite{#TYPE})\]">\##GET{mtitre}</a></td>
+
+			<td class='action'>
+				\[(\#ENV{editable}|oui)
+					<button class="button link delete" name="supprimer_lien\\[#TYPE-\##MID_OBJET-\#OBJET-\#ID_OBJET\\]" value="X">\<:#TYPE:retirer_lien_#TYPE:> \[(\#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})\]</button>
+				\]
+			</td>
+		</tr>
+	\</BOUCLE_liste_#LOBJET>
+	</tbody>
+</table>
+\[<p class='pagination'>(\#PAGINATION{prive})</p>\]
+\[(\#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien\\[#TYPE-*-\#OBJET-\#ID_OBJET\\]" value="X">\<:#TYPE:retirer_tous_liens_#LOBJET:> \[(\#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})\]</button></div>\]
+</div>
+\</B_liste_#LOBJET>
+<div class="liste-objets liste-objets-lies #MOBJET caption-wrap">
+	<strong class="caption">\[(\#ENV*{titre,\<:#TYPE:info_aucun_#TYPE:>})\]</strong>
+</div>
+\<//B_liste_#LOBJET>

@@ -1,0 +1,15 @@
+
+
+À faire
+- lies des objets aux articles
+- supprimer les liaisons vers notre objet à la désinstallation
+
+Question
+- dans la médiathèque, sur l'éditeur de document,
+on ne voit pas les liens avec les objets.
+Le brouteur ne voit pas non plus les objets dedans
+(même s'ils sont lies à une rubrique).
+
+- lorsqu'on lie un objet à une rubrique vide,
+la rubrique ne se publie pas et peut être supprimée.
+Une option pour indiquer que cela publie la rubrique serait bien.
