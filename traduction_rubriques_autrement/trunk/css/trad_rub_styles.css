@@ -1,6 +1,7 @@
 
 .onglets_traduction{
-	width:100%;height : 30px;
+	width:100%;
+	height : 30px;
 	vertical-align: baseline;
 }
 
@@ -29,11 +30,8 @@
 	height :auto;
 }
 .barre_onglet a,.barre_onglet strong  {padding:5px}
+
 .barre_onglet .non_traduit a{background:#eeeeee;font-style:italic;}
-
-.pagination{text-align:left;}
-
-.onglets_traduction .danger{background: #ffffff;}
 
 .bouton_options{float:right;}
 
@@ -62,8 +60,6 @@ div.ref:hover span {
 	font-weight:bold;
 	width:250px;
 } 
-.editer_taa{margin-bottom:5px;}
-body.article .new_trad {display:none}
 
 .ajouter_trads, .changer .icone_delier_traduction {float:left;}
 
@@ -71,4 +67,5 @@ body.article .new_trad {display:none}
     color: #333333;
     margin: 2.0775em 0;
     padding: 0 10px;
-    position: relative;}
+    position: relative;
+    width:100px}
