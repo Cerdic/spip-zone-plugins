@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0-rc;3.0.*]"
 	logo="prive/themes/spip/images/fabrique-64.png"
-	documentation=""
+	documentation="http://www.spip-contrib.net/?article4134"
 >
 
 	<nom>Fabrique</nom>
