@@ -32,6 +32,9 @@ function balise_CALENDRIER_MINI_stat($args, $filtres) {
  * #CALENDRIER_MINI{#ENV{date},date,#SELF}
  * #CALENDRIER_MINI{#ENV{date},date,#SELF,#URL_PAGE{calendrier_mini.json}}
  *
+ * Quand l'url json est explicitée dans les arguments, la collecte automatisée de id_rubrique, id_article et id_mot est desactivée
+ * car dans ce cas il suffit simplement de les expliciter sur l'url json pour les prendre en compte
+ *
  * @param string $date
  *   date automatique collectee par VAR_DATE
  * @param int $id_rubrique
@@ -69,21 +72,30 @@ function balise_CALENDRIER_MINI_dyn($date, $id_rubrique = 0, $id_article = 0, $i
 		}
 	}
 
-	$url_json = ($url_json?$url_json:generer_url_public("calendrier_mini.json"));
+	$args = array(
+		'date' => $date?$date:date('Y-m'),
+		'var_date' => $var_date,
+		'self' => $url?$url:self(),
+	);
+
+	// si pas de url_json explicite, la renseigner et peupler automatiquement les
+	if (is_null($url_json)){
+		$url_json = generer_url_public("calendrier_mini.json");
+		if (!is_null($id_rubrique))
+			$args['id_rubrique'] = $id_rubrique;
+		if (!is_null($id_article))
+			$args['id_article'] = $id_article;
+		if (!is_null($id_mot))
+			$args['id_mot'] = $id_mot;
+	}
+
 	if (_VAR_MODE=="recalcul")
 		$url_json = parametre_url($url_json,'var_mode','recalcul');
 
+	$args['urljson'] = $url_json;
+
 	/* tenir compte de la langue, c'est pas de la tarte */
-	return array('formulaires/calendrier_mini', 3600, 
-		array(
-			'date' => $date?$date:date('Y-m'),
-			'var_date' => $var_date,
-			'self' => $url?$url:self(),
-			'urljson' => $url_json,
-			'id_rubrique' => $id_rubrique,
-			'id_article' => $id_article,
-			'id_mot' => $id_mot
-		));
+	return array('formulaires/calendrier_mini', 3600, $args);
 }
 
 ?>

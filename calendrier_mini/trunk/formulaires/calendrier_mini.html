@@ -1,12 +1,13 @@
-<div id="calendar" class="calendriermini minicalendar">
+[(#SET{urljson,[(#ENV{urljson}
+						|parametre_url{id_rubrique,#ENV{id_rubrique,#ENV{urljson}|parametre_url{id_rubrique}}}
+						|parametre_url{id_article,#ENV{id_article,#ENV{urljson}|parametre_url{id_article}}}
+						|parametre_url{id_mot,#ENV{id_mot,#ENV{urljson}|parametre_url{id_mot}}}
+						|parametre_url{lang,#ENV{lang,#ENV{urljson}|parametre_url{lang}}}
+						)]})
+]<div id="calendar" class="calendriermini minicalendar">
 	<h2 class="menu-titre"><:icone_calendrier:></h2>
 	<div class="calendar-container"
-					data-json="[(#ENV{urljson}
-						|parametre_url{id_rubrique,#ENV{id_rubrique,''}}
-						|parametre_url{id_article,#ENV{id_article,''}}
-						|parametre_url{id_mot,#ENV{id_mot,''}}
-						|parametre_url{lang,#ENV{lang,''}}
-						)]"
+					data-json="#GET{urljson}"
 					data-year="[(#ENV{date}|affdate{Y})]"
 					data-month="[(#ENV{date}|affdate{n})]"
 					data-url="#ENV{self}"
@@ -17,7 +18,7 @@
 		]<div class="alt">
 			#SET{start,#ENV{date}|affdate{Y-m-01}|strtotime}
 			#SET{end,#VAL{Y-m-01}|date{#GET{start}|plus{2764800}}|strtotime}
-			#SET{url,#ENV{urljson}|parametre_url{start,#GET{start},'&'}|parametre_url{end,#GET{end},'&'}|url_absolue}
+			#SET{url,#GET{urljson}|parametre_url{start,#GET{start},'&'}|parametre_url{end,#GET{end},'&'}|url_absolue}
 			<strong>[(#ENV{date}|affdate_mois_annee)]&nbsp;:</strong>
 			<B_alt>
 			<ul class="liste-items">
