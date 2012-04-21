@@ -1,19 +1,18 @@
+#CACHE{0}
 <B_responsables>
 [<p class="pagination">(#PAGINATION)</p>]
 <table class="amap spip">
 	<thead>
 	<tr>
-		<th>[(#TRI{nom,<:nom:>})]</th>
-		<th>[(#TRI{id_producteur,<:amap:producteurs:>})]</th>
 		<th>[(#TRI{date_distribution,<:amap:date_distribution:>})]</th>
+		<th>[(#TRI{nom,<:amap:responsables:>})]</th>
 	</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_responsables(AMAP_RESPONSABLES auteurs) {tri date_distribution}{pagination 20}{age<0}>
+	<BOUCLE_responsables(AMAP_RESPONSABLES auteurs) {tri date_distribution}{pagination 20}>
 	<tr>
-		<td>#NOM</td>
-		<td><BOUCLE_prod(AUTEURS){tous}{id_auteur=#ID_PRODUCTEUR}>#NOM</BOUCLE_prod></td>
 		<td>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
+		<td><BOUCLE_prod(AUTEURS){tous}{id_auteur}>#NOM</BOUCLE_prod></td>
 	</tr>
 	</BOUCLE_responsables>
 	</tbody>

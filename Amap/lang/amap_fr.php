@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action' => 'Action ?',
 	'action_modifier' => 'Modifier',
 	'action_supprimer' => 'Supprimer',
-	'adherent' => 'Adhérent', 
+	'adherent' => 'Adhérent',
 	'adherent_sans_type_panier_sans_type_adherent' => 'Vos adhérents n\'ont pas encore de type de panier affecté ou de type d\'adhérent.', 
 	'adhesion' => 'Adhésion (ex:2008)',
 	'adhesion_auteur' => 'Adhésion :',
@@ -38,7 +38,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'enregistrement' => 'Enregistrement',
-	'enregistrement_panier' => 'Enregistrement d\'un panier',
+	'enregistrement_livraison' => 'Enregistrement d\'une livraison',
+	'enregistrement_paniers' => 'Enregistrement des paniers',
+	'enregistrement_responsable' => 'Enregistrement d\'un responsable pour les distributions',
 	'envoyer' => 'Envoyer',
 
 	// G
@@ -107,6 +109,7 @@ Je récupère le panier du @date_distribution@ produit par @nom_producteur@
 	'qui_recupere_panier_disponible' => 'Qui récupère le panier disponible ?',
 
 	// R
+	'responsables' => 'Responsables',
 	'reste_panier_distribuer' => 'Il nous reste encore 1 panier à distribuer',
 	'reste_panier_recuperer' => 'Il vous reste encore 1 panier à recupérer',
 	'reste_paniers_distribuer' => 'Il nous reste encore @nb@ paniers à distribuer',

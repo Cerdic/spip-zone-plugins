@@ -9,8 +9,23 @@
 </ul>
 </div>
 <!--/#navigation-->
-<BOUCLE_aut(AUTEURS){id_auteur}{tous}><h1><:amap:les_paniers{nom=#NOM}:></h1></BOUCLE_aut>
+<!--#extra-->
+<div class="cadre cadre-info verdana1">
+	<div class="cadre_padding">
+	<:amap:mettre_disposition_explication:>
+	</div>
+</div>
+<!--/#extra-->
 
-<div class="cadre cadre-r">
-	<INCLURE{fond=prive/inclure/liste_panier_adherent,env}>
+<h1><:amap:gestion_amap:></h1>
+
+
+<div class="cadre cadre-trait-couleur">
+	<div class="titrem impliable">
+		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata.gif}">
+		<BOUCLE_aut(AUTEURS){id_auteur}{tous}><:amap:les_paniers{nom=#NOM}:></BOUCLE_aut>
+	</div>
+	<div class="cadre_padding">
+		<INCLURE{fond=prive/inclure/liste_panier_adherent,env}>
+	</div>
 </div>
