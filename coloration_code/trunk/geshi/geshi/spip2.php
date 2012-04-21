@@ -45,7 +45,7 @@
  ************************************************************************************/
 
 @define('REG_NOM_BOUCLE', '[a-zA-Z0-9_]*');
-@define('REG_BOUCLE','(&lt;\/?\/?B(OUCLE)?' . REG_NOM_BOUCLE . ')(\([^)]*\))?(.*)?(&gt;)');
+@define('REG_BOUCLE','(&lt;\/?\/?B(OUCLE)?' . REG_NOM_BOUCLE . ')(\([^)]*\))?\s*({.*})?\s*(&gt;)');
 @define('REG_INCLURE','(&lt;INCLU(D|R)E)(\([^)]*\))?(.*)?(&gt;)');
 @define('REG_BALISE','(\#)(' . REG_NOM_BOUCLE . ':)?([A-Z0-9_]+)([*]{0,2})');
 @define('REG_NOM_FILTRE', '(<PIPE>[a-z_=!<>?][a-z0-9_=]*(::[a-z0-9_]*)?)');
