@@ -62,11 +62,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_paniers' => 'Liste des paniers',
 	'liste_paniers_distribuer_le' => 'Liste des paniers à distribuer le',
 	'liste_paniers_vendu_par' => 'Liste des paniers produit par @nom@',
+	'liste_responsables' => 'Liste des responsables',
 	'livraison' => 'Livraison',
 
 	// M
 	'manque_fpdf_imprimer' => 'Il vous manque le plugins "fpdf" pour pouvoir imprimer vos listes de paniers.',
 	'mettre_disposition' => 'Mettre à disposition',
+	'mettre_disposition_explication' => 'Via cette page vous retrouvez vos paniers mais vous pouvez aussi les mettre a disposition, c\'est à dire que si vous ne pouvez pas venir vous pouvez l\'échanger ou le donner. Cliquer sur le lien "mettre à disposition" et suivez la procédure. un mail sera envoyez à tous les adhérents',
 	'mini_doc' => 'Mini documentation',
 
 	// N
@@ -83,7 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Je mets à disposition le panier du @date_distribution@, pour le récupérer suiver le lien suivant @lien@
 @panier_dispo_plus@
 @nom_adherent@',
-	'panier_dispo_plus' => 'Des infos à donner en plus (elle seront rajouter dans le mail envoyer avant votre nom)',
+	'panier_dispo_plus' => 'Des infos à donner en plus (elles seront rajoutées dans le courriel envoyé avant votre nom)',
 	'panier_distribuer' => 'panier à distribuer',
 	'panier_liste' => 'Liste des paniers',
 	'panier_livraison' => 'Contenu d\'un panier',

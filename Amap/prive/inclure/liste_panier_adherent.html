@@ -1,6 +1,6 @@
-<BOUCLE_auteur(AUTEURS) {id_auteur}{tous}>
-<ul>
-	<li>
+<div class="cadre_padding">
+	<p><:amap:mettre_disposition_explication:></p>
+	<p>
 		<BOUCLE_totalpanier(AMAP_PANIERS){id_auteur}{age<0} />
 			[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:reste_panier_recuperer, amap:reste_paniers_recuperer, nb})]
 		<//B_totalpanier>
@@ -8,9 +8,10 @@
 		<BOUCLE_rub(RUBRIQUES){titre = '001. Distribution'}>
 			<BOUCLE_evenementfin(EVENEMENTS){id_rubrique}{!par date_debut}{age<0}{0,1}>[(#DATE_DEBUT|affdate{'d/m/Y'}).]</BOUCLE_evenementfin>
 		</BOUCLE_rub>
-	</li>
-</ul>
+	</p>
+</div>
 
+<BOUCLE_auteur(AUTEURS) {id_auteur}{tous}>
 <B_paniers>
 <table class="amap spip">
 	<thead>

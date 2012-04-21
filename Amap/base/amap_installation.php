@@ -53,6 +53,11 @@ function amap_upgrade($nom_meta_version_base, $version_cible){
 			spip_log("Maj de la table amap_paniers V1.0", "amap_installation");
 			ecrire_meta($nom_meta_version_base, $current_version=$version_cible, 'non');
 			}
+		if (version_compare($current_version,'1.1','<')) {
+			maj_tables("spip_amap_responsables");
+			spip_log("Maj de la table spip_amap_responsables V1.1", "amap_installation");
+			ecrire_meta($nom_meta_version_base, $current_version=$version_cible, 'non');
+			}
 		}
 }
 function amap_vider_tables($nom_meta_version_base){
@@ -61,6 +66,7 @@ function amap_vider_tables($nom_meta_version_base){
 	include_spip('base/abstract_sql');
 	sql_drop_table('spip_amap_livraisons');
 	sql_drop_table('spip_amap_paniers');
+	sql_drop_table('spip_amap_responsables');
 	//suppression des champs supplementaire
 	$champs = amap_declarer_champs_extras();
 	desinstaller_champs_extras($champs, $nom_meta_base_version);

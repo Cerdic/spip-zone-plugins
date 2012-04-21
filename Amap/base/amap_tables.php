@@ -85,6 +85,7 @@ function amap_declarer_tables_interfaces($interface){
 	//-- Alias
 	$interface['table_des_tables']['amap_livraisons'] = 'amap_livraisons';
 	$interface['table_des_tables']['amap_paniers'] = 'amap_paniers';
+	$interface['table_des_tables']['amap_responsables'] = 'amap_responsables';
 	//-- filtre date
 	$interface['table_date']['amap_paniers'] = 'date_distribution';
 	//-- Savoit traiter "_ " en <br />
@@ -121,6 +122,20 @@ function amap_declarer_tables_principales($tables_principales){
 	$tables_principales['spip_amap_paniers'] = array(
 		'field' => &$spip_amap_paniers,
 		'key' => &$spip_amap_paniers_key,
+		);
+
+	//-- Table amap_responsables -------------------
+	$spip_amap_responsables = array(
+		'id_amap_responsable'  => 'bigint NOT NULL AUTO_INCREMENT',
+		'id_auteur'  => 'bigint NOT NULL',
+		'date_distribution'  => 'datetime DEFAULT "0000-00-00 00:00:00" NOT NULL',
+		);
+	$spip_amap_responsables_key = array(
+		'PRIMARY KEY'   => 'id_amap_responsable'
+		);
+	$tables_principales['spip_amap_responsables'] = array(
+		'field' => &$spip_amap_responsables,
+		'key' => &$spip_amap_responsables_key,
 		);
 
     return $tables_principales;
