@@ -98,4 +98,34 @@ function relecture_formulaire_charger($flux){
 	return $flux;
 }
 
+
+function relecture_pre_insertion($flux) {
+
+	// Traitements particuliers de l'objet relecture dans le cas d'une ouverture :
+	if ($flux['args']['table'] == 'spip_relectures') {
+		if ($id_article = intval(_request('id_article'))) {
+			// - recuperation des informations de l'article concerne (id, chapo, texte, descriptif, ps et la revision courante)
+			$select = array('id_article, chapo AS article_chapo', 'descriptif AS article_descr', 'texte AS article_texte', 'ps AS article_ps');
+			$from = 'spip_articles';
+			$where = array("id_article=$id_article");
+			$article = sql_fetsel($select, $from, $where);
+			foreach ($article as $_cle => $_valeur) {
+				$flux['data'][$_cle] = $_valeur;
+			}
+
+			// - mise a jour de la revision d'ouverture et de la date de fin de commentaire (valeur par defaut)
+			$from = 'spip_versions';
+			$where = array("objet=" . sql_quote('article'), "id_objet=$id_article");
+			$revision = sql_getfetsel('max(id_version) AS revision_ouverture', $from, $where);
+			$flux['data']['revision_ouverture'] = $revision;
+			$flux['data']['date_fin_commentaire'] = date('Y-m-d H:i:s', strtotime("+1 week"));
+
+			// - surcharge la valeur du statut mis par le traitement par defaut
+			$flux['data']['statut'] = 'ouverte';
+		}
+	}
+
+	return $flux;
+}
+
 ?>
