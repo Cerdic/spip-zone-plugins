@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_modifier' => 'Modifier',
 	'action_supprimer' => 'Supprimer',
 	'adherent' => 'Adhérent',
+	'adherents_jour' => 'Adherents du jour', // pas d'accent c'est utiliser dans le pdf des paniers
 	'adherent_sans_type_panier_sans_type_adherent' => 'Vos adhérents n\'ont pas encore de type de panier affecté ou de type d\'adhérent.', 
 	'adhesion' => 'Adhésion (ex:2008)',
 	'adhesion_auteur' => 'Adhésion :',
@@ -101,6 +102,7 @@ Je récupère le panier du @date_distribution@ produit par @nom_producteur@
 	'pas_date_distributions' => 'Pas de date de distribution renseigné.',
 	'pas_paniers' => 'Vous ne disposez d\'aucun panier durant cette saison, en effet aucun contrat vous concernant n\'est actuellement en cours',
 	'pas_producteur_amap' => 'Vous n\'avez pas de producteur dans votre amap.',
+	'pas_responsable_distribution' => 'Vous êtes pas responsable pour les distributions de la saison en cours.',
 	'petit' => 'Petit',
 	'producteur' => 'Producteur',
 	'producteurs' => 'Producteurs',
@@ -133,6 +135,8 @@ Je récupère le panier du @date_distribution@ produit par @nom_producteur@
 	// V
 	'visiteur' => 'Visiteur',
 	'vos_paniers' => 'Vos paniers',
+	'vous_etes_responsable_distribution' => 'Vous êtes responsables pour la distribution suivante :',
+	'vous_etes_responsable_distributions' => 'Vous êtes responsables pour les distributions suivante :',
 );
 
 ?>

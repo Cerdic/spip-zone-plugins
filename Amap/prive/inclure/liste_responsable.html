@@ -1,0 +1,29 @@
+#CACHE{0}
+<p style="text-align: justify;">
+	<BOUCLE_responsables1(AMAP_RESPONSABLES) {id_auteur} />
+		[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:vous_etes_responsable_distribution, amap:vous_etes_responsable_distributions, nb})]
+	<//B_responsables1>
+</p>
+
+<B_responsables>
+[<p class="pagination">(#PAGINATION)</p>]
+<table class="amap spip">
+	<thead>
+	<tr>
+		<th>[(#TRI{date_distribution,<:amap:date_distribution:>})]</th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_responsables(AMAP_RESPONSABLES auteurs) {tri date_distribution}{pagination 20}{id_auteur}>
+	<tr>
+		<td>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
+	</tr>
+	</BOUCLE_responsables>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_responsables>
+	<p style="text-align: justify;">
+		<:amap:pas_responsable_distribution:>
+	</p>
+<//B_responsables>

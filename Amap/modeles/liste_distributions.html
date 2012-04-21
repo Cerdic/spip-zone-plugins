@@ -3,12 +3,14 @@
 	<thead>
 	<tr>
 		<th><:amap:date_distribution:></th>
+		<th><:amap:responsables:></th>
 	</tr>
 	</thead>
 	<tbody>
 	<BOUCLE_evenements(EVENEMENTS) {par date_debut}{age<0}>
 	<tr>
 		<td>[(#DATE_DEBUT|affdate{'d/m/Y'})]</td>
+		<td><BOUCLE_prod(AMAP_RESPONSABLES auteurs){tous}{date_distribution=#DATE_DEBUT}{', '}>#NOM</BOUCLE_prod></td>
 	</tr>
 	</BOUCLE_evenements>
 	</tbody>

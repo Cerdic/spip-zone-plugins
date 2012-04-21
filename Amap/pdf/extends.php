@@ -32,6 +32,17 @@ var $titre;
 		parent::Header();
 	}
 
+	function TitreChapitre($num, $libelle){
+		// Titre
+		$this->SetFont('Arial','',10);
+		//$this->SetFillColor(200,220,255);
+		$this->Cell(0,6,"$libelle",0,1,'L');
+		$this->Ln(10);
+		// Sauvegarde de l'ordonnée
+		$this->y0 = $this->GetY();
+	}
+
+
 	/* fonction ajoute pour Associaspip */
 	/* alors que la fonction Query de base prend uniquement une query sql, celle-ci permet d'ajouter un tableau et le nom d'un champs sur lequel */
 	/* faire la jointure avec la query existente. Cela permet d'ajouter a la query (par un array_merge qui peut ecraser des champs si ils sont   */

@@ -9,8 +9,17 @@
 </ul>
 </div>
 <!--/#navigation-->
-<BOUCLE_prod(AUTEURS){id_auteur=#ID_PRODUCTEUR}{tous}><h1><:amap:liste_paniers_vendu_par{nom=#NOM}:></h1></BOUCLE_prod>
 
-<div class="cadre cadre-r">
-	<INCLURE{fond=prive/inclure/liste_panier_producteur,env}>
+<h1><:amap:gestion_amap:></h1>
+
+
+<div class="cadre cadre-trait-couleur">
+	<div class="titrem impliable">
+		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata.gif}">
+		<BOUCLE_aut(AUTEURS){id_auteur=#ID_PRODUCTEUR}{tous}><:amap:liste_paniers_vendu_par{nom=#NOM}:></BOUCLE_aut>
+	</div>
+	<div class="cadre_padding">
+		<INCLURE{fond=prive/inclure/liste_panier_producteur,env}>
+		<INCLURE{fond=prive/inclure/liste_responsable,env}{id_auteur=#ID_PRODUCTEUR}>
+	</div>
 </div>
