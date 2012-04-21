@@ -246,6 +246,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 	$chemin = is_array($D['chemin']) ? plugin2balise_chemin($D) :'';
 	$necessite = (is_array($D['necessite']) OR is_array($D['lib'])) ? plugin2balise_necessite($D) :'';
 	$utilise = is_array($D['utilise']) ? plugin2balise_utilise($D['utilise']) :'';
+	$procure = is_array($D['procure']) ? plugin2balise_procure($D['procure']) :'';
 	$bouton = is_array($D['menu']) ? plugin2balise_exec($D, 'menu') :'';
 	$onglet = is_array($D['onglet']) ? plugin2balise_exec($D, 'onglet') :'';
 
@@ -258,7 +259,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 	
 	$paquet = 
 		"<$balise$attributs" . ($balise == 'paquet' ? "\n>" : ">") .
-		"\t$nom$commentaire$auteur$licence$traduire$pipeline$necessite$utilise$bouton$onglet$chemin$balises_spip\n" .
+		"\t$nom$commentaire$auteur$licence$traduire$pipeline$procure$necessite$utilise$bouton$onglet$chemin$balises_spip\n" .
 		"</$balise>\n";
 	
 	return array($paquet, $commandes, $descriptions);
@@ -409,6 +410,7 @@ function plugin2balise_traduire($D) {
 // - necessite (plugins)
 // - lib (librairies)
 // - utilise
+// - procure
 // - bouton
 // - onglet
 
@@ -477,6 +479,18 @@ function plugin2balise_utilise($D) {
 				(!empty($i['version']) ? (" compatibilite=\"" . bornes2intervalle(intervalle2bornes($i['version'])) . "\"") : '') .
 				plugin2balise_lien($i['src']);
 		$res .="\n\t<utilise$att />";
+	}
+
+	return $res ? "\n$res" : '';
+}
+
+function plugin2balise_procure($D) {
+	$res = '';
+	foreach($D as $i) {
+		$nom = isset($i['id']) ? $i['id'] : $i['nom'];
+		$att = " nom=\"$nom\"" .
+				(!empty($i['version']) ? (" compatibilite=\"" . $i['version']) . "\"" : '');
+		$res .="\n\t<procure$att />";
 	}
 
 	return $res ? "\n$res" : '';
