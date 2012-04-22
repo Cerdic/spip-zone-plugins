@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_adresse' => 'Add an address',
 	'ajouter_email' => 'Add an email',
 	'ajouter_telephone' => 'Add a phone number', # MODIF
-	'articles' => 'Articles', # MODIF
+	'articles' => '@nb@ articles',
 	'auteurs' => 'Authors',
 
 	// C
@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_email' => 'Edit an email', # MODIF
 	'editer_numero' => 'Edit a phone number', # MODIF
 	'emails' => 'Emails',
-	'explication_objets_actifs' => 'What editorial objects should be provided contact information?', # MODIF
+	'explication_objets_actifs' => 'On which editorial objects should be provided contact information?',
 	'explication_type_adresse' => 'Type can be private or work',
 	'explication_type_email' => 'Type can be private or profesionnal',
 	'explication_type_numero' => 'Type can be private, work or fax',
@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_numero' => 'Phone number', # MODIF
 	'label_objets_actifs' => 'Objects',
 	'label_pays' => 'Country',
-	'label_telephone' => 'Phone', # MODIF
+	'label_telephone' => 'Phone',
 	'label_titre' => 'Title',
 	'label_type_adresse' => 'Address type',
 	'label_type_email' => 'Type of email',
