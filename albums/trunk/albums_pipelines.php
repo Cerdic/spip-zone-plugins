@@ -142,14 +142,6 @@ function albums_post_edition($flux){
 }
 
 
-// CSS PRIVE
-function albums_header_prive($flux){
-	$css_prive = generer_url_public('css/albums_prive.css', parametres_css_prive());
-	$flux .= "\n<link rel='stylesheet' type='text/css' type='text/css' media='all' href='$css_prive' />\n";
-	return $flux;
-}
-
-
 // CSS PUBLIC
 function albums_insert_head_css($flux) {
 	$flux .= '<link rel="stylesheet" href="'.find_in_path('css/albums.css').'" type="text/css" media="all" />';

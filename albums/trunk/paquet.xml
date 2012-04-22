@@ -1,7 +1,7 @@
 <paquet
 	prefix="Albums"
 	categorie="multimedia"
-	version="2.0.0"
+	version="2.0.1"
 	etat="dev"
 	compatibilite="[3.0.0-beta;["
 	logo="prive/themes/spip/images/albums-128.png"
@@ -24,7 +24,6 @@
 	<pipeline nom="affiche_milieu" inclure="albums_pipelines.php" /> <!-- page 'contenu du site': configuration plugin -->
 	<pipeline nom="afficher_complement_objet" inclure="albums_pipelines.php" /> <!-- objets: bloc albums -->
 	<pipeline nom="autoriser" inclure="albums_autoriser.php" />
-	<pipeline nom="header_prive" inclure="albums_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="albums_pipelines.php" />
 	<pipeline nom="post_insertion" inclure="albums_pipelines.php" /> <!-- edition des liens apres creation d'un album -->
 	<pipeline nom="post_edition" inclure="albums_pipelines.php" /> <!-- mettre a jour liens albums apres edition d'un objet-->
