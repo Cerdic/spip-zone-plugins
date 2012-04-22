@@ -87,45 +87,45 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'non_webmestres' => 'اين تنظيم براي وب‌مستر‌ها كاربست ندارد.',
 	'note_rubriques' => '(توجه كنيد كه فقط مديران مي‌توانند بخش‌ها را ايجاد كنند، و، مديران محدود، در بخش‌هاي خودشان مي‌توانند بخش بسازند)',
-	'nouvelles_rubriques' => 'de nouvelles rubriques à la racine du site', # NEW
-	'nouvelles_sous_rubriques' => 'de nouvelles sous-rubriques dans l\'arborescence.', # NEW
+	'nouvelles_rubriques' => 'از بخش‌هاي جديد در ريشه‌ي سايت',
+	'nouvelles_sous_rubriques' => 'زيربخش‌هاي جديد در درخت',
 
 	// O
-	'ouvrir_redacs' => 'Ouvrir aux rédacteurs du site  :', # NEW
-	'ouvrir_visiteurs_enregistres' => 'Ouvrir aux visiteurs enregistrés :', # NEW
-	'ouvrir_visiteurs_tous' => 'Ouvrir à tous les visiteurs du site :', # NEW
+	'ouvrir_redacs' => 'بازگشانيي به روي نويسندگان سايت: ',
+	'ouvrir_visiteurs_enregistres' => 'گشايش به روي بازديد‌كنندگان ثبت‌نام كرده: ',
+	'ouvrir_visiteurs_tous' => 'گشايش به روي تمام بازديدكنندگان سايت:',
 
 	// P
-	'pas_acces_espace_prive' => '<strong>Pas d\'accès à l\'espace privé :</strong> les rédacteurs n\'ont pas accès à l\'espace privé.', # NEW
-	'personne' => 'Personne', # NEW
-	'petitions_qui' => '<strong>Signatures :</strong> qui peut modifier les signatures des pétitions :', # NEW
-	'publication' => 'Publication', # NEW
-	'publication_qui' => 'Qui peut publier sur le site :', # NEW
+	'pas_acces_espace_prive' => '<strong>عدم دسترسي به قسمت شخصي:</strong> تويسندگان به قسمت شخصي دسترسي ندارند.',
+	'personne' => 'هيچكس',
+	'petitions_qui' => '<strong>امضا كنندگان::</strong> كسي كه مي‌تواند امضا كنندگان طومار را تعديل كند:',
+	'publication' => 'نشر',
+	'publication_qui' => 'كسي كه مي‌تواند روي سايت منتشر كند:‌',
 
 	// R
-	'redac_tous' => 'Tous les rédacteurs', # NEW
-	'redacs' => 'aux rédacteurs du site', # NEW
-	'redacteur' => 'rédacteur', # NEW
-	'redacteur_lire_stats' => '<strong>Rédacteur voit stats</strong> : les rédacteurs peuvent visualiser les statistiques.', # NEW
-	'redacteur_modifie_article' => '<strong>Rédacteur modifie proposés</strong> : chaque rédacteur peut modifier un article proposé à la publication, même s\'il n\'en est pas auteur.', # NEW
-	'refus_1' => '<p>Seuls les webmestres du site', # NEW
-	'refus_2' => 'sont autorisés à modifier ces paramètres.</p>
-<p>Pour en savoir plus, voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>.</p>', # NEW
-	'reglage_autorisations' => 'Réglage des autorisations', # NEW
+	'redac_tous' => 'تمام ويراستاران',
+	'redacs' => 'به ويراستان سايت',
+	'redacteur' => 'ويراستار',
+	'redacteur_lire_stats' => '<strong>ويراستار وضعيت را مي‌بيند</strong> : ويراستاران مي‌توانند آمارها را مشاهده كنند.',
+	'redacteur_modifie_article' => '<strong>ويراستار پيشنهادها را تعديل مي‌كند</strong>: هر ويراستار مي‌تواند يك مقاله‌ي پيشنهادي براي انتشار را تعديل كند، حتي اگر نويسنده نباشد.',
+	'refus_1' => '<p>فقط وب مسترهاي سايت ',
+	'refus_2' => 'مجازاند اين پارامتر‌ها را تعديل كنند.</p>
+<p>براي آگاهي بيشتر، بنگريد <a href="http://www.spip-contrib.net/-Autorite-">مستندات </a>.</p>',
+	'reglage_autorisations' => 'تنظيم مجوز‌ها',
 
 	// S
-	'sauvegarde_qui' => 'Qui peut effectuer des <strong>sauvegardes</strong> ?', # NEW
+	'sauvegarde_qui' => 'كي‌ مي‌تواند  <strong>بك آپ بگيرد</strong>?',
 
 	// T
-	'tous' => 'Tous', # NEW
-	'tout_deselectionner' => ' tout déselectionner', # NEW
+	'tous' => 'همه',
+	'tout_deselectionner' => 'رد انتخاب همه',
 
 	// V
-	'valeur_defaut' => '(valeur par défaut)', # NEW
-	'visiteur' => 'visiteur', # NEW
-	'visiteurs_anonymes' => 'les visiteurs anonymes peuvent créer de nouvelles pages.', # NEW
-	'visiteurs_enregistres' => 'aux visiteurs enregistrés', # NEW
-	'visiteurs_tous' => 'à tous les visiteurs du site.', # NEW
+	'valeur_defaut' => '(ارزش پيش‌گزيده)',
+	'visiteur' => 'بازديدكننده',
+	'visiteurs_anonymes' => 'بازديدكنندگان ناشناس مي‌توانند صفحه‌هاي جديد ايجاد كنند.',
+	'visiteurs_enregistres' => 'براي بازديد‌كنندگان ثبت نام كرده',
+	'visiteurs_tous' => 'براي تمام بازديدكنندگان سايت.',
 
 	// W
 	'webmestre' => 'وب مستر',
