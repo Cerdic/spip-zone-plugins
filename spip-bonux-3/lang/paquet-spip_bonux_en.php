@@ -9,8 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'spip_bonux_description' => 'The plugin that make SPIP better than SPIP, with nice gifts inside !
-	arrays, counter, etc.', # MODIF
-	'spip_bonux_slogan' => 'The plugin that make SPIP better than SPIP.' # MODIF
+	arrays, counter, etc.',
+	'spip_bonux_slogan' => 'The plugin that make SPIP better than SPIP.'
 );
 
 ?>
