@@ -52,7 +52,6 @@
 @define('REG_NOM_TABLE_BOUCLE', '\([^)]*\)');
 
 // criteres | arguments : {critere > 0} {critere = #ENV{truc}}
-// reste un bug sur : {#ENV{truc}, #TITO}
 @define('REG_CRITERES', '\{(\s*(?:([^\{\}]+)|(?R))*\s*)\}');
 
 // Remplacements de Regexp par GESHI
