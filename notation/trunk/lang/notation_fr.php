@@ -101,11 +101,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ponderation' => 'Pondération de la note',
 
 	// T
-	'totaux' => 'Totaux',
 	'titre_ip' => 'Mode de fonctionnement :',
 	'topnb' => 'Les 10 objets les plus notés',
 	'topten' => 'Les 10 meilleures notes',
 	'toptenp' => 'Les 10 meilleures notes (pondérées)',
+	'totaux' => 'Totaux',
 
 	// V
 	'valeur_nb_etoiles' => 'Notation de 1 à ',

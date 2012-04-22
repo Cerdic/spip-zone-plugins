@@ -107,6 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'topnb' => 'The 10 items which are the most rated',
 	'topten' => 'The top 10 scores',
 	'toptenp' => 'The 10 highest scores (weighted)',
+	'totaux' => 'Totaux', # NEW
 
 	// V
 	'valeur_nb_etoiles' => 'Rating from 1 to ',

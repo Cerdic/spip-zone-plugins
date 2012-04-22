@@ -107,6 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'topnb' => '10 najlepšie ohodnotených objektov',
 	'topten' => '10 najlepších známok',
 	'toptenp' => '10 najlepších (vážených) známok ',
+	'totaux' => 'Totaux', # NEW
 
 	// V
 	'valeur_nb_etoiles' => 'Hodnotenie od 1 do ',
