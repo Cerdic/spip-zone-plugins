@@ -489,7 +489,7 @@ function plugin2balise_procure($D) {
 	foreach($D as $i) {
 		$nom = isset($i['id']) ? $i['id'] : $i['nom'];
 		$att = " nom=\"$nom\"" .
-				(!empty($i['version']) ? (" compatibilite=\"" . $i['version']) . "\"" : '');
+				(!empty($i['version']) ? (" version=\"" . $i['version']) . "\"" : '');
 		$res .="\n\t<procure$att />";
 	}
 
