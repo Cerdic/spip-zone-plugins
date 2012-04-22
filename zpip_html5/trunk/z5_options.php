@@ -1,3 +1,3 @@
 <?php
-$GLOBALS['z_blocs'] = array('content','extra1','extra2','head','head_js','header','footer','foot_js');
+$GLOBALS['z_blocs'] = array('content','extra1','extra2','head','head_js','header','footer');
 ?>
