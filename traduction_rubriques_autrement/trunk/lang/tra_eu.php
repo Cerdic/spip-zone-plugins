@@ -11,7 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_traduction' => 'Itzulpen bat gehitu',
 
 	// R
-	'rubrique_reference' => '(Erreferentziazko atala)'
+	'rubrique_reference' => '(Erreferentziazko atala)',
+
+	// T
+	'trad_delier_rubrique' => 'Ne plus lier cette rubrique à ces traductions' # NEW
 );
 
 ?>

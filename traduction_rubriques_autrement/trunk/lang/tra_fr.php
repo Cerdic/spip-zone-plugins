@@ -10,11 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'rubrique_reference' => '(rubrique de référence)',
-	
-	//T
-	'trad_delier_rubrique' => 'Ne plus lier cette rubrique &agrave; ces traductions',
-	
-	
+
+	// T
+	'trad_delier_rubrique' => 'Ne plus lier cette rubrique à ces traductions'
 );
 
 ?>
