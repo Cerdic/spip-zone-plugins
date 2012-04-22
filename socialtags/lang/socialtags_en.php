@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_noisette_facebook_like_box' => 'Facebook-like box',
 
 	// T
-	'titre_menu' => 'Social tags', # NEW
+	'titre_menu' => 'Social tags',
 	'titre_mon_badge_facebook' => 'My Facebook badge',
 	'titre_sur_facebook' => 'On Facebook'
 );
