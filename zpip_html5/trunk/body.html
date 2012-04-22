@@ -1,29 +1,12 @@
 <body>
-	[(#REM) Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
-       chromium.org/developers/how-tos/chrome-frame-getting-started ]
-  <!--[if lt IE 7]>
-	<p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
-
 	<section class="page">
 		<header id="header"><INCLURE{fond=header/#ENV{type-page},env} /></header>
 		<nav class="hornav clearfix" id="nav"><INCLURE{fond=inclure/nav,env} /></nav>
-		
-		<div class="container" role="main">
-			<section class="content" id="content">
-				<INCLURE{fond=content/#ENV{type-page},env} />
-			</section>
-			<aside class="extra1 col" id="extra1">
-				<INCLURE{fond=extra1/#ENV{type-page},env} />
-			</aside>
-			<aside class="extra2 col" id="extra2">
-				<INCLURE{fond=extra2/#ENV{type-page},env} />
-			</aside>
-		</div>
-
-		<footer id="footer">
-			<INCLURE{fond=footer/#ENV{type-page},env} />
-		</footer>
+		<section class="container" id="container" role="main">
+			<section class="content" id="content"><INCLURE{fond=content/#ENV{type-page},env} /></section>
+			<aside class="extra1 col" id="extra1"><INCLURE{fond=extra1/#ENV{type-page},env} /></aside>
+			<aside class="extra2 col" id="extra2"><INCLURE{fond=extra2/#ENV{type-page},env} /></aside>
+		</section>
+		<footer id="footer"><INCLURE{fond=footer/#ENV{type-page},env} /></footer>
 	</section>
-	[(#REM) Chargements scripts et plugins en pied de page (Exemple : Google analytics) ]
-	<INCLURE{fond=foot_js/#ENV{type-page},env} />
 </body>
