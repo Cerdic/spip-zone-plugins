@@ -16,17 +16,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 @puce@ SPIP provides the shortcut <code>[?word]</code> to link words to their definitions. By default (or if you leave the checkbox below empty), wikipedia.org is used as the external glossary. You may choose another address if you wish. <br />Test link: [?SPIP][[%url_glossaire_externe2%]]',
 	'SPIP_liens:description1' => '@puce@ SPIP includes a CSS style for "mailto:" email links: a little envelope should appear just before each "mailto" link. However, not all browsers are able to display it (specifically IE6, IE7 and SAF3, in particular, cannot). It is up to you to decide whether to retain this image insertion feature.
-
 _ Test link:[->test@example.com] (Reload the whole page to test.)[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP and external links',
 	'SPIP_tailles:description' => '@puce@ In order to lighten the memory load on your server, SPIP allows you to restrict the dimensions (height and width) and the file sizes of the images, logos or documents that are attached to the various content elements of your site. If a given file exceeds the specified size, the form will still return the data in question but they will be destroyed and SPIP will not retain them for reuse, neither in the IMG/ directory nor in the database. A warning message will then be sent to the user.
 
 A null or blank value indicates an unlimited value.
-
 [[Height: %img_Hmax% pixels]][[->Width: %img_Wmax% pixels]][[->File size: %img_Smax% KB]]
-
 [[Height: %logo_Hmax% pixels]][[->Width: %logo_Wmax% pixels]][[->File size: %logo_Smax% KB]]
-
 [[File size: %doc_Smax% KB]]
 
 @puce@ Enter here the maximum space reserved for remote files that SPIP will be able to download (from server to server) and store on your site. The default value here is 16 MB.[[%copie_Smax% MB]]
@@ -34,7 +30,6 @@ A null or blank value indicates an unlimited value.
 @puce@ In order to avoid PHP memory overloads in processing large images with the GD2 library, SPIP tests the server capacities and can then refuse to process images that are too large. It is possible to deactivate this test by manually defining the maximum number of pixels supported for the calculation processes.
 
 The value of 1,000,000 pixels appears to be reasonable for a configuration with little available memory. A null or blank value will mean that the testing will occur on the server.
-
 [[%img_GDmax% maximum pixels]]
 
 @puce@ The GD2 library is used to modify the compression quality of any JPG images. A higher percentage corresponds to better quality.
@@ -66,9 +61,9 @@ Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [
 	'auteurs:nom' => 'Authors page',
 	'autobr:description' => 'Applies the {|post_autobr} filter to certain types of SPIP content, replacing single line feeds with an HTML line break <br />.[[%alinea%]]',
 	'autobr:nom' => 'Automatic line breaks',
-	'autobr_non' => '>All site text between <alinea></alinea> tags',
+	'autobr_non' => 'All site text between &lt;alinea>&lt;/alinea> tags',
 	'autobr_oui' => 'All article text and public messages  (the #TEXTE tag)',
-	'autobr_racc' => 'Line breaks: <b><alinea></alinea></b>',
+	'autobr_racc' => 'Line breaks: <b>&lt;alinea>&lt;/alinea></b>',
 
 	// B
 	'balise_set:description' => 'In order to reduce the complexity of code segments like <code>#SET{x,#GET{x}|a_filter}</code>, this tool offers you the following short-cut: <code>#SET_UN_FILTRE{x}</code>. The filter applied to a variable is therefore passed in the name of the tag.
@@ -147,54 +142,33 @@ _ • A search field starting from %select_max_auteurs% author(s).</q1>',
 	'chatons:description' => 'Replace <code>:name</code> style tags with smiley images in the text.
 _ This tool will replace these shortcuts with the images of the same name found in the <code>mon_squelette_toto/img/chatons/</code> directory, or else, by default, those found in <code>couteau_suisse/img/chatons/</code>.',
 	'chatons:nom' => 'Smileys',
-	'citations_bb:description' => 'In order to respect the HTML usages in the SPIP content of your site (articles, sections, etc.), this tool replaces the markup <quote> by the markup <q> when there are no line returns. In fact, quotations must be surrounded by <q> tags and the quotations containing paragraphs must be surrounded by <blockquote> tags.', # MODIF
+	'citations_bb:description' => 'In order to respect the HTML usages in the SPIP content of your site (articles, sections, etc.), this tool replaces the markup &lt;quote> by the markup &lt;q> when there are no line returns. In fact, quotations must be surrounded by &lt;q> tags and the quotations containing paragraphs must be surrounded by &lt;blockquote> tags.', # MODIF
 	'citations_bb:nom' => 'Well delimited citations',
 	'class_spip:description1' => 'Here you can define some SPIP shortcuts. An empty value is equivalent to using the default.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{SPIP shortcuts}}.
 
 This is where you can define some SPIP shortcuts. An empty value is equivalent to using the default.[[%racc_hr%]][[%puce%]]',
 	'class_spip:description3' => '
+{N.B. If the "[.->pucesli]" tool has been activated, then the automatic replacing of "-" hyphens will no longer occur; a regular &lt;ul>&lt;li> list will be used instead.}
 
-{N.B. If the "[.->pucesli]" tool has been activated, then the automatic replacing of "-" hyphens will no longer occur; a regular <ul><li> list will be used instead.}
+SPIP normally uses the &lt;h3> tag for subtitles. Here you can choose a different tag to be used instead: [[%racc_h1%]][[->%racc_h2%]]',
+	'class_spip:description4' => 'SPIP normally uses the &lt;strong> tag for marking boldface type. But &lt;b> could also be used, with or without styling. You can choose: [[%racc_g1%]][[->%racc_g2%]]
 
-SPIP normally uses the <h3> tag for subtitles. Here you can choose a different tag to be used instead: [[%racc_h1%]][[->%racc_h2%]]', # MODIF
-	'class_spip:description4' => '
+SPIP normally uses the &lt;i> tag for marking italics. But &lt;em> could also be used, with or without styling. You can choose: [[%racc_i1%]][[->%racc_i2%]]
 
+You can also define the code used to open and close the calls to footnotes (N.B. These changes will only be visible on the public site.): [[%ouvre_ref%]][[->%ferme_ref%]]
 
-
-SPIP normally uses the <strong> tag for marking boldface type. But <b> could also be used, with or without styling. You can choose: [[%racc_g1%]][[->%racc_g2%]]
-
-
-
-SPIP normally uses the <i> tag for marking italics. But <em> could also be used, with or without styling. You can choose: [[%racc_i1%]][[->%racc_i2%]]
-
-
-
- You can also define the code used to open and close the calls to footnotes (N.B. These changes will only be visible on the public site.): [[%ouvre_ref%]][[->%ferme_ref%]]
-
- 
-
- You can define the code used to open and close footnotes: [[%ouvre_note%]][[->%ferme_note%]]
-
-
+You can define the code used to open and close footnotes: [[%ouvre_note%]][[->%ferme_note%]]
 
 @puce@ {{The default SPIP styles}}. Up to version 1.92 of SPIP, typographical shortcuts produced HTML tags all marked with the class "spip". For example, <code><p class="spip"></code>. Here you can define the style of these tags in order to link them to your own stylesheets. An empty box means that no particular style will be applied.
 
-
-
 {N.B. If any of the above shortcuts (horizontal line, subtitle, italics, bold) have been modified, then the styles below will not be applied.}
 
-
-
 <q1>
+_ {{1.}} Tags &lt;p>, &lt;i>, &lt;strong>: [[%style_p%]]
+_ {{2.}} Tags &lt;tables>, &lt;hr>, &lt;h3>, &lt;blockquote> and the lists (&lt;ol>, &lt;ul>, etc.):[[%style_h%]]
 
-_ {{1.}} Tags <p>, <i>, <strong>: [[%style_p%]]
-
-_ {{2.}} Tags <tables>, <hr>, <h3>, <blockquote> and the lists (<ol>, <ul>, etc.):[[%style_h%]]
-
-
-
-N.B. by changing the second parameter you will lose any standard SPIP styles associated with those tags.</q1>', # MODIF
+N.B. by changing the second parameter you will lose any standard SPIP styles associated with those tags.</q1>',
 	'class_spip:nom' => 'SPIP and its shortcuts...',
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Functions',
@@ -224,7 +198,7 @@ In the same way, to change the background colour if the following option allows:
 
 [[%couleurs_fonds%]]
 [[%set_couleurs%]][[-><set_couleurs valeur="1">%couleurs_perso%</set_couleurs>]]
-@_CS_ASTER@The format of these personalised tags have to be of existing colours or defined pairs "tag=colour", separated by commas. Examples: "grey, red", "smooth=yellow, strong=red", "low=#99CC11, high=brown" but also "grey=#DDDDCC, red=#EE3300". For the first and last examples, the allowed tags are: <code>[grey]</code> and <code>[red]</code> (<code>[fond grey]</code> and <code>[fond red]</code> if background colours are allowed).', # MODIF
+@_CS_ASTER@The format of these personalised tags have to be of existing colours or defined pairs "tag=colour", separated by commas. Examples: "grey, red", "smooth=yellow, strong=red", "low=#99CC11, high=brown" but also "grey=#DDDDCC, red=#EE3300". For the first and last examples, the allowed tags are: <code>[grey]</code> and <code>[red]</code> (<code>[fond grey]</code> and <code>[fond red]</code> if background colours are allowed).',
 	'couleurs:nom' => 'Coloured text',
 	'couleurs_fonds' => ', <b>[fond coul]text[/coul]</b>, <b>[bg coul]text[/coul]</b>',
 	'cs_comportement:description' => '@puce@ {{Logs.}} Record a lot of information about the functions executed by the Swiss Army Knife plugin in the {spip.log} files which can be found in this directory: {<html>@_CS_DIR_TMP@</html>}[[%log_couteau_suisse%]]
@@ -235,7 +209,7 @@ In the same way, to change the background colour if the following option allows:
 
 @puce@ {{External requests.}} The Swiss Army Knife regularly checks for new versions of itself and shows any available updates on its configuration page.  In addition, this plugin contains certain tools which may be required for importing remote libraries.
 
-If the external requests involved do not work from your server, or you wish to lock down a possible security weakness, check these boxes to turn them off.[[%distant_off%]][[->%distant_outils_off%]]', # MODIF
+If the external requests involved do not work from your server, or you wish to lock down a possible security weakness, check these boxes to turn them off.[[%distant_off%]][[->%distant_outils_off%]]',
 	'cs_comportement:nom' => 'Behaviour of the Swiss Army Knife',
 	'cs_distant_off' => 'Checks of remote versions',
 	'cs_distant_outils_off' => 'The Swiss Knife tools which have remote files',
@@ -259,29 +233,20 @@ The parameter {type} above can be one of three values:
 - {div}: block element tag
 - {auto}: tag chosen automatically by the plugin
 
-[[%decoration_styles%]]', # MODIF
+[[%decoration_styles%]]',
 	'decoration:nom' => 'Decoration',
-	'decoupe:aide' => 'Tabbed block: <b><onglets></onglets></b><br/>Page or tab separator: @sep@', # MODIF
+	'decoupe:aide' => 'Tabbed block: <b>&lt;onglets>&lt;/onglets></b><br/>Page or tab separator: @sep@', # MODIF
 	'decoupe:aide2' => 'Alias: @sep@',
 	'decoupe:description' => '@puce@ Divides the display of an article into several pages using automatic page numbering. Simply place four consecutive + characters (<code>++++</code>) in your article wherever you wish a page break to occur.
 
-
-
 By default, the Swiss Army Knife plugin inserts the pagination links at the top and bottom of the page. But you can place the links elsewhere in your template by using the #CS_DECOUPE tag, which you can activate here:
-
 [[%balise_decoupe%]]
-
-
 
 @puce@ If you use this separator between <onglets> and </onglets> tags, then you will receive a tabbed page instead.
 
-
-
 In templates you can use the tags #ONGLETS_DEBUT (start), #ONGLETS_TITRE (title) and #ONGLETS_FIN (end).
 
-
-
-This tool may be combined with "[.->sommaire]".', # MODIF
+This tool may be combined with "[.->sommaire]".',
 	'decoupe:nom' => 'Division in pages and tabs',
 	'desactiver_flash:description' => 'Deletes the flash objects from your site and replaces them by the associated alternative content.',
 	'desactiver_flash:nom' => 'Deactivate flash objects',
@@ -341,9 +306,7 @@ When making an official update, update the associated remote file (click above o
 - Local file version: ',
 	'ecran_securite:nom' => 'Security screen',
 	'effaces' => 'Deleted',
-	'en_travaux:description' => 'Makes it possible to display a customised message on the public site and also in the private editing area during maintenance work.
-
-[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1">%avertir_travaux%</admin_travaux>]][[%prive_travaux%]]', # MODIF
+	'en_travaux:description' => 'Makes it possible to display a customised message on the public site and also in the private editing area during maintenance work.',
 	'en_travaux:nom' => 'Site in maintenance mode',
 	'erreur:bt' => '<span style=\\"color:red;\\">Warning:</span> the typographical toolbar (version @version@) appears to be an old version.<br />The Swiss Army Knife is compatible only with version @mini@ or newer.',
 	'erreur:description' => 'missing id in the tool\'s definition!',
@@ -362,26 +325,18 @@ When making an official update, update the associated remote file (click above o
 	// F
 	'f_jQuery:description' => 'Prevents the installation of {jQuery} on the public site in order to economise some "machine resources". The jQuery library ([->http://jquery.com/]) is useful in JavaScript programming and many plugins use it. SPIP uses it in the editing interface.
 
-
-
-N.B. some Swiss Knife tools require {jQuery} to be installed. ', # MODIF
+N.B. some Swiss Knife tools require {jQuery} to be installed. ',
 	'f_jQuery:nom' => 'Deactivate jQuery',
 	'filets_sep:aide' => 'Dividing lines: <b>__i__</b> or <b>i</b> is a number between <b>0</b> and <b>@max@</b>.<br />Other available lines: @liste@',
 	'filets_sep:description' => 'Inserts separating lines for any SPIP texts which can be customised with a stylesheet.
-
-_ The syntax is: "__code__", where "code" is either the identifying number (from 0 to 7) of the line to insert and which is linked to the corresponding style, or the name of an image in the plugins/couteau_suisse/img/filets directory.', # MODIF
+_ The syntax is: "__code__", where "code" is either the identifying number (from 0 to 7) of the line to insert and which is linked to the corresponding style, or the name of an image in the plugins/couteau_suisse/img/filets directory.',
 	'filets_sep:nom' => 'Dividing lines',
 	'filtrer_javascript:description' => 'Three modes are available for controlling JavaScript inserted directly in the text of articles:
-
 - <i>never</i>: JavaScript is prohibited everywhere
-
 - <i>default</i>: the presence of JavaScript is highlighted in red in the editing interface
-
 - <i>always</i>: JavaScript is always accepted.
 
-
-
-N.B. in forums, petitions, RSS feeds, etc., JavaScript is <b>always</b> made secure.[[%radio_filtrer_javascript3%]]', # MODIF
+N.B. in forums, petitions, RSS feeds, etc., JavaScript is <b>always</b> made secure.[[%radio_filtrer_javascript3%]]',
 	'filtrer_javascript:nom' => 'JavaScript management',
 	'flock:description' => 'Deactivates the file-locking system which uses the PHP {flock()} function. Some web-hoting environments are unable to work with this function. Do not activate this tool if your site is functioning normally.',
 	'flock:nom' => 'Files are not locked',
@@ -392,7 +347,7 @@ Technically, this tool does this:
 - deactivates the search for a template matching the object\'s language.
 - deactivates the automatic <code>{lang_select}</code> criterion on SPIP objects (articles, news items, sections, etc.).
 
-This means that multi blocks will always displayed in the language requested by the visitor.', # MODIF
+This means that multi blocks will always displayed in the language requested by the visitor.',
 	'forcer_langue:nom' => 'Force language',
 	'format_spip' => 'Articles in SPIP format',
 	'forum_lgrmaxi:description' => 'By default forum messages are not limited in size. If this tool is activated, an error message is shown each time someone tries to post a message larger than the size given, and the message is refused. An empty value (or 0) means that no limit will be imposed.[[%forum_lgrmaxi%]]',
@@ -402,13 +357,9 @@ This means that multi blocks will always displayed in the language requested by 
 	'glossaire:aide' => 'A text with no glossary: <b>@_CS_SANS_GLOSSAIRE@</b>',
 	'glossaire:description' => '@puce@ Use one or several groups of keywords to manage an internal glossary. Enter the names of the keyword groups here, separating them by colons (:). If you leave the box empty (or enter "Glossaire"), it is the "Glossaire" group which will be used.[[%glossaire_groupes%]]
 
-
-
 @puce@ You can indicate the maximum number of links to create in a text for each word. A null or negative value will mean that all instances of the words will be processed. [[%glossaire_limite% per keyword]]
 
-
-
-@puce@ There is a choice of two options for generating the small window which appears for the mouseover or hover event. [[%glossaire_js%]][[->%glossaire_abbr%]]', # MODIF
+@puce@ There is a choice of two options for generating the small window which appears for the mouseover or hover event. [[%glossaire_js%]][[->%glossaire_abbr%]]',
 	'glossaire:nom' => 'Internal glossary',
 	'glossaire_abbr' => 'Ignorer les balises <code><abbr></code> et <code><acronym></code>', # NEW
 	'glossaire_css' => 'CSS solution',
@@ -431,39 +382,27 @@ _ • [Whole plugin|Reset to the original state of the plugin->@reset@]@install@
 </p>',
 	'horloge:description' => 'Tool currently under development. It offers a JavaScript clock. Tag: <code>#HORLOGE</code>. Model: <code><horloge></code>
 
-
-
-Available arguments: {zone}, {format} and/or {id}.', # MODIF
+Available arguments: {zone}, {format} and/or {id}.',
 	'horloge:nom' => 'Clock',
 
 	// I
 	'icone_visiter:description' => 'Replaces the standard "<:icone_visiter_site:>" button (top right on this page) with the site logo, if there is one.
 
-
-
-To define this logo, go to the "<:titre_configuration:>" page by clicking on the "<:icone_configuration_site:>" button.', # MODIF
+To define this logo, go to the "<:titre_configuration:>" page by clicking on the "<:icone_configuration_site:>" button.',
 	'icone_visiter:nom' => '"<:icone_visiter_site:>" button',
 	'insert_head:description' => 'Activate the tag [#INSERT_HEAD->http://www.spip.net/en_article2421.html] in all templates, whether or not this tag is present between <head> et </head>. This option can be used to allow plugins to insert javascript code (.js) or stylesheets (.css).', # MODIF
 	'insert_head:nom' => '#INSERT_HEAD tag',
 	'insertions:description' => 'N.B.: tool in development!! [[%insertions%]]',
 	'insertions:nom' => 'Auto-correct',
-	'introduction:description' => 'This tag can be used in templates to generate short summaries of articles, new items, etc., typically on the home page or in sections</p>
+	'introduction:description' => 'This tag can be used in templates to generate short summaries of articles, new items, etc., typically on the home page or in sections<
 
-<p>{{Beware}}: If you have another plugin defining the function {balise_INTRODUCTION()} or if you have defined it in your templates, you will get a compilation error.</p>
+{{Beware}}: If you have another plugin defining the function {balise_INTRODUCTION()} or if you have defined it in your templates, you will get a compilation error.
 
-@puce@ You can specify (as a percentage of the default value) the length of the text generated by the tag #INTRODUCTION. A null value, or a value equal to 100 will not modify anything and uses the following default values: 500 characters for the articles, 300 for the news items and 600 for forums or sections.
+@puce@ You can specify (as a percentage of the default value) the length of the text generated by the tag #INTRODUCTION. A null value, or a value equal to 100 will not modify anything and uses the following default values: 500 characters for the articles, 300 for the news items and 600 for forums or sections.[[%lgr_introduction% %]]
 
-[[%lgr_introduction% %]]
+@puce@ By default, if the text is too long, #INTRODUCTION will end with 3 dots (an ellipsis): <html>" (…)"</html>. You can change this to a customised string which indicates that there is more text available.[[%suite_introduction%]]
 
-@puce@ By default, if the text is too long, #INTRODUCTION will end with 3 dots (an ellipsis): <html>"&nbsp;(…)"</html>. You can change this to a customised string which indicates that there is more text available.
-
-[[%suite_introduction%]]
-
-@puce@ If the #INTRODUCTION tag is used to give a summary of an article, the Swiss Army Knife can generate a link to the article for the 3 dots or string  that indicates that there is more text available. For example: "Read the rest of the article…"
-
-[[%lien_introduction%]]
-
-',
+@puce@ If the #INTRODUCTION tag is used to give a summary of an article, the Swiss Army Knife can generate a link to the article for the 3 dots or string  that indicates that there is more text available. For example: "Read the rest of the article…"[[%lien_introduction%]]',
 	'introduction:nom' => '#INTRODUCTION tag',
 
 	// J
@@ -472,7 +411,7 @@ _ See this page for examples: [->http://www.malsup.com/jquery/corner/].
 
 Make a list below of the elements in your templates which are to be rounded by using the CSS syntax (.class, #id, etc. ). Use the sign " = " to specify the jQuery command to apply, and a double slash (" // ") for any comments. If no equals sign is provided, rounded corners equivalent to <code>.my_class = .corner()</code> will be applied.[[%jcorner_classes%]]
 
-N.B. This tool requires the {Round Corners} jQuery plugin in order to function. The Swiss Army Knife plugin can install it for you automatically if you check this box. [[%jcorner_plugin%]]', # MODIF
+N.B. This tool requires the {Round Corners} jQuery plugin in order to function. The Swiss Army Knife plugin can install it for you automatically if you check this box. [[%jcorner_plugin%]]',
 	'jcorner:nom' => 'Pretty Corners',
 	'jcorner_plugin' => '" Round Corners plugin "',
 	'jq_localScroll' => 'jQuery.LocalScroll ([demo->http://demos.flesler.com/jquery/localScroll/])',
@@ -598,7 +537,7 @@ You can choose the type of replacements used:
 _ • {Basic}: links such as {<html>http://spip.net</html>} (whatever protocol) and {<html>www.spip.net</html>} are replaced.
 _ • {Extended}: additionally links such as these are also replaced:  {<html>me@spip.net</html>}, {<html>mailto:myaddress</html>} or {<html>news:mynews</html>}.
 _ • {By default}: automatic replacement (from SPIP version 2.0).
-[[%liens_orphelins%]]', # MODIF
+[[%liens_orphelins%]]',
 	'liens_orphelins:description1' => '[[If the URL is more than %long_url% characters long, SPIP will reduce it to %coupe_url% characters]].',
 	'liens_orphelins:nom' => 'Fine URLs',
 
@@ -607,19 +546,13 @@ _ • {By default}: automatic replacement (from SPIP version 2.0).
 	'mailcrypt:nom' => 'MailCrypt',
 	'maj_auto:description' => 'This tool is used to help you easily manage the updates of your various plugins, specifically by retrieving the version number located in your various local <code>svn.revision</code> files and comparing them with those found on the <code>zone.spip.org</code> site.
 
-
-
 The list above offers the possibility of running SPIP\'s automatic update process for each of the plugins already installed in the  <code>plugins/auto/</code> directory. The other plugins located in the  <code>plugins/</code> directory are simply listed for information purposes. If the remote version can not be located, then try to proceed with updating the plugin manually.
 
-
-
-Note: since the <code>.zip</code> files are not always instantly reconstructed, you might have to wait a while before you can carry out the total update of a very recently modified plugin.', # MODIF
+Note: since the <code>.zip</code> files are not always instantly reconstructed, you might have to wait a while before you can carry out the total update of a very recently modified plugin.',
 	'maj_auto:nom' => 'Automatic updates',
 	'masquer:description' => 'This tool is used for hiding specific editorial content (sections or articles) tagged with the keyword specified below from the public site, without requiring any other modifications to your templates. If a section is hidden, then so is its entire sub-branch.[[%mot_masquer%]]
 
-
-
-To override and force the display of such hidden content, just add the <code>{tout_voir}</code> (view all) criterion to the loops in your template(s).', # MODIF
+To override and force the display of such hidden content, just add the <code>{tout_voir}</code> (view all) criterion to the loops in your template(s).',
 	'masquer:nom' => 'Hide editorial content',
 	'meme_rubrique:description' => 'Define here the number of objects listed in the panel labelled "<:info_meme_rubrique:>" available on some of the private zone pages.[[%meme_rubrique%]]',
 	'message_perso' => 'oh!',
@@ -675,13 +608,9 @@ To override and force the display of such hidden content, just add the <code>{to
 	'pack_delete' => 'Delete a configuration pack',
 	'pack_descrip' => 'Your "Current configuration pack" brings together all the parameters activated for the Swiss Army Knife plugin. It remembers both whether a tool is activated or not, and, if it is, what options have been chosen.
 
-
-
 If write access privileges permit, this PHP code may be placed in the /config/mes_options.php file. It will place a reset link on the page of the "{@pack@}" pack. Of course, you can change its name below.
 
-
-
-If you reset the plugin by clicking on a pack, the Swiss Army Knife plugin will automatically reconfigure itself according to the predefined values in that pack.', # MODIF
+If you reset the plugin by clicking on a pack, the Swiss Army Knife plugin will automatically reconfigure itself according to the predefined values in that pack.',
 	'pack_du' => '• of the pack @pack@',
 	'pack_installe' => 'Installation of a configuration pack',
 	'pack_installer' => 'Are you sure you want to re-initialise the Swiss Army Knife and install the « @pack@ » pack?',
@@ -695,22 +624,18 @@ If you reset the plugin by clicking on a pack, the Swiss Army Knife plugin will 
 	'pack_titre' => 'Current configuration',
 	'pack_variables_defaut' => 'Installation of the default variables',
 	'par_defaut' => 'By default',
-	'paragrapher2:description' => 'The SPIP function <code>paragrapher()</code> inserts the tags <p> and </p> around all texts which do not have paragraphs. In order to have a finer control over your styles and layout, you can give a uniform look to your texts throughout the site.[[%paragrapher%]]', # MODIF
+	'paragrapher2:description' => 'The SPIP function <code>paragrapher()</code> inserts the tags &lt;p> and &lt;/p> around all texts which do not have paragraphs. In order to have a finer control over your styles and layout, you can give a uniform look to your texts throughout the site.[[%paragrapher%]]', # MODIF
 	'paragrapher2:nom' => 'Insert paragraphs',
 	'pipelines' => 'Entry points used:',
 	'previsualisation:description' => 'By default, SPIP enables previewing an article in its public and CSS-styled version, but only when it has been "proposed for publication". However, this current tool allows authors to also preview articles while they are still being written. Anyone can therefore preview and modify their own editorial content repeatedly until they are content with its appearance.
 
-
-
-@puce@ Warning: this functionality does not modify the preview rights. In order for your editors to actually be able to preview their articles "in progress", you still need to authorise this function (in the {[Configuration>Advanced functions->./?exec=config_fonctions]} menu in the private zone).', # MODIF
+@puce@ Warning: this functionality does not modify the preview rights. In order for your editors to actually be able to preview their articles "in progress", you still need to authorise this function (in the {[Configuration>Advanced functions->./?exec=config_fonctions]} menu in the private zone).',
 	'previsualisation:nom' => 'Previewing articles',
 	'puceSPIP' => 'Enable the "*" typographical short-cut',
 	'puceSPIP_aide' => 'A SPIP bullet: <b>*</b>',
 	'pucesli:description' => 'Replaces "-" (single hyphen) bullets in articles with "-*" ordered lists (transformed into  &lt;ul>&lt;li>…&lt;/li>&lt;/ul> in HTML) the style for which may be customised using CSS statements.
 
-
-
-To retain access to SPIP\'s original bullet image (the little triangle), a new "*" short-cut at the start of the line can be offered to your editors:[[%puceSPIP%]]', # MODIF
+To retain access to SPIP\'s original bullet image (the little triangle), a new "*" short-cut at the start of the line can be offered to your editors:[[%puceSPIP%]]',
 	'pucesli:nom' => 'Beautiful bullets',
 
 	// Q
@@ -729,7 +654,7 @@ To retain access to SPIP\'s original bullet image (the little triangle), a new "
 	'rss_var' => 'Swiss Army Knife updates',
 
 	// S
-	'sauf_admin' => 'All, except administrators',
+	'sauf_admin' => 'Everyone, except administrators',
 	'sauf_admin_redac' => 'Everyone, except administrators and editors',
 	'sauf_identifies' => 'Everyone, except nominated authors',
 	'set_options:description' => 'Preselects the type of interface (simplified or advanced) for all editors, both existing and future ones. At the same time the button offering the choice between the two interfaces is also removed.[[%radio_set_options4%]]',
@@ -740,86 +665,50 @@ To retain access to SPIP\'s original bullet image (the little triangle), a new "
 	'simpl_interface:nom' => 'Simplification of the editing interface',
 	'smileys:aide' => 'Smileys: @liste@',
 	'smileys:description' => 'Inserts smileys into texts containing a short-cut in this form <code>:-)</code>. Ideal for use in forums.
-
 _ A tag is available for displaying a table of smileys in templates: #SMILEYS.
-
-_ Images: [Sylvain Michel->http://www.guaph.net/]', # MODIF
+_ Images: [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'Smileys',
 	'soft_scroller:description' => 'Gives a slow scroll effect when a visitor clicks on a link with an anchor tag. This helps the visitor to know where they are in a particularly long piece of text.
 
-
-
 N.B. In order to work, this tool needs to be used in "DOCTYPE XHTML" pages (not HTML!). It also requires two {jQuery} plugins: {ScrollTo} et {LocalScroll}. The Swiss Army Knife can install them itself if you check the following two boxes. [[%scrollTo%]][[->%LocalScroll%]]
-
-@_CS_PLUGIN_JQUERY192@', # MODIF
+@_CS_PLUGIN_JQUERY192@',
 	'soft_scroller:nom' => 'Soft anchors',
 	'sommaire:description' => 'Builds a mini table-of-contents of your articles and sections in order to access the main headings quickly (HTML tags &lt;@h3@>A big title&lt;/@h3@>> or SPIP subtitle short-cuts in the form: <code>{{{My subtitle}}}</code>).
 
-
-
 For information purposes, the \\" [.->class_spip] \\" tool is used to select the &lt;hN> tag used for the SPIP sub-titles.
-
-
 
 @puce@ You can define the depth retained for the sub-headings used to construct the summary (1 = &lt;@h3@>, 2 = &lt;@h3@> and &lt;@h4@>, etc.) :[[%prof_sommaire%]]
 
-
-
 @puce@ You can define here the maximum number of characters of the subtitles used to make the summary:[[%lgr_sommaire% characters]]
-
-
 
 @puce@ The table of content anchors can be calculated from the title and not looking like: {tool_summary_NN}. This option also offers the syntax: <code>{{{My title<my_anchor}}}</code> which allows you to specify the anchor to be used.[[%jolies_ancres%]]
 
-
-
 @puce@ You can also determine the way in which the plugin constructs the summary: 
-
 _ • Systematically, for each article (a tag named <code>@_CS_SANS_SOMMAIRE@</code> placed anywhere within the text of the article will make an exception to the rule).
-
 _ • Only for articles containing the <code>@_CS_AVEC_SOMMAIRE@</code> tag.
-
-
-
 [[%auto_sommaire%]]
 
-
-
 @puce@ By default, the Swiss Army Knife automatically inserts the summary at the top of the article. But you can place it elsewhere, if you wish, by using the #CS_SOMMAIRE tag, which you can activate here:
-
 [[%balise_sommaire%]]
 
-
-
-The summary can be used in conjunction with: \\"{[.->decoupe]}\\" and \\" [.->titres_typo] \\".', # MODIF
+The summary can be used in conjunction with: \\"{[.->decoupe]}\\" and \\" [.->titres_typo] \\".',
 	'sommaire:nom' => 'Automatic T.O.C.',
-	'sommaire_ancres' => 'Selected anchors: <b><html>{{{My Title<my_anchor>}}}</html></b>', # MODIF
+	'sommaire_ancres' => 'Selected anchors: <b><html>{{{My Title&lt;my_anchor>}}}</html></b>',
 	'sommaire_avec' => 'An article with summary: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'An article without summary: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'sommaire_titres' => 'Structured sub-headings: <b><html>{{{*Title}}}</html></b>, <b><html>{{{**Sub-title}}}</html></b>, etc.',
 	'spam:description' => 'Attempts to fight against the sending of abusive and automatic messages through forms on the public site. Some words and the &lt;a>&lt;/a> tags are prohibited. Please teach your content editors to use SPIP short-cuts for any links.
 
-
-
 @puce@ List here the sequences you wish to prohibit, separating them with spaces. [[%spam_mots%]]
-
 <q1>• Expressions containing spaces should be placed within quotation marks.
-
 _ • To specify a whole word, place it in parentheses. For example: {(asses)}.
-
 _ • To use a regular expression, first check the syntax, then place it between slashes and quotation marks.
-
 _ Example:~{<html>\\"/@test.(com|en)/\\"</html>}.
-
 _ • To use a regular expression that works on HTML characters, place the text between \\"&#\\" and \\";\\".
-
 _ Example:~{<html>\\"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/\\"</html>}.</q1>
 
-
-
 @puce@ Certain IP addresses can also be blocked at their source. But remember that behind these addresses (often variable in nature) there may be a multitude of individual users or even an entire network.[[%spam_ips%]]
-
-<q1>• Use the \\"*\\" character to match several unknown characters, \\"?\\" for any single character, and brackets for classes of characters.</q1>', # MODIF
+<q1>• Use the \\"*\\" character to match several unknown characters, \\"?\\" for any single character, and brackets for classes of characters.</q1>',
 	'spam:nom' => 'Fight against SPAM',
 	'spam_ip' => 'IP blocking of @ip@:',
 	'spam_test_ko' => 'This message would be blocked by the anti-SPAM filter!',
@@ -828,27 +717,17 @@ _ Example:~{<html>\\"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/\\"</html>}.</q1>
 	'spam_tester_label' => 'Test your list of prohibited expressions or IP addresses here, using the following panel:',
 	'spip_cache:description' => '@puce@ The cache occupies a certain amount of disk space and SPIP can limit the amount of space that can be consumed. Leaving empty or putting 0 means that no limit will be applied.[[%quota_cache% Mo]]
 
-
-
 @puce@ When the site\'s contents are changed, SPIP immediately invalidates the cache without waiting for the next periodic recalculation. If your site experiences performance problems because of the load caused by repeated recalculations, you can choose "no" for this option.[[%derniere_modif_invalide%]]
-
-
 
 @puce@ If the #CACHE tag is not found within a given template, then by default SPIP caches a page for 24 hours before recalculating it. You can better regulate the load on your server by modifying this default here.[[%duree_cache% heures]]
 
-
-
-@puce@ If you are running several mutualised sites, you can specify here the default value for all the local sites (SPIP 2.0 mini).[[%duree_cache_mutu% hours]]', # MODIF
+@puce@ If you are running several mutualised sites, you can specify here the default value for all the local sites (SPIP 2.0 mini).[[%duree_cache_mutu% hours]]',
 	'spip_cache:description1' => '@puce@ By default, SPIP calculates all the public pages and caches them in order to accelerate their display. It can be useful, when developing the site to disable the cache temporarily, in order to see the effect of changes immediately.[[%radio_desactive_cache3%]]',
 	'spip_cache:description2' => '@puce@ Four options to configure the cache: <q1>
-
 _ • {Normal usage}: SPIP calculates and locates all the pages for the public site in the cache in order to speed up their delivery. After a certain time, the cache is recalculated and stored again.
-
 _ • {Permanent cache}: the cache is never recalculated (time limits in the templates are ignored).
-
 _ • {No cache}: temporarily deactivating the cache can be useful when the site is being developed. With this option, nothing is cached on disk.
-
-_ • {Cache checking}: similar to the preceding option. However, all results are written to disk so that you can manually check them.</q1>[[%radio_desactive_cache4%]]', # MODIF
+_ • {Cache checking}: similar to the preceding option. However, all results are written to disk so that you can manually check them.</q1>[[%radio_desactive_cache4%]]',
 	'spip_cache:description3' => '@puce@ The "Compresser" extension available in SPIP is used to compress the various CSS and JavaScript code sections of your pages and insert them in a static cache file. This speeds up the display of your site, and limits both the number of calls made to the server and the size of the files that need to be retrieved.',
 	'spip_cache:nom' => 'SPIP and the cache',
 	'spip_ecran:description' => 'Specify the screen width imposed on everyone in the private zone. A narrow screen will display two columns and a wide screen will display three. The default settings leaves the user to make their own choice which will be stored in a browser cookie.[[%spip_ecran%]]',
@@ -866,74 +745,47 @@ _ • {Cache checking}: similar to the preceding option. However, all results ar
 	'titre' => 'The Swiss Army Knife',
 	'titre_parent:description' => 'Within a loop, it is common to want to show the title of the parent of the current object. You normally need to use a second loop to do this, but a new tag #TITRE_PARENT makes the syntax easier. In the case of a MOTS loop, the tag gives the title of the keyword group. For other objects (articles, sections, news items, etc.) it gives the title of the parent section (if one such exists).
 
-
-
 Note: For keywords, #TITRE_GROUPE is an alias tag for #TITRE_PARENT. SPIP treats the contents of these new tags as it does other #TITRE tags.
-
-
 
 @puce@ If you are using SPIP 2.0, then you can use an array of tags of this form: #TITRE_XXX, which give you the title of the object \'xxx\', provided that the field \'id_xxx\' is present in the current table (i.e. #ID_XXX is available in the current loop).
 
-
-
 For example, in an (ARTICLES) loop, #TITRE_SECTEUR will give the title of the sector of the current article, since the identifier #ID_SECTEUR (or the field  \'id_secteur\') is available in the loop.
 
-
-
-The code <html>#TITRE_XXX{yy}</html> is also available to be used. Example: <html>#TITRE_ARTICLE{10}</html> will return the title of article #10.[[%titres_etendus%]]', # MODIF
+The code <html>#TITRE_XXX{yy}</html> is also available to be used. Example: <html>#TITRE_ARTICLE{10}</html> will return the title of article #10.[[%titres_etendus%]]',
 	'titre_parent:nom' => '#TITRE_PARENT/OBJECT tags',
 	'titre_tests' => 'The Swiis Army Knife - Test page',
 	'titres_typo:description' => 'Transform all of the intermediary headings <html>"{{{My sub-heading}}}"</html> into configurable typographical images.[[%i_taille% pt]][[%i_couleur%]][[%i_police%
 
-
-
 Available fonts: @_CS_FONTS@]][[%i_largeur% px]][[%i_hauteur% pt]][[%i_padding% px]][[%i_align%]]
 
-
-
-This tool is compatible with: " [.->sommaire] ".', # MODIF
+This tool is compatible with: " [.->sommaire] ".',
 	'titres_typo:nom' => 'Sub-headings as images',
 	'tous' => 'All',
 	'toutes_couleurs' => 'The 36 colours in CSS styles: @_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Multilingual blocks: <b><:trad:></b>',
 	'toutmulti:description' => 'Makes it possible to use the shortcut <code><:a_text:></code> in order to place multilingual blocks from language files, whether SPIP\'s own or your customised ones, anywhere in the text, titles, etc. of an article.
 
-
-
 More information on this can be found in [this article->http://www.spip.net/en_article2444.html].
-
-
 
 User variables can also be added to the shortcuts. This feature was introduced with SPIP 2.0. For example, <code><:a_text{name=John, tel=2563}:></code> makes it possible to pass the values to the SPIP language file: <code>\'a_text\'=>\'Please contact @name@, the administrator, on @tel@.</code>.
 
-
-
 The SPIP PHP function used is: <code>_T(\'a_text\')</code> (with no parameters), and <code>_T(\'a_text\', array(\'arg1\'=>\'some words\', \'arg2\'=>\'other words\'))</code> (with parameters).
 
-
-
-Do not forget to check that the variable used <code>\'a_text\'</code> is defined in the language files.', # MODIF
+Do not forget to check that the variable used <code>\'a_text\'</code> is defined in the language files.',
 	'toutmulti:nom' => 'Multilingual blocks',
 	'travaux_masquer_avert' => 'Hide the frame indicating on the public site that maintenance is currently being carried out',
 	'travaux_nocache' => 'Désactiver également le cache de SPIP', # NEW
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'This site will be back online soon.
-
-_ Thank you for your understanding.', # MODIF
+_ Thank you for your understanding.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
 	'tri_articles:description' => 'Choose the sort order to be used for displaying certain types of objects in the editing interface ([->./?exec=auteurs]), within the sections.
 
-
-
 The options below use the SQL function \'ORDER BY\'. Only use the customised option if you know what you are doing (e.g. the fields available for articles are: {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
-
-
 
 @puce@ {{Order of the articles inside the sections}} [[%tri_articles%]][[->%tri_perso%]]
 
-
-
-@puce@ {{Order of the groups in the add-a-keyword form}} [[%tri_groupes%]][[->%tri_perso_groupes%]]', # MODIF
+@puce@ {{Order of the groups in the add-a-keyword form}} [[%tri_groupes%]][[->%tri_perso_groupes%]]',
 	'tri_articles:nom' => 'SPIP\'s sort orders',
 	'tri_groupe' => 'Sort on the group id (ORDER BY id_groupe)',
 	'tri_modif' => 'Sort by last modified date (ORDER BY date_modif DESC)',
@@ -942,122 +794,65 @@ The options below use the SQL function \'ORDER BY\'. Only use the customised opt
 	'tri_titre' => 'Sort by title (ORDER BY 0+titre,titre)',
 	'trousse_balises:description' => 'Tool currently under development. It offers a few simple and practical tags to improve the legibility of your templates.
 
-
-
 @puce@ {{#BOLO}}: generates a dummy text of about 3000 characters ("bolo" or "[?lorem ipsum]") for use with templates in development. An optional argument specifies the length of the text, e.g. <code>#BOLO{300}</code>. The tag accepts all SPIP\'s filters. For example, <code>[(#BOLO|majuscules)]</code>.
-
 _ It can also be used as a model in content. Place <code><bolo300></code> in any text zone in order to obtain 300 characters of dummy text.
-
-
 
 @puce@ {{#MAINTENANT}} (or {{#NOW}}): returns the current date, just like: <code>#EVAL{date(\'Y-m-d H:m:s\')}</code>. An optional argument specifies the format. For example, <code>#MAINTENANT{Y-m-d}</code>. As with <code>#DATE</code>, the display can be customised using filters: <code>[(#MAINTENANT|affdate)]</code>.
 
-
-
 @puce {{#CHR<html>{XX}</html>}}: a tag equivalent to <code>#EVAL{"chr(XX)"}</code> which is useful for inserting special characters (such as a line feed) or characters which are reserved for special use by the SPIP compiler (e.g. square and curly brackets).
 
-
-
-@puce@ {{#LESMOTS}}: ', # MODIF
+@puce@ {{#LESMOTS}}: ',
 	'trousse_balises:nom' => 'Box of tags',
 	'type_urls:description' => '@puce@ SPIP offers a choice between several types of URLs to generate for the access links on the pages of your site:
 
-
-
-More information: [->http://www.spip.net/en_article3588.html] The "[.->boites_privees]" tool allows you to see on the page of each SPIP object the clean URL which is associated with it.
-
-[[%radio_type_urls3%]]
-
+More information: [->http://www.spip.net/en_article3588.html] The "[.->boites_privees]" tool allows you to see on the page of each SPIP object the clean URL which is associated with it.[[%radio_type_urls3%]]
 <q3>@_CS_ASTER@to use the types {html}, {propres}, {propres2}, {libres} or {arborescentes}, copy the file "htaccess.txt" from the root directory of the SPIP site to a file (also at the root) named ".htaccess" (be careful not to overwrite any existing configuration if there already is a file of this name). If your site is in a subdirectory, you may need to edit the line "RewriteBase" in the file in order for the defined URLs to direct requests to the SPIP files.</q3>
 
-
-
 <radio_type_urls3 valeur="page">@puce@ {{"page" URLs}}: the default type for SPIP since version 1.9x.
-
 _ Example: <code>/spip.php?article123</code>.
 [[%terminaison_urls_page%]][[%separateur_urls_page%]]</radio_type_urls3>
 
-
-
 <radio_type_urls3 valeur="html">@puce@ {{"HTML" URLs}}: URLs take the form of classic html pages.
-
 _ Example: <code>/article123.html</code></radio_type_urls3>
 
-
-
 <radio_type_urls3 valeur="propres">@puce@ {{"clean" URLs}}: URLs are constructed using the title of the object. Markers (_, -, +, @, etc.) surround the titles, depending on the type of object.
-
 _ Examples: <code>/My-article-title</code> or <code>/-My-section-</code> or <code>/@My-site@</code>[[%terminaison_urls_propres%]][[%debut_urls_propres%]][[%marqueurs_urls_propres%]][[%url_max_propres%]]</radio_type_urls3>
 
-
-
 <radio_type_urls3 valeur="propres2">@puce@ {{"clean2" URLs}}: the extension \'.html\' is added to the URLs generated.
-
 _ Example: <code>/My-article-title.html</code> or <code>/-My-section-.html</code>
-
 [[%debut_urls_propres2%]][[%marqueurs_urls_propres2%]][[%url_max_propres2%]]</radio_type_urls3>
 
-
-
 <radio_type_urls3 valeur="libres">@puce@ {{"open" URLs}}: the URLs are like {"propres"}, but without markers (_, -, +, @, etc.) to differentiate the various objects.
-
 _ Example: <code>/My-article-title</code> or <code>/My-section</code>
-
 [[%terminaison_urls_libres%]][[%debut_urls_libres%]][[%url_max_libres%]]</radio_type_urls3>
 
-
-
 <radio_type_urls3 valeur="arbo">@puce@ {{"hierarchical" URLs}}: URLs are built in a tree structure.
-
 _ Example: <code>/sector/section1/section2/My-article-title</code>
-
 [[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]][[%url_max_arbo%]]</radio_type_urls3>
 
-
-
 <radio_type_urls3 valeur="propres-qs">@puce@ {{"qs-clean" URLs}}:  this system functions using a "Query-String", in other words, without using the .htaccess file. URLs are similar in form to {"propres"}.
-
 _ Example: <code>/?My-article-title</code>
-
 [[%terminaison_urls_propres_qs%]][[%url_max_propres_qs%]]</radio_type_urls3>
 
-
-
 <radio_type_urls3 valeur="standard">@puce@ {{"standard" URLs}}: these now discarded URLs were used by SPIP up to version 1.8.
-
 _ Example: <code>article.php3?id_article=123</code>
 </radio_type_urls3>
 
-
-
-@puce@ If you are using the type  {page} described above or if the object requested is not recognised, you can choose the {{calling script}} for SPIP. By default, SPIP uses {spip.php}, but {index.php} (format: <code>/index.php?article123</code>) or an empty value (format: <code>/?article123</code>) are also possible. To use any other value, you must create the corresponding file at the root of your site with the same contents as in the file {index.php}.
-
-[[%spip_script%]]', # MODIF
+@puce@ If you are using the type  {page} described above or if the object requested is not recognised, you can choose the {{calling script}} for SPIP. By default, SPIP uses {spip.php}, but {index.php} (format: <code>/index.php?article123</code>) or an empty value (format: <code>/?article123</code>) are also possible. To use any other value, you must create the corresponding file at the root of your site with the same contents as in the file {index.php}.[[%spip_script%]]',
 	'type_urls:description1' => '@puce@ If you are using a format based on clean URLs ({propres}, {propres2}, {libres}, {arborescentes} ou {propres_qs}), the Swiss Army Knife can:
-
 <q1>• make sure the URL is in {{lower case}}.</q1>[[%urls_minuscules%]]
-
 <q1>• systematically add the {{id of the object}} to the URL (as a suffix, prefix, etc.).
-
 _ (examples: <code>/My-article-title,457</code> or <code>/457-My-article-title</code>)</q1>',
 	'type_urls:nom' => 'Format of URLs',
 	'typo_exposants:description' => '{{Text in French}}: improves the typographical rendering of common abbreviations by adding superscript where necessary (thus, {<acronym>Mme</acronym>} becomes {M<sup>me</sup>}). Common errors corrected: ({<acronym>2ème</acronym>} and {<acronym>2me</acronym>}, for example, become {2<sup>e</sup>}, the only correct abbreviation).
 
-
-
 The rendered abbreviations correspond to those of the Imprimerie nationale given in the {Lexique des règles typographiques en usage à l\'Imprimerie nationale} (article " Abréviations ", Presses de l\'Imprimerie nationale, Paris, 2002).
-
-
 
 The following expressions are also handled: <html>Dr, Pr, Mgr, St, Bx, m2, m3, Mn, Md, Sté, Éts, Vve, bd, Cie, 1o, 2o, etc.</html>
 
-
-
 You can also choose here to use superscript for some other abbreviations, despite the negative opinion of the Imprimerie nationale:[[%expo_bofbof%]]
 
-
-
-{{English text}}: the suffixes of ordinal numbers are placed in superscript: <html>1st, 2nd</html>, etc.', # MODIF
+{{English text}}: the suffixes of ordinal numbers are placed in superscript: <html>1st, 2nd</html>, etc.',
 	'typo_exposants:nom' => 'Superscript',
 
 	// U
@@ -1088,8 +883,8 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'urls_purger_tout' => 'Reset the URLs stored in the database:',
 	'urls_rechercher' => 'Find this object in the database',
 	'urls_titre_objet' => 'Saved title:',
-	'urls_type_objet' => '<MODF>Order:',
-	'urls_url_calculee' => 'URL PUBLIC  « @type@ »:',
+	'urls_type_objet' => 'Order:', # MODIF
+	'urls_url_calculee' => 'Public URL "@type@":',
 	'urls_url_objet' => 'Saved "clean" URL:', # MODIF
 	'urls_valeur_vide' => '(An empty value triggers the recalculation of the URL)', # MODIF
 	'urls_verrouiller' => '{{Lock}} this URL so that SPIP cannot change it, e.g. when someone clicks on " @voir@ " or when the title is modified.',
@@ -1100,7 +895,7 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'vars_modifiees' => 'The data has been modified',
 	'version_a_jour' => 'Your version is up to date.',
 	'version_distante' => 'Distant version...',
-	'version_distante_off' => 'REmote checking deactivated',
+	'version_distante_off' => 'Remote checking deactivated',
 	'version_nouvelle' => 'New version: @version@',
 	'version_revision' => 'version: @revision@',
 	'version_update' => 'Automatic update',
@@ -1108,16 +903,12 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'version_update_chargeur_title' => 'Download the latest version of the plugin using the plugin «Downloader»',
 	'version_update_title' => 'Downloads the latest version of the plugin and updates it automatically.',
 	'verstexte:description' => '2 filters for your templates which make it possible to produce lighter pages.
-
 _ version_texte: extracts the text content of an HTML page, except for some of the more basic tags.
-
-_ version_plein_texte: extracts the textual content from an HTML page to display only the raw text.', # MODIF
+_ version_plein_texte: extracts the textual content from an HTML page to display only the raw text.',
 	'verstexte:nom' => 'Text version',
 	'visiteurs_connectes:description' => 'Creates an HTML fragment for your templates which displays the number of visitors currently connected to the public site.
 
-
-
-Simply add <code><INCLURE{fond=fonds/visiteurs_connectes}></code> in the template.', # MODIF
+Simply add <code><INCLURE{fond=fonds/visiteurs_connectes}></code> in the template.',
 	'visiteurs_connectes:inactif' => 'Attention : les statistiques du site ne sont pas activées.', # NEW
 	'visiteurs_connectes:nom' => 'Vistors logged in',
 	'voir' => 'See: @voir@',
@@ -1126,16 +917,11 @@ Simply add <code><INCLURE{fond=fonds/visiteurs_connectes}></code> in the templat
 	// W
 	'webmestres:description' => 'Within SPIP, the term {{webmaster}} refers to an {{administrator}} who has FTP access to the site. By default, from SPIP 2.0 on, this is assumed to be the administrator with <code>id_auteur=1</code>. Webmasters defined here have the privilege of no longer needing to use FTP to validate important actions on the site, such as upgrading the database structure or restoring a backup.
 
-
-
 Current webmasters: {@_CS_LISTE_WEBMESTRES@}.
-
 _ Eligible administrators: {@_CS_LISTE_ADMINS@}.
 
-
-
-As a webmaster yourself, you have the administrative power to change this list of IDs. Use a colon as a separator if there are to be several administrators. e.g. "1:5:6".[[%webmestres%]]', # MODIF
-	'webmestres:nom' => 'list of webmasters',
+As a webmaster yourself, you have the administrative power to change this list of IDs. Use a colon as a separator if there are to be several administrators. e.g. "1:5:6".[[%webmestres%]]',
+	'webmestres:nom' => 'List of webmasters',
 
 	// X
 	'xml:description' => 'Activates the XML validator for the public site, as described in the [documentation->http://www.spip.net/en_article3582.html]. An « Analyse XML » button is added to the other admin buttons.',

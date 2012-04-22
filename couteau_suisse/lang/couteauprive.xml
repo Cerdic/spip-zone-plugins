@@ -6,18 +6,18 @@
 	<langue code="en" url="http://trad.spip.org/tradlang_module/couteauprive?lang_cible=en">
 		<traducteur nom="Mark" lien="http://trad.spip.org/auteur/mark" />
 		<traducteur nom="sQuonk" lien="http://trad.spip.org/auteur/squonk" />
+		<traducteur nom="PatV" lien="http://trad.spip.org/auteur/pat" />
 		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
 		<traducteur nom="merce" lien="http://trad.spip.org/auteur/merce" />
-		<traducteur nom="Pat" lien="http://trad.spip.org/auteur/pat" />
 	</langue>
 	<langue code="es" />
 	<langue code="fr" />
 	<langue code="fr_tu" url="http://trad.spip.org/tradlang_module/couteauprive?lang_cible=fr_tu">
 		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
-		<traducteur nom="Pat" lien="http://trad.spip.org/auteur/pat" />
+		<traducteur nom="PatV" lien="http://trad.spip.org/auteur/pat" />
 	</langue>
 	<langue code="gl" url="http://trad.spip.org/tradlang_module/couteauprive?lang_cible=gl">
-		<traducteur nom="Pat" lien="http://trad.spip.org/auteur/pat" />
+		<traducteur nom="PatV" lien="http://trad.spip.org/auteur/pat" />
 	</langue>
 	<langue code="nl" url="http://trad.spip.org/tradlang_module/couteauprive?lang_cible=nl">
 		<traducteur nom="mpossoz" lien="http://trad.spip.org/auteur/mpossoz" />
