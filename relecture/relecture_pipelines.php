@@ -113,11 +113,14 @@ function relecture_pre_insertion($flux) {
 				$flux['data'][$_cle] = $_valeur;
 			}
 
-			// - mise a jour de la revision d'ouverture et de la date de fin de commentaire (valeur par defaut)
+			// - mise a jour de la revision d'ouverture
+			// - correction de la date de fin de commentaire positionnee par defaut a cause de la configuration
+			// - mise a jour de la date d'ouverture
 			$from = 'spip_versions';
 			$where = array("objet=" . sql_quote('article'), "id_objet=$id_article");
 			$revision = sql_getfetsel('max(id_version) AS revision_ouverture', $from, $where);
 			$flux['data']['revision_ouverture'] = $revision;
+			$flux['data']['date_ouverture'] = $flux['data']['date_fin_commentaire'];
 			$flux['data']['date_fin_commentaire'] = date('Y-m-d H:i:s', strtotime("+1 week"));
 
 			// - surcharge la valeur du statut mis par le traitement par defaut

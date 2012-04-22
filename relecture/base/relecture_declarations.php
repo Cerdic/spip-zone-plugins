@@ -34,7 +34,7 @@ function relecture_declarer_tables_objets_sql($tables) {
 
 		// Titre, date et gestion du statut
 		'titre'				=> "concat('Relecture ', id_relecture) AS titre, '' AS lang",
-		'date' 				=> 'date_ouverture',
+		'date' 				=> 'date_fin_commentaire', // Pour le formulaire dater uniquement
 		'texte_changer_statut' => 'relecture:texte_instituer_relecture',
 		'aide_changer_statut' => '',
 		'statut_titres' => array(
