@@ -12,7 +12,6 @@ define("_DIR_SIMPLECAL_PRIVE", _DIR_PLUGIN_SIMPLECAL."prive/");
 
 include_spip('inc/simplecal_classement'); // pour la page evenements !
 
-
 // ------------------------------------
 //  Plugin Corbeille - compatibilite
 // ------------------------------------

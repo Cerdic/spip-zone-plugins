@@ -32,13 +32,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'config_refobj_oui' => "Enable text by reference",
     'config_refobj_non' => "Disable text by reference",
     'config_refobj_explication' => "Enable 'text by reference' to allow articles/breves to be in calendar.",
-    'config_themes_explication' => "You can choose a theme (color set) for the 'datepicker' in private area and for the 'little calendar' in public area.",
+    'config_themes_explication' => "You can choose a theme (color set) for the 'little calendar' in public area.",
     'config_autorisation_explication' => "You can choose if event creation are enabled for editors.",
     'config_rubrique_explication' => "If you want to manage a simple calendar for your site, let this option disabled. It is possible to use keywords for categorised your events.<br />But, if you want to manage multiple calendar, and display distinct events for each folder, you can enable it.",
-    'config_themeprive' => "Private area theme",
-    'config_themepublic' => "Public area theme",
-    'config_datepicker' => "date picker",
-    'config_minicalendrier' => "little calendar",
+    'config_themepublic' => "Mini-calendar theme (public section)",
     'config_blocreference' => "References",
     'config_blocthemes' => "Themes",
     'config_blocautorisation' => "Autorisations",
@@ -48,6 +45,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'config_rubrique_partout' => 'Yes, create events in folder.',
     'config_rubrique_secteur' => 'Yes, create events in 1st level folder (sector).',
     'config_rubrique_non' => 'No, it makes no sens for me.',
+    'config_champs' => 'Events content',
+    'config_champs_explication' => 'Based on the layout chosen for your site, you can decide which elements in the following list should be available.',
     
 
 // D

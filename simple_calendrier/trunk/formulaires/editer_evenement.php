@@ -133,6 +133,10 @@ function formulaires_editer_evenement_traiter_dist($id_evenement='new', $id_rubr
     
     // On reconstitue les champs 'type' et 'id_objet' à partir du champ 'ref'
     $config = $config_fonc($row);
+    
+    //print_r($row);
+    //die("yeah !");
+    
     if ($config['simplecal_refobj'] == 'oui'){
         $ref = trim(_request('ref'));
         if ($ref){

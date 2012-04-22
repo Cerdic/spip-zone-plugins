@@ -180,7 +180,10 @@ function simplecal_configurer_liste_metas($metas) {
     $metas['simplecal_autorisation_redac'] = 'non'; // [oui, non]
     $metas['simplecal_rubrique'] = 'non'; // [non, secteur, partout]
     $metas['simplecal_refobj'] = 'non';   // [oui, non]
-    $metas['simplecal_themeprive'] = 'base';
+    $metas['simplecal_descriptif'] = 'oui';   // [oui, non]
+    $metas['simplecal_texte'] = 'oui';  // [oui, non]
+    $metas['simplecal_lieu'] = 'oui';   // [oui, non]
+    $metas['simplecal_lien'] = 'non';   // [oui, non]
     $metas['simplecal_themepublic'] = 'base';
     return $metas;
 }
@@ -231,10 +234,10 @@ function simplecal_compter_contributions_auteur($flux){
 
 // Définir le squelette evenement.html pour les urls de type spip.php?evenement123
 // http://programmer.spip.org/declarer_url_objets
-function simplecal_declarer_url_objets($array){
+/*function simplecal_declarer_url_objets($array){
     $array[] = 'evenement';
     return $array;
-}
+}*/
 
 
 // cf. urls/propres.php

@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Simple Calendrier pour Spip 2.1.2
+ * Plugin Simple Calendrier pour Spip 3.0
  * Licence GPL (c) 2010-2011 Julien Lanfrey
  *
  */
@@ -18,7 +18,7 @@ function simplecal_declarer_tables_interfaces($interfaces) {
     //$interface['table_des_traitements']['DATE_FIN'][] = 'normaliser_date(%s)';
     
     // ---------------------------------------------------------------------------
-    // Champs de type 'date' pour la gestion des critères age, age_relatif, etc.
+    // Champs de type 'date' pour la gestion des criteres age, age_relatif, etc.
     // ---------------------------------------------------------------------------
     // Note : provoque l'enregistrement de la date de publication (lors de sa modif) dans date
     //$interface['table_date']['evenements'] = 'date'; 
@@ -42,7 +42,7 @@ function simplecal_declarer_tables_objets_sql($tables){
         "lieu"              => "varchar(255) NOT NULL",
         "descriptif"        => "text NOT NULL",
         "texte"             => "text NOT NULL",
-        "date"              => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", // création ou publication (selon statut) 
+        "date"              => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", // creation ou publication (selon statut) 
         "statut"            => "varchar(8) NOT NULL",
         "lang"              => "varchar(10) NOT NULL DEFAULT ''",
         "langue_choisie"    => "varchar(3) NULL DEFAULT 'non'", 
@@ -56,7 +56,7 @@ function simplecal_declarer_tables_objets_sql($tables){
         "KEY id_rubrique" => "id_rubrique"
     );
 
-    // champs candidats à la jointure
+    // champs candidats a la jointure
     $join = array(
         "id_evenement" => "id_evenement",
         "id_secteur"   => "id_secteur",
