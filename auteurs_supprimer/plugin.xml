@@ -11,7 +11,7 @@
 	<nom>Auteurs Supprimer (AuSu)</nom>
 	<slogan>Supprimer rapidement un ou plusieurs auteurs en un seul clic</slogan>
 	<auteur>[Christian Paulus->http://www.quesaco.org/]</auteur>
-	<version>1.0.5</version>
+	<version>1.0.6</version>
 	<icon>images/ausu-64.png</icon>
 	<etat>stable</etat>
 

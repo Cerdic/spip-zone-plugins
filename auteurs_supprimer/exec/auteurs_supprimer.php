@@ -22,6 +22,8 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+	include_spip('inc/filtres');
+
 	header('Location: '
 		   . htmlspecialchars(sinon($GLOBALS['meta']['adresse_site'],'.'))
 		   . '/?page=auteurs_supprimer'
