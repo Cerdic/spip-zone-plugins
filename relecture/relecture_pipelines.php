@@ -99,6 +99,16 @@ function relecture_formulaire_charger($flux){
 }
 
 
+/**
+ * Surcharge de l'insertion standard d'un objet en incluant des traitements prealables pour une relecture :
+ * - informations sur l'article
+ * - information sur l'ouverture et la date de fin des commentaires
+ * - positionnement du statut a ouvert
+ *
+ * @param array $flux
+ * @return array
+ *
+**/
 function relecture_pre_insertion($flux) {
 
 	// Traitements particuliers de l'objet relecture dans le cas d'une ouverture :
@@ -125,6 +135,42 @@ function relecture_pre_insertion($flux) {
 
 			// - surcharge la valeur du statut mis par le traitement par defaut
 			$flux['data']['statut'] = 'ouverte';
+		}
+	}
+
+	return $flux;
+}
+
+
+/**
+ * Surcharge de l'action instituer standard d'un objet en incluant des traitements prealables pour une relecture :
+ * - date et revision de cloture
+ *
+ * @param array $flux
+ * @return array
+ *
+**/
+function relecture_pre_edition($flux) {
+
+	$table = $flux['args']['table'];
+	$id_relecture = intval($flux['args']['id_objet']);
+	$action = $flux['args']['action'];
+
+	// Traitements particuliers de l'objet relecture dans le cas d'une cloture :
+	if (($table == 'spip_relectures')
+	AND ($action == 'instituer')) {
+		if (($id_relecture) AND ($flux['args']['statut_ancien'] == 'ouverte')) {
+			// - mise a jour de la date de cloture
+			$flux['data']['date_cloture'] = date('Y-m-d H:i:s');
+
+			// - mise a jour de la revision de cloture
+			$from = 'spip_relectures';
+			$where = array("id_relecture=$id_relecture");
+			$id_article = sql_getfetsel('id_article', $from, $where);
+
+			$from = 'spip_versions';
+			$where = array("objet=" . sql_quote('article'), "id_objet=$id_article");
+			$flux['data']['revision_cloture'] = sql_getfetsel('max(id_version) AS revision', $from, $where);
 		}
 	}
 

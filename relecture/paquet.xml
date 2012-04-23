@@ -3,7 +3,7 @@
 	categorie="edition"
 	version="0.1.0"
 	etat="dev"
-	compatibilite="[3.0.0-beta2;3.0.*]"
+	compatibilite="[3.0.0-rc;3.0.*]"
 	logo="relecture-64.png"
 	schema="1"
 	documentation="http://blog.smellup.net/spip.php?article53"
@@ -24,6 +24,7 @@
 	<pipeline nom="boite_infos" inclure="relecture_pipelines.php" />
 	<pipeline nom="formulaire_charger" inclure="relecture_pipelines.php" />
 	<pipeline nom="pre_insertion" inclure="relecture_pipelines.php" />
+	<pipeline nom="pre_edition" inclure="relecture_pipelines.php" />
 
 	<necessite nom="revisions" compatibilite="[1.6.5;[" />
 </paquet>
