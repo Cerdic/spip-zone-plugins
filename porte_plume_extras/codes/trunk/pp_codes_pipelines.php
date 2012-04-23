@@ -91,6 +91,7 @@ function pp_codes_porte_plume_barre_charger($barres){
 	// par defaut : edition = oui, forum = non
 	// ce que donne deja pre_charger par ailleurs
 	$pp = @unserialize($GLOBALS['meta']['porte_plume']);
+
 	if (isset($pp['codes']) and $codes = $pp['codes']) {
 		$activer = array();
 		
@@ -104,6 +105,7 @@ function pp_codes_porte_plume_barre_charger($barres){
 				$outils_actifs = (isset($codes['outils_actifs']) and is_array($codes['outils_actifs'])) ? $codes['outils_actifs'] : array();
 				if ($outils_actifs) {
 					$barre->afficher($outils_actifs);
+					$barre->afficher(array('sepCode', 'grpCode'));
 				}
 			}
 		}
