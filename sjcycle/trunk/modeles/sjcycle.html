@@ -84,7 +84,7 @@
 
 	[(#REM) Solution de denisb pour eviter de dupliquer le code Cf http://article.gmane.org/gmane.comp.web.spip.zone/18622 ]
 
-	<BOUCLE_img(DOCUMENTS){id_article=#GET{id_objet}}{extension==jpg|png|gif}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{par num titre, date}{doublons}>
+	<BOUCLE_img(DOCUMENTS){id_article=#GET{id_objet}}{extension==jpg|png|gif}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{par #ENV{par}}{par num titre, date}{doublons}{0,#ENV{limite,100000000}}>
    	<div>
    		[(#REM) Les effets de type turnLeft ne fonctionnent pas si ce div est en place. En attendant de corriger
          rajout dans la doc de l'incompatibilite entre infobulles et ces effets. Du coup la bordure autour de l'image
