@@ -1,29 +1,12 @@
 <?php
 /*************************************************************************************
- * xml.php
+ * spip.php
  * -------
- * Author: Nigel McNie (oracle.shinoda@gmail.com)
+ * Author: Collectif SPIP
  * Copyright: (c) 2004 Nigel McNie (http://qbnz.com/highlighter/)
  * Release Version: 1.0.7.6
  * CVS Revision Version: $Revision: 1.10 $
- * Date Started: 2004/09/01
- * Last Modified: $Date: 2005/12/30 04:52:10 $
- *
- * XML language file for GeSHi. Based on the idea/file by Christian Weiske
- *
- * CHANGES
- * -------
- * 2005/12/28 (1.0.2)
- *   -  Removed escape character for strings
- * 2004/11/27 (1.0.1)
- *   -  Added support for multiple object splitters
- * 2004/10/27 (1.0.0)
- *   -  First Release
- *
- * TODO (updated 2004/11/27)
- * -------------------------
- * * Check regexps work and correctly highlight XML stuff and nothing else
- *
+ * 
  *************************************************************************************
  *
  *     This file is part of GeSHi.
@@ -52,7 +35,10 @@
 @define('REG_NOM_TABLE_BOUCLE', '\([^)]*\)');
 
 // criteres | arguments : {critere > 0} {critere = #ENV{truc}}
-@define('REG_CRITERES', '\{(\s*(?:([^\{\}]+)|(?R))*\s*)\}');
+@define('REG_CRITERES', '\{(\s*(?:([^{}]+)|(?R))*\s*)\}');
+// la meme chose sans etre capturant
+#@define('REG_CRITERES_TOUT', '\{(?:\s*(?:(?:[^{}]+)|(?R))*\s*)\}');
+@define('REG_CRITERES_TOUT', '\{(?:\s*(?:(?>[^{}]+)|(?R))*\s*)\}');
 
 // Remplacements de Regexp par GESHI
 // A chaque fois dans le tableau REGEXPS que geshi trouve quelque chose,
@@ -102,18 +88,26 @@
 
 // |filtre |class::methode
 @define('REG_NOM_FILTRE', '(<PIPE>[a-z_=!<>?][a-z0-9_=]*(::[a-z0-9_]*)?)');
+// la meme chose, mais sans etre capturant.
+@define('REG_NOM_FILTRE_TOUT', '(?:<PIPE>[a-z_=!<>?][a-z0-9_=]*(?:::[a-z0-9_]*)?)');
 
 // #BALISE
 @define('REG_BALISE','(\#)(' . REG_NOM_BOUCLE . ':)?([A-Z0-9_]+)([*]{0,2})');
+// la meme chose, mais sans etre capturant.
+@define('REG_BALISE_TOUT','(?:\#)(?:' . REG_NOM_BOUCLE . ':)?(?:[A-Z0-9_]+)(?:[*]{0,2})');
+
 
 // /!\ pas encore au point
-@define('REG_BALISE_COMPLET_START', '((\[)[^\[]*(\())'); // [ ... (
-@define('REG_BALISE_COMPLET_STOP',  '((\))[^\]]*(\]))'); // ) ... ]
+@define('REG_BALISE_AVANT', '[^\[]*');
+@define('REG_BALISE_APRES', '[^\]]*');
+@define('REG_BALISE_COMPLET_START', '(\[)(' . REG_BALISE_AVANT . ')(\()'); // [ ... (
+@define('REG_BALISE_COMPLET_STOP',  '(\))(' . REG_BALISE_APRES . ')(\])'); // ) ... ]
+// Attention a ne pas avoir plus de 9 parentheses capturantes car on ne peut pas ecrire \\10
 @define('REG_BALISE_COMPLET',
-	  REG_BALISE_COMPLET_START // [ ... (
-	. '(' . REG_BALISE . ')' // #BALISE 
-	. '(?:' . REG_NOM_FILTRE . '?' . REG_CRITERES . '?)*' // {arguments} |filtre{criteres}
-	. REG_BALISE_COMPLET_STOP); // ) ... ]
+	  REG_BALISE_COMPLET_START . '(' // [ ... (
+	. '(?:' . REG_BALISE_TOUT . ')' // #BALISE 
+	. '(?:(?:' . REG_NOM_FILTRE_TOUT . '?' . REG_CRITERES_TOUT . '?)*)' // {arguments} |filtre{criteres}
+	. ')' . REG_BALISE_COMPLET_STOP ); // ) ... ]
 
 
 $language_data = array (
@@ -163,6 +157,8 @@ $language_data = array (
 			
 			40 => 'color: #74B900;', // critere de boucle ou de balise 
 			50 => 'color: #E1861A;', // filtres de balise
+
+			99 => 'color: #FF001E; font-weight:bold;', // [ ( et ) ]
 			)
 		),
 	'URLS' => array(),
@@ -174,12 +170,12 @@ $language_data = array (
 		// Balise complexe avec [ ( et ) ] si on peut
 		99 => array(
 			GESHI_SEARCH => REG_BALISE_COMPLET,
-			GESHI_REPLACE => '',
+			GESHI_REPLACE => '\\1',
 			GESHI_MODIFIERS => '',
 			GESHI_BEFORE => '',
-			GESHI_AFTER => ''
-			),
-*/
+			GESHI_AFTER => '\\2\\3\\4\\5\\6\\7'
+			),*/
+
 		// Balise (#nom:TITRE**) (les etoiles)
 		0 => array(
 			GESHI_SEARCH => REG_BALISE,
@@ -209,7 +205,7 @@ $language_data = array (
 		// Au fur et a mesure que GESHI trouve des regexp
 		// il encadre ses trouvailles de <|!REG3XPn!>contenu|>
 		// tel que <|!REG3XP10!>(ARTICLES)|>
-		
+
 		// 1) fin de boucle <BOUCLEx(TABLE).../> ( /> )
 		10 => array(
 			GESHI_SEARCH => REG_BOUCLE_FIN,

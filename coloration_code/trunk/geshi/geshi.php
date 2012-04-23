@@ -3065,6 +3065,7 @@ class GeSHi {
                         $COMMENT_MATCHED = false;
                     }
                 }
+
                 // Parse the last bit
                 $result .= $this->parse_non_string_part($stuff_to_parse);
                 $stuff_to_parse = '';

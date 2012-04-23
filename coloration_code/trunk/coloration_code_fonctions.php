@@ -57,21 +57,21 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 	// En outre, le bouton telecharger n'est pas affiche.
 	if ($cadre == 'cadre')
 		$englobant = 'div';
-		
+
 	// Supprime le premier et le dernier retour chariot
-	$code = preg_replace("/^(\r\n|\n|\r)/m", "", $code);
-	$code = preg_replace("/(\r\n|\n|\r)$/m", "", $code);
+	$code = preg_replace("/^(\r\n|\n|\r)*/", "", $code);
+	$code = preg_replace("/(\r\n|\n|\r)*$/", "", $code);
 
 	$params = explode(' ', $language);
 	$language = array_shift($params);
 	
 	if ($language=='spip') $language = PLUGIN_COLORATION_CODE_COLORIEUR_SPIP;
 	
-	include_spip('geshi/geshi');
+	include_spip('inc/spip_geshi');
 	//
 	// Create a GeSHi object
 	//
-	$geshi = new GeSHi($code, $language);
+	$geshi = new SPIP_GeSHi($code, $language);
 	if ($geshi->error()) {
 		return false;
 	}
