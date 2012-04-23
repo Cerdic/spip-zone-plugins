@@ -296,6 +296,7 @@
 
 			$message_html	= $lettre->message_html;
 			$message_texte	= $lettre->message_texte;
+			$langue_lettre  = $lettre->lang;
 
 			$parametres = 'lang='.$lettre->lang.'&rubriques[]=-1&code='.$this->code.'&email='.$this->email;
 			$url_action_validation_desabonnements = url_absolue(generer_url_action('validation_desabonnements', $parametres, true));
@@ -367,7 +368,11 @@
 				else
 					$email_envoyeur =  $GLOBALS['meta']['email_webmaster'];
 
-				$nom_envoyeur = strip_tags($GLOBALS['meta']['nom_site']);
+				// extraire les multis du titre de site selon la langue de la lettre + encoder iso8859 si utf-8	
+				$nom_envoyeur = strip_tags(extraire_multi($GLOBALS['meta']['nom_site'], $langue_lettre));
+				if (lire_meta("charset")=="utf-8")
+					$nom_envoyeur = utf8_decode($nom_envoyeur);
+
 
 				// l'expéditeur est le webmaster
 				if ('webmaster'==$expediteur_type)
