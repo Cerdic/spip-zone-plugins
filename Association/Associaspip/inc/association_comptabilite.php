@@ -351,32 +351,305 @@ function association_liste_plan_comptable($val,$actives='') {
 
 /* si il existe un compte 58x on le retourne sinon on cree le compte 581 et on le retourne */
 function association_creer_compte_virement_interne() {
-    if ($GLOBALS['association_metas']['pc_intravirements'])
+    if ($GLOBALS['association_metas']['pc_intravirements']) // un code de virement interne est deja defini !
 	return $GLOBALS['association_metas']['pc_intravirements'];
-    /* on recupere tous les comptes de la classe "financier" (classe 5) */
-    $res = association_liste_plan_comptable($GLOBALS['association_metas']['classe_banques']);
-    /* existe-t-il le compte 58x */
+    $res = association_liste_plan_comptable($GLOBALS['association_metas']['classe_banques']); // on recupere tous les comptes de la classe "financier" (classe 5)
     foreach($res as $code => $libelle) {
-	if (substr($code,1,1)=='8') {
-	    $trouve = TRUE; /* j'ai trouve un code qui commence par 58 */
+	/* existe-t-il le compte 58x ? (nota : c'est la compta francaise...) */
+	if (substr($code,1,1)=='8') // il existe un code qui commence par 58...
 	    return $code;
-	}
     }
-    if (!$trouve) { /* j'ai rien trouve, je cree le compte 581 */
-	$code = $GLOBALS['association_metas']['classe_banques'].'81';
-	$id_plan = sql_insertq('spip_asso_plan', array(
-	    'code' => $code,
-	    'intitule' => _T('asso:virement_interne'),
-	    'classe' => $GLOBALS['association_metas']['classe_banques'],
-	    'type_op' => 'multi',
-	    'solde_anterieur' => '0',
-	    'date_anterieure' => date('Y-m-d'),
-	    'commentaire' => _T('asso:compte_cree_automatiquement'),
-	    'active' => '0',
-	    'maj' => date('Y-m-d')
-	));
-    }
+    /* j'ai rien trouve, je cree le compte 581 */
+    $code = $GLOBALS['association_metas']['classe_banques'].'81';
+    $id_plan = sql_insertq('spip_asso_plan', array(
+	'code' => $code,
+	'intitule' => _T('asso:virement_interne'),
+	'classe' => $GLOBALS['association_metas']['classe_banques'],
+	'type_op' => 'multi',
+	'solde_anterieur' => '0',
+	'date_anterieure' => date('Y-m-d'),
+	'commentaire' => _T('asso:compte_cree_automatiquement'),
+	'active' => '0',
+	'maj' => date('Y-m-d')
+    ));
     return $code;
 }
+
+/* on recupere les parametres de requete a passer aux fonctions */
+function association_recupere_parametres_comptables() {
+    $id_exercice = intval(_request('exercice'));
+    if( !$id_exercice ) { // pas d'exercice en parametre
+	$id_exercice = sql_getfetsel('id_exercice', 'spip_asso_exercices', '', '', 'fin DESC'); // on recupere l'id_exercice dont la date "fin" est "la plus grande", c'est a dire l'id de l'exercice le plus recent
+	if( !$id_exercice ) // pas d'exercice defini...
+	    $id_exercice = 0; // forcer la valeur zero pour les requetes devant l'utiliser
+    }
+    $annee = intval(_request('annee'));
+    if( !$annee ) { // pas d'annee en parametre
+	$annee = date('Y'); // on prende l'annee actuelle
+    }
+    $destination = intval(_request('destination'));
+    if( !$destination ) { // pas de destination
+    }
+    return serialize(array($exercice, $destination) );
+}
+
+/* on recupere les totaux (recettes et depenses) d'un exercice des differents comptes de la classe specifiee */
+function association_calcul_totaux_comptes_classe($classe, $exercice=0, $destination=0, $direction='-1') {
+    $c_group = (($classe==$GLOBALS['association_metas']['classe_banques'])?'journal':'imputation');
+    $valeurs = (($direction) ? ( ($direction<0)?'SUM('.(($destination)?'a_d':'a_c').'.depense) AS valeurs' : 'SUM('.(($destination)?'a_d':'a_c').'.recette) AS valeurs') : 'SUM('.(($destination)?'a_d':'a_c').'.recette) AS recettes, SUM('.(($destination)?'a_d':'a_c').'.depense) as depenses, SUM('.(($destination)?'a_d':'a_c').'.recette-'.(($destination)?'a_d':'a_c').'.depense) AS soldes' );
+#    $c_having = ($direction) ? 'valeurs>0' : ''; // on ne retiendra que les totaux non nuls...
+    if ( sql_countsel('spip_asso_plan','active=1') ) { // existence de comptes actifs
+	$p_join = " RIGHT JOIN spip_asso_plan AS a_p ON a_c.$c_group=a_p.code";
+	$p_select = ', a_p.code, a_p.intitule, a_p.classe';
+	$p_order = 'a_p.code'; // imputation ou journal
+	$p_having = 'a_p.classe='.sql_quote($classe); // ok : on agrege par code (indirectement) associe a une classe unique selectionnee ...
+    } else { // pas de comptes actifs ?!?
+	$p_join = $p_select = $p_having = '';
+	$p_order = $c_group; // imputation ou journal
+    }
+    if ( $exercice ) { // exercice budgetaire personnalise
+	$exercice_data = sql_asso1ligne('exercice', $exercice);
+	$c_where = "a_c.date>='$exercice_data[debut]' AND a_c.date<='$exercice_data[fin]' ";
+    } elseif ( $annee ) { // exercice budgetaire par annee civile
+	$c_where = "DATE_FORMAT(a_c.date, '%Y')=$annee ";
+    } elseif ( $classe==$GLOBALS['association_metas']['classe_banques'] ) { // encaisse
+	$c_where = 'LEFT(a_c.imputation,1)<>'. sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']) .' AND a_c.date>=a_p.date_anterieure AND a_c.date<=NOW() ';
+    } else { // tout ?!?
+	$c_where = '';
+    }
+    $query = sql_select(
+	"$c_group, $valeurs ". ($destination ? 'a_d.id_destination' : '') .$p_select, // select
+	'spip_asso_comptes AS a_c '. ($destination ? 'LEFT JOIN spip_asso_destination_op AS a_d ON a_d.id_compte=a_c.id_compte ' : '') .$p_join, // from
+//	'spip_asso_comptes AS a_c '.$p_join, // from
+	($destination ? "a_d.id_destination=$destination AND " : '') .$c_where, // where
+//	$c_where, // where
+	$c_group, // group by
+	$p_order, // order by
+	'', // limit
+	$c_having. (($c_having && $p_having)?' AND ':'') .$p_having // having
+    );
+    return $query;
+}
+
+/* */
+function association_liste_totaux_comptes_classes($classes, $prefixe='', $exercice=0, $destination=0, $direction='-1', $not_in=FALSE) {
+    if( !is_array($classes) ) { // a priori une chaine ou un entier d'une unique classe
+	$liste_classes = array( $classes ) ; // transformer en tableau (puisqu'on va operer sur des tableaux);
+    } else { // c'est un tableau de plusieurs classes
+	$liste_classes = $classes;
+    }
+    $titre = $prefixe.'_'. ( ($direction) ? (($direction<0)?'depenses':'recettes') : 'soldes' );
+    echo "<table width='100%' class='asso_tablo' id='asso_tablo_$titre'>\n";
+    echo "<thead>\n<tr>";
+    echo '<th width="10">&nbsp;</td>';
+    echo '<th width="30">&nbsp;</td>';
+    echo '<th>'. _T("asso:$titre") .'</th>';
+    echo '<th width="80">&nbsp;</th>';
+    echo "</tr>\n</thead><tbody>";
+    $total = 0;
+    $chapitre = '';
+    $i = 0;
+    foreach ( $liste_classes as $rang => $classe ) {
+	$query = association_totaux_comptes_classe($classe, $exercice, $destination, $direction );
+	while ($data = sql_fetch($query)) {
+	    echo '<tr>';
+	    $valeurs = $data['valeurs'];
+	    $new_chapitre = substr($data['code'], 0, 2);
+	    if ($chapitre!=$new_chapitre) {
+		echo '<td class="text">'. $new_chapitre . '</td>';
+		echo '<td colspan="3" class="text">'. ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'")) .'</td>';
+		$chapitre = $new_chapitre;
+		echo "</tr>\n<tr>";
+	    }
+	    if ($valeurs) { // non-zero...
+		echo "<td>&nbsp;</td>";
+		echo '<td class="text">'. $data['code'] .'</td>';
+		echo '<td class="text">'. $data['intitule'] .'</td>';
+		echo '<td class="decimal">'. association_nbrefr($valeurs) .'</td>';
+		echo "</tr>\n";
+		$total += $valeurs;
+	    }
+	}
+    }
+    echo "</tbody><tfoot>\n<tr>";
+    echo '<th colspan="2">&nbsp;</th>';
+    echo '<th class="text">'. _T("asso:$prefixe".'_total_') .'</th>';
+    echo '<th class="decimal">'. association_nbrefr($total) . '</th>';
+    echo "</tr>\n</tfoot>\n</table>\n";
+    return $total;
+}
+
+// Brique commune aux classes d'exportation des donnees du compte de bilan
+class ExportComptes {
+
+    var $exercice;
+    var $join;
+    var $sel;
+    var $where;
+    var $having;
+    var $order;
+    var $out;
+
+    function  __construct($var) {
+	$tableau = unserialize(rawurldecode($var));
+	$this->exercice = $tableau[0];
+	$this->join = $tableau[1];
+	$this->sel = $tableau[2];
+	$this->where = $tableau[3];
+	$this->having = $tableau[4];
+	$this->order = $tableau[5];
+	$this->out = '';
+    }
+
+    // de type CSV,INI,TSV, etc.
+    function LignesSimplesEntete($champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='') {
+	$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('asso:entete_code')))) .$champFin.$champsSeparateur;
+	$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('asso:entete_intitule')))) .$champFin.$champsSeparateur;
+	$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('asso:entete_montant')))) .$champFin.$lignesSeparateur;
+    }
+
+    // de type CSV,INI,TSV, etc.
+    function LignesSimplesCorps($key, $champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='') {
+	switch ($key) {
+	    case 'charges' :
+		$quoi = "SUM(depense) AS valeurs";
+		break;
+	    case 'produits' :
+		$quoi = "SUM(recette) AS valeurs";
+		break;
+	    case 'contributions_volontaires' :
+		$quoi = "SUM(depense) AS charge_evaluee, SUM(recette) AS produit_evalue";
+		break;
+	}
+	$query = sql_select(
+	    "imputation, $quoi ".$this->sel, // select
+	    'spip_asso_comptes '.$this->join, // from
+	    $this->where, // where
+	    $this->order, // group by
+	    $this->order, // order by
+	    '', // limit
+	    $this->having .$GLOBALS['association_metas']['classe_'.$key] // having
+	);
+	$chapitre = '';
+	$i = 0;
+	while ($data = sql_fetch($query)) {
+	    if ($key==='contributions_volontaires') {
+		if ($data['charge_evaluee']>0) {
+		    $valeurs = $data['charge_evaluee'];
+		} else {
+		    $valeurs = $data['produit_evalue'];
+		}
+	    } else {
+		$valeurs = $data['valeurs'];
+	    }
+	    $new_chapitre = substr($data['code'], 0, 2);
+	    if ($chapitre!=$new_chapitre) {
+		$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), $new_chapitre) .$champFin.$champsSeparateur;
+		$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))) .$champFin.$champsSeparateur;
+		$this->out .= $champsSeparateur.' '.$champsSeparateur;
+		$this->out .= $lignesSeparateur;
+		$chapitre = $new_chapitre;
+	    }
+	    $this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), $data['code']) .$champFin.$champsSeparateur;
+	    $this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), $data['intitule']) .$champFin.$champsSeparateur;
+	    $this->out .= $champDebut.$valeurs.$champFin.$lignesSeparateur;
+	}
+    }
+
+    // export texte de type tableau (lignes*colonnes) simple : CSV,CTX,HTML*SPIP,INI*,TSV,etc.
+    // de par la simplicite recherchee il n'y a pas de types ou autres : CSV et CTX dans une certaine mesure pouvant distinguer "nombres", "chaines alphanumeriques" et "chaine binaires encodees"
+    function exportLignesUniques($champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='', $entete=true) {
+	if ($entete) {
+	    LignesSimplesEntete($champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='');
+	}
+	foreach (array('charges', 'produits', 'contributions_volontaires') as $nomClasse) {
+	    LignesSimplesCorps($nomClasse, $champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='');
+	}
+    }
+
+    // export texte de type s-expression / properties-list / balisage (conteneurs*conteneurs*donnees) simple : JSON, XML (utilisable avec ASN.1), YAML, etc.
+    // de par la simplicite recherchee il n'y a pas de types ou d'attributs : BSON, Bencode, JSON, pList, XML, etc.
+    function exportLignesMultiples($balises, $echappements=array(), $champDebut='', $champFin='', $indent="\t", $entetesPerso='') {
+	$this->out .= "$balises[compteresultat1]\n";
+	if (!$entetesPerso) {
+	    $this->out .= "$indent$balises[entete1]\n";
+	    $this->out .= "$indent$indent$balises[titre1] $champDebut". utf8_decode(html_entity_decode(_T('asso:cpte_resultat_titre_general'))) ."$champFin $balises[titre0]\n";
+	    $this->out .= "$indent$indent$balises[nom1] $champDebut". $GLOBALS['association_metas']['nom'] ."$champFin $balises[nom0]\n";
+	    $this->out .= "$indent$indent$balises[exercice1] $champDebut". sql_asso1champ('exercice', $this->exercice, 'intitule') ."$champFin $balises[exercice0]\n";
+	    $this->out .= "$indent$balises[entete0]\n";
+	}
+	foreach (array('charges', 'produits', 'contributions_volontaires') as $nomClasse) {
+	    switch ($nomClasse) {
+		case 'charges' :
+		    $quoi = "SUM(depense) AS valeurs";
+		    break;
+		case 'produits' :
+		    $quoi = "SUM(recette) AS valeurs";
+		    break;
+		case 'contributions_volontaires' :
+		    $quoi = "SUM(depense) AS charge_evaluee, SUM(recette) AS produit_evalue";
+		    break;
+	    }
+	    $baliseClasse = $nomClasse.'1';
+	    $this->out .= "$indent$balises[$baliseClasse]\n";
+	    $query = sql_select(
+		"imputation, $quoi ".$this->sel, // select
+		'spip_asso_comptes'.$this->join, // from
+		$this->where, // where
+		$this->order, // group by
+		$this->order, // order by
+		'', // limit
+		$this->having .$GLOBALS['association_metas']['classe_'.$nomClasse] // having
+	    );
+	    $chapitre = '';
+	    $i = 0;
+	    while ($data = sql_fetch($query)) {
+		if ($key==='contributions_volontaires') {
+		    if ($data['charge_evaluee']>0) {
+			$valeurs = $data['charge_evaluee'];
+		    } else {
+			$valeurs = $data['produit_evalue'];
+		    }
+		} else {
+		    $valeurs = $data['valeurs'];
+		}
+		$new_chapitre = substr($data['code'], 0, 2);
+		if ($chapitre!=$new_chapitre) {
+		    if ($chapitre!='') {
+			$this->out .= "$indent$indent$balises[chapitre0]\n";
+		    }
+		    $this->out .= "$indent$indent$balises[chapitre1]\n";
+		    $this->out .= "$indent$indent$indent$balises[code1] $champDebut". str_replace(array_keys($echappements), array_values($echappements), $new_chapitre) ."$champFin $balises[code0]\n";;
+		    $this->out .= "$indent$indent$indent$balises[libelle1] $champDebut". str_replace(array_keys($echappements), array_values($echappements), ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))) ."$champFin $balises[libelle0]\n";
+		    $chapitre = $new_chapitre;
+		}
+		$this->out .= "$indent$indent$indent$balises[categorie1]\n";
+		$this->out .= "$indent$indent$indent$indent$balises[code1] $champDebut". str_replace(array_keys($echappements), array_values($echappements), $data['code']) ."$champFin $balises[code0]\n";
+		$this->out .= "$indent$indent$indent$indent$balises[intitule1] $champDebut". str_replace(array_keys($echappements), array_values($echappements), $data['intitule']) ."$champFin $balises[intitule0]\n";
+		$this->out .= "$indent$indent$indent$indent$balises[montant1] $champDebut".$valeurs."$champFin $balises[montant0]\n";
+		$this->out .= "$indent$indent$indent$balises[categorie0]\n";
+	    }
+	    if ($chapitre!='') {
+		$this->out .= "$indent$indent$balises[chapitre0]\n";
+	    }
+	    $baliseClasse = $nomClasse.'0';
+	    $this->out .= "$indent$balises[$baliseClasse]\n";
+	}
+	$this->out .= "$balises[compteresultat0]\n";
+    }
+
+    // fichier texte final a afficher/telecharger
+    function leFichier($ext, $subtype) {
+	$fichier = _DIR_RACINE.'/'._NOM_TEMPORAIRES_ACCESSIBLES.'compte_'.$subtype.'_'.$this->exercice.".$ext"; // on essaye de creer le fichier dans le cache local/ http://www.spip.net/fr_article4637.html
+	$f = fopen($fichier, 'w');
+	fputs($f, $this->out);
+		fclose($f);
+	header('Content-type: application/'.$ext);
+	header('Content-Disposition: attachment; filename="'.$fichier.'"');
+	readfile($fichier);
+    }
+
+}
+
 
 ?>

@@ -67,13 +67,11 @@ function exec_bilan()
 			'encaisse' => array('finances-24.png', 'encaisse', "exercice=$exercice"),
 		));
 		debut_cadre_association('finances-24.png', 'bilans_comptables', $exercice_data['intitule']);
-		$clas_banque = $GLOBALS['association_metas']['classe_banques'];
-		$clas_contrib_volontaire = $GLOBALS['association_metas']['classe_contributions_volontaires']; // une contribution benevole ne doit pas etre comptabilisee en charge/produit
 		if ($plan) {
 			$join = ' RIGHT JOIN spip_asso_plan ON imputation=code';
 			$sel = ', code, intitule, classe';
 			$where = " date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' ";
-			$having =  "classe<>'". sql_quote($clas_banque). "' AND classe<>'" .sql_quote($clas_contrib_volontaire) .'\'';
+			$having =  "classe NOT IN ('". sql_quote($GLOBALS['association_metas']['classe_banques']). "','" .sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']) . "','" .sql_quote($GLOBALS['association_metas']['classe_charges']) . "','" .sql_quote($GLOBALS['association_metas']['classe_produits']) . "')";
 			$order = 'code';
 		} else {
 			$join = $sel = $where = $having = $order = '';
@@ -96,51 +94,35 @@ function exec_bilan()
 			echo '<th width="50">'. _T('asso:bilan_depenses') .'</th>';
 			echo '<th width="50">'. _T('asso:bilan_solde').'</th>';
 			echo "</tr>\n</thead><tbody>";
-			// si on fait le bilan sur toutes les destinations (quand aucune de selectionnee ou que destination n'est pas on)
-			if ($id_destination==0) {
+			if ($id_destination==0) { // on fait le bilan sur toutes les destinations (quand aucune de selectionnee ou que destination n'est pas on)
 				$query = sql_select(
-					"imputation, SUM(recette) AS recettes, SUM(depense) AS depenses, DATE_FORMAt(date, '%Y') AS annee $sel",
+					"imputation, SUM(recette) AS recettes, SUM(depense) AS depenses $sel",
 					"spip_asso_comptes $join",
 					$where, $order, '', '', $having);
-				while ($data = sql_fetch($query)) {
-					$recettes = $data['recettes'];
-					$depenses = $data['depenses'];
-					$solde = $recettes-$depenses;
-					echo '<tr>';
-					echo '<td class="text">'. $data['code'] . '</td>';
-					echo '<td class="text">'. $data['intitule'] .'</td>';
-					echo '<td class="decimal">'.association_prixfr($recettes).'</td>';
-					echo '<td class="decimal">'.association_prixfr($depenses).'</td>';
-					echo '<td class="decimal">'.association_prixfr($solde).'</td>';
-					echo "</tr>\n";
-					$total_recettes += $recettes;
-					$total_depenses += $depenses;
-					$total_soldes += $solde;
-				}
 			} else { // on fait le bilan d'une seule destination
 				$query = sql_select(
-					"imputation, DATE_FORMAT(date, '%Y') AS annee,
+					"imputation,
 					SUM(spip_asso_destination_op.recette) AS recettes,
 					SUM(spip_asso_destination_op.depense) AS depenses,
 					spip_asso_destination_op.id_destination $sel",
 					"spip_asso_comptes LEFT JOIN spip_asso_destination_op ON spip_asso_destination_op.id_compte=spip_asso_comptes.id_compte $join",
 					"spip_asso_destination_op.id_destination=$id_destination AND $where",
 					$order, '', '', $having);
-				while ($data = sql_fetch($query)) {
-					$recettes = $data['recettes'];
-					$depenses = $data['depenses'];
-					$solde = $recettes-$depenses;
-					echo '<tr>';
-					echo '<td class="text">'. $data['code'] .'</td>';
-					echo '<td class="text">'. $data['intitule'] .'</td>';
-					echo '<td class="decimal">'.association_prixfr($recettes).'</td>';
-					echo '<td class="decimal">'.association_prixfr($depenses).'</td>';
-					echo '<td class="decimal">'.association_prixfr($solde).'</td>';
-					echo "</tr>\n";
-					$total_recettes += $recettes;
-					$total_depenses += $depenses;
-					$total_soldes += $solde;
-				}
+			}
+			while ($data = sql_fetch($query)) {
+				$recettes = $data['recettes'];
+				$depenses = $data['depenses'];
+				$solde = $recettes-$depenses;
+				echo '<tr>';
+				echo '<td class="text">'. $data['code'] . '</td>';
+				echo '<td class="text">'. $data['intitule'] .'</td>';
+				echo '<td class="decimal">'.association_prixfr($recettes).'</td>';
+				echo '<td class="decimal">'.association_prixfr($depenses).'</td>';
+				echo '<td class="decimal">'.association_prixfr($solde).'</td>';
+				echo "</tr>\n";
+				$total_recettes += $recettes;
+				$total_depenses += $depenses;
+				$total_soldes += $solde;
 			}
 			echo "</tbody><tfoot>\n<tr>";
 			echo '<th colspan="2">'. _T('asso:resultat_courant') .'</th>';

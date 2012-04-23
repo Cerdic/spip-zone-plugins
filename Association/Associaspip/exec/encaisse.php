@@ -46,7 +46,7 @@ function exec_encaisse()
 		$lesEcritures = array(); // initialiser le tableaux des ecritures a afficher
 		/* Recuperer les comptes financiers avec toutes les informations dont on aura besoin */
 		$encaisses = sql_select(
-			'a_p.id_plan, a_p.code, a_p.intitule, a_p.date_anterieure, a_p.solde_anterieur, SUM(a_c.recette) AS recettes, SUM(a_c.depense) AS depenses, a_c.date, a_c.imputation ', // select
+			'a_p.id_plan, a_p.code, a_p.intitule, a_p.date_anterieure, a_p.solde_anterieur, SUM(a_c.recette) AS recettes, SUM(a_c.depense) AS depenses, SUM(a_c.recette-a_c.depense) AS solde_actuel ', // select
 			'spip_asso_comptes AS a_c INNER JOIN spip_asso_plan AS a_p ON a_c.journal=a_p.code', // from
 			'a_p.classe='. sql_quote($GLOBALS['association_metas']['classe_banques']) .' AND LEFT(a_c.imputation,1)<>'. sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']) .' AND a_p.active=1 AND a_c.date>=a_p.date_anterieure AND a_c.date<=NOW() ', // where
 			'a_c.journal', // group by
@@ -54,10 +54,10 @@ function exec_encaisse()
 			'', // limit
 			'' // having
 		); // cette requete ne recupere que les comptes financiers utilises dans les journaux et on n'a donc pas les comptes dormants/inactifs...
-		/* Completer le tableau des ecritures avec les informations recuperees en faisant les controles necessaires au passage */
+		/* Completer le tableau des ecritures avec les informations recuperees */
 		while ($val = sql_fetch($encaisses)) {
 			$lesEcritures[$val['code']] = $val; // on recupere les informations de la requete
-			$lesEcritures[$val['code']]['solde_actuel'] = $val['recettes']-$val['depenses']; // on ajoute la donnee du solde des flux sur la periode
+#			$lesEcritures[$val['code']]['solde_actuel'] = $val['recettes']-$val['depenses']; // on ajoute la donnee du solde des flux sur la periode
 		}
 		/* Afficher les releves de situation des encaisses /!\ Tous les comptes financiers ne sont normalement pas concernes : idealement il aurait fallu configurer un groupe "caisse" (51xx) et un groupe "banque" (53xx) mais d'une part nous ignorons si d'autres systemes comptables n'utilisent pas plus de groupes et d'autre part (meme une association francaise) peut bien ne pas avoir les deux types de comptes... */
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_encaisse'>\n";

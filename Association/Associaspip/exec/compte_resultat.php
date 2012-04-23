@@ -90,26 +90,26 @@ function exec_compte_resultat()
 	}
 }
 
-function compte_resultat_charges_produits($var, $class) {
+function compte_resultat_charges_produits($var, $classe) {
 	include_spip('inc/association_plan_comptable');
 	$tableau = @unserialize($var);
-	$id_tableau = (($class==$GLOBALS['association_metas']['classe_charges']) ? 'charges' : 'produits');
+	$id_tableau = (($classe==$GLOBALS['association_metas']['classe_charges']) ? 'charges' : 'produits');
 	echo "<table width='100%' class='asso_tablo' id='asso_tablo_bilan_$id_tableau'>\n";
 	echo "<thead>\n<tr>";
 	echo '<th width="10">&nbsp;</td>';
 	echo '<th width="30">&nbsp;</td>';
-	echo '<th>'. (($class==$GLOBALS['association_metas']['classe_charges']) ? _T('asso:cpte_resultat_titre_charges') : _T('asso:cpte_resultat_titre_produits')) .'</th>';
+	echo '<th>'. _T("asso:cpte_resultat_titre_$id_tableau") .'</th>';
 	echo '<th width="80">&nbsp;</th>';
 	echo "</tr>\n</thead><tbody>";
-	$quoi = (($class==$GLOBALS['association_metas']['classe_charges']) ? 'SUM(depense) AS valeurs' : 'SUM(recette) AS valeurs');
+	$quoi = (($classe==$GLOBALS['association_metas']['classe_charges']) ? 'SUM(depense) AS valeurs' : 'SUM(recette) AS valeurs');
 	$query = sql_select(
-		"imputation, $quoi, DATE_FORMAT(date, '%Y') AS annee $tableau[2]", // select
+		"imputation, $quoi $tableau[2]", // select
 		"spip_asso_comptes $tableau[1]", // from
 		$tableau[3], // where
 		$tableau[5], // group by
 		$tableau[5], // order by
 		'', // limit
-		$tableau[4].$class // having
+		$tableau[4].$classe // having
 	);
 	$total = 0;
 	$chapitre = '';
@@ -165,7 +165,7 @@ function compte_resultat_benevolat($var, $class) {
 	echo '<th width="80">'. _T('asso:cpte_resultat_recette_evaluee') .'</th>';
 	echo '<th width="80">'. _T('asso:cpte_resultat_depense_evaluee') .'</th>';
 	$query = sql_select(
-		"imputation, SUM(recette) AS recettes, SUM(depense) AS depenses, DATE_FORMAT(date, '%Y') AS annee $tableau[2]", // select
+		"imputation, SUM(recette) AS recettes, SUM(depense) AS depenses $tableau[2]", // select
 		"spip_asso_comptes $tableau[1]", // from
 		$tableau[3], // where
 		$tableau[5], // group by
@@ -248,7 +248,7 @@ class ExportCompteResultats {
 				break;
 		}
 		$query = sql_select(
-			"imputation, $quoi, DATE_FORMAT(date, '%Y') AS annee".$this->sel, // select
+			"imputation, $quoi ".$this->sel, // select
 			'spip_asso_comptes '.$this->join, // from
 			$this->where, // where
 			$this->order, // group by
@@ -319,7 +319,7 @@ class ExportCompteResultats {
 			$baliseClasse = $nomClasse.'1';
 			$this->out .= "$indent$balises[$baliseClasse]\n";
 			$query = sql_select(
-				"imputation, $quoi, DATE_FORMAT(date, '%Y') AS annee ".$this->sel, // select
+				"imputation, $quoi ".$this->sel, // select
 			'spip_asso_comptes'.$this->join, // from
 				$this->where, // where
 				$this->order, // group by
