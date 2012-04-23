@@ -2,6 +2,7 @@
 [(#REM) <!-- La liste des autres relectures de l'article --> ]
 #SET{exclusion, #VAL{id_relecture!=}|concat{#ID_RELECTURE}}
 <INCLURE{fond=prive/objets/liste/relectures,
+	id_article=#ID_ARTICLE,
 	titre=<:relecture:titre_liste_autres_relectures:>,
 	par=date_ouverture,
 	pas=10,
