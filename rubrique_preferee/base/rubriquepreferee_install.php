@@ -20,7 +20,7 @@ function rubriquepreferee_upgrade($nom_meta_base_version, $version_cible){
 		if (version_compare($current_version,'0.0','=')){
 			$champs = rubriquepreferee_declarer_champs_extras();
 			// C'est le plugin Champs Extras qui ecrit le meta
-			if(! installer_champs_extras($champs, $nom_meta_base_version, $current_version='0.1.0')) {
+			if(! installer_champs_extras($champs, $nom_meta_base_version, $current_version='0.1')) {
 				echo _T('rubriquepreferee:msg_erreur_installation')."<br/>";
 			}
 		}
