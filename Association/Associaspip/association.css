@@ -214,10 +214,10 @@ span.erreur {
 .formulaire_spip select,
 .formulaire_spip textarea
 { /* adapte de .formo dans prive/minipress.css (voir s'il faut combiner avec celui de prive/styles_vieilles_def.html) */
-	font-size: 1.1em;
+/*	font-size: 1.1em; */
 	background-color: #f8f8f9;
 	background-position: center bottom;
-	margin-bottom: 1em;
+/*	margin-bottom: 1em; */
 	padding: 3px;
 	border: 1px inset #333;
 }
