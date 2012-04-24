@@ -6,25 +6,13 @@ function action_paypal_ipn_dist() {
 
 	spip_log("Entrer action_paypal_ipn_dist",'paypal');
 
-	#spip_log($_POST,'paypal');
-
-
-	$conf = lire_config('paypal/');
-	$envr = $conf['environnement'];
-
-	if ($envr == 'test') {
-		$account = lire_config('paypal_api_test/account');
-		$url = "https://www.sandbox.paypal.com/cgi-bin/webscr";
-	} else {
-		$account = lire_config('paypal_api_prod/account');
-		$url = "https://www.paypal.com/cgi-bin/webscr";
-	}
+	$conf = lire_config('paypal');
 
 	$datas = $_POST;
 	$datas['cmd'] = "_notify-validate";
 
 	include_spip('inc/distant');
-	$retour = recuperer_page($url, false, false, 1048576, $datas);
+	$retour = recuperer_page(constant( '_URL_SOUMISSION_PAYPAL_'.$conf['environnement']), false, false, 1048576, $datas);
 
 	// retour peut etre "INVALID" ou "VERIFIED".
 	spip_log($retour,'paypal');
@@ -32,7 +20,7 @@ function action_paypal_ipn_dist() {
 	// Si c'est bon, on vérifie aussi que l'email soit celui configuré dans le compte
 	if (
 		$retour == "VERIFIED"
-		and $datas['receiver_email'] == $account
+		and $datas['receiver_email'] == $conf['account_'.$conf['environnement']]
 	) {
 		spip_log('Retour de Paypal vérifié, on peut passer aux traitements','paypal');
 
@@ -40,7 +28,7 @@ function action_paypal_ipn_dist() {
 		pipeline('traitement_paypal', array(
 			'args'=>array(
 				'paypal' => $datas,
-				'test' => (($envr == 'test') or ($datas['test_ipn'] == 1)),
+				'test' => (($conf['environnement'] == 'test') or ($datas['test_ipn'] == 1)),
 			),
 			'data'=>'')
 		);

@@ -1,16 +1,6 @@
-<div class="cadre cadre-trait-couleur" style="">
-	<div class='titrem impliable'><:paypal:configuration_paypal:></div>
-	<div class="cadre_padding">
-		<div class="ajax">
-		#FORMULAIRE_CONFIGURER_PAYPAL
-		</div>
-		<h2 class="h2"><:paypal:api_prod:></h2>
-		<div class="ajax">
-		#FORMULAIRE_CONFIGURER_PAYPAL_API_PROD
-		</div>
-		<h2 class="h2"><:paypal:api_test:></h2>
-		<div class="ajax">
-		#FORMULAIRE_CONFIGURER_PAYPAL_API_TEST
-		</div>
-	</div>
+[(#AUTORISER{configurer,paypal}|oui)
+<h1><:paypal:configuration_paypal:></h1>
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_PAYPAL
 </div>
+]
