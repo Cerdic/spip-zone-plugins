@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rubrique_reference' => '(reference section)',
 
 	// T
-	'trad_delier_rubrique' => 'Unlink this section from these translations',
+	'trad_delier_rubrique' => 'Ne plus lier cette rubrique à ces traductions' # NEW
 );
 
 ?>

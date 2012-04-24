@@ -11,7 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_traduction' => 'يك ترجمه اضافه كنيد',
 
 	// R
-	'rubrique_reference' => 'بخش براي ارجاع'
+	'rubrique_reference' => 'بخش براي ارجاع',
+
+	// T
+	'trad_delier_rubrique' => 'Ne plus lier cette rubrique à ces traductions' # NEW
 );
 
 ?>
