@@ -23,4 +23,5 @@
 	<fonctions>squirrel_chimp_lists_fonctions.php</fonctions>
     <options>squirrel_chimp_lists_options.php</options>	
 	<categorie>communication</categorie>
+	<traduire gestionnaire="salvatore" module="scl" reference="fr" />
 </plugin>
