@@ -65,6 +65,7 @@ function relecture_boite_infos($flux){
  * Surcharge de la fonction charger des formulaires concernes, a savoir :
  * - dater : dans la page relecture permet de choisir la date de fin des commentaires
  * - editer_liens : dans la page relecture permet de choisir les relecteurs
+ * - instituer_objet : dans la page de l'article en cours de relecture bloque le statut de l'article
  *
  * @param array $flux
  * @return array
@@ -72,26 +73,33 @@ function relecture_boite_infos($flux){
 **/
 function relecture_formulaire_charger($flux){
 
-	static $forms_concernes = array('dater', 'editer_liens');
-
 	$form = $flux['args']['form'];
-	$objet = $flux['data']['objet'];
-	$id_objet = intval($flux['data']['id_objet']);
+	$objet = $flux['data']['objet'] ? $flux['data']['objet'] : $flux['data']['_objet'];
+	$id_objet = intval($flux['data']['id_objet']) ? intval($flux['data']['id_objet']) : intval($flux['data']['_id_objet']);
 
-	if ((in_array($form, $forms_concernes)) AND ($objet == 'relecture')) {
+	if ($objet == 'relecture') {
 		// Rendre editable le formulaire si la relecture n'est pas cloturee
 		$from = 'spip_relectures';
 		$where = array("id_relecture=$id_objet");
 		$statut = sql_getfetsel('statut', $from, $where);
 		$flux['data']['editable'] = ($statut !== 'fermee');
 
-		if ($form =='dater') {
+		if ($form == 'dater') {
 			// Identifier le label comme la date de fin des commentaires
 			$flux['data']['_label_date'] = _T('relecture:label_relecture_date_fin_commentaire');
 		}
-		else if ($form =='editer_liens') {
+		else if ($form == 'editer_liens') {
 			// Changer le titre du formulaire pour désigner clairement les relecteurs
 			$flux['data']['titre'] = _T('relecture:titre_liste_relecteurs');
+		}
+	}
+	else if ($objet == 'article') {
+		if ($form == 'instituer_objet') {
+			// Si une relecture est ouverte sur l'article alors on interdit de modifier
+			// le statut de l'article qui reste a "en cours de redaction"
+			$from = 'spip_relectures';
+			$where = array("id_article=$id_objet", "statut=" . sql_quote('ouverte'));
+			$flux['data']['editable'] = (sql_countsel($from, $where) == 0);
 		}
 	}
 
