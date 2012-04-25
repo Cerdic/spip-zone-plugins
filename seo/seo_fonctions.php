@@ -8,21 +8,21 @@ function generer_urls_canoniques(){
 	include_spip('balise/url_');
 	
 	if (count($GLOBALS['contexte']) == 0) {
-		$type_object = 'sommaire';
+		$objet = 'sommaire';
 	} elseif (isset($GLOBALS['contexte']['id_article'])) {
-		$id_object   = $GLOBALS['contexte']['id_article'];
-		$type_object = 'article';
+		$id_objet   = $GLOBALS['contexte']['id_article'];
+		$objet = 'article';
 	} elseif (isset($GLOBALS['contexte']['id_rubrique'])) {
-		$id_object   = $GLOBALS['contexte']['id_rubrique'];
-		$type_object = 'rubrique';
+		$objet   = $GLOBALS['contexte']['id_rubrique'];
+		$objet = 'rubrique';
 	}
 
-	switch ($type_object) {
+	switch ($objet) {
 		case 'sommaire':	
 			$flux .= '<link rel="canonical" href="'. url_de_base() .'" />';
 			break;
 		default:
-			$flux .= '<link rel="canonical" href="'. url_de_base() . generer_url_entite($id_object, $type_object) .'" />';
+			$flux .= '<link rel="canonical" href="'. url_de_base() . generer_url_entite($id_objet, $objet) .'" />';
 			break;
 	}
 	
@@ -62,19 +62,18 @@ function generer_google_analytics(){
  * @return string $flux
  */
 function generer_meta_tags(){
-	include_spip('inc/abstract_sql');
 
 	/* CONFIG */
 	$config = unserialize($GLOBALS['meta']['seo']);
 	
 	if (isset($GLOBALS['contexte']['id_article'])) {
-		$id_object   = $GLOBALS['contexte']['id_article'];
-		$type_object = 'article';
+		$id_objet   = $GLOBALS['contexte']['id_article'];
+		$objet = 'article';
 	} elseif (isset($GLOBALS['contexte']['id_rubrique'])) {
-		$id_object   = $GLOBALS['contexte']['id_rubrique'];
-		$type_object = 'rubrique';
+		$id_objet   = $GLOBALS['contexte']['id_rubrique'];
+		$objet = 'rubrique';
 	} else{
-		$type_object = 'sommaire';
+		$objet = 'sommaire';
 	}
 
 	/* META TAGS */
@@ -82,13 +81,15 @@ function generer_meta_tags(){
 	// If the meta tags configuration is activate
 	$meta_tags = array();
 	
-	switch ($type_object) {
+	switch ($objet) {
 		case 'sommaire':	
 				$meta_tags = $config['meta_tags']['tag'];
 			break;
 		default:
-			$title = couper(sql_getfetsel("titre", "spip_".$type_object."s", "id_$type_object = $id_object"),64);
-			$requete = sql_allfetsel("descriptif,texte", "spip_".$type_object."s", "id_$type_object = $id_object");
+			$table = table_objet_sql($objet);
+			$id_table_objet = id_table_objet($objet);
+			$title = couper(sql_getfetsel("titre", $table, "$id_table_objet = ".intval($id_objet)),64);
+			$requete = sql_allfetsel("descriptif,texte", $table, "$id_table_objet = ".intval($id_objet));
 			if($requete) $description = couper(implode(" ",$requete[0]),150,'');
 			// Get the value set by default
 			foreach ($config['meta_tags']['default'] as $name => $option) {
@@ -104,8 +105,8 @@ function generer_meta_tags(){
 			}
 			
 			// If the meta tags rubrique and articles editing is activate (should overwrite other setting)
-			if ($config['meta_tags']['activate_editing'] == 'yes' && ($type_object == 'article' || $type_object == 'rubrique')) {
-				$result = sql_select("*", "spip_seo", "id_object = $id_object AND type_object = '$type_object'");
+			if ($config['meta_tags']['activate_editing'] == 'yes' && ($objet == 'article' || $objet == 'rubrique')) {
+				$result = sql_select("*", "spip_seo", "id_objet = ".intval($id_objet)." AND objet = ".sql_quote($objet));
 				while($r = sql_fetch($result)){
 					if ($r['meta_content'] != '')
 						$meta_tags[$r['meta_name']] = $r['meta_content'];

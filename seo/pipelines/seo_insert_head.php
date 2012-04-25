@@ -19,20 +19,20 @@ function seo_insert_head($flux) {
 		$contexte = $GLOBALS['contexte'];
 		unset($contexte['lang']);
 		if (count($contexte) == 0) {
-			$type_object = 'sommaire';
+			$objet = 'sommaire';
 		} elseif (isset($contexte['id_article'])) {
-			$id_object   = $contexte['id_article'];
-			$type_object = 'article';
+			$id_objet   = $contexte['id_article'];
+			$objet = 'article';
 		} elseif (isset($contexte['id_rubrique'])) {
-			$id_object   = $contexte['id_rubrique'];
-			$type_object = 'rubrique';
+			$id_objet   = $contexte['id_rubrique'];
+			$objet = 'rubrique';
 		}
 		/* META TAGS */
 		if ($config['meta_tags']['activate'] == 'yes') {
 			$flux .= generer_meta_tags();
 		}
 		/* META GOOGLE WEBMASTER TOOLS */
-		if ($config['webmaster_tools']['activate'] == 'yes' && $type_object == 'sommaire') {
+		if ($config['webmaster_tools']['activate'] == 'yes' && $objet == 'sommaire') {
 			$flux .= generer_webmaster_tools();
 		}
 	
@@ -47,7 +47,7 @@ function seo_insert_head($flux) {
 		}
 
 		/* ALEXA */
-		if ($config['alexa']['activate'] == 'yes' && $type_object == 'sommaire') {
+		if ($config['alexa']['activate'] == 'yes' && $objet == 'sommaire') {
 			$flux .= generer_alexa();
 		}
 	}

@@ -14,19 +14,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_seo_save_meta_dist() {
 	include_spip('inc/abstract_sql');
 
-	$id_object   = _request('id_object');
-	$type_object = _request('type_object');
+	$id_objet   = _request('id_objet');
+	$objet = _request('objet');
 	$meta_tag 	 = is_array(_request('meta_tag')) ? _request('meta_tag') : array();
 	
-	if(!autoriser('modifier', $type_object, $id_object)) {
+	if(!autoriser('modifier', $objet, $id_objet)) {
 		echo "Error :(";
 		return;
 	}
 	
-	sql_delete("spip_seo", "id_object = $id_object AND type_object = '$type_object'");
+	sql_delete("spip_seo", "id_objet = ".intval($id_objet)." AND objet =".sql_quote($objet));
 	
 	foreach ($meta_tag as $name => $content) {
-		sql_insertq('spip_seo', array('id_object' => $id_object, 'type_object' => $type_object, 'meta_name' => $name, 'meta_content' => $content));
+		sql_insertq('spip_seo', array('id_objet' => $id_objet, 'objet' => $objet, 'meta_name' => $name, 'meta_content' => $content));
 	} 
 	
 }

@@ -4,6 +4,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/meta');
+include_spip('base/abstract_sql');
 
 // Installation et mise à jour
 function seo_upgrade($nom_meta_version_base, $version_cible){
@@ -17,7 +18,6 @@ function seo_upgrade($nom_meta_version_base, $version_cible){
 		if (version_compare($version_actuelle,'0.0','=')){
 			// Création des tables
 			include_spip('base/create');
-			include_spip('base/abstract_sql');
 			creer_base();
 			
 			/**
@@ -33,7 +33,6 @@ function seo_upgrade($nom_meta_version_base, $version_cible){
 		/* Gestion des anciennes tables, la numérotation base était de 1.0 */
 		if (version_compare($version_actuelle,'1.0','<=')){
 			include_spip('base/create');
-			include_spip('base/abstract_sql');
 			
 			// On change le nom de la table initialement mal choisi
 			$prefixe = $GLOBALS['table_prefix'];
@@ -42,15 +41,20 @@ function seo_upgrade($nom_meta_version_base, $version_cible){
 			echo "Mise à jour du plugin SEO vers ses nouvelles tables<br/>";
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		}
-		/* FIN : Gestion des anciennes tables, la numérotation base était de 1.0 */
+		if (version_compare($version_actuelle,'1.1.0','<')){
+			sql_alter('TABLE spip_seo DROP PRIMARY KEY');
+			sql_alter('TABLE spip_seo CHANGE type_object objet varchar(10) NOT NULL');
+			sql_alter('TABLE spip_seo CHANGE id_object id_objet int(11) NOT NULL');
+			sql_alter('TABLE spip_seo ADD PRIMARY KEY ( `id_objet` , `objet` , `meta_name` )');
+			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
+		}
 	}
 }
 
 // Désinstallation
 function seo_vider_tables($nom_meta_version_base){
-	include_spip('base/abstract_sql');
 	
-	// On efface les tables du plugin
+	// On efface la table du plugin
 	sql_drop_table('spip_seo');
 	
 	// On efface la méta de configuration

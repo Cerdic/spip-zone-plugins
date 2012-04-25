@@ -1,11 +1,11 @@
 <paquet
 	prefix="seo"
 	categorie="statistique"
-	version="1.5.3"
+	version="1.6.0"
 	etat="test"
 	compatibilite="[2.0.0;3.0.99]"
 	logo="seo.png"
-	schema="1.0.1"
+	schema="1.1.0"
 	documentation="http://www.spip-contrib.net/?rubrique1248"
 >	
 
