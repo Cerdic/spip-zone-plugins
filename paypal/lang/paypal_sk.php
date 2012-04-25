@@ -22,13 +22,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_environnement' => 'Do tohto formulára
  môžete zadať údaje, ktoré sa týkajú testovacej stránky Paypalu (Pieskovisko, Vývoj),
   ako aj údaje, ktoré platia len pre skutočné transakcie.
-  Ktoré prostredie chcete použiť?',
+  Ktoré prostredie chcete použiť?', # MODIF
 	'explication_identifiant_vendeur' => 'Zhoduje sa s e-mailom predávajúceho',
 	'explication_soumission' => 'Na akú stránku Paypalu sa posiela formulár?',
 	'explication_tax' => 'Prípadne hodnotu dane, ktorá sa má použiť (napríklad francúzska DPH: 19,60)',
 
 	// I
-	'info_bouton_paypal' => 'Plaťte cez PayPal: je rýchly, bezplatný a bezpečný!',
+	'info_bouton_paypal' => 'Plaťte cez PayPal: je rýchly, bezplatný a bezpečný!', # MODIF
 
 	// L
 	'label_account' => 'Účet (e-mail)',

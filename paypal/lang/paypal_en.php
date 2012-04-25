@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_tax' => 'Eventually the value of the tax to apply (for example, French VAT: 19.60)',
 
 	// I
-	'info_bouton_paypal' => 'Make payments with PayPal: it\'s fast, free and secure!',
+	'info_bouton_paypal' => 'Make payments with PayPal: it\'s fast, free and secure!', # MODIF
 
 	// L
 	'label_account' => 'Account (email)',
