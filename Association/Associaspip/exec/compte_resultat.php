@@ -41,9 +41,10 @@ function exec_compte_resultat()
 		// datation et raccourcis
 		icones_association(array('comptes', "exercice=$exercice"), array(
 			'encaisse_titre_general' => array('finances-24.png', 'encaisse', "exercice=$exercice"),
-			'cpte_bilan_titre_general' => array('finances-24.png', 'bilan', "exercice=$id_exercice"),
+			'cpte_bilan_titre_general' => array('finances-24.png', 'compte_bilan', "exercice=$id_exercice"),
 #			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$id_exercice"),
 		));
+		include_spip('inc/association_comptabilite');
 		// elements communs aux requetes
 		if ($plan) {
 			$join = ' RIGHT JOIN spip_asso_plan ON imputation=code';
@@ -68,10 +69,14 @@ function exec_compte_resultat()
 			echo fin_cadre_enfonce(true);
 		}
 		debut_cadre_association('finances-24.jpg', 'cpte_resultat_titre_general', $exercice_data['intitule']);
-		$depenses = compte_resultat_charges_produits($var, intval($GLOBALS['association_metas']['classe_charges']));
-		$recettes = compte_resultat_charges_produits($var, intval($GLOBALS['association_metas']['classe_produits']));
+		// liste des charges cumulees par comptes
+		$depenses = association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_charges'], 'cpte_resultat', '-1', $id_exercice, 0);
+		// liste des produits cumules par comptes
+		$recettes = association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_produits'], 'cpte_resultat', '+1', $id_exercice, 0);
+		// resultat comptable courant
 		compte_resultat_benefice_perte($recettes, $depenses);
-		compte_resultat_benevolat($var, intval($GLOBALS['association_metas']['classe_contributions_volontaires']));
+		// liste des contributions volontaires (emplois et ressources) par comptes
+		association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_contributions_volontaires'], 'cpte_benevolat', 0, $id_exercice, 0);
 /*
 		if(autoriser('associer', 'export_compte_resultats') && $plan){ // on peut exporter : pdf, csv, xml, ...
 			echo "<br /><table width='100%' class='asso_tablo' cellspacing='6' id='asso_tablo_exports'>\n";
@@ -90,55 +95,6 @@ function exec_compte_resultat()
 	}
 }
 
-function compte_resultat_charges_produits($var, $classe) {
-	include_spip('inc/association_plan_comptable');
-	$tableau = @unserialize($var);
-	$id_tableau = (($classe==$GLOBALS['association_metas']['classe_charges']) ? 'charges' : 'produits');
-	echo "<table width='100%' class='asso_tablo' id='asso_tablo_bilan_$id_tableau'>\n";
-	echo "<thead>\n<tr>";
-	echo '<th width="10">&nbsp;</td>';
-	echo '<th width="30">&nbsp;</td>';
-	echo '<th>'. _T("asso:cpte_resultat_titre_$id_tableau") .'</th>';
-	echo '<th width="80">&nbsp;</th>';
-	echo "</tr>\n</thead><tbody>";
-	$quoi = (($classe==$GLOBALS['association_metas']['classe_charges']) ? 'SUM(depense) AS valeurs' : 'SUM(recette) AS valeurs');
-	$query = sql_select(
-		"imputation, $quoi $tableau[2]", // select
-		"spip_asso_comptes $tableau[1]", // from
-		$tableau[3], // where
-		$tableau[5], // group by
-		$tableau[5], // order by
-		'', // limit
-		$tableau[4].$classe // having
-	);
-	$total = 0;
-	$chapitre = '';
-	$i = 0;
-	while ($data = sql_fetch($query)) {
-		echo '<tr>';
-		$valeurs = $data['valeurs'];
-		$new_chapitre = substr($data['code'], 0, 2);
-		if ($chapitre!=$new_chapitre) {
-			echo '<td class="text">'. $new_chapitre . '</td>';
-			echo '<td colspan="3" class="text">'. ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'")) .'</td>';
-			$chapitre = $new_chapitre;
-			echo "</tr>\n<tr>";
-		}
-		echo "<td>&nbsp;</td>";
-		echo '<td class="text">'. $data['code'] .'</td>';
-		echo '<td class="text">'. $data['intitule'] .'</td>';
-		echo '<td class="decimal">'. association_nbrefr($valeurs) .'</td>';
-		echo "</tr>\n";
-		$total += $valeurs;
-	}
-	echo "</tbody><tfoot>\n<tr>";
-	echo '<th colspan="2">&nbsp;</th>';
-	echo '<th class="text">'. (($class==$GLOBALS['association_metas']['classe_charges']) ? _T('asso:cpte_resultat_total_charges') : _T('asso:cpte_resultat_total_produits')) .'</th>';
-	echo '<th class="decimal">'. association_nbrefr($total) . '</th>';
-	echo "</tr>\n</tfoot>\n</table>\n";
-	return $total;
-}
-
 function compte_resultat_benefice_perte($recettes, $depenses) {
 	echo "<table width='100%' class='asso_tablo' id='asso_tablo_bilan_solde'>\n";
 	echo "<thead>\n<tr>";
@@ -155,52 +111,6 @@ function compte_resultat_benefice_perte($recettes, $depenses) {
 	echo "</tr></tfoot></table>";
 }
 
-function compte_resultat_benevolat($var, $class) {
-	$tableau = @unserialize($var);
-	echo "<table width='100%' class='asso_tablo' id='asso_tablo_bilan_benevolat'>\n";
-	echo "<thead>\n<tr>";
-	echo '<th width="10">&nbsp;</th>';
-	echo '<th width="30">&nbsp;</th>';
-	echo '<th>'. _T('asso:cpte_resultat_titre_benevolat') . '</th>';
-	echo '<th width="80">'. _T('asso:cpte_resultat_recette_evaluee') .'</th>';
-	echo '<th width="80">'. _T('asso:cpte_resultat_depense_evaluee') .'</th>';
-	$query = sql_select(
-		"imputation, SUM(recette) AS recettes, SUM(depense) AS depenses $tableau[2]", // select
-		"spip_asso_comptes $tableau[1]", // from
-		$tableau[3], // where
-		$tableau[5], // group by
-		$tableau[5], // order by
-		'', // limit
-		$tableau[4].$class // having
-	);
-	$chapitre = '';
-	$total_recettes = $total_depenses = 0;
-	while ($data = sql_fetch($query)) {
-		echo '<tr>';
-		$new_chapitre = substr($data['code'], 0, 2);
-		if ($chapitre!=$new_chapitre) {
-			echo '<td class="text">' . $new_chapitre . '</td>';
-			echo '<td colspan="4" class="text">'. ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'")) . '</td>';
-			$chapitre = $new_chapitre;
-			echo "</tr>\n";
-		}
-		echo '<td>&nbsp;</td>';
-		echo '<td class="text">'. $data['code'] .'</td>';
-		echo '<td class="text">'. $data['intitule'] .'</td>';
-		echo '<td class="decimal">'. association_nbrefr($data['recettes']) .'</td>';
-		echo '<td class="decimal">'. association_nbrefr($data['depenses']) .'</td>';
-		echo '</tr>';
-		$total_recettes += $data['recettes'];
-		$total_depenses += $data['depenses'];
-	}
-	echo "</tbody><tfoot>\n<tr>";
-	echo '<th width="10">&nbsp;</td>';
-	echo '<th width="30">&nbsp;</td>';
-	echo '<th class="decimal">'. _T('asso:resultat_courant') .'</th>';
-	echo '<th class="decimal">'. association_nbrefr($total_recettes) .'</th>';
-	echo '<th class="decimal">'. association_nbrefr($total_depenses) .'</th>';
-	echo "</tr>\n</tfoot>\n</table>\n";
-}
 
 	include_spip('inc/charsets');
 	include_spip('inc/association_plan_comptable');

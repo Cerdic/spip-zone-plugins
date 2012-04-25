@@ -39,7 +39,7 @@ function exec_encaisse()
 		// datation et raccourcis
 		icones_association(array('comptes', "exercice=$exercice"), array(
 			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$exercice"),
-			'cpte_bilan_titre_general' => array('finances-24.png', 'bilan', "exercice=$exercice"),
+			'cpte_bilan_titre_general' => array('finances-24.png', 'compte_bilan', "exercice=$exercice"),
 #			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$exercice"),
 		));
 		debut_cadre_association('finances-24.png', 'encaisse');

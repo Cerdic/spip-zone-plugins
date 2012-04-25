@@ -72,10 +72,24 @@ function exec_compte_bilan()
 */
 		debut_cadre_association('finances-24.jpg', 'cpte_bilan_titre_general', $exercice_data['intitule']);
 		include_spip('inc/association_comptabilite');
-//////////////////////////////////////
-		$depenses = compte_bilan_actifs_passifs($id_exercice, $GLOBALS['association_metas']['classe_charges'], _request('destination') );
-		$recettes = compte_bilan_actifs_passifs($id_exercice, $GLOBALS['association_metas']['classe_produits'], _request('destination') );
-#		compte_resultat_benefice_perte($recettes, $depenses);
+		// les autres classes a prendre en compte ici
+		$classes_bilan = array();
+		$query = sql_select(
+			'classe', // select
+			'spip_asso_plan', // from
+			sql_in('classe', array($GLOBALS['association_metas']['classe_charges'],$GLOBALS['association_metas']['classe_produits'],$GLOBALS['association_metas']['classe_contributions_volontaires']), 'NOT'), // where http://programmer.spip.org/sql_in,642
+			'classe', // group by
+			'classe' // order by
+		);
+		while ($data = sql_fetch($query)) {
+			$classes_bilan[] = $data['classe'];
+		}
+		// liste des actifs cumulees par comptes
+		$dettes = association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', '-1', $id_exercice, 0);
+		// liste des passifs cumulees par comptes
+		$patrimoine = association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', '+1', $id_exercice, 0);
+		// liste des bilans (actifs et passifs) par comptes
+#		$bilan = association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', '', $id_exercice, 0);
 /*
 		if(autoriser('associer', 'export_compte_bilans') && $plan){ // on peut exporter : pdf, csv, xml, ...
 			echo "<br /><table width='100%' class='asso_tablo' cellspacing='6' id='asso_tablo_exports'>\n";
@@ -92,47 +106,6 @@ function exec_compte_bilan()
 */
 		fin_page_association();
 	}
-}
-
-function compte_bilan_actifs_passifs($id_exercice, $classe, $destination) {
-	include_spip('inc/association_plan_comptable');
-	$id_tableau = (($classe==$GLOBALS['association_metas']['classe_charges']) ? 'actifs' : 'passifs');
-	echo "<table width='100%' class='asso_tablo' id='asso_tablo_bilan_$id_tableau'>\n";
-	echo "<thead>\n<tr>";
-	echo '<th width="10">&nbsp;</td>';
-	echo '<th width="30">&nbsp;</td>';
-	echo '<th>'. _T("asso:cpte_resultat_titre_$id_tableau") .'</th>';
-	echo '<th width="80">&nbsp;</th>';
-	echo "</tr>\n</thead><tbody>";
-	$query = association_totaux_comptes_classe($classe, $id_exercice, $destination, (($classe==$GLOBALS['association_metas']['classe_charges'])?'-2':'+2') );
-	$total = 0;
-	$chapitre = '';
-	$i = 0;
-	while ($data = sql_fetch($query)) {
-		echo '<tr>';
-		$valeurs = $data['valeurs'];
-		$new_chapitre = substr($data['code'], 0, 2);
-		if ($chapitre!=$new_chapitre) {
-			echo '<td class="text">'. $new_chapitre . '</td>';
-			echo '<td colspan="3" class="text">'. ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'")) .'</td>';
-			$chapitre = $new_chapitre;
-			echo "</tr>\n<tr>";
-		}
-		if ($valeurs) { // non-zero...
-			echo "<td>&nbsp;</td>";
-			echo '<td class="text">'. $data['code'] .'</td>';
-			echo '<td class="text">'. $data['intitule'] .'</td>';
-			echo '<td class="decimal">'. association_nbrefr($valeurs) .'</td>';
-			echo "</tr>\n";
-			$total += $valeurs;
-		}
-	}
-	echo "</tbody><tfoot>\n<tr>";
-	echo '<th colspan="2">&nbsp;</th>';
-	echo '<th class="text">'. (($classe==$GLOBALS['association_metas']['classe_charges']) ? _T('asso:cpte_bilan_total_actifs') : _T('asso:cpte_bilan_total_passifs')) .'</th>';
-	echo '<th class="decimal">'. association_nbrefr($total) . '</th>';
-	echo "</tr>\n</tfoot>\n</table>\n";
-	return $total;
 }
 
 

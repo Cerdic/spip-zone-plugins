@@ -397,14 +397,15 @@ function association_recupere_parametres_comptables() {
 function association_calcul_totaux_comptes_classe($classe, $exercice=0, $destination=0, $direction='-1') {
     $c_group = (($classe==$GLOBALS['association_metas']['classe_banques'])?'journal':'imputation');
     $valeurs = (($direction) ? ( ($direction<0)?'SUM('.(($destination)?'a_d':'a_c').'.depense) AS valeurs' : 'SUM('.(($destination)?'a_d':'a_c').'.recette) AS valeurs') : 'SUM('.(($destination)?'a_d':'a_c').'.recette) AS recettes, SUM('.(($destination)?'a_d':'a_c').'.depense) as depenses, SUM('.(($destination)?'a_d':'a_c').'.recette-'.(($destination)?'a_d':'a_c').'.depense) AS soldes' );
-#    $c_having = ($direction) ? 'valeurs>0' : ''; // on ne retiendra que les totaux non nuls...
+    $c_having = ($direction) ? 'valeurs>0' : ''; // on ne retiendra que les totaux non nuls...
     if ( sql_countsel('spip_asso_plan','active=1') ) { // existence de comptes actifs
 	$p_join = " RIGHT JOIN spip_asso_plan AS a_p ON a_c.$c_group=a_p.code";
 	$p_select = ', a_p.code, a_p.intitule, a_p.classe';
 	$p_order = 'a_p.code'; // imputation ou journal
+#	$p_where = 'a_p.classe='.sql_quote($classe);
 	$p_having = 'a_p.classe='.sql_quote($classe); // ok : on agrege par code (indirectement) associe a une classe unique selectionnee ...
     } else { // pas de comptes actifs ?!?
-	$p_join = $p_select = $p_having = '';
+	$p_join = $p_select = $p_where = $p_having = '';
 	$p_order = $c_group; // imputation ou journal
     }
     if ( $exercice ) { // exercice budgetaire personnalise
@@ -412,17 +413,15 @@ function association_calcul_totaux_comptes_classe($classe, $exercice=0, $destina
 	$c_where = "a_c.date>='$exercice_data[debut]' AND a_c.date<='$exercice_data[fin]' ";
     } elseif ( $annee ) { // exercice budgetaire par annee civile
 	$c_where = "DATE_FORMAT(a_c.date, '%Y')=$annee ";
-    } elseif ( $classe==$GLOBALS['association_metas']['classe_banques'] ) { // encaisse
-	$c_where = 'LEFT(a_c.imputation,1)<>'. sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']) .' AND a_c.date>=a_p.date_anterieure AND a_c.date<=NOW() ';
+#    } elseif ( $classe==$GLOBALS['association_metas']['classe_banques'] ) { // encaisse
+#	$c_where = 'LEFT(a_c.imputation,1)<>'. sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']) .' AND a_c.date>=a_p.date_anterieure AND a_c.date<=NOW() ';
     } else { // tout ?!?
 	$c_where = '';
     }
     $query = sql_select(
 	"$c_group, $valeurs ". ($destination ? 'a_d.id_destination' : '') .$p_select, // select
 	'spip_asso_comptes AS a_c '. ($destination ? 'LEFT JOIN spip_asso_destination_op AS a_d ON a_d.id_compte=a_c.id_compte ' : '') .$p_join, // from
-//	'spip_asso_comptes AS a_c '.$p_join, // from
-	($destination ? "a_d.id_destination=$destination AND " : '') .$c_where, // where
-//	$c_where, // where
+	($destination ? "a_d.id_destination=$destination AND " : '') . ($p_where?"$p_where AND ":'')  .$c_where, // where
 	$c_group, // group by
 	$p_order, // order by
 	'', // limit
@@ -432,7 +431,7 @@ function association_calcul_totaux_comptes_classe($classe, $exercice=0, $destina
 }
 
 /* */
-function association_liste_totaux_comptes_classes($classes, $prefixe='', $exercice=0, $destination=0, $direction='-1', $not_in=FALSE) {
+function association_liste_totaux_comptes_classes($classes, $prefixe='', $direction='-1', $exercice=0, $destination=0) {
     if( !is_array($classes) ) { // a priori une chaine ou un entier d'une unique classe
 	$liste_classes = array( $classes ) ; // transformer en tableau (puisqu'on va operer sur des tableaux);
     } else { // c'est un tableau de plusieurs classes
@@ -444,16 +443,21 @@ function association_liste_totaux_comptes_classes($classes, $prefixe='', $exerci
     echo '<th width="10">&nbsp;</td>';
     echo '<th width="30">&nbsp;</td>';
     echo '<th>'. _T("asso:$titre") .'</th>';
-    echo '<th width="80">&nbsp;</th>';
+    if ($direction) { // mode liste comptable : charge, produit, actifs, passifs
+	echo '<th width="80">&nbsp;</th>';
+    } else { // mode liste standard : contributions volontaires et autres
+	echo '<th width="80">'. _T("asso:$prefixe".'_recettes') .'</th>';
+	echo '<th width="80">'. _T("asso:$prefixe".'_depenses') .'</th>';
+	// echo '<th width="80">'. _T("asso:$prefixe".'_solde') .'</th>';
+    }
     echo "</tr>\n</thead><tbody>";
-    $total = 0;
+    $total_valeurs = $total_recettes = $total_depenses = 0;
     $chapitre = '';
     $i = 0;
     foreach ( $liste_classes as $rang => $classe ) {
-	$query = association_totaux_comptes_classe($classe, $exercice, $destination, $direction );
+	$query = association_calcul_totaux_comptes_classe($classe, $exercice, $destination, $direction );
 	while ($data = sql_fetch($query)) {
 	    echo '<tr>';
-	    $valeurs = $data['valeurs'];
 	    $new_chapitre = substr($data['code'], 0, 2);
 	    if ($chapitre!=$new_chapitre) {
 		echo '<td class="text">'. $new_chapitre . '</td>';
@@ -461,22 +465,37 @@ function association_liste_totaux_comptes_classes($classes, $prefixe='', $exerci
 		$chapitre = $new_chapitre;
 		echo "</tr>\n<tr>";
 	    }
-	    if ($valeurs) { // non-zero...
+#	    if ( floatval($data['valeurs']) || floatval($data['recettes']) || floatval($data['depenses']) ) { // non-zero...
 		echo "<td>&nbsp;</td>";
 		echo '<td class="text">'. $data['code'] .'</td>';
 		echo '<td class="text">'. $data['intitule'] .'</td>';
-		echo '<td class="decimal">'. association_nbrefr($valeurs) .'</td>';
+		if ($direction) { // mode liste comptable
+		    echo '<td class="decimal">'. association_nbrefr($data['valeurs']) .'</td>';
+		    $total_valeurs += $data['valeurs'];
+		} else { // mode liste standard
+		    echo '<td class="decimal">'. association_nbrefr($data['recettes']) .'</td>';
+		    $total_recettes += $data['recettes'];
+		    echo '<td class="decimal">'. association_nbrefr($data['depenses']) .'</td>';
+		    $total_depenses += $data['depenses'];
+		    //echo '<td class="decimal">'. association_nbrefr($data['soldes']) .'</td>';
+		    $total_valeurs += $data['soldes'];
+		}
 		echo "</tr>\n";
-		$total += $valeurs;
-	    }
+#	    }
 	}
     }
     echo "</tbody><tfoot>\n<tr>";
     echo '<th colspan="2">&nbsp;</th>';
     echo '<th class="text">'. _T("asso:$prefixe".'_total_') .'</th>';
-    echo '<th class="decimal">'. association_nbrefr($total) . '</th>';
+    if ($direction) { // mode liste comptable
+	echo '<th class="decimal">'. association_nbrefr($total_valeurs) . '</th>';
+    } else { // mode liste standard
+	echo '<th class="decimal">'. association_nbrefr($total_recettes) . '</th>';
+	echo '<th class="decimal">'. association_nbrefr($total_depenses) . '</th>';
+	// echo '<th class="decimal">'. association_nbrefr($total_valeurs) . '</th>';
+    }
     echo "</tr>\n</tfoot>\n</table>\n";
-    return $total;
+    return $total_valeurs;
 }
 
 // Brique commune aux classes d'exportation des donnees du compte de bilan
