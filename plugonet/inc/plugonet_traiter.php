@@ -418,7 +418,7 @@ function plugin2balise_pipeline($D) {
 	$res = '';
 	foreach($D as $i) {
 		$att = " nom=\"" . $i['nom'] . "\"" .
-				(!empty($i['action']) ? (" action=\"" . $i['action'] . "\"") : '') .
+				(!is_null($i['action']) ? (" action=\"" . $i['action'] . "\"") : '') .
 				(!empty($i['inclure']) ? (" inclure=\"" . $i['inclure'] . "\"") : '');
 		$res .= "\n\t<pipeline$att />";
 	}
@@ -507,7 +507,7 @@ function plugin2balise_exec($D, $balise) {
 			plugin2attribut('position', @$i['position']) .
 			plugin2attribut('icone', @$i['icone']) .
 			plugin2attribut('action', @$i['action']) .
-			plugin2attribut('parametres', str_replace('&', '&amp;', str_replace('&amp;', '&', @$i['args']))) .
+			plugin2attribut('parametres', str_replace('&', '&amp;', str_replace('&amp;', '&', @$i['parametres']))) .
 			' />';
 	}
 
