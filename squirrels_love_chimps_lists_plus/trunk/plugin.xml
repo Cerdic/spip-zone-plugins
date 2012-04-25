@@ -57,4 +57,5 @@
 	</pipeline> 	
 	<fonctions>sclp_fonctions.php</fonctions>
 	<categorie>communication</categorie>
+	<traduire gestionnaire="salvatore" module="sclp" reference="fr" />
 </plugin>
