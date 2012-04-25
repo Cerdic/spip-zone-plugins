@@ -28,4 +28,5 @@
 	
 	<fonctions>squirrel_chimp_campaigns_fonctions.php</fonctions>
 	<categorie>communication</categorie>
+	<traduire gestionnaire="salvatore" module="scc" reference="fr" />
 </plugin>
