@@ -1,12 +1,12 @@
 <paquet
 	prefix="coloration_code"
 	categorie="edition"
-	version="0.6.5"
-	etat="stable"
+	version="0.7.0-dev"
+	etat="test"
 	compatibilite="[2.0.0;3.0.99]"
 	logo="coloration-32.png"
 	documentation="http://www.spip-contrib.net/Coloration-Code,2938"
->	
+>
 
 	<nom>Coloration Code</nom>
 	<!-- Coloration syntaxique du code source dans les articles -->

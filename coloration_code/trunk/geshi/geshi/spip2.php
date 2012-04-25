@@ -35,10 +35,11 @@
 @define('REG_NOM_TABLE_BOUCLE', '\([^)]*\)');
 
 // criteres | arguments : {critere > 0} {critere = #ENV{truc}}
-@define('REG_CRITERES', '\{(\s*(?:([^{}]+)|(?R))*\s*)\}');
-// la meme chose sans etre capturant
-#@define('REG_CRITERES_TOUT', '\{(?:\s*(?:(?:[^{}]+)|(?R))*\s*)\}');
-@define('REG_CRITERES_TOUT', '\{(?:\s*(?:(?>[^{}]+)|(?R))*\s*)\}');
+@define('REG_CRITERES',           '\{(?:\s*(?:(?>[^{}]+)|(?R))*\s*)\}');
+// la meme chose sans rien de capturant
+@define('REG_CRITERES_TOUT',      '\{(?:\s*(?:(?>[^{}]+)|(?R))*\s*)\}');
+// la meme chose en capturant {, contenu et } en 3 morceaux
+@define('REG_CRITERES_ACCOLADES', '(\{)(\s*(?:(?>[^{}]+)|(?R))*\s*)(\})');
 
 // Remplacements de Regexp par GESHI
 // A chaque fois dans le tableau REGEXPS que geshi trouve quelque chose,
@@ -62,25 +63,32 @@
 @define('REG_TABLE_BOUCLE_TROUVE', REG_REMPLACEMENTS_GESHI_START . REG_NOM_TABLE_BOUCLE . REG_REMPLACEMENTS_GESHI_END);
 // 4) trouver les criteres
 
+
+// Aide pour les reg de boucle
+// ?R est applique sur l'expression complete.
+// on indique donc la parenthese que l'on souhaite avec ?x
+// sinon ca ne fonctionne pas (des qu'un critere a d'autres accolades internes.)
+@define('REG_CRITERES_BOUCLE', '(?:(\s*' . REG_CRITERES . '\s*)*)'); // 1 parenthese capturante pour la recursion
+
 // 1) <BOUCLEx(TABLE){criteres} /> ( la fin /> )
 @define('REG_BOUCLE_FIN', '((?:' . REG_DEBUT_BOUCLE . ')(?:' . REG_NOM_TABLE_BOUCLE . ')'
 	// criteres + fin de boucle
-	. '(?:(?:\s*' . REG_CRITERES . '\s*)*))(' . REG_FIN_BOUCLE . ')');
+	. str_replace('?R', '?2', REG_CRITERES_BOUCLE) . ')(' . REG_FIN_BOUCLE . ')');
 
 // 2) <BOUCLEx(TABLE){criteres} @@/>@@ ( le debut <BOUCLEx )
 @define('REG_BOUCLE_DEBUT','(' . REG_DEBUT_BOUCLE . ')((?:' . REG_NOM_TABLE_BOUCLE . ')'
 	// criteres + fin de boucle
-	. '(?:(?:\s*' . REG_CRITERES . '\s*)*)(?:' . REG_FIN_BOUCLE_TROUVE . '))');
+	. str_replace('?R', '?3', REG_CRITERES_BOUCLE) . '(?:' . REG_FIN_BOUCLE_TROUVE . '))');
 
 // 3) @@<BOUCLEx@@ (TABLE){criteres} @@/>@@ ( la table (TABLE) )
-@define('REG_BOUCLE_TABLE','(' . REG_DEBUT_BOUCLE_TROUVE . ')(' . REG_NOM_TABLE_BOUCLE . ')'
+@define('REG_BOUCLE_TABLE','(' . REG_DEBUT_BOUCLE_TROUVE . ')(' . REG_NOM_TABLE_BOUCLE . ')' . '('
 	// criteres + fin de boucle
-	. '((?:(?:\s*' . REG_CRITERES . '\s*)*)(?:' . REG_FIN_BOUCLE_TROUVE . '))');
+	.  str_replace('?R', '?4', REG_CRITERES_BOUCLE) . '(?:' . REG_FIN_BOUCLE_TROUVE . '))');
 
 // 4) @@<BOUCLEx@@ @@(TABLE)@@ {criteres} @@/>@@ ( des criteres {criteres} )
 @define('REG_BOUCLE_CRITERES','((?:' . REG_DEBUT_BOUCLE_TROUVE . ')(?:' . REG_TABLE_BOUCLE_TROUVE . '))'
 	// criteres + fin de boucle
-	. '((?:\s*' . REG_CRITERES . '\s*)*)(' . REG_FIN_BOUCLE_TROUVE . ')');
+	. '(' . str_replace('?R', '?3', REG_CRITERES_BOUCLE) . ')(' . REG_FIN_BOUCLE_TROUVE . ')');
 
 
 // <INCLURE
@@ -108,6 +116,58 @@
 	. '(?:' . REG_BALISE_TOUT . ')' // #BALISE 
 	. '(?:(?:' . REG_NOM_FILTRE_TOUT . '?' . REG_CRITERES_TOUT . '?)*)' // {arguments} |filtre{criteres}
 	. ')' . REG_BALISE_COMPLET_STOP ); // ) ... ]
+
+
+
+
+if (!function_exists('spip2_geshi_regexp_critere_callback')) {
+/**
+ * Cette fonction recupere la liste des criteres de boucle trouves
+ * "  {critere > 0} {critere=#ENV{tom}}{critere} "
+ * Elle echappe tous les { et } appartenants au criteres
+ * en les remplacant par <CRITERE> et </CRITERE>. Ils seront
+ * remis apres le calcul les arguments de balises / filtres.
+ * 
+ * Ceci est simplement la pour pouvoir distinguer filtre et critere
+ * dans la coloration.
+ *
+ * @param array $matches
+ * 		Le resultat du preg_match
+ * @param Object $geshi
+ * 		Instance de l'objet SPIP_GESHI (issu de GESHI)
+ * @return string
+ * 		La chaine attendu par Geshi
+ * 		qui est quelque chose comme
+ * 		"avant <|!REG3XP31!>contenu|> apres"
+**/
+function spip2_geshi_regexp_critere_callback($matches, $geshi) {
+#var_dump($matches);
+	$key = $geshi->_hmr_key;
+	// 0 = tout
+	// 1 = <BOUCLEx(TABLE)
+	// 2 = {critere}{critere}
+	// 3 = />
+	// L'entree 2 contient les criteres a echapper, et il ne faut pas oublier aussi les espaces possibles.
+	$criteres = $matches[2];
+	if (preg_match_all('/(\s*)' . REG_CRITERES_ACCOLADES . '(\s*)/s', $criteres, $crits, PREG_SET_ORDER)) {
+		$criteres = "";
+		foreach ($crits as $c) {
+			$criteres .=
+				  $c[1] // espace
+				. "<CRITERE>" // {
+				. $c[3] // critere
+				. "</CRITERE>" // }
+				. $c[5]; // espace
+		}
+	}
+
+	$retour = $matches[1] . '<|!REG3XP' . $key .'!>'
+		. str_replace("\n", "|>\n<|!REG3XP" . $key . '!>', $criteres)
+		. '|>' . $matches[4];
+	return $retour;
+}
+}
+
 
 
 $language_data = array (
@@ -209,7 +269,7 @@ $language_data = array (
 		// 1) fin de boucle <BOUCLEx(TABLE).../> ( /> )
 		10 => array(
 			GESHI_SEARCH => REG_BOUCLE_FIN,
-			GESHI_REPLACE => '\\4',
+			GESHI_REPLACE => '\\3',
 			GESHI_MODIFIERS => '',
 			GESHI_BEFORE => '\\1',
 			GESHI_AFTER => ''
@@ -234,12 +294,13 @@ $language_data = array (
 			),
 
 		// criteres de boucle <BOUCLEx(TABLE).../> ( {criteres} )
+		// on remplace { et } de chaque critere par <CRITERE> pour
+		// que les filtres 40 ne matchent pas les criteres
+		// 41 les remets.
 		13 => array(
 			GESHI_SEARCH => REG_BOUCLE_CRITERES,
-			GESHI_REPLACE => '\\2',
+			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_critere_callback',
 			GESHI_MODIFIERS => '',
-			GESHI_BEFORE => '\\1',
-			GESHI_AFTER => '\\5'
 			),
 
 
@@ -307,9 +368,18 @@ $language_data = array (
 
 		// parametres de filtre, balise
 		40 => array(
-			GESHI_SEARCH => '(' . REG_CRITERES . '?)',
+			GESHI_SEARCH => '(' . REG_CRITERES . ')',
 			GESHI_REPLACE => '\\1',
 			GESHI_MODIFIERS => '',
+			GESHI_BEFORE => '',
+			GESHI_AFTER => ''
+			),
+		// remise des accolades de criteres
+		// echappees pour eviter que filtres 40 ne les matchent
+		41 => array(
+			GESHI_SEARCH => '<CRITERE>(.*)<\/CRITERE>',
+			GESHI_REPLACE => '{\\1}',
+			GESHI_MODIFIERS => 'Us',
 			GESHI_BEFORE => '',
 			GESHI_AFTER => ''
 			),
@@ -323,8 +393,9 @@ $language_data = array (
 			GESHI_BEFORE => '',
 			GESHI_AFTER => ''
 			),
+
 		),
-	
+
 	'STRICT_MODE_APPLIES' => GESHI_NEVER,
 	'SCRIPT_DELIMITERS' => array(),
 
