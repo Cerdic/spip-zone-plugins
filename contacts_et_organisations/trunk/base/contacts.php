@@ -104,7 +104,7 @@ function contacts_declarer_tables_objets_sql($tables){
 		'texte_logo_objet' => 'contacts:contact_logo',
 		'info_aucun_objet'=> 'contacts:contact_aucun',
 		'info_1_objet' => 'contacts:contact_un',
-		'info_nb_objets' => 'contacts:ontact_nb',
+		'info_nb_objets' => 'contacts:contact_nb',
 		'titre' => 'nom AS titre, "" AS lang',
 		'date' => 'date_naissance',
 		'principale' => 'oui',
