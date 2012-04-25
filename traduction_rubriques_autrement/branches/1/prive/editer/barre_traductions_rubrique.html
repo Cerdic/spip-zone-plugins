@@ -25,8 +25,11 @@
 					})],#SET{non_traduits,oui}
 					[(#VALEUR|=={#GET{lang}}|?{
 						<li class="non_traduit box_onglet"><strong class="on">[(#VALEUR|traduire_nom_langue)][(#GET{ref_#VALEUR}|oui)<span><:tra:rubrique_reference:></span>]</strong></li>,
-						#SET{parent_trad,#VALEUR|destination_traduction{#GET{id_trad}}}
-						[(#AUTORISER{creerrubriquedans,rubrique,#GET{parent_trad}})<li class="non_traduit onglet"><a href="[(#URL_ECRIRE{rubrique_edit}|parametre_url{new,oui}|parametre_url{id_parent,#GET{parent_trad}}|parametre_url{lang_dest,#VALEUR}|parametre_url{lier_trad,#GET{id_trad}}|parametre_url{trad_new,#GET{trad_new}}|parametre_url{retour,nav})]">[(#VALEUR|traduire_nom_langue)]</a></li>]
+						#SET{donnes_trad,#VALEUR|destination_traduction{#GET{id_trad}}}
+						#SET{parent_trad,#GET{donnes_trad}|table_valeur{0}}
+						#SET{trad,#GET{donnes_trad}|table_valeur{1}}	
+						[(#GET{donnes_trad}|table_valeur{2}|oui)#SET{alert,class="avis_source"}]				
+						[(#AUTORISER{creerrubriquedans,rubrique,#GET{parent_trad}})<li class="non_traduit onglet"><a[ (#GET{alert})]  href="[(#URL_ECRIRE{rubrique_edit}|parametre_url{new,oui}|parametre_url{id_parent,#GET{parent_trad}}|parametre_url{lang_dest,#VALEUR}|parametre_url{lier_trad,#GET{trad}}|parametre_url{trad_new,#GET{trad_new}}|parametre_url{retour,nav})]">[(#VALEUR|traduire_nom_langue)]</a></li>]
 						})]	
 				})]		
 
@@ -80,3 +83,12 @@
 ]
 </BOUCLE_rub>
 <br class="nettoyeur" />
+
+<!-- Example script -->
+<script type="text/javascript">	
+	$(document).ready( function() {		
+		$(".avis_source").click( function() {
+			javascript:alert("<:tra:avis_rubrique_source:>");
+		});
+	});			
+</script>
