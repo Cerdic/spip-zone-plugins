@@ -2,9 +2,9 @@
 	prefix="numero"
 	categorie="navigation"
 	version="1.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*]"
-	logo="icon.gif"
+	logo="numero.gif"
 	documentation="http://www.spip-contrib.net/Numerotation-Rapide"
 >	
 
@@ -13,5 +13,6 @@
 
 	<auteur mail="cedric.morin@yterium.com">Cedric Morin</auteur>
 
+	<pipeline nom="autoriser" inclure="numero_autoriser.php" />
 	<pipeline nom="affiche_droite" inclure="numero_pipeline.php" />
 </paquet>
