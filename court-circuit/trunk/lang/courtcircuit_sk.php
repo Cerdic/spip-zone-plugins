@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'explication_liens_rubriques' => 'Zmeniť internetové adresy presmerovaných rubrík priamo v šablónach?',
 	'explication_regles' => 'Rôzne pravidlá budú testované v tomto poradí. Ak presmerovanie neupravuje žiadne pravidlo, potom bude rubrika zobrazená normálne.',
-	'explication_sousrubrique' => 'Prehľadať prvú podrubriku (zotriedenú podľa čísla, nadpisu a dátumu)? Pravidlá na presmerovanie budú znova testované v tejto podrubrike.',
+	'explication_sousrubrique' => 'Prehľadať prvú podrubriku (zotriedenú podľa čísla, nadpisu a dátumu)? Pravidlá na presmerovanie budú znova testované v tejto podrubrike.', # MODIF
 	'explication_variantes_squelettes' => 'Príklad: šablóny v podobe rubrique-2.html alebo rubrique=3.html.',
 
 	// I
