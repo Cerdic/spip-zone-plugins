@@ -6,14 +6,22 @@ Ce plugin génère d'autres plugins !
 
 
 
+1.13.4 le 25 04 2012
+--------------------
+
+Outil :
+* éviter une erreur de copie sur un système de fichier Windows
+
+
+
 1.13.3 le 20 04 2012
 --------------------
 
 Interface :
-* chemin du plugin complet dans le message de retour du formulaire lors de la creation
+* chemin du plugin complet dans le message de retour du formulaire lors de la création
 
 Outil :
-* ne pas creer d'image vide a la restauration
+* ne pas créer d'image vide a la restauration
 
 
 

@@ -261,7 +261,8 @@ function fabrique_recuperer_et_stocker_les_images($data) {
 function fabrique_sauvegarde_tournante_export($fichier, $destination) {
 	$destination .= 'exports';
 	sous_repertoire_complet($destination);
-	$date = date("Y-m-d H:i:s");
+	// pas de deux points dans les systemes de fichiers Windows
+	$date = date("Y-m-d H-i-s");
 	$base = basename($fichier, '.php');
 	$copie = $base . ' ' . $date . '.php';
 
