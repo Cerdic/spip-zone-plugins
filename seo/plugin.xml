@@ -11,13 +11,13 @@
 		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/?rubrique1248</lien>
-	<licence>(c) 2009 GPL v2</licence>
+	<licence>(c) 2009-2012 GPL v2</licence>
 	<etat>test</etat>
 	
 	<version>1.5.3</version>
 	<version_base>1.0.1</version_base>
 
-	<install>base/seo_installation.php</install>
+	<install>seo_administrations.php</install>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/seo_tables.php</inclure>
@@ -26,8 +26,7 @@
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/seo_tables.php</inclure>
 	</pipeline>
-	
-	<fonctions>public/seo_balises.php</fonctions>
+
 	<fonctions>seo_fonctions.php</fonctions>
 
 	<pipeline>
@@ -57,6 +56,6 @@
 	</bouton>
 	
 	<chemin dir='' />
-	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<categorie>statistique</categorie>
 </plugin>

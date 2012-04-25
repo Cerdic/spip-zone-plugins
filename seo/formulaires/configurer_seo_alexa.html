@@ -10,11 +10,11 @@
 			<li class="fieldset">
 				<h3 class="legend">[(#CHEMIN{img_pack/alexa-24.png}|image_reduire{0,24})] <:seo:alexa:></h3>
 				<ul>
-					<li class="editer_alexa_activate">
+					<li class="editer editer_alexa_activate">
 						<label for="alexa_activate"><:seo:alexa_activate:></label>
 						<input type="checkbox" value="yes" name="activate" id="alexa_activate"[(#ENV{activate}|=={yes}|oui)checked="checked"] onChange="active_alexa($(this), $('.editer_alexa_id'))"/>
 					</li>
-					<li class="editer_alexa_id">
+					<li class="editer editer_alexa_id">
 						<label for="alexa_id"><:seo:alexa_id:></label>
 						<input type="text" name="alexa_id" value="#ENV{alexa_id}" id="alexa_id" class="text" />
 					</li>
