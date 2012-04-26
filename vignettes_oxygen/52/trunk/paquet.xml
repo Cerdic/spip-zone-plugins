@@ -1,5 +1,5 @@
 <paquet
-	prefix="vignettes_oxygen"
+	prefix="vignettes_oxygen52"
 	categorie="multimedia"
 	version="1.0.0"
 	etat="stable"
@@ -7,7 +7,7 @@
 	logo="images/oxygen.png"
 	documentation="http://www.spip-contrib.net/?article3970"
 >
-	<nom>Vignettes Oxygen</nom>
+	<nom>Vignettes Oxygen (52)</nom>
 	<!-- Collection d'icônes pour les documents -->
 	<auteur lien="http://www.spip-contrib.net/Joseph">Joseph</auteur>
 	<credit lien="http://www.oxygen-icons.org/">Team Oxygen</credit>
