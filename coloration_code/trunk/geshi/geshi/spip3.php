@@ -46,7 +46,7 @@ function geshi_language_data_spip3_styles($export_for_keywords = false) {
 			26 => 'color: #D05000;', // ( de [(#BALISE)]
 
 			30 => 'color: #FF851D;', // |filtre
-			31 => 'color: #FF851D;', // {parametre}
+			31 => 'color: #74B900;', // {parametre}
 			32 => 'color: #74B900;', // {parametre, x} (parametre et x)
 
 			40 => 'color: #EB2D2B;', // <INCLURE />
@@ -62,7 +62,7 @@ function geshi_language_data_spip3_styles($export_for_keywords = false) {
 
 			70 => 'color: #FF67BF; font-weight:bold;', // operateurs =
 
-			80 => 'color: #6A6A6A;', // nombre 12
+			80 => '', // nombre 12
 		),
 		'COMMENTS' => array(
 			'MULTI' => 'color: #808080; font-style: italic;'
