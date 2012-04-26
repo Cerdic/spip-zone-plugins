@@ -2,6 +2,14 @@
 function trad_rub_header_prive($flux){
 
     $flux .= '<link rel="stylesheet" href="'.find_in_path('css/trad_rub_styles.css').'" type="text/css" media="all" />';
+    $flux .='<!-- Example script -->
+			<script type="text/javascript">	
+				$(document).ready( function() {		
+					$(".avis_source").click( function() {
+						javascript:alert("'._T('tra:avis_rubrique_source').'");
+					});
+				});			
+			</script>';
  	return $flux;	
 
  }
@@ -11,10 +19,10 @@ function trad_rub_header_prive($flux){
    $form = $flux['args']['form'];
    if ($form=='editer_rubrique'){
 
-	$flux['data']['lang_dest'] .= _request('lang_dest');
+	$flux['data']['lang_dest'] = _request('lang_dest');
 			
-	$flux['data']['_hidden'] .= '<input type="hidden" name="lang_dest" value="'._request('lang_dest').'"/>';
-	if($version = $GLOBALS['spip_version_branche']>=3) $flux['data']['_hidden'] .= '<input type="hidden" name="changer_lang" value="'._request('lang_dest').'"/>';	
+	$flux['data']['_hidden'] .= '<input type="hidden" name="lang_dest" value="'.$flux['data']['lang_dest'].'"/>';
+	$flux['data']['_hidden'] .= '<input type="hidden" name="changer_lang" value="'.$flux['data']['lang_dest'].'"/>';	
 		
     }
     return $flux;
