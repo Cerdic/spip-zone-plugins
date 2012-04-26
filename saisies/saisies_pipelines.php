@@ -79,9 +79,12 @@ function saisies_formulaire_verifier($flux){
 	if (include_spip('inc/saisies') and $saisies = saisies_chercher_formulaire($flux['args']['form'], $flux['args']['args'])){
 		// On ajoute au contexte les champs à déclarer
 		$erreurs = saisies_verifier($saisies);
+		if ($erreurs and !isset($erreurs['message_erreur']))
+			$erreurs['message_erreur'] = _T('saisies:erreur_generique');
 		$flux['data'] = array_merge($erreurs, $flux['data']);
 	}
-	
+
+
 	return $flux;
 }
 
