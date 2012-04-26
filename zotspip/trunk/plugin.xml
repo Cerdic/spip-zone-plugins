@@ -39,6 +39,10 @@
 		<nom>header_prive</nom>
 		<inclure>zotspip_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>jqueryui_forcer</nom>
+		<inclure>zotspip_pipelines.php</inclure>
+	</pipeline>
 
 	<bouton id='zotspip' parent="configuration">
 		<url>configurer_zotspip</url>
@@ -50,7 +54,7 @@
 		<titre>zotspip:zotspip</titre>
 		<icone>images/zotspip-16.png</icone>
 	</bouton>
-	<bouton id='zitems' parent="edition">
+	<bouton id='zitems' parent="naviguer">
 		<url>zitems</url>
 		<titre>zotspip:items_zotero</titre>
 		<icone>images/zotspip-24.png</icone>
@@ -63,4 +67,5 @@
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="spip_bonux" />
+	<necessite id="jqueryui" />
 </plugin>

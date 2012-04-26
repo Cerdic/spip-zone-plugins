@@ -10,4 +10,11 @@ function zotspip_header_prive($flux){
 	$flux .= '<link rel="unapi-server" type="application/xml" title="unAPI" href="'.url_absolue(generer_url_public('zotspip_unapi','source=zotspip')).'" />';
 	return $flux;
 }
+
+function zotspip_jqueryui_forcer($scripts){
+	$scripts[] = "jquery.ui.resizable";
+	$scripts[] = "jquery.ui.sortable";
+	return $scripts;
+}
+
 ?>

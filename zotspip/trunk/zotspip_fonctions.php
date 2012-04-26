@@ -24,14 +24,15 @@ function balise_REFERENCE_dist($p) {
 	$_lang = champ_sql('lang', $p);
 	$style = interprete_argument_balise(1,$p);
 	$souligne = interprete_argument_balise(2,$p);
+	$date = champ_sql('date', $p);
 	if (!$style) $style='""';
 	if (!$souligne) $souligne='array()';
 	
-	$p->code = "zotspip_calculer_reference($csljson,$annee,$style,$souligne,htmlentities($_lang ? $_lang : \$GLOBALS['spip_lang']))";
+	$p->code = "zotspip_calculer_reference($csljson,$annee,$style,$souligne,$date,htmlentities($_lang ? $_lang : \$GLOBALS['spip_lang']))";
 	return $p;
 }
 
-function zotspip_calculer_reference($csljson,$annee,$style,$souligne,$lang) {
+function zotspip_calculer_reference($csljson,$annee,$style,$souligne,$date,$lang) {
 	include_spip('lib/citeproc-php/CiteProc');
 	include_spip('inc/config');
 	static $citeproc = array();
@@ -43,9 +44,15 @@ function zotspip_calculer_reference($csljson,$annee,$style,$souligne,$lang) {
 	
 	if (isset($data->issued->raw) && lire_config('zotspip/corriger_date')) { // Correction de la date de publication (si fournie brute et si option activée)
 		unset($data->issued->raw);
-		$data->issued->{'date-parts'} = array(array($annee));
+		// Gestion des cas où la date est de la forme yyyy-mm ou yyyy-mm-dd
+		if (preg_match('#^([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})$#',trim($date),$matches))
+			$data->issued->{'date-parts'} = array(array($matches[1],$matches[2],$matches[3]));
+		elseif (preg_match('#^([0-9]{4})-([0-9]{1,2})$#',trim($date),$matches))
+			$data->issued->{'date-parts'} = array(array($matches[1],$matches[2]));
+		else
+			$data->issued->{'date-parts'} = array(array($annee));
 	}
-	
+
 	if (!is_array($souligne)) $souligne = explode(';',$souligne);
 	
 	if (count($souligne)){
