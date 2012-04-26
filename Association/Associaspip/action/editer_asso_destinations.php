@@ -24,7 +24,7 @@ function action_editer_asso_destinations_dist()
     );
     include_spip('base/association');
     if ($id_destination) { /* modification */
-	sql_updateq('spip_asso_destination', $champs "id_destination=$id_destination");
+	sql_updateq('spip_asso_destination', $champs, "id_destination=$id_destination");
     } else { /* ajout */
 	$id_destination = sql_insertq('spip_asso_destination', $champs);
 	if (!$id_destination)
