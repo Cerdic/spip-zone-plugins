@@ -99,7 +99,7 @@
 @define('REG_NOM_FILTRE', '((?:<PIPE>\s*[a-z_=!<>?][a-z0-9_=]*(::[a-z0-9_]*)?)'
 		. '|(?:<PIPE>\s*(?:&gt;=?|&lt;=?|&lt;&gt;|===?|!==?|\?)))');
 // la meme chose, mais sans etre capturant.
-@define('REG_NOM_FILTRE_TOUT', '(?:(?:<PIPE>\s*[a-z_=!<>?][a-z0-9_=]*(::[a-z0-9_]*)?)'
+@define('REG_NOM_FILTRE_TOUT', '(?:(?:<PIPE>\s*[a-z_=!<>?][a-z0-9_=]*(?:::[a-z0-9_]*)?)'
 		. '|(?:<PIPE>\s*(?:&gt;=?|&lt;=?|&lt;&gt;|===?|!==?|\?)))');
 
 // #BALISE
@@ -206,10 +206,9 @@ function spip2_geshi_regexp_balise_callback($matches, $geshi) {
 	// 4 = #BALISE|filtre{x}
 	// 5 =
 	// 6 =
-	// 7 =
-	// 8 = )
-	// 9 = apres
-	// 10 = ]
+	// 7 = )
+	// 8 = apres
+	// 9 = ]
 	// -INERTE=x= sera remplace ensuite par le vrai caractere.
 	$retour =
 		  '<|!REG3XP' . $key .'!>-INERTE=' . ord('[') . '=|>' // [
@@ -217,7 +216,7 @@ function spip2_geshi_regexp_balise_callback($matches, $geshi) {
 		. '<|!REG3XP' . $key .'!>-INERTE=' . ord('(') . '=|>' // (
 		. $matches[4] // balise
 		. '<|!REG3XP' . $key .'!>-INERTE=' . ord(')') . '=|>' // )
-		. $matches[9] // apres
+		. $matches[8] // apres
 		. '<|!REG3XP' . $key .'!>-INERTE=' . ord(']') . '=|>' // ]
 		;
 
