@@ -387,8 +387,8 @@ function association_recupere_parametres_comptables() {
     if( !$annee ) { // pas d'annee en parametre
 	$annee = date('Y'); // on prende l'annee actuelle
     }
-    $destination = intval(_request('destination'));
-    if( !$destination ) { // pas de destination
+    $id_destination = intval(_request('destination'));
+    if( !$id_destination ) { // pas de destination
     }
     return serialize(array($exercice, $destination) );
 }
@@ -415,8 +415,8 @@ function association_calcul_totaux_comptes_classe($classe, $exercice=0, $destina
 	$c_where = "DATE_FORMAT(a_c.date, '%Y')=$annee ";
 #    } elseif ( $classe==$GLOBALS['association_metas']['classe_banques'] ) { // encaisse
 #	$c_where = 'LEFT(a_c.imputation,1)<>'. sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']) .' AND a_c.date>=a_p.date_anterieure AND a_c.date<=NOW() ';
-    } else { // tout ?!?
-	$c_where = '';
+    } else { // tout depuis le debut ?!?
+	$c_where = 'a_c.date<=NOW()'; // il faut mettre un test valide car la chaine peut etre precedee de "AND "...  limiter alors a aujourd'hui ?
     }
     $query = sql_select(
 	"$c_group, $valeurs ". ($destination ? 'a_d.id_destination' : '') .$p_select, // select

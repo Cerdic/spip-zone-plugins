@@ -23,15 +23,17 @@ function exec_compte_bilan()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
+// initialisations
 		$plan = sql_countsel('spip_asso_plan','active=1');
 		$id_exercice = intval(_request('exercice'));
 		if(!$id_exercice){
 			/* on recupere l'id_exercice dont la date "fin" est "la plus grande" */
 			$id_exercice = sql_getfetsel('id_exercice', 'spip_asso_exercices', '', '', 'fin DESC');
-			if(!$id_exercice)
-				$id_exercice = 0;
 		}
+		$destination = intval(_request('destination'));
 		$exercice_data = sql_asso1ligne('exercice', $id_exercice);
+		include_spip('inc/association_comptabilite');
+// traitements
 		onglets_association('titre_onglet_comptes');
 		// INTRO : rappel de l'exercicee affichee
 		$infos['exercice_entete_debut'] = association_datefr($exercice_data['debut'], 'dtstart');
@@ -39,10 +41,10 @@ function exec_compte_bilan()
 		echo totauxinfos_intro($exercice_data['intitule'], 'exercice', $id_exercice, $infos);
 		// pas de sommes de synthes puisque tous les totaux sont dans la zone centrale ;-
 		// datation et raccourcis
-		icones_association(array('comptes', "exercice=$exercice"), array(
-			'encaisse_titre_general' => array('finances-24.png', 'encaisse', "exercice=$id_exercice"),
-			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$id_exercice"),
-#			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$id_exercice"),
+		icones_association(array('comptes', "exercice=$id_exercice"), array(
+			'encaisse_titre_general' => array('finances-24.png', 'encaisse', "exercice=$id_exercice".($destination?"&destination=$id_destination":'')),
+			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$id_exercice".($destination?"&destination=$id_destination":'')),
+#			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$id_exercice".($destination?"&destination=$id_destination":'')),
 		));
 		// elements communs aux requetes
 		if ($plan) {
@@ -71,7 +73,10 @@ function exec_compte_bilan()
 		}
 */
 		debut_cadre_association('finances-24.jpg', 'cpte_bilan_titre_general', $exercice_data['intitule']);
-		include_spip('inc/association_comptabilite');
+		echo "\n<table width='100%'><tr>";
+		echo '<td width="50%" align="left">'. association_selectionner_exercice($id_exercice, generer_url_ecrire('compte_bilan',($id_destination?"destination=$id_destination":'')) ) .'</td>';
+		echo '<td width="50%" align="right">'. association_selectionner_destination($id_destination, generer_url_ecrire('compte_bilan',($id_exercice?"exercice=$id_exercice":'')) ) .'</td>';
+		echo '</tr></table>';
 		// les autres classes a prendre en compte ici
 		$classes_bilan = array();
 		$query = sql_select(
@@ -85,11 +90,11 @@ function exec_compte_bilan()
 			$classes_bilan[] = $data['classe'];
 		}
 		// liste des actifs cumulees par comptes
-		$dettes = association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', '-1', $id_exercice, 0);
+		$actifs = association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', '-1', $id_exercice, $id_destination);
 		// liste des passifs cumulees par comptes
-		$patrimoine = association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', '+1', $id_exercice, 0);
+		$passifs = association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', '+1', $id_exercice, $id_destination);
 		// liste des bilans (actifs et passifs) par comptes
-#		$bilan = association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', '', $id_exercice, 0);
+#		$bilan = association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', '', $id_exercice, $id_destination);
 /*
 		if(autoriser('associer', 'export_compte_bilans') && $plan){ // on peut exporter : pdf, csv, xml, ...
 			echo "<br /><table width='100%' class='asso_tablo' cellspacing='6' id='asso_tablo_exports'>\n";

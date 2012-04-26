@@ -33,6 +33,7 @@ function exec_bilan()
 		// recupere l'id_destination de la ou des destinations dans POST ou cree une entree a 0 dans le tableau
 		if (!($ids_destination_bilan = _request('destination')))
 			$ids_destination_bilan = array(0);
+		include_spip('inc/association_comptabilite');
 		onglets_association('titre_onglet_comptes');
 		// INTRO : rappel de l'exercicee affichee
 		$infos['exercice_entete_debut'] = association_datefr($exercice_data['debut'], 'dtstart');
@@ -76,6 +77,12 @@ function exec_bilan()
 		} else {
 			$join = $sel = $where = $having = $order = '';
 		}
+		$classes = array(
+			sql_quote($GLOBALS['association_metas']['classe_charges']),
+			sql_quote($GLOBALS['association_metas']['classe_produits']),
+//			sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']),
+//			sql_quote($GLOBALS['association_metas']['classe_banques']),
+		);
 		// on boucle sur le tableau des destinations en refaisant le fetch a chaque iteration
 		foreach ($ids_destination_bilan as $id_destination) {
 			$total_recettes = $total_depenses = $total_soldes = 0;
@@ -87,56 +94,14 @@ function exec_bilan()
 			}
 			echo "\n<fieldset>";
 			echo '<legend><strong>'. _T('asso:resultat_courant') . ' ' .$intitule_destination_bilan. '</strong></legend>';
-			echo "<table width='100%' class='asso_tablo' id='asso_tablo_bilan_resultat'>\n";
-			echo "<thead>\n<tr>";
-			echo '<th colspan="2">&nbsp;</th>';
-			echo '<th width="50">'. _T('asso:bilan_recettes') .'</th>';
-			echo '<th width="50">'. _T('asso:bilan_depenses') .'</th>';
-			echo '<th width="50">'. _T('asso:bilan_solde').'</th>';
-			echo "</tr>\n</thead><tbody>";
-			if ($id_destination==0) { // on fait le bilan sur toutes les destinations (quand aucune de selectionnee ou que destination n'est pas on)
-				$query = sql_select(
-					"imputation, SUM(recette) AS recettes, SUM(depense) AS depenses $sel",
-					"spip_asso_comptes $join",
-					$where, $order, '', '', $having);
-			} else { // on fait le bilan d'une seule destination
-				$query = sql_select(
-					"imputation,
-					SUM(spip_asso_destination_op.recette) AS recettes,
-					SUM(spip_asso_destination_op.depense) AS depenses,
-					spip_asso_destination_op.id_destination $sel",
-					"spip_asso_comptes LEFT JOIN spip_asso_destination_op ON spip_asso_destination_op.id_compte=spip_asso_comptes.id_compte $join",
-					"spip_asso_destination_op.id_destination=$id_destination AND $where",
-					$order, '', '', $having);
-			}
-			while ($data = sql_fetch($query)) {
-				$recettes = $data['recettes'];
-				$depenses = $data['depenses'];
-				$solde = $recettes-$depenses;
-				echo '<tr>';
-				echo '<td class="text">'. $data['code'] . '</td>';
-				echo '<td class="text">'. $data['intitule'] .'</td>';
-				echo '<td class="decimal">'.association_prixfr($recettes).'</td>';
-				echo '<td class="decimal">'.association_prixfr($depenses).'</td>';
-				echo '<td class="decimal">'.association_prixfr($solde).'</td>';
-				echo "</tr>\n";
-				$total_recettes += $recettes;
-				$total_depenses += $depenses;
-				$total_soldes += $solde;
-			}
-			echo "</tbody><tfoot>\n<tr>";
-			echo '<th colspan="2">'. _T('asso:resultat_courant') .'</th>';
-			echo '<th class="decimal">'. association_prixfr($total_recettes) .'</th>';
-			echo '<th class="decimal">'. association_prixfr($total_depenses) .'</th>';
-			echo '<th class="decimal">'. association_prixfr($total_soldes) .'</th>';
-			echo "</tr>\n</tfoot>\n</table>\n";
+			$solde = association_liste_totaux_comptes_classes($classes, 'cpte_resultat', 0, $exercice, $id_destination);
 			echo '</fieldset>';
 		}
 		fin_page_association();
 	}
 }
 
-/* Dans la fonction suivante "bilan_encaisse($annee)" on dissocie la "lecture" et "l'affichage"
+/* Dans la fonction suivante on dissocie la "lecture" et "l'affichage"
  * afin de pouvoir traiter et calculer des valeurs intermédiaires :
  * 1 - on ne comptabilise pour le terme "encaisse" que les sommes dont le journal est 53xx ou 51xx
  * 2 - si "imputation" vaut 58xx : c'est un virement interne et le solde du compte doit etre a zéro
@@ -145,9 +110,6 @@ function exec_bilan()
  *		que les comptes 86 et 87 s'equilibrent. Faire apparaitre dans le "bilan" uniquement le cas ou il
  *		y a desequilibre !
  */
-
-// TODO : le passage en exercice budgétaire - 1)date de fin de l'exercice 2)faire apparaitre l'avoir initial : qui est le solde à (debut -1) de l'exercice (report)
-
 function bilan_encaisse()
 {
 	$lesEcritures = array();

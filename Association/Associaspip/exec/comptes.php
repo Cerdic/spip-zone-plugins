@@ -21,12 +21,10 @@ function exec_comptes()
 		echo minipres();
 	} else {
 // initialisations
-		$exercice = intval(_request('exercice'));
-		if(!$exercice){
+		$id_exercice = intval(_request('exercice'));
+		if(!$id_exercice){
 			/* on recupere l'id du dernier exercice */
-			$exercice = sql_getfetsel('id_exercice','spip_asso_exercices','','','debut DESC');
-			if(!$exercice)
-				$exercice = 0;
+			$id_exercice = sql_getfetsel('id_exercice','spip_asso_exercices','','','debut DESC');
 		}
 		$vu = _request('vu');
 		if (!is_numeric($vu))
@@ -45,14 +43,14 @@ function exec_comptes()
 			$exercice = sql_getfetsel('id_exercice','spip_asso_exercices', 'fin >= "'.$date_operation.'" AND debut <= "'.$date_operation.'"', '', 'debut DESC');
 		}
 		$debut = intval(_request('debut'));
-		$exercice_data = sql_asso1ligne('exercice', $exercice);
+		$exercice_data = sql_asso1ligne('exercice', $id_exercice);
 // traitements
 		$where = 'imputation LIKE '. sql_quote($imputation);
 		$where .= (!is_numeric($vu) ? '' : " AND vu=$vu");
 		$where .= " AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]'";
 		onglets_association('titre_onglet_comptes');
 		// INTRO : rappel de l'exercicee affichee
-		echo totauxinfos_intro($exercice_data['intitule'],'exercice',$exercice);
+		echo totauxinfos_intro($exercice_data['intitule'],'exercice',$id_exercice);
 		$journaux = sql_allfetsel('journal, intitule', 'spip_asso_comptes RIGHT JOIN spip_asso_plan ON journal=code', "date>='$exercice_data[debut]' AND date<='$exercice_data[fin]'", "intitule DESC"); // on se permet sql_allfetsel car il s'agit d'une association (mois d'une demie dizaine de comptes) et non d'un etablissement financier (des milliers de comptes clients)
 		// TOTAUX : operations de l'exercice par compte financier (indique rapidement les comptes financiers les plus utilises ou les modes de paiement preferes...)
 		foreach (array('recette','depense') as $direction) {
@@ -81,34 +79,22 @@ function exec_comptes()
 		echo totauxinfos_montants(($imputation=='%' ? _T('asso:tous') : $imputation), $data['somme_recettes'], $data['somme_depenses']);
 		// datation et raccourcis
 		icones_association(array(), array(
-			'encaisse_titre_general' => array('finances-24.png', 'encaisse', "exercice=$exercice"),
-			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$exercice"),
-			'cpte_bilan_titre_general' => array('finances-24.png', 'compte_bilan', "exercice=$exercice"),
-#			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$exercice"),
+			'encaisse_titre_general' => array('finances-24.png', 'encaisse', "exercice=$id_exercice"),
+			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$id_exercice"),
+			'cpte_bilan_titre_general' => array('finances-24.png', 'compte_bilan', "exercice=$id_exercice"),
+#			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$id_exercice"),
 			'ajouter_une_operation' => array('ajout-24.png', 'edit_compte'),
 		) );
 		debut_cadre_association('finances-24.png', 'informations_comptables');
-		echo "\n<table width='100%'>";
-		echo '<tr><td>';
-		echo '<form method="post" action="'.generer_url_ecrire('comptes',"imputation=$imputation").'"><div>';
-		echo '<select name ="exercice" onchange="form.submit()">';
-		echo '<option value="0" ';
-		if (!$exercice) {
+		echo "\n<table width='100%'><tr>";
+		echo '<td width="50%" align="left">'. association_selectionner_exercice($id_exercice, generer_url_ecrire('comptes',"imputation=$imputation") ) .'</td>';
+		echo '<td width="50%" align="right">';
+		echo '<form method="post" action="'.generer_url_ecrire('comptes', "exercice=$id_exercice").'"><div>';
+		echo '<select name ="imputation" onchange="form.submit()">';
+		echo '<option value="%" ';
+		if ($imputation=='%') {
 			echo ' selected="selected"';
 		}
-		echo '>Choix Exercice ?</option>';
-		$sql = sql_select('id_exercice, intitule', 'spip_asso_exercices','', "intitule DESC");
-		while ($val = sql_fetch($sql)) {
-			echo '<option value="'.$val['id_exercice'].'" ';
-			if ($exercice==$val['id_exercice']) { echo ' selected="selected"'; }
-			echo '>'.$val['intitule'].'</option>';
-		}
-		echo '</select><noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></div></form></td>';
-		echo '<td>';
-		echo '<form method="post" action="'.generer_url_ecrire('comptes', "exercice=$exercice").'"><div>';
-		echo '<select name ="imputation" class="fondl" onchange="form.submit()">';
-		echo '<option value="%" ';
-		if ($imputation=="%") { echo ' selected="selected"'; }
 		echo '>Tous</option>';
 		/* Remplir le select uniquement avec les comptes utilises */
 		$sql = sql_select(
@@ -119,7 +105,9 @@ function exec_comptes()
 			'code', 'code ASC');
 		while ($plan = sql_fetch($sql)) {
 			echo '<option value="'.$plan['code'].'" ';
-			if ($imputation==$plan['code']) { echo ' selected="selected"'; }
+			if ($imputation==$plan['code']) {
+				echo ' selected="selected"';
+			}
 			echo '>'.$plan['code'].' - '.$plan['intitule'].'</option>';
 		}
 		echo '</select><noscript><input type="submit" value="'._T('asso:bouton_filtrer').'" /></noscript></div></form></td>';

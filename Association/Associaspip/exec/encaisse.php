@@ -21,13 +21,13 @@ function exec_encaisse()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
+// initialisations
 		$plan = sql_countsel('spip_asso_plan');
-		$exercice = intval(_request('exercice'));
-		if(!$exercice){ // on recupere l'id_exercice dont la date "fin" est "la plus grande"
-			$exercice = sql_getfetsel('id_exercice','spip_asso_exercices','','');
-			if(!$exercice)
-				$exercice = 0;
+		$id_exercice = intval(_request('exercice'));
+		if(!$id_exercice){ // on recupere l'id_exercice dont la date "fin" est "la plus grande"
+			$id_exercice = sql_getfetsel('id_exercice','spip_asso_exercices','','');
 		}
+// traitements
 		onglets_association('titre_onglet_comptes');
 		// INTRO : rappel de l'exercicee affichee
 		echo totauxinfos_intro('encaisse', '');
@@ -37,10 +37,10 @@ function exec_encaisse()
 			echo totauxinfos_stats($financier['intitule'], 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), 'journal='.sql_quote($financier['journal']) .' AND date>='. sql_quote($financier['date_anterieure']) .' AND date<=NOW()');
 		}
 		// datation et raccourcis
-		icones_association(array('comptes', "exercice=$exercice"), array(
-			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$exercice"),
-			'cpte_bilan_titre_general' => array('finances-24.png', 'compte_bilan', "exercice=$exercice"),
-#			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$exercice"),
+		icones_association(array('comptes', "exercice=$id_exercice"), array(
+			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$id_exercice"),
+			'cpte_bilan_titre_general' => array('finances-24.png', 'compte_bilan', "exercice=$id_exercice"),
+#			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$id_exercice"),
 		));
 		debut_cadre_association('finances-24.png', 'encaisse');
 		$lesEcritures = array(); // initialiser le tableaux des ecritures a afficher

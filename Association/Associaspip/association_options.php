@@ -500,6 +500,71 @@ function affichage_div($type_operation,$list_operation)
 	return $res;
 }
 
+/* selecteur d'exercice comptable */
+function association_selectionner_exercice($exercice='', $url_action='') {
+    if ($url_action) {
+		$res = '<form method="get" action="'.$url_action.'"><div>';
+    } else {
+		$res = '';
+    }
+    $res .= '<select name ="exercice" onchange="form.submit()">';
+    $res .= '<option value="0" ';
+    if (!$exercice) {
+		$res .= ' selected="selected"';
+    }
+    $res .= '>'. _L("choisir l'exercice ?") .'</option>';
+    $sql = sql_select('id_exercice, intitule', 'spip_asso_exercices','', 'intitule DESC');
+    while ($val = sql_fetch($sql)) {
+		$res .= '<option value="'.$val['id_exercice'].'" ';
+		if ($exercice==$val['id_exercice']) {
+			$res .= ' selected="selected"';
+		}
+		$res .= '>'.$val['intitule'].'</option>';
+    }
+    $res .= '</select><noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>';
+    if ($url_action) {
+		$res .= '</div></form>';
+    }
+    return $res;
+}
+
+/* selecteur d'exercice comptable */
+function association_selectionner_destination($destination='', $url_action='') {
+    if ($url_action) {
+		$res = '<form method="get" action="'.$url_action.'"><div>';
+    } else {
+		$res = '';
+    }
+//    $res .= '<select name ="destination[]" multiple="multiple" onchange="form.submit()">';
+    $res .= '<select name ="destination" onchange="form.submit()">';
+    $res .= '<option value="0" ';
+//    if ( !(array_search(0, $destinations)===FALSE) ) {
+    if (!$destination) {
+		$res .= ' selected="selected"';
+    }
+    $res .= '>'. _T('asso:toutes_destinations') .'</option><option disabled="disabled">--------</option>';
+    $intitule_destinations = array();
+    $sql = sql_select('id_destination, intitule', 'spip_asso_destination','', 'intitule DESC');
+    while ($val = sql_fetch($sql)) {
+		$res .= '<option value="'.$val['id_destination'].'" ';
+//		if (!(array_search($val['id_destination'], $destinations)===FALSE)) {
+		if ($destination==$val['id_destination']) {
+			$res .= ' selected="selected"';
+		}
+		$res .= '>'.$val['intitule'].'</option>';
+		$intitule_destinations[$val['id_destination']] = $val['intitule'];
+    }
+    $res .= '</select><noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>';
+    if ($url_action) {
+		$res .= '</div></form>';
+    }
+    if ($GLOBALS['association_metas']['destinations']){
+		return $res;
+	} else {
+		return FALSE;
+	}
+}
+
 function encadre($texte,$avant='[',$apres=']')
 {
     return ($texte=='')?'':$avant.$texte.$apres;
