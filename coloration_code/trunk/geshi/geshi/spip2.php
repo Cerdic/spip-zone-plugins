@@ -95,9 +95,12 @@
 @define('REG_INCLURE','(&lt;INCLU(D|R)E)(\([^)]*\))?(.*)?(&gt;)');
 
 // |filtre |class::methode
-@define('REG_NOM_FILTRE', '(<PIPE>[a-z_=!<>?][a-z0-9_=]*(::[a-z0-9_]*)?)');
+// et |>= |?
+@define('REG_NOM_FILTRE', '((?:<PIPE>\s*[a-z_=!<>?][a-z0-9_=]*(::[a-z0-9_]*)?)'
+		. '|(?:<PIPE>\s*(?:&gt;=?|&lt;=?|&lt;&gt;|===?|!==?|\?)))');
 // la meme chose, mais sans etre capturant.
-@define('REG_NOM_FILTRE_TOUT', '(?:<PIPE>[a-z_=!<>?][a-z0-9_=]*(?:::[a-z0-9_]*)?)');
+@define('REG_NOM_FILTRE_TOUT', '(?:(?:<PIPE>\s*[a-z_=!<>?][a-z0-9_=]*(::[a-z0-9_]*)?)'
+		. '|(?:<PIPE>\s*(?:&gt;=?|&lt;=?|&lt;&gt;|===?|!==?|\?)))');
 
 // #BALISE
 @define('REG_BALISE','(\#)(' . REG_NOM_BOUCLE . ':)?([A-Z0-9_]+)([*]{0,2})');
@@ -118,7 +121,7 @@
 @define('REG_BALISE_COMPLET',
 	  REG_BALISE_COMPLET_START . '(' // [ ... (
 	. '(?:' . REG_BALISE_TOUT . ')' // #BALISE 
-	. '(?:(' . REG_NOM_FILTRE_TOUT . '?' . str_replace('?R', '?5', REG_CRITERES_BOUCLE) . '?)*)' // {arguments} |filtre{criteres}
+	. '(?:(\s*' . REG_NOM_FILTRE_TOUT . '?' . str_replace('?R', '?5', REG_CRITERES_BOUCLE) . '?)*)' // {arguments} |filtre{criteres}
 	. ')' . REG_BALISE_COMPLET_STOP ); // ) ... ]
 
 
@@ -202,10 +205,11 @@ function spip2_geshi_regexp_balise_callback($matches, $geshi) {
 	// 3 = (
 	// 4 = #BALISE|filtre{x}
 	// 5 =
-	// 6 = 
-	// 7 = )
-	// 8 = apres
-	// 9 = ]
+	// 6 =
+	// 7 =
+	// 8 = )
+	// 9 = apres
+	// 10 = ]
 	// -INERTE=x= sera remplace ensuite par le vrai caractere.
 	$retour =
 		  '<|!REG3XP' . $key .'!>-INERTE=' . ord('[') . '=|>' // [
@@ -213,7 +217,7 @@ function spip2_geshi_regexp_balise_callback($matches, $geshi) {
 		. '<|!REG3XP' . $key .'!>-INERTE=' . ord('(') . '=|>' // (
 		. $matches[4] // balise
 		. '<|!REG3XP' . $key .'!>-INERTE=' . ord(')') . '=|>' // )
-		. $matches[8] // apres
+		. $matches[9] // apres
 		. '<|!REG3XP' . $key .'!>-INERTE=' . ord(']') . '=|>' // ]
 		;
 
@@ -354,22 +358,26 @@ $language_data = array (
 			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_balise_callback',
 			GESHI_MODIFIERS => '',
 			),
-		5 => array(
+		'4b' => array(
 			GESHI_SEARCH => REG_BALISE_COMPLET,
 			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_balise_callback',
 			GESHI_MODIFIERS => '',
 			),
-		6 => array(
+		'4c' => array(
 			GESHI_SEARCH => REG_BALISE_COMPLET,
 			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_balise_callback',
 			GESHI_MODIFIERS => '',
 			),
-		7 => array(
+		'4d' => array(
 			GESHI_SEARCH => REG_BALISE_COMPLET,
 			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_balise_callback',
 			GESHI_MODIFIERS => '',
 			),
-
+		'4e' => array(
+			GESHI_SEARCH => REG_BALISE_COMPLET,
+			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_balise_callback',
+			GESHI_MODIFIERS => '',
+			),
 
 		// Balise (#nom:TITRE**) (les etoiles)
 		0 => array(
