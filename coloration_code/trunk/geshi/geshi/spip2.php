@@ -166,7 +166,41 @@ function spip2_geshi_regexp_critere_callback($matches, $geshi) {
 		. '|>' . $matches[4];
 	return $retour;
 }
+
+
+/**
+ * Echapper les echappements \[ \] ... 
+ *
+**/
+function spip2_geshi_regexp_echappements_echapper_callback($matches, $geshi) {
+	$squelette = $matches[0];
+
+	// rendre inertes les echappements de #[](){}<>
+	$inerte = '-INERTE';
+	$squelette = preg_replace_callback(',\\\\([#[()\]{}<>]),',
+		create_function('$a', "return '$inerte-'.ord(\$a[1]).'-';"), $squelette, -1, $esc);
+
+	return $squelette;
 }
+
+/**
+ * Remettre les echappements \[ \] ... 
+ *
+**/
+function spip2_geshi_regexp_echappements_remettre_callback($matches, $geshi) {
+	$contenu = $matches[0];
+
+	$inerte = '-INERTE';
+	$key = $geshi->_hmr_key;
+	$contenu = preg_replace_callback(",$inerte-(\d+)-,",
+		#create_function('$a', 'return "\\\\" . chr($a[1]);'), $contenu);
+		create_function('$a', 'return "<|!REG3XP'.$key.'!>\\\\" . chr($a[1]) . "|>";'), $contenu);
+
+	return $contenu;
+}
+
+
+} // /if
 
 
 
@@ -182,6 +216,12 @@ $language_data = array (
 	'CASE_SENSITIVE' => array(
 		GESHI_COMMENTS => false,
 		),
+	'PARSER_CONTROL' => array(
+		'ENABLE_FLAGS' => array(
+			'BRACKETS' => GESHI_NEVER, // le colorieur s'occupera des [](){} !
+			'NUMBERS'  => GESHI_NEVER, // le colorieur s'occupera des 123 (ou pas !)
+			#'KEYWORDS' => GESHI_NEVER, // il les faut pour les classes css :(
+	)),
 	'STYLES' => array(
 		'KEYWORDS' => array(),
 		'COMMENTS' => array(
@@ -219,6 +259,10 @@ $language_data = array (
 			50 => 'color: #E1861A;', // filtres de balise
 
 			99 => 'color: #FF001E; font-weight:bold;', // [ ( et ) ]
+			
+			// echappements
+			101 => '', // \[ \] \{ ...
+			102 => 'color:#FF2100; font-weight:bold;', // les \ dans les echappements
 			)
 		),
 	'URLS' => array(),
@@ -226,6 +270,12 @@ $language_data = array (
 	'OBJECT_SPLITTERS' => array(),
 
 	'REGEXPS' => array(
+		// echapper les echappements
+		100 => array(
+			GESHI_SEARCH => '^.*$',
+			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_echappements_echapper_callback',
+			GESHI_MODIFIERS => 's',
+			),
 /*
 		// Balise complexe avec [ ( et ) ] si on peut
 		99 => array(
@@ -394,6 +444,21 @@ $language_data = array (
 			GESHI_AFTER => ''
 			),
 
+		// remettre les echappements
+		101 => array(
+			GESHI_SEARCH => '^.*$',
+			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_echappements_remettre_callback',
+			GESHI_MODIFIERS => 's',
+			),
+		// permettre de colorer le \ des echappements differement
+		102 => array(
+			GESHI_SEARCH => '(<\|!REG3XP101!>)(.)(.\|>)',
+			GESHI_REPLACE => '\\2',
+			GESHI_MODIFIERS => '',
+			GESHI_BEFORE => '\\1',
+			GESHI_AFTER => '\\3'
+			),
+		
 		),
 
 	'STRICT_MODE_APPLIES' => GESHI_NEVER,
