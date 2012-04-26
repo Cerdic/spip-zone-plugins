@@ -201,11 +201,11 @@
       <if type="article-journal article-magazine" match="any">
         <choose>
           <if variable="volume">
-            <text variable="volume" prefix=", n°"/>
+            <text variable="volume" prefix=", "/>
             <text variable="issue" prefix=" (" suffix=")"/>
           </if>
           <else>
-            <text variable="issue" prefix=", n°"/>
+            <text variable="issue" prefix=", "/>
           </else>
         </choose>
       </if>
