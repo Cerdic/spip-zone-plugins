@@ -2,7 +2,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function courtcircuit_url_redirection($id_rubrique) {
-	spip_log('redirection','test');
 	$url = '';
 	include_spip('inc/utils');
 	include_spip('inc/headers');
@@ -38,14 +37,12 @@ function courtcircuit_url_redirection($id_rubrique) {
 		'courtcircuit_selection_article', 
 			array_merge(array('id_rubrique' => $id_rubrique),$config)
 		);
-	spip_log(array_merge(array('id_rubrique' => $id_rubrique),$config),'test');
-	spip_log($redirect_article,'test');
 	if (intval($redirect_article))
 		$url = generer_url_entite(intval($redirect_article), 'article', '', '', true);
 	else {
 		$redirect_rubrique = recuperer_fond(
 			'courtcircuit_selection_rubrique', 
-			array_merge(array('id_rubrique' => $id_rubrique),$config)
+			array_merge(array('id_rubrique' => $id_rubrique,'id_parent' => $id_rubrique),$config)
 			);
 		if (intval($redirect_rubrique)) {
 			// On applique a nouveau les regles de selection a la sous-rubrique
