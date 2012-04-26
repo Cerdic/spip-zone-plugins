@@ -105,16 +105,20 @@
 @define('REG_BALISE_TOUT','(?:\#)(?:' . REG_NOM_BOUCLE . ':)?(?:[A-Z0-9_]+)(?:[*]{0,2})');
 
 
-// /!\ pas encore au point
-@define('REG_BALISE_AVANT', '[^\[]*');
-@define('REG_BALISE_APRES', '[^\]]*');
-@define('REG_BALISE_COMPLET_START', '(\[)(' . REG_BALISE_AVANT . ')(\()'); // [ ... (
-@define('REG_BALISE_COMPLET_STOP',  '(\))(' . REG_BALISE_APRES . ')(\])'); // ) ... ]
+
+// Recherche des parties exterieures des balises.
+// On ne peut pas avoir plus d'une seule recursivite
+/* @define('REG_BALISE_EXTERIEUR', '(?:\s*(?:(?>[^\[\]]+)|(?R))*\s*)'); */ 
+// du coup on ne peut attraper que les parties exterieures
+// qui n'ont pas de crochets internes.
+@define('REG_BALISE_EXTERIEUR', '(?:[^\[\]]*)');
+@define('REG_BALISE_COMPLET_START', '(\[)(' . REG_BALISE_EXTERIEUR . ')(\()'); // [ ... (
+@define('REG_BALISE_COMPLET_STOP',  '(\))(' . REG_BALISE_EXTERIEUR . ')(\])'); // ) ... ]
 // Attention a ne pas avoir plus de 9 parentheses capturantes car on ne peut pas ecrire \\10
 @define('REG_BALISE_COMPLET',
 	  REG_BALISE_COMPLET_START . '(' // [ ... (
 	. '(?:' . REG_BALISE_TOUT . ')' // #BALISE 
-	. '(?:(?:' . REG_NOM_FILTRE_TOUT . '?' . REG_CRITERES_TOUT . '?)*)' // {arguments} |filtre{criteres}
+	. '(?:(' . REG_NOM_FILTRE_TOUT . '?' . str_replace('?R', '?5', REG_CRITERES_BOUCLE) . '?)*)' // {arguments} |filtre{criteres}
 	. ')' . REG_BALISE_COMPLET_STOP ); // ) ... ]
 
 
@@ -141,7 +145,6 @@ if (!function_exists('spip2_geshi_regexp_critere_callback')) {
  * 		"avant <|!REG3XP31!>contenu|> apres"
 **/
 function spip2_geshi_regexp_critere_callback($matches, $geshi) {
-#var_dump($matches);
 	$key = $geshi->_hmr_key;
 	// 0 = tout
 	// 1 = <BOUCLEx(TABLE)
@@ -168,6 +171,57 @@ function spip2_geshi_regexp_critere_callback($matches, $geshi) {
 }
 
 
+
+
+/**
+ * Cette fonction recupere la liste des balises qui
+ * ont des parties optionnelles [ ...( et ) ... ]
+ * 
+ * Elle colorie les signes [()]
+ * Elle les echappe egalement.
+ * Ainsi, on peut relancer la regexp pour tenter de trouver des enchainements
+ * de balise plus profonds.
+ *
+ * @param array $matches
+ * 		Le resultat du preg_match
+ * @param Object $geshi
+ * 		Instance de l'objet SPIP_GESHI (issu de GESHI)
+ * @return string
+ * 		La chaine attendu par Geshi
+ * 		qui est quelque chose comme
+ * 		"avant <|!REG3XP31!>contenu|> apres"
+**/
+function spip2_geshi_regexp_balise_callback($matches, $geshi) {
+	$key = $geshi->_hmr_key;
+	// on l'appelle plusieurs fois mais on colorie toujours avec la meme cle.
+	$key = 4; 
+	
+	// 0 = tout
+	// 1 = [
+	// 2 = avant
+	// 3 = (
+	// 4 = #BALISE|filtre{x}
+	// 5 =
+	// 6 = 
+	// 7 = )
+	// 8 = apres
+	// 9 = ]
+	// -INERTE=x= sera remplace ensuite par le vrai caractere.
+	$retour =
+		  '<|!REG3XP' . $key .'!>-INERTE=' . ord('[') . '=|>' // [
+		. $matches[2] // avant
+		. '<|!REG3XP' . $key .'!>-INERTE=' . ord('(') . '=|>' // (
+		. $matches[4] // balise
+		. '<|!REG3XP' . $key .'!>-INERTE=' . ord(')') . '=|>' // )
+		. $matches[8] // apres
+		. '<|!REG3XP' . $key .'!>-INERTE=' . ord(']') . '=|>' // ]
+		;
+
+	return $retour;
+}
+
+
+
 /**
  * Echapper les echappements \[ \] ... 
  *
@@ -184,7 +238,9 @@ function spip2_geshi_regexp_echappements_echapper_callback($matches, $geshi) {
 }
 
 /**
- * Remettre les echappements \[ \] ... 
+ * Remettre les echappements \[ \] ...
+ * 
+ * Remettre les [ ( ) ] echappes des balises
  *
 **/
 function spip2_geshi_regexp_echappements_remettre_callback($matches, $geshi) {
@@ -192,12 +248,20 @@ function spip2_geshi_regexp_echappements_remettre_callback($matches, $geshi) {
 
 	$inerte = '-INERTE';
 	$key = $geshi->_hmr_key;
+	// echappements avec \
 	$contenu = preg_replace_callback(",$inerte-(\d+)-,",
 		#create_function('$a', 'return "\\\\" . chr($a[1]);'), $contenu);
 		create_function('$a', 'return "<|!REG3XP'.$key.'!>\\\\" . chr($a[1]) . "|>";'), $contenu);
 
+	// echappements de balise faits par une regexp de ce colorieur (regexp 4 à 7).
+	$contenu = preg_replace_callback(",$inerte=(\d+)=,",
+		#create_function('$a', 'return "\\\\" . chr($a[1]);'), $contenu);
+		create_function('$a', 'return chr($a[1]);'), $contenu);
+
 	return $contenu;
 }
+
+
 
 
 } // /if
@@ -240,6 +304,7 @@ $language_data = array (
 			0 => 'color: #E1861A;', // balise (#nom:TITRE**) ** (meme couleur que 50:filtre)
 			1 => 'color: #CA5200;', // balise (#nom:TITRE) #TITRE
 			2 => 'color: #e72;', // balise (#nom:TITRE) nom:
+			4 => 'color: #FF001E;', // [ ( et ) ]
 
 			10 => 'color: #1DA3DD;', // fin boucle
 			11 => 'color: #1DA3DD;', // debut boucle
@@ -258,8 +323,6 @@ $language_data = array (
 			40 => 'color: #74B900;', // critere de boucle ou de balise 
 			50 => 'color: #E1861A;', // filtres de balise
 
-			99 => 'color: #FF001E; font-weight:bold;', // [ ( et ) ]
-			
 			// echappements
 			101 => '', // \[ \] \{ ...
 			102 => 'color:#FF2100; font-weight:bold;', // les \ dans les echappements
@@ -276,15 +339,37 @@ $language_data = array (
 			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_echappements_echapper_callback',
 			GESHI_MODIFIERS => 's',
 			),
-/*
+
+
+		#######  BALISES  ########
+
 		// Balise complexe avec [ ( et ) ] si on peut
-		99 => array(
+		// Colorie les [()] et les echappe lorsqu'il en trouve.
+		// on l'applique plusieurs fois pour tenter de capturer un plus grand nombre
+		// lorsqu'on a des imbrications comme [ [(#TITRE)] (#ENV) apres ]
+		// car on ne peut pas effectuer d'autre recursion
+		// dans cette regexp qui en possede deja une pour les criteres
+		4 => array(
 			GESHI_SEARCH => REG_BALISE_COMPLET,
-			GESHI_REPLACE => '\\1',
+			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_balise_callback',
 			GESHI_MODIFIERS => '',
-			GESHI_BEFORE => '',
-			GESHI_AFTER => '\\2\\3\\4\\5\\6\\7'
-			),*/
+			),
+		5 => array(
+			GESHI_SEARCH => REG_BALISE_COMPLET,
+			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_balise_callback',
+			GESHI_MODIFIERS => '',
+			),
+		6 => array(
+			GESHI_SEARCH => REG_BALISE_COMPLET,
+			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_balise_callback',
+			GESHI_MODIFIERS => '',
+			),
+		7 => array(
+			GESHI_SEARCH => REG_BALISE_COMPLET,
+			SPIP_GESHI_REGEXP_FUNCTION => 'spip2_geshi_regexp_balise_callback',
+			GESHI_MODIFIERS => '',
+			),
+
 
 		// Balise (#nom:TITRE**) (les etoiles)
 		0 => array(
@@ -311,6 +396,8 @@ $language_data = array (
 			GESHI_AFTER => '\\3'
 			),
 
+
+		#######  BOUCLES  ########
 
 		// Au fur et a mesure que GESHI trouve des regexp
 		// il encadre ses trouvailles de <|!REG3XPn!>contenu|>
@@ -365,6 +452,7 @@ $language_data = array (
 			),
 
 
+		#######  INCLURE  ########
 
 		// inclure (entre parenthese)
 		20 => array(
@@ -399,6 +487,10 @@ $language_data = array (
 			GESHI_AFTER => ''
 			),
 
+
+
+		#######  CHAINES DE LANGUE  ########
+
 		// idiome
 		30 => array(
 			GESHI_SEARCH => '(&lt;:(.*):&gt;)',
@@ -415,6 +507,9 @@ $language_data = array (
 			GESHI_BEFORE => '',
 			GESHI_AFTER => ''
 			),
+
+
+		#######  PARAMETRES  ########
 
 		// parametres de filtre, balise
 		40 => array(
@@ -435,6 +530,8 @@ $language_data = array (
 			),
 
 
+		#######  FILTRES  ########
+
 		// filtre
 		50 => array(
 			GESHI_SEARCH => REG_NOM_FILTRE,
@@ -443,6 +540,9 @@ $language_data = array (
 			GESHI_BEFORE => '',
 			GESHI_AFTER => ''
 			),
+
+
+		#######  ECHAPPEMENTS  ########
 
 		// remettre les echappements
 		101 => array(
