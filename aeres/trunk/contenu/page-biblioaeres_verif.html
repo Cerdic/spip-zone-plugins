@@ -148,7 +148,7 @@
 
 <B_ap>
 <h2 class="h2">AP - Autres publications</h2>
-<BOUCLE_ap(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type IN report,encyclopediaArticle,computerProgram,webpage,map,document,manuscript,dictionaryEntry}>
+<BOUCLE_ap(ZITEMS){auteur?}{!par annee}{par auteurs}{annee>=#GET{debut}}{annee<=#GET{fin}}{type IN report,encyclopediaArticle,computerProgram,webpage,map,document,manuscript,dictionaryEntry,newspaperArticle}>
 [<h3 class="h3">(#ANNEE|unique{ap})</h3>]
 <div class="ajax">#FORMULAIRE_AERES_VERIFIER_ZITEM{#ID_ZITEM,#ENV{auteur}}</div>
 #SET{refs, #GET{refs}|push{#ID_ZITEM}}

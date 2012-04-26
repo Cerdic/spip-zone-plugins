@@ -9,8 +9,26 @@ function formulaires_configurer_aeres_charger_dist(){
 		$valeurs = array(
 			'debut' => '',
 			'fin' => '',
-			'csl' => ''
+			'csl' => '',
+			'contact' => '',
+			'conference_actes' => '',
+			'format_docs' => ''
 		);
+	
+	// Liste des membres
+	if (isset($valeurs['membres']))
+		$membres = explode(';',$valeurs['membres']);
+	else
+		$membres = array();
+	include_spip('base/abstract_sql');
+	$zcreators = sql_allfetsel('auteur','spip_zcreators','','auteur','auteur');
+	foreach ($zcreators as $cle => $zcreator) // remise a plat du tableau
+		$zcreators[$cle] = $zcreator['auteur'];
+	$non_membres = array_diff($zcreators,$membres);
+	
+	$valeurs['membres'] = $membres;
+	$valeurs['non_membres'] = $non_membres;
+	
 	return $valeurs;
 }
 
@@ -24,13 +42,20 @@ function formulaires_configurer_aeres_verifier_dist(){
 
 
 function formulaires_configurer_aeres_traiter_dist(){
+	$membres = _request('membres');
+	sort($membres);
+	set_request('membres',$membres); // On retransmet le tableau correctement trié
+	$non_membres = _request('non_membres');
+	sort($non_membres);
+	set_request('non_membres',$non_membres);
 	$config = array(
 		'debut' => _request('debut'),
 		'fin' => _request('fin'),
 		'csl' => _request('csl'),
 		'contact' => _request('contact'),
 		'conference_actes' => _request('conference_actes'),
-		'format_docs' => _request('format_docs')
+		'format_docs' => _request('format_docs'),
+		'membres' => implode(";", $membres)
 	);
 	include_spip('inc/meta');
 	ecrire_meta('aeres',serialize($config));
