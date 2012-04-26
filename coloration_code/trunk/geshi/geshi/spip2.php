@@ -120,9 +120,12 @@
 // Attention a ne pas avoir plus de 9 parentheses capturantes car on ne peut pas ecrire \\10
 @define('REG_BALISE_COMPLET',
 	  REG_BALISE_COMPLET_START . '(' // [ ... (
-	. '(?:' . REG_BALISE_TOUT . ')' // #BALISE 
-	. '(?:(\s*' . REG_NOM_FILTRE_TOUT . '?' . str_replace('?R', '?5', REG_CRITERES_BOUCLE) . '?)*)' // {arguments} |filtre{criteres}
-	. ')' . REG_BALISE_COMPLET_STOP ); // ) ... ]
+	. '(?:' . REG_BALISE_TOUT . ')' // #BALISE
+	 // {arguments} |filtre{criteres}
+	 // *+ pour diminuer le nombre de pcre.backtrace_limit
+	. '(?:(\s*' . REG_NOM_FILTRE_TOUT . '?' . str_replace('?R', '?5', REG_CRITERES_BOUCLE) . '?)*+)'
+	 // ) ... ]
+	. ')' . REG_BALISE_COMPLET_STOP );
 
 
 
@@ -198,7 +201,6 @@ function spip2_geshi_regexp_balise_callback($matches, $geshi) {
 	$key = $geshi->_hmr_key;
 	// on l'appelle plusieurs fois mais on colorie toujours avec la meme cle.
 	$key = 4; 
-	
 	// 0 = tout
 	// 1 = [
 	// 2 = avant
