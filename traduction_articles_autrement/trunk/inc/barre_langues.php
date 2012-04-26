@@ -69,7 +69,19 @@ function inc_barre_langues_dist($id_article){
 				if ($trad_rub=test_plugin_actif('tradrub')) {
 					$id_rubrique_traduite=rubrique_traduction($value,$id_rubrique);
 					
-					$onglets_traduction.= '<li class="non_traduit box_onglet"><a href="'.generer_url_ecrire($objet.'_edit','new=oui&lier_trad='.$id_trad.'&id_rubrique='.$id_rubrique_traduite.'&lang_dest='.$value).'" title="'._T('ecrire:info_tout_site2').'">'.traduire_nom_langue($value).'</a></li>';					
+					if($id_rubrique_traduite)$onglets_traduction.= '<li class="non_traduit box_onglet"><a href="'.generer_url_ecrire($objet.'_edit','new=oui&lier_trad='.$id_trad.'&id_rubrique='.$id_rubrique_traduite.'&lang_dest='.$value).'" title="'._T('ecrire:info_tout_site2').'">'.traduire_nom_langue($value).'</a></li>';
+					elseif(test_plugin_actif('trad_rub')){
+						$id_trad=sql_getfetsel('id_trad','spip_rubriques','id_rubrique='.$id_rubrique);
+						if($id_trad==0){
+							$id_trad=$id_rubrique;
+							$trad_new='oui';
+							}
+						$donnes_trad=destination_traduction($value,$id_trad,$creer_racine='');
+						$parent_trad=$donnes_trad[0];
+						$trad=$donnes_trad[1];
+						
+						$onglets_traduction.='<li class="non_traduit box_onglet"><a href="'.generer_url_ecrire('rubrique_edit','new=oui&id_parent='.$parent_trad.'&lang_dest='.$value.'&lier_trad='.$trad.'&trad_new='.$trad_new.'&retour=nav').'" class="avis_source" title="'._T('tra:avis_rubrique_source').'">'.traduire_nom_langue($value).'</a>';
+						} 					
 					
 					$section='oui';
 
