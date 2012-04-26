@@ -39,7 +39,7 @@ function formulaires_configurer_jquerysuperfish_saisies_dist(){
 						'label' => _T('jquerysuperfish:label_classe'),
 						'explication' => _T('jquerysuperfish:explication_classe'),
 						'defaut' => $config['classe_hori'],
-                  'afficher_si' => '@menu_hori@ == "on"' 
+                  'afficher_si' => '@menu_hori@ == "on"',
 					)
 				),
 				array(
@@ -60,6 +60,9 @@ function formulaires_configurer_jquerysuperfish_saisies_dist(){
 						'explication' => _T('jquerysuperfish:explication_delai'),
 						'defaut' => $config['delai_hori'],
                   'afficher_si' => '@menu_hori@ == "on"' 
+					),
+					'verifier' => array(
+					   'type' => 'entier',
 					)
 				),
 				array(
@@ -96,7 +99,7 @@ function formulaires_configurer_jquerysuperfish_saisies_dist(){
 						'label' => _T('jquerysuperfish:label_classe'),
 						'explication' => _T('jquerysuperfish:explication_classe'),
 						'defaut' => $config['classe_vert'],
-                  'afficher_si' => '@menu_vert@ == "on"' 
+                  'afficher_si' => '@menu_vert@ == "on"',
 					)
 				),
 				array(
@@ -117,6 +120,9 @@ function formulaires_configurer_jquerysuperfish_saisies_dist(){
 						'explication' => _T('jquerysuperfish:explication_delai'),
 						'defaut' => $config['delai_vert'],
                   'afficher_si' => '@menu_vert@ == "on"' 
+					),
+					'verifier' => array(
+					   'type' => 'entier',
 					)
 				),
 				array(
@@ -153,7 +159,7 @@ function formulaires_configurer_jquerysuperfish_saisies_dist(){
 						'label' => _T('jquerysuperfish:label_classe'),
 						'explication' => _T('jquerysuperfish:explication_classe'),
 						'defaut' => $config['classe_navbar'],
-                  'afficher_si' => '@menu_navbar@ == "on"' 
+                  'afficher_si' => '@menu_navbar@ == "on"',
 					)
 				),
 				array(
@@ -174,6 +180,9 @@ function formulaires_configurer_jquerysuperfish_saisies_dist(){
 						'explication' => _T('jquerysuperfish:explication_delai'),
 						'defaut' => $config['delai_navbar'],
                   'afficher_si' => '@menu_navbar@ == "on"' 
+					),
+					'verifier' => array(
+					   'type' => 'entier',
 					)
 				),
 				array(
@@ -186,8 +195,88 @@ function formulaires_configurer_jquerysuperfish_saisies_dist(){
 					)
 				)
 			)
+		),
+		array(
+			'saisie' => 'fieldset',
+			'options' => array(
+				'nom' => 'fmenu_supersubs',
+				'label' => _T('jquerysuperfish:legend_supersubs')
+			),
+			'saisies' => array(
+				array(
+					'saisie' => 'oui_non',
+					'options' => array(
+						'nom' => 'supersubs',
+						'label' => _T('jquerysuperfish:label_supersubs'),
+						'explication' => _T('jquerysuperfish:explication_supersubs'),
+						'defaut' => $config['supersubs']
+					)
+				),
+				array(
+					'saisie' => 'input',
+					'options' => array(
+						'nom' => 'supersubs_minwidth',
+						'label' => _T('jquerysuperfish:label_supersubs_minwidth'),
+						'explication' => _T('jquerysuperfish:explication_supersubs_minwidth'),
+						'defaut' => $config['supersubs_minwidth'],
+                  'afficher_si' => '@supersubs@ == "on"',
+					),
+					'verifier' => array(
+					   'type' => 'entier',
+						'options' => array(
+							'min' => '1',
+						)
+					)
+				),
+				array(
+					'saisie' => 'input',
+					'options' => array(
+						'nom' => 'supersubs_maxwidth',
+						'label' => _T('jquerysuperfish:label_supersubs_maxwidth'),
+						'explication' => _T('jquerysuperfish:explication_supersubs_maxwidth'),
+						'defaut' => $config['supersubs_maxwidth'],
+                  'afficher_si' => '@supersubs@ == "on"',
+					),
+					'verifier' => array(
+					   'type' => 'entier',
+						'options' => array(
+							'min' => '1',
+						)
+					)
+				),
+				array(
+					'saisie' => 'input',
+					'options' => array(
+						'nom' => 'supersubs_extrawidth',
+						'label' => _T('jquerysuperfish:label_supersubs_extrawidth'),
+						'explication' => _T('jquerysuperfish:explication_supersubs_extrawidth'),
+						'defaut' => $config['supersubs_extrawidth'],
+                  'afficher_si' => '@supersubs@ == "on"',
+					),
+					'verifier' => array(
+					   'type' => 'entier',
+						'options' => array(
+							'min' => '1',
+						)
+					)
+				),
+			)
 		)
 	);
-
 }
+
+function formulaires_configurer_jquerysuperfish_verifier(){
+
+	$erreurs = array();
+	include_spip('inc/saisies');
+	$erreurs = saisies_verifier(formulaires_configurer_jquerysuperfish_saisies_dist());
+
+	if (_request('supersubs_minwidth') && _request('supersubs_maxwidth') && (_request('supersubs_maxwidth') < _request('supersubs_minwidth')))
+		$erreurs['supersubs_maxwidth'] = _T('jquerysuperfish:erreur_min_max');
+
+	if ($erreurs and !isset($erreurs['message_erreur']))
+		$erreurs['message_erreur'] = _T('jquerysuperfish:erreur_generique');
+   return $erreurs; // si c'est vide, traiter sera appele, sinon le formulaire sera resoumis
+}
+
 ?>

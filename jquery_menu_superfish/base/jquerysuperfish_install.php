@@ -24,7 +24,8 @@ function jquerysuperfish_upgrade($nom_meta_base_version,$version_cible){
 		$config = array_merge(array(
 				'menu_hori' => '',
 				'menu_vert' => '',
-				'menu_navbar' => ''
+				'menu_navbar' => '',
+				'supersubs' => ''
 		), $config);
 		ecrire_meta('jquerysuperfish', serialize($config));
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
