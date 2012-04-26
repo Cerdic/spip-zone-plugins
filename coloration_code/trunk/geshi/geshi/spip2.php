@@ -301,10 +301,10 @@ $language_data = array (
 		'SYMBOLS' => array(),
 		'SCRIPT' => array(),
 		'REGEXPS' => array(
-			0 => 'color: #E1861A;', // balise (#nom:TITRE**) ** (meme couleur que 50:filtre)
-			1 => 'color: #CA5200;', // balise (#nom:TITRE) #TITRE
-			2 => 'color: #e72;', // balise (#nom:TITRE) nom:
-			4 => 'color: #FF001E;', // [ ( et ) ]
+			0 => 'color: #FF4E00;', // balise (#nom:TITRE**) ** (meme couleur que 50:filtre)
+			1 => 'color: #D05000;', // balise (#nom:TITRE) #TITRE
+			2 => 'color: #1DA3DD;', // balise (#nom:TITRE) nom:
+			4 => 'color: #D05000;', // [ ( et ) ]
 
 			10 => 'color: #1DA3DD;', // fin boucle
 			11 => 'color: #1DA3DD;', // debut boucle
@@ -321,7 +321,7 @@ $language_data = array (
 			31 => 'color: #C90', // multi 
 			
 			40 => 'color: #74B900;', // critere de boucle ou de balise 
-			50 => 'color: #E1861A;', // filtres de balise
+			50 => 'color: #FF851D;', // filtres de balise
 
 			// echappements
 			101 => '', // \[ \] \{ ...

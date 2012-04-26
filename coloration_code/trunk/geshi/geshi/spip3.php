@@ -38,15 +38,15 @@ function geshi_language_data_spip3_styles($export_for_keywords = false) {
 			11 => 'color: #527EE0;', // (TABLE)
 			12 => 'color: #984CFF;', // {criteres}
 
-			20 => 'color: #CA5200;', // #BALISE
-			21 => 'color: #e72;', // #x:BALISE (x:)
-			22 => 'color: #E1861A;', // #BALISE** (**)
+			20 => 'color: #D05000;', // #BALISE
+			21 => 'color: #1DA3DD;', // #x:BALISE (x:)
+			22 => 'color: #FF4E00;', // #BALISE** (**)
 			
-			25 => 'color: #F25E00;', // [ de [(#BALISE)]
-			26 => 'color: #F25E00;', // ( de [(#BALISE)]
+			25 => 'color: #D05000;', // [ de [(#BALISE)]
+			26 => 'color: #D05000;', // ( de [(#BALISE)]
 
-			30 => 'color: #F25E00;', // |filtre
-			31 => 'color: #F25E00;', // {parametre}
+			30 => 'color: #FF851D;', // |filtre
+			31 => 'color: #FF851D;', // {parametre}
 			32 => 'color: #74B900;', // {parametre, x} (parametre et x)
 
 			40 => 'color: #EB2D2B;', // <INCLURE />
