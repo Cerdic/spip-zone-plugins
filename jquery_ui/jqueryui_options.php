@@ -2,8 +2,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_DIR_JQUERYUI_JS','javascript/jquery-ui-1.8.16/ui/');
-define('_DIR_JQUERYUI_CSS','javascript/jquery-ui-1.8.16/themes/');
+define('_DIR_JQUERYUI_JS','javascript/jquery-ui/ui/');
+define('_DIR_JQUERYUI_CSS','javascript/jquery-ui/themes/');
 
 /**
  * Fonction pour lister les ss-repertoires de themes/ de jQuery UI
