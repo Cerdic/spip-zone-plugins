@@ -18,7 +18,11 @@ function seminaire_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	cextras_api_upgrade(seminaire_declarer_champs_extras(), $maj['create']);
-
+	/**activer les mots clés et leur configuration avancée s'ils ne le sont pas déjà**/
+	 if ($GLOBALS['meta']['articles_mots']!=oui){
+	 	ecrire_meta("articles_mots", "oui");
+	 	ecrire_meta("config_precise_groupes", "oui");
+	 	}
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
