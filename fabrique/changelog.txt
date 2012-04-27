@@ -4,6 +4,19 @@ Ce plugin génère d'autres plugins !
 
 
 
+1.14.0 le 27 04 2012
+--------------------
+
+Interface :
+* Permettre d'indiquer que l'on veut un champ id_secteur en meme temps que id_rubrique
+
+Dans le plugin généré :
+* Gérer le critère id_secteur sur les listes
+* Ajout de KEY sur certains champs lorsqu'ils sont là (id_secteur, lang, statut, id_trad)
+* Ajout du texte par défaut en cas de liste vide sur le squelette alternatif prive/squelette/contenu/objets
+  comme dans son homologue echafaudé par SPIP
+
+
 
 
 1.13.4 le 25 04 2012

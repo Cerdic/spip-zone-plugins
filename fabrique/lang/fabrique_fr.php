@@ -186,6 +186,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_champ_date_publication' => 'Champ SQL de date',
 	'label_champ_date_publication_explication' => 'Pour gérer une date de publication, indiquez son champ, tel que «&nbsp;date&nbsp;» ou «&nbsp;date_publication&nbsp;»',
 	'label_champ_id_rubrique' => 'Créer le champ <strong>id_rubrique</strong>',
+	'label_champ_id_secteur' => 'Créer le champ <strong>id_secteur</strong>',
 	'label_champ_lang_et_langue_choisie' => 'Champs <strong>lang</strong> et <strong>langue_choisie</strong>',
 	'label_champ_id_trad' => 'Champ <strong>id_trad</strong>',
 	'label_champ_langues' => 'Gestion des langues',

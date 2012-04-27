@@ -174,7 +174,7 @@ function champ_present($objet, $champ) {
 			}
 		}
 	}
-	// id_rubrique
+	// id_rubrique, id_secteur
 	if (is_array($objet['rubriques'])) {
 		if (in_array($champ, $objet['rubriques'])) {
 			return " "; // true

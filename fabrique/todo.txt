@@ -1,8 +1,13 @@
 
 
 À faire
-- lies des objets aux articles
+- afficher une liste des articles (ou autre) sur la vue d'un objet créé permettant les liaisons avec celui-ci.
 - supprimer les liaisons vers notre objet à la désinstallation
+
+- ? lorsqu'on utilise les statuts
+  - proposer de séparer par statut sur la page de liste des objets
+  - si id_auteur, proposer un onglet sur cette page vers ses objets à soi (comme mes articles)
+  - si id_rubrique, proposer de séparer les listes aussi comme les articles|breves (publie, proposés, rédac)
 
 Question
 - dans la médiathèque, sur l'éditeur de document,
