@@ -13,6 +13,23 @@ function relecture_ajouter_onglets($flux) {
 
 
 /**
+ * Affichage en rappel dans la page d'accueil pour l'auteur connecte :
+ * - des relectures a lesquelles il participe en tant que relecteur
+ * - des relectures qu'il administre en tant qu'auteur de l'article
+ *
+ * @param array $flux
+ * @return array
+ *
+**/
+function relecture_accueil_encours($flux) {
+
+	$flux .= recuperer_fond('prive/squelettes/contenu/accueil-relectures');
+
+	return $flux;
+}
+
+
+/**
  * Affichage du bloc relecture de l'article en cours d'affichage :
  * - bouton ouvrir une relecture
  * - ou informations sur la relecture en cours
