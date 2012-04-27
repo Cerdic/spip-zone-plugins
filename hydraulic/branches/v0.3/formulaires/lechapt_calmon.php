@@ -45,11 +45,11 @@ function mes_champs_coeff_materiau() {
 
 function mes_champs_sans_coeff_materiau(){
 	$mes_champs_sans_coeff = array(
-			'Q' => _T('hydraulic:param_Q'),
-			'D' => _T('hydraulic:param_D'),
-			'J' => _T('hydraulic:param_J'),
-			'Lg' => _T('hydraulic:param_Lg')
-		);
+		'Q' => _T('hydraulic:param_Q'),
+		'D' => _T('hydraulic:param_D'),
+		'J' => _T('hydraulic:param_J'),
+		'Lg' => _T('hydraulic:param_Lg')
+	);
 	
 	return $mes_champs_sans_coeff;
 }

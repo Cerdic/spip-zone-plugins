@@ -158,6 +158,7 @@ function formulaires_calcul_normale_critique_charger_dist() {
             }
         }
     }
+    
     return $valeurs;
 }
 
@@ -296,20 +297,29 @@ function formulaires_calcul_normale_critique_traiter_dist(){
     }
 
     $max += $pas/2;
-    for($i = $min; $i <= $max; $i+= $pas){
-        $oSection->Reset(true);
-        foreach($tVarCal as $sCalc){
-            $rY = $oSection->rY;
-            if(!in_array($sCalc,array('Yn', 'Yc', 'Hsc'))){
-                $result[] = $oSection->Calc($sCalc);
-            }
-            else{
-                $result[] = $oSection->CalcGeo($sCalc);
-            }
-            $oSection->rY = $rY;
-        }
+    
+    $bNoCache = false; // true pour débugage
+	if(!$bNoCache && is_file(HYD_CACHE_DIRECTORY.$CacheFileName)) {
+        // On récupère toutes les données dans un cache déjà créé
+        $result = ReadCacheFile($CacheFileName);
     }
-
+    else{
+		for($i = $min; $i <= $max; $i+= $pas){
+			$oSection->Reset(true);
+			foreach($tVarCal as $sCalc){
+				$rY = $oSection->rY;
+				if(!in_array($sCalc,array('Yn', 'Yc', 'Hsc'))){
+					$result[] = $oSection->Calc($sCalc);
+				}
+				else{
+					$result[] = $oSection->CalcGeo($sCalc);
+				}
+				$oSection->rY = $rY;
+			}
+		}
+		//Enregistrement des données dans fichier cache
+        WriteCacheFile($CacheFileName,$result);
+	}
     /***************************************************************************
     *                             Une valeur varie
     ****************************************************************************/

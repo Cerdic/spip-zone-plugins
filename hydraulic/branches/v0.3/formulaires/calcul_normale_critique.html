@@ -4,6 +4,17 @@
 <script language="javascript" type="text/javascript" src="#CHEMIN{js/jquery.drawinglibrary.js}"></script>
 		
 <script>
+function elementsParClasse(classe, tagName){
+	var divs = document.getElementsByTagName(tagName);
+    var resultats = new Array();
+    for(var i=0; i<divs.length; i++){
+		if(divs[i].className == classe){
+			resultats.push(divs[i]);
+        }
+    }
+    return resultats;	
+}
+
 var globSelectSection = 'FT';
 
 function setVarGlob(){
@@ -13,7 +24,7 @@ function setVarGlob(){
 function resetAffichageChamps(nom){
 	setVarGlob();
 	if(nom){
-		var cacher = document.getElementsByClassName('champs_var_'+nom);
+		var cacher = elementsParClasse('champs_var_'+nom, 'tr');
 		for(var i in cacher){
 			cacher[i].style.display='none';
 		}
@@ -37,7 +48,7 @@ function resetAffichageChamps(nom){
 			
 			document.getElementById('val_fixe_'+tab[i]).checked=true;
 			document.getElementById('caract_'+tab[i]).disabled=false;
-			var cacher = document.getElementsByClassName('champs_var_'+tab[i]);
+			var cacher = elementsParClasse('champs_var_'+tab[i], 'tr');
 			for(var i in cacher){
 				cacher[i].style.display='none';
 			}
@@ -103,7 +114,7 @@ function gestion_radios(nom, valeur){
 		document.getElementById('val_a_cal_field_nc').style.display='table-row';
 		document.getElementById('val_a_cal_nc').style.display='table-row';
 		document.getElementById('caract_'+nom).disabled=true;	
-		var afficher = document.getElementsByClassName('champs_var_'+nom);
+		var afficher = elementsParClasse('champs_var_'+nom, 'tr');
 		for(var i in afficher){
 			afficher[i].style.display='table-row';
 		}	

@@ -28,7 +28,6 @@ include_spip('hyd_inc/section');
  * On travaille avec les libelles non traduits pour pouvoir gérer
  * le multilinguisme.
  */
-
 function mes_saisies_section() {
 
     // On récupère les champs communs à tous les formulaires à savoir les champs de section.
@@ -78,12 +77,11 @@ function champs_obligatoires() {
             // ... alors on parcourt notre deuxième tableau en ajoutant les champs nécessaires.
             foreach($FieldSet[1] as $Cle=>$Champ) {
                 if((!isset($Champ[2])) || (isset($Champ[2]) && $Champ[2])) {
-                    $tChOblig[] = $IdFS.'_'.$Cle.'_cr';
+                    $tChOblig[] = $IdFS.'_'.$Cle;
                 }
             }
         }
     }
-
     return $tChOblig;
 }
 
@@ -95,9 +93,10 @@ function formulaires_courbe_remous_charger_dist() {
         'mes_saisies' => $tSaisie_section
     );
 
+	// On charge tous les champs avec leur valeur
     foreach($tSaisie_section as $CleFD=>$FieldSet) {
         foreach($FieldSet[1] as $Cle=>$Champ) {
-                $valeurs[$CleFD.'_'.$Cle.'_cr'] = $Champ[1];
+			$valeurs[$CleFD.'_'.$Cle] = $Champ[1];
         }
     }
 
@@ -108,7 +107,7 @@ function formulaires_courbe_remous_verifier_dist(){
     $erreurs = array();
     $datas = array();
     $tChOblig= champs_obligatoires();
-    // verifier que les champs obligatoires sont bien là :
+    // On vérifie que les champs obligatoires sont bien là :
     foreach($tChOblig as $obligatoire) {
         if (!_request($obligatoire)) {
             $erreurs[$obligatoire] = _T('hydraulic:champ_obligatoire');}
@@ -117,6 +116,7 @@ function formulaires_courbe_remous_verifier_dist(){
         }
     }
 
+	// Gestion des valeurs négatives
     foreach($datas as $champ=>$data) {
         if ($data < 0) $erreurs[$champ] = _T('hydraulic:valeur_positive');
     }
@@ -142,15 +142,16 @@ function formulaires_courbe_remous_traiter_dist(){
     $tChUtil = array();
     $crTypeSection = _request('crTypeSection');
 
+	// On récupère tous les champs utiles, à savoir les champs fixes, et les champs appartenant à la section choisie
     foreach($tSaisie as $IdFS=>$FieldSet) {
         if((substr($IdFS,0,1) != 'F') || ($IdFS == $crTypeSection)){
             foreach($FieldSet[1] as $Cle=>$Champ) {
-                    $tChUtil[] = $IdFS.'_'.$Cle.'_cr';
+				$tChUtil[] = $IdFS.'_'.$Cle;
             }
         }
     }
 
-    //On récupère les données
+    //On récupère tous les champs utiles dans le tableau datas
     foreach($tChUtil as $champ) {
         if (_request($champ)){
             $datas[$champ] = _request($champ);
@@ -175,29 +176,30 @@ function formulaires_courbe_remous_traiter_dist(){
 
     // Contrôle du nombre de pas d'espace maximum
     $iPasMax = 1000;
-    if($Caract_bief_rLong_cr / $Param_calc_rDx_cr > $iPasMax) {
-        $Param_calc_rDx_cr = $Caract_bief_rLong_cr / $iPasMax;
-        $oLog->Add(_T('hydraulic:pas_nombre').' > '.$iPasMax.' => '._T('hydraulic:pas_ajustement').$Param_calc_rDx_cr.' m');
+    if($Caract_bief_rLong / $Param_calc_rDx > $iPasMax) {
+        $Param_calc_rDx = $Caract_bief_rLong / $iPasMax;
+        $oLog->Add(_T('hydraulic:pas_nombre').' > '.$iPasMax.' => '._T('hydraulic:pas_ajustement').$Param_calc_rDx.' m');
     }
     //spip_log(array($Cond_lim_rYaval,$Caract_bief_rKs,$Cond_lim_rQ,$Caract_bief_rLong,$Caract_bief_rIf,$Param_calc_rDx,$Param_calc_rPrec),'hydraulic');
 
     // Enregistrement des paramètres dans les classes qui vont bien
-    $oParam= new cParam($Caract_bief_rKs_cr,$Cond_lim_rQ_cr,$Caract_bief_rIf_cr,$Param_calc_rPrec_cr,$Caract_bief_rYBerge_cr,$Cond_lim_rYaval_cr,$Param_calc_rDx_cr,$Caract_bief_rLong_cr);
+    $oParam= new cParam($Caract_bief_rKs,$Cond_lim_rQ,$Caract_bief_rIf,$Param_calc_rPrec,$Caract_bief_rYBerge,$Cond_lim_rYaval,$Param_calc_rDx,$Caract_bief_rLong);
 
+	// Création d'un objet de type Section selon la section choisie. 
     switch($crTypeSection) {
         case 'FT':
             include_spip('hyd_inc/sectionTrapez.class');
-            $oSection=new cSnTrapez($oLog,$oParam,$FT_rLargeurFond_cr,$FT_rFruit_cr);
+            $oSection=new cSnTrapez($oLog,$oParam,$FT_rLargeurFond,$FT_rFruit);
             break;
 
         case 'FR':
             include_spip('hyd_inc/sectionRectang.class');
-            $oSection=new cSnRectang($oLog,$oParam,$FR_rLarg_cr);
+            $oSection=new cSnRectang($oLog,$oParam,$FR_rLarg);
             break;
 
         case 'FC':
             include_spip('hyd_inc/sectionCirc.class');
-            $oSection=new cSnCirc($oLog,$oParam,$FC_rD_cr);
+            $oSection=new cSnCirc($oLog,$oParam,$FC_rD);
             break;
 
         case 'FP':
@@ -207,7 +209,7 @@ function formulaires_courbe_remous_traiter_dist(){
 
         default:
             include_spip('hyd_inc/sectionTrapez.class');
-            $oSection=new cSnTrapeze($oLog,$oParam,$FT_rLargeurFond_cr,$FT_rFruit_cr);
+            $oSection=new cSnTrapeze($oLog,$oParam,$FT_rLargeurFond,$FT_rFruit);
     }
 
     /***************************************************************************
@@ -225,7 +227,7 @@ function formulaires_courbe_remous_traiter_dist(){
         $oLog->Add(_T('hydraulic:h_normale').' = '.format_nombre($oSection->CalcGeo('Yn'),$oParam->iPrec).' m');
 
         // Calcul depuis l'aval
-        if($oSection->rHautCritique <= $Cond_lim_rYaval_cr) {
+        if($oSection->rHautCritique <= $Cond_lim_rYaval) {
             $oLog->Add(_T('hydraulic:calcul_fluvial'));
             list($tr['X1'],$tr['Y1']) = calcul_courbe_remous($oParam,$oSection,$oLog,$oParam->iPrec);
         }
@@ -234,9 +236,9 @@ function formulaires_courbe_remous_traiter_dist(){
         }
 
         // Calcul depuis l'amont
-        if($oSection->rHautCritique >= $Cond_lim_rYamont_cr) {
+        if($oSection->rHautCritique >= $Cond_lim_rYamont) {
             $oLog->Add(_T('hydraulic:calcul_torrentiel'));
-            $oParam->rYCL = $Cond_lim_rYamont_cr; // Condition limite amont
+            $oParam->rYCL = $Cond_lim_rYamont; // Condition limite amont
             $oParam->rDx = -$oParam->rDx; // un pas négatif force le calcul à partir de l'amont
             list($tr['X2'],$tr['Y2']) = calcul_courbe_remous($oParam,$oSection,$oLog,$oParam->iPrec);
         }
@@ -310,7 +312,7 @@ function formulaires_courbe_remous_traiter_dist(){
         'lineWidth:2');
 
     // Décalage des données par rapport au fond
-    $oGraph->Decal(0, $Caract_bief_rIf_cr, $Caract_bief_rLong_cr);
+    $oGraph->Decal(0, $Caract_bief_rIf, $Caract_bief_rLong);
 
     // Récupération du graphique
     $echo .= $oGraph->GetGraph('courbe_remous',400,600);
@@ -343,6 +345,7 @@ function formulaires_courbe_remous_traiter_dist(){
         $echo.=($i%2==0)?'row_even':'row_odd';
         $echo.='"><td>'.format_nombre($rX,$oParam->iPrec).'</td>';
         if(isset($tr['X1']) && !(($cle = array_search($rX,$tr['X1'])) === false)) {
+			// On formalise les résultats, avec le nombre de chiffres aprés la virgule adéquat
             $echo .= '<td>'.format_nombre($tr['Y1'][$cle],$oParam->iPrec).'</td>';
             $echo .= '<td>'.format_nombre($oSection->Calc('Fr', $tr['Y1'][$cle]),$oParam->iPrec).'</td>';
         }
