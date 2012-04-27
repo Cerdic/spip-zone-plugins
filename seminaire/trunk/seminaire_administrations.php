@@ -22,6 +22,7 @@ function seminaire_upgrade($nom_meta_base_version, $version_cible) {
 	 if ($GLOBALS['meta']['articles_mots']!=oui){
 	 	ecrire_meta("articles_mots", "oui");
 	 	ecrire_meta("config_precise_groupes", "oui");
+	 	ecrire_meta("documents_objets", "spip_evenements");	
 	 	}
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
