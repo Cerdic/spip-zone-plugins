@@ -65,11 +65,11 @@ function image_mashup($im, $masque, $bord, $background_color)
 	if (!$image) return("");
 	
 	$dest = $image["fichier_dest"];
-	
-	//if ($image["creer"])
-	{	$l = $image["largeur"]+ 2*$bord;
-		$h = $image["hauteur"]+ 2*$bord;
-		$im = $image["fichier"];
+	$l = $image["largeur"]+ 2*$bord;
+	$h = $image["hauteur"]+ 2*$bord;
+			
+	if ($image["creer"])
+	{	$im = $image["fichier"];
 
 		// images sources et destination
 		$im = $image["fonction_imagecreatefrom"]($im);
@@ -108,7 +108,7 @@ function image_mashup($im, $masque, $bord, $background_color)
 	}
 
 	// SPIP
-	return image_ecrire_tag($image,array('src'=>$dest));
+	return image_ecrire_tag($image,array('src'=>$dest,'width'=>$l,'height'=>$h));
 }
 
 /** Calcul d'un logo pour affichage sur la carte (necessite GD2).
