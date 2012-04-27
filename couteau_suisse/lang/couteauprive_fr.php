@@ -61,7 +61,7 @@ Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [
 	'autobr:nom' => 'Retours de ligne automatiques',
 	'autobr_non' => 'À l\'intérieur des balises &lt;alinea>&lt;/alinea>',
 	'autobr_oui' => 'Articles et messages publics (balises @BALISES@)',
-	'autobr_racc' => 'Retours de ligne : <b><alinea></alinea></b>',
+	'autobr_racc' => 'Retours de ligne : <b>&lt;alinea>&lt;/alinea></b>',
 
 	// B
 	'balise_set:description' => 'Afin d\'alléger les écritures du type <code>#SET{x,#GET{x}|un_filtre}</code>, cet outil vous offre le raccourci suivant : <code>#SET_UN_FILTRE{x}</code>. Le filtre appliqué à une variable passe donc dans le nom de la balise.
@@ -392,14 +392,15 @@ Pour définir ce logo, rendez-vous sur la page «<:titre_configuration:>» en cl
 	'insert_head:nom' => 'Balise #INSERT_HEAD',
 	'insertions:description' => 'ATTENTION : outil en cours de développement !! [[%insertions%]]',
 	'insertions:nom' => 'Corrections automatiques',
-	'introduction:description' => 'Cette balise à placer dans les squelettes sert en général à la une ou dans les rubriques afin de produire un résumé des articles, des brèves, etc..</p>
-<p>{{Attention}} : Avant d\'activer cette fonctionnalité, vérifiez bien qu\'aucune fonction {balise_INTRODUCTION()} n\'existe déjà dans votre squelette ou vos plugins, la surcharge produirait alors une erreur de compilation.</p>
-@puce@ Vous pouvez préciser (en pourcentage par rapport à la valeur utilisée par défaut) la longueur du texte renvoyé par balise #INTRODUCTION. Une valeur nulle ou égale à 100 ne modifie pas l\'aspect de l\'introduction et utilise donc les valeurs par défaut suivantes : 500 caractères pour les articles, 300 pour les brèves et 600 pour les forums ou les rubriques.
-[[%lgr_introduction% %]]
-@puce@ Par défaut, les points de suite ajoutés au résultat de la balise #INTRODUCTION si le texte est trop long sont : <html>«&nbsp;(…)»</html>. Vous pouvez ici préciser votre propre chaîne de caractère indiquant au lecteur que le texte tronqué a bien une suite.
-[[%suite_introduction%]]
-@puce@ Si la balise #INTRODUCTION est utilisée pour résumer un article, alors le Couteau Suisse peut fabriquer un lien hypertexte sur les points de suite définis ci-dessus afin de mener le lecteur vers le texte original. Par exemple : «Lire la suite de l\'article…»
-[[%lien_introduction%]]',
+	'introduction:description' => 'Cette balise à placer dans les squelettes sert en général à la une ou dans les rubriques afin de produire un résumé des articles, des brèves, etc..
+
+{{Attention}} : Avant d\'activer cette fonctionnalité, vérifiez bien qu\'aucune fonction {balise_INTRODUCTION()} n\'existe déjà dans votre squelette ou vos plugins, la surcharge produirait alors une erreur de compilation.
+
+@puce@ Vous pouvez préciser (en pourcentage par rapport à la valeur utilisée par défaut) la longueur du texte renvoyé par balise #INTRODUCTION. Une valeur nulle ou égale à 100 ne modifie pas l\'aspect de l\'introduction et utilise donc les valeurs par défaut suivantes : 500 caractères pour les articles, 300 pour les brèves et 600 pour les forums ou les rubriques.[[%lgr_introduction% %]]
+
+@puce@ Par défaut, les points de suite ajoutés au résultat de la balise #INTRODUCTION si le texte est trop long sont : <html>«&nbsp;(…)»</html>. Vous pouvez ici préciser votre propre chaîne de caractère indiquant au lecteur que le texte tronqué a bien une suite.[[%suite_introduction%]]
+
+@puce@ Si la balise #INTRODUCTION est utilisée pour résumer un article, alors le Couteau Suisse peut fabriquer un lien hypertexte sur les points de suite définis ci-dessus afin de mener le lecteur vers le texte original. Par exemple : «Lire la suite de l\'article…»[[%lien_introduction%]]',
 	'introduction:nom' => 'Balise #INTRODUCTION',
 
 	// J
