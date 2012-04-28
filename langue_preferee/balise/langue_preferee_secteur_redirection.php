@@ -46,15 +46,20 @@ function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION_dyn($liste_rub_exclues="")
 			$langues_secteurs[] = $row['lang'];
 		}
 	}
-
-	// Detection de la langue preferee
+	// Détection de la langue preferee
 	if (isset($_GET['lang']) && in_array($_GET['lang'], $langues_secteurs)) {
 		// Soit passee dans l'url, auquel cas c'est un choix qu'on conserve pour la suite
 		$langue_preferee = $_GET['lang'];
 		include_spip('inc/cookie');
 		// On pose un cookie d'un an de duree de vie
 		spip_setcookie('spip_langue_preferee', $langue_preferee, time() + 3660*24*365, chemin_cookie());
-	} elseif (isset($_COOKIE['spip_langue_preferee']) && in_array($_COOKIE['spip_langue_preferee'], $langues_secteurs)) {
+	} elseif(isset($_COOKIE['spip_lang']) && in_array($_COOKIE['spip_lang'], $langues_secteurs)){
+		//Soit un cookie lang est présent
+		$langue_preferee = $_COOKIE['spip_lang'];
+		include_spip('inc/cookie');
+		// On pose un cookie d'un an de duree de vie
+		spip_setcookie('spip_langue_preferee', $langue_preferee, time() + 3660*24*365, chemin_cookie());
+	}elseif (isset($_COOKIE['spip_langue_preferee']) && in_array($_COOKIE['spip_langue_preferee'], $langues_secteurs)) {
 		// Soit deja enregistree dans un cookie
 		$langue_preferee = $_COOKIE['spip_langue_preferee'];
 	} else {
