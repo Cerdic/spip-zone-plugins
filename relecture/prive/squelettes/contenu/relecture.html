@@ -63,14 +63,14 @@
 	</div>
 
 	<div id="accordion">
-		[<h3>descr</h3>
-		<div>(#ARTICLE_DESCR)</div>]
-		[<h3>chapeau</h3>
-		<div>(#ARTICLE_CHAPO)</div>]
-		[<h3>texte</h3>
-		<div>(#ARTICLE_TEXTE)</div>]
-		[<h3>ps</h3>
-		<div>(#ARTICLE_PS)</div>]
+		[<h3><a href="#">descr</a></h3>
+		<div>(#ARTICLE_DESCR|trim)</div>]
+		[<h3><a href="#">chapeau</a></h3>
+		<div>(#ARTICLE_CHAPO|trim)</div>]
+		[<h3><a href="#">texte</a></h3>
+		<div>(#ARTICLE_TEXTE|trim)</div>]
+		[<h3><a href="#">ps</a></h3>
+		<div>(#ARTICLE_PS|trim)</div>]
 	</div>
 
 	<div class="nettoyeur"></div>
@@ -104,7 +104,7 @@
 <//B_relecture>
 
 <script>
- $(document).ready(function() {
-	 $("#accordion").accordion();
- });
- </script>
+	$(function() {
+		$( "#accordion" ).accordion();
+	});
+</script>

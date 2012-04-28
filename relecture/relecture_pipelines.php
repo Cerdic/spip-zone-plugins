@@ -10,6 +10,7 @@
 **/
 function relecture_jqueryui_plugins($scripts) {
 
+	$scripts[] = "javascript/ui/jquery.ui.widget.js";
 	$scripts[] = "javascript/ui/jquery.ui.accordion.js";
 
 	return $scripts;
