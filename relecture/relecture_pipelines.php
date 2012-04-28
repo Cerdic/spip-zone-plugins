@@ -1,29 +1,20 @@
 <?php
 
-/**
- * Ajout de l'onglet Ajouter les plugins dont l'url depend du l'existence ou pas d'un depot
- * de plugins
- *
- * @param array $flux
- * @return array
- */
-function relecture_ajouter_onglets($flux) {
-    return $flux;
-}
-
 
 /**
  * Affichage en rappel dans la page d'accueil pour l'auteur connecte :
- * - des relectures a lesquelles il participe en tant que relecteur
+ * - des relectures auxquelles il participe en tant que relecteur
  * - des relectures qu'il administre en tant qu'auteur de l'article
  *
  * @param array $flux
  * @return array
  *
 **/
-function relecture_accueil_encours($flux) {
+function relecture_affiche_milieu($flux) {
 
-	$flux .= recuperer_fond('prive/squelettes/contenu/accueil-relectures');
+	if (($type = $flux['args']['type-page'])=='accueil') {
+		$flux['data'] .= recuperer_fond('prive/squelettes/contenu/accueil-relectures');
+	}
 
 	return $flux;
 }

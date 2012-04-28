@@ -1,5 +1,5 @@
 [(#REM) <!-- Liste des relectures :
-	- soit en cours pour un relecteue ou auteur donne
+	- soit en cours pour une relecture ou auteur donne
 	- soit du meme article en excluant la relecture en cours d'affichage
 	Dans ces differents cas les informations different car la taille des blocs influe sur l'affichage.
 
@@ -7,8 +7,10 @@
 	- titre     : le titre de la liste
 	- par       : le champ tri principal
 	- pas       : le pas de pagination
-	- recherche : critere de recherche
-	- where     : condition d'exclusion de certaines relectures
+	- id_article: l'id de l'article lie aux relectures (facultatif)
+	- statut    : le statut des relectures cherchees (facultatif)
+	- recherche : critere de recherche (facultatif)
+	- where     : condition d'exclusion de certaines relectures (facultatif)
 	- affichage : complet, tous les champs, ou simplifie, le titre et l'id pour la liste en extra/navigation
  -->]
 
@@ -26,6 +28,7 @@
 			<tr class="first_row">
 				<th class="statut" scope="col">[(#TRI{statut, <span title="<:lien_trier_statut|attribut_html:>">#</span>, ajax})]</th>
 				<th class="titre principale" scope="col">[(#TRI{id_relecture, <:info_titre:>, ajax})]</th>
+				<th class="date" scope="col">[(#TRI{date_fin_commentaire, <relecture:label_abrege_date_fin_commentaire:>, ajax})]</th>
 				<th class="revision" scope="col">[(#TRI{revision_ouverture, <:relecture:label_relecture_revision_abregee:>, ajax})]</th>
 			</tr>
 		</thead>
@@ -41,6 +44,9 @@
 						</a>]}
 					)]
 				</td>
+			[(#ENV{affichage}|=={complet}|oui)
+				<td>[(#DATE_FIN_COMMENTAIRE|affdate_court)]</td>
+			]
 				<td class='id'>
 					[(#SET{url_revision, [(#URL_ECRIRE{revision, objet=article}
 											|parametre_url{id_objet, #ID_ARTICLE}

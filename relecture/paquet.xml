@@ -7,7 +7,8 @@
 	logo="relecture-64.png"
 	schema="1"
 	documentation="http://blog.smellup.net/spip.php?article53"
->	
+	developpement="http://blog.smellup.net/spip.php?article53"
+>
 
 	<nom>Relecture</nom>
 	<!-- Organiser la relecture de vos articles -->
@@ -25,7 +26,7 @@
 	<pipeline nom="formulaire_charger" inclure="relecture_pipelines.php" />
 	<pipeline nom="pre_insertion" inclure="relecture_pipelines.php" />
 	<pipeline nom="pre_edition" inclure="relecture_pipelines.php" />
-	<pipeline nom="accueil_encours" inclure="relecture_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="relecture_pipelines.php" />
 
 	<necessite nom="revisions" compatibilite="[1.6.5;[" />
 </paquet>
