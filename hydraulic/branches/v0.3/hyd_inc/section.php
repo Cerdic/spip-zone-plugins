@@ -22,6 +22,9 @@
  *      MA 02110-1301, USA.
  */
 
+/*
+ * Caractéristiques des différents types de section. 
+ */
 function caract_communes() {
 
     $caract_com = array(

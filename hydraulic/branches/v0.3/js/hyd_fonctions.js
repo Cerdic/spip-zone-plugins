@@ -14,3 +14,4 @@ function getRadioValue(radioId){
 	}
 	return choix;
 }
+

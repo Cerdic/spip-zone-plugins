@@ -139,7 +139,7 @@ class dessinSection {
                 break;
 
             case 'FC':
-                
+					// Trouver une méthode de dessin pour les sections circulaires
                 break;
 
             case 'FP':

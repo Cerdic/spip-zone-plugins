@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'calcul_torrentiel'=> "Condition limite amont <= Hauteur critique : calcul de la partie torrentielle à partir de l'amont",
     'champ_obligatoire'=> "Ce champ est obligatoire",
     'choix_materiau'  => "Choix du matériau",
-    'caract_lechapt_calmon' => "Caractéristiques",
+    'caract'          => "Caractéristiques",
     'calculer_lechapt_calmon' => "Calcul avec la formule de Lechapt et Calmon",
     'calcul_val'      => "Paramètre à calculer",
     'choix_section'   => "Choix de la section",
@@ -27,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'choix_donnee_calc' => "Choix de la donnée à calculer",
     'charge_critique' => "La charge critique (m)",
     'cote_eau'        => "Côte de l'eau (m)",
+    'coef'            => "Coefficient",
     // D
     'debit_amont'     => "Débit amont (m³/s)",
     'def_section_trap'=> "Définition de la section trapézoïdale",
