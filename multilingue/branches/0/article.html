@@ -1,0 +1,4 @@
+[(#REM) Choisis le squelettes selon la version spip, les squelettes inclus puevent être utilisé tels quels, il suffit de renommer le squelette correspondant à votre version]
+
+[(#SPIP_VERSION|version_compare{2.1.99, >}|non)<INCLURE{fond=article_spip2,env}/>]
+[(#SPIP_VERSION|version_compare{2.1.99, >}|oui)<INCLURE{fond=article_spip3,env}/>]

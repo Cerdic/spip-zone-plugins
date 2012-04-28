@@ -1,0 +1,21 @@
+<paquet
+	prefix="multilingue"
+	categorie="edition"
+	version="0.0.1"
+	etat="test"
+	compatibilite="[2.0.0;3.0.*]"
+	logo="prive/themes/spip/images/multilingue-64.png"
+	documentation=""
+>
+	<nom>Site multilingue facile</nom>
+
+	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs --> 
+	<auteur lien='http://www.mychacra.net/'>Rainer Müller</auteur>
+
+	<licence>GNU/GPL</licence>
+
+		<necessite nom="tradrub" compatibilite="[3.0.0;[" />
+		<necessite nom="languepreferee" compatibilite="[0.4.0;[" />				
+		<necessite nom="trad_rub" compatibilite="[1.1.0;]" />				
+		<necessite nom="taa" compatibilite="[1.1.0;[" />		
+</paquet>
