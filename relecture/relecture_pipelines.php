@@ -2,6 +2,21 @@
 
 
 /**
+ * Inclusion dans les pages du prive du script jquery ui accordion
+ *
+ * @param array $script
+ * @return array
+ *
+**/
+function relecture_jqueryui_plugins($scripts) {
+
+	$scripts[] = "javascript/ui/jquery.ui.accordion.js";
+
+	return $scripts;
+}
+
+
+/**
  * Affichage en rappel dans la page d'accueil pour l'auteur connecte :
  * - des relectures auxquelles il participe en tant que relecteur
  * - des relectures qu'il administre en tant qu'auteur de l'article

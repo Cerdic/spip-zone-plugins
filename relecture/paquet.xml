@@ -27,6 +27,7 @@
 	<pipeline nom="pre_insertion" inclure="relecture_pipelines.php" />
 	<pipeline nom="pre_edition" inclure="relecture_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="relecture_pipelines.php" />
+	<pipeline nom="jqueryui_plugins" inclure="relecture_pipelines.php" />
 
 	<necessite nom="revisions" compatibilite="[1.6.5;[" />
 </paquet>
