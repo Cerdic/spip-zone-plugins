@@ -25,13 +25,12 @@
 		</p>
 		[<p>(#ID_RELECTURE|relecture_informer_commentaires)</p>]
 
-	#SET{pied, #BOITE_PIED}
-	[(#AUTORISER{modifier, relecture, #ID_RELECTURE})
-		[(#GET{pied}|unique)]
-		[(#BOUTON_ACTION{<:relecture:bouton_configurer_relecture:>, #URL_ECRIRE{relecture, id_relecture=#ID_RELECTURE}, '', '', ''})]
-	]
+	#BOITE_PIED
+	[(#AUTORISER{modifier, relecture, #ID_RELECTURE}|?{
+		[(#BOUTON_ACTION{<:relecture:bouton_configurer_relecture:>, #URL_ECRIRE{relecture, id_relecture=#ID_RELECTURE}, '', '', ''})],
+		[(#BOUTON_ACTION{<:relecture:bouton_voir_relecture:>, #URL_ECRIRE{relecture, id_relecture=#ID_RELECTURE}, '', '', ''})]}
+	)]
 	[(#AUTORISER{commenter, relecture, #ID_RELECTURE})
-		[(#GET{pied}|unique)]
 		[(#BOUTON_ACTION{<:relecture:bouton_participer_relecture:>, #URL_ECRIRE{relecture_comment, id_relecture=#ID_RELECTURE}, '', '', ''})]
 	]
 	#BOITE_FERMER

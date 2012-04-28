@@ -36,7 +36,7 @@ function relecture_affiche_gauche($flux) {
 			$table = table_objet($type);
 			$id_table_objet = id_table_objet($type);
 
-			$flux['data'] .= recuperer_fond('prive/squelettes/navigation/article-relecture_ouverte',
+			$flux['data'] .= recuperer_fond('prive/squelettes/navigation/article-relecture',
 								array($id_table_objet => $id));
 		}
 	}
@@ -90,7 +90,7 @@ function relecture_formulaire_charger($flux){
 		$from = 'spip_relectures';
 		$where = array("id_relecture=$id_objet");
 		$statut = sql_getfetsel('statut', $from, $where);
-		$flux['data']['editable'] = ($statut !== 'fermee');
+		$flux['data']['editable'] = autoriser('modifier', 'relecture', $id_objet);
 
 		if ($form == 'dater') {
 			// Identifier le label comme la date de fin des commentaires
@@ -118,8 +118,7 @@ function relecture_formulaire_charger($flux){
 /**
  * Surcharge de l'insertion standard d'un objet en incluant des traitements prealables pour une relecture :
  * - informations sur l'article
- * - information sur l'ouverture et la date de fin des commentaires
- * - positionnement du statut a ouvert
+ * - date de fin des commentaires
  *
  * @param array $flux
  * @return array
@@ -139,18 +138,11 @@ function relecture_pre_insertion($flux) {
 				$flux['data'][$_cle] = $_valeur;
 			}
 
-			// - mise a jour de la revision d'ouverture
 			// - correction de la date de fin de commentaire positionnee par defaut a cause de la configuration
-			// - mise a jour de la date d'ouverture
-			$from = 'spip_versions';
-			$where = array("objet=" . sql_quote('article'), "id_objet=$id_article");
-			$revision = sql_getfetsel('max(id_version) AS revision_ouverture', $from, $where);
-			$flux['data']['revision_ouverture'] = $revision;
-			$flux['data']['date_ouverture'] = $flux['data']['date_fin_commentaire'];
 			$flux['data']['date_fin_commentaire'] = date('Y-m-d H:i:s', strtotime("+1 week"));
 
-			// - surcharge la valeur du statut mis par le traitement par defaut
-			$flux['data']['statut'] = 'ouverte';
+			// - Le statut, la date d'ouverture et la revision de l'article a l'ouverture sont mis a jour dans la fonction
+			// instituer surchargee dans le pipeline pre_edition
 		}
 	}
 
@@ -160,7 +152,8 @@ function relecture_pre_insertion($flux) {
 
 /**
  * Surcharge de l'action instituer standard d'un objet en incluant des traitements prealables pour une relecture :
- * - date et revision de cloture
+ * - pour une ouverture, on ecrase le statut a ouverte car il est automatiquement mis a prepa par defaut
+ * - pour une cloture, date et revision de cloture
  *
  * @param array $flux
  * @return array
@@ -174,19 +167,41 @@ function relecture_pre_edition($flux) {
 
 	// Traitements particuliers de l'objet relecture dans le cas d'une cloture :
 	if (($table == 'spip_relectures')
-	AND ($action == 'instituer')) {
-		if (($id_relecture) AND ($flux['args']['statut_ancien'] == 'ouverte')) {
-			// - mise a jour de la date de cloture
-			$flux['data']['date_cloture'] = date('Y-m-d H:i:s');
+	AND ($id_relecture)) {
 
-			// - mise a jour de la revision de cloture
+		// Instituer
+		if ($action == 'instituer') {
+
+			// Recherche de l'id de l'article sur lequel porte la relecture
 			$from = 'spip_relectures';
 			$where = array("id_relecture=$id_relecture");
 			$id_article = sql_getfetsel('id_article', $from, $where);
-
+			// Determination de la revision courante de l'article
 			$from = 'spip_versions';
 			$where = array("objet=" . sql_quote('article'), "id_objet=$id_article");
-			$flux['data']['revision_cloture'] = sql_getfetsel('max(id_version) AS revision', $from, $where);
+			$revision = sql_getfetsel('max(id_version) AS revision', $from, $where);
+
+			// -- Ouverture
+			if ($flux['args']['statut_ancien'] == 'prepa') {
+				// - mise a jour du "vrai" statut de la relecture
+				$flux['data']['statut'] = 'ouverte';
+
+				// - mise a jour de la date d'ouverture
+				$flux['data']['date_ouverture'] = date('Y-m-d H:i:s');
+
+				// - mise a jour de la revision d'ouverture
+				$flux['data']['revision_ouverture'] = $revision;
+			}
+
+			// -- Cloture
+			if (($flux['args']['statut_ancien'] == 'ouverte')
+			AND ($flux['data']['statut'] == 'fermee')) {
+				// - mise a jour de la date de cloture
+				$flux['data']['date_cloture'] = date('Y-m-d H:i:s');
+
+				// - mise a jour de la revision de cloture
+				$flux['data']['revision_cloture'] = $revision;
+			}
 		}
 	}
 
