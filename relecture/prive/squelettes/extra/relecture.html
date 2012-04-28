@@ -7,7 +7,7 @@
 	par=date_ouverture,
 	pas=10,
 	where=#GET{exclusion},
-	affichage=simplifie,
+	affichage=menu_navigation,
 	env, ajax}>
 </BOUCLE_relecture_extra>
 	[(#ENV{exec}|=={relecture_edit}|oui)<INCLURE{fond=prive/squelettes/extra/relecture_edit, env} />]
