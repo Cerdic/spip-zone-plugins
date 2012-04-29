@@ -486,7 +486,7 @@ function association_liste_totaux_comptes_classes($classes, $prefixe='', $direct
     }
     echo "</tbody><tfoot>\n<tr>";
     echo '<th colspan="2">&nbsp;</th>';
-    echo '<th class="text">'. _T("asso:$prefixe".'_total_') .'</th>';
+    echo '<th class="text">'. _T("asso:$prefixe".'_total') .'</th>';
     if ($direction) { // mode liste comptable
 	echo '<th class="decimal">'. association_nbrefr($total_valeurs) . '</th>';
     } else { // mode liste standard
