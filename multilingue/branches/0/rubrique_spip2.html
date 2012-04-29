@@ -16,7 +16,7 @@
 <div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
-	<INCLURE{fond=inc-entete}>
+	<INCLURE{fond=inc-entete,id_rubrique}>
 
 	[(#REM) Contenu principal : contenu de la rubrique ]
     <div id="conteneur">
@@ -33,7 +33,7 @@
 
         <div class="cartouche">
             [(#LOGO_RUBRIQUE|image_reduire{200,200})]
-            <h1 class="#EDIT{titre}">#TITRE</h1>
+            <h1 class="#EDIT{titre}">[(#ID_PARENT|!={0}|?{#TITRE,<:accueil_site:>})]</h1>
             [<p><small><:dernier_ajout:> : (#DATE|affdate_jourcourt).</small></p>]
         </div>
 

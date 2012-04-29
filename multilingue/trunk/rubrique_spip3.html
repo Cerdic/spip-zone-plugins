@@ -19,7 +19,7 @@
 <body class="pas_surlignable page_rubrique">
 <div class="page">
 
-	<INCLURE{fond=inclure/header} />
+	<INCLURE{fond=inclure/header,id_rubrique} />
 	<INCLURE{fond=inclure/nav,env} />
 
 	<div class="main">
@@ -35,7 +35,7 @@
 			</p><!--.arbo-->
 	
 			<div class="cartouche">
-				<h1 class="#EDIT{titre}">[(#LOGO_RUBRIQUE|image_reduire{40,*}) ]#TITRE</h1>
+				<h1 class="#EDIT{titre}">[(#LOGO_RUBRIQUE|image_reduire{40,*}) ][(#ID_PARENT|!={0}|?{#TITRE,<:accueil_site:>})]</h1>
 			</div>
 	
 			[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
