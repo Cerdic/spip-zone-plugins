@@ -376,7 +376,7 @@ function association_creer_compte_virement_interne() {
 }
 
 /* on recupere les parametres de requete a passer aux fonctions */
-function association_recupere_parametres_comptables() {
+function association_passe_parametres_comptables($classes=array()) {
     $id_exercice = intval(_request('exercice'));
     if( !$id_exercice ) { // pas d'exercice en parametre
 	$id_exercice = sql_getfetsel('id_exercice', 'spip_asso_exercices', '', '', 'fin DESC'); // on recupere l'id_exercice dont la date "fin" est "la plus grande", c'est a dire l'id de l'exercice le plus recent
@@ -390,7 +390,7 @@ function association_recupere_parametres_comptables() {
     $id_destination = intval(_request('destination'));
     if( !$id_destination ) { // pas de destination
     }
-    return serialize(array($exercice, $destination) );
+    return serialize(array($id_exercice, $id_destination, $classes) ); //!\ les cles numeriques peuvent poser probleme... <http://www.mail-archive.com/php-bugs@lists.php.net/msg100262.html> mais il semble qu'ici le souci vient de l'absence d'encodage lorsqu'on passe $var par URL...
 }
 
 /* on recupere les totaux (recettes et depenses) d'un exercice des differents comptes de la classe specifiee */

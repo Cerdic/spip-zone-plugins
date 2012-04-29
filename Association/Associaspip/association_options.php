@@ -503,7 +503,7 @@ function affichage_div($type_operation,$list_operation)
 /* selecteur d'exercice comptable */
 function association_selectionner_exercice($exercice='', $url_action='') {
     if ($url_action) {
-		$res = '<form method="get" action="'.$url_action.'"><div>';
+		$res = '<form method="post" action="'.$url_action.'"><div>';
     } else {
 		$res = '';
     }
@@ -531,7 +531,7 @@ function association_selectionner_exercice($exercice='', $url_action='') {
 /* selecteur d'exercice comptable */
 function association_selectionner_destination($destination='', $url_action='') {
     if ($url_action) {
-		$res = '<form method="get" action="'.$url_action.'"><div>';
+		$res = '<form method="post" action="'.$url_action.'"><div>';
     } else {
 		$res = '';
     }

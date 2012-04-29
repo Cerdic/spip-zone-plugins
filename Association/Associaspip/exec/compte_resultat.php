@@ -70,10 +70,10 @@ function exec_compte_resultat()
 			echo fin_cadre_enfonce(true);
 		}
 		debut_cadre_association('finances-24.jpg', 'cpte_resultat_titre_general', $exercice_data['intitule']);
-		echo "\n<form method='get' action='".generer_url_ecrire('compte_resultat')."'>\n<table width='100%'><tr>";
+		echo "\n<form method='get' action=''>\n<input type='hidden' name='exec' value='compte_resultat' />\n<table width='100%'><tr>";
 		echo '<td width="50%" align="left">'. association_selectionner_exercice($id_exercice, '') .'</td>';
 		echo '<td width="50%" align="right">'. association_selectionner_destination($id_destination, '') .'</td>';
-		echo "</tr></table>\n</form>\n";
+		echo "</tr>\n</table>\n</form>\n";
 		// liste des charges cumulees par comptes
 		$charges = association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_charges'], 'cpte_resultat', '-1', $id_exercice, $id_destination);
 		// liste des produits cumules par comptes

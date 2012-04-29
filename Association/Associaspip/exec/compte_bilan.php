@@ -46,19 +46,7 @@ function exec_compte_bilan()
 			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$id_exercice".($destination?"&destination=$id_destination":'')),
 #			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$id_exercice".($destination?"&destination=$id_destination":'')),
 		));
-		// elements communs aux requetes
-		if ($plan) {
-			$join = ' RIGHT JOIN spip_asso_plan ON imputation=code';
-			$sel = ', code, intitule, classe';
-			$where = " classe NOT IN (". sql_quote($GLOBALS['association_metas']['classe_charges']) .",". sql_quote($GLOBALS['association_metas']['classe_produits']) .",". sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']) .") AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' ";
-			$having = 'classe';
-			$order = 'code';
-			$union = ' RIGHT JOIN spip_asso_plan ON journal=code';
-		} else {
-			$join = $sel = $where = $having = $order = '';
-		}
-		$var = serialize(array($id_exercice, $join, $sel, $where, $having, $order)); //!\ les cles numeriques peuvent poser probleme... <http://www.mail-archive.com/php-bugs@lists.php.net/msg100262.html> mais il semble qu'ici le souci vient de l'absence d'encodage lorsqu'on passe $var par URL...
-//		$var = serialize(array('id'=>$id_exercice, '1'=>$join, '2'=>$sel, '3'=>$where, '4'=>$having, '5'=>$order));
+		$var = association_passe_parametres_comptables();
 /*
 		if(autoriser('associer', 'export_compte_bilans') && $plan){ // on peut exporter : pdf, csv, xml, ...
 			echo debut_cadre_enfonce('',true);
@@ -73,10 +61,10 @@ function exec_compte_bilan()
 		}
 */
 		debut_cadre_association('finances-24.jpg', 'cpte_bilan_titre_general', $exercice_data['intitule']);
-		echo "\n<form method='get' action='".generer_url_ecrire('compte_bilan')."'>\n<table width='100%'><tr>";
+		echo "\n<form method='get' action=''>\n<input type='hidden' name='exec' value='compte_bilan' />\n<table width='100%'><tr>";
 		echo '<td width="50%" align="left">'. association_selectionner_exercice($id_exercice, '') .'</td>';
 		echo '<td width="50%" align="right">'. association_selectionner_destination($id_destination, '') .'</td>';
-		echo "</tr></table>\n</form>\n";
+		echo "</tr>\n</table>\n</form>\n";
 		// les autres classes a prendre en compte ici
 		$classes_bilan = array();
 		$query = sql_select(
