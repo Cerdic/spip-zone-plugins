@@ -1,9 +1,11 @@
+[(#REM) <!-- Initialisation de l'accordion des textes de l'article --> ]
 <script type="text/javascript" xmlns="http://www.w3.org/1999/html">
 //<![CDATA[
 	jQuery(document).ready(function() {
 		$( ".accordion" )
 			.accordion({ header: 'h5' })
-			.accordion({ collapsible: true });
+			.accordion({ collapsible: true })
+			.accordion({ active: false });
 	});
 //]]>
 </script>
@@ -76,6 +78,7 @@
 	</div>
 
 	[(#REM) <!-- Textes de l'article a relire et a commenter --> ]
+	<h5><:relecture:titre_boite_textes_article|strtoupper:></h5>
 	<div class="accordion" id="article">
 		[(#ARTICLE_DESCR*|strlen|oui)
 			<h5><a href="#"><:relecture:label_article_descriptif:></a></h5>

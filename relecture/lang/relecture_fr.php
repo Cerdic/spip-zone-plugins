@@ -34,11 +34,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_periode_commentaire_ouverte' => 'Commentaire autorisé jusqu\'au @date@',
 
 // L
-	'label_article_chapeau' => 'Chapeau de l\'article',
-	'label_article_descriptif' => 'Descriptif de l\'article',
-	'label_article_ps' => 'Post-Scriptum de l\'article',
+	'label_article_chapeau' => 'Chapeau',
+	'label_article_descriptif' => 'Descriptif',
+	'label_article_ps' => 'Post-Scriptum',
 	'label_article_relu' => 'Article concerné',
-	'label_article_texte' => 'Texte de l\'article',
+	'label_article_texte' => 'Texte',
 	'label_commentaires_acceptes' => 'Acceptés',
 	'label_commentaires_ouverts' => 'Ouverts',
 	'label_commentaires_refuses' => 'Refusés',
@@ -59,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_boite_cloture' => 'Clôture',
 	'titre_boite_ouverture' => 'Ouverture',
 	'titre_boite_relecture_article' => 'Relecture en cours',
+	'titre_boite_textes_article' => 'Textes de l\'article à relire',
 	'titre_commentaire' => 'Commentaire',
 	'titre_commentaires' => 'Commentaires',
 	'titre_liste_autres_relectures' => 'Autres relectures de l\'article',
