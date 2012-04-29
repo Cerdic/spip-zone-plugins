@@ -35,6 +35,5 @@
 			</BOUCLE_documents_fin2>
 		</ul><!--#feed-->
 	</div><!--#liste nouveautes sommaire-->
-
-	[<div class="list shoutbox post">(#SHOUTBOX{normal,10})</div>]
+	[(#PLUGIN{shoutbox}|oui)[<div class="list shoutbox post">(#SHOUTBOX)</div>]]
 </div><!--#contenu-principal-->
