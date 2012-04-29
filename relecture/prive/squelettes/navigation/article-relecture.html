@@ -11,17 +11,17 @@
 [(#REM) <!-- Information sur la relecture ouverte --> ]
 <BOUCLE_relecture_ouverte(RELECTURES){id_article}{statut=ouverte}>
 [(#AUTORISER{voirrelectures, article, #ID_ARTICLE})
-	[(#SET{titre, <:relecture:titre_info_relecture_article:>})]
+	[(#SET{titre, <:relecture:titre_boite_relecture_article:>})]
 	#BOITE_OUVRIR{#GET{titre}, simple, titrem}
 		[(#SET{date_ouverture, [(#DATE_OUVERTURE|affdate_court)]})]
 		[(#SET{rev_ouverture, #REVISION_OUVERTURE})]
 		[(#SET{date_fin_periode, [(#DATE_FIN_COMMENTAIRE|affdate_court)]})]
 		<p>
-			<:relecture:info_relecture_ouverture{date=#GET{date_ouverture}, revision=#GET{rev_ouverture}}:>
+			<:relecture:info_ouverture_relecture{date=#GET{date_ouverture}, revision=#GET{rev_ouverture}}:>
 		</p>
 		<p>
-			[(#DATE_FIN_COMMENTAIRE|<{#DATE}|non)<:relecture:info_relecture_periode_ouverte{date=#GET{date_fin_periode}}:>]
-			[(#DATE_FIN_COMMENTAIRE|<{#DATE}|oui)<:relecture:info_relecture_periode_fermee{date=#GET{date_fin_periode}}:>]
+			[(#DATE_FIN_COMMENTAIRE|<{#DATE}|non)<:relecture:info_periode_commentaire_ouverte{date=#GET{date_fin_periode}}:>]
+			[(#DATE_FIN_COMMENTAIRE|<{#DATE}|oui)<:relecture:info_periode_commentaire_fermee{date=#GET{date_fin_periode}}:>]
 		</p>
 		[<p>(#ID_RELECTURE|relecture_informer_commentaires)</p>]
 

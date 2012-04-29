@@ -2,7 +2,7 @@
 
 
 /**
- * Inclusion dans les pages du prive du script jquery ui accordion
+ * Inclusion dans la page de suivi d'une relecture du script jquery ui accordion
  *
  * @param array $script
  * @return array
@@ -10,8 +10,11 @@
 **/
 function relecture_jqueryui_plugins($scripts) {
 
-	$scripts[] = "javascript/ui/jquery.ui.widget.js";
-	$scripts[] = "javascript/ui/jquery.ui.accordion.js";
+	$page = _request('exec');
+	if ($page == 'relecture') {
+		$scripts[] = "jquery.ui.widget";
+		$scripts[] = "jquery.ui.accordion";
+	}
 
 	return $scripts;
 }
@@ -110,7 +113,7 @@ function relecture_formulaire_charger($flux){
 
 		if ($form == 'dater') {
 			// Identifier le label comme la date de fin des commentaires
-			$flux['data']['_label_date'] = _T('relecture:label_relecture_date_fin_commentaire');
+			$flux['data']['_label_date'] = _T('relecture:label_date_fin_commentaire');
 		}
 		else if ($form == 'editer_liens') {
 			// Changer le titre du formulaire pour désigner clairement les relecteurs

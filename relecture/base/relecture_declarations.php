@@ -139,6 +139,10 @@ function relecture_declarer_tables_interfaces($interface) {
 	// Les traitements
 	// - table spip_relectures
 	$interface['table_des_traitements']['DESCRIPTION']['relectures'] = _TRAITEMENT_RACCOURCIS;
+	$interface['table_des_traitements']['ARTICLE_DESCR']['relectures'] = _TRAITEMENT_RACCOURCIS;
+	$interface['table_des_traitements']['ARTICLE_CHAPO']['relectures'] = _TRAITEMENT_RACCOURCIS;
+	$interface['table_des_traitements']['ARTICLE_TEXTE']['relectures'] = _TRAITEMENT_RACCOURCIS;
+	$interface['table_des_traitements']['ARTICLE_PS']['relectures'] = _TRAITEMENT_RACCOURCIS;
 	// - table spip_commentaires
 	$interface['table_des_traitements']['TEXTE']['commentaires'] = _TRAITEMENT_RACCOURCIS;
 	$interface['table_des_traitements']['REPONSE']['commentaires'] = _TRAITEMENT_RACCOURCIS;

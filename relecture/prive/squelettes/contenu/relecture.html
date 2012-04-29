@@ -1,3 +1,14 @@
+<script type="text/javascript" xmlns="http://www.w3.org/1999/html">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		$( ".accordion" )
+			.accordion({ header: 'h5' })
+			.accordion({ collapsible: true });
+	});
+//]]>
+</script>
+
+
 <BOUCLE_relecture(RELECTURES){id_relecture}{statut==.*}{si #ENV{exec}|=={relecture}}>
 [(#REM) <!-- Ouverture de la fiche objet : titre relecture et article associe --> ]
 [(#BOITE_OUVRIR{[
@@ -11,7 +22,7 @@
 	]
 	<h1>(#INFO_TITRE{relecture, #ID_RELECTURE}|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{relecture-24.png}|balise_img{relecture, cadre-icone})]</h1>
 	[<p class="soustitre">
-		<:relecture:label_relecture_article:> : <a[ href="(#URL_ECRIRE{article, id_article=#ID_ARTICLE})"]>(#INFO_TITRE{article, #ID_ARTICLE})</a>
+		<:relecture:label_article_relu:> : <a[ href="(#URL_ECRIRE{article, id_article=#ID_ARTICLE})"]>(#INFO_TITRE{article, #ID_ARTICLE})</a>
 	</p>]],
 	simple fiche_objet})
 ]
@@ -19,11 +30,11 @@
 	[(#REM) <!-- Information sur l'ouverture de la relecture : date et revision de l'article --> ]
 	[(#BOITE_OUVRIR{<h5><:relecture:titre_boite_ouverture|strtoupper:></h5>, raccourcis})]
 		<div class="unit size2of3">
-			<span><strong><:relecture:label_relecture_date_ouverture:></strong> : </span>
+			<span><strong><:relecture:label_date_ouverture:></strong> : </span>
 			<span dir="#LANG_DIR">[(#DATE_OUVERTURE|affdate)]</span>
 		</div>
 		<div class="unit size1of3 lastUnit">
-			<span><strong><:relecture:label_relecture_revision_ouverture:></strong> : </span>
+			<span><strong><:relecture:label_revision_ouverture:></strong> : </span>
 			[(#SET{url_revision, [(#URL_ECRIRE{revision, objet=article}
 									|parametre_url{id_objet, #ID_ARTICLE}
 									|parametre_url{id_version, #REVISION_OUVERTURE})]})]
@@ -41,11 +52,11 @@
 	[(#STATUT|=={ouverte}|non)
 		[(#BOITE_OUVRIR{<h5><:relecture:titre_boite_cloture|strtoupper:></h5>, raccourcis})]
 			<div class="unit size2of3">
-				<span><strong><:relecture:label_relecture_date_cloture:></strong> : </span>
+				<span><strong><:relecture:label_date_cloture:></strong> : </span>
 				<span dir="#LANG_DIR">[(#DATE_CLOTURE|affdate)]</span>
 			</div>
 			<div class="unit size1of3 lastUnit">
-				<span><strong><:relecture:label_relecture_revision_cloture:></strong> : </span>
+				<span><strong><:relecture:label_revision_cloture:></strong> : </span>
 				[(#SET{url_revision, [(#URL_ECRIRE{revision, objet=article}
 										|parametre_url{id_objet, #ID_ARTICLE}
 										|parametre_url{id_version, #REVISION_CLOTURE})]})]
@@ -54,27 +65,35 @@
 		#BOITE_FERMER
 	]
 
+	[(#REM) <!-- Formulaire de choix des relecteurs --> ]
 	<div class="ajax">
 		#FORMULAIRE_EDITER_LIENS{auteurs, relecture, #ID_RELECTURE}
 	</div>
 
+	[(#REM) <!-- Description de la relecture --> ]
 	<div id="wysiwyg">
 		<INCLURE{fond=prive/objets/contenu/relecture, id=#ID_RELECTURE, id_article=#ID_ARTICLE, ajax=wysiwyg, wysiwyg=1}>
 	</div>
 
-	<div id="accordion">
-		[<h3><a href="#">descr</a></h3>
-		<div>(#ARTICLE_DESCR|trim)</div>]
-		[<h3><a href="#">chapeau</a></h3>
-		<div>(#ARTICLE_CHAPO|trim)</div>]
-		[<h3><a href="#">texte</a></h3>
-		<div>(#ARTICLE_TEXTE|trim)</div>]
-		[<h3><a href="#">ps</a></h3>
-		<div>(#ARTICLE_PS|trim)</div>]
+	[(#REM) <!-- Textes de l'article a relire et a commenter --> ]
+	<div class="accordion" id="article">
+		[(#ARTICLE_DESCR*|strlen|oui)
+			<h5><a href="#"><:relecture:label_article_descriptif:></a></h5>
+			<div>#ARTICLE_DESCR</div>]
+		[(#ARTICLE_CHAPO*|strlen|oui)
+			<h5><a href="#"><:relecture:label_article_chapeau:></a></h5>
+			<div>#ARTICLE_CHAPO</div>]
+		[(#ARTICLE_TEXTE*|strlen|oui)
+			<h5><a href="#"><:relecture:label_article_texte:></a></h5>
+			<div>#ARTICLE_TEXTE</div>]
+		[(#ARTICLE_PS*|strlen|oui)
+			<h5><a href="#"><:relecture:label_article_ps:></a></h5>
+			<div>#ARTICLE_PS</div>]
 	</div>
 
-	<div class="nettoyeur"></div>
+	<br class="nettoyeur"></div>
 
+	[(#REM) <!-- Bouton d'édition de la relecture --> ]
 	[(#AUTORISER{modifier, relecture, #ID_RELECTURE})
 
 		[(#ID_RELECTURE|afficher_qui_edite{relecture}|non)
@@ -102,9 +121,3 @@
 
 	[(#ENV**{exec}|=={relecture_edit}|?{#INCLURE{fond=prive/squelettes/contenu/relecture_edit, redirect='', env, retourajax=oui}, #REM|sinon_interdire_acces})]
 <//B_relecture>
-
-<script>
-	$(function() {
-		$( "#accordion" ).accordion();
-	});
-</script>

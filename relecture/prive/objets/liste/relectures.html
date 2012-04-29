@@ -29,11 +29,11 @@
 				<th class="statut" scope="col">[(#TRI{statut, <span title="<:lien_trier_statut|attribut_html:>">#</span>, ajax})]</th>
 				<th class="titre principale" scope="col">[(#TRI{id_relecture, <:info_titre:>, ajax})]</th>
 			[(#ENV{affichage}|=={menu_navigation}|non)
-				<th class="titre" scope="col"><:relecture:label_relecture_article:></th>
-				<th class="date" scope="col">[(#TRI{date_fin_commentaire, <:relecture:label_abrege_date_fin_commentaire:>, ajax})]</th>
+				<th class="titre" scope="col"><:relecture:label_article_relu:></th>
+				<th class="date" scope="col">[(#TRI{date_fin_commentaire, <:relecture:label_date_fin_commentaire_abrege:>, ajax})]</th>
 			]
 			[(#ENV{affichage}|=={menu_navigation}|oui)
-				<th class="revision" scope="col">[(#TRI{revision_ouverture, <:relecture:label_relecture_revision_abregee:>, ajax})]</th>
+				<th class="revision" scope="col">[(#TRI{revision_ouverture, <:relecture:label_revision_ouverture_abrege:>, ajax})]</th>
 			]
 			</tr>
 		</thead>
