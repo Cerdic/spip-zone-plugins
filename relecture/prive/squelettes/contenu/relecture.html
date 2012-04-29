@@ -5,7 +5,9 @@
 		$( ".accordion" )
 			.accordion({ header: 'h5' })
 			.accordion({ collapsible: true })
-			.accordion({ active: false });
+			.accordion({ active: false })
+			.accordion({ autoHeight: false })
+			.accordion({ fillSpace: true });
 	});
 //]]>
 </script>
@@ -78,7 +80,14 @@
 	</div>
 
 	[(#REM) <!-- Textes de l'article a relire et a commenter --> ]
-	<h5><:relecture:titre_boite_textes_article|strtoupper:></h5>
+	<div>
+		<INCLURE{fond=prive/objets/contenu/relecture,
+			id=#ID_RELECTURE,
+			id_article=#ID_ARTICLE,
+			ajax=wysiwyg,
+			wysiwyg=1} />
+	</div>
+	<h5><:relecture:titre_boite_textes_article{revision=#REVISION_OUVERTURE}:></h5>
 	<div class="accordion" id="article">
 		[(#ARTICLE_DESCR*|strlen|oui)
 			<h5><a href="#"><:relecture:label_article_descriptif:></a></h5>
