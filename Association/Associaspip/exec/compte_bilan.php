@@ -77,26 +77,13 @@ function exec_compte_bilan()
 		while ($data = sql_fetch($query)) {
 			$classes_bilan[] = $data['classe'];
 		}
-		// liste des actifs cumulees par comptes
+		// liste des actifs (les dettes) cumulees par comptes
 		$actifs = association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', '-1', $id_exercice, $id_destination);
-		// liste des passifs cumulees par comptes
+		// liste des passifs (le patrimoine/avoir) cumulees par comptes
 		$passifs = association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', '+1', $id_exercice, $id_destination);
+		// resultat comptable courant : en comptabilite francaise, la somme les actifs et les passifs doivent s'egaler, ce qui se fait en incorporant le resultat comptable (perte en actif et benefice en passif)
+		association_liste_resultat_net($passifs, $actifs);
 		// liste des bilans (actifs et passifs) par comptes
-#		$bilan = association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', '', $id_exercice, $id_destination);
-/*
-		if(autoriser('associer', 'export_compte_bilans') && $plan){ // on peut exporter : pdf, csv, xml, ...
-			echo "<br /><table width='100%' class='asso_tablo' cellspacing='6' id='asso_tablo_exports'>\n";
-			echo '<tbody><tr>';
-			echo '<td>'. _T('asso:cpte_bilan_mode_exportation') .'</td>';
-			if (test_plugin_actif('FPDF')) { // impression en PDF
-				echo '<td class="action"><a href="'.generer_url_ecrire('export_compteresultats_pdf').'&var='.rawurlencode($var). '"><strong>PDF</strong></td>'; //!\ generer_url_ecrire() utilise url_enconde() or il est preferable avec les grosses variables serialisees d'utiliser rawurlencode()
-			}
-			foreach(array('csv','ctx','tex','tsv','xml','yaml') as $type) { // autres exports (donnees brutes) possibles
-				echo '<td class="action"><a href="'. generer_url_ecrire('export_compteresultats_'.$type).'&var='.rawurlencode($var). '"><strong>'. strtoupper($type) .'</strong></td>'; //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
-			}
-			echo '</tr></tbody></table>';
-		}
-*/
 		fin_page_association();
 	}
 }

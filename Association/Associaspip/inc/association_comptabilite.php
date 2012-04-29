@@ -430,7 +430,7 @@ function association_calcul_totaux_comptes_classe($classe, $exercice=0, $destina
     return $query;
 }
 
-/* */
+/* on affiche les totaux (recettes et depenses) d'un exercice des differents comptes de la classe specifiee */
 function association_liste_totaux_comptes_classes($classes, $prefixe='', $direction='-1', $exercice=0, $destination=0) {
     if( !is_array($classes) ) { // a priori une chaine ou un entier d'une unique classe
 	$liste_classes = array( $classes ) ; // transformer en tableau (puisqu'on va operer sur des tableaux);
@@ -496,6 +496,23 @@ function association_liste_totaux_comptes_classes($classes, $prefixe='', $direct
     }
     echo "</tr>\n</tfoot>\n</table>\n";
     return $total_valeurs;
+}
+
+/* on affiche la difference entre les recettes et les depenses (passees en parametre) pour les classes d'un exercice */
+function association_liste_resultat_net($recettes, $depenses) {
+    echo "<table width='100%' class='asso_tablo' id='asso_tablo_bilan_solde'>\n";
+    echo "<thead>\n<tr>";
+    echo '<th width="10">&nbsp;</td>';
+    echo '<th width="30">&nbsp;</td>';
+    echo '<th>'. _T('asso:cpte_resultat_titre_resultat') .'</th>';
+    echo '<th width="80">&nbsp;</th>';
+    echo "</tr>\n</thead>";
+    echo "<tfoot>\n<tr>";
+    echo '<th colspan="2">&nbsp;</th>';
+    $res = $recettes-$depenses;
+    echo '<th class="text">'. (($res<0) ? _T('asso:cpte_resultat_perte') : _T('asso:cpte_resultat_benefice')) .'</th>';
+    echo '<th class="decimal">'. association_nbrefr(abs($res)) .'</th>';
+    echo "</tr></tfoot></table>";
 }
 
 // Brique commune aux classes d'exportation des donnees du compte de bilan

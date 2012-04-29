@@ -74,46 +74,16 @@ function exec_compte_resultat()
 		echo '<td width="50%" align="left">'. association_selectionner_exercice($id_exercice, '') .'</td>';
 		echo '<td width="50%" align="right">'. association_selectionner_destination($id_destination, '') .'</td>';
 		echo "</tr>\n</table>\n</form>\n";
-		// liste des charges cumulees par comptes
+		// liste des charges (depenses d'exploitation) cumulees par comptes
 		$charges = association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_charges'], 'cpte_resultat', '-1', $id_exercice, $id_destination);
-		// liste des produits cumules par comptes
+		// liste des produits (recettes d'exploitation) cumules par comptes
 		$produits = association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_produits'], 'cpte_resultat', '+1', $id_exercice, $id_destination);
-		// resultat comptable courant
-		compte_resultat_benefice_perte($produits, $charges);
+		// resultat comptable courant : c'est la difference entre les recettes et les depenses d'exploitation
+		association_liste_resultat_net($produits, $charges);
 		// liste des contributions volontaires (emplois et ressources) par comptes
 		$contributions = association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_contributions_volontaires'], 'cpte_benevolat', 0, $id_exercice, $id_destination);
-/*
-		if(autoriser('associer', 'export_compte_resultats') && $plan){ // on peut exporter : pdf, csv, xml, ...
-			echo "<br /><table width='100%' class='asso_tablo' cellspacing='6' id='asso_tablo_exports'>\n";
-			echo '<tbody><tr>';
-			echo '<td>'. _T('asso:cpte_resultat_mode_exportation') .'</td>';
-			if (test_plugin_actif('FPDF')) { // impression en PDF
-				echo '<td class="action"><a href="'.generer_url_ecrire('export_compteresultats_pdf').'&var='.rawurlencode($var). '"><strong>PDF</strong></td>'; //!\ generer_url_ecrire() utilise url_enconde() or il est preferable avec les grosses variables serialisees d'utiliser rawurlencode()
-			}
-			foreach(array('csv','ctx','tex','tsv','xml','yaml') as $type) { // autres exports (donnees brutes) possibles
-				echo '<td class="action"><a href="'. generer_url_ecrire('export_compteresultats_'.$type).'&var='.rawurlencode($var). '"><strong>'. strtoupper($type) .'</strong></td>'; //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
-			}
-			echo '</tr></tbody></table>';
-		}
-*/
 		fin_page_association();
 	}
-}
-
-function compte_resultat_benefice_perte($recettes, $depenses) {
-	echo "<table width='100%' class='asso_tablo' id='asso_tablo_bilan_solde'>\n";
-	echo "<thead>\n<tr>";
-	echo '<th width="10">&nbsp;</td>';
-	echo '<th width="30">&nbsp;</td>';
-	echo '<th>'. _T('asso:cpte_resultat_titre_resultat') .'</th>';
-	echo '<th width="80">&nbsp;</th>';
-	echo "</tr>\n</thead>";
-	echo "<tfoot>\n<tr>";
-	echo '<th colspan="2">&nbsp;</th>';
-	$res = $recettes-$depenses;
-	echo '<th class="text">'. (($res<0) ? _T('asso:cpte_resultat_perte') : _T('asso:cpte_resultat_benefice')) .'</th>';
-	echo '<th class="decimal">'. association_nbrefr($res) .'</th>';
-	echo "</tr></tfoot></table>";
 }
 
 

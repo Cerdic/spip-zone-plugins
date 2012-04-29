@@ -67,7 +67,7 @@ function exec_bilan()
 #			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$exercice"),
 			'encaisse' => array('finances-24.png', 'encaisse', "exercice=$exercice"),
 		));
-		debut_cadre_association('finances-24.png', 'bilans_comptables', $exercice_data['intitule']);
+		debut_cadre_association('finances-24.png', 'resultat_courant', $exercice_data['intitule']);
 		if ($plan) {
 			$join = ' RIGHT JOIN spip_asso_plan ON imputation=code';
 			$sel = ', code, intitule, classe';
@@ -87,16 +87,24 @@ function exec_bilan()
 		foreach ($ids_destination_bilan as $id_destination) {
 			$total_recettes = $total_depenses = $total_soldes = 0;
 			//TABLEAU EXPLOITATION
-			if ($id_destination!=0) {
-				$intitule_destination_bilan = $intitule_destinations[$id_destination];
-			} else {
-				if ($GLOBALS['association_metas']['destinations']=='on') $intitule_destination_bilan = _T('asso:toutes_destination');
-			}
 			echo "\n<fieldset>";
-			echo '<legend><strong>'. _T('asso:resultat_courant') . ' ' .$intitule_destination_bilan. '</strong></legend>';
+			echo '<legend><b>'. ($id_destination ? $intitule_destinations[$id_destination] : ($GLOBALS['association_metas']['destinations']?_T('asso:toutes_destination'):'') ). '</b></legend>';
 			$solde = association_liste_totaux_comptes_classes($classes, 'cpte_resultat', 0, $exercice, $id_destination);
 			echo '</fieldset>';
 		}
+		if(autoriser('associer', 'export_compte_resultats') && $plan){ // on peut exporter : pdf, csv, xml, ...
+			echo "<br /><table width='100%' class='asso_tablo' cellspacing='6' id='asso_tablo_exports'>\n";
+			echo '<tbody><tr>';
+			echo '<td><b>'. _T('asso:cpte_resultat_mode_exportation') .'</b></td>';
+			if (test_plugin_actif('FPDF')) { // impression en PDF
+				echo '<td class="action"><a href="'.generer_url_ecrire('export_compteresultats_pdf').'&var='.rawurlencode($var). '"><strong>PDF</strong></td>'; //!\ generer_url_ecrire() utilise url_enconde() or il est preferable avec les grosses variables serialisees d'utiliser rawurlencode()
+			}
+			foreach(array('csv','ctx','tex','tsv','xml','yaml') as $type) { // autres exports (donnees brutes) possibles
+				echo '<td class="action"><a href="'. generer_url_ecrire('export_compteresultats_'.$type).'&var='.rawurlencode($var). '"><strong>'. strtoupper($type) .'</strong></td>'; //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
+			}
+			echo '</tr></tbody></table>';
+		}
+//		bilan_encaisse();
 		fin_page_association();
 	}
 }
@@ -148,7 +156,6 @@ function bilan_encaisse()
 			}
 		}
 	}
-
 	echo "\n<fieldset>";
 	echo '<legend><strong>' . _T('asso:encaisse') . '</strong></legend>';
 	echo "<table width='100%' class='asso_tablo' id='asso_tablo_bilan_encaisse'>\n";

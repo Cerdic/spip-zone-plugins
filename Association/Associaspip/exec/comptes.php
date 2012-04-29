@@ -40,7 +40,7 @@ function exec_comptes()
 			$id_compte = '';
 		} else { /* quand on a un id compte, on doit selectionner automatiquement l'exercice dans lequel il se trouve */
 			$date_operation = sql_getfetsel('date', 'spip_asso_comptes', 'id_compte='.$id_compte);
-			$exercice = sql_getfetsel('id_exercice','spip_asso_exercices', 'fin >= "'.$date_operation.'" AND debut <= "'.$date_operation.'"', '', 'debut DESC');
+			$exercice = sql_getfetsel('id_exercice','spip_asso_exercices', "fin>='$date_operation' AND debut<='$date_operation'", '', 'debut DESC');
 		}
 		$debut = intval(_request('debut'));
 		$exercice_data = sql_asso1ligne('exercice', $id_exercice);
@@ -132,7 +132,6 @@ function exec_comptes()
 			//SOUS-PAGINATION
 			$nombre_selection = sql_countsel('spip_asso_comptes', $where);
 			$pages = intval($nombre_selection/$max_par_page)+1;
-			$args = 'exercice='.$exercice.'&imputation='.$imputation. (is_numeric($vu) ? "&vu=$vu" : '');
 			$nav = '';
 			if ($pages!=1)
 				for ($i=0; $i<$pages; $i++) {
@@ -140,7 +139,7 @@ function exec_comptes()
 					if ($position==$debut) {
 						$nav .= '<strong>'.$position.' </strong>';
 					} else {
-						$h = generer_url_ecrire('comptes',$args.'&debut='.$position);
+						$h = generer_url_ecrire('comptes',"exercice=$id_exercice"."&imputation=$imputation". (is_numeric($vu) ? "&vu=$vu" : '') ."&debut=$position");
 						$nav .= "<a href='$h'>$position</a>\n";
 				}
 			}
