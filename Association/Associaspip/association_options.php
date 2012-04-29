@@ -542,7 +542,8 @@ function association_selectionner_destination($destination='', $url_action='') {
     if (!$destination) {
 		$res .= ' selected="selected"';
     }
-    $res .= '>'. _T('asso:toutes_destinations') .'</option><option disabled="disabled">--------</option>';
+//    $res .= '>'. _T('asso:toutes_destinations') .'</option><option disabled="disabled">--------</option>';
+    $res .= '>'. _T('asso:toutes_destinations') .'</option>';
     $intitule_destinations = array();
     $sql = sql_select('id_destination, intitule', 'spip_asso_destination','', 'intitule DESC');
     while ($val = sql_fetch($sql)) {
@@ -552,7 +553,7 @@ function association_selectionner_destination($destination='', $url_action='') {
 			$res .= ' selected="selected"';
 		}
 		$res .= '>'.$val['intitule'].'</option>';
-		$intitule_destinations[$val['id_destination']] = $val['intitule'];
+//		$intitule_destinations[$val['id_destination']] = $val['intitule'];
     }
     $res .= '</select><noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>';
     if ($url_action) {

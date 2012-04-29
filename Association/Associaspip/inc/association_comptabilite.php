@@ -419,7 +419,7 @@ function association_calcul_totaux_comptes_classe($classe, $exercice=0, $destina
 	$c_where = 'a_c.date<=NOW()'; // il faut mettre un test valide car la chaine peut etre precedee de "AND "...  limiter alors a aujourd'hui ?
     }
     $query = sql_select(
-	"$c_group, $valeurs ". ($destination ? 'a_d.id_destination' : '') .$p_select, // select
+	"$c_group, $valeurs ". ($destination ? ', a_d.id_destination' : '') .$p_select, // select
 	'spip_asso_comptes AS a_c '. ($destination ? 'LEFT JOIN spip_asso_destination_op AS a_d ON a_d.id_compte=a_c.id_compte ' : '') .$p_join, // from
 	($destination ? "a_d.id_destination=$destination AND " : '') . ($p_where?"$p_where AND ":'')  .$c_where, // where
 	$c_group, // group by

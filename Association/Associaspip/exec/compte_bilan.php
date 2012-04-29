@@ -73,10 +73,10 @@ function exec_compte_bilan()
 		}
 */
 		debut_cadre_association('finances-24.jpg', 'cpte_bilan_titre_general', $exercice_data['intitule']);
-		echo "\n<table width='100%'><tr>";
-		echo '<td width="50%" align="left">'. association_selectionner_exercice($id_exercice, generer_url_ecrire('compte_bilan',($id_destination?"destination=$id_destination":'')) ) .'</td>';
-		echo '<td width="50%" align="right">'. association_selectionner_destination($id_destination, generer_url_ecrire('compte_bilan',($id_exercice?"exercice=$id_exercice":'')) ) .'</td>';
-		echo '</tr></table>';
+		echo "\n<form method='get' action='".generer_url_ecrire('compte_bilan')."'>\n<table width='100%'><tr>";
+		echo '<td width="50%" align="left">'. association_selectionner_exercice($id_exercice, '') .'</td>';
+		echo '<td width="50%" align="right">'. association_selectionner_destination($id_destination, '') .'</td>';
+		echo "</tr></table>\n</form>\n";
 		// les autres classes a prendre en compte ici
 		$classes_bilan = array();
 		$query = sql_select(
