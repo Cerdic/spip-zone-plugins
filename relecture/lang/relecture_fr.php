@@ -47,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_date_fin_commentaire' => 'Date de fin des commentaires',
 	'label_date_ouverture' => 'Date',
 	'label_description' => 'Description',
+	'label_nb_commentaires_a_traiter' => 'À traiter',
 	'label_revision_cloture' => 'Révision',
 	'label_revision_ouverture_abrege' => 'Rév :',
 	'label_revision_ouverture' => 'Révision',

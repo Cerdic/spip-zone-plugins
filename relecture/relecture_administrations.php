@@ -13,8 +13,15 @@ function relecture_upgrade($nom_meta_base_version, $version_cible){
 }
 
 function relecture_vider_tables($nom_meta_base_version) {
+
+	// Supprimer les tables creees par le plugin
 	sql_drop_table('spip_relectures');
 	sql_drop_table('spip_commentaires');
+
+	// Supprimer les relecteurs (enregistrements dans auteurs_liens)
+	sql_delete('spip_auteurs_liens', 'objet=' . sql_quote('relecture'));
+
+	// Supprimer la meta du plugin
 	effacer_meta($nom_meta_base_version);
 }
 
