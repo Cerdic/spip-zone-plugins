@@ -51,19 +51,19 @@ function exec_bilan()
 			$intitule_destinations = array();
 			$query = sql_select('id_destination, intitule', 'spip_asso_destination', '', '', 'intitule');
 			while ($data = sql_fetch($query)) {
-				$select_destination .= '<div class="choix"><input type="checkbox" name ="destination[]" value="'.$data['id_destination'].'"';
+				$select_destination .= '<div class="choix"><input type="checkbox" name ="destination[]" value="'.$data['id_destination'].'" id="destination_'.$data['id_destination'].'"';
 				if (!(array_search($data['id_destination'], $ids_destination_bilan)===FALSE))
-					$select_destination .= ' selected="selected"';
-				$select_destination .= ' /><label>'.$data['intitule'].'</label></div>';
+					$select_destination .= ' checked="checked"';
+				$select_destination .= ' /><label for="destination_'.$data['id_destination'].'">'.$data['intitule'].'</label></div>';
 				$intitule_destinations[$data['id_destination']] = $data['intitule'];
 			}
 			echo debut_cadre_enfonce('',true);
 			echo '<h3>'. _T('plugins_vue_liste') .'</h3>';
 			echo '<form method="post" action="'.generer_url_ecrire('bilan', "exercice=$exercice").'"><div>';
-			echo '<div class="choix"><input type="checkbox" name ="destination[]" value="0"';
+			echo '<div class="choix"><input type="checkbox" name ="destination[]" value="0" id="destination_0"';
 			if (!(array_search(0, $ids_destination_bilan)===FALSE))
 				echo ' selected="selected"';
-			echo ' /><label>'._T('asso:toutes_destinations').'</label></div>'.$select_destination;
+			echo ' /><label for="destination_0">'._T('asso:toutes_destinations').'</label></div>'.$select_destination;
 			echo '</div>';
 			echo '<p class="boutons"><input type="submit" value="Bilan" /></p>';
 			echo '</div></form>';
