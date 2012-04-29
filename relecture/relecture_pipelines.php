@@ -1,5 +1,6 @@
 <?php
 
+/* ----------------------- LIBRAIRIES ----------------------- */
 
 /**
  * Inclusion dans la page de suivi d'une relecture du script jquery ui accordion
@@ -19,6 +20,8 @@ function relecture_jqueryui_plugins($scripts) {
 	return $scripts;
 }
 
+
+/* ----------------------- AFFICHAGES ----------------------- */
 
 /**
  * Affichage en rappel dans la page d'accueil pour l'auteur connecte :
@@ -133,6 +136,8 @@ function relecture_formulaire_charger($flux){
 	return $flux;
 }
 
+
+/* ----------------------- OBJETS ----------------------- */
 
 /**
  * Surcharge de l'insertion standard d'un objet en incluant des traitements prealables pour une relecture :
