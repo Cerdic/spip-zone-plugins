@@ -324,3 +324,9 @@ img.gpGeocodeMatchCodeMatchType
 .SpipPopupBlackCtr
 {	background:url("popup-black-top.png") no-repeat;
 }
+
+div.gpMap img {
+    border: 0 none!important;
+    margin: 0!important;
+    padding: 0!important;
+}
