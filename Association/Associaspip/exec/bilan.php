@@ -39,34 +39,36 @@ function exec_bilan()
 		$infos['exercice_entete_debut'] = association_datefr($exercice_data['debut'], 'dtstart');
 		$infos['exercice_entete_fin'] = association_datefr($exercice_data['fin'], 'dtend');
 		echo totauxinfos_intro($exercice_data['intitule'], 'exercice', $exercice, $infos);
-		if ($GLOBALS['association_metas']['destinations']=='on') {
-			// cree un menu a choix multiple des destinations a inserer dans la boite info et recupere les intitule de toutes les destinations dans un tableau
-			$select_destination = '';
-			$intitule_destinations = array();
-			$query = sql_select('id_destination, intitule', 'spip_asso_destination', '', '', 'intitule');
-			while ($data = sql_fetch($query)) {
-				$select_destination .= '<option value="'.$data['id_destination'].'"';
-				if (!(array_search($data['id_destination'], $ids_destination_bilan)===FALSE))
-					$select_destination .= ' selected="selected"';
-				$select_destination .= '>'.$data['intitule'].'</option>';
-				$intitule_destinations[$data['id_destination']] = $data['intitule'];
-			}
-			echo '<form method="post" action="'.generer_url_ecrire('bilan', "exercice=$exercice").'"><div>';
-			echo '<select name ="destination[]" class="fondl" multiple>';
-			echo '<option value="0"';
-			if (!(array_search(0, $ids_destination_bilan)===FALSE))
-				echo ' selected="selected"';
-			echo '>'._T('asso:toutes_destinations').'</option><option disabled="disabled">--------</option>'.$select_destination;
-			echo '</select>';
-			echo '<p class="boutons"><input type="submit" value="Bilan" /></p>';
-			echo '</div></form>';
-		}
 		// datation et raccourcis
 		icones_association(array('comptes', "exercice=$exercice"), array(
 			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$exercice"),
 #			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$exercice"),
 			'encaisse' => array('finances-24.png', 'encaisse', "exercice=$exercice"),
 		));
+		// selecteur de destinations
+		if ($GLOBALS['association_metas']['destinations']) {// on affiche une liste de choix de destinations et on cree parallelement les intitule de toutes les destinations dans un tableau
+			$select_destination = '';
+			$intitule_destinations = array();
+			$query = sql_select('id_destination, intitule', 'spip_asso_destination', '', '', 'intitule');
+			while ($data = sql_fetch($query)) {
+				$select_destination .= '<div class="choix"><input type="checkbox" name ="destination[]" value="'.$data['id_destination'].'"';
+				if (!(array_search($data['id_destination'], $ids_destination_bilan)===FALSE))
+					$select_destination .= ' selected="selected"';
+				$select_destination .= ' /><label>'.$data['intitule'].'</label></div>';
+				$intitule_destinations[$data['id_destination']] = $data['intitule'];
+			}
+			echo debut_cadre_enfonce('',true);
+			echo '<h3>'. _T('plugins_vue_liste') .'</h3>';
+			echo '<form method="post" action="'.generer_url_ecrire('bilan', "exercice=$exercice").'"><div>';
+			echo '<div class="choix"><input type="checkbox" name ="destination[]" value="0"';
+			if (!(array_search(0, $ids_destination_bilan)===FALSE))
+				echo ' selected="selected"';
+			echo ' /><label>'._T('asso:toutes_destinations').'</label></div>'.$select_destination;
+			echo '</div>';
+			echo '<p class="boutons"><input type="submit" value="Bilan" /></p>';
+			echo '</div></form>';
+			echo fin_cadre_enfonce(true);
+		}
 		debut_cadre_association('finances-24.png', 'resultat_courant', $exercice_data['intitule']);
 		if ($plan) {
 			$join = ' RIGHT JOIN spip_asso_plan ON imputation=code';
