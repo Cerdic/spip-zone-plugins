@@ -14,10 +14,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_classe'=>'Classe de l\'élément ul sur lequel portera le menu',
 	'explication_delai'=>'Le délai en millisecondes entre la sortie du pointeur du sous-menu et la fermeture de celui-ci',
 	'explication_menu'=>'Cliquez sur oui pour activer et paramétrer un menu @type@ sur une arborescence ul/li',
-	'explication_supersubs' => 'Le plugin optionnel Supersubs (actuellement en version bêta) permet d\'avoir des largeurs variables pour les sous-menu. La largeur fixe donnée dans la feuille de style CSS est annulée et tous les éléments d\'un sous-menu sont modifiés de façon à ce que leur largeur commune soit celle de l\'élément le plus long. Tous les items d\'un sous-menu ont alors la même hauteur.',
+	'explication_supersubs' => 'Le plugin optionnel Supersubs (actuellement en version bêta) permet d\'avoir des largeurs variables pour les sous-menu. La largeur fixe donnée dans la feuille de style CSS est annulée et tous les éléments d\'un sous-menu sont modifiés de façon à ce que leur largeur commune soit celle de l\'élément le plus long. Utiliser ceci par ex. pour faire en sorte que tous les items d\'un sous-menu tiennent en une ligne (ayant donc la même hauteur).',
 	'explication_supersubs_extrawidth' => 'Marge supplémentaire appliquée aux calculs permettant de gérer au mieux les retours à la ligne',
-	'explication_supersubs_maxwidth' => 'Largeur maxiale d\un item (en em)',
-	'explication_supersubs_minwidth' => 'Largeur minimale d\un item (en em)',
+	'explication_supersubs_maxwidth' => 'Largeur maximale d\'un item (en em)',
+	'explication_supersubs_minwidth' => 'Largeur minimale d\'un item (en em)',
 
 	// L
 	'label_animation' => 'Animation',
