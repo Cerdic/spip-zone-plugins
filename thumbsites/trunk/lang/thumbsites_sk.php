@@ -48,6 +48,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_taille_vignette' => 'Veľkosť miniatúr',
 	'cfg_lgd_cache' => 'Cache',
 	'cfg_lgd_choix_serveur' => 'Server',
+	'cfg_titre_thumbsites' => 'Configurer Thumbsites', # NEW
+	'configuration_thumbsites' => 'Thumbsites', # NEW
 
 	// T
 	'titre_thumbshot_site' => 'MINIATÚRA STRÁNKY'

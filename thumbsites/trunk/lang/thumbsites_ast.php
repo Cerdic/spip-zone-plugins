@@ -48,6 +48,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_taille_vignette' => 'Tamañu de les miniatures',
 	'cfg_lgd_cache' => 'Cache', # NEW
 	'cfg_lgd_choix_serveur' => 'Sirvidor',
+	'cfg_titre_thumbsites' => 'Configurer Thumbsites', # NEW
+	'configuration_thumbsites' => 'Thumbsites', # NEW
 
 	// T
 	'titre_thumbshot_site' => 'MINIATURA DEL SITIU'

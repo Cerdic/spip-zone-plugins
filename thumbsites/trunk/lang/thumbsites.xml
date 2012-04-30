@@ -1,4 +1,4 @@
-<traduction module="thumbsites" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/thumbsites/lang/" reference="fr">
+<traduction module="thumbsites" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/thumbsites/trunk/lang/" reference="fr">
 	<langue code="ast" url="http://trad.spip.org/tradlang_module/thumbsites?lang_cible=ast">
 		<traducteur nom="Xuacu" lien="http://trad.spip.org/auteur/xuacu" />
 	</langue>
