@@ -9,7 +9,7 @@ Ce plugin génère d'autres plugins !
 
 Interface :
 * Gestion des diff sous Windows (Julien Lanfray)
-
+* Affichage des diff unix plus aérés et simples
 
 
 1.14.0 le 27 04 2012

@@ -304,12 +304,13 @@ function fabrique_generer_diff($ancien, $nouveau, $prefixe) {
 		$fdiff = new Fdiff($ancien, $nouveau);
 		$fdiff->add_ignorer(array("fabrique_diff.diff", "fabrique_".$prefixe.".php"));
 		$tab = $fdiff->get_diff();
-		$diff = $tab["diff"];
+		$diff         = $tab["diff"];
+		$diff_humain  = $tab["affiche"];
 		$suppressions = $tab["suppressions"];
 
 		ecrire_fichier($nouveau . 'fabrique_diff.diff', $diff);
 		// coloration si le plugin 'coloration_code' est la
-		$diff = propre("<cadre class='diff'>\n$diff\n</cadre>");
+		$diff = propre("<cadre class='diff'>\n$diff_humain\n</cadre>");
 		set_request('message_diff', $diff);
 		if ($suppressions) {
 			set_request('message_diff_suppressions', $suppressions);

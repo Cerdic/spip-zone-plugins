@@ -218,7 +218,7 @@ Class Fdiff {
 	 * Retourne un tableau des differences entre dossier1 et dossier2
 	 * base sur la commande "fc" de Windows
 	 * 
-	 * @return array("diff"=>Texte, "suppressions"=>array(noms de fichier))
+	 * @return array("diff"=>Texte, "affiche"=>Texte, "suppressions"=>array(noms de fichier))
 	 * 
 	**/
 	private function get_diff_windows(){
@@ -292,6 +292,7 @@ Class Fdiff {
 
 		$tab = array(
 			"diff" => $diff,
+			"affiche" => $diff, // diff plus humainement lisible
 			"suppressions" => $que_dossier1
 		);
 		
@@ -303,7 +304,7 @@ Class Fdiff {
 	 * Retourne un tableau des differences entre dossier1 et dossier2
 	 * base sur la commande "diff" des systemes Unix
 	 * 
-	 * @return array("diff"=>Texte, "suppressions"=>array(noms de fichier))
+	 * @return array("diff"=>Texte, "affiche"=>Texte, "suppressions"=>array(noms de fichier))
 	 * 
 	**/
 	private function get_diff_unix(){
@@ -320,18 +321,33 @@ Class Fdiff {
 		// on cherche les fichiers presents dans l'ancienne version
 		// supprimes de la nouvelle pour avertir
 		$suppressions = array();
-		foreach($diff as $l) {
+		// on en profite pour raccourcir la ligne diff
+		// pour un retour plus humainement lisible
+		$affiche = $diff;
+		foreach($diff as $k => $l) {
+			// trouver les suppressions
 			// Only in ../plugins/fabrique_auto/.backup/prefixe/dir: fichier.php
 			if ($l[0] == 'O' AND substr($l, 0, 7) == 'Only in') {
 				if (strpos($l, $this->dossier1)) {
 					$suppressions[] = str_replace(': ', '/', trim(substr($l, 8 + strlen($this->dossier1))));
 				}
+				$affiche[$k] = "\n\n$l";
+			}
+			// rendre le diff plus lisible
+			if ($l[0] == 'd' AND substr($l, 0, 4) == 'diff') {
+				// ne garder que le chemin relatif du fichier
+				$fichier = explode(' ', $l);
+				$fichier = array_pop($fichier);
+				$fichier = substr($fichier, strlen($this->dossier2));
+				$affiche[$k] = "\n\n$fichier";
 			}
 		}
 		$diff = implode("\n", $diff);
+		$affiche = implode("\n", $affiche);
 
 		$tab = array(
 			"diff" => $diff,
+			"affiche" => $affiche, // diff plus humainement lisible
 			"suppressions" => $suppressions
 		);
 
@@ -345,7 +361,10 @@ Class Fdiff {
 	 * Usage:
 	 * $fdiff->get_diff();
 	 * 
-	 * @return array("diff"=>Texte, "suppressions"=>array(noms de fichier))
+	 * @return array(
+	 * 		"diff"=>Texte,
+	 * 		"affiche"=>Texte, // diff plus lisible pour affichage
+	 * 		"suppressions"=>array(noms de fichier))
 	 * 
 	**/
 	public function get_diff() {
