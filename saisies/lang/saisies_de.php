@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_verifications_label' => 'Art der Überprüfung',
 
 	// E
+	'erreur_generique' => 'Il y a des erreurs dans les champs ci-dessous, veuillez vérifier vos saisies', # NEW
 	'erreur_option_nom_unique' => 'Dieser Name wird bereits für ein anderes Feld verwendet; er kann in diesem Formular nur einmal verwendet werden.',
 
 	// I

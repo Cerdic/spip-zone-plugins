@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_verifications_label' => 'Тип проверки',
 
 	// E
+	'erreur_generique' => 'Il y a des erreurs dans les champs ci-dessous, veuillez vérifier vos saisies', # NEW
 	'erreur_option_nom_unique' => 'Такое название поля уже используется.',
 
 	// I

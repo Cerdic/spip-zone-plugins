@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_verifications_label' => 'Typ overenia, ktorý sa má vykonať',
 
 	// E
+	'erreur_generique' => 'V poliach sú chyby; prosím, skontrolujte údaje, ktoré ste zadali',
 	'erreur_option_nom_unique' => 'Tento názov už používa iné pole, a v tomto formulári musí byť jedinečný.',
 
 	// I
