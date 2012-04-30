@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
-	'manuelsite_description' => 'Ce plugin installe une icône d\'aide permettant d\'afficher depuis n\'importe quelle page de l\'espace privé le manuel de rédaction du site. Ce manuel est un article du site. Le plugin fournit également un jeu d\'item de Foire Aux Questions courants pouvant être insérés facilement dans votre manuel.', # NEW
+	'manuelsite_description' => 'Tento zásuvný modul nainštaluje ikonu pomocníka, ktorá umožňuje zobraziť hociktorú stránku tohto manuálu na publikovanie zo súkromnej zóny. Tento manuál je článok na stránke. Zásuvný modul ponúka aj časť Časté otázky, ktorú môžete do svojho manuálu ľahko vložiť.',
 	'manuelsite_nom' => 'Manuál na publikovanie stránky',
 	'manuelsite_slogan' => 'Špeciálny manuál na vašu stránku pre vašich redaktorov'
 );
