@@ -63,7 +63,7 @@ Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [
 	'autobr:nom' => 'Retorns de línia automàtics',
 	'autobr_non' => 'A l\'interior d\'etiquetes &lt;alinea>&lt;/alinea>',
 	'autobr_oui' => 'Articles i missatges públics (etiquetes @BALISES@)',
-	'autobr_racc' => 'Retorns de línia: <b>&lt;alinea>&lt;/alinea></b>',
+	'autobr_racc' => 'Retorns de línia: <b>&lt;alinea>&lt;/alinea></b>', # MODIF
 
 	// B
 	'balise_set:description' => 'Per simplificar les escriptures del tipus <code>#SET{x,#GET{x}|un_filtre}</code>, aquesta eina us ofereix la següent drecera: <code>#SET_UN_FILTRE{x}</code>. El filtre aplicat a una variable passa, per tant, al nom de l\'etiqueta.
@@ -406,7 +406,7 @@ Per definir aquest logotip, dirigiu-vos a la pàgina «<:titre_configuration:>»
 [[%suite_introduction%]]
 @puce@ Si l\'etiqueta #INTRODUCTION es fa servir per resumir un article, llavors el Ganivet Su&iacute;s pot fabricar un hipervincle al damunt dels punts de continuaci&oacute; definits m&eacute;s amunt per tal portar al lector cap al text original. Per exemple: &laquo;Llegir la continuaci&oacute; de l\'article…&raquo;
 [[%lien_introduction%]]
-',
+', # MODIF
 	'introduction:nom' => 'Etiqueta #INTRODUCTION',
 
 	// J

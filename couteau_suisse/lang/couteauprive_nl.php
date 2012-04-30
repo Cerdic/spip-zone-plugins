@@ -59,7 +59,7 @@ Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [
 	'autobr:nom' => 'Automatische regeleinden',
 	'autobr_non' => 'Binnen labels &lt;alinea>&lt;/alinea>',
 	'autobr_oui' => 'Artikelen en openbare berichten (labels @BALISES@)',
-	'autobr_racc' => 'Terug van de line : <b><alinea></alinea></b>',
+	'autobr_racc' => 'Terug van de line : <b><alinea></alinea></b>', # MODIF
 
 	// B
 	'balise_set:description' => 'Afin d\'alléger les écritures du type <code>#SET{x,#GET{x}|un_filtre}</code>, cet outil vous offre le raccourci suivant : <code>#SET_UN_FILTRE{x}</code>. Le filtre appliqué à une variable passe donc dans le nom de la balise.

@@ -62,7 +62,7 @@ Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [
 	'autobr:nom' => 'Automatické zlomy riadkov',
 	'autobr_non' => 'Vnútorné tagy &lt;alinea>&lt;/alinea>',
 	'autobr_oui' => 'Články a verejné správy (tagy @BALISES@)',
-	'autobr_racc' => 'Návrat na riadok: <b><alinea></alinea></b>',
+	'autobr_racc' => 'Zlomov riadkov: <b>&lt;alinea>&lt;/alinea></b>',
 
 	// B
 	'balise_set:description' => 'Na zjednodušenie prvkov kódu, ako <code>#SET{x,#GET{x}|a_filter}</code>, tento nástroj ponúka tieto skratky: <code>#SET_UN_FILTRE{x}.</code> Filter, ktorý sa použil na premennú sa preto prenáša v názve tagu.
@@ -318,8 +318,8 @@ When making an official update, update the associated remote file (click above o
 N.B: some Penknife tools require {jQuery} to be installed. ', # MODIF
 	'f_jQuery:nom' => 'Deactivate jQuery',
 	'filets_sep:aide' => 'Oddeľovacie čiary: <b>__i__</b> alebo <b>i</b> je číslo.<br />Iné dostupné čiary: @liste@',
-	'filets_sep:description' => 'Inserts separating lines for any SPIP texts which can be customised with a stylesheet.
-_ The syntax is: "__code__", where "code" is either the identifying number (from 0 to 7) of the line to insert and which is linked to the corresponding style, or the name of an image in the plugins/couteau_suisse/img/filets directory.', # MODIF
+	'filets_sep:description' => 'Vloží oddeľujúce čiary do hocijakého textu v SPIPe, čo sa dá prispôsobiť v súbore so štýlom.
+_ Syntax je: "__code__", ke "code" je buď identifikačné číslo (od 0 do 7) čiary, ktorú chcete vložiť a ktorá je prepojená s príslušným štýlom, alebo názov obrázka v priečinku plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'Dividing lines',
 	'filtrer_javascript:description' => 'Three modes are available for controlling JavaScript inserted directly in the text of articles:
 - <i>never</i>: JavaScript is prohibited everywhere
@@ -357,7 +357,7 @@ Thus multi blocks are always displayed in the language requested by the visitor.
 	'glossaire_inverser' => 'Navrhnutá oprava: prehoďte poradie kľúčových slov v databáze.',
 	'glossaire_js' => 'Riešenie JavaScriptom',
 	'glossaire_ok' => '@nb@ skontrolovaných slov. Zdá sa, že všetky sú v poriadku.',
-	'guillemets:description' => 'Automatically replaces straight inverted commas (") by curly ones, using the correct ones for the current language. The replacement does not change the text stored in the database, but only the display on the screen.', # MODIF
+	'guillemets:description' => 'Automaticky nahrádza rovné úvodzovky (") okrúhlymi, pričom používa správne úvodzovky pre aktuálny jazyk. Nahradenie nemení text uložený v databáze, ale iba jeho zobrazenie na obrazovke.',
 	'guillemets:nom' => 'Okrúhle opačné bodky',
 
 	// H
@@ -710,7 +710,7 @@ _ • {No cache}: temporarily deactivating the cache can be useful when the site
 _ • {Cache checking}: similar to the preceding option. However, all results are written to disk in order to be able to check them.</q1>[[%radio_desactive_cache4%]]', # MODIF
 	'spip_cache:description3' => '@puce@ The "Compresser" extension available in SPIP is used to compress the various CSS and JavaScript code sections of your pages and insert them in a static cache file. This speeds up the display of your site, and limits both the number of calls made to the server and the size of the files that need to be retrieved.', # NEW
 	'spip_cache:nom' => 'SPIP and the cache',
-	'spip_ecran:description' => 'Specify the screen width imposed on everyone in the private zone. A narrow screen will display two columns and a wide screen will display three. The default settings leaves the user to make their own choice which will be stored in a browser cookie.[[%spip_ecran%]]', # NEW
+	'spip_ecran:description' => 'Nastaví šírku obrazovky pre každého v súkromnej zóne. Úzka obrazovka zobrazí dva stĺpce a široká obrazovka zobrazí tri. Predvolené nastavenia nechávajú používateľa, aby sa rozhodol sám, čo sa uloží v cookie prehliadača.[[%spip_ecran%]]',
 	'spip_ecran:nom' => 'Šírka obrazovky',
 	'stat_auteurs' => 'Autori v štatistikách',
 	'statuts_spip' => 'Iba tento status SPIPU:',
@@ -732,11 +732,11 @@ Note: For keywords, #TITRE_GROUPE is an alias of #TITRE_PARENT. SPIP treats the 
 For example, in an (ARTICLES) loop, #TITRE_SECTEUR will give the title of the sector of the current article, since the identifier #ID_SECTEUR (or the field  \'id_secteur\') is available in the loop.[[%titres_etendus%]]', # MODIF
 	'titre_parent:nom' => 'Tagy #TITRE_PARENT/OBJECT',
 	'titre_tests' => 'The Penknife - Test page',
-	'titres_typo:description' => 'Transforme tous les intertitres <html>« {{{Mon intertitre}}} »</html> en image typographique paramétrable.[[%i_taille% pt]][[%i_couleur%]][[%i_police%
+	'titres_typo:description' => 'Zmení všetky nadpisy <html> "{{{Môj nadpis}}}"</html> na nastaviteľný typografický obrazec.[[%i_taille% pt]][[%i_couleur%]][[%i_police%
 
-Polices disponibles : @_CS_FONTS@]][[%i_largeur% px]][[%i_hauteur% pt]][[%i_padding% px]][[%i_align%]]
+Dostupné písma: @_CS_FONTS@]][[%i_largeur% px]][[%i_hauteur% pt]][[%i_padding% px]][[%i_align%]]
 
-Cet outil est compatible avec : « [.->sommaire] ».', # NEW
+Tento nástroj je kompatibilný s nástrojom: "[.->sommaire]".',
 	'titres_typo:nom' => 'Medzititulok v obrázku',
 	'tous' => 'Všetko',
 	'toutes_couleurs' => '36 farieb v štýloch CSS: @_CS_EXEMPLE_COULEURS@',
@@ -879,9 +879,9 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'version_update_chargeur' => 'Automatic download',
 	'version_update_chargeur_title' => 'Download the latest version of the plugin using the plugin «Downloader»',
 	'version_update_title' => 'Downloads the latest version of the plugin and updates it automatically.',
-	'verstexte:description' => '2 filters for your templates which make it possible to produce lighter pages.
-_ version_texte : extracts the text content of an HTML page, excluding some basic tags.
-_ version_plein_texte : extracts the full text content from an html page.', # MODIF
+	'verstexte:description' => '2 filtre pre vaše šablóny, ktoré vám umožňujú vytvárať stránky, ktoré zaberajú menej miesta.
+_ version_texte: extrahuje text HTML stránky, okrem niektorých základných tagov.
+_ version_plein_texte: extrahuje celý text html stránky.',
 	'verstexte:nom' => 'Textová verzia',
 	'visiteurs_connectes:description' => 'Vytvorí fragment HTML pre vaše šablóny, ktorý zobrazí počet návštevníkov, ktorí sú práve pripojení na verejnej stránke.
 

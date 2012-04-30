@@ -63,7 +63,7 @@ Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [
 	'autobr:nom' => 'Retours de ligne automatiques',
 	'autobr_non' => 'À l\'intérieur des balises &lt;alinea>&lt;/alinea>',
 	'autobr_oui' => 'Articles et messages publics (balises @BALISES@)',
-	'autobr_racc' => 'Retours de ligne : <b><alinea></alinea></b>',
+	'autobr_racc' => 'Retours de ligne : <b><alinea></alinea></b>', # MODIF
 
 	// B
 	'balise_set:description' => 'Afin d\'alléger les écritures du type <code>#SET{x,#GET{x}|un_filtre}</code>, cet outil t\'offre le raccourci suivant : <code>#SET_UN_FILTRE{x}</code>. Le filtre appliqué à une variable passe donc dans le nom de la balise.
@@ -401,7 +401,7 @@ Pour définir ce logo, va sur la page «<:titre_configuration:>» en cliquant su
 @puce@ Par défaut, les points de suite ajoutés au résultat de la balise #INTRODUCTION si le texte est trop long sont : <html>«&nbsp;(…)»</html>. Tu peux ici préciser votre propre chaîne de caractère indiquant au lecteur que le texte tronqué a bien une suite.
 [[%suite_introduction%]]
 @puce@ Si la balise #INTRODUCTION est utilisée pour résumer un article, alors le Couteau Suisse peut fabriquer un lien hypertexte sur les points de suite définis ci-dessus afin de mener le lecteur vers le texte original. Par exemple : «Lire la suite de l\'article…»
-[[%lien_introduction%]]',
+[[%lien_introduction%]]', # MODIF
 	'introduction:nom' => 'Balise #INTRODUCTION',
 
 	// J

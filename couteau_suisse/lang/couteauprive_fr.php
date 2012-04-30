@@ -398,7 +398,7 @@ Pour définir ce logo, rendez-vous sur la page «<:titre_configuration:>» en cl
 
 @puce@ Vous pouvez préciser (en pourcentage par rapport à la valeur utilisée par défaut) la longueur du texte renvoyé par balise #INTRODUCTION. Une valeur nulle ou égale à 100 ne modifie pas l\'aspect de l\'introduction et utilise donc les valeurs par défaut suivantes : 500 caractères pour les articles, 300 pour les brèves et 600 pour les forums ou les rubriques.[[%lgr_introduction% %]]
 
-@puce@ Par défaut, les points de suite ajoutés au résultat de la balise #INTRODUCTION si le texte est trop long sont : <html>«&nbsp;(…)»</html>. Vous pouvez ici préciser votre propre chaîne de caractère indiquant au lecteur que le texte tronqué a bien une suite.[[%suite_introduction%]]
+@puce@ Par défaut, les points de suite ajoutés au résultat de la balise #INTRODUCTION si le texte est trop long sont : <html>« (…)»</html>. Vous pouvez ici préciser votre propre chaîne de caractère indiquant au lecteur que le texte tronqué a bien une suite.[[%suite_introduction%]]
 
 @puce@ Si la balise #INTRODUCTION est utilisée pour résumer un article, alors le Couteau Suisse peut fabriquer un lien hypertexte sur les points de suite définis ci-dessus afin de mener le lecteur vers le texte original. Par exemple : «Lire la suite de l\'article…»[[%lien_introduction%]]',
 	'introduction:nom' => 'Balise #INTRODUCTION',

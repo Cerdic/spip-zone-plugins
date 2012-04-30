@@ -63,7 +63,7 @@ Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [
 	'autobr:nom' => 'Automatic line breaks',
 	'autobr_non' => 'All site text between &lt;alinea>&lt;/alinea> tags',
 	'autobr_oui' => 'All article text and public messages  (the #TEXTE tag)',
-	'autobr_racc' => 'Line breaks: <b>&lt;alinea>&lt;/alinea></b>',
+	'autobr_racc' => 'Line breaks: <b>&lt;alinea>&lt;/alinea></b>', # MODIF
 
 	// B
 	'balise_set:description' => 'In order to reduce the complexity of code segments like <code>#SET{x,#GET{x}|a_filter}</code>, this tool offers you the following short-cut: <code>#SET_UN_FILTRE{x}</code>. The filter applied to a variable is therefore passed in the name of the tag.
@@ -402,7 +402,7 @@ To define this logo, go to the "<:titre_configuration:>" page by clicking on the
 
 @puce@ By default, if the text is too long, #INTRODUCTION will end with 3 dots (an ellipsis): <html>" (…)"</html>. You can change this to a customised string which indicates that there is more text available.[[%suite_introduction%]]
 
-@puce@ If the #INTRODUCTION tag is used to give a summary of an article, the Swiss Army Knife can generate a link to the article for the 3 dots or string  that indicates that there is more text available. For example: "Read the rest of the article…"[[%lien_introduction%]]',
+@puce@ If the #INTRODUCTION tag is used to give a summary of an article, the Swiss Army Knife can generate a link to the article for the 3 dots or string  that indicates that there is more text available. For example: "Read the rest of the article…"[[%lien_introduction%]]', # MODIF
 	'introduction:nom' => '#INTRODUCTION tag',
 
 	// J
