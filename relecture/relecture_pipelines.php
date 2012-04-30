@@ -13,7 +13,6 @@ function relecture_jqueryui_plugins($scripts) {
 
 	$page = _request('exec');
 	if ($page == 'relecture') {
-		$scripts[] = "jquery.ui.widget";
 		$scripts[] = "jquery.ui.accordion";
 	}
 
