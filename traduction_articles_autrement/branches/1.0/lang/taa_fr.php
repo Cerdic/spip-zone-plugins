@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'affichage_liste_compacte_desactive' => 'Désactivet l\'affichage compacte des liste des articles',
+	'affichage_liste_compacte_desactive' => 'Désactiver l\'affichage compacte des listes des articles',
 
 	// C
 	'changer_langue' => 'Changer la langue de l\'article',
