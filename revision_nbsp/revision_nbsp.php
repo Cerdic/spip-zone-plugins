@@ -25,10 +25,6 @@
 			$letexte = str_replace('&nbsp;',
 				'<span style="border-bottom:2px solid #ccc;">&nbsp;</span>', $letexte);
 
-			// NBSP sous forme small.fine :
-			if (strpos($letexte, '<small class="fine">'))
-				$letexte .= '<style type="text/css">small.fine {background-color:#ccc;}</style>';
-
 			// redondant avec le nouveau systeme
 			$letexte = str_replace("\n_ ",
 				"<span style='color:orange;'>&para;</span>\n_ ", $letexte);
@@ -56,6 +52,10 @@
 			}
 #			else $x['data'] .= "<div>pas de notes a corriger</div>";
 		}
+
+		// ajouter le css des nbsp;
+		$x['data'] .= '<style type="text/css">small.fine {background-color:#ccc;}</style>';
+
 		return $x;
 	}
 
