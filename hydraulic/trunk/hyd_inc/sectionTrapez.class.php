@@ -40,30 +40,30 @@ class cSnTrapez extends acSection {
     }
 
     protected function CalcB($bBerge=false) {
-		if(!$bBerge && $this->rY > $this->oP->rYB) {
-			return $this->rLargeurBerge;
-		}
-		else {
-			return $this->rLargeurFond+2*$this->rFruit*$this->rY;
-		}
+        if(!$bBerge && $this->rY > $this->oP->rYB) {
+            return $this->rLargeurBerge;
+        }
+        else {
+            return $this->rLargeurFond+2*$this->rFruit*$this->rY;
+        }
     }
 
     protected function CalcP() {
         if($this->rY > $this->oP->rYB) {
-			return $this->CalcGeo('P') + parent::CalcP($this->rY-$this->oP->rYB);
-		}
-		else {
-			return $this->rLargeurFond+2*sqrt(1+pow($this->rFruit,2))*$this->rY;
-		}
+            return $this->CalcGeo('P') + parent::CalcP($this->rY-$this->oP->rYB);
+        }
+        else {
+            return $this->rLargeurFond+2*sqrt(1+pow($this->rFruit,2))*$this->rY;
+        }
     }
 
     protected function CalcS() {
- 		if($this->rY > $this->oP->rYB) {
-			return $this->CalcGeo('S') + parent::CalcS($this->rY-$this->oP->rYB);
-		}
-		else {
-			return $this->rY*($this->rLargeurFond+$this->rFruit*$this->rY);
-		}
+        if($this->rY > $this->oP->rYB) {
+            return $this->CalcGeo('S') + parent::CalcS($this->rY-$this->oP->rYB);
+        }
+        else {
+            return $this->rY*($this->rLargeurFond+$this->rFruit*$this->rY);
+        }
     }
 
     /**
@@ -71,12 +71,12 @@ class cSnTrapez extends acSection {
      * @return dS
      */
     protected function CalcSder() {
-		if($this->rY > $this->oP->rYB) {
-			return parent::CalcSder();
-		}
-		else {
-			return $this->rLargeurFond + 2*$this->rFruit*$this->rY;
-		}
+        if($this->rY > $this->oP->rYB) {
+            return parent::CalcSder();
+        }
+        else {
+            return $this->rLargeurFond + 2*$this->rFruit*$this->rY;
+        }
     }
 
     /**
@@ -84,12 +84,12 @@ class cSnTrapez extends acSection {
      * @return dP
      */
     protected function CalcPder() {
-		if($this->rY > $this->oP->rYB) {
-			return parent::CalcPder();
-		}
-		else {
-			return 2*sqrt(1+$this->rFruit*$this->rFruit);
-		}
+        if($this->rY > $this->oP->rYB) {
+            return parent::CalcPder();
+        }
+        else {
+            return 2*sqrt(1+$this->rFruit*$this->rFruit);
+        }
     }
 
     /**
@@ -97,20 +97,25 @@ class cSnTrapez extends acSection {
      * @return dB
      */
     protected function CalcBder() {
-		if($this->rY > $this->oP->rYB) {
-			return parent::CalcBder();
-		}
-		else {
-			return 2*$this->rLargeurFond*$this->rFruit;
-		}
+        if($this->rY > $this->oP->rYB) {
+            return parent::CalcBder();
+        }
+        else {
+            return 2*$this->rLargeurFond*$this->rFruit;
+        }
     }
 
     /**
      * Calcul de la distance du centre de gravité de la section à la surface libre.
      * @return Distance du centre de gravité de la section à la surface libre
      */
-    protected function CalcYg() {
-        return ($this->rLargeurFond / 2 + $this->rFruit * $this->rY / 3) * pow($this->rY,2) / $this->Calc('S');
+    protected function CalcSYg() {
+        if($this->Calc('S') != 0){
+            return ($this->rLargeurFond / 2 + $this->rFruit * $this->rY / 3) * pow($this->rY,2) / $this->Calc('S');
+        }
+        else{
+            return INF;
+        }
     }
 
 }

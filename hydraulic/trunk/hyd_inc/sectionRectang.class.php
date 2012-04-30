@@ -4,7 +4,7 @@
  *      Gestion des calculs au niveau des Sections
  */
 
-/*      Copyright 2009-2012 Dorch <dorch@dorch.fr>
+/*      Copyright 2012 Dorch <dorch@dorch.fr>
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ include_spip('hyd_inc/section.class');
 class cSnRectang extends acSection {
 
     function __construct(&$oLog,&$oP,$rLargeurFond) {
-		$this->rLargeurBerge = $rLargeurFond;
+        $this->rLargeurBerge = $rLargeurFond;
         parent::__construct($oLog,$oP);
     }
 
@@ -47,8 +47,8 @@ class cSnRectang extends acSection {
      * Calcul de la distance du centre de gravité de la section à la surface libre.
      * @return Distance du centre de gravité de la section à la surface libre
      */
-    protected function CalcYg() {
-        return parent::CalcYg($this->rY);
+    protected function CalcSYg() {
+        return parent::CalcSYg($this->rY);
     }
 
 }

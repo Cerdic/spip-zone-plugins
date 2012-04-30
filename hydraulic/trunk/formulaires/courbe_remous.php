@@ -1,88 +1,80 @@
 <?php
-/*
- * formulaires/courbe_remous.php
+/**
+ *      @file formulaires/courbe_remous.php
+ *      Fonctions du formulaire CVT pour les courbes de remous
+ */
+
+/*      Copyright 2009-2012 Dorch <dorch@dorch.fr>, Médéric Dulondel
  *
+ *      This program is free software; you can redistribute it and/or modify
+ *      it under the terms of the GNU General Public License as published by
+ *      the Free Software Foundation; either version 2 of the License, or
+ *      (at your option) any later version.
  *
+ *      This program is distributed in the hope that it will be useful,
+ *      but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *      GNU General Public License for more details.
  *
- * Copyright 2012 David Dorchies <dorch@dorch.fr>
- *
- *
- *
- * This program is free software; you can redistribute it and/or modify
- *
- * it under the terms of the GNU General Public License as published by
- *
- * the Free Software Foundation; either version 2 of the License, or
- *
- * (at your option) any later version.
- *
- *
- *
- * This program is distributed in the hope that it will be useful,
- *
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- *
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *
- * GNU General Public License for more details.
- *
- *
- *
- * You should have received a copy of the GNU General Public License
- *
- * along with this program; if not, write to the Free Software
- *
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- *
- * MA 02110-1301, USA.
- *
+ *      You should have received a copy of the GNU General Public License
+ *      along with this program; if not, write to the Free Software
+ *      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ *      MA 02110-1301, USA.
  */
 
 include_spip('hyd_inc/section');
 
+/* Tableau des champs à afficher dans le formulaire.
+ * On travaille avec les libelles non traduits pour pouvoir gérer
+ * le multilinguisme.
+ */
 function mes_saisies_section() {
 
+    // On récupère les champs communs à tous les formulaires à savoir les champs de section.
     $fieldset_champs = caract_communes();
 
     $fieldset_champs['Caract_bief'] = array(
-										   'caract_bief',
-										   array(
-												 'rKs'    =>array('coef_strickler',50),
-												 'rLong'  =>array('longueur_bief', 50),
-												 'rIf'    =>array('pente_fond', 0.005),
-												 'rYBerge'=>array('h_berge',1)
-												)
-									   );
+                                           'caract_bief',
+                                           array(
+                                                 'rKs'    =>array('coef_strickler',50),
+                                                 'rLong'  =>array('longueur_bief', 50),
+                                                 'rIf'    =>array('pente_fond', 0.005),
+                                                 'rYBerge'=>array('h_berge',1)
+                                                )
+                                       );
 
-	$fieldset_champs['Cond_lim']    = array(
-										   'condition_limite',
-										   array(
-												 'rQ'     =>array('debit_amont', 2),
-												 'rYaval' =>array('h_aval_imposee', 0.6),
-												 'rYamont'=>array('h_amont_imposee', 0.15)
-												)
-									   );
+    $fieldset_champs['Cond_lim']    = array(
+                                           'condition_limite',
+                                           array(
+                                                 'rQ'     =>array('debit_amont', 2),
+                                                 'rYaval' =>array('h_aval_imposee', 0.6),
+                                                 'rYamont'=>array('h_amont_imposee', 0.15)
+                                                )
+                                       );
 
-	$fieldset_champs['Param_calc']  = array(
-										   'param_calcul',
-										   array(
-												 'rDx'    =>array('pas_discret', 5),
-												 'rPrec'  =>array('precision_calc', 0.001)
-												)
-									   );	
-		
+    $fieldset_champs['Param_calc']  = array(
+                                           'param_calcul',
+                                           array(
+                                                 'rDx'    =>array('pas_discret', 5),
+                                                 'rPrec'  =>array('precision_calc', 0.001)
+                                                )
+                                       );
+
   return $fieldset_champs;
 
 }
 
+// Définition des champs obligatoires pour le formulaire.
 function champs_obligatoires() {
 
     $tSaisie = mes_saisies_section();
+    $sTypeSection = _request('crTypeSection');
     $tChOblig = array();
-    $sTypeSection = _request('lTypeSection');
 
     foreach($tSaisie as $IdFS=>$FieldSet) {
+        // Si ce n'est pas une section ou la section définie...
         if((substr($IdFS,0,1) != 'F') || ($IdFS == $sTypeSection)){
+            // ... alors on parcourt notre deuxième tableau en ajoutant les champs nécessaires.
             foreach($FieldSet[1] as $Cle=>$Champ) {
                 if((!isset($Champ[2])) || (isset($Champ[2]) && $Champ[2])) {
                     $tChOblig[] = $IdFS.'_'.$Cle;
@@ -97,13 +89,14 @@ function formulaires_courbe_remous_charger_dist() {
     // On charge les saisies et les champs qui nécessitent un accès par les fonctions
     $tSaisie_section = mes_saisies_section();
     $valeurs = array(
-        'lTypeSection' => 'FT',
+        'crTypeSection' => 'FT',
         'mes_saisies' => $tSaisie_section
     );
 
+	// On charge tous les champs avec leur valeur
     foreach($tSaisie_section as $CleFD=>$FieldSet) {
         foreach($FieldSet[1] as $Cle=>$Champ) {
-                $valeurs[$CleFD.'_'.$Cle] = $Champ[1];
+			$valeurs[$CleFD.'_'.$Cle] = $Champ[1];
         }
     }
 
@@ -111,13 +104,10 @@ function formulaires_courbe_remous_charger_dist() {
 }
 
 function formulaires_courbe_remous_verifier_dist(){
-
-
     $erreurs = array();
     $datas = array();
-
     $tChOblig= champs_obligatoires();
-    // verifier que les champs obligatoires sont bien là :
+    // On vérifie que les champs obligatoires sont bien là :
     foreach($tChOblig as $obligatoire) {
         if (!_request($obligatoire)) {
             $erreurs[$obligatoire] = _T('hydraulic:champ_obligatoire');}
@@ -126,6 +116,7 @@ function formulaires_courbe_remous_verifier_dist(){
         }
     }
 
+	// Gestion des valeurs négatives
     foreach($datas as $champ=>$data) {
         if ($data < 0) $erreurs[$champ] = _T('hydraulic:valeur_positive');
     }
@@ -149,17 +140,18 @@ function formulaires_courbe_remous_traiter_dist(){
     $echo = '';
     $tSaisie = mes_saisies_section();
     $tChUtil = array();
-    $lTypeSection = _request('lTypeSection');
+    $crTypeSection = _request('crTypeSection');
 
+	// On récupère tous les champs utiles, à savoir les champs fixes, et les champs appartenant à la section choisie
     foreach($tSaisie as $IdFS=>$FieldSet) {
-        if((substr($IdFS,0,1) != 'F') || ($IdFS == $lTypeSection)){
+        if((substr($IdFS,0,1) != 'F') || ($IdFS == $crTypeSection)){
             foreach($FieldSet[1] as $Cle=>$Champ) {
-                    $tChUtil[] = $IdFS.'_'.$Cle;
+				$tChUtil[] = $IdFS.'_'.$Cle;
             }
         }
     }
 
-    //On récupère les données
+    //On récupère tous les champs utiles dans le tableau datas
     foreach($tChUtil as $champ) {
         if (_request($champ)){
             $datas[$champ] = _request($champ);
@@ -191,12 +183,13 @@ function formulaires_courbe_remous_traiter_dist(){
     //spip_log(array($Cond_lim_rYaval,$Caract_bief_rKs,$Cond_lim_rQ,$Caract_bief_rLong,$Caract_bief_rIf,$Param_calc_rDx,$Param_calc_rPrec),'hydraulic');
 
     // Enregistrement des paramètres dans les classes qui vont bien
-    $oParam= new cParam($Cond_lim_rYaval,$Caract_bief_rKs,$Cond_lim_rQ,$Caract_bief_rLong,$Caract_bief_rIf,$Param_calc_rDx,$Param_calc_rPrec,$Caract_bief_rYBerge);
+    $oParam= new cParam($Caract_bief_rKs,$Cond_lim_rQ,$Caract_bief_rIf,$Param_calc_rPrec,$Caract_bief_rYBerge,$Cond_lim_rYaval,$Param_calc_rDx,$Caract_bief_rLong);
 
-    switch($lTypeSection) {
+	// Création d'un objet de type Section selon la section choisie. 
+    switch($crTypeSection) {
         case 'FT':
             include_spip('hyd_inc/sectionTrapez.class');
-            $oSection=new cSnTrapez($oLog,$oParam,$FT_rLarg,$FT_rFruit);
+            $oSection=new cSnTrapez($oLog,$oParam,$FT_rLargeurFond,$FT_rFruit);
             break;
 
         case 'FR':
@@ -206,21 +199,23 @@ function formulaires_courbe_remous_traiter_dist(){
 
         case 'FC':
             include_spip('hyd_inc/sectionCirc.class');
-            $oSection=new cSnCirc($oLog,$oParam,$FC_rDiam);
+            $oSection=new cSnCirc($oLog,$oParam,$FC_rD);
             break;
 
         case 'FP':
-            echo 'puissance';
+            include_spip('hyd_inc/sectionPuiss.class');
+            $oSection=new cSnPuiss($oLog,$oParam,$FP_rCoef,$FP_rLargBerge);
+            break;
 
         default:
-            include_spip('hyd_inc/sectionTrapez.class.php');
-            $oSection=new cSnTrapeze($oLog,$oParam,$FT_rLarg,$FT_rFruit);
+            include_spip('hyd_inc/sectionTrapez.class');
+            $oSection=new cSnTrapeze($oLog,$oParam,$FT_rLargeurFond,$FT_rFruit);
     }
 
     /***************************************************************************
     *                        Calcul de la ligne d'eau
     ****************************************************************************/
-    $bNoCache = false; // true pour débugage
+    $bNoCache = true; // true pour débugage
     if(!$bNoCache && is_file(HYD_CACHE_DIRECTORY.$CacheFileName)) {
         // On récupère toutes les données dans un cache déjà créé
         list($tr,$sLog,$oSection->rHautCritique,$oSection->rHautNormale) = ReadCacheFile($CacheFileName);
@@ -350,6 +345,7 @@ function formulaires_courbe_remous_traiter_dist(){
         $echo.=($i%2==0)?'row_even':'row_odd';
         $echo.='"><td>'.format_nombre($rX,$oParam->iPrec).'</td>';
         if(isset($tr['X1']) && !(($cle = array_search($rX,$tr['X1'])) === false)) {
+			// On formalise les résultats, avec le nombre de chiffres aprés la virgule adéquat
             $echo .= '<td>'.format_nombre($tr['Y1'][$cle],$oParam->iPrec).'</td>';
             $echo .= '<td>'.format_nombre($oSection->Calc('Fr', $tr['Y1'][$cle]),$oParam->iPrec).'</td>';
         }

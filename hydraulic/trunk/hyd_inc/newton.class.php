@@ -1,54 +1,49 @@
 <?php
-/*
-def deriv(f , c, dx = 0.0001):
-   """
-deriv(f,c,dx) --> float
+/**
+ *      @file inc_hyd/newton.class.php
+ *      Classe abstraite de résolution d'une équation par la méthode de Newton
+ */
 
-Returns f'(c), computed as a symmetric difference quotient.  Make dx smaller for more precise results.
-"""
+/*      Copyright 2009-2012 David Dorchies <dorch@dorch.fr>
+ *
+ *      This program is free software; you can redistribute it and/or modify
+ *      it under the terms of the GNU General Public License as published by
+ *      the Free Software Foundation; either version 2 of the License, or
+ *      (at your option) any later version.
+ *
+ *      This program is distributed in the hope that it will be useful,
+ *      but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *      GNU General Public License for more details.
+ *
+ *      You should have received a copy of the GNU General Public License
+ *      along with this program; if not, write to the Free Software
+ *      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ *      MA 02110-1301, USA.
+ */
 
-   return (f(c+dx) - f(c - dx))/ (2*dx)
 
-
-def fuzzyequals(a,b,tol=0.0001):
-   """
-fuzzyequals(a,b,tol) --> Bool
-
-Returns True if a is within tol of b.
-"""
-   return abs(a-b) < tol
-
-
-def Newton(f, c):
-
-   """
-Newton(f,c) --> float
-
-Returns the x closest to c such that f(x) = 0.
-"""
-
- if fuzzyequals(f(c),0,tol):
-        return c
-
- else:
-        # catch recursion limit errors, division by zero errors
-        try:
-            # x_n+1 = x_n - f(x_n)/f'(x_n)
-            return newton(f, c - f(c)/deriv(f,c,tol), tol)
-        except:
-            # We've either hit a horizontal tangent or else
-            # haven't been able to find one within the recursion depth.
-            return None
-*/
 abstract class acNewton {
     protected $rTol;
     protected $rDx;
     private $iCpt=0;
-    private $iCptMax=100;
+    private $iCptMax=50;
     private $rRelax=1; /// Coefficient de relaxation
     private $rFnPrec=0; /// Mémorisation du Fn précédent pour détecter le changement de signe
     private $iOscil=0; /// Nombre de changement de signe de Delta
     private $oLog;
+
+
+    /**
+     * Constructeur de la classe
+     * @param $oSn Section sur laquelle on fait le calcul
+     * @param $oP Paramètres supplémentaires (Débit, précision...)
+     */
+    function __construct(cParam $oP) {
+        $this->rTol=$oP->rPrec;
+        $this->rDx=$oP->rPrec/10;
+    }
+
 
     /**
      * Calcul de la fonction f(x) dont on cherche le zéro.
@@ -63,7 +58,7 @@ abstract class acNewton {
      * @return Calcul de la fonction
      */
     protected function CalcDer($x) {
-        spip_log('Newton:CalcDer $rX='.$x,'hydraulic');
+        //~ spip_log('Newton:CalcDer $rX='.$x,'hydraulic');
         return ($this->CalcFn($x+$this->rDx)-$this->CalcFn($x-$this->rDx))/(2*$this->rDx);
     }
 
@@ -84,13 +79,13 @@ abstract class acNewton {
     public function Newton($rX) {
         $this->iCpt++;
         $rFn=$this->CalcFn($rX);
-        //echo('</br>Newton '.$this->iCpt.' Relax='.$this->rRelax.'- f('.$rX.') = '.$rFn);
+        //~ echo('</br>Newton '.$this->iCpt.' Relax='.$this->rRelax.'- f('.$rX.') = '.$rFn);
         if($this->FuzzyEqual($rFn) || $this->iCpt >= $this->iCptMax) {
             return $rX;
         }
         else {
             $rDer=$this->CalcDer($rX);
-            //echo(' - f\' = '.$rDer);
+            //~ echo(' - f\' = '.$rDer);
             if($rDer!=0) {
 /*
                 if($this->rRelax > 1) {
@@ -107,7 +102,6 @@ abstract class acNewton {
                     elseif($this->nOscil>2) {
                         // On est dans le cas d'une oscillation autour de la solution
                         // On réduit le coefficient de relaxation
-                        //~ echo '</br> ******  Delta='.$Delta.' DeltaPrec='.$this->rDelta;
                         $this->rRelax *= 0.5;
                     }
                 }
@@ -138,13 +132,13 @@ abstract class acNewton {
      * Pour savoir si le Newton a convergé
      * @return true si oui, false sinon
      */    public function HasConverged() {
-		if($this->iCpt >= $this->iCptMax) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
+        if($this->iCpt >= $this->iCptMax) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
 }
 
 ?>

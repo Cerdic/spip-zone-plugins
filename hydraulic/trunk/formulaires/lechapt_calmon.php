@@ -45,11 +45,11 @@ function mes_champs_coeff_materiau() {
 
 function mes_champs_sans_coeff_materiau(){
 	$mes_champs_sans_coeff = array(
-			'Q' => _T('hydraulic:param_Q'),
-			'D' => _T('hydraulic:param_D'),
-			'J' => _T('hydraulic:param_J'),
-			'Lg' => _T('hydraulic:param_Lg')
-		);
+		'Q' => _T('hydraulic:param_Q'),
+		'D' => _T('hydraulic:param_D'),
+		'J' => _T('hydraulic:param_J'),
+		'Lg' => _T('hydraulic:param_Lg')
+	);
 	
 	return $mes_champs_sans_coeff;
 }
@@ -400,8 +400,8 @@ function formulaires_lechapt_calmon_traiter_dist(){
 					}
 				}
 
-	$echo.= '		<th style="text-align:center;" scope="col" rowspan="2">(Abscisse)<br/>'.$tabClass['var'].'</th>
-					<th style="text-align:center;" scope="col" rowspan="2">(Ordonnée)<br/>'.$tabClass['cal'].'</th>
+	$echo.= '		<th style="text-align:center;" scope="col" rowspan="2">'._T('hydraulic:abscisse').'<br/>'.$tabClass['var'].'</th>
+					<th style="text-align:center;" scope="col" rowspan="2">'._T('hydraulic:ordonnee').'<br/>'.$tabClass['cal'].'</th>
 				</tr>	
 			</thead>
 			<tbody>';
@@ -464,6 +464,7 @@ function formulaires_lechapt_calmon_traiter_dist(){
 		}
 		// Récupération du graphique
 		$echo .= $oGraph->GetGraph('ligne_lechapt_calmon',400,600);
+		$echo .= $tabClass['var'];
 	}
 	$res['message_ok'] = $echo;
     return $res;

@@ -5,7 +5,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'abscisse'        => "Abscisse",
     'arret_calcul'    => "Arrêt du calcul : Hauteur critique atteinte à l'abscisse",
     'acier_lamine'    => "Acier laminé - Béton lisse",
-    // B
+    //B
     'berge'           => "Berge",
     // C
     'calcul_caract'   => "Le calcul a les caractéristiques suivantes :",
@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'calcul_torrentiel'=> "Condition limite amont <= Hauteur critique : calcul de la partie torrentielle à partir de l'amont",
     'champ_obligatoire'=> "Ce champ est obligatoire",
     'choix_materiau'  => "Choix du matériau",
-    'caract_lechapt_calmon' => "Caractéristiques",
+    'caract'          => "Caractéristiques",
     'calculer_lechapt_calmon' => "Calcul avec la formule de Lechapt et Calmon",
     'calcul_val'      => "Paramètre à calculer",
     'choix_section'   => "Choix de la section",
@@ -26,15 +26,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'charge_spe'      => "La charge spécifique (m)",
     'choix_donnee_calc' => "Choix de la donnée à calculer",
     'charge_critique' => "La charge critique (m)",
-    'larg_miroir'     => "La largeur au miroir (m)",
+    'cote_eau'        => "Côte de l'eau (m)",
+    'coef'            => "Coefficient",
     // D
-    'debit_amont'     => "Débit amont (m3/s)",
+    'debit_amont'     => "Débit amont (m³/s)",
     'def_section_trap'=> "Définition de la section trapézoïdale",
     'def_section_rect'=> "Définition de la section rectangulaire",
     'def_section_circ'=> "Définition de la section circulaire",
-    'def_section_puis'=> "Définition de la section puissance",
-	'diametre'       => "Diamètre (m)",
-	'donnee_calc'     => "Donnée à calculer",
+    'def_section_parab'=> "Définition de la section parabolique",
+    'diametre'        => "Diamètre (m)",
+    'donnee_calc'     => "Donnée à calculer",
+    'debit'           => "Débit (m³/s)",
     // F
     'fond'            => "Fond",
     'fruit'           => "Fruit (m/m)",
@@ -61,8 +63,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'ligne_eau_torrentielle'  => "Ligne d'eau torrentielle",
     'log_titre'       => "Journal des calculs",
     'longueur_bief'   => "Longueur du bief (m)",
+    'larg_miroir'     => "La largeur au miroir (m)",
     //N
     'newton_non_convergence' => "Non convergence du calcul (Méthode de Newton)",
+    // O
+    'ordonnee'        => "Ordonnée",
     // P
     'param_calcul'    => "Paramètres de calcul",
     'pas_ajustement'  => "ajustement du pas d'espace à ",
@@ -78,17 +83,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'param_D'         => "D: Diamètre du tuyau (m)",
     'param_J'         => "J: Perte de charge (m)",
     'param_Lg'        => "Lg: Longueur du tuyau (m)",
-    'precision_lechapt_calmon'  => "Précision de calcul(m)",
+    'precision'  => "Précision de calcul(m)",
     'perim_mouille'   => "Le périmètre mouillé (m)",
     'perte_charge'    => "La perte de charge (m/m)",
+
     //R
     'rayon_hyd'       => "Le rayon hydraulique (m)",
+    'rugosite_nc'     => "Rugosité (SI)",
     //S
     'saisie_erreur'   => "Votre saisie contient des erreurs !",
     'section_trap'    => "Section Trapézoïdale",
     'section_rect'    => "Section Rectangulaire",
     'section_circ'    => "Section Circulaire",
-    'section_puiss'   => "Section Puissance",
+    'section_parab'   => "Section Parabolique",
     'surf_mouille'    => "La surface mouillée (m²)",
     //T
     'tirant_eau'      => "Tirant d'eau (m)",

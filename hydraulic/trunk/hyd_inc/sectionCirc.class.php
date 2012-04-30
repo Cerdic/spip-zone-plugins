@@ -4,7 +4,7 @@
  *      Gestion des calculs au niveau des Sections
  */
 
-/*      Copyright 2009-2012 Dorch <dorch@dorch.fr>
+/*      Copyright 2012 Dorch <dorch@dorch.fr>
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ include_spip('hyd_inc/section.class');
  * Calculs de la section circulaire
  */
 class cSnCirc extends acSection {
-    protected $rD;      /// Diamètre du cercle
+    public $rD;      /// Diamètre du cercle
     private $rAlpha;    /// Angle de la surface libre par rapport au fond
 
     function __construct(&$oLog,&$oP,$rD) {
@@ -43,12 +43,12 @@ class cSnCirc extends acSection {
      * @return Alpha
      */
     protected function CalcAlpha() {
-		if($this->rY > $this->oP->rYB) {
-			$rY = $this->oP->rYB;
-		}
-		else {
-			$rY = $this->rY;
-		}
+        if($this->rY > $this->oP->rYB) {
+            $rY = $this->oP->rYB;
+        }
+        else {
+            $rY = $this->rY;
+        }
         if($rY <= 0) {
             return 0;
         }
@@ -84,12 +84,12 @@ class cSnCirc extends acSection {
      * @return B
      */
     protected function CalcB() {
-		if($this->rY > $this->oP->rYB) {
-			return parent::CalcB();
-		}
-		else {
-			return $this->rD * sin($this->Calc('Alpha'));
-		}
+        if($this->rY > $this->oP->rYB) {
+            return parent::CalcB();
+        }
+        else {
+            return $this->rD * sin($this->Calc('Alpha'));
+        }
     }
 
     /**
@@ -97,13 +97,13 @@ class cSnCirc extends acSection {
      * @return B
      */
      protected function CalcP() {
-		if($this->rY > $this->oP->rYB and !$this->bSnFermee) {
-			// On n'ajoute pas le périmètre dans le cas d'une fente de Preissmann
-			return $this->CalcGeo('P') + parent::CalcP($this->rY-$this->oP->rYB);
-		}
-		else {
-			return $this->rD * $this->Calc('Alpha');
-		}
+        if($this->rY > $this->oP->rYB and !$this->bSnFermee) {
+            // On n'ajoute pas le périmètre dans le cas d'une fente de Preissmann
+            return $this->CalcGeo('P') + parent::CalcP($this->rY-$this->oP->rYB);
+        }
+        else {
+            return $this->rD * $this->Calc('Alpha');
+        }
     }
 
     /**
@@ -111,12 +111,12 @@ class cSnCirc extends acSection {
      * @return S
      */
     protected function CalcS() {
- 		if($this->rY > $this->oP->rYB) {
-			return $this->CalcGeo('S') + parent::CalcS($this->rY-$this->oP->rYB);
-		}
-		else {
-			return pow($this->rD,2) / 4 * ($this->Calc('Alpha') - sin($this->Calc('Alpha')) * cos($this->Calc('Alpha')));
-		}
+        if($this->rY > $this->oP->rYB) {
+            return $this->CalcGeo('S') + parent::CalcS($this->rY-$this->oP->rYB);
+        }
+        else {
+            return pow($this->rD,2) / 4 * ($this->Calc('Alpha') - sin($this->Calc('Alpha')) * cos($this->Calc('Alpha')));
+        }
     }
 
     /**
@@ -124,12 +124,12 @@ class cSnCirc extends acSection {
      * @return dS
      */
     protected function CalcSder() {
- 		if($this->rY > $this->oP->rYB) {
-			return parent::CalcSder();
-		}
-		else {
-			return pow($this->rD,2) / 4 * $this->Calc('dAlpha') * (1 - cos(2 * $this->Calc('Alpha')));
-		}
+        if($this->rY > $this->oP->rYB) {
+            return parent::CalcSder();
+        }
+        else {
+            return pow($this->rD,2) / 4 * $this->Calc('dAlpha') * (1 - cos(2 * $this->Calc('Alpha')));
+        }
     }
 
     /**
@@ -137,12 +137,12 @@ class cSnCirc extends acSection {
      * @return dP
      */
     protected function CalcPder() {
-		if($this->rY > $this->oP->rYB && !$this->bSnFermee) {
-			return parent::CalcPder();
-		}
-		else {
-			return $this->rD * $this->Calc('dAlpha');
-		}
+        if($this->rY > $this->oP->rYB && !$this->bSnFermee) {
+            return parent::CalcPder();
+        }
+        else {
+            return $this->rD * $this->Calc('dAlpha');
+        }
     }
 
     /**
@@ -150,22 +150,22 @@ class cSnCirc extends acSection {
      * @return dB
      */
     protected function CalcBder() {
-		if($this->rY > $this->oP->rYB) {
-			return parent::CalcBder();
-		}
-		else {
-			return $this->rD * $this->Calc('dAlpha') * cos($this->Calc('Alpha'));
-		}
+        if($this->rY > $this->oP->rYB) {
+            return parent::CalcBder();
+        }
+        else {
+            return $this->rD * $this->Calc('dAlpha') * cos($this->Calc('Alpha'));
+        }
     }
 
     /**
      * Calcul de la distance du centre de gravité de la section à la surface libre.
      * @return Distance du centre de gravité de la section à la surface libre
      */
-    protected function CalcYg() {
+    protected function CalcSYg() {
         $SYg = sin($this->Calc('Alpha'))-pow(sin($this->Calc('Alpha')),3) / 3 - $this->Calc('Alpha') * cos($this->Calc('Alpha'));
         $SYg = pow($this->rD,3) / 8 * $SYg;
-        return $SYg / $this->Calc('S');
+        return $SYg;
     }
 
 }
