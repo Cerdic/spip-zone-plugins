@@ -19,25 +19,30 @@ function relecture_autoriser() {}
  */
 function autoriser_article_ouvrirrelecture_dist($faire, $type, $id, $qui, $opt) {
 
+	$autoriser = false;
+
 	// Conditions :
 	// - l'auteur connecte est un des auteurs de l'article
 	// - l'article est dans l'état "en cours de rédaction"
 	// - l'article n'a pas deja une relecture d'ouverte
+	if ($id_article = intval($id)) {
+		$les_auteurs = lister_objets_lies('auteur', 'article', $id, 'auteurs_liens');
 
-	$les_auteurs = lister_objets_lies('auteur', 'article', $id, 'auteurs_liens');
+		$from = 'spip_articles';
+		$where = array("id_article=$id_article");
+		$statut = sql_getfetsel('statut', $from, $where);
 
-	$from = 'spip_articles';
-	$where = array("id_article=$id");
-	$statut = sql_getfetsel('statut', $from, $where);
+		$from = 'spip_relectures';
+		$where = array("id_article=$id_article", "statut=" . sql_quote('ouverte'));
+		$nb_relecture_ouverte = intval(sql_countsel($from, $where));
 
-	$from = 'spip_relectures';
-	$where = array("id_article=$id", "statut=" . sql_quote('ouverte'));
-	$nb_relecture_ouverte = sql_countsel($from, $where);
+		$autoriser =
+			(in_array($qui['id_auteur'], $les_auteurs)
+			AND ($statut=='prepa')
+			AND ($nb_relecture_ouverte==0));
+	}
 
-	return
-		(in_array($qui['id_auteur'], $les_auteurs)
-		AND ($statut=='prepa')
-		AND ($nb_relecture_ouverte==0));
+	return $autoriser;
 }
 
 
@@ -54,10 +59,15 @@ function autoriser_article_ouvrirrelecture_dist($faire, $type, $id, $qui, $opt) 
  */
 function autoriser_article_voirrelectures_dist($faire, $type, $id, $qui, $opt) {
 
+	$autoriser = false;
+
 	// Conditions :
 	// - pour l'instant tout le monde peut afficher les fiches de relecture clôturées
+	if ($id_article = intval($id)) {
+		$autoriser = true;
+	}
 
-	return true;
+	return $autoriser;
 }
 
 
@@ -73,30 +83,36 @@ function autoriser_article_voirrelectures_dist($faire, $type, $id, $qui, $opt) {
  */
 function autoriser_relecture_modifier_dist($faire, $type, $id, $qui, $opt) {
 
+	$autoriser = false;
+
 	// Conditions :
 	// - la relecture n'est pas fermee
 	// - l'auteur connecte est un des auteurs de l'article
 	// - ou un admin complet ou restreint à la rubrique d'appartenance de l'article (besoin de maintenance)
 
-	$from = 'spip_relectures';
-	$where = array("id_relecture=$id");
-	$infos = sql_fetsel('id_article, statut', $from, $where);
+	if ($id_relecture = intval($id)) {
+		$from = 'spip_relectures';
+		$where = array("id_relecture=$id_relecture");
+		$infos = sql_fetsel('id_article, statut', $from, $where);
 
-	$relecture_ouverte = $infos['statut'] == 'ouverte';
+		$relecture_ouverte = ($infos['statut'] == 'ouverte');
 
-	$id_article = $infos['id_article'];
-	$les_auteurs = lister_objets_lies('auteur', 'article', $id_article, 'auteurs_liens');
+		$id_article = $infos['id_article'];
+		$les_auteurs = lister_objets_lies('auteur', 'article', $id_article, 'auteurs_liens');
 
-	$from = 'spip_articles';
-	$where = array("id_article=$id_article");
-	$id_rubrique = sql_getfetsel('id_rubrique', $from, $where);
+		$from = 'spip_articles';
+		$where = array("id_article=$id_article");
+		$id_rubrique = sql_getfetsel('id_rubrique', $from, $where);
 
-	return
-		$relecture_ouverte
-		AND
-		((in_array($qui['id_auteur'], $les_auteurs)
-			OR (($qui['statut'] == '0minirezo')
-				AND (!$qui['restreint'] OR !$id_rubrique OR in_array($id_rubrique, $qui['restreint'])))));
+		$autoriser =
+			($relecture_ouverte
+			AND
+			((in_array($qui['id_auteur'], $les_auteurs)
+				OR (($qui['statut'] == '0minirezo')
+					AND (!$qui['restreint'] OR !$id_rubrique OR in_array($id_rubrique, $qui['restreint']))))));
+	}
+
+	return $autoriser;
 }
 
 
@@ -112,22 +128,28 @@ function autoriser_relecture_modifier_dist($faire, $type, $id, $qui, $opt) {
  */
 function autoriser_relecture_commenter_dist($faire, $type, $id, $qui, $opt) {
 
+	$autoriser = false;
+
 	// Conditions :
 	// - l'auteur connecte est un des auteurs ou des relecteurs de l'article
 	// - la periode de relecture ne doit pas etre echue
 
-	$from = 'spip_relectures';
-	$where = array("id_relecture=$id");
-	$infos = sql_fetsel('id_article, date_fin_commentaire', $from, $where);
+	if ($id_relecture = intval($id)) {
+		$from = 'spip_relectures';
+		$where = array("id_relecture=$id");
+		$infos = sql_fetsel('id_article, date_fin_commentaire', $from, $where);
 
-	$les_relecteurs = lister_objets_lies('auteur', 'relecture', $id, 'auteurs_liens');
-	$les_auteurs = lister_objets_lies('auteur', 'article', $infos['id_article'], 'auteurs_liens');
+		$les_relecteurs = lister_objets_lies('auteur', 'relecture', $id, 'auteurs_liens');
+		$les_auteurs = lister_objets_lies('auteur', 'article', $infos['id_article'], 'auteurs_liens');
 
-	return
-		(strtotime($infos['date_fin_commentaire'])>time()
-		AND (in_array($qui['id_auteur'], $les_auteurs)
-			OR in_array($qui['id_auteur'], $les_relecteurs)));
+		$autoriser =
+			(strtotime($infos['date_fin_commentaire'])>time()
+			AND (in_array($qui['id_auteur'], $les_auteurs)
+				OR in_array($qui['id_auteur'], $les_relecteurs)));
 
+	}
+
+	return $autoriser;
 }
 
 ?>

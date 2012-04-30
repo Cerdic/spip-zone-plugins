@@ -78,13 +78,6 @@
 	</div>
 
 	[(#REM) <!-- Textes de l'article a relire et a commenter --> ]
-	<div>
-		<INCLURE{fond=prive/objets/contenu/relecture,
-			id=#ID_RELECTURE,
-			id_article=#ID_ARTICLE,
-			ajax=wysiwyg,
-			wysiwyg=1} />
-	</div>
 	<h5><:relecture:titre_boite_textes_article{revision=#REVISION_OUVERTURE}:></h5>
 	<div class="accordion" id="article">
 		[(#ARTICLE_DESCR*|strlen|oui)
