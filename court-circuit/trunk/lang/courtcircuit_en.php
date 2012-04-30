@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'explication_liens_rubriques' => 'Change the URL of redirected sections directly into the skeletons?',
 	'explication_regles' => 'The different rules below are tested in that order. If no rule defines a redirection, then the section will be displayed normally.',
-	'explication_sousrubrique' => 'Browse the first sub-section (sort by title number and date)? Redirection rules will be tested again in this subsection.', # MODIF
+	'explication_sousrubrique' => 'Browse the first subsection (sort by title number and date)? Redirection rules will be tested again in this subsection.',
 	'explication_variantes_squelettes' => 'Example: skeletons of type rubrique-2.html or rubrique=3.html.',
 
 	// I
