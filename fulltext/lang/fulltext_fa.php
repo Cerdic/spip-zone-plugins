@@ -9,24 +9,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accents_pas_pris' => 'آكسن‌ها در نظر گرفته نمي‌شوند  ( در فرانسه « déjà » يا « deja » نتايج يك ساني خواهند داشت،‌ از جمله: « déjà »،« dejà »،« déja »...) ',
-	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
+	'activer_indexation' => 'فعال‌سازي نمايه‌ي پرونده‌‌هاي @ext@',
 	'asie' => 'آسيا',
 	'asterisque_terminale' => 'هيج نتيجه‌‌اي ندارد: ستاره * بايد آخر باشد',
 	'aussi' => 'نيز ',
 
 	// C
 	'casse_indifferente' => 'وضعيت حروف (كوچك/بزرگ) در كلمه تأثيري ندارد.',
-	'configuration_indexation_document' => 'Configuration de l\'indexation des documents', # NEW
-	'configurer_egalement_doc' => 'Vous pouvez également configurer l\'indexation des documents :', # MODIF
+	'configuration_indexation_document' => 'پيكربندي نمايه‌‌سازي سندها',
+	'configurer_egalement_doc' => 'همچنين مي‌تواتيد نمايه‌سازي سند‌ها را پيكربندي كنيد:',
 	'convertir_myisam' => 'تبديل به ماي‌‌ايسام (MyISAM)',
 	'convertir_toutes' => 'تبديل تمام جدول‌ها به ماي‌ايسام',
 	'convertir_utf8' => 'تبديل به يو.تي.اف-8 (UTF-8) براي بهبود هماهنگي ',
 	'creer_tous' => 'ايجاد ايندكس كل متن (FULLTEXT)پيشنهادي ',
 
 	// D
-	'des_utilisations' => '@nb@ utilisations', # NEW
-	'descriptif' => 'Descriptif', # NEW
-	'documents_proteges' => 'Documents protégés', # MODIF
+	'des_utilisations' => '@nb@ استفاده ',
+	'descriptif' => 'توصيف',
+	'documents_proteges' => 'سندهاي حفاظت شده',
 
 	// E
 	'enfan' => 'بچه',
@@ -35,90 +35,92 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'enfanter' => 'بچه',
 	'enfantillage' => 'بچگي ',
 	'enfants' => 'بچه‌ها',
-	'erreur_binaire_indisponible' => 'Ce logiciel n\'est pas disponible sur le serveur.', # NEW
-	'erreur_doc_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .doc', # MODIF
-	'erreur_intervalle_cron' => 'Vous devez indiquer un intervalle supérieur à une seconde.', # MODIF
-	'erreur_nb_docs' => 'Vous devez indiquer un nombre de documents à traiter par itération supérieur à un.', # MODIF
-	'erreur_pdf_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .pdf', # MODIF
-	'erreur_ppt_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .ppt', # MODIF
-	'erreur_taille_index' => 'Il faut au moins indexer un caractère.', # MODIF
-	'erreur_verifier_configuration' => 'Il y a des erreurs de configuration.', # NEW
-	'erreur_xls_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .xls', # MODIF
+	'erreur_binaire_indisponible' => 'اين نرم‌افزار روي سرور در دسترس نيست.',
+	'erreur_doc_bin' => 'براي استخراج سند‌هاي .doc بايد دوتايي را پركنيد.  ',
+	'erreur_intervalle_cron' => 'بايد فاصله‌ي زماني بيش از يك ثانيه تعيين كنيد. ',
+	'erreur_nb_docs' => 'شما بايد تعداد سند‌ها براي پردازش مكرر را بيش از عدد يك تعيين كنيد.
+',
+	'erreur_pdf_bin' => 'شما بايد دوتايي مورد استفاده در استخراج سند‌هاي پي.دي.اف .pdf پركنيد
+',
+	'erreur_ppt_bin' => 'براي استخرج سند‌هاي پي.پي.تي  .ppt بايد دوتايي را پركنيد.',
+	'erreur_taille_index' => 'دست كم يك كاراكتر بايد نمايه‌ سازي شود.',
+	'erreur_verifier_configuration' => 'خطاهاي پيكربندي.',
+	'erreur_xls_bin' => 'براي استفاده در استخراج سند‌هاي ايكس.ال.اس .xls دوتايي را پركنيد.',
 	'et' => 'و ',
 	'etranger' => 'بيگانه',
 	'exemples' => 'نمونه‌هايي از موارد استفاده',
-	'explication_option_readonly' => 'Cette option est forcée sur ce site et n\'est donc pas configurable.', # NEW
+	'explication_option_readonly' => 'اين گزينه‌ روي اين سايت اجباري و در نتيجه غيرقابل‌پيكربندي است.',
 
 	// F
 	'fant' => 'fant',
 	'fonctionnement_recherche' => 'روش سازوكار جستجو در اين سايت ',
 	'fulltext_cree' => 'فول تكست(FULLTEXT)ايجاد شده',
-	'fulltext_creer' => 'Créer l\'index @index@', # NEW
-	'fulltext_documentation' => 'Pour plus d\'information sur la configuration, consultez la documentation en ligne :', # NEW
-	'fulltext_documents' => 'Fulltext - Documents', # NEW
-	'fulltext_index' => 'Fulltext - Index', # NEW
+	'fulltext_creer' => 'ايجاد نمايه‌ي  @index@',
+	'fulltext_documentation' => 'براي اطلاعات بيشتر در مورد پيكربندي، به سندهاي وصل‌خط مراجعه كنيد:',
+	'fulltext_documents' => 'فول متن - سندها',
+	'fulltext_index' => 'فول متن - نمايه',
 
 	// G
-	'general' => 'Général', # NEW
+	'general' => 'همگاني ',
 
 	// I
-	'id' => 'ID', # NEW
+	'id' => 'آي.دي',
 	'il_faut_myisam' => 'ماي ايسام لازم است',
 	'incoherence_charset' => 'بين كارآكترهاي سايت و پايگاه داده‌هاي سايت شما ناهماهنگي وجود دارد.اين ممكن است براي جستجو‌ها نتايج بدي داشته باشد از جمله حروف آكسن دار: ',
 	'index_regenere' => 'ايندكس جدول بازسازيده',
 	'index_reinitialise' => 'اسناد با خطا از نو اول شده‌اند',
-	'index_reinitialise_ptg' => 'Les documents protégés ont tous été réinitialisés', # NEW
-	'index_reinitialise_totalement' => 'Les document ont tous été réinitialisés', # NEW
+	'index_reinitialise_ptg' => 'تمام سند‌هاي حفاظت شده برجاسازي شده‌اند. ',
+	'index_reinitialise_totalement' => 'تمام سند‌ها برجاسازي شده‌اند',
 	'index_supprime' => 'ايندكس حذفي ',
-	'indiquer_chemin_bin' => 'Indiquer le chemin vers le binaire traitant l\'indexation des', # NEW
-	'indiquer_options_bin' => 'Indiquer les options pour l\'indexation des', # NEW
-	'infos' => 'Informations', # NEW
-	'infos_documents_proteges' => 'Vous trouverez ici la liste des documents protégés et donc non-indexés par Fulltext', # NEW
-	'infos_fulltext_document' => 'Vous pourrez ici choisir quels type de documents sont indexés par Fulltext et configurer les binaires utilisés et leurs options.', # NEW
-	'intervalle_cron' => 'Intervalle de temps entre deux passages du CRON (en secondes).', # NEW
+	'indiquer_chemin_bin' => 'مسير به سوي دوتايي را در جريان اين نمايه‌سازي مشخص كنيد:',
+	'indiquer_options_bin' => 'گزينه‌ها را براي نمايه سازي مشخص كنيد',
+	'infos' => 'اطلاعات',
+	'infos_documents_proteges' => 'در اينجا فهرست سند‌هاي حفاظت شده، و در نتيجه، نمايه‌سازي نشده براي «فول متن»‌را مي‌يابيد',
+	'infos_fulltext_document' => 'در اينجا مي‌توانيد انتخاب كنيد كدام نوع از سند‌ها توسط «فول متن»‌نمايه سازي شوند و دوتايي‌هاي مورد استفاده در گزينه‌هايشان را پيكربندي كنيد. ',
+	'intervalle_cron' => 'فاصله‌ي زماني (به ثانيه) بين دو پاساژ CRON',
 
 	// L
 	'liste_tables_connues' => 'جدول‌هايي كه براي جستجو در نظر گفته شده‌اند. مي‌توانيد عناصر فول تكس اضافه كنيد -- بنگريد به مستندات در ',
-	'logo' => 'Logo', # NEW
+	'logo' => 'لوگو',
 
 	// M
 	'mais_pas' => 'اما نه',
-	'message_ok_configuration' => 'Enregistrement de vos préférences terminée', # MODIF
-	'message_ok_update_configuration' => 'Mise à jour de vos préférences terminée', # MODIF
+	'message_ok_configuration' => 'ثبت ترجيحات شما كامل شد',
+	'message_ok_update_configuration' => 'به هنگام سازي ترجيج‌هاي شما ثبت شد',
 
 	// N
-	'nb_err' => 'En erreur d\'indexation', # NEW
-	'nb_index' => 'Indexés', # MODIF
-	'nb_non_index' => 'Non-indexés', # MODIF
-	'nb_ptg' => 'Protégés (non-indexés)', # MODIF
-	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip.', # MODIF
-	'nombre_caracteres' => 'Nombre de caractères indexés (depuis le debut du document).', # MODIF
-	'nombre_documents' => 'Nombre de documents à traiter par itération du CRON', # MODIF
+	'nb_err' => 'خطاي نمايه‌سازي',
+	'nb_index' => 'نمايه سازي شده',
+	'nb_non_index' => 'نمايه‌سازي نشده',
+	'nb_ptg' => 'حمايت شده‌ (نمايه‌سازي نشده)',
+	'necessite_version_php' => 'دست كم به پي.اچ.پي 2.5 نياز است، نيز به گزينه‌ي -enable-zip',
+	'nombre_caracteres' => 'تعداد كاراكتر‌هاي نمايه‌سازي شده (از آغاز سند)',
+	'nombre_documents' => 'تعداد سند‌هاي در دست پردازش توسط تكرار CRON',
 
 	// O
 	'ou_bien' => 'يا ديگر',
 
 	// P
-	'pas_document_ptg' => 'Il n\'y a pas de document protégé.', # NEW
+	'pas_document_ptg' => 'سند حمايت شده‌اي موجود نيست',
 	'pas_index' => 'نبود ايندكس فول‌ تكست(FULLTEXT)',
 	'premier_soit' => 'هم',
 
 	// Q
-	'que_des_exemples' => 'NB : les adresses de binaires et options proposées ici ab initio ne sont que des exemples.', # MODIF
+	'que_des_exemples' => 'توجه: مسيرهاي دوتايي‌ها و گزينه‌هاي پيشنهادي در اينجا مثال هستند.',
 
 	// R
 	'regenerer_tous' => 'بازسازي تمام ايندكس فول‌تكست ',
 	'reinitialise_index_doc' => 'از نو سازي اينكدس اسناد خطادار',
-	'reinitialise_index_ptg' => 'Réinitialiser l\'indexation des documents protégés', # NEW
-	'reinitialise_totalement_doc' => 'Réinitialiser l\'indexation de tous les documents', # NEW
+	'reinitialise_index_ptg' => 'برجاسازي نمايه‌سازي سندهاي حمايت شده',
+	'reinitialise_totalement_doc' => 'برجاسازي نمايه‌سازي تمام سند‌ها',
 	'reserve_webmestres' => 'فقط وب مستر مي‌تواند از اين صفحه استفاده كند',
-	'retour_configuration_fulltext' => 'Retour à la configuration de Fulltext', # MODIF
+	'retour_configuration_fulltext' => 'برگشت به پيكربندي «فول‌متن» ',
 	'retourne' => 'بازگشت محتواي تكست',
 
 	// S
 	'sequence_exacte' => 'عبارت دقيق ',
 	'soit' => 'يا',
-	'statistiques_indexation' => 'Statistiques d\'indexation des documents :', # NEW
+	'statistiques_indexation' => 'آمارهاي نمايه‌سازي سند‌ها:‌',
 	'supprimer' => 'حذف ',
 
 	// T
@@ -126,14 +128,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'table_format' => 'اين جدول به اين فرمت است: ',
 	'table_non_reconnue' => 'جدول شناخته نشده',
 	'textes_premier' => 'اما اول تكست‌ها را با محتوا نشان مي‌دهد',
-	'titre_page_fulltext_index' => 'Configuration des index de recherche', # NEW
+	'titre_page_fulltext_index' => 'پيكربندي نمايه‌هاي جستجو',
 
 	// U
-	'une_utilisation' => '1 utilisation', # NEW
+	'une_utilisation' => ' 1 استفاده ',
 	'utiliser_operateurs_logiques' => 'جستجو اوپراتور‌هاي استاندارد را استفاده مي‌كند.',
 
 	// V
-	'voir_doc_ptg' => 'Voir les documents protegés' # NEW
+	'voir_doc_ptg' => 'ديدن سند‌هاي حفاظت شده'
 );
 
 ?>

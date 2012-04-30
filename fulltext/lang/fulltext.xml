@@ -15,7 +15,9 @@
 	</langue>
 	<langue code="es" />
 	<langue code="et" />
-	<langue code="fa" />
+	<langue code="fa" url="http://trad.spip.org/tradlang_module/fulltext?lang_cible=fa">
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
+	</langue>
 	<langue code="fr" />
 	<langue code="fr_tu" />
 	<langue code="id" />
