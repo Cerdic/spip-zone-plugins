@@ -300,22 +300,13 @@ function fabrique_sauvegarde_tournante_export($fichier, $destination) {
 **/
 function fabrique_generer_diff($ancien, $nouveau, $prefixe) {
 	if (is_dir($ancien)) {
-		$commande_diff = "diff -r -x fabrique_diff.diff -x fabrique_$prefixe.php $ancien $nouveau";
-		$diff = "";
-		exec($commande_diff, $diff);
-		// chaque ligne contient une info
-		// on cherche les fichiers presents dans l'ancienne version
-		// supprimes de la nouvelle pour avertir
-		$suppressions = array();
-		foreach($diff as $l) {
-			// Only in ../plugins/fabrique_auto/.backup/prefixe/dir: fichier.php
-			if ($l[0] == 'O' AND substr($l, 0, 7) == 'Only in') {
-				if (strpos($l, $ancien)) {
-					$suppressions[] = str_replace(': ', '/', trim(substr($l, 8 + strlen($ancien))));
-				}
-			}
-		}
-		$diff = implode("\n", $diff);
+		include_spip('inc/fdiff');
+		$fdiff = new Fdiff($ancien, $nouveau);
+		$fdiff->add_ignorer(array("fabrique_diff.diff", "fabrique_".$prefixe.".php"));
+		$tab = $fdiff->get_diff();
+		$diff = $tab["diff"];
+		$suppressions = $tab["suppressions"];
+
 		ecrire_fichier($nouveau . 'fabrique_diff.diff', $diff);
 		// coloration si le plugin 'coloration_code' est la
 		$diff = propre("<cadre class='diff'>\n$diff\n</cadre>");

@@ -4,6 +4,14 @@ Ce plugin génère d'autres plugins !
 
 
 
+
+* Coquille et code mort en moins
+
+Interface :
+* Gestion des diff sous Windows (Julien Lanfray)
+
+
+
 1.14.0 le 27 04 2012
 --------------------
 
