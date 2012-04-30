@@ -1,0 +1,185 @@
+#CACHE{0}
+<BOUCLE_lonlat(AUTEURS) {id_auteur = #ENV{id_auteur}} {tout}>
+		#SET{lon,#LON}
+		#SET{lat,#LAT}
+</BOUCLE_lonlat>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ ]
+<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title><:sel:creer_nouvel_utilisateur:> - [(#NOM_SITE_SPIP|textebrut)][ - (#SLOGAN_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+[(#CHEMIN{inclure/head.html}|oui) <INCLURE{fond=inclure/head} />]
+[(#CHEMIN{inclure/head.html}|non) <INCLURE{fond=inc-head}>]
+
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?sensor=true">
+</script>
+<script type="text/javascript">
+     function initialise1() {
+	  	  
+        var mesOptions = {
+          center: new google.maps.LatLng(#GET{lat,48.85}, #GET{lon,2.35}), // Paris
+          zoom: 5,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,	  
+		};
+
+        var zemap1 = new google.maps.Map(document.getElementById("carte1"),
+            mesOptions);		
+		var georssLayer = new google.maps.KmlLayer('http://api.flickr.com/services/feeds/geo/?tags=paris&lang=fr-fr&format=feed-georss');
+		georssLayer.setMap(zemap1);
+
+		var georssLayer = new google.maps.KmlLayer('http://api.flickr.com/services/feeds/geo/?tags=ivry-sur-seine&lang=fr-fr&format=feed-georss');
+		georssLayer.setMap(zemap1);
+
+		var georssLayer = new google.maps.KmlLayer('http://api.flickr.com/services/feeds/geo/?tags=brest&lang=fr-fr&format=feed-georss');
+		georssLayer.setMap(zemap1);
+
+		};
+	  
+	// si la personne est connectée, elle peut voir sa localisation dans cette carte
+    function initialise2() {
+		var map;
+		var infowindow = new google.maps.InfoWindow();
+		var marker;
+		var latlng = new google.maps.LatLng(#GET{lat,48.85}, #GET{lon,2.35});
+		var myOptions = {
+			zoom: 15,
+			center: latlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		}
+		map = new google.maps.Map(document.getElementById("carte2"), myOptions)
+		marker = new google.maps.Marker({
+			position: latlng,
+					map: map
+			});		
+		infowindow.open(map, marker);
+		map.setCenter(latlng);	
+    };
+</script>
+</head>
+
+<body class="pas_surlignable page_sommaire" onload="initialise1();initialise2();">
+
+<div class="page">
+[(#CHEMIN{inclure/header.html}|oui) <INCLURE{fond=inclure/header} />]
+[(#CHEMIN{inclure/header.html}|non) <INCLURE{fond=inc-entete}>]
+
+
+	<div class="main">
+	<div class="wrapper hfeed">
+	<div class="more">
+	<INCLURE{fond=inclure/plus}>	
+	</div><!-- .more -->
+	<div class="content" id="content">
+
+		
+		<h1><:sel:creer_nouvel_utilisateur:></h1>
+		<div class="bloc">
+		<:sel:creer_nouvel_utilisateur2_explications:>
+		</div>
+
+		<div id="avatar">
+		<BOUCLE_zeauteur(AUTEURS) {tout} {id_auteur}>	
+	
+		#SET{largeur,#LOGO_AUTEUR|largeur}
+		#SET{hauteur,#LOGO_AUTEUR|hauteur}
+		
+
+		[(#GET{hauteur}|>={#GET{largeur}}|oui)
+			[(#LOGO_AUTEUR|left|image_reduire{105,*})]
+		]
+		[(#GET{largeur}|>{#GET{hauteur}}|oui)
+			[(#LOGO_AUTEUR|left|image_reduire{130,*})]
+		]
+
+		#FORMULAIRE_LOGO_AUTEUR{auteur,#ID_AUTEUR,#SELF}
+		</BOUCLE_zeauteur>
+		</div>
+		<p>&nbsp;</p>
+		
+		[(#SESSION{id_auteur}|non)
+		<h3><:sel:connexion:> :</h3>
+		<p><:sel:connectez_vous:></p>
+		]
+		[(#SESSION{id_auteur}|oui)
+			<div class="bloc">
+			<h3><:sel:bienvenue:> #SESSION{nom}, <:sel:que_voulez_vous_faire|strtolower:></h3>
+			<ul>
+			<li><img src="#CHEMIN{img/puce_verte.png}" alt="" />&nbsp;<:sel:consulter_catalogue:> (en développement)</li>
+			<li><img src="#CHEMIN{img/puce_verte.png}" alt="" />&nbsp;<:sel:poster_annonce:> (en développement)</li>
+			<li><img src="#CHEMIN{img/puce_verte.png}" alt="" />&nbsp;<:sel:consulter_correspondants:> (en développement)</li>
+			<li><img src="#CHEMIN{img/puce_verte.png}" alt="" />&nbsp;<:sel:saisir_echange:> (en développement)</li>
+			<li><img src="#CHEMIN{img/puce_verte.png}" alt="" />&nbsp;<:sel:modifier_donnees:> (en développement)</li>
+			</ul>
+			</div>	
+		]
+		
+		<p>&nbsp;</p>		
+		<BOUCLE_recap(AUTEURS) {tout} {id_auteur = #ENV{id_auteur}}>
+		
+		<h3>#PRENOM #NOM</h3>
+		<em><:sel:email:> : #EMAIL</em><br />
+		
+		<p class="corps_encart">
+		<:sel:login:> : #LOGIN<br />
+		[(#ACCES|=={0nouveau}|oui) <:sel:0nouveau:><br />]
+		</p>
+
+		<p class="corps_encart">
+		#ADRESSE1 [(#ADRESSE2)]<br />
+		#CODE_POSTAL #VILLE #PAYS
+		</p>
+
+		<h3><:sel:localisation:> :</h3>
+		<div class="corps_encart" id="carte2" style="height:220px;"></div>
+		<p>&nbsp;</p>
+		<div class="deco"></div>		
+		<h3><:sel:seljeu:> :</h3>
+		
+		<p>
+		<BOUCLE_sels(CORRESPONDANCES) {fusion id_sel} {id_auteur = #ID_AUTEUR}>
+		<BOUCLE_listesel(SELS) {id_sel = #ID_SEL}>
+		<img src="[(#CHEMIN{img/puce_verte.png})]" /> #NOM<br />
+		</BOUCLE_listesel>
+		</BOUCLE_sels>
+		</p>
+		
+	
+		<B_corr>		
+		<h3><:sel:correspondant_auteur_organisations:></h3>
+		<p>
+		<BOUCLE_corr(CORRESPONDANCES organisations) {id_auteur} {id_organisation >= 1}>
+		<img src="[(#CHEMIN{img/puce_verte.png})]" /> #NOM
+		<:sel:pour:> <BOUCLE_lesel(SELS) {id_sel = #ID_SEL}>#NOM</BOUCLE_lesel><br />
+		</BOUCLE_corr>
+		</p>
+		</B_corr>
+		
+		[<p class="corps_encart">
+		(#COMMENTAIRES)
+		</p>]
+		</BOUCLE_recap>
+
+    </div>	<!-- .content -->	
+	
+	</div><!--.wrapper-->
+	
+	<div class="aside">
+	<INCLURE{fond=inclure/cote}>
+	</div><!--.aside-->
+	</div><!--.main-->
+	<img src="#CHEMIN{img/frise_950.png}" />		
+	[(#CHEMIN{inclure/footer.html}|oui) <INCLURE{fond=inclure/footer, skel=#SQUELETTE} />]
+	[(#CHEMIN{inclure/footer.html}|non) <INCLURE{fond=inc-pied}{skel=#SQUELETTE}>]
+
+</div><!--.page-->
+
+</body>
+</html>

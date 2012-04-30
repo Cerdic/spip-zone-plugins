@@ -1,0 +1,60 @@
+<div class="clearfix header">
+	<div class="ident"[(#SESSION{id_auteur}|oui) style="height:9.5em;" ]>
+		<div class="profil blanc">
+			[(#SESSION{id_auteur}|oui)
+				<strong><big><em>#SESSION{nom}</em></big><br />
+				<em>
+				[(#SESSION{acces}|=={0nouveau}|oui) <:sel:0nouveau:>]
+				[(#SESSION{acces}|=={1utilisateur_ok}|oui) <:sel:1utilisateur_ok:><br />]				
+				[(#SESSION{acces}|=={2utilisateur_ko}|oui) <:sel:2utilisateur_ko:><br />]
+				[(#SESSION{acces}|=={3admin_local}|oui) <:sel:3admin_local:><br />]
+				[(#SESSION{acces}|=={4admin_general}|oui) <:sel:4admin_general:><br />]
+				</em>
+				#SESSION{email}</strong>
+				<p style="margin-top:1em;margin-right:1.2em;text-align:right;"><a href="#URL_LOGOUT" class="blanc" rel="nofollow"><:sel:deconnexion:></a></p>
+			]
+			[(#SESSION{id_auteur}|non)
+				#FORMULAIRE_LOGIN_HEADER
+			]
+		</div>
+	</div>
+	#MENU_LANG
+	[(#ENV{home,'non'}|=={oui}|?{
+	<h1 id="logo">[(#LOGO_SITE_SPIP|image_reduire{300,120})]#NOM_SITE_SPIP</h1>
+	,
+	<strong class="h1" id="logo"><a rel="start home" href="#URL_SITE_SPIP/" title="<:accueil_site:>">[(#LOGO_SITE_SPIP|image_reduire{300,120})]#NOM_SITE_SPIP</a></strong><!-- image_typo{police=eagerzz.ttf} -->
+	})][<p id="slogan"><em>(#SLOGAN_SITE_SPIP)</em></p>]
+
+	<B_enligne_auteurconnecte>
+	<div class='en_lignes'>
+	<b><:info_en_ligne:></b>&nbsp;
+	<BOUCLE_enligne_auteurconnecte(AUTEURS)
+		{statut IN 6forum,1comite,0minirezo}
+		{si #SESSION{id_auteur}}
+		{en_ligne>#VAL{'Y-m-d H:i:s'}|date{#VAL{'-15 minutes'}|strtotime}}{!par en_ligne}{pagination 10}{', '}>
+		<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a>
+	</BOUCLE_enligne_auteurconnecte>[&nbsp;...
+		(#GRAND_TOTAL|>{10}|oui)
+		([(#GRAND_TOTAL|objet_afficher_nb{auteur})])
+		]
+	</div>
+	</B_enligne_auteurconnecte>
+
+	[(#SESSION{id_auteur}|non) #SET{non_session_auteur,1}]
+	
+	<B_enligne_auteurpasconnecte>
+	<div class='en_lignes'>
+	<b><:info_en_ligne:></b>&nbsp;
+	<BOUCLE_enligne_auteurpasconnecte(AUTEURS)
+		{statut IN 6forum,1comite,0minirezo}
+		{si #GET{non_session_auteur}}
+		{en_ligne>#VAL{'Y-m-d H:i:s'}|date{#VAL{'-15 minutes'}|strtotime}}{!par en_ligne}{pagination 10}{', '}>
+
+	</BOUCLE_enligne_auteurpasconnecte>
+		[(#GRAND_TOTAL|>{1}|oui) #GRAND_TOTAL <:sel:utilisateurs:>]
+		[(#GRAND_TOTAL|=={1}|oui) #GRAND_TOTAL <:sel:utilisateur:>]	
+	</div>
+	</B_enligne_auteurpasconnecte>
+	
+	
+</div>

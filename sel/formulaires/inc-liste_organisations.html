@@ -1,11 +1,38 @@
+<script type="text/javascript"><!--
+$(function() { 
+
+
+// A REVOIR	
+	/*
+	$("#choix_selorg").click(function () {
+      $('.editer_liste_organisations').hide("blind", { direction: "horizontal" }, 1000);
+	  return false;
+	});
+	*/
+}
+// --></script>
+
+
+<li id="choix_selorg"><a href=""><img id="fleche" [(#ENV{org}|non) src="#CHEMIN{img/deplierbas.gif}"] [(#ENV{org}|oui) src="#CHEMIN{img/deplierhaut.gif}"]  /><:sel:vous_etes_correspondant:></a></li>
 <B_liste_organisations>
-<li class='editer_liste_sels fieldset'>
+<li class='editer_liste_organisations fieldset' [(#ENV{org}|non) style="display:inline;"] [(#ENV{org}|oui) style="display:none;"]>
 		<fieldset>
-		<legend style="display:inline;"><:auteur:correspondant_auteur_organisations:></legend>
+		<legend><:auteur:correspondant_auteur_organisations:></legend>
 		<BOUCLE_liste_organisations(ORGANISATIONS)>
-			<input type="checkbox" name="org_#ID_ORGANISATION" id="org_#ID_ORGANISATION" value="oui"[(#ENV{sel_#ID_ORGANISATION}|=={oui}|oui)checked="checked"]/>
-			<label for="org_#ID_ORGANISATION">#NOM</label>
+			<input class="checkbox" type="checkbox" name="org[#COMPTEUR_BOUCLE]" id="org_#ID_ORGANISATION" value="#ID_ORGANISATION"[(#ENV{org}|find{#ID_ORGANISATION}|=={#ID_ORGANISATION}|oui)checked="checked"]/>
+			<label for="org_#ID_ORGANISATION">#NOM</label><br />
 		</BOUCLE_liste_organisations>
+		<div class="deco">&nbsp;</div>
+		<div id="correspondance_organisations">
+		<p>
+		<input class="checkbox" type="checkbox" name="corresp_tous_sel" id="corresp_tous_sel" style="width:1.5em;" value="oui"[(#ENV{corresp_tous_sel}|=={oui}|oui)checked="checked"]/>
+		<:sel:correspondance_multiple_sel_organisation1:> <:sel:correspondance_multiple_sel_organisation2:>
+		</p>
+		<input type='text' class='text' name='sels_corresp0' id='sels_corresp0' maxlength='50' value="[(#ENV**{sels})]" />
+				
+		<input type="button" class="button" value="<:sel:ajout_sel:>" id="ajout_selcorresp" />
+		<input type="button" class="button" value="<:sel:suppr_sel:>" id="suppression_selcorresp" />
+		</div><!--#correspondance_organisations-->
 		</fieldset>
 </li>
 </B_liste_organisations>

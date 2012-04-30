@@ -1,0 +1,86 @@
+<html>
+<head>
+<script src="prive/javascript/jquery.js" type="text/javascript"></script>
+<script type="text/javascript" src="plugins/sel/squelettes/js/jquery-ui-1.8.19.autocomplete.min.js"></script>
+</head>
+<body>
+
+
+<?php
+		$sel = 'toto';
+		$i = 1;
+		echo $sel.$$i;
+
+?>
+
+
+
+<script>
+	$(function() {
+
+		var sels = 
+		[
+		"JEU (Jardin d\'échanges Universel) N&#176;0",	
+		"SEL de Paris (75020) N&#176;1",
+		];
+
+
+		$('input[id^="sels"]').autocomplete({
+			source: sels,
+			minLength: 2
+		});
+		
+		
+		$('#sels').live('focus', function() {
+
+			$('input[id^="sels"]').autocomplete({
+			source: sels,
+			minLength: 2
+			});
+
+		});
+
+	});	
+</script>
+
+<script type="text/javascript">  
+$(function() { // when document has loaded  
+  
+    var i = 1;
+    $('#ajout').click(function() {
+		var id = 'sels['+i+']';
+        $('<input type="text"  id="'+id+'" value=" " />').appendTo('.editer_sel');
+        i++;
+		console.log(i);
+    });  
+  
+    $('#suppression').click(function() {
+    if(i > 1) {
+        if (i>1) i--;
+        $('input#sels'+i).remove();
+		console.log(i);
+    }  
+    });   
+  
+});  
+</script>
+avant
+<?php
+print_r(liste_options_langues($nom_select = 'var_lang_ecrire'));
+?>
+après
+<fieldset class='choixsel' >
+		<ul>
+			<li class="editer editer_sel">
+				<label for="sels"><:sel:entree_sel:></label><br />
+				<input type='text' class='text' name='sels' id='sels' maxlength='50' value="[(#ENV**{sels})]" />
+				<input type="button" class="button" value="<:sel:ajout_sel:>" id="ajout" />
+				<input type="button" class="button" value="<:sel:suppr_sel:>" id="suppression" /><br />
+				<input type='text' class='text' name='sels' id='sels' maxlength='50' value="" />
+			</li>
+		</ul>
+</fieldset>
+</body>
+</html>
+
+

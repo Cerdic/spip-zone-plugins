@@ -1,0 +1,117 @@
+#CACHE{0}
+<BOUCLE_lonlat(AUTEURS) {id_auteur = #ENV{id_auteur}} {tout}>
+		#SET{lon,#LON}
+		#SET{lat,#LAT}
+</BOUCLE_lonlat>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ ]
+<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title><:sel:creer_nouvel_utilisateur:> - [(#NOM_SITE_SPIP|textebrut)][ - (#SLOGAN_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+[(#CHEMIN{inclure/head.html}|oui) <INCLURE{fond=inclure/head} />]
+[(#CHEMIN{inclure/head.html}|non) <INCLURE{fond=inc-head}>]
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?sensor=true">
+</script>
+<script type="text/javascript">
+	  
+	// si la personne est connectée, elle peut voir sa localisation dans cette carte
+    function initialise2() {
+		var map;
+		var infowindow = new google.maps.InfoWindow();
+		var marker;
+		var latlng = new google.maps.LatLng(#GET{lat,48.85}, #GET{lon,2.35});
+		var myOptions = {
+			zoom: 15,
+			center: latlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		}
+		map = new google.maps.Map(document.getElementById("carte2"), myOptions)
+		marker = new google.maps.Marker({
+			position: latlng,
+					map: map
+			});		
+		infowindow.open(map, marker);
+		map.setCenter(latlng);	
+    };
+</script>
+
+
+</head>
+
+<body class="pas_surlignable page_sommaire" onload="initialise2();">
+
+<div class="page">
+[(#CHEMIN{inclure/header.html}|oui) <INCLURE{fond=inclure/header} />]
+[(#CHEMIN{inclure/header.html}|non) <INCLURE{fond=inc-entete}>]
+
+	<div class="main">
+	<div class="wrapper hfeed">
+	<h1><:sel:fiche_utilisateur:></h1>
+	<BOUCLE_recap(AUTEURS) {tout} {id_auteur = #ENV{id_auteur}}>
+		
+		<h2>#PRENOM #NOM</h2>
+		<em><:sel:email:> : #EMAIL</em><br />
+		
+		<p class="corps_encart">
+		<:sel:login:> : #LOGIN<br />
+		[(#ACCES|=={0nouveau}|oui) <:sel:0nouveau:><br />]
+		</p>
+
+		<p class="corps_encart">
+		#ADRESSE1 [(#ADRESSE2)]<br />
+		#CODE_POSTAL #VILLE #PAYS
+		</p>
+
+		<h3><:sel:localisation:> :</h3>
+		<div class="corps_encart" id="carte2" style="height:220px;"></div>
+		<p>&nbsp;</p>
+		<div class="deco"></div>		
+		<h3><:sel:seljeu:> :</h3>
+		
+		<p>
+		<BOUCLE_sels(CORRESPONDANCES) {fusion id_sel} {id_auteur = #ID_AUTEUR}>
+		<BOUCLE_listesel(SELS) {id_sel = #ID_SEL}>
+		<img src="[(#CHEMIN{img/puce_verte.png})]" /> #NOM<br />
+		</BOUCLE_listesel>
+		</BOUCLE_sels>
+		</p>
+		
+	
+		<B_corr>		
+		<h3><:sel:correspondant_auteur_organisations:></h3>
+		<p>
+		<BOUCLE_corr(CORRESPONDANCES organisations) {id_auteur} {id_organisation >= 1}>
+		<img src="[(#CHEMIN{img/puce_verte.png})]" /> #NOM
+		<:sel:pour:> <BOUCLE_lesel(SELS) {id_sel = #ID_SEL}>#NOM</BOUCLE_lesel><br />
+		</BOUCLE_corr>
+		</p>
+		</B_corr>
+	</BOUCLE_recap>
+	</div><!--.wrapper-->
+	
+	<div class="aside">
+	[(#REM)
+	INCLURE{fond=inclure/cote}
+	]
+	</div><!--.aside-->
+	</div><!--.main-->
+	<img src="#CHEMIN{img/frise_950.png}" />		
+	[(#CHEMIN{inclure/footer.html}|oui) <INCLURE{fond=inclure/footer, skel=#SQUELETTE} />]
+	[(#CHEMIN{inclure/footer.html}|non) <INCLURE{fond=inc-pied}{skel=#SQUELETTE}>]
+
+</div><!--.page-->
+
+</body>
+</html>
+
+
+
+

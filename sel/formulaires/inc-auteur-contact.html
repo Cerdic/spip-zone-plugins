@@ -1,0 +1,288 @@
+<script type="text/javascript"><!--
+/* Déclaration des variables  */
+var geocodeur;
+geocodeur = new google.maps.Geocoder();
+
+function codeAdresse() {
+	if (document.getElementById("adresse1").value !='' && document.getElementById("code_postal").value !='' && document.getElementById("ville").value !='') {
+	var address = document.getElementById("adresse1").value+' '+document.getElementById("code_postal").value+' '+document.getElementById("ville").value;
+	geocodeur.geocode( { "address": address}, function(results, status) {
+	
+
+		/* Si l'adresse a pu être géolocalisée */
+		if (status == google.maps.GeocoderStatus.OK) {
+
+			/* Récupération de sa latitude et de sa longitude */
+			document.getElementById('lat').value = results[0].geometry.location.lat();
+			document.getElementById('lon').value = results[0].geometry.location.lng();
+
+	// alert('lat dans le form : '+document.getElementById('lat')+' lon : '+document.getElementById('lon'));
+
+		} else {
+			if (status=='ZERO_RESULTS') alert("<:sel:geocodage_zero_resultat:>");
+			else alert("<:sel:geocodage_echec:>" + status);
+		}
+	});
+	
+	// Note : cette alert box 'stoppe' le départ du form et permet au géocodage de fonctionner. Même si on revient avec des erreurs.
+	// Si on l'enlève, le formulaire part et le géocodage ne fait pas ce qu'il faut.
+	// Trouver un autre moyen de stocker les valeurs lon et lat en base.
+	alert('geo : '.geocodeur.geocode);
+	// geocodeur.geocode = function(a,b){Q(ye, function(c){c.geocode(a,b);});}
+	
+	}
+}
+
+$(function() {
+
+    var i = 1;
+    $('#ajout_sel').click(function() {
+		var id = 'sels'+i;
+        $('<input type="text"  name="'+id+'" id="'+id+'" value="" />').appendTo('.editer_sel');
+		$(id).focus(); // ne marche pas : trouver un moyen de placer le focus dynamiquement sur le nouveau champ
+        i++;
+    });
+	
+    $('#ajout_selcorresp').click(function() {
+		var id = 'sels_corresp'+i;
+        $('<input type="text"  name="'+id+'" id="'+id+'" value="" />').appendTo('#correspondance_organisations');		
+        i++;
+    });  
+  
+    $('#suppression_sel').click(function() {
+    if(i > 1) {
+        i--;
+        $('input#sels'+i).remove();
+    }  
+    });
+
+    $('#suppression_selcorresp').click(function() {
+    if (i > 1) {
+		i--;
+		var id = 'sels_corresp'+i;	
+        $('input#sels_corresp'+i).remove();	
+	}
+    });  
+	
+  
+    $('a.reset').click(function() {  
+    while(i > 2) { // while you have more than 1 input on the page  
+        $('input:last').remove(); // remove inputs  
+        i--;  
+    }  
+    });
+
+
+	var sel = [
+		"JEU (Jardin d\'échanges Universel) <N&#176;0>",
+		<BOUCLE_listesel(SELS)>
+		"#NOM (#CODE_POSTAL) <N&#176;#ID_SEL>",
+		</BOUCLE_listesel>
+	];
+		
+	$('input[id^="sels"]').live('focus', function() {	
+		$('input[id^="sels"]').autocomplete({
+			source: sel,
+			minLength: 3
+		});
+	});
+
+ 	$("#choix_selorg > a" ).toggle(function(e) {
+		e.preventDefault(); // Empêche le navigateur de suivre le lien.
+		$('#fleche').remove();
+		$('<img id="fleche" src="#CHEMIN{img/deplierbas.gif}" />').prependTo('#choix_selorg');
+		$('.editer_liste_organisations').show(500);	
+	},function(e) {
+		e.preventDefault();
+		$('#fleche').remove();
+		$('<img id="fleche" src="#CHEMIN{img/deplierhaut.gif}" />').prependTo('#choix_selorg');
+		$('.editer_liste_organisations').hide(500);
+	});
+	
+	$("#corresp_tous_sel").click(function() {
+
+		if ($('#corresp_tous_sel').prop('checked')) {
+			$('input[id^="sels_corresp"]').attr("disabled", true);
+			$('#ajout_selcorresp').attr("disabled", true);
+			$('#suppression_selcorresp').attr("disabled", true);
+		}
+		if (!$('#corresp_tous_sel').prop('checked')) {
+			$('input[id^="sels_corresp"]').attr("disabled", false);
+			$('#ajout_selcorresp').attr("disabled", false);
+			$('#suppression_selcorresp').attr("disabled", false);
+		}
+		
+	});
+	
+
+}); 
+// --></script>
+
+
+<style>
+div.choix-webmestre, div.rubriques_restreintes {
+	display: none;
+}
+</style>
+<li class='editer_localisation fieldset'>
+<ul style="display:none;"><!-- ce champ est caché dans l'espace publique. Il apparaitra ss forme de menu déroulant pour les admin généraux dans le back office -->
+	<li  class="editer editer_acces obligatoire[ (#ENV**{erreurs}|table_valeur{acces_auteur}|oui)erreur]">
+		<label for="acces"><:sel:entree_acces:></label>[
+		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{acces_auteur})</span>
+		]<input type='text' class='text' name='acces' id='acces' value="[(#ENV**{acces})]" />
+	</li>
+</ul>
+<fieldset class='impair' >
+<legend><:auteur:info_coordonnees:></legend>
+<ul>
+	<li class="editer editer_adresse1 obligatoire[ (#ENV**{erreurs}|table_valeur{adresse1}|oui)erreur]">
+				[<label for="adresse1">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:auteur:entree_adresse1:>,<:auteur:entree_adresse1_2:>}) <:sel:entree_obligatoire:></label><br />][
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse1})</span><br />
+				]<input type='text' class='text' name='adresse1' id='adresse1' value="[(#ENV**{adresse1})]" onchange="codeAdresse();" />
+	</li>
+	<li class="editer editer_adresse2[ (#ENV**{erreurs}|table_valeur{adresse2}|oui)erreur]">
+				[<label for="adresse2">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:auteur:entree_adresse2:>,<:auteur:entree_adresse2_2:>})</label><br />][
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse2})</span><br />
+				]<input type='text' class='text' name='adresse2' id='adresse2' value="[(#ENV**{adresse2})]" />
+	</li>
+	<li class="editer editer_code_postal obligatoire[ (#ENV**{erreurs}|table_valeur{code_postal}|oui)erreur]">
+				[<label for="code_postal">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:auteur:entree_code_postal:>,<:auteur:entree_code_postal_2:>}) <:sel:entree_obligatoire:></label><br />][
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{code_postal})</span><br />
+				]<input type='text' class='text' name='code_postal' id='code_postal' maxlength='20' value="[(#ENV**{code_postal})]" onchange="codeAdresse();" />
+	</li>
+	<li class="editer editer_ville obligatoire[ (#ENV**{erreurs}|table_valeur{ville}|oui)erreur]">
+				[<label for="ville">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:auteur:entree_ville:>,<:auteur:entree_ville_2:>}) <:sel:entree_obligatoire:></label><br />][
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ville})</span><br />
+				]<input type='text' class='text' name='ville' id='ville' maxlength='255' value="[(#ENV**{ville})]" onchange="codeAdresse();" />
+	</li>		
+	<li class="editer editer_pays[ (#ENV**{erreurs}|table_valeur{pays}|oui)erreur]">
+			[<label for="pays"><strong>(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:auteur:entree_pays:>,<:auteur:entree_pays_2:>}) <:sel:entree_obligatoire:></strong></label><br />]
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{pays})</span><br />]
+<!-- chercher les codes utf8 de chaque pays (france = fr, etc...-->
+			<select name="pays" id="pays">
+				<option value='[al]' [(#ENV{pays}|=={[al]}|oui) selected="selected"]><:sel:pays_albanie:></option>
+				<option value='[dz]' [(#ENV{pays}|=={[dz]}|oui) selected="selected"]><:sel:pays_algerie:></option>
+				<option value='[de]' [(#ENV{pays}|=={[de]}|oui) selected="selected"]><:sel:pays_allemagne:></option>
+				<option value='[ad]' [(#ENV{pays}|=={[ad]}|oui) selected="selected"]><:sel:pays_andorre:></option>
+				<option value='[am]' [(#ENV{pays}|=={[am]}|oui) selected="selected"]><:sel:pays_armenie:></option>
+				<option value='[at]' [(#ENV{pays}|=={[at]}|oui) selected="selected"]><:sel:pays_autriche:></option>
+				<option value='[az]' [(#ENV{pays}|=={[az]}|oui) selected="selected"]><:sel:pays_azerbaidjan:></option>
+				<option value='[be]' [(#ENV{pays}|=={[be]}|oui) selected="selected"]><:sel:pays_belgique:></option>
+				<option value='[bj]' [(#ENV{pays}|=={[bj]}|oui) selected="selected"]><:sel:pays_benin:></option>
+				<option value='[ba]' [(#ENV{pays}|=={[ba]}|oui) selected="selected"]><:sel:pays_bosnie_herzegovine:></option>			
+				<option value='[bg]' [(#ENV{pays}|=={[bg]}|oui) selected="selected"]><:sel:pays_bulgarie:></option>
+				<option value='[bf]' [(#ENV{pays}|=={[bf]}|oui) selected="selected"]><:sel:pays_burkina_faso:></option>
+				<option value='[bi]' [(#ENV{pays}|=={[bi]}|oui) selected="selected"]><:sel:pays_burundi:></option>
+				<option value='[cm]' [(#ENV{pays}|=={[cm]}|oui) selected="selected"]><:sel:pays_cameroun:></option>
+				<option value='[ca]' [(#ENV{pays}|=={[ca]}|oui) selected="selected"]><:sel:pays_canada:></option>
+				<option value='[cf]' [(#ENV{pays}|=={[cf]}|oui) selected="selected"]><:sel:pays_centrafique:></option>
+				<option value='[cy]' [(#ENV{pays}|=={[cy]}|oui) selected="selected"]><:sel:pays_chypre:></option>
+				<option value='[km]' [(#ENV{pays}|=={[km]}|oui) selected="selected"]><:sel:pays_comores:></option>
+				<option value='[ci]' [(#ENV{pays}|=={[ci]}|oui) selected="selected"]><:sel:pays_cote_divoire:></option>
+				<option value='[hr]' [(#ENV{pays}|=={[hr]}|oui) selected="selected"]><:sel:pays_croatie:></option>
+				<option value='[dk]' [(#ENV{pays}|=={[dk]}|oui) selected="selected"]><:sel:pays_danemark:></option>
+				<option value='[dj]' [(#ENV{pays}|=={[dj]}|oui) selected="selected"]><:sel:pays_djibouti:></option>
+				<option value='[es]' [(#ENV{pays}|=={[es]}|oui) selected="selected"]><:sel:pays_espagne:></option>
+				<option value='[ee]' [(#ENV{pays}|=={[ee]}|oui) selected="selected"]><:sel:pays_estonie:></option>
+				<option value='[fi]' [(#ENV{pays}|=={[fi]}|oui) selected="selected"]><:sel:pays_finlande:></option>
+				<option value='[fr]' [(#ENV{pays}|=={[fr]}|or{#ENV{id_auteur}|=={oui}}|oui) selected="selected"]><:sel:pays_france:></option>
+				<option value='[ga]'><:sel:pays_gabon:></option>
+				<option value='[ge]'><:sel:pays_georgie:></option>
+				<option value='[gr]'><:sel:pays_grece:></option>
+				<option value='[gn]'><:sel:pays_guinee:></option>
+				<option value='[gq]'><:sel:pays_guinee_equatoriale:></option>
+				<option value='[ht]'><:sel:pays_haiti:></option>
+				<option value='[hu]'><:sel:pays_hongrie:></option>
+				<option value='[ie]'><:sel:pays_irlande:></option>
+				<option value='[is]'><:sel:pays_islande:></option>
+				<option value='[it]'><:sel:pays_italie:></option>
+				<option value='[je]'><:sel:pays_jersey:></option>
+				<option value='[kz]'><:sel:pays_kazakhstan:></option>
+				<option value='[ko]'><:sel:pays_kosovo:></option>
+				<option value='[lv]'><:sel:pays_lettonie:></option>
+				<option value='[lb]'><:sel:pays_liban:></option>
+				<option value='[li]'><:sel:pays_liechtenstein:></option>
+				<option value='[lt]'><:sel:pays_lituanie:></option>
+				<option value='[lu]'><:sel:pays_luxembourg:></option>
+				<option value='[mk]'><:sel:pays_macedoine:></option>
+				<option value='[mg]'><:sel:pays_madagascar:></option>
+				<option value='[ml]'><:sel:pays_mali:></option>
+				<option value='[mt]'><:sel:pays_malte:></option>
+				<option value='[ma]'><:sel:pays_maroc:></option>
+				<option value='[mu]'><:sel:pays_maurice:></option>
+				<option value='[md]'><:sel:pays_moldavie:></option>
+				<option value='[mc]'><:sel:pays_monaco:></option>
+				<option value='[me]'><:sel:pays_montenegro:></option>
+				<option value='[ne]'><:sel:pays_niger:></option>
+				<option value='[no]'><:sel:pays_norvege:></option>
+				<option value='[nl]'><:sel:pays_pays_bas:></option>
+				<option value='[pl]'><:sel:pays_pologne:></option>
+				<option value='[pt]'><:sel:pays_portugal:></option>
+				<option value='[cd]'><:sel:pays_republique_democratique_du_congo:></option>
+				<option value='[cg]'><:sel:pays_republique_du_congo:></option>
+				<option value='[cz]'><:sel:pays_republique_tcheque:></option>
+				<option value='[ro]'><:sel:pays_roumanie:></option>
+				<option value='[gb]'><:sel:pays_royaume_uni:></option>
+				<option value='[rw]'><:sel:pays_rwanda:></option>
+				<option value='[sn]'><:sel:pays_senegal:></option>
+				<option value='[rs]'><:sel:pays_serbie:></option>
+				<option value='[sc]'><:sel:pays_seychelles:></option>
+				<option value='[sk]'><:sel:pays_slovaquie:></option>
+				<option value='[si]'><:sel:pays_slovenie:></option>
+				<option value='[se]'><:sel:pays_suede:></option>
+				<option value='[ch]'><:sel:pays_suisse:></option>
+				<option value='[td]'><:sel:pays_tchad:></option>
+				<option value='[tg]'><:sel:pays_togo:></option>
+				<option value='[tn]'><:sel:pays_tunisie:></option>
+				<option value='[ua]'><:sel:pays_ukraine:></option>
+			</select>
+	</li>
+	<!-- Préremplir ce champ, faire une proposition en fonction de la valeur de lang. Faire une table des pays ? -->
+	<li class="editer editer_tel1 obligatoire[ (#ENV**{erreurs}|table_valeur{tel1}|oui)erreur]">
+				[<label for="tel1">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:auteur:entree_tel1:>,<:auteur:entree_tel1_2:>}) <:sel:entree_obligatoire:></label><br />][
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{tel1})</span><br />
+				]<input type='text' class='text' name='tel1' id='tel1' maxlength='50' value="[(#ENV**{tel1})]" />
+	</li>
+	<li class="editer editer_tel2[ (#ENV**{erreurs}|table_valeur{tel2}|oui)erreur]">
+				[<label for="tel2">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:auteur:entree_tel2:>,<:auteur:entree_tel2_2:>})</label><br />][
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{tel2})</span><br />
+				]<input type='text' class='text' name='tel2' id='tel2' maxlength='50' value="[(#ENV**{tel2})]" />
+	</li>
+			
+	<li style="display:none;" class="editer editer_lon">
+				<label for="lon"><:sel:entree_lon:> <!--dans l'espace privé, ajouter un bouton pour relancer le géocodage)--></label><br />
+				<input type='text' class='text' name='lon' id='lon' maxlength='50' value="[(#ENV**{lon})]" />
+	</li>
+	<li style="display:none;" class="editer editer_lat">
+				<label for="lat"><:sel:entree_lat:></label><br />
+				<input type='text' class='text' name='lat' id='lat' maxlength='50' value="[(#ENV**{lat})]" />
+	</li>			
+			
+	<li class="editer editer_commentaires[ (#ENV**{erreurs}|table_valeur{commentaires}|oui)erreur]">
+				<label for="commentaires"><:auteur:entree_commentaires:></label><br />[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{commentaires})</span><br />
+				]<textarea name='commentaires' id='commentaires' rows='4' cols='40'>[(#ENV**{commentaires})]</textarea>
+	</li>
+			
+	[(#REM) Si pas connecté, ou connecté comme visiteur ou rédacteur, le choix du statut a disparu, on le remplace par ceci. ]
+	[(#SESSION{statut}|non
+		|or{#SESSION{statut}|=={6forum}}
+			|or{#SESSION{statut}|=={1comite}}|oui)
+			<li><input type='hidden' name='statut' id='statut' value="[(#ENV**{statut})]" /></li>
+	]
+</ul>
+</fieldset>	
+<fieldset class='choixsel' >
+<legend><:auteur:membre_auteur_sel:></legend>
+<ul>
+	<li class="editer editer_sel">
+		<p><:sel:explication_choixsel:> :</p>
+		<label for="sels0"><strong><:sel:entree_sel:> <:sel:entree_obligatoire:></strong></label><br />
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{sels0})</span><br />]
+		<input type='text' class='text' name='sels0' id='sels0' maxlength='50' value="[(#ENV**{sels})]" />
+		<input type="button" class="button" value="<:sel:ajout_sel:>" id="ajout_sel" />
+		<input type="button" class="button" value="<:sel:suppr_sel:>" id="suppression_sel" />				
+	</li>
+</ul>
+</fieldset>
+</li>

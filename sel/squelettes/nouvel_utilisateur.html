@@ -1,0 +1,94 @@
+<BOUCLE_lonlat(AUTEURS) {id_auteur = #SESSION{id_auteur}} {tout}>
+		#SET{lon,#LON}
+		#SET{lat,#LAT}
+</BOUCLE_lonlat>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ ]
+<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title><:sel:creer_nouvel_utilisateur:> - [(#NOM_SITE_SPIP|textebrut)][ - (#SLOGAN_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+[(#CHEMIN{inclure/head.html}|oui) <INCLURE{fond=inclure/head} />]
+[(#CHEMIN{inclure/head.html}|non) <INCLURE{fond=inc-head}>]
+
+<!-- script et JS autocompletion -->
+<script type="text/javascript" src="#CHEMIN{js/jquery-ui-1.8.19.autocomplete.min.js}"></script>
+[<link rel="stylesheet" href="(#CHEMIN{js/themes/base/jquery.ui.autocomplete.css}|direction_css)" type="text/css" />]
+[<link rel="stylesheet" href="(#CHEMIN{js/themes/base/jquery.ui.core.css}|direction_css)" type="text/css" />]
+[<link rel="stylesheet" href="(#CHEMIN{js/themes/base/jquery-ui-1.8.19.custom.css}|direction_css)" type="text/css" />]
+[<link rel="stylesheet" href="(#CHEMIN{js/themes/base/jquery.ui.all.css}|direction_css)" type="text/css" />]
+[<link rel="stylesheet" href="(#CHEMIN{js/themes/base/jquery.ui.base.css}|direction_css)" type="text/css" />]
+[<link rel="stylesheet" href="(#CHEMIN{js/themes/base/jquery.ui.theme.css}|direction_css)" type="text/css" />]
+<!-- -->
+
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?sensor=true">
+</script>
+<script type="text/javascript">
+
+function initialise() {
+	
+    var mesOptions = {
+        center: new google.maps.LatLng(#GET{lat,48.85}, #GET{lon,2.35}), // Paris
+        zoom: 20,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,	  
+	};
+
+    var zemap1 = new google.maps.Map(document.getElementById("carte1"),
+        mesOptions);
+		
+	var georssLayer = new google.maps.KmlLayer('http://api.flickr.com/services/feeds/geo/?tags=paris&lang=fr-fr&format=feed-georss');
+	georssLayer.setMap(zemap1);
+
+	var georssLayer = new google.maps.KmlLayer('http://api.flickr.com/services/feeds/geo/?tags=ivry-sur-seine&lang=fr-fr&format=feed-georss');
+	georssLayer.setMap(zemap1);
+
+	var georssLayer = new google.maps.KmlLayer('http://api.flickr.com/services/feeds/geo/?tags=brest&lang=fr-fr&format=feed-georss');
+	georssLayer.setMap(zemap1);
+
+};
+</script>
+</head>
+
+<body class="pas_surlignable page_sommaire" onload="initialise();">
+
+<div class="page">
+[(#CHEMIN{inclure/header.html}|oui) <INCLURE{fond=inclure/header} />]
+[(#CHEMIN{inclure/header.html}|non) <INCLURE{fond=inc-entete}>]
+
+
+	<div class="main">
+	<div class="wrapper hfeed">
+	<div class="more">
+	<INCLURE{fond=inclure/plus}>
+		
+	</div><!-- .more -->
+	<div class="content" id="content">
+		
+		<h1><:sel:creer_nouvel_utilisateur:></h1>
+		<div class="bloc">
+		<:sel:creer_nouvel_utilisateur_explications:>
+		</div>
+		#FORMULAIRE_EDITER_AUTEUR
+    </div>	<!-- .content -->	
+	
+	</div><!--.wrapper-->
+	
+	<div class="aside">
+	<INCLURE{fond=inclure/cote}>	
+	</div><!--.aside-->
+	</div><!--.main-->
+	<img src="#CHEMIN{img/frise_950.png}" />		
+	[(#CHEMIN{inclure/footer.html}|oui) <INCLURE{fond=inclure/footer, skel=#SQUELETTE} />]
+	[(#CHEMIN{inclure/footer.html}|non) <INCLURE{fond=inc-pied}{skel=#SQUELETTE}>]
+
+</div><!--.page-->
+
+</body>
+</html>

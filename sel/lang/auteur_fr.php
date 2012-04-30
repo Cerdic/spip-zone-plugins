@@ -30,6 +30,6 @@
 		'info_admin_statuer_webmestre' => "Donner à cet administrateur les droits de webmestre, co-Admnistrateur global du catalogue",
 
 		//M
-		'membre_auteur_sel' => "Membre du / des SEL(s) suivant(s) :"
+		'membre_auteur_sel' => "Membre du / des SEL(s) suivant(s) :",
      );
 ?>

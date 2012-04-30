@@ -3,8 +3,8 @@
 		<fieldset>
 		<legend style="display:inline;"><:auteur:membre_auteur_sel:></legend>
 		<BOUCLE_liste_sels(SELS)>
-			<input type="checkbox" name="sel_#ID_SEL" id="sel_#ID_SEL" value="oui"[(#ENV{sel_#ID_SEL}|=={oui}|oui)checked="checked"]/>
-			<label for="sel_#ID_SEL">#NOM</label>
+			<input class="checkbox" type="checkbox" name="sel_#ID_SEL" id="sel_#ID_SEL" value="oui"[(#ENV{sel_#ID_SEL}|=={oui}|oui)checked="checked"]/>
+			<label for="sel_#ID_SEL">#NOM</label><br />
 		</BOUCLE_liste_sels>
 		</fieldset>
 </li>

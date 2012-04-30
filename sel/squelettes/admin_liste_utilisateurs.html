@@ -1,0 +1,183 @@
+<BOUCLE_lonlat(AUTEURS) {id_auteur = #ENV{id_auteur}} {tout}>
+		#SET{lon,#LON}
+		#SET{lat,#LAT}
+</BOUCLE_lonlat>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ ]
+<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title><:sel:admin_voir_utilisateurs:> - [(#NOM_SITE_SPIP|textebrut)][ - (#SLOGAN_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+[(#CHEMIN{inclure/head.html}|oui) <INCLURE{fond=inclure/head} />]
+[(#CHEMIN{inclure/head.html}|non) <INCLURE{fond=inc-head}>]
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?sensor=true">
+</script>
+<script type="text/javascript">
+     function initialise1() {
+	  	  
+        var mesOptions = {
+          center: new google.maps.LatLng(#GET{lat,48.85}, #GET{lon,2.35}), // Paris
+          zoom: 5,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,	  
+		};
+
+        var zemap1 = new google.maps.Map(document.getElementById("carte1"),
+            mesOptions);		
+		var georssLayer = new google.maps.KmlLayer('http://api.flickr.com/services/feeds/geo/?tags=paris&lang=fr-fr&format=feed-georss');
+		georssLayer.setMap(zemap1);
+
+		var georssLayer = new google.maps.KmlLayer('http://api.flickr.com/services/feeds/geo/?tags=ivry-sur-seine&lang=fr-fr&format=feed-georss');
+		georssLayer.setMap(zemap1);
+
+		var georssLayer = new google.maps.KmlLayer('http://api.flickr.com/services/feeds/geo/?tags=brest&lang=fr-fr&format=feed-georss');
+		georssLayer.setMap(zemap1);
+
+		};
+	  
+	// si la personne est connectée, elle peut voir sa localisation dans cette carte
+    function initialise2() {
+		var map;
+		var infowindow = new google.maps.InfoWindow();
+		var marker;
+		var latlng = new google.maps.LatLng(#GET{lat,48.85}, #GET{lon,2.35});
+		var myOptions = {
+			zoom: 15,
+			center: latlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		}
+		map = new google.maps.Map(document.getElementById("carte2"), myOptions)
+		marker = new google.maps.Marker({
+			position: latlng,
+					map: map
+			});		
+		infowindow.open(map, marker);
+		map.setCenter(latlng);	
+    };
+</script>
+</head>
+
+<body class="pas_surlignable page_admin_moderation_utilisateurs" onload="initialise1();initialise2();" >
+
+<div class="page">
+[(#CHEMIN{inclure/header.html}|oui) <INCLURE{fond=inclure/header} />]
+[(#CHEMIN{inclure/header.html}|non) <INCLURE{fond=inc-entete}>]
+
+
+	<div class="main">
+	<div class="wrapper hfeed">
+	<div class="more">
+	<INCLURE{fond=inclure/plus}>	
+	</div><!-- .more -->
+	<div class="content" id="content">	
+		[(#SESSION{acces}|=={3admin_local}|or{#SESSION{acces}|=={4admin_general}}|non)
+		<h1><:sel:acces_insuffisant:></h1>
+		<p><:sel:acces_insuffisant_explication:></p>
+		]
+		[(#SESSION{acces}|=={3admin_local}|or{#SESSION{acces}|=={4admin_general}}|oui)
+		<h1><:sel:admin_voir_utilisateurs:></h1>			
+		<p><:sel:admin_voir_utilisateurs_explications:></p>
+		<a href="[(#URL_ACTION_AUTEUR{admin_exporter,u}|parametre_url{tri,#ENV{tri}}|parametre_url{senstri,#ENV{senstri}})]"><:sel:exporter:></a><br />
+
+		<a href="#URL_PAGE{admin_imprimer}"><:sel:imprimer:></a>
+		#SET{admin,oui}
+		]	
+		<p>&nbsp;</p>
+
+		<B_utilisateurs>
+		<div class="pagination">#PAGINATION{page_precedent_suivant}</div>
+		<table class="spip" rules="all">
+		<caption>[(#GRAND_TOTAL) <:sel:utilisateurs:>]</caption>
+		<thead>
+			<tr>
+				<th><:sel:login:>
+
+					<a id="triaz" href="[(#URL_PAGE{admin_liste_utilisateurs}|parametre_url{tri,login}|parametre_url{senstri,''})]" title="ggg">
+					<img src="#CHEMIN{img/asc.png}" alt="<:sel:tri_ascendant:>" />
+					</a>&nbsp;<a id="triza" href="[(#URL_PAGE{admin_liste_utilisateurs}|parametre_url{tri,login}|parametre_url{senstri,inverse})]">
+					<img src="#CHEMIN{img/desc.png}" alt="<:sel:tri_descendant:>" />
+					</a>
+
+				</th>
+				<th><:sel:nom:> <:sel:prenom:><br />
+
+					<a id="triaz" href="[(#URL_PAGE{admin_liste_utilisateurs}|parametre_url{tri,nom}|parametre_url{senstri,''})]">
+					<img src="#CHEMIN{img/asc.png}" alt="<:sel:tri_ascendant:>" />
+					</a>&nbsp;<a id="triza" href="[(#URL_PAGE{admin_liste_utilisateurs}|parametre_url{tri,nom}|parametre_url{senstri,inverse})]">
+					<img src="#CHEMIN{img/desc.png}" alt="<:sel:tri_descendant:>" />
+					</a>
+		
+				
+				</th>
+				<th><:sel:acces:><br />
+				
+					<a id="triaz" href="[(#URL_PAGE{admin_liste_utilisateurs}|parametre_url{tri,acces}|parametre_url{senstri,''})]">
+					<img src="#CHEMIN{img/asc.png}" alt="<:sel:tri_ascendant:>" />
+					</a>&nbsp;<a id="triza" href="[(#URL_PAGE{admin_liste_utilisateurs}|parametre_url{tri,acces}|parametre_url{senstri,inverse})]">
+					<img src="#CHEMIN{img/desc.png}" alt="<:sel:tri_descendant:>" />
+					</a>				
+				
+				</th>
+				<th><:sel:localite:>
+				
+					<a id="triaz" href="[(#URL_PAGE{admin_liste_utilisateurs}|parametre_url{tri,ville}|parametre_url{senstri,''})]">
+					<img src="#CHEMIN{img/asc.png}" alt="<:sel:tri_ascendant:>" />
+					</a>&nbsp;<a id="triza" href="[(#URL_PAGE{admin_liste_utilisateurs}|parametre_url{tri,ville}|parametre_url{senstri,inverse})]">
+					<img src="#CHEMIN{img/desc.png}" alt="<:sel:tri_descendant:>" />
+					</a>				
+				
+				</th>
+				<th><:sel:seljeu:></th>
+			</tr>
+		</thead>
+		<tbody>
+
+		<BOUCLE_utilisateurs(AUTEURS) {tout} {acces IN 0nouveau, 1utilisateur_ok, 2utilisateur_ko} {si #GET{admin}} {pagination 15} {par #ENV{tri}}{inverse #ENV{senstri}}>
+
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{fd_blanc,fd_gris})]" >
+			<td>#LOGIN</td>
+			<td>[(#NOM)<br />][(#PRENOM)<br />]</td>
+			<td>
+			[(#ACCES|=={0nouveau}|oui)<:sel:0nouveau:>]
+			[(#ACCES|=={1utilisateur_ok}|oui)<:sel:1utilisateur_ok:>]
+			[(#ACCES|=={2utilisateur_ko}|oui)<:sel:2utilisateur_ko:>]
+			</td>
+			<td>
+			#VILLE #PAYS
+			</td>
+			<td>
+			<BOUCLE_sels(CORRESPONDANCES sels) {id_auteur} {fusion id_sel}>
+			[(#ID_SEL|=={0}|oui) <:sel:jeu:><br />]
+			[(#ID_SEL|!={0}|oui) #NOM<br />]
+			</BOUCLE_sels>
+			</td>
+		</tr>
+		</BOUCLE_utilisateurs>
+		</tbody>
+		</table>
+		<div class="pagination">#PAGINATION{page_precedent_suivant}</div>
+		</B_utilisateurs>
+		
+
+    </div>	<!-- .content -->	
+	
+	</div><!--.wrapper-->
+	
+	<div class="aside">
+	<INCLURE{fond=inclure/cote}>
+	</div><!--.aside-->
+	</div><!--.main-->
+	<img src="#CHEMIN{img/frise_950.png}" />		
+	[(#CHEMIN{inclure/footer.html}|oui) <INCLURE{fond=inclure/footer, skel=#SQUELETTE} />]
+	[(#CHEMIN{inclure/footer.html}|non) <INCLURE{fond=inc-pied}{skel=#SQUELETTE}>]
+
+</div><!--.page-->
+
+</body>
+</html>

@@ -59,17 +59,17 @@
 	
     <pipeline>
 		<nom>declarer_tables_interfaces</nom>
-		<inclure>base/structure.php</inclure>
+		<inclure>base/tables.php</inclure>
 	</pipeline>
 
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
-		<inclure>base/structure.php</inclure>
+		<inclure>base/tables.php</inclure>
 	</pipeline>
 
 	<pipeline>
 		<nom>declarer_tables_auxiliaires</nom>	
-		<inclure>base/structure.php</inclure>
+		<inclure>base/tables.php</inclure>
 	</pipeline>
 
 	<pipeline>
@@ -114,5 +114,7 @@
        <url>mon_onglet</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
        <args></args>
    </onglet>
+   <utilise id="gravatar" />
+   <utilise id="spipdf" />
 
 </plugin>
