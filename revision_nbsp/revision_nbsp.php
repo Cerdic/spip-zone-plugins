@@ -6,7 +6,7 @@
  * Dans l'espace prive, souligne en grise les espaces insecables
  *
  * Auteur : fil@rezo.net
- * © 2005-2007 - Distribue sous licence GNU/GPL
+ * Â© 2005-2007 - Distribue sous licence GNU/GPL
  *
  * l'icone <edit-find-replace.png> est tiree de Tango Desktop Project
  * http://tango.freedesktop.org/Tango_Desktop_Project -- sous licence
@@ -20,10 +20,19 @@
 		AND !defined('_STOP_REVISION_NBSP')
 		) {
 			$letexte = echappe_html($letexte, '', true, ',(<img[^<]*>),Ums');
+
+			// NBSP classique
 			$letexte = str_replace('&nbsp;',
 				'<span style="border-bottom:2px solid #ccc;">&nbsp;</span>', $letexte);
+
+			// NBSP sous forme small.fine :
+			if (strpos($letexte, '<small class="fine">'))
+				$letexte .= '<style type="text/css">small.fine {background-color:#ccc;}</style>';
+
+			// redondant avec le nouveau systeme
 			$letexte = str_replace("\n_ ",
 				"<span style='color:orange;'>&para;</span>\n_ ", $letexte);
+
 			return $letexte;
 		} else
 			return $letexte;
@@ -56,8 +65,7 @@
 
 		// Attraper les notes
 		$regexp = ', *\[\[(.*?)\]\],msS';
-		if (strpos($texte, '[[')
-		AND $s = preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER)
+		if ($s = preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER)
 		AND $s==1
 		AND preg_match(",^ *<>(.*),s", $matches[0][1], $r)) {
 			$lesnotes = $r[1];
@@ -65,10 +73,8 @@
 
 			$num = 0;
 			while (($a = strpos($lesnotes, '('.(++$num).')')) !== false
-			AND (
-				($b = strpos($letexte, '('.($num).')')) !== false
-				OR ($b = strpos($letexte, '['.($num).'])')) !== false
-			)) {
+			AND ($b = strpos($letexte, '('.($num).')')) !== false
+			) {
 				if (!isset($debut))
 					$debut = trim(substr($lesnotes, 0, $a));
 
@@ -95,21 +101,6 @@
 				return (strlen($debut)?"\n\n[[<>$debut ]]":'') . $letexte;
 			}
 		}
-
-
-		//  Cas deux : on recherche des notes en derniers paragraphes,
-		// commencant par (1), on les reinjecte en [[<> ... ]] et on
-		// relance la fonction sur cette onstruction.
-		else {
-			$texte = trim($texte);
-			if (preg_match_all(',^[(](\d+)[)].*$,UmS', $texte, $regs)
-			AND preg_match(',^(.*\n)([(]1[)].*)$,UmsS', $texte, $u)) {
-				$notes = $u[2];
-				$texte = $u[1];
-				return notes_automatiques("$texte\n\n[[<> $notes ]]");
-			} 
-		}
-
 	}
 
 ?>

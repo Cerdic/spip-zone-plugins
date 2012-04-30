@@ -3,7 +3,7 @@
 	<slogan>Faciliter la relecture et l'insertion de notes</slogan>
 	<auteur>fil@rezo.net</auteur>
 	<licence>&#169; 2005-2011 - GNU/GPL</licence>
-	<version>0.4.0</version>
+	<version>0.4.1</version>
 	<etat>stable</etat>
 	<description>
 	Dans l'espace priv&#233;:
@@ -22,5 +22,5 @@
 		<inclure>revision_nbsp.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[1.9.2;2.0.99]" />
+	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
 </plugin>
