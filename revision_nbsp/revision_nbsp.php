@@ -65,7 +65,8 @@
 
 		// Attraper les notes
 		$regexp = ', *\[\[(.*?)\]\],msS';
-		if ($s = preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER)
+		if (strpos($texte, '[[')
+		AND $s = preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER)
 		AND $s==1
 		AND preg_match(",^ *<>(.*),s", $matches[0][1], $r)) {
 			$lesnotes = $r[1];
@@ -73,8 +74,10 @@
 
 			$num = 0;
 			while (($a = strpos($lesnotes, '('.(++$num).')')) !== false
-			AND ($b = strpos($letexte, '('.($num).')')) !== false
-			) {
+			AND (
+				($b = strpos($letexte, '('.($num).')')) !== false
+				OR ($b = strpos($letexte, '['.($num).'])')) !== false
+			)) {
 				if (!isset($debut))
 					$debut = trim(substr($lesnotes, 0, $a));
 
@@ -85,7 +88,7 @@
 				);
 				$lesnotes = substr($lesnotes, $a+strlen('('.$num.')')+strlen($lanote));
 				$lanote = trim($lanote);
-				$lanote = (strlen($lanote) ? '[[ '.$lanote.' ]]' : '');
+				$lanote = (strlen($lanote) ? "[[\n  ".$lanote."\n]]" : '');
 
 				$letexte = substr($letexte,0,$b)
 					. $lanote
@@ -101,6 +104,21 @@
 				return (strlen($debut)?"\n\n[[<>$debut ]]":'') . $letexte;
 			}
 		}
+
+
+		//  Cas deux : on recherche des notes en derniers paragraphes,
+		// commencant par (1), on les reinjecte en [[<> ... ]] et on
+		// relance la fonction sur cette onstruction.
+		else {
+			$texte = trim($texte);
+			if (preg_match_all(',^[(](\d+)[)].*$,UmS', $texte, $regs)
+			AND preg_match(',^(.*\n)([(]1[)].*)$,UmsS', $texte, $u)) {
+				$notes = $u[2];
+				$texte = $u[1];
+				return notes_automatiques("$texte\n\n[[<> $notes ]]");
+			} 
+		}
+
 	}
 
 ?>
