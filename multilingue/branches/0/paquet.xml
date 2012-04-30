@@ -1,11 +1,11 @@
 <paquet
 	prefix="multilingue"
 	categorie="edition"
-	version="0.0.2"
+	version="0.0.3"
 	etat="test"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="prive/themes/spip/images/multilingue-64.png"
-	documentation=""
+	documentation="http://www.spip-contrib.net/Site-multilingue-facile"
 >
 	<nom>Site multilingue facile</nom>
 

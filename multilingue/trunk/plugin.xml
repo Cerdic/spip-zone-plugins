@@ -2,7 +2,7 @@
 	<nom><multi>[fr]Site multilingue facile</multi></nom>
 	<slogan>Créer facilement un site multilingue</slogan>
 	<auteur>[Rainer M&uuml;ller->http://www.mychacra.net]</auteur>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<etat>test</etat>
 	<description>
 		<multi>
@@ -25,7 +25,7 @@
 			et voilà votre site est multilingue
 		</multi>	
 	</description>
-	<lien></lien>
+	<lien>http://www.spip-contrib.net/Site-multilingue-facile</lien>
 	<licence>GNU/GPL</licence>
 	<prefix>multilingue</prefix>
 	<icon>prive/themes/spip/images/multilingue-64.png</icon>
