@@ -40,18 +40,22 @@ function relecture_informer_commentaires($id) {
 
 /**
  * Renvoyer les compteurs de commentaires par statut pour une relecture donnee.
+ * Filtre possible sur l'element d'article commente.
  * Le tableau de sortie est indexe par les valeurs de statut ouvert, accepte, refuse
  *
  * @param int $id
+ * @param string $element
  * @return array
  */
-function relecture_compter_commentaires($id) {
+function relecture_compter_commentaires($id, $element='') {
 	$compteurs = array('ouvert' => 0, 'accepte' => 0, 'refuse' => 0);
 
 	if ($id_relecture = intval($id)) {
 		$select = array('statut', 'count(*) AS compteur');
 		$from = 'spip_commentaires';
 		$where = array("id_relecture=$id_relecture");
+		if ($element)
+			$where[] = "element=" . sql_quote($element);
 		$group_by = 'statut';
 		if ($lignes = sql_select($select, $from, $where, $group_by)) {
 		    // Classer et compter par statut

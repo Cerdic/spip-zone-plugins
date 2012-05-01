@@ -31,8 +31,8 @@
 <div class="entete-formulaire">
 	<:relecture:info_periode_commentaire_ouverte{date=#GET{date_fin_periode}}:>
 	<h1>#INFO_TITRE{relecture, #ID_RELECTURE}[ - (#VAL{relecture:label_article_}|concat{#GET{encours}}|_T)]</h1>
-	[(#REM) <!-- Statistiques sur les commentaires --> ]
-	#SET{compteurs, #ID_RELECTURE|relecture_compter_commentaires}
+	[(#REM) <!-- Statistiques sur les commentaires sur l'element --> ]
+	#SET{compteurs, #ID_RELECTURE|relecture_compter_commentaires{#GET{encours}}}
 	<div class="liste">
 		<ul>
 			[<li><:relecture:label_commentaires_ouverts:> : (#GET{compteurs}|table_valeur{ouvert})</li>]

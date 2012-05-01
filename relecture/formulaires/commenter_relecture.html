@@ -1,4 +1,4 @@
-<div class="formulaire_spip formulaire_editer formulaire_editer_relecture formulaire_editer_relecture-#ENV{id_relecture, new}">
+<div class="formulaire_spip formulaire_editer formulaire_commenter_relecture formulaire_commmenter_relecture-#ENV{element}">
 	<!-- <br class='bugajaxie' /> -->
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -8,10 +8,9 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			<li class="editer_description[ (#ENV**{erreurs}|table_valeur{description}|oui) erreur]">
-				<label for="description"><:relecture:label_description:></label>
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{description})</span>]
-				<textarea name="description" id="description"[ lang="(#LANG)"] rows="12" cols="40">[(#ENV**{description})]</textarea>
+			<li class="editer editer_#ENV{element}[ (#ENV**{erreurs}|table_valeur{texte_element}|oui) erreur]">
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{texte_element})</span>]
+				<textarea name="texte_element" id="texte_element"[ lang="(#LANG)"] rows="20" cols="40">[(#ENV**{texte_element})]</textarea>
 		    </li>
 		</ul>
 
