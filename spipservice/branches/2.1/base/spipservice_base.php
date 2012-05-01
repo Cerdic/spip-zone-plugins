@@ -1,0 +1,68 @@
+<?php
+// Pipelines.
+// Objectifs : 
+//	- Declarer et ajouter des tables dans la base de donnees
+// Voir la doc suivante : http://doc.spip.org/@Ajouter-des-tables-et-des-boucles
+//
+// Attention, il est imperatif de distinguer :
+//	- ce qu'on appelle une *table* : son id ou son nom complet (ex: spip_evenements)
+//	- ce qu'on appelle le *nom* d'une table : son diminutif (ex: evenements)
+//	- ce qu'on appelle un *objet* : nom de la table sans suffixe et au singuler (ex: evenement)
+
+//spip_log("- Fichier 'base/spipservice_base.php' lu.", "spipservice");
+
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+
+
+// Declaration des tables principales
+function spipservice_declarer_tables_principales($tables_principales){
+
+	//spip_log('---> delcaration des tables principales','spipservice');
+	
+	// Table 'spip_spipservice'
+	$spipservice = array(
+        "id_spipservice" 	=> "bigint(21) NOT NULL auto_increment",
+        "id"   				=> "bigint(21) NULL",
+        "type"    			=> "varchar(25) NULL",
+        "id_auteur"    		=> "bigint(21) NULL",
+        "action"          	=> "varchar(255) NULL",
+        "date"          	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"
+	);
+    
+    // champs qui possede les cles
+	$spipservice_key = array(
+        "PRIMARY KEY"     => "id_spipservice"
+	);
+
+    // champs candidats a la jointure
+	$spipservice_join = array(
+	    "id_spipservice" => "id_spipservice"
+	);
+	
+	// Table des tables
+	$tables_principales['spip_spipservice'] = array(
+		'field' => &$spipservice,
+		'key' => &$spipservice_key,
+		'join' => &$spipservice_join
+	);	
+
+	//spip_log('---> delcaration des tables principales OK','spipservice');
+
+	return $tables_principales;
+}
+
+function spipservice_declarer_tables_objets_surnoms($surnoms) {
+	//spip_log('---> delcaration des surnoms','spipservice');
+	
+	// Le type 'spipservice' correspond a la table nommee 'spipservice'
+	$surnoms['spipservice'] = 'spipservice';
+	
+	//spip_log('---> delcaration des surnoms OK','spipservice');
+	
+	return $surnoms;
+}
+
+
+?>

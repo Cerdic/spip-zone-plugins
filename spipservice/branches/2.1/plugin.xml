@@ -1,0 +1,50 @@
+<plugin>
+	<nom>SpipService</nom>
+	<auteur>Studio Lambda</auteur>
+	<version>1.0</version>
+    <version_base>1.0</version_base>
+	<etat>stable</etat>
+	
+	<description>
+		Permet à une application tierce de modifier/consulter le contenu du site via le protocole HTTP REST
+	</description>
+	<lien>http://www.spipmysite.com</lien>
+	<icon>img_pack/spipservice.png</icon>
+	
+	<prefix>spipservice</prefix>
+	<necessite id="SPIP" version="[2.1;]" />
+    
+    <categorie>webservice</categorie>
+	
+	<options>spipservice_options.php</options>
+    <fonctions>spipservice_fonctions.php</fonctions>
+
+	<!-- Installation, mise a jour ou desinstallation des tables supplementaire sur le serveur -->
+	<install>base/spipservice_upgrade.php</install>
+
+	<!-- Pipeline : declarer a SPIP les tables principales -->
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/spipservice_base.php</inclure>
+	<!--        <action>init_tables_principales</action> -->
+	</pipeline>
+
+	<!-- Pipeline : declarer a SPIP les surnoms -->
+	<pipeline>
+		  <nom>declarer_tables_objets_surnoms</nom>
+		  <inclure>base/spipservice_base.php</inclure>
+	</pipeline>
+	
+	<!-- Pipeline : les autorisations specifiques au plugin -->
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>spipservice_autoriser.php</inclure>
+	</pipeline>
+    
+    <!-- Ajout de taches dans le CRON -->
+    <pipeline>
+        <nom>taches_generales_cron</nom>
+        <inclure>spipservice_pipelines.php</inclure>
+    </pipeline>
+
+</plugin>
