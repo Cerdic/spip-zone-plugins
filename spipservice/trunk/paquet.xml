@@ -1,14 +1,11 @@
-<paquet prefix="spipservice" categorie="communication" version="1.0"
+<paquet prefix="spipservice" categorie="communication" version="2.0.0"
 	etat="stable" compatibilite="[3.0.0 ;3.0.*]" logo="prive/themes/spip/images/spipservice.png"
 	schema="10">
 
 	<nom>SpipService</nom>
 	<!-- API REST permettant communication tierce -->
-
-	<credit lien="http://www.studio-lambda.com">Studio Lambda</credit>
-	<credit lien="http://www.spipmysite.com">SpipMySite</credit>
 	
-	<auteur>Studio Lambda</auteur>
+	<auteur lien="http://www.studio-lambda.com">Studio Lambda</auteur>
 
 	<!-- Pipeline : declarer a SPIP les tables principales -->
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/spipservice.php" />

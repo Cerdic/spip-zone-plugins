@@ -1,18 +1,18 @@
 <plugin>
 	<nom>SpipService</nom>
 	<auteur>Studio Lambda</auteur>
-	<version>1.0</version>
+	<version>1.0.0</version>
     <version_base>1.0</version_base>
 	<etat>stable</etat>
 	
 	<description>
 		Permet à une application tierce de modifier/consulter le contenu du site via le protocole HTTP REST
 	</description>
-	<lien>http://www.spipmysite.com</lien>
+	<lien>http://www.studio-lambda.com</lien>
 	<icon>img_pack/spipservice.png</icon>
 	
 	<prefix>spipservice</prefix>
-	<necessite id="SPIP" version="[2.1;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
     
     <categorie>webservice</categorie>
 	
