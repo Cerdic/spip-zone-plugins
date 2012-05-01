@@ -1,0 +1,56 @@
+[(#ID_RELECTURE|oui)
+	[(#AUTORISER{commenter, relecture, #ID_RELECTURE}|sinon_interdire_acces)]
+]
+#SET{elements, #ID_RELECTURE|relecture_lister_elements}
+#SET{encours, #ENV{element, texte}}
+[(#ENV{element, texte}|in_array{#GET{elements}}|non)
+	#SET{encours, #GET{elements}|table_valeur{0}}
+]
+
+[(#REM) <!-- Onglets des elements d'article pouvant etre commentes --> ]
+<div class="onglets_simple">
+<ul class="elements">
+<BOUCLE_elements(DATA){source table, #GET{elements}}>
+	[<li class='#VALEUR'>
+		(#SELF|parametre_url{element, #VALEUR}
+			|lien_ou_expose{
+				[(#VAL{relecture:label_article_}|concat{#VALEUR}|_T)],
+				[(#GET{encours}|=={#VALEUR})],
+				ajax})
+	</li>]
+</BOUCLE_elements>
+</ul>
+<div class="nettoyeur"></div>
+</div>
+
+
+[(#REM) <!-- Formulaire de l'element en cours de commentaire --> ]
+<BOUCLE_relecture(RELECTURES){id_relecture}>
+[(#SET{date_fin_periode, [(#DATE_FIN_COMMENTAIRE|affdate_court)]})]
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	<:relecture:info_periode_commentaire_ouverte{date=#GET{date_fin_periode}}:>
+	<h1>#INFO_TITRE{relecture, #ID_RELECTURE}[ - (#VAL{relecture:label_article_}|concat{#GET{encours}}|_T)]</h1>
+	[(#REM) <!-- Statistiques sur les commentaires --> ]
+	#SET{compteurs, #ID_RELECTURE|relecture_compter_commentaires}
+	<div class="liste">
+		<ul>
+			[<li><:relecture:label_commentaires_ouverts:> : (#GET{compteurs}|table_valeur{ouvert})</li>]
+			[<li><:relecture:label_commentaires_acceptes:> : (#GET{compteurs}|table_valeur{accepte})</li>]
+			[<li><:relecture:label_commentaires_refuses:> : (#GET{compteurs}|table_valeur{refuse})</li>]
+		</ul>
+	</div>
+</div>
+
+#SET{redirect, #ENV{redirect, #ID_RELECTURE|generer_url_entite{relecture}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_COMMENTER_RELECTURE{#GET{encours}, #ID_RELECTURE, #GET{redirect}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</div>
+</BOUCLE_relecture>

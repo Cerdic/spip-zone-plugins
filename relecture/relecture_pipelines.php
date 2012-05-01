@@ -92,9 +92,11 @@ function relecture_boite_infos($flux){
 
 /**
  * Surcharge de la fonction charger des formulaires concernes, a savoir :
- * - dater : dans la page relecture permet de choisir la date de fin des commentaires
- * - editer_liens : dans la page relecture permet de choisir les relecteurs
- * - instituer_objet : dans la page de l'article en cours de relecture bloque le statut de l'article
+ * - relecture / dater : dans la page relecture permet de choisir la date de fin des commentaires
+ * - relecture / editer_liens : dans la page relecture permet de choisir les relecteurs
+ * - relecture / instituer_objet : renforce le test standard base sur l'autorisation modifier en testant si tous les
+ *   commentaires ont ete traites
+ * - article / instituer_objet : dans la page de l'article en cours de relecture bloque le statut de l'article
  *
  * @param array $flux
  * @return array
@@ -107,19 +109,23 @@ function relecture_formulaire_charger($flux){
 	$id_objet = intval($flux['data']['id_objet']) ? intval($flux['data']['id_objet']) : intval($flux['data']['_id_objet']);
 
 	if ($objet == 'relecture') {
-		// Rendre editable le formulaire si la relecture n'est pas cloturee
-		$from = 'spip_relectures';
-		$where = array("id_relecture=$id_objet");
-		$statut = sql_getfetsel('statut', $from, $where);
-		$flux['data']['editable'] = autoriser('modifier', 'relecture', $id_objet);
 
 		if ($form == 'dater') {
 			// Identifier le label comme la date de fin des commentaires
 			$flux['data']['_label_date'] = _T('relecture:label_date_fin_commentaire');
+			// Le formulaire n'est editable que si l'autprisation modifier est accordee.
+			$flux['data']['editable'] = autoriser('modifier', 'relecture', $id_objet);
 		}
 		else if ($form == 'editer_liens') {
 			// Changer le titre du formulaire pour désigner clairement les relecteurs
 			$flux['data']['titre'] = _T('relecture:titre_liste_relecteurs');
+			// Le formulaire n'est editable que si l'autprisation modifier est accordee.
+			$flux['data']['editable'] = autoriser('modifier', 'relecture', $id_objet);
+		}
+		else if ($form == 'instituer_objet') {
+			// A ce stade, le formulaire instituer_objet est deja teste avec l'autorisation modifier.
+			// On rajoute le fait qu'il n'y ait plus de commentaires a traiter
+			// TODO : verifier qu'on le fait ici et pas dans l'autorisation instituer sur le verifier ?
 		}
 	}
 	else if ($objet == 'article') {
@@ -158,7 +164,13 @@ function relecture_pre_insertion($flux) {
 			$where = array("id_article=$id_article");
 			$article = sql_fetsel($select, $from, $where);
 			foreach ($article as $_cle => $_valeur) {
-				$flux['data'][$_cle] = $_valeur;
+				if ($_cle == 'id_article')
+					$flux['data'][$_cle] = intval($_valeur);
+				else
+					// On ne recupere que les textes qui comportent des mots !
+					$texte = trim($_valeur);
+					if ($texte)
+						$flux['data'][$_cle] = $texte;
 			}
 
 			// - correction de la date de fin de commentaire positionnee par defaut a cause de la configuration

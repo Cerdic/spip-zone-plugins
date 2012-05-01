@@ -10,11 +10,11 @@
 function relecture_informer_commentaires($id) {
 	$texte = '';
 
-	if (intval($id)>0) {
+	if ($id_relecture=intval($id)) {
 		$from = 'spip_commentaires';
-		$where = array("id_relecture=$id");
+		$where = array("id_relecture=$id_relecture");
 		$nb_commentaires = sql_countsel($from, $where);
-		$where = array("id_relecture=$id", "statut<>" . sql_quote('ouvert'));
+		$where = array("id_relecture=$id_relecture", "statut<>" . sql_quote('ouvert'));
 		$nb_commentaires_fermes = sql_countsel($from, $where);
 
 		if ($nb_commentaires == 0)
@@ -37,6 +37,7 @@ function relecture_informer_commentaires($id) {
     return $texte;
 }
 
+
 /**
  * Renvoyer les compteurs de commentaires par statut pour une relecture donnee.
  * Le tableau de sortie est indexe par les valeurs de statut ouvert, accepte, refuse
@@ -45,12 +46,12 @@ function relecture_informer_commentaires($id) {
  * @return array
  */
 function relecture_compter_commentaires($id) {
-	$compteurs = array('ouvert' => 0, 'accepte' => 0, 'refuse' => 0,);
+	$compteurs = array('ouvert' => 0, 'accepte' => 0, 'refuse' => 0);
 
-	if (intval($id)>0) {
+	if ($id_relecture = intval($id)) {
 		$select = array('statut', 'count(*) AS compteur');
 		$from = 'spip_commentaires';
-		$where = array("id_relecture=$id");
+		$where = array("id_relecture=$id_relecture");
 		$group_by = 'statut';
 		if ($lignes = sql_select($select, $from, $where, $group_by)) {
 		    // Classer et compter par statut
@@ -61,6 +62,31 @@ function relecture_compter_commentaires($id) {
 	}
 
     return $compteurs;
+}
+
+
+/**
+ * Renvoyer la liste ordonnee des elements d'article non vides pouvant etre relus et commentes
+ *
+ * @param int $id
+ * @return array
+ */
+function relecture_lister_elements($id) {
+	$elements = array();
+
+	if ($id_relecture = intval($id)) {
+		$select = array('article_chapo AS chapo', 'article_descr AS descriptif', 'article_texte AS texte', 'article_ps AS ps');
+		$from = 'spip_relectures';
+		$where = array("id_relecture=$id_relecture");
+		$champs = sql_fetsel($select, $from, $where);
+
+		foreach ($champs as $_cle => $_valeur) {
+			if (strlen(trim($_valeur)) > 0)
+				$elements[] = $_cle;
+		}
+	}
+
+    return $elements;
 }
 
 ?>
