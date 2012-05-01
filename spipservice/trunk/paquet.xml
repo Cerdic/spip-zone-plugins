@@ -1,9 +1,11 @@
 <paquet prefix="spipservice" categorie="communication" version="2.0.0"
-	etat="stable" compatibilite="[3.0.0 ;3.0.*]" logo="prive/themes/spip/images/spipservice.png"
+	etat="dev" compatibilite="[3.0.0 ;3.0.*]" logo="prive/themes/spip/images/spipservice.png"
 	schema="10">
 
 	<nom>SpipService</nom>
 	<!-- API REST permettant communication tierce -->
+	
+	<categorie>communication</categorie>
 	
 	<auteur lien="http://www.studio-lambda.com">Studio Lambda</auteur>
 
