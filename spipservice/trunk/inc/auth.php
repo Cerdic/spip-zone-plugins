@@ -20,6 +20,7 @@
 * INFO : les modifications sont précédées et suivies de '@spipservice'    *
 \***************************************************************************/
 
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/abstract_sql');
