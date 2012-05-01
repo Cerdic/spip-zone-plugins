@@ -1,7 +1,7 @@
-<div class="formulaire_spip formulaire_asso_etiquette">
+<div class="formulaire_spip formulaire_asso_etiquettes">
 	<form action="#ENV{action}" method="post">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
-		<h3 class="legend"><:asso:info_etiquette:></h3>
+		<p class="legend"><:asso:info_etiquette:></p>
 		<ul>
 			<li class="editer_statut_interne">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{statut_interne})</span>]
@@ -16,7 +16,7 @@
 			</li>
 		</ul>
 		<p class="boutons">
-			<input type="submit" class="submit" name="valide" value="<:imprimer:>" />
+			<input type="submit" class="submit" name="valide" value="<:asso:bouton_imprimer:>" />
 		</p>
 	</form>
 </div>

@@ -58,7 +58,7 @@ function exec_compte_resultat()
 		}
 		$var = serialize(array($id_exercice, $join, $sel, $where, $having, $order)); //!\ les cles numeriques peuvent poser probleme... <http://www.mail-archive.com/php-bugs@lists.php.net/msg100262.html> mais il semble qu'ici le souci vient de l'absence d'encodage lorsqu'on passe $var par URL...
 //		$var = serialize(array('id'=>$id_exercice, '1'=>$join, '2'=>$sel, '3'=>$where, '4'=>$having, '5'=>$order));
-		if(autoriser('associer', 'export_compte_resultats') && $plan){ // on peut exporter : pdf, csv, xml, ...
+		if(autoriser('associer', 'export_comptes')){ // on peut exporter : pdf, csv, xml, ...
 			echo debut_cadre_enfonce('',true);
 			echo '<h3>'. _T('asso:cpte_resultat_mode_exportation') .'</h3>';
 			if (test_plugin_actif('FPDF')) { // impression en PDF : _T('asso:bouton_impression')
@@ -73,6 +73,7 @@ function exec_compte_resultat()
 		echo "\n<form method='get' action=''>\n<input type='hidden' name='exec' value='compte_resultat' />\n<table width='100%'><tr>";
 		echo '<td width="50%" align="left">'. association_selectionner_exercice($id_exercice, '') .'</td>';
 		echo '<td width="50%" align="right">'. association_selectionner_destination($id_destination, '') .'</td>';
+		echo '<td width="20%" class="boutons"><noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></td>';
 		echo "</tr>\n</table>\n</form>\n";
 		// liste des charges (depenses d'exploitation) cumulees par comptes
 		$charges = association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_charges'], 'cpte_resultat', '-1', $id_exercice, $id_destination);

@@ -59,17 +59,18 @@ function exec_bilan()
 			}
 			echo debut_cadre_enfonce('',true);
 			echo '<h3>'. _T('plugins_vue_liste') .'</h3>';
-			echo '<form method="post" action="'.generer_url_ecrire('bilan', "exercice=$exercice").'"><div>';
+			echo '<div class="formulaire_spip formulaire_asso_compteresultats">';
+			echo '<form method="post" action="'.generer_url_ecrire('bilan', "exercice=$exercice").'"><ul><li>';
 			echo '<div class="choix"><input type="checkbox" name ="destination[]" value="0" id="destination_0"';
 			if (!(array_search(0, $ids_destination_bilan)===FALSE))
 				echo ' selected="selected"';
 			echo ' /><label for="destination_0">'._T('asso:toutes_destinations').'</label></div>'.$select_destination;
-			echo '</div>';
-			echo '<p class="boutons"><input type="submit" value="Bilan" /></p>';
-			echo '</div></form>';
+			echo '</li></ul>';
+			echo '<p class="boutons"><input type="submit" value="'. _T('asso:compte_resultat') .'" /></p>';
+			echo '</form></div>';
 			echo fin_cadre_enfonce(true);
 		}
-		debut_cadre_association('finances-24.png', 'resultat_courant', $exercice_data['intitule']);
+		debut_cadre_association('finances-24.png', 'resultat_courant');
 		if ($plan) {
 			$join = ' RIGHT JOIN spip_asso_plan ON imputation=code';
 			$sel = ', code, intitule, classe';
@@ -82,29 +83,26 @@ function exec_bilan()
 		$classes = array(
 			sql_quote($GLOBALS['association_metas']['classe_charges']),
 			sql_quote($GLOBALS['association_metas']['classe_produits']),
-//			sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']),
-//			sql_quote($GLOBALS['association_metas']['classe_banques']),
 		);
 		// on boucle sur le tableau des destinations en refaisant le fetch a chaque iteration
 		foreach ($ids_destination_bilan as $id_destination) {
-			$total_recettes = $total_depenses = $total_soldes = 0;
 			//TABLEAU EXPLOITATION
 			echo "\n<fieldset>";
 			echo '<legend><b>'. ($id_destination ? $intitule_destinations[$id_destination] : ($GLOBALS['association_metas']['destinations']?_T('asso:toutes_destination'):'') ). '</b></legend>';
 			$solde = association_liste_totaux_comptes_classes($classes, 'cpte_resultat', 0, $exercice, $id_destination);
+			if(autoriser('associer', 'export_comptes') && !$id_destination){ // on peut exporter : pdf, csv, xml, ...
+				echo "<br /><table width='100%' class='asso_tablo' cellspacing='6' id='asso_tablo_exports'>\n";
+				echo '<tbody><tr>';
+				echo '<td><b>'. _T('asso:cpte_resultat_mode_exportation') .'</b></td>';
+				if (test_plugin_actif('FPDF')) { // impression en PDF
+					echo '<td class="action"><a href="'.generer_url_ecrire('export_compteresultats_pdf').'&var='.rawurlencode($var). '"><strong>PDF</strong></td>'; //!\ generer_url_ecrire() utilise url_enconde() or il est preferable avec les grosses variables serialisees d'utiliser rawurlencode()
+				}
+				foreach(array('csv','ctx','tex','tsv','xml','yaml') as $type) { // autres exports (donnees brutes) possibles
+					echo '<td class="action"><a href="'. generer_url_ecrire('export_compteresultats_'.$type).'&var='.rawurlencode($var). '"><strong>'. strtoupper($type) .'</strong></td>'; //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
+				}
+				echo '</tr></tbody></table>';
+			}
 			echo '</fieldset>';
-		}
-		if(autoriser('associer', 'export_compte_resultats') && $plan){ // on peut exporter : pdf, csv, xml, ...
-			echo "<br /><table width='100%' class='asso_tablo' cellspacing='6' id='asso_tablo_exports'>\n";
-			echo '<tbody><tr>';
-			echo '<td><b>'. _T('asso:cpte_resultat_mode_exportation') .'</b></td>';
-			if (test_plugin_actif('FPDF')) { // impression en PDF
-				echo '<td class="action"><a href="'.generer_url_ecrire('export_compteresultats_pdf').'&var='.rawurlencode($var). '"><strong>PDF</strong></td>'; //!\ generer_url_ecrire() utilise url_enconde() or il est preferable avec les grosses variables serialisees d'utiliser rawurlencode()
-			}
-			foreach(array('csv','ctx','tex','tsv','xml','yaml') as $type) { // autres exports (donnees brutes) possibles
-				echo '<td class="action"><a href="'. generer_url_ecrire('export_compteresultats_'.$type).'&var='.rawurlencode($var). '"><strong>'. strtoupper($type) .'</strong></td>'; //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
-			}
-			echo '</tr></tbody></table>';
 		}
 //		bilan_encaisse();
 		fin_page_association();

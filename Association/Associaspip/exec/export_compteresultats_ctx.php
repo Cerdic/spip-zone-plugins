@@ -19,7 +19,7 @@ include_spip('exec/compte_resultat'); // c'est pour la definition de classe Expo
 // Export du Compte de Resultat au format CTX
 // http://www.creativyst.com/Doc/Std/ctx/ctx.htm
 function exec_export_compteresultats_ctx() {
-	if (!autoriser('associer', 'export_compteresultats')) {
+	if (!autoriser('associer', 'export_comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

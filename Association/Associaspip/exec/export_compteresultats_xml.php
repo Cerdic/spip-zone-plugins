@@ -20,7 +20,7 @@ include_spip('exec/compte_resultat'); // c'est pour la definition de classe Expo
 // http://fr.wikipedia.org/wiki/Extensible_Markup_Language
 // jeu de balisage propre a Associaspip ; pas de DTD ni de Schema
 function exec_export_compteresultats_xml() {
-	if (!autoriser('associer', 'export_compteresultats')) {
+	if (!autoriser('associer', 'export_comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

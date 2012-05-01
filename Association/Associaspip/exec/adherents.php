@@ -61,18 +61,44 @@ function exec_adherents()
 			$critere = "a.id_auteur=$id";
 			$id_groupe = 0;
 		}
-		/* on appelle ici la fonction qui calcule le code du formulaire/tableau de membres pour pouvoir recuperer la liste des membres affiches a transmettre a adherents_table pour la generation du pdf */
-		list($where_adherents, $jointure_adherents, $code_liste_membres) = adherents_liste(intval(_request('debut')), $lettre, $critere, $statut_interne, $id_groupe);
 		if (test_plugin_actif('FPDF')) {
 			echo debut_cadre_enfonce('',true);
 			echo '<h3>'. _T('plugins_vue_liste') .'</h3>';
-			echo adherents_table($where_adherents, $jointure_adherents, $statut_interne);
+			echo '<div class="formulaire_spip formulaire_asso_listemembres">';
+			$champs = description_table('spip_asso_membres');
+			$res = '<ul><li class="edit_champs">';
+			foreach ($champs['field'] as $k => $v) {
+				if (!((!$GLOBALS['association_metas']['civilite'] && $k=='sexe') OR (!$GLOBALS['association_metas']['prenom'] && $k=='prenom') OR (!$GLOBALS['association_metas']['id_asso'] && $k=='id_asso'))) {
+					$libelle = 'adherent_libelle_'.$k;
+					$trad = _T('asso:'.$libelle);
+					if ($libelle!=str_replace(' ', '_', $trad)) {
+						$res .= "<div class='choix'><input type='checkbox' name='champs[$k]' id='listemembres_$k' /><label for='listemembres_$k'>$trad</label></div>";
+					}
+				}
+			}
+			// on ajoute aussi le mail
+			$res .= '<div class="choix"><input type="checkbox" name="champs[email]" id="listemembres_email" /><label for="listemembres_email">'._T('asso:adherent_libelle_email').'</label></div>';
+			if (test_plugin_actif('COORDONNEES')) { // si le plugin coordonnees est actif, on ajoute l'adresse et le telephone
+				$res .= '<div class="choix"><input type="checkbox" name="champs[adresse]" id="listemembres_adresse" /><label for="listemembres_adresse">'._T('coordonnees:adresses').'</label></div>';
+				$res .= '<div class="choix"><input type="checkbox" name="champs[telephone]" id="listemembres_telephone" /><label for="listemembres_telephone"><label for="listemembres_telephone">'._T('coordonnees:numeros').'</label></div>';
+			}
+			// on appelle ici la fonction qui calcule le code du formulaire/tableau de membres pour pouvoir recuperer la liste des membres affiches a transmettre pour la generation du pdf
+			list($where_adherents, $jointure_adherents, $code_liste_membres) = adherents_liste(intval(_request('debut')), $lettre, $critere, $statut_interne, $id_groupe);
+			/* on fait suivre la liste des auteurs a afficher */
+			$res .= '<input type="hidden" name="where_adherents" value="'.$where_adherents.'" />';
+			$res .= '<input type="hidden" name="jointure_adherents" value="'.$jointure_adherents.'" />';
+			$res .= '<input type="hidden" name="statut_interne" value="'.$statut_interne.'" />';
+			$res .= '</li></ul>';
+			$res .= '<p class="boutons"><input type="submit" value="'. _T('asso:bouton_imprimer') .'" /></p>';
+			echo generer_form_ecrire('pdf_adherents', $res, '', '');
+			echo '</div>';
 			echo fin_cadre_enfonce(true);
 		}
 		debut_cadre_association('annonce.gif', 'adherent_titre_liste_actifs');
+		// FILTRES
 		echo "<table width='100%' class='asso_tablo_filtres'>\n";
 		echo '<tr>';
-		// PAGINATION ALPHABETIQUE
+		// Pagination alphabetique
 		echo '<td width="30%" class="pagination0">';
 		if (!$lettre) {
 			$lettre = '%';
@@ -93,44 +119,20 @@ function exec_adherents()
 			$h = generer_url_ecrire('adherents', "statut_interne=$statut_interne");
 			echo "<a href='$h'>"._T('asso:entete_tous').'</a>';
 		}
-		// FILTRES
-		//Filtre groupes
-		$qGroupes = sql_select('nom, id_groupe', 'spip_asso_groupes', 'id_groupe>=100', '', 'nom');  // on ne prend en consideration que les groupe d'id >= 100, les autres sont reserves a la gestion des autorisations
-		if ( $qGroupes && sql_count($qGroupes) ) { // ne proposer que s'il y a des groupes definis
 #		if ($GLOBALS['association_metas']['aff_groupes']) { // ne proposer que si on affiche les groupes ?? (on peut vouloir filtrer par groupe sans pour autant les afficher donc desactive)
-			echo '</td><td width="25%" class="formulaire">';
-			echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
-			echo '<input type="hidden" name="exec" value="adherents" />';
-			echo '<select name="id_groupe" onchange="form.submit()">';
-			echo '<option value="">'._T('asso:tous_les_groupes').'</option>';
-			while ($groupe = sql_fetch($qGroupes)) {
-				echo '<option value="'.$groupe['id_groupe'].'"';
-				if ($id_groupe==$groupe['id_groupe'])
-					echo ' selected="selected"';
-				echo '>'.$groupe['nom'].'</option>';
-			}
-			echo '</select><noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></div></form>';
+			echo '</td><td width="25%">'. association_selectionner_groupe($id_groupe, 'adherents') ; // filtre groupes
 #		}
-		}
 		//Filtre ID
 		echo '</td><td width="16%" class="formulaire">';
 		echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
 		echo '<input type="text" name="id" onfocus=\'this.value=""\' size="5"  value="'. $id .'" onchange="form.submit()" />';
 		echo '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></div></form>';
 		//Filtre statut
-		echo '</td><td width="23%" class="formulaire">';
+		echo '</td><td width="23%">';
 		echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
 		echo '<input type="hidden" name="lettre" value="'.$lettre.'" />';
-		echo '<select name="statut_interne" onchange="form.submit()">';
-		echo '<option value="defaut">'._T('asso:entete_tous').'</option>';
-		foreach ($GLOBALS['association_liste_des_statuts'] as $statut) {
-			echo '<option value="'.$statut.'"';
-			if ($statut_interne==$statut) {
-				echo ' selected="selected"';
-			}
-			echo '> '._T('asso:adherent_entete_statut_'.$statut).'</option>';
-		}
-		echo '</select><noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></div></form>';
+		echo association_selectionner_statut($statut_interne, '');
+		echo '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></div></form>';
 		echo '</td>';
 		echo '</tr>';
 		echo '</table>';
@@ -302,33 +304,6 @@ function affiche_categorie($c)
   return is_numeric($c)
     ? sql_getfetsel('valeur', 'spip_asso_categories', "id_categorie=$c")
     : $c;
-}
-
-function adherents_table($where_adherents, $jointure_adherents, $statut_interne)
-{
-	$champs = description_table('spip_asso_membres');
-	$res = '';
-	foreach ($champs['field'] as $k => $v) {
-		if (!(($GLOBALS['association_metas']['civilite']!='on' && $k=='sexe') OR ($GLOBALS['association_metas']['prenom']!='on' && $k=='prenom') OR ($GLOBALS['association_metas']['id_asso']!='on' && $k=='id_asso'))) {
-			$libelle = 'adherent_libelle_'.$k;
-			$trad = _T('asso:'.$libelle);
-			if ($libelle!=str_replace(' ', '_', $trad)) {
-				$res .= "<input type='checkbox' name='champs[$k]' />$trad<br />";
-			}
-		}
-	}
-	/* on ajoute aussi le mail */
-	$res .= '<input type="checkbox" name="champs[email]" />'._T('asso:adherent_libelle_email').'<br />';
-	/* si le plugin coordonnees est actif, on ajoute l'adresse et le telephone */
-	if (test_plugin_actif('COORDONNEES')) {
-		$res .= '<input type="checkbox" name="champs[adresse]" />'._T('coordonnees:label_adresse').'<br />';
-		$res .= '<input type="checkbox" name="champs[telephone]" />'._T('coordonnees:label_numero').'<br />';
-	}
-	/* on fait suivre la liste des auteurs a afficher */
-	$res .= '<input type="hidden" name="where_adherents" value="'.$where_adherents.'" />';
-	$res .= '<input type="hidden" name="jointure_adherents" value="'.$jointure_adherents.'" />';
-	$res .= '<input type="hidden" name="statut_interne" value="'.$statut_interne.'" />';
-	return  generer_form_ecrire('pdf_adherents', $res, '', _T('asso:bouton_impression'));
 }
 
 ?>

@@ -17,7 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 // Export du Compte de Resultat au format Pdf
 function exec_export_compteresultats_pdf()
 {
-	if (!autoriser('associer', 'export_compte_resultats')) {
+	if (!autoriser('associer', 'export_comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

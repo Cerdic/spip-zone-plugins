@@ -502,8 +502,9 @@ function affichage_div($type_operation,$list_operation)
 
 /* selecteur d'exercice comptable */
 function association_selectionner_exercice($exercice='', $url_action='') {
-    if ($url_action) {
-		$res = '<form method="post" action="'.$url_action.'"><div>';
+    if ($exec) {
+		$res = '<form method="post" action="'. generer_url_ecrire($exec) .'"><div>';
+		$res .= '<input type="hidden" name="exec" value="'.$exec.'" />';
     } else {
 		$res = '';
     }
@@ -521,17 +522,19 @@ function association_selectionner_exercice($exercice='', $url_action='') {
 		}
 		$res .= '>'.$val['intitule'].'</option>';
     }
-    $res .= '</select><noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>';
-    if ($url_action) {
+    $res .= '</select>';
+    if ($exec) {
+		$res .= '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>';
 		$res .= '</div></form>';
     }
     return $res;
 }
 
 /* selecteur d'exercice comptable */
-function association_selectionner_destination($destination='', $url_action='') {
-    if ($url_action) {
-		$res = '<form method="post" action="'.$url_action.'"><div>';
+function association_selectionner_destination($destination='', $exec='') {
+    if ($exec) {
+		$res = '<form method="post" action="'. generer_url_ecrire($exec) .'"><div>';
+		$res .= '<input type="hidden" name="exec" value="'.$exec.'" />';
     } else {
 		$res = '';
     }
@@ -555,8 +558,9 @@ function association_selectionner_destination($destination='', $url_action='') {
 		$res .= '>'.$val['intitule'].'</option>';
 //		$intitule_destinations[$val['id_destination']] = $val['intitule'];
     }
-    $res .= '</select><noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>';
-    if ($url_action) {
+    $res .= '</select>';
+    if ($exec) {
+		$res .= '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>';
 		$res .= '</div></form>';
     }
     if ($GLOBALS['association_metas']['destinations']){
@@ -564,6 +568,55 @@ function association_selectionner_destination($destination='', $url_action='') {
 	} else {
 		return FALSE;
 	}
+}
+
+/* selecteur de grouoe de membres*/
+function association_selectionner_groupe($id_groupe='', $exec='') {
+    if ($exec) {
+		$res = '<form method="post" action="'. generer_url_ecrire($exec) .'"><div>';
+		$res .= '<input type="hidden" name="exec" value="'.$exec.'" />';
+    } else {
+		$res = '';
+    }
+    $qGroupes = sql_select('nom, id_groupe', 'spip_asso_groupes', 'id_groupe>=100', '', 'nom');  // on ne prend en consideration que les groupe d'id >= 100, les autres sont reserves a la gestion des autorisations
+    if ( $qGroupes && sql_count($qGroupes) ) { // ne proposer que s'il y a des groupes definis
+		$res .= '<select name="id_groupe" onchange="form.submit()">';
+		$res .= '<option value="">'._T('asso:tous_les_groupes').'</option>';
+		while ($groupe = sql_fetch($qGroupes)) {
+			$res .= '<option value="'.$groupe['id_groupe'].'"';
+			if ($id_groupe==$groupe['id_groupe'])
+				$res .= ' selected="selected"';
+			$res .= '>'.$groupe['nom'].'</option>';
+		}
+		$res .= '</select><noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></div></form>';
+		return $res;
+	} else {
+		return FALSE;
+	}
+}
+
+/* selecteur de statut de membres*/
+function association_selectionner_statut($statut_interne='', $exec='') {
+    if ($exec) {
+		$res = '<form method="post" action="'. generer_url_ecrire($exec) .'"><div>';
+		$res .= '<input type="hidden" name="exec" value="'.$exec.'" />';
+    } else {
+		$res = '';
+    }
+    $res .= '<select name="statut_interne" onchange="form.submit()">';
+    $res .= '<option value="%"'. (($statut_interne=='defaut' || $statut_interne=='%')?' selected="selected"':'') .'>'._T('asso:entete_tous').'</option>';
+    foreach ($GLOBALS['association_liste_des_statuts'] as $statut) {
+		$res .= '<option value="'.$statut.'"';
+		if ($statut_interne==$statut)
+			$res .= ' selected="selected"';
+		$res .= '> '._T('asso:adherent_entete_statut_'.$statut).'</option>';
+	}
+	$res .= '</select>';
+    if ($exec) {
+		$res .= '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>';
+		$res .= '</div></form>';
+    }
+    return $res;
 }
 
 function encadre($texte,$avant='[',$apres=']')

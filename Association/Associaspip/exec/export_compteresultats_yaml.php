@@ -19,7 +19,7 @@ include_spip('exec/compte_resultat'); // c'est pour la definition de classe Expo
 // Export du Compte de Resultat au format YAML
 // http://fr.wikipedia.org/wiki/Yaml
 function exec_export_compteresultats_yaml() {
-	if (!autoriser('associer', 'export_compteresultats')) {
+	if (!autoriser('associer', 'export_comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
