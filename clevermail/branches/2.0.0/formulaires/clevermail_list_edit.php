@@ -3,11 +3,11 @@ function formulaires_clevermail_list_edit_charger_dist($lst_id = -1) {
 	// Ces define sont mis ici car dans clevermail_options.php, il etait impossible de surcharger avec un plugin ayant :
 	// 	<utilise id="clevermail" version="[2.5.0;]" />
 	// Pour proposer une URL complète (true) ou juste le chemin du squelette (false) à la création d'une nouvelle lettre
-	@define("_CLEVERMAIL_DISTANT", true);
-	@define("_CLEVERMAIL_NOUVEAUTES_HTML", 'clevermail_nouveautes_html');
+	if (!defined('_CLEVERMAIL_DISTANT')) define("_CLEVERMAIL_DISTANT", true);
+	if (!defined('_CLEVERMAIL_NOUVEAUTES_HTML')) define("_CLEVERMAIL_NOUVEAUTES_HTML", 'clevermail_nouveautes_html');
 	// _CLEVERMAIL_NOUVEAUTES_HTML_OPTION est facultatif. Il permet de completer l'url amorcee avec _CLEVERMAIL_NOUVEAUTES_HTML.
 	// define("_CLEVERMAIL_NOUVEAUTES_HTML_OPTION", 'cat=mot&sujet=1&pied=1&entete=1');
-	@define("_CLEVERMAIL_NOUVEAUTES_TEXT", 'clevermail_nouveautes_text');
+	if (!defined('_CLEVERMAIL_NOUVEAUTES_TEXT')) define("_CLEVERMAIL_NOUVEAUTES_TEXT", 'clevermail_nouveautes_text');
 	// _CLEVERMAIL_NOUVEAUTES_TEXT_OPTION est facultatif. Il permet de completer l'url amorcee avec _CLEVERMAIL_NOUVEAUTES_TEXT.
 	// define("_CLEVERMAIL_NOUVEAUTES_TEXT_OPTION", 'cat=mot&sujet=1&pied=1&entete=1');
 	if ($valeurs = sql_fetsel('*', 'spip_cm_lists', 'lst_id='.intval($lst_id))) {
