@@ -1,5 +1,4 @@
 <div class='formulaire_spip formulaire_editer formulaire_#FORM'>
-	[(#ENV{paquet/nom}|oui)<h2 class='h2'><:fabrique:titre_plugin{plugin=#ENV{paquet/nom}}:></h2>]
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<BOUCLE_si_diff(CONDITION){si #ENV**{_message_diff}}>
@@ -42,7 +41,7 @@
 				</a></li>
 				<BOUCLE_tab_objets(DATA){source tableau, #OBJETS}>
 					[(#SET{defaut,<:fabrique:onglet_objet_n{nb=#CLE}:>})]
-				<li id='objet#CLE'><a href="#tab-objet-#CLE">[(#NOM|mb_strtoupper|sinon{#GET{defaut}})]
+				<li id='objet#CLE'><a href="#tab-objet-#CLE">[(#NOM|fabrique_mb_strtoupper|sinon{#GET{defaut}})]
 					[(#REM) Attention à bien rafraichir l'image reduite lorsqu'on change de logo ]
 					[(#VALEUR{logo/24/fichier}
 						|sinon{#VALEUR{logo/32/fichier}}|sinon{#VALEUR{logo/0/fichier}}

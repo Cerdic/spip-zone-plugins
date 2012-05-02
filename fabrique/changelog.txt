@@ -6,10 +6,23 @@ Ce plugin génère d'autres plugins !
 
 
 * Coquille et code mort en moins
+* Suivre le déplacement de jquery-ui dans SPIP3
+* Éviter les fonctions mb_* lorsqu'elles ne sont pas présentes dans le PHP (c'est vraiment dommage) (vince)
+
+Dans le plugin généré
+* Mauvais nommage de l'autorisation du bouton d'action rapide (Cédric Couvrat)
+
 
 Interface :
 * Gestion des diff sous Windows (Julien Lanfray)
 * Affichage des diff unix plus aérés et simples
+* Permettre de saisir des liaisons vers des objets que l'on a déclaré
+  dans la Fabrique, mais qui ne sont pas encore connu de SPIP (plugin
+  non activé). [ Possible que ça ne fonctionne bien, pour ces objets
+  en cours de création, que si la table est naturelle pour SPIP
+  (spip_xxs, id_xx) ]
+* Suppression du titre du plugin en doublon (le premier ne s'affichait pas à cause d'une coquille !)
+
 
 
 1.14.0 le 27 04 2012

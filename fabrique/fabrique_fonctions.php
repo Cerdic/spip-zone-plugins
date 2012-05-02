@@ -91,17 +91,11 @@ function balise_PHP_dist($p) {
  *
 **/
 function chaine_de_langue($texte) {
+	$texte = html_entity_decode($texte, ENT_QUOTES, 'UTF-8');
+	# egalement 
 	# http://www.php.net/manual/fr/function.html-entity-decode.php#104617
-	// mais eviter une fonction anonyme en PHP 5.2
 
-	$texte = preg_replace_callback("/(&#[0-9]+;)/", 'convertir_chaine_de_langue', $texte);
 	return addslashes($texte);
-}
-
-// fonction normalement anonyme dans la fonction chaine_de_langue()
-// mais mise ici pour compat PHP 5.2
-function convertir_chaine_de_langue($m) {
-	return mb_convert_encoding($m[1], "UTF-8", "HTML-ENTITIES");
 }
 
 /**
@@ -529,11 +523,38 @@ function fabrique_tabulations($texte, $nb_tabulations) {
 
 
 
-// ucfirst en utilisant mb
-if (!function_exists('mb_ucfirst')) {
-	function mb_ucfirst($str) {
-		$str[0] = mb_strtoupper($str[0]);
-		return $str;
+
+/**
+ * Passer en majuscule en utilisant mb de preference
+ * s'il est disponible. 
+ *
+ * @param string $str
+ * 		La chaine a passer en majuscule
+ * @return string
+ * 		La chaine en majuscule
+**/
+function fabrique_mb_strtoupper($str) {
+	if (function_exists('mb_strtoupper')) {
+		return mb_strtoupper($str);
+	} else {
+		return strtoupper($str);
+	}
+}
+
+/**
+ * Passer en minuscule en utilisant mb de preference
+ * s'il est disponible. 
+ *
+ * @param string $str
+ * 		La chaine a passer en minuscule
+ * @return string
+ * 		La chaine en minuscule
+**/
+function fabrique_mb_strtolower($str) {
+	if (function_exists('mb_strtolower')) {
+		return mb_strtolower($str);
+	} else {
+		return strtolower($str);
 	}
 }
 
@@ -550,6 +571,62 @@ function filtre_fabrique_miniature_image($fichier, $taille=256) {
 	$im = timestamp($im);
 	$im = filtrer('balise_img', $im);
 	return $im;
+}
+
+
+
+/**
+ * Retourne un tableau table_sql=>Nom des objets de SPIP
+ * complété des objets declares dans la fabrique ainsi
+ * que de tables indiquees même si elles ne font pas parties
+ * de declarations connues.
+ *
+ * @param array $objets_fabrique
+ * 		Déclaration d'objets de la fabrique
+ * @param array $inclus
+ * 		Liste de tables SQL que l'on veut forcement presentes
+ * 		meme si l'objet n'est pas declare
+ * @param array $exclus
+ * 		Liste de tables SQL que l'on veut forcement exclues
+ * 		meme si l'objet n'est pas declare
+ * @return array
+ * 		Tableau table_sql => Nom
+**/
+function filtre_fabrique_lister_objets_editoriaux($objets_fabrique, $inclus=array(), $exclus=array()) {
+
+	// les objets existants
+	$objets = lister_tables_objets_sql();
+	foreach ($objets as $sql => $o) {
+		if ($o['editable']) {
+			$liste[$sql] = _T($o['texte_objets']);
+		}
+	}
+	unset($objets);
+
+	// les objets de la fabrique
+	foreach ($objets_fabrique as $o) {
+		if (!isset($liste[$o['table']])) {
+			$liste[ $o['table'] ] = $o['nom'];
+		}
+	}
+
+	// des objets qui n'existent pas mais qui sont actuellement coches dans la saisie
+	foreach ($inclus as $sql) {
+		if (!isset($liste[$sql])) {
+			$liste[$sql] = $sql; // on ne connait pas le nom
+		}
+	}
+
+	// tables forcement exclues
+	foreach ($exclus as $sql) {
+		unset($liste[$sql]);
+	}
+	// enlever un eventuel element vide
+	unset($liste['']);
+
+	asort($liste);
+
+	return $liste;
 }
 
 

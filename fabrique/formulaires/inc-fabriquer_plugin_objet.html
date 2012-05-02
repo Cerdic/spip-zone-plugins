@@ -269,10 +269,10 @@
 
 <h3><a href="#chaines"><:fabrique:legend_chaines_langues:></a></h3>
 <div class='li_colonne'>
-		[(#SET{objets,#ENV{objets/#CLE/nom}|trim|mb_strtolower})]
-		[(#SET{type,#ENV{objets/#CLE/nom_singulier}|trim|mb_strtolower|sinon{#GET{objets}|substr{0,-1}}})]
-		[(#SET{mobjets,#GET{objets}|mb_ucfirst})]
-		[(#SET{mtype,#GET{type}|mb_ucfirst})]
+		[(#SET{objets,#ENV{objets/#CLE/nom}|trim|fabrique_mb_strtolower})]
+		[(#SET{type,#ENV{objets/#CLE/nom_singulier}|trim|fabrique_mb_strtolower|sinon{#GET{objets}|substr{0,-1}}})]
+		[(#SET{mobjets,#GET{objets}|fabrique_mb_strtoupper|ucfirst})]
+		[(#SET{mtype,#GET{type}|fabrique_mb_strtoupper|ucfirst})]
 	<B_chaines>
 	<ul>
 	<BOUCLE_chaines(DATA){si #ENV{objets/#CLE/nom}}{liste
@@ -326,10 +326,11 @@
 		[(#SAISIE{oui_non, objets/#CLE/table_liens,
 			label=<:fabrique:label_table_liens:>})]
 
-		[(#SAISIE{choisir_objets, objets/#CLE/vue_liens,
+		[(#SAISIE{checkbox, objets/#CLE/vue_liens,
 			label=<:fabrique:label_vue_liens:>,
 			explication=<:fabrique:label_vue_liens_explication:>,
-			exclus=#TABLE})]
+			datas=[(#ENV{objets}|fabrique_lister_objets_editoriaux{#ENV{objets/#CLE/vue_liens, #ARRAY}, #LISTE{#TABLE}})],
+			li_class=saisie_choisir_objets})]
 		</ul>
 	</fieldset>
 
