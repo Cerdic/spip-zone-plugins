@@ -1,0 +1,5 @@
+<BOUCLE_nav(BANNIERES){id_banniere}{statut==.*}{si #ENV{exec}|=={banniere}}>
+#BOITE_OUVRIR{'','info'}
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','banniere','id',#ENV{id_banniere}}}}
+#BOITE_FERMER
+</BOUCLE_nav>

@@ -1,0 +1,13 @@
+<h1 class="grostitre"><:pubban:gestion_pubban:></h1>
+
+<INCLURE{fond=prive/squelettes/inclure/pubban_recherche,env} />
+
+<INCLURE{fond=prive/squelettes/inclure/statistiques_pubban_resume} />
+
+<br class='nettoyeur' />
+[(#URL_ECRIRE{statistiques_bannieres}|icone_verticale{<:pubban:page_stats:>,stock-tool-button-color-balance.png,'',right})]
+[(#URL_ECRIRE{pubban_info}|icone_verticale{<:pubban:page_infos:>,status-dock-24.png,'',right})]
+[(#SESSION{statut}|=={0minirezo}|oui)
+	[(#URL_ECRIRE{publicites}|icone_verticale{<:pubban:liste_pub:>,stock_insert-object.png,'',right})]
+	[(#URL_ECRIRE{bannieres}|icone_verticale{<:pubban:list_empl:>,stock_insert-image.png,'',right})]
+]

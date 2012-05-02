@@ -1,0 +1,23 @@
+<BOUCLE_afficher_contenu(BANNIERES){id_banniere=#ENV{id}}{statut?}>
+<div class="vevent id_#ID_BANNIERE">
+	<p class='date'><small>
+		[<:pubban:date_maj:> : <abbr title="[(#MAJ|date_iso)]">(#MAJ|affdate) [(#MAJ|affdate{H:i})]</abbr>]
+	</small></p>
+	<p class='date'>
+		<strong><:pubban:dimensions:>&nbsp;:&nbsp;#WIDTH x #HEIGHT px</strong>
+	</p>
+	<p class='date'>
+		<strong><:pubban:stats:></strong>&nbsp;:
+		<ul>
+			<li><:pubban:ratio_pages:>&nbsp;:&nbsp;<strong>#RATIO_PAGES %</strong></li>
+			<li><:pubban:nb_pub:>&nbsp;:&nbsp;<strong>#ENV{decompte_pub}&nbsp;<:pubban:pub:></strong>
+			<ul>
+				<li><:pubban:nb_pub_actives:>&nbsp;:&nbsp;<strong>#ENV{decompte_pub_actives}&nbsp;<:pubban:pub:></strong>
+				<li><:pubban:nb_pub_inactives:>&nbsp;:&nbsp;<strong>#ENV{decompte_pub_inactives}&nbsp;<:pubban:pub:></strong>
+				<li><:pubban:nb_pub_obsoletes:>&nbsp;:&nbsp;<strong>#ENV{decompte_pub_obsoletes}&nbsp;<:pubban:pub:></strong>
+			</ul></li>
+		</ul>
+	</p>
+</div>
+<div class='nettoyeur'></div>
+</BOUCLE_afficher_contenu>
