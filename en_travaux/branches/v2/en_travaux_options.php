@@ -32,6 +32,8 @@ if (isset($GLOBALS['meta']['entravaux_id_auteur']) AND $GLOBALS['meta']['entrava
 				echo "Acces interdit (en travaux) <a href='"
 				.generer_url_action('logout',"logout=public",false,true)
 				."'>Deconnexion</a>";
+			} else {
+				echo $travaux ;
 			}
 			die();
 		}
