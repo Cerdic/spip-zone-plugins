@@ -1,8 +1,8 @@
-		<BOUCLE_mots(MOTS){gis}{id_mot ?}{id_groupe ?}{id_article ?}{id_rubrique ?}{id_breve ?}{id_syndic ?}{id_forum ?}{recherche ?}{0, #ENV{limit}}{","}>
+		<BOUCLE_sit(SITES){gis}{id_syndic ?}{id_rubrique ?}{id_secteur ?}{id_mot ?}{recherche ?}{0, #ENV{limit}}{","}>
 		{"type": "Feature",
 		"geometry": {"type": "Point", "coordinates": [#LON, #LAT]},
 		"id":"#ID_GIS",
-		"title":[(#TITRE_GIS*|sinon{#TITRE*}|supprimer_numero|json_encode)],
+		"title":[(#TITRE_GIS*|sinon{#NOM_SITE*}|supprimer_numero|json_encode)],
 		"description":[(#DESCRIPTIF_GIS|sinon{#DESCRIPTIF}|json_encode)][(#SET{logo_doc,''})]
 		[(#LOGO_GIS|oui)
 		[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{32,32}|image_recadre{32,32}})]]
@@ -17,4 +17,4 @@
 		[,"icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
 		"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)],
 		"icon_anchor": [(#VAL{91}|chr)][(#GET{icon_w}|div{2})],[(#GET{icon_h})][(#VAL{93}|chr)]
-		]}</BOUCLE_mots>
+		]}</BOUCLE_sit>

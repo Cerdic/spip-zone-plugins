@@ -1,9 +1,9 @@
-		<BOUCLE_auteurs(AUTEURS){id_article ?}{id_auteur ?}{recherche ?}{0, #ENV{limit}}{","}><BOUCLE_gis(GIS){id_auteur}{","}>
+		<BOUCLE_auteurs(AUTEURS){gis}{id_article ?}{id_auteur ?}{recherche ?}{0, #ENV{limit}}{","}>
 		{"type": "Feature",
 		"geometry": {"type": "Point", "coordinates": [#LON, #LAT]},
 		"id":"#ID_GIS",
-		"title":[(#TITRE|sinon{#_auteurs:NOM}|supprimer_numero|json_encode)],
-		"description":[(#DESCRIPTIF|sinon{#_auteurs:BIO}|json_encode)][(#SET{logo_doc,''})]
+		"title":[(#TITRE_GIS*|sinon{#NOM*}|supprimer_numero|json_encode)],
+		"description":[(#DESCRIPTIF_GIS|sinon{#BIO}|json_encode)][(#SET{logo_doc,''})]
 		[(#LOGO_GIS|oui)
 		[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{32,32}|image_recadre{32,32}})]]
 		[(#LOGO_GIS|non)
@@ -17,4 +17,4 @@
 		[,"icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
 		"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)],
 		"icon_anchor": [(#VAL{91}|chr)][(#GET{icon_w}|div{2})],[(#GET{icon_h})][(#VAL{93}|chr)]
-		]}</BOUCLE_gis></BOUCLE_auteurs>
+		]}</BOUCLE_auteurs>

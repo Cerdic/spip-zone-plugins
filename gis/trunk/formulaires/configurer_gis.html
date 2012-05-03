@@ -131,6 +131,8 @@
 	var init_config = function() {
 		var map;
 		var map_container = 'map_config';
+		// ne pas doublonner la carte quand on passe plusieurs fois dans ajaxload, pas propre mais bon... 
+        $('#map_config').empty();
 		map = new mxn.Mapstraction(map_container,'[(#REM|gis_api_utilisee)]');
 		map.setCenterAndZoom(new mxn.LatLonPoint(#ENV{lat,0},#ENV{lon,0}),#ENV{zoom,0});
         // Pour l'API Openlayers, la methode n'existe pas
@@ -170,7 +172,7 @@
 
 	}
 	
-	var geocoders = ['cartociudad','google','googlev3','yandex'];
+	var geocoders = ['cartociudad','google','googlev3','yandex','openlayers'];
 	
 	var show_geocoder = function(){
 		if(($.inArray($('#champ_api').val(),geocoders) >= 0) && $('li.editer_geocoder').is(':hidden')){

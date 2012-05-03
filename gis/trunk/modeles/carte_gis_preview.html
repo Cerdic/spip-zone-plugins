@@ -11,6 +11,8 @@ var cloudmade_key = '#CONFIG{gis/api_key_cloudmade}';]
 		var map_preview;
 		var map_preview_container = 'map_preview';
 		var marker;
+		// ne pas doublonner la carte quand on passe plusieurs fois dans ajaxload, pas propre mais bon...
+		$('#map_preview').empty(); 
 		map_preview = new mxn.Mapstraction(map_preview_container,'[(#REM|gis_api_utilisee)]');
         // Pour l'API Openlayers, la methode n'existe pas
         try {

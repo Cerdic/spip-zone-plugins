@@ -8,7 +8,7 @@ var gis_get_navigator_location = function(map,zoom){
 
 function gis_close_infowindows(map) {
 	var map = eval('map'+ map);
-	for (i in map.markers) {
+	for (var i = 0; i < map.markers.length; i++) {
 		map.markers[i].closeBubble();
 	}
 }
@@ -16,7 +16,7 @@ function gis_close_infowindows(map) {
 function gis_focus_marker(id, map) {
 	var mxn = eval('map'+ map);
 	gis_close_infowindows(map);
-	for (i in mxn.markers) {
+	for (var i = 0; i < mxn.markers.length; i++) {
 		if (mxn.markers[i].attributes.marker == id) {
 			mxn.setCenter(mxn.markers[i].location);
 			mxn.markers[i].openBubble();
@@ -26,7 +26,7 @@ function gis_focus_marker(id, map) {
 
 function gis_autofocus_marker(map) {
 	var mxn = eval('map'+ map);
-	for (i in mxn.markers) {
+	for (var i = 0; i < mxn.markers.length; i++) {
 		mxn.markers[i].openInfoBubble.addHandler(function(name, source, args) {
 			gis_close_infowindows(map);
 		});

@@ -76,37 +76,66 @@ function distance($from,$to,$miles=false) {
 function critere_gis_dist($idb, &$boucles, $crit) {
 	
 	$boucle = &$boucles[$idb];
-	$id = $boucle->primary;
+	$id_table = $boucle->id_table; // articles
+	$primary = $boucle->primary; // id_article
+	$objet = objet_type($id_table); // article
 	
-	// exclure l'élément en cours des résultats
-	$id_gis = calculer_argument_precedent($idb,$id, $boucles);
-	$boucle->where[]= array("'!='", "'$boucle->id_table." . "$id'", $id_gis);
-	
-	// récupérer les paramètres du critère
-	$op='';
-	$params = $crit->param;
-	$type = array_shift($params);
-	$type = $type[0]->texte;
-	if(preg_match(',^(\w+)([<>=]+)([0-9]+)$,',$type,$r)){
-		$type=$r[1];
-		$op=$r[2];
-		$op_val=$r[3];
+	if ($id_table == 'gis') {
+		// exclure l'élément en cours des résultats
+		$id_gis = calculer_argument_precedent($idb,$primary, $boucles);
+		$boucle->where[]= array("'!='", "'$boucle->id_table." . "$primary'", $id_gis);
+		
+		// récupérer les paramètres du critère
+		$op='';
+		$params = $crit->param;
+		$type = array_shift($params);
+		$type = $type[0]->texte;
+		if(preg_match(',^(\w+)([<>=]+)([0-9]+)$,',$type,$r)){
+			$type=$r[1];
+			$op=$r[2];
+			$op_val=$r[3];
+		}
+		if ($op)
+			$boucle->having[]= array("'".$op."'", "'".$type."'",$op_val);
+		
+		// récupérer lat/lon du point de la boucle englobante
+		$lat = calculer_argument_precedent($idb,'lat', $boucles);
+		$lon = calculer_argument_precedent($idb,'lon', $boucles);
+		
+		// http://www.awelty.fr/developpement-web/php/
+		// http://www.movable-type.co.uk/scripts/latlong-db.html
+		// http://code.google.com/intl/fr/apis/maps/articles/geospatial.html#geospatial
+		$select = "(6371 * acos( cos( radians(\".$lat.\") ) * cos( radians( gis.lat ) ) * cos( radians( gis.lon ) - radians(\".$lon.\") ) + sin( radians(\".$lat.\") ) * sin( radians( gis.lat ) ) ) ) AS distance";
+		$order = "'distance'";
+		
+		$boucle->select[]= $select;
+		$boucle->order[]= $order;
+	} else {
+		// ajouter tous les champs du point au select 
+		// et les suffixer pour lever toute ambiguite avec des champs homonymes
+		$boucle->select[]= 'gis.titre AS titre_gis';
+		$boucle->select[]= 'gis.descriptif AS descriptif_gis';
+		$boucle->select[]= 'gis.adresse AS adresse_gis';
+		$boucle->select[]= 'gis.pays AS pays_gis';
+		$boucle->select[]= 'gis.code_pays AS code_pays_gis';
+		$boucle->select[]= 'gis.region AS region_gis';
+		$boucle->select[]= 'gis.ville AS ville_gis';
+		$boucle->select[]= 'gis.code_postal AS code_postal_gis';
+		// jointure sur spip_gis_liens/spip_gis
+		// cf plugin notation
+		// $boucle->join["surnom (as) table de liaison"] = array("surnom de la table a lier", "cle primaire de la table de liaison", "identifiant a lier", "type d'objet de l'identifiant");
+		$boucle->from['gis_liens'] = 'spip_gis_liens';
+		$boucle->join['gis_liens']= array("'$id_table'","'id_objet'","'$primary'","'gis_liens.objet='.sql_quote('$objet')");
+		$boucle->from['gis'] = 'spip_gis';
+		$boucle->join['gis']= array("'gis_liens'","'id_gis'");
+		// bien renvoyer tous les points qui son attachés à l'objet
+		$boucle->group[] = 'gis_liens.id_gis';
+		// ajouter gis aux jointures et spécifier les jointures explicites pour pouvoir utiliser les balises de la table de jointure
+		// permet de passer dans trouver_champ_exterieur() depuis index_tables_en_pile()
+		// cf http://article.gmane.org/gmane.comp.web.spip.zone/6628
+		$boucle->jointures[] = 'gis';
+		$boucle->jointures_explicites = 'gis_liens gis';
 	}
-	if ($op)
-		$boucle->having[]= array("'".$op."'", "'".$type."'",$op_val);
-	
-	// récupérer lat/lon du point de la boucle englobante
-	$lat = calculer_argument_precedent($idb,'lat', $boucles);
-	$lon = calculer_argument_precedent($idb,'lon', $boucles);
-	
-	// http://www.awelty.fr/developpement-web/php/
-	// http://www.movable-type.co.uk/scripts/latlong-db.html
-	// http://code.google.com/intl/fr/apis/maps/articles/geospatial.html#geospatial
-	$select = "(6371 * acos( cos( radians(\".$lat.\") ) * cos( radians( gis.lat ) ) * cos( radians( gis.lon ) - radians(\".$lon.\") ) + sin( radians(\".$lat.\") ) * sin( radians( gis.lat ) ) ) ) AS distance";
-	$order = "'distance'";
-	
-	$boucle->select[]= $select;
-	$boucle->order[]= $order;
 	
 }
 
@@ -118,6 +147,26 @@ function critere_gis_dist($idb, &$boucles, $crit) {
  */
 function balise_distance_dist($p) {
 	return rindex_pile($p, 'distance', 'gis');
+}
+
+/**
+ * Balise #TITRE_GIS : retourne le titre du point
+ * Necessite le critere {gis} sur la boucle
+ *
+ * @param unknown_type $p
+ */
+function balise_titre_gis_dist($p) {
+	return rindex_pile($p, 'titre_gis', 'gis');
+}
+
+/**
+ * Balise #DESCRIPTIF_GIS : retourne le descriptif du point
+ * Necessite le critere {gis} sur la boucle
+ *
+ * @param unknown_type $p
+ */
+function balise_descriptif_gis_dist($p) {
+	return rindex_pile($p, 'descriptif_gis', 'gis');
 }
 
 /**

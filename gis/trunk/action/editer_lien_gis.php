@@ -9,7 +9,7 @@ function action_editer_lien_gis_dist(){
 	list($action,$id_gis, $objet, $id_objet) = explode('/',$arg);
 	
 	include_spip('inc/autoriser');
-	if (intval($id_gis) AND autoriser('modifier','gis',$id_gis,null,null)){
+	if (intval($id_gis) AND autoriser('lier','gis',$id_gis,$GLOBALS['visiteur_session'],array('objet' => $objet,'id_objet'=>$id_objet))){
 		include_spip('action/editer_gis');
 		if ($action == 'lier')
 			lier_gis($id_gis, $objet, $id_objet);

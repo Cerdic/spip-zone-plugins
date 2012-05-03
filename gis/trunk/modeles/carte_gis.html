@@ -30,6 +30,7 @@
 	- kml = 12						kml à superposer à la carte (id_document ou url)
 	- localize_visitor|localiser_visiteur = oui		centrer la carte sur la position du visiteur (API geolocation HTML5)
 	- point = non					si elle vaut "non" cette option n'affichera pas de points du tout (utile pour n'afficher qu'un kml par exemple)
+	- ajaxload = non                si elle vaut "non" cette option désactive l'init de la carte sur l'event ajaxload 
 
 ]
 
@@ -111,40 +112,51 @@ var map[(#GET{id})];
         catch(err) {
 			;
         }
-
+		
+		#SET{map_controls,#ARRAY}
+		
 		[(#ENV{no_control,#ENV{aucun_controle}}|!={oui}|oui)
-		map[(#GET{id})].addControls({zoom: '[(#ENV{control_zoom,large})]'});]
+			[(#SET{map_controls,#GET{map_controls}|array_merge{#ARRAY{zoom,#ENV{control_zoom,large}}}})]
+		]
 	
 		[(#ENV{overview}|oui)
-		map[(#GET{id})].addControls({overview: true});]
-	
-		[(#ENV{scale}|oui)
-		map[(#GET{id})].addControls({scale: true});]
-	
-		[(#ENV{control_type,#ENV{controle_type}}|!={non}|oui)
-		map[(#GET{id})].addControls({map_type: true});]
+			[(#SET{map_controls,#GET{map_controls}|array_merge{#ARRAY{overview,true}}})] 
+		]
 		
-		[(#ENV{control_pan,#ENV{controle_pan}}|!={non}|oui)
-		map[(#GET{id})].addControls({pan: true});]
-
+		[(#ENV{scale}|oui)
+			[(#SET{map_controls,#GET{map_controls}|array_merge{#ARRAY{scale,true}}})] 
+		]
+		
+		[(#ENV{control_type,#ENV{controle_type}}|!={non}|oui)
+			[(#SET{map_controls,#GET{map_controls}|array_merge{#ARRAY{map_type,true}}})] 
+		]
+		
+		[(#ENV{control_pan,#ENV{controle_pan}}|!={non}|oui) 
+			[(#SET{map_controls,#GET{map_controls}|array_merge{#ARRAY{pan,true}}})]
+		]
+		
+		map[(#GET{id})].addControls([(#GET{map_controls}|json_encode)]);
+		
 		[(#ENV{point}|!={non}|oui)
 		jQuery.getJSON("[(#URL_PAGE{gis_json}|url_absolue)]",
 			{[
-				objets : "(#ENV{objets,#ENV{class}})",][
-				id_rubrique : (#ENV{id_rubrique}),][
-				id_secteur : (#ENV{id_secteur}),][
-				id_parent : (#ENV{id_parent}),][
-				id_article : (#ENV{id_article}),][
-				id_breve : (#ENV{id_breve}),][
-				id_document : (#ENV{id_document}),][
-				id_mot : (#ENV{id_mot}),][
-				id_groupe : (#ENV{id_groupe}),][
-				id_auteur : (#ENV{id_auteur}),][
-				id_syndic : (#ENV{id_syndic}),][
-				id_forum : (#ENV{id_forum}),][
-				id_gis : (#ENV{id_gis}),][
+				objets : "(#ENV{objets,#ENV{class}}|trim)",][
+				id_rubrique : (#ENV{id_rubrique}|trim),][
+				id_secteur : (#ENV{id_secteur}|trim),][
+				id_parent : (#ENV{id_parent}|trim),][
+				id_article : (#ENV{id_article}|trim),][
+				id_breve : (#ENV{id_breve}|trim),][
+				id_document : (#ENV{id_document}|trim),][
+				id_mot : (#ENV{id_mot}|trim),][
+				id_groupe : (#ENV{id_groupe}|trim),][
+				id_auteur : (#ENV{id_auteur}|trim),][
+				id_syndic : (#ENV{id_syndic}|trim),][
+				id_forum : (#ENV{id_forum}|trim),][
+				id_evenement : (#ENV{id_evenement}|trim),][
+				id_gis : (#ENV{id_gis}|trim),][
 				recherche : "(#ENV{recherche})",][
-				limit : (#ENV{limit,#ENV{limite,500}})]
+				mots : (#ENV{mots}|?{[(#ENV{mots}|trim|json_encode)],''}),][
+				limit : (#ENV{limit,#ENV{limite,500}}|trim)]
 			},
 			function(data) {
 				if (data){
@@ -184,7 +196,7 @@ var map[(#GET{id})];
 
 	$(function(){
 		init_map[(#GET{id})]();
-		onAjaxLoad(init_map[(#GET{id})]);
+		[(#ENV{ajaxload}|!={non}|oui)onAjaxLoad(init_map[(#GET{id})]);] 
 	});
 
 })(jQuery);

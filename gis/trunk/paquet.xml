@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="3.2.3"
+	version="3.3.0"
 	schema="2.0.2"
 	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*["
@@ -73,7 +73,14 @@
 		nom="saisies_autonomes"
 		inclure="gis_pipelines.php"
 	/>
-	
+	<pipeline
+		nom="xmlrpc_methodes"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="xmlrpc_server_class"
+		inclure="gis_pipelines.php"
+	/>	
 	<menu nom="gis_tous" titre="gis:icone_gis_tous" parent="menu_edition" icone="images/gis-16.png" />
 	<menu nom="configurer_gis" titre="gis:cfg_titre_gis" parent="menu_configuration" icone="images/gis-16.png" />
 	<menu nom="gis_nouveau" titre="gis:editer_gis_nouveau" parent="outils_rapides" icone="images/gis-new-16.png" action="gis_edit" parametres="new=oui" />
