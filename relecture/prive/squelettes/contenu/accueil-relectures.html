@@ -1,10 +1,11 @@
-[(#BOITE_OUVRIR{<:relecture:titre_boite_accueil_relectures:>, basic highlight})]
+[(#SET{ouvrir, [(#BOITE_OUVRIR{<:relecture:titre_boite_accueil_relectures:>, basic highlight})]})]
 
 	[(#REM) <!-- Liste des relectures auxquelles l'auteur connecte participe comme relecteurs --> ]
 	#SET{liste, #ARRAY}
 	<BOUCLE_relecteurs(RELECTURES){id_auteur=#SESSION{id_auteur}}{statut=ouverte}>
 		#SET{liste, #GET{liste}|push{#ID_RELECTURE}}
 	</BOUCLE_relecteurs>
+		[(#GET{ouvrir}|unique)]
 		[(#SET{inclusion, [(#GET{liste}|implode{','}|concat{)})] })]
 		[(#SET{inclusion, [(#VAL{'id_relecture IN ('}|concat{#GET{inclusion}} )] })]
 		<INCLURE{fond=prive/objets/liste/relectures,
@@ -22,6 +23,7 @@
 	<BOUCLE_organisateurs(ARTICLES relectures){id_auteur=#SESSION{id_auteur}}{articles.statut=prepa}{relectures.statut=ouverte}>
 		#SET{liste, #GET{liste}|push{#ID_RELECTURE}}
 	</BOUCLE_organisateurs>
+		[(#GET{ouvrir}|unique)]
 		[(#SET{inclusion, [(#GET{liste}|implode{','}|concat{)})] })]
 		[(#SET{inclusion, [(#VAL{'id_relecture IN ('}|concat{#GET{inclusion}} )] })]
 		<INCLURE{fond=prive/objets/liste/relectures,
@@ -34,4 +36,4 @@
 			env, ajax}>
 	</B_organisateurs>
 
-#BOITE_FERMER
+[(#GET{ouvrir}|unique|non)#BOITE_FERMER]
