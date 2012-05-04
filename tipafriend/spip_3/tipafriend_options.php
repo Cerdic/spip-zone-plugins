@@ -74,7 +74,6 @@ define('_TIPAFRIEND_TEST', 0);
 
 /**
  * Dimensions par défaut de la popup
- * => ces dimensions ne sont pas prises en compte en fenêtre javascript (FancyBox, MediaBox)
  */
 define('_TIPAFRIEND_POPUP_WIDTH', 600);
 define('_TIPAFRIEND_POPUP_HEIGHT', 460);
@@ -103,8 +102,6 @@ $GLOBALS['TIPAFRIEND_DEFAULTS'] = array(
 	'close_button'			=> 'oui',
 	// options ajoutees comme attributs au lien
 	'options' 				=> '',
-	// arguments ajoutes au lien
-	'options_url' 				=> '',
 	// fonctions JS standards (ouverture de popup) ?
 	'javascript_standard' 	=> 'oui',
 	// contenus des objets inclus au mail
@@ -113,75 +110,19 @@ $GLOBALS['TIPAFRIEND_DEFAULTS'] = array(
 	'form_reset'			=> 'window.close();window.opener.focus();',
 );
 
-// -----------------------------
-// FONCTIONS
-// -----------------------------
+/**
+ * Nom du meta CFG de configuration
+ */
+define('TIPAFRIEND_CFGMETA', 'tipafriend');
 
 /**
- * Fonction renvoyant la configuration courante.
- * @param	string	$var Le nom d'une variable de config voulue | optionnel
- * @return	array/string	Array de configuration complet ou valeur de la variable de configuration entrée en paramètre (config utilisateur si présent, sinon config par défaut).
+ * Nom de la page de documentation interne pour generation des liens
  */
-function tipafriend_config($var=''){
-	$config = array();
-	$a = $GLOBALS['TIPAFRIEND_DEFAULTS'];
-	if(isset($GLOBALS['meta']['tipafriend']))
-		$a = array_merge($a, unserialize($GLOBALS['meta']['tipafriend']));
-
-	// preparation / rectifications
-	foreach($a as $key=>$val){
-		if($key == 'options') {
-			if(!strlen($val) AND $a['modele'] == $GLOBALS['TIPAFRIEND_DEFAULTS']['modele']) {
-				$config['javascript_standard'] = $GLOBALS['TIPAFRIEND_DEFAULTS']['javascript_standard'];
-			}
-			$config[$key] = str_replace('.html', '', $val);
-		}
-		elseif($key == 'javascript_standard') {
-			if(!isset($config[$key])) $config[$key] = $val;
-		}
-		elseif($key == 'patron') {
-			$config[$key] = str_replace('.html', '', $val);
-		}
-		else $config[$key] = str_replace('.html', '', $val);
-	}
-
-	if(strlen($var)){
-		if(isset($config[$var])) return($config[$var]);
-		return false;
-	}
-	return $config;
-}
+define('TIPAFRIEND_DOC', 'tipafriend_documentation');
 
 /**
- * Constructeur des blocs de débogue
+ * URL de la page de documentation sur spip-contrib (documentation officielle)
  */
-function taf_dbg_block($tab_dbg=null) {
-	if(is_null($tab_dbg)) return;
-	if(_TIPAFRIEND_TEST) {
-		$str_dbg = taf_dbg_block_css();
-		foreach($tab_dbg as $ttl=>$val) {
-			if (is_string($ttl))
-				$str_dbg .= "<li><b>$ttl</b><br />$val</li>";
-			else $str_dbg .= "<li><b>$val</b></li>";
-		}
-		return "<div class=\"taf_dbg_global\">"
-			."<div class=\"taf_dbg_title\"><small><strong>"._T('tipafriend:taftest_title')."</strong></small></div>"
-			."<pre class=\"taf_dbg_pre\"><ul>".$str_dbg."</ul></pre></div>";
-	}
-	return '';
-}
-
-function taf_dbg_block_css() {
-	static $TAF_dbg_cssOK=false;
-	if ($TAF_dbg_cssOK==true) return '';
-	$TAF_dbg_cssOK=true;
-	return "<style type=\"text/css\">
-/* ---- Blocs de debug ... ---- */
-.taf_dbg_global {color:black;border:1px solid #ddd;margin:.1em;padding:0;background:#fff}
-.taf_dbg_title {height:20px;background-color:#ddd;border-bottom:1px solid #ddd;padding-left:1em;padding-top:.4em}
-pre.taf_dbg_pre {max-height:280px;overflow:auto;color:black;padding:.6em;margin:0}
-pre.taf_dbg_pre ul li {margin-bottom:.6em}
-</style>";
-}
+define('TIPAFRIEND_DOC_CONTRIB', 'http://www.spip-contrib.net/?article3638');
 
 ?>

@@ -1,0 +1,47 @@
+[(#SET{config,#EVAL{tipafriend_config()}})]
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	
+<h3 class="titrem"><:tipafriend:cfg_legend_balise:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+
+<ul>
+
+	#SET{name,options}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="options"><:tipafriend:cfgform_titre_options:></label>
+		<div class="explication"><:tipafriend:cfgform_comment_options:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="text" name="options" id="options" class="text" value="[(#GET{config}|table_valeur{options})]" />
+	</li>	
+
+	#SET{name,javascript_standard}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="javascript_standard"><:tipafriend:cfgform_titre_javascript:></label>
+		<div class="explication"><:tipafriend:cfgform_comment_javascript:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="radio" name="javascript_standard" value="oui"[(#GET{config}|table_valeur{}|=={oui}|oui) checked="checked"] />&nbsp;<:tipafriend:bouton_activer:>
+		 &nbsp;&nbsp;<strong>|</strong>&nbsp;&nbsp;
+		 <input type="radio" name="javascript_standard" value="non"[(#GET{config}|table_valeur{javascript_standard}|=={non}|oui) checked="checked"] />&nbsp;<:tipafriend:bouton_desactiver:>
+	</li>	
+
+	#SET{name,form_reset}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="form_reset"><:tipafriend:cfgform_titre_reset:></label>
+		<div class="explication"><:tipafriend:cfgform_comment_reset:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="text" name="form_reset" id="form_reset" class="text" value="[(#GET{config}|table_valeur{form_reset})]" />
+	</li>	
+
+</ul>
+
+<input type="hidden" name="_meta_casier" value="tipafriend" />
+<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+
+</div>
+</form>
+</div>

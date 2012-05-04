@@ -1,0 +1,14 @@
+[(#AUTORISER{configurer}|sinon_interdire_acces)]
+
+#BOITE_OUVRIR{'',info}
+<img src="[(#CHEMIN{img/letter_32.png})]" width="32" height="32" alt="Logo <:tipafriend:tipafriend:>" style="float:#LANG_RIGHT;" />
+<h3><:tipafriend:tipafriend:></h3>
+<:tipafriend:cfg_texte_descr|propre:>
+#BOITE_FERMER
+
+#BOITE_OUVRIR{'',raccourcis}
+[(#EVAL{TIPAFRIEND_DOC_CONTRIB}|icone_horizontale{<:tipafriend:doc_en_ligne:>,spip_contrib-24.gif})]
+[(#URL_PAGE{#EVAL{TIPAFRIEND_DOC}}|icone_horizontale{<:tipafriend:page_test:>,article-24})]
+<small>[<a href='#URL_PAGE{#EVAL{TIPAFRIEND_DOC}}' target='_blank' title='<:tipafriend:page_test_in_new_window:>'><:fbmodeles:new_window:></a>]</small>
+#BOITE_FERMER
+

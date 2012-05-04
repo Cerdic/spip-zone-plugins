@@ -135,17 +135,10 @@ function balise_TIPAFRIEND_dyn($objet='', $id_objet='', $url='', $skel='', $mail
 		$model = str_replace('.html', '', $GLOBALS['TIPAFRIEND_DEFAULTS']['modele']);
 	}
 
-	// On traite les arguments utilisateurs
-	$user_opts = '';
-	if(isset($config['options_url']) && strlen($config['options_url'])) {
-		parse_str($config['options_url'], $opts_url);
-		$user_opts = "&".http_build_query($opts_url);
-	}
-
 	// Construction du contexte
 	$contexte = array( 
 		'fond' => 'modeles/'.$model,
-		'url' => $_url.$user_opts,
+		'url' => $_url,
 		'type' => $type_skel,
 		'options' => _request('options') ? _request('options') : (
 			$config['options'] ? $config['options'] : ''
@@ -162,7 +155,7 @@ function balise_TIPAFRIEND_dyn($objet='', $id_objet='', $url='', $skel='', $mail
 		}
 		else $contexte["id_$_obj"] = '';
 	}
-	$url_args = "id=$id&type=$type&mex=$mail_exp&nex=$nom_exp&mdes=$mail_dest".$user_opts;
+	$url_args = "id=$id&type=$type&mex=$mail_exp&nex=$nom_exp&mdes=$mail_dest&usend=$_url";
 	$skel = $config['squelette'];
 	if(!find_in_path($skel.'.html')) {
 		if(_TIPAFRIEND_TEST)
@@ -174,10 +167,7 @@ function balise_TIPAFRIEND_dyn($objet='', $id_objet='', $url='', $skel='', $mail
 	$contexte['lien_href_accessible'] = generer_url_public($skel, $url_args);
 	if($config['header'] == 'non') $url_args .= "&header=non";
 	if($config['close_button'] == 'non') $url_args .= "&close_button=non";
-	else $url_args .= "&close_button=oui";
 	if($config['taf_css'] == 'non') $url_args .= "&taf_css=non";
-	// On l'ajoute en dernier car sinon ca semble poser probleme
-	$url_args .= "&usend=$_url";
 	$contexte['lien_href'] = generer_url_public($skel, $url_args);
 
 	if(_TIPAFRIEND_TEST){

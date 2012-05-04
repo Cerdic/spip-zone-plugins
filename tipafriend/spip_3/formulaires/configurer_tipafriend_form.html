@@ -1,0 +1,61 @@
+[(#SET{config,#EVAL{tipafriend_config()}})]
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	
+<h3 class="titrem"><:tipafriend:cfg_legend_squelette:></h3>
+
+<:tipafriend:cfgform_info_squelettes|propre:>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+
+<ul>
+
+	#SET{name,squelette}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="squelette"><:tipafriend:cfgform_titre_squelette:></label>
+		<div class="explication"><:tipafriend:cfgform_comment_squelette:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="text" name="squelette" id="squelette" class="text" value="[(#GET{config}|table_valeur{squelette})]" />
+	</li>	
+
+	#SET{name,taf_css}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="taf_css"><:tipafriend:cfgform_titre_taf_css:></label>
+		<div class="explication"><:tipafriend:cfgform_comment_taf_css:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="radio" name="taf_css" value="oui"[(#GET{config}|table_valeur{taf_css}|=={oui}|oui) checked="checked"] />&nbsp;<:item_oui:>
+			&nbsp;&nbsp;<strong>|</strong>&nbsp;&nbsp;
+			<input type="radio" name="taf_css" value="non"[(#GET{config}|table_valeur{taf_css}|=={non}|oui) checked="checked"] />&nbsp;<:item_non:>
+	</li>	
+
+	#SET{name,header}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="header"><:tipafriend:cfgform_titre_header:></label>
+		<div class="explication"><:tipafriend:cfgform_comment_header:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="radio" name="header" value="oui"[(#GET{config}|table_valeur{header}|=={oui}|oui) checked="checked"] />&nbsp;<:item_oui:>
+			&nbsp;&nbsp;<strong>|</strong>&nbsp;&nbsp;
+			<input type="radio" name="header" value="non"[(#GET{config}|table_valeur{header}|=={non}|oui) checked="checked"] />&nbsp;<:item_non:>
+	</li>	
+
+	#SET{name,close_button}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="close_button"><:tipafriend:cfgform_titre_close_button:></label>
+		<div class="explication"><:tipafriend:cfgform_comment_close_button:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="radio" name="close_button" value="oui"[(#GET{config}|table_valeur{close_button}|=={oui}|oui) checked="checked"] />&nbsp;<:item_oui:>
+			&nbsp;&nbsp;<strong>|</strong>&nbsp;&nbsp;
+			<input type="radio" name="close_button" value="non"[(#GET{config}|table_valeur{close_button}|=={non}|oui) checked="checked"] />&nbsp;<:item_non:>
+	</li>	
+
+</ul>
+
+<input type="hidden" name="_meta_casier" value="tipafriend" />
+<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+
+</div>
+</form>
+</div>

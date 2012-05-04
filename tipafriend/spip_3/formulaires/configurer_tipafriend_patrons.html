@@ -1,0 +1,53 @@
+[(#SET{config,#EVAL{tipafriend_config()}})]
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	
+<h3 class="titrem"><:tipafriend:cfg_legend_patron:></h3>
+
+<:tipafriend:cfgform_info_patrons|propre:>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+
+<ul>
+
+	#SET{name,patron}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="patron"><:tipafriend:cfgform_titre_patron:></label>
+		<div class="explication"><:tipafriend:cfgform_comment_patron:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="text" name="patron" id="patron" class="text" value="[(#ENV{patron,#GET{config}|table_valeur{patron}})]" />
+	</li>	
+
+	#SET{name,contenu_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="contenu_objets"><:tipafriend:cfgform_titre_contenu:></label>
+		<div class="explication"><:tipafriend:cfgform_comment_contenu:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<select name="" id="contenu_objets" class="forml verdana1">
+				<option value="tout"[(#GET{config}|table_valeur{contenu_objets}|=={tout}|oui) selected="selected"]><:tipafriend:cfgform_option_contenu_tout:></option>
+				<option value="introduction"[(#GET{config}|table_valeur{contenu_objets}|=={introduction}|oui) selected="selected"]><:tipafriend:cfgform_option_contenu_introduction:></option>
+				<option value="rien"[(#GET{config}|table_valeur{contenu_objets}|=={rien}|oui) selected="selected"]><:tipafriend:cfgform_option_contenu_rien:></option>
+			</select>
+	</li>	
+
+	<li class=""><:tipafriend:cfgform_info_patron_html:></li>	
+
+	#SET{name,patron_html}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="patron_html"><:tipafriend:cfgform_titre_patron_html:></label>
+		<div class="explication"><:tipafriend:cfgform_comment_patron_html:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="text" name="patron_html" id="patron_html" class="text" value="[(#ENV{patron_html,#GET{config}|table_valeur{patron_html}})]" />
+	</li>	
+
+</ul>
+
+<input type="hidden" name="_meta_casier" value="tipafriend" />
+<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+
+</div>
+</form>
+</div>
