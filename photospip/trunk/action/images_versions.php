@@ -50,15 +50,15 @@ function action_images_versions_post($r){
 		spip_log("script image_version... on repart vers l'arrière","photospip");
 		spip_log("revenir à la version $version","photospip");
 		
-		$row = sql_fetsel("fichier,largeur,hauteur", "spip_documents_inters", "id_document=$arg AND version=$version");
+		$row = sql_fetsel("fichier,largeur,hauteur", "spip_documents_inters", "id_document=".intval($arg)." AND version=".intval($version));
 		
-		$src = _DIR_RACINE . copie_locale(_NOM_PERMANENTS_ACCESSIBLES.$row['fichier']);
+		$src = _DIR_RACINE . copie_locale(get_spip_doc($row['fichier']));
 		spip_log("la source est $src","photospip");
 		
 		// On cherche le fichier actuel
-		$doc_actuel = sql_getfetsel("fichier","spip_documents","id_document=$arg");
+		$doc_actuel = sql_getfetsel("fichier","spip_documents","id_document=".intval($arg));
 		// On supprimer le document actuel puisque l'on revient en arrière
-		unlink(_NOM_PERMANENTS_ACCESSIBLES.$doc_actuel);
+		spip_unlink(get_spip_doc($doc_actuel));
 		
 		sql_updateq('spip_documents', array('fichier' => $row['fichier'], 'largeur' =>$row['largeur'], 'hauteur' =>$row['hauteur']), "id_document=$arg");
 		spip_log("on update la table spip_documents et on met le fichier ".$row['fichier'],"photospip");
@@ -70,7 +70,7 @@ function action_images_versions_post($r){
 			sql_delete("spip_documents_inters","id_document =$arg AND version = ".$version_delete['version']);
 			spip_log("Pour le doc $arg on delete la version ".$version_delete['version'],"photospip");
 			if($version_delete['version'] > $version){
-				unlink(_NOM_PERMANENTS_ACCESSIBLES.$version_delete['fichier']);
+				spip_unlink(get_spip_doc($version_delete['fichier']));
 				spip_log("On vire le fichier ".$version_delete['fichier'],"photospip");
 			}
 			else{
@@ -82,7 +82,7 @@ function action_images_versions_post($r){
 		spip_log("script image_version... on supprimer une version","photospip");
 		$fichier = sql_getfetsel("fichier", "spip_documents_inters", "id_document=$arg AND version=$version");
 		spip_log("On vire le fichier $fichier","photospip");
-		unlink(_NOM_PERMANENTS_ACCESSIBLES.$fichier);
+		spip_unlink(get_spip_doc($fichier));
 		sql_delete("spip_documents_inters","id_document=$arg AND version=$version");
 		spip_log("supprimer la version $version","photospip");
 		

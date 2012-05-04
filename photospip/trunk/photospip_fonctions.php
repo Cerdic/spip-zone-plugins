@@ -7,7 +7,7 @@
  * Auteurs :
  * Quentin Drouet (kent1@arscenic.info)
  *
- * © 2008 - Distribue sous licence GNU/GPL
+ * © 2008-2012 - Distribue sous licence GNU/GPL
  * Pour plus de details voir le fichier COPYING.txt
  *
  */
@@ -23,6 +23,7 @@
 */
 
 function photospip_appliquer_filtre($balise, $filtre,$param1=NULL,$param2=NULL,$param3=NULL) {
+	$filtre = chercher_filtre($filtre);
 	if (function_exists($filtre)){
 		spip_log("$filtre($balise,$param1,$param2,$param3);","photospip");
 		if ($param1){
@@ -34,7 +35,7 @@ function photospip_appliquer_filtre($balise, $filtre,$param1=NULL,$param2=NULL,$
 			spip_log("$filtre($balise,$param1,$param2,$param3);","photospip");
 		}
 	} else {
-		return balise;
+		return $balise;
 	}
 }
 ?>

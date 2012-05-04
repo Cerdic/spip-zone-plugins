@@ -12,5 +12,5 @@
  *
  */
  
-define(_DIR_LIB_IMGAREASELECT,_DIR_LIB.'jquery.imgareaselect-0.9.8/')
+define(_DIR_LIB_IMGAREASELECT,_DIR_RACINE.'lib/jquery.imgareaselect-0.9.8/')
 ?>

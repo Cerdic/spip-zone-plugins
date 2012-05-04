@@ -2,22 +2,22 @@
 #HTTP_HEADER{Content-Type:text/html}
 <BOUCLE_doc(DOCUMENTS){id_document}{tout}>
 	<div id="image_modifier" style="[width:(#ENV{largeur_max}|sinon{450})px;]">
-		[(#ENV{message}|?{' '})
+		[(#ENV{message}|oui)
 		<div class="photospip_previsu">
 			<div class="previsu_texte" style="[width:(#ENV{largeur_max}|sinon{450})px;]">
-				[(#ENV{message}|=={previsu}|?{' '})
+				[(#ENV{message}|=={previsu}|oui)
 				<span style="text-transform: uppercase;"><:previsualisation:></span><br />
 				<:photospip:previsu:>]
-				[(#ENV{message}|=={sanstest}|?{' '})
+				[(#ENV{message}|=={sanstest}|oui)
 				<:photospip:sanstest:>]
-				[(#ENV{message}|=={sansfiltre}|?{' '})
+				[(#ENV{message}|=={sansfiltre}|oui)
 				<:photospip:sansfiltre:>]
-				[(#ENV{message}|=={sansconf}|?{' '})
+				[(#ENV{message}|=={sansconf}|oui)
 				<:photospip:sansconf:>]
 			</div>
 		</div>
 		]
-		[(#ENV{filtre}|?{' ',''})
+		[(#ENV{filtre}|oui)
 		[(#FICHIER|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|photospip_appliquer_filtre{#ENV{filtre},[(#ENV{param})]}|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|inserer_attribut{alt,' '})]]
 		[(#ENV{filtre}|?{'',' '})
 		[(#FICHIER|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|inserer_attribut{alt,' '})]]
@@ -35,7 +35,7 @@
 									<label>
 										[(#HAUTEUR|>{#LARGEUR}|?{'',' '})
 										[(#FICHIER|get_spip_doc|image_reduire{80,80}|inserer_attribut{alt,Version #VERSION})]]
-										[(#HAUTEUR|>{#LARGEUR}|?{' ',''})
+										[(#HAUTEUR|>{#LARGEUR}|oui)
 										[(#FICHIER|get_spip_doc|image_reduire{80,80}|inserer_attribut{alt,Version #VERSION}|inserer_attribut{style,'vertical-align:bottom;'})]]
 									</label>
 									<input type="hidden" name="redirect" value="[(#SELF)]" />
@@ -72,8 +72,8 @@
 				<p><:photospip:fichier_original:>[(#FICHIER|basename)]</p>
 			</div>
 		</div>
-		[(#CONFIG{plugin/PHOTO_INFOS}|?{' ',''})
-		[(#EXTENSION|=={jpg}|?{' '})
+		[(#CONFIG{plugin/PHOTO_INFOS}|oui)
+		[(#EXTENSION|=={jpg}|oui)
 		<h4><:photospip:donnees_exif:></h4>
 		<div class="infos">
 			<INCLURE{fond=inc_exif}{fichier=#FICHIER}>

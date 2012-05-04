@@ -122,7 +122,6 @@ function action_photospip_post($r){
 			$dest = preg_replace(",\.[^.]+$,", "-photospip".($newversion)."$0", $orig_src);
 			spip_log("la destination sera $dest","photospip");
 			spip_log("application du filtre $var_filtre $src : $dest","photospip");
-		
 		}
 		else{
 			$dest = preg_replace(',\.[^.]+$,', '-photospip1.png', $src);
@@ -142,8 +141,13 @@ function action_photospip_post($r){
 		else if ($process == "gd2") {
 			spip_log("Vous utilisez gd2, tout est ok jusque là","photospip");
 			if($var_filtre == "tourner"){
-				include_spip('action/tourner');
-				$dst_img = gdRotate ($src, $dest, $params);
+				include_spip('inc/filtres');
+				include_spip('public/parametrer'); // charger les fichiers fonctions #bugfix spip 2.1.0
+				$dst_img = filtrer('image_rotation',$src,$params);
+				$dst_img = filtrer('image_format',$dst_img,$row['extension']);
+				$dst_img = extraire_attribut($dst_img,'src');
+				include_spip('inc/getdocument');
+				deplacer_fichier_upload($dst_img,$dest);
 			}
 			else{
 				photospipfiltre($src, $dest, $var_filtre,$params);
@@ -158,54 +162,56 @@ function action_photospip_post($r){
 			return;
 		}
 	
-		$size_image = @getimagesize($dest);
+		$size_image = getimagesize($dest);
 		spip_log("taille de l'image $size_image[0] x $size_image[1]","photospip");
 		$largeur = $size_image[0];
 		$hauteur = $size_image[1];
-		$ext = substr($dest, strpos($dest, ".")+1, strlen($dest));
+		$ext = substr(basename($dest), strpos(basename($dest), ".")+1, strlen(basename($dest)));
 		$poids = filesize($dest);
 		
 		// succes !
 		if ($largeur>0 AND $hauteur>0) {
 			sql_insertq("spip_documents_inters",array("id_document" => $row['id_document'],"id_auteur" => $id_auteur,"extension" => $row['extension'], "fichier" => $row['fichier'], "taille" => $row['taille'],"hauteur" => $row['hauteur'], "largeur" => $row['largeur'],"mode" => $row['mode'], "version" => ($version? $version:1), "filtre" => $var_filtre, "param" => $params));
-			sql_updateq('spip_documents', array('fichier' => set_spip_doc($dest), 'taille' => $poids, 'largeur'=>$largeur, 'hauteur'=>$hauteur, 'extension' => $ext), "id_document=$arg");
+			sql_updateq('spip_documents', array('fichier' => set_spip_doc($dest), 'taille' => $poids, 'largeur'=>$largeur, 'hauteur'=>$hauteur, 'extension' => $ext), "id_document=".intval($row['id_document']));
 			spip_log("Update de l'image dans la base poid= $poids, extension = $ext, hauteur= $hauteur, largeur = $largeur, fichier = $dest","photospip");
-			if ($effacer) {
-				spip_log("j'efface $effacer","photospip");
-				spip_unlink($effacer);
-			}
+			//if ($effacer) {
+			//	spip_log("j'efface $effacer","photospip");
+			//	spip_unlink($effacer);
+			//}
 			redirige_par_entete(str_replace("&amp;","&",$redirect));
 		}
 	}
 	else if($validation == "tester"){
+		include_spip('inc/headers');
 		// Si on fait simplement un test on se tappe pas tout le traitement sur l'image de base
 		if(($var_filtre == 'tourner') || ($var_filtre == 'image_recadre')){
 			$redirect = parametre_url($redirect,'message','sanstest');
+						spip_log("on est dans un filtre tourner que l'on ne peut pas tester donc on retourne rien...", "photospip");
 			redirige_par_entete(str_replace("&amp;","&",$redirect));
-			spip_log("on est dans un filtre tourner que l'on ne peut pas tester donc on retourne rien...", "photospip");
 		}
 		else{
-			$redirect = parametre_url($redirect,'message','previsu');
-			$redirect = parametre_url($redirect,'filtre',$var_filtre);
+			$redirect = parametre_url($redirect,'message','previsu','&');
+			$redirect = parametre_url($redirect,'filtre',$var_filtre,'&');
 			if($var_filtre == "image_recadre"){
 				if (!$param1){
-					$redirect = parametre_url($redirect,'filtre','');
-					$redirect = parametre_url($redirect,'message','sansconf');
+					$redirect = parametre_url($redirect,'filtre','','&');
+					$redirect = parametre_url($redirect,'message','sansconf','&');
 				}
 				else{
-					$redirect = parametre_url($redirect,'param',$param1);
+					$redirect = parametre_url($redirect,'param',$param1,'&');
 				}
 			}
 			else{
-				$redirect = parametre_url($redirect,'param',$params);
+				$redirect = parametre_url($redirect,'param',$params,'&');
 			}
 			if($param2){
-				$redirect = parametre_url($redirect,'param2',$param2);
+				$redirect = parametre_url($redirect,'param2',$param2,'&');
 			}
 			if($param3){
-				$redirect = parametre_url($redirect,'param3',$param3);
+				$redirect = parametre_url($redirect,'param3',$param3,'&');
 			}
 			spip_log("on est dans un test, on fait simplement un retour avec des paramètres dans l'ajax : filtre = $var_filtre, param = $params", "photospip");
+			spip_log('on retourne '.$redirect,'photospip');
 			redirige_par_entete(str_replace("&amp;","&",$redirect));
 		}
 	}
