@@ -33,9 +33,28 @@ include_spip('hyd_inc/newton.class');
  */
 class cOuvrage {
     private $oLog;  /// Journal des calculs
-    private $nL;      /// Loi d'ouvrage
-    private $nLS;     /// Loi pour la surverse
-    private $Cd;    /// Coefficients de débit de l'ouvrage
+    /**
+     * Loi de débit pour l'ouvrage. Valeurs possibles :
+     * - 1 - Déversoir/Orifice Cemagref 88 : Type 1,2,3 + Surverse
+     * - 2 - Vanne de fond/Seuil Cemagref 88 : Type 1,2,3 + Surverse
+     * - 3 - Seuil dénoyé : Type 3 + Surverse
+     * - 4 - Seuil noyé : Type 3 + Surverse
+     * - 5 - Vanne dénoyé : Type 1,2
+     * - 6 - Vanne noyé : Type 1,2
+     * - 7 - Cunge 1980 : Type 1,2,3 + Surverse
+     * - 8 - Déversoir/Orifice Cemagref 02 : Type 4,5
+     * - 9 - Vanne de fond/Seuil Cemagref 02 : Type 4,5
+     */
+    private $nL;
+    /**
+     * Loi de débit pour la surverse. Valeurs possibles :
+     * - 1 - Déversoir/Orifice Cemagref 88
+     * - 2 - Vanne de fond/Seuil Cemagref 88
+     * - 3 - Seuil dénoyé
+     * - 4 - Seuil noyé
+     * - 7 - Cunge 1980
+     */
+    private $nLS;
     /**
      * Tableau contenant les paramètres de l'ouvrage.
      *
@@ -52,12 +71,15 @@ class cOuvrage {
      * - CR : Coefficient de débit partie rectangulaire pour les trapézoïdales
      * - CT : Coefficient de débit partie triangulaire pour les trapézoïdales
      * - CS : Coefficient de débit de la surverse
+     * - P : Précision du calcul
      */
     private $tP = array();
 
-    const G = 9.81;
-    const R2G = 4.42944; //sqrt(2*self::gP);
-    const R32 = 2.59807; // 3*sqrt(3)/2;
+    const G = 9.81; /// Constante de gravité terrestre
+    const R2G = 4.42944; /// sqrt(2*self::gP);
+    const R32 = 2.59807; /// 3*sqrt(3)/2;
+    const IDEFINT = 100; /// Pas de parcours de l'intervalle pour initialisation dichotomie
+    const IDICMAX = 100; /// Itérations maximum de la dichotomie
 
     /**
      * Construction de la classe.
@@ -72,17 +94,6 @@ class cOuvrage {
         $this->nL = $nLoi;
         $this->nLS = $nLoiSurverse;
         $this->tP = $tP;
-        if(isset($tP['C'])) {
-            // Lois avec un coef de débit
-            $this->Cd = $tP['C'];
-        }
-        elseif(isset($tP['CR']) and isset($tP['CR'])) {
-            // Lois des vannes et seuils trapézoïdaux
-            $this->Cd = array($tP['CR'],$tP['CT']);
-        }
-        else {
-            echo 'absence de coefficient de débit';
-        }
         //spip_log($this,'hydraulic');
     }
 
@@ -90,7 +101,7 @@ class cOuvrage {
     /**
      * Mise à jour d'un paramètre de l'ouvrage
      * @param $sMaj Variable à modifier (indice du tableau tP)
-     * @param $rmaj Valeur de lavariable à mettre à jour
+     * @param $rmaj Valeur de la variable à mettre à jour
      */
     public function Set($sMaj,$rMaj) {
         $this->tP[$sMaj] = $rMaj;
@@ -102,37 +113,128 @@ class cOuvrage {
      * @param $sCalc Variable à calculer (indice du tableau tP)
      * @param $rInit Valeur initiale pour le calcul
      * @return array(0=> donnée calculée, 1=> Flag d'écoulement)
+     * Signification du Flag d'écoulement :
+     * - -1 : erreur de calcul
+     * -  0 : débit nul
+     * -  1 : surface libre dénoyé
+     * -  2 : surface libre noyé
+     * -  3 : charge denoyé
+     * -  4 : charge noyé partiel
+     * -  5 : charge noyé total
+     * - 11 : surverse dénoyé
+     * - 12 : surverse noyé
      */
-    public function Calc($sCalc,$rInit=0) {
-        $rVarC = &$this->tP[$sCalc];
-
+    public function Calc($sCalc,$rInit=0.) {
+        //print_r($this->tP);
         // Calcul du débit (facile !)
-        if($sCalc=='Q') return $this->OuvrageQ();
+        if($sCalc=='Q') {
+            return $this->OuvrageQ();
+        }
+        else {
+            // Sinon calcul d'une autre donnée par dichotomie
+            $rVarC = &$this->tP[$sCalc];
+            $QT = $this->tP['Q']; // Débit recherché (Target)
+            $XMinInit = 0;
+            $rVarC = $XMinInit;
+            list($Q1,$nFlag) = $this->OuvrageQ();
+            $XMaxInit = $rInit*10; /// @todo Boucler la valeur max sur 10,100,1000,10000
+            $rVarC = $XMaxInit;
+            list($Q2,$nFlag) = $this->OuvrageQ();
+            $DX = ($XMaxInit - $XMinInit) / floatval(self::IDEFINT);
+            $nIterMax = floor(max($XMaxInit - $rInit,$rInit - $XMinInit) / $DX + 1);
+            $Xmin = $rInit;
+            $Xmax = $rInit;
+            $X1 = $rInit;
+            $X2 = $rInit;
+            $rVarC = $rInit;
+            list($Q,$nFlag) = $this->OuvrageQ();
+            $Q1 = $Q;
+            $Q2 = $Q;
+            //echo "\n".'nIterMax='.$nIterMax.'  XMinInit='.$XMinInit.'  XMaxInit='.$XMaxInit.'  DX='.$DX;
 
-        // Sinon calcul d'une autre donnée par dichotomie
 
+            for($nIter=1;$nIter<=$nIterMax;$nIter++) {
+                //Ouverture de l'intervalle des deux côtés puis à droite et à gauche
+                $Xmax = $Xmax + $DX;
+                if($Xmax > $XMaxInit xor $DX <= 0) $Xmax = $XMaxInit;
+                $rVarC = $Xmax;
+                list($Q,$nFlag) = $this->OuvrageQ();
+                if($Q1 < $Q2 xor $Q <= $Q2) {
+                    $Q2 = $Q;
+                    $X2 = $Xmax;
+                }
+                if($Q1 < $Q2 xor $Q >= $Q1) {
+                    $Q1 = $Q;
+                    $X1 = $Xmax;
+                }
+                $Xmin = $Xmin - $DX;
+                if($Xmin < $XMinInit xor $DX <= 0) {
+                    $Xmin = $XMinInit;
+                }
+                $rVarC = $Xmin;
+                list($Q,$nFlag) = $this->OuvrageQ();
+                if($Q1 < $Q2 xor $Q <= $Q2) {
+                    $Q2 = $Q;
+                    $X2 = $Xmin;
+                }
+                if($Q1 < $Q2 xor $Q >= $Q1) {
+                    $Q1 = $Q;
+                    $X1 = $Xmin;
+                }
+/*
+                echo "\n".'nIter='.$nIter.' Xmin='.$Xmin.' Xmax='.$Xmax;
+                echo "\n".'X1='.$X1.' Q1='.$Q1.' X2='.$X2.' Q2='.$Q2;
+                echo "\n".'$QT > $Q1 xor $QT >= $Q2 = '.($QT > $Q1 xor $QT >= $Q2);
+*/
+                if($QT > $Q1 xor $QT >= $Q2) {break;}
+            }
+
+            if($nIter >= self::IDEFINT) {
+                // Pas d'intervalle trouvé avec au moins une solution
+                if($Q2 < $QT and $Q1 < $QT) {
+                    // Cote de l'eau trop basse pour passer le débit il faut ouvrir un autre ouvrage
+                    $rVarC = $XmaxInit;
+                }
+                else {
+                    // Cote de l'eau trop grande il faut fermer l'ouvrage
+                    $rVarC = $XminInit;
+
+                }
+                list($Q,$nFlag) = $this->OuvrageQ();
+                $nFlag = -1;
+            }
+            else {
+                // Dichotomie
+                $X = $rInit;
+                for($nIter = 1; $nIter<=self::IDICMAX;$nIter++) {
+                    $rVarC=$X;
+                    list($Q,$nFlag) = $this->OuvrageQ();
+                    if(abs($Q/$QT-1.) <= $this->tP['P']) {break;}
+                    if($QT < $Q xor $Q1 <= $Q2) {
+                        // QT < IQ et Q(X1) > Q(X2) ou pareil en inversant les inégalités
+                        $X1=$rVarC;
+                    }
+                    else {
+                        // QT < IQ et Q(X1) < Q(X2) ou pareil en inversant les inégalités
+                        $X2=$rVarC;
+                    }
+                    $X=($X2+$X1)*0.5;
+                }
+                if($nIter == self::IDICMAX) {
+                    //IF1 <-- -10 anomalie: la dichotomie n'a pas abouti en ITER iterations
+                    $nFlag = -1;
+                }
+            }
+        }
         return array($rVarC,$nFlag);
     }
 
 
     /**
      * Calcul du débit à l'ouvrage
-     * @param $sCalc Variable à calculer (indice du tableau tP)
-     * @return array(0=> débit, 1=> Flag d'écoulement)
+     * @return array(0=> débit, 1=> Flag d'écoulement) (Voir Calc)
      */
     private function OuvrageQ() {
-        /**
-         * Flag d'écoulement $nFlag :
-         * - -1 : erreur de calcul
-         * - 0 : débit nul
-         * - 1 : surface libre dénoyé
-         * - 2 : surface libre noyé
-         * - 3 : charge denoyé
-         * - 4 : charge noyé partiel
-         * - 5 : charge noyé total
-         * - 11 : surverse dénoyé
-         * - 12 : surverse noyé
-         */
         $nFlag=-1; // Initialisé à -1 pour détecter les modifications
         // Gestion des sens de l'écoulement
         if($this->tP['ZM'] == $this->tP['ZV']){
@@ -163,10 +265,10 @@ class cOuvrage {
 
         if($nFlag < 0) {
             // On doit pouvoir calculer un débit sur l'ouvrage
-            list($rQ,$nFlag)=$this->CalculQ($this->nL,$this->Cd);
+            list($rQ,$nFlag)=$this->CalculQ($this->nL,$this->tP['C']);
             if($this->nLS and isset($this->tP['H']) and $this->tP['W']+$this->tP['H'] < $this->tP['ZM']) {
                 // Vanne avec surverse autorisée et la cote amont est supérieure à la cote de surverse
-                list($rQS,$nFlagS)=$this->CalculQ($this->nLS,$this->CdS,$this->tP['ZM']-$this->tP['W']-$this->tP['H']);
+                list($rQS,$nFlagS)=$this->CalculQ($this->nLS,$this->tP['CS'],$this->tP['ZM']-$this->tP['W']-$this->tP['H']);
                 $rQ += $rQS;
                 $nFlag = $nFlagS+10;
             }
@@ -179,14 +281,15 @@ class cOuvrage {
             $this->tP['ZV'] = $this->tP['ZM'];
             $this->tP['ZM'] = $ZM;
         }
-
+        //echo "\n".'OuvrageQ='.$rQ.' / '.$nFlag;
         return array($rQ,$nFlag);
     }
+
 
     /**
      * Loi de vanne de fond dénoyée classique
      * @param $rC Coefficient de débit
-     * @return array(0=> débit, 1=> Flag d'écoulement)
+     * @return array(0=> débit, 1=> Flag d'écoulement) (Voir Calc)
      */
     private function VanneDen($rC) {
         if($this->tP['ZM']>$this->tP['W']) {
@@ -207,7 +310,7 @@ class cOuvrage {
     /**
      * Loi de vanne de fond totalement noyée classique
      * @param $rC Coefficient de débit
-     * @return array(0=> débit, 1=> Flag d'écoulement)
+     * @return array(0=> débit, 1=> Flag d'écoulement) (Voir Calc)
      */
     private function VanneNoy($rC) {
         if($this->tP['ZM']>$this->tP['W']) {
@@ -229,7 +332,7 @@ class cOuvrage {
      * Loi seuil dénoyé classique
      * @param $rC Coefficient de débit
      * @param $rZ Cote de radier à retrancher pour la surverse
-     * @return array(0=> débit, 1=> Flag d'écoulement)
+     * @return array(0=> débit, 1=> Flag d'écoulement) (Voir Calc)
      */
     private function SeuilDen($rC,$rZ=0) {
         $rQ=$rC*$this->tP['L']*self::R2G*pow($this->tP['ZM']-$rZ,1.5);
@@ -241,7 +344,7 @@ class cOuvrage {
      * Loi seuil noyé classique
      * @param $rC Coefficient de débit
      * @param $rZ Cote de radier à retrancher pour la surverse
-     * @return array(0=> débit, 1=> Flag d'écoulement)
+     * @return array(0=> débit, 1=> Flag d'écoulement) (Voir Calc)
      */
     private function SeuilNoy($rC,$rZ=0) {
         $rQ=$rC*self::R32*$this->tP['L']*self::R2G*sqrt($this->tP['ZM']-$rZ-$this->tP['ZV'])*$this->tP['ZV'];
@@ -254,7 +357,7 @@ class cOuvrage {
      * @param $nLoi Loi de débit
      * @param $rC Coefficient de débit
      * @param $rZ Cote de radier à retrancher pour la surverse
-     * @return array(0=> débit, 1=> Flag d'écoulement)
+     * @return array(0=> débit, 1=> Flag d'écoulement) (Voir Calc)
      */
     private function CalculQ($nLoi,$rC,$rZ=0) {
         $rQ=0; // Débit par défaut

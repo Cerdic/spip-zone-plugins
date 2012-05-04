@@ -4,7 +4,7 @@
  *
  *
  *
- * Copyright 2012 David Dorchies <dorch@dorch.fr>
+ * Copyright 2012 Médéric Dulondel, David Dorchies <dorch@dorch.fr>
  *
  *
  *
@@ -39,145 +39,158 @@
  */
 
 /**
- * Classe pour l'affichage du dessin des section
+ * Classe pour l'affichage du dessin des sections
  *
  * @date 10/04/2012
- * @author Médéric Dulondel
+ * @author Médéric Dulondel, David Dorchies
  *
  */
 class dessinSection {
-	private $hauteurDessin; // Hauteur du dessin en px
-	private $largeurDessin; // Largeur du dessin en px
-	private $mesCouleurs = array('red', 'blue', 'orange', 'green', 'grey', 'black');  // Couleur des différentes lignes
-	private $tSection; // Choix de la section
-	private $sectionClass; 
-	private $donnees = array();
-	
-    function __construct($hauteur, $largeur, $typeSection, $section, $lib_data) {
-        $this->hauteurDessin = $hauteur;
-        $this->largeurDessin = $largeur;
-        $this->tSection = $typeSection;
-        $this->sectionClass = $section;
-		$this->donnees = $lib_data;
-    } 
+    private $hauteurDessin; // Hauteur du dessin en px
+    private $largeurDessin; // Largeur du dessin en px
+    private $mesCouleurs = array('red', 'blue', 'orange', 'green', 'grey', 'black');  // Couleur des différentes lignes
+    private $sectionClass;
+    private $donnees = array();
+    private $rValMax = 0; // Hauteur maxi en m à figurer dans le dessin
+    private $rSnXmax = 0; // Largeur maximum en m à figurer dans le dessin
 
-	/*
-	 * Rajoute une ligne à notre dessin. 
-	 * $color correspond à la couleur de la ligne
-	 * $val correspond à l'ordonnée exprimée en pixel de la ligne
-	 */
-	function AddRow($color, $val){		
-		$ligneDessin = '$("#dessinSection").drawLine(0,'.$val.','.$this->largeurDessin.','.$val.', {color: "'.$color.'"});';
-		return $ligneDessin;
-	}
-	
-	/*
-	 * Transforme des valeurs de tirants d'eau en leur valeur en pixel
-	 */ 
-	function transformeValeur($tabDonnees){
-		// On détermine la valeur la plus grande dans le tableau
-		$ValMax = 0;
-		foreach($tabDonnees as $val){
-			if($val > $ValMax){
-				$ValMax = $val;
-			}
-		}
-		
-		// La valeur maximum de l'échelle correspondant à 10% de la hauteur afin de faire plus propre
-		$valEchelle = $this->hauteurDessin - ($this->hauteurDessin * 0.1);
-		
-		// On transforme nos valeurs en leur attribuant la valeur en pixel et une couleur qui leur est associé
-		$result = array();
-		$couleur = 0;
-		foreach($tabDonnees as $cle=>$valeur){
-			$result[$cle][] = round($this->hauteurDessin - (($valeur*$valEchelle)/$ValMax), 1);
-			$result[$cle][] = $this->mesCouleurs[$couleur];
-			$couleur++;
-		}
+    function __construct($hauteur, $largeur, &$section, $lib_data) {
+        $this->hauteurDessin = (real) $hauteur;
+        $this->largeurDessin = (real) $largeur;
+        $this->sectionClass = &$section;
+        $this->donnees = $lib_data;
+        // On détermine la valeur la plus grande dans le tableau
+        foreach($this->donnees as $val){
+            if($val > $this->ValMax){
+                $this->ValMax = $val;
+            }
+        }
+        //spip_log($this,'hydraulic');
+    }
 
-		asort($result);
+    /**
+     * Rajoute une ligne à notre dessin.
+     * $color correspond à la couleur de la ligne
+     * $val correspond à l'ordonnée exprimée en pixel de la ligne
+     */
+    function AddRow($color, $val){
+        $ligneDessin = '$("#dessinSection").drawLine(0,'.$val.','.$this->largeurDessin.','.$val.', {color: "'.$color.'"});';
+        return $ligneDessin;
+    }
 
-		return $result;
-	}
-	
-	// Retourne le dessin de la section
-	function GetDessinSection(){
-		// On transforme nos valeurs en pixels
-		$mesDonnees = $this->transformeValeur($this->donnees); 
-		
-		// Hauteur dessin - Hauteur de berge, en format pixels 
-		$diffHautBerge = $mesDonnees['rYB'][0];
+    /**
+     * Convertit un tirant d'eau en mètre en une ordonnée en pixels
+     */
+    private function GetDessinY($val) {
+        // La valeur maximum de l'échelle  en px correspondant à 10% de la hauteur afin de faire plus propre
+        return round($this->hauteurDessin * (1- 0.9*$val/$this->ValMax), 1)-2;
+    }
 
-		// On définit le style de notre dessin 
-		$dessin = '<style type="text/css">
-					.canvas{
-						position: relative;
-						width:'.$this->largeurDessin.'px;
-						height:'.$this->hauteurDessin.'px;
-					}
-					</style>';
-		
-		// On créé la base de notre dessin de section
-		$dessin.= '<script type="text/javascript">
-					$(document).ready(function(){';
-			
-		$dessin.= '$("#dessinSection").drawLine(0, 0, 0,'.$diffHautBerge.', {stroke: 1});
-				   $("#dessinSection").drawLine('.$this->largeurDessin.', 0,'.$this->largeurDessin.','.$diffHautBerge.', {stroke: 1});';
-			
-		switch($this->tSection){
-			case 'FT':
-				$dessin.= '$("#dessinSection").drawPolyline(
-							[0,'.($this->largeurDessin*0.25).','.($this->largeurDessin*0.75).','.$this->largeurDessin.'],
-							['.$diffHautBerge.','.$this->hauteurDessin.','.$this->hauteurDessin.','.$diffHautBerge.'], {stroke: 4});';
-                break;
+    /**
+     * Convertit une largeur en mètre en une abscisse en pixels
+     * @param $Axe détermine si le pixel est à droite (1) ou à gauche (-1) de l'axe de symétrie
+     * @return Abscisse en pixel à dessiner
+     */
+    private function GetDessinX($val,$Axe) {
+        return round(($this->largeurDessin-14) * (1/2 + $Axe*$val/$this->SnXmax), 1)+7;
+    }
 
-            case 'FR':
-				$dessin.= '$("#dessinSection").drawPolyline(
-							[0,0,'.$this->largeurDessin.','.$this->largeurDessin.'],
-							['.$diffHautBerge.','.$this->hauteurDessin.','. $this->hauteurDessin.','.$diffHautBerge.'], {stroke: 4});';
-	
-                break;
+    /**
+     * Transforme le tableau de tirants d"eau et charges à afficher en pixel + attribution des couleurs
+     */
+    function transformeValeur($tabDonnees){
+        // On transforme nos valeurs en leur attribuant la valeur en pixel et une couleur qui leur est associé
+        $result = array();
+        $couleur = 0;
+        foreach($tabDonnees as $cle=>$valeur){
+            $result[$cle][] = $this->GetDessinY($valeur);
+            $result[$cle][] = $this->mesCouleurs[$couleur];
+            $couleur++;
+        }
 
-            case 'FC':
-					// Trouver une méthode de dessin pour les sections circulaires
-                break;
+        asort($result);
 
-            case 'FP':
-				$dessin.= '$("#dessinSection").drawPolyline([0,0,'.$this->largeurDessin.','.$this->largeurDessin.'], [0,'.$this->hauteurDessin.','. $this->hauteurDessin.', 0]);';
-	
-				break;
+        return $result;
+    }
 
-            default:
-                
-		}			
+    // Retourne le dessin de la section
+    function GetDessinSection(){
+        // On transforme nos valeurs en pixels
+        $mesDonnees = $this->transformeValeur($this->donnees);
 
-		// On ajoute les différentes lignes avec couleur + valeur
-		foreach($mesDonnees as $cle=>$valeur){
-			if($cle != 'rYB'){
-				$dessin.= $this->AddRow($valeur[1], $valeur[0]);
-			}
-		}
-		
-		$dessin.= '});
-			</script>';
+        // Hauteur dessin - Hauteur de berge, en format pixels
+        $diffHautBerge = $mesDonnees['rYB'][0];
 
-		//Div qui va contenir notre dessin de section
-		$dessin.='<div id="dessinSection" class="canvas">';
-		
-		// Pour alterner le placement des libellés
-		$droiteGauche = 0;
-		// On rajoute les différents libelles avec la couleur qui va bien
-		foreach($mesDonnees as $cle=>$valeur){
-			if($cle != 'rYB'){
-				$placement = ($droiteGauche%2==0)?'left: -80px':'right: -80px;';
-				$dessin.= '<p style="position: absolute; top:'.($valeur[0]-8).'px;'.$placement.'; width: auto; display: inline-block; color:'.$valeur[1].'">'.$cle.' = '.round($this->donnees[$cle], $this->sectionClass->oP->iPrec).'</p>';
-				$droiteGauche++;		
-			}	
-		}
-		
-		$dessin.= '</div>';
-	
-		return $dessin;
-	}
+        // On définit le style de notre dessin
+        $dessin = '<style type="text/css">
+                    .canvas{
+                        position: relative;
+                        width:'.$this->largeurDessin.'px;
+                        height:'.$this->hauteurDessin.'px;
+                    }
+                    </style>';
+
+        // On créé la base de notre dessin de section
+        $dessin.= '<script type="text/javascript">
+                    $(document).ready(function(){';
+        // Récupération des coordonnées de la section à dessiner
+        $tCoordSn = $this->sectionClass->DessinCoordonnees();
+
+        // Détermination de la largeur max de la section
+        $this->SnXmax = max($tCoordSn['x'])*2;
+
+        // Dessin des verticales au dessus des berges
+        $LargeurBerge = $this->sectionClass->CalcGeo('B')/2;
+        $xBergeGauche = $this->GetDessinX($LargeurBerge,-1);
+        $xBergeDroite = $this->GetDessinX($LargeurBerge,1);
+        $dessin.= '$("#dessinSection").drawLine('.$xBergeGauche.', 0, '.$xBergeGauche.','.$diffHautBerge.', {stroke: 1});
+                   $("#dessinSection").drawLine('.$xBergeDroite.', 0,'.$xBergeDroite.','.$diffHautBerge.', {stroke: 1});';
+
+        // Dessin de la section
+
+        $tSnX = array();
+        $tSnY = array();
+        // Parcours des points à gauche
+        for($i=count($tCoordSn['x'])-1; $i>=0; $i-=1) {
+            $tSnX[] = $this->GetDessinX($tCoordSn['x'][$i],-1);
+            $tSnY[] = $this->GetDessinY($tCoordSn['y'][$i]);
+        }
+        // Parcours des points à droite
+        for($i=0; $i<count($tCoordSn['x']); $i++) {
+            $tSnX[] = $this->GetDessinX($tCoordSn['x'][$i],1);
+            $tSnY[] = $this->GetDessinY($tCoordSn['y'][$i]);
+        }
+        $dessin.=   '$("#dessinSection").drawPolyline(
+                        ['.implode(',',$tSnX).'],
+                        ['.implode(',',$tSnY).'], {stroke: 4});';
+
+        // On ajoute les différentes lignes avec couleur + valeur
+        foreach($mesDonnees as $cle=>$valeur){
+            if($cle != 'rYB'){
+                $dessin.= $this->AddRow($valeur[1], $valeur[0]);
+            }
+        }
+
+        $dessin.= '});
+            </script>';
+
+        //Div qui va contenir notre dessin de section
+        $dessin.='<div id="dessinSection" class="canvas">';
+
+        // Pour alterner le placement des libellés
+        $droiteGauche = 0;
+        // On rajoute les différents libelles avec la couleur qui va bien
+        foreach($mesDonnees as $cle=>$valeur){
+            if($cle != 'rYB'){
+                $placement = ($droiteGauche%2==0)?'left: -80px':'right: -80px;';
+                $dessin.= '<p style="position: absolute; top:'.($valeur[0]-8).'px;'.$placement.'; width: auto; display: inline-block; color:'.$valeur[1].'">'.$cle.' = '.round($this->donnees[$cle], $this->sectionClass->oP->iPrec).'</p>';
+                $droiteGauche++;
+            }
+        }
+
+        $dessin.= '</div>';
+
+        return $dessin;
+    }
 }
 ?>

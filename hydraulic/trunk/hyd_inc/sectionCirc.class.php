@@ -31,6 +31,7 @@ include_spip('hyd_inc/section.class');
 class cSnCirc extends acSection {
     public $rD;      /// Diamètre du cercle
     private $rAlpha;    /// Angle de la surface libre par rapport au fond
+    protected $nbDessinPoints=50;
 
     function __construct(&$oLog,&$oP,$rD) {
         $this->rD=(real) $rD;
@@ -71,7 +72,7 @@ class cSnCirc extends acSection {
      * @return dAlpha
      */
     protected function CalcAlphaDer() {
-        if($this->rY <= 0 or $this->rY > $this->rD or $this->rY > $this->oP->rYB) {
+        if($this->rY <= 0 or $this->rY >= $this->rD or $this->rY > $this->oP->rYB) {
             return 0;
         }
         else {
