@@ -25,16 +25,13 @@ $GLOBALS['photospip_base_version'] = 0.03;
 				include_spip('base/abstract_sql');
 				creer_base();
 				ecrire_meta('photospip_base_version',$current_version=$version_base,'non');
-				echo "Installation des tables de 'modifier images'";
 			}
 			if ($current_version<0.02){
 				spip_query("ALTER TABLE spip_documents_inters  ADD `filtre` text AFTER `version` ");
-				echo "Modifier Images upgrade @ 0.02";
 				ecrire_meta('photospip_base_version',$current_version=0.02);
 			}
 			if ($current_version<0.03){
 				spip_query("ALTER TABLE spip_documents_inters  ADD `param` text AFTER `filtre` ");
-				echo "Modifier Images upgrade @ ".$version_base;
 				ecrire_meta('photospip_base_version',$current_version=0.03);
 			}
 			ecrire_metas();
