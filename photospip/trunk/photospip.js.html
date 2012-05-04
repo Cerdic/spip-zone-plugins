@@ -4,20 +4,10 @@
 
 ]#CACHE{7*24*3600,cache-client}
 #HTTP_HEADER{'Content-Type: text/javascript'}
-/*
- * ui.core.js (plugins @ jQuery.com)
- * ui.tabs.js (plugins @ jQuery.com)
- * ui.slider.js (plugins @ jQuery.com)
- * jquery.scrollTo.js (plugins @ jQuery.com)
- * farbtastic.js (plugins @ jQuery.com)
- * jquery.scrollTo.js (plugins @ jQuery.com)
- * layer.js (www.spip.net)
- * imgareaselect-0.5.js (plugins @ jQuery.com)
- */
-[(#INCLURE{lib/jquery.ui-1.5.2/ui/ui.core.js}|compacte_js)]
-[(#INCLURE{lib/jquery.ui-1.5.2/ui/ui.tabs.js}|compacte_js)]
-[(#INCLURE{lib/jquery.ui-1.5.2/ui/ui.slider.js}|compacte_js)]
-[(#INCLURE{lib/jquery.scrollTo-1.4.0/jquery.scrollTo.js}|compacte_js)]
-[(#INCLURE{lib/farbtastic12/farbtastic/farbtastic.js}|compacte_js)]
-[(#INCLURE{javascript/layer.js}|compacte_js)]
-[(#INCLURE{lib/imgareaselect-0.5.1/jquery.imgareaselect-0.5.1.js}|compacte_js)]
+[(#INCLURE{javascript/jquery-ui/ui/jquery.ui.core.js})]
+[(#INCLURE{javascript/jquery-ui/ui/jquery.ui.widget.js})]
+[(#INCLURE{javascript/jquery-ui/ui/jquery.ui.mouse.js})]
+[(#INCLURE{javascript/jquery-ui/ui/jquery.ui.tabs.js})]
+[(#INCLURE{javascript/jquery-ui/ui/jquery.ui.slider.js})]
+[(#INCLURE{javascript/layer.js})]
+[(#INCLURE{[(#EVAL{_DIR_LIB_IMGAREASELECT})]jquery.imgareaselect.js})]

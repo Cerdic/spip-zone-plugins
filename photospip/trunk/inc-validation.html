@@ -1,8 +1,8 @@
 #CACHE{0}
 #HTTP_HEADER{Content-Type:text/html}
 [(#SET{photospip,pasok})]
-<BOUCLE_interd(DOCUMENTS_INTERS){id_document} />
-[(#TOTAL_BOUCLE|>={#CONFIG{photospip/limite_version}}|?{#SET{photospip,ok},#SET{photospip,pasok}})]
+<BOUCLE_interd(DOCUMENTS_INTERS){id_document}{tout} />
+[(#TOTAL_BOUCLE|>={#CONFIG{photospip/limite_version,5}}|?{#SET{photospip,ok},#SET{photospip,pasok}})]
 <//B_interd>
 
 <p>

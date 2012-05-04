@@ -12,5 +12,5 @@
  *
  */
  
-include_spip('base/photospip');
+define(_DIR_LIB_IMGAREASELECT,_DIR_LIB.'jquery.imgareaselect-0.9.8/')
 ?>
