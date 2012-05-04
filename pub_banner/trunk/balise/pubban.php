@@ -14,16 +14,18 @@ function balise_PUBBAN_dist($p) {
 }
 
 function balise_PUBBAN_dyn($banner_id, $tout='non') {
+	include_spip('inc/banniere');
 	$div = '';
 	$tout_montrer = ($tout=='oui' || $tout=='tout');
 	$border = ( _request('border') ) ? _request('border') : 0;
+	$from = _request('from') ? _request('from') : self();
 	if (is_numeric($banner_id))
 		$banniere = pubban_recuperer_banniere($banner_id);
 	else
 		$banniere = pubban_recuperer_banniere_par_nom($banner_id);
 	
 	if ($banniere && ($tout_montrer || $banniere['statut'] == '2actif')) {
-		$url = generer_url_public(_PUBBAN_ADDS_DISPLAYER)."&empl=".$banniere['titre_id'];
+		$url = generer_url_public('banniere')."&empl=".$banniere['titre_id']."&from=".urlencode($from);
 		if ($tout_montrer)
 			$url .= "&tout=oui";
 		$div = "<center><div class=\"pubban banniere_".$banniere['titre_id']."\"><iframe name='".$banniere['titre_id']."' src=\"".$url."\" width=\"".$banniere['width']."\" height=\"".$banniere['height']."\" marginwidth=\"auto\" marginheight=\"0\" hspace=\"0\" vspace=\"0\" frameborder=\"".$border."\" scrolling=\"no\"></iframe></div></center>";

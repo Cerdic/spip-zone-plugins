@@ -24,6 +24,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_activer_publicite(){
 	include_spip('inc/autoriser');
 	include_spip('inc/pubban_process');
+	include_spip('inc/publicite');
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	list($activer, $id_publicite) = explode('-', $arg);
@@ -55,8 +56,6 @@ function action_activer_publicite(){
 		}
 		if ($redirect = _request('redirect') ) {
 			$redirect = str_replace('&amp;', '&', $redirect);
-//			if( $mode = _request('mode') )
-//				$redirect = parametre_url($redirect, 'mode', $mode);
 			include_spip('inc/headers');
 			redirige_par_entete( $redirect );
 		}

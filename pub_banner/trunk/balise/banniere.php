@@ -14,6 +14,7 @@ function balise_BANNIERE($p) {
 }
 
 function balise_BANNIERE_dyn($id_banniere) {
+	include_spip('inc/banniere');
 	$empl = pubban_recuperer_banniere($id_banniere);
 	echo $empl['titre'];
 }

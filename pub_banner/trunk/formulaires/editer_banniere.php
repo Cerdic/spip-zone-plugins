@@ -10,6 +10,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_editer_banniere_charger($id_banniere='new', $retour=''){
+	include_spip('inc/banniere');
+	if ($id_banniere=='0') $id_banniere='new';
 	$valeurs = array(
 		'titre' => '',
 		'titre_id' => '',
@@ -33,11 +35,14 @@ function formulaires_editer_banniere_verifier($id_banniere='new', $retour=''){
 		$erreurs['dimensions'] = _T('pubban:error_dimensions_missing_empl');	
 	elseif(!is_numeric($width) OR !is_numeric($height))
 			$erreurs['dimensions'] = _T('pubban:error_dimensions_numeric_empl');
+	if($refresh = _request('refresh') AND !is_numeric($refresh))
+			$erreurs['refresh'] = _T('pubban:error_refresh_numeric_empl');
 	return $erreurs;
 }
 
 function formulaires_editer_banniere_traiter($id_banniere='new', $retour=''){
 	include_spip('inc/pubban_process');
+	if ($id_banniere=='0') $id_banniere='new';
 	$datas = array(
 		'titre' => _request('titre'),
 		'titre_id' => pubban_transformer_titre_id(_request('titre_id')),
@@ -45,6 +50,7 @@ function formulaires_editer_banniere_traiter($id_banniere='new', $retour=''){
 		'height' => pubban_transformer_nombre( _request('height') ),
 		'ratio_pages' => _request('ratio_pages'),
 		'statut' => _request('statut'),
+		'refresh' => _request('refresh'),
 	);
 	if (empty($datas['titre_id'])) {
 		$datas['titre_id'] = pubban_transformer_titre_id($datas['titre']);
@@ -52,12 +58,12 @@ function formulaires_editer_banniere_traiter($id_banniere='new', $retour=''){
 	if($id_banniere == 'new') {
 		$instit_empl = charger_fonction('instituer_banniere', 'inc');
 		if( $id_banniere = $instit_empl($datas) )
-			$redirect = generer_url_ecrire("banniere_voir","id_banniere=$id_banniere");
+			$redirect = generer_url_ecrire("banniere","id_banniere=$id_banniere");
 	}
 	else {
 		$editer_empl = charger_fonction('editer_banniere', 'inc');
 		if ($ok = $editer_empl($id_banniere, $datas))
-			$redirect = strlen($retour) ? $retour : generer_url_ecrire("banniere_voir","id_banniere=$id_banniere");
+			$redirect = strlen($retour) ? $retour : generer_url_ecrire("banniere","id_banniere=$id_banniere");
 	}
 	if($redirect){
 		include_spip('inc/headers');

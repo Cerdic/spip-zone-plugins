@@ -70,6 +70,14 @@ function pubban_recup_statut_pub($statut) {
 }
 
 /**
+ * Renvoie l'image d'un element en fonction de son type
+ */
+function pubban_recup_img_pub($type, $objet) {
+	$ext_pub = pubban_extension( $objet );
+	return ($type == 'img') ? ( isset($GLOBALS['pubban_pub_icons'][ $ext_pub ]) ? $GLOBALS['pubban_pub_icons'][ $ext_pub ] : $GLOBALS['pubban_pub_icons']['default'] ) : $GLOBALS['pubban_pub_icons']['flash'];
+}
+
+/**
  * @todo ecrire la fonction !!
  */
 function retirer_lien_pub($url='', $what='pub', $id_del=false){
@@ -79,25 +87,43 @@ function retirer_lien_pub($url='', $what='pub', $id_del=false){
 	return $n_url;
 }
 
-function pubban_exporter($list_id){
+function pubban_exporter($ids=null, $banner_ids=null){
 	include_spip('inc/filtres');
-	$ids = explode(',', $list_id);
+	include_spip('inc/publicite');
+	include_spip('inc/banniere');
+	if (!is_array($ids)) $ids = explode(',', $ids);
+	$ids = array_filter($ids);
+
+	if (!count($ids)) {
+		if (empty($banner_ids)) return;
+		else {
+			if (!is_array($banner_ids)) $banner_ids = explode(',', $banner_ids);
+			include_spip('inc/pubban_process');
+			$tmpids=array();
+			foreach($banner_ids as $ban_id) {
+				$_ids = pubban_pubs_de_la_banniere($ban_id, true);
+				$tmpids = array_merge($tmpids, $_ids);
+			}
+		}
+		$ids = $tmpids;
+	}
+
 	$entetes = array(
 			_T('pubban:site_web'),
 			_T('pubban:titre'),
 			_T('pubban:type'),
 			_T('pubban:date_add'),
 			_T('pubban:statut'),
-			_T('pubban:url'),
-			_T('pubban:banniere'),
-			_T('pubban:dimensions_banniere'),
+			_T('pubban:url_pub'),
+			_T('pubban:bannieres_pub'),
+			_T('pubban:dimensions'),
 			_T('pubban:illimite'),
 			_T('pubban:date_debut'),
 			_T('pubban:date_fin'),
-			_T('pubban:affichages'),
-			_T('pubban:affichages_restant'),
-			_T('pubban:clics'),
-			_T('pubban:clics_restant'),
+			_T('pubban:nb_affichages'),
+			_T('pubban:nb_affires_pub'),
+			_T('pubban:nb_clics'),
+			_T('pubban:nb_clicres_pub'),
 			_T('pubban:ratio'),
 	);
 	$donnees = array();
@@ -107,22 +133,22 @@ function pubban_exporter($list_id){
 		$id_emp = pubban_bannieres_de_la_pub($id);
 		$datas_emp = pubban_recuperer_banniere($id_emp);
 		$donnees[$id] = array(
-			textebrut($GLOBALS['meta']['nom_site']),
-			textebrut($datas['titre']),
+			utf8_encode( html_entity_decode(textebrut($GLOBALS['meta']['nom_site']))),
+			utf8_encode( html_entity_decode(textebrut($datas['titre']))),
 			$datas['type'],
 			date_iso($datas['date_add']),
-			pubban_recup_statut_pub($datas['statut']),
+			utf8_encode( html_entity_decode(pubban_recup_statut_pub($datas['statut']))),
 			$datas['url'],
-			textebrut($datas_emp['titre']),
+			utf8_encode( html_entity_decode(textebrut($datas_emp['titre']))),
 			$datas_emp['width']." x ".$datas_emp['height']." px",
 			$datas['illimite'],
-			date_iso($datas['date_debut']),
-			date_iso($datas['date_fin']),
+			!empty($datas['date_debut']) ? date_iso($datas['date_debut']) : '-',
+			!empty($datas['date_fin']) ? date_iso($datas['date_fin']) : '-',
 			$datas['affichages'],
 			$datas['affichages_restant'],
 			$datas['clics'],
 			$datas['clics_restant'],
-			($datas['clics']/$datas['affichages'])." %",
+			round( ($datas['clics']/$datas['affichages']*100), 4)." %",
 		);
 	}
 	// Nom du fichier
@@ -140,7 +166,7 @@ function pubban_exporter($list_id){
 */
 	inc_exporter_csv_dist(
 //		$export, $donnees,';', array_map('texte_backend', array_map('textebrut', $entetes))
-		$export, $donnees,',', array_map('texte_backend', array_map('textebrut', $entetes))
+		$export, $donnees,',', array_map('utf8_encode', array_map('html_entity_decode', array_map('textebrut', $entetes)))
 	);
 }
 

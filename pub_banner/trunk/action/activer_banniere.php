@@ -24,6 +24,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_activer_banniere(){
 	include_spip('inc/autoriser');
 	include_spip('inc/pubban_process');
+	include_spip('inc/banniere');
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	list($activer, $id_banniere) = explode('-', $arg);

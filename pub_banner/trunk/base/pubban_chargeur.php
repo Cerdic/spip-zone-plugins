@@ -18,6 +18,7 @@ $GLOBALS['bannieres_site'] = array(
 		'height' => '600', 
 		'statut' => '2actif',
 		'ratio_pages' => '100',
+		'refresh'=>'10',
 	),
 	'2' => array(
 		'titre' => 'Banner', 
@@ -26,6 +27,7 @@ $GLOBALS['bannieres_site'] = array(
 		'height' => '60', 
 		'statut' => '2actif',
 		'ratio_pages' => '100',
+		'refresh'=>'10',
 	),
 	'3' => array(
 		'titre' => 'Leaderboard', 
@@ -52,7 +54,8 @@ $GLOBALS['publicites_site'] = array(
 	'1' => array(
 		'id_banniere' => '1',
 		'titre' => 'Skyscraper : exemple 1',
-		'url' => $GLOBALS['meta']['adresse_site'].'/?page=adds',
+//		'url' => $GLOBALS['meta']['adresse_site'].'/?page=adds',
+		'url' => $GLOBALS['meta']['adresse_site'],
 		'blank' => 'non',
 		'objet' => _DIR_IMGPUB.'/pubbantest_skyscraper.png',
 		'type' => 'img',
@@ -73,7 +76,8 @@ $GLOBALS['publicites_site'] = array(
 	'3' => array(
 		'id_banniere' => '2',
 		'titre' => 'Banner : exemple 2', 
-		'url' => $GLOBALS['meta']['adresse_site'].'/?page=adds',
+//		'url' => $GLOBALS['meta']['adresse_site'].'/?page=adds',
+		'url' => $GLOBALS['meta']['adresse_site'],
 		'blank' => 'non',
 		'objet' => _DIR_IMGPUB.'/bannierewipub468x60.gif',
 		'type' => 'img',
@@ -134,14 +138,16 @@ $GLOBALS['flash_demo'] = array(
 		'width' => '250', 
 		'height' => '250', 
 		'src' => _DIR_IMGPUB.'/pub-defaut-250x250.gif',
-		'href' => $GLOBALS['meta']['adresse_site'].'/?page=adds',
+//		'href' => $GLOBALS['meta']['adresse_site'].'/?page=adds',
+		'href' => $GLOBALS['meta']['adresse_site'],
 	),
 	'2' => array(
 		'titre' => 'Demo pub ...', 
 		'width' => '250', 
 		'height' => '250', 
 		'src' => _DIR_IMGPUB.'/20081219_studiob_250x250.jpg',
-		'href' => $GLOBALS['meta']['adresse_site'].'/?page=adds',
+//		'href' => $GLOBALS['meta']['adresse_site'].'/?page=adds',
+		'href' => $GLOBALS['meta']['adresse_site'],
 	),
 );
 ?>

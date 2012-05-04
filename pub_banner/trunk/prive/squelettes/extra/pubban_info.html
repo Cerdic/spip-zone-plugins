@@ -1,0 +1,13 @@
+#SET{open,#BOITE_OUVRIR{'',raccourcis}}
+	[(#GET{open}|unique)]
+[(#URL_ECRIRE{pubbanner}|icone_horizontale{<:pubban:home:>,stock_home.png})]
+	[(#GET{open}|unique)]
+[(#URL_ECRIRE{statistiques_bannieres}|icone_horizontale{<:pubban:page_stats:>,stock-tool-button-color-balance.png})]
+[(#AUTORISER{voir,publicite})
+	[(#GET{open}|unique)]
+[(#URL_ECRIRE{publicites}|icone_horizontale{<:pubban:liste_pub:>,publicite-24.png})]
+][(#AUTORISER{voir,banniere})
+	[(#GET{open}|unique)]
+[(#URL_ECRIRE{bannieres}|icone_horizontale{<:pubban:list_empl:>,banniere-24.png})]
+]
+[(#GET{open}|unique|?{'',#BOITE_FERMER})]

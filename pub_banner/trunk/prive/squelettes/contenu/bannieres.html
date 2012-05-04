@@ -1,0 +1,10 @@
+<h1 class="grostitre"><:pubban:list_empl:></h1>
+
+<INCLURE{fond=prive/squelettes/inclure/pubban_recherche,env} />
+
+<INCLURE{fond=prive/objets/liste/bannieres,
+	titre=<:pubban:list_empl:>,statut=#ARRAY{1,1inactif,2,2actif},par=id_banniere,ajax
+	redirect=#URL_ECRIR{pubban_pub},
+	inverse=#ENV{inverse}
+} />
+

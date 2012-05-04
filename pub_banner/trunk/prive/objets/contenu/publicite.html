@@ -1,0 +1,57 @@
+<BOUCLE_afficher_contenu(PUBLICITES){id_publicite=#ENV{id}}{statut?}>
+<p><small>
+		[<:pubban:date_creation:> : <abbr title="[(#DATE_ADD|date_iso)]">(#DATE_ADD|affdate) [(#DATE_ADD|affdate{H:i})]</abbr>]
+		[(#MAJ|affdate{'d-m-Y H:i'}|=={#DATE_ADD|affdate{'d-m-Y H:i'}}|non)
+			&nbsp;|&nbsp;
+			<:pubban:date_maj:> : <abbr title="[(#MAJ|date_iso)]">[(#MAJ|affdate)] [(#MAJ|affdate{H:i})]</abbr>
+		]
+</small></p>
+<div class="champ banniere_publicite">
+<div class='label'><:pubban:bannieres_pub:></div>
+<div dir='#LANG_DIR' class='banniere_publicite'>
+<BOUCLE_empl(bannieres_publicites){id_publicite=#ENV{id_publicite}}>
+		[<a href='[(#ID_BANNIERE|generer_url_entite{banniere})]' title='<:pubban:btn_details:>'>(#BANNIERE{#ID_BANNIERE})</a>] / 
+</BOUCLE_empl>
+</div>
+</div>
+<br />
+<div class="champ contenu_donnees">
+<div class='label'><:pubban:stats:></div>
+<div dir='#LANG_DIR' class='donnees_publicite'>
+	<ul>
+		<li><:pubban:nb_affires_pub:>&nbsp;:&nbsp;
+			[(#ILLIMITE|=={oui}|oui)<strong><:pubban:no_limit:></strong>]
+			[(#ILLIMITE|=={non}|oui)
+				[<strong>#AFFICHAGES_RESTANT</strong>&nbsp;<i>(total : <strong>(#AFFICHAGES|plus{#AFFICHAGES_RESTANT})</strong>)</i>]
+			]
+		</li>
+		<li><:pubban:nb_clicres_pub:>&nbsp;:&nbsp;
+			[(#ILLIMITE|=={oui}|oui)<strong><:pubban:no_limit:></strong>]
+			[(#ILLIMITE|=={non}|oui)
+				[<strong>#CLICS_RESTANT</strong>&nbsp;<i>(total : <strong>(#CLICS|plus{#CLICS_RESTANT})</strong>)</i>]
+			]
+		</li>
+		<li><:pubban:dates_validite_pub:>&nbsp;:<ul>
+			<li>&nbsp;-&nbsp;<:pubban:date_debut:>&nbsp;:&nbsp;<strong>[(#DATE_DEBUT|affdate|sinon{" - "})]</strong></li>
+			<li>&nbsp;-&nbsp;<:pubban:date_fin:>&nbsp;:&nbsp;<strong>[(#DATE_FIN|affdate|sinon{" - "})]</strong></li>
+		</ul></li>
+	</ul>
+</div>
+</div>
+<br />
+<div class="champ url">
+<div class='label'><:pubban:url_pub:></div>
+<div dir='#LANG_DIR' class='url_publicite'>
+	<ul>
+		<li>&nbsp;[<a href="#URL" target="_blank">(#URL)</a>]</li>
+		<li>&nbsp;[(#BLANK|=={oui}|?{<:pubban:target_blank:>,<:pubban:target_parent:>})]</li>
+	</ul>
+</div>
+</div>
+<br />
+<div class="champ code">
+<div class='label'><:pubban:code_pub:></div>
+<div dir='#LANG_DIR' class='code_publicite'>[(#OBJET|affiche_code_pub)]</div>
+</div>
+<br />
+</BOUCLE_afficher_contenu>

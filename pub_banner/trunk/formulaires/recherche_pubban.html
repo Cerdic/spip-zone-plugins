@@ -3,6 +3,7 @@
 <form action="[(#ENV{action})]" method="get">
 	<div style="padding: 0.4em">
 	[(#ENV{action}|form_hidden)]
+	[(#ENV**{_hidden})]
 	<label for="search_pubban"><strong><:pubban:info_search_box:>&nbsp;:</strong></label>
 	<br />
 	<input type="text" class="text" size="10" name="search_pubban" id="search_pubban"[ value="(#ENV{id_publicite})"][ value="(#ENV{search_pubban})"] accesskey="1" style="width: 200px" />

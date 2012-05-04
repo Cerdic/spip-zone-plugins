@@ -10,6 +10,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_editer_publicite_charger_dist($id_publicite='new', $retour=''){
+	if ($id_publicite=='0') $id_publicite='new';
 	$valeurs = array(
 		'id_publicite' => $id_publicite,
 		'statut' => '1inactif',
@@ -30,6 +31,7 @@ function formulaires_editer_publicite_charger_dist($id_publicite='new', $retour=
 		$valeurs['banniere'] = array($valeurs['banniere']);
 	}
 	if($id_publicite != 'new') {
+		include_spip('inc/publicite');
 		$pub = pubban_recuperer_publicite($id_publicite);
 		$valeurs = array_merge($valeurs, $pub);
 	}
@@ -81,6 +83,8 @@ function formulaires_editer_publicite_verifier_dist($id_publicite='new', $retour
 }
 
 function formulaires_editer_publicite_traiter_dist($id_publicite='new', $retour=''){
+	if ($id_publicite=='0') $id_publicite='new';
+	include_spip('inc/banniere');
 	$empls = _request('banniere');
 
 	// verification de l'objet : son extension ?
@@ -115,7 +119,7 @@ function formulaires_editer_publicite_traiter_dist($id_publicite='new', $retour=
 		$id_publicite = $instit_pub($datas);
 	}
 	if($id_publicite) {
-		$attacher = charger_fonction('attacher_pub_bannieres', 'inc');
+		$attacher = charger_fonction('attacher_publicite_bannieres', 'inc');
 		$ok = $attacher($id_publicite, $empls);
 	}
 
@@ -124,7 +128,7 @@ function formulaires_editer_publicite_traiter_dist($id_publicite='new', $retour=
 	);
 	else {
 		include_spip('inc/headers');
-		$retour = generer_url_ecrire("publicite_voir","id_publicite=$id_publicite");
+		$retour = generer_url_ecrire("publicite","id_publicite=$id_publicite");
 		return( redirige_formulaire($retour) );
 	}
 	return $message;

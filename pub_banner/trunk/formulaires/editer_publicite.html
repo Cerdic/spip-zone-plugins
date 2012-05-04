@@ -1,11 +1,14 @@
-<div class='formulaire_spip formulaire_editer formulaire_editer_publicite-#ENV{id_publicite,new}'>
+<div class='formulaire_spip formulaire_editer formulaire_editer_publicite formulaire_editer_publicite-#ENV{id_publicite,new}'>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
-	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<input type='hidden' class='text' name='id_publicite' value="[(#ENV**{id_publicite,new})]" />
+	  [<input type='hidden' name='id_publicite' value='(#ENV{id_publicite})' />]
 	  <ul>
-	    <li class='editer fieldset'><fieldset><legend><:pubban:infos_pub:></legend>
+	    <li class='editer fieldset'>
+	    <fieldset><h3 class="legend"><:pubban:infos_pub:> #AIDER{pubbanner}</h3>
 	    <ul>
 		    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 		    	<label for="titre"><:pubban:titre_tablo_nom:>&nbsp;:</label>[
@@ -32,9 +35,9 @@
 		    	<label for="banniere"><:pubban:titre_tablo_banniere:>&nbsp;:</label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{banniere})</span>
 				]<select name="banniere[]" id="banniere" size='4' multiple="multiple" class="fondl">
-<BOUCLE_liste_bannieres(BANNIERES){statut=2actif}>
+<BOUCLE_liste_bannieres(BANNIERES){statut IN (1inactif,2actif)}>
 					<option value="#ID_BANNIERE"<BOUCLE_emppub(POUR){tableau #ENV**{banniere}}>[(#VALEUR|=={#ID_BANNIERE}|oui) selected="selected"]</BOUCLE_emppub>>
-						#TITRE (#WIDTH x #HEIGHT)</option>
+						#TITRE (#WIDTH x #HEIGHT[(#STATUT|=={1inactif}|oui) - <:pubban:inactive:>])</option>
 </BOUCLE_liste_bannieres>
 				</select>
 				<p class='explication'><:pubban:comment_multiple_empl:></p>
@@ -56,7 +59,8 @@
 		    </li>
 	    </ul>
 	    </fieldset></li>
-	    <li class='editer fieldset'><fieldset><legend><:pubban:droits:></legend>
+	    <li class='editer fieldset'>
+	    <fieldset><h3 class="legend"><:pubban:droits:></h3>
 	    <ul>
 			[<li class="obligatoire erreur"><span class='erreur_message'>(#ENV**{erreurs}|table_valeur{droits})</span></li>]
 		    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{droits_aff}|oui)erreur]">
@@ -78,14 +82,18 @@
 		    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{droits_dates}|oui)erreur]">
 	      		<label for="date_debut"><:pubban:droits_dates_pub:>&nbsp;:</label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{droits_dates})</span>]
-				<:pubban:debut:>&nbsp;<input type='text' class='text' name='date_debut' id='date_debut' value="[(#ENV**{date_debut})]" style="width:100px" />
+				<:pubban:debut:>&nbsp;<input type='text' class="text date" name='date_debut' id='date_debut' value="[(#ENV**{date_debut})]" style="width:100px" />
 				&nbsp;|&nbsp;
-				<:pubban:fin:>&nbsp;<input type='text' class='text' name='date_fin' id='date_fin' value="[(#ENV**{date_fin})]" style="width:100px" />
+				<:pubban:fin:>&nbsp;<input type='text' class="text date" name='date_fin' id='date_fin' value="[(#ENV**{date_fin})]" style="width:100px" />
 				<p class='explication'><i><:pubban:comment_dates:></i></p>
 		    </li>
 	    </ul>
 	    </fieldset></li>
 	  </ul>
-	  <p class="boutons"><input type='submit' class='fondo' value='<:bouton_enregistrer:>' /></p>
+
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
 </div>
+<INCLURE{fond=formulaires/dateur/inc-dateur} />

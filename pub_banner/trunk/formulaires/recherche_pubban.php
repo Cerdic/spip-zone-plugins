@@ -12,6 +12,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function formulaires_recherche_pubban_charger_dist(){
 	return array(
 			'action' => generer_url_ecrire('pubbanner'),
+			'_hidden'=>"<input type='hidden' name='mode' value='search' />",
 			'search_pubban' => _request('search_pubban')
 		);
 }

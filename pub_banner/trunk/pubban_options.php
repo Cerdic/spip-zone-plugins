@@ -44,17 +44,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * => define('PUBBAN_FORCE_UNINSTALL',1); pour forcer l'effacement des tables
  * => utilitaire de dev ou test
  */
-define('PUBBAN_FORCE_UNINSTALL', 0);
+define('PUBBAN_FORCE_UNINSTALL', 1);
 
 /**
  * Pour forcer l'utilisation d'une fonction Javascript pour ouvrir les popups (retrait de l'attribut "target")
  */
-define('PUBBAN_FORCE_JAVASCRIPT', 0);
-
-/**
- * Adresse du displayer de pub
- */
-define('_PUBBAN_ADDS_DISPLAYER', 'pub_displayer');
+define('PUBBAN_FORCE_JAVASCRIPT_ONCLICK', 0);
 
 /**
  * Adresse du cliqueur
@@ -73,21 +68,21 @@ $GLOBALS['_PUBBAN_PUCES_STATUTS'] = array(
 	'img' => array(
 		'name' => 'Image',
 		'value' => 'img',
-		'icon' => _DIR_PLUGIN_PUBBAN."img/image.png",
+		'icon' => find_in_path("prive/themes/spip/images/image.png"),
 	),
 	'swf' => array(
 		'name' => 'SWF object',
 		'value' => 'swf',
-		'icon' => _DIR_PLUGIN_PUBBAN."img/application_flash.gif",
+		'icon' => find_in_path("prive/themes/spip/images/application_flash.gif"),
 	),
 	'flash' => array(
 		'name' => 'Flash object',
 		'value' => 'flash',
-		'icon' => _DIR_PLUGIN_PUBBAN."img/application_flash.gif",
+		'icon' => find_in_path("prive/themes/spip/images/application_flash.gif"),
 	),
 	'banniere' => array(
 		'name' => 'Banner',
-		'icon' => _DIR_PLUGIN_PUBBAN."img/insert-image-16.png",
+		'icon' => find_in_path("prive/themes/spip/images/insert-image-16.png"),
 	),
 );
 
@@ -95,28 +90,14 @@ $GLOBALS['_PUBBAN_PUCES_STATUTS'] = array(
  * Definition des icones utilisees
  */
 $GLOBALS['pubban_pub_icons'] = array(
-	'default' => _DIR_PLUGIN_PUBBAN."img/gnome-text-x-readme.png",
-	'bmp' => _DIR_PLUGIN_PUBBAN."img/gnome-image-bmp.png",
-	'gif' => _DIR_PLUGIN_PUBBAN."img/gnome-image-gif.png",
-	'jpeg' => _DIR_PLUGIN_PUBBAN."img/gnome-image-jpeg.png",
-	'jpg' => _DIR_PLUGIN_PUBBAN."img/gnome-image-jpeg.png",
-	'png' => _DIR_PLUGIN_PUBBAN."img/gnome-image-png.png",
-	'swf' => _DIR_PLUGIN_PUBBAN."img/gnome-flash.png",
-	'flash' => _DIR_PLUGIN_PUBBAN."img/gnome-flash.png",
-);
-
-/**
- * Definition des boutons
- */
-$GLOBALS['pubban_btns'] = array(
-	'apercu' => _DIR_PLUGIN_PUBBAN."img/stock_search-16.png",
-	'editer' => _DIR_PLUGIN_PUBBAN."img/stock_edit-16.png",
-	'poubelle' => _DIR_PLUGIN_PUBBAN."img/stock_delete-16.png",
-	'sortie_poubelle' => _DIR_PLUGIN_PUBBAN."img/stock_undelete-16.png",
-	'inactif' => _DIR_PLUGIN_PUBBAN."img/cross.png",
-	'actif' => _DIR_PLUGIN_PUBBAN."img/thumb_up.png",
-	'obsolete' => _DIR_PLUGIN_PUBBAN."img/clock_stop.png",
-	'lister' => _DIR_PLUGIN_PUBBAN."img/stock_open-16.png",
+	'default' => find_in_path("prive/themes/spip/images/gnome-text-x-readme.png"),
+	'bmp' => find_in_path("prive/themes/spip/images/gnome-image-bmp.png"),
+	'gif' => find_in_path("prive/themes/spip/images/gnome-image-gif.png"),
+	'jpeg' => find_in_path("prive/themes/spip/images/gnome-image-jpeg.png"),
+	'jpg' => find_in_path("prive/themes/spip/images/gnome-image-jpeg.png"),
+	'png' => find_in_path("prive/themes/spip/images/gnome-image-png.png"),
+	'swf' => find_in_path("prive/themes/spip/images/gnome-flash.png"),
+	'flash' => find_in_path("prive/themes/spip/images/gnome-flash.png"),
 );
 
 /**
@@ -126,185 +107,19 @@ define('_PUBBAN_URL', 'http://www.spip-contrib.net/?article3637');
 /**
  * URL de telechargement des mises a jour
  */
-define('_PUBBAN_UPDATE', 'http://files.spip.org/spip-zone/pub_banner.zip');
+define('_PUBBAN_UPDATE', 'http://files.spip.org/spip-zone/pub_banner_spip3.zip');
 /**
  * Traceur de dev.
  */
 define('_PUBBAN_TRAC', 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/pub_banner');
 
-// charger la config
-include_spip('inc/pubban_configset');
-
 // Si admin, lib pubban_prive
-if(test_espace_prive())
-	include_spip('inc/pubban_prive');
-
-// ----------------------------
-// FONCTIONS RECUPERATION DES DONNEES
-// ----------------------------
+if(test_espace_prive()) include_spip('inc/pubban_prive');
 
 /**
- * Recuperation des donnes d'une publicite
- * @param	integer	$id_publicite	L'ID de la pub a recuperer
- * @param	string	$str	Le nom d'un paramtre ˆ rŽcupŽrer (optionnel)
- * @return array	Les donnŽes de la pub (ou la valeur du paramtre si demandŽ)
+ * Test de la nouveaute SPIP 2.1 : etendre l'aide de SPIP (ici pour l'aide du plugin)
  */
-function pubban_recuperer_publicite($id_publicite, $str=false) {
-	include_spip('base/abstract_sql');
-	$vals = array();
-	if($id_publicite != '0') {
-		$resultat = sql_select("*", 'spip_publicites',"id_publicite=".intval($id_publicite)	, '', '', '', '');
-		if (sql_count($resultat) > 0) {
-			while ($row=spip_fetch_array($resultat)) {
-				$vals['id'] = $id_publicite;
-				$vals['id_publicite'] = $id_publicite;
-				$vals['type'] = $row['type'];
-				$vals['titre'] = $row['titre'];
-				$vals['url'] = $row['url'];
-				$vals['objet'] = $row['objet'];
-				$vals['illimite'] = $row['illimite'];
-				$vals['affichages'] = $row['affichages'];
-				$vals['clics'] = $row['clics'];
-				$vals['affichages_restant'] = $row['affichages_restant'];
-				$vals['clics_restant'] = $row['clics_restant'];
-				$vals['date_debut'] = $row['date_debut'];
-				$vals['date_fin'] = $row['date_fin'];
-				$vals['date_add'] = $row['date_add'];
-				$vals['statut'] = $row['statut'];
-			}
-			sql_free($resultat);
-		}
-		$resultat_empl = sql_select("*", 'spip_bannieres_publicites',"id_publicite=".intval($id_publicite), '', '', '', '');
-		if (sql_count($resultat_empl) > 0) {
-			while ($row_empl=spip_fetch_array($resultat_empl)) {
-				$vals['banniere'][] = $row_empl['id_banniere'];
-			}
-			sql_free($resultat_empl);
-		}
-	}
-	if($str){
-		if( isset($vals[$str]) ) return $vals[$str];
-		return false;
-	}
-	return $vals;
-}
-
-function pubban_comparer_bannieres($emp){
-	if(!is_array($emp)) return;
-	if(count($emp) > 1) {
-		$width = $height = array();
-		foreach($emp as $k=>$empl){
-			$width[] = pubban_recuperer_banniere($empl, 'width');
-			$height[] = pubban_recuperer_banniere($empl, 'height');
-		}
-		if( count(array_unique($width)) != 1 OR 
-			count(array_unique($height)) != 1
-		) return false;
-	}
-	return true;
-}
-
-/**
- * Recuperation des donnes d'une banniere
- * @param	integer	$id_banniere	L'ID de la bannire ˆ rŽcuperer
- * @param	string	$str	Le nom d'un paramtre ˆ rŽcupŽrer (optionnel)
- * @return array	Les donnŽes de la banniere (ou la valeur du paramtre si demandŽ)
- */
-function pubban_recuperer_banniere($id_banniere, $str=false) {
-	include_spip('base/abstract_sql');
-	$vals = array();
-	if($id_banniere != '0') {
-		$resultat = sql_select("*", 'spip_bannieres',"id_banniere=".intval($id_banniere), '', '', '', '');
-		if (sql_count($resultat) > 0) {
-			while ($row=spip_fetch_array($resultat)) {
-				$vals['id'] = $id_banniere;
-				$vals['id_banniere'] = $id_banniere;
-				$vals['titre'] = $row['titre'];
-				$vals['titre_id'] = $row['titre_id'];
-				$vals['width'] = $row['width'];
-				$vals['height'] = $row['height'];
-				$vals['ratio_pages'] = $row['ratio_pages'];
-				$vals['statut'] = $row['statut'];
-/*
-				$vals['prix_tranche_1'] = $row['prix_tranche1'];
-				$vals['prix_tranche_2'] = $row['prix_tranche2'];
-				$vals['prix_tranche_3'] = $row['prix_tranche3'];
-				$vals['prix_tranche_4'] = $row['prix_tranche4'];
-*/
-			}
-			sql_free($resultat);
-		}
-	}
-	if($str){
-		if( isset($vals[$str]) ) return $vals[$str];
-		return false;
-	}
-	return $vals;
-}
-
-/**
- * Recuperation de l'ID d'une banniere depuis son nom
- * @param	string	$name	Le nom de la banniere a recuperer
- * @return integer	L'ID recherche
- */
-function pubban_recuperer_banniere_par_nom($name) {
-	include_spip('base/abstract_sql');
-
-	// Si c'est un "id" on renvoie
-	if (is_numeric($name))
-		return pubban_recuperer_banniere($name);
-
-	// Par "titre_id"
-	$id_banniere = sql_getfetsel("id_banniere", 'spip_bannieres', "titre_id=".sql_quote($name), '', '', '', '');
-	if($id_banniere)
-		return pubban_recuperer_banniere($id_banniere);
-
-	// Par "titre" (compatibilite)
-	$id_banniere = sql_getfetsel("id_banniere", 'spip_bannieres', "titre LIKE ('$name')", '', '', '', '');
-	if($id_banniere)
-		return pubban_recuperer_banniere($id_banniere);
-
-	// Sinon nada
-	return false;
-}
-
-function pubban_liste_bannieres($statut=false){
-	include_spip('base/abstract_sql');
-	$bannieres = array();
-	if($statut AND !is_array($statut))
-		$statut = array( $statut );
-	$where = $statut ? "statut IN ('".join("','", $statut)."')" : '';
-	$resultat = sql_select("id_banniere", 'spip_bannieres', $where, '', '', '', '');
-	if (sql_count($resultat) > 0) {
-		while ($row=spip_fetch_array($resultat)) {
-			$bannieres[] = $row['id_banniere'];
-		}
-	}
-	return $bannieres;
-}
-
-function pubban_trouver_bannieres($id_publicite){
-	if($id_publicite == '0') return;
-	include_spip('base/abstract_sql');
-	$bannieres = array();
-	$resultat = sql_select("*", 'spip_bannieres_publicites', 'id_publicite='.intval($id_publicite), '', '', '', '');
-	if (sql_count($resultat) > 0) {
-		while ($row=spip_fetch_array($resultat)) {
-			$bannieres[] = $row['id_banniere'];
-		}
-	}
-	return $bannieres;
-}
-
-function pubban_transformer_nombre($nombre){
-	$nombre = str_replace(' ', '', $nombre);
-	$nombre = str_replace(',', '.', $nombre);
-	return trim($nombre);
-}
-
-function pubban_transformer_titre_id($str){
-	$str = str_replace(' ', '_', utf8_encode($str));
-	return trim($str);
-}
+if (isset($GLOBALS['help_server']) && is_array($GLOBALS['help_server']))
+	$GLOBALS['help_server'][] = url_de_base(1).str_replace("../", "", _DIR_PLUGIN_PUBBAN)."aide/";
 
 ?>

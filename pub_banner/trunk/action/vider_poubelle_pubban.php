@@ -10,6 +10,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_vider_poubelle_pubban(){
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
 	include_spip('base/abstract_sql');
 	$resultat1 = sql_select("id_publicite", 'spip_publicites', "statut='5poubelle'", '', '', '', '');
 	if (sql_count($resultat1) > 0) {
@@ -30,6 +32,11 @@ function action_vider_poubelle_pubban(){
 				sql_delete('spip_bannieres_publicites', "id_banniere=".$id_supp);
 			}
 		}
+	}
+	if ($redirect = _request('redirect')) {
+		$redirect = str_replace('&amp;', '&', $redirect);
+		include_spip('inc/headers');
+		redirige_par_entete( $redirect );
 	}
 	return;
 }
