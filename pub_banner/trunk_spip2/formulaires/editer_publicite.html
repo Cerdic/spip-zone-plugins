@@ -1,0 +1,91 @@
+<div class='formulaire_spip formulaire_editer formulaire_editer_publicite-#ENV{id_publicite,new}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' class='text' name='id_publicite' value="[(#ENV**{id_publicite,new})]" />
+	  <ul>
+	    <li class='editer fieldset'><fieldset><legend><:pubban:infos_pub:></legend>
+	    <ul>
+		    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+		    	<label for="titre"><:pubban:titre_tablo_nom:>&nbsp;:</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+				]<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre})]" />
+		    </li>
+		    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{url}|oui)erreur]">
+		    	<label for="url"><:pubban:titre_tablo_url:>&nbsp;:</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url})</span>
+				]<input type='text' class='text' name='url' id='url' value="[(#ENV**{url})]" />
+				[(#ENV{url_optionnel}|=={oui}|oui)<p class='explication'><:pubban:comment_url_optionnel:></p>]
+		    </li>
+		    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{blank}|oui)erreur]">
+	      		<label for="blank"><:pubban:target_blank:>&nbsp;:</label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{blank})</span>]
+		    	<label style="padding:0;margin:0;width:auto;padding-right:1em;">
+					<input type='radio' class='radio' name='blank' id='blank_oui' value="oui"[(#ENV**{blank}|=={oui}|oui) checked="checked"] /><:pubban:oui:>
+				</label>
+		    	<label style="padding:0;margin:0;width:auto;padding-right:1em;">
+					<input type='radio' class='radio' name='blank' id='blank_non' value="non"[(#ENV**{blank}|=={non}|oui) checked="checked"] /><:pubban:non:>
+				</label>
+		    </li>
+		    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{banniere}|oui)erreur]">
+		    	<label for="banniere"><:pubban:titre_tablo_banniere:>&nbsp;:</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{banniere})</span>
+				]<select name="banniere[]" id="banniere" size='4' multiple="multiple" class="fondl">
+<BOUCLE_liste_bannieres(BANNIERES){statut=2actif}>
+					<option value="#ID_BANNIERE"<BOUCLE_emppub(POUR){tableau #ENV**{banniere}}>[(#VALEUR|=={#ID_BANNIERE}|oui) selected="selected"]</BOUCLE_emppub>>
+						#TITRE (#WIDTH x #HEIGHT)</option>
+</BOUCLE_liste_bannieres>
+				</select>
+				<p class='explication'><:pubban:comment_multiple_empl:></p>
+		    </li>
+		    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{objet}|oui)erreur]">
+	      		<label for="text_area"><:pubban:titre_tablo_code:></label>
+	      		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{objet})</span>]
+		    	<label style="padding:0;margin:0;width:auto;padding-right:1em;">
+					<input type='radio' name='type' id='type_img' value='img' [(#ENV{type}|=={img}|?{" checked='checked'"})] />&nbsp;<:pubban:type_img:>
+				</label>
+		    	<label style="padding:0;margin:0;width:auto;padding-right:1em;">
+					<input type='radio' name='type' id='type_swf' value='swf' [(#ENV{type}|=={swf}|?{" checked='checked'"})] />&nbsp;<:pubban:type_swf:>
+				</label>
+		    	<label style="padding:0;margin:0;width:auto;padding-right:1em;">
+					<input type='radio' name='type' id='type_flash' value='flash' [(#ENV{type}|=={flash}|?{" checked='checked'"})] />&nbsp;<:pubban:type_flash:>
+				</label><br />
+				<textarea name='objet' id='text_area' class='barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{3})]' cols='40'>[(#ENV**{objet})]</textarea>
+				<p class='explication'><:pubban:comment_code_pub:></p>
+		    </li>
+	    </ul>
+	    </fieldset></li>
+	    <li class='editer fieldset'><fieldset><legend><:pubban:droits:></legend>
+	    <ul>
+			[<li class="obligatoire erreur"><span class='erreur_message'>(#ENV**{erreurs}|table_valeur{droits})</span></li>]
+		    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{droits_aff}|oui)erreur]">
+	      		<label for="illimite"><:pubban:illimite:>&nbsp;:</label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{droits_aff})</span>]
+				<input type='checkbox' class='checkbox' name='illimite' id='illimite' value="oui"[(#ENV**{illimite}|=={oui}|oui) checked="checked"] />
+				<span class='explication'><:pubban:comment_illimite:></span>
+		    </li>
+		    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{droits_aff}|oui)erreur]">
+	      		<label for="affichages_restant"><:pubban:droits_aff_pub:>&nbsp;:</label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{droits_aff})</span>]
+				<input type='text' class='text' name='affichages_restant' id='affichages_restant' value="[(#ENV**{affichages_restant})]" style="width:100px" />
+		    </li>
+		    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{droits_clic}|oui)erreur]">
+	      		<label for="clics_restant"><:pubban:droits_clic_pub:>&nbsp;:</label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{droits_clic})</span>]
+				<input type='text' class='text' name='clics_restant' id='clics_restant' value="[(#ENV**{clics_restant})]" style="width:100px" />
+		    </li>
+		    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{droits_dates}|oui)erreur]">
+	      		<label for="date_debut"><:pubban:droits_dates_pub:>&nbsp;:</label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{droits_dates})</span>]
+				<:pubban:debut:>&nbsp;<input type='text' class='text' name='date_debut' id='date_debut' value="[(#ENV**{date_debut})]" style="width:100px" />
+				&nbsp;|&nbsp;
+				<:pubban:fin:>&nbsp;<input type='text' class='text' name='date_fin' id='date_fin' value="[(#ENV**{date_fin})]" style="width:100px" />
+				<p class='explication'><i><:pubban:comment_dates:></i></p>
+		    </li>
+	    </ul>
+	    </fieldset></li>
+	  </ul>
+	  <p class="boutons"><input type='submit' class='fondo' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>
