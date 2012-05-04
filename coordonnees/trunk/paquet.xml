@@ -28,7 +28,7 @@
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/coordonnees.php" />
 
 	<!-- Autorisations -->
-	<pipeline nom="autoriser" inclure="base/coordonnees.php" />
+	<pipeline nom="autoriser" inclure="coordonnees_autorisations.php" />
 
 	<!-- Éléments d'interface -->
 	<pipeline nom="affiche_milieu" inclure="coordonnees_pipelines.php" />
