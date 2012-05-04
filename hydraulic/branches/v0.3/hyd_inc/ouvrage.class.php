@@ -33,9 +33,28 @@ include_spip('hyd_inc/newton.class');
  */
 class cOuvrage {
     private $oLog;  /// Journal des calculs
-    private $nL;      /// Loi d'ouvrage
-    private $nLS;     /// Loi pour la surverse
-    private $Cd;    /// Coefficients de débit de l'ouvrage
+    /**
+     * Loi de débit pour l'ouvrage. Valeurs possibles :
+     * - 1 - Déversoir/Orifice Cemagref 88 : Type 1,2,3 + Surverse
+     * - 2 - Vanne de fond/Seuil Cemagref 88 : Type 1,2,3 + Surverse
+     * - 3 - Seuil dénoyé : Type 3 + Surverse
+     * - 4 - Seuil noyé : Type 3 + Surverse
+     * - 5 - Vanne dénoyé : Type 1,2
+     * - 6 - Vanne noyé : Type 1,2
+     * - 7 - Cunge 1980 : Type 1,2,3 + Surverse
+     * - 8 - Déversoir/Orifice Cemagref 02 : Type 4,5
+     * - 9 - Vanne de fond/Seuil Cemagref 02 : Type 4,5
+     */
+    private $nL;
+    /**
+     * Loi de débit pour la surverse. Valeurs possibles :
+     * - 1 - Déversoir/Orifice Cemagref 88
+     * - 2 - Vanne de fond/Seuil Cemagref 88
+     * - 3 - Seuil dénoyé
+     * - 4 - Seuil noyé
+     * - 7 - Cunge 1980
+     */
+    private $nLS;
     /**
      * Tableau contenant les paramètres de l'ouvrage.
      *
@@ -75,17 +94,6 @@ class cOuvrage {
         $this->nL = $nLoi;
         $this->nLS = $nLoiSurverse;
         $this->tP = $tP;
-        if(isset($tP['C'])) {
-            // Lois avec un coef de débit
-            $this->Cd = $tP['C'];
-        }
-        elseif(isset($tP['CR']) and isset($tP['CR'])) {
-            // Lois des vannes et seuils trapézoïdaux
-            $this->Cd = array($tP['CR'],$tP['CT']);
-        }
-        else {
-            echo 'absence de coefficient de débit';
-        }
         //spip_log($this,'hydraulic');
     }
 
@@ -93,7 +101,7 @@ class cOuvrage {
     /**
      * Mise à jour d'un paramètre de l'ouvrage
      * @param $sMaj Variable à modifier (indice du tableau tP)
-     * @param $rmaj Valeur de lavariable à mettre à jour
+     * @param $rmaj Valeur de la variable à mettre à jour
      */
     public function Set($sMaj,$rMaj) {
         $this->tP[$sMaj] = $rMaj;
@@ -105,6 +113,16 @@ class cOuvrage {
      * @param $sCalc Variable à calculer (indice du tableau tP)
      * @param $rInit Valeur initiale pour le calcul
      * @return array(0=> donnée calculée, 1=> Flag d'écoulement)
+     * Signification du Flag d'écoulement :
+     * - -1 : erreur de calcul
+     * -  0 : débit nul
+     * -  1 : surface libre dénoyé
+     * -  2 : surface libre noyé
+     * -  3 : charge denoyé
+     * -  4 : charge noyé partiel
+     * -  5 : charge noyé total
+     * - 11 : surverse dénoyé
+     * - 12 : surverse noyé
      */
     public function Calc($sCalc,$rInit=0.) {
         //print_r($this->tP);
@@ -214,22 +232,9 @@ class cOuvrage {
 
     /**
      * Calcul du débit à l'ouvrage
-     * @param $sCalc Variable à calculer (indice du tableau tP)
-     * @return array(0=> débit, 1=> Flag d'écoulement)
+     * @return array(0=> débit, 1=> Flag d'écoulement) (Voir Calc)
      */
     private function OuvrageQ() {
-        /**
-         * Flag d'écoulement $nFlag :
-         * - -1 : erreur de calcul
-         * - 0 : débit nul
-         * - 1 : surface libre dénoyé
-         * - 2 : surface libre noyé
-         * - 3 : charge denoyé
-         * - 4 : charge noyé partiel
-         * - 5 : charge noyé total
-         * - 11 : surverse dénoyé
-         * - 12 : surverse noyé
-         */
         $nFlag=-1; // Initialisé à -1 pour détecter les modifications
         // Gestion des sens de l'écoulement
         if($this->tP['ZM'] == $this->tP['ZV']){
@@ -260,10 +265,10 @@ class cOuvrage {
 
         if($nFlag < 0) {
             // On doit pouvoir calculer un débit sur l'ouvrage
-            list($rQ,$nFlag)=$this->CalculQ($this->nL,$this->Cd);
+            list($rQ,$nFlag)=$this->CalculQ($this->nL,$this->tP['C']);
             if($this->nLS and isset($this->tP['H']) and $this->tP['W']+$this->tP['H'] < $this->tP['ZM']) {
                 // Vanne avec surverse autorisée et la cote amont est supérieure à la cote de surverse
-                list($rQS,$nFlagS)=$this->CalculQ($this->nLS,$this->CdS,$this->tP['ZM']-$this->tP['W']-$this->tP['H']);
+                list($rQS,$nFlagS)=$this->CalculQ($this->nLS,$this->tP['CS'],$this->tP['ZM']-$this->tP['W']-$this->tP['H']);
                 $rQ += $rQS;
                 $nFlag = $nFlagS+10;
             }
@@ -280,10 +285,11 @@ class cOuvrage {
         return array($rQ,$nFlag);
     }
 
+
     /**
      * Loi de vanne de fond dénoyée classique
      * @param $rC Coefficient de débit
-     * @return array(0=> débit, 1=> Flag d'écoulement)
+     * @return array(0=> débit, 1=> Flag d'écoulement) (Voir Calc)
      */
     private function VanneDen($rC) {
         if($this->tP['ZM']>$this->tP['W']) {
@@ -304,7 +310,7 @@ class cOuvrage {
     /**
      * Loi de vanne de fond totalement noyée classique
      * @param $rC Coefficient de débit
-     * @return array(0=> débit, 1=> Flag d'écoulement)
+     * @return array(0=> débit, 1=> Flag d'écoulement) (Voir Calc)
      */
     private function VanneNoy($rC) {
         if($this->tP['ZM']>$this->tP['W']) {
@@ -326,7 +332,7 @@ class cOuvrage {
      * Loi seuil dénoyé classique
      * @param $rC Coefficient de débit
      * @param $rZ Cote de radier à retrancher pour la surverse
-     * @return array(0=> débit, 1=> Flag d'écoulement)
+     * @return array(0=> débit, 1=> Flag d'écoulement) (Voir Calc)
      */
     private function SeuilDen($rC,$rZ=0) {
         $rQ=$rC*$this->tP['L']*self::R2G*pow($this->tP['ZM']-$rZ,1.5);
@@ -338,7 +344,7 @@ class cOuvrage {
      * Loi seuil noyé classique
      * @param $rC Coefficient de débit
      * @param $rZ Cote de radier à retrancher pour la surverse
-     * @return array(0=> débit, 1=> Flag d'écoulement)
+     * @return array(0=> débit, 1=> Flag d'écoulement) (Voir Calc)
      */
     private function SeuilNoy($rC,$rZ=0) {
         $rQ=$rC*self::R32*$this->tP['L']*self::R2G*sqrt($this->tP['ZM']-$rZ-$this->tP['ZV'])*$this->tP['ZV'];
@@ -351,7 +357,7 @@ class cOuvrage {
      * @param $nLoi Loi de débit
      * @param $rC Coefficient de débit
      * @param $rZ Cote de radier à retrancher pour la surverse
-     * @return array(0=> débit, 1=> Flag d'écoulement)
+     * @return array(0=> débit, 1=> Flag d'écoulement) (Voir Calc)
      */
     private function CalculQ($nLoi,$rC,$rZ=0) {
         $rQ=0; // Débit par défaut

@@ -38,6 +38,7 @@ class cParam {
     public $rPrec;  /// Précision de calcul et d'affichage
     public $rG=9.81;/// Constante de gravité
     public $iPrec;  /// Précision en nombre de décimales
+    public $rYB;    /// Hauteur de berge
 
     function __construct($rKs, $rQ, $rIf, $rPrec, $rYB, $rYCL = 0, $rDx = 0, $rLong = 0) {
         $this->rYCL=(real) $rYCL;
@@ -89,6 +90,11 @@ abstract class acSection {
 
     private $rY_old ; /// Mémorisation du tirant d'eau pour calcul intermédiaire
     private $arCalc_old = array(); /// Mémorisation des données hydrauliques pour calcul intermédiaire
+    /**
+     * Nombre de points nécessaires pour le dessin de la section (hors point de berge)
+     * Valeur de 1 par défaut pour les sections rectangulaires et trapézoïdales
+     */
+    protected $nbDessinPoints=1;
 
     /**
      * Construction de la classe.
@@ -136,7 +142,7 @@ abstract class acSection {
      */
     public function Calc($sDonnee, $rY = false) {
         if($rY!==false && $rY!=$this->rY) {
-            spip_log('Calc('.$sDonnee.') rY='.$rY,'hydraulic');
+            //spip_log('Calc('.$sDonnee.') rY='.$rY,'hydraulic');
             $this->rY = $rY;
             // On efface toutes les données dépendantes de Y pour forcer le calcul
             $this->Reset(false);
@@ -207,7 +213,7 @@ abstract class acSection {
                     break;
             }
         }
-        spip_log('Calc('.$sDonnee.')='.$this->arCalc[$sDonnee],'hydraulic');
+        //spip_log('Calc('.$sDonnee.')='.$this->arCalc[$sDonnee],'hydraulic');
         return $this->arCalc[$sDonnee];
     }
 
@@ -495,6 +501,24 @@ abstract class acSection {
         return 0;
     }
 
+
+    /**
+     * Fournit les coordonnées des points d'une demi section pour le dessin
+     * @return tableau de couples de coordonnées (x,y)
+     */
+    public function DessinCoordonnees() {
+        $rPas = $this->oP->rYB / $this->nbDessinPoints;
+        $tPoints = array();
+        $this->Swap(true); // On mémorise les données hydrauliques en cours
+        for($rY=0;$rY<$this->oP->rYB+$rPas/2;$rY+=$rPas) {
+            spip_log('DessinCoordonnees rY='.$rY,'hydraulic');
+            $tPoints['x'][] = $this->Calc('B',$rY)/2;
+            $tPoints['y'][] = $rY;
+        }
+        // On restitue les données initiales
+        $this->Swap(false);
+        return $tPoints;
+    }
 }
 
 
@@ -649,6 +673,7 @@ class cHautCorrespondante extends acNewton {
         spip_log('cHautCorrespondante:CalcDer('.$rX.')='.$rDer,'hydraulic');
         return $rDer;
     }
+
 }
 
 ?>
