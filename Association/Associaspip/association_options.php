@@ -509,11 +509,11 @@ function association_selectionner_exercice($exercice='', $url_action='') {
 		$res = '';
     }
     $res .= '<select name ="exercice" onchange="form.submit()">';
-    $res .= '<option value="0" ';
-    if (!$exercice) {
-		$res .= ' selected="selected"';
-    }
-    $res .= '>'. _L("choisir l'exercice ?") .'</option>';
+#    $res .= '<option value="0" ';
+#    if (!$exercice) {
+#		$res .= ' selected="selected"';
+#    }
+#    $res .= '>'. _L("choisir l'exercice ?") .'</option>';
     $sql = sql_select('id_exercice, intitule', 'spip_asso_exercices','', 'intitule DESC');
     while ($val = sql_fetch($sql)) {
 		$res .= '<option value="'.$val['id_exercice'].'" ';
@@ -612,6 +612,56 @@ function association_selectionner_statut($statut_interne='', $exec='') {
 		$res .= '> '._T('asso:adherent_entete_statut_'.$statut).'</option>';
 	}
 	$res .= '</select>';
+    if ($exec) {
+		$res .= '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>';
+		$res .= '</div></form>';
+    }
+    return $res;
+}
+
+/* selecteur de statut de membres*/
+function association_selectionner_id($id='', $exec='') {
+    if ($exec) {
+		$res = '<form method="post" action="'. generer_url_ecrire($exec) .'"><div>';
+		$res .= '<input type="hidden" name="exec" value="'.$exec.'" />';
+    } else {
+		$res = '';
+    }
+    $res .= '<input type="text" name="id" onfocus=\'this.value=""\' size="5"  value="'. $id .'" onchange="form.submit()" />';
+    if ($exec) {
+		$res .= '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>';
+		$res .= '</div></form>';
+    }
+    return $res;
+}
+
+/* selecteur d'annee parmi celles disponibles dans une table */
+function association_selectionner_annee($annee='', $dtable, $dchamp, $exec='') {
+    if ($exec) {
+		$res = '<form method="post" action="'. generer_url_ecrire($exec) .'"><div>';
+		$res .= '<input type="hidden" name="exec" value="'.$exec.'" />';
+    } else {
+		$res = '';
+    }
+    $pager = '';
+    $res .= '<select name ="annee" onchange="form.submit()">';
+#    $res .= '<option value="0" ';
+#    if (!$exercice) {
+#		$res .= ' selected="selected"';
+#    }
+#    $res .= '>'. _L("choisir l'exercice ?") .'</option>';
+    $sql = sql_select("DATE_FORMAT(date_$dchamp, '%Y') AS annee", "spip_asso_$dtable",'', 'annee DESC', 'annee');
+    while ($val = sql_fetch($sql)) {
+		$res .= '<option value="'.$val['annee'].'" ';
+		if ($annee==$val['annee']) {
+			$res .= ' selected="selected"';
+			$pager .= "\n<strong>$val[annee]</strong>";
+		} else {
+			$pager .= ' <a href="'. generer_url_ecrire($exec, '&annee='.$val['annee']) .'">'.$val['annee']."</a>\n";
+		}
+		$res .= '>'.$val['annee'].'</option>';
+    }
+    $res .= '</select>';
     if ($exec) {
 		$res .= '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>';
 		$res .= '</div></form>';

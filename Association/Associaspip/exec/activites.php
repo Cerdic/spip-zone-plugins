@@ -49,15 +49,8 @@ function exec_activites()
 		//!\ il manque le blo des raccourcis !
 		debut_cadre_association('activites.gif','activite_titre_toutes_activites');
 		// FILTRES
-		echo "<table class='asso_tablo_filtres'><tr>\n<td width='40%'><p class='pagination'>";
-		$query = sql_select("DATE_FORMAT(date_debut, '%Y') AS annee", 'spip_evenements', '', 'annee', 'annee');
-		while ($data = sql_fetch($query)) {
-			if ($data['annee']==$annee) {
-				echo ' <strong>'.$data['annee'].'</strong> ';
-			} else {
-				echo ' <a href="'. generer_url_ecrire('activites','annee='.$data['annee'].($id_mot?'&id_mot='.$id_mot:'')).'">'.$data['annee'].'</a> ';
-			}
-		}
+		echo '<table width="100%" class="asso_tablo_filtre"><tr>';
+		echo '<td>'. association_selectionner_annee($annee, 'activites', 'inscription','activites'.($id_mot?'&id_mot='.$id_mot:'')) .'</td>'; // evenements/asso_activites debut/inscription activites/activites
 		if (test_plugin_actif('AGENDA')) { /* le plugin "Agenda 2" peut associer des mots-cles aux evenements */
 			if ($id_mot) {
 				$mc_sel = ', M.id_mot AS motact';
@@ -67,7 +60,7 @@ function exec_activites()
 			} else {
 				$mc_sel = $mc_join = $mc_where = '';
 			}
-			echo "</p></td><td width='60%' class='formulaire'>";
+			echo '<td width="60%">';
 			echo '<form method="get"><div>';
 			echo '<input type="hidden" name="exec" value="activites" />';
 			echo '<input type="hidden" name="annee" value="'.$annee.'" />';
@@ -87,10 +80,8 @@ function exec_activites()
 				echo '</optgroup>';
 			}
 			echo '</select><noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></div></form></td>';
-		} else { /* le plugin "Agenda Simple" par contre n'associee pas directement les mots-cles aux evenements */
-			echo '</p></td>';
 		}
-		echo "</tr></table>\n";
+		echo '</tr></table>';
 		//TABLEAU
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_activites'>\n";
 		echo "<thead>\n<tr>";

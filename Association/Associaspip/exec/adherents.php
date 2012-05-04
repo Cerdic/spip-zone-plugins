@@ -96,8 +96,7 @@ function exec_adherents()
 		}
 		debut_cadre_association('annonce.gif', 'adherent_titre_liste_actifs');
 		// FILTRES
-		echo "<table width='100%' class='asso_tablo_filtres'>\n";
-		echo '<tr>';
+		echo "<table width='100%' class='asso_tablo_filtres'>\n<tr>";
 		// Pagination alphabetique
 		echo '<td width="30%" class="pagination0">';
 		if (!$lettre) {
@@ -125,17 +124,15 @@ function exec_adherents()
 		//Filtre ID
 		echo '</td><td width="16%" class="formulaire">';
 		echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
-		echo '<input type="text" name="id" onfocus=\'this.value=""\' size="5"  value="'. $id .'" onchange="form.submit()" />';
+		echo association_selectionner_statut($id, '');
 		echo '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></div></form>';
 		//Filtre statut
 		echo '</td><td width="23%">';
 		echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
 		echo '<input type="hidden" name="lettre" value="'.$lettre.'" />';
 		echo association_selectionner_statut($statut_interne, '');
-		echo '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></div></form>';
-		echo '</td>';
-		echo '</tr>';
-		echo '</table>';
+		echo '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></div></form></td>';
+		echo '</tr></table>';
 		//Affichage de la liste
 		echo $code_liste_membres;
 		fin_page_association();

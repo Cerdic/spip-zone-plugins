@@ -31,12 +31,11 @@ function exec_edit_relances()
 			$statut_interne = 'echu';
 		$id_groupe = intval(_request('groupe'));
 		debut_cadre_association('relance-24.png', 'tous_les_membres_a_relancer');
-		// FILTRES
-		echo "\n<form method='get' action=''>\n<input type='hidden' name='exec' value='edit_relances' />\n<table width='100%'><tr>";
-		echo '<td width="40%">'. association_selectionner_groupe($id_groupe, '') .'</td>'; // filtre groupe
-		echo '<td width="40%">'. association_selectionner_statut($statut_interne, '') .'</td>'; // filtre statut : la selection de "tous"  est pratique pour faire une newsletter (mail d'information)
-		echo '<td width="20%" class="boutons"><noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></td>';
-		echo "</tr>\n</table>\n</form>\n";
+		// Filtres
+		filtres_association(array(
+			'groupe'=>$id_groupe,
+			'statut'=>$statut_interne,
+		), 'edit_relances');
 		// MAILING
 		$res = '<div class="formulaire_spip formulaire_edit_relance"><form>'
 			// message (objet/titre et corps)
@@ -52,7 +51,7 @@ function exec_edit_relances()
 			. "</ul>\n"
 			// destinataires (liste des resultats de filtrage, a affiner en decochant les membres a exclure)
 			. "<table width='100%' class='asso_tablo' id='asso_tablo_relances'>\n"
-			. '<caption>'. _T('asso:adherent_entete_statut_'.$statut_interne) .'</caption>'
+#			. '<caption>'. _T('asso:adherent_entete_statut_'.$statut_interne) .'</caption>'
 			. "<thead>\n<tr>"
 			. '<th>'. _T('asso:entete_id') .'</th>'
 			. '<th>' . _T('asso:entete_nom') .'</th>'

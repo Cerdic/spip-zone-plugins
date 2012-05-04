@@ -71,6 +71,10 @@ function exec_bilan()
 			echo fin_cadre_enfonce(true);
 		}
 		debut_cadre_association('finances-24.png', 'resultat_courant');
+		// Filtres
+		filtres_association(array(
+			'exercice'=>$exercice,
+		), 'bilan');
 		if ($plan) {
 			$join = ' RIGHT JOIN spip_asso_plan ON imputation=code';
 			$sel = ', code, intitule, classe';

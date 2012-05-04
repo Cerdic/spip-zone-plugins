@@ -46,20 +46,10 @@ function exec_dons()
 			'ajouter_un_don' => array('ajout-24.png', 'edit_don'),
 		));
 		debut_cadre_association('dons-24.gif', 'tous_les_dons');
-		// PAGINATION ET FILTRES
-		echo '<table width="100%" class="asso_tablo_filtre">';
-		echo '<tr>';
-		echo '<td>';
-		$query = sql_select("DATE_FORMAT(date_don, '%Y') AS annee", 'spip_asso_dons', '', 'annee', 'annee');
-		while ($data = sql_fetch($query)) {
-		 	if ($data['annee']==$annee) {
-				echo "\n<strong>".$data['annee'].'</strong>';
-			} else {
-				echo ' <a href="'. generer_url_ecrire('dons', '&annee='.$data['annee']) .'">'.$data['annee']."</a>\n";
-			}
-		}
-		echo '</td></tr>';
-		echo '</table>';
+		// Filtres
+		echo '<table width="100%" class="asso_tablo_filtre"><tr>';
+		echo '<td>'. association_selectionner_annee($annee, 'dons', 'don','dons') .'</td>';
+		echo '</tr></table>';
 		//TABLEAU
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_dons'>\n";
 		echo "<thead>\n<tr>";

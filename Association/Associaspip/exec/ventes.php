@@ -48,15 +48,10 @@ function exec_ventes()
 			'ajouter_une_vente' => array('ajout-24.png', 'edit_vente'),
 		) );
 		debut_cadre_association('ventes.gif', 'toutes_les_ventes');
-		// PAGINATION ET FILTRES
-		echo "\n<table><tr><td>";
-		$query = sql_select("DATE_FORMAT(date_vente, '%Y')  AS annee", 'spip_asso_ventes', '', 'annee', 'annee');
-		while ($data = sql_fetch($query)) {
-			$a = $data['annee'];
-			if ($a==$annee)	{echo ' <strong>'.$a.'</strong>';}
-			else {echo ' <a href="'. generer_url_ecrire('ventes','annee='.$a).'">'.$a.'</a>';}
-		}
-		echo "</td></tr></table>\n";
+		// Filtres
+		echo '<table width="100%" class="asso_tablo_filtre"><tr>';
+		echo '<td>'. association_selectionner_annee($annee, 'ventes', 'vente','ventes') .'</td>';
+		echo '</tr></table>';
 		//TABLEAU
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_ventes'>\n";
 		echo "<thead>\n<tr>";

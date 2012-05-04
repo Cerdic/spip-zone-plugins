@@ -128,5 +128,19 @@ function icone1_association($texte, $lien, $image, $sup='rien.gif')
 	return icone_horizontale(_T("asso:$texte"), $lien, _DIR_PLUGIN_ASSOCIATION_ICONES. $image, $sup, false);
 }
 
+// Bloc (tableau en ligne) d'affinage (filtrage) des resultats dans les pages principales
+function filtres_association($liste_filtres, $exec='')
+{
+	echo '<form method="get" action="'. ($exec?generer_url_ecrire($exec):'') .'">';
+	if ($exec)
+		echo "\n<input type='hidden' name='exec' value='$exec' />";
+	echo "\n<table width='100%'><tr>";
+	$largeur_cellules = ceil((100/count($liste_filtres)+1));
+	foreach($liste_filtres as $filtre_selection =>$id_selectionne) {
+		echo "<td width='$largeur_cellules%'>". call_user_func("association_selectionner_$filtre_selection", $id_selectionne) .'</td>';
+	}
+	echo "<td width='$largeur_cellules%' class='boutons'><noscript><input type='submit' value='". _T('asso:bouton_lister') ."' /></noscript></td>";
+	echo "</tr></table>\n</form>\n";
+}
 
 ?>
