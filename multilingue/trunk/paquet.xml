@@ -1,7 +1,7 @@
 <paquet
 	prefix="multilingue"
 	categorie="edition"
-	version="0.0.3"
+	version="0.1.0"
 	etat="test"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="prive/themes/spip/images/multilingue-64.png"
@@ -18,4 +18,5 @@
 		<necessite nom="languepreferee" compatibilite="[0.4.0;[" />				
 		<necessite nom="trad_rub" compatibilite="[1.1.0;]" />				
 		<necessite nom="taa" compatibilite="[1.1.0;[" />		
+		<utilise nom="z" compatibilite="[1.7.17;[" />		
 </paquet>

@@ -7,10 +7,10 @@
 <B_rubriques>
 <div class="menu rubriques">
 	<h2><:rubriques:></h2>
-	<ul>
+	<ul class="menu-liste">
 	<BOUCLE_rubriques(RUBRIQUES) {racine} {lang}>
 		<BOUCLE_racines(RUBRIQUES){id_parent}{par num titre, titre}>
-		<li>
+		<li class="menu-entree">
 			<a href="#URL_RUBRIQUE"[ class="(#EXPOSE)"]>[(#TITRE|couper{80})]</a>
 
 			<B_sous_rubriques>
