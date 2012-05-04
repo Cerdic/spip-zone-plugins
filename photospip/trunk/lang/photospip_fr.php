@@ -17,14 +17,17 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// CFG
-	'configuration' => 'Configuration du plugin',
-	'limiter_version' => 'Limiter le nombre de versions possibles à :',
-	'vider_version' => 'Intervale entre les vidages des versions interm&eacute;diaires (en nombre de jours, 0 = jamais) :',
-	'compression_rendu' => 'Qualit&eacute; de compression du rendu (en %, 85 par d&eacute;faut) :',
-	'filtres_a_disposition' => 'Filtres &agrave; disposition',
-	'configuration_publique' => 'Configuration de la partie publique',
-	'hauteur_previsu' => 'Hauteur maximale de la pr&eacute;visualisation en px (450 par d&eacute;faut) : ',
-	'largeur_previsu' => 'Largeur maximale de la pr&eacute;visualisation en px (450 par d&eacute;faut) : ',
+	
+	'label_choisir_filtres' => 'Choisissez les filtres à activer',
+	'label_compression_rendu' => 'Qualit&eacute; de compression du rendu (en %, 85 par d&eacute;faut) :',
+	'label_hauteur_previsu' => 'Hauteur maximale de la pr&eacute;visualisation en px (450 par d&eacute;faut) : ',
+	'label_largeur_previsu' => 'Largeur maximale de la pr&eacute;visualisation en px (450 par d&eacute;faut) : ',
+	'label_limiter_version' => 'Limiter le nombre de versions possibles à :',
+	'label_vider_version' => 'Intervale entre les vidages des versions interm&eacute;diaires (en nombre de jours, 0 = jamais) :',
+	'legend_configuration' => 'Configuration du plugin',
+	'legend_configuration_publique' => 'Configuration de la partie publique',
+	'legend_filtres_a_disposition' => 'Filtres &agrave; disposition',
+	'photospip' => 'PhotoSPIP',
 		
 	// PUBLIC
 	

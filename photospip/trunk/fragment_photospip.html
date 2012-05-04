@@ -19,7 +19,7 @@
 		]
 		[(#ENV{filtre}|oui)
 		[(#FICHIER|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|photospip_appliquer_filtre{#ENV{filtre},[(#ENV{param})]}|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|inserer_attribut{alt,' '})]]
-		[(#ENV{filtre}|?{'',' '})
+		[(#ENV{filtre}|non)
 		[(#FICHIER|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|inserer_attribut{alt,' '})]]
 	</div>
 	<div id="versions">
@@ -33,14 +33,14 @@
 								<div>
 									<input type="hidden" name="version" value="#VERSION" />
 									<label>
-										[(#HAUTEUR|>{#LARGEUR}|?{'',' '})
+										[(#HAUTEUR|>{#LARGEUR}|non)
 										[(#FICHIER|get_spip_doc|image_reduire{80,80}|inserer_attribut{alt,Version #VERSION})]]
 										[(#HAUTEUR|>{#LARGEUR}|oui)
 										[(#FICHIER|get_spip_doc|image_reduire{80,80}|inserer_attribut{alt,Version #VERSION}|inserer_attribut{style,'vertical-align:bottom;'})]]
 									</label>
 									<input type="hidden" name="redirect" value="[(#SELF)]" />
 									<input type="hidden" name="redirect_ajax" value="[(#URL_PAGE{fragment_photospip}|parametre_url{id_document,#ENV{id_document}})]" />
-									[(#VERSION|=={1}|?{'',' '})<button type="submit" name="action_faire" class="delete_version"  value="supprimer" onclick="AjaxNamedSubmit(this)" title="<:photospip:supprimer_version:> #VERSION">
+									[(#VERSION|=={1}|non)<button type="submit" name="action_faire" class="delete_version"  value="supprimer" onclick="AjaxNamedSubmit(this)" title="<:photospip:supprimer_version:> #VERSION">
 										<img src="[(#CHEMIN{images/delete_version.png}|image_sepia{86B900}|extraire_attribut{src})]" alt="<:photospip:supprimer_version:> #VERSION" />
 									</button>]
 									<button type="submit" name="action_faire" value="revenir" class="revenir_version" onclick="AjaxNamedSubmit(this)" title="<:photospip:revenir_version:> #VERSION">

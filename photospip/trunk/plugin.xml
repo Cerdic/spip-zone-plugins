@@ -1,25 +1,17 @@
 	<plugin>
 	<nom><multi>
-		[fr]Photospip
+		[fr]PhotoSPIP
 	</multi></nom>
 	<auteur>[kent1->http://www.kent1.info/]
 _ &copy; 2008-2012 - Distribu&#233; sous licence GNU/LGPL pour la partie spip
 	</auteur>
-	<version>0.1</version>
+	<version>0.2.0</version>
 	<version_base>0.4</version_base>
 	<prefix>photospip</prefix>
 	<etat>dev</etat>
+	<slogan>Un photoshop-light dans SPIP</code>
 	<description><multi>
-[fr]un photoshop-light dans spip?
-_ 
-_ Modifier les images ins&eacute;r&eacute;es dans les articles 
-_ Ce plugin n&eacute;cessite les plugins suivant :
-_ CFG
-_ Médiathèque
-_ jQuery UI
-_ Palette
-_ Il n&eacute;cessite &eacute;galement les plugins jQuery suivants :
-_ [imgAreaSelect 0.5->http://plugins.jquery.com/project/imgAreaSelect]
+[fr]Modifier les images ins&eacute;r&eacute;es dans les articles 
 	</multi></description>
 	<lien>http://kent1.sklunk.net/spip.php?article121</lien>
 	<install>base/photospip_upgrade.php</install>
@@ -39,4 +31,5 @@ _ [imgAreaSelect 0.5->http://plugins.jquery.com/project/imgAreaSelect]
 	<necessite id="jqueryui" version='[1.8.19;]' />
 	<necessite id="SPIP" version='[2.1.13;2.1.99]' />
 	<necessite id="lib:jquery.imgareaselect-0.9.8" src="http://odyniec.net/projects/imgareaselect/jquery.imgareaselect-0.9.8.zip" />
+	<categorie>multimedia</categorie>
 </plugin>

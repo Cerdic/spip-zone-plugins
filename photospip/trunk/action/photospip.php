@@ -108,6 +108,7 @@ function action_photospip_post($r){
 		spip_log("params image_niveaux_gris_auto = $params", "photospip");
 	}
 
+	include_spip('inc/filtres_images_mini');
 	if($validation == "appliquer"){
 		include_spip('inc/documents'); 
 		$src = get_spip_doc($row['fichier']);
