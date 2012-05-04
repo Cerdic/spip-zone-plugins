@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="3.3.1"
+	version="3.3.2"
 	schema="2.0.2"
 	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*["
@@ -63,11 +63,6 @@
 	<pipeline
 		nom="autoriser"
 		inclure="gis_autoriser.php"
-	/>
-	<pipeline
-		nom="formulaire_traiter"
-		inclure="formulaires/configurer_gis.php"
-		action="gis_configurer_gis_post_traitement"
 	/>
 	<pipeline
 		nom="saisies_autonomes"

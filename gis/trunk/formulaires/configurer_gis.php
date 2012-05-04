@@ -29,21 +29,4 @@ function formulaires_configurer_gis_verifier_dist(){
 	return $erreurs;
 }
 
-function gis_configurer_gis_post_traitement($flux){
-	// Si on est dans le formulaire de config de GIS et qu'on change d'API
-	if (
-		$flux['args']['form'] == 'configurer_gis'
-		and _request('api') != _request('ancienne_api')
-	){
-		// On invalide le cache du site
-		include_spip('inc/invalideur');
-		suivre_invalideur('1');
-		
-		// Et on recharge entièrement la page
-		$flux['data']['redirect'] = self();
-	}
-	
-	return $flux;
-}
-
 ?>
