@@ -1,0 +1,30 @@
+#CACHE{0}
+[(#ENV{docmode}|=={zpip}|oui)
+<INCLURE{fond=structure}{env}{type=doc_pubbaner}{composition=#ENV{composition,#ENV{page}}}>
+][(#ENV{docmode}|=={zpip}|non)
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title><:pubban:doc_titre_court:>[ - (#NOM_SITE_SPIP|textebrut)]</title>
+[(#ENV{docmode}|=={brut}|non)<INCLURE{fond=inclure/head}>]
+[(#ENV{docmode}|=={brut}|oui)#INSERT_HEAD]
+<meta name="robots" content="none" />
+</head>
+<body class="page_sommaire">
+<div class="page">
+	[(#ENV{docmode}|=={brut}|non)<INCLURE{fond=inclure/header}>]
+	<div class="main">
+		<div class="wrapper hfeed">
+		<div class="content hentry" id="content">
+		<INCLURE{fond=contenu/doc_pubbaner}{env}>
+		</div><!--.content-->
+		</div><!--.wrapper-->
+		<div class="aside">
+			[(#ENV{docmode}|=={brut}|non)<INCLURE{fond=inclure/rubriques}>]
+			<INCLURE{fond=navigation/doc_pubbaner}{env}>
+		</div><!--.aside-->
+	</div><!--.main-->
+	[(#ENV{docmode}|=={brut}|non)<INCLURE{fond=inclure/footer,self=#SELF}>]
+</div><!--#page-->
+</body>
+</html>]

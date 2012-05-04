@@ -5,9 +5,9 @@ body { margin: 0; padding: 0; }
 a, img, a img { border: none; cursor: hand }
 #bouton_montrer, #boutons_admin_supp, .spip-admin-float { display:none;visibility:hidden }
 </style>
-<body>
+<body onload="pubDislpayerLoad()">
 <center>
-	#FORMULAIRE_INC_PUBBAN{env}
+	#FORMULAIRE_INC_PUBBAN{env,#ENV{id_banniere,''}}
 </center>
 </body>
 </html>
