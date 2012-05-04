@@ -31,6 +31,11 @@ function action_photospip_post($r){
 	$id_auteur = $visiteur_session['id_auteur'];
 	spip_log($r,'photospip');
 	
+	if($GLOBALS['meta']['image_process'] != 'gd2'){
+		spip_log("Vous n'utilisez pas GD2, veuillez utiliser GD2 pour le traitement d'images","photospip");
+		return;
+	}
+
 	//on récup l'id_document
 	$arg = $r[1];
 	spip_log("on travail sur l'id_document $arg","photospip");
@@ -55,9 +60,9 @@ function action_photospip_post($r){
 	}
 	
 	// On vérifie si le document existe
-	$result = sql_select("*", "spip_documents", "id_document=$arg");
+	$row = sql_fetsel("*", "spip_documents", "id_document=".intval($arg));
 
-	if (!$row = sql_fetch($result))
+	if (!is_array($row))
 		return;
 	
 	spip_log("On lui applique le filtre $var_filtre","photospip");	
@@ -103,11 +108,9 @@ function action_photospip_post($r){
 		spip_log("params image_niveaux_gris_auto = $params", "photospip");
 	}
 
-	
 	if($validation == "appliquer"){
-		include_spip('inc/charsets');	# pour le nom de fichier
 		include_spip('inc/documents'); 
-		$src = _DIR_RACINE . get_spip_doc($row['fichier']);
+		$src = get_spip_doc($row['fichier']);
 		if (preg_match(',^(.*)-photospip(\d+).([^.]+)$,', $src, $match)) {
 			$version = $match[2];
 			$orig_src = $match[1].'.'.$match[3];
@@ -116,7 +119,6 @@ function action_photospip_post($r){
 			$newversion = ++$version;
 			spip_log("La nouvelle version sera $newversion","photospip");
 		}
-	
 		if($version){
 			// $dest = preg_replace(',\.[^.]+$,', '-r'.$var_rot.'$0', $src); //original
 			$dest = preg_replace(",\.[^.]+$,", "-photospip".($newversion)."$0", $orig_src);
@@ -131,35 +133,23 @@ function action_photospip_post($r){
 			$src = extraire_attribut(image_alpha($src,0),'src');
 			spip_log("application du filtre $var_filtre $src : $dest","photospip");
 		}
-		$process = $GLOBALS['meta']['image_process'];
-	
-		// imagick (php4-imagemagick)
-		if ($process == 'imagick') {
-			spip_log("Vous utilisez imagick, veuillez utiliser GD pour le traitement d'images","photospip");
-			return;
-		}
-		else if ($process == "gd2") {
-			spip_log("Vous utilisez gd2, tout est ok jusque là","photospip");
-			if($var_filtre == "tourner"){
-				include_spip('inc/filtres');
-				include_spip('public/parametrer'); // charger les fichiers fonctions #bugfix spip 2.1.0
-				$dst_img = filtrer('image_rotation',$src,$params);
-				$dst_img = filtrer('image_format',$dst_img,$row['extension']);
-				$dst_img = extraire_attribut($dst_img,'src');
-				include_spip('inc/getdocument');
-				deplacer_fichier_upload($dst_img,$dest);
-			}
-			else{
-				photospipfiltre($src, $dest, $var_filtre,$params);
-			}
-		}
-		else if ($process = "convert") {
-			spip_log("Vous utilisez convert, veuillez utiliser GD pour le traitement d'images","photospip");
-			return;
+		
+		if($var_filtre == "tourner"){
+			include_spip('inc/filtres');
+			include_spip('public/parametrer'); // charger les fichiers fonctions #bugfix spip 2.1.0
+			$dst_img = filtrer('image_rotation',$src,$params);
+			$dst_img = filtrer('image_format',$dst_img,$row['extension']);
+			$dst_img = extraire_attribut($dst_img,'src');
+			include_spip('inc/getdocument');
+			deplacer_fichier_upload($dst_img,$dest);
 		}
 		else{
-			spip_log("Veuillez utiliser GD pour le traitement d'images","photospip");
-			return;
+			$sortie = photospipfiltre($src, $dest, $var_filtre,$params);
+			if(!$sortie){
+				spip_log('photospip n a pas pu appliquer le filre '.$var_filtre,'photospip');
+				return;
+			}
+				
 		}
 	
 		$size_image = getimagesize($dest);
@@ -171,20 +161,18 @@ function action_photospip_post($r){
 		
 		// succes !
 		if ($largeur>0 AND $hauteur>0) {
+			if(is_array($params))
+				$params = serialize($params);
 			sql_insertq("spip_documents_inters",array("id_document" => $row['id_document'],"id_auteur" => $id_auteur,"extension" => $row['extension'], "fichier" => $row['fichier'], "taille" => $row['taille'],"hauteur" => $row['hauteur'], "largeur" => $row['largeur'],"mode" => $row['mode'], "version" => ($version? $version:1), "filtre" => $var_filtre, "param" => $params));
 			sql_updateq('spip_documents', array('fichier' => set_spip_doc($dest), 'taille' => $poids, 'largeur'=>$largeur, 'hauteur'=>$hauteur, 'extension' => $ext), "id_document=".intval($row['id_document']));
 			spip_log("Update de l'image dans la base poid= $poids, extension = $ext, hauteur= $hauteur, largeur = $largeur, fichier = $dest","photospip");
-			//if ($effacer) {
-			//	spip_log("j'efface $effacer","photospip");
-			//	spip_unlink($effacer);
-			//}
 			redirige_par_entete(str_replace("&amp;","&",$redirect));
 		}
 	}
 	else if($validation == "tester"){
 		include_spip('inc/headers');
 		// Si on fait simplement un test on se tappe pas tout le traitement sur l'image de base
-		if(($var_filtre == 'tourner') || ($var_filtre == 'image_recadre')){
+		if(in_array($var_filtre,array('tourner','image_recadre'))){
 			$redirect = parametre_url($redirect,'message','sanstest');
 						spip_log("on est dans un filtre tourner que l'on ne peut pas tester donc on retourne rien...", "photospip");
 			redirige_par_entete(str_replace("&amp;","&",$redirect));
@@ -230,18 +218,20 @@ function photospipfiltre ($src, $dest, $filtre,$params){
 	spip_log("filtre = $filtre","photospip");
 	spip_log("params = $params","photospip");
 	
-	include_spip('inc/filtres_images');
-	include_spip('fonctions_images_fonctions');
-		
+	include_spip('inc/filtres');
+	include_spip('public/parametrer');
 	$src_img = '';
 	
-	if ($filtre){
+	$filtre = chercher_filtre($filtre);
+	spip_log($filtre,'photospip');
+	if (function_exists($filtre)){
 		if($params){
 			if($filtre == 'image_recadre'){
 				$dst_img = $filtre($src,$params[0],$params[1],$params[2]);
 				spip_log("$filtre($src,$params[0],$params[1],$params[2]);","photospip");
 			}
 			else{
+				spip_log("$filtre($src,$params)","photospip");
 				$dst_img = $filtre($src,$params);		
 			}
 		}
@@ -250,9 +240,12 @@ function photospipfiltre ($src, $dest, $filtre,$params){
 		}
 		$dst_img = extraire_attribut($dst_img,'src');
 		spip_log("après le filtre $filtre dst_img = $dst_img","photospip");		
+	}else{
+		spip_log('le filtre n existe pas','photospip');
+		return false;
 	}
 
-		if(preg_match("/\.(png|gif|jpe?g|bmp)$/i", $src, $regs)) {
+	if(preg_match("/\.(png|gif|jpe?g|bmp)$/i", $src, $regs)) {
 		switch($regs[1]) {
 			case 'png':
 			  if (function_exists('ImageCreateFromPNG')) {
@@ -289,7 +282,7 @@ function photospipfiltre ($src, $dest, $filtre,$params){
 		return false;
 	}
 
-	$size=@getimagesize($src);
+	$size=getimagesize($src);
 	if (!($size[0] * $size[1])) return false;
 
 	//ImageDestroy($src_img);
@@ -297,6 +290,7 @@ function photospipfiltre ($src, $dest, $filtre,$params){
 
 	$save($src_img,$dest);
 	spip_log("dest $dest","photospip");
+	return true;
 }
 
 ?>

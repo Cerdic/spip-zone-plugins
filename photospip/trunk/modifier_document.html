@@ -367,8 +367,8 @@
 							<input type="hidden" name="redirect_ajax" value="[(#URL_PAGE{fragment_photospip}|parametre_url{id_document,#ID_DOCUMENT})]" />
 							<div class="boutons validation" >
 								<p>
-									<input type="radio" name="validation" class="nocache" value="tester" id="tester2" checked="checked" /><label for="tester2" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_tester.png})" alt="<:photospip:tester:>" /> ]<:photospip:tester:></label><br />
-									[(#GET{photospip}|=={pasok}|?{<input type="radio" name="validation" class="nocache" value="appliquer" id="appliquer2" /><label for="appliquer2" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_appliquer.png})" alt="<:photospip:valider:>" /> ]<:photospip:valider:></label>,<span class="warning"><:photospip:nb_versions_depasse:></span><br />})]
+									<input type="radio" name="validation" class="nocache" value="tester" id="tester_couleur" checked="checked" /><label for="filtre_gamma" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_tester.png})" alt="<:photospip:tester:>" /> ]<:photospip:tester:></label><br />
+									[(#GET{photospip}|=={pasok}|?{<input type="radio" name="validation" class="nocache" value="appliquer" id="appliquer_couleur" /><label for="appliquer_couleur" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_appliquer.png})" alt="<:photospip:valider:>" /> ]<:photospip:valider:></label>,<span class="warning"><:photospip:nb_versions_depasse:></span><br />})]
 								</p>
 								<p>
 									<input type="submit" class="submit" name="valider" value="<:photospip:valider:>" />

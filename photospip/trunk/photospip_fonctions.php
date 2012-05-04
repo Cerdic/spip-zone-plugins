@@ -24,6 +24,7 @@
 
 function photospip_appliquer_filtre($balise, $filtre,$param1=NULL,$param2=NULL,$param3=NULL) {
 	$filtre = chercher_filtre($filtre);
+	spip_log("On a trouvé $filtre",'photospip');
 	if (function_exists($filtre)){
 		spip_log("$filtre($balise,$param1,$param2,$param3);","photospip");
 		if ($param1){
