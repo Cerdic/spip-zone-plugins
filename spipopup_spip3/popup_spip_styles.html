@@ -1,0 +1,39 @@
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+/* --------- POPUP SPIP ---------- */
+html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
+body { width: 600px; height: 100%; 
+	background: #FFF; margin: 0; padding: 0; text-align: center; 
+	font-size: 0.8125em; font-family: "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", sans-serif; color: #333; }
+
+/*  ------------------------------------------
+/*  Disposition a l'ecran des blocs principaux
+/*  ------------------------------------------ */
+#page { width: 96%;text-align: left;margin: 0 2%;padding: 0;position: relative;}
+#conteneur {clear:both;margin:0;padding:0;font-size:0.9em;overflow:hidden;width:100%;}
+#contenu {width:100%;}
+#entete {width:96%;margin:0;padding-top:.60em;border-bottom: 1px solid #ddd;}
+#pied, #footer_popup {
+	clear: both; width: 96%; margin: 0;
+	margin-bottom:1em;padding: 2px 10px;border-top:1px solid #ddd;text-align:right;
+}
+.nettoyeur { clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px; }
+.invisible { position: absolute; top: -3000em; height: 1%; }
+
+/* logos */
+#conteneur .spip_logos { float: right; margin-left: 16px; margin-bottom: 4px; }
+
+/* en tete */
+#entete a.accueil { display: inline; width: auto; }
+.header_popup {margin:5px 0;padding:0 1em;}
+.header_popup_right { float:right; top:0;padding: 10px 20px; }
+
+/* ariane dans le pied de page */
+.hierarchie { font-size: 0.76em; font-weight: bold; margin-top: 4px; text-align: left;}
+.hierarchie a { text-decoration: underline; color: #97C74A; }
+
+/* petits liens */
+a.popup_liens {color:#666666; text-decoration:underline;font-size:0.76em; margin:0 5px;}
+a.popup_liens:active, a.popup_liens:hover {color:#a71f2f; text-decoration:underline;}
