@@ -244,9 +244,13 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 			}
 		}
 	}
-	// on nettoie les saisies choisir_objets qui ajoutent un element vide
+	// on nettoie les saisies checkbox de vue_liens (equivalent de choisir_objets)
+	// qui peuvent ne rien envoyer
 	// on nettoie une eventuelle table ayant servi a pre-remplir l'objet
 	foreach ($data['objets'] as $c => $o) {
+		if (!is_array($o['vue_liens'])) {
+			$o['vue_liens'] = array();
+		}
 		$data['objets'][$c]['vue_liens'] = array_filter($o['vue_liens']);
 		unset($data['objets'][$c]['renseigner_avec_table']);
 	}

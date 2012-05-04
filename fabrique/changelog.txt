@@ -4,6 +4,11 @@ Ce plugin génère d'autres plugins !
 
 
 
+* Coquille PHP avec le changement de saisie des liaisons (Satch)
+
+
+1.15.0 le 04 05 2012
+--------------------
 
 * Coquille et code mort en moins
 * Suivre le déplacement de jquery-ui dans SPIP3
