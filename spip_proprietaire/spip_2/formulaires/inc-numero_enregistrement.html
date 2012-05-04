@@ -1,0 +1,74 @@
+[(#SET{domid,_[(#ENV**{proposer_enregistrement})]})]
+	<input type="hidden" name="num_mode_hidden" id="num_mode_hidden" value="[(#ENV**{proposer_enregistrement})]" />
+
+<script type='text/javascript'>/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+setTimeout(function(){
+if (window.jQuery){
+jQuery(document).ready(function(){
+	[(#ENV**{proposer_enregistrement}|=={auto_fr}|non)
+	jQuery('.num_mode#GET{domid}:not(#num_libre#GET{domid})').hide();
+	]
+	[(#ENV**{proposer_enregistrement}|=={auto_fr}|oui)
+	jQuery('.num_mode#GET{domid}:not(#num_auto#GET{domid})').hide();
+	]
+	if (jQuery('.num_mode#GET{domid}:visible').length>1)
+		jQuery('.num_mode#GET{domid}:not(#num_auto#GET{domid})').hide();
+});
+}
+},10);
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
+
+	<div class='sourceup'>
+		<a href='#num_libre#GET{domid}' onclick="if (jQuery('#num_libre#GET{domid}').is(':hidden')) {jQuery('div.num_mode#GET{domid}:visible').slideUp('fast');jQuery('#num_libre#GET{domid}').slideDown('fast');jQuery('#num_mode_hidden').val('libre');}return false;"><:spipproprio:bouton_saisie_libre:></a>
+		| <a href='#num_auto#GET{domid}' onclick="if (jQuery('#num_auto#GET{domid}').is(':hidden')) {jQuery('div.num_mode#GET{domid}:visible').slideUp('fast');jQuery('#num_auto#GET{domid}').slideDown('fast');jQuery('#num_mode_hidden').val('auto_fr');}return false;"><:spipproprio:bouton_auto_fr:></a>
+	</div>
+	<hr style="color:#ccc;background-color:#ccc;border:0;" />
+
+[(#REM)		Mode saisie libre	]
+	<div class='num_mode#GET{domid}' id='num_libre#GET{domid}'>[
+		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{enregistrement_numero})</span>
+		]<input type='text' class='text' name='enregistrement_numero' id='enregistrement_numero' value="[(#ENV**{enregistrement_numero})]" />
+	<hr style="color:#ccc;background-color:#ccc;border:0;" />
+	</div>
+
+[(#REM)		Mode saisie automatique pour la France	]
+	<div class='num_mode#GET{domid}' id='num_auto#GET{domid}'>
+		    <table><tr>
+
+			<td>
+			    <label style="float:none;margin:0;padding:0;width:100px"><:spipproprio:enregistrement_tvaintra_label:>&nbsp;:
+			    [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{enregistrement_tvaintra})</span>
+				]<input type='text' class='text' name='enregistrement_tvaintra' id='enregistrement_tvaintra' value="[(#ENV**{enregistrement_tvaintra})]" style="width: 100px;" maxlength="5" title="<:spipproprio:enregistrement_tvaintra_title:>"[
+					(#ENV**{enregistrement_siren}|=={''}|oui|sinon{#ENV**{erreurs}|table_valeur{enregistrement_siren}|=={''}|non}) disabled="disabled"] />
+				</label>
+				<span class='explication'><:spipproprio:enregistrement_tvaintra_comment:></span>
+			</td>
+
+			<td>
+			    <label style="float:none;margin:0;padding:0;width:100px"><:spipproprio:enregistrement_siren_label:>&nbsp;:
+			    [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{enregistrement_siren})</span>
+				]<input type='text' class='text' name='enregistrement_siren' id='enregistrement_siren' value="[(#ENV**{enregistrement_siren})]" style="width: 100px;" maxlength="11" title="<:spipproprio:enregistrement_siren_title:>" />
+				</label>
+				<span class='explication'><:spipproprio:enregistrement_siren_comment:></span>
+			</td>
+
+			<td>
+			    <label style="float:none;margin:0;padding:0;width:100px"><:spipproprio:enregistrement_siret_label:>&nbsp;:
+			    [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{enregistrement_siret})</span>
+				]<input type='text' class='text' name='enregistrement_siret' id='enregistrement_siret' value="[(#ENV**{enregistrement_siret})]" style="width: 100px;" maxlength="6" title="<:spipproprio:enregistrement_siret_title:>" />
+				</label>
+				<span class='explication'><:spipproprio:enregistrement_siret_comment:></span>
+			</td>
+			</tr><tr>
+			
+			<td colspan="3">
+			    <label style="float:none;margin:0;padding:0;width:100%">
+			    [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{enregistrement_tva_nonapplicable})</span>
+				]<input type='checkbox' class='checkbox' name='enregistrement_tva_nonapplicable' id='enregistrement_tva_nonapplicable' value="oui"[(#ENV**{enregistrement_tva_nonapplicable}|=={oui}|oui) checked="checked"] />
+				&nbsp;<:spipproprio:tva_nonapplicable_label:></label>
+				<span class='explication'><:spipproprio:tva_nonapplicable_comment:></span>
+			</td>
+
+			</tr></table>
+	<hr style="color:#ccc;background-color:#ccc;border:0;" />
+	</div>

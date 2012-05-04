@@ -1,0 +1,1 @@
+[(#HTTP_HEADER{Content-Type: [(#ENV{telechargement}|=={oui}|?{text/x-vcard,text/plain})]; charset=#CHARSET})][(#ENV{telechargement}|=={oui}|oui)[(#HTTP_HEADER{Content-Disposition: attachment; filename=[(#NOM_SITE_SPIP|spip_proprio_formater_nom_fichier)_vcard].vcf})]]#MODELE{vcard}

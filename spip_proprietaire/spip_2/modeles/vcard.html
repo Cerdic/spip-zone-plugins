@@ -1,0 +1,20 @@
+[(#SET{proprietaire,[(#CONFIG{spip_proprietaire})]})]BEGIN:VCARD
+VERSION:3.0
+PRODID: SPIP http://www.spip.net
+N:[(#GET*{proprietaire}|table_valeur{proprietaire_nom}|extraire_multi|filtrer_ical)];;;;
+FN:[(#GET*{proprietaire}|table_valeur{proprietaire_nom}|extraire_multi|filtrer_ical)]
+ORG:[(#NOM_SITE_SPIP|filtrer_ical)];
+EMAIL;type=INTERNET;type=WORK;type=PREF:[(#GET*{proprietaire}|table_valeur{proprietaire_mail}|filtrer_ical)]
+[TEL;type=WORK;type=PREF:(#GET*{proprietaire}|table_valeur{proprietaire_adresse_telephone}|filtrer_ical)][
+TEL;type=WORK;type=FAX:(#GET*{proprietaire}|table_valeur{proprietaire_adresse_telecopie}|filtrer_ical)
+]ADR;[language=(#LANG);]type=WORK;type=PREF:;;[(#GET*{proprietaire}|table_valeur{proprietaire_adresse_rue}|filtrer_ical)];[(#GET*{proprietaire}|table_valeur{proprietaire_adresse_ville}|filtrer_ical)];;[(#GET*{proprietaire}|table_valeur{proprietaire_adresse_code_postal}|filtrer_ical)];[(#GET*{proprietaire}|table_valeur{proprietaire_adresse_pays}|filtrer_ical)]
+LABEL;[language=(#LANG);]type=WORK:;;[(#GET*{proprietaire}|table_valeur{proprietaire_adresse_rue}|filtrer_ical)]\n[(#GET*{proprietaire}|table_valeur{proprietaire_adresse_code_postal}|filtrer_ical) - ][(#GET*{proprietaire}|table_valeur{proprietaire_adresse_ville}|filtrer_ical) - ][(#GET*{proprietaire}|table_valeur{proprietaire_adresse_pays}|filtrer_ical)]
+URL;type=PREF:[(#URL_SITE_SPIP|filtrer_ical)][
+item1.X-ABRELATEDNAMES;TYPE=PREF:(#GET*{proprietaire}|table_valeur{proprietaire_nom_responsable}|extraire_multi|supprimer_tags|filtrer_ical)
+item1.X-ABLabel:_$!<Manager>!$_]
+UID: @ [(#URL_SITE_SPIP|filtrer_ical)]\:ABPerson
+REV:[(#DATE|date_ical)]
+[NOTE;[language=(#LANG);]ENCODING=QUOTED-PRINTABLE:(#DESCRIPTIF_SITE_SPIP|supprimer_tags|textebrut|filtrer_ical)]
+[LOGO[;type=(#LOGO_SITE_SPIP||extraire_attribut{src}|spip_proprio_recuperer_extension|strtoupper)]:(#LOGO_SITE_SPIP||extraire_attribut{src}|url_absolue|filtrer_ical)
+]X-ABShowAs:COMPANY
+END:VCARD
