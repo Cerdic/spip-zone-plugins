@@ -1,0 +1,31 @@
+<!-- titre=<:spip_400:spip_400:>-->
+<!-- icone=stop_16.png-->
+<!-- descriptif=
+<h4><:spip_400:cfg_descr_titre:></h4>
+<p><:spip_400:cfg_descr|propre:></p>
+<br />
+-->
+<!-- boite=<:spip_400:cfg_label_titre:>-->
+#CACHE{0}
+
+<form method="post" action="#SELF" id="top_400_form"><div>
+	<div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+	<div style="padding:0.2em; padding-right: 1.2em">
+		<span class="comment"><:spip_400:cfg_comment_email|propre:></span>
+		<p class="forml">
+			<label for="liste_rub"><strong><:spip_400:cfg_label_sender_email:>&nbsp;:</strong></label>
+			<input type="text" name="sender_400" id="sender_400" value="[(#EVAL{_request('sender_400_b')}|sinon{#ENV{sender_400,#EMAIL_WEBMASTER}})]" size="50" />
+			&nbsp;<small><a href="[(#SELF|parametre_url{sender_400_b,#EMAIL_WEBMASTER})]" title="<:spip_400:email_webmestre_ttl:>"><:spip_400:email_webmestre:></a></small>
+		</p>
+		<p class="forml">
+			<label for="liste_rub"><strong><:spip_400:cfg_label_receipt_email:>&nbsp;:</strong></label>
+			<input type="text" name="receipt_400" id="receipt_400" value="[(#EVAL{_request('receipt_400_b')}|sinon{#ENV{receipt_400,#EMAIL_WEBMASTER}})]" size="50" />
+			&nbsp;<small><a href="[(#SELF|parametre_url{receipt_400_b,#EMAIL_WEBMASTER})]" title="<:spip_400:email_webmestre_ttl:>"><:spip_400:email_webmestre:></a></small>
+		</p>
+	</div>
+
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="fondo" />
+	</p>
+</div></form>
