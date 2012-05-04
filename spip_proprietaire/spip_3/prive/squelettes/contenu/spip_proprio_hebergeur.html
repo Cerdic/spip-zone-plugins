@@ -1,0 +1,30 @@
+[(#SESSION{statut}|=={0minirezo}|sinon_interdire_acces)]
+<h1 class="grostitre"><:spipproprio:infos_hebergeur:></h1>
+
+[(#BOITE_OUVRIR{#VAL{avis_attention}|_T|wrap{<h4>},'info'})]
+<p><:texte_inc_config:></p>
+#BOITE_FERMER
+
+<div class='cadre-formulaire-editer'>
+
+	<div class="ajax">
+		#FORMULAIRE_PROPRIETAIRE_INFOS_IDEM{hebergeur}
+	</div>
+
+	<div class="ajax">
+		#FORMULAIRE_PROPRIETAIRE_INFOS_NECESSAIRES{hebergeur}
+	</div>
+	
+	<div class="ajax">
+		#FORMULAIRE_PROPRIETAIRE_ADRESSE{hebergeur}
+	</div>
+	
+	<div class="ajax">
+		#FORMULAIRE_PROPRIETAIRE_INFOS_LEGALES{hebergeur}
+	</div>
+	
+	<div class="ajax">
+		#FORMULAIRE_PROPRIETAIRE_INFOS_SERVEUR
+	</div>
+
+</div>

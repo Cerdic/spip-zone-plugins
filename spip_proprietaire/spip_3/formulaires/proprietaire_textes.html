@@ -3,12 +3,10 @@
 	<br class='bugajaxie' />
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
-
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
+	<input type="hidden" name="exec" value="spip_proprio_textes" />
 
-	<ul>
-	<li class='editer fieldset'><fieldset>
 	<ul>
 	    <li class='editer obligatoire[ (#ENV**{erreurs}|table_valeur{raccourci}|oui)erreur]'>
 		    <label for="raccourci"><:module_raccourci:>&nbsp;:</label>[
@@ -22,13 +20,14 @@
 			]<textarea class="textarea" name='value' id='text_area'[ lang='(#LANG)'] rows='[(#ENV**{config}|table_valeur{lignes_longues}|moins{5})]' cols='40'[
 			(#ENV**{config}|table_valeur{_browser_caret,''})]>[(#ENV**{value})]</textarea>
 	    </li>
-	</ul></fieldset></li>
 	</ul>
 
 	<p class="boutons">
 		<input type='submit' class='fondo' value='<:bouton_enregistrer:>' />
-		<input type='button' class='fondo' value='<:bouton_annuler:>' onclick="window.location.href = '[(#SELF|parametre_url{editer,''})]';" />
+		<input type='button' class='fondo' value='<:bouton_annuler:>' onclick="window.location.href = '[(#SELF|parametre_url{raccourci,''})]';" />
 	</p>
 	</div></form>
 </div>
 </div>
+<:spipproprio:ptexte_info_tags|propre:>
+<:spipproprio:ptexte_info_supp|propre:>

@@ -1,0 +1,10 @@
+#BOITE_OUVRIR
+	<:spipproprio:pconfig_texte_notes:>
+	<:spipproprio:pconfig_texte_ajouts:>
+#BOITE_FERMER
+
+#SET{open,#BOITE_OUVRIR{'',raccourcis}}
+	[(#GET{open}|unique)]
+[(#URL_ECRIRE{spip_proprio}|icone_horizontale{<:spipproprio:proprietaire_titre_page_short:>,idisk-dir-24.png})]
+[(#GET{open}|unique|?{'',#BOITE_FERMER})]
+

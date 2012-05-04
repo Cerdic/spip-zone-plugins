@@ -1,9 +1,12 @@
-<div class='formulaire_spip formulaire_editer ajax' id='formulaire_editer_proprietaire_config_infos_createures'>
+<div class='formulaire_spip formulaire_editer formulaire_editer_createur ajax' id='formulaire_editer_proprietaire_config_infos_createur'>
 	<br class='bugajaxie' />
+	<h3 class='titrem'><:spipproprio:admin_legend:></h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
-	#ACTION_FORMULAIRE{#ENV{action}}
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
 		<li class="editer[ (#ENV**{erreurs}|table_valeur{createur_administrateur}|oui)erreur]">
 		    <label for="createur_administrateur"><:spipproprio:administrateur_aussi_label:>&nbsp;:</label>[
@@ -12,6 +15,8 @@
 			<span class='explication'><:spipproprio:administrateur_aussi_comment:></span>
 		</li>
 	</ul>
-	<span><input type='submit' value='<:bouton_enregistrer:>' class='fondo' style='float: right' /></span>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
 </div>

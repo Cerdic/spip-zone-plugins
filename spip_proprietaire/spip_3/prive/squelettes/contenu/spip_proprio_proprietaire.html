@@ -1,0 +1,30 @@
+[(#SESSION{statut}|=={0minirezo}|sinon_interdire_acces)]
+<h1 class="grostitre"><:spipproprio:infos_proprietaire:></h1>
+
+[(#BOITE_OUVRIR{#VAL{avis_attention}|_T|wrap{<h4>},'info'})]
+<p><:texte_inc_config:></p>
+#BOITE_FERMER
+
+<div class='cadre-formulaire-editer'>
+
+	<div class="ajax">
+		#FORMULAIRE_PROPRIETAIRE_INFOS_NECESSAIRES{proprietaire}
+	</div>
+	
+	<div class="ajax">
+		#FORMULAIRE_PROPRIETAIRE_ADRESSE{proprietaire}
+	</div>
+	
+	<div class="ajax">
+		#FORMULAIRE_PROPRIETAIRE_INFOS_LEGALES{proprietaire}
+	</div>
+	
+	<div class="ajax">
+		#FORMULAIRE_PROPRIETAIRE_INFOS_CNIL
+	</div>
+	
+	<div class="ajax">
+		#FORMULAIRE_PROPRIETAIRE_COPYRIGHT
+	</div>
+
+</div>

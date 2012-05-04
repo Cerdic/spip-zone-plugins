@@ -1,0 +1,27 @@
+[(#SESSION{statut}|=={0minirezo}|sinon_interdire_acces)]
+[(#EVAL{spip_proprio_charger_toutes_les_langues()})]
+<h1 class="grostitre"><:spipproprio:ptexte_titre_page:></h1>
+
+[(#BOITE_OUVRIR{
+	[(#CHEMIN_IMAGE{gnome-text-abiword-24.png}|balise_img{'','cadre-icone'})]
+	<:spipproprio:ptexte_titre_page:>
+,'simple right'})]
+	<:spipproprio:ptexte_texte:>
+#BOITE_FERMER
+
+[(#BOITE_OUVRIR{#VAL{avis_attention}|_T|wrap{<h4>},'info'})]
+<p><:texte_inc_config:></p>
+#BOITE_FERMER
+
+#BOITE_OUVRIR
+
+#SET{icone_vide,rien.gif}
+
+[(#GET{icone_vide}|cadre_depliable{<:spipproprio:ptexte_info_titre:>,0,<:spipproprio:ptexte_info_texte|propre:>,'ptexte-info'})]
+
+[(#GET{icone_vide}|cadre_depliable{<:spipproprio:ptexte_form_titre:>,[(#ENV{raccourci}|=={''}|?{0,1})],#INCLURE{fond=prive/squelettes/inclure/proprietaire_textes,raccourci=#ENV{raccourci,''}},'ptexte-form'})]
+
+<br class='nettoyeur' />
+#EVAL{charger_textes_proprietaire(false)}
+
+#BOITE_FERMER

@@ -1,9 +1,12 @@
-<div class='formulaire_spip formulaire_editer ajax[ (#ENV**{who})]' id='formulaire_editer_proprietaire_config_infos_necessaires'>
+<div class='formulaire_spip formulaire_editer formulaire_editer_necessaires formulaire_editer_necessaires_[(#ENV**{who})] ajax[ (#ENV**{who})]' id='formulaire_editer_proprietaire_config_infos_necessaires'>
 	<br class='bugajaxie' />
+	<h3 class='titrem'><:spipproprio:infos_legend:></h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
-	#ACTION_FORMULAIRE{#ENV{action}}
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
 		<li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
 	    	<label for="nom"><:spipproprio:nom_label:>&nbsp;:<span style='color: red;'>*</span></label>[
@@ -49,6 +52,8 @@
 			]<input type='text' class='text' name='site_web' id='site_web' value="[(#ENV**{site_web})]" />
 		</li>
 	</ul>
-	<span><input type='submit' value='<:bouton_enregistrer:>' class='fondo' style='float: right' /></span>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
 </div>

@@ -1,0 +1,4 @@
+#SET{open,#BOITE_OUVRIR{'',raccourcis}}
+	[(#GET{open}|unique)]
+[(#URL_ECRIRE{spip_proprio_tech}|icone_horizontale{<:spipproprio:exporter_importer:>,stock_export.png})]
+[(#GET{open}|unique|?{'',#BOITE_FERMER})]

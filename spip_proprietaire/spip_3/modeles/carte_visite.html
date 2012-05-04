@@ -9,13 +9,10 @@
 [(#SET{couleur_police,[(#LOGO_SITE_SPIP||couleur_extraire|couleur_eclaircir)]})]
 [(#SET{couleur_fond,[(#LOGO_SITE_SPIP||couleur_extraire|couleur_foncer|couleur_foncer)]})]
 <style type="text/css">
-html { font-size: 100%; }
-body { font-size: 0.8125em; font-family: "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", sans-serif; color: #333; background: #FFF; margin: 0; padding: 0; }
-img { margin: 0; padding: 0.1em;}
-a, a img { color: #604A7F; text-decoration: none; border: none;}
-a:focus,a:hover,a:active,a:focus img,a:hover img,a:active img { color: #F57900; text-decoration: underline; border: none; }
-div.carte_visite {z-index: 100;}
-div.carte_visite img, div.carte_visite table td img {z-index: 105;}
+div.carte_visite { font-size: 86%; font-family: "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", sans-serif; color: #333; background: #FFF; margin: 0; padding: 0; z-index: 100;}
+div.carte_visite img, div.carte_visite table td img {margin: 0; padding: 0.1em; z-index: 105;}
+div.carte_visite a, div.carte_visite a img { color: #604A7F; text-decoration: none; border: none;}
+div.carte_visite a:focus, div.carte_visite a:hover, div.carte_visite a:active, div.carte_visite a:focus img, div.carte_visite a:hover img, div.carte_visite a:active img { color: #F57900; text-decoration: underline; border: none; }
 </style>
 <div class="carte_visite" style="position: relative; padding: 0.6em; margin: [(#ENV{type}|=={image}|?{0,1em})]; border: 1px solid #ccc; -moz-border-radius: 8px; -webkit-border-radius: 8px; width: 420px; background-color: ##GET{couleur_fond}; text-align: left;">
 <table border="0" width="96%">

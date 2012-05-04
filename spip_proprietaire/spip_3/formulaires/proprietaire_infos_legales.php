@@ -1,6 +1,6 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_spip('spip_proprio_fonctions');
+include_spip('inc/spip_proprio_insee');
 
 
 function formulaires_proprietaire_infos_legales_charger_dist($who='proprietaire', $mode=false){

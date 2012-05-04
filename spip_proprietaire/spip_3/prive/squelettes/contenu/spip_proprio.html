@@ -1,0 +1,12 @@
+[(#SESSION{statut}|=={0minirezo}|sinon_interdire_acces)]
+<h1 class="grostitre"><:spipproprio:proprietaire_titre_page:></h1>
+
+#SET{icone_vide,rien.gif}
+
+[(#GET{icone_vide}|cadre_depliable{<:spipproprio:pourquoi_ce_plugin:>,0,<:spipproprio:presentation|propre:>,'bloc_presentation'})]
+[(#GET{icone_vide}|cadre_depliable{<:spipproprio:utiliser_ce_plugin:>,0,<:spipproprio:presentation_plugin|propre:>,'bloc_presentation_plugin'})]
+[(#GET{icone_vide}|cadre_depliable{<:spipproprio:outils_de_communication:>,0,<:spipproprio:presentation_outils_de_communication|propre:>,'bloc_presentation_outils'})]
+
+[(#URL_PAGE{test_proprietaire}|icone_horizontale{<:spipproprio:testing_page_public:>,article-24.gif})]
+<small>[<a href='[(#URL_PAGE{test_proprietaire})]' target='_blank' title='<:spipproprio:see_doc_in_new_window:>'><:spipproprio:new_window:></a>]</small>
+

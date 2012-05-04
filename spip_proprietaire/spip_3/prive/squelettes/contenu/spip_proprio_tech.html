@@ -1,0 +1,59 @@
+[(#SESSION{statut}|=={0minirezo}|sinon_interdire_acces)]
+<h1 class="grostitre"><:spipproprio:proprietaire_export_import:></h1>
+
+#SET{msg_export,#EVAL{spip_proprio_exporter()}}
+#SET{msg_import,#EVAL{spip_proprio_importer()}}
+
+[(#BOITE_OUVRIR{<:spipproprio:outil_exporter:>,'simple right'})]
+
+[<p><strong>(#GET{msg_export})</strong></p>]
+
+<form method='get' action='' enctype='multipart/form-data'><div>
+	<input type='hidden' name='exec' value='spip_proprio_tech' />
+	<input type='hidden' name='do_proprio_export' value='oui' />
+	<p class='editer'>
+		<label>
+			<input type='checkbox' class='checkbox' name='configuration' id='configuration' value='oui' />
+			<:spipproprio:exporter_configuration:>
+		</label>
+	</p>
+	<p class='editer'>
+		<label>
+			<input type='checkbox' class='checkbox' name='languages' id='languages' value='oui' />
+			<:spipproprio:exporter_fichiers_langues:>
+		</label>
+	</p>
+	<span><input type='submit' value='<:spipproprio:bouton_exporter:>' class='fondo' style='float: right' /></span>
+</div></form>
+
+#BOITE_FERMER
+
+#SET{liste,#EVAL{liste_proprio_dump()}}
+[(#GET{liste}|=={0}|non)
+[(#BOITE_OUVRIR{<:spipproprio:outil_importer:>,'simple right'})]
+
+[<p><strong>(#GET{msg_import})</strong></p>]
+
+[(#GET{msg_import}|=={0}|oui)
+[(#BOITE_OUVRIR{#VAL{avis_attention}|_T|wrap{<h4>},'info'})]
+<p>	<:spipproprio:import_avertissement:></p>
+#BOITE_FERMER
+]
+
+<br class="nettoyeur" />
+<form method='get' action='' enctype='multipart/form-data'><div>
+	<input type='hidden' name='exec' value='spip_proprio_tech' />
+	<input type='hidden' name='do_proprio_import' value='oui' />
+	<p class='editer'>
+		<label>
+			<:spipproprio:importer_dump:>
+			<select name='import_archive' id='import_archive'>#GET{liste}</select>
+		</label>
+	</p>
+	<p><small>
+		<:spipproprio:sauvegardes_dans_dump:>
+	</small></p>
+	<span><input type='submit' value='<:spipproprio:bouton_importer:>' class='fondo' style='float: right' /></span>
+</div></form>
+
+#BOITE_FERMER]

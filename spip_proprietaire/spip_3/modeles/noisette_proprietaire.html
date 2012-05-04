@@ -33,8 +33,8 @@
 		][
 		(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_siret}|=={''}|oui)
 			[<:spipproprio:siren:> (#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_siren}|typo)]
-		][<br /><:spipproprio:numero_maj:> <:spipproprio:tva_intracommunautaire:>
-			(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_tvaintra}|typo)[
+		][<br /><:spipproprio:numero_maj:> <:spipproprio:tva_intracommunautaire:> 
+			(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_tvaintra}|typo)[ 
 				(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_siren}|typo)
 			]
 		]
