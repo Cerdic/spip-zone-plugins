@@ -1,0 +1,32 @@
+[(#SET{who,#ENV{who,proprietaire}})]
+[(#SET{proprietaire,#CONFIG{spip_proprietaire}})]
+[<strong>(#GET*{proprietaire}|table_valeur{[(#GET{who})_nom]}|typo)</strong>]
+[<br />(#GET*{proprietaire}|table_valeur{[(#GET{who})_libelle]}|typo)]
+[<br />
+	[(#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_rue]})<br />]
+	[(#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_code_postal]}) ]
+	(#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_ville]})
+	[ - (#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_pays]})]
+]
+[<br />
+	<:spipproprio:tel_abbrev:>: (#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_telephone]}|spip_proprio_isoler_telephone)
+	[ - <:spipproprio:fax_abbrev:>: (#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_telecopie]}|spip_proprio_isoler_telephone)]
+]
+<br />#URL_SITE_SPIP[ - (#GET*{proprietaire}|table_valeur{[(#GET{who})_mail]})]
+[<br />
+	(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_numero]}|typo)
+]
+[<br />(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|=={''}|non)[
+		(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siret]}|=={''}|non)
+			[<:spipproprio:siret_abbrev:> [
+				(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|typo)
+			 ](#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siret]}|typo)]
+		][
+		(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siret]}|=={''}|oui)
+			[<:spipproprio:siren_abbrev:> (#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|typo)]
+		][<br /><:spipproprio:tva_intracommunautaire_abbrev:> 
+			(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_tvaintra]}|typo)[ 
+				(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|typo)
+			]
+		]
+]

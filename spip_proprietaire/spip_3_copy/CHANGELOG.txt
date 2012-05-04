@@ -1,0 +1,51 @@
+Plus d'infos sur ce plugin à l'adresse : 
+http://www.spip-contrib.net/SPIP-Proprio
+
+----------------------------------------
+## Spip Proprio - CHANGELOG ##
+
+version 1.2 -> 1.3
+	(montée en version pour compatibilité avec SPIP 2.1.8, qui nécessite
+	donc la version 1.3 minimum)
+
+20/01/2011 - Commit 43710
+- Correction de l'inclusion des squelettes par la fonction 'recuperer_fond()' qui
+renvoyait une erreur sur SPIP 2.1.8 (les inclusions renvoyaient des pages 404 !)
+=> retrait des premiers slashs dans le chemin des fichiers à récupérer :
+    recuperer_fond("/modeles/noisette_proprietaire", $contexte);
+devient :
+    recuperer_fond("modeles/noisette_proprietaire", $contexte);
+- Après vérification, la correction ne semble pas poser de problème sur les SPIP
+plus anciennes (et pour cause: la fonction devrait toujours être utilisée comme ça!)
+
+14/12/2010 - Commit 42913 et 42914
+Ajout d'une plateforme d'exportation/importation des réglages du plugin d'un
+site à l'autre
+
+20/09/2010 - MISE EN DEV SVN SUR SPIP-ZONE :
+http://zone.spip.org/trac/spip-zone/browser/_plugins_/spip_proprietaire
+
+version 1.1 -> 1.2
+
+22/08/2010 - Revision 1.003
+Ajout du filtre 'propre' au chapeau du squelette de la page de test.
+Ajout des traductions des titres des liens des cartes de visite.
+
+version 1.0 -> 1.1
+
+22/07/2010 - Revision 1.002
+Ajout de squelettes Z-compatibles :
+- "mentions_legales_zpip.html"
+- "test_proprietaire_zpip.html"
+et mise en place d'un squelette de pied de page pour Zpip :
+- "pied-zpip.html"
+
+janvier 2010 - Revision 1.001
+Mise à jour des textes légaux au regard de la mise à jour de la loi en janvier 2010.
+
+version 1.0 - ORIGINALE (2009)
+
+----------------------------------------
+## Spip Proprio - TODO ##
+
+- Reste des problèmes de dimensions sur les images des cartes de visite 
