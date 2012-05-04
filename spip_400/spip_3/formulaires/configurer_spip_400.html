@@ -1,0 +1,38 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	
+<h3 class="titrem"><:spip400:cfg_label_titre:></h3>
+
+<:spip400:cfg_comment_email|propre:>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+
+<ul>
+
+	#SET{name,sender_400}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="sender_400"><:spip400:cfg_label_sender_email:></label>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="text" name="sender_400" id="sender_400" class="text" value="[(#EVAL{_request('sender_400_b')}|sinon{#ENV{sender_400,#EMAIL_WEBMASTER}})]" />
+		&nbsp;<small><a href="[(#SELF|parametre_url{sender_400_b,#EMAIL_WEBMASTER})]" title="<:spip400:email_webmestre_ttl:>"><:spip400:email_webmestre:></a></small>
+	</li>	
+
+	#SET{name,receipt_400}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="receipt_400"><:spip400:cfg_label_receipt_email:></label>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="text" name="receipt_400" id="receipt_400" class="text" value="[(#EVAL{_request('receipt_400_b')}|sinon{#ENV{receipt_400,#EMAIL_WEBMASTER}})]" />
+		&nbsp;<small><a href="[(#SELF|parametre_url{receipt_400_b,#EMAIL_WEBMASTER})]" title="<:spip400:email_webmestre_ttl:>"><:spip400:email_webmestre:></a></small>
+	</li>	
+
+</ul>
+
+<input type="hidden" name="_meta_casier" value="spip_400" />
+<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+
+</div>
+</form>
+</div>

@@ -16,8 +16,8 @@ function formulaires_bug_report_traiter_dist($code_erreur='404', $url=false){
 	include_spip('inc/texte');
 	$sitename = couper($GLOBALS['meta']['nom_site'], 10, '.');
 
-	$sujet = _T('spip_400:report_a_bug_titre_mail', array('code'=>$code_erreur, 'sitename'=>$sitename));
-	$texte = _T('spip_400:report_a_bug_texte_mail', array(
+	$sujet = _T('spip400:report_a_bug_titre_mail', array('code'=>$code_erreur, 'sitename'=>$sitename));
+	$texte = _T('spip400:report_a_bug_texte_mail', array(
 		'code'=>$code_erreur, 'url'=>$url, 'date'=>date('Y/m/d - H:i:s'),
 	));
 
@@ -37,20 +37,20 @@ function formulaires_bug_report_traiter_dist($code_erreur='404', $url=false){
 	if (isset($GLOBALS["visiteur_session"]) && isset($GLOBALS["visiteur_session"]['id_auteur'])) {
 		if ($code_erreur=='401') {
 			$typemail = 'auth';
-			$texte = _T('spip_400:request_auth_texte_mail', array(
+			$texte = _T('spip400:request_auth_texte_mail', array(
 				'code'=>$code_erreur, 'url'=>$url, 'date'=>date('Y/m/d - H:i:s'), 'user' => $GLOBALS["visiteur_session"]['nom'],
 			));
 		}
-		$texte .= "\n\n-- "._T('spip_400:utilisateur_concerne').$GLOBALS["visiteur_session"]['nom'].' ('.$GLOBALS["visiteur_session"]['email'].')';
+		$texte .= "\n\n-- "._T('spip400:utilisateur_concerne').$GLOBALS["visiteur_session"]['nom'].' ('.$GLOBALS["visiteur_session"]['email'].')';
 	}
 
 	// Infos URL complete
-	$texte .= "\n\n-- "._T('spip_400:url_complete')." : ".$url;
+	$texte .= "\n\n-- "._T('spip400:url_complete')." : ".$url;
 	if (isset($_SERVER['HTTP_REFERER']))	
-		$texte .= "\n\n-- "._T('spip_400:referer')." : ".$_SERVER['HTTP_REFERER'];
+		$texte .= "\n\n-- "._T('spip400:referer')." : ".$_SERVER['HTTP_REFERER'];
 	file_get_contents($url);
 	if (isset($http_response_header) && is_array($http_response_header) && count($http_response_header)) {
-		$texte .= "\n\n-- "._T('spip_400:http_headers');
+		$texte .= "\n\n-- "._T('spip400:http_headers');
 		foreach($http_response_header as $var=>$val)
 			$texte .= "\n".' #'.$val;
 		$texte .= "\n---- ";
@@ -63,7 +63,7 @@ function formulaires_bug_report_traiter_dist($code_erreur='404', $url=false){
 			if ($sess_val && strlen($sess_val)>0)
 				$session_str .= "\n".'#'.$sess_var.' => '.$sess_val;
 		}
-		$texte .= "\n\n-- "._T('spip_400:session')."\n"._T('spip_400:session_only_notempty_values').$session_str."\n---- ";
+		$texte .= "\n\n-- "._T('spip400:session')."\n"._T('spip400:session_only_notempty_values').$session_str."\n---- ";
 	}
 
 	// Backtrace PHP
@@ -72,7 +72,7 @@ function formulaires_bug_report_traiter_dist($code_erreur='404', $url=false){
 	$backtrace = @ob_get_contents();
 	@ob_end_clean();
 	if ($backtrace)
-		$texte .= "\n\n-- "._T('spip_400:backtrace')."\n".$backtrace."\n---- ";
+		$texte .= "\n\n-- "._T('spip400:backtrace')."\n".$backtrace."\n---- ";
 
 	// Pied: info site
 	$texte .= "\n\n-- "._T('envoi_via_le_site')
@@ -83,9 +83,9 @@ function formulaires_bug_report_traiter_dist($code_erreur='404', $url=false){
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	if ($envoyer_mail($mail_receipt, $sujet, $texte, $mail_sender, "X-Originating-IP: ".$GLOBALS['ip'])) {
 		if ($typemail=='auth') {
-			$messages['message_ok'] = _T('spip_400:request_auth_message_envoye');
+			$messages['message_ok'] = _T('spip400:request_auth_message_envoye');
 		} else {
-			$messages['message_ok'] = _T('spip_400:report_a_bug_message_envoye');
+			$messages['message_ok'] = _T('spip400:report_a_bug_message_envoye');
 		}
 	} else {
 		$messages['message_erreur'] = _T('pass_erreur_probleme_technique');

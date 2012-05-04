@@ -2,23 +2,29 @@
 #HTTP_HEADER{"Cache-Control: no-store, no-cache, must-revalidate"}
 #HTTP_HEADER{Pragma: no-cache}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
 <head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
 <title><:pass_erreur:> [(#ENV{status,404}) ]- [(#NOM_SITE_SPIP|textebrut)]</title>
-<INCLURE{fond=inc-head}>
+<INCLURE{fond=inclure/head} />
 <meta name="robots" content="none" />
 </head>
-<body class="page_404">
-	<div id="page">
+<body class="pas_surlignable page_404">
+<div class="page">
 
-	[(#REM) Entete de la page + titre du site ]
-	<INCLURE{fond=inc-entete}>
-
-	<div id="conteneur">
-    <div id="contenu">
-
+	<INCLURE{fond=inclure/header} />
+	<INCLURE{fond=inclure/nav,env} />
+	
+	<div class="main">
+		<div class="wrapper">
+		<div class="content" id="content">
         [(#REM) Fil d'Ariane ]
-        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:pass_erreur:> [(#ENV{status,404})]</strong></div>
+        <p class="arbo"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:pass_erreur:> [(#ENV{status,404})]</strong></p>
 
         <div class="cartouche">
         <h1><:pass_erreur:> [(#ENV{status,404})]</h1>
@@ -28,27 +34,16 @@
         [(#REM) Traitement des erreurs ]
         <INCLURE{fond=inclure/inc-erreur}{env}{status=#ENV{status,404}}>
 
-	</div><!--#contenu-->
-	</div><!--#conteneur-->
-
-    [(#REM) Menu de navigation laterale ]
-    <div id="navigation">
-
-        [(#REM) Menu de navigation par rubriques ]
-        <INCLURE{fond=inc-rubriques}>
-		
-		#FORMULAIRE_RECHERCHE
-
-    </div><!--#navigation-->
+		</div><!--.content-->
+		</div><!--.wrapper-->
 	
-	[(#REM) Menu de navigation laterale ]
-	<div id="extra">
-	&nbsp;
-	</div><!--#extra-->
+		<div class="aside">
+			<INCLURE{fond=inclure/navsub} />
+		</div><!--.aside-->
+	</div><!--.main-->
 
-	[(#REM) Pied de page ]
-	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+	<INCLURE{fond=inclure/footer,self=#SELF} />
 
-	</div><!--#page-->
+</div><!--.page-->
 </body>
 </html>

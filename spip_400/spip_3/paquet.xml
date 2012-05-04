@@ -1,0 +1,26 @@
+<paquet
+	prefix="spip_400"
+	categorie="navigation"
+	version="0.22.0"
+	etat="stable"
+	compatibilite="[3.0.0-beta;["
+	logo="stop_32.png"
+	documentation="http://www.spip-contrib.net/?article3884"
+>	
+
+	<nom>SPIP 400</nom>
+	<!-- Gestion des erreurs HTTP (401, 404) pour SPIP -->
+
+	<auteur lien="http://www.spip-contrib.net/PieroWbmstr">Piero Wbmstr</auteur>
+
+	<copyright>2011</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<traduire module="spip400" reference="fr" gestionnaire="salvatore" />
+
+	<utilise nom="z" compatibilite="[1.0.0;[" />
+
+	<chemin path="public" type="public" />
+	<chemin path="" />
+</paquet>
