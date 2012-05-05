@@ -1,3 +1,16 @@
+[(#REM) <!-- Initialisation de l'accordion des textes de l'article --> ]
+<script type="text/javascript" xmlns="http://www.w3.org/1999/html">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		function barrer(){
+			$('.formulaire_commenter_relecture textarea[name=texte_element]').barre_outils('relecture');
+		}
+		barrer();
+		onAjaxLoad(barrer);
+	});
+//]]>
+</script>
+
 <div class="formulaire_spip formulaire_editer formulaire_commenter_relecture formulaire_commmenter_relecture-#ENV{element}">
 	<!-- <br class='bugajaxie' /> -->
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
@@ -10,7 +23,7 @@
 		<ul>
 			<li class="editer editer_#ENV{element}[ (#ENV**{erreurs}|table_valeur{texte_element}|oui) erreur]">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{texte_element})</span>]
-				<textarea name="texte_element" id="texte_element"[ lang="(#LANG)"] rows="20" cols="40">[(#ENV**{texte_element})]</textarea>
+				<textarea readonly="readonly" name="texte_element" id="texte_element"[ lang="(#LANG)"] rows="20" cols="40">[(#ENV**{texte_element})]</textarea>
 		    </li>
 		</ul>
 
