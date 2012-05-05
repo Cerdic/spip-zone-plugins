@@ -1,11 +1,11 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_core_/plugins/breves/lang/
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/popup/spipopup_spip3/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// B
+	// S
 	'spipopup_description' => 'Gestion d\'une fenêtre popup ({fenêtre externe}) unique sous forme de squelette SPIP et aux dimensions réglables pour différents usages.
 
 {{Utilisation de la balise #POPUP }}
