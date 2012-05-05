@@ -102,7 +102,8 @@ function relecture_declarer_tables_objets_sql($tables) {
 
 		// Edition, affichage et recherche
 		'page'					=> '',
-		'url_voir'				=> '',
+		'url_voir' => 'commentaire_edit',
+		'url_edit' => 'commentaire_edit',
 		'editable'				=> 'non',
 		'champs_editables'		=> array(),
 		'rechercher_champs'		=> array(),

@@ -152,4 +152,62 @@ function autoriser_relecture_commenter_dist($faire, $type, $id, $qui, $opt) {
 	return $autoriser;
 }
 
+
+/**
+ * Autorisation de modifier le texte d'une commentaire
+ *
+ * @param object $faire
+ * @param object $type
+ * @param object $id
+ * @param object $qui
+ * @param object $opt
+ * @return
+ */
+function autoriser_commentaire_modifier_dist($faire, $type, $id, $qui, $opt) {
+
+	$autoriser = false;
+
+	// Conditions :
+	// - Seul l'auteur ayant depose le commmentaire peut le modifier
+	// - le commentaire est encore ouvert
+
+	if ($id_commentaire = intval($id)) {
+		$from = 'spip_commentaires';
+		$where = array("id_commentaire=$id_commentaire");
+		$infos = sql_getfetsel('id_emetteur, statut', $from, $where);
+
+		$autoriser =
+			(($qui['id_auteur'] == $infos['id_emetteur'])
+			AND ($infos['statut'] == 'ouvert'));
+	}
+
+	return $autoriser;
+}
+
+
+/**
+ * Autorisation de repondre a un commentaire
+ *
+ * @param object $faire
+ * @param object $type
+ * @param object $id
+ * @param object $qui
+ * @param object $opt
+ * @return
+ */
+function autoriser_commentaire_repondre_dist($faire, $type, $id, $qui, $opt) {
+
+	$autoriser = false;
+
+	// Conditions :
+	// - l'auteur connecte est un des auteurs de l'article
+	// - ou un admin complet ou restreint à la rubrique d'appartenance de l'article (besoin de maintenance)
+	// - le commentaire est encore ouvert
+
+	if ($id_commentaire = intval($id)) {
+	}
+
+	return $autoriser;
+}
+
 ?>

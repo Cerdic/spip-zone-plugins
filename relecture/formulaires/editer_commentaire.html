@@ -8,14 +8,16 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			<li class="editer editer_#ENV{element}[ (#ENV**{erreurs}|table_valeur{texte_element}|oui) erreur]">
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{texte_element})</span>]
-				<textarea readonly="readonly" name="texte_element" id="texte_element"[ lang="(#LANG)"] rows="20" cols="40">[(#ENV**{texte_element})]</textarea>
+			<li class="editer editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui) erreur]">
+				<label for="texte"><:relecture:label_commentaire_texte:></label>
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{texte})</span>]
+				<textarea readonly="readonly" name="texte" id="texte"[ lang="(#LANG)"] rows="20" cols="40">[(#ENV**{texte})]</textarea>
 		    </li>
 		</ul>
 
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
+		<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
 	]
 </div>

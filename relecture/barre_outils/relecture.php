@@ -29,7 +29,8 @@ function barre_outils_relecture(){
 				d = h.textarea.selectionStart;
 				f = h.textarea.selectionEnd;
 				// Creer l'url de la page d'edition du commentaire
-				u = parametre_url('?exec=commentaire_edit', 'debut', d);
+				u = parametre_url('?exec=commentaire_edit', 'id_relecture', 29);
+				u = parametre_url(u, 'debut', d);
 				u = parametre_url(u, 'fin', f);
 				// Appel de la modalbox pour saisir le commentaire
 				// Le retour se fait sur la page en cours

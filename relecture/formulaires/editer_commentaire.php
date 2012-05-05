@@ -6,7 +6,7 @@ include_spip('inc/editer');
 
 function formulaires_editer_commentaire_charger_dist($id_commentaire='oui', $id_relecture, $index_debut, $index_fin, $redirect='') {
 	// Traitement standard de chargement
-	$valeurs = formulaires_editer_objet_charger('commentaire', $id_commentaire, 0, 0, $redirect, 'relectures_edit_config');
+	$valeurs = formulaires_editer_objet_charger('commentaire', $id_commentaire, 0, 0, $redirect, '');
 
 	return $valeurs;
 }

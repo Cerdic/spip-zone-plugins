@@ -1,0 +1,21 @@
+[(#ID_COMMENTAIRE|oui)
+	[(#AUTORISER{modifier, commentaire, #ID_RELECTURE}|sinon_interdire_acces)]
+][(#ID_COMMENTAIRE|non)
+	[(#AUTORISER{commenter, relecture, #ENV{id_relecture}}|sinon_interdire_acces)]
+]
+#SET{redirect, #ENV{redirect}|sinon{#URL_ECRIRE{relecture_comment, id_relecture=#ENV{id_relecture}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+</div>
+
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_{editer_commentaire, #ID_COMMENTAIRE|sinon{oui}, #ENV{id_relecture}, #ENV{index_debut}, #ENV{index_fin}, #GET{redirect}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</div>
