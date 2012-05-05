@@ -1,24 +1,20 @@
 <?php
-// RAPPELS
-// Les textes de cette page peuvent etre rediges avec les raccourcis typo de SPIP
-// !! - Les accents doivent etre code en HTML : é => &eacute;
-// !! - Les apostrophes doivents etre echappees : ' => \'
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.org/tradlang_module/spip400?lang_cible=en
+// ** ne pas modifier le fichier **
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// chiffres //
-// Textes des pages d'erreur HTML
-
-	// 401 //
+	// 4
 	'401_error' => 'You do not have sufficient permissions to access the requested page or document ...',
-	'401_error_comment_notconnected' => '{{Please login below to access ...}}
-
-Access to this page or this document requires to be authorized and identified. If you have permission, please sign in via the form below.',
 	'401_error_comment_connected' => '{{Please contact the webmaster for access ...}}
 
 Access to this page or this document requires to be authorized and identified. It appears that your access rights are not sufficient ...',
+	'401_error_comment_notconnected' => '{{Please login below to access ...}}
 
-	// 404 //
+Access to this page or this document requires to be authorized and identified. If you have permission, please sign in via the form below.',
 	'404_error' => 'The page or document you requested is not found on the site ...',
 	'404_error_comment' => '{{We apologize for this time-cons ...}}
 
@@ -33,46 +29,44 @@ To facilitate your browsing, we recommend the following actions:
 
 Finally, many websites have one or several spaces reserved for their directors or subscribers require login. If you have permission, [click here to access the platform connecting the site|IDs will be required->@ecrire@].',
 
-// B //
+	// B
 	'backtrace' => 'PHP Backtrace',
 
-// C //
-	// Page de CFG
-	'cfg_descr_titre' => 'HTTP 400 Error Management',
-	'cfg_label_titre' => 'Setup of HTTP 400 Error Management',
-	'cfg_descr' => 'Here you can set some options of the "HTTP 400 Error Management" plugin.',
-	'cfg_label_sender_email' => 'Email address of sender reports error',
-	'cfg_label_receipt_email' => 'Email address of recipient reports error',
+	// C
 	'cfg_comment_email' => 'Use the form below to select the email addresses of sender and receiver for error reports ({these reports are sent when the user clicks the button in question - by default, webmaster\'s email is used}).',
+	'cfg_descr' => 'Here you can set some options of the "HTTP 400 Error Management" plugin.',
+	'cfg_descr_titre' => 'HTTP 400 Error Management',
+	'cfg_label_receipt_email' => 'Email address of recipient reports error',
+	'cfg_label_sender_email' => 'Email address of sender reports error',
+	'cfg_label_titre' => 'Setup of HTTP 400 Error Management',
 
-// E //
+	// E
 	'email_webmestre' => 'Webmaster\'s email',
 	'email_webmestre_ttl' => 'Webmaster\'s email auto-insertion',
 
-// H //
+	// H
 	'http_headers' => 'HTTP Headers',
 
-// R //
-	// Bug rapport
+	// R
+	'referer' => 'Referer',
 	'report_a_bug' => 'Incident report',
 	'report_a_bug_comment' => 'You can submit an incident report about the error you are encountering to the webmaster of the site by clicking the button below.',
-	'report_an_authorized_bug_comment' => 'If you think that it is an error or a bad review of your rights, you can submit an incident report to the webmaster of the site by clicking the button below. Information is transmitted automatically (<i>requested page and your username</i>).',
 	'report_a_bug_envoyer' => 'Send report',
 	'report_a_bug_message_envoye' => 'OK - A bug report has been submitted. Thank you.',
-	'report_a_bug_titre_mail' => 'Error report @code@',
 	'report_a_bug_texte_mail' => 'The page "@url@" has returned an error code @code@ at @date@.',
-	'request_auth_texte_mail' => 'User "@user@" asked to be allowed to access the page "@url@" at @date@.',
+	'report_a_bug_titre_mail' => 'Error report @code@',
+	'report_an_authorized_bug_comment' => 'If you think that it is an error or a bad review of your rights, you can submit an incident report to the webmaster of the site by clicking the button below. Information is transmitted automatically (<i>requested page and your username</i>).',
 	'request_auth_message_envoye' => 'OK - Your request has been forwarded. Thank you.',
-	'referer' => 'Referer',
+	'request_auth_texte_mail' => 'User "@user@" asked to be allowed to access the page "@url@" at @date@.',
 
-// S //
-	'spip_400' => 'SPIP 400',
+	// S
 	'session' => 'User session',
 	'session_only_notempty_values' => '(only non-empty values ​​are listed)',
+	'spip_400' => 'SPIP 400',
 
-// U //
+	// U
 	'url_complete' => 'Complete URL',
-	'utilisateur_concerne' => 'User concerned : ',
-
+	'utilisateur_concerne' => 'User concerned : '
 );
+
 ?>
