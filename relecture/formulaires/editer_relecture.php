@@ -6,7 +6,7 @@ include_spip('inc/editer');
 
 function formulaires_editer_relecture_charger_dist($id_relecture='oui', $redirect='') {
 	// Traitement standard de chargement
-	$valeurs = formulaires_editer_objet_charger('relecture', $id_relecture, 0, 0, $redirect, 'relectures_edit_config', $row, $hidden);
+	$valeurs = formulaires_editer_objet_charger('relecture', $id_relecture, 0, 0, $redirect, 'relectures_edit_config');
 
 	// Ouverture d'une relecture sur un article
 	if (($id_relecture == 'oui')

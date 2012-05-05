@@ -1,17 +1,4 @@
-[(#REM) <!-- Initialisation de la barre d'outils de gestion des commentaires --> ]
-<script type="text/javascript" xmlns="http://www.w3.org/1999/html">
-//<![CDATA[
-	jQuery(document).ready(function() {
-		function barrer(){
-			$('.formulaire_commenter_relecture textarea[name=texte_element]').barre_outils('relecture');
-		}
-		barrer();
-		onAjaxLoad(barrer);
-	});
-//]]>
-</script>
-
-<div class="formulaire_spip formulaire_editer formulaire_commenter_relecture formulaire_commmenter_relecture-#ENV{element}">
+<div class="formulaire_spip formulaire_editer formulaire_editer_commentaire formulaire_editer_commentaire-#ENV{id_commentaire, new}">
 	<!-- <br class='bugajaxie' /> -->
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]

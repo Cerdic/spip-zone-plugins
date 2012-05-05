@@ -10,29 +10,30 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function barre_outils_relecture(){
 	$set = new Barre_outils(array(
 		'nameSpace'         => 'relecture',
-		'onShiftEnter'      => array('keepDefault'=>false, 'replaceWith'=>"\n_ "),
-		'onCtrlEnter'       => array('keepDefault'=>false, 'replaceWith'=>"\n\n"),
-		// garder les listes si on appuie sur entree
-		'onEnter'           => array('keepDefault'=>false, 'selectionType'=>'return', 'replaceWith'=>"\n"),
 		'markupSet'         => array(
 			// Inserer un commentaire
 			array(
 				"id"        => 'insercom',
-				"name"      => 'essai',
-				"className" => "outil_insercom",
-				"replaceWith" => "function(h){ return essai(h);}",
-//				"openWith"	=> "[[[",
-//				"closeWith" => "]]]",
+				"name"      => _T('relecture:bouton_inserer_commentaire'),
+				"className" => "outil_inserer",
+				"replaceWith" => "function(h){ return lancer_insertion(h);}",
 				"display"   => true,
 				"selectionType" => "")
 			),
 		'functions'			=> "
-			// essai
-			function essai(h) {
+			// Lancement de l'insertion d'un commentaire a l'emplacement designe
+			function lancer_insertion(h) {
+				// Reserver la selection pour le reinjecter ensuite
 				s = h.selection;
-				alert(h.textarea.selectionStart);
-				alert(h.textarea.selectionEnd);
-				console.log(h);
+				// Recuperer les offsets de debut et fin de la selection
+				d = h.textarea.selectionStart;
+				f = h.textarea.selectionEnd;
+				// Creer l'url de la page d'edition du commentaire
+				u = parametre_url('?exec=commentaire_edit', 'debut', d);
+				u = parametre_url(u, 'fin', f);
+				// Appel de la modalbox pour saisir le commentaire
+				// Le retour se fait sur la page en cours
+				jQuery.modalboxload(u, {onClose: function (dialog) {jQuery('#').ajaxReload();}});
 				return s;
 			}
 			",
@@ -47,7 +48,6 @@ function barre_outils_relecture(){
 }
 
 
-
 /**
  * Definitions des liens entre css et icones
  *
@@ -55,7 +55,8 @@ function barre_outils_relecture(){
  */
 function barre_outils_relecture_icones(){
 	return array(
-		'outil_insercom' => array('spt-v1.png','-10px -226px'), //'intertitre.png'
+		'outil_inserer' => array('inserer_commentaire-16.png',''),
 	);
 }
+
 ?>
