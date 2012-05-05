@@ -81,6 +81,7 @@ où id_traducteur = 1 autre champ de la table auteur, pointant vers un id_auteur 
 		"tel1" => "VARCHAR(50) NOT NULL DEFAULT ''",
 		"tel2" => "VARCHAR(50) DEFAULT NULL",
 		"email" => "TINYTEXT DEFAULT NULL",
+		"site" => "TINYTEXT DEFAULT NULL",		
 		"nom_unite" => "VARCHAR(255) DEFAULT NULL", // basilic, piaf, bouchon...
 		"credit_ouverture" => "INT(5) UNSIGNED NOT NULL DEFAULT '0'", // chiffre : valeur à créditer à tout ouverture de comte. prévoir question : à prélever sur le compte d'un SEL ou corne d'abondance ?
 		"validation_echange" => "INT(5) UNSIGNED NOT NULL DEFAULT '0'", // permettre la validation implicite d'un échange saisi par un membre ? si oui, nombre de jours laissé avant validation automatique, 0 sinon 
@@ -127,6 +128,7 @@ où id_traducteur = 1 autre champ de la table auteur, pointant vers un id_auteur 
 		"tel2_referent" => "VARCHAR(50) DEFAULT NULL",
 		"email_referent" => "TINYTEXT DEFAULT NULL",
 		"statut" => "VARCHAR(10) NOT NULL DEFAULT ''", // pour l'éventuelle gestion d'une modération a priori des annonces
+		// liste des statuts : 0nouvelle, 1annonce_ok, 2annonce_ko, ?? 3perime ?? ce dernier statut pourrait être calculé automatiquement à partir des dates
 		"total_unite" => "INT(5) UNSIGNED NOT NULL DEFAULT '0'",
 		"si_unite_heure" => "SMALLINT(3) UNSIGNED NOT NULL DEFAULT '0'",
 		"total_fiduc" => "INT(5) UNSIGNED NOT NULL DEFAULT '0'",
@@ -310,7 +312,6 @@ function sel_declarer_tables_objets_sql($tables){
 	
 	
     $tables['spip_sels'] = array(
-
         'principale' => "oui",
         'field'=> array(
 			"id_sel" => "BIGINT(21) NOT NULL",
@@ -328,6 +329,7 @@ function sel_declarer_tables_objets_sql($tables){
 			"tel1" => "VARCHAR(50) NOT NULL DEFAULT ''",
 			"tel2" => "VARCHAR(50) DEFAULT NULL",
 			"email" => "TINYTEXT DEFAULT NULL",
+			"site" => "TINYTEXT DEFAULT NULL",	
 			"nom_unite" => "VARCHAR(255) DEFAULT NULL", // basilic, piaf, bouchon...
 			"credit_ouverture" => "INT(5) UNSIGNED NOT NULL DEFAULT '0'", // chiffre : valeur à créditer à tout ouverture de comte. prévoir question : à prélever sur le compte d'un SEL ou corne d'abondance ?
 			"validation_echange" => "INT(5) UNSIGNED NOT NULL DEFAULT '0'", // permettre la validation implicite d'un échange saisi par un membre ? si oui, nombre de jours laissé avant validation automatique, 0 sinon 
@@ -344,12 +346,14 @@ function sel_declarer_tables_objets_sql($tables){
 			Exemple de chaîne générée : pourcntactf01, ou forfaittous01
 			4. A prévoir en plus : sur les comptes positifs uniquement
 			*/	
-			
         ),
         'key' => array(
 			"PRIMARY KEY" => "id_sel",
 			"KEY" => "nom"
         ),
+		'rechercher_champs' => array(
+            'nom' => 8, 'ville' => 2, 'nom_unite' => 2
+		),
     );
 	
 	
@@ -379,6 +383,7 @@ function sel_declarer_tables_objets_sql($tables){
 			"tel2_referent" => "VARCHAR(50) DEFAULT NULL",
 			"email_referent" => "TINYTEXT DEFAULT NULL",
 			"statut" => "VARCHAR(10) NOT NULL DEFAULT ''", // pour l'éventuelle gestion d'une modération a priori des annonces
+			// liste des statuts : 0nouvelle, 1annonce_ok, 2annonce_ko, ?? 3perime ?? ce dernier statut pourrait être calculé automatiquement à partir des dates
 			"total_unite" => "INT(5) UNSIGNED NOT NULL DEFAULT '0'",
 			"si_unite_heure" => "SMALLINT(3) UNSIGNED NOT NULL DEFAULT '0'",
 			"total_fiduc" => "INT(5) UNSIGNED NOT NULL DEFAULT '0'",
@@ -391,6 +396,9 @@ function sel_declarer_tables_objets_sql($tables){
 			"KEY" => "id_auteur",
 			"KEY" => "date_debut"
         ),
+		'rechercher_champs' => array(
+            'titre' => 8, 'nature' => 1, 'direction_echange' => 1, 'description' => 1, 'ville' => 1, 
+		),
     );
 	
 

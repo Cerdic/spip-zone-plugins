@@ -18,10 +18,12 @@
 		//A
 		'acces'					=> 'Niveau d\'accès',
 		'acces_insuffisant_explication' => 'Vous ne disposez pas du niveau d\'accès nécessaire pour consulter ces informations',
+		'accueil'				=> 'Accueil',
 		'admin_moderer_utilisateurs'=>'Certifier - refuser des utilisateurs',
 		'admin_voir_utilisateurs'=>'Voir et exporter la liste des utilisateurs',
 		'adresse_annonce'			=> 'Adresse de cette annonce',
 		'adresse_annonce_explications'=>'Si cette adresse est différente de celle qui figure sur votre fiche, merci de la préciser ci-dessous.',
+		'adresse_annonce_explications2'=>'Si cette adresse est différente de celle qui figure sur la fiche de l\'auteur de l\'annonce, merci de la préciser ci-dessous.',
 		'ajout_sel'				=> 'Ajouter un sel',
 		'avatar'				=> 'Avatar',
 	 
@@ -76,6 +78,8 @@
 		'entree_code_postal' => 'Votre code postal',
 		'entree_code_postal_2' => 'Code postal',
 		'entree_commentaires' => 'Commentaires',
+		'entree_date_debut_annonce'=>'Date début (JJ/MM/AAAA)',
+		'entree_date_fin_annonce'=>'Date fin (JJ/MM/AAAA)',
 		'entree_demande'		=> 'Demande',
 		'entree_description_annonce'=>'Description de votre annonce',
 		'entree_description_annonce2'=>'Description de l\'annonce',
@@ -122,7 +126,7 @@
 		//F
 		'fiche'			=> 'Fiche',
 		'fiche_utilisateur'=>'Fiche utilisateur',
-		'frais_annonce_explications'=>'Les montants en monnaie fiduciaire correspondent à des participations à des frais réels. Ceux-ci sont détaillés en nature : location de matériel extérieur, nourriture, par exemple. Indiquer les totaux uniquement (nombres entiers). Si le montant en euros est différent de 0, le champ des précisions devient obligatoire.',
+		'frais_annonce_explications'=>'Les montants en monnaie fiduciaire correspondent à des participations à des frais réels. Ceux-ci sont détaillés en nature : location de matériel extérieur, nourriture, par exemple. Indiquer les totaux uniquement (nombres entiers). Si le montant en euros est différent de 0, le champ commentaires devient obligatoire.',
 		'form_login'	=> 'Login ou e-mail',
 		'form_passe'		=> 'Mot de passe',
 		'formerr'		=> 'Votre saisie contient des erreurs !',
@@ -162,7 +166,8 @@
 		'mes_annonces'		=> 'Mes annonces',
 		'modifier_donnees'	=> 'Modifier mes données',
 		'modifier_statut'	=> 'Modifier le statut',
-		
+		'msgerr_mise_a_jour_acces_auteur'=>'Un problème est survenu pendant la prise en compte de votre avatar',
+		'msgok_mise_a_jour_acces_auteur'=> 'Nouvel avatar pris en compte !',		
 		
 		//N
 		'nom'				=> 'Nom',
@@ -173,6 +178,7 @@
 
 		
 		//P
+		'page'		=>'Page',
 		'pays_albanie'=>'Albanie',
 		'pays_algerie'=>'Algérie',
 		'pays_allemagne'=>'Allemagne',
@@ -274,7 +280,7 @@
 		à l\'aide du premier champ date de début, et s\'il s\'agit de la programmation d\'un échange collectif (un stage par exemple), ajoutez-lui une date de fin de façon à ce que l\'annonce soit considéré comme étant "à dates fixes".',
 		'visites'			=> 'Visites depuis le lancement du catalogue',
 		'voir_fiche'		=> 'Voir la fiche',
-		'vous_etes_correspondant'=>'Vous êtes correspondant-e au titre de votre / vos SEL(s), cliquez ici :'
-		
+		'vous_etes_correspondant'=>'Vous êtes correspondant-e au titre de votre / vos SEL(s), cliquez ici :',
+		'vous_organisez_echange_collectif'	=> 'Vous organisez un échange collectif (stage, ballade...), cliquez ici',
      );
 ?>
