@@ -227,16 +227,18 @@ Parameter {typ}, ktorý je uvedený vyššie, môže mať tri hodnoty:
 	'decoration:nom' => 'Decoration',
 	'decoupe:aide' => 'Blok kariet: <b><onglets></onglets></b><br/>Oddeľovač stránok alebo kariet: @sep@',
 	'decoupe:aide2' => 'Alias: @sep@',
-	'decoupe:description' => '@puce@ Divides the display of an article into pages using automatic page numbering. Simply place four consecutive + signes (<code>++++</code>) where you wish a page break to occur.
+	'decoupe:description' => '@puce@ Rozdelí článok na strany, ktoré budú automaticky očíslované. 
+Tam, kde chcete, aby bol zlom strany, jednoducho zadajte štyri znaky + za sebou (<code>++++</code>).
 
-By default, the Penknife inserts the pagination links at the top and bottom of the page. But you can place the links elsewhere in your template by using the #CS_DECOUPE tag, which you can activate here:
+Podľa predvolených nastavení modul Vreckový nožík umiestni odkazy na stránkovanie na vrchnú a spodnú časť strany. Vy však môžete dať v šablóne odkazy aj inde pomocou tagu #CS_DECOUPE, ktorý aktivujete tu:
 [[%balise_decoupe%]]
 
-@puce@ If you use this separator between  <onglets> and </onglets> tags, then you will receive a tabbed page instead.
+@puce@ Ak použijete tento oddeľovač medzi  tagmi <onglets> a </onglets>, potom namiesto toho vytvoríte stránku s kartami.
 
-In templates you can use the tags #ONGLETS_DEBUT, #ONGLETS_TITRE and #ONGLETS_FIN.
+V šablónach môžete používať tagy
+#ONGLETS_DEBUT, #ONGLETS_TITRE a #ONGLETS_FIN.
 
-This tool may be combined with "[.->sommaire]".', # MODIF
+Tento nástroj môžete spojiť s nástrojom "[zhrnutie.->sommaire]".',
 	'decoupe:nom' => 'Division in pages and tabs',
 	'desactiver_flash:description' => 'Deletes the flash objects from your site and replaces them by the associated alternative content.',
 	'desactiver_flash:nom' => 'Deactivate flash objects',
@@ -283,17 +285,17 @@ This tool may be combined with "[.->sommaire]".', # MODIF
 	'ecran_maj_ko' => 'K dispozícii je verzia {{@n@}} bezpečnostnej obrazovky. Prosím, aktualizujte vzdialený súbor tejto utility.',
 	'ecran_maj_ko2' => 'K dispozícii je verzia @n@ bezpečnostnej obrazovky. Môžete aktualizovať vzdialený súbor " [.->ecran_securite] ".',
 	'ecran_maj_ok' => '(zdá sa, že je aktuálny).',
-	'ecran_securite:description' => 'The security screen is a PHP file directly downloaded from the official SPIP site which protects your sites by blocking certain attacks aimed at specific security flaws. This system allows you to react very quickly whenever a problem is discovered, by covering up for such flaws without needing to immediately update your site nor apply any complex patches.
+	'ecran_securite:description' => 'Bezpečnostná obrazovka je súbor PHP priamo stiahnutý z oficiálnej stránky SPIPu, ktorý chráni vaše stránky tým, že blokuje niektoré útoky zamerané na určité chyby v zabezpečení. Tento systém vám umožňuje veľmi rýchlo zareagovať vždy, ak sa objaví problém ochranou systému pri týchto chybách bez toho, aby ste museli okamžite aktualizovať svoju stránku alebo použiť zložité záplaty.
 
-Important note: the screen locks down certain variables. For example, the variables named as <code>id_xxx</code> are all checked as being whole integer numbers in order to avoid SQL code injections via this very common URL variable. Certain plugins are not compatible with all of the rules imposed by this screen, including those that might use a syntax like  <code>&id_x=new</code> to create a new object {x}.
+Dôležitá poznámka: obrazovka zamkne niektoré premenné. Napríklad všetky premenné s názvom <code>id_xxx</code> sú nastavené ako celé nezáporné čísla, aby sa zabránilo injekciám do SQL kódu cez túto veľmi bežnú premennú internetovej adresy. Niektorým zásuvným modulom nevyhovujú všetky pravidlá, ktoré zaviedla táto obrazovka vrátane tých, ktoré musia na vytvorenie nového objektu {x} používať syntax, ako napríklad  <code>&id_x=new.</code>
 
-In addition to the security, this screen has a configurable ability to restrict access by indexing robots to the PHP scripts, in such a way as to indicate that they should " come back later " whenever the server is currently saturated.[[ %ecran_actif%]][[->
-@puce@ Adjust the anti-robot protection when the server load exceeds the value: %ecran_load%
-_ {The default value is 4. Assign a value of 0 to deactivate this process.}@_ECRAN_CONFLIT@]]
+Okrem zabezpečenia môže mať táto obrazovka nastavenú možnosť zakázať prístup indexovacím robotom do skriptov PHP, ak je server zaťažený, a to tak, že im povie, aby sa prišli neskôr.[[ %ecran_actif%]][[->
+@puce@ Upravte ochranu proti robotom vždy, keď nahrávanie na serveri prekročí hodnotu: %ecran_load%
+_ {Predvolená hodnota je 4. Ak chcete tento proces deaktivovať, nastavte hodnotu na 0.}@_ECRAN_CONFLIT@]]
 
-When making an official update, update the associated remote file (click above on [update]) to take advantage of the most recent protective measures.
+Pri oficiálnej aktualizácii aktualizujte prepojený vzdialený súbor (kliknite hore na [aktualizovať]) a využívajte najnovšie ochranné prvky.
 
-- Local file version: ', # NEW
+- Verzia lokálneho súboru: ',
 	'ecran_securite:nom' => 'Bezpečnostná obrazovka',
 	'effaces' => 'Deleted',
 	'en_travaux:description' => 'Počas údržby umožňuje zobraziť vlastnú správu na každej verejne prístupnej stránke, prípadne v súkromnej zóne.',
@@ -313,31 +315,31 @@ When making an official update, update the associated remote file (click above o
 	'etendu' => 'Expanded',
 
 	// F
-	'f_jQuery:description' => 'Prevents the installation of {jQuery} on the public site in order to economise some "machine resources". The jQuery library ([->http://jquery.com/]) is useful in Javascript programming and many plugins use it. SPIP uses it in the editing interface.
+	'f_jQuery:description' => 'Bráni inštalácii {jQuery} na verejne prístupnú stránku, aby sa hospodárne využili "možnosti stroja". Knižnica jQuery ([->http://jquery.com/]) je užitočná pri programovaní pomocou Javascriptu a veľa zásuvných modulov ju aj využíva. SPIP ju využíva v rozhraní úprav. 
 
-N.B: some Penknife tools require {jQuery} to be installed. ', # MODIF
+Pozor: Niektoré nástroje modulu Vreckový nožík si vyžadujú, aby bol {jQuery} nainštalovaný.',
 	'f_jQuery:nom' => 'Deactivate jQuery',
 	'filets_sep:aide' => 'Oddeľovacie čiary: <b>__i__</b> alebo <b>i</b> je číslo.<br />Iné dostupné čiary: @liste@',
 	'filets_sep:description' => 'Vloží oddeľujúce čiary do hocijakého textu v SPIPe, čo sa dá prispôsobiť v súbore so štýlom.
 _ Syntax je: "__code__", ke "code" je buď identifikačné číslo (od 0 do 7) čiary, ktorú chcete vložiť a ktorá je prepojená s príslušným štýlom, alebo názov obrázka v priečinku plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'Dividing lines',
-	'filtrer_javascript:description' => 'Three modes are available for controlling JavaScript inserted directly in the text of articles:
-- <i>never</i>: JavaScript is prohibited everywhere
-- <i>default</i>: the presence of Javascript is highlighted in red in the editing interface
-- <i>always</i>: JavaScript is always accepted.
+	'filtrer_javascript:description' => 'Na ovládanie JavaScriptu, ktorý sa vkladá priamo do textu článkov sú k dispozícii tri možnosti:
+- <i>nikdy:</i> JavaScript je všade zakázaný, 
+- <i>predvolené:</i> v rozhraní na úpravy je Javascript zvýraznený červenou farbou,
+- <i>vždy:</i> JavaScript je vždy akceptovaný.
 
-N.B.: in forums, petitions, RSS feeds, etc., JavaScript is <b>always</b> made secure.[[%radio_filtrer_javascript3%]]', # MODIF
+Pozor: v diskusných fórach, petíciách, kanáloch RSS atď. je JavaScript  <b>vždy</b> zabezpečený tak, aby sa predišlo škodám.[[%radio_filtrer_javascript3%]]',
 	'filtrer_javascript:nom' => 'Riadenie JavaScriptu',
 	'flock:description' => 'Deactivates the file-locking system which uses the PHP {flock()} function. Some web-hoting environments are unable to work with this function. Do not activate this tool if your site is functioning normally.',
 	'flock:nom' => 'Súbory nie sú zamknuté',
 	'fonds' => 'Pozadia:',
-	'forcer_langue:description' => 'Forces the language context for multiligual templates which have a language menu able to manage the language cookie.
+	'forcer_langue:description' => 'Vynúti si kontext jazyka pre viacjazyčné šablóny, ktoré majú viacjazyčné menu s možnosťou riadiť jazykovú cookie.
 
-Technically, this tool does this:
-- deactivates the choice of template according to the object\'s language.
-- deactivates the automatic <code>{lang_select}</code> criterion on SPIP objects (articles, news items, sections, etc.).
+Technicky tento nástroj môže robiť toto:
+- deaktivuje výber šablóny podľa jazyku objektu,
+- deaktivuje automatické kritérium <code>{lang_select}</code> pre bežné objekty (články, novinky, rubriky, atď.).
 
-Thus multi blocks are always displayed in the language requested by the visitor.', # MODIF
+Takto sa multibloky vždy zobrazia v jazyku podľa požiadavky návštevníka.',
 	'forcer_langue:nom' => 'Nanútiť jazyk',
 	'format_spip' => 'Články vo formáte SPIPU',
 	'forum_lgrmaxi:description' => 'By default forum messages are not limited in size. If this tool is activated, an error message is shown each time someone tries to post a message larger than the size given, and the message is refused. An empty value (or 0) means that no limit will be imposed.[[%forum_lgrmaxi%]]',
@@ -391,12 +393,12 @@ Ak chcete toto logo nastaviť, choďte na "Konfiguráciu stránky" kliknutím na
 	'introduction:nom' => 'Tag #INTRODUCTION',
 
 	// J
-	'jcorner:description' => '"Pretty Corners" is a tool which makes it easy to change the appearance of the corners of {{coloured boxes}} on the public pages of your site. Almost anything is possible!
-_ See this page for examples: [->http://www.malsup.com/jquery/corner/].
+	'jcorner:description' => '"Zaoblené rohy" je nástroj, ktorý uľahčuje zmenu vzhľadu rohov {{farebných textových polí}} na verejne prístupných stránkach vášho webu. Možné je takmer čokoľvek!
+_ Príklady nájdete na tejto stránke: [->http://www.malsup.com/jquery/corner/].
 
-Make a list below of the elements in your templates which are to be rounded. Use CSS syntax (.class, #id, etc. ). Use the sign " = " to specify the jQuery command to apply, and a double slash (" // ") for comments. If no equals sign is provided, rounded corners equivalent to  <code>.ma_classe = .corner()</code> will be applied.[[%jcorner_classes%]]
+Vytvorte zoznam objektov v svojich šablónach, ktoré majú byť zaoblené. Použite syntax CSS  (.class, #id, atď.). Na použitie  príkazu jQuery použite znak " = "  a na komentáre dve lomky (" // "). Ak nezadáte žiaden znak rovná sa, použije sa ekvivalent k zaobleným rohom  <code>.ma_classe = .corner().</code> [[%jcorner_classes%]]
 
-N.B. This tool requires the {Round Corners} jQuery plugin in order to function. The Penknife can install it automatically if you check this box. [[%jcorner_plugin%]]', # MODIF
+Pozor! Na to, aby fungoval, tento nástroj potrebuje  zásuvný modul {Zaoblené rohy} typu jQuery. Ak zaškrtnete toto pole, modul Vreckový nožík ho môže nainštalovať automaticky.[[%jcorner_plugin%]]',
 	'jcorner:nom' => 'Pekné rohy',
 	'jcorner_plugin' => '" Round Corners plugin "',
 	'jq_localScroll' => 'jQuery.LocalScroll ([demo->http://demos.flesler.com/jquery/localScroll/])',
@@ -508,21 +510,21 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:webmestres' => 'Zoznam webmasterov:',
 	'liens_en_clair:description' => 'Makes the filter: \'liens_en_clair\' available to you. Your text probably contains hyperlinks which are not visible when the page is printed. This filter adds the link code between square brackets for every clickabel link (external links and email addresses). N.B: in printing mode (when using the parameter \'cs=print\' or \'page=print\' in the URL), this treatment is automatically applied.',
 	'liens_en_clair:nom' => 'Viditeľné odkazy',
-	'liens_orphelins:description' => 'This tool has two functions:
+	'liens_orphelins:description' => 'Tento nástroj má dve funkcie:
 
-@puce@ {{Correct Links}}.
+@puce@ {{Správne odkazy.}}
 
-In French texts, SPIP follows the rules of French typography and inserts a space before question and exclamation marks. This tool prevents this from happening in URLs.[[%liens_interrogation%]]
+Vo francúzskych textoch SPIP dodržiava pravidlá francúzskej typografie a vloží medzeru pred otázniky a výkričníky. Tento nástroj zabráni, aby sa to stávalo v internetových adresách.[[%liens_interrogation%]]
 
-@puce@ {{Orphan links}}.
+@puce@ {{Osamotené odkazy.}}
 
-Systematically replaces all URLs which authors have placed in texts (especially often in forums) and which are thus not clickable, by links in the SPIP format. For example, {<html>www.spip.net</html>} will be replaced by: [->www.spip.net].
+Systematicky nahradí všetky internetové adresy, ktoré autori vložili do textov (obzvlášť často v diskusných fórach) a na ktoré sa nedá kliknúť odkazmi vo formáte SPIPu. Napríklad {<html>www.spip.net</html>} bude nahradený odkazom: [->www.spip.net].
 
-You can choose the manner of replacement:
-_ • {Basic}: links such as {<html>http://spip.net</html>} (whatever protocol) and {<html>www.spip.net</html>} are replaced.
-_ • {Extended}: additionally links such as these are also replaced:  {<html>me@spip.net</html>}, {<html>mailto:myaddress</html>} ou {<html>news:mynews</html>}.
-_ • {By default}: automatic replacement (from SPIP version 2.0).
-[[%liens_orphelins%]]', # MODIF
+Môžete si vybrať spôsob nahradenia:
+_ • {základný:} odkazy, ako {<html>http://spip.net</html>} (akýkoľvek protokol) a {<html>www.spip.net</html>} budú nahradené.
+_ • {rozšírený:} okrem toho takéto odkazy budú nahradené tiež: {<html>me@spip.net</html>,} {<html>mailto:myaddress</html>} alebo {<html>news:mynews</html>}.
+_ • {predvolený:} automatické nahrádzanie (od verzie 2.0).
+[[%liens_orphelins%]]',
 	'liens_orphelins:description1' => '[[Ak má internetová adresa viac ako %long_url% znakov, SPIP ju zmenší na %coupe_url% znakov]].',
 	'liens_orphelins:nom' => 'Pekné www adresy',
 
@@ -591,11 +593,11 @@ Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère
 	'pack_actuel_titre' => 'AKTUÁLNY BALÍK S NASTAVENIAMI MODULU VRECKOVÝ NOŽÍK',
 	'pack_alt' => 'See the current configuration parameters',
 	'pack_delete' => 'Vymazanie balíka s nastaveniami',
-	'pack_descrip' => 'Your "Current configuration pack" brings together all the parameters activated for the Penknife plugin. It remembers both whether a tool is activated or not and, if so, what options have been chosen.
+	'pack_descrip' => 'Váš "Balík s aktuálnymi nastaveniami" spája všetky parametre aktivované pre zásuvný modul Vreckový nožík. Pamätá si, či bol nástroj aktivovaný, alebo nie a ak bol, aké možnosti ste si vybrali.
 
-This PHP code may be placed in the /config/mes_options.php file. It will place a reset link on the page of the "pack {@pack@}". Of course, you can change its name below.
+Tento kód PHP môžete uložiť do súboru /config/mes_options.php. Na stránku "balíka {@pack@}" umiestni odkaz na obnovenie. Samozrejme, jeho názov môžete zmeniť nižšie.
 
-If you reset the plugin by clicking on a pack, the Penknife will reconfigure itself according to the values defined in that pack.', # MODIF
+Ak zásuvný modul obnovíte kliknutím na balík, modul Vreckový nožík sa sám nastaví podľa hodnôt definovaných v tomto balíku.',
 	'pack_du' => '• of the pack @pack@',
 	'pack_installe' => 'Inštalácia balíka s nastaveniami',
 	'pack_installer' => 'Are you sure you want to re-initialise the Penknife and install the « @pack@ » pack?',
@@ -620,7 +622,9 @@ If you reset the plugin by clicking on a pack, the Penknife will reconfigure its
 	'previsualisation:nom' => 'Zobrazujú sa články',
 	'puceSPIP' => 'Povoliť klávesové skratky "*"',
 	'puceSPIP_aide' => 'Odrážka SPIPU: <b>*</b>',
-	'pucesli:description' => 'Replaces bullets «-» (simple dash) in articles with ordered lists «-*» (transformed into  &lt;ul>&lt;li>…&lt;/li>&lt;/ul> in HTML) whose style may be customised using CSS.', # MODIF
+	'pucesli:description' => 'Z odrážok "-" (spojovník) v článkoch vytvorí číslované zoznamy "-*" (zmenia sa na  &lt;ul>&lt;li>…&lt;/li>&lt;/ul> v HTML), ktorých štýl  môžete upraviť pomocou CSS.
+
+Na to, aby ostal zachovaný prístup k pôvodnému obrázku odrážky SPIPu (malý trojuholník), redaktorom sa môže začiatku riadka "*" ponúknuť nová skratka: [[%puceSPIP%]]',
 	'pucesli:nom' => 'Pekné odrážky',
 
 	// Q
@@ -702,13 +706,13 @@ _ Example:~{<html>\\"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/\\"</html>}.</q1>
 @puce@ If the #CACHE tag is not found in a template then by default SPIP caches a page for 24 hours before recalculating it. You can modify this default here.[[%duree_cache% heures]]
 
 @puce@ If you are running several mutualised sites, you can specify here the default value for all the local sites (SPIP 2.0 mini).[[%duree_cache_mutu% heures]]', # MODIF
-	'spip_cache:description1' => '@puce@ By default, SPIP calculates all the public pages and caches them in order to accelerate their display. It can be useful, when developing the site to disable the cache temporarily, in order to see the effect of changes immediately.@_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]', # MODIF
+	'spip_cache:description1' => '@puce@ Podľa predvolených nastavení SPIP registruje všetky verejne prístupné stránky a ukladá ich do cache, aby sa potom rýchlejšie načítali. Dočasné deaktivovanie cache môže pomôcť pri vývoji stránky. [[%radio_desactive_cache3%]]',
 	'spip_cache:description2' => '@puce@ Four options to configure the cache: <q1>
 _ • {Normal usage}: SPIP places all the calculated pages of the public site in the cache in order to speed up their delivery. After a certain time the cache is recalculated and stored again.
 _ • {Permanent cache}: the cache is never recalculated (time limits in the templates are ignored).
 _ • {No cache}: temporarily deactivating the cache can be useful when the site is being developed. With this option, nothing is cached on disk.
 _ • {Cache checking}: similar to the preceding option. However, all results are written to disk in order to be able to check them.</q1>[[%radio_desactive_cache4%]]', # MODIF
-	'spip_cache:description3' => '@puce@ The "Compresser" extension available in SPIP is used to compress the various CSS and JavaScript code sections of your pages and insert them in a static cache file. This speeds up the display of your site, and limits both the number of calls made to the server and the size of the files that need to be retrieved.', # NEW
+	'spip_cache:description3' => '@puce@ Rozšírenie "Compresser" dostupné v SPIPe umožňuje skomprimovať rôzne prvky CSS a JavaScript z vašich stránok a uložiť ich do statickej cache. Tak sa zrýchli zobrazenie stránky a obmedzí sa počet požiadaviek na server, ako aj výsledná veľkosť súborov.',
 	'spip_cache:nom' => 'SPIP and the cache',
 	'spip_ecran:description' => 'Nastaví šírku obrazovky pre každého v súkromnej zóne. Úzka obrazovka zobrazí dva stĺpce a široká obrazovka zobrazí tri. Predvolené nastavenia nechávajú používateľa, aby sa rozhodol sám, čo sa uloží v cookie prehliadača.[[%spip_ecran%]]',
 	'spip_ecran:nom' => 'Šírka obrazovky',
@@ -816,20 +820,20 @@ _ Example : <code>article.php3?id_article=123</code>
 
 @puce@ If you are using the type  {page} described above or if the object requested is not recognised, you can choose the calling script for SPIP. By default, SPIP uses {spip.php}, but {index.php} (format: <code>/index.php?article123</code>) or an empty value (format: <code>/?article123</code>) are also possible. To use any other value, you need to create the corresponding file at the root of your site with the same contents as in the file {index.php}.
 [[%spip_script%]]', # MODIF
-	'type_urls:description1' => '@puce@ If you are using a format based on URLs «propres» ({propres}, {propres2}, {libres}, {arborescentes} ou {propres_qs}), the Penknife can:
-<q1>• make sure the URL is in {{lower case}}.</q1>[[%urls_minuscules%]]
-<q1>• systematically add the {{ID of the object}} to the URL (as a suffix, prefix, etc.).
-_ (examples: <code>/My-article-title,457</code> or <code>/457-My-article-title</code>)</q1>', # MODIF
+	'type_urls:description1' => '@puce@ Ak používate internetové adresy (URL) založené na určitom formáte, napríklad  "pekné" ({propres}, {propres2}, {voľné}, {stromovité} alebo {propres_qs}), modul Vreckový nožík môže:
+<q1>• skontrolovať, či je celá internetová adresa zapísaná {{malými písmenami.}}</q1>[[%urls_minuscules%]]
+<q1>• systematicky pridávať {{ID objektu}} k internetovej adrese (ako príponu, predponu, atď.).
+_ (Príklady: <code>/Nadpis-mojho-clanku,457</code> alebo <code>/457-Nadpis-mojho-clanku</code>)</q1>',
 	'type_urls:nom' => 'Formát www adries',
-	'typo_exposants:description' => '{{Text in French}}: improves the typographical rendering of common abbreviations by adding superscript where necessary (thus, {<acronym>Mme</acronym>} becomes {M<sup>me</sup>}). Common errors corrected:  ({<acronym>2ème</acronym>} and  {<acronym>2me</acronym>}, for example, become {2<sup>e</sup>}, the only correct abbreviation).
+	'typo_exposants:description' => '{{Text vo francúzštine:}} vylepšuje typografické spracovanie bežných skratiek pridaním horného indexu tam, kde je to potrebné (takto sa z {<acronym>Mme</acronym>} stane {M<sup>me</sup>}). Opravuje bežné chyby:  (z {<acronym>2ème</acronym>} a  {<acronym>2me</acronym>,} sa napríklad stane {2<sup>e</sup>,} jediná správna skratka).
 
-The rendered abbreviations correspond to those of the Imprimerie nationale given in the {Lexique des règles typographiques en usage à l\'Imprimerie nationale} (article « Abréviations », Presses de l\'Imprimerie nationale, Paris, 2002).
+Spracúvané skratky sa zhodujú s Imprimerie nationale uvedenými v {Lexique des règles typographiques en usage à l\'Imprimerie nationale} (článok "Skratky", Presses de l\'Imprimerie nationale, Paríž, 2002).
 
-The following expressions are also handled: <html>Dr, Pr, Mgr, St, Bx, m2, m3, Mn, Md, Sté, Éts, Vve, bd, Cie, 1o, 2o, etc.</html>
+Spracúvajú sa aj tieto výrazy: <html>Dr, Pr, Mgr, St, Bx, m2, m3, Mn, Md, Sté, Éts, Vve, bd, Cie, 1o, 2o, etc.</html>
 
-You can also choose here to use superscript for some other abbreviations, despite the negative opinion of the Imprimerie nationale:[[%expo_bofbof%]]
+Tu sa môžete rozhodnúť, že pri písaní niektorých ďalších skratiek budete používať horný index napriek tomu, že Imprimerie nationale má k tomu zamietavé stanovisko:[[%expo_bofbof%]]
 
-{{English text}}: the suffixes of ordinal numbers are placed in superscript: <html>1st, 2nd</html>, etc.', # MODIF
+{{Anglický text:}} prípony radových čísloviek budú automaticky zapísané horným indexom: <html>1st, 2nd,</html> atď.',
 	'typo_exposants:nom' => 'Horný index',
 
 	// U
