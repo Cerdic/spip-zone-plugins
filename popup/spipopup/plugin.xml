@@ -2,15 +2,15 @@
 	<nom>Balise &#035;POPUP</nom>
 	<slogan>Gestion d'une fen&#234;tre popup unique</slogan>
 	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
-	<version>1.3.0</version>
+	<version>1.31.0</version>
 	<licence>&#169; 2010-2011 GPL</licence>
 	<icon>images/popup-128.png</icon>
-	<etat>dev</etat>
+	<etat>stable</etat>
 	<lien>http://www.spip-contrib.net/?article3573</lien>
 	<description>
 Ce plugin permet de g&#233;rer d'une fen&#234;tre popup ({fen&#234;tre externe}) unique sous forme de squelette SPIP et aux dimensions r&#233;glables pour diff&#233;rents usages.
 
--* {{Utilisation dans un squelette :}}<code><a href="#POPUP{objet SPIP,squelette,width,height,titre}">texte du lien</a></code>
+-* {{Utilisation dans un squelette :}}<code><a href="#POPUP{objet SPIP,squelette,width,height,titre,options}">texte du lien</a></code>
 -* {{Utilisation dans un article :}}<code>
 <popup
 	|texte=le texte du lien (necessaire)
@@ -19,6 +19,7 @@ Ce plugin permet de g&#233;rer d'une fen&#234;tre popup ({fen&#234;tre externe})
 	|width=XX (option)
 	|height=XX (option)
 	|titre=mon titre (option)
+	|options=liste d'options (option - type 'variable:valeur,...')
 >
 </code>
 
@@ -26,6 +27,7 @@ Ce plugin permet de g&#233;rer d'une fen&#234;tre popup ({fen&#234;tre externe})
 	</description>
 	<options>spipopup_options.php</options>
 	<options>spipopup_fonctions.php</options>
+	<traduire gestionnaire="salvatore" module="spipopup" reference="fr" />
 	<prefix>spipopup</prefix>
 	<chemin dir='' />
 	<pipeline>
