@@ -17,5 +17,4 @@
 
 	<traduire module="tipafriend" reference="fr" gestionnaire="salvatore" />
 
-	<utilise nom="cfg" compatibilite="[1.0;[" />
 </paquet>
