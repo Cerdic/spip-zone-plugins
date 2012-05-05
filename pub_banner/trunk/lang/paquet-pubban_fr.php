@@ -1,18 +1,11 @@
 <?php
-
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-
-///  Fichier produit par PlugOnet
-// Module: paquet-pubban
-// Langue: fr
-// Date: 01-05-2012 17:52:23
-// Items: 2
-
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/pub_banner/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// P
+	// P
 	'pubban_description' => 'Gestion et statistiques de bannières publicitaires pour intégrées aux squelettes SPIP ...
 
 {{UTILISATION}}
@@ -30,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 -* Une explication ainsi qu\'un exemple complet sont disponibles dans la documentation, qui vous permettra également de visualiser l\'intégration des bannières dans vos squelettes. Cette documentation est disponible, si le plugin est actif sur votre site, sur la page publique "pubban_documentation".
 
 -* La page de statistiques du plugin est une adaptation libre du script \'{{[VRG pub->http://vrgpub.frankdevelopper.com/]}}\' développé par {{Vincent Roseberry}} ({sous licence GPL à l\'époque}).',
-	'pubban_slogan' => 'Gestionnaire de bannières publicitaires',
+	'pubban_slogan' => 'Gestionnaire de bannières publicitaires'
 );
+
 ?>
