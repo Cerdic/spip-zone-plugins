@@ -16,7 +16,7 @@
 [(#CHEMIN{inclure/head.html}|oui) <INCLURE{fond=inclure/head} />]
 [(#CHEMIN{inclure/head.html}|non) <INCLURE{fond=inc-head}>]
 
-<!-- script et JS autocompletion -->
+<!-- script et CSS autocompletion -->
 <script type="text/javascript" src="#CHEMIN{js/jquery-ui-1.8.19.autocomplete.min.js}"></script>
 [<link rel="stylesheet" href="(#CHEMIN{js/themes/base/jquery.ui.autocomplete.css}|direction_css)" type="text/css" />]
 [<link rel="stylesheet" href="(#CHEMIN{js/themes/base/jquery.ui.core.css}|direction_css)" type="text/css" />]
@@ -65,6 +65,8 @@ function initialise() {
 
 	<div class="main">
 	<div class="wrapper hfeed">
+	<div class="ariane rouge"><a href="#URL_SITE_SPIP"><:sel:accueil:></a> > <:sel:creer_nouvel_utilisateur:> 1/2</div>
+	
 	<div class="more">
 	<INCLURE{fond=inclure/plus}>
 		

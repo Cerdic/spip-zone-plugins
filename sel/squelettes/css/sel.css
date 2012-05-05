@@ -34,9 +34,6 @@ table caption {
 table thead tr {
 	background-color: #7a2628;
 	color: white;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
 }
 
 table th, table td {
@@ -180,6 +177,12 @@ ul li fieldset {
     border-radius: 3px;
 }
 
+.page .ariane {
+	font-size: .8em;
+	font-style: italic;
+
+}
+
 .page .formulaire_spip input.submit{
 	background: url(../img/fd_bouton_vertok.png) bottom left repeat-x;
 	height: 24px;
@@ -284,8 +287,20 @@ ul li fieldset {
 	background: rgba(247, 234, 198, 0.3) url(../img/cadenas.png) top right no-repeat; /* = hexa #f7eac6; + transparence */
 }
 
-.page .formulaire_editer_auteur fieldset.choixsel{
+.page .formulaire_editer_auteur fieldset.choixsel {
 	background-color: rgba(247, 234, 198, 0.3);
+}
+
+.page .formulaire_editer_annonce  #echcoll {
+/*
+	background-image: url(../img/entraide.png);
+	background-repeat: no-repeat;
+	background-position: bottom right;
+*/
+}
+
+.page .formulaire_editer_annonce .boutons {
+	margin: 0.5em 0;
 }
 
 .page .formulaire_editer_auteur #correspondance_organisations p {
@@ -299,6 +314,14 @@ ul li fieldset {
 	clear: none;
 	text-align: left;
 }
+
+.page .formulaire_editer_annonce .blocdate {
+	float:left;
+	width:48%;
+	margin-top: 0.5em;
+}
+
+
 
 /* pagination */
 .pagination   .prev a, .pagination  .pages a, .pagination  .next a  {

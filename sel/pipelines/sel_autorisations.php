@@ -19,4 +19,10 @@ function autoriser_auteur_modifier($faire, $type, $id, $qui, $opt){
 	return true;
 }
 
+function autoriser_sel_configurer($faire, $type, $id, $qui, $opt){
+	if (($qui['statut']=='0minirezo') && ($qui['acces'] == '4admin_general')) return true;
+	else return false;
+}
+
+
 ?>

@@ -1,17 +1,18 @@
-Note : le champ statut de cette table permettra une éventuelle modération de l'annonce
+Note : le champ statut de cette table permettra une éventuelle modération de l'annonce.
 
 <div class="formulaire_spip formulaire_editer formulaire_editer_annonce formulaire_editer_annonce-#ENV{id_annonce,nouveau}">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
-	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur}) <:info_recommencer:></p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur}) <:info_recommencer:></p>]
 
 	<form method='post' action='#ENV{action}'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<input type='hidden' name='id_annonce' value='#ENV{id_annonce}' />
-		[<input type='hidden' name='redirect' value='(#ENV**{redirect})' />]
+		<input type='hidden' name='id_auteur' value='#SESSION{id_auteur}' />
+		<input type='hidden' name='redirect' value='(#ENV**{redirect})' />
+
 		<fieldset class="impair">
-		<legend><:resume_annonce:></legend>
+		<legend><:sel:resume_annonce:></legend>
 		<ul>
 			<li class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 				[<label for="titre">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:sel:entree_titre_annonce:>,<:sel:entree_titre_annonce2:>}) <:sel:entree_obligatoire:></label><br />]
@@ -21,16 +22,16 @@ Note : le champ statut de cette table permettra une éventuelle modération de l'a
 			<li class="editer editer_direction_echange [ (#ENV**{erreurs}|table_valeur{direction_echange}|oui)erreur]">
 				<strong><label for="direction_echange"><:sel:entree_direction_echange_annonce:> <:sel:entree_obligatoire:></label></strong><br />
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{direction_echange})</span>]
-				<input type='radio' class='text' name='direction_echange' id='direction_echange1' value="[(#ENV**{direction_echange})]" /><:sel:entree_offre:><br />
-				<input type='radio' class='text' name='direction_echange' id='direction_echange2' value="[(#ENV**{direction_echange})]" /><:sel:entree_demande:><br />
-				<input type='radio' class='text' name='direction_echange' id='direction_echange3' value="[(#ENV**{direction_echange})]" /><:sel:entree_partage:>
+				<input type='radio' class='text' name='direction_echange' id='direction_echange1' value="offre" [(#ENV{direction_echange}|=={offre}|oui) checked="cheched"] /><:sel:entree_offre:><br />
+				<input type='radio' class='text' name='direction_echange' id='direction_echange2' value="demande" [(#ENV{direction_echange}|=={demande}|oui) checked="cheched"] /><:sel:entree_demande:><br />
+				<input type='radio' class='text' name='direction_echange' id='direction_echange3' value="partage" [(#ENV{direction_echange}|=={partage}|oui) checked="cheched"] /><:sel:entree_partage:>
 			</li>
 			<li class="editer editer_nature [ (#ENV**{erreurs}|table_valeur{nature}|oui)erreur]">
 				<strong><label for="nature"><:sel:entree_nature_annonce:> <:sel:entree_obligatoire:></label></strong><br />
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nature})</span>]
-				<input type='radio' class='text' name='nature' id='nature1' value="[(#ENV**{nature})]" /><:sel:entree_objet:><br />
-				<input type='radio' class='text' name='nature' id='nature2' value="[(#ENV**{nature})]" /><:sel:entree_service:><br />
-				<input type='radio' class='text' name='nature' id='nature3' value="[(#ENV**{nature})]" /><:sel:entree_savoir:>
+				<input type='radio' class='text' name='nature' id='nature1' value="objet" [(#ENV{nature}|=={objet}|oui) checked="cheched"] /><:sel:entree_objet:><br />
+				<input type='radio' class='text' name='nature' id='nature2' value="service" [(#ENV{nature}|=={service}|oui) checked="cheched"] /><:sel:entree_service:><br />
+				<input type='radio' class='text' name='nature' id='nature3' value="savoir" [(#ENV{nature}|=={savoir}|oui) checked="cheched"] /><:sel:entree_savoir:>
 			</li>
 
 			<li class="editer editer_description[ (#ENV**{erreurs}|table_valeur{description}|oui)erreur]">
@@ -44,11 +45,25 @@ Note : le champ statut de cette table permettra une éventuelle modération de l'a
 		<legend><:sel:validite_annonce:></legend>
 		<p><:sel:validite_annonce_explications:></p>
 		Date de début obligatoire, date de fin pour indication de dates fixes (dates libres sinon)
-		Utilisation d'un widget calendar
+		
+
+		<div>
+			<div class="blocdate">
+					<label for="date_debut"><strong><:sel:entree_date_debut_annonce:></strong></label><br />
+					[<span>(#ENV**{erreurs}|table_valeur{date_debut})</span><br />]				
+					<input class="datepicker" name="date_debut" id="" size="20" style="width:12em;" type="text" value='#ENV{date_debut}' />
+			</div>
+			<div class="blocdate">
+					<label for="date_fin"><strong><:sel:entree_date_fin_annonce:></strong></label><br />
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span><br />]
+					<input class="datepicker" name="date_fin" size="20" style="width:12em;" type="text" value='#ENV{date_fin}' />
+			</div>		
+		</div>		
+		
 		</fieldset>
 		<fieldset class="impair">
-		<legend><:sel:adresse_annonce:></legend>
-		<:sel:adresse_annonce_explications:>
+		<legend><:sel:adresse_annonce:></legend>	
+		[<p>(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:sel:adresse_annonce_explications:>,<:sel:adresse_annonce_explications2:>})</p>]
 		<ul>
 		    <li class="editer editer_adresse1[ (#ENV**{erreurs}|table_valeur{adresse1}|oui)erreur]">
 				<label for="adresse1"><:sel:entree_adresse1_annonce:></label><br />
@@ -74,93 +89,95 @@ Note : le champ statut de cette table permettra une éventuelle modération de l'a
 				<label for="pays"><:sel:entree_pays_2:></label><br />
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{pays})</span>]
 			<select name="pays" id="pays">
-				<option value='[al]' [(#ENV{pays}|=={[al]}|oui) selected="selected"]><:sel:pays_albanie:></option>
-				<option value='[dz]' [(#ENV{pays}|=={[dz]}|oui) selected="selected"]><:sel:pays_algerie:></option>
-				<option value='[de]' [(#ENV{pays}|=={[de]}|oui) selected="selected"]><:sel:pays_allemagne:></option>
-				<option value='[ad]' [(#ENV{pays}|=={[ad]}|oui) selected="selected"]><:sel:pays_andorre:></option>
-				<option value='[am]' [(#ENV{pays}|=={[am]}|oui) selected="selected"]><:sel:pays_armenie:></option>
-				<option value='[at]' [(#ENV{pays}|=={[at]}|oui) selected="selected"]><:sel:pays_autriche:></option>
-				<option value='[az]' [(#ENV{pays}|=={[az]}|oui) selected="selected"]><:sel:pays_azerbaidjan:></option>
-				<option value='[be]' [(#ENV{pays}|=={[be]}|oui) selected="selected"]><:sel:pays_belgique:></option>
-				<option value='[bj]' [(#ENV{pays}|=={[bj]}|oui) selected="selected"]><:sel:pays_benin:></option>
-				<option value='[ba]' [(#ENV{pays}|=={[ba]}|oui) selected="selected"]><:sel:pays_bosnie_herzegovine:></option>			
-				<option value='[bg]' [(#ENV{pays}|=={[bg]}|oui) selected="selected"]><:sel:pays_bulgarie:></option>
-				<option value='[bf]' [(#ENV{pays}|=={[bf]}|oui) selected="selected"]><:sel:pays_burkina_faso:></option>
-				<option value='[bi]' [(#ENV{pays}|=={[bi]}|oui) selected="selected"]><:sel:pays_burundi:></option>
-				<option value='[cm]' [(#ENV{pays}|=={[cm]}|oui) selected="selected"]><:sel:pays_cameroun:></option>
-				<option value='[ca]' [(#ENV{pays}|=={[ca]}|oui) selected="selected"]><:sel:pays_canada:></option>
-				<option value='[cf]' [(#ENV{pays}|=={[cf]}|oui) selected="selected"]><:sel:pays_centrafique:></option>
-				<option value='[cy]' [(#ENV{pays}|=={[cy]}|oui) selected="selected"]><:sel:pays_chypre:></option>
-				<option value='[km]' [(#ENV{pays}|=={[km]}|oui) selected="selected"]><:sel:pays_comores:></option>
-				<option value='[ci]' [(#ENV{pays}|=={[ci]}|oui) selected="selected"]><:sel:pays_cote_divoire:></option>
-				<option value='[hr]' [(#ENV{pays}|=={[hr]}|oui) selected="selected"]><:sel:pays_croatie:></option>
-				<option value='[dk]' [(#ENV{pays}|=={[dk]}|oui) selected="selected"]><:sel:pays_danemark:></option>
-				<option value='[dj]' [(#ENV{pays}|=={[dj]}|oui) selected="selected"]><:sel:pays_djibouti:></option>
-				<option value='[es]' [(#ENV{pays}|=={[es]}|oui) selected="selected"]><:sel:pays_espagne:></option>
-				<option value='[ee]' [(#ENV{pays}|=={[ee]}|oui) selected="selected"]><:sel:pays_estonie:></option>
-				<option value='[fi]' [(#ENV{pays}|=={[fi]}|oui) selected="selected"]><:sel:pays_finlande:></option>
-				<option value='[fr]' [(#ENV{pays}|=={[fr]}|or{#ENV{id_auteur}|=={oui}}|oui) selected="selected"]><:sel:pays_france:></option>
-				<option value='[ga]'><:sel:pays_gabon:></option>
-				<option value='[ge]'><:sel:pays_georgie:></option>
-				<option value='[gr]'><:sel:pays_grece:></option>
-				<option value='[gn]'><:sel:pays_guinee:></option>
-				<option value='[gq]'><:sel:pays_guinee_equatoriale:></option>
-				<option value='[ht]'><:sel:pays_haiti:></option>
-				<option value='[hu]'><:sel:pays_hongrie:></option>
-				<option value='[ie]'><:sel:pays_irlande:></option>
-				<option value='[is]'><:sel:pays_islande:></option>
-				<option value='[it]'><:sel:pays_italie:></option>
-				<option value='[je]'><:sel:pays_jersey:></option>
-				<option value='[kz]'><:sel:pays_kazakhstan:></option>
-				<option value='[ko]'><:sel:pays_kosovo:></option>
-				<option value='[lv]'><:sel:pays_lettonie:></option>
-				<option value='[lb]'><:sel:pays_liban:></option>
-				<option value='[li]'><:sel:pays_liechtenstein:></option>
-				<option value='[lt]'><:sel:pays_lituanie:></option>
-				<option value='[lu]'><:sel:pays_luxembourg:></option>
-				<option value='[mk]'><:sel:pays_macedoine:></option>
-				<option value='[mg]'><:sel:pays_madagascar:></option>
-				<option value='[ml]'><:sel:pays_mali:></option>
-				<option value='[mt]'><:sel:pays_malte:></option>
-				<option value='[ma]'><:sel:pays_maroc:></option>
-				<option value='[mu]'><:sel:pays_maurice:></option>
-				<option value='[md]'><:sel:pays_moldavie:></option>
-				<option value='[mc]'><:sel:pays_monaco:></option>
-				<option value='[me]'><:sel:pays_montenegro:></option>
-				<option value='[ne]'><:sel:pays_niger:></option>
-				<option value='[no]'><:sel:pays_norvege:></option>
-				<option value='[nl]'><:sel:pays_pays_bas:></option>
-				<option value='[pl]'><:sel:pays_pologne:></option>
-				<option value='[pt]'><:sel:pays_portugal:></option>
-				<option value='[cd]'><:sel:pays_republique_democratique_du_congo:></option>
-				<option value='[cg]'><:sel:pays_republique_du_congo:></option>
-				<option value='[cz]'><:sel:pays_republique_tcheque:></option>
-				<option value='[ro]'><:sel:pays_roumanie:></option>
-				<option value='[gb]'><:sel:pays_royaume_uni:></option>
-				<option value='[rw]'><:sel:pays_rwanda:></option>
-				<option value='[sn]'><:sel:pays_senegal:></option>
-				<option value='[rs]'><:sel:pays_serbie:></option>
-				<option value='[sc]'><:sel:pays_seychelles:></option>
-				<option value='[sk]'><:sel:pays_slovaquie:></option>
-				<option value='[si]'><:sel:pays_slovenie:></option>
-				<option value='[se]'><:sel:pays_suede:></option>
-				<option value='[ch]'><:sel:pays_suisse:></option>
-				<option value='[td]'><:sel:pays_tchad:></option>
-				<option value='[tg]'><:sel:pays_togo:></option>
-				<option value='[tn]'><:sel:pays_tunisie:></option>
-				<option value='[ua]'><:sel:pays_ukraine:></option>
+				<option value='al' [(#ENV{pays}|=={al}|oui) selected="selected"]><:sel:pays_albanie:></option>
+				<option value='dz' [(#ENV{pays}|=={dz}|oui) selected="selected"]><:sel:pays_algerie:></option>
+				<option value='de' [(#ENV{pays}|=={de}|oui) selected="selected"]><:sel:pays_allemagne:></option>
+				<option value='ad' [(#ENV{pays}|=={ad}|oui) selected="selected"]><:sel:pays_andorre:></option>
+				<option value='am' [(#ENV{pays}|=={am}|oui) selected="selected"]><:sel:pays_armenie:></option>
+				<option value='at' [(#ENV{pays}|=={at}|oui) selected="selected"]><:sel:pays_autriche:></option>
+				<option value='az' [(#ENV{pays}|=={az}|oui) selected="selected"]><:sel:pays_azerbaidjan:></option>
+				<option value='be' [(#ENV{pays}|=={be}|oui) selected="selected"]><:sel:pays_belgique:></option>
+				<option value='bj' [(#ENV{pays}|=={bj}|oui) selected="selected"]><:sel:pays_benin:></option>
+				<option value='ba' [(#ENV{pays}|=={ba}|oui) selected="selected"]><:sel:pays_bosnie_herzegovine:></option>			
+				<option value='bg' [(#ENV{pays}|=={bg}|oui) selected="selected"]><:sel:pays_bulgarie:></option>
+				<option value='bf' [(#ENV{pays}|=={bf}|oui) selected="selected"]><:sel:pays_burkina_faso:></option>
+				<option value='bi' [(#ENV{pays}|=={bi}|oui) selected="selected"]><:sel:pays_burundi:></option>
+				<option value='cm' [(#ENV{pays}|=={cm}|oui) selected="selected"]><:sel:pays_cameroun:></option>
+				<option value='ca' [(#ENV{pays}|=={ca}|oui) selected="selected"]><:sel:pays_canada:></option>
+				<option value='cf' [(#ENV{pays}|=={cf}|oui) selected="selected"]><:sel:pays_centrafique:></option>
+				<option value='cy' [(#ENV{pays}|=={cy}|oui) selected="selected"]><:sel:pays_chypre:></option>
+				<option value='km' [(#ENV{pays}|=={km}|oui) selected="selected"]><:sel:pays_comores:></option>
+				<option value='ci' [(#ENV{pays}|=={ci}|oui) selected="selected"]><:sel:pays_cote_divoire:></option>
+				<option value='hr' [(#ENV{pays}|=={hr}|oui) selected="selected"]><:sel:pays_croatie:></option>
+				<option value='dk' [(#ENV{pays}|=={dk}|oui) selected="selected"]><:sel:pays_danemark:></option>
+				<option value='dj' [(#ENV{pays}|=={dj}|oui) selected="selected"]><:sel:pays_djibouti:></option>
+				<option value='es' [(#ENV{pays}|=={es}|oui) selected="selected"]><:sel:pays_espagne:></option>
+				<option value='ee' [(#ENV{pays}|=={ee}|oui) selected="selected"]><:sel:pays_estonie:></option>
+				<option value='fi' [(#ENV{pays}|=={fi}|oui) selected="selected"]><:sel:pays_finlande:></option>
+				<option value='fr' [(#ENV{pays}|=={fr}|or{#ENV{id_annonce}|=={oui}}|oui) selected="selected"]><:sel:pays_france:></option>
+				<option value='ga' [(#ENV{pays}|=={ga}|oui) selected="selected"]><:sel:pays_gabon:></option>
+				<option value='ge' [(#ENV{pays}|=={ge}|oui) selected="selected"]><:sel:pays_georgie:></option>
+				<option value='gr' [(#ENV{pays}|=={gr}|oui) selected="selected"]><:sel:pays_grece:></option>
+				<option value='gn' [(#ENV{pays}|=={gn}|oui) selected="selected"]><:sel:pays_guinee:></option>
+				<option value='gq' [(#ENV{pays}|=={gq}|oui) selected="selected"]><:sel:pays_guinee_equatoriale:></option>
+				<option value='ht' [(#ENV{pays}|=={ht}|oui) selected="selected"]><:sel:pays_haiti:></option>
+				<option value='hu' [(#ENV{pays}|=={hu}|oui) selected="selected"]><:sel:pays_hongrie:></option>
+				<option value='ie' [(#ENV{pays}|=={ie}|oui) selected="selected"]><:sel:pays_irlande:></option>
+				<option value='is' [(#ENV{pays}|=={is}|oui) selected="selected"]><:sel:pays_islande:></option>
+				<option value='it' [(#ENV{pays}|=={it}|oui) selected="selected"]><:sel:pays_italie:></option>
+				<option value='je' [(#ENV{pays}|=={je}|oui) selected="selected"]><:sel:pays_jersey:></option>
+				<option value='kz' [(#ENV{pays}|=={kz}|oui) selected="selected"]><:sel:pays_kazakhstan:></option>
+				<option value='ko' [(#ENV{pays}|=={ko}|oui) selected="selected"]><:sel:pays_kosovo:></option>
+				<option value='lv' [(#ENV{pays}|=={lv}|oui) selected="selected"]><:sel:pays_lettonie:></option>
+				<option value='lb' [(#ENV{pays}|=={lb}|oui) selected="selected"]><:sel:pays_liban:></option>
+				<option value='li' [(#ENV{pays}|=={li}|oui) selected="selected"]><:sel:pays_liechtenstein:></option>
+				<option value='lt' [(#ENV{pays}|=={lt}|oui) selected="selected"]><:sel:pays_lituanie:></option>
+				<option value='lu' [(#ENV{pays}|=={lu}|oui) selected="selected"]><:sel:pays_luxembourg:></option>
+				<option value='mk' [(#ENV{pays}|=={mk}|oui) selected="selected"]><:sel:pays_macedoine:></option>
+				<option value='mg' [(#ENV{pays}|=={mg}|oui) selected="selected"]><:sel:pays_madagascar:></option>
+				<option value='ml' [(#ENV{pays}|=={ml}|oui) selected="selected"]><:sel:pays_mali:></option>
+				<option value='mt' [(#ENV{pays}|=={mt}|oui) selected="selected"]><:sel:pays_malte:></option>
+				<option value='ma' [(#ENV{pays}|=={ma}|oui) selected="selected"]><:sel:pays_maroc:></option>
+				<option value='mu' [(#ENV{pays}|=={mu}|oui) selected="selected"]><:sel:pays_maurice:></option>
+				<option value='md' [(#ENV{pays}|=={md}|oui) selected="selected"]><:sel:pays_moldavie:></option>
+				<option value='mc' [(#ENV{pays}|=={mc}|oui) selected="selected"]><:sel:pays_monaco:></option>
+				<option value='me' [(#ENV{pays}|=={me}|oui) selected="selected"]><:sel:pays_montenegro:></option>
+				<option value='ne' [(#ENV{pays}|=={ne}|oui) selected="selected"]><:sel:pays_niger:></option>
+				<option value='no' [(#ENV{pays}|=={no}|oui) selected="selected"]><:sel:pays_norvege:></option>
+				<option value='nl' [(#ENV{pays}|=={nl}|oui) selected="selected"]><:sel:pays_pays_bas:></option>
+				<option value='pl' [(#ENV{pays}|=={pl}|oui) selected="selected"]><:sel:pays_pologne:></option>
+				<option value='pt' [(#ENV{pays}|=={pt}|oui) selected="selected"]><:sel:pays_portugal:></option>
+				<option value='cd' [(#ENV{pays}|=={cd}|oui) selected="selected"]><:sel:pays_republique_democratique_du_congo:></option>
+				<option value='cg' [(#ENV{pays}|=={cg}|oui) selected="selected"]><:sel:pays_republique_du_congo:></option>
+				<option value='cz' [(#ENV{pays}|=={cz}|oui) selected="selected"]><:sel:pays_republique_tcheque:></option>
+				<option value='ro' [(#ENV{pays}|=={ro}|oui) selected="selected"]><:sel:pays_roumanie:></option>
+				<option value='gb' [(#ENV{pays}|=={gb}|oui) selected="selected"]><:sel:pays_royaume_uni:></option>
+				<option value='rw' [(#ENV{pays}|=={rw}|oui) selected="selected"]><:sel:pays_rwanda:></option>
+				<option value='sn' [(#ENV{pays}|=={sn}|oui) selected="selected"]><:sel:pays_senegal:></option>
+				<option value='rs' [(#ENV{pays}|=={rs}|oui) selected="selected"]><:sel:pays_serbie:></option>
+				<option value='sc' [(#ENV{pays}|=={sc}|oui) selected="selected"]><:sel:pays_seychelles:></option>
+				<option value='sk' [(#ENV{pays}|=={sk}|oui) selected="selected"]><:sel:pays_slovaquie:></option>
+				<option value='si' [(#ENV{pays}|=={si}|oui) selected="selected"]><:sel:pays_slovenie:></option>
+				<option value='se' [(#ENV{pays}|=={se}|oui) selected="selected"]><:sel:pays_suede:></option>
+				<option value='ch' [(#ENV{pays}|=={ch}|oui) selected="selected"]><:sel:pays_suisse:></option>
+				<option value='td' [(#ENV{pays}|=={td}|oui) selected="selected"]><:sel:pays_tchad:></option>
+				<option value='tg' [(#ENV{pays}|=={tg}|oui) selected="selected"]><:sel:pays_togo:></option>
+				<option value='tn' [(#ENV{pays}|=={tn}|oui) selected="selected"]><:sel:pays_tunisie:></option>
+				<option value='ua' [(#ENV{pays}|=={ua}|oui) selected="selected"]><:sel:pays_ukraine:></option>
 			</select>		
 			</li>
 		</ul>
 		</fieldset>
-		<fieldset class="pair">
+		<fieldset class="pair" id="echcoll">
 		<legend><:sel:echanges_collectifs_organisation_annonce:></legend>
+		<a href=""><img id="fleche" [(#ENV{nombre_personnes}|non) src="#CHEMIN{img/deplierhaut.gif}"] [(#ENV{nombre_personnes}|oui) src="#CHEMIN{img/deplierbas.gif}"]  /><:sel:vous_organisez_echange_collectif:></a></li>		
+		<div id="facultatif" [(#ENV{nombre_personnes}|non) style="display:none;"] [(#ENV{nombre_personnes}|oui) style="display:inline;"]>
 		<p><:sel:echanges_collectifs_organisation_annonce_explications:></p>
 		<ul>
 		    <li class="editer editer_nombre_personnes obligatoire[ (#ENV**{erreurs}|table_valeur{nombre_personnes}|oui)erreur]">
 				<label for="ville"><:sel:entree_nombre_personnes_annonce:> <:sel:entree_obligatoire:></label><br />
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nombre_personnes})</span>]
-				<input type='text' class='text' name='nombre_personnes' id='nombre_personnes' value="[(#ENV**{nombre_personnes})]" />
+				<input type='text' class='text' style='width:3em;' name='nombre_personnes' id='nombre_personnes' maxlength='4' value="[(#ENV**{nombre_personnes})]" />
 		    </li>		
 			<li class="editer editer_transport[ (#ENV**{erreurs}|table_valeur{transport}|oui)erreur]">
 				<label for="transport"><:sel:entree_transport_annonce:></label><br />
@@ -178,6 +195,7 @@ Note : le champ statut de cette table permettra une éventuelle modération de l'a
 				<textarea name='hebergement' id='hebergement' rows='6' cols='40'>[(#ENV**{hebergement})]</textarea>
 			</li>
 		</ul>
+		</div>
 		</fieldset>
 		<fieldset class="impair">
 		<legend><:sel:contacts_annonce:></legend>
@@ -217,13 +235,20 @@ Note : le champ statut de cette table permettra une éventuelle modération de l'a
 			<li class="editer editer_si_unite_heure[ (#ENV**{erreurs}|table_valeur{si_unite_heure}|oui)erreur]">
 				<label for="si_unite_heure"><:sel:entree_si_unite_heure_annonce:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{si_unite_heure})</span>
-				]<input type='checkbox' class='text' name='si_unite_heure' id='si_unite_heure' value="[(#ENV**{si_unite_heure})]" />
+				]<input type='checkbox' class='text' name='si_unite_heure' id='si_unite_heure' value="1" [(#ENV{si_unite_heure}|=={1}|oui) checked="checked"]" />
 			</li>
 			<li class="editer editer_total_fiduc[ (#ENV**{erreurs}|table_valeur{total_fiduc}|oui)erreur]">
 				<label for="total_fiduc"><:sel:entre_total_fiduc_annonce:></label><br />[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{total_fiduc})</span>
 				]<input type='text' class='text' name='total_fiduc' id='total_fiduc' value="[(#ENV**{total_fiduc})]" />
 			</li>
+			
+			<li class="editer editer_justification_fiduc[ (#ENV**{erreurs}|table_valeur{justification_fiduc}|oui)erreur]">
+				<label for="justification_fiduc"><:sel:entre_justification_fiduc_annonce:></label><br />[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{justification_fiduc})</span>
+				]<textarea name='justification_fiduc' id='justification_fiduc' rows='4' cols='40'>[(#ENV**{justification_fiduc})]</textarea>
+			</li>
+			
 			<li class="editer editer_commentaires[ (#ENV**{erreurs}|table_valeur{commentaires}|oui)erreur]">
 				<label for="commentaires"><:sel:commentaires:></label><br />
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{commentaires})</span>]

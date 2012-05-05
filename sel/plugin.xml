@@ -78,6 +78,11 @@
 	</pipeline>
 
 	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>pipelines/header_prive.php</inclure>
+	</pipeline>
+	
+	<pipeline>
 		<nom>editer_contenu_objet</nom>
 		<inclure>pipelines/complement_editer_auteur.php"</inclure>
 	</pipeline>

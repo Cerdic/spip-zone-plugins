@@ -54,6 +54,9 @@
 
 	<div class="main">
 	<div class="wrapper hfeed">
+	
+		<div class="ariane rouge"><a href="#URL_SITE_SPIP"><:sel:accueil:></a> > <a href="#URL_PAGE{admin_moderation_utilisateurs}"><:sel:admin_moderer_utilisateurs:></a> > <:sel:fiche_utilisateur:></div>
+	
 	<h1><:sel:fiche_utilisateur:></h1>
 	<BOUCLE_recap(AUTEURS) {tout} {id_auteur = #ENV{id_auteur}}>
 		
@@ -67,7 +70,7 @@
 
 		<p class="corps_encart">
 		#ADRESSE1 [(#ADRESSE2)]<br />
-		#CODE_POSTAL #VILLE #PAYS
+		#CODE_POSTAL #VILLE [#PAYS]
 		</p>
 
 		<h3><:sel:localisation:> :</h3>

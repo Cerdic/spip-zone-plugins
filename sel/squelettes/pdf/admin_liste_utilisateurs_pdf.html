@@ -1,0 +1,110 @@
+#CACHE{0}
+[(#SESSION{acces}|=={3admin_local}|or{#SESSION{acces}|=={4admin_general}}|oui)
+	#SET{admin,oui}
+]
+[<link rel="stylesheet" href="(#CHEMIN{css/impression.css}|direction_css)" type="text/css" media="print" />]
+<style type="text/css">
+		/* quelques styles en plus */
+		img {  }
+		
+		h1#logo {
+			font-size: 53px;
+		}
+		
+		h1#logo img {
+			float: left;
+			margin: 10px;
+		}
+		
+		#contenu {
+			margin-top: 200px;
+		
+		}
+		
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+		
+		table caption {
+			padding: 0;
+			text-align: right;
+			font-style: italic;
+		}
+
+		table thead tr {
+			background-color: #7a2628;
+			color: white;
+		}
+
+		table th, table td {
+			border: none;
+			padding: 10px;
+			font-size: 10px;
+			vertical-align: top;
+		}
+		
+		.pied {
+			font-size: 10px;
+			text-align: center;			
+		}
+	
+</style>
+<page orientation="P" format="A4" backtop="7mm" backbottom="7mm" backleft="10mm" backright="10mm">
+	
+	<page_header>
+	<div class="header">
+	<h1 id="logo"><img src="#CHEMIN{IMG/siteon0.png}" style="width:150px" /> #NOM_SITE_SPIP</h1>
+	[<p id="slogan"><em>(#SLOGAN_SITE_SPIP)</em></p>]
+	</div>
+	<h2><:sel:admin_voir_utilisateurs:></h2>
+	</page_header>
+	
+	<page_footer>
+	<div class="pied">
+	<em><:sel:page:> [[page_cu]]</em>
+	<img src="#CHEMIN{img/frise_950.png}" style="width:700px" />
+	</div>
+	</page_footer>
+
+	<div id="contenu">
+	<B_utilisateurs>
+	<table>
+	<caption>[(#GRAND_TOTAL) <:sel:utilisateurs:>]</caption>
+	<thead>
+	<tr>
+		<th><:sel:login:></th>
+		<th><:sel:nom:> <:sel:prenom:></th>
+		<th><:sel:acces:></th>
+		<th><:sel:localite:></th>
+		<th><:sel:seljeu:></th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_utilisateurs(AUTEURS) {tout} {acces IN 0nouveau, 1utilisateur_ok, 2utilisateur_ko} {si #GET{admin}} {par #ENV{tri}}{inverse #ENV{senstri}}>
+	<tr>
+		<td>#LOGIN</td>
+		<td>[(#NOM)<br />][(#PRENOM)<br />]</td>
+		<td>
+		[(#ACCES|=={0nouveau}|oui)<:sel:0nouveau:>]
+		[(#ACCES|=={1utilisateur_ok}|oui)<:sel:1utilisateur_ok:>]
+		[(#ACCES|=={2utilisateur_ko}|oui)<:sel:2utilisateur_ko:>]
+		</td>
+		<td>
+		#VILLE #PAYS
+		</td>
+		<td>
+		<BOUCLE_sels(CORRESPONDANCES sels) {id_auteur} {fusion id_sel}>
+		[(#ID_SEL|=={0}|oui) <:sel:jeu:><br />]
+		[(#ID_SEL|!={0}|oui) #NOM<br />]
+		</BOUCLE_sels>
+		</td>	
+	</tr>
+	</BOUCLE_utilisateurs>
+	</tbody>
+	</table>
+	</B_utilisateurs>
+	</div>
+
+</page>
+

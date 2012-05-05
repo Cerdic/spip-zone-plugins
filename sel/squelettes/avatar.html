@@ -74,6 +74,10 @@
 
 	<div class="main">
 	<div class="wrapper hfeed">
+	
+	<div class="ariane rouge"><a href="#URL_SITE_SPIP"><:sel:accueil:></a> > <:sel:creer_nouvel_utilisateur:> 2/2</div>
+	
+	
 	<div class="more">
 	<INCLURE{fond=inclure/plus}>	
 	</div><!-- .more -->
@@ -112,11 +116,11 @@
 			<div class="bloc">
 			<h3><:sel:bienvenue:> #SESSION{nom}, <:sel:que_voulez_vous_faire|strtolower:></h3>
 			<ul>
-			<li><img src="#CHEMIN{img/puce_verte.png}" alt="" />&nbsp;<:sel:consulter_catalogue:> (en développement)</li>
-			<li><img src="#CHEMIN{img/puce_verte.png}" alt="" />&nbsp;<:sel:poster_annonce:> (en développement)</li>
-			<li><img src="#CHEMIN{img/puce_verte.png}" alt="" />&nbsp;<:sel:consulter_correspondants:> (en développement)</li>
-			<li><img src="#CHEMIN{img/puce_verte.png}" alt="" />&nbsp;<:sel:saisir_echange:> (en développement)</li>
-			<li><img src="#CHEMIN{img/puce_verte.png}" alt="" />&nbsp;<:sel:modifier_donnees:> (en développement)</li>
+			<li><img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<a href="#URL_PAGE{nouvelle_annonce}"><:sel:poster_annonce:></a></li>
+			<li><img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<:sel:consulter_catalogue:> (en développement)</li>
+			<li><img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<:sel:consulter_correspondants:> (en développement)</li>
+			<li><img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<:sel:saisir_echange:> (en développement)</li>
+			<li><img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<:sel:modifier_donnees:> (en développement)</li>
 			</ul>
 			</div>	
 		]
@@ -146,7 +150,7 @@
 		<p>
 		<BOUCLE_sels(CORRESPONDANCES) {fusion id_sel} {id_auteur = #ID_AUTEUR}>
 		<BOUCLE_listesel(SELS) {id_sel = #ID_SEL}>
-		<img src="[(#CHEMIN{img/puce_verte.png})]" /> #NOM<br />
+		<img src="[(#CHEMIN{img/puce_verte_creuse.gif})]" /> #NOM<br />
 		</BOUCLE_listesel>
 		</BOUCLE_sels>
 		</p>
@@ -156,7 +160,7 @@
 		<h3><:sel:correspondant_auteur_organisations:></h3>
 		<p>
 		<BOUCLE_corr(CORRESPONDANCES organisations) {id_auteur} {id_organisation >= 1}>
-		<img src="[(#CHEMIN{img/puce_verte.png})]" /> #NOM
+		<img src="[(#CHEMIN{img/puce_verte_creuse.gif})]" /> #NOM
 		<:sel:pour:> <BOUCLE_lesel(SELS) {id_sel = #ID_SEL}>#NOM</BOUCLE_lesel><br />
 		</BOUCLE_corr>
 		</p>

@@ -1,24 +1,9 @@
-<script type="text/javascript"><!--
-$(function() { 
-
-
-// A REVOIR	
-	/*
-	$("#choix_selorg").click(function () {
-      $('.editer_liste_organisations').hide("blind", { direction: "horizontal" }, 1000);
-	  return false;
-	});
-	*/
-}
-// --></script>
-
-
-<li id="choix_selorg"><a href=""><img id="fleche" [(#ENV{org}|non) src="#CHEMIN{img/deplierbas.gif}"] [(#ENV{org}|oui) src="#CHEMIN{img/deplierhaut.gif}"]  /><:sel:vous_etes_correspondant:></a></li>
+<li id="choix_selorg"><a href=""><img id="fleche" [(#ENV{org}|oui) src="#CHEMIN{img/deplierbas.gif}"] [(#ENV{org}|non) src="#CHEMIN{img/deplierhaut.gif}"]  /><:sel:vous_etes_correspondant:></a></li>
 <B_liste_organisations>
-<li class='editer_liste_organisations fieldset' [(#ENV{org}|non) style="display:inline;"] [(#ENV{org}|oui) style="display:none;"]>
+<li class='editer_liste_organisations fieldset' [(#ENV{org}|oui) style="display:inline;"] [(#ENV{org}|non) style="display:none;"]>
 		<fieldset>
 		<legend><:auteur:correspondant_auteur_organisations:></legend>
-		<BOUCLE_liste_organisations(ORGANISATIONS)>
+		<BOUCLE_liste_organisations(ORGANISATIONS) {par nom}>
 			<input class="checkbox" type="checkbox" name="org[#COMPTEUR_BOUCLE]" id="org_#ID_ORGANISATION" value="#ID_ORGANISATION"[(#ENV{org}|find{#ID_ORGANISATION}|=={#ID_ORGANISATION}|oui)checked="checked"]/>
 			<label for="org_#ID_ORGANISATION">#NOM</label><br />
 		</BOUCLE_liste_organisations>

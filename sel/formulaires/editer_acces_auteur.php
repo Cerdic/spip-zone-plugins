@@ -27,22 +27,23 @@ function formulaires_editer_acces_auteur_verifier_dist($tri = '',$senstri = '', 
 function formulaires_editer_acces_auteur_traiter_dist($tri = '',$senstri = '', $retour = '') {
 
 	$certifier = _request('certifier');
+	$message = array();
 
 	if (is_array($certifier)) {
 		foreach ($certifier as $id_auteur => $acces) {
 			if ($acces = '1utilisateur_ok') $stt = '1comite'; else $stt = '6forum';
 			$resupdate = sql_updateq('spip_auteurs',array('acces'=>$acces,'statut'=>$stt),'id_auteur='.sql_quote($id_auteur));
 			if ($resupdate)	{
-				$message['stt'] = 'message_ok';
-				$message['lang'] = _T('msgok_mise_a_jour_acces_auteur');
+				$message_stt = 'message_ok';
+				$message_lang = _T('sel:msgok_mise_a_jour_acces_auteur');
 			}
 			else {
-				$message['stt'] = 'message_erreur';
-				$message['lang'] = _T('msgerr_mise_a_jour_acces_auteur');
+				$message_stt = 'message_erreur';
+				$message_lang = _T('sel:msgerr_mise_a_jour_acces_auteur');
 			}
 		}
 	}
-	$traitement[$message]['stt'] = $message['lang'];
+	$traitement[$message_stt] = $message_lang;
 	$retour = parametre_url($retour,'tri',$tri);
 	$retour = parametre_url($retour,'senstri',$senstri);
 	$retour = parametre_url($retour,'var_mode','calcul');

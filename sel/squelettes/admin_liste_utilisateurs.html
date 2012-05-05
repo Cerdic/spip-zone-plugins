@@ -72,6 +72,8 @@
 
 	<div class="main">
 	<div class="wrapper hfeed">
+	<div class="ariane rouge"><a href="#URL_SITE_SPIP"><:sel:accueil:></a> > <:sel:admin_voir_utilisateurs:></div>
+	
 	<div class="more">
 	<INCLURE{fond=inclure/plus}>	
 	</div><!-- .more -->
@@ -83,9 +85,9 @@
 		[(#SESSION{acces}|=={3admin_local}|or{#SESSION{acces}|=={4admin_general}}|oui)
 		<h1><:sel:admin_voir_utilisateurs:></h1>			
 		<p><:sel:admin_voir_utilisateurs_explications:></p>
-		<a href="[(#URL_ACTION_AUTEUR{admin_exporter,u}|parametre_url{tri,#ENV{tri}}|parametre_url{senstri,#ENV{senstri}})]"><:sel:exporter:></a><br />
-
-		<a href="#URL_PAGE{admin_imprimer}"><:sel:imprimer:></a>
+		
+		<a href="[(#URL_ACTION_AUTEUR{admin_exporter,u}|parametre_url{tri,#ENV{tri}}|parametre_url{senstri,#ENV{senstri}})]"><img src="#CHEMIN{img/puce_verte.png}" /> <:sel:exporter:></a><br />
+		<a href="[(#URL_PAGE{spipdf}|parametre_url{spipdf,pdf/admin_liste_utilisateurs_pdf}|parametre_url{nom_fichier,liste_des_utilisateurs}|parametre_url{tri,#ENV{tri}}|parametre_url{senstri,#ENV{senstri}})]" class="gris"><img src="#CHEMIN{img/puce_verte.png}" /> <:sel:imprimer:></a>
 		#SET{admin,oui}
 		]	
 		<p>&nbsp;</p>
@@ -149,7 +151,7 @@
 			[(#ACCES|=={2utilisateur_ko}|oui)<:sel:2utilisateur_ko:>]
 			</td>
 			<td>
-			#VILLE #PAYS
+			#VILLE [#PAYS]
 			</td>
 			<td>
 			<BOUCLE_sels(CORRESPONDANCES sels) {id_auteur} {fusion id_sel}>

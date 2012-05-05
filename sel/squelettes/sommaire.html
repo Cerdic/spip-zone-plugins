@@ -83,6 +83,10 @@
 
 	<div class="main">
 	<div class="wrapper hfeed">
+	
+	<div class="ariane rouge"><:sel:accueil:></div>
+	
+	
 	<div class="more">
 	<INCLURE{fond=inclure/plus}>			
 	</div><!-- .more -->
@@ -112,25 +116,27 @@
 			<li><img src="#CHEMIN{img/puce_verte.png}" alt="" />&nbsp;<:sel:bienvenue_explications_6:></li>
 			</ul>
 		]
-		<p class="fond_gris">
 		<BOUCLE_logo(AUTEURS) {id_auteur = #SESSION{id_auteur}} {tout}>
+		<p class="fond_gris">
 		#LOGO_AUTEUR
 		#SET{lon,#LON}
 		#SET{lat,#LAT}
 		#SET{inscription,(#INSCRIPTION|affdate{'d/m/Y'})}
 
 		[(#SESSION{id_auteur}|oui)
-
-			<strong><:sel:adresse:></strong><br />
-			#ADRESSE1 [- (#ADRESSE2)]<br />
-			#CODE_POSTAL #VILLE #PAYS
-			</p>	
-
-			<p style="clear:left;"><strong><:sel:contacts:></strong><br />
-			#TEL1 [- (#TEL2)]<br />
-			#EMAIL</p>
-			<p><:sel:inscrit_depuis:> #GET{inscription}<br /></p>
-			<p style="clear:left;"><strong>SEL/JEU :</strong><br /></p>
+		<strong><:sel:adresse:></strong><br />
+		#ADRESSE1
+		#ADRESSE2<br />
+		#CODE_POSTAL #VILLE &#91;#PAYS&#93;
+		]
+		</p>	
+		[(#SESSION{id_auteur}|oui)
+		<p style="clear:left;"><strong><:sel:contacts:></strong><br />
+			#TEL1 - #TEL2<br />
+			#EMAIL
+		</p>
+		<p><:sel:inscrit_depuis:> #GET{inscription}<br /></p>
+		<p style="clear:left;"><strong><:sel:seljeu:> :</strong><br /></p>
 		]
 		
 		<B_sels>
@@ -171,10 +177,10 @@
 		<div class="bloc">
 		<h3><:sel:que_voulez_vous_faire:></h3>
 		<ul>
-		<li><img src="#CHEMIN{img/puce_verte.png}" alt="" />&nbsp;<:sel:consulter_catalogue:> (en développement)</li>
-		<li><img src="#CHEMIN{img/puce_verte.png}" alt="" />&nbsp;<a href="#URL_PAGE{nouvelle_annonce}"><:sel:poster_annonce:></a> (en développement)</li>
-		<li><img src="#CHEMIN{img/puce_verte.png}" alt="" />&nbsp;<:sel:consulter_correspondants:> (en développement)</li>
-		<li><img src="#CHEMIN{img/puce_verte.png}" alt="" />&nbsp;<:sel:saisir_echange:> (en développement)</li>
+		<li><img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<a href="#URL_PAGE{nouvelle_annonce}"><:sel:poster_annonce:></a></li>
+		<li><img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<:sel:consulter_catalogue:> (en développement)</li>
+		<li><img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<:sel:consulter_correspondants:> (en développement)</li>
+		<li><img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<:sel:saisir_echange:> (en développement)</li>
 		</ul>
 		</div>
 		]
@@ -231,9 +237,6 @@
 	</div><!--.aside-->
 
 	</div><!--.main-->
-	
-	
-
 	
 	
 	<img src="#CHEMIN{img/frise_950.png}" />		

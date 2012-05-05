@@ -16,15 +16,56 @@
 [(#CHEMIN{inclure/head.html}|oui) <INCLURE{fond=inclure/head} />]
 [(#CHEMIN{inclure/head.html}|non) <INCLURE{fond=inc-head}>]
 
-<!-- script et JS autocompletion -->
-<script type="text/javascript" src="#CHEMIN{js/jquery-ui-1.8.19.autocomplete.min.js}"></script>
-[<link rel="stylesheet" href="(#CHEMIN{js/themes/base/jquery.ui.autocomplete.css}|direction_css)" type="text/css" />]
-[<link rel="stylesheet" href="(#CHEMIN{js/themes/base/jquery.ui.core.css}|direction_css)" type="text/css" />]
-[<link rel="stylesheet" href="(#CHEMIN{js/themes/base/jquery-ui-1.8.19.custom.css}|direction_css)" type="text/css" />]
-[<link rel="stylesheet" href="(#CHEMIN{js/themes/base/jquery.ui.all.css}|direction_css)" type="text/css" />]
-[<link rel="stylesheet" href="(#CHEMIN{js/themes/base/jquery.ui.base.css}|direction_css)" type="text/css" />]
-[<link rel="stylesheet" href="(#CHEMIN{js/themes/base/jquery.ui.theme.css}|direction_css)" type="text/css" />]
+<!-- script et CSS datepicker -->
+<script src="[(#CHEMIN{js/jquery-ui-1.8.19.datepicker.min.js})]" type="text/javascript"></script>
+<link rel="stylesheet" href="[(#CHEMIN{js/themes/base/jquery.ui.datepicker.css})]" type="text/css" />
+<link rel="stylesheet" href="[(#CHEMIN{js/themes/base/jquery.ui.core.css})]" type="text/css" />
+<link rel="stylesheet" href="[(#CHEMIN{js/themes/base/jquery.ui.all.css})]" type="text/css" />
+<link rel="stylesheet" href="[(#CHEMIN{js/themes/base/jquery.ui.base.css})]" type="text/css" />
+<link rel="stylesheet" href="[(#CHEMIN{js/themes/base/jquery.ui.theme.css})]" type="text/css" />
 <!-- -->
+
+<script>
+jQuery(function($){
+	$.datepicker.regional['fr'] = {
+		closeText: 'Fermer',
+		prevText: '&#x3c;Préc',
+		nextText: 'Suiv&#x3e;',
+		currentText: 'Courant',
+		monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin',
+		'Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
+		monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun',
+		'Jul','Aoû','Sep','Oct','Nov','Déc'],
+		dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
+		dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
+		dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
+		weekHeader: 'Sm',
+		dateFormat: 'dd/mm/yy',
+		firstDay: 1,
+		isRTL: false,
+		showMonthAfterYear: false,
+		yearSuffix: ''};
+	$.datepicker.setDefaults($.datepicker.regional['fr']);
+});
+
+$(document).ready(function() {
+    $(".datepicker").datepicker({ disabled: false });
+	
+	$("#echcoll > a" ).toggle(function(e) {
+		e.preventDefault(); // Empêche le navigateur de suivre le lien.
+		$('#fleche').remove();
+		$('<img id="fleche" src="#CHEMIN{img/deplierbas.gif}" />').prependTo('#echcoll');
+		$('#facultatif').show(500);	
+	},function(e) {
+		e.preventDefault();
+		$('#fleche').remove();
+		$('<img id="fleche" src="#CHEMIN{img/deplierhaut.gif}" />').prependTo('#echcoll');
+		$('#facultatif').hide(500);
+});
+	
+	
+});
+</script>
 
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <script type="text/javascript"
@@ -53,6 +94,8 @@ function initialise() {
 	georssLayer.setMap(zemap1);
 
 };
+
+	
 </script>
 </head>
 
@@ -65,6 +108,8 @@ function initialise() {
 
 	<div class="main">
 	<div class="wrapper hfeed">
+	<div class="ariane rouge"><a href="#URL_SITE_SPIP"><:sel:accueil:></a> > <:sel:poster_annonce:></div>
+	
 	<div class="more">
 	<INCLURE{fond=inclure/plus}>
 		
@@ -75,7 +120,7 @@ function initialise() {
 		<div class="bloc">
 		<:sel:poster_annonce_explications:>
 		</div>
-		#FORMULAIRE_EDITER_ANNONCE
+		#FORMULAIRE_EDITER_ANNONCE{#ENV{id_annonce,oui},#SESSION{id_auteur}}
     </div>	<!-- .content -->	
 	
 	</div><!--.wrapper-->

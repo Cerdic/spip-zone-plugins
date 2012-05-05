@@ -1,11 +1,18 @@
 #CACHE{0}
 <script type="text/javascript">
+/* aucune de ces 3 écritures ne marchent...
 $(function() {
-// $("#triaz" ).preventDefault();
-// Empêche le navigateur de suivre le lien.
 	$('a.lightbox').colorbox({rel:'fiche'});
-
 });
+
+jQuery(function($){
+	$('a.lightbox').colorbox({rel:'fiche'});
+});
+
+$(document).ready(function() {
+    $('a.lightbox').colorbox({rel:'fiche'});
+});
+*/
 </script>
 
 <div class='formulaire_spip formulaire_editer formulaire_editer_acces_auteur'>
