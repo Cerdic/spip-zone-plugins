@@ -1,0 +1,1 @@
+<?php 	function sel_header_prive($flux){        $flux .= '<link rel="stylesheet" href="' . _DIR_PLUGIN_SEL  .'prive/themes/spip/css/sel_prive.css" type="text/css" media="all" />';        return $flux;    }?>

@@ -26,6 +26,7 @@
 <pipeline nom="formulaire_charger" inclure="pipelines/complement_editer_auteur.php" />
 <pipeline nom="formulaire_verifier" inclure="pipelines/complement_editer_auteur.php" />
 <pipeline nom="formulaire_traiter" inclure="pipelines/complement_editer_auteur.php" />
+<pipeline nom="header_prive" inclure="pipelines/header_prive.php" />
 
 <!-- ERGONOMIE DANS ESPACE PRIVE A REVOIR ET UNIFORMISER AVEC PLUGIN.XML -->
 <menu nom="sels" titre="sel:titre_sel" parent="menu_edition" icone="images/sel-16.png" />

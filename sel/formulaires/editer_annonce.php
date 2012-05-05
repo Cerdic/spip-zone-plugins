@@ -9,6 +9,9 @@ function formulaires_editer_annonce_charger_dist($id_annonce='new',$id_auteur) {
 	$valeurs['id_auteur'] = $id_auteur;
 	$valeurs['direction_echange'] = '';
 	$valeurs['nature'] = '';
+	$valeurs['date_debut'] = date('d/m/Y');
+	if ($GLOBALS['meta']['moderation_annonce']=='non') $valeurs['statut'] = '1annonce_ok';
+	else $valeurs['statut'] = '0nouvelle';
 	$valeurs['si_unite_heure']='';
 	
 	return $valeurs;

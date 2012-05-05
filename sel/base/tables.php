@@ -127,7 +127,7 @@ où id_traducteur = 1 autre champ de la table auteur, pointant vers un id_auteur 
 		"tel1_referent" => "VARCHAR(50) DEFAULT NULL",
 		"tel2_referent" => "VARCHAR(50) DEFAULT NULL",
 		"email_referent" => "TINYTEXT DEFAULT NULL",
-		"statut" => "VARCHAR(10) NOT NULL DEFAULT ''", // pour l'éventuelle gestion d'une modération a priori des annonces
+		"statut" => "VARCHAR(20) NOT NULL DEFAULT ''", // pour l'éventuelle gestion d'une modération a priori des annonces
 		// liste des statuts : 0nouvelle, 1annonce_ok, 2annonce_ko, ?? 3perime ?? ce dernier statut pourrait être calculé automatiquement à partir des dates
 		"total_unite" => "INT(5) UNSIGNED NOT NULL DEFAULT '0'",
 		"si_unite_heure" => "SMALLINT(3) UNSIGNED NOT NULL DEFAULT '0'",
@@ -382,7 +382,7 @@ function sel_declarer_tables_objets_sql($tables){
 			"tel1_referent" => "VARCHAR(50) DEFAULT NULL",
 			"tel2_referent" => "VARCHAR(50) DEFAULT NULL",
 			"email_referent" => "TINYTEXT DEFAULT NULL",
-			"statut" => "VARCHAR(10) NOT NULL DEFAULT ''", // pour l'éventuelle gestion d'une modération a priori des annonces
+			"statut" => "VARCHAR(20) NOT NULL DEFAULT ''", // pour l'éventuelle gestion d'une modération a priori des annonces
 			// liste des statuts : 0nouvelle, 1annonce_ok, 2annonce_ko, ?? 3perime ?? ce dernier statut pourrait être calculé automatiquement à partir des dates
 			"total_unite" => "INT(5) UNSIGNED NOT NULL DEFAULT '0'",
 			"si_unite_heure" => "SMALLINT(3) UNSIGNED NOT NULL DEFAULT '0'",
