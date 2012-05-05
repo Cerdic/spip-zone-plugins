@@ -1,2 +1,3 @@
-<traduction module="paquet-spip_400" gestionnaire="salvatore" reference="fr">
+<traduction module="paquet-spip_400" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/spip_400/spip_3/lang/" reference="fr">
+	<langue code="fr" />
 </traduction>
