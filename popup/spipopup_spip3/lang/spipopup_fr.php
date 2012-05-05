@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_popup' => 'Nom JavaScript de la fen&ecirc;tre',
 	'titre_popup_comment' => 'Vous pourrez par la suite utiliser ce nom pour la d&eacute;signer dans vos scripts ("window.popup").',
 	'options_popup' => 'Options JavaScript pass&eacute;es &agrave; la nouvelle fen&ecirc;tre',
-	'options_popup_comment' => 'Indiquez ici un tableau d\'options qui seront pass&eacute;es &agrave; la nouvelle fen&ecirc;tre sous la forme d\'un tableau du genre : "variable1: valeur1, variable2: valeur2, ..."',
+	'options_popup_comment' => 'Indiquez ici un tableau d\'options qui seront pass&eacute;es &agrave; la nouvelle fen&ecirc;tre sous la forme d\'un tableau du genre : "variable1: valeur1, variable2: valeur2, ..." ({ex.: "location: 0, scrollbars: 1"}).',
 
 // Popup
 	'popup_titre' => 'Bo&#238;te de dialogue',
