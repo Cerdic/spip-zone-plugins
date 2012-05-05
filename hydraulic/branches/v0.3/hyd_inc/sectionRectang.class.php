@@ -29,7 +29,7 @@ include_spip('hyd_inc/section.class');
  * Calculs de la section rectangulaire
  */
 class cSnRectang extends acSection {
-
+	
     function __construct(&$oLog,&$oP,$rLargeurFond) {
         $this->rLargeurBerge = $rLargeurFond;
         parent::__construct($oLog,$oP);

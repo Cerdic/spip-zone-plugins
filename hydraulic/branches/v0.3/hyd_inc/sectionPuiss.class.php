@@ -29,7 +29,7 @@ include_spip('hyd_inc/section.class');
  * Calculs de la section parabolique ou "puissance"
  */
 class cSnPuiss extends acSection {
-    protected $rk;      /// Coefficient de forme compris entre 0 et 1
+    public $rk;      /// Coefficient de forme compris entre 0 et 1
     //$LargeurBerge => La largeur des berges est déjà présente dans acSection
     protected $nbDessinPoints=50;
 

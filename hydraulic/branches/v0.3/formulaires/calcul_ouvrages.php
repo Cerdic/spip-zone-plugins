@@ -24,15 +24,15 @@
 function numLoi(){
 
 	$numLoi = array(
-		1 => 'Déversoir/Orifice Cemagref 88',
-		2 => 'Vanne de fond/Seuil Cemagref 88',
-		3 => 'Seuil dénoyé',	
-		4 => 'Seuil noyé',
-		5 => 'Vanne dénoyé',
-		6 => 'Vanne noyé',
-		7 => 'Cunge 1980',
-		8 => 'Déversoir/Orifice Cemagref 02',
-		9 => 'Vanne de fond/Seuil Cemagref 02'
+		1 => 'or_cemagref88',
+		2 => 's_cemagref88',
+		3 => 's_denoye',	
+		4 => 's_noye',
+		5 => 'v_denoye',
+		6 => 'v_noye',
+		7 => 'cunge',
+		8 => 'or_cemagref02',
+		9 => 's_cemagref02'
 	);
 	
 	return $numLoi;

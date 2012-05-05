@@ -39,7 +39,7 @@ function caract_communes() {
         'FR' => array(
             'def_section_rect',
             array(
-                'rLarg'  =>array('largeur_fond',2.5),
+                'rLargeurBerge'  =>array('largeur_fond',2.5),
             )
         ),
 
@@ -53,8 +53,8 @@ function caract_communes() {
         'FP' => array(
             'def_section_parab',
             array(
-                'rCoef' =>array('coef',0.5),
-                'rLargBerge' =>array('largeur_berge', 4)
+                'rk' =>array('coef',0.5),
+                'rLargeurBerge' =>array('largeur_berge', 4)
             )
         )
     );

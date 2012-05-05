@@ -38,11 +38,13 @@
  *
  */
  
+// Cette fonction renvoit tous les indices des champs présents dans le formulaire.
 function mes_champs_coeff_materiau() {
 	$mes_champs_coeff = array('L','M','N','Q','D','J','Lg');
 	return $mes_champs_coeff;
 }
 
+// Cette fonction renvoit seulement les paramètres fixes, ainsi que leur code pour le dictionnaires des langues
 function mes_champs_sans_coeff_materiau(){
 	$mes_champs_sans_coeff = array(
 		'Q' => _T('hydraulic:param_Q'),
@@ -54,12 +56,14 @@ function mes_champs_sans_coeff_materiau(){
 	return $mes_champs_sans_coeff;
 }
 
+// Découpe le paramètre champs en suivant les "_" et renvoit l'avant derner morceau.
 function id_decoupe($champs){
 	$decoup = explode('_', $champs, 3);
 	return $decoup[count($decoup)-1];
 }
 
-/* Tableau des données pour chaque type de tuyau. Ces valeurs sont associées
+/* 
+ * Tableau des données pour chaque type de tuyau. Ces valeurs sont associées
  * aux numéros des options du select (voir page lechapt_calmon.php)
  */
 function mes_saisies_materiau() {
@@ -129,7 +133,6 @@ function champs_obligatoires_lcalmon(){
 	 * Ce tableau contient la liste de tous les champs du formulaire.
 	 * La suite de cette fonction se chargera de supprimer les valeurs non obligatoires.
 	 */
-	 
 	$tChOblig = mes_champs_coeff_materiau();
 	$tChUtil = mes_champs_sans_coeff_materiau();
 	
@@ -178,6 +181,7 @@ function formulaires_lechapt_calmon_charger_dist() {
 	);
   
 	$mes_champs = mes_champs_sans_coeff_materiau();
+	// On parcourt tous le tableau des indices, et on initialise les valeurs des boutons radios, et des champs de variation
 	foreach($mes_champs as $cle=>$valeur){
 		if($cle == 'Q'){
 			$valeurs['choix_champs_'.$cle] = 'calcul_val_'.$cle;
@@ -203,6 +207,7 @@ function formulaires_lechapt_calmon_verifier_dist(){
 		if (_request($obligatoire) == NULL) {
 			$erreurs[$obligatoire] = _T('hydraulic:champ_obligatoire');
         }
+        // Les coefficients des matériaux doivent être strictement positifs
         else if(($obligatoire == 'L' || $obligatoire == 'M' || $obligatoire == 'N') && _request($obligatoire) == 0){
 			$erreurs[$obligatoire] = _T('hydraulic:valeur_positive');			
 		}
@@ -257,10 +262,12 @@ function formulaires_lechapt_calmon_traiter_dist(){
     // Nom du fichier en cache pour calcul déjà fait
     $CacheFileName=md5(serialize($datas));
 
+	// On transforme les champs du tableau en variables
 	foreach($champs_materiau_coeff as $champs){
 		${$champs} = _request($champs);
 	}
 	
+	// On récupère les différents choix effectué sur les boutons radios ainsi que les libelles de tous les paramètres
 	foreach($champs_materiau_sans_coeff as $cle=>$valeur){
 		$choix_radio[$cle] = _request('choix_champs_'.$cle);
 		$tabLibelle[$cle] = _T('hydraulic:param_'.$cle);
@@ -272,16 +279,22 @@ function formulaires_lechapt_calmon_traiter_dist(){
 	$i = 0;
 		
 	foreach($choix_radio as $ind){
+		// Si il y a une valeur a calculer
 		if(substr($ind, 0, 3) == 'cal'){
 			$ValCal = id_decoupe($ind);
 		}
+		// Sinon si une valeur varie
 		else if(substr($ind, 0, 3) == 'var'){
+			// alors on récupère sa valeur maximum, minimum et son pas de variation
 			$min = _request('val_min_'.id_decoupe($ind));
 			$max = _request('val_max_'.id_decoupe($ind));
 			$pas = _request('pas_var_'.id_decoupe($ind));
+			// On fait pointer la variable qui varie sur l'indice de parcours du tableau i 
 			${id_decoupe($ind)} = &$i;
 		}
 	}
+	
+	// Pour afficher correctement la valeur maximum
 	$max += $pas/2;
 	
 	$bNoCache = false; // true pour débugage
@@ -290,6 +303,10 @@ function formulaires_lechapt_calmon_traiter_dist(){
         $result = ReadCacheFile($CacheFileName);
     }
     else {
+		/*
+		 * Selon la variable à calculer, on gère les valeurs = à 0  et les valeurs infinies
+		 * et on fait le valcul correspondant.
+		 */
 		switch($ValCal){
 			case 'Q':
 				if($Lg == 0 && _request('choix_champs_Lg') != 'varier_val_Lg'){
@@ -367,12 +384,13 @@ function formulaires_lechapt_calmon_traiter_dist(){
 	$i = 0;
 	$tabClass = array();
 	
+	// On compte le nombre de valeur qui varie
 	foreach($tabLibelle as $cle=>$valeur){
 		if(substr(_request('choix_champs_'.$cle), 0, 3) == 'var'){
 			$cptValVar++;
 		}
 	}
-	
+	// On répertorie toutes les valeurs selon leur type dans un tableau
 	foreach($tabLibelle as $cle=>$valeur){
 		if(substr(_request('choix_champs_'.$cle), 0, 3) == 'cal'){
 			$tabClass['cal'] = $tabLibelle[$cle];
@@ -390,6 +408,7 @@ function formulaires_lechapt_calmon_traiter_dist(){
 		}
 	}
 	
+	// On génère les entêtes du tableau de résulats
 	$echo.='<table class="spip">
 			<thead>
 				<tr class="row_first">';
@@ -416,6 +435,7 @@ function formulaires_lechapt_calmon_traiter_dist(){
 		$ValeurVarie = _request(substr($tabClass['var'],0,1));
 	}
 	
+	// On insère les différents résultats dans le tableau correspondant.
 	foreach($result as $indice){
 		$i++;
 		$echo.= '<tr class="align_right ';
@@ -439,6 +459,7 @@ function formulaires_lechapt_calmon_traiter_dist(){
     $echo.=	'</tbody>
         </table>';
 
+	// Si la première valeur est infinie alors on la supprime et on tasse le tableau
 	if(is_infinite($result[0])){
 		unset($result[0]);
 		$result = array_values($result);

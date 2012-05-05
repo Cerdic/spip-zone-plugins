@@ -2,6 +2,23 @@
 
 <script language="javascript" type="text/javascript" src="#CHEMIN{js/hyd_fonctions.js}"></script>
 <script>
+/*
+ * La plupart des commentaires sont les mêmes que pour la page lechapt_calmon.html
+ */
+ 
+// Choix de l'ouvrage
+var globSelectOuv = 'vRect';
+var glob = [];
+
+function setVarGlob(){
+	globSelectOuv = getSelectValue('choix_ouvrage');
+	affSurvCheck = document.getElementById("affSurverse").checked;
+	for(var i in glob){
+		glob[i] = getRadioValue('choix_champs_'+i);
+	}
+}
+
+// Retourne sous forme de tableau tous les élèments de la Class classe et de type tagName
 function elementsParClasse(classe, tagName){
 	var divs = document.getElementsByTagName(tagName);
     var resultats = new Array();
@@ -13,45 +30,116 @@ function elementsParClasse(classe, tagName){
     return resultats;	
 }
 
-var globSelectOuv = 'vRect';
-var glob = [];
-
-// Variables globales contenant le choix fait pour chaque ligne	 
-<BOUCLE_remplisglob(POUR){tableau #ENV{mes_saisies}}>
-	if(globSelectOuv == '#CLE'){
-	<BOUCLE_remplisglob1(POUR){tableau #VALEUR|table_valeur{1}}>
-		glob['#CLE'] = '#ENV{choix_champs_#CLE}';
-	</BOUCLE_remplisglob1>
-	}
-</BOUCLE_remplisglob>
-
-function setVarGlob(){
-	globSelectOuv = getSelectValue('choix_ouvrage');
-	<BOUCLE_remplisglob2(POUR){tableau #ENV{mes_saisies}}>
-		if(globSelectOuv == '#CLE'){
-		<BOUCLE_remplisglob3(POUR){tableau #VALEUR|table_valeur{1}}>
-			glob['#CLE'] = getRadioValue('choix_champs_#CLE');
-		</BOUCLE_remplisglob3>
-		}
-	</BOUCLE_remplisglob2>
+function affichageEtValeur(){
+	afficher_cacher_champs_select();
+	afficher_cacher_champs_ouv();
+	afficher_cacher_surverse();
 }
 
-function gestion_radios(nom,valeur){
-	var tabPartiel = [];
-	var tabIndice = [];
+function afficher_cacher_champs_select(){
 	setVarGlob();
+	var tabAfficher = [];
 
-<BOUCLE_libelleCaract3(POUR){tableau #ENV{mes_saisies}}>
-	if(globSelectOuv == '#CLE'){
-	<BOUCLE_libelleCaract4(POUR){tableau #VALEUR|table_valeur{1}}>
-		tabPartiel['#CLE'] = glob['#CLE'];
-			tabIndice.push('#CLE');
-		</BOUCLE_libelleCaract4>
+	<BOUCLE_tabS(POUR){tableau #ENV{mes_saisies}}>
+		if(globSelectOuv == '#CLE'){
+			<BOUCLE_tabS2(POUR){tableau #VALEUR|table_valeur{2}}>
+				tabAfficher.push([(#VALEUR|table_valeur{0})]);
+			</BOUCLE_tabS2>
 		}
-		</BOUCLE_libelleCaract3>
-		
+	</BOUCLE_tabS>
+
+	for(var i = 0; i < document.getElementById("choix_equation_debit").length; i++){
+		document.getElementById("choix_equation_debit").options[i].style.display="none";
+		document.getElementById("choix_equation_debit").options[i].selected=false;
+	}
+
+	var cpt = 0;
+	for(var i in tabAfficher){ 
+		document.getElementById("choix_equation_debit").options[tabAfficher[i]-1].style.display="list-item";
+		if(cpt == 0){
+			document.getElementById("choix_equation_debit").options[tabAfficher[i]-1].selected=true;
+			cpt++;
+		}
+	}
+}
+
+function afficher_cacher_champs_ouv(){
+	setVarGlob();
+	var tabOuvrageAfficher = [];
+	var tabOuvrageCacher = [];
+	
+	<BOUCLE_remplisTabOuv(POUR) {tableau #ENV{mes_saisies}}>
+		if(globSelectOuv == '#CLE'){
+		<BOUCLE_remplisTabOuv2(POUR) {tableau #VALEUR|table_valeur{1}}>
+			tabOuvrageAfficher.push('#CLE');
+		</BOUCLE_remplisTabOuv2>
+		}
+	</BOUCLE_remplisTabOuv>
+	
+	<BOUCLE_libEquat(POUR){tableau #ENV{saisie_equat}}>
+		tabOuvrageCacher.push('#CLE');
+	</BOUCLE_libEquat>
+	
+	for(var i in tabOuvrageCacher){
+		document.getElementById('ouvrage_'+tabOuvrageCacher[i]).style.display='none';
+	}
+	
+	for(var i in tabOuvrageAfficher){
+		document.getElementById('ouvrage_'+tabOuvrageAfficher[i]).style.display='table-row';
+	}
+	
+}
+
+function afficher_cacher_surverse(){
+	setVarGlob();
+	var tabAffSurv = [];
+
+	<BOUCLE_vanne1(POUR){tableau #ENV{mes_saisies}}>
+	#SET{afficherVanne, #VALEUR|table_valeur{1}}
+		<BOUCLE_vanne2(CONDITION){si #VALEUR|table_valeur{0}|substr{0,5}|== {'vanne'}}>
+			tabAffSurv.push('#CLE');
+		</BOUCLE_vanne2>
+	</BOUCLE_vanne1>
+
+	// Afficher ou cacher le fieldset + la case a cocher si cest pas une vanne
+	if(tabAffSurv.indexOf(globSelectOuv) !== -1){
+		document.getElementById("surverseField").style.display='table-row';	
+		document.getElementById("afficher_surverse").style.display='table-row';		
+				
+	}
+	else{
+		document.getElementById("surverseField").style.display='none';			
+		document.getElementById("afficher_surverse").style.display='none';		
+		document.getElementById("affSurverse").checked=false;		
+	}
+	
+	var f = document.getElementById("form_calcul_ouvrages");
+	if(f) {
+		var champs = f.getElementsByTagName("tr");
+		for(var i=0, n=champs.length; i<n; i++) {
+			if(champs[i].getAttribute("id") !== null && champs[i].getAttribute("id").indexOf('field_surverse',0) !== -1 && document.getElementById("affSurverse").checked){
+				document.getElementById(champs[i].getAttribute("id")).style.display="table-row";
+				document.getElementById('loi_debit_surverse').style.display="table-row";
+			}
+			else if(champs[i].getAttribute("id") !== null && champs[i].getAttribute("id").indexOf('field_surverse',0) !== -1 && !document.getElementById("affSurverse").checked){
+				document.getElementById(champs[i].getAttribute("id")).style.display="none";
+				document.getElementById('loi_debit_surverse').style.display="none";
+			}
+		}
+	}
+}
+
+// Gére le comportement des boutons radios
+function gestion_radios(nom,valeur){
+	// Ce tableau contiendra tous les indices , ainsi que leur valeur, excepté celle qui a été cliquée
+	var tabPartiel = [];
+	
+	// On supprime du tableau l'élément sur lequel on a cliqué
 	delete(tabPartiel[nom]);
-	// Si on appuis sur un bouton de type "calcul_val"
+	
+	// Tableau des indices
+	var tabIndice = [];
+
 	if(valeur.substr(0,3) == 'cal'){
 		/*
 		 * Pour toutes les lignes autres que celle passée en paramètre,
@@ -69,10 +157,9 @@ function gestion_radios(nom,valeur){
 		}
 	}
 
-	// Si on appuis sur un bouton de type "varier_val" ou "val_fixe" 
+	// Si on appuit sur un bouton de type "varier_val" ou "val_fixe" 
 	else if(valeur.substr(0,3) == 'var' || valeur.substr(0,3)=='val'){
 		for(var cle in tabPartiel){
-			var test = 0;
 			if(document.getElementById('varier_val_'+cle).checked && (glob[nom] != "calcul_val_"+nom)){
 				if(document.getElementById('varier_val_'+nom).checked){
 					document.getElementById('val_fixe_'+cle).checked=true;
@@ -96,7 +183,7 @@ function gestion_radios(nom,valeur){
 		}
 		// Si aucune calcul_val n'est checké
 		if(cptValCal == 0){
-			
+			// Alors on chercher l'indice suivant...
 			indice = '';
 			for(var i = 0; i < tabIndice.length; i++){
 				if(tabIndice[i] == nom){
@@ -110,6 +197,7 @@ function gestion_radios(nom,valeur){
 				}
 				
 			}
+			// ... et on le met a calcul_val
 			document.getElementById('calcul_val_'+indice).checked=true;
 			document.getElementById('caract_'+nom).disabled=false;
 			document.getElementById('caract_'+indice).disabled=true;
@@ -121,6 +209,7 @@ function gestion_radios(nom,valeur){
 		}
 	}
 
+	// Si on appuis sur un bouton de type varier_val
 	if(valeur.substr(0,3) == 'var'){
 		setVarGlob();
 		document.getElementById('caract_'+nom).disabled=true;
@@ -129,12 +218,13 @@ function gestion_radios(nom,valeur){
 				document.getElementById('caract_'+cle).disabled=false;
 			}	
 		}
-		alert(nom);
+		
+		// on affiche les champs correspondant au bouton sélectionné
 		var afficher = elementsParClasse('champs_var_'+nom, 'tr');
 		for(var i in afficher){
 			afficher[i].style.display='table-row';
 		}
-		
+		// On cache tous les autres champs de variations. 
 		for(var cle in tabPartiel){	
 			var cacher = elementsParClasse('champs_var_'+cle, 'tr');
 			for(var i in cacher){
@@ -164,9 +254,12 @@ function gestion_radios(nom,valeur){
 			cacher[i].style.display='none';
 		}
 	}
+	
 	setVarGlob();
-}	
+}
+
 </script>
+
 <form method="post" action="#ENV{action}" id="form_calcul_ouvrages">
    #ACTION_FORMULAIRE{#ENV{action}}
    <table class="hyd_formulaire">
@@ -212,7 +305,7 @@ function gestion_radios(nom,valeur){
 						</BOUCLE_tabMesSaisies2>
 					</BOUCLE_conditionAff>
 				</BOUCLE_tabMesSaisies>
-					<option value="#CLE" [(#ENV{choixEquation}|=={#CLE}|?{'selected',''})] style="display: [(#CLE|=={#GET{affichage}}|?{'list-item','none'})]">#VALEUR</option>
+					<option value="#CLE" [(#ENV{choixEquation}|=={#CLE}|?{'selected',''})] style="display: [(#CLE|=={#GET{affichage}}|?{'list-item','none'})]">[(#VALEUR|traduction_hydraulic)]</option>
 				</BOUCLE_choixEquat>
 				</select>
 		  
@@ -303,7 +396,7 @@ function gestion_radios(nom,valeur){
 				<:hydraulic:surverse:> :			
 			</td>			
 			<td>
-				<input type="checkbox" id="affSurverse" name="afficher_surverse" onclick="afficher_case_a_cocher()" [(#ENV{afficher_surverse}|=={'on'}|?{'checked', ''})]/>
+				<input type="checkbox" id="affSurverse" name="afficher_surverse" onclick="afficher_cacher_surverse()" [(#ENV{afficher_surverse}|=={'on'}|?{'checked', ''})]/>
 				[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{[(#VALEUR|table_valeur{0})]})</div>]
 			</td>	
 		</tr>

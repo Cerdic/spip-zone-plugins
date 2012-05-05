@@ -236,6 +236,7 @@ abstract class acSection {
             $this->rY = $this->oP->rYB;
             switch($sDonnee) {
                 case 'B' : // Largeur aux berges
+               
                     $this->arCalcGeo[$sDonnee] = $this->CalcB();
                     if($this->arCalcGeo[$sDonnee] < $this->oP->rYB / 100) {
                         // Section fermée

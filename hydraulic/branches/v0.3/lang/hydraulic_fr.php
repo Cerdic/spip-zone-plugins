@@ -28,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'charge_critique' => "La charge critique (m)",
     'cote_eau'        => "Côte de l'eau (m)",
     'coef'            => "Coefficient",
+    'cunge'           => "Cunge 1980",
     // D
     'debit_amont'     => "Débit amont (m³/s)",
     'def_section_trap'=> "Définition de la section trapézoïdale",
@@ -68,6 +69,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'newton_non_convergence' => "Non convergence du calcul (Méthode de Newton)",
     // O
     'ordonnee'        => "Ordonnée",
+    'or_cemagref88'   => "Déversoir/Orifice Cemagref 88",
+    'or_cemagref02'   => "Déversoir/Orifice Cemagref 02",
     // P
     'param_calcul'    => "Paramètres de calcul",
     'pas_ajustement'  => "ajustement du pas d'espace à ",
@@ -86,7 +89,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'precision'  => "Précision de calcul(m)",
     'perim_mouille'   => "Le périmètre mouillé (m)",
     'perte_charge'    => "La perte de charge (m/m)",
-
     //R
     'rayon_hyd'       => "Le rayon hydraulique (m)",
     'rugosite_nc'     => "Rugosité (SI)",
@@ -97,6 +99,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'section_circ'    => "Section Circulaire",
     'section_parab'   => "Section Parabolique",
     'surf_mouille'    => "La surface mouillée (m²)",
+    's_cemagref88'    => "Vanne de fond/Seuil Cemagref 88",
+    's_denoye'        => "Seuil dénoyé",
+    's_noye'          => "Seuil noyé", 
+    's_cemagref02'    => "Vanne de fond/Seuil Cemagref 02",
     //T
     'tirant_eau'      => "Tirant d'eau (m)",
     'type_materiau'   => "Type du matériau",
@@ -119,6 +125,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'varier_val'      => "Paramètre à varier",
     'vit_moy'         => "La vitesse moyenne (m/s)",
     'var_lin'         => "Variation linéaire de l'énergie spécifique (m/m)",
+    'v_denoye'        => "Vanne dénoyé",
+    'v_noye'          => "Vanne noyé",
 
 );
 

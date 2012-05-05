@@ -1,8 +1,12 @@
 [<div class='hyd_formulaire_erreur '><span>(#ENV*{message_erreur})</span></div>]
 <script language="javascript" type="text/javascript" src="#CHEMIN{js/hyd_fonctions.js}"></script>
 <script>
-// Permet de switcher les valeur de L, M et N en fonction du matériau choisie
+// Permet de switcher les valeur de L, M et N en fonction du matériau choisis
 function change_valeur() {
+	/*
+	 * Le select commence à 1 donc on diminue son indice de 1 vu qu'on utilise un tableau pour stocker
+	 * les valeurs (on commence a 0)
+	 */
 	var choix_mat = getSelectValue('choix_materiau')-1;
 	var materiau = new Array();
 
@@ -17,6 +21,7 @@ function change_valeur() {
    document.getElementById('champs_N').value=materiau[(choix_mat*3)+2];
 }
 
+// Retourne sous forme de tableau tous les élèments de la Class classe et de type tagName
 function elementsParClasse(classe, tagName){
 	var divs = document.getElementsByTagName(tagName);
     var resultats = new Array();
@@ -28,6 +33,7 @@ function elementsParClasse(classe, tagName){
     return resultats;	
 }
 
+// Tableau contenant tous les choix des groupes de boutons radios
 var glob = [];
 
 // Variables globales contenant le choix fait pour chaque ligne	 
@@ -38,6 +44,7 @@ var glob = [];
 // Mise a jour des variables globales
 function setVarGlob(){
 	<BOUCLE_sans_coeff2(POUR){tableau #ENV{tableau_caract}}>
+		// On récupère le choix effectué parmis les groupes de champs radios.
 		glob['#CLE'] = getRadioValue('choix_champs_#CLE');
 	</BOUCLE_sans_coeff2>
 }
@@ -45,13 +52,14 @@ function setVarGlob(){
 // Gére le comportement des boutons radios
 function gestion_radios(nom,valeur){
 
-	// Ce tableau contiendra tous les indices , ainsi que leur valeur, excepté celle qui a été cliqué
+	// Ce tableau contiendra tous les indices , ainsi que leur valeur, excepté celle qui a été cliquée
 	var tabPartiel = {
 		<BOUCLE_sans_coeff3(POUR){tableau #ENV{tableau_caract}}>
 			'#CLE' : glob['#CLE'],
 		</BOUCLE_sans_coeff3>
 	};
 	
+	// On supprime du tableau l'élément sur lequel on a cliqué
 	delete(tabPartiel[nom]);
 	
 	// Tableau des indices
@@ -78,10 +86,9 @@ function gestion_radios(nom,valeur){
 		}
 	}
 
-	// Si on appuis sur un bouton de type "varier_val" ou "val_fixe" 
+	// Si on appuit sur un bouton de type "varier_val" ou "val_fixe" 
 	else if(valeur.substr(0,3) == 'var' || valeur.substr(0,3)=='val'){
 		for(var cle in tabPartiel){
-			var test = 0;
 			if(document.getElementById('varier_val_'+cle).checked && (glob[nom] != "calcul_val_"+nom)){
 				if(document.getElementById('varier_val_'+nom).checked){
 					document.getElementById('val_fixe_'+cle).checked=true;
@@ -105,7 +112,7 @@ function gestion_radios(nom,valeur){
 		}
 		// Si aucune calcul_val n'est checké
 		if(cptValCal == 0){
-			
+			// Alors on chercher l'indice suivant...
 			indice = '';
 			for(var i = 0; i < tabIndice.length; i++){
 				if(tabIndice[i] == nom){
@@ -119,6 +126,7 @@ function gestion_radios(nom,valeur){
 				}
 				
 			}
+			// ... et on le met a calcul_val
 			document.getElementById('calcul_val_'+indice).checked=true;
 			document.getElementById('caract_'+nom).disabled=false;
 			document.getElementById('caract_'+indice).disabled=true;
@@ -130,6 +138,7 @@ function gestion_radios(nom,valeur){
 		}
 	}
 
+	// Si on appuis sur un bouton de type varier_val
 	if(valeur.substr(0,3) == 'var'){
 		setVarGlob();
 		document.getElementById('caract_'+nom).disabled=true;
@@ -139,11 +148,12 @@ function gestion_radios(nom,valeur){
 			}	
 		}
 		
+		// on affiche les champs correspondant au bouton sélectionné
 		var afficher = elementsParClasse('champs_var_'+nom, 'tr');
 		for(var i in afficher){
 			afficher[i].style.display='table-row';
 		}
-		
+		// On cache tous les autres champs de variations. 
 		for(var cle in tabPartiel){	
 			var cacher = elementsParClasse('champs_var_'+cle, 'tr');
 			for(var i in cacher){
