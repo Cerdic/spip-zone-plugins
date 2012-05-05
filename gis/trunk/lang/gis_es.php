@@ -53,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_gis_nouveau' => 'Crear un nuevo punto', # MODIF
 	'editer_gis_titre' => 'Los puntos geolocalizados', # MODIF
 	'erreur_recherche_pas_resultats' => 'Ningún punto corresponde a la búsqueda.', # MODIF
+	'erreur_xmlrpc_lat_lon' => 'La latitude et la longitude doivent être passées en argument', # NEW
 	'explication_api_forcee' => 'La API esta impuesta por un otro plugin o esqueleto.',
 	'explication_maptype_force' => 'Le fond cartographique est imposé par un autre plugin ou squelette.', # NEW
 
