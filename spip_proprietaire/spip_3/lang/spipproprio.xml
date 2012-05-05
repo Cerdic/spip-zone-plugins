@@ -1,4 +1,4 @@
-<traduction module="spipproprio" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/spip_proprietaire/lang/" reference="fr">
+<traduction module="spipproprio" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/spip_proprietaire/spip_3/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.org/tradlang_module/spipproprio?lang_cible=en">
 		<traducteur nom="merce" lien="http://trad.spip.org/auteur/merce" />
 	</langue>
