@@ -2,6 +2,9 @@
 	<langue code="ar" url="http://trad.spip.org/tradlang_module/boutonstexte?lang_cible=ar">
 		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
 	</langue>
+	<langue code="de" url="http://trad.spip.org/tradlang_module/boutonstexte?lang_cible=de">
+		<traducteur nom="klaus++" lien="http://trad.spip.org/auteur/klaus" />
+	</langue>
 	<langue code="en" url="http://trad.spip.org/tradlang_module/boutonstexte?lang_cible=en">
 		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
 	</langue>
