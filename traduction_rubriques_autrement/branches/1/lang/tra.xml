@@ -5,7 +5,9 @@
 	<langue code="ca" url="http://trad.spip.org/tradlang_module/tra?lang_cible=ca">
 		<traducteur nom="merce" lien="http://trad.spip.org/auteur/merce" />
 	</langue>
-	<langue code="de" />
+	<langue code="de" url="http://trad.spip.org/tradlang_module/tra?lang_cible=de">
+		<traducteur nom="Rainer Müller" lien="http://trad.spip.org/auteur/rainer-muller" />
+	</langue>
 	<langue code="en" url="http://trad.spip.org/tradlang_module/tra?lang_cible=en">
 		<traducteur nom="Mark" lien="http://trad.spip.org/auteur/mark" />
 	</langue>
