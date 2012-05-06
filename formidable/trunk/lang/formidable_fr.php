@@ -100,6 +100,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'traiter_email_option_sujet_accuse_label' => 'Sujet de l\'accus&eacute; de r&eacute;ception',
 'traiter_email_option_sujet_explication' => 'Construisez le sujet &agrave; l\'aide des @raccourcis@. Si vous ne mettez rien, le sujet sera construit automatiquement.',
 'traiter_email_option_sujet_label' => 'Sujet du message',
+'traiter_email_option_vrai_envoyeur_label' => 'Ins&eacute;rer le courriel de l\'envoyeur dans le champ "From"',
+'traiter_email_option_vrai_envoyeur_explication' => 'Certains serveurs SMTP ne permettent pas d\'utiliser un courriel arbitraire pour le champ "From". Pour cette raison Formidable ins&egrave;re par défaut le courriel de l\'envoyeur dans le champ "Reply-To". Cocher ici pour ins&egrave;rer le courriel dans le champ "From".',
 'traiter_email_page' => '<a href="@url@">Depuis cette page</a>.',
 'traiter_email_sujet' => '@nom@ vous a &eacute;crit.',
 'traiter_email_sujet_accuse' => 'Merci de votre r&eacute;ponse.',

@@ -26,6 +26,12 @@ options:
       explication: '<:formidable:traiter_email_option_envoyeur_courriel_explication:>'
       env: true
   -
+    saisie: 'case'
+    options:
+      nom: 'activer_vrai_envoyeur'
+      label: '<:formidable:traiter_email_option_vrai_envoyeur_label:>'
+      explication: '<:formidable:traiter_email_option_vrai_envoyeur_explication:>'
+  -
     saisie: 'input'
     options:
       nom: 'champ_nom'
