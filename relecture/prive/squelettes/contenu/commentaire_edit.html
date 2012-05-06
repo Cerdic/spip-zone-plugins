@@ -3,14 +3,19 @@
 ][(#ID_COMMENTAIRE|non)
 	[(#AUTORISER{commenter, relecture, #ENV{id_relecture}}|sinon_interdire_acces)]
 ]
-#SET{redirect, #ENV{redirect}|sinon{#URL_ECRIRE{relecture_comment}|parametre_url{id_relecture,#ENV{id_relecture}}|parametre_url{element, #ENV{element}}}}
+#SET{redirect, #ENV{redirect}
+				|sinon{#URL_ECRIRE{relecture_comment}
+				|parametre_url{id_relecture,#ENV{id_relecture}}
+				|parametre_url{element, #ENV{element}}}}
 
 <div class="cadre-formulaire-editer">
 	<div class="entete-formulaire">
 		[(#ENV{redirect}|icone_verticale{<:icone_retour:>, commentaire, '', left})]
 		[(#VAL{commentaire}|objet_info{#ID_COMMENTAIRE|?{texte_modifier, texte_creer}}|_T)]
 		<h1>
-			#INFO_TITRE{relecture, #ENV{id_relecture}}[ - #VAL{commentaire}|objet_info{texte_objet}|_T (#ID_COMMENTAIRE)]
+			[(#INFO_TITRE{relecture, #ENV{id_relecture}})]
+			[ - (#VAL{relecture:label_article_}|concat{#ENV{element}}|_T)]
+			[ - #VAL{commentaire}|objet_info{texte_objet}|_T(#ID_COMMENTAIRE)]
 		</h1>
 	</div>
 

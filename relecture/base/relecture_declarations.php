@@ -99,13 +99,31 @@ function relecture_declarer_tables_objets_sql($tables) {
 
 		// Titre, date et gestion du statut
 		'titre'					=> "id_commentaire AS titre, '' AS lang",
+		'date' 					=> 'date_crea',
+		'texte_changer_statut' => 'relecture:texte_instituer_commentaire',
+		'aide_changer_statut' => '',
+		'statut_titres' => array(
+			'ouvert' => 'relecture:titre_commentaire_ouvert',
+			'accepte' => 'relecture:titre_commentaire_accepte',
+			'refuse' => 'relecture:titre_commentaire_refuse'
+		),
+		'statut_textes_instituer' => 	array(
+			'ouvert' => 'relecture:texte_commentaire_ouvert',
+			'accepte' => 'relecture:texte_commentaire_accepte',
+			'refuse' => 'relecture:texte_commentaire_refuse'
+		),
+		'statut_images' => array(
+			'ouvert'=>'puce-preparer-8.png',
+			'accepte'=>'puce-publier-8.png',
+			'accepte'=>'puce-refuser-8.png'
+		),
 
 		// Edition, affichage et recherche
 		'page'					=> '',
 		'url_voir' => 'commentaire_edit',
 		'url_edit' => 'commentaire_edit',
-		'editable'				=> 'non',
-		'champs_editables'		=> array(),
+		'editable'				=> 'oui',
+		'champs_editables'		=> array('texte', 'reponse'),
 		'rechercher_champs'		=> array(),
 		'rechercher_jointures'	=> array(),
 		'icone_objet'			=> '',

@@ -180,6 +180,8 @@ function relecture_pre_insertion($flux) {
 			// instituer surchargee dans le pipeline pre_edition
 		}
 	}
+	else if ($flux['args']['table'] == 'spip_commentaires') {
+	}
 
 	return $flux;
 }

@@ -30,7 +30,6 @@ function formulaires_editer_relecture_traiter_dist($id_relecture='oui', $redirec
 	// Ouverture d'une relecture sur un article
 	if (($id_relecture == 'oui')
 	AND ($id_article = intval(_request('id_article')))) {
-		// On transmet l'id de l'article
 		// Pour eviter que le traitement standard ne cree un enregistrement dans la table spip_auteurs_liens
 		// il faut supprimer la reference a l'auteur connecte
 		set_request('id_auteur','');
