@@ -11,7 +11,7 @@
 <div class="onglets_simple">
 <ul class="elements">
 <BOUCLE_elements(DATA){source table, #GET{elements}}>
-	[<li class='#VALEUR'>
+	[<li>
 		(#SELF|parametre_url{element, #VALEUR}
 			|lien_ou_expose{
 				[(#VAL{relecture:label_article_}|concat{#VALEUR}|_T)],
@@ -27,19 +27,28 @@
 [(#REM) <!-- Formulaire de l'element en cours de commentaire --> ]
 <BOUCLE_relecture(RELECTURES){id_relecture}>
 [(#SET{date_fin_periode, [(#DATE_FIN_COMMENTAIRE|affdate_court)]})]
-<div class='cadre-formulaire-editer'>
+<div class="cadre-formulaire-editer">
 <div class="entete-formulaire">
-	<:relecture:info_periode_commentaire_ouverte{date=#GET{date_fin_periode}}:>
+	<:relecture:info_commenter_relecture:>
 	<h1>#INFO_TITRE{relecture, #ID_RELECTURE}[ - (#VAL{relecture:label_article_}|concat{#GET{encours}}|_T)]</h1>
-	[(#REM) <!-- Statistiques sur les commentaires sur l'element --> ]
+
+	[(#REM) <!-- Statistiques sur les commentaires de l'element --> ]
 	#SET{compteurs, #ID_RELECTURE|relecture_compter_commentaires{#GET{encours}}}
-	<div class="liste">
-		<ul>
-			[<li><:relecture:label_commentaires_ouverts:> : (#GET{compteurs}|table_valeur{ouvert})</li>]
-			[<li><:relecture:label_commentaires_acceptes:> : (#GET{compteurs}|table_valeur{accepte})</li>]
-			[<li><:relecture:label_commentaires_refuses:> : (#GET{compteurs}|table_valeur{refuse})</li>]
-		</ul>
+	[(#BOITE_OUVRIR{'', raccourcis})]
+	<div class="unit size1of1 lastunit"><strong><:relecture:info_periode_commentaire_ouverte{date=#GET{date_fin_periode}}:></strong></div>
+	<div class="unit size1of3">
+		<span><:relecture:label_commentaires_ouverts:> : </span>
+		<span dir="#LANG_DIR">[<strong>(#GET{compteurs}|table_valeur{ouvert})</strong>]</span>
 	</div>
+	<div class="unit size1of3">
+		<span><:relecture:label_commentaires_acceptes:> : </span>
+		<span dir="#LANG_DIR">[<strong>(#GET{compteurs}|table_valeur{accepte})</strong>]</span>
+	</div>
+	<div class="unit size1of3 lastunit">
+		<span><:relecture:label_commentaires_refuses:> : </span>
+		<span dir="#LANG_DIR">[<strong>(#GET{compteurs}|table_valeur{refuse})</strong>]</span>
+	</div>
+	#BOITE_FERMER
 </div>
 
 #SET{redirect, #ENV{redirect, #ID_RELECTURE|generer_url_entite{relecture}}}

@@ -3,7 +3,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
- * Definition de la barre d'outil utilie pour deposer des commentaires de relecture.
+ * Definition de la barre d'outil utilisee pour deposer des commentaires de relecture.
  *
  * @return object
  */
@@ -14,7 +14,7 @@ function barre_outils_relecture(){
 			// Inserer un commentaire
 			array(
 				"id"        => 'insercom',
-				"name"      => _T('relecture:bouton_inserer_commentaire'),
+				"name"      => _T('relecture:bouton_ajouter_commentaire'),
 				"className" => "outil_inserer",
 				"replaceWith" => "function(h){ return lancer_insertion(h);}",
 				"display"   => true,
@@ -25,17 +25,39 @@ function barre_outils_relecture(){
 			function lancer_insertion(h) {
 				// Reserver la selection pour le reinjecter ensuite
 				s = h.selection;
+
 				// Recuperer les offsets de debut et fin de la selection
 				d = h.textarea.selectionStart;
+				if (!d) { d = '0'; }
 				f = h.textarea.selectionEnd;
+				if (!f) { f = '0'; }
+
 				// Creer l'url de la page d'edition du commentaire
-				u = parametre_url('?exec=commentaire_edit', 'id_relecture', 29);
-				u = parametre_url(u, 'debut', d);
-				u = parametre_url(u, 'fin', f);
+				p = get_parametre_url();console.log(p);
+				if (!p['element']) {
+					p['element'] = 'texte';
+				}
+				u = parametre_url('?exec=commentaire_edit', 'id_relecture', p['id_relecture']);
+				u = parametre_url(u, 'element', p['element']);
+				u = parametre_url(u, 'index_debut', d);
+				u = parametre_url(u, 'index_fin', f);
+				u = parametre_url(u, 'var_zajax', 'contenu');
+
 				// Appel de la modalbox pour saisir le commentaire
 				// Le retour se fait sur la page en cours
 				jQuery.modalboxload(u, {onClose: function (dialog) {jQuery('#').ajaxReload();}});
 				return s;
+			}
+
+			function get_parametre_url() {
+			    var vars = [], hash;
+			    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+			    for (var i = 0; i < hashes.length; i++) {
+			        hash = hashes[i].split('=');
+			        vars.push(hash[0]);
+			        vars[hash[0]] = hash[1];
+			    }
+			    return vars;
 			}
 			",
 	));

@@ -111,9 +111,9 @@ function relecture_declarer_tables_objets_sql($tables) {
 		'icone_objet'			=> '',
 
 		// Textes standard
-		'texte_retour' 			=> '',
-		'texte_modifier' 		=> '',
-		'texte_creer' 			=> '',
+		'texte_retour' 			=> 'icone_retour',
+		'texte_modifier' 		=> 'relecture:bouton_modifier_commentaire',
+		'texte_creer' 			=> 'relecture:bouton_saisir_commentaire',
 		'texte_creer_associer' 	=> '',
 		'texte_signale_edition' => '',
 		'texte_objet' 			=> 'relecture:titre_commentaire',

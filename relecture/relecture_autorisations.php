@@ -195,7 +195,7 @@ function autoriser_commentaire_modifier_dist($faire, $type, $id, $qui, $opt) {
  * @param object $opt
  * @return
  */
-function autoriser_commentaire_repondre_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_commentaire_moderer_dist($faire, $type, $id, $qui, $opt) {
 
 	$autoriser = false;
 

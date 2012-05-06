@@ -1,0 +1,14 @@
+[(#ID_RELECTURE|oui)
+	[(#AUTORISER{commenter, relecture, #ID_RELECTURE})
+		[(#URL_ECRIRE{relecture_comment, id_relecture=#ID_RELECTURE}|icone{<:relecture:bouton_participer_relecture:>, commentaire, #LANG_RIGHT,'',ajax})]
+	]
+
+	[(#REM)	<!-- Les plugins heberges par le depot et le nombre de paquets pour chaque plugin --> ]
+	[(#INCLURE{fond=prive/objets/liste/commentaires,
+		titre=<:svp:titre_liste_commentaires:>,
+		par=date_crea,
+		pas=10,
+		id_relecture,
+		ajax,
+		env})]
+]

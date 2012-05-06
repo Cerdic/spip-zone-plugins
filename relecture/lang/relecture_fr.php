@@ -10,12 +10,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
+	'bouton_ajouter_commentaire' => 'Ajouter un commentaire',
 	'bouton_ajouter_relecteur' => 'Ajouter un relecteur',
-	'bouton_configurer_relecture' => 'Administrer',
-	'bouton_inserer_commentaire' => 'Insérer un commentaire',
+	'bouton_configurer_relecture' => 'Administrer la relecture',
+	'bouton_modifier_commentaire' => 'Modifier le commentaire',
 	'bouton_modifier_relecture' => 'Modifier la relecture',
 	'bouton_ouvrir_relecture' => 'Ouvrir un cycle de relecture',
-	'bouton_participer_relecture' => 'Participer',
+	'bouton_participer_relecture' => 'Participer à la relecture',
+	'bouton_saisir_commentaire' => 'Saisir le texte de votre commentaire',
 	'bouton_voir_relecture' => 'Voir',
 	'bouton_voir_relectures' => 'Afficher l\'historique des relectures',
 
@@ -26,13 +28,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_commentaire_ferme' => 'Aucun commentaire fermé',
 	'info_aucun_commentaire' => 'Aucun commentaire déposé',
 	'info_aucun_relecture' => 'aucune relecture',
+	'info_commenter_relecture' => 'Insérer des commentaires sur cet élément',
 	'info_nb_commentaires_fermes' => '@nb@ commentaires fermés',
 	'info_nb_commentaires' => '@nb@ commentaires déposés',
 	'info_nb_relectures' => '@nb@ relectures',
 	'info_numero_relecture' => 'relecture numéro',
 	'info_ouverture_relecture' => 'Ouvert le @date@ sur la révision @revision@ de l\'article',
 	'info_periode_commentaire_fermee' => 'L\'ajout de commentaire n\'est plus possible depuis le @date@',
-	'info_periode_commentaire_ouverte' => 'Commentaire autorisé jusqu\'au @date@',
+	'info_periode_commentaire_ouverte' => 'Commentaires autorisés jusqu\'au @date@',
 
 // L
 	'label_article_chapo' => 'Chapeau',
@@ -63,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_boite_cloture' => 'Clôture',
 	'titre_boite_ouverture' => 'Ouverture',
 	'titre_boite_relecture_article' => 'Relecture en cours',
+	'titre_boite_statistiques_commentaires' => 'STATISTIQUES SUR CET ELEMENT :',
 	'titre_boite_textes_article' => 'TEXTES DE L\'ARTICLE EN RÉVISION @revision@',
 	'titre_commentaire' => 'Commentaire',
 	'titre_commentaires' => 'Commentaires',

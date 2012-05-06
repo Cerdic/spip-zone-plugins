@@ -8,7 +8,7 @@
 <div class='cadre-formulaire-editer'>
 <div class="entete-formulaire">
 	[(#ID_RELECTURE|oui)
-	[(#GET{redirect}|icone_verticale{[(#VAL{relecture}|objet_info{texte_retour}|_T)], #VAL{relecture}|objet_info{icone_objet},'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+		[(#GET{redirect}|icone_verticale{[(#VAL{relecture}|objet_info{texte_retour}|_T)], #VAL{relecture}|objet_info{icone_objet},'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
 	]
 	[
 		[(#VAL{relecture}|objet_info{#ID_RELECTURE|?{texte_modifier,texte_creer}}|_T)]

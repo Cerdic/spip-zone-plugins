@@ -11,7 +11,7 @@
 			<li class="editer editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui) erreur]">
 				<label for="texte"><:relecture:label_commentaire_texte:></label>
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{texte})</span>]
-				<textarea readonly="readonly" name="texte" id="texte"[ lang="(#LANG)"] rows="20" cols="40">[(#ENV**{texte})]</textarea>
+				<textarea name="texte" id="texte"[ lang="(#LANG)"] rows="10" cols="40">[(#ENV**{texte})]</textarea>
 		    </li>
 		</ul>
 
