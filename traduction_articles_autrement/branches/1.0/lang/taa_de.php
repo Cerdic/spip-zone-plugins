@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'affichage_liste_compacte_desactive' => 'Désactivet l\'affichage compacte des liste des articles', # NEW
+	'affichage_liste_compacte_desactive' => 'Die Kompaktansicht der Artikellisten deaktivieren', # MODIF
 
 	// C
 	'changer_langue' => 'Die Sprache des Artikels ändern',
@@ -17,23 +17,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fermer' => 'Schliessen',
 
 	// L
-	'lier_traduction' => 'Eine übersetzung anhängen',
+	'lier_traduction' => 'Eine Übersetzung anfügen',
 
 	// M
-	'modifier_options_langue' => 'options', # NEW
+	'modifier_options_langue' => 'Optionen',
 
 	// N
-	'necesite_afficher_objet' => 'Diese Fuktion erfordert die Installierung des Plugins',
+	'necesite_afficher_objet' => 'Diese Funktion erfordert die Installierung des Plugins',
 
 	// O
-	'options' => 'Sprachoptionen verändern', # MODIF
+	'options' => 'Sprachoptionen verändern',
 
 	// R
-	'rang' => 'Rang', # NEW
+	'rang' => 'Rang',
 
 	// T
 	'titre_plugin' => 'Artikel Übersetzung mal Anders',
-	'traductions' => 'Übersetzungen', # MODIF
+	'traductions' => 'Übersetzungen',
 
 	// V
 	'voir_traductions' => 'Detaillierte Ansicht der Übersetzungen'

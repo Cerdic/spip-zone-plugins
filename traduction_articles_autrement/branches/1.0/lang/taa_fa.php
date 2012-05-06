@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'affichage_liste_compacte_desactive' => 'غيرفعال‌سازي نمايش فشرده‌ي فهرست مقاله‌ها را ',
+	'affichage_liste_compacte_desactive' => 'غيرفعال‌سازي نمايش فشرده‌ي فهرست مقاله‌ها را ', # MODIF
 
 	// C
 	'changer_langue' => 'تغيير زبان مقاله',
