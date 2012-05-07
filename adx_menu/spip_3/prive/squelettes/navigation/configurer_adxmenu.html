@@ -1,0 +1,14 @@
+[(#AUTORISER{configurer}|sinon_interdire_acces)]
+
+#BOITE_OUVRIR{'',info}
+<img src="[(#CHEMIN_IMAGE{adxmenu_36.png})]" width="36" height="36" alt="Logo <:adxmenu:adxmenu:>" style="float:#LANG_RIGHT;" />
+<h3><:adxmenu:adxmenu:></h3>
+<:adxmenu:descr_cfg|propre:>
+#BOITE_FERMER
+
+#BOITE_OUVRIR{'',raccourcis}
+[(#EVAL{ADXMENU_DOC_CONTRIB}|icone_horizontale{<:adxmenu:doc_en_ligne:>,spip_contrib-24.gif})]
+[(#URL_PAGE{#EVAL{ADXMENU_DOC}}|icone_horizontale{<:adxmenu:page_test:>,article-24})]
+<small>[<a href='#URL_PAGE{#EVAL{ADXMENU_DOC}}' target='_blank' title='<:adxmenu:page_test_in_new_window:>'><:adxmenu:new_window:></a>]</small>
+#BOITE_FERMER
+

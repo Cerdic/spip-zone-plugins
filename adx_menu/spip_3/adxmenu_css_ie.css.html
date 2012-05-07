@@ -1,0 +1,71 @@
+[(#REM)
+	Les commentaires sont ceux de l'auteur
+]#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=utf8}
+#HTTP_HEADER{Vary: Accept-Encoding}[
+(#SET{style,#ENV{type,htb}})
+][(#SET{ouverture,[(#GET{style}|=={vlr}|sinon{#GET{style}|=={vrl}}|?{vertical,horizontal})]})
+]/* - - - ADxMenu: BASIC styles [ MANDATORY ] / special IE6 - - - */
+/*<![CDATA[*/
+
+/* - - - ADxMenu: BASIC styles - - - */
+
+/*
+	this rules improves accessibility - if Javascript is disabled, the entire menu will be visible
+	of course, that means that it might require different styling then.
+	in which case you can use adxie class - see: aplus.co.yu/adxmenu/examples/ie6-double-style/
+ */
+.adxmenu ul {
+	visibility:visible;
+	position:static;
+}
+
+.adxmenu, .adxmenu ul { /* float.clear */
+	zoom:1;
+}
+
+.adxmenu li.adxmhover {
+	z-index:10000;
+}
+
+.adxmenu .adxmhoverUL { /* li:hover>ul selector */
+	visibility:visible;
+}
+
+.adxmenu .adxmhoverUL { /* 1st-level submenu go below their parent item */
+	[(#GET{ouverture}|=={horizontal}|oui)[(#GET{style}|=={hbt}|?{bottom,top}): 100%;]][
+	(#GET{ouverture}|=={vertical}|oui)[(#GET{style}|=={vlr}|?{left,right}): 100%;]]
+	[(#GET{ouverture}|=={vertical}|non)left:0;]
+}[(#GET{ouverture}|=={horizontal}|oui)
+
+.adxmenu .adxmhoverUL .adxmhoverUL { /* 2nd+ levels go on the right side of the parent item */
+	[(#GET{ouverture}|=={horizontal}|oui)[(#GET{style}|=={hbt}|?{bottom,top}): 0;]]
+	left:100%;
+}]
+
+[(#REM) 
+	PERSONNALISATION des styles du plugin ADX Menu pour SPIP ci-dessous 
+]
+
+/* - - - ADxMenu: DESIGN styles - - - */
+
+.adxmenu ul a { /* fix clickability-area problem */
+	zoom: 1;
+}
+
+[(#GET{ouverture}|=={horizontal}|?{.adxmenu li li,.adxmenu li})] { /* fix white gap problem */
+	float:left;
+	width:100%;
+	margin-top:-1px; /* prevent double-line between items */
+}
+
+.adxmenu a:hover, .adxmenu .adxmhoverA { /* li:hover>a selector */
+	color:#fc3;
+}
+
+[(#GET{ouverture}|=={horizontal}|?{.adxmenu .adxmhoverUL .adxmhoverUL,.adxmenu .adxmhoverUL})] { /* inset 2nd+ submenus, to show off overlapping */
+	[(#GET{style}|=={hbt}|?{bottom,top}): 5px;]
+	[(#GET{style}|=={vrl}|?{right,left}): 90%;]
+}
+
+/*]]>*/
