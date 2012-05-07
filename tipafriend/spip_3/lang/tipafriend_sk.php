@@ -24,16 +24,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_legend_squelette' => 'O odosielacom formulári',
 	'cfg_texte_descr' => 'Tento zásuvný modul SPIPu pridáva modul na poslanie stránky (<i>jej obsahu, adresy a správy</i>) jednému príjemcovi alebo viacerým.',
 	'cfg_titre_descr' => 'Nastavenie zásuvného modulu <i>Odporučiť priateľom</i>',
-	'cfgform_comment_close_button' => 'podľa predvolených nastavení aktivované, táto možnosť vám umožňuje rozhodnúť, či sa v spodnej časti okna zobrazí tlačidlo "Zatvoriť"; <strong>táto možnosť je automaticky deaktivovaná ak sú deaktivované hlavičky, ktoré sú vymenované vyššie.</strong>',
-	'cfgform_comment_contenu' => 'Tu si vyberte typ objektu SPIPu (<i>článok, novinka, autor, a i.</i>) ktorý bude pripojený do e-mailu.',
-	'cfgform_comment_header' => 'táto možnosť vám umožňuje rozhodnúť sa, či stránka musí mať tag  &lt;head&gt; ("hlavička") alebo nie (<i>môže byť užitočné deaktivovať túto možnosť, ak používate javascriptové okno typu "thickbox" alebo ich chcete zobraziť iným spôsobom v rovnakom kontexte s rámom</i>).',
-	'cfgform_comment_javascript' => 'funkciu otvárania vyskakovacieho okna môžete deaktivovať (<i>napríklad v prípade použitia javascriptových okien typu "thickbox" alebo "fancybox"</i>).',
-	'cfgform_comment_options' => 'musíte zadať úplné parametre, napríklad: "class=\'thickbox\'", budú automaticky pridané k odkazom na vaše šablóny; <b>používajte len jednoduché úvodzovky (\'...\').</b>',
-	'cfgform_comment_patron' => 'predvolený e-mail vlastníka v klasickej verzii (<i>neformátovaný text</i>).',
-	'cfgform_comment_patron_html' => 'ak si vyberiete túto možnosť, odoslaný e-mail bude mať úplne rovnakú prvú šablónu v textovej verzii; ak chcete túto možnosť zrušiť, nechajte toto pole prázdne.',
-	'cfgform_comment_reset' => 'tu môžete definovať, čo sa stane vo formulári po stlačení tlačidla "Zrušiť" (<i>túto akciu môžete napríklad zmeniť tak, aby vám mohla pomôcť zatvoriť okno "thickbox" namiesto bežného okna</i>).',
-	'cfgform_comment_squelette' => 'ak ste vytvorili vlastnú šablónu pre dialógové okno zásuvného modulu  (<i>vytvorenú podľa súboru "tip_a_friend.html"</i>) zadajte ju tu; vaša šablóna bude musieť mať vyplnený formulár <b>"tipafriend_form".</b>',
-	'cfgform_comment_taf_css' => 'zásuvný modul definuje štýly CSS na modely štýlov distribúcie SPIPu; tieto štýly sa podľa predvolených nastavení vkladajú do formulára, ale môžete sa rozhodnúť, že ich tam nevložíte.',
+	'cfgform_comment_close_button' => 'podľa predvolených nastavení aktivované, táto možnosť vám umožňuje rozhodnúť, či sa v spodnej časti okna zobrazí tlačidlo "Zatvoriť"; <strong>táto možnosť je automaticky deaktivovaná ak sú deaktivované hlavičky, ktoré sú vymenované vyššie.</strong>', # MODIF
+	'cfgform_comment_contenu' => 'Tu si vyberte typ objektu SPIPu (<i>článok, novinka, autor, a i.</i>) ktorý bude pripojený do e-mailu.', # MODIF
+	'cfgform_comment_header' => 'táto možnosť vám umožňuje rozhodnúť sa, či stránka musí mať tag  &lt;head&gt; ("hlavička") alebo nie (<i>môže byť užitočné deaktivovať túto možnosť, ak používate javascriptové okno typu "thickbox" alebo ich chcete zobraziť iným spôsobom v rovnakom kontexte s rámom</i>).', # MODIF
+	'cfgform_comment_javascript' => 'funkciu otvárania vyskakovacieho okna môžete deaktivovať (<i>napríklad v prípade použitia javascriptových okien typu "thickbox" alebo "fancybox"</i>).', # MODIF
+	'cfgform_comment_options' => 'musíte zadať úplné parametre, napríklad: "class=\'thickbox\'", budú automaticky pridané k odkazom na vaše šablóny; <b>používajte len jednoduché úvodzovky (\'...\').</b>', # MODIF
+	'cfgform_comment_options_url' => 'Vous pouvez ici indiquer une liste d\'arguments, par exemple : "arg=valeur&arg2=nouvelle_valeur", ils seront automatiquement ajoutés à l\'URL générée par la balise.', # NEW
+	'cfgform_comment_patron' => 'predvolený e-mail vlastníka v klasickej verzii (<i>neformátovaný text</i>).', # MODIF
+	'cfgform_comment_patron_html' => 'ak si vyberiete túto možnosť, odoslaný e-mail bude mať úplne rovnakú prvú šablónu v textovej verzii; ak chcete túto možnosť zrušiť, nechajte toto pole prázdne.', # MODIF
+	'cfgform_comment_reset' => 'tu môžete definovať, čo sa stane vo formulári po stlačení tlačidla "Zrušiť" (<i>túto akciu môžete napríklad zmeniť tak, aby vám mohla pomôcť zatvoriť okno "thickbox" namiesto bežného okna</i>).', # MODIF
+	'cfgform_comment_squelette' => 'ak ste vytvorili vlastnú šablónu pre dialógové okno zásuvného modulu  (<i>vytvorenú podľa súboru "tip_a_friend.html"</i>) zadajte ju tu; vaša šablóna bude musieť mať vyplnený formulár <b>"tipafriend_form".</b>', # MODIF
+	'cfgform_comment_taf_css' => 'zásuvný modul definuje štýly CSS na modely štýlov distribúcie SPIPu; tieto štýly sa podľa predvolených nastavení vkladajú do formulára, ale môžete sa rozhodnúť, že ich tam nevložíte.', # MODIF
 	'cfgform_info_balise' => 'Tag vypíše odkaz na otvorenie stránky s formulárom na odoslanie. Obrazok, ktorý sa zobrazuje, môžete zmeniť priamo úpravou šablóny  <strong>"modeles/tipafriend.html"</strong> zásuvného modulu.',
 	'cfgform_info_patron_html' => '<strong>Ak je na vašej stránke nainštalovaný a aktivovaný zásuvný modul <a href="http://www.spip-contrib.net/?article3371"><strong>Faktor,</strong></a> dá sa vytvoriť HTML verzia odoslaného e-mailu.',
 	'cfgform_info_patrons' => 'Vaše vlastné vzory sa umiestňujú do podpriečinka  <strong>patrons/</strong> vášho priečinka so šablónami.',
@@ -46,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfgform_titre_header' => 'Pripojiť hlavičky HTML',
 	'cfgform_titre_javascript' => 'Štandardná funkcia javascriptu (otvorenie vyskakovacieho okna)',
 	'cfgform_titre_options' => 'Pridaný (-é) atribút(y) k vytvorenému odkazu podľa tagu',
+	'cfgform_titre_options_url' => 'Argument(s) ajouté(s) à l\'URL du lien créé par la balise', # NEW
 	'cfgform_titre_patron' => 'Šablóna odoslaného e-mailu',
 	'cfgform_titre_patron_html' => 'Šablóna e-mailu vo formáte HTML',
 	'cfgform_titre_reset' => 'Akcia tlačidla na zrušenie',
@@ -54,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'doc_chapo' => 'Zásuvný modul "Odporučiť priateľom" ponúka kompletný formulár na odoslanie ({hocijakej}) stránky v SPIPe na viacero e-mailových adries.',
-	'doc_en_ligne' => 'Dokumentácia zásuvného modulu na stránke Spip-Contrib',
+	'doc_en_ligne' => 'Dokumentácia zásuvného modulu na stránke Spip-Contrib', # MODIF
 	'doc_titre_court' => 'Dokumentácia zásuvného modulu Odporučiť priateľom',
 	'doc_titre_page' => 'Dokumentácia zásuvného modulu "Odporučiť priateľom"',
 	'docskel_sep' => '----',
@@ -100,7 +102,7 @@ Tieto odkazy vám umožňujú otestovať šablóny využívané na vašej webove
 
 Ak je zásuvný modul {{[CFG: nástroj na nastavenie->http://www.spip-contrib.net/?rubrique575]}} aktivovaný na vašej stránky, po kliknutí na tento odkaz sa zobrazia hodnoty na nastavení uložené pre zásuvný modul "Odporučiť priateľom".
 
-@cfg_param@',
+@cfg_param@', # MODIF
 
 	// E
 	'error_dest' => 'Neuviedli ste žiadneho príjemcu',
