@@ -16,7 +16,7 @@ Une documentation interne est disponible lorsque le plugin est actif sur la page
 
 Logo et certaines images du plugin : [->http://pixel-mixer.com/]', # NEW
 	'tipafriend_nom' => 'Odporučiť priateľom',
-	'tipafriend_slogan' => 'Pošlite stránku v SPIPe (akúkoľvek) priateľom v zozname e-mailových adries'
+	'tipafriend_slogan' => 'Pošlite stránku v SPIPe (akúkoľvek) priateľom v zozname e-mailových adries' # MODIF
 );
 
 ?>
