@@ -128,19 +128,26 @@ function icone1_association($texte, $lien, $image, $sup='rien.gif')
 	return icone_horizontale(_T("asso:$texte"), $lien, _DIR_PLUGIN_ASSOCIATION_ICONES. $image, $sup, false);
 }
 
-// Bloc (tableau en ligne) d'affinage (filtrage) des resultats dans les pages principales
-function filtres_association($liste_filtres, $exec='')
+// Bloc (tableau en ligne) d'affinage (filtrage) des resultats dans les pages principales... (ici il s'agit de la navigation au sein des donnees tabulaires --un grand listing-- d'un module...)
+function filtres_association($liste_filtres, $exec='', $supplements='', $td=TRUE)
 {
 	echo '<form method="get" action="'. ($exec?generer_url_ecrire($exec):'') .'">';
 	if ($exec)
 		echo "\n<input type='hidden' name='exec' value='$exec' />";
-	echo "\n<table width='100%'><tr>";
-	$largeur_cellules = ceil((100/count($liste_filtres)+1));
-	foreach($liste_filtres as $filtre_selection =>$id_selectionne) {
-		echo "<td width='$largeur_cellules%'>". call_user_func("association_selectionner_$filtre_selection", $id_selectionne) .'</td>';
+	echo "\n<". ($td?'table width="100%"':'ul') .' class="asso_tablo_filtres">'. ($td?'<tr>':'');
+	foreach($liste_filtres as $filtre_selection =>$params) {
+//		echo ($td?'<td>':'<li>') . call_user_func("association_selectionner_$filtre_selection", (is_array($params)?implode(', ',$params):$params) ) . ($td?'</td>':'</li>');
+		echo ($td?'<td':'<li') ." class='filtre_$filtre_selection'>". call_user_func_array("association_selectionner_$filtre_selection", (is_array($params)?$params:array($params)) ) . ($td?'</td>':'</li>');
 	}
-	echo "<td width='$largeur_cellules%' class='boutons'><noscript><input type='submit' value='". _T('asso:bouton_lister') ."' /></noscript></td>";
-	echo "</tr></table>\n</form>\n";
+	if ( is_array($supplements) ) {
+		foreach ($supplements as $nom => $supplement) {
+			echo ($td?'<td':'<li') ." class='filtre_$nom'>$supplement</". ($td?'td>':'li>');
+		}
+	} elseif ($supplements) {
+		echo ($td?'<td':'<li') .">$supplements</". ($td?'td>':'li>');
+	}
+	echo ($td?'<td':'<li') . ' class="boutons"><noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript></td>' . ($td?'</td>':'</li>');
+	echo ($td?'</tr></table':'</ul>') .">\n</form>\n";
 }
 
 ?>

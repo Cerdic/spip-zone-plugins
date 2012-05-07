@@ -56,7 +56,7 @@ function exec_adherents()
 		if (!$id) {
 			$id = _T('asso:adherent_libelle_id_auteur');
 			//Filtre groupe
-			$id_groupe = intval(_request('id_groupe'));
+			$id_groupe = intval(_request('groupe'));
 		} else {
 			$critere = "a.id_auteur=$id";
 			$id_groupe = 0;
@@ -98,7 +98,7 @@ function exec_adherents()
 		// FILTRES
 		echo "<table width='100%' class='asso_tablo_filtres'>\n<tr>";
 		// Pagination alphabetique
-		echo '<td width="30%" class="pagination0">';
+		echo '<td class="filtre_lettre">';
 		if (!$lettre) {
 			$lettre = '%';
 		}
@@ -108,28 +108,29 @@ function exec_adherents()
 			if($i==$lettre) {
 				echo ' <strong>'.$i.'</strong>';
 			} else {
-				$h = generer_url_ecrire('adherents', "statut_interne=$statut_interne&lettre=$i");
+				$h = generer_url_ecrire('adherents', "statut_interne=$statut_interne&lettre=$i".($id_groupe?"&groupe=$id_groupe":''));
 				echo " <a href='$h'>$i</a>\n";
 			}
 		}
 		if ($lettre=='%') {
 			echo ' <strong>'._T('asso:entete_tous').'</strong>';
 		} else {
-			$h = generer_url_ecrire('adherents', "statut_interne=$statut_interne");
+			$h = generer_url_ecrire('adherents', "statut_interne=$statut_interne".($id_groupe?"&groupe=$id_groupe":''));
 			echo "<a href='$h'>"._T('asso:entete_tous').'</a>';
 		}
 #		if ($GLOBALS['association_metas']['aff_groupes']) { // ne proposer que si on affiche les groupes ?? (on peut vouloir filtrer par groupe sans pour autant les afficher donc desactive)
-			echo '</td><td width="25%">'. association_selectionner_groupe($id_groupe, 'adherents') ; // filtre groupes
+			echo '</td><td class="filtre_groupe">'. association_selectionner_groupe($id_groupe, 'adherents') ; // filtre groupes
 #		}
 		//Filtre ID
-		echo '</td><td width="16%" class="formulaire">';
-		echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
-		echo association_selectionner_statut($id, '');
-		echo '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></div></form>';
+		echo '</td><td class="filtre_id">';
+		echo association_selectionner_id($id, 'adherents');
+		echo '</div></form>';
 		//Filtre statut
-		echo '</td><td width="23%">';
+		echo '</td><td class="fitre_statut">';
 		echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
 		echo '<input type="hidden" name="lettre" value="'.$lettre.'" />';
+		if ($id_groupe)
+			echo '<input type="hidden" name="groupe" value="'.$id_groupe.'" />';
 		echo association_selectionner_statut($statut_interne, '');
 		echo '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></div></form></td>';
 		echo '</tr></table>';

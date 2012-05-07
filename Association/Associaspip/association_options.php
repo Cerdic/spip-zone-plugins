@@ -580,7 +580,7 @@ function association_selectionner_groupe($id_groupe='', $exec='') {
     }
     $qGroupes = sql_select('nom, id_groupe', 'spip_asso_groupes', 'id_groupe>=100', '', 'nom');  // on ne prend en consideration que les groupe d'id >= 100, les autres sont reserves a la gestion des autorisations
     if ( $qGroupes && sql_count($qGroupes) ) { // ne proposer que s'il y a des groupes definis
-		$res .= '<select name="id_groupe" onchange="form.submit()">';
+		$res .= '<select name="groupe" onchange="form.submit()">';
 		$res .= '<option value="">'._T('asso:tous_les_groupes').'</option>';
 		while ($groupe = sql_fetch($qGroupes)) {
 			$res .= '<option value="'.$groupe['id_groupe'].'"';
@@ -627,9 +627,9 @@ function association_selectionner_id($id='', $exec='') {
     } else {
 		$res = '';
     }
-    $res .= '<input type="text" name="id" onfocus=\'this.value=""\' size="5"  value="'. $id .'" onchange="form.submit()" />';
+    $res .= '<input type="text" name="id" onfocus=\'this.value=""\' size="5"  value="'. ($id?$id:_T('asso:entete_id')) .'" />';
     if ($exec) {
-		$res .= '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>';
+		$res .= '<noscript><input type="submit" value="'._T('spip:chercher').'" /></noscript>';
 		$res .= '</div></form>';
     }
     return $res;
@@ -645,14 +645,15 @@ function association_selectionner_annee($annee='', $dtable, $dchamp, $exec='') {
     }
     $pager = '';
     $res .= '<select name ="annee" onchange="form.submit()">';
-#    $res .= '<option value="0" ';
-#    if (!$exercice) {
-#		$res .= ' selected="selected"';
-#    }
-#    $res .= '>'. _L("choisir l'exercice ?") .'</option>';
-    $sql = sql_select("DATE_FORMAT(date_$dchamp, '%Y') AS annee", "spip_asso_$dtable",'', 'annee DESC', 'annee');
+    $an_max = sql_getfetsel("MAX(DATE_FORMAT(date_$dchamp, '%Y')) AS an_max", "spip_$dtable", '');
+    $an_min = sql_getfetsel("MIN(DATE_FORMAT(date_$dchamp, '%Y')) AS an_min", "spip_$dtable", '');
+    if ($annee>$an_max || $annee<$an_min) { // a l'initialisation, l'annee courante est mise si rien n'est indique... or si l'annee n'est pas disponible dans la liste deroulante on est mal positionne et le changement de valeur n'est pas top
+		$res .= '<option value="'.$annee.'" selected="selected">'.$annee.'</option>';
+
+	}
+    $sql = sql_select("DATE_FORMAT(date_$dchamp, '%Y') AS annee", "spip_$dtable",'', 'annee DESC', 'annee');
     while ($val = sql_fetch($sql)) {
-		$res .= '<option value="'.$val['annee'].'" ';
+		$res .= '<option value="'.$val['annee'].'"';
 		if ($annee==$val['annee']) {
 			$res .= ' selected="selected"';
 			$pager .= "\n<strong>$val[annee]</strong>";

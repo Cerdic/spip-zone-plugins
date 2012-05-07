@@ -66,16 +66,22 @@ function exec_edit_relances()
 	}
 }
 
-function relances_while($statut_interne, $groupe=0)
+function relances_while($statut_interne, $id_groupe=0)
 {
-	$query = sql_select('id_auteur, sexe, nom_famille, prenom, statut_interne, validite', 'spip_asso_membres AS a_m', " statut_interne like '$statut_interne' AND statut_interne <> 'sorti'", '', 'nom_famille');
+	$query = sql_select(
+		'id_auteur, sexe, nom_famille, prenom, statut_interne, validite', // select
+		'spip_asso_membres AS a_m'. ($id_groupe?' LEFT JOIN spip_asso_groupes_liaisons a_g_l ON a_m.id_auteur=a_g_l.id_auteur ':''), // from
+		" statut_interne LIKE '$statut_interne' AND statut_interne <> 'sorti'". ($id_groupe?' AND id_groupe='.intval($id_groupe):''), //where
+		'', // limit
+		'nom_famille, prenom, validite' // order by
+	);
 	$res = '';
 	while ($data = sql_fetch($query)) {
-		$res .= '<tr class="'.$GLOBALS['association_styles_des_statuts'][$data['statut_interne']].'">'
-		.'<td class="integer">'. $data['id_auteur'] .'</td>'
-		.'<td class="text">'. association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']) .'</td>'
-		.'<td class="date">'. association_datefr($data['validite']) .'</td>'
-		.'<td class="action"><input name="id[]" type="checkbox" value="'.$data['id_auteur'].'" checked="checked" /><input name="statut['.$data['id_auteur'].']" type="hidden" value="'.$data['statut_interne'].'" /></td>'
+		$res .= '<tr class="'.$GLOBALS['association_styles_des_statuts'][$data['statut_interne']].'" id="'.$data['id_auteur'].'">'
+		.'<td class="integer"><label for="mbr'.$data['id_auteur'].'">'.$data['id_auteur'].'</label></td>'
+		.'<td class="text"><label for="mbr'.$data['id_auteur'].'">'. association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']) .'</label></td>'
+		.'<td class="date"><label for="mbr'.$data['id_auteur'].'">'. association_datefr($data['validite']) .'</label></td>'
+		.'<td class="action"><input name="id[]" type="checkbox" id="mbr'.$data['id_auteur'].'" value="'.$data['id_auteur'].'" checked="checked" /><input name="statut['.$data['id_auteur'].']" type="hidden" value="'.$data['statut_interne'].'" /></td>'
 		."</tr>\n";
 	}
 	return $res;

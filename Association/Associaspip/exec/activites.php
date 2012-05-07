@@ -21,10 +21,17 @@ function exec_activites()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$id_mot = intval(_request('id_mot'));
-		$annee = intval(_request('annee'));
-		if(!$annee){
-			$annee = date('Y');
+		$id_evenement = intval(_request('id'));
+		if ($id_evenement) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
+			$annee = sql_getfetsel("DATE_FORMAT(date_debut, '%Y')",'spip_evenements', "id_evenement=$id_evenement"); // on recupere l'annee correspondante
+		} else {
+			$annee = intval(_request('annee')); // on recupere l'annee requetee
+			$id_mot = intval(_request('mot')); // on recupere l'id du mot cle requete
+			$id_evenement = ''; // ne pas afficher ce disgracieux '0'
+		}
+		if (!$annee) {
+			$annee = date('Y'); // par defaut c'est l'annee courante
+			$id_evenement = ''; // virer l'ID inexistant
 		}
 		onglets_association('titre_onglet_activite');
 		// TOTAUX : nombre d'activites de l'annee en cours repartis par mots-clefs
@@ -49,9 +56,12 @@ function exec_activites()
 		//!\ il manque le blo des raccourcis !
 		debut_cadre_association('activites.gif','activite_titre_toutes_activites');
 		// FILTRES
-		echo '<table width="100%" class="asso_tablo_filtre"><tr>';
-		echo '<td>'. association_selectionner_annee($annee, 'activites', 'inscription','activites'.($id_mot?'&id_mot='.$id_mot:'')) .'</td>'; // evenements/asso_activites debut/inscription activites/activites
-		if (test_plugin_actif('AGENDA')) { /* le plugin "Agenda 2" peut associer des mots-cles aux evenements */
+		echo '<form method="get" action="'.generer_url_ecrire('activites').'">';
+		echo "\n<input type='hidden' name='exec' value='activites' />";
+		echo "\n<table width='100%' class='asso_tablo_filtres'><tr>";
+		echo '<td id="filtre_annee">'. association_selectionner_annee($annee, 'evenements', 'debut') .'</td>';
+#		echo '<td id="filtre_id">'. association_selectionner_id($id_evenement) .'</td>';
+		if (test_plugin_actif('AGENDA')) { /* le plugin "Agenda 2" peut associer des mots-cles aux evenements : les proposer comme critere de filtrage */
 			if ($id_mot) {
 				$mc_sel = ', M.id_mot AS motact';
 				$mc_join = ' LEFT JOIN spip_mots_evenements AS A ON  A.id_evenement=E.id_evenement LEFT JOIN spip_mots AS M ON A.id_mot=M.id_mot';
@@ -60,11 +70,8 @@ function exec_activites()
 			} else {
 				$mc_sel = $mc_join = $mc_where = '';
 			}
-			echo '<td width="60%">';
-			echo '<form method="get"><div>';
-			echo '<input type="hidden" name="exec" value="activites" />';
-			echo '<input type="hidden" name="annee" value="'.$annee.'" />';
-			echo '<select name="id_mot" onchange="form.submit()">';
+			echo '<td id="filtre_mot">';
+			echo '<select name="mot" onchange="form.submit()">';
 			echo '<option value="">'._T('asso:entete_tous').'</option>';
 			$query_groupes = sql_select('id_groupe, titre', 'spip_groupes_mots', "tables_liees LIKE '%evenements%'");
 			while($data_groupes = sql_fetch($query_groupes)) {
@@ -79,9 +86,10 @@ function exec_activites()
 				}
 				echo '</optgroup>';
 			}
-			echo '</select><noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></div></form></td>';
+			echo '</select></td>';
 		}
-		echo '</tr></table>';
+		echo '<noscript><td><input type="submit" value="'._T('asso:bouton_filtrer').'" /></noscript></td>';
+		echo '</tr></table></form>';
 		//TABLEAU
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_activites'>\n";
 		echo "<thead>\n<tr>";
@@ -101,7 +109,7 @@ function exec_activites()
 		$query = sql_select('*, E.id_evenement, E.titre AS intitule'.$mc_sel, 'spip_evenements AS E'.$mc_join, "DATE_FORMAT(date_debut, '%Y')=$annee $mc_where", '', 'date_debut DESC', "$debut,$max_par_page");
 		while ($data = sql_fetch($query)) {
 			$inscrits = sql_fetsel('SUM(inscrits) AS total', 'spip_asso_activites', 'id_evenement='.$data['id_evenement']);
-			echo '<tr class="'.($inscrits['total']?'pair':'impair').'">';
+			echo '<tr class="'. ($inscrits['total']?'pair':'impair') . (($id_evenement==$data['id_evenement'])?' surligne':'') .'" id="'.$data['id_evenement'].'">';
 			echo '<td class="integer">'.$data['id_evenement'].'</td>';
 			echo '<td class="date">'. association_datefr($data['date_debut'],'dtstart') .'</td>';
 			echo '<td class="date">'. substr($data['date_debut'],10,6) .'</td>';

@@ -22,9 +22,16 @@ function exec_dons()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$annee = intval(_request('annee'));
-		if(!$annee){
-			$annee = date('Y');
+		$id_don = intval(_request('id'));
+		if ($id_don) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
+			$annee = sql_getfetsel("DATE_FORMAT(date_don, '%Y')",'spip_asso_dons', "id_don=$id_don"); // on recupere l'annee correspondante
+		} else {
+			$annee = intval(_request('annee')); // on recupere l'annee requetee
+			$id_don = ''; // ne pas afficher ce disgracieux '0'
+		}
+		if (!$annee) {
+			$annee = date('Y'); // par defaut c'est l'annee courante
+			$id_don = ''; // virer l'ID inexistant
 		}
 		onglets_association('titre_onglet_dons');
 		// INTRO : nom du module et annee affichee
@@ -46,10 +53,11 @@ function exec_dons()
 			'ajouter_un_don' => array('ajout-24.png', 'edit_don'),
 		));
 		debut_cadre_association('dons-24.gif', 'tous_les_dons');
-		// Filtres
-		echo '<table width="100%" class="asso_tablo_filtre"><tr>';
-		echo '<td>'. association_selectionner_annee($annee, 'dons', 'don','dons') .'</td>';
-		echo '</tr></table>';
+		// FILTRES
+		filtres_association(array(
+			'annee' => array($annee, 'asso_dons', 'don'),
+			'id' => $id_don,
+		), 'dons');
 		//TABLEAU
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_dons'>\n";
 		echo "<thead>\n<tr>";
@@ -70,9 +78,8 @@ function exec_dons()
 			$critere2 .= ($critere1?' OR ':' AND ');
 		$query = sql_select('DISTINCT a_d.*', 'spip_asso_dons AS a_d LEFT JOIN spip_asso_comptes AS a_c ON a_c.id_journal=a_d.id_don', "$critere2$critere1 DATE_FORMAT(date_don, '%Y')=$annee", '',  'id_don' ) ;
 		while ($data = sql_fetch($query)) {
-			$id_don = $data['id_don'];
-			echo '<tr class="'.(($data['argent'] && !$data['colis'])?'pair':(($data['argent'] && !$data['colis'])?'prospect':'impair')).'" id="'.$data['id_don'].'">';
-			echo '<td class="integer">'.$id_don.'</td>';
+			echo '<tr class="'. (($data['argent'] && !$data['colis'])?'pair':(($data['argent'] && !$data['colis'])?'prospect':'impair')) . (($id_don==$data['id_don'])?' surligne':'') .'" id="'.$data['id_don'].'">';
+			echo '<td class="integer">'.$data['id_don'].'</td>';
 			echo '<td class="date">'. association_datefr($data['date_don']) .'</td>';
 			echo '<td class="text">'. association_calculer_lien_nomid($data['bienfaiteur'],$data['id_adherent']) .'</td>';
 			echo '<td class="decimal">'. association_prixfr($data['argent']) .'</td>';
@@ -83,8 +90,8 @@ function exec_dons()
 				? ('<td class="text">&nbsp;</td>')
 			    : ('<td class="text">'. propre($data['contrepartie']) .'</td>')
 				);
-			echo '<td  class="action">'. association_bouton('supprimer_le_don', 'suppr-12.gif', 'action_dons', "id=$id_don") .'</td>';
-			echo '<td class="action">' . association_bouton('mettre_a_jour_le_don', 'edit-12.gif', 'edit_don', "id=$id_don") .'</td>';;
+			echo '<td  class="action">'. association_bouton('supprimer_le_don', 'suppr-12.gif', 'action_dons', "id=$data[id_don]") .'</td>';
+			echo '<td class="action">' . association_bouton('mettre_a_jour_le_don', 'edit-12.gif', 'edit_don', "id=$data[id_don]") .'</td>';;
 			echo "</tr>\n";
 		}
 		echo "</tbody>\n</table>\n";

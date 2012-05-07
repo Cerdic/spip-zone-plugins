@@ -38,7 +38,7 @@ function exec_comptes()
 		$id_compte = intval(_request('id_compte', $_GET));
 		if (!$id_compte) {
 			$id_compte = '';
-		} else { /* quand on a un id compte, on doit selectionner automatiquement l'exercice dans lequel il se trouve */
+		} else { // quand on a un id compte, on doit selectionner automatiquement l'exercice dans lequel il se trouve
 			$date_operation = sql_getfetsel('date', 'spip_asso_comptes', 'id_compte='.$id_compte);
 			$exercice = sql_getfetsel('id_exercice','spip_asso_exercices', "fin>='$date_operation' AND debut<='$date_operation'", '', 'debut DESC');
 		}
@@ -86,32 +86,34 @@ function exec_comptes()
 			'ajouter_une_operation' => array('ajout-24.png', 'edit_compte'),
 		) );
 		debut_cadre_association('finances-24.png', 'informations_comptables');
-		echo "\n<table width='100%'><tr>";
-		echo '<td width="50%" align="left">'. association_selectionner_exercice($id_exercice, generer_url_ecrire('comptes',"imputation=$imputation") ) .'</td>';
-		echo '<td width="50%" align="right">';
-		echo '<form method="post" action="'.generer_url_ecrire('comptes', "exercice=$id_exercice").'"><div>';
-		echo '<select name ="imputation" onchange="form.submit()">';
+		// FILTRES
+		echo '<form method="get" action="'.generer_url_ecrire('comptes').'">';
+		echo "\n<input type='hidden' name='exec' value='comptes' />";
+		echo "\n<table width='100%' class='asso_tablo_filtres'><tr>";
+		echo '<td id="filtre_exercice">'. association_selectionner_exercice($id_exercice) .'</td>';
+#		echo '<td id="filtre_id">'. association_selectionner_id($id_compte) .'</td>';
+		echo '<td id="filtre_imputation">';
+		echo '<select name="imputation" onchange="form.submit()">';
 		echo '<option value="%" ';
 		if ($imputation=='%') {
 			echo ' selected="selected"';
 		}
-		echo '>Tous</option>';
-		/* Remplir le select uniquement avec les comptes utilises */
+		echo '>'. _T('asso:entete_tous') .'</option>';
 		$sql = sql_select(
 			'imputation , code, intitule, classe',
 			'spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code',
-			/* n'afficher ni les comptes de la classe financiere --ce ne sont pas des imputations-- ni les inactifs */
-			"classe<>'".$GLOBALS['association_metas']['classe_banques']."' AND active AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' ",
+			"classe<>'".$GLOBALS['association_metas']['classe_banques']."' AND active AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' ", // pour l'exercice en cours... ; n'afficher ni les comptes de la classe financiere --ce ne sont pas des imputations-- ni les inactifs
 			'code', 'code ASC');
-		while ($plan = sql_fetch($sql)) {
-			echo '<option value="'.$plan['code'].'" ';
+		while ($plan = sql_fetch($sql)) { // Remplir le select uniquement avec les comptes utilises
+			echo '<option value="'.$plan['code'].'"';
 			if ($imputation==$plan['code']) {
 				echo ' selected="selected"';
 			}
 			echo '>'.$plan['code'].' - '.$plan['intitule'].'</option>';
 		}
-		echo '</select><noscript><input type="submit" value="'._T('asso:bouton_filtrer').'" /></noscript></div></form></td>';
-		echo '</tr></table>';
+		echo '</select></td>';
+		echo '<noscript><td><input type="submit" value="'._T('asso:bouton_filtrer').'" /></noscript></td>';
+		echo '</tr></table></form>';
 		/* (re)calculer la pagination en fonction de id_compte */
 		if ($id_compte) {
 			/* on recupere les id_comptes de la requete sans le critere de limite et on en tire l'index de l'id_compte recherche parmis tous ceux disponible */
@@ -170,18 +172,18 @@ function comptes_while($where, $limit, $id_compte)
 	$query = sql_select('*', 'spip_asso_comptes', $where,'',  'date DESC,id_compte DESC', $limit);
 	$comptes = '';
 	while ($data = sql_fetch($query)) {
-		if ($data['depense']>0) {
+		if ($data['depense']>0) { // depense
 			$class = 'impair';
-		} else {
+		} else { // recette
 			$class = 'pair';
 		}
-		if ($data['imputation']==$GLOBALS['association_metas']['pc_intravirements']) {
+		if ($data['imputation']==$GLOBALS['association_metas']['pc_intravirements']) { // virement interne
 			$class = 'vi';
-		} // virement interne
-		if (substr($data['imputation'],0,1)==$GLOBALS['association_metas']['classe_contributions_volontaires']) {
+		}
+		if (substr($data['imputation'],0,1)==$GLOBALS['association_metas']['classe_contributions_volontaires']) { // contribution volontaire
 			$class = 'cv';
 		}
-		if($id_compte==$data['id_compte']) { /* pour voir au chargement l'id_compte recherche */
+		if($id_compte==$data['id_compte']) { // pour voir au chargement l'id_compte recherche
 			$onload_option .= 'onLoad="document.getElementById(\'id_compte'.$id_compte.'\').scrollIntoView(true);"';
 			$class = 'surligne';
 		} else {

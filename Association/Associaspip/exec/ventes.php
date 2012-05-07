@@ -22,9 +22,17 @@ function exec_ventes()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$annee = intval(_request('annee'));
-		if(!$annee)
-			$annee = date('Y');
+		$id_vente = intval(_request('id'));
+		if ($id_vente) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
+			$annee = sql_getfetsel("DATE_FORMAT(date_vente, '%Y')",'spip_asso_ventes', "id_vente=$id_vente"); // on recupere l'annee correspondante
+		} else {
+			$annee = intval(_request('annee')); // on recupere l'annee requetee
+			$id_vente = ''; // ne pas afficher ce disgracieux '0'
+		}
+		if (!$annee) {
+			$annee = date('Y'); // par defaut c'est l'annee courante
+			$id_vente = ''; // virer l'ID inexistant
+		}
 		onglets_association('titre_onglet_ventes');
 		// INTRO : nom du module et annee affichee
 		echo totauxinfos_intro('','ventes',$annee);
@@ -48,10 +56,11 @@ function exec_ventes()
 			'ajouter_une_vente' => array('ajout-24.png', 'edit_vente'),
 		) );
 		debut_cadre_association('ventes.gif', 'toutes_les_ventes');
-		// Filtres
-		echo '<table width="100%" class="asso_tablo_filtre"><tr>';
-		echo '<td>'. association_selectionner_annee($annee, 'ventes', 'vente','ventes') .'</td>';
-		echo '</tr></table>';
+		// FILTRES
+		filtres_association(array(
+			'annee' => array($annee, 'asso_ventes', 'vente'),
+			'id' => $id_vente,
+		), 'ventes');
 		//TABLEAU
 		echo "<table width='100%' class='asso_tablo' id='asso_tablo_ventes'>\n";
 		echo "<thead>\n<tr>";
@@ -66,7 +75,7 @@ function exec_ventes()
 		echo "</tr>\n</thead><tbody>";
 		$query = sql_select('*', 'spip_asso_ventes', "DATE_FORMAT(date_vente, '%Y')=$annee", '',  'id_vente DESC') ;
 		while ($data = sql_fetch($query)) {
-			echo '<tr class="'. ($data['date_envoi']<$data['date_vente']?'pair':'impair') . '">';
+			echo '<tr class="'. ($data['date_envoi']<$data['date_vente']?'pair':'impair') . (($id_vente==$data['id_vente'])?' surligne':'') .'" id="'.$data['id_vente'].'">';
 			echo '<td class="integer">'.$data['id_vente'].'</td>';
 			echo '<td class="date">'. association_datefr($data['date_vente'],'dtstart') .'</td>';
 			echo '<td class="text">'
