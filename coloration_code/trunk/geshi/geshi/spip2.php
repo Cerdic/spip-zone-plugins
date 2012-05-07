@@ -96,12 +96,28 @@
 
 // |filtre |class::methode
 // et |>= |?
-@define('REG_NOM_FILTRE', '((?:<PIPE>\s*[a-z_=!<>?][a-z0-9_=]*(::[a-z0-9_]*)?)'
+@define('REG_NOM_FILTRE', '((?:<PIPE>\s*[a-z_][a-z0-9_=]*(::[a-z0-9_]*)?)'
+		// |< et consoeurs sont toujours suivis par une accolade ouvrante {,
+		// mais ce peut etre aussi suivi par la capture d'un parametre (REGEXP40)
+		// dans nos recherches egalement
+		// on le teste pour eviter de prendre | <style> par exemple
+		. '|(?:<PIPE>\s*(?:&gt;=?|&lt;=?|&lt;&gt;|===?|!==?|\?)(?:\s*)(?={|<\|!REG3XP40!>)))');
+// la meme chose, mais sans etre capturant.
+@define('REG_NOM_FILTRE_TOUT', '(?:(?:<PIPE>\s*[a-z_][a-z0-9_=]*(?:::[a-z0-9_]*)?)'
+		. '|(?:<PIPE>\s*(?:&gt;=?|&lt;=?|&lt;&gt;|===?|!==?|\?)(?:\s*)(?={|<\|!REG3XP40!>)))');
+/*
+@define('REG_NOM_FILTRE', '((?:<PIPE>\s*[a-z_][a-z0-9_]*(::[a-z0-9_]*)?)'
 		. '|(?:<PIPE>\s*(?:&gt;=?|&lt;=?|&lt;&gt;|===?|!==?|\?)))');
 // la meme chose, mais sans etre capturant.
-@define('REG_NOM_FILTRE_TOUT', '(?:(?:<PIPE>\s*[a-z_=!<>?][a-z0-9_=]*(?:::[a-z0-9_]*)?)'
-		. '|(?:<PIPE>\s*(?:&gt;=?|&lt;=?|&lt;&gt;|===?|!==?|\?)))');
-
+@define('REG_NOM_FILTRE_TOUT', '(?:(?:<PIPE>\s*[a-z_][a-z0-9_]*(?:::[a-z0-9_]*)?)'
+		. '|(?:<PIPE>\s*(?:&gt;=?|&lt;=?|&lt;&gt;|===?|!==?|\?)))');*/
+/*
+@define('REG_NOM_FILTRE', '((?:<PIPE>\s*[a-z_][a-z0-9_=]*(::[a-z0-9_]*)?)'
+		. '|(?:<PIPE>\s*(?:&gt;=?|&lt;=?|&lt;&gt;|===?|!==?|\?)(?:\s*)(?=\{)))');
+// la meme chose, mais sans etre capturant.
+@define('REG_NOM_FILTRE_TOUT', '(?:(?:<PIPE>\s*[a-z_][a-z0-9_=]*(?:::[a-z0-9_]*)?)'
+		. '|(?:<PIPE>\s*(?:&gt;=?|&lt;=?|&lt;&gt;|===?|!==?|\?)(?:\s*)(?=\{)))');
+*/
 // #BALISE
 @define('REG_BALISE','(\#)(' . REG_NOM_BOUCLE . ':)?([A-Z0-9_]+)([*]{0,2})');
 // la meme chose, mais sans etre capturant.
