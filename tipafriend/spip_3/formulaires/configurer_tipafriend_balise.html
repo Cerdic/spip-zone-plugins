@@ -3,6 +3,8 @@
 	
 <h3 class="titrem"><:tipafriend:cfg_legend_balise:></h3>
 
+<:tipafriend:cfgform_info_balise|propre:>
+
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 <form method="post" action="#ENV{action}">
@@ -19,12 +21,20 @@
 		]<input type="text" name="options" id="options" class="text" value="[(#GET{config}|table_valeur{options})]" />
 	</li>	
 
+	#SET{name,options_url}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="options_url"><:tipafriend:cfgform_titre_options_url:></label>
+		<div class="explication"><:tipafriend:cfgform_comment_options_url:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="text" name="options_url" id="options_url" class="text" value="[(#GET{config}|table_valeur{options_url})]" />
+	</li>	
+
 	#SET{name,javascript_standard}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
 		<label for="javascript_standard"><:tipafriend:cfgform_titre_javascript:></label>
 		<div class="explication"><:tipafriend:cfgform_comment_javascript:></div>
 		[<span class='erreur_message'>(#GET{erreurs})</span>
-		]<input type="radio" name="javascript_standard" value="oui"[(#GET{config}|table_valeur{}|=={oui}|oui) checked="checked"] />&nbsp;<:tipafriend:bouton_activer:>
+		]<input type="radio" name="javascript_standard" value="oui"[(#GET{config}|table_valeur{javascript_standard}|=={oui}|oui) checked="checked"] />&nbsp;<:tipafriend:bouton_activer:>
 		 &nbsp;&nbsp;<strong>|</strong>&nbsp;&nbsp;
 		 <input type="radio" name="javascript_standard" value="non"[(#GET{config}|table_valeur{javascript_standard}|=={non}|oui) checked="checked"] />&nbsp;<:tipafriend:bouton_desactiver:>
 	</li>	

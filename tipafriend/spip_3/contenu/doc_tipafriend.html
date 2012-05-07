@@ -39,10 +39,8 @@
 </BOUCLE_artic>
 
 <div class="texte entry-content">
-[(#SET{cfg_param,[(#EVAL{function_exists('lire_config')}|=={1}|?{
-			[(#CFG_ARBO{tipafriend}|propre)],
-			<small><:tipafriend:page_test_cfg_pas_installe|propre:></small>
-})]})]
+[(#SET{config,#EVAL{tipafriend_config()}})]
+[(#SET{cfg_param,[<pre>(#GET{config}|var_export{1})</pre>]})]
 [(#SET{url_article,[(#SELF|parametre_url{id_article,1}|parametre_url{id_breve,''})]})]
 [(#SET{url_breve,[(#SELF|parametre_url{id_article,''}|parametre_url{id_breve,2})]})]
 [(#SET{url_recalcul,[(#SELF|parametre_url{var_mode,recalcul})]})]

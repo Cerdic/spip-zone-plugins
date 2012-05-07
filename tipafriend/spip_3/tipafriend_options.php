@@ -74,9 +74,10 @@ define('_TIPAFRIEND_TEST', 0);
 
 /**
  * Dimensions par défaut de la popup
+ * => ces dimensions ne sont pas prises en compte en fenêtre javascript (FancyBox, MediaBox)
  */
-define('_TIPAFRIEND_POPUP_WIDTH', 600);
-define('_TIPAFRIEND_POPUP_HEIGHT', 460);
+define('_TIPAFRIEND_POPUP_WIDTH', 640);
+define('_TIPAFRIEND_POPUP_HEIGHT', 540);
 
 /**
  * Config par défaut
@@ -102,6 +103,8 @@ $GLOBALS['TIPAFRIEND_DEFAULTS'] = array(
 	'close_button'			=> 'oui',
 	// options ajoutees comme attributs au lien
 	'options' 				=> '',
+	// arguments ajoutes au lien
+	'options_url' 				=> '',
 	// fonctions JS standards (ouverture de popup) ?
 	'javascript_standard' 	=> 'oui',
 	// contenus des objets inclus au mail

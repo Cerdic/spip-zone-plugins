@@ -98,7 +98,7 @@ function tipafriend_config($var=''){
  */
 function taf_dbg_block($tab_dbg=null) {
 	if(is_null($tab_dbg)) return;
-	if(_TIPAFRIEND_TEST) {
+	if(defined('_TIPAFRIEND_TEST') && _TIPAFRIEND_TEST) {
 		$str_dbg = taf_dbg_block_css();
 		foreach($tab_dbg as $ttl=>$val) {
 			if (is_string($ttl))

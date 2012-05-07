@@ -45,14 +45,13 @@ function balise_TIPAFRIEND($p, $nom='TIPAFRIEND') {
 	if (!is_array($p->param) OR !count($p->param))
 		$p->param = array(array(0=>null));
 
-    $objet = $p->boucles[$p->id_boucle]->id_table;
-    $_objet = $objet ? objet_type($objet) : "balise_hors_boucle";
+  $objet = $p->boucles[$p->id_boucle]->id_table;
+  $_objet = $objet ? objet_type($objet) : "balise_hors_boucle";
 	$t = new Texte;
 	$t->texte = $_objet;
 	$p->param[0][] = array($t); 
 	if(_TIPAFRIEND_TEST)
-		$div_debug[_T('tipafriend:taftest_creation_objet_texte')] = 
-			var_export($t, true);
+		$div_debug[_T('tipafriend:taftest_creation_objet_texte')] = var_export($t, true);
 
 	$_id_objet = $p->boucles[$p->id_boucle]->primary;
     $id_objet = champ_sql($_id_objet, $p);
@@ -60,8 +59,7 @@ function balise_TIPAFRIEND($p, $nom='TIPAFRIEND') {
 	$t->nom_champ = "id_$_objet";
 	$p->param[0][] = array($t); 
 	if(_TIPAFRIEND_TEST)
-		$div_debug[_T('tipafriend:taftest_creation_objet_champs')] =
-			var_export($t, true);
+		$div_debug[_T('tipafriend:taftest_creation_objet_champs')] = var_export($t, true);
 
 	// Arguments vides puisque fonction statique ci-dessous
 	$args = $supp = array();
@@ -89,8 +87,8 @@ function balise_TIPAFRIEND_stat($args, $filtres) {
 	$nom_exped = ($num >= 6) ? $args[3] : ''; // 4: nom expediteur
 	$adresse_dest = ($num >= 7) ? $args[4] : ''; // 5: adresses destination
 
-    $objet = $args[$num-2]; // tot-2: type objet
-    $id_objet = $args[$num-1];// tot-1: id_objet
+  $objet = $args[$num-2]; // tot-2: type objet
+  $id_objet = $args[$num-1];// tot-1: id_objet
 
 	$args = array($objet, $id_objet, $url, $type_skel, $adresse_exped, $nom_exped, $adresse_dest);
 	return $args;
@@ -135,10 +133,17 @@ function balise_TIPAFRIEND_dyn($objet='', $id_objet='', $url='', $skel='', $mail
 		$model = str_replace('.html', '', $GLOBALS['TIPAFRIEND_DEFAULTS']['modele']);
 	}
 
+	// On traite les arguments utilisateurs
+	$user_opts = '';
+	if(isset($config['options_url']) && strlen($config['options_url'])) {
+		parse_str($config['options_url'], $opts_url);
+		$user_opts = "&".http_build_query($opts_url);
+	}
+
 	// Construction du contexte
 	$contexte = array( 
 		'fond' => 'modeles/'.$model,
-		'url' => $_url,
+		'url' => $_url.$user_opts,
 		'type' => $type_skel,
 		'options' => _request('options') ? _request('options') : (
 			$config['options'] ? $config['options'] : ''
@@ -155,7 +160,7 @@ function balise_TIPAFRIEND_dyn($objet='', $id_objet='', $url='', $skel='', $mail
 		}
 		else $contexte["id_$_obj"] = '';
 	}
-	$url_args = "id=$id&type=$type&mex=$mail_exp&nex=$nom_exp&mdes=$mail_dest&usend=$_url";
+	$url_args = "id=$id&type=$type&mex=$mail_exp&nex=$nom_exp&mdes=$mail_dest".$user_opts;
 	$skel = $config['squelette'];
 	if(!find_in_path($skel.'.html')) {
 		if(_TIPAFRIEND_TEST)
@@ -167,7 +172,10 @@ function balise_TIPAFRIEND_dyn($objet='', $id_objet='', $url='', $skel='', $mail
 	$contexte['lien_href_accessible'] = generer_url_public($skel, $url_args);
 	if($config['header'] == 'non') $url_args .= "&header=non";
 	if($config['close_button'] == 'non') $url_args .= "&close_button=non";
+	else $url_args .= "&close_button=oui";
 	if($config['taf_css'] == 'non') $url_args .= "&taf_css=non";
+	// On l'ajoute en dernier car sinon ca semble poser probleme
+	$url_args .= "&usend=$_url";
 	$contexte['lien_href'] = generer_url_public($skel, $url_args);
 
 	if(_TIPAFRIEND_TEST){

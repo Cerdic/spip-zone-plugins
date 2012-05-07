@@ -26,7 +26,7 @@
 		<label for="contenu_objets"><:tipafriend:cfgform_titre_contenu:></label>
 		<div class="explication"><:tipafriend:cfgform_comment_contenu:></div>
 		[<span class='erreur_message'>(#GET{erreurs})</span>
-		]<select name="" id="contenu_objets" class="forml verdana1">
+		]<select name="contenu_objets" id="contenu_objets" class="forml verdana1">
 				<option value="tout"[(#GET{config}|table_valeur{contenu_objets}|=={tout}|oui) selected="selected"]><:tipafriend:cfgform_option_contenu_tout:></option>
 				<option value="introduction"[(#GET{config}|table_valeur{contenu_objets}|=={introduction}|oui) selected="selected"]><:tipafriend:cfgform_option_contenu_introduction:></option>
 				<option value="rien"[(#GET{config}|table_valeur{contenu_objets}|=={rien}|oui) selected="selected"]><:tipafriend:cfgform_option_contenu_rien:></option>

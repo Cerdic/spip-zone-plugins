@@ -22,16 +22,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_legend_squelette' => 'Concernant le formulaire d\'envoi',
 	'cfg_texte_descr' => 'Le plugin ajoute à SPIP un module permettant d\'envoyer une page (<i>son contenu, son adresse ainsi qu\'un message</i>) à un ou plusieurs destinataires par e-mail.',
 	'cfg_titre_descr' => 'Configuration du plugin <i>Tip A Friend</i>',
-	'cfgform_comment_close_button' => 'active par défaut, cette option vous permet de choisir de montrer ou non le bouton \'Fermer\' en bas de la fenêtre ; <strong>cette option est automatiquement désactivée si les en-têtes sont eux-mêmes désactivés ci-dessus</strong>.',
-	'cfgform_comment_contenu' => 'sélectionnez ici le type de contenu de l\'objet SPIP (<i>article, brève, auteur ...</i>) qui sera inclus dans le mail transmis.',
-	'cfgform_comment_header' => 'cette option vous permet de choisir si les informations de la balise &lt;head&gt; de la page doivent être présentes ou non (<i>il peut être utile de les désactiver si vous utilisez une fenêtre javascript type \'thickbox\', ou au contraire de forcer leur affichage dans le même contexte avec un contenu en frame</i>).',
-	'cfgform_comment_javascript' => 'vous pouvez désactiver la fonction d\'ouverture de la popup (<i>dans le cas de l\'utilisation de fenêtres javascript type \'thickbox\' ou \'fancybox\' par exemple</i>).',
-	'cfgform_comment_options' => 'vous devez indiquer des attributs complets, par exemple : "class=\'thickbox\'", ils seront automatiquement ajoutés au lien inclus dans vos squelettes ; <b>utilisez seulement des guillemets simples</b>.',
-	'cfgform_comment_patron' => 'patron par défaut du mail dans sa version classique (<i>texte brut</i>).',
-	'cfgform_comment_patron_html' => 'si vous utilisez cette option, le mail envoyé comportera tout de même le premier squelette en version texte brut ; laissez le champ vide pour annuler cette option.',
-	'cfgform_comment_reset' => 'vous pouvez ici définir l\'action du bouton "Annuler" du formulaire (<i>redéfinir cette action peut vous permettre de fermer la thickbox plutôt que la fenêtre par exemple</i>).',
-	'cfgform_comment_squelette' => 'si vous avez créé un squelette personnel pour la boîte de dialogue du plugin (<i>sur le modèle du fichier "tip_a_friend.html"</i>) indiquez-le ici ; votre squelette devra obligatoirement inclure le formulaire "<b>tipafriend_form</b>".',
-	'cfgform_comment_taf_css' => 'le plugin définit des styles CSS sur le modèle des styles de la distribution de SPIP ; ces styles sont inclus au formulaire par défaut mais vous pouvez ici choisir de ne pas les inclure.',
+	'cfgform_comment_close_button' => 'Active par défaut, cette option vous permet de choisir de montrer ou non le bouton \'Fermer\' en bas de la fenêtre ; <strong>cette option est automatiquement désactivée si les en-têtes sont eux-mêmes désactivés ci-dessus</strong>.',
+	'cfgform_comment_contenu' => 'Sélectionnez ici le type de contenu de l\'objet SPIP (<i>article, brève, auteur ...</i>) qui sera inclus dans le mail transmis.',
+	'cfgform_comment_header' => 'Cette option vous permet de choisir si les informations de la balise &lt;head&gt; de la page doivent être présentes ou non (<i>il peut être utile de les désactiver si vous utilisez une fenêtre javascript type \'thickbox\', ou au contraire de forcer leur affichage dans le même contexte avec un contenu en frame</i>).',
+	'cfgform_comment_javascript' => 'Vous pouvez désactiver la fonction d\'ouverture de la popup (<i>dans le cas de l\'utilisation de fenêtres javascript type \'thickbox\' ou \'fancybox\' par exemple</i>).',
+	'cfgform_comment_options' => 'Vous devez indiquer des attributs complets, par exemple : "class=\'thickbox\'", ils seront automatiquement ajoutés au lien inclus dans vos squelettes ; <b>utilisez seulement des guillemets simples</b>.',
+	'cfgform_comment_options_url' => 'Vous pouvez ici indiquer une liste d\'arguments, par exemple : "arg=valeur&arg2=nouvelle_valeur", ils seront automatiquement ajoutés à l\'URL générée par la balise.',
+	'cfgform_comment_patron' => 'Patron par défaut du mail dans sa version classique (<i>texte brut</i>).',
+	'cfgform_comment_patron_html' => 'Si vous utilisez cette option, le mail envoyé comportera tout de même le premier squelette en version texte brut ; laissez le champ vide pour annuler cette option.',
+	'cfgform_comment_reset' => 'Vous pouvez ici définir l\'action du bouton "Annuler" du formulaire (<i>redéfinir cette action peut vous permettre de fermer la thickbox plutôt que la fenêtre par exemple</i>).',
+	'cfgform_comment_squelette' => 'Si vous avez créé un squelette personnel pour la boîte de dialogue du plugin (<i>sur le modèle du fichier "tip_a_friend.html"</i>) indiquez-le ici ; votre squelette devra obligatoirement inclure le formulaire "<b>tipafriend_form</b>".',
+	'cfgform_comment_taf_css' => 'Le plugin définit des styles CSS sur le modèle des styles de la distribution de SPIP ; ces styles sont inclus au formulaire par défaut mais vous pouvez ici choisir de ne pas les inclure.',
 	'cfgform_info_balise' => 'La balise renvoie le lien ouvrant la page du formulaire d\'envoi. Vous pouvez changer l\'image affichée en éditant directement le squelette "<strong>modeles/tipafriend.html</strong>" du plugin.',
 	'cfgform_info_patron_html' => '<strong>Si le plugin <a href="http://www.spip-contrib.net/?article3371"><strong>Facteur</strong></a> est installé et actif sur votre site</strong>, il est possible de construire une version HTML du mail envoyé.',
 	'cfgform_info_patrons' => 'Vos patrons personnels sont à placer dans le sous-répertoire "<strong>patrons/</strong>" de votre répertoire de squelettes.',
@@ -44,6 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfgform_titre_header' => 'Inclure les en-têtes HTML',
 	'cfgform_titre_javascript' => 'Fonction javascript standard (ouverture d\'une popup)',
 	'cfgform_titre_options' => 'Attribut(s) ajouté(s) au lien créé par la balise',
+	'cfgform_titre_options_url' => 'Argument(s) ajouté(s) à l\'URL du lien créé par la balise',
 	'cfgform_titre_patron' => 'Patron du mail envoyé',
 	'cfgform_titre_patron_html' => 'Patron du mail au format HTML',
 	'cfgform_titre_reset' => 'Action du bouton d\'annulation',
@@ -52,7 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'doc_chapo' => 'Le plugin "Tip A Friend" propose un formulaire complet pour envoyer une page d\'un site SPIP ({n\'importe laquelle}) à une liste d\'adresses e-mail.',
-	'doc_en_ligne' => 'Documentation du plugin sur Spip-Contrib',
+	'doc_en_ligne' => 'Documentation',
 	'doc_titre_court' => 'Documentation TipAFriend',
 	'doc_titre_page' => 'Documentation du plugin "Tip A Friend"',
 	'docskel_sep' => '----',
@@ -95,9 +97,9 @@ Les liens ci-dessous vous permettent de tester les modèles utilisés en page we
 - [Voir le modèle brut avec des données fictives->@url_model_brut@]
 - [Voir le modèle HTML avec des données fictives->@url_model_html@] <small>(nécessite le plugin {{[Facteur->http://www.spip-contrib.net/?article3371]}})</small>
 
-{{{Paramètres de CFG pour TIPAFRIEND}}}
+{{{Paramètres de configuration}}}
 
-Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubrique575]}} est actif sur votre site, le lien ci-dessous vous présente les valeurs de configuration enregistrées pour le plugin "Tip A Friend".
+Le bloc ci-dessous vous présente les valeurs de configuration enregistrées pour le plugin "Tip A Friend".
 
 @cfg_param@',
 
