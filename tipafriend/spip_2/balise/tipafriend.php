@@ -23,8 +23,9 @@
  * => 5: adresses destination
  *
  * Arguments ajoutés par la balise statique :
- * => tot-1: id_objet
- * => tot-2: type objet
+ * => tot-1: langue courante
+ * => tot-2: id_objet
+ * => tot-3: type objet
  *
  * @name 		BaliseDynamique
  * @author 		Piero Wbmstr <http://www.spip-contrib.net/PieroWbmstr>
@@ -38,30 +39,32 @@ global $div_debug; $div_debug = array();
  * Balise classique, appelée par SPIP
  *
  * On ajoute ici dans les paramètres du contexte de la balise les valeurs de l'objet demandé
- * et de son identifiant
+ * et de son identifiant ainsi que la langue courante
  */
 function balise_TIPAFRIEND($p, $nom='TIPAFRIEND') {
 	global $div_debug;
 	if (!is_array($p->param) OR !count($p->param))
 		$p->param = array(array(0=>null));
 
-    $objet = $p->boucles[$p->id_boucle]->id_table;
-    $_objet = $objet ? objet_type($objet) : "balise_hors_boucle";
+  $objet = $p->boucles[$p->id_boucle]->id_table;
+  $_objet = $objet ? objet_type($objet) : "balise_hors_boucle";
 	$t = new Texte;
 	$t->texte = $_objet;
 	$p->param[0][] = array($t); 
 	if(_TIPAFRIEND_TEST)
-		$div_debug[_T('tipafriend:taftest_creation_objet_texte')] = 
-			var_export($t, true);
+		$div_debug[_T('tipafriend:taftest_creation_objet_texte')] = var_export($t, true);
 
 	$_id_objet = $p->boucles[$p->id_boucle]->primary;
-    $id_objet = champ_sql($_id_objet, $p);
+  $id_objet = champ_sql($_id_objet, $p);
 	$t = new Champ;
 	$t->nom_champ = "id_$_objet";
 	$p->param[0][] = array($t); 
 	if(_TIPAFRIEND_TEST)
-		$div_debug[_T('tipafriend:taftest_creation_objet_champs')] =
-			var_export($t, true);
+		$div_debug[_T('tipafriend:taftest_creation_objet_champs')] = var_export($t, true);
+
+	$t = new Texte;
+	$t->texte = $GLOBALS['spip_lang'];
+	$p->param[0][] = array($t); 
 
 	// Arguments vides puisque fonction statique ci-dessous
 	$args = $supp = array();
@@ -79,9 +82,10 @@ function balise_TIPAFRIEND_stat($args, $filtres) {
 	global $div_debug;
 	$num = count($args);
 
+//var_export($args);var_export($filtres);
+
 	if(_TIPAFRIEND_TEST)
-		$div_debug[_T('tipafriend:taftest_arguments_balise_stat')] =
-			var_export($args, true);
+		$div_debug[_T('tipafriend:taftest_arguments_balise_stat')] = var_export($args, true);
 
 	$type_skel = ($num >= 3) ? $args[0] : ''; // 1: type de squelette
 	$url = ($num >= 4) ? $args[1] : ''; // 2: URL
@@ -89,10 +93,12 @@ function balise_TIPAFRIEND_stat($args, $filtres) {
 	$nom_exped = ($num >= 6) ? $args[3] : ''; // 4: nom expediteur
 	$adresse_dest = ($num >= 7) ? $args[4] : ''; // 5: adresses destination
 
-    $objet = $args[$num-2]; // tot-2: type objet
-    $id_objet = $args[$num-1];// tot-1: id_objet
+  $objet = $args[$num-3]; // tot-3: type objet
+  $id_objet = $args[$num-2];// tot-2: id_objet
 
-	$args = array($objet, $id_objet, $url, $type_skel, $adresse_exped, $nom_exped, $adresse_dest);
+  $_ln = $args[$num-1];// tot-1: langue courante
+
+	$args = array($_ln, $objet, $id_objet, $url, $type_skel, $adresse_exped, $nom_exped, $adresse_dest);
 	return $args;
 }
 
@@ -104,7 +110,7 @@ function balise_TIPAFRIEND_stat($args, $filtres) {
  *
  * Le cache de ce modèle est fixé à 0. Cette valeur peut être modifiée en première ligne de cette fontion.
  */
-function balise_TIPAFRIEND_dyn($objet='', $id_objet='', $url='', $skel='', $mail_exp='', $nom_exp='', $mail_dest='', $plus='') {
+function balise_TIPAFRIEND_dyn($_ln='fr', $objet='', $id_objet='', $url='', $skel='', $mail_exp='', $nom_exp='', $mail_dest='', $plus='') {
 	// Temps du cache sur le modèle | peut être modifié
 	$temps_de_cache = 0;
 
@@ -117,6 +123,10 @@ function balise_TIPAFRIEND_dyn($objet='', $id_objet='', $url='', $skel='', $mail
 	if(_TIPAFRIEND_TEST)
 		$div_debug[_T('tipafriend:taftest_arguments_balise_dyn')] =
 			var_export(array('objet'=>$objet, 'id_objet'=>$id_objet, 'url'=>$url, 'squelette'=>$skel, 'adresse mail'=>$mail, 'ajouts'=>$plus), true);
+
+	// Completer la langue
+	if (empty($_ln)) $_ln = $GLOBALS['spip_lang'];
+	$lang_arg = 'lang='.$_ln;
 
 	// Completer la requete
 	$_url = strlen($url) ? urlencode($url) : urlencode(url_absolue(self('&amp;')));
@@ -152,7 +162,9 @@ function balise_TIPAFRIEND_dyn($objet='', $id_objet='', $url='', $skel='', $mail
 		),
 		'java' => ($config['javascript_standard'] == 'oui') ? 'oui' : 'non',
 		'adresse_expediteur' => $_mail ? $_mail : '',
-		'temps_cache' => $temps_de_cache
+		'temps_cache' => $temps_de_cache,
+		'lang'=>$_ln,
+		'var_mode'=>'recalcul', // force le recalcul pour les langues
 	);
 	foreach($list_objets as $_obj){
 		if( strlen($objet) AND strtolower($objet) == $_obj) {
@@ -171,21 +183,21 @@ function balise_TIPAFRIEND_dyn($objet='', $id_objet='', $url='', $skel='', $mail
 		$skel = str_replace('.html', '', $GLOBALS['TIPAFRIEND_DEFAULTS']['squelette']);
 	}
 	if(_TIPAFRIEND_TEST) $url_args .= "&var_mode=recalcul";
-	$contexte['lien_href_accessible'] = generer_url_public($skel, $url_args);
+	$contexte['lien_href_accessible'] = generer_url_public($skel, $url_args.'&'.$lang_arg);
 	if($config['header'] == 'non') $url_args .= "&header=non";
 	if($config['close_button'] == 'non') $url_args .= "&close_button=non";
 	else $url_args .= "&close_button=oui";
 	if($config['taf_css'] == 'non') $url_args .= "&taf_css=non";
 	// On l'ajoute en dernier car sinon ca semble poser probleme
-	$url_args .= "&usend=$_url";
+	$url_args .= '&'.$lang_arg."&usend=$_url";
 	$contexte['lien_href'] = generer_url_public($skel, $url_args);
 
 	if(_TIPAFRIEND_TEST){
-		$div_debug[_T('tipafriend:taftest_contexte_modele')] = 
-			var_export($contexte, true);
+		$div_debug[_T('tipafriend:taftest_contexte_modele')] = var_export($contexte, true);
 		echo taf_dbg_block($div_debug);
 	}
 
 	return array('modeles/'.$model, $temps_de_cache, $contexte);
 }
+
 ?>

@@ -17,7 +17,7 @@ div.spip_tipafriend {display:inline}
 		[(#ENV{type,complet}|=={complet}|oui)&nbsp;<:tipafriend:bouton_send_by_mail:>]
 </a>
 </div>
-<script type='text/javascript'>
+[(#ENV{java,oui}|=={oui}|oui)<script type='text/javascript'>
 <!--
 function taf_get_url() {
 	var url = document.URL, d_index = url.indexOf("#"), 
@@ -38,4 +38,4 @@ function taf_popup(url, name) {
 	new_f.focus();
 }
 //-->
-</script>
+</script>]

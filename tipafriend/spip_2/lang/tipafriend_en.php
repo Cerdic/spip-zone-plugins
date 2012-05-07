@@ -15,8 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_fermer' => 'Fermer', # NEW
 	'bouton_reessayer' => 'Recommencer', # NEW
 	'bouton_reset' => 'Réinitialiser', # NEW
-	'bouton_send_by_mail' => 'Envoyer par email', # NEW
-	'bouton_send_by_mail_ttl' => 'Envoyer cette page par email', # NEW
+	'bouton_send_by_mail' => 'Send by email', # NEW
+	'bouton_send_by_mail_ttl' => 'Send this page by email', # NEW
 
 	// C
 	'cfg_legend_balise' => 'Concernant la balise "#TIPAFRIEND"', # NEW
@@ -113,7 +113,7 @@ Si le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubr
 	'error_one_is_not_mail' => 'Il semble qu\'une des adresses saisies au moins ne soit pas un e-mail', # NEW
 
 	// F
-	'form_dest_label' => 'Adresses e-mail des destinataires', # NEW
+	'form_dest_label' => 'Receivers e-mail addresses', # NEW
 	'form_exp_label' => 'Votre adresse e-mail', # NEW
 	'form_exp_nom_label' => 'Votre nom', # NEW
 	'form_exp_send_label' => '<em>Vous joindre en copie du mail (champ "Cc")</em>', # NEW
