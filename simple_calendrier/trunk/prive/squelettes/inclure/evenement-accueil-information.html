@@ -1,7 +1,7 @@
 <div class='accueil_informations articles liste'>
 	[(#SET{titre,#ARRAY{prepa,<:texte_statut_en_cours_redaction:>,prop,<:texte_statut_attente_validation:>,publie,<:texte_statut_publies:>}})]
 <B_cpt>
-	<h4>[(#URL_ECRIRE{evenements,mode=avenir}|afficher_plus_info{<:simplecal:info_evenements:>})]<:simplecal:info_evenements:></h4>
+	<h4>[(#URL_ECRIRE{evenements,mode=avenir}|afficher_plus_info{<:simplecal:info_evenements:>, <:simplecal:info_evenements:>})]</h4>
 	<ul class="liste-items">
 		<BOUCLE_cpt(DATA){liste prepa,prop,publie}><BOUCLE_evts(EVENEMENTS){statut=#VALEUR}{pagination 1}>
 			<li class="item[(#STATUT|=={publie}|oui)on]">
@@ -16,5 +16,3 @@
 	</ul>
 </B_cpt>
 </div>
-
-
