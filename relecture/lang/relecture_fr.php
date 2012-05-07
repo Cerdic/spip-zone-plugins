@@ -48,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_article_texte' => 'Texte',
 	'label_commentaires_acceptes' => 'Acceptés',
 	'label_commentaires_ouverts' => 'Ouverts',
+	'label_commentaires_poubelle' => 'Supprimés',
 	'label_commentaires_refuses' => 'Refusés',
 	'label_commentaire_texte' => 'Texte du commentaire',
 	'label_commentaire_reponse' => 'Réponse au commentaire',

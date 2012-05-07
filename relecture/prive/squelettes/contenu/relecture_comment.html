@@ -38,17 +38,21 @@
 	<div class="unit size1of1 lastunit">
 		<strong><:relecture:info_periode_commentaire_ouverte{date=#GET{date_fin_periode}}:></strong>
 	</div>
-	<div class="unit size1of3">
+	<div class="unit size1of4">
 		<span><:relecture:label_commentaires_ouverts:> : </span>
 		<span dir="#LANG_DIR">[<strong>(#GET{compteurs}|table_valeur{ouvert})</strong>]</span>
 	</div>
-	<div class="unit size1of3">
+	<div class="unit size1of4">
 		<span><:relecture:label_commentaires_acceptes:> : </span>
 		<span dir="#LANG_DIR">[<strong>(#GET{compteurs}|table_valeur{accepte})</strong>]</span>
 	</div>
-	<div class="unit size1of3 lastunit">
+	<div class="unit size1of4">
 		<span><:relecture:label_commentaires_refuses:> : </span>
 		<span dir="#LANG_DIR">[<strong>(#GET{compteurs}|table_valeur{refuse})</strong>]</span>
+	</div>
+	<div class="unit size1of4 lastunit">
+		<span><:relecture:label_commentaires_poubelle:> : </span>
+		<span dir="#LANG_DIR">[<strong>(#GET{compteurs}|table_valeur{poubelle})</strong>]</span>
 	</div>
 	#BOITE_FERMER
 </div>

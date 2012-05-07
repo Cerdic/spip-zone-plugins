@@ -48,7 +48,7 @@ function relecture_informer_commentaires($id) {
  * @return array
  */
 function relecture_compter_commentaires($id, $element='') {
-	$compteurs = array('ouvert' => 0, 'accepte' => 0, 'refuse' => 0);
+	$compteurs = array('ouvert' => 0, 'accepte' => 0, 'refuse' => 0, 'poubelle' => 0);
 
 	if ($id_relecture = intval($id)) {
 		$select = array('statut', 'count(*) AS compteur');
