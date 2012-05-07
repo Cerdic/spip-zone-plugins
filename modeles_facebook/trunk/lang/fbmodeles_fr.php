@@ -16,14 +16,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // C //
 	// Documentation
 	'cf_navigation' => 'Cf. [colonne de navigation->@url@]',
-	'configuration' => '{{{Configuration}}}
-
-Le plugin est pr&eacute;vu pour proposer une page de configuration gr&acirc;ce au plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubrique575]}} mais celui-ci n\'est pas obligatoire.
-
-@bloc_cfg@
-',
-	'cfg_pas_installe' => 'Le plugin CFG ne semble pas install&eacute; sur votre site.',
-	'cfg_page' => 'Page de configuration',	
 	// Configuration (CFG)
 	'cfg_descr_titre' => 'Mod&egrave;les Facebook',
 	'cfg_label_titre' => 'Configuration des mod&egrave;les Facebook',
@@ -56,7 +48,7 @@ Pour inclure les balises "Open Graph" en en-t&ecirc;te de vos pages publiques, v
 	// Documentation
 	'doc_titre_page' => 'Page de documentation du plugin Mod&egrave;les Facebook',	
 	'doc_titre_court' => 'Documentation Mod&egrave;les Facebook',	
-	'doc_en_ligne' => 'Documentation du plugin sur Spip-Contrib',
+	'doc_en_ligne' => 'Documentation',
 	'doc_chapo' => 'Le plugin Mod&egrave;les Facebook pour SPIP 2.0 ({et plus}) propose un ensemble de mod&egrave;les, ou noisettes, permettant d\'utiliser simplement et rapidement les plugins sociaux propos&eacute;s par Facebook.',
 	'documentation' => '{{{Utilisation du plugin}}}
 
@@ -80,7 +72,7 @@ Le plugin propose &eacute;galement un mod&egrave;le g&eacute;n&eacute;rant des i
 	// Documentation
 	'exemple' => '{{{Exemple}}}
 
-Les diff&eacute;rents blocs ci-dessous vous pr&eacute;sentent un exemple de chaque mod&egrave;le avec des valeurs fictives ({la page utilisera vos valeurs si vous utilisez [CFG->http://www.spip-contrib.net/?rubrique575]}). Reportez-vous au mod&egrave;le correspondant pour les options.',
+Les diff&eacute;rents blocs ci-dessous vous pr&eacute;sentent un exemple de chaque mod&egrave;le avec des valeurs fictives. Reportez-vous au mod&egrave;le correspondant pour les options.',
 
 // F //
 	'fb_modeles' => 'Mod&egrave;les Facebook',
@@ -89,7 +81,7 @@ Les diff&eacute;rents blocs ci-dessous vous pr&eacute;sentent un exemple de chaq
 	'javascript_inactif' => 'Le javascript est inactif sur votre navigateur. Certaines fonctionnalit&eacute;s de cet outil seront inactives ...',
 	
 // L //
-	'licence' => 'Plugin pour SPIP 2.0+ : {{"Facebook Models" - copyright &#169; 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] sous licence ([GPL->http://www.opensource.org/licenses/gpl-3.0.html]}) }}.',
+	'licence' => 'Plugin pour SPIP 2.0+ : {{"Facebook Models" - copyright &#169; 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] sous licence [GPL->http://www.opensource.org/licenses/gpl-3.0.html] }}.',
 
 // N //
 	'new_window' => 'Nouvelle fen&ecirc;tre',
