@@ -87,7 +87,7 @@ function relecture_declarer_tables_objets_sql($tables) {
 			"repere"			=> "varchar(255) DEFAULT '' NOT NULL",
 			"texte"				=> "text DEFAULT '' NOT NULL",
 			"reponse"			=> "text DEFAULT '' NOT NULL",
-			"date_crea" 		=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+			"date_ouverture"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 			"date_modif" 		=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 			"date_cloture"		=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 			"statut"			=> "varchar(10) DEFAULT '' NOT NULL",
@@ -99,29 +99,32 @@ function relecture_declarer_tables_objets_sql($tables) {
 
 		// Titre, date et gestion du statut
 		'titre'					=> "id_commentaire AS titre, '' AS lang",
-		'date' 					=> 'date_crea',
-		'texte_changer_statut' => 'relecture:texte_instituer_commentaire',
-		'aide_changer_statut' => '',
-		'statut_titres' => array(
-			'ouvert' => 'relecture:titre_commentaire_ouvert',
-			'accepte' => 'relecture:titre_commentaire_accepte',
-			'refuse' => 'relecture:titre_commentaire_refuse'
+		'date' 					=> 'date_ouverture',
+		'texte_changer_statut'	=> 'relecture:texte_instituer_commentaire',
+		'aide_changer_statut'	=> '',
+		'statut_titres'			=> array(
+			'ouvert'	=> 'relecture:titre_commentaire_ouvert',
+			'accepte'	=> 'relecture:titre_commentaire_accepte',
+			'refuse'	=> 'relecture:titre_commentaire_refuse',
+			'poubelle'	=> 'relecture:titre_commentaire_poubelle'
 		),
-		'statut_textes_instituer' => 	array(
-			'ouvert' => 'relecture:texte_commentaire_ouvert',
-			'accepte' => 'relecture:texte_commentaire_accepte',
-			'refuse' => 'relecture:texte_commentaire_refuse'
+		'statut_textes_instituer'=>	array(
+			'ouvert'	=> 'relecture:texte_commentaire_ouvert',
+			'accepte'	=> 'relecture:texte_commentaire_accepte',
+			'refuse'	=> 'relecture:texte_commentaire_refuse',
+			'poubelle'	=> 'relecture:texte_commentaire_poubelle'
 		),
-		'statut_images' => array(
-			'ouvert'=>'puce-preparer-8.png',
-			'accepte'=>'puce-publier-8.png',
-			'accepte'=>'puce-refuser-8.png'
+		'statut_images'			=> array(
+			'ouvert'	=> 'puce-preparer-8.png',
+			'accepte'	=> 'puce-publier-8.png',
+			'refuse'	=> 'puce-refuser-8.png',
+			'poubelle'	=> 'puce-poubelle-8.png'
 		),
 
 		// Edition, affichage et recherche
 		'page'					=> '',
-		'url_voir' => 'commentaire_edit',
-		'url_edit' => 'commentaire_edit',
+		'url_voir' 				=> 'commentaire_edit',
+		'url_edit' 				=> 'commentaire_edit',
 		'editable'				=> 'oui',
 		'champs_editables'		=> array('texte', 'reponse'),
 		'rechercher_champs'		=> array(),

@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // L
 	'label_article_chapo' => 'Chapeau',
-	'label_article_descriptif' => 'Descriptif',
+	'label_article_descr' => 'Descriptif',
 	'label_article_ps' => 'Post-Scriptum',
 	'label_article_relu' => 'Article concerné',
 	'label_article_texte' => 'Texte',

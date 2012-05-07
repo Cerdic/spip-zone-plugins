@@ -37,7 +37,8 @@ function barre_outils_relecture(){
 				if (!p['element']) {
 					p['element'] = 'texte';
 				}
-				u = parametre_url('?exec=commentaire_edit', 'id_relecture', p['id_relecture']);
+				u = parametre_url('?exec=commentaire_edit', 'new', 'oui');
+				u = parametre_url(u, 'id_relecture', p['id_relecture']);
 				u = parametre_url(u, 'element', p['element']);
 				u = parametre_url(u, 'index_debut', d);
 				u = parametre_url(u, 'index_fin', f);

@@ -145,9 +145,12 @@ function relecture_formulaire_charger($flux){
 /* ----------------------- OBJETS ----------------------- */
 
 /**
- * Surcharge de l'insertion standard d'un objet en incluant des traitements prealables pour une relecture :
+ * Surcharge de l'insertion standard d'un objet relecture :
  * - informations sur l'article
  * - date de fin des commentaires
+ *
+ * Surcharge de l'insertion standard d'un objet commentaire :
+ * - element et repere du commentaire dans le texte de cet element
  *
  * @param array $flux
  * @return array
@@ -166,11 +169,12 @@ function relecture_pre_insertion($flux) {
 			foreach ($article as $_cle => $_valeur) {
 				if ($_cle == 'id_article')
 					$flux['data'][$_cle] = intval($_valeur);
-				else
+				else {
 					// On ne recupere que les textes qui comportent des mots !
 					$texte = trim($_valeur);
 					if ($texte)
 						$flux['data'][$_cle] = $texte;
+				}
 			}
 
 			// - correction de la date de fin de commentaire positionnee par defaut a cause de la configuration
@@ -181,6 +185,19 @@ function relecture_pre_insertion($flux) {
 		}
 	}
 	else if ($flux['args']['table'] == 'spip_commentaires') {
+		if ($id_relecture = intval(_request('id_relecture'))) {
+			include_spip('inc/session');
+
+			// - ajout des informations de base sur le commentaire
+			$flux['data']['id_relecture'] = $id_relecture;
+			$flux['data']['element'] = _request('element');
+			$flux['data']['repere'] = serialize(array(intval(_request('index_debut')), intval(_request('index_fin'))));
+
+			// - l'auteur du commentaire (auteur connecte)
+			$flux['data']['id_emetteur'] = session_get('id_auteur');
+
+			// - Le statut est mis a jour dans la fonction instituer surchargee dans le pipeline pre_edition
+		}
 	}
 
 	return $flux;
@@ -199,19 +216,19 @@ function relecture_pre_insertion($flux) {
 function relecture_pre_edition($flux) {
 
 	$table = $flux['args']['table'];
-	$id_relecture = intval($flux['args']['id_objet']);
+	$id = intval($flux['args']['id_objet']);
 	$action = $flux['args']['action'];
 
 	// Traitements particuliers de l'objet relecture dans le cas d'une cloture :
 	if (($table == 'spip_relectures')
-	AND ($id_relecture)) {
+	AND ($id)) {
 
 		// Instituer
 		if ($action == 'instituer') {
 
 			// Recherche de l'id de l'article sur lequel porte la relecture
 			$from = 'spip_relectures';
-			$where = array("id_relecture=$id_relecture");
+			$where = array("id_relecture=$id");
 			$id_article = sql_getfetsel('id_article', $from, $where);
 			// Determination de la revision courante de l'article
 			$from = 'spip_versions';
@@ -238,6 +255,29 @@ function relecture_pre_edition($flux) {
 
 				// - mise a jour de la revision de cloture
 				$flux['data']['revision_cloture'] = $revision;
+			}
+		}
+	}
+	else if (($table == 'spip_commentaires'   )
+	AND ($id)) {
+
+		// Instituer
+		if ($action == 'instituer') {
+
+			// -- Ouverture
+			if ($flux['args']['statut_ancien'] == 'prepa') {
+				// - mise a jour du "vrai" statut de la relecture
+				$flux['data']['statut'] = 'ouvert';
+
+				// - mise a jour de la date d'ouverture
+				$flux['data']['date_ouverture'] = date('Y-m-d H:i:s');
+			}
+
+			// -- Cloture
+			if (($flux['args']['statut_ancien'] == 'ouvert')
+			AND (in_array($flux['data']['statut'], array('accepte', 'refuse', 'poubelle')))) {
+				// - mise a jour de la date de cloture
+				$flux['data']['date_cloture'] = date('Y-m-d H:i:s');
 			}
 		}
 	}

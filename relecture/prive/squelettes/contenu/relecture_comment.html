@@ -35,7 +35,9 @@
 	[(#REM) <!-- Statistiques sur les commentaires de l'element --> ]
 	#SET{compteurs, #ID_RELECTURE|relecture_compter_commentaires{#GET{encours}}}
 	[(#BOITE_OUVRIR{'', raccourcis})]
-	<div class="unit size1of1 lastunit"><strong><:relecture:info_periode_commentaire_ouverte{date=#GET{date_fin_periode}}:></strong></div>
+	<div class="unit size1of1 lastunit">
+		<strong><:relecture:info_periode_commentaire_ouverte{date=#GET{date_fin_periode}}:></strong>
+	</div>
 	<div class="unit size1of3">
 		<span><:relecture:label_commentaires_ouverts:> : </span>
 		<span dir="#LANG_DIR">[<strong>(#GET{compteurs}|table_valeur{ouvert})</strong>]</span>

@@ -1,0 +1,14 @@
+<BOUCLE_commentaire_navigation(COMMENTAIRES) {id_commentaire}{si #ENV{exec}|=={commentaire}}>
+[(#REM) <!-- La boite d'infos de la relecture --> ]
+#BOITE_OUVRIR{'', info}
+	<INCLURE{fond=prive/objets/infos/commentaire,
+		type=#ENV{type-page},
+		id=#ID_COMMENTAIRE,
+		env} />
+#BOITE_FERMER
+
+[(#REM) <!-- Pas de logo pour une relecture --> ]
+
+[(#REM) <!-- Appel du pipeline "afficher_config_objet" pour ajouter de la config eventuelle --> ]
+#PIPELINE{afficher_config_objet, #ARRAY{args, #ARRAY{type, #ENV{type-page}, id, #ID_RELECTURE}, data,''}}
+</BOUCLE_commentaire_navigation>

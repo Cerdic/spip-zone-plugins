@@ -12,7 +12,7 @@ function formulaires_editer_relecture_charger_dist($id_relecture='oui', $redirec
 	if (($id_relecture == 'oui')
 	AND ($id_article = intval(_request('id_article')))) {
 		// On supprime l'index 'id_article' du tableau des valeurs afin que id_article soit transmis dans
-		// la fonction traiter()
+		// la fonction traiter() (car id_article est un champ de l'objet relecture)
 		unset($valeurs['id_article']);
 	}
 
