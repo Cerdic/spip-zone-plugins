@@ -179,7 +179,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'tous' => 'Tous',
     'titre_boite_refobj' => 'dans le calendrier',
     'titre_boite_rubrique' => 'Calendrier',
-    'titre_langue_evenement' => "LANGUE DE L'EVENEMENT",
+    'titre_langue_evenement' => "Langue de l'&eacute;v&egrave;nement",
     
 // V
     'validation_date_debut' => 'La date de d&eacute;but est requise.',

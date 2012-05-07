@@ -99,6 +99,7 @@ function simplecal_declarer_tables_objets_sql($tables){
         'info_1_objet' => 'simplecal:info_1_evenement',
         'info_nb_objets' => 'simplecal:info_nb_evenements',
         'texte_logo_objet' => 'simplecal:logo_evenement',
+		'texte_langue_objet' => 'simplecal:titre_langue_evenement',
         'titre' => 'titre, lang',
         'date' => 'date', // indique le nom du field pour le formulaires_dater_charger_dist
         'principale' => 'oui',
