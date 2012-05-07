@@ -38,7 +38,12 @@ if (!defined('PLUGIN_COLORATION_CODE_SANS_STYLES')) {
 // pouvoir definir la taille des tablations (defaut de geshi : 8)
 // define('PLUGIN_COLORATION_CODE_TAB_WIDTH', 4);
 
-	
+// Liens externes sur les mots cles de langage (defaut de geshi : true)
+if (!defined('PLUGIN_COLORATION_CODE_LIENS_LANGAGE')) {
+	define('PLUGIN_COLORATION_CODE_LIENS_LANGAGE', true); // false pour les eviter
+}
+
+
 // pour utiliser le colorieur 'spip' ou 'spip2' si on
 // passe une class "spip" simplement.
 // note: le colorieur "spip" est celui present originellement dans le plugin
@@ -95,7 +100,12 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 	if (defined('PLUGIN_COLORATION_CODE_TAB_WIDTH') and PLUGIN_COLORATION_CODE_TAB_WIDTH) {
 		$geshi->set_tab_width(PLUGIN_COLORATION_CODE_TAB_WIDTH);
 	}
-		
+
+	// permettre de supprimer les liens vers les documentations sur les mots cles de langage
+	if (!PLUGIN_COLORATION_CODE_LIENS_LANGAGE) {
+		$geshi->enable_keyword_links(false);
+	}
+
 	include_spip('inc/texte');
 	$code = echappe_retour($code);
 
