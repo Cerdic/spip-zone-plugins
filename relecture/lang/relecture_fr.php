@@ -21,6 +21,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_voir_relecture' => 'Voir',
 	'bouton_voir_relectures' => 'Afficher l\'historique des relectures',
 
+// E
+	'explication_ajout_commentaire' => 'Pour ajouter des commentaires à cet élément cliquez sur le bouton de la barre d\'outils. Au préalable, si vous souhaitez associer ce commentaire à un emplacement ou à une portion du texte veillez à positionner correctement votre curseur dans le texte.',
+
 // I
 	'info_1_commentaire_ferme' => '1 commentaire fermé',
 	'info_1_commentaire' => '1 commentaire déposé',
@@ -28,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_commentaire_ferme' => 'Aucun commentaire fermé',
 	'info_aucun_commentaire' => 'Aucun commentaire déposé',
 	'info_aucun_relecture' => 'aucune relecture',
-	'info_commenter_relecture' => 'Insérer des commentaires sur cet élément',
+	'info_commenter_relecture' => 'Ajouter des commentaires sur cet élément',
 	'info_nb_commentaires_fermes' => '@nb@ commentaires fermés',
 	'info_nb_commentaires' => '@nb@ commentaires déposés',
 	'info_nb_relectures' => '@nb@ relectures',
