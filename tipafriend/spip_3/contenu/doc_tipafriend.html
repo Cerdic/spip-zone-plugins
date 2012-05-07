@@ -22,6 +22,14 @@
 		<hr /><p><strong><:tipafriend:page_test_fin_simulation:></strong></p>
 ]
 
+[(#REM)
+
+	Test d'appel de la balise avec tous les arguments :
+	
+		#TIPAFRIEND{#ENV{arg,''},http://www.test.com,oim@moi.com,MOI,desti@natire.fr}
+
+]
+
 <BOUCLE_brev(BREVES) {id_breve=#ENV{id_breve}}>
         <p><strong><:tipafriend:page_test_titre_inclusion_objet{objet='breve',id_objet=#ENV{id_breve}}:></strong></p><hr />
 		<div class="cartouche"><p class="entry-title">#TITRE</p></div>
