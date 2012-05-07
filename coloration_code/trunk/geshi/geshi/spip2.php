@@ -105,19 +105,7 @@
 // la meme chose, mais sans etre capturant.
 @define('REG_NOM_FILTRE_TOUT', '(?:(?:<PIPE>\s*[a-z_][a-z0-9_=]*(?:::[a-z0-9_]*)?)'
 		. '|(?:<PIPE>\s*(?:&gt;=?|&lt;=?|&lt;&gt;|===?|!==?|\?)(?:\s*)(?={|<\|!REG3XP40!>)))');
-/*
-@define('REG_NOM_FILTRE', '((?:<PIPE>\s*[a-z_][a-z0-9_]*(::[a-z0-9_]*)?)'
-		. '|(?:<PIPE>\s*(?:&gt;=?|&lt;=?|&lt;&gt;|===?|!==?|\?)))');
-// la meme chose, mais sans etre capturant.
-@define('REG_NOM_FILTRE_TOUT', '(?:(?:<PIPE>\s*[a-z_][a-z0-9_]*(?:::[a-z0-9_]*)?)'
-		. '|(?:<PIPE>\s*(?:&gt;=?|&lt;=?|&lt;&gt;|===?|!==?|\?)))');*/
-/*
-@define('REG_NOM_FILTRE', '((?:<PIPE>\s*[a-z_][a-z0-9_=]*(::[a-z0-9_]*)?)'
-		. '|(?:<PIPE>\s*(?:&gt;=?|&lt;=?|&lt;&gt;|===?|!==?|\?)(?:\s*)(?=\{)))');
-// la meme chose, mais sans etre capturant.
-@define('REG_NOM_FILTRE_TOUT', '(?:(?:<PIPE>\s*[a-z_][a-z0-9_=]*(?:::[a-z0-9_]*)?)'
-		. '|(?:<PIPE>\s*(?:&gt;=?|&lt;=?|&lt;&gt;|===?|!==?|\?)(?:\s*)(?=\{)))');
-*/
+
 // #BALISE
 @define('REG_BALISE','(\#)(' . REG_NOM_BOUCLE . ':)?([A-Z0-9_]+)([*]{0,2})');
 // la meme chose, mais sans etre capturant.
