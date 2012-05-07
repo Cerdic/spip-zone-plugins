@@ -41,6 +41,7 @@ define('ADXMENU_RUB_DEFAUT', 'secteurs');
  * Nom de la page de documentation interne pour generation des liens
  */
 define('ADXMENU_DOC', 'adxmenu_documentation');
+define('ADXMENU_DOC_SPIP2', 'adxmenu_documentation_spip2'); // compat
 
 /**
  * URL de la page de documentation sur spip-contrib (documentation officielle)

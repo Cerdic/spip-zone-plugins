@@ -38,7 +38,7 @@ Le menu ci-dessous vous pr&eacute;sente un exemple en utilisant les 3 premiers s
 	'pas_cfg_installe' => 'Le plugin CFG ne semble pas install&eacute; sur votre site.',
 	'documentation' => '{{{Utilisation & configuration}}}
 
-Le plugin peut s\'utiliser de deux fa&ccedil;ons d&eacute;taill&eacute;es ci-dessous. Il est pr&eacute;vu pour proposer une page de configuration gr&acirc;ce au plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubrique575]}} mais celui-ci n\'est pas obligatoire.
+Le plugin peut s\'utiliser de deux fa&ccedil;ons d&eacute;taill&eacute;es ci-dessous. Il est pr&eacute;vu pour proposer une page de configuration gr&acirc;ce au plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubrique575]}} mais celui-ci n\'est pas obligatoire[[Cela ne concerne que les versions de SPIP inférieures à 3.0 ; au-delà, la configuration est proposée en interne.]].
 
 La page de configuration permet de d&eacute;finir notamment le sens d\'ouverture du menu ; celui-ci peut &ecirc;tre {{horizontal}}, de {{bas en haut}} ou de {{haut en bas}}, mais aussi {{vertical}}, de {{gauche &agrave; droite}} ou de {{droite &agrave; gauche}}[[Cette option n\'est accessible que si le plugin {{CFG}} est install&eacute; sur votre site. &Agrave; d&eacute;faut, vous pouvez &eacute;diter directement le fichier "adxmenu_options.php" &agrave; la racine du plugin.]].
 
