@@ -1,0 +1,22 @@
+<paquet
+	prefix="c2f"
+	categorie="multimedia"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[2.1.10;["
+	logo="images/c2f-64.png"
+>	
+
+	<nom>Cr&#233;dits en filigrane</nom>
+	<!-- Générer automatiquement un filigrane sur les documents images en utilisant le contenu du champ "Crédits" -->
+
+	<auteur>cy_altern</auteur>
+
+	<copyright>2012</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="post_edition" inclure="c2f_pipelines.php" />
+
+	<necessite nom="medias" />
+</paquet>
