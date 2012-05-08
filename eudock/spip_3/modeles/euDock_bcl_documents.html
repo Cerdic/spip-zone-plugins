@@ -1,0 +1,28 @@
+[(#SET{type_objet,#ENV{type_objet,logos_articles}})][
+(#SET{label_style,[(#ENV{style}|sinon{font-weight:bold;text-align:center;})]})][
+(#SET{image_si_vide,#ENV{image_si_vide,non}})][
+(#SET{image_defaut,[(#CHEMIN{[(#ENV{image_defaut,img/ecureuil_transparent.png})]}||image_reduire{#ENV{taille,200}}|image_graver|extraire_attribut{src})]})][
+(#SET{image_defaut_vignette,[(#CHEMIN{[(#ENV{image_defaut,img/ecureuil_transparent.png})]}||image_reduire{#ENV{taille_vignette,100}}|image_alpha{#ENV{alpha,40}}|image_graver|extraire_attribut{src})]})][
+(#SET{count,#EVAL{count_euDock()}})][
+(#SET{pagine,#ENV{max_image,10}|moins{#GET{count}}})]
+// MODELE 'bcl_documents' | reste : #GET{pagine}/#ENV{max_image,10}
+
+<BOUCLE_euDock_documents(DOCUMENTS) {id_document IN #ENV{documents}} {mode=document}{extension IN png,jpg,gif} {par date}{inverse}{doublons}{pagination #GET{pagine}}>[(#GET{pagine}|>{0}|oui)[
+(#GET{type_objet}|=={documents_articles}|ou{
+	#GET{type_objet}|=={documents_rubriques}
+}|oui)
+			[(#URL_DOCUMENT|!={''}|oui)[(#GET{count}|<={#ENV{max_image,10}}|oui)
+// Boucle document : '#ID_DOCUMENT'
+	[(#MODELE{euDock_item}
+		{image_vignette=[(#FICHIER||image_reduire{#ENV{taille_vignette,100}}|image_alpha{#ENV{alpha,40}}|image_graver|extraire_attribut{src})]}
+		{image=[(#FICHIER||image_reduire{#ENV{taille,200}}|image_graver|extraire_attribut{src})]}
+		{titre=#TITRE}
+		{url=#URL_DOCUMENT}
+		{dockID=#ENV{dockID}}
+		{label_style=#GET{label_style}}
+		{blank_x=#ENV{blank_x}}
+		{blank_y=#ENV{blank_y}}
+	)]
+
+			]]
+]]</BOUCLE_euDock_documents>

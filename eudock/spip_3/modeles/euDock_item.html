@@ -1,0 +1,18 @@
+[(#SET{count,#EVAL{count_euDock(1)}})]
+	[(#ENV{dockID})].addIcon(
+		new Array(
+			{euImage:{image:"[(#ENV{image_vignette})]",PngObjIE:euImageNoFadingIE_PNG}},
+			{euLabel:{
+				object  : {euImage:{image:"[(#ENV{image})]",PngObjIE:euImageNoFadingIE_PNG}},
+				txt     : "[(#ENV{titre}|textebrut)]",
+				style   : "[(#ENV{label_style})]",
+				anchor  : euUP,
+				offsetX : 0,
+				offsetY : -20}}
+		), {link:"[(#ENV{url})]", fadingStep:0.4}
+	);
+	[(#ENV{dockID})].addIcon(
+		new Array(
+			{euBlank:{width:[(#ENV{blank_x,20})],height:[(#ENV{blank_y,20})]}}
+		)
+	);

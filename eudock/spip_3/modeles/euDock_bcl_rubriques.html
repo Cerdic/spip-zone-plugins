@@ -1,0 +1,92 @@
+[(#SET{type_objet,#ENV{type_objet,logos_articles}})][
+(#SET{label_style,[(#ENV{style}|sinon{font-weight:bold;text-align:center;})]})][
+(#SET{image_si_vide,#ENV{image_si_vide,non}})][
+(#SET{image_defaut,[(#CHEMIN{[(#ENV{image_defaut,img/ecureuil_transparent.png})]}||image_reduire{#ENV{taille,200}}|image_graver|extraire_attribut{src})]})][
+(#SET{image_defaut_vignette,[(#CHEMIN{[(#ENV{image_defaut,img/ecureuil_transparent.png})]}||image_reduire{#ENV{taille_vignette,100}}|image_alpha{#ENV{alpha,40}}|image_graver|extraire_attribut{src})]})][
+(#SET{count,#EVAL{count_euDock()}})][
+(#SET{pagine,#ENV{max_image,10}|moins{#GET{count}}})]
+// MODELE 'bcl_rubriques' | reste : #GET{pagine}/#ENV{max_image,10}
+
+<BOUCLE_rubriques(RUBRIQUES) {id_rubrique IN #ENV{rubriques}} {par date}{inverse}{doublons}{pagination #GET{pagine}}>
+	<BOUCLE_articles_rubriques(ARTICLES) {id_rubrique} {par date}{inverse}{doublons}{pagination #GET{pagine}}>[
+(#ENV{racine}|=={oui}|non)[(#GET{type_objet}|=={logos_articles}|ou{
+	#GET{type_objet}|=={documents_articles}
+}|ou{
+	#GET{type_objet}|=={logos_auteurs}
+}|oui)
+	[(#INCLURE{fond=modeles/euDock_bcl_articles}{env}
+		{articles=#ID_ARTICLE}
+		{dockID=#ENV{dockID}}
+	)]
+]]</BOUCLE_articles_rubriques>
+	<BOUCLE_breves_rubriques(BREVES) {id_rubrique} {par date}{inverse}{doublons}{pagination #GET{pagine}}>[
+(#ENV{racine}|=={oui}|non)[(#GET{type_objet}|=={logos_breves}|oui)
+	[(#INCLURE{fond=modeles/euDock_bcl_breves}{env}
+		{breves=#ID_BREVE}
+		{dockID=#ENV{dockID}}
+	)]
+]]</BOUCLE_breves_rubriques>
+	<BOUCLE_sites_rubriques(SITES) {id_rubrique}  {par date}{inverse}{doublons}{pagination #GET{pagine}}>[
+(#ENV{racine}|=={oui}|non)[(#GET{type_objet}|=={logos_sites}|oui)
+	[(#INCLURE{fond=modeles/euDock_bcl_sites}{env}
+		{sites=#ID_SYNDIC}
+		{dockID=#ENV{dockID}}
+	)]
+]]</BOUCLE_sites_rubriques>
+	<BOUCLE_mots_rubriques(MOTS) {id_rubrique} {doublons}{pagination #GET{pagine}}>[
+(#ENV{racine}|=={oui}|non)[(#GET{type_objet}|=={logos_mots}|oui)
+	[(#INCLURE{fond=modeles/euDock_bcl_mots}{env}
+		{mots=#ID_MOT}
+		{dockID=#ENV{dockID}}
+	)]
+]]</BOUCLE_mots_rubriques>
+	<BOUCLE_documents_rubriques(DOCUMENTS) {id_rubrique} {mode=document}{extension IN png,jpg,gif} {par date}{inverse}{doublons}{pagination #GET{pagine}}>[
+(#GET{type_objet}|=={documents_rubriques}|oui)
+	[(#INCLURE{fond=modeles/euDock_bcl_documents}{env}
+		{documents=#ID_DOCUMENT}
+		{dockID=#ENV{dockID}}
+	)]
+]</BOUCLE_documents_rubriques>[(#REM)
+	-- Verif sur 'pagine' dans le cas des boucles recursives ... --
+][(#GET{pagine}|>{0}|oui)[
+
+(#GET{type_objet}|=={logos_rubriques}|oui)
+		[(#LOGO_RUBRIQUE|!={''}|oui)[(#GET{count}|<={#ENV{max_image,10}}|oui)
+// Boucle rubrique :  rubrique '#ID_RUBRIQUE' avec logo
+	[(#MODELE{euDock_item}
+		{image_vignette=[(#LOGO_RUBRIQUE||image_reduire{#ENV{taille_vignette,100}}|image_alpha{#ENV{alpha,40}}|image_graver|extraire_attribut{src})]}
+		{image=[(#LOGO_RUBRIQUE||image_reduire{#ENV{taille,200}}|image_graver|extraire_attribut{src})]}
+		{titre=#TITRE}
+		{url=#URL_RUBRIQUE}
+		{dockID=#ENV{dockID}}
+		{label_style=#GET{label_style}}
+		{blank_x=#ENV{blank_x}}
+		{blank_y=#ENV{blank_y}}
+	)]
+
+		]][(#LOGO_RUBRIQUE|=={''}|oui)[(#GET{image_si_vide}|=={oui}|oui)[(#GET{count}|<={#ENV{max_image,10}}|oui)
+// Boucle rubrique :  rubrique '#ID_RUBRIQUE' sans logo
+	[(#MODELE{euDock_item}
+		{image_vignette=#GET{image_defaut_vignette}}
+		{image=#GET{image_defaut}}
+		{titre=#TITRE}
+		{url=#URL_RUBRIQUE}
+		{dockID=#ENV{dockID}}
+		{label_style=#GET{label_style}}
+		{blank_x=#ENV{blank_x}}
+		{blank_y=#ENV{blank_y}}
+	)]
+
+		]]]
+]]<B_sous_rubriques>[
+(#SET{pagine,#GET{pagine}|moins{#COMPTEUR_BOUCLE}})
+]<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {exclus}{par date}{inverse}{doublons}{pagination #GET{pagine}}>[
+(#GET{pagine}|>{0}|oui)[(#GET{type_objet}|=={logos_rubriques}|ou{
+	#GET{type_objet}|=={documents_rubriques}
+}|oui)
+	[(#INCLURE{fond=modeles/euDock_bcl_rubriques}{env}
+		{rubriques=#ID_RUBRIQUE}
+		{dockID=#ENV{dockID}}
+	)]
+]]<BOUCLE_recursive(BOUCLE_sous_rubriques)></BOUCLE_recursive></BOUCLE_sous_rubriques>
+</B_sous_rubriques></BOUCLE_rubriques>

@@ -1,0 +1,39 @@
+[(#SET{type_objet,#ENV{type_objet,logos_articles}})][
+(#SET{label_style,[(#ENV{style}|sinon{font-weight:bold;text-align:center;})]})][
+(#SET{image_si_vide,#ENV{image_si_vide,non}})][
+(#SET{image_defaut,[(#CHEMIN{[(#ENV{image_defaut,img/ecureuil_transparent.png})]}||image_reduire{#ENV{taille,200}}|image_graver|extraire_attribut{src})]})][
+(#SET{image_defaut_vignette,[(#CHEMIN{[(#ENV{image_defaut,img/ecureuil_transparent.png})]}||image_reduire{#ENV{taille_vignette,100}}|image_alpha{#ENV{alpha,40}}|image_graver|extraire_attribut{src})]})][
+(#SET{count,#EVAL{count_euDock()}})][
+(#SET{pagine,#ENV{max_image,10}|moins{#GET{count}}})]
+// MODELE 'bcl_breves' | reste : #GET{pagine}/#ENV{max_image,10}
+
+<BOUCLE_euDock_breves(BREVES) {id_breve IN #ENV{breves}} {par date}{inverse}{doublons}{pagination #GET{pagine}}>[(#GET{pagine}|>{0}|oui)[
+(#GET{type_objet}|=={logos_breves}|oui)
+		[(#LOGO_BREVE|!={''}|oui)[(#GET{count}|<={#ENV{max_image,10}}|oui)
+// Boucle breve : '#ID_BREVE' avec logo
+	[(#MODELE{euDock_item}
+		{image_vignette=[(#LOGO_BREVE||image_reduire{#ENV{taille_vignette,100}}|image_alpha{#ENV{alpha,40}}|image_graver|extraire_attribut{src})]}
+		{image=[(#LOGO_BREVE||image_reduire{#ENV{taille,200}}|image_graver|extraire_attribut{src})]}
+		{titre=#TITRE}
+		{url=#URL_BREVE}
+		{dockID=#ENV{dockID}}
+		{label_style=#GET{label_style}}
+		{blank_x=#ENV{blank_x}}
+		{blank_y=#ENV{blank_y}}
+	)]
+
+		]][(#LOGO_BREVE|=={''}|oui)[(#GET{image_si_vide}|=={oui}|oui)[(#GET{count}|<={#ENV{max_image,10}}|oui)
+// Boucle breve : '#ID_BREVE' sans logo
+	[(#MODELE{euDock_item}
+		{image_vignette=#GET{image_defaut_vignette}}
+		{image=#GET{image_defaut}}
+		{titre=#TITRE}
+		{url=#URL_BREVE}
+		{dockID=#ENV{dockID}}
+		{label_style=#GET{label_style}}
+		{blank_x=#ENV{blank_x}}
+		{blank_y=#ENV{blank_y}}
+	)]
+
+		]]]
+]]</BOUCLE_euDock_breves>

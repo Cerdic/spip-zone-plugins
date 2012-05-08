@@ -1,0 +1,24 @@
++------------------------------------------------------------------------+
+|  EU Dock , plugin pour SPIP 2.0                                        |
+|                                                                        |
+|  Copyright (c) 2009 | Piero Wbmstr                                     |
++------------------------------------------------------------------------+
+
+-----
+[ TODO ]
+
+- set de modèles pour documents des rubriques, secteurs ou breves ...
+
+-----
+[ CHANGELOG ]
+
+[ version 1.2 ]
+18/12/2010 - Revision 002
+TOUT A CHANGÉ !!!
+- chaque objet SPIP a sa propre boucle et son affichage
+- les options ont changé
+- mise en place des gadgets
+
+[ version 1.1 ]
+17/12/2010 - Revision 001
+- retrait de 'eudock_options.php' inutile ...

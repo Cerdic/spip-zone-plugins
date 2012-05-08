@@ -1,0 +1,24 @@
+// Ghost Item
+[(#SET{count,#EVAL{count_euDock(1)}})][
+(#SET{image,[(#ENV{vignette,#ENV{image,#LOGO_SITE_SPIP|extraire_attribut{src}}}||image_reduire{#ENV{taille,200}}|image_graver|extraire_attribut{src})]})][
+(#SET{image_vignette,[(#ENV{image,#LOGO_SITE_SPIP|extraire_attribut{src}}||image_reduire{#ENV{taille_vignette,100}}|image_alpha{#ENV{alpha,40}}|image_graver|extraire_attribut{src})]})][
+(#SET{titre,#ENV{titre,#NOM_SITE_SPIP}})][
+(#SET{url,#ENV{url,#URL_SITE_SPIP}})
+]
+[(#ENV{dockID})].addIcon(
+		new Array(
+			{euImage:{image:"[(#GET{image_vignette})]"}},
+			{euLabel:{
+				object  : {euImage:{image:"[(#GET{image})]"}},
+				txt     : "[(#GET{titre}|textebrut)]",
+				style   : "[(#ENV{label_style});]background:#eeeeee;border:1px solid #dddddd;color:#604a7f;width:140px;padding:6px;",
+				anchor  : euUP,
+				offsetX : 0,
+				offsetY : -40}}
+		), {link:"[(#GET{url})]", fadingStep:0.4}
+	);
+	[(#ENV{dockID})].addIcon(
+		new Array(
+			{euBlank:{width:[(#ENV{blank_x,20})],height:[(#ENV{blank_y,20})]}}
+		)
+	);

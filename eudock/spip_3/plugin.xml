@@ -1,0 +1,23 @@
+<plugin>
+	<nom>EuDock</nom>
+	<version>1.22.0</version>
+	<etat>test</etat>
+ 
+ 	<prefix>eudock</prefix>
+	<auteur>[Parodi (Pier...) Eugenio->http://eudock.jules.it] - Mis en plugin pour SPIP 2 par [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
+	<licence>[GPL->http://www.opensource.org/licenses/gpl-3.0.html]</licence>
+	<lien>http://www.spip-contrib.net/?article3567</lien>
+	<description>
+{{Effet 'Dock' &#224; la mode 'Apple' en javascript}}
+
+Ce plugin ajoute une biblioth&#232;que javascript permettant de cr&#233;er un effet 'Dock' sur une liste d'objets images ({documents ou logos du site}).
+
+Une documentation interne est disponible lorsque le plugin est actif sur la page publique [eudock_documentation->../?page=eudock_documentation_spip2].
+	</description>
+	<lien></lien>
+ 	<icon>img/euDock-red.png</icon>
+ 	<options>eudock_options.php</options>
+	<chemin dir='' />
+	<necessite id="SPIP" version='[2.0;]' />
+	<categorie>multimedia</categorie>
+</plugin>

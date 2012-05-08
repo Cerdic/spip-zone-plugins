@@ -1,0 +1,30 @@
+// Ghost Item SPIP
+[(#SET{count,#EVAL{count_euDock(1)}})][
+(#SET{image_defaut,[(#CHEMIN{ghostImages/ecureuil_rose.png}||image_reduire{#ENV{taille,200}}|image_graver|extraire_attribut{src})]})][
+(#SET{image_defaut_vignette,[(#CHEMIN{ghostImages/ecureuil_rose.png}||image_reduire{#ENV{taille_vignette,100}}|image_alpha{#ENV{alpha,40}}|image_graver|extraire_attribut{src})]})][
+(#SET{titre,#ENV{titre,"! SPIP ?"}})][
+(#SET{url,#ENV{url,http://www.spip.net/}})
+]
+[(#ENV{dockID})].addIcon(
+		new Array(
+			{euImage:{image:"[(#GET{image_defaut_vignette})]"}},
+			{euLabel:{object:{euGhost:{	
+					ghost     : "[(#GET{image_defaut})]",
+					eyespot_1 : "[(#CHEMIN{ghostImages/eye-spot-1.png})]",
+					eyespot_2 : "[(#CHEMIN{ghostImages/eye-spot-2.png})]",
+					shadowPos : {x:5,y:10},
+					spotCoord1: {x:68,y:106,rad:21},
+					spotCoord2: {x:127,y:109,rad:15}
+				}},
+				txt     : "[(#GET{titre}|textebrut)]",
+				style   : "[(#ENV{label_style});]background:#eeeeee;border:1px solid #dddddd;color:#604a7f;width:140px;padding:6px;",
+				anchor  : euUP,
+				offsetX : 0,
+				offsetY : -40}}
+		), {link:"[(#GET{url})]", fadingStep:0.4}
+	);
+	[(#ENV{dockID})].addIcon(
+		new Array(
+			{euBlank:{width:[(#ENV{blank_x,20})],height:[(#ENV{blank_y,20})]}}
+		)
+	);

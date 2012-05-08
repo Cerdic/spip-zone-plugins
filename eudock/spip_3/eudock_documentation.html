@@ -1,0 +1,91 @@
+#CACHE{0}
+[(#ENV{docmode}|=={zpip}|oui)
+<INCLURE{fond=structure}{env}{type=doc_eudock}{composition=#ENV{composition,#ENV{page}}}>
+][(#ENV{docmode}|=={zpip}|non)
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title><:eudock:doc_titre_court:>[ - (#NOM_SITE_SPIP|textebrut)]</title>
+[(#ENV{docmode}|=={brut}|non)<INCLURE{fond=inclure/head}>]
+[(#ENV{docmode}|=={brut}|oui)#INSERT_HEAD]
+<meta name="robots" content="none" />
+</head>
+<body class="page_sommaire">
+<div class="page">
+	[(#ENV{docmode}|=={brut}|non)
+		<INCLURE{fond=inclure/header} />
+		<INCLURE{fond=inclure/nav,env} />
+	]
+
+	<div class="main">
+		<div class="wrapper">
+		<div class="content" id="content">
+		<INCLURE{fond=contenu/doc_eudock}{env}{skel=#SQUELETTE}>
+		</div><!--.content-->
+		</div><!--.wrapper-->
+		<div class="aside">
+		[(#ENV{docmode}|=={brut}|non)<INCLURE{fond=inclure/rubriques}>]
+		</div><!--.aside-->
+	</div><!--.main-->
+
+	[(#ENV{docmode}|=={brut}|non)
+		<INCLURE{fond=inclure/footer,self=#SELF} />
+	]
+
+</div><!--.page-->
+</body>
+</html>][(#REM)
+	Inlcusion du modele 'noisette_euDock' avec les arguments :
+
+	----
+	"div_id" = "eudock" par defaut | doit etre dans la page !
+
+	----
+	"type_objet" = 	logos_articles (defaut)
+					documents_articles
+					logos_rubriques
+					documents_rubriques
+					logos_breves
+					logos_sites
+					logos_auteurs
+					logos_mots
+	EXEMPLE :
+		{type_objet=logos_rubriques}
+
+	----
+	"rubriques" / "articles" / "breves" / "sites" / "auteurs" / "mots" / "documents"
+		=> liste d'ID separees par des virgule
+		=> a noter en array : #ARRAY{cle1,val1,cle2,val2}
+	EXEMPLE :
+		=> les rubriques 1 et 2
+		{rubriques=#ARRAY{0,1,1,2}}
+
+	----
+	"max_image" = nombre max d'images affichees (10 par defaut)
+	EXEMPLE :
+		{max_image=4}
+
+	----
+	"alpha" = couche alpha appliquee sur les vignettes (par defaut 40)
+	"taille" = taille des images (par defaut 200 max)
+	"taille_vignette" = taille des vignettes (par defaut 100 max)
+	
+	----
+	"image_si_vide" = oui / non (defaut)
+	"image_defaut" = fichier image (defaut : "img/ecureuil_transparent.png")
+	EXEMPLE :
+		{image_si_vide=oui}
+		{image_defaut=img/ecureuil_transparent.png}
+
+	----
+	"offset" = valeur d'offset en pixels (2 par defaut)
+	"style" = styles CSS des labels
+
+][(#MODELE{noisette_euDock}
+	{max_image=#ENV{limit,10}}
+	{type_objet=#ENV{type,logos_articles}}
+	{image_si_vide=#ENV{vide,non}}
+	{offset=0}{div_id=eudock}
+	{style=font-weight:bold;text-align:center;font-size:0.9em;}
+	{bar=[(#ENV{bar}|=={oui}|?{oui,non})]}
+)]

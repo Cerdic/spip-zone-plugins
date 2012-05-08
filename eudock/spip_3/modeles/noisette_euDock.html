@@ -1,0 +1,103 @@
+[(#SET{type_objet,#ENV{type_objet,logos_articles}})][
+(#SET{offset,#ENV{offset,2}})][
+(#SET{label_style,[(#ENV{style}|sinon{font-weight:bold;text-align:center;})]})][
+(#SET{image_defaut,[(#CHEMIN{[(#ENV{image_defaut,img/ecureuil_transparent.png})]}||image_reduire{#ENV{taille,200}}|image_graver|extraire_attribut{src})]})][
+(#SET{image_defaut_vignette,[(#CHEMIN{[(#ENV{image_defaut,img/ecureuil_transparent.png})]}||image_reduire{#ENV{taille_vignette,100}}|image_alpha{#ENV{alpha,40}}|image_graver|extraire_attribut{src})]})][
+(#SET{total_width,#ENV{width,500}})][
+(#SET{div_id,[(#ENV{div_id,eudock})]})][
+(#SET{dockID,[dock(#EVAL{uniqid()})]})][
+(#SET{image_si_vide,#ENV{image_si_vide,non}})][
+(#SET{count,#EVAL{count_euDock()}})]
+[<script language="JavaScript1.3" src="(#CHEMIN{javascript/euDock.2.0.js})"></script>]
+[<script language="JavaScript1.3" src="(#CHEMIN{javascript/euDock.Image.js})"></script>]
+[<script language="JavaScript1.3" src="(#CHEMIN{javascript/euDock.Label.js})"></script>]
+[<script language="JavaScript1.3" src="(#CHEMIN{javascript/euDock.Blank.js})"></script>][
+(#ENV{gadget_ghost}|=={oui}|ou{#ENV{gadget_ghost_spip}|=={oui}}|oui)[
+<script language="JavaScript1.3" src="(#CHEMIN{javascript/euDock.Ghost.js})"></script>]][
+(#ENV{div}|=={oui}|oui)<div id="[(#GET{div_id})]" style="width: [(#GET{total_width})]px;">&nbsp;</div>]
+<script type="text/javascript"><!--
+	euEnv.imageBasePath="[(#EVAL{_DIR_PLUGIN_EUDOCK})]javascript/";
+	var #GET{dockID} = new euDock();
+	#GET{dockID}.setAnimation(euMOUSE,0.5);
+	#GET{dockID}.setObjectAlign("[(#GET{div_id})]",euCENTER,[(#GET{offset})],euHORIZONTAL);[
+(#ENV{bar}|=={oui}|oui)
+	#GET{dockID}.setBar({
+		left      :{euImage:{image:"[(#CHEMIN{barImages/dockBg-l.png})]"}},
+		horizontal:{euImage:{image:"[(#CHEMIN{barImages/dockBg-c-o.gif})]"}},
+		right     :{euImage:{image:"[(#CHEMIN{barImages/dockBg-r.png})]"}}
+	});
+][(#ENV{gadget_ghost_spip}|=={oui}|oui)
+	[(#MODELE{euDock_gadget_ghost_spip}
+		{titre=#ENV{titre}}
+		{url=#ENV{url}}
+		{alpha=#ENV{alpha}}
+		{taille_vignette=#ENV{taille_vignette}}
+		{taille=#ENV{taille}}
+		{dockID=#GET{dockID}}
+		{label_style=#GET{label_style}}
+		{blank_x=#ENV{blank_x}}
+		{blank_y=#ENV{blank_y}}
+	)]
+][(#ENV{gadget_ghost}|=={oui}|oui)
+	[(#MODELE{euDock_gadget_ghost}
+		{vignette=#ENV{vignette}}
+		{image=#ENV{image}}
+		{titre=#ENV{titre}}
+		{url=#ENV{url}}
+		{alpha=#ENV{alpha}}
+		{taille_vignette=#ENV{taille_vignette}}
+		{taille=#ENV{taille}}
+		{dockID=#GET{dockID}}
+		{label_style=#GET{label_style}}
+		{blank_x=#ENV{blank_x}}
+		{blank_y=#ENV{blank_y}}
+	)]
+][(#REM) 
+
+-- Si id_rubriques demandes -- 
+][(#ENV{rubriques}|!={''}|oui)[
+	(#INCLURE{fond=modeles/euDock_bcl_rubriques}{env}{dockID=#GET{dockID}})
+]][(#REM) 
+
+-- Si id_articles demandes -- 
+][(#ENV{articles}|!={''}|oui)[
+	(#INCLURE{fond=modeles/euDock_bcl_articles}{env}{dockID=#GET{dockID}})
+]][(#REM) 
+
+-- Si id_breves demandes -- 
+][(#ENV{breves}|!={''}|oui)[
+	(#INCLURE{fond=modeles/euDock_bcl_breves}{env}{dockID=#GET{dockID}})
+]][(#REM) 
+
+-- Si id_sites demandes -- 
+][(#ENV{sites}|!={''}|oui)[
+	(#INCLURE{fond=modeles/euDock_bcl_sites}{env}{dockID=#GET{dockID}})
+]][(#REM) 
+
+-- Si id_auteurs demandes -- 
+][(#ENV{auteurs}|!={''}|oui)[
+	(#INCLURE{fond=modeles/euDock_bcl_auteurs}{env}{dockID=#GET{dockID}})
+]][(#REM) 
+
+-- Si id_documents demandes -- 
+][(#ENV{documents}|!={''}|oui)[
+	(#INCLURE{fond=modeles/euDock_bcl_documents}{env}{dockID=#GET{dockID}})
+]][(#REM)
+
+-- Si id_mots demandes -- 
+][(#ENV{mots}|!={''}|oui)[
+	(#INCLURE{fond=modeles/euDock_bcl_mots}{env}{dockID=#GET{dockID}})
+]][(#REM) 
+
+-- Si rien demande -- 
+][(#ENV{rubriques}|=={''}|oui)
+	[(#ENV{articles}|=={''}|oui)
+		[(#ENV{breves}|=={''}|oui)
+			[(#ENV{sites}|=={''}|oui)
+				[(#ENV{auteurs}|=={''}|oui)
+					[(#ENV{documents}|=={''}|oui)
+						[(#ENV{mots}|=={''}|oui)[
+	(#INCLURE{fond=modeles/euDock_bcl_racine}{env}{dockID=#GET{dockID}})
+]]]]]]]]
+
+//--></script>
