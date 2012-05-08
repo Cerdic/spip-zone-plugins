@@ -25,6 +25,33 @@ function pubban_upgrade($nom_meta_base_version,$version_cible)
 		array('pubban_inserer_exemples')
 	);
 
+	// Si deja installe, on maj sans inserer
+	
+	// v <0.8
+	$maj['0.4'] = array(
+		array('sql_alter', "TABLE spip_pubban_publicites ADD `titre_id` varchar(30) NOT NULL default ''"),
+	);
+
+	$maj['0.5'] = array(
+		array('sql_query', "RENAME TABLE spip_pubban_publicites TO spip_publicites"),
+		array('sql_query', "ALTER TABLE `spip_publicites` CHANGE `id_pub` `id_publicite` bigint(21) NOT NULL"),
+		array('sql_query', "RENAME TABLE spip_pubban_emplacements TO spip_bannieres"),
+		array('sql_query', "ALTER TABLE `spip_bannieres` CHANGE `id_empl` `id_banniere` bigint(21) NOT NULL"),
+		array('sql_query', "RENAME TABLE spip_pubban_pub_empl TO spip_bannieres_publicites"),
+		array('sql_query', "ALTER TABLE `spip_bannieres_publicites` CHANGE `id_pub` `id_publicite` bigint(21) NOT NULL"),
+		array('sql_query', "ALTER TABLE `spip_bannieres_publicites` CHANGE `id_empl` `id_banniere` bigint(21) NOT NULL"),
+		array('sql_query', "ALTER TABLE `spip_pubban_stats` CHANGE `id_empl` `id_banniere` bigint(21) NOT NULL"),
+	);
+
+	// v 0.8
+	$maj['0.8'] = array(
+		array('sql_alter', "TABLE spip_bannieres ADD `refresh` bigint(5) NOT NULL default '0'"),
+		array('sql_alter', "TABLE spip_pubban_stats ADD `id_publicite` bigint(21) NOT NULL"),
+		array('sql_alter', "TABLE spip_pubban_stats ADD INDEX `id_publicite` (`id_publicite`)"),
+		array('sql_alter', "TABLE spip_pubban_stats ADD `page` varchar(255) NOT NULL"),
+		array('maj_tables',array('spip_publicites','spip_bannieres','spip_pubban_stats','spip_bannieres_publicites'))
+	);
+
 	spip_log("Plugin PUB BANNER - installation OK - tables creees ou mises a jour en base");
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -65,6 +92,7 @@ function pubban_vider_tables($nom_meta_base_version)
 	// Sinon, on informe
 	else {
 		spip_log("Plugin PUB BANNER - uninstall pas possible car $count_join pubs et $count_stats statisqtiques en base ! - forcer l'effacement avec PUBBAN_FORCE_UNINSTALL=true dans 'pubban_options.php'");
+		echo "Plugin PUB BANNER - uninstall pas possible car $count_join pubs et $count_stats statisqtiques en base ! - forcer l'effacement avec PUBBAN_FORCE_UNINSTALL=true dans 'pubban_options.php' ou sauvegardez vos données et videz vos tables";
 		return false;
 	}
 
