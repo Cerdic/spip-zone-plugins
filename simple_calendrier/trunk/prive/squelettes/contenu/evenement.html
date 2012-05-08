@@ -1,6 +1,6 @@
 <BOUCLE_evenement(EVENEMENTS){id_evenement}{statut?}{si #ENV{exec}|=={evenement}}>
 [(#BOITE_OUVRIR{[
-				
+	
 	[(#AUTORISER{modifier,evenement,#ID_EVENEMENT})
 				
 		[(#ID_EVENEMENT|afficher_qui_edite{evenement}|non)
@@ -14,7 +14,7 @@
 ],simple fiche_objet})]
 
 <div class="ajax">
-    #FORMULAIRE_DATER{evenement,#ID_EVENEMENT}
+	#FORMULAIRE_DATER{evenement,#ID_EVENEMENT}
 </div>
 
 <div class="ajax">
@@ -22,7 +22,7 @@
 </div>
 
 <div id="wysiwyg">
-    <INCLURE{fond=prive/objets/contenu/evenement,id=#ID_EVENEMENT} />
+	<INCLURE{fond=prive/objets/contenu/evenement,id=#ID_EVENEMENT} />
 </div>
 
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,evenement,id,#ID_EVENEMENT},data,'<div class="nettoyeur"></div>'}}

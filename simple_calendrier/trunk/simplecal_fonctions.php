@@ -1,8 +1,10 @@
 <?php
 /**
- * Plugin Simple Calendrier pour Spip 2.1.2
- * Licence GPL (c) 2010-2011 Julien Lanfrey
+ * Plugin Simple Calendrier v2 pour SPIP 3.0
+ * Licence GNU/GPL
+ * 2010-2012
  *
+ * cf. paquet.xml pour plus d'infos.
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -17,7 +19,7 @@ include_spip('inc/simplecal_filtres');
 // balises 
 include_spip('balise/simplecal_dates');
 
-// critères
+// criteres
 include_spip('public/simplecal_criteres');
 
 ?>

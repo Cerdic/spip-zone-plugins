@@ -1,12 +1,12 @@
 [(#REM)
 <!-- 
-Liste des évènements - Page appelée depuis :
+Liste des evenements - Page appelee depuis :
 - exec = accueil    (titre, statut,    par=date)
 - exec = info_perso (titre, id_auteur, par=date)
 - exec = evenements (titre, statut)
 
 
-Le seul moyen d'accéder aux parametres mode,anne,mois dans la boucle 
+Le seul moyen d'acceder aux parametres mode,anne,mois dans la boucle 
 c'est de les transmettre via un inclure...
 Mettre directement un #GET{where} dans la boucle ne fonctionne pas.
 
@@ -26,10 +26,10 @@ Note : css automatique dans /prive/themes/spip/lists.css.html
 ]
 
 #INCLURE{fond=prive/objets/liste/evenements-liste,
-    titre=#TITRE,
-    id_auteur=#ID_AUTEUR,
-    id_rubrique=#ID_RUBRIQUE,
-    id_secteur=#ID_SECTEUR,
-    id_mot=#ID_MOT,
-    where=#GET{where},
-    statut=#ENV{statut}} 
+	titre=#TITRE,
+	id_auteur=#ID_AUTEUR,
+	id_rubrique=#ID_RUBRIQUE,
+	id_secteur=#ID_SECTEUR,
+	id_mot=#ID_MOT,
+	where=#GET{where},
+	statut=#ENV{statut}} 

@@ -1,8 +1,10 @@
 <?php
 /**
- * Plugin Simple Calendrier pour Spip 2.1.2
- * Licence GPL (c) 2010-2011 Julien Lanfrey
+ * Plugin Simple Calendrier v2 pour SPIP 3.0
+ * Licence GNU/GPL
+ * 2010-2012
  *
+ * cf. paquet.xml pour plus d'infos.
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -18,9 +20,9 @@ include_spip('inc/simplecal_classement'); // pour la page evenements !
 /*
 global $corbeille_params;
 $corbeille_params["evenements"] = array (
-    "statut" => "poubelle",
-    "table" => "spip_evenements",
-    "tableliee"  => array("spip_mots_evenements"),
+	"statut" => "poubelle",
+	"table" => "spip_evenements",
+	"tableliee"  => array("spip_mots_evenements"),
 );
 */
 
@@ -31,39 +33,39 @@ $corbeille_params["evenements"] = array (
 
 
 function simplecal_evenements_where($where='', $mode='', $annee='', $mois=''){
-    
-    // Note : date_fin non obligatoire => like nécessaire
-    
-    if ($annee && $mois) {
-        $date_min = $annee."-".$mois."-01";
-        $date_max = $annee."-".$mois."-31";
-        $req = "((date_debut like '%".$annee."-".$mois."%'";
-        $req .= " OR date_fin like '%".$annee."-".$mois."%')";
-        $req .= " OR (date_debut <= '$date_max' AND date_fin >= '$date_min'))"; 
-    } else if ($annee && !$mois) {
-        $date_min = $annee."-01-01";
-        $date_max = $annee."-12-31";
-        $req = "((date_debut like '%".$annee."%'";
-        $req .= " OR date_fin like '%".$annee."%')";
-        $req .= " OR (date_debut <= '$date_max' AND date_fin >= '$date_min'))"; 
-    } else if ($mode == 'avenir') {
-        $req = "(date_debut >= DATE_FORMAT(NOW(),'%Y-%m-%d')";
-        $req .= " OR date_fin >= DATE_FORMAT(NOW(),'%Y-%m-%d'))";
-    } else {
-        $req = "";
-    }
-    
-    if ($where and $req){
-        $s = $where." AND ".$req;
-    } else if ($where){
-        $s = $where;
-    } else {
-        $s = $req;
-    }
-    //echo("where=".$where);
-    //die("req=".$req);
-    
-    return $s;
+	
+	// Note : date_fin non obligatoire => like necessaire
+	
+	if ($annee && $mois) {
+		$date_min = $annee."-".$mois."-01";
+		$date_max = $annee."-".$mois."-31";
+		$req = "((date_debut like '%".$annee."-".$mois."%'";
+		$req .= " OR date_fin like '%".$annee."-".$mois."%')";
+		$req .= " OR (date_debut <= '$date_max' AND date_fin >= '$date_min'))"; 
+	} else if ($annee && !$mois) {
+		$date_min = $annee."-01-01";
+		$date_max = $annee."-12-31";
+		$req = "((date_debut like '%".$annee."%'";
+		$req .= " OR date_fin like '%".$annee."%')";
+		$req .= " OR (date_debut <= '$date_max' AND date_fin >= '$date_min'))"; 
+	} else if ($mode == 'avenir') {
+		$req = "(date_debut >= DATE_FORMAT(NOW(),'%Y-%m-%d')";
+		$req .= " OR date_fin >= DATE_FORMAT(NOW(),'%Y-%m-%d'))";
+	} else {
+		$req = "";
+	}
+	
+	if ($where and $req){
+		$s = $where." AND ".$req;
+	} else if ($where){
+		$s = $where;
+	} else {
+		$s = $req;
+	}
+	//echo("where=".$where);
+	//die("req=".$req);
+	
+	return $s;
 }
 
 ?>

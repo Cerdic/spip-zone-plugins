@@ -1,9 +1,12 @@
 <?php
 /**
- * Plugin Simple Calendrier pour Spip 2.1.2
- * Licence GPL (c) 2010-2011 Julien Lanfrey
+ * Plugin Simple Calendrier v2 pour SPIP 3.0
+ * Licence GNU/GPL
+ * 2010-2012
  *
+ * cf. paquet.xml pour plus d'infos.
  */
+
 
 /**
  * Critere {a_venir} 
@@ -12,7 +15,6 @@
  * @param unknown_type $boucles
  * @param unknown_type $crit
  */
-
 function critere_a_venir_dist($idb, &$boucles, $crit) {
     $boucle = &$boucles[$idb];
     $table = $boucle->id_table;
@@ -90,7 +92,7 @@ function critere_de_lannee_dist($idb, &$boucles, $crit) {
     $table = $boucle->id_table;
     $not = $crit->not;
     
-    // definition de l'annee demandée
+    // definition de l'annee demandee
     $annee = !isset($crit->param[0][0]) ? "''" : calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucle->id_parent);
     // $annee = "'2011'";
     // $annee = strtr($annee, "'", ""); // ne change rien !
