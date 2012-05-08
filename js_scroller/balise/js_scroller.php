@@ -91,7 +91,7 @@ function balise_JS_SCROLLER_dyn(
 	$java_scroller_txt = "<span class='js_scroller_titre'>".$java_scroller_titre.'</span> '.$java_scroller_txt;
 	$div=
 '
-<link rel="stylesheet" href="'.find_in_path('js_scroller.css').'" type="text/css" media="projection, screen, tv" />
+<link rel="stylesheet" href="'.find_in_path(_JS_SCROLLER_CSS).'" type="text/css" media="projection, screen, tv" />
 <script language="javascript">'.js_scroller_get_js($width,$height,$dir,$speed).'</script>
 <ilayer width="&amp;{wwidth};" height="&amp;{wheight};" name="wslider1" bgcolor="&amp;{wbcolor};"><layer name="wslider2" width="&amp;{wwidth};" height="&amp;{wheight};" onmouseover="sspeed=0;" onmouseout="sspeed=restart"></layer></ilayer>
 <script language="javascript" type="text/javascript">

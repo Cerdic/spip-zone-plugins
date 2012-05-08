@@ -1,0 +1,30 @@
+/* JavaScript Scroller : styles du bandeau */
+
+/* bloc encadrant la banniere */
+#js_scroller {
+	position: relative; overflow: hidden; 
+	border-top: 1px solid #222; border-bottom: 1px solid #222;
+	background: transparent;
+	font-size: 1em; padding: .2em 0; margin: .5em 0;
+	vertical-align: center;
+}
+
+/* bloc contenant directement la banniere : ne pas styler ! */
+#wslider {
+	vertical-align: middle; position: absolute;
+}
+#wslider img {
+	vertical-align: middle;
+}
+/* Bloc de titre */
+#wslider span.js_scroller_titre {
+	font-weight: bold;
+}
+/* Bloc de lien d'une entree */
+#wslider a.js_scroller_lien {
+	font-weight: bold;
+}
+/* Bloc de description d'une entree */
+#wslider span.js_scroller_description {
+	font-size: 1em;
+}

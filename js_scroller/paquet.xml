@@ -1,7 +1,7 @@
 <paquet
 	prefix="js_scroller"
 	categorie="squelette"
-	version="1.44.0"
+	version="1.44.1"
 	etat="stable"
 	compatibilite="[2.0.0;["
 	logo="javascriptb.png"
