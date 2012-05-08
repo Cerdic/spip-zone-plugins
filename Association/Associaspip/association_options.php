@@ -501,14 +501,8 @@ function affichage_div($type_operation,$list_operation)
 }
 
 /* selecteur d'exercice comptable */
-function association_selectionner_exercice($exercice='', $url_action='') {
-    if ($exec) {
-		$res = '<form method="post" action="'. generer_url_ecrire($exec) .'"><div>';
-		$res .= '<input type="hidden" name="exec" value="'.$exec.'" />';
-    } else {
-		$res = '';
-    }
-    $res .= '<select name ="exercice" onchange="form.submit()">';
+function association_selectionner_exercice($exercice='', $exec='', $plus='') {
+    $res = '<select name ="exercice" onchange="form.submit()">';
 #    $res .= '<option value="0" ';
 #    if (!$exercice) {
 #		$res .= ' selected="selected"';
@@ -522,24 +516,14 @@ function association_selectionner_exercice($exercice='', $url_action='') {
 		}
 		$res .= '>'.$val['intitule'].'</option>';
     }
-    $res .= '</select>';
-    if ($exec) {
-		$res .= '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>';
-		$res .= '</div></form>';
-    }
-    return $res;
+    $res .= '</select>'.$plus;
+    return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>') : $res;
 }
 
 /* selecteur d'exercice comptable */
-function association_selectionner_destination($destination='', $exec='') {
-    if ($exec) {
-		$res = '<form method="post" action="'. generer_url_ecrire($exec) .'"><div>';
-		$res .= '<input type="hidden" name="exec" value="'.$exec.'" />';
-    } else {
-		$res = '';
-    }
-//    $res .= '<select name ="destination[]" multiple="multiple" onchange="form.submit()">';
-    $res .= '<select name ="destination" onchange="form.submit()">';
+function association_selectionner_destination($destination='', $exec='', $plus='') {
+//    $res = '<select name ="destination[]" multiple="multiple" onchange="form.submit()">';
+    $res = '<select name ="destination" onchange="form.submit()">';
     $res .= '<option value="0" ';
 //    if ( !(array_search(0, $destinations)===FALSE) ) {
     if (!$destination) {
@@ -558,29 +542,19 @@ function association_selectionner_destination($destination='', $exec='') {
 		$res .= '>'.$val['intitule'].'</option>';
 //		$intitule_destinations[$val['id_destination']] = $val['intitule'];
     }
-    $res .= '</select>';
-    if ($exec) {
-		$res .= '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>';
-		$res .= '</div></form>';
-    }
+    $res .= '</select>'.$plus;
     if ($GLOBALS['association_metas']['destinations']){
-		return $res;
+		return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>') : $res;
 	} else {
 		return FALSE;
 	}
 }
 
 /* selecteur de grouoe de membres*/
-function association_selectionner_groupe($id_groupe='', $exec='') {
-    if ($exec) {
-		$res = '<form method="post" action="'. generer_url_ecrire($exec) .'"><div>';
-		$res .= '<input type="hidden" name="exec" value="'.$exec.'" />';
-    } else {
-		$res = '';
-    }
+function association_selectionner_groupe($id_groupe='', $exec='', $plus='') {
     $qGroupes = sql_select('nom, id_groupe', 'spip_asso_groupes', 'id_groupe>=100', '', 'nom');  // on ne prend en consideration que les groupe d'id >= 100, les autres sont reserves a la gestion des autorisations
     if ( $qGroupes && sql_count($qGroupes) ) { // ne proposer que s'il y a des groupes definis
-		$res .= '<select name="groupe" onchange="form.submit()">';
+		$res = '<select name="groupe" onchange="form.submit()">';
 		$res .= '<option value="">'._T('asso:tous_les_groupes').'</option>';
 		while ($groupe = sql_fetch($qGroupes)) {
 			$res .= '<option value="'.$groupe['id_groupe'].'"';
@@ -588,22 +562,16 @@ function association_selectionner_groupe($id_groupe='', $exec='') {
 				$res .= ' selected="selected"';
 			$res .= '>'.$groupe['nom'].'</option>';
 		}
-		$res .= '</select><noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></div></form>';
-		return $res;
+		$res .= '</select>'.$plus;
+		return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>') : $res;
 	} else {
 		return FALSE;
 	}
 }
 
 /* selecteur de statut de membres*/
-function association_selectionner_statut($statut_interne='', $exec='') {
-    if ($exec) {
-		$res = '<form method="post" action="'. generer_url_ecrire($exec) .'"><div>';
-		$res .= '<input type="hidden" name="exec" value="'.$exec.'" />';
-    } else {
-		$res = '';
-    }
-    $res .= '<select name="statut_interne" onchange="form.submit()">';
+function association_selectionner_statut($statut_interne='', $exec='', $plus='') {
+    $res = '<select name="statut_interne" onchange="form.submit()">';
     $res .= '<option value="%"'. (($statut_interne=='defaut' || $statut_interne=='%')?' selected="selected"':'') .'>'._T('asso:entete_tous').'</option>';
     foreach ($GLOBALS['association_liste_des_statuts'] as $statut) {
 		$res .= '<option value="'.$statut.'"';
@@ -611,32 +579,18 @@ function association_selectionner_statut($statut_interne='', $exec='') {
 			$res .= ' selected="selected"';
 		$res .= '> '._T('asso:adherent_entete_statut_'.$statut).'</option>';
 	}
-	$res .= '</select>';
-    if ($exec) {
-		$res .= '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>';
-		$res .= '</div></form>';
-    }
-    return $res;
+	$res .= '</select>'.$plus;
+    return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>') : $res;
 }
 
 /* selecteur de statut de membres*/
-function association_selectionner_id($id='', $exec='') {
-    if ($exec) {
-		$res = '<form method="post" action="'. generer_url_ecrire($exec) .'"><div>';
-		$res .= '<input type="hidden" name="exec" value="'.$exec.'" />';
-    } else {
-		$res = '';
-    }
-    $res .= '<input type="text" name="id" onfocus=\'this.value=""\' size="5"  value="'. ($id?$id:_T('asso:entete_id')) .'" />';
-    if ($exec) {
-		$res .= '<noscript><input type="submit" value="'._T('spip:chercher').'" /></noscript>';
-		$res .= '</div></form>';
-    }
-    return $res;
+function association_selectionner_id($id='', $exec='', $plus='') {
+    $res = '<input type="text" name="id" onfocus=\'this.value=""\' size="5"  value="'. ($id?$id:_T('asso:entete_id')) .'" />'.$plus;
+    return $exec ? generer_form_ecrire($exec, $res.'<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>') : $res;
 }
 
 /* selecteur d'annee parmi celles disponibles dans une table */
-function association_selectionner_annee($annee='', $dtable, $dchamp, $exec='') {
+function association_selectionner_annee($annee='', $dtable, $dchamp, $exec='', $plus='') {
     if ($exec) {
 		$res = '<form method="post" action="'. generer_url_ecrire($exec) .'"><div>';
 		$res .= '<input type="hidden" name="exec" value="'.$exec.'" />';
@@ -662,7 +616,7 @@ function association_selectionner_annee($annee='', $dtable, $dchamp, $exec='') {
 		}
 		$res .= '>'.$val['annee'].'</option>';
     }
-    $res .= '</select>';
+    $res .= '</select>'.$plus;
     if ($exec) {
 		$res .= '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript>';
 		$res .= '</div></form>';

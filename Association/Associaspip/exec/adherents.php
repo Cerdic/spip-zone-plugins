@@ -119,20 +119,11 @@ function exec_adherents()
 			echo "<a href='$h'>"._T('asso:entete_tous').'</a>';
 		}
 #		if ($GLOBALS['association_metas']['aff_groupes']) { // ne proposer que si on affiche les groupes ?? (on peut vouloir filtrer par groupe sans pour autant les afficher donc desactive)
-			echo '</td><td class="filtre_groupe">'. association_selectionner_groupe($id_groupe, 'adherents') ; // filtre groupes
+			echo '</td><td class="filtre_groupe">'. association_selectionner_groupe($id_groupe, 'adherents', '<input type="hidden" name="lettre" value="'.$lettre.'" /><input type="hidden" name="statut_interne" value="'.$statut_interne.'" />') ; // filtre groupes
 #		}
-		//Filtre ID
-		echo '</td><td class="filtre_id">';
-		echo association_selectionner_id($id, 'adherents');
-		echo '</div></form>';
-		//Filtre statut
-		echo '</td><td class="fitre_statut">';
-		echo '<form method="post" action="'.generer_url_ecrire('adherents').'"><div>';
-		echo '<input type="hidden" name="lettre" value="'.$lettre.'" />';
-		if ($id_groupe)
-			echo '<input type="hidden" name="groupe" value="'.$id_groupe.'" />';
-		echo association_selectionner_statut($statut_interne, '');
-		echo '<noscript><input type="submit" value="'._T('asso:bouton_lister').'" /></noscript></div></form></td>';
+		echo '<td class="filtre_id">';
+		echo association_selectionner_id($id, 'adherents') .'</td>';
+		echo '<td class="fitre_statut">'. association_selectionner_statut($statut_interne, 'adherents', '<input type="hidden" name="lettre" value="'.$lettre.'" />'.($id_groupe?'<input type="hidden" name="groupe" value="'.$id_groupe.'" />':'') ) . '</td>';
 		echo '</tr></table>';
 		//Affichage de la liste
 		echo $code_liste_membres;

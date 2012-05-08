@@ -37,7 +37,10 @@ function exec_comptes()
 			$max_par_page = 30;
 		$id_compte = intval(_request('id_compte', $_GET));
 		if (!$id_compte) {
-			$id_compte = '';
+			$id_compte = intval(_request('id'));
+		}
+		if (!$id_compte) {
+				$id_compte = '';
 		} else { // quand on a un id compte, on doit selectionner automatiquement l'exercice dans lequel il se trouve
 			$date_operation = sql_getfetsel('date', 'spip_asso_comptes', 'id_compte='.$id_compte);
 			$exercice = sql_getfetsel('id_exercice','spip_asso_exercices', "fin>='$date_operation' AND debut<='$date_operation'", '', 'debut DESC');
@@ -87,33 +90,37 @@ function exec_comptes()
 		) );
 		debut_cadre_association('finances-24.png', 'informations_comptables');
 		// FILTRES
-		echo '<form method="get" action="'.generer_url_ecrire('comptes').'">';
-		echo "\n<input type='hidden' name='exec' value='comptes' />";
-		echo "\n<table width='100%' class='asso_tablo_filtres'><tr>";
-		echo '<td id="filtre_exercice">'. association_selectionner_exercice($id_exercice) .'</td>';
-#		echo '<td id="filtre_id">'. association_selectionner_id($id_compte) .'</td>';
-		echo '<td id="filtre_imputation">';
-		echo '<select name="imputation" onchange="form.submit()">';
-		echo '<option value="%" ';
-		if ($imputation=='%') {
-			echo ' selected="selected"';
+		$filtre_imputation = '<select name="imputation" onchange="form.submit()">';
+		$filtre_imputation .= '<option value="%" ';
+		if ($imputation=='%' || $imputation='') {
+			$filtre_imputation .= ' selected="selected"';
 		}
-		echo '>'. _T('asso:entete_tous') .'</option>';
+		$filtre_imputation .= '>'. _T('asso:entete_tous') .'</option>';
 		$sql = sql_select(
 			'imputation , code, intitule, classe',
 			'spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code',
-			"classe<>'".$GLOBALS['association_metas']['classe_banques']."' AND active AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' ", // pour l'exercice en cours... ; n'afficher ni les comptes de la classe financiere --ce ne sont pas des imputations-- ni les inactifs
+			"classe<>". sql_quote($GLOBALS['association_metas']['classe_banques']) ." AND active AND date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' ", // pour l'exercice en cours... ; n'afficher ni les comptes de la classe financiere --ce ne sont pas des imputations-- ni les inactifs
 			'code', 'code ASC');
 		while ($plan = sql_fetch($sql)) { // Remplir le select uniquement avec les comptes utilises
-			echo '<option value="'.$plan['code'].'"';
+			$filtre_imputation .= '<option value="'.$plan['code'].'"';
 			if ($imputation==$plan['code']) {
-				echo ' selected="selected"';
+				$filtre_imputation .= ' selected="selected"';
 			}
-			echo '>'.$plan['code'].' - '.$plan['intitule'].'</option>';
+			$filtre_imputation .= '>'.$plan['code'].' - '.$plan['intitule'].'</option>';
 		}
-		echo '</select></td>';
-		echo '<noscript><td><input type="submit" value="'._T('asso:bouton_filtrer').'" /></noscript></td>';
-		echo '</tr></table></form>';
+		$filtre_imputation .= '</select>';
+		$filtre_vu = '<select name="vu" onchange="form.submit()">';
+		$filtre_vu .= '<option value="" '. ($vu==''?'':' selected="selected"') .'>'. _T('asso:cpte_op_vu_tous') .'</option>';
+		$filtre_vu .= '<option value="0" '. ($vu=='0'?' selected="selected"':'') .'>'. _T('asso:cpte_op_vu_non') .'</option>';
+		$filtre_vu .= '<option value="1" '. ($vu=='1'?' selected="selected"':'') .'>'. _T('asso:cpte_op_vu_oui') .'</option>';
+		$filtre_vu .= '</select>';
+		filtres_association(array(
+			'exercice' => $id_exercice,
+#			'id' => $id_compte,
+		), 'comptes', array(
+			'imputation' => $filtre_imputation,
+			'vu' => $filtre_vu,
+		));
 		/* (re)calculer la pagination en fonction de id_compte */
 		if ($id_compte) {
 			/* on recupere les id_comptes de la requete sans le critere de limite et on en tire l'index de l'id_compte recherche parmis tous ceux disponible */

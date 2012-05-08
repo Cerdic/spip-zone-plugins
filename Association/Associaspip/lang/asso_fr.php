@@ -708,6 +708,9 @@ Commentaire: @commentaire@
 	'compte_liste_nombre_impair' => 'Charges : ',
 	'compte_liste_nombre_cv' => 'Contrib. volontaires : ',
 	'compte_liste_nombre_vi' => 'Virements internes : ',
+	'cpte_op_vu_non' => 'non val.',
+	'cpte_op_vu_oui' => 'val.',
+	'cpte_op_vu_tous' => 'op. :',
 	# Syntheses
 	'cpte_resultat_titre_general' => 'Compte de R&eacute;sultat',
 	'cpte_resultat_bouton_voir' => 'Voir',

@@ -143,8 +143,8 @@ function filtres_association($liste_filtres, $exec='', $supplements='', $td=TRUE
 		foreach ($supplements as $nom => $supplement) {
 			echo ($td?'<td':'<li') ." class='filtre_$nom'>$supplement</". ($td?'td>':'li>');
 		}
-	} elseif ($supplements) {
-		echo ($td?'<td':'<li') .">$supplements</". ($td?'td>':'li>');
+	} else {
+		echo $supplements;
 	}
 	echo ($td?'<td':'<li') . ' class="boutons"><noscript><input type="submit" value="'. _T('asso:bouton_lister') .'" /></noscript></td>' . ($td?'</td>':'</li>');
 	echo ($td?'</tr></table':'</ul>') .">\n</form>\n";
