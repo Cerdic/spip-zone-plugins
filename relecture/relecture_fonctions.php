@@ -93,4 +93,18 @@ function relecture_lister_elements($id) {
     return $elements;
 }
 
+
+/**
+ * Construire le titre d'une relecture a partir d'un appel a la balise #INFO_TITRE
+ *
+ * @param int $id
+ * @param array $champs
+ * @return string
+ */
+function generer_titre_relecture($id_objet, $champs) {
+
+	$titre = _T('relecture:titre_relecture') . ' ' . $id_objet;
+    return $titre;
+}
+
 ?>
