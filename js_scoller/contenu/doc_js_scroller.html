@@ -1,0 +1,50 @@
+<div style="border:1px solid red;margin:.2em;padding:.4em;font-weight:bold;text-align:center;"><:js_scroller:info_doc{link=#info_doc}|propre:></div>
+
+[(#REM) Fil d'Ariane ]
+<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:js_scroller:doc_titre_court:></strong></div>
+
+<div class="cartouche">
+	<h1 class="entry-title"><:js_scroller:doc_titre_page:></h1>
+</div>
+		
+<div class="chapo"><:js_scroller:doc_chapo|propre:></div>
+
+[(#REM) JAVASCRIPT SCROLLER
+	=> EDITEZ CETTE BALISE POUR TESTER VOS OPTIONS DU JAVASCRIPT SCROLLER 
+	=> EXEMPLES :
+		JS_SCROLLER{50,50} : bandeau de 50x50 pixels
+		JS_SCROLLER{'','',breves,20} : liste des 20 dernieres breves
+		JS_SCROLLER{'','','','',100} : liste des 50 derniers articles dont
+			la presentation est coupee a 100 caracteres
+		JS_SCROLLER{'','',documents} : apercu des 50 derniers documents
+		JS_SCROLLER{'','','','','','rtl'} : sens d ecriture des textes de droite a gauche
+			vous pouvez utiliser plus simplement la balise SPIP : #LANG_DIR
+		JS_SCROLLER{'','','','','','',Ma chaine} : titre personnel
+		JS_SCROLLER{'','','','','','',mon_plugin:ma_chaine} : titre personnel qui sera traduit
+		JS_SCROLLER{'','','','','','',''} : pas de titre
+]
+		#JS_SCROLLER
+
+<div class="texte entry-content">
+	<:js_scroller:documentation|propre:>
+</div>
+
+<:js_scroller:docskel_sep|propre:>
+
+[<div class="notes"><h2 class="pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
+
+<div id="bloc_licence" class="cartouche" style="border:1px solid #404040;margin:.2em;padding:.8em;line-height:1.4em;">
+	<img class='spip_logos' alt="" src="#CHEMIN{javascriptb.png}" width='64' height='64' style='height:64px;width:64px;' />
+	<p class="soustitre"><:js_scroller:titre_original:></p>
+	<p><small><:js_scroller:licence_actuelle|propre:></small></p>
+	<p><small><:js_scroller:licence_originale|propre:></small></p>
+</div>
+
+<div id="info_doc" style="background:#eee;color:#000;margin:.2em;padding:.4em;border:1px solid red;font-size:96%;">
+[(#SET{urldocbrut,[(#URL_PAGE{js_scroller_documentation}|parametre_url{docmode,brut})]})]
+[(#SET{urldoczpip,[(#URL_PAGE{js_scroller_documentation}|parametre_url{docmode,zpip})]})]
+[(#SET{urldocspip,[(#URL_PAGE{js_scroller_documentation}|parametre_url{docmode,spip})]})]
+<h3><:js_scroller:info_doc_titre:></h3>
+<:js_scroller:info_skel_doc{mode_brut=#GET{urldocbrut},mode_zpip=#GET{urldoczpip},mode_spip=#GET{urldocspip}}|propre:>
+<:js_scroller:info_skel_contrib|propre:>
+</div>

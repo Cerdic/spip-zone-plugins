@@ -1,0 +1,9 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml 
+version="1.0"[ encoding="(#CHARSET)"]?>
+<scroller>
+[(#SET{xml_caller,[scroller_items_(#ENV{type,articles})]})]
+
+	<INCLURE{fond=xml/#GET{xml_caller}}{env}>
+
+</scroller>

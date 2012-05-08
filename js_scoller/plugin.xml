@@ -1,0 +1,31 @@
+<plugin>
+	<nom>Javascript Scroller</nom>
+	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
+	<version>1.44.0</version>
+	<licence>&#169; 2009 [GPLv3->http://www.opensource.org/licenses/gpl-3.0.html]</licence>
+	<icon>javascriptb.png</icon>
+	<etat>stable</etat>
+	<description>
+{{Javascript Scroller :: un scroller javascript de donn&eacute;es XML}}
+
+Ce plugin ajoute un widget javascript sous forme de banni&#232;re d&#233;filante pr&#233;sentant une liste d'&#233;l&#233;ments SPIP du site.
+
+Le widget s'appelle en utilisant la balise : {{&#35;JS_SCROLLER&#123;width,height,type,maximum,coupe,direction,titre&#125;}} avec :
+- {{width et height}} les dimensions ({par d&#233;faut 600 x 20 pixels}),
+- {{type}} le type d'&#233;l&#233;ments SPIP pr&#233;sent&#233; ({par d&#233;faut les articles}),
+- {{maximum}} le nombre d'entr&#233;es pr&#233;sent&#233;es ({par d&#233;faut 50}),
+- {{coupe}} le nombre de caract&#232;res du texte pr&#233;sent&#233; pour chaque entr&#233;e ({par d&#233;faut 40}),
+- {{direction}} la direction du texte ({par d&#233;faut 'ltr' : gauche->droite}),
+- {{titre}} le titre du bandeau ({valeur par d&#233;faut selon le type - mettre 'non' pour un titre vide}).
+
+Le code javascript du {scroller} est tir&#233; de [->http://javascripts.vbarsan.com/].
+
+Une documentation interne est disponible lorsque le plugin est actif sur la page publique [js_scroller_documentation_spip2->../?page=js_scroller_documentation_spip2].
+	</description>
+	<lien>http://www.spip-contrib.fr/?article3570</lien>
+	<options>js_scroller_options.php</options>
+	<prefix>js_scroller</prefix>
+	<chemin dir='' />
+	<necessite id='SPIP' version='[2.0.0;]' />
+	<categorie>squelette</categorie>
+</plugin>

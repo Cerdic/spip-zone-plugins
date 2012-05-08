@@ -1,0 +1,10 @@
+<BOUCLE_scroller(DOCUMENTS) {tout}{mode=document}{extension IN png,jpg,gif}{par date}{inverse} {pagination #ENV{counter}}>
+	<item>
+		<titre>[(#TITRE|couper{#ENV{couper}}|supprimer_tags|sinon{[(#FICHIER|basename)]}|texte_backend)]</titre>
+		<lien>[(#URL_DOCUMENT|texte_backend)]</lien>
+		<url_doc>[(#FICHIER|image_reduire{0,#ENV{height}}|extraire_attribut{src}|texte_backend)]</url_doc>
+		<width>[(#FICHIER|image_reduire{0,#ENV{height}}|extraire_attribut{width}|texte_backend)]</width>
+		<height>[(#FICHIER|image_reduire{0,#ENV{height}}|extraire_attribut{height}|texte_backend)]</height>
+		<typedoc>[(#MIME_TYPE|texte_backend)]</typedoc>
+	</item>
+</BOUCLE_scroller>

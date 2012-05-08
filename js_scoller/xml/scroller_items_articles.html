@@ -1,0 +1,7 @@
+<BOUCLE_scroller(ARTICLES) {par date}{inverse} {pagination #ENV{counter}}>
+	<item>
+		<titre>[(#TITRE|couper{#ENV{couper}}|supprimer_tags|texte_backend)]</titre>
+		<lien>[(#URL_ARTICLE|texte_backend)]</lien>
+		<description>[(#INTRODUCTION|couper{#ENV{couper}}|sinon{#CHAPO|couper{#ENV{couper}}|sinon{#TEXTE|couper{#ENV{couper}}}}|texte_backend)]</description>
+	</item>
+</BOUCLE_scroller>

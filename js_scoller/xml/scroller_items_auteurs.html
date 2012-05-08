@@ -1,0 +1,7 @@
+<BOUCLE_scroller(AUTEURS) {pagination #ENV{counter}}>
+	<item>
+		<titre>[(#NOM|couper{#ENV{couper}}|supprimer_tags|texte_backend)]</titre>
+		<lien>[(#URL_AUTEUR|texte_backend)]</lien>
+		<description>[(#BIO|couper{#ENV{couper}}|texte_backend)]</description>
+	</item>
+</BOUCLE_scroller>

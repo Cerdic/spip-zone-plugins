@@ -1,0 +1,61 @@
++------------------------------------------------------------------------+
+|  JavaScript Scroller , plugin pour SPIP                                |
+|                                                                        |
+|  Copyright (c) 2009 | Piero Wbmstr                                     |
++------------------------------------------------------------------------+
+
+-----
+[ TODO ]
+
+- le script de la balise est à revoir je pense : cas des images mal définit, pas de vérifications ...
+
+
+-----
+[ CHANGELOG ]
+
+
+[ version 1.4]
+24/12/201 - Revision 007
+- reconstruction CSS des entrées (cf. fichier CSS) : 
+	<div id='wslider'>
+		<span class='js_scroller_titre'>$titre</span>$items_sparator
+		// Pour chaque entrée :
+		<a class='js_scroller_lien'>lien<a>$description_sparator
+			<span class='js_scroller_description'>...</span>$items_sparator
+	</div>
+
+24/12/201 - Revision 006
+- refonte de la construction des chaînes affichées
+- ajout de trois arguments à la balise (non publics mais utilisables par tous) :
+	- speed : la vitesse de défilement
+	- items_separator : la chaîne de séparation entre chaque entrée
+	- description_separator : la chaîne de séparation entre le titre et la description
+- définition de valeurs par défaut dans 'js_scroller_options.php'
+
+24/12/201 - Revision 005
+- sortie du CSS en fichier externe pour personnalisation : "js_scroller.css" inclus
+par la balise
+- inclusion du fichier de fonctions manuellement dans le code de la balise, donc on retire
+l'argument du "plugin.xml"
+- doc interne complétée et infos sur la doc de Contrib
+
+[ version 1.3]
+23/12/2010 - Revision 004
+- modif des entrées XML des items pour simplicité et personnalisation :
+	'titre', 'lien', 'description', 'url_doc', 'width', 'height', 'typedoc'
+
+23/12/2010 - Revision 003
+- ajout du titre en argument de la balise : 
+	- valeur par défaut 'defaut' 
+	- mettre 'non' pour un titre vide
+	- possibilité d'indiquer une chaîne perso, passée par _T() par la balise
+
+[ version 1.2 ]
+18/11/2010 - Revision 002
+- ajout de sens d'écriture dans la balise : 'rtl' ou 'ltr' (défaut)
+- retrait des fichiers javascripts qui ne servaient plus : le code JS est directement
+donné par la balise ou appelé par 'js_scroller_get_js()' dans "js_scroller_fonctions.php"
+
+[ version 1.1 ]
+10/10/2010 - Revision 001
+- mise en place du squelette "js_scroller.js.html" appelable par spip
