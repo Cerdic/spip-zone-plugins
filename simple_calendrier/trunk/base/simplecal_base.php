@@ -34,6 +34,7 @@ function simplecal_declarer_tables_objets_sql($tables){
         "id_evenement"      => "bigint(21) NOT NULL auto_increment",
         "id_secteur"        => "bigint(21) NOT NULL DEFAULT '0'",
         "id_rubrique"       => "bigint(21) NOT NULL DEFAULT '0'",
+        "id_trad"           => "bigint(21) NOT NULL DEFAULT '0'",
         "id_objet"          => "bigint(21) NOT NULL DEFAULT '0'",
         "type"              => "varchar(25) NOT NULL",
         "titre"             => "varchar(255) NOT NULL",
@@ -53,7 +54,9 @@ function simplecal_declarer_tables_objets_sql($tables){
     $key = array(
         "PRIMARY KEY"     => "id_evenement",
         "KEY id_secteur"  => "id_secteur",
-        "KEY id_rubrique" => "id_rubrique"
+        "KEY id_rubrique" => "id_rubrique",
+        "KEY id_trad"     => "id_trad",
+        "KEY lang"        => "lang"
     );
 
     // champs candidats a la jointure
@@ -103,6 +106,8 @@ function simplecal_declarer_tables_objets_sql($tables){
         'titre' => 'titre, lang',
         'date' => 'date', // indique le nom du field pour le formulaires_dater_charger_dist
         'principale' => 'oui',
+        'champs_editables' => array('titre', 'date_debut', 'date_fin', 'lieu', 'descriptif', 'texte', 'lien_titre', 'lien_url', 'type', 'id_objet'),
+        'champs_versionnes' => array('id_rubrique', 'titre', 'descriptif', 'texte', 'lieu', 'date_debut', 'date_fin', 'lien_titre', 'lien_url', 'jointure_auteurs'),
         'field'=> $fields,
         'key' => $key,
         'join' => $join,
@@ -118,7 +123,7 @@ function simplecal_declarer_tables_objets_sql($tables){
         'rechercher_jointures' => array(
             'document' => array('titre' => 2, 'descriptif' => 1)
         ),
-        'champs_versionnes' => array('id_rubrique', 'titre', 'descriptif', 'texte', 'lieu', 'date_debut', 'date_fin'),
+        
     );
     
     // On peut lire dans :

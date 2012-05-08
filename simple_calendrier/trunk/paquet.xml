@@ -5,7 +5,7 @@
     etat="dev"
     compatibilite="[3.0.0-dev;["
     logo="prive/themes/spip/images/evenement-32.png"
-    schema="2.0.0"
+    schema="2.1.0"
     documentation="http://www.spip-contrib.net/Simple-Calendrier-v1"
 > 
 

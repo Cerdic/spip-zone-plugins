@@ -112,7 +112,7 @@ function evenement_modifier ($id_evenement, $set=null) {
     include_spip('inc/modifier');
     $c = collecter_requests(
         // white list
-        array('titre', 'date_debut', 'date_fin', 'lieu', 'descriptif', 'texte', 'lien_titre', 'lien_url', 'type', 'id_objet'),
+        objet_info('evenement','champs_editables'),
         // black list
         array('id_parent', 'statut'),
         // donnees eventuellement fournies

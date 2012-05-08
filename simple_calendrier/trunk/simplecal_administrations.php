@@ -71,6 +71,11 @@ function simplecal_upgrade($nom_meta_base_version,$version_cible){
         array('simplecal_meta_2_0_0'),
     );
     
+    $maj['2.1.0'] = array(
+        array('sql_alter',"TABLE spip_evenements ADD id_trad bigint(21) NOT NULL DEFAULT '0' AFTER langue_choisie"),
+        array('sql_alter',"TABLE spip_evenements ADD INDEX id_trad (id_trad)"),
+    );
+        
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
