@@ -12,7 +12,7 @@
 
 Ce plugin ajoute une biblioth&#232;que javascript permettant de cr&#233;er un effet 'Dock' sur une liste d'objets images ({documents ou logos du site}).
 
-Une documentation interne est disponible lorsque le plugin est actif sur la page publique [eudock_documentation->../?page=eudock_documentation_spip2].
+Une documentation interne est disponible lorsque le plugin est actif sur la page publique [eudock_documentation_spip2->../?page=eudock_documentation_spip2].
 	</description>
 	<lien></lien>
  	<icon>img/euDock-red.png</icon>
