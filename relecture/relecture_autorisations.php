@@ -136,7 +136,7 @@ function autoriser_relecture_commenter_dist($faire, $type, $id, $qui, $opt) {
 
 	if ($id_relecture = intval($id)) {
 		$from = 'spip_relectures';
-		$where = array("id_relecture=$id");
+		$where = array("id_relecture=$id_relecture");
 		$infos = sql_fetsel('id_article, date_fin_commentaire', $from, $where);
 
 		$les_relecteurs = lister_objets_lies('auteur', 'relecture', $id, 'auteurs_liens');

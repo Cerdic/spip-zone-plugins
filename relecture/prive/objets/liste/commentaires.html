@@ -27,17 +27,15 @@
 		<thead>
 			<tr class="first_row">
 				<th class="statut" scope="col">#</th>
-			[(#ENV{affichage}|=={menu_navigation}|non)
 				[(#ENV{id_relecture}|non)<th class="titre" scope="col"><:relecture:titre_relecture:></th>]
 				[(#ENV{element}|non)<th class="element" scope="col">[(#TRI{element, <:relecture:label_element:>, ajax})]</th>]
 				<th class="auteur" scope="col">[(#TRI{id_emetteur, <:relecture:label_emetteur:>, ajax})]</th>
 				<th class="date" scope="col">[(#TRI{date_ouverture, <:relecture:label_date_ouverture_commentaire:>, ajax})]</th>
 				<th class="statut" scope="col">[(#TRI{statut, <:relecture:label_statut:>, ajax})]</th>
 				<th class="date" scope="col">[(#TRI{date_cloture, <:relecture:label_date_cloture_commentaire:>, ajax})]</th>
-			]
 			[(#ENV{affichage}|=={menu_navigation}|oui)
-				<th><:relecture:label_date_statut:></th>
-				<th><:relecture:label_date_statut:></th>
+				<th class="date-statut"><:relecture:label_date_statut:></th>
+				<th><:relecture:label_action:></th>
 			]
 				<th class="id" scope="col">[(#TRI{id_commentaire, <:info_numero_abbreviation:>, ajax})]</th>
 			</tr>
@@ -48,7 +46,6 @@
 				<td class="statut">
 					[(#STATUT|puce_statut{commentaire, #STATUT, 0, commentaire, #EVAL{false}, #EVAL{false}})]
 				</td>
-			[(#ENV{affichage}|=={menu_navigation}|non)
 				[(#ENV{id_relecture}|non)
 				<td class="titre">
 					<a[ href="(#ID_RELECTURE|generer_url_entite{relecture})"]>[(#INFO_TITRE{relecture, ID_RELECTURE})]</a>
@@ -63,9 +60,8 @@
 				<td class="date">[(#DATE_OUVERTURE|affdate_court)]</td>
 				<td class="statut-clair">[(#VAL{relecture:texte_commentaire_}|concat{#STATUT}|_T)]</td>
 				<td class="date">[(#DATE_CLOTURE|intval|oui)[(#DATE_CLOTURE|affdate_court)]]</td>
-			]
 			[(#ENV{affichage}|=={menu_navigation}|oui)
-				<td>
+				<td class="date-statut">
 					[(#STATUT|=={ouvert}|oui)[(#DATE_OUVERTURE|affdate_court)]]
 					[(#STATUT|=={ouvert}|non)[(#DATE_CLOTURE|affdate_court)]]
 				</td>
@@ -73,9 +69,11 @@
 				[(#AUTORISER{moderer, commentaire, #ID_RELECTURE})
 					[(#BOUTON_ACTION{<:relecture:bouton_moderer:>, 'commentaire_edit', '', '', ''})]
 				]
-				[(#AUTORISER{modifier, commentaire, #ID_RELECTURE})
-					[(#BOUTON_ACTION{<:relecture:bouton_modifier:>, 'commentaire_edit', '', '', ''})]}
-				)]
+				[(#AUTORISER{moderer, commentaire, #ID_RELECTURE}|non)
+					[(#AUTORISER{modifier, commentaire, #ID_RELECTURE})
+						[(#BOUTON_ACTION{<:relecture:bouton_modifier:>, 'commentaire_edit', '', '', ''})]
+					]
+				]
 				</td>
 			]
 				<td class="id">#ID_COMMENTAIRE</td>

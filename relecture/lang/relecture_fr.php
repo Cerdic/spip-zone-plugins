@@ -43,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_periode_commentaire_ouverte' => 'Commentaires autorisés jusqu\'au @date@',
 
 // L
+	'label_action' => ' ',
 	'label_article_chapo' => 'Chapeau',
 	'label_article_descr' => 'Descriptif',
 	'label_article_ps' => 'Post-Scriptum',
