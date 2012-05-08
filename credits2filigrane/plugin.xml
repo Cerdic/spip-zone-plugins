@@ -8,7 +8,8 @@ _ &#169; 2012 - Distribu&#233; sous licence GNU/GPL v3
         </version>
         <etat>dev</etat>
         <description>
-			G&#233;n&#233;rer automatiquement un filigrane sur les documents images en utilisant le contenu du champ "Cr&#233;dits"
+			G&#233;n&#233;rer automatiquement un filigrane sur les documents images en utilisant le contenu du champ "Cr&#233;dits".
+_ Pour enlever le filigrane d'une image, mettre "0" dans le champ "Cr&#233;dits".
 _ N&#233;cessite le plugin Mediath&#232;que.
         </description>
 		<lien>

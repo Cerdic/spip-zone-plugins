@@ -45,6 +45,11 @@ function c2f_post_edition($flux) {
 		@copy(_DIR_IMG.$fichier, $rep_sans_filigrane.$fichier);
 	$fichier = _DIR_IMG.$fichier;
 
+	// pour restaurer l'image sans filigrane: mettre 0 dans le champ credits
+	$credits = $flux['data']['credits'];
+	if ($credits == '0')
+		return;
+
 	// le petit nécessaire pour générer le masque et l'appliquer
 	include_spip('filtres/couleurs');
 	include_spip('filtres/images_transforme');
