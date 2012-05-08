@@ -1,7 +1,7 @@
 <paquet
 	prefix="adxmenu"
 	categorie="navigation"
-	version="1.23.0"
+	version="1.23.1"
 	etat="stable"
 	compatibilite="[2.0;["
 	logo="prive/themes/spip/images/adxmenu_36.png"
@@ -16,7 +16,7 @@
 
 	<licence lien="http://creativecommons.org/licenses/by/3.0/">Creative Commons BY 3.0 Attribution</licence>
 
-	<pipeline nom="insert_head" inclure="adxmenu_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="adxmenu_pipelines.php" />
 
 	<utilise nom="cfg" compatibilite="[1.0;[" />
 </paquet>
