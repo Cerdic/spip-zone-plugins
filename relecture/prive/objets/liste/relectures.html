@@ -22,7 +22,7 @@
 <B_liste_relectures>
 #ANCRE_PAGINATION
 <div class="liste-objets relectures">
-	<table class="spip liste" summary="<:relecture:resume_table_relectures">
+	<table class="spip liste" summary="<:relecture:resume_table_relectures:>">
 		[<caption><strong class="caption">(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{relecture:info_1_relecture, relecture:info_nb_relectures}})</strong></caption>]
 		<thead>
 			<tr class="first_row">
@@ -31,12 +31,12 @@
 			[(#ENV{affichage}|=={menu_navigation}|non)
 				<th class="titre" scope="col"><:relecture:label_article_relu:></th>
 				[(#ENV{affichage}|=={liste_organisation}|oui)
-					<th><:relecture:label_nb_commentaires_a_traiter:></th>
+					<th class="numero"><:relecture:label_nb_commentaires_a_traiter:></th>
 				]
 				<th class="date" scope="col">[(#TRI{date_fin_commentaire, <:relecture:label_date_fin_commentaire_abrege:>, ajax})]</th>
 			]
 			[(#ENV{affichage}|=={menu_navigation}|oui)
-				<th class="revision" scope="col">[(#TRI{revision_ouverture, <:relecture:label_revision_ouverture_abrege:>, ajax})]</th>
+				<th class="numero" scope="col">[(#TRI{revision_ouverture, <:relecture:label_revision_ouverture_abrege:>, ajax})]</th>
 			]
 			</tr>
 		</thead>
@@ -50,17 +50,17 @@
 					</a>]
 				</td>
 			[(#ENV{affichage}|=={menu_navigation}|non)
-				<td>
+				<td class="titre">
 					<a[ href="(#ID_ARTICLE|generer_url_entite{article})"]>[(#INFO_TITRE{article, #ID_ARTICLE})]</a>
 				</td>
 				[(#ENV{affichage}|=={liste_organisation}|oui)
 					#SET{compteurs, #ID_RELECTURE|relecture_compter_commentaires}
-					<td>[(#GET{compteurs}|table_valeur{ouvert})]</td>
+					<td class="numero">[(#GET{compteurs}|table_valeur{ouvert})]</td>
 				]
-				<td>[(#DATE_FIN_COMMENTAIRE|affdate_court)]</td>
+				<td class="date">[(#DATE_FIN_COMMENTAIRE|affdate_court)]</td>
 			]
 			[(#ENV{affichage}|=={menu_navigation}|oui)
-				<td class='id'>
+				<td class='numero'>
 					[(#SET{url_revision, [(#URL_ECRIRE{revision, objet=article}
 											|parametre_url{id_objet, #ID_ARTICLE}
 											|parametre_url{id_version, #REVISION_OUVERTURE})]})]

@@ -32,7 +32,7 @@
 	[(#REM) <!-- Information sur l'ouverture de la relecture : date et revision de l'article --> ]
 	[(#BOITE_OUVRIR{<h5><:relecture:titre_boite_ouverture|strtoupper:></h5>, raccourcis})]
 		<div class="unit size2of3">
-			<span><strong><:relecture:label_date_ouverture:></strong> : </span>
+			<span><strong><:relecture:label_date_ouverture_relecture:></strong> : </span>
 			<span dir="#LANG_DIR">[(#DATE_OUVERTURE|affdate)]</span>
 		</div>
 		<div class="unit size1of3 lastUnit">
@@ -54,7 +54,7 @@
 	[(#STATUT|=={ouverte}|non)
 		[(#BOITE_OUVRIR{<h5><:relecture:titre_boite_cloture|strtoupper:></h5>, raccourcis})]
 			<div class="unit size2of3">
-				<span><strong><:relecture:label_date_cloture:></strong> : </span>
+				<span><strong><:relecture:label_date_cloture_relecture:></strong> : </span>
 				<span dir="#LANG_DIR">[(#DATE_CLOTURE|affdate)]</span>
 			</div>
 			<div class="unit size1of3 lastUnit">
