@@ -1,9 +1,10 @@
 [(#REM)	<!-- La liste des commentaires attaches a un element d'une relecture --> ]
 [(#INCLURE{fond=prive/objets/liste/commentaires,
-	titre=<:relecture:titre_liste_commentaires:>,
+	titre=<:relecture:titre_menu_commentaires:>,
 	par=date_modif,
-	pas=10,
+	pas=50,
 	id_relecture,
 	element=#ENV{element, texte},
+	affichage=menu_navigation,
 	ajax,
 	env})]

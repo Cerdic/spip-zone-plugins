@@ -154,7 +154,7 @@ function autoriser_relecture_commenter_dist($faire, $type, $id, $qui, $opt) {
 
 
 /**
- * Autorisation de modifier le texte d'une commentaire
+ * Autorisation de modifier le texte d'un commentaire
  *
  * @param object $faire
  * @param object $type
@@ -174,7 +174,7 @@ function autoriser_commentaire_modifier_dist($faire, $type, $id, $qui, $opt) {
 	if ($id_commentaire = intval($id)) {
 		$from = 'spip_commentaires';
 		$where = array("id_commentaire=$id_commentaire");
-		$infos = sql_getfetsel('id_emetteur, statut', $from, $where);
+		$infos = sql_fetsel('id_emetteur, statut', $from, $where);
 
 		$autoriser =
 			(($qui['id_auteur'] == $infos['id_emetteur'])
@@ -186,7 +186,7 @@ function autoriser_commentaire_modifier_dist($faire, $type, $id, $qui, $opt) {
 
 
 /**
- * Autorisation de repondre a un commentaire
+ * Autorisation moderer - repondre, changer le statut, supprimer - un commentaire
  *
  * @param object $faire
  * @param object $type
@@ -205,6 +205,23 @@ function autoriser_commentaire_moderer_dist($faire, $type, $id, $qui, $opt) {
 	// - le commentaire est encore ouvert
 
 	if ($id_commentaire = intval($id)) {
+		$from = array('spip_commentaires AS c', 'spip_relectures AS r');
+		$where = array("id_commentaire=$id_commentaire", 'c.id_relecture=r.id_relecture');
+		$infos = sql_fetsel('c.statut, r.id_article', $from, $where);
+
+		$id_article = $infos['id_article'];
+		$les_auteurs = lister_objets_lies('auteur', 'article', $id_article, 'auteurs_liens');
+
+		$from = 'spip_articles';
+		$where = array("id_article=$id_article");
+		$id_rubrique = sql_getfetsel('id_rubrique', $from, $where);
+
+		$autoriser =
+			(($infos['statut'] == 'ouvert')
+			AND
+			((in_array($qui['id_auteur'], $les_auteurs)
+				OR (($qui['statut'] == '0minirezo')
+					AND (!$qui['restreint'] OR !$id_rubrique OR in_array($id_rubrique, $qui['restreint']))))));
 	}
 
 	return $autoriser;
