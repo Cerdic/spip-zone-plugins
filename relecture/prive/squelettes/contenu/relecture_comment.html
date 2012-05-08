@@ -15,8 +15,7 @@
 		(#SELF|parametre_url{element, #VALEUR}
 			|lien_ou_expose{
 				[(#VAL{relecture:label_article_}|concat{#VALEUR}|_T)],
-				[(#GET{encours}|=={#VALEUR})],
-				ajax})
+				[(#GET{encours}|=={#VALEUR})]})
 	</li>]
 </BOUCLE_elements>
 </ul>
