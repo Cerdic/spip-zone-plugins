@@ -3415,7 +3415,7 @@ class GeSHi {
                         $this->_hmr_replace = $regexp[GESHI_REPLACE];
                         $this->_hmr_before = $regexp[GESHI_BEFORE];
                         $this->_hmr_key = $key;
-                        $this->_hmr_after = $regexp[GESHI_AFTER];
+                        $this->_hmr_after = $regexp[GESHI_AFTER];z
                         $stuff_to_parse = preg_replace_callback(
                             "/" . $regexp[GESHI_SEARCH] . "/{$regexp[GESHI_MODIFIERS]}",
                             array($this, 'handle_multiline_regexps'),

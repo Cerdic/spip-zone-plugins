@@ -32,7 +32,7 @@
 @define('REG_NOM_BOUCLE', '[a-zA-Z0-9_]+');
 
 // table d'une boucle (TABLE) ou (connect:TABLE)
-@define('REG_NOM_TABLE_BOUCLE', '\([^)]*\)');
+@define('REG_NOM_TABLE_BOUCLE', '\([^)]+\)');
 
 // criteres | arguments : {critere > 0} {critere = #ENV{truc}}
 @define('REG_CRITERES',           '\{(?:\s*(?:(?>[^{}]+)|(?R))*\s*)\}');
@@ -54,7 +54,7 @@
 
 // Calcul des <BOUCLEx(){} />. C'est complexe
 // 1) trouver la fin   />
-@define('REG_FIN_BOUCLE', '\/?&gt;');
+@define('REG_FIN_BOUCLE', '\s*\/?&gt;');
 @define('REG_FIN_BOUCLE_TROUVE', REG_REMPLACEMENTS_GESHI_START . REG_FIN_BOUCLE . REG_REMPLACEMENTS_GESHI_END);
 // 2) trouver le debut <BOUCLEx
 @define('REG_DEBUT_BOUCLE', '&lt;BOUCLE' . REG_NOM_BOUCLE);
