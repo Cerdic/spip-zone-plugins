@@ -44,7 +44,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * => define('PUBBAN_FORCE_UNINSTALL',1); pour forcer l'effacement des tables
  * => utilitaire de dev ou test
  */
-define('PUBBAN_FORCE_UNINSTALL', 1);
+define('PUBBAN_FORCE_UNINSTALL', 0);
 
 /**
  * Pour forcer l'utilisation d'une fonction Javascript pour ouvrir les popups (retrait de l'attribut "target")
