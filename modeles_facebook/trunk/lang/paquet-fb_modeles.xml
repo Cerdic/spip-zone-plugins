@@ -1,2 +1,3 @@
-<traduction module="paquet-fb_modeles" gestionnaire="salvatore" reference="fr">
+<traduction module="paquet-fb_modeles" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/modeles_facebook/trunk/lang/" reference="fr">
+	<langue code="fr" />
 </traduction>
