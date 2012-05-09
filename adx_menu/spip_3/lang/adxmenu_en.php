@@ -25,6 +25,10 @@ An internal documentation page is available ({in french}) : [internal documentat
 -* \'tout\' to present all site sections in the menu head,
 -* a sections IDs list, separated by colons (ex "1:2").',
 	'bouton_reset' => 'Reset',
+	'bouton_effacer' => 'Delete',
+	'enregistrer_les_modifications' => 'Record your modifications',
+	'effacer_les_modifications' => 'Delete your modifications',
+	'effacer_config_courante' => 'Delete your configuration',
 
 
 	// Infos squelette de doc
@@ -37,5 +41,6 @@ An internal documentation page is available ({in french}) : [internal documentat
 -* [&#034;Zpip skeleton&#034; mode->@mode_zpip@] ({Z compatible skeleton})
 -* [&#034;SPIP skeleton&#034; mode->@mode_spip@] ({compatible with distribution})',
 	'info_skel_contrib' => 'A full documentation page is available online at spip-contrib ({in french}) : [->http://www.spip-contrib.fr/?article3566].',
+	'new_window' => 'New window',
 );
 ?>
