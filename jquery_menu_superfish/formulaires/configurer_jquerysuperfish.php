@@ -40,6 +40,7 @@ function formulaires_configurer_jquerysuperfish_saisies_dist(){
 						'explication' => _T('jquerysuperfish:explication_classe'),
 						'defaut' => $config['classe_hori'],
                   'afficher_si' => '@menu_hori@ == "on"',
+						'obligatoire' => 'oui',
 					)
 				),
 				array(
@@ -100,6 +101,7 @@ function formulaires_configurer_jquerysuperfish_saisies_dist(){
 						'explication' => _T('jquerysuperfish:explication_classe'),
 						'defaut' => $config['classe_vert'],
                   'afficher_si' => '@menu_vert@ == "on"',
+						'obligatoire' => 'oui',
 					)
 				),
 				array(
@@ -160,6 +162,7 @@ function formulaires_configurer_jquerysuperfish_saisies_dist(){
 						'explication' => _T('jquerysuperfish:explication_classe'),
 						'defaut' => $config['classe_navbar'],
                   'afficher_si' => '@menu_navbar@ == "on"',
+						'obligatoire' => 'oui',
 					)
 				),
 				array(
@@ -220,6 +223,7 @@ function formulaires_configurer_jquerysuperfish_saisies_dist(){
 						'explication' => _T('jquerysuperfish:explication_supersubs_minwidth'),
 						'defaut' => $config['supersubs_minwidth'],
                   'afficher_si' => '@supersubs@ == "on"',
+						'obligatoire' => 'oui',
 					),
 					'verifier' => array(
 					   'type' => 'entier',
@@ -236,6 +240,7 @@ function formulaires_configurer_jquerysuperfish_saisies_dist(){
 						'explication' => _T('jquerysuperfish:explication_supersubs_maxwidth'),
 						'defaut' => $config['supersubs_maxwidth'],
                   'afficher_si' => '@supersubs@ == "on"',
+						'obligatoire' => 'oui',
 					),
 					'verifier' => array(
 					   'type' => 'entier',
@@ -252,6 +257,7 @@ function formulaires_configurer_jquerysuperfish_saisies_dist(){
 						'explication' => _T('jquerysuperfish:explication_supersubs_extrawidth'),
 						'defaut' => $config['supersubs_extrawidth'],
                   'afficher_si' => '@supersubs@ == "on"',
+						'obligatoire' => 'oui',
 					),
 					'verifier' => array(
 					   'type' => 'entier',
@@ -271,7 +277,7 @@ function formulaires_configurer_jquerysuperfish_verifier(){
 	include_spip('inc/saisies');
 	$erreurs = saisies_verifier(formulaires_configurer_jquerysuperfish_saisies_dist());
 
-	if (_request('supersubs_minwidth') && _request('supersubs_maxwidth') && (_request('supersubs_maxwidth') < _request('supersubs_minwidth')))
+	if (_request('supersubs_maxwidth') < _request('supersubs_minwidth'))
 		$erreurs['supersubs_maxwidth'] = _T('jquerysuperfish:erreur_min_max');
 
 	if ($erreurs and !isset($erreurs['message_erreur']))

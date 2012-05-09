@@ -1,7 +1,7 @@
 <paquet
 	prefix="jquerysuperfish"
 	categorie="navigation"
-	version="0.5.1"
+	version="0.5.2"
 	etat="stable"
 	compatibilite="[2.1.0;3.0.99]"
 	logo="prive/themes/spip/images/jquerysuperfish-32.png"
