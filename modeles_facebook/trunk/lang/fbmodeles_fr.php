@@ -8,11 +8,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'oui' => 'Oui',
 	'non' => 'Non',
 
-// B //
-	// Configuration (CFG)
-	'bouton_reset' => 'R&#233;initialiser',
-	'bouton_effacer' => 'Effacer',
-
 // C //
 	// Documentation
 	'cf_navigation' => 'Cf. [colonne de navigation->@url@]',
@@ -45,6 +40,7 @@ Pour inclure les balises "Open Graph" en en-t&ecirc;te de vos pages publiques, v
 	'cfg_comment_colorscheme' => 'S&eacute;lectionnez ici le profil pr&eacute;d&eacute;termin&eacute; par les modules qui sera utilis&eacute; pour l\'affichage.',
 
 // D //
+	'defaut'=>'Défaut',
 	// Documentation
 	'doc_titre_page' => 'Page de documentation du plugin Mod&egrave;les Facebook',	
 	'doc_titre_court' => 'Documentation Mod&egrave;les Facebook',	
@@ -65,10 +61,6 @@ Le plugin propose &eacute;galement un mod&egrave;le g&eacute;n&eacute;rant des i
 ',
 
 // E //
-	// Configuration (CFG)
-	'enregistrer_les_modifications' => 'Enregsitrer les modifications',
-	'effacer_les_modifications' => 'Effacer les modifications',
-	'effacer_config_courante' => 'Effacer votre configuration',
 	// Documentation
 	'exemple' => '{{{Exemple}}}
 
