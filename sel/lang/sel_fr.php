@@ -19,12 +19,14 @@
 		'acces'					=> 'Niveau d\'accès',
 		'acces_insuffisant_explication' => 'Vous ne disposez pas du niveau d\'accès nécessaire pour consulter ces informations',
 		'accueil'				=> 'Accueil',
-		'admin_moderer_utilisateurs'=>'Certifier - refuser des utilisateurs',
+		'admin_moderer_utilisateurs'=>'Certifier ou refuser des utilisateurs',
 		'admin_voir_utilisateurs'=>'Voir et exporter la liste des utilisateurs',
 		'adresse_annonce'			=> 'Adresse de cette annonce',
-		'adresse_annonce_explications'=>'Si cette adresse est différente de celle qui figure sur votre fiche, merci de la préciser ci-dessous.',
-		'adresse_annonce_explications2'=>'Si cette adresse est différente de celle qui figure sur la fiche de l\'auteur de l\'annonce, merci de la préciser ci-dessous.',
-		'ajout_sel'				=> 'Ajouter un sel',
+		'adresse_annonce_explications'=>'Si cette annonce se réfère à une adresse précise, différente de celle qui figure sur votre fiche, cliquez ici et la précisez-là ci-dessous',
+		'adresse_annonce_explications2'=>'Si cette annonce se réfère à une adresse précise, différente de celle qui figure sur la fiche de l\'auteur de l\'annonce, cliquez ici et la précisez-là ci-dessous',
+		'ajout_sel'				=> 'Ajouter un SEL',
+		'a_partir_du'			=> 'À partir du',
+		'au'					=> 'au',
 		'avatar'				=> 'Avatar',
 	 
 		//B
@@ -33,30 +35,36 @@
 		'bienvenue_catalogue_explications'=> 'Cet espace permet :',
 		'bienvenue_explications_1'=>'de s\'inscrire comme untilisateur, de gérer ses annonces',
 		'bienvenue_explications_2'=>'de consulter les annonces, les SEL',
-		'bienvenue_explications_3'=>'de localiser vos voisins sur la carte, pour faire des échanges',
+		'bienvenue_explications_3'=>'de localiser vos voisins sur la carte, pour faire des échanges locaux',
 		'bienvenue_explications_4'=>'enregistrer et suivre les échanges comptabilisés, consulter son solde',
 		'bienvenue_explications_5'=>'consulter les correspondants locaux',
-		'bienvenue_explications_6'=>'suivre les relations des utilisateurs, représantant des ateliers / instances intersel...',
+		'bienvenue_explications_6'=>'suivre les relations des utilisateurs, représantant des ateliers, des instances intersel, etc.',
 
 		//C
 		'certifier_ko'					=> 'Refuser',
 		'certifier_ok'					=> 'Certifier',
 		'certifier_oko'					=> 'En attente',
+		'choisir_moderation_annonces'	=>'Choisir la modération des annonces',
+		'choisir_moderation_annonces_explications'	=>'Cette option vous permet de déterminer si les nouvelles annonces doivent ou non être validées par un administrateur avant publication.',
+		'choisir_moderation_utilisateurs'=>'Choisir la modération des utilisateurs',
+		'choisir_moderation_utilisateurs_explications'=>'Cette option vous permet de déterminer si les nouvelles inscriptions pevent utiliser le catalogue pour gérer leurs annonces dès la création de leur profil, ou après certification uniquement. Dans le second cas, la consultation simple du catalogue reste possible avant certification.',
+		'choisir_monnaie_fiduc'			=> 'Choisir l\'unité monétaire fiduciaire',
+		'configuration'					=> 'Configuration',
 		'connexion'						=> 'Connexion',
-		'connectez_vous'				=> 'Vos accès sont maintenant créés. Utilisez-les pour vous connecter au catalogue, en saisissant login et mot de passe en haut de cette page',
+		'connectez_vous'				=> 'Vos codes d\'accès vous permettent maintenant de vous connecter au catalogue : rendez-vous en haut de cette page pour saisir vos login et mot de passe.',
 		'contacts_annonce'				=> 'Contact',
 		'consulter_catalogue des annonces'	=> 'Consulter le catalogue',
 		'consulter_correspondants'		=> 'Consulter la liste des correspondants',
 		'poster_annonce'				=> 'Poster une annonce',
 		'poster_annonce_explications'	=> 'Vous pouvez créer une nouvelle annonce dans le catalogue. Il peut s\'agir d\'une offre, une demande ou un partage, concernant des objets, des savoirs ou des services. 
-		Tout service ou savoir proposés collectivement (sous forme de stages par exemple) peuvent être programmés à date fixe, ou rester à la demande, en dates libre.',
+		Tout service ou savoir proposés collectivement (sous forme de stages par exemple) peut être programmés à date fixe, ou rester à la demande, en dates libre.',
 		'saisir echange'				=> 'Saisir un nouvel échange',
 		'correspondance'				=> 'Correspondance locale',
 		'correspondance_multiple_sel_organisation1'=> 'Si vous êtes correspondant au titre de tous les SELs indiqués (si vous en avez indiqué plusieurs) cochez cette case.',
 		'correspondance_multiple_sel_organisation2'=> 'Sinon, précisez ci-dessous le ou les SEL :',
-		'correspondant_auteur_organisations' => "Correspondant-e des ateliers / organisations suivant-e-s :",
+		'correspondant_auteur_organisations' => "Correspondant-e des ateliers ou organisations suivant-es :",
 		'creer_nouvel_utilisateur'=>'Créer votre accès utilisateur',
-		'creer_nouvel_utilisateur_explications'=>'Si vous disposez d\'un accès, connectez-vous directement avec votre login et votre mot de passe.
+		'creer_nouvel_utilisateur_explications'=>'Si vous disposez d\'un accès, connectez-vous directement avec vos login et mot de passe.
 		Si vous l\'avez perdu, vous pouvez utiliser le lien <strong>mot de passe oublié ?</strong> pour le réinitialiser.
 		Dans le cas contraire, remplissez la fiche ci-dessous. Après validation, vous pourrez choisir un avatar.',
 		'creer_nouvel_utilisateur2'		=> 'Ajouter votre avatar',
@@ -64,9 +72,11 @@
 	
 		//D
 		'deconnexion'		=> 'Déconnexion',
-
+		'description'		=> 'Description',
+		'du'				=> 'Du',
 	
 		// E
+		'echange_collectif'	=> 'Echange collectif',
 		'echanges_collectifs_organisation_annonce' => 'Organisation des échanges collectifs',
 		'echanges_collectifs_organisation_annonce_explications'=>'Saisissez ici tous les aspects pratiques de l\'organisation collective',
 		'entree_acces'	=> 'Niveau d\'accès au catalogue',
@@ -86,8 +96,13 @@
 		'entree_direction_echange_annonce'=>'Direction de l\'annonce',
 		'entree_email_referent_annonce'=>'E-mail',
 		'entree_hebergement_annonce'=>'Hébergement',
+		'entree_justification_fiduc_annonce'=>'Précisions sur les frais en monnaie fiduciaire',
 		'entree_lon'		=>'Longitude',
 		'entree_lat'		=>'Latitude',
+		'entree_moderation_annonce_non'=>'Pas de validation préalable',
+		'entree_moderation_annonce_oui'=>'Validation préalable',
+		'entree_moderation_utilisateur_non'=>'Pas de certification préalable',
+		'entree_moderation_utilisateur_oui' => 'Certification préalable',
 		'entree_nature_annonce'=> 'Nature de l\'annonce : Objet, service, savoir',
 		'entree_nom_referent_annonce'=> 'Nom du référent pour cette annonce',
 		'entree_nombre_personnes_annonce'=>'Nombre de personnes maximum',
@@ -113,30 +128,31 @@
 		'entree_tel2_2' => '2e Téléphone',
 		'entree_titre_annonce'=> 'Titre de l\'annonce',
 		'entree_titre_annonce2'=> 'Titre de votre annonce',
-		'entre_total_fiduc_annonce'=>'Total demandé en monnaie fiduciaire',
-		'entree_total_unite_annonce_obligatoire'=>'Nombre d\'unité demandé',
+		'entree_total_fiduc_annonce'=>'Total demandé en monnaie fiduciaire',
+		'entree_total_unite_annonce'=>'Nombre d\'unité demandé',
 		'entree_si_unite_heure_annonce'=>'Par heure',
 		'entree_transport_annonce'=>'Comment venir : transports',
 		'entree_ville' => "Votre ville",
 		'entree_ville_2' => "Ville",
-		'explication_choixsel' => 'Indiquez parmi le JEU / les SELs le ou les groupes dans le/lesquels vous vous trouvez. Débutez la saisie dans le champ, celui-ci sera auto-complété. Sélectionnez alors le SEL parmi les propositions, sans rien modifier. Si vous devez indiquer d\'autres SELs, cliquez sur le bouton "Ajouter un SEL" et recommencez.',
+		'explication_choixsel' => 'Indiquez parmi le JEU ou les SELs le ou les groupes dans le-lesquels vous vous trouvez. Débutez la saisie dans le champ, celui-ci sera auto-complété. Sélectionnez alors le SEL parmi les propositions, sans rien modifier. Si vous devez indiquer d\'autres SELs, cliquez sur le bouton "Ajouter un SEL" et recommencez.',
 		'explications_email_valide'=>'Ce mail doit être valide, il vous servira notamment à réinitialiser votre mot de passe si vous le perdez et à récupérer votre accès au catalogue',
 		'exporter'			=> 'Exporter au format CSV',
 		
 		//F
 		'fiche'			=> 'Fiche',
 		'fiche_utilisateur'=>'Fiche utilisateur',
-		'frais_annonce_explications'=>'Les montants en monnaie fiduciaire correspondent à des participations à des frais réels. Ceux-ci sont détaillés en nature : location de matériel extérieur, nourriture, par exemple. Indiquer les totaux uniquement (nombres entiers). Si le montant en euros est différent de 0, le champ commentaires devient obligatoire.',
+		'frais_annonce_explications'=>'Les montants en monnaie fiduciaire (euros par exemple) correspondent à des participations à des frais réels. Ceux-ci sont détaillés en nature : location de matériel extérieur, nourriture, par exemple. Indiquer les totaux uniquement (nombres entiers). Si le montant en monnaie fiduciaire est différent de 0, le champ <em>Précisions sur les frais en monnaie fiduciaire</em> devient obligatoire.',
 		'form_login'	=> 'Login ou e-mail',
 		'form_passe'		=> 'Mot de passe',
 		'formerr'		=> 'Votre saisie contient des erreurs !',
 		'formerr_oblig'	=> 'Cette information est obligatoire',
-		'formerr_email_existe'=>'L\'email que vous avez saisi existe déjà dans la base, vous devez déjà disposer d\'une connexion. Merci d\'utiliser de préférence la fonction "Mot de passe oublié" afin de retrouver vos accès',
-		'formerr_email_format'=>'Le format de votre email n\'est pas correct. Veuillez saisir une adresse mail contenant un@ et un .',
-		'frais_annonce'		=> 'Frais engagés',
+		'formerr_email_existe'=>'L\'email que vous avez saisi existe déjà dans la base, vous devez déjà disposer d\'un login et d\'un mot de passe. Merci d\'utiliser la fonction "Mot de passe oublié" pour vous connecter',
+		'formerr_email_format'=>'Le format de votre email n\'est pas correct. Veuillez saisir une adresse mail de la forme xxxxxxxx@xxx.xxx',
+		'formerr_justif_fiduc_oblig'=>'Vous demandez une certaine somme en monnaie fiduciaire, merci d\'en indiquer la raison d\'être dans le champ des précisions sur les frais',
+		'frais_annonce'		=> 'Frais',
 		
 		//G
-		'geocodage_echec'	=> 'Le geocodage n\'a pu etre effectue pour la raison suivante : ',
+		'geocodage_echec'	=> 'Le géocodage n\'a pu etre effectué pour la raison suivante : ',
 		'geocodage_zero_resultat'=>'L\'adresse que vous avez saisie ne permet pas de vous localiser sur la carte',
 		'gestion_annonces'	=> 'Gestion des annonces',
 		'gestion_inscriptions'=> 'Gestion des inscriptions',
@@ -144,10 +160,13 @@
 		
 		//I
 		'identite'			=> 'Identité',
-		'imprimer'			=> 'Imprimer - format PDF',
+		'imprimer'			=> 'Imprimer sous format PDF',
 		'info_coordonnees' => 'Coordonnées',
-		'info_admin_statuer_webmestre' => "Donner à cet administrateur les droits de webmestre, co-Admnistrateur global du catalogue",
+		'info_admin_statuer_webmestre' => "Donner à cet administrateur les droits de webmestre, co-admnistrateur global du catalogue",
+		'info_sans_titre'	=> 'Sans titre',
 		'inscrit_depuis'	=> 'inscrit depuis le : ',
+		'inscrivez_vous'	=> 'Inscrivez-vous !',
+		'item_nouvelle_annonce' => 'Nouvelle annonce',
 		
 		//J
 		'jeu'				=> 'JEU',
@@ -162,20 +181,37 @@
 	
 		
 		//M
-		'membre_auteur_sel' => 'Membre du / des SEL(s) suivant(s) :',
+		'membre_auteur_sel' => 'Membre du ou des SEL(s) suivant(s) :',
 		'mes_annonces'		=> 'Mes annonces',
+		'modifier'			=> 'Modifier',
+		'modifier_annonce'	=> 'Modifier une annonce',
 		'modifier_donnees'	=> 'Modifier mes données',
 		'modifier_statut'	=> 'Modifier le statut',
+		'monnaie_dinar_algerie'	=> 'Dinar (Algérie)',
+		'monnaie_dollar_canadien'=>'Dollar canadien',
+		'monnaie_euro'		=> 'Euro',
+		'monnaie_franc_cfa_bceao'=>'Franc CFA (BCEAO)',
+		'monnaie_franc_suisse'	=> 'Franc suisse',
+		'monnaie_lek_albanie'	=> 'Lek (Albanie)',
+		'monnaie_livre_sterling'=>'Livre sterling',
+		'monnaie_rouble_sovietique_armenie'=>'Rouble soviétique (Arménie)',
+		'monnaie_nouveau_manat_azerbaidjan'=>'Nouveau manat (Azerbaïdjan)',
+
 		'msgerr_mise_a_jour_acces_auteur'=>'Un problème est survenu pendant la prise en compte de votre avatar',
-		'msgok_mise_a_jour_acces_auteur'=> 'Nouvel avatar pris en compte !',		
+		'msgok_mise_a_jour_acces_auteur'=> 'Nouvel avatar pris en compte !',			
 		
 		//N
 		'nom'				=> 'Nom',
-		'nouvelles_annonces'=>'Nouvelles annonces',
+		'nouvelles_annonces'=> 'Nouvelles annonces',
+		'nouvelle_annonce_theme'=>'Félicitations, votre annonce a été correctement créée, voir ci-dessous, le récapitulatif.
+Vous pouvez associer des thèmes à votre annonce, de façon à accroitre sa visilibilité à travers les accès thématiques au catalogue.
+La rédaction de votre annonce met en avant l\'existance des thèmes suivants. S\'ils sont corrects, validez simplement.
+Sinon, utilisez le formulaire ci-dessous pour indiquer votre choix. Vos thèmes remplaceront les thèmes détectés dans votre rédaction.',
+
 		'nouveaux_inscrits'	=> 'Nouveaux inscrits',
 
 		//O
-
+		'options_generales'	=> 'Options générales',
 		
 		//P
 		'page'		=>'Page',
@@ -189,7 +225,7 @@
 		'pays_belgique'=>'Belgique',
 		'pays_benin'=>'Bénin',
 		'pays_bosnie_herzegovine'=>'Bosnie Herzégovine',		
-		'pays_bulgarie'=>'Bilgarie',
+		'pays_bulgarie'=>'Bulgarie',
 		'pays_burkina_faso'=>'Burkina Faso',
 		'pays_burundi'=>'Burundi',
 		'pays_cameroun'=>'Cameroun',
@@ -209,11 +245,12 @@
 		'pays_georgie'=>'Georgie',
 		'pays_grece'=>'Grèce',
 		'pays_guinee'=>'Guinée',
-		'pays_guinee_equatoriale'=>'Guinée Équatoriale',
+		'pays_guinee_equatoriale'=>'Guinée équatoriale',
 		'pays_haiti'=>'Haïti',
 		'pays_hongrie'=>'Hongrie',
 		'pays_irlande'=>'Irlande',
 		'pays_islande'=>'Islande',
+		'pays_israel'=>'Israël',
 		'pays_italie'	=> 'Italie',
 		'pays_jersey'=>'Jersey',
 		'pays_kazakhstan'=>'Kazakhstan',
@@ -232,44 +269,47 @@
 		'pays_moldavie'	=> 'Moldavie',
 		'pays_monaco'	=> 'Monaco',
 		'pays_montenegro'=> 'Monténégro',
-			/*
-				<option value='[ne]'><:sel:pays_niger:></option>
-				<option value='[no]'><:sel:pays_norvege:></option>
-				<option value='[nl]'><:sel:pays_pays_bas:></option>
-				<option value='[pl]'><:sel:pays_pologne:></option>
-				<option value='[pt]'><:sel:pays_portugal:></option>
-				<option value='[cd]'><:sel:pays_republique_democratique_du_congo:></option>
-				<option value='[cg]'><:sel:pays_republique_du_congo:></option>
-				<option value='[cz]'><:sel:pays_republique_tcheque:></option>
-				<option value='[ro]'><:sel:pays_roumanie:></option>
-				<option value='[gb]'><:sel:pays_royaume_uni:></option>
-				<option value='[rw]'><:sel:pays_rwanda:></option>
-				<option value='[sn]'><:sel:pays_senegal:></option>
-				<option value='[rs]'><:sel:pays_serbie:></option>
-				<option value='[sc]'><:sel:pays_seychelles:></option>
-				<option value='[sk]'><:sel:pays_slovaquie:></option>
-				<option value='[si]'><:sel:pays_slovenie:></option>
-				<option value='[se]'><:sel:pays_suede:></option>
-				<option value='[ch]'><:sel:pays_suisse:></option>
-				<option value='[td]'><:sel:pays_tchad:></option>
-				<option value='[tg]'><:sel:pays_togo:></option>
-				<option value='[tn]'><:sel:pays_tunisie:></option>
-				<option value='[ua]'><:sel:pays_ukraine:></option>
-		*/
+		'pays_niger'	=> 'Niger',
+		'pays_norvege'	=> 'Norvège',
+		'pays_pays_bas'	=> 'Pays-Bas',
+		'pays_pologne'	=> 'Pologne',
+		'pays_portugal'	=> 'Portugal',
+		'pays_republique_democratique_du_congo'	=> 'République démocratique du Congo',
+		'pays_republique_du_congo'	=> 'République du Congo',
+		'pays_republique_tcheque'	=> 'République Tchèque',
+		'pays_roumanie'	=> 'Roumanie',
+		'pays_royaume_uni'	=> 'Royaume-Uni',
+		'pays_rwanda'	=> 'Rwanda',
+		'pays_senegal'	=> 'Sénégal',
+		'pays_serbie'	=> 'Serbie',
+		'pays_seychelles'	=> 'Seychelles',
+		'pays_slovaquie'	=> 'République Slovaque',
+		'pays_slovenie'	=> 'Slovénie',
+		'pays_suede'	=> 'Suède',
+		'pays_suisse'	=> 'Suisse',
+		'pays_tchad'	=> 'Tchad',
+		'pays_togo'		=> 'Togo',
+		'pays_tunisie'	=> 'Tunisie',
+		'pays_ukraine'	=> 'Ukraine',
 		'prenom'		=> 'Prénom',
 		'pour'			=> 'pour : ',
 		
 		//Q
 		'que_voulez_vous_faire'=>'Que voulez-vous faire ?',
 		//R
+		'recap_annonce'			=> 'Récapitulatif de votre annonce',
 		'resume_annonce'		=> 'Résumé',
 		
 		//S
-		'seljeu'			=> 'SEL / JEU',
+		'seljeu'			=> 'SEL ou JEU',
 		'suppr_sel'			=> 'Supprimer un sel',
+		'supprimer'			=> 'Supprimer',
 		
 		//T
-		'telecharger_nouvel_avatar'	=> 'Télécharger un nouvel avatar',	
+		'telecharger_nouvel_avatar'	=> 'Télécharger un nouvel avatar',
+		'themes_selectionnes'		=> 'Si les thèmes ci-dessous vous conviennent, cliquez silmplement sur Enregistrer. Sinon, cochez ci-dessous vos propres thèmes en remplacement.',
+		'themes_trouves_annonce'	=> 'Thèmes trouvés',
+		
 		
 		//U
 		'utilisateurs'			=>'Utilisateurs',
@@ -280,7 +320,7 @@
 		à l\'aide du premier champ date de début, et s\'il s\'agit de la programmation d\'un échange collectif (un stage par exemple), ajoutez-lui une date de fin de façon à ce que l\'annonce soit considéré comme étant "à dates fixes".',
 		'visites'			=> 'Visites depuis le lancement du catalogue',
 		'voir_fiche'		=> 'Voir la fiche',
-		'vous_etes_correspondant'=>'Vous êtes correspondant-e au titre de votre / vos SEL(s), cliquez ici :',
-		'vous_organisez_echange_collectif'	=> 'Vous organisez un échange collectif (stage, ballade...), cliquez ici',
+		'vous_etes_correspondant'=>'Vous êtes correspondant-e au titre de votre ou vos SEL(s), cliquez ici :',
+		'vous_organisez_echange_collectif'	=> 'Vous organisez un échange collectif (stage, ballade...), cliquez ici',		
      );
 ?>

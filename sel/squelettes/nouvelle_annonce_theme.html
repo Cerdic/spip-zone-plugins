@@ -1,3 +1,152 @@
-Dans cette page,
-- ajout du logo.
-- détection automatique de categorie
+<BOUCLE_lonlat(AUTEURS) {id_auteur = #SESSION{id_auteur}} {tout}>
+		#SET{lon,#LON}
+		#SET{lat,#LAT}
+</BOUCLE_lonlat>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ ]
+<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title><:sel:poster_annonce:> - [(#NOM_SITE_SPIP|textebrut)][ - (#SLOGAN_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+[(#CHEMIN{inclure/head.html}|oui) <INCLURE{fond=inclure/head} />]
+[(#CHEMIN{inclure/head.html}|non) <INCLURE{fond=inc-head}>]
+
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?sensor=true">
+</script>
+<script type="text/javascript">
+
+function initialise() {
+	
+    var mesOptions = {
+        center: new google.maps.LatLng(#GET{lat,48.85}, #GET{lon,2.35}), // Paris
+        zoom: 20,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,	  
+	};
+
+    var zemap1 = new google.maps.Map(document.getElementById("carte1"),
+        mesOptions);
+		
+	var georssLayer = new google.maps.KmlLayer('http://api.flickr.com/services/feeds/geo/?tags=paris&lang=fr-fr&format=feed-georss');
+	georssLayer.setMap(zemap1);
+
+	var georssLayer = new google.maps.KmlLayer('http://api.flickr.com/services/feeds/geo/?tags=ivry-sur-seine&lang=fr-fr&format=feed-georss');
+	georssLayer.setMap(zemap1);
+
+	var georssLayer = new google.maps.KmlLayer('http://api.flickr.com/services/feeds/geo/?tags=brest&lang=fr-fr&format=feed-georss');
+	georssLayer.setMap(zemap1);
+
+};
+
+	
+</script>
+</head>
+
+<body class="pas_surlignable page_nouvelle_annonce" onload="initialise();">
+
+<div class="page">
+[(#CHEMIN{inclure/header.html}|oui) <INCLURE{fond=inclure/header} />]
+[(#CHEMIN{inclure/header.html}|non) <INCLURE{fond=inc-entete}>]
+
+
+	<div class="main">
+	<div class="wrapper hfeed">
+	<div class="ariane rouge"><a href="#URL_SITE_SPIP"><:sel:accueil:></a> > <:sel:poster_annonce:> 2/2</div>
+	
+	<div class="more">
+	<INCLURE{fond=inclure/plus}>
+		
+	</div><!-- .more -->
+	<div class="content" id="content">
+
+	<h1><:sel:poster_annonce:></h1>
+		<div class="bloc">
+<p>
+<:sel:nouvelle_annonce_theme:>
+</p>
+		</div>		
+<h2><:sel:recap_annonce:></h2>
+
+<div class="bloc recap">
+<BOUCLE_recap(ANNONCES) {id_annonce}>
+<h3>#TITRE</h3>
+<em>#DIRECTION_ECHANGE #NATURE</em>
+<p><strong><:sel:description:></strong> : #DESCRIPTION</p>
+<p><strong><:sel:validite_annonce:></strong>
+[(#DATE_FIN|=={'0000-00-00 00:00:00'}|non) <:sel:du:> [(#DATE_DEBUT|affdate{d/m/Y})] <:sel:au:> [(#DATE_FIN|affdate{d/m/Y})]]<br />
+[(#DATE_FIN|=={'0000-00-00 00:00:00'}|oui) <:sel:a_partir_du:> [(#DATE_DEBUT|affdate{d/m/Y})]]
+</p>
+<br />
+<p><strong><:sel:adresse_annonce:></strong> :<br />
+#ADRESSE1 #ADRESSE2<br />
+#CODE_POSTAL #VILLE #PAYS
+</p>
+<br />
+[(#NOMBRE_PERSONNES|>={1}|oui)
+<p><strong><:sel:echange_collectif:></strong> :<br />
+<:sel:entree_nombre_personnes_annonce:> : #NOMBRE_PERSONNES<br />
+<strong><:sel:entree_transport_annonce:></strong><br />
+#TRANSPORT<br />
+<strong><:sel:entree_repas_annonce:></strong><br />
+#REPAS<br />
+<strong><:sel:entree_hebergement_annonce:></strong><br />
+#HEBERGEMENT
+</p>
+
+<p>
+<strong><:sel:entree_nom_referent_annonce:></strong> : #NOM_REFERENT<br />
+<strong><:sel:contact:></strong> : #TEL1_REFERENT [/ (#TEL2_REFERENT)] [/ (#EMAIL_REFERENT)]
+</p>
+<br />
+]
+
+<p><strong><:sel:frais_annonce:></strong> :<br />
+<strong><:sel:entree_total_unite_annonce:></strong> : #TOTAL_UNITE [(#SI_UNITE_HEURE|oui) <:sel:entree_si_unite_heure_annonce:>]<br />
+<strong><:sel:entree_total_fiduc_annonce:></strong> #TOTAL_FIDUC #CONFIG{monnaie_fiduc}<br />
+[(#TOTAL_FIDUC|>{0}|oui)
+<strong><:sel:entree_justification_fiduc_annonce:></strong> : #JUSTIFICATION_FIDUC<br />
+]
+<strong><:sel:commentaires:></strong> : #COMMENTAIRES
+</p>
+
+</BOUCLE_recap>
+</div>
+<br />
+
+<h2><:sel:themes_trouves_annonce:> :</h2>
+<div class="entete_encart blanc">
+#SET{tab_idth,#ARRAY}
+<BOUCLE_liste_themes(THEMES)>
+<BOUCLE_rechmots(ANNONCES) {id_annonce} {CONCAT(titre, description) LIKE %#NOM%}>
+#NOM -
+[(#SET{tab_idth, #GET{tab_idth}|array_merge{#ARRAY{t#ID_THEME,1}}})]
+</BOUCLE_rechmots>
+</BOUCLE_liste_themes>
+</div>
+
+
+#FORMULAIRE_CHOISIR_THEME_ANNONCE{#ENV{id_annonce},#GET{tab_idth},#SELF}
+
+
+    </div>	<!-- .content -->	
+	
+	</div><!--.wrapper-->
+	
+	<div class="aside">
+	<INCLURE{fond=inclure/cote}>	
+	</div><!--.aside-->
+	</div><!--.main-->
+	<img src="#CHEMIN{img/frise_950.png}" />		
+	[(#CHEMIN{inclure/footer.html}|oui) <INCLURE{fond=inclure/footer, skel=#SQUELETTE} />]
+	[(#CHEMIN{inclure/footer.html}|non) <INCLURE{fond=inc-pied}{skel=#SQUELETTE}>]
+
+</div><!--.page-->
+
+</body>
+</html>

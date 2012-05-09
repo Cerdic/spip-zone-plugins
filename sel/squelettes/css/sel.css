@@ -317,11 +317,26 @@ ul li fieldset {
 
 .page .formulaire_editer_annonce .blocdate {
 	float:left;
-	width:48%;
+	width:49.5%;
 	margin-top: 0.5em;
 }
 
+.page .formulaire_choisir_theme_annonce li {
+	padding-left: 1em;
+	margin: 0;
 
+}
+
+.page .formulaire_choisir_theme_annonce {
+	border-left: solid 1px #7a2628;
+	border-bottom: solid 1px #7a2628;
+	border-right: solid 1px #7a2628;
+}
+
+
+.page_nouvelle_annonce .recap {
+	font-size: .8em;
+}
 
 /* pagination */
 .pagination   .prev a, .pagination  .pages a, .pagination  .next a  {
@@ -436,7 +451,7 @@ ul li fieldset {
 
 }
 
-.corps_encart ul li{
+.corps_encart ul li {
 	font-size: .8em;
 	border-bottom: dotted 1px gray;
 }
@@ -453,7 +468,7 @@ ul li fieldset {
 	margin: 0.3em 0;
     padding: 0.3em 0;
     height: 1em;
-	font-size: 4em;
+	font-size: 3em;
 	line-height: 0.9em;
 	color: #441f27;
     text-align: center;

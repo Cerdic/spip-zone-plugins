@@ -51,18 +51,31 @@ jQuery(function($){
 
 $(document).ready(function() {
     $(".datepicker").datepicker({ disabled: false });
+
+	$("#echadr > a" ).toggle(function(e) {
+		e.preventDefault(); // Empêche le navigateur de suivre le lien.
+		$('#fleche1').remove();
+		$('<img id="fleche1" src="#CHEMIN{img/deplierbas.gif}" />').prependTo('#echadr');
+		$('#facultatif1').show(500);	
+	},function(e) {
+		e.preventDefault();
+		$('#fleche1').remove();
+		$('<img id="fleche1" src="#CHEMIN{img/deplierhaut.gif}" />').prependTo('#echadr');
+		$('#facultatif1').hide(500);
+	});
+
 	
 	$("#echcoll > a" ).toggle(function(e) {
 		e.preventDefault(); // Empêche le navigateur de suivre le lien.
-		$('#fleche').remove();
-		$('<img id="fleche" src="#CHEMIN{img/deplierbas.gif}" />').prependTo('#echcoll');
-		$('#facultatif').show(500);	
+		$('#fleche2').remove();
+		$('<img id="fleche2" src="#CHEMIN{img/deplierbas.gif}" />').prependTo('#echcoll');
+		$('#facultatif2').show(500);	
 	},function(e) {
 		e.preventDefault();
-		$('#fleche').remove();
-		$('<img id="fleche" src="#CHEMIN{img/deplierhaut.gif}" />').prependTo('#echcoll');
-		$('#facultatif').hide(500);
-});
+		$('#fleche2').remove();
+		$('<img id="fleche2" src="#CHEMIN{img/deplierhaut.gif}" />').prependTo('#echcoll');
+		$('#facultatif2').hide(500);
+	});
 	
 	
 });
@@ -109,7 +122,7 @@ function initialise() {
 
 	<div class="main">
 	<div class="wrapper hfeed">
-	<div class="ariane rouge"><a href="#URL_SITE_SPIP"><:sel:accueil:></a> > <:sel:poster_annonce:></div>
+	<div class="ariane rouge"><a href="#URL_SITE_SPIP"><:sel:accueil:></a> > <:sel:poster_annonce:> 1/2</div>
 	
 	<div class="more">
 	<INCLURE{fond=inclure/plus}>
@@ -121,6 +134,7 @@ function initialise() {
 		<div class="bloc">
 		<:sel:poster_annonce_explications:>
 		</div>
+
 		#FORMULAIRE_EDITER_ANNONCE{#ENV{id_annonce,oui},#SESSION{id_auteur}}
     </div>	<!-- .content -->	
 	

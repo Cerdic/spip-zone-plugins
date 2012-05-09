@@ -4,6 +4,12 @@
 </h3>
 		<div class="corps_encart">
 			<ul>
+			<BOUCLE_annonces(ANNONCES) {id_auteur = #SESSION{id_auteur} ?} {statut = 1annonce_ok} {0,6}>
+			<li><strong>#DIRECTION_ECHANGE</strong> : #TITRE<br />
+			#VILLE
+			[(#SESSION{id_auteur}|oui)<br /><a href="[(#URL_PAGE{modifier_annonce}|parametre_url{id_annonce,#ID_ANNONCE})]" class="rouge">&#91;<:sel:modifier:>&#93;</a><a href="" class="rouge">&#91;<:sel:supprimer:>&#93;</a>]
+			</li>
+			</BOUCLE_annonces>
 			<li>
 			<strong>Offre</strong> : triporteur<br />
 			Tours

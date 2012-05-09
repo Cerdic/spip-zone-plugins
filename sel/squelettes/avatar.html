@@ -113,6 +113,11 @@
 		<p><:sel:connectez_vous:></p>
 		]
 		[(#SESSION{id_auteur}|oui)
+		
+			<h3 class="focus">
+			<small><a href="#URL_PAGE{nouvelle_annonce}">&nbsp;<:sel:poster_annonce:>&nbsp;</a></small>
+			</h3>
+		
 			<div class="bloc">
 			<h3><:sel:bienvenue:> #SESSION{nom}, <:sel:que_voulez_vous_faire|strtolower:></h3>
 			<ul>
@@ -122,7 +127,7 @@
 			<li><img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<:sel:saisir_echange:> (en développement)</li>
 			<li><img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<:sel:modifier_donnees:> (en développement)</li>
 			</ul>
-			</div>	
+			</div>
 		]
 		
 		<p>&nbsp;</p>		

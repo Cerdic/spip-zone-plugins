@@ -27,7 +27,7 @@
 		
 		//I
 		'info_coordonnees' => "Coordonnées",
-		'info_admin_statuer_webmestre' => "Donner à cet administrateur les droits de webmestre, co-Admnistrateur global du catalogue",
+		'info_admin_statuer_webmestre' => "Donner à cet administrateur les droits de webmestre, co-admnistrateur global du catalogue",
 
 		//M
 		'membre_auteur_sel' => "Membre du / des SEL(s) suivant(s) :",

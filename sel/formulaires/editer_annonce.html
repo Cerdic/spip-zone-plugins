@@ -1,13 +1,16 @@
+[(#REM) A l'ouverture de ce form en modif, on déterminera s'il faut replier ou non le pavé adresse, en comparant l'adresse qui figure sur l'annonce et celle sur la fiche auteur.
+Si c'est la même, pas la peine de montrer, on replie.
+]
 <div class="formulaire_spip formulaire_editer formulaire_editer_annonce formulaire_editer_annonce-#ENV{id_annonce,nouveau}">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur}) <:info_recommencer:></p>]
-
+	
 	<form method='post' action='#ENV{action}'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_auteur' value='#SESSION{id_auteur}' />
-		<input type='text' name='statut' value='#ENV{statut}' />
+		<input type='hidden' name='statut' value='#ENV{statut}' />
 		<input type='hidden' name='redirect' value='(#ENV**{redirect})' />
 
 		<fieldset class="impair">
@@ -15,19 +18,19 @@
 		<ul>
 			<li class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 				[<label for="titre">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:sel:entree_titre_annonce:>,<:sel:entree_titre_annonce2:>}) <:sel:entree_obligatoire:></label><br />]
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span><br />]
 				<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre})]" />
 		    </li>
 			<li class="editer editer_direction_echange [ (#ENV**{erreurs}|table_valeur{direction_echange}|oui)erreur]">
-				<strong><label for="direction_echange"><:sel:entree_direction_echange_annonce:> <:sel:entree_obligatoire:></label></strong><br />
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{direction_echange})</span>]
+				<label for="direction_echange"><strong><:sel:entree_direction_echange_annonce:> <:sel:entree_obligatoire:></strong></label><br />
+				[<span class='erreur_message'><strong>(#ENV**{erreurs}|table_valeur{direction_echange})</strong></span><br />]
 				<input type='radio' class='text' name='direction_echange' id='direction_echange1' value="offre" [(#ENV{direction_echange}|=={offre}|oui) checked="cheched"] /><:sel:entree_offre:><br />
 				<input type='radio' class='text' name='direction_echange' id='direction_echange2' value="demande" [(#ENV{direction_echange}|=={demande}|oui) checked="cheched"] /><:sel:entree_demande:><br />
 				<input type='radio' class='text' name='direction_echange' id='direction_echange3' value="partage" [(#ENV{direction_echange}|=={partage}|oui) checked="cheched"] /><:sel:entree_partage:>
 			</li>
 			<li class="editer editer_nature [ (#ENV**{erreurs}|table_valeur{nature}|oui)erreur]">
-				<strong><label for="nature"><:sel:entree_nature_annonce:> <:sel:entree_obligatoire:></label></strong><br />
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nature})</span>]
+				<label for="nature"><strong><:sel:entree_nature_annonce:> <:sel:entree_obligatoire:></strong></label><br />
+				[<span class='erreur_message'><strong>(#ENV**{erreurs}|table_valeur{nature})</strong></span><br />]
 				<input type='radio' class='text' name='nature' id='nature1' value="objet" [(#ENV{nature}|=={objet}|oui) checked="cheched"] /><:sel:entree_objet:><br />
 				<input type='radio' class='text' name='nature' id='nature2' value="service" [(#ENV{nature}|=={service}|oui) checked="cheched"] /><:sel:entree_service:><br />
 				<input type='radio' class='text' name='nature' id='nature3' value="savoir" [(#ENV{nature}|=={savoir}|oui) checked="cheched"] /><:sel:entree_savoir:>
@@ -48,25 +51,26 @@
 
 		<div>
 			<div class="blocdate">
-					<label for="date_debut"><strong><:sel:entree_date_debut_annonce:></strong></label><br />
-					[<span>(#ENV**{erreurs}|table_valeur{date_debut})</span><br />]				
+					<label for="date_debut"><strong><:sel:entree_date_debut_annonce:> <:sel:entree_obligatoire:></strong></label><br />
+					[<span><strong>(#ENV**{erreurs}|table_valeur{date_debut})</strong></span><br />]				
 					<input class="datepicker" name="date_debut" id="" size="20" style="width:12em;" type="text" value='#ENV{date_debut}' />
 			</div>
 			<div class="blocdate">
-					<label for="date_fin"><strong><:sel:entree_date_fin_annonce:></strong></label><br />
-					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span><br />]
-					<input class="datepicker" name="date_fin" size="20" style="width:12em;" type="text" value='#ENV{date_fin}' />
+					&nbsp;<label for="date_fin"><:sel:entree_date_fin_annonce:></label><br />
+					[&nbsp;<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span><br />]
+					&nbsp;<input class="datepicker" name="date_fin" size="20" style="width:12em;" type="text" value='#ENV{date_fin}' />
 			</div>		
 		</div>		
 		
 		</fieldset>
-		<fieldset class="impair">
+		<fieldset class="impair" id="echadr">
 		<legend><:sel:adresse_annonce:></legend>	
-		[<p>(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:sel:adresse_annonce_explications:>,<:sel:adresse_annonce_explications2:>})</p>]
+		<a href=""><img id="fleche1" [(#ENV{adresse1}|non) src="#CHEMIN{img/deplierhaut.gif}"] [(#ENV{adresse1}|oui) src="#CHEMIN{img/deplierbas.gif}"]  />[(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:sel:adresse_annonce_explications:>,<:sel:adresse_annonce_explications2:>})]</a></li>		
+		<div id="facultatif1" [(#ENV{adresse1}|non) style="display:none;"] [(#ENV{adresse1}|oui) style="display:inline;"]>
 		<ul>
 		    <li class="editer editer_adresse1[ (#ENV**{erreurs}|table_valeur{adresse1}|oui)erreur]">
-				<label for="adresse1"><:sel:entree_adresse1_annonce:></label><br />
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse1})</span>]
+				<label for="adresse1"><strong><:sel:entree_adresse1_annonce:> <:sel:entree_obligatoire:></strong></label><br />
+				[<span class='erreur_message'><strong>(#ENV**{erreurs}|table_valeur{adresse1})</strong></span><br />]
 				<input type='text' class='text' name='adresse1' id='adresse1' value="[(#ENV**{adresse1})]" />
 		    </li>			
 		    <li class="editer editer_adresse2[ (#ENV**{erreurs}|table_valeur{adresse2}|oui)erreur]">
@@ -76,12 +80,12 @@
 		    </li>
 		    <li class="editer editer_code_postal obligatoire[ (#ENV**{erreurs}|table_valeur{code_postal}|oui)erreur]">
 				<label for="code_postal"><:sel:entree_code_postal_2:> <:sel:entree_obligatoire:></label><br />
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{code_postal})</span>]
-				<input type='text' class='text' name='code_postal' id='code_postal' value="[(#ENV**{code_postal})]" />
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{code_postal})</span><br />]
+				<input type='text' class='text' style='width:8em;' name='code_postal' id='code_postal' value="[(#ENV**{code_postal})]" />
 		    </li>			
 		    <li class="editer editer_ville obligatoire[ (#ENV**{erreurs}|table_valeur{ville}|oui)erreur]">
 				<label for="ville"><:sel:entree_ville_2:> <:sel:entree_obligatoire:></label><br />
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ville})</span>]
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ville})</span><br />]
 				<input type='text' class='text' name='ville' id='ville' value="[(#ENV**{ville})]" />
 		    </li>
 			<li class="editer editer_pays[ (#ENV**{erreurs}|table_valeur{pays}|oui)erreur]">
@@ -166,11 +170,12 @@
 			</select>		
 			</li>
 		</ul>
+		</div>
 		</fieldset>
 		<fieldset class="pair" id="echcoll">
 		<legend><:sel:echanges_collectifs_organisation_annonce:></legend>
-		<a href=""><img id="fleche" [(#ENV{nombre_personnes}|non) src="#CHEMIN{img/deplierhaut.gif}"] [(#ENV{nombre_personnes}|oui) src="#CHEMIN{img/deplierbas.gif}"]  /><:sel:vous_organisez_echange_collectif:></a></li>		
-		<div id="facultatif" [(#ENV{nombre_personnes}|non) style="display:none;"] [(#ENV{nombre_personnes}|oui) style="display:inline;"]>
+		<a href=""><img id="fleche2" [(#ENV{nombre_personnes}|non) src="#CHEMIN{img/deplierhaut.gif}"] [(#ENV{nombre_personnes}|oui) src="#CHEMIN{img/deplierbas.gif}"]  /><:sel:vous_organisez_echange_collectif:></a>	
+		<div id="facultatif2" [(#ENV{nombre_personnes}|non) style="display:none;"] [(#ENV{nombre_personnes}|oui) style="display:inline;"]>
 		<p><:sel:echanges_collectifs_organisation_annonce_explications:></p>
 		<ul>
 		    <li class="editer editer_nombre_personnes obligatoire[ (#ENV**{erreurs}|table_valeur{nombre_personnes}|oui)erreur]">
@@ -201,7 +206,7 @@
 		<ul>		
 		    <li class="editer editer_nom_referent obligatoire[ (#ENV**{erreurs}|table_valeur{nom_referent}|oui)erreur]">
 				<label for="nom_referent"><:sel:entree_nom_referent_annonce:> <:sel:entree_obligatoire:></label><br />[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_referent})</span>
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_referent})</span><br />
 				]<input type='text' class='text' name='nom_referent' id='nom_referent' value="[(#ENV**{nom_referent})]" />
 		    </li>
 		    <li class="editer editer_tel1_referent[ (#ENV**{erreurs}|table_valeur{tel1_referent}|oui)erreur]">
@@ -224,27 +229,26 @@
 		<fieldset class="pair">
 		<legend><:sel:frais_annonce:></legend>
 		<p><:sel:frais_annonce_explications:></p>
-		<ul>		
-
+		<ul>
 			<li class="editer editer_total_unite obligatoire[ (#ENV**{erreurs}|table_valeur{total_unite}|oui)erreur]">
-				<label for="total_unite"><:sel:entree_total_unite_annonce_obligatoire:></label><br />[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{total_unite})</span>
-				]<input type='text' class='text' name='total_unite' id='total_unite' value="[(#ENV**{total_unite})]" />
+				<label for="total_unite"><:sel:entree_total_unite_annonce:> <:sel:entree_obligatoire:></label><br />[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{total_unite})</span><br />
+				]<input type='text' class='text' style='width:5em;' name='total_unite' id='total_unite' value="[(#ENV**{total_unite})]" />
 			</li>
 			<li class="editer editer_si_unite_heure[ (#ENV**{erreurs}|table_valeur{si_unite_heure}|oui)erreur]">
 				<label for="si_unite_heure"><:sel:entree_si_unite_heure_annonce:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{si_unite_heure})</span>
-				]<input type='checkbox' class='text' name='si_unite_heure' id='si_unite_heure' value="1" [(#ENV{si_unite_heure}|=={1}|oui) checked="checked"]" />
+				]<input type='checkbox' class='text' name='si_unite_heure' id='si_unite_heure' value="1" [(#ENV{si_unite_heure}|=={1}|oui) checked="checked"] />
 			</li>
 			<li class="editer editer_total_fiduc[ (#ENV**{erreurs}|table_valeur{total_fiduc}|oui)erreur]">
-				<label for="total_fiduc"><:sel:entre_total_fiduc_annonce:></label><br />[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{total_fiduc})</span>
-				]<input type='text' class='text' name='total_fiduc' id='total_fiduc' value="[(#ENV**{total_fiduc})]" />
+				<label for="total_fiduc"><:sel:entree_total_fiduc_annonce:></label><br />[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{total_fiduc})</span><br />
+				]<input type='text' class='text' style='width:5em;' name='total_fiduc' id='total_fiduc' value="[(#ENV**{total_fiduc})]" /> #CONFIG{monnaie_fiduc}
 			</li>
 			
 			<li class="editer editer_justification_fiduc[ (#ENV**{erreurs}|table_valeur{justification_fiduc}|oui)erreur]">
-				<label for="justification_fiduc"><:sel:entre_justification_fiduc_annonce:></label><br />[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{justification_fiduc})</span>
+				<label for="justification_fiduc"><:sel:entree_justification_fiduc_annonce:></label><br />[
+				<span class='erreur_message'><strong>(#ENV**{erreurs}|table_valeur{justification_fiduc})</strong></span><br />
 				]<textarea name='justification_fiduc' id='justification_fiduc' rows='4' cols='40'>[(#ENV**{justification_fiduc})]</textarea>
 			</li>
 			
@@ -258,7 +262,7 @@
 
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
-		<p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+		<p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /><br /></p>
 	</div></form>
 
 </div>

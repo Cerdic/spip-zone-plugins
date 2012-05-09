@@ -170,10 +170,13 @@
 		</div>
 
 		[(#SESSION{id_auteur}|non)
-		<h3 class="focus"><a href="#URL_PAGE{nouvel_utilisateur}">&nbsp;Inscrivez-vous !&nbsp;</a></h3>
+		<h3 class="focus"><a href="#URL_PAGE{nouvel_utilisateur}">&nbsp;<:sel:inscrivez_vous:>&nbsp;</a></h3>
 		]
 
 		[(#SESSION{id_auteur}|oui)
+		<h3 class="focus">
+			<a href="#URL_PAGE{nouvelle_annonce}">&nbsp;<:sel:poster_annonce:>&nbsp;</a>
+		</h3>
 		<div class="bloc">
 		<h3><:sel:que_voulez_vous_faire:></h3>
 		<ul>

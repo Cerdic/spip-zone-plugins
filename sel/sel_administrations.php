@@ -125,6 +125,8 @@ function sel_upgrade($nom_meta_base_version, $version_cible){
 					'description' => 'Acteurs de l\'Econimie Sociale et Solidaire'
 				),
 			));
+			
+			$idauteur1_admin = sql_updateq(spip_auteurs,array('acces' => '4admin_general'),'id_auteur=1');
 		}
 			
 		// if (version_compare($current_version,"0.2","<")) {
