@@ -8,15 +8,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
-	'tipafriend_description' => 'Ce plugin propose un formulaire complet pour envoyer une page d\'un site SPIP ({n\'importe laquelle}) à une liste d\'adresses e-mail.
+	'tipafriend_description' => 'Tento zásuvný modul ponúka kompletný formulár na poslanie ({akejkoľvek}) stránky v SPIPe priateľom, ktorých máte v zozname e-mailových adries.
 
-Il s\'utilise en plaçant la balise {{#TIPAFRIEND}} dans vos squelettes ; le formulaire apparaît en fenêtre popup par défaut, mais peut être intégré en div type {{thickbox}} ({plugin SPIP}) via le panneau de configuration accessible depuis le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubrique575]}} ({optionnel}).
+Používa sa tak, že do svojich šablón umiestnite tag  {{#TIPAFRIEND;}} podľa predvolených nastavení sa formulár zobrazí vo vyskakovacom okne, ale môžete ho dať do divu typu {{thickbox}} ({zásuvného modulu SPIPu}) cez Ovládací panel, na ktorý sa dostanete zo zásuvného modulu {{[CFG: nastavovacieho nástroja->http://www.spip-contrib.net/?rubrique575]}} ({nepovinné}).
 
-Une documentation interne est disponible lorsque le plugin est actif sur la page publique [tipafriend_documentation->../?page=tipafriend_documentation].
+Interná dokumentácia vám bude k dispozícii, ak zásuvný modul aktivujete na verejne prístupnej stránke [tipafriend_documentation->../?page=tipafriend_documentation].
 
-Logo et certaines images du plugin : [->http://pixel-mixer.com/]', # NEW
+Logo a niekoľko obrázkov zásuvného modulu: [->http://pixel-mixer.com/]',
 	'tipafriend_nom' => 'Odporučiť priateľom',
-	'tipafriend_slogan' => 'Pošlite stránku v SPIPe (akúkoľvek) priateľom v zozname e-mailových adries' # MODIF
+	'tipafriend_slogan' => 'Pošlite stránku v SPIPe priateľom v zozname e-mailových adries'
 );
 
 ?>
