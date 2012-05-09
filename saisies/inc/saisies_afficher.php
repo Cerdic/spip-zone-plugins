@@ -363,8 +363,8 @@ function saisies_verifier_afficher_si($saisies, $env=NULL) {
 				if (is_null($env)) set_request($saisie['options']['nom'],NULL);
 			}
 		}
-		if (isset($saisie['saisies'])) // S'il s'agit d'un fieldset ou equivalent, verifier les sous-saisies
-			$saisies[$cle]['saisies'] = saisies_verifier_afficher_si($saisie['saisies'], $env);
+		if (isset($saisies[$cle]['saisies'])) // S'il s'agit d'un fieldset ou equivalent, verifier les sous-saisies
+			$saisies[$cle]['saisies'] = saisies_verifier_afficher_si($saisies[$cle]['saisies'], $env);
 	}
 	return $saisies;
 }
