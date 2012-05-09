@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'btn_haut_page_ttl' => 'Retour en haut de page',
 	'btn_imprimer' => 'Imprimer',
 	'btn_imprimer_ttl' => 'Imprimer cette page',
+	'spipopup' => 'SPIPopup',
 
 	// D
 	'descr_cfg' => 'Documentation du plugin pour plus d\'infos : [spip-contrib.net/?article3573->http://www.spip-contrib.net/?article3573]',

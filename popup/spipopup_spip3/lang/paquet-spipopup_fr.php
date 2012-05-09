@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 - {{options}} : un tableau d\'options JavaScript pour la nouvelle fenêtre ({location, status ...}).
 
 {{Utilisation du modèle dans les articles}}
-<pre>
+<code>
 <popup
 |texte=le texte du lien (necessaire)
 |lien=objet SPIP pour le lien (necessaire)
@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 |height=XX (option)
 |titre=mon titre (option)
 >
-</pre>
+</code>
 Mêmes options que la balise, le texte du lien en plus.
 
 {{Retour de la balise #POPUP }}
