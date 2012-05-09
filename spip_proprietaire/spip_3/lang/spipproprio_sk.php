@@ -95,13 +95,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'import_avertissement' => 'Nemeňte hodnoty, keď si sami nie ste istí: toto vymaže vaše súčasné nastavenie a reťazce jazyka!<br /><br /><b>Veľmi sa odporúča prenechať riadenie tejto stránky webmasterovi hlavnej stránky.</b>',
 	'importer_dump' => '<strong>Nahrať súbor:</strong> ',
 	'infos_createur' => 'Informácie o autorovi',
-	'infos_createur_short' => 'Vytvoril(a)', # MODIF
+	'infos_createur_short' => 'Tvorca',
 	'infos_hebergeur' => 'Informácie o poskytovateľovi hostingu',
-	'infos_hebergeur_short' => 'Poskytovateľ webhostingu', # MODIF
+	'infos_hebergeur_short' => 'Poskytovateľ webhostingu',
 	'infos_idem' => 'Rovnaká štruktúra',
 	'infos_legend' => 'Všeobecné informácie',
 	'infos_proprietaire' => 'Informácie o majiteľovi',
-	'infos_proprietaire_short' => 'Majiteľ', # MODIF
+	'infos_proprietaire_short' => 'Majiteľ',
 
 	// L
 	'la' => 'dňa',
