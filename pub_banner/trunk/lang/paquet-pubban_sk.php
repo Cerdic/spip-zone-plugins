@@ -8,23 +8,23 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
-	'pubban_description' => 'Gestion et statistiques de bannières publicitaires pour intégrées aux squelettes SPIP ...
+	'pubban_description' => 'Ovládanie a štatistiky reklamných pútačov integrovaných v šablónach SPIPu.
 
-{{UTILISATION}}
+{{POUŽITIE}}
 
--* Ce plugin ajoute la balise {{ #PUBBAN{nom de la bannière} }} pour les squelettes, qui est remplacée par une frame englobant la bannière.
--* Une page publique vous permet de présenter les statistiques des encarts et de les exporter au format \'.xls\'.
+-* Tento zásuvný modul pridá do šablón tag {{ #PUBBAN{názov pútača,} }} ktorý nahradí rám umiestnený okolo pútača.
+-* Verejná stránka vám umožňuje zobraziť štatistiky pútačov a exportovať ich do formátu  ".xls".
 
-{{VALEURS PAR DEFAUT}}
+{{PREDVOLENÉ HODNOTY}}
 
--* Des bannières standards sont chargées par défaut à l\'installation ; il s\'agit des quatre types les plus répandus sur le web. Vous pouvez les effacer et en créer de nouvelles.
--* Des exemples d\'encarts ({écureuil SPIP}) sont également chargés, pour démonstration.
+-* Podľa predvolených nastavení sa štandardné pútače nahrávajú pri inštalácii; sú to štyri najbežnejšie typy na internete. Môžete ich mazať a vytvárať nové.
+-* Ukážkové pútače ({veverička SPIP}) sa nahrávajú aj ako demo.
 
-{{AIDE / DOC}}
+{{POMOC/DOKUMENTÁCIA}}
 
--* Une explication ainsi qu\'un exemple complet sont disponibles dans la documentation, qui vous permettra également de visualiser l\'intégration des bannières dans vos squelettes. Cette documentation est disponible, si le plugin est actif sur votre site, sur la page publique "pubban_documentation".
+-* Podrobné vysvetlenie a príklady nájdete v dokumentácii, ktorá vám umožňuje aj zobraziť si ukážku integrácie pútačov do šablón. Táto dokumentácia vám bude k dispozícii, ak si zásuvný modul aktivujete na verejne prístupnej stránke "pubban_documentation".
 
--* La page de statistiques du plugin est une adaptation libre du script \'{{[VRG pub->http://vrgpub.frankdevelopper.com/]}}\' développé par {{Vincent Roseberry}} ({sous licence GPL à l\'époque}).', # NEW
+-* Stránka so štatistikami zásuvného modulu je jednoduchým prispôsobením skriptu "{{[VRG pub->http://vrgpub.frankdevelopper.com/]}}," ktorý naprogramoval {{Vincent Roseberry}} ({toho času pod licenciou GPL.})',
 	'pubban_slogan' => 'Ovládanie reklamných pútačov'
 );
 
