@@ -17,13 +17,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_lien' => 'Odstrániť tento odkaz',
 
 	// C
-	'cfg_descr_gis' => 'Geografický informačný systém.<br />Pozrieť si dokumentáciu.</a>', # MODIF
+	'cfg_descr_gis' => 'Geografický informačný systém.<br /><a href="http://www.spip-contrib.net/3887" class="spip_out">Prejsť na dokumentáciu.</a>',
 	'cfg_inf_adresse' => 'Zobrazí ďalšie polia adresy (krajinu, mesto, štát, adresu a pod.)',
-	'cfg_inf_cloudmade' => 'Táto aplikácia potrebuje kľúč na vytvorenie <a href=\'@url@\'>stránky v Cloude.</a>', # MODIF
+	'cfg_inf_cloudmade' => 'Táto aplikácia potrebuje kľúč na vytvorenie <a href=\'@url@\' class="spip_out">stránky v Cloude.</a>',
 	'cfg_inf_geocoder' => 'Aktivovať funkciu geokódera (vyhľadávanie z jednej adresy, zistenie adresy zo súradníc).',
 	'cfg_inf_geolocaliser_user_html5' => 'Ak to povoľuje prehliadač používateľa, na určenie predvolenej polohy pri vytváraní nového bodu sa ukladá približná geografická poloha používateľa.',
-	'cfg_inf_google' => 'Táto aplikácia potrebuje kľúč, ktorý si treba vytvoriť na <a href=\'@url@\'>stránke GoogleMaps.</a>', # MODIF
-	'cfg_inf_yandex' => 'Táto aplikácia potrebuje kľúč na vytvorenie <a href=\'@url@\'>stránky v Yandexe.</a>', # MODIF
+	'cfg_inf_google' => 'Táto aplikácia potrebuje kľúč, ktorý si treba vytvoriť na <a href=\'@url@\' class="spip_out">stránke GoogleMaps.</a>',
+	'cfg_inf_yandex' => 'Táto aplikácia potrebuje kľúč na vytvorenie <a href=\'@url@\' class="spip_out">stránky v Yandexe.</a>',
 	'cfg_lbl_activer_objets' => 'Aktivovať geolokalizáciu obsahu:',
 	'cfg_lbl_adresse' => 'Zobraziť polia adresy',
 	'cfg_lbl_api' => 'Geolokačná API',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_gis_nouveau' => 'Vytvoriť nový bod',
 	'editer_gis_titre' => 'Geolokalizované body',
 	'erreur_recherche_pas_resultats' => 'Vyhľadávania sa netýka žiaden bod.',
-	'erreur_xmlrpc_lat_lon' => 'La latitude et la longitude doivent être passées en argument', # NEW
+	'erreur_xmlrpc_lat_lon' => 'Zemepisná šírka a dĺžka musia byť odovzdané ako parameter',
 	'explication_api_forcee' => 'Túto aplikáciu používa iný zásuvný modul alebo iná šablóna.',
 	'explication_maptype_force' => 'Základnú mapu si vyžaduje iný zásuvný modul alebo šablóna.',
 
