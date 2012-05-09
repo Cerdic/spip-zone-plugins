@@ -21,20 +21,20 @@ options:
     options:
       nom: 'champ_primary'
       label: 'Nom de la clé primaire de votre table'
-      explication: 'Indiquez le nom du champ contenant les id_auteurs dand la table destinataire des enregistrements'
+      explication: 'Indiquez le nom du champ contenant éventuellement la clé primaire de votre table destinataire, si elle en a une'
   -
     saisie: 'input'
     options:
       nom: 'champ_id_auteur'
       label: 'Champ id_auteur de votre table'
-      explication: 'Indiquez le nom du champ contenant les id_auteurs dand la table destinataire des enregistrements'
+      explication: 'Indiquez le nom du champ contenant éventuellement les id_auteurs dand la table destinataire des enregistrements'
       defaut: 'id_auteur'
   - 
     saisie: 'input'
     options:
       nom: 'champ_statut'
       label: 'Champ statut'
-      explication: 'Indiquez le nom du champ qui contient le statut de chaque enregistrement sil existe. Videz sinon.'
+      explication: 'Indiquez le nom du champ qui contient éventuellement le statut de chaque enregistrement sil existe. Videz sinon.'
       defaut: 'statut'
   -
     saisie: 'radio'
