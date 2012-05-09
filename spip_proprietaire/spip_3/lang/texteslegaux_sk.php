@@ -85,7 +85,7 @@ Internetovú stránku {{[@nom_site@->@url_site@]}} prevádzkuje jej šéfredakto
 ',
 
 	// M
-	'mention_cnil' => 'As such, {{[@nom_site@->@url_site@]}} was the subject of a statement from the {{<abbr title="National French Commission for informatical freedom - Commission Nationale de l\'informatique et des Libertés - www.cnil.fr">CNIL</abbr>}} on @date_cnil@, registered under reference {{@numero_cnil@.}}', # NEW
+	'mention_cnil' => 'Tento nadpisom {{[@nom_site@->@url_site@]}} mal predmet  deklarácie u {{<abbr title="Francúzska štátna komisia pre počítačové slobody - Commission Nationale de l\'informatique et des Libertés - www.cnil.fr">CNIL</abbr>}} dňa @date_cnil@, zaregistrovaná pod číslom {{@numero_cnil@.}}',
 	'mentions_legales_copyright' => '{{{Contents and copyright}}}
 
 Pursuant to [articles L. 111-1 et L. 123-1 of the French Intellectual Property Code|See the text (legifrance.gouv.fr) [fr]->http://www.legifrance.gouv.fr/affichCode.do?cidTexte=LEGITEXT000006069414], the entire contents of this site ({texts, images, videos and any media in general}), unless explicitly stated otherwise, is {{protected by copyright}}. Reproduction, even partial, of the contents of pages on this site without prior agreement of @proprietaire_forme@ [{{@proprietaire_nom@}}->#proprietaire] is strictly prohibited.
