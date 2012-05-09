@@ -1,6 +1,6 @@
 <div class="liste-objets publicites">
 <table class='spip liste'>
-<caption><strong class="caption"><:pubban:trash:></caption>
+<caption><strong class="caption"><:pubban:poubelle_contenu:></caption>
 	<thead>
 		<tr class='first_row'>
 			<th class='type' scope='col'><:pubban:type:></th>
@@ -23,7 +23,7 @@
 			<td class='date secondaire'>[(#DATE_ADD|affdate)]</td>
 			<td class='outils secondaire'>
 				<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_publicite,out_trash-#ID_PUBLICITE,#SELF})]', '<:pubban:confirm_undelete:>');">
-					<img src='#CHEMIN_IMAGE{stock_undelete-16.png}' title='<:pubban:btn_reabiliter:>' alt='<:pubban:btn_reabilite:>' border="0" align="absmiddle" hspace="3" />
+					<img src='#CHEMIN_IMAGE{stock_undelete-16.png}' title='<:pubban:btn_reabiliter:>' alt='<:pubban:btn_reabiliter:>' border="0" align="absmiddle" hspace="3" />
 				</a>
 			</td>
 		</tr>
@@ -34,7 +34,7 @@
 	<BOUCLE_pubbanempl(BANNIERES){pagination #ENV{pagine,20}}{par titre}{inverse #ENV{inverse}}{statut=5poubelle}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='type'>
-				<img src='#CHEMIN_IMAGE{banniere-16.png}' title='<:pubban:empl:>' alt='<:pubban:empl:>' border="0" align="absmiddle" hspace="3" />
+				<img src='#CHEMIN_IMAGE{banniere-16.png}' title='<:pubban:banner:>' alt='<:pubban:banner:>' border="0" align="absmiddle" hspace="3" />
 			</td>
 			<td class='titre principale'>
 				[<a href="[(#ID_BANNIERE|generer_url_entite{banniere})]" title="<:info_numero_abbreviation|attribut_html:> #ID_BANNIERE">(#TITRE)</a>]
@@ -42,7 +42,7 @@
 			<td class='date secondaire'>-</td>
 			<td class='outils secondaire'>
 				<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_banniere,out_trash-#ID_BANNIERE,#SELF})]', '<:pubban:confirm_undelete:>');">
-					<img src='#CHEMIN_IMAGE{stock_undelete-16.png}' title='<:pubban:btn_reabiliter:>' alt='<:pubban:btn_reabilite:>' border="0" align="absmiddle" hspace="3" />
+					<img src='#CHEMIN_IMAGE{stock_undelete-16.png}' title='<:pubban:btn_reabiliter:>' alt='<:pubban:btn_reabiliter:>' border="0" align="absmiddle" hspace="3" />
 				</a>
 			</td>
 		</tr>

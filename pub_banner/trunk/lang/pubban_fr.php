@@ -9,7 +9,9 @@
  */
 
 $GLOBALS['i18n_pubban_fr'] = array(
-	
+	'oui'=>'Oui',
+	'non'=>'Non',
+	'pour'=>'Pour',
 
 // A //
 	'auteur' => 'Auteur',
@@ -144,12 +146,14 @@ Suivie du nom de la banni&egrave;re que vous souhaitez afficher. La balise est r
 	'erreur_img_not_url' => 'L\'adresse web saisie est inaccessible ...',
 	'erreur_nb_aff' => 'Vous n\'avez pas pr&eacute;cis&eacute; de nombre d\'affichage ...',
 	'edit_pub_ok_bannieres_differents' => 'OK - Valeurs enregistr&eacute;es mais les banni&egrave;res s&eacute;lectionn&eacute;es pour la publicit&eacute; ont des tailles diff&eacute;rentes ... Cela pourra g&eacute;n&eacute;rer des erreurs d\'affichage.',
+	'exporter' => 'Exporter',
 	'exporter_donnees' => 'Exporter ces données',
 	'exporter_csv' => 'Exporter les données au format CSV',
 
 // F //
 	'fiche' => 'Fiche',
 	'fin' => 'Fin',
+	'fermer'=>'Fermer',
 
 // G //
 	'gestion_pubban' => 'Gestion de banni&egrave;res publicitaires',
@@ -196,6 +200,7 @@ Suivie du nom de la banni&egrave;re que vous souhaitez afficher. La balise est r
 	'info_titre_banniere_poubelle' => 'À la poubelle',
 	// original
 	'inactif' => 'Inactiv&eacute;',
+	'inactive' => 'Inactiv&eacute;e',
 	'intro_stats' => 'Statistiques',
 	'intro_stats_banner' => 'Lecture des statistiques',
 	'intro_texte_stats_banner' => 'Les chiffres des statistiques permettent d\'estimer l\'efficacit&eacute; des encarts publicitaires : en particulier, <b>le ratio global</b> indique le nombre de clic par rapport au nombre d\'affichage des encarts.<br /><br />Il est int&eacute;ressant de comparer les ratios des banni&egrave;res en fonction de leur positionnement notamment.<br /><br /><em>(cf. LICENSES en bas de page)</em><br />',
@@ -263,6 +268,7 @@ Les nombreuses &eacute;tudes statistiques montrent que les banni&egrave;res publ
 {{Le forfait}} est &eacute;galement utilis&eacute; pour les campagnes hors normes : incrustation dans les pages, objet publicitaire intrusif, campagne active ...
 ",
 	'installation' => 'Installation',
+	'imprimer' => 'Imprimer',
 
 	// Skels doc
 	'info_doc' => 'Si vous rencontrez des problèmes pour afficher cette page, [cliquez-ici->@link@].',
@@ -280,6 +286,7 @@ Les nombreuses &eacute;tudes statistiques montrent que les banni&egrave;res publ
 	'liste_pub' => 'Liste des publiclit&eacute;s',
 	'leaderboard_banner' => 'Banni&egrave;re "Leaderboard"',
 	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] distribué sous licence [Creative Commons BY-SA|Creative Commons - Paternite - Distribution a l\'Identique->http://creativecommons.org/licenses/by-sa/3.0/].',
+	'lien_page' => 'Voir la page',
 
 // M //
 	'manque_date_fin' => 'Veuillez pr&eacute;ciser une date de fin',
@@ -330,6 +337,7 @@ Les nombreuses &eacute;tudes statistiques montrent que les banni&egrave;res publ
 	'pubban' => 'Pub Banner',
 	'pubban_titre' => 'Banni&#232;res publicitaires',
 	'poubelle' => '&Agrave; la poubelle',
+	'poubelle_contenu' => 'Contenu de la poubelle',
 	'pub' => 'publicit&eacute;(s)',
 	'page_stats' => 'Page de statistiques',
 	'prerequis' => 'Pr&eacute;-requis',
@@ -363,6 +371,7 @@ Les nombreuses &eacute;tudes statistiques montrent que les banni&egrave;res publ
 	'statut' => 'Statut',
 	'statut_actuel' => 'Statut actuel',
 	'select_articles_choose' => '&gt; liste de vos articles',
+	'statistiques' => 'Statistiques',
 	'stats_pubban' => 'Statistiques des publicit&eacute;s',
 	'statistiques_pubban' => 'Statistiques des banni&egrave;res publicitaires',
 	'stats' => 'Donn&eacute;es statistiques',
