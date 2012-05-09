@@ -33,8 +33,6 @@ En dernier lieu, de nombreux sites web disposent d’un ou plusieurs espaces ré
 	// C
 	'cfg_comment_email' => 'Utilisez les champs ci-dessous pour choisir les adresses email d\'envoi et réception des rapports d\'erreurs ({ces rapports sont envoyés lorsque l\'internaute clique sur le bouton concerné - par défaut, le mail du webmestre est utilisé}).',
 	'cfg_descr' => 'Vous pouvez ici définir certaines options du plugin "Gestion des Erreurs HTTP".',
-	'cfg_label_titre' => 'Configuration du gestionnaire d\'erreurs HTTP 400',
-	'cfg_label_sender_email' => 'Adresse courriel d\'envoi des rapports d\'erreur',
 	'cfg_label_receipt_email' => 'Adresse courriel destinataire des rapports d\'erreur',
 	'cfg_label_sender_email' => 'Adresse courriel d\'envoi des rapports d\'erreur',
 	'cfg_label_titre' => 'Configuration du gestionnaire d\'erreurs HTTP 400',
