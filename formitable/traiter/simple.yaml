@@ -44,7 +44,7 @@ options:
       datas:
         posteriori: '<:bouton_radio_modere_posteriori:>'
         priori: '<:bouton_radio_modere_priori:>'
-        defaut: 'posteriori'
+      defaut: 'posteriori'
   -
     saisie: 'oui_non'
     options:
