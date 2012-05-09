@@ -12,7 +12,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'btn_haut_page_ttl' => 'Retour en haut de page',
 	'btn_imprimer' => 'Imprimer',
 	'btn_imprimer_ttl' => 'Imprimer cette page',
-	'spipopup' => 'SPIPopup',
 
 	// D
 	'descr_cfg' => 'Documentation du plugin pour plus d\'infos : [spip-contrib.net/?article3573->http://www.spip-contrib.net/?article3573]',
@@ -40,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'skel_defaut' => 'Squelette par défaut utilisé pour afficher le contenu de la fenêtre',
 	'skel_defaut_comment' => 'Il s\'agit initialement du squelette "popup_defaut.html" présent à la racine du plugin.',
+	'spipopup' => 'SPIPopup',
 
 	// T
 	'titre_descr_cfg' => 'Configuration de l\'outil "Popup"',

@@ -41,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'skel_defaut' => 'Predvolená šablóna, ktorá sa použije na zobrazenie obsahu okna',
 	'skel_defaut_comment' => 'Toto je začiatok šablóny "popup_defaut.html", ktorá sa nachádza v koreňovom adresári zásuvného modulu.',
+	'spipopup' => 'SPIPopup', # NEW
 
 	// T
 	'titre_descr_cfg' => 'Nastavenia nástroja "Vyskakovacie okno"',
