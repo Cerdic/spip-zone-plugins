@@ -9,14 +9,14 @@ function saisies_fieldset_pliable(){
 		.each(function(){
 			var li = $(this);
 			var ul = $(this).find('> fieldset > ul');
-			var h3 = $(this).find('> fieldset > h3');
+			var legend = $(this).find('> fieldset > .legend');
 			
 			// S'il est déjà plié on cache le contenu
 			if (li.is('.plie'))
 				ul.hide();
 			
 			// Ensuite on ajoute une action sur le titre
-			h3
+			legend
 				.unbind('click')
 				.click(
 					function(){
