@@ -12,15 +12,15 @@ function glossaire_core($chemin, $ligne=0) {
 	// vers core_plugins lorsque le chemin indique un fichier qui y pointe.
 	static $aiguillages = array(
 		'dev' => array(
-			'plugins-dist/' => '',
-			'squelettes-dist/' => 'dist/',
+			'plugins-dist' => '',
+			'squelettes-dist' => 'dist',
 		),
 		'3.0' => array(
-			'plugins-dist/' => '',
-			'squelettes-dist/' => 'dist/',
+			'plugins-dist' => '',
+			'squelettes-dist' => 'dist',
 		),
 		'2.1' => array(
-			'extensions/' => '',
+			'extensions' => '',
 		),
 	);
 	if (isset($aiguillages[CODES_SPIP_BRANCHE])) {
