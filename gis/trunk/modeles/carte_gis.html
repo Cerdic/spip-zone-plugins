@@ -72,7 +72,7 @@
 
 <div id="map[(#GET{id})]" class="carte_gis"[(#ENV{style}|!={'non'}|?{' '})style="[width:(#GET{width});][ height:(#GET{height});]"]></div>
 
-<script type="text/javascript">//<![CDATA[
+<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 [(#CONFIG{gis/api}|=={cloudmade}|oui)
 var cloudmade_key = '#CONFIG{gis/api_key_cloudmade}';]
 
@@ -199,5 +199,5 @@ var map[(#GET{id})];
 	});
 
 })(jQuery);
-// ]]>
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/
 </script>
