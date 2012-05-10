@@ -8,18 +8,33 @@ if (!defined('CODES_SPIP_BRANCHE')) {
 
 
 function glossaire_core($chemin, $ligne=0) {
-	// gestion des cas 'plugins-dist/...' et 'squelettes-dist/...'
-	foreach (array(
-		'plugins-dist/' => '',
-		'squelettes-dist/' => 'dist/',
-	) AS $repertoire => $remplacer) {
-		if (substr($chemin, 0, $len = strlen($repertoire)) == $repertoire) {
-			return glossaire_spip_url('core_plugins', $remplacer . substr($chemin, $len), $ligne);
+	// gestion des aiguillages automatiques
+	// vers core_plugins lorsque le chemin indique un fichier qui y pointe.
+	static $aiguillages = array(
+		'dev' => array(
+			'plugins-dist/' => '',
+			'squelettes-dist/' => 'dist/',
+		),
+		'3.0' => array(
+			'plugins-dist/' => '',
+			'squelettes-dist/' => 'dist/',
+		),
+		'2.1' => array(
+			'extensions/' => '',
+		),
+	);
+	if (isset($aiguillages[CODES_SPIP_BRANCHE])) {
+		foreach ( $aiguillages[CODES_SPIP_BRANCHE] AS $repertoire => $remplacer ) {
+			if (substr($chemin, 0, $len = strlen($repertoire)) == $repertoire) {
+				return glossaire_spip_url('core_plugins', $remplacer . substr($chemin, $len), $ligne);
+			}
 		}
 	}
+
 	// sinon c'est la...
 	return glossaire_spip_url('core', $chemin, $ligne);
 }
+
 
 function glossaire_core_plugins($chemin, $ligne=0) {
 	return glossaire_spip_url('core_plugins', $chemin, $ligne);
