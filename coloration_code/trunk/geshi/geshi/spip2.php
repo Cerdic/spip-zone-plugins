@@ -232,7 +232,8 @@ function spip2_geshi_regexp_balise_callback($matches, $geshi) {
 
 
 /**
- * Echapper les echappements \[ \] ... 
+ * Echapper les echappements \[ \] ...
+ * Attention a < et > qui arrivent avec &lt; et &gt;
  *
 **/
 function spip2_geshi_regexp_echappements_echapper_callback($matches, $geshi) {
@@ -240,8 +241,8 @@ function spip2_geshi_regexp_echappements_echapper_callback($matches, $geshi) {
 
 	// rendre inertes les echappements de #[](){}<>
 	$inerte = '-INERTE';
-	$squelette = preg_replace_callback(',\\\\([#[()\]{}<>]),',
-		create_function('$a', "return '$inerte-'.ord(\$a[1]).'-';"), $squelette, -1, $esc);
+	$squelette = preg_replace_callback(',\\\\([#[()\]{}<>]|&gt;|&lt;),',
+		create_function('$a', "return '$inerte-'.ord(html_entity_decode(\$a[1])).'-';"), $squelette, -1, $esc);
 
 	return $squelette;
 }
@@ -250,6 +251,7 @@ function spip2_geshi_regexp_echappements_echapper_callback($matches, $geshi) {
  * Remettre les echappements \[ \] ...
  * 
  * Remettre les [ ( ) ] echappes des balises
+ * Attention a < et > qui doivent repartir avec &lt; et &gt;
  *
 **/
 function spip2_geshi_regexp_echappements_remettre_callback($matches, $geshi) {
@@ -260,7 +262,7 @@ function spip2_geshi_regexp_echappements_remettre_callback($matches, $geshi) {
 	// echappements avec \
 	$contenu = preg_replace_callback(",$inerte-(\d+)-,",
 		#create_function('$a', 'return "\\\\" . chr($a[1]);'), $contenu);
-		create_function('$a', 'return "<|!REG3XP'.$key.'!>\\\\" . chr($a[1]) . "|>";'), $contenu);
+		create_function('$a', 'return "<|!REG3XP'.$key.'!>\\\\" . htmlspecialchars(chr($a[1])) . "|>";'), $contenu);
 
 	// echappements de balise faits par une regexp de ce colorieur (regexp 4 à 7).
 	$contenu = preg_replace_callback(",$inerte=(\d+)=,",
@@ -564,8 +566,9 @@ $language_data = array (
 			GESHI_MODIFIERS => 's',
 			),
 		// permettre de colorer le \ des echappements differement
+		// attention a \&gt; et \&lt; a la place de \> et \< dans geshi
 		102 => array(
-			GESHI_SEARCH => '(<\|!REG3XP101!>)(.)(.\|>)',
+			GESHI_SEARCH => '(<\|!REG3XP101!>)(.)((?:.|&lt;|&gt;)\|>)',
 			GESHI_REPLACE => '\\2',
 			GESHI_MODIFIERS => '',
 			GESHI_BEFORE => '\\1',
