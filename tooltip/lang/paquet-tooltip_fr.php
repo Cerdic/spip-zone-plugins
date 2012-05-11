@@ -5,9 +5,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// M
+	// T
 	'tooltip_description' => 'Infobulles en jQuery et CSS, accessibles au clavier.
-_ D\'après le script jQuery &laquo;&nbsp;Tooltip&nbsp;&raquo;.',
+_ D\'après le script jQuery « Tooltip ».',
 	'tooltip_nom' => 'Tooltips',
 	'tooltip_slogan' => 'Infobulles jQuery'
 );
