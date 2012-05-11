@@ -8,39 +8,38 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'spipopup_description' => 'Gestion d\'une fenêtre popup ({fenêtre externe}) unique sous forme de squelette SPIP et aux dimensions réglables pour différents usages.
+	'spipopup_description' => 'Unikátne ovládanie vyskakovacieho okna ({externého okna}) vo forme šablóny SPIPu a s rozmermi, ktoré sa dajú prispôsobiť podľa použitia.
 
-{{Utilisation de la balise #POPUP }}
+{{Použitie tagu #POPUP }}
 <code>
-#POPUP{objet SPIP,squelette,width,height,titre,options}
+#POPUP{objekt SPIPu,šablóna,šírka,výška,nadpis,vlastnosti}
 </code>
-- {{objet SPIP}} : \'article1\' ou \'id_article=1\' (valable par défaut pour tout objet éditorial de SPIP).
-- {{squelette}} : squelette utilisé pour afficher la fenêtre ({optionnel - par défaut : \'{{popup_defaut.html}}\'}).
-- {{width}} : la largeur de la fenêtre en pixels ({optionnel - {{620px}} par défaut}).
-- {{height}} : la hauteur de la fenêtre en pixels ({optionnel - {{640px}} par défaut}).
-- {{titre}} : le titre ajouté au lien.
-- {{options}} : un tableau d\'options JavaScript pour la nouvelle fenêtre ({location, status ...}).
+- {{objekt SPIPu:}} \'article1\' alebo \'id_article=1\' (predvolená premenná pre každý redakčný objekt SPIPu).
+- {{šablóna:}} šablóna, ktorá sa použije na zobrazenie okna  ({nepovinné – predvolené: \'{{popup_defaut.html}}\'}).
+- {{šírka:}} šírka okna v pixeloch ({nepovinné – predvolené}{{620 px}}).
+- {{výška:}} výška okna v pixeloch ({nepovinné – predvolené} {{640 px}}).
+- {{nadpis:}} nadpis, ktorý bude pripojený k odkazu.
+- {{vlastnosti:}} tabuľka s vlastnosťami JavaScriptu pre nové okno ({poloha, status, a i.}).
 
-{{Utilisation du modèle dans les articles}}
+{{Použitie šablóny v článkoch}}
 <pre>
 <popup
-|texte=le texte du lien (necessaire)
-|lien=objet SPIP pour le lien (necessaire)
-|skel=squelette (option)
-|width=XX (option)
-|height=XX (option)
-|titre=mon titre (option)
+|texte=text odkazu (povinné)
+|lien=objekt SPIPu pre odkaz(povinné)
+|skel=šablóna (nepovinné)
+|width=XX (nepovinné)
+|height=XX (nepovinné)
+|titre=môj nadpis (nepovinné)
 >
 </pre>
-Mêmes options que la balise, le texte du lien en plus.
+Rovnaké vlastnosti ako tag, text odkazu a iné.
 
-{{Retour de la balise #POPUP }}
+{{Výpis z tagu #POPUP }}
 
-La balise retourne un tag de lien (<code>a</code>) avec les attributs suivants:
+Tag vypíše tag odkazu (<code>a</code>) s týmito parametrami:
 - href = " url "
-- onclick = " _popup_set(\'url\', width, height, options); return false; " 
-- title = " titre - nouvelle fenêtre "
-', # NEW
+- onclick = " _popup_set(\'url\', šírka, výška, vlastnosti); return false; " 
+- title = " nadpis – nové okno "',
 	'spipopup_slogan' => 'Ovládanie jedinečnej šablóny SPIPu pre vyskakovacie okno'
 );
 
