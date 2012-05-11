@@ -22,5 +22,10 @@ _ D'apr&egrave;s le script jQuery &laquo;&nbsp;Tooltip&nbsp;&raquo;.</descriptio
 	<nom>insert_head</nom>
 	<inclure>tooltip_pipelines.php</inclure>
 </pipeline>
+<pipeline>
+	<nom>jquery_plugins</nom>
+	<inclure>tooltip_pipelines.php</inclure>
+</pipeline>
+
 <necessite id="SPIP" version="[1.9.1;2.1.99]" />
 </plugin>

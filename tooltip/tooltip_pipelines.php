@@ -8,14 +8,30 @@ function tooltip_insert_head_css($flux) {
 }
 
 function tooltip_insert_head($flux) {
-	$flux .=
-		'<script type="text/javascript" src="'.find_in_path('lib/bgiframe.js').'" ></script>'."\n"
-		.'<script type="text/javascript" src="'.find_in_path('lib/delegate.js').'" ></script>'."\n"
-		.'<script type="text/javascript" src="'.find_in_path('lib/dimensions.js').'" ></script>'."\n"
-		.'<script type="text/javascript" src="'.find_in_path('demo/chili-1.7.pack.js').'" ></script>'."\n"
-		.'<script type="text/javascript" src="'.find_in_path('js/tooltip.js').'" ></script>';
-
+	$config = @unserialize($GLOBALS['meta']['tooltip']);
+	if (!is_array($config))
+		$config = array();
+	if(isset($config['selecteur']) && strlen($config['selecteur']) > 0){
+		$flux .=
+			'<script type="text/javascript">/* <![CDATA[ */
+				var tooltip_init=function(){$("'.$config['selecteur'].'").tooltip();}
+				$(document).ready(function(){
+					tooltip_init();
+				});
+				onAjaxLoad(tooltip_init);
+			/* ]]> */</script>
+			';
+	}
 	return $flux;
 }
 
+function tooltip_jquery_plugins($plugins){
+	$plugins[] = 'lib/bgiframe.js';
+	$plugins[] = 'lib/delegate.js';
+	$plugins[] = 'lib/dimensions.js';
+	$plugins[] = 'demo/chili-1.7.pack.js';
+	$plugins[] = 'js/tooltip.js';
+	
+	return $plugins;
+}
 ?>
