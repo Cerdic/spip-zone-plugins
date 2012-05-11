@@ -11,7 +11,7 @@ function spam_installe_dist() {
 		// des liens en dur ou simili...
 		array('<a href=', '</a>', '[url=', '[/url]', '[link=', '[/link]',),
 		// des regexpr ou ips (sans delimiteurs)
-		array(), array(), array()
+		array(), array(), array(), array()
 	);
 	// repere les mots entiers entre parentheses, les regexpr entre slashes et les caracteres unicodes
 	$spam_mots = defined('_spam_MOTS')?spam_liste_mots(_spam_MOTS):array();
@@ -20,6 +20,8 @@ function spam_installe_dist() {
 			$t[1][] = '\b'.preg_quote($reg[1], '/').'\b';
 		elseif(preg_match(',^\/(&#)?(.*?)(;?)\/$,', $v, $reg))
 			$t[($reg[2] && $reg[3])?2:1][]=$reg[2];
+		elseif(preg_match(',^(\/.*\/)([a-z]+)$,i', $v, $reg))
+			$t[4][] = $reg[1].preg_replace(',[^imsxeAESUXu],','',$reg[2]);
 		else $t[0][] = $v;
 	}
 	$t[1] = count($t[1])?'/'.join('|',$t[1]).'/i':'';

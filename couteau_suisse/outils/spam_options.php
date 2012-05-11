@@ -42,12 +42,16 @@ if ( count($_POST)
 unset($ip_);
 
 function cs_test_spam(&$spam, &$texte, &$test) {
-	foreach($spam[0] as $m) $test |= strpos($texte, $m)!==false;
-	if(!$test && $spam[1]) $test = preg_match($spam[1], $texte);
-	if(!$test && $spam[2]) {
+	foreach($spam[0] as $m) 
+		if($test |= strpos($texte, $m)!==false) return true;
+	if($spam[1]) 
+		if($test = preg_match($spam[1], $texte)) return true;
+	if($spam[2]) {
 		include_spip('inc/charsets');
-		$test = preg_match($spam[2], charset2unicode($texte));
+		if($test = preg_match($spam[2], charset2unicode($texte))) return true;
 	}
+	if($spam[4]) foreach($spam[4] as $m) 
+		if($test = preg_match($m, $texte)) return true;
 	return $test;
 }
 

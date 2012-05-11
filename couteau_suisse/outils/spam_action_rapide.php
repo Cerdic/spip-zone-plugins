@@ -2,14 +2,20 @@
 
 // module inclu dans la description de l'outil en page de configuration
 
-//include_spip('inc/actions');
-include_spip('inc/actions_compat');
+include_spip('inc/actions');
 
 function spam_filtre_de_test($texte) {
 	if (!strlen($texte)) return '';
 	$spam = cs_lire_data_outil('spam');
 	$test = false;
 	return cs_test_spam($spam, $texte, $test)?'ko':'ok';
+}
+
+function spam_filtre_de_test_array($textes) {
+	$spam = cs_lire_data_outil('spam');
+	$test = false;
+	foreach($textes as $texte) cs_test_spam($spam, $texte, $test);
+	return $test?'ko':'ok';
 }
 
 function spam_filtre_de_test_ip($texte, $liste=false) {

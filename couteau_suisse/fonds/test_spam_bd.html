@@ -1,7 +1,7 @@
 #CACHE{0}
 #SET{tab, #ARRAY}
 <BOUCLE_m(FORUMS){statut?=#ENV*{statut}}{plat}{par date}{inverse}>
-	#SET{test, #TEXTE*|concat{" ",#TITRE*," ",#AUTEUR*," ",#EMAIL_AUTEUR*}|spam_filtre_de_test|=={ko}}
+	#SET{test, #ARRAY{0,#TEXTE*,1,#TITRE*,2,#AUTEUR*,3,#EMAIL_AUTEUR*}|spam_filtre_de_test_array|=={ko}}
 	[(#GET{test}|non)#SET{test, #IP|spam_filtre_de_test_ip|=={ko}}]
 	[(#GET{test}|oui)#SET{tab, #GET{tab}|push{#ID_FORUM}}]
 </BOUCLE_m>
