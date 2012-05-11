@@ -5,12 +5,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// L
-	'label_selecteur' => 'Sélecteur',
-	
 	// E
 	'explication_selecteur' => 'Indiquez la cible des éléments qui déclencheront les infobulles. (Expression CSS ou étendue jQuery)',
-	
+
+	// L
+	'label_selecteur' => 'Sélecteur',
+
 	// T
 	'titre_menu_tooltips' => 'Infobulles',
 	'titre_page_configurer_tooltips' => 'Configuration des infobulles'
