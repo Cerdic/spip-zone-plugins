@@ -171,7 +171,7 @@ function traiter_echap_script_dist($regs) {
 	return $regs[0];
 }
 
-define('_PROTEGE_BLOCS', ',<(html|code|cadre|frame|script)(\s[^>]*)?>(.*)</\1>,UimsS');
+define('_PROTEGE_BLOCS', ',<(html|code|cadre|frame|script)\b[^>]*>,UimsS');
 
 // - pour $source voir commentaire infra (echappe_retour)
 // - pour $no_transform voir le filtre post_autobr dans inc/filtres
@@ -182,8 +182,19 @@ $preg='') {
 		return $letexte;
 
 	if (($preg OR strpos($letexte,"<")!==false) 
-	  AND preg_match_all($preg ? $preg : _PROTEGE_BLOCS, $letexte, $matches, PREG_SET_ORDER))
+	AND preg_match_all($preg ? $preg : _PROTEGE_BLOCS, $letexte, $matches, PREG_SET_ORDER))
 		foreach ($matches as $regs) {
+			$init = $regs[0];
+			$tag = $regs[1];
+			$a = stripos($letexte, $tag);
+			$b = stripos($letexte, "</$tag>", $a);
+			if (!$b) next;
+
+			$regs[0] = substr($letexte, $a-1, $b - $a + strlen("</$tag>") + 1);
+
+			$regs[3] = substr($letexte, $a-1 + strlen($init),
+				$b - $a - strlen($init) + 1);
+
 			// echappements tels quels ?
 			if ($no_transform) {
 				$echap = $regs[0];
