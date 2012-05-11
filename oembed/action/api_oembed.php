@@ -55,7 +55,7 @@ function action_api_oembed_dist(){
 	}
 	else {
 		$content_type = ($format=='xml'?"text/xml":"application/json");
-		header("Content-type: $content_type; charest=utf-8");
+		header("Content-type: $content_type; charset=utf-8");
 		echo $res;
 	}
 
