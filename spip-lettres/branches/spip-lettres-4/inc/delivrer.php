@@ -52,7 +52,7 @@ function lettres_envoyer_une_lettre($id_lettre,$id_abonne,$try=1){
 
 	if ($resultat) {
 		// Succes
-		$result = $abonne->enregistrer_envoi($id_lettre, $resultat);
+		$abonne->enregistrer_envoi($id_lettre, $resultat);
 		if ($GLOBALS['meta']['spip_lettres_log_utiliser_email']=='oui') 
 			$dest = $id_abonne."(".sql_getfetsel("email", "spip_abonnes", "id_abonne= ".intval($id_abonne)).")";
 		else $dest = $id_abonne;
@@ -69,11 +69,11 @@ function lettres_envoyer_une_lettre($id_lettre,$id_abonne,$try=1){
 		if (++$try>_LETTRES_MAX_TRY_SEND
 		OR !lettres_programmer_un_envoi($id_lettre,$id_abonne,$abonne->format,$try))
 			// Programmer une nouvelle tentative
-			spip_log("FAIL Envoi lettre $id_lettre -> $id_abonne",'lettres_delivrer_fail');
+			spip_log("ECHEC Envoi de la lettre n° $id_lettre à l'abonné $id_abonne (arrêt des essais)",'lettres_delivrer_fail');
 		else {
 			// Abandon : enregistrer l'echec
-			$result = $abonne->enregistrer_envoi($id_lettre, $resultat);
-			spip_log("RETRY#$try Envoi lettre $id_lettre -> $id_abonne (Erreur $resultat)",'lettres_delivrer_fail');
+			$abonne->enregistrer_envoi($id_lettre, $resultat);
+			spip_log("ESSAI n° $try Envoi de la lettre $id_lettre à l'abonné $id_abonne (Erreur)",'lettres_delivrer_fail');
 		}
 	}
 }
