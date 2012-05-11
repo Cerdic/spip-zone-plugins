@@ -17,13 +17,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_lien' => 'Remove this link',
 
 	// C
-	'cfg_descr_gis' => 'Geographic Information System.<br /><a href="http://www.spip-contrib.net/3887" class="spip_out">Link to the documentation.</a>', # MODIF
+	'cfg_descr_gis' => 'Geographic Information System.<br /><a href="http://www.spip-contrib.net/3887" class="spip_out">Link to the documentation</a>.',
 	'cfg_inf_adresse' => 'Displays additional address fields (country, city, state, address ...)',
-	'cfg_inf_cloudmade' => 'This API needs a key you can create on <a href=\'@url@\'>the CloudMade website</a>.', # MODIF
+	'cfg_inf_cloudmade' => 'This API needs a key you can create on <a href=\'@url@\' class="spip_out">the CloudMade website</a>.',
 	'cfg_inf_geocoder' => 'Enable geocoder functions (search from an address, recovery of the address from the coordinates).',
 	'cfg_inf_geolocaliser_user_html5' => 'If the user\'s browser allows it, its approximate geographic location is retrieved to give the default position when creating a new point.',
-	'cfg_inf_google' => 'This API needs a key you can create on <a href=\'@url@\'>the GoogleMaps website</a>.', # MODIF
-	'cfg_inf_yandex' => 'This API needs a key you can create on <a href=\'@url@\' class=\'spip_out\'>the yandex website</a>.', # MODIF
+	'cfg_inf_google' => 'This API needs a key you can create on <a href=\'@url@\' class="spip_out">the GoogleMaps website</a>.',
+	'cfg_inf_yandex' => 'This API needs a key you can create on <a href=\'@url@\' class="spip_out">the yandex website</a>.',
 	'cfg_lbl_activer_objets' => 'Enable geotagging of content:',
 	'cfg_lbl_adresse' => 'Show address fields',
 	'cfg_lbl_api' => 'Geolocation API',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_gis_nouveau' => 'Create a new point',
 	'editer_gis_titre' => 'The location-based points',
 	'erreur_recherche_pas_resultats' => 'No point corresponds to the searched text.',
-	'erreur_xmlrpc_lat_lon' => 'La latitude et la longitude doivent être passées en argument', # NEW
+	'erreur_xmlrpc_lat_lon' => 'Latitude and longitude should be set as arguments',
 	'explication_api_forcee' => 'The is imposed by another plugin or skeleton.',
 	'explication_maptype_force' => 'The base map is imposed by another plugin or skeleton.',
 
