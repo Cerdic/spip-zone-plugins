@@ -1,5 +1,5 @@
 <ul class="nav">
-	[(#CONFIG{babbi/accueil}|=={avec}|oui) <li>
+	[(#CONFIG{babbi/accueil}|non) <li>
 		<a href="#URL_SITE_SPIP/" title="[(#NOM_SITE_SPIP|textebrut)]"><:accueil_site:></a>
 	</li>]
 	<BOUCLE_lang(RUBRIQUES) {racine} {lang}>	

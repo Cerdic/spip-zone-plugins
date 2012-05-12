@@ -11,19 +11,31 @@
 			[en]Horizontal dropdown menu with jQuery
 		</multi>
 	</slogan>
-	<version>2.2.1</version>
+	
+	<version>3.0</version>
 	<prefix>babbi</prefix>
-	<auteur>[babbibel->http://www.spip-contrib.net/babbibel]</auteur>
+	<auteur>babbibel</auteur>
 	<licence>(c) 2009 GNU/GPL</licence>
-	<icon>img/logo_menu.png</icon>
+	<icon>prive/themes/spip/images/logo_menu-27-24.png</icon>
 	<etat>stable</etat>
 	<description>
 		<multi>
-		[fr]Ce plugin propose un menu d&#233;roulant horizontal s’appuyant sur la librairie jQuery, sans limitation de profondeur et configurable avec CFG. Le code &#233;tant tr&#232;s simple, le menu est facile &#224; personnaliser. Il n&#233;cessite le plugin jQuery pour les versions de SPIP ant&#233;rieures &#224; 1.9.2.
-		[en]This plugin provides a horizontal dropdown menu based on jQuery library, without depth limitation and configurable with CFG. The code is very simple, the menu is easy to customize. It requires the jQuery plugin for versions of SPIP < 1.9.2.
+		[fr]Ce plugin propose un menu d&#233;roulant horizontal s&#233;appuyant sur la librairie jQuery, sans limitation de profondeur et configurable avec CFG. Le code &#233;tant tr&#232;s simple, le menu est facile &#224; personnaliser.
+		[en]This plugin provides a horizontal dropdown menu based on jQuery library, without depth limitation and configurable with CFG. The code is very simple, the menu is easy to customize.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Le-menu-deroulant-Babbibel</lien>
+	<lien>http://www.spip-contrib.net/spip.php?article3055</lien>
+
+	<bouton id='babbi' parent='configuration'>
+        	<icone>prive/themes/spip/images/logo_menu-27-24.png</icone>
+		      <titre>babbi:titre_menu_babbibel</titre>
+		      <url>configurer_babbi</url>  
+  </bouton>
+	<bouton id='babbi2' parent='bando_squelette'>
+           <icone>prive/themes/spip/images/logo_menu-27-24.png</icone>
+           <titre>babbi:titre_menu_babbibel</titre>
+           <url>configurer_babbi</url>
+  </bouton>
 	
 	<fonctions>fonctions_menu.php</fonctions>
 
@@ -40,7 +52,5 @@
 	</pipeline>
 
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
-	<necessite id="cfg" version="[1.14.0;)" />
-	<utilise id="jQuery pour SPIP 1.9.2x" version="1.1.0">
+	<necessite id="SPIP" version="[1.9.2;3.0.99)" />
 </plugin>
