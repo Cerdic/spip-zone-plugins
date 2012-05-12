@@ -1,0 +1,76 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	
+<h3 class="titrem"><:babbi:titre_menu:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+
+<ul>
+	<li>
+	<label for="consigne"><:babbi:label_explication:></label>			
+		<p class="explication"><:babbi:explication:><br />
+			<br /><a href="../spip.php?page=test_menu&var_mode=recalcul"><:babbi:test_norm:></a>
+			<br /><a href="../spip.php?page=test_menu_multi&var_mode=recalcul"><:babbi:test_multi:></a>
+			<br /><a href="http://www.spip-contrib.net/Le-menu-deroulant-Babbibel" class="spip_out"><:babbi:lien_doc:></a>
+		</p>
+	</li>
+
+	<li class="editer_accueil[ (#ENV**{erreurs}|table_valeur{accueil}|oui)erreur]">		
+
+		<label for="accueil"><:babbi:label_accueil:></label>
+		<p class="explication"><:babbi:cocher_accueil:></p>
+		<input type="checkbox" name="accueil" [checked="(#ENV{accueil}|!={''}|?{'checked'})"] class="checkbox" />
+	</li>
+	
+	<li class="editer_type_menu[ (#ENV**{erreurs}|table_valeur{type_menu}|oui)erreur]">
+		<label for="type_menu"><:babbi:label_type:></label>
+		<p class="explication"><:babbi:selection_menu:></p>
+		<select name="type_menu">
+			 <option value="inc_menu"[(#ENV{type_menu}|=={inc_menu}|oui)selected="selected"]><:babbi:secteur_sousrub:></option>
+			 <option value="inc_menu_articles"[(#ENV{type_menu}|=={inc_menu_articles}|oui)selected="selected"]><:babbi:secteur_article:></option>
+			 <option value="inc_menu_laur"[(#ENV{type_menu}|=={inc_menu_laur}|oui)selected="selected"]><:babbi:secteur_duo:></option>
+			 <option value="inc_menu_mot_cle"[(#ENV{type_menu}|=={inc_menu_mot_cle}|oui)selected="selected"]><:babbi:cle_sousrub:></option>
+			 <option value="inc_menu_mot_cle2"[(#ENV{type_menu}|=={inc_menu_mot_cle2}|oui)selected="selected"]><:babbi:cle_article:></option>
+			 <option value="inc_menu_mot_cle3"[(#ENV{type_menu}|=={inc_menu_mot_cle3}|oui)selected="selected"]><:babbi:cle_duo:></option>
+		</select>
+	</li>
+
+	
+	<li class="editer_nb_articles[ (#ENV**{erreurs}|table_valeur{nb_articles}|oui)erreur]">
+		<label for="nb_articles"><:babbi:nb_article:></label>
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nb_articles})</span>]
+		<p class="explication"><:babbi:explication_nbarticles:><br /><br /><:babbi:question_nbarticles:></p>
+		<input type="text" class="text" name="nb_articles" [value="(#CONFIG{babbi/nb_articles}|sinon{''})"] />
+	</li>
+	
+	<li class="editer_tri[ (#ENV**{erreurs}|table_valeur{tri}|oui)erreur]">	
+		<label for="tri"><:babbi:label_classement:></label>
+		<p class="explication">Choisissez le type de classement des articles</p>
+		   <input type="radio" name="tri" value="date"[(#ENV{tri}|=={date}|oui)checked="checked"] class="radio" /><:babbi:par_date:>
+		   <br /><br />
+		   <input type="radio" name="tri" value="maj"[(#ENV{tri}|=={maj}|oui)checked="checked"]class="radio" /><:babbi:par_maj:>
+		   <br /><br />
+		   <input type="radio" name="tri" value="titre" [(#ENV{tri}|=={titre}|oui)checked="checked"] class="radio" /><:babbi:par_alpha:>	 
+		   <br /><br />
+		   <input type="radio" name="tri" value="popularite"[(#ENV{tri}|=={popularite}|oui)checked="checked"] class="radio" /><:babbi:par_popu:>	 
+		   <br /><br />
+		   <input type="radio" name="tri" value="hasard"[(#ENV{tri}|=={hasard}|oui)checked="checked"] class="radio" /><:babbi:aleatoire:>
+	</li>
+
+	<li class="editer_inverse [ (#ENV**{erreurs}|table_valeur{inverse}|oui)erreur]">	
+		<label for="inverse"><:babbi:inverse:></label>
+		<p class="explication"><:babbi:explication_inverse:></p>
+		<input type="checkbox" name="inverse" [checked="(#ENV{inverse}|!={''}|?{'checked'})"] class="checkbox" />
+	</li>	
+	
+</ul>
+
+
+<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+
+</div>
+</form>
+</div>
