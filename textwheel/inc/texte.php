@@ -188,27 +188,28 @@ $preg='') {
 			$tag = $regs[1];
 			$a = stripos($letexte, $tag);
 			$b = stripos($letexte, "</$tag>", $a);
-			if (!$b) next;
 
-			$regs[0] = substr($letexte, $a-1, $b - $a + strlen("</$tag>") + 1);
+			if ($a and $b) {
+				$regs[0] = substr($letexte, $a-1, $b - $a + strlen("</$tag>") + 1);
 
-			$regs[3] = substr($letexte, $a-1 + strlen($init),
-				$b - $a - strlen($init) + 1);
+				$regs[3] = substr($letexte, $a-1 + strlen($init),
+					$b - $a - strlen($init) + 1);
 
-			// echappements tels quels ?
-			if ($no_transform) {
-				$echap = $regs[0];
+				// echappements tels quels ?
+				if ($no_transform) {
+					$echap = $regs[0];
+				}
+
+				// sinon les traiter selon le cas
+				else if (function_exists($f = 'traiter_echap_'.strtolower($regs[1])))
+					$echap = $f($regs);
+				else if (function_exists($f = $f.'_dist'))
+					$echap = $f($regs);
+
+				$letexte = str_replace($regs[0],
+					code_echappement($echap, $source, $no_transform),
+					$letexte);
 			}
-
-			// sinon les traiter selon le cas
-			else if (function_exists($f = 'traiter_echap_'.strtolower($regs[1])))
-				$echap = $f($regs);
-			else if (function_exists($f = $f.'_dist'))
-				$echap = $f($regs);
-
-			$letexte = str_replace($regs[0],
-				code_echappement($echap, $source, $no_transform),
-				$letexte);
 		}
 
 	if ($no_transform)
