@@ -1,11 +1,12 @@
 <script type="text/javascript">
+//<![CDATA[
 	/** Chargement de l'API Geoportail */
 	if (window.__Geoportal$timer===undefined) {
             var __Geoportal$timer= null;
         }
 
-	function checkApiLoading(retryClbk,clss) 
-	{	if (__Geoportal$timer!=null) 
+	function checkApiLoading(retryClbk,clss)
+	{	if (__Geoportal$timer!=null)
 		{	//clearTimeout: annule le minuteur "__Geoportal$timer" avant sa fin
 			window.clearTimeout(__Geoportal$timer);
 			__Geoportal$timer= null;
@@ -17,7 +18,7 @@
 		 */
 		var f, i;
 		var l=clss.length;
-		for (i=0; i<l; i++) 
+		for (i=0; i<l; i++)
 		{	try {
 				f= eval(clss[i]);
 			} catch (e) {
@@ -31,7 +32,7 @@
 		return true;
 	}
 
-	function loadAPI() 
+	function loadAPI()
 	{	// on attend que les classes soient chargées
 		if (checkApiLoading(loadAPI,['OpenLayers','Geoportal','Geoportal.Viewer','Geoportal.Viewer.Default'])===false) {
 			return;
@@ -42,6 +43,7 @@
 			onContractsComplete: function(){ jQuery.geoportail.initMap();}
 		});
 	}
+//]]>
 </script>
 
 <!--_GEOPORTAIL_HEADER_-->
