@@ -1,0 +1,7 @@
+<traduction module="paquet-gis" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/gis/trunk/lang/" reference="fr">
+	<langue code="en" url="http://trad.spip.org/tradlang_module/paquet-gis?lang_cible=en">
+		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
+	</langue>
+	<langue code="es" />
+	<langue code="fr" />
+</traduction>

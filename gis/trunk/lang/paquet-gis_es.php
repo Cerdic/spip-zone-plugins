@@ -1,11 +1,15 @@
 <?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.org/tradlang_module/paquet-gis?lang_cible=es
+// ** ne pas modifier le fichier **
 
-// Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-'gis_slogan' => 'Sistema de información geográfica',
-'gis_description' => 'Provee la estructura y las interfaces para crear, manejar y visualizar puntos geolocalizados sobre mapas. Estás mapas puedes ser recuperadas desde varios proveedores gracias a la libreria Mapstraction.',
+
+	// G
+	'gis_description' => 'Provee la estructura y las interfaces para crear, manejar y visualizar puntos geolocalizados sobre mapas. Estás mapas puedes ser recuperadas desde varios proveedores gracias a la libreria Mapstraction.',
+	'gis_slogan' => 'Sistema de información geográfica'
 );
 
 ?>
