@@ -32,7 +32,7 @@ switch(\$GLOBALS['type_urls']) {
 	// TODO : Dependance du plugin "Urls Etendues" sous SPIP 2.1
 	'description' => '<:type_urls::>'
 		// Tronc commun sous SPIP 2.0
-		.(defined('_SPIP19300')?'<radio_type_urls3 valeur="propres/propres2/libres/arbo/propres_qs"><:type_urls:1:>[[%urls_avec_id%]][[->%urls_avec_id2%]][[->%urls_id_3_chiffres%]][[->%urls_id_sauf_rubriques%]][[->%urls_id_sauf_liste%]]</radio_type_urls3>':''),
+		.(defined('_SPIP19300')?'<radio_type_urls3 valeur="propres/propres2/libres/arbo/propres_qs"><:type_urls:1:>[[%urls_avec_id%]][[->%urls_avec_id2%]][[->%urls_id_3_chiffres%]][[->%urls_id_sauf_rubriques%]][[->%urls_id_sauf_liste%]]<q1><:type_urls:2:></q1></radio_type_urls3>':''),
 	defined('_SPIP20100')
 		?'pipelinecode:arbo_creer_chaine_url, pipelinecode:propres_creer_chaine_url'
 		:'pipelinecode:creer_chaine_url'
