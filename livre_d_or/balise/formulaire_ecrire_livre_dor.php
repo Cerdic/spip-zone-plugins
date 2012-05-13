@@ -47,11 +47,13 @@
 	59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.
 	
 	*****************************************************/
+
+if ( !defined ( '_ECRIRE_INC_VERSION' ) ) return;
 	
 include_spip('inc/utils');
 include_spip('inc/filtres');
 include_spip('inc/plugin_globales_lib');
-	
+
 function balise_FORMULAIRE_ECRIRE_LIVRE_DOR ($p, $nom='FORMULAIRE_ECRIRE_LIVRE_DOR') {
 	return calculer_balise_dynamique($p, $nom, array());
 }
@@ -122,7 +124,8 @@ function balise_FORMULAIRE_ECRIRE_LIVRE_DOR_dyn ($id_rubrique, $table, $id_auteu
 				
 				$row = spip_fetch_array(spip_query("SELECT lang, id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 				$id_secteur = $row['id_secteur'];
-				if (!$lang) {
+				if (!$lang)
+				{
 					$lang = $GLOBALS['meta']['langue_site'];
 					$choisie = 'non';
 					$lang = $row['lang'];
@@ -130,35 +133,69 @@ function balise_FORMULAIRE_ECRIRE_LIVRE_DOR_dyn ($id_rubrique, $table, $id_auteu
 				
 				$statut = ($valider_auto == 'oui') ? "publie" : "prop";
 				
-				if($table == 'spip_articles') {
+				if($table == 'spip_articles')
+				{
 					$sql_query = "INSERT INTO $table 
 						(titre, texte, id_rubrique, id_secteur, statut, date, accepter_forum, lang, langue_choisie)
 						VALUES
 						("._q($titre).", "._q($texte).", $id_rubrique, $id_secteur, '$statut', NOW(), '" 
 							. substr($GLOBALS['meta']['forums_publics'],0,3) . "', '$lang', '$choisie')
 						";
-				} else {
+				}
+				else
+				{
 					$sql_query = "INSERT INTO spip_breves
 						(titre, texte, id_rubrique, statut, date_heure, lang, langue_choisie)
 						VALUES
 						("._q($titre).", "._q($texte).", $id_rubrique, '$statut', NOW(), '$lang', '$choisie')
 						";
 				}
-				$sql_result = spip_query($sql_query);
-				if($sql_result) {
-					$id_comment = spip_insert_id();
-					if($id_comment && ($id_auteur > 0)) {
-						// attribue l'article à un auteur
-						spip_abstract_insert(
-							'spip_auteurs_articles'
-							, "(id_auteur,id_article)"
-							, "($id_auteur, $id_comment)"
-						);
+				
+				$id_comment = NULL;
+				
+				// spip_insert_id() n'est plus en SPIP 2.*
+				if ( !function_exists ( 'spip_insert_id' ) )
+				{
+					$id_comment = sql_query ( $sql_query );
+				}
+				else
+				// compatiblité SPIP 1.9.x
+				{
+					$sql_result = spip_query($sql_query);
+					
+					if ( $sql_result )
+					{
+						$id_comment = spip_insert_id();
 					}
-					lido_log(_LIDO_PRE_LOG." record comment #$id_comment into $table");
 				}
 				
-				if(($prevenir == 'oui') && email_valide($email)) {
+				// attribue l'article à son auteur
+				if ( $id_comment && ($id_auteur > 0) )
+				{
+					$table = 'spip_auteurs_articles';
+					$noms = '(id_auteur,id_article)';
+					$valeurs = "($id_auteur, $id_comment)";
+					
+					// spip_insert_id() n'est plus en SPIP 2.*
+					if ( !function_exists ( 'spip_insert_id' ) )
+					{
+						sql_insert ( $table, $noms, $valeurs );
+					}
+					else
+					// compatiblité SPIP 1.9.x
+					{
+						spip_abstract_insert (
+							$table,
+							$noms,
+							$valeurs
+						);
+					}
+					lido_log ( _LIDO_PRE_LOG." record comment #$id_comment into $table" );
+				}
+				
+				
+				if ( $id_comment && ($prevenir == 'oui') && email_valide ($email) )
+				{
 					include_spip('inc/urls');
 					
 					$texte .= ""
@@ -188,11 +225,14 @@ function balise_FORMULAIRE_ECRIRE_LIVRE_DOR_dyn ($id_rubrique, $table, $id_auteu
 					envoyer_mail($email, $email_tag." ".$titre, $text_mail, $from, "X-Originating-IP: ".$GLOBALS['ip']);
 					lido_log(_LIDO_PRE_LOG." send mail to $email");
 				}
+				
 				$commentaire_envoye = _T('lido:commentaire_envoye')
 					. (($valider_auto == 'oui') ? "" : _T('lido:commentaire_modere'))
 					. _T('lido:commentaire_merci')
 					;
-			} else {
+			}
+			else
+			{
 				$validable = true;
 			}
 		}

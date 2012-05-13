@@ -1,11 +1,8 @@
 <?php 
 
-	// lido_mes_fonctions.php
-
-	// $LastChangedRevision$
-	// $LastChangedBy$
-	// $LastChangedDate$
-
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 /* filtres */
 
@@ -17,4 +14,3 @@ function lido_inserer_date ($texte, $date) {
 	return($texte);
 }
 
-?>

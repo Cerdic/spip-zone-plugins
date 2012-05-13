@@ -242,6 +242,14 @@ if(!function_exists('__plugin_meta_version')) {
 if(!function_exists('__plugin_boite_meta_info')) {
 	// affiche un petit bloc info sur le plugin
 	function __plugin_boite_meta_info ($prefix, $return = false) {
+		
+		// plugin_get_infos() n'existe plus depuis SPIP 2.1.0
+		// @todo reconstruire le bloc info. Pas urgent/indispensable
+		if ( !function_exists ( 'plugin_get_infos') )
+		{
+			return ('');
+		}
+		
 		include_spip('inc/meta');
 		$result = false;
 		if(!empty($prefix)) {
@@ -319,6 +327,13 @@ if(!function_exists('__plugin_html_signature')) {
 	// petite signature de plugin
 	// du style "Dossier plugin [version]"
 	function __plugin_html_signature ($prefix, $return = false, $html = true, $verifier_svn = false) {
+		
+		// plugin_get_infos() n'existe plus depuis SPIP 2.1.0
+		// @todo reconstruire la ligne info. Pas urgent/indispensable
+		if ( !function_exists ( 'plugin_get_infos') )
+		{
+			return ('');
+		}
 
 		$info = plugin_get_infos(__plugin_get_meta_dir($prefix));
 		$nom = typo($info['nom']);
