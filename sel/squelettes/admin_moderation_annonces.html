@@ -1,4 +1,4 @@
-<BOUCLE_lonlat(AUTEURS) {id_auteur = #SESSION{id_auteur}} {tout}>
+<BOUCLE_lonlat(AUTEURS) {id_auteur = #ENV{id_auteur}} {tout}>
 		#SET{lon,#LON}
 		#SET{lat,#LAT}
 </BOUCLE_lonlat>
@@ -11,29 +11,18 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
 <head>
 <script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
-<title><:sel:creer_nouvel_utilisateur:> - [(#NOM_SITE_SPIP|textebrut)][ - (#SLOGAN_SITE_SPIP|textebrut)]</title>
+<title><:sel:admin_moderer_annonces:> - [(#NOM_SITE_SPIP|textebrut)][ - (#SLOGAN_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+
 [(#CHEMIN{inclure/head.html}|oui) <INCLURE{fond=inclure/head} />]
 [(#CHEMIN{inclure/head.html}|non) <INCLURE{fond=inc-head}>]
-
-<!-- script et CSS autocompletion -->
-<script type="text/javascript" src="#CHEMIN{js/jquery-ui-1.8.19.autocomplete.min.js}"></script>
-[<link rel="stylesheet" href="(#CHEMIN{js/themes/base/jquery.ui.autocomplete.css}|direction_css)" type="text/css" />]
-[<link rel="stylesheet" href="(#CHEMIN{js/themes/base/jquery.ui.core.css}|direction_css)" type="text/css" />]
-[<link rel="stylesheet" href="(#CHEMIN{js/themes/base/jquery-ui-1.8.19.custom.css}|direction_css)" type="text/css" />]
-[<link rel="stylesheet" href="(#CHEMIN{js/themes/base/jquery.ui.all.css}|direction_css)" type="text/css" />]
-[<link rel="stylesheet" href="(#CHEMIN{js/themes/base/jquery.ui.base.css}|direction_css)" type="text/css" />]
-[<link rel="stylesheet" href="(#CHEMIN{js/themes/base/jquery.ui.theme.css}|direction_css)" type="text/css" />]
-<!-- -->
-
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <script type="text/javascript"
     src="http://maps.googleapis.com/maps/api/js?sensor=true">
 </script>
 <script type="text/javascript">
-
-function initialise() {
-	
+    function initialise1() {
+	  	  
 		var coucheKml = new google.maps.KmlLayer('#URL_SITE_SPIP/spip.php?page=kml_nouveaux_inscrits&var_mode=recalcul');	  		
 		
 		var mesOptions = {
@@ -42,53 +31,83 @@ function initialise() {
 		}		
 		
 		/**
-		 * On affiche notre 'coucheKML' sur la carte nommÈe 'zemap1'
+		 * On affiche notre 'coucheKML' sur la carte nomm√©e 'zemap1'
 		 */	
         var zemap1 = new google.maps.Map(document.getElementById("carte1"), mesOptions);
 		coucheKml.setMap(zemap1);
 		
 		/**		 
-		 * Une fois notre KML chargÈ on centre automatiquement la carte
-		 * et l'on optimise son affichage gr‚ce aux mÈthodes :
-		 * fitBounds() et getDefaultViewport() afin que le dÈpartement
+		 * Une fois notre KML charg√© on centre automatiquement la carte
+		 * et l'on optimise son affichage gr√¢ce aux m√©thodes :
+		 * fitBounds() et getDefaultViewport() afin que le d√©partement
 		 * soit totalement visible.
 		 */
 		google.maps.event.addListener(coucheKml, "status_changed" , function() {
 			zemap1.fitBounds(coucheKml.getDefaultViewport());
 		});
 
-};
+	};
+	  
+	// si la personne est connect√©e, elle peut voir sa localisation dans cette carte
+    function initialise2() {
+		var map;
+		var infowindow = new google.maps.InfoWindow();
+		var marker;
+		var latlng = new google.maps.LatLng(#GET{lat,48.85}, #GET{lon,2.35});
+		var myOptions = {
+			zoom: 15,
+			center: latlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		}
+		map = new google.maps.Map(document.getElementById("carte2"), myOptions)
+		marker = new google.maps.Marker({
+			position: latlng,
+					map: map
+			});		
+		infowindow.open(map, marker);
+		map.setCenter(latlng);	
+    };
 </script>
 </head>
 
-<body class="pas_surlignable page_sommaire" onload="initialise();">
+<body class="pas_surlignable page_admin_moderation_utilisateurs" onload="initialise1();initialise2();" >
 
 <div class="page">
 [(#CHEMIN{inclure/header.html}|oui) <INCLURE{fond=inclure/header} />]
 [(#CHEMIN{inclure/header.html}|non) <INCLURE{fond=inc-entete}>]
 
-
 	<div class="main">
 	<div class="wrapper hfeed">
-	<div class="ariane rouge"><a href="#URL_SITE_SPIP"><:sel:accueil:></a> > <:sel:creer_nouvel_utilisateur:> 1/2</div>
-	
+	<div class="ariane rouge"><a href="#URL_SITE_SPIP"><:sel:accueil:></a> > <:sel:admin_moderer_annonces:></div>
+
 	<div class="more">
-	<INCLURE{fond=inclure/plus}>
-		
+	<INCLURE{fond=inclure/plus}>	
 	</div><!-- .more -->
+
 	<div class="content" id="content">
-		
-		<h1><:sel:creer_nouvel_utilisateur:></h1>
-		<div class="bloc">
-		<:sel:creer_nouvel_utilisateur_explications:>
-		</div>
-		#FORMULAIRE_EDITER_AUTEUR
-    </div>	<!-- .content -->	
+	[(#CONFIG{moderation_annonce}|=={oui}|oui)
+		[(#SESSION{acces}|=={3admin_local}|or{#SESSION{acces}|=={4admin_general}}|non)
+		<h1><:sel:acces_insuffisant:></h1>
+		<p><:sel:acces_insuffisant_explication:></p>
+		]
+		[(#SESSION{acces}|=={3admin_local}|or{#SESSION{acces}|=={4admin_general}}|oui)
+		<h1><:sel:admin_moderer_annonces:></h1>			
+		<p><:sel:admin_moderer_annonces_explications:></p>
+
+		#FORMULAIRE_EDITER_ACCES_ANNONCE{#ENV{tri},#ENV{senstri},#SELF}
+		]	
+		<p>&nbsp;</p>
+	]
+	[(#CONFIG{moderation_annonce}|=={oui}|non)
+		<h1><:sel:admin_moderer_annonces:></h1>			
+		<p><:sel:admin_moderer_annonces_pasconfig:></p>	
+	]
+    </div><!-- .content -->	
 	
 	</div><!--.wrapper-->
 	
 	<div class="aside">
-	<INCLURE{fond=inclure/cote}>	
+	<INCLURE{fond=inclure/cote}>
 	</div><!--.aside-->
 	</div><!--.main-->
 	<img src="#CHEMIN{img/frise_950.png}" />		

@@ -1,46 +1,31 @@
+#CACHE{0}
 <h3 class="entete_encart blanc">
 		[(#SESSION{id_auteur}|non)<:sel:nouvelles_annonces:>]
 		[(#SESSION{id_auteur}|oui)<:sel:mes_annonces:>]
 </h3>
 		<div class="corps_encart">
+			<B_annonces>
 			<ul>
-			<BOUCLE_annonces(ANNONCES) {id_auteur = #SESSION{id_auteur} ?} {statut = 1annonce_ok} {0,6}>
+			<BOUCLE_annonces(ANNONCES) {id_auteur = #SESSION{id_auteur}} {statut = 1annonce_ok} {par date_saisie} {inverse} {0,6}>
 			<li><strong>#DIRECTION_ECHANGE</strong> : #TITRE<br />
 			#VILLE
 			[(#SESSION{id_auteur}|oui)<br /><a href="[(#URL_PAGE{modifier_annonce}|parametre_url{id_annonce,#ID_ANNONCE})]" class="rouge">&#91;<:sel:modifier:>&#93;</a><a href="" class="rouge">&#91;<:sel:supprimer:>&#93;</a>]
 			</li>
 			</BOUCLE_annonces>
-			<li>
-			<strong>Offre</strong> : triporteur<br />
-			Tours
-			[(#SESSION{id_auteur}|oui)<br /><a href="" class="rouge">&#91;modifier&#93;</a><a href="" class="rouge">&#91;supprimer&#93;</a>]
-			</li>
-			<li>
-			<strong>Demande</strong>  : garde chat 3 jours<br />
-			Brest
-			[(#SESSION{id_auteur}|oui)<br /><a href="" class="rouge">&#91;modifier&#93;</a><a href="" class="rouge">&#91;supprimer&#93;</a>]
-			</li>
-			<li>
-			<strong>Partage</strong>  : chants / danse folklorique : week-end du 1er mai<br />
-			Montauban
-			[(#SESSION{id_auteur}|oui)<br /><a href="" class="rouge">&#91;modifier&#93;</a><a href="" class="rouge">&#91;supprimer&#93;</a>]
-			</li>
-			<li>
-			<strong>Offre</strong>  : canapé-lit<br />
-			Ermont-Eaubonne (95)
-			[(#SESSION{id_auteur}|oui)<br /><a href="" class="rouge">&#91;modifier&#93;</a><a href="" class="rouge">&#91;supprimer&#93;</a>]
-			</li>
-			<li>
-			<strong>Demande</strong>  : qui aurait une canette pour machine à coudre ?<br />
-			Villeurbane
-			[(#SESSION{id_auteur}|oui)<br /><a href="" class="rouge">&#91;modifier&#93;</a><a href="" class="rouge">&#91;supprimer&#93;</a>]
-			</li>
-			<li>
-			<strong>Partage</strong>  : Sortie botanique & plantes comestibles<br />
-			Forêt du Vantoux
-			[(#SESSION{id_auteur}|oui)<br /><a href="" class="rouge">&#91;modifier&#93;</a><a href="" class="rouge">&#91;supprimer&#93;</a>]
-			</li>			
 			</ul>
+			</B_annonces>
+				<B_toutes_annonces>
+				<ul>
+				<BOUCLE_toutes_annonces(ANNONCES) {statut = 1annonce_ok} {par date_saisie} {inverse} {0,6}>
+					<li><strong>#DIRECTION_ECHANGE</strong> : #TITRE<br />
+					#VILLE
+					[(#SESSION{id_auteur}|oui)<br /><a href="[(#URL_PAGE{modifier_annonce}|parametre_url{id_annonce,#ID_ANNONCE})]" class="rouge">&#91;<:sel:modifier:>&#93;</a><a href="" class="rouge">&#91;<:sel:supprimer:>&#93;</a>]
+					</li>
+				</BOUCLE_toutes_annonces>
+				</ul>
+				</B_toutes_annonces>				
+			<//B_annonces>						
+
 		</div>
 		[(#CHEMIN{inclure/nav.html}|oui) <INCLURE{fond=inclure/nav,env} />]
 		[(#CHEMIN{inclure/nav.html}|non) <INCLURE{fond=inc-rubriques}>]

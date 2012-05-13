@@ -1,7 +1,9 @@
 		[(#SESSION{acces}|=={3admin_local}|or{#SESSION{acces}|=={4admin_general}}|oui)
 		<h3 class="entete_encart_admin blanc"><:sel:gestion_inscriptions:></h3>
 		<div class="corps_encart_admin" >
+		[(#CONFIG{moderation_utilisateur}|=={oui}|oui)
 		<img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<a href="#URL_PAGE{admin_moderation_utilisateurs}"><:sel:admin_moderer_utilisateurs:></a><br />
+		]
 		<img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<a href="#URL_PAGE{admin_liste_utilisateurs}"><:sel:admin_voir_utilisateurs:></a><br />
 		<small>--...(en développement :)...--</small><br />
 		<img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<a href="#URL_PAGE{admin_modification_utilisateur}">Modifier les données d'un utilisateur</a><br />
@@ -14,7 +16,10 @@
 
 		<h3 class="entete_encart_admin blanc"><:sel:gestion_annonces:></h3>
 		<div class="corps_encart_admin" >
-		<img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<a href="#URL_PAGE{admin_moderation_annonces}">Valider / refuser des annonces</a><br />
+		[(#CONFIG{moderation_annonce}|=={oui}|oui)
+		<img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<a href="#URL_PAGE{admin_moderation_annonces}"><:sel:admin_moderer_annonces:></a><br />
+		]
+		<small>--...(en développement :)...--</small><br />
 		<img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<a href="#URL_PAGE{admin_gestion_annonces_perimees}">Gérer les annonces périmées</a><br />
 		<img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<a href="#URL_PAGE{admin_liste_annonces_fixes}">Voir la liste des annonces à dates fixes (pour mois prochain, date paramétrable)</a><br />
 		<img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<a href="#URL_PAGE{admin_annonces_publiees}">Voir la liste des annonces publiés (ce mois-ci, date paramétrable)</a><br />	
@@ -37,30 +42,23 @@
 		<h3 class="entete_encart blanc"><:sel:nouveaux_inscrits:></h3>
 		<div class="corps_encart" >
 			<ul>
+			<BOUCLE_derniers_inscrits(AUTEURS) {tous} {par inscription} {inverse} {0,6}>
 			<li>
-			Bernadette<br />
-			SEL de Thiviers (France)
+			#PRENOM #NOM<br />
+			<BOUCLE_sels(CORRESPONDANCES) {id_auteur}>
+			<BOUCLE_nomsels(SELS) {id_sel}>
+			#NOM -
+			</BOUCLE_nomsels>
+			[(#ID_SEL|=={0}|oui) <:sel:jeu:>]
+			</BOUCLE_sels>
+			</B_sels>
+			<//B_sels>
+			&#091;#PAYS&#093;
 			</li>
-			<li>
-			Alain<br />
-			SEL de Brest (France)
-			</li>
-			<li>
-			Norredine<br />
-			SEL de la Bièvres (France)
-			</li>
-			<li>
-			Eric<br />
-			SEL de Courreau (Belgique)
-			</li>
-			<li>
-			Famille Guillaume<br />
-			SEL du Val de Marne (France)
-			</li>
-			<li>
-			Jean-Philippe<br />
-			SEL du Puy en Velay (France)
-			</li>			
+			</BOUCLE_derniers_inscrits>
+			</B_derniers_inscrits>
+			u
+			<//B_derniers_inscrits>		
 			</ul>
 		</div>	
 	

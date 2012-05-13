@@ -1,0 +1,99 @@
+#CACHE{0}
+<script type="text/javascript">
+/* aucune de ces 3 écritures ne marchent...
+$(function() {
+	$('a.lightbox').colorbox({rel:'fiche'});
+});
+
+jQuery(function($){
+	$('a.lightbox').colorbox({rel:'fiche'});
+});
+
+$(document).ready(function() {
+    $('a.lightbox').colorbox({rel:'fiche'});
+});
+*/
+</script>
+
+<div class='formulaire_spip formulaire_editer formulaire_editer_acces_auteur'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+		<B_annonces>
+
+		<div class="pagination">#PAGINATION{page_precedent_suivant}</div>
+		<table class="" rules="all">
+		<caption>[(#GRAND_TOTAL) <:sel:annonces:>]</caption>
+		<thead>
+			<tr>
+				<th><:sel:titre:>
+
+					<a id="triaz" href="[(#URL_PAGE{admin_moderation_utilisateurs}|parametre_url{tri,login}|parametre_url{senstri,''})]" title="ggg">
+					<img src="#CHEMIN{img/asc.png}" alt="<:sel:tri_ascendant:>" />
+					</a>&nbsp;<a id="triza" href="[(#URL_PAGE{admin_moderation_utilisateurs}|parametre_url{tri,login}|parametre_url{senstri,inverse})]">
+					<img src="#CHEMIN{img/desc.png}" alt="<:sel:tri_descendant:>" />
+					</a>
+
+				</th>
+				<th><:sel:direction_echange:><br />
+
+					<a id="triaz" href="[(#URL_PAGE{admin_moderation_utilisateurs}|parametre_url{tri,nom}|parametre_url{senstri,''})]">
+					<img src="#CHEMIN{img/asc.png}" alt="<:sel:tri_ascendant:>" />
+					</a>&nbsp;<a id="triza" href="[(#URL_PAGE{admin_moderation_utilisateurs}|parametre_url{tri,nom}|parametre_url{senstri,inverse})]">
+					<img src="#CHEMIN{img/desc.png}" alt="<:sel:tri_descendant:>" />
+					</a>
+		
+				
+				</th>
+				<th><:sel:nature:><br />
+				
+					<a id="triaz" href="[(#URL_PAGE{admin_moderation_utilisateurs}|parametre_url{tri,acces}|parametre_url{senstri,''})]">
+					<img src="#CHEMIN{img/asc.png}" alt="<:sel:tri_ascendant:>" />
+					</a>&nbsp;<a id="triza" href="[(#URL_PAGE{admin_moderation_utilisateurs}|parametre_url{tri,acces}|parametre_url{senstri,inverse})]">
+					<img src="#CHEMIN{img/desc.png}" alt="<:sel:tri_descendant:>" />
+					</a>				
+				
+				</th>
+				<th><:sel:modifier_statut:></th>
+				<th><:sel:date_saisie:></th>
+				<th><:sel:fiche:></th>
+			</tr>
+		</thead>
+		<tbody>	
+		
+		<BOUCLE_annonces(ANNONCES) {tout} {statut IN 0nouvelle, 1annonce_ok, 2annonce_ko} {pagination 15} {par #ENV{tri}}{inverse #ENV{senstri}}>
+		
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{fd_blanc,fd_gris})]" >
+			<td>#TITRE</td>
+			<td style="width: 18%;">[(#DIRECTION_ECHANGE|ucfirst)]</td>
+			<td style="width: 15%;">
+			[(#NATURE|ucfirst)]
+			</td>
+			<td style="width: 20%;">
+			<label for="ok_#COMPTEUR_BOUCLE"><:sel:valider_ok:></label>
+			<input style="width:4em;" type="radio" id="ok_#ID_ANNONCE" value="1annonce_ok" name="valider[#ID_ANNONCE]" [(#ENV{valider}|table_valeur{#ID_ANNONCE}|=={1annonce_ok}|oui) checked="checked"] /><br /> 
+			<label for="ko_#COMPTEUR_BOUCLE"><:sel:valider_ko:> </label>
+			<input style="width:3.35em;" type="radio" id="ko_#ID_ANNONCE" value="2annonce_ko" name="valider[#ID_ANNONCE]" [(#ENV{valider}|table_valeur{#ID_ANNONCE}|=={2annonce_ko}|oui) checked="checked"] /><br /> 
+			<label for="oko_#COMPTEUR_BOUCLE"><:sel:valider_oko:></label>			
+			<input style="width:1.2em;" type="radio" id="oko_#ID_ANNONCE" value="0nouvelle" name="valider[#ID_ANNONCE]" [(#ENV{valider}|table_valeur{#ID_ANNONCE}|=={0nouvelle}|oui) checked="checked"] /><br /> 
+			</td>
+			<td>
+			[(#DATE_SAISIE|affdate{d/m/Y})]
+			</td> <!-- [(URL_PAGE{fiche_utilisateur}|parametre_url{id_auteur,ID_AUTEUR}|parametre_url{tri,ENV{tri}}|parametre_url{senstri,ENV{senstri}})] -->
+			<td><a class="rouge lightboxzz" rel="fiche" href="[(#URL_PAGE{fiche_annonce}|parametre_url{id_annonce,#ID_ANNONCE}|parametre_url{tri,#ENV{tri}}|parametre_url{senstri,#ENV{senstri}})]">><:sel:voir_fiche:></a></td>
+		</tr>
+
+		</BOUCLE_annonces>
+
+		</tbody>
+		</table>
+		<div class="pagination">#PAGINATION{page_precedent_suivant}</div>
+
+		</B_annonces>
+		<p class='boutons'><input type='submit' name="enregistrer" class='submit' value='<:bouton_enregistrer:>' /></p>
+
+	</form>
+</div>

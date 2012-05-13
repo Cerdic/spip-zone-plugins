@@ -9,7 +9,10 @@
 	 
 		//0,1,2...
 		'0nouveau'	=> 'profil non certifié',
-		'1utilisateur_ok'=>'profil certifié',				
+		'0nouvelle'	=> 'nouvelle annonce',
+		'1annonce_ok'	=> 'annonce validée',
+		'1utilisateur_ok'=>'profil certifié',	
+		'2annonce_ko'	=> 'annonce refusée',
 		'2utilisateur_ko'=>'profil refusé',
 		'3admin_local'=>'administrateur local',
 		'4admin_general'=>'administrateur général',
@@ -19,7 +22,11 @@
 		'acces'					=> 'Niveau d\'accès',
 		'acces_insuffisant_explication' => 'Vous ne disposez pas du niveau d\'accès nécessaire pour consulter ces informations',
 		'accueil'				=> 'Accueil',
+		'admin_moderer_annonces'=>'Valider ou refuser des annonces',
+		'admin_moderer_annonces_explications'=>'Cette page vous permet de valider les annonces postées, de les refuser ou de les laisser en attente.',
+		'admin_moderer_annonces_pasconfig'=>'Le catalogue est configuré pour que les annonces soient validées automatiquement dès leur dépot. Cette page n\'a donc pas lieu d\'être pour cette configuration.',		
 		'admin_moderer_utilisateurs'=>'Certifier ou refuser des utilisateurs',
+		'admin_moderer_utilisateurs_pasconfig'=>'Le catalogue est configuré pour que les utilisateurs n\'aient pas besoin de certification pour déposer leurs annonces et utiliser pleinement le catalogue. Cette page n\'a donc pas lieu d\'être pour cette configuration.',
 		'admin_voir_utilisateurs'=>'Voir et exporter la liste des utilisateurs',
 		'adresse_annonce'			=> 'Adresse de cette annonce',
 		'adresse_annonce_explications'=>'Si cette annonce se réfère à une adresse précise, différente de celle qui figure sur votre fiche, cliquez ici et la précisez-là ci-dessous',
@@ -71,8 +78,10 @@
 		'creer_nouvel_utilisateur2_explications' => 'Félicitations, votre compte a été correctement créé et vous permet dès à présent de consulter les annonces. Ci dessous, le récapitulatif de votre fiche.<br />Vous pouvez maintenant ajouter votre avatar en joignant à votre fiche une image qui vous représente.',
 	
 		//D
+		'date_saisie'		=> 'Date de saisie',
 		'deconnexion'		=> 'Déconnexion',
 		'description'		=> 'Description',
+		'direction_echange'	=> 'Direction de l\'échange',
 		'du'				=> 'Du',
 	
 		// E
@@ -175,6 +184,7 @@
 		
 		//L
 		'localisation'		=>	'Localisation',
+		'localisation_derniers_inscrits'=>'Localisation des derniers inscrits',
 		'localisez'			=> 'Localisez les nouveaux inscrits',
 		'localite'			=> 'Localité',
 		'login'				=> 'Login',
@@ -183,6 +193,9 @@
 		//M
 		'membre_auteur_sel' => 'Membre du ou des SEL(s) suivant(s) :',
 		'mes_annonces'		=> 'Mes annonces',
+		'mes_demandes'		=> 'Mes demandes',
+		'mes_offres'		=> 'Mes offres',
+		'mes_partages'		=> 'Mes partages',
 		'modifier'			=> 'Modifier',
 		'modifier_annonce'	=> 'Modifier une annonce',
 		'modifier_donnees'	=> 'Modifier mes données',
@@ -201,6 +214,7 @@
 		'msgok_mise_a_jour_acces_auteur'=> 'Nouvel avatar pris en compte !',			
 		
 		//N
+		'nature'			=> 'Nature',
 		'nom'				=> 'Nom',
 		'nouvelles_annonces'=> 'Nouvelles annonces',
 		'nouvelle_annonce_theme'=>'Félicitations, votre annonce a été correctement créée, voir ci-dessous, le récapitulatif.
@@ -296,6 +310,7 @@ Sinon, utilisez le formulaire ci-dessous pour indiquer votre choix. Vos thèmes 
 		
 		//Q
 		'que_voulez_vous_faire'=>'Que voulez-vous faire ?',
+		
 		//R
 		'recap_annonce'			=> 'Récapitulatif de votre annonce',
 		'resume_annonce'		=> 'Résumé',
@@ -309,12 +324,15 @@ Sinon, utilisez le formulaire ci-dessous pour indiquer votre choix. Vos thèmes 
 		'telecharger_nouvel_avatar'	=> 'Télécharger un nouvel avatar',
 		'themes_selectionnes'		=> 'Si les thèmes ci-dessous vous conviennent, cliquez silmplement sur Enregistrer. Sinon, cochez ci-dessous vos propres thèmes en remplacement.',
 		'themes_trouves_annonce'	=> 'Thèmes trouvés',
-		
+		'titre'				=> 'Titre',
 		
 		//U
 		'utilisateurs'			=>'Utilisateurs',
 		
 		//V
+		'valider_ko'			=> 'Refuser',
+		'valider_ok'			=> 'Valider',
+		'valider_oko'			=> 'En attente',
 		'validite_annonce'	=> 'Période de validité de l\'annonce',
 		'validite_annonce_explications'=>'Toute annonce se voit attribuer une durée de validité par défaut, à partir du jour de sa saisie. Vous pouvez néanmoins lui attribuer vous-même un créneau, en lui associant une date de votre choix
 		à l\'aide du premier champ date de début, et s\'il s\'agit de la programmation d\'un échange collectif (un stage par exemple), ajoutez-lui une date de fin de façon à ce que l\'annonce soit considéré comme étant "à dates fixes".',

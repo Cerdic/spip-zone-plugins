@@ -16,6 +16,7 @@
 [(#SESSION{id_auteur}|non)<:sel:bienvenue_catalogue:> -]
 [(#SESSION{id_auteur}|oui)<:sel:bienvenue:> #SESSION{nom} -]
 [(#NOM_SITE_SPIP|textebrut)][ - (#SLOGAN_SITE_SPIP|textebrut)]
+#SPIP_CRON
 </title>
 [<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
 [(#CHEMIN{inclure/head.html}|oui) <INCLURE{fond=inclure/head} />]
@@ -23,19 +24,13 @@
 
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <script type="text/javascript"
-      src="http://maps.googleapis.com/maps/api/js?sensor=true">
+      src="http://maps.googleapis.com/maps/api/js?sensor=false">
     </script>
     <script type="text/javascript">
       function initialise1() {
-	  	  
-        var mesOptions = {
-          center: new google.maps.LatLng(#GET{lat,48.85}, #GET{lon,2.35}), // Paris
-          zoom: 5,
-          mapTypeId: google.maps.MapTypeId.ROADMAP,	  
-		};
-
-        var zemap1 = new google.maps.Map(document.getElementById("carte1"),
-            mesOptions);		
+		var coucheKml = new google.maps.KmlLayer('#URL_SITE_SPIP/spip.php?page=kml_nouveaux_inscrits&var_mode=recalcul'); /* #URL_SITE_SPIP/#CHEMIN{tmp/nouveaux_inscrits.kml} */	  	  
+		/*
+		Lecture de flux GeoRSS avec l'objet KmlLayer :
 		var georssLayer = new google.maps.KmlLayer('http://api.flickr.com/services/feeds/geo/?tags=paris&lang=fr-fr&format=feed-georss');
 		georssLayer.setMap(zemap1);
 
@@ -44,8 +39,33 @@
 
 		var georssLayer = new google.maps.KmlLayer('http://api.flickr.com/services/feeds/geo/?tags=brest&lang=fr-fr&format=feed-georss');
 		georssLayer.setMap(zemap1);
+		*/
+		
+		var mesOptions = {
+			zoom: 3,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		}		
+		
+		/* retiré de mesOptions : center: new google.maps.LatLng(#GET{lat,48.85}, #GET{lon,2.35}),  Paris */
+		
+		/**
+		 * On affiche notre 'coucheKML' sur la carte nommée 'zemap1'
+		 */	
+        var zemap1 = new google.maps.Map(document.getElementById("carte1"), mesOptions);
+		coucheKml.setMap(zemap1);
+		
+		/**		 
+		 * Une fois notre KML chargé on centre automatiquement la carte
+		 * et l'on optimise son affichage grâce aux méthodes :
+		 * fitBounds() et getDefaultViewport() afin que le département
+		 * soit totalement visible.
+		 */
+		google.maps.event.addListener(coucheKml, "status_changed" , function() {
+			zemap1.fitBounds(coucheKml.getDefaultViewport());
+		});
 
-		};
+
+	};
 	  
 	// si la personne est connectée, elle peut voir sa localisation dans cette carte
     function initialise2() {
@@ -66,6 +86,8 @@
 		infowindow.open(map, marker);
 		map.setCenter(latlng);	
     };
+	// google.maps.event.addDomListener(window, 'load', initialise1);
+	// google.maps.event.addDomListener(window, 'load', initialise2);
     </script>
 
     <link rel="stylesheet" href="#CHEMIN{js/themes/default/default.css}" type="text/css" media="screen" />
@@ -75,7 +97,7 @@
     <link rel="stylesheet" href="style.css" type="text/css}" media="screen" />
 </head>
 
-<body class="pas_surlignable page_sommaire" onload="initialise1();initialise2()">
+<body class="pas_surlignable page_sommaire" onload="initialise1();initialise2()"> <!--  -->
 <div class="page">
 [(#CHEMIN{inclure/header.html}|oui) <INCLURE{fond=inclure/header}{home=oui} />]
 [(#CHEMIN{inclure/header.html}|non) <INCLURE{fond=inc-entete}>]
@@ -161,9 +183,7 @@
 
 		</BOUCLE_corr>
 		</p>
-		</B_corr>			
-
-		<p class="gris">>> Modifier mes données (en développement) </p>
+		</B_corr>
 		
 		</BOUCLE_logo>
 				
@@ -181,6 +201,7 @@
 		<h3><:sel:que_voulez_vous_faire:></h3>
 		<ul>
 		<li><img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<a href="#URL_PAGE{nouvelle_annonce}"><:sel:poster_annonce:></a></li>
+		<li><img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<:sel:modifier_donnees:> (en développement) </a></li>
 		<li><img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<:sel:consulter_catalogue:> (en développement)</li>
 		<li><img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<:sel:consulter_correspondants:> (en développement)</li>
 		<li><img src="#CHEMIN{img/puce_verte_creuse.gif}" alt="" />&nbsp;<:sel:saisir_echange:> (en développement)</li>

@@ -89,23 +89,28 @@ $(document).ready(function() {
 
 function initialise() {
 	
-    var mesOptions = {
-        center: new google.maps.LatLng(#GET{lat,48.85}, #GET{lon,2.35}), // Paris
-        zoom: 20,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,	  
-	};
-
-    var zemap1 = new google.maps.Map(document.getElementById("carte1"),
-        mesOptions);
+		var coucheKml = new google.maps.KmlLayer('#URL_SITE_SPIP/spip.php?page=kml_nouveaux_inscrits&var_mode=recalcul');	  		
 		
-	var georssLayer = new google.maps.KmlLayer('http://api.flickr.com/services/feeds/geo/?tags=paris&lang=fr-fr&format=feed-georss');
-	georssLayer.setMap(zemap1);
-
-	var georssLayer = new google.maps.KmlLayer('http://api.flickr.com/services/feeds/geo/?tags=ivry-sur-seine&lang=fr-fr&format=feed-georss');
-	georssLayer.setMap(zemap1);
-
-	var georssLayer = new google.maps.KmlLayer('http://api.flickr.com/services/feeds/geo/?tags=brest&lang=fr-fr&format=feed-georss');
-	georssLayer.setMap(zemap1);
+		var mesOptions = {
+			zoom: 3,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		}		
+		
+		/**
+		 * On affiche notre 'coucheKML' sur la carte nommée 'zemap1'
+		 */	
+        var zemap1 = new google.maps.Map(document.getElementById("carte1"), mesOptions);
+		coucheKml.setMap(zemap1);
+		
+		/**		 
+		 * Une fois notre KML chargé on centre automatiquement la carte
+		 * et l'on optimise son affichage grâce aux méthodes :
+		 * fitBounds() et getDefaultViewport() afin que le département
+		 * soit totalement visible.
+		 */
+		google.maps.event.addListener(coucheKml, "status_changed" , function() {
+			zemap1.fitBounds(coucheKml.getDefaultViewport());
+		});
 
 };
 

@@ -1,0 +1,47 @@
+<div class="formulaire_spip formulaire_editer formulaire_choisir_theme_annonce">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur}) <:info_recommencer:></p>]
+	
+<form method='post' action='#ENV{action}'><div>
+
+	[(#REM) declarer les hidden qui declencheront le service du formulaire 
+	parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<input type='hidden' name='id_annonce' value='#ENV{id_annonce}' />
+	<input type='hidden' name='redirect' value='#ENV**{redirect}' />
+		
+
+<p style="margin:0;padding:0.5em;">
+<:sel:themes_selectionnes:>	
+</p>
+		<ul>			
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_themes})</span>]
+				<BOUCLE_themes_racine(THEMES) {id_parent = 0}>
+				<li>
+				<input type='checkbox' class='text' name='id_themes[#ID_THEME]' id='id_themes#ID_THEME' value="1" [(#ENV{id_themes}|table_valeur{#ID_THEME}|=={1}|or{#ENV{tab_idth}|table_valeur{t#ID_THEME}|=={1}}|oui) checked="checked"] />
+				<label for="id_themes[#ID_THEME]">#NOM</label><br />
+							
+						<B_sous_themes>
+						<ul>
+						<BOUCLE_sous_themes(THEMES) {id_parent}>
+							<li>
+							<input type='checkbox' class='text' name='id_themes[#ID_THEME]' id='id_themes#ID_THEME' value="1" [(#ENV{id_themes}|table_valeur{#ID_THEME}|=={1}|or{#ENV{tab_idth}|table_valeur{t#ID_THEME}|=={1}}|oui) checked="checked"] />
+							<label for="id_themes[#ID_THEME]">#NOM</label><br />
+							<BOUCLE_re(BOUCLE_sous_themes)></BOUCLE_re>
+							</li>
+						</BOUCLE_sous_themes>
+						</ul>
+						</B_sous_themes>
+				</li>
+				</BOUCLE_themes_racine>
+			
+		</ul>
+		
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+		<br />
+		
+	</div></form>
+
+</div>

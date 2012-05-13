@@ -460,6 +460,10 @@ ul li fieldset {
 	margin-top: 1em;
 }
 
+.bulle_smallgmap {
+	font-size: 0.8em;
+}
+
 .deco {
 	border-bottom: dotted 1px #939292;
 }

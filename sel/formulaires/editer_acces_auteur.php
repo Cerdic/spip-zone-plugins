@@ -31,7 +31,7 @@ function formulaires_editer_acces_auteur_traiter_dist($tri = '',$senstri = '', $
 
 	if (is_array($certifier)) {
 		foreach ($certifier as $id_auteur => $acces) {
-			if ($acces = '1utilisateur_ok') $stt = '1comite'; else $stt = '6forum';
+			if ($acces == '1utilisateur_ok') $stt = '1comite'; else $stt = '6forum';
 			$resupdate = sql_updateq('spip_auteurs',array('acces'=>$acces,'statut'=>$stt),'id_auteur='.sql_quote($id_auteur));
 			if ($resupdate)	{
 				$message_stt = 'message_ok';
@@ -49,8 +49,6 @@ function formulaires_editer_acces_auteur_traiter_dist($tri = '',$senstri = '', $
 	$retour = parametre_url($retour,'var_mode','calcul');
 	$retour = ancre_url ($retour, 'pagination_utilisateurs');
 	$traitement['redirect'] = $retour;
-	spip_log($certifier,'nn');
-	spip_log($resupdate,'nn');
 	return $traitement;
 }
 

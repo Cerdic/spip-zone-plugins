@@ -21,26 +21,32 @@
     src="http://maps.googleapis.com/maps/api/js?sensor=true">
 </script>
 <script type="text/javascript">
-     function initialise1() {
+    function initialise1() {
 	  	  
-        var mesOptions = {
-          center: new google.maps.LatLng(#GET{lat,48.85}, #GET{lon,2.35}), // Paris
-          zoom: 5,
-          mapTypeId: google.maps.MapTypeId.ROADMAP,	  
-		};
+		var coucheKml = new google.maps.KmlLayer('#URL_SITE_SPIP/spip.php?page=kml_nouveaux_inscrits&var_mode=recalcul');	  		
+		
+		var mesOptions = {
+			zoom: 3,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		}		
+		
+		/**
+		 * On affiche notre 'coucheKML' sur la carte nommée 'zemap1'
+		 */	
+        var zemap1 = new google.maps.Map(document.getElementById("carte1"), mesOptions);
+		coucheKml.setMap(zemap1);
+		
+		/**		 
+		 * Une fois notre KML chargé on centre automatiquement la carte
+		 * et l'on optimise son affichage grâce aux méthodes :
+		 * fitBounds() et getDefaultViewport() afin que le département
+		 * soit totalement visible.
+		 */
+		google.maps.event.addListener(coucheKml, "status_changed" , function() {
+			zemap1.fitBounds(coucheKml.getDefaultViewport());
+		});
 
-        var zemap1 = new google.maps.Map(document.getElementById("carte1"),
-            mesOptions);		
-		var georssLayer = new google.maps.KmlLayer('http://api.flickr.com/services/feeds/geo/?tags=paris&lang=fr-fr&format=feed-georss');
-		georssLayer.setMap(zemap1);
-
-		var georssLayer = new google.maps.KmlLayer('http://api.flickr.com/services/feeds/geo/?tags=ivry-sur-seine&lang=fr-fr&format=feed-georss');
-		georssLayer.setMap(zemap1);
-
-		var georssLayer = new google.maps.KmlLayer('http://api.flickr.com/services/feeds/geo/?tags=brest&lang=fr-fr&format=feed-georss');
-		georssLayer.setMap(zemap1);
-
-		};
+	};
 	  
 	// si la personne est connectée, elle peut voir sa localisation dans cette carte
     function initialise2() {
@@ -78,6 +84,7 @@
 	<INCLURE{fond=inclure/plus}>	
 	</div><!-- .more -->
 	<div class="content" id="content">
+	[(#CONFIG{moderation_utilisateur}|=={oui}|oui)
 		[(#SESSION{acces}|=={3admin_local}|or{#SESSION{acces}|=={4admin_general}}|non)
 		<h1><:sel:acces_insuffisant:></h1>
 		<p><:sel:acces_insuffisant_explication:></p>
@@ -89,8 +96,11 @@
 		#FORMULAIRE_EDITER_ACCES_AUTEUR{#ENV{tri},#ENV{senstri},#SELF}
 		]	
 		<p>&nbsp;</p>
-
-	
+	]
+	[(#CONFIG{moderation_annonce}|=={oui}|non)
+		<h1><:sel:admin_moderer_utilisateurs:></h1>			
+		<p><:sel:admin_moderer_utilisateurs_pasconfig:></p>	
+	]	
 
     </div><!-- .content -->	
 	
