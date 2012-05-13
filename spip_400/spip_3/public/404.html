@@ -1,6 +1,10 @@
 #HTTP_HEADER{#VAL{"HTTP/1.0 "}|concat{#ENV{code,"404 Not Found"}}}
 #HTTP_HEADER{"Cache-Control: no-store, no-cache, must-revalidate"}
 #HTTP_HEADER{Pragma: no-cache}
+<BOUCLE_si_z(CONDITION){si #PLUGIN{z}|ou{#PLUGIN{Zpip}}|oui}>
+<INCLURE{fond=structure}{env}{type-page=page}{composition=#ENV{status,404}} />
+</BOUCLE_si_z>
+</B_si_z>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 [(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
 ]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
@@ -47,3 +51,4 @@
 </div><!--.page-->
 </body>
 </html>
+<//B_si_z>

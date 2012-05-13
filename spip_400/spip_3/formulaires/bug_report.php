@@ -48,7 +48,7 @@ function formulaires_bug_report_traiter_dist($code_erreur='404', $url=false){
 	$texte .= "\n\n-- "._T('spip400:url_complete')." : ".$url;
 	if (isset($_SERVER['HTTP_REFERER']))	
 		$texte .= "\n\n-- "._T('spip400:referer')." : ".$_SERVER['HTTP_REFERER'];
-	file_get_contents($url);
+	@file_get_contents($url);
 	if (isset($http_response_header) && is_array($http_response_header) && count($http_response_header)) {
 		$texte .= "\n\n-- "._T('spip400:http_headers');
 		foreach($http_response_header as $var=>$val)
@@ -60,8 +60,14 @@ function formulaires_bug_report_traiter_dist($code_erreur='404', $url=false){
 	if (isset($GLOBALS["visiteur_session"])) {
 		$session_str = '';
 		foreach($GLOBALS["visiteur_session"] as $sess_var=>$sess_val){
-			if ($sess_val && strlen($sess_val)>0)
+			if ($sess_val && !is_array($sess_val) && strlen($sess_val)>0)
 				$session_str .= "\n".'#'.$sess_var.' => '.$sess_val;
+			if ($sess_val && is_array($sess_val) && count($sess_val)>0){
+				$session_str .= "\n".'#'.$sess_var.' => ';
+				foreach($sess_val as $key => $val)
+					$session_str .= "\n".'##'.$key.' => '.$val;
+			}
+				
 		}
 		$texte .= "\n\n-- "._T('spip400:session')."\n"._T('spip400:session_only_notempty_values').$session_str."\n---- ";
 	}

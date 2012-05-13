@@ -4,11 +4,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 //ini_set('display_errors','1'); error_reporting(E_ALL);
 
-/**
- * Nom du log specifique erreurs HTTP
- */
-define('SPIP_400_LOGNAME', 'spip_400');
-
 //
 // Reprise de 'self' standard, sans rien enlever
 //
@@ -52,7 +47,7 @@ function spip_400_log($code=400, $url=null) {
 		$infos_log[] = "Sess=[".$_COOKIE['spip_session']."]";
 	}
 
-	spip_log("[ERROR HTTP $code] ".join(' ', $infos_log), SPIP_400_LOGNAME);
+	spip_log("[ERROR HTTP $code] ".join(' ', $infos_log), 'spip_error'._LOG_ERREUR);
 	return;
 }
 
