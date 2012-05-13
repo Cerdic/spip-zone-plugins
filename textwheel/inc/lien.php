@@ -289,10 +289,16 @@ function traiter_autoliens($r) {
 
 define('_EXTRAIRE_LIENS', ',' . '\[[^\[\]]*(?:<-|->).*?\]' . '|<a\b.*?</a\b' . '|<\w.*?>' . '|((?:https?:/|www\.)[^"\'\s\[\]\}\)<>]*)' .',imsS');
 
+
 // Les URLs brutes sont converties en <a href='url'>url</a>
 // http://doc.spip.org/@traiter_raccourci_liens
 function traiter_raccourci_liens($t) {
 	$t = preg_replace_callback(_EXTRAIRE_LIENS, 'traiter_autoliens', $t);
+
+	include_spip('inc/ressource');
+	if (defined('_EXTRAIRE_RESSOURCES'))
+	$t = preg_replace_callback(_EXTRAIRE_RESSOURCES, 'traiter_ressources', $t);
+
 	// echapper les autoliens eventuellement inseres (en une seule fois)
 	if (strpos($t,"<html>")!==false)
 		$t = echappe_html($t);

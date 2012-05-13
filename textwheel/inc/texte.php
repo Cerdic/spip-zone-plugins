@@ -171,7 +171,7 @@ function traiter_echap_script_dist($regs) {
 	return $regs[0];
 }
 
-define('_PROTEGE_BLOCS', ',<(html|code|cadre|frame|script)\b[^>]*>,UimsS');
+define('_PROTEGE_BLOCS', ',<(html|code|cadre|frame|script)\b([^>]*)>(.*)</\1>,UimsS');
 
 // - pour $source voir commentaire infra (echappe_retour)
 // - pour $no_transform voir le filtre post_autobr dans inc/filtres
@@ -181,35 +181,34 @@ $preg='') {
 	if (!is_string($letexte) or !strlen($letexte))
 		return $letexte;
 
+	// si le texte recu est long PCRE risque d'exploser, on
+	// fait donc un mic-mac pour augmenter pcre.backtrack_limit
+	if (($len = strlen($letexte)) > 100000) {
+		if (!$old = @ini_get('pcre.backtrack_limit')) $old = 100000;
+		if ($len > $old) {
+			$a = @ini_set('pcre.backtrack_limit', $len);
+			spip_log("ini_set pcre.backtrack_limit=$len ($old)");
+		}
+	}
+
 	if (($preg OR strpos($letexte,"<")!==false) 
-	AND preg_match_all($preg ? $preg : _PROTEGE_BLOCS, $letexte, $matches, PREG_SET_ORDER))
+	  AND preg_match_all($preg ? $preg : _PROTEGE_BLOCS, $letexte, $matches, PREG_SET_ORDER))
 		foreach ($matches as $regs) {
-			$init = $regs[0];
-			$tag = $regs[1];
-			$a = stripos($letexte, $tag);
-			$b = stripos($letexte, "</$tag>", $a);
-
-			if ($a and $b) {
-				$regs[0] = substr($letexte, $a-1, $b - $a + strlen("</$tag>") + 1);
-
-				$regs[3] = substr($letexte, $a-1 + strlen($init),
-					$b - $a - strlen($init) + 1);
-
-				// echappements tels quels ?
-				if ($no_transform) {
-					$echap = $regs[0];
-				}
-
-				// sinon les traiter selon le cas
-				else if (function_exists($f = 'traiter_echap_'.strtolower($regs[1])))
-					$echap = $f($regs);
-				else if (function_exists($f = $f.'_dist'))
-					$echap = $f($regs);
-
-				$letexte = str_replace($regs[0],
-					code_echappement($echap, $source, $no_transform),
-					$letexte);
+			// echappements tels quels ?
+			if ($no_transform) {
+				$echap = $regs[0];
 			}
+
+
+			// sinon les traiter selon le cas
+			else if (function_exists($f = 'traiter_echap_'.strtolower($regs[1])))
+				$echap = $f($regs);
+			else if (function_exists($f = $f.'_dist'))
+				$echap = $f($regs);
+
+			$letexte = str_replace($regs[0],
+				code_echappement($echap, $source, $no_transform),
+				$letexte);
 		}
 
 	if ($no_transform)
