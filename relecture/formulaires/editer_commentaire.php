@@ -20,7 +20,7 @@ function formulaires_editer_commentaire_charger_dist($id_commentaire='oui', $red
 	else if ($id = intval($id_commentaire)) {
 		// - si le commentaire est ouvert l'auteur de l'article peut le moderer.
 		//   On lui renvoie le texte du commentaire et de la reponse
-		$textes = sql_fetsel('texte, reponse', 'spip_commentaire', "id_commentaire=$id");
+		$textes = sql_fetsel('texte, reponse', 'spip_commentaires', "id_commentaire=$id");
 		$valeurs = array_merge($valeurs, $textes);
 	}
 

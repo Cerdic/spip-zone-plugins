@@ -3,15 +3,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
- * Definition de la barre d'outil utilisee pour deposer des commentaires de relecture.
+ * Definition de la barre d'outil utilisee pour ajouter des commentaires de relecture.
  *
- * @return object
+ * @return object L'objet barre_outils configure
  */
 function barre_outils_relecture(){
 	$set = new Barre_outils(array(
 		'nameSpace'         => 'relecture',
 		'markupSet'         => array(
-			// Inserer un commentaire
+			// Bouton Inserer un commentaire
 			array(
 				"id"        => 'insercom',
 				"name"      => _T('relecture:bouton_ajouter_commentaire'),
@@ -75,7 +75,7 @@ function barre_outils_relecture(){
 /**
  * Definitions des liens entre css et icones
  *
- * @return object
+ * @return array
  */
 function barre_outils_relecture_icones(){
 	return array(

@@ -107,4 +107,27 @@ function generer_titre_relecture($id_objet, $champs) {
     return $titre;
 }
 
+
+/**
+ * Extraire du texte fourni la partie correspondante determinee par les offsets de debut et fin
+ * Si ceux sont nuls ou egaux la fonction renvoie une portion de texte autour du point d'insertion.
+ *
+ * @param string $texte
+ * @param int $idebut
+ * @param int $ifin
+ * @return string
+ */
+function relecture_extraire_selection($texte, $idebut, $ifin) {
+	$selection = '';
+
+	if ($idebut < $ifin) {
+		$selection = substr($texte, $idebut, $ifin-$idebut+1);
+	}
+	else {
+		$selection = substr($texte, max($idebut-10, 0), min($idebut+10, strlen($texte)));
+	}
+
+    return $selection;
+}
+
 ?>

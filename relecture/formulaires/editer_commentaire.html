@@ -11,8 +11,14 @@
 			<li class="editer editer_texte obligatoire[ (#ENV**{erreurs}|table_valeur{texte}|oui) erreur]">
 				<label for="texte"><:relecture:label_commentaire_texte:></label>
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{texte})</span>]
-				<textarea name="texte" id="texte"[ lang="(#LANG)"] rows="10" cols="40">[(#ENV**{texte})]</textarea>
+				<textarea name="texte" id="texte"[(#AUTORISER{modifer, commentaire, #ENV{id_commentaire}}|non) readonly="readonly"][ lang="(#LANG)"] rows="10" cols="40">[(#ENV**{texte})]</textarea>
 		    </li>
+			[(#AUTORISER{moderer, commentaire, #ENV{id_commentaire}})
+			<li class="editer editer_texte[ (#ENV**{erreurs}|table_valeur{reponse}|oui) erreur]">
+				<label for="reponse"><:relecture:label_commentaire_reponse:></label>
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{reponse})</span>]
+				<textarea name="reponse" class="inserer_barre_edition inserer_previsualisation" id="reponse"[ lang="(#LANG)"] rows="10" cols="40">[(#ENV**{reponse})]</textarea>
+		    </li>]
 		</ul>
 
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
