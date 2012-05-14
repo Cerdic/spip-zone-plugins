@@ -813,6 +813,7 @@ _ Ejemplo: <code>article.php3?id_article=123</code>
 <q1>• Asegurar que la URL producida esté totalmente {{en minúsculas}}.
 _ • Hacer que se añada sistemáticamente {{la id del objeto}} a su URL (como sufijo o prefijo).
 _ (ejemplos: <code>/Mi-titulo-de-articulo,457</code> o <code>/457-Mi-titulo-de-articulo</code>)</q1>[[%urls_minuscules%]][[->%urls_avec_id%]][[->%urls_avec_id2%]]', # MODIF
+	'type_urls:description2' => '{Note} : un changement dans ce paragraphe peut nécessiter de vider la table des URLs afin de permettre à SPIP de tenir compte des nouveaux paramètres.', # NEW
 	'type_urls:nom' => 'Formato de las URLs',
 	'typo_exposants:description' => '{{Textos en francés}}: mejora la presentación tipográfica de las abreviaturas corrientes, poniendo como superíndices los elementos necesarios (así, {<acronym>Mme</acronym>} se transforma en {M<sup>me</sup>}) y corrigiendo los errores comunes ({<acronym>2ème</acronym>} o  {<acronym>2me</acronym>}, por ejemplo, se transforman en {2<sup>e</sup>}, única abreviatura correcta).
 

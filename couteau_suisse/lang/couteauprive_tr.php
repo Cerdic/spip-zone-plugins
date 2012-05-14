@@ -785,6 +785,7 @@ _ Örnek : <code>article.php3?id_article=123</code>
 <q1>• URL\'nin tamamen {{küçük harf olması}}.</q1>[[%urls_minuscules%]]
 <q1>• Sistematik olarak {{nesne id\'sinin}} URL\'ye eklenmesi (ön ek, son ek vb.).
 _ (örnekler : <code>/Mon-titre-d-article,457</code> veya <code>/457-Mon-titre-d-article</code>)</q1>', # MODIF
+	'type_urls:description2' => '{Note} : un changement dans ce paragraphe peut nécessiter de vider la table des URLs afin de permettre à SPIP de tenir compte des nouveaux paramètres.', # NEW
 	'type_urls:nom' => 'URL\'lerin formatları',
 	'typo_exposants:description' => '{{Fransızca metinler}} : güncel kısaltmaların tipografik görünümünü gerekli elemanları üs\'e koyarak  (böylece, {<acronym>Mme</acronym>} şu hale gelir {M<sup>me</sup>}) ve sıkça yapılan hataları düzelterek ({<acronym>2ème</acronym>} veya {<acronym>2me</acronym>} şu hale gelir {2<sup>e</sup>}) geliştirir,.
 _ Burada elde edilen kısaltmalar 2002 yılında yayınlanan Paris Ulusal Basımevi 2002 standartlarına uygundur. 

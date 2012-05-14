@@ -818,6 +818,7 @@ _ Exemplu: <code>article.php3?id_article=123</code>
 <q1>• Asegurase que la URL producida tea totalmente {{en minúscules}}.</q1>[[%urls_minuscules%]]
 <q1>• Provocar l\'amestamientu sistemáticu de {{la id de l\'oxetu}} a la URL (como sufixu, prefixu, etc.).
 _ (exemplos: <code>/Mio-titulu-d-artículu,457</code> o <code>/457-Mio-títulu-d-artículu</code>)</q1>', # MODIF
+	'type_urls:description2' => '{Note} : un changement dans ce paragraphe peut nécessiter de vider la table des URLs afin de permettre à SPIP de tenir compte des nouveaux paramètres.', # NEW
 	'type_urls:nom' => 'Formatu de les URLs',
 	'typo_exposants:description' => '{{Testos en francés}}: meyora la presentación tipográfica de les abreviatures corrientes, escribiendo como esponente los elementos necesarios (así, {<acronym>Mme</acronym>} tresfórmase en {M<sup>me</sup>}) y corrixendo los fallos comunes ({<acronym>2ème</acronym>} o  {<acronym>2me</acronym>}, por exemplu, camúdense en {2<sup>e</sup>}, única abreviatura correuta).
 

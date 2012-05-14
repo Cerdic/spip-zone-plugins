@@ -819,6 +819,7 @@ _ Exemplo : <code>article.php3?id_article=123</code></radio_type_urls3>
 </ql>[[%urls_minuscules%]]
  <ql> Provocar o engadido sistemático do{{id do obxecto}} ao seu URL (en sufixo ou en prefixo, etc.).
 _(exemplos : <code>/Meu-titulo-de-artigo,457</code> ou <code>/457-Meu-titulo-de-artigo</code>)</q1>[[%urls_minuscules%]][[->%urls_avec_id%]][[->%urls_avec_id2%]]</ql>', # MODIF
+	'type_urls:description2' => '{Note} : un changement dans ce paragraphe peut nécessiter de vider la table des URLs afin de permettre à SPIP de tenir compte des nouveaux paramètres.', # NEW
 	'type_urls:nom' => 'Formato das URL',
 	'typo_exposants:description' => 'Textos franceses : mellora o rendemento tipográfico das abreviacións correntes, metendo en superíndice os elementos necesarios (así, {<acronym>Mme</acronym>} produce {M<sup>me</sup>}) e corrixindo os erros correntes ({<acronym>2ème</acronym>} ou  {<acronym>2me</acronym>}, por exemplo, produce {2<sup>e</sup>}, só abreviatura correcta).
 

@@ -855,6 +855,7 @@ _ Exemple : <code>article.php3?id_article=123</code>
 <q1>• Assegurar-se que l\'URL produïda estigui totalment {{en minúscules}}.</q1>[[%urls_minuscules%]]
 <q1>• Provocar l\'afegit sistemàtic de {{l\'id de l\'objecte}} al seu URL (en sufix, en prefix, etc.).
 _ (exemples: <code>/El-meu-títol-d-article,457</code> o <code>/457-El-meu-títol-d-article</code>)</q1>',
+	'type_urls:description2' => '{Note} : un changement dans ce paragraphe peut nécessiter de vider la table des URLs afin de permettre à SPIP de tenir compte des nouveaux paramètres.', # NEW
 	'type_urls:nom' => 'Format dels URLs',
 	'typo_exposants:description' => '((Textos francesos)): millora el retorn tipogràfic de les abreviacions corrents, exposant els elements necessaris (així, {<acronym>Mme</acronym>} esdevé {M<sup>me</sup>}) i corregint-ne els errors normals ({<acronym>2ème</acronym>} o  {<acronym>2me</acronym>}, per exemple, esdevenen {2<sup>e</sup>}, única abreviació correcta).
 

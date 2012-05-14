@@ -843,6 +843,7 @@ _ Example: <code>article.php3?id_article=123</code>
 <q1>• make sure the URL is in {{lower case}}.</q1>[[%urls_minuscules%]]
 <q1>• systematically add the {{id of the object}} to the URL (as a suffix, prefix, etc.).
 _ (examples: <code>/My-article-title,457</code> or <code>/457-My-article-title</code>)</q1>',
+	'type_urls:description2' => '{Note} : un changement dans ce paragraphe peut nécessiter de vider la table des URLs afin de permettre à SPIP de tenir compte des nouveaux paramètres.', # NEW
 	'type_urls:nom' => 'Format of URLs',
 	'typo_exposants:description' => '{{Text in French}}: improves the typographical rendering of common abbreviations by adding superscript where necessary (thus, {<acronym>Mme</acronym>} becomes {M<sup>me</sup>}). Common errors corrected: ({<acronym>2ème</acronym>} and {<acronym>2me</acronym>}, for example, become {2<sup>e</sup>}, the only correct abbreviation).
 
