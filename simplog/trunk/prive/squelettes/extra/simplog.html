@@ -9,7 +9,5 @@
         <li class="item"><a href="[(#URL_ECRIRE{#ENV{exec}}|parametre_url{fic,#VALEUR}|parametre_url{senstri,#ENV{senstri,0}})]">[(#VALEUR|basename)]</a></li>
         </BOUCLE_fics_logs>
     </ul>
-	<form action="#SELF" method="post">
-		<input value="<:simplog:actualiser:>" class="fondo" type="submit">
-    </form>
+    <p><a href="[(#SELF|parametre_url{hasard,[(#VAL{1}|rand{10000000})]})]" class="ajax"><:simplog:actualiser:></a></p>
 #BOITE_FERMER

@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'consultation_logs' => 'Consultation des fichiers de logs',
 
 	// D
-	'description_simplog' => 'Cette page permet de visualiser simplement les journaux contenus dans les répertoires de Spip.',
+	'description_simplog' => 'Cette page permet de visualiser simplement les journaux contenus dans les répertoires de SPIP.',
 
 	// F
 	'fichier' => 'Fichier',

@@ -1,21 +1,25 @@
-<BOUCLE_autoriser(CONDITION){si #AUTORISER{'voir','simplog'}}>
+[(#AUTORISER{voir,simplog}|sinon_interdire_acces)]
 
 <h1 class="grostitre"><:simplog:consultation_logs:></h1>
 
+#BOITE_OUVRIR
 [<h2><:simplog:fichier:> : (#ENV{fic})</h2>
-<p><a href="#SELF" class='ajax'><:simplog:clic_rafraichir:></a>&nbsp;-&nbsp;<a href="[(#SELF|parametre_url{senstri,[(#ENV{senstri,0}|=={1}|?{0,1})]})]" class='ajax'><:simplog:clic_senstri:></a></p>]
-
-<div class='cadre'>
+<p><a href="[(#SELF|parametre_url{hasard,[(#VAL{1}|rand{10000000})]})]" class='ajax'><:simplog:clic_rafraichir:></a>&nbsp;-&nbsp;<a href="[(#SELF|parametre_url{senstri,[(#ENV{senstri,0}|=={1}|?{0,1})]})]" class='ajax'><:simplog:clic_senstri:></a></p>]
     <B_fic>
     #ANCRE_PAGINATION
-    <BOUCLE_fic(DATA){source file, #ENV{fic}}{par cle}{inverse #ENV{senstri,0}}{pagination 100}>
+    <div class="spip_code">
+    <BOUCLE_fic(DATA){source file, #ENV{fic}}{par cle}{valeur != #ENV{fic}}{inverse #ENV{senstri,0}}{pagination 100}>
     <p>#VALEUR</p>
     </BOUCLE_fic>
+    </div>
     [<p class="pagination">(#PAGINATION{prive})</p>]
 	</B_fic>
-    <p><b><:simplog:message_fichier_inconnu{fichier=#ENV{fic}}:></b></p>
+	#BOITE_OUVRIR{'','error'}
+    <:simplog:message_fichier_inconnu{fichier=#ENV{fic}}:>
+    #BOITE_FERMER
     <//B_fic>
     [(#ENV{fic}|non)
-    <p><b><:simplog:message_fichier_choisir:></b></p>]
-</div>
-</BOUCLE_autoriser>
+    #BOITE_OUVRIR{'','notice'}
+    <:simplog:message_fichier_choisir:>
+    #BOITE_FERMER]
+#BOITE_FERMER
