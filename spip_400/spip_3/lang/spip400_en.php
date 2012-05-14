@@ -8,14 +8,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// 4
-	'401_error' => 'You do not have sufficient permissions to access the requested page or document ...',
+	'401_error' => 'You do not have sufficient permissions to access the requested page or document ...', # MODIF
 	'401_error_comment_connected' => '{{Please contact the webmaster for access ...}}
 
-Access to this page or this document requires to be authorized and identified. It appears that your access rights are not sufficient ...',
+Access to this page or this document requires to be authorized and identified. It appears that your access rights are not sufficient ...', # MODIF
 	'401_error_comment_notconnected' => '{{Please login below to access ...}}
 
-Access to this page or this document requires to be authorized and identified. If you have permission, please sign in via the form below.',
-	'404_error' => 'The page or document you requested is not found on the site ...',
+Access to this page or this document requires to be authorized and identified. If you have permission, please sign in via the form below.', # MODIF
+	'404_error' => 'The page or document you requested is not found on the site ...', # MODIF
 	'404_error_comment' => '{{We apologize for this time-cons ...}}
 
 Some web pages are not permanent or regularly changing URL ({address access entry in the browser bar}).
@@ -27,7 +27,7 @@ To facilitate your browsing, we recommend the following actions:
 - return to the [homepage|Back to site homepage->@sommaire@] to restart from the root of the hierarchy,
 - send an error report to the site administrators to correct the broken link using the button below.
 
-Finally, many websites have one or several spaces reserved for their directors or subscribers require login. If you have permission, [click here to access the platform connecting the site|IDs will be required->@ecrire@].',
+Finally, many websites have one or several spaces reserved for their directors or subscribers require login. If you have permission, [click here to access the platform connecting the site|IDs will be required->@ecrire@].', # MODIF
 
 	// B
 	'backtrace' => 'PHP Backtrace',
