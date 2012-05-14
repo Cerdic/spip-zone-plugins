@@ -1,7 +1,7 @@
 <paquet
 	prefix="spip_400"
 	categorie="navigation"
-	version="0.22.1"
+	version="0.22.2"
 	etat="stable"
 	compatibilite="[3.0.0-beta;["
 	logo="stop_32.png"
