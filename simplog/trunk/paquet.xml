@@ -1,0 +1,20 @@
+<paquet
+	prefix="simplog"
+	categorie="outil"
+	version="0.2.1"
+	etat="dev"
+	compatibilite="[3.0.0-dev;3.0.99]"
+	logo="prive/themes/spip/images/simplog-24.gif"
+>	
+
+	<nom>Simples Logs</nom>
+	<!-- Visualisation des logs SPIP par les administrateurs -->
+
+	<auteur mail="luc.tech@free.fr">Luc Tech</auteur>
+
+	<licence>GNU/GLP</licence>
+
+	<pipeline nom="autoriser" inclure="inc/simplog_autoriser.php" />
+	<necessite nom="iterateurs" />
+	<menu nom="simplog_bt" titre="simplog:logs" parent="configuration" icone="prive/themes/spip/images/simplog-24.gif" action="simplog" />
+</paquet>
