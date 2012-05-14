@@ -7,32 +7,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'actualiser' => 'Actualiser',
-	'autoriser_non' => 'Vous n\'êtes pas autorisé.',
+	'autoriser_non' => 'Vous n\'êtes pas autorisé à lire les journaux.',
 
 	// C
-	'clic_rafraichir' => 'Cliquer pour rafraîchir',
-	'clic_senstri' => 'Cliquer pour inverser l\'ordre d\'affichage des données',
-	'consultation_logs' => 'Consultation des fichiers de traces',
+	'clic_rafraichir' => 'Rafraîchir',
+	'clic_senstri' => 'Inverser l\'ordre d\'affichage des données',
+	'consultation_logs' => 'Consultation des fichiers de logs',
 
 	// D
-	'description_simplog' => 'Ce plugin permet de visualiser simplement :) les fichiers de traces contenus dans le répertoire <i>tmp</i> de Spip.',
+	'description_simplog' => 'Cette page permet de visualiser simplement les journaux contenus dans les répertoires de Spip.',
 
 	// F
 	'fichier' => 'Fichier',
-	'fichier_inconnu' => 'Fichier inconnu',
 
 	// L
 	'liste_fic' => 'Liste des fichiers',
 	'logs' => 'Consultation des journaux',
 
+	// M
+	'message_fichier_choisir' => 'Choisissez un fichier à analyser.',
+	'message_fichier_inconnu' => 'Le fichier "@fichier@" est indisponible.',
+	
 	// P
 	'plugin_simplog' => 'Plugin Simplog',
 
 	// R
-	'rep_tmp' => 'Votre Répertoire',
-
-	// Z
-	'z' => 'z'
+	'rep_tmp' => 'Vos répertoires'
 );
 
 ?>

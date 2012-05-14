@@ -1,0 +1,21 @@
+<BOUCLE_autoriser(CONDITION){si #AUTORISER{'voir','simplog'}}>
+
+<h1 class="grostitre"><:simplog:consultation_logs:></h1>
+
+[<h2><:simplog:fichier:> : (#ENV{fic})</h2>
+<p><a href="#SELF" class='ajax'><:simplog:clic_rafraichir:></a>&nbsp;-&nbsp;<a href="[(#SELF|parametre_url{senstri,[(#ENV{senstri,0}|=={1}|?{0,1})]})]" class='ajax'><:simplog:clic_senstri:></a></p>]
+
+<div class='cadre'>
+    <B_fic>
+    #ANCRE_PAGINATION
+    <BOUCLE_fic(DATA){source file, #ENV{fic}}{par cle}{inverse #ENV{senstri,0}}{pagination 100}>
+    <p>#VALEUR</p>
+    </BOUCLE_fic>
+    [<p class="pagination">(#PAGINATION{prive})</p>]
+	</B_fic>
+    <p><b><:simplog:message_fichier_inconnu{fichier=#ENV{fic}}:></b></p>
+    <//B_fic>
+    [(#ENV{fic}|non)
+    <p><b><:simplog:message_fichier_choisir:></b></p>]
+</div>
+</BOUCLE_autoriser>

@@ -1,7 +1,7 @@
 <paquet
 	prefix="simplog"
 	categorie="outil"
-	version="0.2.1"
+	version="0.3.0"
 	etat="dev"
 	compatibilite="[3.0.0-dev;3.0.99]"
 	logo="prive/themes/spip/images/simplog-24.gif"
@@ -16,5 +16,5 @@
 
 	<pipeline nom="autoriser" inclure="inc/simplog_autoriser.php" />
 	<necessite nom="iterateurs" />
-	<menu nom="simplog_bt" titre="simplog:logs" parent="configuration" icone="prive/themes/spip/images/simplog-24.gif" action="simplog" />
+	<menu nom="simplog_bt" titre="simplog:logs" parent="menu_administration" icone="images/simplog-16.gif" action="simplog" />
 </paquet>
