@@ -15,9 +15,10 @@
     </div>
     [<p class="pagination">(#PAGINATION{prive})</p>]
 	</B_fic>
+	[(#ENV{fic}|oui)
 	#BOITE_OUVRIR{'','error'}
     <:simplog:message_fichier_inconnu{fichier=#ENV{fic}}:>
-    #BOITE_FERMER
+    #BOITE_FERMER]
     <//B_fic>
     [(#ENV{fic}|non)
     #BOITE_OUVRIR{'','notice'}
