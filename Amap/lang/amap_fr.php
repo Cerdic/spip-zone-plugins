@@ -9,11 +9,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_modifier' => 'Modifier',
 	'action_supprimer' => 'Supprimer',
 	'adherent' => 'Adhérent',
-	'adherents_jour' => 'Adherents du jour', // pas d'accent c'est utiliser dans le pdf des paniers
+	'adherents_jour' => 'Adhérents du jour', // pas d'accent c'est utiliser dans le pdf des paniers
 	'adherent_sans_type_panier_sans_type_adherent' => 'Vos adhérents n\'ont pas encore de type de panier affecté ou de type d\'adhérent.', 
 	'adhesion' => 'Adhésion (ex:2008)',
 	'adhesion_auteur' => 'Adhésion :',
 	'administrateur' => 'Administrateur',
+	'amapiens_explication' => 'Sur cette page vous trouverez la liste des amapiens de votre association, en cliquant sur le nom vous retournerez sur la page de l\'auteur. Tenir à jours les informations de chaqu\'un est obligatoire au moment du changement de saison.',
 	'attention' => 'ATTENTION !',
 	'attention_modifications' => '<p>Vous venez d\'activer le plugin AMAP, ce dernier vient de créer une nouvelle rubrique "Agenda de la saison" avec deux sous-rubriques "Distribution" et "Évènements", ainsi que la rubrique "Archives".</p>
 									1. Avant de poursuivre, veuillez renseigner toutes les dates de votre saison grâce au plugin agenda.<br />
@@ -52,8 +53,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'information_amap' => 'Information AMAP',
 	'impression' => 'Impression',
 	'impression_donnees' => 'Impression de données',
-	'impression_donnees_fonction_date' => 'Impression des paniers en fonction d\'une date :',
 	'impression_explication' => 'Seulement les dates contenant au minimum un panier sont cliquables et ouvrent une nouvelle fenêtre.',
+	'impression_paniers_fonction_date' => 'Impression des paniers en fonction d\'une date :',
+	'impression_responsables_fonction_date' => 'Impression des responsables en fonction d\'un mois :',
 
 	// L
 	'les_livraisons' => 'Les livraisons',
@@ -67,6 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_paniers_vendu_par' => 'Liste des paniers produit par @nom@',
 	'liste_responsables' => 'Liste des responsables',
 	'livraison' => 'Livraison',
+	'livraison_explication' => 'Sur cette page vous trouverez la liste des livraison que vous avez déjà effectuer, le contenu de ce tableau est visible sur la page <a href="@url@"><b>ici</b></a>.',
 
 	// M
 	'manque_fpdf_imprimer' => 'Il vous manque le plugins "fpdf" pour pouvoir imprimer vos listes de paniers.',
@@ -90,6 +93,7 @@ Je mets à disposition le panier du @date_distribution@, pour le récupérer sui
 @nom_adherent@',
 	'panier_dispo_plus' => 'Des infos à donner en plus (elles seront rajoutées dans le courriel envoyé avant votre nom)',
 	'panier_distribuer' => 'panier à distribuer',
+	'panier_explication' => 'Sur cette page vous trouverez la liste des paniers que vous devez distribuer, ils sont modifiable et supprimable. Toutes modifications entraîne un envoie de mail en masse à tous les adhérents et les producteurs de l\'association.',
 	'panier_liste' => 'Liste des paniers',
 	'panier_livraison' => 'Contenu d\'un panier',
 	'panier_recupere' => 'Panier du @date_distribution@ récupéré',
@@ -112,6 +116,8 @@ Je récupère le panier du @date_distribution@ produit par @nom_producteur@
 
 	// R
 	'responsables' => 'Responsables',
+	'responsables_distribution_paniers' => 'Responsables des distributions pour le mois de @nb@',
+	'responsables_explication' => 'Sur cette page vous trouverez la liste des responsables avec la dates de distribution à laquelle il a été associé. Ce tableau est affichable sur le site via un article en mettant le code <liste|distributions>',
 	'reste_panier_distribuer' => 'Il nous reste encore 1 panier à distribuer',
 	'reste_panier_recuperer' => 'Il vous reste encore 1 panier à recupérer',
 	'reste_paniers_distribuer' => 'Il nous reste encore @nb@ paniers à distribuer',

@@ -25,7 +25,7 @@ var $titre;
 			$this->SetFont('Arial','',10);
 			$this->Cell(0,6,_T('amap:liste_paniers'),0,1,'L');
 			$this->SetFont('Arial','B',14);
-			$this->Cell(0,6,unicode2charset(html2unicode($this->titre)),0,1,'C');
+			$this->Cell(0,6,(html_entity_decode($this->titre)),0,1,'C');
 			$this->Ln(10);
 		//Imprime l'en-t�te du tableau si n�cessaire
 		}
@@ -36,7 +36,7 @@ var $titre;
 		// Titre
 		$this->SetFont('Arial','',10);
 		//$this->SetFillColor(200,220,255);
-		$this->Cell(0,6,"$libelle",0,1,'L');
+		$this->Cell(0,6,html_entity_decode($libelle),0,1,'L');
 		$this->Ln(10);
 		// Sauvegarde de l'ordonnée
 		$this->y0 = $this->GetY();
