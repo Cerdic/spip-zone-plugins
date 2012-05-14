@@ -5,8 +5,6 @@
 	<nom>SpipService</nom>
 	<!-- API REST permettant communication tierce -->
 	
-	<categorie>communication</categorie>
-	
 	<auteur lien="http://www.studio-lambda.com">Studio Lambda</auteur>
 
 	<!-- Pipeline : declarer a SPIP les tables principales -->
