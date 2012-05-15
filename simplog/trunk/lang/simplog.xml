@@ -1,4 +1,4 @@
-<traduction module="simplog" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/simplog/lang/" reference="fr">
+<traduction module="simplog" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/simplog/trunk/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.org/tradlang_module/simplog?lang_cible=en">
 		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
 	</langue>

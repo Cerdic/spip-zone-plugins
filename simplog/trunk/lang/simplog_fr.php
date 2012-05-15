@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/simplog/lang/
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/simplog/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_fichier_choisir' => 'Choisissez un fichier à analyser.',
 	'message_fichier_inconnu' => 'Le fichier "@fichier@" est indisponible.',
-	
+
 	// P
 	'plugin_simplog' => 'Plugin Simplog',
 
