@@ -284,15 +284,15 @@ if (!function_exists('fixer_extension_document')){
 function fixer_extension_document($doc) {
 	$extension = '';
 	$name = $doc['name'];
-	if (preg_match(',[.]([^.]+)$,', $name, $r)
+	if (preg_match(',\.([^.]+)$,', $name, $r)
 	 AND $t = sql_fetsel("extension", "spip_types_documents",	"extension=" . sql_quote(corriger_extension($r[1])))
 	 ) {
 		$extension = $t['extension'];
-		$name = preg_replace(',[.][^.]*$,', '', $doc['name']).'.'.$extension;
+		$name = preg_replace(',\.[^.]*$,', '', $doc['name']).'.'.$extension;
 	}
 	else if ($t = sql_fetsel("extension", "spip_types_documents",	"mime_type=" . sql_quote($doc['type']))) {
 		$extension = $t['extension'];
-		$name = preg_replace(',[.][^.]*$,', '', $doc['name']).'.'.$extension;
+		$name = preg_replace(',\.[^.]*$,', '', $doc['name']).'.'.$extension;
 	}
 
 	return array($extension,$name);
