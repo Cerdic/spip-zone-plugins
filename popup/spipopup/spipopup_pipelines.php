@@ -21,4 +21,28 @@ function spipopup_insert_head($flux){
 	return $flux;
 }
 
+function spipopup_porte_plume_barre_pre_charger($barres){
+	$barre = &$barres['edition'];
+
+	$link = $barre->get('link');
+	$link["dropMenu"] = array(
+			// poesie spip
+			array(
+				"id"          => 'popup_link',
+				"name"        => _T('spipopup:inserer_lien_popup'),
+				"className"   => "outil_barre_popup", 
+				"replaceWith" => 'function(markitup) { zone_selection = markitup.textarea; window.open("?exec=popup_edit", "popup_editor","scrollbars=yes,resizable=yes,width=480,height=400"); }',
+				"display"     => true,
+			),
+	);
+	$barre->set('link', $link);	
+
+	return $barres;
+}
+
+function spipopup_porte_plume_lien_classe_vers_icone($flux){
+	return array_merge($flux, array(
+		'outil_barre_popup' => array('popup.png','0'),
+	));
+}
 ?>

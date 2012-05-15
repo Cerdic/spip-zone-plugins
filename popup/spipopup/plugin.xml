@@ -2,7 +2,7 @@
 	<nom>Balise &#035;POPUP</nom>
 	<slogan>Gestion d'une fen&#234;tre popup unique</slogan>
 	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
-	<version>1.31.0</version>
+	<version>1.31.1</version>
 	<licence>&#169; 2010-2011 GPL</licence>
 	<icon>images/popup-128.png</icon>
 	<etat>stable</etat>
@@ -34,6 +34,15 @@ Ce plugin permet de g&#233;rer d'une fen&#234;tre popup ({fen&#234;tre externe})
 		<nom>insert_head</nom>
 		<inclure>spipopup_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>porte_plume_barre_pre_charger</nom>
+		<inclure>spipopup_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_lien_classe_vers_icone</nom>
+		<inclure>spipopup_pipelines.php</inclure>
+	</pipeline>
 	<necessite id='SPIP' version='[1.9.2;2.1.99]' />
+	<necessite id="porte_plume" version="[1.2.2;]" />
 	<categorie>squelette</categorie>
 </plugin>
