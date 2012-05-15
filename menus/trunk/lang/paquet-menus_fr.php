@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	Le but du plugin {{Menus}} est donc de permettre de facilement élaborer des menus au moyen d\'une interface conviviale, directement dans la partie privée.
 	{{Attention !}} Ce plugin ne s\'occupe pas de la manière dont seront affichés les menus. Il permet de les créer facilement et d\'en générer le code HTML.',
+	'menus_nom' => 'Menus',
 	'menus_slogan' => 'Créez vos menus personnalisés.',
 	'menus_titre' => 'Menus'
 );
