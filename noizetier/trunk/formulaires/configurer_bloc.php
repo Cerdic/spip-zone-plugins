@@ -12,9 +12,11 @@ function formulaires_configurer_bloc_charger($bloc,$page,$infos_bloc){
 	$contexte['page'] = $page;
 	$type_compo = explode ('-',$page,2);
 	$contexte['type'] = $type_compo[0];
-	if(!isset($type_compo[1]))
-		$contexte['composition'] = $type_compo[0];
-	else 
+	if(!isset($type_compo[1])) {
+		#$contexte['composition'] = $type_compo[0];
+		# Z-Core n'a pas besoin de composition identique au type s'il n'y en a pas !
+		$contexte['composition'] = '';
+	} else 
 		$contexte['composition'] = $type_compo[1];
 	$contexte['bloc_page'] = $bloc.'-'.$page;
 	$contexte['_infos_bloc'] = $infos_bloc;
@@ -171,9 +173,11 @@ function formulaires_configurer_bloc_traiter($bloc,$page){
 			$t_bloc_page = explode ('-',$bloc_page,3);
 			$bloc = $t_bloc_page[0];
 			$type = $t_bloc_page[1];
-			if(!isset($t_bloc_page[2]))
-				$composition = $t_bloc_page[1];
-			else 
+			if(!isset($t_bloc_page[2])) {
+				#$composition = $t_bloc_page[1];
+				# Z-core n'a pas besoin de composition
+				$composition = '';
+			} else 
 				$composition = $t_bloc_page[2];
 			$id_noisette = sql_insertq(
 				'spip_noisettes',
@@ -191,7 +195,7 @@ function formulaires_configurer_bloc_traiter($bloc,$page){
 			include_spip('inc/invalideur');
 			$cle_invalidation = $bloc.'/'.$type;
 			if ($composition != '')
-				$cle_invalidation .= '-'.composition;
+				$cle_invalidation .= '-'.$composition;
 			suivre_invalideur($cle_invalidation);
 		}
 		// Mise à jour de la noisette

@@ -223,7 +223,7 @@ function extrait_parametres_noisette($parametres){
 
 /**
  * Lister les pages pouvant recevoir des noisettes
- * Par defaut, cette liste est basee sur le contenu du repertoire contenu/
+ * Par defaut, cette liste est basee sur le contenu du repertoire content/
  * Le tableau de resultats peut-etre modifie via le pipeline noizetier_lister_pages.
  *
  * @staticvar array $liste_pages
@@ -237,8 +237,9 @@ function noizetier_lister_pages(){
 		$match = ".+[.]html$";
 
 		// lister les fonds disponibles dans le repertoire contenu
-		$rep = defined('_NOIZETIER_REPERTOIRE_PAGES')?_NOIZETIER_REPERTOIRE_PAGES:'contenu/';
+		$rep = defined('_NOIZETIER_REPERTOIRE_PAGES')?_NOIZETIER_REPERTOIRE_PAGES:'content/';
 		$liste = find_all_in_path($rep, $match);
+
 		if (count($liste)){
 			foreach($liste as $squelette=>$chemin) {
 				$page = preg_replace(',[.]html$,i', '', $squelette);
@@ -255,7 +256,7 @@ function noizetier_lister_pages(){
 			unset($liste_pages['page']);
 			unset($liste_pages['z_apl']);
 		}
-		
+
 		// supprimer de la liste les pages necissant un plugin qui n'est pas actif
 		foreach ($liste_pages as $page => $infos_page)
 			if (isset($infos_page['necessite']))
@@ -303,7 +304,7 @@ function noizetier_charger_infos_page($dossier,$page, $info=""){
 		
 		// On autorise le fait que le fichier xml ne soit pas dans le meme plugin que le fichier .html
 		// Au cas ou le fichier .html soit surcharge sans que le fichier .xml ne le soit
-		$rep = defined('_NOIZETIER_REPERTOIRE_PAGES')?_NOIZETIER_REPERTOIRE_PAGES:'contenu/';
+		$rep = defined('_NOIZETIER_REPERTOIRE_PAGES')?_NOIZETIER_REPERTOIRE_PAGES:'content/';
 		$fichier = find_in_path("$rep$page.xml");
 		
 		include_spip('inc/xml');
@@ -369,17 +370,17 @@ function noizetier_blocs_defaut(){
 
 	if (is_null($blocs_defaut)){
 		$blocs_defaut = array (
-			'contenu' => array(
+			'content' => array(
 				'nom' => _T('noizetier:nom_bloc_contenu'),
 				'description' => _T('noizetier:description_bloc_contenu'),
 				'icon' => 'img/ic_bloc_contenu.png'
 				),
-			'navigation' => array(
+			'extra1' => array(
 				'nom' => _T('noizetier:nom_bloc_navigation'),
 				'description' => _T('noizetier:description_bloc_navigation'),
 				'icon' => 'img/ic_bloc_navigation.png'
 				),
-			'extra' => array(
+			'extra2' => array(
 				'nom' => _T('noizetier:nom_bloc_extra'),
 				'description' => _T('noizetier:description_bloc_extra'),
 				'icon' => 'img/ic_bloc_extra.png'
@@ -492,6 +493,7 @@ function noizetier_lister_icones(){
  * @return 
 **/
 function noizetier_choisir_contexte($noisette, $contexte_entrant, $id_noisette) {
+
 	$contexte_noisette = array_flip(noizetier_obtenir_contexte($noisette));
 
 	// On transmet toujours l'id_noisette et les variables se terminant par _$id_noisette (utilisees par exemple par Aveline pour la pagination)
@@ -505,14 +507,15 @@ function noizetier_choisir_contexte($noisette, $contexte_entrant, $id_noisette) 
 	foreach ($contexte_entrant as $variable => $valeur)
 		if (substr($variable,$l)=='_'.$id_noisette)
 			$contexte_min[$variable] = $valeur;
-	
+
 	if (isset($contexte_noisette['aucun'])) {
 		return $contexte_min;
 	}
+
 	if ($contexte_noisette) {
 		return array_merge(array_intersect_key($contexte_entrant, $contexte_noisette),$contexte_min);
 	}
-	
+
 	return $contexte_entrant;
 }
 
