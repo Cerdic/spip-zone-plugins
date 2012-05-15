@@ -16,8 +16,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'descr_cfg' => 'Documentation du plugin pour plus d\'infos : [spip-contrib.net/?article3573->http://www.spip-contrib.net/?article3573]',
 
+	// E
+	// editor
+	'editor' => 'Editeur de lien popup',
+	'editor_titre_inserer_lien_popup' => 'Insérer un lien popup',
+	'editor_lien' => 'Lien à insérer (URL ou objet SPIP)',
+	'editor_texte' => 'Texte du lien',
+	'editor_skel' => 'Squelette de page SPIP',
+	'editor_titre' => 'Titre du lien (au passage de la souris)',
+	'editor_erreur_entree_obligatoire' => 'Cette entrée est obligatoire !',
+	'editor_enregistrer' => 'Enregistrer',
+
 	// H
 	'height' => 'Hauteur (en pixels)',
+
+	// I
+	'inserer_lien_popup' => 'Insérer un lien en fenêtre popup',
 
 	// L
 	'legend_cfg_balise' => 'Concernant la fenêtre externe',

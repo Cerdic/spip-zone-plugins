@@ -1,7 +1,7 @@
 <paquet
 	prefix="spipopup"
 	categorie="squelette"
-	version="1.4.0"
+	version="1.4.1"
 	etat="stable"
 	compatibilite="[3.0.0-alpha2;["
 	logo="images/popup-128.png"
@@ -19,6 +19,9 @@
 	<traduire module="spipopup" reference="fr" gestionnaire="salvatore" />
 
 	<pipeline nom="insert_head" inclure="spipopup_pipelines.php" />
+	<pipeline nom="porte_plume_barre_pre_charger" inclure="spipopup_pipelines.php" />
+	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="spipopup_pipelines.php" />
 
-	<chemin path="" />
+	<necessite nom="porte_plume" compatibilite="[1.2.2;[" />
+
 </paquet>
