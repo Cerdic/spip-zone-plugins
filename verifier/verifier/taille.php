@@ -22,13 +22,13 @@ function verifier_taille_dist($valeur, $options=array()){
 	$erreur = '';
 
 	if (isset($options['min']))
-		$ok = ($ok and (strlen($valeur) >= $options['min']));
+		$ok = ($ok and (mb_strlen($valeur) >= $options['min']));
 	
 	if (isset($options['max'])){
-		$ok = ($ok and (strlen($valeur) <= $options['max']));
+		$ok = ($ok and (mb_strlen($valeur) <= $options['max']));
 	}
 	if (isset($options['egal'])){
-		$ok = ($ok and (strlen($valeur) == $options['egal']));
+		$ok = ($ok and (mb_strlen($valeur) == $options['egal']));
 	}
 	
 	if (!$ok){
