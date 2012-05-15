@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ancresdouces_description' => 'Ce plugin permet un défilement continu de la page lorsque le visiteur clique sur un lien pointant vers une ancre de l\'article en cours de lecture.',
+	'ancresdouces_nom' => 'Ancres Douces',
 	'ancresdouces_slogan' => 'Des ancres en douceur'
 );
 
