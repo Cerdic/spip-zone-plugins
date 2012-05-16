@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'menus_description' => 'Create your own custom menus.',
+	'menus_nom' => 'Menus', # NEW
 	'menus_slogan' => 'Create your own custom menus.',
 	'menus_titre' => 'Menus'
 );

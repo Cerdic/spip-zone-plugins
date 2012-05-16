@@ -15,8 +15,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	Cieľom zásuvného modulu {{Menus}} je umožniť vám ľahko vytvárať menu pomocou intuitívneho rozhrania priamo do súkromnej zóny.
 	{{Pozor!}} Tento zásuvný modul sa nezaoberá tým, ako sa položky menu zobrazia. Umožňuje  ľahké vytváranie menu a vygenerovanie kódu HTML.',
+	'menus_nom' => 'Ponuky menu',
 	'menus_slogan' => 'Vytvorte svoje vlastné ponuky menu.',
-	'menus_titre' => 'Menu'
+	'menus_titre' => 'Ponuky menu'
 );
 
 ?>
