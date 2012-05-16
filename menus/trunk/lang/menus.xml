@@ -13,6 +13,9 @@
 	<langue code="es" url="http://trad.spip.org/tradlang_module/menus?lang_cible=es">
 		<traducteur nom="tin" lien="http://trad.spip.org/auteur/tin" />
 	</langue>
+	<langue code="fa" url="http://trad.spip.org/tradlang_module/menus?lang_cible=fa">
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
+	</langue>
 	<langue code="fr" />
 	<langue code="it" />
 	<langue code="sk" url="http://trad.spip.org/tradlang_module/menus?lang_cible=sk">
