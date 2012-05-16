@@ -1,0 +1,78 @@
+<?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.org/tradlang_module/facteur?lang_cible=sk
+// ** ne pas modifier le fichier **
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+$GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// Z
+	'Z' => 'ZZzZZzzz',
+
+	// C
+	'config_info_enregistree' => 'La configuration du facteur a bien été enregistrée', # NEW
+	'configuration_adresse_envoi' => 'Configuration de l\'adresse d\'envoi', # NEW
+	'configuration_facteur' => 'Facteur', # NEW
+	'configuration_mailer' => 'Configuration du mailer', # NEW
+	'configuration_smtp' => 'Choix de la méthode d\'envoi de mail', # NEW
+	'configuration_smtp_descriptif' => 'Si vous n\'êtes pas sûrs, choisissez la fonction mail de PHP.', # NEW
+	'corps_email_de_test' => 'Ceci est un email de test accentué', # NEW
+
+	// E
+	'email_test_envoye' => 'L\'email de test a correctement été envoyé. Si vous ne le recevez pas correctement, vérifiez la configuration de votre serveur ou contactez un administrateur du serveur.', # NEW
+	'erreur' => 'Chyba',
+	'erreur_dans_log' => ' : consultez le fichier log pour plus de détails', # NEW
+	'erreur_generale' => 'Il y a une ou plusieurs erreurs de configuration. Veuillez vérifier le contenu du formulaire.', # NEW
+	'erreur_invalid_host' => 'Ce nom d\'hôte n\'est pas correct', # NEW
+	'erreur_invalid_port' => 'Ce numéro de port n\'est pas correct', # NEW
+
+	// F
+	'facteur_adresse_envoi_email' => 'E-mail:',
+	'facteur_adresse_envoi_nom' => '(Obchodné) meno:',
+	'facteur_bcc' => 'Skrytá kópia (BCC):',
+	'facteur_cc' => 'Kópia (CC):',
+	'facteur_copies' => 'Kópie:',
+	'facteur_copies_descriptif' => 'Un email sera envoyé en copie aux adresses définies. Une seule adresse en copie et/ou une seule adresse en copie cachée.', # NEW
+	'facteur_filtre_accents' => 'Transformer les accents en leur entités html (utile pour Hotmail notamment).', # NEW
+	'facteur_filtre_css' => 'Transformer les styles contenus entre <head> et </head> en des styles "en ligne", utile pour les webmails car les styles en ligne ont la priorité sur les styles externes.', # NEW
+	'facteur_filtre_images' => 'Embarquer les images référencées dans les emails', # NEW
+	'facteur_filtre_iso_8859' => 'Zmeniť na ISO-8859-1',
+	'facteur_filtres' => 'Filtre',
+	'facteur_filtres_descriptif' => 'Des filtres peuvent être appliqués aux emails au moment de l\'envoi.', # NEW
+	'facteur_smtp_auth' => 'Vyžaduje sa prihlásenie:',
+	'facteur_smtp_auth_non' => 'nie',
+	'facteur_smtp_auth_oui' => 'áno',
+	'facteur_smtp_host' => 'Host:',
+	'facteur_smtp_password' => 'Heslo:',
+	'facteur_smtp_port' => 'Port:',
+	'facteur_smtp_secure' => 'Zabezpečené pripojenie:',
+	'facteur_smtp_secure_non' => 'nie',
+	'facteur_smtp_secure_ssl' => 'SSL',
+	'facteur_smtp_secure_tls' => 'TLS',
+	'facteur_smtp_sender' => 'Vypísanie chýb (nepovinné)',
+	'facteur_smtp_sender_descriptif' => 'Définit dans l\'entête du mail l\'adresse email de retour des erreurs (ou Return-Path), et lors d\'un envoi via la méthode SMTP cela définit aussi l\'adresse de l\'envoyeur.', # NEW
+	'facteur_smtp_username' => 'Používateľské meno:',
+
+	// N
+	'note_test_configuration' => 'Un email sera envoyé à l\'adresse d\'envoi définie (ou celle du webmaster).', # NEW
+
+	// P
+	'personnaliser' => 'Prispôsobiť si tieto nastavenia',
+
+	// T
+	'tester' => 'Otestovať',
+	'tester_la_configuration' => 'Otestovať nastavenia',
+
+	// U
+	'utiliser_mail' => 'Používať funkciu mail z PHP',
+	'utiliser_reglages_site' => 'Utiliser les réglages du site SPIP : le nom affiché sera le nom du site SPIP et l\'adresse email sera celle du webmaster', # NEW
+	'utiliser_smtp' => 'Používať SMTP',
+
+	// V
+	'valider' => 'Potvrdiť',
+	'version_html' => 'HTML verzia.',
+	'version_texte' => 'Textová verzia.'
+);
+
+?>
