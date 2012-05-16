@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cextras_description' => 'Ponúka jednoduchú aplikáciu, ktorá umožňuje vytvárať nové polia v redakčných objektoch.
 					Je základom pre iné zásuvné moduly, vrátane  "Rozhrania doplnkových polí", ktoré poskytuje
 					grafické rozhranie na riadenie týchto nových polí.',
+	'cextras_nom' => 'Doplnkové polia',
 	'cextras_slogan' => 'Aplikácia na riadenie nových polí v redakčných objektoch',
 	'cextras_titre' => 'Doplnkové polia'
 );
