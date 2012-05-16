@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'agenda_description' => 'Events agenda',
+	'agenda_nom' => 'Agenda',
 	'agenda_slogan' => 'Events agenda'
 );
 

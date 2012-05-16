@@ -8,8 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'agenda_description' => 'Program udalostí',
-	'agenda_slogan' => 'Program udalostí'
+	'agenda_description' => 'Kalendár udalostí',
+	'agenda_nom' => 'Diár',
+	'agenda_slogan' => 'Kalendár udalostí'
 );
 
 ?>
