@@ -18,8 +18,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'descr_cfg' => 'Dokumentácia zásuvného modulu pre viac informácií: [spip-contrib.net/?article3573->http://www.spip-contrib.net/?article3573]',
 
+	// E
+	'editor' => 'Upraviť vyskakovací odkaz',
+	'editor_enregistrer' => 'Uložiť',
+	'editor_erreur_entree_obligatoire' => 'Tento údaj je povinný!',
+	'editor_lien' => 'Odkaz, ktorý chcete vložiť (adresa alebo objekt SPIPu)',
+	'editor_skel' => 'Šablóna stránky v SPIPe',
+	'editor_texte' => 'Text odkazu',
+	'editor_titre' => 'Nadpis odkazu (pri prejdení myšou)',
+	'editor_titre_inserer_lien_popup' => 'Vložiť vyskakovací odkaz',
+
 	// H
 	'height' => 'Výška (v pixeloch)',
+
+	// I
+	'inserer_lien_popup' => 'Vložiť odkaz vo vyskakovacom okne',
 
 	// L
 	'legend_cfg_balise' => 'O externom okne',
