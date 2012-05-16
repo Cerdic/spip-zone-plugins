@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ancresdouces_description' => 'Tento zásuvný modul umožňuje nepretržité posúvanie stránky, keď návštevník klikne na odkaz na kotvu na rovnakej stránke.',
+	'ancresdouces_nom' => 'Jednoduché kotvy',
 	'ancresdouces_slogan' => 'Kotvy s ľahkosťou'
 );
 
