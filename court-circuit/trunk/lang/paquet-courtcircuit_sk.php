@@ -8,7 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'courtcircuit_description' => 'Umožňuje vám presmerovať niektoré rubriky k určitému článku. Môžete nastaviť v súkromnej zóne, pravidlá na presmerovanie platia.',
+	'courtcircuit_description' => 'Umožňuje vám presmerovať niektoré rubriky k určitému článku. V súkromnej zóne môžete nastaviť pravidlá na presmerovanie, ktoré chcete použiť.',
+	'courtcircuit_nom' => 'Krátke prepojenie',
 	'courtcircuit_slogan' => 'Priamy prístup k článkom'
 );
 

@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'courtcircuit_description' => 'Allows to redirect certain sections to a specific article. You can configure in the private area, the redirection rules to apply.',
+	'courtcircuit_nom' => 'Short-circuit',
 	'courtcircuit_slogan' => 'Direct access to articles'
 );
 
