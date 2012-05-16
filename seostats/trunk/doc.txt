@@ -1,0 +1,19 @@
+Ce plugin fourni une fonction pour afficher diverses informations de statistiques SEO (Search Engine Optimisation). 
+Nécessite une version de PHP compilé avec la librairie CURL.
+
+Pour obtenir les principales infos SEO d'un site, mettre ce code à l'intérieur d'une boucle SITES :
+
+[(#INCLURE{fond=inclure/seostats,url=#URL_SITE})]
+
+Vous verrez alors s'afficher diverses informations comme le nombre de backlinks, le nombre de pages indexées, le score PAGESPEED, etc...
+
+Si vous utilisez un jeu de squelettes ZPIP, la page seostats affiche par défaut les statistiques du site ou celle de n'importe quelle url passée en paramètre.
+
+Consulter la liste des méthodes disponibles  : http://code.google.com/p/seostats/#Public_Methods_%28Feature_List%29
+
+Vous êtes invités à vous renseigner sur les conditions d'utilisation des différents service auprès des moteurs et outils de recherche. Il se peut par exemple que le nombre de requêtes soit limité.
+
+Pour utiliser les services YAHOO, vous devez renseignez votre clé pour utiliser l'API. Inscrivez vous sur le "Yahoo déveloper network" http://developer.yahoo.com/ et modifier le fichier seostats_options.php pour y indiquer la clé.
+
+
+TODO : apparemment les infos ne sont pas mises en cache. #SEOSTATS ?

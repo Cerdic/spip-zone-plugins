@@ -1,0 +1,9 @@
+[(#SET{url,[(#ENV{url}|sinon{#URL_SITE_SPIP})]})]
+
+
+ <div class="cartouche">
+	<h1 class="h1">Statistiques SEO pour #GET{url}</h1>
+</div>
+	
+	
+[(#INCLURE{fond=inclure/seostats,url=#GET{url}})]

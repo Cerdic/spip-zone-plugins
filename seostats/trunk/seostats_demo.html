@@ -1,0 +1,32 @@
+	[(#SET{url,[(#URL_SITE_SPIP|url_absolue)]})]
+	<h1>Statistiques SEO du site #NOM_SITE_SPIP - [(#GET{url})]</h1>
+	
+	
+	<h2>Google</h2>
+     <ul>
+	     <li>Nombre de backlinks : [(#GET{url}|seostats{Google_Backlinks_Total})]</li>
+	     <li>Nombre de pages indexées :  [(#GET{url}|seostats{Google_Siteindex_Total_API})]</li>
+	    [(#REM) <li>Pagerank :  [(#GET{url}|seostats{Google_Page_Rank})]</li> ]
+	     <li>Score PAGESPEED : [(#GET{url}|seostats{Google_Pagespeed_Score})/100]</li>
+     </ul>
+   
+   <h2>Yahoo</h2>  
+	<ul>
+     <li>Nombre de backlinks : [(#GET{url}|seostats{Yahoo_Backlinks_Total})]</li>
+     <li>Nombre de pages indexées :  [(#GET{url}|seostats{Yahoo_Siteindex_Total})]</li>
+  </ul>
+  
+  <h2>Réseaux sociaux</h2>
+  <ul>
+	  	<li>Facebook : [(#GET{url}|seostats{Facebook_Mentions_Total})]</li>
+	  	<li>Twitter : [(#GET{url}|seostats{Twitter_Mentions_Total})]</li>
+  </ul>
+  
+  <h2>MajesticSEO</h2>
+  <ul>
+  	<li>Pages indéxées : [(#GET{url}|seostats{Majesticseo_Siteindex_Total})]</li>
+  	<li>Nombre de backlinks : [(#GET{url}|seostats{Majesticseo_Backlinks_Total})]</li>
+  	<li>Nombre de domaines référents : [(#GET{url}|seostats{Majesticseo_Backlinking_Domains_Total})]</li>
+  </ul>
+  
+<p><a href="http://code.google.com/p/seostats/#Public_Methods_%28Feature_List%29">Consulter la liste des méthodes disponibles</a></p>

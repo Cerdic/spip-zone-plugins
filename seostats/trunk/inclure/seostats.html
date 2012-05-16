@@ -1,0 +1,42 @@
+
+	<ul id="seostats">
+		<li class="moteur google">
+			<h3 class="spip">Google</h3>
+		     <ul>
+			     <li>Nombre de backlinks : [<strong>(#ENV{url}|seostats{Google_Backlinks_Total})</strong>]</li>
+			     <li>Nombre de pages indexées :  [<strong>(#ENV{url}|seostats{Google_Siteindex_Total_API})</strong>]</li>
+			    <li>Pagerank :  [<strong>(#ENV{url}|seostats{Google_Page_Rank})</strong>]</li> 
+			     <li>Score PAGESPEED : [<strong>(#ENV{url}|seostats{Google_Pagespeed_Score})/100</strong>]</li>
+		     </ul>
+		</li>
+		<li class="moteur yahoo">
+		   <h3 class="spip">Yahoo</h3>  
+			<ul>
+		     <li>Nombre de backlinks : [<strong>(#ENV{url}|seostats{Yahoo_Backlinks_Total})</strong>]</li>
+		     <li>Nombre de pages indexées :  [<strong>(#ENV{url}|seostats{Yahoo_Siteindex_Total})</strong>]</li>
+		  </ul>
+		</li>
+		<li class="moteur nofloat social">
+		  <h3 class="spip">Réseaux sociaux</h3>
+		  <ul>
+			  	<li>Facebook : [<strong>(#ENV{url}|seostats{Facebook_Mentions_Total})</strong>]</li>
+			  	<li>Twitter : [<strong>(#ENV{url}|seostats{Twitter_Mentions_Total})</strong>]</li>
+		  </ul>
+		</li>
+		<li class="moteur majesticseo">  
+		  <h3 class="spip">MajesticSEO</h3>
+		  <ul>
+			  	<li>Pages indexées : [<strong>(#ENV{url}|seostats{Majesticseo_Siteindex_Total})</strong>]</li>
+			  	<li>Nombre de backlinks : [<strong>(#ENV{url}|seostats{Majesticseo_Backlinks_Total})</strong>]</li>
+			  	<li>Nombre de domaines référents : [<strong>(#ENV{url}|seostats{Majesticseo_Backlinking_Domains_Total})</strong>]</li>
+		  </ul>
+	  		<p><a class="spip_out" href="http://www.majesticseo.com/reports/site-explorer?q=[(#ENV{url}|urlencode)]">Voir les résultats sur majesticSEO</a></p>
+	  </li>
+	  <li class="moteur nofloat">
+	     <!-- Alexa -->
+	     <h3>Stats ALEXA</h3>
+			<p><img border="0" src="http://traffic.alexa.com/graph?w=379&h=216&r=6m&z=&y=r&u=#ENV{url}&u="></p>
+		</li>
+	
+	</ul>
+</BOUCLE_seostats>

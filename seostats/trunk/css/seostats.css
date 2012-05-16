@@ -1,0 +1,8 @@
+/*
+ * Bloc d'informations SEO
+ */
+
+#seostats {border: 10px red;}
+#seostats .moteur {width: 50%; float: left;list-style-type: none;}
+
+#seostats .nofloat {clear: left;}

@@ -1,0 +1,31 @@
+    <plugin>
+        <nom>SEOstats : statistiques SEO pour les sites référencés</nom>
+        <auteur>Stephan Schmitz (http://apps.nahklick.de/seostats/) mis en plugin pour SPIP par jfefe</auteur>
+        <licence>GNU/GPL</licence>
+        <version>1.0</version>
+        <description>
+        	<multi>
+        		[fr]
+	        Le plugin SEOstats fourni des fonctions pour afficher des statistiques SEO sur les sites référencés dans un site SPIP.  [Démo->../?page=seostats_demo]
+
+	        
+	        Par exemple : pour afficher le nombre de pages indéxées dans le moteur de recherche GOOGLE il suffit d'écrire [(#URL_SITE|seostats{Google_Siteindex_Total_API})] à l'intérieur d'une boucle SITES.
+	        
+	        
+			[Consulter l'index des méthodes->http://code.google.com/p/seostats/#Public_Methods_%28Feature_List%29] disponibles.
+        </description>
+        <etat>test</etat>
+        <prefix>seostats</prefix>
+        <fonctions>seostats_fonctions.php</fonctions>
+         <options>seostats_options.php</options>
+         
+       <pipeline>
+	       <nom>header_prive</nom>
+	       <inclure>seostats_pipelines.php</inclure>
+    	</pipeline>
+
+		<pipeline>
+	       <nom>seostats_insert_head_css</nom>
+	       <inclure>seostats_pipelines.php</inclure>
+    	</pipeline>
+    </plugin>
