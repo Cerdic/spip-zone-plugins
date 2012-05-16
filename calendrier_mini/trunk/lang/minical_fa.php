@@ -10,15 +10,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aucune_date' => 'اين ماه برنامه‌اي نيست',
 
-	// D
-	'date_jour_abbr_1' => 'يك‌شنبه.',
-	'date_jour_abbr_2' => 'دوشنبه.',
-	'date_jour_abbr_3' => 'سه‌شنبه.',
-	'date_jour_abbr_4' => 'چهارشنبه.',
-	'date_jour_abbr_5' => 'پنجشنبه.',
-	'date_jour_abbr_6' => 'جمعه.',
-	'date_jour_abbr_7' => 'شنبه.',
-
 	// M
 	'mois_precedent' => 'ماه قبل',
 	'mois_suivant' => 'ماه بعد'

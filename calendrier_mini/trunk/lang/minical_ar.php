@@ -10,15 +10,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aucune_date' => 'لا شيء لهذا الشهر',
 
-	// D
-	'date_jour_abbr_1' => 'أحد',
-	'date_jour_abbr_2' => 'اثنين',
-	'date_jour_abbr_3' => 'ثلثاء',
-	'date_jour_abbr_4' => 'أربعاء',
-	'date_jour_abbr_5' => 'خميس',
-	'date_jour_abbr_6' => 'جمعة',
-	'date_jour_abbr_7' => 'سبت',
-
 	// M
 	'mois_precedent' => 'الشهر السابق',
 	'mois_suivant' => 'الشهر التالي'
