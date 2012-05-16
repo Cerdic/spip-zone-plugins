@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'calendriermini_description' => '#CALENDRIER_MINI zobrazí kalendár s dizajnom od dotclear, a preto je kompatibilný so štýlmi tohto  publikačného systému pre blogy.
 _ Sám pomáha iným objektom, ako sú tagy, kritériá, šablóny atď.
 .',
+	'calendriermini_nom' => 'Minikalendár',
 	'calendriermini_slogan' => 'Umožňuje používať tag #CALENDRIER_MINI'
 );
 
