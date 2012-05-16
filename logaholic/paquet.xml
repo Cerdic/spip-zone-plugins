@@ -1,0 +1,18 @@
+<paquet
+	prefix="logaholic"
+	categorie="statistique"
+	version="0.4.1"
+	etat="stable"
+	compatibilite="[1.9.2;3.0.*]"
+	logo="images/logaholic-32x32.png"
+	documentation=""
+>	
+
+	<nom>Logaholic</nom>
+	<!-- Utiliser le service Logaholic -->
+
+	<auteur>[Pierre KUHN->http://www.pierre-kuhn.org]</auteur>
+
+	<pipeline nom="insert_head_css" inclure="logaholic_insert_head.php" />
+
+</paquet>

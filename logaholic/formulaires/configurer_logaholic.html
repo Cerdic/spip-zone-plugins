@@ -1,0 +1,30 @@
+<!-- autoriser=configurer -->
+<!-- refus=<:cfg:refus_configuration_administrateur:> -->
+<!-- nom=logaholic -->
+
+<div class="formulaire_spip formulaire_cfg formulaire_#FORM">
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+		
+	<form method="post" action="#ENV{action}">
+		<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="editer_id_logaholic">
+				<label for="idgoogle"><:logaholic:label_id_logaholic:></label>
+				<p class="explication"><:logaholic:explication_id_logaholic:></p>
+				<input type="text" name="id_logaholic" class="text" id="id_logaholic" size="20" value="#ENV{id_logaholic}" placeholder="LWA_p1" />
+			</li>
+			<li class="editer_idGoogle">
+				<label for="idgoogle"><:logaholic:label_lwa_server:></label>
+				<p class="explication"><:logaholic:explication_lwa_server:></p>
+				<input type="text" name="lwa_server" class="text" id="lwa_server" size="80" value="#ENV{lwa_server}" placeholder="votre_site.ext" />
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+		</p>
+		</div>
+	</form>
+</div>
