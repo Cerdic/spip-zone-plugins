@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'iextras_description' => 'Do súkromnej zóny pridá kompletné rozhranie na riadenie doplnkových polí
 							v redakčných objektoch.',
+	'iextras_nom' => 'Ďalšie polia (rozhranie)',
 	'iextras_slogan' => 'Ponúka grafické rozhranie na riadenie ďalších polí',
 	'iextras_titre' => 'Ďalšie polia (rozhranie)'
 );

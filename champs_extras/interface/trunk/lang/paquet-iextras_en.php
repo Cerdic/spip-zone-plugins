@@ -8,7 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'iextras_description' => '',
+	'iextras_description' => 'Adds in the private space a complete interface to manage additional fields on editorial objects.',
+	'iextras_nom' => 'Extra fields (Interface)',
 	'iextras_slogan' => 'Interface to manage the extra fields on SPIP objects',
 	'iextras_titre' => 'Extra fields (Interface)'
 );
