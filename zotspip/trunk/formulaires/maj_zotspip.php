@@ -13,8 +13,12 @@ function formulaires_maj_zotspip_charger_dist(){
 
 function formulaires_maj_zotspip_traiter_dist(){
 	include_spip('inc/zotspip');
-	if (_request('nettoyer')) zotspip_nettoyer(); // Eviter de nettoyer à chaque tour, la première fois suffit
 	$forcer = (_request('sync_complete')) ? true : false;
+	if (_request('nettoyer')) {
+		zotspip_nettoyer(); // Eviter de nettoyer à chaque tour, la première fois suffit
+		zotspip_maj_collections($forcer); // De meme, pour les collections, un seul appel suffit 
+	}
+	
 	$cont = zotspip_maj_items($forcer);
 	
 	if ($cont==0)

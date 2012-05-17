@@ -14,7 +14,7 @@ function zotspip_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_zitems'][]= 'ztags';
 	$interface['tables_jointures']['spip_zitems'][]= 'zcreators';
 	$interface['tables_jointures']['spip_zitems'][]= 'zitems_zcollections';
-	$interface['tables_jointures']['spip_zcollections'][]= 'zitems_zcollections';
+	$interface['tables_jointures']['spip_zitems'][]= 'zcollections';
 	$interface['tables_jointures']['spip_ztags'][]= 'zitems';
 	$interface['tables_jointures']['spip_zcreators'][]= 'zitems';
 	
@@ -50,8 +50,7 @@ function zotspip_declarer_tables_principales($tables_principales){
 		"fichier" => "text DEFAULT '' NOT NULL",
 		"json" => "mediumtext DEFAULT '' NOT NULL",
 		"csljson" => "mediumtext DEFAULT '' NOT NULL",
-		"updated" => "varchar(50) DEFAULT '' NOT NULL",
-		"maj" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"
+		"updated" => "varchar(50) DEFAULT '' NOT NULL"
 	);
 	
 	$zitems_cles = array(
@@ -69,8 +68,7 @@ function zotspip_declarer_tables_principales($tables_principales){
 		"id_zcollection" => "varchar(16) DEFAULT '' NOT NULL",
 		"id_parent" => "varchar(16) DEFAULT '' NOT NULL",
 		"zcollection" => "text DEFAULT '' NOT NULL",
-		"updated" => "varchar(50) DEFAULT '' NOT NULL",
-		"maj" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"
+		"updated" => "varchar(50) DEFAULT '' NOT NULL"
 	);
 	
 	$zcollections_cles = array(

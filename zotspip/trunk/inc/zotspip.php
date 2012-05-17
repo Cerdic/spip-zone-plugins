@@ -34,6 +34,14 @@ function zotspip_extraire_itemkey($url){
 		return '';
 }
 
+// Extraire l'identifiant d'une collection à partir de l'URL
+function zotspip_extraire_collectionkey($url){
+	if (preg_match('#collections/(.*)$#',$url,$matches))
+		return $matches[1];
+	else
+		return '';
+}
+
 // Mise à jour de la base de données
 // $forcer : forcer la mise à jour complète de la base
 // $n integer : nombre d'items à mettre à jour simultanément (max 50)
@@ -247,13 +255,73 @@ function zotspip_maj_items($forcer=false, $n=50) {
 	return 1; //0 si rien à faire, 1 si effectuée, -5 si tâche pas finie
 }
 
+// Mise à jour des collections
+// $forcer : forcer la mise à jour complète de la base
+function zotspip_maj_collections($forcer=false) {
+	$feed = zotero_get('collections/?format=atom&order=dateModified&sort=desc');
+	// On vérifie qu'on a bien eu un retour
+	if (!$feed)
+		return 0;
+	
+	// On parse le flux ATOM reçu
+	include_spip('inc/xml');
+	$xml = spip_xml_parse($feed, false);
+	
+	if (spip_xml_match_nodes(',^entry,', $xml, $entrees)){
+		include_spip('base/abstract_sql');
+		foreach ($entrees['entry'] as $entree) {
+			$id_zcollection = spip_xml_aplatit($entree['zapi:key']);
+			$updated = spip_xml_aplatit($entree['updated']);
+			
+			// Faire une vérification sur la date de maj (seulement si on ne force pas)
+			if (!$zotspip_maj_items['forcer']) {
+				if ($updated==sql_getfetsel('updated','spip_zcollections','id_zitem='.sql_quote($id_zitem))) {
+					return 1;
+				}
+			}
+			
+			// On initialise la ligne SQL à insérer
+			$insertion = array(
+				'id_zcollection' => $id_zcollection,
+				'id_parent' => '0', // 0 si pas de parent
+				'zcollection' => spip_xml_aplatit($entree['title']),
+				'updated' => $updated
+			);
+			
+			// On récupère la collection parente
+			$links = array(); // NB : il faut réinitialiser $links sinon les résultats s'accumulent
+			if (spip_xml_match_nodes(',^link,', $entree, $links)) {
+				foreach (array_keys($links) as $link){
+					list($balise, $attributs) = spip_xml_decompose_tag($link);
+					if ($attributs['rel'] == 'up')
+						$insertion['id_parent'] = zotspip_extraire_collectionkey($attributs['href']);
+				}
+			}
+			
+			// Items de la collection
+			$items = zotero_get("collections/$id_zcollection/items/?format=keys");
+			$items = explode("\n",trim($items));
+			$zitems_zcollections = array();
+			foreach ($items as $item)
+				$zitems_zcollections[] = array('id_zitem' => $item, 'id_zcollection' => $id_zcollection);
+			
+			// Insertion en base de données
+			sql_replace('spip_zcollections',$insertion);
+			sql_delete('spip_zitems_zcollections','id_zcollection='.sql_quote($id_zcollection));
+			if (count($zitems_zcollections)) sql_insertq_multi('spip_zitems_zcollections',$zitems_zcollections);
+		}
+	}
+	
+	return 1; //0 si rien à faire, 1 si effectuée, -5 si tâche pas finie
+}
+
 // Nettoyer la base de données
 function zotspip_nettoyer() {
+	include_spip('base/abstract_sql');
 	// Suppression des items qui ne sont plus dans la base
 	$feed = zotero_get('items/?format=keys');
 	if ($feed) {
 		$items_zotero = explode("\n",trim($feed));
-		include_spip('base/abstract_sql');
 		$requete = sql_allfetsel('id_zitem','spip_zitems');
 		$items_spip = array();
 		foreach ($requete as $item)
@@ -261,6 +329,18 @@ function zotspip_nettoyer() {
 		$diff = array_diff($items_spip,$items_zotero);
 		foreach ($diff as $id_zitem)
 			zotspip_supprimer_item($id_zitem);
+	}
+	// Suppression des collections qui ne sont plus dans la base
+	$feed2 = zotero_get('collections/?format=keys');
+	if ($feed2) {
+		$collections_zotero = explode("\n",trim($feed2));
+		$requete = sql_allfetsel('id_zcollection','spip_zcollections');
+		$collections_spip = array();
+		foreach ($requete as $collection)
+			$collections_spip[] = $collection['id_zcollection'];
+		$diff = array_diff($collections_spip,$collections_zotero);
+		foreach ($diff as $id_zcollection)
+			zotspip_supprimer_collection($id_zcollection);
 	}
 	return 1;
 }
@@ -273,6 +353,15 @@ function zotspip_supprimer_item($id_zitem) {
 	sql_delete('spip_zitems_zcollections','id_zitem='.sql_quote($id_zitem));
 	sql_delete('spip_zitems','id_zitem='.sql_quote($id_zitem));
 }
+
+
+// Supprimer une collection
+function zotspip_supprimer_collection($id_zcollection) {
+	include_spip('base/abstract_sql');
+	sql_delete('spip_zcollections','id_zcollection='.sql_quote($id_zcollection));
+	sql_delete('spip_zitems_zcollections','id_zcollection='.sql_quote($id_zcollection));
+}
+
 
 // Télécharge le schéma de données Zotero
 function zotspip_maj_schema_zotero() {
