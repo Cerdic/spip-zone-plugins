@@ -26,7 +26,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_rubriques_articles' => 'نمايش يك فهرست از بخش‌ها، و اگر مي‌خواهيد، زيربخش‌ها و مقاله‌ها در چندين سطح. 
 به صورت پيش‌گزيده، نمايش تمام بخش‌ها ريشه، مرتب شده بر اساس تيتر(شماره‌اي و بعد الفبايي). مقاله‌ها به طور نظام‌مند بعد از بخش‌ها قرار مي‌گيرند. 
 ',
-	'description_menu_secteurlangue' => 'Cette entrée est spécifique aux sites utilisant un secteur par langue. Elle affiche automatiquement un menu listant les rubriques du secteur correspondant à la langue de la page et, si on veut, les sous-rubriques sur plusieurs niveaux. Par défaut, affiche toutes les rubriques depuis la racine, triées par titre (numériquement puis alphabétiquement).', # NEW
+	'description_menu_secteurlangue' => 'اين مدخل به سايت‌هايي اختصاص دارد كه يك بخش براي زبان دارند. اين مدخل به صورت خودكار منيويي را نشان مي‌دهد كه بخش‌ها آن قسمت منطبق با آن زبان و صفحه، و اگر بخواهند زيربخش‌ها را تا چندين سطح، را فهرست مي‌كنند. به صورت پيش‌گزيده، تمام بخش‌هاي عد از ريشه را، به ترتيب تيتر (طبق شماره و بعد طبق الفا) نشان مي‌دهد. 
+',
 	'description_menu_texte_libre' => 'فقط متني كه دوست داريد، يا يك كد زباني اسپيپ  (<:...:>)',
 
 	// E
@@ -39,7 +40,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_afficher_item_suite' => 'گنجاندن مقاله‌ها در منيو؟ (براي اين بگذاريد «بله»)',
 	'entree_articles_max' => 'اگر بله، نمايش مقاله‌ها فقط اگر بخش شامل حداكثر ايكس ايكس مقاله است؟ (عدد مربوط به حداكثر مقاله را بگذاريد، براي نمايش تمام مقاله‌ها، خالي بگذاريد)
 ',
-	'entree_articles_max_affiches' => 'Si oui, limiter le nombre d\'articles listés à xx maximum (suivis d\'un item "... Tous les articles" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum d\'articles, laissez vide pour afficher tous les articles)', # NEW
+	'entree_articles_max_affiches' => 'در اين صورت، تعداد مقاله‌هاي فهرست شده تا حداكثر xx  محدود شود(بعد از يك فقره «...تمام مقاله‌ها» با يك لينك به بخش‌ والد)؟ (تعداد حداكثر مقاله‌ها را مشخص كنيد ، يا خالي بگذاريد تا تمام مقاله‌ها نشان داده شوند)
+',
 	'entree_aucun' => 'هيچي',
 	'entree_bloc' => 'بلاك ازپيپ (Bloc Zpip)',
 	'entree_choisir' => 'نوع مدخلي را كه مي‌خواهيد اضافه كنيد انتخاب نماييد.',
@@ -64,9 +66,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_parametres' => 'فهرست پارامترها',
 	'entree_rubriques_max_affichees' => 'Si oui, limiter le nombre de rubriques listés à xx maximum (suivis d\'un item "... Toutes les rubriques" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum de rubriques, laissez vide pour afficher toutes les rubriques)', # NEW
 	'entree_sousrub_cond' => 'N\'afficher que les sous-rubriques de la rubrique en cours (mettre "oui", sinon laisser vide)', # NEW
-	'entree_suivant_connexion' => 'Restreindre cette entrée suivant la connexion (mettre "connecte" pour afficher seulement si le visiteur est connecté, "deconnecte" pour le cas contraire, ou laisser vide pour toujours afficher)', # NEW
-	'entree_suivant_connexion_connecte' => 'seulement si connecté', # NEW
-	'entree_suivant_connexion_deconnecte' => 'seulement si déconnecté', # NEW
+	'entree_suivant_connexion' => 'منحصر سازي مدخل بعدي به اتصال (بگذاريد «اتصال» براي نمايش فقط اگر بازديد كننده متصل باشد، بگذاريد «قطع» براي مورد عكس، يا خالي بگذاريد تا هميشه نشان داده شود).
+',
+	'entree_suivant_connexion_connecte' => 'فقط اگر متصل باشد',
+	'entree_suivant_connexion_deconnecte' => 'فقط اگر قطع باشد',
 	'entree_sur_n_articles' => '@n@ مقاله‌ي منتشره',
 	'entree_sur_n_mots' => '@n@ كلمه‌هاي منتشره ',
 	'entree_sur_n_niveaux' => 'تحت @n@ سطح',
@@ -116,15 +119,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_ieconfig_remplacer' => 'جايگزين سازي منيوي موجود با منوي وارداتي',
 	'formulaire_ieconfig_renommer' => 'تجديد نام اين منيو پيش از واردات',
 	'formulaire_importer' => 'واردسازي يك منيو',
-	'formulaire_importer_explication' => 'Si vous avez exporté un menu dans un fichier, vous pouvez l\'importer maintenant.', # NEW
-	'formulaire_modifier_entree' => 'Modifier cette entrée', # NEW
-	'formulaire_modifier_menu' => 'Modifier le menu :', # NEW
-	'formulaire_nouveau' => 'Nouveau menu', # NEW
-	'formulaire_partie_construction' => 'Construction du menu', # NEW
-	'formulaire_partie_identification' => 'Identification du menu', # NEW
-	'formulaire_supprimer_entree' => 'Supprimer cette entrée', # NEW
-	'formulaire_supprimer_menu' => 'Supprimer le menu', # NEW
-	'formulaire_supprimer_sous_menu' => 'Supprimer ce sous-menu', # NEW
+	'formulaire_importer_explication' => 'اگر يك منيو را داخل يك پرونده صادر كرده باشيد، مي‌توانيد آن را اكنون وارد كنيد.',
+	'formulaire_modifier_entree' => 'اصلاح اين مدخل',
+	'formulaire_modifier_menu' => 'اصلاح منيو:',
+	'formulaire_nouveau' => 'منيوي جديد',
+	'formulaire_partie_construction' => 'ساخت منيو',
+	'formulaire_partie_identification' => 'شناسه‌ي منيو',
+	'formulaire_supprimer_entree' => 'حذف اين مدخل
+
+',
+	'formulaire_supprimer_menu' => 'حذف منيو',
+	'formulaire_supprimer_sous_menu' => 'حذف اين زيرمنيو',
 	'formulaire_titre' => 'Titre', # NEW
 
 	// I
@@ -132,19 +137,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_articles_max' => 'Seulement si la rubrique contient au plus @max@ articles', # NEW
 	'info_articles_max_affiches' => 'Affichage limité à @max@ articles', # NEW
 	'info_classe_parent' => 'Classe des éléments parents : ', # NEW
-	'info_connexion_obligatoire' => 'Connexion obligatoire', # NEW
-	'info_deconnexion_obligatoire' => 'Uniquement déconnecté', # NEW
+	'info_connexion_obligatoire' => 'اتصال اجباري',
+	'info_deconnexion_obligatoire' => 'فقط هنگام قطعي',
 	'info_masquer_articles_uniques' => 'Articles uniques masqués', # NEW
-	'info_numero_menu' => 'MENU NUMÉRO :', # NEW
-	'info_page_speciale' => 'Lien vers la page « @page@ »', # NEW
-	'info_page_speciale_zajax' => 'Modalbox de la page « @page@ » pour le bloc « @bloc@ &#187', # NEW
+	'info_numero_menu' => 'منيوي شماره‌ي: ',
+	'info_page_speciale' => 'پيوند به صفحه‌ي  «@page@»',
+	'info_page_speciale_zajax' => 'مدال باكس صفحه‌ي  «@page@» براي بلوك «@bloc@»   ',
 	'info_rubrique_courante' => 'Rubrique courante', # NEW
 	'info_rubriques_exclues' => ' / sauf rubrique(s) @id_rubriques@', # NEW
 	'info_rubriques_max_affichees' => 'Affichage limité à @max@ rubriques', # NEW
 	'info_secteur_exclus' => ' / sauf secteur(s) @id_secteur@', # NEW
 	'info_sousrub_cond' => 'Seules les sous-rubriques de la rubriques en cours sont affichées.', # NEW
-	'info_tous_groupes_mots' => 'Tous les groupes de mots', # NEW
-	'info_traduction_recuperee' => 'Le contexte décidera de la traduction choisie', # NEW
+	'info_tous_groupes_mots' => 'تمام گروه‌ واژه‌ها',
+	'info_traduction_recuperee' => 'متن ترجمه‌ي منتخب را تعيين خواهد كرد',
 	'info_tri' => 'ترتيب بخش‌ها:‌',
 	'info_tri_alpha' => '(الفبايي)',
 	'info_tri_articles' => 'Tri des articles :', # NEW
@@ -166,7 +171,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_objet' => 'مقاله، بخش يا ساير چيزهاي اسپيپي ',
 	'nom_menu_page_speciale' => 'پيوند به يك صفحه‌ي اسكلت',
 	'nom_menu_page_speciale_zajax' => 'يك بلوك از صفحه‌ي ازپيپ',
-	'nom_menu_rubriques' => 'Liste ou arborescence de rubriques', # MODIF
+	'nom_menu_rubriques' => 'فهرست يا درخت بخش‌ها و مقاله‌ها',
 	'nom_menu_rubriques_evenements' => 'برنامه‌هاي مربوط به بخش‌ها',
 	'nom_menu_secteurlangue' => 'بخش‌هاي زباني ',
 	'nom_menu_texte_libre' => 'متن آزاد',
