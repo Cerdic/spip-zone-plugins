@@ -146,7 +146,6 @@ function autoriser_relecture_commenter_dist($faire, $type, $id, $qui, $opt) {
 			(strtotime($infos['date_fin_commentaire'])>time()
 			AND (in_array($qui['id_auteur'], $les_auteurs)
 				OR in_array($qui['id_auteur'], $les_relecteurs)));
-
 	}
 
 	return $autoriser;
