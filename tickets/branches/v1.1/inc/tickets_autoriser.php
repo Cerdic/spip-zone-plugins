@@ -185,8 +185,8 @@ function autoriser_ticket_commenter_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 	$utiliser_defaut = true;
 
-	if(autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt)){
-		return autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt);
+	if(autoriser('modifier',$type, $id, $qui, $opt)){
+		return true;
 	}
 	// Utilisation du CFG si possible
 	if(function_exists('lire_config')){
@@ -247,11 +247,9 @@ function autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt){
 	if(is_numeric($id)){
 		// Si l'auteur en question est l'auteur assigné au ticket,
 		// il peut modifier le ticket
-		if(intval($id)){
-			$id_assigne = sql_getfetsel('id_assigne','spip_tickets','id_ticket='.intval($id));
-			if($id_assigne && ($id_assigne == $qui['id_auteur'])){
-				return true;
-			}
+		$id_assigne = sql_getfetsel('id_assigne','spip_tickets','id_ticket='.intval($id));
+		if($id_assigne && ($id_assigne == $qui['id_auteur'])){
+			return true;
 		}
 		// Utilisation du CFG si possible
 		if(function_exists('lire_config')){
@@ -293,7 +291,7 @@ function autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt){
 			$autorise = in_array($qui['id_auteur'], $liste['auteur']);
 		if(!$autorise){
 			$id_auteur = sql_getfetsel('id_auteur','spip_tickets','id_ticket='.intval($id));
-			if($id_auteur == $qui['id_auteur'])
+			if($id_auteur && ($id_auteur == $qui['id_auteur']))
 				$autorise = true;
 		}
 	}
