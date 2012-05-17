@@ -1,0 +1,30 @@
+<plugin>
+	<nom>Raccourci &lt;ressource&gt;</nom>
+	<auteur>
+	collectif
+	</auteur>
+	<licence>
+		&#169; 2012 - GNU/GPL
+	</licence>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Un raccourci permettant d'intégrer une ressource externe en indiquant entre chevrons son URL ou son nom de fichier.
+	</description>
+	<!-- lien>http://www.spip-contrib.net/</lien -->
+	<prefix>
+	ressource
+	</prefix>
+	<!-- icon>
+	images/ressource-128.png
+	</icon -->
+	<chemin dir='' />
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.1.14;3.0.99]" />
+	<necessite id="tw" version="[0.8.3;1.0.0]" />
+	<!-- traduire gestionnaire="salvatore" module="crayons" reference="fr" / -->
+</plugin>
