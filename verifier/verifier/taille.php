@@ -22,7 +22,6 @@ function verifier_taille_dist($valeur, $options=array()){
 	include_spip('inc/charsets');
 	$erreur = '';
 	$taille = spip_strlen($valeur);
-	var_dump($taille);
 	
 	if (isset($options['min']))
 		$ok = ($ok and ($taille >= $options['min']));
