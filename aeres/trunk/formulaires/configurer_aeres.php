@@ -43,10 +43,12 @@ function formulaires_configurer_aeres_verifier_dist(){
 
 function formulaires_configurer_aeres_traiter_dist(){
 	$membres = _request('membres');
-	sort($membres);
+	if (count($membres)) sort($membres);
+	else $membres = array();
 	set_request('membres',$membres); // On retransmet le tableau correctement trié
 	$non_membres = _request('non_membres');
-	sort($non_membres);
+	if (count($non_membres)) sort($non_membres);
+	else $non_membres = array();
 	set_request('non_membres',$non_membres);
 	$config = array(
 		'debut' => _request('debut'),
