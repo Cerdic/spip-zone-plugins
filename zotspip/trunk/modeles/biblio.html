@@ -9,13 +9,21 @@
 	volume,-1,
 	numero,-1
 }})]
-<B_biblio>
 
-recherche #ENV{recherche}
-
-<ul class="spip">
-<BOUCLE_biblio(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{json ?LIKE %#ENV{recherche}%}{zotsip_depuis}{0,#ENV{max,100000}}{tri #ENV{par,auteurs},#GET{defaut_tri}}>
-#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
-</BOUCLE_biblio>
-</ul>
-</B_biblio>
+<BOUCLE_test_tri(CONDITION){si #ENV{par}|=={type}}>
+	<B_biblio_type>
+	<ul class="spip">
+	<BOUCLE_biblio_type(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{json LIKE %#ENV{recherche}%}{zotsip_depuis}{0,#ENV{max,100000}}{par_type_zotero}>
+	#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
+	</BOUCLE_biblio_type>
+	</ul>
+	</B_biblio_type>
+</BOUCLE_test_tri>
+	<B_biblio>
+	<ul class="spip">
+	<BOUCLE_biblio(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{json LIKE %#ENV{recherche}%}{zotsip_depuis}{0,#ENV{max,100000}}{tri #ENV{par,auteurs},#GET{defaut_tri}}>
+	#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
+	</BOUCLE_biblio>
+	</ul>
+	</B_biblio>
+<//B_test_tri>

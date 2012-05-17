@@ -64,6 +64,19 @@
 					<label for='type_librairie_group'><:item_oui:></label>
 				</div>
 			</li>
+			<B_ordre_types>
+			<li class="editer_ordre_types[ (#ENV**{erreurs}|table_valeur{ordre_types}|oui)erreur]">
+				<label for='ordre_types'><:zotspip:label_ordre_types:></label>
+				<p class="explication"><:zotspip:explication_ordre_types:></p>
+				<ul class="spip" id="liste_ordre_types">
+				<BOUCLE_ordre_types(POUR){tableau #ENV**{ordre_types}|zotspip_configurer_ordre_types}>
+					<li style="list-style-image : url([(#CLE|zotspip_icone_type|extraire_attribut{src})]);">#VALEUR
+					<input type="hidden" name="ordre_types[]" value="#CLE" />
+					</li>
+				</BOUCLE_ordre_types>
+				</ul>
+			</li>
+			</B_ordre_types>
 		</ul></fieldset></li>
 		</ul>
 		<p class='boutons'><span class='image_loading'>&nbsp;</span>
@@ -71,3 +84,10 @@
 		</p>
 	</div></form>
 </div>
+<script type="text/javascript">// <![CDATA[
+$(document).ready(function(){
+	$( "ul#liste_ordre_types" ).sortable({
+			placeholder: "ui-state-highlight"
+		});
+});
+ //]]></script>

@@ -249,7 +249,7 @@ function critere_zotsip_depuis($idb, &$boucles, $crit) {
 function zotspip_calcul_depuis($depuis,$table) {
 	$annee = false;
 	if (is_numeric($depuis)) $annee = intval($depuis);
-	elseif (substr($depuis,-2)=='an' && is_numeric(substr($depuis,0,-2))) $annee = 1 + intval(date('Y')) - intval(substr($depuis,0,-2)); // L'année en cours ocmpte pour un
+	elseif (substr($depuis,-2)=='an' && is_numeric(substr($depuis,0,-2))) $annee = 1 + intval(date('Y')) - intval(substr($depuis,0,-2)); // L'année en cours compte pour un
 	elseif (substr($depuis,-3)=='ans' && is_numeric(substr($depuis,0,-3))) $annee = 1 + intval(date('Y')) - intval(substr($depuis,0,-3));
 	if ($annee) return array('>=',"$table.annee",$annee);
 	else return array();
@@ -301,6 +301,32 @@ function modifier_sur_zotero($id_zitem){
 		return "https://www.zotero.org/".lire_config('zotspip/username')."/items/itemKey/$id_zitem/mode/edit";
 	else
 		return "https://www.zotero.org/groups/".lire_config('zotspip/username')."/items/itemKey/$id_zitem/mode/edit";
+}
+
+// Fonction renvoyant le tableau adequat pour la configuration de l'ordre des types de documents
+function zotspip_configurer_ordre_types($ordre) {
+	if (!is_array($ordre)) $ordre=array();
+	$ordre = array_flip($ordre);
+	// Il faut completer par rapport au schema Zotero (au cas ou le schema change)
+	$zotero = schema_zotero('itemTypes');
+	$zotero[]='attachment'; // Ajouter les pieces jointes non presentes dans le schema
+	$ordre = array_merge($ordre,array_flip($zotero));
+	// Ajout des chaines de langue
+	foreach ($ordre as $cle => $val)
+		$ordre[$cle] = zotspip_traduire_type($cle);
+	return $ordre;
+}
+
+// Le critere qui permet le tri par type (selon l'ordre defini)
+function critere_par_type_zotero($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$id_table = $boucle->id_table;
+	include_spip('inc/config');
+	$config = lire_config('zotspip/ordre_types');
+	if (is_array($config) && count($config))
+		$boucle->order[] = "\"FIELD($id_table.type,'".implode("','",$config)."')\"";
+	else
+		$boucle->order[] = "'$id_table.type'";
 }
 
 ?>
