@@ -77,6 +77,7 @@ function exec_geoservice()
 			if ($GLOBALS['spip_version_code']>2) echo gros_titre (textebrut(typo($row['titre'])),puce_statut($row['statut']), false);
 			else gros_titre (textebrut(typo($row['titre'])),'puce-'.puce_statut($row['statut']).'.gif');
 			echo $row['type'];
+			echo " - ".$row['zone'];
 			$id_parent = $row['id_rubrique'];
 			$rub = spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$id_parent'"));
 			if ($rub) echo "<br/>"._T("geoportail:dans_rubrique")." : ".$rub['titre'];

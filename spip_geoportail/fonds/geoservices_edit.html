@@ -83,6 +83,8 @@ Fonctionnalit&eacute; non impl&eacute;ment&eacute;e...<br/></span>
 <label class='geoservice' ><:geoportail:opacity:> : </label><input class=formo style="display:inline; width:60px;" type=text name=opacity id="opacity" size=5 value="[(#OPACITY|entites_html)]" />
 <label class='geoservice' for=visibility><:geoportail:visibility:> : </label>
 <input type=checkbox name=visibility id="visibility" [(#VISIBILITY|=={1}|?{CHECKED})] />
+<br/>#SET{zone,zone}
+<label class='geoservice' ><:geoportail:geoservice_zone:> :</label>[(#GET{zone}|geoportail_popup_zone{#ZONE,'','',true})]
 <br/>
 <:geoportail:geoservice_extent:> :
 <input class=formo style="display:inline; width:200px;"  type=text name=extent value="[(#MAXEXTENT|entites_html)]"  />

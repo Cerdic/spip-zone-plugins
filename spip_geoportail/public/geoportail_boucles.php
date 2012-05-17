@@ -13,12 +13,13 @@
 include_spip('base/geoportail');
 
 // Affichage du popup des zones Geoportail
-function geoportail_popup_zone ($name, $selected=null, $class='', $options="")
+function geoportail_popup_zone ($name, $selected=null, $class='', $options="", $world=false)
 {	if (!$selected || $selected=='') $selected = geoportail_profil('zone');
 
 	$s = "<select class='$class' name='$name' id='$name' $options >";
 	eval ('$p = array('._T("geoportail:tzone").');');
 	$i=0;
+	if ($world) $s .= "<option value='WLD'".('WLD'==$selected ? ' selected="selected">':'>')._T("geoportail:wld")."</option>";
 	foreach ($p as $v)
 	{	$s .= "<option value='$v'".($v==$selected ? ' selected="selected"':'').">"._T("geoportail:".strtolower($v))."</option>";
 	}

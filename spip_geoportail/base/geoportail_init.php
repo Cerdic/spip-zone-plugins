@@ -52,6 +52,10 @@ function geoportail_install($action){
 			if (isset($desc['field']['id_geoservice']) && !isset($desc['field']['niveau']))
 			{	spip_query("ALTER TABLE spip_geoservices ADD niveau INTEGER DEFAULT '0' NOT NULL");
 			}
+			// Mettre a jour la zone des geoservices
+			if (isset($desc['field']['id_geoservice']) && !isset($desc['field']['zone']))
+			{	spip_query("ALTER TABLE spip_geoservices ADD zone varchar(3) NOT NULL default 'WLD'");
+			}
 			
 			// Pas de RGC
 			$desc = sql_showtable("spip_georgc", true, '');

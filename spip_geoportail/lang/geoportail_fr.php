@@ -83,6 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Correspondance code => nom de la zone Geoportail :
 'zone'		=> 'Zone g&eacute;ographique',
+'wld'		=> 'Monde',
 'fxx'		=> 'France m&eacute;tropolitaine',
 'atf'		=> 'Terres Art. Australes',
 'glp'		=> 'Guadeloupe',
@@ -133,6 +134,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'maxzoom'		=> 'Zoom max',
 'opacity'		=> 'Opacit&eacute;',
 'visibility'	=> 'Visibilit&eacute;',
+'geoservice_zone'	=> 'Zone du service',
 'geoservice_extent'	=> 'Extension du service',
 'logo'			=> 'Association de logo (<i>les logos de m&ecirc;me nom seront associ&eacute;s</i>)',
 'link'			=> 'Lien vers le service',
