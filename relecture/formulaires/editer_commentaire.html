@@ -8,15 +8,30 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			[(#ENV{id_commentaire}|=={oui}|ou{#AUTORISER{modifier, commentaire, #ENV{id_commentaire}}}|oui)
+			#SET{ecrire_texte, ''}
+			[(#ENV{id_commentaire, oui}|=={oui}|ou{#AUTORISER{modifier, commentaire, #ENV{id_commentaire}}}|oui)
 				#SET{ecrire_texte, oui}
 			]
+			#SET{emetteur, #INFO_NOM{auteur, #ENV{id_emetteur}}}
+			[(#SET{emetteur, [<a[ href="(#ENV{id_emetteur}|generer_url_entite{auteur})"]>(#GET{emetteur})</a>]})]
 			<li class="editer editer_texte obligatoire[ (#ENV**{erreurs}|table_valeur{texte}|oui) erreur]">
-				<label for="texte"><:relecture:label_commentaire_texte:></label>
+				<label for="texte">
+					<:relecture:label_commentaire_texte:>
+					[(#ENV{id_emetteur}|oui) - <:relecture:label_auteur_commentaire{auteur=#GET{emetteur}}:>]
+				</label>
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{texte})</span>]
-				<textarea name="texte" id="texte"[(#GET{ecrire_texte}|non) readonly="readonly"][ lang="(#LANG)"] rows="10" cols="40">[(#ENV**{texte})]</textarea>
+				<textarea name="texte" id="texte"[(#GET{ecrire_texte}|non) readonly="readonly" class="no_barre"][ lang="(#LANG)"] rows="10" cols="40">[(#ENV**{texte})]</textarea>
 		    </li>
 			[(#AUTORISER{moderer, commentaire, #ENV{id_commentaire}})
+			<li class="editer editer_texte obligatoire[ (#ENV**{erreurs}|table_valeur{statut}|oui) erreur]">
+				<label for="statut"><:relecture:label_commentaire_statut:></label>
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{statut})</span>]
+				<select name="statut" id="statut">
+					<option value="accepte"><:relecture:texte_commentaire_accepte:></option>
+					<option value="refuse"><:relecture:texte_commentaire_refuse:></option>
+					<option value="poubelle"><:relecture:texte_commentaire_poubelle:></option>
+				</select>
+		    </li>
 			<li class="editer editer_texte[ (#ENV**{erreurs}|table_valeur{reponse}|oui) erreur]">
 				<label for="reponse"><:relecture:label_commentaire_reponse:></label>
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{reponse})</span>]

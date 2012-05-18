@@ -30,7 +30,9 @@
 				[(#ENV{element}|non)<th class="element" scope="col">[(#TRI{element, <:relecture:label_element:>, ajax})]</th>]
 				<th class="auteur" scope="col">[(#TRI{id_emetteur, <:relecture:label_emetteur:>, ajax})]</th>
 				<th class="date" scope="col">[(#TRI{date_ouverture, <:relecture:label_date_ouverture_commentaire:>, ajax})]</th>
-				<th class="statut" scope="col">[(#TRI{statut, <:relecture:label_statut:>, ajax})]</th>
+			[(#ENV{affichage}|=={menu_navigation}|non)
+				<th class="statut-clair" scope="col">[(#TRI{statut, <:relecture:label_statut:>, ajax})]</th>
+			]
 				<th class="date" scope="col">[(#TRI{date_cloture, <:relecture:label_date_cloture_commentaire:>, ajax})]</th>
 			[(#ENV{affichage}|=={menu_navigation}|oui)
 				<th class="date-statut"><:relecture:label_date_statut:></th>
@@ -57,7 +59,9 @@
 					</BOUCLE_auteurs>
 				</td>
 				<td class="date">[(#DATE_OUVERTURE|affdate_court)]</td>
+			[(#ENV{affichage}|=={menu_navigation}|non)
 				<td class="statut-clair">[(#VAL{relecture:texte_commentaire_}|concat{#STATUT}|_T)]</td>
+			]
 				<td class="date">[(#DATE_CLOTURE|intval|oui)[(#DATE_CLOTURE|affdate_court)]]</td>
 			[(#ENV{affichage}|=={menu_navigation}|oui)
 				<td class="date-statut">

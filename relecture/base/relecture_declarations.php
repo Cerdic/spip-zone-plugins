@@ -118,7 +118,7 @@ function relecture_declarer_tables_objets_sql($tables) {
 			'ouvert'	=> 'puce-preparer-8.png',
 			'accepte'	=> 'puce-publier-8.png',
 			'refuse'	=> 'puce-refuser-8.png',
-			'poubelle'	=> 'puce-poubelle-8.png'
+			'poubelle'	=> 'puce-supprimer-8.png'
 		),
 
 		// Edition, affichage et recherche
