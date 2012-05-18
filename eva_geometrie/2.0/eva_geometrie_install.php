@@ -12,9 +12,64 @@ function eva_geometrie_install($action){
 	case 'test':
 	if (!$GLOBALS['meta']['eva_geometrie_test']) {return false;}
 	else {
+	//Pour les collègues matheux, on insères ici quelques formats de documents à accepter par SPIP pour le logiciel Scilab
+		//Ajout de l'icone pour le format sce pour Scilab
+		if (!@opendir(_DIR_IMG."icones")) {mkdir(_DIR_IMG."icones");}
+		if (!@fopen(_DIR_IMG."icones/sce.png", "r")) {copy(_DIR_PLUGIN_EVA_GEOMETRIE.'img_pack/sce.png',_DIR_IMG.'icones/sce.png');}
+		//On poursuit avec l'ajout du format sce dans la base de données
+		$test_sce_req=sql_select('inclus','spip_types_documents',"extension = 'sce'");
+		$test_sce_ta=sql_fetch($test_sce_req);
+		$test_sce=$test_sce_ta['inclus'];
+		if (!$test_sce) {
+			sql_insertq('spip_types_documents',array('extension' => 'sce','mime_type' => 'application/Scilab','titre' => 'Scilab','inclus' => 'embed','upload' => 'oui'));
+		}
+		//Ajout de l'icone pour le format sci pour Scilab
+		if (!@fopen(_DIR_IMG."icones/sci.png", "r")) {copy(_DIR_PLUGIN_EVA_GEOMETRIE.'img_pack/sci.png',_DIR_IMG.'icones/sci.png');}
+		//On poursuit avec l'ajout du format sci dans la base de données
+		$test_sci_req=sql_select('inclus','spip_types_documents',"extension = 'sci'");
+		$test_sci_ta=sql_fetch($test_sci_req);
+		$test_sci=$test_sci_ta['inclus'];
+		if (!$test_sci) {
+			sql_insertq('spip_types_documents',array('extension' => 'sci','mime_type' => 'application/Scilab','titre' => 'Scilab','inclus' => 'embed','upload' => 'oui'));
+		}
+		//Ajout de l'icone pour le format tst pour Scilab
+		if (!@fopen(_DIR_IMG."icones/tst.png", "r")) {copy(_DIR_PLUGIN_EVA_GEOMETRIE.'img_pack/tst.png',_DIR_IMG.'icones/tst.png');}
+		//On poursuit avec l'ajout du format tst dans la base de données
+		$test_tst_req=sql_select('inclus','spip_types_documents',"extension = 'tst'");
+		$test_tst_ta=sql_fetch($test_tst_req);
+		$test_tst=$test_tst_ta['inclus'];
+		if (!$test_tst) {
+			sql_insertq('spip_types_documents',array('extension' => 'tst','mime_type' => 'application/Scilab','titre' => 'Scilab','inclus' => 'embed','upload' => 'oui'));
+		}
+		//Ajout de l'icone pour le format cos pour Scilab
+		if (!@fopen(_DIR_IMG."icones/cos.png", "r")) {copy(_DIR_PLUGIN_EVA_GEOMETRIE.'img_pack/cos.png',_DIR_IMG.'icones/cos.png');}
+		//On poursuit avec l'ajout du format cos dans la base de données
+		$test_cos_req=sql_select('inclus','spip_types_documents',"extension = 'cos'");
+		$test_cos_ta=sql_fetch($test_cos_req);
+		$test_cos=$test_cos_ta['inclus'];
+		if (!$test_cos) {
+			sql_insertq('spip_types_documents',array('extension' => 'cos','mime_type' => 'application/Scilab','titre' => 'Scilab','inclus' => 'embed','upload' => 'oui'));
+		}
+		//Ajout de l'icone pour le format xcos pour Scilab
+		if (!@fopen(_DIR_IMG."icones/xcos.png", "r")) {copy(_DIR_PLUGIN_EVA_GEOMETRIE.'img_pack/xcos.png',_DIR_IMG.'icones/xcos.png');}
+		//On poursuit avec l'ajout du format xcos dans la base de données
+		$test_xcos_req=sql_select('inclus','spip_types_documents',"extension = 'xcos'");
+		$test_xcos_ta=sql_fetch($test_xcos_req);
+		$test_xcos=$test_xcos_ta['inclus'];
+		if (!$test_xcos) {
+			sql_insertq('spip_types_documents',array('extension' => 'xcos','mime_type' => 'application/Scilab','titre' => 'Scilab','inclus' => 'embed','upload' => 'oui'));
+		}
+		//Ajout de l'icone pour le format cosf pour Scilab
+		if (!@fopen(_DIR_IMG."icones/cosf.png", "r")) {copy(_DIR_PLUGIN_EVA_GEOMETRIE.'img_pack/cosf.png',_DIR_IMG.'icones/cosf.png');}
+		//On poursuit avec l'ajout du format cosf dans la base de données
+		$test_cosf_req=sql_select('inclus','spip_types_documents',"extension = 'cosf'");
+		$test_cosf_ta=sql_fetch($test_cosf_req);
+		$test_cosf=$test_cosf_ta['inclus'];
+		if (!$test_cosf) {
+			sql_insertq('spip_types_documents',array('extension' => 'cosf','mime_type' => 'application/Scilab','titre' => 'Scilab','inclus' => 'embed','upload' => 'oui'));
+		}
 	//Pour les collègues matheux, on insères ici quelques formats de documents à accepter par SPIP (algobox, XCAS)
 		//On commence par ajouter l'icone pour le format alg = logiciel algobox
-		if (!@opendir(_DIR_IMG."icones")) {mkdir(_DIR_IMG."icones");}
 		if (!@fopen(_DIR_IMG."icones/alg.png", "r")) {copy(_DIR_PLUGIN_EVA_GEOMETRIE.'img_pack/alg.png',_DIR_IMG.'icones/alg.png');}
 		//On poursuit avec l'ajout du format alg dans la base de données
 		$test_alg_req=sql_select('inclus','spip_types_documents',"extension = 'alg'");
