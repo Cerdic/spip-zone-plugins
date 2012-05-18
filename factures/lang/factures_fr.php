@@ -29,5 +29,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_config_factures' => 'Configuration du plugin Factures &amp; Devis',
 	'titre_liste_factures' => 'Liste des factures existantes',
 
+    // Z
+    'z_facture' => 'Test pour voir si le plugin factures était bien pris en compte',
+
 );
 ?>
