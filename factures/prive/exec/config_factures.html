@@ -21,3 +21,35 @@
 <h1><:factures:titre_page_config_factures:></h1>
 
 <div><:factures:explications_page_config_factures:>
+
+    <h3><:factures:choisir_organisation:></h3>
+    <B_organisations><ul class="liste-items">
+    <BOUCLE_organisations(ORGANISATIONS){par nom}{0,5}>
+    <li class="item"><a href="[(#URL_ECRIRE{organisation}|parametre_url{id_organisation,#ID_ORGANISATION})]">#NOM</a></li>
+    </BOUCLE_organisations></ul>
+    </B_organisations>
+
+    <h3><:factures:choisir_auteur_emetteur:></h3>
+    <B_auteur_emetteur><ul class="liste-items">
+    <BOUCLE_auteur_emetteur(AUTEURS){par nom}{tous}{0,5}>
+    <li class="item"><a href="[(#URL_ECRIRE{auteur}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></li>
+    </BOUCLE_auteur_emetteur></ul>
+    </B_auteur_emetteur>
+
+    <h3><:factures:choisir_groupe_mots_facture:></h3>
+    <B_groupes><ul class="liste-items">
+    <BOUCLE_groupes(GROUPES_MOTS){par titre}{0,5}>
+    <li class="item"><a href="[(#URL_ECRIRE{mot_type}|parametre_url{id_groupe,#ID_GROUPE})]">#TITRE</a></li>
+    </BOUCLE_groupes></ul>
+    </B_groupes>Achtung ! pas de groupe, il faut en créer un et y copier les types de facture.
+    <//B_groupes>
+
+    
+    <pre>
+NOTES 1 :
+faire en sorte que lorsque F&D est activé, on vérifie bien que les mots clé et groupes de mots clé soient bien activés.
+idem, faire en sorte que l'on vérifie que pots objet + coordonnées + C&O est bien actif.
+
+NOTES 2 :
+est-ce qu'il faut imposer C&O ? Doit on dire qu'un auteur facture, ou plutôt qu'une organisation facture ?
+    </pre>

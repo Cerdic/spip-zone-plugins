@@ -12,7 +12,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_factures' => 'Factures &amp; Devis',
 	'bouton_configurer_factures' => 'Configurer Factures &amp; Devis',
-	
+
+    // C
+    'choisir_groupe_mots_facture' => 'Choisir un groupe de mots clé pour définir le type de facture (avoir, devis, proforma...).',
+    'choisir_organisation' => 'Choisir une organisation (en général la votre...) qui sera l\'emetteur de toutes les factures.',
+    'choisir_auteur_emetteur' => 'Choisir un auteur (en général vous ou celui attaché à votre organisation...) qui sera l\'emetteur de toutes les factures.',
+
 	// E
 	'editer_facturation_titre' => 'Editer une facture',
 	'explication_liste_factures' => 'Objectif : un tableau, avec pagination, moteur de recherche, possibilit&eacute; de tri (clic sur colonne) et de filtre (s&eacute;lection d\'un mot cl&eacute;, p.ex. le type de document : facture ou devis)',

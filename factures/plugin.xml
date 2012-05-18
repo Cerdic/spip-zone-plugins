@@ -1,8 +1,8 @@
 <plugin>
-	<nom><multi>[en]Invoices &#39; Quotations[fr]Factures &#39; Devis</multi></nom>
+	<nom><multi>[en]Invoices &amp; Quotations[fr]Factures &amp; Devis</multi></nom>
 	<icon>images/factures-32.png</icon>
 
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<version_base>1.0.1</version_base>
 	<install>base/factures_upgrade.php</install>
 
@@ -21,10 +21,10 @@ _ Chaque facture est liée à un auteur SPIP, qui peut (ou pas) être un Contact
 
 Le plugin nécessite les plugins suivants :
 - Coordonnées, pour pouvoir gérer les adresses postales
+- C&amp;O, afin de pouvoir différencier Contacts et Organisations
 
 Le plugin utilise (sans les nécessiter) les plugins suivants :
 - Commandes, afin de pouvoir éditer la facture correspondant à une commande
-- C&amp;0, afin de pouvoir différencier Contacts et Organisations
 - Projets, afin que les actions d'un projet puissent etre liés à une facture
 
 	[en]Invoicing with SPIP (description to be translated when stable...)
@@ -47,14 +47,14 @@ Le plugin utilise (sans les nécessiter) les plugins suivants :
 	</pipeline>
 
 	<!-- configurer le plugin -->
-	<bouton id="config_factures" parent="bando_configuration">
+	<bouton id="config_factures21" parent="bando_configuration">
 		<titre>factures:bouton_configurer_factures</titre>
 		<icone>images/factures-16.png</icone>
 		<url>config_factures</url>
 	</bouton>
 
 	<!-- éditer les factures -->
-	<bouton id='factures' parent='bando_edition'> 
+	<bouton id='factures21' parent='bando_edition'>
 		<icone>images/factures-16.png</icone> 
 		<titre>factures:bouton_factures</titre> 
 		<url>factures</url> 
@@ -77,8 +77,9 @@ Le plugin utilise (sans les nécessiter) les plugins suivants :
 		<inclure>factures_pipelines.php</inclure>
 	</pipeline-->
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
-	<necessite id="contacts" version="[1.0.0;]" />
+	<necessite id="coordonnees" version="[1.4.0;]" />
+    <necessite id="mots_objets" version="[1.0.0;]" />
 
-	<!-- utilise id="spimine" version="[1.0;]" /-->
+    <utilise id="contacts" version="[1.4.0;]" />
 
 </plugin>
