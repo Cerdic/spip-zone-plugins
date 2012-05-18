@@ -9,6 +9,7 @@
 		<multi>
 		[fr]Afficher le Porte Plume sur la plupart des champs de saisie
 		[en]Display Quill on most input fields
+		</multi>
 	</slogan>
 	<auteur>Pascal M&#233;chin - Matthieu Marcillaud - Jacques Pyrat</auteur>
 	<licence>GPLv3</licence>
@@ -46,6 +47,7 @@
 		<multi>
 		[fr]Afficher le Porte Plume sur la plupart des champs de saisie
 		[en]Display Quill on most input fields
+		</multi>
 	</slogan>
 	<auteur>Pascal M&#233;chin - Matthieu Marcillaud - Jacques Pyrat</auteur>
 	<licence>GPLv3</licence>
