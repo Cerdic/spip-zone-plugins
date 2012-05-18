@@ -7,18 +7,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'actualiser' => 'Actualiser',
-	'autoriser_non' => 'Vous n\'êtes pas autorisé à lire les journaux.',
 
 	// C
-	'clic_rafraichir' => 'Rafraîchir',
-	'clic_senstri' => 'Inverser l\'ordre d\'affichage des données',
-	'consultation_logs' => 'Consultation des fichiers de logs',
+	'clic_rafraichir' => 'Recharger le fichier',
+	'colonne_date' => 'Date',
+	'colonne_ip' => 'IP',
+	'colonne_pid' => 'PID',
+	'colonne_hit' => 'Hit',
+	'colonne_gravite' => 'Gravité',
+	'colonne_texte' => 'Texte',
 
 	// D
 	'description_simplog' => 'Cette page permet de visualiser simplement les journaux contenus dans les répertoires de SPIP.',
 
 	// F
 	'fichier' => 'Fichier : "@fichier@"',
+
+	// I
+	'info_hit_pub' => 'Public',
+	'info_hit_pri' => 'Privé',
 
 	// L
 	'liste_fic' => 'Liste des fichiers',
@@ -27,12 +34,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_fichier_choisir' => 'Choisissez un fichier à analyser.',
 	'message_fichier_inconnu' => 'Le fichier "@fichier@" est indisponible.',
-
-	// P
-	'plugin_simplog' => 'Plugin Simplog',
-
-	// R
-	'rep_tmp' => 'Vos répertoires'
 );
 
 ?>

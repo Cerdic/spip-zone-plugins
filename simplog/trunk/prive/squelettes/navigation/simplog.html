@@ -1,3 +1,17 @@
 #BOITE_OUVRIR{'','info'}
     <p><:simplog:description_simplog:></p>
 #BOITE_FERMER
+
+#BOITE_OUVRIR
+    <h3><:simplog:liste_fic:></h3>
+	<ul class="liste-items">
+        <BOUCLE_fics(DATA){source glob, #EVAL{_DIR_TMP}*.log*}{par valeur}{valeur != ''}>
+        <li class="item">
+        	<a href="[(#URL_ECRIRE{#ENV{exec}}|parametre_url{fic,[(#VALEUR)]}|parametre_url{senstri,#ENV{senstri,0}})]">[(#VALEUR|basename)]</a></li>
+        </BOUCLE_fics>
+        <BOUCLE_fics_logs(DATA){source glob, #EVAL{_DIR_TMP}*/*.log*}{par valeur}{valeur != ''}>
+        <li class="item"><a href="[(#URL_ECRIRE{#ENV{exec}}|parametre_url{fic,#VALEUR}|parametre_url{senstri,#ENV{senstri,0}})]">[(#VALEUR|basename)]</a></li>
+        </BOUCLE_fics_logs>
+    </ul>
+    <p><a href="[(#SELF|parametre_url{hasard,[(#VAL{1}|rand{10000000})]})]" class="ajax"><:simplog:actualiser:></a></p>
+#BOITE_FERMER

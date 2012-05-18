@@ -1,27 +1,56 @@
 [(#AUTORISER{voir,simplog}|sinon_interdire_acces)]
 
-<h1 class="grostitre"><:simplog:consultation_logs:></h1>
-
-[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{simplog-24.gif}|balise_img{'',cadre-icone})][(#ENV{fic}|oui)<:simplog:fichier{fichier=#ENV{fic}}:>]})]
+<h1 class="grostitre"><:simplog:logs:></h1>
 
 [(#ENV{fic}|oui)
-<p><a href="[(#SELF|parametre_url{hasard,[(#VAL{1}|rand{10000000})]})]" class='ajax'><:simplog:clic_rafraichir:></a>&nbsp;-&nbsp;<a href="[(#SELF|parametre_url{senstri,[(#ENV{senstri,0}|=={1}|?{0,1})]})]" class='ajax'><:simplog:clic_senstri:></a></p>]
-    <B_fic>
-    #ANCRE_PAGINATION
-    <div class="spip_code">
-    <BOUCLE_fic(DATA){source file, #ENV{fic}}{par cle}{valeur != #ENV{fic}}{inverse #ENV{senstri,0}}{pagination 100}>
-    <p>#VALEUR</p>
-    </BOUCLE_fic>
-    </div>
-    [<p class="pagination">(#PAGINATION{prive})</p>]
-	</B_fic>
-	[(#ENV{fic}|oui)
+	<p>
+		<a href="[(#SELF|parametre_url{hasard,[(#VAL{1}|rand{10000000})]})]" class='ajax'>
+			<:simplog:clic_rafraichir:>
+		</a>
+	</p>
+]
+
+<B_lecture_log>
+	#ANCRE_PAGINATION
+	<div class="spip_code">
+		<table class="spip liste">
+			[<caption><strong class="caption">(#ENV{fic}|oui)<:simplog:fichier{fichier=#ENV{fic}}:></strong></caption>]
+			<thead>
+				<tr class="first_row">
+					<th class="date secondaire" scope="col"><:simplog:colonne_date:></th>
+					<th class="ip" scope="col"><:simplog:colonne_ip:></th>
+					<th class="pid" scope="col"><:simplog:colonne_pid:></th>
+					<th class="hit" scope="col"><:simplog:colonne_hit:></th>
+					<th class="gravite" scope="col"><:simplog:colonne_gravite:></th>
+					<th class="texte principale" scope="col"><:simplog:colonne_texte:></th>
+				</tr>
+			</thead>
+			<tbody>
+<BOUCLE_lecture_log(DATA){source file, #ENV{fic}}{par cle}{valeur != #ENV{fic}}{inverse}{pagination 100}>
+			#SET{ligne, #VALEUR|simplog_phraser_log}
+			[(#GET{ligne}|oui)
+				<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
+					<td class="date secondaire">[(#GET{ligne}|table_valeur{date})]</td>
+					<td class="ip">[(#GET{ligne}|table_valeur{ip})]</td>
+					<td class="pid">[(#GET{ligne}|table_valeur{pid})]</td>
+					<td class="hit">[(#GET{ligne}|table_valeur{hit})]</td>
+					<td class="gravite">[(#GET{ligne}|table_valeur{gravite})]</td>
+					<td class="texte principale">[(#GET{ligne}|table_valeur{texte})]</td>
+				</tr>
+			]
+</BOUCLE_lecture_log>
+			</tbody>
+		</table>
+	</div>
+	[<p class="pagination">(#PAGINATION{prive})</p>]
+</B_lecture_log>
+[(#ENV{fic}|oui)
 	#BOITE_OUVRIR{'','error'}
-    <:simplog:message_fichier_inconnu{fichier=#ENV{fic}}:>
-    #BOITE_FERMER]
-    <//B_fic>
-    [(#ENV{fic}|non)
-    #BOITE_OUVRIR{'','notice'}
-    <:simplog:message_fichier_choisir:>
-    #BOITE_FERMER]
-#BOITE_FERMER
+		<:simplog:message_fichier_inconnu{fichier=#ENV{fic}}:>
+	#BOITE_FERMER]
+<//B_lecture_log>
+[(#ENV{fic}|non)
+	#BOITE_OUVRIR{'','notice'}
+		<:simplog:message_fichier_choisir:>
+	#BOITE_FERMER
+]
