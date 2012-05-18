@@ -69,6 +69,11 @@ function zotspip_calculer_reference($csljson,$annee,$style,$souligne,$date,$lang
 	if (!isset($citeproc[$style])) {
 		include_spip('inc/distant');
 		$csl = spip_file_get_contents(find_in_path("csl/$style.csl"));
+		// Si le style demande n'est pas disponible, message d'erreur et se rabattre sur apa.csl
+		if (!$csl) {
+			erreur_squelette(_T('zotspip:message_erreur_style_csl',array('style'=>$style)));
+			$csl = spip_file_get_contents(find_in_path("csl/apa.csl"));
+		}
 		$citeproc[$style] = new citeproc($csl,$lang);
 	}
 	
@@ -107,17 +112,17 @@ function zotspip_lister_csl(){
 
 // Traduire le type de document
 function zotspip_traduire_type($type) {
-	return _T('zotero:itemtypes_'.strtolower($type));
+	return ($type!='') ? _T('zotero:itemtypes_'.strtolower($type)) : '';
 }
 
 // Traduire le champ Zotero
 function zotspip_traduire_champ($champ) {
-	return _T('zotero:itemfields_'.strtolower($champ));
+	return ($champ!='') ? _T('zotero:itemfields_'.strtolower($champ)) : '';
 }
 
 // Traduire le type d'auteur
 function zotspip_traduire_createur($type) {
-	return _T('zotero:creatortypes_'.strtolower($type));
+	return ($type!='') ? _T('zotero:creatortypes_'.strtolower($type)) : '';
 }
 
 // Afficher l'icône du document

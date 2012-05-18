@@ -52,6 +52,10 @@
 				</select>
 			</li>
 			</B_csl_defaut>
+			<li class="editer_titre_page_biblio[ (#ENV**{erreurs}|table_valeur{titre_page_biblio}|oui)erreur]">
+				<label for="titre_page_biblio"><:zotspip:label_titre_page_biblio:></label>
+				<input type="text" name="titre_page_biblio" class="text" value="#ENV*{titre_page_biblio}" id="titre_page_biblio" [(#HTML5|oui)required='required']/>
+			</li>
 			<li class="editer_corriger_date[ (#ENV**{erreurs}|table_valeur{corriger_date}|oui)erreur]">
 				<label><:zotspip:label_corriger_date:></label>
 				<p class="explication"><:zotspip:explication_corriger_date:></p>

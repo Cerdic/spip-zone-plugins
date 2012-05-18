@@ -1,0 +1,10 @@
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:zotspip:titre_page_biblio:></strong></p>
+
+<div class="contenu-principal">
+	<div class="cartouche">
+		[<h1 class="h1">(#CONFIG{titre_page_biblio,<:zotspip:titre_page_biblio:>})</h1>]
+	</div>
+</div>
+[(#REM) Le type de reference est passe dans type_ref pour eviter colision avec Zpip et le type de page. ]
+#INCLURE{fond=modeles/biblio_#ENV{tri,annee},type=#ENV{type_ref},env}
