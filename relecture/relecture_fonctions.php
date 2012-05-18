@@ -121,10 +121,10 @@ function relecture_extraire_selection($texte, $idebut, $ifin) {
 	$selection = '';
 
 	if ($idebut < $ifin) {
-		$selection = substr($texte, $idebut, $ifin-$idebut+1);
+		$selection = mb_substr($texte, $idebut, $ifin-$idebut+1, $GLOBALS['meta']['charset']);
 	}
 	else {
-		$selection = substr($texte, max($idebut-10, 0), min($idebut+10, strlen($texte)));
+		$selection = mb_substr($texte, max($idebut-10, 0), min($idebut+10, strlen($texte)), $GLOBALS['meta']['charset']);
 	}
 
     return $selection;
