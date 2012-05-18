@@ -45,27 +45,31 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_aucun' => 'هيچي',
 	'entree_bloc' => 'بلاك ازپيپ (Bloc Zpip)',
 	'entree_choisir' => 'نوع مدخلي را كه مي‌خواهيد اضافه كنيد انتخاب نماييد.',
-	'entree_classe_parent' => 'Classe des liens des éléments parents. Cette classe sera rajoutée aux li>a ayant une suite ul/li. Par exemple, si vous saisissez "daddy", cela vous permet d\'utiliser le plugin menu deroulant 2 pour la mise en forme du menu.', # NEW
+	'entree_classe_parent' => 'طبقه‌ي پيوند‌هاي عناصر والد. اين طبقه دو باره به li>داراي پيامد  ul / lاضافه خواهد كرد. 
+به عنوان نمونه، اگر شما «ددي» را تايپ كنيد، اين به شما اجازه مي‌دهد تا پلاگين« منيو طوماري 2»» را براي فرمت بخشي به منيو مورد استفاده قرار دهيد. 
+',
 	'entree_connexion_objet' => 'براي ديدن اوبژه وصل بودن («session»وارد كنيد) يا قطع بودن («nosession»وارد كنيد) لازم است',
-	'entree_contenu' => 'Contenu', # NEW
+	'entree_contenu' => 'محتوا',
 	'entree_css' => 'كلاش‌هاي سي.اس.اس (حامل) مدخل',
 	'entree_css_lien' => 'كلاس‌هاي سي.اس.اس پيوند',
 	'entree_id_groupe' => 'تعداد گروه واژه‌ها',
 	'entree_id_mot' => 'تعداد كليدواژه‌ها',
 	'entree_id_objet' => 'تعداد',
 	'entree_id_rubrique' => 'تعداد بخش‌هاي والد',
-	'entree_id_rubrique_ou_courante' => 'Numéro de la rubrique parente ou "courante" si la rubrique parente est la rubrique courante du contexte', # NEW
-	'entree_id_rubriques_exclues' => 'Numéros des rubriques à exclure, séparés par des virgules', # NEW
-	'entree_id_secteur_exclus' => 'Numéros des secteurs à exclure, séparés par des virgules', # NEW
+	'entree_id_rubrique_ou_courante' => 'تعداد بخش‌ والد يا «فعلي» اگر بخش‌ والد در متن بخش فعلي باشد.',
+	'entree_id_rubriques_exclues' => 'تعداد بخش‌ها براي كنارگذاري، جداشده با ويرگول',
+	'entree_id_secteur_exclus' => 'تعداد بخش‌ها براي داخل‌ گذاري، جداشده با ويرگول',
 	'entree_infini' => 'تا بي‌نهايت',
 	'entree_mapage' => 'صفحه‌ي شخصي من',
-	'entree_masquer_articles_uniques' => 'Si oui et si une rubrique contient un seul article, le masquer ? (mettre "oui" pour cela)', # NEW
+	'entree_masquer_articles_uniques' => 'در اين صورت و اگر يك بخش فقط يك مقاله دارد، آن را مخفي كند؟ (براي اين كار بگذاريد «بله»)',
 	'entree_niveau' => 'سطح زيربخش‌ها',
 	'entree_nombre_articles' => 'تعداد حداكثر مقاله‌ها (پيش گزيده صفر)',
 	'entree_page' => 'نام صفحه',
 	'entree_parametres' => 'فهرست پارامترها',
-	'entree_rubriques_max_affichees' => 'Si oui, limiter le nombre de rubriques listés à xx maximum (suivis d\'un item "... Toutes les rubriques" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum de rubriques, laissez vide pour afficher toutes les rubriques)', # NEW
-	'entree_sousrub_cond' => 'N\'afficher que les sous-rubriques de la rubrique en cours (mettre "oui", sinon laisser vide)', # NEW
+	'entree_rubriques_max_affichees' => 'در اين صورت، تعداد بخش‌هاي فهرست شده تا حداكثر xx محدود شئذ (در پي فقره‌‌ي . . . «تمام بخش‌ها» با پيوند به بخش والد)؟
+(حداكثر تعداد بخش‌ها را تعيين كنيد، براي نشان دادن تمام آن‌ها خالي بگذاريد)
+',
+	'entree_sousrub_cond' => 'فقط نمايش زيربخش‌هاي بخش فعلي (بگذاريد «بله»، در غيراينصورت خالي بگذاريد)',
 	'entree_suivant_connexion' => 'منحصر سازي مدخل بعدي به اتصال (بگذاريد «اتصال» براي نمايش فقط اگر بازديد كننده متصل باشد، بگذاريد «قطع» براي مورد عكس، يا خالي بگذاريد تا هميشه نشان داده شود).
 ',
 	'entree_suivant_connexion_connecte' => 'فقط اگر متصل باشد',
@@ -73,23 +77,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_sur_n_articles' => '@n@ مقاله‌ي منتشره',
 	'entree_sur_n_mots' => '@n@ كلمه‌هاي منتشره ',
 	'entree_sur_n_niveaux' => 'تحت @n@ سطح',
-	'entree_titre' => 'Titre', # NEW
+	'entree_titre' => 'تيتر',
 	'entree_titre_connecter' => 'تيتر براي دستيابي به فرم شناسايي',
 	'entree_titre_prive' => 'تيتر براي دسترسي به قسمت شخصي',
-	'entree_traduction_articles_rubriques' => 'Dans la mesure du possible, afficher les articles de la rubrique dans la langue du contexte (mettre "trad" pour cela)', # NEW
+	'entree_traduction_articles_rubriques' => 'در صورت امكان، نمايش مقاله‌هاي اين بخش به زبان متن («ترجمه» (trad) را براي اينكار بگذاريد)',
 	'entree_traduction_objet' => 'در مور مقاله، ترجمه را در ارتباط با آن متن انتخاب كنيد (براي آن trad را بگذاريد)',
 	'entree_tri_alpha' => ' معيار مرتب كردن بخش‌ها (الفبايي). اگر «تاريخ»"date" را تايپ كنيد، معيار اضافه شده (طبق تاريخ)‌ {par date}خواهد بدو بخش‌ها طبق ترايخ مرتب خواهند شد
 ',
-	'entree_tri_alpha_articles' => 'Critère de tri des articles (alphabétique). Si vous saisissez "date", le critère ajouté sera {par date} et les articles seront triés par date', # NEW
-	'entree_tri_alpha_articles_inverse' => 'Inverser le critère de tri alphabétique ? (mettre "oui" pour cela)', # NEW
-	'entree_tri_alpha_inverse' => 'Inverser le critère de tri alphabétique ? (mettre "oui" pour cela)', # NEW
+	'entree_tri_alpha_articles' => 'مرتب‌ سازي معيارهاي مقاله‌ها (الفبايي). اگر «تاريخ» را تايپ كنيد، معيار افزوده شده {طبق تاريخ}خواهد بودو مقاله بر اساس تاريخ مرتب خواهد شد
+
+',
+	'entree_tri_alpha_articles_inverse' => 'معكس سازي مرتب‌سازي الفبايي؟ («بله» را براي آن بگذاريد)',
+	'entree_tri_alpha_inverse' => 'معكوس سازي مرتب‌سازي الفبايي؟ (براي آن «بله» بگذاريد)',
 	'entree_tri_num' => 'معيار مرتب كردن بخش‌ها (رقم). اگر «تيتر» را تايپ كنيد، معيار افزوده شده (طبق تيتر) {par num titre}خواهد بود و بخش‌ها بر اساس شماره تيتر‌ها مرتب خواهند شد
 ',
-	'entree_tri_num_articles' => 'Critère de tri des articles (numérique). Si vous saisissez "titre", le critère ajouté sera {par num titre} et les articles seront triés par numéro de titre', # NEW
-	'entree_tri_num_articles_inverse' => 'Inverser le critère de tri numérique ? (mettre "oui" pour cela)', # NEW
-	'entree_tri_num_inverse' => 'Inverser le critère de tri numérique ? (mettre "oui" pour cela)', # NEW
+	'entree_tri_num_articles' => 'مرتب‌سازي مقاله‌ها (شماره‌اي). اگر «تيتر» را تايپ كنيد، معيار افزوده شده {طبق تيتر} خواهد بود و مقاله‌ها طبق شماره‌ي تيتر مرتب خواهند شد',
+	'entree_tri_num_articles_inverse' => 'معكوس سازي مرتب‌سازي بخش‌؟ (براي آن «بله» بگذاريد)',
+	'entree_tri_num_inverse' => 'معكوس سازي مرتب‌سازي شماره‌اي؟ (براي آن «بله» بگذاريد)',
 	'entree_type_objet' => 'نوع اوبژه',
-	'entree_url' => 'Adresse', # NEW
+	'entree_url' => 'نشاني (يو.آر.ال) سايت شما',
 	'entree_url_public' => 'نشاني بازگشت بعد از اتصال ',
 	'erreur_aucun_type' => 'هيچ نوع مدخلي يافت نشد.',
 	'erreur_autorisation' => 'شما مجاز به اصلاح منيوي سايت نيستيد.',
@@ -99,7 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_mise_a_jour' => 'هنگام به هنگام سازي پايگاه داده‌ها خطايي رخ داده است.',
 	'erreur_parametres' => 'در پارامتر‌هاي صفحه خطايي وجود دارد',
 	'erreur_type_menu' => 'بايد نوعي از منيو را انتخاب كنيد',
-	'erreur_type_menu_inexistant' => 'Ce type de menu n\'est pas/plus disponible', # NEW
+	'erreur_type_menu_inexistant' => 'اين نوع مينو فعلا/ديگر در دسترس نيست',
 
 	// F
 	'formulaire_ajouter_entree' => 'يك مدخل اضافه كنيد',
@@ -130,29 +136,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ',
 	'formulaire_supprimer_menu' => 'حذف منيو',
 	'formulaire_supprimer_sous_menu' => 'حذف اين زيرمنيو',
-	'formulaire_titre' => 'Titre', # NEW
+	'formulaire_titre' => 'تيتر',
 
 	// I
-	'info_afficher_articles' => 'Les articles seront inclus dans le menu.', # NEW
-	'info_articles_max' => 'Seulement si la rubrique contient au plus @max@ articles', # NEW
-	'info_articles_max_affiches' => 'Affichage limité à @max@ articles', # NEW
-	'info_classe_parent' => 'Classe des éléments parents : ', # NEW
+	'info_afficher_articles' => 'مقاله‌ها در منيو گنجانده خواهند شد',
+	'info_articles_max' => 'فقط اگر بخش بيش از @max@مقاله داشته باشد',
+	'info_articles_max_affiches' => 'نمايش محدود به @max@ مقاله ',
+	'info_classe_parent' => 'طبقه‌ي عناصر والد‌:',
 	'info_connexion_obligatoire' => 'اتصال اجباري',
 	'info_deconnexion_obligatoire' => 'فقط هنگام قطعي',
-	'info_masquer_articles_uniques' => 'Articles uniques masqués', # NEW
+	'info_masquer_articles_uniques' => 'منحصراً مقاله‌هاي پنهان',
 	'info_numero_menu' => 'منيوي شماره‌ي: ',
 	'info_page_speciale' => 'پيوند به صفحه‌ي  «@page@»',
 	'info_page_speciale_zajax' => 'مدال باكس صفحه‌ي  «@page@» براي بلوك «@bloc@»   ',
-	'info_rubrique_courante' => 'Rubrique courante', # NEW
-	'info_rubriques_exclues' => ' / sauf rubrique(s) @id_rubriques@', # NEW
-	'info_rubriques_max_affichees' => 'Affichage limité à @max@ rubriques', # NEW
-	'info_secteur_exclus' => ' / sauf secteur(s) @id_secteur@', # NEW
-	'info_sousrub_cond' => 'Seules les sous-rubriques de la rubriques en cours sont affichées.', # NEW
+	'info_rubrique_courante' => 'بخش فعلي',
+	'info_rubriques_exclues' => '/به جز بخش‌(هاي)@id_rubriques@ ',
+	'info_rubriques_max_affichees' => 'نمايش محدود به @max@ بخش‌ها',
+	'info_secteur_exclus' => '/به جز بخ‌ش (هاي) @id_secteur@',
+	'info_sousrub_cond' => 'فقط زيربخش‌هاي بخش‌هاي فعلي نمايش داده مي‌شوند.',
 	'info_tous_groupes_mots' => 'تمام گروه‌ واژه‌ها',
 	'info_traduction_recuperee' => 'متن ترجمه‌ي منتخب را تعيين خواهد كرد',
 	'info_tri' => 'ترتيب بخش‌ها:‌',
 	'info_tri_alpha' => '(الفبايي)',
-	'info_tri_articles' => 'Tri des articles :', # NEW
+	'info_tri_articles' => 'مرتب‌ سازي مقاله‌ها:',
 	'info_tri_num' => '(شماره‌اي)',
 
 	// N
@@ -160,9 +166,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_label_afficher_titre_menu' => 'نمايش تيتر منيو؟',
 	'noisette_label_identifiant' => 'منيو براي نمايش: ',
 	'noisette_nom_noisette' => 'منيو',
-	'nom_menu_accueil' => 'Accueil', # NEW
+	'nom_menu_accueil' => 'پذيرش',
 	'nom_menu_articles_rubrique' => 'مقاله‌هاي يك بخش',
-	'nom_menu_deconnecter' => 'Se déconnecter', # NEW
+	'nom_menu_deconnecter' => 'قطع شدن',
 	'nom_menu_espace_prive' => 'اتصال/ پيوند به قسمت شخصي',
 	'nom_menu_groupes_mots' => 'كليدواژه‌ها و مقاله‌هاي يك گروه‌ واژه',
 	'nom_menu_lien' => 'پيوند دلبخواهي',
@@ -177,8 +183,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_texte_libre' => 'متن آزاد',
 
 	// T
-	'tous_les_articles' => '... Tous les articles', # NEW
-	'toutes_les_rubriques' => '... Toutes les rubriques' # NEW
+	'tous_les_articles' => '...تمام مقاله‌ها',
+	'toutes_les_rubriques' => '...تمام بخش‌ها'
 );
 
 ?>
