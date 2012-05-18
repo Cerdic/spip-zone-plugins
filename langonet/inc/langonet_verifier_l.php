@@ -41,7 +41,9 @@ define('_LANGONET_FILES', '(?<!/charsets|/lang|/req)(/[^/]*\.(php))$');
 function inc_langonet_verifier_l($module, $ou_fichier) {
 
 	$item_md5 = $fichier_non = array();
-	$files = preg_files(_DIR_RACINE.$ou_fichier, _LANGONET_FILES);
+	foreach($ou_fichier as $rep){
+		$files = array_merge(preg_files(_DIR_RACINE.$rep, _LANGONET_FILES));
+	}
 	foreach ($files as $_fichier) {
 		foreach ($contenu = file($_fichier) as $ligne => $texte) {
 			if (preg_match_all(_LANGONET_FONCTION_L, $texte, $m, PREG_SET_ORDER))

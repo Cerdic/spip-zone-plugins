@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function langonet_creer_select_langues($sel_l='0') {
 
-	$retour = creer_selects($sel_l, '0');
+	$retour = creer_selects($sel_l, array());
 	return $retour['fichiers'];
 }
 
@@ -20,8 +20,7 @@ function langonet_creer_select_langues($sel_l='0') {
  * @param string $sel_d
  * @return array
  */
-function langonet_creer_select_dossiers($sel_d='0') {
-
+function langonet_creer_select_dossiers($sel_d=array()) {
 	$retour = creer_selects('0', $sel_d);
 	return $retour['dossiers'];
 }
@@ -31,16 +30,11 @@ function langonet_creer_select_dossiers($sel_d='0') {
  * - des fichiers de langue
  * - des arborescences a scanner
  *
- * @param string $sel_l
- * @param string $sel_d
+ * @param string $sel_l option du select des langues 
+ * @param array $sel_d option(s) du select des repertoire
  * @return array
  */
-
-// $sel_l  => option du select des langues
-// $sel_d  => option du select des repertoires
-function creer_selects($sel_l='0',$sel_d='0') {
-	
-
+function creer_selects($sel_l='0',$sel_d=array()) {
 	// Recuperation des repertoires des plugins
 	$rep_plugins = lister_dossiers_plugins();
 	// Recuperation des repertoires des extensions
@@ -64,10 +58,10 @@ function creer_selects($sel_l='0',$sel_d='0') {
 	$sel_lang .= ($sel_l == '0') ? ' selected="selected">' : '>';
 	$sel_lang .= _T('langonet:option_aucun_fichier') . '</option>' . "\n";
 	// -- les racines des arborescences a scanner
-	$sel_dossier = '<select name="dossier_scan" id="dossier_scan">' . "\n";
-	$sel_dossier .= '<option value="0"';
-	$sel_dossier .= ($sel_d == '0') ? ' selected="selected">' : '>';
-	$sel_dossier .= _T('langonet:option_aucun_dossier') . '</option>' . "\n";
+	$sel_dossier = '<select name="dossier_scan[]" id="dossier_scan" multiple="multiple">' . "\n";
+	//$sel_dossier .= '<option value="0"';
+	//$sel_dossier .= (count($sel_d) == '0') ? ' selected="selected">' : '>';
+	//$sel_dossier .= _T('langonet:option_aucun_dossier') . '</option>' . "\n";
 
 	// la liste des options :
 	// value (fichier_langue) =>
@@ -110,7 +104,7 @@ function creer_selects($sel_l='0',$sel_d='0') {
 			}
 		}
 		$sel_dossier .= '<option value="' . $ou_fichier;
-		$sel_dossier .= ($sel_d == $ou_fichier) ? '" selected="selected">' : '">';
+		$sel_dossier .= (in_array($ou_fichier,$sel_d)) ? '" selected="selected">' : '">';
 		$sel_dossier .= str_replace('../', '', $reel_dir) . '/</option>' . "\n";
 	}
 

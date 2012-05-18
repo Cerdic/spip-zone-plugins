@@ -39,7 +39,7 @@
 							<label for="dossier_scan"><:langonet:label_arborescence_scannee:></label>
 							<p class="explication"><:langonet:info_arborescence_scannee:></p>
 							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{dossier_scan})</span>]
-							[(#ENV{dossier_scan, 0}|langonet_creer_select_dossiers)]
+							[(#ENV{dossier_scan, #ARRAY}|langonet_creer_select_dossiers)]
 						</li>
 					</ul>
 				</fieldset>
