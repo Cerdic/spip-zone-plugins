@@ -11,10 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'clic_rafraichir' => 'Recharger le fichier',
 	'colonne_date' => 'Date',
+	'colonne_gravite' => 'Gravité',
+	'colonne_hit' => 'Hit',
 	'colonne_ip' => 'IP',
 	'colonne_pid' => 'PID',
-	'colonne_hit' => 'Hit',
-	'colonne_gravite' => 'Gravité',
 	'colonne_texte' => 'Texte',
 
 	// D
@@ -24,8 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fichier' => 'Fichier : "@fichier@"',
 
 	// I
-	'info_hit_pub' => 'Public',
 	'info_hit_pri' => 'Privé',
+	'info_hit_pub' => 'Public',
 
 	// L
 	'liste_fic' => 'Liste des fichiers',
@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_fichier_choisir' => 'Choisissez un fichier à analyser.',
-	'message_fichier_inconnu' => 'Le fichier "@fichier@" est indisponible.',
+	'message_fichier_inconnu' => 'Le fichier "@fichier@" est indisponible.'
 );
 
 ?>

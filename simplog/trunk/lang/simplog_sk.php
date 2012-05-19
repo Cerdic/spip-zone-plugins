@@ -9,12 +9,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'actualiser' => 'Aktualizovať',
-	'autoriser_non' => 'Na čítanie protokolov nemáte dostatočné povolenia.',
 
 	// C
-	'clic_rafraichir' => 'Obnoviť',
-	'clic_senstri' => 'Zmeniť poradie zobrazenia dát',
-	'consultation_logs' => 'Prezeranie súborov protokolov',
+	'clic_rafraichir' => 'Obnoviť', # MODIF
+	'colonne_date' => 'Date', # NEW
+	'colonne_gravite' => 'Gravité', # NEW
+	'colonne_hit' => 'Hit', # NEW
+	'colonne_ip' => 'IP', # NEW
+	'colonne_pid' => 'PID', # NEW
+	'colonne_texte' => 'Texte', # NEW
 
 	// D
 	'description_simplog' => 'Tento zásuvný modul vám umožňuje jednoducho zobraziť súbory protokolov v priečinkoch  SPIPu.',
@@ -22,19 +25,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'fichier' => 'Súbor: "@fichier@"',
 
+	// I
+	'info_hit_pri' => 'Privé', # NEW
+	'info_hit_pub' => 'Public', # NEW
+
 	// L
 	'liste_fic' => 'Zoznam súborov',
 	'logs' => 'Čítanie denníkov',
 
 	// M
 	'message_fichier_choisir' => 'Vyberte súbor, ktorý chcete analyzovať.',
-	'message_fichier_inconnu' => 'Súbor "@fichier@" nie je dostupný.',
-
-	// P
-	'plugin_simplog' => 'Zásuvný modul Simplog',
-
-	// R
-	'rep_tmp' => 'Vaše priečinky'
+	'message_fichier_inconnu' => 'Súbor "@fichier@" nie je dostupný.'
 );
 
 ?>

@@ -9,12 +9,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'actualiser' => 'Refresh',
-	'autoriser_non' => 'You are not allowed to read the logs.',
 
 	// C
-	'clic_rafraichir' => 'Refresh',
-	'clic_senstri' => 'Reverse the sort of data',
-	'consultation_logs' => 'Viewing log files',
+	'clic_rafraichir' => 'Refresh', # MODIF
+	'colonne_date' => 'Date', # NEW
+	'colonne_gravite' => 'Gravité', # NEW
+	'colonne_hit' => 'Hit', # NEW
+	'colonne_ip' => 'IP', # NEW
+	'colonne_pid' => 'PID', # NEW
+	'colonne_texte' => 'Texte', # NEW
 
 	// D
 	'description_simplog' => 'This page simply allows you to read the log files in the folders of SPIP.',
@@ -22,19 +25,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'fichier' => 'File: "@fichier@"',
 
+	// I
+	'info_hit_pri' => 'Privé', # NEW
+	'info_hit_pub' => 'Public', # NEW
+
 	// L
 	'liste_fic' => 'Files list',
 	'logs' => 'Viewing logs',
 
 	// M
 	'message_fichier_choisir' => 'Choose a file to analyze.',
-	'message_fichier_inconnu' => 'The file "@fichier@" is not available.',
-
-	// P
-	'plugin_simplog' => 'Simplog plugin',
-
-	// R
-	'rep_tmp' => 'Your folders'
+	'message_fichier_inconnu' => 'The file "@fichier@" is not available.'
 );
 
 ?>
