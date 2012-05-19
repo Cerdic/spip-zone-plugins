@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'actualiser' => 'Actualiser',
+	'actualiser' => 'Actualiser la liste',
 
 	// C
 	'clic_rafraichir' => 'Recharger le fichier',
@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hit_pub' => 'Public',
 
 	// L
-	'liste_fic' => 'Liste des fichiers',
+	'liste_fic' => 'Liste des journaux',
 	'logs' => 'Consultation des journaux',
 
 	// M
