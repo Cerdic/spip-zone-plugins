@@ -459,11 +459,15 @@ function formulaires_lechapt_calmon_traiter_dist(){
     $echo.=	'</tbody>
         </table>';
 
-	// Si la première valeur est infinie alors on la supprime et on tasse le tableau
+	// Si la première valeur est infinie alors ...
 	if(is_infinite($result[0])){
+		// ... on supprime cette valeur
 		unset($result[0]);
+		// ... on tasse le tableau des résultats
 		$result = array_values($result);
+		// ... on supprime l'abscisse correspond
 		unset($tabAbs[0]);
+		// ... on tasse le tableau des abscisses
 		$tabAbs = array_values($tabAbs);
 	}
 

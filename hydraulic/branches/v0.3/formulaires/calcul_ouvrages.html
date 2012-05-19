@@ -10,12 +10,43 @@
 var globSelectOuv = 'vRect';
 var glob = [];
 
+function initGlob(){
+	<BOUCLE_globChOuv(POUR){tableau #ENV{saisie_equat}}>
+		glob['#CLE'] = '#ENV{choix_champs_#CLE}';
+	</BOUCLE_globChOuv>
+		
+	<BOUCLE_globSurverse(POUR){tableau #ENV{surverse}}>
+		<BOUCLE_pasLoiDeb(CONDITION){si #CLE|!= {'loi_debit'}}>
+			glob['#CLE'] = '#ENV{choix_champs_#CLE}';
+		</BOUCLE_pasLoiDeb>
+	</BOUCLE_globSurverse>
+
+	<BOUCLE_globCaractFixes(POUR){tableau #ENV{caract_fixes}}>
+		#SET{caractFixes, #VALEUR|table_valeur{1}}
+		<BOUCLE_siCaractFixes(CONDITION){si #VALEUR|table_valeur{0}|== {'caract_globale'}}>
+			<BOUCLE_Fixes(POUR){tableau #GET{caractFixes}}>
+				glob['#CLE'] = '#ENV{choix_champs_#CLE}';
+			</BOUCLE_Fixes>
+		</BOUCLE_siCaractFixes>
+	</BOUCLE_globCaractFixes>
+}
+
+initGlob();
 function setVarGlob(){
 	globSelectOuv = getSelectValue('choix_ouvrage');
-	affSurvCheck = document.getElementById("affSurverse").checked;
 	for(var i in glob){
 		glob[i] = getRadioValue('choix_champs_'+i);
 	}
+}
+
+function inArray(array, p_val) {
+    var l = array.length;
+    for(var i = 0; i < l; i++) {
+        if(array[i] == p_val) {
+            return true;
+        }
+    }
+    return false;
 }
 
 // Retourne sous forme de tableau tous les élèments de la Class classe et de type tagName
@@ -28,6 +59,22 @@ function elementsParClasse(classe, tagName){
         }
     }
     return resultats;	
+}
+
+function retourneIndiceSuivant(tabIndice, nom){
+	var indice = '';
+	for(var i = 0; i < tabIndice.length; i++){
+		if(tabIndice[i] == nom){
+			// Si on est pas arrivé au dernier élément
+			if(i+1 <= tabIndice.length-1){
+				indice = tabIndice[i+1];
+			}
+			else{
+				indice = tabIndice[0];
+			}
+		}
+	}
+	return indice;
 }
 
 function affichageEtValeur(){
@@ -64,7 +111,32 @@ function afficher_cacher_champs_select(){
 }
 
 function afficher_cacher_champs_ouv(){
-	setVarGlob();
+	
+	for(var i in glob){
+		if(document.getElementById('varier_val_'+i).checked){
+			var cacher = elementsParClasse('champs_var_'+i, 'tr');
+			for(var j in cacher){
+				cacher[j].style.display='none';
+			}
+			document.getElementById('val_fixe_'+i).checked=true;
+			document.getElementById('caract_'+i).disabled=false;
+		}
+		if(document.getElementById('calcul_val_'+i).checked){
+			document.getElementById('val_fixe_'+i).checked=true;
+		}
+	}
+	
+	<BOUCLE_initGlob(POUR){tableau #ENV{mes_saisies}}>
+		<BOUCLE_initGlob1(POUR){tableau #VALEUR|table_valeur{1}}>
+			#SET{compteur, #COMPTEUR_BOUCLE}
+			<BOUCLE_premiereVal(CONDITION){si #GET{compteur}|== {1}}>
+				document.getElementById('calcul_val_#CLE').checked=true;
+			</BOUCLE_premiereVal>
+				document.getElementById('val_fixe_#CLE').checked=true;
+			<//B_premiereVal>
+		</BOUCLE_initGlob1>
+	</BOUCLE_initGlob>
+	
 	var tabOuvrageAfficher = [];
 	var tabOuvrageCacher = [];
 	
@@ -131,45 +203,63 @@ function afficher_cacher_surverse(){
 
 // Gére le comportement des boutons radios
 function gestion_radios(nom,valeur){
-	// Ce tableau contiendra tous les indices , ainsi que leur valeur, excepté celle qui a été cliquée
-	var tabPartiel = [];
+	tabPartiel = [];
+	tabIndice = [];
 	
+	<BOUCLE_chOuv(POUR){tableau #ENV{mes_saisies}}>
+		if(globSelectOuv == '#CLE'){
+			<BOUCLE_chOuv2(POUR){tableau #VALEUR|table_valeur{1}}>
+				tabPartiel['#CLE'] = '#ENV{choix_champs_#CLE}';
+				tabIndice.push('#CLE');
+			</BOUCLE_chOuv2>
+		}
+	</BOUCLE_chOuv>
+	
+	if(document.getElementById('affSurverse').checked){
+		<BOUCLE_surverseCoche(POUR){tableau #ENV{surverse}}>
+			<BOUCLE_pasLoi(CONDITION){si #CLE|!= {'loi_debit'}}>
+				tabPartiel['#CLE'] = '#ENV{choix_champs_#CLE}';
+				tabIndice.push('#CLE');
+			</BOUCLE_pasLoi>
+		</BOUCLE_surverseCoche>		
+	}
+	
+	<BOUCLE_globCaractFixes2(POUR){tableau #ENV{caract_fixes}}>
+		#SET{caractFixes2, #VALEUR|table_valeur{1}}
+		<BOUCLE_siCaractFixes2(CONDITION){si #VALEUR|table_valeur{0}|== {'caract_globale'}}>
+			<BOUCLE_Fixes2(POUR){tableau #GET{caractFixes2}}>
+				tabPartiel['#CLE'] = '#ENV{choix_champs_#CLE}';
+				tabIndice.push('#CLE');
+			</BOUCLE_Fixes2>
+		</BOUCLE_siCaractFixes2>
+	</BOUCLE_globCaractFixes2>
+
 	// On supprime du tableau l'élément sur lequel on a cliqué
 	delete(tabPartiel[nom]);
 	
-	// Tableau des indices
-	var tabIndice = [];
-
 	if(valeur.substr(0,3) == 'cal'){
-		/*
-		 * Pour toutes les lignes autres que celle passée en paramètre,
-		 * on contrôle  si il y a déjà une valeur à calculer.
-		 * Si oui, alors on fais les modifications adéquates sur les champs: 
-		 * sélection, visibilité	
-		 */
+		document.getElementById('caract_'+nom).disabled=false;
 		for(var cle in tabPartiel){
 			if(document.getElementById('calcul_val_'+cle).checked){
 				document.getElementById('val_fixe_'+cle).checked=true;
-				document.getElementById('caract_'+cle).disabled=false;	
-				document.getElementById('caract_'+nom).disabled=true;
 				setVarGlob();
 			}	
 		}
 	}
-
+	
 	// Si on appuit sur un bouton de type "varier_val" ou "val_fixe" 
 	else if(valeur.substr(0,3) == 'var' || valeur.substr(0,3)=='val'){
 		for(var cle in tabPartiel){
 			if(document.getElementById('varier_val_'+cle).checked && (glob[nom] != "calcul_val_"+nom)){
 				if(document.getElementById('varier_val_'+nom).checked){
 					document.getElementById('val_fixe_'+cle).checked=true;
+					document.getElementById('caract_'+nom).disabled=true;
 				}
 				setVarGlob();
 			}
 			else if(document.getElementById('varier_val_'+cle).checked && (glob[nom] == "calcul_val_"+nom) && valeur.substr(0,3) == 'var'){
 				document.getElementById('calcul_val_'+cle).checked=true;
-				document.getElementById('caract_'+cle).disabled=true;
-				document.getElementById('caract_'+nom).disabled=false;
+				document.getElementById('caract_'+cle).disabled=false;
 				setVarGlob();
 			}
 		}	
@@ -177,8 +267,10 @@ function gestion_radios(nom,valeur){
 		// Compte le nombre de calcul_val checké
 		var cptValCal = 0;
 		for(var cle in glob){
-			if(document.getElementById('calcul_val_'+cle).checked){
-				cptValCal++;
+			if(inArray(tabIndice, cle)){
+				if(document.getElementById('calcul_val_'+cle).checked){
+					cptValCal++;
+				}
 			}
 		}
 		// Si aucune calcul_val n'est checké
@@ -199,8 +291,8 @@ function gestion_radios(nom,valeur){
 			}
 			// ... et on le met a calcul_val
 			document.getElementById('calcul_val_'+indice).checked=true;
+			document.getElementById('caract_'+indice).disabled=false;
 			document.getElementById('caract_'+nom).disabled=false;
-			document.getElementById('caract_'+indice).disabled=true;
 			var cacher = elementsParClasse('champs_var_'+indice, 'tr');
 			for(var i in cacher){
 				cacher[i].style.display='none';
@@ -214,9 +306,11 @@ function gestion_radios(nom,valeur){
 		setVarGlob();
 		document.getElementById('caract_'+nom).disabled=true;
 		for(var cle in glob){
-			if(glob[cle].substr(0,3) == 'val'){
-				document.getElementById('caract_'+cle).disabled=false;
-			}	
+			if(inArray(tabIndice, cle)){
+				if(glob[cle].substr(0,3) == 'val'){
+					document.getElementById('caract_'+cle).disabled=false;
+				}	
+			}
 		}
 		
 		// on affiche les champs correspondant au bouton sélectionné
@@ -238,16 +332,20 @@ function gestion_radios(nom,valeur){
 	// Compte le nombre de varier_val checké
 	var cptVarVal = 0;
 	for(var cle in glob){
-		if(document.getElementById('varier_val_'+cle).checked){
-			cptVarVal++;
+		if(inArray(tabIndice, cle)){
+			if(document.getElementById('varier_val_'+cle).checked){
+				cptVarVal++;
+			}
 		}
 	}
 	
 	if(cptVarVal == 0){
 		for(var cle in glob){
-			if(glob[cle].substr(0,3) != 'cal'){
-				document.getElementById('caract_'+cle).disabled=false;
-			}	
+			if(inArray(tabIndice, cle)){
+				if(glob[cle].substr(0,3) != 'cal'){
+					document.getElementById('caract_'+cle).disabled=false;
+				}	
+			}
 		}
 		var cacher = elementsParClasse('champs_var_'+nom, 'tr');
 		for(var i in cacher){
@@ -345,7 +443,7 @@ function gestion_radios(nom,valeur){
 			</td>
 			
 			<td>
-				<input id="caract_#CLE" type="text" value="#ENV{#CLE}" maxlength="30" name="#CLE" [(#ENV{choix_champs_#CLE}|match{^((calcul_val_#CLE)|(varier_val_#CLE))$}|?{'disabled="true"',''})]/>
+				<input id="caract_#CLE" type="text" value="#ENV{#CLE}" maxlength="30" name="#CLE"/>
 				[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{#CLE})</div>]
 			</td>	
 
@@ -431,7 +529,7 @@ function gestion_radios(nom,valeur){
 			</td>
 					
 			<td>
-				<input id="caract_#CLE" type="text" value="#ENV{#CLE}" maxlength="30" name="#CLE" [(#ENV{choix_champs_#CLE}|match{^((calcul_val_#CLE)|(varier_val_#CLE))$}|?{'disabled="true"',''})]/>
+				<input id="caract_#CLE" type="text" value="#ENV{#CLE}" maxlength="30" name="#CLE"/>
 				[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{#CLE})</div>]
 			</td>	
 
@@ -488,7 +586,7 @@ function gestion_radios(nom,valeur){
 			</td>
 
 			<td>
-				<input id="caract_#CLE" type="text" value="#ENV{#CLE}" maxlength="30" name="#CLE" [(#ENV{choix_champs_#CLE}|match{^((calcul_val_#CLE)|(varier_val_#CLE))$}|?{'disabled="true"',''})]/>
+				<input id="caract_#CLE" type="text" value="#ENV{#CLE}" maxlength="30" name="#CLE"/>
 				[<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{#CLE})</div>]
 			</td>	
 

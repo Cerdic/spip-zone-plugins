@@ -117,14 +117,14 @@ function mes_saisies_ouvrages(){
 		
 		'sTrap' => array(
 			'seuil_trap',
-            array( 'LF', 'F', 'CR', 'CT'),
+            array( 'LF', 'CR', 'CT', 'F'),
             array(8,9),
             false
 		),
 		
 		'vTrap' => array(
 			'vanne_trap',
-            array( 'LF', 'F', 'CR', 'CT'),
+            array( 'LF', 'CR', 'CT', 'F'),
             array(8,9),
             true
 		),
