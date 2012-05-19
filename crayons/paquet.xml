@@ -1,9 +1,9 @@
 <paquet
 	prefix="crayons"
 	categorie="edition"
-	version="1.13.7"
+	version="1.13.8"
 	etat="stable"
-	compatibilite="[1.9.0;3.0.0]"
+	compatibilite="[1.9.0;3.0.*]"
 	logo="images/crayon-32.png"
 	documentation="http://www.spip-contrib.net/Les-Crayons"
 >
