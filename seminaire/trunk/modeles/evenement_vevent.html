@@ -12,7 +12,7 @@
 		<ACM.msc>	
 [(#REM)abstract de l'evenement, le filtre est là pour que les maths soient interprétés dans l'abstract (marche aussi avec le filtre typo). description est là pour le hcal]
 			[<p class="#EDIT{abstract} abstract description"><strong><:seminaire:abstract:> : </strong>(#ABSTRACT|propre|PtoBR)</p>]
-			[<p class="lieu"><strong><:seminaire:lieu:> : </strong><span class="location #EDIT{lieu}">(#LIEU|textebrut)</span>[<span class="adresse #EDIT{adresse}">(#ADRESSE|PtoBR)</span>]</p>]
+			[<p class="lieu"><strong><:seminaire:lieu:> : </strong><span class="location #EDIT{lieu}">(#LIEU|textebrut)</span>[<span class="adresse #EDIT{adresse}"> - (#ADRESSE|PtoBR)</span>]</p>]
 			[<p class="#EDIT{notes} notes"><strong><:seminaire:notes:> :</strong> (#CHAMP_SQL{notes}|typo)</p>][(#REM)NOTES reprenait les notes de l'article au lieu du champs note (merci marcimat) et typo plutôt que propre sinon passage à la ligne non désiré]
 		</ACM.msc>
 
