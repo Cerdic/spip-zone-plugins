@@ -174,10 +174,19 @@ div.gpLUSResult:hover, div.gpLUSResultAlternate:hover
 	bottom:0px !important; 
 } 
 
-/** Decaler le logo Google */
-.GMAP .olLayerGooglePoweredBy {
-//	bottom:8px !important;
+/** Bug d'affichage intempestif du popup */
+.GMAP .olLayerGoogleCopyright,
+.GMAP .olLayerGooglePoweredBy 
+{	display:none;
 }
+.GMAP .gmnoprint
+{	right:0!important;
+}
+/*
+.GMAP .olLayerGoogleCopyright 
+{	display: none;
+}
+*/
 /** Decaler le logo GeoPortail */
 .GMAP .gpControlPermanentLogo 
 {	bottom:25px !important;
@@ -186,12 +195,6 @@ div.gpLUSResult:hover, div.gpLUSResultAlternate:hover
 .GMAP .gpControlLogo 
 {	bottom:12px !important; 
 }
-/** Bug d'affichage intempestif du popup * /
-.GMAP .olLayerGoogleCopyright 
-{	display: none;
-}
-*/
-
 
 /** Affichage overview */
 .overviewSpipMap .olControlOverviewMapElement
