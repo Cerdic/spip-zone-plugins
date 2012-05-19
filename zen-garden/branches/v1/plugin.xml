@@ -40,7 +40,7 @@
 	</bouton>
 
 </plugin>
-<plugin spip="[2.1.0;3.0.99]">
+<plugin spip="[2.1.0;2.1.99]">
 	<nom>Zen-Garden</nom>
 	<slogan>
 		<multi>
