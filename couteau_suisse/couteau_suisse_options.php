@@ -44,7 +44,7 @@ $GLOBALS['cs_options'] = $GLOBALS['cs_fonctions'] = $GLOBALS['cs_fonctions_essai
 // parametres d'url concernant le plugin ?
 $GLOBALS['cs_params'] = isset($_GET['cs'])?explode(',', urldecode($_GET['cs'])):array();
 // fichiers/dossiers temporaires pour le Couteau Suisse
-define('_DIR_CS_TMP', sous_repertoire(_DIR_TMP, "couteau-suisse"));
+define('_DIR_CS_TMP', sous_repertoire(_DIR_TMP, 'couteau-suisse'));
 
 // pour voir les erreurs ?
 if (in_array('report', $GLOBALS['cs_params'])) 

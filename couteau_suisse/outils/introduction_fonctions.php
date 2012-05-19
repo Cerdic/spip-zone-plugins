@@ -13,9 +13,12 @@ if (!defined('_SPIP19300')) {
 			$texte = substr($texte, 0, $i) . _INTRODUCTION_CODE;
 		return $texte;
 	}
-	function chapo_redirigetil($chapo) { return $chapo && $chapo[0] == '=';	}
 	function objet_type($table_objet){ return preg_replace(',^spip_|s$,', '', $table_objet); }
 }
+
+// fonction obsolete sous SPIP 3.0
+function chapo_redirigetil2($chapo) { return $chapo && $chapo[0] == '=';	}
+
 // compatibilite avec SPIP 2.0 : la balise a fortement change !! >> TODO
 // la fonction couper_intro a disparu.
 // voir function filtre_introduction_dist
@@ -100,7 +103,7 @@ if (!function_exists('balise_INTRODUCTION')) {
 				$_descriptif =  champ_sql('descriptif', $p);
 				$_texte = defined('_SPIP30000')
 					?"strlen($_descriptif) ? '' : $_chapo . \"\\n\\n\" . $_texte"
-					:"(strlen($_descriptif) OR chapo_redirigetil($_chapo)) ? '' : $_chapo . \"\\n\\n\" . $_texte";
+					:"(strlen($_descriptif) OR chapo_redirigetil2($_chapo)) ? '' : $_chapo . \"\\n\\n\" . $_texte";
 				$_lgr = "500";
 				break;
 			case 'rubriques':
