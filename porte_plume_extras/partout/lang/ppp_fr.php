@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_personnalisation' => 'Indiquez la cible des éléments qui utiliseront la barre typographique (Expression CSS ou étendue jQuery).',
-	
+
 	// L
 	'label_hauteur_champ' => 'Demi-hauteur de l\'écran',
 	'label_personnalisation' => 'Sélecteur personnalisé',

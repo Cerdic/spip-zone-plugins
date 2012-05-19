@@ -15,10 +15,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_description' => 'uistite sa, že v šablónach máte povolené používanie Porte Plume iba pri poliach, kde  použitie skratiek nevyvolá chybu xhtml.',
 	'cfg_titre' => 'Všade Porte Plume',
 
+	// E
+	'explication_personnalisation' => 'Zadajte cieľ objektov, ktoré budú používať typografický panel (výraz CSS alebo rozšírenie jQuery).',
+
 	// L
 	'label_hauteur_champ' => 'Polovičná výška obrazovky',
+	'label_personnalisation' => 'Vybrať prispôsobené',
 	'legend_barre_typo' => 'Typografický panel aktivovať na:',
 	'legend_hauteur_champ' => 'Výška textového poľa pre články',
+	'legend_personnalisation' => 'Prispôsobenie',
 
 	// S
 	'supprimer' => 'Obnoviť pôvodné hodnoty'
