@@ -4,7 +4,7 @@
 	version="3.3.3"
 	schema="2.0.2"
 	etat="test"
-	compatibilite="[3.0.0-dev;3.0.*["
+	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="images/gis.png"
 	documentation="http://www.spip-contrib.net/GIS2"
 >
