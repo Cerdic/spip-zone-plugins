@@ -5,7 +5,7 @@ function inserer_modeles_affiche_droite($flux){
 	if (in_array($flux['args']['exec'],array('article_edit','breve_edit','rubrique_edit','mot_edit'))) {
 		include_spip('inc/inserer_modeles');
 		if (count(inserer_modeles_lister_formulaires_modeles())>0)
-			$flux['data'] .= recuperer_fond('prive/inserer_modeles',$flux['args']);
+			$flux['data'] .= recuperer_fond('inclure/inserer_modeles',$flux['args']);
 	}
 	return $flux;
 }
@@ -32,9 +32,9 @@ function inserer_modeles_porte_plume_barre_pre_charger($barres) {
 				"id" => 'inserer_modele_'.$nom,
 				"name" => _T_ou_typo($formulaire['nom']),
 				"className" => 'outil_inserer_modele_'.$nom,
-				"beforeInsert" => "function() {jQuery.modalboxload('".generer_url_ecrire(
-					'inserer_modeles',
-					"formulaire_modele=$nom&id_article='+$(\"[name='id_article']\").val()+'&id_rubrique='+$(\"[name='id_rubrique']\").val()+'&id_breve='+$(\"[name='id_breve']\").val()"
+				"beforeInsert" => "function() {jQuery.modalboxload('".generer_url_public(
+					'inclure/inserer_modeles',
+					"modalbox=oui&formulaire_modele=$nom&id_article='+$(\"[name='id_article']\").val()+'&id_rubrique='+$(\"[name='id_rubrique']\").val()+'&id_breve='+$(\"[name='id_breve']\").val()"
 				).",{minHeight: '90%'});}",
 				"display" => true
 			);
@@ -46,9 +46,9 @@ function inserer_modeles_porte_plume_barre_pre_charger($barres) {
 			"name"        => _T('inserer_modeles:outil_inserer_modeles'),
 			"key"         => "M",
 			"className"   => 'outil_inserer_modeles',
-			"beforeInsert" => "function() {jQuery.modalboxload('".generer_url_ecrire(
-				'inserer_modeles',
-				"id_article='+$(\"[name='id_article']\").val()+'&id_rubrique='+$(\"[name='id_rubrique']\").val()+'&id_breve='+$(\"[name='id_breve']\").val()"
+			"beforeInsert" => "function() {jQuery.modalboxload('".generer_url_public(
+				'inclure/inserer_modeles',
+				"modalbox=oui&id_article='+$(\"[name='id_article']\").val()+'&id_rubrique='+$(\"[name='id_rubrique']\").val()+'&id_breve='+$(\"[name='id_breve']\").val()"
 			).",{minHeight: '90%'});}",
 			"display"     => true,
 			"dropMenu"    => $sous_menu
