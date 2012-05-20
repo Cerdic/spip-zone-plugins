@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'actualiser' => 'Refresh',
+	'actualiser' => 'Refresh', # MODIF
 
 	// C
 	'clic_rafraichir' => 'Refresh', # MODIF
@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hit_pub' => 'Public', # NEW
 
 	// L
-	'liste_fic' => 'Files list',
+	'liste_fic' => 'Files list', # MODIF
 	'logs' => 'Viewing logs',
 
 	// M

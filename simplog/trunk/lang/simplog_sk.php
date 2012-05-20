@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'actualiser' => 'Aktualizovať',
+	'actualiser' => 'Aktualizovať', # MODIF
 
 	// C
 	'clic_rafraichir' => 'Obnoviť', # MODIF
@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hit_pub' => 'Public', # NEW
 
 	// L
-	'liste_fic' => 'Zoznam súborov',
+	'liste_fic' => 'Zoznam súborov', # MODIF
 	'logs' => 'Čítanie denníkov',
 
 	// M
