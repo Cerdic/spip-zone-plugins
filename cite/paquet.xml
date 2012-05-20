@@ -15,5 +15,5 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 	
 	<utilise nom="verifier" compatibilite="[0.1.8;[" />
-	<utilise id="saisies" version="[1.25.4;]" />
+	<utilise nom="saisies" compatibilite="[1.25.4;]" />
 </paquet>
