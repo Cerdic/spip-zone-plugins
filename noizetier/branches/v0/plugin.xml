@@ -85,4 +85,5 @@
 	<necessite id="jqueryui" version="[1.8.5;]" />
 	<necessite id="verifier" />
 	<utilise id="compositions" version="[2.0.0;]" />
+	<utilise id="Zpip" version="[;1.9.*]" />
 </plugin>
