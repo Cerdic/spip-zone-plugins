@@ -1,8 +1,6 @@
 <?php
-/// @file
 /**
- * Formulaire principal
- *
+ * Formulaire principal de vérification des fichiers de langue
  */
 
 // Il est anormal que cette variable puisse etre indefinie
@@ -157,7 +155,8 @@ function formater_resultats($verification, $resultats, $corrections,$ou_fichier)
 			$texte['non'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
 			$texte['non'] .= afficher_lignes('non', $resultats['fichier_non'], array(), $f_coloriser);
 			$texte['non'] .= "</div><br />\n";
-			$texte['non'] .= bouton_action(_T('langonet:bouton_corriger'), 
+			if($corrections['fichier'])
+				$texte['non'] .= bouton_action(_T('langonet:bouton_corriger'), 
 											generer_action_auteur('langonet_telecharger', $corrections['fichier']),
 											"", "", _T('langonet:bulle_corriger'));
 			$texte['non'] .= "</div>\n";
@@ -251,9 +250,10 @@ function formater_resultats($verification, $resultats, $corrections,$ou_fichier)
 				$texte['non'] .= "<div class=\"titrem\">\n" . $_item . "</div>\n";
 			}
 			$texte['non'] .= "</div><br />\n";
-			$texte['non'] .= bouton_action(_T('langonet:bouton_corriger'), 
-							generer_action_auteur('langonet_telecharger', $corrections['fichier']),
-							"", "", _T('langonet:bulle_corriger'));
+			if($corrections['fichier'])
+				$texte['non'] .= bouton_action(_T('langonet:bouton_corriger'), 
+								generer_action_auteur('langonet_telecharger', $corrections['fichier']),
+								"", "", _T('langonet:bulle_corriger'));
 			$texte['non'] .= "</div>\n";
 		}
 		else {
@@ -299,7 +299,8 @@ function formater_resultats($verification, $resultats, $corrections,$ou_fichier)
 			$texte['non'] .= '<div style="background-color: #fff; margin-top: 10px;">' . "\n";
 			$texte['non'] .= afficher_lignes('non', $resultats['fichier_non'], $resultats['item_md5'], $f_coloriser);
 			$texte['non'] .= "</div><br />\n";
-			$texte['non'] .= bouton_action(_T('langonet:bouton_corriger'), 
+			if($corrections['fichier'])
+				$texte['non'] .= bouton_action(_T('langonet:bouton_corriger'), 
 							generer_action_auteur('langonet_telecharger', $corrections['fichier']),
 							"", "", _T('langonet:bulle_corriger'));
 			$texte['non'] .= "</div>\n";
@@ -366,7 +367,7 @@ function afficher_lignes($type, $tableau, $extra=array(), $f_coloriser) {
 		$occ = langonet_lister_occ($type, $k, $v, $extra, $f_coloriser);
 		$brut = preg_match('/^(.*)[{].*[}]$/', $k, $m) ? $m[1]:$k;
 		if (!$occ)
-		  $tableau[$k] = "<p style='font-weight:bold;padding-left:2em;'>$brut</p>";
+		  $tableau[$k] = "<div class='titrem'>\n$brut</div>\n";
 		else
 		  $tableau[$k] = bouton_block_depliable($brut, false) .
 			debut_block_depliable(false) . 
@@ -445,7 +446,6 @@ function langonet_lister_occ($type, $item, $detail, $extra, $f_coloriser)
  * @return boolean
  */
 function creer_log($verification, $resultats, $texte, &$log_fichier) {
-
 	// Fichier de log dans tmp/langonet/
 	$ou_fichier =  $resultats['ou_fichier'];
 	$log_prefixe = ($verification == 'fonction_l') ? str_replace("/", "%", implode('_',$ou_fichier)) : basename($resultats['langue'], '.php') . '_';
@@ -477,9 +477,9 @@ function creer_log($verification, $resultats, $texte, &$log_fichier) {
 	}
 
 	$log_texte .= "# " .
-		entite2utf(_T('langonet:label_arborescence_scannee')) . " : " .
-		entite2utf(implode(', ',$ou_fichier)) . 
-		"\n# $sep\n# " .
+		entite2utf(_T('langonet:label_arborescence_scannee')) . " : \n# - " .
+		entite2utf(implode("\n# - ",$ou_fichier)) . 
+		"\n#\n# $sep\n# " .
 		entite2utf(_T('langonet:label_erreur')) . " : " .
 		strval(count($resultats['item_non'])+count($resultats['item_non_mais_nok']));
 
@@ -511,11 +511,11 @@ function creer_log($verification, $resultats, $texte, &$log_fichier) {
 	// -- Texte des resultats: avertissement (non definis ou non utilises sans certitude)
 	if ($verification != 'fonction_l') {
 		$log_texte .= "\n\n# $sep\n# " . 
-		  entite2utf(_T('langonet:entete_log_avertissement_peutetre_'.$verification)) . 
-		  "\n# $sep\n" .
-		texte2log($texte['peut_etre']);
+			entite2utf(_T('langonet:entete_log_avertissement_peutetre_'.$verification)) . 
+			"\n# $sep\n" .
+			texte2log($texte['peut_etre']);
 	}
-
+	$log_texte = wordwrap($log_texte, 80, "\n", true);
 	$ok = ecrire_fichier($log_fichier, $log_texte);
 	return $ok;
 }
