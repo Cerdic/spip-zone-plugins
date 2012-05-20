@@ -1306,7 +1306,7 @@ add_variable( array(
 	'code:%s' => "define('_CORBEILLE_SANS_OPTIM', 1);
 if(!function_exists('genie_optimiser')) { 
 	// surcharge de la fonction d'optimisation de SPIP (inc/optimiser.php)
-	function genie_optimiser(\$t='foo'){ include_spip('optimiser','genie'); optimiser_base_une_table(); return -(mktime(2,0,0) + rand(0, 3600*4)); }\n}",
+	function genie_optimiser(\$t='foo'){ if(include_spip('optimiser','genie')) optimiser_base_une_table(); return -(mktime(2,0,0) + rand(0, 3600*4)); }\n}",
 ));
 
 add_outil( array(
