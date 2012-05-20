@@ -1,0 +1,18 @@
+<BOUCLE_doc(DOCUMENTS) {id_document}{tout}>
+#SET{largeur,#LARGEUR}
+#SET{hauteur,#HAUTEUR}
+[<!--(#REM)
+
+	Si largeur ou hauteur fournit en parametre, appliquer ces dimensions
+
+-->][
+(#ENV{largeur,0}|ou{#ENV{hauteur,0}})
+	#SET{largeur,#ENV{largeur}}
+	#SET{hauteur,#ENV{hauteur}}
+]
+[(#ENV{popin}|?{
+[(#INCLURE{fond=inclure/imageactive_popin}{env}{largeur=#GET{largeur}}{hauteur=#GET{hauteur}})]
+,
+[(#INCLURE{fond=inclure/imageactive_swf}{env}{largeur=#GET{largeur}}{hauteur=#GET{hauteur}})]
+})]
+</BOUCLE_doc>
