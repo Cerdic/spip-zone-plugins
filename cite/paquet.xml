@@ -1,7 +1,7 @@
 <paquet
 	prefix="cite"
 	categorie="edition"
-	version="0.4.1"
+	version="0.4.2"
 	etat="stable"
 	compatibilite="[2.1.0;3.0.99]"
 	logo="prive/themes/spip/images/cite-32.png"
@@ -15,4 +15,5 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 	
 	<utilise nom="verifier" compatibilite="[0.1.8;[" />
+	<utilise id="saisies" version="[1.25.4;]" />
 </paquet>
