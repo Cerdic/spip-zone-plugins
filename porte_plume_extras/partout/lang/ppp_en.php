@@ -16,14 +16,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre' => 'Quill everywhere',
 
 	// E
-	'explication_personnalisation' => 'Indiquez la cible des éléments qui utiliseront la barre typographique (Expression CSS ou étendue jQuery).', # NEW
+	'explication_personnalisation' => 'Specify the target elements that will use the typographical bar (CSS or jQuery expression).',
 
 	// L
 	'label_hauteur_champ' => 'Half size of the screen',
-	'label_personnalisation' => 'Sélecteur personnalisé', # NEW
+	'label_personnalisation' => 'Custom selector',
 	'legend_barre_typo' => 'Enable the editing toolbar on :',
 	'legend_hauteur_champ' => 'Height of the text field on articles',
-	'legend_personnalisation' => 'Personnalisation', # NEW
+	'legend_personnalisation' => 'Customization',
 
 	// S
 	'supprimer' => 'Reset to the default values'
