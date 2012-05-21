@@ -8,8 +8,8 @@
 [(#GET{erreurs_fieldset}|oui)
 	#SET{plie, ''}
 ]
-[(#SET{hndebut,[(#EVAL{$GLOBALS\['debut_intertitre'\]}|sinon{<h3>})]})]
-[(#SET{hnfin,[(#EVAL{$GLOBALS\['fin_intertitre'\]}|sinon{</h3>})]})]
+[(#SET{hndebut,[(#EVAL{$GLOBALS#EVAL**{chr(91)'debut_intertitre'#EVAL**{chr(93)}|sinon{<h3>})]})]
+[(#SET{hnfin,[(#EVAL{$GLOBALS#EVAL**{chr(91)'fin_intertitre'#EVAL**{chr(93)}|sinon{</h3>})]})]
 
 <li class="fieldset[ fieldset_(#ENV{nom})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})][ (#GET{pliable})[ (#GET{plie})]]"[ data-id="(#ENV{id_saisie})"]> 
 	#ENV*{inserer_debut}
