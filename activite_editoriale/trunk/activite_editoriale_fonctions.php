@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 function age_rubrique($date_str) {
 	/*
 	$date = new DateTime();
