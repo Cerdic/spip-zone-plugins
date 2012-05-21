@@ -650,6 +650,7 @@ Per tal de conservar l\'accés al caràcter imatge original d\'SPIP (el petit tr
 	// R
 	'raccourcis' => 'Dreceres tipogràfiques actives del Ganivet Suís:',
 	'raccourcis_barre' => 'Les dreceres tipogràfiques del Ganivet Suís',
+	'rafraichir' => 'Afin de terminer la configuration du plugin, merci d\'actualiser la page courante.', # NEW
 	'reserve_admin' => 'Accés reservat als administradors.',
 	'rss_actualiser' => 'Actualitzar',
 	'rss_attente' => 'Esperant RSS...',

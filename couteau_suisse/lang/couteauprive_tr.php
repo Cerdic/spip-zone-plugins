@@ -602,6 +602,7 @@ Eğer eklentiyi bir pakete tıklayarak sıfırlarsanız İsviçre Çakısı kend
 	// R
 	'raccourcis' => 'İsviçre Çakısı\'nın aktif tipografik kısayolları :',
 	'raccourcis_barre' => 'İsviçre Çakısı\'nın tipografik kısayolları',
+	'rafraichir' => 'Afin de terminer la configuration du plugin, merci d\'actualiser la page courante.', # NEW
 	'reserve_admin' => 'Yöneticilere ayrılmış erişim.',
 	'rss_actualiser' => 'Güncelle',
 	'rss_attente' => 'RSS bekleniyor...',

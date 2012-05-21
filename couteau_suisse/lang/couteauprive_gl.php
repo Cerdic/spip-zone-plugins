@@ -630,6 +630,7 @@ De reiniciar o módulo premendo sobre un paquete, a Navalla Suíza reconfigurara
 	// R
 	'raccourcis' => 'Atallos tipográficos activos da Navalla Suíza :',
 	'raccourcis_barre' => 'Os atallo tipográficos da Navalla Suíza',
+	'rafraichir' => 'Afin de terminer la configuration du plugin, merci d\'actualiser la page courante.', # NEW
 	'reserve_admin' => 'Acceso reservado aos administradores.',
 	'rss_actualiser' => 'Actualizar',
 	'rss_attente' => 'Espera RSS...',

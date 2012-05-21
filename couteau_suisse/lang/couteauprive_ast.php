@@ -628,6 +628,7 @@ Si reanicies el plugin calcando nun paquete, la Navaya Suiza reconfigurarase aut
 	// R
 	'raccourcis' => 'Atayos tipográficos activos de la Navaya Suiza:',
 	'raccourcis_barre' => 'Los atayos tipográficos de la Navaya Suiza',
+	'rafraichir' => 'Afin de terminer la configuration du plugin, merci d\'actualiser la page courante.', # NEW
 	'reserve_admin' => 'Accesu acutao pa los alministradores.',
 	'rss_actualiser' => 'Actualizar',
 	'rss_attente' => 'Esperando RSS...',

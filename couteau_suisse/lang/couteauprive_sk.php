@@ -633,6 +633,7 @@ Na to, aby ostal zachovaný prístup k pôvodnému obrázku odrážky SPIPu (ma
 	// R
 	'raccourcis' => 'Active Penknife typographical shortcuts:',
 	'raccourcis_barre' => 'Klávesové skratky modulu Vreckový nožík',
+	'rafraichir' => 'Afin de terminer la configuration du plugin, merci d\'actualiser la page courante.', # NEW
 	'reserve_admin' => 'Access restricted to administrators',
 	'rss_actualiser' => 'Aktualizovať',
 	'rss_attente' => 'Čaká sa na RSS...',

@@ -625,6 +625,7 @@ Si reinicializas el plugin pulsando en un paquete, la Navaja Suiza volverá a co
 	// R
 	'raccourcis' => 'Atajos tipográficos activos de la Navaja Suiza:',
 	'raccourcis_barre' => 'Los atajos tipográficos de la Navaja Suiza',
+	'rafraichir' => 'Afin de terminer la configuration du plugin, merci d\'actualiser la page courante.', # NEW
 	'reserve_admin' => 'Acceso reservado a los administradores.',
 	'rss_actualiser' => 'Actualizar',
 	'rss_attente' => 'Esperando RSS...',

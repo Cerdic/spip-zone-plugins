@@ -644,6 +644,7 @@ To retain access to SPIP\'s original bullet image (the little triangle), a new "
 	// R
 	'raccourcis' => 'Active Swiss Army Knife typographical shortcuts:',
 	'raccourcis_barre' => 'The Swiss Army Knife\'s typographical shorcuts',
+	'rafraichir' => 'Afin de terminer la configuration du plugin, merci d\'actualiser la page courante.', # NEW
 	'reserve_admin' => 'Access restricted to administrators',
 	'rss_actualiser' => 'Update',
 	'rss_attente' => 'Awaiting RSS...',

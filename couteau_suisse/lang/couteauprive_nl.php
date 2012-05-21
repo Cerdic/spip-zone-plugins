@@ -617,6 +617,7 @@ Als u plugin réinitialiserd door op een pakijs te klikken, reconfiguratie van h
 	// R
 	'raccourcis' => 'Actieve typografische kortere wegen van het Mes Zwitserland :',
 	'raccourcis_barre' => 'De typografische kortere wegen van het Mes Zwitserland',
+	'rafraichir' => 'Afin de terminer la configuration du plugin, merci d\'actualiser la page courante.', # NEW
 	'reserve_admin' => 'Toegang die voor de beheerders is gereserveerd.',
 	'rss_actualiser' => 'Actualiseren',
 	'rss_attente' => 'Wachten RSS...',
