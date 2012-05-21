@@ -1,0 +1,79 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]sauvegarde automatique
+			[it]Salvataggio automatico
+			[en]Automatic backup
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+			[fr]Sauvegarde automatique de la base de donn&#233;es de SPIP
+			[it]Salvataggio automatico di la base dati utilizzata da SPIP
+			[en]Automatic backup of the database used by SPIP
+		</multi>
+	</slogan>
+	<auteur>
+		<multi>
+			[fr]cy_altern, Eric Lupinacci, kent1 d'apr&#232;s une contrib de Silicium [Silicium->silicium@japanim.net]
+			[it]cy_altern, Eric Lupinacci, kent1 - basato su un contrib di Silicium [Silicium->silicium@japanim.net]
+			[en]cy_altern, Eric Lupinacci, kent1 from a contribution of Silicium [Silicium->silicium@japanim.net]
+		</multi>
+	</auteur>
+	<version>0.7.5</version>
+	<version_base>0.1.0</version_base>
+	<etat>stable</etat>
+	<prefix>saveauto</prefix>
+	<description>
+		<multi>
+			[fr]Permet de r&#233;aliser une sauvegarde de toute la base de donn&#233;es utilis&#233;e par SPIP.
+			Le fichier .zip (ou .sql) obtenu est stock&#233; dans un r&#233;pertoire (par d&#233;faut /tmp/dump, configurable)
+			et peut &#234;tre envoy&#233; par mail.
+			
+			Les sauvegardes stock&#233;es consid&#233;r&#233;es comme obsol&#232;tes (en fonction du param&#232;tre de config correspondant)
+			sont automatiquement d&#233;truites.
+			
+			Une interface permet de d&#233;clencher manuellement les sauvegardes et de g&#233;rer les fichiers g&#233;n&#233;r&#233;s
+			
+			
+			[it]Consente di effettuare un salvataggio di tutta la base dati utilizzata da SPIP.
+			Il file .zip (o .sql) ottenuto &#232; memorizzato all'interno di una cartella (in maniera predefinita /tmp/dump, configurabile)
+			e pu&#242; essere inviato per posta elettronica.
+			
+			I salvataggi memorizzati considerati obsoleti (in funzione del parametro di configurazione corrispondente)
+			vengono automaticamente cancellati.
+			
+			[en]Makes a backup of the entire database used by SPIP.
+			The .gz or .sql file obtained is stored in a directory (default /tmp, but configurable) and can be sent automatically by email.
+			
+			The backup is triggered by a cron job (the frequency is configurable).
+			The stored backups considered obsolete (according to the corresponding config setting) are automatically destroyed.
+		</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/Le-plugin-saveauto-sauvegarde</lien>
+	<icon>img_pack/saveauto-24.png</icon>
+	<options>saveauto_options.php</options>
+	<pipeline>
+		<nom>mes_fichiers_a_sauver</nom>
+		<inclure>saveauto_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>saveauto_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>saveauto_pipelines.php</inclure>
+	</pipeline>
+	<onglet id='saveauto' parent='administration'>
+		<icone>img_pack/saveauto-24.png</icone>
+		<titre>saveauto:saveauto_titre</titre>
+	</onglet>
+	<install>base/saveauto_installer.php</install>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="cfg" version="[1.14.4;]" />
+	<necessite id="spip_bonux" version="[1.9.1;]" />
+	<necessite id="facteur" version="[1.5.6;]" />
+	<categorie>maintenance</categorie>
+	<traduire gestionnaire="salvatore" module="saveauto" reference="fr" />
+</plugin>
