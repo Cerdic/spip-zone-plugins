@@ -12,18 +12,32 @@
 
 <BOUCLE_test_tri(CONDITION){si #ENV{par}|=={type}}>
 	<B_biblio_type>
+	[(#GET{export}|oui)
+		<form method="get" action="spip.php" target="_blank">
+		<input type="hidden" name="page" value="zotspip_unapi">]
 	<ul class="spip">
-	<BOUCLE_biblio_type(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{json LIKE %#ENV{recherche}%}{zotsip_depuis}{0,#ENV{max,100000}}{par_type_zotero}>
-	#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
+	<BOUCLE_biblio_type(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{json LIKE %#ENV{recherche}%}{zotsip_depuis}{0,#ENV{max,100000}}{par_type_zotero}{pagination 50}>
+	#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne},form_export=#GET{export}}
 	</BOUCLE_biblio_type>
 	</ul>
+	[<p class="pagination">(#PAGINATION)</p>]
+	[(#GET{export}|oui)
+		#INCLURE{fond=inclure/zotspip_form_export_select}
+		</form>]
 	</B_biblio_type>
 </BOUCLE_test_tri>
 	<B_biblio>
+	[(#GET{export}|oui)
+		<form method="get" action="spip.php" target="_blank">
+		<input type="hidden" name="page" value="zotspip_unapi">]
 	<ul class="spip">
-	<BOUCLE_biblio(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{json LIKE %#ENV{recherche}%}{zotsip_depuis}{0,#ENV{max,100000}}{tri #ENV{par,auteurs},#GET{defaut_tri}}>
-	#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne}}
+	<BOUCLE_biblio(ZITEMS){id_parent==0}{auteur?}{type?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{zcollection?}{json LIKE %#ENV{recherche}%}{zotsip_depuis}{0,#ENV{max,100000}}{tri #ENV{par,auteurs},#GET{defaut_tri}}{pagination 50}>
+	#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne},form_export=#GET{export}}
 	</BOUCLE_biblio>
 	</ul>
+	[<p class="pagination">(#PAGINATION)</p>]
+	[(#GET{export}|oui)
+		#INCLURE{fond=inclure/zotspip_form_export_select}
+		</form>]
 	</B_biblio>
 <//B_test_tri>

@@ -4,6 +4,8 @@
 .zotspip_item .liens {
 	float: right;
 	margin-left: 0.5em;
+	text-align: center;
+	width: 16px;
 }
 .zotspip_item .details {
 	font-size:90%;
@@ -38,4 +40,10 @@
 .formulaire_spip .remove_creator img,
 .formulaire_spip .remove_tag img {
 	vertical-align: middle;
+}
+
+.zotspip_select_ref {
+	float: right;
+	margin-top: 3px;
+	margin-left: 10px;
 }

@@ -300,6 +300,14 @@ function zotspip_liste_creatorTypes_complete($creatorTypes) {
 	return $retour;
 }
 
+// Renvoie l'URL de visualisation d'un item sur zotero.org
+function voir_sur_zotero($id_zitem){
+	if(lire_config('zotspip/type_librairie')=='user')
+		return "https://www.zotero.org/".lire_config('zotspip/username')."/items/itemKey/$id_zitem";
+	else
+		return "https://www.zotero.org/groups/".lire_config('zotspip/username')."/items/itemKey/$id_zitem";
+}
+
 // Renvoie l'URL de modification d'un item sur zotero.org
 function modifier_sur_zotero($id_zitem){
 	if(lire_config('zotspip/type_librairie')=='user')
@@ -332,6 +340,12 @@ function critere_par_type_zotero($idb, &$boucles, $crit) {
 		$boucle->order[] = "\"FIELD($id_table.type,'".implode("','",$config)."')\"";
 	else
 		$boucle->order[] = "'$id_table.type'";
+}
+
+// Renvoie le premier auteur a partir du champs auteurs de la table zitems
+function zotspip_premier_auteur($auteurs) {
+	$auteurs = explode(', ',$auteurs);
+	return $auteurs[0];
 }
 
 ?>
