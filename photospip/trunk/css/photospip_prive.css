@@ -1,6 +1,3 @@
-#CACHE{7*24*3600,cache-client}
-#HTTP_HEADER{'Content-Type: text/css'}
-
 #image-container{
 	position:relative;
 	margin:15px 10;
@@ -41,25 +38,11 @@ button.delete_version{
 	background-color:transparent;
 }
 
-.params_filtre{
-	margin: 10px;
-	padding :5px;
-	border:1px solid #ccc;
-	width:60%;
-}
-
 #versions{
 	padding :0;
 	font-size:.85em;
 	width:275px;
-	float:right;
 	text-align:left;
-}
-
-.help h4,#versions h4{
-	background:#E5E5E5 url(#CHEMIN{images/titre_top_left.png}) no-repeat scroll right top;
-	font-weight:normal;
-	padding:5px 3px;
 }
 
 .help .infos,#versions .infos{
@@ -70,7 +53,6 @@ button.delete_version{
 }
 .version{
 	position:relative;
-	float:left;
 	border:1px solid #ccc;
 	width:80px;
 	margin:1px;
@@ -95,24 +77,15 @@ button{
 .waiting{
 	color:#86B900;
 }
-input.texte{
-	border:3px solid #ccc;
-	padding:2px;
-}
-.spip_bouton input{
-	margin:3px;
-}
+
 .cache {
 	display:block;
 }
-#container-1 h3{
-	margin:20px 0;
-}
+
 .help{
 	width:30%;
 	padding:5px;
 	margin:0 10px 20px 0;
-	float:right;
 	font-size:11px;
 }
 .waiting{
@@ -127,19 +100,6 @@ input.texte{
 	background-color:red;
 }
 
-.clear{
-	clear:both;
-}
-
-#fragment-format label{
-	color:#666;
-	cursor:pointer;
-	border-bottom:1px dotted #86B900;
-}
-
-#image_modifier{
-	float:left;border:2px solid #ccc;
-}
 .nocache{
 	color:#000;
 	border:none;
@@ -149,9 +109,8 @@ input.texte{
 	margin:5px;
 	padding:3px 3px 3px 12px;
 	border:1px solid #86B900;
-	background:#d4f384 url(#CHEMIN{images/ico-warning.png}) left center no-repeat;
 }
 
-[(#INCLURE{[(#EVAL{_DIR_LIB_IMGAREASELECT})]css/imgareaselect-animated.css}|liens_absolus)]
-[(#INCLURE{javascript/jquery-ui/themes/smoothness/jquery.ui.tabs.css}|liens_absolus)]
-[(#INCLURE{javascript/jquery-ui/themes/smoothness/jquery.ui.slider.css}|liens_absolus)]
+.ui-tabs .ui-tabs-nav li{
+	clear:none;
+}

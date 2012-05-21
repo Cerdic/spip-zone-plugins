@@ -1,27 +1,7 @@
 #CACHE{0}
 #HTTP_HEADER{Content-Type:text/html}
 <BOUCLE_doc(DOCUMENTS){id_document}{tout}>
-	<div id="image_modifier" style="[width:(#ENV{largeur_max}|sinon{450})px;]">
-		[(#ENV{message}|oui)
-		<div class="photospip_previsu">
-			<div class="previsu_texte" style="[width:(#ENV{largeur_max}|sinon{450})px;]">
-				[(#ENV{message}|=={previsu}|oui)
-				<span style="text-transform: uppercase;"><:previsualisation:></span><br />
-				<:photospip:previsu:>]
-				[(#ENV{message}|=={sanstest}|oui)
-				<:photospip:sanstest:>]
-				[(#ENV{message}|=={sansfiltre}|oui)
-				<:photospip:sansfiltre:>]
-				[(#ENV{message}|=={sansconf}|oui)
-				<:photospip:sansconf:>]
-			</div>
-		</div>
-		]
-		[(#ENV{filtre}|oui)
-		[(#FICHIER|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|photospip_appliquer_filtre{#ENV{filtre},[(#ENV{param})]}|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|inserer_attribut{alt,' '})]]
-		[(#ENV{filtre}|non)
-		[(#FICHIER|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|inserer_attribut{alt,' '})]]
-	</div>
+	
 	<div id="versions">
 		<h4><:photospip:versions_precedentes:></h4>
 			<div class="infos">

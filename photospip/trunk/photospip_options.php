@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Photospip
  * Un Photoshop-light dans spip?

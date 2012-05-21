@@ -37,9 +37,15 @@ function action_photospip_post($r){
 	}
 
 	//on récup l'id_document
-	$arg = $r[1];
+	$arg = $id_document = $r[1];
 	spip_log("on travail sur l'id_document $arg","photospip");
 	
+	// On vérifie si le document existe
+	$row = sql_fetsel("*", "spip_documents", "id_document=".intval($arg));
+
+	if (!is_array($row))
+		return;
+
 	// Fichier destination : on essaie toujours de repartir de l'original
 
 	//Quelle redirection finale?
@@ -58,12 +64,6 @@ function action_photospip_post($r){
 		redirige_par_entete(str_replace("&amp;","&",$redirect));
 		spip_log("on a oublié de choisir le filtre donc  on retourne rien...", "photospip");
 	}
-	
-	// On vérifie si le document existe
-	$row = sql_fetsel("*", "spip_documents", "id_document=".intval($arg));
-
-	if (!is_array($row))
-		return;
 	
 	spip_log("On lui applique le filtre $var_filtre","photospip");	
 
@@ -204,94 +204,6 @@ function action_photospip_post($r){
 			redirige_par_entete(str_replace("&amp;","&",$redirect));
 		}
 	}
-}
-
-
-/////////////////////////////////////////////////////////////////////
-//
-// Appliquer le filtre image
-//
-/////////////////////////////////////////////////////////////////////
-
-function photospipfiltre ($src, $dest, $filtre,$params){
-	spip_log("src = $src","photospip");
-	spip_log("dest = $dest","photospip");
-	spip_log("filtre = $filtre","photospip");
-	spip_log("params = $params","photospip");
-	
-	include_spip('inc/filtres');
-	include_spip('public/parametrer');
-	$src_img = '';
-	
-	$filtre = chercher_filtre($filtre);
-	spip_log($filtre,'photospip');
-	if (function_exists($filtre)){
-		if($params){
-			if($filtre == 'image_recadre'){
-				$dst_img = $filtre($src,$params[0],$params[1],$params[2]);
-				spip_log("$filtre($src,$params[0],$params[1],$params[2]);","photospip");
-			}
-			else{
-				spip_log("$filtre($src,$params)","photospip");
-				$dst_img = $filtre($src,$params);		
-			}
-		}
-		else{
-			$dst_img = $filtre($src);
-		}
-		$dst_img = extraire_attribut($dst_img,'src');
-		spip_log("après le filtre $filtre dst_img = $dst_img","photospip");		
-	}else{
-		spip_log('le filtre n existe pas','photospip');
-		return false;
-	}
-
-	if(preg_match("/\.(png|gif|jpe?g|bmp)$/i", $src, $regs)) {
-		switch($regs[1]) {
-			case 'png':
-			  if (function_exists('ImageCreateFromPNG')) {
-				$src_img=ImageCreateFromPNG($dst_img);
-				spip_log("creation png from $dst_img","photospip");
-				$save = 'imagepng';
-			  }
-			  break;
-			case 'gif':
-			  if (function_exists('ImageCreateFromGIF')) {
-				$src_img=ImageCreateFromGIF($dst_img);
-				$save = 'imagegif';
-			  }
-			  break;
-			case 'jpeg':
-			case 'jpg':
-			  if (function_exists('ImageCreateFromJPEG')) {
-				$src_img=ImageCreateFromJPEG($dst_img);
-				spip_log("creation jpg from $dst_img","photospip");
-				$save = 'Imagejpeg';
-			  }
-			  break;
-			case 'bmp':
-			  if (function_exists('ImageCreateFromWBMP')) {
-				$src_img=@ImageCreateFromWBMP($dst_img);
-				$save = 'imagewbmp';
-			  }
-			  break;
-		}
-	}
-
-	if (!$src_img) {
-		spip_log("photospipfiltre : image non lue, $src","photospip");
-		return false;
-	}
-
-	$size=getimagesize($src);
-	if (!($size[0] * $size[1])) return false;
-
-	//ImageDestroy($src_img);
-	ImageInterlace($src_img,0);
-
-	$save($src_img,$dest);
-	spip_log("dest $dest","photospip");
-	return true;
 }
 
 ?>
