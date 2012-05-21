@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
-	'menus_description' => 'Crea i tuoi menù in redazione.',
+	'menus_description' => 'Crea i tuoi menù in redazione.', # MODIF
 	'menus_nom' => 'Menus', # NEW
 	'menus_slogan' => 'Crea i tuoi menù in redazione.',
 	'menus_titre' => 'Menù'

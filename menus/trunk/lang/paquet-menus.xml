@@ -1,8 +1,14 @@
 <traduction module="paquet-menus" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/menus/trunk/lang/" reference="fr">
-	<langue code="de" />
-	<langue code="en" />
+	<langue code="de" url="http://trad.spip.org/tradlang_module/paquet-menus?lang_cible=de">
+		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
+	</langue>
+	<langue code="en" url="http://trad.spip.org/tradlang_module/paquet-menus?lang_cible=en">
+		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
+	</langue>
 	<langue code="fr" />
-	<langue code="it" />
+	<langue code="it" url="http://trad.spip.org/tradlang_module/paquet-menus?lang_cible=it">
+		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
+	</langue>
 	<langue code="sk" url="http://trad.spip.org/tradlang_module/paquet-menus?lang_cible=sk">
 		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 	</langue>
