@@ -8,29 +8,29 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'actualiser' => 'Aktualizovať', # MODIF
+	'actualiser' => 'Aktualizovať zoznam',
 
 	// C
-	'clic_rafraichir' => 'Obnoviť', # MODIF
-	'colonne_date' => 'Date', # NEW
-	'colonne_gravite' => 'Gravité', # NEW
-	'colonne_hit' => 'Hit', # NEW
-	'colonne_ip' => 'IP', # NEW
-	'colonne_pid' => 'PID', # NEW
-	'colonne_texte' => 'Texte', # NEW
+	'clic_rafraichir' => 'Obnoviť súbor',
+	'colonne_date' => 'Dátum',
+	'colonne_gravite' => 'Dôležitosť',
+	'colonne_hit' => 'Počet klikov',
+	'colonne_ip' => 'IP',
+	'colonne_pid' => 'PID regulátor',
+	'colonne_texte' => 'Text',
 
 	// D
 	'description_simplog' => 'Tento zásuvný modul vám umožňuje jednoducho zobraziť súbory protokolov v priečinkoch  SPIPu.',
 
 	// F
-	'fichier' => 'Súbor: "@fichier@"',
+	'fichier' => 'Súbor: "@fichier@"', # MODIF
 
 	// I
-	'info_hit_pri' => 'Privé', # NEW
-	'info_hit_pub' => 'Public', # NEW
+	'info_hit_pri' => 'Súkromná zóna',
+	'info_hit_pub' => 'Verejne prístupná stránka',
 
 	// L
-	'liste_fic' => 'Zoznam súborov', # MODIF
+	'liste_fic' => 'Zoznam protokolov',
 	'logs' => 'Čítanie denníkov',
 
 	// M

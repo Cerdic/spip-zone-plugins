@@ -8,29 +8,29 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'actualiser' => 'Refresh', # MODIF
+	'actualiser' => 'Refresh the list',
 
 	// C
-	'clic_rafraichir' => 'Refresh', # MODIF
-	'colonne_date' => 'Date', # NEW
-	'colonne_gravite' => 'Gravité', # NEW
-	'colonne_hit' => 'Hit', # NEW
-	'colonne_ip' => 'IP', # NEW
-	'colonne_pid' => 'PID', # NEW
-	'colonne_texte' => 'Texte', # NEW
+	'clic_rafraichir' => 'Refresh the file',
+	'colonne_date' => 'Date',
+	'colonne_gravite' => 'Severity',
+	'colonne_hit' => 'Hit',
+	'colonne_ip' => 'IP',
+	'colonne_pid' => 'PID',
+	'colonne_texte' => 'Text',
 
 	// D
 	'description_simplog' => 'This page simply allows you to read the log files in the folders of SPIP.',
 
 	// F
-	'fichier' => 'File: "@fichier@"',
+	'fichier' => 'File "@fichier@"',
 
 	// I
-	'info_hit_pri' => 'Privé', # NEW
-	'info_hit_pub' => 'Public', # NEW
+	'info_hit_pri' => 'Private',
+	'info_hit_pub' => 'Public',
 
 	// L
-	'liste_fic' => 'Files list', # MODIF
+	'liste_fic' => 'List of log files',
 	'logs' => 'Viewing logs',
 
 	// M
