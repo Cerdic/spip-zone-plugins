@@ -76,7 +76,7 @@
 		<li class="editer_csl[ (#ENV**{erreurs}|table_valeur{csl}|oui)erreur]">
 			<label for='csl'>Personnaliser le style des références</label>
 			<select name="csl" id="csl">
-				<BOUCLE_csl(POUR){tableau #LISTER_CSL}>
+				<BOUCLE_csl(POUR){tableau #LISTER_CSL}{par valeur}>
 				<option value="#CLE"[(#CONFIG{aeres/csl}|=={#CLE}|oui)selected="selected"]>#VALEUR</option>
 				</BOUCLE_csl>
 			</select>

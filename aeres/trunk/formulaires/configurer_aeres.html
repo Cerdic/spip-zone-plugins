@@ -21,7 +21,7 @@
 		<li class="editer_csl[ (#ENV**{erreurs}|table_valeur{csl}|oui)erreur]">
 			<label for='csl'>Style CSL à utiliser</label>
 			<select name="csl" id="csl">
-				<BOUCLE_csl(POUR){tableau #LISTER_CSL}>
+				<BOUCLE_csl(POUR){tableau #LISTER_CSL}{par valeur}>
 				<option value="#CLE"[(#ENV{csl}|=={#CLE}|oui)selected="selected"]>#VALEUR</option>
 				</BOUCLE_csl>
 			</select>
