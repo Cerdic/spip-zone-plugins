@@ -28,7 +28,7 @@
     <layout>
       <choose>
         <if type="book">
-          <group prefix="&lt;cite|book" suffix="&gt;">
+          <group prefix="&amp;lt;cite|book" suffix="&amp;gt;">
             <text variable="title" prefix="|title=" suffix=""/>
             <names variable="author" prefix="|authors=" suffix="">
               <name delimiter="; " name-as-sort-order="all" sort-separator=", " form="long"/>
@@ -48,7 +48,7 @@
           </group>
         </if>
         <else-if type="chapter">
-          <group prefix="&lt;cite|chapter" suffix="&gt;">
+          <group prefix="&amp;lt;cite|chapter" suffix="&amp;gt;">
             <text variable="title" prefix="|title=" suffix=""/>
             <names variable="author" prefix="|authors=" suffix="">
               <name delimiter="; " name-as-sort-order="all" sort-separator=", " form="long"/>
@@ -72,7 +72,7 @@
           </group>
         </else-if>
         <else-if type="article-journal">
-          <group prefix="&lt;cite|journal" suffix="&gt;">
+          <group prefix="&amp;lt;cite|journal" suffix="&amp;gt;">
             <text variable="title" prefix="|title=" suffix=""/>
             <names variable="author" prefix="|authors=" suffix="">
               <name delimiter="; " name-as-sort-order="all" sort-separator=", " form="long"/>
@@ -89,7 +89,7 @@
           </group>
         </else-if>
         <else-if type="report">
-          <group prefix="&lt;cite|report" suffix="&gt;">
+          <group prefix="&amp;lt;cite|report" suffix="&amp;gt;">
             <text variable="title" prefix="|title=" suffix=""/>
             <names variable="author" prefix="|authors=" suffix="">
               <name delimiter="; " name-as-sort-order="all" sort-separator=", " form="long"/>
@@ -108,7 +108,7 @@
           </group>
         </else-if>
         <else-if type="thesis">
-          <group prefix="&lt;cite|thesis" suffix="&gt;">
+          <group prefix="&amp;lt;cite|thesis" suffix="&amp;gt;">
             <text variable="title" prefix="|title=" suffix=""/>
             <names variable="author" prefix="|authors=" suffix="">
               <name delimiter="; " name-as-sort-order="all" sort-separator=", " form="long"/>
@@ -124,7 +124,7 @@
           </group>
         </else-if>
         <else-if type="webpage">
-          <group prefix="&lt;cite|web" suffix="&gt;">
+          <group prefix="&amp;lt;cite|web" suffix="&amp;gt;">
             <text variable="title" prefix="|title=" suffix=""/>
             <names variable="author" prefix="|authors=" suffix="">
               <name delimiter="; " name-as-sort-order="all" sort-separator=", " form="long"/>
@@ -139,7 +139,7 @@
           </group>
         </else-if>
         <else>
-          <group prefix="&lt;cite|book" suffix="&gt;">
+          <group prefix="&amp;lt;cite|book" suffix="&amp;gt;">
             <text variable="title" prefix="|title=" suffix=""/>
             <names variable="author" prefix="|authors=" suffix="">
               <name delimiter="; " name-as-sort-order="all" sort-separator=", " form="long"/>
