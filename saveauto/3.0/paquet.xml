@@ -21,8 +21,6 @@
 	<pipeline nom="autoriser" inclure="saveauto_autoriser.php" />
 	<pipeline nom="taches_generales_cron" inclure="saveauto_pipelines.php" />
 
-	<necessite nom="cfg" compatibilite="[1.14.4;[" />
-	<necessite nom="spip_bonux" compatibilite="[1.9.1;[" />
 	<necessite nom="facteur" compatibilite="[1.5.6;[" />
 
 	<onglet nom="saveauto" titre="saveauto:saveauto_titre" parent="administration" icone="img_pack/saveauto-24.png" />
