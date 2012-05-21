@@ -56,7 +56,7 @@ function couteau_suisse_vider_tables($nom_meta_base_version) {
 
 // installation des tables du plugin et mises a jour
 function couteau_suisse_upgrade($nom_meta_base_version, $version_cible){
-if(defined('_LOG_CS')) cs_log("cout_upgrade($nom_meta_base_version, $version_cible)");
+if(defined('_LOG_CS')) cs_log("cout_upgrade : $nom_meta_base_version => $version_cible");
 	$current_version = 0.0;
 	if(	(!isset($GLOBALS['meta'][$nom_meta_base_version]))
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
@@ -89,12 +89,18 @@ if(defined('_LOG_CS')) cs_log("cout_upgrade($nom_meta_base_version, $version_cib
 				effacer_meta($meta);
 			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
 		}
-		if (version_compare($current_version, $tmp='1.1','<')){
+		if (version_compare($current_version, $tmp='1.2','<')){
 			echo '<h4>',_T('couteau:titre'),' - Upgrade ',$tmp,'</h4>';
 			effacer_meta('tweaks_contribs');
+			// MAJ forcee de certains fichiers distants
+			$outils = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
+			$outils['previsualisation']['maj_distant'] = 1;
+			$outils['masquer']['maj_distant'] = 1;
+			$outils['maj_auto']['maj_distant'] = 1;
+			ecrire_meta('tweaks_actifs', serialize($outils));
 			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
 		}
-		ecrire_metas();
+		ecrire_metas(); # Pour SPIP 1.92
 	}
 }
 

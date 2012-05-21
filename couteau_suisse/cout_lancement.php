@@ -85,7 +85,7 @@ if($log) cs_log($rand.($forcer?"\$forcer = true":"cs_initialisation($forcer) : S
 		if(isset($o['actif']) && $o['actif'] && !isset($outils[$nom])) 
 			unset($metas_outils[$nom]);
 	ecrire_meta('tweaks_actifs', serialize($metas_outils));
-	ecrire_metas();
+	ecrire_metas(); # Pour SPIP 1.92
 	// stocker les types de variables declarees
 	global $cs_variables;
 	$metas_vars['_chaines'] = $cs_variables['_chaines'];
@@ -109,14 +109,23 @@ if($log) cs_log("$rand -- cs_initialise_includes()... couteau_suisse_fonctions.p
 	cs_verif_FILE_OPTIONS($metas_outils['cs_comportement']['actif'] && $metas_vars['spip_options_on'], true);
 	// sauver la configuration
 	cs_sauve_configuration();
-	// en metas : outils actifs
 if($log) cs_log("$rand -- ecriture metas");
+	// en metas : outils actifs
 	ecrire_meta('tweaks_actifs', serialize($metas_outils));
 	// en metas : variables d'outils
 	ecrire_meta('tweaks_variables', serialize($metas_vars));
 	// en metas : code inline pour les pipelines, mes_options et mes_fonctions;
 	ecrire_meta('tweaks_pipelines', serialize($cs_metas_pipelines));
-	ecrire_metas();
+	// maj forcee des fichiers distants ?
+	$test = 0;
+ 	foreach($metas_outils as $nom=>$o) 
+		if(isset($o['actif']) && $o['actif'] && isset($o['maj_distant']) && $o['maj_distant']) {
+			cs_action_fichiers_distants($outils[$nom], true, true);
+			$metas_outils[$nom]['maj_distant'] = 0;
+			$test = 1;
+		}
+	if($test) ecrire_meta('tweaks_actifs', serialize($metas_outils));
+	ecrire_metas(); # Pour SPIP 1.92
 	$GLOBALS['cs_init'] = 0;
 if($log) cs_log("{$rand}cs_initialisation($forcer) : Sortie");
 }

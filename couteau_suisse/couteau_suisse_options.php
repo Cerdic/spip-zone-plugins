@@ -284,4 +284,15 @@ function cs_nettoie(&$flux) {
 	return preg_replace(',<pp>\s*</p>,', '', preg_replace(','._CS_HTMLX.',', '', $flux));
 }
 
+if(defined('_SPIP30000')) {
+// Compatibilite temporaire, methode SPIP2 pour SPIP3
+function action_charger_plugin() {
+//	include_spip('inc/minipres'); die(minipres('Partie en développement.<br/>Mettre &agrave; jour votre plugin prochainement.'));
+	// extraction automatique
+	//$_POST['extract'] = 'oui';
+	// lancement de la maj
+	if(include_spip('lib/maj_auto/distant_action_charger_plugin') && include_spip('lib/maj_auto/distant_inc_charger_plugin'))
+		action_charger_plugin_dist();
+}}
+
 ?>

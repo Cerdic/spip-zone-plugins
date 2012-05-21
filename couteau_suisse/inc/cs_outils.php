@@ -211,7 +211,7 @@ function detail_outil($outil_id) {
 	if($outil['nb_disabled']) $details[] = _T('couteauprive:detail_disabled') . ' ' . $outil['nb_disabled'];
 	if(isset($outil['fichiers_distants'])) {
 		$a = array();
-		foreach($outil['fichiers_distants'] as $i) $a[] = basename($outil[$i]);
+		foreach($outil['fichiers_distants'] as $i) $a[] = cs_basename($outil[$i]);
 		$details[] = _T('couteauprive:detail_fichiers_distant') . ' ' . join(', ', $a);
 	}
 	if($outil['surcharge']) $details[] = '* ' . _T('couteauprive:detail_surcharge') . ' ' . _T('item_oui');
@@ -245,7 +245,6 @@ function cs_action_rapide($outil_id, $actif=true) {
 	}
 	return '';
 }
-
 // gere les fichiers distants d'un outil
 function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 	if(!isset($outil['fichiers_distants'])) return '';
@@ -256,13 +255,12 @@ function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 		$erreur = false;
 		$res_pipe = '';
 		$dir = sous_repertoire($lib, $outil['id']);
-		// retrait des arguments
-		preg_match('/[^?]*/', basename($outil[$i]), $reg); 
-		$f = 'distant_' . $reg[0];
+		// prefixe et basename sans arguments
+		preg_match('/[^:]*/', $i, $reg); 
+		$f = $reg[0] . '_' . cs_basename($outil[$i]);
 		// 1er appel : envoi du nom du fichier
 		$file = pipeline('fichier_distant', array('outil'=>$outil['id'], 'actif'=>$actif, 'fichier_local'=>$dir.$f));
 		$file = $file['fichier_local'];
-		$f = basename($file);
 		$size = ($forcer || @(!file_exists($file)) ? 0 : filesize($file));
 		if($size) $statut = _T('couteauprive:distant_present', array('date'=>cs_date_long(date('Y-m-d H:i:s', filemtime($file)))));
 		elseif($actif || $forcer) {
@@ -276,7 +274,7 @@ function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 				$distant = $distant['texte'];
 				if(preg_match(',\.php\d?$,', $file)) {
 					$test = preg_replace(',^.*?\<\?php|\?\>.*?$,', '', $distant);
-					if(!@eval("return true; $test")) $distant = false;
+					if(!@eval("return true; ". preg_replace(',function\s+\w+,','\\0_zz',$test))) $distant = false;
 					else $distant = ecrire_fichier($file, '<'."?php\n\n".trim($test)."\n\n?".'>');
 				} else
 					$distant = ecrire_fichier($file, $distant);
@@ -284,7 +282,7 @@ function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 			if($distant) $statut = '<span style="color:green">'._T('couteauprive:distant_charge').'</span>';
 			else $erreur = $statut = '<span style="color:red">'._T('couteauprive:distant_echoue').'</span>';
 		} else $erreur = $statut = _T('couteauprive:distant_inactif');
-		$a[] = "[{$f}->{$outil[$i]}]\n_ ".$statut.$message;
+		$a[] = '[{'.basename($file)."}->{$outil[$i]}]\n_ ".$statut.$message;
 	}
 	if($tester) return $a;
 	$a = '<ul style="margin:0.6em 0 0.6em 4em;"><li>' . join("</li><li style='margin-top:0.4em;'>", $a) . '</li></ul>';

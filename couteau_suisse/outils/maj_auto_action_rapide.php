@@ -90,8 +90,9 @@ function maj_auto_action_rapide() {
 	// verification des plugins
 	include_spip('inc/plugin');
 	$plugins_actifs = array_values(liste_chemin_plugin_actifs());
-	// liste des extensions dispo sous SPIP 2.1
-	$plugins_extensions = defined('_SPIP20100')?array_values(liste_chemin_plugin_actifs(_DIR_EXTENSIONS)):array();
+	// liste des extensions dispo sous SPIP >= 2.1
+	if(defined('_DIR_EXTENSIONS')) define('_DIR_PLUGINS_DIST', _DIR_EXTENSIONS); // compat pour SPIP 2.1
+	$plugins_extensions = defined('_SPIP20100')?array_values(liste_chemin_plugin_actifs(_DIR_PLUGINS_DIST)):array();
 	// tous, mais les actifs d'abord...
 	$plugins = array_unique(array_merge($plugins_actifs, $plugins_extensions, liste_plugin_files()));
 	$html_actifs = $html_inactifs = $html_extensions = array();
@@ -99,7 +100,7 @@ function maj_auto_action_rapide() {
 		$actif = in_array($p, $plugins_actifs, true);
 		$extension = in_array($p, $plugins_extensions, true);
 		$auto = preg_match(',^auto/,', $p);
-		$infos = plugin_get_infos_maj($p, $stop=time()-$time>$timeout, $extension?_DIR_EXTENSIONS:_DIR_PLUGINS);
+		$infos = plugin_get_infos_maj($p, $stop=time()-$time>$timeout, $extension?_DIR_PLUGINS_DIST:_DIR_PLUGINS);
 		$maj_lib = $checked = '';
 		if($stop)
 			$maj_lib = '<span class="cs_relancer">'.'Temps serveur &eacute;coul&eacute; : [poursuivre->#].'.'</span>';
@@ -141,7 +142,7 @@ function maj_auto_action_rapide() {
 		. _T('couteau:maj_liste').'</legend>'
 		. propre(
 			(count($html_actifs)? "\n|{{" . _T('couteau:plug_actifs') . "<span id='maj_1'" . $sep . join("\n",$html_actifs) . "\n" : '')
-			. (count($html_extensions)? "\n|{{" . _T('plugins_liste_extensions') . "<span id='maj_2'". $sep . join("\n",$html_extensions) . "\n" : '')
+			. (count($html_extensions)? "\n|{{" . _T(defined('_SPIP30000')?'plugins_liste_dist':'plugins_liste_extensions') . "<span id='maj_2'". $sep . join("\n",$html_extensions) . "\n" : '')
 			. (count($html_inactifs)? "\n|{{" . _T('couteau:plug_inactifs') . "<span id='maj_3'". $sep . join("\n",$html_inactifs) . "\n" : '')
 		  )
 		. "<div style='text-align: right;'><input class='fondo' type='submit' value=\""

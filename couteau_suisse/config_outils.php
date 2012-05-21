@@ -1325,17 +1325,18 @@ add_outil( array(
 	'code:jq_init' => 'jclock_init.apply(this);',
 ));
 
-add_outil(defined('_SPIP20100')?array(
-	'id' => 'maj_auto',
-	'categorie' => 'securite',
-	'contrib' => 3223,
-):array(
-	'id' => 'maj_auto',
-	'categorie' => 'securite',
+$cs_temp = defined('_SPIP30000')?array(
+	'distant_action' => 'http://core.spip.org/projects/spip/repository/raw/branches/spip-2.1/ecrire/action/charger_plugin.php',
+	'distant_inc' => 'http://core.spip.org/projects/spip/repository/raw/branches/spip-2.1/ecrire/inc/charger_plugin.php',
+):(defined('_SPIP20100')?array():array(
 	'version-min' => '1.9300',
-	'contrib' => 3223,
 	'distant' => 'http://core.spip.org/projects/spip/repository/raw/branches/spip-2.1/ecrire/genie/mise_a_jour.php',
 ));
+add_outil(array_merge(array(
+	'id' => 'maj_auto',
+	'categorie' => 'securite',
+	'contrib' => 3223,
+), $cs_temp));
 
 // reglage des differents selecteurs en partie privee
 add_outil( array(

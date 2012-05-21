@@ -129,8 +129,6 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		enregistre_modif_outils($cmd, $outil);
 		cout_exec_redirige(strlen($outil)?"cmd=descrip&outil=$outil#cs_infos":'');
 	}
-//	else
-//		verif_outils();
 
 	$t = charger_fonction('commencer_page', 'inc');
 	echo $t(couteauprive_T('titre'), 'configuration', 'couteau_suisse');
@@ -155,7 +153,11 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		// TODO: redondances probables a revoir
 		// mises a jour eventuelles de la base
 		$installer_plugins = charger_fonction('installer', 'plugins');
-		/*$infos = */$installer_plugins('couteau_suisse', 'install');
+		$infos = $installer_plugins('couteau_suisse', 'install');
+		if($infos && $infos['install_test'])
+			 echo $infos['install_test'][1], '<p style="color:red;">', 
+			 	_T($infos['install_test'][0]?'plugin_info_install_ok':'avis_operation_echec'), '<br>', couteauprive_T('rafraichir'), '</p>';
+		unset($infos);
 		parse_str(parametres_css_prive(), $paramcss);
 	} else {
 		// compatibilite SPIP < 3.0

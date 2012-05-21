@@ -207,6 +207,12 @@ if(defined('_LOG_CS')) cs_log("$nb pipeline(s) actif(s) : strlen=".strlen($contr
 		'<'."?php\n// Code de controle pour le plugin 'Couteau Suisse' : $nb pipeline(s) actif(s)\n{$controle}?".'>');
 }
 
+// basename sans argument
+function cs_basename($file, $suffix=null) {
+	preg_match('/[^?]*/', $file, $reg); 
+	return basename($reg[0], $suffix);
+}
+
 // est-ce que $pipe est un pipeline ?
 function is_pipeline_outil($pipe, &$set_pipe) {
 	if($ok=(strncmp('pipeline:', $pipe, 9)==0)) $set_pipe = trim(substr($pipe, 9));
@@ -346,7 +352,7 @@ function cs_initialise_includes($count_metas_outils) {
 	$temp_js_html = $temp_css_html = $temp_css = $temp_js = $temp_jq = $temp_jq_init = $temp_filtre_imprimer = array();
 	@define('_CS_HIT_EXTERNE', 1500);
 	// inclure d'office outils/couteau_suisse_fonctions.php
-	if($temp=cs_lire_fichier_php("outils/cout_fonctions.php"))
+	if($temp = cs_lire_fichier_php("outils/cout_fonctions.php"))
 		$infos_fichiers['code_fonctions'][] = $temp;
 	// variable de verification
 	$infos_fichiers['code_options'][] = "\$GLOBALS['cs_verif']=$count_metas_outils;";
@@ -375,8 +381,9 @@ function cs_initialise_includes($count_metas_outils) {
 					// module a inclure
 					if(find_in_path("outils/$inc.php"))
 						$infos_pipelines[$pipe2]['inclure'][] = "outils/$inc";
-					if(isset($outil['distant_pipelines']) && find_in_path("lib/$inc/distant_".basename($outil['distant_pipelines'])))
-						$infos_pipelines[$pipe2]['inclure'][] = "lib/$inc/distant_".basename($outil['distant_pipelines'],'.php');
+					// inclusion du fichier des pipelines distants. TODO : inclusion mieux ciblee
+					if(isset($outil['distant_pipelines']))
+						$infos_pipelines[$pipe2]['inclure'][] = "lib/$inc/distant_pipelines_".cs_basename($outil['distant_pipelines'], '.php');
 					// fonction a appeler
 					$infos_pipelines[$pipe2]['fonction'][] = $fonc;
 				} elseif(is_pipeline_outil_inline($pipe, $pipe2)) {
@@ -393,7 +400,7 @@ function cs_initialise_includes($count_metas_outils) {
 				// le code est mis de cote. il sera compile plus tard au moment du pipeline grace a cs_compile_header()
 				if($file=find_in_path("outils/$inc.$f.html")) { lire_fichier($file, $ff); ${'temp_'.$f.'_html'}[] = $ff; }
 				// TODO : librairies distantes placees dans lib/
-/*				if(isset($outil['distant_'.$type]) && ($file=find_in_path("lib/$inc/distant_{$f}_".basename($outil["distant_$f"])))) etc. */
+/*				if(isset($outil['distant_'.$f]) && ($file=find_in_path("lib/$inc/distant_{$f}_".cs_basename($outil["distant_$f"])))) etc. */
 			}
 			// recherche d'un code inline eventuellement propose
 			if(isset($outil['code:spip_options'])) $infos_fichiers['code_spip_options'][] = $outil['code:spip_options'];
@@ -407,7 +414,7 @@ function cs_initialise_includes($count_metas_outils) {
 			// TODO : librairies distantes placees dans lib/
 			foreach(array('options', 'fonctions') as $f) {
 				if($temp=cs_lire_fichier_php("outils/{$inc}_{$f}.php")) $infos_fichiers['code_'.$f][] = $temp;
-/*				if(isset($outil['distant_'.$f]) && find_in_path("lib/$inc/distant_{$f}_".basename($outil["distant_$f"])))
+/*				if(isset($outil['distant_'.$f]) && find_in_path("lib/$inc/distant_{$f}_".cs_basename($outil["distant_$f"])))
 					if($temp=cs_lire_fichier_php("lib/$inc/distant_{$f}_$outil[distant_$f].php")) 
 						$infos_fichiers['code_'.$f][] = $temp;
 */			}
