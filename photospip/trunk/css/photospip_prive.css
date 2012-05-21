@@ -39,9 +39,8 @@ button.delete_version{
 }
 
 #versions{
-	padding :0;
+	padding:0;
 	font-size:.85em;
-	width:275px;
 	text-align:left;
 }
 

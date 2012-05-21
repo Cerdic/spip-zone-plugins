@@ -65,7 +65,7 @@ function formulaires_editer_image_verifier_dist($id_document='new', $id_parent='
 	/**
 	 * On test uniquement
 	 */
-	elseif(_request('validation') == 'tester'){
+	elseif(_request('tester')){
 		if(in_array($var_filtre,array('tourner','image_recadre'))){
 			$erreurs['message_erreur'] = _T('photospip:erreur_form_filtre_sstest');
 		}

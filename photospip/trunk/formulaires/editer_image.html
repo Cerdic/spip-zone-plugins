@@ -179,7 +179,6 @@
 					</div>
 				</div>
 				]
-				[(#ENV{erreurs}|foreach)]
 				[(#ENV{erreurs}|table_valeur{filtre}|oui)
 				[(#_document:FICHIER|image_reduire{#GET{largeur_max,450},#GET{hauteur_max,450}}|photospip_appliquer_filtre{#ENV{erreurs}|table_valeur{filtre},[(#ENV{erreurs}|table_valeur{param})]}|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|inserer_attribut{alt,' '})]]
 				[(#ENV{erreurs}|table_valeur{filtre}|non)
@@ -414,19 +413,14 @@
 						</li>]
 					</ul>
 				</li>]
-			<li>
-				<div class="choix">
-					<input type="radio" name="validation" value="tester" id="tester" checked="checked" />
-					<label for="tester">[<img src="(#CHEMIN{images/photospip-ico/ico_tester.png})" alt="<:photospip:bouton_tester:>" /> ]<:photospip:bouton_tester:></label>
-				</div>
-				<div class="choix">
-				[(#GET{photospip}|=={pasok}|?{<input type="radio" name="validation" value="appliquer" id="appliquer" /><label for="appliquer">[<img src="(#CHEMIN{images/photospip-ico/ico_appliquer.png})" alt="<:photospip:valider:>" /> ]<:photospip:valider:></label>,<span class="warning"><:photospip:nb_versions_depasse:></span>})]
-				</div>
-			</li>
+
 		</ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
-	  <p class="boutons"><input type="submit" class="submit" name="valider" value="<:photospip:valider:>" /></p>
+	  <p class="boutons">
+	  	<input type="submit" class="submit" name="tester" value="<:photospip:bouton_tester:>" />
+	  	<input type="submit" class="submit" name="validation" value="<:photospip:valider:>" />
+	  </p>
 	</div></form>
 	</BOUCLE_document>
 	</BOUCLE_editable>
