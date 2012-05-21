@@ -1,0 +1,3 @@
+<BOUCLE_articles(ARTICLES){id_rubrique}{tout}{!par date_modif}{0,1}>#SET{article,#DATE_MODIF}</BOUCLE_articles>
+<BOUCLE_breves(BREVES){id_rubrique}{tout}{!par maj}{0,1}>#SET{breves,#MAJ}</BOUCLE_breves>
+[(#GET{article}|max{#GET{breves}})]
