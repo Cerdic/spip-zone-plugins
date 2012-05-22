@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="0.1.16"
 	etat="test"
-	compatibilite="[2.0.10;3.0.99]"
+	compatibilite="[2.0.10;3.0.*]"
 	logo="images/verifier-128.png"
 	documentation="http://www.spip-contrib.net/Verifier,1505"
 >
