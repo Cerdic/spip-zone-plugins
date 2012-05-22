@@ -5,7 +5,7 @@
  * Un Photoshop-light dans spip?
  *
  * Auteurs :
- * Quentin Drouet (kent1@arscenic.info)
+ * kent1 (kent1@arscenic.info -  http://www.kent1.info)
  *
  * © 2008-2012 - Distribue sous licence GNU/GPL
  * Pour plus de details voir le fichier COPYING.txt
@@ -13,7 +13,6 @@
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
 
 function photospip_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_documents_inters'][] = 'documents';

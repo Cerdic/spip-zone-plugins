@@ -37,6 +37,7 @@ function formulaires_editer_image_charger_dist($id_document='new', $retour=''){
 		'recadre_x2',
 		'recadre_y1',
 		'recadre_y2',
+		'params_tourner',
 		'params_image_sepia',
 		'params_image_gamma',
 		'params_image_flou',
@@ -87,7 +88,6 @@ function formulaires_editer_image_verifier_dist($id_document='new', $retour=''){
 	return $erreurs;
 }
 
-// http://doc.spip.org/@inc_editer_article_dist
 function formulaires_editer_image_traiter_dist($id_document='new', $retour=''){
 	$res = array();
 	

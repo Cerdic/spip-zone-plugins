@@ -84,32 +84,32 @@
 								</li>
 								<li>
 									<label for="recadre_width"><:photospip:label_recadre_width:></label>
-									<input type="text" class="text" id="recadre_width" maxlength="5" name="recadre_width" value="#ENV{recadre_width}" readonly="readonly" />
+									<input type="text" class="text" id="recadre_width" maxlength="5" style="width:5em" name="recadre_width" value="#ENV{recadre_width}" />
 								</li>
 								<li>
 									<label for="recadre_height"><:photospip:label_recadre_height:></label>
-									<input type="text" class="text" id="recadre_height" maxlength="5" name="recadre_height" value="#ENV{recadre_height}" readonly="readonly" />
+									<input type="text" class="text" id="recadre_height" maxlength="5" style="width:5em" name="recadre_height" value="#ENV{recadre_height}" />
 								</li>
 								<li>
 									<label><:photospip:label_recadre_x1_y1:></label>
-									<div class="choix">
+									<div class="choix" style="display:inline">
 										<label for="recadre_x1">x</label>
-										<input type="text" class="text" id="recadre_x1" name="recadre_x1" value="#ENV{recadre_x1}" readonly="readonly" />
+										<input type="text" class="text" id="recadre_x1" name="recadre_x1" maxlength="5" style="width:5em" value="#ENV{recadre_x1}" />
 									</div>
-									<div class="choix">
+									<div class="choix" style="display:inline">
 										<label for="recadre_y1">y</label>
-										<input type="text" class="text" id="recadre_y1" name="recadre_y1" value="#ENV{recadre_y1}" readonly="readonly" />
+										<input type="text" class="text" id="recadre_y1" name="recadre_y1" maxlength="5" style="width:5em" value="#ENV{recadre_y1}" />
 									</div>
 								</li>
 								<li>
 									<label><:photospip:label_recadre_x2_y2:></label>
-									<div class="choix">
+									<div class="choix" style="display:inline">
 										<label for="recadre_x2">x</label>
-										<input type="text" class="text" id="recadre_x2" name="recadre_x2" value="#ENV{recadre_x2}" readonly="readonly" />
+										<input type="text" class="text" id="recadre_x2" name="recadre_x2" maxlength="5" style="width:5em" value="#ENV{recadre_x2}" />
 									</div>
-									<div class="choix">
+									<div class="choix" style="display:inline">
 										<label for="recadre_y2">y</label>
-										<input type="text" class="text" id="recadre_y2" name="recadre_y2" value="#ENV{recadre_y2}" readonly="readonly" />
+										<input type="text" class="text" id="recadre_y2" name="recadre_y2" maxlength="5" style="width:5em" value="#ENV{recadre_y2}" />
 									</div>
 								</li>
 							</ul>
@@ -175,10 +175,11 @@
 						</li>]
 					</ul>
 				</li>
+				
 				<li class="fieldset" id="fragment-couleurs">
 					<h3 class="legend"><:photospip:legende_filtres_de_couleur:></h3>
 					<ul>
-						[(#CONFIG{photospip/image_nb,on}|=={on}|oui)
+						[(#CONFIG{photospip/image_nb}|=={on}|oui)
 						<li class="editer editer_nb">
 							<input type="radio" name="filtre" id="filtre_nb" value="image_nb"[(#ENV{filtre}|=={image_nb}|oui)checked="checked"] />
 							<label for="filtre_nb">[<img src="(#CHEMIN{images/photospip-ico/ico_nb.png})" alt="<:photospip:label_image_nb:>" /> ]<:photospip:label_image_nb:></label>
@@ -229,12 +230,6 @@
 								</ul>
 							</div>
 						</li>]
-					</ul>
-				</li>
-				[(#GET{fonctions_images}|=={on}|oui)
-				<li class="fieldset" id="fragment-sup">
-					<h3 class="legend"><:photospip:legende_filtres_supplementaires:></h3>
-					<ul>
 						[(#CONFIG{photospip/image_niveau_de_gris_auto}|=={on}|oui)
 						<li class="editer editer_niveaux_auto">
 							<input type="radio" name="filtre" id="filtre_niveaux_auto" value="image_niveaux_gris_auto"[(#ENV{filtre}|=={image_niveaux_gris_auto}|oui)checked="checked"] />
@@ -243,6 +238,7 @@
 								<p class="explication"><:photospip:explication_image_niveau_de_gris_auto:></p>
 							</div>
 						</li>]
+						[(#GET{fonctions_images}|=={on}|oui)
 						[(#CONFIG{photospip/image_sincity}|=={on}|oui)
 						<li class="editer editer_sincity">
 							<input type="radio" name="filtre" id="filtre_sincity" value="image_sincity"[(#ENV{filtre}|=={image_sincity}|oui)checked="checked"] />
@@ -273,9 +269,9 @@
 									</li>
 								</ul>
 							</div>
-						</li>]
+						</li>]]
 					</ul>
-				</li>]
+				</li>
 		</ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
@@ -285,10 +281,10 @@
 	  </p>
 	 <script type="text/javascript"><!--
 			[(#CONFIG{photospip/image_recadre,on}|=={on}|oui)
-				var x1, y1, x2, y2, w, h, ias;
+				var x1, y1, x2, y2, w, h, ias,ratio;
+				var ratio = parseFloat([(#GET{ratio})]);
 				function crop_selectchange(img, selection){
 					// Le ratio est la relation entre notre image normale et la prévisualisation
-					var ratio = parseFloat([(#GET{ratio})]);
 					if(!isNaN(parseFloat(selection.x1*ratio))){
 						x1.val(parseFloat(selection.x1*ratio).toFixed(0));
 						y1.val(parseFloat(selection.y1*ratio).toFixed(0));
@@ -415,6 +411,46 @@
 				if(jQuery('#image_recadre').is(':checked')){
 					image_crop();
 				}]
+				jQuery('#recadre_x1,#recadre_y1,#recadre_x2,#recadre_y2,#recadre_width,#recadre_height').change(function(){
+					if(typeof(ias) == 'object'){
+						var ias_selection = ias.getSelection();
+						if($(this).is('#recadre_width')){
+							var width_ratio = (parseFloat($(this).val())/ratio).toFixed(0);
+							ias_selection.x2 = parseInt(ias_selection.x1)+parseInt(width_ratio);
+						}
+						else if($(this).is('#recadre_height')){
+							var height_ratio = (parseFloat($(this).val())/ratio).toFixed(0);
+							ias_selection.y2 = parseInt(ias_selection.y1)+parseInt(height_ratio);
+						}
+						else{
+							var width = parseFloat(ias_selection.x2)-parseFloat(ias_selection.x1);
+							console.log(width);
+							var height = parseFloat(ias_selection.y2)-parseFloat(ias_selection.y1);
+							console.log(height);
+							if($(this).is('#recadre_x1')){
+								var x1_ratio = (parseFloat($(this).val())/ratio).toFixed(0);
+								ias_selection.x1 = parseInt(x1_ratio);
+								ias_selection.x2 = parseInt(x1_ratio)+parseInt(width);
+							}
+							else if($(this).is('#recadre_y1')){
+								var y1_ratio = (parseFloat($(this).val())/ratio).toFixed(0);
+								ias_selection.y1 = parseInt(y1_ratio);
+							}
+							else if($(this).is('#recadre_x2')){
+								var x2_ratio = (parseFloat($(this).val())/ratio).toFixed(0);
+								ias_selection.x2 = parseInt(x2_ratio);
+							}
+							else if($(this).is('#recadre_y2')){
+								var y2_ratio = (parseFloat($(this).val())/ratio).toFixed(0);
+								ias_selection.y2 = parseInt(y2_ratio);
+							}
+						}
+						ias.setSelection(ias_selection.x1,ias_selection.y1,ias_selection.x2,ias_selection.y2);
+						ias.update();
+						var new_selection = ias.getSelection();
+						crop_selectchange($('image_modifier img'), new_selection);
+					}
+				});
 				jQuery('.image_recadre input[type=radio]').click(function(){
 					if (jQuery(this).val() != ''){
 						jQuery('#image_modifier img').imgAreaSelect({aspectRatio: jQuery(this).val()});
