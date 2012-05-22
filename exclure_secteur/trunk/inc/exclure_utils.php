@@ -1,11 +1,6 @@
 <?php
 include_spip('inc/config');
-if (!function_exists('critere_tout_voir_dist')){
-        function critere_tout_voir_dist($idb, &$boucles, $crit) {   
-            $boucle = &$boucles[$idb];
-            $boucle->modificateur['tout_voir'] = true;
-    }
-}
+
 function secteur_explicite($crit){
     
     foreach($crit as $critere){   
@@ -67,7 +62,7 @@ function exclure_sect_choisir($crit,$type){
         $cfg = implode($cfg, ',');
     }
     else {
-        $cfg = sql_quote('z');
+        $cfg = 'z';
     }
 
     return $cfg;
