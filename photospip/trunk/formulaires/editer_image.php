@@ -7,9 +7,24 @@ include_spip('inc/autoriser');
 include_spip('inc/documents');
 include_spip('photospip_fonctions');
 
-function formulaires_editer_image_charger_dist($id_document='new', $id_parent='', $retour='', $lier_trad=0, $config_fonc='image_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_image_charger_dist($id_document='new', $retour='', $config_fonc='image_edit_config'){
 	$valeurs = array();
+	$id_document = sql_getfetsel('id_document','spip_documents','id_document='.intval($id_documents));
 	$valeurs['id_document'] = $id_document;
+	
+	if(!$id_document){
+		$valeurs['editable'] = false;
+		$valeurs['message_erreur'] = _T('phpotospip:erreur_doc_numero');
+		return $valeurs;
+	}
+	
+	$limite = lire_config('photospip/limite_version',1000000);
+	$nb_versions = sql_count('*','spip_documents_inters','id_document='.intval($id_document));
+	if($nb_versions >= $limite){
+		$valeurs['modifiable'] = false;
+		$valeurs['message_erreur'] = _T('phpotospip:erreur_nb_versions_atteint',array('nb'=>$limite));
+	}
+		
 	/**
 	 * Restaurer les inputs en cas de test
 	 */

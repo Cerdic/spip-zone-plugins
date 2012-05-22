@@ -158,9 +158,6 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_document' value='#ENV{id_document}' />
-		[(#REM) un bouton submit pour enregistrer qui sera declenche par le return
-		il ne doit pas etre hidden pour marcher dans safari
-		]
 		<div id="modifier_image">
 			<div id="image-container">
 				<div id="image_modifier" style="[width:(#GET{largeur_max})px;]">
@@ -190,6 +187,7 @@
 				[(#TOTAL_BOUCLE|>={#CONFIG{photospip/limite_version}}|?{#SET{photospip,ok},#SET{photospip,pasok}})]
 				<//B_interd>
 			<div>
+			<BOUCLE_modifiable(CONDITION){si #ENV{modifiable,oui}|oui}>
 			<ul>
 				<li class="fieldset" id="fragment-format">
 					<h3 class="legend"><:photospip:legende_filtres_format:></h3>
@@ -413,7 +411,6 @@
 						</li>]
 					</ul>
 				</li>]
-
 		</ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
@@ -421,6 +418,7 @@
 	  	<input type="submit" class="submit" name="tester" value="<:photospip:bouton_tester:>" />
 	  	<input type="submit" class="submit" name="validation" value="<:photospip:valider:>" />
 	  </p>
+	</BOUCLE_modifiable>
 	</div></form>
 	</BOUCLE_document>
 	</BOUCLE_editable>

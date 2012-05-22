@@ -7,7 +7,7 @@
  * Auteurs :
  * Quentin Drouet (kent1@arscenic.info)
  *
- * © 2008 - Distribue sous licence GNU/GPL
+ * © 2008-2012 - Distribue sous licence GNU/GPL
  * Pour plus de details voir le fichier COPYING.txt
  *
  */
@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_form_filtre' => 'Veuillez indiquer un filtre à appliquer.',
 	'erreur_form_filtre_sstest' => 'Le filtre que vous avez essayé ne permet pas d\'&ecirc;tre testé. Vous ne pouvez que l\'appliquer.',
 	'erreur_image_process' => 'Le site n\'utilise pas GD2 pour gérer les images, veuillez l\'utiliser pour leur traitement.',
+	'erreur_nb_versions_atteint' => 'Le nombre de versions différentes de l\'image a été atteint (@nb@). Vous ne pouvez que tester et non appliquer les modifications.',
 
 	// I
 	'info_modifier_image' => 'Éditer l\'image',
@@ -67,7 +68,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'limite_versions_public' => 'Les versions précédentes sont limitées à @limite@',
 	'revenir_version' => 'Revenir à la version&nbsp;:',
 	'supprimer_version' => 'Supprimer la version&nbsp;:',
-	'nb_versions_depasse' => 'Le nombre de versions différentes de l\'image a été dépassé. Vous ne pouvez que tester et non appliquer les modifications.',
 	
 	
 	'image_taille_actuelle' => 'Taille actuelle de l\'image&nbsp;:',
