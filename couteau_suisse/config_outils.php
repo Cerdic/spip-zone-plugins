@@ -269,7 +269,8 @@ add_outil( array(
 	'pipeline:boite_infos' => 'previsu_redac_boite_infos',
 	// fichier distant pour les pipelines
 	'distant_pipelines' => 'http://zone.spip.org/trac/spip-zone/export/53447/_plugins_/previsu_redaction/previsu_redac_pipelines.php',
-	'version-min' => '1.9300',
+	'version-min' => '1.9300', // SPIP 2.0
+	'version-max' => '17743', // SPIP 3.0
 ));
 
 add_variable( array(
