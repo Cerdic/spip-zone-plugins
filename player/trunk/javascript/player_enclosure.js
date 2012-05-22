@@ -22,10 +22,6 @@ soundManager.debugMode = false;
 soundManager.url = player_data.soundManager_url;
 soundManager.nullURL = player_data.soundManager_nullURL;
 
-var seljQ = '@';
-if (jQuery.fn.jquery>="1.3.0")
-	seljQ = '';
-
 jQuery(document).ready(function (){
 	//lecteur_debug();
 	lecteur_multimedia_init();
@@ -38,10 +34,10 @@ function lecteur_multimedia_init(){
 	flvArray = new Array();
 	flvTitles = new Array();
 
-	var aff = jQuery("a["+seljQ+"rel*='enclosure']["+seljQ+"href$=mp3]").size();
+	var aff = jQuery("a[rel*='enclosure'][href$=mp3]").size();
 
 	// lister les mp3 de la page 
-	jQuery("a["+seljQ+"rel*='enclosure']["+seljQ+"href$=mp3]").each(
+	jQuery("a[rel*='enclosure'][href$=mp3]").each(
 		function (i){
 			// we store mp3 links in an array
 			mp3Array.push(this.href);
@@ -73,7 +69,7 @@ function lecteur_multimedia_init(){
 		}
 	);
 
-	jQuery("a["+seljQ+"rel='video']").each(
+	jQuery("a[rel='video']").each(
 		function (i){
 			// we store flv links in an array
 			flvArray.push(this.href);
@@ -205,7 +201,7 @@ function player_play(i){
 		file1 = file1.substr(0, 90);
 		file1 = file1.replace(/(.mp3)/g, ' ');
 		file1 = file1.replace(/(_|-)/g, ' ');
-		//jQuery("img["+seljQ+"alt='play']").attr()
+		//jQuery("img[alt='play']").attr()
 		var taille = file1.length;
 		//$large_s = taille * 7; // pas bon. Laisser le navigateur decider
 		$large_s = 'auto';

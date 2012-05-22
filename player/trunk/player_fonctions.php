@@ -14,8 +14,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function player_call_js() {
 	$flux = "\n"
-		. '<script type="text/javascript" src="'.find_in_path('javascript/soundmanager/soundmanager2.js').'"></script>'
-		. '<script type="text/javascript" src="'.find_in_path('javascript/player_enclosure.js').'"></script>'."\n"
+		. '<script type="text/javascript" src="'.timestamp(find_in_path('javascript/soundmanager/soundmanager2.js')).'"></script>'
+		. '<script type="text/javascript" src="'.timestamp(find_in_path('javascript/player_enclosure.js')).'"></script>'."\n"
 		;
 	return $flux;
 }
