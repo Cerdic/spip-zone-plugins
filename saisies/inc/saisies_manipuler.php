@@ -174,10 +174,19 @@ function saisies_modifier($saisies, $id_ou_nom_ou_chemin, $modifs){
 		$parent =& $parent[$cle];
 	}
 	
-	// On récupère le type, le nom s'il n'y est pas, et les enfants tels quels
+	// On récupère le type tel quel
 	$modifs['saisie'] = $parent[$position]['saisie'];
-	if (!isset($modifs['options']['nom'])) $modifs['options']['nom'] = $parent[$position]['options']['nom'];
-	if (is_array($parent[$position]['saisies'])) $modifs['saisies'] = $parent[$position]['saisies'];
+	// On récupère le nom s'il n'y est pas
+	if (!isset($modifs['options']['nom'])){
+		$modifs['options']['nom'] = $parent[$position]['options']['nom'];
+	}
+	// On récupère les enfants tels quels s'il n'y a pas des enfants dans la modif
+	if (
+		!isset($modif['saisies'])
+		and is_array($parent[$position]['saisies'])
+	){
+		$modifs['saisies'] = $parent[$position]['saisies'];
+	}
 
 	// Si une option 'nouveau_type_saisie' est donnee, c'est que l'on souhaite
 	// peut être changer le type de saisie !
