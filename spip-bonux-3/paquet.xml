@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="3.0.0-dev"
 	etat="dev"
-	compatibilite="[3.0.0-dev;["
+	compatibilite="[3.0.0-dev;3.1.*]"
 	logo="img_pack/spip-bonux.png"
 	documentation="http://www.spip-contrib.net/SPIP-Bonux"
 >	
