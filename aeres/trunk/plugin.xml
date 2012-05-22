@@ -1,12 +1,13 @@
 <plugin>
 	<nom>Bibliographie AERES</nom>
 	<slogan>Générer une bibliographie au format AERES à partir de ZotSpip</slogan>
-	<auteur>[Joseph->http://www.spip-contrib.net/Joseph]</auteur>
+	<auteur>[Joseph Larmarange->http://www.spip-contrib.net/Joseph]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.1.1</version>
+	<version>1.0.0</version>
 	<version_base>0.1</version_base>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<description>Ce plugin fournit une interface pour faciliter la réalisation d'une bibliographie au format AERES. Les auteurs peuvent indiquer en ligne des corrections à effectuer ou bien indiquer des références à ajouter.</description>
+	<lien>http://www.spip-contrib.net/spip.php?article4162</lien>
 	<icon>images/aeres-48.png</icon>
 	<prefix>aeres</prefix>
 	<install>aeres_administrations.php</install>

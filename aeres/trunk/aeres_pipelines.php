@@ -2,7 +2,7 @@
 
 function aeres_affiche_milieu($flux) {
 	$exec = $flux['args']['exec'];
-	if ($exec=='configurer_zotspip')
+	if ($exec=='configurer_zotspip' && autoriser('webmestre'))
 		$flux['data'] .= recuperer_fond('prive/inclure/configurer_aeres');
 	return $flux;
 }

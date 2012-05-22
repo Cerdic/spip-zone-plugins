@@ -36,6 +36,7 @@ function formulaires_configurer_aeres_verifier_dist(){
 	$erreurs = array();
 	if (!_request('debut') || !intval(_request('debut'))) $erreurs['debut'] = 'Vous devez spécifier un nombre entier.';
 	if (!_request('fin') || !intval(_request('fin'))) $erreurs['fin'] = 'Vous devez spécifier un nombre entier.';
+	if (!autoriser('webmestre')) $erreurs['message_erreur'] = 'Vous n\'avez pas les droits suffisants pour modifier la configuration.';
 	return $erreurs;
 }
 
