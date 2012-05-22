@@ -182,7 +182,7 @@ function saisies_modifier($saisies, $id_ou_nom_ou_chemin, $modifs){
 	}
 	// On récupère les enfants tels quels s'il n'y a pas des enfants dans la modif
 	if (
-		!isset($modif['saisies'])
+		!isset($modifs['saisies'])
 		and is_array($parent[$position]['saisies'])
 	){
 		$modifs['saisies'] = $parent[$position]['saisies'];
