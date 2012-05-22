@@ -13,15 +13,19 @@ function exclure_sect_pre_boucle(&$boucle){
     
         $crit = $boucle->criteres;
         $exclut = exclure_sect_choisir($crit,$type);    
-        $boucle->where[] = "sql_in(id_secteur,$exclut,'NOT')";   
+        
+        if ($exclut !='z'){
+        	$boucle->where[] = "sql_in(id_secteur,$exclut,'NOT')";   
+        }
     }
     
     if ($type == 'breves'){
     
         $crit = $boucle->criteres;
         $exclut = exclure_sect_choisir($crit,$type);       
-        $boucle->where[] = "sql_in(id_rubrique,$exclut,'NOT')";       
-         
+        if ($exclut !='z'){
+        	$boucle->where[] = "sql_in(id_rubrique,$exclut,'NOT')";       
+        }
     }
     
     if ($type == 'forum'){
@@ -29,13 +33,13 @@ function exclure_sect_pre_boucle(&$boucle){
         $exclut = exclure_sect_choisir($crit,$type);        
 		
 		$select_article = "sql_get_select('id_article', 'spip_articles', sql_in('id_secteur',$exclut))";
-
-		$where = array(sql_quote('NOT'),
+		if ($exclut !='z'){
+			$where = array(sql_quote('NOT'),
 					array(sql_quote('AND'),
 						"sql_in('forum.objet',sql_quote('article'))",
 						"sql_in('id_objet',$select_article)"
 					));
-		
+		}	
     }
 	$boucle->where[] = $where;
     return $boucle;
