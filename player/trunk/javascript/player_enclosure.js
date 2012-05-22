@@ -57,14 +57,14 @@ function lecteur_multimedia_init(){
 			);
 
 			// activer le click sur un parent de class "play_"
-			if (jQuery(this).parent().attr("class"))
-				if (jQuery(this).parent().attr("class").split(" ").contains("play_"))
-					jQuery(this).parent().click(
-						function (e){
-							player_play(i);
-							jQuery("#bouton_play").attr('src', player_data.dir+'skins/blogo/pause.png');
-						}
-					);
+			var myclass = jQuery(this).parent().attr("class");
+			if (myclass && myclass.match(/(^|\s)play_/))
+				jQuery(this).parent().click(
+					function (e){
+						player_play(i);
+						jQuery("#bouton_play").attr('src', player_data.dir+'skins/blogo/pause.png');
+					}
+				);
 
 			// ajouter un bouton "play" devant les liens hors player - 
 			//a passer en .ajoute_musicplayer()	
@@ -380,20 +380,9 @@ function Player_init(url_player){
 	}
 }
 
-// Nouvelle methode pour les tableaux
-// Retourne la premiere occurence correspondant, sinon false
-Array.prototype.contains = function (ele){
-	for (var i = 0; i<this.length; i++){
-		if (this[i]==ele){
-			return true;
-		}
-	}
-	return false;
-};
-
-
-function lecteur_debug(){
-	var content = jQuery("#debug").html();
-	jQuery("#debug").html(content+"<br />live_track = "+live_track);
-}
+/*
+ function lecteur_debug(){
+ var content = jQuery("#debug").html();
+ jQuery("#debug").html(content+"<br />live_track = "+live_track);
+ }*/
 ;
