@@ -76,24 +76,24 @@ function typo_exposants_fr($texte){
 		$eaigu2 = unicode2charset('&#201;').'|&#201;|&Eacute;';
 		$accents = unicode2charset('&#224;&#225;&#226;&#228;&#229;&#230;&#232;&#233;&#234;&#235;&#236;&#237;&#238;&#239;&#242;&#243;&#244;&#246;&#249;&#250;&#251;&#252;');
 		$typo = array( array(
-			'/(?<=\bM)e?(lles?)\b/',		// Mlle(s), Mme(s) et erreurs Melle(s)
-			'/(?<=\bM)(gr|mes?)\b/',	// Mme(s) et Mgr
-			'/(?<=\b[DP])(r)(?=[\s\.-])/',	// Dr, Pr suivis d'un espace d'un point ou d'un tiret
+			'/(?<=\bM)e?(lles?)\b/u',		// Mlle(s), Mme(s) et erreurs Melle(s)
+			'/(?<=\bM)(gr|mes?)\b/u',	// Mme(s) et Mgr
+			'/(?<=\b[DP])(r)(?=[\s\.-])/u',	// Dr, Pr suivis d'un espace d'un point ou d'un tiret
 
-			'/\bm≤\b/', '/(?<=\bm)([23])\b/',	 // m2, m3, m≤
-			'/(?<=\b[Mm])([nd]s?)\b/',	// millions, milliards
-			'/(?<=\bV)(ve)\b/', '/(?<=\bC)(ies?)\b/',	// Vve et Cie(s)
-			"/(?<=\bS)(t(?:$eaigu1)s?)(?=\W)/", "/(?<=\W)(?:E|$eaigu2)ts\b/",	 // Societes(s), Etablissements
+			'/\bm≤\b/', '/(?<=\bm)([23])\b/u',	 // m2, m3, m≤
+			'/(?<=\b[Mm])([nd]s?)\b/u',	// millions, milliards
+			'/(?<=\bV)(ve)\b/', '/(?<=\bC)(ies?)\b/u',	// Vve et Cie(s)
+			"/(?<=\bS)(t(?:$eaigu1)s?)(?=\W)/u", "/(?<=\W)(?:E|$eaigu2)ts\b/u",	 // Societes(s), Etablissements
 	
-			'/(?<=\b[1I])i?(ers?)\b/',	// 1er(s), Erreurs 1ier(s), 1ier(s)
-			"/(?<=\b[1I])i?(?:e|$egrave)(res?)\b/",	// Erreurs 1(i)ere(s) + accents
-			'/(?<=\b1)(r?es?)\b/', // 1e(s), 1re(s)
-			'/(?<=\b2)(nde?s?)\b/',	// 2nd(e)(s)
+			'/(?<=\b[1I])i?(ers?)\b/u',	// 1er(s), Erreurs 1ier(s), 1ier(s)
+			"/(?<=\b[1I])i?(?:e|$egrave)(res?)\b/u",	// Erreurs 1(i)ere(s) + accents
+			'/(?<=\b1)(r?es?)\b/u', // 1e(s), 1re(s)
+			'/(?<=\b2)(nde?s?)\b/u',	// 2nd(e)(s)
 	
-			"/(\b[0-9IVX]+)i?(?:e|$egrave)?me(s?)\b/", // Erreurs (i)(e)me(s) + accents
-			'/\b([0-9IVX]+)(es?)\b/', // 2e(s), IIIe(s)... (les 1(e?r?s?) ont deja ete remplaces)
-			"/(?<![;$accents])\b(\d+|r|v)o\b/", // recto, verso, primo, secondo, etc.
-			'/(?<=\bM)(e)(?= [A-Z])/', // Maitre (suivi d'un espace et d'une majuscule)
+			"/(\b[0-9IVX]+)i?(?:e|$egrave)?me(s?)\b/u", // Erreurs (i)(e)me(s) + accents
+			'/\b([0-9IVX]+)(es?)\b/u', // 2e(s), IIIe(s)... (les 1(e?r?s?) ont deja ete remplaces)
+			"/(?<![;$accents])\b(\d+|r|v)o\b/u", // recto, verso, primo, secondo, etc.
+			'/(?<=\bM)(e)(?= [A-Z])/u', // Maitre (suivi d'un espace et d'une majuscule)
 		), array(
 			_TYPO_sup, _TYPO_sup,		// Mlle(s), Mme(s), Mgr
 			_TYPO_sup,		// Dr, Pr, 
@@ -113,9 +113,9 @@ function typo_exposants_fr($texte){
 
 		if(defined('_CS_EXPO_BOFBOF')) {
 			$typo[0] = array_merge($typo[0], array(
-				'/(?<=\bS)(te?s?)(?=[\s\.-])/',  // St(e)(s) suivis d'un espace d'un point ou d'un tiret
-				'/(?<=\bB)(x|se|ses)(?=[\s\.-])/',  // Bx, Bse(s) suivis d'un espace d'un point ou d'un tiret
-				'/(?<=\b[Bb])(ds?)\b/',	 '/(?<=\b[Ff])(gs?)\b/', // boulevard(s) et faubourgs(s)
+				'/(?<=\bS)(te?s?)(?=[\s\.-])/u',  // St(e)(s) suivis d'un espace d'un point ou d'un tiret
+				'/(?<=\bB)(x|se|ses)(?=[\s\.-])/u',  // Bx, Bse(s) suivis d'un espace d'un point ou d'un tiret
+				'/(?<=\b[Bb])(ds?)\b/u',	 '/(?<=\b[Ff])(gs?)\b/u', // boulevard(s) et faubourgs(s)
 			));
 			$typo[1] = array_merge($typo[1], array(
 				_TYPO_sup, _TYPO_sup,	// St(e)(s), Bx, Bse(s)
