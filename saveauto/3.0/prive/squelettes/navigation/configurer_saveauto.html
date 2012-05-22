@@ -1,3 +1,14 @@
+#BOITE_OUVRIR{'',info}
+
+<p><:saveauto:help_restauration:></p>
+[<div class="formulaire_spip">
+<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{err})</p>
+</div>]
+[(#BOUTON_ACTION{<:texte_sauvegarde_base:>,#URL_ACTION_AUTEUR{saveauto,'',#SELF}})]
+
+#BOITE_FERMER
+
+
 #SET{racine,#EVAL{_DIR_SITE}|?{#EVAL{_DIR_SITE},#EVAL{_DIR_RACINE}}}
 #SET{rep_base,#GET{racine}#CONFIG{saveauto/rep_bases}}
 #SET{regexp,#CONFIG{saveauto/prefixe_save}.+[.](zip|sql)$}
@@ -36,13 +47,4 @@
 	</div>
 </div>
 <//B_historique>
-#BOITE_FERMER
-#BOITE_OUVRIR
-
-<p><:saveauto:help_restauration:></p>
-[<div class="formulaire_spip">
-<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{err})</p>
-</div>]
-[(#BOUTON_ACTION{<:texte_sauvegarde_base:>,#URL_ACTION_AUTEUR{saveauto,'',#SELF}})]
-
 #BOITE_FERMER
