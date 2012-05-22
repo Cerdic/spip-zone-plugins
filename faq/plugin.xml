@@ -17,5 +17,5 @@
 		<nom>insert_head</nom>
 		<inclure>faq_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.0;3.0.*]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 </plugin>
