@@ -63,6 +63,17 @@
 				<label for="titre_page_biblio"><:zotspip:label_titre_page_biblio:></label>
 				<input type="text" name="titre_page_biblio" class="text" value="#ENV*{titre_page_biblio}" id="titre_page_biblio" [(#HTML5|oui)required='required']/>
 			</li>
+			<li class="editer_autoriser_modif_zotero[ (#ENV**{erreurs}|table_valeur{autoriser_modif_zotero}|oui)erreur]">
+				<label for='autoriser_modif_zotero'><:zotspip:label_autoriser_modif_zotero:></label>
+				<p class="explication"><:zotspip:explication_autoriser_modif_zotero:></p>
+				<select name="autoriser_modif_zotero" id="autoriser_modif_zotero">
+					<option value=""[(#ENV{autoriser_modif_zotero}|=={''}|oui)selected="selected"]><:zotspip:item_personne:></option>
+					<option value="webmestre"[(#ENV{autoriser_modif_zotero}|=={'webmestre'}|oui)selected="selected"]><:zotspip:item_webmestre:></option>
+					<option value="admin"[(#ENV{autoriser_modif_zotero}|=={'admin'}|oui)selected="selected"]><:zotspip:item_admin:></option>
+					<option value="admin_restreint"[(#ENV{autoriser_modif_zotero}|=={'admin_restreint'}|oui)selected="selected"]><:zotspip:item_admin_restreint:></option>
+					<option value="redacteur"[(#ENV{autoriser_modif_zotero}|=={'redacteur'}|oui)selected="selected"]><:zotspip:item_redacteur:></option>
+				</select>
+			</li>
 			<li class="editer_corriger_date[ (#ENV**{erreurs}|table_valeur{corriger_date}|oui)erreur]">
 				<label><:zotspip:label_corriger_date:></label>
 				<p class="explication"><:zotspip:explication_corriger_date:></p>

@@ -17,4 +17,30 @@ function zotspip_jqueryui_forcer($scripts){
 	return $scripts;
 }
 
+function zotspip_autoriser(){}
+
+function autoriser_zitems_bouton_dist($faire, $type, $id, $qui, $opt) {
+	return true;
+}
+
+function autoriser_bando_zitems_bouton_dist($faire, $type, $id, $qui, $opt) {
+	return true;
+}
+
+function autoriser_zotero_modifier_dist($faire, $type, $id, $qui, $opt) {
+	include_spip('inc/config');
+	$config = lire_config('zotspip/autoriser_modif_zotero');
+	if (!$config)
+		return false;
+	if ($config=='webmestre')
+		return autoriser('webmestre');
+	if ($config=='admin')
+		return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+	if ($config=='admin_restreint')
+		return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+	if ($config=='redacteur')
+		return $qui['statut'] == '0minirezo' OR $qui['statut'] == '1comite';
+	return false;
+}
+
 ?>
