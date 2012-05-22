@@ -2,7 +2,7 @@
 #SET{rep_base,#GET{racine}#CONFIG{saveauto/rep_bases}}
 #SET{regexp,#CONFIG{saveauto/prefixe_save}.+[.](zip|sql)$}
 #SET{sauvegardes,#GET{rep_base}|preg_files{#GET{regexp}}}
-
+#BOITE_OUVRIR
 <B_historique>
 <p><:saveauto:info_telecharger_sauvegardes:></p>
 #SET{jours,#CONFIG{saveauto/jours_obso,15}}
@@ -36,3 +36,13 @@
 	</div>
 </div>
 <//B_historique>
+#BOITE_FERMER
+#BOITE_OUVRIR
+
+<p><:saveauto:help_restauration:></p>
+[<div class="formulaire_spip">
+<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{err})</p>
+</div>]
+[(#BOUTON_ACTION{<:texte_sauvegarde_base:>,#URL_ACTION_AUTEUR{saveauto,'',#SELF}})]
+
+#BOITE_FERMER

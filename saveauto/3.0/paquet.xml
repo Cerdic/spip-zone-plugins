@@ -10,7 +10,7 @@
 >	
 
 	<nom>sauvegarde automatique</nom>
-
+	
 	<auteur>cy_altern</auteur>
 	<auteur>Eric Lupinacci</auteur>
 	<auteur mail="silicium@japanim.net">Silicium</auteur>
@@ -22,6 +22,6 @@
 	<pipeline nom="taches_generales_cron" inclure="saveauto_pipelines.php" />
 
 	<necessite nom="facteur" compatibilite="[1.5.6;[" />
-
-	<onglet nom="saveauto" titre="saveauto:saveauto_titre" parent="administration" icone="img_pack/saveauto-24.png" />
+	<menu nom="configurer_saveauto" titre="saveauto:titre_page_saveauto" parent="menu_configuration" icone="img_pack/sauvegarde-16.png" />
+	
 </paquet>
