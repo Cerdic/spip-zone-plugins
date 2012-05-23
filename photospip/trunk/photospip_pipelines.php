@@ -63,12 +63,14 @@ function photospip_document_desc_actions($flux) {
 	$infos = sql_fetsel('distant,extension', 'spip_documents', 'id_document=' . intval($id_document));
 	if (($infos['distant'] == 'non') && in_array($infos['extension'], array('jpg', 'png', 'gif'))) {
 		$redirect = self();
-		$url = parametre_url(generer_url_ecrire('image_edit', 'id_document=' . intval($id_document)), 'redirect', $redirect);
-		$texte = _T('photospip:lien_editer_image');
+		$url_modif = parametre_url(generer_url_ecrire('image_edit', 'id_document=' . intval($id_document)), 'redirect', $redirect);
+		$texte_modif = _T('photospip:lien_editer_image');
+		$url_vignette = parametre_url(parametre_url(generer_url_ecrire('image_edit','id_document='.intval($id_document)),'mode','vignette'),'redirect', $redirect);
+		$texte_vignette = _T('photospip:lien_editer_vignette');
 		if ($flux['args']['position'] == 'galerie') {
-			$flux['data'] .= "[<a href='$url'>$texte</a>]";
+			$flux['data'] .= "[<a href='$url_modif'>$texte_modif</a>] [<a href='$url_vignette'>$texte_vignette</a>]";
 		} else {
-			$flux['data'] .= "<span class='sep'> | </span><a href='$url'>$texte</a>";
+			$flux['data'] .= "<span class='sep'> | </span><a href='$url_modif'>$texte_modif</a><span class='sep'> | </span><a href='$url_vignette'>$texte_vignette</a>";
 		}
 	}
 	return $flux;

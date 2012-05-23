@@ -8,22 +8,15 @@ include_spip('inc/documents');
 include_spip('inc/filtres_images');
 include_spip('photospip_fonctions');
 
-function formulaires_editer_image_charger_dist($id_document='new', $retour=''){
+function formulaires_editer_image_charger_dist($id_document='new',$mode=false, $retour=''){
 	$valeurs = array();
 	$id_document = sql_getfetsel('id_document','spip_documents','id_document='.intval($id_document));
 	$valeurs['id_document'] = $id_document;
-
+	$valeurs['mode'] = $mode;
+	
 	if(!$id_document){
 		$valeurs['editable'] = false;
 		$valeurs['message_erreur'] = _T('phpotospip:erreur_doc_numero');
-		return $valeurs;
-	}
-	
-	$limite = lire_config('photospip/limite_version',1000000);
-	$nb_versions = sql_countsel('spip_documents_inters','id_document='.intval($id_document));
-	if($nb_versions >= $limite){
-		$valeurs['modifiable'] = false;
-		$valeurs['message_erreur'] = _T('phpotospip:erreur_nb_versions_atteint',array('nb'=>$limite));
 		return $valeurs;
 	}
 		
@@ -55,10 +48,23 @@ function formulaires_editer_image_charger_dist($id_document='new', $retour=''){
 	}
 	
 	$valeurs['largeur_previsu'] = test_espace_prive()? 548 : lire_config('photospip/largeur_previsu','450');
-	
-	$resultats = lire_config('photospip/resultats',array('remplacer_image','creer_nouvelle_image','creer_version_image'));
-	if(count($resultats) == 1){
-		$valeurs['_hidden'] .= '<input type="hidden" name="type_modification" value="'.$resultats[0].'" />';
+	if($mode != 'vignette'){
+		$limite = lire_config('photospip/limite_version',1000000);
+		$nb_versions = sql_countsel('spip_documents_inters','id_document='.intval($id_document));
+		$resultats = lire_config('photospip/resultats',array('remplacer_image','creer_nouvelle_image','creer_version_image'));
+		if(count($resultats) == 1){
+			$valeurs['_hidden'] .= '<input type="hidden" name="type_modification" value="'.$resultats[0].'" />';
+		}
+		if($nb_versions >= $limite){
+			$valeurs['modifiable'] = false;
+			$valeurs['message_erreur'] = _T('phpotospip:erreur_nb_versions_atteint',array('nb'=>$limite));
+			return $valeurs;
+		}
+	}else{
+		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($row['id_document']));
+		if($id_vignette && $id_vignette > 0 && $id_document = sql_getfetsel('id_document','spip_documents','id_document='.intval($id_vignette)))
+			$valeurs['id_document'] = $id_vignette;
+			
 	}
 	
 	if(!autoriser('modifier','document',$id_document)){
@@ -72,11 +78,11 @@ function formulaires_editer_image_charger_dist($id_document='new', $retour=''){
 	return $valeurs;
 }
 
-function formulaires_editer_image_verifier_dist($id_document='new', $retour=''){
+function formulaires_editer_image_verifier_dist($id_document='new',$mode=false, $retour=''){
+	spip_log($mode,'photospip');
 	if(!$var_filtre = _request('filtre'))
 		$erreurs['message_erreur'] = _T('photospip:erreur_form_filtre');
-	
-	elseif(!$type_resultat = _request('type_modification'))
+	else if(($mode != 'vignette') && (!$type_resultat = _request('type_modification')))
 		$erreurs['message_erreur'] = _T('photospip:erreur_form_type_resultat');
 	/**
 	 * On test uniquement
@@ -102,7 +108,7 @@ function formulaires_editer_image_verifier_dist($id_document='new', $retour=''){
 	return $erreurs;
 }
 
-function formulaires_editer_image_traiter_dist($id_document='new', $retour=''){
+function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $retour=''){
 	$res = array();
 	
 	$var_filtre = _request('filtre');
@@ -126,8 +132,15 @@ function formulaires_editer_image_traiter_dist($id_document='new', $retour=''){
 	$tmp_img = _DIR_TMP.preg_replace(",\.[^.]+$,","-photospip".md5(date('Y-m-d H:i:s'))."$0", basename($src_tmp));
 	$dest = preg_replace(",\.[^.]+$,","-photospip".md5(date('Y-m-d H:i:s'))."$0", $src_tmp);
 	
-	spip_log("application du filtre $var_filtre $src : $tmp_img","photospip");
+	if($mode == 'vignette'){
+	//	spip_log("On retaille d'abord en 800 px","photospip");
+	//	$src = extraire_attribut(image_reduire($src,800,800),'src');
+		$res['redirect'] = _request('redirect');
+	}else{
+		$mode = $row['mode'];
+	}
 	
+	spip_log("application du filtre $var_filtre $src : $tmp_img","photospip");
 	if($var_filtre == "tourner"){
 		include_spip('inc/filtres');
 		include_spip('public/parametrer'); // charger les fichiers fonctions #bugfix spip 2.1.0
@@ -165,13 +178,24 @@ function formulaires_editer_image_traiter_dist($id_document='new', $retour=''){
 	}else {
 		$files[0]['tmp_name'] = $tmp_img;
 		$files[0]['name'] = basename($dest);
-		if($type_modif == 'remplacer_image'){
+		if(($type_modif == 'remplacer_image') OR $mode=='vignette'){
 			/**
 			 * Remplace l'image actuelle par une nouvelle
 			 */
 			 spip_log('on remplace','photospip');
 			 $ajouter_document = charger_fonction('ajouter_documents','action');
-			 $id_document = $ajouter_document($row['id_document'], $files, $objet, $id_objet, $row['mode']);
+			 if($mode != 'vignette'){
+				$ajoute = $ajouter_document($row['id_document'], $files, $objet, $id_objet, $mode);
+			 }else{
+				 $id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($row['id_document']));
+				 $ajoute = $ajouter_document($id_vignette,$files,'',0,'vignette');
+					if(is_int(reset($ajoute))){
+						$id_vignette = reset($ajoute);
+						include_spip('action/editer_document');
+						document_set($row['id_document'],array("id_vignette" => $id_vignette,'mode'=>'document'));
+						$res['message_ok'] = _T('medias:document_installe_succes');
+					}
+			 }
 			 include_spip('inc/flock');
 			 spip_unlink($tmp_img);
 		}
@@ -182,7 +206,7 @@ function formulaires_editer_image_traiter_dist($id_document='new', $retour=''){
 			 spip_log('on crée un nouveau doc','photospip');
 			 $ajouter_document = charger_fonction('ajouter_documents','action');
 			 $objet_lie = sql_fetsel('*','spip_documents_liens','id_document='.intval($row['id_document']));
-			 $id_document = $ajouter_document('new', $files, $objet_lie['objet'], $objet_lie['id_objet'], $row['mode']);
+			 $id_document = $ajouter_document('new', $files, $objet_lie['objet'], $objet_lie['id_objet'], $mode);
 			 spip_log($id_document,'photospip');
 			 $res['redirect'] = parametre_url(parametre_url(self(),'redirect',''),'id_document',$id_document[0]);
 			 include_spip('inc/flock');
@@ -195,7 +219,7 @@ function formulaires_editer_image_traiter_dist($id_document='new', $retour=''){
 		
 	if (!isset($res['redirect']))
 		$res['redirect'] = parametre_url(self(),'redirect','');
-	if (!isset($res['message_erreur']))
+	if (!isset($res['message_erreur']) && !$res['message_ok'])
 		$res['message_ok'] = _L('Votre modification a &eacute;t&eacute; enregistr&eacute;e');
 	return $res;
 }

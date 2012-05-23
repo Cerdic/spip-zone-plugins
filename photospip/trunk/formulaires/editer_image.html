@@ -63,7 +63,7 @@
 						(#INCLURE{fond=formulaires/editer_image_couleurs,env}|trim)
 					</ul>
 				</li>]
-				<BOUCLE_resultats_sup_un(CONDITION){si #CONFIG{photospip/resultats,#ARRAY{0,remplacer_image,1,creer_nouvelle_image,2,creer_version_image}}|count|>{1}|oui}>
+				<BOUCLE_resultats_sup_un(CONDITION){si #ENV{mode}|!={vignette}|et{#CONFIG{photospip/resultats,#ARRAY{0,remplacer_image,1,creer_nouvelle_image,2,creer_version_image}}|count|>{1}}|oui}>
 				<li>
 					<label><:photospip:label_type_modification:></label>
 					<BOUCLE_resultats(POUR){tableau #CONFIG{photospip/resultats,#ARRAY{0,remplacer_image,1,creer_nouvelle_image,2,creer_version_image}}}>

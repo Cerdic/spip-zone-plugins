@@ -85,9 +85,11 @@ function photospipfiltre ($src, $dest, $filtre,$params){
 		spip_log('le filtre n existe pas','photospip');
 		return false;
 	}
-	spip_log($dst_img,'photospip');
+	spip_log("dst_img = $dst_img",'photospip');
 	if (preg_match(',^(.*)\?date=(\d+).([^.]+)$,', $dst_img, $match)) {
 		$dst_img = $match[1];
+		spip_log($match,'photospip');
+		spip_log("On enlève la date : dst_img = $dst_img",'photospip');
 	}
 	//$dst_img = preg_replace(',\?date=\d+$,','', $dst_img);
 	if(preg_match("/\.(png|gif|jpe?g|bmp)$/i", $src, $regs)) {

@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_doc_numero' => 'Vous devez indiquer un identifiant de document existant.',
 	'erreur_form_filtre' => 'Veuillez indiquer un filtre à appliquer.',
 	'erreur_form_filtre_sstest' => 'Le filtre que vous avez essayé ne permet pas d\'&ecirc;tre testé. Vous ne pouvez que l\'appliquer.',
+	'erreur_form_type_resultat' => 'Vous devez choisir le type de résultat',
 	'erreur_image_process' => 'Le site n\'utilise pas GD2 pour gérer les images, veuillez l\'utiliser pour leur traitement.',
 	'erreur_nb_versions_atteint' => 'Le nombre de versions différentes de l\'image a été atteint (@nb@). Vous ne pouvez que tester et non appliquer les modifications.',
 	'erreur_selectionner_au_moins_une_valeur' => 'Vous devez sélectionner au moins une valeur',
@@ -44,6 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_modifier_image' => 'Éditer l\'image',
+	'info_modifier_vignette' => 'Modifier la vignette du document #@id_document@',
 	
 	// L
 	'label_angle_rotation' => 'Angle de rotation&nbsp:',
@@ -97,6 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende_filtres_format' => 'Modifier le format',
 	'legende_filtres_supplementaires' => 'Filtres supplémentaires',
 	'lien_editer_image' => 'Éditer cette image',
+	'lien_editer_vignette' => 'Éditer la vignette',
 	
 	// M
 	'message_image_taille_actuelle' => 'Taille actuelle de l\'image&nbsp;: @largeur@x@hauteur@px.',
