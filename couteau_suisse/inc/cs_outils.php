@@ -58,17 +58,18 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 function cs_description_pack() {
 	if(!isset($GLOBALS['cs_pack_actuel'])) return '';
 	return debut_cadre_relief('', true)
-		. "<h3 class='titrem'><img src='"._DIR_IMG_PACK."puce-verte.gif' width='9' height='9' alt='-' />&nbsp;" . _T('couteauprive:pack_titre') . '</h3>'
+		. "<h3 class='titrem'><img src='"._DIR_IMG_PACK."puce-verte.gif' width='9' height='9' alt='-' />&nbsp;" . couteauprive_T('pack_titre') . '</h3>'
 		. ((strlen($temp = cs_action_rapide('pack')))?"<div class='cs_action_rapide' id='cs_action_rapide'>$temp</div>":'')
-		. propre(_T('couteauprive:pack_descrip', array('pack'=> _T('couteauprive:pack_actuel', array('date'=>cs_date()))))
-		. "\n\n" . _T('couteauprive:contrib', array('url'=>'[->'._URL_CONTRIB.'2552]')))
-		. '<br/><textarea rows=40 cols=500 style="width:100%; font-size:90%;">'.htmlentities($GLOBALS[cs_pack_actuel], ENT_QUOTES, $GLOBALS['meta']['charset']).'</textarea>'
+		. propre(couteauprive_T('pack_descrip', array('pack'=> couteauprive_T('pack_actuel', array('date'=>cs_date()))))
+		. "\n\n" . couteauprive_T('contrib', array('url'=>'[->'._URL_CONTRIB.'2552]')))
+		. '<br/><textarea rows=40 cols=500 style="width:100%; font-size:90%;">'
+		. htmlentities($GLOBALS[cs_pack_actuel], ENT_QUOTES, $GLOBALS['meta']['charset']) . '</textarea>'
 		. fin_cadre_relief(true);
 }
 
 // renvoie (pour la nouvelle interface) la description d'un outil
 function description_outil2($outil_id) {
-	if(!strlen($outil_id)) return _T('couteauprive:outils_cliquez');
+	if(!strlen($outil_id)) return couteauprive_T('outils_cliquez');
 	global $outils, $metas_vars, $metas_outils;
 	include_spip('cout_utils');
 	// remplir $outils (et aussi $cs_variables qu'on n'utilise pas ici);
@@ -88,7 +89,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	$outil = $outils[$outil_id]; unset($outils);
 	$actif = $outil['actif'];
 	$puce = $actif?'puce-verte.gif':'puce-rouge.gif';
-	$titre_etat = _T('couteauprive:outil_'.($actif?'actif':'inactif'));
+	$titre_etat = couteauprive_T('outil_'.($actif?'actif':'inactif'));
 	$nb_var = intval($outil['nb_variables']);
 
 	// cette valeur par defaut n'est pas definie sous SPIP 1.92
@@ -97,30 +98,35 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	if(!strlen($outil['id']) || !autoriser('configurer', 'outil', 0, NULL, $outil))
 		return $s . _T('info_acces_interdit') . '</div>';
 
-	$s .= "<h3 class='titrem'><img src='"._DIR_IMG_PACK."$puce' width='9' height='9' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;" . $outil['nom'] . '</h3>';
+	$s .= "<h3 class='titrem'><img src='" . _DIR_IMG_PACK."$puce' width='9' height='9' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;" 
+		. $outil['nom'] . '</h3>';
 	$s .= '<div class="cs_menu_outil">';
 	if($nb_var)
-		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=reset&outil='.$outil_id).'" title="' . _T('couteauprive:par_defaut') . '">' . _T('couteauprive:par_defaut') . '</a>&nbsp;|&nbsp;';
+		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=reset&outil='.$outil_id).'" title="' 
+			. couteauprive_T('par_defaut') . '">' . couteauprive_T('par_defaut') . '</a>&nbsp;|&nbsp;';
 	if(!$actif)
-		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=hide&outil='.$outil_id).'" title="' . _T('couteauprive:outil_cacher') . '">' . _T('couteauprive:outil_cacher') . '</a>&nbsp;|&nbsp;';
+		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=hide&outil='.$outil_id).'" title="' 
+			. couteauprive_T('outil_cacher') . '">' . couteauprive_T('outil_cacher') . '</a>&nbsp;|&nbsp;';
 	$act = $actif?'des':'';
-	$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=switch&outil='.$outil_id).'" title="'._T("couteauprive:outil_{$act}activer_le").'">'._T("couteauprive:outil_{$act}activer")."</a></div>";
+	$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=switch&outil='.$outil_id).'" title="' 
+		. _T("couteauprive:outil_{$act}activer_le").'">'._T("couteauprive:outil_{$act}activer")."</a></div>";
 	if(strlen($temp = cs_action_fichiers_distants($outil) . cs_action_rapide($outil_id, $actif))) 
 		$s .= "<div class='cs_action_rapide' id='cs_action_rapide'>$temp</div>";
 	$descrip = propre($descrip); 
 	$s .= cs_nettoie($descrip); // absolument une variable pour les passages par reference (PHP 5.4)
 	$serial = serialize(array_keys($outil));
 	$p = '';
-	if($b=cs_balises_traitees($outil_id, '*, #'))
-		$p .=  '<p>' . _T('couteauprive:detail_balise_etoilee', array('bal' => $b.'*')) . '</p>';
+	if($b = cs_balises_traitees($outil_id, '*, #'))
+		$p .=  '<p>' . couteauprive_T('detail_balise_etoilee', array('bal' => $b.'*')) . '</p>';
 	if($actif && isset($outil['code:spip_options']) && strlen($outil['code:spip_options']) && ($outil_id<>'cs_comportement'))
-		$p .= '<p>' . _T('couteauprive:detail_spip_options'.(defined('_CS_SPIP_OPTIONS_OK')?'_ok':''), array('lien'=>description_outil_liens_callback(array(1=>'cs_comportement')))) . '</p>';
+		$p .= '<p>' . couteauprive_T('detail_spip_options' 
+			. (defined('_CS_SPIP_OPTIONS_OK')?'_ok':''), array('lien'=>description_outil_liens_callback(array(1=>'cs_comportement')))) . '</p>';
 	if(isset($outil['jquery']) && $outil['jquery']=='oui')
-		$p .= '<p>' . _T('couteauprive:detail_jquery2') . '</p>';
+		$p .= '<p>' . couteauprive_T('detail_jquery2') . '</p>';
 	if(isset($outil['auteur']) && strlen($outil['auteur']))
 		$p .= '<p>' . _T('auteur') .' '. ($outil['auteur']) . '</p>';
 	if(isset($outil['contrib']) && strlen($outil['contrib']))
-		$p .= '<p>' . _T('couteauprive:contrib', array('url'=>'[->'._URL_CONTRIB.$outil['contrib'].']')) . '</p>';
+		$p .= '<p>' . couteauprive_T('contrib', array('url'=>'[->'._URL_CONTRIB.$outil['contrib'].']')) . '</p>';
 
 	return $s . propre($p) . detail_outil($outil_id) . '</div>';
 }
@@ -134,7 +140,7 @@ function liste_outils() {
 	foreach($outils as $outil) {
 		// liste des categories
 		if(!isset($categ[$cat=&$outil['categorie']])) {
-			$tmp = _T('couteauprive:categ:'.$cat);
+			$tmp = couteauprive_T('categ:'.$cat);
 			if($tmp{1}=='.') $tmp='0'.$tmp; // classement sur deux chiffres
 			$categ[$cat] = strncmp($tmp, 'categ', 5)==0?$cat:$tmp;
 		}
@@ -174,20 +180,21 @@ function liste_outils() {
 
 	$fieldset = '<fieldset style="width:92%; margin:0; padding:0.6em;" class="cadre-trait-couleur liste_outils"><legend style="font-weight:bold; color:';
 	return array($nb_actifs, '<div id="cs_outils" class="cs_outils">'
-	. '<div class="cs_liste cs_inactifs">' . $fieldset . 'red;">' . _T('couteauprive:outils_inactifs') . '</legend>'
+	. '<div class="cs_liste cs_inactifs">' . $fieldset . 'red;">' . couteauprive_T('outils_inactifs') . '</legend>'
 	. $results_inactifs . '</fieldset></div>'
-	. '<form id="csform" name="csform" method="post" action="'.generer_url_ecrire(_request('exec'),"cmd=switch").'">'
+	. '<form id="csform" name="csform" method="post" action="' . generer_url_ecrire(_request('exec'),"cmd=switch").'">'
 	. '<input type="hidden" value="test" name="cs_selection" id="cs_selection" />'
 	. '<div class="cs_toggle"><div style="display:none;">'
-	. '<a id="cs_toggle_a" title="'._T('couteauprive:outils_permuter_gras1').'" href="'.generer_url_ecrire(_request('exec'),"cmd=switch").'">'
-	. '<img alt="<->" src="'.find_in_path('img/permute.gif').'"/></a>'
+	. '<a id="cs_toggle_a" title="' . couteauprive_T('outils_permuter_gras1') . '" href="' . generer_url_ecrire(_request('exec'),"cmd=switch").'">'
+	. '<img alt="<->" src="' . find_in_path('img/permute.gif').'"/></a>'
 	. '<p id="cs_toggle_p">(0)</p>'
-	. '<a id="cs_reset_a" title="'._T('couteauprive:outils_resetselection').'" href="#">'
+	. '<a id="cs_reset_a" title="'.couteauprive_T('outils_resetselection').'" href="#">'
 	. '&nbsp;<img alt="X" class="class_png" src="'.find_in_path('img/nosel.gif').'"/>&nbsp;</a>'
 	.	'</div></div></form>'
-	. '<div class="cs_liste cs_actifs">' . $fieldset . '#22BB22;">' . _T('couteauprive:outils_actifs') . '</legend>'
+	. '<div class="cs_liste cs_actifs">' . $fieldset . '#22BB22;">' . couteauprive_T('outils_actifs') . '</legend>'
 	. $results_actifs . '</fieldset>'
-	. '<div style="text-align: right;"><a id="cs_tous_a" title="'._T('couteauprive:outils_selectionactifs').'" href="#">'._T('couteauprive:outils_selectiontous').'</a></div>'
+	. '<div style="text-align: right;"><a id="cs_tous_a" title="' . couteauprive_T('outils_selectionactifs') . '" href="#">'
+	. couteauprive_T('outils_selectiontous') . '</a></div>'
 	. '</div></div>');
 }
 
@@ -196,26 +203,26 @@ function detail_outil($outil_id) {
 	global $outils;
 	$outil = &$outils[$outil_id];
 	$div = '<div class="cs_details_outil">';
-	if(cs_version_erreur($outil)) return $div . _T('couteauprive:erreur:version') . '</div>';
+	if(cs_version_erreur($outil)) return $div . couteauprive_T('erreur:version') . '</div>';
 	$details = $a = array();
 	foreach(array('spip_options', 'options', 'fonctions', 'js', 'jq', 'css') as $in)
-		if(isset($outil['code:'.$in])) $a[] = _T('couteauprive:code_'.$in);
-	if(count($a)) $details[] = _T('couteauprive:detail_inline') . ' ' . join(', ', $a);
+		if(isset($outil['code:'.$in])) $a[] = couteauprive_T('code_'.$in);
+	if(count($a)) $details[] = couteauprive_T('detail_inline') . ' ' . join(', ', $a);
 	$a = array();
 	foreach(array('.php', '_options.php', '_fonctions.php', '.js', '.js.html', '.css', '.css.html') as $ext)
 		if(find_in_path('outils/'.($temp=$outil_id.$ext))) $a[] = $temp;
-	if(count($a)) $details[] = _T('couteauprive:detail_fichiers') . ' ' . join(', ', $a);
-	if($b=cs_balises_traitees($outil_id)) $details[] = _T('couteauprive:detail_traitements') . $b;
+	if(count($a)) $details[] = couteauprive_T('detail_fichiers') . ' ' . join(', ', $a);
+	if($b=cs_balises_traitees($outil_id)) $details[] = couteauprive_T('detail_traitements') . $b;
 	$serkeys = serialize(array_keys($outil));
 	if(preg_match_all(',(pipeline|pipelinecode):([a-z_]+),', $serkeys, $regs, PREG_PATTERN_ORDER))
-		$details[] = _T('couteauprive:detail_pipelines') . ' ' . join(', ', array_unique($regs[2]));
-	if($outil['nb_disabled']) $details[] = _T('couteauprive:detail_disabled') . ' ' . $outil['nb_disabled'];
+		$details[] = couteauprive_T('detail_pipelines') . ' ' . join(', ', array_unique($regs[2]));
+	if($outil['nb_disabled']) $details[] = couteauprive_T('detail_disabled') . ' ' . $outil['nb_disabled'];
 	if(isset($outil['fichiers_distants'])) {
 		$a = array();
 		foreach($outil['fichiers_distants'] as $i) $a[] = cs_basename($outil[$i]);
-		$details[] = _T('couteauprive:detail_fichiers_distant') . ' ' . join(', ', $a);
+		$details[] = couteauprive_T('detail_fichiers_distant') . ' ' . join(', ', $a);
 	}
-	if($outil['surcharge']) $details[] = '* ' . _T('couteauprive:detail_surcharge') . ' ' . _T('item_oui');
+	if($outil['surcharge']) $details[] = '* ' . couteauprive_T('detail_surcharge') . ' ' . _T('item_oui');
 	if(count($details)) return $div . join('<br />', $details) . '</div>';
 	return '';
 }
@@ -241,7 +248,7 @@ function cs_action_rapide($outil_id, $actif=true) {
 				// on ne conserve que les <legend> ou <p>
 				$f = '<ul><li>' . join("</li><li>", $regs[1]) . '</li></ul>';
 		}
-		$info = '<strong>' . definir_puce() . '&nbsp;' . _T('couteauprive:action_rapide'.($actif?'':'_non')) . "</strong>";
+		$info = '<strong>' . definir_puce() . '&nbsp;' . couteauprive_T('action_rapide'.($actif?'':'_non')) . "</strong>";
 		return "<div>$info</div><div>$f</div>";
 	}
 	return '';
@@ -263,7 +270,7 @@ function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 		$file = pipeline('fichier_distant', array('outil'=>$outil['id'], 'actif'=>$actif, 'fichier_local'=>$dir.$f));
 		$file = $file['fichier_local'];
 		$size = ($forcer || @(!file_exists($file)) ? 0 : filesize($file));
-		if($size) $statut = _T('couteauprive:distant_present', array('date'=>cs_date_long(date('Y-m-d H:i:s', filemtime($file)))));
+		if($size) $statut = couteauprive_T('distant_present', array('date'=>cs_date_long(date('Y-m-d H:i:s', filemtime($file)))));
 		elseif($actif || $forcer) {
 			include_spip('inc/distant');
 			if($distant = recuperer_page($outil[$i])) {
@@ -271,7 +278,7 @@ function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 				$distant = pipeline('fichier_distant', array('outil'=>$outil['id'], 'fichier_local'=>$file, 
 						'fichier_distant'=>$outil[$i], 'message'=>'', 'texte'=>$distant, 'actif'=>$actif));
 				$file = $distant['fichier_local'];
-				$message = $distant['message'] . "\n_ " . _T('couteauprive:copie_vers', array('dir'=>dirname($distant['fichier_local']).'/'));
+				$message = $distant['message'] . "\n_ " . couteauprive_T('copie_vers', array('dir'=>dirname($distant['fichier_local']).'/'));
 				$distant = $distant['texte'];
 				if(preg_match(',\.php\d?$,', $file)) {
 					$test = preg_replace(',^.*?\<\?php|\?\>.*?$,', '', $distant);
@@ -280,19 +287,19 @@ function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 				} else
 					$distant = ecrire_fichier($file, $distant);
 			}
-			if($distant) $statut = '<span style="color:green">'._T('couteauprive:distant_charge').'</span>';
-			else $erreur = $statut = '<span style="color:red">'._T('couteauprive:distant_echoue').'</span>';
-		} else $erreur = $statut = _T('couteauprive:distant_inactif');
+			if($distant) $statut = '<span style="color:green">'.couteauprive_T('distant_charge').'</span>';
+			else $erreur = $statut = '<span style="color:red">'.couteauprive_T('distant_echoue').'</span>';
+		} else $erreur = $statut = couteauprive_T('distant_inactif');
 		$a[] = '[{'.basename($file)."}->{$outil[$i]}]\n_ ".$statut.$message;
 	}
 	if($tester) return $a;
 	$a = '<ul style="margin:0.6em 0 0.6em 4em;"><li>' . join("</li><li style='margin-top:0.4em;'>", $a) . '</li></ul>';
 	$b = ($actif || !$erreur)?'rss_actualiser':($erreur?'distant_charger':false);
 	$b = $b?"\n<p class='cs_sobre'><input class='cs_sobre' type='submit' value=\" ["
-			. attribut_html(_T('couteauprive:'.$b)).']" /></p>':'';
+			. attribut_html(couteauprive_T(''.$b)).']" /></p>':'';
 	return ajax_action_auteur('action_rapide', 'fichiers_distants', 'admin_couteau_suisse', "arg=$outil[id]|fichiers_distants&cmd=descrip#cs_action_rapide",
-			'<p>' . _T('couteauprive:distant_aide') . '</p>'
-			. '<p style="margin-top:1em"><strong>' . definir_puce() . '&nbsp;' . _T('couteauprive:detail_fichiers_distant') . '</strong></p>'
+			'<p>' . couteauprive_T('distant_aide') . '</p>'
+			. '<p style="margin-top:1em"><strong>' . definir_puce() . '&nbsp;' . couteauprive_T('detail_fichiers_distant') . '</strong></p>'
 			. '<div>' . propre($a) . '</div>' . $b);
 	
 }

@@ -83,7 +83,7 @@ function description_outil_une_variable($index, &$outil, &$variable, &$label, &$
 	}
 	// ... ou un textarea ... ou une case input
 	if(!$actif)
-		return $label.'<html>'.(strlen($valeur)?nl2br(echapper_tags($valeur)):'&nbsp;'._T('couteauprive:variable_vide')).'</html>';
+		return $label.'<html>'.(strlen($valeur)?nl2br(echapper_tags($valeur)):'&nbsp;'.couteauprive_T('variable_vide')).'</html>';
 	$len = $nombre?6:0;
 	$width = $len?'':'style="width:98.8%;" ';
 	$lignes = !isset($cs_variable['lignes']) || $nombre?0:strval($cs_variable['lignes']);
@@ -108,7 +108,7 @@ function description_outil_input1_callback($matches) {
 	return "<fieldset><legend>$matches[1]</legend><div>$matches[2]</div></fieldset>";
 }
 
-// callback sur les labels de zones input en utilisant _T('couteauprive:label:variable') ; format [[qq chose %variable% qq chose]]
+// callback sur les labels de zones input en utilisant couteauprive_T('label:variable') ; format [[qq chose %variable% qq chose]]
 // regexpr : ,\[\[((.*?)%([a-zA-Z_][a-zA-Z0-9_]*)%(.*?))\]\],msS
 // ici, renseignement de la globale $cs_input_variable
 function description_outil_input2_callback($matches) {
@@ -127,7 +127,7 @@ function description_outil_liens_callback($matches) {
 
 function description_outil_label_callback($matches) { 
 	global $cs_variables; 
-	return isset($cs_variables[$matches[1]]['label'])?$cs_variables[$matches[1]]['label']:_T('couteauprive:label:'.$matches[1]);
+	return isset($cs_variables[$matches[1]]['label'])?$cs_variables[$matches[1]]['label']:couteauprive_T('label:'.$matches[1]);
 }
 
 function cs_input_variable_callback($matches) {
@@ -156,7 +156,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	 && ( isset($outil['pipeline:porte_plume_barre_pre_charger']) || isset($outil['pipeline:porte_plume_cs_pre_charger'])
 	 	|| isset($outil['pipelinecode:porte_plume_barre_pre_charger']) || isset($outil['pipelinecode:porte_plume_cs_pre_charger']))
 	 && count($barres = cs_pp_liste_barres())) {
-		$descrip .= "\n\n@puce@ "._T('couteauprive:barres_typo_intro');
+		$descrip .= "\n\n@puce@ " . couteauprive_T('barres_typo_intro');
 		$i=0;
 		foreach($barres as $f=>$b) {
 			$nom = "pp_{$b}_$outil[id]";
@@ -172,7 +172,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	if (strpos($descrip, '<:')!==false) {
 		if(!isset($outil['perso']))
 			// lames natives : reconstitution d'une description eventuellement morcelee
-			// exemple : <:mon_outil:3:> est remplace par _T('couteauprive:mon_outil:description3')
+			// exemple : <:mon_outil:3:> est remplace par couteauprive_T('mon_outil:description3')
 			$descrip = preg_replace_callback(',<:([a-z_][a-z0-9_-]*):([0-9]*):>,i', 
 				create_function('$m','return _T("couteauprive:$m[1]:description$m[2]");'), $descrip);
 		// chaines de langue personnalisees
@@ -184,7 +184,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	global $cs_input_variable;	$cs_input_variable = array();
 	// remplacement des zones input de format [[label->qq chose]]
 	$descrip = preg_replace_callback(',\[\[([^][]*)->([^]]*)\]\],msS', 'description_outil_input1_callback' , $descrip);
-	// remplacement des zones input de format [[qq chose %variable% qq chose]] en utilisant _T('couteauprive:label:variable') comme label
+	// remplacement des zones input de format [[qq chose %variable% qq chose]] en utilisant couteauprive_T('label:variable') comme label
 	// la fonction description_outil_input2_callback renseigne la globale $cs_input_variable
 	$descrip = preg_replace_callback(',\[\[((.*?)%([a-zA-Z_][a-zA-Z0-9_]*)%(.*?))\]\],msS', 'description_outil_input2_callback', $descrip);
 
@@ -215,7 +215,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	if(!$modif) {unset($cs_input_variable); return;}
 
 	// information sur les raccourcis disponibles
-	if($a=cs_aide_raccourci($outil_)) $res .= '<p>@puce@ '._T('couteauprive:detail_raccourcis').'<br /><html>'.$a.'.</html></p>';
+	if($a=cs_aide_raccourci($outil_)) $res .= '<p>@puce@ '.couteauprive_T('detail_raccourcis').'<br /><html>'.$a.'.</html></p>';
 	// envoi de la description courante en pipeline
 	include_spip("cout_define");
 	$res = pipeline('pre_description_outil', array('outil'=>$outil_, 'texte'=>$res, 'actif'=>$actif));
@@ -229,7 +229,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	// bouton 'Modifier' : en dessous du texte s'il y a plusieurs variables, a la place de _VAR_OUTIL s'il n'y en a qu'une.
 	// attention : on ne peut pas modifier les variables si l'outil est inactif
 	if($actif) {
-		$bouton = "<input type='submit' class='fondo' style='margin-left:1em;' value=\"".($nb_variables>1?_T('couteauprive:modifier_vars_0'):_T('bouton_modifier'))."\" />";
+		$bouton = "<input type='submit' class='fondo' style='margin-left:1em;' value=\"".($nb_variables>1?couteauprive_T('modifier_vars_0'):_T('bouton_modifier'))."\" />";
 		if($nb_variables>1) $res .= "<div class=\"cs_bouton\">$bouton</div>";
 			else $res = str_replace(_VAR_OUTIL, $bouton, $res);
 	}
@@ -251,7 +251,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$res = preg_replace(',(<br />)?</fieldset><fieldset>( ?<div>),', '$2', $res);
 	// remplacement de diverses constantes
 	$res = str_replace(array('@puce@', '@_CS_CHOIX@','@_CS_ASTER@','@_CS_PLUGIN_JQUERY192@'),
-		array(definir_puce(), _T('couteauprive:votre_choix'), '<sup>(*)</sup>', defined('_SPIP19300')?'':_T('couteauprive:detail_jquery3')), $res);
+		array(definir_puce(), couteauprive_T('votre_choix'), '<sup>(*)</sup>', defined('_SPIP19300')?'':couteauprive_T('detail_jquery3')), $res);
 	// remplacement des constantes qui restent de forme @_CS_XXXX@
 	if(strpos($res,'@_CS')!==false) 
 		$res = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 

@@ -36,7 +36,7 @@ function add_outil($tableau) {
 	static $index; $index = isset($index)?$index + 10:0;
 	$tableau['index'] = $index;
 	// grave erreur si pas d'id
-	if(!isset($tableau['id'])) { $tableau['id']='erreur'.count($outils); $tableau['nom'] = _T('couteauprive:erreur_id'); }
+	if(!isset($tableau['id'])) { $tableau['id']='erreur'.count($outils); $tableau['nom'] = couteauprive_T('erreur_id'); }
 	// surcharges perso. Ex : $GLOBALS['mes_outils']['supprimer_numero_perso']
 	// (methode par variable globale depreciee)
 	if(isset($GLOBALS['mes_outils'][$perso = $tableau['id'].'_perso']) && is_array($GLOBALS['mes_outils'][$perso])) {
@@ -267,7 +267,7 @@ function cs_aide_raccourcis() {
 	// remplacement des constantes de forme @_CS_XXXX@
 	$aide = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 
 		create_function('$matches','return defined($matches[1])?constant($matches[1]):"";'), join("\n", $aide));
-	return '<p><b>' . _T('couteauprive:raccourcis') . '</b></p><ul class="cs_raccourcis">' . $aide . '</ul>';
+	return '<p><b>' . couteauprive_T('raccourcis') . '</b></p><ul class="cs_raccourcis">' . $aide . '</ul>';
 }
 
 // retourne une aide concernant les pipelines utilises par l'outil
@@ -279,7 +279,7 @@ function cs_aide_pipelines($outils_affiches_actifs) {
 		// stockage de la liste des pipelines et du nombre d'outils actifs concernes
 		$nb=0; foreach($outils as $outil) if($outil['actif'] && (isset($outil['pipeline:'.$pipe]) || isset($outil['pipelinecode:'.$pipe]))) $nb++;
 		if(($len=strlen($pipe))>25) $pipe = substr($pipe, 0, 8).'...'.substr($pipe, $len - 14);
-		if($nb) $aide[] = _T('couteauprive:outil_nb'.($nb>1?'s':''), array('pipe'=>$pipe, 'nb'=>$nb));
+		if($nb) $aide[] = couteauprive_T('outil_nb'.($nb>1?'s':''), array('pipe'=>$pipe, 'nb'=>$nb));
 	}
 	// nombre d'outils actifs / interdits par les autorisations (hors versionnage SPIP)
 	$nb = $ca2 = 0; 
@@ -287,10 +287,10 @@ function cs_aide_pipelines($outils_affiches_actifs) {
 	foreach($outils as $o) if(isset($o['interdit']) && $o['interdit'] && !cs_version_erreur($o)) $ca2++;
 	// nombre d'outils caches de la configuration par l'utilisateur
 	$ca1 = isset($GLOBALS['meta']['tweaks_caches'])?count(unserialize($GLOBALS['meta']['tweaks_caches'])):0;
-	return '<p><b>' . _T('couteauprive:outils_actifs') . "</b> $nb"
-		. '<br /><b>' . _T('couteauprive:outils_caches') . "</b> $ca1"
-		. (!$ca2?'':('<br /><b>' . _T('couteauprive:outils_non_parametrables') . "</b> $ca2"))
-		.'<br /><b>' . _T('couteauprive:pipelines') . '</b> '.count($aide)
+	return '<p><b>' . couteauprive_T('outils_actifs') . "</b> $nb"
+		. '<br /><b>' . couteauprive_T('outils_caches') . "</b> $ca1"
+		. (!$ca2?'':('<br /><b>' . couteauprive_T('outils_non_parametrables') . "</b> $ca2"))
+		.'<br /><b>' . couteauprive_T('pipelines') . '</b> '.count($aide)
 		. '</p><p style="font-size:80%; margin-left:0.4em;">' . join("<br />", $aide) . '</p>';
 }
 
@@ -315,14 +315,14 @@ function cs_sauve_configuration() {
 		. "\n// Valeurs validees en metas\n\$valeurs_validees = array(\n" . join(",\n", $metas) . "\n);\n";
 
 	include_spip('inc/charset');
-	$nom_pack = _T('couteauprive:pack_actuel', array('date'=>cs_date()));
+	$nom_pack = couteauprive_T('pack_actuel', array('date'=>cs_date()));
 	$fct_pack = md5($nom_pack.time());
-	$sauve .= $temp = "\n######## "._T('couteauprive:pack_actuel_titre')." #########\n\n// "
-		. filtrer_entites(_T('couteauprive:pack_actuel_avert')."\n\n"
+	$sauve .= $temp = "\n######## ".couteauprive_T('pack_actuel_titre')." #########\n\n// "
+		. filtrer_entites(couteauprive_T('pack_actuel_avert')."\n\n"
 			. "\$GLOBALS['cs_installer']['$nom_pack'] =\t'cs_$fct_pack';\nfunction cs_$fct_pack() { return array(\n\t// "
-			. _T('couteauprive:pack_outils_defaut')."\n"
+			. couteauprive_T('pack_outils_defaut')."\n"
 			. "\t'outils' =>\n\t\t'".join(",\n\t\t", $actifs)."',\n"
-			. "\n\t// "._T('couteauprive:pack_variables_defaut')."\n")
+			. "\n\t// ".couteauprive_T('pack_variables_defaut')."\n")
 		. "\t'variables' => array(\n\t" . join(",\n\t", $metas_actifs) . "\n\t)\n);} # $nom_pack #\n";
 
 	ecrire_fichier(_DIR_CS_TMP.'config.php', '<'."?php\n// Configuration de controle pour le plugin 'Couteau Suisse'\n\n$sauve?".'>');
@@ -512,7 +512,7 @@ jQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};\
 		foreach($balise as $obj=>$type_objet) {
 			// ici, on fait attention de ne pas melanger propre et typo
 			if(array_key_exists('typo', $type_objet) && array_key_exists('propre', $type_objet)) 
-				die(var_dump($type_objet) . "<br/>>> <b>#$bal/$obj</b><br/>" . _T('couteauprive:erreur:traitements'));
+				die(var_dump($type_objet) . "<br/>>> <b>#$bal/$obj</b><br/>" . couteauprive_T('erreur:traitements'));
 			$traitements_type_objet = &$traitements_utilises[$bal][$obj];
 			foreach($type_objet as $f=>$fonction)  {
 				// pas d'objet precis
@@ -740,9 +740,9 @@ if(defined('_LOG_CS')) cs_log(" -- $f() : OK !");
 function cs_outils_concernes($key, $off=false){
 	global $outils, $metas_outils; $s='';
 	foreach($outils as $o) if(isset($o[$key])) 
-		$s .= ($s?' - ':'')."[.->$o[id]]".(isset($metas_outils[$o[id]]['actif']) && $metas_outils[$o[id]]['actif']?' ('._T('couteauprive:outil_actif_court').')':'');
+		$s .= ($s?' - ':'')."[.->$o[id]]".(isset($metas_outils[$o[id]]['actif']) && $metas_outils[$o[id]]['actif']?' ('.couteauprive_T('outil_actif_court').')':'');
 	if(!$s) return '';
-	$s = _T('couteauprive:outils_'.($off?'desactives':'concernes')).$s;
+	$s = couteauprive_T('outils_'.($off?'desactives':'concernes')).$s;
 	return "<q1><q3>$s</q3></q1>";
 }
 ?>
