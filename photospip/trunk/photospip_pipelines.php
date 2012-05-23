@@ -55,10 +55,10 @@ function photospip_jquery_plugins($plugins) {
  * Insertion dans le pipeline document_desc_actions (Plugin Mediathèque)
  * Ajouter le lien vers l'édition de l'image
  *
- * @param string $flux
- * @return string
+ * @param array $flux
+ * @return array $flux
  */
-function photospip_document_desc_actions($flux = '') {
+function photospip_document_desc_actions($flux) {
 	$id_document = $flux['args']['id_document'];
 	$infos = sql_fetsel('distant,extension', 'spip_documents', 'id_document=' . intval($id_document));
 	if (($infos['distant'] == 'non') && in_array($infos['extension'], array('jpg', 'png', 'gif'))) {
@@ -71,6 +71,22 @@ function photospip_document_desc_actions($flux = '') {
 			$flux['data'] .= "<span class='sep'> | </span><a href='$url'>$texte</a>";
 		}
 	}
+	return $flux;
+}
+
+/**
+ * Insertion dans le pipeline formulaire_verifier (SPIP)
+ * On vérifie le contenu du formulaire de configuration 
+ * 
+ * @param array $flux
+ * @return array $flux
+ */
+function photospip_formulaire_verifier($flux){
+	if ($flux['args']['form']=='configurer_photospip'){
+		if(count(_request('resultats')) == 0){
+			$flux['data']['resultats'] = _T('photospip:erreur_selectionner_au_moins_une_valeur');
+		}
+	}	
 	return $flux;
 }
 ?>

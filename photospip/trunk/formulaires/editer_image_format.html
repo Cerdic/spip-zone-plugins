@@ -1,0 +1,160 @@
+<BOUCLE_doc(DOCUMENTS){id_document}{tout}>
+[(#CONFIG{photospip/image_reduire,on}|=={on}|oui)
+<li class="editer editer_reduire">
+	<input type="radio" name="filtre" id="image_reduire" value="image_reduire"[(#ENV{filtre}|=={image_reduire}|oui)checked="checked"] />
+	<label for="image_reduire"><:photospip:label_image_reduire:></label>
+	<div class="cache params_filtre image_reduire">
+		<p class="explication">
+			<:photospip:explication_image_reduire:><br />
+			<:photospip:message_image_taille_actuelle{largeur=#LARGEUR,hauteur=#HAUTEUR}:>
+		</p>
+		<ul>
+		<li>
+			<label for="reduire_width"><:photospip:label_reduire_width:></label>
+			<input type="text" class="text" id="reduire_width" maxlength="5" style="width:5em" name="reduire_width" value="#ENV{reduire_width}" />
+		</li>
+		<li>
+			<label for="reduire_height"><:photospip:label_reduire_height:></label>
+			<input type="text" class="text" id="reduire_height" maxlength="5" style="width:5em" name="reduire_height" value="#ENV{reduire_height}" />
+		</li>
+	</ul>
+	</div>
+</li>]
+[(#CONFIG{photospip/image_passe_partout,on}|=={on}|oui)
+<li class="editer editer_passe_partout">
+	<input type="radio" name="filtre" id="image_passe_partout" value="image_passe_partout"[(#ENV{filtre}|=={image_passe_partout}|oui)checked="checked"] />
+	<label for="image_passe_partout"><:photospip:label_image_passe_partout:></label>
+	<div class="cache params_filtre image_passe_partout">
+		<p class="explication">
+			<:photospip:explication_image_passe_partout:><br />
+			<:photospip:message_image_taille_actuelle{largeur=#LARGEUR,hauteur=#HAUTEUR}:>
+		</p>
+		<ul>
+		<li>
+			<label for="passe_partout_width"><:photospip:label_reduire_width:></label>
+			<input type="text" class="text" id="passe_partout_width" maxlength="5" style="width:5em" name="passe_partout_width" value="#ENV{passe_partout_width}" />
+		</li>
+		<li>
+			<label for="passe_partout_height"><:photospip:label_reduire_height:></label>
+			<input type="text" class="text" id="passe_partout_height" maxlength="5" style="width:5em" name="passe_partout_height" value="#ENV{passe_partout_height}" />
+		</li>
+	</ul>
+	</div>
+</li>]
+[(#CONFIG{photospip/image_recadre,on}|=={on}|oui)
+<li class="editer editer_recadre">
+	<input type="radio" name="filtre" id="image_recadre" value="image_recadre"[(#ENV{filtre}|=={image_recadre}|oui)checked="checked"] />
+	<label for="image_recadre">[<img src="(#CHEMIN{images/photospip-ico/ico_rotation.png})" alt="<:photospip:image_recadre:>" /> ]<:photospip:label_image_recadre:></label>
+	<div class="cache params_filtre image_recadre">
+		<p class="explication">
+			<:photospip:explication_image_recadre:>
+			<:photospip:message_image_taille_actuelle{largeur=#LARGEUR,hauteur=#HAUTEUR}:>
+		</p>
+		<ul>
+		<li>
+			<label><:photospip:label_ratio:></label>
+			<div class="choix">
+				<input type="radio" id="ratio" name="ratio" value=""[(#ENV{ratio}|non)checked="checked"] />
+				<label for="ratio"><:photospip:label_ratio_libre:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" id="ratio1" name="ratio" value="1:1"[(#ENV{ratio}|=={'1:1'}|oui)checked="checked"] />
+				<label for="ratio1">1:1</label>
+			</div>
+			<div class="choix">
+				<input type="radio" id="ratio2" name="ratio" value="4:3"[(#ENV{ratio}|=={'4:3'}|oui)checked="checked"] />
+				<label for="ratio2">4:3</label>
+			</div>
+		</li>
+		<li>
+			<label for="recadre_width"><:photospip:label_recadre_width:></label>
+			<input type="text" class="text" id="recadre_width" maxlength="5" style="width:5em" name="recadre_width" value="#ENV{recadre_width}" />
+		</li>
+		<li>
+			<label for="recadre_height"><:photospip:label_recadre_height:></label>
+			<input type="text" class="text" id="recadre_height" maxlength="5" style="width:5em" name="recadre_height" value="#ENV{recadre_height}" />
+		</li>
+		<li>
+			<label><:photospip:label_recadre_x1_y1:></label>
+			<div class="choix" style="display:inline">
+				<label for="recadre_x1">x</label>
+				<input type="text" class="text" id="recadre_x1" name="recadre_x1" maxlength="5" style="width:5em" value="#ENV{recadre_x1}" />
+			</div>
+			<div class="choix" style="display:inline">
+				<label for="recadre_y1">y</label>
+				<input type="text" class="text" id="recadre_y1" name="recadre_y1" maxlength="5" style="width:5em" value="#ENV{recadre_y1}" />
+			</div>
+		</li>
+		<li>
+			<label><:photospip:label_recadre_x2_y2:></label>
+			<div class="choix" style="display:inline">
+				<label for="recadre_x2">x</label>
+				<input type="text" class="text" id="recadre_x2" name="recadre_x2" maxlength="5" style="width:5em" value="#ENV{recadre_x2}" />
+			</div>
+			<div class="choix" style="display:inline">
+				<label for="recadre_y2">y</label>
+				<input type="text" class="text" id="recadre_y2" name="recadre_y2" maxlength="5" style="width:5em" value="#ENV{recadre_y2}" />
+			</div>
+		</li>
+	</ul>
+	</div>
+</li>]
+[(#CONFIG{photospip/tourner,oui}|=={on}|oui)
+<li class="editer editer_tourner">
+	<input type="radio" name="filtre" id="tourner" value="tourner"[(#ENV{filtre}|=={tourner}|oui)checked="checked"] />
+	<label for="tourner">[<img src="(#CHEMIN{images/photospip-ico/ico_rotation.png})" alt="<:photospip:label_tourner:>" /> ]<:photospip:label_tourner:></label>
+	<div class="cache params_filtre">
+		<p class="explication"><:photospip:explication_tourner:></p>
+		<ul>
+			<li>
+				<label><:photospip:label_angle_rotation:></label>
+				<div class="choix">
+					<input type="radio" name="params_tourner" value="90" id="param_tourner_90"[(#ENV{params_tourner}|=={90}|oui)checked="checked"] />
+					<label for="param_tourner_90"><:photospip:label_tourner_90:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="params_tourner" value="180" id="param_tourner_180"[(#ENV{params_tourner}|=={180}|oui)checked="checked"] />
+					<label for="param_tourner_180"><:photospip:label_tourner_180:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="params_tourner" value="270" id="param_tourner_270"[(#ENV{params_tourner}|=={270}|oui)checked="checked"] />
+					<label for="param_tourner_270"><:photospip:label_tourner_270:></label>
+				</div>
+			</li>
+		</ul>
+	</div>
+</li>]
+[(#CONFIG{photospip/image_rotation}|=={on}|oui)
+<li class="editer editer_rotation">
+	<input type="radio" name="filtre" id="image_rotation" value="image_rotation"[(#ENV{filtre}|=={image_rotation}|oui)checked="checked"] />
+	<label for="image_rotation">[<img src="(#CHEMIN{images/photospip-ico/ico_rotation.png})" alt="<:photospip:label_image_rotation:>" /> ]<:photospip:label_image_rotation:></label>`
+	<div class="cache params_filtre">
+		<p class="explication"><:photospip:explication_image_rotation:></p>
+		<div id='sliderrotation'>
+			<div></div>	
+		</div>
+		<ul>
+			<li class="editer editer_param_image_rotation">
+				<label for="param_image_rotation"><:photospip:label_angle_rotation:></label>
+				<input type="text" class="text" name="params_image_rotation" id="param_image_rotation" value="#ENV{params_image_rotation,45}" maxlength="4" />
+			</li>
+		</ul>
+	</div>
+</li>]
+[(#CONFIG{photospip/image_flip_vertical}|=={on}|oui)
+<li class="editer editer_flip_vertical">
+	<input type="radio" name="filtre" id="image_flip_vertical" value="image_flip_vertical"[(#ENV{filtre}|=={image_flip_vertical}|oui)checked="checked"] />
+	<label for="image_flip_vertical">[<img src="(#CHEMIN{images/photospip-ico/ico_flip_vertical.png})" alt="<:photospip:image_flip_vertical:>" /> ]<:photospip:label_image_flip_vertical:></label>
+	<div class="cache params_filtre">
+		<p class="explication"><:photospip:explication_image_flip_vertical:></p>
+	</div>
+</li>]
+[(#CONFIG{photospip/image_flip_horizontal}|=={on}|oui)
+<li class="editer editer_flip_horizontal">
+	<input type="radio" name="filtre" id="image_flip_horizontal" value="image_flip_horizontal"[(#ENV{filtre}|=={image_flip_horizontal}|oui)checked="checked"] />
+	<label for="image_flip_horizontal">[<img src="(#CHEMIN{images/photospip-ico/ico_flip_horizontal.png})" alt="<:photospip:image_flip_horizontal:>" /> ]<:photospip:label_image_flip_horizontal:></label>
+	<div class="cache params_filtre">
+		<p class="explication"><:photospip:explication_image_flip_horizontal:></p>
+	</div>
+</li>]
+</BOUCLE_doc>

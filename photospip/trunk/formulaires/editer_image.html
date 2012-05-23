@@ -1,6 +1,19 @@
 <div class='formulaire_spip formulaire_editer formulaire_editer_document formulaire_editer_document-#ENV{id_document,nouveau}'>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{erreurs}|table_valeur{message}|oui)
+				<div class="notice">
+						[(#ENV{erreurs}|table_valeur{message}|=={previsu}|oui)
+						<span><:previsualisation:></span><br />
+						<:photospip:previsu:>]
+						[(#ENV{erreurs}|table_valeur{message}|=={sanstest}|oui)
+						<:photospip:sanstest:>]
+						[(#ENV{erreurs}|table_valeur{message}|=={sansfiltre}|oui)
+						<:photospip:sansfiltre:>]
+						[(#ENV{erreurs}|table_valeur{message}|=={sansconf}|oui)
+						<:photospip:sansconf:>]
+					</div>
+				]
 	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
 	[(#PLUGIN{fonctions_images}|oui)
 		[(#CONFIG{photospip/image_niveau_de_gris_auto}|=={on}|oui)#SET{fonctions_images,on}]
@@ -26,253 +39,42 @@
 		<div id="modifier_image">
 			<div id="image-container">
 				<div id="image_modifier" style="[width:(#GET{largeur_max})px;]">
-				[(#ENV{erreurs}|table_valeur{message}|oui)
-				<div class="photospip_previsu">
-					<div class="previsu_texte" style="[width:(#GET{largeur_max})px;]">
-						[(#ENV{erreurs}|table_valeur{message}|=={previsu}|oui)
-						<span><:previsualisation:></span>
-						<:photospip:previsu:>]
-						[(#ENV{erreurs}|table_valeur{message}|=={sanstest}|oui)
-						<:photospip:sanstest:>]
-						[(#ENV{erreurs}|table_valeur{message}|=={sansfiltre}|oui)
-						<:photospip:sansfiltre:>]
-						[(#ENV{erreurs}|table_valeur{message}|=={sansconf}|oui)
-						<:photospip:sansconf:>]
-					</div>
-				</div>
-				]
+				
 				[(#ENV{erreurs}|table_valeur{filtre}|oui)
-				[(#_document:FICHIER|image_reduire{#GET{largeur_max,450},#GET{hauteur_max,450}}|photospip_appliquer_filtre{#ENV{erreurs}|table_valeur{filtre},[(#ENV{erreurs}|table_valeur{param})]}|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|inserer_attribut{alt,' '})]]
+				[(#_document:FICHIER|image_reduire{[(#GET{largeur_max,450})],[(#GET{hauteur_max,450})]}|photospip_appliquer_filtre{[(#ENV{erreurs}|table_valeur{filtre})],[(#ENV{erreurs}|table_valeur{param1})],[(#ENV{erreurs}|table_valeur{param2})],[(#ENV{erreurs}|table_valeur{param3})],[(#ENV{erreurs}|table_valeur{param})]}|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|inserer_attribut{alt,' '})]]
 				[(#ENV{erreurs}|table_valeur{filtre}|non)
 				[(#_document:FICHIER|image_reduire{#GET{largeur_max,450},#GET{hauteur_max,450}}|inserer_attribut{alt,' '})]]
 			</div>
-			</div>
-				[(#SET{photospip,pasok})]
-				<BOUCLE_interd(DOCUMENTS_INTERS){id_document}> </BOUCLE_interd>
-				[(#TOTAL_BOUCLE|>={#CONFIG{photospip/limite_version}}|?{#SET{photospip,ok},#SET{photospip,pasok}})]
-				<//B_interd>
-			<div>
+		</div>
+		<div>
 			<BOUCLE_modifiable(CONDITION){si #ENV{modifiable,oui}|oui}>
 			<ul>
-				<li class="fieldset" id="fragment-format">
+				#CHEMIN{formulaires/editer_image_format}
+				[<li class="fieldset" id="fragment-format">
 					<h3 class="legend"><:photospip:legende_filtres_format:></h3>
 					<ul>
-						[(#CONFIG{photospip/image_recadre,on}|=={on}|oui)
-						<li class="editer editer_recadre">
-							<input type="radio" name="filtre" id="image_recadre" value="image_recadre"[(#ENV{filtre}|=={image_recadre}|oui)checked="checked"] />
-							<label for="image_recadre">[<img src="(#CHEMIN{images/photospip-ico/ico_rotation.png})" alt="<:photospip:image_recadre:>" /> ]<:photospip:label_image_recadre:></label>
-							<div class="cache params_filtre image_recadre">
-								<p class="explication">
-									<:photospip:explication_image_recadre:>
-									<:photospip:image_taille_actuelle:> #LARGEUR x #HAUTEUR px
-								</p>
-								<ul>
-								<li>
-									<label><:photospip:label_ratio:></label>
-									<div class="choix">
-										<input type="radio" id="ratio" name="ratio" value=""[(#ENV{ratio}|non)checked="checked"] />
-										<label for="ratio"><:photospip:label_ratio_libre:></label>
-									</div>
-									<div class="choix">
-										<input type="radio" id="ratio1" name="ratio" value="1:1"[(#ENV{ratio}|=={'1:1'}|oui)checked="checked"] />
-										<label for="ratio1">1:1</label>
-									</div>
-									<div class="choix">
-										<input type="radio" id="ratio2" name="ratio" value="4:3"[(#ENV{ratio}|=={'4:3'}|oui)checked="checked"] />
-										<label for="ratio2">4:3</label>
-									</div>
-								</li>
-								<li>
-									<label for="recadre_width"><:photospip:label_recadre_width:></label>
-									<input type="text" class="text" id="recadre_width" maxlength="5" style="width:5em" name="recadre_width" value="#ENV{recadre_width}" />
-								</li>
-								<li>
-									<label for="recadre_height"><:photospip:label_recadre_height:></label>
-									<input type="text" class="text" id="recadre_height" maxlength="5" style="width:5em" name="recadre_height" value="#ENV{recadre_height}" />
-								</li>
-								<li>
-									<label><:photospip:label_recadre_x1_y1:></label>
-									<div class="choix" style="display:inline">
-										<label for="recadre_x1">x</label>
-										<input type="text" class="text" id="recadre_x1" name="recadre_x1" maxlength="5" style="width:5em" value="#ENV{recadre_x1}" />
-									</div>
-									<div class="choix" style="display:inline">
-										<label for="recadre_y1">y</label>
-										<input type="text" class="text" id="recadre_y1" name="recadre_y1" maxlength="5" style="width:5em" value="#ENV{recadre_y1}" />
-									</div>
-								</li>
-								<li>
-									<label><:photospip:label_recadre_x2_y2:></label>
-									<div class="choix" style="display:inline">
-										<label for="recadre_x2">x</label>
-										<input type="text" class="text" id="recadre_x2" name="recadre_x2" maxlength="5" style="width:5em" value="#ENV{recadre_x2}" />
-									</div>
-									<div class="choix" style="display:inline">
-										<label for="recadre_y2">y</label>
-										<input type="text" class="text" id="recadre_y2" name="recadre_y2" maxlength="5" style="width:5em" value="#ENV{recadre_y2}" />
-									</div>
-								</li>
-							</ul>
-							</div>
-						</li>]
-						[(#CONFIG{photospip/tourner,oui}|=={on}|oui)
-						<li class="editer editer_tourner">
-							<input type="radio" name="filtre" id="tourner" value="tourner"[(#ENV{filtre}|=={tourner}|oui)checked="checked"] />
-							<label for="tourner">[<img src="(#CHEMIN{images/photospip-ico/ico_rotation.png})" alt="<:photospip:label_tourner:>" /> ]<:photospip:label_tourner:></label>
-							<div class="cache params_filtre">
-								<p class="explication"><:photospip:explication_tourner:></p>
-								<ul>
-									<li>
-										<label><:photospip:label_angle_rotation:></label>
-										<div class="choix">
-											<input type="radio" name="params_tourner" value="90" id="param_tourner_90"[(#ENV{params_tourner}|=={90}|oui)checked="checked"] />
-											<label for="param_tourner_90"><:photospip:label_tourner_90:></label>
-										</div>
-										<div class="choix">
-											<input type="radio" name="params_tourner" value="180" id="param_tourner_180"[(#ENV{params_tourner}|=={180}|oui)checked="checked"] />
-											<label for="param_tourner_180"><:photospip:label_tourner_180:></label>
-										</div>
-										<div class="choix">
-											<input type="radio" name="params_tourner" value="270" id="param_tourner_270"[(#ENV{params_tourner}|=={270}|oui)checked="checked"] />
-											<label for="param_tourner_270"><:photospip:label_tourner_270:></label>
-										</div>
-									</li>
-								</ul>
-							</div>
-						</li>]
-						[(#CONFIG{photospip/image_rotation}|=={on}|oui)
-						<li class="editer editer_rotation">
-							<input type="radio" name="filtre" id="image_rotation" value="image_rotation"[(#ENV{filtre}|=={image_rotation}|oui)checked="checked"] />
-							<label for="image_rotation">[<img src="(#CHEMIN{images/photospip-ico/ico_rotation.png})" alt="<:photospip:label_image_rotation:>" /> ]<:photospip:label_image_rotation:></label>`
-							<div class="cache params_filtre">
-								<p class="explication"><:photospip:explication_image_rotation:></p>
-								<div id='sliderrotation'>
-									<div></div>	
-								</div>
-								<ul>
-									<li class="editer editer_param_image_rotation">
-										<label for="param_image_rotation"><:photospip:label_angle_rotation:></label>
-										<input type="text" class="text" name="params_image_rotation" id="param_image_rotation" value="#ENV{params_image_rotation,45}" maxlength="4" />
-									</li>
-								</ul>
-							</div>
-						</li>]
-						[(#CONFIG{photospip/image_flip_vertical}|=={on}|oui)
-						<li class="editer editer_flip_vertical">
-							<input type="radio" name="filtre" id="image_flip_vertical" value="image_flip_vertical"[(#ENV{filtre}|=={image_flip_vertical}|oui)checked="checked"] />
-							<label for="image_flip_vertical">[<img src="(#CHEMIN{images/photospip-ico/ico_flip_vertical.png})" alt="<:photospip:image_flip_vertical:>" /> ]<:photospip:label_image_flip_vertical:></label>
-							<div class="cache params_filtre">
-								<p class="explication"><:photospip:explication_image_flip_vertical:></p>
-							</div>
-						</li>]
-						[(#CONFIG{photospip/image_flip_horizontal}|=={on}|oui)
-						<li class="editer editer_flip_horizontal">
-							<input type="radio" name="filtre" id="image_flip_horizontal" value="image_flip_horizontal"[(#ENV{filtre}|=={image_flip_horizontal}|oui)checked="checked"] />
-							<label for="image_flip_horizontal">[<img src="(#CHEMIN{images/photospip-ico/ico_flip_horizontal.png})" alt="<:photospip:image_flip_horizontal:>" /> ]<:photospip:label_image_flip_horizontal:></label>
-							<div class="cache params_filtre">
-								<p class="explication"><:photospip:explication_image_flip_horizontal:></p>
-							</div>
-						</li>]
+					(#INCLURE{fond=formulaires/editer_image_format,env}|trim)
 					</ul>
-				</li>
+				</li>]
 				
-				<li class="fieldset" id="fragment-couleurs">
+				[<li class="fieldset" id="fragment-couleurs">
 					<h3 class="legend"><:photospip:legende_filtres_de_couleur:></h3>
 					<ul>
-						[(#CONFIG{photospip/image_nb}|=={on}|oui)
-						<li class="editer editer_nb">
-							<input type="radio" name="filtre" id="filtre_nb" value="image_nb"[(#ENV{filtre}|=={image_nb}|oui)checked="checked"] />
-							<label for="filtre_nb">[<img src="(#CHEMIN{images/photospip-ico/ico_nb.png})" alt="<:photospip:label_image_nb:>" /> ]<:photospip:label_image_nb:></label>
-							<div class="cache params_filtre">
-								<p class="explication"><:photospip:explication_image_nb:></p>
-							</div>
-						</li>]
-						[(#CONFIG{photospip/image_gamma}|=={on}|oui)
-						<li class="editer editer_gamma">
-							<input type="radio" name="filtre" id="filtre_gamma" value="image_gamma"[(#ENV{filtre}|=={image_gamma}|oui)checked="checked"] />
-							<label for="filtre_gamma"><:photospip:label_image_gamma:></label>
-							<div class="cache params_filtre">
-								<p class="explication"><:photospip:explication_image_gamma:></p>
-								<div id='slidergamma'> </div>
-								<ul>
-									<li class="editer_params_image_gamma">
-										<label for="param_image_gamma"><:photospip:label_niveau_gamma:></label>
-										<input type="text" class="text" name="params_image_gamma" id="param_image_gamma" value="#ENV{params_image_gamma,10}" maxlength="4" />
-									</li>
-								</ul>
-							</div>
-						</li>]
-						[(#CONFIG{photospip/image_flou}|=={on}|oui)
-						<li class="editer editer_flou">
-							<input type="radio" name="filtre" id="filtre_flou" value="image_flou"[(#ENV{filtre}|=={image_flou}|oui)checked="checked"] />
-							<label for="filtre_flou"><:photospip:label_image_flou:></label>
-							<div class="cache params_filtre">
-								<p class="explication"><:photospip:explication_image_flou:></p>
-								<div id='sliderflou'> </div>
-								<ul>
-									<li class="editer_param_image_flou">
-										<label for="param_image_flou"><:photospip:label_niveau_flou:></label>
-										<input type="text" class="text" name="params_image_flou" id="param_image_flou" value="#ENV{params_image_flou,3}" maxlength="2" />
-									</li>
-								</ul>
-							</div>
-						</li>]
-						[(#CONFIG{photospip/image_sepia}|=={on}|oui)
-						<li class="editer editer_image_sepia">
-							<input type="radio" name="filtre" id="filtre_sepia" value="image_sepia"[(#ENV{filtre}|=={image_sepia}|oui)checked="checked"] />
-							<label for="filtre_sepia">[<img src="(#CHEMIN{images/photospip-ico/ico_sepia.png})" alt="<:photospip:image_sepia:>" /> ]<:photospip:label_image_sepia:></label>
-							<div class="cache params_filtre">
-								<ul>
-									<li class="editer_param_image_sepia">
-										<label for="param_image_sepia"><:photospip:label_couleur_sepia:></label>
-										<input type="text" name="params_image_sepia" class="text palette couleur" id="param_image_sepia" value="#ENV{params_image_sepia,#896f5e}" maxlength="7" />
-									</li>
-								</ul>
-							</div>
-						</li>]
-						[(#CONFIG{photospip/image_niveau_de_gris_auto}|=={on}|oui)
-						<li class="editer editer_niveaux_auto">
-							<input type="radio" name="filtre" id="filtre_niveaux_auto" value="image_niveaux_gris_auto"[(#ENV{filtre}|=={image_niveaux_gris_auto}|oui)checked="checked"] />
-							<label for="filtre_niveaux_auto"><:photospip:label_image_niveau_de_gris_auto:></label>
-							<div class="cache params_filtre explications">
-								<p class="explication"><:photospip:explication_image_niveau_de_gris_auto:></p>
-							</div>
-						</li>]
-						[(#GET{fonctions_images}|=={on}|oui)
-						[(#CONFIG{photospip/image_sincity}|=={on}|oui)
-						<li class="editer editer_sincity">
-							<input type="radio" name="filtre" id="filtre_sincity" value="image_sincity"[(#ENV{filtre}|=={image_sincity}|oui)checked="checked"] />
-							<label for="filtre_sincity"><:photospip:label_image_sincity:></label>
-							<div class="cache params_filtre explications">
-								<p class="explication"><:photospip:explication_image_sincity:></p>
-							</div>
-						</li>]
-						[(#CONFIG{photospip/image_contour_alpha}|=={on}|oui)
-						<li class="editer editer_contour_alpha">
-							<input type="radio" name="filtre" id="filtre_contour_alpha" value="image_contour_alpha"[(#ENV{filtre}|=={image_contour_alpha}|oui)checked="checked"] />
-							<label for="filtre_contour_alpha"><:photospip:label_image_contour_alpha:></label>
-							<div class="cache params_filtre explications">
-								<p class="explication"><:photospip:explication_image_contour_alpha:></p>
-							</div>
-						</li>]
-						[(#CONFIG{photospip/image_saturer}|=={on}|oui)
-						<li class="editer editer_saturer">
-							<input type="radio" name="filtre" id="filtre_saturer" value="image_saturer"[(#ENV{filtre}|=={image_saturer}|oui)checked="checked"] />
-							<label for="filtre_saturer"><:photospip:label_image_saturation_desaturation:></label>
-							<div class="cache params_filtre explications">
-								<p class="explication"><:photospip:explication_image_saturation_desaturation:></p>
-								<div id='slidersaturer'> </div>
-								<ul>
-									<li class="editer editer_param_image_saturer">
-										<label for="param_image_saturer"><:photospip:label_niveau_saturation_desaturation:></label>
-										<input type="text" class="text" name="params_image_saturer" id="param_image_saturer" value="#ENV{params_image_saturer,1}" maxlength="3" />
-									</li>
-								</ul>
-							</div>
-						</li>]]
+						(#INCLURE{fond=formulaires/editer_image_couleurs,env}|trim)
 					</ul>
+				</li>]
+				<BOUCLE_resultats_sup_un(CONDITION){si #CONFIG{photospip/resultats,#ARRAY{0,remplacer_image,1,creer_nouvelle_image,2,creer_version_image}}|count|>{1}|oui}>
+				<li>
+					<label><:photospip:label_type_modification:></label>
+					<BOUCLE_resultats(POUR){tableau #CONFIG{photospip/resultats,#ARRAY{0,remplacer_image,1,creer_nouvelle_image,2,creer_version_image}}}>
+					<div class="choix">
+						<input type="radio" id="#VALEUR" name="type_modification" value="#VALEUR"[(#ENV{type_modification,#CONFIG{photospip/resultats_defaut,creer_version_image}}|=={#VALEUR}|oui)checked="checked"] />
+						<label for=#VALEUR">[(#VAL{photospip:label_modif_}|concat{#VALEUR}|_T)]</label>
+					</div>
+					</BOUCLE_resultats>
 				</li>
-		</ul>
+				</BOUCLE_resultats_sup_un>
+			</ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class="boutons">

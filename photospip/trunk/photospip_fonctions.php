@@ -63,6 +63,9 @@ function photospipfiltre ($src, $dest, $filtre,$params){
 			if($filtre == 'image_recadre'){
 				$dst_img = $filtre($src,$params[0],$params[1],$params[2]);
 				spip_log("$filtre($src,$params[0],$params[1],$params[2]);","photospip");
+			}else if(in_array($filtre, array('image_passe_partout','image_reduire'))){
+				$dst_img = $filtre($src,$params[0],$params[1]);
+				spip_log("$filtre($src,$params[0],$params[1]);","photospip");
 			}
 			else{
 				spip_log("$filtre($src,".$params[3].")","photospip");
@@ -78,7 +81,11 @@ function photospipfiltre ($src, $dest, $filtre,$params){
 		spip_log('le filtre n existe pas','photospip');
 		return false;
 	}
-
+	spip_log($dst_img,'photospip');
+	if (preg_match(',^(.*)\?date=(\d+).([^.]+)$,', $dst_img, $match)) {
+		$dst_img = $match[1];
+	}
+	//$dst_img = preg_replace(',\?date=\d+$,','', $dst_img);
 	if(preg_match("/\.(png|gif|jpe?g|bmp)$/i", $src, $regs)) {
 		switch($regs[1]) {
 			case 'png':
@@ -111,17 +118,19 @@ function photospipfiltre ($src, $dest, $filtre,$params){
 		}
 	}
 
-	if (!$src_img) {
-		spip_log("photospipfiltre : image non lue, $src","photospip");
-		return false;
-	}
-
-	$size=getimagesize($src);
-	if (!($size[0] * $size[1])) return false;
+	//if (!$src_img) {
+	//	spip_log("photospipfiltre : image non lue, $src","photospip");
+	//	return false;
+	//}
+	//spip_log($src_img,'photospip');
 
 	ImageInterlace($src_img,0);
 
 	$save($src_img,$dest);
+	$size=getimagesize($dest);
+	spip_log($size,'photospip');
+	if (!($size[0] * $size[1])) return false;
+	
 	spip_log("dest $dest","photospip");
 	return true;
 }
