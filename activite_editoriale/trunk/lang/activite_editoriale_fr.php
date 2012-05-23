@@ -2,20 +2,12 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
     //A
     'activite_editoriale'   			=>'Activité éditoriale',
-	'activite_editoriale_statistiques'	=> 'Activité éditoriales: statistiques de publication',
-	'au'								=> ' au ',
-	'apartirde'							=> 'À partir du ',
-	'activer_stats'						=> 'Activer les stats des rubriques',
-	'activer_mots_cles'					=> 'Liste des articles sans mots-clés',
-	'activer_stat_oui'					=> 'Oui',
-	'activer_stat_non'					=> 'Non',
 	
 	//D
 	'delai' 							=> 'D&eacute;lai',
 	'delai_precisions' 					=> '(en nombre de jours)',
 	'derniere_maj'     					=> 'Dernière MàJ',
 	'du'								=> 'Du ',
-	'detail_mots_cles' 					=> 'Articles sans mot-clé',
 	'date'								=> 'Date',
 	
 	//E
@@ -27,26 +19,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//I
 	'identifiants' 						=> 'Identifiants ou email  des auteurs &agrave; alerter',
 	'identifiants_precisions' 			=> '(s&eacute;par&eacute;s par des ",")',
-	'icone_statistics'					=> 'Voir les statistiques de la rubrique',
-	'icone_mots_cles'					=> 'Voir le détail',
-	'id_article'						=> 'ID de l\'article',
 	
 	//J
 	'jours'        						=> 'jour(s)',
 	'jusqua'							=> 'Jusqu\'au',
 	
-	//N
-	'nb_art_secteur' 					=> 'Nb d\'articles publiés dans le secteur',
-	'nb_art_branche' 						=> 'Nb d\'articles publiés dans la branche',
-	'nb_art_total' 						=> 'Nb d\'articles publiés total',
-	'nb_total_notag'					=> 'Nb d\'articles publiés sans mot-clé',
-	'nb_articles'						=> 'Nombre d\'articles',
-	'nb_rubriques'						=> 'Nombre de rubriques',
-	'nb_total_articles'					=> 'Nombre total d\'article',
-	'nb_total_rubriques'				=> 'Nombre total de rubriques',
-	
 	//P
-	'periode'							=> 'Période',
 	
 	//R
 	'responsables'             			=> 'Responsables',
@@ -54,16 +32,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rubrique_doit_maj'        			=> 'Une rubrique doit être mise a jour',
 	'rubrique_pas_maj'         			=> 'Attention, la rubrique “ @titre@ ” n\'a pas été mise à jour depuis @jours@ jours',
 	'rubriques_pas_a_jour'     			=> 'Rubriques n\'ayant pas été mises à jour à temps',
-	'redacteurs'						=> 'Rédacteurs',
-	'rubrique'							=> 'RUBRIQUE: ',
 	
 	//S
 	'secteur'							=> 'Secteur:',
 	
-	//T
-	'top_auteurs'						=> 'Top des auteurs',
-	'toutelaperiode'					=> 'Toute la période',
-	'titre_article'						=> 'Titre de l\'article',
 	
 	//CFG
 	'cfg'                      			=> 'Configurer le plugin Activité éditoriale',
