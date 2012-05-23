@@ -102,7 +102,7 @@ function exec_evenement_tous_dist(){
     if (count($liste_a)>0){
         $filtre .= '<ul id="simplecal-filtres">';
         
-        // Restriction à la rubrique ?
+        // Restriction a la rubrique ?
         if ($param_idrub != 0){
             $param_rub = "id_rubrique=$param_idrub";
         } else {
@@ -121,7 +121,7 @@ function exec_evenement_tous_dist(){
         $filtre .= '<small> ['.simplecal_get_nb_tous($param_idrub).']</small>';
         $filtre .= '</li>';
         
-        // Lien A venir
+        // Lien a venir
         $filtre .= '<li class="marge-bas1">';
         $actif = (!$param_annee && !$param_mois && $param_mode);
         if ($actif){
@@ -205,7 +205,7 @@ function exec_evenement_tous_dist(){
         echo fin_cadre_forum(true);
     }
     
-    // Lien vers la démo
+    // Lien vers la demo
     if (autoriser('demo', 'evenement')) {
         $lien = generer_url_ecrire("simplecal_demo", "var_mode=recalcul");
         $racc_demo = icone_horizontale(_T('simplecal:raccourcis_demo'), $lien, _DIR_SIMPLECAL_IMG_PACK."simplecal-logo-24.png", "", false);
@@ -255,11 +255,13 @@ function exec_evenement_tous_dist(){
        
 
     // Note : inc_afficher_objets_dist charge la fonction inc/afficher_|evenement|s
-    // Note : dernier paramètre = pour que le bloc n'apparaisse pas si aucun item.
+    // Note : dernier parametre = pour que le bloc n'apparaisse pas si aucun item.
     
     $req_select = "e.*, a.id_auteur, a.nom, count(e.id_evenement) as nb_auteurs";
-    $req_from = "spip_evenements AS e, spip_auteurs_evenements as lien, spip_auteurs as a";
-    $req_where = "e.id_evenement=lien.id_evenement AND lien.id_auteur = a.id_auteur";
+    $req_from = "spip_evenements AS e";
+    $req_from .= " LEFT OUTER JOIN spip_auteurs_evenements as lien on lien.id_evenement=e.id_evenement";
+    $req_from .= " LEFT OUTER JOIN spip_auteurs as a on a.id_auteur=lien.id_auteur";
+    $req_where = "e.id_evenement != 0"; // tautologie (commodite...)
     $req_where .= $req_filtres;
     $req_groupby = "e.id_evenement";
     $req_orderby = "e.date_debut DESC, e.date_fin DESC";
@@ -272,19 +274,19 @@ function exec_evenement_tous_dist(){
     //$req5 = array("SELECT"=>$req_select, "FROM"=>$req_from, "WHERE"=>$req_where." AND e.statut = 'poubelle'", "GROUP BY"=>$req_groupby, "ORDER BY"=>$req_orderby);
              
     
-    // Liste des evenement  'proposées à l'évaluation'
+    // Liste des evenement  'proposees a l'evaluation'
     echo afficher_objets('evenement',_T('simplecal:liste_evenements_prop'), $req1, '',false);
     
-    // Liste des evenement 'publiées'
+    // Liste des evenement 'publiees'
     echo afficher_objets('evenement',_T('simplecal:liste_evenements_publie'), $req2, '', false);
     
-    // Liste des evenement 'en cours de rédaction'
+    // Liste des evenement 'en cours de redaction'
     echo afficher_objets('evenement',_T('simplecal:liste_evenements_prepa'), $req3, '', false);
     
-    // Liste des evenement 'supprimées'
+    // Liste des evenement 'supprimees'
     echo afficher_objets('evenement',_T('simplecal:liste_evenements_refuse'), $req4, '',false);
     
-    // Liste des evenement 'à la poubelle'
+    // Liste des evenement 'a la poubelle'
     //echo afficher_objets('evenement',_T('simplecal:liste_evenements_poubelle'), $req5, '',false);
     // --------------
 

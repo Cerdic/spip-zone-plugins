@@ -1,0 +1,38 @@
+Plugin Simple Calendrier pour SPIP 2.1
+------------------------------------------
+
+
+1.2.5 le 23/05/2012 
+--------------------
+- Correction : les évènements sans auteurs n'apparaissaient pas dans les listings de l'espace privé (Alexandre).
+
+
+1.2.3 & 1.2.4 le 18/03/2012
+----------------------------
+- Alternative pour une fonction non disponible en PHP < 5.2
+
+
+1.2.2 le 20/10/2011
+--------------------
+- Amélioration de la compatibilité avec le plugin 'bandeau' (raccourcis de création rapide)
+  => Entraine compatibilite avec le plugin 'mini bandeau'
+  => A condition de supprimer le administration.html de simple_calendrier (cf. doc)
+
+
+1.2 le 01/10/2011
+------------------
+- Compatibilité avec le plugin 'bandeau' : icone dans le menu Edition.
+- Ajout de 2 champs dans le MDD : 'lien_titre' et 'lien_url'
+- Ajout d'un bloc de configuration permettant de définir les champs disponibles parmi 'descriptif', 'texte', 'lieu', 'lien'
+- plugin.xml : fixer la borne maximal de SPIP
+
+
+1.1 le 16/09/2011
+------------------
+- Suppression de la lib embarquée jquery-ui remplacée par une dépendance au plugin spip jquery-ui.
+- Suppression de la possibilité d'un choix du thème pour l'espace privé.
+
+
+1.0 le 23/07/2011
+--------------------
+- Première version (non publiée)
