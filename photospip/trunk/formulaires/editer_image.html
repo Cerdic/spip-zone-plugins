@@ -22,7 +22,7 @@
 		[(#CONFIG{photospip/image_dispersion}|=={on}|oui)#SET{fonctions_images,on}]
 		[(#CONFIG{photospip/image_saturer}|=={on}|oui)#SET{fonctions_images,on}]
 	]
-	<BOUCLE_document(DOCUMENTS){id_document}{tout}>
+	<BOUCLE_document(DOCUMENTS){id_document}{mode IN vignette,image,document}{tout}>
 	[(#REM)
 		Calcul du ratio entre notre image originale et la prévisualisation
 		Utile pour les opération de recadrage notamment

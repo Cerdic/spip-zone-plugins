@@ -61,10 +61,9 @@ function formulaires_editer_image_charger_dist($id_document='new',$mode=false, $
 			return $valeurs;
 		}
 	}else{
-		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($row['id_document']));
-		if($id_vignette && $id_vignette > 0 && $id_document = sql_getfetsel('id_document','spip_documents','id_document='.intval($id_vignette)))
+		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
+		if($id_vignette && ($id_vignette > 0) && $id_vignette = sql_getfetsel('id_document','spip_documents','id_document='.intval($id_vignette)))
 			$valeurs['id_document'] = $id_vignette;
-			
 	}
 	
 	if(!autoriser('modifier','document',$id_document)){
@@ -115,11 +114,20 @@ function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $
 	$type_modif = _request('type_modification');
 	$params = photospip_recuperer_params_form($var_filtre);
 	
+	if($mode == 'vignette'){
+		$id_document_orig = $id_document;
+		$res['redirect'] = _request('redirect');
+		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
+		if($id_vignette && ($id_vignette > 0) && $id_vignette = sql_getfetsel('id_document','spip_documents','id_document='.intval($id_vignette)))
+			$id_document = $id_vignette;
+	}else{
+		$mode = $row['mode'];
+	}
+	
 	$row = sql_fetsel('*','spip_documents','id_document='.intval($id_document)); 
 	$src = get_spip_doc($row['fichier']);
 	
 	$version = sql_countsel('spip_documents_inters','id_document='.intval($row['id_document']))+1;
-	
 	// on transforme l'image en png non destructif
 	//spip_log("On transforme l'image source en PNG non destructif","photospip");
 	//$src = extraire_attribut(image_alpha($src,0),'src');
@@ -131,14 +139,6 @@ function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $
 	$src_tmp = preg_replace(",\-photospip\w+([^\-]),","$1", $src);
 	$tmp_img = _DIR_TMP.preg_replace(",\.[^.]+$,","-photospip".md5(date('Y-m-d H:i:s'))."$0", basename($src_tmp));
 	$dest = preg_replace(",\.[^.]+$,","-photospip".md5(date('Y-m-d H:i:s'))."$0", $src_tmp);
-	
-	if($mode == 'vignette'){
-	//	spip_log("On retaille d'abord en 800 px","photospip");
-	//	$src = extraire_attribut(image_reduire($src,800,800),'src');
-		$res['redirect'] = _request('redirect');
-	}else{
-		$mode = $row['mode'];
-	}
 	
 	spip_log("application du filtre $var_filtre $src : $tmp_img","photospip");
 	if($var_filtre == "tourner"){
@@ -187,12 +187,11 @@ function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $
 			 if($mode != 'vignette'){
 				$ajoute = $ajouter_document($row['id_document'], $files, $objet, $id_objet, $mode);
 			 }else{
-				 $id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($row['id_document']));
 				 $ajoute = $ajouter_document($id_vignette,$files,'',0,'vignette');
 					if(is_int(reset($ajoute))){
 						$id_vignette = reset($ajoute);
 						include_spip('action/editer_document');
-						document_set($row['id_document'],array("id_vignette" => $id_vignette,'mode'=>'document'));
+						document_set($id_document_orig,array("id_vignette" => $id_vignette,'mode'=>'document'));
 						$res['message_ok'] = _T('medias:document_installe_succes');
 					}
 			 }

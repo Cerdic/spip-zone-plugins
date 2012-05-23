@@ -1,4 +1,4 @@
-<BOUCLE_doc(DOCUMENTS){id_document}{tout}>
+<BOUCLE_doc(DOCUMENTS){id_document}{mode IN vignette,image,document}{tout}>
 [(#CONFIG{photospip/image_reduire,on}|=={on}|oui)
 <li class="editer editer_reduire">
 	<input type="radio" name="filtre" id="image_reduire" value="image_reduire"[(#ENV{filtre}|=={image_reduire}|oui)checked="checked"] />
