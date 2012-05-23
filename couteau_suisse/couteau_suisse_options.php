@@ -290,8 +290,9 @@ function action_charger_plugin() {
 //	include_spip('inc/minipres'); die(minipres('Partie en développement.<br/>Mettre &agrave; jour votre plugin prochainement.'));
 	// extraction automatique
 	//$_POST['extract'] = 'oui';
-	// lancement de la maj
-	if(include_spip('lib/maj_auto/distant_action_charger_plugin') && include_spip('lib/maj_auto/distant_inc_charger_plugin'))
+	// lancement de la maj (prise en compte de fichiers fantomes restes apres mise à jour de SPIP)
+	if((include_spip('action/charger_plugin') OR include_spip('lib/maj_auto/distant_action_charger_plugin'))
+		&& (include_spip('inc/charger_plugin') OR include_spip('lib/maj_auto/distant_inc_charger_plugin')))
 		action_charger_plugin_dist();
 }}
 
