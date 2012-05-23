@@ -1,7 +1,7 @@
 <paquet
 	prefix="activite_editoriale"
 	categorie="edition"
-	version="2.0.0"
+	version="2.0.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="activite_editoriale.png"
@@ -22,5 +22,5 @@
 
 	<necessite nom="cextras" compatibilite="[3.0.6;[" />
 
-	<menu nom="activite_editoriale2" titre="activite_editoriale:activite_editoriale" parent="bando_publication" icone="activite_editoriale.png" action="activite_editoriale" />
+	<menu nom="activite_editoriale" titre="activite_editoriale:activite_editoriale" parent="menu_configuration" icone="activite_editoriale.png" />
 </paquet>

@@ -1,7 +1,6 @@
-<div class="formulaire_spip">
-<!-- titre=<:activite_editoriale:cfg:> -->
+<div class="formulaire_spip formulaire_configurer">
 	<form action="#SELF" method="post">
-    [<div>(#ENV{_cfg_}|form_hidden)</div>]
+    #ACTION_FORMULAIRE{#ENV{action}}
         
         <ul>
             <li>
@@ -13,8 +12,9 @@
                     
                 </select>
             </li>
+    	</ul>
     <p class="boutons">
-	<input type="submit" name="_cfg_ok" value="<:OK:>" />
+	<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
 	</p>
 	</form>
 </div>
