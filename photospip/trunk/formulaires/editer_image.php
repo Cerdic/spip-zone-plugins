@@ -113,20 +113,19 @@ function formulaires_editer_image_traiter_dist($id_document='new', $retour=''){
 	$src = get_spip_doc($row['fichier']);
 	
 	$version = sql_countsel('spip_documents_inters','id_document='.intval($row['id_document']))+1;
-	spip_log($version,"photospip");
-	/**
-	 * L'image temporaire est crée dans tmp/
-	 * Elle a pour nom : tmp/image_orig-xxxx.ext où xxxx est le md5 de la date
-	 */
-	$src_tmp = preg_replace(",\-photospip\w+([^\-]),","$1", $src);
-	spip_log("src_tmp = $src_tmp",'photospip');
-	$tmp_img = _DIR_TMP.preg_replace(",\.[^.]+$,","-photospip".md5(date('Y-m-d H:i:s'))."$0", basename($src_tmp));
-	$dest = preg_replace(",\.[^.]+$,","-photospip".md5(date('Y-m-d H:i:s'))."$0", $src_tmp);
-	spip_log("la destination sera $dest","photospip");
 	
 	// on transforme l'image en png non destructif
-	//$src = extraire_attribut(image_alpha($src,0),'src');
 	//spip_log("On transforme l'image source en PNG non destructif","photospip");
+	//$src = extraire_attribut(image_alpha($src,0),'src');
+	
+	/**
+	 * L'image créée aura pour nom image_orig-xxxx.ext où xxxx est le md5 de la date
+	 * L'image temporaire est crée dans tmp/
+	 */
+	$src_tmp = preg_replace(",\-photospip\w+([^\-]),","$1", $src);
+	$tmp_img = _DIR_TMP.preg_replace(",\.[^.]+$,","-photospip".md5(date('Y-m-d H:i:s'))."$0", basename($src_tmp));
+	$dest = preg_replace(",\.[^.]+$,","-photospip".md5(date('Y-m-d H:i:s'))."$0", $src_tmp);
+	
 	spip_log("application du filtre $var_filtre $src : $tmp_img","photospip");
 	
 	if($var_filtre == "tourner"){
@@ -241,7 +240,7 @@ function photospip_recuperer_params_form($var_filtre){
 		$param1 = _request('params_image_rotation');
 	}
 	else if($var_filtre == 'image_niveaux_gris_auto'){
-		$param1 = '';
+		$param1 = sinon(_request('params_image_niveaux_gris_auto'),null);
 	}
 	return array($param1,$param2,$param3,$params);
 }

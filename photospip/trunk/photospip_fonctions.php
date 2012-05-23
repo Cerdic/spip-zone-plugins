@@ -50,7 +50,8 @@ function photospipfiltre ($src, $dest, $filtre,$params){
 	spip_log("src = $src","photospip");
 	spip_log("dest = $dest","photospip");
 	spip_log("filtre = $filtre","photospip");
-	spip_log("params = $params","photospip");
+	spip_log("params","photospip");
+	spip_log($params,"photospip");
 	
 	include_spip('inc/filtres');
 	include_spip('public/parametrer');
@@ -67,9 +68,12 @@ function photospipfiltre ($src, $dest, $filtre,$params){
 				$dst_img = $filtre($src,$params[0],$params[1]);
 				spip_log("$filtre($src,$params[0],$params[1]);","photospip");
 			}
-			else{
-				spip_log("$filtre($src,".$params[3].")","photospip");
-				$dst_img = $filtre($src,$params[3]);		
+			else if($params[0] && !is_null($params[0])){
+				spip_log("$filtre($src,".$params[0].")","photospip");
+				$dst_img = $filtre($src,$params[0]);		
+			}else{
+				spip_log("$filtre($src)","photospip");
+				$dst_img = $filtre($src);
 			}
 		}
 		else{

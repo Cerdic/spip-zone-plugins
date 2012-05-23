@@ -50,7 +50,7 @@ function action_images_versions_post($r){
 		spip_log("script image_version... on repart vers l'arrière","photospip");
 		spip_log("revenir à la version $version","photospip");
 		
-		$row = sql_fetsel("fichier,largeur,hauteur", "spip_documents_inters", "id_document=".intval($arg)." AND version=".intval($version));
+		$row = sql_fetsel("*", "spip_documents_inters", "id_document=".intval($arg)." AND version=".intval($version));
 		
 		$src = _DIR_RACINE . copie_locale(get_spip_doc($row['fichier']));
 		spip_log("la source est $src","photospip");
@@ -60,7 +60,7 @@ function action_images_versions_post($r){
 		// On supprimer le document actuel puisque l'on revient en arrière
 		spip_unlink(get_spip_doc($doc_actuel));
 		
-		sql_updateq('spip_documents', array('fichier' => $row['fichier'], 'largeur' =>$row['largeur'], 'hauteur' =>$row['hauteur']), "id_document=$arg");
+		sql_updateq('spip_documents', array('fichier' => $row['fichier'], 'largeur' =>$row['largeur'], 'hauteur' =>$row['hauteur'],'taille' => $row['taille']), "id_document=$arg");
 		spip_log("on update la table spip_documents et on met le fichier ".$row['fichier'],"photospip");
 		$nextversion = $version - 1;
 		$res2 = sql_select("version,fichier","spip_documents_inters","id_document=$arg AND version > $nextversion");

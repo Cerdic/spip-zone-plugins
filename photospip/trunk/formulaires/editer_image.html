@@ -69,7 +69,7 @@
 					<BOUCLE_resultats(POUR){tableau #CONFIG{photospip/resultats,#ARRAY{0,remplacer_image,1,creer_nouvelle_image,2,creer_version_image}}}>
 					<div class="choix">
 						<input type="radio" id="#VALEUR" name="type_modification" value="#VALEUR"[(#ENV{type_modification,#CONFIG{photospip/resultats_defaut,creer_version_image}}|=={#VALEUR}|oui)checked="checked"] />
-						<label for=#VALEUR">[(#VAL{photospip:label_modif_}|concat{#VALEUR}|_T)]</label>
+						<label for="#VALEUR">[(#VAL{photospip:label_modif_}|concat{#VALEUR}|_T)]</label>
 					</div>
 					</BOUCLE_resultats>
 				</li>
