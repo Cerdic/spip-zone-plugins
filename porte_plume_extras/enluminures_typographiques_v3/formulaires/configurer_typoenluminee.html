@@ -2,7 +2,7 @@
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	
-<form method="post" action="#ENV{action}"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+<form method="post" action="#ENV{action}"><div>[(#ENV{_cfg_}|form_hidden)]<input type="hidden" name="_meta_casier" value="bte" /></div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 
 <ul><li class="fieldset"><fieldset><legend><:enlumtypo:cfg_puces:></legend></li>
