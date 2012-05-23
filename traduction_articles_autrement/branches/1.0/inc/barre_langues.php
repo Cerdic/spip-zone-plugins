@@ -51,6 +51,7 @@ function inc_barre_langues_dist($id_article){
 	foreach($langues_dispos as $key => $value){
 		$class='';
 		$span='';	
+		$trad='';
 
 		// les boutons hors article présent
 		if($traductions[$value]!=$id_article){
@@ -68,12 +69,13 @@ function inc_barre_langues_dist($id_article){
 				// Si le plugin traduction rubriques est activé on regarde si on trouve la rubrique traduite
 				if ($trad_rub=test_plugin_actif('tradrub')) {
 					$id_rubrique_traduite=rubrique_traduction($value,$id_rubrique);
-					
-					if($id_rubrique_traduite)$onglets_traduction.= '<li class="non_traduit box_onglet"><a href="'.generer_url_ecrire($objet.'_edit','new=oui&lier_trad='.$id_trad.'&id_rubrique='.$id_rubrique_traduite.'&lang_dest='.$value).'" title="'._T('ecrire:info_tout_site2').'">'.traduire_nom_langue($value).'</a></li>';
+
+					if($id_rubrique_traduite){
+						$onglets_traduction.= '<li class="non_traduit box_onglet"><a href="'.generer_url_ecrire($objet.'_edit','new=oui&lier_trad='.$id_trad.'&id_rubrique='.$id_rubrique_traduite.'&lang_dest='.$value).'" title="'._T('ecrire:info_tout_site2').'">'.traduire_nom_langue($value).'</a></li>';
+						}
 					elseif(test_plugin_actif('trad_rub')){
-						$id_trad=sql_getfetsel('id_trad','spip_rubriques','id_rubrique='.$id_rubrique);
-						if($id_trad==0){
-							$id_trad=$id_rubrique;
+						$id_t=sql_getfetsel('id_trad','spip_rubriques','id_rubrique='.$id_rubrique);
+						if($id_t==0){
 							$trad_new='oui';
 							}
 						$donnes_trad=destination_traduction($value,$id_trad,$creer_racine='');
