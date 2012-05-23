@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rubrique_doit_maj'        			=> 'Une rubrique doit être mise a jour',
 	'rubrique_pas_maj'         			=> 'Attention, la rubrique “ @titre@ ” n\'a pas été mise à jour depuis @jours@ jours',
 	'rubriques_pas_a_jour'     			=> 'Rubriques n\'ayant pas été mises à jour à temps',
-	
+	'rubrique'							=> 'RUBRIQUE: ',	
 	//S
 	'secteur'							=> 'Secteur:',
 	
