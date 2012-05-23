@@ -17,7 +17,7 @@
 <select name="#ENV{nom}" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ size="(#ENV{size})"]>
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 #SET{arbo,#ARRAY{0,&nbsp;}}
-<BOUCLE_selection(ZCOLLECTIONS){par zcollection}{id_parent=0}>
+<BOUCLE_selection(ZCOLLECTIONS){par zcollection}{id_parent==0}>
 	<option value="#ZCOLLECTION"[(#ZCOLLECTION|=={#GET{valeur}}|oui)selected="selected"]>#ZCOLLECTION</option>
 	<BOUCLE_sous(ZCOLLECTIONS){par zcollection}{id_parent}>
 	<option value="#ZCOLLECTION"[(#ZCOLLECTION|=={#GET{valeur}}|oui)selected="selected"]>[(#GET{arbo}|table_valeur{#ID_PARENT})]&#x27a5; #ZCOLLECTION</option>

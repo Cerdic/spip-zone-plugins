@@ -275,7 +275,7 @@ function zotspip_maj_collections($forcer=false) {
 			
 			// Faire une vérification sur la date de maj (seulement si on ne force pas)
 			if (!$zotspip_maj_items['forcer']) {
-				if ($updated==sql_getfetsel('updated','spip_zcollections','id_zitem='.sql_quote($id_zitem))) {
+				if ($updated==sql_getfetsel('updated','spip_zcollections','id_zcollection='.sql_quote($id_zcollection))) {
 					return 1;
 				}
 			}
