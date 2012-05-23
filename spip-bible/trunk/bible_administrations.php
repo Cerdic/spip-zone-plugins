@@ -1,11 +1,19 @@
 <?php 
-function bible_install($action){
 
-	switch($action){
 
-		case 'install':
-			if (function_exists('ecrire_config')){
-				
+function bible_upgrade($nom_meta_base_version,$version_cible) {
+  $maj = array();
+  $maj['create'] = array(array('bible_conf'));	
+  include_spip('base/upgrade');
+  maj_plugin($nom_meta_base_version, $version_cible, $maj);
+}
+function bible_vider_tables($nom_meta_base_version) {
+	effacer_config('bible');
+	effacer_config('bible_pp');
+	effacer_meta($nom_meta_base_version);
+}
+function bible_conf(){
+	include_spip('inc/config');
 				ecrire_config('bible/numeros','oui');
 				ecrire_config('bible/retour','oui');
 				ecrire_config('bible/ref','oui');
@@ -24,35 +32,7 @@ function bible_install($action){
 				ecrire_config('bible/traduction_fi','pr92');
 				ecrire_config('bible/traduction_ru','вж');
 				ecrire_config('bible/traduction_bg','bb');
-				bible_initialise_pp();
-			
-				
-				}
-			return;
-			
-		case 'uninstall':
-			
-			if (function_exists('effacer_config')){
-				effacer_config('bible');
-				effacer_config('bible_pp');
-			}
-
-			break;
-		case 'test':
-			//	spip_log('on passe icicfg','bible');
-			if (function_exists('lire_config')){
-				
-				if (lire_config('bible')&lire_config('bible_pp')){
-					
-					return true;
-				}
-				else {
-					return false;
-				}
-			}
-			return true;
-	}
-		
+				bible_initialise_pp();		
 }
 function bible_initialise_pp(){
     $tableau = array_keys(bible_tableau('traduction'));
