@@ -1,5 +1,6 @@
-<form action="#SELF" method="post">
-[<div>(#ENV{_cfg_}|form_hidden)</div>]
+<form action="#SELF" method="post" class='formulaire_spip formulaire_configurer'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+
     
     <script type="text/javascript">
     // <![CDATA[
@@ -81,7 +82,7 @@
 			
     </ul>
 	</fieldset>
-	<p class="boutons"><input type="submit" name="_cfg_ok" value="<:bible:OK:>" />
-	<input type="submit" name="_cfg_delete" value="<:bible:supprimer:>" /></p>
-   
+    <p class="boutons">
+		<input type="submit" value="<:bouton_enregistrer:>" />
+	</p>
 </form>
