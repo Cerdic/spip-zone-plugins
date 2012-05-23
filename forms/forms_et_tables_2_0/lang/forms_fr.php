@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/_stable_/forms/forms_et_tables_1_9_1/lang/
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -183,7 +183,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rang' => 'Rang',
 	'remplir_un_champ' => 'Veuillez remplir au moins un champ.',
 	
-	'reponse' => 'Réponse @id_reponse@',
+	'reponse' => 'R&eacute;ponse @id_reponse@',
 	
 	'reponse_depuis' => 'Depuis la page ',
 	'reponse_enregistree' => 'Votre saisie a &eacute;t&eacute; enregistr&eacute;e.',
