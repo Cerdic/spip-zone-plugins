@@ -163,7 +163,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'adresse_complement' => 'Compl&eacute;ment d\'adresse',
 'nous_vous_suggerons' => 'Nous vous sugg&eacute;rons :',
 'etape' => 'Eactue;tape',
-'rubrique_produit' => 'Rubrique du produit'
+'rubrique_produit' => 'Rubrique du produit',
+'configurer_spipthelia' => 'Interface Th&eacute;lia'
 
 );
 ?>

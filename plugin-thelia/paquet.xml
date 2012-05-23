@@ -1,0 +1,25 @@
+<paquet
+	prefix="spip_thelia"
+	categorie="divers"
+	version="1.5"
+	etat="stable"
+	compatibilite="[1.9.0;]"
+	logo="img_pack/logo_thelia.png"
+	documentation="http://www.spip-contrib.net/Plugin-Thelia"
+>	
+
+	<nom>Interface Th&#233;lia</nom>
+
+	<auteur>Arnault Pachot</auteur>
+	<auteur>Gilles Vincent</auteur>
+	<auteur>Claude Chadoutaud</auteur>
+	<auteur>Aur&#233;lien Dumas</auteur>
+
+	<pipeline nom="affichage_final" action="appeler_moteur_thelia" inclure="spip_thelia_fonctions.php" />
+	<pipeline nom="header_prive" action="header_prive" inclure="spip_thelia_fonctions.php" />
+	<pipeline nom="insert_head" action="insert_head" inclure="spip_thelia_fonctions.php" />
+	<pipeline nom="affiche_milieu" action="affiche_milieu" inclure="spip_thelia_fonctions.php" />
+	<pipeline nom="post_typo" action="supprimer_balises_thelia" inclure="spip_thelia_fonctions.php" />
+	
+	<menu nom="Interface T&eacute;lia" titre="spipthelia:configurer_spipthelia" parent="bando_configuration" icone="img_pack/logo_thelia_petit.png" action="configurer_spip_thelia" />
+</paquet>

@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Interface Th&#233;lia</nom>
- 	<version>1.4.3</version>
+ 	<version>1.5</version>
 	<prefix>spip_thelia</prefix>
  	<auteur>Arnault Pachot, Gilles Vincent, Claude Chadoutaud, Aur&#233;lien Dumas</auteur>
 	<slogan>Interfacer SPIP avec le logiciel de vente en ligne Th&#233;lia</slogan>
@@ -8,22 +8,22 @@
 	<licence>GNU/GPL</licence>
 	<lien>http://www.spip-contrib.net/Plugin-Thelia</lien>
  	<etat>stable</etat>
- 	<options>spip_thelia_mes_options.php</options>
-	<fonctions>spip_thelia_fonct.php</fonctions>
+ 	<options>spip_thelia_options.php</options>
+	<fonctions>spip_thelia_fonctions.php</fonctions>
 	<pipeline>
   		<nom>affichage_final</nom>
   		<action>appeler_moteur_thelia</action>
-  		<inclure>spip_thelia_fonct.php</inclure>
+  		<inclure>spip_thelia_fonctions.php</inclure>
  	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>header_prive</action>
-		<inclure>spip_thelia_fonct.php</inclure>
+		<inclure>spip_thelia_fonctions.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>insert_head</nom>
 		<action>insert_head</action>
-		<inclure>spip_thelia_fonct.php</inclure>
+		<inclure>spip_thelia_fonctions.php</inclure>
 	</pipeline>
 	<onglet id="thelia" parent="configuration">
 		<icone>img_pack/logo_thelia_petit.png</icone>
@@ -38,18 +38,23 @@
 	<pipeline>
 		<nom>affiche_milieu</nom>
 		<action>affiche_milieu</action>
-		<inclure>spip_thelia_fonct.php</inclure>
+		<inclure>spip_thelia_fonctions.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>post_typo</nom>
   		<action>supprimer_balises_thelia</action>
-  		<inclure>spip_thelia_fonct.php</inclure>
+  		<inclure>spip_thelia_fonctions.php</inclure>
 	</pipeline>
 
 	<install>base/spip_thelia_upgrade.php</install>
 	<icon>img_pack/logo_thelia.png</icon>
- 	<necessite id="CFG" version="[1.0;]" />
-	<necessite id='SPIP' version='[1.9.0;2.1.99]' />
+ 	<utilise id="CFG" version="[1.0;]" />
+	<necessite id='SPIP' version='[1.9.0;]' />
 	<utilise id='Z' version='[1.7.0;]' />
 	<categorie>divers</categorie>
+	<bouton id='config_spip_thelia' parent="bando_configuration">
+		<icone>images/logo_thelia_petit.png</icone>
+		<titre>spipthelia:configuration_spip_thelia</titre>		
+		<url>spip_thelia</url>
+	</bouton>
 </plugin>
