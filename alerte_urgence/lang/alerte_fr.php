@@ -1,10 +1,10 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/_stable_/cfg/lang/
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/alerte_urgence/lang/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	'message_urgent'=>'Alerte&nbsp;: correction d\'une importante faille de s&eacute;curit&eacute;. Vous &ecirc;tes invit&eacute;s &agrave; mettre &agrave; jour votre SPIP dans la [version 2.1.8->http://www.spip-contrib.net/SPIP-2-1-8-corrige-une-importante-faille-de-securite]'
+	'message_urgent'=>'Modifiez ce message directement dans le fichier alerte_urgence/lang/alerte_fr.php'
 );
 
 ?>
