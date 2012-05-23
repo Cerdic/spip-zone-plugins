@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_traduction_ru' =>	'Traduction russe par d&eacute;faut',
 	'cfg_traduction_sv' =>	'Traduction su&eacute;doise par d&eacute;faut',
 	'cfg_traduction_bg' =>  'Traduction bulgare par d&eacute;faut',
-	'cfg_configurer'	=>	'Configurer le plugin Spip-Bible',
+	'cfg_configurer'	=>	'Configurer Spip-Bible',
 	'cfg_explication'	=>	"Vous pouvez régler la mani&egrave;re dont apparaitra les citation du texte, en l'absence d'argument pass&eacute; au mod&egrave;le",
 	'cfg_numeros'		=>	"Afficher les n° de chapitres et de versets dans le corps du texte",
 	'pas_livre'			=>"L'abr&eacute;viation du livre demandé n'existe pas dans cette traduction",
@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"cfg_pp_version_par_lang" => "@lang@ : traductions propos&eacute;es",
 	'cfg_pp_pas_bonux'        => 'Cette configuration nécéssite le plugin "SPIP-BONUX"',
 	'cfg_pp_descriptif'       => 'Cette page vous permet de configurer le presse-papier de Spip-Bible. Voici comment il s\'affiche avec le configuration actuelle.',
-	'cfg_pp'                  => 'Presse-papier de Spip-Bible'
+	'cfg_pp'                  => 'Configurer le presse-papier de Spip-Bible'
 );
 
 
