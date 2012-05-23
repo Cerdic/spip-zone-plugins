@@ -1,6 +1,16 @@
 <?php
 
 include_spip("inc/charsets");
+include_spip('plugins/installer'); // spip_version_compare dans SPIP 3.x
+include_spip('inc/plugin'); // spip_version_compare dans SPIP 2.x
+if (spip_version_compare($GLOBALS['spip_version_branche'], '3.0.0alpha', '>=')) {
+                define('_SPIP3', true);
+} else {
+                define('_SPIP3', false);
+}
+
+
+
 function spip_thelia_supprimer_balises_thelia($texte) {
 	//suppression des boucles th�lia
 	$texte = str_replace("THELIA_", "DUMMY_", $texte);
@@ -33,11 +43,11 @@ function spip_thelia_header_prive($flux) {
 	$id_article= $_REQUEST['id_article'];
 	$id_rubrique= $_REQUEST['id_rubrique'];
 	if (function_exists('lire_config')) {
-		if ($exec=='articles'){
+		if (($exec=='articles')||($exec=='article')){
 			if((lire_config("spip_thelia/produits_articles_spip_thelia", "non") == "oui")||(lire_config("spip_thelia/rubriques_articles_spip_thelia", "non") == "oui"))
 				spip_thelia_demarrer_session_thelia();
 		}
-		else if (($exec=='naviguer')&&($id_rubrique)){
+		else if ((($exec=='naviguer')||($exec='rubrique'))&&($id_rubrique)){
 			if((lire_config("spip_thelia/produits_rubriques_spip_thelia", "non") == "oui")||(lire_config("spip_thelia/rubriques_rubriques_spip_thelia", "non") == "oui"))
 				spip_thelia_demarrer_session_thelia();
 		}
@@ -222,15 +232,15 @@ function spip_thelia_affiche_milieu($flux) {
 	$id_article= $_REQUEST['id_article'];
 	$id_rubrique= $_REQUEST['id_rubrique'];
 	if (function_exists('lire_config')) {
-		if ($exec=='articles'){
+		if (($exec=='article')||($exec=='articles')){
 			if((lire_config("spip_thelia/produits_articles_spip_thelia", "non") == "oui")||(lire_config("spip_thelia/rubriques_articles_spip_thelia", "non") == "oui"))
 				$flux['data'] .= spip_thelia_formulaire_article($id_article, spip_thelia_article_editable($id_article),'articles');
 		}
-		else if (($exec=='naviguer')&&($id_rubrique)){
+		else if ((($exec=='naviguer')||($exec=='rubrique'))&&($id_rubrique)){
 			if((lire_config("spip_thelia/produits_rubriques_spip_thelia", "non") == "oui")||(lire_config("spip_thelia/rubriques_rubriques_spip_thelia", "non") == "oui"))
 				$flux['data'] .= spip_thelia_formulaire_rubrique($id_rubrique, spip_thelia_rubrique_editable($id_rubrique),'rubriques');
 		}
-	}
+	}  
 	return $flux;
 }
 
@@ -292,7 +302,11 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script) {
 
 	
 	
-	$link = generer_action_auteur('produits_article',"$id_article",generer_url_ecrire('articles','id_article='.$id_article));
+	if (_SPIP3)
+		$link = generer_action_auteur('produits_article',"$id_article",generer_url_ecrire('article','id_article='.$id_article));
+	else 
+		$link = generer_action_auteur('produits_article',"$id_article",generer_url_ecrire('articles','id_article='.$id_article));
+	
 	$out .= "<form method='POST' action='$link'>\n";
 	$out .= form_hidden($link);
 	
@@ -379,7 +393,11 @@ function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script) 
 
 	
 	
-	$link = generer_action_auteur('produits_rubrique',"$id_rubrique",generer_url_ecrire('naviguer&id_rubrique='.$id_rubrique,"",false,true));
+	if (_SPIP3)
+		$link = generer_action_auteur('produits_rubrique',"$id_rubrique",generer_url_ecrire('rubrique&id_rubrique='.$id_rubrique,"",false,true));
+	else
+		$link = generer_action_auteur('produits_rubrique',"$id_rubrique",generer_url_ecrire('naviguer&id_rubrique='.$id_rubrique,"",false,true));
+		
 	$out .= "<form method='POST' action='$link'>\n";
 	$out .= form_hidden($link);
 	
