@@ -161,12 +161,15 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	if(!strlen($sommaire) || $nbh3<_sommaire_NB_TITRES_MINI)
 		return $sommaire_seul?'':sommaire_nettoyer_raccourcis($texte0);
 
+	// contexte du sommaire : on passe aussi les id_objet disponibles
+	$temp = array(
+		'sommaire' => $sommaire,
+		'fond_css' => strpos($texte0, _sommaire_SANS_FOND)===false ?'avec':'sans',
+	);
+	foreach($GLOBALS['contexte'] as $i=>$v) if(strncmp($i,'id_',3)==0) $temp[$i] = $v;
 	// calcul du sommaire
 	include_spip('public/assembler');
-	$sommaire = recuperer_fond('fonds/sommaire', array(
-		'sommaire'=>$sommaire,
-		'fond_css'=>strpos($texte0, _sommaire_SANS_FOND)===false ?'avec':'sans',
-	));
+	$sommaire = recuperer_fond('fonds/sommaire', $temp);
 
 	// si on ne veut que le sommaire, on renvoie le sommaire
 	// sinon, on n'insere ce sommaire en tete de texte que si la balise #CS_SOMMAIRE n'est pas activee
