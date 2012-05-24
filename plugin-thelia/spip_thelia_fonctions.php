@@ -70,6 +70,7 @@ function spip_thelia_insert_head($flux) {
 	return $flux;
 }
 
+
 function spip_thelia_appeler_moteur_thelia($texte) {
 	
 	include_spip("inc/utils");

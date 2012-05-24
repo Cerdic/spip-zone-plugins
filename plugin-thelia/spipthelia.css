@@ -47,3 +47,4 @@ a.lien-retour-thelia { color: #666; text-decoration: underline; font-size: .9em;
 #infos_etapes li.erreur .fond { background-color: #ff6868; background-image: url(../../../prive/images/degrade-etapes-rouge-left.gif); }
 #infos_etapes li.prochains { background-image: url(../../../prive/images/degrade-etapes-clair-left.gif); }
 #infos_etapes li.prochains .fond { background-color: #dbdbdb;background-image: url(../../../prive/images/degrade-etapes-clair-left.gif); }
+

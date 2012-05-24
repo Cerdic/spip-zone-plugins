@@ -21,5 +21,6 @@
 	<pipeline nom="affiche_milieu" action="affiche_milieu" inclure="spip_thelia_fonctions.php" />
 	<pipeline nom="post_typo" action="supprimer_balises_thelia" inclure="spip_thelia_fonctions.php" />
 	
-	<menu nom="Interface T&eacute;lia" titre="spipthelia:configurer_spipthelia" parent="bando_configuration" icone="img_pack/logo_thelia_petit.png" action="configurer_spip_thelia" />
+	<menu nom="configurer_spipthelia" titre="spipthelia:configurer_spipthelia" parent="menu_configuration" icone="images/logo_thelia_16.png"/>
+	<menu nom="Interface T&eacute;lia" titre="spipthelia:configurer_spipthelia" parent="menu_edition" icone="images/logo_thelia_16.png" action="spip_thelia_catalogue" />
 </paquet>

@@ -1,0 +1,28 @@
+
+
+#SET{thelia_url,'../'.#EVAL{_RACINE_THELIA}#CONFIG{spip_thelia/repadmin_spip_thelia,admin}}
+
+
+[(#GET{thelia_url}|find_in_path|oui)
+<div style="margin-left:-230px;width: 1010px;overflow:auto">
+	      
+	      <script type='text/javascript' src="[(#VAL{javascript/jquery.dimensions.min.js}|find_in_path)]"></script>
+		      <iframe src='#GET{thelia_url}' style='width:100%;height:600px;' frameborder='0' scrolling='auto' id='iFrameToAdjust' ></iframe>
+		      <script type='text/javascript' >
+			      function autoHeight() {
+				      var theFrame = jQuery('#iFrameToAdjust', parent.document.body);
+				      var H = jQuery('html').innerHeight() - jQuery('#conteur').innerHeight() - jQuery('#pied').innerHeight();
+				      if (H>20) {
+					      theFrame.height(H - 20);  // .table_page possede un margin-top de 13px ; les 7px sont pour IE (3px sontnecessaires pour Firefox)
+				      }
+			      }
+			      jQuery(window)
+				      .resize(autoHeight)
+				      .load(autoHeight);
+		      </script>
+
+]	      
+
+[(#GET{thelia_url}|find_in_path|non)
+	   Le dossier d'admin de Th&eacute;lia n'a pas &eacute;t&eacute; trouv&eacute;. V&eacute;rifiez que le chemin est correct dans le <a href='?exec=configurer_spipthelia'>formulaire CFG de param&eacute;trage du plugin</a>.");
+	]
