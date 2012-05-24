@@ -245,12 +245,16 @@
     <choose>
       <if type="chapter paper-conference" match="any">
         <choose>
-          <if variable="page">
-            <group prefix=", ">
-              <text variable="volume" suffix=": "/>
-              <text term="page" form="short" suffix=" "/>
-              <text variable="page"/>
-            </group>
+          <if variable="container-title">
+            <choose>
+              <if variable="page">
+                <group prefix=", ">
+                  <text variable="volume" suffix=": "/>
+                  <text term="page" form="short" suffix=" "/>
+                  <text variable="page"/>
+                </group>
+              </if>
+            </choose>
           </if>
         </choose>
       </if>
@@ -272,10 +276,22 @@
       </if>
       <else-if type="article-journal article-magazine" match="any">
         <choose>
-          <if variable="page">
-            <text term="page" form="short" prefix=", " suffix=" " />
-            <text variable="page"/>
+          <if variable="author">
+            <choose>
+              <if variable="page">
+                <text term="page" form="short" prefix=", " suffix=" " />
+                <text variable="page"/>
+              </if>
+            </choose>
           </if>
+          <else>
+            <choose>
+              <if variable="page">
+                <text variable="page" prefix=", " suffix=" " />
+                <text term="page" form="short" />
+              </if>
+            </choose>
+          </else>
         </choose>
       </else-if>
     </choose>
@@ -363,8 +379,12 @@
       <if type="paper-conference">
         <choose>
           <if variable="container-title">
-            <text term="presented at" prefix=" (" suffix=" "/>
-            <text variable="event" text-case="capitalize-first" font-style="italic" suffix=")"/>
+            <choose>
+              <if variable="event">
+                <text term="presented at" prefix=" (" suffix=" "/>
+                <text variable="event" text-case="capitalize-first" font-style="italic" suffix=")"/>
+              </if>
+            </choose>
           </if>
           <else>
             <text variable="publisher" prefix=" (" suffix=")"/>
@@ -495,11 +515,11 @@
       <text macro="edition" prefix=", "/>
       <text variable="version" prefix=", version "/>
       <text macro="locators"/>
-      <text macro="collection-title" prefix=", "/>
       <text macro="issue"/>
       <text macro="locators-article"/>
       <text macro="locators-chapter"/>
       <text macro="nb-pages" prefix=", "/>
+      <text macro="collection-title" prefix=". (" suffix=")" />
       <text macro="access" prefix=". "/>
     </layout>
   </bibliography>
