@@ -166,6 +166,8 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 		'sommaire' => $sommaire,
 		'fond_css' => strpos($texte0, _sommaire_SANS_FOND)===false ?'avec':'sans',
 	);
+	if(!defined('_SPIP30000') && test_espace_prive() && !empty($_GET)) // SPIP < 3.0 : partie privee non squelettisee
+		foreach($_GET as $i=>$v) if(strncmp($i,'id_',3)==0) $temp[$i] = $v;
 	if(is_array($GLOBALS['contexte'])) foreach($GLOBALS['contexte'] as $i=>$v) if(strncmp($i,'id_',3)==0) $temp[$i] = $v;
 	// calcul du sommaire
 	include_spip('public/assembler');
