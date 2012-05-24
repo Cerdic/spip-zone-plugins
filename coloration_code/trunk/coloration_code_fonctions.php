@@ -128,7 +128,7 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 	  $geshi->set_header_type(GESHI_HEADER_DIV);
 	  $geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
 	} else {
-	  $spip_cadre = ' ';
+	  $spip_cadre = '';
 	  $geshi->set_header_type(GESHI_HEADER_NONE);
 	  $geshi->enable_line_numbers(GESHI_NO_LINE_NUMBERS);
 	}
