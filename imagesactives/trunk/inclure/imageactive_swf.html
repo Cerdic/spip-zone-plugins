@@ -17,17 +17,23 @@ div.insertion_swf {
 .preload_images_actives {
     z-index: 99;
     position:absolute;
-    left:1em;
-    top:1em;
+    left:50%;
+    top:50%;
+    width:260px;
+    height:154px;
+    margin-left:-130px;
+    margin-top:-77px;
 }
+
+
 </style>
 <script type="text/javascript" src="#CHEMIN{swfobject.js}"></script>
 <script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/ 
-/*
+
 function stopPreload() {
     jQuery(".preload_images_actives").css({'display':'none'}); 
 }
-*/
+
 function insererSwf#ID_DOCUMENT(nom) {
     var swfVersionStr = "10.0.0";
     var xiSwfUrlStr = "playerProductInstall.swf";
@@ -50,7 +56,7 @@ jQuery(document).ready(function(){
 /*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/
 </script>
 <div id="insertion_swf#ID_DOCUMENT" class="insertion_swf spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})]" >
-    <!--<div class="preload_images_actives" id="preload#ID_DOCUMENT"><img src="#CHEMIN{img/chargement_images_actives.gif}" alt="<:imagesactives:chargement:>"/></div>-->
+    <div class="preload_images_actives" id="preload#ID_DOCUMENT"><img src="#CHEMIN{img/chargement_images_actives.gif}" alt="<:imagesactives:chargement:>"/></div>
     <div id="insertion_swfobject#ID_DOCUMENT" class="insertion_swfobject"> </div>[
     <div class='#EDIT{titre}'><strong>(#TITRE)</strong></div>][
     <div class='#EDIT{descriptif} spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)</div>]
