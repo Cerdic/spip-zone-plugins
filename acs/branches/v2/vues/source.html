@@ -1,0 +1,23 @@
+#CACHE{0}
+[(#REM)
+#              ACS
+#          (Plugin Spip)
+#     http://acs.geomaticien.org
+#
+# Copyright Daniel FAIVRE, 2007-2009
+# Copyleft: licence GPL - Cf. LICENCES.txt
+#
+# Vue source
+]<?php 
+// Attention aux effets de bords sur les noms de variables !
+$v__page = str_replace('_slash_', '/', str_replace('_tiret_', '-', '#ENV*{champ}'));
+$v__file = find_in_path($v__page.'.html');
+
+// On regarde si le fichier est accessible en ecriture:
+if (!is_writable($v__file))
+	echo '<h3 class="alert">'._T('dirs_probleme_droits').' : '._T('avis_operation_echec').'</h3><hr />';
+
+// Affichage d'une vue du code source
+$v__source = file_get_contents($v__file);
+echo entites_html($v__source);
+?>

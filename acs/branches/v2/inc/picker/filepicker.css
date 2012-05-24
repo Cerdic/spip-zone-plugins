@@ -1,0 +1,38 @@
+a:hover {
+  cursor: pointer;
+}
+
+.cadre {
+  margin: 2px;
+  border: 1px solid #afafaf;
+  border-collapse: collapse;
+  background: #ffffff;
+  float: #LANG_LEFT;
+  font-size: 0.79em;
+}
+
+.cadre .boutonImg {
+  border:thin outset #afafaf;
+  max-width: 100px;
+  max-height: 75px;
+  min-width: 8px;
+  min-height: 8px;
+  margin: 2px;
+}
+
+.cadre .boutonImg:hover {
+  border:thin inset #afafaf;
+  cursor: pointer;
+}
+
+.selection {
+  max-width: 100px;
+  max-height: 75px;
+}
+.selection:hover {
+  width: auto;
+  height: auto;
+}
+.alert {
+  color: darkred;
+}

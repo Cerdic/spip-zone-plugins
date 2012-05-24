@@ -1,0 +1,90 @@
+#CACHE{86400}
+
+<form action="[(#ENV{url})]" method="post" name="formulaire_article" enctype="multipart/form-data">
+
+	<input type="hidden" name="article" value="[(#ENV**{article})]"  size="50">
+	<input type="hidden" name="url_site" value="[(#URL_SITE_SPIP)]"  size="50">
+
+	[(#ENV*{formulaire_previsu})]
+
+	[<div id="erreur"><p>(#ENV*{mess_error})</p></div>]
+
+	<div class="block">
+
+
+	<br />
+
+	<table>
+	<tr><td valign="top" width="200">
+
+		<div class="block-titre">&nbsp;<b><:opconfig:redigez_article:></b></div>
+		<div class="block-contenu">
+
+		<p><label><b><small><:opconfig:publie_titre:>&nbsp;[<:opconfig:obligatoire:>]</small></b></label></p>
+		<p><input type="text" name="titre" value="[(#ENV**{titre})]"  size="60" maxlength="80"></p>
+
+
+		<p><label><b><small><:opconfig:publie_texte:></b></small></label></p>
+		<p><div id="op-textearea">[(#ENV**{texte}|barre_article{30,62})]</div></p>
+
+		<p>[(#ENV*{formulaire_motclefs})]</p>
+
+
+		</div>
+
+	</td>
+	<td valign="top" width="100%">
+
+		<div class="block-contenu">
+
+		<p>[(#ENV*{formulaire_agenda})]</p>
+    <p>[(#ENV*{formulaire_tagopen})]</p>
+
+		<p>
+				<div style="background-color: #eee; text-style: justify; padding:5px; margin: 5px; margin-right:5px">
+				<b><:opconfig:identification:>&nbsp;[<:opconfig:optionel:>]</b>
+
+				<p><:opconfig:identif_explique:></p>
+
+
+				<table cellspacing="0" cellpadding="0" border="0">
+				<tr><td><:opconfig:votre_nom:>&nbsp;:&nbsp;</td><td>
+				<input class="nom_inscription" type="text" name="nom_inscription" value="[(#ENV*{nom_inscription})]" size="25"></td></tr>
+				<tr><td><:opconfig:votre_mail:>&nbsp;:&nbsp;</td><td>
+				<input class="mail_inscription" type="text" name="mail_inscription" value="[(#ENV*{mail_inscription})]" size="25"></td></tr>
+				<tr><td><:opconfig:votre_groupe:>&nbsp;:&nbsp;</td><td>
+				<input class="group_name" type="text" name="group_name" value="[(#ENV*{group_name})]" size="25"></td></tr>
+				<tr><td><:opconfig:votre_phone:>&nbsp;:&nbsp;</td><td>
+				<input class="phone" type="text" name="phone" value="[(#ENV*{phone})]" size="25"></td></tr>
+				</table>
+			</div>
+		</p>
+    <p>[(#ENV*{formulaire_documents})]</p>
+
+		</div>
+	</td>
+
+	</tr>
+	</table>
+	<br />
+
+	<div class="block-pied">
+		&nbsp;&nbsp;<label><b><:opconfig:publie_rubrique:></b></label>
+		<select name="rubrique" value="[(#ENV**{rubrique})]">
+			<BOUCLE_rubrique_op(op_rubriques)>
+			<BOUCLE_rubrique(RUBRIQUES){id_rubrique = #OP_RUBRIQUE}{tout}>
+				[(#ENV**{rubrique}|selected_option{#ID_RUBRIQUE,#TITRE})]
+			</BOUCLE_rubrique>
+			</BOUCLE_rubrique_op>
+		</select>
+		<input type="submit" name="previsualiser" class="spip_bouton" value="<:opconfig:previsualiser:>" />
+		<input type='submit' name='valider' class='spip_bouton' value="#ENV*{bouton}" />
+		<input type="submit" name="abandonner" class="spip_bouton" value="<:opconfig:abandonner:>" />
+	</div>
+	</div>
+
+
+	</center>
+	</div>
+
+</form>

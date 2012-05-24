@@ -1,0 +1,45 @@
+[(#CACHE{0})]
+.cBandeau fieldset.a_la_une {
+  position: relative;
+  font-weight: bold;
+  font-style: italic;
+  [font-size: (#VAR{acsBandeauFontSize,1em});
+  ]margin: 0;
+  [margin-#LANG_LEFT: (#VAR{acsBandeauLeft});
+  ][margin-#LANG_RIGHT: (#VAR{acsBandeauRight});
+  ]padding: 0;
+  padding-left: 0.79em;
+  padding-right: 0.79em;
+  padding-bottom: 0.2em;
+  padding-top: 0.2em;
+  border: 0;
+  [color: (#VAR{acsBandeauTextColor,#VAR{acsFondText}});]
+  [background: (#VAR{acsBandeauFond});]
+  [border-top: #VAR{acsBandeauBord/Width,thin}[ (#VAR{acsBandeauBord/Style,groove}) ](#VAR{acsBandeauBord/Color});]
+  [border-bottom: #VAR{acsBandeauBord/Width,thin}[ (#VAR{acsBandeauBord/Style,groove}) ](#VAR{acsBandeauBordBas});]
+  [text-align: (#VAR{acsBandeauAlignement,center});]
+}
+
+.cBandeau fieldset.a_la_une legend {
+  position: relative;
+  [border: #VAR{acsBandeauBord/Width,thin}[ (#VAR{acsBandeauBord/Style,groove}) ](#VAR{acsBandeauBord/Color});
+  border-bottom: 0;
+  ][background: (#VAR{acsBandeauFond});]
+  font-weight: normal;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-style: italic;
+  line-height: 1.2em;
+  -moz-border-radius: 0.8em;
+  -moz-border-radius-bottomleft: 0;
+  -moz-border-radius-bottomright: 0;
+  margin-top: -1.2em;
+}
+
+.cBandeau div.a_la_une {
+  font-weight: normal;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-style: normal;
+  [text-align: (#VAR{acsBandeauAlignement,center});]
+}

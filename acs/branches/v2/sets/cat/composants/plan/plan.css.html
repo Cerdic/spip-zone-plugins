@@ -1,0 +1,84 @@
+[(#CACHE{0})][(#REM)
+
+Habillage specifique du plan du site
+
+].plan-secteur {position: relative; display: block; z-index: 1;} /* IE */
+
+.cPlan h1 {
+  border: 0;
+  margin: 0;
+  font-weight: bold;
+  text-align: center;
+  margin-right:1px;
+}
+* html .plan-rubrique { /* IE */
+  width: 100%;
+  position: relative;
+  display: block;
+  z-index: 2;
+}
+
+.cPlan .menu-item {
+  margin-left: 1.5em;
+  list-style: url(#ACS_CHEMIN{puces/#VAR{acsPlanPuce,puce_8x8.gif}});
+}
+
+.cPlan, .plan-rubrique {
+  font-weight: bold;
+  border: [(#VAR{acsPlanBord/Width,1px})][ (#VAR{acsPlanBord/Style,solid})][ (#VAR{acsPlanBord/Color})];
+  [padding: (#VAR{acsPlanMarge,5px});]
+  margin:0;
+  [margin-top: (#VAR{acsPlanMarge,5px});]
+  [margin-bottom: (#VAR{acsPlanMarge,5px});]
+  [margin-right: (#VAR{acsPlanMarge,5px});]
+  min-height: #VAR{acsPlanLogoMax,50}px;[
+  (#MODELE{c_css_border-radius}{c=Plan}{var=BordRond})][
+  (#MODELE{c_css_shadow}{c=Plan})]
+}
+
+.plan-rubrique .spip_logos {
+  float: #LANG_LEFT;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+div.plan-articles {
+  font-weight: normal;
+  padding-left: 4px;
+  padding-right: 4px;
+  text-align: justify;
+}
+
+span.plan-article {
+  margin-right: 1em;
+}
+
+[(#REM) Eclaircissement ou assombrissement progressif des rubriques en fonction de la profondeur ]
+
+.cPlan {
+  background: [(#VAR{acsPlanFond1, #fefffe})];
+}
+
+ul .plan-rubrique {
+  background: [(#VAR{acsPlanFond2, #fafffa})];
+  margin-left: 2%;
+}
+
+ul ul .plan-rubrique {
+  background: [(#VAR{acsPlanFond3, #f5fff5})];
+  margin-left: 3%;
+}
+ul ul ul .plan-rubrique {
+  background: [(#VAR{acsPlanFond4, #efffef})];
+  margin-left: 4%;
+}
+ul ul ul ul .plan-rubrique {
+  background: [(#VAR{acsPlanFond5, #dfffdf})];
+  margin-left: 5%;
+}
+ul ul ul ul ul .plan-rubrique {
+  background: [(#VAR{acsPlanFond6, #d0ffd0})];
+  margin-left: 6%;
+}
