@@ -1402,7 +1402,7 @@ add_variables( array(
 ));
 add_outil( array(
 	'id' => 'alerte_urgence',
-	'categorie' => 'securite',
+	'categorie' => 'public',
 	'auteur' => 'Cerdic',
 	'code:options' => '%%alerte_message%%',
 	'pipelinecode:affichage_final' => 'if($GLOBALS[\'html\'] AND ($p=strpos($flux,\'</body>\'))!==false) {
