@@ -28,6 +28,14 @@
     <valeur>vertical</valeur>
   </variable>
   <variable>
+    <nom>Width</nom>
+    <type>text</type>
+  </variable>
+  <variable>
+    <nom>Height</nom>
+    <type>text</type>
+  </variable>
+  <variable>
     <nom>Left</nom>
     <type>text</type>
   </variable>
@@ -41,6 +49,22 @@
   </variable>
   <variable>
     <nom>Bottom</nom>
+    <type>text</type>
+  </variable>
+  <variable>
+    <nom>PaddingLeft</nom>
+    <type>text</type>
+  </variable>
+  <variable>
+    <nom>PaddingRight</nom>
+    <type>text</type>
+  </variable>
+  <variable>
+    <nom>PaddingTop</nom>
+    <type>text</type>
+  </variable>
+  <variable>
+    <nom>PaddingBottom</nom>
     <type>text</type>
   </variable>
   <variable>

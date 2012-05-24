@@ -4,7 +4,7 @@ Contenu de Mediabox.
 Appellé en Ajax à travers c.html qui définit la durée de cache.
 
 Selon leur type, les documents sont affichés soit avec le modèle EMB de SPIP,
-soit avec le lecteur vidéo du composant Audio, soit avec un viewer externe (par exemple Google Docs).
+soit avec le lecteur du composant Audio ou Video, soit avec un viewer externe (par exemple Google Docs).
 
 ]#SET{isdoc,(#VAR{#EVAL{'acsDiapo'.'#NIC'.'ExtViewer'},pdf|odt|ods|doc|docx|xls|xlsx|ppt|pptx|wmf|pages|ai|psd|dxf|svg|eps|ps|ttf|xps})}
 #SET{is2embed,(#VAR{#EVAL{'acsDiapo'.'#NIC'.'ExtEmbed'},gif|jpg|tif|png|swf})}

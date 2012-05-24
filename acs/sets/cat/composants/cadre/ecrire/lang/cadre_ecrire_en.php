@@ -11,5 +11,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'orientation' => 'Orientation',
 'vertical' => 'vertical',
 'horizontal' => 'horizontal',
+'style' => 'Css style',
+'PaddingLeft' => 'left',
+'PaddingRight' => 'right',
+'PaddingTop' => 'top',
+'PaddingBottom' => 'bottom',
+'WidthHelp' => 'Keep empty to get 100%'
 );
 ?>

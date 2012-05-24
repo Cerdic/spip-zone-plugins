@@ -1,10 +1,20 @@
 [(#CACHE{0})]
-.cCadre#NIC {[
+.composant-cadre-[(#NIC|sinon{0})] {
+  text-align: center;
+}
+.cCadre#NIC {
+  text-align: #LANG_LEFT;[
+  width: (#VAR{#EVAL{'acsCadre'.'#NIC'.'Width'}});][
   margin-top: (#VAR{#EVAL{'acsCadre'.'#NIC'.'Top'}});][
   margin-bottom: (#VAR{#EVAL{'acsCadre'.'#NIC'.'Bottom'}});][
   margin-left: (#VAR{#EVAL{'acsCadre'.'#NIC'.'Left'}});][
   margin-right: (#VAR{#EVAL{'acsCadre'.'#NIC'.'Right'}});][
+  padding-top: (#VAR{#EVAL{'acsCadre'.'#NIC'.'PaddingTop'}});][
+  padding-bottom: (#VAR{#EVAL{'acsCadre'.'#NIC'.'PaddingBottom'}});][
+  padding-left: (#VAR{#EVAL{'acsCadre'.'#NIC'.'PaddingLeft'}});][
+  padding-right: (#VAR{#EVAL{'acsCadre'.'#NIC'.'PaddingRight'}});][
   background: (#VAR{#EVAL{'acsCadre'.'#NIC'.'Fond'}});][
+  background-image: url("(#ACS_CHEMIN{trame/#VAR{#EVAL{'acsCadre'.'#NIC'.'FondImage'}}})");][
   border: #VAR{#EVAL{'acsCadre'.'#NIC'.'Bord/Width'},thin}[ (#VAR{#EVAL{'acsCadre'.'#NIC'.'Bord/Style'},solid}) ](#VAR{#EVAL{'acsCadre'.'#NIC'.'Bord/Color'}});][
   color: (#VAR{#EVAL{'acsCadre'.'#NIC'.'Text'}});][
   (#MODELE{c_css_border-radius}{c=Cadre}{nic=#NIC}{var=BordRond})][

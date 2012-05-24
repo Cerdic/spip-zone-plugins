@@ -83,4 +83,8 @@
     <type>text</type>
     <valeur>3</valeur>
   </variable>
+  <variable>
+    <nom>NbLettres</nom>
+    <type>text</type>
+  </variable>
 </composant>

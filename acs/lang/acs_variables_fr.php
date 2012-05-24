@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'align' => 'Alignement',
   'valign' => 'Alignement vertical',
   'margin' => 'Marge',
+  'padding' => 'Marge int&eacute;rieure',
   'left' => 'gauche',
   'center' => 'centr&eacute;',
   'right' => 'droit',

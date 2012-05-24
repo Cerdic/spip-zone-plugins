@@ -11,6 +11,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'Orientation' => 'Orientation',
 'OrientationVertical' => 'verticale',
 'OrientationHorizontal' => 'horizontale',
-'style' => 'Style CSS'
+'style' => 'Style CSS',
+'PaddingLeft' => 'gauche',
+'PaddingRight' => 'droit',
+'PaddingTop' => 'haut',
+'PaddingBottom' => 'bas',
+'WidthHelp' => 'Laisser vide pour une largeur de 100%'
 );
 ?>

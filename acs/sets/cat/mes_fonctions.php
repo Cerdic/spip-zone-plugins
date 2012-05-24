@@ -21,6 +21,8 @@ function sans_guillemets($texte) {
 }
 
 function coupe($texte, $taille=50, $suite) {
+	if ($taille == 0)
+		return $texte;
 	$texte = textebrut($texte); // filtre spip qui supprime les tags HTML
 	$texte = couper($texte, $taille);
 	$texte = PtoBR(propre($texte));
