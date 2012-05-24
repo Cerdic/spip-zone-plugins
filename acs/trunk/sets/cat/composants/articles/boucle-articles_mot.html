@@ -1,0 +1,26 @@
+[(#CACHE{0})][(#REM)
+
+Affichage d'un mot-clé et de la liste des articles 
+ayant le mot-clef id_mot, pour la langue en cours
+
+Paramètres:
+id_mot
+
+Si le texte du mot-clé COMMENCE par le modèle composant, alors les articles et
+rubriques associés au mot-clé NE sont PAS affichés.
+ 
+]<B_mot>
+<BOUCLE_mot(MOTS){id_mot}>
+  <div class="cArticle">
+    <div class="entete">
+      [(#LOGO_MOT|right|image_reduire{200,200})]
+      [<h1 class="titre tsize #EDIT{titre}">(#TITRE)</h1>]
+    </div>
+    <div class="article">
+      [<div class="texte #EDIT{texte}">(#TEXTE)</div>]
+      [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+    </div>
+  </div>
+  [(#TEXTE*|match{^<composant.*>}|?{""," "})<INCLURE{fond=composants/articles/inc-bam}{ajax}{env}{id_mot}>]
+</BOUCLE_mot>
+</B_mot>
