@@ -1392,6 +1392,25 @@ if(window.jQuery) jQuery(document).ready(disable_spip_ecran);
 //--></script>\'; }',
 ));
 
+add_variables( array(
+	'nom' => 'alerte_message',
+	'format' => _format_CHAINE,
+	'lignes' => 6,
+	'defaut' => '',
+	'label' => _T('info_texte_message'),
+	'code' => "define('_alerte_MESSAGE', %s);"
+));
+add_outil( array(
+	'id' => 'alerte_urgence',
+	'categorie' => 'securite',
+	'auteur' => 'Cerdic',
+	'code:options' => '%%alerte_message%%',
+	'pipelinecode:affichage_final' => 'if($GLOBALS[\'html\'] AND ($p=strpos($flux,\'</body>\'))!==false) {
+		include_spip(\'public/assembler\');
+		$flux = substr_replace($flux, recuperer_fond(\'fonds/alerte_urgence\'), $p, 0);
+}',
+));
+
 // Recuperer tous les outils (et leurs variables) de la forme outils/toto_config.xml
 foreach (find_all_in_path('outils/', '\w+_config\.xml$') as $f) {
 	add_outils_xml($f);
