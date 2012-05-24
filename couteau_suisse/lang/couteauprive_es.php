@@ -45,6 +45,9 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 
 Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.', # NEW
 	'aff_tout:nom' => 'Affiche tout', # NEW
+	'alerte_urgence:description' => 'Affiche en tête de toutes les pages publiques un bandeau d\'alerte pour diffuser le message d\'urgence défini ci-dessous.
+_ Les balises <code><multi/></code> sont recommandées en cas de site multilingue.[[%alerte_message%]]', # NEW
+	'alerte_urgence:nom' => 'Message d\'alerte', # NEW
 	'attente' => 'Espera...',
 	'auteur_forum:description' => 'Pide a todos los autores de mensajes públicos que rellenen (¡al menos con una letra!) el campo «@_CS_FORUM_NOM@» para evitar las contribuciones completamente anónimas.', # MODIF
 	'auteur_forum:nom' => 'Sin foros anónimos',

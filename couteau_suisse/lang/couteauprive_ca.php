@@ -45,6 +45,9 @@ El valor de 1~000~000 píxels sembla correcte per una configuració amb poca mem
 
 Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.', # NEW
 	'aff_tout:nom' => 'Affiche tout', # NEW
+	'alerte_urgence:description' => 'Affiche en tête de toutes les pages publiques un bandeau d\'alerte pour diffuser le message d\'urgence défini ci-dessous.
+_ Les balises <code><multi/></code> sont recommandées en cas de site multilingue.[[%alerte_message%]]', # NEW
+	'alerte_urgence:nom' => 'Message d\'alerte', # NEW
 	'attente' => 'Espera...',
 	'auteur_forum:description' => 'Incita a tots els autors de missatges públics a omplir (amb una lletra com a mínim!) un nom i/o un correu electrònic per tal d\'evitar les contribucions totalment anònimes. Fixeu-vos que aquesta eina fa una verificació del JavaScript al lloc del visitant.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
 {Alerta: Escollir la tercera opció anul·la les 2 primeres. És important verificar que els formularis del vostre esquelet són compatibles completament amb aquesta eina.}',
