@@ -2837,6 +2837,7 @@ class GeSHi {
                         $string = '';
                         continue;
                     } else {
+
                         //Have a look for regexp comments
                         if ($i == $next_comment_regexp_pos) {
                             $COMMENT_MATCHED = true;
@@ -3293,6 +3294,21 @@ class GeSHi {
         return  ' style="' . call_user_func($this->language_data['STYLES']['REGEXPS'][$this->_rx_key], $matches[1]) . '"'. $matches[1] . '|>';
     }
 
+
+	/**
+	 * [Surcharge de Geshi] 
+	 *
+	**/
+	function handle_singleline_regexps($stuff_to_parse, $regexp, $key) {
+		$stuff_to_parse = preg_replace(
+			'/' . $regexp[GESHI_SEARCH] . '/' . $regexp[GESHI_MODIFIERS],
+			$regexp[GESHI_BEFORE] . '<|!REG3XP'. $key .'!>' . $regexp[GESHI_REPLACE] . '|>' . $regexp[GESHI_AFTER],
+			$stuff_to_parse);
+		return $stuff_to_parse;
+	}
+
+
+
     /**
      * handles newlines in REGEXPS matches. Set the _hmr_* vars before calling this
      *
@@ -3424,10 +3440,16 @@ class GeSHi {
                         $this->_hmr_before = '';
                         $this->_hmr_after = '';
                     } else {
+                        // [surcharge de GESHI]
+                        // pour passer dans une methode
+                        // (qui permet donc une surcharge de juste la methode)
+                        /*
                         $stuff_to_parse = preg_replace(
                             '/' . $regexp[GESHI_SEARCH] . '/' . $regexp[GESHI_MODIFIERS],
                             $regexp[GESHI_BEFORE] . '<|!REG3XP'. $key .'!>' . $regexp[GESHI_REPLACE] . '|>' . $regexp[GESHI_AFTER],
                             $stuff_to_parse);
+                        */
+                        $stuff_to_parse = $this->handle_singleline_regexps($stuff_to_parse, $regexp, $key);
                     }
                 } else {
                     if ($this->line_numbers != GESHI_NO_LINE_NUMBERS) {

@@ -256,7 +256,6 @@ function spip2_geshi_regexp_echappements_echapper_callback($matches, $geshi) {
 **/
 function spip2_geshi_regexp_echappements_remettre_callback($matches, $geshi) {
 	$contenu = $matches[0];
-
 	$inerte = '-INERTE';
 	$key = $geshi->_hmr_key;
 	// echappements avec \
