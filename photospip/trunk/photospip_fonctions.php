@@ -92,19 +92,19 @@ function photospipfiltre ($src, $dest, $filtre,$params){
 		spip_log("On enlève la date : dst_img = $dst_img",'photospip');
 	}
 	//$dst_img = preg_replace(',\?date=\d+$,','', $dst_img);
-	if(preg_match("/\.(png|gif|jpe?g|bmp)$/i", $src, $regs)) {
+	if(preg_match("/\.(png|gif|jpe?g)$/i", $src, $regs)) {
 		switch($regs[1]) {
 			case 'png':
 			  if (function_exists('ImageCreateFromPNG')) {
 				$src_img=ImageCreateFromPNG($dst_img);
 				spip_log("creation png from $dst_img","photospip");
-				$save = 'imagepng';
+				$save = '_image_imagepng';
 			  }
 			  break;
 			case 'gif':
 			  if (function_exists('ImageCreateFromGIF')) {
 				$src_img=ImageCreateFromGIF($dst_img);
-				$save = 'imagegif';
+				$save = '_image_imagegif';
 			  }
 			  break;
 			case 'jpeg':
@@ -112,13 +112,7 @@ function photospipfiltre ($src, $dest, $filtre,$params){
 			  if (function_exists('ImageCreateFromJPEG')) {
 				$src_img=ImageCreateFromJPEG($dst_img);
 				spip_log("creation jpg from $dst_img","photospip");
-				$save = 'Imagejpeg';
-			  }
-			  break;
-			case 'bmp':
-			  if (function_exists('ImageCreateFromWBMP')) {
-				$src_img=@ImageCreateFromWBMP($dst_img);
-				$save = 'imagewbmp';
+				$save = '_image_imagejpg';
 			  }
 			  break;
 		}
@@ -132,12 +126,9 @@ function photospipfiltre ($src, $dest, $filtre,$params){
 
 	ImageInterlace($src_img,0);
 
-	$save($src_img,$dest);
-	$size=getimagesize($dest);
-	spip_log($size,'photospip');
-	if (!($size[0] * $size[1])) return false;
+	$image = $save($src_img,$dest,100);
 	
 	spip_log("dest $dest","photospip");
-	return true;
+	return $image;
 }
 ?>

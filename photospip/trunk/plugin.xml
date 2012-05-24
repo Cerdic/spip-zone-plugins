@@ -3,7 +3,7 @@
 	<auteur>[kent1->http://www.kent1.info/]
 _ &copy; 2008-2012 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
-	<version>0.2.8</version>
+	<version>0.2.9</version>
 	<version_base>0.4</version_base>
 	<prefix>photospip</prefix>
 	<etat>dev</etat>
@@ -46,7 +46,7 @@ _ &copy; 2008-2012 - Distribu&#233; sous licence GNU/GPL
 	<necessite id="medias" version='[1.6.12;]' />
 	<necessite id="jqueryui" version='[1.8.19;]' />
 	<necessite id="spip_bonux" version='[2.3.0;]' />
-	<necessite id="SPIP" version='[2.1.13;2.1.99]' />
+	<necessite id="SPIP" version='[2.1.10;2.1.99]' />
 	<necessite id="lib:jquery.imgareaselect-0.9.8" src="http://odyniec.net/projects/imgareaselect/jquery.imgareaselect-0.9.8.zip" />
 	<categorie>multimedia</categorie>
 </plugin>

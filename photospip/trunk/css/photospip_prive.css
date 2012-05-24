@@ -4,18 +4,14 @@
 	text-align:center;
 }
 
+#modifier_image, #image_modifier{
+	position:relative;
+}
+
 #image_modifier img{
 	vertical-align:bottom;
 }
-.previsu_texte{
-	font-size:.9em;
-	background-color:#333;
-	color:#fff;
-	position:absolute;
-	top:0;
-	opacity:0.6;
-	padding:10px 0;
-}
+
 button.revenir_version{
 	position:absolute;
 	top :50%;
@@ -44,12 +40,6 @@ button.delete_version{
 	text-align:left;
 }
 
-.help .infos,#versions .infos{
-	background-color:#F4F4F4;
-	padding:10px;
-	position:relative;
-	margin:0 0 10px 0;
-}
 .version{
 	position:relative;
 	border:1px solid #ccc;
@@ -73,43 +63,12 @@ button{
 .version label img{
 	vertical-align:middle;
 }
-.waiting{
-	color:#86B900;
-}
 
 .cache {
 	display:block;
 }
 
-.help{
-	width:30%;
-	padding:5px;
-	margin:0 10px 20px 0;
-	font-size:11px;
-}
-.waiting{
-	width:60%;
-	margin:40px auto;
-	position:absolute;
-	color:#000;
-	top:20px;
-	left:40px;
-}
-.disabled{
-	background-color:red;
-}
-
 .nocache{
 	color:#000;
 	border:none;
-}
-
-.warning{
-	margin:5px;
-	padding:3px 3px 3px 12px;
-	border:1px solid #86B900;
-}
-
-.ui-tabs .ui-tabs-nav li{
-	clear:none;
 }

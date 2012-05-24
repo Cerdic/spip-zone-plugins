@@ -16,6 +16,7 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
+	'bouton_supprimer_vignette' => 'Supprimer cette vignette',
 	'bouton_tester' => 'Prévisualiser',
 	
 	// E

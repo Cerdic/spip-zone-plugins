@@ -70,7 +70,7 @@ function photospip_document_desc_actions($flux) {
 		if ($flux['args']['position'] == 'galerie') {
 			$flux['data'] .= "[<a href='$url_modif'>$texte_modif</a>] [<a href='$url_vignette'>$texte_vignette</a>]";
 		} else {
-			$flux['data'] .= "<span class='sep'> | </span><a href='$url_modif'>$texte_modif</a><span class='sep'> | </span><a href='$url_vignette'>$texte_vignette</a>";
+			$flux['data'] .= "<span class='sep'> | </span><a href='$url_modif'>$texte_modif</a><span class='sep'> | </span><a href='$url_vignette' target='_blank' class='editbox'>$texte_vignette</a>";
 		}
 	}
 	return $flux;

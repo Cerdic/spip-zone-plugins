@@ -42,13 +42,18 @@ function exec_image_edit_args($id_document, $mode){
 function image_edit_ok($row, $id_document, $mode)
 {
 
+	$id_document=$row['id_document'];
+	$titre=$row['titre']?$row['titre']:basename($row['fichier']);
+	$statut=$row['statut'];
+	
 	if (defined('_AJAX') AND _AJAX){
 		$contexte = array(
 		'redirect'=>'',//generer_url_ecrire("portfolio"),
 		'new'=>$id_document,
 		'mode'=>$mode,
 		'config_fonc'=>'image_edit_config',
-		'fichier'=>$row['fichier']
+		'titre'=>$titre,
+		'mode'=>$mode
 		);
 
 		include_spip('inc/actions');
@@ -62,11 +67,6 @@ function image_edit_ok($row, $id_document, $mode)
 		);
 		return;
 	}
-
-	
-	$id_document=$row['id_document'];
-	$titre=$row['titre']?$row['titre']:basename($row['fichier']);
-	$statut=$row['statut'];
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	pipeline('exec_init',array('args'=>array('exec'=>'image_edit','id_document'=>$id_document),'data'=>''));
@@ -92,12 +92,12 @@ function image_edit_ok($row, $id_document, $mode)
 
 	$redirect = _request('redirect') ? _request('redirect') : generer_url_ecrire("portfolio");
 	$contexte = array(
-	'icone_retour'=>icone_inline(_T('icone_retour'),$redirect, find_in_path("images/document-24.png"), "rien.gif",$GLOBALS['spip_lang_left']),
-	'redirect'=>_request('redirect',''),//generer_url_ecrire("portfolio"),
-	'titre'=>$titre,
-	'new'=>$id_document,
-	'mode'=>$mode,
-	'config_fonc'=>'image_edit_config'
+		'icone_retour'=>icone_inline(_T('icone_retour'),$redirect, find_in_path("images/document-24.png"), "rien.gif",$GLOBALS['spip_lang_left']),
+		'redirect'=>_request('redirect',''),//generer_url_ecrire("portfolio"),
+		'titre'=>$titre,
+		'new'=>$id_document,
+		'mode'=>$mode,
+		'config_fonc'=>'image_edit_config'
 	);
 
 	$milieu = recuperer_fond("prive/editer/image", $contexte);
