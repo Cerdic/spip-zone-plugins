@@ -5,6 +5,7 @@
 		[(#SET{len,
 		#VAL{120}|moins{#GET{url}|strlen}
 		})]
-		[(#TITRE|textebrut|couper{#GET{len}}|concat{' ',#GET{url}})]
+		[(#TITRE|textebrut|couper{#GET{len}}|concat{' ',#GET{url}}
+			|replace{&nbsp;,' '})]
 	]
 </BOUCLE_art>
