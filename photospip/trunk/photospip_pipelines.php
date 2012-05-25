@@ -110,12 +110,13 @@ function photospip_boite_infos($flux){
 			if($document['id_vignette'] && $document['id_vignette'] > 0){
 				$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_vignette'), parametre_url(parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'mode','vignette'),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit.gif',false);
 				$flux['data'] .= icone_horizontale(_T('photospip:bouton_supprimer_vignette_document'), generer_action_auteur('supprimer_document',$document['id_vignette'],parametre_url(self(),'supprimer_vignette','oui')), find_in_path('images/photospip-24.png'), 'supprimer.gif',false);
+				$flux['data'] .= recuperer_fond('prive/photospip_vignette',array('id_document'=>intval($id_document)));
 			}else if(in_array($document['extension'],array('gif','png','jpg'))){
 				$flux['data'] .= icone_horizontale(_T('photospip:bouton_creer_vignette'), parametre_url(parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'mode','vignette'),'redirect',self()), find_in_path('images/photospip-24.png'), 'creer.gif',false);
 			}
 		}elseif((_request('mode') == 'vignette') && ($document = sql_fetsel('*','spip_documents','id_document='.intval($id_document)))){
-			$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_image'), parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit.gif',false);
 			$flux['data'] .= icone_horizontale(_T('photospip:bouton_modifier_document'), parametre_url(generer_url_ecrire('documents_edit','id_document='.$document['id_document']),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit.gif',false);
+			$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_image'), parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit.gif',false);
 		}
 	}
 	return $flux;

@@ -2,26 +2,18 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{erreurs}|table_valeur{message}|oui)
-				<div class="notice">
-						[(#ENV{erreurs}|table_valeur{message}|=={previsu}|oui)
-						<span><:previsualisation:></span><br />
-						<:photospip:previsu:>]
-						[(#ENV{erreurs}|table_valeur{message}|=={sanstest}|oui)
-						<:photospip:sanstest:>]
-						[(#ENV{erreurs}|table_valeur{message}|=={sansfiltre}|oui)
-						<:photospip:sansfiltre:>]
-						[(#ENV{erreurs}|table_valeur{message}|=={sansconf}|oui)
-						<:photospip:sansconf:>]
-					</div>
-				]
+	<div class="notice">
+			[(#ENV{erreurs}|table_valeur{message}|=={previsu}|oui)
+			<span><:previsualisation:></span><br />
+			<:photospip:previsu:>]
+			[(#ENV{erreurs}|table_valeur{message}|=={sanstest}|oui)
+			<:photospip:sanstest:>]
+			[(#ENV{erreurs}|table_valeur{message}|=={sansfiltre}|oui)
+			<:photospip:sansfiltre:>]
+			[(#ENV{erreurs}|table_valeur{message}|=={sansconf}|oui)
+			<:photospip:sansconf:>]
+		</div>]
 	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
-	[(#PLUGIN{fonctions_images}|oui)
-		[(#CONFIG{photospip/image_niveau_de_gris_auto}|=={on}|oui)#SET{fonctions_images,on}]
-		[(#CONFIG{photospip/image_sincity}|=={on}|oui)#SET{fonctions_images,on}]
-		[(#CONFIG{photospip/image_contour_alpha}|=={on}|oui)#SET{fonctions_images,on}]
-		[(#CONFIG{photospip/image_dispersion}|=={on}|oui)#SET{fonctions_images,on}]
-		[(#CONFIG{photospip/image_saturer}|=={on}|oui)#SET{fonctions_images,on}]
-	]
 	<BOUCLE_document(DOCUMENTS){id_document}{mode IN vignette,image,document}{tout}>
 	[(#REM)
 		Calcul du ratio entre notre image originale et la prévisualisation
@@ -38,12 +30,12 @@
 		<input type='hidden' name='id_document' value='#ENV{id_document}' />
 		<div id="modifier_image">
 			<div id="image-container">
-				<div id="image_modifier" style="[width:(#GET{largeur_max})px;]position:relative">
-				
-				[(#ENV{erreurs}|table_valeur{filtre}|oui)
-				[(#_document:FICHIER|image_reduire{[(#GET{largeur_max,450})],[(#GET{hauteur_max,450})]}|photospip_appliquer_filtre{[(#ENV{erreurs}|table_valeur{filtre})],[(#ENV{erreurs}|table_valeur{param1})],[(#ENV{erreurs}|table_valeur{param2})],[(#ENV{erreurs}|table_valeur{param3})],[(#ENV{erreurs}|table_valeur{param})]}|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|inserer_attribut{alt,' '})]]
-				[(#ENV{erreurs}|table_valeur{filtre}|non)
-				[(#_document:FICHIER|image_reduire{#GET{largeur_max,450},#GET{hauteur_max,450}}|inserer_attribut{alt,' '})]]
+				<div id="image_modifier" style="[width:(#GET{largeur_max})px;]">
+					[(#ENV{erreurs}|table_valeur{filtre}|oui)
+					[(#_document:FICHIER|image_reduire{[(#GET{largeur_max,450})],[(#GET{hauteur_max,450})]}|photospip_appliquer_filtre{[(#ENV{erreurs}|table_valeur{filtre})],[(#ENV{erreurs}|table_valeur{param1})],[(#ENV{erreurs}|table_valeur{param2})],[(#ENV{erreurs}|table_valeur{param3})],[(#ENV{erreurs}|table_valeur{param})]}|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|inserer_attribut{alt,' '})]]
+					[(#ENV{erreurs}|table_valeur{filtre}|non)
+					[(#_document:FICHIER|image_reduire{#GET{largeur_max,450},#GET{hauteur_max,450}}|inserer_attribut{alt,' '})]]
+				</div>
 			</div>
 		</div>
 		<div>
@@ -78,7 +70,7 @@
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class="boutons">
-	  	[(#ENV{mode}|=={vignette}|oui)
+	  	[(#ENV{mode}|=={vignette}|et{#ENV{vignette}|=={oui}}|oui)
 	  	<input type="submit" class="submit" name="supprimer_vignette" value="<:photospip:bouton_supprimer_vignette:>" />
 	  	]
 	  	<input type="submit" class="submit" name="tester" value="<:photospip:bouton_tester:>" />

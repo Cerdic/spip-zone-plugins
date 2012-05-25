@@ -1,7 +1,7 @@
 [(#CONFIG{photospip/image_nb}|=={on}|oui)
 <li class="editer editer_nb">
 	<input type="radio" name="filtre" id="filtre_nb" value="image_nb"[(#ENV{filtre}|=={image_nb}|oui)checked="checked"] />
-	<label for="filtre_nb">[<img src="(#CHEMIN{images/photospip-ico/ico_nb.png})" alt="<:photospip:label_image_nb:>" /> ]<:photospip:label_image_nb:></label>
+	<label for="filtre_nb"><:photospip:label_image_nb:></label>
 	<div class="cache params_filtre">
 		<p class="explication"><:photospip:explication_image_nb:></p>
 	</div>
@@ -39,7 +39,7 @@
 [(#CONFIG{photospip/image_sepia}|=={on}|oui)
 <li class="editer editer_image_sepia">
 	<input type="radio" name="filtre" id="filtre_sepia" value="image_sepia"[(#ENV{filtre}|=={image_sepia}|oui)checked="checked"] />
-	<label for="filtre_sepia">[<img src="(#CHEMIN{images/photospip-ico/ico_sepia.png})" alt="<:photospip:image_sepia:>" /> ]<:photospip:label_image_sepia:></label>
+	<label for="filtre_sepia"><:photospip:label_image_sepia:></label>
 	<div class="cache params_filtre">
 		<ul>
 			<li class="editer_param_image_sepia">

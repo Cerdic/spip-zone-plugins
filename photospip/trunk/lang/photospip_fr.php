@@ -17,12 +17,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
-	'bouton_supprimer_vignette' => 'Supprimer cette vignette',
-	'bouton_supprimer_vignette_document' => 'Supprimer la vignette de ce document',
-	'bouton_tester' => 'Prévisualiser',
+	'bouton_creer_vignette' => 'Créer une vignette à partir de ce document',
 	'bouton_editer_image' => 'Éditer l\'image',
 	'bouton_editer_vignette' => 'Éditer la vignette',
 	'bouton_modifier_document' => 'Modifier les informations du document',
+	'bouton_supprimer_vignette' => 'Supprimer cette vignette',
+	'bouton_supprimer_vignette_document' => 'Supprimer la vignette de ce document',
+	'bouton_tester' => 'Prévisualiser',
 	
 	// E
 	'erreur_auth_modifier' => 'Vous n\'êtes pas autoriser à modifier ce document.',
@@ -110,7 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_image_taille_actuelle' => 'Taille actuelle de l\'image&nbsp;: @largeur@x@hauteur@px.',
 	'message_limite_versions' => 'Le nombre de versions précédentes sont limitées à @limite@.',
-	'message_pas_de_versions' => 'Il n\'y a pas encore de versions disponibles de cette image.',
+	'message_pas_de_versions' => 'Ce document n\'est pas versionné.',
 
 	// P
 	'photospip' => 'PhotoSPIP',

@@ -73,8 +73,10 @@ function formulaires_editer_image_charger_dist($id_document='new',$mode=false, $
 		}
 	}else{
 		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
-		if($id_vignette && ($id_vignette > 0) && $id_vignette = sql_getfetsel('id_document','spip_documents','id_document='.intval($id_vignette)))
+		if($id_vignette && ($id_vignette > 0) && $id_vignette = sql_getfetsel('id_document','spip_documents','id_document='.intval($id_vignette))){
 			$valeurs['id_document'] = $id_vignette;
+			$valeurs['vignette'] = 'oui';
+		}
 	}
 	
 	if(!autoriser('modifier','document',$id_document)){
@@ -173,7 +175,8 @@ function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $
 		}
 		
 		else{
-			$sortie = photospipfiltre($src, $tmp_img, $var_filtre,$params);
+			$appliquer_filtre = charger_fonction('photospip_appliquer_filtre','inc');
+			$sortie = $appliquer_filtre($src, $tmp_img, $var_filtre,$params);
 			if(!$sortie && (file_exists($tmp_img))){
 				$res['message_erreur'] = 'photospip n a pas pu appliquer le filtre '.$var_filtre;
 				return $res;

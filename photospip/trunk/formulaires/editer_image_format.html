@@ -44,7 +44,7 @@
 [(#CONFIG{photospip/image_recadre,on}|=={on}|oui)
 <li class="editer editer_recadre">
 	<input type="radio" name="filtre" id="image_recadre" value="image_recadre"[(#ENV{filtre}|=={image_recadre}|oui)checked="checked"] />
-	<label for="image_recadre">[<img src="(#CHEMIN{images/photospip-ico/ico_rotation.png})" alt="<:photospip:image_recadre:>" /> ]<:photospip:label_image_recadre:></label>
+	<label for="image_recadre"><:photospip:label_image_recadre:></label>
 	<div class="cache params_filtre image_recadre">
 		<p class="explication">
 			<:photospip:explication_image_recadre:>
@@ -64,6 +64,10 @@
 			<div class="choix">
 				<input type="radio" id="ratio2" name="ratio" value="4:3"[(#ENV{ratio}|=={'4:3'}|oui)checked="checked"] />
 				<label for="ratio2">4:3</label>
+			</div>
+			<div class="choix">
+				<input type="radio" id="ratio3" name="ratio" value="16:9"[(#ENV{ratio}|=={'16:9'}|oui)checked="checked"] />
+				<label for="ratio3">16:9</label>
 			</div>
 		</li>
 		<li>
@@ -102,7 +106,7 @@
 [(#CONFIG{photospip/tourner,oui}|=={on}|oui)
 <li class="editer editer_tourner">
 	<input type="radio" name="filtre" id="tourner" value="tourner"[(#ENV{filtre}|=={tourner}|oui)checked="checked"] />
-	<label for="tourner">[<img src="(#CHEMIN{images/photospip-ico/ico_rotation.png})" alt="<:photospip:label_tourner:>" /> ]<:photospip:label_tourner:></label>
+	<label for="tourner"><:photospip:label_tourner:></label>
 	<div class="cache params_filtre">
 		<p class="explication"><:photospip:explication_tourner:></p>
 		<ul>
@@ -127,7 +131,7 @@
 [(#CONFIG{photospip/image_rotation}|=={on}|oui)
 <li class="editer editer_rotation">
 	<input type="radio" name="filtre" id="image_rotation" value="image_rotation"[(#ENV{filtre}|=={image_rotation}|oui)checked="checked"] />
-	<label for="image_rotation">[<img src="(#CHEMIN{images/photospip-ico/ico_rotation.png})" alt="<:photospip:label_image_rotation:>" /> ]<:photospip:label_image_rotation:></label>`
+	<label for="image_rotation"><:photospip:label_image_rotation:></label>`
 	<div class="cache params_filtre">
 		<p class="explication"><:photospip:explication_image_rotation:></p>
 		<div id='sliderrotation'>
@@ -144,7 +148,7 @@
 [(#CONFIG{photospip/image_flip_vertical}|=={on}|oui)
 <li class="editer editer_flip_vertical">
 	<input type="radio" name="filtre" id="image_flip_vertical" value="image_flip_vertical"[(#ENV{filtre}|=={image_flip_vertical}|oui)checked="checked"] />
-	<label for="image_flip_vertical">[<img src="(#CHEMIN{images/photospip-ico/ico_flip_vertical.png})" alt="<:photospip:image_flip_vertical:>" /> ]<:photospip:label_image_flip_vertical:></label>
+	<label for="image_flip_vertical"><:photospip:label_image_flip_vertical:></label>
 	<div class="cache params_filtre">
 		<p class="explication"><:photospip:explication_image_flip_vertical:></p>
 	</div>
@@ -152,7 +156,7 @@
 [(#CONFIG{photospip/image_flip_horizontal}|=={on}|oui)
 <li class="editer editer_flip_horizontal">
 	<input type="radio" name="filtre" id="image_flip_horizontal" value="image_flip_horizontal"[(#ENV{filtre}|=={image_flip_horizontal}|oui)checked="checked"] />
-	<label for="image_flip_horizontal">[<img src="(#CHEMIN{images/photospip-ico/ico_flip_horizontal.png})" alt="<:photospip:image_flip_horizontal:>" /> ]<:photospip:label_image_flip_horizontal:></label>
+	<label for="image_flip_horizontal"><:photospip:label_image_flip_horizontal:></label>
 	<div class="cache params_filtre">
 		<p class="explication"><:photospip:explication_image_flip_horizontal:></p>
 	</div>
