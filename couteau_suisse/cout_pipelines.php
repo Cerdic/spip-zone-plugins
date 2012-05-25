@@ -136,6 +136,10 @@ function couteau_suisse_post_edition($flux){
  * DIVERS *
  *********/
 
+function couteau_suisse_taches_generales_cron($flux){
+	return eval_metas_pipelines($flux, 'taches_generales_cron');
+}
+
 // pipeline SPIP<2.1
 function couteau_suisse_creer_chaine_url($flux){
 	return eval_metas_pipelines($flux, 'creer_chaine_url');

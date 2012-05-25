@@ -269,8 +269,8 @@ add_outil( array(
 	'pipeline:boite_infos' => 'previsu_redac_boite_infos',
 	// fichier distant pour les pipelines
 	'distant_pipelines' => 'http://zone.spip.org/trac/spip-zone/export/53447/_plugins_/previsu_redaction/previsu_redac_pipelines.php',
-	'version-min' => '1.9300', // SPIP 2.0
-	'version-max' => '17743', // SPIP 3.0
+	'version-min' => '1.9300', // SPIP 2.0 : oui
+	'version-max' => '17743', // SPIP 3.0 : non
 ));
 
 add_variable( array(
@@ -1409,6 +1409,16 @@ add_outil( array(
 		include_spip(\'public/assembler\');
 		$flux = substr_replace($flux, recuperer_fond(\'fonds/alerte_urgence\'), $p, 0);
 }',
+));
+
+add_outil( array(
+	'id' => 'sessions_anonymes',
+	'categorie' => 'securite',
+	'pipelinecode:taches_generales_cron' => '$flux[\'nettoyer_sessions_anonymes\'] = 7*24*3600;',
+	'pipeline:pre_description_outil' => 'sessions_anonymes_pre_description_outil',
+	'code:options' => 'function cron_nettoyer_sessions_anonymes() { genie_nettoyer_sessions_anonymes(); } // Pour SPIP 1.92
+function genie_nettoyer_sessions_anonymes() { include_spip(\'outils/sessions_anonymes\'); cs_nettoyer_sessions_anonymes(); }',
+	'version-max' => '17743', // SPIP 3.0 : c'est dans le core !
 ));
 
 // Recuperer tous les outils (et leurs variables) de la forme outils/toto_config.xml
