@@ -1,0 +1,32 @@
+<div id="wrap">
+
+	<div id="header">
+		[(#REM)	HEADER / ENTETE ]
+		<INCLURE{fond=inclure/entete,env}>
+	</div>
+
+	[(#REM)	MAIN NAVIGATION / NAVIGATION PRINCIPALE ]
+	<div id="nav"><INCLURE{fond=inclure/barre-nav,env}></div>
+	
+	<div id="content">			
+		<div id="posts">	
+			[(#REM)	CONTENT / CONTENU ]
+			<INCLURE{fond=contenu/#ENV{type},env}>
+		</div>
+		
+		<div id="links">
+			[(#REM)	SECONDARY NAVIGATION SIDEBAR / Navigation laterale secondaire ]
+			<INCLURE{fond=navigation/#ENV{type},env}>
+	    
+			[(#REM)	EXTRA INFORMATIONS / Informations complementaires]
+			<INCLURE{fond=extra/#ENV{type},env}>
+		</div>
+	</div>
+		
+
+	<div id="footer">
+		[(#REM)	FOOTER / Pied de page ]
+		<INCLURE{fond=inclure/pied,env}>
+		<div class='copyleft'><INCLURE{fond=inc-theme-copyleft}></div>
+	</div>
+</div>

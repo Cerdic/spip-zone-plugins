@@ -1,0 +1,21 @@
+<div class="accueil">
+	[<a rel="start home" href="#URL_SITE_SPIP/" title="<:accueil_site:>">(#LOGO_SITE_SPIP||image_reduire{300,100})</a>]
+
+	<strong id="nom_site_spip">
+		<BOUCLE_rub(RUBRIQUES){id_rubrique}>
+			<BOUCLE_listerub(HIERARCHIE){tout}{inverse}{titre_mot=nom-structure}>
+				<div class="titre#ID_RUBRIQUE">#TITRE</div>
+			</BOUCLE_listerub>
+		</BOUCLE_rub>
+			Bienvenue
+		<//B_rub>
+	</strong>
+	
+	<div id='slogan_site_spip'>#NOM_SITE_SPIP</div>
+
+	
+#MENU_LANG
+
+</div>
+
+

@@ -1,0 +1,41 @@
+<BOUCLE_extra_rubrique(RUBRIQUES){id_rubrique}>
+	[(#REM) Menu de navigation mots-cles ]
+	<B_mots>
+	<div class="liste mots">
+		<h2 class="h2"><:mots_clefs:></h2>
+		<ul class="liste-items">
+			<BOUCLE_mots(MOTS) {id_rubrique} {par titre}>
+			<li class="item"><a href="#URL_MOT" rel="tag">#TITRE</a></li>
+			</BOUCLE_mots>
+		</ul>
+	</div>
+	</B_mots>
+</BOUCLE_extra_rubrique>
+
+[(#REM)
+	Barre de navigation, ouverte sur la hierarchie courante
+
+	On fait un plan, et, quand on avance vers une rubrique,
+	on l'affiche si son parent est expose ou est la racine du site. ]
+<B_rubriques>
+<div class="menu rubriques">
+	<h2 class="h2"><:rubriques:></h2>
+	<ul class="menu-liste">
+	<BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}>
+		<li class="menu-entree">
+			<a href="#URL_RUBRIQUE"[ class="(#EXPOSE)"]>[(#TITRE|couper{80})]</a>
+
+			<B_sous_rubriques>
+			<ul class="menu-liste">
+				<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}><BOUCLE_test_expose(RUBRIQUES) {id_enfant}>#EXPOSE{' '}</BOUCLE_test_expose>
+					<li class="menu-entree"><a href="#URL_RUBRIQUE"[ class="(#EXPOSE)"]>[(#TITRE|couper{80})]</a><BOUCLE_re(BOUCLE_sous_rubriques)></BOUCLE_re>	</li>
+				</B_test_expose></BOUCLE_sous_rubriques>
+			</ul>
+			</B_sous_rubriques>
+
+		</li>
+	</BOUCLE_rubriques>
+
+	</ul>
+</div>
+</B_rubriques>
