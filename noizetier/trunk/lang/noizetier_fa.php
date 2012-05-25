@@ -71,54 +71,54 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_supprimer_composition' => 'حذف اين فندق',
 	'formulaire_supprimer_noisette' => 'حذف اين فندق',
 	'formulaire_supprimer_noisettes_page' => 'حذف فندق‌هاي اين صفحه ',
-	'formulaire_type' => 'Type de composition', # NEW
-	'formulaire_type_explication' => 'Indiquez sur quel objet / quelle page porte cette composition.', # NEW
-	'formulaire_type_import' => 'Type d\'importation', # NEW
-	'formulaire_type_import_explication' => 'Vous pouvez fusionner le fichier de configuration avec votre configuration actuelle (les noisettes de chaque page seront ajoutées à vos noisettes déjà définies) ou bien remplacer votre configuration par celle-ci.', # NEW
+	'formulaire_type' => 'نوع تركيب ',
+	'formulaire_type_explication' => 'تعيين اينكه روي كدام چيز و كدام صفحه اين تركيب به كار رود.',
+	'formulaire_type_import' => 'نوع واردسازي',
+	'formulaire_type_import_explication' => 'مي‌توانيد پرونده‌ي پيكربندي را با پيكربندي فعلي ادغام كنيد (فندق‌هاي هر صفحه به فندق‌هاي تعريف شده افزوده خواهد شد) يا پيكربندي خود را با اين يكي جايگزين سازيد. ',
 
 	// I
-	'ieconfig_ne_pas_importer' => 'Ne pas importer', # NEW
-	'ieconfig_noizetier_export_explication' => 'Exportera la configuration des noisettes et les compositions du noiZetier.', # NEW
-	'ieconfig_noizetier_export_option' => 'Inclure dans l\'export ?', # NEW
-	'ieconfig_non_installe' => '<b>Plugin Importeur/Exporteur de configurations :</b> ce plugin n\'est pas installé sur votre site. Il n\'est pas nécessaire au fonctionnement du noizetier. Cependant, s\'il est activé, vous pourrez exporter et importer des configurations de noisettes dans le noizetier.', # NEW
-	'ieconfig_probleme_import_config' => 'Un problème a été rencontré lors de l\'importation de la configuration du noiZetier.', # NEW
-	'info_composition' => 'COMPOSITION :', # NEW
-	'info_page' => 'PAGE :', # NEW
-	'installation_tables' => 'Tables du plugin noiZetier installées.<br />', # NEW
-	'item_titre_perso' => 'titre personnalisé', # NEW
+	'ieconfig_ne_pas_importer' => 'وارد نكردن',
+	'ieconfig_noizetier_export_explication' => 'صادر سازي پيكربندي فندق‌ها و تركيب‌هاي فندق‌ها.',
+	'ieconfig_noizetier_export_option' => 'گنجاندن در صادرات؟',
+	'ieconfig_non_installe' => '<b>پلاگين صادرسازي/واردسازي پيكربندي‌ها: </b> اين پلاگين روي سايت شما نصب نشده. نيازي به پيكربندي فندق‌ها نيست. با اين همه، اگر فعال شود، مي‌توانيد پيكربندي‌هاي فندق‌هاي ذاخل فندق را صادر و وارد كنيد.',
+	'ieconfig_probleme_import_config' => 'هنگام واردسازي پيكربندي فندق‌ها مشكلي رخ داده است.',
+	'info_composition' => 'تركيب:',
+	'info_page' => 'صفحه: ',
+	'installation_tables' => 'جدول پلاگين فندق نصب شده .<br />',
+	'item_titre_perso' => 'تيتر شخصي‌',
 
 	// L
-	'label_afficher_titre_noisette' => 'Afficher un titre de noisettes ?', # NEW
-	'label_niveau_titre' => 'Niveau du titre :', # NEW
-	'label_noizetier_css' => 'Classes CSS :', # NEW
-	'label_texte' => 'Texte :', # NEW
-	'label_titre' => 'Titre :', # NEW
-	'label_titre_noisette' => 'Titre de la noisette :', # NEW
-	'label_titre_noisette_perso' => 'Titre personnalisé:', # NEW
-	'liste_icones' => 'Liste d\'icônes', # NEW
+	'label_afficher_titre_noisette' => 'نمايش تيتر فندق؟',
+	'label_niveau_titre' => 'تراز تيتر: ',
+	'label_noizetier_css' => 'كلاس‌هاي سي.اس.اس.:',
+	'label_texte' => 'متن:',
+	'label_titre' => 'تيتر:',
+	'label_titre_noisette' => 'تيتر فندق:',
+	'label_titre_noisette_perso' => 'تيتر شخصي:',
+	'liste_icones' => 'فهرست صورتك‌ها',
 
 	// N
-	'ne_pas_definir_d_heritage' => 'Ne pas définir d\'héritage', # NEW
-	'noisettes_composition' => 'Noisettes spécifiques à la composition <i>@composition@</i> :', # NEW
-	'noisettes_page' => 'Noisettes spécifiques à la page <i>@type@</i> :', # NEW
-	'noisettes_toutes_pages' => 'Noisettes communes à toutes les pages :', # NEW
-	'noizetier' => 'noiZetier', # NEW
-	'nom_bloc_contenu' => 'Contenu', # NEW
-	'nom_bloc_extra' => 'Extra', # NEW
-	'nom_bloc_navigation' => 'Navigation', # NEW
-	'nom_bloctexte' => 'Bloc de texte libre', # NEW
-	'non' => 'Non', # NEW
-	'notice_enregistrer_rang' => 'Cliquez sur Enregistrer pour sauvegarder l\'ordre des noisettes.', # NEW
+	'ne_pas_definir_d_heritage' => 'تعريف نكردن ميراث',
+	'noisettes_composition' => 'فندق‌هاي مشخص شده در تركيب <i>@composition@</i>:',
+	'noisettes_page' => 'فندق‌هاي مشخص شده براي صفحه‌ي <i>@type@</i> :',
+	'noisettes_toutes_pages' => 'فندق‌هاي مشترك در تمام صفحه‌ها: ',
+	'noizetier' => 'درخت فندق',
+	'nom_bloc_contenu' => 'مطلب',
+	'nom_bloc_extra' => 'فوق‌العاده ',
+	'nom_bloc_navigation' => 'ناوبري',
+	'nom_bloctexte' => 'بلوك متن آزاد',
+	'non' => 'نه',
+	'notice_enregistrer_rang' => 'روي ثبت كنيد كليك كنيد تا ترتيب فندق‌ها حفظ شود.',
 
 	// O
-	'oui' => 'Oui', # NEW
+	'oui' => 'بله',
 
 	// P
-	'page' => 'Page', # NEW
+	'page' => 'صفحه',
 
 	// W
-	'warning_noisette_plus_disponible' => 'ATTENTION : cette noisette n\'est plus disponible.', # NEW
-	'warning_noisette_plus_disponible_details' => 'Le squelette de cette noisette (<i>@squelette@</i>) n\'est plus accessible. Il se peut qu\'il s\'agisse d\'une noisette nécessitant un plugin que vous avez désactivé ou désinstallé.' # NEW
+	'warning_noisette_plus_disponible' => 'توجه: اين فندق ديگر در دسترس نيست.',
+	'warning_noisette_plus_disponible_details' => 'اسكليت اين فندق  (<i>@squelette@</i>)  ديگر در دسترس نيست. ممكن است ناشي از يك فندق نيازمند پلگين باشد كه آن را غيرفعال يا نصب‌ زدايي كرده‌ايد.'
 );
 
 ?>
