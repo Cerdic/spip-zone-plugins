@@ -74,20 +74,33 @@ function inc_importer_csv_dist($file, $head = false, $delim = ",", $enclos = '"'
 			if ($header){
 				$header = array_map('importer_csv_importcharset',$header);
 				$header = array_map('importer_csv_nettoie_key',$header);
+				$header_type = array();
+				foreach ($header as $heading) {
+					if (!isset($header_type[$heading]))
+						$header_type[$heading] = "scalar";
+					else
+						$header_type[$heading] = "array";
+				}
 			}
 		}
 		while (($data = fgetcsv($handle, $len, $delim, $enclos)) !== FALSE) {
 			$data = array_map('importer_csv_importcharset',$data);
 			if ($head AND isset($header)) {
 				foreach ($header as $key=>$heading) {
-					$row[$heading]=(isset($data[$key])) ? $data[$key] : '';
+					if ($header_type[$heading]=="array"){
+						if (!isset($row[$heading]))
+							$row[$heading] = array();
+						if (isset($data[$key]) AND strlen($data[$key]))
+							$row[$heading][]= $data[$key];
+					}
+					else
+						$row[$heading]=(isset($data[$key])) ? $data[$key] : '';
 				}
 				$return[]=$row;
 			} else {
 				$return[]=$data;
 			}
 		}
-		fclose($handle);
 	}
 	return $return;
 }
