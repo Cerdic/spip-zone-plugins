@@ -69,10 +69,8 @@ function action_cs_travaux($prive=false){
 
 function en_travaux_affichage_final($flux){
 	if(defined('_en_travaux_SANSMSG') || !$GLOBALS['html']) return $flux;
-	include_spip('inc/minipres'); // pour http_img_pack
-	$res = '<div id="en_travaux" style="padding:6px; position:absolute; left:12px; top:22px; border-color:#CECECE #CECECE #4A4A4A; background-color:#FFEEEE; opacity:0.8; font-size:12px; border-style:solid; border-width:3px; font-weight:bold;">'
-	. http_img_pack('warning-24.gif', _T('info_travaux_titre'), 'align="absmiddle"')
-	. ' &nbsp;'. _T('info_travaux_titre') . '</div>';
+	include_spip('public/assembler');
+	$res = recuperer_fond('fonds/en_travaux_note');
 	if (!$pos = stripos($flux, '</body>')) $pos = strlen($flux);
 	return substr_replace($flux, $res, $pos, 0);
 }
