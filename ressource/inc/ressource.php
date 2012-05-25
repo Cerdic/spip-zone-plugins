@@ -162,10 +162,12 @@ function ressource_meta($res) {
 function ressource_html(&$meta) {
 
 	include_spip('fonctionsale');
-	$u = sale(spip_file_get_contents($meta['local']));
+	if (function_exists('sale')) {
+		$u = sale(spip_file_get_contents($meta['local']));
 
-	$meta['fullextract'] = $u;
-	$meta['extract'] = propre(couper($u, 500));
+		$meta['fullextract'] = $u;
+		$meta['extract'] = propre(couper($u, 500));
+	}
 }
 
 function ressource_mime($e) {
@@ -394,7 +396,9 @@ function ressource_extract($meta) {
 		case 'odt':
 			$conv = converthtml($meta['local'], $err);
 			include_spip('fonctionsale');
-			$conv = sale($conv);
+			if (function_exists('sale')) {
+				$conv = sale($conv);
+			}
 			break;
 		default:
 			break;

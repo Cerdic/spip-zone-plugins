@@ -1,0 +1,19 @@
+<paquet
+	prefix="ressource"
+	categorie="edition"
+	version="0.1"
+	etat="dev"
+	compatibilite="[1.9.0;3.1.*]"
+	logo="images/ressource-32.png"
+	documentation="http://www.spip-contrib.net/Ressource"
+>
+	<nom>Ressource</nom>
+	
+	<auteur>Fil</auteur>
+	
+	<licence>GNU/GPL</licence>
+
+	<!-- traduire gestionnaire="salvatore" module="ressource" reference="fr" / -->
+	
+	<utilise nom="tw" compatibilite="[0.8.0;1.0.0]" />
+</paquet>
