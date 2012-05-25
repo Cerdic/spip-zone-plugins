@@ -52,7 +52,12 @@
 				<ul>
 					<BOUCLE_articles(ARTICLES) {id_rubrique} {!par date} {pagination}>
 					<li>
-						<strong><a href="#URL_ARTICLE">[(#LOGO_ARTICLE_RUBRIQUE|image_reduire{40,*}) ]#TITRE</a></strong>
+						<strong><a href="#URL_ARTICLE">
+								[(#LOGO_ARTICLE_RUBRIQUE|image_reduire{40,*}|sinon{
+									[(#INCLURE{fond=inclure/logo_article_rubrique,largeur=40,hauteur=*,id_trad})]
+									})]
+								#TITRE
+							</a></strong>
 						<br /><small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS|supprimer_tags)]</small>
 					</li>
 					</BOUCLE_articles>

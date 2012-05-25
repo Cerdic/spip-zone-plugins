@@ -32,8 +32,7 @@
 			<div class="cartouche">
 				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
 				<h1 class="#EDIT{titre} surlignable">
-					[(#LOGO_ARTICLE|!={''}|?{
-						[(#LOGO_ARTICLE|image_reduire{40,*})],
+					[(#LOGO_ARTICLE|image_reduire{40,*}|sinon{
 						[(#INCLURE{fond=inclure/logo_article,largeur=40,hauteur=*,id_trad})]
 						})]
 					#TITRE</h1>

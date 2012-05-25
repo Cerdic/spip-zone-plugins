@@ -20,5 +20,5 @@
 		<necessite nom="taa" compatibilite="[1.1.0;[" />		
 		<utilise nom="z" compatibilite="[1.7.17;[" />	
 		
-		<menu nom="configurer_multilingue" titre="multilingue:configurer_multilingue" parent="menu_configuration" icone="images/multilingue-16.png"/>	
+		<menu nom="configurer_multilingue" titre="multilingue:multilingue_titre" parent="menu_configuration" icone="images/multilingue-16.png"/>	
 </paquet>

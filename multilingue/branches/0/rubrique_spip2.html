@@ -32,7 +32,9 @@
 		</div><!--.arbo-->
 
         <div class="cartouche">
-            [(#LOGO_RUBRIQUE|image_reduire{200,200})]
+            [(#LOGO_RUBRIQUE|image_reduire{200,200}|sinon{
+				[(#INCLURE{fond=inclure/logo_rubrique,largeur=200,hauteur=200,id_trad})]
+				})]
             <h1 class="#EDIT{titre}">[(#ID_PARENT|!={0}|?{#TITRE,<:accueil_site:>})]</h1>
             [<p><small><:dernier_ajout:> : (#DATE|affdate_jourcourt).</small></p>]
         </div>
@@ -47,7 +49,9 @@
             <ul>
                 <BOUCLE_articles(ARTICLES) {id_rubrique} {par date}{inverse} {pagination}>
                 <li>
-                    [(#LOGO_ARTICLE{#URL_ARTICLE}|image_reduire{150,100})]
+					[(#LOGO_ARTICLE{URL_ARTICLE}|image_reduire{150,100}|sinon{
+						[(#INCLURE{fond=inclure/logo_article,largeur=200,hauteur=200,id_trad,url=#URL_ARTICLE})]
+					})]
                     <h3><a href="#URL_ARTICLE">#TITRE</a></h3>
                     <small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
                 </li>
