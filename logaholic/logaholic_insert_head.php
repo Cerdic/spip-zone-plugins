@@ -36,12 +36,11 @@ function logaholic_snippet(){
 	$lwa_server = lire_config('logaholic/lwa_server');
 	if ($id_logaholic
 	  AND $id_logaholic !== '_'
-	  AND (strncmp($id_logaholic,"LWA_pxxx",6)!=0)) {
-
+	  AND (strncmp($id_logaholic,"xxx",6)!=0)) {
 		return '
 <!-- /* Logaholic Web Analytics Code */ -->
 <script type="text/javascript">
-var lwa_id = "'.$id_logaholic.'";
+var lwa_id = "LWA_p'.$id_logaholic.'";
 if (document.location.protocol=="https:") { var ptcl = "https:" } else { var ptcl = "http:" } 
 var lwa_server = ptcl + "//'.$lwa_server.'//";    
 document.write(unescape("%3Cscript type="text/javascript" src="" + lwa_server + "lwa.js"%3E%3C/script%3E"));
@@ -49,7 +48,7 @@ document.write(unescape("%3Cscript type="text/javascript" src="" + lwa_server + 
 <script type="text/javascript">
 var lwa = trackPage();
 </script>
-<noscript><a href="http://'.$lwa_server.'//logaholictracker.php?conf='.$id_logaholic.'"></noscript>'."\n";
+<noscript><a href="http://'.$lwa_server.'//logaholictracker.php?conf=LWA_p'.$id_logaholic.'"></noscript>'."\n";
 
 	}
 	return "";

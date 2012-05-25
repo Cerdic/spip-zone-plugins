@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre' => 'Logaholic',
 
 	// E
-	'explication_id_logaholic' => 'Si "_" ou vide, supprime la fonctionnalit&eacute; (vide reviendra au d&eacute;faut).',
+	'explication_id_logaholic' => 'Si "_" ou vide, supprime la fonctionnalit&eacute; (vide reviendra au d&eacute;faut). ne reneseigner que le numéro',
 	'explication_lwa_server' => 'Saisisser l\'adresse du site sur le quel vous pouvez consulter les statistiques.',
 
 	// L
