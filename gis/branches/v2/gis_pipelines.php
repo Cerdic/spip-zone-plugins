@@ -357,4 +357,10 @@ function gis_xmlrpc_server_class($flux){
 	include_spip('inc/gis_xmlrpc');
 	return $flux;
 }
+
+function gis_saisies_autonomes($flux){
+	$flux[] = 'carte';
+	return $flux;
+}
+
 ?>
