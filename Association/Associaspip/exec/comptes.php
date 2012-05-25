@@ -22,8 +22,7 @@ function exec_comptes()
 	} else {
 // initialisations
 		$id_exercice = intval(_request('exercice'));
-		if(!$id_exercice){
-			/* on recupere l'id du dernier exercice */
+		if(!$id_exercice){ // on recupere l'id du dernier exercice
 			$id_exercice = sql_getfetsel('id_exercice','spip_asso_exercices','','','debut DESC');
 		}
 		$vu = _request('vu');
@@ -168,7 +167,7 @@ function exec_comptes()
 			. "<table width='100%'><tr>\n<td>" . $nav . '</td><td style="text-align:right;"><input type="submit" value="'. _T('asso:bouton_valider') . '" class="fondo" /></td></tr></table>';
 			echo generer_form_ecrire('action_comptes', $table);
 		} else {
-			echo '<table width="100%"><tbody><tr><td class="actions erreur">' .( $exercice ? _T('asso:exercice_sans_operation') : '<a href="'.generer_url_ecrire('exercices').'">'._T('asso:ajouter_un_exercice').'</a>' ). '</td></tr></tbody></table>';
+			echo '<table width="100%"><tbody><tr><td class="actions erreur">' .( $id_exercice ? _T('asso:exercice_sans_operation') : '<a href="'.generer_url_ecrire('exercices').'">'._T('asso:ajouter_un_exercice').'</a>' ). '</td></tr></tbody></table>';
 		}
 		fin_page_association();
 	}
