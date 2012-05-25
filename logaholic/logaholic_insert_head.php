@@ -48,7 +48,8 @@ document.write(unescape("%3Cscript type="text/javascript" src="" + lwa_server + 
 </script>
 <script type="text/javascript">
 var lwa = trackPage();
-</script>'."\n";
+</script>
+<noscript><a href="http://'.$lwa_server.'//logaholictracker.php?conf='.$id_logaholic.'"></noscript>'."\n";
 
 	}
 	return "";

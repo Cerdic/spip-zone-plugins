@@ -1,7 +1,7 @@
 <paquet
 	prefix="logaholic"
 	categorie="statistique"
-	version="0.4.1"
+	version="0.0.2"
 	etat="stable"
 	compatibilite="[1.9.2;3.0.*]"
 	logo="images/logaholic-32x32.png"
