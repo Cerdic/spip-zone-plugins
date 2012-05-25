@@ -3,5 +3,5 @@
 	<strong id="nom_site_spip"><a rel="start home" href="#URL_SITE_SPIP/" title="<:accueil_site:>">#NOM_SITE_SPIP</a></strong>
 	[<div id='slogan_site_spip'>(#SLOGAN_SITE_SPIP|PtoBR)</div>]
 </div>
-<INCLURE{fond=inclure/menu_langues,env}/>
+<INCLURE{fond=inclure/menu_langues[_(#CONFIG{multilingue/menu_langue})],env}/>
 

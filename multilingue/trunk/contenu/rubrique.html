@@ -11,7 +11,10 @@
 <div class="contenu-principal">
 
 	<div class="cartouche">
-		[(#LOGO_RUBRIQUE||image_reduire{200,200})]
+		[(#LOGO_RUBRIQUE|!={''}|?{
+			[(#LOGO_RUBRIQUE|image_reduire{200,200})],
+			[(#INCLURE{fond=inc/logo_rubrique,largeur=200,hauteur=200,id_trad})]
+			})]
 		<h1 class="h1 #EDIT{titre}">#TITRE</h1>
 		[<p class="info-publi"><span class="published"><:dernier_ajout:> : (#DATE|affdate_jourcourt).</span></p>]
 	</div>

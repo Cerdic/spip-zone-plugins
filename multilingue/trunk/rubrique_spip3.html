@@ -35,7 +35,12 @@
 			</p><!--.arbo-->
 	
 			<div class="cartouche">
-				<h1 class="#EDIT{titre}">[(#LOGO_RUBRIQUE|image_reduire{40,*}) ][(#ID_PARENT|!={0}|?{#TITRE,<:accueil_site:>})]</h1>
+				<h1 class="#EDIT{titre}">
+					 [(#LOGO_RUBRIQUE|!={''}|?{
+						[(#LOGO_RUBRIQUE|image_reduire{40,*})],
+						[(#INCLURE{fond=inc/logo_rubrique,largeur=40,hauteur=*,id_trad})]
+						})]
+				[(#ID_PARENT|!={0}|?{#TITRE,<:accueil_site:>})]</h1>
 			</div>
 	
 			[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
