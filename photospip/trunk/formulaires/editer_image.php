@@ -20,7 +20,7 @@ include_spip('inc/filtres_images');
 include_spip('photospip_fonctions');
 
 function formulaires_editer_image_charger_dist($id_document='new',$mode=false, $retour=''){
-	$valeurs = array();
+	$valeurs = array('editable'=>true);
 	$id_document = sql_getfetsel('id_document','spip_documents','id_document='.intval($id_document));
 	$valeurs['id_document'] = $id_document;
 	$valeurs['mode'] = $mode;
@@ -87,6 +87,7 @@ function formulaires_editer_image_charger_dist($id_document='new',$mode=false, $
 		$valeurs['message_erreur'] = _T('photospip:erreur_image_process');
 		$valeurs['editable'] = false;
 	}
+	spip_log($valeurs,'photospip');
 	return $valeurs;
 }
 
@@ -122,16 +123,17 @@ function formulaires_editer_image_verifier_dist($id_document='new',$mode=false, 
 }
 
 function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $retour=''){
-	$res = array();
-	
+	$res = array('editable'=>true);
+	$autoclose = "<script type='text/javascript'>if (window.jQuery) jQuery.modalboxclose();</script>";
 	if($mode == 'vignette'){
 		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
-		$res['redirect'] = sinon(_request('redirect'),false);
+		$res['redirect'] = sinon(_request('redirect'),'');
 		if(_request('supprimer_vignette')){
 			$supprimer_document = charger_fonction('supprimer_document','action');
 			if ($id_vignette)
 				$supprimer_document($id_vignette);
-			$res['message_ok'] = _T('medias:vignette_supprimee');
+			$res['message_ok'] = _T('medias:vignette_supprimee').$autoclose;
+			set_request('id_document',$id_document);
 		}else{
 			$id_document_orig = $id_document;
 			if($id_vignette && ($id_vignette > 0) && $id_vignette = sql_getfetsel('id_document','spip_documents','id_document='.intval($id_vignette)))
@@ -154,8 +156,6 @@ function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $
 		// on transforme l'image en png non destructif
 		//spip_log("On transforme l'image source en PNG non destructif","photospip");
 		//$src = extraire_attribut(image_alpha($src,0),'src');
-		
-		$autoclose = "<script type='text/javascript'>if (window.jQuery) jQuery.modalboxclose();</script>";
 		
 		/**
 		 * L'image créée aura pour nom image_orig-xxxx.ext où xxxx est le md5 de la date
@@ -214,12 +214,13 @@ function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $
 					$ajoute = $ajouter_document($row['id_document'], $files, $objet, $id_objet, $mode);
 				 }else{
 					 $ajoute = $ajouter_document($id_vignette,$files,'',0,'vignette');
-						if(is_int(reset($ajoute))){
-							$id_vignette = reset($ajoute);
-							include_spip('action/editer_document');
-							document_set($id_document_orig,array("id_vignette" => $id_vignette,'mode'=>'document'));
-							$res['message_ok'] = _T('medias:document_installe_succes').$autoclose;
-						}
+					if(is_int(reset($ajoute))){
+						$id_vignette = reset($ajoute);
+						include_spip('action/editer_document');
+						document_set($id_document_orig,array("id_vignette" => $id_vignette,'mode'=>'document'));
+						set_request('id_document',$id_vignette);
+						$res['message_ok'] = _T('photospip:message_vignette_installe_succes').$autoclose;
+					}
 				 }
 				 include_spip('inc/flock');
 				 spip_unlink($tmp_img);
@@ -238,14 +239,14 @@ function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $
 				 spip_unlink($tmp_img);
 			}
 		}
-		
 		include_spip('inc/invalideur');
 		suivre_invalideur("id='id_document/$id_document'");
 	}
 	$ajax = defined('_AJAX') AND _AJAX;
-	if($ajax)
-		$res['redirect'] = '';
-	elseif (!isset($res['redirect']))
+	//$if($ajax)
+	//	$res['redirect'] = '';
+	//else
+	if (!isset($res['redirect']))
 		$res['redirect'] = parametre_url(self(),'redirect','');
 	if (!isset($res['message_erreur']) && !$res['message_ok'])
 		$res['message_ok'] = _L('Votre modification a &eacute;t&eacute; enregistr&eacute;e').$autoclose;

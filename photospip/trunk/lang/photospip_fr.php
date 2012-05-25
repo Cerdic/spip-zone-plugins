@@ -112,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_image_taille_actuelle' => 'Taille actuelle de l\'image&nbsp;: @largeur@x@hauteur@px.',
 	'message_limite_versions' => 'Le nombre de versions précédentes sont limitées à @limite@.',
 	'message_pas_de_versions' => 'Ce document n\'est pas versionné.',
+	'message_vignette_installe_succes' => 'La vignette a été chargé avec succès',
 
 	// P
 	'photospip' => 'PhotoSPIP',

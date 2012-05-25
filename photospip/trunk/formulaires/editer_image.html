@@ -1,4 +1,4 @@
-<div class='formulaire_spip formulaire_editer formulaire_editer_document formulaire_editer_document-#ENV{id_document,nouveau}' style="position:relative">
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_document}' style="position:relative">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{erreurs}|table_valeur{message}|oui)
@@ -70,10 +70,10 @@
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class="boutons">
+	  	<input type="submit" class="submit" name="tester" value="<:photospip:bouton_tester:>" />
 	  	[(#ENV{mode}|=={vignette}|et{#ENV{vignette}|=={oui}}|oui)
 	  	<input type="submit" class="submit" name="supprimer_vignette" value="<:photospip:bouton_supprimer_vignette:>" />
 	  	]
-	  	<input type="submit" class="submit" name="tester" value="<:photospip:bouton_tester:>" />
 	  	<input type="submit" class="submit" name="validation" value="<:photospip:valider:>" />
 	  </p>
 	 <script type="text/javascript"><!--

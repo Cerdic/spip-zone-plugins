@@ -59,17 +59,26 @@ function photospip_jquery_plugins($plugins) {
  */
 function photospip_document_desc_actions($flux) {
 	$id_document = $flux['args']['id_document'];
-	$infos = sql_fetsel('distant,extension', 'spip_documents', 'id_document=' . intval($id_document));
+	$infos = sql_fetsel('*', 'spip_documents', 'id_document=' . intval($id_document));
+	spip_log($infos,'photospip');
 	if (($infos['distant'] == 'non') && in_array($infos['extension'], array('jpg', 'png', 'gif'))) {
 		$redirect = self();
 		$url_modif = parametre_url(generer_url_ecrire('image_edit', 'id_document=' . intval($id_document)), 'redirect', $redirect);
 		$texte_modif = _T('photospip:lien_editer_image');
-		$url_vignette = parametre_url(parametre_url(generer_url_ecrire('image_edit','id_document='.intval($id_document)),'mode','vignette'),'redirect', $redirect);
+		$url_vignette = parametre_url(generer_url_ecrire('image_edit','id_document='.intval($id_document)),'mode','vignette');
 		$texte_vignette = _T('photospip:lien_editer_vignette');
 		if ($flux['args']['position'] == 'galerie') {
 			$flux['data'] .= "[<a href='$url_modif'>$texte_modif</a>] [<a href='$url_vignette'>$texte_vignette</a>]";
 		} else {
 			$flux['data'] .= "<span class='sep'> | </span><a href='$url_modif'>$texte_modif</a><span class='sep'> | </span><a href='$url_vignette' target='_blank' class='editbox'>$texte_vignette</a>";
+		}
+	}else if($id_vignette = sql_getfetsel('id_document','spip_documents','id_document='.intval($infos['id_vignette']))){
+		$url_vignette = parametre_url(generer_url_ecrire('image_edit','id_document='.intval($id_document)),'mode','vignette');
+		$texte_vignette = _T('photospip:lien_editer_vignette');
+		if ($flux['args']['position'] == 'galerie') {
+			$flux['data'] .= "[<a href='$url_vignette'>$texte_vignette</a>]";
+		} else {
+			$flux['data'] .= "<span class='sep'> | </span><a href='$url_vignette' target='_blank' class='editbox'>$texte_vignette</a>";
 		}
 	}
 	return $flux;
@@ -108,15 +117,15 @@ function photospip_boite_infos($flux){
 			if(_request('exec') != 'image_edit')
 				$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_image'), parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit.gif',false);
 			if($document['id_vignette'] && $document['id_vignette'] > 0){
-				$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_vignette'), parametre_url(parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'mode','vignette'),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit.gif',false);
+				$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_vignette'), parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'mode','vignette'), find_in_path('images/photospip-24.png'), 'edit.gif',false);
 				$flux['data'] .= icone_horizontale(_T('photospip:bouton_supprimer_vignette_document'), generer_action_auteur('supprimer_document',$document['id_vignette'],parametre_url(self(),'supprimer_vignette','oui')), find_in_path('images/photospip-24.png'), 'supprimer.gif',false);
 				$flux['data'] .= recuperer_fond('prive/photospip_vignette',array('id_document'=>intval($id_document)));
 			}else if(in_array($document['extension'],array('gif','png','jpg'))){
-				$flux['data'] .= icone_horizontale(_T('photospip:bouton_creer_vignette'), parametre_url(parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'mode','vignette'),'redirect',self()), find_in_path('images/photospip-24.png'), 'creer.gif',false);
+				$flux['data'] .= icone_horizontale(_T('photospip:bouton_creer_vignette'), parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'mode','vignette'), find_in_path('images/photospip-24.png'), 'creer.gif',false);
 			}
 		}elseif((_request('mode') == 'vignette') && ($document = sql_fetsel('*','spip_documents','id_document='.intval($id_document)))){
-			$flux['data'] .= icone_horizontale(_T('photospip:bouton_modifier_document'), parametre_url(generer_url_ecrire('documents_edit','id_document='.$document['id_document']),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit.gif',false);
-			$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_image'), parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit.gif',false);
+			$flux['data'] .= icone_horizontale(_T('photospip:bouton_modifier_document'), generer_url_ecrire('documents_edit','id_document='.$document['id_document']), find_in_path('images/photospip-24.png'), 'edit.gif',false);
+			$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_image'), generer_url_ecrire('image_edit','id_document='.$document['id_document']), find_in_path('images/photospip-24.png'), 'edit.gif',false);
 		}
 	}
 	return $flux;
