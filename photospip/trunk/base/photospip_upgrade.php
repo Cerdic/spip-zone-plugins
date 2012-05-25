@@ -1,8 +1,7 @@
 <?php
-
 /**
- * Photospip
- * Un Photoshop-light dans spip?
+ * PhotoSPIP
+ * Modification d'images dans SPIP
  *
  * Auteurs :
  * kent1 (kent1@arscenic.info -  http://www.kent1.info)
@@ -11,6 +10,7 @@
  * Pour plus de details voir le fichier COPYING.txt
  *
  */
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function photospip_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;

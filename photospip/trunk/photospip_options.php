@@ -1,7 +1,7 @@
 <?php
 /**
- * Photospip
- * Un Photoshop-light dans spip?
+ * PhotoSPIP
+ * Modification d'images dans SPIP
  *
  * Auteurs :
  * kent1 (kent1@arscenic.info -  http://www.kent1.info)
@@ -10,8 +10,11 @@
  * Pour plus de details voir le fichier COPYING.txt
  *
  */
-if (!defined("_ECRIRE_INC_VERSION")) return;
- 
-define(_DIR_LIB_IMGAREASELECT,_DIR_RACINE.'lib/jquery.imgareaselect-0.9.8/')
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
+if(!defined('_DIR_LIB_IMGAREASELECT'))
+	define('_DIR_LIB_IMGAREASELECT',_DIR_RACINE.'lib/jquery.imgareaselect-0.9.8/');
+
+if(!defined('_IMG_GD_QUALITE'))
+	define('_IMG_GD_QUALITE', lire_config('photospip/compression_rendu',100));
 ?>

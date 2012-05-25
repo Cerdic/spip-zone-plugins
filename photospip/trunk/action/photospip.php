@@ -1,20 +1,17 @@
 <?php
-
-/*
- * Photospip
- * Un Photoshop-light dans spip?
+/**
+ * PhotoSPIP
+ * Modification d'images dans SPIP
  *
  * Auteurs :
- * Quentin Drouet (kent1@arscenic.info)
+ * kent1 (kent1@arscenic.info -  http://www.kent1.info)
  *
- * © 2008 - Distribue sous licence GNU/GPL
+ * © 2008-2012 - Distribue sous licence GNU/GPL
  * Pour plus de details voir le fichier COPYING.txt
  *
  */
  
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
-define('_IMG_GD_QUALITE', lire_config('photospip/compression_rendu') ? lire_config('photospip/compression_rendu') : 85);
+if (!defined('_ECRIRE_INC_VERSION')) return;
 	
 function action_photospip_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');

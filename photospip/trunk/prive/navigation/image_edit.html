@@ -34,7 +34,6 @@
 		<:photospip:message_pas_de_versions:>
 		<//B_interd>
 		<h3><:photospip:titre_informations_images:></h3>
-		<h4 class="#_doc:EDIT{titre}">[(#TITRE|sinon{[(#FICHIER|basename)]})]</h4>
 		<div class="infos">
 			<div id="infos_doc_sup">
 				<p><:photospip:id_document:>#ID_DOCUMENT</p>
@@ -44,15 +43,14 @@
 				<p><:photospip:taille_fichier:><br />
 				#LARGEUR x #HAUTEUR px[ - (#TAILLE|taille_en_octets)]
 				</p>
-				<p><:photospip:fichier_original:>[(#FICHIER|basename)]</p>
+				<p><:photospip:fichier_original:><abbr title="[(#FICHIER|basename)]">[(#FICHIER|basename|couper{30})]</abbr></p>
 			</div>
 		</div>
 		[(#CONFIG{plugin/PHOTO_INFOS}|oui)
-		[(#EXTENSION|=={jpg}|oui)
-		<h4><:photospip:donnees_exif:></h4>
+		[<h4><:photospip:donnees_exif:></h4>
 		<div class="infos">
-			<INCLURE{fond=inc_exif}{fichier=#FICHIER}>
-			<INCLURE{fond=inc_histogramme}{fichier=#FICHIER}>
+			(#INCLURE{fond=inc_exif,fichier=#FICHIER}|trim)
+			<INCLURE{fond=inc_histogramme,fichier=#FICHIER}>
 		</div>]]
 </div>
 </BOUCLE_doc>

@@ -1,8 +1,7 @@
 <?php
-
-/*
- * Photospip
- * Un Photoshop-light dans spip?
+/**
+ * PhotoSPIP
+ * Modification d'images dans SPIP
  *
  * Auteurs :
  * kent1 (kent1@arscenic.info -  http://www.kent1.info)
@@ -12,7 +11,7 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function photospip_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_documents_inters'][] = 'documents';

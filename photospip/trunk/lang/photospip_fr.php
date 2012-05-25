@@ -1,11 +1,10 @@
 <?php
-
-/*
- * Photospip
- * Un Photoshop-light dans spip?
+/**
+ * PhotoSPIP
+ * Modification d'images dans SPIP
  *
  * Auteurs :
- * Quentin Drouet (kent1@arscenic.info)
+ * kent1 (kent1@arscenic.info -  http://www.kent1.info)
  *
  * © 2008-2012 - Distribue sous licence GNU/GPL
  * Pour plus de details voir le fichier COPYING.txt
@@ -14,10 +13,16 @@
  
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_supprimer_vignette' => 'Supprimer cette vignette',
+	'bouton_supprimer_vignette_document' => 'Supprimer la vignette de ce document',
 	'bouton_tester' => 'Prévisualiser',
+	'bouton_editer_image' => 'Éditer l\'image',
+	'bouton_editer_vignette' => 'Éditer la vignette',
+	'bouton_modifier_document' => 'Modifier les informations du document',
 	
 	// E
 	'erreur_auth_modifier' => 'Vous n\'êtes pas autoriser à modifier ce document.',

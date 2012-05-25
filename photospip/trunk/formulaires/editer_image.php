@@ -1,6 +1,17 @@
 <?php
-
-if (!defined("_ECRIRE_INC_VERSION")) return;
+/**
+ * PhotoSPIP
+ * Modification d'images dans SPIP
+ *
+ * Auteurs :
+ * kent1 (kent1@arscenic.info -  http://www.kent1.info)
+ *
+ * © 2008-2012 - Distribue sous licence GNU/GPL
+ * Pour plus de details voir le fichier COPYING.txt
+ *
+ */
+ 
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
 include_spip('inc/autoriser');

@@ -1,18 +1,17 @@
 <?php
-
-/*
- * Photospip
- * Un Photoshop-light dans spip?
+/**
+ * PhotoSPIP
+ * Modification d'images dans SPIP
  *
  * Auteurs :
- * Quentin Drouet (kent1@arscenic.info)
+ * kent1 (kent1@arscenic.info -  http://www.kent1.info)
  *
- * © 2008 - Distribue sous licence GNU/GPL
+ * © 2008-2012 - Distribue sous licence GNU/GPL
  * Pour plus de details voir le fichier COPYING.txt
  *
  */
  
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function action_images_versions_dist() {
 	include_spip('inc/distant'); # pour copie_locale

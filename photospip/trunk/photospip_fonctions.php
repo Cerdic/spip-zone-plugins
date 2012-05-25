@@ -1,7 +1,7 @@
 <?php
 /**
- * Photospip
- * Un Photoshop-light dans spip?
+ * PhotoSPIP
+ * Modification d'images dans SPIP
  *
  * Auteurs :
  * kent1 (kent1@arscenic.info -  http://www.kent1.info)
@@ -11,7 +11,7 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 /*
 
 @argument balise : balise sur lequel est appliquer le filtre appliquer_filtre

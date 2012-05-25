@@ -1,7 +1,7 @@
 <?php
 /**
- * Photospip
- * Un Photoshop-light dans spip?
+ * PhotoSPIP
+ * Modification d'images dans SPIP
  *
  * Auteurs :
  * kent1 (kent1@arscenic.info -  http://www.kent1.info)
@@ -11,8 +11,7 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION"))
-	return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Insertion dans le pipeline header_prive (SPIP)
@@ -89,6 +88,36 @@ function photospip_formulaire_verifier($flux){
 			$flux['data']['resultats'] = _T('photospip:erreur_selectionner_au_moins_une_valeur');
 		}
 	}	
+	return $flux;
+}
+
+
+/**
+ * Insertion dans le pipeline boite_infos (SPIP)
+ * On ajoute quelques boutons sur les pages de modification de documents
+ * 
+ * @param array $flux
+ * @return array $flux
+ */
+function photospip_boite_infos($flux){
+	if ($flux['args']['type']=='document'){
+		$id_document = $flux['args']['id'];
+		if((_request('mode') != 'vignette') && ($document = sql_fetsel('*','spip_documents','id_document='.intval($id_document)))){
+			if(_request('exec') != 'documents_edit')
+				$flux['data'] .= icone_horizontale(_T('photospip:bouton_modifier_document'), parametre_url(generer_url_ecrire('documents_edit','id_document='.$document['id_document']),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit.gif',false);
+			if(_request('exec') != 'image_edit')
+				$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_image'), parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit.gif',false);
+			if($document['id_vignette'] && $document['id_vignette'] > 0){
+				$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_vignette'), parametre_url(parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'mode','vignette'),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit.gif',false);
+				$flux['data'] .= icone_horizontale(_T('photospip:bouton_supprimer_vignette_document'), generer_action_auteur('supprimer_document',$document['id_vignette'],parametre_url(self(),'supprimer_vignette','oui')), find_in_path('images/photospip-24.png'), 'supprimer.gif',false);
+			}else if(in_array($document['extension'],array('gif','png','jpg'))){
+				$flux['data'] .= icone_horizontale(_T('photospip:bouton_creer_vignette'), parametre_url(parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'mode','vignette'),'redirect',self()), find_in_path('images/photospip-24.png'), 'creer.gif',false);
+			}
+		}elseif((_request('mode') == 'vignette') && ($document = sql_fetsel('*','spip_documents','id_document='.intval($id_document)))){
+			$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_image'), parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit.gif',false);
+			$flux['data'] .= icone_horizontale(_T('photospip:bouton_modifier_document'), parametre_url(generer_url_ecrire('documents_edit','id_document='.$document['id_document']),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit.gif',false);
+		}
+	}
 	return $flux;
 }
 ?>
