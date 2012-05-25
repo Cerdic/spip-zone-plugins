@@ -86,6 +86,7 @@ function inc_importer_csv_dist($file, $head = false, $delim = ",", $enclos = '"'
 		while (($data = fgetcsv($handle, $len, $delim, $enclos)) !== FALSE) {
 			$data = array_map('importer_csv_importcharset',$data);
 			if ($head AND isset($header)) {
+				$row = array();
 				foreach ($header as $key=>$heading) {
 					if ($header_type[$heading]=="array"){
 						if (!isset($row[$heading]))
