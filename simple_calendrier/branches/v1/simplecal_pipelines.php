@@ -141,6 +141,22 @@ function simplecal_affiche_milieu($flux) {
     return $flux;
 }
 
+/**
+ * Publier et dater les rubriques qui ont un evenement publie
+ * (Suite a un import (dump))
+ * 
+ * @param array $flux
+ * @return array
+ */
+function simplecal_calculer_rubriques($flux){
+
+    $r = sql_select("R.id_rubrique AS id, max(A.date) AS date", "spip_rubriques AS R, spip_evenements AS A", "R.id_rubrique = A.id_rubrique AND R.date_tmp <= A.date AND A.statut='publie' ", "R.id_rubrique");
+    while ($row = sql_fetch($r)) {
+        sql_updateq('spip_rubriques', array('statut_tmp'=>'publie', 'date_tmp'=>$row['date']), "id_rubrique=".$row['id']);	
+    }
+    return $flux;
+}
+
 
 function simplecal_configurer_liste_metas($metas) {
     $metas['simplecal_autorisation_redac'] = 'non'; // [oui, non]

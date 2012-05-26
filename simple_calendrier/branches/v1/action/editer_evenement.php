@@ -103,8 +103,10 @@ function revisions_evenements($id_evenement, $c=false) {
 
     // Un cas special : changer le statut ? 
     // On recupere le statut courant
-    $row = sql_fetsel("statut", "spip_evenements", "id_evenement=$id_evenement");
+    $row = sql_fetsel("statut, id_rubrique", "spip_evenements", "id_evenement=$id_evenement");
     $statut_ancien = $statut = $row['statut'];
+    $id_rubrique = $row['id_rubrique'];
+    
     // Si un nouveau statut est demande, ET qu'il est different de l'actuel, 
     if (_request('statut', $c) AND _request('statut', $c) != $statut) {
         $statut = $champs['statut'] = _request('statut', $c);
@@ -129,8 +131,9 @@ function revisions_evenements($id_evenement, $c=false) {
     // Invalider les caches
     include_spip('inc/invalideur');
     suivre_invalideur("id='id_evenement/$id_evenement'");
-
+    
+    // Au besoin, changer le statut des rubriques concernees 
+	include_spip('inc/rubriques');
+	calculer_rubriques_if($id_rubrique, $champs, $statut_ancien);
 }
-
-
 ?>

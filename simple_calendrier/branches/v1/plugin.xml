@@ -4,7 +4,7 @@
     </nom>
     <auteur>[Julien Lanfrey->http://www.spip-contrib.net/ju3873]</auteur>
     <licence>GPL &#169; 2010-2011</licence>
-    <version>1.2.5</version>
+    <version>1.2.6</version>
     <version_base>1.4</version_base>
     <etat>stable</etat>
     
@@ -126,6 +126,11 @@ _   (Th&#232;mes pour le mini-calendrier bas&#233;s sur [jquery-ui themeroller->
     
     <pipeline>
         <nom>compter_contributions_auteur</nom>
+        <inclure>simplecal_pipelines.php</inclure>
+    </pipeline>
+    
+    <pipeline>
+        <nom>calculer_rubriques</nom>
         <inclure>simplecal_pipelines.php</inclure>
     </pipeline>
     
