@@ -737,9 +737,9 @@ Commentaire: @commentaire@
 	'cpte_bilan_total_depenses' => 'Total des Actifs',
 	'cpte_bilan_total_recettes' => 'Total des Passifs',
 	'cpte_resultat_pied_page_export_pdf' => "Associaspip - Gestion d'une association sous licence GPL",
-	'cpte_res_export_association' => 'Association : @nom@',
-	'cpte_res_export_exercice' => 'Exercice : @titre@',
-	'cpte_res_export_page' => 'Page : @numero@',
+	'cpte_export_association' => 'Association : @nom@',
+	'cpte_export_exercice' => 'Exercice : @titre@',
+	'cpte_export_page' => 'Page : @numero@',
 	# Comptes de Bilan
 	'cpte_bilan_titre_general' => 'Bilan',
 	'cpte_bilan_bouton_voir' => 'Voir',

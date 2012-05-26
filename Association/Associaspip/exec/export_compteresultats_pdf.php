@@ -97,7 +97,7 @@ class EXPORT_PDF extends FPDF {
 		//Couleur du texte en gris
 		$this->SetTextColor(128);
 		//Date et Numéro de page
-		$this->Cell(0, 10, html_entity_decode(_T('asso:cpte_resultat_pied_page_export_pdf') .' -- '. affdate(date('Y-m-d')) .' -- '. _T('asso:cpte_res_export_page', array('numero'=>$this->PageNo()) ), 0, 0, 'C');
+		$this->Cell(0, 10, html_entity_decode(_T('asso:cpte_resultat_pied_page_export_pdf') .' -- '. affdate(date('Y-m-d')) .' -- '. _T('asso:cpte_export_page', array('numero'=>$this->PageNo()) )), 0, 0, 'C');
 	}
 
 	function enTete() {
@@ -135,7 +135,7 @@ class EXPORT_PDF extends FPDF {
 		$this->SetFillColor(235);
 		//Sous titre Nom de l'association
 		$this->SetXY($xc, $yc);
-		$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 6, utf8_decode(_T('cpte_res_export_association', array('nom'=>$GLOBALS['association_metas']['nom']) )), 0, 0, 'C', true);
+		$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 6, utf8_decode(_T('asso:cpte_export_association', array('nom'=>$GLOBALS['association_metas']['nom']) )), 0, 0, 'C', true);
 		$yc += 6;
 		//Saut de ligne
 		$this->Ln($this->space_v/2);
@@ -147,7 +147,7 @@ class EXPORT_PDF extends FPDF {
 		$this->SetFillColor(235);
 		//Sous titre Date début et fin de l'exercice
 		$this->SetXY($xc, $yc);
-		$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 6, utf8_decode(_T('asso:cpte_res_export_exercice', array('titre'=>sql_getfetsel('intitule','spip_asso_exercices', 'id_exercice='.$this->exercice) ) )), 0, 0, 'C', true);
+		$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 6, utf8_decode(_T('asso:cpte_export_exercice', array('titre'=>sql_getfetsel('intitule','spip_asso_exercices', 'id_exercice='.$this->exercice) ) )), 0, 0, 'C', true);
 		$yc += 6;
 		//Saut de ligne
 		$this->Ln($this->space_v);
@@ -175,7 +175,7 @@ class EXPORT_PDF extends FPDF {
 
 		//Titre centre
 		$this->SetXY($xc, $yc);
-		$this->Cell($this->largeur_utile, 10, html_entity_decode(_T('asso:cpte_resultat_titre_charges')), 0, 0, 'C');
+		$this->Cell($this->largeur_utile, 10, html_entity_decode(_T('asso:cpte_resultat_depenses')), 0, 0, 'C');
 		$yc += 10;
 
 		//Saut de ligne
@@ -239,7 +239,7 @@ class EXPORT_PDF extends FPDF {
 		//Couleur de fond
 		$this->SetFillColor(215);
 
-		$this->Cell(($this->largeur_utile)-(2*$this->space_h+30), 6, html_entity_decode(_T('asso:cpte_resultat_total_charges')), 1, 0, 'R', true);
+		$this->Cell(($this->largeur_utile)-(2*$this->space_h+30), 6, html_entity_decode(_T('asso:cpte_resultat_total')), 1, 0, 'R', true);
 		$this->Cell(30, 6, association_nbrefr($this->total_charges), 1, 0, 'R', true);
 		$yc += 6;
 
@@ -269,7 +269,7 @@ class EXPORT_PDF extends FPDF {
 
 		//Titre centre
 		$this->SetXY($xc, $yc);
-		$this->Cell($this->largeur_utile, 10, html_entity_decode(_T('asso:cpte_resultat_titre_produits')), 0, 0, 'C');
+		$this->Cell($this->largeur_utile, 10, html_entity_decode(_T('asso:cpte_resultat_recettes')), 0, 0, 'C');
 		$yc += 10;
 
 		//Saut de ligne
@@ -333,7 +333,7 @@ class EXPORT_PDF extends FPDF {
 		//Couleur de fond
 		$this->SetFillColor(215);
 
-		$this->Cell(($this->largeur_utile)-(2*$this->space_h+30), 6, html_entity_decode(_T('asso:cpte_resultat_total_produits')), 1, 0, 'R', true);
+		$this->Cell(($this->largeur_utile)-(2*$this->space_h+30), 6, html_entity_decode(_T('asso:cpte_resultat_total')), 1, 0, 'R', true);
 		$this->Cell(30, 6, association_nbrefr($this->total_produits), 1, 0, 'R', true);
 		$yc += 6;
 
@@ -411,7 +411,7 @@ class EXPORT_PDF extends FPDF {
 		//Titre centre
 		$this->SetXY($xc, $yc);
 
-		$this->Cell($this->largeur_utile, 10, html_entity_decode(_T('asso:cpte_resultat_titre_benevolat')), 0, 0, 'C');
+		$this->Cell($this->largeur_utile, 10, html_entity_decode(_T('asso:cpte_benevolat_soldes')), 0, 0, 'C');
 		$yc += 10;
 
 		//Saut de ligne
@@ -475,13 +475,13 @@ class EXPORT_PDF extends FPDF {
 		// positionne le curseur
 		$this->SetXY($xc, $yc);
 
-		$this->Cell(($this->largeur_utile)/2-(2*$this->space_h+30), 6, html_entity_decode(_T('asso:cpte_resultat_total_charges_evaluees')), 1, 0, 'R', true);
+		$this->Cell(($this->largeur_utile)/2-(2*$this->space_h+30), 6, html_entity_decode(_T('asso:cpte_benevolat_total_depenses')), 1, 0, 'R', true);
 		$this->Cell(30, 6, association_nbrefr($charges_evaluees), 1, 0, 'R', true);
 
 		// positionne le curseur sur l'autre demi page
 		$xc += ( $this->largeur_utile)/2;
 		$this->SetXY($xc, $yc);
-		$this->Cell(($this->largeur_utile)/2-(2*$this->space_h+30), 6, html_entity_decode(_T('asso:cpte_resultat_total_produits_evalues')), 1, 0, 'R', true);
+		$this->Cell(($this->largeur_utile)/2-(2*$this->space_h+30), 6, html_entity_decode(_T('asso:cpte_benevolat_total_recettes')), 1, 0, 'R', true);
 		$this->Cell(30, 6, association_nbrefr($produits_evalues), 1, 0, 'R', true);
 
 		$yc += 6;

@@ -69,7 +69,7 @@ function exec_compte_resultat()
 			}
 			echo fin_cadre_enfonce(true);
 		}
-		debut_cadre_association('finances-24.jpg', 'cpte_resultat_titre_general', $exercice_data['intitule']);
+		debut_cadre_association('finances-24.png', 'cpte_resultat_titre_general', $exercice_data['intitule']);
 		// Filtres
 		filtres_association(array(
 			'exercice'=>$id_exercice,

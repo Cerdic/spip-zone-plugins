@@ -50,10 +50,19 @@ function exec_activites()
 		$data = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT('date', '%Y')=$annee AND imputation=".sql_quote($GLOBALS['association_metas']['pc_activites']) );
 		echo totauxinfos_montants('activites', $data['somme_recettes'], $data['somme_depenses']);
 */
-		// datation
-		echo association_date_du_jour();
-		echo fin_boite_info(true);
-		//!\ il manque le blo des raccourcis !
+		// datation et raccourci vers la gestion des evenements
+		if ( test_plugin_actif('SIMPLECAL') ) { // gestion des evenements avec Simple Calendrier
+			icones_association(array(), array(
+				'evenements' => array('simplecal-logo-16.png', 'evenement_tous'),
+			) );
+		} elseif ( test_plugin_actif('AGENDA') ) { // gestion des evenements avec Agenda 2
+			icones_association(array(), array(
+				'evenements' => array('agenda-evenements-16.png', 'agenda_evenements'),
+			) );
+		} else { // pas de bloc de raccourcis
+			echo association_date_du_jour();
+			echo fin_boite_info(true);
+		}
 		debut_cadre_association('activites.gif','activite_titre_toutes_activites');
 		// FILTRES
 		echo '<form method="get" action="'.generer_url_ecrire('activites').'">';

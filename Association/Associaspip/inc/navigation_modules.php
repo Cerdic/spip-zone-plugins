@@ -136,7 +136,6 @@ function filtres_association($liste_filtres, $exec='', $supplements='', $td=TRUE
 		echo "\n<input type='hidden' name='exec' value='$exec' />";
 	echo "\n<". ($td?'table width="100%"':'ul') .' class="asso_tablo_filtres">'. ($td?'<tr>':'');
 	foreach($liste_filtres as $filtre_selection =>$params) {
-//		echo ($td?'<td>':'<li>') . call_user_func("association_selectionner_$filtre_selection", (is_array($params)?implode(', ',$params):$params) ) . ($td?'</td>':'</li>');
 		echo ($td?'<td':'<li') ." class='filtre_$filtre_selection'>". call_user_func_array("association_selectionner_$filtre_selection", (is_array($params)?$params:array($params)) ) . ($td?'</td>':'</li>');
 	}
 	if ( is_array($supplements) ) {
