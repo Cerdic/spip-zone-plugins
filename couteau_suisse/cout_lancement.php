@@ -183,7 +183,6 @@ function cs_echappe_balises($balises, $fonction, $texte, $arg=NULL){
 	// transformation par $fonction
 	$texte = $arg==NULL?$fonction($texte):$fonction($texte, $arg);
 	// deprotection en abime, notamment des modeles...
-if(is_array($texte)) die(var_export($texte, true));
 	if(strpos($texte, 'base64CS')!==false) $texte = echappe_retour($texte, 'CS');
 	if(strpos($texte, 'base64CS')!==false) return echappe_retour($texte, 'CS');
 	return $texte;
