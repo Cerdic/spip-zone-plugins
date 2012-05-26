@@ -645,6 +645,12 @@ Si reanicies el plugin calcando nun paquete, la Navaya Suiza reconfigurarase aut
 	'sauf_admin' => 'Toos, sacante los alministradores',
 	'sauf_admin_redac' => 'Tous, sauf les administrateurs et rédacteurs', # NEW
 	'sauf_identifies' => 'Tous, sauf les auteurs identifiés', # NEW
+	'sessions_anonymes:description' => 'Chaque semaine, cet outil vérifie les sessions anonymes et supprime les fichiers qui sont trop anciens (plus de @_NB_SESSIONS3@ jours) afin de ne pas surcharger le serveur, notamment en cas de SPAM sur le forum.
+
+Dossier stockant les sessions : @_DIR_SESSIONS@
+
+Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.', # NEW
+	'sessions_anonymes:nom' => 'Sessions anonymes', # NEW
 	'set_options:description' => 'Seleiciona d\'oficiu el tipu d’interfaz privada (simplificada o avanzada) pa tolos redactores esistentes o futuros y desanicia el botón correspondiente na barra d\'iconos amenorgaos.[[%radio_set_options4%]]',
 	'set_options:nom' => 'Tipu d\'interfaz privada',
 	'sf_amont' => 'Enriba',

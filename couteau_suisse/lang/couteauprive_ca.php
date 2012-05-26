@@ -667,6 +667,12 @@ Per tal de conservar l\'accés al caràcter imatge original d\'SPIP (el petit tr
 	'sauf_admin' => 'Tots, excepte els administradors',
 	'sauf_admin_redac' => 'Tots, excepte els administradors i els redactors',
 	'sauf_identifies' => 'Tots, excepte els autors identificats',
+	'sessions_anonymes:description' => 'Chaque semaine, cet outil vérifie les sessions anonymes et supprime les fichiers qui sont trop anciens (plus de @_NB_SESSIONS3@ jours) afin de ne pas surcharger le serveur, notamment en cas de SPAM sur le forum.
+
+Dossier stockant les sessions : @_DIR_SESSIONS@
+
+Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.', # NEW
+	'sessions_anonymes:nom' => 'Sessions anonymes', # NEW
 	'set_options:description' => 'Selecciona d\'entrada el tipus d\'interfície privada (simple o avançada) per tots els redactors ja existents o per aquells que poden venir i suprimeix el botó corresponent de la banda on hi ha les icones petites.[[%radio_set_options4%]]',
 	'set_options:nom' => 'Tipus d\'interfície privada',
 	'sf_amont' => 'Més amunt',

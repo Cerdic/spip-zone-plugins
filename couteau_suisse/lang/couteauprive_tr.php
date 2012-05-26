@@ -619,6 +619,12 @@ Eğer eklentiyi bir pakete tıklayarak sıfırlarsanız İsviçre Çakısı kend
 	'sauf_admin' => 'Yöneticiler dışında herkes',
 	'sauf_admin_redac' => 'Tous, sauf les administrateurs et rédacteurs', # NEW
 	'sauf_identifies' => 'Tous, sauf les auteurs identifiés', # NEW
+	'sessions_anonymes:description' => 'Chaque semaine, cet outil vérifie les sessions anonymes et supprime les fichiers qui sont trop anciens (plus de @_NB_SESSIONS3@ jours) afin de ne pas surcharger le serveur, notamment en cas de SPAM sur le forum.
+
+Dossier stockant les sessions : @_DIR_SESSIONS@
+
+Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.', # NEW
+	'sessions_anonymes:nom' => 'Sessions anonymes', # NEW
 	'set_options:description' => 'Mevcut veya gelecek tüm redaktörler veya özel arayüzü seçer (basit veya gelişmiş) ve küçük ikonlar bandına ait düğmeyi siler.[[%radio_set_options4%]]',
 	'set_options:nom' => 'Özel arayüz tipi',
 	'sf_amont' => 'En amont', # NEW

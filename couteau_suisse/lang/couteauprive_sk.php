@@ -650,6 +650,12 @@ Na to, aby ostal zachovaný prístup k pôvodnému obrázku odrážky SPIPu (ma
 	'sauf_admin' => 'Všetci okrem administrátorov',
 	'sauf_admin_redac' => 'Každý okrem administrátorov a redaktorov',
 	'sauf_identifies' => 'Každý okrem vymenovaných autorov',
+	'sessions_anonymes:description' => 'Chaque semaine, cet outil vérifie les sessions anonymes et supprime les fichiers qui sont trop anciens (plus de @_NB_SESSIONS3@ jours) afin de ne pas surcharger le serveur, notamment en cas de SPAM sur le forum.
+
+Dossier stockant les sessions : @_DIR_SESSIONS@
+
+Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.', # NEW
+	'sessions_anonymes:nom' => 'Sessions anonymes', # NEW
 	'set_options:description' => 'Preselects the type of interface (simplified or advanced) for all editors, both existing and future ones. At the same time the button offering the choice between the two interfaces is also removed.[[%radio_set_options4%]]',
 	'set_options:nom' => 'Type of private interface',
 	'sf_amont' => 'Upstream',

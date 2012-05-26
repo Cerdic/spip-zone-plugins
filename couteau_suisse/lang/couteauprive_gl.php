@@ -647,6 +647,12 @@ De reiniciar o módulo premendo sobre un paquete, a Navalla Suíza reconfigurara
 	'sauf_admin' => 'Todos, agás os administradores',
 	'sauf_admin_redac' => 'Todos, salvo os administradores e redactores',
 	'sauf_identifies' => 'Todos, agás os autores identificados',
+	'sessions_anonymes:description' => 'Chaque semaine, cet outil vérifie les sessions anonymes et supprime les fichiers qui sont trop anciens (plus de @_NB_SESSIONS3@ jours) afin de ne pas surcharger le serveur, notamment en cas de SPAM sur le forum.
+
+Dossier stockant les sessions : @_DIR_SESSIONS@
+
+Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.', # NEW
+	'sessions_anonymes:nom' => 'Sessions anonymes', # NEW
 	'set_options:description' => 'Seleccione o tipo de interface privada predeterminada (simplificada ou avanzada) para todos os redactores xa existentes ou futuros e suprima o botón correspondente da barra de iconas.[[%radio_set_options4%]]',
 	'set_options:nom' => 'Tipo de interface privada',
 	'sf_amont' => 'Fluxo ascendente',

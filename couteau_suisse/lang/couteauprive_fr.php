@@ -8,12 +8,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// 2
 	'2pts_non' => ' : non',
 	'2pts_oui' => ' : oui',
-	'sessions_anonymes:nom' => 'Sessions anonymes',
-	'sessions_anonymes:description' => 'Chaque semaine, cet outil vérifie les sessions anonymes et supprime les fichiers qui sont trop anciens (plus de @_NB_SESSIONS3@ jours) afin de ne pas surcharger le serveur, notamment en cas de SPAM sur le forum.
-
-Dossier stockant les sessions : @_DIR_SESSIONS@
-
-Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.',
 
 	// S
 	'SPIP_liens:description' => '@puce@ Tous les liens du site s\'ouvrent par défaut dans la fenêtre de navigation en cours. Mais il peut être utile d\'ouvrir les liens externes au site dans une nouvelle fenêtre extérieure -- cela revient à ajouter {target=&quot;_blank&quot;} à toutes les balises &lt;a&gt; dotées par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois nécessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'étendre au maximum cette fonctionnalité.[[%radio_target_blank3%]]
@@ -665,6 +659,12 @@ Afin de conserver l\'accès à la puce image originale de SPIP (le petit triangl
 	'sauf_admin' => 'Tous, sauf les administrateurs',
 	'sauf_admin_redac' => 'Tous, sauf les administrateurs et rédacteurs',
 	'sauf_identifies' => 'Tous, sauf les auteurs identifiés',
+	'sessions_anonymes:description' => 'Chaque semaine, cet outil vérifie les sessions anonymes et supprime les fichiers qui sont trop anciens (plus de @_NB_SESSIONS3@ jours) afin de ne pas surcharger le serveur, notamment en cas de SPAM sur le forum.
+
+Dossier stockant les sessions : @_DIR_SESSIONS@
+
+Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.',
+	'sessions_anonymes:nom' => 'Sessions anonymes',
 	'set_options:description' => 'Sélectionne d\'office le type d’interface privée (simplifiée ou avancée) pour tous les rédacteurs déjà existant ou à venir et supprime le bouton correspondant du bandeau des petites icônes.[[%radio_set_options4%]]',
 	'set_options:nom' => 'Type d\'interface privée',
 	'sf_amont' => 'En amont',

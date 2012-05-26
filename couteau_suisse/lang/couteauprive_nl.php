@@ -634,6 +634,12 @@ Als u plugin réinitialiserd door op een pakijs te klikken, reconfiguratie van h
 	'sauf_admin' => 'Iedereen, behalve de beheerders',
 	'sauf_admin_redac' => 'Allemaal behalve beheerders en redacteurs',
 	'sauf_identifies' => 'Tous, sauf les auteurs identifiés', # NEW
+	'sessions_anonymes:description' => 'Chaque semaine, cet outil vérifie les sessions anonymes et supprime les fichiers qui sont trop anciens (plus de @_NB_SESSIONS3@ jours) afin de ne pas surcharger le serveur, notamment en cas de SPAM sur le forum.
+
+Dossier stockant les sessions : @_DIR_SESSIONS@
+
+Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.', # NEW
+	'sessions_anonymes:nom' => 'Sessions anonymes', # NEW
 	'set_options:description' => 'Selecteert automatisch het soort particuliere interface (vereenvoudigd of geavanceerd) voor alle redacteuren reeds bestaand of om te komen en schaft de kleine ikonen hoofdband overeenkomstige af.[[%radio_set_options4%]]',
 	'set_options:nom' => 'Soort particuliere interface',
 	'sf_amont' => 'Voorafgaand',

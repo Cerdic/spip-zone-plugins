@@ -660,6 +660,12 @@ Afin de conserver l\'accès à la puce image originale de SPIP (le petit triangl
 	'sauf_admin' => 'Tous, sauf les administrateurs',
 	'sauf_admin_redac' => 'Tous, sauf les administrateurs et rédacteurs',
 	'sauf_identifies' => 'Tous, sauf les auteurs identifiés',
+	'sessions_anonymes:description' => 'Chaque semaine, cet outil vérifie les sessions anonymes et supprime les fichiers qui sont trop anciens (plus de @_NB_SESSIONS3@ jours) afin de ne pas surcharger le serveur, notamment en cas de SPAM sur le forum.
+
+Dossier stockant les sessions : @_DIR_SESSIONS@
+
+Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.', # NEW
+	'sessions_anonymes:nom' => 'Sessions anonymes', # NEW
 	'set_options:description' => 'Sélectionne d\'office le type d’interface privée (simplifiée ou avancée) pour tous les rédacteurs déjà existant ou à venir et supprime le bouton correspondant du bandeau des petites icônes.[[%radio_set_options4%]]',
 	'set_options:nom' => 'Type d\'interface privée',
 	'sf_amont' => 'En amont',
