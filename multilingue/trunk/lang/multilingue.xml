@@ -1,6 +1,3 @@
 <traduction module="multilingue" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/multilingue/trunk/lang/" reference="fr">
 	<langue code="fr" />
-	<langue code="sk" url="http://trad.spip.org/tradlang_module/multilingue?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
-	</langue>
 </traduction>
