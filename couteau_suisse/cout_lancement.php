@@ -16,7 +16,7 @@ cs_log("inclusion des fonctions de cout_lancement.php pour initialisation");
 
 // compatibilite avec les plugins de version anterieure a 1.7.0.0
 function tweak_choix($s) { if ($p = strpos($s, '(')) return substr($s, 0, $p); return ''; }
-// Compatibilite : stripos() n'existe pas en php4
+// Compatibilite : stripos() n'existe pas en php4 (SPIP < 3)
 if (!function_exists('stripos')) {
 	function stripos($botte, $aiguille) {
 		if (preg_match('@^(.*)' . preg_quote($aiguille, '@') . '@isU', $botte, $regs))
@@ -183,6 +183,7 @@ function cs_echappe_balises($balises, $fonction, $texte, $arg=NULL){
 	// transformation par $fonction
 	$texte = $arg==NULL?$fonction($texte):$fonction($texte, $arg);
 	// deprotection en abime, notamment des modeles...
+if(is_array($texte)) die(var_export($texte, true));
 	if(strpos($texte, 'base64CS')!==false) $texte = echappe_retour($texte, 'CS');
 	if(strpos($texte, 'base64CS')!==false) return echappe_retour($texte, 'CS');
 	return $texte;
