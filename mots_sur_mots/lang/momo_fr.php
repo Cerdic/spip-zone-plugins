@@ -19,6 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'hierachie_guidee_par' => 'Fil d\'Ariane guid&eacute; par le mot &laquo;&nbsp;@titre@&nbsp;&raquo;&nbsp;:',
 	'hierarchies_mot' => 'Diff&eacute;rentes hi&eacute;rarchies d\'un mot-cl&eacute; pass&eacute; en param&egrave;tre',
 //I
+	'item_mots_cles_association_mots' => 'aux mots-cl&eacute;s',
+	'objet_mots' => 'Mots-cl&eacute;s',
 //J
 //K
 //L

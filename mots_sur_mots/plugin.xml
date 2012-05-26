@@ -5,7 +5,7 @@
 	</slogan>
 	<auteur>[Bertrand Marne->http://www.spip-contrib.net/Beurt]</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.1.1</version>
+	<version>0.2.0</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<description>
@@ -41,6 +41,14 @@ Dans la partie publique, le plugin Momo propose:
 	</pipeline>
 	<pipeline>
 		<nom>affiche_milieu</nom>
+		<inclure>momo_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>momo_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>libelle_association_mots</nom>
 		<inclure>momo_pipelines.php</inclure>
 	</pipeline>
 	<fonctions>momo_fonctions.php</fonctions>
