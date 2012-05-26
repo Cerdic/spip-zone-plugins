@@ -1,9 +1,9 @@
 <paquet
 	prefix="palette"
 	categorie="outil"
-	version="2.0.2"
+	version="3.0.0"
 	etat="stable"
-	compatibilite="[3.0.0-beta;3.0.*]"
+	compatibilite="[3.0.0;3.*]"
 	logo="prive/themes/spip/images/palette-128.png"
 	schema="0.1"
 	documentation="http://www.spip-contrib.net/Palette"
@@ -14,7 +14,7 @@
 
 	<auteur>Daniel FAIVRE (à partir de travaux de Marcimat)</auteur>
 
-	<copyright>2008</copyright>
+	<copyright>2008-2012</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL 3</licence>
 
