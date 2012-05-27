@@ -121,7 +121,13 @@ function formulaires_editer_image_verifier_dist($id_document='new',$mode=false, 
 					$erreurs[$var_filtre] = $erreur_param0;
 				}
 			}
+			if(($var_filtre == 'image_sepia') && strlen($params[0]) && strlen($erreur_param0 = $verifier($params[0],'couleur', array('type'=>'hexa'))))
+				$erreurs[$var_filtre] = $erreur_param0;
 		}
+		/**
+		 * Ces erreurs ne sont pas de réelles erreurs mais seulement
+		 * les valeurs pour la prévisualisation si c'est ce que l'on a validé
+		 */
 		if(count($erreurs) == 0 && _request('tester')){
 			if(in_array($var_filtre,array('tourner','image_recadre'))){
 				$erreurs['message_erreur'] = _T('photospip:erreur_form_filtre_sstest');
@@ -164,7 +170,6 @@ function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $
 		}
 	}
 	if(_request('validation') OR _request('supprimer_vignette')){
-		spip_log('On valide...','photospip');
 		$row = sql_fetsel('*','spip_documents','id_document='.intval($id_document)); 
 		$src = get_spip_doc($row['fichier']);
 		
@@ -197,7 +202,6 @@ function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $
 				$tmp_img = filtrer('image_format',$tmp_img,$row['extension']);
 				$tmp_img = extraire_attribut($tmp_img,'src');
 			}
-			
 			else{
 				$appliquer_filtre = charger_fonction('photospip_appliquer_filtre','inc');
 				$sortie = $appliquer_filtre($src, $tmp_img, $var_filtre,$params);
@@ -206,7 +210,6 @@ function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $
 					return $res;
 				}
 			}
-		
 			if($type_modif == 'creer_version_image'){
 				$size_image = getimagesize($tmp_img);
 				spip_log("taille de l'image $size_image[0] x $size_image[1]","photospip");
@@ -321,7 +324,7 @@ function photospip_recuperer_params_form($var_filtre){
 	}
 	else if ($var_filtre == 'image_sepia'){
 		$params = _request('params_image_sepia');
-		$param1 = str_replace('#','',$params);
+		$param1 = $params;
 	}
 	else if($var_filtre == 'image_gamma'){
 		$param1 = _request('params_image_gamma');

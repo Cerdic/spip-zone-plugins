@@ -45,9 +45,13 @@ function inc_photospip_appliquer_filtre_dist($src, $dest, $filtre,$params){
 				$dst_img = $filtre($src,$params[0],$params[1]);
 				spip_log("$filtre($src,$params[0],$params[1]);","photospip");
 			}
+			elseif($filtre == 'image_sepia' && $params[0] && !is_null($params[0])){
+				$params[0] = str_replace('#','',$params[0]);
+				$dst_img = $filtre($src,$params[0]);
+			}
 			else if($params[0] && !is_null($params[0])){
 				spip_log("$filtre($src,".$params[0].")","photospip");
-				$dst_img = $filtre($src,$params[0]);		
+				$dst_img = $filtre($src,$params[0]);
 			}else{
 				spip_log("$filtre($src)","photospip");
 				$dst_img = $filtre($src);

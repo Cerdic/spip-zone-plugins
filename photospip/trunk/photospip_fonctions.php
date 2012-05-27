@@ -28,12 +28,14 @@ function photospip_appliquer_filtre($balise, $filtre,$param1=NULL,$param2=NULL,$
 	if (function_exists($filtre)){
 		spip_log("$filtre($balise,$param1,$param2,$param3);","photospip");
 		if ($param1){
+			if($filtre == 'image_sepia')
+				$param1 = str_replace('#','',$param1);
 			return $filtre($balise,$param1,$param2,$param3);
 			spip_log("$filtre($balise,$param1,$param2,$param3);","photospip");
 		}
 		else{
 			return $filtre($balise);
-			spip_log("$filtre($balise,$param1,$param2,$param3);","photospip");
+			spip_log("$filtre($balise);","photospip");
 		}
 	} else {
 		return $balise;
