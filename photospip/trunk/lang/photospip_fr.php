@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_vignette' => 'Supprimer cette vignette',
 	'bouton_supprimer_vignette_document' => 'Supprimer la vignette de ce document',
 	'bouton_tester' => 'Prévisualiser',
+	'bouton_valider' => 'Appliquer',
 	
 	// E
 	'erreur_auth_modifier' => 'Vous n\'êtes pas autoriser à modifier ce document.',
@@ -35,6 +36,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_form_type_resultat' => 'Vous devez choisir le type de résultat',
 	'erreur_image_process' => 'Le site n\'utilise pas GD2 pour gérer les images, veuillez l\'utiliser pour leur traitement.',
 	'erreur_nb_versions_atteint' => 'Le nombre de versions différentes de l\'image a été atteint (@nb@). Vous ne pouvez que tester et non appliquer les modifications.',
+	'erreur_previsu' => 'Si le résultat vous satisfait vous pouvez le valider en bas du formulaire, sinon vous pouvez tester d\'autres filtres',
+	'erreur_sansconf' => 'Vous n\'avez pas configuré votre filtre.',
+	'erreur_sansfiltre' => 'Vous n\'avez pas sélectionné de filtre.',
+	'erreur_sanstest' => 'Le filtre que vous avez essayé ne permet pas d\'&ecirc;tre testé. Vous ne pouvez que l\'appliquer.',
 	'erreur_selectionner_au_moins_une_valeur' => 'Vous devez sélectionner au moins une valeur',
 	'explication_image_flip_horizontal' => 'Appliquer un effet de « miroir » selon un axe horizontal (Aucun réglage nécessaire).',
 	'explication_image_flip_vertical' => 'Appliquer un effet de « miroir » selon un axe vertical (Aucun réglage nécessaire).',	
@@ -80,9 +85,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_image_sincity' => 'Filtre Sin City',
 	'label_largeur_previsu' => 'Largeur maximale de la prévisualisation en px (450 par défaut) : ',
 	'label_limiter_version' => 'Limiter le nombre de versions possibles à :',
-	'label_modif_remplacer_image' => 'L\'image originale sera simplement remplacée',
 	'label_modif_creer_nouvelle_image' => 'Un nouveau document sera créé à partir de l\'image originale',
 	'label_modif_creer_version_image' => 'L\'image originale sera enregistrée en tant que version du nouveau document qui la remplacera dans le site',
+	'label_modif_remplacer_image' => 'L\'image originale sera simplement remplacée',
+	'label_modif_vignette_creer_version_image' => 'La vignette originale sera enregistrée en tant que version de la nouvelle vignette qui la remplacera dans le site',
+	'label_modif_vignette_remplacer_image' => 'La vignette originale sera simplement remplacée',
 	'label_niveau_flou' => 'Niveau de flou&nbsp;:',
 	'label_niveau_gamma' => 'Niveau Gamma&nbsp;:',
 	'label_niveau_saturation_desaturation' => 'Niveau de saturation&nbsp;:',
@@ -115,7 +122,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_image_taille_actuelle' => 'Taille actuelle de l\'image&nbsp;: @largeur@x@hauteur@px.',
 	'message_limite_versions' => 'Le nombre de versions précédentes sont limitées à @limite@.',
-	'message_ok_version_retour' => 'Vous êtes revenu à la version @version@',
+	'message_ok_version_retour' => 'Vous êtes revenu à la version #@version@',
 	'message_ok_version_supprimee' => 'La version #@version@ a été supprimée',
 	'message_pas_de_versions' => 'Ce document n\'est pas versionné.',
 	'message_vignette_installe_succes' => 'La vignette a été chargé avec succès',
@@ -141,7 +148,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fichier_original' => 'Fichier original : ',
 	'donnees_exif' => 'Données EXIF',
 	'tester' => 'Tester',
-	'valider' => 'Appliquer',
 	'revenir_version' => 'Revenir à la version&nbsp;:',
 	'supprimer_version' => 'Supprimer la version&nbsp;:',
 	'image_taille_actuelle' => 'Taille actuelle de l\'image&nbsp;:',
@@ -151,9 +157,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	<p>Ensuite choisissez entre "tester" ou "appliquer", puis validez.</p>
 	<p><strong>NB :</strong> Ces traitements d\'images sont lourds et peuvent prendre quelque temps avant de s\'effectuer. C\'est pourquoi nous vous recommandons de les "tester" avant (cela créera une prévisualisation). Chaque test repartira de la dernière version. Appliquer créera une nouvelle version disponible.</p>',
 	'modification_pas_autorisee' => 'Vous ne disposez pas des droits nécessaires pour pouvoir modifier ce document',
-	// Messages
-	'previsu' => 'Si le résultat vous satisfait vous pouvez le valider en bas du formulaire, sinon vous pouvez tester d\'autres filtres',
-	'sanstest' => 'Le filtre que vous avez essayé ne permet pas d\'&ecirc;tre testé. Vous ne pouvez que l\'appliquer.',
-	'sansfiltre' => 'Vous n\'avez pas sélectionné de filtre.',
-	'sansconf' => 'Vous n\'avez pas configuré votre filtre.',
+	
 );

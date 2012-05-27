@@ -125,24 +125,24 @@ function formulaires_editer_image_verifier_dist($id_document='new',$mode=false, 
 function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $retour=''){
 	$res = array('editable'=>true);
 	$autoclose = "<script type='text/javascript'>if (window.jQuery) jQuery.modalboxclose();</script>";
-	
-	if(_request('validation') OR _request('supprimer_vignette')){
-		if($mode == 'vignette'){
-			$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
-			$res['redirect'] = sinon(_request('redirect'),'');
-			if(_request('supprimer_vignette')){
-				$supprimer_document = charger_fonction('supprimer_document','action');
-				if ($id_vignette)
-					$supprimer_document($id_vignette);
-				$res['message_ok'] = _T('medias:vignette_supprimee').$autoclose;
-				set_request('id_document',$id_document);
-			}else{
-				$id_document_orig = $id_document;
-				if($id_vignette && ($id_vignette > 0) && $id_vignette = sql_getfetsel('id_document','spip_documents','id_document='.intval($id_vignette)))
-					$id_document = $id_vignette;
-			}
+	spip_log('traiter','photospip');
+	if($mode == 'vignette'){
+		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
+		$res['redirect'] = sinon(_request('redirect'),'');
+		if(_request('supprimer_vignette')){
+			$supprimer_document = charger_fonction('supprimer_document','action');
+			if ($id_vignette)
+				$supprimer_document($id_vignette);
+			$res['message_ok'] = _T('medias:vignette_supprimee').$autoclose;
+			set_request('id_document',$id_document);
+		}else{
+			$id_document_orig = $id_document;
+			if($id_vignette && ($id_vignette > 0) && $id_vignette = sql_getfetsel('id_document','spip_documents','id_document='.intval($id_vignette)))
+				$id_document = $id_vignette;
 		}
-		
+	}
+	if(_request('validation') OR _request('supprimer_vignette')){
+		spip_log('On valide...','photospip');
 		$row = sql_fetsel('*','spip_documents','id_document='.intval($id_document)); 
 		$src = get_spip_doc($row['fichier']);
 		

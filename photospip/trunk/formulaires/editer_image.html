@@ -5,7 +5,7 @@
 	<div class="notice">
 			[(#ENV{erreurs}|table_valeur{message}|=={previsu}|oui)
 			<span><:previsualisation:></span><br />
-			<:photospip:previsu:>]
+			<:photospip:erreur_previsu:>]
 			[(#ENV{erreurs}|table_valeur{message}|=={sanstest}|oui)
 			<:photospip:sanstest:>]
 			[(#ENV{erreurs}|table_valeur{message}|=={sansfiltre}|oui)
@@ -19,8 +19,8 @@
 		Calcul du ratio entre notre image originale et la prévisualisation
 		Utile pour les opération de recadrage notamment
 	]
-	#SET{largeur_max,#ENV{largeur_previsu,450}}
-	#SET{hauteur_max,#CONFIG{photospip/hauteur_previsu,450}}
+	#SET{largeur_max,#ENV{largeur_previsu,#ENV{erreurs}|table_valeur{largeur_previsu}|sinon{450}}}
+	#SET{hauteur_max,#CONFIG{photospip/hauteur_previsu,#ENV{erreurs}|table_valeur{hauteur_previsu}|sinon{450}}}
 	[(#SET{largeur_reduit,[(#FICHIER|image_reduire{#GET{largeur_max},#GET{hauteur_max}}|extraire_attribut{width})]})]
 	#SET{ratio,#LARGEUR|div{#GET{largeur_reduit}}}
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
@@ -33,11 +33,12 @@
 			<div id="image-container">
 				<div id="image_modifier" style="[width:(#GET{largeur_max})px;]">
 					[(#ENV{erreurs}|table_valeur{filtre}|oui)
-					[(#_document:FICHIER|image_reduire{[(#GET{largeur_max,450})],[(#GET{hauteur_max,450})]}|photospip_appliquer_filtre{[(#ENV{erreurs}|table_valeur{filtre})],[(#ENV{erreurs}|table_valeur{param1})],[(#ENV{erreurs}|table_valeur{param2})],[(#ENV{erreurs}|table_valeur{param3})],[(#ENV{erreurs}|table_valeur{param})]}|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|inserer_attribut{alt,' '})]]
+					[(#_document:FICHIER|photospip_appliquer_filtre{[(#ENV{erreurs}|table_valeur{filtre})],[(#ENV{erreurs}|table_valeur{param1})],[(#ENV{erreurs}|table_valeur{param2})],[(#ENV{erreurs}|table_valeur{param3})],[(#ENV{erreurs}|table_valeur{param})]}|image_reduire{#GET{largeur_max},#GET{hauteur_max}}|inserer_attribut{alt,' '})]]
 					[(#ENV{erreurs}|table_valeur{filtre}|non)
-					[(#_document:FICHIER|image_reduire{#GET{largeur_max,450},#GET{hauteur_max,450}}|inserer_attribut{alt,' '})]]
+					[(#_document:FICHIER|image_reduire{#GET{largeur_max},#GET{hauteur_max}}|inserer_attribut{alt,' '})]]
 				</div>
 			</div>
+			<BOUCLE_si_versions_et_vignettes(CONDITION){si #ENV{mode}|!={vignette}|ou{#ENV{mode}|=={vignette}|et{#ENV{vignette}|=={oui}}}|oui}>
 			<B_interd_nb>
 			<ul class="liste-versions">
 				<li class="fieldset">
@@ -70,6 +71,7 @@
 				</li>
 			</ul>
 			</B_interd_nb>
+			</BOUCLE_si_versions_et_vignettes>
 		</div>
 		<div>
 			<BOUCLE_modifiable(CONDITION){si #ENV{modifiable,oui}|oui}>
@@ -99,6 +101,27 @@
 					</BOUCLE_resultats>
 				</li>
 				</BOUCLE_resultats_sup_un>
+				[(#REM)
+				
+					Les résultats possible dans le cas d'une vignette.
+					
+					On affiche ce choix de résultat uniquement lorsque la vignette existe réellement
+					
+					Contrairement aux résultats du travail sur le document, seuls 2 résultats sont possibles :
+					-* Le remplacement de la vignette purement et simplement;
+					-* La création de versions de la vignette
+				]
+				<BOUCLE_resultats_sup_vignette_un(CONDITION){si #ENV{mode}|=={vignette}|et{#ENV{vignette}|=={oui}}|et{#CONFIG{photospip/resultats_vignette,#ARRAY{0,remplacer_image,1,creer_version_image}}|count|>{1}}|oui}>
+				<li>
+					<label><:photospip:label_type_modification:></label>
+					<BOUCLE_resultats_vignette(POUR){tableau #CONFIG{photospip/resultats_vignette,#ARRAY{0,remplacer_image,1,creer_version_image}}}>
+					<div class="choix">
+						<input type="radio" id="#VALEUR" name="type_modification" value="#VALEUR"[(#ENV{type_modification,#CONFIG{photospip/resultats_defaut_vignette,creer_version_image}}|=={#VALEUR}|oui)checked="checked"] />
+						<label for="#VALEUR">[(#VAL{photospip:label_modif_vignette_}|concat{#VALEUR}|_T)]</label>
+					</div>
+					</BOUCLE_resultats_vignette>
+				</li>
+				</BOUCLE_resultats_sup_vignette_un>
 			</ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
@@ -107,7 +130,7 @@
 	  	[(#ENV{mode}|=={vignette}|et{#ENV{vignette}|=={oui}}|oui)
 	  	<input type="submit" class="submit" name="supprimer_vignette" value="<:photospip:bouton_supprimer_vignette:>" />
 	  	]
-	  	<input type="submit" class="submit" name="validation" value="<:photospip:valider:>" />
+	  	<input type="submit" class="submit" name="validation" value="<:photospip:bouton_valider:>" />
 	  </p>
 	 <script type="text/javascript"><!--
 			[(#CONFIG{photospip/image_recadre,on}|=={on}|oui)
@@ -216,9 +239,9 @@
 						jQuery(this).parent().parent().find('.revenir_version, .delete_version').hide();
 					});	
 			  	});
-				jQuery('form input[type=radio]').not('.nocache').unbind().click(function(){
+				jQuery('form input[type=radio]').unbind().click(function(){
 					if(jQuery(this).next().next('.cache').is(':hidden')){
-				  		jQuery(".visible").slideUp().removeClass('visible')
+				  		jQuery(".visible").slideUp().removeClass('visible');
 						jQuery(this).parent().find('.cache').slideDown().addClass('visible');
 						if(jQuery(this).attr('id') == 'image_recadre'){
 							image_crop();
