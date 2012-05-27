@@ -38,7 +38,6 @@ function doc2img_post_edition($flux) {
     if (in_array($flux['args']['operation'], array('ajouter_document','document_copier_local'))
             && (sql_countsel('spip_doc2img','id_document='.intval($id_document)) == 0)
             && (lire_config('doc2img/conversion_auto') == "on")){
-
             	$infos_doc = sql_fetsel('extension,mode,fichier,mode,distant','spip_documents','id_document='.intval($id_document));
             	$types_autorises = explode(',',lire_config("doc2img/format_document",null,true));
 				if($infos_doc['extension'] == 'tif'){
@@ -71,4 +70,30 @@ function doc2img_post_edition($flux) {
 	return $flux;
 }
 
+/**
+ * Insertion dans le pipeline document_desc_actions (Plugin Mediathèque)
+ * Ajouter le bouton de conversion de document dans le bloc de document 
+ *
+ * @param array $flux
+ * @return array $flux
+ */
+function doc2img_document_desc_actions($flux) {
+	$id_document = $flux['args']['id_document'];
+	$infos = sql_fetsel('*', 'spip_documents', 'id_document=' . intval($id_document));
+	$types_autorises = explode(',',lire_config("doc2img/format_document",null,true));
+	if($infos['extension'] == 'tif'){
+		$infos['extension'] = 'tiff';
+	}
+	if(($infos['mode'] != 'vignette')
+		&& ($infos['distant'] == 'non')
+		&& in_array($infos['extension'],$types_autorises)){
+			$fond='prive/doc2img_media_boutons';
+		if ($flux['args']['position'] == 'galerie') {
+			$flux['data'] .= recuperer_fond($fond,array('mode'=>'galerie','id_document'=>$id_document));
+		} else {
+			$flux['data'] .= recuperer_fond($fond,array('id_document'=>$id_document));
+		}
+	}
+	return $flux;
+}
 ?>

@@ -7,6 +7,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_convertir' => 'Convertir',
+	'bouton_convertir_serie' => 'Convertir en une série d\'images',
+	'bouton_convertir_vignette' => 'Convertir la première page en vignette',
 
 	// C
 	'cfg_explication_compression' => 'Défini la qualité de compression finale des fichiers de sortie (en poucentage)',

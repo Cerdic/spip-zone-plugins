@@ -13,10 +13,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *  - http://valokuva.org/?p=7
  *  - http://valokuva.org/?p=7#comment-19198
  *
- * @param $id_document identifiant du document à convertir
+ * @param int $id_document identifiant du document à convertir
+ * @param string $type méthode à utiliser :
+ * 		- full converti tout le document
+ * 		- vignette converti la première page en vignette du document
  */
-function inc_doc2img_convertir($id_document) {
-
+function inc_doc2img_convertir($id_document,$type='full') {
+	if(!in_array($type,array('full','vignette')))
+		$type = 'full';
 	if(function_exists('imagick_readimage') OR class_exists('Imagick')){
 	    // NOTE : les repertoires doivent se finir par un /
 
@@ -24,8 +28,6 @@ function inc_doc2img_convertir($id_document) {
 	    include_spip('inc/flock');
 
 	    $config = lire_config('doc2img');
-
-	    //ecrire_config('php::doc2img/'.$id_document.'/statut','encours');
 
 	    //racine du site c'est a dire url_site/
 	    //une action se repere à la racine du site
@@ -74,93 +76,157 @@ function inc_doc2img_convertir($id_document) {
 	        $nb_pages = imagick_getlistsize($handle);
 	    }
 
-	    //ecrire_config('php::doc2img/'.$id_document.'/pages',$nb_pages);
-
 	    $frame = 0;
 
 		$resolution = $config['resolution'] ? $config['resolution'] : 150;
 		
-	    // chaque page est un fichier qu'on sauve dans la table doc2img indexé
-	    // par son numéro de page
-	    do {
-	    	spip_log("Conversion de la page $frame",'doc2img');
-	        //on accede à la page $frame
-	        if ($version == '0.9') {
-	            imagick_goto($handle, $frame);
-	            $handle_frame = @imagick_getimagefromlist($handle);
-	        } else {
-	        	$image_frame = new Imagick();
-	        	if(is_numeric($resolution) && ($resolution <= '600') && ($resolution > $identify['resolution']['x'])){
-		        	$image_frame->setResolution($resolution,$resolution);
-	        	}
-				$image_frame->readImage($document['source_url']['absolute'].$document['fullname'].'['.$frame.']');
-				$image_frame->setImageFormat($config['format_cible']);
-				if(is_numeric($config['compression']) && ($config['compression'] > 50) && ($config['compression'] <= 100)){
-					$image_frame->setImageCompressionQuality($config['compression']);
-				}
-	            $handle_frame = $image_frame;
-	        }
-
-	        //calcule des dimensions
-	        $dimensions = doc2img_ratio($handle_frame,$version,$config);
-
-	        //nom du fichier cible, c'est à dire la frame (image) indexée
-	        $document['frame'] = $document['name'].'-'.$frame.'.'.$config['format_cible'];
-
-	        //on sauvegarde la page
-	        if ($version == '0.9') {
-	        	//on redimensionne l'image
-		        imagick_zoom($handle_frame, $dimensions['largeur'], $dimensions['hauteur']);
-	            imagick_writeimage($handle_frame, $document['cible_url']['absolute'].$document['frame']);
-	            $taille = filesize($document['cible_url']['absolute'].$document['frame']);
-
-	        } else {
-	        	//$image_frame->resizeImage($dimensions['largeur'], $dimensions['hauteur'],Imagick::FILTER_LANCZOS,1);
-	            $image_frame->writeImage($document['cible_url']['absolute'].$document['frame']);
-	            $taille = filesize(get_spip_doc(set_spip_doc($document['cible_url']['relative'].$document['frame'])));
-	        }
-
-	        $largeur = $dimensions['largeur'];
-			$hauteur = $dimensions['hauteur'];
-
-			//sauvegarde les donnees dans la base
-	        if (!sql_insertq(
-	            "spip_doc2img",
-	            array(
-	                "id_document" => $id_document,
-	                "fichier" => set_spip_doc($document['cible_url']['relative'].$document['frame']),
-	                "page" => $frame,
-	                "largeur" => $largeur,
-	                "hauteur" => $hauteur,
-	                "taille" => $taille
-	            )
-	        )) {
-	            return "erreur base de donnée";
-	        }
-
-	        if(($frame == 0) && ($config['logo_auto']=='on') && in_array($config['format_cible'],array('png','jpg'))){
-	        	if(
-	        		($id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document)) == 0)
-	        		OR !file_exists(get_spip_doc(sql_getfetsel('fichier','spip_documents','id_document='.intval($id_vignette))))
-	        	){
-	        		if(is_numeric($id_vignette)){
-	        			sql_delete('spip_documents','id_document='.intval($id_vignette));
-	        		}
-		        	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
-					$x = $ajouter_documents($document['cible_url']['absolute'].$document['frame'], $document['cible_url']['absolute'].$document['frame'],
-							    'document', $id, 'vignette', $id_document, $actifs);
-	        	}
-	        }
-	        //on libère la frame
-	        if ($version == '0.9') {
-	            imagick_free($handle_frame);
-	        } else {
-	            $image_frame->clear();
-	            $image_frame->destroy();
-	        }
-	        $frame++;
-	    } while($frame < $nb_pages );
-
+		
+		if($type == 'full'){
+		    // chaque page est un fichier qu'on sauve dans la table doc2img indexé
+		    // par son numéro de page
+		    do {
+		    	spip_log("Conversion de la page $frame",'doc2img');
+		        //on accede à la page $frame
+		        if ($version == '0.9') {
+		            imagick_goto($handle, $frame);
+		            $handle_frame = @imagick_getimagefromlist($handle);
+		        } else {
+		        	$image_frame = new Imagick();
+		        	if(is_numeric($resolution) && ($resolution <= '600') && ($resolution > $identify['resolution']['x'])){
+			        	$image_frame->setResolution($resolution,$resolution);
+		        	}
+					$image_frame->readImage($document['source_url']['absolute'].$document['fullname'].'['.$frame.']');
+					$image_frame->setImageFormat($config['format_cible']);
+					if(is_numeric($config['compression']) && ($config['compression'] > 50) && ($config['compression'] <= 100)){
+						$image_frame->setImageCompressionQuality($config['compression']);
+					}
+		            $handle_frame = $image_frame;
+		        }
+	
+		        //calcule des dimensions
+		        $dimensions = doc2img_ratio($handle_frame,$version,$config);
+	
+		        //nom du fichier cible, c'est à dire la frame (image) indexée
+		        $document['frame'] = $document['name'].'-'.$frame.'.'.$config['format_cible'];
+	
+		        //on sauvegarde la page
+		        if ($version == '0.9') {
+		        	//on redimensionne l'image
+			        imagick_zoom($handle_frame, $dimensions['largeur'], $dimensions['hauteur']);
+		            imagick_writeimage($handle_frame, $document['cible_url']['absolute'].$document['frame']);
+		            $taille = filesize($document['cible_url']['absolute'].$document['frame']);
+	
+		        } else {
+		        	//$image_frame->resizeImage($dimensions['largeur'], $dimensions['hauteur'],Imagick::FILTER_LANCZOS,1);
+		            $image_frame->writeImage($document['cible_url']['absolute'].$document['frame']);
+		            $taille = filesize(get_spip_doc(set_spip_doc($document['cible_url']['relative'].$document['frame'])));
+		        }
+	
+		        $largeur = $dimensions['largeur'];
+				$hauteur = $dimensions['hauteur'];
+	
+				//sauvegarde les donnees dans la base
+		        if (!sql_insertq(
+		            "spip_doc2img",
+		            array(
+		                "id_document" => $id_document,
+		                "fichier" => set_spip_doc($document['cible_url']['relative'].$document['frame']),
+		                "page" => $frame,
+		                "largeur" => $largeur,
+		                "hauteur" => $hauteur,
+		                "taille" => $taille
+		            )
+		        )) {
+		            return "erreur base de donnée";
+		        }
+	
+		        if(($frame == 0) && ($config['logo_auto']=='on') && in_array($config['format_cible'],array('png','jpg'))){
+		        	if(
+		        		($id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document)) == 0)
+		        		OR !file_exists(get_spip_doc(sql_getfetsel('fichier','spip_documents','id_document='.intval($id_vignette))))
+		        	){
+		        		if(is_numeric($id_vignette)){
+		        			sql_delete('spip_documents','id_document='.intval($id_vignette));
+		        		}
+			        	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
+						$x = $ajouter_documents($document['cible_url']['absolute'].$document['frame'], $document['cible_url']['absolute'].$document['frame'],
+								    'document', $id, 'vignette', $id_document, $actifs);
+		        	}
+		        }
+		        //on libère la frame
+		        if ($version == '0.9') {
+		            imagick_free($handle_frame);
+		        } else {
+		            $image_frame->clear();
+		            $image_frame->destroy();
+		        }
+		        $frame++;
+		    } while($frame < $nb_pages );
+	    }else{
+	    	do {
+		    	spip_log("Conversion de la page $frame",'doc2img');
+		        //on accede à la page $frame
+		        if ($version == '0.9') {
+		            imagick_goto($handle, $frame);
+		            $handle_frame = @imagick_getimagefromlist($handle);
+		        } else {
+		        	$image_frame = new Imagick();
+		        	if(is_numeric($resolution) && ($resolution <= '600') && ($resolution > $identify['resolution']['x'])){
+			        	$image_frame->setResolution($resolution,$resolution);
+		        	}
+					$image_frame->readImage($document['source_url']['absolute'].$document['fullname'].'['.$frame.']');
+					$image_frame->setImageFormat($config['format_cible']);
+					if(is_numeric($config['compression']) && ($config['compression'] > 50) && ($config['compression'] <= 100)){
+						$image_frame->setImageCompressionQuality($config['compression']);
+					}
+		            $handle_frame = $image_frame;
+		        }
+	
+		        //calcule des dimensions
+		        $dimensions = doc2img_ratio($handle_frame,$version,$config);
+	
+		        //nom du fichier cible, c'est à dire la frame (image) indexée
+		        $document['frame'] = $document['name'].'-'.$frame.'.'.$config['format_cible'];
+	
+		        //on sauvegarde la page
+		        if ($version == '0.9') {
+		        	//on redimensionne l'image
+			        imagick_zoom($handle_frame, $dimensions['largeur'], $dimensions['hauteur']);
+		            imagick_writeimage($handle_frame, $document['cible_url']['absolute'].$document['frame']);
+		            $taille = filesize($document['cible_url']['absolute'].$document['frame']);
+	
+		        } else {
+		        	//$image_frame->resizeImage($dimensions['largeur'], $dimensions['hauteur'],Imagick::FILTER_LANCZOS,1);
+		            $image_frame->writeImage($document['cible_url']['absolute'].$document['frame']);
+		            $taille = filesize(get_spip_doc(set_spip_doc($document['cible_url']['relative'].$document['frame'])));
+		        }
+	
+		        $largeur = $dimensions['largeur'];
+				$hauteur = $dimensions['hauteur'];
+	
+		        if(in_array($config['format_cible'],array('png','jpg'))){
+		        	if(
+		        		($id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document)) == 0)
+		        		OR !file_exists(get_spip_doc(sql_getfetsel('fichier','spip_documents','id_document='.intval($id_vignette))))
+		        	){
+		        		if(is_numeric($id_vignette)){
+		        			sql_delete('spip_documents','id_document='.intval($id_vignette));
+		        		}
+			        	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
+						$x = $ajouter_documents($document['cible_url']['absolute'].$document['frame'], $document['cible_url']['absolute'].$document['frame'],
+								    'document', $id, 'vignette', $id_document, $actifs);
+		        	}
+		        }
+		        //on libère la frame
+		        if ($version == '0.9') {
+		            imagick_free($handle_frame);
+		        } else {
+		            $image_frame->clear();
+		            $image_frame->destroy();
+		        }
+		        $frame++;
+		    } while($frame < 1 );
+	    }
 	    /**
 	     * Libération de la ressource pour les anciennes versions
 	     */
@@ -170,7 +236,6 @@ function inc_doc2img_convertir($id_document) {
 
 	    // libération du verrou
 	    spip_fclose_unlock($fp);
-	    //ecrire_config('doc2img/'.$id_document.'/statut','ok');
 
 	    return true;
 	}else{

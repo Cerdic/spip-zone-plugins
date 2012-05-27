@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[fr]Documents en Images[en]Documents to images</multi></nom>
 	<auteur>Camille Lafitte</auteur>
-	<version>1.0.3</version>
+	<version>1.1.0</version>
 	<etat>stable</etat>
 	<slogan>
 		<multi>
@@ -10,8 +10,8 @@
 		</multi>
 	</slogan>
     <description><multi>
-    	[fr]Ce plugin permet de convertir &#224; la vol&#233;e des pdf, tiff en image. Ces images sont ensuite exploitable via une boucle.
-		[en]This plugin will convert on the fly pdf, tiff ... documents in image(s). These images can then be exploited via a loop.
+    	[fr]Ce plugin permet de convertir &#224; la vol&#233;e des pdf, tiff et autres types de document en image ou série d'images. Ces images sont ensuite exploitables via une boucle spécifique.
+		[en]This plugin will convert on the fly pdf, tiff and other kind of documents in image or serie of images. These images can then be used with a specific loop.
 	</multi></description>
     <lien>http://www.spip-contrib.net/doc2img</lien>
 	<icon>images/doc2img-128.png</icon>
@@ -35,8 +35,12 @@
        <nom>post_edition</nom>
        <inclure>doc2img_pipeline.php</inclure>
    </pipeline>
-
+	<pipeline>
+		<nom>document_desc_actions</nom>
+		<inclure>doc2img_pipeline.php</inclure>
+	</pipeline>
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="cfg" version="[1.9;]" />
+	<utilise id="medias" version="[1.6.12;]" />
    <categorie>edition</categorie>
 </plugin>
