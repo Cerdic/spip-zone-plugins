@@ -100,7 +100,29 @@ function formulaires_editer_image_verifier_dist($id_document='new',$mode=false, 
 		/**
 		 * On test uniquement
 		 */
-		elseif(_request('tester')){
+		else{
+			$verifier = charger_fonction('verifier','inc');
+			$params = photospip_recuperer_params_form($var_filtre);
+			if(in_array($var_filtre,array('image_reduire','image_passe_partout'))){
+				if((strlen($params[0]) && strlen($erreur_param0 = $verifier($params[0],'entier'))) OR (strlen($params[1]) && strlen($erreur_param1 = $verifier($params[1],'entier')))){
+					$erreurs[$var_filtre] = _T('photospip:erreur_valeurs_numeriques');
+				}
+			}
+			if(in_array($var_filtre,array('image_rotation','image_gamma','image_flou'))){
+				if(strlen($params[0]) && strlen($erreur_param0 = $verifier($params[0],'entier')))
+					$erreurs[$var_filtre] = _T('photospip:erreur_valeur_numerique');
+				elseif($var_filtre == 'image_rotation' && $erreur_param0 = $verifier($params[0],'entier',array('min'=>'-180','max'=>'180'))){
+					$erreurs[$var_filtre] = $erreur_param0;
+				}
+				elseif($var_filtre == 'image_gamma' && $erreur_param0 = $verifier($params[0],'entier',array('min'=>'-254','max'=>'254'))){
+					$erreurs[$var_filtre] = $erreur_param0;
+				}
+				elseif($var_filtre == 'image_flou' && $erreur_param0 = $verifier($params[0],'entier',array('min'=>'1','max'=>'11'))){
+					$erreurs[$var_filtre] = $erreur_param0;
+				}
+			}
+		}
+		if(count($erreurs) == 0 && _request('tester')){
 			if(in_array($var_filtre,array('tourner','image_recadre'))){
 				$erreurs['message_erreur'] = _T('photospip:erreur_form_filtre_sstest');
 			}

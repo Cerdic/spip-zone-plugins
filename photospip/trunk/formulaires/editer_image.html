@@ -23,6 +23,8 @@
 	#SET{hauteur_max,#CONFIG{photospip/hauteur_previsu,#ENV{erreurs}|table_valeur{hauteur_previsu}|sinon{450}}}
 	[(#SET{largeur_reduit,[(#FICHIER|image_reduire{#GET{largeur_max},#GET{hauteur_max}}|extraire_attribut{width})]})]
 	#SET{ratio,#LARGEUR|div{#GET{largeur_reduit}}}
+	#SET{largeur_image,#LARGEUR}
+	#SET{hauteur_image,#HAUTEUR}
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
@@ -134,8 +136,10 @@
 	  </p>
 	 <script type="text/javascript"><!--
 			[(#CONFIG{photospip/image_recadre,on}|=={on}|oui)
-				var x1, y1, x2, y2, w, h, ias,ratio;
+				var x1, y1, x2, y2, w, h, ias,ratio,largeur,hauteur;
 				var ratio = parseFloat([(#GET{ratio})]);
+				var largeur = #GET{largeur_image};
+				var hauteur = #GET{hauteur_image};
 				function crop_selectchange(img, selection){
 					// Le ratio est la relation entre notre image normale et la prévisualisation
 					if(!isNaN(parseFloat(selection.x1*ratio))){
@@ -179,7 +183,8 @@
 				}
 				
 				var image_crop_close = function(){
-					ias.remove();
+					if(typeof(ias) == 'object')
+						ias.remove();
 				}
 			]
 			
@@ -187,7 +192,7 @@
 				var slider_image_rotation = jQuery('#sliderrotation').slider({
 					min: -180,
 					max: 180,
-					value: #ENV{params_image_rotation,45},
+					value: [(#ENV{params_image_rotation}|intval|sinon{45})],
 					slide: function( event, ui ) {
 						jQuery(this).parent().find('input').val(ui.value.toFixed(0));
 					}
@@ -199,7 +204,7 @@
 				var slider_image_gamma = jQuery('#slidergamma').slider({
 					min: -254,
 					max: 254,
-					value: #ENV{params_image_gamma,10},
+					value: [(#ENV{params_image_gamma}|intval|sinon{10})],
 					slide: function( event, ui ) {
 						jQuery(this).parent().find('input').val(ui.value.toFixed(0));
 					}
@@ -212,7 +217,7 @@
 				var slider_image_flou = jQuery('#sliderflou').slider({
 					min: 1,
 					max: 11,
-					value : #ENV{param_image_flou,3},
+					value : [(#ENV{param_image_flou}|intval|sinon{3})],
 					slide: function( event, ui ) {
 						jQuery(this).parent().find('input').val(ui.value.toFixed(0));
 					}
@@ -223,22 +228,17 @@
 				});
 			}
 			
+			if(typeof(jQuery) == 'function'){
 			jQuery(document).ready(function() {
 				activatesliders();
+				/**
+				 * On cache les options des filtres
+				 */
 				jQuery('.cache').hide();
-				jQuery('input[name=filtre]:checked').parent().find('.cache').show();
-			  	jQuery('#navigation .version').hover(function(){
-					jQuery(this).find('label img').fadeTo('fast',.1,function(){
-						jQuery(this).parent().parent().find('input').attr({
-			  				checked: "checked"
-				  		});
-				  		jQuery(this).parent().parent().find('.revenir_version, .delete_version').show();	
-					});	
-			  	},function(){
-					jQuery(this).find('label img').fadeTo('fast',1,function(){
-						jQuery(this).parent().parent().find('.revenir_version, .delete_version').hide();
-					});	
-			  	});
+				/**
+				 * On affiche les options du filtre sélectionné
+				 */
+				jQuery('input[name=filtre]:checked').parent().find('.cache').addClass('visible').show();
 				jQuery('form input[type=radio]').unbind().click(function(){
 					if(jQuery(this).next().next('.cache').is(':hidden')){
 				  		jQuery(".visible").slideUp().removeClass('visible');
@@ -268,18 +268,28 @@
 					if(typeof(ias) == 'object'){
 						var ias_selection = ias.getSelection();
 						if($(this).is('#recadre_width')){
-							var width_ratio = (parseFloat($(this).val())/ratio).toFixed(0);
-							ias_selection.x2 = parseInt(ias_selection.x1)+parseInt(width_ratio);
+							if($(this).val() <= largeur){
+								var width_ratio = (parseInt($(this).val()/ratio));
+								ias_selection.x2 = parseInt(ias_selection.x1)+width_ratio;
+								if(ias_selection.x2 > (parseInt(largeur/ratio))){
+									ias_selection.x1 = parseInt((parseInt(largeur)/ratio) - parseInt(width_ratio));
+									ias_selection.x2 = parseInt(parseInt(ias_selection.x1)+parseInt(width_ratio));
+								}
+							}
 						}
 						else if($(this).is('#recadre_height')){
-							var height_ratio = (parseFloat($(this).val())/ratio).toFixed(0);
-							ias_selection.y2 = parseInt(ias_selection.y1)+parseInt(height_ratio);
+							if($(this).val() <= hauteur){
+								var height_ratio = parseInt($(this).val()/ratio);
+								ias_selection.y2 = parseInt(ias_selection.y1)+height_ratio;
+								if(ias_selection.y2 > (parseInt(hauteur/ratio))){
+									ias_selection.y1 = parseInt((parseInt(hauteur)/ratio) - parseInt(height_ratio));
+									ias_selection.y2 = parseInt(parseInt(ias_selection.y1)+parseInt(height_ratio));
+								}
+							}
 						}
 						else{
 							var width = parseFloat(ias_selection.x2)-parseFloat(ias_selection.x1);
-							console.log(width);
 							var height = parseFloat(ias_selection.y2)-parseFloat(ias_selection.y1);
-							console.log(height);
 							if($(this).is('#recadre_x1')){
 								var x1_ratio = (parseFloat($(this).val())/ratio).toFixed(0);
 								ias_selection.x1 = parseInt(x1_ratio);
@@ -313,6 +323,7 @@
 					}
 				});
 			});
+			}
 			// -->
 	</script>
 	</BOUCLE_modifiable>
