@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_autorisation' => 'Vous n\'êtes pas autorisé à convertir ce document',
 	'erreur_format_document' => 'Un format de document ne peut être pris en compte : @type@',
 	'erreur_formats_documents' => 'Plusieurs formats de document ne peuvent être pris en compte : @types@',
+	'erreur_class_imagick' => 'Vous ne disposez pas de la class PHP Imagick. Vous ne pouvez donc pas utiliser ce plugin.',
 	'explication_doc2img' => 'Ce plugin permet de transformer certains types de documents en une seule ou une série d\'images afin de pouvoir les visualiser.',
 	'explication_formats_possibles' => 'Les extensions acceptées par votre configuration sont : @formats@',
 

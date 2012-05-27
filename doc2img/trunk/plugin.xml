@@ -39,6 +39,14 @@
 		<nom>document_desc_actions</nom>
 		<inclure>doc2img_pipeline.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>doc2img_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>doc2img_pipeline.php</inclure>
+	</pipeline>
 	<necessite id="SPIP" version="[2.1.14;2.1.99]" />
 	<necessite id="spip_bonux" version="[2.3.0;]" />
 	<utilise id="medias" version="[1.6.12;]" />

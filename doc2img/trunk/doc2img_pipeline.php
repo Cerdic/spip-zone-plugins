@@ -96,4 +96,52 @@ function doc2img_document_desc_actions($flux) {
 	}
 	return $flux;
 }
+
+/**
+ * Insertion dans le pipeline formulaire_charger (SPIP)
+ * Vérifie au chargement du formulaire de configuration que l'on a bien accès à la class Imagick 
+ *
+ * @param array $flux
+ * @return array $flux
+ */
+function doc2img_formulaire_charger($flux) {
+	if($flux['args']['form'] == 'configurer_doc2img'){
+		if (!class_exists('Imagick')) {
+			$flux['editable'] = false;
+			$flux['message_erreur'] = _T('doc2img:erreur_class_imagick');	
+		}
+	}
+	return $flux;
+}
+
+/**
+ * Insertion dans le pipeline formulaire_verifier (SPIP)
+ * Vérifie la configuration du formulaire de configuration 
+ *
+ * @param array $flux
+ * @return array $flux
+ */
+function doc2img_formulaire_verifier($flux) {
+	if($flux['args']['form'] == 'configurer_doc2img'){
+		include_spip('inc/config');
+		if(!is_array($formats = lire_config('doc2img_imagick_extensions'))){
+			include_spip('inc/metas');
+			$imagick = new Imagick();
+			$formats = $imagick->queryFormats();
+			ecrire_meta('doc2img_imagick_extensions',serialize($formats));
+		}
+		if(_request('format_document')){
+			$formats_choisis = explode(',',trim(_request('format_document')));
+			$diff = array_diff(array_map('trim',array_map('strtolower',$formats_choisis)),array_map('trim',array_map('strtolower',$formats)));
+			$formats = array_map('trim',array_map('strtolower',explode(',',trim(_request('format_document')))));
+			set_request('format_document',implode(',',$formats));
+		}
+		if(count($diff) > 1){
+			$flux['format_document'] = _T('doc2img:erreur_formats_documents',array('types'=>implode(',',$diff)));
+		}else if(count($diff) == 1){
+			$flux['format_document'] = _T('doc2img:erreur_format_document',array('type'=>implode(',',$diff)));
+		}
+	}
+	return $flux;
+}
 ?>
