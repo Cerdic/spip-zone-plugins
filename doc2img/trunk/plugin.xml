@@ -1,8 +1,8 @@
 <plugin>
 	<nom><multi>[fr]Documents en Images[en]Documents to images</multi></nom>
 	<auteur>Camille Lafitte</auteur>
-	<version>1.1.0</version>
-	<etat>stable</etat>
+	<version>1.2.0</version>
+	<etat>dev</etat>
 	<slogan>
 		<multi>
 			[fr]Convertir des documents textuels &#224; la vol&#233;e
@@ -39,8 +39,8 @@
 		<nom>document_desc_actions</nom>
 		<inclure>doc2img_pipeline.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
-	<necessite id="cfg" version="[1.9;]" />
+	<necessite id="SPIP" version="[2.1.14;2.1.99]" />
+	<necessite id="spip_bonux" version="[2.3.0;]" />
 	<utilise id="medias" version="[1.6.12;]" />
    <categorie>edition</categorie>
 </plugin>

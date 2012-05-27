@@ -63,7 +63,6 @@ function inc_doc2img_convertir($id_document,$type='full') {
 	     * car on réouvre chaque page par la suitre
 	     */
 	    if (class_exists('Imagick')) {
-	        $version = '2.x';
 	        $image = new Imagick($document['source_url']['absolute'].$document['fullname']);
 	        $identify = $image->identifyImage();
 	        $identify2 = $image->getImageProperties();
@@ -71,9 +70,8 @@ function inc_doc2img_convertir($id_document,$type='full') {
 	        $image->clear();
 	        $image->destroy();
 	    } else {
-	        $version = '0.9';
-	        $handle = imagick_readimage($document['source_url']['absolute'].$document['fullname']);
-	        $nb_pages = imagick_getlistsize($handle);
+	    	spip_log('Erreur Doc2Img : La class doc2img n est pas disponible');
+	        return false;
 	    }
 
 	    $frame = 0;
@@ -87,40 +85,28 @@ function inc_doc2img_convertir($id_document,$type='full') {
 		    do {
 		    	spip_log("Conversion de la page $frame",'doc2img');
 		        //on accede à la page $frame
-		        if ($version == '0.9') {
-		            imagick_goto($handle, $frame);
-		            $handle_frame = @imagick_getimagefromlist($handle);
-		        } else {
-		        	$image_frame = new Imagick();
-		        	if(is_numeric($resolution) && ($resolution <= '600') && ($resolution > $identify['resolution']['x'])){
-			        	$image_frame->setResolution($resolution,$resolution);
-		        	}
-					$image_frame->readImage($document['source_url']['absolute'].$document['fullname'].'['.$frame.']');
-					$image_frame->setImageFormat($config['format_cible']);
-					if(is_numeric($config['compression']) && ($config['compression'] > 50) && ($config['compression'] <= 100)){
-						$image_frame->setImageCompressionQuality($config['compression']);
-					}
-		            $handle_frame = $image_frame;
-		        }
+	        	$image_frame = new Imagick();
+	        	if(is_numeric($resolution) && ($resolution <= '600') && ($resolution > $identify['resolution']['x'])){
+		        	$image_frame->setResolution($resolution,$resolution);
+	        	}
+				$image_frame->readImage($document['source_url']['absolute'].$document['fullname'].'['.$frame.']');
+				$image_frame->setImageFormat($config['format_cible']);
+				if(is_numeric($config['compression']) && ($config['compression'] > 50) && ($config['compression'] <= 100)){
+					$image_frame->setImageCompressionQuality($config['compression']);
+				}
+	            $handle_frame = $image_frame;
 	
 		        //calcule des dimensions
-		        $dimensions = doc2img_ratio($handle_frame,$version,$config);
+		        $dimensions = doc2img_ratio($handle_frame,$config);
 	
 		        //nom du fichier cible, c'est à dire la frame (image) indexée
 		        $document['frame'] = $document['name'].'-'.$frame.'.'.$config['format_cible'];
 	
 		        //on sauvegarde la page
-		        if ($version == '0.9') {
-		        	//on redimensionne l'image
-			        imagick_zoom($handle_frame, $dimensions['largeur'], $dimensions['hauteur']);
-		            imagick_writeimage($handle_frame, $document['cible_url']['absolute'].$document['frame']);
-		            $taille = filesize($document['cible_url']['absolute'].$document['frame']);
-	
-		        } else {
-		        	//$image_frame->resizeImage($dimensions['largeur'], $dimensions['hauteur'],Imagick::FILTER_LANCZOS,1);
-		            $image_frame->writeImage($document['cible_url']['absolute'].$document['frame']);
-		            $taille = filesize(get_spip_doc(set_spip_doc($document['cible_url']['relative'].$document['frame'])));
-		        }
+		        
+	        	//$image_frame->resizeImage($dimensions['largeur'], $dimensions['hauteur'],Imagick::FILTER_LANCZOS,1);
+	            $image_frame->writeImage($document['cible_url']['absolute'].$document['frame']);
+	            $taille = filesize(get_spip_doc(set_spip_doc($document['cible_url']['relative'].$document['frame'])));
 	
 		        $largeur = $dimensions['largeur'];
 				$hauteur = $dimensions['hauteur'];
@@ -154,52 +140,35 @@ function inc_doc2img_convertir($id_document,$type='full') {
 		        	}
 		        }
 		        //on libère la frame
-		        if ($version == '0.9') {
-		            imagick_free($handle_frame);
-		        } else {
-		            $image_frame->clear();
-		            $image_frame->destroy();
-		        }
+	            $image_frame->clear();
+	            $image_frame->destroy();
 		        $frame++;
 		    } while($frame < $nb_pages );
 	    }else{
 	    	do {
 		    	spip_log("Conversion de la page $frame",'doc2img');
 		        //on accede à la page $frame
-		        if ($version == '0.9') {
-		            imagick_goto($handle, $frame);
-		            $handle_frame = @imagick_getimagefromlist($handle);
-		        } else {
-		        	$image_frame = new Imagick();
-		        	if(is_numeric($resolution) && ($resolution <= '600') && ($resolution > $identify['resolution']['x'])){
-			        	$image_frame->setResolution($resolution,$resolution);
-		        	}
-					$image_frame->readImage($document['source_url']['absolute'].$document['fullname'].'['.$frame.']');
-					$image_frame->setImageFormat($config['format_cible']);
-					if(is_numeric($config['compression']) && ($config['compression'] > 50) && ($config['compression'] <= 100)){
-						$image_frame->setImageCompressionQuality($config['compression']);
-					}
-		            $handle_frame = $image_frame;
-		        }
+	        	$image_frame = new Imagick();
+	        	if(is_numeric($resolution) && ($resolution <= '600') && ($resolution > $identify['resolution']['x'])){
+		        	$image_frame->setResolution($resolution,$resolution);
+	        	}
+				$image_frame->readImage($document['source_url']['absolute'].$document['fullname'].'['.$frame.']');
+				$image_frame->setImageFormat($config['format_cible']);
+				if(is_numeric($config['compression']) && ($config['compression'] > 50) && ($config['compression'] <= 100)){
+					$image_frame->setImageCompressionQuality($config['compression']);
+				}
+	            $handle_frame = $image_frame;
 	
 		        //calcule des dimensions
-		        $dimensions = doc2img_ratio($handle_frame,$version,$config);
+		        $dimensions = doc2img_ratio($handle_frame,$config);
 	
 		        //nom du fichier cible, c'est à dire la frame (image) indexée
 		        $document['frame'] = $document['name'].'-'.$frame.'.'.$config['format_cible'];
 	
 		        //on sauvegarde la page
-		        if ($version == '0.9') {
-		        	//on redimensionne l'image
-			        imagick_zoom($handle_frame, $dimensions['largeur'], $dimensions['hauteur']);
-		            imagick_writeimage($handle_frame, $document['cible_url']['absolute'].$document['frame']);
-		            $taille = filesize($document['cible_url']['absolute'].$document['frame']);
-	
-		        } else {
-		        	//$image_frame->resizeImage($dimensions['largeur'], $dimensions['hauteur'],Imagick::FILTER_LANCZOS,1);
-		            $image_frame->writeImage($document['cible_url']['absolute'].$document['frame']);
-		            $taille = filesize(get_spip_doc(set_spip_doc($document['cible_url']['relative'].$document['frame'])));
-		        }
+	        	//$image_frame->resizeImage($dimensions['largeur'], $dimensions['hauteur'],Imagick::FILTER_LANCZOS,1);
+	            $image_frame->writeImage($document['cible_url']['absolute'].$document['frame']);
+	            $taille = filesize(get_spip_doc(set_spip_doc($document['cible_url']['relative'].$document['frame'])));
 	
 		        $largeur = $dimensions['largeur'];
 				$hauteur = $dimensions['hauteur'];
@@ -217,21 +186,11 @@ function inc_doc2img_convertir($id_document,$type='full') {
 								    'document', $id, 'vignette', $id_document, $actifs);
 		        	}
 		        }
-		        //on libère la frame
-		        if ($version == '0.9') {
-		            imagick_free($handle_frame);
-		        } else {
-		            $image_frame->clear();
-		            $image_frame->destroy();
-		        }
+
+	            $image_frame->clear();
+	            $image_frame->destroy();
 		        $frame++;
 		    } while($frame < 1 );
-	    }
-	    /**
-	     * Libération de la ressource pour les anciennes versions
-	     */
-	    if ($version == '0.9') {
-	        imagick_free($handle);
 	    }
 
 	    // libération du verrou
@@ -296,20 +255,15 @@ function can_doc2img($id_document = NULL) {
  * @param $id_document identifiant du document à controler
  * @return booleen $resultat : true document convertible, false sinon
  */
-function doc2img_ratio(&$handle,$version='0.9',$config=array()) {
+function doc2img_ratio(&$handle,$config=array()) {
 
     $ratio['largeur'] = $ratio['hauteur'] = 1;
 
     /**
      * Récupération des dimensions du document d'origine
      */
-    if($version == '0.9'){
-    	$dimensions['largeur'] = imagick_getwidth($handle);
-    	$dimensions['hauteur'] = imagick_getheight($handle);
-    }else{
-		$dimensions['largeur'] = $handle->getImageWidth();
-    	$dimensions['hauteur'] = $handle->getImageHeight();
-    }
+	$dimensions['largeur'] = $handle->getImageWidth();
+	$dimensions['hauteur'] = $handle->getImageHeight();
 
     //si une largeur seuil a été définie
     if ($largeur = $config['largeur']) {
