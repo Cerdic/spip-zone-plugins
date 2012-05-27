@@ -25,33 +25,27 @@ function action_images_versions_dist() {
 }
 
 function action_images_versions_post($r){
-	global $visiteur_session;
-	$id_auteur = $visiteur_session['id_auteur'];
-	$action = _request('action_faire');
+	$action = _request('action_faire') ? _request('action_faire') : $r['action_faire'];
 	spip_log("action_faire: $action","photospip");
 	spip_log($r,'photospip');
 	//on récup l'id_document
 	$arg = $r[1];
 	spip_log("on travail sur l'id_document $arg","photospip");
 
-	$version = _request('version');
+	$version = _request('version') ? _request('version') : $r['version'];
 
 	include_spip('inc/charsets');	# pour le nom de fichier
 	include_spip('inc/documents'); 
-			
-	if (_SPIP_AJAX === 1 ){
-		$redirect = _request('redirect_ajax');
-	}
-	else{
-		$redirect = _request('redirect');
-	}
+
+	$redirect = _request('redirect');
+	
 	if($action == "revenir"){
 		spip_log("script image_version... on repart vers l'arrière","photospip");
 		spip_log("revenir à la version $version","photospip");
 		
 		$row = sql_fetsel("*", "spip_documents_inters", "id_document=".intval($arg)." AND version=".intval($version));
 		
-		$src = _DIR_RACINE . copie_locale(get_spip_doc($row['fichier']));
+		$src = get_spip_doc($row['fichier']);
 		spip_log("la source est $src","photospip");
 		
 		// On cherche le fichier actuel
@@ -100,5 +94,7 @@ function action_images_versions_post($r){
 	
 	if($redirect)
 		redirige_par_entete(str_replace("&amp;","&",$redirect));
+		
+	return true;
 }
 ?>

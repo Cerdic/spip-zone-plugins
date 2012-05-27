@@ -21,6 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_editer_image' => 'Éditer l\'image',
 	'bouton_editer_vignette' => 'Éditer la vignette',
 	'bouton_modifier_document' => 'Modifier les informations du document',
+	'bouton_revenir_version' => 'Revenir à cette version',
+	'bouton_supprimer_version' => 'Supprimer cette version',
 	'bouton_supprimer_vignette' => 'Supprimer cette vignette',
 	'bouton_supprimer_vignette_document' => 'Supprimer la vignette de ce document',
 	'bouton_tester' => 'Prévisualiser',
@@ -53,6 +55,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_modifier_image' => 'Éditer l\'image',
 	'info_modifier_vignette' => 'Modifier la vignette du document #@id_document@',
+	'info_nb_versions_une' => 'Une version',
+	'info_nb_versions' => '@nb@ versions',
 	
 	// L
 	'label_angle_rotation' => 'Angle de rotation&nbsp:',
@@ -111,6 +115,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_image_taille_actuelle' => 'Taille actuelle de l\'image&nbsp;: @largeur@x@hauteur@px.',
 	'message_limite_versions' => 'Le nombre de versions précédentes sont limitées à @limite@.',
+	'message_ok_version_retour' => 'Vous êtes revenu à la version @version@',
+	'message_ok_version_supprimee' => 'La version #@version@ a été supprimée',
 	'message_pas_de_versions' => 'Ce document n\'est pas versionné.',
 	'message_vignette_installe_succes' => 'La vignette a été chargé avec succès',
 
@@ -118,6 +124,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'photospip' => 'PhotoSPIP',
 	
 	// T
+	'title_version' => 'Version #@version@',
 	'titre_informations_images' => 'Informations du document',
 	'titre_page_image_edit' => 'Édition de l\'image',
 	'titre_versions_precedentes' => 'Précédentes versions',
@@ -140,8 +147,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'image_taille_actuelle' => 'Taille actuelle de l\'image&nbsp;:',
 	
 	//aide
-	'texte_en_cours' => '<div class="waiting"><h2>Modification de votre image...</h2><p>Veuillez patienter que l\'opération soit terminée</p></div>',
-	'titre_aide' => 'Aide',
 	'texte_aide' =>'<p>Pour appliquer une modification à votre image, il vous suffit de choisir le type en le cochant à coté de son titre et de procéder à son réglage.</p>
 	<p>Ensuite choisissez entre "tester" ou "appliquer", puis validez.</p>
 	<p><strong>NB :</strong> Ces traitements d\'images sont lourds et peuvent prendre quelque temps avant de s\'effectuer. C\'est pourquoi nous vous recommandons de les "tester" avant (cela créera une prévisualisation). Chaque test repartira de la dernière version. Appliquer créera une nouvelle version disponible.</p>',

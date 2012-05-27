@@ -28,6 +28,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_document' value='#ENV{id_document}' />
+		<input type="submit" class="submit" name="tester" style="display:none;" value="<:photospip:bouton_tester:>" />
 		<div id="modifier_image">
 			<div id="image-container">
 				<div id="image_modifier" style="[width:(#GET{largeur_max})px;]">
@@ -37,6 +38,38 @@
 					[(#_document:FICHIER|image_reduire{#GET{largeur_max,450},#GET{hauteur_max,450}}|inserer_attribut{alt,' '})]]
 				</div>
 			</div>
+			<B_interd_nb>
+			<ul class="liste-versions">
+				<li class="fieldset">
+					<h3 class="legend">[(#GRAND_TOTAL|singulier_ou_pluriel{photospip:info_nb_versions_une,photospip:info_nb_versions})]</h3>
+					<BOUCLE_interd_nb(DOCUMENTS_INTERS){id_document}{!par version}> </BOUCLE_interd_nb>
+					<ul>
+					<B_interd>
+						<li id="image-versions" class="editer editer_version">
+						<BOUCLE_interd(DOCUMENTS_INTERS){id_document}{!par version}>
+						<div class="version choix">
+						<label for="version_#VERSION" title="<:photospip:title_version{version=#VERSION}:>">
+							[(#HAUTEUR|>{#LARGEUR}|non)
+							[(#SET{fichier,[(#FICHIER|get_spip_doc)]})]
+							[(#SET{miniature,[(#FICHIER|get_spip_doc|image_reduire{80,80}|inserer_attribut{alt,Version #VERSION})]})]]
+							[(#HAUTEUR|>{#LARGEUR}|oui)
+							[(#SET{fichier,[(#FICHIER|get_spip_doc)]})]
+							[(#SET{miniature,[(#FICHIER|get_spip_doc|image_reduire{80,80}|inserer_attribut{alt,Version #VERSION}|inserer_attribut{style,'vertical-align:bottom;'})]})]]
+							<a href="#GET{fichier}" class="mediabox">#GET{miniature}</a>
+						</label>
+						<input type="radio" name="version" id="version_#VERSION" value="#VERSION" />
+						</div>
+						</BOUCLE_interd>
+						</li>
+						<li class="boutons">
+							<input type="submit" class="submit" name="revenir_version" value="<:photospip:bouton_revenir_version:>" />
+							<input type="submit" class="submit" name="supprimer_version" value="<:photospip:bouton_supprimer_version:>" />
+						</li>
+					</B_interd>
+					</ul>
+				</li>
+			</ul>
+			</B_interd_nb>
 		</div>
 		<div>
 			<BOUCLE_modifiable(CONDITION){si #ENV{modifiable,oui}|oui}>
@@ -171,7 +204,7 @@
 				activatesliders();
 				jQuery('.cache').hide();
 				jQuery('input[name=filtre]:checked').parent().find('.cache').show();
-			  	jQuery('.version').hover(function(){
+			  	jQuery('#navigation .version').hover(function(){
 					jQuery(this).find('label img').fadeTo('fast',.1,function(){
 						jQuery(this).parent().parent().find('input').attr({
 			  				checked: "checked"

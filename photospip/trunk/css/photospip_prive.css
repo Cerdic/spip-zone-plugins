@@ -12,6 +12,22 @@
 	vertical-align:bottom;
 }
 
+#image-versions{
+	margin: 10px;
+    overflow-x: scroll;
+    padding: 0;
+    border-spacing:6px 0;
+}
+
+#image-versions .version{
+	display:table-cell;
+}
+
+#image-versions .version label{
+	margin:0 auto;
+	width:auto;
+	display:block;
+}
 button.revenir_version{
 	position:absolute;
 	top :50%;
