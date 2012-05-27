@@ -1,0 +1,23 @@
+<div class="formulaire_spip formulaire_editer formulaire_editer_doc2img">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<B_doc2img>
+    <form method="post" action="#ENV{action}"><div>
+    	#ACTION_FORMULAIRE{#ENV{action}}
+	    	<ul>
+	    		<li class="editer editer_id_document">
+					<label for="id_document"><:doc2img:formulaire_label_choix_doc{formats=#CONFIG{doc2img/format_document}}:></label>
+					<select name="id_document" id="id_document">
+						<BOUCLE_doc2img(DOCUMENTS) {id_article} {tout} {extension IN #CONFIG{doc2img/format_document}|explode{','}}>
+						    <option value=#ID_DOCUMENT>#ID_DOCUMENT - [(#TITRE|?{#TITRE,[(#FICHIER|basename)]})]</option>
+						</BOUCLE_doc2img>
+					</select>
+				</li>
+			</ul>
+			<p class="boutons">
+	        	<input type="submit" class="submit" value="<:doc2img:bouton_convertir:>" />
+			</p>
+		</div>
+    </form>
+	</B_doc2img>
+</div>

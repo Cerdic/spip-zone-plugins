@@ -1,0 +1,9 @@
+#CACHE{0}
+<BOUCLE_doc(DOCUMENTS) {id_document} {tout}>
+    #SET{res, #ID_DOCUMENT|d2c_convertir }
+        
+    [(#GET{res}|=={1}|?{ 
+        <a href='[(#URL_PAGE{doc2img,id_document=#ID_DOCUMENT})]' target="_blank">Voir</a>,
+        #GET{res}
+    })]
+</BOUCLE_doc>
