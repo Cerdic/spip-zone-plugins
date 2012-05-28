@@ -15,6 +15,7 @@ function formulaires_aeres_ajouter_zitem_charger_dist($auteur){
 }
 
 function formulaires_aeres_ajouter_zitem_verifier_dist($auteur){
+	include_spip('inc/config');
 	$erreurs=array();
 	if (_request('ajout') == 'reference' && _request('itemType')=='') // Seulement si on n'a pas saisi de référence
 		if (!_request('texte') || strlen(_request('texte'))<10)
