@@ -20,7 +20,7 @@
 #PAGINATION 
 <BOUCLE_jeux(JEUX){par #ENV{par,date}}{inverse #ENV{par}|!={id_jeu}|?{1,0}}{pagination 10}><!--{statut==refuse|publie}-->
 <tr class ="tr_liste"  style="text-align:center" >
-	<td>[(#STATUT|puce_statut)]</td>
+	<td>[(#STATUT|jeux_puce_statut)]</td>
 	<td style="text-align:center"><a href="#URL_ECRIRE{jeux_voir,id_jeu=#ID_JEU}">#ID_JEU</a></td>
 	<td style="text-align:center"><a href="#URL_ECRIRE{jeux_voir,id_jeu=#ID_JEU}">#TYPE_JEU</a></td>
 	<td style="text-align:center"><a href="#URL_ECRIRE{jeux_voir,id_jeu=#ID_JEU}">#TITRE_PRIVE</a></td>
@@ -51,7 +51,7 @@
 #PAGINATION 
 <BOUCLE_articles(ARTICLES){par date}{inverse}{pagination 10}{statut?}{recherche &lt;/jeux&gt;}>
 <tr class ="tr_liste"  style="text-align:center" >
-	<td>[(#STATUT|puce_statut)]</td>
+	<td>[(#STATUT|jeux_puce_statut)]</td>
 	<td style="text-align:center"><a href="#URL_ECRIRE{articles,id_article=#ID_ARTICLE}">#ID_ARTICLE</a></td>
 	<td style="text-align:center"><a href="#URL_ECRIRE{articles,id_article=#ID_ARTICLE}">#TITRE</a></td>
 	<td style="text-align:center">[(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)]</td>

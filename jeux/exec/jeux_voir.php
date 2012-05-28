@@ -42,7 +42,7 @@ function exec_jeux_voir(){
 		$titre_public = _T('jeux:jeu_titre_public_') . ' ' . $titre_public;
 	}
 	$contenu = $type_jeu==_T('jeux:jeu_vide')?_T('jeux:introuvable'):propre($contenu);
-	$puce = puce_statut($statut);
+	$puce = jeux_puce_statut($statut);
 	
 	if(!$id_jeu){
 		echo $commencer_page(_T("jeux:pas_de_jeu"));

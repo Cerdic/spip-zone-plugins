@@ -14,7 +14,7 @@ Mettez une touche éducative et ludique à votre site !
 
 Deux solutions :
 -* Des jeux codés en clair dans les articles entre les balises <code><jeux></code> et <code></jeux></code>.
--* Des jeux codés dans l\'espace privé et accessibles grâce au modèle <code><jeuXX></code> o&#249; XX est l\'identifiant du jeu.
+-* Des jeux codés dans l\'espace privé et accessibles grâce au modèle <code><jeuXX></code> où XX est l\'identifiant du jeu.
 
 L\'enregistrement et la gestion des scores n\'est possible qu\'en utilisant la seconde solution.
 

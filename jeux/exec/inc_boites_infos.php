@@ -61,8 +61,8 @@ function boite_infos_accueil($id_foo=0) {
 function boite_info_jeux_edit(){
 	return debut_cadre_relief(find_in_path('img/jeu-voir.png'),true,'',_T('jeux:inserer_jeu'))
 	. "<div>"._T('jeux:inserer_jeu_explication')."</div>"
-	. icone_horizontale(_T('jeux:liste_jeux'),generer_url_ecrire('jeux_tous'),find_in_path('img/jeux-tous.png'),'','',false)
-	. icone_horizontale(_T('jeux:nouveau_jeu'),generer_url_ecrire('jeux_edit','nouveau=oui'),find_in_path('img/jeu-nouveau.png'),'','',false)
+	. jeux_icone_horizontale(_T('jeux:liste_jeux'),generer_url_ecrire('jeux_tous'),find_in_path('img/jeux-tous.png'))
+	. jeux_icone_horizontale(_T('jeux:nouveau_jeu'),generer_url_ecrire('jeux_edit','nouveau=oui'),find_in_path('img/jeu-nouveau.png'))
 	. fin_cadre_relief(true);
 }
 

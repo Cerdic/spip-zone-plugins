@@ -30,13 +30,13 @@ function exec_jeux_edit(){
 	echo debut_droite('',true);
 	echo gros_titre($gros_titre, '', false);
 	
-	echo debut_cadre_formulaire('', true);
+	echo jeux_debut_cadre_formulaires();
 	echo "<form method='post' name='jeux_edit'>\n";
 	include_spip('public/assembler');
 	echo recuperer_fond('fonds/jeux_edit', array('id_jeu'=>$id_jeu));
 	echo "<p align='right'><input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo' /></p>";
 	echo '</form>';
-	echo fin_cadre_formulaire(true);
+	echo jeux_fin_cadre_formulaire(s);
 	echo fin_gauche(), fin_page();
 }
 

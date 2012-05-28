@@ -148,7 +148,7 @@ function gerer_resultat_jeux($id_jeu, $bouton){
 
 function formulaire_suppression($bouton, $type){
     $commencer_page = charger_fonction('commencer_page', 'inc');
-	echo debut_cadre_formulaire('', true);
+	echo jeux_jeux_debut_cadre_formulaire();
 	echo "<form method='post'  name='supprimer_resultat'>";
 	debut_cadre_relief();	
 	
@@ -208,7 +208,7 @@ function formulaire_suppression($bouton, $type){
 	fin_cadre_relief();
 	echo "</form>";
 	
-	echo fin_cadre_formulaire(true);
+	echo jeux_fin_cadre_formulaire();
 }
 function interdit(){
     $commencer_page = charger_fonction('commencer_page', 'inc');
