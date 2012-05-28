@@ -92,8 +92,10 @@ function action_images_versions_post($r){
 		spip_log("script image_version... pas d'action demandée","photospip");
 	}
 	
-	if($redirect)
+	if($redirect){
+		include_spip('inc/headers');
 		redirige_par_entete(str_replace("&amp;","&",$redirect));
+	}
 		
 	return true;
 }

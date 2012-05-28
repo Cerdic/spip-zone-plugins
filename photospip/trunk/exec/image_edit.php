@@ -49,7 +49,7 @@ function image_edit_ok($row, $id_document, $mode)
 	
 	if (defined('_AJAX') AND _AJAX){
 		$contexte = array(
-		'redirect'=>'',//generer_url_ecrire("portfolio"),
+		'retour'=>'',//generer_url_ecrire("portfolio"),
 		'new'=>$id_document,
 		'mode'=>$mode,
 		'config_fonc'=>'image_edit_config',
@@ -91,10 +91,10 @@ function image_edit_ok($row, $id_document, $mode)
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'image_edit','id_document'=>$id_document,'mode'=>$mode),'data'=>''));
 	echo debut_droite('', true);
 
-	$redirect = _request('redirect') ? _request('redirect') : generer_url_ecrire("portfolio");
+	$redirect = _request('retour') ? _request('retour') : generer_url_ecrire("portfolio");
 	$contexte = array(
 		'icone_retour'=>icone_inline(_T('icone_retour'),$redirect, find_in_path("images/document-24.png"), "rien.gif",$GLOBALS['spip_lang_left']),
-		'redirect'=>_request('redirect',''),//generer_url_ecrire("portfolio"),
+		'retour'=>$redirect,//generer_url_ecrire("portfolio"),
 		'titre'=>$titre,
 		'new'=>$id_document,
 		'mode'=>$mode,

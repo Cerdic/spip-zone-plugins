@@ -153,7 +153,6 @@ function formulaires_editer_image_verifier_dist($id_document='new',$mode=false, 
 function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $retour=''){
 	$res = array('editable'=>true);
 	$autoclose= '';
-	//$autoclose = "<script type='text/javascript'>if (window.jQuery) jQuery.modalboxclose();</script>";
 	if($mode == 'vignette'){
 		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
 		$res['redirect'] = sinon(_request('redirect'),'');
@@ -177,6 +176,12 @@ function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $
 			$mode = $row['mode'];
 		}
 		if(!_request('supprimer_vignette')){
+			if(_request('type_retour') == 'retour'){
+				$res['redirect'] = $retour ? $retour : _request('retour');
+				$autoclose = "<script type='text/javascript'>if (window.jQuery) jQuery.modalboxclose();</script>";
+			}else{
+				$res['redirect'] = '';
+			}
 			$var_filtre = _request('filtre');
 			$type_modif = _request('type_modification');
 			$params = photospip_recuperer_params_form($var_filtre);
@@ -212,7 +217,6 @@ function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $
 			}
 			if($type_modif == 'creer_version_image'){
 				$size_image = getimagesize($tmp_img);
-				spip_log("taille de l'image $size_image[0] x $size_image[1]","photospip");
 				$largeur = $size_image[0];
 				$hauteur = $size_image[1];
 				$ext = substr(basename($tmp_img), strpos(basename($tmp_img), ".")+1, strlen(basename($tmp_img)));
@@ -235,7 +239,6 @@ function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $
 					/**
 					 * Remplace l'image actuelle par une nouvelle
 					 */
-					 spip_log('on remplace','photospip');
 					 $ajouter_document = charger_fonction('ajouter_documents','action');
 					 if($mode != 'vignette'){
 						$ajoute = $ajouter_document($row['id_document'], $files, $objet, $id_objet, $mode);
@@ -305,12 +308,6 @@ function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $
 	}
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='id_document/$id_document'");
-	$ajax = defined('_AJAX') AND _AJAX;
-	//if($ajax)
-	//	$res['redirect'] = '';
-	//else
-	//if (!isset($res['redirect']))
-		//$res['redirect'] = parametre_url(self(),'redirect','');
 	if (!isset($res['message_erreur']) && !$res['message_ok'])
 		$res['message_ok'] = _L('Votre modification a &eacute;t&eacute; enregistr&eacute;e').$autoclose;
 	
