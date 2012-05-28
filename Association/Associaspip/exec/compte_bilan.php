@@ -24,27 +24,22 @@ function exec_compte_bilan()
 		echo minipres();
 	} else {
 // initialisations
-		$plan = sql_countsel('spip_asso_plan','active=1');
-		$id_exercice = intval(_request('exercice'));
-		if(!$id_exercice){
-			/* on recupere l'id_exercice dont la date "fin" est "la plus grande" */
-			$id_exercice = sql_getfetsel('id_exercice', 'spip_asso_exercices', '', '', 'fin DESC');
-		}
-		$destination = intval(_request('destination'));
-		$exercice_data = sql_asso1ligne('exercice', $id_exercice);
 		include_spip('inc/association_comptabilite');
+		$ids = association_passe_parametres_comptables();
+		$plan = sql_countsel('spip_asso_plan','active=1');
+		$exercice_data = sql_asso1ligne('exercice', $ids['exercice']);
 // traitements
 		onglets_association('titre_onglet_comptes');
 		// INTRO : rappel de l'exercicee affichee
 		$infos['exercice_entete_debut'] = association_datefr($exercice_data['debut'], 'dtstart');
 		$infos['exercice_entete_fin'] = association_datefr($exercice_data['fin'], 'dtend');
-		echo totauxinfos_intro($exercice_data['intitule'], 'exercice', $id_exercice, $infos);
+		echo totauxinfos_intro($exercice_data['intitule'], 'exercice', $ids['exercice'], $infos);
 		// pas de sommes de synthes puisque tous les totaux sont dans la zone centrale ;-
 		// datation et raccourcis
-		icones_association(array('comptes', "exercice=$id_exercice"), array(
-			'encaisse_titre_general' => array('finances-24.png', 'encaisse', "exercice=$id_exercice".($destination?"&destination=$id_destination":'')),
-			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$id_exercice".($destination?"&destination=$id_destination":'')),
-#			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$id_exercice".($destination?"&destination=$id_destination":'')),
+		icones_association(array('comptes', "exercice=$ids[exercice]"), array(
+			'encaisse_titre_general' => array('finances-24.png', 'encaisse', "exercice=$ids[exercice]".($ids['destination']?"&destination=$ids[destination]":'')),
+			'cpte_resultat_titre_general' => array('finances-24.png', 'compte_resultat', "exercice=$ids[exercice]".($ids['destination']?"&destination=$ids[destination]":'')),
+#			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$ids[exercice]".($ids['destination']?"&destination=$ids[destination]":'')),
 		));
 		$var = association_passe_parametres_comptables();
 /*
@@ -52,10 +47,10 @@ function exec_compte_bilan()
 			echo debut_cadre_enfonce('',true);
 			echo '<h3>'. _T('asso:cpte_bilan_mode_exportation') .'</h3>';
 			if (test_plugin_actif('FPDF')) { // impression en PDF : _T('asso:bouton_impression')
-				echo icone1_association('PDF', generer_url_ecrire('export_comptebilans_pdf').'&var='.rawurlencode($var), 'print-24.png'); //!\ generer_url_ecrire() utilise url_enconde() or il est preferable avec les grosses variables serialisees d'utiliser rawurlencode()
+				echo icone1_association('PDF', generer_url_ecrire('export_comptebilans_pdf'), "exercice=$ids[exercice]".($ids['destination']?"&destination=$ids[destination]":'')), 'print-24.png');
 			}
 			foreach(array('csv','ctx','dbk','json','tex','tsv','xml','yaml') as $type) { // autres exports (donnees brutes) possibles
-				echo icone1_association(strtoupper($type), generer_url_ecrire("export_comptebilans_$type").'&var='.rawurlencode($var), 'export-24.png'); //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
+				echo icone1_association(strtoupper($type), generer_url_ecrire("export_comptebilans_$type").'&var='.rawurlencode($ids['url']), 'export-24.png'); //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
 			}
 			echo fin_cadre_enfonce(true);
 		}
@@ -63,8 +58,8 @@ function exec_compte_bilan()
 		debut_cadre_association('finances-24.png', 'cpte_bilan_titre_general', $exercice_data['intitule']);
 		// Filtres
 		filtres_association(array(
-			'exercice'=>$id_exercice,
-			'destination'=>$id_destination,
+			'exercice'=>$ids['exercice'],
+			'destination'=>$ids['destination'],
 		), 'compte_bilan');
 		// les autres classes a prendre en compte ici
 		$classes_bilan = array();
@@ -79,9 +74,9 @@ function exec_compte_bilan()
 			$classes_bilan[] = $data['classe'];
 		}
 		// liste des actifs (les dettes) cumulees par comptes
-		$actifs = association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', '-1', $id_exercice, $id_destination);
+		$actifs = association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', '-1', $ids['exercice'], $ids['destination']);
 		// liste des passifs (le patrimoine/avoir) cumulees par comptes
-		$passifs = association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', '+1', $id_exercice, $id_destination);
+		$passifs = association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', '+1', $ids['exercice'], $ids['destination']);
 		// resultat comptable courant : en comptabilite francaise, la somme les actifs et les passifs doivent s'egaler, ce qui se fait en incorporant le resultat comptable (perte en actif et benefice en passif)
 		association_liste_resultat_net($passifs, $actifs);
 		// liste des bilans (actifs et passifs) par comptes

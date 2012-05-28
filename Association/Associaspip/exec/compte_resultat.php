@@ -24,65 +24,50 @@ function exec_compte_resultat()
 		echo minipres();
 	} else {
 // initialisations
-		$plan = sql_countsel('spip_asso_plan','active=1');
-		$id_exercice = intval(_request('exercice'));
-		if(!$id_exercice){
-			/* on recupere l'id_exercice dont la date "fin" est "la plus grande" */
-			$id_exercice = sql_getfetsel('id_exercice', 'spip_asso_exercices', '', '', 'fin DESC');
-		}
-		$id_destination = intval(_request('destination'));
-		$exercice_data = sql_asso1ligne('exercice', $id_exercice);
 		include_spip('inc/association_comptabilite');
+		$ids = association_passe_parametres_comptables();
+		$exercice_data = sql_asso1ligne('exercice', $ids['exercice']);
 // traitements
 		onglets_association('titre_onglet_comptes');
 		// INTRO : rappel de l'exercicee affichee
 		$infos['exercice_entete_debut'] = association_datefr($exercice_data['debut'], 'dtstart');
 		$infos['exercice_entete_fin'] = association_datefr($exercice_data['fin'], 'dtend');
-		echo totauxinfos_intro($exercice_data['intitule'], 'exercice', $id_exercice, $infos);
+		echo totauxinfos_intro($exercice_data['intitule'], 'exercice', $ids['exercice'], $infos);
 		// pas de sommes de synthes puisque tous les totaux sont dans la zone centrale ;-
 		// datation et raccourcis
-		icones_association(array('comptes', "exercice=$id_exercice"), array(
-			'encaisse_titre_general' => array('finances-24.png', 'encaisse', "exercice=$id_exercice".($destination?"&destination=$id_destination":'')),
-			'cpte_bilan_titre_general' => array('finances-24.png', 'compte_bilan', "exercice=$id_exercice".($destination?"&destination=$id_destination":'')),
-#			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$id_exercice".($destination?"&destination=$id_destination":'')),
+		icones_association(array('comptes', "exercice=$ids[exercice]"), array(
+			'encaisse_titre_general' => array('finances-24.png', 'encaisse', "exercice=$ids[exercice]".($ids['destination']?"&destination=$ids[destination]":'')),
+			'cpte_bilan_titre_general' => array('finances-24.png', 'compte_bilan', "exercice=$ids[exercice]".($ids['destination']?"&destination=$ids[destination]":'')),
+#			'annexe_titre_general' => array('finances-24.png', 'annexe', "exercice=$ids[exercice]".($ids['destination']?"&destination=$ids[destination]":'')),
 		));
 		// elements communs aux requetes
-		if ($plan) {
-			$join = ' RIGHT JOIN spip_asso_plan ON imputation=code';
-			$sel = ', code, intitule, classe';
-			$where = " date>='$exercice_data[debut]' AND date<='$exercice_data[fin]' ";
-			$having = 'classe = ';
-			$order = 'code';
-		} else {
-			$join = $sel = $where = $having = $order = '';
-		}
-		$var = serialize(array($id_exercice, $join, $sel, $where, $having, $order)); //!\ les cles numeriques peuvent poser probleme... <http://www.mail-archive.com/php-bugs@lists.php.net/msg100262.html> mais il semble qu'ici le souci vient de l'absence d'encodage lorsqu'on passe $var par URL...
-//		$var = serialize(array('id'=>$id_exercice, '1'=>$join, '2'=>$sel, '3'=>$where, '4'=>$having, '5'=>$order));
+		$var = serialize(array($ids['exercice'], $join, $sel, $where, $having, $order)); //!\ les cles numeriques peuvent poser probleme... <http://www.mail-archive.com/php-bugs@lists.php.net/msg100262.html> mais il semble qu'ici le souci vient de l'absence d'encodage lorsqu'on passe $var par URL...
+//		$var = serialize(array('id'=>$ids['exercice'], '1'=>$join, '2'=>$sel, '3'=>$where, '4'=>$having, '5'=>$order));
 		if(autoriser('associer', 'export_comptes')){ // on peut exporter : pdf, csv, xml, ...
 			echo debut_cadre_enfonce('',true);
 			echo '<h3>'. _T('asso:cpte_resultat_mode_exportation') .'</h3>';
 			if (test_plugin_actif('FPDF')) { // impression en PDF : _T('asso:bouton_impression')
-				echo icone1_association('PDF', generer_url_ecrire('export_compteresultats_pdf').'&var='.rawurlencode($var), 'print-24.png'); //!\ generer_url_ecrire() utilise url_enconde() or il est preferable avec les grosses variables serialisees d'utiliser rawurlencode()
+				echo icone1_association('PDF', generer_url_ecrire('export_compteresultats_pdf', "exercice=$ids[exercice]".($ids['destination']?"&destination=$ids[destination]":'')), 'print-24.png');
 			}
 			foreach(array('csv','ctx','dbk','json','tex','tsv','xml','yaml') as $type) { // autres exports (donnees brutes) possibles
-				echo icone1_association(strtoupper($type), generer_url_ecrire("export_compteresultats_$type").'&var='.rawurlencode($var), 'export-24.png'); //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
+				echo icone1_association(strtoupper($type), generer_url_ecrire("export_compteresultats_$type").'&var='.rawurlencode($ids['url']), 'export-24.png'); //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
 			}
 			echo fin_cadre_enfonce(true);
 		}
 		debut_cadre_association('finances-24.png', 'cpte_resultat_titre_general', $exercice_data['intitule']);
 		// Filtres
 		filtres_association(array(
-			'exercice'=>$id_exercice,
-			'destination'=>$id_destination,
+			'exercice'=>$ids['exercice'],
+			'destination'=>$ids['destination'],
 		), 'compte_resultat');
 		// liste des charges (depenses d'exploitation) cumulees par comptes
-		$charges = association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_charges'], 'cpte_resultat', '-1', $id_exercice, $id_destination);
+		$charges = association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_charges'], 'cpte_resultat', '-1', $ids['exercice'], $ids['destination']);
 		// liste des produits (recettes d'exploitation) cumules par comptes
-		$produits = association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_produits'], 'cpte_resultat', '+1', $id_exercice, $id_destination);
+		$produits = association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_produits'], 'cpte_resultat', '+1', $ids['exercice'], $ids['destination']);
 		// resultat comptable courant : c'est la difference entre les recettes et les depenses d'exploitation
 		association_liste_resultat_net($produits, $charges);
 		// liste des contributions volontaires (emplois et ressources) par comptes
-		$contributions = association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_contributions_volontaires'], 'cpte_benevolat', 0, $id_exercice, $id_destination);
+		$contributions = association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_contributions_volontaires'], 'cpte_benevolat', 0, $ids['exercice'], $ids['destination']);
 		fin_page_association();
 	}
 }
@@ -90,26 +75,23 @@ function exec_compte_resultat()
 
 	include_spip('inc/charsets');
 	include_spip('inc/association_plan_comptable');
+	include_spip('inc/association_comptabilite');
 
 // Brique commune aux classes d'exportation des donnees du compte de resultat
 class ExportCompteResultats {
 
 	var $exercice;
-	var $join;
-	var $sel;
-	var $where;
-	var $having;
-	var $order;
+	var $destination;
+	var $annee;
+	var $classes;
 	var $out;
 
 	function  __construct($var) {
 		$tableau = unserialize(rawurldecode($var));
-		$this->exercice = $tableau[0];
-		$this->join = $tableau[1];
-		$this->sel = $tableau[2];
-		$this->where = $tableau[3];
-		$this->having = $tableau[4];
-		$this->order = $tableau[5];
+		$this->exercice = $tableau['exercice'];
+		$this->destination = $tableau['destination'];
+		$this->annee = $tableau['annee'];
+		$this->classes = $tableau['classes'];
 		$this->out = '';
 	}
 
@@ -124,32 +106,24 @@ class ExportCompteResultats {
 	function LignesSimplesCorps($key, $champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='') {
 		switch ($key) {
 			case 'charges' :
-				$quoi = "SUM(depense) AS valeurs";
+				$dir = '-1';
 				break;
 			case 'produits' :
-				$quoi = "SUM(recette) AS valeurs";
+				$dir = '+1';
 				break;
 			case 'contributions_volontaires' :
-				$quoi = "SUM(depense) AS charge_evaluee, SUM(recette) AS produit_evalue";
+				$dir = 0;
 				break;
 		}
-		$query = sql_select(
-			"imputation, $quoi ".$this->sel, // select
-			'spip_asso_comptes '.$this->join, // from
-			$this->where, // where
-			$this->order, // group by
-			$this->order, // order by
-			'', // limit
-			$this->having .$GLOBALS['association_metas']['classe_'.$key] // having
-		);
+		$query = association_calcul_totaux_comptes_classe($GLOBALS['association_metas']['classe_'.$key], $this->exercice, $this->destination, $dir);
 		$chapitre = '';
 		$i = 0;
 		while ($data = sql_fetch($query)) {
 			if ($key==='contributions_volontaires') {
-				if ($data['charge_evaluee']>0) {
-					$valeurs = $data['charge_evaluee'];
+				if ($data['depenses']>0) {
+					$valeurs = $data['depenses'];
 				} else {
-					$valeurs = $data['produit_evalue'];
+					$valeurs = $data['recettes'];
 				}
 			} else {
 				$valeurs = $data['valeurs'];
@@ -172,10 +146,10 @@ class ExportCompteResultats {
 	// de par la simplicite recherchee il n'y a pas de types ou autres : CSV et CTX dans une certaine mesure pouvant distinguer "nombres", "chaines alphanumeriques" et "chaine binaires encodees"
 	function exportLignesUniques($champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='', $entete=true) {
 		if ($entete) {
-			LignesSimplesEntete($champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='');
+			$this->LignesSimplesEntete($champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='');
 		}
 		foreach (array('charges', 'produits', 'contributions_volontaires') as $nomClasse) {
-			LignesSimplesCorps($nomClasse, $champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='');
+			$this->LignesSimplesCorps($nomClasse, $champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='');
 		}
 	}
 
@@ -193,34 +167,26 @@ class ExportCompteResultats {
 		foreach (array('charges', 'produits', 'contributions_volontaires') as $nomClasse) {
 			switch ($nomClasse) {
 				case 'charges' :
-					$quoi = "SUM(depense) AS valeurs";
+					$dir = '-1';
 					break;
 				case 'produits' :
-					$quoi = "SUM(recette) AS valeurs";
+					$dir = '+1';
 					break;
 				case 'contributions_volontaires' :
-					$quoi = "SUM(depense) AS charge_evaluee, SUM(recette) AS produit_evalue";
+					$dir = 0;
 					break;
 			}
 			$baliseClasse = $nomClasse.'1';
 			$this->out .= "$indent$balises[$baliseClasse]\n";
-			$query = sql_select(
-				"imputation, $quoi ".$this->sel, // select
-			'spip_asso_comptes'.$this->join, // from
-				$this->where, // where
-				$this->order, // group by
-				$this->order, // order by
-			'', // limit
-				$this->having .$GLOBALS['association_metas']['classe_'.$nomClasse] // having
-			);
+			$query = association_calcul_totaux_comptes_classe($GLOBALS['association_metas']['classe_'.$nomClasse], $this->exercice, $this->destination, $dir);
 			$chapitre = '';
 			$i = 0;
 			while ($data = sql_fetch($query)) {
 				if ($key==='contributions_volontaires') {
-					if ($data['charge_evaluee']>0) {
-						$valeurs = $data['charge_evaluee'];
+					if ($data['depenses']>0) {
+						$valeurs = $data['depenses'];
 					} else {
-						$valeurs = $data['produit_evalue'];
+						$valeurs = $data['recettes'];
 					}
 				} else {
 					$valeurs = $data['valeurs'];
@@ -252,7 +218,7 @@ class ExportCompteResultats {
 
 	// fichier texte final a afficher/telecharger
 	function leFichier($ext) {
-		$fichier = _DIR_RACINE.'/'._NOM_TEMPORAIRES_ACCESSIBLES.'compte_resultats_'.$this->exercice.".$ext"; // on essaye de creer le fichier dans le cache local/ http://www.spip.net/fr_article4637.html
+		$fichier = _DIR_RACINE.'/'._NOM_TEMPORAIRES_ACCESSIBLES.'compte_resultats_'.$this->exercice.'_'.$this->destination.".$ext"; // on essaye de creer le fichier dans le cache local/ http://www.spip.net/fr_article4637.html
 		$f = fopen($fichier, 'w');
 		fputs($f, $this->out);
 		fclose($f);

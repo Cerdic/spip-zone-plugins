@@ -377,20 +377,21 @@ function association_creer_compte_virement_interne() {
 
 /* on recupere les parametres de requete a passer aux fonctions */
 function association_passe_parametres_comptables($classes=array()) {
-    $id_exercice = intval(_request('exercice'));
-    if( !$id_exercice ) { // pas d'exercice en parametre
-	$id_exercice = sql_getfetsel('id_exercice', 'spip_asso_exercices', '', '', 'fin DESC'); // on recupere l'id_exercice dont la date "fin" est "la plus grande", c'est a dire l'id de l'exercice le plus recent
-	if( !$id_exercice ) // pas d'exercice defini...
-	    $id_exercice = 0; // forcer la valeur zero pour les requetes devant l'utiliser
+    $params = array(); // initialisation de la liste
+    $params['exercice'] = intval(_request('exercice'));
+    if( !$params['exercice'] ) { // pas de "id_exercice" en parametre
+	$params['exercice'] = intval(sql_getfetsel('id_exercice', 'spip_asso_exercices', '', '', 'fin DESC')); // on recupere l'id_exercice dont la "date de fin" est "la plus grande", c'est a dire l'id de l'exercice le plus recent
     }
-    $annee = intval(_request('annee'));
-    if( !$annee ) { // pas d'annee en parametre
-	$annee = date('Y'); // on prende l'annee actuelle
+    $params['annee'] = intval(_request('annee'));
+    if( !$params['annee'] ) { // pas d'annee en parametre
+	$params['annee'] = date('Y'); // on prende l'annee actuelle
     }
-    $id_destination = intval(_request('destination'));
-    if( !$id_destination ) { // pas de destination
-    }
-    return serialize(array($id_exercice, $id_destination, $classes) ); //!\ les cles numeriques peuvent poser probleme... <http://www.mail-archive.com/php-bugs@lists.php.net/msg100262.html> mais il semble qu'ici le souci vient de l'absence d'encodage lorsqu'on passe $var par URL...
+    $params['destination'] = intval(_request('destination'));
+#    if( !$params['destination'] ) { // pas de destination
+#    }
+    $params['classes'] = $classes;
+    $params['url'] = serialize($params); //!\ les cles numeriques peuvent poser probleme... <http://www.mail-archive.com/php-bugs@lists.php.net/msg100262.html> mais il semble qu'ici le souci vient de l'absence d'encodage lorsqu'on passe $var par URL...
+    return $params;
 }
 
 /* on recupere les totaux (recettes et depenses) d'un exercice des differents comptes de la classe specifiee */
@@ -515,25 +516,21 @@ function association_liste_resultat_net($recettes, $depenses) {
     echo "</tr></tfoot></table>";
 }
 
-// Brique commune aux classes d'exportation des donnees du compte de bilan
+// Brique commune aux classes d'exportation des etats comptables
 class ExportComptes {
 
     var $exercice;
-    var $join;
-    var $sel;
-    var $where;
-    var $having;
-    var $order;
+    var $destination;
+    var $annee;
+    var $classes;
     var $out;
 
     function  __construct($var) {
 	$tableau = unserialize(rawurldecode($var));
-	$this->exercice = $tableau[0];
-	$this->join = $tableau[1];
-	$this->sel = $tableau[2];
-	$this->where = $tableau[3];
-	$this->having = $tableau[4];
-	$this->order = $tableau[5];
+	$this->exercice = $tableau['exercice'];
+	$this->destination = $tableau['estination'];
+	$this->annee = $tableau['annee'];
+	$this->classes = $tableau['classes'];
 	$this->out = '';
     }
 
@@ -548,32 +545,24 @@ class ExportComptes {
     function LignesSimplesCorps($key, $champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='') {
 	switch ($key) {
 	    case 'charges' :
-		$quoi = "SUM(depense) AS valeurs";
+		$dir = -1;
 		break;
 	    case 'produits' :
-		$quoi = "SUM(recette) AS valeurs";
+		$dir = +1;
 		break;
 	    case 'contributions_volontaires' :
-		$quoi = "SUM(depense) AS charge_evaluee, SUM(recette) AS produit_evalue";
+		$dir = 0;
 		break;
 	}
-	$query = sql_select(
-	    "imputation, $quoi ".$this->sel, // select
-	    'spip_asso_comptes '.$this->join, // from
-	    $this->where, // where
-	    $this->order, // group by
-	    $this->order, // order by
-	    '', // limit
-	    $this->having .$GLOBALS['association_metas']['classe_'.$key] // having
-	);
+	$query = association_calcul_totaux_comptes_classe($GLOBALS['association_metas']['classe_'.$key], $this->exercice, $this->destination, $dir);
 	$chapitre = '';
 	$i = 0;
 	while ($data = sql_fetch($query)) {
 	    if ($key==='contributions_volontaires') {
-		if ($data['charge_evaluee']>0) {
-		    $valeurs = $data['charge_evaluee'];
+		if ($data['depenses']>0) {
+		    $valeurs = $data['depenses'];
 		} else {
-		    $valeurs = $data['produit_evalue'];
+		    $valeurs = $data['recettes'];
 		}
 	    } else {
 		$valeurs = $data['valeurs'];
@@ -596,10 +585,10 @@ class ExportComptes {
     // de par la simplicite recherchee il n'y a pas de types ou autres : CSV et CTX dans une certaine mesure pouvant distinguer "nombres", "chaines alphanumeriques" et "chaine binaires encodees"
     function exportLignesUniques($champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='', $entete=true) {
 	if ($entete) {
-	    LignesSimplesEntete($champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='');
+	    $this->LignesSimplesEntete($champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='');
 	}
 	foreach (array('charges', 'produits', 'contributions_volontaires') as $nomClasse) {
-	    LignesSimplesCorps($nomClasse, $champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='');
+	    $this->LignesSimplesCorps($nomClasse, $champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='');
 	}
     }
 
@@ -617,34 +606,26 @@ class ExportComptes {
 	foreach (array('charges', 'produits', 'contributions_volontaires') as $nomClasse) {
 	    switch ($nomClasse) {
 		case 'charges' :
-		    $quoi = "SUM(depense) AS valeurs";
+		    $dir = '-1';
 		    break;
 		case 'produits' :
-		    $quoi = "SUM(recette) AS valeurs";
+		    $dir = '+1';
 		    break;
 		case 'contributions_volontaires' :
-		    $quoi = "SUM(depense) AS charge_evaluee, SUM(recette) AS produit_evalue";
+		    $dir = 0;
 		    break;
 	    }
 	    $baliseClasse = $nomClasse.'1';
 	    $this->out .= "$indent$balises[$baliseClasse]\n";
-	    $query = sql_select(
-		"imputation, $quoi ".$this->sel, // select
-		'spip_asso_comptes'.$this->join, // from
-		$this->where, // where
-		$this->order, // group by
-		$this->order, // order by
-		'', // limit
-		$this->having .$GLOBALS['association_metas']['classe_'.$nomClasse] // having
-	    );
+	    $query = association_calcul_totaux_comptes_classe($GLOBALS['association_metas']['classe_'.$nomClasse], $this->exercice, $this->destination, $dir);
 	    $chapitre = '';
 	    $i = 0;
 	    while ($data = sql_fetch($query)) {
 		if ($key==='contributions_volontaires') {
-		    if ($data['charge_evaluee']>0) {
-			$valeurs = $data['charge_evaluee'];
+		    if ($data['depenses']>0) {
+			$valeurs = $data['depenses'];
 		    } else {
-			$valeurs = $data['produit_evalue'];
+			$valeurs = $data['recettes'];
 		    }
 		} else {
 		    $valeurs = $data['valeurs'];
@@ -676,7 +657,7 @@ class ExportComptes {
 
     // fichier texte final a afficher/telecharger
     function leFichier($ext, $subtype) {
-	$fichier = _DIR_RACINE.'/'._NOM_TEMPORAIRES_ACCESSIBLES.'compte_'.$subtype.'_'.$this->exercice.".$ext"; // on essaye de creer le fichier dans le cache local/ http://www.spip.net/fr_article4637.html
+	$fichier = _DIR_RACINE.'/'._NOM_TEMPORAIRES_ACCESSIBLES.'compte_'.$subtype.'_'.$this->exercice.'_'.$this->destination.".$ext"; // on essaye de creer le fichier dans le cache local/ http://www.spip.net/fr_article4637.html
 	$f = fopen($fichier, 'w');
 	fputs($f, $this->out);
 		fclose($f);

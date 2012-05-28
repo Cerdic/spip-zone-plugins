@@ -21,11 +21,12 @@ function exec_export_compteresultats_pdf()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$var = _request('var');
+		include_spip('inc/association_comptabilite');
+		$ids = association_passe_parametres_comptables();
 		$pdf = new EXPORT_PDF();
 		$pdf->SetFont('Arial', '', 12);
 		$pdf->AddPage();
-		$pdf->init($var);
+		$pdf->init($ids);
 		$pdf->enTete();
 		$pdf->lesCharges($GLOBALS['association_metas']['classe_charges']);
 		$pdf->lesProduits($GLOBALS['association_metas']['classe_produits']);
@@ -57,22 +58,13 @@ class EXPORT_PDF extends FPDF {
 	var $largeur_utile = 0; // largeur sans les marges droites et gauches
 	var $largeur_pour_titre = 0; // largeur utile sans icone
 	var $exercice;
-	var $join;
-	var $sel;
-	var $where;
-	var $having;
-	var $order;
+	var $destination;
 	var $total_charges;
 	var $total_produits;
 
-	function init($var) {
-		$tableau = unserialize(rawurldecode($var));
-		$this->exercice = $tableau[0];
-		$this->join = $tableau[1];
-		$this->sel = $tableau[2];
-		$this->where = $tableau[3];
-		$this->having = $tableau[4];
-		$this->order = $tableau[5];
+	function init($ids) {
+		$this->exercice = $ids['exercice'];
+		$this->destination = $ids['destination'];
 
 		$this->largeur_utile = $this->largeur-$this->marge_gauche-$this->marge_droite;
 		$this->largeur_pour_titre = $this->largeur_utile-$this->icone_h-3*$this->space_h;
@@ -182,15 +174,7 @@ class EXPORT_PDF extends FPDF {
 		$this->Ln($this->space_v);
 		$yc += $this->space_v;
 
-		$query = sql_select(
-			"imputation, SUM(depense) AS valeurs, date_format(date, '%Y') AS annee".$this->sel, // select
-			'spip_asso_comptes '.$this->join, // from
-			$this->where, // where
-			$this->order, // group by
-			$this->order, // order by
-			'', // limit
-			$this->having.$classe // having
-		);
+		$query = association_calcul_totaux_comptes_classe($GLOBALS['association_metas']['classe_charges'], $this->exercice, $this->destination, -1);
 		$chapitre = '';
 		$i = 0;
 
@@ -276,15 +260,7 @@ class EXPORT_PDF extends FPDF {
 		$this->Ln($this->space_v);
 		$yc += $this->space_v;
 
-		$query = sql_select(
-			"imputation, SUM(recette) AS valeurs, date_format(date, '%Y') AS annee".$this->sel, // select
-			'spip_asso_comptes '.$this->join, // from
-			$this->where, // where
-			$this->order, // group by
-			$this->order, // order by
-			'', // limit
-			$this->having.$classe // having
-		);
+		$query = association_calcul_totaux_comptes_classe($GLOBALS['association_metas']['classe_produits'], $this->exercice, $this->destination, +1);
 		$chapitre = '';
 		$i = 0;
 
@@ -419,15 +395,7 @@ class EXPORT_PDF extends FPDF {
 		$yc += $this->space_v;
 
 		$charges_evaluees = $produits_evalues = 0;
-		$query = sql_select(
-			"imputation, SUM(depense) AS charge_evaluee, SUM(recette) AS produit_evalue, date_format(date, '%Y') AS annee".$this->sel, // select
-			'spip_asso_comptes '.$this->join, // from
-			$this->where, // where
-			$this->order, // group by
-			$this->order, // order by
-			'', // limit
-			$this->having.$classe // having
-		);
+		$query = association_calcul_totaux_comptes_classe($GLOBALS['association_metas']['classe_contributions_volantaires'], $this->exercice, $this->destination, 0);
 		$chapitre = '';
 		$i = 0;
 
@@ -497,10 +465,9 @@ class EXPORT_PDF extends FPDF {
 	}
 
 	function leFichier() {
-		$this->Output('compte_resultats_'.$this->exercice.'.pdf', 'I');
+		$this->Output('comptes_resultats_'.$this->exercice.'_'.$this->destination.'.pdf', 'I');
 	}
 
 }
-
 
 ?>
