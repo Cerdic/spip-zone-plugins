@@ -1,0 +1,17 @@
+<paquet
+	prefix="gviewer"
+	categorie="edition"
+	version="0.3.0"
+	etat="stable"
+	compatibilite="[2.1.0;3.0.99]"
+	logo="images/gviewer.png"
+	documentation="http://www.spip-contrib.net/Plugin-Google-Viewer"
+>
+
+	<nom>Google Viewer</nom>
+	<!-- Modèles d insertion de documents utilisant le lecteur de documents de Google -->
+
+	<auteur lien="http://www.spip-contrib.net/Joseph">Joseph</auteur>
+
+	<utilise nom="media" />
+</paquet>
