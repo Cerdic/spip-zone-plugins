@@ -152,8 +152,8 @@ function formulaires_editer_image_verifier_dist($id_document='new',$mode=false, 
 
 function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $retour=''){
 	$res = array('editable'=>true);
-	$autoclose = "<script type='text/javascript'>if (window.jQuery) jQuery.modalboxclose();</script>";
-	spip_log('traiter','photospip');
+	$autoclose= '';
+	//$autoclose = "<script type='text/javascript'>if (window.jQuery) jQuery.modalboxclose();</script>";
 	if($mode == 'vignette'){
 		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
 		$res['redirect'] = sinon(_request('redirect'),'');
@@ -267,6 +267,25 @@ function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $
 				}
 			}
 		}
+		/**
+		 * Restaurer les inputs à vide
+		 */
+		foreach(array('filtre',
+			'ratio',
+			'recadre_width',
+			'recadre_height',
+			'recadre_x1',
+			'recadre_x2',
+			'recadre_y1',
+			'recadre_y2',
+			'reduire_width',
+			'reduire_height',
+			'passe_partout_width',
+			'passe_partout_height',
+			'type_modification') as $input){
+			if(_request($input))
+				set_request($input,'');	
+		}
 	}
 	if(_request('supprimer_version')){
 		include_spip('action/images_versions');
@@ -295,7 +314,6 @@ function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $
 	if (!isset($res['message_erreur']) && !$res['message_ok'])
 		$res['message_ok'] = _L('Votre modification a &eacute;t&eacute; enregistr&eacute;e').$autoclose;
 	
-	spip_log($res,'photospip');
 	return $res;
 }
 

@@ -61,14 +61,14 @@ function photospip_document_desc_actions($flux) {
 	spip_log($infos,'photospip');
 	if (($infos['distant'] == 'non') && in_array($infos['extension'], array('jpg', 'png', 'gif'))) {
 		$redirect = self();
-		$url_modif = parametre_url(generer_url_ecrire('image_edit', 'id_document=' . intval($id_document)), 'redirect', $redirect);
+		$url_modif = generer_url_ecrire('image_edit', 'id_document=' . intval($id_document));
 		$texte_modif = _T('photospip:lien_editer_image');
 		$url_vignette = parametre_url(generer_url_ecrire('image_edit','id_document='.intval($id_document)),'mode','vignette');
 		$texte_vignette = _T('photospip:lien_editer_vignette');
 		if ($flux['args']['position'] == 'galerie') {
 			$flux['data'] .= "[<a href='$url_modif'>$texte_modif</a>] [<a href='$url_vignette'>$texte_vignette</a>]";
 		} else {
-			$flux['data'] .= "<span class='sep'> | </span><a href='$url_modif'>$texte_modif</a><span class='sep'> | </span><a href='$url_vignette' target='_blank' class='editbox'>$texte_vignette</a>";
+			$flux['data'] .= "<span class='sep'> | </span><a href='$url_modif' target='_blank' class='editbox'>$texte_modif</a><span class='sep'> | </span><a href='$url_vignette' target='_blank' class='editbox'>$texte_vignette</a>";
 		}
 	}else if($id_vignette = sql_getfetsel('id_document','spip_documents','id_document='.intval($infos['id_vignette']))){
 		$url_vignette = parametre_url(generer_url_ecrire('image_edit','id_document='.intval($id_document)),'mode','vignette');
