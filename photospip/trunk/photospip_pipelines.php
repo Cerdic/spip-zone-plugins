@@ -23,8 +23,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function photospip_header_prive($flux) {
 	$flux .= '
 			<link rel="stylesheet" href="' . direction_css(find_in_path(_DIR_LIB_IMGAREASELECT . 'css/imgareaselect-animated.css')) . '" type="text/css" media="all" />';
-	$flux .= '
-			<link rel="stylesheet" href="' . direction_css(find_in_path('css/photospip_prive.css')) . '" type="text/css" media="all" />';
 	return $flux;
 }
 
