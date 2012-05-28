@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_precedente' => 'année précédente',
 	'annee_suivante' => 'année suivante',
 	'aucun_evenement' => 'aucun événement',
+	'aucun_inscrit' => 'Aucun inscrit',
 	'aucune_rubrique_mode_agenda' => 'Par défaut, toutes les rubriques permettent d\'utiliser les événements. Si vous activez le mode agenda sur une ou plusieurs rubriques, la gestion des événements sera limitée a sa branche.',
 
 	// B
@@ -24,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'confirm_suppression_inscription' => 'Voulez-vous vraiment supprimer cette inscription ?',
+	'confirm_suppression_inscription_toutes' => 'Voulez-vous vraiment supprimer toutes les inscriptions ?',
 	'connexion_necessaire_pour_inscription' => 'Merci de vous connecter pour pouvoir vous inscrire à cet événement.',
 	'creer_evenement' => 'Créer un événement',
 
@@ -54,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenements' => 'Événements',
 	'evenements_a_venir' => 'À venir',
 	'evenements_depuis_debut' => 'Depuis le début',
+        'evenement_date_inscription' => 'Date d\'inscription',
 
 	// F
 	'fermer' => 'fermer',
@@ -81,7 +84,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_reponse_inscription_nsp' => '?',
 	'info_reponse_inscription_oui' => 'oui',
 	'info_reponses_inscriptions' => 'Réponses :',
+	'info_reponse_inscriptions' => 'Réponse',
 	'info_un_evenement' => '1 événement',
+        'info_un_inscrit' => 'Un inscrit',
+	'info_nb_inscrits' => '@nb@ inscrits',
 	'inscrits' => 'Inscriptions',
 	'item_mots_cles_association_evenements' => 'aux événements',
 
@@ -93,6 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_reponse_jyparticipe_peutetre' => 'J\'y serai peut-être',
 	'label_vous_inscrire' => 'Votre participation',
 	'lien_desinscrire' => 'Supprimer',
+	'lien_desinscrire_tous' => 'Supprimer toutes les inscriptions',
 	'lien_retirer_evenement' => 'Supprimer',
 	'liste_inscrits' => 'Liste des inscriptions',
 
@@ -112,6 +119,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'repetition' => 'Répétition',
 	'repetition_de' => 'Répétition de',
+        'retour_evenement' => 'Retour à l\'événement',
 	'rubrique_activer_agenda' => 'Activer le mode agenda',
 	'rubrique_dans_une_rubrique_mode_agenda' => 'Cette rubrique permet d\'utiliser les événements car elle est dans une rubrique dont le mode agenda a été activé',
 	'rubrique_desactiver_agenda' => 'Désactiver le mode agenda',
@@ -124,7 +132,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sans_titre' => '(sans titre)',
 
 	// T
-	'telecharger' => 'Télécharger',
+	'telecharger' => 'Télécharger (csv)',
+	'telecharger_toutes' => 'Toutes les réponses',
+	'telecharger_oui' => 'Seulement les réponses positives',
+        'telecharger_toutes_tous_evenements' => 'Toutes les réponses aux inscriptions',
 	'texte_agenda' => 'AGENDA',
 	'texte_evenement_statut' => 'Cet événement est :',
 	'texte_logo_objet' => 'LOGO DE L\'EVENEMENT',
