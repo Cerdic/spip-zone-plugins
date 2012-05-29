@@ -181,12 +181,12 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	return _sommaire_REM.$sommaire._sommaire_REM.$texte;
 }
 
-// fonction appelee par le traitement de #TEXTE/articles
-function sommaire_d_article($texte) {
+// fonction/filtre appelee par le traitement de #TEXTE/articles
+function sommaire_d_article($texte, $sommaire_seul=false) {
 	// s'il n'y a aucun intertitre, on ne fait rien
 	// si la balise est utilisee, il faut quand meme inserer les ancres de retour
 	if((strpos($texte, '<h')===false)) return $texte;
-	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|onglets|table', 'sommaire_d_article_rempl', $texte, false);
+	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|onglets|table', 'sommaire_d_article_rempl', $texte, $sommaire_seul);
 }
 
 // fonction appelee par le traitement post_propre de #CS_SOMMAIRE
