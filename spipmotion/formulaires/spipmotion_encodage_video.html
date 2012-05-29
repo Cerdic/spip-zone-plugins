@@ -3,22 +3,23 @@
 		<ul>
 			[(#SAISIE{input,width_#ENV{valeur},
 				label=<:spipmotion:width_video:>,
-				defaut=480,
+				defaut=640,
 				size=4})]
 		
 			[(#SAISIE{input,height_#ENV{valeur},
 				label=<:spipmotion:height_video:>,
-				defaut=320,
+				defaut=480,
 				size=4})]
 		
 			[(#SAISIE{input,bitrate_#ENV{valeur},
 				label=<:spipmotion:bitrate:>,
-				defaut=418,
+				defaut=600,
 				size=4})]
 		
 			[(#SAISIE{input,fps_#ENV{valeur},
 				label=<:spipmotion:framerate:>,
 				explication=<:spipmotion:explication_framerate:>,
+				defaut=25,
 				size=4})]
 		
 			#SET{acodecs_possibles,#ARRAY}
@@ -104,7 +105,7 @@
 			</BOUCLE_flv>
 			<BOUCLE_mp4(CONDITION){si #ENV{valeur}|in_array{#ARRAY|push{mov}|push{mp4}|push{m4v}}|oui}>
 				#SET{acodecs_possibles,#ARRAY|push{libfaac}|push{libmp3lame}}
-				#SET{vcodecs_possibles,#ARRAY|push{libx264}|push{libxvid}|push{mpeg4}}
+				#SET{vcodecs_possibles,#ARRAY|push{libx264}|push{mpeg4}}
 				#SET{formats_possibles,#ARRAY|push{ipod}|push{psp}|push{mp4}|push{m4v}}
 				#SET{presets_qualite,#ARRAY|push{medium}|push{placebo}|push{ultrafast}|push{superfast}|push{faster}|push{fast}|push{slow}|push{slower}|push{veryslow}}
 				#SET{2_passes,oui}
@@ -130,8 +131,6 @@
 				[(#GET{formats_possibles}|count|>{0}|oui)
 					[(#SAISIE{selection_valeur,format_#ENV{valeur},
 						label=<:spipmotion:label_format_final:>,
-						defaut=ipod,
-						cacher_option_intro=oui,
 						datas=#GET{formats_possibles}})]
 				]
 				[(#SAISIE{selection_valeur,vcodec_#ENV{valeur},

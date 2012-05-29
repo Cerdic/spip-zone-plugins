@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * Quentin Drouet (kent1)
- * 2008-2011 - Distribué sous licence GNU/GPL
+ * 2008-2012 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -112,7 +112,6 @@ function encodage($source,$doc_attente){
 	$fichier_final = substr($fichier,0,-(strlen($source['extension'])+1)).'-encoded.'.$extension_attente;
 	$fichier_temp = "$dossier$query.$extension_attente";
 	$fichier_log = "$dossier$query.log";
-	spip_log("le nom temporaire durant l'encodage est $fichier_temp","spipmotion");
 	
 	/**
 	 * Si on n'a pas l'info hasaudio c'est que la récupération d'infos n'a pas eu lieu
@@ -248,10 +247,8 @@ function encodage($source,$doc_attente){
 		if(in_array($extension_attente,array('ogg','ogv','oga'))
 				&& ($source['audiochannels'] < 2)
 				&& ($encodeur != 'ffmpeg2theora')){
-			spip_log('on passe en deux canaux','spipmotion');
 			$audiochannels = 2;
 		}else{
-			spip_log($source['audiochannels'].' canaux','spipmotion');
 			$audiochannels = $source['audiochannels'];
 		}
 
@@ -310,19 +307,31 @@ function encodage($source,$doc_attente){
 	 * On corrige les paramètres video avant de lancer l'encodage
 	 */
 	if(in_array($source['extension'],lire_config('spipmotion/fichiers_videos_encodage',array()))){
-		/**
-		 * Calcul de la hauteur en fonction de la largeur souhaitée
-		 * et de la taille de la video originale
-		 */
+		$format = lire_config("spipmotion/format_$extension_attente");
+		
 		$width = $source['largeur'];
 		$height = $source['hauteur'];
 		$width_finale = lire_config("spipmotion/width_$extension_attente",480);
+		
+		/**
+		 * Les ipod/iphones 3Gs et inférieur ne supportent pas de résolutions > à 640x480
+		 */
+		if($format == 'ipod' && ($width_finale > 640))
+			$width_finale = 640;
 
+		/**
+		 * On n'agrandit jamais la taille
+		 * si la taille demandée est supérieure à la taille originale
+		 */
 		if($width < $width_finale){
 			$width_finale = $width;
 			$height_finale = $height;
 		}
 		else{
+			/**
+			 * Calcul de la hauteur en fonction de la largeur souhaitée
+			 * et de la taille de la video originale
+			 */
 			$height_finale = intval(round($source['hauteur']/($source['largeur']/$width_finale)));
 		}
 
@@ -383,27 +392,35 @@ function encodage($source,$doc_attente){
 		 */
 		if($vcodec == '--vcodec libx264'){
 			$preset_quality = lire_config("spipmotion/vpreset_$extension_attente",'slow');
-			if(in_array('--enable-pthreads',@unserialize($spipmotion_compiler['configuration']))){
-				$infos_sup_normal .= "-threads 0";
+			$configuration = array();
+			if(is_array($spipmotion_compiler['configuration'])){
+				$configuration = $spipmotion_compiler['configuration'];
+			}
+			if(in_array('--enable-pthreads',$configuration)){
+				$infos_sup_normal .= " -threads 0 ";
 			}
 			/**
-			 * Encodage pour Ipod
-			 * http://rob.opendot.cl/index.php/useful-stuff/ipod-video-guide/
+			 * Encodage pour Ipod/Iphone (<= 3G)
 			 */
-			if(lire_config("spipmotion/format_$extension_attente",'ipod') == 'ipod'){
-				$infos_sup_normal .= ' -vpre ipod640';
+			if($format == 'ipod'){
+				if(version_compare($ffmpeg_version,'0.7.10','<')){
+					$infos_sup_normal .= ' -vpre baseline -vpre ipod640';
+				}else{
+					$infos_sup_normal .= ' -profile baseline -vpre ipod640';	
+				}
 			}
 			/**
 			 * Encodage pour PSP
 			 * http://rob.opendot.cl/index.php/useful-stuff/psp-video-guide/
 			 */
-			if(lire_config("spipmotion/format_$extension_attente",'ipod') == 'psp'){
+			else if($format == 'psp'){
 				$infos_sup_normal .= ' -vpre main';
 				$infos_sup_normal .= ' -level 21';
 				$infos_sup_normal .= ' -refs 2';
 			}
 			$infos_sup_normal .= " -aspect $width_finale:$height_finale";
-			$infos_sup_normal .= ' -f '.lire_config("spipmotion/format_$extension_attente",'ipod');
+			if($format)
+				$infos_sup_normal .= ' -f '.$format;
 		}
 
 		$fichier_texte = "$dossier$query.txt";
@@ -416,7 +433,6 @@ function encodage($source,$doc_attente){
 		 * sinon on utilise notre script pour ffmpeg
 		 */
 		$passes = lire_config("spipmotion/passes_$extension_attente",'1');
-		spip_log("on est en $passes passe(s)","spipmotion");
 		$pass_log_file = $dossier.$query.'-pass';
 		
 		$ffmpeg2theora = @unserialize($GLOBALS['spipmotion_metas']['spipmotion_ffmpeg2theora']);
@@ -426,10 +442,8 @@ function encodage($source,$doc_attente){
 			$encodage = $spipmotion_sh." --force true $video_size --e $chemin --videoquality ".lire_config('spipmotion/qualite_video_ffmpeg2theora_'.$extension_attente,7)." $fps $bitrate $audiofreq $audiobitrate_ffmpeg2theora $audiochannels_ffmpeg2theora --s $fichier_temp $deux_passes --log $fichier_log --encodeur ffmpeg2theora";
 			spip_log($encodage,'spipmotion');
 			$lancement_encodage = exec($encodage,$retour,$retour_int);
-			spip_log($retour_int,'spipmotion');
 		}else{
 			if(($passes == "2") && ((($vcodec == '--vcodec libx264') && ($preset_quality != 'hq')) OR ($vcodec == '--vcodec flv') OR ($vcodec == '--vcodec libtheora') OR ($extension_attente == 'webm'))){
-				spip_log('on encode en 2 passes','spipmotion');
 				spip_log('Premiere passe','spipmotion');
 				if ($ffmpeg_version < '0.7'){
 					$preset_1 = $preset_quality ? '-vpre '.$preset_quality.'_firstpass' : '';
@@ -441,6 +455,7 @@ function encodage($source,$doc_attente){
 				}
 				$infos_sup_normal_1 = "--params_supp \"-an $preset_1 -passlogfile $pass_log_file $infos_sup_normal $rotation\"";
 				$encodage_1 = $spipmotion_sh." --force true --pass 1 $video_size --e $chemin $vcodec $fps $bitrate $infos_sup_normal_1 --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." --log $fichier_log";
+				spip_log($encodage_1,'spipmotion');
 				$lancement_encodage_1 = exec($encodage_1,$retour_1,$retour_int_1);
 				/**
 				 * La première passe est ok 
@@ -462,7 +477,6 @@ function encodage($source,$doc_attente){
 					$encodage = $spipmotion_sh." --force true --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2  --fpre $fichier_texte --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." --log $fichier_log";
 					spip_log($encodage,'spipmotion');
 					$lancement_encodage = exec($encodage,$retour,$retour_int);
-					spip_log($retour_int,'spipmotion');
 				}else{
 					$retour_int = 1;
 				}
@@ -483,7 +497,6 @@ function encodage($source,$doc_attente){
 				$encodage = $spipmotion_sh." --force true $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate_ffmpeg $audiochannels_ffmpeg $bitrate $infos_sup_normal --s $fichier_temp --fpre $fichier_texte --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." --log $fichier_log";
 				spip_log($encodage,'spipmotion');
 				$lancement_encodage = exec($encodage,$retour,$retour_int);
-				spip_log($retour_int,'spipmotion');
 			}
 		}
 
@@ -502,10 +515,10 @@ function encodage($source,$doc_attente){
 		 * le pipeline post-edition appelé par l'ajout du document
 		 */
 		$mode = 'document';
-
+		spip_log('Ajout du document en base','spipmotion');
 		$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 		$x = $ajouter_documents($fichier_temp, $fichier_final, $type_doc, $id_objet, $mode, '', $actif,'','','');
-
+		spip_log('le nouveau document est le '.$x,'spipmotion');
 		if(intval($x) > 1){
 			supprimer_fichier($fichier_temp);
 			
@@ -514,7 +527,9 @@ function encodage($source,$doc_attente){
 			 * - On marque le document comme correctement encodé
 			 * - On ajoute la date de fin d'encodage
 			 */
+			
 			$infos_encodage['fin_encodage'] = time();
+			spip_log('Insertion du temps final d encodage : '.$infos_encodage['fin_encodage'],'spipmotion');
 			sql_updateq("spip_spipmotion_attentes",array('encode'=>'oui','infos' => serialize($infos_encodage)),"id_spipmotion_attente=".intval($doc_attente));
 
 			/**
