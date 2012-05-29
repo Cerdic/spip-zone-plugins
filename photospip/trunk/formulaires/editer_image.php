@@ -91,8 +91,15 @@ function formulaires_editer_image_charger_dist($id_document='new',$mode=false, $
 	return $valeurs;
 }
 
+/**
+ * Fonction de vérification du formulaire
+ */
 function formulaires_editer_image_verifier_dist($id_document='new',$mode=false, $retour=''){
 	if(!_request('supprimer_vignette') && !_request('supprimer_version') && !_request('revenir_version')){
+		/**
+		 * On est soit dans la prévisualisation,
+		 * soit dans l'application d'un filtre
+		 */
 		if(!$var_filtre = _request('filtre'))
 			$erreurs['message_erreur'] = _T('photospip:erreur_form_filtre');
 		else if(($mode != 'vignette') && (!$type_resultat = _request('type_modification')))
@@ -150,25 +157,38 @@ function formulaires_editer_image_verifier_dist($id_document='new',$mode=false, 
 	return $erreurs;
 }
 
+/**
+ * Fonction de traitement du formulaire
+ */
 function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $retour=''){
 	$res = array('editable'=>true);
 	$autoclose= '';
 	if($mode == 'vignette'){
+		/**
+		 * On est en mode vignette
+		 */
 		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
-		$res['redirect'] = sinon(_request('redirect'),'');
+		$res['redirect'] = sinon($retour,'');
 		if(_request('supprimer_vignette')){
+			/**
+			 * Suppression de la vignette
+			 */
 			$supprimer_document = charger_fonction('supprimer_document','action');
 			if ($id_vignette)
 				$supprimer_document($id_vignette);
 			$res['message_ok'] = _T('medias:vignette_supprimee').$autoclose;
 			set_request('id_document',$id_document);
 		}else{
+			/**
+			 * Si la vignette existe, l'id_document passé en paramètre du formulaire
+			 * est remplace par celui de la vignette à traiter
+			 */
 			$id_document_orig = $id_document;
 			if($id_vignette && ($id_vignette > 0) && $id_vignette = sql_getfetsel('id_document','spip_documents','id_document='.intval($id_vignette)))
 				$id_document = $id_vignette;
 		}
 	}
-	if(_request('validation') OR _request('supprimer_vignette')){
+	if(_request('validation') OR _request('validation_continuer') OR _request('validation_fermer') OR _request('supprimer_vignette')){
 		$row = sql_fetsel('*','spip_documents','id_document='.intval($id_document)); 
 		$src = get_spip_doc($row['fichier']);
 		
@@ -176,7 +196,7 @@ function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $
 			$mode = $row['mode'];
 		}
 		if(!_request('supprimer_vignette')){
-			if(_request('type_retour') == 'retour'){
+			if(_request('validation_fermer')){
 				$res['redirect'] = $retour ? $retour : _request('retour');
 				$autoclose = "<script type='text/javascript'>if (window.jQuery) jQuery.modalboxclose();</script>";
 			}else{

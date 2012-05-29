@@ -27,6 +27,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_vignette_document' => 'Supprimer la vignette de ce document',
 	'bouton_tester' => 'Prévisualiser',
 	'bouton_valider' => 'Appliquer',
+	'bouton_valider_continuer' => 'Valider et continuer',
+	'bouton_valider_fermer' => 'Valider et revenir à la page précédente',
 	
 	// E
 	'erreur_auth_modifier' => 'Vous n\'êtes pas autoriser à modifier ce document.',

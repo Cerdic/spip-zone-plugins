@@ -124,17 +124,6 @@
 					</BOUCLE_resultats_vignette>
 				</li>
 				</BOUCLE_resultats_sup_vignette_un>
-				<li>
-					<label><:photospip:label_type_retour:></label>
-					<div class="choix">
-						<input type="radio" id="continuer" name="type_retour" value="continuer" checked="checked" />
-						<label for="continuer"><:photospip:label_type_retour_continuer:></label>
-					</div>
-					<div class="choix">
-						<input type="radio" id="retour" name="type_retour" value="retour" />
-						<label for="retour"><:photospip:label_type_retour_retour:></label>
-					</div>
-				</li>
 			</ul>
 		</div>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
@@ -144,7 +133,8 @@
 	  	[(#ENV{mode}|=={vignette}|et{#ENV{vignette}|=={oui}}|oui)
 	  	<input type="submit" class="submit" name="supprimer_vignette" value="<:photospip:bouton_supprimer_vignette:>" />
 	  	]
-	  	<input type="submit" class="submit" name="validation" value="<:photospip:bouton_valider:>" />
+	  	<input type="submit" class="submit" name="validation_continuer" value="<:photospip:bouton_valider_continuer:>" />
+	  	<input type="submit" class="submit" name="validation_fermer" value="<:photospip:bouton_valider_fermer:>" />
 	  </p>
 	 <script type="text/javascript"><!--
 			[(#CONFIG{photospip/image_recadre,on}|=={on}|oui)
