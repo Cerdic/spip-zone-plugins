@@ -76,7 +76,7 @@
 	<tbody>
 	<BOUCLE_modules_lang(TRADLANG_MODULES){priorite}>
 	<tr class="module #MODULE[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-		<td><a href="[(#SELF|parametre_url{id_tradlang_module,#ID_TRADLANG_MODULE})]" title="<:tradlang:lien_voir_bilan_module{module=#MODULE,nom_mod=#NOM_MOD}|attribut_html:>">[(#NOM_MOD)]</a></td>
+		<td>[(#FORMULAIRE_FAVORI{tradlang_module,#ID_TRADLANG_MODULE}) ]<a href="[(#SELF|parametre_url{id_tradlang_module,#ID_TRADLANG_MODULE})]" title="<:tradlang:lien_voir_bilan_module{module=#MODULE,nom_mod=#NOM_MOD}|attribut_html:>">[(#NOM_MOD)]</a></td>
 		#SET{full,''}
 		#SET{langue_mere,#LANG_MERE}
 		<BOUCLE_compte_langue_mere(TRADLANGS){module}{lang=#LANG_MERE}> </BOUCLE_compte_langue_mere>
