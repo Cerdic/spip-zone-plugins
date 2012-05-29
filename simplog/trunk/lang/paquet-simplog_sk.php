@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'simplog_description' => 'Une fois le plugin activé, les administrateurs ont la possibilité de consulter tous les journaux disponibles sur le site. Une entrée du menu Maintenance permet de se rendre sur la page de consultation (simplog).', # NEW
+	'simplog_description' => 'Ak je zásuvný modul aktivovaný, administrátori majú možnosť prezrieť si všetky protokoly, ktoré sú na stránke dostupné. Vstup do menu údržby umožňuje navštíviť stránku na prezeranie protokolov.',
 	'simplog_nom' => 'Jednoduché protokoly',
 	'simplog_slogan' => 'Zobrazenie protokolov SPIPu pre  administrátorov'
 );
