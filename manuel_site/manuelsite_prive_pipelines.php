@@ -1,6 +1,7 @@
 <?php
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/plugin');
 
 function manuelsite_header_prive($flux) {
 	$flux .= '<link rel="stylesheet" href="'.url_absolue(generer_url_public('manuelsite.css')).'" type="text/css" media="all" />' . "\n";
