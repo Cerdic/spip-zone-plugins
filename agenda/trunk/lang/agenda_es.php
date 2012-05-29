@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_precedente' => 'Año anterior', # MODIF
 	'annee_suivante' => 'Año siguiente',
 	'aucun_evenement' => 'Ningún evento',
+	'aucun_inscrit' => 'Aucun inscrit', # NEW
 	'aucune_rubrique_mode_agenda' => 'Por defecto, se puede crear eventos sobre cualquier sección. Si activas el modo agenda sobre una o más secciones, la gestión la creación de eventos se limitará a esa/s ramas.',
 
 	// B
@@ -26,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'confirm_suppression_inscription' => 'Voulez-vous vraiment supprimer cette inscription ?', # NEW
+	'confirm_suppression_inscription_toutes' => 'Voulez-vous vraiment supprimer toutes les inscriptions ?', # NEW
 	'connexion_necessaire_pour_inscription' => 'Merci de <a href=\'#LOGIN_PUBLIC\'>vous connecter</a> pour pouvoir vous inscrire à cet événement.', # NEW
 	'creer_evenement' => 'Crear un evento',
 
@@ -48,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_date_debut' => 'Fecha de comienzo',
 	'evenement_date_du' => 'Del ',
 	'evenement_date_fin' => 'Fecha de fin',
+	'evenement_date_inscription' => 'Date d\'inscription', # NEW
 	'evenement_descriptif' => 'Descripción',
 	'evenement_horaire' => 'Todo el día',
 	'evenement_lieu' => 'Ubicación',
@@ -76,14 +79,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_evenements' => 'Eventos',
 	'info_inscription' => 'Inscription en ligne :', # NEW
 	'info_lieu' => 'Lieu :', # NEW
+	'info_nb_inscrits' => '@nb@ inscrits', # NEW
 	'info_nb_places' => '@nb@ places', # NEW
 	'info_nombre_evenements' => '@nb@ eventos',
 	'info_nouvel_evenement' => 'Nouvel événement', # NEW
 	'info_reponse_inscription_non' => 'non', # NEW
 	'info_reponse_inscription_nsp' => '?', # NEW
 	'info_reponse_inscription_oui' => 'oui', # NEW
+	'info_reponse_inscriptions' => 'Réponse', # NEW
 	'info_reponses_inscriptions' => 'Réponses :', # NEW
 	'info_un_evenement' => '1 evento',
+	'info_un_inscrit' => 'Un inscrit', # NEW
 	'inscrits' => 'Inscriptions', # NEW
 	'item_mots_cles_association_evenements' => 'para eventos',
 
@@ -95,6 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_reponse_jyparticipe_peutetre' => 'Tal vez asista',
 	'label_vous_inscrire' => 'Tu participación',
 	'lien_desinscrire' => 'Supprimer', # NEW
+	'lien_desinscrire_tous' => 'Supprimer toutes les inscriptions', # NEW
 	'lien_retirer_evenement' => 'Eliminar',
 	'liste_inscrits' => 'Liste des inscriptions', # NEW
 
@@ -114,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'repetition' => 'Répétition', # NEW
 	'repetition_de' => 'Repetición de',
+	'retour_evenement' => 'Retour à l\'événement', # NEW
 	'rubrique_activer_agenda' => 'Activar el modo agenda para esa sección',
 	'rubrique_dans_une_rubrique_mode_agenda' => 'Esta sección permite utilizar eventos',
 	'rubrique_desactiver_agenda' => 'Desactivar el modo agenda para esta sección',
@@ -127,6 +135,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'telecharger' => 'Télécharger', # NEW
+	'telecharger_oui' => 'Seulement les réponses positives', # NEW
+	'telecharger_toutes' => 'Toutes les réponses', # NEW
+	'telecharger_toutes_tous_evenements' => 'Toutes les réponses aux inscriptions', # NEW
 	'texte_agenda' => 'AGENDA',
 	'texte_evenement_statut' => 'Cet événement est :', # NEW
 	'texte_logo_objet' => 'LOGO DE L\'EVENEMENT', # NEW

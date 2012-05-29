@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_precedente' => 'Jahr davor', # MODIF
 	'annee_suivante' => 'Jahr danach',
 	'aucun_evenement' => 'Kein Event',
+	'aucun_inscrit' => 'Aucun inscrit', # NEW
 	'aucune_rubrique_mode_agenda' => 'In der Grundeinstellung können Events in alle Rubriken eingetragen werden. Wenn sie den Kalender gezielt für eine oder mehrere Rubriken aktivieren, dann steht ihnen der Kalender nur für diese Rubriken zur Verfügung.',
 
 	// B
@@ -26,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'confirm_suppression_inscription' => 'Wollen sie diese Anmeldung wirklich löschen?',
+	'confirm_suppression_inscription_toutes' => 'Voulez-vous vraiment supprimer toutes les inscriptions ?', # NEW
 	'connexion_necessaire_pour_inscription' => 'Merci de <a href=\'#LOGIN_PUBLIC\'>vous connecter</a> pour pouvoir vous inscrire à cet événement.', # NEW
 	'creer_evenement' => 'Event neu anlegen',
 
@@ -48,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_date_debut' => 'Anfangsdatum',
 	'evenement_date_du' => 'Vom ',
 	'evenement_date_fin' => 'Enddatum',
+	'evenement_date_inscription' => 'Date d\'inscription', # NEW
 	'evenement_descriptif' => 'Beschreibung',
 	'evenement_horaire' => 'ganztägig',
 	'evenement_lieu' => 'Ort',
@@ -76,14 +79,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_evenements' => 'Event',
 	'info_inscription' => 'Inscription en ligne :', # NEW
 	'info_lieu' => 'Ort:',
+	'info_nb_inscrits' => '@nb@ inscrits', # NEW
 	'info_nb_places' => '@nb@ Plätze',
 	'info_nombre_evenements' => '@nb@ Events',
 	'info_nouvel_evenement' => 'Neues Event',
 	'info_reponse_inscription_non' => 'nein',
 	'info_reponse_inscription_nsp' => '?',
 	'info_reponse_inscription_oui' => 'ja',
+	'info_reponse_inscriptions' => 'Réponse', # NEW
 	'info_reponses_inscriptions' => 'Antworten',
 	'info_un_evenement' => 'ein Event',
+	'info_un_inscrit' => 'Un inscrit', # NEW
 	'inscrits' => 'Anmeldungen',
 	'item_mots_cles_association_evenements' => 'zu den Events',
 
@@ -95,6 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_reponse_jyparticipe_peutetre' => 'Ich komem vielleicht',
 	'label_vous_inscrire' => 'Ihre Teilnahme',
 	'lien_desinscrire' => 'Entfernen',
+	'lien_desinscrire_tous' => 'Supprimer toutes les inscriptions', # NEW
 	'lien_retirer_evenement' => 'Löschen',
 	'liste_inscrits' => 'Liste der Anmeldungen',
 
@@ -114,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'repetition' => 'Wiederholung',
 	'repetition_de' => 'Wiederholung von',
+	'retour_evenement' => 'Retour à l\'événement', # NEW
 	'rubrique_activer_agenda' => 'Kalender für diese Rubrik aktivieren',
 	'rubrique_dans_une_rubrique_mode_agenda' => 'Diese Rubrik kann den Kalender nutzen, denn sie befindet sich innerhalb einer Rubrik, für die den Kalende nutzen darf.',
 	'rubrique_desactiver_agenda' => 'Kalender in dieser Rubrik deaktivieren',
@@ -126,7 +134,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sans_titre' => '(ohne Titel)',
 
 	// T
-	'telecharger' => 'Herunterladen',
+	'telecharger' => 'Herunterladen', # MODIF
+	'telecharger_oui' => 'Seulement les réponses positives', # NEW
+	'telecharger_toutes' => 'Toutes les réponses', # NEW
+	'telecharger_toutes_tous_evenements' => 'Toutes les réponses aux inscriptions', # NEW
 	'texte_agenda' => 'KALENDER',
 	'texte_evenement_statut' => 'Dieses Event ist',
 	'texte_logo_objet' => 'EVENT-LOGO',

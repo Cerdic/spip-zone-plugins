@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_precedente' => 'predchádzajúci rok',
 	'annee_suivante' => 'ďalší rok',
 	'aucun_evenement' => 'žiadna udalosť',
+	'aucun_inscrit' => 'Aucun inscrit', # NEW
 	'aucune_rubrique_mode_agenda' => 'Podľa predvolených nastavení vám všetky rubriky umožňujú umožňujú využívať udalosti. Ak kalendár udalostí aktivujete pre jednu rubriku alebo viacero rubrík, riadenie udalostí bude obmedzené na vetvy týchto rubrík.',
 
 	// B
@@ -26,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'confirm_suppression_inscription' => 'Chcete odstrániť tento údaj?',
+	'confirm_suppression_inscription_toutes' => 'Voulez-vous vraiment supprimer toutes les inscriptions ?', # NEW
 	'connexion_necessaire_pour_inscription' => 'Ďakujeme vám, že sa prihlásite predtým, ako sa zaregistrujete na túto udalosť.',
 	'creer_evenement' => 'Vytvoriť udalosť',
 
@@ -48,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_date_debut' => 'Dátum začiatku',
 	'evenement_date_du' => 'Od ',
 	'evenement_date_fin' => 'Dátum ukončenia',
+	'evenement_date_inscription' => 'Date d\'inscription', # NEW
 	'evenement_descriptif' => 'Popis',
 	'evenement_horaire' => 'Celý deň',
 	'evenement_lieu' => 'Miesto',
@@ -76,14 +79,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_evenements' => 'Udalosti',
 	'info_inscription' => 'Registrácia online:',
 	'info_lieu' => 'Miesto:',
+	'info_nb_inscrits' => '@nb@ inscrits', # NEW
 	'info_nb_places' => '@nb@ miest',
 	'info_nombre_evenements' => '@nb@ udalostí',
 	'info_nouvel_evenement' => 'Nová udalosť',
 	'info_reponse_inscription_non' => 'nie',
 	'info_reponse_inscription_nsp' => '?',
 	'info_reponse_inscription_oui' => 'áno',
+	'info_reponse_inscriptions' => 'Réponse', # NEW
 	'info_reponses_inscriptions' => 'Reakcie:',
 	'info_un_evenement' => '1 udalosť',
+	'info_un_inscrit' => 'Un inscrit', # NEW
 	'inscrits' => 'Registrácie',
 	'item_mots_cles_association_evenements' => 'k udalostiam',
 
@@ -95,6 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_reponse_jyparticipe_peutetre' => 'Možno prídem',
 	'label_vous_inscrire' => 'Vaša účasť',
 	'lien_desinscrire' => 'Odstrániť',
+	'lien_desinscrire_tous' => 'Supprimer toutes les inscriptions', # NEW
 	'lien_retirer_evenement' => 'Odstrániť',
 	'liste_inscrits' => 'Zoznam zaregistrovaných',
 
@@ -114,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'repetition' => 'Opakovanie',
 	'repetition_de' => 'Opakovanie',
+	'retour_evenement' => 'Retour à l\'événement', # NEW
 	'rubrique_activer_agenda' => 'Aktivovať Kalendár udalostí pre túto rubriku',
 	'rubrique_dans_une_rubrique_mode_agenda' => 'Táto rubrika vám umožňuje využívať udalosti, keďže sa nachádza v rubrike, pre ktorú bol Kalendár udalostí aktivovaný',
 	'rubrique_desactiver_agenda' => 'Deaktivovať Kalendár udalostí pre túto rubriku',
@@ -126,7 +134,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sans_titre' => '(bez nadpisu)',
 
 	// T
-	'telecharger' => 'Stiahnuť',
+	'telecharger' => 'Stiahnuť', # MODIF
+	'telecharger_oui' => 'Seulement les réponses positives', # NEW
+	'telecharger_toutes' => 'Toutes les réponses', # NEW
+	'telecharger_toutes_tous_evenements' => 'Toutes les réponses aux inscriptions', # NEW
 	'texte_agenda' => 'KALENDÁR UDALOSTÍ',
 	'texte_evenement_statut' => 'Táto udalosť je:',
 	'texte_logo_objet' => 'LOGO UDALOSTI',

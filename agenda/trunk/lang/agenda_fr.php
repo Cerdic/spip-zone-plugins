@@ -48,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_date_debut' => 'Date de début',
 	'evenement_date_du' => 'Du ',
 	'evenement_date_fin' => 'Date de fin',
+	'evenement_date_inscription' => 'Date d\'inscription',
 	'evenement_descriptif' => 'Descriptif',
 	'evenement_horaire' => 'Toute la journée',
 	'evenement_lieu' => 'Lieu',
@@ -56,7 +57,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenements' => 'Événements',
 	'evenements_a_venir' => 'À venir',
 	'evenements_depuis_debut' => 'Depuis le début',
-        'evenement_date_inscription' => 'Date d\'inscription',
 
 	// F
 	'fermer' => 'fermer',
@@ -77,17 +77,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_evenements' => 'Événements',
 	'info_inscription' => 'Inscription en ligne :',
 	'info_lieu' => 'Lieu :',
+	'info_nb_inscrits' => '@nb@ inscrits',
 	'info_nb_places' => '@nb@ places',
 	'info_nombre_evenements' => '@nb@ événements',
 	'info_nouvel_evenement' => 'Nouvel événement',
 	'info_reponse_inscription_non' => 'non',
 	'info_reponse_inscription_nsp' => '?',
 	'info_reponse_inscription_oui' => 'oui',
-	'info_reponses_inscriptions' => 'Réponses :',
 	'info_reponse_inscriptions' => 'Réponse',
+	'info_reponses_inscriptions' => 'Réponses :',
 	'info_un_evenement' => '1 événement',
-        'info_un_inscrit' => 'Un inscrit',
-	'info_nb_inscrits' => '@nb@ inscrits',
+	'info_un_inscrit' => 'Un inscrit',
 	'inscrits' => 'Inscriptions',
 	'item_mots_cles_association_evenements' => 'aux événements',
 
@@ -119,7 +119,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'repetition' => 'Répétition',
 	'repetition_de' => 'Répétition de',
-        'retour_evenement' => 'Retour à l\'événement',
+	'retour_evenement' => 'Retour à l\'événement',
 	'rubrique_activer_agenda' => 'Activer le mode agenda',
 	'rubrique_dans_une_rubrique_mode_agenda' => 'Cette rubrique permet d\'utiliser les événements car elle est dans une rubrique dont le mode agenda a été activé',
 	'rubrique_desactiver_agenda' => 'Désactiver le mode agenda',
@@ -133,9 +133,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'telecharger' => 'Télécharger (csv)',
-	'telecharger_toutes' => 'Toutes les réponses',
 	'telecharger_oui' => 'Seulement les réponses positives',
-        'telecharger_toutes_tous_evenements' => 'Toutes les réponses aux inscriptions',
+	'telecharger_toutes' => 'Toutes les réponses',
+	'telecharger_toutes_tous_evenements' => 'Toutes les réponses aux inscriptions',
 	'texte_agenda' => 'AGENDA',
 	'texte_evenement_statut' => 'Cet événement est :',
 	'texte_logo_objet' => 'LOGO DE L\'EVENEMENT',
