@@ -58,7 +58,7 @@ function formulaires_editer_image_charger_dist($id_document='new',$mode=false, $
 			$valeurs[$input] = _request($input);	
 	}
 	
-	$valeurs['largeur_previsu'] = test_espace_prive()? 548 : lire_config('photospip/largeur_previsu','450');
+	$valeurs['largeur_previsu'] = test_espace_prive()? 800 : lire_config('photospip/largeur_previsu','450');
 	if($mode != 'vignette'){
 		$limite = lire_config('photospip/limite_version',1000000);
 		$nb_versions = sql_countsel('spip_documents_inters','id_document='.intval($id_document));

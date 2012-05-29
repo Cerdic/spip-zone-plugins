@@ -1,18 +1,6 @@
-<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_document}' style="position:relative">
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_document}' style="position:relative;overflow:auto;">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	[(#ENV{erreurs}|table_valeur{message}|oui)
-	<div class="notice">
-			[(#ENV{erreurs}|table_valeur{message}|=={previsu}|oui)
-			<span><:previsualisation:></span><br />
-			<:photospip:erreur_previsu:>]
-			[(#ENV{erreurs}|table_valeur{message}|=={sanstest}|oui)
-			<:photospip:sanstest:>]
-			[(#ENV{erreurs}|table_valeur{message}|=={sansfiltre}|oui)
-			<:photospip:sansfiltre:>]
-			[(#ENV{erreurs}|table_valeur{message}|=={sansconf}|oui)
-			<:photospip:sansconf:>]
-		</div>]
 	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
 	<BOUCLE_document(DOCUMENTS){id_document}{mode IN vignette,image,document}{tout}>
 	[(#REM)
@@ -33,13 +21,27 @@
 		<input type="submit" class="submit" name="tester" style="display:none;" value="<:photospip:bouton_tester:>" />
 		<div id="modifier_image">
 			<div id="image-container">
-				<div id="image_modifier" style="[width:(#GET{largeur_max})px;]">
+				<div id="image_modifier" class="spip_documents spip_documents_center">
 					[(#ENV{erreurs}|table_valeur{filtre}|oui)
 					[(#_document:FICHIER|photospip_appliquer_filtre{[(#ENV{erreurs}|table_valeur{filtre})],[(#ENV{erreurs}|table_valeur{param1})],[(#ENV{erreurs}|table_valeur{param2})],[(#ENV{erreurs}|table_valeur{param3})],[(#ENV{erreurs}|table_valeur{param})]}|image_reduire{#GET{largeur_max},#GET{hauteur_max}}|inserer_attribut{alt,' '})]]
 					[(#ENV{erreurs}|table_valeur{filtre}|non)
 					[(#_document:FICHIER|image_reduire{#GET{largeur_max},#GET{hauteur_max}}|inserer_attribut{alt,' '})]]
 				</div>
 			</div>
+			[(#ENV{erreurs}|table_valeur{message}|oui)
+			<div class="notice">
+				[(#ENV{erreurs}|table_valeur{message}|=={previsu}|oui)
+				<span><:previsualisation:></span><br />
+				<:photospip:erreur_previsu:>]
+				[(#ENV{erreurs}|table_valeur{message}|=={sanstest}|oui)
+				<:photospip:sanstest:>]
+				[(#ENV{erreurs}|table_valeur{message}|=={sansfiltre}|oui)
+				<:photospip:sansfiltre:>]
+				[(#ENV{erreurs}|table_valeur{message}|=={sansconf}|oui)
+				<:photospip:sansconf:>]
+			</div>]
+		</div>
+		<div class="editer_image_inputs">
 			<BOUCLE_si_versions_et_vignettes(CONDITION){si #ENV{mode}|!={vignette}|ou{#ENV{mode}|=={vignette}|et{#ENV{vignette}|=={oui}}}|oui}>
 			<B_interd_nb>
 			<ul class="liste-versions">
@@ -74,8 +76,6 @@
 			</ul>
 			</B_interd_nb>
 			</BOUCLE_si_versions_et_vignettes>
-		</div>
-		<div>
 			<BOUCLE_modifiable(CONDITION){si #ENV{modifiable,oui}|oui}>
 			<ul>
 				#CHEMIN{formulaires/editer_image_format}
@@ -136,6 +136,7 @@
 					</div>
 				</li>
 			</ul>
+		</div>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class="boutons">
@@ -238,9 +239,60 @@
 					slider_image_flou.slider("value", val);
 				});
 			}
-			
+			jQuery('#cboxLoadedContent').load(function() {
+				console.log('load');
+			});
 			if(typeof(jQuery) == 'function'){
 			jQuery(document).ready(function() {
+				if($('#cboxLoadedContent').size() > 0){
+					var boxtop, imagetop, difftop;
+					$(document).bind('cbox_complete', function(){
+				   		if($('#modifier_image img').width() > $('#modifier_image').width()){
+							$('#image-container img').attr('width','');
+							$('#image-container img').attr('height','');
+							$('#image-container img').width('100%');
+							$('#image-container img').height('auto');
+						}
+						var boxoffset = $('#cboxLoadedContent').offset();
+						var container_offset = $('#image-container').offset().top-$('#cboxLoadedContent').offset().top;
+						var container_width = $('#image-container').width();
+						if($('#image-container').height() < $('#cboxLoadedContent').height()){
+							$('#cboxLoadedContent').scroll(function() {
+								var limite_multilang = boxoffset.top;
+								var limite_bas = limite_multilang+$('#image-container').parents("form").height()-$('#image-container').parents("form").find(".boutons").height();
+								var pos_bas = $('#image-container').offset().top+$('#image-container').height();
+								if(($('#cboxLoadedContent').scrollTop() >= container_offset) && (pos_bas <= limite_bas) && ($('#cboxLoadedContent').scrollTop()+$('#image-container').offset().top < limite_bas)){
+									var margintop = $('#cboxLoadedContent').scrollTop() - container_offset+20;
+									if(!$('#image-container').hasClass("image_flottant"))
+										$('#image-container').addClass("image_flottant");
+									$('#image-container').css({"margin-top": margintop+"px"});
+									if(typeof(ias) == 'object'){
+										ias.update();
+									}
+								}
+								else if(($('cboxLoadedContent').scrollTop()+$('#image-container').offset().top < limite_multilang)||(pos_bas > limite_bas) ){
+									$('#image-container').removeClass("image_flottant").css({"margin-top": "0px", "width": "auto"});
+									if(typeof(ias) == 'object'){
+										ias.update();
+									}
+								}
+							});
+						}
+					});
+					if($('#modifier_image').width() != 0){
+						if($('#modifier_image img').width() > $('#modifier_image').width()){
+							$('#image-container img').attr('width','');
+							$('#image-container img').attr('height','');
+							$('#image-container img').width('100%');
+							$('#image-container img').height('auto');
+						}
+					}
+				}
+				if(typeof($.fn.scrollTo) == 'function'){
+					$('input[type=submit]').click(function(){
+						$('#cboxLoadedContent').scrollTo( { top: 0, left:'0' });
+					});
+				}
 				activatesliders();
 				/**
 				 * On cache les options des filtres

@@ -45,6 +45,8 @@ function photospip_jqueryui_forcer($plugins) {
 function photospip_jquery_plugins($plugins) {
 	if (test_espace_prive())
 		$plugins[] = _DIR_LIB_IMGAREASELECT . 'scripts/jquery.imgareaselect.js';
+		$plugins[] = find_in_path("js/jquery.scrollto.js");
+		$plugins[] = find_in_path("js/jquery.localscroll.js");
 	return $plugins;
 }
 
