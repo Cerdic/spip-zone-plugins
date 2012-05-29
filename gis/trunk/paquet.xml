@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="3.3.4"
+	version="3.3.5"
 	schema="2.0.2"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
@@ -39,15 +39,15 @@
 		inclure="base/gis.php"
 	/>
 	<pipeline
-		nom="affichage_final"
+		nom="insert_head"
+		action="inserer_javascript"
 		inclure="gis_pipelines.php"
 	/>
 	<pipeline
-		nom="affichage_final_prive"
-		action="affichage_final"
+		nom="header_prive"
+		action="inserer_javascript"
 		inclure="gis_pipelines.php"
 	/>
-
 	<pipeline
 		nom="afficher_contenu_objet"
 		inclure="gis_pipelines.php"

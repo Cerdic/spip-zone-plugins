@@ -5,25 +5,6 @@ function gis_saisies_autonomes($flux){
 	return $flux;
 }
 
-/**
- * Inserer les libs js de carto si une carte presente dans la page
- * @param string $flux
- * @return string
- */
-function gis_affichage_final($flux){
-	if (strpos($flux,"carte_gis")!==false){
-		$js = gis_inserer_javascript('');
-		if ($p = stripos($flux,"</head>"))
-			$flux = substr_replace($flux,$js,$p,0);
-	}
-	return $flux;
-}
-
-/**
- * generer le code des libs js de carto a inserer dans la page
- * @param $flux
- * @return string
- */
 function gis_inserer_javascript($flux){
 	
 	// initialisation des valeurs de config
