@@ -29,7 +29,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'remove_from' => 'Retirer de ma sélection',
 
 	// S
-	'ses_favoris' => 'Ses favoris'
+	'ses_favoris' => 'Ses favoris',
+	
+	// V
+	'vos_favoris' => 'Vos favoris' # Utile pour modifier le titre de l'inclusion 
 );
 
 ?>
