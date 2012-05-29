@@ -83,6 +83,7 @@ function remplacer_rubrique($id_rubrique, $id_parent, $descriptif) {
 //tables du plugins amap
 function amap_declarer_tables_interfaces($interface){
 	//-- Alias
+	$interface['table_des_tables']['amap_disponibles'] = 'amap_disponibles';
 	$interface['table_des_tables']['amap_livraisons'] = 'amap_livraisons';
 	$interface['table_des_tables']['amap_paniers'] = 'amap_paniers';
 	$interface['table_des_tables']['amap_responsables'] = 'amap_responsables';
@@ -90,12 +91,28 @@ function amap_declarer_tables_interfaces($interface){
 	$interface['table_date']['amap_paniers'] = 'date_distribution';
 	$interface['table_date']['amap_responsables'] = 'date_distribution';
 	//-- Savoit traiter "_ " en <br />
+	$interface['table_des_traitements']['INFO_SUPPLEMENTAIRE']['amap_disponibles'] = _TRAITEMENT_RACCOURCIS;
 	$interface['table_des_traitements']['CONTENU_PANIER']['amap_livraisons'] = _TRAITEMENT_RACCOURCIS;
 	return $interface;
 }
 
 //creation des tables
 function amap_declarer_tables_principales($tables_principales){
+	//-- Table amap_disponibles -------------------
+	$spip_amap_disponibles = array(
+		'id_amap_disponible'  => 'bigint NOT NULL AUTO_INCREMENT',
+		'id_amap_panier'  => 'bigint NOT NULL',
+		'type_disponibilite'  => 'text DEFAULT "" NOT NULL',
+		'info_supplementaire'  => 'text DEFAULT "" NOT NULL',
+		);
+	$spip_amap_disponibles_key = array(
+		'PRIMARY KEY'   => 'id_amap_disponible'
+		);
+	$tables_principales['spip_amap_disponibles'] = array(
+		'field' => &$spip_amap_disponibles,
+		'key' => &$spip_amap_disponibles_key,
+		);
+
 	//-- Table amap_livraisons -------------------
 	$spip_amap_livraisons = array(
 		'id_amap_livraison'  => 'bigint NOT NULL AUTO_INCREMENT',
@@ -116,6 +133,7 @@ function amap_declarer_tables_principales($tables_principales){
 		'id_auteur'  => 'bigint NOT NULL',
 		'id_producteur'  => 'bigint NOT NULL',
 		'date_distribution'  => 'datetime DEFAULT "0000-00-00 00:00:00" NOT NULL',
+		'dispo'  => 'bigint DEFAULT "0" NOT NULL',
 		);
 	$spip_amap_paniers_key = array(
 		'PRIMARY KEY'   => 'id_amap_panier'

@@ -9,10 +9,10 @@
 	</description>
 
 	<auteur>St&#233;phane Moulinet, E-cosystems, [Pierre KUHN->http://www.pierre-kuhn.org] </auteur>
-	<version>2.2.4</version>
-	<version_base>1.1</version_base>
+	<version>2.2.5</version>
+	<version_base>1.2</version_base>
 
-	<licence>GNU/GPL - (c) 2010-2012</licence>
+	<licence>GNU/GPL - &copy; 2010-2012</licence>
 	<etat>dev</etat>
 
 	<prefix>amap</prefix>
@@ -64,7 +64,7 @@
 	<necessite id="saisies" version="[1.7.7;]" />
 	<necessite id="spip_bonux" version="[2.2.21;]" />
 	<necessite id="verifier" version="[0.1;]" />
+	<necessite id="z" version="[1.5.1;]" />
 	<utilise id="fpdf" version="[0.0.1;]" />
-	<utilise id="z" version="[1.5.1;]" />
 	<categorie>divers</categorie>
 </plugin>

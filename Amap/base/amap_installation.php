@@ -58,6 +58,12 @@ function amap_upgrade($nom_meta_version_base, $version_cible){
 			spip_log("Maj de la table spip_amap_responsables V1.1", "amap_installation");
 			ecrire_meta($nom_meta_version_base, $current_version=$version_cible, 'non');
 			}
+		if (version_compare($current_version,'1.2','<')) {
+			maj_tables("spip_amap_disponibles");
+			maj_tables("spip_amap_paniers");
+			spip_log("Maj de la table spip_amap_paniers et spip_amap_disponibles V1.2", "amap_installation");
+			ecrire_meta($nom_meta_version_base, $current_version=$version_cible, 'non');
+			}
 		}
 }
 function amap_vider_tables($nom_meta_version_base){
