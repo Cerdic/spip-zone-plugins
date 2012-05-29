@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_simplog' => 'Tento zásuvný modul vám umožňuje jednoducho zobraziť súbory protokolov v priečinkoch  SPIPu.',
 
 	// F
-	'fichier' => 'Súbor: "@fichier@"', # MODIF
+	'fichier' => 'Súbor "@fichier@"',
 
 	// I
 	'info_hit_pri' => 'Súkromná zóna',
