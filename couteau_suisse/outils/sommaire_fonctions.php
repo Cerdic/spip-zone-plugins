@@ -129,7 +129,10 @@ function sommaire_id_ancre_ex($index, &$titre, $hn) {
 	return strlen($a)>2?$a:"sommaire_$index";
 }
 
-// fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
+// fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite|onglets|table
+// $sommaire_seul = true ou 1 : retour du sommaire seul
+// $sommaire_seul = false : insertion du sommaire automatique dans le texte si la balise #CS_SOMMAIRE est inactive
+// $sommaire_seul = 0 : insertion du sommaire automatique dans le texte, balise #CS_SOMMAIRE active ou non
 function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	// pour sommaire_nettoyer_raccourcis()
 	include_spip('outils/sommaire');
@@ -177,7 +180,7 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	// sinon, on n'insere ce sommaire en tete de texte que si la balise #CS_SOMMAIRE n'est pas activee
 	if($sommaire_seul) return $sommaire;
 	if(defined('_onglets_FIN')) $texte = echappe_retour($texte, 'SOMM');
-	if(defined('_sommaire_BALISE')) return $texte;
+	if(defined('_sommaire_BALISE') && $sommaire_seul===false) return $texte;
 	return _sommaire_REM.$sommaire._sommaire_REM.$texte;
 }
 
