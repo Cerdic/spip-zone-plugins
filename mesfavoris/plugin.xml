@@ -2,21 +2,21 @@
 	<nom>Mes Favoris 2</nom>
 	<slogan>S&#233;lection de favoris</slogan>
 	<icon>images/mesfavoris-128.png</icon>
-	<version>2.1.3</version>
+	<version>2.2.0</version>
 	<version_base>1.0.0</version_base>
 	<etat>stable</etat>
 	<prefix>mesfavoris</prefix>
 	<auteur>Olivier Sallou, [C&#233;dric Morin->yterium.net]</auteur>
 	<description>(D&#233;)S&#233;lectionne un objet pour g&#233;rer des objets (articles, rubriques ...) favoris pour un visiteur authentifi&#233;</description>
-	<install>base/mesfavoris.php</install>
+	<install>mesfavoris_administrations.php</install>
 	<lien>http://www.spip-contrib.net/Mes-Favoris-2-0</lien>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
-		<inclure>base/mesfavoris.php</inclure>
+		<inclure>mesfavoris_administrations.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
-		<inclure>base/mesfavoris.php</inclure>
+		<inclure>mesfavoris_administrations.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>insert_head_css</nom>

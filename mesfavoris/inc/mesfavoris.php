@@ -1,10 +1,12 @@
 <?php
 /*
  * Plugin mesfavoris
- * (c) 2009-2010 Olivier Sallou, Cedric Morin
+ * (c) 2009-2012 Olivier Sallou, Cedric Morin
  * Distribue sous licence GPL
  *
  */
+
+ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Supprimer un favori dont on connait l'id
