@@ -30,7 +30,7 @@ function multilang_insert_head_css($flux){
  * @param string $flux Le contenu du head privé
  */
 function multilang_insert_head_prive($flux){
-
+	include_spip('inc/config');
 	$config = lire_config('multilang',array());
 
 	$flux .= multilang_inserer_head($config);
