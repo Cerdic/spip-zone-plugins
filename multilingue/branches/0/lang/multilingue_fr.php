@@ -6,16 +6,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'afficher_menu_select' => 'Afficher en menu dropdown (select)',	
-	
+	'afficher_menu_select' => 'Afficher en menu dropdown (select)',
+
 	// M
 	'menu_langue' => 'Menu de langue',
 	'multilingue_titre' => 'Site Multilingue Facile',
-	
+
 	// P
-	'precision_menu_select'=>'Ne fonctionnerait uniquement si vous utilisez les noisettes originales du plugin',
+	'precision_menu_select' => 'Ne fonctionnerait uniquement si vous utilisez les noisettes originales du plugin',
+
 	// T
-	'titre_page_configurer_multilingue' => 'Configuration de Site Multilingue Facile',
+	'titre_page_configurer_multilingue' => 'Configuration de Site Multilingue Facile'
 );
 
 ?>
