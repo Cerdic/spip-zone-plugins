@@ -1,10 +1,10 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="3.3.3"
+	version="3.3.4"
 	schema="2.0.2"
 	etat="test"
-	compatibilite="[3.0.0-dev;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/gis.png"
 	documentation="http://www.spip-contrib.net/GIS2"
 >
@@ -39,15 +39,15 @@
 		inclure="base/gis.php"
 	/>
 	<pipeline
-		nom="insert_head"
-		action="inserer_javascript"
+		nom="affichage_final"
 		inclure="gis_pipelines.php"
 	/>
 	<pipeline
-		nom="header_prive"
-		action="inserer_javascript"
+		nom="affichage_final_prive"
+		action="affichage_final"
 		inclure="gis_pipelines.php"
 	/>
+
 	<pipeline
 		nom="afficher_contenu_objet"
 		inclure="gis_pipelines.php"
