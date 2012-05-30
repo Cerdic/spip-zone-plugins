@@ -13,6 +13,7 @@ _ © 2008-2012 - Distribué sous licence GNU/GPL
 	<install>base/photospip_upgrade.php</install>
 	<options>photospip_options.php</options>
 	<fonctions>photospip_fonctions.php</fonctions>
+	<icon>images/photospip_logo.png</icon>
 	<pipeline>
 		<nom>header_prive</nom>
 		<inclure>photospip_pipelines.php</inclure>
@@ -45,8 +46,6 @@ _ © 2008-2012 - Distribué sous licence GNU/GPL
 		<nom>boite_infos</nom>
 		<inclure>photospip_pipelines.php</inclure>
 	</pipeline>
-	<utilise id='cfg' version='[1.10.1;]' />
-	<utilise id='Fonctions_images' version='[0.5.2;]' />
 	<necessite id="palette" version='[1.3.4;]' />
 	<necessite id="medias" version='[1.6.12;]' />
 	<necessite id="jqueryui" version='[1.8.19;]' />
@@ -55,6 +54,9 @@ _ © 2008-2012 - Distribué sous licence GNU/GPL
 	<necessite id="verifier" version='[0.1.14;]' />
 	<necessite id="ancresdouces" version='[1.4;]' />
 	<necessite id="SPIP" version='[2.1.10;2.1.99]' />
+	<necessite id="mediabox" version='[0.6.10;]' />
+	<utilise id='cfg' version='[1.10.1;]' />
+	<utilise id='Fonctions_images' version='[0.5.2;]' />
 	<necessite id="lib:jquery.imgareaselect-0.9.8" src="http://odyniec.net/projects/imgareaselect/jquery.imgareaselect-0.9.8.zip" />
 	<categorie>multimedia</categorie>
 </plugin>
