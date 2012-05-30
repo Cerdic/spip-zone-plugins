@@ -130,7 +130,8 @@ function sommaire_id_ancre_ex($index, &$titre, $hn) {
 }
 
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite|onglets|table
-// $sommaire_seul = true ou 1 : retour du sommaire seul
+// $sommaire_seul = true ou 1 : retour du sommaire seul, fond complet
+// $sommaire_seul = 2 : retour du sommaire seul sous forme de liste <li></li>
 // $sommaire_seul = false : insertion du sommaire automatique dans le texte si la balise #CS_SOMMAIRE est inactive
 // $sommaire_seul = 0 : insertion du sommaire automatique dans le texte, balise #CS_SOMMAIRE active ou non
 function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
@@ -164,6 +165,9 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	if(!strlen($sommaire) || $nbh3<_sommaire_NB_TITRES_MINI)
 		return $sommaire_seul?'':sommaire_nettoyer_raccourcis($texte0);
 
+	// on ne veut que la liste <li></li> du sommaire ?
+	if($sommaire_seul===2) return $sommaire;
+	
 	// contexte du sommaire : on passe aussi les id_objet disponibles
 	$temp = array(
 		'sommaire' => $sommaire,
