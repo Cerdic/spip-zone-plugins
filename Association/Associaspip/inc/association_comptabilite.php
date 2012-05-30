@@ -432,7 +432,7 @@ function association_calcul_totaux_comptes_classe($classe, $exercice=0, $destina
 }
 
 /* on affiche les totaux (recettes et depenses) d'un exercice des differents comptes de la classe specifiee */
-function association_liste_totaux_comptes_classes($classes, $prefixe='', $direction='-1', $exercice=0, $destination=0) {
+function association_liste_totaux_comptes_classes_html($classes, $prefixe='', $direction='-1', $exercice=0, $destination=0) {
     if( !is_array($classes) ) { // a priori une chaine ou un entier d'une unique classe
 	$liste_classes = array( $classes ) ; // transformer en tableau (puisqu'on va operer sur des tableaux);
     } else { // c'est un tableau de plusieurs classes
@@ -668,5 +668,214 @@ class ExportComptes {
 
 }
 
+define('FPDF_FONTPATH', 'font/');
+include_spip('fpdf');
+include_spip('inc/charsets');
+include_spip('inc/association_plan_comptable');
+
+class ExportComptes_PDF extends FPDF {
+
+    // variables de parametres de mise en page
+    var $largeur = 210; // format A4
+    var $hauteur = 297; // format A4
+    var $marge_gauche = 10;
+    var $marge_droite = 10;
+    var $marge_haut = 10;
+    var $marge_bas = 10;
+    var $icone_h = 20;
+    var $icone_v = 20;
+    var $space_v = 2;
+    var $space_h = 2;
+
+    // variables de mise en page calculees
+    var $largeur_utile = 0; // largeur sans les marges droites et gauches
+    var $largeur_pour_titre = 0; // largeur utile sans icone
+
+    // position du curseur
+    var $xx = 0; // abscisse 1ere boite
+    var $yy = 0; // ordonnee 1ere boite
+
+    // variables de fonctionnement passees en parametre
+    var $annee;
+    var $exercice;
+    var $destination;
+
+    // Initialisations
+    function init($ids) {
+	// passer les parametres transmis aux variables de la classe
+	$this->annee = $ids['annee'];
+	$this->exercice = $ids['exercice'];
+	$this->destination = $ids['destination'];
+	// calculer les dimensions de mise en page
+	$this->largeur_utile = $this->largeur-$this->marge_gauche-$this->marge_droite;
+	$this->largeur_pour_titre = $this->largeur_utile-$this->icone_h-3*$this->space_h;
+	// initialiser les variables de mise en page
+	$this->xx = $this->marge_gauche;
+	$this->yy = $this->marge_haut;
+	// meta pour le fichier PDF
+	$this->SetAuthor('Marcel BOLLA');
+	$this->SetCreator('Associaspip & Fpdf');
+	$this->SetTitle('Module Comptabilite');
+	$this->SetSubject('Etats comptables');
+	// typo par defaut
+	$this->SetFont('Arial', '', 12);
+	// engager la page
+	$this->AddPage();
+    }
+
+    // Pied de pages : redefinition de FPDF::Footer() qui est automatiquement appele par FPDF::AddPage() et FPDF::Close() !
+    //@ http://www.id.uzh.ch/cl/zinfo/fpdf/doc/footer.htm
+    //!\ Adapter la marge basse (et la hauteur utile) des pages en consequence
+    function Footer() {
+	// Positionnement a 2 fois la marge du bas
+	$this->SetY(-2*$this->marge_bas);
+	// typo
+	$this->SetFont('Arial', 'I', 8); // police: Arial italique 8px
+	$this->SetTextColor(128); // Couleur du texte : gris-50.2% (fond blanc)
+	// Date et Numéro de page
+	$this->Cell(0, 10, html_entity_decode(_T('asso:cpte_export_pied_notice') .' -- '. affdate(date('Y-m-d')) .' -- '. _T('asso:cpte_export_page', array('numero'=>$this->PageNo()) )), 0, 0, 'C');
+    }
+
+    // Haut de pages : redefinition de FPDF qui est directement appele par FPDF::AddPage()
+    //@ http://www.id.uzh.ch/cl/zinfo/fpdf/doc/header.htm
+    //!\ Adapter la marge haute (et la hauteur utile) des pages en consequence
+    function Header() {
+	// nop
+    }
+
+    // cartouche au debut de la 1ere page (contrairement au Header ceci fait partir du contenu/flux et n'est pas repete sur toutes les pages, et peut accepter des parametres)
+    function association_cartouche_pdf($titre='') {
+	// Les coordonnees courantes
+	$xc = $this->xx+$this->space_h;
+	$yc = $this->yy+$this->space_v;
+	$this->SetDrawColor(128); // La couleur du trace : gris 50.2% (sur fond blanc)
+	// Le logo du site
+#	$chercher_logo = charger_fonction('chercher_logo', 'inc');
+#	$logo = $chercher_logo(0, 'id_site');
+	$logo = find_in_path('IMG/siteon0.jpg'); // Probleme FPDF et images non JPEG :-/ http://forum.virtuemart.net/index.php?topic=75616.0
+	if ($logo) {
+	    include_spip('/inc/filtres_images_mini');
+	    $this->Image(extraire_attribut(image_reduire($logo, $this->icone_h, $this->icone_v), 'src'), $xc, $yc, $this->icone_h);
+	}
+	// typo
+	$this->SetFont('Arial', 'B', 22); // police : Arial gras 22px
+	$this->SetFillColor(235); // Couleur du cadre, du fond du cadre : gris-92,2%
+	$this->SetTextColor(0); // Couleur du texte : noir
+	// Titre centre
+	$xc += $this->space_h+($logo?$this->icone_h:0);
+	$this->SetXY($xc, $yc);
+	$this->Cell($logo?($this->largeur_pour_titre):($this->largeur_pour_titre+$this->icone_h-$this->space_h), 12, html_entity_decode(_T("asso:$titre")), 0, 0, 'C', true);
+	$yc += 12;
+	$this->Ln($this->space_v); // Saut de ligne
+	$yc += $this->space_v;
+	// typo
+	$this->SetFont('Arial', '', 12); // police : Arial 12px
+	$this->SetFillColor(235); // Couleur de remplissage : gris-92.2%
+	// Sous titre Nom de l'association
+	$this->SetXY($xc, $yc);
+	$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 6, utf8_decode(_T('asso:cpte_export_association', array('nom'=>$GLOBALS['association_metas']['nom']) )), 0, 0, 'C', true);
+	$yc += 6;
+	$this->Ln($this->space_v/2); // Saut de ligne
+	$yc += $this->space_v/2;
+	// typo
+	$this->SetFont('Arial', '', 12); // police : Arial 12px
+	$this->SetFillColor(235); // Couleur de fond : gris-92.2%
+	//Sous titre Intitule de l'exercice
+	$this->SetXY($xc, $yc);
+	$this->Cell($logo?$this->largeur_pour_titre:$this->largeur_pour_titre+$this->icone_h-$this->space_h, 6, utf8_decode(_T('asso:cpte_export_exercice', array('titre'=>sql_getfetsel('intitule','spip_asso_exercices', 'id_exercice='.$this->exercice) ) )), 0, 0, 'C', true);
+	$yc += 6;
+	$this->Ln($this->space_v); // Saut de ligne
+	$yc += $this->space_v;
+	$this->Rect($this->xx, $this->yy, $this->largeur_utile, $yc-$this->marge_haut); // Rectangle tout autour de l'entete
+	$this->yy = $yc; // on sauve la position du curseur dans la page
+    }
+
+    // Fichier final envoye
+    function File($titre='etat_comptes') {
+	$this->Output($titre.'_'.($this->exercice?$this->exercice:$this->annee).'_'.$this->destination.'.pdf', 'I');
+    }
+
+    // on affiche les totaux (recettes et depenses) d'un exercice des differents comptes de la classe specifiee
+    function association_liste_totaux_comptes_classes_pdf($classes, $prefixe='', $direction='-1', $exercice=0, $destination=0) {
+	if( !is_array($classes) ) { // a priori une chaine ou un entier d'une unique classe
+	    $liste_classes = array( $classes ) ; // transformer en tableau (puisqu'on va operer sur des tableaux);
+	} else { // c'est un tableau de plusieurs classes
+	    $liste_classes = $classes;
+	}
+	// Les coordonnees courantes
+	$xc = $this->xx+$this->space_h;
+	$y_orig = $this->yy+$this->space_v;
+	$yc = $y_orig+$this->space_v;
+	// typo
+	$this->SetFont('Arial', 'B', 14); // police: Arial gras 14px
+	$this->SetFillColor(235); // Couleursdu fond du cadre de titre : gris-92.2%
+	$this->SetTextColor(0); // Couleurs du texte du cadre de titre
+	// Titre centre
+	$titre = $prefixe.'_'. ( ($direction) ? (($direction<0)?'depenses':'recettes') : 'soldes' );
+	$this->SetXY($xc, $yc);
+	$this->Cell($this->largeur_utile, 10, html_entity_decode(_T("asso:$titre")), 0, 0, 'C');
+	$yc += 10;
+	$this->Ln($this->space_v); // Saut de ligne
+	$yc += $this->space_v;
+	// initialisation du calcul+affichage des comptes
+	$total_valeurs = $total_recettes = $total_depenses = 0;
+	$chapitre = '';
+	$i = 0;
+	foreach ( $liste_classes as $rang => $classe ) { // calcul+affichage par classe
+	    $query = association_calcul_totaux_comptes_classe($classe, $this->exercice, $this->destination, $direction );
+	    $this->SetFont('Arial', '', 12); // police : Arial 12px
+	    while ($data = sql_fetch($query)) {
+		$this->SetXY($xc, $yc); // positionne le curseur
+		$new_chapitre = substr($data['code'], 0, 2);
+		if ($chapitre!=$new_chapitre) { // debut de categorie
+		    $this->SetFillColor(225); // Couleur de fond de la ligne : gris-92.2%
+		    $this->Cell(20, 6, utf8_decode($new_chapitre), 0, 0, 'L', true);
+		    $this->Cell(($this->largeur_utile)-(2*$this->space_h+20), 6, utf8_decode(($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))), 0, 0, 'L', true);
+		    $chapitre = $new_chapitre;
+		    $this->Ln(); // Saut de ligne
+		    $yc += 6;
+		}
+		$this->SetFillColor(245); // Couleur de fond du total : gris-96.1%
+		$this->SetXY($xc, $yc); // positionne le curseur
+#	    	if ( floatval($data['valeurs']) || floatval($data['recettes']) || floatval($data['depenses']) ) { // non-zero...
+		    $this->Cell(20, 6, utf8_decode($data['code']), 0, 0, 'R', true);
+		    $this->Cell(($this->largeur_utile)-(2*$this->space_h+50), 6, utf8_decode($data['intitule']), 0, 0, 'L', true);
+		    $this->Cell(30, 6, association_nbrefr($data['valeurs']), 0, 0, 'R', true);
+		    if ($direction) { // mode liste comptable
+			$this->Cell(30, 6, association_nbrefr($data['valeurs']), 0, 0, 'R', true);
+			$total_valeurs += $data['valeurs'];
+		    } else { // mode liste standard
+			$this->Cell(30, 6, association_nbrefr($data['depenses']>0?$data['depenses']:$data['recettes']), 0, 0, 'R', true);
+			$total_recettes += $data['recettes'];
+			$total_depenses += $data['depenses'];
+			$total_valeurs += $data['soldes'];
+		    }
+		    $this->Ln(); // Saut de ligne
+		    $yc += 6;
+#	    	}
+	    }
+	}
+	$this->SetXY($xc, $yc); // positionne le curseur
+	$this->SetFillColor(215); // Couleur de fond : 84.3%
+	if ($direction) { // mode liste comptable : charge, produit, actifs, passifs
+	    $this->Cell(($this->largeur_utile)-(2*$this->space_h+30), 6, html_entity_decode(_T("asso:$prefixe".'_total')), 1, 0, 'R', true);
+	    $this->Cell(30, 6, association_nbrefr($total_valeurs), 1, 0, 'R', true);
+	} else { // mode liste standard : contributions volontaires et autres
+	    $this->Cell(($this->largeur_utile)/2-(2*$this->space_h+30), 6, html_entity_decode(_T("asso:$prefixe".'_total_depenses')), 1, 0, 'R', true);
+	    $this->Cell(30, 6, association_nbrefr($total_depenses), 1, 0, 'R', true);
+	    $xc += ( $this->largeur_utile)/2;
+	    $this->SetXY($xc, $yc); // positionne le curseur sur l'autre demi page
+	    $this->Cell(($this->largeur_utile)/2-(2*$this->space_h+30), 6, html_entity_decode(_T("asso:$prefixe".'_total_recettes')), 1, 0, 'R', true);
+	    $this->Cell(30, 6, association_nbrefr($total_recettes), 1, 0, 'R', true);
+	}
+	$yc += 6;
+	$this->Ln($this->space_v); // Saut de ligne
+	$yc += $this->space_v;
+	$this->Rect($this->xx, $y_orig, $this->largeur_utile, $yc-$y_orig); // Rectangle tout autour
+	$this->yy = $yc; // on sauve la position du curseur dans la page
+	return $total_valeurs;
+    }
+
+}
 
 ?>

@@ -93,7 +93,7 @@ function exec_bilan()
 			//TABLEAU EXPLOITATION
 			echo "\n<fieldset>";
 			echo '<legend><b>'. ($id_destination ? $intitule_destinations[$id_destination] : ($GLOBALS['association_metas']['destinations']?_T('asso:toutes_destination'):'') ). '</b></legend>';
-			$solde = association_liste_totaux_comptes_classes($classes, 'cpte_resultat', 0, $exercice, $id_destination);
+			$solde = association_liste_totaux_comptes_classes_html($classes, 'cpte_resultat', 0, $exercice, $id_destination);
 			if(autoriser('associer', 'export_comptes') && !$id_destination){ // on peut exporter : pdf, csv, xml, ...
 				echo "<br /><table width='100%' class='asso_tablo' cellspacing='6' id='asso_tablo_exports'>\n";
 				echo '<tbody><tr>';

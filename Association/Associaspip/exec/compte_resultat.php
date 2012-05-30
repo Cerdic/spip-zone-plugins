@@ -47,7 +47,7 @@ function exec_compte_resultat()
 			echo debut_cadre_enfonce('',true);
 			echo '<h3>'. _T('asso:cpte_resultat_mode_exportation') .'</h3>';
 			if (test_plugin_actif('FPDF')) { // impression en PDF : _T('asso:bouton_impression')
-				echo icone1_association('PDF', generer_url_ecrire('export_compteresultats_pdf', "exercice=$ids[exercice]".($ids['destination']?"&destination=$ids[destination]":'')), 'print-24.png');
+				echo icone1_association('PDF', generer_url_ecrire('pdf_compteresultat', "exercice=$ids[exercice]".($ids['destination']?"&destination=$ids[destination]":'')), 'print-24.png');
 			}
 			foreach(array('csv','ctx','dbk','json','tex','tsv','xml','yaml') as $type) { // autres exports (donnees brutes) possibles
 				echo icone1_association(strtoupper($type), generer_url_ecrire("export_compteresultats_$type").'&var='.rawurlencode($ids['url']), 'export-24.png'); //!\ generer_url_ecrire($exec, $param) equivaut a generer_url_ecrire($exec).'&'.urlencode($param) or il faut utiliser rawurlencode($param) ici...
@@ -61,13 +61,13 @@ function exec_compte_resultat()
 			'destination'=>$ids['destination'],
 		), 'compte_resultat');
 		// liste des charges (depenses d'exploitation) cumulees par comptes
-		$charges = association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_charges'], 'cpte_resultat', '-1', $ids['exercice'], $ids['destination']);
+		$charges = association_liste_totaux_comptes_classes_html($GLOBALS['association_metas']['classe_charges'], 'cpte_resultat', '-1', $ids['exercice'], $ids['destination']);
 		// liste des produits (recettes d'exploitation) cumules par comptes
-		$produits = association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_produits'], 'cpte_resultat', '+1', $ids['exercice'], $ids['destination']);
+		$produits = association_liste_totaux_comptes_classes_html($GLOBALS['association_metas']['classe_produits'], 'cpte_resultat', '+1', $ids['exercice'], $ids['destination']);
 		// resultat comptable courant : c'est la difference entre les recettes et les depenses d'exploitation
 		association_liste_resultat_net($produits, $charges);
 		// liste des contributions volontaires (emplois et ressources) par comptes
-		$contributions = association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_contributions_volontaires'], 'cpte_benevolat', 0, $ids['exercice'], $ids['destination']);
+		$contributions = association_liste_totaux_comptes_classes_html($GLOBALS['association_metas']['classe_contributions_volontaires'], 'cpte_benevolat', 0, $ids['exercice'], $ids['destination']);
 		fin_page_association();
 	}
 }
