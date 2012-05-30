@@ -13,29 +13,18 @@
 			<li>
 				<label for="reduire_width"><:photospip:label_reduire_width:></label>
 				<input type="text" class="text nombre" id="reduire_width" maxlength="5" style="width:5em" name="reduire_width" value="#ENV{reduire_width,#LARGEUR}" />
+				<div id='slider_image_reduire_width'>
+					<div></div>	
+				</div>
 			</li>
 			<li>
 				<label for="reduire_height"><:photospip:label_reduire_height:></label>
 				<input type="text" class="text nombre" id="reduire_height" maxlength="5" style="width:5em" name="reduire_height" value="#ENV{reduire_height,#HAUTEUR}" />
+				<div id='slider_image_reduire_height'>
+					<div></div>	
+				</div>
 			</li>
 		</ul>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				var width_depart = #LARGEUR;
-				var height_depart = #HAUTEUR;
-				var ratio_depart = [(#LARGEUR|div{#HAUTEUR})]
-				$('#reduire_width').change(function(){
-					var width = parseInt($(this).val());
-					var height = (width/ratio_depart).toFixed(0);
-					$('#reduire_height').val(height);
-				});
-				$('#reduire_height').change(function(){
-					var height = parseInt($(this).val());
-					var width = (height*ratio_depart).toFixed(0);
-					$('#reduire_width').val(width);
-				});
-			});
-		</script>
 	</div>
 </li>]
 [(#CONFIG{photospip/image_passe_partout,on}|=={on}|oui)

@@ -11,6 +11,7 @@
 	#SET{hauteur_max,#CONFIG{photospip/hauteur_previsu,#ENV{erreurs}|table_valeur{hauteur_previsu}|sinon{450}}}
 	[(#SET{largeur_reduit,[(#FICHIER|image_reduire{#GET{largeur_max},#GET{hauteur_max}}|extraire_attribut{width})]})]
 	#SET{ratio,#LARGEUR|div{#GET{largeur_reduit}}}
+	#SET{ratio_image,#LARGEUR|div{#HAUTEUR}}
 	#SET{largeur_image,#LARGEUR}
 	#SET{hauteur_image,#HAUTEUR}
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
@@ -137,11 +138,14 @@
 	  	<input type="submit" class="submit" name="validation_fermer" value="<:photospip:bouton_valider_fermer:>" />
 	  </p>
 	 <script type="text/javascript"><!--
+	 		var ratio, ratio_image,largeur,hauteur;
+	 		ratio = parseFloat([(#GET{ratio})]);
+			ratio_image = parseFloat([(#GET{ratio_image})]);
+			largeur = #GET{largeur_image};
+			hauteur = #GET{hauteur_image};
+			
 			[(#CONFIG{photospip/image_recadre,on}|=={on}|oui)
-				var x1, y1, x2, y2, w, h, ias,ratio,largeur,hauteur;
-				ratio = parseFloat([(#GET{ratio})]);
-				largeur = #GET{largeur_image};
-				hauteur = #GET{hauteur_image};
+				var x1, y1, x2, y2, w, h, ias;
 				function image_crop_selectchange(img, selection){
 					/**
 					 *  Le ratio est la relation entre notre image normale et la prévisualisation
@@ -228,6 +232,44 @@
 				$("#param_image_flou").change(function() {
 					var val = parseInt($(this).val());
 					slider_image_flou.slider("value", val);
+				});
+				
+				var slider_image_reduire_width = jQuery('#slider_image_reduire_width').slider({
+					min: 10,
+					max: #LARGEUR,
+					value: [(#ENV{reduire_width}|sinon{#LARGEUR}|intval)],
+					slide: function(event, ui) {
+						jQuery(this).parent().find('input').val(ui.value.toFixed(0));
+						var height = (ui.value.toFixed(0)/ratio_image).toFixed(0);
+						slider_image_reduire_height.slider("value", height);
+						$('#reduire_height').val(height);
+					}
+				});
+				$("#reduire_width").change(function() {
+					var val = parseInt($(this).val());
+					slider_image_reduire_width.slider("value", val);
+					var height = (val/ratio_image).toFixed(0);
+					slider_image_reduire_height.slider("value", height);
+					$("#reduire_height").val(height);
+				});
+				
+				var slider_image_reduire_height = jQuery('#slider_image_reduire_height').slider({
+					min: 10,
+					max: #HAUTEUR,
+					value: [(#ENV{reduire_height}|sinon{#HAUTEUR}|intval)],
+					slide: function(event, ui) {
+						jQuery(this).parent().find('input').val(ui.value.toFixed(0));
+						var width = (ui.value.toFixed(0)*ratio_image).toFixed(0);
+						slider_image_reduire_width.slider("value", width);
+						$('#reduire_width').val(width);
+					}
+				});
+				$("#reduire_height").change(function() {
+					var val = parseInt($(this).val());
+					slider_image_reduire_height.slider("value", val);
+					var width = (val*ratio_image).toFixed(0);
+					slider_image_reduire_width.slider("value", width);
+					$('#reduire_width').val(width);
 				});
 			}
 			if(typeof(jQuery) == 'function'){
