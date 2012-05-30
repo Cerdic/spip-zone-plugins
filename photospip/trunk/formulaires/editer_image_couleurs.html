@@ -18,7 +18,7 @@
 		<ul>
 			<li class="editer_params_image_gamma">
 				<label for="param_image_gamma"><:photospip:label_niveau_gamma:></label>
-				<input type="text" class="text" name="params_image_gamma" id="param_image_gamma" value="#ENV{params_image_gamma,10}" maxlength="4" />
+				<input type="number" max="254" min="-254" step="1" class="text" name="params_image_gamma" id="param_image_gamma" value="#ENV{params_image_gamma,10}" maxlength="4" />
 			</li>
 		</ul>
 	</div>
@@ -34,7 +34,7 @@
 		<ul>
 			<li class="editer_param_image_flou">
 				<label for="param_image_flou"><:photospip:label_niveau_flou:></label>
-				<input type="text" class="text" name="params_image_flou" id="param_image_flou" value="#ENV{params_image_flou,3}" maxlength="2" />
+				<input type="number" max="11" min="1" step="1" class="text" name="params_image_flou" id="param_image_flou" value="#ENV{params_image_flou,3}" maxlength="2" />
 			</li>
 		</ul>
 	</div>

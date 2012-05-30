@@ -12,14 +12,14 @@
 		<ul>
 			<li>
 				<label for="reduire_width"><:photospip:label_reduire_width:></label>
-				<input type="text" class="text nombre" id="reduire_width" maxlength="5" style="width:5em" name="reduire_width" value="#ENV{reduire_width,#LARGEUR}" />
+				<input type="number" max="#LARGEUR" min="10" class="text nombre" id="reduire_width" maxlength="5" style="width:7em" name="reduire_width" value="#ENV{reduire_width,#LARGEUR}" />
 				<div id='slider_image_reduire_width'>
 					<div></div>	
 				</div>
 			</li>
 			<li>
 				<label for="reduire_height"><:photospip:label_reduire_height:></label>
-				<input type="text" class="text nombre" id="reduire_height" maxlength="5" style="width:5em" name="reduire_height" value="#ENV{reduire_height,#HAUTEUR}" />
+				<input type="number" max="#HAUTEUR" min="10" class="text nombre" id="reduire_height" maxlength="5" style="width:7em" name="reduire_height" value="#ENV{reduire_height,#HAUTEUR}" />
 				<div id='slider_image_reduire_height'>
 					<div></div>	
 				</div>
@@ -40,11 +40,11 @@
 		<ul>
 			<li>
 				<label for="passe_partout_width"><:photospip:label_reduire_width:></label>
-				<input type="text" class="text nombre" id="passe_partout_width" maxlength="5" style="width:5em" name="passe_partout_width" value="#ENV{passe_partout_width,#LARGEUR}" />
+				<input type="number" max="#LARGEUR" min="10" step="1" class="text nombre" id="passe_partout_width" maxlength="5" style="width:7em" name="passe_partout_width" value="#ENV{passe_partout_width,#LARGEUR}" />
 			</li>
 			<li>
 				<label for="passe_partout_height"><:photospip:label_reduire_height:></label>
-				<input type="text" class="text nombre" id="passe_partout_height" maxlength="5" style="width:5em" name="passe_partout_height" value="#ENV{passe_partout_height,#HAUTEUR}" />
+				<input type="number" max="#HAUTEUR" min="10" step="1" class="text nombre" id="passe_partout_height" maxlength="5" style="width:7em" name="passe_partout_height" value="#ENV{passe_partout_height,#HAUTEUR}" />
 			</li>
 		</ul>
 	</div>
@@ -81,32 +81,32 @@
 		</li>
 		<li>
 			<label for="recadre_width"><:photospip:label_recadre_width:></label>
-			<input type="text" class="text nombre" id="recadre_width" maxlength="5" style="width:5em" name="recadre_width" value="#ENV{recadre_width}" />
+			<input type="number" max="#LARGEUR" min="10" step="1" class="text nombre" id="recadre_width" maxlength="5" style="width:7em" name="recadre_width" value="#ENV{recadre_width}" />
 		</li>
 		<li>
 			<label for="recadre_height"><:photospip:label_recadre_height:></label>
-			<input type="text" class="text nombre" id="recadre_height" maxlength="5" style="width:5em" name="recadre_height" value="#ENV{recadre_height}" />
+			<input type="number" max="#HAUTEUR" min="10" step="1" class="text nombre" id="recadre_height" maxlength="5" style="width:7em" name="recadre_height" value="#ENV{recadre_height}" />
 		</li>
 		<li>
 			<label><:photospip:label_recadre_x1_y1:></label>
 			<div class="choix" style="display:inline">
 				<label for="recadre_x1">x</label>
-				<input type="text" class="text nombre" id="recadre_x1" name="recadre_x1" maxlength="5" style="width:5em" value="#ENV{recadre_x1}" />
+				<input type="number" max="[(#LARGEUR|moins{10})]" min="0" step="1" class="text nombre" id="recadre_x1" name="recadre_x1" maxlength="5" style="width:7em" value="#ENV{recadre_x1}" />
 			</div>
 			<div class="choix" style="display:inline">
 				<label for="recadre_y1">y</label>
-				<input type="text" class="text nombre" id="recadre_y1" name="recadre_y1" maxlength="5" style="width:5em" value="#ENV{recadre_y1}" />
+				<input type="number" max="[(#HAUTEUR|moins{10})]" min="0" step="1" class="text nombre" id="recadre_y1" name="recadre_y1" maxlength="5" style="width:7em" value="#ENV{recadre_y1}" />
 			</div>
 		</li>
 		<li>
 			<label><:photospip:label_recadre_x2_y2:></label>
 			<div class="choix" style="display:inline">
 				<label for="recadre_x2">x</label>
-				<input type="text" class="text nombre" id="recadre_x2" name="recadre_x2" maxlength="5" style="width:5em" value="#ENV{recadre_x2}" />
+				<input type="number" max="[(#LARGEUR)]" min="10" step="1" class="text nombre" id="recadre_x2" name="recadre_x2" maxlength="5" style="width:7em" value="#ENV{recadre_x2}" />
 			</div>
 			<div class="choix" style="display:inline">
 				<label for="recadre_y2">y</label>
-				<input type="text" class="text nombre" id="recadre_y2" name="recadre_y2" maxlength="5" style="width:5em" value="#ENV{recadre_y2}" />
+				<input type="number" max="[(#HAUTEUR)]" min="10" step="1" class="text nombre" id="recadre_y2" name="recadre_y2" maxlength="5" style="width:7em" value="#ENV{recadre_y2}" />
 			</div>
 		</li>
 	</ul>
@@ -151,7 +151,7 @@
 		<ul>
 			<li class="editer editer_param_image_rotation">
 				<label for="param_image_rotation"><:photospip:label_angle_rotation:></label>
-				<input type="text" class="text" name="params_image_rotation" id="param_image_rotation" value="#ENV{params_image_rotation,45}" maxlength="4" />
+				<input type="number" max="180" min="-180" step="1" class="text" name="params_image_rotation" id="param_image_rotation" value="#ENV{params_image_rotation,45}" maxlength="4" />
 			</li>
 		</ul>
 	</div>

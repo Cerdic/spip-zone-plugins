@@ -23,6 +23,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function photospip_header_prive($flux) {
 	$flux .= '
 			<link rel="stylesheet" href="' . direction_css(find_in_path(_DIR_LIB_IMGAREASELECT . 'css/imgareaselect-animated.css')) . '" type="text/css" media="all" />';
+	$flux .= '
+			<link rel="stylesheet" href="' . direction_css(find_in_path("javascript/jQuery_ui_spinner/ui.spinner.css")) . '" type="text/css" media="all" />';
 	return $flux;
 }
 
@@ -47,6 +49,7 @@ function photospip_jquery_plugins($plugins) {
 		$plugins[] = _DIR_LIB_IMGAREASELECT . 'scripts/jquery.imgareaselect.js';
 		$plugins[] = find_in_path("js/jquery.scrollto.js");
 		$plugins[] = find_in_path("js/jquery.localscroll.js");
+		$plugins[] = find_in_path("javascript/jQuery_ui_spinner/ui.spinner.js");
 	return $plugins;
 }
 

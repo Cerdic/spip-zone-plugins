@@ -279,9 +279,11 @@
 					 */
 					if($('#cboxLoadedContent').size() > 0){
 						$(document).bind('cbox_complete', function(){
+							$('input[type=number]').spinner();
 					   		if($('#modifier_image img').width() > $('#modifier_image').width()){
 								$('#image-container img').attr('width','').attr('height','').width('100%').height('auto');
 							}
+							jQuery('.cache').hide();
 							var boxoffset = $('#cboxLoadedContent').offset();
 							var container_offset = $('#image-container').offset().top-$('#cboxLoadedContent').offset().top;
 							var container_width = $('#image-container').width();
@@ -313,17 +315,21 @@
 								$('#image-container img').attr('width','').attr('height','').width('100%').height('auto');
 							}
 						}
+					}else{
+						$('input[type=number]').spinner();
+						jQuery('.cache').hide();
 					}
 					if(typeof($.fn.scrollTo) == 'function'){
 						$('input[type=submit]').click(function(){
 							$('#cboxLoadedContent').scrollTo( { top: 0, left:'0' });
 						});
 					}
+					
 					activatesliders();
 					/**
 					 * On cache les options des filtres
 					 */
-					jQuery('.cache').hide();
+					
 					/**
 					 * On affiche les options du filtre sélectionné
 					 */
