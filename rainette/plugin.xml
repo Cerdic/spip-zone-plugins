@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Rainette</nom>
 	<auteur>Cedric Morin, Eric Lupinacci</auteur>
-	<version>1.4.0</version>
+	<version>1.4.1</version>
 	<etat>stable</etat>
 	<licence>GNU/GPL</licence>
 	<slogan>La m&#233;t&#233;o au quotidien</slogan>
@@ -32,6 +32,6 @@ Essayez la page de d&#233;mo {demo/rainette.html} pour des exemples d'utilisatio
 		<inclure>rainette_pipelines.php</inclure>
 	</pipeline>
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[1.9.0;3.0.0]" />
+	<necessite id="SPIP" version="[1.9.0;3.0.*]" />
 	<traduire gestionnaire="salvatore" module="rainette" reference="fr" />
 </plugin>
