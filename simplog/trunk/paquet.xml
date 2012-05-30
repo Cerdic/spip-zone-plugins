@@ -1,7 +1,7 @@
 <paquet
 	prefix="simplog"
 	categorie="outil"
-	version="0.4.1"
+	version="0.4.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/simplog-24.gif"
@@ -11,6 +11,7 @@
 	<!-- Visualisation des logs SPIP par les administrateurs -->
 
 	<auteur mail="luc.tech@free.fr">Luc Tech</auteur>
+	<auteur lien="http://blog.smellup.net/">Eric Lupinacci</auteur>
 
 	<licence>GNU/GLP</licence>
 

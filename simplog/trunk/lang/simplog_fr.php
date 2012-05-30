@@ -31,6 +31,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_fic' => 'Liste des journaux',
 	'logs' => 'Consultation des journaux',
 
+	// T
+	'tri_croissant' => 'Tri croissant',
+	'tri_decroissant' => 'Tri décroissant',
+
 	// M
 	'message_fichier_choisir' => 'Choisissez un fichier à analyser.',
 	'message_fichier_inconnu' => 'Le fichier "@fichier@" est indisponible.'
