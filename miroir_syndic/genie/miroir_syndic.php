@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin miroir_syndic
- * (c) 2006-2010 Fil, Cedric
+ * (c) 2006-2012 Fil, Cedric
  * Distribue sous licence GPL
  *
  *
@@ -37,38 +37,9 @@ function genie_miroir_syndic($t) {
 }
 
 
-// un nouvel article : le creer
-function miroirsyndic_creer_article($t) {
-	lang_select(trim(preg_replace(',[-_].*,', '', $t['lang'])));
-	$lang = $GLOBALS['spip_lang'];
-	lang_select();
-
-	spip_log('insert', 'miroirsyndic');
-
-	include_spip('action/editer_article');
-	include_spip('inc/autoriser');
-	autoriser_exception('publierdans','rubrique',$t['id_rubrique']); // se donner temporairement le droit
-	if ($id_article = insert_article($t['id_rubrique'])) {
-		autoriser_exception('modifier','article',$id_article); // se donner temporairement le droit
-		articles_set($id_article,array(
-				'titre'=>$t['titre'],
-				'nom_site'=>$t['titre'],
-				'url_site'=>$t['url'],
-				'statut'=>'prop',
-				'date'=>$t['date'],
-				'lang' => $lang,
-		));
-		autoriser_exception('modifier','article',$id_article,false); // revenir a la normale
-	}
-	autoriser_exception('publierdans','rubrique',$t['id_rubrique'], false);
-
-	spip_log($id_article, 'miroirsyndic');
-	return $id_article;
-}
-
 // indique la rubrique d'un (nouvel) article en fonction de ses tags
 //
-function miroirsyndic_regler_rubrique($t) {
+function miroirsyndic_regler_rubrique($t, $objet) {
 	$nom_rub = '';
 
 	if (_MODE_RUBRIQUE_MIROIR != '') {
@@ -85,10 +56,10 @@ function miroirsyndic_regler_rubrique($t) {
 		spip_log("rubrique '$nom_rub'", 'miroirsyndic');
 		include_spip('inc/rubriques');
 		$r = creer_rubrique_nommee($nom_rub, $t['id_rubrique']);
-		include_spip('action/editer_article');
+		include_spip('action/editer_objet');
 		include_spip('inc/autoriser');
 		autoriser_exception('publierdans','rubrique',$r); // se donner temporairement le droit
-		articles_set($id_article,array('id_parent'=>$r));
+		objet_modifier($objet,$t['id'],array('id_parent'=>$r));
 		autoriser_exception('publierdans','rubrique',$r,false);
 	}
 
@@ -100,7 +71,6 @@ function miroirsyndic_miroir($force_refresh = false) {
 	include_spip('inc/lang');
 	include_spip('inc/filtres');
 	include_spip('base/abstract_sql');
-	include_spip('action/editer_article');
 	include_spip('inc/rubriques');
 	include_spip('inc/autoriser');
 
@@ -111,35 +81,42 @@ function miroirsyndic_miroir($force_refresh = false) {
 	// -- le mode par defaut est 'tag' (qui prend le mois s'il n'y a pas de tag)
 	// -- define('_MODE_RUBRIQUE_MIROIR', '') pour ne pas ranger
 	// -- define('_MODE_RUBRIQUE_MIROIR', 'mois') : par mois exclusivement
-	define('_MODE_RUBRIQUE_MIROIR', 'tag');
+	if (!defined('_MIROIR_OBJET')) define('_MIROIR_OBJET','article');
+	if (!defined('_MODE_RUBRIQUE_MIROIR')) define('_MODE_RUBRIQUE_MIROIR', 'tag');
 
-	define('_MIROIR_CHAMP_LESAUTEURS','surtitre');
-	define('_MIROIR_CHAMP_DESCRIPTIF','chapo');
-	define('_MIROIR_CHAMP_TAGS','soustitre');
+	if (!defined('_MIROIR_CHAMP_LESAUTEURS')) define('_MIROIR_CHAMP_LESAUTEURS','surtitre');
+	if (!defined('_MIROIR_CHAMP_DESCRIPTIF')) define('_MIROIR_CHAMP_DESCRIPTIF','chapo');
+	if (!defined('_MIROIR_CHAMP_TAGS')) define('_MIROIR_CHAMP_TAGS','soustitre');
+
+	$objet = _MIROIR_OBJET;
+	$table_sql = table_objet_sql($objet);
+	$_id_table_objet = id_table_objet($objet);
+
+	$requeter_objet = charger_fonction('requeter_'.$objet,'miroir');
+	$peupler_objet = charger_fonction('peupler_'.$objet,'miroir');
+	$creer_objet = charger_fonction('creer_'.$objet,'miroir');
+
+	list($select,$from) = $requeter_objet();
 
 	$s = sql_select(
-		"s.*, a.id_article AS id_article,a.id_rubrique AS rubrique_article, src.nom_site as nom_site,
-		src.id_rubrique AS id_rubrique, src.id_secteur AS id_secteur",
-		// FROM
-		"spip_syndic_articles AS s
-		LEFT JOIN spip_articles AS a
-		ON s.url = a.url_site
-		LEFT JOIN spip_syndic AS src
-		ON s.id_syndic = src.id_syndic",
+		$select,
+		$from,
 		// WHERE
 		"src.statut='publie'
 		AND s.statut='publie'"
-		. ($force_refresh?'':' AND (a.id_article IS NULL OR s.maj > a.maj)')
+		. ($force_refresh?'':" AND (o.$_id_table_objet IS NULL OR s.maj > o.maj)")
 		. (defined('_MIROIR_ID_SYNDIC')?" AND ".sql_in('src.id_syndic',explode(',',_MIROIR_ID_SYNDIC)):''),
 		'',
 		// ORDER BY
 		's.maj DESC LIMIT 200'
 		);
 
-	$peupler_article = charger_fonction('peupler_article','miroir');
-	spip_log('miroir:'.sql_count($s)." articles syndiques a mettre a jour (fonction $peupler_article)", 'miroirsyndic');
-	
+
+	spip_log('miroir: '.sql_count($s)." articles syndiques a mettre a jour (fonction $peupler_objet)", 'miroirsyndic');
+
+	$nombre = 0;
 	while ($t = sql_fetch($s)) {
+		#var_dump($t);
 		$nombre ++;
 		spip_log('miroir:'.var_export($t,1), 'miroirsyndic');
 		if (
@@ -150,23 +127,23 @@ function miroirsyndic_miroir($force_refresh = false) {
 			)
 		){
 
-			// Si l'article n'existe pas, on le cree ; a priori sa rubrique
+			// Si l'objet n'existe pas, on le cree ; a priori sa rubrique
 			// est la meme que la rubrique du site syndique (idem pour le secteur)
-			if (!$t['id_article']) {
-				$t['id_article'] = miroirsyndic_creer_article($t);
-				miroirsyndic_regler_rubrique($t);
+			if (!$t['id']) {
+				$t['id'] = $creer_objet($t);
+				miroirsyndic_regler_rubrique($t, $objet);
 				$creation = true;
 			}
 
-			$id_rubrique = sql_getfetsel("id_rubrique", "spip_articles", "id_article=".$t['id_article']);
+			$id_rubrique = sql_getfetsel("id_rubrique", $table_sql, "$_id_table_objet=".$t['id']);
 			autoriser_exception('publierdans','rubrique',$id_rubrique); // se donner temporairement le droit
-			autoriser_exception('modifier','article',$t['id_article']); // se donner temporairement le droit
-			$peupler_article($t['id_article'],$t);
-			autoriser_exception('modifier','article',$t['id_article'],false); // revenir a la normale
+			autoriser_exception('modifier',$objet,$t['id']); // se donner temporairement le droit
+			$peupler_objet($t['id'],$t);
+			autoriser_exception('modifier',$objet,$t['id'],false); // revenir a la normale
 			autoriser_exception('publierdans','rubrique',$id_rubrique,false);
 		}
 
-		spip_log($q, 'miroirsyndic');
+		spip_log("$objet ".$t['id']." mis a jour", 'miroirsyndic');
 	}
 
 	if ($creation) {

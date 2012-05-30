@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin miroir_syndic
- * (c) 2006-2010 Fil, Cedric
+ * (c) 2006-2012 Fil, Cedric
  * Distribue sous licence GPL
  *
  */
@@ -17,12 +17,13 @@ function miroirsyndic_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-		if (version_compare($current_version,'0.1.0','<')){
+		if (version_compare($current_version,'0.2.0','<')){
 			include_spip('base/abstract_sql');
 
 			sql_alter("TABLE spip_articles ADD INDEX url_site (url_site)");
+			sql_alter("TABLE spip_breves ADD INDEX lien_url (lien_url)");
 			sql_alter("TABLE spip_syndic_articles ADD INDEX url (url)");
-			ecrire_meta($nom_meta_base_version,$current_version="0.1.0",'non');
+			ecrire_meta($nom_meta_base_version,$current_version="0.2.0",'non');
 		}
 	}
 }
