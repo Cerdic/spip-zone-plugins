@@ -71,10 +71,10 @@ function exec_compte_bilan()
 		while ($data = sql_fetch($query)) {
 			$classes_bilan[] = $data['classe'];
 		}
-		// liste des actifs (les dettes) cumulees par comptes
-		$actifs = association_liste_totaux_comptes_classes_html($classes_bilan, 'cpte_bilan', '-1', $ids['exercice'], $ids['destination']);
 		// liste des passifs (le patrimoine/avoir) cumulees par comptes
-		$passifs = association_liste_totaux_comptes_classes_html($classes_bilan, 'cpte_bilan', '+1', $ids['exercice'], $ids['destination']);
+		$passifs = association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', '+1', $ids['exercice'], $ids['destination']);
+		// liste des actifs (les dettes) cumulees par comptes
+		$actifs = association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', '-1', $ids['exercice'], $ids['destination']);
 		// resultat comptable courant : en comptabilite francaise, la somme les actifs et les passifs doivent s'egaler, ce qui se fait en incorporant le resultat comptable (perte en actif et benefice en passif)
 		association_liste_resultat_net($passifs, $actifs);
 		// liste des bilans (actifs et passifs) par comptes

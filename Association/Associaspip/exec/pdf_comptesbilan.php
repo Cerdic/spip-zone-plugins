@@ -37,9 +37,9 @@ function exec_pdf_comptesbilan()
 		while ($data = sql_fetch($query)) {
 			$classes_bilan[] = $data['classe'];
 		}
-		$lesActifs = $pdf->association_liste_totaux_comptes_classes_pdf($classes_bilan, 'cpte_bilan', +1, $pdf_>exercice, $pdf->destination);
-		$lesPassifs = $pdf->association_liste_totaux_comptes_classes_pdf($classes_bilan, 'cpte_bilan', -1, $pdf_>exercice, $pdf->destination);
-//		$pdf->leResultat($lesPassifs, $lesActifs);
+		$lesPassifs = $pdf->association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', +1, $pdf_>exercice, $pdf->destination);
+		$lesActifs = $pdf->association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', -1, $pdf_>exercice, $pdf->destination);
+		$pdf->association_liste_resultat_net($lesPassifs, $lesActifs);
 		$pdf->File('comptes_bilan');
 	}
 }

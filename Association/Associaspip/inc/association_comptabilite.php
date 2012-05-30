@@ -432,7 +432,7 @@ function association_calcul_totaux_comptes_classe($classe, $exercice=0, $destina
 }
 
 /* on affiche les totaux (recettes et depenses) d'un exercice des differents comptes de la classe specifiee */
-function association_liste_totaux_comptes_classes_html($classes, $prefixe='', $direction='-1', $exercice=0, $destination=0) {
+function association_liste_totaux_comptes_classes($classes, $prefixe='', $direction='-1', $exercice=0, $destination=0) {
     if( !is_array($classes) ) { // a priori une chaine ou un entier d'une unique classe
 	$liste_classes = array( $classes ) ; // transformer en tableau (puisqu'on va operer sur des tableaux);
     } else { // c'est un tableau de plusieurs classes
@@ -796,7 +796,7 @@ class ExportComptes_PDF extends FPDF {
     }
 
     // on affiche les totaux (recettes et depenses) d'un exercice des differents comptes de la classe specifiee
-    function association_liste_totaux_comptes_classes_pdf($classes, $prefixe='', $direction='-1', $exercice=0, $destination=0) {
+    function association_liste_totaux_comptes_classes($classes, $prefixe='', $direction='-1', $exercice=0, $destination=0) {
 	if( !is_array($classes) ) { // a priori une chaine ou un entier d'une unique classe
 	    $liste_classes = array( $classes ) ; // transformer en tableau (puisqu'on va operer sur des tableaux);
 	} else { // c'est un tableau de plusieurs classes
@@ -874,6 +874,34 @@ class ExportComptes_PDF extends FPDF {
 	$this->Rect($this->xx, $y_orig, $this->largeur_utile, $yc-$y_orig); // Rectangle tout autour
 	$this->yy = $yc; // on sauve la position du curseur dans la page
 	return $total_valeurs;
+    }
+
+    // on affiche le resultat comptable net : benefice ou deficit
+    function association_liste_resultat_net($lesRecettes, $lesDepenses) {
+	// Les coordonnees courantes
+	$xc = $this->xx+$this->space_h;
+	$y_orig = $this->yy+$this->space_v;
+	$yc = $y_orig+$this->space_v;
+	// typo
+	$this->SetFont('Arial', 'B', 14); // police : Arial gras 14px
+	$this->SetFillColor(235); // Couleur du fond : gris-92.2%
+	$this->SetTextColor(0); // Couleur du texte : noir
+	// Titre centre
+	$this->SetXY($xc, $yc);
+	$this->Cell($this->largeur_utile, 10, html_entity_decode(_T('asso:cpte_resultat_titre_resultat')), 0, 0, 'C');
+	$yc += 10;
+	$this->Ln($this->space_v); // Saut de ligne
+	$yc += $this->space_v;
+	$this->SetFillColor(215); // Couleur de fond : gris-84.3%
+	$leSolde = $lesRecettes-$lesDepenses;
+	$this->SetXY($xc, $yc);
+	$this->Cell(($this->largeur_utile)-(2*$this->space_h+30), 6, html_entity_decode(_T('asso:cpte_resultat_'.($leSolde<0?'perte':'benefice'))), 1, 0, 'R', true);
+	$this->Cell(30, 6, association_nbrefr($leSolde), 1, 0, 'R', true);
+	$yc += 6;
+	$this->Ln($this->space_v); // Saut de ligne
+	$yc += $this->space_v;
+	$this->Rect($this->xx, $y_orig, $this->largeur_utile, $yc-$y_orig); // Rectangle tout autour
+	$this->yy = $yc; // on sauve la position du curseur dans la page
     }
 
 }
