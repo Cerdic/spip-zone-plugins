@@ -32,6 +32,6 @@ Essayez la page de d&#233;mo {demo/rainette.html} pour des exemples d'utilisatio
 		<inclure>rainette_pipelines.php</inclure>
 	</pipeline>
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[1.9.0;3.0.*]" />
+	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
 	<traduire gestionnaire="salvatore" module="rainette" reference="fr" />
 </plugin>
