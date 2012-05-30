@@ -42,6 +42,7 @@ if(%%urls_id_3_chiffres%%) {\$id = sprintf('%03d', \$id);}
 if(%%urls_avec_id2%%) {@define('_CS_URL_SEP','-'); if(\$ok) \$flux['data']=\$id._CS_URL_SEP.\$flux['data'];}
 if(%%urls_avec_id%%) {@define('_CS_URL_SEP',','); if(\$ok) \$flux['data'].=_CS_URL_SEP.\$id;}
 if(%%urls_minuscules%%) {\$flux['data']=strtolower(\$flux['data']);}",
+	'pipelinecode:affiche_milieu' => "if(\$flux['args']['exec']==='configurer_urls') \$flux['data'] .= propre('['._T('couteau:configurer').'->'.generer_url_ecrire('admin_couteau_suisse', 'cmd=descrip&outil=type_urls#cs_infos').'].');",
 ));
 
 // Ajout des variables utilisees ci-dessus
