@@ -60,7 +60,7 @@
 							[(#HAUTEUR|>{#LARGEUR}|oui)
 							[(#SET{fichier,[(#FICHIER|get_spip_doc)]})]
 							[(#SET{miniature,[(#FICHIER|get_spip_doc|image_reduire{80,80}|inserer_attribut{alt,Version #VERSION}|inserer_attribut{style,'vertical-align:bottom;'})]})]]
-							<a href="#GET{fichier}" class="mediabox">#GET{miniature}</a>
+							#GET{miniature}
 						</label>
 						<input type="radio" name="version" id="version_#VERSION" value="#VERSION" />
 						</div>
