@@ -31,7 +31,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'remove_from' => 'حذف از گزينه‌هاي من',
 
 	// S
-	'ses_favoris' => 'دوستداشتني‌هاي او '
+	'ses_favoris' => 'دوستداشتني‌هاي او ',
+
+	// V
+	'vos_favoris' => 'Vos favoris' # Utile pour modifier le titre de l'inclusion NEW
 );
 
 ?>

@@ -30,9 +30,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'ses_favoris' => 'Ses favoris',
-	
+
 	// V
-	'vos_favoris' => 'Vos favoris' # Utile pour modifier le titre de l'inclusion 
+	'vos_favoris' => 'Vos favoris' # Utile pour modifier le titre de l'inclusion
 );
 
 ?>
