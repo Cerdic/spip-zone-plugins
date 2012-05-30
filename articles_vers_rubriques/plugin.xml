@@ -1,0 +1,29 @@
+<plugin>
+	<nom>Articles vers Rubriques</nom>
+	<slogan>Convertir des articles en rubriques</slogan>
+	<auteur>mmmx adapté du Didier, [JLuc->http://www.ouhpla.net]</auteur>
+	<licence>GNU/GLP</licence>
+	<description>
+	Transforme les articles d'un site en rubriques, les range dans une rubrique, fait suivre les logos et les documents, et convertit les liens raccourcis, permet d'assurer la redirection vis-&#224;-vis des moteurs de recherche.
+	</description>
+	<lien>http://www.spip-contrib.net/4164</lien>
+	<categorie>maintenance</categorie>
+	<etat>test</etat>
+	<icon>prive/themes/spip/images/logo-28.png</icon>
+	<prefix>articles_vers_rubriques</prefix>
+	<version>0.0.2</version>
+	<install>base/articles_vers_rubriques_upgrade.php</install>
+	<options>articles_vers_rubriques_options.php</options>
+	<fonctions>articles_vers_rubriques_fonctions.php</fonctions>	
+	<bouton id='articles_vers_rubriques' parent='bando_administration'> 
+        <icone>prive/themes/spip/images/logo-28.png</icone>
+        <titre>Articles vers rubriques</titre>   
+	</bouton>
+	<bouton id='articles_vers_rubriques2' parent='configuration'>
+		<icone>prive/themes/spip/images/logo-28.png</icone>
+		<url>articles_vers_rubriques</url>
+		<titre>Articles vers Rubriques</titre>
+	</bouton>
+	<necessite id="SPIP" version="[2.1.0;]" />
+</plugin>
+
