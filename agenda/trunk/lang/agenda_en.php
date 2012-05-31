@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_precedente' => 'previous year',
 	'annee_suivante' => 'next year',
 	'aucun_evenement' => 'no event',
-	'aucun_inscrit' => 'Aucun inscrit', # NEW
+	'aucun_inscrit' => 'No registered',
 	'aucune_rubrique_mode_agenda' => 'By default, all sections can use the events. If you activate the agenda mode on one or more sections, event management will be limited in its subtree.',
 
 	// B
@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'confirm_suppression_inscription' => 'Are you sure you want to delete this registration?',
-	'confirm_suppression_inscription_toutes' => 'Voulez-vous vraiment supprimer toutes les inscriptions ?', # NEW
+	'confirm_suppression_inscription_toutes' => 'Do you really want to delete all registrations?',
 	'connexion_necessaire_pour_inscription' => 'Please log in to register to this event.',
 	'creer_evenement' => 'Create an event',
 
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_date_debut' => 'Starting date',
 	'evenement_date_du' => 'From ',
 	'evenement_date_fin' => 'Ending date',
-	'evenement_date_inscription' => 'Date d\'inscription', # NEW
+	'evenement_date_inscription' => 'Registration date',
 	'evenement_descriptif' => 'Description',
 	'evenement_horaire' => 'All day',
 	'evenement_lieu' => 'Location',
@@ -79,17 +79,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_evenements' => 'Events',
 	'info_inscription' => 'Online registration:',
 	'info_lieu' => 'Place:',
-	'info_nb_inscrits' => '@nb@ inscrits', # NEW
+	'info_nb_inscrits' => '@nb@ registered',
 	'info_nb_places' => '@nb@ seats',
 	'info_nombre_evenements' => '@nb@ events',
 	'info_nouvel_evenement' => 'New event',
 	'info_reponse_inscription_non' => 'no',
 	'info_reponse_inscription_nsp' => '?',
 	'info_reponse_inscription_oui' => 'yes',
-	'info_reponse_inscriptions' => 'Réponse', # NEW
+	'info_reponse_inscriptions' => 'Answer',
 	'info_reponses_inscriptions' => 'Answers:',
 	'info_un_evenement' => 'One event',
-	'info_un_inscrit' => 'Un inscrit', # NEW
+	'info_un_inscrit' => 'One registered',
 	'inscrits' => 'Registrations',
 	'item_mots_cles_association_evenements' => 'to those events',
 
@@ -101,7 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_reponse_jyparticipe_peutetre' => 'Maybe I\'ll be there',
 	'label_vous_inscrire' => 'Your participation',
 	'lien_desinscrire' => 'Remove',
-	'lien_desinscrire_tous' => 'Supprimer toutes les inscriptions', # NEW
+	'lien_desinscrire_tous' => 'Delete all registrations',
 	'lien_retirer_evenement' => 'Deleted ',
 	'liste_inscrits' => 'Registrations',
 
@@ -121,7 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'repetition' => 'Repetition',
 	'repetition_de' => 'Repetition of',
-	'retour_evenement' => 'Retour à l\'événement', # NEW
+	'retour_evenement' => 'Back to the event',
 	'rubrique_activer_agenda' => 'Activate the agenda for this section',
 	'rubrique_dans_une_rubrique_mode_agenda' => 'This section allows you to use the events as it is in a section where agenda mode has been enabled',
 	'rubrique_desactiver_agenda' => 'Disable agenda mode for this section',
@@ -134,10 +134,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sans_titre' => '(without title)',
 
 	// T
-	'telecharger' => 'Download', # MODIF
-	'telecharger_oui' => 'Seulement les réponses positives', # NEW
-	'telecharger_toutes' => 'Toutes les réponses', # NEW
-	'telecharger_toutes_tous_evenements' => 'Toutes les réponses aux inscriptions', # NEW
+	'telecharger' => 'Download (csv)',
+	'telecharger_oui' => 'Only positive answers',
+	'telecharger_toutes' => 'All answers',
+	'telecharger_toutes_tous_evenements' => 'All answers to registrations',
 	'texte_agenda' => 'AGENDA',
 	'texte_evenement_statut' => 'This event is:',
 	'texte_logo_objet' => 'LOGO OF THE EVENT',
