@@ -4,7 +4,18 @@ Ce plugin génère d'autres plugins !
 
 
 
+Dans l'interface
+* Décocher les boutons d'un objet et ils revenaient !
+
+
+1.15.1 le 28 05 2012
+--------------------
+
 * Coquille PHP avec le changement de saisie des liaisons (Satch)
+
+Interface :
+* Ne pas mélanger objet de traduction (texte humain) et objet de table (texte machine)
+
 
 
 1.15.0 le 04 05 2012

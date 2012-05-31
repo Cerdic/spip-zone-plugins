@@ -161,9 +161,17 @@
 					list=definitions_sql, inserer_fin=#GET{datalist_aide},
 					obligatoire=oui})]
 
+				[(#REM)
+					Cette saisie possede par defaut les caracteristiques cochees
+					mais si on les decoche, et qu'on valide, pour notre cas,
+					objet/cle/champs/cle/caracteristique devient alors NULL (et non pas array())
+					et la saisie remet logiquement les valeurs par defaut.
+					Pour eviter cela, on ne met les valeurs par defaut que sur la creation du champ
+				]
+				[(#SET{defaut,[(#ENV{objets/#_objet:CLE/champs/#CLE}|non|?{#LISTE{editable,versionne},#LISTE})]})]
 				[(#SAISIE{checkbox, objets/#_objet:CLE/champs/#CLE/caracteristiques,
 					label=<:fabrique:label_caracteristiques:>,
-					defaut=#LISTE{editable,versionne},
+					defaut=#GET{defaut},
 					datas=[(#ARRAY{
 						editable,<:fabrique:label_champ_est_editable:>,
 						versionne,<:fabrique:label_champ_est_versionne:>,
@@ -414,13 +422,22 @@
 <h3><a href="#options"><:fabrique:legend_options:></a></h3>
 <div>
 	<ul>
+	[(#REM)
+		Cette saisie possede par defaut les boutons edition et outils rapide
+		mais si on les decoche, et qu'on valide, pour notre cas,
+		objet/cle/boutons devient alors NULL (et non pas array())
+		et la saisie remet logiquement les valeurs par defaut.
+		Pour eviter cela, on ne met les valeurs par defaut que sur la creation de l'objet
+	]
+	[(#SET{defaut,[(#ENV{objets/#CLE}|non|?{#LISTE{menu_edition,outils_rapides},#LISTE})]})]
 	[(#SAISIE{checkbox, objets/#CLE/boutons,
 		label=<:fabrique:label_boutons:>,
 		explication=<:fabrique:label_boutons_explication:>,
-		defaut=#LISTE{menu_edition,outils_rapides},
+		defaut=#GET{defaut},
 		datas=[(#ARRAY{
 			menu_edition,<:fabrique:bouton_menu_edition:>,
 			outils_rapides,<:fabrique:bouton_outils_rapides:>})]})]
+
 	</ul>
 </div>
 
