@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ses_favoris' => 'His favorites',
 
 	// V
-	'vos_favoris' => 'Vos favoris' # Utile pour modifier le titre de l'inclusion NEW
+	'vos_favoris' => 'Your favorites' # Utile pour modifier le titre de l'inclusion
 );
 
 ?>
