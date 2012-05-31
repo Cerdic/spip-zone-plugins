@@ -7,6 +7,10 @@ Ce plugin génère d'autres plugins !
 Dans l'interface
 * Décocher les boutons d'un objet et ils revenaient !
 
+Dans le plugin généré
+* Une table avec un espace (spip_xx_yys) nécessite la définition d'un surnom de table objet
+* À l'inverse sur ces tables avec un espace, les fonctions d'autorisations n'en n'ont pas : autoriser_xxyy_creer_dist()
+
 
 1.15.1 le 28 05 2012
 --------------------

@@ -113,7 +113,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'champ_auto_rempli' => 'Le champ sera automatiquement rempli si vous laissez vide.',
 	'champ_ajoute' => 'Un champ a été ajouté',
-	'champ_supprime' => 'Le champ a été supprime',
+	'champ_supprime' => 'Le champ a été supprimé',
 	'champ_deplace' => 'Le champ a été déplacé',
 	'chargement_effectue' => 'Chargement effectué',
 
@@ -277,6 +277,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		indiquera que SPIP peut chercher dans ce champ lors d\'une recherche sur l\'objet.
 		Laisser vide pour ne pas chercher dedans.',
 	'label_slogan' => 'Slogan',
+	'label_saisies' => 'Saisies',
+	'label_saisies_explication' => 'Créer des saisies et leurs vues',
 	'label_saisie' => 'Type de saisie',
 	'label_saisie_explication' => 'Si nécessaire (pour afficher ce champ dans le formulaire), indiquez le type de saisie (du plugin saisies) souhaité.',
 	'label_saisie_options' => 'Options de saisie',
@@ -375,6 +377,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		répertoire de plugins. Ainsi, les plugins créés seront aussitôt disponibles
 		sur l\'administration des plugins et activables.',
 	'restaurer' => 'Restaurer',
+
+	'saisies_objets' => 'Saisie <code>@saisie@</code> : sélecteur d\'objet simple pour tables peu peuplées.',
 
 	'scripts_explication' => 'Du code PHP valide peut être executé
 		à certains moment de la procédure de création du plugin. Cela vous permet de traiter des

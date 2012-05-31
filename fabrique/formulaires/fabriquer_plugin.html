@@ -56,7 +56,6 @@
 				</div>
 			</div>
 
-			[(#REM) Attention, la boucle DATA applique safehtml sur toutes les balises ! ]
 			<BOUCLE_objets(DATA){source tableau, #OBJETS}>
 				<div id="tab-objet-#CLE">
 					<div class='parties' id="partie_[(#CLE|plus{1})]">
@@ -70,7 +69,7 @@
 			<input type='submit' name='f_action[ajouter_objet]' class='submit add left' value='<:fabrique:bouton_ajouter_objet:>' />
 			<input type='submit' name='creer' class='submit' value='<:fabrique:bouton_creer:>' />
 		</p>
-		
+
 		<datalist id="licences">
 			<option label="GNU/GPL"    value="GNU/GPL"/>
 			<option label="GNU/GPL v2" value="GNU/GPL v2"/>

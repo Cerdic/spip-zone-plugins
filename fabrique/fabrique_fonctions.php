@@ -375,6 +375,36 @@ function _tableau_options_presentes($func, $tableau, $options, $type='') {
 	return $res;
 }
 
+
+/**
+ * Retourne une ecriture de criteres
+ * {id_parent?}{id_documentation?}
+ * avec tous les champs id_x declares dans l'interface
+ * dans la liste des champs.
+ * 
+ * Cela ne concerne pas les champs speciaux (id_rubrique, id_secteur, id_trad)
+ * qui ne seront pas inclus. 
+ *
+ * @param array $objet
+ * 		Description de l'objet
+ * @return string
+ * 		L'écriture des criteres de boucle
+**/
+function criteres_champs_id($objet) {
+	$ids = array();
+	if (is_array($objet['champs'])) {
+		foreach ($objet['champs'] as $info) {
+			if (substr($info['champ'], 0, 3) == 'id_') {
+				$ids[] = $info['champ'];
+			}
+		}
+	}
+	if (!$ids) {
+		return "";
+	}
+	return "{" . implode("?}{", $ids) . "?}";
+}
+
 /**
  * Retourne un tableau de toutes les tables SQL
  * pour tous les objets.
@@ -719,4 +749,19 @@ function fabrique_code_autorisation_defaut($autorisations, $autorisation) {
 	// retourner le code PHP correspondant
 	return fabrique_code_autorisation($type);
 }
+
+/**
+ * Retourne le type pour le nom d'une fonction d'autorisation 
+ * 'article' => 'article'
+ * 'truc_muche' => 'trucmuche'
+ * 
+ * @param string $type
+ * 		Type ou objet
+ * @return string
+ * 		Type pour le nom d'autorisation
+**/
+function fabrique_type_autorisation($type) {
+	return str_replace('_', '', $type);
+}
+
 ?>

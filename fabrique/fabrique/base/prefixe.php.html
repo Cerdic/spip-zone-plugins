@@ -20,8 +20,8 @@ function [(#PREFIXE)]_declarer_tables_objets_sql($tables) {
 <BOUCLE_objets_editoriaux(DATA) {source tableau, #OBJETS}>
 	$tables['#TABLE'] = array(
 		'type' => '#TYPE',
-		'principale' => "oui",[(#SURNOMS|oui)
-		'table_objet_surnoms' => array('#TYPE'), // table_objet('#TYPE') => '#LOBJET' ]
+		'principale' => "oui",[(#OBJETS_SURNOMS|oui)
+		'table_objet_surnoms' => [(#OBJETS_SURNOMS|ecrire_tableau)], // table_objet('#TYPE') => '#LOBJET' ]
 		'field'=> array(
 			[(#VAL{["(#ID_OBJET)"]}   |espacer)] => "#CLE_PRIMAIRE_SQL",[
 			[(#VAL{'"id_rubrique"'}   |espacer)] => "bigint(21) NOT NULL DEFAULT 0",(#VALEUR|champ_present{id_rubrique})][

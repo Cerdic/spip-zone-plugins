@@ -359,7 +359,7 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 			}
 
 		}
-		
+
 		unset($data['objet'],  $data['id_objet'], $data['type'],  $data['table']);
 		unset($data['mobjet'], $data['lobjet'],   $data['mtype'], $data['mid_objet']);
 
@@ -560,15 +560,27 @@ function fabrique_completer_contexte($data) {
 	foreach( $data['objets'] as $c => $o ) {
 		// quelques raccourcis
 		if ($o['table']) {
+			$data['objets'][$c]['objets_surnoms'] = array();
+
 			// si la table est different de spip_xxs
-			// on met leve un drapeau au passage indiquant qu'il faudra creer
-			// les surnoms car ce n'est pas un nommage standard.
+			// ou si elle possede des espaces spip_xx_yys
+			// on indique qu'il faudra creer
+			// des surnoms car ce n'est pas un nommage standard.
 			// on s'appuie sur la table pour calculer l'objet (pluriel en general)
+			$preparation_objet = preg_replace(',^spip_|^id_|s$,', '', $o['table']);
+			// table avec espace
+			if (false !== strpos($preparation_objet, '_')) {
+				// on prend en surnom d'objet le type sans son espace
+				$data['objets'][$c]['objets_surnoms'][] = str_replace('_', '', $preparation_objet); // xxyy = xx_yy
+			}
+			// table non standard sans s
 			if (rtrim($o['table'], 's') == $o['table']) {
 				// la table n'est pas standard.
-				$data['objets'][$c]['surnoms'] = true;
-				$data['les_objets'][] = $data['objets'][$c]['objet'] = preg_replace(',^spip_|^id_|s$,', '', $o['table']);
-			} else {
+				$data['objets'][$c]['objets_surnoms'][] = $o['table_type']; // xx
+				$data['les_objets'][] = $data['objets'][$c]['objet'] = $preparation_objet;
+			}
+			// table standard avec s
+			else {
 				$data['les_objets'][] = $data['objets'][$c]['objet'] = table_objet($o['table']);
 			}
 			$data['les_types'][]     = $data['objets'][$c]['type']     = $o['table_type'];
