@@ -71,6 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_objet_gis' => '1 object linked to that point',
 	'info_aucun_gis' => 'No location-based point',
 	'info_aucun_objet_gis' => 'No object linked to that point',
+	'info_geolocalisation' => 'Géolocalisation', # NEW
 	'info_id_objet' => 'N°',
 	'info_liste_gis' => 'Location-based points',
 	'info_nb_gis' => '@nb@ location-based points',

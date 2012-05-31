@@ -71,6 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_objet_gis' => '1 objet lié à ce point', # NEW
 	'info_aucun_gis' => 'Aucun point géolocalisé', # NEW
 	'info_aucun_objet_gis' => 'Aucun objet lié à ce point', # NEW
+	'info_geolocalisation' => 'Géolocalisation', # NEW
 	'info_id_objet' => 'N°', # MODIF
 	'info_liste_gis' => 'Puntos geolocalizados',
 	'info_nb_gis' => '@nb@ points géolocalisés', # NEW

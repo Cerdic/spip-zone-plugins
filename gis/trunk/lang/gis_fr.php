@@ -64,12 +64,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'gis_singulier' => 'Point géolocalisé',
 
 	// I
-	'info_geolocalisation' => 'Géolocalisation',
 	'icone_gis_tous' => 'Points géolocalisés',
 	'info_1_gis' => 'Un point géolocalisé',
 	'info_1_objet_gis' => '1 objet lié à ce point',
 	'info_aucun_gis' => 'Aucun point géolocalisé',
 	'info_aucun_objet_gis' => 'Aucun objet lié à ce point',
+	'info_geolocalisation' => 'Géolocalisation',
 	'info_id_objet' => 'N°',
 	'info_liste_gis' => 'Points géolocalisés',
 	'info_nb_gis' => '@nb@ points géolocalisés',
