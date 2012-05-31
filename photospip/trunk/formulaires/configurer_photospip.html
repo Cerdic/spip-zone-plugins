@@ -21,6 +21,18 @@
 					<li class="editer editer_filtres">
 						<label><:photospip:label_choisir_filtres:></label>
 						<div class="choix">
+							<input type="checkbox" name="image_reduire" id="image_reduire"[(#ENV{image_reduire}|=={on}|oui) checked="checked"] />
+							<label for="image_recadre"><:photospip:label_image_reduire:></label>
+						</div>
+						<div class="choix">
+							<input type="checkbox" name="image_passe_partout" id="image_passe_partout"[(#ENV{image_passe_partout}|=={on}|oui) checked="checked"] />
+							<label for="image_passe_partout"><:photospip:label_image_passe_partout:></label>
+						</div>
+						<div class="choix">
+							<input type="checkbox" name="image_recadre" id="image_recadre"[(#ENV{image_recadre}|=={on}|oui) checked="checked"] />
+							<label for="image_recadre"><:photospip:label_image_recadre:></label>
+						</div>
+						<div class="choix">
 							<input type="checkbox" name="tourner" id="tourner"[(#ENV{tourner}|=={on}|oui) checked="checked"] />
 							<label for="tourner"><:photospip:label_tourner:></label>
 						</div>
@@ -36,22 +48,11 @@
 							<input type="checkbox" name="image_flip_horizontal" id="image_flip_horizontal"[(#ENV{image_flip_horizontal}|=={on}|oui) checked="checked"] />
 							<label for="image_flip_horizontal"><:photospip:label_image_flip_horizontal:></label>
 						</div>
-						<div class="choix">
-							<input type="checkbox" name="image_reduire" id="image_reduire"[(#ENV{image_reduire}|=={on}|oui) checked="checked"] />
-							<label for="image_recadre"><:photospip:label_image_reduire:></label>
-						</div>
-						<div class="choix">
-							<input type="checkbox" name="image_passe_partout" id="image_passe_partout"[(#ENV{image_passe_partout}|=={on}|oui) checked="checked"] />
-							<label for="image_passe_partout"><:photospip:label_image_passe_partout:></label>
-						</div>
-						<div class="choix">
-							<input type="checkbox" name="image_recadre" id="image_recadre"[(#ENV{image_recadre}|=={on}|oui) checked="checked"] />
-							<label for="image_recadre"><:photospip:label_image_recadre:></label>
-						</div>
+						[(#REM)
 						<div class="choix">
 							<input type="checkbox" name="image_aplatir" id="image_aplatir"[(#ENV{image_aplatir}|=={on}|oui) checked="checked"] />
 							<label for="image_aplatir"><:photospip:label_image_aplatir:></label>
-						</div>
+						</div>]
 						<div class="choix">
 							<input type="checkbox" name="image_sepia" id="image_sepia"[(#ENV{image_sepia}|=={on}|oui) checked="checked"] />
 							<label for="image_sepia"><:photospip:label_image_sepia:></label>
@@ -69,14 +70,16 @@
 							<label for="image_flou"><:photospip:label_image_flou:></label>
 						</div>
 						[(#PLUGIN{Fonctions_images}|oui)
+						[(#REM)
 						<div class="choix">
 							<input type="checkbox" name="image_sincity" id="image_sincity"[(#ENV{image_sincity}|=={on}|oui) checked="checked"] />
 							<label for="image_sincity"><:photospip:label_image_sincity:></label>
-						</div>
+						</div>]
+						[(#REM)
 						<div class="choix">
 							<input type="checkbox" name="image_saturer" id="image_saturer"[(#ENV{image_saturer}|=={on}|oui) checked="checked"] />
 							<label for="image_saturer"><:photospip:label_image_saturation_desaturation:></label>
-						</div>
+						</div>]
 						<div class="choix">
 							<input type="checkbox" name="image_niveau_de_gris_auto" id="image_niveau_de_gris_auto"[(#ENV{image_niveau_de_gris_auto}|=={on}|oui) checked="checked"] />
 							<label for="image_niveau_de_gris_auto"><:photospip:label_image_niveau_de_gris_auto:></label>

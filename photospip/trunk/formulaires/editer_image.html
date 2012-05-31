@@ -195,81 +195,77 @@
 				}
 			]
 			var activatesliders = function(){
-				var slider_image_rotation = jQuery('#sliderrotation').slider({
-					min: -180,
-					max: 180,
-					value: [(#ENV{params_image_rotation}|intval|sinon{45})],
-					slide: function( event, ui ) {
-						jQuery(this).parent().find('input').val(ui.value.toFixed(0));
+				if(typeof($.fn.slider) == 'function'){
+					if(jQuery('#sliderrotation').size() > 0){
+						var slider_image_rotation = jQuery('#sliderrotation').slider({
+							min: -180,
+							max: 180,
+							value: [(#ENV{params_image_rotation}|intval|sinon{45})],
+							slide: function( event, ui ) {
+								jQuery(this).parent().find('input').val(ui.value.toFixed(0));
+							}
+						});
+						$("#param_image_rotation").change(function() {
+							var val = parseInt($(this).val());
+							slider_image_rotation.slider("value", val);
+						});
 					}
-				});
-				$("#param_image_rotation").change(function() {
-					var val = parseInt($(this).val());
-					slider_image_rotation.slider("value", val);
-				});
-				var slider_image_gamma = jQuery('#slidergamma').slider({
-					min: -254,
-					max: 254,
-					value: [(#ENV{params_image_gamma}|sinon{10}|intval)],
-					slide: function(event, ui) {
-						jQuery(this).parent().find('input').val(ui.value.toFixed(0));
+					if(jQuery('#slidergamma').size() > 0){
+						var slider_image_gamma = jQuery('#slidergamma').slider({
+							min: -254,
+							max: 254,
+							value: [(#ENV{params_image_gamma}|sinon{10}|intval)],
+							slide: function(event, ui) {
+								jQuery(this).parent().find('input').val(ui.value.toFixed(0));
+							}
+						});
+						$("#param_image_gamma").change(function() {
+							var val = parseInt($(this).val());
+							slider_image_gamma.slider("value", val);
+						});
 					}
-				});
-				$("#param_image_gamma").change(function() {
-					var val = parseInt($(this).val());
-					slider_image_gamma.slider("value", val);
-				});
-				
-				var slider_image_flou = jQuery('#sliderflou').slider({
-					min: 1,
-					max: 11,
-					value: [(#ENV{param_image_flou}|sinon{3}|intval)],
-					slide: function(event, ui) {
-						jQuery(this).parent().find('input').val(ui.value.toFixed(0));
+					if(jQuery('#sliderflou').size() > 0){
+						var slider_image_flou = jQuery('#sliderflou').slider({
+							min: 1,
+							max: 11,
+							value: [(#ENV{param_image_flou}|sinon{3}|intval)],
+							slide: function(event, ui) {
+								jQuery(this).parent().find('input').val(ui.value.toFixed(0));
+							}
+						});
+						$("#param_image_flou").change(function() {
+							var val = parseInt($(this).val());
+							slider_image_flou.slider("value", val);
+						});
 					}
-				});
-				$("#param_image_flou").change(function() {
-					var val = parseInt($(this).val());
-					slider_image_flou.slider("value", val);
-				});
-				
-				var slider_image_reduire_width = jQuery('#slider_image_reduire_width').slider({
-					min: 10,
-					max: #LARGEUR,
-					value: [(#ENV{reduire_width}|sinon{#LARGEUR}|intval)],
-					slide: function(event, ui) {
-						jQuery(this).parent().find('input').val(ui.value.toFixed(0));
-						var height = (ui.value.toFixed(0)/ratio_image).toFixed(0);
-						slider_image_reduire_height.slider("value", height);
-						$('#reduire_height').val(height);
+					if(jQuery('#slider_image_reduire').size() > 0){
+						/**
+						 * On utilise qu'un slider pour les deux valeurs 
+						 * car on fait dans le proportionnel ici
+						 */
+						var slider_image_reduire = jQuery('#slider_image_reduire').slider({
+							min: 5,
+							max: 100,
+							value: [(#ENV{reduire_width,#LARGEUR}|div{#LARGEUR}|mult{100}|intval)],
+							slide: function(event, ui) {
+								jQuery(this).parent().find('input#reduire_width').val(((ui.value.toFixed(0)*#LARGEUR)/100).toFixed(0));
+								jQuery(this).parent().find('input#reduire_height').val(((ui.value.toFixed(0)*#HAUTEUR)/100).toFixed(0));
+							}
+						});
+						$("#reduire_width").change(function() {
+							var val = (parseInt($(this).val())/parseInt(#LARGEUR))*100;
+							slider_image_reduire.slider("value", val);
+							var height = ((parseInt(#HAUTEUR)*val)/100).toFixed(0);
+							$("#reduire_height").val(height);
+						});
+						$("#reduire_height").change(function() {
+							var val = (parseInt($(this).val())/parseInt(#HAUTEUR))*100;
+							slider_image_reduire.slider("value", val);
+							var height = ((parseInt(#LARGEUR)*val)/100).toFixed(0);
+							$("#reduire_width").val(height);
+						});
 					}
-				});
-				$("#reduire_width").change(function() {
-					var val = parseInt($(this).val());
-					slider_image_reduire_width.slider("value", val);
-					var height = (val/ratio_image).toFixed(0);
-					slider_image_reduire_height.slider("value", height);
-					$("#reduire_height").val(height);
-				});
-				
-				var slider_image_reduire_height = jQuery('#slider_image_reduire_height').slider({
-					min: 10,
-					max: #HAUTEUR,
-					value: [(#ENV{reduire_height}|sinon{#HAUTEUR}|intval)],
-					slide: function(event, ui) {
-						jQuery(this).parent().find('input').val(ui.value.toFixed(0));
-						var width = (ui.value.toFixed(0)*ratio_image).toFixed(0);
-						slider_image_reduire_width.slider("value", width);
-						$('#reduire_width').val(width);
-					}
-				});
-				$("#reduire_height").change(function() {
-					var val = parseInt($(this).val());
-					slider_image_reduire_height.slider("value", val);
-					var width = (val*ratio_image).toFixed(0);
-					slider_image_reduire_width.slider("value", width);
-					$('#reduire_width').val(width);
-				});
+				}
 			}
 			if(typeof(jQuery) == 'function'){
 				jQuery(document).ready(function() {

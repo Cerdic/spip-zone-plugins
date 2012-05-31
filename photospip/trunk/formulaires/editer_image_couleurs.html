@@ -63,6 +63,7 @@
 	</div>
 </li>]
 [(#GET{fonctions_images}|=={on}|oui)
+[(#REM)
 [(#CONFIG{photospip/image_sincity}|=={on}|oui)
 <li class="editer editer_sincity[ (#ENV**{erreurs}|table_valeur{image_sincity}|oui)erreur]">
 	<input type="radio" name="filtre" id="filtre_sincity" value="image_sincity"[(#ENV{filtre}|=={image_sincity}|oui)checked="checked"] />
@@ -71,7 +72,8 @@
 		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_sincity})</span>]
 		<p class="explication"><:photospip:explication_image_sincity:></p>
 	</div>
-</li>]
+</li>]]
+[(#REM)
 [(#CONFIG{photospip/image_contour_alpha}|=={on}|oui)
 <li class="editer editer_contour_alpha[ (#ENV**{erreurs}|table_valeur{image_contour_alpha}|oui)erreur]">
 	<input type="radio" name="filtre" id="filtre_contour_alpha" value="image_contour_alpha"[(#ENV{filtre}|=={image_contour_alpha}|oui)checked="checked"] />
@@ -80,7 +82,8 @@
 		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_contour_alpha})</span>]
 		<p class="explication"><:photospip:explication_image_contour_alpha:></p>
 	</div>
-</li>]
+</li>]]
+[(#REM)
 [(#CONFIG{photospip/image_saturer}|=={on}|oui)
 <li class="editer editer_saturer[ (#ENV**{erreurs}|table_valeur{image_saturer}|oui)erreur]">
 	<input type="radio" name="filtre" id="filtre_saturer" value="image_saturer"[(#ENV{filtre}|=={image_saturer}|oui)checked="checked"] />
@@ -96,4 +99,4 @@
 			</li>
 		</ul>
 	</div>
-</li>]]
+</li>]]]

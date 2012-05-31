@@ -9,20 +9,17 @@
 			<:photospip:explication_image_reduire:><br />
 			<:photospip:message_image_taille_actuelle{largeur=#LARGEUR,hauteur=#HAUTEUR}:>
 		</p>
+		<div id='slider_image_reduire'>
+			<div></div>	
+		</div>
 		<ul>
 			<li>
 				<label for="reduire_width"><:photospip:label_reduire_width:></label>
 				<input type="number" max="#LARGEUR" min="10" class="text nombre" id="reduire_width" maxlength="5" style="width:7em" name="reduire_width" value="#ENV{reduire_width,#LARGEUR}" />
-				<div id='slider_image_reduire_width'>
-					<div></div>	
-				</div>
 			</li>
 			<li>
 				<label for="reduire_height"><:photospip:label_reduire_height:></label>
 				<input type="number" max="#HAUTEUR" min="10" class="text nombre" id="reduire_height" maxlength="5" style="width:7em" name="reduire_height" value="#ENV{reduire_height,#HAUTEUR}" />
-				<div id='slider_image_reduire_height'>
-					<div></div>	
-				</div>
 			</li>
 		</ul>
 	</div>
