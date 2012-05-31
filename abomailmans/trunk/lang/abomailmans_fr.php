@@ -49,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoyer_courier_liste' => 'Envoyer ce courrier à cette liste de diffusion :',
 	'envoyer_mailmans' => 'Sélectionner le modèle et son contenu',
 	'erreur_email_liste_oublie' => 'L\'adresse email de la liste est obligatoire',
+	'erreur_nobot' => 'Votre inscription n\' a pu être effectué à cause d\'un problème technique',  
 	'explication_email_subscribe' => 'Email d\'abonnement, de style <code>suffixe+subscribe@exemple.org</code>',
 	'explication_email_sympa' => 'Si ce champ est renseigné, la liste est considérée comme une liste de serveur "Sympa", dans le cas contraire comme une liste "Mailman" ou "ezmlm".',
 	'explication_email_unsubscribe' => 'Email de désabonnement',

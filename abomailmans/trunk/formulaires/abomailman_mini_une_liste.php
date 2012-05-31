@@ -1,15 +1,5 @@
 <?php
 
-/***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
- *                                                                         *
- *  Copyright (c) 2001-2008                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
-\***************************************************************************/
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('base/abstract_sql');
@@ -62,14 +52,21 @@ function formulaires_abomailman_mini_une_liste_verifier_dist($id_abomailman = ""
 
 function formulaires_abomailman_mini_une_liste_traiter_dist($id_abomailman = ""){
 	include_spip('inc/abomailmans');
-   $nom = _request('nom');
+	
+	$nom = _request('nom');
 	$email = _request('email');
 
+	// Antispam basique :
+	// si l'input invisible a ete renseigne, ca ne peut etre qu'un bot
+	if (strlen(_request('nobot'))){
+		return array('message_erreur'=>_T('abomailmans:erreur_nobot'));
+	}
+	
 	$message = null;
 
    // on initialise l'envoi
 	// on traite chaque liste via une fonction reutilisable ailleurs
-	// on passe abonnement ˆ true d'office
+	// on passe abonnement a true d'office
 	$traiter=abomailman_traiter_abonnement($id_abomailman,true);
 	$titre = $traiter[0];
 	$proprio_email=$traiter[1];

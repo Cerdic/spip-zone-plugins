@@ -1,4 +1,4 @@
-<div class="formulaire_spip ajax" id="formulaire_abomailman">
+<div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM">
 	[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
@@ -55,6 +55,11 @@
 					</li>
 						
 				</ul>
+				[(#REM) Piege a robots spammeurs, du moins on essaie]
+				<p style="display:none;">
+					<label for="nobot_abomailman"><:antispam_champ_vide:></label>
+					<input type="text" class="text" name="nobot" id="nobot_abomailman" value="#ENV{nobot}" size="10" />
+				</p>
 				<p class="boutons">
                 	<input name="abonnement" type="submit" value="<:abomailmans:btn_abonnement:>" class="submit" />
 					<input name="desabonnement" type="submit" value="<:abomailmans:btn_desabonnement:>" class="submit" />

@@ -26,7 +26,7 @@ function formulaires_abomailman_charger_dist($id_abomailman = ""){
 		// on verifie s'il existe des listes disponibles
 		$ok=sql_count(sql_select('id_abomailman','spip_abomailmans'));
 	}
-
+	$valeurs['nobot'] = _request('nobot');
 	if ($ok)
 	return $valeurs;
 }
@@ -77,6 +77,11 @@ function formulaires_abomailman_traiter_dist($id_abomailman = ""){
 	// Pour l'envoi de l'email
 	include_spip('inc/abomailmans');
 
+	// Antispam basique :
+	// si l'input invisible a ete renseigne, ca ne peut etre qu'un bot
+	if (strlen(_request('nobot'))){
+		return array('message_erreur'=>_T('abomailmans:erreur_nobot'));
+	}
 
 	$nom = _request('nom');
 	$email = _request('email');
