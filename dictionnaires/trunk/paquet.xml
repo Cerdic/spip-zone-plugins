@@ -3,7 +3,7 @@
 	categorie="divers"
 	version="0.3.0"
 	etat="dev"
-	compatibilite="[2.1.12;["
+	compatibilite="[2.1.12;3.0.*]"
 	logo="prive/themes/spip/images/dictionnaire-32.png"
 	schema="0.3.0"
 >	

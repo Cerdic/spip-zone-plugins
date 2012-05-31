@@ -40,7 +40,6 @@ function dictionnaires_post_edition($flux){
 function dictionnaires_post_propre($texte){
 	$GLOBALS['dictionnaires_id_texte'] = uniqid();
 	include_spip('inc/dictionnaires');
-	include_spip('inc/texte');
 	$definitions = dictionnaires_lister_definitions();
 	$masques = array();
 	foreach ($definitions as $definition){
