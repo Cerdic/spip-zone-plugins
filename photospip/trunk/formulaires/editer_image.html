@@ -139,11 +139,10 @@
 	  </p>
 	 <script type="text/javascript"><!--
 	 		var ratio, ratio_image,largeur,hauteur;
-	 		ratio = parseFloat([(#GET{ratio})]);
 			ratio_image = parseFloat([(#GET{ratio_image})]);
-			largeur = #GET{largeur_image};
-			hauteur = #GET{hauteur_image};
-			
+			largeur = parseFloat(#GET{largeur_image});
+			hauteur = parseFloat(#GET{hauteur_image});
+			ratio = largeur/parseFloat($('#image-container img').width());
 			[(#CONFIG{photospip/image_recadre,on}|=={on}|oui)
 				var x1, y1, x2, y2, w, h, ias;
 				function image_crop_selectchange(img, selection){
@@ -277,11 +276,12 @@
 					/**
 					 * Cas où l'on se trouve dans une mediabox
 					 */
-					if($('#cboxLoadedContent').size() > 0){
+					if($('#cboxLoadedContent').is(':visible')){
 						$(document).bind('cbox_complete', function(){
 							$('input[type=number]').spinner();
 					   		if($('#modifier_image img').width() > $('#modifier_image').width()){
 								$('#image-container img').attr('width','').attr('height','').width('100%').height('auto');
+								ratio = largeur/parseFloat($('#image-container img').width());
 							}
 							jQuery('.cache').hide();
 							var boxoffset = $('#cboxLoadedContent').offset();
@@ -316,6 +316,10 @@
 							}
 						}
 					}else{
+						if($('#modifier_image img').width() > $('#modifier_image').width()){
+							$('#image-container img').attr('width','').attr('height','').width('100%').height('auto');
+							ratio = largeur/parseFloat($('#image-container img').width());
+						}
 						$('input[type=number]').spinner();
 						jQuery('.cache').hide();
 					}
@@ -346,85 +350,141 @@
 							}
 						}
 				  	});
-					[(#CONFIG{photospip/image_recadre,on}|oui)
-					x1 = jQuery('#recadre_x1');
-					x1.change(function(){
-						jQuery('#image_modifier img').imgAreaSelect({
-							x1:#ENV{recadre_x1,20},
-							y1:#ENV{recadre_y1,20},
-							x2:#ENV{recadre_x2,70},
-							y2:#ENV{recadre_y2,70},
-							width:#ENV{recadre_width,50},
-							height:#ENV{recadre_height,50},
-							onSelectChange: image_crop_selectchange,show:true
-						});
-					});
-					y1 = jQuery('#recadre_y1');
-					x2 = jQuery('#recadre_x2');
-					y2 = jQuery('#recadre_y2');
-					w = jQuery('#recadre_width');
-					h = jQuery('#recadre_height');
-					if(jQuery('#image_recadre').is(':checked')){
-						image_crop();
-					}]
-					jQuery('#recadre_x1,#recadre_y1,#recadre_x2,#recadre_y2,#recadre_width,#recadre_height').change(function(){
-						if(typeof(ias) == 'object'){
-							var ias_selection = ias.getSelection();
-							if($(this).is('#recadre_width')){
-								if($(this).val() <= largeur){
-									var width_ratio = (parseInt($(this).val()/ratio));
-									ias_selection.x2 = parseInt(ias_selection.x1)+width_ratio;
-									if(ias_selection.x2 > (parseInt(largeur/ratio))){
-										ias_selection.x1 = parseInt((parseInt(largeur)/ratio) - parseInt(width_ratio));
-										ias_selection.x2 = parseInt(parseInt(ias_selection.x1)+parseInt(width_ratio));
+				  	<BOUCLE_si_image_reduire(CONDITION){si #CONFIG{photospip/image_recadre,on}|oui}>
+						x1 = jQuery('#recadre_x1');
+						y1 = jQuery('#recadre_y1');
+						x2 = jQuery('#recadre_x2');
+						y2 = jQuery('#recadre_y2');
+						w = jQuery('#recadre_width');
+						h = jQuery('#recadre_height');
+						
+						if(jQuery('#image_recadre').is(':checked')){
+							image_crop();
+						}
+						
+						jQuery('#recadre_x1,#recadre_y1,#recadre_width,#recadre_height').change(function(){
+							//,#recadre_x2,#recadre_y2
+							if(typeof(ias) == 'object'){
+								var ias_selection = ias.getSelection();
+								if($(this).is('#recadre_width')){
+									if($(this).val() < largeur){
+										var width_ratio = parseInt(parseInt($(this).val())/ratio);
+										ias_selection.x2 = parseInt(ias_selection.x1)+width_ratio;
+										if(parseInt($('#recadre_x2').val()) >= parseInt(largeur)){
+											/**
+											 * Là on doit déplacer x2 à fond et x1 un petit peu 
+											 * sinon x2 se retrouverait hors zone
+											 */
+											$('#recadre_x2').val(largeur);
+											ias_selection.x2 = parseInt(largeur/ratio);
+											$('#recadre_x1').val(largeur-parseInt($(this).val()));
+											ias_selection.x1 = (parseInt(largeur)-parseInt($(this).val()))/ratio;
+										}else{
+											/**
+											 * Là on doit déplacer seulement x2
+											 */
+											var width = (parseInt($('#recadre_x1').val())+parseInt($(this).val()));
+											$('#recadre_x2').val(width);
+										}
+									}else{
+										/**
+										 * On occuper toute la largeur
+										 */
+										$(this).val(largeur);
+										ias_selection.x1 = 0;
+										$('#recadre_x1').val(0);
+										ias_selection.x2 = parseInt(largeur/ratio);
+										$('#recadre_x2').val(largeur);
 									}
 								}
+								else if($(this).is('#recadre_height')){
+									if($(this).val() < hauteur){
+										var height_ratio = parseInt(parseInt($(this).val())/ratio);
+										ias_selection.y2 = parseInt(ias_selection.y1)+height_ratio;
+										if(parseInt($('#recadre_y2').val()) >= parseInt(hauteur)){
+											/**
+											 * Là on doit déplacer y2 à fond et y1 un petit peu 
+											 * sinon y2 se retrouverait hors zone
+											 */
+											$('#recadre_y2').val(hauteur);
+											ias_selection.y2 = parseInt(hauteur/ratio);
+											$('#recadre_y1').val(hauteur-parseInt($(this).val()));
+											ias_selection.y1 = (parseInt(hauteur)-parseInt($(this).val()))/ratio;
+										}else{
+											/**
+											 * Là on doit déplacer seulement y2
+											 */
+											var height = (parseInt($('#recadre_y1').val())+parseInt($(this).val()));
+											$('#recadre_y2').val(height);
+										}
+									}else{
+										/**
+										 * On occuper toute la hauteur
+										 */
+										$(this).val(hauteur);
+										ias_selection.y1 = 0;
+										$('#recadre_y1').val(0);
+										ias_selection.y2 = parseInt(hauteur/ratio);
+										$('#recadre_y2').val(hauteur);
+									}
+								}
+								else{
+									var largeur_image = parseFloat($('#image-container img').width());
+									var width = parseInt($('#recadre_width').val());
+									var height = parseInt($('#recadre_height').val());
+									if($(this).is('#recadre_x1')){
+										var width_left = parseInt($(this).val()) + parseInt(width);
+										if(width_left >= largeur){
+											$('#recadre_x2').val(largeur);
+											ias_selection.x2 = parseInt(largeur)/ratio;
+											$('#recadre_x1').val(largeur-width);
+											ias_selection.x1 = parseInt(ias_selection.x2)-parseInt(width/ratio);
+										}else{
+											var x1_ratio = (parseInt($(this).val())/ratio);
+											ias_selection.x1 = x1_ratio;
+											ias_selection.x2 = parseInt(x1_ratio)+parseInt(width/ratio);
+											$('#recadre_x2').val(parseInt($(this).val())+width);
+										}
+									}
+									else if($(this).is('#recadre_y1')){
+										var height_top = parseInt($(this).val()) + parseInt(height);
+										if(height_top >= hauteur){
+											$('#recadre_y2').val(hauteur);
+											ias_selection.y2 = parseInt(hauteur)/ratio;
+											$('#recadre_y1').val(hauteur-width);
+											ias_selection.y1 = parseInt(ias_selection.y2)-parseInt(height/ratio);
+										}else{
+											var y1_ratio = (parseInt($(this).val())/ratio);
+											ias_selection.y1 = y1_ratio;
+											ias_selection.y2 = y1_ratio+parseInt(height/ratio);
+											$('#recadre_y2').val(parseInt($(this).val())+height);
+										}
+									}
+									else if($(this).is('#recadre_x2')){
+										var x2_ratio = (parseFloat($(this).val())/ratio).toFixed(0);
+										ias_selection.x2 = parseInt(x2_ratio);
+									}
+									else if($(this).is('#recadre_y2')){
+										var y2_ratio = (parseFloat($(this).val())/ratio).toFixed(0);
+										ias_selection.y2 = parseInt(y2_ratio);
+									}
+								}
+								/**
+								 * On met à jour la sélection visuelle
+								 */
+								ias.setSelection(ias_selection.x1,ias_selection.y1,ias_selection.x2,ias_selection.y2);
+								ias.update();
 							}
-							else if($(this).is('#recadre_height')){
-								if($(this).val() <= hauteur){
-									var height_ratio = parseInt($(this).val()/ratio);
-									ias_selection.y2 = parseInt(ias_selection.y1)+height_ratio;
-									if(ias_selection.y2 > (parseInt(hauteur/ratio))){
-										ias_selection.y1 = parseInt((parseInt(hauteur)/ratio) - parseInt(height_ratio));
-										ias_selection.y2 = parseInt(parseInt(ias_selection.y1)+parseInt(height_ratio));
-									}
-								}
+						});
+						jQuery('.image_recadre input[type=radio]').click(function(){
+							if (jQuery(this).val() != ''){
+								jQuery('#image_modifier img').imgAreaSelect({aspectRatio: jQuery(this).val()});
 							}
 							else{
-								var width = parseFloat(ias_selection.x2)-parseFloat(ias_selection.x1);
-								var height = parseFloat(ias_selection.y2)-parseFloat(ias_selection.y1);
-								if($(this).is('#recadre_x1')){
-									var x1_ratio = (parseFloat($(this).val())/ratio).toFixed(0);
-									ias_selection.x1 = parseInt(x1_ratio);
-									ias_selection.x2 = parseInt(x1_ratio)+parseInt(width);
-								}
-								else if($(this).is('#recadre_y1')){
-									var y1_ratio = (parseFloat($(this).val())/ratio).toFixed(0);
-									ias_selection.y1 = parseInt(y1_ratio);
-								}
-								else if($(this).is('#recadre_x2')){
-									var x2_ratio = (parseFloat($(this).val())/ratio).toFixed(0);
-									ias_selection.x2 = parseInt(x2_ratio);
-								}
-								else if($(this).is('#recadre_y2')){
-									var y2_ratio = (parseFloat($(this).val())/ratio).toFixed(0);
-									ias_selection.y2 = parseInt(y2_ratio);
-								}
+								jQuery('#image_modifier img').imgAreaSelect({aspectRatio: ''});
 							}
-							ias.setSelection(ias_selection.x1,ias_selection.y1,ias_selection.x2,ias_selection.y2);
-							ias.update();
-							var new_selection = ias.getSelection();
-							image_crop_selectchange($('image_modifier img'), new_selection);
-						}
-					});
-					jQuery('.image_recadre input[type=radio]').click(function(){
-						if (jQuery(this).val() != ''){
-							jQuery('#image_modifier img').imgAreaSelect({aspectRatio: jQuery(this).val()});
-						}
-						else{
-							jQuery('#image_modifier img').imgAreaSelect({aspectRatio: ''});
-						}
-					});
+						});
+					</BOUCLE_si_image_reduire>
 				});
 			}
 	// --></script>
