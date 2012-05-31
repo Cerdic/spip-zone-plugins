@@ -48,7 +48,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_prives_thread' => '<strong>خط گفتگو</strong> : شركت كنندگان در همان خط گفتگو اطلايه‌هاي سخنگاه‌ها را دريافت خواهند كرد (خصوصي)',
 	'forums_prives' => 'سخنگاه‌هاي خصوصي',
 	'forums_public' => 'سخنگاه‌هاي همگاني',
-	'forums_public_a_noter' => 'À noter : dans le cas des forums modérés à priori, seuls les auteurs ayant le droit de valider les forums sont notifiés lors de l\'envoi du forum ; les autres destinataires sont notifiés lors de la validation du message par le modérateur.', # NEW
+	'forums_public_a_noter' => 'توجه: اگر سخنگاه‌ها در انتظار تأييد گرداننده‌ها پيش از نشر باشند، فقط نويسندگان با حق تأييد سخنگاه‌ها هنگامي كه نظري پست شود اطلاعيه‌ دريافت مي‌كنند، ساير دريافت كنندگان فقط هنگامي اطلاعيه را دريافت خواهدند كرد كه گردانند‌گان اظهار نظر را تأييد كنند.
+',
 	'forums_public_auteurs' => '<strong>نويسندگان</strong>: نويسندگان اطلاعيه‌هايي در سخنگاه‌هاي پست شده روي مقاله‌هايشان در سايت همگاني دريافت مي‌كنند.',
 	'forums_public_moderateur' => 'در زير نشاني ايميل گرداننده‌ (يا گردانندگان - جدا شده با ويرگول) سخنگاههاي عمومي  را قيد كنند.',
 	'forums_public_thread' => '<strong>خط گفتگو</strong>: شركت‌كنندگان در همان خط گفتگو اطلاعيه‌هايي از سخنگاه‌ها (همگاني) دريافت مي‌كنند.',
@@ -67,27 +68,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_voir_configuration' => 'به پيكربندي اطلاعيه‌ها بنگريد',
 	'messagerie_interne' => 'پيك داخلي',
-	'messagerie_interne_signaler' => '<strong>Signaler les nouveaux messages privés</strong> : activer cette option pour que le site envoie une notification lorsqu\'un rédacteur n\'a pas vu un nouveau message dans sa messagerie. Le système attend 20 minutes avant de notifier le rédacteur, de manière à ne pas spammer un rédacteur déjà en ligne dans l\'espace privé.', # NEW
-	'moderateur' => '<strong>Modérateur</strong>', # NEW
+	'messagerie_interne_signaler' => '<strong>خبر يك پيام خصوصي</strong>: اين گزينه‌ را فعال كنيد تا هنگامي كه  نويسندگان يك پيام خصوصي را كه برايشان ارسال شده نديده باشند سايت يك اطلاعيه ارسال كند. سامانه پيش از خبر كردن نويسنده 20 دقيقه صبر خواهد كرد،  براي آنكه نويسنده‌اي كه الان در قسمت شخصي روي خط است اسپم نباشد.
+',
+	'moderateur' => '<strong>گرداننده</strong>',
 
 	// N
-	'notifications' => 'Notifications', # NEW
+	'notifications' => 'اطلاعيه‌ها',
 
 	// S
-	'signature_petition' => 'Signatures de pétition', # NEW
-	'signature_petition_moderateur' => 'Indiquez ci-dessous l\'adresse email du modérateur des pétitions (ou plusieurs, séparés par des virgules).', # NEW
-	'suivis_perso' => 'Suivi personnalisé', # NEW
-	'suivis_perso_activer_option' => 'Si vous activez cette option, chaque visiteur qui se connecte sur cet URL de suivi sera enregistré dans la table <code>spip_auteurs</code>, avec le statut <code>6visiteur</code>. Il pourra alors voir l\'ensemble des messages qu\'il a signés sur le forum, régler ses options de notification, etc.', # NEW
-	'suivis_perso_non' => 'Pas de suivi', # NEW
-	'suivis_perso_oui' => 'Suivi activé', # NEW
-	'suivis_perso_url_suivis' => '<strong>Ajouter une URL de suivi personnalisé</strong> dans chacun des emails de notification. À partir de cette URL, l\'utilisateur pourra configurer ses préférences individuelles de notification.', # NEW
-	'suivis_public_article_thread' => 'TODO: case à cocher sur chaque article/thread', # NEW
-	'suivis_public_changer_email' => 'TODO: changer d\'email', # NEW
-	'suivis_public_description' => 'Vous pourrez (quand ce sera fonctionnel...) y retrouver tous vos messages de forum, obtenir un fil RSS des réponses qui y seront apportées, choisir votre mode de notification, etc.', # NEW
-	'suivis_public_notif_desactiver' => 'TODO: case à cocher pour ne plus recevoir de notifications', # NEW
-	'suivis_public_vos_forums' => 'Vos forums', # NEW
-	'suivis_public_vos_forums_date' => 'Vos forums, par date', # NEW
-	'suivis_public_votre_page' => 'Ceci est votre page personnalisée de suivi du site' # NEW
+	'signature_petition' => 'امضا كنندگان طومار ',
+	'signature_petition_moderateur' => ' نشاني ايميل گرداننده (يا گردانندگان، با ويرگول جدا شود) طومارها را در زير قيد كنيد.',
+	'suivis_perso' => 'پيگيري اطلاهيه‌هاي خصوصي',
+	'suivis_perso_activer_option' => 'اگر اين گزينه را فعال كنيد، هر بازديد‌كننده‌اي كه به اين يو.آر.ال وصل شود، در جدول نويسندگان اسپيپ <code>spip_auteurs</code>با وضعيت <code>6visiteur</code>فلان ثبت مي‌شود. بعد او مي‌تواند تمام پيام‌هايي را كه روي وب سايت پست كرده ببيند، گزينه‌هاي اطلاعيه‌ي خودش را پيكربندي كند و از اين قبيل. . . 
+',
+	'suivis_perso_non' => 'بدون پيگيري',
+	'suivis_perso_oui' => 'پيگيري فعال',
+	'suivis_perso_url_suivis' => 'افزودن يك يو.آر.ال پيگيري اطلاعيه‌هاي خصوصي در هر يك از ايميل‌هاي اطلاع‌رساني. بازديدكننده مي‌تواند از اين يو.آر.ال ترجيح‌هاي شخصي خود از اطلاع رساني را پيكربندي كند. ',
+	'suivis_public_article_thread' => 'TODO:جاي علامت روي هر مقاله/خط بحث',
+	'suivis_public_changer_email' => 'TODO: تغيير ايميل',
+	'suivis_public_description' => '(هرگاه اين كاركرد فعال باشد. . . )خواهيد توانست اينجا تمام پيام‌هاي خود در سخنگاه را بيابيد، يك خط آر.اس.اس براي پاسخ‌هاي آن‌ها به دست آوريد،حالت اطلاع‌رساني خود را انتخاب كنيد و از اين قبيل. . . ',
+	'suivis_public_notif_desactiver' => 'TODO: جاي علامت زدن براي آنكه ديگر اطلاعيه دريافت نشود',
+	'suivis_public_vos_forums' => 'سخنگاه‌هاي شما ',
+	'suivis_public_vos_forums_date' => 'سخنگاه‌هاي شما، به ترتيب تاريخ',
+	'suivis_public_votre_page' => 'اين صفحه‌ي شخصي شما براي پيگيري سايت است'
 );
 
 ?>
