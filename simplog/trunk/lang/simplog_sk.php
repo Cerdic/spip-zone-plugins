@@ -35,7 +35,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_fichier_choisir' => 'Vyberte súbor, ktorý chcete analyzovať.',
-	'message_fichier_inconnu' => 'Súbor "@fichier@" nie je dostupný.'
+	'message_fichier_inconnu' => 'Súbor "@fichier@" nie je dostupný.',
+
+	// T
+	'tri_croissant' => 'Tri croissant', # NEW
+	'tri_decroissant' => 'Tri décroissant' # NEW
 );
 
 ?>

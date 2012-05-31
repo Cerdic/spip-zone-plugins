@@ -35,7 +35,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_fichier_choisir' => 'Choose a file to analyze.',
-	'message_fichier_inconnu' => 'The file "@fichier@" is not available.'
+	'message_fichier_inconnu' => 'The file "@fichier@" is not available.',
+
+	// T
+	'tri_croissant' => 'Tri croissant', # NEW
+	'tri_decroissant' => 'Tri décroissant' # NEW
 );
 
 ?>
