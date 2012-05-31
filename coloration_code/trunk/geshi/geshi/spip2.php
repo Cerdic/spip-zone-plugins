@@ -94,17 +94,29 @@
 // <INCLURE
 @define('REG_INCLURE','(&lt;INCLU(D|R)E)(\([^)]*\))?(.*)?(&gt;)');
 
+// Ce qui suit un filtre d'operation tel que |> |< |== |? ...
+// doit toujours etre une { ou equivalent ( la capture d'un parametre (REGEXP40) )
+// On le teste pour eviter de prendre | <style> par exemple
+// Mais certaines versions de PCRE (7.6 ko, 8.12 ok) plantent sur cette recherche de suite,
+// donc on ne le fait pas pour ces vieilles versions
+if (version_compare(current(explode(' ', PCRE_VERSION, 2)), '7.7', '>=')) {
+	@define('REG_SUITE_FILTRE', '(?={|<\|!REG3XP40!>)');
+} else {
+	@define('REG_SUITE_FILTRE', '');
+}
+
 // |filtre |class::methode
 // et |>= |?
 @define('REG_NOM_FILTRE', '((?:<PIPE>\s*[a-z_][a-z0-9_=]*(::[a-z0-9_]*)?)'
-		// |< et consoeurs sont toujours suivis par une accolade ouvrante {,
-		// mais ce peut etre aussi suivi par la capture d'un parametre (REGEXP40)
-		// dans nos recherches egalement
-		// on le teste pour eviter de prendre | <style> par exemple
-		. '|(?:<PIPE>\s*(?:&gt;=?|&lt;=?|&lt;&gt;|===?|!==?|\?)(?:\s*)(?={|<\|!REG3XP40!>)))');
+		// |< et consoeurs sont toujours suivis par une accolade ouvrante {
+		. '|(?:<PIPE>\s*(?:&gt;=?|&lt;=?|&lt;&gt;|===?|!==?|\?)(?:\s*)'
+		. REG_SUITE_FILTRE
+		. '))');
 // la meme chose, mais sans etre capturant.
 @define('REG_NOM_FILTRE_TOUT', '(?:(?:<PIPE>\s*[a-z_][a-z0-9_=]*(?:::[a-z0-9_]*)?)'
-		. '|(?:<PIPE>\s*(?:&gt;=?|&lt;=?|&lt;&gt;|===?|!==?|\?)(?:\s*)(?={|<\|!REG3XP40!>)))');
+		. '|(?:<PIPE>\s*(?:&gt;=?|&lt;=?|&lt;&gt;|===?|!==?|\?)(?:\s*)'
+		. REG_SUITE_FILTRE
+		. '))');
 
 // #BALISE
 @define('REG_BALISE','(\#)(' . REG_NOM_BOUCLE . ':)?([A-Z0-9_]+)([*]{0,2})');
