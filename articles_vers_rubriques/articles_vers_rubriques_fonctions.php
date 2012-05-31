@@ -5,9 +5,9 @@
 // Licence GPL 
 //
 //
-// Transforme les articles seletionne site en rubriques,
+// Transforme les articles seletionne des site en rubriques,
 // les met dans une même rubrique
-// et leur attribue optionnellement un même auteur
+// et leur attribue optionnellement un admin
 
 include_spip('base/articles_vers_rubriques_base');
 
@@ -51,16 +51,17 @@ function articles_vers_rubriques($id_article_list, $id_parent, $auteur_admin, $s
 	
 		// un article =>  id_article, surtitre, titre, soustitre, id_rubrique, descriptif, chapo, texte, ps, date, statut, id_secteur, maj, export, date_redac, visites, referers, popularite, accepter_forum, date_modif, lang, langue_choisie, id_trad, extra, id_version, nom_site, url_site
 		// un article spip 3 =>  	id_version 		virtuel
-
-		$nouvel_rubrique['descriptif'] = '{{'.$res['surtitre']."}} \n\n ";
-		$nouvel_rubrique['descriptif'] .= '{'.$res['soustitre']."} \n\n ";
-		$nouvel_rubrique['descriptif'] ."[".$res['nom_site'].'->'.$res['url_site'].']'."} \n\n ";
+		$nouvel_rubrique['descriptif'] = '';
+		//$message .= print_r($res);
+		if($res['surtitre']!='') $nouvel_rubrique['descriptif'] .= '{{'.$res['surtitre']."}} \n\n ";
+		if($res['soustitre']!='') $nouvel_rubrique['descriptif'] .= '{'.$res['soustitre']."} \n\n ";
+		if($res['url_site']!='') $nouvel_rubrique['descriptif'] .="[".$res['nom_site'].'->'.$res['url_site'].']'." \n\n ";
 		$nouvel_rubrique['descriptif'] .= $res['descriptif'];
 
 		$nouvel_rubrique['titre'] = $res['titre'];
 
 		$nouvel_rubrique['texte'] = $res['texte'];
-		$nouvel_rubrique['texte'] .= '{{{P.S.}}}'."\n\n ".$res['ps'];
+		if($res['ps']!='') $nouvel_rubrique['texte'] .= '{{{P.S.}}}'."\n\n ".$res['ps'];
 		
 
 		if($id_parent==false) {

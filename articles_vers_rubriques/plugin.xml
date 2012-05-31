@@ -16,11 +16,13 @@
 	<options>articles_vers_rubriques_options.php</options>
 	<fonctions>articles_vers_rubriques_fonctions.php</fonctions>	
 	<bouton id='articles_vers_rubriques' parent='bando_administration'> 
-        <icone>prive/themes/spip/images/logo-28.png</icone>
+        <icon>images/logo-24.png</icon>
+		<icone>images/logo-24.png</icone>
         <titre>Articles vers rubriques</titre>   
 	</bouton>
 	<bouton id='articles_vers_rubriques2' parent='configuration'>
-		<icone>prive/themes/spip/images/logo-28.png</icone>
+		<icon>images/logo-24.png</icon>
+		<icone>images/logo-24.png</icone>
 		<url>articles_vers_rubriques</url>
 		<titre>Articles vers Rubriques</titre>
 	</bouton>
