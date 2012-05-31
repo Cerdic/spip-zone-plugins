@@ -348,4 +348,9 @@ function zotspip_premier_auteur($auteurs) {
 	return $auteurs[0];
 }
 
+function zotspip_div_en_span($texte) {
+	return preg_replace('#div#U','span',$texte);
+}
+
+
 ?>
