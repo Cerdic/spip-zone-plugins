@@ -255,14 +255,14 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe,
 	. $auteurs
 	. "</tbody>\n</table>\n";
 	//SOUS-PAGINATION
-	$res .= "<table class='asso_tablo_filtres'><tr>\n<td width='52%'><p class='pagination'>";
+	$res .= "<table width='100%' class='asso_tablo_filtres'><tr>\n<td align='left'>";
 	$nombre_selection = sql_countsel('spip_asso_membres', $critere);
 	$pages = intval($nombre_selection/$max_par_page)+1;
 	if ($pages!=1)	{
 		for ($i=0; $i<$pages; $i++)	{
 			$position = $i*$max_par_page;
 			if ($position==$debut)	{
-			$res .= '<strong>'.$position.'</strong>';
+				$res .= '<strong>'.$position.'</strong>';
 			} else {
 				$h = generer_url_ecrire('adherents', 'lettre='.$lettre.'&debut='.$position.'&statut_interne='.$statut_interne);
 				$res .= "<a href='$h'>$position</a>\n";
@@ -270,7 +270,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $id_groupe,
 		}
 	}
 	if (autoriser('editer_membres', 'association', 100)) {
-		$res .= "</p></td><td width='48%' class='formulaire'><form>\n";
+		$res .= "</td><td align='right' class='formulaire'><form>\n";
 		if ($auteurs) {
 			$res .=  '<select name="action_adherents"><option value="" selected="">'._T('asso:choisir_action').'</option><option value="desactive">'
 			.($statut_interne=='sorti' ? _T('asso:reactiver_adherent') : _T('asso:desactiver_adherent'))

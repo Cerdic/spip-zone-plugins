@@ -133,7 +133,7 @@ function exec_activites()
 		echo "</tbody>\n</table>\n";
 		echo "\n<table width='100%'>\n";
 		//SOUS-PAGINATION
-		echo "<table class='asso_tablo_filtres'><tr>\n<td width='40%'><p class='pagination'>";
+		echo "<table width='100%' class='asso_tablo_filtres'><tr>\n<td align='left'>";
 		$nombre_selection = sql_countsel('spip_evenements', "DATE_FORMAT(date_debut, '%Y')=$annee");
 		$pages = ceil($nombre_selection/$max_par_page);
 		if ($pages==1) {
@@ -148,7 +148,7 @@ function exec_activites()
 				}
 			}
 		}
-		echo '</p></td></tr></table>';
+		echo '</td></tr></table>';
 		fin_page_association();
 	}
 }
