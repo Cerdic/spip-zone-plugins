@@ -6,11 +6,12 @@
   - id_edito:  id de l'article edito
   - selection: id des articles selectionnes (separe par une virgule)
 
-]#CACHE{0}[(#HTTP_HEADER{Content-Type: text/plain[; charset=(#CHARSET)}]})][(#REM)pour supprimer les boutons admin ]
+]#CACHE{0}
+#HTTP_HEADER{Content-Type: text/plain;}[(#REM)pour supprimer les boutons admin ]
 Ceci est une message automatique - ne pas repondre
 
 --------------------------------------------------------------------
-  LETTRE D'INFORMATION #NOM_SITE_SPIP
+      LETTRE D'INFORMATION #NOM_SITE_SPIP
 --------------------------------------------------------------------
 
 <B_edito>
@@ -21,7 +22,7 @@ EDITO
 [(#TITRE|textebrut)] 
 -------------------------------------------------
 [(#TEXTE|liens_absolus|couper{300}|PtoBR|textebrut)]
-[(#URL_ARTICLE|url_absolue)]
+#URL_SITE_SPIP/[(#URL_ARTICLE|substr{3})]
 </BOUCLE_edito>
 
 #SET{selection,#ENV**{selection}|explode{","}}
@@ -48,4 +49,7 @@ EDITO
 
 --
 #NOM_SITE_SPIP
-#URL_SITE_SPIP  
+#URL_SITE_SPIP
+se désabonner: #NOM_SITE_SPIP
+
+                       

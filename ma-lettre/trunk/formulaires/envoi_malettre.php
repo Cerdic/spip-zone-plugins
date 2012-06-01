@@ -223,36 +223,39 @@ function formulaires_envoi_malettre_traiter_dist(){
             $message.= "<div> $i / $j </div>";
             
             // archivage de la lettre en dur    
-            // FIXME: utiliser les methodes natives pour ecrire les fichiers          
-            $message.= "<div style=\"margin:15px 0;\">"._T('malettre:archives_placer');
+            // FIXME: utiliser les methodes natives pour ecrire les fichiers   
+            $no_archive = _request('no_archive');            
+            if (!is_array($no_archive)) { 
+                   
+                  $message.= "<div style=\"margin:15px 0;\">"._T('malettre:archives_placer');
+                  
+                  $lettre_archive = "$path_archive_full/lettre_".date("Ymd")."_".$lettre_hash."_"._request('lang_select').".html";
+                  $f_archive=fopen($lettre_archive,"w");
+                  fwrite($f_archive,$recup); 
+                  fclose($f_archive);
+                  $message.= " <a href='$url_lettre_archive' target='_blank'>html</a> - ";
+                 
+                  $lettre_archive = "$path_archive_full/lettre_".date("Ymd")."_".$lettre_hash."_"._request('lang_select').".txt";
+                  $f_archive=fopen($lettre_archive,"w");
+                  fwrite($f_archive,$recup_txt); 
+                  fclose($f_archive);
+                  $message.= "<a href='$url_lettre_archive_txt' target='_blank'>txt</a></div>";
+                  
+                  // stockage en base
+                  include_spip('base/abstract_sql');
+                  
+                  sql_insertq('spip_meslettres',array(
+                              'titre' => $lettre_title,
+                              'lang' => $lang,
+                              'url_html' => "lettre/$url_lettre_archive_short",
+                              'url_txt' => "lettre/$url_lettre_archive_txt_short",
+                              'date' => date('Y-m-d H:i:s')
+                              ));
+                                      
+                             
+                  $message.= "<p><a href='".generer_url_ecrire("malettre_archive")."'>"._T('malettre:archives_gerer')."</a></p>\n";
             
-            $lettre_archive = "$path_archive_full/lettre_".date("Ymd")."_".$lettre_hash."_"._request('lang_select').".html";
-            $f_archive=fopen($lettre_archive,"w");
-            fwrite($f_archive,$recup); 
-            fclose($f_archive);
-            $message.= " <a href='$url_lettre_archive' target='_blank'>html</a> - ";
-           
-            $lettre_archive = "$path_archive_full/lettre_".date("Ymd")."_".$lettre_hash."_"._request('lang_select').".txt";
-            $f_archive=fopen($lettre_archive,"w");
-            fwrite($f_archive,$recup_txt); 
-            fclose($f_archive);
-            $message.= "<a href='$url_lettre_archive_txt' target='_blank'>txt</a></div>";
-            
-            // stockage en base
-            include_spip('base/abstract_sql');
-            
-            sql_insertq('spip_meslettres',array(
-                        'titre' => $lettre_title,
-                        'lang' => $lang,
-                        'url_html' => "lettre/$url_lettre_archive_short",
-                        'url_txt' => "lettre/$url_lettre_archive_txt_short",
-                        'date' => date('Y-m-d H:i:s')
-                        ));
-                                
-                       
-            $message.= "<p><a href='".generer_url_ecrire("malettre_archive")."'>"._T('malettre:archives_gerer')."</a></p>\n";
-            
-  
+            }
   
   // --------------------------------
 

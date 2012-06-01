@@ -20,6 +20,4 @@ function malettre_get_contents($patron,$id_edito=0,$selection,$selection_eve,$la
   return $texte_patron;	
   			          	
 }
-
-
 ?>

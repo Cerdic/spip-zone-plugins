@@ -78,6 +78,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   
   //N
   'nom'=>'Nom',#NEW
+  'no_archive' => 'Mode test', #NEW
+  'no_archive_info' => 'Ne pas archiver cet envoi', #NEW
   
   // 0
   'obligatoire' => 'Champs obligatoire',
