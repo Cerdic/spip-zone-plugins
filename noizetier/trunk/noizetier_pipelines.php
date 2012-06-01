@@ -22,10 +22,10 @@ function noizetier_recuperer_fond($flux){
 	if (defined('_NOIZETIER_RECUPERER_FOND')?_NOIZETIER_RECUPERER_FOND:true) {
 		include_spip('noizetier_fonctions');
 		$fond = $flux['args']['fond'];
-
 		$composition = $flux['args']['contexte']['composition'];
 		// Si une composition est définie et si elle n'est pas déjà dans le fond, on l'ajoute au fond
-		if ($composition!='' AND noizetier_page_composition($fond)=='')
+		// sauf s'il s'agit d'une page de type page (les squelettes page.html assurant la redirection)
+		if ($composition!='' AND noizetier_page_composition($fond)=='' AND noizetier_page_type($fond)!='page')
 			$fond .= '-'.$composition;
 		
 		// Tester l'installation du noizetier pour éviter un message d'erreur à l'installation
