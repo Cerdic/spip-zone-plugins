@@ -17,6 +17,7 @@ function agenda_affiche_milieu($flux) {
 	$e = trouver_objet_exec($flux['args']['exec']);
 	$out = "";
 	if ($e['type']=='rubrique'
+	  AND autoriser('configurer')
 	  AND $e['edition']==false
 	  AND $id_rubrique = intval($flux['args']['id_rubrique'])){
 		$activer = true;
