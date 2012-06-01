@@ -269,10 +269,11 @@
 			}
 			if(typeof(jQuery) == 'function'){
 				jQuery(document).ready(function() {
+					var cbox = '[(#EVAL{_AJAX}|?{oui,non})]';
 					/**
 					 * Cas où l'on se trouve dans une mediabox
 					 */
-					if($('#cboxLoadedContent').is(':visible')){
+					if(cbox == 'oui'){
 						$(document).bind('cbox_complete', function(){
 							$('input[type=number]').spinner();
 					   		if($('#modifier_image img').width() > $('#modifier_image').width()){
