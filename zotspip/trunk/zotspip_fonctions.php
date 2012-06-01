@@ -348,6 +348,32 @@ function zotspip_premier_auteur($auteurs) {
 	return $auteurs[0];
 }
 
+// Renvoie le tableau des id passes à [ref=XXX]
+function zotspip_ids_ref($ids) {
+	$ids = explode(',',$ids);
+	foreach ($ids as $cle => $id) $ids[$cle] = trim($id); // (on supprime les espaces inutiles)
+	foreach ($ids as $cle => $id) {
+		if ($p=strpos($id,'@'))
+			$ids[$cle] = substr($id,0,$p); // on ne garde que la partie avant le @
+	}
+	return $ids;
+}
+
+// Renvoie le tableau des positions/suffixes passés à [ref=XXX]
+function zotspip_suffixes_ref($ids) {
+	$ret = array();
+	$ids = explode(',',$ids);
+	foreach ($ids as $cle => $id) $ids[$cle] = trim($id); // (on supprime les espaces inutiles)
+	foreach ($ids as $cle => $id) {
+		if ($p=strpos($id,'@')) {
+			$id_zitem = substr($id,0,$p); // id_zitem est avant le @
+			$ret[$id_zitem] = substr($id,$p+1); // suffixe apres le @
+			}
+	}
+	return $ret;
+}
+
+// Utilise pour les [ref=XXX] les div ne sont pas pertinents dans une note
 function zotspip_div_en_span($texte) {
 	return preg_replace('#div#U','span',$texte);
 }

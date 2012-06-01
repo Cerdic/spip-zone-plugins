@@ -3,7 +3,7 @@
 	<slogan>La puissance de Zotero dans votre Spip</slogan>
 	<auteur>[Joseph Larmarange->http://www.spip-contrib.net/Joseph]</auteur>
 	<licence>GPL v3</licence>
-	<version>1.1.0</version>
+	<version>1.1.1</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<description>Synchronise Spip avec une bibliothèque (personnelle ou collective) de références bibliographiques Zotero. Utilisez Zotero pour gérer / importer / rédiger vos références bibliographiques, puis incorporez vos références bibliographiques dans votre Spip avec ZotSpip au travers de modèles dédiés.</description>
@@ -50,6 +50,14 @@
 	</pipeline>
 	<pipeline>
 		<nom>autoriser</nom>
+		<inclure>zotspip_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_barre_pre_charger</nom>
+		<inclure>zotspip_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_lien_classe_vers_icone</nom>
 		<inclure>zotspip_pipelines.php</inclure>
 	</pipeline>
 

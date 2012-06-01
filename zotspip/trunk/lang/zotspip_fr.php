@@ -102,6 +102,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_erreur_style_csl' => 'Le style CSL @style@.csl n\'a pas été trouvé sur le serveur (fichier inexistant ou plugin désactivé).',
 	'modifier_en_ligne' => 'Modifier en ligne sur zotero.org',
 	'nom_prenom' => 'Nom, Prénom',
+	'outil_explication_inserer_ref' => 'Identifiant Zotero de la référence. Dans le cas d\'une citation, un nombre de page ou un numéro de section peut être précisé après l\'identifiant, séparé par @. Plusieurs références peuvent être indiquées, séparées par une virgule. Exemple : 4JA2I4UC@page 16-17,FSCANX5W',
+	'outil_inserer_ref' => 'Insérer une réference bibliographie [ref=XXX]',
 	'plusieurs_references' => '@nb@ références',
 	'probleme_survenu_lors_du_remplacement' => 'Un problème est survenu lors du remplacement (code HTTP @code@).',
 	'reference_num' => 'Référence n°',

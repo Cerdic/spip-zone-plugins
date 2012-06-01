@@ -49,4 +49,27 @@ function zotspip_pre_propre($texte) {
 	return $texte;
 }
 
+// Insertion du raccourci [ref=XXX] dans le porte-plume
+function zotspip_porte_plume_barre_pre_charger($barres) {
+	$barre = &$barres['edition'];
+	
+	$barre->ajouterApres('notes', array(
+		"id"             => 'inserer_ref',
+		"name"           => _T('zotspip:outil_inserer_ref'),
+		"className"      => 'outil_inserer_ref',
+		"selectionType"  => '',
+		"closeWith"      => "[ref=[!["._T('zotspip:outil_explication_inserer_ref')."]!]]",
+		"display"        => true
+	 ));
+	
+	return $barres;
+}
+
+// Icone pour le porte-plume
+function zotspip_porte_plume_lien_classe_vers_icone($flux) {
+	$icones = array();
+	$icones['outil_inserer_ref'] = 'inserer_ref.png';
+	return array_merge($flux, $icones);
+}
+
 ?>
