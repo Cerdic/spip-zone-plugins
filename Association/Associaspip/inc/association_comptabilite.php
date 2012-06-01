@@ -392,13 +392,13 @@ function association_passe_parametres_comptables($classes=array()) {
     $params['type'] = _request('type');
     if ( !$classes ) { // pas en parametre, on prend dans la requete
 //	$params['classes'] = array_flip( explode(',', _request('classes')) );
-#	$keys = explode(',', _request('classes'));
-#	if ( count($keys) ) {
-#	    $vals = array_fill(0, count($keys) ,0);
-#	    $params['classes'] = array_combine($keys, $vals);
-#	} else {
+	$keys = explode(',', _request('classes'));
+	if ( count($keys) ) {
+	    $vals = array_fill(0, count($keys) ,0);
+	    $params['classes'] = array_combine($keys, $vals);
+	} else {
 	    $params['classes'] = array();
-#	}
+	}
     } elseif ( is_array($classes) ) { // c'est a priori bon
 	$params['classes'] = $classes;
     } else { // c'est un tableau de classe_comptable=>type_operations qui est requis !
@@ -715,8 +715,8 @@ class ExportComptes_PDF extends FPDF {
     var $exercice;
     var $destination;
 
-    // Initialisations (automatique au chargement de la classe)
-    function __construct($ids='') {
+    // Initialisations
+    function init($ids='') {
 	if ( !$ids )
 	    $ids = association_passe_parametres_comptables();
 	// passer les parametres transmis aux variables de la classe

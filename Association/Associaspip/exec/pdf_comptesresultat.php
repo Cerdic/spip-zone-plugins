@@ -22,9 +22,8 @@ function exec_pdf_comptesresultat()
 		echo minipres();
 	} else {
 		include_spip('inc/association_comptabilite');
-		$ids = association_passe_parametres_comptables();
 		$pdf = new ExportComptes_PDF();
-		$pdf->init($ids);
+		$pdf->init();
 		$pdf->association_cartouche_pdf('cpte_resultat_titre_general');
 		$lesProduits = $pdf->association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_produits'], 'cpte_resultat', +1, $pdf_>exercice, $pdf->destination);
 		$lesCharges = $pdf->association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_charges'], 'cpte_resultat', -1, $pdf_>exercice, $pdf->destination);

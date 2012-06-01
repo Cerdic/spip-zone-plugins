@@ -22,9 +22,8 @@ function exec_pdf_comptesbilan()
 		echo minipres();
 	} else {
 		include_spip('inc/association_comptabilite');
-		$ids = association_passe_parametres_comptables();
 		$pdf = new ExportComptes_PDF();
-		$pdf->init($ids);
+		$pdf->init();
 		$pdf->association_cartouche_pdf('cpte_bilan_titre_general');
 		$classes_bilan = array();
 		$query = sql_select(
