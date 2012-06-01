@@ -142,7 +142,7 @@
 			ratio_image = parseFloat([(#GET{ratio_image})]);
 			largeur = parseFloat(#GET{largeur_image});
 			hauteur = parseFloat(#GET{hauteur_image});
-			ratio = largeur/parseFloat($('#image-container img').width());
+			//ratio = largeur/parseFloat($('#image-container img').width());
 			[(#CONFIG{photospip/image_recadre,on}|=={on}|oui)
 				var x1, y1, x2, y2, w, h, ias;
 				function image_crop_selectchange(img, selection){
@@ -267,50 +267,64 @@
 					}
 				}
 			}
-			if(typeof(jQuery) == 'function'){
+			if(typeof($) == 'function' && typeof(jQuery) == 'function'){
 				jQuery(document).ready(function() {
 					var cbox = '[(#EVAL{_AJAX}|?{oui,non})]';
+					
 					/**
 					 * Cas où l'on se trouve dans une mediabox
 					 */
-					if(cbox == 'oui'){
-						$(document).bind('cbox_complete', function(){
+					var container_offset = $('#image-container').offset().top-$('#cboxLoadedContent').offset().top;
+					if((cbox == 'oui') || ($('#image-container').parents('#cboxLoadedContent').size()>0)){
+						var boxoffset, boxmargins,container_offset;
+						var init_box = function(){
 							$('input[type=number]').spinner();
 					   		if($('#modifier_image img').width() > $('#modifier_image').width()){
 								$('#image-container img').attr('width','').attr('height','').width('100%').height('auto');
-								ratio = largeur/parseFloat($('#image-container img').width());
 							}
+							ratio = largeur/parseFloat($('#image-container img').width());
+							
 							jQuery('.cache').hide();
-							var boxoffset = $('#cboxLoadedContent').offset();
-							var container_offset = $('#image-container').offset().top-$('#cboxLoadedContent').offset().top;
-							var container_width = $('#image-container').width();
+							
 							/**
 							 * Si on est en modal et si la hauteur de l'image affichée est inférieure à la hauteur
 							 * de la div de la modale, on fait scroller l'image lors du scroll dans la modale
-							 */
-							if($('#image-container').height() < $('#cboxLoadedContent').height()){
-								$('#cboxLoadedContent').scroll(function() {
-									var limite_image = boxoffset.top;
-									var limite_bas = limite_image+$('#image-container').parents("form").height()-$('#image-container').parents("form").find(".boutons").height();
-									var pos_bas = $('#image-container').offset().top+$('#image-container').height();
-									if(($('#cboxLoadedContent').scrollTop() >= container_offset) && (pos_bas <= limite_bas) && ($('#cboxLoadedContent').scrollTop()+$('#image-container').offset().top < limite_bas)){
-										var margintop = $('#cboxLoadedContent').scrollTop() - container_offset+20;
-										if(!$('#image-container').hasClass("image_flottant"))
-											$('#image-container').addClass("image_flottant");
-										$('#image-container').css({"margin-top": margintop+"px"});
-										if(typeof(ias) == 'object'){
-											ias.update();
-										}
+							 * jusqu'aux boutons au maximum 
+							 */							
+							boxoffset = $('#cboxLoadedContent').offset();
+							boxmargins = $('#cboxContent').height() - $('#cboxLoadedContent').height();
+							container_offset = $('#image-container').offset().top-$('#cboxLoadedContent').offset().top+10;
+							$('#cboxLoadedContent').unbind('scroll').scroll(function() {
+								var limite_image = boxoffset.top;
+								var limite_bas = $('#cboxContent .boutons').last().offset().top-$('#cboxContent .boutons').last().outerHeight();
+								var pos_bas = $('#image-container').offset().top+$('#image-container').height();
+								if(($('#cboxLoadedContent').scrollTop() >= container_offset) && (pos_bas < limite_bas) && ($('#cboxLoadedContent').scrollTop()+$('#image-container').offset().top < limite_bas)){
+									var margintop = $('#cboxLoadedContent').scrollTop() - container_offset+(boxmargins/2);
+									if(!$('#image-container').hasClass("image_flottant"))
+										$('#image-container').addClass("image_flottant");
+									$('#image-container').css({"margin-top": margintop+"px"});
+									if(typeof(ias) == 'object'){
+										ias.update();
 									}
-									else if(($('cboxLoadedContent').scrollTop() < container_offset)||(pos_bas > limite_bas) ){
-										$('#image-container').removeClass("image_flottant").css({"margin-top": "0px", "width": "auto"});
-										if(typeof(ias) == 'object'){
-											ias.update();
-										}
+								}
+								else if($('#image-container').hasClass("image_flottant") && ($('#cboxLoadedContent').scrollTop() < container_offset)){
+									$('#image-container').removeClass("image_flottant").css({"margin-top": "0px", "width": "auto"});
+									if(typeof(ias) == 'object'){
+										ias.update();
 									}
-								});
-							}
-						});
+								}
+							});
+						}
+						/**
+						 * On initialise les js de la box qui si la box est complete
+						 */
+						if($('#cboxLoadedContent').html() == ''){
+							$(document).bind('cbox_complete', function(){
+								init_box();
+							});
+						}else{
+							init_box();
+						}
 						if($('#modifier_image').width() != 0){
 							if($('#modifier_image img').width() > $('#modifier_image').width()){
 								$('#image-container img').attr('width','').attr('height','').width('100%').height('auto');
@@ -319,8 +333,8 @@
 					}else{
 						if($('#modifier_image img').width() > $('#modifier_image').width()){
 							$('#image-container img').attr('width','').attr('height','').width('100%').height('auto');
-							ratio = largeur/parseFloat($('#image-container img').width());
 						}
+						ratio = largeur/parseFloat($('#image-container img').width());
 						$('input[type=number]').spinner();
 						jQuery('.cache').hide();
 					}
