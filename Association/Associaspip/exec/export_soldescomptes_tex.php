@@ -14,13 +14,14 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-// Export du Compte de Resultat au format .tab
-function exec_export_compteresultats_tab() {
+// Export du Compte de Resultat au format LaTeX
+// http://fr.wikipedia.org/wiki/LaTeX
+function exec_export_soldescomptes_tex() {
 	if (!autoriser('associer', 'export_comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		exec_export_compteresultats_tsv();
+		exec_export_soldescomptes_latex();
 	}
 }
 

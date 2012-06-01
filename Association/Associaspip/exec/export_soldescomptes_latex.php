@@ -14,17 +14,15 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('exec/compte_resultat'); // c'est pour la definition de classe ExportCompteResultats
-
 // Export du Compte de Resultat au format LaTeX
 // http://fr.wikipedia.org/wiki/LaTeX
-function exec_export_compteresultats_tex() {
+function exec_export_soldescomptes_latex() {
 	if (!autoriser('associer', 'export_comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
+		include_spip('inc/association_comptabilite');
 		$latex = new LaTeX(_request('var'));
-		$balises = array();
 		$latex->EnTete();
 		foreach (array('charges', 'produits', 'contributions_volontaires') as $key) {
 			$latex->LesEcritures($key);
@@ -34,22 +32,23 @@ function exec_export_compteresultats_tex() {
 	}
 }
 
+include_spip('inc/association_comptabilite');
 /**
  *  Utilisation d'une classe tres tres tres simple !!!
  */
-class LaTeX extends ExportCompteResultats {
+class LaTeX extends ExportComptes_TXT {
 
 	function EnTete() {
 		$this->out .= '\\documentclass[a4paper]{article}'."\n";
-		$this->out .= '\\usepackage['. str_replace('-', '', strtolower($GLOBALS['meta']['charset']) ).']{inputenc}'."\n";
+		$this->out .= '\\usepackage['.$GLOBALS['meta']['charset'].']{inputenc}'."\n";
 		$this->out .= '\\usepackage[french]{babel}'."\n";
 		$this->out .= '\\usepackage[table]{xcolor}'."\n";
 		$this->out .= '%generator: Associaspip'."\n";
-		$this->out .= '\\title{'. html_entity_decode(_T('asso:cpte_resultat_titre_general')) .'\\\\ '. _T('asso:cpte_res_export_exercice', array('titre'=>sql_getfetsel('intitule','spip_asso_exercices', 'id_exercice='.$this->exercice) ) ) .'}'."\n";
+		$this->out .= '\\title{'. html_entity_decode(_T('asso:cpte_resultat_titre_general')) .'\\\\ '. _T('Exercice') .' : '. sql_asso1champ('exercice', $this->exercice, 'intitule') .'}'."\n";
 		$this->out .= '\\author{'. $GLOBALS['association_metas']['nom'] .'}'."\n";
 		$this->out .= '\\date{\\today}'."\n";
 		$this->out .= '\\begin{document}'."\n";
-		$this->out .= '\\maketitle'."\n";
+		$this->out .= '\\maketitle{}'."\n";
 	}
 
 	function LesEcritures($key) {
@@ -64,7 +63,7 @@ class LaTeX extends ExportCompteResultats {
 				$quoi = "SUM(depense) AS charge_evaluee, SUM(recette) AS produit_evalue";
 				break;
 		}
-		$this->out .= '\\section*{'. ucfirst(_T("asso:$key")) .'}'."\n";
+		$this->out .= '\\section*{'. ucfirst($key) .'}'."\n";
 		$this->out .= '\\begin{tabular}{|l p{.7562\\textwidth} r|}'."\n"; // 20/210=9.52381/100 30/210=14.8571/100 (210-20-30)/100=75.61909
 		$query = sql_select(
 			"imputation, $quoi, DATE_FORMAT(date, '%Y') AS annee ".$this->sel, // select
@@ -90,7 +89,7 @@ class LaTeX extends ExportCompteResultats {
 			$new_chapitre = substr($data['code'], 0, 2);
 			if ($chapitre!=$new_chapitre) {
 				$this->out .= str_replace(array('\\','&'), array('\\backslash{}','\\&'), $new_chapitre) .' & ';
-				$this->out .= '\multicolumn{2}{p{.86\\textwidth}|}{'. str_replace(array('\\','&'), array('\\backslash{}','\\&'), ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))) .'}\\\\'."\n";
+				$this->out .= '\multicolumn{2}{l|}{'. str_replace(array('\\','&'), array('\\backslash{}','\\&'), ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))) .'}\\\\'."\n";
 				$chapitre = $new_chapitre;
 			}
 			$this->out .= str_replace(array('\\','&'), array('\\backslash{}','\\&'), $data['code']) .' & ';

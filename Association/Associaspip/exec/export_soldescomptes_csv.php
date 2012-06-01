@@ -14,25 +14,18 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('exec/compte_resultat'); // c'est pour la definition de classe ExportCompteResultats
-
-// Export du Compte de Resultat au format YAML
-// http://fr.wikipedia.org/wiki/Yaml
-function exec_export_compteresultats_yaml() {
+// Export du Compte de Resultat au format CSV
+// http://fr.wikipedia.org/wiki/Comma-separated_values
+// (forme commune de base : champs separes par une virgule et point decimal !)
+function exec_export_soldescomptes_csv() {
 	if (!autoriser('associer', 'export_comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$yaml = new ExportCompteResultats(_request('var'));
-		$balises = array();
-		foreach (array('entete', 'titre', 'nom', 'exercice', 'charges', 'produits', 'contributions_volontaires', 'chapitre', 'code', 'libelle', 'categorie', 'intitule', 'montant') as $key) {
-			$balises[$key.'1'] = ucfirst($key).': ';
-			$balises[$key.'0'] = '';
-		}
-		$balises['compteresultat1'] = 'Encodage: '.$GLOBALS['meta']['charset']."\nCompteDeResultat: ";
-		$balises['compteresultat0'] = '';
-		$yaml->exportLignesMultiples($balises, array("\t"=>'\t',"\r"=>'\r',"\n"=>'\n','\\'=>'\\\\'), '', '');
-		$yaml->leFichier('yaml');
+		include_spip('inc/association_comptabilite');
+		$csv = new ExportComptes_TXT();
+		$csv->exportLignesUniques(',', "\n", array('"'=>'""'), '"', '"');
+		$csv->leFichier('csv');
 	}
 }
 

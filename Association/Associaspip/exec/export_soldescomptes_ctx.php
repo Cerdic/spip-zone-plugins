@@ -14,19 +14,17 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('exec/compte_resultat'); // c'est pour la definition de classe ExportCompteResultats
-
-// Export du Compte de Resultat au format CSV
-// http://fr.wikipedia.org/wiki/Comma-separated_values
-// (forme commune de base : champs separes par une virgule et point decimal !)
-function exec_export_compteresultats_csv() {
+// Export du Compte de Resultat au format CTX
+// http://www.creativyst.com/Doc/Std/ctx/ctx.htm
+function exec_export_soldescomptes_ctx() {
 	if (!autoriser('associer', 'export_comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$csv = new ExportCompteResultats(_request('var'));
-		$csv->exportLignesUniques(',', "\n", array('"'=>'""'), '"', '"');
-		$csv->leFichier('csv');
+		include_spip('inc/association_comptabilite');
+		$ctx = new ExportComptes_TXT();
+		$ctx->exportLignesUniques('|', "\n", array("\r"=>'\r', "\n"=>'\n', "\\"=>'\i', '|'=>'\p'), '', '');
+		$ctx->leFichier('ctx');
 	}
 }
 

@@ -18,11 +18,12 @@ include_spip('exec/compte_resultat'); // c'est pour la definition de classe Expo
 
 // Export du Compte de Resultat au format XML : balisage DocBooK
 // http://fr.wikipedia.org/wiki/DocBook
-function exec_export_compteresultats_dbk() {
+function exec_export_soldescomptes_dbk() {
 	if (!autoriser('associer', 'export_comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
+		include_spip('inc/association_comptabilite');
 		$dbk = new ExportCompteResultats(_request('var'));
 		$balises = array();
 		foreach (array('charges', 'produits', 'contributions_volontaires') as $key) {
@@ -48,7 +49,7 @@ function exec_export_compteresultats_dbk() {
 		$balises['categorie0'] = '</row>';
 		$balises['chapitre1'] = '<informaltable frame="all"><tgroup cols="3">';
 		$balises['chapitre0'] = '</tgroup></informaltable>';
-		$dbk->exportLignesMultiples($balises, array('<'=>'&lt;','>'=>'&gt;'), '', '');
+		$dbk->exportLignesMultiples(array($GLOBALS['association_metas']['classe_charges']=>'-1', $GLOBALS['association_metas']['classe_produits']=>'+1', $GLOBALS['association_metas']['classe_contributions_volontaires']=>0), $balises, array('<'=>'&lt;','>'=>'&gt;'), '', '');
 		$dbk->leFichier('dbk');
 	}
 }

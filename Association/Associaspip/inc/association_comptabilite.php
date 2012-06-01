@@ -389,7 +389,21 @@ function association_passe_parametres_comptables($classes=array()) {
     $params['destination'] = intval(_request('destination'));
 #    if( !$params['destination'] ) { // pas de destination
 #    }
-    $params['classes'] = $classes;
+    $params['type'] = _request('type');
+    if ( !$classes ) { // pas en parametre, on prend dans la requete
+//	$params['classes'] = array_flip( explode(',', _request('classes')) );
+#	$keys = explode(',', _request('classes'));
+#	if ( count($keys) ) {
+#	    $vals = array_fill(0, count($keys) ,0);
+#	    $params['classes'] = array_combine($keys, $vals);
+#	} else {
+	    $params['classes'] = array();
+#	}
+    } elseif ( is_array($classes) ) { // c'est a priori bon
+	$params['classes'] = $classes;
+    } else { // c'est un tableau de classe_comptable=>type_operations qui est requis !
+	$params['classes'] = $classes ? array( $classes=>0 ) : array() ;
+    }
     $params['url'] = serialize($params); //!\ les cles numeriques peuvent poser probleme... <http://www.mail-archive.com/php-bugs@lists.php.net/msg100262.html> mais il semble qu'ici le souci vient de l'absence d'encodage lorsqu'on passe $var par URL...
     return $params;
 }
@@ -517,84 +531,95 @@ function association_liste_resultat_net($recettes, $depenses) {
 }
 
 // Brique commune aux classes d'exportation des etats comptables
-class ExportComptes {
+class ExportComptes_TXT {
 
     var $exercice;
     var $destination;
     var $annee;
+    var $type;
     var $classes;
     var $out;
 
-    function  __construct($var) {
-	$tableau = unserialize(rawurldecode($var));
-	$this->exercice = $tableau['exercice'];
-	$this->destination = $tableau['estination'];
-	$this->annee = $tableau['annee'];
-	$this->classes = $tableau['classes'];
+    // constructeur (fonction d'initialisatio de la classe)
+    function __construct($var='') {
+	if ( !$var )
+	    $tableau = association_passe_parametres_comptables();
+	elseif ( is_string($var) )
+	    $tableau = unserialize(rawurldecode($var));
+	elseif ( is_array($var) )
+	    $tableau = $var;
+	else
+	    $tableau = array($var=>0);
+	$this->exercice = intval($tableau['exercice']);
+	$this->destination = intval($tableau['destination']);
+	$this->annee = intval($tableau['annee']);
+	$this->type = $tableau['type'];
+	if ( count($tableau['classes']) ) {
+	    $this->classes = $tableau['classes'];
+	} else {
+	    switch ($tableau['type']) {
+		case 'bilan' :
+		    $query = sql_select(
+			'classe', // select
+			'spip_asso_plan', // from
+			sql_in('classe', array($GLOBALS['association_metas']['classe_charges'],$GLOBALS['association_metas']['classe_produits'],$GLOBALS['association_metas']['classe_contributions_volontaires']), 'NOT'), // where  not in
+			'classe', // group by
+			'classe' // order by
+		    );
+		    while ($data = sql_fetch($query)) {
+			$this->classes[$data['classe']] = 0;
+		    }
+		    break;
+		case 'resultat' :
+		    $this->classes = array($GLOBALS['association_metas']['classe_charges']=>'-1', $GLOBALS['association_metas']['classe_produits']=>'+1', $GLOBALS['association_metas']['classe_contributions_volontaires']=>0);
+		    break;
+	    }
+	}
 	$this->out = '';
-    }
-
-    // de type CSV,INI,TSV, etc.
-    function LignesSimplesEntete($champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='') {
-	$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('asso:entete_code')))) .$champFin.$champsSeparateur;
-	$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('asso:entete_intitule')))) .$champFin.$champsSeparateur;
-	$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('asso:entete_montant')))) .$champFin.$lignesSeparateur;
-    }
-
-    // de type CSV,INI,TSV, etc.
-    function LignesSimplesCorps($key, $champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='') {
-	switch ($key) {
-	    case 'charges' :
-		$dir = -1;
-		break;
-	    case 'produits' :
-		$dir = +1;
-		break;
-	    case 'contributions_volontaires' :
-		$dir = 0;
-		break;
-	}
-	$query = association_calcul_totaux_comptes_classe($GLOBALS['association_metas']['classe_'.$key], $this->exercice, $this->destination, $dir);
-	$chapitre = '';
-	$i = 0;
-	while ($data = sql_fetch($query)) {
-	    if ($key==='contributions_volontaires') {
-		if ($data['depenses']>0) {
-		    $valeurs = $data['depenses'];
-		} else {
-		    $valeurs = $data['recettes'];
-		}
-	    } else {
-		$valeurs = $data['valeurs'];
-	    }
-	    $new_chapitre = substr($data['code'], 0, 2);
-	    if ($chapitre!=$new_chapitre) {
-		$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), $new_chapitre) .$champFin.$champsSeparateur;
-		$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))) .$champFin.$champsSeparateur;
-		$this->out .= $champsSeparateur.' '.$champsSeparateur;
-		$this->out .= $lignesSeparateur;
-		$chapitre = $new_chapitre;
-	    }
-	    $this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), $data['code']) .$champFin.$champsSeparateur;
-	    $this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), $data['intitule']) .$champFin.$champsSeparateur;
-	    $this->out .= $champDebut.$valeurs.$champFin.$lignesSeparateur;
-	}
     }
 
     // export texte de type tableau (lignes*colonnes) simple : CSV,CTX,HTML*SPIP,INI*,TSV,etc.
     // de par la simplicite recherchee il n'y a pas de types ou autres : CSV et CTX dans une certaine mesure pouvant distinguer "nombres", "chaines alphanumeriques" et "chaine binaires encodees"
-    function exportLignesUniques($champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='', $entete=true) {
+    function exportLignesUniques($champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='', $entete=true, $multi=false) {
 	if ($entete) {
-	    $this->LignesSimplesEntete($champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='');
+	    $this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('asso:entete_code')))) .$champFin.$champsSeparateur;
+	    $this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('asso:entete_intitule')))) .$champFin.$champsSeparateur;
+	    if (!$multi) {
+		$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('asso:entete_montant')))) .$champFin.$lignesSeparateur;
+	    } else {
+		$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('asso:entete_recette')))) .$champFin.$champsSeparateur;
+		$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('asso:entete_depense')))) .$champFin.$lignesSeparateur;
+	    }
 	}
-	foreach (array('charges', 'produits', 'contributions_volontaires') as $nomClasse) {
+	foreach ($this->classes as $laClasse=>$laDirection) {
 	    $this->LignesSimplesCorps($nomClasse, $champsSeparateur, $lignesSeparateur, $echappements=array(), $champDebut='', $champFin='');
+	    $query = association_calcul_totaux_comptes_classe($laClasse, $this->exercice, $this->destination, $multi?0:$laDirection);
+	    $chapitre = '';
+	    $i = 0;
+	    while ($data = sql_fetch($query)) {
+		$new_chapitre = substr($data['code'], 0, 2);
+		if ($chapitre!=$new_chapitre) {
+		    $this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), $new_chapitre) .$champFin.$champsSeparateur;
+		    $this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))) .$champFin.$champsSeparateur;
+		    $this->out .= $champsSeparateur.' '.$champsSeparateur;
+		    $this->out .= $lignesSeparateur;
+		    $chapitre = $new_chapitre;
+		}
+		$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), $data['code']) .$champFin.$champsSeparateur;
+		$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), $data['intitule']) .$champFin.$champsSeparateur;
+		if (!$multi) {
+		    $this->out .= $champDebut. ($laDirection?$data['valeurs']:$data['recettes']-$data['depenses']) .$champFin.$lignesSeparateur;
+		} else {
+		    $this->out .= $champDebut.$data['recettes'].$champFin.$champsSeparateur;
+		    $this->out .= $champDebut.$data['depenses'].$champFin.$lignesSeparateur;
+		}
+	    }
 	}
     }
 
     // export texte de type s-expression / properties-list / balisage (conteneurs*conteneurs*donnees) simple : JSON, XML (utilisable avec ASN.1), YAML, etc.
     // de par la simplicite recherchee il n'y a pas de types ou d'attributs : BSON, Bencode, JSON, pList, XML, etc.
-    function exportLignesMultiples($balises, $echappements=array(), $champDebut='', $champFin='', $indent="\t", $entetesPerso='') {
+    function exportLignesMultiples($balises, $echappements=array(), $champDebut='', $champFin='', $indent="\t", $entetesPerso='', $multi=false) {
 	$this->out .= "$balises[compteresultat1]\n";
 	if (!$entetesPerso) {
 	    $this->out .= "$indent$balises[entete1]\n";
@@ -603,30 +628,15 @@ class ExportComptes {
 	    $this->out .= "$indent$indent$balises[exercice1] $champDebut". sql_asso1champ('exercice', $this->exercice, 'intitule') ."$champFin $balises[exercice0]\n";
 	    $this->out .= "$indent$balises[entete0]\n";
 	}
-	foreach (array('charges', 'produits', 'contributions_volontaires') as $nomClasse) {
-	    switch ($nomClasse) {
-		case 'charges' :
-		    $dir = '-1';
-		    break;
-		case 'produits' :
-		    $dir = '+1';
-		    break;
-		case 'contributions_volontaires' :
-		    $dir = 0;
-		    break;
-	    }
+	foreach ($this->classes as $laClasse=>$laDirection) {
 	    $baliseClasse = $nomClasse.'1';
 	    $this->out .= "$indent$balises[$baliseClasse]\n";
-	    $query = association_calcul_totaux_comptes_classe($GLOBALS['association_metas']['classe_'.$nomClasse], $this->exercice, $this->destination, $dir);
+	    $query = association_calcul_totaux_comptes_classe($laClasse, $this->exercice, $this->destination, $laDirection);
 	    $chapitre = '';
 	    $i = 0;
 	    while ($data = sql_fetch($query)) {
-		if ($key==='contributions_volontaires') {
-		    if ($data['depenses']>0) {
-			$valeurs = $data['depenses'];
-		    } else {
-			$valeurs = $data['recettes'];
-		    }
+		if ( !$laDirection ) {
+		    $valeurs = ($data['depenses']>0)?$data['depenses']:$data['recettes'];
 		} else {
 		    $valeurs = $data['valeurs'];
 		}
@@ -643,7 +653,12 @@ class ExportComptes {
 		$this->out .= "$indent$indent$indent$balises[categorie1]\n";
 		$this->out .= "$indent$indent$indent$indent$balises[code1] $champDebut". str_replace(array_keys($echappements), array_values($echappements), $data['code']) ."$champFin $balises[code0]\n";
 		$this->out .= "$indent$indent$indent$indent$balises[intitule1] $champDebut". str_replace(array_keys($echappements), array_values($echappements), $data['intitule']) ."$champFin $balises[intitule0]\n";
-		$this->out .= "$indent$indent$indent$indent$balises[montant1] $champDebut".$valeurs."$champFin $balises[montant0]\n";
+		if ( !$multi ) {
+		    $this->out .= "$indent$indent$indent$indent$balises[montant1] $champDebut".$valeurs."$champFin $balises[montant0]\n";
+		} else {
+		    $this->out .= "$indent$indent$indent$indent$balises[credit1] $champDebut".$data['recettes']."$champFin $balises[credit0]\n";
+		    $this->out .= "$indent$indent$indent$indent$balises[debit1] $champDebut".$data['depenses']."$champFin $balises[debit0]\n";
+		}
 		$this->out .= "$indent$indent$indent$balises[categorie0]\n";
 	    }
 	    if ($chapitre!='') {
@@ -656,8 +671,8 @@ class ExportComptes {
     }
 
     // fichier texte final a afficher/telecharger
-    function leFichier($ext, $subtype) {
-	$fichier = _DIR_RACINE.'/'._NOM_TEMPORAIRES_ACCESSIBLES.'compte_'.$subtype.'_'.$this->exercice.'_'.$this->destination.".$ext"; // on essaye de creer le fichier dans le cache local/ http://www.spip.net/fr_article4637.html
+    function leFichier($ext, $subtype='') {
+	$fichier = _DIR_RACINE.'/'._NOM_TEMPORAIRES_ACCESSIBLES.'compte_'. ($subtype?$subtype:$this->type) .'_'.$this->exercice.'_'.$this->destination.".$ext"; // on essaye de creer le fichier dans le cache local/ http://www.spip.net/fr_article4637.html
 	$f = fopen($fichier, 'w');
 	fputs($f, $this->out);
 		fclose($f);
@@ -700,8 +715,10 @@ class ExportComptes_PDF extends FPDF {
     var $exercice;
     var $destination;
 
-    // Initialisations
-    function init($ids) {
+    // Initialisations (automatique au chargement de la classe)
+    function __construct($ids='') {
+	if ( !$ids )
+	    $ids = association_passe_parametres_comptables();
 	// passer les parametres transmis aux variables de la classe
 	$this->annee = $ids['annee'];
 	$this->exercice = $ids['exercice'];

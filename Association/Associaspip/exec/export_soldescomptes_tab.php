@@ -14,18 +14,13 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('exec/compte_resultat'); // c'est pour la definition de classe ExportCompteResultats
-
-// Export du Compte de Resultat au format CTX
-// http://www.creativyst.com/Doc/Std/ctx/ctx.htm
-function exec_export_compteresultats_ctx() {
+// Export du Compte de Resultat au format .tab
+function exec_export_soldescomptes_tab() {
 	if (!autoriser('associer', 'export_comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$ctx = new ExportCompteResultats(_request('var'));
-		$ctx->exportLignesUniques('|', "\n", array("\r"=>'\r', "\n"=>'\n', "\\"=>'\i', '|'=>'\p'), '', '');
-		$ctx->leFichier('ctx');
+		exec_export_soldescomptes_tsv();
 	}
 }
 

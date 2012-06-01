@@ -14,25 +14,17 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('exec/compte_resultat'); // c'est pour la definition de classe ExportCompteResultats
-
-// Export du Compte de Resultat au format JSON
-// http://fr.wikipedia.org/wiki/Json
-function exec_export_compteresultats_json() {
+// Export du Compte de Resultat au format TSV
+// http://fr.wikipedia.org/wiki/Format_TSV
+function exec_export_soldescomptes_tsv() {
 	if (!autoriser('associer', 'export_comptes')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$json = new ExportCompteResultats(_request('var'));
-		$balises = array();
-		foreach (array('entete', 'titre', 'nom', 'exercice', 'charges', 'produits', 'contributions_volontaires', 'chapitre', 'code', 'libelle', 'categorie', 'intitule', 'montant') as $key) {
-			$balises[$key.'1'] = '{ "'.ucfirst($key).'": ';
-			$balises[$key.'0'] = '}';
-		}
-		$balises['compteresultat1'] = '{ "CompteDeResultat": ';
-		$balises['compteresultat0'] = '}';
-		$json->exportLignesMultiples($balises, array('&'=>'&amp;','"'=>'&quot;','<'=>'&lt;','>'=>'&gt;'), '"', '"');
-		$json->leFichier('json');
+		include_spip('inc/association_comptabilite');
+		$tsv = new ExportComptes_TXT();
+		$tsv->exportLignesUniques("\t", "\n", array("\t"=>'\t',"\n"=>'\n'), '"', '"');
+		$tsv->leFichier('tab');
 	}
 }
 
