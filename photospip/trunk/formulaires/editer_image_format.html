@@ -64,15 +64,15 @@
 				<label for="ratio"><:photospip:label_ratio_libre:></label>
 			</div>
 			<div class="choix">
-				<input type="radio" id="ratio1" name="ratio" value="1:1"[(#ENV{ratio}|=={'1:1'}|oui)checked="checked"] />
+				<input type="radio" id="ratio1" name="ratio" value="1:1"[(#ENV{ratio,''}|=={'1:1'}|oui)checked="checked"] />
 				<label for="ratio1">1:1</label>
 			</div>
 			<div class="choix">
-				<input type="radio" id="ratio2" name="ratio" value="4:3"[(#ENV{ratio}|=={'4:3'}|oui)checked="checked"] />
+				<input type="radio" id="ratio2" name="ratio" value="4:3"[(#ENV{ratio,''}|=={'4:3'}|oui)checked="checked"] />
 				<label for="ratio2">4:3</label>
 			</div>
 			<div class="choix">
-				<input type="radio" id="ratio3" name="ratio" value="16:9"[(#ENV{ratio}|=={'16:9'}|oui)checked="checked"] />
+				<input type="radio" id="ratio3" name="ratio" value="16:9"[(#ENV{ratio,''}|=={'16:9'}|oui)checked="checked"] />
 				<label for="ratio3">16:9</label>
 			</div>
 		</li>
