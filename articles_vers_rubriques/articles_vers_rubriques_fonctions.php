@@ -20,7 +20,7 @@ if (spip_version_compare($GLOBALS['spip_version_branche'], '3.0.0alpha', '>=')) 
 	define('_SPIP3', false);
 }
 
-function articles_vers_rubriques($id_article_list, $id_parent, $auteur_admin, $statut_br) {
+function articles_vers_rubriques($id_article_list, $id_parent, $auteur_admin, $statut_br, $modif_liens) {
 	$nouvel_rubrique = array();
 	$message = "";
 	
@@ -217,31 +217,21 @@ function articles_vers_rubriques($id_article_list, $id_parent, $auteur_admin, $s
 
 		// correspondance id_marticle <-> id_article
 		sql_insertq(TABLE_ARTICLES_RUBRIQUES, array('id_article' => $id_marticle, 'id_rubrique' => $id_rubrique));
+		
+		if($modif_liens)  $message.= modif_liens_article($id_marticle,$id_rubrique);
 	}
 	return $message;
 }
 
 
-function trouve_idrubrique($masque) {
-	$id_rubrique = sql_getfetsel('id_rubrique', TABLE_ARTICLES_RUBRIQUES, 'id_article='.$masque[2]);
-	
-	if($id_rubrique != false)
-		return '['.$masque[1].'->rubrique'.$id_rubrique.']';
-
-	else {
-		echo "<br><b>Pas de articles:".$masque[2]." trouvée dans la table ".TABLE_ARTICLES_RUBRIQUES."</b><br>";
-		return '['.$masque[1].'->article'.$masque[2].']';
-	}
-}
-
-function traite_table_champ2($table, $id, $champs) {
-	
+function traite_table_champ2($id_article, $id_rubrique, $table, $id, $champs) {
+	$msg='';
 	$select = $id;
 	foreach ($champs as $i => $nom_champ) {
 		$select .= ', '.$nom_champ;
 	}
 	
-	$pattern = '/\[([^]]*)-\>[article]{0,7}([0-9 ]+)\]/';
+	$pattern = '/\[([^]]*)-\>[article]{0,7}('.$id_article.')\]/';
 	//$pattern = '/\[([^]]*)-\>[article]{0,7}(['.$id.' ]+)\]/';
 	if($resultats = sql_select($select, $table)) {
 		while($res = sql_fetch($resultats)) {
@@ -251,8 +241,8 @@ function traite_table_champ2($table, $id, $champs) {
 				$string = $res[$nom_champ];
 				if($string!='') {
 					$count = 0;
-					$new_string = preg_replace_callback($pattern, 'trouve_idrubrique', $string);
-		//print "pattern  $newstring";
+					$replacement = '[$1->rubrique'.$id_rubrique.']';
+					$new_string = preg_replace($pattern, $replacement, $string, -1, $count);
 					if($new_string == NULL){
 						echo "<br><b>Erreur sur preg_replace_callback ... sur champ:$nom_champ et id:$res[$id]</b><br>";
 						//print "pattern $pattern, e stinga $string";
@@ -265,25 +255,32 @@ function traite_table_champ2($table, $id, $champs) {
 						// echo "table:$table,id:".$res[$id].", String <br>$string<br>devient<br>".$new_string."<br>";
 
 						sql_updateq($table, array($nom_champ => $new_string), $id.'='.$res[$id]);
+						if($count>0)  $msg.= "<br /> $count liens trait&eacute;s dans la table $table ";
 					}
+					
 				}
 			}
 		}
 
 	}
 	else
-		echo 'Erreur sur sql_select<br>'.sql_error();
+		return 'liens: Erreur sur sql_select<br>'.sql_error();
+	
+	return $msg;
 }
 
 
 // Fonction de recherche des liens vers une article
 // Changer ces liens qui pointaient vers l'article vers la rubriqe 
-function modif_liens2() {
-	traite_table_champ2('spip_articles', 'id_article', array("surtitre","titre","soustitre","texte","chapo","ps"));
-	traite_table_champ2('spip_rubriques', 'id_rubrique', array("titre","descriptif","texte"));
-	traite_table_champ2('spip_auteurs', 'id_auteur', array("bio"));
-	traite_table_champ2('spip_forum', 'id_forum', array("texte"));
-	traite_table_champ2('spip_syndic', 'id_syndic', array("descriptif"));
+function modif_liens_article($id_article,$id_rubrique) {
+	$msg='';
+	$msg .= traite_table_champ2($id_article, $id_rubrique, 'spip_articles', 'id_article', array("surtitre","titre","soustitre","texte","chapo","ps"));
+	$msg .= traite_table_champ2($id_article, $id_rubrique, 'spip_breves', 'id_breve', array("titre","texte"));	
+	$msg .= traite_table_champ2($id_article, $id_rubrique, 'spip_rubriques', 'id_rubrique', array("titre","descriptif","texte"));
+	$msg .= traite_table_champ2($id_article, $id_rubrique, 'spip_auteurs', 'id_auteur', array("bio"));
+	$msg .= traite_table_champ2($id_article, $id_rubrique, 'spip_forum', 'id_forum', array("texte"));
+	$msg .= traite_table_champ2($id_article, $id_rubrique, 'spip_syndic', 'id_syndic', array("descriptif"));
+	return $msg;
 }
 
 ?>

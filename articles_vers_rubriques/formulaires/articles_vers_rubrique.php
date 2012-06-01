@@ -64,36 +64,15 @@ function formulaires_articles_vers_rubrique_traiter_dist(){
 	} else {
 		$auteur_admin = false;
 	}
-	
-	
-	
-	if(_request('lance_conv') == 'toutes') {
-		if($les_breves = sql_select('id_article', 'spip_articles')) {
-			while($une_breve = sql_fetch($les_breves)) {
-				articles_vers_rubriques($une_breve['id_article'], $choix_rub, $auteur_admin, _request('statut_br'));
-				spip_log('articles_vers_rubrique : conversion sur article n'.$une_breve['id_article']);
-			}
-		}
-		else
-			$msg = '<br>Erreur sur sql_select dans boucle sur les articles'.sql_error().'<br>';
-		
-		if(sql_count($les_breves)<1)
-			$msg = "Aucunes articleses trouvées";
-		else
-			$msg = "Conversion des articleses terminées";
-		
-		spip_log('articles_vers_rubrique : conversion des articles finies');
-	}
-	else if(_request('lance_conv') == 'test') {
-	    // Test sur une breve
-	    $msg = "Conversion de test sur la article "._request('_id_test')."<br>";
-	    $msg .= articles_vers_rubriques(_request('_id_test'), $choix_rub, $auteur_admin, _request('statut_br'));
-	}
-
 	if(_request('modif_liens')) {
-		modif_liens2();
-		$msg .= "<br>Modification des liens vers les articles";
-	}
+		$modif_liens=true;
+	} else {
+		$modif_liens=false;
+	}	
+	
+	    // conversion des articles
+	    $msg = "Conversion sur les articles "._request('_id_test')."<br>";
+		$msg .= articles_vers_rubriques(_request('_id_test'), $choix_rub, $auteur_admin, _request('statut_br'),$modif_liens);
 
 //	if(!_request('modif_liens') && !_request('lance_conv'))
 //		$msg = "Rien à faire ...";
