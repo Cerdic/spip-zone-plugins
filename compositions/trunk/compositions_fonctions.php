@@ -244,6 +244,7 @@ function compositions_recuperer_heritage($type){
 	else {
 		$type_parent = 'rubrique';
 		$nom_id_ancetre = 'id_parent';
+		$ancetres = false;
 		$arr_sql = array($nom_id_ancetre,'composition');
 	}
 	$table_parents =  table_objet_sql($type_parent);
@@ -345,7 +346,7 @@ function compositions_heriter($type, $id_rubrique, $serveur=''){
 		if (strlen($compo_rubrique) AND is_null($infos))
 			$infos = compositions_lister_disponibles($type_parent);
 	}
-	while ($id_parent = $row[$nom_id_parent]
+	while ($id_parent = $row[$nom_id_ancetre] // ATtention : nom_id_ancetre peut differer de nom_id_parent, pour les articles par exemple
 		AND
 		(!strlen($compo_rubrique) OR !isset($infos[$type_parent][$compo_rubrique]['branche'][$type])));
 
