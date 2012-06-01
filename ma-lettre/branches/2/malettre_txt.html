@@ -1,0 +1,55 @@
+[(#REM)
+  squelette de la newsletter au format texte
+  
+  parametre:
+  - date
+  - id_edito:  id de l'article edito
+  - selection: id des articles selectionnes (separe par une virgule)
+
+]#CACHE{0}
+#HTTP_HEADER{Content-Type: text/plain;}[(#REM)pour supprimer les boutons admin ]
+Ceci est une message automatique - ne pas repondre
+
+--------------------------------------------------------------------
+      LETTRE D'INFORMATION #NOM_SITE_SPIP
+--------------------------------------------------------------------
+
+<B_edito>
+*********************************
+EDITO
+*********************************
+<BOUCLE_edito(ARTICLES){id_article=#ENV{id_edito}}> 
+[(#TITRE|textebrut|supprimer_numero)] 
+-------------------------------------------------
+[(#TEXTE|liens_absolus|couper{300}|PtoBR|textebrut)]
+#URL_SITE_SPIP/[(#URL_ARTICLE|substr{3})]
+</BOUCLE_edito>
+
+#SET{selection,#ENV**{selection}|explode{","}}
+<BOUCLE_selection_bonux(POUR){tableau #GET{selection}}><BOUCLE_artx(ARTICLES){id_article=#VALEUR}>
+    
+[(#TITRE|textebrut|supprimer_numero)] 
+-------------------------------------------------
+[(#INTRODUCTION|liens_absolus|couper{300}|PtoBR|textebrut)]
+#URL_SITE_SPIP/[(#URL_ARTICLE|substr{3})]
+</BOUCLE_artx></BOUCLE_selection_bonux>
+
+#SET{selection_eve,#ENV**{selection_eve}|explode{","}}
+<B_eveselection_bonux>
+*********************************
+<:agenda:agenda:>
+<BOUCLE_eveselection_bonux(POUR){tableau #GET{selection_eve}}><BOUCLE_eveartx(EVENEMENTS){id_evenement=#VALEUR}>
+    
+[(#TITRE|textebrut|supprimer_numero)] 
+-------------------------------------------------
+[(#DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,''})]
+[(#DESCRIPTIF|liens_absolus|couper{300}|PtoBR|textebrut)]
+#URL_SITE_SPIP/[(#URL_EVENEMENT)]
+</BOUCLE_eveartx></BOUCLE_eveselection_bonux>
+
+--
+#NOM_SITE_SPIP
+#URL_SITE_SPIP
+se désabonner: #NOM_SITE_SPIP
+
+                       
