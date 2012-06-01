@@ -38,8 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_fichier_inconnu' => 'Súbor "@fichier@" nie je dostupný.',
 
 	// T
-	'tri_croissant' => 'Tri croissant', # NEW
-	'tri_decroissant' => 'Tri décroissant' # NEW
+	'tri_croissant' => 'Zotriediť vzostupne',
+	'tri_decroissant' => 'Zotriediť zostupne'
 );
 
 ?>

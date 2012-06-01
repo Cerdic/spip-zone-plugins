@@ -38,8 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_fichier_inconnu' => 'The file "@fichier@" is not available.',
 
 	// T
-	'tri_croissant' => 'Tri croissant', # NEW
-	'tri_decroissant' => 'Tri décroissant' # NEW
+	'tri_croissant' => 'Ascending sort',
+	'tri_decroissant' => 'Descending sort'
 );
 
 ?>
