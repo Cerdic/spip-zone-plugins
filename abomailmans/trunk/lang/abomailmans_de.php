@@ -51,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoyer_courier_liste' => 'Mail an diese Mailingliste senden:',
 	'envoyer_mailmans' => 'Modell und Inhalt auswählen', # MODIF
 	'erreur_email_liste_oublie' => 'Die E-Mail Adresse ist obligatorisch.',
+	'erreur_nobot' => 'Votre inscription n\' a pu être effectué à cause d\'un problème technique', # NEW
 	'explication_email_subscribe' => 'Email for subscribe, something like <code>suffix+subscribe@exemple.org</code>',
 	'explication_email_sympa' => 'Wenn dieses Feld ausgefüllt ist, wird von einer Sympa-Liste ausgegangen,
 							anderenfalls von einer Mailman-Liste.',
