@@ -284,10 +284,14 @@
 							var boxoffset = $('#cboxLoadedContent').offset();
 							var container_offset = $('#image-container').offset().top-$('#cboxLoadedContent').offset().top;
 							var container_width = $('#image-container').width();
+							/**
+							 * Si on est en modal et si la hauteur de l'image affichée est inférieure à la hauteur
+							 * de la div de la modale, on fait scroller l'image lors du scroll dans la modale
+							 */
 							if($('#image-container').height() < $('#cboxLoadedContent').height()){
 								$('#cboxLoadedContent').scroll(function() {
-									var limite_multilang = boxoffset.top;
-									var limite_bas = limite_multilang+$('#image-container').parents("form").height()-$('#image-container').parents("form").find(".boutons").height();
+									var limite_image = boxoffset.top;
+									var limite_bas = limite_image+$('#image-container').parents("form").height()-$('#image-container').parents("form").find(".boutons").height();
 									var pos_bas = $('#image-container').offset().top+$('#image-container').height();
 									if(($('#cboxLoadedContent').scrollTop() >= container_offset) && (pos_bas <= limite_bas) && ($('#cboxLoadedContent').scrollTop()+$('#image-container').offset().top < limite_bas)){
 										var margintop = $('#cboxLoadedContent').scrollTop() - container_offset+20;
@@ -347,7 +351,7 @@
 							}
 						}
 				  	});
-				  	<BOUCLE_si_image_reduire(CONDITION){si #CONFIG{photospip/image_recadre,on}|oui}>
+				  	<BOUCLE_si_image_recadre(CONDITION){si #CONFIG{photospip/image_recadre,on}|oui}>
 						x1 = jQuery('#recadre_x1');
 						y1 = jQuery('#recadre_y1');
 						x2 = jQuery('#recadre_x2');
@@ -454,6 +458,7 @@
 									if($(this).val() < hauteur){
 										var height_ratio = parseInt(parseInt($(this).val())/ratio);
 										ias_selection.y2 = parseInt(ias_selection.y1)+height_ratio;
+										var width_new = $('#resize_width').val();
 										/**
 										 * Faire attention aux ratios
 										 */
@@ -719,7 +724,7 @@
 								}
 							}
 						});
-					</BOUCLE_si_image_reduire>
+					</BOUCLE_si_image_recadre>
 				});
 			}
 	// --></script>
