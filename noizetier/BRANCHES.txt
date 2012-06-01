@@ -1,0 +1,3 @@
+La branche v1 concerne noiZetier sous SPIP 2.1 avec Zpip v1.
+La branche v2 concerne noiZetier sous SPIP 3 avec Zpip v1.
+La branche v3 concerne noiZetier sous SPIP 3 avec Zpip v2.

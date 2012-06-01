@@ -1,7 +1,7 @@
 <paquet
 	prefix="noizetier"
 	categorie="maintenance"
-	version="1.0.2"
+	version="2.0.0"
 	etat="dev"
 	compatibilite="[3.0.0-beta;3.0.99]"
 	logo="prive/themes/spip/images/noizetier-32.png"
@@ -40,7 +40,7 @@
 
 	<utilise nom="compositions" compatibilite="[2.0.0;[" />
 	<utilise nom="ieconfig" />
-	<utilise nom="Zpip" compatibilite="[2.0.0;[" />
+	<utilise nom="Zpip" compatibilite="[1.7.0;1.9.99]" />
 
 	<menu nom="bando_noizetier" titre="noizetier:editer_noizetier_titre" parent="menu_squelette" icone="images/noizetier-16.png" action="noizetier" />
 </paquet>
