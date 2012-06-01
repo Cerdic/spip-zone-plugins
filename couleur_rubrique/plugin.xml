@@ -32,5 +32,3 @@
 	<necessite id="lib:farbtastic_1_3_1" src="http://files.spip.org/contribs/farbtastic_1_3_1.zip" />
 	<categorie>maintenance</categorie>
 </plugin>
-
-
