@@ -129,31 +129,29 @@ function formulaires_envoi_malettre_traiter_dist(){
             // recup  expediteur
             $exp_email = _request('expediteur_more');
             if ($exp_email=="") {
-                $id_expediteur = intval(substr(_request('expediteur'),1)); 
+               $id_expediteur = intval(substr(_request('expediteur'),1)); 
                 $exp_name  = lire_config("malettre/expediteur_nom$id_expediteur"); 
-                $exp_mail = lire_config("malettre/expediteur_email$id_expediteur");
-                if ($exp_mail=="") 
-                   die("expediteur inconnu");
-                
+                $exp_email = lire_config("malettre/expediteur_email$id_expediteur");
+                if ($exp_email=="") 
+                   die("expediteur inconnu");               
             } else {
-              $exp_name = $exp_mail;
+              $exp_name = $exp_email;               
             } 
             
-           
-                 
+               
             // recup destinataire
             $destinataire = array();
             $desti = _request('desti');
             foreach ($desti as $desti_item) {     // on lit la config pour retrouver l'email
                 $id_desti = intval(substr($desti_item,1)); 
-                $desti_mail = lire_config("malettre/adresse_email$id_desti"); 
-                if ($desti_mail !="") 
-                      $destinataire[] = $desti_mail;            
+                $desti_email = lire_config("malettre/adresse_email$id_desti"); 
+                if ($desti_email !="") 
+                      $destinataire[] = $desti_email;            
             }
             
             $desti_more = _request('desti_more'); 
             if ($desti_more!="") $destinataire[] = $desti_more;
-             /*    FIXME: 
+             /*    FIXME:   a finaliser : if (!defined('_DIR_PLUGIN_MESABONNES ...
             if (_request('mes_abonnes')=='oui') {
                 if ($resultats = sql_select('email', 'spip_mesabonnes')) {
                 	while ($res = sql_fetch($resultats)) 
@@ -163,9 +161,10 @@ function formulaires_envoi_malettre_traiter_dist(){
              */
            
             
-            $message = "<h3>"._T('malettre:envoi')." <i style='color:#999;'>$sujet</i></h3>\n";
-            $message = "<div style='border:1px solid;background:#eee;margin:10px 0;padding:10px;font-family:arial,sans-serif;font-size:0.9em;'>";
+            $message = "<h3>"._T('malettre:envoi')." : <span style='font-weight:normal;font-size:12px;'>$sujet</span></h3>\n";
+            $message .= "<div style='border:1px solid;background:#eee;margin:10px 0;padding:10px;font-family:arial,sans-serif;font-size:0.9em;'>";
             
+           
             // envoi lettre
             // a ameliorer grandement flood
             // utiliser une methode ajax pour temporiser l'envoi par flot
@@ -220,7 +219,7 @@ function formulaires_envoi_malettre_traiter_dist(){
             }
             $message.= "</div>";
             
-            $message.= "<div> $i / $j </div>";
+            // $message.= "<div> $i / $j </div>";
             
             // archivage de la lettre en dur    
             // FIXME: utiliser les methodes natives pour ecrire les fichiers   
