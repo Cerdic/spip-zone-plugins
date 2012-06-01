@@ -9,7 +9,7 @@ _ &#169; Distribu&#233; sous licence GNU/GPL
 _ Le module de choix de couleur par [Steven Wittens->http://acko.net/dev/farbtastic] sous licence GPL
 	</auteur>
 	<version>
-	1.6
+	1.6.1
 	</version>
 	<etat>
 	stable
@@ -43,7 +43,7 @@ _ Le module de choix de couleur par [Steven Wittens->http://acko.net/dev/farbtas
 
 	<necessite id="SPIP" version="[1.9.0;]" />
 	
-	<necessite id="lib:farbtastic_1_3" src="http://files.spip.org/spip-zone/farbtastic_1_3.zip" />
+	<necessite id="lib:farbtastic_1_3_1" src="http://files.spip.org/spip-zone/farbtastic_1_3_1.zip" />
 	
 </plugin>
 
