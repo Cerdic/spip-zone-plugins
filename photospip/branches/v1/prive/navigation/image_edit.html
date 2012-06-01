@@ -1,0 +1,24 @@
+<BOUCLE_mode_pas_vignette(CONDITION){si #ENV{mode}|!={vignette}|oui}>
+<BOUCLE_doc(DOCUMENTS){id_document}{tout}>
+<div id="versions">
+	<h3><:photospip:titre_informations_images:></h3>
+	<div class="infos">
+		<div id="infos_doc_sup">
+			<p><:photospip:id_document:>#ID_DOCUMENT</p>
+			<p><:photospip:type_original:>[(#MIME_TYPE|sinon{inconnu})]</p>
+			<p><:photospip:date_doc:>#DATE</p>
+			<p><:photospip:date_modif_doc:>#MAJ</p>
+			<p><:photospip:taille_fichier:><br />
+			#LARGEUR x #HAUTEUR px[ - (#TAILLE|taille_en_octets)]
+			</p>
+		</div>
+	</div>
+	[(#CONFIG{plugin/PHOTO_INFOS}|oui)
+	[<h4><:photospip:donnees_exif:></h4>
+	<div class="infos">
+		(#INCLURE{fond=inc_exif,fichier=#FICHIER}|trim)
+		<INCLURE{fond=inc_histogramme,fichier=#FICHIER}>
+	</div>]]
+</div>
+</BOUCLE_doc>
+</BOUCLE_mode_pas_vignette>

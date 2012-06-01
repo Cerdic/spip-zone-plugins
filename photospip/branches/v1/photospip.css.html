@@ -1,0 +1,157 @@
+#CACHE{7*24*3600,cache-client}
+#HTTP_HEADER{'Content-Type: text/css'}
+
+#image-container{
+	position:relative;
+	margin:15px 10;
+	text-align:center;
+}
+
+#image_modifier img{
+	vertical-align:bottom;
+}
+.previsu_texte{
+	font-size:.9em;
+	background-color:#333;
+	color:#fff;
+	position:absolute;
+	top:0;
+	opacity:0.6;
+	padding:10px 0;
+}
+button.revenir_version{
+	position:absolute;
+	top :50%;
+	margin-top:-12px;
+	right:22px;
+	cursor :hand;
+	display:none;
+	border:none;
+	background-color:transparent;
+}
+
+button.delete_version{
+	position:absolute;
+	top :50%;
+	margin-top:-12px;
+	right:2px;
+	cursor :hand;
+	display:none;
+	border:none;
+	background-color:transparent;
+}
+
+.params_filtre{
+	margin: 10px;
+	padding :5px;
+	border:1px solid #ccc;
+	width:60%;
+}
+
+#versions{
+	padding :0;
+	font-size:.85em;
+	width:275px;
+	float:right;
+	text-align:left;
+}
+
+.help h4,#versions h4{
+	background:#E5E5E5 url(#CHEMIN{images/titre_top_left.png}) no-repeat scroll right top;
+	font-weight:normal;
+	padding:5px 3px;
+}
+
+.help .infos,#versions .infos{
+	background-color:#F4F4F4;
+	padding:10px;
+	position:relative;
+	margin:0 0 10px 0;
+}
+.version{
+	position:relative;
+	float:left;
+	border:1px solid #ccc;
+	width:80px;
+	margin:1px;
+	height:80px;
+	text-align:center;
+	background:#fff;
+}
+
+.version label{
+	border:none;
+	line-height:80px;
+	cursor:inherit;
+	display:inline;
+}
+
+button{
+	cursor:pointer;	
+}
+.version label img{
+	vertical-align:middle;
+}
+.waiting{
+	color:#86B900;
+}
+input.texte{
+	border:3px solid #ccc;
+	padding:2px;
+}
+.spip_bouton input{
+	margin:3px;
+}
+.cache {
+	display:block;
+}
+#container-1 h3{
+	margin:20px 0;
+}
+.help{
+	width:30%;
+	padding:5px;
+	margin:0 10px 20px 0;
+	float:right;
+	font-size:11px;
+}
+.waiting{
+	width:60%;
+	margin:40px auto;
+	position:absolute;
+	color:#000;
+	top:20px;
+	left:40px;
+}
+.disabled{
+	background-color:red;
+}
+
+.clear{
+	clear:both;
+}
+
+#fragment-format label{
+	color:#666;
+	cursor:pointer;
+	border-bottom:1px dotted #86B900;
+}
+
+#image_modifier{
+	float:left;border:2px solid #ccc;
+}
+.nocache{
+	color:#000;
+	border:none;
+}
+
+.warning{
+	margin:5px;
+	padding:3px 3px 3px 12px;
+	border:1px solid #86B900;
+	background:#d4f384 url(#CHEMIN{images/ico-warning.png}) left center no-repeat;
+}
+
+[(#INCLURE{[(#EVAL{_DIR_LIB_IMGAREASELECT})]css/imgareaselect-animated.css}|liens_absolus)]
+[(#INCLURE{javascript/jquery-ui/themes/smoothness/jquery.ui.tabs.css}|liens_absolus)]
+[(#INCLURE{javascript/jquery-ui/themes/smoothness/jquery.ui.slider.css}|liens_absolus)]
