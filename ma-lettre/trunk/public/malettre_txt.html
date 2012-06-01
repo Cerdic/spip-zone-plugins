@@ -22,7 +22,7 @@ EDITO
 [(#TITRE|textebrut)] 
 -------------------------------------------------
 [(#TEXTE|liens_absolus|couper{300}|PtoBR|textebrut)]
-#URL_SITE_SPIP/[(#URL_ARTICLE|substr{3})]
+[(#URL_ARTICLE|url_absolue)]
 </BOUCLE_edito>
 
 #SET{selection,#ENV**{selection}|explode{","}}
@@ -49,7 +49,4 @@ EDITO
 
 --
 #NOM_SITE_SPIP
-#URL_SITE_SPIP
-se désabonner: #NOM_SITE_SPIP
-
-                       
+#URL_SITE_SPIP  
