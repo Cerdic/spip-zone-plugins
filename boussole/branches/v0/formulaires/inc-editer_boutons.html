@@ -1,0 +1,24 @@
+<div class="actions">
+	[(#ENV{type}|=={site}|et{#ENV{affiche}|=={oui}}|oui)
+	<button name="afficher" value="#ENV{id_site}-non" title="<:boussole:bulle_cacher:>">
+		[<img height="24" width="24" src="(#CHEMIN{prive/themes/spip/images/action_cacher.png})" alt="" />]
+	</button>
+	]
+	[(#ENV{type}|=={site}|et{#ENV{affiche}|=={non}}|oui)
+	<button name="afficher" value="#ENV{id_site}-oui" title="<:boussole:bulle_afficher:>">
+		[<img height="24" width="24" src="(#CHEMIN{prive/themes/spip/images/action_afficher.png})" alt="" />]
+	</button>
+	]
+[(#ENV{total}|>{1}|oui)
+	[(#ENV{compteur}|=={#ENV{total}}|non)
+	<button name="deplacer_#ENV{type}" value="[(#ENV{id_site}|?{#ENV{id_site}, #ENV{alias}})-bas]" title="<:boussole:bulle_deplacer_bas:>">
+		[<img height="24" width="24" src="(#CHEMIN{prive/themes/spip/images/action_bas.png})" alt="" />]
+	</button>
+	]
+	[(#ENV{compteur}|=={1}|non)
+	<button name="deplacer_#ENV{type}" value="[(#ENV{id_site}|?{#ENV{id_site}, #ENV{alias}})-haut]" title="<:boussole:bulle_deplacer_haut:>">
+		[<img height="24" width="24" src="(#CHEMIN{prive/themes/spip/images/action_haut.png})" alt="" />]
+	</button>
+	]
+]
+</div>

@@ -1,0 +1,10 @@
+<BOUCLE_boussole(BOUSSOLES) {id_syndic}>
+<div style="background: #eee; border: 1px solid #ccc; margin: 1em 0; padding: 0 1em 0;">
+	<div class="champ contenu_descriptif">
+		[(#SET{nom_boussole, [<a href="#URL_ECRIRE{boussoles, alias=#AKA_BOUSSOLE}" title="<:boussole:bulle_aller_boussole:>">(#AKA_BOUSSOLE|boussole_traduire{nom_boussole})</a>]})]
+		<div dir="#LANG_DIR" class="descriptif">
+			<p><:boussole:info_site_boussole{boussole=#GET{nom_boussole}}:></p>
+		</div>
+	</div>
+</div>
+</BOUCLE_boussole>
