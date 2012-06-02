@@ -1,6 +1,6 @@
-[(#ID_EVENEMENT|oui)
+[(#ID_EVENEMENT|intval|oui)
 	[(#AUTORISER{modifier,evenement,#ID_EVENEMENT}|sinon_interdire_acces)]]
-[(#ID_EVENEMENT|non)
+[(#ID_EVENEMENT|intval|non)
 	[(#AUTORISER{creer,evenement,0,'',#ARRAY{id_article,#ENV{id_article}}}|sinon_interdire_acces)]]
 
 #SET{retour,#ENV{redirect}|sinon{#ENV{id_article}|?{#URL_ECRIRE{article,id_article=#ID_ARTICLE},#ID_EVENEMENT|?{#ID_EVENEMENT|generer_url_entite{evenement},#URL_ECRIRE{evenements}}}}}
