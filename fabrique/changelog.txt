@@ -3,11 +3,17 @@ Ce plugin génère d'autres plugins !
 -----------------------------------
 
 
+1.16.0 le 02 06 2012
+--------------------
 
 Dans l'interface
 * Décocher les boutons d'un objet et ils revenaient !
 
 Dans le plugin généré
+* Possibilité de génerer une saisie et sa vue pour un objet.
+  La saisie proposée fonctionne pour les tables de petits volumes (<select>)
+  et gère la presence du champ id_parent en proposant alors le parametre recursif=oui
+
 * Une table avec un espace (spip_xx_yys) nécessite la définition d'un surnom de table objet
 * À l'inverse sur ces tables avec un espace, les fonctions d'autorisations n'en n'ont pas : autoriser_xxyy_creer_dist()
 

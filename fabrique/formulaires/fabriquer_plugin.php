@@ -358,6 +358,18 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 				}
 			}
 
+			// saisies demandees
+			if (is_array($objet['saisies'])) {
+				foreach ($objet['saisies'] as $saisie) {
+					fabriquer_fichier('saisies/' . $saisie . '.html', $data);
+					fabriquer_fichier('saisies-vues/' . $saisie . '.html', $data);
+					// si parentee presente, saisie propose un mode recursif
+					if (champ_present($objet, 'id_parent')) {
+						fabriquer_fichier('saisies/_' . $saisie . '_recurs.html', $data);
+					}
+				}
+			}
+
 		}
 
 		unset($data['objet'],  $data['id_objet'], $data['type'],  $data['table']);
