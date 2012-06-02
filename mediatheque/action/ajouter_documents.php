@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2009                                                *
+ *  Copyright (c) 2001-2012                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -18,10 +18,24 @@ include_spip('inc/ajouter_documents'); // compat core
 include_spip('inc/choisir_mode_document'); // compat core
 include_spip('inc/renseigner_document');
 
+/**
+ * Ajouter un ou plusieurs documents
+ * 
+ * @param $id_document int 
+ * 		L'id du document à remplacer sinon si pas un id numérique, le document sera un nouveau
+ * @param $files array 
+ * 		Un array des fichiers à ajouter comme envoyé par php donc au format $_FILES :
+ * 		array(array('tmp_name' => 'fichier temporaire','name' => 'nom du fichier final'...),array(...))
+ * @param $objet string 
+ * 		Le type d'objet auquel le document est à joindre
+ * @param $id_objet int 
+ * 		L'identifiant numérique de l'objet auquel on joint le document
+ * @param $mode string 
+ * 		Le mode du document (distant, vignette, image, document, modes personnalisés)
+ */
 function action_ajouter_documents_dist($id_document, $files, $objet, $id_objet, $mode){
 	$ajouter_un_document = charger_fonction('ajouter_un_document','action');
 	$ajoutes = array();
-
 	// on ne peut mettre qu'un seul document a la place d'un autre ou en vignette d'un autre
 	if (intval($id_document)){
 		$ajoutes[] = $ajouter_un_document($id_document, reset($files), $objet, $id_objet, $mode);
@@ -37,23 +51,20 @@ function action_ajouter_documents_dist($id_document, $files, $objet, $id_objet, 
  * Ajouter un document (au format $_FILES)
  *
  * @param  $id_document
- *    document a remplacer
+ * 		document a remplacer
  * @param  $file
- *   description au format $_FILES enrichi :
- *   tmp_name : le fichier sur le serveur (/var/tmp/xyz34)
- *   name : le nom initial chez le client (portequoi.pdf)
- *   titrer : true/false
- *   mode : choix (ou auto), image, document, vignette, ...
- *   distant : url distante
- *
- * http://doc.spip.org/@ajouter_un_document
- *
+ *		description au format $_FILES enrichi :
+ *			- tmp_name : le fichier sur le serveur (/var/tmp/xyz34)
+ *			- name : le nom initial chez le client (portequoi.pdf)
+ * 			- titrer : true/false
+ * 			- mode : choix (ou auto), image, document, vignette, ...
+ * 			- distant : url distante
  * @param  $objet
- *   objet parent
+ * 		objet parent
  * @param  $id_objet
- *   id_objet du parent
+ * 		id_objet du parent
  * @param  $mode
- *   mode par defaut si pas precise pour le document
+ * 		mode par defaut si pas precise pour le document
  * @return array|bool|int|mixed|string|unknown
  */
 function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet, $mode) {
