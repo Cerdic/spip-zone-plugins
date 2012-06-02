@@ -15,6 +15,7 @@ function action_twidget_dist(){
 		$sd = "search.";
 	$url = "http://{$sd}twitter.com/".$url;
 
+	header("Content-type: text/javascript; charset=utf-8");
 	echo twidget_get_cached_url($url);
 	exit;
 }
