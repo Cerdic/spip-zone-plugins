@@ -1,0 +1,41 @@
+<div class="ajax">
+<BOUCLE_test(GIS){objet}{id_objet}{0,1}> </BOUCLE_test>
+#SET{gis_defaut,nouveau}
+#SET{gis_defaut,glop}
+<//B_test>
+
+#SET{bloc_gis, #ENV{bloc_gis,#GET{gis_defaut}|=={nouveau}|?{editer,lier}}}
+
+<div class="actions onglets_simple second clearfix">
+	<ul>
+	<li>
+	[(#GET{bloc_gis}|=={lier}|?{<strong>,<a href="[(#SELF|parametre_url{bloc_gis,lier}|parametre_url{id_gis,''})]" class="ajax">})]
+		<:gis:titre_bloc_points_lies:>
+	[(#GET{bloc_gis}|=={lier}|?{</strong>,</a>})]
+	</li>
+	<li>
+	[(#GET{bloc_gis}|=={rechercher}|?{<strong>,<a href="[(#SELF|parametre_url{bloc_gis,rechercher}|parametre_url{id_gis,''})]" class="ajax">})]
+		<:gis:titre_bloc_rechercher_point:>
+	[(#GET{bloc_gis}|=={rechercher}|?{</strong>,</a>})]
+	</li>
+	<li>
+	[(#GET{bloc_gis}|=={editer}|?{<strong>,<a href="[(#SELF|parametre_url{bloc_gis,editer}|parametre_url{id_gis,nouveau})]" class="ajax">})]
+		<:gis:titre_bloc_creer_point:>
+	[(#GET{bloc_gis}|=={editer}|?{</strong>,</a>})]
+	</li>
+	</ul>
+</div>
+
+[(#GET{bloc_gis}|=={editer}|oui)
+	#FORMULAIRE_EDITER_GIS{#ENV{id_gis,#GET{gis_defaut}},#ENV{objet},#ENV{id_objet},#SELF,'non',#ENV{options_formulaire_editer_gis}}
+]
+
+[(#GET{bloc_gis}|=={lier}|oui)
+	[(#INCLURE{fond=prive/objets/liste/gis_lies,sinon=<:gis:aucun_gis:>,env})]
+]
+
+<BOUCLE_gis(GIS){0,1}> </BOUCLE_gis>[(#GET{bloc_gis}|=={rechercher}|oui)
+<div class="ajax">
+	#FORMULAIRE_RECHERCHER_GIS{#ENV{objet},#ENV{id_objet},#SELF|parametre_url{bloc_gis,lier}}
+</div>]</B_gis>
+</div>
