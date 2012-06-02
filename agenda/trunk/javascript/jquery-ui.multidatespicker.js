@@ -285,7 +285,8 @@
 						case 'array':
 							if(dates.length) {
 								for(var i in dates)
-									addDate.call(this, dates[i], type, true);
+									if (typeof dates[i] != "function")
+										addDate.call(this, dates[i], type, true);
 								sortDates.call(this, type);
 								break;
 							} // else does the same as 'string'
