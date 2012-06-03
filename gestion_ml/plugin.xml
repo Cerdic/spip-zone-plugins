@@ -2,7 +2,7 @@
 	<nom>Gestion ML avec SOAP</nom>
 	<slogan>G&#233;rer les mailing lists chez votre h&#233;bergeur avec le protocole SOAP</slogan>
 	<auteur>Yffic</auteur>
-	<version>0.4.3</version>
+	<version>0.5.0</version>
 	<version_base>0.2</version_base>
 	<etat>test</etat>
 	<description>
@@ -27,6 +27,10 @@
 		<icone>images/gestionml-16.png</icone>
 		<url>gestionml</url>
 	</bouton>
+	<pipeline>
+		<nom>ieconfig_metas</nom>
+		<inclure>gestionml_ieconfig_metas.php</inclure>
+	</pipeline>
 	<bouton id='gestionml' parent='configuration'>
 		<icone>images/gestionml-24.png</icone>
 		<titre>gestionml:titre_menu_configurer</titre>
