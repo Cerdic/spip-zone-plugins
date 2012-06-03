@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_boussole' => 'Boussole',
 	'bouton_supprimer' => 'Supprimer',
 	'bulle_afficher' => 'Afficher dans les modèles',
-	'bulle_aller_boussole' => 'Se rendre sur la page de la boussole',
 	'bulle_aller_site' => 'Se rendre sur la page du site référencé',
 	'bulle_cacher' => 'Ne pas afficher dans les modèles',
 	'bulle_deplacer_bas' => 'Déplacer vers le bas',
@@ -53,15 +52,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_ajouter_boussole' => 'En ajoutant des boussoles à votre base de données, vous aurez la possiblité d\'utiliser les modèles fournis pour les afficher dans vos pages publiques.<br />Une boussole est décrite par un fichier XML contenant les informations sur la boussole et ses sites.<br /><br />Si la boussole existe déjà ce formulaire permettra de la mettre à jour en conservant la configuration d\'affichage.',
-	'info_aucun_logo_boussole' => 'La boussole ne possède pas de logo',
 	'info_boite_boussoles_gerer' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet l’ajout, la mise à jour et la suppression des boussoles. Il est aussi possible de se rendre sur la page de configuration de l\'affichage de chaque boussole.</p>',
 	'info_configurer_boussole' => 'Ce formulaire vous permez de configurer l\'affichage de la boussole en choisissant les sites à afficher ou pas et l\'ordre d\'affichage dans un groupe. Les sites non affichés sont repérés par un fond hachuré et une police grise.',
 	'info_fichier_boussole' => 'Saisissez l\'url du fichier de description de votre boussole',
 	'info_liste_aucune_boussole' => 'Aucune boussole n\'a encore été chargée dans votre base. Utilisez le formulaire ci-dessous pour en ajouter.',
-	'info_liste_boussoles' => 'Vous trouverez ci-dessous la liste des boussoles ajoutées à votre base.',
 	'info_site_boussole' => 'Ce site fait partie de la boussole :',
 	'info_site_boussoles' => 'Ce site fait partie des boussoles :',
-	'info_boussole_inconnue' => 'La boussole d\'alias « @boussole@ » n\'existe pas.',
 
 	// L
 	'label_1_site' => '@nb@ site',
@@ -155,7 +151,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_site_spip_zone' => 'SPIP Zone',
 
 	// O
-	'onglet_boussoles' => 'Gérer les boussoles',
 	'option_aucune_description' => 'Aucune description',
 	'option_descriptif_site' => 'Descriptif du site',
 	'option_nom_site' => 'Nom du site',
@@ -188,18 +183,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'slogan_site_spip_zone' => 'L\'espace de développement des contributions à SPIP',
 
 	// T
-	'titre_boussole' => 'Boussole',
-	'titre_boussoles' => 'Boussoles',
 	'titre_actualite_spip' => 'Actualités de la Galaxie SPIP',
-	'titre_bloc_boussoles' => 'BOUSSOLES',
 	'titre_boite_autres_boussoles' => 'Autres boussoles',
 	'titre_boite_infos_boussole' => 'BOUSSOLE D\'ALIAS',
 	'titre_boite_logo_boussole' => 'LOGO DE LA BOUSSOLE',
 	'titre_form_ajouter_boussole' => 'Ajouter ou mettre à jour une boussole',
 	'titre_formulaire_configurer' => 'Configuration de l\'affichage de la boussole',
 	'titre_liste_boussoles' => 'Liste des boussoles disponibles',
-	'titre_page_boussole' => 'Boussole',
-	'titre_page_edition_boussole' => 'Édition d\'une boussole'
+	'titre_page_boussole' => 'Gestion des boussoles',
 );
 
 ?>
