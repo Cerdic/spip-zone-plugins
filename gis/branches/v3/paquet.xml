@@ -1,9 +1,9 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="3.3.6"
+	version="3.3.7"
 	schema="2.0.2"
-	etat="test"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/gis.png"
 	documentation="http://www.spip-contrib.net/GIS2"
