@@ -8,24 +8,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Insertion dans le pipeline affiche_gauche
- *
- * @param $flux flux html de la partie gauche
- * @return $flux le flux html completé
- */
-function doc2img_affiche_gauche($flux) {
-	switch ($flux['args']['exec']) {
-		case "articles" :
-			$id_article = $flux['args']['id_article'];
-			$flux['data'] .= debut_cadre('r');
-			$flux['data'] .= recuperer_fond("prive/doc2img",array('id_article'=>$id_article));
-			$flux['data'] .= fin_cadre('r');
-			break;
-	}
-	return $flux;
-}
-
-/**
  * Insertion dans le pipeline post-edition
  * Converti automatiquement les fichiers autorisés si possible
  *
