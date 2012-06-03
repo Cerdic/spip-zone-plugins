@@ -528,7 +528,7 @@ function plugin2balise_exec($D, $balise) {
 function plugin2balise_implicite($D, $balise, $nom) {
 	$files = is_array($D[$balise]) ? $D[$balise] : array($D[$balise]);
 	$contenu = join(' ', array_map('trim', $files));
-	$std = $D['prefix'] . "_$nom" . '.php';
+	$std = strtolower($D['prefix']) . "_$nom" . '.php';
 	
 	if (!$contenu OR $contenu == $std) 
 		return array();
