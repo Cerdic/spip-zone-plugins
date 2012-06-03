@@ -1,6 +1,6 @@
 <plugin>
 	<nom><multi>[fr]Documents en Images[en]Documents to images</multi></nom>
-	<auteur>Camille Lafitte</auteur>
+	<auteur>Camille Lafitte, kent1</auteur>
 	<version>1.2.1</version>
 	<etat>dev</etat>
 	<slogan>
@@ -46,5 +46,5 @@
 	<necessite id="SPIP" version="[2.1.14;3.0.99]" />
 	<necessite id="spip_bonux" version="[2.3.0;]" />
 	<necessite id="medias" version="[1.6.12;]" />
-	<categorie>edition</categorie>
+	<categorie>multimedia</categorie>
 </plugin>

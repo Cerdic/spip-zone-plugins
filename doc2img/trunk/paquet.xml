@@ -1,6 +1,6 @@
 <paquet
 	prefix="doc2img"
-	categorie="edition"
+	categorie="multimedia"
 	version="1.2.1"
 	etat="dev"
 	compatibilite="[2.1.14;3.0.99]"
@@ -13,6 +13,8 @@
 	<!-- Convertir des documents textuels à la volée -->
 
 	<auteur>Camille Lafitte</auteur>
+	<auteur lien="http://www.kent1.info">kent1</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<pipeline nom="declarer_tables_principales" inclure="base/doc2img.php" />
 	<pipeline nom="affiche_gauche" inclure="doc2img_pipelines.php" />
