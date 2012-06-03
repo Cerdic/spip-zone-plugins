@@ -23,7 +23,7 @@ function action_supprimer_boussole_dist(){
 	if ($alias) {
 		include_spip('inc/deboussoler');
 		boussole_supprimer($alias);
-		spip_log("ACTION SUPPRIMER BOUSSOLE : alias = ". $alias, 'boussole');
+		spip_log("ACTION SUPPRIMER BOUSSOLE : alias = ". $alias, 'boussole' . _LOG_INFO);
 	}
 }
 

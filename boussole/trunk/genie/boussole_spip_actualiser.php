@@ -13,12 +13,12 @@ function genie_boussole_spip_actualiser_dist($last) {
 		$xml = 'http://zone.spip.org/trac/spip-zone/export/HEAD/_galaxie_/boussole.spip.org/boussole_spip.xml';
 		if (!$url = boussole_localiser_xml($xml)) {
 			// Le fichier est introuvable
-			spip_log("ERREUR ACTUALISATION CRON : fichier xml introuvable", 'boussole');
+			spip_log("ERREUR ACTUALISATION CRON : fichier xml introuvable", 'boussole' . _LOG_ERREUR);
 		}
 		else {
 			if (!boussole_valider_xml($url, $erreur)) {
 				// Le fichier ne suit pas la DTD (boussole.dtd)
-				spip_log("ERREUR ACTUALISATION CRON : fichier xml invalide", 'boussole');
+				spip_log("ERREUR ACTUALISATION CRON : fichier xml invalide", 'boussole' . _LOG_ERREUR);
 			}
 			else {
 				// On insere la boussole dans la base
@@ -28,10 +28,10 @@ function genie_boussole_spip_actualiser_dist($last) {
 			
 				// Determination des messages de retour
 				if (!$ok) {
-					spip_log("ERREUR ACTUALISATION CRON : " . $message, 'boussole');
+					spip_log("ERREUR ACTUALISATION CRON : " . $message, 'boussole' . _LOG_ERREUR);
 				}
 				else {
-					spip_log("ACTUALISATION CRON OK", 'boussole');
+					spip_log("ACTUALISATION CRON OK", 'boussole' . _LOG_INFO);
 				}
 			}
 		}

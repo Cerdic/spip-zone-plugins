@@ -39,7 +39,7 @@ function boussole_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_boussoles");
 	effacer_meta($nom_meta_base_version);
 
-	spip_log('DESINSTALLATION BDD','boussole');
+	spip_log('DESINSTALLATION BDD','boussole' . _LOG_INFO);
 }
 
 ?>
