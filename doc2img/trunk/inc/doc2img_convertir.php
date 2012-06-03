@@ -176,50 +176,6 @@ function inc_doc2img_convertir($id_document,$type='full') {
 }
 
 /**
- * Fonction qui indique si le document a deja été converti
- *
- * @param $id_document identifiant du document à controler
- * @return booleen true / false : true document déjà converti, false sinon
- */
-function is_doc2img($id_document) {
-    $pages = intval(sql_countsel('spip_doc2img','id_document='.$id_document));
-    if ($pages > 0) {
-        return true;
-    } else  {
-        return false;
-    }
-}
-
-
-/**
- * Fonction controlant que le document founi peut être converti :
- * - Son extension figure parmi ceux de la configuration
- * - Ce n'est pas un document distant
- *
- *  @param $id_document identifiant du document à controler
- *  @return booleen true/false : true document convertible, false si non
- */
-function can_doc2img($id_document = NULL) {
-    $info_document = sql_fetsel(
-        'extension,mode,distant',
-        'spip_documents',
-        'id_document = '.intval($id_document)
-    );
-
-    //on liste les extensions autorisées depuis CFG
-    $types_autorises = explode(',',lire_config('doc2img/format_document','pdf,tiff,bmp'));
-
-    //on controle si le document est convertible ou non
-    if (!in_array($info_document['mode'],array('doc2img','vignette'))
-    	&& ($info_document['distant'] != 'oui')
-    	&& in_array($info_document['extension'],$types_autorises)) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-/**
  * Calcul les ratios de taille de l'image finale
  *
  * Vérifie que le document donné en paramètre est bien listé dans les types de documents
