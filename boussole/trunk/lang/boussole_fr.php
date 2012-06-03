@@ -59,7 +59,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_fichier_boussole' => 'Saisissez l\'url du fichier de description de votre boussole',
 	'info_liste_aucune_boussole' => 'Aucune boussole n\'a encore été chargée dans votre base. Utilisez le formulaire ci-dessous pour en ajouter.',
 	'info_liste_boussoles' => 'Vous trouverez ci-dessous la liste des boussoles ajoutées à votre base.',
-	'info_site_boussole' => 'Ce site fait partie de la boussole « @boussole@ »',
+	'info_site_boussole' => 'Ce site fait partie de la boussole :',
+	'info_site_boussoles' => 'Ce site fait partie des boussoles :',
 	'info_boussole_inconnue' => 'La boussole d\'alias « @boussole@ » n\'existe pas.',
 
 	// L
