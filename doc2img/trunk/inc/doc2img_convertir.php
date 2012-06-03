@@ -32,7 +32,6 @@ function inc_doc2img_convertir($id_document,$type='full') {
 	    $config = lire_config('doc2img',array());
 
 	    $document = doc2img_document($id_document);
-		spip_log($document,'doc2img');
 
 	    /**
 	     * Chargement du document en mémoire
@@ -109,23 +108,20 @@ function inc_doc2img_convertir($id_document,$type='full') {
 				$x = $ajouter_documents('new', $files,'document', $id_document, 'doc2img');
 
 		        if(($frame == 0) && ($config['logo_auto']=='on') && in_array($config['format_cible'],array('png','jpg'))){
-		        	if(
-		        		($id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document)) == 0)
-		        		OR !file_exists(get_spip_doc(sql_getfetsel('fichier','spip_documents','id_document='.intval($id_vignette))))
-		        	){
-						$frame_tmp = $document['cible_url'].$document['name'].'-logo.'.$config['format_cible'];
-						$image_frame->writeImage($frame_tmp);
-						$files = array(array('tmp_name'=>$frame_tmp,'name'=>$frame_name));
-						spip_log('On va ajouter une vignette','doc2img');
-		        		if(is_numeric($id_vignette)){
-		        			$supprimer_document = charger_fonction('supprimer_document','action');
-							$supprimer_document($id_vignette);
-							spip_log('suppression de la vignette '.$id_vignette,'doc2img');
-		        		}
-						$x = $ajouter_documents($id_document, $files,'document', $id_document, 'vignette');
-						spip_log($x,'doc2img');
-						spip_log('On ajouter une vignette '.$x,'doc2img');
-		        	}
+		        	$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
+					$frame_tmp = $document['cible_url'].$document['name'].'-logo.'.$config['format_cible'];
+					$image_frame->writeImage($frame_tmp);
+					$files = array(array('tmp_name'=>$frame_tmp,'name'=>$frame_name));
+	        		if(is_numeric($id_vignette) && $id_vignette > 0){
+	        			$x = $ajouter_documents($id_vignette, $files,'', 0, 'vignette');	
+	        		}else{
+						$x = $ajouter_documents('new', $files,'', 0, 'vignette');
+					}
+					if (is_numeric(reset($x))
+					  AND $id_vignette = reset($x)){
+						include_spip('action/editer_document');
+						document_modifier($id_document,array("id_vignette" => $id_vignette,'mode'=>'document'));
+					}
 		        }
 		        //on libère la frame
 	            $image_frame->clear();
@@ -147,21 +143,23 @@ function inc_doc2img_convertir($id_document,$type='full') {
 					}
 		
 			        //nom du fichier cible, c'est à dire la frame (image) indexée
-			        $document['frame'] = $document['name'].'-'.$frame.'.'.$config['format_cible'];
+			        $frame_name = $document['name'].'-logo.'.$config['format_cible'];
 		
 			        //on sauvegarde la page
-		            $image_frame->writeImage($document['cible_url'].$document['frame']);
-		        	if(
-		        		($id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document)) == 0)
-		        		OR !file_exists(get_spip_doc(sql_getfetsel('fichier','spip_documents','id_document='.intval($id_vignette))))
-		        	){
-		        		if(is_numeric($id_vignette)){
-		        			sql_delete('spip_documents','id_document='.intval($id_vignette));
-		        		}
-						
-						$x = $ajouter_documents($document['cible_url'].$document['frame'], $document['cible_url'].$document['frame'],
-								    'document', $id, 'vignette', $id_document, $actifs);
-		        	}
+		            $image_frame->writeImage($document['cible_url'].$frame_name);
+					$files = array(array('tmp_name'=>$document['cible_url'].$frame_name,'name'=>$frame_name));
+					
+					$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
+		        	if(is_numeric($id_vignette)){
+	        			$x = $ajouter_documents($id_vignette, $files,'', 0, 'vignette');	
+	        		}else{
+						$x = $ajouter_documents('new', $files,'', 0, 'vignette');
+					}
+					if (is_numeric(reset($x))
+					  AND $id_vignette = reset($x)){
+						include_spip('action/editer_document');
+						document_modifier($id_document,array("id_vignette" => $id_vignette,'mode'=>'document'));
+					}
 		            $image_frame->clear();
 		            $image_frame->destroy();
 	            }else{
@@ -170,9 +168,6 @@ function inc_doc2img_convertir($id_document,$type='full') {
 		        $frame++;
 		    } while($frame < 1 );
 	    }
-
-	    // libération du verrou
-	    spip_fclose_unlock($fp);
 	    return true;
 	}else{
 		spip_log('Erreur Doc2Img : La class doc2img n est pas disponible');
