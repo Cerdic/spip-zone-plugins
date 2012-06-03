@@ -13,7 +13,7 @@ function formulaires_configurer_bloc_charger($bloc,$page,$infos_bloc){
 	$type_compo = explode ('-',$page,2);
 	$contexte['type'] = $type_compo[0];
 	if(!isset($type_compo[1]))
-		$contexte['composition'] = $type_compo[0];
+		$contexte['composition'] = '';
 	else 
 		$contexte['composition'] = $type_compo[1];
 	$contexte['bloc_page'] = $bloc.'-'.$page;
