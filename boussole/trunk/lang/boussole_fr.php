@@ -7,16 +7,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_boussole' => 'Boussole',
-	'bouton_configurer' => 'Configurer',
 	'bouton_supprimer' => 'Supprimer',
 	'bulle_afficher' => 'Afficher dans les modèles',
 	'bulle_aller_boussole' => 'Se rendre sur la page de la boussole',
 	'bulle_aller_site' => 'Se rendre sur la page du site référencé',
 	'bulle_cacher' => 'Ne pas afficher dans les modèles',
-	'bulle_configurer_boussole' => 'Configurer l\'affichage de la boussole',
 	'bulle_deplacer_bas' => 'Déplacer vers le bas',
 	'bulle_deplacer_haut' => 'Déplacer vers le haut',
-	'bulle_supprimer_boussole' => 'Supprimer la boussole de la base de données',
+
+	// C
+	'colonne_alias' => 'Alias',
+	'colonne_nbr_sites' => 'Contient',
+	'colonne_titre' => 'Titre',
+	'colonne_version' => 'Version',
 
 	// D
 	'descriptif_boussole_spip' => 'La boussole SPIP regroupe l\'ensemble des sites « officiels » de la galaxie SPIP. Elle définit pour chaque site, son logo, son nom, son slogan et sa description. N\'hésitez donc pas à l\'utiliser dans vos propres sites pour aiguiller vos visiteurs dans la galaxie SPIP.',
@@ -57,11 +60,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_liste_aucune_boussole' => 'Aucune boussole n\'a encore été chargée dans votre base. Utilisez le formulaire ci-dessous pour en ajouter.',
 	'info_liste_boussoles' => 'Vous trouverez ci-dessous la liste des boussoles ajoutées à votre base.',
 	'info_site_boussole' => 'Ce site fait partie de la boussole « @boussole@ »',
+	'info_boussole_inconnue' => 'La boussole d\'alias « @boussole@ » n\'existe pas.',
 
 	// L
 	'label_1_site' => '@nb@ site',
 	'label_a_class' => 'Classe de l\'ancre englobant le logo',
-	'label_actualise_le' => 'Actualisé le',
+	'label_actualise_le' => 'Actualisée le',
 	'label_affiche' => 'Affiché ?',
 	'label_afficher_descriptif' => 'Afficher le descriptif des sites ?',
 	'label_afficher_lien_accueil' => 'Afficher le lien vers la page d\'accueil ?',
@@ -157,9 +161,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_nom_slogan_site' => 'Nom et slogan du site',
 	'option_slogan_site' => 'Slogan du site',
 
-	// R
-	'resume_table_boussoles' => 'Liste des boussoles ajoutées',
-
 	// S
 	'slogan_boussole_spip' => 'Les bonnes adresses de la galaxie SPIP !',
 	'slogan_site_spip_blog' => 'Du logiciel libre et de la tendresse',
@@ -186,6 +187,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'slogan_site_spip_zone' => 'L\'espace de développement des contributions à SPIP',
 
 	// T
+	'titre_boussole' => 'Boussole',
+	'titre_boussoles' => 'Boussoles',
 	'titre_actualite_spip' => 'Actualités de la Galaxie SPIP',
 	'titre_bloc_boussoles' => 'BOUSSOLES',
 	'titre_boite_autres_boussoles' => 'Autres boussoles',

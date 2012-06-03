@@ -8,11 +8,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * - soit le tableau des infos contenues dans la meta boussole_infos_<alias> si l'alias est fourni
  * - soit la liste de tous les tableaux d'infos des meta boussole_infos_xxxx sinon
  *
- * @param string $p
- * @return array
+ * @param string $p	alias de la boussole ou vide
+ * @return array	tableau des informations demandees (une boussole ou toutes les boussoles)
  */
-
-// $p	=> alias de la boussole ou vide
 function balise_BOUSSOLE_INFOS($p) {
 	
 	$alias = interprete_argument_balise(1,$p);
@@ -56,15 +54,11 @@ function calcul_boussole_infos($alias) {
 /**
  * Renvoie la traduction d'un champ d'une boussole, d'un groupe ou d'un site
  *
- * @param string $aka_boussole
- * @param string $champ
- * @param string $alias
- * @return string
+ * @param string $aka_boussole	alias de la boussole
+ * @param string $champ			champ a traduire
+ * @param string $alias			alias du groupe ou du site
+ * @return string				champ traduit
  */
-
-// $aka_boussole	=> alias de la boussole
-// $champ			=> champ a traduire
-// $alias			=> alias du groupe ou du site
 function boussole_traduire($aka_boussole, $champ, $alias='') {
 	if ($champ == 'non')
 		return false;
@@ -84,43 +78,6 @@ function boussole_traduire($aka_boussole, $champ, $alias='') {
 	}
 
 	return $traduction;
-}
-
-/**
- * Renvoie la la chaine habituelle informant sur la taille d'un logo (lxh pixels)
- *
- * @param string $logo
- * @return string
- */
-
-// $logo	=> fichier logo
-function boussole_informer_taille($logo) {
-	$taille = '';
-	if ($taille = @getimagesize($logo))
-		$taille = _T('info_largeur_vignette', array('largeur_vignette' => $taille[0], 'hauteur_vignette' => $taille[1]));
-	else
-		$taille = _T('boussole:info_aucun_logo_boussole');
-	
-	return $taille;
-}
-
-
-// -------------------- Filtres de compatibilite avec SPIP 2.0 ------------------------
-
-if (substr($GLOBALS['spip_version_branche'],0, 3) == '2.0') {
-	function bouton_action($libelle, $url, $class="", $confirm="", $title=""){
-		$onclick = $confirm?" onclick='return confirm(\"" . attribut_html($confirm) . "\");'":"";
-		$title = $title ? " title='$title'" : "";
-	
-		return "<form class='bouton_action_post $class' method='post' action='$url'><div>".form_hidden($url)
-			."<button type='submit' class='submit'$title$onclick>$libelle</button></div></form>";
-	}
-
-	function singulier_ou_pluriel($nb,$chaine_un,$chaine_plusieurs,$var='nb'){
-		if (!$nb=intval($nb)) return "";
-		if ($nb>1) return _T($chaine_plusieurs, array($var => $nb));
-		else return _T($chaine_un);
-	}
 }
 
 ?>

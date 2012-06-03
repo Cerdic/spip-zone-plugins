@@ -65,6 +65,7 @@ function boussole_ajouter($url) {
 	// -- consignation des informations de mise a jour de cette boussole dans la table spip_meta
 	$infos['boussole']['nbr_sites'] = count($infos['sites']);
 	$infos['boussole']['xml'] = $url;
+	$infos['boussole']['maj'] = date('Y-m-d H:i:s');
 	ecrire_meta($meta_boussole, serialize($infos['boussole']));
 
 	// On definit le message de retour ok (actualisation ou ajout)

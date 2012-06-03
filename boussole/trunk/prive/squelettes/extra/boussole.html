@@ -1,0 +1,8 @@
+#SET{exclusion, #VAL{aka_boussole!=}|concat{#ENV{alias}|sql_quote}}
+<INCLURE{fond=prive/squelettes/liste/boussoles,
+	titre=<:boussole:titre_boite_autres_boussoles:>,
+	par=aka_boussole,
+	pas=10,
+	where=#GET{exclusion},
+	affichage=simplifie,
+	env, ajax}>

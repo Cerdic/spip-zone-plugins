@@ -1,0 +1,15 @@
+[(#AUTORISER{webmestre}|sinon_interdire_acces)]
+<h1><:boussole:titre_page_boussole:></h1>
+
+[(#REM) <!-- Liste des boussoles --> ]
+<INCLURE{fond=prive/squelettes/liste/boussoles,
+	titre=<:boussole:titre_liste_boussoles:>,
+	par=aka_boussole,
+	pas=10,
+	affichage=complet,
+	env, ajax} />
+
+[(#REM) <!-- Formulaire d'ajout ou de mise à jour manuelle d'une boussole --> ]
+<div class="noajax">
+	#FORMULAIRE_AJOUTER_BOUSSOLE
+</div>
