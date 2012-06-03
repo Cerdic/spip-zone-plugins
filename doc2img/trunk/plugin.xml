@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[fr]Documents en Images[en]Documents to images</multi></nom>
 	<auteur>Camille Lafitte</auteur>
-	<version>1.2.0</version>
+	<version>1.2.1</version>
 	<etat>dev</etat>
 	<slogan>
 		<multi>
@@ -9,16 +9,16 @@
 			[en]Convert text documents on the fly
 		</multi>
 	</slogan>
-    <description><multi>
-    	[fr]Ce plugin permet de convertir &#224; la vol&#233;e des pdf, tiff et autres types de document en image ou série d'images. Ces images sont ensuite exploitables via une boucle spécifique.
+	<description><multi>
+		[fr]Ce plugin permet de convertir &#224; la vol&#233;e des pdf, tiff et autres types de document en image ou série d'images. Ces images sont ensuite exploitables via une boucle spécifique.
 		[en]This plugin will convert on the fly pdf, tiff and other kind of documents in image or serie of images. These images can then be used with a specific loop.
 	</multi></description>
-    <lien>http://www.spip-contrib.net/doc2img</lien>
+	<lien>http://www.spip-contrib.net/doc2img</lien>
 	<icon>images/doc2img-128.png</icon>
-    <prefix>doc2img</prefix>
+	<prefix>doc2img</prefix>
 	<install>base/doc2img_install.php</install>
-    <fonctions>doc2img_fonctions.php</fonctions>
-	<version_base>0.93</version_base>
+	<fonctions>doc2img_fonctions.php</fonctions>
+	<version_base>0.94</version_base>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/doc2img.php</inclure>
@@ -27,14 +27,14 @@
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/doc2img.php</inclure>
 	</pipeline>
-    <pipeline>
-       <nom>affiche_gauche</nom>
-       <inclure>doc2img_pipeline.php</inclure>
-   </pipeline>
-    <pipeline>
-       <nom>post_edition</nom>
-       <inclure>doc2img_pipeline.php</inclure>
-   </pipeline>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>doc2img_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>doc2img_pipeline.php</inclure>
+	</pipeline>
 	<pipeline>
 		<nom>document_desc_actions</nom>
 		<inclure>doc2img_pipeline.php</inclure>
@@ -47,8 +47,8 @@
 		<nom>formulaire_verifier</nom>
 		<inclure>doc2img_pipeline.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.1.14;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.14;3.0.99]" />
 	<necessite id="spip_bonux" version="[2.3.0;]" />
-	<utilise id="medias" version="[1.6.12;]" />
-   <categorie>edition</categorie>
+	<necessite id="medias" version="[1.6.12;]" />
+	<categorie>edition</categorie>
 </plugin>

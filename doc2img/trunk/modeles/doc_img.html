@@ -6,7 +6,7 @@
 	#ANCRE_PAGINATION
 	<div class="spip_docimg_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok"[ style='float:(#ENV{align}|match{left|right});']>
 	[(#ENV{no_pagination}|non)[<p class="pagination">(#PAGINATION)</p>]]
-	<BOUCLE_d2c(DOCUMENTS){mode=doc2img}{objet=document} {id_objet=#ENV{id_document,#ENV{id}}}{par id_document} {pagination 1}{statut==.*}>
+	<BOUCLE_d2c(DOCUMENTS){mode=doc2img}{objet=document} {id_objet=#ENV{id_document,#ENV{id}}}{par id_document} {statut==.*}{pagination 1}>
 		<a href="#URL_DOCUMENT" class="mediabox">
 		[(#FICHIER|image_reduire{#ENV{largeur,640},#ENV{hauteur,0}}|inserer_attribut{alt,''})]
 		</a>

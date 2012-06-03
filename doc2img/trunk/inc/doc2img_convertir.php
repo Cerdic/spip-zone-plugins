@@ -7,7 +7,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  *  Ensemble des actions necessaires à la conversion d'un document en image :
  *  - recupère les informations sur le documents (nom, repertoire, nature)
- *  - determine les informatsions sur le documents finals (nom, respertoire, extension)
+ *  - determine les informations sur le documents final (nom, repertoire, extension)
  *
  *  Documentation intéressante :
  *  - http://valokuva.org/?p=7
@@ -21,65 +21,60 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function inc_doc2img_convertir($id_document,$type='full') {
 	if(!in_array($type,array('full','vignette')))
 		$type = 'full';
-	if(function_exists('imagick_readimage') OR class_exists('Imagick')){
+	
+	if(class_exists('Imagick')){
 	    // NOTE : les repertoires doivent se finir par un /
 
 	    include_spip('inc/documents');
 	    include_spip('inc/flock');
+		include_spip('inc/config');
 
-	    $config = lire_config('doc2img');
-
-	    //racine du site c'est a dire url_site/
-	    //une action se repere à la racine du site
-	    $racine_site = _DIR_RACINE;
+	    $config = lire_config('doc2img',array());
 
 	    $document = doc2img_document($id_document);
-
-	    //verrouille document ou quitte
-	    //si erreur sur verrou alors on quitte le script
-	    if (!$fp = @spip_fopen_lock($document['source_url']['absolute'].$document['fullname'],'r',LOCK_EX)) {
-	        return "erreur document verrouillé";
-	    }
-
-	    //suppresssion d'un eventuel repertoire deja existant
-	    //include_spip('base/doc2img_install');
-	    //rm($document['cible_url']['absolute']);
-
-	    //suppression dans la base
-	    sql_delete(
-	        "spip_doc2img",
-	        "id_document = ".$id_document
-	    );
-
-	    //creation du repertoire cible
-	    if (!is_dir($document['cible_url']['absolute']) && !@mkdir($document['cible_url']['absolute'])) {
-	        return "erreur impossible de creer le repertoire";
-	    }
+		spip_log($document,'doc2img');
 
 	    /**
 	     * Chargement du document en mémoire
 	     * On détermine le nombre de pages du document
 	     * On libère la ressource automatiquement si on utilise la class
-	     * car on réouvre chaque page par la suitre
+	     * car on réouvre chaque page par la suite
 	     */
-	    if (class_exists('Imagick')) {
-	        $image = new Imagick($document['source_url']['absolute'].$document['fullname']);
-	        $identify = $image->identifyImage();
-	        $identify2 = $image->getImageProperties();
-	        $nb_pages = $image->getNumberImages();
-	        $image->clear();
-	        $image->destroy();
-	    } else {
-	    	spip_log('Erreur Doc2Img : La class doc2img n est pas disponible');
-	        return false;
-	    }
+		$image = new Imagick($document['fichier']);
+		$identify = $image->identifyImage();
+		$identify2 = $image->getImageProperties();
+		$nb_pages = $image->getNumberImages();
+		$image->clear();
+		$image->destroy();
 
 	    $frame = 0;
 
 		$resolution = $config['resolution'] ? $config['resolution'] : 150;
 		
+		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 		
 		if($type == 'full'){
+			/**
+			 * Est ce que ce document a déja été converti
+			 * Si oui, on supprime son ancienne conversion
+			 */
+			$documents_doc2img = sql_select('L1.id_document',
+											'spip_documents AS L1 LEFT JOIN spip_documents_liens AS L2 ON L1.id_document=L2.id_document',
+											'L1.mode="doc2img" AND L2.objet="document" AND L2.id_objet='.intval($id_document));
+			
+			$documents_a_supprimer = array();
+			while($document_doc2img = sql_fetch($documents_doc2img)){
+				spip_log($document_doc2img,'doc2img');
+				$documents_a_supprimer[] = $document_doc2img['id_document'];
+			}
+			if(count($documents_a_supprimer) > 0){
+				spip_log('On supprime les documents','doc2img');
+				spip_log($documents_a_supprimer,'doc2img');
+				$supprimer_document = charger_fonction('supprimer_document','action');
+				foreach ($documents_a_supprimer as $id_document) {
+					$supprimer_document($id_document); // pour les orphelins du contexte, on traite avec la fonction existante
+				}
+			}
 		    // chaque page est un fichier qu'on sauve dans la table doc2img indexé
 		    // par son numéro de page
 		    do {
@@ -89,54 +84,47 @@ function inc_doc2img_convertir($id_document,$type='full') {
 	        	if(is_numeric($resolution) && ($resolution <= '600') && ($resolution > $identify['resolution']['x'])){
 		        	$image_frame->setResolution($resolution,$resolution);
 	        	}
-				$image_frame->readImage($document['source_url']['absolute'].$document['fullname'].'['.$frame.']');
+				$image_frame->readImage($document['fichier'].'['.$frame.']');
 				$image_frame->setImageFormat($config['format_cible']);
 				if(is_numeric($config['compression']) && ($config['compression'] > 50) && ($config['compression'] <= 100)){
 					$image_frame->setImageCompressionQuality($config['compression']);
 				}
-	            $handle_frame = $image_frame;
 	
 		        //calcule des dimensions
-		        $dimensions = doc2img_ratio($handle_frame,$config);
+		        //$dimensions = doc2img_ratio($image_frame,$config);
 	
 		        //nom du fichier cible, c'est à dire la frame (image) indexée
-		        $document['frame'] = $document['name'].'-'.$frame.'.'.$config['format_cible'];
-	
+		        $frame_name = $document['name'].'-'.$frame.'.'.$config['format_cible'];
+				$dest = $document['cible_url'].$frame_name;
 		        //on sauvegarde la page
 		        
 	        	//$image_frame->resizeImage($dimensions['largeur'], $dimensions['hauteur'],Imagick::FILTER_LANCZOS,1);
-	            $image_frame->writeImage($document['cible_url']['absolute'].$document['frame']);
-	            $taille = filesize(get_spip_doc(set_spip_doc($document['cible_url']['relative'].$document['frame'])));
-	
-		        $largeur = $dimensions['largeur'];
-				$hauteur = $dimensions['hauteur'];
-	
-				//sauvegarde les donnees dans la base
-		        if (!sql_insertq(
-		            "spip_doc2img",
-		            array(
-		                "id_document" => $id_document,
-		                "fichier" => set_spip_doc($document['cible_url']['relative'].$document['frame']),
-		                "page" => $frame,
-		                "largeur" => $largeur,
-		                "hauteur" => $hauteur,
-		                "taille" => $taille
-		            )
-		        )) {
-		            return "erreur base de donnée";
-		        }
-	
+	            $image_frame->writeImage($dest);
+				
+				/**
+				 * On ajoute le document dans la table spip_documents avec comme type "doc2img"
+				 * Il sera automatiquement lié au document original
+				 */
+				$files = array(array('tmp_name'=>$dest,'name'=>$frame_name));
+				$x = $ajouter_documents('new', $files,'document', $id_document, 'doc2img');
+
 		        if(($frame == 0) && ($config['logo_auto']=='on') && in_array($config['format_cible'],array('png','jpg'))){
 		        	if(
 		        		($id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document)) == 0)
 		        		OR !file_exists(get_spip_doc(sql_getfetsel('fichier','spip_documents','id_document='.intval($id_vignette))))
 		        	){
+						$frame_tmp = $document['cible_url'].$document['name'].'-logo.'.$config['format_cible'];
+						$image_frame->writeImage($frame_tmp);
+						$files = array(array('tmp_name'=>$frame_tmp,'name'=>$frame_name));
+						spip_log('On va ajouter une vignette','doc2img');
 		        		if(is_numeric($id_vignette)){
-		        			sql_delete('spip_documents','id_document='.intval($id_vignette));
+		        			$supprimer_document = charger_fonction('supprimer_document','action');
+							$supprimer_document($id_vignette);
+							spip_log('suppression de la vignette '.$id_vignette,'doc2img');
 		        		}
-			        	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
-						$x = $ajouter_documents($document['cible_url']['absolute'].$document['frame'], $document['cible_url']['absolute'].$document['frame'],
-								    'document', $id, 'vignette', $id_document, $actifs);
+						$x = $ajouter_documents($id_document, $files,'document', $id_document, 'vignette');
+						spip_log($x,'doc2img');
+						spip_log('On ajouter une vignette '.$x,'doc2img');
 		        	}
 		        }
 		        //on libère la frame
@@ -146,34 +134,23 @@ function inc_doc2img_convertir($id_document,$type='full') {
 		    } while($frame < $nb_pages );
 	    }else{
 	    	do {
-		    	spip_log("Conversion de la page $frame",'doc2img');
-		        //on accede à la page $frame
-	        	$image_frame = new Imagick();
-	        	if(is_numeric($resolution) && ($resolution <= '600') && ($resolution > $identify['resolution']['x'])){
-		        	$image_frame->setResolution($resolution,$resolution);
-	        	}
-				$image_frame->readImage($document['source_url']['absolute'].$document['fullname'].'['.$frame.']');
-				$image_frame->setImageFormat($config['format_cible']);
-				if(is_numeric($config['compression']) && ($config['compression'] > 50) && ($config['compression'] <= 100)){
-					$image_frame->setImageCompressionQuality($config['compression']);
-				}
-	            $handle_frame = $image_frame;
-	
-		        //calcule des dimensions
-		        $dimensions = doc2img_ratio($handle_frame,$config);
-	
-		        //nom du fichier cible, c'est à dire la frame (image) indexée
-		        $document['frame'] = $document['name'].'-'.$frame.'.'.$config['format_cible'];
-	
-		        //on sauvegarde la page
-	        	//$image_frame->resizeImage($dimensions['largeur'], $dimensions['hauteur'],Imagick::FILTER_LANCZOS,1);
-	            $image_frame->writeImage($document['cible_url']['absolute'].$document['frame']);
-	            $taille = filesize(get_spip_doc(set_spip_doc($document['cible_url']['relative'].$document['frame'])));
-	
-		        $largeur = $dimensions['largeur'];
-				$hauteur = $dimensions['hauteur'];
-	
-		        if(in_array($config['format_cible'],array('png','jpg'))){
+	    		if(in_array($config['format_cible'],array('png','jpg'))){
+			        //on accede à la page $frame
+		        	$image_frame = new Imagick();
+		        	if(is_numeric($resolution) && ($resolution <= '600') && ($resolution > $identify['resolution']['x'])){
+			        	$image_frame->setResolution($resolution,$resolution);
+		        	}
+					$image_frame->readImage($document['fichier'].'['.$frame.']');
+					$image_frame->setImageFormat($config['format_cible']);
+					if(is_numeric($config['compression']) && ($config['compression'] > 50) && ($config['compression'] <= 100)){
+						$image_frame->setImageCompressionQuality($config['compression']);
+					}
+		
+			        //nom du fichier cible, c'est à dire la frame (image) indexée
+			        $document['frame'] = $document['name'].'-'.$frame.'.'.$config['format_cible'];
+		
+			        //on sauvegarde la page
+		            $image_frame->writeImage($document['cible_url'].$document['frame']);
 		        	if(
 		        		($id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document)) == 0)
 		        		OR !file_exists(get_spip_doc(sql_getfetsel('fichier','spip_documents','id_document='.intval($id_vignette))))
@@ -181,23 +158,24 @@ function inc_doc2img_convertir($id_document,$type='full') {
 		        		if(is_numeric($id_vignette)){
 		        			sql_delete('spip_documents','id_document='.intval($id_vignette));
 		        		}
-			        	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
-						$x = $ajouter_documents($document['cible_url']['absolute'].$document['frame'], $document['cible_url']['absolute'].$document['frame'],
+						
+						$x = $ajouter_documents($document['cible_url'].$document['frame'], $document['cible_url'].$document['frame'],
 								    'document', $id, 'vignette', $id_document, $actifs);
 		        	}
-		        }
-
-	            $image_frame->clear();
-	            $image_frame->destroy();
+		            $image_frame->clear();
+		            $image_frame->destroy();
+	            }else{
+					spip_log("DOC2IMG : le format de sortie sélectionné dans la configuration ne permet pas de créer une vignette",'doc2img');
+	            }
 		        $frame++;
 		    } while($frame < 1 );
 	    }
 
 	    // libération du verrou
 	    spip_fclose_unlock($fp);
-
 	    return true;
 	}else{
+		spip_log('Erreur Doc2Img : La class doc2img n est pas disponible');
 		return false;
 	}
 }
@@ -230,14 +208,14 @@ function can_doc2img($id_document = NULL) {
     $info_document = sql_fetsel(
         'extension,mode,distant',
         'spip_documents',
-        'id_document = '.$id_document
+        'id_document = '.intval($id_document)
     );
 
     //on liste les extensions autorisées depuis CFG
-    $types_autorises = explode(',',lire_config("doc2img/format_document",null,true));
+    $types_autorises = explode(',',lire_config('doc2img/format_document','pdf,tiff,bmp'));
 
     //on controle si le document est convertible ou non
-    if (($info_document['mode'] != 'vignette')
+    if (!in_array($info_document['mode'],array('doc2img','vignette'))
     	&& ($info_document['distant'] != 'oui')
     	&& in_array($info_document['extension'],$types_autorises)) {
         return true;
@@ -255,7 +233,7 @@ function can_doc2img($id_document = NULL) {
  * @param $id_document identifiant du document à controler
  * @return booleen $resultat : true document convertible, false sinon
  */
-function doc2img_ratio(&$handle,$config=array()) {
+function doc2img_ratio($handle,$config=array()) {
 
     $ratio['largeur'] = $ratio['hauteur'] = 1;
 
@@ -309,35 +287,33 @@ function doc2img_ratio(&$handle,$config=array()) {
 function doc2img_document($id_document) {
 
     //on recupere l'url du document
-    $fichier = sql_getfetsel(
-        'fichier',
+    $fichier = sql_fetsel(
+        '*',
         'spip_documents',
         'id_document='.$id_document
     );
 
     //chemin relatif du fichier
-    $fichier = get_spip_doc($fichier);
+    $fichier = get_spip_doc($fichier['fichier']);
 
     //nom complet du fichier : recherche ce qui suit le dernier / et retire ce dernier
     // $resultat[0] = $resultat[1]/$resultat[2].$resultat[3]
     preg_match('/(.*)\/(.*)\.(.\w*)/i', $fichier, $result);
 
     //url relative du repertoire contenant le fichier , on retire aussi le / en fin
-    $document['source_url']['relative'] = $result[1].'/';
-    $document['source_url']['absolute'] = $racine_site.$document['source_url']['relative'];
+    $document['fichier'] = $fichier;
 
     //information sur le nom du fichier
-    $document['extension'] = $result[3];
+    $document['extension'] = $fichier['extension'];
     $document['name'] = $result[2];
-    $document['fullname'] = $result[2].'.'.$result[3];
+    $document['fullname'] = basename($fichier);
 
     //creation du repertoire cible
     //url relative du repertoire cible
-    if(!is_dir(_DIR_IMG.lire_config('doc2img/repertoire_cible'))){
-    	sous_repertoire(_DIR_IMG, lire_config('doc2img/repertoire_cible'));
+    if(!is_dir(_DIR_VAR."cache-doc2img")){
+    	sous_repertoire(_DIR_VAR,"cache-doc2img");
     }
-    $document['cible_url']['relative'] = _DIR_IMG.lire_config('doc2img/repertoire_cible').'/'.$document['name'].'/';
-    $document['cible_url']['absolute'] = $racine_site.$document['cible_url']['relative'];
+    $document['cible_url'] = _DIR_VAR."cache-doc2img".'/';
 
     return $document;
 }

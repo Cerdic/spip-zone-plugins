@@ -9,5 +9,5 @@
 [(#SET{formats_possibles,[(#GET{ext_spip}|array_diff{#GET{ext_a_virer}}|array_intersect{#VAL{strtolower}|array_map{#CONFIG{doc2img_imagick_extensions}|unserialize}}|implode{', '})]})]]
 <!-- descriptif=<p><:doc2img:explication_doc2img:></p>[(#GET{liste_fichier}|=={oui}|oui)<p><:doc2img:explication_formats_possibles{formats=#GET{formats_possibles}}:></p>]-->
 <div class="ajax">
-    #FORMULAIRE_CONFIG_DOC2IMG
+    #FORMULAIRE_CONFIGURER_DOC2IMG
 </div>
