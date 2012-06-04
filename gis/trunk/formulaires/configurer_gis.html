@@ -122,11 +122,29 @@
 		// defalut layer
 		[(#REM|gis_api_utilisee|=={openlayers}|oui)
 		var base_layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'});
-		][(#VAL|gis_api_utilisee|=={googlev3}|oui)
-		var base_layer = new L.Google('[(#GET{maptype}|replace{ROAD,ROADMAP}|replace{PHYSICAL,TERRAIN})]');
-		]
-		
 		map.addLayer(base_layer);
+		]
+		[(#VAL|gis_api_utilisee|=={googlev3}|oui)
+		var road_layer = new L.Google('ROADMAP');
+		var satelitte_layer = new L.Google('SATELLITE');
+		var terrain_layer = new L.Google('TERRAIN');
+		[(#GET{maptype}|=={ROAD}|oui)
+		var base_layer = road_layer;
+		][(#GET{maptype}|=={SATELLITE}|oui)
+		var base_layer = satelitte_layer;
+		][(#GET{maptype}|=={PHYSICAL}|oui)
+		var base_layer = terrain_layer;
+		]
+		map.addLayer(base_layer);
+		var layersControl = new L.Control.Layers({
+			"<:gis:cfg_lbl_maptype_carte:>": road_layer,
+			"<:gis:cfg_lbl_maptype_satellite:>": satelitte_layer,
+			"<:gis:cfg_lbl_maptype_relief:>": terrain_layer
+		});
+		map.addControl(layersControl);
+		// class noajax sur les controles pour ne pas leur ajouter de hidden
+		$(layersControl._form).addClass('noajax');
+		]
 
 		map.setView(new L.LatLng(#ENV{lat,0},#ENV{lon,0}),#ENV{zoom,0});
 		/*
