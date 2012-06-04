@@ -34,8 +34,9 @@ function photospip_header_prive($flux) {
  * l'espace privé
  */
 function photospip_jqueryui_forcer($plugins) {
-	if (test_espace_prive())
+	if (test_espace_prive()){
 		$plugins[] = 'jquery.ui.slider';
+	}
 	return $plugins;
 }
 
@@ -45,11 +46,12 @@ function photospip_jqueryui_forcer($plugins) {
  * dans l'espace privé
  */
 function photospip_jquery_plugins($plugins) {
-	if (test_espace_prive())
+	if (test_espace_prive()){
 		$plugins[] = _DIR_LIB_IMGAREASELECT . 'scripts/jquery.imgareaselect.js';
 		$plugins[] = find_in_path("js/jquery.scrollto.js");
 		$plugins[] = find_in_path("js/jquery.localscroll.js");
 		$plugins[] = find_in_path("javascript/jQuery_ui_spinner/ui.spinner.js");
+	}
 	return $plugins;
 }
 
