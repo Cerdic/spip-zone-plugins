@@ -3,6 +3,9 @@
 		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
 	</langue>
 	<langue code="en" />
+	<langue code="fa" url="http://trad.spip.org/tradlang_module/pages?lang_cible=fa">
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
+	</langue>
 	<langue code="fr" />
 	<langue code="ru" url="http://trad.spip.org/tradlang_module/pages?lang_cible=ru">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.org/auteur/serge-markitanenko" />
