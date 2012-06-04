@@ -9,16 +9,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_boussole' => 'Kompas',
-	'bouton_configurer' => 'Nastaviť',
 	'bouton_supprimer' => 'Odstrániť',
 	'bulle_afficher' => 'Zobraziť v šablónach',
-	'bulle_aller_boussole' => 'Prejsť na stránku kompasu',
 	'bulle_aller_site' => 'Prejsť na odkazovanú stránku',
 	'bulle_cacher' => 'Nezobrazovať v šablónach',
-	'bulle_configurer_boussole' => 'Nastaviť zobrazenie kompasu',
 	'bulle_deplacer_bas' => 'Posunúť nadol',
 	'bulle_deplacer_haut' => 'Posunúť nahor',
-	'bulle_supprimer_boussole' => 'Odstrániť kompas z databázy',
+
+	// C
+	'colonne_alias' => 'Prezývka',
+	'colonne_nbr_sites' => 'Obsahuje',
+	'colonne_titre' => 'Nadpis',
+	'colonne_version' => 'Verzia',
 
 	// D
 	'descriptif_boussole_spip' => 'Kompas SPIPu zoskupuje všetky "oficiálne" stránky galaxie SPIPu. Pri každej stránke uvádza jej logo, názov, slogan a jej popis. Pokojne ju môžete použiť na vlastných stránkach na nasmerovanie svojich návštevníkov do galaxie SPIPu.',
@@ -52,13 +54,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_ajouter_boussole' => 'Pridaním kompasov do svojej databázy budete mať možnosť využívať šablóny na zobrazenie verejne prístupných stránok.<br />Kompas opisuje súbor XML, ktorý obsahuje údaje o kompase a jeho stránkach.<br /><br />Ak už kompas existuje, tento formulár ho aktualizuje s tým, že nastavenia zobrazenia ponechá bezo zmeny.',
-	'info_aucun_logo_boussole' => 'Kompas nemá žiadne logo',
 	'info_boite_boussoles_gerer' => '<strong>Táto stránka je prístupná iba pre manažérov webu.</strong><p>Umožňuje pridávať, aktualizovať a mazať kompasy. Môžete navštíviť aj stránku s nastaveniami zobrazenia každého kompasu.</p>',
 	'info_configurer_boussole' => 'Tento formulár vám umožňuje nastaviť zobrazenie kompasu tak, že si vyberiete, v akom poradí a v akej skupine sa stránky majú alebo nemajú zobraziť. Stránky, ktoré sa nezobrazia, budú označené tieňom a sivým písmom.',
 	'info_fichier_boussole' => 'Zadajte adresu súboru s popisom svojho kompasu',
 	'info_liste_aucune_boussole' => 'Do vašej databázy ešte nebol pridaný žiaden kompas. Na jeho pridanie použite formulár, ktorý sa nachádza nižšie.',
-	'info_liste_boussoles' => 'Na tejto stránke nájdete zoznam kompasov pridaných do vašej databázy.',
-	'info_site_boussole' => 'Táto stránka je súčasťou kompasu "@boussole@"',
+	'info_site_boussole' => 'Táto stránka je súčasťou kompasu:',
+	'info_site_boussoles' => 'Táto stránka je súčasťou kompasov:',
 
 	// L
 	'label_1_site' => '@nb@ stránka',
@@ -152,15 +153,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_site_spip_zone' => 'SPIP Zone',
 
 	// O
-	'onglet_boussoles' => 'Riadiť kompasy',
 	'option_aucune_description' => 'Žiaden popis',
 	'option_descriptif_site' => 'Popis stránky',
 	'option_nom_site' => 'Názov stránky',
 	'option_nom_slogan_site' => 'Názov a slogan stránky',
 	'option_slogan_site' => 'Slogan stránky',
-
-	// R
-	'resume_table_boussoles' => 'Zoznam pridaných kompasov',
 
 	// S
 	'slogan_boussole_spip' => 'Obľúbené adresy galaxie SPIPu!',
@@ -189,15 +186,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_actualite_spip' => 'Novinky z Galaxie SPIPu',
-	'titre_bloc_boussoles' => 'KOMPASY',
 	'titre_boite_autres_boussoles' => 'Ďalšie kompasy',
 	'titre_boite_infos_boussole' => 'KOMPAS PREZÝVKY',
 	'titre_boite_logo_boussole' => 'LOGO KOMPASU',
 	'titre_form_ajouter_boussole' => 'Pridať alebo aktualizovať kompas',
 	'titre_formulaire_configurer' => 'Nastavenia zobrazenia kompasu',
 	'titre_liste_boussoles' => 'Zoznam dostupných kompasov',
-	'titre_page_boussole' => 'Kompas',
-	'titre_page_edition_boussole' => 'Upraviť kompas'
+	'titre_page_boussole' => 'Riadenie kompasov'
 );
 
 ?>

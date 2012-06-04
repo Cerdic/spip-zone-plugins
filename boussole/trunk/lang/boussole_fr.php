@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/boussole/lang/
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/boussole/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -190,7 +190,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_form_ajouter_boussole' => 'Ajouter ou mettre à jour une boussole',
 	'titre_formulaire_configurer' => 'Configuration de l\'affichage de la boussole',
 	'titre_liste_boussoles' => 'Liste des boussoles disponibles',
-	'titre_page_boussole' => 'Gestion des boussoles',
+	'titre_page_boussole' => 'Gestion des boussoles'
 );
 
 ?>
