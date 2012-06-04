@@ -80,6 +80,7 @@ add_outil( array(
 	 traitement:NOM:pre_typo,
 	 traitement:TYPE/mots:pre_typo' => 'supprimer_numero',
 	'categorie' => 'public',
+	'version-max' => '17743', // SPIP 3.0 : plus la peine
 ));
 
 add_variable( array(
