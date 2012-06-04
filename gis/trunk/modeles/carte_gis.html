@@ -17,11 +17,11 @@
 	- style = non					ne pas styler la carte
 	- zoom_molette|zoom_wheel = non	désactiver le zoom avec la molette de la souris, actif par defaut
 	- type = carte					type de la carte : carte, satellite, relief ou hybride
-	- control_zoom|controle_zoom = large	type de controles pour le zoom : large, small
-	- control_pan|controle_pan = non				ne pas afficher les controles de déplacement dans la carte
+X	- control_zoom|controle_zoom = large	type de controles pour le zoom : large, small
+X	- control_pan|controle_pan = non				ne pas afficher les controles de déplacement dans la carte
 	- control_type|controle_type = non			ne pas afficher les controles de changement de type
 	- no_control|aucun_controle = oui				ne pas afficher les controles de la carte
-	- overview = oui				afficher un mini carte de situation
+X	- overview = oui				afficher un mini carte de situation
 	- scale = oui					afficher l'échelle de la carte
 	- limit|limite = 500					nombre max de marqueurs à afficher, 500 par defaut
 	- objets = gis					type d'objets à afficher (fichier json/gis_xx qui génère la source de donnees)
@@ -32,6 +32,7 @@
 	- point = non					si elle vaut "non" cette option n'affichera pas de points du tout (utile pour n'afficher qu'un kml par exemple)
 	- ajaxload = non                si elle vaut "non" cette option désactive l'init de la carte sur l'event ajaxload 
 
+X : plus dispo
 ]
 
 [(#SET{width,#ENV{width,#ENV{largeur,100%}}})]
@@ -63,7 +64,8 @@ var map[(#GET{id})];
 		var map_container = 'map[(#GET{id})]';
 		
 		map[(#GET{id})] = new L.Map(map_container,{
-			scrollWheelZoom: [(#ENV{zoom_molette,#ENV{zoom_wheel}}|=={non}|?{false,true})]	
+			scrollWheelZoom: [(#ENV{zoom_molette,#ENV{zoom_wheel}}|=={non}|?{false,true})],
+			zoomControl: [(#ENV{no_control,#ENV{aucun_controle}}|!={oui}|?{true,false})]	
 		});
 		
 		[(#GET{utiliser_bb}|non)
@@ -101,7 +103,7 @@ var map[(#GET{id})];
 		var base_layer = terrain_layer;
 		]
 		map[(#GET{id})].addLayer(base_layer);
-		[(#ENV{control_type,#ENV{controle_type}}|!={non}|oui)
+		[(#ENV{control_type,#ENV{controle_type}}|!={non}|et{#ENV{no_control,#ENV{aucun_controle}}|!={oui}}|oui)
 		var layersControl = new L.Control.Layers({
 			"<:gis:cfg_lbl_maptype_carte:>": road_layer,
 			"<:gis:cfg_lbl_maptype_satellite:>": satelitte_layer,
@@ -116,7 +118,7 @@ var map[(#GET{id})];
 		
 		map[(#GET{id})].attributionControl.setPrefix('');
 		
-		[(#ENV{scale}|oui)
+		[(#ENV{scale}|et{#ENV{no_control,#ENV{aucun_controle}}|!={oui}}|oui)
 			map[(#GET{id})].addControl(new L.Control.Scale());
 		]
 		
