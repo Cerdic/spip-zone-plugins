@@ -23,7 +23,7 @@ function photospip_upgrade($nom_meta_base_version,$version_cible){
 			$config_palette = lire_config('palette',array());
 			$config_palette['palette_ecrire'] = 'on';
 			ecrire_meta("palette",serialize($config_palette));
-			ecrire_meta($nom_meta_base_version,$current_version=$version_base,'non');
+			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 		}
 		if (version_compare($current_version,'0.2','<')){
 			spip_query("ALTER TABLE spip_documents_inters  ADD `filtre` text AFTER `version` ");
