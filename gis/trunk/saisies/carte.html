@@ -49,6 +49,8 @@ var geocoder;]
 	var champ_region = $('#champ_#ENV{champ_region,region}');
 	var champ_pays = $('#champ_#ENV{champ_pays,pays}');
 	
+	var marker = new L.Marker(new L.LatLng(#ENV{lat,0}, #ENV{lon,0}), {draggable: true});
+	
 	var maj_inputs = function(map,data,action) {
 		[(#GET{geocoder}|oui)
 		if (action != 'geocoding') {
@@ -58,26 +60,28 @@ var geocoder;]
 		$('#champ_#ENV{champ_zoom,zoom}').val(zoom);
 		if(action == 'click'){
 			$('#champ_#ENV{champ_lat,lat}').val(data.lat);
-			$('#champ_#ENV{champ_lon,lon}').val(data.lon);
+			$('#champ_#ENV{champ_lon,lon}').val(data.lng);
 			annuler_geocoder = 1;
-			form_map.setCenter(data);
-			marker = new mxn.Marker(data);
+			form_map.panTo(data);
+			marker.setLatLng(data);
 		}
 		else if(annuler_geocoder != 1){
 			if(data.point == 'undefined'){
 				$('#champ_#ENV{champ_lat,lat}').val(data.lat);
-				$('#champ_#ENV{champ_lon,lon}').val(data.lon);
-				form_map.setCenter(data);
-				marker = new mxn.Marker(data);
+				$('#champ_#ENV{champ_lon,lon}').val(data.lng);
+				form_map.panTo(data);
+				marker.setLatLng(data);
 			}else{
 				$('#champ_#ENV{champ_lat,lat}').val(data.point.lat);
-				$('#champ_#ENV{champ_lon,lon}').val(data.point.lon);
-				form_map.setCenter(data.point);
-				marker = new mxn.Marker(data.point);
+				$('#champ_#ENV{champ_lon,lon}').val(data.point.lng);
+				form_map.panTo(data.point);
+				marker.setLatLng(data.point);
 			}
 		}
-		form_map.removeAllMarkers();
-		form_map.addMarker(marker);
+		//form_map.removeAllMarkers();
+		console.log(marker);
+		if (!marker._map)
+			form_map.addLayer(marker);
 	}
 	
 	[(#GET{geocoder}|oui)
@@ -93,36 +97,41 @@ var geocoder;]
 	var init_map = function() {
 		// creer la carte
 		var map_container = 'map_[(#ENV{nom})]';
-		form_map = new mxn.Mapstraction(map_container,'[(#REM|gis_api_utilisee)]');
+		form_map = new L.Map(map_container);
+		
+		form_map.attributionControl.setPrefix('');
+		
+		[(#SET{maptype, #REM|gis_maptype_utilise})]
+		// defalut layer
+		[(#REM|gis_api_utilisee|=={openlayers}|oui)
+		var base_layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'});
+		][(#VAL|gis_api_utilisee|=={googlev3}|oui)
+		var base_layer = new L.Google('[(#GET{maptype}|=={PHYSICAL}|?{TERRAIN,#GET{maptype}})]');
+		]
+		
+		form_map.addLayer(base_layer);
+		
 		[(#GET{utiliser_bb}|non)
-		form_map.setCenterAndZoom(new mxn.LatLonPoint([(#GET{init_lat})],[(#GET{init_lon})]),[(#GET{init_zoom})]);
+		form_map.setView(new L.LatLng([(#GET{init_lat})], [(#GET{init_lon})]), [(#GET{init_zoom})]); 
 		]
 		[(#GET{utiliser_bb}|oui)
-		form_map.setBounds(new mxn.BoundingBox([(#GET{init_sw_lat})],[(#GET{init_sw_lon})],[(#GET{init_ne_lat})],[(#GET{init_ne_lon})]));
+		form_map.fitBounds(
+			new L.LatLngBounds(
+				new L.LatLng([(#GET{init_sw_lat})], [(#GET{init_sw_lon})]),
+				new L.LatLng([(#GET{init_ne_lat})], [(#GET{init_ne_lon})])
+			)
+		);
 		// mettre à jour les champs de latitude et longitude quand la carte est chargée
 		// a voir si on le fait dans tous les cas, pas seulement pour la boundingbox, comme pour le zoom
-		form_map.load.addHandler(function(name, source, args) {
-			var center = source.getCenter();
-			$('#champ_#ENV{champ_lat,lat}').val(center.lat);
-			$('#champ_#ENV{champ_lon,lon}').val(center.lon);
+		form_map.on('load', function(e) {
+			$('#champ_#ENV{champ_lat,lat}').val(e.latlng.lat);
+			$('#champ_#ENV{champ_lon,lon}').val(e.latlng.lon);
 		});		
 		]
-        // Pour l'API Openlayers, la methode n'existe pas
-        try {
-			form_map.setMapType([mxn.Mapstraction.(#REM|gis_maptype_utilise)]);
-        }
-        catch(err) {
-            ;
-        }
-		form_map.addControls({
-			pan: true,
-			zoom: '#CONFIG{gis/control,large}',
-			map_type: true
-		});
 		
 		[(#GET{geocoder}|oui)
 		// geocoder
-		geocoder = new mxn.Geocoder('[(#REM|gis_api_utilisee)]',geocode);]
+		//geocoder = new mxn.Geocoder('[(#REM|gis_api_utilisee)]',geocode);]
 		
 		[(#REM) Ici on utilise #ENV{lat} et #ENV{lon}, et pas les valeurs
 		        d'initialisation #GET{init_lat} et #GET{init_lon} qui sont toujours remplies]
@@ -133,31 +142,50 @@ var geocoder;]
 				{"type": "Feature",
 					"geometry": {"type": "Point", "coordinates": [(#VAL{91}|chr)]#ENV{lon}, #ENV{lat}[(#VAL{93}|chr)]},
 					"id":"#ENV{id_gis,oui}",
-					"title":[(#ENV{titre,''}|supprimer_numero|json_encode)],
-					"description":[(#ENV{descriptif,''}|json_encode)][,(#LOGO_GIS|oui)
-					[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{32,32}|image_recadre{32,32}})]
-					#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
-					#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
-					["icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
-					"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)],
-					"icon_anchor": [(#VAL{91}|chr)][(#GET{icon_w}|div{2})],[(#GET{icon_h})][(#VAL{93}|chr)]]
+					"properties": {
+						"title":[(#ENV{titre,''}|supprimer_numero|json_encode)],
+						"description":[(#ENV{descriptif,''}|json_encode)][,(#LOGO_GIS|oui)
+						[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{32,32}|image_recadre{32,32}})]
+						#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
+						#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
+						["icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
+						"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)],
+						"icon_anchor": [(#VAL{91}|chr)][(#GET{icon_w}|div{2})],[(#GET{icon_h})][(#VAL{93}|chr)]]
+					}
 				}[(#VAL{93}|chr)]
 		}
-		form_map.addJSON(data);]
+		var geojson = new L.GeoJSON();
+		geojson.on("featureparse", function(e){
+			marker = e.layer;
+			e.layer.options.draggable = true;
+			e.layer.on("dragend", function(e){
+				maj_inputs(form_map,e.target._latlng,'click');
+			});
+			if (e.properties && e.properties.icon){
+				e.layer.setIcon(new L.Icon({
+					iconUrl: e.properties.icon,
+					iconSize: new L.Point( e.properties.icon_size[(#VAL{91}|chr)]0[(#VAL{93}|chr)], e.properties.icon_size[(#VAL{91}|chr)]1[(#VAL{93}|chr)] ),
+					iconAnchor: new L.Point( e.properties.icon_anchor[(#VAL{91}|chr)]0[(#VAL{93}|chr)], e.properties.icon_anchor[(#VAL{91}|chr)]1[(#VAL{93}|chr)] ),
+				}));
+			}
+			if (e.properties && e.properties.title){
+				e.layer.bindPopup(e.properties.title);
+			}
+		});
+		form_map.addLayer(geojson);
+		geojson.addGeoJSON(data);]
 		
 		// mettre a jour les coordonnees quand on clique la carte
-		form_map.click.addHandler(function(name, source, args) {
+		form_map.on('click', function(e) {
 			annuler_geocoder = 0;
-			var pos = args.location;
-			maj_inputs(form_map,pos,'click');
+			maj_inputs(form_map,e.latlng,'click');
 		});
 		
 		// mettre à jour le zoom quand on le modifie
-		form_map.changeZoom.addHandler(function(name, source, args) {
-			var zoom = source.getZoom();
-			$('#champ_#ENV{champ_zoom,zoom}').val(zoom);
+		form_map.on('zoomend', function(e) {
+			$('#champ_#ENV{champ_zoom,zoom}').val(e.target._zoom);
 		});
-		
+		/*
 		[(#GET{geocoder}|oui)
 		// geocoder si clic...
 		$('a##ENV{nom}_rechercher_geocodage').css("cursor","pointer").click(function(){
@@ -174,13 +202,15 @@ var geocoder;]
 				return false;
 			}
 		});]
+		*/
 		[(#ENV{id_gis}|non|ou{#ENV{id_gis}|=={oui}}|et{#CONFIG{gis/geolocaliser_user_html5}|=={on}}|oui)
-		gis_get_navigator_location(form_map,#GET{init_zoom});]
+		form_map.locate({setView: true, maxZoom: [(#GET{init_zoom})]});]
+		
 	};
 
 	$(function(){
 		init_map();
-		[(#ENV{ajaxload}|!={non}|oui)onAjaxLoad(init_map);]
+		//[(#ENV{ajaxload}|!={non}|oui)onAjaxLoad(init_map);]
 	});
 	
 })(jQuery);

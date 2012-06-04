@@ -1,9 +1,9 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="3.3.6"
+	version="4.0.0"
 	schema="2.0.2"
-	etat="test"
+	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/gis.png"
 	documentation="http://www.spip-contrib.net/GIS2"
@@ -24,7 +24,7 @@
 
 	<utilise nom="selecteur_generique" compatibilite="[1.12;]" />
 	<necessite nom="saisies" compatibilite="[1.19.0;]" />
-	<lib nom="mxn-gis-2.2.2" lien="https://github.com/downloads/brunob/mxn/mxn-gis-2.2.2.zip" />
+	<lib nom="leaflet-gis-4.0.0" lien="https://github.com/downloads/brunob/Leaflet/leaflet-gis-4.0.0.zip" />
 
 	<pipeline
 		nom="declarer_tables_interfaces"
@@ -40,12 +40,14 @@
 	/>
 	<pipeline
 		nom="insert_head"
-		action="inserer_javascript"
 		inclure="gis_pipelines.php"
 	/>
 	<pipeline
 		nom="header_prive"
-		action="inserer_javascript"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="insert_head_css"
 		inclure="gis_pipelines.php"
 	/>
 	<pipeline

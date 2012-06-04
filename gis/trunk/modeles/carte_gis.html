@@ -50,31 +50,10 @@
 	#SET{ne_lat,#ENV{ne_lat,#GET{lat}|plus{10}}}
 	#SET{ne_lon,#ENV{ne_lon,#GET{lon}|plus{10}}}
 ]
-[(#REM)  
-	// todo
-	{recursive=#ENV{recursive}}
-	{attente=#ENV{attente}}
-	{ombre=#ENV{ombre}}
-	{load_map=#ENV{load_map}}
-	{id_a_ouvrir=#ENV{id_a_ouvrir}}
-	{swfobject=#CONFIG{gis/swfobject,oui}}
-	
-	// pas documentes
-	{control_move=#ENV{control_move}}
-	{control_zoom=#ENV{control_zoom}}
-	
-	// done
-	
-	{latit}{lonxit}{zoom}{hauteur=#GET{height}}{largeur=#GET{width}}{id_carte_gis}{zoom_molette=#ENV{zoom_molette}}
-	{control}{control_type=#ENV{control_type}}{type}{limit=#ENV{limit}}
-	{id_rubrique=#GET{id_rubrique}}{id_secteur}{id_mot}{id_article}{id_auteur}{recherche}{id_groupe}
-]
 
 <div id="map[(#GET{id})]" class="carte_gis"[(#ENV{style}|!={'non'}|?{' '})style="[width:(#GET{width});][ height:(#GET{height});]"]></div>
 
 <script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
-[(#CONFIG{gis/api}|=={cloudmade}|oui)
-var cloudmade_key = '#CONFIG{gis/api_key_cloudmade}';]
 
 var map[(#GET{id})];
 
@@ -82,20 +61,21 @@ var map[(#GET{id})];
 	
 	var init_map[(#GET{id})] = function() {
 		var map_container = 'map[(#GET{id})]';
-
-		$('#map[(#GET{id})]').empty();
-		map[(#GET{id})] = new mxn.Mapstraction(map_container,'[(#REM|gis_api_utilisee)]');
 		
-		[(#ENV{zoom_molette,#ENV{zoom_wheel}}|!={non}|oui)
-		map[(#GET{id})].enableScrollWheelZoom();]
+		map[(#GET{id})] = new L.Map(map_container,{
+			scrollWheelZoom: [(#ENV{zoom_molette,#ENV{zoom_wheel}}|=={non}|?{false,true})]	
+		});
 		
 		[(#GET{utiliser_bb}|non)
-		map[(#GET{id})].setCenterAndZoom(new mxn.LatLonPoint([(#GET{lat})],[(#GET{lon})]),[(#ENV{zoom,#CONFIG{gis/zoom,0}})]);
-		]
+		map[(#GET{id})].setView(new L.LatLng([(#GET{lat})], [(#GET{lon})]), [(#ENV{zoom,#CONFIG{gis/zoom,0}})]);]
 		
 		[(#GET{utiliser_bb}|oui)
-		map[(#GET{id})].setBounds(new mxn.BoundingBox([(#GET{sw_lat})],[(#GET{sw_lon})],[(#GET{ne_lat})],[(#GET{ne_lon})]));
-		]
+		map[(#GET{id})].fitBounds(
+			new L.LatLngBounds(
+				new L.LatLng([(#GET{sw_lat})], [(#GET{sw_lon})]),
+				new L.LatLng([(#GET{ne_lat})], [(#GET{ne_lon})])
+			)
+		);]
 
 		[(#SET{maptype, #REM|gis_maptype_utilise})]
 		[(#ENV{type}|oui)
@@ -104,38 +84,37 @@ var map[(#GET{id})];
 		[(#ENV{type}|=={'hybride'}|oui) #SET{maptype,HYBRID} ]
 		[(#ENV{type}|=={'relief'}|oui) #SET{maptype,PHYSICAL} ]
 		]
-        // Pour l'API Openlayers, la methode n'existe pas
-        try {
-			map[(#GET{id})].setMapType([mxn.Mapstraction.(#GET{maptype})]);
-        }
-        catch(err) {
-			;
-        }
+		// defalut layer
+		[(#REM|gis_api_utilisee|=={openlayers}|oui)
+		var base_layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'});
+		][(#VAL|gis_api_utilisee|=={googlev3}|oui)
+		var base_layer = new L.Google('[(#GET{maptype}|=={PHYSICAL}|?{TERRAIN,#GET{maptype}})]');
+		]
+		
+		map[(#GET{id})].addLayer(base_layer);
+		
+		map[(#GET{id})].setView(new L.LatLng(#GET{lat},#GET{lon}),#ENV{zoom,#CONFIG{gis/zoom,0}});
+		
+		map[(#GET{id})].attributionControl.setPrefix('');
+		
+		[(#ENV{scale}|oui)
+			map[(#GET{id})].addControl(new L.Control.Scale());
+		]
+		
+		/*
 		
 		#SET{map_controls,#ARRAY}
 		
-		[(#ENV{no_control,#ENV{aucun_controle}}|!={oui}|oui)
-			[(#SET{map_controls,#GET{map_controls}|array_merge{#ARRAY{zoom,#ENV{control_zoom,large}}}})]
-		]
-	
 		[(#ENV{overview}|oui)
-			[(#SET{map_controls,#GET{map_controls}|array_merge{#ARRAY{overview,true}}})] 
+			[(#SET{map_controls,#GET{map_controls}|array_merge{#ARRAY{overview,true}}})]
 		]
-		
-		[(#ENV{scale}|oui)
-			[(#SET{map_controls,#GET{map_controls}|array_merge{#ARRAY{scale,true}}})] 
-		]
-		
 		[(#ENV{control_type,#ENV{controle_type}}|!={non}|oui)
-			[(#SET{map_controls,#GET{map_controls}|array_merge{#ARRAY{map_type,true}}})] 
-		]
-		
-		[(#ENV{control_pan,#ENV{controle_pan}}|!={non}|oui) 
-			[(#SET{map_controls,#GET{map_controls}|array_merge{#ARRAY{pan,true}}})]
+			[(#SET{map_controls,#GET{map_controls}|array_merge{#ARRAY{map_type,true}}})]
 		]
 		
 		map[(#GET{id})].addControls([(#GET{map_controls}|json_encode)]);
-		
+		*/
+
 		[(#ENV{point}|!={non}|oui)
 		jQuery.getJSON("[(#URL_PAGE{gis_json}|url_absolue)]",
 			{[
@@ -159,17 +138,23 @@ var map[(#GET{id})];
 			},
 			function(data) {
 				if (data){
-					map[(#GET{id})].addJSON(data);
+					var geojson = new L.GeoJSON();
+					geojson.on("featureparse", function(e){
+						if (e.properties && e.properties.icon){
+							e.layer.setIcon(new L.Icon({
+								iconUrl: e.properties.icon,
+								iconSize: new L.Point( e.properties.icon_size[(#VAL{91}|chr)]0[(#VAL{93}|chr)], e.properties.icon_size[(#VAL{91}|chr)]1[(#VAL{93}|chr)] ),
+								iconAnchor: new L.Point( e.properties.icon_anchor[(#VAL{91}|chr)]0[(#VAL{93}|chr)], e.properties.icon_anchor[(#VAL{91}|chr)]1[(#VAL{93}|chr)] ),
+							}));
+						}
+						if (e.properties && e.properties.title){
+							e.layer.bindPopup(e.properties.title);
+						}
+					});
+					map[(#GET{id})].addLayer(geojson);
+					geojson.addGeoJSON(data);
 					[(#ENV{autocenterandzoom,#ENV{centrer_auto}}|oui)
-					var markers = map[(#GET{id})].markers;
-					if (markers.length == 1){
-						map[(#GET{id})].setCenterAndZoom(new mxn.LatLonPoint(markers[(#VAL{91}|chr)]0[(#VAL{93}|chr)].location.lat,markers[(#VAL{91}|chr)]0[(#VAL{93}|chr)].location.lon),#ENV{zoom,#CONFIG{gis/zoom,0}});
-					} else {
-						map[(#GET{id})].autoCenterAndZoom();
-					}]
-					[(#ENV{autofocus_marker}|oui) 
-					 	gis_autofocus_marker('[(#GET{id})]');
-					]
+					map[(#GET{id})].fitBounds(geojson.getBounds());]
 				}
 			}
 		);]
@@ -177,25 +162,24 @@ var map[(#GET{id})];
 		<BOUCLE_test_kml(CONDITION){si (#ENV{kml}|oui)}>
 			#SET{kml, #ENV{kml}}
 			[(#GET{kml}|is_array|non) #SET{kml, #ARRAY{0,#GET{kml}}} ]
-			
 			<BOUCLE_kml(POUR){tableau #GET{kml}}>
 				[(#VALEUR|intval|oui)
-					map[(#GET{id})].addOverlay(['(#VALEUR|generer_url_entite{document}|url_absolue)']);
-				]
+				var kml_#COMPTEUR_BOUCLE = new L.KML(['(#VALEUR|generer_url_entite{document}|url_absolue)'], {async: true}); ]
 				[(#VALEUR|intval|non)
-					map[(#GET{id})].addOverlay(['(#VALEUR)']);
-				]
+				var kml_#COMPTEUR_BOUCLE = new L.KML(['(#VALEUR|copie_locale)'], {async: true}); ]
+				kml_#COMPTEUR_BOUCLE.on("loaded", function(e) { map[(#GET{id})].fitBounds(e.target.getBounds()); });
+				map[(#GET{id})].addLayer(kml_#COMPTEUR_BOUCLE);
 			</BOUCLE_kml>
 		</BOUCLE_test_kml>
 		
 		[(#ENV{localize_visitor,#ENV{localiser_visiteur}}|oui)
-		gis_get_navigator_location(map[(#GET{id})],#ENV{zoom,#CONFIG{gis/zoom,0}});]
+		map[(#GET{id})].locate({setView: true, maxZoom: [(#ENV{zoom,#CONFIG{gis/zoom,0}})]});]
 		
 	}
 
 	$(function(){
 		init_map[(#GET{id})]();
-		[(#ENV{ajaxload}|!={non}|oui)onAjaxLoad(init_map[(#GET{id})]);] 
+		//[(#ENV{ajaxload}|!={non}|oui)onAjaxLoad(init_map[(#GET{id})]);]
 	});
 
 })(jQuery);

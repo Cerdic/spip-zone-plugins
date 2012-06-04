@@ -3,55 +3,52 @@
 
 <script type="text/javascript">
 <!--
-[(#CONFIG{gis/api}|=={cloudmade}|oui)
-var cloudmade_key = '#CONFIG{gis/api_key_cloudmade}';]
-
 (function($){
 	var init_map_preview = function() {
 		var map_preview;
 		var map_preview_container = 'map_preview';
 		var marker;
-		// ne pas doublonner la carte quand on passe plusieurs fois dans ajaxload, pas propre mais bon...
-		$('#map_preview').empty(); 
-		map_preview = new mxn.Mapstraction(map_preview_container,'[(#REM|gis_api_utilisee)]');
-        // Pour l'API Openlayers, la methode n'existe pas
-        try {
-			map_preview.setMapType([mxn.Mapstraction.(#REM|gis_maptype_utilise)]);
-        }
-        catch(err) {
-            ;
-        }
 		
-		map_preview.addControls({
-			pan: true,
-			zoom: '[(#ENV{control,large})]',
-		});
+		map_preview = new L.Map(map_preview_container);
 		
-		map_preview.setCenterAndZoom(new mxn.LatLonPoint([(#LAT)],[(#LON)]),[(#ZOOM|sinon{#CONFIG{gis/zoom,0}})]);
+		map_preview.attributionControl.setPrefix('');
+		
+		[(#SET{maptype, #REM|gis_maptype_utilise})]
+		// defalut layer
+		[(#REM|gis_api_utilisee|=={openlayers}|oui)
+		var base_layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'});
+		][(#VAL|gis_api_utilisee|=={googlev3}|oui)
+		var base_layer = new L.Google('[(#GET{maptype}|=={PHYSICAL}|?{TERRAIN,#GET{maptype}})]');
+		]
+		
+		map_preview.addLayer(base_layer);
+		
+		map_preview.setView(new L.LatLng([(#LAT)],[(#LON)]),[(#ZOOM|sinon{#CONFIG{gis/zoom,0}})]);
 		
 		[(#REM) On ajoute les points ou le point unique suivant les params ]
-		<BOUCLE_points(GIS){id_objet}{objet}>
+		<B_points>
 		var data = {
 			"type": "FeatureCollection",
 			"features": [
+		<BOUCLE_points(GIS){id_objet}{objet}{","}>
 				{"type": "Feature",
 					"geometry": {"type": "Point", "coordinates": [#LON, #LAT]},
 					"id":"#ID_GIS",
-					"title":[(#TITRE|supprimer_numero|json_encode)],
-					"description":[(#DESCRIPTIF|json_encode)][,(#LOGO_GIS|oui)
-					[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{28,28}|image_recadre{28,28}|image_recadre{32,32,center}|image_aplatir{jpg,ffffff}})]
-					#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
-					#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
-					["icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
-					"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)]
-					]
-				}]
-		}
-		map_preview.addJSON(data);
+					"properties": {
+						"title":[(#TITRE|supprimer_numero|json_encode)],
+						"description":[(#DESCRIPTIF|json_encode)][,(#LOGO_GIS|oui)
+						[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{28,28}|image_recadre{28,28}|image_recadre{32,32,center}|image_aplatir{jpg,ffffff}})]
+						#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
+						#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
+						["icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
+						"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)],
+						"icon_anchor": [(#VAL{91}|chr)][(#GET{icon_w}|div{2})],[(#GET{icon_h})][(#VAL{93}|chr)]]
+					}
+				}
 		</BOUCLE_points>
-		[(#TOTAL_BOUCLE|>{1}|oui)
-			map_preview.autoCenterAndZoom();
-		]
+			]
+		};
+		[(#TOTAL_BOUCLE|>{1}|oui) #SET{autocenter,oui} ]
 		</B_points>
 		<BOUCLE_point(GIS){id_gis}>
 		var data = {
@@ -60,29 +57,48 @@ var cloudmade_key = '#CONFIG{gis/api_key_cloudmade}';]
 				{"type": "Feature",
 					"geometry": {"type": "Point", "coordinates": [#LON, #LAT]},
 					"id":"#ID_GIS",
-					"title":[(#TITRE|supprimer_numero|json_encode)],
-					"description":[(#DESCRIPTIF|json_encode)][,(#LOGO_GIS|oui)
-					[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{28,28}|image_recadre{28,28}|image_recadre{32,32,center}|image_aplatir{jpg,ffffff}})]
-					#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
-					#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
-					["icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
-					"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)]
-					]
+					"properties": {
+						"title":[(#TITRE|supprimer_numero|json_encode)],
+						"description":[(#DESCRIPTIF|json_encode)][,(#LOGO_GIS|oui)
+						[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{28,28}|image_recadre{28,28}|image_recadre{32,32,center}|image_aplatir{jpg,ffffff}})]
+						#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
+						#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
+						["icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
+						"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)],
+						"icon_anchor": [(#VAL{91}|chr)][(#GET{icon_w}|div{2})],[(#GET{icon_h})][(#VAL{93}|chr)]]
+					}
 				}]
-		}
-		map_preview.addJSON(data);
+		};
 		</BOUCLE_point>
 		<//B_points>
-		
+		if (data) {
+			var geojson = new L.GeoJSON();
+			geojson.on("featureparse", function(e){
+				if (e.properties && e.properties.icon){
+					e.layer.setIcon(new L.Icon({
+						iconUrl: e.properties.icon,
+						iconSize: new L.Point( e.properties.icon_size[0], e.properties.icon_size[1] ),
+						iconAnchor: new L.Point( e.properties.icon_anchor[0], e.properties.icon_anchor[1] ),
+					}));
+				}
+				if (e.properties && e.properties.title){
+					e.layer.bindPopup(e.properties.title);
+				}
+			});
+			map_preview.addLayer(geojson);
+			geojson.addGeoJSON(data);
+			[(#GET{autocenter}|oui)
+			map_preview.fitBounds(geojson.getBounds());]
+		}
 		[(#REM) On ajoute les KML attachés à l'objet ]
 		<BOUCLE_kml(DOCUMENTS){tous}{objet}{id_objet}{extension=kml}>
-		map_preview.addOverlay('[(#URL_DOCUMENT|url_absolue)]', true);
+		map_preview.addLayer(new L.KML('[(#URL_DOCUMENT|url_absolue)]', {async: true}));
 		</BOUCLE_kml>
 	}
 
 	$(function(){
 		init_map_preview();
-		onAjaxLoad(init_map_preview);
+		//onAjaxLoad(init_map_preview(true));
 	});
 
 })(jQuery);

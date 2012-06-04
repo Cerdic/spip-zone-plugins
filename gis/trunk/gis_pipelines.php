@@ -1,12 +1,32 @@
 <?php
 
-function gis_saisies_autonomes($flux){
-	$flux[] = 'carte';
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+/**
+ * Insertion des css du plugin dans les pages publiques
+ *
+ * @param $flux
+ * @return mixed
+ */
+function gis_insert_head_css($flux){
+	$flux .="\n".'<link rel="stylesheet" href="'. find_in_path(_DIR_LIB_GIS.'dist/leaflet.css') .'" />';
+	$flux .= "\n".'<!--[if lte IE 8]> <link rel="stylesheet" href="'. find_in_path(_DIR_LIB_GIS.'dist/leaflet.ie.css') .'" /> <![endif]-->';
 	return $flux;
 }
 
-function gis_inserer_javascript($flux){
+/**
+ * Insertion des scripts du plugin dans les pages publiques
+ *
+ * @param $flux
+ * @return mixed
+ */
+function gis_insert_head($flux){
 	
+	$flux .="\n".'<script type="text/javascript" src="'. find_in_path(_DIR_LIB_GIS.'dist/leaflet.js') .'"></script>';
+	$flux .="\n".'<script type="text/javascript">/*<![CDATA[*/ L.Icon.Default.imagePath = "' . find_in_path(_DIR_LIB_GIS.'dist/images') .'"; /*]]>*/</script>'."\n";
+	$flux .="\n".'<script type="text/javascript" src="'. find_in_path('lib/leaflet-plugins/control/Scale.js') .'"></script>';
+	$flux .="\n".'<script type="text/javascript" src="'. find_in_path('lib/leaflet-plugins/layer/vector/KML.js') .'"></script>';
+
 	// initialisation des valeurs de config
 	$config = @unserialize($GLOBALS['meta']['gis']);
 	if (!is_array($config))
@@ -22,32 +42,22 @@ function gis_inserer_javascript($flux){
 	}
 	
 	// insertion du script de l'api a utiliser
-	if ($config['api'] == 'cloudmade')
-		$flux .="\n".'<script type="text/javascript" src="http://tile.cloudmade.com/wml/latest/web-maps-lite.js"></script>'."\n";
-	if ($config['api'] == 'google')
-		$flux .="\n".'<script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key='.$config['api_key_google'].'&hl='.$GLOBALS['spip_lang'].'"></script>'."\n";
-	if ($config['api'] == 'googlev3')
-		$flux .="\n".'<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;language='.$GLOBALS['spip_lang'].'"></script>'."\n";
-	if ($config['api'] == 'microsoft')
-		$flux .="\n".'<script type="text/javascript" src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6"></script>'."\n";
-	if ($config['api'] == 'openlayers')
-		$flux .="\n".'<script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>'."\n";
-	if ($config['api'] == 'ovi')
-		$flux .="\n".'<script type="text/javascript" src="http://api.maps.ovi.com/jsl.js"></script>'."\n";
-	if ($config['api'] == 'yandex')
-		$flux .="\n".'<script type="text/javascript" src="http://api-maps.yandex.ru/1.1/index.xml?key='.$config['api_key_yandex'].'"></script>'."\n";
-		
-	// insertion de la lib mapstraction
-	if(in_array($config['api'],array('cartociudad','google','googlev3','yandex','openlayers'))){
-		$geocoder = ($config['geocoder']) ? ',[geocoder]' : '';
-	}else{
-		$geocoder = '';
+	if ($config['api'] == 'googlev3') {
+		$flux .="\n".'<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;language='.$GLOBALS['spip_lang'].'"></script>';
+		$flux .="\n".'<script type="text/javascript" src="'. find_in_path('lib/leaflet-plugins/layer/tile/Google.js') .'"></script>';
 	}
-	$flux .="\n".'<script id="mxn_script" type="text/javascript" src="'. url_absolue(find_in_path(_DIR_LIB_GIS.'mxn.js')) .'?('. $config['api'] . $geocoder .')"></script>'."\n";
 	
-	// insertion des scripts de gis
-	$flux .="\n".'<script type="text/javascript" src="'. url_absolue(find_in_path('javascript/gis.js')) .'"></script>'."\n";
+	return $flux;
+}
 
+/**
+ * Insertion des scripts et css du plugin dans les pages de l'espace privé
+ * @param $flux
+ * @return mixed
+ */
+function gis_header_prive($flux){
+	$flux .= gis_insert_head_css('');
+	$flux .= gis_insert_head('');
 	return $flux;
 }
 
@@ -279,6 +289,11 @@ function gis_post_edition($flux){
 function gis_taches_generales_cron($taches_generales){
 	$taches_generales['gis_nettoyer_base'] = 3600*48;
 	return $taches_generales;
+}
+
+function gis_saisies_autonomes($flux){
+	$flux[] = 'carte';
+	return $flux;
 }
 
 /**
