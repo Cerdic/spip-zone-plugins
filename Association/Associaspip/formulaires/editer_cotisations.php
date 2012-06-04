@@ -72,9 +72,9 @@ function formulaires_editer_cotisations_verifier_dist($id_auteur, $nom_prenom, $
 	return $erreurs;
 }
 
-function formulaires_editer_cotisations_traiter($id_auteur, $nom_prenom, $categorie, $validite) {
+function formulaires_editer_cotisations_traiter_dist($id_auteur, $nom_prenom, $categorie, $validite) {
 	/* partie de code grandement inspiree du code de formulaires_editer_objet_traiter dans ecrire/inc/editer.php */
-	$res=array();
+	$res = array();
 	// eviter la redirection forcee par l'action...
 	set_request('redirect');
 	$action_cotisation = charger_fonction('cotisation','action');
