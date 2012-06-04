@@ -39,6 +39,11 @@ function photospip_upgrade($nom_meta_base_version,$version_cible){
 			ecrire_meta("palette",serialize($config_palette));
 			ecrire_meta($nom_meta_base_version,$current_version="0.4","non");
 		}
+		if (version_compare($current_version,'0.5','<')){
+			include_spip('base/create');
+			creer_base();
+			ecrire_meta($nom_meta_base_version,$current_version="0.5","non");
+		}
 	}
 }
 	
