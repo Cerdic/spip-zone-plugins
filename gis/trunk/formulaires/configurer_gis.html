@@ -123,7 +123,7 @@
 		[(#REM|gis_api_utilisee|=={openlayers}|oui)
 		var base_layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'});
 		][(#VAL|gis_api_utilisee|=={googlev3}|oui)
-		var base_layer = new L.Google('[(#GET{maptype}|=={PHYSICAL}|?{TERRAIN,#GET{maptype}})]');
+		var base_layer = new L.Google('[(#GET{maptype}|replace{ROAD,ROADMAP}|replace{PHYSICAL,TERRAIN})]');
 		]
 		
 		map.addLayer(base_layer);
