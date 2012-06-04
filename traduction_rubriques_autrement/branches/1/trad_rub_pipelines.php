@@ -58,12 +58,17 @@ function trad_rub_recuperer_fond($flux){
 	//Insertion des onglets de langue
 
     if ($flux['args']['fond'] == 'prive/squelettes/contenu/rubrique'){
-
+		include_spip('inc/config');
     	$contexte=array('id_rubrique'=> $flux['args']['contexte']['id_rubrique']);
-				
-		$barre_langue=recuperer_fond("prive/editer/barre_traductions_rubrique",$contexte,array('ajax'=>true));
-
-        $flux['data']['texte'] = str_replace('</h1>', '</h1>' . $barre_langue, $flux['data']['texte']);
+    	
+    	//Verifier si le plugin taa à prévu une limitation d'affiçchage au niveau des secteur
+    	$id_secteur=sql_getfetsel('id_secteur','spip_rubriques','id_rubrique='.$contexte['id_rubrique']);
+    	$limiter_secteur=lire_config('taa/limiter_secteur')?lire_config('taa/limiter_secteur'):array();
+    
+		if(!in_array($id_secteur,$limiter_secteur)){			
+			$barre_langue=recuperer_fond("prive/editer/barre_traductions_rubrique",$contexte,array('ajax'=>true));	
+	        $flux['data']['texte'] = str_replace('</h1>', '</h1>' . $barre_langue, $flux['data']['texte']);
+			}
     }
 
 

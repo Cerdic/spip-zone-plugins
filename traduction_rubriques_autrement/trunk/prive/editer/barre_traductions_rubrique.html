@@ -1,5 +1,9 @@
-[(#CONFIG{langues_multilingue}|?{#SET{langues_dispos,#CONFIG{langues_multilingue}},#SET{langues_dispos,#CONFIG{langues_utilisees}}})]
-#SET{langues_dispos,#GET{langues_dispos}|explode{','}}
+[(#REM) Verifier si le plugin taa limite les langues sinon on, affiche les langues du site]
+[(#CONFIG{taa/utiliser_langues}|?{
+	#SET{langues_dispos,#CONFIG{taa/utiliser_langues}},
+	#SET{langues_dispos,#CONFIG{langues_multilingue}|explode{','}}
+	})]
+
 
 <BOUCLE_rub(RUBRIQUES){id_rubrique}{tout}>
 	#SET{lang,#LANG}
