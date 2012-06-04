@@ -27,8 +27,11 @@
 						<label><:ck:label_options_typo:></label>[
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{options_typo})</span>
 						]
-						<div class="choix"><input type="checkbox" name="supprimer_numero" id="supprimer_numero" value="1"[(#ENV{supprimer_numero}|=={'1'}|oui)checked="checked"] /><label for="supprimer_numero"><:ck:label_supprimer_numero:></label></div>
+						<div class="choix"><input type="checkbox" name="supprimer_numero" id="supprimer_numero" value="1"[(#ENV{supprimer_numero}|=={'1'}|oui)checked="checked"][(#EVAL{$GLOBALS}|table_valeur{spip_version_branche}|intval|<{3}|non)disabled="disabled"] /><label for="supprimer_numero"><:ck:label_supprimer_numero:></label></div>
 						<div class="choix"><input type="checkbox" name="toujours_paragrapher" id="toujours_paragrapher" value="1"[(#ENV{toujours_paragrapher}|=={'1'}|oui)checked="checked"] /><label for="toujours_paragrapher"><:ck:label_toujours_paragrapher:></label></div>
+						[(#EVAL{$GLOBALS}|table_valeur{spip_version_branche}|intval|<{3}|non)
+						<div class="choix"><input type="checkbox" name="no_autobr" id="no_autobr" value="1"[(#ENV{no_autobr}|=={'1'}|oui)checked="checked"] /><label for="no_autobr"><:ck:label_no_autobr:></label></div>
+						]
 					</li>
 					<li class="editer_introduction_suite [ (#ENV**{erreurs}|table_valeur{introduction_suite}|oui)erreur]">
 						<label><:ck:label_introduction_suite:></label>[

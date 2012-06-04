@@ -36,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_max_width' => 'Largeur maxi (pixel)',
 	'label_nb_objets_tranches' => 'Nombre d\'objets dans les listes',
 	'label_no_set_html_base' => 'Pas d\'ajout automatique de <tt>&lt;base href="..."&gt;</tt>',
+	'label_no_autobr' => 'Désactiver la prise en compte des alinéas (retour-ligne simples) dans le texte',
 	'label_options_ecrire_perfo' => 'Performance',
 	'label_options_ecrire_secu' => 'Sécurité',
 	'label_options_skel' => 'Calcul des pages',
