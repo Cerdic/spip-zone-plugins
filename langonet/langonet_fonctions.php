@@ -21,6 +21,7 @@ function langonet_creer_select_langues($sel_l='0') {
  * @return array
  */
 function langonet_creer_select_dossiers($sel_d=array()) {
+	if (is_string($sel_d)) $sel_d = array($sel_d);
 	$retour = creer_selects('0', $sel_d);
 	return $retour['dossiers'];
 }

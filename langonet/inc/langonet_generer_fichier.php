@@ -98,7 +98,7 @@ function langonet_generer_couples($module, $var_source, $var_cible, $mode='index
 				else if ($mode == 'vide')
 					$texte = '';
 				else if (($mode == 'fonction_l') OR (($mode == 'oublie') AND $_valeur))
-					$texte = array(_LANGONET_DEFINITION_L, $_valeur, $mode);
+					$texte = array(_LANGONET_DEFINITION_L, preg_replace("/'[$](\w+)'/", '\'@\1@\'', $_valeur), $mode);
 				else if ($mode !== 'oublie')
 					$texte = $_item;
 				else if (preg_match('/^[a-z]+$/i', $_item))

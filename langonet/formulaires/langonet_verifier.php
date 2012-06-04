@@ -1,6 +1,6 @@
 <?php
 /**
- * Formulaire principal de vérification des fichiers de langue
+ * Formulaire principal de verification des fichiers de langue
  */
 
 // Il est anormal que cette variable puisse etre indefinie
@@ -545,23 +545,35 @@ function creer_script($resultats, $verification) {
 		$val = array_shift($val); // premiere ligne du dit
 		$val = array_shift($val); // premier match dans la dite
 		$val = array_shift($val); // index 0 du dit
+		$args = '';
 		if ($_l) {
-			// gestion des backslash imparfaite, mais c'est deja ca
-			if (preg_match(_LANGONET_FONCTION_L, $val, $m))
-				$occ = str_replace('\\', '.', $m[2]);
-			elseif (preg_match(_LANGONET_FONCTION_L2, $val, $m))
+			if (preg_match(_LANGONET_FONCTION_L2, $val, $m))
 				$occ = $m[2];
-			else continue;
+			elseif (!preg_match(_LANGONET_FONCTION_L, $val, $m))
+				continue;
+			else {
+			// gestion des backslash imparfaite, mais c'est deja ca
+				$occ = str_replace('\\', '.', $m[2]);
+				if (preg_match_all("/'[$](\w*?)'/", $occ, $m)) {
+				  $args = array();
+				  foreach($m[1] as $s) {
+				    $args[]= "'$s' => \\\$$s";
+				    $occ = str_replace("'\$$s'", "'\\\$$s'", $occ);    
+				  }
+				  $args = ", array(" . join(', ', $args) . ')';
+				}
+			}
 		} else {
 			// si c'est un <: :> normaliser au besoin
 			if ($val[0]!=='<') continue;
 			if (!preg_match(_LANGONET_ITEM_H, $val, $m)) continue;
 			if (preg_match(',^\w+$,', $occ = $m[2])) continue;
 		}
-		// Un item avec $ est intraduisible.
-		if (strpos($occ, '$') !== false)  continue;
+		// Un item avec $ non transforme n'est pas gere
+		// (le cas mixte pose pb, mais bof)
+		if ((strpos($occ, '$') !== false) AND !$args) continue;
 		$occ = str_replace('%', '\\%', str_replace('[', '\\[', $occ));
-		$cite = $_l ? "s%_L *( *.$occ *.%_T('$prefixe$index'%;" : "s%<:$occ%<:$prefixe$index%;";
+		$cite = $_l ? "s%_L *( *.$occ *.%_T('$prefixe$index'$args%;" : "s%<:$occ%<:$prefixe$index%;";
 		$sed[$cite]=strlen($occ); 
 	}
 	if (!$sed) return '';
