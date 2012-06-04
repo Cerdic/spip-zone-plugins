@@ -11,11 +11,11 @@ function inc_barre_langues_dist($id_article){
 		
 	$objet='article';	
 	
-	/*création des onglets traduction*/
+	//création des onglets traduction
 	
 	// Les langues du site ou si restreint celle définis par config
 	
-	$langues_dispos=lire_config('taa/utiliser_langue')?lire_config('taa/utiliser_langue'):explode(',',lire_config('langues_multilingue'));
+	$langues_dispos=lire_config('taa/utiliser_langues')?lire_config('taa/utiliser_langues'):explode(',',lire_config('langues_multilingue'));
 
 	
 	// On établit les traductions de l'article

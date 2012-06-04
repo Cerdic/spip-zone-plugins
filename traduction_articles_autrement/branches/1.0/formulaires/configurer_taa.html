@@ -14,9 +14,10 @@
 					#SET{erreurs,#ENV**{erreurs}|table_valeur{affichage_liste_compacte}}
 					<li class="editer_liste_compacte_desactive[ (#GET{erreurs}|oui)erreur]">
 						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label for='liste_compacte_desactive'><:taa:affichage_liste_compacte_desactive:></label>
 						<div class="choix">
 							<input type="checkbox" name="liste_compacte_desactive" class="checkbox" value="on" id="liste_compacte" [(#ENV{liste_compacte_desactive}|oui) checked="checked"] />
-							<label for='liste_compacte_desactive'><:taa:affichage_liste_compacte_desactive:></label>
+							<label for='liste_compacte_desactive_oui'><:taa:oui:></label>
 						</div>
 					</li>
 					#SET{erreurs,#ENV**{erreurs}|table_valeur{limiter_secteur}}
@@ -30,15 +31,15 @@
 							</div>
 							</BOUCLE_secteurs>
 					</li>					
-					#SET{erreurs,#ENV**{erreurs}|table_valeur{utiliser_langue}}
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{utiliser_langues}}
 					#SET{langues_dispos,#CONFIG{langues_multilingue}|explode{','}}
-					<li class="editer_utiliser_langue[ (#GET{erreurs}|oui)erreur]">
+					<li class="editer_utiliser_langues[ (#GET{erreurs}|oui)erreur]">
 						[<span class='erreur_message'>(#GET{erreurs})</span>]
-						<label for='utiliser_langue'><:taa:cfg_utiliser_langue:></label>						
+						<label for='utiliser_langues'><:taa:cfg_utiliser_langues:></label>						
 							<BOUCLE_langues(DATA){source table,#GET{langues_dispos}}{par valeur}>
 							<div class="choix">	
-							<input type="checkbox" name="utiliser_langue[[(#COMPTEUR_BOUCLE|moins{1})]]" class="checkbox" value="#VALEUR" id="utiliser_langue" [(#ENV{utiliser_langue,#GET{langues_dispos}}|table_valeur{#COMPTEUR_BOUCLE|moins{1}}|oui) checked="checked"] />
-							<label for='utiliser_langue_#VALEUR'>[(#VALEUR|traduire_nom_langue)]</label>
+							<input type="checkbox" name="utiliser_langues[[(#COMPTEUR_BOUCLE|moins{1})]]" class="checkbox" value="#VALEUR" id="utiliser_langues" [(#ENV{utiliser_langues,#GET{langues_dispos}}|table_valeur{#COMPTEUR_BOUCLE|moins{1}}|oui) checked="checked"] />
+							<label for='utiliser_langues_#VALEUR'>[(#VALEUR|traduire_nom_langue)]</label>
 							</div>
 							</BOUCLE_langues>
 					</li>					

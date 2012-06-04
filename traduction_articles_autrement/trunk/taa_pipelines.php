@@ -11,17 +11,22 @@ function taa_header_prive($flux){
     $form = $flux['args']['form'];
    if ($form=='editer_article'){	
 	$id_article=$flux['data']['id_article'];
-	$id_rubrique=_request('id_rubrique')?_request('id_rubrique'):sql_getfetsel('id_rubrique','spip_articles','id_article='.$id_article);
+	$id_rubrique=(
+		_request('id_rubrique')?_request('id_rubrique'):
+		(intval($id_article)?sql_getfetsel('id_rubrique','spip_articles','id_article='.$id_article):'')
+		);
 	
-	$lang= _request('lang_dest')?_request('lang_dest'):sql_getfetsel('lang','spip_rubriques','id_rubrique='.$id_rubrique);;
-	$flux['data']['lang_dest']=$lang;
-
-	if($flux['data']['lang_dest']){		
-		$flux['data']['_hidden'] .= '<input type="hidden" name="lang_dest" value="'.$lang.'"/>';
-		$flux['data']['_hidden'] .= '<input type="hidden" name="changer_lang" value="'.$lang.'"/>';
-		}
-    }
-    return $flux;
+	if(intval($id_rubrique)){
+		$lang= _request('lang_dest')?_request('lang_dest'):sql_getfetsel('lang','spip_rubriques','id_rubrique='.$id_rubrique);;
+		$flux['data']['lang_dest']=$lang;
+	
+		if($flux['data']['lang_dest']){		
+			$flux['data']['_hidden'] .= '<input type="hidden" name="lang_dest" value="'.$lang.'"/>';
+			$flux['data']['_hidden'] .= '<input type="hidden" name="changer_lang" value="'.$lang.'"/>';
+			}
+	    }
+	}
+	    return $flux;
 }
 
 
