@@ -553,7 +553,11 @@ Note : les paquets <code>.zip</code> n\'étant pas reconstruits instantanément,
 	'maj_auto:nom' => 'Mises à jour automatiques',
 	'masquer:description' => 'Cet outil permet de masquer sur le site public et sans modification particulière de vos squelettes, les contenus (rubriques ou articles) qui ont le mot-clé défini ci-dessous. Si une rubrique est masquée, toute sa branche l\'est aussi.[[%mot_masquer%]]
 
-Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère <code>{tout_voir}</code> aux boucles de votre squelette.',
+Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère <code>{tout_voir}</code> aux boucles de votre squelette.
+
+Objets publiés mais masqués du public :
+-* Rubriques : @_RUB@.
+-* Articles : @_ART@.',
 	'masquer:nom' => 'Masquer du contenu',
 	'meme_rubrique:description' => 'Définissez ici le nombre d\'objets listés dans le cadre nommé «<:info_meme_rubrique:>» et présent sur certaines pages de l\'espace privé.[[%meme_rubrique%]]',
 	'message_perso' => 'Un grand merci aux traducteurs qui passeraient par ici. Pat ;-)',

@@ -286,7 +286,7 @@ add_outil( array(
 	'auteur' => 'Nicolas Hoizey, St&eacute;phanie Caron',
 	'pipeline:pre_boucle' => 'masquer_pre_boucle',
 	// fichier distant pour le pipeline
-	'distant_pipelines' => 'http://zone.spip.org/trac/spip-zone/export/35809/_plugins_/masquer/masquer_pipelines.php',
+	'distant_pipelines' => 'http://zone.spip.org/trac/spip-zone/export/62063/_plugins_/masquer/masquer_pipelines.php',
 	'code:options' => "%%mot_masquer%%",
 	'code:fonctions' => 'if (!function_exists("critere_tout_voir_dist")){
   function critere_tout_voir_dist($idb, &$boucles, $crit) {
@@ -295,6 +295,12 @@ add_outil( array(
   }
 }',
 	'version-min' => '1.9300',
+	'pipelinecode:pre_description_outil' => 'if($id=="masquer") {
+	include_spip("lib/masquer/distant_pipelines_masquer_pipelines");
+	$texte=str_replace(array("@_RUB@","@_ART@"),
+		array((function_exists("masquer_liste_rubriques") && $x=masquer_liste_rubriques(true))?"[->rub".join("], [->rub", $x)."]":couteauprive_T("variable_vide"),
+			(function_exists("masquer_liste_articles") && $x=masquer_liste_articles(true))?"[->art".join("], [->art", $x)."]":couteauprive_T("variable_vide"))
+	,$texte); }',
 ));
 
 add_variables( array(

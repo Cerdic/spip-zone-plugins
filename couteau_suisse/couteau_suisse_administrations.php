@@ -64,8 +64,7 @@ if(defined('_LOG_CS')) cs_log("cout_upgrade : $nom_meta_base_version => $version
 			include_spip('base/create');
 			creer_base();
 		}
-		if (version_compare($current_version, $tmp='1.0','<')){
-			echo '<h4>',_T('couteau:titre'),' - Upgrade ',$tmp,'</h4>';
+		if (cs_le_test($current_version, $tmp, '1.0')){
 			cs_suppr_metas_var('set_options');
 			cs_suppr_metas_var('radio_set_options3');
 			cs_suppr_metas_var('radio_set_options', 'radio_set_options4');
@@ -89,19 +88,30 @@ if(defined('_LOG_CS')) cs_log("cout_upgrade : $nom_meta_base_version => $version
 				effacer_meta($meta);
 			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
 		}
-		if (version_compare($current_version, $tmp='1.2','<')){
-			echo '<h4>',_T('couteau:titre'),' - Upgrade ',$tmp,'</h4>';
+		if (cs_le_test($current_version, $tmp, '1.2')){
 			effacer_meta('tweaks_contribs');
 			// MAJ forcee de certains fichiers distants
-			$outils = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
-			$outils['previsualisation']['maj_distant'] = 1;
-			$outils['masquer']['maj_distant'] = 1;
-			$outils['maj_auto']['maj_distant'] = 1;
-			ecrire_meta('tweaks_actifs', serialize($outils));
+			cs_maj_forcee(array('previsualisation','maj_auto'));
+			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
+		}
+		if (cs_le_test($current_version, $tmp, '1.3')){
+			cs_maj_forcee(array('masquer'));
 			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
 		}
 		ecrire_metas(); # Pour SPIP 1.92
 	}
+}
+
+function cs_le_test($current_version, &$tmp, $new) {
+	if($test = version_compare($current_version, $tmp=$new, '<'))
+		echo '<h4>',_T('couteau:titre'),' - Upgrade ',$tmp,'</h4>';
+	return $test;
+}
+
+function cs_maj_forcee($liste) {
+	$outils = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
+	foreach($liste as $l) $outils[$l]['maj_distant'] = 1;
+	ecrire_meta('tweaks_actifs', serialize($outils));
 }
 
 function cs_suppr_metas_var($meta, $new = false) {
@@ -140,7 +150,7 @@ function cout_exec_redirige($arg='', $recompiler=true) {
 		ecrire_metas();
 		cs_initialisation(true);
 		include_spip('inc/invalideur');
-		suivre_invalideur("1"); # tout effacer
+		suivre_invalideur('1'); # tout effacer
 		purger_repertoire(_DIR_SKELS);
 		purger_repertoire(_DIR_CACHE);
 	}
