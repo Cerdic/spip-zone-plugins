@@ -45,14 +45,19 @@ return $flux;
 function taa_recuperer_fond($flux){
 	//Insertion des onglets de langue
     if ($flux['args']['fond'] == 'prive/squelettes/contenu/article'){
-
+		include_spip('inc/config');
     	$id_article= $flux['args']['contexte']['id_article'];
-				
-		$barre=charger_fonction('barre_langues','inc');
-		$barre_langue=$barre($id_article);
-		
-
-        $flux['data']['texte'] = str_replace('</h1>', '</h1>' . $barre_langue, $flux['data']['texte']);
+    	
+    	// Vérifier si il y des secteurs à exclure
+    	$id_secteur=sql_getfetsel('id_secteur','spip_articles','id_article='.$id_article);
+    	$limiter_secteur=lire_config('taa/limiter_secteur')?lire_config('taa/limiter_secteur'):array();
+    
+		if(!in_array($id_secteur,$limiter_secteur))	{	
+			$barre=charger_fonction('barre_langues','inc');
+			$barre_langue=$barre($id_article);
+			
+	        $flux['data']['texte'] = str_replace('</h1>', '</h1>' . $barre_langue, $flux['data']['texte']);
+		}
     }
     
     //Liste compacte des articles

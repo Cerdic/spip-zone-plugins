@@ -1,5 +1,6 @@
 <?php
 function inc_barre_langues_dist($id_article){
+	include_spip('inc/config');
 	$row = sql_fetsel("*", "spip_articles", "id_article=$id_article");
 		
 	$id_rubrique = $row['id_rubrique'];
@@ -12,12 +13,10 @@ function inc_barre_langues_dist($id_article){
 	
 	/*création des onglets traduction*/
 	
-	// Les langues du site
+	// Les langues du site ou si restreint celle définis par config
 	
-	if (lire_config('langues_multilingue')) $langues_dispos=explode(',',lire_config('langues_multilingue'));
-	else $langues_dispos=explode(',',lire_config('langues_utilisees'));
-	
-	
+	$langues_dispos=lire_config('taa/utiliser_langue')?lire_config('taa/utiliser_langue'):explode(',',lire_config('langues_multilingue'));
+
 	
 	// On établit les traductions de l'article
 	$traductions	= array();

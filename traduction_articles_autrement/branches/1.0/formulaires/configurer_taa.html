@@ -19,6 +19,29 @@
 							<label for='liste_compacte_desactive'><:taa:affichage_liste_compacte_desactive:></label>
 						</div>
 					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{limiter_secteur}}
+					<li class="editer_limiter_secteur[ (#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label for='limiter_secteur'><:taa:cfg_limiter_secteur:></label>						
+							<BOUCLE_secteurs(RUBRIQUES){tout}{racine}>
+							<div class="choix">	
+							<input type="checkbox" name="limiter_secteur[#COMPTEUR_BOUCLE]" class="checkbox" value="#ID_RUBRIQUE" id="limiter_secteur" [(#ENV{limiter_secteur}|table_valeur{#COMPTEUR_BOUCLE}|oui) checked="checked"] />
+							<label for='limiter_secteur'>#TITRE</label>
+							</div>
+							</BOUCLE_secteurs>
+					</li>					
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{utiliser_langue}}
+					#SET{langues_dispos,#CONFIG{langues_multilingue}|explode{','}}
+					<li class="editer_utiliser_langue[ (#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label for='utiliser_langue'><:taa:cfg_utiliser_langue:></label>						
+							<BOUCLE_langues(DATA){source table,#GET{langues_dispos}}{par valeur}>
+							<div class="choix">	
+							<input type="checkbox" name="utiliser_langue[[(#COMPTEUR_BOUCLE|moins{1})]]" class="checkbox" value="#VALEUR" id="utiliser_langue" [(#ENV{utiliser_langue,#GET{langues_dispos}}|table_valeur{#COMPTEUR_BOUCLE|moins{1}}|oui) checked="checked"] />
+							<label for='utiliser_langue_#VALEUR'>[(#VALEUR|traduire_nom_langue)]</label>
+							</div>
+							</BOUCLE_langues>
+					</li>					
 				</ul>
 				</fieldset>
 			</li>
