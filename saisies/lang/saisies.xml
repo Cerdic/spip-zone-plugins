@@ -14,6 +14,7 @@
 	<langue code="fr_tu" url="http://trad.spip.org/tradlang_module/saisies?lang_cible=fr_tu">
 		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
 	</langue>
+	<langue code="it" />
 	<langue code="ru" url="http://trad.spip.org/tradlang_module/saisies?lang_cible=ru">
 		<traducteur nom="nazar" lien="http://trad.spip.org/auteur/nazar" />
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.org/auteur/serge-markitanenko" />
