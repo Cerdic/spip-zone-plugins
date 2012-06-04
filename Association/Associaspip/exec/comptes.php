@@ -42,7 +42,7 @@ function exec_comptes()
 				$id_compte = '';
 		} else { // quand on a un id compte, on doit selectionner automatiquement l'exercice dans lequel il se trouve
 			$date_operation = sql_getfetsel('date', 'spip_asso_comptes', 'id_compte='.$id_compte);
-			$exercice = sql_getfetsel('id_exercice','spip_asso_exercices', "fin>='$date_operation' AND debut<='$date_operation'", '', 'debut DESC');
+			$id_exercice = sql_getfetsel('id_exercice','spip_asso_exercices', "fin>='$date_operation' AND debut<='$date_operation'", '', 'debut DESC');
 		}
 		$debut = intval(_request('debut'));
 		$exercice_data = sql_asso1ligne('exercice', $id_exercice);
@@ -164,7 +164,7 @@ function exec_comptes()
 			. "</tr>\n</thead><tbody>"
 			. $table
 			. "</tbody>\n</table>\n"
-			. "<table width='100%'><tr>\n<td align='left'>" . $nav . '</td><td align="right"><input type="submit" value="'. _T('asso:bouton_valider') . '  /></td></tr></table>';
+			. "<table width='100%' class='asso_tablo_filtres'><tr>\n<td align='left'>" . $nav . '</td><td align="right" width="30"><input type="submit" value="'. _T('asso:bouton_valider') . '"  /></td></tr></table>';
 			echo generer_form_ecrire('action_comptes', $table);
 		} else {
 			echo '<table width="100%"><tbody><tr><td class="actions erreur">' .( $id_exercice ? _T('asso:exercice_sans_operation') : '<a href="'.generer_url_ecrire('exercices').'">'._T('asso:ajouter_un_exercice').'</a>' ). '</td></tr></tbody></table>';
