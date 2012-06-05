@@ -176,8 +176,9 @@ jQuery(document).ready(function() {
 		return false;
 	});
 	jQuery('#maj_auto_div thead').click( function() {
+		var span = jQuery('span', this);
+		if(!span.length) return true;
 		jQuery(this).next().toggleClass('cs_hidden');
-		span = jQuery('span', this);
 		cs_EcrireCookie(span[0].id, '+'+span[0].className, dixans);
 		span.toggleClass('cs_hidden');
 		// annulation du clic
@@ -185,8 +186,9 @@ jQuery(document).ready(function() {
 	}).each(maj_lire_cookie);
 
 function maj_lire_cookie(i,e){
-	jQuery(this).attr('style', 'cursor:pointer;')
 	var span = jQuery('span', this);
+	if(!span.length) return;
+	jQuery(this).attr('style', 'cursor:pointer;')
 	var c = cs_LireCookie(span[0].id);
 	if(c!==null && c.match('cs_hidden')) {
 		jQuery(this).next().addClass('cs_hidden');
