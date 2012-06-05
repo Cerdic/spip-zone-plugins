@@ -13,11 +13,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function seo_affiche_milieu($vars) {
 	include_spip('inc/autoriser');
-	
+	include_spip('inc/presentation');
 	$config = unserialize($GLOBALS['meta']['seo']);
 	
 	// Rubrique
-	if ($vars["args"]["exec"] == 'naviguer' && $vars["args"]["id_rubrique"] != '') {
+	if (in_array($vars["args"]["exec"], array('naviguer','rubrique')) && $vars["args"]["id_rubrique"] != '') {
 		$objet = 'rubrique';
 		$id_objet   = $vars["args"]["id_rubrique"];
 	// Article
@@ -34,14 +34,11 @@ function seo_affiche_milieu($vars) {
 		return $vars;
 	}
 	
-	
-	
 	$bouton = bouton_block_depliable(_T('seo:meta_tags'), false, "SEO");
 	$ret .= debut_block_depliable(false, "SEO");
 	
 	// List		
 	$ret .= recuperer_fond('prive/squelettes/inclure/seo_metas',array('objet'=>$objet,'id_objet'=>$id_objet));
-	
 	
 	$ret .= fin_block();
 		 
