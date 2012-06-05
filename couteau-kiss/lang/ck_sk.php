@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_max_size' => 'Maximálna veľkosť (kB)',
 	'label_max_width' => 'Maximálna šírka (v pixeloch)',
 	'label_nb_objets_tranches' => 'Počet objektov v zoznamoch',
+	'label_no_autobr' => 'Désactiver la prise en compte des alinéas (retour-ligne simples) dans le texte', # NEW
 	'label_no_set_html_base' => 'Žiadne automatické pridávanie <tt>&lt;základný odkaz href="..."&gt;</tt>',
 	'label_options_ecrire_perfo' => 'Výkon',
 	'label_options_ecrire_secu' => 'Zabezpečenie',
