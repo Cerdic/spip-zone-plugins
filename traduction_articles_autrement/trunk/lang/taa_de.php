@@ -11,6 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'affichage_liste_compacte_desactive' => 'Die Kompaktansicht der Artikellisten deaktivieren', # MODIF
 
 	// C
+	'cfg_limiter_secteur' => 'Ne pas afficher la barre de langue dans le secteur :', # NEW
+	'cfg_utiliser_langues' => 'Utiliser les langues suivantes :', # NEW
 	'changer_langue' => 'Die Sprache des Artikels ändern',
 
 	// F
@@ -27,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'options' => 'Sprachoptionen verändern',
+	'oui' => 'Oui', # NEW
 
 	// R
 	'rang' => 'Rang',

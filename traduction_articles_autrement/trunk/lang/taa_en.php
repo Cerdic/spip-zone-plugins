@@ -11,6 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'affichage_liste_compacte_desactive' => 'Désactivet l\'affichage compacte des liste des articles', # NEW
 
 	// C
+	'cfg_limiter_secteur' => 'Ne pas afficher la barre de langue dans le secteur :', # NEW
+	'cfg_utiliser_langues' => 'Utiliser les langues suivantes :', # NEW
 	'changer_langue' => 'Modify the article\'s language',
 
 	// F
@@ -27,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'options' => 'Modify the language options',
+	'oui' => 'Oui', # NEW
 
 	// R
 	'rang' => 'Row',
