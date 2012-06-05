@@ -142,7 +142,6 @@
 			ratio_image = parseFloat([(#GET{ratio_image})]);
 			largeur = parseFloat(#GET{largeur_image});
 			hauteur = parseFloat(#GET{hauteur_image});
-			//ratio = largeur/parseFloat($('#image-container img').width());
 			[(#CONFIG{photospip/image_recadre,on}|=={on}|oui)
 				var x1, y1, x2, y2, w, h, ias;
 				function image_crop_selectchange(img, selection){
@@ -278,7 +277,7 @@
 					if((cbox == 'oui') || ($('#image-container').parents('#cboxLoadedContent').size()>0)){
 						var boxoffset, boxmargins,container_offset;
 						var init_box = function(){
-							$('input[type=number]').spinner();
+							$('input[type=number],input.nombre').spinner();
 					   		if($('#modifier_image img').width() > $('#modifier_image').width()){
 								$('#image-container img').attr('width','').attr('height','').width('100%').height('auto');
 							}
@@ -335,7 +334,7 @@
 							$('#image-container img').attr('width','').attr('height','').width('100%').height('auto');
 						}
 						ratio = largeur/parseFloat($('#image-container img').width());
-						$('input[type=number]').spinner();
+						$('input[type=number],input.nombre').spinner();
 						jQuery('.cache').hide();
 					}
 					if(typeof($.fn.scrollTo) == 'function'){
@@ -354,9 +353,12 @@
 					 */
 					jQuery('input[name=filtre]:checked').parent().find('.cache').addClass('visible').show();
 					jQuery('form input[type=radio]').unbind().click(function(){
-						if(jQuery(this).next().next('.cache').is(':hidden')){
+						if(jQuery(this).parents('li').find('.cache').is(':hidden')){
 					  		jQuery(".visible").slideUp().removeClass('visible');
-							jQuery(this).parent().find('.cache').slideDown().addClass('visible');
+							jQuery(this).parent().find('.cache').slideDown('fast',function(){
+								jQuery(this).find('input[type=number],input.nombre').spinner();
+								jQuery(this).addClass('visible');
+							});
 							if(jQuery(this).attr('id') == 'image_recadre'){
 								image_crop();
 							}

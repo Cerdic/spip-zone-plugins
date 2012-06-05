@@ -1,8 +1,8 @@
 <BOUCLE_doc(DOCUMENTS){id_document}{mode IN vignette,image,document}{tout}>
 [(#CONFIG{photospip/image_reduire,on}|=={on}|oui)
 <li class="editer editer_reduire[ (#ENV**{erreurs}|table_valeur{image_reduire}|oui)erreur]">
-	<input type="radio" name="filtre" id="image_reduire" value="image_reduire"[(#ENV{filtre}|=={image_reduire}|oui)checked="checked"] />
 	<label for="image_reduire"><:photospip:label_image_reduire:></label>
+	<input type="radio" name="filtre" id="image_reduire" value="image_reduire"[(#ENV{filtre}|=={image_reduire}|oui)checked="checked"] />
 	<div class="cache params_filtre image_reduire">
 		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_reduire})</span>]
 		<p class="explication">
@@ -26,8 +26,8 @@
 </li>]
 [(#CONFIG{photospip/image_passe_partout,on}|=={on}|oui)
 <li class="editer editer_passe_partout[ (#ENV**{erreurs}|table_valeur{image_passe_partout}|oui)erreur]">
-	<input type="radio" name="filtre" id="image_passe_partout" value="image_passe_partout"[(#ENV{filtre}|=={image_passe_partout}|oui)checked="checked"] />
 	<label for="image_passe_partout"><:photospip:label_image_passe_partout:></label>
+	<input type="radio" name="filtre" id="image_passe_partout" value="image_passe_partout"[(#ENV{filtre}|=={image_passe_partout}|oui)checked="checked"] />
 	<div class="cache params_filtre image_passe_partout">
 		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_passe_partout})</span>]
 		<p class="explication">
@@ -48,8 +48,8 @@
 </li>]
 [(#CONFIG{photospip/image_recadre,on}|=={on}|oui)
 <li class="editer editer_recadre[ (#ENV**{erreurs}|table_valeur{image_recadre}|oui)erreur]">
-	<input type="radio" name="filtre" id="image_recadre" value="image_recadre"[(#ENV{filtre}|=={image_recadre}|oui)checked="checked"] />
 	<label for="image_recadre"><:photospip:label_image_recadre:></label>
+	<input type="radio" name="filtre" id="image_recadre" value="image_recadre"[(#ENV{filtre}|=={image_recadre}|oui)checked="checked"] />
 	<div class="cache params_filtre image_recadre">
 		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_recadre})</span>]
 		<p class="explication">
@@ -111,8 +111,8 @@
 </li>]
 [(#CONFIG{photospip/tourner,oui}|=={on}|oui)
 <li class="editer editer_tourner[ (#ENV**{erreurs}|table_valeur{tourner}|oui)erreur]">
-	<input type="radio" name="filtre" id="tourner" value="tourner"[(#ENV{filtre}|=={tourner}|oui)checked="checked"] />
 	<label for="tourner"><:photospip:label_tourner:></label>
+	<input type="radio" name="filtre" id="tourner" value="tourner"[(#ENV{filtre}|=={tourner}|oui)checked="checked"] />
 	<div class="cache params_filtre">
 		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_passe_partout})</span>]
 		<p class="explication"><:photospip:explication_tourner:></p>
@@ -137,8 +137,8 @@
 </li>]
 [(#CONFIG{photospip/image_rotation}|=={on}|oui)
 <li class="editer editer_rotation[ (#ENV**{erreurs}|table_valeur{image_rotation}|oui)erreur]">
+	<label for="image_rotation"><:photospip:label_image_rotation:></label>
 	<input type="radio" name="filtre" id="image_rotation" value="image_rotation"[(#ENV{filtre}|=={image_rotation}|oui)checked="checked"] />
-	<label for="image_rotation"><:photospip:label_image_rotation:></label>`
 	<div class="cache params_filtre">
 		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_rotation})</span>]
 		<p class="explication"><:photospip:explication_image_rotation:></p>
@@ -148,15 +148,15 @@
 		<ul>
 			<li class="editer editer_param_image_rotation">
 				<label for="param_image_rotation"><:photospip:label_angle_rotation:></label>
-				<input type="number" max="180" min="-180" step="1" class="text" name="params_image_rotation" id="param_image_rotation" value="#ENV{params_image_rotation,45}" maxlength="4" />
+				<input type="number" max="180" min="-180" step="1" class="text nombre" name="params_image_rotation" id="param_image_rotation" value="#ENV{params_image_rotation,45}" maxlength="4" />
 			</li>
 		</ul>
 	</div>
 </li>]
 [(#CONFIG{photospip/image_flip_vertical}|=={on}|oui)
 <li class="editer editer_flip_vertical[ (#ENV**{erreurs}|table_valeur{image_flip_vertical}|oui)erreur]">
-	<input type="radio" name="filtre" id="image_flip_vertical" value="image_flip_vertical"[(#ENV{filtre}|=={image_flip_vertical}|oui)checked="checked"] />
 	<label for="image_flip_vertical"><:photospip:label_image_flip_vertical:></label>
+	<input type="radio" name="filtre" id="image_flip_vertical" value="image_flip_vertical"[(#ENV{filtre}|=={image_flip_vertical}|oui)checked="checked"] />
 	<div class="cache params_filtre">
 		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_flip_vertical})</span>]
 		<p class="explication"><:photospip:explication_image_flip_vertical:></p>
@@ -164,8 +164,8 @@
 </li>]
 [(#CONFIG{photospip/image_flip_horizontal}|=={on}|oui)
 <li class="editer editer_flip_horizontal[ (#ENV**{erreurs}|table_valeur{image_flip_horizontal}|oui)erreur]">
-	<input type="radio" name="filtre" id="image_flip_horizontal" value="image_flip_horizontal"[(#ENV{filtre}|=={image_flip_horizontal}|oui)checked="checked"] />
 	<label for="image_flip_horizontal"><:photospip:label_image_flip_horizontal:></label>
+	<input type="radio" name="filtre" id="image_flip_horizontal" value="image_flip_horizontal"[(#ENV{filtre}|=={image_flip_horizontal}|oui)checked="checked"] />
 	<div class="cache params_filtre">
 		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_flip_horizontal})</span>]
 		<p class="explication"><:photospip:explication_image_flip_horizontal:></p>
