@@ -17,7 +17,6 @@
 	<icon>images/doc2img-128.png</icon>
 	<prefix>doc2img</prefix>
 	<install>doc2img_administrations.php</install>
-	<fonctions>doc2img_fonctions.php</fonctions>
 	<version_base>0.94</version_base>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>

@@ -23,7 +23,6 @@ function inc_doc2img_convertir($id_document,$type='full') {
 		$type = 'full';
 	
 	if(class_exists('Imagick')){
-	    // NOTE : les repertoires doivent se finir par un /
 
 	    include_spip('inc/documents');
 	    include_spip('inc/flock');
