@@ -2,6 +2,8 @@
 
 @define('_CS_AUTOBR_BR', '<br />');
 
+// Sous SPIP 3, _CS_AUTOBR_TRAIT n'est jamais defini
+
 // pipeline pre_typo, appel automatique si defined('_CS_AUTOBR_RACC')
 function autobr_alinea($flux) {
 	while ($fin = strpos($flux, '</alinea>')) {
@@ -15,7 +17,7 @@ function autobr_alinea($flux) {
 	return $flux;
 }
 
-// traitements sur la balise #TEXTE
+// traitements sur la balise #TEXTE (SPIP < 3)
 function autobr_pre_propre($flux) {
 	// post_autobr() est une fonction de traitement qui possede son propre systeme d'echappement
 	// on traite, sauf si la balise alinea est detectee

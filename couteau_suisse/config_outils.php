@@ -36,11 +36,19 @@ add_variables( array(
 	'check' => 'couteauprive:autobr_non',
 	'defaut' => 0,
 	'code:%s' => "define('_CS_AUTOBR_RACC', 1);",
+) ,array(
+	'nom' => 'alinea3',
+	'radio' => array(1 => 'item_oui', 0 => 'item_non'), //'couteauprive:par_defaut'),
+	'defaut' => 0,
+	'code:%s' => "define('_AUTOBR', '');",
+	'code:!%s' => "// (desactive alinea2) ",
 ));
 add_outil( array(
 	'id' => 'autobr',
-	'code:options' => '%%alinea%%%%alinea2%%',
+	'code:options' => defined('_SPIP30000')?"%%alinea3%%%%alinea2%%\n":'%%alinea%%%%alinea2%%',
 	'categorie' => 'typo-corr',
+	'description' => defined('_SPIP30000')?'<:autobr:1:>[[%alinea3%]]<alinea3 valeur="1">[[%alinea2%<br /><q3><:autobr:2:></q3>]]</alinea3>'
+		:'<:autobr::>[[%alinea%]][[->%alinea2% <:autobr:2:>]]',
 	// traitement automatique des TEXTE/articles, et TEXTE/forums (standard pour SPIP>=2.1)
 	'traitement:TEXTE/articles:pre_propre'
 	 .(!defined('_SPIP20100')?',traitement:TEXTE/forums:pre_propre':'') => 'autobr_pre_propre',
@@ -51,9 +59,12 @@ add_outil( array(
 	'code:fonctions' => "// pour le traitement TEXTE/articles et la balise #INTRODUCTION
 include_spip('outils/autobr');
 \$GLOBALS['cs_introduire'][] = 'autobr_nettoyer_raccourcis';",
-	'pipelinecode:pre_description_outil' => 'if($id=="autobr")
-		$texte=str_replace("@BALISES@",cs_balises_traitees("autobr"),$texte);',
-));
+	'pipelinecode:pre_description_outil' => 'if($id=="autobr") {
+		if(defined("_SPIP30000")) $texte=str_replace("@BALISES@",cs_balises_traitees("autobr"),$texte);
+		$texte=str_replace(array("@ARTICLES@","@RUBRIQUES@","@FORUMS@"),
+			array(cs_raccourcis_presents(array("article/texte", "article/descriptif", "article/chapo"),"%<alinea>%"), cs_raccourcis_presents(array("rubrique/texte"),"%<alinea>%"), cs_raccourcis_presents(array("forum/texte"),"%<alinea>%")), $texte);
+}',
+)); 
 
 // ici on a besoin d'une case input. La variable est : dossier_squelettes
 // a la toute premiere activation de l'outil, la valeur sera : $GLOBALS['dossier_squelettes']

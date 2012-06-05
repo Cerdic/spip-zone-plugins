@@ -227,6 +227,7 @@ function detail_outil($outil_id) {
 	return '';
 }
 
+// liste les balises sur lesquelles l'outil applique un traitement
 function cs_balises_traitees($outil_id, $join=', #') {
 	global $outils;
 	if(preg_match_all(',traitement:([A-Z_]+),', serialize(array_keys($outils[$outil_id])), $regs, PREG_PATTERN_ORDER))
@@ -302,6 +303,23 @@ function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 			. '<p style="margin-top:1em"><strong>' . definir_puce() . '&nbsp;' . couteauprive_T('detail_fichiers_distant') . '</strong></p>'
 			. '<div>' . propre($a) . '</div>' . $b);
 	
+}
+
+// Liste les endroits de la base ou on trouve un raccourci
+// Ex. : $champs = array("article/texte", "rubrique/texte")
+function cs_raccourcis_presents($champs, $racc) {
+	if(!defined('_SPIP19300')) return "(SPIP 2 mini)";
+	$res = array();
+	foreach($champs as $c) {
+		list($type, $champ) = explode('/', $c, 2);
+		$f = create_function('$a', 'return "[$a"."->'.$type.'$a]";');
+		$ids = sql_allfetsel(id_table_objet($type), table_objet_sql($type), $champ.' LIKE '._q("$racc"));
+		if(count($ids)) {
+			$ids = array_map($f, array_map('reset', $ids));
+			$res[] = join(', ', $ids);
+		}
+	}
+	return count($ids)?join(", ", array_unique($res)):couteauprive_T('variable_vide');
 }
 
 ?>
