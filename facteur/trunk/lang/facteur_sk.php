@@ -11,21 +11,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'Z' => 'ZZzZZzzz',
 
 	// C
-	'config_info_enregistree' => 'La configuration du facteur a bien été enregistrée', # NEW
-	'configuration_adresse_envoi' => 'Configuration de l\'adresse d\'envoi', # NEW
-	'configuration_facteur' => 'Facteur', # NEW
-	'configuration_mailer' => 'Configuration du mailer', # NEW
-	'configuration_smtp' => 'Choix de la méthode d\'envoi de mail', # NEW
-	'configuration_smtp_descriptif' => 'Si vous n\'êtes pas sûrs, choisissez la fonction mail de PHP.', # NEW
+	'config_info_enregistree' => 'Nastavenia Poštára sa uložili správne',
+	'configuration_adresse_envoi' => 'Nastavenie adresy odosielateľa',
+	'configuration_facteur' => 'Poštár',
+	'configuration_mailer' => 'Nastavenia Poštára',
+	'configuration_smtp' => 'Výber spôsobu odoslania e-mailu',
+	'configuration_smtp_descriptif' => 'Ak si nie ste istý, zvoľte si funkciu mail jazyka PHP.',
 	'corps_email_de_test' => 'Ceci est un email de test accentué', # NEW
 
 	// E
 	'email_test_envoye' => 'L\'email de test a correctement été envoyé. Si vous ne le recevez pas correctement, vérifiez la configuration de votre serveur ou contactez un administrateur du serveur.', # NEW
 	'erreur' => 'Chyba',
-	'erreur_dans_log' => ' : consultez le fichier log pour plus de détails', # NEW
+	'erreur_dans_log' => ' : viac podrobností nájdete v súbore log',
 	'erreur_generale' => 'Il y a une ou plusieurs erreurs de configuration. Veuillez vérifier le contenu du formulaire.', # NEW
-	'erreur_invalid_host' => 'Ce nom d\'hôte n\'est pas correct', # NEW
-	'erreur_invalid_port' => 'Ce numéro de port n\'est pas correct', # NEW
+	'erreur_invalid_host' => 'Názov servera nie je správny',
+	'erreur_invalid_port' => 'Toto číslo portu nie je správne',
 
 	// F
 	'facteur_adresse_envoi_email' => 'E-mail:',
@@ -34,9 +34,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_cc' => 'Kópia (CC):',
 	'facteur_copies' => 'Kópie:',
 	'facteur_copies_descriptif' => 'Un email sera envoyé en copie aux adresses définies. Une seule adresse en copie et/ou une seule adresse en copie cachée.', # NEW
-	'facteur_filtre_accents' => 'Transformer les accents en leur entités html (utile pour Hotmail notamment).', # NEW
+	'facteur_filtre_accents' => 'Diakritiku meniť na entity html (užitočné najmä pre Hotmail).',
 	'facteur_filtre_css' => 'Transformer les styles contenus entre <head> et </head> en des styles "en ligne", utile pour les webmails car les styles en ligne ont la priorité sur les styles externes.', # NEW
-	'facteur_filtre_images' => 'Embarquer les images référencées dans les emails', # NEW
+	'facteur_filtre_images' => 'Do e-mailov pridávať obrázky, na ktoré sa v nich odkazuje',
 	'facteur_filtre_iso_8859' => 'Zmeniť na ISO-8859-1',
 	'facteur_filtres' => 'Filtre',
 	'facteur_filtres_descriptif' => 'Des filtres peuvent être appliqués aux emails au moment de l\'envoi.', # NEW
