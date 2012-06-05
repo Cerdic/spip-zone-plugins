@@ -119,7 +119,7 @@ function inc_doc2img_convertir($id_document,$type='full') {
 					if (is_numeric(reset($x))
 					  AND $id_vignette = reset($x)){
 						include_spip('action/editer_document');
-						document_modifier($id_document,array("id_vignette" => $id_vignette,'mode'=>'document'));
+						document_set($id_document,array("id_vignette" => $id_vignette,'mode'=>'document'));
 					}
 		        }
 		        //on libère la frame
@@ -157,7 +157,7 @@ function inc_doc2img_convertir($id_document,$type='full') {
 					if (is_numeric(reset($x))
 					  AND $id_vignette = reset($x)){
 						include_spip('action/editer_document');
-						document_modifier($id_document,array("id_vignette" => $id_vignette,'mode'=>'document'));
+						document_set($id_document,array("id_vignette" => $id_vignette,'mode'=>'document'));
 					}
 		            $image_frame->clear();
 		            $image_frame->destroy();
