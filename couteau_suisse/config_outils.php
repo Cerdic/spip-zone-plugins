@@ -48,7 +48,7 @@ add_outil( array(
 	'code:options' => defined('_SPIP30000')?"%%alinea3%%%%alinea2%%\n":'%%alinea%%%%alinea2%%',
 	'categorie' => 'typo-corr',
 	'description' => defined('_SPIP30000')?'<:autobr:1:>[[%alinea3%]]<alinea3 valeur="1">[[%alinea2%<br /><q3><:autobr:2:></q3>]]</alinea3>'
-		:'<:autobr::>[[%alinea%]][[->%alinea2% <:autobr:2:>]]',
+		:'<:autobr::>[[%alinea%]][[->%alinea2%<br /><q3><:autobr:2:></q3>]]',
 	// traitement automatique des TEXTE/articles, et TEXTE/forums (standard pour SPIP>=2.1)
 	'traitement:TEXTE/articles:pre_propre'
 	 .(!defined('_SPIP20100')?',traitement:TEXTE/forums:pre_propre':'') => 'autobr_pre_propre',
