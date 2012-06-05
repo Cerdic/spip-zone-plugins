@@ -8,14 +8,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'spip_400_description' => 'Ce plugin tente de compléter la distribution de SPIP en proposant des modèles de pages d\'erreur HTTP ({codes 401 et 404}) avec un texte explicatif et la possibilité pour l\'internaute de transmettre un "ticket de bug" au webmestre du site.
+	'spip_400_description' => 'Tento zásuvný modul dopĺňa distribúciu SPIPu tým, že ponúka šablóny chybových stránok HTTP ({kódy 401 a 404}) s vysvetlivkou a možnosťou pre používateľa poslať webmasterovi stránky "lístok s chybou".
 
-Il propose notamment : 
-- un message sur les pages publiques pour que l\'internaute ne se perde pas, 
-- l\'envoi d\'un mail au webmestre avec une info complète sur l\'erreur en question ({utilisateur SPIP, URL, REFERER, backtrace PHP, etc}), 
-- l\'écriture de messages de LOG dans un fichier spécifique ...
-
-Une page de configuration est proposée en option si vous utilisez le plugin [CFG : moteur de configuration->http://www.spip-contrib.net/?rubrique575].', # NEW
+Ponúka najmä:
+-* správu na verejne prístupných stránkach, aby sa používateľ nestratil,
+-* poslanie e-mailu webmasterovi s kompletnými informáciami o danej chybe ({používateľ SPIPu, URL, backtrace PHP, atď.}),
+-* zápis správ do špeciálneho súboru LOG.',
+	'spip_400_nom' => 'SPIP 400',
 	'spip_400_slogan' => 'Ovládanie vynútených chybových stránok (401, 404) pre SPIP'
 );
 
