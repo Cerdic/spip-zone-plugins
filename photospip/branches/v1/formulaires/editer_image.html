@@ -1,6 +1,18 @@
 <div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_document}' style="position:relative;overflow:auto;">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{erreurs}|table_valeur{message}|oui)
+	<div class="reponse_formulaire_notice notice">
+		[(#ENV{erreurs}|table_valeur{message}|=={previsu}|oui)
+		<span><:previsualisation:></span><br />
+		<:photospip:erreur_previsu:>]
+		[(#ENV{erreurs}|table_valeur{message}|=={sanstest}|oui)
+		<:photospip:sanstest:>]
+		[(#ENV{erreurs}|table_valeur{message}|=={sansfiltre}|oui)
+		<:photospip:sansfiltre:>]
+		[(#ENV{erreurs}|table_valeur{message}|=={sansconf}|oui)
+		<:photospip:sansconf:>]
+	</div>]
 	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
 	<BOUCLE_document(DOCUMENTS){id_document}{mode IN vignette,image,document}{tout}>
 	[(#REM)
@@ -29,18 +41,6 @@
 					[(#_document:FICHIER|image_reduire{#GET{largeur_max},#GET{hauteur_max}}|inserer_attribut{alt,' '})]]
 				</div>
 			</div>
-			[(#ENV{erreurs}|table_valeur{message}|oui)
-			<div class="notice">
-				[(#ENV{erreurs}|table_valeur{message}|=={previsu}|oui)
-				<span><:previsualisation:></span><br />
-				<:photospip:erreur_previsu:>]
-				[(#ENV{erreurs}|table_valeur{message}|=={sanstest}|oui)
-				<:photospip:sanstest:>]
-				[(#ENV{erreurs}|table_valeur{message}|=={sansfiltre}|oui)
-				<:photospip:sansfiltre:>]
-				[(#ENV{erreurs}|table_valeur{message}|=={sansconf}|oui)
-				<:photospip:sansconf:>]
-			</div>]
 		</div>
 		<div class="editer_image_inputs">
 			<BOUCLE_si_versions_et_vignettes(CONDITION){si #ENV{mode}|!={vignette}|ou{#ENV{mode}|=={vignette}|et{#ENV{vignette}|=={oui}}}|oui}>
