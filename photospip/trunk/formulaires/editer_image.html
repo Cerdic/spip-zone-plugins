@@ -277,7 +277,7 @@
 					if((cbox == 'oui') || ($('#image-container').parents('#cboxLoadedContent').size()>0)){
 						var boxoffset, boxmargins,container_offset;
 						var init_box = function(){
-							$('input[type=number],input.nombre').spinner();
+							$('input[type=number],input.nombre').spinner().parents('li').addClass('has_spinner');
 					   		if($('#modifier_image img').width() > $('#modifier_image').width()){
 								$('#image-container img').attr('width','').attr('height','').width('100%').height('auto');
 							}
@@ -334,7 +334,7 @@
 							$('#image-container img').attr('width','').attr('height','').width('100%').height('auto');
 						}
 						ratio = largeur/parseFloat($('#image-container img').width());
-						$('input[type=number],input.nombre').spinner();
+						$('input[type=number],input.nombre').spinner().parents('li').addClass('has_spinner');
 						jQuery('.cache').hide();
 					}
 					if(typeof($.fn.scrollTo) == 'function'){
@@ -352,11 +352,11 @@
 					 * On affiche les options du filtre sélectionné
 					 */
 					jQuery('input[name=filtre]:checked').parent().find('.cache').addClass('visible').show();
-					jQuery('form input[type=radio]').unbind().click(function(){
+					jQuery('form input[type=radio][name=filtre]').unbind().click(function(){
 						if(jQuery(this).parents('li').find('.cache').is(':hidden')){
 					  		jQuery(".visible").slideUp().removeClass('visible');
 							jQuery(this).parent().find('.cache').slideDown('fast',function(){
-								jQuery(this).find('input[type=number],input.nombre').spinner();
+								jQuery(this).find('input[type=number],input.nombre').spinner().parents('li').addClass('has_spinner');
 								jQuery(this).addClass('visible');
 							});
 							if(jQuery(this).attr('id') == 'image_recadre'){

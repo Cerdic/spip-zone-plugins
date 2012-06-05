@@ -119,7 +119,7 @@ function photospip_boite_infos($flux){
 		if((_request('mode') != 'vignette') && ($document = sql_fetsel('*','spip_documents','id_document='.intval($id_document)))){
 			if(_request('exec') != 'documents_edit')
 				$flux['data'] .= icone_horizontale(_T('photospip:bouton_modifier_document'), parametre_url(generer_url_ecrire('documents_edit','id_document='.$document['id_document']),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit.gif',false);
-			if(_request('exec') != 'image_edit')
+			if((_request('exec') != 'image_edit') && in_array($document['extension'], array('jpg', 'png', 'gif')))
 				$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_image'), parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit.gif',false);
 			if($document['id_vignette'] && $document['id_vignette'] > 0){
 				$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_vignette'), parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'mode','vignette'), find_in_path('images/photospip-24.png'), 'edit.gif',false);
@@ -130,7 +130,8 @@ function photospip_boite_infos($flux){
 			}
 		}elseif((_request('mode') == 'vignette') && ($document = sql_fetsel('*','spip_documents','id_document='.intval($id_document)))){
 			$flux['data'] .= icone_horizontale(_T('photospip:bouton_modifier_document'), generer_url_ecrire('documents_edit','id_document='.$document['id_document']), find_in_path('images/photospip-24.png'), 'edit.gif',false);
-			$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_image'), generer_url_ecrire('image_edit','id_document='.$document['id_document']), find_in_path('images/photospip-24.png'), 'edit.gif',false);
+			if(in_array($document['extension'], array('jpg', 'png', 'gif')))
+				$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_image'), generer_url_ecrire('image_edit','id_document='.$document['id_document']), find_in_path('images/photospip-24.png'), 'edit.gif',false);
 		}
 	}
 	return $flux;
