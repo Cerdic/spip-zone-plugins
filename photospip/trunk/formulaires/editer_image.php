@@ -14,12 +14,12 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
-include_spip('inc/autoriser');
 include_spip('inc/documents');
 include_spip('inc/filtres_images');
 include_spip('photospip_fonctions');
 
 function formulaires_editer_image_charger_dist($id_document='new',$mode=false, $retour=''){
+	include_spip('inc/autoriser');
 	$valeurs = array('editable'=>true);
 	$id_document = sql_getfetsel('id_document','spip_documents','id_document='.intval($id_document));
 	$valeurs['id_document'] = $id_document;
@@ -130,26 +130,46 @@ function formulaires_editer_image_verifier_dist($id_document='new',$mode=false, 
 			}
 			if(($var_filtre == 'image_sepia') && strlen($params[0]) && strlen($erreur_param0 = $verifier($params[0],'couleur', array('type'=>'hexa'))))
 				$erreurs[$var_filtre] = $erreur_param0;
+			if(($var_filtre == 'tourner') && !_request('params_tourner'))
+				$erreurs[$var_filtre] = _T('photospip:erreur_form_filtre_valeur_obligatoire');
 		}
 		/**
 		 * Ces erreurs ne sont pas de réelles erreurs mais seulement
 		 * les valeurs pour la prévisualisation si c'est ce que l'on a validé
 		 */
 		if(count($erreurs) == 0 && _request('tester')){
-			if(in_array($var_filtre,array('tourner','image_recadre'))){
+			if(in_array($var_filtre,array('image_recadre'))){
 				$erreurs['message_erreur'] = _T('photospip:erreur_form_filtre_sstest');
 			}
 			else{
-				list($param1, $param2, $param3,$params) = photospip_recuperer_params_form($var_filtre);
 				$erreurs['message'] = 'previsu';
-				$erreurs['filtre'] = $var_filtre;
-				$erreurs['param'] = $params;
-				$erreurs['param1'] = $param1;
-				if($param2){
-					$erreurs['param2'] = $param2;
-				}
-				if($param3){
-					$erreurs['param3'] = $param3;
+				if($var_filtre == 'tourner'){
+					$erreurs['filtre'] = 'image_rotation';
+					switch ($angle = _request('params_tourner')) {
+					    case 90:
+					        $erreurs['param'] = array('90');
+							$erreurs['param1'] = '90';
+					        break;
+					    case 180:
+					        $erreurs['param'] = array('180');
+							$erreurs['param1'] = '180';
+					        break;
+					    case 270:
+					        $erreurs['param'] = array('270');
+							$erreurs['param1'] = '270';
+					        break;
+					}
+				}else{
+					list($param1, $param2, $param3,$params) = photospip_recuperer_params_form($var_filtre);
+					$erreurs['filtre'] = $var_filtre;
+					$erreurs['param'] = $params;
+					$erreurs['param1'] = $param1;
+					if($param2){
+						$erreurs['param2'] = $param2;
+					}
+					if($param3){
+						$erreurs['param3'] = $param3;
+					}
 				}
 			}
 		}

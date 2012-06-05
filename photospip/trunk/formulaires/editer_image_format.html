@@ -114,7 +114,7 @@
 	<label for="tourner"><:photospip:label_tourner:></label>
 	<input type="radio" name="filtre" id="tourner" value="tourner"[(#ENV{filtre}|=={tourner}|oui)checked="checked"] />
 	<div class="cache params_filtre">
-		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_passe_partout})</span>]
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{tourner})</span>]
 		<p class="explication"><:photospip:explication_tourner:></p>
 		<ul>
 			<li>
