@@ -62,7 +62,12 @@ _ Les balises <code><multi/></code> sont recommandées en cas de site multilingu
 @puce@ Which kinds of authors should be listed on these pages?
 [[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]',
 	'auteurs:nom' => 'Authors page',
-	'autobr:description' => 'Applies the {|post_autobr} filter to certain types of SPIP content, replacing single line feeds with an HTML line break <br />.[[%alinea%]]',
+	'autobr:description' => 'Applies the {|post_autobr} filter to certain types of SPIP content, replacing single line feeds with an HTML line break <br />.[[%alinea%]]', # MODIF
+	'autobr:description1' => 'Rompant avec une tradition historique, SPIP 3 tient désormais compte par défaut des alinéas (retours de ligne simples) dans ses contenus. Vous pouvez ici désactiver ce comportement et revenir à l\'ancien système où le retour de ligne simple n\'est pas reconnu -- à l\'instar du langage HTML.', # NEW
+	'autobr:description2' => 'Objets contenant cette balise (non exhaustif) :
+- Articles : @ARTICLES@.
+- Rubriques : @RUBRIQUES@.
+- Forums : @FORUMS@.', # NEW
 	'autobr:nom' => 'Automatic line breaks',
 	'autobr_non' => 'All site text between &lt;alinea>&lt;/alinea> tags',
 	'autobr_oui' => 'All article text and public messages  (the #TEXTE tag)',
@@ -431,6 +436,8 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	// L
 	'label:admin_travaux' => 'Close the public site for:',
 	'label:alinea' => 'Scope of application:',
+	'label:alinea2' => 'Sauf :', # NEW
+	'label:alinea3' => 'Désactiver la prise en compte des alinéas :', # NEW
 	'label:arret_optimisation' => 'Stop SPIP from emptying the wastebin automatically:',
 	'label:auteur_forum_nom' => 'The visitor must specify:',
 	'label:auto_sommaire' => 'Systematic creation of a summary:',
@@ -555,7 +562,7 @@ Note: since the <code>.zip</code> files are not always instantly reconstructed, 
 	'maj_auto:nom' => 'Automatic updates',
 	'masquer:description' => 'This tool is used for hiding specific editorial content (sections or articles) tagged with the keyword specified below from the public site, without requiring any other modifications to your templates. If a section is hidden, then so is its entire sub-branch.[[%mot_masquer%]]
 
-To override and force the display of such hidden content, just add the <code>{tout_voir}</code> (view all) criterion to the loops in your template(s).',
+To override and force the display of such hidden content, just add the <code>{tout_voir}</code> (view all) criterion to the loops in your template(s).', # MODIF
 	'masquer:nom' => 'Hide editorial content',
 	'meme_rubrique:description' => 'Define here the number of objects listed in the panel labelled "<:info_meme_rubrique:>" available on some of the private zone pages.[[%meme_rubrique%]]',
 	'message_perso' => 'oh!',

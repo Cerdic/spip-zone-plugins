@@ -62,7 +62,12 @@ _ Les balises <code><multi/></code> sont recommandées en cas de site multilingu
 @puce@ Quels statuts d\'auteurs peuvent être listés sur cette page ?
 [[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]',
 	'auteurs:nom' => 'Page des auteurs',
-	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML <br />.[[%alinea%]][[->%alinea2%]]',
+	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML <br />.[[%alinea%]][[->%alinea2%]]', # MODIF
+	'autobr:description1' => 'Rompant avec une tradition historique, SPIP 3 tient désormais compte par défaut des alinéas (retours de ligne simples) dans ses contenus. Vous pouvez ici désactiver ce comportement et revenir à l\'ancien système où le retour de ligne simple n\'est pas reconnu -- à l\'instar du langage HTML.', # NEW
+	'autobr:description2' => 'Objets contenant cette balise (non exhaustif) :
+- Articles : @ARTICLES@.
+- Rubriques : @RUBRIQUES@.
+- Forums : @FORUMS@.', # NEW
 	'autobr:nom' => 'Retours de ligne automatiques',
 	'autobr_non' => 'À l\'intérieur des balises &lt;alinea>&lt;/alinea>',
 	'autobr_oui' => 'Articles et messages publics (balises @BALISES@)',
@@ -430,6 +435,8 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	// L
 	'label:admin_travaux' => 'Fermer le site public pour :',
 	'label:alinea' => 'Champ d\'application :',
+	'label:alinea2' => 'Sauf :', # NEW
+	'label:alinea3' => 'Désactiver la prise en compte des alinéas :', # NEW
 	'label:arret_optimisation' => 'Empêcher SPIP de vider la corbeille automatiquement :',
 	'label:auteur_forum_nom' => 'Le visiteur doit spécifier :',
 	'label:auto_sommaire' => 'Création systématique du sommaire :',
@@ -554,7 +561,7 @@ Note : les paquets <code>.zip</code> n\'étant pas reconstruits instantanément,
 	'maj_auto:nom' => 'Mises à jour automatiques',
 	'masquer:description' => 'Cet outil permet de masquer sur le site public et sans modification particulière de tes squelettes, les contenus (rubriques ou articles) qui ont le mot-clé défini ci-dessous. Si une rubrique est masquée, toute sa branche l\'est aussi.[[%mot_masquer%]]
 
-Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère <code>{tout_voir}</code> aux boucles de ton squelette.',
+Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère <code>{tout_voir}</code> aux boucles de ton squelette.', # MODIF
 	'masquer:nom' => 'Masquer du contenu',
 	'meme_rubrique:description' => 'Définis ici le nombre d\'objets listés dans le cadre nommé «<:info_meme_rubrique:>» et présent sur certaines pages de l\'espace privé.[[%meme_rubrique%]]',
 	'message_perso' => 'Un grand merci aux traducteurs qui passeraient par ici. Pat ;-)',

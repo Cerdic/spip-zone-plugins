@@ -66,8 +66,6 @@ _ Les balises <code><multi/></code> sont recommandées en cas de site multilingu
 - Articles : @ARTICLES@.
 - Rubriques : @RUBRIQUES@.
 - Forums : @FORUMS@.',
-	'label:alinea3' => 'Désactiver la prise en compte des alinéas :',
-	'label:alinea2' => 'Sauf :',
 	'autobr:nom' => 'Retours de ligne automatiques',
 	'autobr_non' => 'À l\'intérieur des balises &lt;alinea>&lt;/alinea>',
 	'autobr_oui' => 'Articles et messages publics (balises @BALISES@)',
@@ -436,6 +434,8 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	// L
 	'label:admin_travaux' => 'Fermer le site public pour :',
 	'label:alinea' => 'Champ d\'application :',
+	'label:alinea2' => 'Sauf :',
+	'label:alinea3' => 'Désactiver la prise en compte des alinéas :',
 	'label:arret_optimisation' => 'Empêcher SPIP de vider la corbeille automatiquement :',
 	'label:auteur_forum_nom' => 'Le visiteur doit spécifier :',
 	'label:auto_sommaire' => 'Création systématique du sommaire :',

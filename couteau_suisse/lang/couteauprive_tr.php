@@ -62,6 +62,11 @@ _ Les balises <code><multi/></code> sont recommandées en cas de site multilingu
 [[%auteurs_tout_voir%]][[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]', # MODIF
 	'auteurs:nom' => 'Yazarlar sayfası',
 	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML <br />.[[%alinea%]][[->%alinea2%]]', # NEW
+	'autobr:description1' => 'Rompant avec une tradition historique, SPIP 3 tient désormais compte par défaut des alinéas (retours de ligne simples) dans ses contenus. Vous pouvez ici désactiver ce comportement et revenir à l\'ancien système où le retour de ligne simple n\'est pas reconnu -- à l\'instar du langage HTML.', # NEW
+	'autobr:description2' => 'Objets contenant cette balise (non exhaustif) :
+- Articles : @ARTICLES@.
+- Rubriques : @RUBRIQUES@.
+- Forums : @FORUMS@.', # NEW
 	'autobr:nom' => 'Retours de ligne automatiques', # NEW
 	'autobr_non' => 'À l\'intérieur des balises &lt;alinea>&lt;/alinea>', # NEW
 	'autobr_oui' => 'Articles et messages publics (balises @BALISES@)', # NEW
@@ -392,6 +397,8 @@ Dikkat, bu gereç çalışmak için {Round Corners} {jQuery} eklentisine gereksi
 	// L
 	'label:admin_travaux' => 'Kamusal alanı şuna kapat :',
 	'label:alinea' => 'Champ d\'application :', # NEW
+	'label:alinea2' => 'Sauf :', # NEW
+	'label:alinea3' => 'Désactiver la prise en compte des alinéas :', # NEW
 	'label:arret_optimisation' => 'SPIP\'in çöp kutusunu otomatik olarak boşaltmasını engelle :',
 	'label:auteur_forum_nom' => 'Le visiteur doit spécifier :', # NEW
 	'label:auto_sommaire' => 'Özet\'in sistemli biçimde oluşturulması :',

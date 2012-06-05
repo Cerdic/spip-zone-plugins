@@ -62,7 +62,12 @@ _ Les balises <code><multi/></code> sont recommandées en cas de site multilingu
 @puce@ Quins estats d\'autors es poden llistar en aquesta pàgina?
 [[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]',
 	'auteurs:nom' => 'Pàgina d\'autors',
-	'autobr:description' => 'Aplica, en alguns continguts SPIP, el filtre {|post_autobr} que substitueix tots els salts de línia simples per un salt de línia HTML <br />.[[%alinea%]][[->%alinea2%]]',
+	'autobr:description' => 'Aplica, en alguns continguts SPIP, el filtre {|post_autobr} que substitueix tots els salts de línia simples per un salt de línia HTML <br />.[[%alinea%]][[->%alinea2%]]', # MODIF
+	'autobr:description1' => 'Rompant avec une tradition historique, SPIP 3 tient désormais compte par défaut des alinéas (retours de ligne simples) dans ses contenus. Vous pouvez ici désactiver ce comportement et revenir à l\'ancien système où le retour de ligne simple n\'est pas reconnu -- à l\'instar du langage HTML.', # NEW
+	'autobr:description2' => 'Objets contenant cette balise (non exhaustif) :
+- Articles : @ARTICLES@.
+- Rubriques : @RUBRIQUES@.
+- Forums : @FORUMS@.', # NEW
 	'autobr:nom' => 'Retorns de línia automàtics',
 	'autobr_non' => 'A l\'interior d\'etiquetes &lt;alinea>&lt;/alinea>',
 	'autobr_oui' => 'Articles i missatges públics (etiquetes @BALISES@)',
@@ -435,6 +440,8 @@ Atenció, aquesta eina necessita per funcionar el plugin {jQuery}: {Round Corner
 	// L
 	'label:admin_travaux' => 'Tancar el lloc públic per:',
 	'label:alinea' => 'Camp d\'aplicació:',
+	'label:alinea2' => 'Sauf :', # NEW
+	'label:alinea3' => 'Désactiver la prise en compte des alinéas :', # NEW
 	'label:arret_optimisation' => 'Impedir que SPIP buidi la paperera automàticament:',
 	'label:auteur_forum_nom' => 'El visitant ha d\'especificar:',
 	'label:auto_sommaire' => 'Creació sistemàtica del sumari:',
@@ -559,7 +566,7 @@ Nota: com que els paquets <code>.zip</code> no es poden reconstruir instantània
 	'maj_auto:nom' => 'Actualitzacions automàtiques',
 	'masquer:description' => 'Aquesta eina permet amagar al lloc públic, i sense modificar els vostres esquelets, els continguts (seccions o articles) que tinguin la paraula clau definida més avall. Si una secció està amagada, també ho estarà tota la branca. [[%mot_masquer%]]
 
-Per forçar la publicació de continguts amagats, n\'hi ha prou afegint el criteri <code>{tout_voir}</code> als bucles de la vostra plantilla.',
+Per forçar la publicació de continguts amagats, n\'hi ha prou afegint el criteri <code>{tout_voir}</code> als bucles de la vostra plantilla.', # MODIF
 	'masquer:nom' => 'Amagar el contingut',
 	'meme_rubrique:description' => 'Definiu aquí la quantitat d\'objectes a llistar en el quadre anomenat  «<:info_meme_rubrique:>» i present a algunes pàgines de l\'espai privat.[[%meme_rubrique%]]',
 	'message_perso' => 'Moltes gràcies als traductors que passaran per aquí. Pat ;-)',

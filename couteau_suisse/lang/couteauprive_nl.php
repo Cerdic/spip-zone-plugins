@@ -58,7 +58,12 @@ _ Les balises <code><multi/></code> sont recommandées en cas de site multilingu
 @puce@ Welke statuten van auteurs kunnen op deze bladzijde op een lijst gezet worden ?
 [[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]', # MODIF
 	'auteurs:nom' => 'Bladzijde van de auteurs',
-	'autobr:description' => 'Toegepast op bepaalde content SPIP filter {|post_autobr} vervangt alle nieuwe regels met een enkele HTML lijn te breken <br />.[[%alinea%]][[->%alinea2%]]',
+	'autobr:description' => 'Toegepast op bepaalde content SPIP filter {|post_autobr} vervangt alle nieuwe regels met een enkele HTML lijn te breken <br />.[[%alinea%]][[->%alinea2%]]', # MODIF
+	'autobr:description1' => 'Rompant avec une tradition historique, SPIP 3 tient désormais compte par défaut des alinéas (retours de ligne simples) dans ses contenus. Vous pouvez ici désactiver ce comportement et revenir à l\'ancien système où le retour de ligne simple n\'est pas reconnu -- à l\'instar du langage HTML.', # NEW
+	'autobr:description2' => 'Objets contenant cette balise (non exhaustif) :
+- Articles : @ARTICLES@.
+- Rubriques : @RUBRIQUES@.
+- Forums : @FORUMS@.', # NEW
 	'autobr:nom' => 'Automatische regeleinden',
 	'autobr_non' => 'Binnen labels &lt;alinea>&lt;/alinea>',
 	'autobr_oui' => 'Artikelen en openbare berichten (labels @BALISES@)',
@@ -405,6 +410,8 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	// L
 	'label:admin_travaux' => 'De openbare site sluiten voor :',
 	'label:alinea' => 'Champ d\'application :', # NEW
+	'label:alinea2' => 'Sauf :', # NEW
+	'label:alinea3' => 'Désactiver la prise en compte des alinéas :', # NEW
 	'label:arret_optimisation' => 'SPIP\'s automatische leegmaken van het vuilnisbak vermijden :',
 	'label:auteur_forum_nom' => 'Bezoeker moet aanduiden :',
 	'label:auto_sommaire' => 'Systematische oprichting van het overzicht :',

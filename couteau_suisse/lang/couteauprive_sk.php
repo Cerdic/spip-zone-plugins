@@ -61,7 +61,12 @@ _ Les balises <code><multi/></code> sont recommandées en cas de site multilingu
 @puce@ Aký typ autorov by sa mal objaviť na stránke autorov?
 [[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]',
 	'auteurs:nom' => 'Stránka autorov',
-	'autobr:description' => 'Použije sa na niektoré filtre SPIPU na text, {|post_autobr} všetky zlomy na nové riadky sa nahradia zlomom na jeden nový riadok <br />.[[%alinea%]][[->%alinea2%]]',
+	'autobr:description' => 'Použije sa na niektoré filtre SPIPU na text, {|post_autobr} všetky zlomy na nové riadky sa nahradia zlomom na jeden nový riadok <br />.[[%alinea%]][[->%alinea2%]]', # MODIF
+	'autobr:description1' => 'Rompant avec une tradition historique, SPIP 3 tient désormais compte par défaut des alinéas (retours de ligne simples) dans ses contenus. Vous pouvez ici désactiver ce comportement et revenir à l\'ancien système où le retour de ligne simple n\'est pas reconnu -- à l\'instar du langage HTML.', # NEW
+	'autobr:description2' => 'Objets contenant cette balise (non exhaustif) :
+- Articles : @ARTICLES@.
+- Rubriques : @RUBRIQUES@.
+- Forums : @FORUMS@.', # NEW
 	'autobr:nom' => 'Automatické zlomy riadkov',
 	'autobr_non' => 'Vnútorné tagy &lt;alinea>&lt;/alinea>',
 	'autobr_oui' => 'Články a verejné správy (tagy @BALISES@)',
@@ -418,6 +423,8 @@ Pozor! Na to, aby fungoval, tento nástroj potrebuje  zásuvný modul {Zaoblené
 	// L
 	'label:admin_travaux' => 'Zatvoriť verejnú stránku pre:',
 	'label:alinea' => 'Oblasť použitia:',
+	'label:alinea2' => 'Sauf :', # NEW
+	'label:alinea3' => 'Désactiver la prise en compte des alinéas :', # NEW
 	'label:arret_optimisation' => 'Stop SPIP from emptying the wastebin automatically:',
 	'label:auteur_forum_nom' => 'The visitor must specify:',
 	'label:auto_sommaire' => 'Systematic creation of a summary:',
