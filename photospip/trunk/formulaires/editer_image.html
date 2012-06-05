@@ -137,8 +137,8 @@
 	  	<input type="submit" class="submit" name="validation_continuer" value="<:photospip:bouton_valider_continuer:>" />
 	  	<input type="submit" class="submit" name="validation_fermer" value="<:photospip:bouton_valider_fermer:>" />
 	  </p>
-	 <script type="text/javascript"><!--
-	 		var ratio, ratio_image,largeur,hauteur;
+		<script type="text/javascript"><!--
+			var ratio, ratio_image,largeur,hauteur;
 			ratio_image = parseFloat([(#GET{ratio_image})]);
 			largeur = parseFloat(#GET{largeur_image});
 			hauteur = parseFloat(#GET{hauteur_image});
@@ -282,7 +282,6 @@
 								$('#image-container img').attr('width','').attr('height','').width('100%').height('auto');
 							}
 							ratio = largeur/parseFloat($('#image-container img').width());
-							
 							jQuery('.cache').hide();
 							
 							/**
@@ -297,20 +296,20 @@
 								var limite_image = boxoffset.top;
 								var limite_bas = $('#cboxContent .boutons').last().offset().top-$('#cboxContent .boutons').last().outerHeight();
 								var pos_bas = $('#image-container').offset().top+$('#image-container').height();
-								if(($('#cboxLoadedContent').scrollTop() >= container_offset) && (pos_bas < limite_bas) && ($('#cboxLoadedContent').scrollTop()+$('#image-container').offset().top < limite_bas)){
+								if(($('#cboxLoadedContent').scrollTop() >= container_offset) && ($('#cboxLoadedContent').scrollTop()+$('#image-container').offset().top < limite_bas)){
 									var margintop = $('#cboxLoadedContent').scrollTop() - container_offset+(boxmargins/2);
-									if(!$('#image-container').hasClass("image_flottant"))
-										$('#image-container').addClass("image_flottant");
-									$('#image-container').css({"margin-top": margintop+"px"});
-									if(typeof(ias) == 'object'){
-										ias.update();
-									}
+									$('#image-container').addClass("image_flottant").animate({"margin-top": margintop+"px"},'fast','',function(){
+										if(typeof(ias) == 'object'){
+											ias.update();
+										}	
+									});
 								}
 								else if($('#image-container').hasClass("image_flottant") && ($('#cboxLoadedContent').scrollTop() < container_offset)){
-									$('#image-container').removeClass("image_flottant").css({"margin-top": "0px", "width": "auto"});
-									if(typeof(ias) == 'object'){
-										ias.update();
-									}
+									$('#image-container').removeClass("image_flottant").animate({"margin-top": "0px", "width": "auto"},'fast','',function(){
+										if(typeof(ias) == 'object'){
+											ias.update();
+										}
+									});
 								}
 							});
 						}
@@ -326,12 +325,12 @@
 						}
 						if($('#modifier_image').width() != 0){
 							if($('#modifier_image img').width() > $('#modifier_image').width()){
-								$('#image-container img').attr('width','').attr('height','').width('100%').height('auto');
+								$('#image-container img').attr('width','').attr('height','').animate({"width": "100%", "height": "auto"});
 							}
 						}
 					}else{
 						if($('#modifier_image img').width() > $('#modifier_image').width()){
-							$('#image-container img').attr('width','').attr('height','').width('100%').height('auto');
+							$('#image-container img').attr('width','').attr('height','').animate({"width": "100%", "height": "auto"});
 						}
 						ratio = largeur/parseFloat($('#image-container img').width());
 						$('input[type=number],input.nombre').spinner().parents('li').addClass('has_spinner');
@@ -600,7 +599,7 @@
 								ias.update();
 							}
 						});
-						jQuery('.image_recadre input[type=radio]').click(function(){
+						jQuery('.image_recadre input[type=radio][name=ratio]').click(function(){
 							if(typeof(ias) == "object"){
 								if (jQuery(this).val() != ''){
 									/**
@@ -608,7 +607,7 @@
 									 */
 									ias.setOptions({aspectRatio: jQuery(this).val()});
 									var ias_selection = ias.getSelection();
-									
+
 									/**
 									 * On redimentionne la sélection en fonction du nouveau ratio
 									 */
