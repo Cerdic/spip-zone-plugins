@@ -7,16 +7,17 @@ function exec_mesabonnes(){
   global $connect_statut;
 	global $connect_toutes_rubriques;
 
+	include_spip('inc/presentation');
   // main ------------------------------------------------------  
 	$commencer_page = charger_fonction('commencer_page', 'inc');
   echo $commencer_page(_T('mesabonnes:mes_abonnes'),_T('mesabonnes:mes_abonnes'),_T('mesabonnes:mes_abonnes'));	  
  
+	echo debut_gauche('',  true);
+  echo debut_droite('', true);
 	if ($connect_statut == "0minirezo" && $connect_toutes_rubriques) {	  // admin restreint (connect_toutes_rubriques si admin)
+
 		echo gros_titre(_T('mesabonnes:mes_abonnes'),'', false);
-    
-    echo debut_gauche('',  true);
-    echo debut_droite('', true);
-    echo "<h1>"._T('mesabonnes:export_abonnes')."</h1>";
+    echo "<h3>"._T('mesabonnes:export_abonnes')."</h3>";
     
     if ($res = sql_select('id_abonne', 'spip_mesabonnes','statut="publie"')) {         
         if ($res and sql_count($res)>0) {
@@ -52,7 +53,7 @@ function exec_mesabonnes(){
 		echo "<strong>Vous n'avez pas acc&egrave;s &agrave; cette page.</strong>"; 
 	}
 	
-	echo fin_page();
+	echo fin_gauche(),fin_page();
 }
 
 ?>
